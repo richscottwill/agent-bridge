@@ -58,6 +58,18 @@ def _build_parser() -> argparse.ArgumentParser:
         metavar="PATH",
         help="Path to config YAML file (default: ~/shared/tools/sharepoint-sync/config.yaml)",
     )
+    parser.add_argument(
+        "--articles-path",
+        default=None,
+        metavar="PATH",
+        help="Path to articles directory (overrides config; e.g. ./artifacts/)",
+    )
+    parser.add_argument(
+        "--output-path",
+        default=None,
+        metavar="PATH",
+        help="Path to output directory (overrides config; e.g. ./output/)",
+    )
     return parser
 
 
@@ -66,6 +78,10 @@ def _build_config_overrides(args: argparse.Namespace) -> dict[str, str]:
     overrides: dict[str, str] = {}
     if args.mode is not None:
         overrides["sync.mode"] = args.mode
+    if args.articles_path is not None:
+        overrides["sync.articles_path"] = args.articles_path
+    if args.output_path is not None:
+        overrides["sharepoint.output_path"] = args.output_path
     return overrides
 
 
