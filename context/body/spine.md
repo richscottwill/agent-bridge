@@ -87,13 +87,13 @@ Then read the organ you need for the task at hand (brain, eyes, hands, memory).
 |---|------|---------|-------------|
 | 1 | 1 · AM: Morning Routine | userTriggered | Morning — reads fresh organs → Asana sync → drafts → brief → calendar blocks |
 | 2 | 2 · EOD: Meeting Sync | userTriggered | End of day — ingest today's meetings into series files |
-| 3 | 3 · EOD: System Refresh | userTriggered | End of day, after Meeting Sync — cascade into organs so they're fresh for morning |
+| 3 | 3 · EOD: System Refresh | userTriggered | End of day, after Meeting Sync — cascade into organs, then git push to personal repo |
 | 4 | Guard: Email | preToolUse | Always on |
 | 5 | Guard: Calendar | preToolUse | Always on |
 | 6 | On-Demand: PS Audit | userTriggered | When reviewing campaign data |
 | 7 | On-Demand: Dashboard | userTriggered | When you want visuals |
 
-**Daily sequence: AM (1), then EOD (2 → 3).** Meeting Sync feeds System Refresh feeds tomorrow's Morning Routine. Guards are automatic. On-Demand hooks run when needed.
+**Daily sequence: AM (1), then EOD (2 → 3 → git push).** Meeting Sync feeds System Refresh feeds git sync feeds tomorrow's Morning Routine. Guards are automatic. On-Demand hooks run when needed.
 
 ---
 
