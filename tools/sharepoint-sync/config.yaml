@@ -13,7 +13,7 @@ sharepoint:
   #   macOS:  ~/Library/CloudStorage/OneDrive-Amazon/SharePoint/WikiSync
   #   Linux:  ~/OneDrive/SharePoint/WikiSync
   #   Or use a local staging folder: ~/shared/tools/sharepoint-sync/output
-  output_path: "~/shared/tools/sharepoint-sync/output"
+  output_path: "c:\Users\prichwil\OneDrive - amazon.com"
 
 sync:
   # Only "directory" mode is supported with OneDrive sync.
