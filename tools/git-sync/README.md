@@ -4,7 +4,9 @@ Syncs `~/shared/` and `~/.kiro/` between the DevSpaces container and a personal 
 
 ## How It Works
 
-- The home directory (`~`) is a git repo tracking only `shared/` and `.kiro/` (everything else is gitignored)
+- The git repo lives at `/shared/user/` (the real path behind `~/shared/`)
+- This EFS volume persists across container restarts
+- `.kiro/` lives inside `/shared/user/.kiro/` (symlinked from `~/.kiro`)
 - A personal GitHub repo acts as the relay between container and local machine
 - `sync.sh` handles commit + push/pull with a single command
 
@@ -12,13 +14,13 @@ Syncs `~/shared/` and `~/.kiro/` between the DevSpaces container and a personal 
 
 ### In DevSpaces (this container):
 ```bash
-# 1. Add your GitHub repo as remote
-git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
+# 1. Add your GitHub repo as remote (MAKE THE REPO PRIVATE)
+git -C /shared/user remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
 
-# 2. Store credentials (GitHub PAT)
-git config credential.helper store
-echo "https://YOUR_USER:YOUR_TOKEN@github.com" > ~/.git-credentials
-chmod 600 ~/.git-credentials
+# 2. Store credentials (GitHub PAT with repo scope)
+git -C /shared/user config credential.helper store
+echo "https://YOUR_USER:YOUR_TOKEN@github.com" > /shared/user/.git-credentials
+chmod 600 /shared/user/.git-credentials
 
 # 3. Initial push
 ~/shared/tools/git-sync/sync.sh push
@@ -48,14 +50,21 @@ cd rw-system && git pull
 
 ## What Gets Synced
 
-- `shared/` — context, artifacts, tools, research, meetings, wiki
+- `context/` — body organs, active state, meetings, wiki, intake, archive
+- `artifacts/` — published wiki articles (testing, strategy, reporting, etc.)
+- `tools/` — bridge, dashboard-ingester, git-sync, sharepoint-sync, progress-charts
+- `research/` — ad copy results, competitor intel, test docs, excel analyses
+- `reference/` — static reference material
 - `.kiro/` — agents, hooks, steering, specs, settings
 
 ## What Does NOT Get Synced
 
-- Auth tokens, AWS credentials, SSH keys
-- IDE caches, browser data, build artifacts
-- `.arcc/`, `.hypothesis/`, `.cache/`, `.local/`
+- `credentials/` — secrets and auth tokens
+- `agentspaces-desktop-launcher/` — local-only launcher
+- `audit-reports/` — regenerable
+- `.agentspaces/`, `.aim/`, `.smithy-mcp/` — runtime state
+- `.kiro/powers/`, `.kiro/mcp-servers-reference.json` — runtime
+- `*.tar.gz`, `*.sqlite3`, `*.log` — binaries and logs
 
 ## Portability Note
 
