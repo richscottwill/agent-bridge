@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+body { font-family: Segoe UI, sans-serif; max-width: 100%; margin: 8px; padding: 0; line-height: 1.5; color: #1a1a1a; }
+h1 { font-size: 22px; }
+h2 { font-size: 18px; margin-top: 32px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }
+h3 { font-size: 15px; margin-top: 20px; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+th, td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; font-size: 13px; }
+th { background: #f5f5f5; font-weight: 600; }
+p, li { font-size: 14px; }
+.status-green { color: #0a7c00; }
+.status-yellow { color: #b8860b; }
+.status-red { color: #c00; }
+.big-number { font-size: 28px; font-weight: 700; margin: 0; }
+.subtitle { font-size: 12px; color: #666; margin-top: 2px; }
+.kpi-row { display: flex; gap: 40px; margin: 16px 0 24px 0; }
+.kpi-box { flex: 1; }
+hr { border: none; border-top: 1px solid #ddd; margin: 24px 0; }
+.caveat { font-size: 12px; color: #888; margin-top: 4px; }
+</style>
+</head><body>
+
+<h1>AI Automation Command Center — Paid Search</h1>
+<p>Richard Williams · Amazon Business, Paid Acquisition · Started March 2026<br>
+Last measured: 2026-03-19 · Next measurement: 2026-04-19</p>
+
+<hr>
+
+<h2>Automation Status</h2>
+
+<div class="kpi-row">
+<div class="kpi-box">
+<p class="big-number status-green">11%</p>
+<p class="subtitle">Done by agents<br>(human reviews, doesn't create)</p>
+</div>
+<div class="kpi-box">
+<p class="big-number status-yellow">34%</p>
+<p class="subtitle">Human + agent<br>(agent drafts, human edits/sends)</p>
+</div>
+<div class="kpi-box">
+<p class="big-number status-red">55%</p>
+<p class="subtitle">Human only<br>(not yet automated)</p>
+</div>
+</div>
+
+<p class="caveat">Percentages are weighted by time spent per week across observed workflows. This inventory is incomplete by design — it reflects what has surfaced through email, calendar, task tracking, and conversation. As more work becomes visible, expect the "human only" number to increase before it decreases — not because automation regressed, but because the denominator got more accurate.</p>
+
+<hr>
+
+<h2>Results (2 weeks of operation)</h2>
+
+<table>
+<tr><th>Metric</th><th>Current</th><th>Projected (all tools built)</th></tr>
+<tr><td>Weekly time savings</td><td>~5.3 hrs/week</td><td>~8.3 hrs/week</td></tr>
+<tr><td>% of work hours automated or AI-assisted</td><td>~13%</td><td>~21%</td></tr>
+<tr><td>Workflows touched by AI</td><td>45%</td><td>70%+ (target, 6 months)</td></tr>
+</table>
+
+<p><strong>External benchmarks:</strong> Average knowledge worker saves ~2.2 hrs/week with AI. Power users (top 5%) save ~5 hrs/week. AI-mature marketing teams report 40-60% manual work reduction within 90 days.</p>
+
+<hr>
+
+<h2>Measured Time Savings</h2>
+
+<table>
+<tr><th>Workflow</th><th>Before</th><th>After</th><th>Weekly Savings</th><th>Confidence</th></tr>
+<tr><td>Morning prioritization + email triage</td><td>~45 min/day</td><td>~15 min/day</td><td>~2.5 hrs</td><td>HIGH</td></tr>
+<tr><td>Drafting routine email replies (~8/wk)</td><td>~12 min each</td><td>~3 min each</td><td>~1.2 hrs</td><td>HIGH</td></tr>
+<tr><td>Task creation with context + drafts (~5/wk)</td><td>~15 min each</td><td>~3 min each</td><td>~1.0 hr</td><td>HIGH</td></tr>
+<tr><td>WBR callout prep</td><td>~40 min</td><td>~15 min</td><td>~0.4 hrs</td><td>MED</td></tr>
+<tr><td>Session context loading (amortized)</td><td>~30 min/2wks</td><td>~2 min</td><td>~0.2 hrs</td><td>HIGH</td></tr>
+<tr><td colspan="3"><strong>Total measured</strong></td><td><strong>~5.3 hrs</strong></td><td></td></tr>
+</table>
+
+<h2>Projected Savings (In Progress)</h2>
+
+<table>
+<tr><th>Workflow</th><th>Before</th><th>Projected After</th><th>Weekly Savings</th><th>Status</th></tr>
+<tr><td>Invoice/PO coordination (AU + MX)</td><td>~2 hrs/wk</td><td>~30 min</td><td>~1.5 hrs</td><td>🔧 Process doc in progress</td></tr>
+<tr><td>Cross-market performance review</td><td>~1 hr/wk</td><td>~15 min</td><td>~0.75 hrs</td><td>🔧 Not started</td></tr>
+<tr><td>Kingpin Goal updates (amortized)</td><td>~2 hrs/mo</td><td>~30 min</td><td>~0.4 hrs</td><td>🔧 Not started</td></tr>
+<tr><td>Campaign link updates (amortized)</td><td>~45 min each</td><td>~5 min</td><td>~0.3 hrs</td><td>🔧 Tool on backlog</td></tr>
+<tr><td colspan="3"><strong>Total projected additional</strong></td><td><strong>~3.0 hrs</strong></td><td></td></tr>
+</table>
+
+<hr>
+
+<h2>Full Workflow Inventory</h2>
+
+<h3>🟢 Done by Agents</h3>
+
+<table>
+<tr><th>Workflow</th><th>What It Does</th><th>How</th></tr>
+<tr><td>Daily planning + prioritization</td><td>Scan email/calendar/Asana, prioritize tasks, generate daily brief</td><td>Morning Routine + Asana Sync + Run the Loop (3 hooks)</td></tr>
+<tr><td>Context maintenance</td><td>Maintain source-of-truth files across sessions</td><td>Autoresearch Loop + Session Bootstrap</td></tr>
+<tr><td>Research artifact compression</td><td>Compress large context into small high-signal files (8 artifacts, ~27 tool calls saved/session)</td><td>Autoresearch Loop experiments</td></tr>
+</table>
+
+<h3>🟡 Human + Agent</h3>
+
+<table>
+<tr><th>Workflow</th><th>What It Does</th><th>How</th></tr>
+<tr><td>Email drafting</td><td>Draft replies to stakeholders, status updates, data requests</td><td>7 writing style steering files + Draft Unread Replies hook</td></tr>
+<tr><td>Task creation + management</td><td>Create tasks with status, action steps, draft messages</td><td>4-list To-Do workflow (Sweep/Core/Engine Room/Admin)</td></tr>
+<tr><td>WBR callout prep</td><td>Pre-draft traffic/conversion callouts</td><td>Agent drafts from available data, human reviews</td></tr>
+<tr><td>Meeting prep + follow-up</td><td>Prep notes, talking points, follow-up messages for ~6 meetings/wk</td><td>Meeting Briefs artifact + agent-drafted messages</td></tr>
+<tr><td>Calendar blocking</td><td>Create focus events with full task context</td><td>Task Calendar Block hook</td></tr>
+<tr><td>Strategic document drafting</td><td>First drafts of frameworks, test designs, POVs</td><td>Agent drafts from context + research, human restructures</td></tr>
+</table>
+
+<h3>🔴 Human Only (Not Yet Automated)</h3>
+
+<table>
+<tr><th>Workflow</th><th>Time/Week</th><th>Why Not Automated</th><th>Suggested Solution</th><th>Potential</th></tr>
+<tr><td>Campaign optimization (Google Ads)</td><td>~3-4 hrs</td><td>Requires Google Ads UI</td><td>OCI bidding (already reducing bid work). Campaign change request template pre-filled from data. Longer term: API scripts.</td><td>HIGH</td></tr>
+<tr><td>Invoice/PO coordination</td><td>~2 hrs</td><td>Email chains + PO system</td><td>Process doc + delegation to Carlos (MX). Invoice routing checklist agent pre-fills.</td><td>HIGH</td></tr>
+<tr><td>Performance reporting (Adobe/Google)</td><td>~1.5 hrs</td><td>Requires Adobe + Google Ads UI</td><td>Cross-market dashboard. Longer term: API integration.</td><td>HIGH</td></tr>
+<tr><td>Landing page coordination</td><td>~1 hr</td><td>Cross-team judgment calls</td><td>Agent drafts coordination emails, tracks status. Human decides.</td><td>LOW</td></tr>
+<tr><td>Test design + methodology</td><td>~2 hrs (target)</td><td>Strategic judgment</td><td>Agent drafts from template + historical results. Human refines.</td><td>MED</td></tr>
+<tr><td>Stakeholder comms (non-email)</td><td>~1 hr</td><td>Requires Quip/Loop access</td><td>Agent drafts, human pastes. Partially happening already.</td><td>LOW-MED</td></tr>
+<tr><td>Campaign link/sitelink updates</td><td>~0.4 hrs</td><td>Requires Google Ads UI</td><td>Campaign link generator — template URL builder from promo briefs.</td><td>MED</td></tr>
+<tr><td>Kingpin Goal updates</td><td>~0.5 hrs</td><td>Andes requires manual export</td><td>Goal status updater — agent pre-fills from exported data.</td><td>MED</td></tr>
+<tr><td>Budget/R&O input</td><td>~0.4 hrs</td><td>SharePoint spreadsheets</td><td>Budget forecast helper — pre-fill from actuals + trends.</td><td>MED</td></tr>
+<tr><td>PO submissions</td><td>~0.1 hrs</td><td>Internal procurement system</td><td>PO checklist with pre-filled values. Low priority.</td><td>LOW</td></tr>
+<tr><td>Competitive monitoring</td><td>~0 hrs (gap)</td><td>No system exists</td><td>Competitive intel agent — monitors auction insights, ad copy, landing pages. Weekly digest.</td><td>HIGH</td></tr>
+</table>
+tr>
+
+<hr>
+
+<h2>Where Saved Time Went</h2>
+
+<table>
+<tr><th>Redirection</th><th>Impact</th></tr>
+<tr><td>OP1 Testing Framework draft</td><td>Positions PS as strategic. Contributors active (Andrew in Loop doc 3/18).</td></tr>
+<tr><td>Autoresearch loop (8 artifacts)</td><td>Compounds daily. 27 tool calls saved per session.</td></tr>
+<tr><td>Morning routine system</td><td>Operational since 3/13. Daily time dividend.</td></tr>
+<tr><td>Writing style codification (7 guides)</td><td>Used in every drafted communication.</td></tr>
+</table>
+
+<p><strong>Honest gaps:</strong> Zero strategic artifacts shipped W11-W12 (2.5 weeks). Admin backlog growing (5 tasks overdue, some 17 days). AEO POV unwritten.</p>
+
+<hr>
+
+<h2>What's Applicable to the Team</h2>
+
+<table>
+<tr><th>Pattern</th><th>What It Does</th><th>Team Benefit</th><th>Effort</th></tr>
+<tr><td>Writing style steering files</td><td>AI drafts in consistent voice per context</td><td>Faster drafting, consistent team voice</td><td>Low</td></tr>
+<tr><td>Session bootstrap files</td><td>Persistent context across chat sessions</td><td>No re-explaining projects every 2 weeks</td><td>Low</td></tr>
+<tr><td>Task body templates</td><td>AI generates tasks with status, steps, drafts</td><td>Clearer handoffs, less back-and-forth</td><td>Low</td></tr>
+<tr><td>Morning brief pattern</td><td>AI scans email/calendar → prioritized daily plan</td><td>Everyone starts the day with clarity</td><td>Med</td></tr>
+</table>
+
+<p><strong>Worth exploring:</strong> WBR auto-briefing (Med-High effort) · Campaign link generator (Med) · Competitive intel agent (High) · Cross-market dashboard (High)</p>
+
+<hr>
+
+<h2>What I Built (Detail)</h2>
+
+<table>
+<tr><th>System</th><th>Components</th><th>What It Does</th></tr>
+<tr><td>Daily Operations</td><td>Asana Sync + Run the Loop + Morning Routine (3 hooks)</td><td>Syncs tasks, refreshes context, prioritizes, generates daily brief. Runs in sequence.</td></tr>
+<tr><td>Communication</td><td>Draft Unread Replies + Block Email Send (2 hooks) + 7 writing style steering files</td><td>Drafts emails in my voice, safety-checks before send.</td></tr>
+<tr><td>Knowledge</td><td>Autoresearch Loop + 8 compressed artifacts</td><td>Maintains context, compresses knowledge (6:1 to 20:1 ratios), saves ~27 tool calls/session.</td></tr>
+<tr><td>Accountability</td><td>RW Trainer + 4-list task system + Session Bootstrap + Calendar Block hook</td><td>Detects low-leverage patterns, manages tasks, persists memory, blocks focus time.</td></tr>
+</table>
+
+<hr>
+
+<h2>How I Measure</h2>
+
+<table>
+<tr><th>Metric</th><th>What It Tracks</th><th>Target</th></tr>
+<tr><td>Time per task (before vs. after)</td><td>Minutes per task, including AI processing + human review</td><td>Decrease over time</td></tr>
+<tr><td>Redirection quality</td><td>Did saved time go to high-leverage or low-leverage work?</td><td>80%+ to high-leverage</td></tr>
+<tr><td>System reliability</td><td>% of AI outputs needing only minor edits</td><td>>80%</td></tr>
+<tr><td>Compounding indicator</td><td>Is the system improving over time?</td><td>Positive trend</td></tr>
+</table>
+
+<hr>
+
+<h2>Measurement Log</h2>
+
+<h3>March 2026 (Baseline)</h3>
+<p>Build period: March 5-13 · First operating period: March 13-19<br>
+Measured savings: ~5.3 hrs/week · Automation rate: 45% (11% agent-only, 34% augmented, 55% human-only)<br>
+Artifacts: 8 research + 6 hooks + 10 steering files · Strategic artifacts shipped: 0 (system-building month)</p>
+
+<hr>
+
+<h2>Update Protocol</h2>
+<p><em>When updating this document, follow this sequence:</em></p>
+<ol>
+<li>Read current.md and rw-tracker.md for latest state</li>
+<li>For each 🔴 workflow: check if a tool/process was built → move to 🟡 or 🟢 with measured data</li>
+<li>For each 🟡 workflow: check if reliability improved or savings changed → update numbers</li>
+<li>Move projected savings to measured when real data exists</li>
+<li>Recalculate the three automation percentages based on updated time weights</li>
+<li>Add new monthly entry to Measurement Log</li>
+<li>Update "Where Saved Time Went" — add new redirections, retire resolved gaps</li>
+<li>Sharpen framing: shift narrative from "what we built" toward "what it's producing"</li>
+<li>Add any new workflows discovered since last update</li>
+<li>Bump "Last measured" date at the top</li>
+</ol>
+
+<p><strong>Next update: April 19, 2026</strong></p>
+
+</body></html>

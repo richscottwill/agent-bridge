@@ -1,0 +1,96 @@
+# Competitor Intelligence — Paid Search
+
+Last updated: 2026-03-12
+Sources: Global Acq WBR Callouts (W27 2024 - W10 2026), EU Callouts notes
+
+## Summary
+Competitive pressure on AB Paid Search has intensified significantly since mid-2024, with Walmart Business as the primary US threat and a growing set of regional competitors in EU and international markets. This file tracks impression share (IS), CPC impact, and strategic responses.
+
+## US: Walmart Business
+- **First appeared:** Jul 2024 on Brand Core terms
+- **IS trajectory:** 25% avg (Jul-Sep 2024) → 35% (Oct-Nov 2024) → 37-55% (Jan-Mar 2026)
+- **Peak IS:** 55% in W6 2026 (Feb), up from 43% in prior weeks
+- **CPC impact:** Brand Core CPC increased from $2.4 to $2.8-$3.5 range due to Walmart competition
+  - Pre-Walmart avg: ~$1.6
+  - Oct 2024: $2.6-$2.9
+  - Feb 2026: $2.5-$2.8 (with spikes to $3.5 during aggressive periods)
+- **Brand CPA impact:** Brand CPA increased from ~$40 avg to $65-$77 range in Feb 2026
+- **Pattern:** Walmart appears to pull back during holidays (Thanksgiving, Christmas) and ramp up in Jan-Mar
+- **Strategic response:** Team maintains IS through bid caps rather than escalating auction; focuses on NB efficiency via OCI to offset Brand CPA increases
+- Confidence: HIGH
+
+## EU5: Multiple Competitors by Market
+
+### UK
+| Competitor | First Seen | IS | Impact |
+|-----------|-----------|-----|--------|
+| weareuncapped.com | Dec 2023 | 24% (W52 2023) | +45% Brand Core CPC |
+| Temu | W10 2024 | 13% on Generic NB | +14% NB CPC |
+| Shopify | Various | <10% | Minimal |
+| revolut.com | W34-35 2025 | <10% | Temporary, ended W36 |
+| Amazon Global Logistics UK | W8-W10 2026 | <10% on ES Brand | +41% CPC impact on ES (2/13-3/4) |
+| sellesfi.com | W42 2024 | Present | Elevated Brand CPC |
+
+### DE
+| Competitor | First Seen | IS | Impact |
+|-----------|-----------|-----|--------|
+| recht24-7.de | Jul 2025 | 14% on Brand Core | +3% MoM Core CPC; reported for store closure |
+| Amazon Associate (recht24-7.de) | Ongoing | Persistent | Under investigation |
+
+### FR
+| Competitor | First Seen | IS | Impact |
+|-----------|-----------|-----|--------|
+| ebay.com | W38 2024 | Aggressive on Brand Core | +25% WoW Brand CPC |
+| bruneau.fr | W38 2025 | 39-47% IS on Generic NB | Significant NB pressure |
+| mirakl.com | W5 2026 | 10% on Brand Core | -5% clicks, -14% CVR |
+| Shopify | Various | <10% | Periodic |
+
+### IT
+| Competitor | First Seen | IS | Impact |
+|-----------|-----------|-----|--------|
+| shopify (mondoffice) | W43 2025 | >10% on Generic NB | -20% CVR on Generic |
+| revolut.com | W9-10 2026 | <10% | -36% CVR drop on Brand Core (W10) |
+| Brand Core CPC trend | Ongoing | N/A | +131% CPC YoY (highest in EU5), driven by limited ad opportunities |
+
+### ES
+| Competitor | First Seen | IS | Impact |
+|-----------|-----------|-----|--------|
+| amazon.es | YoY new | Present | NB CPC pressure |
+| amazon.co.uk (AGL) | W8-W10 2026 | <10% | +41% CPC increase (2/13-3/4), flagged and addressed |
+| Temu | Various | <10% | Periodic |
+
+### CA
+| Competitor | First Seen | IS | Impact |
+|-----------|-----------|-----|--------|
+| Shopify.com | W3 2026 | <10% on Brand Core | Recurring, +13% CPC when present |
+| restock.ca | W42 2025 | New | +11% CPC |
+| liquidationdeals.ca | W45 2025 | Brand Plus | Temporary |
+
+### JP
+| Competitor | First Seen | IS | Impact |
+|-----------|-----------|-----|--------|
+| axalpha.com | W6-W7 2026 | 10% on Brand Core Google | New threat |
+| shop-pro.jp | W9-W10 2026 | 12-15% on Yahoo Brand Core | Strengthening |
+| cyber-records.co.jp | Periodic 2024 | <10% | Comes and goes |
+| ec-force.com | W4-W5 2026 | 10% on Yahoo | New |
+| Rakuten | Ongoing | Present on Yahoo | Persistent |
+| moneyforward.com | Ongoing | Present on Yahoo | Persistent |
+
+### MX
+| Competitor | First Seen | IS | Impact |
+|-----------|-----------|-----|--------|
+| algo-mas.mx | Aug 2025 | 11-13% on Brand | +20% CPC spikes |
+| pedidos.com | W17 2025 | Brand terms | Discussed counter-bidding |
+| Temu | W23 2025 | Generic NB | Emerging |
+| nihaojewelry.com | W32 2025 | Apparel NB | Category-specific |
+| uline.mx | W23 2025 | NB terms | +10% IS |
+
+## Key Trends
+1. **Competition is broadening, not just deepening.** In 2023, most markets had 1-2 competitors. By 2026, most have 3-5.
+2. **Walmart is the only competitor with sustained, aggressive Brand bidding in the US.** Others come and go.
+3. **EU competition is fragmentary** — different competitors in each market, making it harder to develop a unified response.
+4. **JP competition is intensifying on Yahoo** specifically, with multiple new entrants in early 2026.
+5. **The team's primary defense is efficiency, not escalation** — OCI, campaign consolidation, and NB CPA improvement allow the team to absorb Brand CPC increases without proportional budget increases.
+
+## Gaps → Feed to Experiment 3
+- Ad copy testing as a competitive response (evidence-based messaging vs. generic B2B copy)

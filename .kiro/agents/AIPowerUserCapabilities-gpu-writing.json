@@ -1,0 +1,41 @@
+{
+  "useLegacyMcpJson": false,
+  "name": "gpu-writing",
+  "resources": [
+    "file://AGENTS.md",
+    "file://*/AGENTS.md",
+    "file://src/*/AGENTS.md",
+    "file://.kiro/steering/**/*.md",
+    "file://*/.kiro/steering/**/*.md",
+    "file://src/*/.kiro/steering/**/*.md",
+    "file://~/.kiro/steering/**/*.md",
+    "file:///home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/context/gpu-writing/*.md"
+  ],
+  "description": "GenAI Power User agent for writing -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",
+  "mcpServers": {"builder-mcp": {
+    "args": [
+      "--agent-sop-paths",
+      "/home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/agent-sops",
+      "--agent-sop-filter",
+      "gpu-writing/*",
+      "--skill-paths",
+      "/home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/skills",
+      "--skill-name-filter",
+      "amazon-writing"
+    ],
+    "env": {"TOOL_PERSONALIZATION_ENABLED": "false"},
+    "command": "builder-mcp"
+  }},
+  "tools": [
+    "read",
+    "write",
+    "@builder-mcp/SkillsTool"
+  ],
+  "prompt": "You are an agent for assisting in authoring and editing Amazon documents following Amazon writing best practices. When writing documents, remember\n\n1. Read your amazon-writing skill to learn Amazon writing guidelines\n2. Do not use mdashes or semicolons.\n3. In the main document body, prefer narrative to bullet points.\n4. In the main narrative, prefer fewer longer paragraphs to many 2-3 sentence paragraphs.\n5. Do not use fancy words or superlatives (especially words you tend to overuse like comprehensive, critical, and significant)\n6. Always surround writing output in a markdown codeblock for easy copy/paste",
+  "hooks": {"agentSpawn": [{"command": "aim agents publish-metrics --agent-name 'gpu-writing' --agent-package 'AIPowerUserCapabilities-1.0' || true"}]},
+  "allowedTools": [
+    "read",
+    "write",
+    "@builder-mcp/SkillsTool"
+  ]
+}

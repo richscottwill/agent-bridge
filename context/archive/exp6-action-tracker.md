@@ -1,0 +1,85 @@
+# Action Item Tracker — Richard Williams
+
+Last updated: 2026-03-20 (Friday, W12 Day 5)
+Sources: rw-tracker.md, To-Do lists, email scan, calendar scan
+
+## Priority Actions (ordered by urgency)
+
+### P0 — Ship AEO POV (BREAK THE DROUGHT)
+
+| # | Action | Due | Status | Est. Time | Blockers |
+|---|--------|-----|--------|-----------|----------|
+| 1 | **Write and ship AEO POV (1-pager)** | **TODAY** | **NOT STARTED — 3 consecutive weeks at 0 artifacts. Calendar block 1-2:30pm PT.** | 90 min | None |
+
+### P1 — Admin Block (scheduled 8:15-8:45am PT)
+
+| # | Action | Due | Status | Est. Time | Blockers |
+|---|--------|-----|--------|-----------|----------|
+| 2 | Flash topics | 3/17 (3 DAYS OVERDUE) | NOT STARTED | 10 min | None |
+| 3 | Raise rest of year PO for PAM US | 3/1 (19 DAYS OVERDUE) | NOT STARTED | 15 min | None |
+| 4 | PAM R&O input | 3/10 (10 DAYS OVERDUE) | NOT STARTED | 10 min | None |
+| 5 | Google invoice OFA — 2 timed out approvals | 3/20 | WAITING — asked Bhawna to resend (5511928883, 5508024310) | 5 min when resent | Bhawna |
+| 6 | PO #2D-19910170 comment — replied to BK | 3/20 | DONE (sent 3/20 12:52am) | — | — |
+
+### P2 — Today's Sweep + Quick Sends (8:45-9am PT block)
+
+| # | Action | Due | Status | Blockers |
+|---|--------|-----|--------|----------|
+| 7 | Reply to Vijeth — MX Auto/Beauty footer decision | TODAY | Sweep task | None |
+| 8 | Confirm MX Beauty with Lorena | TODAY | Draft sent via Outlook (morning routine) | None |
+| 9 | OCI TT/suffix — FR to 25% | TODAY | Engine Room block 9-9:30am PT | None |
+
+### P3 — Today's Meetings
+
+| # | Action | Due | Status | Notes |
+|---|--------|-----|--------|-------|
+| 10 | AppTweak sync (11am PT) | TODAY | Accepted | Anthony Asuncion. Conflicts with ARCC Workshop. |
+| 11 | ARCC Workshop (11am PT) | TODAY | Accepted | Conflicts with AppTweak. Pick one. |
+| 12 | Yun 1:1 (12pm PT) | TODAY | Accepted | Topics: WW redirect reporting, Polaris Brand LP (US-ES page, Alex working with Yun), AU CPC debrief |
+| 13 | WW Redirect Adobe Reporting (12:30pm PT block) | TODAY | Focus block post-Yun | Overdue since 3/19 |
+
+### P4 — New Signal: Polaris Brand LP Rollout
+
+| # | Action | Due | Status | Blockers |
+|---|--------|-----|--------|----------|
+| 14 | Review Brandon's Polaris Brand LP weblab plan | This week | NEW — Brandon CC'd Richard. Need to align PS ad URLs with new page rollout. | Alex translations due 3/26 |
+| 15 | Coordinate AU/MX PS ad URL updates for Polaris pages | W13 (after 3/26) | NOT STARTED — depends on Alex's translations | Alex AEM translations |
+
+### P5 — Next Week+
+
+| # | Action | Due | Status | Blockers |
+|---|--------|-----|--------|----------|
+| 16 | Delegate MX invoicing to Carlos | 3/21 | NOT STARTED | None |
+| 17 | MX/AU confirm budgets | 3/25 | NOT STARTED | R&O tasks |
+| 18 | Email overlay WW rollout — Tech scoping | 3/27 | BLOCKED — Vijay | Vijay |
+| 19 | AI Max test design | 3/28 | NOT STARTED | None |
+| 20 | AU URL migration to Polaris | W13 | Alexis mapping received, Lena confirmed full switch | None |
+| 21 | OP1 doc — contributor sections | W13 | Andrew active. Need Stacey, Yun, Adi. | Contributors |
+| 22 | Kingpin Goals — MX Jan/Feb/Mar | OVERDUE | BLOCKED — needs Andes data pull | Andes access |
+| 23 | Triage MS Advertising paused accounts | W13 | 10x emails, needs investigation | None |
+
+## Dependencies Map
+- Action 1 (AEO POV) → no blockers, just write it
+- Actions 2-4 (admin) → no blockers, just do them
+- Action 5 (OFA) → waiting Bhawna resend
+- Actions 14-15 (Polaris LP) → depends on Alex translations (3/26)
+- Action 17 (budgets) → blocked by Actions 3-4 (R&O)
+- Action 22 (Kingpin) → blocked by Andes data pull
+
+## What's Overdue?
+| Task | Original Due | Days Overdue |
+|------|-------------|--------------|
+| Raise PO for PAM US | 3/1 | 19 days |
+| PAM R&O input | 3/10 | 10 days |
+| Flash topics | 3/17 | 3 days |
+| Kingpin Goals | 3/17 | 3 days (blocked) |
+| WW redirect Adobe reporting | 3/19 | 1 day |
+
+## New Signals (since 3/19)
+- 🆕 Brandon: Polaris Brand LP WW rollout — Stacey/Adi to switch, Alex submitted AU/MX/JP/CA translations (due 3/26), EU5 blocked (ops ticket est. 3/24)
+- ✅ PO #2D-19910170 comment replied to BK (3/20)
+- ✅ Google invoice — 1 approved in OFA, 2 timed out (asked Bhawna to resend)
+- ✅ Lorena MX strategy draft sent via Outlook
+- ✅ Brandon Polaris Brand LP draft reply sent via Outlook
+- ✅ Bhawna Google invoice redirect sent via Outlook
+- 📅 Today: AppTweak 11am, ARCC Workshop 11am (conflict), Yun 1:1 12pm, AEO POV deep write 1-2:30pm

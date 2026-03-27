@@ -1,0 +1,114 @@
+{
+  "useLegacyMcpJson": false,
+  "name": "gpu-dev",
+  "resources": [
+    "file://AGENTS.md",
+    "file://*/AGENTS.md",
+    "file://src/*/AGENTS.md",
+    "file://.kiro/steering/**/*.md",
+    "file://*/.kiro/steering/**/*.md",
+    "file://src/*/.kiro/steering/**/*.md",
+    "file://~/.kiro/steering/**/*.md",
+    "file:///home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/context/gpu-dev/*.md"
+  ],
+  "description": "GenAI Power User agent for development tasks. Good general purpose default agent for engineering roles. -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",
+  "mcpServers": {
+    "aws-knowledge-mcp-server": {
+      "type": "http",
+      "url": "https://knowledge-mcp.global.api.aws"
+    },
+    "builder-mcp": {
+      "args": [
+        "--agent-sop-paths",
+        "/home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/agent-sops",
+        "--agent-sop-filter",
+        "gpu-dev/*",
+        "--skill-paths",
+        "/home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/skills",
+        "--skill-name-filter",
+        "*,development-guardrail-onboarding"
+      ],
+      "env": {"TOOL_PERSONALIZATION_ENABLED": "false"},
+      "command": "builder-mcp"
+    },
+    "pippin-mcp": {"command": "pippin-mcp-server"}
+  },
+  "model": "claude-opus-4.6-1m",
+  "toolsSettings": {
+    "read": {
+      "deniedPaths": ["~/.aws/credentials"],
+      "allowedPaths": ["*"]
+    },
+    "execute_bash": {
+      "autoAllowReadonly": true,
+      "allowedCommands": [
+        "(?s)^(cd [^ ]+ && )?(git (-P |--no-pager )*(status|log|diff|show|branch|blame|shortlog|rev-parse|ls-files|ls-tree|fetch|tag|remote))( [^;|&`$]+)?( 2>(&1|/dev/null))?( \\| (tail|head)( -[0-9n]+)?| \\| grep( [^;&`$]+)?)?( && (cd [^ ]+ && )?(git (-P |--no-pager )*(status|log|diff|show|branch|blame|shortlog|rev-parse|ls-files|ls-tree|add|commit|pull|fetch|merge|rebase|checkout|switch|restore|reset|revert|rm|mv|stash|tag|remote))( [^;|&`$]+)?( 2>(&1|/dev/null))?( \\| (tail|head)( -[0-9n]+)?| \\| grep( [^;&`$]+)?)?)*$",
+        "^(cd [^ ]+ && )?(source \\.venv/bin/activate && )?([A-Z_]+=[^ ]+ )*(kubectl get|ls|cat|head|tail|wc|grep|which|whoami|pwd|date|env|echo|file|du|df|tree|jq|yq|rg|npm|pnpm|bun|bunx|npx|node|uv|pip|python3?|cargo|cdk (deploy|synth|diff|list|bootstrap|context|doctor)|brazil-build|brazil-recursive-cmd|builder-mcp|toolbox|kiro-cli|wt|\\./(gradlew|mvnw) [a-zA-Z]+)( [^;|&`$]+)?( > [^;|&`$]+)?( 2>(&1|/dev/null))?( \\| (tail|head)( -[0-9n]+)?| \\| grep( [^;&`$]+)?)?((; | && | \\|\\| )(cd [^ ]+ && )?(source \\.venv/bin/activate && )?([A-Z_]+=[^ ]+ )*(kubectl get|ls|cat|head|tail|wc|grep|which|whoami|pwd|date|env|echo|file|du|df|tree|jq|yq|rg|npm|pnpm|bun|bunx|npx|node|uv|pip|python3?|cargo|cdk (deploy|synth|diff|list|bootstrap|context|doctor)|brazil-build|brazil-recursive-cmd|builder-mcp|toolbox|kiro-cli|wt|\\./(gradlew|mvnw) [a-zA-Z]+)( [^;|&`$]+)?( > [^;|&`$]+)?( 2>(&1|/dev/null))?( \\| (tail|head)( -[0-9n]+)?| \\| grep( [^;&`$]+)?)?)*$",
+        "^(cd [^;|&`$]+ && )?brazil w(s|orkspace) (?!delete)([a-z]+)( [^;|&`$]+)*$",
+        "^(cd [^;|&`$]+ && )?find [^;`$]+( \\| (grep|head|tail)( [^;`$]+)?)+$",
+        "^mkdir -p [^;|&`$]+$",
+        "^cat [^;|&`$]+ \\| (pbcopy|head|tail)( -[0-9n]+)?$",
+        "^(cd [^;&`$]+ && )?jq( -[rceMS]+)* '[^']+' [^;&`$]+\\.json( > [^;&`$]+\\.json\\.tmp( && mv [^;&`$]+\\.json\\.tmp [^;&`$]+\\.json)?)?$",
+        "^(cd [^;&`$]+ && )?yq( -[rceMS]+)* '[^']+' [^;&`$]+\\.ya?ml( > [^;&`$]+\\.ya?ml\\.tmp( && mv [^;&`$]+\\.ya?ml\\.tmp [^;&`$]+\\.ya?ml)?)?$",
+        "^(cd [^;&`$]+ && )?for f in [^;&`$]+\\.json( [^;&`$]+\\.json)*; do jq( -[rceMS]+)* '[^']+' \"\\$f\" > \"\\$f\\.tmp\" && mv \"\\$f\\.tmp\" \"\\$f\"( && echo \"[^\"]+\")? done$",
+        "^(cd [^;&`$]+ && )?for f in [^;&`$]+\\.ya?ml( [^;&`$]+\\.ya?ml)*; do yq( -[rceMS]+)* '[^']+' \"\\$f\" > \"\\$f\\.tmp\" && mv \"\\$f\\.tmp\" \"\\$f\"( && echo \"[^\"]+\")? done$"
+      ]
+    },
+    "subagent": {"allowedAgents": [
+      "gpu-research",
+      "gpu-writing"
+    ]},
+    "write": {
+      "deniedPaths": ["~/.aws/credentials"],
+      "allowedPaths": ["./**"]
+    }
+  },
+  "hooks": {
+    "preToolUse": [{
+      "matcher": "use_aws",
+      "command": "/shared/user/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/agents/hooks/use_aws_guardrail/guardrail"
+    }],
+    "agentSpawn": [{"command": "aim agents publish-metrics --agent-name 'gpu-dev' --agent-package 'AIPowerUserCapabilities-1.0' || true"}]
+  },
+  "tools": [
+    "read",
+    "write",
+    "shell",
+    "code",
+    "glob",
+    "grep",
+    "web_fetch",
+    "web_search",
+    "subagent",
+    "aws",
+    "introspect",
+    "@builder-mcp/CRRevisionCreator",
+    "@builder-mcp/InternalSearch",
+    "@builder-mcp/InternalCodeSearch",
+    "@builder-mcp/ReadInternalWebsites",
+    "@builder-mcp/WorkspaceSearch",
+    "@builder-mcp/TaskeiCreateTask",
+    "@builder-mcp/TaskeiGetRoomResources",
+    "@builder-mcp/TaskeiGetRooms",
+    "@builder-mcp/TaskeiGetTask",
+    "@builder-mcp/TaskeiListTasks",
+    "@builder-mcp/TaskeiUpdateTask",
+    "@pippin-mcp/*",
+    "@aws-knowledge-mcp-server/*",
+    "@builder-mcp/SkillsTool"
+  ],
+  "allowedTools": [
+    "code",
+    "glob",
+    "grep",
+    "introspect",
+    "@builder-mcp/*",
+    "@pippin-mcp/pippin_list_projects",
+    "@pippin-mcp/pippin_list_artifacts",
+    "@pippin-mcp/pippin_get_project",
+    "@pippin-mcp/pippin_get_artifact",
+    "@pippin-mcp/pippin_get_artifact_comments",
+    "@aws-knowledge-mcp-server/*",
+    "@builder-mcp/SkillsTool"
+  ]
+}

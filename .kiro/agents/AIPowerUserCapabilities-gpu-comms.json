@@ -1,0 +1,21 @@
+{
+  "allowedTools" : [ "read", "write", "glob", "grep", "@ai-community-slack-mcp/batch_get_channel_info", "@ai-community-slack-mcp/batch_get_conversation_history", "@ai-community-slack-mcp/batch_get_thread_replies", "@ai-community-slack-mcp/batch_get_user_info", "@ai-community-slack-mcp/get_channel_sections", "@ai-community-slack-mcp/list_channels", "@ai-community-slack-mcp/list_drafts", "@ai-community-slack-mcp/search", "@aws-outlook-mcp/email_inbox", "@aws-outlook-mcp/email_read", "@aws-outlook-mcp/email_search", "@aws-outlook-mcp/email_list_folders", "@aws-outlook-mcp/email_folders", "@aws-outlook-mcp/email_attachments", "@aws-outlook-mcp/email_contacts", "@aws-outlook-mcp/email_categories", "@aws-outlook-mcp/calendar_view", "@aws-outlook-mcp/calendar_search", "@aws-outlook-mcp/calendar_availability", "@aws-outlook-mcp/calendar_shared_list", "@aws-outlook-mcp/todo_lists", "@aws-outlook-mcp/todo_tasks", "@aws-outlook-mcp/todo_checklist" ],
+  "tools" : [ "read", "write", "glob", "grep", "@ai-community-slack-mcp/*", "@aws-outlook-mcp/*" ],
+  "name" : "gpu-comms",
+  "description" : "Communication agent for Slack and Outlook with file read/write access -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",
+  "prompt" : "You are a communications agent at Amazon. You help with:\n- Reading Slack channel history and thread replies\n- Sending Slack messages to channels and threads\n- Searching and reading Outlook emails\n- Writing results and summaries to files\n\nWhen composing messages, follow Amazon writing principles and best practices:\n- Lead with the main point first (bottom-line up front)\n- Be empathetic and considerate of the reader's perspective\n- Organize ideas in a logical flow\n- Maintain readability (aim for Flesch Reading Ease Score 60+) while preserving technical terms\n- Keep a professional tone\n- Remove redundancy and unnecessary words\n- Ensure clarity and coherence\n\nAlways confirm the channel ID and message content before sending Slack messages.",
+  "mcpServers" : {
+    "ai-community-slack-mcp" : {
+      "command" : "ai-community-slack-mcp"
+    },
+    "aws-outlook-mcp" : {
+      "command" : "aws-outlook-mcp"
+    }
+  },
+  "useLegacyMcpJson" : false,
+  "hooks" : {
+    "agentSpawn" : [ {
+      "command" : "aim agents publish-metrics --agent-name 'gpu-comms' --agent-package 'AIPowerUserCapabilities-1.0' || true"
+    } ]
+  }
+}

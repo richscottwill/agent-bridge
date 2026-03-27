@@ -1,0 +1,32 @@
+deployment-strategy
+
+### Deploying the Emergent Protocol
+
+When the autoresearch script registers >95% accuracy, empirical evidence proves the mathematical protocol works. You must transition the models from dynamic, belief-updating agents into static infrastructure. You lock the weights and deploy them as the ground-truth dictionary for your multi-agent swarm.
+
+Here is the deployment strategy to capture and utilize these fine-tuned artifacts.
+
+### 1. Artifact Extraction (Freezing the State)
+
+The autoresearch engine must save the exact mathematical state of the system the moment it crosses the accuracy threshold. You do not save a single monolithic model; you extract three distinct artifacts.
+
+* **The Sender (`agent_a_v1`):** Save Agent A using standard Hugging Face `save_pretrained()` methods. This model now functions exclusively as a text-to-vector encoder.
+* **The Bridge (`bridge_v1.pt`):** Save the PyTorch `state_dict` for the latent bridge. This is the spatial transformation matrix.
+* **The Receiver (`agent_b_v1`):** Save Agent B. This model functions exclusively as a vector-to-action decoder.
+
+### 2. The Latent API (Microservice Architecture)
+
+You do not deploy these models with standard chat interfaces. You wrap them in a high-throughput microservice (like FastAPI or vLLM) to act as dedicated translation endpoints for the rest of your system.
+
+* **Endpoint A (`/encode_latent`):** A human user or a standard LLM sends a complex, text-based task to this endpoint. Agent A processes the text, passes it through the Latent Bridge, and returns the raw, continuous vector.
+* **Endpoint B (`/decode_action`):** A system receives a latent vector and sends it to this endpoint. Agent B processes the mathematical coordinate and executes the corresponding discrete action (e.g., triggering a database query or returning a specific code snippet).
+
+### 3. The Distillation Anchor
+
+Once deployed, Agent A and Agent B become the immutable teachers for your swarm.
+
+You stop running the expensive, multi-agent referential game. Instead, when you introduce a new, specialized coding agent to the swarm, you use the `/encode_latent` endpoint to generate thousands of vector targets. You train the new coding agent to match those exact vectors using a simple Mean Squared Error (MSE) loss function. The new agent learns to speak the swarm's language without disrupting the established protocol.
+
+### The "So What"
+
+Deploying the artifacts this way decouples the language from the training loop. You turn the emergent protocol into a utility API. Any new agent, regardless of its size or architecture, can query Endpoint A to learn exactly how a specific concept maps into the swarm's mathematical dialect. This standardizes the communication layer, allowing you to scale the swarm infinitely while maintaining near-zero latency in agent-to-agent data transfer.

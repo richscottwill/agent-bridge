@@ -1,0 +1,68 @@
+{
+  "useLegacyMcpJson": false,
+  "name": "gpu-research",
+  "resources": [
+    "file://AGENTS.md",
+    "file://*/AGENTS.md",
+    "file://src/*/AGENTS.md",
+    "file://.kiro/steering/**/*.md",
+    "file://*/.kiro/steering/**/*.md",
+    "file://src/*/.kiro/steering/**/*.md",
+    "file://~/.kiro/steering/**/*.md",
+    "file:///home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/context/gpu-research/*.md"
+  ],
+  "description": "GenAI Power User agent useful for internal Amazon research tasks -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",
+  "mcpServers": {
+    "aws-knowledge-mcp-server": {
+      "type": "http",
+      "url": "https://knowledge-mcp.global.api.aws"
+    },
+    "builder-mcp": {
+      "args": [
+        "--agent-sop-paths",
+        "/home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/agent-sops",
+        "--agent-sop-filter",
+        "gpu-research/*"
+      ],
+      "env": {"TOOL_PERSONALIZATION_ENABLED": "false"},
+      "command": "builder-mcp"
+    },
+    "pippin-mcp": {"command": "pippin-mcp-server"},
+    "coe-mcp": {"command": "coemcpproxy"}
+  },
+  "tools": [
+    "read",
+    "write",
+    "code",
+    "glob",
+    "grep",
+    "web_fetch",
+    "web_search",
+    "@builder-mcp/InternalSearch",
+    "@builder-mcp/ReadInternalWebsites",
+    "@builder-mcp/InternalCodeSearch",
+    "@builder-mcp/TicketingReadActions",
+    "@builder-mcp/TaskeiGetTask",
+    "@builder-mcp/TaskeiListTasks",
+    "@pippin-mcp/*",
+    "@aws-knowledge-mcp-server/*",
+    "@coe-mcp/*"
+  ],
+  "prompt": "You are a research specialist focused on finding and analyzing information from Amazon's internal systems. Always provide comprehensive searches across multiple sources and synthesize findings clearly.\n\nWhen conducting research:\n1. Search across multiple internal sources (wikis, code, documentation)\n2. Synthesize findings into a comprehensive analysis\n3. Structure your output as clean, well-organized markdown\n4. Save your complete research findings to a markdown file\n\nFor each research task:\n- Create a markdown file with a descriptive filename based on the research topic\n- Use clear headings and code blocks\n- Include source links and references\n- Provide executive summary and detailed findings\n- Use mermaid format for all diagrams\n- Save the file using fs_write tool\n\nOutput Structure:\n- Use proper markdown formatting with headers (# ## ###)\n- Include a summary section at the top\n- Organize findings into logical sections\n- Include code blocks for technical details\n- Add source references at the end",
+  "hooks": {"agentSpawn": [{"command": "aim agents publish-metrics --agent-name 'gpu-research' --agent-package 'AIPowerUserCapabilities-1.0' || true"}]},
+  "allowedTools": [
+    "read",
+    "write",
+    "code",
+    "glob",
+    "grep",
+    "@builder-mcp/*",
+    "@pippin-mcp/pippin_list_projects",
+    "@pippin-mcp/pippin_list_artifacts",
+    "@pippin-mcp/pippin_get_project",
+    "@pippin-mcp/pippin_get_artifact",
+    "@pippin-mcp/pippin_get_artifact_comments",
+    "@aws-knowledge-mcp-server/*",
+    "@coe-mcp/*"
+  ]
+}

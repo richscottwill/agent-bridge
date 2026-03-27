@@ -1,0 +1,189 @@
+{
+  "mcpServers": {
+    "aws-outlook-mcp": {
+      "command": "aws-outlook-mcp",
+      "args": [],
+      "autoApprove": [
+        "email_search",
+        "email_search",
+        "email_search",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "todo_tasks",
+        "email_read",
+        "email_read",
+        "email_read",
+        "email_read",
+        "email_read",
+        "email_read",
+        "todo_lists",
+        "calendar_view",
+        "calendar_view",
+        "todo_lists",
+        "email_inbox",
+        "calendar_view",
+        "email_send",
+        "email_folders",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "calendar_meeting",
+        "email_reply",
+        "email_draft",
+        "email_draft",
+        "email_list_folders",
+        "calendar_search",
+        "calendar_search",
+        "todo_checklist"
+      ]
+    },
+    "arcc": {
+      "command": "arcc",
+      "args": [
+        "mcp",
+        "start",
+        "--scope",
+        "/spaces/nsp_UDffgb3g,/spaces/nsp_yvb9q5li,/spaces/nsp_on1vkyir,/spaces/nsp_Y1qqN5Lk,/spaces/nsp_t7yvb9q5,/spaces/nsp_gk8r2mat,/spaces/nsp_yl36r2th,/spaces/nsp_51rfgtt7,/spaces/nsp_3twfv3h2"
+      ],
+      "autoApprove": [
+        "search_arcc"
+      ]
+    },
+    "google-sheets": {
+      "command": "uvx",
+      "args": [
+        "mcp-google-sheets@latest"
+      ],
+      "env": {
+        "SERVICE_ACCOUNT_PATH": "/home/prichwil/shared/credentials/kiro-491503-6b65ab0501c6.json",
+        "DRIVE_FOLDER_ID": "1aeRuldkc-OL1gyR7FQ-WrvbpERPsYChZ"
+      },
+      "disabled": true,
+      "autoApprove": [],
+      "disabledTools": [
+        "get_sheet_data",
+        "get_sheet_formulas",
+        "update_cells",
+        "batch_update_cells",
+        "add_rows",
+        "add_columns",
+        "list_sheets",
+        "copy_sheet",
+        "rename_sheet",
+        "get_multiple_sheet_data",
+        "get_multiple_spreadsheet_summary",
+        "create_spreadsheet",
+        "create_sheet",
+        "list_spreadsheets",
+        "share_spreadsheet",
+        "list_folders",
+        "search_spreadsheets",
+        "find_in_spreadsheet",
+        "batch_update",
+        "add_chart"
+      ]
+    },
+    "hedy": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://api.hedy.bot/mcp"
+      ],
+      "autoApprove": [
+        "GetSessions",
+        "GetSessionDetails",
+        "GetSessionHighlights",
+        "GetSessionToDos",
+        "GetHighlights",
+        "GetHighlightDetails",
+        "GetToDos",
+        "GetAllTopics",
+        "GetTopicDetails",
+        "GetTopicSessions",
+        "ListSessionContexts",
+        "GetSessionContext",
+        "UpdateSessionContext",
+        "UpdateTopic",
+        "UpdateTopic"
+      ]
+    }
+  },
+  "powers": {
+    "mcpServers": {
+      "power-aws-agentcore-agentcore-mcp-server": {
+        "command": "uvx",
+        "args": [
+          "awslabs.amazon-bedrock-agentcore-mcp-server@latest"
+        ],
+        "disabled": false
+      }
+    }
+  }
+}

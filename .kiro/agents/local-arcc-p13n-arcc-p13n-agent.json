@@ -1,0 +1,6 @@
+{
+  "tools" : [ "@builtin" ],
+  "resources" : [ "file:///shared/user/.aim/packages/local/arcc-p13n-arcc/context/pilot-steering.md", "file:///home/prichwil/.aim/packages/local/arcc-p13n-arcc/context/*" ],
+  "name" : "p13n-agent",
+  "description" : "Agent for P13N ARCC pilot -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY."
+}

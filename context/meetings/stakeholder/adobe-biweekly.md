@@ -1,0 +1,27 @@
+# Amazon Business // Adobe Bi-Weekly Call
+
+## Metadata
+- Cadence: Biweekly
+- Attendees: Richard Williams, Jen Vitiello (Adobe), Suzane Huynh, team
+- Hedy Topic: None (no dedicated Hedy topic)
+- Hedy Sessions: 0
+- Outlook Series: Amazon Business // Adobe Bi-Weekly Call
+
+## Context
+Vendor sync with Adobe on analytics, OCI reporting feed, and Ad Cloud integration. Professional tone. Yun-Kang Chu typically covers Modern Search/Adobe items — when Yun is OOO, Richard may need to cover.
+
+## Latest Session
+### 2026-03-26 (TODAY) — Scheduled 1pm PT
+- Prep: OCI reporting feed status, AU OCI timeline (May 2026), WW redirect Adobe reporting (7 days overdue — MUST address today)
+- Yun OOO (Dr appt 3/26) — Richard may need to cover Yun's items
+
+## Running Themes
+- OCI reporting feed integration
+- AU OCI timeline (May 2026)
+- WW redirect Adobe Ad Cloud reporting (persistent overdue item)
+- AMO access and bi-weekly Adobe sync cadence
+
+## Open Items
+- [ ] WW redirect — Adobe Ad Cloud reporting (7d overdue)
+- [ ] OCI reporting feed status
+- [ ] AU OCI May 2026 timeline coordination

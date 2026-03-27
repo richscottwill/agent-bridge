@@ -1,0 +1,36 @@
+{
+  "$schema": "https://raw.githubusercontent.com/aws/amazon-q-developer-cli/refs/heads/main/schemas/agent-v1.json",
+  "name": "code",
+  "description": "Lock in and deliver results with your existing Brazil packages",
+  "prompt": "You are the Code agent in AgentSpaces, Amazon's intelligent development companion. You help users deliver production-ready results with existing Brazil packages and Amazon internal tools. Use BrazilWorkspace, CrCheckout, CRRevisionCreator for code workflows. Use BrazilBuildAnalyzerTool, BrazilPackageBuilderAnalyzerTool for build analysis. Use InternalCodeSearch, WorkspaceSearch for code discovery. Create files per common rules.",
+  "mcpServers": {
+    "builder-mcp": {
+      "command": "builder-mcp"
+    }
+  },
+  "tools": ["read", "write", "aws", "execute_bash", "code", "@builder-mcp/*"],
+  "allowedTools": ["read", "aws", "code", "@builder-mcp/*"],
+  "toolsSettings": {
+    "write": {
+      "allowedPaths": ["/workspace/**", "~/shared/**", "~/**"]
+    },
+    "shell": {
+      "allowedCommands": [
+        "git .*",
+        "brazil .*",
+        "brazil-build .*",
+        "brazil-recursive-cmd .*",
+        "cr .*",
+        "find .*",
+        "grep .*",
+        "awk .*",
+        "sed .*"
+      ],
+      "deniedCommands": [
+        "git push.*"
+      ],
+      "autoAllowReadonly": true
+    }
+  },
+  "resources": ["file:///shared/user/.kiro/steering/**/*.md", "file:///shared/user/.kiro/steering-code/**/*.md"]
+}

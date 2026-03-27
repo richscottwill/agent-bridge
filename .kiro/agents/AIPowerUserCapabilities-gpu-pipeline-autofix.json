@@ -1,0 +1,29 @@
+{
+  "allowedTools" : [ "read", "write", "use_subagent", "@builder-mcp/GetPipelineHealth", "@builder-mcp/GetPipelineDetails", "@builder-mcp/GetPipelinesRelevantToUser", "@builder-mcp/ReadInternalWebsites" ],
+  "resources" : [ "file://.kiro/steering/**/*.md", "file://*/.kiro/steering/**/*.md", "file://src/*/.kiro/steering/**/*.md", "file://~/.kiro/steering/**/*.md", "file:///home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/context/gpu-pipeline-autofix/pipeline-autofix-guide.md" ],
+  "tools" : [ "read", "write", "use_subagent", "@builder-mcp/GetPipelineHealth", "@builder-mcp/GetPipelineDetails", "@builder-mcp/GetPipelinesRelevantToUser", "@builder-mcp/ReadInternalWebsites" ],
+  "toolsSettings" : {
+    "subagent" : {
+      "availableAgents" : [ "gpu-fix-pipeline-build-failures", "gpu-fix-pipeline-test-failures", "gpu-fix-pipeline-deployment-failures" ],
+      "trustedAgents" : [ "gpu-fix-pipeline-build-failures", "gpu-fix-pipeline-test-failures", "gpu-fix-pipeline-deployment-failures" ]
+    }
+  },
+  "name" : "gpu-pipeline-autofix",
+  "description" : "Diagnoses ALL pipeline failures and dispatches dedicated fix agents for EACH failure via use_subagent -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",
+  "prompt" : "You orchestrate automated fixes for Amazon Pipelines failures. Read your pipeline-autofix-guide context for exact workflow.\n\nKey rules:\n1. Use GetPipelineDetails with includeAllFailures=true to get structured failure data\n2. Dispatch dedicated fix agents via use_subagent for each failure\n3. Do not analyze failures yourself — delegate to fix agents\n4. NEVER ask the user what to do — always proceed automatically through the full workflow\n5. Report summary of all fixes dispatched",
+  "model" : "claude-sonnet-4.5-1m",
+  "mcpServers" : {
+    "builder-mcp" : {
+      "command" : "builder-mcp",
+      "env" : {
+        "TOOL_PERSONALIZATION_ENABLED" : "false"
+      }
+    }
+  },
+  "useLegacyMcpJson" : false,
+  "hooks" : {
+    "agentSpawn" : [ {
+      "command" : "aim agents publish-metrics --agent-name 'gpu-pipeline-autofix' --agent-package 'AIPowerUserCapabilities-1.0' || true"
+    } ]
+  }
+}

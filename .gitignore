@@ -1,0 +1,40 @@
+# === RW System Git Sync ===
+# Track: context, artifacts, tools, research, reference, .kiro config
+# Exclude: credentials, caches, binaries, runtime state
+
+# Credentials & secrets
+credentials/
+*.pem
+*.key
+.git-credentials
+
+# Large binary / archive files
+*.tar.gz
+*.zip
+*.sqlite3
+
+# Python runtime
+*.pyc
+__pycache__/
+
+# Tool runtime state
+tools/sharepoint-sync/output/
+tools/sharepoint-sync/.sync-manifest.json
+
+# Logs
+*.log
+
+# IDE / AgentSpaces internals
+.agentspaces/
+.aim/
+.smithy-mcp/
+
+# Kiro runtime (keep agents, hooks, steering, specs, settings)
+.kiro/powers/
+.kiro/mcp-servers-reference.json
+
+# Desktop launcher (local-only)
+agentspaces-desktop-launcher/
+
+# Audit reports (regenerable)
+audit-reports/

@@ -1,0 +1,13 @@
+{
+  "tools" : [ "@builtin", "@loaf_mcp" ],
+  "mcpServers" : {
+    "loaf_mcp" : {
+      "command" : "loaf-mcp",
+      "args" : [ ]
+    }
+  },
+  "resources" : [ "file:///shared/user/.aim/packages/local/arcc-avoiding-shepherd-issues/context/pilot-steering.md", "file:///home/prichwil/.aim/packages/local/arcc-avoiding-shepherd-issues/context/*" ],
+  "name" : "avoiding-issues-agent",
+  "description" : "Agent with LOAF MCP for internal security guidance -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",
+  "useLegacyMcpJson" : false
+}

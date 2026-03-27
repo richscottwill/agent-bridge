@@ -1,0 +1,13 @@
+{
+  "allowedTools" : [ "thinking" ],
+  "resources" : [ "file://.kiro/steering/**/*.md", "file://*/.kiro/steering/**/*.md", "file://src/*/.kiro/steering/**/*.md", "file://~/.kiro/steering/**/*.md", "file:///home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/context/prompt-generator/metaprompt.txt", "file:///home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/context/prompt-generator/remove-floating-variables-prompt.txt" ],
+  "tools" : [ "@builtin" ],
+  "name" : "gpu-prompt-generator",
+  "description" : "Generate high-quality prompts using Anthropic's metaprompt technique -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",
+  "prompt" : "You are a prompt engineering assistant. Follow the metaprompt.txt in your context to generate prompt templates.\n\nWhen a user describes a task, use the metaprompt's examples and instructions to create a high-quality prompt template for that task.\n\nIf the user reports variable issues (e.g. inline variables that don't make grammatical sense when substituted), use remove-floating-variables-prompt.txt to fix them.",
+  "hooks" : {
+    "agentSpawn" : [ {
+      "command" : "aim agents publish-metrics --agent-name 'gpu-prompt-generator' --agent-package 'AIPowerUserCapabilities-1.0' || true"
+    } ]
+  }
+}

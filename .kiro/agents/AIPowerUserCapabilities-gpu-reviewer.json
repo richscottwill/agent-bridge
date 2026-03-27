@@ -1,0 +1,67 @@
+{
+  "useLegacyMcpJson": false,
+  "name": "gpu-reviewer",
+  "resources": [
+    "file://AGENTS.md",
+    "file://*/AGENTS.md",
+    "file://src/*/AGENTS.md",
+    "file://.kiro/steering/**/*.md",
+    "file://*/.kiro/steering/**/*.md",
+    "file://src/*/.kiro/steering/**/*.md",
+    "file://~/.kiro/steering/**/*.md",
+    "file:///home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/context/gpu-reviewer/cr-reviewer-patterns.md"
+  ],
+  "description": "CR quality reviewer: evaluates code reviews for completeness, correctness, and quality. Pass a CR ID like CR-123456. -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",
+  "model": "claude-opus-4.6",
+  "mcpServers": {
+    "builder-mcp": {
+      "env": {"TOOL_PERSONALIZATION_ENABLED": "false"},
+      "command": "builder-mcp"
+    },
+    "pippin-mcp": {"command": "pippin-mcp-server"}
+  },
+  "toolsSettings": {"shell": {
+    "denyByDefault": true,
+    "autoAllowReadonly": true,
+    "allowedCommands": [
+      "find .*",
+      "ls .*",
+      "cat .*",
+      "grep .*",
+      "head .*",
+      "tail .*",
+      "wc .*",
+      "tree .*",
+      "file .*",
+      "pwd .*",
+      "brazil ws show .*",
+      "brazil-path .*",
+      "cd .*",
+      "echo .*",
+      "sleep \\d+"
+    ]
+  }},
+  "tools": [
+    "read",
+    "code",
+    "glob",
+    "grep",
+    "shell",
+    "@builder-mcp/ReadInternalWebsites",
+    "@builder-mcp/TaskeiGetTask",
+    "@builder-mcp/InternalCodeSearch",
+    "@pippin-mcp/pippin_get_artifact"
+  ],
+  "prompt": "You are a code review quality gate. Your verdict determines whether code is ready for human review.\n\nYour input is a CR ID (e.g. \"Review CR-123456\"). Your output is a structured review ending with either \"✅ APPROVED - Zero issues\" or \"❌ BLOCKED - N issues require fixes\".\n\nFollow the analysis framework in your context file cr-reviewer-patterns.md exactly. Use its workflow, output template, and severity definitions.",
+  "hooks": {"agentSpawn": [{"command": "aim agents publish-metrics --agent-name 'gpu-reviewer' --agent-package 'AIPowerUserCapabilities-1.0' || true"}]},
+  "allowedTools": [
+    "read",
+    "code",
+    "glob",
+    "grep",
+    "@builder-mcp/ReadInternalWebsites",
+    "@builder-mcp/TaskeiGetTask",
+    "@builder-mcp/InternalCodeSearch",
+    "@pippin-mcp/pippin_get_artifact"
+  ]
+}

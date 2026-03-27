@@ -1,0 +1,646 @@
+Received: from SJ0PR18MB4011.namprd18.prod.outlook.com (2603:10b6:a03:2ca::9)
+ by LV3PR18MB5592.namprd18.prod.outlook.com with HTTPS; Fri, 13 Mar 2026
+ 03:35:09 +0000
+Received: from MEWP282CA0024.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:1e2::8)
+ by SJ0PR18MB4011.namprd18.prod.outlook.com (2603:10b6:a03:2ca::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.11; Fri, 13 Mar
+ 2026 03:35:07 +0000
+Received: from ME0P282MB5336.AUSP282.PROD.OUTLOOK.COM
+ (2603:10c6:220:1e2:cafe::e) by MEWP282CA0024.outlook.office365.com
+ (2603:10c6:220:1e2::8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.30 via Frontend
+ Transport; Fri, 13 Mar 2026 03:35:08 +0000
+Received: from ME3P282MB2644.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:121::13)
+ by ME0P282MB5336.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:237::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.16; Fri, 13 Mar
+ 2026 03:35:03 +0000
+Received: from ME3P282MB2644.AUSP282.PROD.OUTLOOK.COM
+ ([fe80::bd91:544e:45b5:72a0]) by ME3P282MB2644.AUSP282.PROD.OUTLOOK.COM
+ ([fe80::bd91:544e:45b5:72a0%6]) with mapi id 15.20.9700.015; Fri, 13 Mar 2026
+ 03:35:02 +0000
+From: "Zak, Lena" <lenazak@amazon.com>
+To: "Williams, Richard" <prichwil@amazon.com>, "Eck, Alexis"
+	<alexieck@amazon.com>
+CC: "Mudradi, Harsha" <hmudradi@amazon.com>, ABIX Paid Search
+	<abix-paid-search@groups.amazon.com>
+Subject: RE: AB AU Paid Search Sync
+Thread-Topic: AB AU Paid Search Sync
+Thread-Index: Adyqle05SV7dZmfiGEuJOBcYgzo0QQCgJ9KAACS3wmcAreiYMAAWN+jTAHaG9oA=
+Date: Fri, 13 Mar 2026 03:35:02 +0000
+Message-ID:
+	<ME3P282MB264402CC258FFDF97087F4C7D545A@ME3P282MB2644.AUSP282.PROD.OUTLOOK.COM>
+References:
+	<ME3P282MB264481995EFB082CD7533A7BD57EA@ME3P282MB2644.AUSP282.PROD.OUTLOOK.COM>
+ <ME3P282MB26445681E9F75B0E5CAAFCD6D57AA@ME3P282MB2644.AUSP282.PROD.OUTLOOK.COM>
+ <LV3PR18MB559276078ED9771161EA3883B17AA@LV3PR18MB5592.namprd18.prod.outlook.com>
+ <ME3P282MB26444010B9B9C4993C7A3503D546A@ME3P282MB2644.AUSP282.PROD.OUTLOOK.COM>
+ <LV3PR18MB55921C911FC34E000A85D3DCB146A@LV3PR18MB5592.namprd18.prod.outlook.com>
+In-Reply-To:
+	<LV3PR18MB55921C911FC34E000A85D3DCB146A@LV3PR18MB5592.namprd18.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: ME3P282MB2644.AUSP282.PROD.OUTLOOK.COM
+X-MS-Has-Attach: yes
+X-MS-Exchange-Organization-Network-Message-Id:
+	d7bd6650-ee64-415d-4c8d-08de80b182d8
+X-MS-Exchange-Organization-SCL: 1
+X-MS-TNEF-Correlator:
+X-MS-Exchange-Organization-RecordReviewCfmType: 0
+msip_labels:
+x-ms-publictraffictype: Email
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:1;jmr:0;auth:0;dest:C;OFR:CustomRules;ENG:(910005)(944506478)(944626604)(920097)(425001)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	J91oqi5DOcIvFrcorN8tNmD9v9gkLxROc972ajQiNlzfaeC5p0C2jxNTpoo2aC2uwRycdKaF/epbHxvyY5bNY3IdeL4SBQpZh10t3xrdW8Y5bPgqd1hR38pBXtW3uTtSeWaJLUxK46uXUVxPV9SbS2Fr3gBwwUy9kTOqgiVv6PtN5DS+sD94LdKqKzFEr4EVJ/cZ+qMUdeq9bJ1Dm7qwF2VfaqnCv/0x2uIei8dw/vhCnRtxkzFvYDpGzw1kLCXpkelf6c+Yk5j0+69qBU9b9xtKyGE93AWJ5AR7rN0XZ/dHKJ7J+7sN5ZBgpGN6+f+wCLtRnHdKrwvepHG9kpgdkC0KBEfkYOuI1vvmjl09c/F8Wx3v+q7Dfm/dmrouZNk5VM+376DAVljPImYvPwSs4wbDZYBXRn7FIPr+A7J9Ei3d16CHlVtTeteEF8Qwlw5SItMIvdWAqCQyUJD2/mWGdHFF+XWTkhygRWfr2Ybo9pZ49jjjhaSqOIQOlVEyw9l8p4utMHDP9/bleDpSHCjbny5P5X85FdrXMf/ER1vTHVcftOEKSVCcRZ20nsEk89zYO9Q9YNZIhbPxBsJJ63n6s754ev/fJkJf8t3wWNxedBQG0bKICG/aHVQ8A1HEZ3995O8GByfYv+wUpI+xxNDWax85yIXQnVi3c2U3mnCXvgFKFJS3TFPFFDg9b7UhDTOt5zvNsjQzcTTZidoHWAwLoQMOEe2my1jbqc+1x8/fpFpArYkjsxnhcqe0kIZcWSRcRpDYMcgardIY2044fjHK76+Q35G8bKj7NbDLlep3apsiKU+yV0bPG0PF8zeSt2JKmACa44Rnj//WKKSoGdLzABdMwZbQ2apuyLinCcIjrxwzPgJJViCIKWaNZ0FSsZRxa7HpViZ3zUF9DQY5Xv9LHXbf3pbMvuJg0a3QOMa33NA=
+Content-Type: multipart/related;
+	boundary="_004_ME3P282MB264402CC258FFDF97087F4C7D545AME3P282MB2644AUSP_";
+	type="multipart/alternative"
+MIME-Version: 1.0
+
+--_004_ME3P282MB264402CC258FFDF97087F4C7D545AME3P282MB2644AUSP_
+Content-Type: multipart/alternative;
+	boundary="_000_ME3P282MB264402CC258FFDF97087F4C7D545AME3P282MB2644AUSP_"
+
+--_000_ME3P282MB264402CC258FFDF97087F4C7D545AME3P282MB2644AUSP_
+Content-Type: text/plain; charset="us-ascii"
+
+Thanks for sending Richard. Some of those CPAs look really alarming, so look forward to them coming down significantly.
+
+Let's have a process of looking at these weekly together in our syncs.
+
+Confirming I'd like to switch all links to the new Polaris pages, and continue to optimize from there.
+
+Thanks,
+Lena
+
+From: Williams, Richard <prichwil@amazon.com>
+Sent: Wednesday, March 11, 2026 5:31 AM
+To: Zak, Lena <lenazak@amazon.com>; Eck, Alexis <alexieck@amazon.com>
+Cc: Mudradi, Harsha <hmudradi@amazon.com>; ABIX Paid Search <abix-paid-search@groups.amazon.com>
+Subject: Re: AB AU Paid Search Sync
+
+Thanks for the notes Lena.
+
+Unfortunately I'll have to cancel today's meeting because I'm out sick, but have the keyword data attached here. (I've done a lot recently with negatives, so the data is likely pretty stale. This, along with updates to bid strategies, means we should see keyword data that's more representative of the actual search terms moving forward.)
+
+In terms of the responses you laid out below, thank you yes we will not be bidding on perishables/alcohol moving forward. We did a check on the keywords as well as adding negatives.
+On the point about landing pages; there's a risk to performance, and we'll still want to plan to move to paid search specific pages in the future, but we can definitely test. I'll put it on my list work quickly with Alexis on specific pages once you confirm. Also can you confirm you'd rather switch all to the new pages rather than doing a 50/50 traffic split? (I'd recommend sending half of the traffic to MCS and half to Polaris-style pages with different reftags, and this wouldn't lengthen the implementation.)
+
+Thank you,
+Richard
+________________________________
+From: Zak, Lena <lenazak@amazon.com<mailto:lenazak@amazon.com>>
+Sent: Tuesday, March 10, 2026 0:44
+To: Williams, Richard <prichwil@amazon.com<mailto:prichwil@amazon.com>>; Eck, Alexis <alexieck@amazon.com<mailto:alexieck@amazon.com>>
+Cc: Mudradi, Harsha <hmudradi@amazon.com<mailto:hmudradi@amazon.com>>; ABIX Paid Search <abix-paid-search@groups.amazon.com<mailto:abix-paid-search@groups.amazon.com>>
+Subject: RE: AB AU Paid Search Sync
+
+
+Thanks Richard.
+
+
+
+Responses in line in red.
+
+
+
+From: Williams, Richard <prichwil@amazon.com<mailto:prichwil@amazon.com>>
+Sent: Saturday, March 7, 2026 8:25 AM
+To: Zak, Lena <lenazak@amazon.com<mailto:lenazak@amazon.com>>; Eck, Alexis <alexieck@amazon.com<mailto:alexieck@amazon.com>>
+Cc: Mudradi, Harsha <hmudradi@amazon.com<mailto:hmudradi@amazon.com>>; ABIX Paid Search <abix-paid-search@groups.amazon.com<mailto:abix-paid-search@groups.amazon.com>>
+Subject: Re: AB AU Paid Search Sync
+
+
+
+Hi Lena, comments below:
+
+1-3: Our team manages these optimizations as part of our standard workflow. Reducing bids and adding negatives for efficiency has been part of the plan, especially following the bid strategies we've just implemented.
+
+            If that's the case I'm not sure I understand why we are still bidding on alcohol and perishables. Assuming we won't be doing that moving forward.
+
+4-5: What you're describing regarding the paid search landing pages and redirects are the ideal end state, but they're managed at the global level. I'll be sure to provide updates as they become available.
+
+            I would like to update all urls that we are pointing to as part of our campaigns. For AU, all urls need to start pointing to the new MCS. If we test that for 4 weeks, to get statistically significant results, and see a deterioration in performance, we can switch back. This is a two-way door decision, that I'd like to do asap.
+
+Happy to have the conversation at the global level on the redirects from MCS to AB.com.au, as well as the reasoning for pointing to the legacy site, and understand who is driving that strategy, but let's keep the two things separate.
+
+6: I will bring the requested conversion data to our next meeting.
+
+            Sounds good.
+
+
+
+Thank you,
+
+Richard
+
+
+
+________________________________
+
+From: Zak, Lena <lenazak@amazon.com<mailto:lenazak@amazon.com>>
+Sent: Thursday, March 5, 2026 19:18
+To: Williams, Richard <prichwil@amazon.com<mailto:prichwil@amazon.com>>; Eck, Alexis <alexieck@amazon.com<mailto:alexieck@amazon.com>>
+Cc: Chu, Yun-Kang <yunchu@amazon.com<mailto:yunchu@amazon.com>>; Mudradi, Harsha <hmudradi@amazon.com<mailto:hmudradi@amazon.com>>
+Subject: RE: AB AU Paid Search Sync
+
+
+
+Hi Richard,
+
+
+
+Thanks for your time this week.
+
+
+
+Ahead of the next meeting, could you please partner with Alexis to make sure the following is done:
+
+
+
+  1.  Optimise key words we are bidding on (at a minimum removing anything with a CPC >USD$20, but continuing to bring that down over time).
+  2.  Remove any bidding from selection we don't sell - e.g. alcohol, perishables
+  3.  Add negative keywords (including for selection we don't sell, as well as underperforming keywords).
+  4.  Update all urls to go to the relevant pages on the new MCS site.
+  5.  Ensure that the logged in experience for customers coming from paid search redirects to the relevant page on AB.com.au (Alexis can help you find the right storefront urls for redirects).
+  6.  Share conversion data for our keywords from Adobe.
+
+
+
+Thank you!
+
+Lena
+
+
+
+-----Original Appointment-----
+From: Williams, Richard <prichwil@amazon.com<mailto:prichwil@amazon.com>>
+Sent: Tuesday, March 3, 2026 9:43 AM
+To: Williams, Richard; Eck, Alexis
+Cc: Zak, Lena; Chu, Yun-Kang; Mudradi, Harsha
+Subject: AB AU Paid Search Sync
+When: Tuesday, 3 March 2026 4:30 PM-4:55 PM (UTC-08:00) Pacific Time (US & Canada).
+Where: https://amazon.zoom.us/j/95406184746?pwd=TB87P3hwgYtcQRG81nd9kOJGnQALQB.1&from=addon
+
+
+
+Scheduling for the same day/time as the previous sync, and every week during this transition. Let me know if this time doesn't work and we can adjust.
+
+
+
+[Image removed by sender.]<https://zoom.com/>
+
+Join Zoom Meeting<https://amazon.zoom.us/j/95406184746?pwd=TB87P3hwgYtcQRG81nd9kOJGnQALQB.1&from=addon>
+
+Quick Reference
+
+Meeting URL:
+
+https://amazon.zoom.us/j/95406184746?pwd=TB87P3hwgYtcQRG81nd9kOJGnQALQB.1&from=addon
+
+Meeting ID:
+
+954 0618 4746
+
+Passcode:
+
+70098517
+
+One tap mobile:
+
+US: +12532050468,,95406184746#,,,,*70098517#<tel:+12532050468,,95406184746#,,,,*70098517#> or +12532158782,,95406184746#,,,,*70098517#<tel:+12532158782,,95406184746#,,,,*70098517#>
+
+Join by Telephone
+
+Dial:
+
+833 928 4608 (US Toll Free)
+
+Meeting ID:
+
+954 0618 4746
+
+Passcode:
+
+70098517
+
+International numbers<https://amazon.zoom.us/u/abOGfD5hfv>
+
+Join from a SIP room system
+
+SIP:
+
+95406184746@zoomcrc.com<mailto:95406184746@zoomcrc.com>
+
+Passcode:
+
+70098517
+
+
+
+--_000_ME3P282MB264402CC258FFDF97087F4C7D545AME3P282MB2644AUSP_
+Content-Type: text/html; charset="us-ascii"
+
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:m="http://schemas.microsoft.com/office/2004/12/omml" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+<meta name="Generator" content="Microsoft Word 15 (filtered medium)">
+<!--[if !mso]><style>v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style><![endif]--><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Aptos;}
+@font-face
+	{font-family:"Amazon Ember";
+	panose-1:2 11 6 3 2 2 4 2 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	font-size:12.0pt;
+	font-family:"Aptos",sans-serif;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+p.xmsonormal, li.xmsonormal, div.xmsonormal
+	{mso-style-name:x_msonormal;
+	margin:0cm;
+	font-size:12.0pt;
+	font-family:"Aptos",sans-serif;}
+span.EmailStyle25
+	{mso-style-type:personal-compose;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;
+	mso-ligatures:none;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+/* List Definitions */
+@list l0
+	{mso-list-id:861675391;
+	mso-list-template-ids:57058578;}
+ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+--></style>
+</head>
+<body lang="EN-US" link="blue" vlink="purple" style="word-wrap:break-word">
+<div class="WordSection1">
+<p class="MsoNormal"><span style="font-family:&quot;Calibri&quot;,sans-serif">Thanks for sending Richard. Some of those CPAs look really alarming, so look forward to them coming down significantly.<o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-family:&quot;Calibri&quot;,sans-serif"><br>
+Let&#8217;s have a process of looking at these weekly together in our syncs.<o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-family:&quot;Calibri&quot;,sans-serif"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal"><span style="font-family:&quot;Calibri&quot;,sans-serif">Confirming I&#8217;d like to switch all links to the new Polaris pages, and continue to optimize from there.<o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-family:&quot;Calibri&quot;,sans-serif"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal"><span style="font-family:&quot;Calibri&quot;,sans-serif">Thanks,<br>
+Lena<o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-family:&quot;Calibri&quot;,sans-serif"><o:p>&nbsp;</o:p></span></p>
+<div>
+<div style="border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0cm 0cm 0cm">
+<p class="MsoNormal"><b><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif">From:</span></b><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif"> Williams, Richard &lt;prichwil@amazon.com&gt;
+<br>
+<b>Sent:</b> Wednesday, March 11, 2026 5:31 AM<br>
+<b>To:</b> Zak, Lena &lt;lenazak@amazon.com&gt;; Eck, Alexis &lt;alexieck@amazon.com&gt;<br>
+<b>Cc:</b> Mudradi, Harsha &lt;hmudradi@amazon.com&gt;; ABIX Paid Search &lt;abix-paid-search@groups.amazon.com&gt;<br>
+<b>Subject:</b> Re: AB AU Paid Search Sync<o:p></o:p></span></p>
+</div>
+</div>
+<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black">Thanks for the notes Lena.&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black">Unfortunately I'll have to cancel today's meeting because I'm out sick, but have the keyword data attached here. (I've done a lot recently with negatives,
+ so the data is likely pretty stale. This, along with updates to bid strategies, means we should see keyword data that's more representative of the actual search terms moving forward.)<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black">In terms of the responses you laid out below, thank you yes we will not be bidding on perishables/alcohol moving forward. We did a check on the keywords as
+ well as adding negatives.<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black">On the point about landing pages; there's a risk to performance, and we'll still want to plan to move to paid search specific pages in the future, but we can
+ definitely test. I'll put it on my list work quickly with Alexis on specific pages&nbsp;once you confirm. Also can you confirm you'd rather switch all to the new pages rather than doing a 50/50 traffic split? (I'd recommend sending half of the traffic to MCS and
+ half to Polaris-style pages with different reftags, and this wouldn't lengthen the implementation.)<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black">Thank you,<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black">Richard<o:p></o:p></span></p>
+</div>
+<div class="MsoNormal" align="center" style="text-align:center">
+<hr size="2" width="98%" align="center">
+</div>
+<div id="divRplyFwdMsg">
+<p class="MsoNormal"><b><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black">From:</span></b><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black"> Zak, Lena &lt;<a href="mailto:lenazak@amazon.com">lenazak@amazon.com</a>&gt;<br>
+<b>Sent:</b> Tuesday, March 10, 2026 0:44<br>
+<b>To:</b> Williams, Richard &lt;<a href="mailto:prichwil@amazon.com">prichwil@amazon.com</a>&gt;; Eck, Alexis &lt;<a href="mailto:alexieck@amazon.com">alexieck@amazon.com</a>&gt;<br>
+<b>Cc:</b> Mudradi, Harsha &lt;<a href="mailto:hmudradi@amazon.com">hmudradi@amazon.com</a>&gt;; ABIX Paid Search &lt;<a href="mailto:abix-paid-search@groups.amazon.com">abix-paid-search@groups.amazon.com</a>&gt;<br>
+<b>Subject:</b> RE: AB AU Paid Search Sync</span> <o:p></o:p></p>
+<div>
+<p class="MsoNormal">&nbsp;<o:p></o:p></p>
+</div>
+</div>
+<div>
+<div>
+<p class="xmsonormal"><span style="font-family:&quot;Calibri&quot;,sans-serif">Thanks Richard.</span><o:p></o:p></p>
+<p class="xmsonormal"><span style="font-family:&quot;Calibri&quot;,sans-serif">&nbsp;</span><o:p></o:p></p>
+<p class="xmsonormal"><span style="font-family:&quot;Calibri&quot;,sans-serif">Responses in line
+<span style="color:red">in red</span>.</span><o:p></o:p></p>
+<p class="xmsonormal"><span style="font-family:&quot;Calibri&quot;,sans-serif">&nbsp;</span><o:p></o:p></p>
+<div>
+<div style="border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0cm 0cm 0cm">
+<p class="xmsonormal"><b><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif">From:</span></b><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif"> Williams, Richard &lt;<a href="mailto:prichwil@amazon.com">prichwil@amazon.com</a>&gt;
+<br>
+<b>Sent:</b> Saturday, March 7, 2026 8:25 AM<br>
+<b>To:</b> Zak, Lena &lt;<a href="mailto:lenazak@amazon.com">lenazak@amazon.com</a>&gt;; Eck, Alexis &lt;<a href="mailto:alexieck@amazon.com">alexieck@amazon.com</a>&gt;<br>
+<b>Cc:</b> Mudradi, Harsha &lt;<a href="mailto:hmudradi@amazon.com">hmudradi@amazon.com</a>&gt;; ABIX Paid Search &lt;<a href="mailto:abix-paid-search@groups.amazon.com">abix-paid-search@groups.amazon.com</a>&gt;<br>
+<b>Subject:</b> Re: AB AU Paid Search Sync</span><o:p></o:p></p>
+</div>
+</div>
+<p class="xmsonormal">&nbsp;<o:p></o:p></p>
+<div>
+<p class="xmsonormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black">Hi Lena, comments below:</span><o:p></o:p></p>
+</div>
+<div>
+<p class="xmsonormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black">1-3: Our team manages these optimizations as part of our standard workflow. Reducing bids and adding negatives for efficiency has been part of the plan, especially
+ following the bid strategies we've just implemented.&nbsp;</span><o:p></o:p></p>
+<p class="xmsonormal"><span style="font-family:&quot;Calibri&quot;,sans-serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:red">
+If that&#8217;s the case I&#8217;m not sure I understand why we are still bidding on alcohol and perishables. Assuming we won&#8217;t be doing that moving forward.</span></span><o:p></o:p></p>
+</div>
+<div>
+<p class="xmsonormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black">4-5: What you're describing regarding the paid search landing pages and redirects are the ideal end state, but they're managed at the global level. I'll be
+ sure to provide updates as they become available.&nbsp;</span><o:p></o:p></p>
+<p class="xmsonormal"><span style="font-family:&quot;Calibri&quot;,sans-serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:red">
+I would like to update all urls that we are pointing to as part of our campaigns. For AU, all urls need to start pointing to the new MCS. If we test that for 4 weeks, to get statistically significant results, and see a deterioration in performance, we can switch
+ back. This is a two-way door decision, that I&#8217;d like to do asap. </span></span><o:p></o:p></p>
+<p class="xmsonormal" style="text-indent:36.0pt"><span style="font-family:&quot;Calibri&quot;,sans-serif;color:red">Happy to have the conversation at the global level on the redirects from MCS to AB.com.au, as well as the reasoning for pointing to the legacy site, and
+ understand who is driving that strategy, but let&#8217;s keep the two things separate.</span><o:p></o:p></p>
+</div>
+<div>
+<p class="xmsonormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black">6: I will bring the requested conversion data to our next meeting.</span><o:p></o:p></p>
+<p class="xmsonormal"><span style="font-family:&quot;Calibri&quot;,sans-serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:red">
+Sounds good.</span></span><o:p></o:p></p>
+</div>
+<div>
+<p class="xmsonormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black">&nbsp;</span><o:p></o:p></p>
+</div>
+<div>
+<p class="xmsonormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black">Thank you,</span><o:p></o:p></p>
+</div>
+<div>
+<p class="xmsonormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black">Richard</span><o:p></o:p></p>
+</div>
+<div>
+<p class="xmsonormal"><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black">&nbsp;</span><o:p></o:p></p>
+</div>
+<div class="MsoNormal" align="center" style="text-align:center">
+<hr size="2" width="98%" align="center">
+</div>
+<div id="x_divRplyFwdMsg">
+<div>
+<p class="xmsonormal"><b><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black">From:</span></b><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black">&nbsp;Zak, Lena &lt;<a href="mailto:lenazak@amazon.com">lenazak@amazon.com</a>&gt;<br>
+<b>Sent:</b>&nbsp;Thursday, March 5, 2026 19:18<br>
+<b>To:</b>&nbsp;Williams, Richard &lt;<a href="mailto:prichwil@amazon.com">prichwil@amazon.com</a>&gt;; Eck, Alexis &lt;<a href="mailto:alexieck@amazon.com">alexieck@amazon.com</a>&gt;<br>
+<b>Cc:</b>&nbsp;Chu, Yun-Kang &lt;<a href="mailto:yunchu@amazon.com">yunchu@amazon.com</a>&gt;; Mudradi, Harsha &lt;<a href="mailto:hmudradi@amazon.com">hmudradi@amazon.com</a>&gt;<br>
+<b>Subject:</b>&nbsp;RE: AB AU Paid Search Sync</span><o:p></o:p></p>
+</div>
+<div>
+<p class="xmsonormal">&nbsp;<o:p></o:p></p>
+</div>
+</div>
+<p><span style="font-family:&quot;Calibri&quot;,sans-serif">Hi Richard,</span><o:p></o:p></p>
+<p><span style="font-family:&quot;Calibri&quot;,sans-serif">&nbsp;</span><o:p></o:p></p>
+<p><span style="font-family:&quot;Calibri&quot;,sans-serif">Thanks for your time this week.</span><o:p></o:p></p>
+<p><span style="font-family:&quot;Calibri&quot;,sans-serif">&nbsp;</span><o:p></o:p></p>
+<p><span style="font-family:&quot;Calibri&quot;,sans-serif">Ahead of the next meeting, could you please partner with Alexis to make sure the following is done:</span><o:p></o:p></p>
+<p><span style="font-family:&quot;Calibri&quot;,sans-serif">&nbsp;</span><o:p></o:p></p>
+<ol style="margin-top:0cm" start="1" type="1">
+<li class="xmsonormal" style="mso-list:l0 level1 lfo1"><span style="font-family:&quot;Calibri&quot;,sans-serif">Optimise key words we are bidding on (at a minimum removing anything with a CPC &gt;USD$20, but continuing to bring that down over time).</span><o:p></o:p></li><li class="xmsonormal" style="mso-list:l0 level1 lfo1"><span style="font-family:&quot;Calibri&quot;,sans-serif">Remove any bidding from selection we don&#8217;t sell &#8211; e.g. alcohol, perishables</span><o:p></o:p></li><li class="xmsonormal" style="mso-list:l0 level1 lfo1"><span style="font-family:&quot;Calibri&quot;,sans-serif">Add negative keywords (including for selection we don&#8217;t sell, as well as underperforming keywords).</span><o:p></o:p></li><li class="xmsonormal" style="mso-list:l0 level1 lfo1"><span style="font-family:&quot;Calibri&quot;,sans-serif">Update all urls to go to the relevant pages on the new MCS site.</span><o:p></o:p></li><li class="xmsonormal" style="mso-list:l0 level1 lfo1"><span style="font-family:&quot;Calibri&quot;,sans-serif">Ensure that the logged in experience for customers coming from paid search redirects to the relevant page on AB.com.au (Alexis can help you find the right
+ storefront urls for redirects).</span><o:p></o:p></li><li class="xmsonormal" style="mso-list:l0 level1 lfo1"><span style="font-family:&quot;Calibri&quot;,sans-serif">Share conversion data for our keywords from Adobe.</span><o:p></o:p></li></ol>
+<p><span style="font-family:&quot;Calibri&quot;,sans-serif">&nbsp;</span><o:p></o:p></p>
+<p><span style="font-family:&quot;Calibri&quot;,sans-serif">Thank you!</span><o:p></o:p></p>
+<p><span style="font-family:&quot;Calibri&quot;,sans-serif">Lena</span><o:p></o:p></p>
+<p><span style="font-family:&quot;Calibri&quot;,sans-serif">&nbsp;</span><o:p></o:p></p>
+<p><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif">-----Original Appointment-----<br>
+<b>From:</b>&nbsp;Williams, Richard &lt;<a href="mailto:prichwil@amazon.com">prichwil@amazon.com</a>&gt;<br>
+<b>Sent:</b>&nbsp;Tuesday, March 3, 2026 9:43 AM<br>
+<b>To:</b>&nbsp;Williams, Richard; Eck, Alexis<br>
+<b>Cc:</b>&nbsp;Zak, Lena; Chu, Yun-Kang; Mudradi, Harsha<br>
+<b>Subject:</b>&nbsp;AB AU Paid Search Sync<br>
+<b>When:</b>&nbsp;Tuesday, 3 March 2026 4:30 PM-4:55 PM (UTC-08:00) Pacific Time (US &amp; Canada).<br>
+<b>Where:</b>&nbsp;<a href="https://amazon.zoom.us/j/95406184746?pwd=TB87P3hwgYtcQRG81nd9kOJGnQALQB.1&amp;from=addon">https://amazon.zoom.us/j/95406184746?pwd=TB87P3hwgYtcQRG81nd9kOJGnQALQB.1&amp;from=addon</a></span><o:p></o:p></p>
+<p>&nbsp;<o:p></o:p></p>
+<p><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black">Scheduling for the same day/time as the previous sync, and every week during this transition. Let me know if this time doesn't work and we can adjust.</span><o:p></o:p></p>
+<p><span style="font-size:11.0pt;font-family:&quot;Amazon Ember&quot;,sans-serif;color:black">&nbsp;</span><a name="x_x_x_x_zBegin"></a><o:p></o:p></p>
+<div align="center">
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;box-sizing:border-box;border-spacing:0px">
+<tbody>
+<tr>
+<td valign="top" style="padding:0cm 0cm 0cm 0cm">
+<div align="center">
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="592" style="width:444.0pt;border-collapse:collapse;box-sizing:border-box;border-spacing:0px">
+<tbody>
+<tr>
+<td valign="top" style="background:#F4F5F9;padding:0cm 0cm 0cm 0cm">
+<div align="center">
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;background:white;border-collapse:collapse;box-sizing:border-box;border-spacing:0px">
+<tbody>
+<tr>
+<td style="padding:22.5pt 0cm 7.5pt 0cm">
+<p><span style="color:black"><a href="https://zoom.com/"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;text-decoration:none"><img border="0" width="600" height="600" style="width:6.25in;height:6.25in" id="x_x_Picture_x0020_1" src="cid:image001.jpg@01DCB2F0.A83987B0" alt="Image removed by sender."></span></a></span><o:p></o:p></p>
+</td>
+</tr>
+<tr>
+<td style="padding:0cm 21.0pt 0cm 21.0pt">
+<div align="center">
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;box-sizing:border-box;border-spacing:0px">
+<tbody>
+<tr>
+<td colspan="2" style="background:white;padding:15.0pt 0cm 6.0pt 0cm">
+<p style="line-height:25.5pt"><u><span style="font-size:19.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#2D8CFF"><a href="https://amazon.zoom.us/j/95406184746?pwd=TB87P3hwgYtcQRG81nd9kOJGnQALQB.1&amp;from=addon"><span style="color:#2D8CFF">Join Zoom Meeting</span></a></span></u><o:p></o:p></p>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="padding:15.0pt 0cm 6.75pt 0cm">
+<p style="line-height:18.75pt"><b><span style="font-family:&quot;Arial&quot;,sans-serif;color:#39394D">Quick Reference</span></b><o:p></o:p></p>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="padding:0cm 0cm 0cm 0cm">
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;background:#F9F9F9;border-collapse:collapse;border-radius:20px;box-sizing:border-box;border-spacing:0px">
+<tbody>
+<tr>
+<td width="35%" valign="top" style="width:35.0%;border-top:solid #2D8CFF 1.5pt;border-left:solid #2D8CFF 1.5pt;border-bottom:inset 1.0pt;border-right:inset 1.0pt;padding:4.5pt 7.5pt 4.5pt 7.5pt">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">Meeting URL:</span><o:p></o:p></p>
+</td>
+<td valign="top" style="border-top:solid #2D8CFF 1.5pt;border-left:none;border-bottom:inset 1.0pt;border-right:solid #2D8CFF 1.5pt;padding:4.5pt 7.5pt 4.5pt 7.5pt">
+<p style="line-height:15.0pt"><u><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D"><a href="https://amazon.zoom.us/j/95406184746?pwd=TB87P3hwgYtcQRG81nd9kOJGnQALQB.1&amp;from=addon"><span style="color:#39394D">https://amazon.zoom.us/j/95406184746?pwd=TB87P3hwgYtcQRG81nd9kOJGnQALQB.1&amp;from=addon</span></a></span></u><o:p></o:p></p>
+</td>
+</tr>
+<tr>
+<td width="35%" valign="top" style="width:35.0%;border-top:none;border-left:solid #2D8CFF 1.5pt;border-bottom:inset 1.0pt;border-right:inset 1.0pt;padding:4.5pt 7.5pt 4.5pt 7.5pt">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">Meeting ID:</span><o:p></o:p></p>
+</td>
+<td valign="top" style="border-top:none;border-left:none;border-bottom:inset 1.0pt;border-right:solid #2D8CFF 1.5pt;padding:4.5pt 7.5pt 4.5pt 7.5pt">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">954 0618 4746</span><o:p></o:p></p>
+</td>
+</tr>
+<tr>
+<td width="35%" valign="top" style="width:35.0%;border-top:none;border-left:solid #2D8CFF 1.5pt;border-bottom:inset 1.0pt;border-right:inset 1.0pt;padding:4.5pt 7.5pt 4.5pt 7.5pt">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">Passcode:</span><o:p></o:p></p>
+</td>
+<td valign="top" style="border-top:none;border-left:none;border-bottom:inset 1.0pt;border-right:solid #2D8CFF 1.5pt;padding:4.5pt 7.5pt 4.5pt 7.5pt">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">70098517</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style="height:13.5pt">
+<td width="35%" valign="top" style="width:35.0%;border-top:none;border-left:solid #2D8CFF 1.5pt;border-bottom:solid #2D8CFF 1.5pt;border-right:inset 1.0pt;padding:4.5pt 7.5pt 4.5pt 7.5pt;height:13.5pt">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">One tap mobile:</span><o:p></o:p></p>
+</td>
+<td valign="top" style="border-top:none;border-left:none;border-bottom:solid #2D8CFF 1.5pt;border-right:solid #2D8CFF 1.5pt;padding:4.5pt 7.5pt 4.5pt 7.5pt;height:13.5pt">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">US:
+</span><u><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:blue"><a href="tel:+12532050468,,95406184746#,,,,*70098517#">+12532050468,,95406184746#,,,,*70098517#</a></span></u><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">&nbsp;or
+</span><u><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:blue"><a href="tel:+12532158782,,95406184746#,,,,*70098517#">+12532158782,,95406184746#,,,,*70098517#</a></span></u><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="padding:15.0pt 0cm 6.75pt 0cm">
+<p style="line-height:18.75pt"><b><span style="font-family:&quot;Arial&quot;,sans-serif;color:#39394D">Join by Telephone</span></b><o:p></o:p></p>
+</td>
+</tr>
+<tr>
+<td width="35%" valign="top" style="width:35.0%;padding:0cm 0cm 0cm 0cm">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">Dial:</span><o:p></o:p></p>
+</td>
+<td valign="top" style="padding:0cm 0cm 7.5pt 0cm">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">833 928 4608 (US Toll Free)</span><o:p></o:p></p>
+</td>
+</tr>
+<tr>
+<td width="35%" valign="top" style="width:35.0%;padding:0cm 0cm 0cm 0cm">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">Meeting ID:</span><o:p></o:p></p>
+</td>
+<td valign="top" style="padding:0cm 0cm 7.5pt 0cm">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">954 0618 4746</span><o:p></o:p></p>
+</td>
+</tr>
+<tr>
+<td width="35%" valign="top" style="width:35.0%;padding:0cm 0cm 0cm 0cm">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">Passcode:</span><o:p></o:p></p>
+</td>
+<td valign="top" style="padding:0cm 0cm 7.5pt 0cm">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">70098517</span><o:p></o:p></p>
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top" style="padding:0cm 0cm 0cm 0cm">
+<p style="line-height:15.0pt"><u><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#2D8CFF"><a href="https://amazon.zoom.us/u/abOGfD5hfv"><span style="color:#2D8CFF">International numbers</span></a></span></u><o:p></o:p></p>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="padding:15.0pt 0cm 6.75pt 0cm">
+<p style="line-height:18.75pt"><b><span style="font-family:&quot;Arial&quot;,sans-serif;color:#39394D">Join from a SIP room system</span></b><o:p></o:p></p>
+</td>
+</tr>
+<tr>
+<td width="35%" valign="top" style="width:35.0%;padding:0cm 0cm 0cm 0cm">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">SIP:</span><o:p></o:p></p>
+</td>
+<td valign="top" style="padding:0cm 0cm 3.75pt 0cm">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D"><a href="mailto:95406184746@zoomcrc.com">95406184746@zoomcrc.com</a></span><o:p></o:p></p>
+</td>
+</tr>
+<tr>
+<td width="35%" valign="top" style="width:35.0%;padding:0cm 0cm 0cm 0cm">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">Passcode:</span><o:p></o:p></p>
+</td>
+<td valign="top" style="padding:0cm 0cm 3.75pt 0cm">
+<p style="line-height:15.0pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#39394D">70098517</span><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a name="x_x_x_x_zEnd"></a>&nbsp;<o:p></o:p></p>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+--_000_ME3P282MB264402CC258FFDF97087F4C7D545AME3P282MB2644AUSP_--
+
+--_004_ME3P282MB264402CC258FFDF97087F4C7D545AME3P282MB2644AUSP_
+Content-Type: image/jpeg; name="image001.jpg"
+Content-Description: image001.jpg
+Content-Disposition: inline; filename="image001.jpg"; size=1099;
+	creation-date="Fri, 13 Mar 2026 03:35:01 GMT";
+	modification-date="Fri, 13 Mar 2026 03:35:10 GMT"
+Content-ID: <image001.jpg@01DCB2F0.A83987B0>
+Content-Transfer-Encoding: base64
+
+/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
+MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii
+gAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKA
+CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK
+KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoo
+ooAKKKKACiiigAooooAKKKKACiiigD//2Q==
+
+--_004_ME3P282MB264402CC258FFDF97087F4C7D545AME3P282MB2644AUSP_--

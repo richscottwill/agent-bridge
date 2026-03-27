@@ -1,0 +1,10 @@
+{
+  "$schema": "https://raw.githubusercontent.com/aws/amazon-q-developer-cli/refs/heads/main/schemas/agent-v1.json",
+  "name": "title-generator",
+  "description": "Generates short titles for conversations - minimal agent with no MCPs for fast execution",
+  "prompt": "You are a title generator. Output ONLY a 3-5 word title, nothing else. No tools, no actions, no explanations, just the title text.",
+  "model": "claude-haiku-4.5",
+  "mcpServers": {},
+  "tools": [],
+  "allowedTools": []
+}

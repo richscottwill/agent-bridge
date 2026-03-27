@@ -1,0 +1,94 @@
+---
+title: Agentic Marketing — Industry Landscape & Amazon Context
+status: DRAFT
+audience: personal
+level: 4-5
+owner: Richard Williams
+created: 2026-03-25
+updated: 2026-03-25
+update-trigger: major industry announcements, Amazon internal agentic initiatives, new tools
+---
+
+# Agentic Marketing — Industry Landscape & Amazon Context
+
+## The Macro Shift
+
+Marketing is entering the agentic era. The progression:
+1. **Manual** (pre-2020): humans do everything
+2. **Assisted** (2020-2024): AI suggests, humans decide and execute
+3. **Agentic** (2025-2027): AI executes within guardrails, humans set strategy and review
+4. **Autonomous** (2028+): AI operates end-to-end, humans intervene on exceptions
+
+Most marketing teams are at stage 2. Within Amazon: Hydra/Retail PS uses ML bidder Midas (Stage 2 — algorithmic but not agentic). Amazon Flex uses Marin software (Stage 2). Shopbop partners with agency Tinuiti (Stage 1-2). No Amazon marketing team has published Stage 3 infrastructure. Richard is building stage 3 infrastructure. The window to be early is 12-18 months — based on Google's AI Max timeline (launching 2026, expected mainstream adoption by 2027) and the typical 12-month lag between early adopters and mainstream in marketing automation.
+
+## What's Happening at Amazon
+
+### Internal Tools
+- AgentSpaces/DevSpaces: containerized AI development environment (what Richard uses)
+- Q Developer: Amazon's AI coding assistant
+- Bedrock AgentCore: AWS platform for building AI agents
+- ATMS: direct submission workflow (training session 3/24)
+
+### Amazon Marketing Context
+- Google AI Max: Google's own agentic campaign management (Richard testing Q2)
+- OCI: already proved algorithmic > manual for bidding
+- Project Baloo: Shopping Ads for AB — new channel, new automation opportunity
+- The Hydra team (Retail PS): manages ~400MM keywords via ML bidder "Midas" — the scale endpoint
+
+### What Other Amazon Teams Are Doing
+- Retail Central PS (Hydra): ML-powered bidding at scale via Midas
+- Amazon Flex SEM: uses Marin software for SEM management
+- Shopbop: partners with agency Tinuiti for paid search
+- Most teams still use traditional tools (Marin, SA360, manual) — no agentic infrastructure
+
+The key insight: most Amazon teams are still at Stage 2 (assisted). AB PS is building Stage 3 infrastructure. The window is 12-18 months before this becomes table stakes — based on Google's AI Max timeline (launching 2026, expected mainstream adoption by 2027) and the typical 12-month lag between early adopters and mainstream in marketing automation.
+
+## What's Happening in Industry
+
+### Google's Direction
+- AI Max: automated asset generation + expanded reach
+- Performance Max: fully automated campaign type
+- Broad match + Smart Bidding: Google pushing toward less manual control
+- Trend: Google wants advertisers to provide signals, not manage keywords
+
+### The Agency Model is Shifting
+- Agencies traditionally sold labor (people managing campaigns)
+- Agentic tools compress that labor — agencies need to sell strategy, not execution
+- First-party agentic infrastructure (what Richard is building) reduces agency dependency
+
+### Emerging Patterns
+- Persistent context systems (body system is an early example)
+- Autonomous loop architectures (autoresearch is an early example)
+- Human-in-the-loop with decreasing loop frequency
+- Multi-agent orchestration (analyst → writer → reviewer pipeline)
+
+Industry claims above are based on public announcements from Google (I/O 2025), industry analyst reports, and observed patterns in Amazon's internal tooling. AB-specific validation is ongoing.
+
+## AB PS Positioning
+
+1. Building the infrastructure while most teams are still debating whether to use ChatGPT
+2. The body system is a working prototype of what enterprise AI assistants will look like in 2-3 years
+3. The autoresearch loop is a working prototype of self-improving AI systems
+4. The artifact pipeline (agent drafts → human refines → agent maintains) is a replicable workflow pattern
+5. Documentation of the methodology IS the artifact — it's both the work and the proof of the work
+
+## What to Watch
+- Google I/O announcements (AI Max evolution, new automation features)
+- Amazon internal agentic initiatives (Bedrock AgentCore adoption)
+- Competitor agency adoption of agentic tools
+- When the first marketing team publishes an "agentic marketing" case study — that's when the window starts closing
+
+## Sources
+- Amazon internal tools — source: ~/shared/context/active/org-chart.md → Hydra team, tool references
+- Google direction (AI Max, PMax) — source: ~/shared/context/body/eyes.md → What's Coming
+- Hydra/Midas — source: ~/shared/context/active/org-chart.md → Amazon Retail Central Paid Search
+- Agency landscape — source: ~/shared/context/active/org-chart.md → Shopbop (Tinuiti), Flex (Marin)
+- Body system architecture — source: ~/shared/context/body/body.md
+- ATMS training — source: email (Kiyo Walker, 3/24)
+
+<!-- AGENT_CONTEXT
+machine_summary: "Industry landscape analysis of agentic marketing trends and Amazon's position. Most marketing teams are at Stage 2 (assisted); AB PS is building Stage 3 (agentic) infrastructure with a 12-18 month window before it becomes table stakes."
+key_entities: ["AI Max", "OCI", "Bedrock AgentCore", "Hydra/Midas", "Project Baloo", "AgentSpaces", "body system", "autoresearch loop"]
+action_verbs: ["monitor", "build", "position", "test", "document"]
+update_triggers: ["major industry announcements", "Amazon internal agentic initiatives", "new tools", "Google I/O announcements"]
+-->

@@ -1,0 +1,1694 @@
+﻿Task ID,Created At,Completed At,Last Modified,Name,Section/Column,Assignee,Assignee Email,Start Date,Due Date,Tags,Notes,Projects,Parent task,Blocked By (Dependencies),Blocking (Dependencies),Actual time,Priority_RW,Importance_RW,Notes - Task,Begin Date,Routine,Important/Urgent,Time Left,Help Needed flag,Status L-week,Status C-week,Marketplace/Region,Task Progress,Task Progress,Date diff
+"1213637505601028",2026-03-12,,2026-03-12,MX/AU confirm budgets,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-03-25,,,,,,,,Not urgent,,,2026-03-12,Admin (Wind-down),,,,,,,,,
+"1213637505601024",2026-03-12,,2026-03-12,"R&O for MX/AU (help to input amount, and remind about confirming budgets)",Recently assigned,Richard Williams,prichwil@amazon.com,,2026-03-10,,,,,,,,Urgent,,,2026-03-12,Admin (Wind-down),,,,,,,,,
+"1213624580143471",2026-03-11,,2026-03-12,Reply to Alexis and Stella,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-03-12,,,,,,,,Today,,,2026-03-12,Sweep (Low-friction),,,,,,,,,
+"1213611457559870",2026-03-11,,2026-03-11,Finish Audience Request after legal approval and Media Team request,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,F90,Get Legal Approval,,,Not urgent,,,,Sweep (Low-friction),,,,,,,,,
+"1213611457559863",2026-03-11,2026-03-11,2026-03-11,Audience Request - Inc w/Media Team,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,PS ENG,F90,,,,,,,2026-03-11,,,,,,,,,,
+"1213608836755498",2026-03-10,,2026-03-11,Make changes to AU/MX/PAM for the week,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-03-11,,,,,,,,Today,,,2026-03-09,Engine Room (Excel and Google ads),,,,,,,,,
+"1213560614815911",2026-03-06,,2026-03-11,PAM R&O ,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-03-10,,,,,,,,Today,,,2026-03-06,Admin (Wind-down),,,,,,,,,
+"1213560587721386",2026-03-05,2026-03-11,2026-03-11,OCI : 25/50/100 plan for EU3,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-03-11,,,,,,,,Today,Important,,2026-03-06,Engine Room (Excel and Google ads),,,,,,,,,96:00
+"1213528325884300",2026-03-03,2026-03-04,2026-03-04,Ask about ps_kw_s in IT (should it be removed?),Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,,,,,Today,,,2026-03-03,,,,,,,,,,
+"1213494284353345",2026-03-02,,2026-03-11,MX - investigate reftags,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"Week 8:
+    Total unique ref tags: 87
+    Branded ref tags: 27
+    Unbranded ref tags: 60
+Week 9:
+    Total unique ref tags: 12
+    Branded ref tags: 7
+    Unbranded ref tags: 5
+",,,,,,Urgent,,,2026-03-03,Engine Room (Excel and Google ads),,,,,,,,,
+"1213494284353342",2026-03-02,2026-03-11,2026-03-11,"For MX/AU, Generic is taking search queries from NB campaigns (add negatives)",Recently assigned,Richard Williams,prichwil@amazon.com,,,,,"AU,MX",,,,,Not urgent,Important,,2026-03-02,,Non Important/Non Urgent,,,,,,Done,Done,
+"1213494284353338",2026-03-02,2026-03-03,2026-03-03,AU meetings - Agenda,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-03-03,,"
+
+    Increase relevance of things we’re bidding on? (this would be understanding keywords and landing pages and campaigns live)
+    Occasionally (per quarter/per half, something reasonable) look at keywords (performing vs. not performing)
+        Bring this with the intent to figure out what works and doesn’t work.
+",AU,,,,,Today,,,2026-03-02,,,,,,,,,Done,24:00
+"1213494284353333",2026-03-02,2026-03-03,2026-03-03,Send AU team invoice for Feb,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-03-02,,,,,,,,Today,,,2026-03-02,,,,,,,,,,0:00
+"1213444508187809",2026-02-25,2026-03-06,2026-03-06,It's time to update your goal(s),Recently assigned,Richard Williams,prichwil@amazon.com,,2026-03-02,,"These goals need an update:
+<UL><LI><ASANA_OBJECT OBJECT_ID=""1213204514049667"" PREFERRED_PATH=""/0/goal/1213204514049667""></ASANA_OBJECT></LI><LI><ASANA_OBJECT OBJECT_ID=""1213204514049671"" PREFERRED_PATH=""/0/goal/1213204514049671""></ASANA_OBJECT></LI><LI><ASANA_OBJECT OBJECT_ID=""1213204514049680"" PREFERRED_PATH=""/0/goal/1213204514049680""></ASANA_OBJECT></LI><LI><ASANA_OBJECT OBJECT_ID=""1213204514049684"" PREFERRED_PATH=""/0/goal/1213204514049684""></ASANA_OBJECT></LI><LI><ASANA_OBJECT OBJECT_ID=""1213204514049688"" PREFERRED_PATH=""/0/goal/1213204514049688""></ASANA_OBJECT></LI><LI><ASANA_OBJECT OBJECT_ID=""1213204514049691"" PREFERRED_PATH=""/0/goal/1213204514049691""></ASANA_OBJECT></LI><LI><ASANA_OBJECT OBJECT_ID=""1213204514049812"" PREFERRED_PATH=""/0/goal/1213204514049812""></ASANA_OBJECT></LI><LI><ASANA_OBJECT OBJECT_ID=""1213245014119125"" PREFERRED_PATH=""/0/goal/1213245014119125""></ASANA_OBJECT></LI><LI><ASANA_OBJECT OBJECT_ID=""1213245014119128"" PREFERRED_PATH=""/0/goal/1213245014119128""></ASANA_OBJECT></LI><LI><ASANA_OBJECT OBJECT_ID=""1213245014119131"" PREFERRED_PATH=""/0/goal/1213245014119131""></ASANA_OBJECT></LI></UL>
+Stakeholders and teammates need an up-to-date source of information about your goals so they know you’re on track, have what they need to update their own goals, and can resolve issues that need attention.
+Here’s how to update your goals:
+<OL><LI>Go to each goal</LI><LI>Choose the status that reflects your level of confidence in achieving the goal</LI><LI>Add information that reflects your latest efforts</LI></OL>
+We’ll send a notification to each goal’s members after you make these changes. Complete this task when you are done.",,,,,,Today,,,2026-03-02,,,,,,,,,,0:00
+"1213423303841378",2026-02-24,2026-03-02,2026-03-02,"Write comment for AU - ask about planned AU events, project baloo, can let them know that this is US only, and no plans for further dev (already delayed two times for US, from Q4 '25, to May '26 to Aug '26)",Recently assigned,Richard Williams,prichwil@amazon.com,,2026-03-02,,,,,,,,Today,,,2026-03-02,,,,,,,,,,0:00
+"1213423303841375",2026-02-24,2026-03-11,2026-03-11,Ask Vijay about timing for email overlay - Want to finish within March to avoid overlap with OCI work,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,,,,,Not urgent,,,2026-02-24,,,,,,,,,,
+"1213379551525584",2026-02-23,,2026-03-11,Paid Acq Agent Swarm (Alpha),Recently assigned,Richard Williams,prichwil@amazon.com,,,,"**1) Sample Swarm Architecture for Amazon Business (business.amazon.com) – Focused on Paid Acquisition Marketing**
+
+This is a **production-ready, fully internal swarm** built on Amazon’s own secure stack (AWS Bedrock AgentCore + Amazon Q Business Quick Suite + native Amazon Ads Agent). Everything stays inside your VPC, respects IAM/ACLs, and complies with the March 2026 BSA Agent Policy. No external tools touch live accounts.
+
+**High-Level Architecture (Text Diagram)**
+```
+[Human Swarm Commander (Marketing Manager)] 
+          ↓ (natural language goal: “Grow mid-market B2B sign-ups 25% at 3:1 ROAS in Q2”)
+[Orchestrator Agent – Amazon Q Business + Bedrock AgentCore]
+          ├── Researcher Agent (Bedrock + internal data lakes)
+          ├── Campaign Planner Agent (Amazon Ads Agent + Google Ads export connector)
+          ├── Creative Agent (Amazon Creative Agent + Bedrock)
+          ├── Bidding & Optimization Agent (Bedrock + real-time signals)
+          ├── AEO/GEO Citation Agent (Bedrock + Profound/internal visibility data)
+          ├── Analytics & Compliance Guardian Agent (Amazon Q + SageMaker monitoring)
+          └── Executor Agents (write-only APIs to Amazon Ads / Google Ads via approved scripts)
+          ↑ (daily report + escalation flags)
+[Human Swarm Commander] ← weekly 15-min review + one-click approval
+```
+**Specialist Agents & Responsibilities (Paid Acquisition Focus)**
+
+- **Orchestrator Agent** (Amazon Q Business Quick Suite + Bedrock): Receives your high-level brief, breaks it into tasks, routes them, merges outputs, enforces budget caps, and escalates anything >5% variance. Runs 24/7 on scheduled Lambda triggers.
+
+- **Researcher Agent** (Bedrock AgentCore + Amazon Q connected to internal BI + Google Drive/SharePoint): Pulls last 7/30-day performance (Google Ads CSV export, Amazon Ads reports, first-party purchase data), competitor ASIN/share-of-voice, B2B procurement trends from Rufus signals. Outputs: “Top 12 rising keywords + 3 persona segments losing share.”
+
+- **Campaign Planner Agent** (Amazon Ads Agent native + Bedrock wrapper for Google Ads): Takes researcher output → “Create full-funnel campaign: Sponsored Brands + Performance Max on Google targeting ‘bulk office supplies procurement’ with $X budget.” Auto-builds structure, negative keywords, audience lists.
+
+- **Creative Agent** (Amazon Creative Agent + Bedrock): Generates 50+ variants (headlines, images, video scripts, AEO-structured landing-page copy) in brand voice. Outputs directly to Campaign Manager.
+
+- **Bidding & Optimization Agent** (Bedrock + Amazon Ads Agent real-time loop): Adjusts bids every 15 min based on inventory, competitor activity, conversion signals, and AI-procurement intent (e.g., Rufus-driven).
+
+- **AEO/GEO Citation Agent** (Bedrock + internal citation tracker or Profound export): Monitors which prompts surface competitors in ChatGPT/Gemini/Perplexity → triggers paid amplification on your highest-authority pages.
+
+- **Analytics & Compliance Guardian** (Amazon Q + SageMaker): Scores every output for ROAS, brand safety, data privacy; blocks anything non-compliant; generates weekly executive deck.
+
+**Deployment Path (Internal Only)**
+- Week 1–2: Marketing + 1–2 engineers stand up in Bedrock console (visual builder, no heavy code).
+- Use Strands Agents SDK (AWS-native) for peer-to-peer swarm communication.
+- Connect via Amazon Q Apps for zero-code custom workflows.
+- Scale: Start with one vertical (e.g., office supplies), expand to all B2B categories.
+
+This swarm already exists in prototype form inside Amazon Ads teams post-unBoxed 2025. You can replicate it in your Amazon Business pod today.
+
+**2) Detailed Plan to Become Swarm Manager – Google Ads Focus Using Grok 4, Gemini 3.1 Pro, Amazon Q**
+
+You do **not** need to code. You run a **manual-then-semi-automated swarm** entirely in chat windows. Takes 20–40 min/day at first, drops to 10 min once patterns lock in. All data stays secure (export CSVs, never share live credentials).
+
+**Phase 1: Week 1 – Manual Paper Swarm (Zero Risk, Prove Value)**
+
+**Daily Routine (Copy-Paste Workflow)**
+1. **Morning (10 min) – Export & Feed Data**  
+   Google Ads → Reports → Predefined → “Campaign performance (last 7 days)” → Download CSV.  
+   Paste the raw table into a fresh chat.
+
+2. **Researcher Agent Prompt** (paste into **Amazon Q Business** first – it’s internal & secure)  
+   You are Researcher Agent for Amazon Business paid acquisition.  
+   Goal: Grow B2B sign-ups and spend at 3:1+ ROAS.  
+   Here is last 7-day Google Ads CSV: [PASTE ENTIRE CSV]  
+   Plus our internal targets: CPC cap $4.20, conversion value target $180 per sign-up.  
+   Analyze and output ONLY in this exact format:  
+   1. Top 5 rising opportunities (keywords/ audiences with >20% growth)  
+   2. 3 problems to fix today (high spend, low conv rate)  
+   3. 2 competitor signals you see  
+   4. Recommended next actions for Planner Agent
+
+3. **Copy Researcher output → Paste into Grok 4 as Planner Agent**  
+   You are Planner Agent. Take this Researcher output: [PASTE]  
+   Build a complete Google Ads campaign plan for next 7 days:  
+   - Campaign type (Performance Max or Search)  
+   - Exact ad groups + keywords (max 20)  
+   - Bidding strategy & daily budget split  
+   - Negative keywords list  
+   - Landing page recommendations (business.amazon.com URLs)  
+   Output in bullet-point format only.
+
+4. **Copy Planner output → Paste into Gemini 3.1 Pro as Creative Agent**  
+   You are Creative Agent using Gemini 3.1 Pro.  
+   Goal: Maximize B2B clicks & sign-ups. Brand voice: professional, trustworthy, efficiency-focused.  
+   Campaign plan: [PASTE]  
+   Generate:  
+   - 10 headlines (≤30 chars)  
+   - 5 descriptions (≤90 chars)  
+   - 3 call-to-action variations  
+   - 1 AEO-optimized meta description for landing page  
+   Ensure every asset includes at least one stat or benefit.
+
+5. **Copy Creative output → Paste back into Amazon Q as Optimizer Agent**  
+   You are Bidding & Optimization Agent.  
+   Current campaign data: [PASTE yesterday’s CSV summary]  
+   Proposed creative & plan: [PASTE]  
+   Recommend exact bid adjustments, budget moves, and pause/add rules for today.  
+   Flag anything that would break our 3:1 ROAS guardrail.
+
+6. **End of Day (5 min)** – Paste all outputs into one Google Doc titled “Swarm Daily Log – [Date]”. Add your one-sentence human decision: “Approve all / Tweak X / Pause Y”.
+
+**Phase 2: Week 2–3 – Semi-Automated Chaining (Still No Code)**
+- Create 4 saved prompt templates in each tool (Amazon Q, Grok, Gemini) so you just hit “Load template” + paste data.
+- Use Amazon Q Apps (inside your Amazon Q Business) to build one lightweight “Swarm Dashboard App” that remembers context across days (your dev teammate can help set it up in <1 hour).
+- Add Gemini 3.1 Pro’s agentic mode: start a new chat with “Act as full swarm orchestrator using the 5 roles above” and feed it the Researcher output first – it can chain internally.
+
+**Phase 3: Week 4+ – Hand-Off to Real Swarm (You Stay Commander)**
+- Present your 3-week log + side-by-side metrics (manual vs swarm) to engineering.
+- Ask them to replicate the exact prompt chain inside Bedrock AgentCore using your templates as the instruction set.
+- You keep the same role: every morning you type one goal sentence into the internal Orchestrator and get the full plan back.
+
+**Exact Guardrails You Own as Swarm Manager**
+- Budget cap prompt line (never exceeded)
+- Brand voice & compliance checklist (add to every prompt)
+- Escalation rule: “If ROAS projected <2.8:1, pause and alert me immediately”
+
+**Weekly 15-Min Review Template You Run**
+1. Open Swarm Log
+2. Ask Amazon Q: “Summarize last 7 days swarm performance vs goals”
+3. Tweak one prompt (e.g., “Add more emphasis on procurement agent intent”)
+4. Approve next week’s budget split
+
+You are now the Swarm Commander. The agents do the tactical work; you set direction, review, and iterate. This exact manual-to-automated path is how several Amazon marketing pods started in late 2025.
+
+You now have everything you need to lead this internally. Start tomorrow morning with the Researcher prompt on your latest Google Ads export and you’ll have your first swarm output by lunch. Let me know which phase you want me to expand with more example CSVs or prompt tweaks.",ABPS AI,,,,,Not urgent,,,2026-02-23,Core Two (Deep Work),,,,,,,,,
+"1213332849519450",2026-02-19,,2026-03-11,Request Media Updates,Recently assigned,Richard Williams,prichwil@amazon.com,,,,Stay in touch with Siri to ensure we're included in the Tech conversation/work when they begin building the audience,,Include audience in Media request,,,,Urgent,,,,Sweep (Low-friction),,,,,,,,,
+"1213363301506113",2026-02-19,,2026-03-11,Get Media to reference our SIM,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-19,,"Ensure F90 request is referenced in their SIM/documents/process with Tech so it isn't missed.
+ Provide Media with SIM link and request they add to their SIM/documentation, etc ",,Include audience in Media request,,,,Urgent,,,2026-02-19,Sweep (Low-friction),,,,,,,,,0:00
+"1213363301506111",2026-02-19,2026-02-19,2026-02-24,Submit ABMA SIM Req ,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-19,,"https://sim.amazon.com/issues/create?assignedFolder=23c49671-73c3-4edd-a6c5-d44926e1809a
+
+Instructions (from Robert): Thanks for the info. For F90, you need to cut a general ABMA https://sim.amazon.com/issues/create?assignedFolder=23c49671-73c3-4edd-a6c5-d44926e1809a. In the SIM, please note that we will follow up with a point of view on how to phase this as part of the overarching LR 1P targeting phased rollout. This won’t happen until next week when Siri is back but I will send a note on the broader chain to tee up next steps. Please share the SIM with us here once complete. Abdul and I will add it to the quip; no other changes to the quip are required.",,Include audience in Media request,,,,Today,,,,,,,,,,,,,
+"1213341921686576",2026-02-18,2026-02-24,2026-02-24,Dwayne WW MCS Callout in PreWBR (Due Tuesday EOD),Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-24,,"https://quip-amazon.com/MMgBAzDrlVou/WW-AB-Traffic-Marketing-Pre-WBR-Callouts
+
+",,,,,,Today,Important,,,,,,,,,,,,
+"1213336296972493",2026-02-18,,2026-03-11,Enable Enhanced Match,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,F90,Get Legal Approval,,,Not urgent,,,,Engine Room (Excel and Google ads),,,,,,,,,
+"1213336296972490",2026-02-18,,2026-03-11,Import audience to GAds,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,Add Audiences to Google,"Get Legal Approval,Paid Media Legal Approval",,,Not urgent,,,,Engine Room (Excel and Google ads),,,,,,,,,
+"1213336296972488",2026-02-18,,2026-03-11,Include audience in Media request,Recently assigned,Richard Williams,prichwil@amazon.com,,,,https://issues.amazon.com/issues/ABMA-11139,,Add Audiences to Google,,,,Not urgent,,,,Sweep (Low-friction),,,,,,,,,
+"1213336296972484",2026-02-18,,2026-03-11,Add Audiences to Google,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,F90,,Enable F90 Ads,,Not urgent,,,,Engine Room (Excel and Google ads),,,,,,,,,
+"1213336296972470",2026-02-18,,2026-03-11,Apply kws at Acct level (100% application),Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,Apply URL Kws WW,Remove subset Testing,,,Not urgent,,,,Engine Room (Excel and Google ads),,,,,,,,,
+"1213336296972468",2026-02-18,,2026-03-11,Remove subset Testing,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,Apply URL Kws WW,Test kw application across URL subset,Apply kws at Acct level (100% application),,Not urgent,,,,Engine Room (Excel and Google ads),,,,,,,,,
+"1213329819048778",2026-02-18,,2026-03-11,Test kw application across URL subset,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,Apply URL Kws WW,Get confirmation of OCI support from Tech,Remove subset Testing,,Not urgent,,,,Engine Room (Excel and Google ads),,,,,,,,,
+"1213341921686564",2026-02-18,,2026-03-11,Testing Document for Kate,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-04-01,,"Overall: What we’ve done, as well as future for the year. Foundation for OP1.
+Doc captain: Richard
+
+Questions to answer:
+    Impact for each test
+    Spotlight for each test
+    Overall narrative that shows what we do
+    Who should be in the audience? (Focus on Kate, but Alessio as well?)
+","ABPS - WW Testing & Projects,PS-Owned Global Testing",,,,,Today,Important,,2026-02-26,Core Two (Deep Work),,,,,,,,,816:00
+"1213341921686568",2026-02-18,2026-03-11,2026-03-11,"Create structure of the doc, and strong idea of narrative before DDD.",,,,,2026-02-25,,,,Testing Document for Kate,,,,Today,,,,,,,,,,,,,
+"1213341921686574",2026-02-18,2026-03-03,2026-03-03,DDD to identify owners for each section,,,,,2026-03-05,,,,Testing Document for Kate,,,,Urgent,,,,,,,,,,,,,
+"1213341921686570",2026-02-18,2026-03-04,2026-03-04,Contact Megan for Kate's calendar,,,,,,,,,Testing Document for Kate,,,,,,,,,,,,,,,,,
+"1213341921686571",2026-02-18,,2026-02-18,Create Timeline for 1st/2nd review with team,,,,,,,,,Testing Document for Kate,,,,,,,,,,,,,,,,,
+"1213341921686572",2026-02-18,,2026-02-18,1st Review due date,,,,,,,,,Testing Document for Kate,,,,,,,,,,,,,,,,,
+"1213341921686573",2026-02-18,,2026-02-18,2nd Review due date,,,,,,,,,Testing Document for Kate,,,,,,,,,,,,,,,,,
+"1213329816575017",2026-02-18,,2026-03-11,Create FR accounts,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-20,,,Paid App,,,,,Not urgent,,,2026-02-18,Engine Room (Excel and Google ads),,,,,,,,,48:00
+"1213341921686555",2026-02-18,,2026-02-18,"Resolve IT POs. Allocate only the amount spent, and remove other months from asp.",,,,,,,,,Create FR accounts,,,,,,,,,,,,,,,,,
+"1213341921686554",2026-02-18,,2026-02-18,Request PO for Google,,,,,,,,,Create FR accounts,,,,,,,,,,,,,,,,,
+"1213341921686558",2026-02-18,,2026-02-18,Request PO for Apple,,,,,,,,,Create FR accounts,,,,,,,,,,,,,,,,,
+"1213341921686560",2026-02-18,,2026-02-18,Google account tied to correct FR billing (not consolidated),,,,,,,,,Create FR accounts,,,,,,,,,,,,,,,,,
+"1213341921686561",2026-02-18,,2026-02-18,Apple campaign with correct email address for billing,,,,,,,,,Create FR accounts,,,,,,,,,,,,,,,,,
+"1213341921686562",2026-02-18,,2026-02-18,Add FR to reporting,,,,,,,,,Create FR accounts,,,,,,,,,,,,,,,,,
+"1213316107541662",2026-02-17,2026-02-18,2026-02-18,"Turn off IT activity for PAM because of the 22% tax. Think about allocating to others, or begin in FR.",Recently assigned,Richard Williams,prichwil@amazon.com,,,,,Paid App,,,,,Today,,,,,,,,,,,,,
+"1213316107541659",2026-02-17,2026-02-18,2026-02-18,"Put LP experiences for Existing/New into a Quip, with some details and also for DE",Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-17,,https://quip-amazon.com/ArHxAjEzkxOe/Existing-vs-New-traffic-experience,,,,,,Today,,,,,,,,,,,,,
+"1213316107541654",2026-02-17,2026-02-18,2026-02-18,ie%CCP calc - insert MX spend/regs before 9th,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-17,,https://quip-amazon.com/bqogATBbIY91/FY26-SSR-IECCP-CPA-Registration#temp:C:BJE26065d11889b4e8cbf95de072,,,,,,Today,Important,,,,,,,,,,,,
+"1213272364362307",2026-02-16,2026-02-24,2026-02-24,Free Search Callout for Yoav in PreWBR (due Monday EOD),Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-23,,"SQL for FS
+WITH base_results AS (
+    SELECT 
+        c.Market_Country,
+        c.current_count,
+        pw.previous_week_count,
+        py.previous_year_count,
+        CASE 
+            WHEN pw.previous_week_count = 0 THEN NULL
+            ELSE ROUND(((c.current_count - pw.previous_week_count)::FLOAT / pw.previous_week_count * 100), 2)
+        END as ""WoW"",
+        CASE 
+            WHEN py.previous_year_count = 0 THEN NULL
+            ELSE ROUND(((c.current_count - py.previous_year_count)::FLOAT / py.previous_year_count * 100), 2)
+        END as ""YoY""
+    FROM (
+        SELECT 
+            CASE
+                WHEN marketplace_id = '1' THEN 'US'
+                WHEN marketplace_id = '7' THEN 'CA'
+                WHEN marketplace_id = '3' THEN 'UK'
+                WHEN marketplace_id = '4' THEN 'DE'
+                WHEN marketplace_id = '5' THEN 'FR'
+                WHEN marketplace_id = '35691' THEN 'IT'
+                WHEN marketplace_id = '44551' THEN 'ES'
+                WHEN marketplace_id = '6' THEN 'JP'
+                WHEN marketplace_id = '771770' THEN 'MX'
+                ELSE 'No Country Found'
+            END AS Market_Country,
+            count(distinct business_account_id) as current_count
+        FROM abbd_sandbox_mktg.ab_acq_channel_attr
+        WHERE channel = 'Free Offsite'
+            and feature_name = 'Offsite - Free Search'
+            and account_verified_date BETWEEN '20260215' and '20260221'
+            and overall_status IN ('VERIFIED_POSITIVE','WHITELISTED')
+            and is_active = 1
+        group by 1
+    ) c
+    LEFT JOIN (
+        SELECT 
+            CASE
+                WHEN marketplace_id = '1' THEN 'US'
+                WHEN marketplace_id = '7' THEN 'CA'
+                WHEN marketplace_id = '3' THEN 'UK'
+                WHEN marketplace_id = '4' THEN 'DE'
+                WHEN marketplace_id = '5' THEN 'FR'
+                WHEN marketplace_id = '35691' THEN 'IT'
+                WHEN marketplace_id = '44551' THEN 'ES'
+                WHEN marketplace_id = '6' THEN 'JP'
+                WHEN marketplace_id = '771770' THEN 'MX'
+                ELSE 'No Country Found'
+            END AS Market_Country,
+            count(distinct business_account_id) as previous_week_count
+        FROM abbd_sandbox_mktg.ab_acq_channel_attr
+        WHERE channel = 'Free Offsite'
+            and feature_name = 'Offsite - Free Search'
+            and account_verified_date BETWEEN '20260208' and '20260214'
+            and overall_status IN ('VERIFIED_POSITIVE','WHITELISTED')
+            and is_active = 1
+        group by 1
+    ) pw ON c.Market_Country = pw.Market_Country
+    LEFT JOIN (
+        SELECT 
+            CASE
+                WHEN marketplace_id = '1' THEN 'US'
+                WHEN marketplace_id = '7' THEN 'CA'
+                WHEN marketplace_id = '3' THEN 'UK'
+                WHEN marketplace_id = '4' THEN 'DE'
+                WHEN marketplace_id = '5' THEN 'FR'
+                WHEN marketplace_id = '35691' THEN 'IT'
+                WHEN marketplace_id = '44551' THEN 'ES'
+                WHEN marketplace_id = '6' THEN 'JP'
+                WHEN marketplace_id = '771770' THEN 'MX'
+                ELSE 'No Country Found'
+            END AS Market_Country,
+            count(distinct business_account_id) as previous_year_count
+        FROM abbd_sandbox_mktg.ab_acq_channel_attr
+        WHERE channel = 'Free Offsite'
+            and feature_name = 'Offsite - Free Search'
+            and account_verified_date BETWEEN '20250216' and '20250222'
+            and overall_status IN ('VERIFIED_POSITIVE','WHITELISTED')
+            and is_active = 1
+        group by 1
+    ) py ON c.Market_Country = py.Market_Country
+),
+
+eu_results AS (
+    SELECT 
+        'EU' as Market_Country,
+        SUM(current_count) as current_count,
+        SUM(previous_week_count) as previous_week_count,
+        SUM(previous_year_count) as previous_year_count,
+        CASE 
+            WHEN SUM(previous_week_count) = 0 THEN NULL
+            ELSE ROUND(((SUM(current_count) - SUM(previous_week_count))::FLOAT / SUM(previous_week_count) * 100), 2)
+        END as ""WoW"",
+        CASE 
+            WHEN SUM(previous_year_count) = 0 THEN NULL
+            ELSE ROUND(((SUM(current_count) - SUM(previous_year_count))::FLOAT / SUM(previous_year_count) * 100), 2)
+        END as ""YoY""
+    FROM base_results
+    WHERE Market_Country IN ('DE', 'ES', 'FR', 'IT', 'UK')
+)
+
+-- First Tab: All marketplaces plus EU and Total
+SELECT 
+    Market_Country,
+    current_count,
+    previous_week_count,
+    previous_year_count,
+    ""WoW"",
+    ""YoY"",
+    0 as sort_order
+FROM base_results
+UNION ALL
+SELECT 
+    Market_Country,
+    current_count,
+    previous_week_count,
+    previous_year_count,
+    ""WoW"",
+    ""YoY"",
+    1 as sort_order
+FROM eu_results
+UNION ALL
+SELECT 
+    'Total' as Market_Country,
+    SUM(current_count),
+    SUM(previous_week_count),
+    SUM(previous_year_count),
+    CASE 
+        WHEN SUM(previous_week_count) = 0 THEN NULL
+        ELSE ROUND(((SUM(current_count) - SUM(previous_week_count))::FLOAT / SUM(previous_week_count) * 100), 2)
+    END,
+    CASE 
+        WHEN SUM(previous_year_count) = 0 THEN NULL
+        ELSE ROUND(((SUM(current_count) - SUM(previous_year_count))::FLOAT / SUM(previous_year_count) * 100), 2)
+    END,
+    2 as sort_order
+FROM base_results
+ORDER BY sort_order, Market_Country;
+
+-- Second Tab: EU Breakdown only
+SELECT 
+    Market_Country,
+    current_count,
+    previous_week_count,
+    previous_year_count,
+    ""WoW"",
+    ""YoY"",
+    0 as sort_order
+FROM base_results
+WHERE Market_Country IN ('DE', 'ES', 'FR', 'IT', 'UK')
+UNION ALL
+SELECT 
+    Market_Country,
+    current_count,
+    previous_week_count,
+    previous_year_count,
+    ""WoW"",
+    ""YoY"",
+    1 as sort_order
+FROM eu_results
+ORDER BY sort_order, Market_Country;
+
+
+----------------------------------------
+
+
+
+https://loop.cloud.microsoft/join/eyJnIjoiVDBSVFVIeGhiV0Y2YjI1blluSXVjMmhoY21Wd2IybHVkQzVqYjIxOFlpRnBSbU5WVlhoMllWWnJZWGxMVWtzME1GUXdVVk5wYW14dE5uUkhjbTF3U0d0TGNsTmpORlpqUmxKdFdXRk1hMDlsVlUxbVZGa3lSbTlmVlhVellUSktmREF4Tmt0WlRsSkdObGRHVWtsUVJqSldVRkZPUlVsU1VVeEVNbGhCTkRjMFNsQT0iLCJpIjoieGhqS1lJaUUwQ3M1WnduYXBIZmdBIiwidyI6IlQwUlRVSHhoYldGNmIyNW5Zbkl1YzJoaGNtVndiMmx1ZEM1amIyMThZaUZwUm1OVlZYaDJZVlpyWVhsTFVrczBNRlF3VVZOcGFteHROblJIY20xd1NHdExjbE5qTkZaalJsSnRXV0ZNYTA5bFZVMW1WRmt5Um05ZlZYVXpZVEpLZkRBeE5rdFpUbEpHTmxkR1VrbFFSakpXVUZGT1JVbFNVVXhFTWxoQk5EYzBTbEE9In0%3D
+
+MCS callout
+    Before PreWBR on Wednesday
+    WW callout is more shallow if doing for each 
+    For WW, if within 2-3%, then it's flat
+Data
+    All data coming from WBR slides for consistency
+    Secondary callout from Adobe
+        https://experience.adobe.com/#/@amazonservicesllc/so:amazon3d/analytics/spa/index.html?lazyLoadPhpSession=1#/workspace/edit/697915299b200021de1e2e66
+        Filter for AB customers only (Existing)
+        Either Performance by site or performance by channel
+        Easiest way: Unique visitors
+            Drag Last week over, then compare to prior week
+            Traffic WBR attribution only looks at Free Search
+            If registration flow drove, then look at SSR  to see if thank you page went up because of increase to regs
+            call out percentages rather than volume
+        If more detail needed:
+            break channel by entry page
+            hp/login is brand-driven
+            outbound campaign refmarker if reftag needed
+            
+
+Marketing & Business Prime WBR doc (
+
+Surge in customer traffic isn't really a thing
+
+",,,,,,Today,Important,,,,,,,,,,,,
+"1213316107541673",2026-02-17,,2026-02-17,Hubble data: country level WoW and YoY,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213316107541674",2026-02-17,,2026-02-17,Keep structure the same,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213316107541675",2026-02-17,,2026-02-17,Investigation: Adobe Analytics tracker ,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213316107541676",2026-02-17,,2026-02-17,https://experience.adobe.com/#/@amazonservicesllc/so:amazon3d/analytics/spa/index.html#/workspace/edit/6807a07a805621bb97f81179,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213316107541677",2026-02-17,,2026-02-17,Page-level callouts,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213316107541678",2026-02-17,,2026-02-17,"Group chat: Jill (agency point of contact) not full visibility, but should be able to help with surface-level insights. ",,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213329816575012",2026-02-18,,2026-02-18,Jill's Looker: https://lookerstudio.google.com/u/0/reporting/bb9dac4e-88b9-4881-9e02-e46aa10c7280/page/p_fug10zj9vc,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213379788950223",2026-02-20,,2026-02-20,SQL for FS,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213204514049847",2026-02-12,2026-02-25,2026-02-25,Google tickets,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-23,,,"Paid App,MX",,,,,Today,,,,,,,,,,,Done,,
+"1213204514049850",2026-02-12,2026-02-19,2026-02-19,PAM IT invoice overdue,,,,,,,,,Google tickets,,,,,,,,,,,,,,,Done,,
+"1213204514049851",2026-02-12,,2026-02-12,MX January to new PO,,,,,,,,,Google tickets,,,,,,,,,,,,,,,,,
+"1213204514049837",2026-02-12,2026-03-03,2026-03-03,OCI IT/ES/FR,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-27,,,,,,,,Not urgent,Important,,2026-02-26,,,,,,,,,,24:00
+"1213204514049840",2026-02-12,2026-02-23,2026-02-23,TT/URLs from team,,,,,2026-02-17,,,,OCI IT/ES/FR,,,,Today,,,,,,,,,,,,,
+"1213204514049841",2026-02-12,2026-02-26,2026-02-26,Enable TT/URLs,,,,,2026-02-26,,,,OCI IT/ES/FR,,,,Today,,,,,,,,,,,,,
+"1213204514049842",2026-02-12,2026-03-03,2026-03-03,Monitor traffic for 2 days (26th-27th),,,,,2026-02-27,,,,OCI IT/ES/FR,,,,Today,,,,,,,,,,,,,
+"1213204514049843",2026-02-12,,2026-03-01,Validation from team,,,,,2026-03-02,,,,OCI IT/ES/FR,,,,Today,,,,,,,,,,,,,
+"1213204514049844",2026-02-12,,2026-03-01,Re-enable tracking as-needed for testing,,,,,2026-03-02,,,,OCI IT/ES/FR,,,,Today,,,,,,,,,,,,,
+"1213235338214791",2026-02-11,,2026-03-11,AB Customer Redirect,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"Redirecting logged-in AB customers from NonBrand ads directly to https://A.com (bypassing MCS). This was tested in 2025, and is now being rolled out WW 
+
+Pages for application: https://quip-amazon.com/DynAANZqukJp/PS-Customer-Redirect-Mapping
+SIM Req: https://issues.amazon.com/MCS-1840
+MCM: https://mcm.amazon.dev/cms/MCM-144193956","ABPS - WW Testing & Projects,PS ENG",,,,,Urgent,Important,,,Core Two (Deep Work),,,,,,,,,
+"1213230198995943",2026-02-11,2026-02-19,2026-02-19,Come prepared: Bi-weekly with Adi to brainstorm usable AI,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-18,,,,,,,,Today,Not Important,,,,,,,,,,,,
+"1213230198995937",2026-02-11,,2026-03-11,WW redirect - Existing customer reporting in Adobe Ad Cloud,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-03-09,,"so they're proceeding with implementing the curr cust redirect tomorrow actually (though they're working out some kinks in the MCM/expectations...so we'll see). This functionality is implemented through Adobe Target. So a couple things:
+    Keep an eye on the chat for when this rolls out so you can do a quick QA
+    Once this happens, I won't be able to use this AA Curr Cust report to see cust traffic. I need vis into cust traffic though since we report on http://A.com traffic in a separate WBR. Can you...
+        Check if we can create an Ad Cloud metric/segment based on a Target activity?
+        If so, can you build it into Ad Cloud with a Mon export so me/Yun can use it to prep for the Traffic WBR weekly?    
+",,,,,,Today,Important,,2026-02-16,Core Two (Deep Work),,,,,,,,,504:00
+"1213230198995940",2026-02-11,2026-03-03,2026-03-03,Hear back about redirect switching back on,,,,,,,,,WW redirect - Existing customer reporting in Adobe Ad Cloud,,,,,,,,,,,,,,,,,
+"1213230198995941",2026-02-11,,2026-02-11,Have the metric sent to Adobe Ad Cloud,,,,,,,,,WW redirect - Existing customer reporting in Adobe Ad Cloud,,,,,,,,,,,,,,,,,
+"1213230198995942",2026-02-11,,2026-02-11,Create report for Brandon/Yun to report on Existing traffic vs. New.,,,,,,,,,WW redirect - Existing customer reporting in Adobe Ad Cloud,,,,,,,,,,,,,,,,,
+"1213204514049845",2026-02-12,,2026-02-12,Ask Adobe or Dwayne about sharing metric from Target to Ad Cloud,,,,,,,,,WW redirect - Existing customer reporting in Adobe Ad Cloud,,,,,,,,,,,,,,,,,
+"1213217278513284",2026-02-10,2026-02-12,2026-02-12,Look for Weblab for In-context: EU in that as well?,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-11,,,,,,,,Today,,,,,,,,,,,,,
+"1213217278513281",2026-02-10,2026-02-17,2026-02-17,Monthly: Individual Goals update,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-10,,,,,,,,Today,,,,,,,,,,,,,
+"1213150901236256",2026-02-06,2026-03-06,2026-03-06,MBR callout,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-03-03,,,"AU,MX",,,,,Today,Important,,2026-03-02,,,,,,,,Done,Done,24:00
+"1213137411194968",2026-02-05,2026-02-05,2026-02-05,"Carlos: ask about PO, asap",Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-05,,,,,,,,Today,Important,,,,,,,,,,,,
+"1213125741205612",2026-02-04,2026-02-05,2026-02-05,Add QBR for AU to MBR/QBR doc,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-05,,,AU,,,,,Today,,,,,,,,,,,,Done,
+"1213125740755945",2026-02-04,,2026-03-11,Localize ABIX pages based on CA testing,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,"AU,MX",,,,,Not urgent,Important,,2026-03-02,Engine Room (Excel and Google ads),,,,,,,,,
+"1213125740755931",2026-02-04,,2026-03-11,Email overlay WW rollout/testing,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-03-27,,,"ABPS - WW Testing & Projects,PS-Owned Global Testing",,,,,Urgent,Important,,2026-03-02,Core Two (Deep Work),,,,,,,,,600:00
+"1213125740755943",2026-02-04,2026-02-12,2026-02-12,"Put together Quip to detail what this email overlay is, the proof from Vijay/promo experiment, what we're proposing, and the list of LPs.",,,,,2026-02-06,,,,Email overlay WW rollout/testing,,,,Today,,,,,,,,,,,,,
+"1213125740755941",2026-02-04,2026-02-12,2026-02-12,Put together list of markets/landing pages and yes/no for overlay status,,,,,2026-02-06,,,,Email overlay WW rollout/testing,,,,Today,,,,,,,,,,,,,
+"1213125740755938",2026-02-04,2026-02-12,2026-02-12,"Gather interested markets for Weblab: AU, ",,,,,,,,,Email overlay WW rollout/testing,,,,,,,,,,,,,,,,,
+"1213125740755939",2026-02-04,2026-02-12,2026-02-12,Rollout to markets with uplift proof,,,,,,,,,Email overlay WW rollout/testing,,,,,,,,,,,,,,,,,
+"1213125740755942",2026-02-04,2026-02-12,2026-02-12,DDD 2/12 to discuss plan,,,,,2026-02-12,,,,Email overlay WW rollout/testing,,,,Today,,,,,,,,,,,,,
+"1213204514049661",2026-02-12,2026-02-18,2026-02-18,Comment to Frank/Vijay,,,,,,,,,Email overlay WW rollout/testing,,,,,,,,,,,,,,,,,
+"1213329816575014",2026-02-18,,2026-02-26,Tech team scoping details. Follow up on Friday.,,,,,2026-02-27,,,,Email overlay WW rollout/testing,,,,Today,,,,,,,,,,,,,
+"1213125740755927",2026-02-04,2026-02-05,2026-02-05,For Brandon - Impact of MCS Tech,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-05,,"https://amazon.enterprise.slack.com/team/U040ECP305S I'd like to validate that the https://t.corp.amazon.com/V2094424775/communication (it seems low to me). Would you be able to pull the clicks associated https://quip-amazon.com/DynAANZqukJp/PS-Customer-Redirect-Mapping on 1/30 6am-11:22am ET? Even if you just pull EU, it'd be enough since they only gave a regional impact breakdown. Don't need this urgently, but if we could get it by EOW, that'd be great",,,,,,Today,Not Important,,,,,,,,,,,,
+"1213125740755923",2026-02-04,2026-02-04,2026-02-04,Q4 QBR callout for Harjeet,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-04,,,AU,,,,,Today,Not Important,,,,,,,,,,,Done,
+"1213102221235860",2026-02-03,2026-02-04,2026-02-04,Comm to Saajan to say there is no current solution. Will open ticket to investigate promo/overlay solution.,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,Richard,,,,,,Important,,,,,,,,,,,,
+"1213102221235857",2026-02-03,2026-02-04,2026-02-04,Maybe test promo reg start on spring sale sitelink's page (depends on whether it's on a.com or email overlay),Recently assigned,Richard Williams,prichwil@amazon.com,,,,,Richard,,,,,,Important,,,,,,,,,,,,
+"1213102221235851",2026-02-03,2026-02-06,2026-02-06,MBR callout - MX/AU,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-06,,,"AU,MX",,,,,Today,Important,,,,,,,,,,Done,Done,
+"1205997667579014",2023-11-20,2026-02-02,2026-02-02,Gain access to tools again if needed,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"    https://permissions.amazon.com/group.mhtml?action=finished&is_temporary=false&target=22123&name=prichwil&type=User&expires=&request=2153063332, 
+    Hubble, 
+    'ABATLAS-DTL02' and 'abbd_sandbox-ro', 
+    QuickSight, 
+    Coupa, 
+    PO,
+    
+",,,,,,,,,,,Non Important/Non Urgent,,,,,,,,
+"1205997667579040",2023-11-20,2026-02-02,2026-02-02,CPS Details and docs,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"CPS Docs
+https://quip-amazon.com/x0zvARoKvXcn/EU-CPS-Paid-Search | https://quip-amazon.com/obqLAEfn6pqe | https://quip-amazon.com/RSytAtioipPfhttps://quip-amazon.com/aHH5A9oYHKoK/CPS-Approach
+https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c78a3963-6bfb-46f9-83f9-2af78500b3a9/Managed_Spend_Track_2_Report_-_Customer_Needs_and_Pain_Points.pdf
+https://s3-us-west-2.amazonaws.com/secure.notion-static.com/167fc531-9eea-49e9-888e-d0e5c332d19f/AB_Managed_Spend_Report.png
+https://s3-us-west-2.amazonaws.com/secure.notion-static.com/175dcfa8-7ccc-4cb5-8ed2-3caf465628da/AB_Managed_Spend_Report_-_Key_insights.png
+
+CPS team: 
+Shivam: CPS CA
+Marci: CPS US
+Madhu: CPS EU5
+
+
+
+KPIs
+TTM-OPS:
+YTD OPS:
+DG would take on (3 emails and 3 call attempts to try and set with Sales)
+If high enough revenue, then the CA who owns will action with the account. (but they will not be counted as a lead)
+
+Anything over 25M can expect to be CPS account
+
+0-1M Small SSR 
+1M-10M Medium SSR 
+10M-35M Large SSR AB is trying to drive large SSR. Query to see reftags on registrations, or Adobe Audience.",,,,,,,,,,,Non Important/Non Urgent,,,,,,,,
+"1205997667579042",2023-11-20,2026-02-02,2026-02-02,BP Details and docs,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"Business Prime
+https://quip-amazon.com/Yv1kATQE8ZTW/BP-Media-Plan-Paid-Search: Matt took us through a walkthrough of BP customer process Next step: Account setup is on me by EOW. Launch:
+    BP Existing user flow: Membership within the account (Business.) —> BP page —> BP Free trial (have to put CC info) —> Plan switch (live now) AB customer to BP customer —> Marketing to get current AB customers to BP
+    Example: SBCC - CC apps (https://issues.amazon.com/issues/LENDBI-16626) Stakeholders to open ticket, and work with ABMA to set up FTP to send to Adobe.
+Business Prime
+https://quip-amazon.com/Yv1kATQE8ZTW/BP-Media-Plan-Paid-Search",,,,,,,,,,,Non Important/Non Urgent,,,,,,,,
+"1205997667579061",2023-11-20,2026-02-02,2026-02-02,Weblab notes,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"Dwayne Weblab notes:
+    Standard process: Everything goes through Weblab, but have to set up within Adobe Target anyway
+    Definitely Weblab for this test, but make sure to reference Dwayne's SIM (https://issues.amazon.com/ABMCSDev-8345)
+        Mahesh should be able to do this. (We want to run weblab on this specific page)
+        Timing: Shouldn't take too long to set up.
+        We can split by experience fragment.
+        Weblab is setting IDs based on traffic split.
+            Adobe Target - build experiences
+                C is the control page
+                T1 modified within Adobe Target
+                Javascript looks for the IDs on the page, and serves the correct experience
+            Send Dwayne the SIM (he'll send to Chetan)
+",,,,,,,,,,,Non Important/Non Urgent,,,,,,,,
+"1205997667579063",2023-11-20,2026-02-02,2026-02-02,LiveRamp notes,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"    LiveRamp Legal meeting:
+        Export list to LR - requirement was to have CCBA preferences on AB before sending.
+        At time of exporting, check against Tollhouse (filter against those who opt out)
+        Pending: legal is okay with it
+        Process (Neha): Privacy team shared consent data through S3, and we have run pipeline every day, every day the files will filter out consent data and upload into S3. 12 UTC the files are available and process runs downstream.
+     
+    Questions:
+        Where do we collect opt-outs?
+        When expected to be complete?
+        Sending only new data?
+            Might need capability to share a deny list. Charlie to connect Chetan to technical contact.
+            Caveat: Moving forward with the delta on LiveRamp might be difficult from legal team, because we're relying on LiveRamp. Legal will need to approve the delta approach.
+ 
+ 
+LiveRamp vs. AWS meeting
+        Working with LR with CCBA compliance; ready to go
+        Contract with LR expired, and want to look into it, and want to understand alternate options
+        AWS cleanroom is available
+        Charlie owns contract for LR
+        Charlie: Better targeting, and more exact targeting opens up more value. (Approach, enmesh ourselves within LR, become experts, and prove it out for Clean Room and more development.)
+     
+",,,,,,,,,,,Non Important/Non Urgent,,,,,,,,
+"1213072707685849",2026-02-02,,2026-03-11,AU opp: AE: Introduce RW to Amy for Amazon Essentials (valid test?),Recently assigned,Richard Williams,prichwil@amazon.com,,,,,AU,,,,,Not urgent,,,2026-02-02,Engine Room (Excel and Google ads),,,,,,,,,
+"1213072707685846",2026-02-02,,2026-03-11,AU opp: May-June opp for ad text (seasonality),Recently assigned,Richard Williams,prichwil@amazon.com,,,,,AU,,,,,Not urgent,,,2026-02-02,Engine Room (Excel and Google ads),,,,,,,,,
+"1213072707685843",2026-02-02,,2026-03-11,AU NB testing focus: MRO/Trades in AU,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,AU,,,,,Urgent,,,2026-02-02,Engine Room (Excel and Google ads),,,,,,,,,
+"1213072707685838",2026-02-02,,2026-03-11,AU Paper LP,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"Test idea: Paper is expensive in AU; might drive traffic to our own paper product.
+
+Frame it as we need your help for MCS landing page and text, but here's the structure.",AU,,,,,Not urgent,,,2026-03-02,Engine Room (Excel and Google ads),,,,,,,,,'-576:00
+"1213072707685834",2026-02-02,,2026-03-13,MX Automotive page,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-03-13,,"        Sitelinks for Auto-related whether Brand or NB
+        LP test for Auto keywords
+        Keywords - source these and send over to Carlos
+        Reftag related to the LP
+",MX,,"Page Creation  ( 7 business days ), Duplicate Beauty and Auto page for MX",,,Today,,,2026-03-02,Engine Room (Excel and Google ads),,,,,,,,,264:00
+"1213072707685831",2026-02-02,2026-02-06,2026-02-06,"MX PO to MXN - List each and every thing, share with Brandon",Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-06,,"
+
+New acct required. Set timing expectation with Carlos.
+15% Tax - check with Yun (a way to bill differently to avoid tax?)
+iECCP?
+
+For Carlos:
+        If we’d need to start from scratch, need some data to support (in terms of regs)
+            Would need justification written down before beginning of Feb (in prep for March PO)
+            3 lines to justify preserving current process (USD rather than MXN)
+        Differing currencies likely not a solution (MXN in both) that will be ideal for MX Finance.
+        Funding still from corporate, and York mentioned preference for USD would be fine.
+",MX,,,,,Today,Important,,,,,,,,,,Done,,
+"1213072707685824",2026-02-02,2026-02-03,2026-02-03,Update EU callouts before 12pm,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-02,,,,,,,,Today,Important,,,,,,,,,,,,
+"1213085905102041",2026-02-02,,2026-03-11,WW keyword gap fill based on market-level ASINs,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"People consistently point out kw coverage, so this would be a great exercise where we can confidently tell them we went through this rigorous work to ensure kw coverage","ABPS - WW Testing & Projects,PS-Owned Global Testing",,,,,Urgent,Important,,,Core Two (Deep Work),,,,,,,,,
+"1213085905102051",2026-02-02,,2026-02-02,ASIN data at the market level,,,,,,,,,WW keyword gap fill based on market-level ASINs,,,,,,,,,,,,,,,,,
+"1213085905102052",2026-02-02,,2026-02-02,"For each market's data, pivot to find 1) highest volume orders and 2) highest OPS/GMS orders and 3) highest volume of first-purchase orders.",,,,,,,,,WW keyword gap fill based on market-level ASINs,,,,,,,,,,,,,,,,,
+"1213085905102053",2026-02-02,,2026-02-02,"Use the list of products to create a structured template for each market. Campaign, Ad group, keywords, and ads.",,,,,,,,,WW keyword gap fill based on market-level ASINs,,,,,,,,,,,,,,,,,
+"1213072707685823",2026-02-02,,2026-02-02,Remember to suggest these keywords as negatives in appropriate campaigns.,,,,,,,,,WW keyword gap fill based on market-level ASINs,,,,,,,,,,,,,,,,,
+"1213085905102048",2026-02-02,,2026-02-02,Work with the local stakeholders (people like Andrew) if you find gaps to align on where the kws should go (you could also make suggestions),,,,,,,,,WW keyword gap fill based on market-level ASINs,,,,,,,,,,,,,,,,,
+"1213085905102050",2026-02-02,,2026-02-02,You could use it build the mechanism for that MarTech work I mentioned - where it'll be identifying (or auto-adding) kws based on recent on-amazon searching trends. Like basically this would define where those kws get added per marketplace once the tech is launched,,,,,,,,,WW keyword gap fill based on market-level ASINs,,,,,,,,,,,,,,,,,
+"1213085905102033",2026-02-02,2026-02-23,2026-02-23,Create something useful that's AI-driven for bidding/budgeting/automation,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"
+ID
+Country
+
+Initiative Name
+
+Description
+
+Completion ETA
+
+PS/App Team (wks)
+
+Tech/Ops (wks)
+
+Total
+Notes
+1
+FRITES, CA, JP
+OCI Expansion
+Recover acquisition volume with Google Bidding
+Tech: 03/2026
+PS: 06/2026
+
+07/2026 Full Impact
+3
+10
+13
+
+
+5
+US
+PMax w/OCI
+Enable PMax testing through OCI Enablement
+Pending Google enablement (EO Q1)
+
+
+
+
+0
+
+
+2
+WW
+Intelligent Management
+Automate the day-to-day management of keyword bidding for Google Search Ads
+09/2026
+4
+20
+24
+
+
+
+
+US
+Baloo for Text Ads
+Ability to send users to a AB Guest experience pre-registration through existing NonBrand Text Ads
+Tech: 05/2026 [TBC]
+PS: +6-12 wks
+2
+253
+255
+won't change PS URLs unless successful. PS team to identify test campaigns & setup kw pass-thru
+3
+US
+Shopping Ads
+Leverage MarTech + CAT (Baloo) work and Consumer pipelines to enable Shopping
+Q4 - TBC
+Pending CAT confirmation
+12
+100
+112
+Tech may take up 85-145 tech weeks
+4
+WW
+Automated Keyword Creation
+Automate sourcing of new keywords by evaluating A9 (onsite) search patterns of business customers, using Central technology.
+Q4 - Tech prioritization being debated
+3
+12
+15
+
+
+5
+WW
+Current Customer Redirect
+Identifying AB customers entering the MCS through NonBrand keywords and re-routing them to the AB Shopping experience when logged in
+02/2026
+4
+3
+7
+
+
+
+
+EU5
+WhatsApp
+Upon launch of WA in Marketly, we will test the WA outbound channel within AB. Test to include ENG and ACQ and will require $500-$600K in funding.
+06/2026
+36
+12
+48
+Requires completion of Marketly launch for WA estimated Q1
+
+
+PAM
+Appsflyer(?)
+Possible implementation of Appsflyer?
+N/A
+
+
+
+
+0
+
+
+
+
+",,,,,,Urgent,Important,,,,,,,,,,,,
+"1212992331748509",2026-01-27,,2026-03-11,Promo Test,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,"ABPS - WW Testing & Projects,EU SSR Acquisition Roadmap,Paid Search Promo Experiments",,,,,Not urgent,Important,Removing Email overlay impacted results of test. Working on fix to allow for promo and email overlay. ,,Core Two (Deep Work),,,No,,Not Started,,,,
+"1213125740755920",2026-02-04,,2026-02-04,"RW to work Registration team on fix, and understand scope.",,,,,,,,,Promo Test,,,,,,,,,,,,,,,,,
+"1212988092117056",2026-01-27,2026-02-11,2026-02-11,Look into MX Performance before W6,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-06,,,MX,,,,,Today,Not Important,,,,,,,,,,Done,,
+"1213125741205615",2026-02-04,,2026-02-04,Brand Exact ticket,,,,,,,,,Look into MX Performance before W6,,,,,,,,,,,,,,,,,
+"1213125741205616",2026-02-04,,2026-02-04,Also look at why CPC increased so much in W5 push for budget,,,,,,,,,Look into MX Performance before W6,,,,,,,,,,,,,,,,,
+"1212988092117049",2026-01-27,2026-02-03,2026-02-03,Put items from Brandon into Asana,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,,,,,Today,Not Important,,,,,,,,,,,,
+"1212988092117041",2026-01-27,,2026-03-02,Paid App,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-03-31,,"App installs are the top of the funnel for app users and new registrations. By increasing the number of installs, we would expect to see an increase in prospects resulting in an increase of AB App registrations.","ABPS - WW Testing & Projects,EU SSR Acquisition Roadmap",,,,,,Important,"W7 paused IT accounts due to tax increase to 22%. Pivoting towards FR market. (US, DE, FR, ES)",,,,,No,Green - On track,Green - On track,"FR, DE, ES, IT",,,
+"1212988092117037",2026-01-27,2026-02-02,2026-02-02,Andrew OOO file: any comments? ,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-29,,,,,,,,,Important,,,,,,,,,,,,
+"1213003036439758",2026-01-27,2026-02-02,2026-02-02,Put items from AU meeting into Asana,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,,,,,Today,Not Important,,,,,,,,,,,,
+"1213003036439750",2026-01-27,,2026-03-11,"Create campaign for new vs. all, and prioritize new if possible.",Recently assigned,Richard Williams,prichwil@amazon.com,,,,,Paid App,,,,,Not urgent,,,,Engine Room (Excel and Google ads),Non Important/Non Urgent,,,,,,,,
+"1212905889837825",2026-01-22,2026-02-02,2026-02-02,York to ask about MXN vs. USD within Google,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-23,,,MX,,,,,,Important,,,,,,,,,,Done,,
+"1212891776023030",2026-01-22,2026-02-02,2026-02-02,Put Paid App into the EU SSR Acq Asana,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-23,,,Paid App,,,,,,Important,,,,,,,,,,,,
+"1212915141732002",2026-01-21,,2026-03-11,"For MX/AU, add ad group for Amazon terms that have a lot of search volume but should not be within Brand Exact",Recently assigned,Richard Williams,prichwil@amazon.com,,,,,"AU,MX",,,,,Not urgent,Important,,2026-03-02,Engine Room (Excel and Google ads),Non Important/Non Urgent,,,,,,,,
+"1212894473091615",2026-01-20,2026-01-27,2026-01-27,"For AU document - include a mechanism to track Weekly CPA against a benchmark (MX/CA), and impact of initiatives on CPA.",Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-23,,,,,,,,Today,Important,,,,Important/Urgent,,,,,,,,
+"1212878484154713",2026-01-20,2026-01-22,2026-01-22,"For MX callout - increase in CPC was due to OCI enablement in DE, removing bid modifiers, but not having guardrails set. ",Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,,,,,Not urgent,N/A,,,,Important/Non Urgent,,,,,,,,
+"1212878484154707",2026-01-20,2026-02-02,2026-02-02,Update Flash content and statuses with highlights/lowlights/projects,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-27,,,,,,,,,Important,,,,,,,,,,,,
+"1212878484154701",2026-01-20,2026-01-20,2026-01-20,Add promo test to lowlights (EOD),Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-20,,,,,,,,,,,,,Important/Non Urgent,,,,,,,,
+"1212878484154698",2026-01-20,2026-02-02,2026-02-02,Update Individual Goals by EOD,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-20,,,,,,,,,,,,,,,,,,,,,
+"1212878484154688",2026-01-20,2026-02-02,2026-02-02,MX PO - local currency. Look into whether we could pay for USD invoice with MXN PO.,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-23,,,MX,,,,,,Important,,,,,,,,,,Done,,
+"1212878484154694",2026-01-20,,2026-01-20,Contact someone in AP for answer,,,,,,,,,MX PO - local currency. Look into whether we could pay for USD invoice with MXN PO.,,,,,,,,,,,,,,,,,
+"1212878484154695",2026-01-20,,2026-01-20,Contact Google support just in case,,,,,,,,,MX PO - local currency. Look into whether we could pay for USD invoice with MXN PO.,,,,,,,,,,,,,,,,,
+"1212878484154696",2026-01-20,,2026-01-20,Let Carlos know.,,,,,,,,,MX PO - local currency. Look into whether we could pay for USD invoice with MXN PO.,,,,,,,,,,,,,,,,,
+"1212878484154697",2026-01-20,,2026-01-20,"Another reason for urgency is that we need PO before end of month, without work of creating a new account.",,,,,,,,,MX PO - local currency. Look into whether we could pay for USD invoice with MXN PO.,,,,,,,,,,,,,,,,,
+"1212841295685708",2026-01-16,2026-01-20,2026-01-20,Mondays - Write into EU SSR Acq Asana,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-19,,,,,,,,,,,,,Important/Non Urgent,,,,,,,,
+"1212841295685705",2026-01-16,2026-01-22,2026-01-22,Address Brandon's comments about goals,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-20,,,"Paid App,AU,MX",,,,,Today,Important,,,,Important/Urgent,,,,,,Done,Done,
+"1212808474749953",2026-01-15,2026-01-20,2026-01-20,Follow up with Tino (https://t.corp.amazon.com/V2041073433/communication),Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-19,,,,,,,,,,,,,Non-Important/Urgent,,,,,,,,
+"1212808474749819",2026-01-15,,2026-03-11,Raise rest of year PO for PAM US,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-03-01,,,Paid App,,,,,Today,Important,,2026-03-02,Admin (Wind-down),Non Important/Non Urgent,0:00,,,,,,,'-24:00
+"1212828180259421",2026-01-15,2026-01-15,2026-01-15,PO process for H2: start in May,Recently assigned,Richard Williams,prichwil@amazon.com,,2025-05-01,,,,Raise PO - H1 and H2,,,,,,,,,,0:00,,,,,,,
+"1212811293275571",2026-01-14,2026-02-12,2026-02-12,List testing for each market Asana (each quarter) ,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-20,,,"Paid App,AU,MX",,,,,Urgent,Important,,,,Important/Urgent,0:00,,,,,Done,Done,
+"1212811293275567",2026-01-14,,2026-03-11,"See if we can create a view with relevant links for each account (a template table, where people insert and keep updated; off of Quip, Maybe Slack.) ",Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,,,,,Not urgent,,,,Core Two (Deep Work),Non Important/Non Urgent,0:00,,,,,,,
+"1212811293275565",2026-01-14,,2026-03-11,See if budget dashboard WW can be created ,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,,,,,Not urgent,,,,Core Two (Deep Work),Non Important/Non Urgent,0:00,,,,,,,
+"1212811293275563",2026-01-14,2026-02-02,2026-02-02,"Q4 Events - Post-mortem for PAM, then put into MBR doc",Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-16,,,Paid App,,,,,,,,,,,0:00,,,,,,,
+"1212760973200434",2026-01-13,,2026-03-11,F90,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-04-30,,"Launch F90 DG ads 
+
+Legal Owner: Brandon
+Tech Owner: Richard
+Launch Owner: Andrew
+
+2/23: We are now red to a 3/30 ETA. Following Media approval (not yet approved), Tech will need 4 weeks to create the file.  ","ABPS - WW Testing & Projects,PS ENG",,,,,Not urgent,Important,,,Core Two (Deep Work),Important/Non Urgent,0:00,,,,,,,
+"1213336296972482",2026-02-18,,2026-03-12,Get Legal Approval,,Andrew,awirtz@amazon.com,,2026-03-03,,"https://sim.amazon.com/issues/V2070197680
+
+Legal approval is required for the audience (being sent to Google), usage of Enhanced Match, and usage in DG
+
+As of 2/24, I will decouple the request for Enhanced Match until Matt is back. Joyce (covering for Matt) is unfamiliar, so removing EM approval request until he's back.",,F90,,"Import audience to GAds,Enable Enhanced Match,Get Enhanced Match Legal Approval,Finish Audience Request after legal approval and Media Team request",,Today,,,,,,,,,,,,,
+"1213423229051006",2026-02-24,2026-02-24,2026-02-24,Decouple Enhanced Match,,Brandon,brandoxy@amazon.com,,2026-02-24,,,,Get Legal Approval,,,,,,,,,,,,,,,,,
+"1213423229051008",2026-02-24,2026-02-27,2026-02-27,Get copies of Agreements,,Andrew,awirtz@amazon.com,,2026-03-05,,Optional. Requested from Media 2/24 in Subj: LiveRamp Audience Delivery,,Get Legal Approval,,,,,,,,,,,,,,,,,
+"1213423229051009",2026-02-24,,2026-03-05,Get Ads approval for Media Auds,,Andrew,awirtz@amazon.com,,2026-03-05,,Requested from Media 2/24. Subj: LiveRamp Audience Delivery,,Get Legal Approval,,,,,,,,,,,,,,,,,
+"1213363301506108",2026-02-19,2026-03-11,2026-03-11,Paid Media Legal Approval,,Brandon,brandoxy@amazon.com,,,,"Paid Media is leading the audience delivery mechanism. They must have Legal approval before Tech will begin audience builds.
+
+This is a dependency for us, as Tech can only send our audience segment within the PM-driven delivery mechanism
+
+We will need to ask Robert/Siri for updates on progress ",PS ENG,F90,,Import audience to GAds,,,,,,,,,,,,,,,
+"1213423234257246",2026-02-24,,2026-02-24,Get Enhanced Match Legal Approval,,Brandon,brandoxy@amazon.com,,,,"Legal SIM: https://sim.amazon.com/issues/V2119695669
+
+Putting on hold until other SIM is approved (and likely until Matt Rich is back)",,F90,Get Legal Approval,,,,,,,,,,,,,,,,
+"1213332849519452",2026-02-19,,2026-03-12,Creative,,Andrew,awirtz@amazon.com,,,,Identify or create creative assets for use in DG: copy and imagery/video,,F90,,,,,,,,,,,,,,,,,
+"1213611457559866",2026-03-11,,2026-03-11,Enable F90 Ads,,Andrew,awirtz@amazon.com,,,,,,F90,Add Audiences to Google,,,,,,,,,,,,,,,,
+"1212760973200430",2026-01-13,2026-02-02,2026-02-02,"Andrew is out Feb 2nd - Plan process while out (what tasks needed, and change log strictly)",Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-30,,,,,,,,,Important,,,,,0:00,,,,,,,
+"1212760973200426",2026-01-13,2026-02-03,2026-02-03,"Promo test - reached out to Tino/Dwayne - if Adobe not good enough, then find Weblab contact",Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-02,,,,,,,,Today,Important,,,,Non-Important/Urgent,0:00,,,,,,,
+"1212760973200424",2026-01-13,2026-02-02,2026-02-02,Ask Alex - timing on Polaris LPs (Want to plan brand LP for AU/MX Brand),Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-20,,,"AU,MX",,,,,,Not Important,,,,Important/Urgent,0:00,,,,,Done,Done,
+"1212760973200420",2026-01-13,,2026-03-11,"Source keywords for DE/IT/ES Apple account, and implement",Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-20,,,Paid App,,,,,Not urgent,Important,,2026-02-20,Engine Room (Excel and Google ads),Important/Urgent,0:00,,,,,,,0:00
+"1212760973200416",2026-01-13,,2026-03-11,Keep Change Log updated,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,"AU,MX",,,,,Not urgent,,,2026-01-01,Engine Room (Excel and Google ads),Important/Urgent,0:00,,,,,,,
+"1212760973200410",2026-01-13,2026-02-06,2026-02-06,Ask Carlos about MX PO for FY26 and Kingpin,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-06,,,MX,,,,528:40,Today,Important,,,,Important/Non Urgent,0:00,,,,,Done,,
+"1212760973200412",2026-01-13,2026-02-02,2026-02-02,Talk with Brandon about 100% projection (Carlos speaking with finance after I give projection; done),Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-15,,,MX,,,,,,,,,,,0:00,,,,,Done,,
+"1206020650712115",2023-11-23,,2026-02-12,MX account,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,MX,,,,,,,,,,Non Important/Non Urgent,0:00,,,,,,,
+"1212760973200381",2026-01-13,,2026-02-02,AU account,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"Testing for AU/MX
+also want to balance the timelines and long-term impact:
+    Brand: We're going to push to keep this on MCS. I'd like to test this because it
+    builds out our approach to new market launch,
+    should be unaffected by Baloo launch,
+    leading to reg-start permanently doesn't align with our narrative of needing the MCS (which I do prefer using b/c then we have control over the experience).
+    NonBrand: If we're still using generic pages, we've already proven category specific pages increase performance substantially. So...
+    agree this could have strong impact (though it may need to be balanced if we'd need to create all the pages ourselves)
+    may only be a shorter-term change depending on Baloo scope/timing
+    Baloo for text Ads is still (tentatively) EO May, but it's unclear if it will be US-only
+
+Melissa did the numbers, based on what we achieved in 2025. 
+            Ballpark: 270% ie%CCP vs. 210% target, and 2026 is 188%.
+            Yun said we should just exhaust budget as much as we can to get as many regs, before we have to pull back.
+            I think we should try and maximize Brand regs as much as possible while making NB more efficient.
+
+What is the plan for next year? 
+            Brand registrations - LP testing.
+            Nonbrand make more efficient: Bid strategy testing, more granular keywords.
+            Focus Group Messaging, try and tweak for small businesses for higher CTR
+            Jan 19th to Feb 27th - Event. Think about LP for any discount testing.
+                Ads to emphasize event, and LP to emphasize
+        Provide this plan soon after 12/12.
+    Maximize conversion channels as much as possible; efficient ie%CCP, throw as much budget as we can to have ie%CCP.
+    Budget for 2026 is final for AU, and MX
+    Budget to exclude the 10% VAT for AU, and MX don't need to account for VAT in budget.
+
+
+",AU,,,,,,,,,,Non Important/Non Urgent,0:00,,,,,,,
+"1205997667579059",2023-11-20,,2026-02-02,Paid App account,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"JP App
+    9/13 JP Apple App extension
+    8/16 JP App: Added negatives to Search Results (Prime, Flex, Seller, Keepa) PDP Other categories is driving volume, so increased bid (also increased for Similar categories because small spend, as a test), Search Tab has 5x higher CPA, so slightly lowered bid.
+    Next, Today campaign after custom page.
+    Budget of 36k was allocated for 2-3 months
+    8/23 - Increased budgets and bids across account.
+    9/7 - PDP and Search Tab bids lowered to 750 yen (~$5), and increased search results bids for both auto and brand. (Both are the lowest in terms of CPA)
+ 
+    Apple meeting: adjusted structure to allow brand to get full budget. Not sure how much impact it will have, but made the change. (also dropped bids 30-40% at their recommendation and added negatives)
+
+US App
+
+",Paid App,,,,,,,,,,Non Important/Non Urgent,0:00,,,,,,,
+"1206497728159518",2024-02-01,,2026-03-11,AppsFlyer setup (tentative date),Recently assigned,Richard Williams,prichwil@amazon.com,,2026-07-01,,,Paid App,,,,,Not urgent,Important,,,Core Two (Deep Work),Important/Non Urgent,0:00,,,,,,,
+"1212776102858833",2026-01-13,2026-02-05,2026-02-05,Update Kingpin for MX,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-03,,,MX,,,,,Today,Important,,,,Important/Non Urgent,0:00,,,,,Done,,
+"1212760973200390",2026-01-13,2026-02-03,2026-02-03,Monthly - Confirm actual budgets,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-02-01,,,Paid App,,,,,Today,Important,,,,Important/Non Urgent,0:00,,,,,,,
+"1212760973200386",2026-01-13,2026-02-02,2026-02-02,Bi-monthly Flash,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-15,,,"Paid App,AU,MX",,,,,,,,,,,0:00,,,,,Done,Done,
+"1205997667578899",2023-11-20,2026-01-13,2026-03-09,ENG Test - Live 3/5,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"Test Details:
+$800k budget for 2024
+Weblab test, would know that these users are business customers.
+    Drive to AB to have them log in, then go to products
+    Drive directly to A.com to see products first, then log in
+
+
+----------------------------------------
+
+ 
+FYI, talking loosely to Kristine on upcoming ENG test (don't worry, we still need CCBA compliance to roll out and should be close to a backfill by then). She wanted to know about budgets since she has $160k for us:
+Our BP ENG spent 2.34% of the US SSR brand budget. If I use that same brand budget for your ENG and the same 2.34% to determine NB costs....it comes to $159,130. This would mean we could completely copy our SSR campaign (brand and product terms) and target it to current customers for a 2 mo test.
+
+----------------------------------------
+
+
+First meeting with Kristine: They’re concerned with getting users into a log-in state.
+    AB Marketing-Owned pages (can lead to these category pages and a login CTA.)
+    Kristine is more for engagement traffic, and Ruby is more like HVAs.
+    For BP, we were sending to BP on http://a.com. We can do a 50/50 test against the experience we want. ( would be a last resort, but next logical step would be to send to Kristine/Ruby’s team so they can push for login and merchandise. (Segmentation and landing pages possible to develop for different types of customers if it gets to that point.)
+        Option 1: Send to marketing owned category pages for NB, and a 50/50 test to Kristine’s page for Brand) 50/50 test
+        Option 2: Send to an interstitial on MCS? Show value of either an HVA, or encourage to log in, and CTA to log in.)
+        Option 3: 50/50 test for Brand traffic; 50% to BP page, which is something we’ve already tested in the past, and 50% to Kristine’s page to encourage login state. (Not ideal, but builds on our previous test)
+
+
+",ABPS - Partnerships,,LiveRamp Relaunch,,,,,,,,,0:00,,,,,,,
+"1205997667579022",2023-11-20,2024-01-29,2026-01-15,"Write inside a doc to talk about refining SSR keywords, scope to liveramp audience, and drive to Kristine's account. Write up a testing plan and set a meeting with Kristine. ",Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,ENG Test - Live 3/5,,,,,,,,,,0:00,,,,,,,
+"1205997667579023",2023-11-20,2024-03-06,2026-01-15,"Identify Google help (have them customize ads, per ad group)",Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,ENG Test - Live 3/5,,,,,,,,,,0:00,,,,,,,
+"1205997667579024",2023-11-20,2024-01-29,2026-01-15,Create the new account for US Engagement.,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,ENG Test - Live 3/5,,,,,,,,,,0:00,,,,,,,
+"1205997667578932",2023-11-20,2024-01-29,2026-02-02,Input EU5 into Rows,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-01,,"https://rows.com/embed/1wQsZGVipN4iJLGC8qWP3DyVCF68HCwZQ6vLhSXe0F8m/5923dfc2-cc5d-420a-b963-1899b56c38d1
+https://rows.com/embed/1wQsZGVipN4iJLGC8qWP3DyVCF68HCwZQ6vLhSXe0F8m/acaa1961-688d-49ee-b3da-82360097f04f
+https://rows.com/embed/1wQsZGVipN4iJLGC8qWP3DyVCF68HCwZQ6vLhSXe0F8m/d4f1b03e-667f-42e0-b527-5447204e3796",,,,,,,,,,,,0:00,,,,,,,
+"1205997667578942",2023-11-20,2023-11-22,2026-01-15,Check AMO data feeds,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-11-22,,,"ABPS - EU5,ABPS - JP,ABPS - WW Acquisition",,,,,,,,,,,0:00,,,,,,,
+"1205997667578947",2023-11-20,2024-02-01,2026-01-15,App - Holidays ,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-21,,"Budget and timing:
+    7-day lead up for BF/CM, then spread out spend from December 4th to 22nd.
+        Ramp up spend leading up to each event.
+    Budget: 60/40 Google/Apple.
+        60k total. (50/50 between BFCM and Business Gift guide)
+
+BF/CM Apple - scheduled to launch 11/21
+BF/CM Google - next step Invoice created with PO
+
+60% Google, 40% Apple
+https://amazon.coupahost.com/requisition_headers/14181749
+https://amazon.coupahost.com/requisition_headers/13817154","Paid App,ABPS - WW Acquisition",,,,,,,,,,,0:00,,,,,,,
+"1205997667578951",2023-11-20,2023-11-20,2026-01-15,BF/CM Apple - scheduled to launch 11/21,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,App - Holidays ,,,,,,,,,,0:00,,,,,,,
+"1205997667578952",2023-11-20,2023-11-21,2026-01-15,BF/CM Google - Hear back from Google reps about Invoice creation,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,App - Holidays ,,,,,,,,,,0:00,,,,,,,
+"1205997667579079",2023-11-21,2023-11-28,2026-01-15,Pause campaigns 11/27 EOD,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-11-27,,,,App - Holidays ,,,,,,,,,,0:00,,,,,,,
+"1206040710770246",2023-11-27,2023-12-05,2026-01-15,"Create dupe for Google ""Gift Guide""",Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-01,,,,App - Holidays ,,,,,,,,,,0:00,,,,,,,
+"1205997667578954",2023-11-20,2024-01-25,2026-01-15,Holiday Gift Guide - Re-enable campaigns for 12/4 to 12/22,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-21,,,,App - Holidays ,,,,,,,,,,0:00,,,,,,,
+"1205997667578949",2023-11-20,2023-12-05,2026-01-15,Redo daily budgets for $81k pacing - Google and Yahoo,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-01,,,ABPS - JP,,,,,,,,,,,0:00,,,,,,,
+"1205997667578955",2023-11-20,2024-01-25,2026-01-15,EU5 Onboarding,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-01,,"Onboarding document: https://quip-amazon.com/mttRA9pGgNSv/Richards-on-boarding-to-EU
+
+    Daily tasks:
+        Monitor EU budget: pacing report
+        Optimization check
+    Weekly tasks:
+        Weekly reporting for Paid Search meeting
+        WBR callouts to prepare every Monday for EU (Meeting is weekly Tuesday at 2pm)
+        Check Auction Insight and Search terms quality
+    Monthly tasks:
+        MBR/QBR: Brandon (prepare quick notes)
+        MSP: Email coming to us (invoice email), and we make sure it matches
+        R&O: Lisa
+    Quarterly or 2 times/year:
+        OP2 approval, sync with Brandon, then PO. (Takes about a month)
+        Create PO, longer process, want before Invoice expires in January.
+        Update PO in platform invoices/budgets.
+
+Focus:
+    Lots of challenges - Todd was head of EU, and Paid search developing. 
+        Now there's trust in the paid search channel. More educated now.
+        Activation has been a topic in WBRs with SSR team.
+        75% ie%CCP (we're at 50%) want to see the increase in regs to activate on top of acquiring.
+    Zoe has been pushing for modern search structure
+        Want to make sure we're going with best practice, but not at the risk of overall performance.
+        Maybe do a test on a few campaigns for account structure.
+","ABPS - EU5,ABPS - WW Acquisition",,,,,,,,,,,0:00,,,,,,,
+"1205997667578958",2023-11-20,2023-11-28,2026-01-15,Get access to EU5 Google accounts,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-11-24,,,,EU5 Onboarding,,,,,,,,,,0:00,,,,,,,
+"1205997667578895",2023-11-20,2026-01-13,2026-01-15,Amazon Build,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"Met with AMZ Build week of 11/13 - a sub group of Amazon Business. They aim to support the DIY and independent contractor and want to leverage PS kws to target these users for both Acq & ENG.
+
+Paused ENG conversations given LR delay. Pursuing research into Acq",ABPS - Partnerships,,,,,,,,,,,0:00,,,,,,,
+"1205997497212976",2023-11-20,2023-11-22,2026-01-15,Pull Kws for Relevant categories and send to Yasmin/Akshay directly,,,,,2023-11-22,,,,Amazon Build,,,,,,,,,,0:00,,,,,,,
+"1205997497212980",2023-11-20,,2026-01-15,Get feedback from Build on kw ideas,,,,,,,,,Amazon Build,,,,,,,,,,0:00,,,,,,,
+"1205997667578971",2023-11-20,2023-11-22,2026-02-02,Quentin meeting pre-read: AB campaign structure,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-11-22,,"Document URL:
+https://share.amazon.com/sites/SearchMarketing/_layouts/15/WopiFrame2.aspx?sourcedoc=%7b97CB95EA-9132-4BCB-B588-115AB5523809%7d&file=Vendor%20Acc%20Restructure-PRFAQ.docx&action=default
+
+",,,,,,,,,,,,0:00,,,,,,,
+"1205997667578986",2023-11-20,2023-11-22,2026-02-02,Pick up new badge,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-11-21,,,,,,,,,,,,,,0:00,,,,,,,
+"1205997667578991",2023-11-20,2026-01-15,2026-01-15,Consumer sitelinks data - Sophia - check for data with updated ref,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-01-31,,https://sophia.aka.amazon.com/#/campaign?app=$c6dc22294485cc88e3edf4cdcf80a190dea89c4c-0,ABPS - BP,,,,,,,,,,,0:00,,,,,,,
+"1205997667578993",2023-11-20,2023-11-20,2026-01-15,Access to Sophia,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,Consumer sitelinks data - Sophia - check for data with updated ref,,,,,,,,,,0:00,,,,,,,
+"1205997667578994",2023-11-20,2023-11-29,2026-01-15,"Asked Meddy about scoping to Consumer sitelinks on Sophia, no response yet. Follow up.",Recently assigned,Richard Williams,prichwil@amazon.com,,2023-11-29,,,,Consumer sitelinks data - Sophia - check for data with updated ref,,,,,,,,,,0:00,,,,,,,
+"1205997667578995",2023-11-20,2024-01-25,2026-01-15,JP NB Document,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,"ABPS - JP,ABPS - WW Acquisition",,,,,,,,,,,0:00,,,,,,,
+"1205997667579002",2023-11-20,2024-01-29,2026-01-15,Percolate Test JP - Chetan's SIM ,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"
+
+
+",,JP NB Document,,,,,,,,,,0:00,,,,,,,
+"1206075815585916",2023-12-01,2024-01-25,2026-01-15,JP team to choose ASIN sets to test with Data Science team,,,,,,,,,Percolate Test JP - Chetan's SIM ,,,,,,,,,,0:00,,,,,,,
+"1206075815585917",2023-12-01,2024-01-25,2026-01-15,"Deepika to create and activate Weblab experiment, with a 3 week SLA. (Today is 12/1)",,,,,,,,,Percolate Test JP - Chetan's SIM ,,,,,,,,,,0:00,,,,,,,
+"1206075815585915",2023-12-01,,2026-01-15,Add any context to the Percolate Tests sheet. ,,,,,,,,,Percolate Test JP - Chetan's SIM ,,,,,,,,,,0:00,,,,,,,
+"1205997667579004",2023-11-20,2024-01-29,2026-01-15,"Put context into the JP sheet: Details of tax/invoice/receipt page additions. Launched based on data from SEO; (conversions from the page for PS?); Inadvertently tested as NB (search terms catching search terms like ""Invoice"". Any conversions from these?)",Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,JP NB Document,,,,,,,,,,0:00,,,,,,,
+"1205997667579006",2023-11-20,,2026-01-15,Ask Mao for help auditing the JP NB pages (AWS said this may be helpful),,,,,,,,,JP NB Document,,,,,,,,,,0:00,,,,,,,
+"1205997667579007",2023-11-20,2026-01-13,2026-02-02,Embark plan,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-03-01,,,,,,,,,,,,,,0:00,,,,,,,
+"1205997667579010",2023-11-20,2023-11-22,2026-02-02,Ask Chetan/Charlie for update on LiveRamp.,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-11-22,,,,,,,,,,,,,,0:00,,,,,,,
+"1205997667579018",2023-11-20,2024-01-29,2026-01-15,US Brand LP Test - CPS column,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-18,,"Quip: https://quip-amazon.com/mtweAxu24qLT/202311-Brand-LP-Test-CPS-column
+Launched 11/8, End date 12/8","ABPS - Partnerships,ABPS - NA,ABPS - WW Acquisition",,,,,,,,,,,0:00,,,,,,,
+"1206959543071744",2024-03-29,2026-02-02,2026-02-02,Weekly Reporting - Global WBR sheet,Recently assigned,Richard Williams,prichwil@amazon.com,,2026-01-20,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+MX - https://quip-amazon.com/K9OYA9mXm7DU/AB-MX-Paid-Search-Sync
+
+AU - https://quip-amazon.com/84SxAbCaICKb/AU-PS-Weekly-Performance","Paid App,AU,MX",,,,,,,,,,,0:00,,,,,Done,Done,
+"1206959613824175",2024-03-29,,2026-01-15,AU - Team and Harjeet quip ,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1212762064447487",2026-01-13,,2026-01-15,MX - Team and Carlos quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206959613824183",2024-03-29,,2026-01-15,App,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206959613824191",2024-03-29,,2026-01-15,Tests: Weekly meeting quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206689390369753",2024-02-25,2024-03-29,2026-02-02,Weekly Reporting - Global WBR sheet,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-26,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+EU Marketing Weekly - https://quip-amazon.com/I1fzASpOHZca/EU-Weekly-ACQ-Update-2023",,,,,,,,,,,,0:00,,,,,,,
+"1206689389631521",2024-02-25,,2026-01-15,EU5 - Team WBR ,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206689390412612",2024-02-25,,2026-01-15,"Partnerships: CPS, App",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206689390412620",2024-02-25,,2026-01-15,"Tests: US Brand page, ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206592479906553",2024-02-13,2024-02-25,2026-02-02,Weekly Reporting - Global WBR sheet,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-19,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+EU Marketing Weekly - https://quip-amazon.com/I1fzASpOHZca/EU-Weekly-ACQ-Update-2023",,,,,,,,,,,,0:00,,,,,,,
+"1206592552828022",2024-02-13,,2026-01-15,EU5 - Team WBR ,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206592552828027",2024-02-13,,2026-01-15,"Partnerships: CPS, App",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206592552828032",2024-02-13,,2026-01-15,"Tests: US Brand page, ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206592554203626",2024-02-13,2024-02-13,2026-02-02,Weekly Reporting - Global WBR sheet,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-12,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+EU Marketing Weekly - https://quip-amazon.com/I1fzASpOHZca/EU-Weekly-ACQ-Update-2023",,,,,,,,,,,,0:00,,,,,,,
+"1206592554307459",2024-02-13,,2026-01-15,EU5 - Team WBR ,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206592554307464",2024-02-13,,2026-01-15,"Partnerships: CPS, App",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206592554307469",2024-02-13,,2026-01-15,"Tests: US Brand page, ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206480285045548",2024-01-30,2024-02-13,2026-02-02,Weekly Reporting - Global WBR sheet,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-05,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+EU Marketing Weekly - https://quip-amazon.com/I1fzASpOHZca/EU-Weekly-ACQ-Update-2023",,,,,,,,,,,,0:00,,,,,,,
+"1206480171601635",2024-01-30,,2026-01-15,EU5 - Team WBR ,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206480171601640",2024-01-30,,2026-01-15,"Partnerships: CPS, App",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206480171601645",2024-01-30,,2026-01-15,"Tests: US Brand page, ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469076440632",2024-01-29,2024-01-30,2026-02-02,Weekly Reporting - Global WBR sheet,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-01-29,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+EU Marketing Weekly - https://quip-amazon.com/I1fzASpOHZca/EU-Weekly-ACQ-Update-2023",,,,,,,,,,,,0:00,,,,,,,
+"1206469197013514",2024-01-29,,2026-01-15,EU5 - Team WBR ,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469197013524",2024-01-29,,2026-01-15,"Partnerships: CPS, App",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469197013529",2024-01-29,,2026-01-15,"Tests: US Brand page, ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469077466393",2024-01-29,2024-01-29,2026-02-02,Weekly Reporting - Global WBR sheet,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-01-22,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+EU Marketing Weekly - https://quip-amazon.com/I1fzASpOHZca/EU-Weekly-ACQ-Update-2023",,,,,,,,,,,,0:00,,,,,,,
+"1206469117767699",2024-01-29,,2026-01-15,"EU5 - Team WBR, and Marketing WBR sheet ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469117767704",2024-01-29,,2026-01-15,JP,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469117767709",2024-01-29,,2026-01-15,"Partnerships: CPS, App",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469117767714",2024-01-29,,2026-01-15,"Tests: US Brand page, ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469114886860",2024-01-29,2024-01-29,2026-02-02,Weekly Reporting - Global WBR sheet,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-01-15,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+EU Marketing Weekly - https://quip-amazon.com/I1fzASpOHZca/EU-Weekly-ACQ-Update-2023",,,,,,,,,,,,0:00,,,,,,,
+"1206469073050045",2024-01-29,,2026-01-15,"EU5 - Team WBR, and Marketing WBR sheet ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469073050050",2024-01-29,,2026-01-15,JP,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469077018073",2024-01-29,,2026-01-15,"Partnerships: CPS, App",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469077018078",2024-01-29,,2026-01-15,"Tests: US Brand page, ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469075003309",2024-01-29,2024-01-29,2026-02-02,Weekly Reporting - Global WBR sheet,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-01-08,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+EU Marketing Weekly - https://quip-amazon.com/I1fzASpOHZca/EU-Weekly-ACQ-Update-2023",,,,,,,,,,,,0:00,,,,,,,
+"1206469194613397",2024-01-29,,2026-01-15,"EU5 - Team WBR, and Marketing WBR sheet ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469194613402",2024-01-29,,2026-01-15,JP,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469194613407",2024-01-29,,2026-01-15,"Partnerships: CPS, App",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469194613412",2024-01-29,,2026-01-15,"Tests: US Brand page, ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469107902844",2024-01-29,2024-01-29,2026-02-02,Weekly Reporting - Global WBR sheet,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-01-01,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+EU Marketing Weekly - https://quip-amazon.com/I1fzASpOHZca/EU-Weekly-ACQ-Update-2023",,,,,,,,,,,,0:00,,,,,,,
+"1206469107080217",2024-01-29,,2026-01-15,"EU5 - Team WBR, and Marketing WBR sheet ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469107080222",2024-01-29,,2026-01-15,JP,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469107080227",2024-01-29,,2026-01-15,"Partnerships: CPS, App",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206469107080232",2024-01-29,,2026-01-15,"Tests: US Brand page, ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206444656540477",2024-01-25,2024-01-29,2026-02-02,Weekly Reporting - Global WBR sheet,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-25,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+EU Marketing Weekly - https://quip-amazon.com/I1fzASpOHZca/EU-Weekly-ACQ-Update-2023",,,,,,,,,,,,0:00,,,,,,,
+"1206444311071782",2024-01-25,,2026-01-15,"EU5 - Team WBR, and Marketing WBR sheet ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206444311071786",2024-01-25,,2026-01-15,JP,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206444311071790",2024-01-25,,2026-01-15,"Partnerships: CPS, App",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206444311913018",2024-01-25,,2026-01-15,"Tests: US Brand page, ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206163969835510",2023-12-13,2024-01-25,2026-02-02,Weekly Reporting - Global WBR sheet,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-18,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+EU Marketing Weekly - https://quip-amazon.com/I1fzASpOHZca/EU-Weekly-ACQ-Update-2023",,,,,,,,,,,,0:00,,,,,,,
+"1206163910202367",2023-12-13,,2026-01-15,"EU5 - Team WBR, and Marketing WBR sheet ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206163910202371",2023-12-13,,2026-01-15,JP,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206163910202375",2023-12-13,,2026-01-15,"Partnerships: CPS, App",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206163910202379",2023-12-13,,2026-01-15,"Tests: US Brand page, ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206107433283220",2023-12-05,2023-12-13,2026-02-02,Weekly Reporting - Global WBR sheet,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-11,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+EU Marketing Weekly - https://quip-amazon.com/I1fzASpOHZca/EU-Weekly-ACQ-Update-2023",,,,,,,,,,,,0:00,,,,,,,
+"1206106796676211",2023-12-05,,2026-01-15,"EU5 - Team WBR, and Marketing WBR sheet ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206106796676215",2023-12-05,,2026-01-15,JP,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206106796676219",2023-12-05,,2026-01-15,"Partnerships: CPS, App",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206106796676223",2023-12-05,,2026-01-15,"Tests: US Brand page, ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206050448460128",2023-11-28,2023-12-05,2026-02-02,Weekly Reporting - Global WBR sheet,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-04,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+EU Marketing Weekly - https://quip-amazon.com/I1fzASpOHZca/EU-Weekly-ACQ-Update-2023",,,,,,,,,,,,0:00,,,,,,,
+"1206050212471591",2023-11-28,,2026-01-15,"EU5 - Team WBR, and Marketing WBR sheet ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206050212471595",2023-11-28,,2026-01-15,JP,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206050212471599",2023-11-28,,2026-01-15,"Partnerships: CPS, App",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206050212471603",2023-11-28,,2026-01-15,"Tests: US Brand page, ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206006277967485",2023-11-21,2023-11-28,2026-02-02,Weekly Reporting - Global WBR sheet,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-11-27,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+EU Marketing Weekly - https://quip-amazon.com/I1fzASpOHZca/EU-Weekly-ACQ-Update-2023",,,,,,,,,,,,0:00,,,,,,,
+"1206020650712119",2023-11-23,,2026-01-15,"EU5 - Team WBR, and Marketing WBR sheet ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206020650712120",2023-11-23,,2026-01-15,JP,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206020650712121",2023-11-23,,2026-01-15,"Partnerships: CPS, App",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1206020650712123",2023-11-23,,2026-01-15,"Tests: US Brand page, ",,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,0:00,,,,,,,
+"1205997667579082",2023-11-21,2023-11-21,2026-02-02,Weekly Reporting - Global WBR sheet,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-11-20,,,,,,,,,,,,,,0:00,,,,,,,
+"1206005868437231",2023-11-21,2023-11-28,2026-02-02,Add in App to the Events Doc - also data on PBDD to Brandon or in a doc,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-11-22,,https://quip-amazon.com/9q0JAs8yFmMW/2023-Event-Plans,,,,,,,,,,,,0:00,,,,,,,
+"1206005868437240",2023-11-21,2024-01-29,2026-01-15,Organize Asana - more project-based rather than task-based,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,,,,,,,,,,,0:00,,,,,,,
+"1206011240457118",2023-11-22,2023-12-01,2026-01-15,EU task - RSA ad strength optimization suggestions,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-08,,"https://docs.google.com/spreadsheets/d/14mG2EOuQanb0fXe0x4EJySQpU_1LYycvKN5AiF4s8Zg/edit?resourcekey=0-Ya4JcLp3lTdJ5M1P8CVg3g#gid=1546632905
+
+
+",,,,,,,,,,,,0:00,,,,,,,
+"1206011240457120",2023-11-22,2023-12-06,2026-01-15,Amazon Campaign Structure (Brandon said to just send),Recently assigned,Richard Williams,prichwil@amazon.com,,2024-01-15,,Quentin said it should be done latest Jan 15th.,ABPS - WW Acquisition,,,,,,,,,,,0:00,,,,,,,
+"1206011240457123",2023-11-22,2023-11-29,2026-01-15,"Send file to Husain and team (file has audience layers removed, such as RLSA and Device-type, but I left in our campaign structure.)",Recently assigned,Richard Williams,prichwil@amazon.com,,2023-11-29,,,,Amazon Campaign Structure (Brandon said to just send),,,,,,,,,,0:00,,,,,,,
+"1205997667578980",2023-11-20,2023-12-05,2026-01-15,Request content before 11/30 (Size and what purpose should be okay.): https://share.amazon.com/sites/ABInternational/Japan/SitePages/Home.aspx?RootFolder=%25%5b%E2%80%A6%5d3130&View=%7B27A1EB2E%2D0245%2D40B6%2D8DA6%2D6E9F881F7589%7D,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-11-30,,,,JP Fiscal Year End event,,,,,,,,,,0:00,,,,,,,
+"1205997667578983",2023-11-20,2023-12-13,2026-01-15,"Before 12/15, fill details in the quip link above if interested in ACQ promo: In “Targeting by channel” tab, at least add Marketing Channel, POC, targeting size.",Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-08,,,,JP Fiscal Year End event,,,,,,,,,,0:00,,,,,,,
+"1206060076662398",2023-11-29,2024-01-29,2026-01-15,Prep for 1/8 BP Review,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-28,,"See 11/29 entry to ensure campaigns are ready to provide update to BP Team: https://quip-amazon.com/VXBCAKQ498yp/BP-Paid-Search-Review-Notes
+
+",ABPS - BP,,,,,,,,,,,0:00,,,,,,,
+"1206060077147215",2023-11-29,2024-01-25,2026-01-15,Confirm on Prep w/Brandon by EOW,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-01,,,,Prep for 1/8 BP Review,,,,,,,,,,0:00,,,,,,,
+"1206060077147216",2023-11-29,2024-01-29,2026-01-15,Ensure campaigns are setup to provide results,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-18,,,,Prep for 1/8 BP Review,,,,,,,,,,0:00,,,,,,,
+"1206107432906951",2023-12-05,2023-12-13,2026-02-02,EU Quip by Monday EOD,Recently assigned,Richard Williams,prichwil@amazon.com,,,,https://quip-amazon.com/I1fzASpOHZca/EU-Weekly-ACQ-Update-2023,,,,,,,,,,,,0:00,,,,,,,
+"1206060672750733",2023-11-29,2023-12-05,2026-02-02,EU Quip by Monday EOD,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-04,,https://quip-amazon.com/I1fzASpOHZca/EU-Weekly-ACQ-Update-2023,,,,,,,,,,,,0:00,,,,,,,
+"1206058024220673",2023-11-29,2023-12-05,2026-02-02,50% ie%CCP sheet for JP and EU5,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-01,,,,,,,,,,,,,,0:00,,,,,,,
+"1206058024220677",2023-11-29,,2026-01-15,JP - Add Percolate/Guest/Consolidation from the ACQ sheet,,,,,,,,,50% ie%CCP sheet for JP and EU5,,,,,,,,,,0:00,,,,,,,
+"1206058024220678",2023-11-29,,2026-01-15,EU5 - Important,,,,,,,,,50% ie%CCP sheet for JP and EU5,,,,,,,,,,0:00,,,,,,,
+"1206075815585918",2023-12-01,2026-01-15,2026-01-15,Invoice issue with Bing Ads (400k R&O),Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,,,,,,,,,,,0:00,,,,,,,
+"1206469103789481",2024-01-29,,2026-01-15,"Asked Aktar/Sriram about ETAs on invoices, and how to best use POs across EU",,,,,2024-01-30,,,,Invoice issue with Bing Ads (400k R&O),,,,,,,,,,0:00,,,,,,,
+"1206075815585920",2023-12-01,2023-12-05,2026-01-15,LiveRamp email - Remy,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,,,,,,,,,,,0:00,,,,,,,
+"1206075815585922",2023-12-01,2023-12-13,2026-01-15,Conversion uploads - Google EU and Adobe,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-01,,,,,,,,,,,,,,0:00,,,,,,,
+"1206075815585925",2023-12-01,2023-12-05,2026-01-15,Send Zoe questions about Consent for Conversions,,,,,,,,,Conversion uploads - Google EU and Adobe,,,,,,,,,,0:00,,,,,,,
+"1206075815585924",2023-12-01,2023-12-05,2026-01-15,"Set meeting with Mike Adobe to figure out the process of upload, and exactly what's uploaded.",,,,,,,,,Conversion uploads - Google EU and Adobe,,,,,,,,,,0:00,,,,,,,
+"1206075815585926",2023-12-01,2026-01-13,2026-01-15,Raise PO - H1 and H2,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-05-01,,"2024 OP1
+DE: $60,996
+UK: $74,366
+FR: $71,353
+IT: $75,232
+ES: $42,900
+
+When? H1/H2 for E.U You need to make sure you open new POs prior to the start of a new period. So for 2024 it would be great if you could open it as soon as you have the budget confirmed.
+
+Where? Coupa https://amazon.coupahost.com/user/home
+
+EU legal Entities: Legal Entities are Local
+6U - Amazon EU SARL (UK Branch)
+6D - Amazon EU SARL (DE Branch)
+6F - Amazon EU SARL (FR Branch)
+6W - Amazon EU SARL (IT Branch)
+6S - Amazon EU SARL (ES Branch)
+6L - Amazon EU SARL (LUX Branch)",ABPS - EU5,,,,,,,,,,,0:00,,,,,,,
+"1206075815585933",2023-12-01,2023-12-16,2026-01-15,PO Process for H1: Start after OP1 finalized,Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-01,,,,Raise PO - H1 and H2,,,,,,,,,,0:00,,,,,,,
+"1206188494819740",2023-12-16,2024-03-25,2026-01-15,PO Process for H1: Start after OP1 finalized,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-12-01,,,,Raise PO - H1 and H2,,,,,,,,,,0:00,,,,,,,
+"1206922028546996",2024-03-25,2026-01-15,2026-01-15,PO Process for H1: Start after OP1 finalized,Recently assigned,Richard Williams,prichwil@amazon.com,,2025-12-01,,,,Raise PO - H1 and H2,,,,,,,,,,0:00,,,,,,,
+"1206075815585934",2023-12-01,2026-01-15,2026-01-15,PO process for H2: start in May,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-05-01,,,,Raise PO - H1 and H2,,,,,,,,,,0:00,,,,,,,
+"1206959541544083",2024-03-29,2026-01-13,2026-02-02,Monthly MSP Matching (Invoice),Recently assigned,Richard Williams,prichwil@amazon.com,,2024-04-25,,"MSP Matching:
+        Once invoices become available, please update the received value & match the invoice in MSP
+        You will receive an automatic email and will be able to access the tool as PO owner
+        Check in the interface the amount to be billedto see if matches the invoice
+        Confirm the spend in MSP before 25th each month
+",ABPS - EU5,,,,,,,,,,,0:00,,,,,,,
+"1206782098219478",2024-03-06,2024-03-29,2026-02-02,Monthly MSP Matching (Invoice),Recently assigned,Richard Williams,prichwil@amazon.com,,2024-03-25,,"MSP Matching:
+        Once invoices become available, please update the received value & match the invoice in MSP
+        You will receive an automatic email and will be able to access the tool as PO owner
+        Check in the interface the amount to be billedto see if matches the invoice
+        Confirm the spend in MSP before 25th each month
+",ABPS - EU5,,,,,,,,,,,0:00,,,,,,,
+"1206454919952447",2024-01-26,2024-03-06,2026-02-02,Monthly MSP Matching (Invoice),Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-26,,"MSP Matching:
+        Once invoices become available, please update the received value & match the invoice in MSP
+        You will receive an automatic email and will be able to access the tool as PO owner
+        Check in the interface the amount to be billedto see if matches the invoice
+        Confirm the spend in MSP before 25th each month
+",ABPS - EU5,,,,,,,,,,,0:00,,,,,,,
+"1206444588731094",2024-01-25,2024-01-26,2026-02-02,Monthly MSP Matching (Invoice),Recently assigned,Richard Williams,prichwil@amazon.com,,2024-01-25,,"MSP Matching:
+        Once invoices become available, please update the received value & match the invoice in MSP
+        You will receive an automatic email and will be able to access the tool as PO owner
+        Check in the interface the amount to be billedto see if matches the invoice
+        Confirm the spend in MSP before 25th each month
+",ABPS - EU5,,,,,,,,,,,0:00,,,,,,,
+"1206075815585928",2023-12-01,2024-01-25,2026-02-02,Monthly MSP Matching (Invoice),Recently assigned,Richard Williams,prichwil@amazon.com,,2023-12-22,,"MSP Matching:
+        Once invoices become available, please update the received value & match the invoice in MSP
+        You will receive an automatic email and will be able to access the tool as PO owner
+        Check in the interface the amount to be billedto see if matches the invoice
+        Confirm the spend in MSP before 25th each month
+",ABPS - EU5,,,,,,,,,,,0:00,,,,,,,
+"1206145696521264",2023-12-11,2024-01-25,2026-01-15,Wait to hear on resolution/next steps,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-01-01,,,,EU5 - March Deadline - Data Markets Act (Conversion uploads),,EU5 - March Deadline - Data Markets Act (Conversion uploads),,,,,,,,0:00,,,,,,,
+"1206145696521260",2023-12-11,2024-03-25,2026-02-02,EU5 - March Deadline - Data Markets Act (Conversion uploads),Recently assigned,Richard Williams,prichwil@amazon.com,,,,,"ABPS - EU5,ABPS - WW Acquisition",,Wait to hear on resolution/next steps,,,,,,,,,0:00,,,,,,,
+"1206145696521262",2023-12-11,2023-12-11,2026-01-15,Meet with Google,,,,,,,,,EU5 - March Deadline - Data Markets Act (Conversion uploads),,,,,,,,,,0:00,,,,,,,
+"1206145696521263",2023-12-11,2023-12-11,2026-01-15,Provide notes to Brandon ,,,,,,,,,EU5 - March Deadline - Data Markets Act (Conversion uploads),,,,,,,,,,0:00,,,,,,,
+"1206444095899814",2024-01-25,2024-03-25,2026-01-15,"Google document from Maya - extract anything useful and loop others in (Brandon, Josh)",,,,,2024-01-31,,,,EU5 - March Deadline - Data Markets Act (Conversion uploads),,,,,,,,,,0:00,,,,,,,
+"1206188205738086",2023-12-16,2024-02-25,2026-01-15,EU5 - update report with segments,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-19,,"    Richard to provide updated weekly performance report - include cluster performance (bidding strategy) by regions- Richard to update this for next week’s report
+",,,,,,,,,,,,0:00,,,,,,,
+"1206207775408546",2023-12-19,2024-01-25,2026-01-15,Look into UK performance and write into quip. (also norms of week 48 to 52),Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,,,,,,,,,,,0:00,,,,,,,
+"1206312302553990",2024-01-09,2024-03-06,2026-02-02,Submit Q2 Bing PO,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-03-01,,,ABPS - EU5,,,,,,,,,,,0:00,,,,,,,
+"1206443873373659",2024-01-25,2026-01-13,2026-02-02,"Brand LP: edit text and restart, or test secondary CTA from Paula's email",Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-02,,Results doc for previous test: https://quip-amazon.com/mtweAxu24qLT/202311-Brand-LP-Test-CPS-column,ABPS - WW Testing & Projects,,,,,,,,,,,0:00,,,,,,,
+"1206444095899805",2024-01-25,2024-02-25,2026-02-02,LiveRamp (to enable testing),Recently assigned,Richard Williams,prichwil@amazon.com,,,,,ABPS - WW Testing & Projects,,,,,,,,,,,0:00,,,,,,,
+"1206444095899807",2024-01-25,2024-02-25,2026-01-15,Check to make sure data is being sent,,,,,2024-01-26,,,,LiveRamp (to enable testing),,,,,,,,,,0:00,,,,,,,
+"1206444095899808",2024-01-25,2024-02-25,2026-01-15,Let team know about LR status via Slack,,,,,2024-01-29,,,,LiveRamp (to enable testing),,,,,,,,,,0:00,,,,,,,
+"1206469103789484",2024-01-29,,2026-02-02,Yun/Stacey leadership,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"Yun - flip-flopping based on Stacey's feedback vs. Brandon's (IS bidding the latest example, because of Stacey's feedback about inefficiency).
+- Also, I let the entire team know that I'd implement the IS bidding testing today, and later in slack she lays out the test and asks if I can implement today. 
+- Asked me if I'm free for a call, and showed me something that could easily be slacked. (10 min phone call to talk about 1 finding)
+
+1/30 - UK/FR bid strategies increased and increased again by Yun week 3 and 4, which led to increase in campaign CPCs. (CPAs above target) And then asks me to investigate 2 campaigns with increased cost, when it was across whole portfolios.
+
+2/6 - Brand regs weren't pacing along with cost, and Yun asked me to look into changing from IS bidding to max conv. I was testing IS bidding vs. max clicks bidding to find a middle ground away from complete IS bidding. She asked me to test for a few more days and move to conv. based bidding if it doesn't turn around, even though I asked to do this as a legitimate test. (she based this off of 4 days of registration data pacing, 2 of them being weekend)
+
+2/12 - I wrote WBR callout, included overview/highlight/lowlight, and Yun came in later and added a paragraph that essentially talked about the same points. (ticket out to investigate UK, and ie%CCP changes; positives and negatives) I deleted my part because it became repetitive with the addition of her text, and this makes me feel that I shouldn't even write these.
+
+3/6 - Yun mentioned a few times the importance of adding to the change log when making substantive changes. After the meeting, I look in UK change log for the same day, and noticed Yun added negatives and paused keywords related to Amazon Affiliates, Dropshipping, and fba. These are terms that converted in our account in the past, whether we were bidding directly on them as keywords or not. She paused and added negatives saying that they had 0 ref_regs, even though these terms had only spent $100 and about 20 clicks.
+
+3/7 - I found out that Yun has also been pausing keywords using the Adobe platform. These are keywords that I recently created or turned on because of the lack of NB conversions, such as 'bestellen auf rechnung' in DE and 'cosmetic salon furniture' in UK, both of which had conversions, but maybe didn't sound like something we should have on for Yun. I went through each change from the Adobe user and activated those that I was specifically testing for NB. (There wasn't even enough data for these decisions)
+*I'm noticing she makes actions that are ad-hoc and seemingly harmless, but can go against strategy that I've already discussed. (I remove negatives like affiliates/fba, and she adds back in. I add keywords to get more NB, and she pauses before they've got enough data.)
+
+3/12 - EU accounts are under pressure. Stacey asked for insight on UK/FR/ES focused on YoY with specific asks. Yun jumped in and wanted me to repeat those asks to make sure I understood.
+
+3/18 - Syncs regularly go over 45 mins. She also has tendency of listing out possible outcomes for tasks, and what we can do for each, even if I've already mentioned the task/possible outcome. (I've basically let her know I have that understanding)
+I was working on callout for each market in EU, as a solution to not having all the details each each, and Yun working on synthesizing the info. She asked me to do the EU callout, which would mean that I was creating the callout for EU (what I've been doing), and the callout for each market. I had to clarify this a couple times, and she agreed to do the synthesis/story for EU.
+I find myself managing up a lot more now.
+
+This has become more a doc on leadership of Stacey and Yun. Stacey has gone off the rails the past few weeks with Brandon not in the WBR meetings. 
+    Consistently mentioning that I don't think at a high level.
+    Mentioned a few separate times that I need to stop making changes to the accounts
+    Asked me about my to-do list during a WBR team meeting; I talked through a few things like invoice tasks (leftover work from her tenure), ENG accounts (requesting audiences, reporting, callouts for other teams' plans; Events and ENG)
+    Consistently micromanaging changes made to the accounts, which has dis-incentivized me from making changes, and even looking deeply into the accounts like I would normally do.
+    Disproportionately asking me for granular reporting directly. I am being managed by both Stacey and Yun; but Yun's tasks seem to come from Stacey.
+    All of the above done in public; not classy at all, and has destroyed my morale, my wanting to work for the team with intrinsic motivation, and my trust in her leadership. (Yun's weakness from pressure were born from ignorance, Stacey's weakness under pressure born not from ignorance.)
+",,,,,,,,,,,Non Important/Non Urgent,0:00,,,,,,,
+"1206469103789486",2024-01-29,2026-01-13,2026-01-15,Test Pmax in DE/IT - too efficient,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,ABPS - WW Testing & Projects,,,,,,,,,,,0:00,,,,,,,
+"1206469103789490",2024-01-29,2026-01-13,2026-01-15,"Phrase match parity, and broad test",Recently assigned,Richard Williams,prichwil@amazon.com,,,,"Phrase match parity, add as negatives to broad, and broad as their own campaigns for budget (maximize exact/phrase, and CPA constraint for broad)",ABPS - EU5,,,,,,,,,,,0:00,,,,,,,
+"1206469103789493",2024-01-29,2026-01-15,2026-01-15,Check Jan invoices on Microsoft to see if paid,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-29,,,,,,,,,,,,,,0:00,,,,,,,
+"1206469103789497",2024-01-29,2026-01-15,2026-01-15,"CPS CA going to lead form and Shivam providing updated copy/updated keywords/page, minimal from our side. (1 week SLA from when he delivers)",Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,,,,,,,,,,,0:00,,,,,,,
+"1206469103789499",2024-01-29,2026-01-15,2026-01-15,"$50 per month, try to expense last year too. (phone line items should be $50/month, but if less than $50, then submit without receipt)",Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,,,,,,,,,,,0:00,,,,,,,
+"1206469103789501",2024-01-29,2024-02-25,2026-01-15,Test for Brand bid strat (IS vs. max conv.),Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-14,,,"ABPS - EU5,ABPS - WW Testing & Projects",,,,,,,,,,,0:00,,,,,,,
+"1206469103789505",2024-01-29,,2026-01-15,"Couldn't create all because of ""cannot edit removed entities"" error. Check on the support ticket.",,,,,2024-01-30,,,,Test for Brand bid strat (IS vs. max conv.),,,,,,,,,,0:00,,,,,,,
+"1206469104015147",2024-01-29,2024-01-30,2026-01-15,"EU5 WBR - Cost data callouts, then update with regs data",Recently assigned,Richard Williams,prichwil@amazon.com,,2024-01-29,,,,,,,,,,,,,,0:00,,,,,,,
+"1206469104015149",2024-01-29,2026-01-15,2026-01-15,Live: ENG account,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,,,,,,,,,,,0:00,,,,,,,
+"1206469104015151",2024-01-29,,2026-01-15,Richard to see how we can set up conversion event for ENG,,,,,,,,,Live: ENG account,,,,,,,,,,0:00,,,,,,,
+"1206469104015152",2024-01-29,2024-03-08,2026-01-15,Richard to define ref tag structure.,,,,,,,,,Live: ENG account,,,,,,,,,,0:00,,,,,,,
+"1206469104015155",2024-01-29,2024-01-29,2026-01-15,check regs at 1pm for EU,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-01-29,,,,,,,,,,,,,,0:00,,,,,,,
+"1206497184489076",2024-02-01,2024-02-05,2026-01-15,App Impact,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,SSR QBR - Budget Impact,,,,,,,,,,0:00,,,,,,,
+"1206497728159513",2024-02-01,2024-02-25,2026-02-02,ENG - New account conversions setup,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-09,,"Make sure conversions are set up via portfolio settings 
+(follow up with Mike)",ABPS - Partnerships,,,,,,,,,,,0:00,,,,,,,
+"1205997667578904",2023-11-20,2024-02-25,2026-02-02,LiveRamp Relaunch,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"Charlie identifying new contract scope
+Subj: Liveramp pricing / contract implications due to full load data",ABPS - Partnerships,,,ENG Test - Live 3/5,,,,,,,,0:00,,,,,,,
+"1206003181775827",2023-11-21,,2026-01-15,Req'ing delta suppression capabilities,,Brandon,brandoxy@amazon.com,,2023-11-27,,Subj: Technical Discovery Session for Delta Feeds,,LiveRamp Relaunch,,,,,,,,,,0:00,,,,,,,
+"1206526096311054",2024-02-05,2024-03-06,2026-02-02,ENG- Create ENG Google Campaigns,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-23,,Yun to do Brand and Richard to do NB,ABPS - Partnerships,,,,,,,,,,,0:00,,,,,,,
+"1206536553844352",2024-02-06,2024-02-25,2026-02-20,Check Brand Click bidding in EU5,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-14,,"    Check Brand Max Click Bidding for EU5 and provide updates by regions. 
+    CPAs per regions and compare the performance with the previous bidding strategy. 
+    We can decide the next steps based on the insights
+    Ensure to document the changes in the change log. When did the Brand Click bidding launch? 
+",ABPS - EU5,,,,,,,,,,,0:00,,,,,,,
+"1206536618310665",2024-02-06,2024-02-25,2026-01-15,If still no convs in DE & UK Brand Max Click Bidding> Change the bidding to tCPA for DE & UK,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-09,,,,Check Brand Click bidding in EU5,,,,,,,,,,0:00,,,,,,,
+"1206536618310670",2024-02-06,2024-02-25,2026-02-02,Check Top/Low Performers Bidding for UK & FR,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-15,,"Check UK & FR top performers/low performers bidding to see the impact of the changes.
+    Do we have the similar conversion volume like previously?
+    Does the CPA improve compared to previously?
+",ABPS - EU5,,,,,,,,,,,0:00,,,,,,,
+"1206536618310673",2024-02-06,2024-02-20,2026-02-02,BP - Consumer Sitelink Data,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-15,,Could you please pull the data for ref_=pd_sl_consumer_bp_sitelink. So we can provide update to BP team. There's a monthly call with BP team next Monday! ,ABPS - Partnerships,,,,,,,,,,,0:00,,,,,,,
+"1206556644802163",2024-02-08,2024-02-25,2026-02-02,EU5 IS vs Max Conv Bidding ,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-13,,Document the result by regions ,ABPS - EU5,,,,,,,,,,,0:00,,,,,,,
+"1206556644802166",2024-02-08,2024-02-25,2026-02-02,EU5 IS vs Max Clicks,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-20,,"Document the results by regions
+    Which bidding works well in which regions
+
+",ABPS - EU5,,,,,,,,,,,0:00,,,,,,,
+"1206558289850225",2024-02-08,2024-02-25,2026-01-15,Get information on in-reg drop-off,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-13,,,,EU Brand CVR Drop Investigation,,,,,,,,,,0:00,,,,,,,
+"1206558289850224",2024-02-08,2024-02-13,2026-01-15,Create Quip consolidating investigation info,Recently assigned,Richard Williams,prichwil@amazon.com,,,,,,EU Brand CVR Drop Investigation,,,,,,,,,,0:00,,,,,,,
+"1206558289850222",2024-02-08,2026-01-13,2026-02-02,EU Brand CVR Drop Investigation,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-04-05,,"Investigate EU Brand CVR drop to identify issues inhibiting reg conversion. Initial investigation shows -20% drop in CVR, but increased reg start. Identify why/if users are dropping out mid-reg",ABPS - EU5,,,,,,,,,,,0:00,,,,,,,
+"1206959344644368",2024-03-29,,2026-01-15,With ABMA now: ,,,,,,,,,EU Brand CVR Drop Investigation,,,,,,,,,,0:00,,,,,,,
+"1206592223381191",2024-02-13,2024-02-20,2026-02-02,BP Consumer Sitelink Data,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-15,,,ABPS - Partnerships,,,,,,,,,,,0:00,,,,,,,
+"1206595086909520",2024-02-13,2024-03-06,2026-02-02,Reply Zoe's email regarding of DMA,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-15,,"Email from Zoe ""Amazon Business - Modern Search Best Practices - UK Assessment""
+In addition, please can you also confirm on the required DMA changes and whether you are on track for March (with regards to ensuring that user consent has been collected by sharing opt-in user consent signals with Google's tools). ",ABPS - EU5,,,,,,,,,,,0:00,,,,,,,
+"1206595086909526",2024-02-13,2026-01-13,2026-02-02,GA Bidding Performance,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-03-29,,,ABPS - EU5,,,,,,,,,,,0:00,,,,,,,
+"1206646085162524",2024-02-20,2024-03-25,2026-02-02,Can we pull our ref tag for a.com traffic?,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-22,,"Plz check to see if this is doable to pull https://a.com data via query/table. If not, then:
+    ENG- communicate with ENG team to use their ref tag structure
+        Discussed unique ref so we don't muddle current ENG (non-PS) visibility. Tag structure will need to be confirmed with ABMA
+    BP- I will communicate with the team to tell them it's not doable to see the traffics
+
+
+Solution for ENG:
+We implemented ""pdsl_eng_"" instead of ""pd_sl_"" because there are likely too many for SSR ref tags. This is currently working.",ABPS - Partnerships,,,,,,,,,,,0:00,,,,,,,
+"1206689304271092",2024-02-25,2024-03-29,2026-01-15,Paid Acq flash - EU perf,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-02-25,,,,,,,,,,,,,,0:00,,,,,,,
+"1205997667578968",2023-11-20,2026-01-13,2026-02-02,YT Retargeting Test,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-05-31,,"RE: [EXTERNAL] YT Retargeting
+
+","ABPS - NA,ABPS - WW Testing & Projects,ABPS - WW Acquisition",,,,,,,,,,,0:00,,,,,,,
+"1206779040277772",2024-03-06,2024-03-25,2026-02-02,UK - Brand restriction 20% test,Recently assigned,Richard Williams,prichwil@amazon.com,,,,"Small-scale platform test
+
+Test: Google allows us to choose brands we'd like to restrict our traffic to, on the campaign level. I've created a test to see if doing this will allow us to target Brand Phrase match more efficiently.
+A/B: 20% test, 80% control
+Timeline: 3/8 to 3/22
+Success: Ref tag CVR, and conversion volume increase.
+
+Experiment too small, and need to prioritize Brand traffic for ie%CCP. This might be good for NB where we have very low IS.",ABPS - WW Testing & Projects,,,,,,,,,,,0:00,,,,,,,
+"1206779040277776",2024-03-06,2026-01-13,2026-02-02,UK Pmax - 3/22 to 6/14,Recently assigned,Richard Williams,prichwil@amazon.com,,2024-06-14,,,ABPS - WW Testing & Projects,,,,,,,,,,,0:00,,,,,,,
+"1213610213328675",2026-03-10,,2026-03-11,AU meetings - Agenda,Do later,Richard Williams,prichwil@amazon.com,,2026-03-17,,"
+
+    Increase relevance of things we’re bidding on? (this would be understanding keywords and landing pages and campaigns live)
+    Occasionally (per quarter/per half, something reasonable) look at keywords (performing vs. not performing)
+        Bring this with the intent to figure out what works and doesn’t work.
+",AU,,,,,Not urgent,,,2026-03-02,Sweep (Low-friction),,,,,,,,,
+"1213608836854363",2026-03-10,,2026-03-13,Mondays - Write into EU SSR Acq Asana,Do later,Richard Williams,prichwil@amazon.com,,2026-03-16,,,,,,,,Urgent,Important,,2026-03-02,Sweep (Low-friction),Important/Non Urgent,,,,,,,,
+"1213608836772772",2026-03-10,,2026-03-13,Weekly Reporting - Global WBR sheet,Do later,Richard Williams,prichwil@amazon.com,,2026-03-16,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+MX - https://quip-amazon.com/K9OYA9mXm7DU/AB-MX-Paid-Search-Sync
+
+AU - https://quip-amazon.com/84SxAbCaICKb/AU-PS-Weekly-Performance","Paid App,AU,MX",,,,,Urgent,Important,,2026-03-02,Engine Room (Excel and Google ads),Important/Urgent,,,,,,,,
+"1213610213291392",2026-03-10,,2026-03-10,AU - Team and Harjeet quip ,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213610213291400",2026-03-10,,2026-03-10,MX - Team and Carlos quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213610213291408",2026-03-10,,2026-03-10,App,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213609980893571",2026-03-10,,2026-03-10,Tests: Weekly meeting quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213541622135762",2026-03-06,,2026-03-11,MBR callout,Do later,Richard Williams,prichwil@amazon.com,,2026-04-02,,,"AU,MX",,,,,Not urgent,Important,,2026-03-02,Admin (Wind-down),,,,,,,,,
+"1213530917597503",2026-03-05,,2026-03-11,Monthly - Confirm actual budgets,Do later,Richard Williams,prichwil@amazon.com,,2026-04-01,,,Paid App,,,,,Not urgent,Important,,2026-03-01,Admin (Wind-down),Important/Non Urgent,,,,,,,,744:00
+"1213530917597492",2026-03-05,,2026-03-11,Come prepared: Bi-weekly with Adi to brainstorm usable AI,Do later,Richard Williams,prichwil@amazon.com,,2026-03-18,,,,,,,,Not urgent,,,2026-03-03,Sweep (Low-friction),,,,,,,,,360:00
+"1213531566195255",2026-03-04,,2026-03-11,Update Kingpin for MX,Do later,Richard Williams,prichwil@amazon.com,,2026-04-07,,https://kingpin.amazon.com/#/items/1121196,MX,,,,,Not urgent,Important,,2026-03-02,Sweep (Low-friction),Important/Non Urgent,,,,,,,,864:00
+"1213546434830000",2026-03-04,,2026-03-11,ie%CCP calc - insert MX spend/regs before 9th,Do later,Richard Williams,prichwil@amazon.com,,2026-04-03,,https://quip-amazon.com/bqogATBbIY91/FY26-SSR-IECCP-CPA-Registration#temp:C:BJE26065d11889b4e8cbf95de072,,,,,,Not urgent,Important,,2026-03-05,Sweep (Low-friction),,,,,,,,,696:00
+"1213535004121612",2026-03-03,2026-03-10,2026-03-10,Dwayne WW MCS Callout in PreWBR (Due Tuesday EOD),Do later,Richard Williams,prichwil@amazon.com,,,,"https://quip-amazon.com/MMgBAzDrlVou/WW-AB-Traffic-Marketing-Pre-WBR-Callouts
+
+",,,,,,Today,Important,,2026-03-02,,,,,,,,,,192:00
+"1213529666320502",2026-03-03,2026-03-10,2026-03-10,AU meetings - Agenda,Do later,Richard Williams,prichwil@amazon.com,,2026-03-10,,"
+
+    Increase relevance of things we’re bidding on? (this would be understanding keywords and landing pages and campaigns live)
+    Occasionally (per quarter/per half, something reasonable) look at keywords (performing vs. not performing)
+        Bring this with the intent to figure out what works and doesn’t work.
+",AU,,,,,Today,,,2026-03-02,,,,,,,,,Done,192:00
+"1213531814325315",2026-03-03,,2026-03-11,Send AU team invoice for prev month,Do later,Richard Williams,prichwil@amazon.com,,2026-04-02,,,,,,,,Not urgent,,,2026-03-02,Admin (Wind-down),,,,,,,,,744:00
+"1213505346075092",2026-03-02,2026-03-10,2026-03-10,Free Search Callout for Yoav in PreWBR (due Monday EOD),Do later,Richard Williams,prichwil@amazon.com,,,,"SQL for FS
+WITH base_results AS (
+    SELECT 
+        c.Market_Country,
+        c.current_count,
+        pw.previous_week_count,
+        py.previous_year_count,
+        CASE 
+            WHEN pw.previous_week_count = 0 THEN NULL
+            ELSE ROUND(((c.current_count - pw.previous_week_count)::FLOAT / pw.previous_week_count * 100), 2)
+        END as ""WoW"",
+        CASE 
+            WHEN py.previous_year_count = 0 THEN NULL
+            ELSE ROUND(((c.current_count - py.previous_year_count)::FLOAT / py.previous_year_count * 100), 2)
+        END as ""YoY""
+    FROM (
+        SELECT 
+            CASE
+                WHEN marketplace_id = '1' THEN 'US'
+                WHEN marketplace_id = '7' THEN 'CA'
+                WHEN marketplace_id = '3' THEN 'UK'
+                WHEN marketplace_id = '4' THEN 'DE'
+                WHEN marketplace_id = '5' THEN 'FR'
+                WHEN marketplace_id = '35691' THEN 'IT'
+                WHEN marketplace_id = '44551' THEN 'ES'
+                WHEN marketplace_id = '6' THEN 'JP'
+                WHEN marketplace_id = '771770' THEN 'MX'
+                ELSE 'No Country Found'
+            END AS Market_Country,
+            count(distinct business_account_id) as current_count
+        FROM abbd_sandbox_mktg.ab_acq_channel_attr
+        WHERE channel = 'Free Offsite'
+            and feature_name = 'Offsite - Free Search'
+            and account_verified_date BETWEEN '20260215' and '20260221'
+            and overall_status IN ('VERIFIED_POSITIVE','WHITELISTED')
+            and is_active = 1
+        group by 1
+    ) c
+    LEFT JOIN (
+        SELECT 
+            CASE
+                WHEN marketplace_id = '1' THEN 'US'
+                WHEN marketplace_id = '7' THEN 'CA'
+                WHEN marketplace_id = '3' THEN 'UK'
+                WHEN marketplace_id = '4' THEN 'DE'
+                WHEN marketplace_id = '5' THEN 'FR'
+                WHEN marketplace_id = '35691' THEN 'IT'
+                WHEN marketplace_id = '44551' THEN 'ES'
+                WHEN marketplace_id = '6' THEN 'JP'
+                WHEN marketplace_id = '771770' THEN 'MX'
+                ELSE 'No Country Found'
+            END AS Market_Country,
+            count(distinct business_account_id) as previous_week_count
+        FROM abbd_sandbox_mktg.ab_acq_channel_attr
+        WHERE channel = 'Free Offsite'
+            and feature_name = 'Offsite - Free Search'
+            and account_verified_date BETWEEN '20260208' and '20260214'
+            and overall_status IN ('VERIFIED_POSITIVE','WHITELISTED')
+            and is_active = 1
+        group by 1
+    ) pw ON c.Market_Country = pw.Market_Country
+    LEFT JOIN (
+        SELECT 
+            CASE
+                WHEN marketplace_id = '1' THEN 'US'
+                WHEN marketplace_id = '7' THEN 'CA'
+                WHEN marketplace_id = '3' THEN 'UK'
+                WHEN marketplace_id = '4' THEN 'DE'
+                WHEN marketplace_id = '5' THEN 'FR'
+                WHEN marketplace_id = '35691' THEN 'IT'
+                WHEN marketplace_id = '44551' THEN 'ES'
+                WHEN marketplace_id = '6' THEN 'JP'
+                WHEN marketplace_id = '771770' THEN 'MX'
+                ELSE 'No Country Found'
+            END AS Market_Country,
+            count(distinct business_account_id) as previous_year_count
+        FROM abbd_sandbox_mktg.ab_acq_channel_attr
+        WHERE channel = 'Free Offsite'
+            and feature_name = 'Offsite - Free Search'
+            and account_verified_date BETWEEN '20250216' and '20250222'
+            and overall_status IN ('VERIFIED_POSITIVE','WHITELISTED')
+            and is_active = 1
+        group by 1
+    ) py ON c.Market_Country = py.Market_Country
+),
+
+eu_results AS (
+    SELECT 
+        'EU' as Market_Country,
+        SUM(current_count) as current_count,
+        SUM(previous_week_count) as previous_week_count,
+        SUM(previous_year_count) as previous_year_count,
+        CASE 
+            WHEN SUM(previous_week_count) = 0 THEN NULL
+            ELSE ROUND(((SUM(current_count) - SUM(previous_week_count))::FLOAT / SUM(previous_week_count) * 100), 2)
+        END as ""WoW"",
+        CASE 
+            WHEN SUM(previous_year_count) = 0 THEN NULL
+            ELSE ROUND(((SUM(current_count) - SUM(previous_year_count))::FLOAT / SUM(previous_year_count) * 100), 2)
+        END as ""YoY""
+    FROM base_results
+    WHERE Market_Country IN ('DE', 'ES', 'FR', 'IT', 'UK')
+)
+
+-- First Tab: All marketplaces plus EU and Total
+SELECT 
+    Market_Country,
+    current_count,
+    previous_week_count,
+    previous_year_count,
+    ""WoW"",
+    ""YoY"",
+    0 as sort_order
+FROM base_results
+UNION ALL
+SELECT 
+    Market_Country,
+    current_count,
+    previous_week_count,
+    previous_year_count,
+    ""WoW"",
+    ""YoY"",
+    1 as sort_order
+FROM eu_results
+UNION ALL
+SELECT 
+    'Total' as Market_Country,
+    SUM(current_count),
+    SUM(previous_week_count),
+    SUM(previous_year_count),
+    CASE 
+        WHEN SUM(previous_week_count) = 0 THEN NULL
+        ELSE ROUND(((SUM(current_count) - SUM(previous_week_count))::FLOAT / SUM(previous_week_count) * 100), 2)
+    END,
+    CASE 
+        WHEN SUM(previous_year_count) = 0 THEN NULL
+        ELSE ROUND(((SUM(current_count) - SUM(previous_year_count))::FLOAT / SUM(previous_year_count) * 100), 2)
+    END,
+    2 as sort_order
+FROM base_results
+ORDER BY sort_order, Market_Country;
+
+-- Second Tab: EU Breakdown only
+SELECT 
+    Market_Country,
+    current_count,
+    previous_week_count,
+    previous_year_count,
+    ""WoW"",
+    ""YoY"",
+    0 as sort_order
+FROM base_results
+WHERE Market_Country IN ('DE', 'ES', 'FR', 'IT', 'UK')
+UNION ALL
+SELECT 
+    Market_Country,
+    current_count,
+    previous_week_count,
+    previous_year_count,
+    ""WoW"",
+    ""YoY"",
+    1 as sort_order
+FROM eu_results
+ORDER BY sort_order, Market_Country;
+
+
+----------------------------------------
+
+
+
+https://loop.cloud.microsoft/join/eyJnIjoiVDBSVFVIeGhiV0Y2YjI1blluSXVjMmhoY21Wd2IybHVkQzVqYjIxOFlpRnBSbU5WVlhoMllWWnJZWGxMVWtzME1GUXdVVk5wYW14dE5uUkhjbTF3U0d0TGNsTmpORlpqUmxKdFdXRk1hMDlsVlUxbVZGa3lSbTlmVlhVellUSktmREF4Tmt0WlRsSkdObGRHVWtsUVJqSldVRkZPUlVsU1VVeEVNbGhCTkRjMFNsQT0iLCJpIjoieGhqS1lJaUUwQ3M1WnduYXBIZmdBIiwidyI6IlQwUlRVSHhoYldGNmIyNW5Zbkl1YzJoaGNtVndiMmx1ZEM1amIyMThZaUZwUm1OVlZYaDJZVlpyWVhsTFVrczBNRlF3VVZOcGFteHROblJIY20xd1NHdExjbE5qTkZaalJsSnRXV0ZNYTA5bFZVMW1WRmt5Um05ZlZYVXpZVEpLZkRBeE5rdFpUbEpHTmxkR1VrbFFSakpXVUZGT1JVbFNVVXhFTWxoQk5EYzBTbEE9In0%3D
+
+MCS callout
+    Before PreWBR on Wednesday
+    WW callout is more shallow if doing for each 
+    For WW, if within 2-3%, then it's flat
+Data
+    All data coming from WBR slides for consistency
+    Secondary callout from Adobe
+        https://experience.adobe.com/#/@amazonservicesllc/so:amazon3d/analytics/spa/index.html?lazyLoadPhpSession=1#/workspace/edit/697915299b200021de1e2e66
+        Filter for AB customers only (Existing)
+        Either Performance by site or performance by channel
+        Easiest way: Unique visitors
+            Drag Last week over, then compare to prior week
+            Traffic WBR attribution only looks at Free Search
+            If registration flow drove, then look at SSR  to see if thank you page went up because of increase to regs
+            call out percentages rather than volume
+        If more detail needed:
+            break channel by entry page
+            hp/login is brand-driven
+            outbound campaign refmarker if reftag needed
+            
+
+Marketing & Business Prime WBR doc (
+
+Surge in customer traffic isn't really a thing
+
+",,,,,,Today,Important,,2026-03-02,,,,,,,,,,168:00
+"1213505346076703",2026-03-02,,2026-03-02,Hubble data: country level WoW and YoY,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213505346076711",2026-03-02,,2026-03-02,Keep structure the same,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213505346076719",2026-03-02,,2026-03-02,Investigation: Adobe Analytics tracker ,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213505346076727",2026-03-02,,2026-03-02,https://experience.adobe.com/#/@amazonservicesllc/so:amazon3d/analytics/spa/index.html#/workspace/edit/6807a07a805621bb97f81179,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213505346383758",2026-03-02,,2026-03-02,Page-level callouts,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213505346383766",2026-03-02,,2026-03-02,"Group chat: Jill (agency point of contact) not full visibility, but should be able to help with surface-level insights. ",,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213505346383774",2026-03-02,,2026-03-02,Jill's Looker: https://lookerstudio.google.com/u/0/reporting/bb9dac4e-88b9-4881-9e02-e46aa10c7280/page/p_fug10zj9vc,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213505346383782",2026-03-02,,2026-03-02,SQL for FS,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213504173298978",2026-03-02,2026-03-10,2026-03-10,Weekly Reporting - Global WBR sheet,Do later,Richard Williams,prichwil@amazon.com,,2026-03-09,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+MX - https://quip-amazon.com/K9OYA9mXm7DU/AB-MX-Paid-Search-Sync
+
+AU - https://quip-amazon.com/84SxAbCaICKb/AU-PS-Weekly-Performance","Paid App,AU,MX",,,,,Today,Important,,2026-03-02,,Important/Urgent,,,,,,Done,Done,184:00
+"1213504176361921",2026-03-02,,2026-03-02,AU - Team and Harjeet quip ,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213504176657379",2026-03-02,,2026-03-02,MX - Team and Carlos quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213504176657387",2026-03-02,,2026-03-02,App,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213504176657395",2026-03-02,,2026-03-02,Tests: Weekly meeting quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213502094928671",2026-03-02,2026-03-10,2026-03-10,Mondays - Write into EU SSR Acq Asana,Do later,Richard Williams,prichwil@amazon.com,,2026-03-09,,,,,,,,Today,Important,,2026-03-02,,Important/Non Urgent,,,,,,,,168:00
+"1213433460685629",2026-02-25,2026-03-02,2026-03-02,Weekly Reporting - Global WBR sheet,Do later,Richard Williams,prichwil@amazon.com,,2026-03-02,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+MX - https://quip-amazon.com/K9OYA9mXm7DU/AB-MX-Paid-Search-Sync
+
+AU - https://quip-amazon.com/84SxAbCaICKb/AU-PS-Weekly-Performance","Paid App,AU,MX",,,,,Today,Important,,2026-03-02,,Important/Urgent,,,,,,Done,Done,17:00
+"1213442843332956",2026-02-25,,2026-02-25,AU - Team and Harjeet quip ,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213442843348651",2026-02-25,,2026-02-25,MX - Team and Carlos quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213442843348660",2026-02-25,,2026-02-25,App,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213442843348669",2026-02-25,,2026-02-25,Tests: Weekly meeting quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213433460659834",2026-02-25,2026-03-02,2026-03-02,Mondays - Write into EU SSR Acq Asana,Do later,Richard Williams,prichwil@amazon.com,,2026-03-02,,,,,,,,Today,Important,,2026-03-02,,Important/Non Urgent,,,,,,,,0:00
+"1213428608099824",2026-02-24,2026-03-03,2026-03-03,Dwayne WW MCS Callout in PreWBR (Due Tuesday EOD),Do later,Richard Williams,prichwil@amazon.com,,2026-03-03,,"https://quip-amazon.com/MMgBAzDrlVou/WW-AB-Traffic-Marketing-Pre-WBR-Callouts
+
+",,,,,,Today,Important,,2026-03-02,,,,,,,,,,24:00
+"1213423444013113",2026-02-24,2026-03-02,2026-03-02,Free Search Callout for Yoav in PreWBR (due Monday EOD),Do later,Richard Williams,prichwil@amazon.com,,2026-03-02,,"SQL for FS
+WITH base_results AS (
+    SELECT 
+        c.Market_Country,
+        c.current_count,
+        pw.previous_week_count,
+        py.previous_year_count,
+        CASE 
+            WHEN pw.previous_week_count = 0 THEN NULL
+            ELSE ROUND(((c.current_count - pw.previous_week_count)::FLOAT / pw.previous_week_count * 100), 2)
+        END as ""WoW"",
+        CASE 
+            WHEN py.previous_year_count = 0 THEN NULL
+            ELSE ROUND(((c.current_count - py.previous_year_count)::FLOAT / py.previous_year_count * 100), 2)
+        END as ""YoY""
+    FROM (
+        SELECT 
+            CASE
+                WHEN marketplace_id = '1' THEN 'US'
+                WHEN marketplace_id = '7' THEN 'CA'
+                WHEN marketplace_id = '3' THEN 'UK'
+                WHEN marketplace_id = '4' THEN 'DE'
+                WHEN marketplace_id = '5' THEN 'FR'
+                WHEN marketplace_id = '35691' THEN 'IT'
+                WHEN marketplace_id = '44551' THEN 'ES'
+                WHEN marketplace_id = '6' THEN 'JP'
+                WHEN marketplace_id = '771770' THEN 'MX'
+                ELSE 'No Country Found'
+            END AS Market_Country,
+            count(distinct business_account_id) as current_count
+        FROM abbd_sandbox_mktg.ab_acq_channel_attr
+        WHERE channel = 'Free Offsite'
+            and feature_name = 'Offsite - Free Search'
+            and account_verified_date BETWEEN '20260215' and '20260221'
+            and overall_status IN ('VERIFIED_POSITIVE','WHITELISTED')
+            and is_active = 1
+        group by 1
+    ) c
+    LEFT JOIN (
+        SELECT 
+            CASE
+                WHEN marketplace_id = '1' THEN 'US'
+                WHEN marketplace_id = '7' THEN 'CA'
+                WHEN marketplace_id = '3' THEN 'UK'
+                WHEN marketplace_id = '4' THEN 'DE'
+                WHEN marketplace_id = '5' THEN 'FR'
+                WHEN marketplace_id = '35691' THEN 'IT'
+                WHEN marketplace_id = '44551' THEN 'ES'
+                WHEN marketplace_id = '6' THEN 'JP'
+                WHEN marketplace_id = '771770' THEN 'MX'
+                ELSE 'No Country Found'
+            END AS Market_Country,
+            count(distinct business_account_id) as previous_week_count
+        FROM abbd_sandbox_mktg.ab_acq_channel_attr
+        WHERE channel = 'Free Offsite'
+            and feature_name = 'Offsite - Free Search'
+            and account_verified_date BETWEEN '20260208' and '20260214'
+            and overall_status IN ('VERIFIED_POSITIVE','WHITELISTED')
+            and is_active = 1
+        group by 1
+    ) pw ON c.Market_Country = pw.Market_Country
+    LEFT JOIN (
+        SELECT 
+            CASE
+                WHEN marketplace_id = '1' THEN 'US'
+                WHEN marketplace_id = '7' THEN 'CA'
+                WHEN marketplace_id = '3' THEN 'UK'
+                WHEN marketplace_id = '4' THEN 'DE'
+                WHEN marketplace_id = '5' THEN 'FR'
+                WHEN marketplace_id = '35691' THEN 'IT'
+                WHEN marketplace_id = '44551' THEN 'ES'
+                WHEN marketplace_id = '6' THEN 'JP'
+                WHEN marketplace_id = '771770' THEN 'MX'
+                ELSE 'No Country Found'
+            END AS Market_Country,
+            count(distinct business_account_id) as previous_year_count
+        FROM abbd_sandbox_mktg.ab_acq_channel_attr
+        WHERE channel = 'Free Offsite'
+            and feature_name = 'Offsite - Free Search'
+            and account_verified_date BETWEEN '20250216' and '20250222'
+            and overall_status IN ('VERIFIED_POSITIVE','WHITELISTED')
+            and is_active = 1
+        group by 1
+    ) py ON c.Market_Country = py.Market_Country
+),
+
+eu_results AS (
+    SELECT 
+        'EU' as Market_Country,
+        SUM(current_count) as current_count,
+        SUM(previous_week_count) as previous_week_count,
+        SUM(previous_year_count) as previous_year_count,
+        CASE 
+            WHEN SUM(previous_week_count) = 0 THEN NULL
+            ELSE ROUND(((SUM(current_count) - SUM(previous_week_count))::FLOAT / SUM(previous_week_count) * 100), 2)
+        END as ""WoW"",
+        CASE 
+            WHEN SUM(previous_year_count) = 0 THEN NULL
+            ELSE ROUND(((SUM(current_count) - SUM(previous_year_count))::FLOAT / SUM(previous_year_count) * 100), 2)
+        END as ""YoY""
+    FROM base_results
+    WHERE Market_Country IN ('DE', 'ES', 'FR', 'IT', 'UK')
+)
+
+-- First Tab: All marketplaces plus EU and Total
+SELECT 
+    Market_Country,
+    current_count,
+    previous_week_count,
+    previous_year_count,
+    ""WoW"",
+    ""YoY"",
+    0 as sort_order
+FROM base_results
+UNION ALL
+SELECT 
+    Market_Country,
+    current_count,
+    previous_week_count,
+    previous_year_count,
+    ""WoW"",
+    ""YoY"",
+    1 as sort_order
+FROM eu_results
+UNION ALL
+SELECT 
+    'Total' as Market_Country,
+    SUM(current_count),
+    SUM(previous_week_count),
+    SUM(previous_year_count),
+    CASE 
+        WHEN SUM(previous_week_count) = 0 THEN NULL
+        ELSE ROUND(((SUM(current_count) - SUM(previous_week_count))::FLOAT / SUM(previous_week_count) * 100), 2)
+    END,
+    CASE 
+        WHEN SUM(previous_year_count) = 0 THEN NULL
+        ELSE ROUND(((SUM(current_count) - SUM(previous_year_count))::FLOAT / SUM(previous_year_count) * 100), 2)
+    END,
+    2 as sort_order
+FROM base_results
+ORDER BY sort_order, Market_Country;
+
+-- Second Tab: EU Breakdown only
+SELECT 
+    Market_Country,
+    current_count,
+    previous_week_count,
+    previous_year_count,
+    ""WoW"",
+    ""YoY"",
+    0 as sort_order
+FROM base_results
+WHERE Market_Country IN ('DE', 'ES', 'FR', 'IT', 'UK')
+UNION ALL
+SELECT 
+    Market_Country,
+    current_count,
+    previous_week_count,
+    previous_year_count,
+    ""WoW"",
+    ""YoY"",
+    1 as sort_order
+FROM eu_results
+ORDER BY sort_order, Market_Country;
+
+
+----------------------------------------
+
+
+
+https://loop.cloud.microsoft/join/eyJnIjoiVDBSVFVIeGhiV0Y2YjI1blluSXVjMmhoY21Wd2IybHVkQzVqYjIxOFlpRnBSbU5WVlhoMllWWnJZWGxMVWtzME1GUXdVVk5wYW14dE5uUkhjbTF3U0d0TGNsTmpORlpqUmxKdFdXRk1hMDlsVlUxbVZGa3lSbTlmVlhVellUSktmREF4Tmt0WlRsSkdObGRHVWtsUVJqSldVRkZPUlVsU1VVeEVNbGhCTkRjMFNsQT0iLCJpIjoieGhqS1lJaUUwQ3M1WnduYXBIZmdBIiwidyI6IlQwUlRVSHhoYldGNmIyNW5Zbkl1YzJoaGNtVndiMmx1ZEM1amIyMThZaUZwUm1OVlZYaDJZVlpyWVhsTFVrczBNRlF3VVZOcGFteHROblJIY20xd1NHdExjbE5qTkZaalJsSnRXV0ZNYTA5bFZVMW1WRmt5Um05ZlZYVXpZVEpLZkRBeE5rdFpUbEpHTmxkR1VrbFFSakpXVUZGT1JVbFNVVXhFTWxoQk5EYzBTbEE9In0%3D
+
+MCS callout
+    Before PreWBR on Wednesday
+    WW callout is more shallow if doing for each 
+    For WW, if within 2-3%, then it's flat
+Data
+    All data coming from WBR slides for consistency
+    Secondary callout from Adobe
+        https://experience.adobe.com/#/@amazonservicesllc/so:amazon3d/analytics/spa/index.html?lazyLoadPhpSession=1#/workspace/edit/697915299b200021de1e2e66
+        Filter for AB customers only (Existing)
+        Either Performance by site or performance by channel
+        Easiest way: Unique visitors
+            Drag Last week over, then compare to prior week
+            Traffic WBR attribution only looks at Free Search
+            If registration flow drove, then look at SSR  to see if thank you page went up because of increase to regs
+            call out percentages rather than volume
+        If more detail needed:
+            break channel by entry page
+            hp/login is brand-driven
+            outbound campaign refmarker if reftag needed
+            
+
+Marketing & Business Prime WBR doc (
+
+Surge in customer traffic isn't really a thing
+
+",,,,,,Today,Important,,2026-03-02,,,,,,,,,,0:00
+"1213372318722386",2026-02-24,,2026-02-24,Hubble data: country level WoW and YoY,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213372318746696",2026-02-24,,2026-02-24,Keep structure the same,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213372318746704",2026-02-24,,2026-02-24,Investigation: Adobe Analytics tracker ,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213372318746712",2026-02-24,,2026-02-24,https://experience.adobe.com/#/@amazonservicesllc/so:amazon3d/analytics/spa/index.html#/workspace/edit/6807a07a805621bb97f81179,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213372318746720",2026-02-24,,2026-02-24,Page-level callouts,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213423443782842",2026-02-24,,2026-02-24,"Group chat: Jill (agency point of contact) not full visibility, but should be able to help with surface-level insights. ",,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213423443782850",2026-02-24,,2026-02-24,Jill's Looker: https://lookerstudio.google.com/u/0/reporting/bb9dac4e-88b9-4881-9e02-e46aa10c7280/page/p_fug10zj9vc,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213423443782858",2026-02-24,,2026-02-24,SQL for FS,,,,,,,,,Free Search Callout for Yoav in PreWBR (due Monday EOD),,,,,,,,,,,,,,,,,
+"1213359572628675",2026-02-19,2026-03-05,2026-03-05,Come prepared: Bi-weekly with Adi to brainstorm usable AI,Do later,Richard Williams,prichwil@amazon.com,,2026-03-04,,,,,,,,Today,Not Important,,2026-03-03,,,,,,,,,,24:00
+"1213342554588800",2026-02-18,2026-03-04,2026-03-04,ie%CCP calc - insert MX spend/regs before 9th,Do later,Richard Williams,prichwil@amazon.com,,2026-03-06,,https://quip-amazon.com/bqogATBbIY91/FY26-SSR-IECCP-CPA-Registration#temp:C:BJE26065d11889b4e8cbf95de072,,,,,,Urgent,Important,,2026-03-05,,,,,,,,,,24:00
+"1213342548660777",2026-02-18,2026-02-25,2026-02-25,Mondays - Write into EU SSR Acq Asana,Do later,Richard Williams,prichwil@amazon.com,,2026-02-23,,,,,,,,Today,Important,,,,Important/Non Urgent,,,,,,,,
+"1213316930583133",2026-02-17,,2026-03-11,Monthly: Individual Goals update,Do later,Richard Williams,prichwil@amazon.com,,2026-03-10,,,,,,,,Today,Important,,2026-03-09,Engine Room (Excel and Google ads),,,,,,,,,24:00
+"1213316921832483",2026-02-17,2026-02-25,2026-02-25,Weekly Reporting - Global WBR sheet,Do later,Richard Williams,prichwil@amazon.com,,2026-02-23,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+MX - https://quip-amazon.com/K9OYA9mXm7DU/AB-MX-Paid-Search-Sync
+
+AU - https://quip-amazon.com/84SxAbCaICKb/AU-PS-Weekly-Performance","Paid App,AU,MX",,,,,Today,Important,,,,Important/Urgent,,,,,,Done,Done,
+"1213316935758201",2026-02-17,,2026-02-17,AU - Team and Harjeet quip ,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213279443482487",2026-02-17,,2026-02-17,MX - Team and Carlos quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213279443482495",2026-02-17,,2026-02-17,App,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213279443482503",2026-02-17,,2026-02-17,Tests: Weekly meeting quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213234513361834",2026-02-11,2026-02-18,2026-02-18,Mondays - Write into EU SSR Acq Asana,Do later,Richard Williams,prichwil@amazon.com,,2026-02-16,,,,,,,,Today,Important,,,,Important/Non Urgent,,,,,,,,
+"1213191151872213",2026-02-10,2026-02-17,2026-02-17,Weekly Reporting - Global WBR sheet,Do later,Richard Williams,prichwil@amazon.com,,2026-02-16,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+MX - https://quip-amazon.com/K9OYA9mXm7DU/AB-MX-Paid-Search-Sync
+
+AU - https://quip-amazon.com/84SxAbCaICKb/AU-PS-Weekly-Performance","Paid App,AU,MX",,,,,Today,Important,,,,Important/Urgent,,,,,,Done,Done,
+"1213220322262780",2026-02-10,,2026-02-10,AU - Team and Harjeet quip ,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213191151969645",2026-02-10,,2026-02-10,MX - Team and Carlos quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213191151969653",2026-02-10,,2026-02-10,App,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213191151969661",2026-02-10,,2026-02-10,Tests: Weekly meeting quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213114617521055",2026-02-05,2026-03-04,2026-03-04,Update Kingpin for MX,Do later,Richard Williams,prichwil@amazon.com,,2026-03-03,,https://kingpin.amazon.com/#/items/1121196,MX,,,,,Today,Important,,2026-03-02,,Important/Non Urgent,,,,,,Done,,24:00
+"1213125837803607",2026-02-04,2026-02-11,2026-02-11,Mondays - Write into EU SSR Acq Asana,Do later,Richard Williams,prichwil@amazon.com,,2026-02-09,,,,,,,,Today,Important,,,,Important/Non Urgent,,,,,,,,
+"1213104051003156",2026-02-03,2026-02-10,2026-02-10,Weekly Reporting - Global WBR sheet,Do later,Richard Williams,prichwil@amazon.com,,2026-02-09,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+MX - https://quip-amazon.com/K9OYA9mXm7DU/AB-MX-Paid-Search-Sync
+
+AU - https://quip-amazon.com/84SxAbCaICKb/AU-PS-Weekly-Performance","Paid App,AU,MX",,,,,Today,Important,,,,Important/Urgent,,,,,,Done,Done,
+"1213074024933965",2026-02-03,,2026-02-03,AU - Team and Harjeet quip ,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213074024933973",2026-02-03,,2026-02-03,MX - Team and Carlos quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213074024933981",2026-02-03,,2026-02-03,App,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213074024933989",2026-02-03,,2026-02-03,Tests: Weekly meeting quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213103376544900",2026-02-03,2026-03-05,2026-03-05,Monthly - Confirm actual budgets,Do later,Richard Williams,prichwil@amazon.com,,2026-03-01,,,Paid App,,,,,Urgent,Important,,2026-03-01,,Important/Non Urgent,,,,,,,,0:00
+"1213004778335961",2026-01-27,2026-02-04,2026-02-04,Mondays - Write into EU SSR Acq Asana,Do later,Richard Williams,prichwil@amazon.com,,2026-02-02,,,,,,,,Today,Important,,,,Important/Non Urgent,,,,,,,,
+"1213003588351015",2026-01-27,2026-02-03,2026-02-03,Weekly Reporting - Global WBR sheet,Do later,Richard Williams,prichwil@amazon.com,,2026-02-02,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+MX - https://quip-amazon.com/K9OYA9mXm7DU/AB-MX-Paid-Search-Sync
+
+AU - https://quip-amazon.com/84SxAbCaICKb/AU-PS-Weekly-Performance","Paid App,AU,MX",,,,,Today,Important,,,,Important/Urgent,,,,,,Done,Done,
+"1213003591070505",2026-01-27,,2026-01-27,AU - Team and Harjeet quip ,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213003594500969",2026-01-27,,2026-01-27,MX - Team and Carlos quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213003594500977",2026-01-27,,2026-01-27,App,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1213003594500985",2026-01-27,,2026-01-27,Tests: Weekly meeting quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1212894593151995",2026-01-20,2026-02-02,2026-02-02,Mondays - Write into EU SSR Acq Asana,Do later,Richard Williams,prichwil@amazon.com,,2026-01-26,,,,,,,,,Important,,,,,,,,,,,,
+"1212891150761358",2026-01-20,2026-02-02,2026-02-02,Weekly Reporting - Global WBR sheet,Do later,Richard Williams,prichwil@amazon.com,,2026-01-26,,"Team Weekly - https://quip-amazon.com/CSJ3AkvLITsA/Global-Acq-WBR-Callouts
+
+MX - https://quip-amazon.com/K9OYA9mXm7DU/AB-MX-Paid-Search-Sync
+
+AU - https://quip-amazon.com/84SxAbCaICKb/AU-PS-Weekly-Performance","Paid App,AU,MX",,,,,,N/A,,,,,,,,,,Done,Done,
+"1212891150764865",2026-01-20,,2026-01-20,AU - Team and Harjeet quip ,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1212891150764873",2026-01-20,,2026-01-20,MX - Team and Carlos quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1212891150764881",2026-01-20,,2026-01-20,App,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1212891150764889",2026-01-20,,2026-01-20,Tests: Weekly meeting quip,,,,,,,,,Weekly Reporting - Global WBR sheet,,,,,,,,,,,,,,,,,
+"1212867643480344",2026-01-19,,2026-03-11,Bi-monthly Flash,Do later,Richard Williams,prichwil@amazon.com,,2026-03-19,,,"Paid App,AU,MX",,,,,Not urgent,,,2026-03-18,Sweep (Low-friction),Important/Non Urgent,,,,,,,,24:00

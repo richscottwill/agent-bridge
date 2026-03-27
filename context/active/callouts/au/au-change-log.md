@@ -1,0 +1,16 @@
+# AU Change Log (2026)
+
+Source: AB - Change Log - MX_AU.csv
+
+| Date | Platform | Cluster | Campaign   | Change                                                                                                                     | Owner   | Note                                           |
+| ---- | -------- | ------- | ---------- | -------------------------------------------------------------------------------------------------------------------------- | ------- | ---------------------------------------------- |
+| 1/12 | Google   | All     | All        | Brand: increased budget $50/day (already underspending), and increased max CPC from 10 to 12. NB: Increased spend $350/day | Richard |                                                |
+| 1/16 | Google   | Brand   | Brand Plus | Implemented Adobe bid strategy; same weekly budget pacing                                                                  | Richard | Test                                           |
+| 1/20 | Google   | All     | All        | Implemented Adobe bid strategy across the board; same weekly budget pacing as week 3, and converted to Daily budget        | Richard | Test                                           |
+| 1/21 | Google   | Brand   | Brand Core | Added negatives of terms we don't target within Exact match ad groups (mostly "seller account" terms)                      | Richard |                                                |
+| 2/3  | Google   | NB      | All        | Decreased overall NB budget by 300/day (~6% cut) to align with Feb budget                                                  | Richard |                                                |
+| 2/10 | Google   | NB      | All        | Changed to CPT bidding, and lowered max CPC for both NB portfolios to $20                                                  | Richard | Roughly 40/60 split for NB budget and regs     |
+| 2/23 | Google   | NB      | P-V        | Enabled previously paused NB campaigns at $10/day budget (to be optimized by NB portfolio and reviewed with AU team)       | Richard |                                                |
+| 2/23 | Google   | NB      | All        | Transitioned all to CPT portfolio, and aligned with Lena to target $140 CPA (likely to increase budgets)                   | Richard |                                                |
+| 3/5  | Google   | All     | All        | Negatives added to better filter search queries to correct keywords                                                        | Richard | Specific to Generic campaigns and Brand Phrase |
+| 3/5  | Google   | All     | All        | Adjusted portfolios for efficiency (Lowered max CPCs, minimum budgets)                                                     | Richard |                                                |

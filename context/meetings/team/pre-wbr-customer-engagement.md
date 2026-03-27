@@ -1,0 +1,26 @@
+# Pre-WBR Customer Engagement
+
+## Metadata
+- Cadence: Weekly
+- Attendees: Richard Williams, Dwayne Palmer, Kristine Weber, Kate Rundell
+- Hedy Topic: None dedicated
+- Hedy Sessions: 0
+- Quip Doc: [WW AB Traffic Marketing Pre-WBR Callouts](https://quip-amazon.com/MMgBAzDrlVou)
+- Outlook Series: Pre-WBR Customer Engagement
+
+## Context
+Weekly prep meeting for the WBR (Weekly Business Review). Richard covers MCS WBR callouts when Dwayne is out. Kate Rundell attends — this is a visibility opportunity with the L8 Director. Callouts are written in the Quip doc and reviewed in this meeting.
+
+Key dynamic: Kate is present. Richard should come prepared with data-forward callouts. This meeting feeds directly into the WBR which is leadership-visible.
+
+## Latest Session
+No Hedy or Amazon Meeting Summary data captured yet. Context from current.md and memory.md.
+
+## Running Themes
+- WBR callout preparation (AU, MX markets for Richard)
+- Cross-team coordination with MCS
+- Kate visibility opportunity
+
+## Open Items
+- [ ] Maintain WBR callout quality and timeliness
+- [ ] Cover for Dwayne when needed

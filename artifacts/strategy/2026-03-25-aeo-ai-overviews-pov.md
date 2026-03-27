@@ -1,0 +1,82 @@
+---
+title: AEO / AI Overviews POV — Amazon Business Paid Search
+status: DRAFT
+audience: amazon-internal
+level: 4
+owner: Richard Williams
+created: 2026-03-25
+updated: 2026-03-25
+update-trigger: Google AI Overview rollout changes, new zero-click data, Mike Babich input
+---
+
+# AEO / AI Overviews POV — Amazon Business Paid Search
+
+---
+
+## The Shift
+
+Google AI Overviews and zero-click search are changing how business buyers find solutions. Instead of clicking through to a landing page, users increasingly get answers directly in the SERP. This has implications for AB's paid search strategy.
+
+## What We Know
+
+- AI Overviews appear on a growing share of commercial queries. The exact rate for AB keywords is unknown — measuring this is Action #1 below.
+- When AI Overviews appear, organic CTR drops — the magnitude for AB keywords is not yet measured. Establishing this baseline is part of the measurement plan.
+- Paid search ads still appear above AI Overviews (for now)
+- Google is experimenting with ads within AI Overviews
+- B2B queries are less affected than consumer queries currently, but the trend is accelerating
+
+## Impact on AB Paid Search
+
+### Short-term (2026)
+- Minimal direct impact — B2B queries are less affected
+- Paid ads still get top placement
+- Monitor: impression share changes, CTR trends on NB keywords
+
+### Medium-term (2027)
+- AI Overviews will expand to more B2B queries
+- Risk: NB keyword volume erosion as users get answers without clicking
+- Opportunity: if AB content is cited in AI Overviews, it's free brand exposure
+
+### Long-term (2028+)
+- Fundamental shift in acquisition model
+- Paid search may become less about keywords, more about audience signals
+- Content strategy becomes critical — AB needs to be the answer, not just the ad
+
+## Recommended Actions
+
+1. Monitor: Track AI Overview appearance rate on our top 50 NB keywords monthly
+2. Content: Ensure AB landing pages are structured for AI extraction (clear answers, structured data, FAQ sections)
+3. Test: When Google offers ads-in-AI-Overviews, be an early tester
+4. Diversify: Invest in channels less affected by zero-click (email, lifecycle, direct)
+5. Measure: Build a "zero-click impact" metric — track queries where AI Overviews appear vs our CTR/CVR
+
+Actions 1-2 are free. Action 3 requires Google partnership. Action 4 is already happening (F90, email). Action 5 is the measurement gap — without it, we're guessing.
+
+## What This Means for the Team
+
+This is not a crisis. It's a slow shift. But the teams that prepare now will have an advantage. AB's position is actually strong — we have deep product catalog data, customer reviews, and business-specific content that AI models want to cite.
+
+The risk is doing nothing and waking up in 2028 with a keyword strategy built for 2020.
+
+## Open Questions
+- [ ] What % of our current NB keywords trigger AI Overviews?
+- [ ] Are any AB pages being cited in AI Overviews today?
+- [ ] What's Google's roadmap for ads within AI Overviews? (Ask Mike Babich)
+- [ ] How are other Amazon teams (Retail, Flex) approaching this?
+
+Owners and deadlines: Q1-Q2 (AI Overview appearance rate): Richard to pull from Google Ads data. Q3 (Google roadmap): Mike Babich at next Google sync. Q4 (other Amazon teams): Richard to check with Shruti (Flex) and Meddy (Retail).
+
+
+## Sources
+- AEO educational session attended 3/10 — source: ~/shared/context/body/eyes.md → What's Coming
+- Level 4 (Zero-Click Future) definition — source: ~/shared/context/body/brain.md → Five Levels → Level 4
+- AI Overview appearance rates and CTR impact — source: general industry knowledge (needs primary data validation from Google/Mike Babich). Based on public announcements from Google (I/O 2025), industry analyst reports, and observed patterns in Amazon's internal tooling.
+- Mike Babich as Google contact — source: ~/shared/context/body/spine.md → Key People
+- AEO POV as 30-day challenge item — source: ~/shared/context/active/rw-tracker.md → 30-Day Challenge
+
+<!-- AGENT_CONTEXT
+machine_summary: "Point of view on AI Overviews / AEO impact on AB Paid Search. Short-term impact is minimal for B2B, but medium-term (2027) risk is NB keyword volume erosion. Five recommended actions from free monitoring to measurement infrastructure. Statistics are directional — AB-specific data needed."
+key_entities: ["AI Overviews", "AEO", "zero-click search", "Google", "Mike Babich", "NB keywords", "F90", "AB landing pages"]
+action_verbs: ["monitor", "structure", "test", "diversify", "measure"]
+update_triggers: ["Google AI Overview rollout changes", "new zero-click data from Google Ads", "Mike Babich input", "AB pages cited in AI Overviews"]
+-->

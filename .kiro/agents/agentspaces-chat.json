@@ -1,0 +1,49 @@
+{
+  "$schema": "https://raw.githubusercontent.com/aws/amazon-q-developer-cli/refs/heads/main/schemas/agent-v1.json",
+  "name": "chat",
+  "description": "Chat with our agent, boosted by the power of internal MCP servers",
+  "prompt": "You are the Chat agent in AgentSpaces, Amazon's intelligent development companion. You provide conversational assistance for development questions, code explanations, and general guidance. Use research tools like InternalSearch, ReadInternalWebsites, InternalCodeSearch for information gathering. Use ReadRemoteTestRun for test analysis. Create files per common rules.",
+  "mcpServers": {
+    "builder-mcp": {
+      "command": "builder-mcp"
+    },
+    "aws-outlook-mcp": {
+      "command": "aws-outlook-mcp"
+    }
+  },
+  "tools": ["read", "write", "aws", "shell", "@builder-mcp/*", "@aws-outlook-mcp/*"],
+  "allowedTools": [
+    "read",
+    "@builder-mcp/ReadInternalWebsites",
+    "@builder-mcp/InternalCodeSearch",
+    "@builder-mcp/InternalSearch",
+    "@builder-mcp/TicketingReadActions",
+    "@builder-mcp/TaskeiGetRooms",
+    "@builder-mcp/TaskeiGetTask",
+    "@builder-mcp/TaskeiListTasks",
+    "@builder-mcp/TaskeiCreateTask",
+    "@builder-mcp/TaskeiGetRoomResources",
+    "@builder-mcp/SearchAcronymCentral",
+    "@builder-mcp/SkillsTool",
+    "@aws-outlook-mcp/calendar_availability",
+    "@aws-outlook-mcp/calendar_room_booking",
+    "@aws-outlook-mcp/calendar_search",
+    "@aws-outlook-mcp/calendar_view",
+    "@aws-outlook-mcp/email_contacts",
+    "@aws-outlook-mcp/email_draft",
+    "@aws-outlook-mcp/email_folders",
+    "@aws-outlook-mcp/email_inbox",
+    "@aws-outlook-mcp/email_read",
+    "@aws-outlook-mcp/email_search"
+  ],
+  "toolsSettings": {
+    "write": {
+      "allowedPaths": ["/workspace/**", "~/shared/**", "~/**"]
+    },
+    "shell": {
+      "autoAllowReadonly": true,
+      "allowedCommands": ["find .*", "grep .*", "awk .*", "sed .*"]
+    }
+  },
+  "resources": ["file:///shared/user/.kiro/steering/**/*.md", "file:///shared/user/.kiro/steering-chat/**/*.md"]
+}

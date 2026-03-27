@@ -1,0 +1,100 @@
+---
+title: Invoice & PO Process Guide
+status: DRAFT
+audience: amazon-internal
+level: N/A
+owner: Richard Williams
+created: 2026-03-25
+updated: 2026-03-25
+update-trigger: PO changes, new delegate assigned, process changes
+---
+
+# Invoice & PO Process Guide — AB Paid Search
+
+---
+
+## Purpose
+
+Document the end-to-end invoice/PO process so it can be delegated. Currently takes Richard 1-2 hours/week. Goal: reduce to <30 min/week or hand off entirely.
+
+## Google Ads Invoice Flow
+
+### Monthly Cycle
+1. Google generates invoice (1st-5th of following month)
+2. Invoice appears in Google Ads → Billing → Documents
+3. Download PDF
+4. Match to correct PO
+5. Submit via OFA (One Financial Approval) or AP system
+6. Follow up if not processed within 10 business days
+
+### PO Reference
+
+| Market | PO Number | Vendor | Notes |
+|--------|-----------|--------|-------|
+| AU | TBD | Google Australia | Not yet created. Action: Richard to raise with finance by 3/28. Lead time: 2+ weeks. |
+| MX | MS-20200908 | Google Mexico | — |
+| US (PAM) | TBD | Google LLC | Overdue 24 days. Action: escalation sent to finance. Follow up by 3/28 if no response. |
+| WW | 5LN2R - 5489247319 | Google Ireland Ltd | Covers multiple markets |
+
+The MX and WW POs are active. AU and US PAM are blockers — Richard cannot submit invoices for these markets until POs are created/renewed.
+
+### OFA Submission
+1. Go to OFA portal
+2. Select "Invoice Submission"
+3. Attach invoice PDF
+4. Enter PO number, amount, currency
+5. Add approver (finance contact)
+6. Submit
+
+## R&O (Revenue & Operations) Input
+
+### When
+- Per finance cycle (monthly or quarterly)
+- Finance sends email requesting input
+
+### What to Input
+- MTD actuals per market (from Google Ads)
+- Projected month-end spend (trailing average × remaining days)
+- Variance vs OP2 plan
+- Flags: markets trending >10% over/under
+
+### Where
+- Finance spreadsheet (shared via email or SharePoint — no direct access)
+- Richard inputs manually, confirms with finance
+
+## Common Issues
+
+| Issue | Fix |
+|-------|-----|
+| Invoice doesn't match PO amount | Check currency conversion, contact Google billing |
+| PO expired or insufficient | Raise new PO (lead time: 2+ weeks) |
+| OFA rejection | Check PO number, amount, approver. Resubmit. |
+| Invoice for wrong entity | Verify Google entity (LLC vs Ireland vs Australia) matches PO |
+
+The most common issue is PO expiration. Lead time for a new PO is 2+ weeks. Track PO expiry dates proactively.
+
+## Delegation Checklist
+
+To hand this off to someone:
+- [ ] Share this guide
+- [ ] Share PO numbers and Google Ads billing access
+- [ ] Introduce to finance contact
+- [ ] Walk through one invoice cycle together
+- [ ] Set up monthly reminder for invoice check
+- [ ] Richard reviews first 2 months, then fully hands off
+
+
+## Sources
+- PO numbers (MX PO MS-20200908, Google Ireland Ltd 5LN2R) — source: ~/shared/context/body/hands.md → Admin tasks + spine.md references
+- Invoice as recurring time trap (4+ weeks) — source: ~/shared/context/active/rw-tracker.md → Mediocrity Patterns
+- PAM US PO 24d overdue — source: ~/shared/context/body/hands.md → P2 Overdue Items
+- Delegation to Carlos VOID — source: ~/shared/context/active/current.md → MX Paid Search
+- Level 3 delegation goal — source: ~/shared/context/body/brain.md → Five Levels → Level 3
+- Device.md tool factory #6 — source: ~/shared/context/body/device.md → Tool Factory → Invoice routing workflow
+
+<!-- AGENT_CONTEXT
+machine_summary: "End-to-end invoice and PO process guide for AB Paid Search Google Ads billing. Covers monthly invoice flow, PO reference numbers per market, OFA submission steps, R&O budget input, and delegation checklist. AU and US PAM POs are currently blockers."
+key_entities: ["Google Ads invoicing", "OFA", "PO numbers", "R&O budget", "AU", "MX", "US PAM", "WW"]
+action_verbs: ["submit", "match", "download", "escalate", "delegate"]
+update_triggers: ["PO expiration or renewal", "new delegate assigned", "finance process changes", "new market PO created"]
+-->

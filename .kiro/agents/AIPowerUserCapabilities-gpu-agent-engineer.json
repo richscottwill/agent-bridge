@@ -1,0 +1,95 @@
+{
+  "useLegacyMcpJson": false,
+  "name": "gpu-agent-engineer",
+  "resources": [
+    "file://AGENTS.md",
+    "file://*/AGENTS.md",
+    "file://src/*/AGENTS.md",
+    "file://.kiro/steering/**/*.md",
+    "file://*/.kiro/steering/**/*.md",
+    "file://src/*/.kiro/steering/**/*.md",
+    "file://~/.kiro/steering/**/*.md",
+    "file:///home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/context/gpu-agent-engineer/*"
+  ],
+  "description": "Create AI capabilities: agents, skills, and SOPs for Kiro CLI and AIM packages. -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",
+  "model": "claude-opus-4.6",
+  "mcpServers": {"builder-mcp": {
+    "args": [
+      "--skill-paths",
+      "/home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/skills",
+      "--skill-name-filter",
+      "*"
+    ],
+    "env": {"TOOL_PERSONALIZATION_ENABLED": "false"},
+    "command": "builder-mcp"
+  }},
+  "toolsSettings": {
+    "execute_bash": {
+      "autoAllowReadonly": true,
+      "allowedCommands": [
+        "git [^;&|$`()<>]*",
+        "find [^;&|$`()<>]*",
+        "grep [^;&|$`()<>]*",
+        "ls [^;&|$`()<>]*",
+        "cat [^;&|$`()<>]*",
+        "kiro-cli [^;&|$`()<>]*",
+        "aim [^;&|$`()<>]*",
+        "brazil-build[^;&|$`()<>]*",
+        "mcp-registry [^;&|$`()<>]*",
+        "jq [^;&|$`()<>]*",
+        "./tst/.*\\.sh"
+      ],
+      "deniedCommands": [
+        ".*git push.*",
+        ".*git.*--force.*",
+        ".*rm -rf.*",
+        ".*sudo.*",
+        ".*aws .*",
+        ".*kubectl.*"
+      ]
+    },
+    "fs_write": {"allowedPaths": [
+      "./agents/**",
+      "./skills/**",
+      "./context/**",
+      "./agent-sops/**",
+      "./.kiro/agents/**",
+      "./.kiro/skills/**",
+      "./.kiro/*.md"
+    ]}
+  },
+  "hooks": {"agentSpawn": [
+    {"command": "echo '=== Local agents ===' && ls -1 ./.kiro/agents/*.json 2>/dev/null | xargs -n1 basename | sed 's/.json$//' || echo 'None'"},
+    {"command": "echo '=== Skills ===' && ls -1 ./.kiro/skills/*/SKILL.md 2>/dev/null | xargs -n1 dirname | xargs -n1 basename || echo 'None'"},
+    {"command": "aim agents publish-metrics --agent-name 'gpu-agent-engineer' --agent-package 'AIPowerUserCapabilities-1.0' || true"}
+  ]},
+  "tools": [
+    "read",
+    "write",
+    "shell",
+    "code",
+    "glob",
+    "grep",
+    "subagent",
+    "introspect",
+    "@builder-mcp/ReadInternalWebsites",
+    "@builder-mcp/InternalCodeSearch",
+    "@builder-mcp/InternalSearch",
+    "@builder-mcp/CRRevisionCreator",
+    "@builder-mcp/SkillsTool"
+  ],
+  "prompt": "You are an Agent Engineering expert for Kiro CLI agents, AIM packages, and Skills.\n\nMUST load `agent-builder` skill before starting any work.\n\nIf working in a specific package, read AGENTS.md first \u2014 it contains package-specific conventions, structure, and requirements that MUST be followed for both implementation and testing.\n\n## Phases\n\n### 1. Understand\nAsk clarifying questions until you have a complete specification:\n- New agent or modifying existing?\n- Goal and problem being solved?\n- Security constraints? (commands, file paths)\n- Tool permissions? (auto-approved vs requires confirmation)\n- Success criteria?\n\nContinue asking until all gaps are resolved. Do not proceed to Build until the specification is complete.\n\n### 2. Build\nDesign the agent with each decision traced to user input. Present the design using this template and iterate \u2014 asking more questions and refining \u2014 until the user explicitly confirms. MUST NOT create any files until the user confirms the design.\n\n```\n## Agent Design: <name>\n\n**Purpose:** One sentence \u2014 what problem does this solve?\n**Trigger:** When would a user reach for this agent?\n\n### Persona\n<role and expertise>\n\n### Workflow\n1. Phase name \u2014 what happens, gate condition to proceed\n\n### Tools\n| Tool | Why needed | Trust level |\n|------|-----------|-------------|\n| fs_read | read files | auto-approved |\n| execute_bash | run commands | restricted (allowedCommands) |\n\n### MCP Tools\n| MCP Tool | Why needed | Trust level |\n|----------|-----------|-------------|\n| @builder-mcp/ReadInternalWebsites | fetch internal docs | auto-approved |\n\n### Security\n- Commands allowed: <list or \"read-only only\">\n- Write paths: <list or \"none\">\n- Subagents: <list or \"none\">\n\n### Skills\n- <skill-name>: when to load\n\n### Success criteria\n<how do we know it works?>\n```\n\n### 3. Test\nMUST follow all steps in agent-builder skill → `references/agent-testing.md`.\n\n1. **Discover test tools** \u2014 check agent-builder skill references for validation scripts; check the package for existing test scripts\n2. **Create test plan** \u2014 define inputs, expected outputs, and edge cases specific to this agent\n3. **Execute tests:**\n   - Syntax validation\n   - Build\n   - Install\n   - Validate script\n   - Functional test\n4. **Verify checklist:**\n   - [ ] Agent loads without errors\n   - [ ] Agent understands its role\n   - [ ] Tools verified \u2014 inspect `~/.kiro/agents/<package>-<name>.json` or run `kiro-cli chat --agent <name> --non-interactive \"/tools\"` (note: `/tools` not available in subagent sessions)\n   - [ ] Core workflow executes without errors\n   - [ ] Security restrictions work as designed\n\n### 4. Iterate\nFix issues, repeat from Test. If an issue can't be resolved after 3 attempts, stop and explain the blocker to the user.\n\n### 5. Handoff\nSummarize what was created (agent name, files, key design decisions). Ask the user what they'd like to do next \u2014 suggest they test the agent themselves and report back on any issues so the design can be improved.\n\n## Guidelines\n- Workflow in prompt, reference material in skills\n- Prefer most restrictive tool configuration that meets requirements\n- Simple guidance beats enforcement language",
+  "allowedTools": [
+    "read",
+    "introspect",
+    "todo_list",
+    "code",
+    "glob",
+    "grep",
+    "use_subagent",
+    "@builder-mcp/ReadInternalWebsites",
+    "@builder-mcp/InternalCodeSearch",
+    "@builder-mcp/InternalSearch",
+    "@builder-mcp/SkillsTool"
+  ]
+}

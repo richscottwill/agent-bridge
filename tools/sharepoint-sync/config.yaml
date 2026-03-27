@@ -1,0 +1,27 @@
+# ~/shared/tools/sharepoint-sync/config.yaml
+# Wiki-SharePoint Sync Configuration
+#
+# OneDrive sync mode: the tool writes .docx files to a local folder
+# that OneDrive syncs to SharePoint automatically.
+
+sharepoint:
+  # Path to your OneDrive-synced SharePoint document library folder.
+  # This is where .docx files will be written. OneDrive handles the
+  # upload to SharePoint.
+  #
+  # Example paths:
+  #   macOS:  ~/Library/CloudStorage/OneDrive-Amazon/SharePoint/WikiSync
+  #   Linux:  ~/OneDrive/SharePoint/WikiSync
+  #   Or use a local staging folder: ~/shared/tools/sharepoint-sync/output
+  output_path: "~/shared/tools/sharepoint-sync/output"
+
+sync:
+  # Only "directory" mode is supported with OneDrive sync.
+  # Site pages require API access (Power Automate or Graph API).
+  mode: "directory"
+  eligible_statuses:
+    - REVIEW
+    - FINAL
+  articles_path: "~/shared/artifacts/"
+  wiki_index_path: "~/shared/context/wiki/wiki-index.md"
+  manifest_path: "~/shared/tools/sharepoint-sync/.sync-manifest.json"

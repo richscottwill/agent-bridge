@@ -1,0 +1,613 @@
+WK,Date,MKT,Platform,Cluster,Category/Campaign,Change Note,Reference,Impact,Owner,Note
+,3/20/2024,MX,Google,,Brand Broad,Budget decreased from $150 to $50,,,Sabryna,Lower Brand CPA
+,3/20/2024,MX,Google,,Negative Brand KWs,Added 64 keywords to Non-Core Brand Keywordes_AB_MX list,,,Sabryna,Lower CPA for Brand and AMZ related campaigns
+,3/20/2024,MX,Google,,Crafts,Budget decreased from $100 to $50,,,Sabryna,Lower NB CPA
+,3/20/2024,MX,Google,,Medical,Budget decreased from $100 to $75,,,Sabryna,Lower NB CPA
+,3/20/2024,MX,Google,,Janitorial,Budget decreased from $100 to $75,,,Sabryna,Lower NB CPA
+,3/20/2024,MX,Google,,Electronics,Budget decreased from $100 to $75,,,Sabryna,Lower NB CPA
+,3/20/2024,MX,Google,,Office,Budget decreased from $150 to $100,,,Sabryna,Lower NB CPA
+,3/20/2024,MX,Google,,Shops,Budget decreased from $150 to $100,,,Sabryna,Lower NB CPA
+,3/20/2024,MX,Google,,Apparel,Budget decreased from $100 to $75,,,Sabryna,Lower NB CPA
+,3/20/2024,MX,Google,,Generic,Budget decreased from $100 to $75,,,Sabryna,Lower NB CPA
+,3/21/2024,MX,Google,,Generic AMZ,Budget increased from $150 to $250,,,Sabryna,Showing strong result in registrations so opening up budget
+,3/22/2024,MX,Google,,Janitorial,Budget increased from $75 to $150,,,Sabryna,Showing registrations so opening up budget
+,3/22/2024,MX,Google,,Food,Budget increased from $75 to $150,,,Sabryna,Showing registrations so opening up budget
+,3/22/2024,MX,Google,,Generic AMZ,Budget increased from $250 to $350,,,Sabryna,Need to increase daily spend pacing and this is a strong campaign
+,3/25/2024,MX,Google,,Apparel,Budget increased from $75 to $200,,,Sabryna,Need to increase daily spend pacing and showing some registrations
+,3/25/2024,MX,Google,,Food,Budget increased from $150 to $250,,,Sabryna,Need to increase daily spend pacing and showing some registrations
+,3/25/2024,MX,Google,,Generic,Budget increased from $75 to $200,,,Sabryna,Need to increase daily spend pacing and showing some registrations
+,3/25/2024,MX,Google,,Brand - Exact,Increasing Bid limit from $20 to $40,,,Sabryna,Bid setting limited warning from Google saying 82% of impressions are limited by your max. bid limit
+,3/28/2024,MX,Google,,Generic,Budget increased from $75 to $300,,,Sabryna,Need to increase daily spend pacing through EOM and want to get more testing out of this category
+,3/28/2024,MX,Google,,Generic AMZ,Budget decreased from $350 to $250,,,Sabryna,CPA getting a little high and we're seeing enough registrations here to start to gauge where this should live
+,3/28/2024,MX,Google,,Competitors,paused [mercado libre] ,,,Sabryna,to allow other keywords in that campaign to be tested more since [mercado libre] taking majority of the budget
+,3/28/2024,MX,Google,,Food,Budget increased from $250 to $350,,,Sabryna,Need to increase daily spend pacing and showing 2nd most registrations for NB
+,3/28/2024,MX,Google,,Generic,"Paused Clothing related ad groups (Clothing_Exact, Clothing_Broad, Clothing_Work_Exact, Clothing_Work_Phrase)",,,Sabryna,Keywords covered under Apparel campaign - don't want to take from generic terms
+,3/28/2024,MX,Google,,Brand Exact,"Added [amazon para empresas], [business amazon], [amazon negocios], [amazon empresarial], [amazon for business], [amazon para negocios]",,,Sabryna,in Brand search queries and all relevant to the Brand terms
+,3/28/2024,MX,Google,,Generic AMZ,Paused amazon cuenta de empresa and amazon para empresas broad match,,,Sabryna,keywords were duplicates of Brand Broad
+,3/29/2024,MX,Google,,Electronics,Increased budget from $75 to $150,,,Sabryna,need to increase daily budget for month and this campaign has more room for testing
+,3/29/2024,MX,Google,,Competitors,Increase budget from $50 to $100,,,Sabryna,need to increase daily budget for month and want to retest this campaign with [mercado libre] now paused since it was taking all the budget previously
+,3/29/2024,MX,Google,,Janitorial,Increased budget from $75 to $125,,,Sabryna,need to increase daily budget for month and this campaign has more room for testing
+,3/29/2024,MX,Google,,Apparel,Budget increased from $200 to $300,,,Sabryna,Need to increase daily spend pacing and showing some registrations
+,4/1/2024,MX,Google,,Generic,Increased Budget from $300 to $800,,,Sabryna,Strong performance after increase in budget so lifting higher
+,4/2/2024,MX,Google,,Food,Decreased Budget from $350 to $150,,,Sabryna,Decreasing as it's not as efficient and give more to Generic campaign
+,4/2/2024,MX,Google,,Apparel,Budget decreased from $300 to $150,,,Sabryna,Decreasing as it's not as efficient and give more to Generic campaign
+,4/3/2024,MX,Google,,Competitors,"Paused ""mercado libre"", and adding only wholesale relevant terms to Exact and Phrase Mercado Libre ad groups",,,Sabryna,Taking most of traffic from the campaign inefficiently
+,4/3/2024,MX,Google,,Generic AMZ,"Paused [amazon empresa], [amazon para empresa] - Paused ad group Generic_Enterprises_Broad and Generic_Enterprises_Exact
+",,,Sabryna,Moved keyword to Brand campaign
+,4/3/2024,MX,Google,,Brand Exact,"Added [amazon empresa], [amazon para empresa]",,,Sabryna,Was under Generic AMZ previously now shifted as they are better categorized as Brand
+,4/9/2024,MX,Google,,Competitors,Decreased Budget from $100 to $50,,,Sabryna,Still very low performance
+,4/9/2024,MX,Google,,Brand Exact,Increased Budget from $200 to $220,,,Sabryna,Limited by Budget
+,4/10/2024,MX,Google,,Janitorial,Decreased Budget from $125 to $75,,,Sabryna,Need to cut back spend for daily pacing
+,4/11/2024,MX,Google,,Generic,Decreased Budget from $800 to $600,,,Sabryna,Need to cut back spend for daily pacing
+,4/11/2024,MX,Google,,Apparel,Decreased Budget from $150 to $75,,,Sabryna,Need to cut back spend for daily pacing; not showing strong performance
+,4/11/2024,MX,Google,,Food,Decreased Budget from $150 to $50,,,Sabryna,Need to cut back spend for daily pacing; not showing strong performance
+,4/11/2024,MX,Google,,Electronics,Decreased Budget from $150 to $50,,,Sabryna,Need to cut back spend for daily pacing; not showing strong performance
+,4/11/2024,MX,Google,,Medical,Decreased Budget from $150 to $50,,,Sabryna,Need to cut back spend for daily pacing; not showing strong performance
+,4/11/2024,MX,Google,,Office,Increased Budget from $50 to $75,,,Sabryna,Lower NB CPA than others
+,4/15/2024,MX,Google,,Generic AMZ,Increased Budget from $275 to $400,,,Sabryna,Need to increase daily spend pacing
+,4/15/2024,MX,Google,,Invoice AMZ Broad,Increased Budget from $50 to $100,,,Sabryna,Had a couple of regs and worth testing
+,4/15/2024,MX,Google,,Brand - Broad,Paused Pay_Broad Ad Group,,,Sabryna,Majority of queries were irrelevant to AB and lowering our CTR and adding unnecessary spend
+,4/16/2024,MX,Google,,Generic AMZ,Changed bid strategy from Maximize clicks to TCPA with $108.33 goal,,,Sabryna,Recommended by Google - This campaign also saw increases to CPA WoW with lower Regs so worth testing
+,4/16/2024,MX,Google,,Shops,Decreased budget from $75 to $50,,,Sabryna,High CPA
+,4/16/2024,MX,Google,,Celebrations,Decreased budget from $50 to $25,,,Sabryna,No Regs and need to reduce daily pacing
+,4/16/2024,MX,Google,,Apparel,Decreased budget from $75 to $50,,,Sabryna,Adjusting to get on track for daily pacing
+,4/17/2024,MX,Google,,Invoice AMZ Broad,Decreased Budget from $100 to $50,,,Sabryna,Need to decrease daily spend pacing
+,4/17/2024,MX,Google,,MX Brand Broad,Decreased budget from $50 to $25,,,Sabryna,Inefficient and need to improve Brand segment CPC
+,4/18/2024,MX,Google,,Generic AMZ,Increased budget from $400 to $600,,,Sabryna,Have some room in daily spend and this campaign is limited by budget but has lots of regs
+,4/23/2024,MX,Google,,Janitorial,Decreased Budget from $75 to $50,,,Sabryna,Needed to decrease budget for daily spend pacing
+,4/23/2024,MX,Google,,Beauty,Decreased Budget from $75 to $50,,,Sabryna,Needed to decrease budget for daily spend pacing
+,4/23/2024,MX,Google,,Office,Decreased Budget from $75 to $50,,,Sabryna,Needed to decrease budget for daily spend pacing
+,4/23/2024,MX,Google,,Generic,Decreased Budget from $600 to $400,,,Sabryna,Needed to decrease budget for daily spend pacing
+,4/25/2024,MX,Google,,Brand Exact,Raising Bid Limit from $40 to $60; increasing budget from $220 to $300,,,Sabryna,Pedidos.com bidding on our terms and our Brand only at 46% impression share this week
+,4/26/2024,MX,Google,,Automotive,Decreased Budget from $50 to $25,,,Sabryna,Need to cut back NB spend with Brand spend increasing with competitors. Campaign has generated no regs to date so minimal impact.
+,4/26/2024,MX,Google,,Hospitality,Decreased Budget from $50 to $25,,,Sabryna,Need to cut back NB spend with Brand spend increasing with competitors. Campaign has generated no regs to date so minimal impact.
+,4/26/2024,MX,Google,,Product AMZ,Decreased Budget from $50 to $25,,,Sabryna,Need to cut back NB spend with Brand spend increasing with competitors. Campaign has generated no regs to date so minimal impact.
+,4/26/2024,MX,Google,,Vertical AMZ,Decreased Budget from $50 to $25,,,Sabryna,Need to cut back NB spend with Brand spend increasing with competitors. Campaign has generated no regs to date so minimal impact.
+,4/26/2024,MX,Google,,Industrial,Decreased Budget from $50 to $25,,,Sabryna,Need to cut back NB spend with Brand spend increasing with competitors. Campaign has generated no regs to date so minimal impact.
+,4/27/2024,MX,Google,,Generic,Increased Budget from $400 to $800,,,Sabryna,Need to increase daily spend
+,4/27/2024,MX,Google,,Janitorial,Increased Budget from $50 to $150,,,Sabryna,Need to increase daily spend
+,4/27/2024,MX,Google,,Generic AMZ,Added 15 negative keywords to Non-Core Brand KW Negative list,,,Sabryna,Broad KWs attaching to terms we shouldn't be bidding on
+,4/27/2024,MX,Google,,Apparel,Increased budget from $50 to $100,,,Sabryna,Need to increase daily spend
+,4/28/2024,MX,Google,,Generic AMZ,Reduced budget from $600 to $500,,,Sabryna,Need to pull back just a tad to not go over Monthly budget
+,5/1/2024,MX,Google,,Office,Increased budget from $50 to $300,,,Sabryna,Starting experiment with this campaign adding testing budget
+,5/1/2024,MX,Google,,Janitorial,Increased budget from $50 to $300,,,Sabryna,Starting experiment with this campaign adding testing budget
+,5/1/2024,MX,Google,,Generic AMZ,Changed bid strategy from TCPA to Maximize Clicks,,,Sabryna,For the new approved way of bidding
+,5/1/2024,MX,Google,,Food,Increased budget from $50 to $100,,,Sabryna,Increasing daily spend for new monthly budget
+,5/1/2024,MX,Google,,Beauty,Increased budget from $50 to $100,,,Sabryna,Increasing daily spend for new monthly budget
+,5/1/2024,MX,Google,,Invoice AMZ,Increased budget from $50 to $100,,,Sabryna,Increasing daily spend for new monthly budget
+,5/1/2024,MX,Google,,Shops,Increased budget from $50 to $100,,,Sabryna,Increasing daily spend for new monthly budget
+,5/1/2024,MX,Google,,Office and Janitorial,Experiement launched for category specific LPs,,,Sabryna,next iteration of NB test
+,5/2/2024,MX,Google,,Electronics,Increased budget from $50 to $100,,,Sabryna,Increasing daily spend for new monthly budget
+,5/2/2024,MX,Google,,Invoice AMZ Broad,Increased budget from $50 to $100,,,Sabryna,Increasing daily spend for new monthly budget
+,5/5/2024,MX,Google,,Brand,Increased budget from $300 to $440,,,Sabryna,Budget Constrants
+,5/15/2024,MX,Google,,Generic AMZ,Paused Generic_Bulk_Broad and Generic_Suppliers_Broad ad group and keywords,,,Sabryna,interfering too much with Amazon terms
+,5/15/2024,MX,Google,,Celebrations AMZ,Paused campaign,,,Sabryna,Little to no traffic since launch
+,5/15/2024,MX,Google,,Competitors,Lowered budget from $50 to $25,,,Sabryna,No regs last 2 weeks
+,5/15/2024,MX,Google,,Electronics,Lowered budget from $100 to $50,,,Sabryna,No regs last 2 weeks
+,5/20/2024,MX,Google,,Office,Increased budget from $300 to $500,,,Sabryna,room to increase daily budget and putting towards A/B test campaigns and showing good results
+,5/20/2024,MX,Google,,Janitorial,Lowered budget from $300 to $150,,,Sabryna,High CPA and need to bring down NB CPA
+,5/20/2024,MX,Google,,Apparel,Lowered budget from $100 to $50,,,Sabryna,need to bring down NB CPA and this campaign is more inefficent with no regs in last week
+,5/20/2024,MX,Google,,Shops,Increased budget from $100 to $150,,,Sabryna,$87 CPA strong performance
+,5/28/2024,MX,Google,,Generic AMZ,Lowered budget from $500 to $250,,,Sabryna,Bringing down NB efficiency
+,5/28/2024,MX,Google,,Generic AMZ,mayorista amazon broad to phrase,,,Sabryna,Too many amazon queries matching that we should not be matching to
+,5/28/2024,MX,Google,,Invoice AMZ Broad,Increased budget from $100 to $150,,,Sabryna,Balancing out daily spend - good CPA last FW
+,5/28/2024,MX,Google,,Apparel,Increased budget from $50 to $100,,,Sabryna,Balancing out daily spend - good CPA last FW
+,5/28/2024,MX,Google,,Office,Lowered budget from $500 to $400,,,Sabryna,Effiency performance decreased WoW with previous increase
+,5/28/2024,MX,Google,,Generic,Increased budget from $800 to $1200,,,Sabryna,Balancing out daily spend - good CPA last FW
+,6/12/2024,MX,Google,,Generic,Decreased budget from $1080 to $700,,,Sabryna,CPA running high
+,6/12/2024,MX,Google,,Office,Lowered budget from $400 to $700,,,Sabryna,"Good CPA, need to increase overall spend"
+,6/14/2024,MX,Google,,Invoice AMZ,Increased budget from $100 to $600,,,Sabryna,"Good CPA, need to increase overall spend"
+,6/14/2024,MX,Google,,Invoice AMZ Broad,Increased budget from $150 to $400,,,Sabryna,"Good CPA, need to increase overall spend"
+,6/14/2024,MX,Google,,Office,Ended A/B LP test and applied specific landing page,,,Sabryna,Has been seeing much better CVR over 5 weeks and we need to improve CVR/CPA
+,6/14/2024,MX,Google,,Brand Broad,Increased budget from $25 to $80,,,Sabryna,Limited by Budget
+,6/17/2024,MX,Google,,Generic,Increased budget from $700 to $800,,,Sabryna,"Daily Budget too low, need to increase spend"
+,6/17/2024,MX,Google,,Medical,Increased budget from $50 to $250,,,Sabryna,"Daily Budget too low, need to increase spend"
+,6/17/2024,MX,Google,,Food,Increased budget from $100 to $300,,,Sabryna,"Daily Budget too low, need to increase spend"
+,6/17/2024,MX,Google,,Generic AMZ,Increased budget from $250 to $700,,,Sabryna,"Daily Budget too low, need to increase spend"
+,6/17/2024,MX,Google,,Brand Broad,Decreased budget from $80 to $40,,,Sabryna,
+,6/18/2024,MX,Google,,Generic,paused [proveedores],,,Sabryna,Spending a ton with little to no regs
+,6/18/2024,MX,Google,,Office,Lowered budget from $700 to $400,,,Sabryna,Can scale back
+,6/19/2024,MX,Google,,Generic,Lowered budget from $800 to $700,,,Sabryna,Need to get daily spend in line
+,6/19/2024,MX,Google,,Brand Broad,Paused campaign,,,Sabryna,Only 2 regs in last 30 days with $430 CPA - Search Terms are straying a bit into more random queries
+,6/19/2024,MX,Google,,Invoice AMZ Broad,Lowered budget from $400 to $100,,,Sabryna,More inefficient in first half of week with previous week increases
+,6/19/2024,MX,Google,,Invoice AMZ,Lowered budget from $600 to $100,,,Sabryna,More inefficient in first half of week with previous week increases
+,6/20/2024,MX,Google,,Generic,paused [proveedor],,,Sabryna,spend increasing in the same way as [proveedores]
+,6/21/2024,MX,Google,,Pets,Paused campaign,,,Sabryna,Only 119 impressions 3/13-6/21. Will retest at later date
+,6/24/2024,MX,Google,,Generic,Increased budget from $700 to $1500,,,Sabryna,Need to increase daily spend; optimizations should have made this more efficient
+,6/24/2024,MX,Google,,Generic AMZ,Increased budget from $700 to $1200,,,Sabryna,Need to increase daily spend; optimizations should have made this more efficient
+,6/24/2024,MX,Google,,Generic,added [proveedores] as negative to campaign,,,Sabryna,Keeps hiking up spend on other related keywords
+,6/24/2024,MX,Google,,Brand Exact,Switched from MCS to Reg Start LP,,,Sabryna,based on A/B test results
+,6/25/2024,MX,Google,,Generic,added [mayoreo],,,Sabryna,popular search term
+,6/26/2024,MX,Google,,Generic AMZ,Decreased budget from $1200 to $1000,,,Sabryna,need to lower daily spend pacing
+,6/26/2024,MX,Google,,Medical,Decreased budget from $250 to $150,,,Sabryna,"need to lower daily spend pacing, low regs this week"
+,6/26/2024,MX,Google,,Food,Decreased budget from $300 to $150,,,Sabryna,"need to lower daily spend pacing, low regs this week"
+,6/27/2024,MX,Google,,Janitorial,Decreased budget from $150 to $50,,,Sabryna,need to lower NB CPA
+,6/27/2024,MX,Google,,Food,Decreased budget from $150 to $50,,,Sabryna,need to lower NB CPA
+,6/27/2024,MX,Google,,Medical,Decreased budget from $150 to $75,,,Sabryna,need to lower NB CPA
+,6/27/2024,MX,Google,,Vertical AMZ,Paused campaign,,,Sabryna,need to lower NB CPA and no regs since launch
+,6/27/2024,MX,Google,,Product AMZ,Paused campaign,,,Sabryna,need to lower NB CPA and only 1 regs since launch with $3.6K spend
+,6/27/2024,MX,Google,,Celebrations,Paused campaign,,,Sabryna,need to lower NB CPA and only 1 regs since launch with $3K spend
+,6/27/2024,MX,Google,,Materials,Decreased budget from $50 to $25,,,Sabryna,need to lower NB CPA
+,6/28/2024,MX,Google,,Shops,Decreased budget from $150 to $75,,,Sabryna,need to lower NB CPA
+,6/28/2024,MX,Google,,Beauty,Decreased budget from $100 to $50,,,Sabryna,need to lower NB CPA
+,6/28/2024,MX,Google,,Generic AMZ,Decreased budget from $1000 to $800,,,Sabryna,need to lower NB CPA
+,6/28/2024,MX,Google,,Office,Increased budget from $400 to $600,,,Sabryna,"Need to increase spend, lower than $200 CPA for the week"
+,7/15/2024,MX,Google,,Shops,Increased budget from $75 to $200,,,Sabryna,Need to increase spend
+,7/18/2024,MX,Google,,Crafts,Increased budget from $50 to $200,,,Sabryna,"Testing if ""fan"" related terms pick up volume"
+,7/22/2024,MX,Google,,Generic,"Lowered budget from $1,500 to $1,200",,,Sabryna,
+,7/25/2024,MX,Google,,Crafts,Lowered budget from $200 to $100,,,Sabryna,
+,7/25/2024,MX,Google,,Shops,Lowered budget from $200 to $100,,,Sabryna,
+,7/29/2024,MX,Google,,Office,Increased budget from $800 to $1200,,,Sabryna,Need to increase daily speed
+,7/29/2024,MX,Google,,Generic AMZ,Increased budget from $1000 to $1400,,,Sabryna,Need to increase daily speed
+,7/31/2024,MX,Google,,Brand,Increased bd limit ifrom $60 to $90,,,Sabryna,97% of impressions are limited by your max. bid limit
+,8/1/2024,MX,Google,,Food and Hospitality,Swapped LPs from https://business.amazon.com.mx/es/find-solutions/simplify-buying/selection to https://business.amazon.com.mx/es/find-solutions/simplify-buying/selection/breakroom1,,,Sabryna,Best practice
+,8/1/2024,MX,Google,,Food and Hospitality,Increased budget from $50 to $150,,,Sabryna,Testing
+,8/1/2024,MX,Google,,Generic,Lowered budget from $1600 to $700,,,Sabryna,Lowering daily spend for new month pacing
+,8/1/2024,MX,Google,,Generic AMZ,Lowered budget from $1400 to $800,,,Sabryna,Lowering daily spend for new month pacing
+,8/1/2024,MX,Google,,Office,Lowered budget from $1200 to $450,,,Sabryna,Lowering daily spend for new month pacing
+,8/8/2024,MX,Google,,Generic,"Added phrase match ""mayorista"" and ""al por mayor"", pausing mayorista broad",,,Sabryna,Testing if pausing this KW will allow more regs more efficiently with more budget allowed for other KWs as mayorista takes a large allocation currently
+,8/8/2024,MX,Google,,Generic,Paused [proveedores de productos] - $828 CPA from 3/13-8/3,,,Sabryna,Need to improve NB efficiency
+,8/8/2024,MX,Google,,Apparel,"Added KWs in exact and phrase:  
+[ropa mayoreo]
+[ropa por mayoreo]
+[ropa por mayoreo para vender]
+[comprar ropa para vender]
+[ropa para vender por mayoreo]
+[ropa al mayoreo]
+[playeras mayoreo]",,,Sabryna,
+,8/8/2024,MX,Google,,Office,"Pausing escritorios oficina and sillas oficina ergonómicas broad match
+
+Added KWs in exact and phrase:
+escritorios para oficina
+escritorio para computadora
+escritorio ejecutivo
+escritorio para oficina
+muebles para oficina
+escritorios de madera
+[silla de oficina]
+[sillas para oficina]
+[sillas para oficina economicas]
+[sillas ergonomicas para oficina]
+[silla ergonomica oficina]",,,Sabryna,Seeing if adding the search terms and pausing broad match keyword will improve efficiency
+,8/12/2024,MX,Google,,Competitors,Paused,,,Sabryna,High CPA
+,8/14/2024,MX,Google,,Food,Increased budget from $150 to $220,,,Sabryna,Good performance with new LP
+,8/14/2024,MX,Google,,Office,Decreased budget from $450 to $150,,,Sabryna,Optimizing for NB CPA
+,8/26/2024,MX,Google,,Hospitality,Paused campaign,,,Sabryna,Performance did not improve with new LP
+,8/26/2024,MX,Google,,Office,Paused all Broad keywords,,,Sabryna,Testing if budget can perform more efficiently and effectively without broad taking majority spend
+,8/26/2024,MX,Google,,Apparel,Updated LP for Apparel with https://business.amazon.com.mx/es/find-solutions/simplify-buying/selection/ropa-de-trabajo,,,Sabryna,Best practice LP
+36,9/3/2024,MX,Google,NB,MX - Generic AMZ,Budget $600 to $570,,,Stacey,
+36,9/3/2024,MX,Google,NB,MX - Food,Budget $400 to $350,,,Stacey,
+36,9/3/2024,MX,Google,NB,MX - Apparel,Budget $300 to $360,,,Stacey,
+36,9/3/2024,MX,Google,NB,MX - Office,Budget $250 to $170,,,Stacey,
+36,9/3/2024,MX,Google,NB,MX - Shops,Budget $250 to $150,,,Stacey,
+36,9/3/2024,MX,Google,NB,MX - Crafts,Budget $100 to $50,,,Stacey,
+37,9/10/2024,CA,ADB,PB,CA - PB AVT - [G],Budget $1.1K to $1.2K,,,Stacey,
+37,9/10/2024,CA,ADB,Brand,CA - Brand Plus - [B],Budget $80 to $70,,,Stacey,
+37,9/10/2024,MX,Google,NB,MX - Apparel,Budget $360 to $320,40,pull back $300 to pacing Q3 budget,Stacey,
+37,9/10/2024,MX,Google,NB,MX - Automotive,pause as CPA YTD over $700,25,,Stacey,
+37,9/10/2024,MX,Google,NB,MX - Janitorial,budget $200 to $150,50,,Stacey,
+37,9/10/2024,MX,Google,NB,MX - Medical,budget $75 to $60,15,,Stacey,
+37,9/10/2024,MX,Google,NB,MX - Shops,budget $150 to $130,20,,Stacey,
+37,9/10/2024,MX,Google,NB,MX - Food,Budget $350 to $300,50,,Stacey,
+37,9/10/2024,MX,Google,NB,MX - Office,budget $170 to $130,20,,Stacey,
+37,9/10/2024,MX,Google,NB,MX - Generic AMZ,Budget $570 to $500,70,,Stacey,
+38,9/19/2024,MX,Google,NB,MX - Generic,"Budget $1.2k to $1.1k, daily needs to be at $3.5k for Sep budget $112,744",,,Katy,
+38,9/19/2024,MX,Google,NB,MX - Food,"Budget $300 to $200, daily needs to be at $3.5k for Sep budget $112,744",,,Katy,
+38,9/19/2024,MX,Google,NB,MX - Janitorial,"Budget $150 to $120, daily needs to be at $3.5k for Sep budget $112,744",,,Katy,
+39,9/23/2024,MX,Google,NB,MX - Generic,"Budget $1.1k to $1.2k, daily needs to be at $3958",,,Katy,
+39,9/24/2024,MX,Google,NB,MX - Apparel,"Budget $320 to $420, aiming to spend $4k per day",,,Katy,
+39,9/24/2024,MX,Google,NB,MX - Apparel,"Budget $50 to $75, aiming to spend $4k per day",,,Katy,
+,9/24/2024,MX,Google,NB,MX - Invoice AMZ Broad,"Budget $150 to $180, aiming to spend $4k per day",,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Apparel,Budget increased from $420 to $450,,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Beauty,Budget increased from $75 to $80,,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Electronics,Budget increased from $50 to $100,,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Generic,Budget increased from $1.2k to $1.5k,,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Invoice AMZ,Budget increased from $250 to $400,,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget increased from $180 to $300,,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Janitorial,Budget increased from $120 to $200,,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Materials,Budget increased from $25 to $50,,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Shops,Budget increased from $130 to $200,,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Food,Budget increased from $200 to $250,,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Industrial,Budget increased from $25 to $50,,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Generic,Budget increased from $1.5k to $1650,,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Food,Budget increased from $250 to $350,,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Invoice AMZ,Budget increased from $400 to $550,,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget increased from $300 to $350,,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Janitorial,Budget increased from $200 to $220,,,Katy,
+40,10/1/2024,MX,Google,NB,MX - Medical,Budget increased from $60 to $100,,,Katy,
+40,10/7/2024,MX,Google,NB,MX - Invoice AMZ,Budget cut from $550 to $250,,,Stacey,daily trend $7K > $5.5K daily spend plan
+40,10/7/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget cut from $350 to $250,,,Stacey,
+40,10/7/2024,MX,Google,NB,MX - Food,Budget cut from $350 to $200,,,Stacey,
+41,10/10/2024,MX,Google,NB,MX - Generic,Budget increased from $1650 to $1750 as daily spend is at $5k and need to at $5.5k,,,Katy,
+41,10/10/2024,MX,Google,NB,MX - Electronics,Budget increased from $100 to $150 as daily spend is at $5k and need to at $5.5k,,,Katy,
+41,10/11/2024,MX,Google,NB,MX - Invoice AMZ,Budget increased from $250 to $300,,,Katy,
+41,10/11/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget increased from $250 to $300,,,Katy,
+42,10/14/2024,MX,Google,NB,MX - PPE,Campaign enabled,,,Katy,
+42,10/14/2024,MX,Google,NB,All,"New ad variation added, labeled '10.10 New variation', 2219 ads",,,Katy,
+42,10/15/2024,MX,Google,NB,MX - Generic,Budget $1750 cut to $1450 as CPA too high,,,Katy,
+42,10/15/2024,MX,Google,NB,MX - Invoice AMZ,Budget $300 to $350,,,Katy,
+42,10/15/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget $300 to $350,,,Katy,
+42,10/15/2024,MX,Google,NB,MX - Food,Budget $200 to $250,,,Katy,
+42,10/15/2024,MX,Google,NB,MX - Apparel,Budget $450 to $550,,,Katy,
+42,10/15/2024,MX,Google,NB,MX - Beauty,Budget $80 to $100,,,Katy,
+42,10/15/2024,MX,Google,NB,MX - Industrial,Budget $50 to $100,,,Katy,
+42,10/15/2024,MX,Google,NB,MX - Materials,Budget $50 to $100,,,Katy,
+42,10/15/2024,MX,Google,NB,MX - PPE,Budget $100 to $150,,,Katy,
+42,10/16/2024,MX,Google,NB,MX - Invoice AMZ,Budget $350 to $380,,,Katy,
+42,10/16/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget $350 to $380,,,Katy,
+42,10/17/2024,MX,Google,NB,MX - Invoice AMZ,Budget $380 to $410,,,Katy,
+42,10/17/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget $380 to $410,,,Katy,
+42,10/18/2024,MX,Google,NB,MX - Invoice AMZ,Budget $410 to $440,,,Katy,
+42,10/18/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget $410 to $440,,,Katy,
+43,10/21/2024,MX,Google,NB,MX - Apparel,Budget $550 to $600,,,Katy,
+43,10/21/2024,MX,Google,NB,MX - Generic,Budget $1450 to $1600,,,Katy,
+43,10/21/2024,MX,Google,NB,MX - Generic AMZ,Budget $500 to $650,,,Katy,
+43,10/21/2024,MX,Google,NB,MX - Invoice AMZ,Budget $440 to $500,,,Katy,
+43,10/21/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget $440 to $470,,,Katy,
+43,10/21/2024,MX,Google,NB,MX - Office,Budget $150 to $250,,,Katy,
+43,10/24/2024,MX,Google,NB,MX - Generic,Budget $1600 to $1650,,,Katy,
+43,10/24/2024,MX,Google,NB,MX - Invoice AMZ,Budget $500 to $600,,,Katy,
+43,10/24/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget $470 to $520,,,Katy,
+43,10/24/2024,MX,Google,NB,"MX - Brand Exact, MX - Generic, MX - Generic AMZ, MX - Invoice AMZ, MX - Invoice AMZ Broad",Added 369 new RSA to Brand Exact+ Inovice+Generic campaigns labeled '10.24.24 New Variation',,,Katy,
+44,10/28/2024,MX,Google,NB,MX - Apparel,Budget increase from $600 to $700,,,Katy,
+44,10/28/2024,MX,Google,NB,MX - Beauty,Budget - from $100 to $70,,,Katy,
+44,10/28/2024,MX,Google,NB,MX - Electronics,Budget - from $150 to $75,,,Katy,
+44,10/28/2024,MX,Google,NB,MX - Generic,Budget - from $1650 to $1600,,,Katy,
+44,10/28/2024,MX,Google,NB,MX - Generic AMZ,Budget + from $650 to $750,,,Katy,
+44,10/28/2024,MX,Google,NB,MX - Industrial,Budget - from $100 to $50,,,Katy,
+44,10/28/2024,MX,Google,NB,MX - Invoice AMZ,Budget - from $600 to $500,,,Katy,
+44,10/28/2024,MX,Google,NB,MX - Janitorial,Budget - from $220 to $200,,,Katy,
+44,10/28/2024,MX,Google,NB,MX - Office,Budget + from $250 to $280,,,Katy,
+45,11/4/2024,MX,Google,NB,MX - Apparel,Budget - from $700 to $650,,,Katy,
+45,11/4/2024,MX,Google,NB,MX - Beauty,Budget - from $70 to $50,,,Katy,
+45,11/4/2024,MX,Google,NB,MX - Generic,Budget - from $1600 to $1550,,,Katy,
+45,11/4/2024,MX,Google,NB,MX - Generic AMZ,Budget - from $950 to $900,,,Katy,
+45,11/4/2024,MX,Google,NB,MX - Invoice AMZ,Budget - from $500 to $400,,,Katy,
+45,11/4/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget - from $520 to $420,,,Katy,
+45,11/4/2024,MX,Google,NB,MX - Janitorial,Budget - from $200 to $170,,,Katy,
+45,11/4/2024,MX,Google,NB,MX - Office,Budget - from $280 to $250,,,Katy,
+45,11/4/2024,MX,Google,NB,MX - Shops,Budget - from $200 to $170,,,Katy,
+46,11/11/2024,MX,Google,NB,MX - PPE,Budget lowered from $150 to $100 as CPA too high at $998,,,Katy,
+47,11/18/2024,MX,Google,NB,MX - PPE,Budget lowered from $100 to $80 as WK46 still no reg,,,Katy,
+47,11/18/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget increased from $420 to $450,,,Katy,
+47,11/20/2024,MX,Google,NB,MX - Invoice AMZ,Budget - from $400 to $430,,,Katy,
+47,11/20/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget - from $450 to $470,,,Katy,
+47,11/20/2024,MX,Google,NB,MX - Crafts,Budget - from $50 to $70,,,Katy,
+47,11/21/2024,MX,Google,NB,MX - Invoice AMZ,Budget - from $430 to $460,,,Katy,
+47,11/21/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget - from $470 to $500,,,Katy,
+47,11/21/2024,MX,Google,NB,MX - Food,Budget - from $250 to $280,,,Katy,
+48,11/26/2024,MX,Google,NB,MX - PPE,Budget - from $80 to $50 as no regs,,,Katy,
+48,11/26/2024,MX,Google,NB,MX - PPE,Added ad variation without discount,,,Katy,
+48,11/26/2024,MX,Google,NB,NB,"Paused all NB ad variation with discount, 2583 ads",,,Katy,
+48,11/26/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget - from $500 to $550,,,Katy,
+48,11/26/2024,MX,Google,NB,MX - Office,Budget - from $250 to $280,,,Katy,
+49,12/2/2024,MX,Google,NB,MX - PPE,Paused PPE as no regs for last 4 weeks,,,Katy,
+49,12/2/2024,MX,Google,NB,MX - Apparel,Budget $650 to $550,,,Katy,
+49,12/2/2024,MX,Google,NB,MX - Crafts,Budget $70 to $50,,,Katy,
+49,12/2/2024,MX,Google,NB,MX - Electronics,Budget $75 to $50,,,Katy,
+49,12/2/2024,MX,Google,NB,MX - Generic,Budget $1550 to $1350,,,Katy,
+49,12/2/2024,MX,Google,NB,MX - Invoice AMZ,Budget $460 to $400,,,Katy,
+49,12/2/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget $600 to $550,,,Katy,
+49,12/2/2024,MX,Google,NB,MX - Janitorial,Budget $170 to $100,,,Katy,
+49,12/2/2024,MX,Google,NB,MX - Materials,Budget $100 to $50,,,Katy,
+49,12/2/2024,MX,Google,NB,MX - Medical,Budget $100 to $80,,,Katy,
+49,12/2/2024,MX,Google,NB,MX - Office,Budget $280 to $250,,,Katy,
+49,12/2/2024,MX,Google,NB,MX - Shops,Budget $170 to $150,,,Katy,
+49,12/3/2024,MX,Google,NB,MX - Apparel,Budget $550 to $500,,,Katy,
+49,12/3/2024,MX,Google,NB,MX - Generic,Budget $1350 to $1300,,,Katy,
+49,12/3/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget $550 to $500,,,Katy,
+49,12/3/2024,MX,Google,NB,MX - Medical,Budget $80 to $50,,,Katy,
+49,12/3/2024,MX,Google,NB,MX - Office,Budget $250 to $220,,,Katy,
+49,12/3/2024,MX,Google,NB,MX - Beauty,169 ads and 1260 KWs updated from https://business.amazon.com.mx/es/find-solutions/simplify-buying/selection to https://business.amazon.com.mx/es/find-solutions/simplify-buying/selection/belleza-cuidado-del-cabello,,,Katy,
+50,12/9/2024,MX,Google,NB,MX - Apparel,Budget $500 to $400,,,Katy,
+50,12/9/2024,MX,Google,NB,MX - Generic,Budget $1.3k to $1.2k,,,Katy,
+50,12/9/2024,MX,Google,NB,MX - Office,Budget $220 to $180,,,Katy,
+50,12/9/2024,MX,Google,NB,MX - Shops,Budget $150 to $100,,,Katy,
+50,12/10/2024,MX,Google,NB,MX - Industrial,Paused due to low YTD regs of 13,,,Katy,
+50,12/10/2024,MX,Google,NB,MX - Materials,Paused due to low YTD regs of 20,,,Katy,
+50,12/10/2024,MX,Google,NB,MX - Generic AMZ,Budget lowered from $900 to $800,,,Katy,
+50,12/13/2024,MX,Google,Both,All,Added callout 'Facturación simplifica' and '30% en primera compra' on account level and pause 'Facturas con IVA en Grupo' on campaign level,,,Katy,
+50,12/13/2024,MX,Google,Both,All,"Added sitelink 'Regístrate sin costo' new 'Prime Duo, sin costo' and 'Soluciones para empresas' on campaign level. Paused old 'Prime Duo, sin costo' and 'Soluciones para empresas'. ",,,Katy,
+51,12/16/2024,MX,Google,NB,MX - Apparel,Budget lowered from $400 to $280,,,Katy,
+51,12/16/2024,MX,Google,NB,MX - Food,Budget lowered from $280 to $230,,,Katy,
+51,12/16/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget lowered from $400 to $300,,,Katy,
+51,12/18/2024,MX,Google,NB,,"Added new ad variation for 2,262 NB ads labeled ' 12.18.24 Revised Copy'",,,Katy,
+51,12/18/2024,MX,Google,Brand,,Added 5 new ads labeld '12.18.24 New Brand Variation (No Discount)',,,Katy,
+51,12/18/2024,MX,Google,Brand,,"Changed 5 existing ads labeld '12.18.24 Update with Discount Message' (Limited 3 RSA so can't add new one, chose to update this one as less history with similar CTR)",,,Katy,
+51,12/20/2024,MX,Google,NB,,"Paused 24 KWs with no regs with spend >$300 OR 1 reg with spend>$500 and CPA>$500, labeled '12.20.24 Paused'",,,Katy,
+52,12/26/2024,MX,Google,NB,MX - Generic AMZ,Budget lowered from $1.2kto $1k,,,Katy,
+52,12/26/2024,MX,Google,NB,MX - Apparel,Budget lowered from $280 to $250,,,Katy,
+52,12/27/2024,MX,Google,NB,MX - Generic AMZ,Budget $1k to $1.2k,,,Katy,
+52,12/27/2024,MX,Google,NB,MX - Invoice AMZ,Budget $400 to $500,,,Katy,
+52,12/27/2024,MX,Google,NB,MX - Invoice AMZ Broad,Budget $300 to $400,,,Katy,
+52,12/27/2024,MX,Google,NB,MX - Apparel,Budget $250 to $300,,,Katy,
+52,12/27/2024,MX,Google,NB,MX - Office,Budget $180 to $200,,,Katy,
+1,1/3/2025,MX,Google,NB,"MX - Generic AMZ, MX - Generic, MX - Office, and MX - Apparel",Added a Maximum CPC bid limit of $10 to campaign.,,,Katy,
+2,1/6/2025,MX,Google,NB,MX - Generic,Budget $1.2k to $1.4k,,,Katy,
+2,1/6/2025,MX,Google,NB,MX - Generic AMZ,Budget $800 to $1k,,,Katy,
+2,1/6/2025,MX,Google,NB,MX - Invoice AMZ,Budget $500 to $700,,,Katy,
+2,1/6/2025,MX,Google,NB,MX - Invoice AMZ Broad,Budget $400 to $350,,,Katy,
+2,1/7/2025,MX,Google,NB,"MX - Medical, MX - Shops, MX - Janitorial, and MX - Crafts","Changed from Max click Google bidding to manual CPC to prep for CPT bidding, labeled 'MX NB CPT Campaigns'",,,Katy,
+2,1/8/2025,MX,Google,NB,MX - Generic AMZ,Budget from $1k to $1.1k,,,Katy,
+2,1/8/2025,MX,Google,NB,NB CPT portfolio,Budget from $300 to $400,,,Katy,
+2,1/10/2025,MX,Google,NB,NB CPT portfolio,Lowered the bid by 10% for 10951 KWs for Adobe to learn on auto bidding,,,Katy,
+3,1/13/2025,MX,Google,Brand,MX - Brand Exact,CPC cap lowered from $90 to $10 as long tail KWs are driving high CPC,,,Katy,
+3,1/13/2025,MX,Google,NB,MX - Invoice AMZ Broad,Add max CPC cap as $10,,,Katy,
+3,1/13/2025,MX,Google,NB,NB CPT,Portfolio budget from $400 to $300,,,Katy,
+3,1/13/2025,MX,Google,NB,MX - Apparel,Budget $300 to $200,,,Katy,
+3,1/13/2025,MX,Google,NB,MX - Generic AMZ,Budget $1.1k to $1k,,,Katy,
+3,1/13/2025,MX,Google,NB,MX - Invoice AMZ Broad,Budget $350 to $200,,,Katy,
+3,1/14/2025,MX,Google,NB,MX - Invoice AMZ,Add max CPC cap as $10,,,Katy,
+3,1/15/2025,MX,Google,NB,NB CPT portfolio,"Lowered the bid by 5% for 10951 KWs for Adobe to learn on auto bidding, 2nd time bid change",,,Katy,
+3,1/16/2025,MX,Google,NB,MX - Food,Changed from Max click to manual CPC to test mobile bid adjustment. Change 2953 KWs. Set campaign level mobile bid as -30%,,,Katy,
+4,1/21/2025,MX,Google,NB,MX - Invoice AMZ,CPC cap lowered from $10 to $7,,,Katy,
+4,1/21/2025,MX,Google,NB,MX - Generic,Budget $1.4k to $1.3k,,,Katy,
+4,1/21/2025,MX,Google,NB,MX - Generic AMZ,Budget $1k to $1.1k,,,Katy,
+4,1/21/2025,MX,Google,NB,MX - Invoice AMZ,Budget $700 to $800,,,Katy,
+4,1/21/2025,MX,Google,NB,MX - Invoice AMZ Broad,Budget $200 to $300,,,Katy,
+4,1/21/2025,MX,Google,NB,MX - Google - NB CPT,Switched from manual CPC to Daily spend bidding of $300 and check next week to see if it's ready for CPT,,,Katy,
+4,1/23/2025,MX,Google,NB,MX - Invoice AMZ Broad,"Switched campaign from Max Click bidding to manual CPC and mobile -30% at campaign level, budget $300",,,Katy,
+4,1/24/2025,MX,Google,NB,MX - Invoice AMZ Broad,Increased the bid by 10% as spend is low.,,,Katy,
+4,1/24/2025,MX,Google,NB,MX - Generic,Budget $1.3k to $1.4k,,,Katy,
+4,1/24/2025,MX,Google,NB,MX - Google - Food,"Change MX - Food from manual CPC to Daily spend Adobe bidding, budget $230",,,Katy,
+5,1/27/2025,MX,Google,NB,MX - Generic,Budget $1.4k to $1.6k,,,Katy,
+5,1/29/2025,MX,Google,Brand,MX - Brand Exact,Paused 5 ads labeled '12.18.24 New Brand Variation (No Discount)' as CTR and CVR are not as efficient as the old messaging,,,Katy,
+5,1/29/2025,MX,Google,NB,"MX - Generic, MX Generic AMZ, and MX - Apparel",Lowered CPC cap from $10 to $7,,,Katy,
+5,1/29/2025,MX,Google,NB,MX Invoice AMZ,Lowered CPC cap from $7 to $5,,,Katy,
+5,1/31/2025,MX,Google,NB,MX - Generic,"Reset CPC under manual bidding for 491 KWs fro 4hrs from 1pm to 5pm CT, check next week to see if resetting the CPC works on lowering the CPA. If not, changed campaign to manual CPC on Wed.",,,Katy,
+6,2/3/2025,MX,Google,NB,MX - Apparel,Bugdet $200 to $150,,,Katy,
+6,2/3/2025,MX,Google,NB,MX - Office,Bugdet $200 to $150,,,Katy,
+6,2/3/2025,MX,Google,NB,MX - Generic,Budget $1.6k to $1.5k,,,Katy,
+6,2/3/2025,MX,Google,NB,MX - Generic AMZ,Budget $1.1k to $1.3k,,,Katy,
+6,2/3/2025,MX,Google,NB,MX - Invoice AMZ,Budget $800 to $850,,,Katy,
+6,2/3/2025,MX,Google,NB,MX - Invoice AMZ Broad,Budget $300 to $500,,,Katy,
+6,2/3/2025,MX,ADB,NB,MX - Google - NB CPT,Budget $300 to $250,,,Katy,
+6,2/4/2025,MX,Google,NB,MX - Generic,Switched the campaign under Manual CPC with spend target as $1.5k,,,Katy,
+6,2/4/2025,MX,Google,NB,MX - Food,Combined this campaign to MX - Google - NB CPT portfolio. Portfolio budget updated to $480 to include the $230 Food budget,,,Katy,
+6,2/4/2025,MX,Google,NB,MX - Google - NB CPT,"Device level bid adjustment enabled, M set at min/max -30/0",,,Katy,
+6,2/5/2025,MX,Google,NB,MX - Generic,Increased bid by 5% on 491 KWs as campaign $100 underspend after switching to manual CPC,,,Katy,
+6,2/5/2025,MX,Google,NB,MX - Generic AMZ,Budget $1.3k to $1.45k,,,Katy,
+6,2/5/2025,MX,Google,NB,MX - Invoice AMZ Broad,Budget $500 to $650,,,Katy,
+7,2/11/2025,MX,Google,NB,MX - Google - Generic,Switched from manual CPC to optimzied daily budget at $1.5k,,,Katy,
+7,2/12/2025,MX,Google,NB,MX - Google - Generic,Mobile bid adj min/max change to -30/0,,,Katy,
+7,2/12/2025,MX,Google,NB,MX - Generic AMZ,"Switched the campaign from max click to Manual CPC for 673 enabled KWs with spend target as $1450, mobile bid-30% in Google",,,Katy,
+7,2/13/2025,MX,Google,NB,MX - Google - Generic,"Switched to CPT from Daily spend of $1.5k, CPT target $200 with min/max budget of 1450/1550 to target $1500.",,,Katy,
+7,2/13/2025,MX,Google,NB,MX - Generic AMZ,Switched from manual CPC to optimized Daily spend of $1450 with -30% mobile min adj,,,Katy,
+8,2/17/2025,MX,Google,NB,MX - Invoice AMZ Broad,Budget increased from $650 to $950,,,Katy,
+8,2/17/2025,MX,Google,NB,MX - Generic,Mobile bid adj min/max changed from -30/0 to -50/-20,,,Katy,
+8,2/17/2025,MX,Google,NB,MX - Google - Generic AMZ,Switched from Daily spend bidding of $1450 to CPT bidding target $200 with min/max of 1450/1500 to target $1450,,,Katy,
+8,2/18/2025,MX,Google,NB,MX - Invoice AMZ,CPC cap increased back from $5 to $7 as campaign status 'Bid setting limited' and the campaign is underspend,,,Katy,
+8,2/18/2025,MX,Google,"""bocinas profesionales"" keyword in MX - Electronics campaign
+",MX - Electronics,Keyword with over $3K spend with 0 regs based on whole year AMO data,,,Yun,
+8,2/19/2025,MX,Google,NB,MX - Google - Generic,"CPT to 180 from 200, mobile -80% to -70% from -50% to -20%, tablet -90% form 0; budget $1.4k to $1.5k by lowering $50 on min & max",,,Stacey,mobile spend 80% + with CPA over$480 for 14 wks 
+8,2/19/2025,MX,Google,NB,MX - Google - Generic AMZ,CPT to 180 from 200; budget $1.2K to $1.3K by lower 100 ,,,Stacey,
+8,2/19/2025,MX,Google,NB,MX - Invoice AMZ,mobile off as CPA over $350 for 4 wks; budget $850 to $750,,,Stacey,
+8,2/19/2025,MX,Google,NB,MX - Invoice AMZ Broad,"start adobe max conv bid with budget $500, mobilie -30% to 0%",,,Stacey,
+8,2/19/2025,MX,Google,NB,MX - Google - NB,Group all other NB campaigns to use ADB max conv bid; mobile -70% to -50%,,,Stacey,
+8,2/24/2025,MX,Google,NB,MX - Google - Generic,Budget $1400 to $1500 to $1.2K to $1.3K,,,Stacey,
+8,2/24/2025,MX,Google,NB,MX - Google - Generic AMZ,mobile -30% to -60% from -30% to 0%,,,Stacey,
+8,2/24/2025,MX,Google,NB,MX - Google - Invoice AMZ Broad,mobile -30% to -60% from -30% to 0%,,,Stacey,
+8,2/24/2025,MX,Google,NB,MX - Google - Invoice AMZ,change to AMO bid; mobile -60% to -30%; tablet -50%; kw bids adj made before to pull back on high CPA kws,,,Stacey,
+8,2/24/2025,MX,Google,NB,MX - Google - NB,mobile -80% to -60% from -70% to -50%,,,Stacey,
+8,2/24/2025,MX,Google,NB,MX - Google - Generic,manual intervetion to lower bids on high CPA kws,,,Stacey,
+8,2/24/2025,MX,Google,NB,MX - Google - Generic AMZ,Budget down $100 to $1.1K to $1.2K,,,Stacey,
+9,2/24/2025,MX,Google,NB,MX - Google - Generic,Budget $1400 to $1500 to $1.3K to $1.4K,,,Stacey,
+9,2/24/2025,MX,Google,NB,MX - Google - Generic AMZ,mobile -30% to -60% from -30% to 0%,,,Stacey,
+9,2/24/2025,MX,Google,NB,MX - Google - Invoice AMZ Broad,mobile -30% to -60% from -30% to 0%,,,Stacey,
+9,2/24/2025,MX,Google,NB,MX - Google - Invoice AMZ,change to AMO bid; mobile -60% to -30%; tablet -50%; kw bids adj made before to pull back on high CPA kws,,,Stacey,
+9,2/24/2025,MX,Google,NB,MX - Google - NB,mobile -80% to -60% from -70% to -50%,,,Stacey,
+9,2/24/2025,MX,Google,NB,MX - Google - Generic,manual intervetion to lower bids on high CPA kws,,,Stacey,
+9,2/24/2025,MX,Google,NB,MX - Google - Generic AMZ,Budget down $100 to $1.1K to $1.2K,,,Stacey,
+8,3/3/2025,MX,Google,NB,MX - Google - Generic,further down mobile bids -10%,,,Stacey,
+8,3/3/2025,MX,Google,NB,MX - Google - Generic AMZ,"CPT 160 from 180, desktop -10%",,,Stacey,
+8,3/3/2025,MX,Google,NB,MX - Google - Invoice AMZ,budget 600 to 700,,,Stacey,
+8,3/3/2025,MX,Google,NB,MX - Google - Invoice AMZ Broad,mobile -80% to -60%,,,Stacey,
+8,3/3/2025,MX,Google,NB,MX - Google - NB,"desktop -10%, mobile up +10% on min",,,Stacey,
+10,3/3/2025,MX,Google,NB,MX - Google - Generic,further down mobile bids -10%,,,Stacey,
+10,3/3/2025,MX,Google,NB,MX - Google - Generic AMZ,"CPT 160 from 180, desktop -10%",,,Stacey,
+10,3/3/2025,MX,Google,NB,MX - Google - Invoice AMZ,budget 600 to 700,,,Stacey,
+10,3/3/2025,MX,Google,NB,MX - Google - Invoice AMZ Broad,mobile -80% to -60%,,,Stacey,
+10,3/3/2025,MX,Google,NB,MX - Google - NB,"desktop -10%, mobile up +10% on min",,,Stacey,
+8,3/7/2025,MX,Google,NB,MX - Google - Invoice AMZ,add 49 kws label as SQR 030725 from SQR,,,Stacey,
+10,3/7/2025,MX,Google,NB,MX - Google - Invoice AMZ,add 49 kws label as 030725 from SQR,,,Stacey,
+11,3/10/2025,MX,Google,NB,MX - Google - Generic,"desktop lower -10% on min, CPT to $170 from $180",,,Stacey,
+11,3/10/2025,MX,Google,NB,MX - Google - NB,budget $900 to $1.1K; mobile min to -80% from -70%,,,Stacey,
+11,3/10/2025,MX,Google,NB,MX - Google - Invoice AMZ Broad,Budget $500 to $400,,,Stacey,
+11,3/12/2025,MX,Google,NB,MX - Generic AMZ,manually bid adj by lowering high cpa kw & bid up a bit on low cpa kw,,,Stacey,
+11,3/12/2025,MX,Google,NB,MX - Generic,manually bid adj by lowering high cpa kw & bid up a bit on low cpa kw,,,Stacey,
+12,3/17/2025,MX,Google,NB,MX - Google - NB,"budget 1.1K to 1.3K, desktop min up 10%, mobile max donwn -10%",,,Stacey,
+12,3/17/2025,MX,Google,NB,MX - Invoice AMZ,mobile -100% to -90%,,,Stacey,
+12,3/17/2025,MX,Google,NB,MX - Google - Invoice AMZ Broad,desktop min to -10%,,,Stacey,
+12,3/17/2025,MX,Google,NB,MX - Generic; MX - Generic AMZ,tablet off to -100%,,,Stacey,
+12,3/17/2025,MX,Google,NB,MX - Generic AMZ,manually bid down high CPA kws,,,Stacey,
+13,3/24/2025,MX,Google,NB,MX - Google - NB,desktop lower -15% on min and -10% on max,,,Stacey,
+13,3/24/2025,MX,Google,NB,MX - Google - Generic,desktop lower -10% to -20% to -10%,,,Stacey,
+13,3/24/2025,MX,Google,NB,MX - Google - Generic AMZ,moible lower -10% to -70% to -40%,,,Stacey,
+13,3/24/2025,MX,Google,NB,MX - Google - Invoice AMZ,"mobile up 10% and change to CPT bidding with CPA $170 and budget $600-$700, vs previously $700 max conv",,,Stacey,
+14,3/31/2025,MX,Google,NB,MX - Google - NB,budget $1.3K to $1.5K; desktop down -10% & mobile up +10%,,,Stacey,
+14,3/31/2025,MX,Google,NB,MX - Google - Generic,combine MX - Google - Generic AMZ into this. Budget to $2.1K with $170 CPT,,,Stacey,
+14,3/31/2025,MX,Google,NB,MX - Google - Invoice AMZ Broad,mobile up 10% & desktop down -10%,,,Stacey,
+15,4/7/2025,MX,Google,NB,MX - Google - Generic,pause YTD high CPA kws,,,Stacey,
+15,4/7/2025,MX,Google,NB,MX - Google - Generic,mobile up 10% see if help on overall CPA,,,Stacey,
+15,4/7/2025,MX,Google,NB,MX - Google - Invoice AMZ,desktop down -10%,,,Stacey,
+15,4/11/2025,MX,Google,NB,MX - Google - All,"slightly adjusted targets for month's budget, and added max CPC within portfolios",,,Richard,
+15,4/11/2025,MX,Google,NB,MX - Google - All,added all regions as location targets (mexico country target is still there),,,Richard,
+16,4/15/2025,MX,Google,NB,"Janitorial, Craft, Eletroncis",Paused 5 KWs with over $1K spend w/o regs,,,Yun,
+16,4/15/2025,MX ,Google,Brand Phrase,Brand Phrase,Campaign live,,,Yun/Richard,
+16,4/15/2025,MX,Google,Brand Phrase,Brand Phrase,Created portfolio,,,Richard,
+16,4/17/2025,MX,Google,NB,,Paused KWs with only 1 reg and over $1K CPA,,,Yun,
+19,5/5/2025,MX,Google,Brand,MX - Brand Phrase,negative exact kws in related AG; turn off location & audience target,,,Stacey,
+19,5/5/2025,MX,Google,All,All,location & audience max 100% to 20%,,,Stacey,
+19,5/5/2025,MX,Google,NB,MX - Google - Generic,"turn off device, location & audience target due to high CPA aross the board; mobile to -50% in G ads",,,Stacey,
+19,5/6/2025,MX,Google,NB,Google ,Paused 4 NB KWs with over $600 spend but no regs (all year data),,,Yun,
+19,5/6/2025,MX,Google,NB,Google ,Paused 2 high CPA terms ($900+ cpa with only 1 reg),,,Yun,
+20,5/12/2025,MX,Google,Brand,MX - Google - Brand Phrase,multiple 1.5 to 1,,,Stacey,
+20,5/12/2025,MX,Google,NB,MX - Google - Invoice AMZ Broad,min budget $5 to $200,,,Stacey,
+22,5/28/2025,MX,Google,NB,MX - Google - Invoice AMZ,budget up $100,,,Stacey,
+23,6/2/2025,MX,Google,NB,MX Google,Paused keywords with over $500 spend w/o ef id regs,,,Yun,
+23,6/2/2025,MX,Google,NB,MX Google,Paused keywords with over $700 CPA,,,Yun,
+23,6/2/2025,MX,Google,Brand Phrase & NB,MX Google,"Negative mobile/tablet bids (from -30% to -40,-50 or -60% on mobile. Some tablets with -100% in google ads",,,Yun,
+23,6/2/2025,MX,Google,NB,Portfolios,Turn off location bid in AMO (Google NB & Brand Phrase portfolios),,,Yun,
+23,6/2/2025,MX,Google,All,MX Google,Removed AMO location level bids,,,Yun,
+23,6/2/2025,MX,Google,NB,"""MX - Google - NB"" Portfolio","CPT $200>$180. Min $1.2K>1K Max $1.5K>$1.3K, Max CPC cap decreased by 10%",,,Yun,Highest CPA portfolio in May
+23,6/2/2025,MX,Google,NB,MX - Google - Generic,CPT $170>$155. Min $1.4K>$1.2K Max $2K>$1.8K,,,Yun,
+24,6/11/2025,MX,Google,NB,MX - Google - Generic,Reverting CPT to 170 after seeing lower than expected spend,,,Richard,
+25,6/23/2025,AU,Google,NB ,Mobile bid -25%>-35%,,,,Yun,
+25,6/23/2025,AU,Google,AU_Generic_P-V,Budget $1100>$1000,,,,Yun,
+25,6/23/2025,AU,Google,AU_Generic_P-V_Office,Mobile bid -25%>-35%,,,,Yun,
+25,6/23/2025,AU,Google,All,Added logo,,,,Yun,
+26,6/24/2025,MX,Google,All,All portfolios,"Targeting a 20% increase in spend, via increase in CPT for Generic campaign, and increasing bid limits for each portfolio",,,Richard,
+25,6/27/2025,AU,Google,Brand Plus & Brand Core,Selected website traffics as the goal,,,,Yun,
+25,6/27/2025,AU,Google,AU_Generic_P-V_Gym,$100>$50,,,,Yun,High CPA $500+ campaign
+25,6/27/2025,AU,Google,AU_Generic_P-V_Hospitality,$300>$100,,,,Yun,High CPA $500+ campaign
+25,6/27/2025,AU,Google,AU_Generic_P-V_Safety,$100>$50,,,,Yun,No reg
+25,6/27/2025,AU,Google,AU_Generic_P-V_Celebrations,$100>$50,,,,Yun,No reg
+25,6/27/2025,AU,Google,AU_Generic_P-V_Medical,$50>$100,,,,Yun,
+25,6/27/2025,AU,Google,AU_Generic_P-V_Crafts,$50>$100,,,,Yun,
+25,6/27/2025,AU,Google,AU_Generic_P-V_Janitorial,$312>$500 Max CPC $10>$11,,,,Yun,
+25,6/27/2025,AU,Google,AU_Generic_P-V,"$1K>$1.25K, Max CPC $10>$11",,,,Yun,
+25,6/27/2025,AU,Google,AU_Generic_P-V_Shops,$700>$900,,,,Yun,
+25,6/27/2025,AU,Google,AU_Generic_P-V_Automatice,"$50>$200, Max CPC $11>$12",,,,Yun,
+25,6/27/2025,AU,Google,AU_Generic_P-V,"Paused ""online business companies""",,,,Yun,High cost no spend
+26,6/30/2025,AU,Google,AU_Generic_P-V,Budget $1250>$1400,,,,Yun,
+26,6/30/2025,AU,Google,AU_Generic_P-V_Janitorial,Budget $500>$625,,,,Yun,
+28,7/7/2025,MX,Google,NB,MX - Google - NB,"CPT $180 to $160, budget down -30%",,,Stacey,
+28,7/7/2025,MX,Google,NB,MX - Google - Generic,"CPT $180 to $160, budget down -30%",,,Stacey,
+28,7/7/2025,MX,Google,NB,MX - Google - Invoice AMZ,"CPT $160 to $150, budget down -10%",,,Stacey,
+27,7/7/2025,AU,Google,AU_Generic_P-V_Safety,Budget $100>$50,,,,Yun,
+27,7/7/2025,AU,Google,AU_Generic_P-V_Industrial,Budget $200>$100,,,,Yun,
+27,7/7/2025,AU,Google,AU_Generic_P-V_Office,Budget $1.1K>$800,,,,Yun,
+27,7/7/2025,AU,Google,AU_Generic_P-V,Budget $1540>$2K,,,,Yun,
+29,7/15/2025,MX,Google,NB,All,"Lowered CPT targets across the board (walking down slowly), as well as bringing budget down to target 2.3K/day",,,Richard,
+28,7/18/2025,AU,Google,AU_Generic_P-V_Industrial,"Budget $100>$50, Max CPC $10>$8",,,,Yun,
+28,7/18/2025,AU,Google,AU_Generic_P-V_Office,$900>$700 Max CPC Max CPC $10>$8,,,,Yun,
+28,7/18/2025,AU,Google,Gym,$50>$100,,,,Yun,
+28,7/18/2025,AU,Google,All,Added new headlines,,,,Yun,
+28,7/18/2025,AU,Google,Industry,$300>$200 Max cpc $11>$10,,,,Yun,
+28,7/18/2025,AU,Google,Material & Hospitality & Celebration,Max CPC $10>$7,,,,Yun,
+28,7/18/2025,AU,Google,Craft,"$150>$100, Max CPC $10>$9",,,,Yun,
+32,8/4/2025,AU,Google,AU_Generic_P-V_Hospitality,$50>$200,,,,Yun,
+32,8/4/2025,AU,Google,AU_Generic_P-V_Industry,$200>$100 max cpc $10>$8,,,,Yun,
+32,8/4/2025,AU,Google,AU_Generic_P-V_Crafts,$100>$50 max cpc $9>$7,,,,Yun,
+32,8/4/2025,AU,Google,AU_Generic_P-V_Electronics,$500>$600,,,,Yun,
+32,8/4/2025,AU,Google,AU_Generic_P-V,$2K>$2.1K,,,,Yun,
+32,8/6/2025,MX,Google,Brand,MX - Google - Brand Phrase,"Max budget 500 to 200, Multiple 1.2 to 1, max bid 8 to 0; desktop 20% to 10%, off location & audience; mobile max -20%",,lower CPA from $240 to $75,Stacey,
+32,8/6/2025,MX,Google,NB,MX - Google - Generic,"CPT $120 to $100; max budget $800 to $700, multiple 1.2 to 1; off audience & location; mobile max to -30%",,,Stacey,
+32,8/6/2025,MX,Google,NB,MX - Google - Invoice AMZ,"Max budget $550 to $450, Multiple 1.2 to 1, max bid 8 to 0; desktop 20% to 0%, mobile max to -40%; off location & audience",,,Stacey,
+32,8/6/2025,MX,Google,NB,MX - Google - Invoice AMZ Broad,"Multiple 1.1 to 1, max bid 8 to 0; mobile max to -70%, desktop max to 0%",,,Stacey,
+32,8/6/2025,MX,Google,NB,MX - Google - NB,"CPT $120 to $100; max budget $800 to $700, multiple 1.2 to 1; off audience & location; max bid 8 to 0; mobile to -30%",,,Stacey,
+32,8/6/2025,AU,Google,AU_Generic_P-V_Hospitality,$200>$300,,,,Yun,
+32,8/6/2025,AU,Google,Industry,$100>$50,,,,Yun,
+33,8/11/2025,AU,Google,AU_Generic_P-V_Automotive,$300>$150 | high CPC ($11.3) and low click vol (83).,,,,Michelle,
+33,8/11/2025,AU,Google,AU_Generic_P-V_Medical,$100>$50 | low traffic (2 impressions),,,,Michelle,
+33,8/11/2025,AU,Google,AU_Generic_P-V_Materials,$50>$65 | strong CTR (10%) and low CPC ($3.9),,,,Michelle,
+33,8/11/2025,AU,Google,AU_Generic_P-V_Office,$700>$785 | good CTR (5%) and low CPC ($5.1),,,,Michelle,
+33,8/11/2025,AU,Google,AU_Generic_P-V_Janitorial,$800>$900 | good CTR (6%) and at avg CPC ($6.6),,,,Michelle,
+33,8/12/2025,MX,Google,NB,MX - Google - NB,"CPT $100 to $90 and Max Budget $700 to $560; very low CVR (0.8%), high spend ($4.5k), major driver of high total IECCP",,,Michelle,
+33,8/12/2025,MX,Google,NB,MX - Google - Generic,"CPT $100 to $90, Min Budget $400 to $350 and Max Budget $700 to $560; similar to NB with low CVR (0.9%) and high CPA",,,Michelle,
+33,8/12/2025,MX,Google,NB,MX - Google - Invoice AMZ,CPT $100 to $90 and Max Budget $450 to $400; lower CPR to force Adobe to bid more selectively,,,Michelle,
+33,8/12/2025,MX,Google,NB,MX - Google - Invoice AMZ Broad,"CPT $90 to $80; very high CPC ($4.9), and minimal impressions; keep only as a low-spend test.",,,Michelle,
+33,8/13/2025,AU,Google,AU_Generic_P-V,Budget $2.1K>$2.2 ,,,,Michelle,
+33,8/13/2025,AU,Google,AU_Generic_P-V_Automotive,Budget $150>$135,,,,Michelle,
+33,8/13/2025,AU,Google,AU_Generic_P-V_Invoice,Budget $100>$70,,,,Michelle,
+33,8/13/2025,AU,Google,AU_Generic_P-V_Gym,Budget $100>$70,,,,Michelle,
+33,8/13/2025,AU,Google,AU_Generic_P-V_Education,Budget $100>$70,,,,Michelle,
+34,8/18/2025,AU,Google,AU_Generic_P-V,"$2.2K>$2.3 | outperforming, high traffic and reg volume, CPA below avg ",,,,Michelle,
+34,8/18/2025,AU,Google,AU_Generic_P-V_Celebrations,"$50>$55 |  low CPC, strong CTR ",,,,Michelle,Yun's note- Plz don't increase campaign budget
+34,8/18/2025,AU,Google,AU_Generic_P-V_Crafts,"$50>$55 |  low CPC, strong CTR ",,,,Michelle,Yun's note- Plz don't increase campaign budget
+34,8/18/2025,AU,Google,AU_Generic_P-V_Industrial,$50>$55 | low CPC and good CTR ,,,,Michelle,Yun's note- Plz don't increase campaign budget
+34,8/18/2025,AU,Google,AU_Generic_P-V_Industry,"$50>$55 | low CPC, strong CTR  ",,,,Michelle,Yun's note- Plz don't increase campaign budget
+34,8/18/2025,AU,Google,AU_Generic_P-V_Materials,"$65>$70 | CTR above avg, CPA below avg ",,,,Michelle,Yun's note- Increase budget to $100
+34,8/18/2025,AU,Google,AU_Generic_P-V_Automotive,"$135>$115 | high CPC, low click volume, 0 regs ",,,,Michelle,Yun's note- Decrease budget to $80
+34,8/18/2025,AU,Google,AU_Generic_P-V_Invoice,$70>$60 | 0 clicks,,,,Michelle,Yun's note- No need to make change since it's 0 clicks
+34,8/18/2025,AU,Google,AU_Generic_P-V_Janitorial,"$900>$800 | high CPC, CPA above avg ",,,,Michelle,
+34,8/18/2025,AU,Google,AU_Generic_P-V_Automotive,"Max CPC $15>$12 |  CPA below avg, but high CPC ",,,,Michelle,What's the CPA and daily budget? If the campaign is limited by budget and CPA is low- Plz increase campaign budget
+34,8/18/2025,AU,Google,AU_Generic_P-V_Electronics,"Max CPC $15>$10 |  CPA below avg, but high CPC ",,,,Michelle,What's the CPA and daily budget? If the campaign is limited by budget and CPA is low- Plz increase campaign budget. Plz avoid making aggressive CPC changes. Plz keep CPC to $12
+34,8/19/2025,AU,Google,All,Added discount related messaging in RSAs,,,,Yun,https://quip-amazon.com/OahhAATttFQ1/AU-RSA-Ads
+34,8/20/2025,MX,Google,Brand Phrase,MX - Google - Brand Phrase,Max budget from $200 to $180. ,,,Michelle,
+34,8/20/2025,MX,Google,NB,MX - Google - NB,Max budget from $560 to $500,,,Michelle,
+34,8/20/2025,MX,Google,Generic,MX - Google - Generic,Min budget from $350 to $325 and Max budget from $560 to $500,,,Michelle,
+40,9/29/2025,MX,Google,NB,MX - Google - Generic,min budget $200 to $400,,,Stacey,
+40,9/29/2025,MX,Google,NB,MX - Google - NB,min budget $200 to $400,,,Stacey,
+42,10/14/2025,MX,Google,NB,MX - Google - NB,"cpt 75 to 100, budget up 200",,,Stacey,
+42,10/14/2025,MX,Google,NB,MX - Google - NB,"cpt 75 to 100, budget up 200",,,Stacey,
+42,10/14/2025,MX,Google,NB,MX - Google - Invoice AMZ,"cpt 80 to 90, budget up 100",,,Stacey,
+44,10/27/2025,MX,Google,NB,MX - Google - Invoice AMZ,"combine campaign AMZ & AMZ SQR in one bidding portfolio, budget min up $50, and max lower to $450",,,Stacey,
+44,10/27/2025,MX,Google,NB,MX - Google - NB,multiple 1.2 to 1,,,Stacey,
+46,11/11/2025,MX,Google,NB,MX - Google - NB,budget up $100 to support event till 11/17,,,Stacey,
+46,11/11/2025,MX,Google,NB,MX - Google - Generic,budget up $100 to support event till 11/17,,,Stacey,
+47,11/17/2025,MX,Google,NB,MX - Google - Invoice AMZ,budget up $50,,,Stacey,
+47,11/24/2025,MX,Google,All,Account auto setting,Account-level automated assets settings off,,,Stacey,
+48,11/24/2025,MX,Google,NB,MX - Google - NB,budget down $100,,,Stacey,
+48,11/24/2025,MX,Google,Brand,MX - Google - Brand Phrase,"budget down $60, CPT $65 to $60",,,Stacey,
+48,11/24/2025,MX,Google,NB,MX - Google - Generic,budget down $100,,,Stacey,
+34,8/20/2025,AU,Google,NB,"Food, Apparel, Beauty",Launched New Campaigns,,,Yun,
+35,8/27/2025,AU,Google,NB,AU_Generic_P-V_Automotive,"Budget $80>$40, Max CPC $12>$8",,High CPA campagin,Yun,
+35,8/27/2025,AU,Google,NB,AU_Generic_P-V_Hospitality,Budget $300>$100,,,Yun,
+35,8/27/2025,AU,Google,NB,AU_Generic_P-V_Industry,Budget $55>$45 Max CPC $8>$6,,,Yun,
+35,8/27/2025,AU,Google,NB,AU_Generic_P-V_Gym,Budget $70>$50 Max CPC $10>$7,,,Yun,
+35,8/27/2025,AU,Google,NB,AU_Generic_P-V_Food,Budget $150>$450,,,Yun,
+35,8/27/2025,AU,Google,NB,AU_Generic_P-V_Apparel,Budget $100>$200,,,Yun,
+35,8/27/2025,AU,Google,All,All,Paused KWs with more than $600 spend w/o regs,,,Yun,
+36,9/2/2025,AU,Google,NB,Shops,"Budget $2310>$2,000",,,Yun,
+36,9/2/2025,AU,Google,NB,Electronics,"Budget $600>$500, max cpc $12>$11",,,Yun,
+36,9/2/2025,AU,Google,NB,Apparel,Budget $200>$350,,,Yun,
+36,9/2/2025,AU,Google,NB,Beauty,Budget $80>$300,,,Yun,
+36,9/2/2025,AU,Google,NB,Materials,Budget $100>$250,,,Yun,
+36,9/2/2025,AU,Google,NB,"Crafts, Education, Pets, Gym",Campaign paused. Low performing,,,Yun,
+37,9/8/2025,AU,Google,All,,Paused high spend KWs w/o regs based on all time AMO data,,,Yun,
+37,9/8/2025,AU,Google,NB,Shops,$2K>$1.2K,,-500,Yun,
+37,9/8/2025,AU,Google,NB,Material,$350>$500,,150,Yun,
+37,9/8/2025,AU,Google,NB,Apparel,$350>$500,,150,Yun,
+37,9/8/2025,AU,Google,NB,Beauty,$300>$500,,200,Yun,
+37,9/8/2025,AU,Google,NB,Office,$785>$650,,,Yun,
+37,9/8/2025,AU,Google,NB,"Automotive, Industrial, Industry",Campaign paused. Low performing,,-135,Yun,
+37,9/8/2025,AU,Google,NB,Janitorial,$800>$450,,-350,Yun,
+37,9/8/2025,AU,Google,NB,Electronics,$500>$350,,-150,Yun,
+37,9/8/2025,AU,Google,NB,PV,$2200>$1800,,-635,Yun,
+38,9/15/2025,AU,Google,NB,Shops,$1200>$800,,,Yun,
+38,9/15/2025,AU,Google,NB,Office,$650>$500,,,Yun,
+38,9/15/2025,AU,Google,NB,Beauty,$500>$625,,,Yun,
+39,9/23/2025,AU,Google,NB,Office,$500>$250,,,Yun,
+39,9/23/2025,AU,Google,NB,Electronics,$400>$300,,,Yun,
+39,9/23/2025,AU,Google,NB,Shops,$800>$600,,,Yun,
+39,9/23/2025,AU,Google,NB,All,Paused NB KWs with over $400 spend w/o regs,,,Yun,
+40,9/29/2025,AU,Google,NB,Food,$500>$600,,,Yun,
+40,9/29/2025,AU,Google,NB,Apparel,$500>$600,,,Yun,
+40,10/3/2025,AU,Google,NB,Shops,Landing page changed from https://business.amazon.com.au/en/cp/lpa-sho to https://www.amazon.com.au/ab/business-discounts,,,Yun,
+40,10/3/2025,AU,Google,NB,Office,Landing page changed from https://business.amazon.com.au/en/cp/lpa-b to https://www.amazon.com.au/ab/business-discounts,,,Yun,
+40,10/3/2025,AU,Google,NB,Eletroncis,Landing page changed from https://business.amazon.com.au/en/cp/lpa-it-products to https://www.amazon.com.au/ab/business-discounts,,,Yun,
+42,10/13/2025,AU,Google,NB,Food,600>800,,,Yun,
+42,10/13/2025,AU,Google,NB,Apparel,600>800,,,Yun,
+42,10/13/2025,AU,Google,NB,AU_Generic_P-V,$1500>$1700,,,Yun,
+42,10/13/2025,AU,Google,NB,Shops/Apparel/Office,Add biz saving in ref tags,,,Yun,
+42,10/16/2025,AU,Google,NB,,"Shops, Electronics and Office campaigns all switched back to the original MCS pages",,,Yun,
+43,10/20/2025,AU,Google,NB,AU_Generic_P-V_Hospitality,$100>$300,,,Yun,
+45,11/3/2025,AU,Google,NB,Shop,$600>$400,,,Yun,
+45,11/3/2025,AU,Google,NB,Janitorial,$500>$400,,,Yun,
+45,11/3/2025,AU,Google,NB,Food,$900>$600,,,Yun,
+45,11/3/2025,AU,Google,NB,PV,$2.2K>$2K,,,Yun,
+46,11/11/2025,AU,Google,NB,Office,$300>$200,,,Yun,
+46,11/11/2025,AU,Google,NB,PV,$1.8K>$1.2K,,,Yun,
+46,11/11/2025,AU,Google,NB,Apparel,900>600,,,Yun,
+47,11/17/2025,AU,Google,NB,Apparel,$600>$450,,,Yun,
+47,11/17/2025,AU,Google,NB,PV,$1.2K>$1K,,,Yun,
+3,1/12/2026,MX,Google,All,All,Increased budgets in Brand Phrase and NB more assertively to $2K,,,Richard,
+3,1/12/2026,AU,Google,All,All,"Brand: increased budget $50/day (already underspending), and increased max CPC from 10 to 12
+NB: Increased spend $350/day",,,Richard,
+3,1/16/2026,AU,Google,Brand,Brand Plus,Implemented Adobe bid strategy; same weekly budget pacing.,,Test,Richard,
+4,1/20/2026,AU,Google,All,All,"Implemented Adobe bid strategy across the board; same weekly budget pacing as week 3, and converted to Daily budget.",,Test,Richard,
+4,1/20/2026,MX,Google,Brand,Brand Plus,Increased max CPC from 12 to 18 (was limited week 3),,,Richard,
+4,1/20/2026,MX,Google,NB,All,"Increased target budgets to target a 51% spend increase, from 9.9K/week to 15K/week NB",,,Richard,
+4,1/21/2026,AU,Google,Brand,Brand Core,"Added negatives of terms we don't target within Exact match ad groups (mostly ""seller account"" terms)",,,Richard,
+5,2/3/2026,AU,Google,NB,All,Decreased overall NB budget by 300/day (~6% cut) to align with Feb budget,,,Richard,
+5,2/3/2026,MX,Google,NB,All,Decreased overall NB budget by 350/day (~19% cut) to align with Feb budget and 100% target.,,,,
+6,2/10/2026,MX,Google,NB,All,"Changed Generic to CPT bidding, and increased total NB budget by roughly 5%",,,Richard,Roughly 50% of NB budget and Regs
+6,2/10/2026,AU,Google,NB,All,"Changed to CPT bidding, and lowered max CPC for both NB portfolios to $20.",,,Richard,Roughly 40/60 split for NB budget and regs
+8,2/23/2026,AU,Google,NB,P-V,Enabled previously paused NB campaigns at $10/day budget (to be optimized by NB portfolio and reviewed with AU team),,,Richard,
+8,2/23/2026,AU,Google,NB,All,"Transitioned all to CPT portfolio, and aligned with Lena to target $140 CPA  (likely to increase budgets)",,,Richard,
+8,2/23/2026,MX,Google,NB,All,"Transitioned all to CPT portfolio, and targeting a 30% increase to current spend.",,,Richard,
+10,3/5/2026,MX,Google,All,All,Negatives added to better filter search queries to correct keywords,,,Richard,Specific to Generic campaigns and Brand Phrase
+10,3/5/2026,AU,Google,All,All,Negatives added to better filter search queries to correct keywords,,,Richard,Specific to Generic campaigns and Brand Phrase
+10,3/5/2026,MX,Google,All,All,Left budgets/bids alone based on this week's perf,,,Richard,
+10,3/5/2026,AU,Google,All,All,"Adjusted portfolios for efficiency. (Lowered max CPCs, minimum budgets)",,,Richard,

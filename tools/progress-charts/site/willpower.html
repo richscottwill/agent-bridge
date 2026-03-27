@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Willpower &mdash; Body System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#0b0e11;--surface:#131820;--surface2:#1a2230;--border:#1e2a3a;--border2:#253345;
+  --text:#d0d8e0;--text2:#8899aa;--text3:#5a6a7a;--white:#f0f4f8;
+  --accent:#4da8da;--accent2:#2d7eb5;--accent-dim:rgba(77,168,218,0.12);
+  --green:#34d399;--red:#f87171;--amber:#fbbf24;--purple:#a78bfa}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);padding:0;min-height:100vh;-webkit-font-smoothing:antialiased}
+.page{max-width:1200px;margin:0 auto;padding:24px 20px}
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);background:rgba(19,24,32,0.92)}
+.nav-brand{color:var(--white);font-weight:700;font-size:.9em;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:4px;letter-spacing:1.5px;text-transform:uppercase}
+.nav-link{color:var(--text2);text-decoration:none;padding:14px 18px;font-size:.8em;font-weight:500;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
+.nav-link:hover{color:var(--text);background:rgba(77,168,218,0.06)}
+.nav-link.active{color:var(--accent);border-bottom-color:var(--accent)}
+h1{color:var(--white);font-size:1.35em;margin-bottom:4px;font-weight:600;letter-spacing:.2px}
+h2{color:var(--text);font-size:.95em;margin:28px 0 12px;font-weight:600;letter-spacing:.2px}
+.sub{color:var(--text2);font-size:.78em;margin-bottom:24px;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px;margin-bottom:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:16px}
+.card{background:var(--surface);border-radius:8px;padding:18px;border:1px solid var(--border)}
+.card-title{color:var(--text2);font-size:.72em;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;font-weight:500}
+.chart-box{position:relative;height:280px}
+.chart-box-sm{position:relative;height:200px}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.stat{background:var(--surface);border-radius:6px;padding:12px 16px;border:1px solid var(--border);min-width:100px}
+.stat .v{font-size:1.5em;font-weight:700;color:var(--white)}
+.stat .l{font-size:.62em;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
+table{width:100%;border-collapse:collapse;font-size:.82em}
+th{text-align:left;color:var(--text3);font-weight:500;padding:8px;border-bottom:1px solid var(--border);font-size:.85em;text-transform:uppercase;letter-spacing:.5px}
+td{padding:8px;border-bottom:1px solid var(--border)}
+.badge{font-size:.68em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;display:inline-block;letter-spacing:.3px}
+.b-worsening{background:rgba(248,113,113,0.15);color:var(--red)}.b-stuck{background:rgba(251,191,36,0.15);color:var(--amber)}
+.b-improving{background:rgba(52,211,153,0.15);color:var(--green)}.b-new{background:var(--accent-dim);color:var(--accent)}
+.b-validated{background:rgba(167,139,250,0.15);color:var(--purple)}.b-active{background:var(--accent-dim);color:var(--accent)}
+.b-adopted{background:rgba(52,211,153,0.15);color:var(--green)}.b-reverted{background:rgba(248,113,113,0.15);color:var(--red)}
+.b-queued{background:rgba(90,106,122,0.15);color:var(--text2)}
+.no-data{color:var(--text3);font-style:italic;padding:20px;text-align:center}
+.trainer{font-size:.78em;color:var(--text3);margin-top:12px;line-height:1.5;padding:10px 0;border-top:1px solid var(--border)}
+.level-track{margin-bottom:10px;padding:14px;background:var(--bg);border-radius:6px;border:1px solid var(--border)}
+.level-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.level-name{font-weight:600;font-size:.9em;color:var(--white)}
+.level-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;margin:6px 0}
+.level-fill{height:100%;border-radius:2px}
+.lb{font-size:.62em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.lb-active{background:var(--accent-dim);color:var(--accent)}.lb-next{background:rgba(90,106,122,0.15);color:var(--text2)}
+.lb-queued{background:rgba(90,106,122,0.08);color:var(--text3)}.lb-future{background:rgba(90,106,122,0.05);color:var(--text3)}
+.comp-row{margin-bottom:14px}
+.comp-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.comp-name{font-weight:600;font-size:.85em;color:var(--text)}
+.comp-stage{font-size:.7em;color:var(--text3)}
+.comp-track{display:flex;height:22px;background:var(--surface2);border-radius:4px;overflow:hidden}
+.comp-stop{flex:1;display:flex;align-items:center;justify-content:center;font-size:.58em;font-weight:600;color:rgba(255,255,255,0.1);border-right:1px solid var(--border)}
+.comp-stop:last-child{border-right:none}
+.comp-stop.filled{color:rgba(255,255,255,0.9)}
+.ch-item{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.85em}
+.ch-box{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:.65em}
+.ch-done{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
+.ch-text{color:var(--text)}.ch-text.done{color:var(--text3);text-decoration:line-through}
+.overview-card{background:var(--surface);border-radius:8px;padding:20px;border:1px solid var(--border);text-decoration:none;display:block;transition:all .2s}
+.overview-card:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(77,168,218,0.08)}
+.oc-title{color:var(--text2);font-weight:600;font-size:.78em;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px}
+.oc-metric{font-size:1.8em;font-weight:700;margin:8px 0;color:var(--white)}
+.oc-sub{color:var(--text2);font-size:.78em;line-height:1.5}
+</style></head><body>
+<nav><span class="nav-brand">Body System</span><a href="index.html" class="nav-link">Overview</a><a href="growth.html" class="nav-link">Growth</a><a href="willpower.html" class="nav-link active">Willpower</a><a href="output.html" class="nav-link">Output</a><a href="autoresearch.html" class="nav-link">Autoresearch</a></nav>
+<div class="page">
+<h1>Willpower and Patterns</h1>
+<div class="sub">The gap between knowing and doing. The aMCC (anterior midcingulate cortex) grows when you do hard things you do not want to do, and atrophies when you choose comfort.</div>
+
+<p style="color:var(--text);font-size:.9em;line-height:1.7;margin-bottom:16px">
+  The streak measures consecutive days where Richard chose the hard thing over the comfortable thing. Right now it is at 0 days, with 1 total resets since tracking began on March 20. 6 distinct resistance types have been identified, each with a specific counter-reframe the system uses during live sessions.
+</p>
+<p style="color:var(--text2);font-size:.85em;line-height:1.7;margin-bottom:24px">
+  The nervous system tracks behavioral patterns over time. 2 patterns are currently worsening, 2 are stuck. When a pattern is stuck for 3+ weeks, the intervention is wrong. The system proposes structural fixes (changing defaults, building tools, removing friction) rather than relying on willpower.
+</p>
+
+<div class="stats">
+  <div class="stat"><div class="v" style="color:var(--alert)">0</div><div class="l">Streak Days</div></div>
+  <div class="stat"><div class="v">0</div><div class="l">Longest</div></div>
+  <div class="stat"><div class="v">1</div><div class="l">Resets</div></div>
+  <div class="stat"><div class="v">6</div><div class="l">Resistance Types</div></div>
+  <div class="stat"><div class="v">2</div><div class="l">Worsening</div></div>
+  <div class="stat"><div class="v">2</div><div class="l">Stuck</div></div>
+</div>
+
+<div class="card" style="margin-bottom:16px;padding:24px;text-align:center">
+  <div style="font-size:.72em;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">The Hard Thing</div>
+  <div style="font-size:1.1em;color:var(--accent);font-weight:500">Testing Approach doc for Kate</div>
+  <div style="font-size:.78em;color:var(--text3);margin-top:10px;max-width:600px;margin-left:auto;margin-right:auto">At any given time there is one hard thing. Not three. Not a prioritized list. One. The aMCC fires when you are about to choose the comfortable thing over this.</div>
+</div>
+
+<h2>30-Day Challenge</h2>
+<p style="color:var(--text2);font-size:.85em;line-height:1.7;margin-bottom:12px">
+  10 items due by 2026-04-13. A mix of strategic artifacts, system improvements, and operational cleanup. 0/10 complete. The highest-leverage items are the Testing Approach doc and AI Max test design &mdash; they feed Level 1 and Level 2 simultaneously.
+</p>
+<div class="card" id="challengeList"></div>
+
+<h2>Growth Model &mdash; Current vs Targets</h2>
+<div class="grid">
+  <div class="card" id="growthTable"></div>
+  <div class="card"><div class="card-title">Resistance Taxonomy</div><div id="resistanceTable"></div>
+    <div style="font-size:.72em;color:#888;margin-top:6px">Each resistance type has a counter &mdash; a reframe that makes the hard choice easier. The aMCC uses these during live sessions when avoidance is detected.</div>
+  </div>
+</div>
+
+<h2>Pattern Trajectories</h2>
+<div style="font-size:.72em;color:var(--text3);margin-bottom:8px">
+  Each pattern is scored on a -2 to +1 scale. The bar shows direction: left is worsening, right is improving. Weeks shows how long the pattern has been tracked.
+</div>
+<div class="card" id="patternTable"></div>
+<div class="trainer" id="patternTrainer"></div>
+
+<script>
+var amcc={"streak": 0, "hard_thing": "Testing Approach doc for Kate", "longest": 0, "resets": 1, "resistance_types": [{"type": "Visibility avoidance", "description": "Fear that publishing work = self-promotion", "counter": "The doc is a tool for others, not a spotlight on you. Sharing is service."}, {"type": "Blank page paralysis", "description": "Can't start because the output isn't clear yet", "counter": "Write the worst possible version. You can fix bad writing. You can't fix nothing"}, {"type": "Competence anxiety", "description": "Worry that the output won't be good enough for the audience ", "counter": "Brandon shared a Loop doc with typos. Kate reads rough drafts. The bar is lower "}, {"type": "Comfort zone gravity", "description": "Engine Room work (bids, keywords, campaigns) feels productiv", "counter": "Execution is your floor. Strategy is your ceiling. You can't reach the ceiling f"}, {"type": "Delegation guilt", "description": "Feels wrong to hand off work to someone else", "counter": "Delegation isn't dumping. It's multiplying. Carlos doing invoices frees you to d"}, {"type": "Urgency addiction", "description": "Reactive fire drills feel important and get adrenaline flowi", "counter": "Urgent is not important. Important is not urgent. Which one are you responding t"}], "growth_model": [{"metric": "Current streak", "current": "0", "target_30d": "5+ days", "target_90d": "10+ days"}, {"metric": "Avg days to complete hard thing", "current": "\u2014", "target_30d": "< 5 days", "target_90d": "< 3 days"}, {"metric": "Avoidance count per hard thing", "current": "3+", "target_30d": "< 2", "target_90d": "< 1"}, {"metric": "Resistance types active", "current": "6", "target_30d": "4", "target_90d": "2"}, {"metric": "Interventions per session", "current": "\u2014", "target_30d": "< 2", "target_90d": "< 1"}]};
+var patterns=[{"name": "Visibility avoidance", "status": "VALIDATED", "weeks": "5+", "trajectory": "WORSENING", "assessment": "3/25 \u2014 Brandon flagged explicitly, 3+ peers confirmed in Annual Review"}, {"name": "Zero strategic artifacts", "status": "ACTIVE", "weeks": "4-5", "trajectory": "WORSENING", "assessment": "3/25 \u2014 3rd consecutive week, W12 scorecard still 0"}, {"name": "Admin backlog displacement", "status": "ACTIVE", "weeks": "3", "trajectory": "STUCK", "assessment": "3/18 \u2014 Admin list over cap, displacing strategic work"}, {"name": "Reactive fire drills", "status": "ACTIVE", "weeks": "3", "trajectory": "STUCK", "assessment": "3/19 \u2014 AU CPC response displaced AEO POV (3rd consecutive week)"}];
+var challenge={"items": [{"text": "Ship Testing Approach doc to Kate (meeting Apr 16) \u2014 Andrew active in Loop doc \u2705", "done": false}, {"text": "Update Kingpin Goals with Jan-Mar data \u2014 2 DAYS OVERDUE, blocked by Andes", "done": false}, {"text": "Build one automation tool (campaign link generator)", "done": false}, {"text": "Publish AEO POV for AB Paid Search \u2014 2 DAYS LEFT", "done": false}, {"text": "Write AI Max test design \u2014 due 3/28", "done": false}, {"text": "Reduce invoice/PO time to <30 min/week", "done": false}, {"text": "Decide on Asana with Brandon \u2014 raise in next 1:1", "done": false}, {"text": "Draft cross-market playbook (US\u2192EU5\u2192RoW)", "done": false}, {"text": "Audit and reduce observer-only meetings \u2014 PSME Demo today is a test case", "done": false}, {"text": "Implement AU URL migration to Polaris pages \u2014 Alexis sent mapping, Lena confirmed full switch", "done": false}], "completed": 0, "total": 10, "deadline": "2026-04-13"};
+
+// Challenge
+(function(){
+  var el=document.getElementById('challengeList');
+  var items=challenge.items||[];
+  var pct=Math.round(challenge.completed/Math.max(challenge.total,1)*100);
+  var h='<div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:.85em;color:#888">Progress</span><span style="font-weight:700;color:#fff">'+pct+'%</span></div>'+
+    '<div style="height:6px;background:#1f2230;border-radius:3px;margin-bottom:12px"><div style="height:100%;width:'+pct+'%;background:var(--accent);border-radius:3px"></div></div>';
+  items.forEach(function(item){
+    h+='<div class="ch-item"><div class="ch-box'+(item.done?' ch-done':'')+'">'+( item.done?'\u2713':'')+'</div><span class="ch-text'+(item.done?' done':'')+'">'+item.text+'</span></div>';
+  });
+  el.innerHTML=h;
+})();
+// Growth
+(function(){
+  var el=document.getElementById('growthTable');
+  var gm=amcc.growth_model||[];
+  if(!gm.length){el.innerHTML='<div class="no-data">No data</div>';return;}
+  var h='<div class="card-title">Growth Metrics</div><table><tr><th>Metric</th><th>Current</th><th>30d Target</th><th>90d Target</th></tr>';
+  gm.forEach(function(r){h+='<tr><td>'+r.metric+'</td><td style="color:#fff;font-weight:600">'+r.current+'</td><td style="color:#888">'+r.target_30d+'</td><td style="color:#666">'+r.target_90d+'</td></tr>';});
+  el.innerHTML=h+'</table><div style="font-size:.72em;color:#888;margin-top:6px">The aMCC grows with sustained effort and atrophies with avoidance. Stage 4 (unconscious competence) is when these metrics hit their 90d targets and stay there.</div>';
+})();
+// Resistance
+(function(){
+  var el=document.getElementById('resistanceTable');
+  var rt=amcc.resistance_types||[];
+  if(!rt.length){el.innerHTML='<div class="no-data">No data</div>';return;}
+  var h='<table><tr><th>Type</th><th>Counter</th></tr>';
+  rt.forEach(function(r){h+='<tr><td style="font-weight:600;font-size:.85em">'+r.type+'</td><td style="color:#888;font-size:.82em">'+r.counter+'</td></tr>';});
+  el.innerHTML=h+'</table>';
+})();
+// Patterns &mdash; numeric scale with directional bars
+(function(){
+  var el=document.getElementById('patternTable');
+  if(!patterns.length){el.innerHTML='<div class="no-data">No patterns</div>';return;}
+  var scores={'WORSENING':-2,'STUCK':-1,'NEW':0,'ACTIVE':0,'IMPROVING':1,'VALIDATED':1};
+  var h='<table><tr><th>Pattern</th><th style="text-align:center;width:60px">Weeks</th><th style="text-align:center;width:180px">Trend</th><th>Assessment</th></tr>';
+  patterns.forEach(function(p){
+    var traj=p.trajectory!=='\u2014'?p.trajectory:p.status;
+    var score=scores[traj]!==undefined?scores[traj]:0;
+    // Build centered directional bar
+    var barLeft='',barRight='';
+    if(score<0){
+      var w=Math.abs(score)*40;
+      barLeft='<div style="position:absolute;right:50%;height:100%;width:'+w+'px;background:rgba(248,113,113,0.4);border-radius:2px 0 0 2px"></div>';
+    } else if(score>0){
+      var w=score*40;
+      barRight='<div style="position:absolute;left:50%;height:100%;width:'+w+'px;background:rgba(77,168,218,0.5);border-radius:0 2px 2px 0"></div>';
+    }
+    var scoreColor=score<0?'#f87171':score>0?'var(--accent)':'var(--text3)';
+    h+='<tr><td style="font-weight:500">'+p.name+'</td>'+
+      '<td style="text-align:center;color:var(--text3)">'+p.weeks+'</td>'+
+      '<td><div style="position:relative;height:16px;background:var(--surface2);border-radius:2px;overflow:hidden">'+
+        '<div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--border2)"></div>'+
+        barLeft+barRight+
+      '</div><div style="text-align:center;font-size:.65em;color:'+scoreColor+';margin-top:2px">'+
+        (score>0?'+':'')+score+
+      '</div></td>'+
+      '<td style="color:var(--text2);font-size:.8em">'+(p.assessment||'\u2014')+'</td></tr>';
+  });
+  el.innerHTML=h+'</table>';
+  var w=patterns.filter(function(p){return p.trajectory==='WORSENING'});
+  var s=patterns.filter(function(p){return p.trajectory==='STUCK'});
+  var note='';
+  if(w.length) note+=w.length+' pattern(s) at -2 (worsening). These need structural intervention, not more willpower. ';
+  if(s.length>1) note+=s.length+' pattern(s) at -1 (stuck). Same approach for 3+ weeks without movement means the approach is wrong.';
+  if(!note) note='All patterns at 0 or above. Stable.';
+  document.getElementById('patternTrainer').textContent=note;
+})();
+</script>
+<div style="color:var(--text3);font-size:.62em;text-align:center;margin-top:48px;padding:16px;letter-spacing:.5px">GENERATED 2026-03-25 09:16 &middot; STANDALONE HTML &middot; CHART.JS VIA CDN &middot; PORTABLE</div></div></body></html>
