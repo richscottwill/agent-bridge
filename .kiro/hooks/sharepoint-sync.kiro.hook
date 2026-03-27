@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Sync to SharePoint",
+  "description": "Runs a dry-run of the wiki-to-SharePoint sync, shows what articles will be created/updated/removed, and asks for confirmation before executing the live sync.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Run the SharePoint sync tool in dry-run mode first to show Richard what will change. Execute: python3 ~/shared/tools/sharepoint-sync/cli.py --dry-run --mode directory Then present the results clearly — list what will be created, updated, removed, skipped, and any conflicts. Ask Richard to confirm before proceeding. If he confirms, run the live sync: python3 ~/shared/tools/sharepoint-sync/cli.py --mode directory Then show the final results."
+  }
+}
