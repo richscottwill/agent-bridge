@@ -76,6 +76,16 @@ These are live. They execute without Richard thinking.
 - **Integration:** Hedy MCP power (18 tools — GetSessions, GetSessionDetails, GetSessionHighlights, GetSessionToDos, GetAllTopics, GetTopicDetails, ListSessionContexts, UpdateSessionContext, UpdateTopic, etc.)
 - **Feeds into:** Memory (relationship dynamics), Nervous System (communication patterns, Loop 7), Eyes (meeting prep — what was discussed last time)
 
+### SharePoint Sync (Hook: `sharepoint-sync`)
+- **What it does:** Converts eligible wiki articles from `~/shared/artifacts/` to .docx files and writes them to a OneDrive-synced SharePoint folder. Filters by audience (amazon-internal only) and status (configurable, default REVIEW+FINAL). Incremental sync via SHA-256 content hashing — only changed articles are re-exported. Dry-run first, then confirms with Richard before live sync.
+- **Trigger:** userTriggered (one-click "Sync to SharePoint" button)
+- **Judgment required:** Yes — hook runs dry-run first, shows what will be created/updated/removed, and asks Richard to confirm before executing.
+- **Tool:** `python3 ~/shared/tools/sharepoint-sync/cli.py --mode directory`
+- **Config:** `~/shared/tools/sharepoint-sync/config.yaml`
+- **Output:** .docx files in OneDrive folder → auto-syncs to SharePoint document library
+- **Local (Windows):** `c:/Users/prichwil/OneDrive - amazon.com/Artifacts/wiki-sync`
+- **Portability:** Pure Python, no API keys. Config is YAML, manifest is JSON. Works on any machine with Python + OneDrive sync.
+
 ---
 
 ## 📋 Templates (pre-computed responses)
@@ -153,6 +163,7 @@ Tracks installed system infrastructure only — hooks, agents, tools, and guards
 | Eyes Chart Agent | ✅ Active | 3/25 | Visualization specialist. Read-only. Invokes progress-charts tool. |
 | Safety: Email Block | ✅ Active | Always on | preToolUse guard |
 | Safety: Calendar Block | ✅ Active | Always on | preToolUse guard |
+| SharePoint Sync | ✅ Active | 3/27 | Wiki → .docx → OneDrive → SharePoint. Hook: `sharepoint-sync` |
 
 ---
 
