@@ -2,7 +2,7 @@
 
 *The skeleton that holds everything together across sessions. Bootstrap sequence, directory conventions, environment rules, and the ground-truth files that define Richard's current state.*
 
-Last updated: 2026-03-26 (Thursday evening PT)
+Last updated: 2026-03-27 (Friday evening PT)
 
 ---
 

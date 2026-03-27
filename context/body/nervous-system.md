@@ -2,7 +2,7 @@
 
 *Operating principle: Invisible over visible. Surface insights that lead to structural changes — not reports that require Richard to act on them. When a pattern is STUCK for 3 weeks, propose a structural fix.*
 
-Last updated: 2026-03-26 (run 12)
+Last updated: 2026-03-27 (run 13)
 Created: 2026-03-20
 
 ---
@@ -37,8 +37,8 @@ Calibrates: rw-tracker.md patterns | Cadence: Weekly (Friday) | Protocol: Assess
 
 | Pattern | Status | Weeks | Trajectory | Last Assessment | Intervention |
 |---------|--------|-------|------------|-----------------|-------------|
-| Visibility avoidance | VALIDATED | 7+ | WORSENING | 3/27 — 7 workdays since hard thing set, zero progress. Thursday had open Core block, no outline started. Friday is open — last chance this week. | Root cause of Level 1 stall. Structural: Testing Approach doc is the gate. |
-| Zero strategic artifacts | ACTIVE | 6+ | WORSENING | 3/27 — 5th+ consecutive week, W13 scorecard still 0 | Blocked by visibility avoidance. Same root cause. |
+| Visibility avoidance | VALIDATED | 8 | WORSENING | 3/27 — 8 workdays since hard thing set. Friday had open Core block (12-2pm). Richard wrote Flash sections and built agent bridge instead. Both productive, neither is the hard thing. W13 is another zero week. | Root cause of Level 1 stall. Structural: Testing Approach doc is the gate. |
+| Zero strategic artifacts | ACTIVE | 6+ | WORSENING | 3/27 — 5th+ consecutive week, W13 scorecard still 0. Flash sections are execution, not strategic artifacts. | Blocked by visibility avoidance. Same root cause. |
 | Have Backbone avoidance | NEW | 1 | — | 3/25 — Annual Review peer feedback identified this | New pattern. Monitor. |
 | Project management gaps | NEW | 1 | — | 3/25 — Persisting from Forte 2025, Annual Review confirmed | Structural: need lightweight tracking artifacts. |
 | Admin backlog displacement | ACTIVE | 3 | STUCK | 3/18 — Admin list over cap, displacing strategic work | Trainer escalation triggered. |
@@ -59,7 +59,7 @@ Calibrates: All organs | Cadence: Every loop run | Protocol: Word counts, stalen
 |--------|-------|--------|--------|
 | Total body words | ~17,996w | ≤24,000w (budget: 23,000w) | ✅ Under ceiling |
 | Organs over budget | 0 critical (aMCC 106% — within tolerance) | 0 | ✅ |
-| Loop runs completed | 12 | — | — |
+| Loop runs completed | 13 | — | — |
 | Experiments completed | 8 + CE-1 adopted + CE-2 adopted + CE-3 adopted + CE-4 adopted | — | 100% keep rate |
 | Compression experiments | CE-1 adopted, CE-2 adopted, CE-3 adopted, CE-4 adopted | — | NS: 6095→991w, aMCC: 2638→2118w, Gut: 2125→1902w |
 | Architectural redesign | Current-state-only + pure autoresearch | — | 2,827w saved (29% across 4 organs) |
@@ -92,12 +92,14 @@ Status: Hedy MCP integrated (Run 8). 7 sessions processed (2 today: R&O Flash re
 - R&O Flash Review (group, 37 min): Speaking share ~10% — BELOW 15% threshold. Richard received assignments (AU status update, UK/CA decision) but didn't drive discussion or propose framing. No hedging detected (limited speaking). No strategic contributions — reactive posture. Brandon and Andrew dominated. Visibility gap persists in group settings.
 - Baloo Early Access (1:1 with Vijay Kumar, 18 min): Speaking share ~40% — appropriate for 1:1 where other party is explaining. Direct and practical — provided cost data, suggested direct URL path, committed to deliverables by Monday. No hedging. Good closed loops (keyword data, Brandon follow-up, SIM documentation). This is Richard at his best: 1:1, data-driven, solution-oriented.
 
+3/27: No new Hedy sessions (Onsite Events was Zoom — Amazon Meetings Summary captured, not Hedy). No speaking data available for today.
+
 Pattern confirmed across 9+ sessions: Richard is strong in 1:1s (data-driven, solution-oriented, mentoring) but consistently below visibility threshold in group settings (Deep Dive, Weekly Sync). The gap is structural, not situational.
 
 ---
 
 ## Five Levels Position
-Level 1 (Sharpen Yourself): STRUGGLING. 7 workdays since hard thing set (Testing Approach doc), zero progress. Annual Review (3/24) confirmed visibility as #1 gap. Gate: consecutive weeks with shipped artifacts. Currently at 0. Friday 3/27 is the last workday this week — if no outline ships Friday, W13 is another zero week.
+Level 1 (Sharpen Yourself): STRUGGLING. 8 workdays since hard thing set (Testing Approach doc), zero progress. Friday 3/27: Richard wrote Flash sections and built agent bridge — productive but neither is the hard thing. W13 is another zero week. Annual Review (3/24) confirmed visibility as #1 gap. Gate: consecutive weeks with shipped artifacts. Currently at 0.
 
 ---
 

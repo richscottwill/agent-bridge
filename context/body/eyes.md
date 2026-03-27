@@ -152,24 +152,24 @@ Shifted from bulk/wholesale/B2B messaging → price, quality, selection messagin
 
 ## Predicted Questions (next session)
 
-Based on calendar patterns, email threads, active projects as of 3/26/26 Thursday evening PT.
+Based on calendar patterns, email threads, active projects as of 3/27/26 Friday evening PT.
 
-**Q1: "What's on my plate tomorrow?"**
-LIGHT meeting day Friday. Update Kingpin (7am PT, 30 min — recurring). Biweekly AB Onsite Events Stakeholder (8:30am PT, 30 min — Caroline Miller, tentative). Otherwise open. AI Max test design due 3/28 (Saturday — effectively due Friday). Testing Approach doc outline still not started — 7 workdays since hard thing was set. Flash content due (AU status update, UK/CA decision). Baloo keyword cost data due Monday.
+**Q1: "What's on my plate Monday?"**
+Baloo early access launches EOD Monday 3/30. Richard owes keyword cost data + "don't use Google" blurb (Vijay). Memorial Day round 2 creative assets due Monday 3/30 (Onsite Events). Flash due 3/30 (sections written, needs final assembly). Lorena Q2 spend still unanswered (4 days). Polaris rollout timeline still not created. Testing Approach doc still not started — 8 workdays at zero.
 
-**Q2: "What happened with OCI APAC?"**
-Mike Babich (Google) sent 3 follow-up questions at 11pm 3/26: (1) loop him into case 6-7924000040915 email thread, (2) confirm if new user access resolved the issue, (3) status of appeal for first user. Brandon needs to respond. Still unresolved — JP OCI launch delayed.
+**Q2: "What happened with the Polaris weblab?"**
+Frank Volinsky (MCS-3004) acknowledged 3/27: "Received. Our team will start scoping out and will get back with an ETA next week." Alex checking in with Vijeth on page creation task (due today 3/27). Weblab dial-up still targeting April 6-7.
 
-**Q3: "What came out of the R&O Flash review?"**
-US highlight renamed to "Modern Search Structure" (combines campaign + portfolio consolidation). CA moved from highlight to status update (tariff-driven). AU moved from lowlight to announcements. WhatsApp simplified. Video strategy: Andrew to specify "unlocking new placements." DE tech issue under investigation (EAAAAA project). App resourcing: Peter to escalate to Kate/Todd. Brandon called out late submissions.
+**Q3: "What came out of the Onsite Events meeting?"**
+Prime Day marketing brief process introduced. Translation SLA changing 3→4 days for <500w content. Memorial Day round 2 assets due Monday 3/30, feedback due Tuesday 3/31. Marquee event tags restricted. Teams retain existing homepage hero placements for Prime Day.
 
-**Q4: "What does Lorena need?"**
-Two open requests: (1) Q2 expected spend for MX PO submission (3/25 email — needs response), (2) keyword performance data + negative keyword strategy (3/19 email — still pending). She also added beauty LP inputs. Lorena is actively engaging — good sign for delegation.
+**Q4: "Did Richard write anything today?"**
+Yes — Flash sections (MX highlight, AU update, Bid Strategy Test, Brand LP Tests, Paid App status). Also built the agent bridge (Google Sheets/Docs communication layer). But NOT the Testing Approach doc. The Flash writing shows Richard CAN write when the topic is concrete and data-driven. The Testing Approach doc's blank-page paralysis is the resistance.
 
-**Q5: "What's the Baloo early access status?"**
-Vijay briefed Richard 3/26. 50 stakeholders get Tampermonkey script. Direct URL (shop.business.amazon.com) for routine testing, Google search restricted to 5-6 leadership demo clicks. Richard owes keyword cost data + "don't use Google" blurb by Monday 3/30. Vijay will tag Richard in Baloo SIM. Kate attended prior demo — positive.
+**Q5: "What's the Karpathy identity protection request?"**
+Brandon's pronouns (she/her) were compressed out of memory.md during a loop experiment. Richard caught it manually. Requesting: (1) gut.md rule making identity fields non-compressible, (2) heart.md standing adversarial eval question for Memory experiments ("What are Brandon's pronouns?"). Routed to Karpathy.
 
-Last updated: 2026-03-26 (Thursday evening PT)
+Last updated: 2026-03-27 (Friday evening PT)
 
 ---
 

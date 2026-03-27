@@ -4,6 +4,65 @@
 LOOP READ OPTIMIZATION: The autoresearch loop reads from the top DOWN to the 
 nearest LOOP_READ_MARKER comment. Everything below the marker was already 
 
+## 2026-03-27 — Autoresearch Loop Run 13 (Friday evening)
+
+### Phase 1: Maintenance
+- **current.md**: Bumped to run 13. Added Paid Acquisition Flash section (Richard wrote MX highlight, AU update, Bid Strategy Test, Brand LP Tests, Paid App status on 3/27). Added Agent Bridge section (built and live 3/27). Added Biweekly AB Onsite Events section (Prime Day brief process, translation SLA change, Memorial Day assets due 3/30). Updated Polaris section (Frank Volinsky MCS-3004 acknowledged, Alex Asana page creation task). Updated pending actions (Flash sections ✅, bridge ✅, Onsite Events ✅, added Memorial Day feedback, Kudoboard, Apple Ads investigation, bridge Code.gs action). Updated Frank Volinsky and Caroline Miller in key people.
+- **Email scan**: Key signals since Run 12: Frank Volinsky (MCS-3004 weblab scoping started, ETA next week), Alex VanDerStuyf (Asana page creation task, checking Vijeth), Amazon Meetings Summary (Onsite Events — Prime Day brief, translation SLA, Memorial Day), Apple Ads (system issue, campaigns overspent), Asana (6 overdue tasks), LiveRamp (files ready), Kudoboard for Kate Vives (due 4/1), Adobe OCI report completed.
+- **Calendar scan**: Today (Fri 3/27): Kingpin 7am ✅, Sweep 7:30am, Onsite Events 8:30am ✅, Core 12-2pm, Engine Room 2-3pm, Admin 3-3:30pm. Weekend: no meetings. Monday 3/30: check next session.
+- **Hedy scan**: No new sessions since Run 12 (last: Baloo 3/26). Onsite Events was Zoom (Amazon Meetings Summary, not Hedy).
+- **Sent items**: Daily Brief 3/27, Richard Comp 1:1 acceptance, Brief template variations (J/K/L/FINAL), PS Keywords Early Access acceptance, Bridge test doc drafts.
+- **Intake**: 3 files processed and archived (bridge-morning-integration.md, flash-session-2026-03-26.md, session-2026-03-27-bridge-build.md). 1 file kept for Karpathy routing (karpathy-request-identity-protection.md). 1 trigger file kept (pending-artifact-fixes.md). WW Dashboard folder still unprocessed.
+- **Org chart**: SKIPPED — no changes.
+- **Soul**: SKIPPED — no changes.
+
+### Phase 2: Cascade
+- **Brain**: Updated Five Levels position (8 workdays at zero, W13 another zero week). Added Flash sections and bridge as Level 2/5 parallel work. Updated date.
+- **Eyes**: Full predicted QA rewrite for weekend/Monday (Baloo launch Monday, Flash due, Memorial Day assets, Lorena overdue, Polaris weblab ETA, Karpathy identity request). Updated date.
+- **Hands**: Rewrote P1 overdue counts (+1 day each). Replaced P3 (was Friday calendar) with Monday deliverables (Baloo, Memorial Day, Flash assembly, Kudoboard). Updated overdue table. Refreshed new signals section (Flash ✅, bridge ✅, Onsite Events ✅, Frank weblab, Alex page task, Apple Ads, Karpathy request). Updated date.
+- **Memory**: Updated Caroline Miller (Onsite Events 3/27, Prime Day brief, Memorial Day assets). Updated Frank Volinsky (MCS-3004 weblab scoping 3/27). Updated date.
+- **Spine**: Updated date.
+- **Nervous System**: Updated run count (13). Updated visibility avoidance (8 workdays, WORSENING — Friday had open Core block, Richard wrote Flash + built bridge instead). Updated zero artifacts (W13 zero week confirmed). Updated Five Levels position. Added note: no Hedy data for 3/27. Updated date.
+- **aMCC**: Updated streak (still 0, 8 workdays). Updated last avoidance (3/27 — Core block available, wrote Flash + built bridge instead of Testing Approach). Updated date.
+- **Device**: Updated loop run count (13).
+- **Gut**: Updated word budget table with Run 13 actuals. Total body: 19,500w (81% of ceiling). aMCC 110% — within tolerance. Device back to 91% (post CE-5 + bridge entry). No critical overages.
+
+### Intake Processing
+- **bridge-morning-integration.md** → ARCHIVED. Facts extracted to device.md (bridge entry already existed from build session).
+- **flash-session-2026-03-26.md** → ARCHIVED. Facts extracted to current.md (Flash sections, writing style observations), eyes.md (MX data points), hands.md (Flash status).
+- **session-2026-03-27-bridge-build.md** → ARCHIVED. Facts extracted to current.md (bridge project), device.md (bridge entry).
+- **karpathy-request-identity-protection.md** → KEPT in intake. Routed to Karpathy: requests (1) gut.md identity field protection rule, (2) heart.md standing adversarial eval question for Memory. Karpathy-governed changes — this loop does not modify heart.md or gut.md compression rules.
+- **pending-artifact-fixes.md** → KEPT (trigger file).
+- **WW Dashboard folder** → KEPT (unprocessed data).
+
+### Phase 3: Experiment — SKIPPED
+- Reason: CE-6 (next in queue) targets Brain, aMCC, Memory, Spine. All four were modified by maintenance this run (per-organ cooldown). CE-7 depends on CE-6. Karpathy identity protection request in intake but requires Karpathy session, not loop experiment. No eligible experiment.
+
+### Suggested Changes
+1. **Monday morning: write the Testing Approach outline BEFORE anything else** — 8 workdays. W13 is zero. The Flash writing proves Richard CAN write when the topic is concrete. The resistance is blank-page paralysis on the Testing Approach doc specifically. Counter: the bridge draft already has 5 section headers (Why testing matters, Methodology, Active tests, Results framework, 2026 roadmap). Open that draft. Add 2-3 bullets under each header. 30 minutes. That's the outline. Why: Level 1 gate. Measure: outline exists by Monday EOD. Reversible: N/A. Risk: none — the sections are already named. → Approve/Deny?
+
+2. **Reply to Lorena Monday morning** — 4 days without a response. She's actively taking ownership of MX PS. Drafts were created in the morning routine days ago. Copy-paste and send. 5 minutes. Why: Level 3 (team leverage) + NS Loop 4 (delegation verification). Measure: reply sent by Monday 10am. Reversible: N/A. Risk: none. → Approve/Deny?
+
+3. **Route Karpathy identity protection request next session** — Brandon's pronouns were compressed out of memory.md. This is a real data loss with real harm potential (misgendering in drafted communications). The fix is two Karpathy-governed changes: gut.md non-compressible identity fields + heart.md standing eval question. Route to Karpathy at next opportunity. Why: Do-no-harm principle (100% accuracy for Memory). Measure: gut.md and heart.md updated. Reversible: yes (revert both changes). Risk: low — additive rules, no content removed. → Approve/Deny?
+
+### Self-Audit
+- CASCADE: 9/9 organs checked. Brain ✅, Eyes ✅, Hands ✅, Memory ✅, Spine ✅, Nervous System ✅, aMCC ✅, Device ✅, Gut ✅.
+- STRUCTURAL CHANGES: No files created, renamed, or moved. 3 intake files archived to ~/shared/context/archive/.
+- COHERENCE SPOT-CHECK: (1) current.md Polaris section references "MCS-3004" — VERIFIED in Frank Volinsky's Taskei email 3/27. (2) gut.md total body says "19,500w" — VERIFIED via wc -w (19,500w actual).
+- SELF-AUDIT: Cascade 9/9 organs covered. Structural changes: no (archiving only). Coherence spot-check: 2/2 valid.
+
+### Gut Health
+- Body: 19,500w / 24,000w ceiling (81%). Under ceiling by ~4,500w.
+- Over budget: aMCC (110%) — within tolerance.
+- Intake: 3 items remaining (Karpathy request, pending-artifact-fixes trigger, WW Dashboard folder).
+- Bloat signals: none.
+- 🧳 Portable body: organs stale since last sync (3/24). Multiple organs modified since then. Friday sync recommended.
+
+### Summary
+Run 13: ingested Flash writing session (MX highlight, AU update, project statuses), agent bridge build, Onsite Events meeting, and Polaris weblab scoping confirmation. All 9 organs cascaded. 3 intake files processed and archived. CE-6 skipped (per-organ cooldown on all targets). Karpathy identity protection request routed but not executed (Karpathy-governed). aMCC streak 0 — 8 workdays, W13 is another zero week. Flash writing proves Richard can write; the Testing Approach doc resistance is specific, not general.
+
+<!-- LOOP_READ_MARKER: 2026-03-27-run13 -->
+
 ## 2026-03-27 — Autoresearch Loop Run 12 (Friday)
 
 ### Phase 1: Maintenance

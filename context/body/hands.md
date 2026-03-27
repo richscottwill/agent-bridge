@@ -4,8 +4,8 @@
 
 *Operating principle: Reduce decisions, not options. Every task should have a clear next action, a pre-written draft if it involves communication, and a due date that drives My Day. Richard opens his list and acts — he doesn't plan.*
 
-Last updated: 2026-03-26 (Thursday evening PT, autoresearch loop run 12)
-Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, annual review, Adi sync, OCI APAC escalation, R&O Flash review, Baloo early access
+Last updated: 2026-03-27 (Friday evening PT, autoresearch loop run 13)
+Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, annual review, flash session 3/27, bridge build, Onsite Events
 
 ---
 
@@ -19,11 +19,11 @@ Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, annual review, A
 ### P1 — This Week Deliverables
 | # | Action | Due | Status | Est. Time | Blockers |
 |---|--------|-----|--------|-----------|----------|
-| 1 | **Create one-page Polaris rollout timeline** with dates and owners (Brandon request 3/23) | **This week** | NOT STARTED | 30-45 min | None |
-| 2 | **AI Max test design** | **3/28 (TOMORROW)** | NOT STARTED | 2 hours | None |
-| 3 | **Respond to Lorena — Q2 expected spend for MX PO** | **ASAP** | NOT STARTED | 15 min | None |
-| 4 | **Coordinate MCS tracking/attribution post-migration** | **This week** | NOT STARTED | 30 min | None |
-| 5 | **MX/AU confirm budgets** | **3/25 (1d OVERDUE)** | NOT STARTED | 15 min | R&O tasks |
+| 1 | **Create one-page Polaris rollout timeline** with dates and owners (Brandon request 3/23) | **This week (OVERDUE)** | NOT STARTED | 30-45 min | None |
+| 2 | **AI Max test design** | **3/28 (OVERDUE)** | NOT STARTED | 2 hours | None |
+| 3 | **Respond to Lorena — Q2 expected spend for MX PO** | **ASAP (4d overdue)** | NOT STARTED | 15 min | None |
+| 4 | **Coordinate MCS tracking/attribution post-migration** | **This week (OVERDUE)** | NOT STARTED | 30 min | None |
+| 5 | **MX/AU confirm budgets** | **3/25 (2d OVERDUE)** | NOT STARTED | 15 min | R&O tasks |
 
 ### P2 — Overdue Items
 | # | Action | Due | Status | Blockers |
@@ -35,17 +35,14 @@ Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, annual review, A
 | 10 | OCI TT/suffix — FR to 25% | 3/20 (6 DAYS OVERDUE) | NOT STARTED | None |
 | 11 | MX Auto page — Vijeth footer | 3/20 (6 DAYS OVERDUE) | NOT STARTED | Vijeth |
 
-### P3 — Tomorrow's Calendar (Fri 3/27, LIGHT)
+### P3 — Monday (3/30)
 | # | Action | Due | Status | Notes |
 |---|--------|-----|--------|-------|
-| 12 | Update Kingpin | 7am PT | Accepted | Recurring — MX Jan/Feb/Mar still blocked by Andes |
-| 13 | Biweekly AB Onsite Events Stakeholder | 8:30am PT | Tentative | Caroline Miller. Respond or decline. |
-
-### P4 — Monday (3/30)
-| # | Action | Due | Status | Notes |
-|---|--------|-----|--------|-------|
-| 14 | Baloo: keyword cost data + "don't use Google" blurb | 3/30 | NOT STARTED | Vijay needs this for early access launch EOD Monday |
-| 15 | Baloo: follow up with Brandon on MBR click-cost guardrails | 3/30 | NOT STARTED | Close the loop from MBR concern |
+| 12 | Baloo: keyword cost data + "don't use Google" blurb | 3/30 | NOT STARTED | Vijay needs this for early access launch EOD Monday |
+| 13 | Baloo: follow up with Brandon on MBR click-cost guardrails | 3/30 | NOT STARTED | Close the loop from MBR concern |
+| 14 | Memorial Day round 2 creative assets feedback | 3/31 (Tue) | NOT STARTED | From Onsite Events meeting 3/27 |
+| 15 | Flash final assembly and submission | 3/30 | SECTIONS WRITTEN | MX, AU, Bid Strategy, Brand LP done. Paid App blocked (Andrew). |
+| 16 | Kudoboard for Kate Vives | 4/1 (Wed) | NOT STARTED | From Ariel Sencil 3/27 |
 
 ### P5 — This Week+
 | # | Action | Due | Status | Blockers |
@@ -88,26 +85,28 @@ Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, annual review, A
 ## What's Overdue
 | Task | Original Due | Days Overdue |
 |------|-------------|--------------|
-| Raise PO for PAM US | 3/1 | 25 days |
-| PAM R&O input | 3/10 | 16 days |
-| Flash topics | 3/17 | 9 days |
-| Kingpin Goals | 3/17 | 9 days (blocked) |
-| WW redirect Adobe reporting | 3/19 | 7 days |
-| OCI FR to 25% | 3/20 | 6 days |
-| MX Auto page (Vijeth) | 3/20 | 6 days |
-| MX invoice delegation | 3/21 | 5 days (VOID — Carlos transitioned, needs new owner) |
-| MX/AU confirm budgets | 3/25 | 1 day |
+| Raise PO for PAM US | 3/1 | 26 days |
+| PAM R&O input | 3/10 | 17 days |
+| Flash topics | 3/17 | 10 days |
+| Kingpin Goals | 3/17 | 10 days (blocked) |
+| WW redirect Adobe reporting | 3/19 | 8 days |
+| OCI FR to 25% | 3/20 | 7 days |
+| MX Auto page (Vijeth) | 3/20 | 7 days |
+| MX invoice delegation | 3/21 | 6 days (VOID — Carlos transitioned, needs new owner) |
+| MX/AU confirm budgets | 3/25 | 2 days |
+| Lorena Q2 spend | 3/25 | 2 days (request, not hard deadline) |
+| AI Max test design | 3/28 | 0 days (due tomorrow, effectively overdue) |
 
-## New Signals (since 3/26)
-- 🆕 Mike Babich (Google) sent 3 follow-up questions on OCI APAC at 11pm 3/26 — Brandon needs to respond (loop Mike into case thread, confirm new user access, appeal status).
-- 🆕 R&O Flash review (Deep Dive 3/26): US highlight renamed "Modern Search Structure," CA → status update (tariff), AU → announcements, WhatsApp simplified, DE tech issue under investigation (EAAAAA).
-- 🆕 Baloo early access (3/26): 50 stakeholders, Tampermonkey script, direct URL for testing, Google search restricted. Richard owes keyword cost data + blurb by Monday 3/30.
-- 🆕 Asana: Paid App "Bi-monthly Flash" moved to Complete.
-- 🆕 Alex (Asana reminder 3/26): AU + MX pages ready to go live minus translations. Weblab dial-up discussed.
-- 🆕 Jen Vitiello (Adobe): sent dinner + meeting invites for Adobe Advertising event.
-- 🆕 Google Ads: Veo video ad creation tool announcement.
-- 📅 Tomorrow (Fri 3/27): Kingpin 7am, Onsite Events 8:30am (tentative). Otherwise OPEN — best day for Testing Approach outline.
-- 📅 AI Max test design due 3/28 (Saturday — effectively due Friday).
+## New Signals (since 3/27)
+- ✅ Flash sections WRITTEN (3/27): MX highlight, AU update, Bid Strategy Test, Brand LP Tests, Paid App (blocked). Due 3/30 for final assembly.
+- ✅ Agent Bridge BUILT (3/27): Google Sheets/Docs communication layer live. Device.md updated.
+- ✅ Onsite Events ATTENDED (3/27): Prime Day brief process, translation SLA change, Memorial Day assets due 3/30.
+- 🆕 Frank Volinsky (MCS-3004, 3/27): Polaris weblab scoping started. ETA next week.
+- 🆕 Alex (Asana 3/27): Page Creation task, checking in with Vijeth. Due today.
+- 🆕 Apple Ads (3/27): System issue — campaigns overspent. Needs investigation.
+- 🆕 Kudoboard for Kate Vives — due April 1 (from Ariel Sencil).
+- 🆕 Karpathy request: identity field protection in compression (Brandon's pronouns were compressed out).
+- 📅 Monday 3/30: Baloo early access launch, Flash due, Memorial Day assets due, Lorena Q2 spend overdue.
 
 ---
 

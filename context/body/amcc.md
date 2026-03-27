@@ -4,8 +4,7 @@
 
 *Operating principle: Protect the habit loop. The aMCC's job is to make the hard thing the default, not the exception. The streak, the escalation ladder, the resistance taxonomy — these are structural nudges that make avoidance harder than action. The intervention should feel like gravity pulling toward the right choice, not a voice yelling to change direction.*
 
-Last updated: 2026-03-26 (loop run 12 — streak still 0, 7 workdays no progress, FRIDAY IS LAST CHANCE)
-Created: 2026-03-20
+Last updated: 2026-03-27 (loop run 13: Flash sections written, bridge built, Onsite Events attended, Polaris weblab scoping confirmed)
 
 ---
 
@@ -13,7 +12,7 @@ Created: 2026-03-20
 
 Intervenes in the gap between knowing and doing — the moment where Richard knows the right thing but is about to choose the comfortable thing. Not the trainer (which calls out patterns after the fact). The aMCC fires *in the moment*, before avoidance becomes a pattern.
 
-**The biological truth:** The aMCC physically grows with sustained effortful behavior and shrinks with avoidance. The streak tracks that growth. Every day Richard chooses the harder, higher-leverage task, the streak grows. Every day he avoids it, the streak resets.
+**The biological truth:** The aMCC physically grows with sustained effortful behavior and shrinks with avoidance. The streak is the single most important metric in this organ. It measures consecutive days where Richard chose the hard thing over the comfortable thing.
 
 ---
 
@@ -45,11 +44,11 @@ The streak is the single most important metric in this organ. It measures consec
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| Current streak | 0 days | 7 workdays since hard thing was set (3/20). No outline started. Thursday Core block was available — no evidence of progress. Friday 3/27 is the LAST workday this week. If no outline ships Friday, W13 is another zero week. |
+| Current streak | 0 days | 8 workdays since hard thing was set (3/20). No Testing Approach outline started. Friday 3/27: Richard wrote Flash sections (MX highlight, AU update, project statuses) and built the agent bridge — productive day, but neither is the hard thing. Flash is Level 2 execution. Bridge is Level 5 infrastructure. The Testing Approach doc remains untouched. W13 is another zero week. |
 | Longest streak | 0 days | Tracking starts 3/20 |
 | Streak resets (total) | 1 | Initial reset from artifact drought |
 | Last hard choice | 3/23 | Deprioritized AEO in favor of higher-leverage Testing Approach doc — strategic decision, not avoidance. |
-| Last avoidance | 3/26 | Thursday — Deep Dive and ACQ Promo done by 10:30am. Core block 10:30am-1pm was available. Adobe at 1pm. Baloo 1:1 at 2:30pm. No evidence outline was started despite multiple open windows. |
+| Last avoidance | 3/27 | Friday — light calendar (Kingpin 7am, Onsite Events 8:30am). Core block 12-2pm was available. Richard spent the day writing Flash sections and building the agent bridge. Both are valuable. Neither is the hard thing. Comfort zone gravity: building systems and writing execution content instead of the strategic artifact. |
 
 ### Streak History
 Removed — current-state-only principle. Historical data lives in changelog.md.

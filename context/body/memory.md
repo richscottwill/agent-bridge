@@ -4,7 +4,7 @@
 
 *Operating principle: Invisible over visible. Memory works best when Richard doesn't have to look things up. The relationship graph, tone notes, and meeting briefs should flow invisibly into drafts and prep — Richard gets a draft that already sounds right for the recipient without having to think about register.*
 
-Last updated: 2026-03-26 (loop run 12: OCI APAC Mike update, R&O Flash review, Baloo early access)
+Last updated: 2026-03-27 (loop run 13: Flash sections written, bridge built, Onsite Events, Polaris weblab scoping)
 
 ---
 
@@ -148,15 +148,15 @@ L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate R
 - Meeting dynamic (from Hedy 3/26): Vijay is organized and proactive — came prepared with the full early access plan and two proposals (direct URL vs Google search). Defers to Richard on PS cost implications. Good collaborative dynamic. Kate attended his demo and was positive. Vijay will tag Richard in Baloo SIM for ongoing alignment. Richard was direct and practical — provided $4.43 NB CPC data, suggested direct URL path, committed to deliverables by Monday. No hedging. Good closed loops.
 
 ### Caroline Miller (carolimy) — Product Marketing Manager, reports to Ann Vu
-- Last interaction: 3/10 (Memorial Day Sale creative deadline reminder)
+- Last interaction: 3/27 (Biweekly AB Onsite Events — Prime Day brief process, translation SLA, Memorial Day assets)
 - Tone: Professional, organized. Signs "Cheers, Caroline Miller"
-- Current topic: Memorial Day Sale 2026 creative requests
+- Current topic: Prime Day marketing brief process, Memorial Day Sale 2026 (round 2 assets due 3/30, feedback due 3/31)
 - Draft style: Match organized style, reference deadlines clearly.
 
-### Frank Volinsky — MX market, page builds
-- Last interaction: 3/17 (MX Auto/Beauty pages CTA comment, waiting Vijeth footer)
-- Tone: Professional
-- Current topic: MX Automotive and Beauty landing pages
+### Frank Volinsky — MCS team, page builds/weblab
+- Last interaction: 3/27 (Taskei MCS-3004 comment: "Received. Our team will start scoping out and will get back with an ETA next week.")
+- Tone: Professional, brief
+- Current topic: WW PS Brand Polaris Redesign weblab scoping, MX Automotive/Beauty landing pages
 - Draft style: Brief, action-oriented.
 
 ---

@@ -152,7 +152,7 @@ Tracks installed system infrastructure only — hooks, agents, tools, and guards
 | Function | Status | Last Run | Notes |
 |----------|--------|----------|-------|
 | Morning Routine | ✅ Active | 3/24 | One-click: sync + drafts + brief + blocks |
-| Autoresearch Loop | ✅ Active | 3/27 | 12 runs completed |
+| Autoresearch Loop | ✅ Active | 3/27 | 13 runs completed |
 | Agent Bridge | ✅ Active | 3/27 | Google Sheets/Docs bridge to personal swarm. `~/shared/tools/bridge/bridge.py` |
 | Dashboard Ingester | ✅ Active | 3/23 | `python3 shared/tools/dashboard-ingester/ingest.py <xlsx>` — all 10 markets |
 | Progress Charts | ✅ Active | 3/25 | Via `update-dashboard` hook only — single entry point for HTML dashboard |

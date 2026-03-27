@@ -1,6 +1,6 @@
 # Active Context — Richard Williams
 
-Last updated: 2026-03-26 (Thursday evening PT, autoresearch loop run 12)
+Last updated: 2026-03-27 (Friday evening PT, autoresearch loop run 13)
 
 ## Role & Scope
 - Amazon Business, Paid Acquisition / Paid Search
@@ -23,7 +23,8 @@ Last updated: 2026-03-26 (Thursday evening PT, autoresearch loop run 12)
 - US: Stacey switched to Polaris on 3/24 ✅
 - WW: Weblabs needed for AU, JP, EU (DE + FR per Andrew's recco). Brandon confirmed do-no-harm: minimal localization, follow US template.
 - ✅ Weblab ticket SUBMITTED (3/21): "WW PS Brand Polaris Redesign" via Taskei. Weblab dial-up targeting April 6-7.
-- Alex AEM translations for AU/MX/JP/CA due 3/26 (TODAY). EU5 AEM blocked (ops ticket est. 3/24).
+- 🆕 Frank Volinsky (MCS-3004, 3/27): "Received. Our team will start scoping out and will get back with an ETA next week." Weblab scoping in progress.
+- 🆕 Alex (Asana 3/27): Added Richard to "Page Creation / Page Edit, ps-brand XF + Template" task. Alex checking in with Vijeth on status. Due today.
 - Brandon's priority: AU > MX > DE > UK > JP > FR > IT > ES > CA > US-ES
 - US-ES page: noindex/nofollow, Alex working with Yun
 - Action: Create one-page Polaris rollout timeline with dates and owners (due this week — running out of time)
@@ -49,12 +50,35 @@ Last updated: 2026-03-26 (Thursday evening PT, autoresearch loop run 12)
 - Strengths: analytical depth, testing expertise, ownership, bias for action, mentoring.
 - Persisting gaps (same as Forte 2025): communication, project management, strategic proactivity.
 
+### Paid Acquisition Flash (3/27, Richard wrote sections)
+- Richard wrote MX highlight (~100w), AU update (~50w), Bid Strategy Test status, Brand LP Tests status, Paid App status (blocked — needs Andrew).
+- MX: NB CPA $267→$112 in H2 2025, sustained $117 YTD 2026 despite +16% CPC. Regs +14% vs H2, exceeding OP2 by 16%.
+- AU: keyword audit, CPA optimization, Polaris migration monitoring.
+- Bid Strategy: 6 consecutive weeks NB CPC decline (-21%), NB CPA $168→$117. No longer a test.
+- Brand LP: US switched March, weblab submitted, dial-up April 6-7.
+- Status: Sections written. Flash due 3/30.
+
+### Agent Bridge (3/27, built and live)
+- Google Sheets/Docs communication layer between Kiro and personal agent swarm.
+- Toolkit: `~/shared/tools/bridge/bridge.py` + CLI.
+- Message bus, context snapshots, agent registry, heartbeat monitoring.
+- Apps Script automation deployed (bus poller, staleness checker, heartbeat monitor, request notifier).
+- 10 Drive folders + 3 new docs (portable body, testing approach, agent protocols) created.
+- Status: Live. Richard needs to paste Code.gs into Apps Script editor and run createTriggers().
+
 ### Paid Acquisition Testing
 - Andrew active in Testing Doc Loop (mentioned Richard 3/18)
 - Kate meeting Apr 16
 
 ### Microsoft Advertising
 - 10x "account paused" emails (3/17). Needs triage.
+
+### Biweekly AB Onsite Events (3/27, attended)
+- Prime Day marketing brief process introduced (event overview, historical performance, target audience, key messages, goals, KPIs).
+- Translation SLA changing 3→4 days for content <500w when JP secondary support ends.
+- Memorial Day round 2 assets due Monday 3/30, feedback due Tuesday 3/31.
+- Marquee event tags restricted to official event emails only.
+- Teams retain existing homepage hero placements for Prime Day.
 
 ### OCI APAC MCC Access Issues (3/25, Brandon-escalated)
 - Brandon escalated to Google (Mike Babich) — team can't access APAC MCC (852-899-4580) for OCI.
@@ -129,7 +153,7 @@ Last updated: 2026-03-26 (Thursday evening PT, autoresearch loop run 12)
 | Harjeet Heer | hkheer | Stepped away from AU day-to-day |
 | Kate Rundell | kataxt | L8 Director. Visible on AU CPC thread. |
 | Sharon Serene | ssserene | Prime Day 2026 Visibility Intake (3/17) |
-| Frank Volinsky | — | MX pages. Waiting Vijeth on footer. |
+| Frank Volinsky | — | MX market, page builds. MCS-3004 weblab scoping (3/27). |
 | Suzane Huynh | — | Adobe, OCI Rollout Discussion (3/19) |
 | Alex VanDerStuyf | afvans | AEM translations, Polaris Brand LP rollout. Submitted AU/MX/JP/CA translations (3/19, due 3/26). |
 | York Chen | yorkchen | Back from paternity leave (ended 3/22). JP market. |
@@ -139,30 +163,37 @@ Last updated: 2026-03-26 (Thursday evening PT, autoresearch loop run 12)
 | Jen Vitiello | — | Adobe rep. Adobe Bi-Weekly. Sent dinner + meeting invites 3/26. |
 
 ## Pending Actions
-- [ ] 🚨 Testing Approach doc for Kate — THE hard thing. Apr 16 meeting. Draft exists. Andrew active. Ship outline this week.
-- [ ] AU status update for Flash (repurpose Lena CPC content) — by EOD 3/26
+- [ ] 🚨 Testing Approach doc for Kate — THE hard thing. Apr 16 meeting. Draft exists. Bridge doc created (sections outlined). Andrew active. Ship outline this week.
 - [ ] Baloo: keyword cost data + "don't use Google search" blurb — by Monday 3/30
 - [ ] Baloo: follow up with Brandon on MBR click-cost guardrails — by Monday 3/30
+- [ ] Memorial Day round 2 creative feedback — due Tuesday 3/31
+- [ ] Kudoboard for Kate Vives — due April 1
+- [ ] Create one-page Polaris rollout timeline with dates and owners (overdue — was due this week)
+- [ ] Provide Lorena Q2 expected spend for MX PO submission (3d overdue — 3/25 request)
+- [ ] Compile rolling 4-week keyword CPA dashboard for AU (due next week)
+- [ ] Coordinate with MCS team on tracking/attribution post-migration (overdue — was due this week)
+- [ ] Schedule 15-min "process-snap" sync to map undocumented hand-offs (from Adi sync 3/25)
 - [ ] UK/CA combined vs separate decision for R&O report
 - [ ] Clarify 10% growth metric definition — before next flash
-- [ ] DE tech issue / EAAAAA investigation — within 5 days
-- [ ] Create one-page Polaris rollout timeline with dates and owners (due this week — running out of time)
-- [ ] Provide Lorena Q2 expected spend for MX PO submission (NEW — 3/25 request)
-- [ ] Compile rolling 4-week keyword CPA dashboard for AU (due next week)
-- [ ] Coordinate with MCS team on tracking/attribution post-migration (due this week)
-- [ ] Schedule 15-min "process-snap" sync to map undocumented hand-offs (from Adi sync 3/25)
-- [ ] Admin: Flash topics (9d overdue), PAM US PO (25d overdue), PAM R&O (16d overdue)
-- [ ] WW redirect — Adobe Ad Cloud reporting (7d overdue — address at Adobe Bi-Weekly TODAY)
-- [ ] OCI TT/suffix — FR to 25% (6d overdue)
-- [ ] MX Auto page — Vijeth footer (6d overdue)
-- [ ] AI Max test design (due 3/28 — TOMORROW)
-- [ ] MX/AU confirm budgets (1d overdue — was due 3/25)
+- [ ] DE tech issue / EAAAAA investigation — within 5 days (from 3/26)
+- [ ] AI Max test design (due 3/28 — OVERDUE)
+- [ ] Bridge: paste Code.gs into Apps Script editor, run createTriggers()
+- [ ] Admin: Flash topics (10d overdue), PAM US PO (26d overdue), PAM R&O (17d overdue)
+- [ ] WW redirect — Adobe Ad Cloud reporting (8d overdue)
+- [ ] OCI TT/suffix — FR to 25% (7d overdue)
+- [ ] MX Auto page — Vijeth footer (7d overdue)
+- [ ] MX/AU confirm budgets (2d overdue — was due 3/25)
 - [ ] Delegate MX invoicing — Carlos VOID, needs new owner (Lorena or Richard keeps it)
 - [ ] Kingpin Goals MX — overdue, blocked by Andes
 - [ ] Triage MS Advertising paused accounts (10x emails)
 - [ ] Follow up with Brandon on specific "walk on water" promo criteria
 - [ ] Proactively share AU CPC and Polaris outcomes with Lena and stakeholders
 - [ ] PSME Seattle Party vote (due 3/31)
+- [ ] Apple Ads: investigate system issue (campaigns overspent — 3/27 notice)
+- [x] Flash sections written (MX highlight, AU update, Bid Strategy, Brand LP, Paid App) — 3/27
+- [x] Agent Bridge built and live — 3/27
+- [x] Onsite Events meeting attended — 3/27
+- [x] Polaris weblab acknowledged by MCS team (Frank) — 3/27
 - [x] Annual Review shared with Richard (3/24)
 - [x] ATMS Training session attended (3/24)
 - [x] System Snapshot (portable body sync) sent (3/24)

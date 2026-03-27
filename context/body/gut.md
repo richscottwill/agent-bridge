@@ -94,20 +94,20 @@ Word budgets are CONSTRAINTS (like a context window), not OBJECTIVES. The gut en
 
 | Organ | Budget | Actual | Utilization | Status |
 |-------|--------|--------|-------------|--------|
-| Memory | 3500w | 2371w | 68% | ✅ |
+| Memory | 3500w | 2410w | 69% | ✅ |
 | Heart | 3500w | 2602w | 74% | ✅ |
-| Brain | 2500w | 2090w | 84% | ✅ |
-| Eyes | 2500w | 1923w | 77% | ✅ |
-| aMCC | 2000w | 2155w | 108% | ⚠️ (within tolerance, post CE-3) |
-| Hands | 2000w | 1859w | 93% | ✅ |
-| Device | 2000w | 1464w | 73% | ✅ |
+| Brain | 2500w | 2103w | 84% | ✅ |
+| Eyes | 2500w | 1901w | 76% | ✅ |
+| aMCC | 2000w | 2192w | 110% | ⚠️ (within tolerance, post CE-3) |
+| Hands | 2000w | 1862w | 93% | ✅ |
+| Device | 2000w | 1821w | 91% | ✅ |
 | Gut (this file) | 2000w | 1938w | 97% | ✅ |
-| Nervous System | 1500w | 1197w | 80% | ✅ |
-| Spine | 1500w | 1422w | 95% | ✅ |
+| Nervous System | 1500w | 1239w | 83% | ✅ |
+| Spine | 1500w | 1432w | 95% | ✅ |
 
 **Total body budget:** 23,000w. Hard ceiling: 24,000w.
-**Actual body total:** ~19,021w (run 12). Under ceiling by ~4,979w.
-**Over-budget organs:** aMCC (108%) — within tolerance. No critical overages.
+**Actual body total:** ~19,500w (run 13). Under ceiling by ~4,500w.
+**Over-budget organs:** aMCC (110%) — within tolerance. Device back to 91% post CE-5. No critical overages.
 
 ### Compression Techniques
 
