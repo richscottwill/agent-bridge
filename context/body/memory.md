@@ -70,6 +70,7 @@ L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate R
 
 ### Brandon Munday (brandoxy) — WW Head of Outbound Marketing, L7, Austin
 - Reports to: Kate Rundell
+- Pronouns: she/her
 - Last interaction: 3/24 (Annual Review 1:1 + Weekly Team Sync)
 - Tone: Professional but approachable. Richard's direct manager.
 - Current topic: Annual Review feedback (solid strength rating, promo criteria), Polaris Brand LP WW rollout, Weblab timing, testing methodology, artifact shipping as visibility mechanism
