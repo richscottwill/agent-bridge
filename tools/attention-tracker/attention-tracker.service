@@ -1,0 +1,13 @@
+[Unit]
+Description=Attention Tracker — local attention state monitoring daemon
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 -m attention_tracker.daemon
+Restart=on-failure
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=graphical-session.target

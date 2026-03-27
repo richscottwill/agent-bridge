@@ -1,0 +1,47 @@
+[[rules]]
+name = "code-editors"
+match_type = "WINDOW_CLASS"
+pattern = "(code|Code|vim|nvim|emacs|jetbrains)"
+category = "deep-work"
+productivity_score = 0.9
+priority = 10
+
+[[rules]]
+name = "google-docs"
+match_type = "URL_PATTERN"
+pattern = "docs\\.google\\.com/document"
+category = "deep-work"
+productivity_score = 0.85
+priority = 10
+
+[[rules]]
+name = "slack"
+match_type = "WINDOW_CLASS"
+pattern = "(Slack|slack)"
+category = "communication"
+productivity_score = 0.4
+priority = 8
+
+[[rules]]
+name = "email"
+match_type = "WINDOW_CLASS"
+pattern = "(Thunderbird|thunderbird|Evolution|evolution|Geary|geary)"
+category = "communication"
+productivity_score = 0.5
+priority = 8
+
+[[rules]]
+name = "social-media"
+match_type = "URL_PATTERN"
+pattern = "(twitter|reddit|youtube|facebook|instagram)\\.com"
+category = "distraction"
+productivity_score = 0.1
+priority = 9
+
+[[rules]]
+name = "calendar"
+match_type = "URL_PATTERN"
+pattern = "calendar\\.google\\.com"
+category = "planning"
+productivity_score = 0.6
+priority = 7

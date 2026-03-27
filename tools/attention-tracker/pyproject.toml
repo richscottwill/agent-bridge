@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "attention-tracker"
+version = "0.1.0"
+description = "Local-only Linux daemon that monitors active windows and infers attention state using Bayesian inference"
+requires-python = ">=3.10"
+dependencies = [
+    "tomli>=2.0.0; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+dev = [
+    "hypothesis>=6.0",
+    "pytest>=7.0",
+]
+
+[project.scripts]
+attention-tracker = "attention_tracker.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["attention_tracker*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
