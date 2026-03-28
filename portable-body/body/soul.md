@@ -99,7 +99,7 @@ When Richard's request touches an agent's domain, route to that agent instead of
 | WBR callout work for US/CA/JP | `najp-analyst` → `najp-callout-writer` | Same pipeline as ABIX but for NA+JP markets. |
 | WBR callout work for UK/DE/FR/IT/ES | `eu5-analyst` → `eu5-callout-writer` | Same pipeline for EU5 markets. |
 | "Review callouts" or quality check on all market callouts | `callout-reviewer` | Runs after all writers. Checks word counts, narrative quality, cross-market coherence. |
-| Friday calibration portable body sync, or "sync portable body" | `portable-body-maintainer` | Syncs files to portable-body/, updates docs, sends snapshot email. |
+| Friday system refresh portable body sync, or "sync portable body" | `portable-body-maintainer` | Syncs files to portable-body/, updates docs, sends snapshot email. Invoked automatically at the end of the Friday system refresh (after loop completes). |
 | "Generate charts", "visualize progress", "show dashboard", or data visualization requests | `eyes-chart` | Reads body organs + market data, runs `python3 ~/shared/tools/progress-charts/generate.py`, outputs standalone HTML dashboard. Read-only on all organs. |
 | "Write a wiki article", "document X", "what should we document?", wiki content creation | `wiki-editor` | Orchestrates the wiki pipeline: editor → researcher → writer → critic → librarian. Start with the editor — it assigns work to the rest. |
 | "Search the wiki", "do we have a doc on X?", wiki lookup, or proactive doc surfacing | `wiki-concierge` | Searches published wiki articles, synthesizes answers, tracks demand signals. Feeds gaps back to wiki-editor. |
