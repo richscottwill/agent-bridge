@@ -15,21 +15,25 @@ OP2: 6,129 regs | $657,549 spend | $107 CPA
 | Week | Days  | Projected | MTD   | vs OP2 |     |
 | ---- | ----- | --------- | ----- | ------ | --- |
 | W12  | 21/31 | 6,100     | 4,174 | +0%    | ✅   |
+| W13  | 28/31 | 5,900     | 4,757 | -4%    | ✅   |
 
 ### Spend
 
 | Week | Days  | Projected | MTD      | vs OP2 |     |
 | ---- | ----- | --------- | -------- | ------ | --- |
 | W12  | 21/31 | $664,000  | $466,725 | +1%    | ✅   |
+| W13  | 28/31 | $624,000  | $576,000 | -5%    | ✅   |
 
 ### CPA
 
 | Week | Days  | Projected | OP2  |     |
 | ---- | ----- | --------- | ---- | --- |
 | W12  | 21/31 | $109      | $107 | ✅   |
+| W13  | 28/31 | $106      | $107 | ✅   |
 
 ### Rationale
 - W12: Added ~250 regs for Fri/Sat data lag correction. W12 adjusted rates (weekday ~215, weekend ~130) with -4% seasonal discount.
+- W13: Severe data lag (Sun-Wed avg 28 regs vs Thu-Sat avg 181). Added ~550-650 lag correction to MTD. Remaining 3 days: 2 weekdays + 1 weekend. Used corrected rates (weekday ~200, weekend ~140). Budget increases on 3/23 should help final days.
 
 ### Accuracy (after month closes)
 

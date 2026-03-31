@@ -1,0 +1,96 @@
+keyword,kw_match_type,campaign,ad_group,ref_tag,kw_clicks,kw_report_cost,regs,st_total_clicks,st_total_cost,search_term_count,cpa_kw_report,reg_status
+"""bulk cups""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Phrase,pd_sl_AU_pv_foo_312588111050_y173370686130,183,1012.41,2,73,377.14,57,506.21,HAS_REGS
+"""bulk drinks""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,pd_sl_AU_pv_foo_155086809_y173370685170,130,393.9,1,74,233.11,62,393.9,HAS_REGS
+"""bulk buy sweets""",Phrase match,AU_Generic_P-V_Food,Sweets_Bulk_Phrase,pd_sl_AU_pv_foo_3454124304_y173370688050,100,385.63,1,66,261.98,51,385.63,HAS_REGS
+"""foodstuffs wholesale""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,pd_sl_AU_pv_foo_1870721568950_y173370688530,71,377.15,1,28,137.4,23,377.15,HAS_REGS
+"""amazon business au""",Phrase match,AU_Brand_Phrase,Pure_ Phrase,pd_sl_au_brand_phrase_827808610064_y182824218927,117,1110.6,3,27,179.63,11,370.2,HAS_REGS
+"""foods wholesalers""",Phrase match,AU_Generic_P-V_Food,Food_Wholesalers_Phrase,pd_sl_AU_pv_foo_383976782815_y173370685610,159,740.15,2,67,292.38,59,370.08,HAS_REGS
+"""bulk bath products""",Phrase match,AU_Generic_P-V_Beauty,Skin-Care_Bulk_Phrase,pd_sl_AU_pv_bea_359926722937_y178961840576,57,281.38,1,30,148.17,26,281.38,HAS_REGS
+"""amazon business prime""",Phrase match,AU_Brand_Phrase,Prime_Phrase,pd_sl_au_brand_phrase_373588144049_y182824219087,49,561.33,2,23,213.64,16,280.67,HAS_REGS
+"""amazon business account""",Phrase match,AU_Brand_Phrase,Account_ Phrase,pd_sl_au_brand_phrase_32475936916_y182824219127,181,2206.76,8,66,685.86,44,275.85,HAS_REGS
+"""bulk herbs""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,pd_sl_AU_pv_foo_10127251_y173370685170,58,266.68,1,34,158.06,30,266.68,HAS_REGS
+"""bakery box suppliers""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Suppliers_Phrase,pd_sl_AU_pv_foo_354992661347_y173370686330,22,254.27,1,9,92.39,8,254.27,HAS_REGS
+[amazon business au],Exact match,AU_Brand_Exact,Pure_Exact,pd_sl_au_brand_core_825772595656_x182824221527,54,476.04,2,35,250.77,8,238.02,HAS_REGS
+[amazon business information],Exact match,AU_Brand_Exact,Navigation_Exact,pd_sl_au_brand_core_413943788105_x182824221567,23,236.84,1,19,198.06,7,236.84,HAS_REGS
+"""bulk fresh foods""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,pd_sl_AU_pv_foo_1436450656930_y173370685170,37,231.44,1,19,110.21,19,231.44,HAS_REGS
+"""amazon business information""",Phrase match,AU_Brand_Phrase,Navigation_Phrase,pd_sl_au_brand_phrase_487064728054_y182824219167,77,673.79,3,20,156.63,17,224.6,HAS_REGS
+[amazon business account cost],Exact match,AU_Brand_Exact,Account_Exact,pd_sl_au_brand_core_381759531551_x182824221487,20,216.63,1,16,155.68,11,216.63,HAS_REGS
+"""amazon prime business""",Phrase match,AU_Brand_Phrase,Prime_Phrase,pd_sl_au_brand_phrase_382550438527_y182824219087,62,829.02,4,22,254.29,19,207.26,HAS_REGS
+"""drinks wholesaler""",Phrase match,AU_Generic_P-V_Food,Wholesalers_Food_Phrase,pd_sl_AU_pv_foo_374553731404_y173370688490,37,205.94,1,21,116.55,18,205.94,HAS_REGS
+"""bulk take out boxes""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Phrase,pd_sl_AU_pv_foo_354992663947_y173370686130,118,609.44,3,40,204.54,30,203.15,HAS_REGS
+"""amazon business""",Phrase match,AU_Brand_Phrase,Pure_ Phrase,pd_sl_au_brand_phrase_1802041673_y182824218927,79,600.58,3,33,160.1,17,200.19,HAS_REGS
+"""buy bulk sweets""",Phrase match,AU_Generic_P-V_Food,Sweets_Bulk_Phrase,pd_sl_AU_pv_foo_295679152696_y173370688050,220,775.98,4,129,449.38,97,194.0,HAS_REGS
+"""jars wholesale""",Phrase match,AU_Generic_P-V_Food,Plates_Wholesale_Phrase,pd_sl_AU_pv_foo_494642135_y173370687330,87,384.42,2,50,227.92,42,192.21,HAS_REGS
+"""bulk oils""",Phrase match,AU_Generic_P-V_Food,Condiments_Bulk_Phrase,pd_sl_AU_pv_foo_330368993924_y173370683730,42,168.1,1,26,99.52,18,168.1,HAS_REGS
+"""bottles wholesale""",Phrase match,AU_Generic_P-V_Food,Drinks_Wholesale_Phrase,pd_sl_AU_pv_foo_297851839330_y173370685090,135,657.25,4,63,311.71,51,164.31,HAS_REGS
+"""wholesale soft drinks""",Phrase match,AU_Generic_P-V_Food,Drinks_Wholesale_Phrase,pd_sl_AU_pv_foo_303684835891_y173370685090,57,327.43,2,27,155.65,20,163.72,HAS_REGS
+[amazon business account benefits],Exact match,AU_Brand_Exact,Account_Exact,pd_sl_au_brand_core_342260079596_x182824221487,20,162.5,1,17,132.79,7,162.5,HAS_REGS
+"""bulk trays""",Phrase match,AU_Generic_P-V_Food,Plates_Bulk_Phrase,pd_sl_AU_pv_foo_320544528714_y173370687090,26,160.62,1,2,13.17,2,160.62,HAS_REGS
+"""wholesale glassware""",Phrase match,AU_Generic_P-V_Food,Cultlery_Wholesale_Phrase,pd_sl_AU_pv_foo_299990629803_y173370684650,98,629.39,4,43,271.64,37,157.35,HAS_REGS
+"""wholesale foods""",Phrase match,AU_Generic_P-V_Food,Food_Wholesale_Phrase,pd_sl_AU_pv_foo_296136790011_y173370685570,114,466.98,3,64,253.74,57,155.66,HAS_REGS
+"""amazon business delivery""",Phrase match,AU_Brand_Phrase,Navigation_Phrase,pd_sl_au_brand_phrase_322112036565_y182824219167,32,306.85,2,11,80.97,7,153.43,HAS_REGS
+"""bulk fruit""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,pd_sl_AU_pv_foo_296504565485_y173370685170,25,150.49,1,11,70.01,11,150.49,HAS_REGS
+"""drinks wholesale market""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,pd_sl_AU_pv_foo_2269516802760_y173370688530,101,586.44,4,54,307.65,40,146.61,HAS_REGS
+"""bulk buy food""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,pd_sl_AU_pv_foo_298850182490_y173370685170,262,729.32,5,149,411.13,107,145.86,HAS_REGS
+[business prime duo],Exact match,AU_Brand_Exact,Prime_Exact,pd_sl_au_brand_core_1280864456576_x182824221727,14,143.72,1,13,130.38,8,143.72,HAS_REGS
+"""bulk nail polish""",Phrase match,AU_Generic_P-V_Beauty,Nail-Care_Bulk_Phrase,pd_sl_AU_pv_bea_300640519119_y178961839096,22,142.88,1,14,91.65,7,142.88,HAS_REGS
+"""coffee wholesalers""",Phrase match,AU_Generic_P-V_Food,Food_Wholesalers_Phrase,pd_sl_AU_pv_foo_300519070492_y173370685610,32,142.58,1,11,45.87,10,142.58,HAS_REGS
+"""amazon company account""",Phrase match,AU_Brand_Phrase,Account_ Phrase,pd_sl_au_brand_phrase_396660574738_y182824219127,93,1098.97,8,31,305.09,19,137.37,HAS_REGS
+"""bulk skin care products""",Phrase match,AU_Generic_P-V_Beauty,Skin-Care_Bulk_Phrase,pd_sl_AU_pv_bea_354393519254_y178961840576,185,677.28,5,73,274.24,58,135.46,HAS_REGS
+"""jars bulk""",Phrase match,AU_Generic_P-V_Food,Plates_Bulk_Phrase,pd_sl_AU_pv_foo_298330710177_y173370687090,219,1051.04,8,115,534.5,73,131.38,HAS_REGS
+"""amazon au business""",Phrase match,AU_Brand_Phrase,Pure_ Phrase,pd_sl_au_brand_phrase_2263004745042_y182824218927,48,391.68,3,27,137.78,7,130.56,HAS_REGS
+[amazon business benefits],Exact match,AU_Brand_Exact,Account_Exact,pd_sl_au_brand_core_381999707896_x182824221487,23,254.7,2,17,174.0,10,127.35,HAS_REGS
+"""amazon business portal""",Phrase match,AU_Brand_Phrase,Navigation_Phrase,pd_sl_au_brand_phrase_487064728454_y182824219167,102,1123.81,9,41,425.76,33,124.87,HAS_REGS
+"""bulk canned food""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,pd_sl_AU_pv_foo_298763615933_y173370685170,46,247.98,2,18,93.86,13,123.99,HAS_REGS
+"""bulk buy easter eggs""",Phrase match,AU_Generic_P-V_Food,Sweets_Bulk_Phrase,pd_sl_AU_pv_foo_331727639673_y173370688050,83,494.58,4,59,355.14,34,123.65,HAS_REGS
+[amazon business registration],Exact match,AU_Brand_Exact,Account_Exact,pd_sl_au_brand_core_381999709176_x182824221487,36,353.47,3,25,216.6,23,117.82,HAS_REGS
+"""amazon for business""",Phrase match,AU_Brand_Phrase,Pure_ Phrase,pd_sl_au_brand_phrase_320496721401_y182824218927,238,1746.23,15,148,604.9,38,116.42,HAS_REGS
+"""bulk biscuits""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,pd_sl_AU_pv_foo_332087543455_y173370685170,42,231.23,2,13,77.95,11,115.62,HAS_REGS
+[amazon business cost],Exact match,AU_Brand_Exact,Pure_Exact,pd_sl_au_brand_core_381759532071_x182824221527,17,222.46,2,12,170.37,7,111.23,HAS_REGS
+"""business amazon""",Phrase match,AU_Brand_Phrase,Pure_ Phrase,pd_sl_au_brand_phrase_26299210406_y182824218927,303,2557.79,23,134,930.73,73,111.21,HAS_REGS
+[how to set up a business amazon account],Exact match,AU_Brand_Exact,Navigation_Exact,pd_sl_au_brand_core_356593839970_x182824221567,38,441.41,4,20,210.84,16,110.35,HAS_REGS
+"""sugar sellers""",Phrase match,AU_Generic_P-V_Food,Food_Sellers_Phrase,pd_sl_AU_pv_foo_296048756130_y173370685370,26,108.24,1,14,54.08,14,108.24,HAS_REGS
+[business prime],Exact match,AU_Brand_Exact,Prime_Exact,pd_sl_au_brand_core_301409912300_x182824221727,78,315.56,3,68,164.59,9,105.19,HAS_REGS
+"""commercial take out containers""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Phrase,pd_sl_AU_pv_foo_2291754366874_y173370686290,115,411.29,4,33,136.58,27,102.82,HAS_REGS
+"""ingredients wholesale""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,pd_sl_AU_pv_foo_510213213832_y173370688530,31,102.22,1,10,32.29,10,102.22,HAS_REGS
+"""bulk party""",Phrase match,AU_Generic_P-V_Celebrations,Party_Bulk_Phrase,pd_sl_AU_pv_celec_714057231_y183739365532,51,300.77,3,22,128.11,16,100.26,HAS_REGS
+[bulk drinks],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,pd_sl_AU_pv_foo_4358061107_x173370681730,17,99.7,1,17,99.7,7,99.7,HAS_REGS
+"""bulk party decorations""",Phrase match,AU_Generic_P-V_Celebrations,Party_Bulk_Phrase,pd_sl_AU_pv_celec_169094804_y183739365532,18,96.21,1,4,23.69,4,96.21,HAS_REGS
+[business prime account cost],Exact match,AU_Brand_Exact,Prime_Exact,pd_sl_au_brand_core_1374483578072_x182824221727,16,169.59,2,11,112.06,9,84.8,HAS_REGS
+"""gastronomy tools""",Phrase match,AU_Generic_P-V_Food,Tools_Phrase,pd_sl_AU_pv_foo_370973176453_y173370688250,20,82.76,1,9,35.43,9,82.76,HAS_REGS
+"""glassware wholesalers""",Phrase match,AU_Generic_P-V_Food,Cultlery_Wholesalers_Phrase,pd_sl_AU_pv_foo_318860268161_y173370684690,29,161.66,2,13,64.62,11,80.83,HAS_REGS
+"""bulk boxed chocolate""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,pd_sl_AU_pv_foo_1436450656530_y173370685170,37,160.03,2,21,83.14,17,80.02,HAS_REGS
+[how to get amazon business account],Exact match,AU_Brand_Exact,Navigation_Exact,pd_sl_au_brand_core_376943159738_x182824221567,20,157.25,2,13,80.28,10,78.63,HAS_REGS
+[business amazon],Exact match,AU_Brand_Exact,Pure_Exact,pd_sl_au_brand_core_5033848589_x182824221527,72,155.44,2,71,151.45,11,77.72,HAS_REGS
+"""bulk water bottles""",Phrase match,AU_Generic_P-V_Food,Drinks_Bulk_Phrase,pd_sl_AU_pv_foo_2205402849_y173370684850,126,536.46,7,44,179.41,37,76.64,HAS_REGS
+"""commercial serving trays""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Phrase,pd_sl_AU_pv_foo_306939701682_y173370686290,22,73.65,1,9,29.17,8,73.65,HAS_REGS
+"""bulk buy water""",Phrase match,AU_Generic_P-V_Food,Drinks_Bulk_Phrase,pd_sl_AU_pv_foo_329589041274_y173370684850,16,65.21,1,10,39.89,10,65.21,HAS_REGS
+[wholesale canned goods],Exact match,AU_Generic_P-V_Food,Food_Wholesale_Exact,pd_sl_AU_pv_foo_380016645117_x173370681770,16,64.59,1,14,56.1,12,64.59,HAS_REGS
+[amazon for business prime],Exact match,AU_Brand_Exact,Prime_Exact,pd_sl_au_brand_core_374151901645_x182824221727,10,64.55,1,8,26.63,5,64.55,HAS_REGS
+"""wholesale event supplies""",Phrase match,AU_Generic_P-V_Celebrations,Wholesale_Phrase,pd_sl_AU_pv_celec_296882768326_y183739365252,25,117.67,2,9,33.15,8,58.84,HAS_REGS
+"""cooking suppliers""",Phrase match,AU_Generic_P-V_Food,Food_Suppliers_Phrase,pd_sl_AU_pv_foo_1302577753_y173370685410,26,114.91,2,14,65.95,12,57.46,HAS_REGS
+[how to create an amazon business account],Exact match,AU_Brand_Exact,Navigation_Exact,pd_sl_au_brand_core_376943159698_x182824221567,56,514.69,9,37,289.77,31,57.19,HAS_REGS
+"""wholesale boxed chocolate""",Phrase match,AU_Generic_P-V_Food,Food_Wholesale_Phrase,pd_sl_AU_pv_foo_1045627263830_y173370685570,6,55.92,1,3,30.92,3,55.92,HAS_REGS
+[amazon business account sign in],Exact match,AU_Brand_Exact,Navigation_Exact,pd_sl_au_brand_core_366638075008_x182824221567,21,110.35,2,15,47.46,12,55.18,HAS_REGS
+[amazon business prime au],Exact match,AU_Brand_Exact,Prime_Exact,pd_sl_au_brand_core_2611426118152_x182824221727,11,53.86,1,9,30.02,3,53.86,HAS_REGS
+[bulk soft drinks],Exact match,AU_Generic_P-V_Food,Drinks_Bulk_Exact,pd_sl_AU_pv_foo_317481834185_x173370678890,10,52.94,1,9,46.0,5,52.94,HAS_REGS
+"""bulk seasoning""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,pd_sl_AU_pv_foo_300646649906_y173370685170,50,208.08,4,22,87.64,21,52.02,HAS_REGS
+[setup amazon business account],Exact match,AU_Brand_Exact,Account_Exact,pd_sl_au_brand_core_354102983953_x182824221487,12,147.42,3,7,81.28,5,49.14,HAS_REGS
+"""bulk glassware""",Phrase match,AU_Generic_P-V_Food,Cultlery_Bulk_Phrase,pd_sl_AU_pv_foo_298901863905_y173370684410,21,49.01,1,10,25.22,9,49.01,HAS_REGS
+"""party decorations suppliers""",Phrase match,AU_Generic_P-V_Celebrations,Party_Suppliers_Phrase,pd_sl_AU_pv_celec_510211709192_y183739365972,18,93.44,2,15,80.74,12,46.72,HAS_REGS
+[how to create a business amazon account],Exact match,AU_Brand_Exact,Account_Exact,pd_sl_au_brand_core_376943159658_x182824221487,3,43.75,1,1,12.38,1,43.75,HAS_REGS
+[commercial cake boxes],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Exact,pd_sl_AU_pv_foo_343383864948_x173370677250,21,75.88,2,17,64.52,8,37.94,HAS_REGS
+"""christmas decorations wholesalers""",Phrase match,AU_Generic_P-V_Celebrations,Christmas_Wholesale_Phrase,pd_sl_AU_pv_celec_339325864204_y183739365772,6,35.14,1,5,29.0,5,35.14,HAS_REGS
+"""wholesale canned goods""",Phrase match,AU_Generic_P-V_Food,Food_Wholesale_Phrase,pd_sl_AU_pv_foo_300421345801_y173370685570,7,32.48,1,2,7.82,2,32.48,HAS_REGS
+[business prime au],Exact match,AU_Brand_Exact,Prime_Exact,pd_sl_au_brand_core_2611426118072_x182824221727,8,32.17,1,8,32.17,2,32.17,HAS_REGS
+[amazon business open account],Exact match,AU_Brand_Exact,Account_Exact,pd_sl_au_brand_core_315288937870_x182824221487,7,61.28,2,6,55.29,4,30.64,HAS_REGS
+[party suppliers],Exact match,AU_Generic_P-V_Celebrations,Party_Suppliers_Exact,pd_sl_AU_pv_celec_101735944_x175435639102,3,30.37,1,3,30.37,1,30.37,HAS_REGS
+[amazon business account au],Exact match,AU_Brand_Exact,Account_Exact,pd_sl_au_brand_core_2318365166105_x182824221487,69,297.49,10,23,108.61,6,29.75,HAS_REGS
+"""bulk salon products""",Phrase match,AU_Generic_P-V_Beauty,Salon-Spa_Bulk_Phrase,pd_sl_AU_pv_bea_360664667645_y178961838136,9,29.31,1,2,5.78,2,29.31,HAS_REGS
+[amazon prime business],Exact match,AU_Brand_Exact,Prime_Exact,pd_sl_au_brand_core_330020978097_x182824221727,51,104.27,4,50,83.72,7,26.07,HAS_REGS
+[amazon au business prime],Exact match,AU_Brand_Exact,Prime_Exact,pd_sl_au_brand_core_2611426118352_x182824221727,16,98.38,4,13,41.78,3,24.6,HAS_REGS
+[create amazon business account],Exact match,AU_Brand_Exact,Account_Exact,pd_sl_au_brand_core_300984984225_x182824221487,24,89.88,4,20,52.18,4,22.47,HAS_REGS
+"""bulk cocktail glasses""",Phrase match,AU_Generic_P-V_Food,Glassware_Bulk_Phrase,pd_sl_AU_pv_foo_306076548380_y173370685810,3,21.67,1,1,8.04,1,21.67,HAS_REGS
+[bulk shampoo],Exact match,AU_Generic_P-V_Beauty,Hair-Styling_Bulk_Exact,pd_sl_AU_pv_bea_263635243_x181712969001,5,21.27,1,5,21.27,3,21.27,HAS_REGS
+[amazon business account australia],Exact match,AU_Brand_Exact,Account_Exact,pd_sl_au_brand_core_927846284635_x182824221487,65,211.67,10,58,178.02,1,21.17,HAS_REGS
+[amazon business account sign up],Exact match,AU_Brand_Exact,Account_Exact,pd_sl_au_brand_core_356593838770_x182824221487,7,41.58,2,4,28.96,3,20.79,HAS_REGS

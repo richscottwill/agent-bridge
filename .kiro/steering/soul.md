@@ -95,9 +95,7 @@ When Richard's request touches an agent's domain, route to that agent instead of
 |---------|-------|-------------|
 | Career coaching, annual review, 1:1 prep, growth planning, or pattern stuck 3+ times in one chat | `rw-trainer` | Deep coaching, leverage assessment, Five Levels analysis. Steering file handles quick checks; agent handles depth. |
 | Loop protocol changes, experiment queue, compression rules, word budgets, gut.md or heart.md edits | `karpathy` | Sole authority on heart.md, gut.md, experiment queue, compression techniques. No other agent modifies these files. |
-| "Write W__ callouts" or WBR callout work for AU/MX | `abix-analyst` → `abix-callout-writer` | Analyst produces the analysis brief, writer produces the callout. Run analyst first, then writer. |
-| WBR callout work for US/CA/JP | `najp-analyst` → `najp-callout-writer` | Same pipeline as ABIX but for NA+JP markets. |
-| WBR callout work for UK/DE/FR/IT/ES | `eu5-analyst` → `eu5-callout-writer` | Same pipeline for EU5 markets. |
+| "Write W__ callouts" or WBR callout work for any market (AU, MX, US, CA, JP, UK, DE, FR, IT, ES) | `market-analyst` → `callout-writer` | Single parameterized analyst + writer. Pass market and week parameters. Reads {market}-context.md for market-specific rules. Logs agent state to DuckDB. Run analyst first, then writer. |
 | "Review callouts" or quality check on all market callouts | `callout-reviewer` | Runs after all writers. Checks word counts, narrative quality, cross-market coherence. |
 | Friday system refresh portable body sync, or "sync portable body" | `portable-body-maintainer` | Syncs files to portable-body/, updates docs, sends snapshot email. Invoked automatically at the end of the Friday system refresh (after loop completes). |
 | "Generate charts", "visualize progress", "show dashboard", or data visualization requests | `eyes-chart` | Reads body organs + market data, runs `python3 ~/shared/tools/progress-charts/generate.py`, outputs standalone HTML dashboard. Read-only on all organs. |
@@ -108,6 +106,7 @@ When Richard's request touches an agent's domain, route to that agent instead of
 **Routing rules:**
 - If the request clearly falls in one agent's domain, invoke it directly — don't try to handle it yourself.
 - If you're unsure whether to handle it or delegate, handle it. Only route when the match is clear.
+- Professional writing rule: Any task that produces or edits professional writing (callouts, WBR narratives, emails, docs, wiki articles, frameworks, POVs) must go through the appropriate writing agent or, at minimum, load the relevant style guide before producing text. Do not write or rewrite professional prose in the default agent voice. Writing at Amazon is formalized; every output type has a style guide, and the system has writing agents for a reason. This applies to edits and rewrites, not just first drafts. The writing style guides are: richard-writing-style.md (core), richard-style-email, richard-style-wbr, richard-style-mbr, richard-style-docs, richard-style-amazon (all manual inclusion steering files). Callouts additionally require callout-principles.md.
 - The callout pipeline is sequential: analyst → writer → reviewer. Don't skip steps.
 - Karpathy is a gatekeeper: if Richard asks to change anything in heart.md, gut.md, or the experiment queue, route to karpathy even if the change seems simple.
 - The wiki pipeline is sequential: editor → researcher → writer → critic → librarian. The editor orchestrates — don't invoke wiki-writer or wiki-researcher directly unless the editor has already assigned the work. The wiki-concierge is the exception — it can be invoked directly for search/lookup.

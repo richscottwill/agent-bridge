@@ -14,7 +14,7 @@ Usage:
   python3 shared/tools/progress-charts/generate.py [--output-dir path/]
 """
 
-import json, os, re, argparse
+import json, os, re, sys, argparse
 from datetime import datetime
 
 HOME = os.path.expanduser("~")
@@ -22,6 +22,14 @@ BODY_DIR = os.path.join(HOME, "shared", "context", "body")
 ACTIVE_DIR = os.path.join(HOME, "shared", "context", "active")
 CHANGELOG = os.path.join(HOME, "shared", "context", "changelog.md")
 DEFAULT_OUTPUT_DIR = os.path.join(HOME, "shared", "tools", "progress-charts", "site")
+
+# DuckDB query layer — falls back to regex if unavailable
+sys.path.insert(0, os.path.expanduser('~/shared/tools/data'))
+try:
+    from query import db
+    _DUCKDB_AVAILABLE = True
+except ImportError:
+    _DUCKDB_AVAILABLE = False
 
 # ═══════════════════════════════════════════════════════════════
 # PARSERS (unchanged logic, all in one block)
@@ -34,7 +42,8 @@ def parse_gut_budgets():
     return [{"organ":m.group(1).strip(),"budget":int(m.group(2)),"actual":int(m.group(3)),"utilization":int(m.group(4))}
             for m in re.finditer(r"\|\s*(\w[\w\s]*?)\s*\|\s*(\d+)w\s*\|\s*(\d+)w\s*\|\s*(\d+)%\s*\|", text)]
 
-def parse_changelog():
+def _parse_changelog_regex():
+    """Regex fallback: parse changelog.md for savings, runs, body totals, experiments."""
     if not os.path.exists(CHANGELOG): return {"savings":[],"runs":[],"body_totals":[],"experiments":[]}
     with open(CHANGELOG) as f: text = f.read()
     savings = [{"before":int(m.group(1).replace(",","")),"after":int(m.group(2).replace(",","")),"saved":int(m.group(1).replace(",",""))-int(m.group(2).replace(",",""))}
@@ -48,7 +57,48 @@ def parse_changelog():
     experiments = [{"id":k,"status":v} for k,v in sorted(seen.items())]
     return {"savings":savings,"runs":runs,"body_totals":body_totals,"experiments":experiments}
 
-def parse_tracker_scorecard():
+def parse_changelog():
+    """Parse changelog data. Uses DuckDB for experiments (and savings if compression_log
+    table exists), falls back to regex for everything else or on DuckDB failure."""
+    # Always get runs and body_totals from regex — these are narrative/log metadata
+    regex_data = _parse_changelog_regex()
+
+    if not _DUCKDB_AVAILABLE:
+        return regex_data
+
+    result = {"savings": regex_data["savings"], "runs": regex_data["runs"],
+              "body_totals": regex_data["body_totals"], "experiments": regex_data["experiments"]}
+
+    # Experiments: try DuckDB first (experiment_id is VARCHAR like 'CE-1')
+    try:
+        rows = db("SELECT experiment_id, status FROM experiments ORDER BY experiment_id")
+        if rows:
+            exps = []
+            for r in rows:
+                eid = r["experiment_id"]
+                # Extract numeric id from 'CE-1' format
+                id_match = re.search(r"(\d+)", str(eid))
+                exps.append({"id": int(id_match.group(1)) if id_match else eid,
+                             "status": r["status"].upper()})
+            result["experiments"] = exps
+    except Exception:
+        pass  # keep regex fallback
+
+    # Savings: try DuckDB if compression_log table exists
+    try:
+        tables = db("SELECT table_name FROM duckdb_tables() WHERE table_name = 'compression_log'")
+        if tables:
+            rows = db("SELECT before_words, after_words FROM compression_log WHERE before_words > 500 AND after_words > 200 ORDER BY id")
+            if rows:
+                result["savings"] = [{"before": r["before_words"], "after": r["after_words"],
+                                      "saved": r["before_words"] - r["after_words"]} for r in rows]
+    except Exception:
+        pass  # keep regex fallback
+
+    return result
+
+def _parse_tracker_scorecard_regex():
+    """Regex fallback: parse rw-tracker.md for weekly scorecard data."""
     path = os.path.join(ACTIVE_DIR, "rw-tracker.md")
     if not os.path.exists(path): return []
     with open(path) as f: text = f.read()
@@ -63,6 +113,50 @@ def parse_tracker_scorecard():
                        "artifacts":int(a.group(2)) if a else 0,"tools":int(t.group(2)) if t else 0,
                        "low_leverage_hours":int(l.group(2)) if l else 0})
     return weeks
+
+def parse_tracker_scorecard():
+    """Parse weekly scorecard. Uses DuckDB weekly_metrics when available,
+    falls back to regex parsing of rw-tracker.md."""
+    if not _DUCKDB_AVAILABLE:
+        return _parse_tracker_scorecard_regex()
+
+    try:
+        rows = db(
+            "SELECT DISTINCT week "
+            "FROM weekly_metrics "
+            "ORDER BY week DESC"
+        )
+        if rows:
+            weeks = []
+            for r in rows:
+                # Extract week number from format '2026 W13' -> 'W13'
+                week_str = r.get("week", "")
+                w_match = re.search(r"W(\d+)", week_str)
+                week_label = f"W{int(w_match.group(1))}" if w_match else week_str
+                weeks.append({
+                    "week": week_label,
+                    "date": week_str,
+                    "artifacts": 0,  # not in weekly_metrics — scorecard-specific
+                    "tools": 0,
+                    "low_leverage_hours": 0,
+                })
+            # DuckDB provides the canonical week list. Overlay personal output
+            # metrics (artifacts, tools, low_leverage_hours) from regex since
+            # those live in rw-tracker.md, not in DuckDB.
+            regex_data = _parse_tracker_scorecard_regex()
+            regex_by_week = {w["week"]: w for w in regex_data}
+            for w in weeks:
+                if w["week"] in regex_by_week:
+                    rw = regex_by_week[w["week"]]
+                    w["date"] = rw["date"]
+                    w["artifacts"] = rw["artifacts"]
+                    w["tools"] = rw["tools"]
+                    w["low_leverage_hours"] = rw["low_leverage_hours"]
+            return weeks
+        # Empty DuckDB result — fall back to regex
+        return _parse_tracker_scorecard_regex()
+    except Exception:
+        return _parse_tracker_scorecard_regex()
 
 def parse_patterns():
     path = os.path.join(BODY_DIR, "nervous-system.md")

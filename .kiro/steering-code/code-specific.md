@@ -20,6 +20,7 @@
 - Check for `.crux_template.md` and use if present
 - Verify branch sync status before raising CRs
 - Follow conventional commit message format
+- When using CRRevisionCreator, invoke the cr-tagging skill for required tags
 
 ## Development Standards
 

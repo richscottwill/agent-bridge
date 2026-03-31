@@ -15,21 +15,25 @@ OP2: 2,592 regs | $228,258 spend | $88 CPA
 | Week | Days  | Projected | MTD   | vs OP2 |     |
 | ---- | ----- | --------- | ----- | ------ | --- |
 | W12  | 21/31 | 3,000     | 2,095 | +16%   | 🔴   |
+| W13  | 28/31 | 3,200     | 2,886 | +23%   | 🔴   |
 
 ### Spend
 
 | Week | Days  | Projected | MTD      | vs OP2 |     |
 | ---- | ----- | --------- | -------- | ------ | --- |
 | W12  | 21/31 | $228,000  | $155,338 | +0%    | ✅   |
+| W13  | 28/31 | $230,000  | $207,000 | +1%    | ✅   |
 
 ### CPA
 
 | Week | Days  | Projected | OP2 |     |
 | ---- | ----- | --------- | --- | --- |
 | W12  | 21/31 | $76       | $88 | 🟢   |
+| W13  | 28/31 | $72       | $88 | 🟢   |
 
 ### Rationale
 - W12: W12 daily rates (weekday 110, weekend 74). -5% Brand volatility conservatism. OCI E2E too early for impact.
+- W13: W12-W13 blended weekday avg ~120, weekend ~84. -5% Brand CVR reversion risk. 3 remaining days (1 weekend, 2 weekday). No holidays. Brand CVR spike (4.02%) may partially revert.
 
 ### Accuracy (after month closes)
 

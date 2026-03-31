@@ -4,7 +4,7 @@
 
 *Operating principle: Subtraction before addition. The gut is the only organ whose primary job is removal. Every other organ wants to grow. The gut enforces the constraint that makes the whole system work: a fixed context budget. Information has a half-life. The gut tracks decay and acts on it.*
 
-Last updated: 2026-03-25 (Karpathy — added portable body staleness signal to bloat detection)
+Last updated: 2026-03-31 (loop run 14 — completing cascade)
 Created: 2026-03-20
 
 ---
@@ -94,20 +94,20 @@ Word budgets are CONSTRAINTS (like a context window), not OBJECTIVES. The gut en
 
 | Organ | Budget | Actual | Utilization | Status |
 |-------|--------|--------|-------------|--------|
-| Memory | 3500w | 2410w | 69% | ✅ |
+| Memory | 3500w | 2436w | 70% | ✅ |
 | Heart | 3500w | 2602w | 74% | ✅ |
-| Brain | 2500w | 2103w | 84% | ✅ |
-| Eyes | 2500w | 1901w | 76% | ✅ |
-| aMCC | 2000w | 2192w | 110% | ⚠️ (within tolerance, post CE-3) |
-| Hands | 2000w | 1862w | 93% | ✅ |
-| Device | 2000w | 1821w | 91% | ✅ |
-| Gut (this file) | 2000w | 1938w | 97% | ✅ |
-| Nervous System | 1500w | 1239w | 83% | ✅ |
-| Spine | 1500w | 1432w | 95% | ✅ |
+| Brain | 2500w | 2120w | 85% | ✅ |
+| Eyes | 2500w | 1402w | 56% | ✅ |
+| aMCC | 2000w | 2204w | 110% | ⚠️ (within tolerance, post CE-3) |
+| Hands | 2000w | 1886w | 94% | ✅ |
+| Device | 2000w | 2409w | 120% | ⚠️ OVER — new tools added (prediction engine, attention tracker). Needs compression. |
+| Gut (this file) | 2000w | 1968w | 98% | ✅ |
+| Nervous System | 1500w | 1297w | 86% | ✅ |
+| Spine | 1500w | 1490w | 99% | ✅ |
 
 **Total body budget:** 23,000w. Hard ceiling: 24,000w.
-**Actual body total:** ~19,500w (run 13). Under ceiling by ~4,500w.
-**Over-budget organs:** aMCC (110%) — within tolerance. Device back to 91% post CE-5. No critical overages.
+**Actual body total:** ~19,814w (run 14). Under ceiling by ~4,186w.
+**Over-budget organs:** aMCC (110%) — within tolerance. Device (120%) — OVER, needs compression next experiment cycle.
 
 ### Compression Techniques
 

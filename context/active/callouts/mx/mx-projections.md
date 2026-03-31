@@ -15,21 +15,25 @@ OP2: 859 regs | $56,562 spend | $66 CPA
 | Week | Days  | Projected | MTD   | vs OP2 |     |
 | ---- | ----- | --------- | ----- | ------ | --- |
 | W12  | 21/31 | 1,441     | 1,021 | +68%   | 🔴   |
+| W13  | 28/31 | 1,500     | 1,370 | +75%   | 🔴   |
 
 ### Spend
 
 | Week | Days  | Projected | MTD     | vs OP2 |     |
 | ---- | ----- | --------- | ------- | ------ | --- |
 | W12  | 21/31 | $90,000   | $63,104 | +59%   | 🔴   |
+| W13  | 28/31 | $96,000   | $86,000 | +70%   | 🔴   |
 
 ### CPA
 
 | Week | Days  | Projected | OP2 |     |
 | ---- | ----- | --------- | --- | --- |
 | W12  | 21/31 | $63       | $66 | ✅   |
+| W13  | 28/31 | $64       | $66 | ✅   |
 
 ### Rationale
 - W12: W12 daily rates (wkday 50, wkend 30) after W11 spike normalization. ie%CCP at 90%, on track for 95-100% EOM.
+- W13 (analyst-adjusted): W12-W13 blended daily rates (Sat ~30, Sun ~45, Mon ~50). 3 remaining days est 125 regs. ie%CCP at 99% for W13, effectively at 100% ceiling. $96K/$1,500 = $64 CPA, $2 below OP2 target.
 
 ### Accuracy (after month closes)
 

@@ -93,3 +93,13 @@ Adjusted budget rebalanced to flat $140 CPA across months.
 - CVR drops post-promo are expected and typically recover in 2-3 weeks
 - December historically requires significant budget cuts
 - Brand spike investigations needed periodically (W34 2025, W51 2025)
+
+
+## Agent Configuration
+- markets: [AU]
+- has_yoy: false
+- has_ieccp: false
+- headline_extras: []
+- regional_summary: false
+- spend_strategy: OP2 registration targets, cut wasted spend
+- projection_notes: No fixed CPA target, bias toward efficiency

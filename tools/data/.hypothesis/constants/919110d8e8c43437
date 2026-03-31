@@ -1,0 +1,4 @@
+# file: /shared/user/tools/data/migrate_changelog.py
+# hypothesis_version: 6.151.10
+
+[2026, '$', '%Y-%m-%d', '(\\d{1,2})/(\\d{1,2})', '--db', '--dry-run', 'Database path', '__main__', 'au', 'bid', 'bid_strategy', 'budget', 'ca', 'campaign', 'campaign_change', 'category', 'change-log.md', 'changelog_migration', 'consolidat', 'cpc', 'cpt', 'data exclusion', 'data_exclusion', 'date', 'de', 'description', 'discount', 'enabled', 'es', 'exclusion', 'fr', 'impact_metric', 'impact_value', 'it', 'jp', 'landing page', 'launch', 'live', 'lp', 'market', 'mx', 'negative', 'negative_kw', 'negatives', 'off', 'other', 'param', 'paused', 'pmax', 'promo', 'promotion', 'roas', 'source', 'spend', 'store_true', 'suffix', 'troas', 'uk', 'url', 'url_migration', 'us', '|']

@@ -54,6 +54,24 @@
         "UpdateSessionContext",
         "UpdateTopic"
       ]
+    },
+    "duckdb": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-motherduck",
+        "--db-path",
+        "/home/prichwil/shared/tools/data/ps-analytics.duckdb",
+        "--read-write"
+      ],
+      "env": {
+        "HOME": "/home/prichwil"
+      },
+      "autoApprove": [
+        "execute_query",
+        "list_databases",
+        "list_tables",
+        "list_columns"
+      ]
     }
   },
   "powers": {

@@ -51,7 +51,7 @@ Last updated: 2026-03-25
 - [AU NB Testing — MRO/Trades](~/shared/artifacts/testing/2026-03-25-au-nb-mro-trades-proposal.md): AU non-brand testing proposal for MRO/Trades vertical
   - slug: au-nb-mro-trades-proposal | status: DRAFT | audience: amazon-internal | level: 2
 
-### Strategy & Frameworks (6)
+### Strategy & Frameworks (7)
 
 - [Agentic Paid Search — Vision & Roadmap](~/shared/artifacts/strategy/2026-03-25-agentic-ps-vision.md): Vision and roadmap for agentic PS
   - slug: agentic-ps-vision | status: DRAFT | audience: amazon-internal | level: 5
@@ -70,6 +70,9 @@ Last updated: 2026-03-25
 
 - [F90 Lifecycle Strategy](~/shared/artifacts/strategy/2026-03-25-f90-lifecycle-strategy.md): F90 lifecycle program strategy
   - slug: f90-lifecycle-strategy | status: DRAFT | audience: amazon-internal | level: 2
+
+- [ie%CCP Planning & Optimization Framework](~/shared/artifacts/strategy/2026-03-30-ieccp-planning-framework.md): How to understand, plan around, and optimize ie%CCP for budget decisions and performance analysis
+  - slug: ieccp-planning-framework | status: DRAFT | audience: amazon-internal | level: 2
 
 ### Paid Search Operations / Program Details (6)
 
@@ -143,16 +146,16 @@ _No system documentation articles published yet. System docs currently live in b
 | Category | Count | Artifact Folder |
 |----------|-------|-----------------|
 | Testing & Experimentation | 11 | `testing/` |
-| Strategy & Frameworks | 6 | `strategy/` |
+| Strategy & Frameworks | 7 | `strategy/` |
 | Program Details / PS Ops | 6 | `program-details/` |
 | Reporting | 3 | `reporting/` |
 | Tools & Automation | 2 | `tools/` |
 | Communication | 3 | `communication/` |
 | Best Practices | 3 | `best-practices/` |
 | System Documentation | 0 | _(none yet)_ |
-| **Total** | **34** | |
+| **Total** | **35** | |
 
-Status: 34 DRAFT | 0 REVIEW | 0 FINAL
+Status: 35 DRAFT | 0 REVIEW | 0 FINAL
 Audience: 31 amazon-internal | 2 personal | 0 agent-only
 
 ---

@@ -20,3 +20,4 @@
 - Ask clarifying questions when needed
 - Provide step-by-step guidance
 - Reference Amazon internal documentation when relevant
+- When using CRRevisionCreator, invoke the cr-tagging skill for required tags

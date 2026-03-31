@@ -1,6 +1,6 @@
 # Active Context — Richard Williams
 
-Last updated: 2026-03-27 (Friday evening PT, autoresearch loop run 13)
+Last updated: 2026-03-31 (Tuesday PT, autoresearch loop run 14)
 
 ## Role & Scope
 - Amazon Business, Paid Acquisition / Paid Search
@@ -23,11 +23,11 @@ Last updated: 2026-03-27 (Friday evening PT, autoresearch loop run 13)
 - US: Stacey switched to Polaris on 3/24 ✅
 - WW: Weblabs needed for AU, JP, EU (DE + FR per Andrew's recco). Brandon confirmed do-no-harm: minimal localization, follow US template.
 - ✅ Weblab ticket SUBMITTED (3/21): "WW PS Brand Polaris Redesign" via Taskei. Weblab dial-up targeting April 6-7.
-- 🆕 Frank Volinsky (MCS-3004, 3/27): "Received. Our team will start scoping out and will get back with an ETA next week." Weblab scoping in progress.
-- 🆕 Alex (Asana 3/27): Added Richard to "Page Creation / Page Edit, ps-brand XF + Template" task. Alex checking in with Vijeth on status. Due today.
+- 🆕 Frank Volinsky (MCS-3004, 3/30): Scheduled sync with Richard for 3/31 11:30am PT — "I want to make sure I have all the correct requirements before work starts." Richard accepted.
+- Alex (Asana 3/27): Added Richard to "Page Creation / Page Edit, ps-brand XF + Template" task. Alex checking in with Vijeth on status.
 - Brandon's priority: AU > MX > DE > UK > JP > FR > IT > ES > CA > US-ES
 - US-ES page: noindex/nofollow, Alex working with Yun
-- Action: Create one-page Polaris rollout timeline with dates and owners (due this week — running out of time)
+- Action: Create one-page Polaris rollout timeline with dates and owners (OVERDUE — was due last week). Prep requirements for Frank sync TODAY.
 
 ### AU Paid Search Optimization
 - MCS → Polaris: FULL SWITCH confirmed by Lena (3/13). Alexis sent mapping (3/17). Migration completing 3/24-25.
@@ -66,9 +66,19 @@ Last updated: 2026-03-27 (Friday evening PT, autoresearch loop run 13)
 - 10 Drive folders + 3 new docs (portable body, testing approach, agent protocols) created.
 - Status: Live. Richard needs to paste Code.gs into Apps Script editor and run createTriggers().
 
-### Paid Acquisition Testing
-- Andrew active in Testing Doc Loop (mentioned Richard 3/18)
-- Kate meeting Apr 16
+### Data Layer & Tooling (3/28-3/31, built across sessions)
+- Bayesian Prediction Engine: `~/shared/tools/prediction/` — NL question parsing, conjugate priors, posterior updates, credible intervals, auto-calibration, autonomy tracking. 9 modules, 10 test files. CLI: `python3 ~/shared/tools/prediction/predict.py`.
+- PS Analytics Data Layer Overhaul: query.py expanded with `db_validate()`, `schema()`, `export_parquet()`, `check_freshness()`, `data_summary()`, agent state functions (`log_agent_action`, `log_agent_observation`, `query_prior_observations`). DuckDB MCP Server configured. 6 PBT test files. Migration scripts for changelog, competitors, OCI.
+- WBR Callout Pipeline consolidated: 3 parameterized agents (market-analyst, callout-writer, callout-reviewer). Hook v2 with 6-phase process. W13 callouts produced for all 10 markets. Agent state wired to DuckDB.
+- Attention Tracker: `~/shared/tools/attention-tracker/` — full application for local machine (browser monitor, window monitor, idle detector, classifier, event processor, session tracker, state machine, summary, daemon). 34 test files.
+- Dashboard ingester ie%CCP bug fixed (was reading CPA instead of ie%CCP ratios).
+- Change Log CSVs ingested to DuckDB (477 rows across EU5, MX/AU, NA/JP).
+
+### ABMA-11245: Quick Paid Search Integration (SIM ticket)
+- Richard created 3/3. Requests Amazon Quick integration to read from multiple Google Ads MCCs for anomaly detection, budget/bid recommendations, and weekly investigations.
+- rasanmol asked mpgupta to groom for sprint planning (3/9).
+- Richard followed up 3/30: "Hey all, wondering if this ticket would be possible to action?"
+- Status: Open, unassigned. Impact: 4.
 
 ### Microsoft Advertising
 - 10x "account paused" emails (3/17). Needs triage.
@@ -99,10 +109,11 @@ Last updated: 2026-03-27 (Friday evening PT, autoresearch loop run 13)
 - Two access paths: direct URL (shop.business.amazon.com) for routine testing, Google search for leadership demos only (5-6 clicks).
 - Brandon's MBR concern: internal clicks inflate paid media costs (~$4.43 NB CPC).
 - Decision: restrict Google search testing, provide direct URL instead.
-- Richard to provide keyword cost data + "don't use Google" blurb by Monday 3/30.
+- ✅ Richard shared 26 keywords + URLs + tracking params in Quip sheet (3/30) — commented on ABCA-371 Taskei ticket. Deliverable DONE.
+- Baloo SIM ticket: ABCA-371 (Aarushi Jamwal assigned).
 - Kate attended prior Baloo demo — positive reaction.
-- Early access launches end of Monday 3/30.
-- Vijay will tag Richard in internal Baloo SIM for visibility/alignment.
+- Early access launched EOD Monday 3/30.
+- Still need: follow up with Brandon on MBR click-cost guardrails.
 
 ### R&O Flash Review (3/26, Deep Dive & Debate — Hedy captured)
 - Flash content finalized: US Modern Search Structure highlight (renamed from "Portfolio Consolidation" — combines campaign + portfolio consolidation), CA moved to status update (tariff-driven, not team-influenced), AU moved from lowlight to announcements (repurpose Lena CPC content), WhatsApp simplified (remove description, add Amazon-wide scope).
@@ -161,46 +172,53 @@ Last updated: 2026-03-27 (Friday evening PT, autoresearch loop run 13)
 | Mike Babich | — | Google rep. OCI email creation issues escalation (3/25). APAC MCC access. Latest: 3/26 11pm — 3 follow-up questions for Brandon. |
 | Caroline Miller | carolimy | Product Marketing Manager. Biweekly AB Onsite Events. |
 | Jen Vitiello | — | Adobe rep. Adobe Bi-Weekly. Sent dinner + meeting invites 3/26. |
+| Aarushi Jamwal | aarushij | Baloo Tech team. Assigned on ABCA-371 (Baloo Paid Search flow). |
 
 ## Pending Actions
-- [ ] 🚨 Testing Approach doc for Kate — THE hard thing. Apr 16 meeting. Draft exists. Bridge doc created (sections outlined). Andrew active. Ship outline this week.
-- [ ] Baloo: keyword cost data + "don't use Google search" blurb — by Monday 3/30
-- [ ] Baloo: follow up with Brandon on MBR click-cost guardrails — by Monday 3/30
-- [ ] Memorial Day round 2 creative feedback — due Tuesday 3/31
-- [ ] Kudoboard for Kate Vives — due April 1
-- [ ] Create one-page Polaris rollout timeline with dates and owners (overdue — was due this week)
-- [ ] Provide Lorena Q2 expected spend for MX PO submission (3d overdue — 3/25 request)
-- [ ] Compile rolling 4-week keyword CPA dashboard for AU (due next week)
-- [ ] Coordinate with MCS team on tracking/attribution post-migration (overdue — was due this week)
+- [ ] 🚨 Testing Approach doc for Kate — THE hard thing. Apr 16 meeting. Draft exists. Bridge doc created (sections outlined). Andrew active. 10 WORKDAYS AT ZERO.
+- [ ] Memorial Day round 2 creative feedback — due TODAY 3/31
+- [ ] PSME Seattle Party vote — due TODAY 3/31
+- [ ] Kudoboard for Kate Vives — due tomorrow 4/1
+- [ ] Prep for Frank Volinsky Polaris weblab sync — TODAY 11:30am PT. Confirm requirements for MCS-3004.
+- [ ] Provide Lorena Q2 expected spend for MX PO submission (6d overdue — 3/25 request)
+- [ ] Reply to Lorena keyword data request (12d overdue — 3/19 request)
+- [ ] Create one-page Polaris rollout timeline with dates and owners (OVERDUE — was due last week)
+- [ ] Compile rolling 4-week keyword CPA dashboard for AU (due this week)
+- [ ] Coordinate with MCS team on tracking/attribution post-migration (overdue)
+- [ ] Follow up with Brandon on Baloo MBR click-cost guardrails
 - [ ] Schedule 15-min "process-snap" sync to map undocumented hand-offs (from Adi sync 3/25)
 - [ ] UK/CA combined vs separate decision for R&O report
 - [ ] Clarify 10% growth metric definition — before next flash
 - [ ] DE tech issue / EAAAAA investigation — within 5 days (from 3/26)
-- [ ] AI Max test design (due 3/28 — OVERDUE)
+- [ ] AI Max test design (3d OVERDUE — was due 3/28)
 - [ ] Bridge: paste Code.gs into Apps Script editor, run createTriggers()
-- [ ] Admin: Flash topics (10d overdue), PAM US PO (26d overdue), PAM R&O (17d overdue)
-- [ ] WW redirect — Adobe Ad Cloud reporting (8d overdue)
-- [ ] OCI TT/suffix — FR to 25% (7d overdue)
-- [ ] MX Auto page — Vijeth footer (7d overdue)
-- [ ] MX/AU confirm budgets (2d overdue — was due 3/25)
+- [ ] Admin: Flash topics (13d overdue), PAM US PO (30d overdue), PAM R&O (21d overdue)
+- [ ] WW redirect — Adobe Ad Cloud reporting (12d overdue)
+- [ ] OCI TT/suffix — FR to 25% (11d overdue)
+- [ ] MX Auto page — Vijeth footer (11d overdue)
+- [ ] MX/AU confirm budgets (6d overdue)
 - [ ] Delegate MX invoicing — Carlos VOID, needs new owner (Lorena or Richard keeps it)
 - [ ] Kingpin Goals MX — overdue, blocked by Andes
 - [ ] Triage MS Advertising paused accounts (10x emails)
 - [ ] Follow up with Brandon on specific "walk on water" promo criteria
 - [ ] Proactively share AU CPC and Polaris outcomes with Lena and stakeholders
-- [ ] PSME Seattle Party vote (due 3/31)
 - [ ] Apple Ads: investigate system issue (campaigns overspent — 3/27 notice)
+- [ ] ABMA-11245: follow up if no response to 3/30 comment
+- [x] Baloo: keyword cost data + "don't use Google" blurb — DONE 3/30 (ABCA-371 comment, Quip sheet)
 - [x] Flash sections written (MX highlight, AU update, Bid Strategy, Brand LP, Paid App) — 3/27
 - [x] Agent Bridge built and live — 3/27
 - [x] Onsite Events meeting attended — 3/27
 - [x] Polaris weblab acknowledged by MCS team (Frank) — 3/27
+- [x] W13 WBR callouts produced for all 10 markets — 3/30
+- [x] ie%CCP ingester bug fixed — 3/30
+- [x] Change Log CSVs ingested to DuckDB (477 rows) — 3/30
+- [x] Bayesian Prediction Engine built — 3/30
+- [x] Data layer overhaul (query.py, agent state, DuckDB MCP, PBT tests) — 3/30
+- [x] Attention Tracker built — 3/30
 - [x] Annual Review shared with Richard (3/24)
 - [x] ATMS Training session attended (3/24)
 - [x] System Snapshot (portable body sync) sent (3/24)
 - [x] US Polaris switch — Stacey completed (3/24)
-- [x] Added to ab-paidsearch-oci-apac2@ email list (3/25)
-- [x] Adi sync completed (3/25) — AI ad-copy workflow reviewed
-- [x] Google sync completed (3/25) — OCI email issues discussed with Mike Babich
 
 ## Key Quip Documents
 - MX Sync: https://quip-amazon.com/K9OYA9mXm7DU/AB-MX-Paid-Search-Sync

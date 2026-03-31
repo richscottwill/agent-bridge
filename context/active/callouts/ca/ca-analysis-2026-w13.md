@@ -1,0 +1,72 @@
+# CA W13 Analysis Brief
+
+## Registration summary
+812 regs, +19% WoW. Spend $52K (-2% WoW). CPA $64 (-17% WoW). Brand 565 (+25% WoW). NB 247 (+7% WoW). Overall CVR 2.96% (+16% WoW). March projection: 3,200 regs at $230K spend ($72 CPA) vs OP2 2,592 regs at $228K ($88 CPA). +23% regs, +1% spend vs OP2.
+
+## Why registrations changed
+CVR-driven surge. CVR jumped +16% WoW (2.96% vs 2.56%) while clicks grew only +3%. The CVR improvement did nearly all the work.
+
+Brand was the primary driver:
+- Brand regs +25% WoW (565 vs 451). CVR spiked +19% (4.02% vs 3.39%), an 8-week high. Clicks grew +6% (14.1K vs 13.3K). Brand CPA dropped to $42 from $56 (-24%). The 4.02% Brand CVR is the highest since W5 (when it was in the 3.5-3.7% range). This is a genuine outlier, not a return to baseline.
+- NB regs +7% WoW (247 vs 230). CVR improved +6% (1.85% vs 1.74%) on flat clicks (+1%). NB CPA fell to $113 from $121 (-6%). NB CPC held flat at $2.10, ending the 12-week decline streak. Steady, not accelerating.
+
+The Brand CVR spike is the story. At 4.02%, Brand is converting at a rate not seen in the 12-week trend. W11 had a similar Brand surge (523 regs, 3.71% CVR) that reverted in W12. The question is whether W13's 4.02% holds or follows the same pattern.
+
+## Trend context
+W13 breaks the range-bound pattern that defined W5-W12:
+- W5-W6: ~735 regs (stable)
+- W7-W10: gradual decline to 644 (W10 trough)
+- W11: bounce to 749 (Brand spike)
+- W12: pullback to 681 (Brand reversion)
+- W13: 812, the highest in the 12-week trend
+
+The sawtooth pattern (W10: 644, W11: 749, W12: 681, W13: 812) shows increasing amplitude. Brand is swinging: 411 → 523 → 451 → 565 over four weeks. The 4-week Brand rolling average is ~488, up from ~457 in the W5-W9 period. There may be a genuine upward shift in Brand demand, masked by week-to-week volatility.
+
+NB remains the stability anchor: 226-300 range for 13 weeks, averaging ~247. No trend, no volatility.
+
+CPA at $64 is the best since W5 ($68) and breaks below the $69-78 range that held for W6-W12. Overall CVR at 2.96% is the highest in the 12-week trend.
+
+NB CPC flattened at $2.10 after declining from $2.40 (W2). The 12-week compression may have found its floor. Further NB CPA improvement depends on CVR gains, not CPC reduction.
+
+## Relevant actions and events
+- OCI E2E launched 3/4, now 24 days in. Still too early for measurable NB impact. Full impact projected Jul 2026. NB CPC flattening at $2.10 is consistent with pre-OCI bid management reaching its efficiency limit. OCI should unlock the next CPC compression phase once it matures.
+- LP optimization (Bulk CVR +187%, Wholesale CVR +180%) continues to underpin the YoY NB CPA improvement. These gains are fully baked into the current baseline.
+- Bing budget increases on 3/17 (NB +$50, Brand +$50). Minor budget additions that wouldn't explain the W13 surge. The timing aligns but the magnitude doesn't.
+- No CA holidays in W13. Clean performance read. LY W13 was +1% WoW (455 → 459), so TY's +19% is not a seasonal pattern. The outperformance is TY-specific.
+
+## YoY assessment
++77% regs YoY (812 vs 459). Spend only +7% ($52K vs $49K).
+- NB: +79% YoY. NB CPA dropped 53% ($113 vs $240). LP optimization is the structural driver.
+- Brand: +76% YoY. Strong growth. Brand CPA at $42 vs $72 LY (-42% YoY).
+- WoW pattern: TY +19% vs LY +1%. TY significantly outperformed LY's W13 trajectory.
+
+LY W14-W17 showed 373-469 regs at $107-127 CPA. TY is running at 1.7x LY volume at 0.6x LY CPA. The structural gap is LP optimization on NB and organic Brand growth.
+
+## Monthly projection
+28/31 days elapsed. MTD: 2,886 regs, $207K spend.
+
+Remaining 3 days (Mar 29-31): Sun Mar 29, Mon Mar 30, Tue Mar 31. 1 weekend day, 2 weekdays. No CA holidays.
+
+Daily rate estimation from W13 actuals:
+- Weekday avg: (160 + 125 + 145 + 122 + 92) / 5 = 129 regs/day, $7.6K spend/day
+- Weekend avg: (82 + 86) / 2 = 84 regs/day, $6.5K spend/day
+
+W13 was an unusually strong week. Apply -5% conservatism for Brand CVR reversion risk (W11's Brand spike reverted in W12; W13's could partially revert in the remaining days).
+
+Cross-check: W12 weekday avg was 110, W13 is 129. Use W12-W13 blended weekday avg of ~120 for conservatism.
+
+Remaining estimate: (1 x 84) + (2 x 120) = 324 regs, (1 x $6.5K) + (2 x $7.6K) = $21.7K spend.
+
+**Analyst projection: 3,200 regs at $230K spend, $72 CPA.**
+vs OP2: +23% regs, +1% spend.
+
+The projection improved from W12's +16% to +23% vs OP2 on regs, driven by W13's strong performance. Even if the remaining 3 days revert to W12 rates, the MTD cushion (2,886 regs through 28 days) ensures a comfortable beat.
+
+## Flags
+- Brand CVR at 8-week high (4.02%): This is a 23% deviation above the 8-week average (3.24%). W11 had a similar Brand spike (3.71%) that reverted in W12. If W14 reverts, the 4-week rolling average (~3.5%) is the true signal.
+- Brand regs anomaly: 565 is 23% above the 8-week average (460). Flagged by the data brief as an anomaly. Two of the last four weeks (W11: 523, W13: 565) have been Brand spikes. The pattern suggests either genuine demand growth or increasing volatility.
+- NB CPC floor: $2.10 for two consecutive weeks after 12 weeks of decline. Pre-OCI bid management may have reached its efficiency limit. OCI E2E is the next lever, but months away from impact.
+- NB CPA still expensive at $113: Despite -53% YoY improvement, NB CPA is 2.7x Brand CPA ($42). The gap is structural and depends on OCI maturation to close.
+
+## Suggested narrative angle
+Strongest week in 13 weeks. Brand CVR spiked to 4.02% (8-week high), driving +25% Brand regs on flat spend. CPA dropped to $64 (-17% WoW), the best since W5. NB held steady at 247 regs with CPC flattening at $2.10 after a 12-week decline. March tracking +23% regs vs OP2 at matched spend, up from +16% at W12. YoY: +77% regs on +7% spend. The Brand CVR spike may revert (W11's did), but the monthly projection is locked in regardless.

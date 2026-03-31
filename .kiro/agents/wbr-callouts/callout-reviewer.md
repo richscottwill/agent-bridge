@@ -14,6 +14,12 @@ You will be given a week number. Read:
 
 Markets to review: AU, MX, US, UK, DE, FR, IT, ES, CA, JP (10 total).
 
+Before scoring, pull historical quality scores from DuckDB for trend comparison. Use one of:
+- Shell: `python3 -c "from query import callout_scores; print(callout_scores('{market}', 8))"` for each market
+- Or via DuckDB MCP `execute_query`: `SELECT * FROM callout_scores ORDER BY week DESC LIMIT 80` (all markets, last ~8 weeks)
+
+This gives you the previous weeks' scores to compare against in the "Week-over-week quality trend" section.
+
 ## What you check
 
 ### 1. Word count (mechanical)
@@ -79,6 +85,29 @@ Structure:
 5. **Week-over-week quality trend**: Compare this week's average score to the previous week's (read the prior review file at ww-review-2026-w{prev}.md if it exists). Note whether quality is improving, flat, or declining, and which dimensions moved.
 
 Be specific. Don't say "tighten the WoW paragraph." Say "replace 'Brand registrations fell -15% WoW on -9% CVR and -7% clicks as W11's elevated conversion rates normalized' with 'Both segments declined as W11's elevated CVRs normalized: Brand -15% WoW on -9% CVR, NB -17% WoW on -12% CVR.'"
+
+## Write scores to DuckDB
+After scoring all 10 markets, write each market's quality scores to the `callout_scores` table. For each market, run via shell:
+```bash
+python3 -c "
+from query import db_upsert
+db_upsert('callout_scores', {
+    'market': '{market}',
+    'week': '2026 W{NN}',
+    'overall_score': {overall},
+    'headline_clarity': {headline},
+    'narrative_justification': {narrative},
+    'conciseness': {conciseness},
+    'actionability': {actionability},
+    'voice': {voice},
+    'word_count': {word_count},
+    'reviewer_notes': '{notes}',
+}, key_cols=['market', 'week'])
+"
+```
+Or use the DuckDB MCP `execute_query` tool with the equivalent INSERT ... ON CONFLICT UPDATE SQL.
+
+Do this for all 10 markets. This persists the scores so future reviews can query the trend directly from DuckDB instead of parsing prior review files.
 
 ## Quality scoring (1-10 per market)
 

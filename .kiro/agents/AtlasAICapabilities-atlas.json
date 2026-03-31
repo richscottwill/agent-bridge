@@ -3,7 +3,7 @@
   "hooks" : {
     "userPromptSubmit" : [ {
       "cache_ttl_seconds" : 1,
-      "command" : "/shared/user/.aim/packages/AtlasAICapabilities-1.0/eventId-6428578568/agents/hooks/amzn-atlas-context-script",
+      "command" : "/shared/user/.aim/packages/AtlasAICapabilities-1.0/eventId-6436799284/agents/hooks/amzn-atlas-context-script",
       "max_output_size" : 20000,
       "timeout_ms" : 10000
     } ],
@@ -11,7 +11,7 @@
       "command" : "aim agents publish-metrics --agent-name 'atlas' --agent-package 'AtlasAICapabilities-1.0' || true"
     } ]
   },
-  "resources" : [ "file://README.md", "file://AGENTS.md", "file://.kiro/steering/**/*.md", "file:///home/prichwil/.aim/packages/AtlasAICapabilities-1.0/eventId-6428578568/context/*.md" ],
+  "resources" : [ "file://README.md", "file://AGENTS.md", "file://.kiro/steering/**/*.md", "file:///home/prichwil/.aim/packages/AtlasAICapabilities-1.0/eventId-6436799284/context/*.md" ],
   "tools" : [ "@builtin", "@builder-mcp" ],
   "name" : "atlas",
   "description" : "[DO NOT UPDATE] AI Assistant for atlas. Subsequent updates will overwrite this agent, copying is recommended. -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",

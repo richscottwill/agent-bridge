@@ -31,7 +31,7 @@ Note: Q1 budgets higher than Q2+ because ie%CCP targets are less aggressive earl
 ## ie%CCP History
 - Q2 2025: Finance introduced 100% ie%CCP target, forcing significant NB budget cuts
 - Current target: 100% ie%CCP (active constraint on NB spend)
-- CCP guidance: Brand $80, NB $30 (updated from $150/$50 in mid-2025)
+- CCP guidance: Brand $90, NB $30 (updated from $80/$30 in early 2026; originally $150/$50 in mid-2025). Source: IECCP tab rows 92-93. Always read from the dashboard, not from this file.
 - Budget cut from $1.97M to $1.07M in FY25 to meet threshold
 - 2026 budget already reflects ie%CCP constraints
 - Every MX callout should reference ie%CCP and frame NB spend decisions against the 100% target
@@ -99,3 +99,13 @@ Note: Q1 budgets higher than Q2+ because ie%CCP targets are less aggressive earl
 - Device optimization: Desktop CPA significantly lower than Mobile
 - Holiday weeks (Constitution Day, Easter, etc.) cause 15-25% WoW registration dips
 - Post-event weeks typically show Brand registration normalization (-20-30% WoW)
+
+
+## Agent Configuration
+- markets: [MX]
+- has_yoy: true
+- has_ieccp: true
+- headline_extras: [ie%CCP]
+- regional_summary: false
+- spend_strategy: Maximum weekly spend keeping blended ie%CCP at or below 100%
+- projection_notes: Brand follows seasonality, NB adjusted to match efficiency thresholds

@@ -132,9 +132,21 @@ class Bridge:
         return self._update_status(msg_id, 'complete')
 
     def respond(self, original_msg_id, payload, subject=''):
-        """Respond to a message."""
+        """Respond to a message. Looks up the original to set the correct target."""
+        # Find the original message to get its source (who sent it)
+        target = ''
+        rows = self._read_sheet('bus!A:K')
+        if len(rows) >= 2:
+            headers = rows[0]
+            for row in rows[1:]:
+                while len(row) < len(headers):
+                    row.append('')
+                msg = dict(zip(headers, row))
+                if msg.get('msg_id') == original_msg_id:
+                    target = msg.get('source', '')
+                    break
         return self.send(
-            target='',  # response goes back to original sender
+            target=target,
             msg_type='response',
             subject=subject or f'Re: {original_msg_id}',
             payload=payload,

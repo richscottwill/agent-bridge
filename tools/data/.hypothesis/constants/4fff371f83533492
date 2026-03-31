@@ -1,0 +1,4 @@
+# file: /shared/user/tools/data/migrate_oci.py
+# hypothesis_version: 6.151.10
+
+['%Y-%m-%d', '%b %Y', '([+-]?\\d+)%', '(\\d{1,2})/(\\d{1,2})', '*', '--db', '--dry-run', '--eyes', 'Database path', 'N/A', 'Path to eyes.md', 'Total', '__main__', 'cpa_improvement', 'full_impact_date', 'in progress', 'in_progress', 'launch_date', 'live', 'market', 'not planned', 'not_planned', 'notes', 'oci_status', 'reg_lift_pct', 'status', 'store_true', '|']

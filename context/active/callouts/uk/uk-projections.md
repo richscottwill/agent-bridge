@@ -15,21 +15,25 @@ OP2: 5,174 regs | $460,638 spend | $89 CPA
 | Week | Days  | Projected | MTD   | vs OP2 |     |
 | ---- | ----- | --------- | ----- | ------ | --- |
 | W12  | 21/31 | 6,050     | 4,149 | +17%   | 🔴   |
+| W13  | 28/31 | 6,300     | 5,626 | +22%   | 🔴   |
 
 ### Spend
 
 | Week | Days  | Projected | MTD      | vs OP2 |     |
 | ---- | ----- | --------- | -------- | ------ | --- |
 | W12  | 21/31 | $395,000  | $273,181 | -14%   | 🔴   |
+| W13  | 28/31 | $396,000  | $359,000 | -14%   | 🔴   |
 
 ### CPA
 
 | Week | Days  | Projected | OP2 |     |
 | ---- | ----- | --------- | --- | --- |
 | W12  | 21/31 | $65       | $89 | 🟢   |
+| W13  | 28/31 | $63       | $89 | 🟢   |
 
 ### Rationale
 - W12: W12 daily rates (weekday ~210, weekend ~175) with 3% seasonal discount. OCI mature, ad copy test baked in.
+- W13: W13 daily rates for remaining Sat/Sun/Mon. CVR at 12-week high (4.28%) may not fully sustain but MTD momentum strong. OCI mature + ad copy test Phase 2 compounding. Projected 6,220 regs (+20% vs OP2) at $395K spend (-14% vs OP2), $64 CPA.
 
 ### Accuracy (after month closes)
 

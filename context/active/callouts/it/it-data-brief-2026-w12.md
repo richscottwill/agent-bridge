@@ -28,16 +28,7 @@ Non-Brand:
   CPA: $136 vs $133 (+2%)
 
 ## 8-week trend
-| Week | Regs | Brand | NB  | Cost  | CPA | CVR   |
-| ---- | ---- | ----- | --- | ----- | --- | ----- |
-| W5   | 1370 | 1057  | 313 | $84K  | $61 | 2.94% |
-| W6   | 1343 | 1050  | 293 | $77K  | $58 | 2.92% |
-| W7   | 1275 | 906   | 369 | $95K  | $75 | 2.30% |
-| W8   | 1310 | 957   | 353 | $103K | $78 | 2.33% |
-| W9   | 1337 | 960   | 377 | $98K  | $74 | 2.55% |
-| W10  | 1157 | 805   | 352 | $99K  | $85 | 2.12% |
-| W11  | 1443 | 1028  | 415 | $93K  | $65 | 2.65% |
-| W12  | 1273 | 924   | 349 | $78K  | $61 | 2.43% |
+<!-- Data: market_trend("IT", weeks=8) -->
 
 ## YoY comparison
 - Regs: 1273 TY vs 1225 LY (+4%)
@@ -57,36 +48,10 @@ Non-Brand:
 - NOTE: Analyst should produce the actual projection accounting for weekday/weekend mix, holidays, LY patterns, and known upcoming changes.
 
 ## This year weekly trend (last 12 weeks)
-| Week | Regs | Brand | NB  | Spend | CPA | NB CPC | NB CVR |
-| ---- | ---- | ----- | --- | ----- | --- | ------ | ------ |
-| W1   | 724  | 507   | 217 | $41K  | $56 | $2.23  | 2.62%  |
-| W2   | 1305 | 980   | 325 | $77K  | $59 | $2.74  | 2.14%  |
-| W3   | 1378 | 1028  | 350 | $120K | $87 | $3.29  | 1.84%  |
-| W4   | 1322 | 978   | 344 | $116K | $88 | $3.37  | 2.02%  |
-| W5   | 1370 | 1057  | 313 | $84K  | $61 | $2.83  | 2.77%  |
-| W6   | 1343 | 1050  | 293 | $77K  | $58 | $2.51  | 2.67%  |
-| W7   | 1275 | 906   | 369 | $95K  | $75 | $2.53  | 1.98%  |
-| W8   | 1310 | 957   | 353 | $103K | $78 | $2.58  | 1.61%  |
-| W9   | 1337 | 960   | 377 | $98K  | $74 | $2.57  | 1.87%  |
-| W10  | 1157 | 805   | 352 | $99K  | $85 | $2.61  | 1.61%  |
-| W11  | 1443 | 1028  | 415 | $93K  | $65 | $2.61  | 1.96%  |
-| W12  | 1273 | 924   | 349 | $78K  | $61 | $2.37  | 1.74%  |
+<!-- Data: market_trend("IT", weeks=12) -->
 
 ## Last year same period (W8 to W16)
-| Week | Regs | Brand | NB  | Spend | CPA | NB CPC | NB CVR |
-| ---- | ---- | ----- | --- | ----- | --- | ------ | ------ |
-| W13  | 1326 | 869   | 457 | $56K  | $42 | $1.93  | 3.47%  |
-| W14  | 1210 | 840   | 370 | $55K  | $45 | $2.08  | 2.75%  |
-| W15  | 1218 | 790   | 428 | $78K  | $64 | $2.42  | 2.04%  |
-| W16  | 1136 | 775   | 361 | $79K  | $70 | $2.53  | 2.03%  |
+<!-- Data: db("SELECT * FROM weekly_metrics WHERE market='IT' AND week LIKE '2025%' ORDER BY week") -->
 
 ## Daily breakdown
-| Day | Regs | Brand | NB  | Cost |
-| --- | ---- | ----- | --- | ---- |
-| Sun | 171  | 120   | 51  | $9K  |
-| Mon | 125  | 89    | 36  | $12K |
-| Tue | 218  | 155   | 63  | $13K |
-| Wed | 213  | 156   | 57  | $12K |
-| Thu | 184  | 137   | 47  | $11K |
-| Fri | 127  | 90    | 37  | $11K |
-| Sat | 235  | 177   | 58  | $9K  |
+<!-- Data: db("SELECT * FROM daily_metrics WHERE market='IT' AND week='2026 W12' ORDER BY date") -->

@@ -4,6 +4,136 @@
 LOOP READ OPTIMIZATION: The autoresearch loop reads from the top DOWN to the 
 nearest LOOP_READ_MARKER comment. Everything below the marker was already 
 
+## 2026-03-31 — Autoresearch Loop Run 14 (Tuesday)
+
+### Phase 1: Maintenance
+
+#### Builds & Infrastructure (3/28-3/31, reconstructed from filesystem — chat sessions wiped)
+
+**1. Bayesian Prediction Engine** (`~/shared/tools/prediction/`)
+- Full prediction system: BayesianCore (conjugate priors, posterior updates, credible intervals), PredictionEngine (NL question parsing, model registry, auto-calibration), Calibrator (scoring, confidence adjustment), Formatter (human/agent output), AutonomyTracker (task logging, ratio computation).
+- 9 modules: core.py, engine.py, models.py, calibrator.py, formatter.py, parser.py, autonomy.py, types.py, predict.py (CLI).
+- 10 test files with property-based tests (test_core, test_engine, test_calibrator, test_formatter, test_parser, test_integration, test_autonomy, test_schema).
+- DuckDB tables added: predictions (logged forecasts), prediction_outcomes (scored results), calibration_log (calibration reports), autonomy_tasks, autonomy_history.
+- CLI: `python3 ~/shared/tools/prediction/predict.py "What will AU regs be next week?"`
+
+**2. PS Analytics Data Layer Overhaul** (`~/shared/tools/data/`)
+- query.py expanded: added `db_validate()` (EXPLAIN-based SQL validation), `schema()` (runtime introspection), `export_parquet()` (Parquet exports for cross-env agents), `schema_export()` (CREATE TABLE SQL), `check_freshness()` (data event polling), `data_summary()` (market coverage orientation), `write_data_event()` (ingestion notifications).
+- Agent state functions added: `log_agent_action()`, `log_agent_observation()`, `query_prior_observations()`, `log_architecture_eval()`. These give agents learned experience across runs.
+- DuckDB MCP Server configured in `.kiro/settings/mcp.json` — agents call `execute_query`, `list_tables`, `list_columns` directly via MCP instead of shelling out.
+- 6 property-based test files: test_agent_state_properties, test_check_constraints, test_ingester_properties, test_migration_properties, test_query_properties, test_schema_idempotence.
+- Migration scripts: migrate_changelog.py, migrate_competitors.py, migrate_oci.py.
+- Parquet exports: weekly_metrics, monthly_metrics, projections → `~/shared/tools/data/exports/`.
+- Change Log CSVs ingested: 477 rows across EU5, MX/AU, NA/JP.
+- init_db.py updated with new tables (predictions, prediction_outcomes, calibration_log, autonomy_tasks, autonomy_history).
+
+**3. WBR Callout Pipeline — Consolidated & Parameterized**
+- 3 agents consolidated from 6+: market-analyst.md (parameterized, one per market), callout-writer.md (parameterized), callout-reviewer.md (blind reviewer).
+- Pipeline hook: `wbr-callout-pipeline.kiro.hook` (v2) — 6-phase process: dashboard ingestion → context load → analysis (10 markets) → writing (10 markets) → blind review → correction loop.
+- W13 callouts produced for all 10 markets (AU, MX, US, CA, JP, UK, DE, FR, IT, ES) + WW summary + EU5 aggregate + WW review.
+- Per-market artifacts: data briefs, analysis briefs, callouts, projections, change logs, context files.
+- callout-principles.md expanded: ie%CCP reference, pipeline process rules, confidence threshold (66%), spend strategy by market, supplementary section format, style rules.
+- Agent state wired: analysts log actions + observations to DuckDB, query prior observations at run start for learned experience.
+
+**4. Dashboard Ingester Bug Fix** (ie%CCP)
+- `_read_ieccp()` was reading CPA values instead of ie%CCP ratios (scanning from row 1 instead of IECCP header row 15). MX showed 6559% ie%CCP. Fixed to scan from IECCP header.
+- MX CCP guidance corrected: Brand $90 (was $80 in context file).
+- Documented in `ieccp-learning-2026-03-30.md` intake file.
+
+**5. Attention Tracker** (`~/shared/tools/attention-tracker/`)
+- Full application: browser_monitor, window_monitor, idle_detector, classifier, event_processor, event_store, session_tracker, state_machine, summary, daemon, CLI, database, rules_loader, models.
+- 34 test files including property-based tests (anomaly_detector, budget_pacing, data_normalizer, data_store, google_ads_fetcher, models, multi_horizon, orchestrator, priority_ranker).
+- Systemd service file + install script.
+- Designed for Richard's local Windows machine (not AgentSpaces).
+
+**6. Richard's Monday Actions (3/30)**
+- Morning routine ran. Daily Brief sent ("Ten workdays. Zero outline.").
+- Baloo keyword data delivered: commented on ABCA-371 with 26 keywords in Quip sheet (quip-amazon.com/R6pSAFTPneHY) with URLs and tracking params. ✅ DONE.
+- ABMA-11245 (Quick paid search integration SIM): Richard followed up asking if ticket can be actioned. Still unassigned.
+- Frank Volinsky scheduled Polaris weblab sync for TODAY (3/31) 11:30am PT — wants to confirm requirements before work starts. Richard accepted.
+- Several meeting declines sent (Adobe dinner, LiveRamp, Google lunch, Adobe meeting).
+- W13 dashboard ingested (AU, MX data confirmed in DuckDB).
+
+#### Email Scan (3/28-3/31)
+- Frank Volinsky (3/30): Polaris weblab sync scheduled for 3/31 11:30am PT. "I want to make sure I have all the correct requirements before work starts." MCS-3004.
+- Jeff Twining (3/30): OOTO for son's birthday.
+- Abhinav Vohra (3/30): Bi-Weekly PSME Marketing Tech demo series.
+- Big Spring Sale launched (Joshua Braziel, 3/27 late).
+- Lorena: STILL NO REPLY (6 days on Q2 spend, 12 days on keyword data).
+- No new Hedy sessions detected.
+
+#### Calendar — Today (Tuesday 3/31)
+- 9:00am PT: Weekly Paid Acq Team Meeting + Central Outbound Team Meeting (Brandon)
+- 11:30am PT: Polaris weblab sync with Frank Volinsky (MCS-3004 requirements)
+- 2:00pm PT: Richard/Brandon 1:1
+- 4:30pm PT: AB AU Paid Search Sync
+
+#### Calendar — Tomorrow (Wednesday 4/1)
+- 12:00pm PT: Richard/Adi sync
+- Kudoboard for Kate Vives due
+
+#### Intake Processing
+- **ieccp-learning-2026-03-30.md** → Facts extracted to device.md (ingester fix), eyes.md (ie%CCP methodology). ARCHIVE after this run.
+- **ieccp-learnings-2026-03-30.md** → Empty file. DELETE.
+- **ps-keyword-analysis-capability.md** → Empty file. DELETE.
+- **karpathy-request-identity-protection.md** → KEPT. Still needs Karpathy routing.
+- **pending-artifact-fixes.md** → KEPT (trigger file).
+- **WW Dashboard folder** → W13 xlsx present. Y25 Final xlsx present. W13 INGESTED (3/30). Y25 still unprocessed.
+- **Change log folder** → 3 CSVs (EU5, MX/AU, NA/JP). INGESTED to DuckDB (477 rows).
+
+- **current.md**: Bumped to run 14. Updated Polaris section (Frank sync TODAY). Added Baloo keyword delivery (✅ DONE). Added ABMA-11245 follow-up. Updated all build/infrastructure sections. Updated pending actions. Updated key people (Aarushi Jamwal from Baloo SIM).
+- **Org chart**: SKIPPED — no changes.
+- **Soul**: SKIPPED — no changes.
+
+### Phase 2: Cascade
+- **Brain**: Updated Five Levels position (10 workdays at zero, W14 starts today). Added Level 3/5 parallel work (prediction engine, data layer, callout pipeline, attention tracker). Updated date.
+- **Eyes**: Full predicted QA rewrite for Tuesday (Frank sync prep, Brandon 1:1 prep, AU sync prep, Testing Approach status, system builds summary). Updated date.
+- **Hands**: Updated Baloo to ✅ DONE. Rewrote new signals section (all builds completed, Frank sync, ABMA-11245, today's calendar). Updated date.
+- **Memory**: Updated Frank Volinsky (sync scheduled TODAY, requirements confirmation). Updated date.
+- **Spine**: Updated date.
+- **Nervous System**: Updated run count (14). Updated visibility avoidance (10 workdays, WORSENING — massive Level 3/5 output while Level 1 at zero). Updated zero artifacts (W14 starts, 7th+ consecutive week). Updated Five Levels position. Updated system health (total body 19,647w). Updated date.
+- **aMCC**: Updated streak (still 0, 10 workdays). Updated last avoidance (3/30 — system-building comfort zone). Updated date.
+- **Device**: Updated loop run count (14). Added Prediction Engine, Attention Tracker entries. Updated WBR Callout Pipeline to v2 with W13 production run.
+- **Gut**: Updated word budget table with Run 14 actuals. Total body: 19,647w (82% of ceiling). Device at 120% — OVER budget, needs compression. aMCC 110% — within tolerance.
+
+### Intake Processing
+- **ieccp-learning-2026-03-30.md** → ARCHIVED. Facts extracted to device.md (ingester fix), changelog (ie%CCP methodology).
+- **ieccp-learnings-2026-03-30.md** → DELETED (empty file).
+- **ps-keyword-analysis-capability.md** → DELETED (empty file).
+- **karpathy-request-identity-protection.md** → KEPT. Still needs Karpathy routing.
+- **pending-artifact-fixes.md** → KEPT (trigger file).
+- **WW Dashboard folder** → W13 xlsx INGESTED (3/30). Y25 Final xlsx still unprocessed.
+- **Change log folder** → 3 CSVs INGESTED to DuckDB (477 rows).
+
+### Phase 3: Experiment — SKIPPED
+- Reason: CE-5 (Device dead-weight removal) was already adopted. CE-6 (cross-environment portability) targets Brain, aMCC, Memory, Spine — all modified by maintenance this run (per-organ cooldown). CE-7 depends on CE-6. Device is now over budget (120%) and is the highest-priority compression target, but Device was also modified this run. Karpathy identity protection request still pending. No eligible experiment.
+- Note: Device at 120% should be the FIRST experiment target next run. The new tool entries (prediction engine, attention tracker) added ~400w. CE-5-style REMOVE+COMPRESS on Device is needed.
+
+### Suggested Changes
+1. **Write the Testing Approach outline TODAY between meetings** — 10 workdays. W14 starts today. You have gaps: 9:30-11:30am (after team meeting, before Frank sync), and potentially after AU sync. The irony is brutal — you built a Bayesian prediction engine, a full data layer overhaul, a 10-market callout pipeline, and an attention tracker in 3 days, but you haven't written 5 section headers on the one doc that matters for your career. The system-building is the comfort zone. The Testing Approach doc is the hard thing. Open the OP1 draft. Write 5 headers. Add 2-3 bullets each. 30 minutes. Why: Level 1 gate. Measure: outline exists by EOD. Reversible: N/A. Risk: none. → Approve/Deny?
+
+2. **Reply to Lorena TODAY** — 6 days on Q2 spend, 12 days on keyword data. This is becoming a relationship risk. She's actively taking ownership of MX PS and you're ghosting her. Drafts were created in the morning routine over a week ago. Copy-paste and send. 5 minutes. Why: Level 3 (team leverage) + NS Loop 4 (delegation verification). Measure: both replies sent by EOD. Reversible: N/A. Risk: relationship damage if delayed further. → Approve/Deny?
+
+3. **Route Karpathy identity protection request** — Still in intake since 3/27. Brandon's pronouns were compressed out of memory.md. The fix is two Karpathy-governed changes: gut.md non-compressible identity fields + heart.md standing eval question. Also: Device is at 120% and needs compression — Karpathy should queue a Device experiment. Why: Do-no-harm principle + gut health. Measure: gut.md and heart.md updated, Device compression queued. Reversible: yes. Risk: low. → Approve/Deny?
+
+### Self-Audit
+- CASCADE: 9/9 organs checked. Brain ✅, Eyes ✅, Hands ✅, Memory ✅, Spine ✅, Nervous System ✅, aMCC ✅, Device ✅, Gut ✅.
+- STRUCTURAL CHANGES: No files created, renamed, or moved. 1 intake file archived. 2 empty intake files deleted.
+- COHERENCE SPOT-CHECK: (1) device.md WBR Callout Pipeline references `wbr-callout-pipeline.kiro.hook` — VERIFIED exists at `.kiro/hooks/wbr-callout-pipeline.kiro.hook`. (2) current.md Baloo section references ABCA-371 — VERIFIED in Taskei email thread.
+- SELF-AUDIT: Cascade 9/9 organs covered. Structural changes: no (cleanup only). Coherence spot-check: 2/2 valid.
+
+### Gut Health
+- Body: 19,647w / 24,000w ceiling (82%). Under ceiling by ~4,353w.
+- Over budget: Device (120%) — needs compression. aMCC (110%) — within tolerance.
+- Intake: 2 items remaining (Karpathy request, pending-artifact-fixes trigger). WW Dashboard Y25 Final unprocessed.
+- Bloat signals: Device over budget from new tool entries.
+- 🧳 Portable body: organs stale since last sync (3/27). Multiple organs modified since then. Sync overdue.
+
+### Summary
+Run 14: Reconstructed 3 days of lost chat history. Massive system-building output discovered and logged — Bayesian prediction engine, PS analytics data layer overhaul, WBR callout pipeline consolidation (W13 callouts for all 10 markets), attention tracker, ie%CCP ingester fix, change log ingestion. Richard also delivered Baloo keyword data and followed up on ABMA-11245. All 9 organs cascaded. Device now over budget (120%). aMCC streak 0 — 10 workdays, zero progress on Testing Approach doc. The system is getting more capable while the human output gap widens.
+
+<!-- LOOP_READ_MARKER: 2026-03-31-run14 -->
+
 ## 2026-03-27 — Autoresearch Loop Run 13 (Friday evening)
 
 ### Phase 1: Maintenance

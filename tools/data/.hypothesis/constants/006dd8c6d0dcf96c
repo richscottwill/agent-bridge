@@ -1,0 +1,4 @@
+# file: /shared/user/tools/data/init_db.py
+# hypothesis_version: 6.151.10
+
+['--path', 'Database file path', 'SHOW TABLES', '__main__', 'callout_scores', 'projections']
