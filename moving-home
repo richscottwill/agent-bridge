@@ -1,0 +1,467 @@
+
+
+Here's the complete updated playbook with Five Levels structure and all previous content consolidated. Copy this whole thing to the new workspace.
+
+---
+
+## Complete Workspace Migration & Reorg Playbook
+
+### Part 1: Workspace Migration
+
+#### Step 1: Create .kiro symlink at /home/
+
+```bash
+sudo ln -s /home/prichwil/shared/.kiro /home/.kiro
+```
+
+#### Step 2: Create /home/.vscode/settings.json
+
+```bash
+sudo mkdir -p /home/.vscode
+sudo tee /home/.vscode/settings.json << 'EOF'
+{
+  "files.exclude": {
+    "devspaces": true,
+    "setup_user": true,
+    "template": true,
+    "prichwil/.aim": true,
+    "prichwil/.arcc": true,
+    "prichwil/.aws": true,
+    "prichwil/.builder-mcp": true,
+    "prichwil/.cache": true,
+    "prichwil/.cargo": true,
+    "prichwil/.config": true,
+    "prichwil/.dotnet": true,
+    "prichwil/.duckdb": true,
+    "prichwil/.kiro": true,
+    "prichwil/.kiro-server": true,
+    "prichwil/.local": true,
+    "prichwil/.mcp-auth": true,
+    "prichwil/.midway": true,
+    "prichwil/.npm": true,
+    "prichwil/.pytest_cache": true,
+    "prichwil/.rustup": true,
+    "prichwil/.ssh": true,
+    "prichwil/.toolbox": true,
+    "prichwil/.vscode": true,
+    "prichwil/.vscode-server": true,
+    "prichwil/brazil-pkg-cache": true,
+    "prichwil/.bash_logout": true,
+    "prichwil/.bash_profile": true,
+    "prichwil/.bashrc": true,
+    "prichwil/.bemol-schema.json": true,
+    "prichwil/.emacs": true,
+    "prichwil/.gitconfig": true,
+    "prichwil/.profile": true,
+    "prichwil/.zcompdump": true,
+    "prichwil/.zprofile": true,
+    "prichwil/.zshenv": true,
+    "prichwil/.zshrc": true
+  },
+  "kiroAgent.configureMCP": "Enabled"
+}
+EOF
+```
+
+After this your tree shows:
+
+```
+/home/
+├── .kiro/                         (symlink → agents, hooks, steering, specs)
+└── prichwil/
+    ├── .hypothesis/               (PBT data)
+    ├── .workspace/                (workspace files)
+    └── shared/                    (your whole system)
+```
+
+#### Step 3: Open /home/ as workspace, verify
+
+1. Open `/home/` in the IDE
+2. Check Agent Hooks panel — hooks should appear
+3. Check steering files load
+4. If missing: `ls -la /home/.kiro` to verify symlink
+
+---
+
+### Part 2: Dead Weight Removal
+
+```bash
+# Remove 596MB+ of non-essential files
+rm -rf ~/shared/agentspaces-desktop-launcher/
+rm -rf ~/shared/.aim/
+rm ~/shared/rw-shared-export-2026-03-21.tar.gz
+rmdir ~/shared/scripts/
+
+# Clean research/ temp files
+rm -f ~/shared/research/err.txt
+rm -f ~/shared/research/brand_nb_data.txt
+rm -f ~/shared/research/xlsx_output.txt
+rm -f ~/shared/research/xlsx_full_output.txt
+rm -f ~/shared/research/daily-brief-latest.md
+
+# Clean 0-byte files in active/
+rm -f ~/shared/context/active/au-ps-w9-13-optimization-pt2.md
+rm -f ~/shared/context/active/au-ps-w9-13-pt2.md
+
+# Move misplaced files from active/
+mv ~/shared/context/active/parse-au-search-terms.py ~/shared/tools/
+mv ~/shared/context/active/au-analysis/ ~/shared/data/processed/au-analysis-w9-13/
+
+# Move debug scripts from context/tools/
+mv ~/shared/context/tools/mcp_debug.py ~/shared/uploads/scratch/
+mv ~/shared/context/tools/mcp_scan.py ~/shared/uploads/scratch/
+mv ~/shared/context/tools/mcp_test.py ~/shared/uploads/scratch/
+mv ~/shared/context/tools/mcp_test2.py ~/shared/uploads/scratch/
+
+# Merge reference/ into artifacts/ (only has index.md)
+cat ~/shared/reference/index.md >> ~/shared/artifacts/SITEMAP.md
+rm -rf ~/shared/reference/
+```
+
+---
+
+### Part 3: Create Canonical Directory Structure
+
+```bash
+# DuckDB data paths
+mkdir -p ~/shared/data/duckdb
+mkdir -p ~/shared/data/raw
+mkdir -p ~/shared/data/processed
+mkdir -p ~/shared/data/exports
+mkdir -p ~/shared/data/markets/au
+mkdir -p ~/shared/data/markets/mx
+mkdir -p ~/shared/data/markets/us
+mkdir -p ~/shared/data/markets/ca
+mkdir -p ~/shared/data/markets/jp
+mkdir -p ~/shared/data/markets/uk
+mkdir -p ~/shared/data/markets/de
+mkdir -p ~/shared/data/markets/fr
+mkdir -p ~/shared/data/markets/it
+mkdir -p ~/shared/data/markets/es
+mkdir -p ~/shared/data/testing
+
+# Level 1: Sharpen Yourself
+mkdir -p ~/shared/artifacts/weekly-ships
+
+# Level 2: Drive WW Testing
+mkdir -p ~/shared/artifacts/testing/active
+mkdir -p ~/shared/artifacts/testing/completed
+mkdir -p ~/shared/artifacts/testing/templates
+mkdir -p ~/shared/artifacts/frameworks
+
+# Level 3: Team Automation
+mkdir -p ~/shared/tools/team
+mkdir -p ~/shared/tools/team/docs
+
+# Level 4: Zero-Click Future
+mkdir -p ~/shared/research/aeo
+
+# Level 5: Agentic Orchestration
+mkdir -p ~/shared/tools/autonomous
+mkdir -p ~/shared/tools/autonomous/logs
+mkdir -p ~/shared/tools/autonomous/configs
+
+# Archive structure
+mkdir -p ~/shared/context/archive/context
+mkdir -p ~/shared/context/archive/research
+mkdir -p ~/shared/context/archive/tools
+mkdir -p ~/shared/context/archive/misc
+
+# Tools scratch (for debug/one-off scripts)
+mkdir -p ~/shared/tools/scratch
+```
+
+Move existing DuckDB data:
+
+```bash
+# Move DuckDB files from tools/data/ to data/
+mv ~/shared/tools/data/*.duckdb ~/shared/data/duckdb/ 2>/dev/null
+mv ~/shared/tools/data/*.wal ~/shared/data/duckdb/ 2>/dev/null
+mv ~/shared/tools/data/*.csv ~/shared/data/raw/ 2>/dev/null
+mv ~/shared/tools/data/*.parquet ~/shared/data/raw/ 2>/dev/null
+```
+
+---
+
+### Part 4: Create Key Documents
+
+#### DIRECTORY-MAP.md at ~/shared/DIRECTORY-MAP.md
+
+```markdown
+# Directory Map — ~/shared/
+
+Single source of truth for where every file type belongs.
+
+## Top-Level Directories
+
+| Path | Purpose | Writes | Cadence |
+|------|---------|--------|---------|
+| context/ | Live context: organs, active state, meetings, wiki, archive | Agents, hooks | Daily |
+| context/body/ | Body organs (11 files) | System refresh hook | Daily |
+| context/active/ | Ground truth files only | Morning routine, agents | Daily |
+| context/active/callouts/ | Per-market callout files | Callout pipeline | Weekly |
+| context/archive/ | Archived files by category | Agents on cleanup | As needed |
+| context/intake/ | System processing queue | Agents | As needed |
+| context/meetings/ | Meeting notes by relationship type | Meeting sync hook | After meetings |
+| context/tools/ | Production utility scripts | Manual | As needed |
+| context/wiki/ | Wiki articles | Wiki pipeline | As needed |
+| artifacts/ | Published work product | Agents, Richard | Weekly |
+| artifacts/weekly-ships/ | L1: Weekly shipped artifacts | Richard | Weekly |
+| artifacts/testing/ | L2: Test designs and results | Richard, agents | Per test |
+| artifacts/frameworks/ | Reusable frameworks and methodologies | Richard | As needed |
+| data/ | All data files for DuckDB | Ingestion pipeline | Daily-weekly |
+| data/duckdb/ | DuckDB database files | DuckDB, agents | On ingestion |
+| data/raw/ | Unprocessed data awaiting ingestion | Upload flow | On upload |
+| data/processed/ | Ingested data (timestamped) | Ingestion pipeline | On ingestion |
+| data/exports/ | Query results and agent exports | Agents | On demand |
+| data/markets/{code}/ | Per-market data files | Agents | Weekly |
+| data/testing/ | Test-specific data | Agents | Per test |
+| tools/ | Automation tools and scripts | Richard, agents | As needed |
+| tools/team/ | L3: Tools built for team adoption | Richard | As needed |
+| tools/autonomous/ | L5: Autonomous workflow configs | Agents | Future |
+| tools/scratch/ | Debug/one-off scripts, safe to purge | Anyone | Ephemeral |
+| uploads/ | Human drop zone | Richard | On upload |
+| uploads/sheets/ | Data files (xlsx, csv) | Richard | On upload |
+| uploads/changelogs/ | Change log exports | Richard | Weekly |
+| uploads/docs/ | PDFs, markdown, misc documents | Richard | As needed |
+| uploads/scratch/ | Ephemeral agent outputs | Agents | Ephemeral |
+| research/ | Active research files | Richard, agents | As needed |
+| research/aeo/ | L4: AEO/AI Overviews research | Future | Future |
+| portable-body/ | Cold-start bootstrap kit | portable-body-maintainer | Weekly |
+| audit-reports/ | System audit outputs | Agents | On audit |
+| .kiro/ | Agents, hooks, specs, steering, settings | Kiro | As needed |
+| credentials/ | Auth files (PROTECTED) | System | Never move |
+| .agentspaces/ | Auth sqlite (PROTECTED) | System | Never move |
+
+## File Type → Location
+
+| File Type | Drop Location | Final Location |
+|-----------|--------------|----------------|
+| CSV/XLSX data you download | uploads/sheets/ | data/raw/ → data/processed/ |
+| Change logs | uploads/changelogs/ | data/raw/ → data/processed/ |
+| Documents/PDFs | uploads/docs/ | uploads/docs/ or artifacts/ |
+| Agent-generated analysis | uploads/scratch/ or data/exports/ | data/exports/ |
+| DuckDB databases | — | data/duckdb/ |
+| Test designs | — | artifacts/testing/active/ |
+| Completed tests | — | artifacts/testing/completed/ |
+| Weekly ship artifacts | — | artifacts/weekly-ships/ |
+| Meeting notes | — | context/meetings/{type}/ |
+| Wiki articles | — | context/wiki/ |
+| Debug/temp scripts | — | tools/scratch/ |
+| Production scripts | — | context/tools/ or tools/ |
+| Team tools | — | tools/team/ |
+```
+
+#### data/README.md
+
+```markdown
+# Data Directory
+
+All data files for DuckDB ingestion and querying.
+
+## Ingestion Flow
+
+1. Richard drops files in uploads/sheets/ or uploads/changelogs/
+2. Ingestion script copies to data/raw/
+3. DuckDB loads from data/raw/
+4. Source file moves to data/processed/ with date prefix (2026-03-31_filename.csv)
+5. Agent exports go to data/exports/
+
+## Subdirectories
+
+- duckdb/ — .duckdb and .wal database files
+- raw/ — unprocessed files awaiting ingestion
+- processed/ — ingested files (timestamped)
+- exports/ — query results and agent-generated data
+- markets/{code}/ — per-market data (au, mx, us, ca, jp, uk, de, fr, it, es)
+- testing/ — test-specific data files
+
+## Naming Convention
+
+- Raw: original filename as uploaded
+- Processed: YYYY-MM-DD_original-filename.csv
+- Exports: {agent}-{description}-YYYY-MM-DD.csv
+```
+
+---
+
+### Part 5: Agent/Hook/Process Discovery & Verification
+
+Run these after migration to verify everything connects:
+
+```bash
+# Agents
+echo "=== AGENTS ==="
+ls ~/shared/.kiro/agents/
+
+# Hooks
+echo "=== HOOKS ==="
+for f in ~/shared/.kiro/hooks/*.json; do
+  echo "--- $f ---"
+  cat "$f" | python3 -c "import sys,json; d=json.load(sys.stdin); print(f\"  Name: {d.get('name')}\n  Event: {d['when']['type']}\n  Action: {d['then']['type']}\")" 2>/dev/null
+done
+
+# Steering
+echo "=== STEERING ==="
+ls ~/shared/.kiro/steering/
+ls ~/shared/.kiro/steering-chat/ 2>/dev/null
+ls ~/shared/.kiro/steering-code/ 2>/dev/null
+
+# Production scripts
+echo "=== PRODUCTION SCRIPTS ==="
+ls ~/shared/context/tools/*.py
+
+# Tools
+echo "=== TOOLS ==="
+ls -d ~/shared/tools/*/
+
+# DuckDB databases
+echo "=== DUCKDB ==="
+ls ~/shared/data/duckdb/ 2>/dev/null
+
+# Path reference scan (broken paths)
+echo "=== BROKEN PATH SCAN ==="
+grep -rn "tools/data/" ~/shared/context/body/ ~/shared/.kiro/steering/ 2>/dev/null
+grep -rn "context/active/au-analysis" ~/shared/context/body/ 2>/dev/null
+grep -rn "agentspaces-desktop-launcher" ~/shared/context/body/ 2>/dev/null
+grep -rn "reference/" ~/shared/context/body/ 2>/dev/null
+```
+
+---
+
+### Part 6: Path Reference Updates
+
+After the reorg, tell the agent in the new workspace:
+
+> "Scan all files in shared/context/body/, shared/.kiro/steering/, shared/.kiro/agents/, shared/.kiro/hooks/, and the soul.md steering file for any path references. Update any paths that point to moved or deleted locations. Specifically check for: tools/data/ (now data/duckdb/ or data/raw/), context/active/au-analysis/ (now data/processed/), reference/ (merged into artifacts/), agentspaces-desktop-launcher/ (deleted), .aim/ (deleted), scripts/ (deleted)."
+
+---
+
+### Part 7: Portable Body Sync
+
+After all moves are done:
+
+> "Sync portable-body/ with current state. Copy all 11 organs from context/body/, update README.md with new file count and today's date, update CHANGELOG.md with a version entry documenting the reorg, update portable-layer.md with the new directory structure, and verify all path references inside portable-body/ files use post-reorg paths."
+
+---
+
+### Part 8: Blind Evaluator Test
+
+Create `~/shared/audit-reports/blind-evaluator-tests.md` with 50+ prompts. Give a fresh agent only the DIRECTORY-MAP.md and these prompts. Target: >98% accuracy.
+
+Sample prompts:
+1. "Where do I drop a new CSV I downloaded?" → uploads/sheets/
+2. "Where is the experiment queue?" → context/body/heart.md
+3. "Where are AU callouts for week 13?" → context/active/callouts/au/au-2026-w13.md
+4. "Where do debug scripts go?" → tools/scratch/
+5. "Where is the DuckDB database?" → data/duckdb/
+6. "Where do I find the weekly ship log?" → artifacts/weekly-ships/
+7. "Where is the test methodology framework?" → artifacts/frameworks/ or artifacts/testing/templates/
+8. "Where do agent-generated CSV exports go?" → data/exports/
+9. "Where is the org chart?" → context/active/org-chart.md
+10. "Where do I put a tool I'm building for the team?" → tools/team/
+11. "Where are meeting notes for my manager 1:1?" → context/meetings/manager/
+12. "Where is the AEO research?" → research/aeo/
+13. "Where do autonomous workflow configs go?" → tools/autonomous/configs/
+14. "Where is the morning routine script?" → context/tools/morning_routine.py
+15. "Where do processed data files go after DuckDB ingestion?" → data/processed/
+
+---
+
+### Final Target Structure
+
+```
+~/shared/
+├── DIRECTORY-MAP.md
+├── README.md
+├── .gitignore
+├── .kiro/
+│   ├── agents/
+│   ├── hooks/
+│   ├── specs/
+│   ├── steering/
+│   ├── steering-chat/
+│   ├── steering-code/
+│   └── settings/
+├── context/
+│   ├── active/          (ground truth files only)
+│   │   ├── callouts/    (per-market callout dirs)
+│   │   ├── current.md
+│   │   ├── org-chart.md
+│   │   ├── rw-tracker.md
+│   │   ├── long-term-goals.md
+│   │   ├── asana-sync-protocol.md
+│   │   └── mcp-tool-reference.md
+│   ├── archive/
+│   │   ├── context/
+│   │   ├── research/
+│   │   ├── tools/
+│   │   └── misc/
+│   ├── body/            (11 organs)
+│   ├── changelog.md
+│   ├── intake/          (system processing queue)
+│   ├── meetings/
+│   │   ├── adhoc/
+│   │   ├── manager/
+│   │   ├── peer/
+│   │   ├── stakeholder/
+│   │   └── team/
+│   ├── tools/           (production scripts only)
+│   └── wiki/
+├── artifacts/
+│   ├── best-practices/
+│   ├── communication/
+│   ├── frameworks/
+│   ├── program-details/
+│   ├── reporting/
+│   ├── strategy/
+│   ├── testing/
+│   │   ├── active/
+│   │   ├── completed/
+│   │   └── templates/
+│   ├── tools/
+│   └── weekly-ships/
+├── data/
+│   ├── duckdb/
+│   ├── raw/
+│   ├── processed/
+│   ├── exports/
+│   ├── markets/
+│   │   ├── au/ mx/ us/ ca/ jp/ uk/ de/ fr/ it/ es/
+│   └── testing/
+├── tools/
+│   ├── attention-tracker/
+│   ├── bridge/
+│   ├── dashboard-ingester/
+│   ├── git-sync/
+│   ├── prediction/
+│   ├── progress-charts/
+│   ├── sharepoint-sync/
+│   ├── team/
+│   │   └── docs/
+│   ├── autonomous/
+│   │   ├── configs/
+│   │   └── logs/
+│   └── scratch/
+├── uploads/
+│   ├── sheets/
+│   ├── changelogs/
+│   ├── docs/
+│   ├── scratch/
+│   └── other/
+├── research/
+│   ├── aeo/
+│   ├── ad-copy-results.md
+│   ├── automation-impact/
+│   ├── competitor-intel.md
+│   ├── excel-analyses/
+│   ├── oci-performance.md
+│   ├── op1-ps-testing-framework-draft.md
+│   └── test-docs/
+├── portable-body/
+├── audit-reports/
+├── credentials/          (PROTECTED)
+└── .agentspaces/         (PROTECTED)
+```
+
+That's the complete playbook. Take it to the new workspace and execute in order.
