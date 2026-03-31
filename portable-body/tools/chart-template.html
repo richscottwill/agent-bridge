@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Body System Dashboard — %%NOW%%</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#e0e0e0;padding:20px;max-width:1400px;margin:0 auto}
+h1{color:#fff;font-size:1.5em;margin-bottom:2px}
+.sub{color:#888;font-size:.8em;margin-bottom:20px}
+.section-title{color:#a0a0a0;font-size:.85em;text-transform:uppercase;letter-spacing:1px;margin:28px 0 12px;padding-bottom:6px;border-bottom:1px solid #1f2230}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{background:#1a1d27;border-radius:10px;padding:16px;border:1px solid #2a2d37}
+.card h2{color:#999;font-size:.8em;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.chart-box{position:relative;height:260px}
+.chart-box-sm{position:relative;height:200px}
+.summary{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.stat{background:#1a1d27;border-radius:8px;padding:12px 16px;border:1px solid #2a2d37;min-width:110px}
+.stat .v{font-size:1.6em;font-weight:700;color:#fff}
+.stat .l{font-size:.7em;color:#888;text-transform:uppercase;letter-spacing:.5px}
+table{width:100%;border-collapse:collapse;font-size:.82em}
+th{text-align:left;color:#888;font-weight:500;padding:6px 8px;border-bottom:1px solid #2a2d37}
+td{padding:6px 8px;border-bottom:1px solid #1f2230}
+.badge{font-size:.7em;padding:2px 8px;border-radius:10px;font-weight:600;text-transform:uppercase;display:inline-block}
+.b-worsening{background:#7f1d1d;color:#fca5a5}.b-stuck{background:#78350f;color:#fcd34d}
+.b-improving{background:#14532d;color:#86efac}.b-new{background:#1e3a5f;color:#93c5fd}
+.b-validated{background:#581c87;color:#d8b4fe}.b-active{background:#1e3a5f;color:#93c5fd}
+.b-adopted{background:#14532d;color:#86efac}.b-reverted{background:#7f1d1d;color:#fca5a5}
+.b-queued{background:#374151;color:#d1d5db}
+.no-data{color:#555;font-style:italic;padding:20px;text-align:center}
+.trainer-note{font-size:.78em;color:#666;margin-top:8px;line-height:1.4;font-style:italic;padding:6px 0;border-top:1px solid #1f2230}
+/* Levels */
+.level-track{margin-bottom:14px;padding:12px;background:#12141c;border-radius:8px}
+.level-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.level-name{font-weight:600;font-size:.95em}
+.level-badge{font-size:.65em;padding:2px 8px;border-radius:10px;font-weight:600;text-transform:uppercase}
+.lb-active{background:#1e3a5f;color:#93c5fd}.lb-next{background:#374151;color:#d1d5db}
+.lb-queued{background:#1f2230;color:#666}.lb-future{background:#1f2230;color:#444}
+.level-bar{height:8px;background:#1f2230;border-radius:4px;overflow:hidden;margin:4px 0}
+.level-fill{height:100%;border-radius:4px}
+.level-meta{font-size:.75em;color:#666;margin-top:4px}
+.level-gate{font-size:.75em;color:#888;margin-top:2px;font-style:italic}
+/* Competence */
+.comp-row{margin-bottom:12px}
+.comp-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}
+.comp-name{font-weight:600;font-size:.85em}
+.comp-stage{font-size:.7em;color:#888}
+.comp-track{display:flex;height:24px;background:#1f2230;border-radius:6px;overflow:hidden}
+.comp-stop{flex:1;display:flex;align-items:center;justify-content:center;font-size:.6em;font-weight:600;color:rgba(255,255,255,0.2);border-right:1px solid #2a2d37}
+.comp-stop:last-child{border-right:none}
+.comp-stop.filled{color:#fff}
+.cs1{background:#7f1d1d}.cs2{background:#78350f}.cs3{background:#1e3a5f}.cs4{background:#14532d}
+.comp-evidence{font-size:.73em;color:#555;margin-top:3px;line-height:1.3}
+/* Challenge */
+.challenge-item{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid #1f2230;font-size:.85em}
+.challenge-check{width:18px;height:18px;border-radius:4px;border:2px solid #2a2d37;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:.7em}
+.challenge-done{background:#14532d;border-color:#22c55e;color:#22c55e}
+.challenge-text{color:#aaa}.challenge-text.done{color:#555;text-decoration:line-through}
+</style>
+</head>
+<body>
+<h1>&#x1F9EC; Body System Dashboard</h1>
+<div class="sub">Generated %%NOW%% · Body-only · Autoresearch-inspired</div>
+
+<div class="summary">
+  <div class="stat"><div class="v">%%TOTAL_ACTUAL%%w</div><div class="l">Body Mass</div></div>
+  <div class="stat"><div class="v">%%TOTAL_BUDGET%%w</div><div class="l">Budget Ceiling</div></div>
+  <div class="stat"><div class="v">%%UTIL_PCT%%%</div><div class="l">Utilization</div></div>
+  <div class="stat"><div class="v">%%TOTAL_RUNS%%</div><div class="l">Loop Runs</div></div>
+  <div class="stat"><div class="v">%%ADOPTED%%</div><div class="l">Kept</div></div>
+  <div class="stat"><div class="v">%%KEEP_RATE%%%</div><div class="l">Keep Rate</div></div>
+  <div class="stat"><div class="v">%%TOTAL_SAVED%%w</div><div class="l">Words Saved</div></div>
+  <div class="stat"><div class="v">%%STREAK%%</div><div class="l">Streak</div></div>
+</div>
+
+<!-- 1. FIVE LEVELS -->
+<div class="section-title">&#x1F3AF; Five Levels — Strategic North Star</div>
+<div class="grid">
+  <div class="card" style="grid-column:span 2"><h2>Level Progression</h2><div id="levelsDisplay"></div>
+    <div class="trainer-note" id="levelsTrainer"></div>
+  </div>
+</div>
+
+<!-- 2. AUTONOMY -->
+<div class="section-title">&#x1F680; Autonomy Spectrum — Road to 100% Agentic</div>
+<div class="grid">
+  <div class="card"><h2>Work Classification</h2><div class="chart-box"><canvas id="autonomyChart"></canvas></div>
+    <div class="trainer-note" id="autonomyTrainer"></div></div>
+  <div class="card"><h2>Autonomy Breakdown</h2><div id="autonomyTable"></div>
+    <div style="font-size:.75em;color:#666;margin-top:10px;line-height:1.5">
+      <b style="color:#22c55e">Fully Agentic</b> — Zero touch.<br>
+      <b style="color:#3b82f6">Agent + Human</b> — Agent works, human triggers/approves.<br>
+      <b style="color:#f59e0b">Delegated</b> — Another human does it.<br>
+      <b style="color:#ef4444">Human</b> — Richard does it manually.
+    </div>
+    <div id="autonomyConfidence" style="font-size:.6em;color:#3a3a3a;margin-top:6px;font-style:italic"></div>
+  </div>
+</div>
+
+<!-- 3. COMPETENCE -->
+<div class="section-title">&#x1F9E0; Competence Stages — Road to Unconscious Competence</div>
+<div class="grid">
+  <div class="card" style="grid-column:span 2">
+    <h2>Principle Mastery</h2>
+    <div style="display:flex;justify-content:space-between;font-size:.7em;color:#555;margin-bottom:10px;padding:0 2px">
+      <span style="color:#fca5a5">&#x25C0; Unconscious Incompetence</span>
+      <span style="color:#fcd34d">Conscious Incompetence</span>
+      <span style="color:#93c5fd">Conscious Competence</span>
+      <span style="color:#86efac">Unconscious Competence &#x25B6;</span>
+    </div>
+    <div id="competenceDisplay"></div>
+    <div class="trainer-note" id="competenceTrainer"></div>
+  </div>
+</div>
+
+<!-- 4. GOALS & WILLPOWER -->
+<div class="section-title">&#x1F525; Goals &amp; Willpower (aMCC)</div>
+<div class="grid-3">
+  <div class="card"><h2>30-Day Challenge</h2><div id="challengeDisplay"></div>
+    <div class="trainer-note" id="challengeTrainer"></div></div>
+  <div class="card"><h2>Growth Model — Current vs Targets</h2><div id="growthTable"></div></div>
+  <div class="card"><h2>Resistance Taxonomy</h2><div id="resistanceTable"></div></div>
+</div>
+
+<!-- 5. CALIBRATION -->
+<div class="section-title">&#x1F9EC; Calibration &amp; Patterns (Nervous System)</div>
+<div class="grid">
+  <div class="card" style="grid-column:span 2"><h2>Pattern Trajectories</h2>
+    <div style="font-size:.72em;color:#555;margin-bottom:8px">
+      <span style="color:#fca5a5;background:#7f1d1d;padding:1px 6px;border-radius:4px;margin-right:6px">WORSENING</span> Getting worse despite intervention
+      <span style="color:#fcd34d;background:#78350f;padding:1px 6px;border-radius:4px;margin:0 6px">STUCK</span> No movement for 3+ weeks
+      <span style="color:#86efac;background:#14532d;padding:1px 6px;border-radius:4px;margin:0 6px">IMPROVING</span> Trending in the right direction
+      <span style="color:#93c5fd;background:#1e3a5f;padding:1px 6px;border-radius:4px;margin:0 6px">NEW</span> Recently identified
+      <span style="color:#d8b4fe;background:#581c87;padding:1px 6px;border-radius:4px;margin:0 6px">VALIDATED</span> Confirmed by multiple sources
+    </div>
+    <div id="patternTable"></div>
+    <div class="trainer-note" id="patternTrainer"></div>
+  </div>
+</div>
+
+<!-- 6. SCORECARD -->
+<div class="section-title">&#x1F4CA; Weekly Scorecard</div>
+<div class="grid">
+  <div class="card">
+    <h2>Weekly Output</h2><div class="chart-box"><canvas id="scorecardChart"></canvas></div>
+    <div style="font-size:.75em;color:#666;margin-top:8px;line-height:1.5">
+      <b style="color:#8b5cf6">Artifacts</b> — Docs, frameworks, test designs, POVs (target: 1/week, Level 1 gate).<br>
+      <b style="color:#06b6d4">Tools</b> — Automations completed (target: 1/month, Level 3 gate).<br>
+      <b style="color:#f59e0b">Low-Leverage Hrs</b> — Invoice/PO, manual links, reactive dives, passive meetings, budget spreadsheets (target: &lt;5/week).
+    </div>
+    <div class="trainer-note" id="scorecardTrainer"></div>
+  </div>
+  <div class="card"><h2>Low-Leverage Patterns (Mediocrity Traps)</h2><div id="lowLevTable"></div></div>
+</div>
+
+<!-- 7. AUTORESEARCH -->
+<div class="section-title">&#x1F52C; Autoresearch Engine</div>
+<div class="grid">
+  <div class="card"><h2>Organ Word Budgets</h2><div class="chart-box"><canvas id="budgetChart"></canvas></div></div>
+  <div class="card"><h2>Experiment Word Savings</h2><div class="chart-box"><canvas id="savingsChart"></canvas></div></div>
+</div>
+<div class="grid-3" style="margin-top:16px">
+  <div class="card"><h2>Experiment Status</h2><div id="expTable"></div></div>
+  <div class="card"><h2>Experiment Queue</h2><div id="queueTable"></div></div>
+  <div class="card"><h2>Organ Freshness</h2><div class="chart-box-sm"><canvas id="stalenessChart"></canvas></div></div>
+</div>
+
+<div style="color:#444;font-size:.7em;text-align:center;margin-top:32px;padding:12px">
+  Body System Dashboard · Standalone HTML · Chart.js via CDN · Portable
+</div>
+
+<script>
+var budgets=%%BUDGETS_JSON%%;
+var changelog=%%CHANGELOG_JSON%%;
+var scorecard=%%SCORECARD_JSON%%;
+var patterns=%%PATTERNS_JSON%%;
+var amcc=%%AMCC_JSON%%;
+var fiveLevels=%%FIVE_LEVELS_JSON%%;
+var staleness=%%STALENESS_JSON%%;
+var expQueue=%%EXP_QUEUE_JSON%%;
+var autonomy=%%AUTONOMY_JSON%%;
+var competence=%%COMPETENCE_JSON%%;
+var challenge=%%CHALLENGE_JSON%%;
+
+var C={blue:'#3b82f6',purple:'#8b5cf6',green:'#22c55e',red:'#ef4444',amber:'#f59e0b',cyan:'#06b6d4',gray:'#6b7280'};
+var cDef={responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{labels:{color:'#888',font:{size:11}}}},
+  scales:{x:{ticks:{color:'#666'},grid:{color:'#1f2230'}},y:{ticks:{color:'#666'},grid:{color:'#1f2230'}}}};
+</script>
+
+<script>
+// ═══ 1. FIVE LEVELS — Stepped progress bars with next action ═══
+(function(){
+  var el=document.getElementById('levelsDisplay');
+  if(!fiveLevels.length){el.innerHTML='<div class="no-data">No Five Levels data</div>';return;}
+  var statusColors={ACTIVE:'#3b82f6',NEXT:'#4b5563',QUEUED:'#374151',FUTURE:'#1f2230'};
+  var gates=[
+    '4 consecutive weeks with a strategic artifact shipped',
+    '3+ WW tests with written status docs the team references',
+    '1+ tool built by Richard and actively used by a teammate for 30+ days',
+    'Published POV or framework that influenced a team-level decision',
+    'One PS workflow runs autonomously end-to-end'
+  ];
+  var nextSteps=[
+    'Ship the Testing Approach doc outline this week. One artifact breaks the drought.',
+    'Write status docs for OCI rollout + ad copy test. Make them findable without asking you.',
+    'Finish the campaign link generator. Ship it to a teammate. Measure if they use it.',
+    'Publish the AEO POV. Share it with Brandon and Kate. Get it cited.',
+    'Convert one agent+human workflow to fully agentic. Morning routine is the candidate.'
+  ];
+  var fills=[35,15,0,0,0]; // estimated % progress per level
+  var h='';
+  fiveLevels.forEach(function(lv,i){
+    var color=statusColors[lv.status]||'#1f2230';
+    var badgeCls=lv.status==='ACTIVE'?'lb-active':lv.status==='NEXT'?'lb-next':lv.status==='QUEUED'?'lb-queued':'lb-future';
+    var fill=fills[i]||0;
+    h+='<div class="level-track">'+
+      '<div class="level-header"><span class="level-name">Level '+lv.level+': '+lv.name+'</span>'+
+      '<span style="color:#555;font-size:.8em;margin-right:8px">'+fill+'%</span>'+
+      '<span class="level-badge '+badgeCls+'">'+lv.status+'</span></div>'+
+      '<div class="level-bar"><div class="level-fill" style="width:'+fill+'%;background:'+color+'"></div></div>'+
+      '<div class="level-meta">'+lv.description+'</div>'+
+      '<div class="level-gate">Gate: '+(gates[i]||'TBD')+'</div>';
+    if(lv.status==='ACTIVE'||lv.status==='NEXT')
+      h+='<div style="font-size:.75em;color:#a78bfa;margin-top:3px">&#x27A1; Next step: '+(nextSteps[i]||'')+'</div>';
+    h+='</div>';
+  });
+  el.innerHTML=h;
+  document.getElementById('levelsTrainer').textContent='Level 1 is the gate. You\'ve been at zero artifacts for 3+ weeks. The Testing Approach doc is the convergence point \u2014 it\'s a Level 2 artifact that proves Level 1 consistency. Ship the outline, then iterate.';
+})();
+
+// ═══ 2. AUTONOMY — Doughnut with numerical labels ═══
+(function(){
+  var s=autonomy.summary||{};
+  var labels=['Fully Agentic','Agent + Human','Delegated','Human'];
+  var data=[s.fully_agentic||0,s.agent_human||0,s.delegated||0,s.human||0];
+  var colors=[C.green,C.blue,C.amber,C.red];
+  new Chart(document.getElementById('autonomyChart'),{type:'doughnut',
+    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderColor:'#1a1d27',borderWidth:3}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom',labels:{color:'#888',font:{size:11},padding:12,
+        generateLabels:function(chart){
+          var ds=chart.data.datasets[0];
+          var total=ds.data.reduce(function(a,b){return a+b},0);
+          return chart.data.labels.map(function(label,i){
+            return {text:label+' ('+ds.data[i]+', '+Math.round(ds.data[i]/total*100)+'%)',
+              fillStyle:ds.backgroundColor[i],strokeStyle:ds.backgroundColor[i],hidden:false,index:i};
+          });
+        }}},
+        tooltip:{callbacks:{label:function(c){var total=c.dataset.data.reduce(function(a,b){return a+b},0);return c.label+': '+c.raw+' of '+total+' ('+Math.round(c.raw/total*100)+'%)'}}}}}});
+  // Table with examples
+  var el=document.getElementById('autonomyTable');
+  var cats=[{label:'Fully Agentic',key:'fully_agentic',color:C.green},{label:'Agent + Human',key:'agent_human',color:C.blue},
+    {label:'Delegated',key:'delegated',color:C.amber},{label:'Human',key:'human',color:C.red}];
+  var total=autonomy.total||1;
+  var funcs=autonomy.functions||[];
+  var h='<table><tr><th>Category</th><th style="text-align:center">Count</th><th>Examples</th><th></th></tr>';
+  cats.forEach(function(cat){
+    var count=s[cat.key]||0; var pct=Math.round(count/total*100);
+    var examples=funcs.filter(function(f){return f.category===cat.key}).map(function(f){return f.name}).slice(0,3).join(', ');
+    h+='<tr><td style="color:'+cat.color+';font-weight:600;white-space:nowrap">'+cat.label+'</td><td style="text-align:center">'+count+'</td>'+
+      '<td style="color:#888;font-size:.78em">'+examples+'</td>'+
+      '<td><div style="background:#1f2230;border-radius:4px;height:12px;width:80px"><div style="background:'+cat.color+';border-radius:4px;height:12px;width:'+Math.round(pct*0.8)+'px"></div></div></td></tr>';
+  });
+  h+='<tr style="border-top:2px solid #2a2d37"><td style="font-weight:700">Total</td><td style="text-align:center;font-weight:700">'+total+'</td><td></td><td></td></tr>';
+  el.innerHTML=h+'</table>';
+  var confEl=document.getElementById('autonomyConfidence');
+  if(autonomy.confidence_note) confEl.textContent='\u24D8 '+autonomy.confidence_note;
+  document.getElementById('autonomyTrainer').textContent='58% of your work is still fully manual. The biggest buckets are campaign ops (9 functions) and strategic work (5). Campaign ops is Level 3 territory \u2014 automate it. Strategic work stays human, but the prep can be agent-assisted.';
+})();
+
+// ═══ 3. COMPETENCE — Horizontal progress bars, single header ═══
+(function(){
+  var p=competence.principles||[];
+  if(!p.length)return;
+  var el=document.getElementById('competenceDisplay');
+  var stageFull=['Unconscious Incompetence','Conscious Incompetence','Conscious Competence','Unconscious Competence'];
+  var stageColors=['#7f1d1d','#78350f','#1e3a5f','#14532d'];
+  var h='';
+  p.forEach(function(pr){
+    h+='<div class="comp-row">'+
+      '<div class="comp-label"><span class="comp-name">'+pr.name+' <span style="color:#555;font-size:.8em;font-weight:400">('+pr.source+')</span></span>'+
+      '<span class="comp-stage">Stage '+pr.score+' \u2014 '+stageFull[pr.score-1]+'</span></div>'+
+      '<div class="comp-track">';
+    for(var i=0;i<4;i++){
+      var filled=i<pr.score;
+      h+='<div class="comp-stop'+(filled?' filled':'')+'" style="'+(filled?'background:'+stageColors[i]:'')+'"></div>';
+    }
+    h+='</div><div class="comp-evidence">'+pr.evidence+'</div></div>';
+  });
+  h+='<div style="margin-top:10px;padding:8px 12px;background:#12141c;border-radius:6px;display:flex;justify-content:space-between;align-items:center">'+
+    '<span style="font-size:.85em;color:#888">Overall Average</span>'+
+    '<span style="font-size:1.1em;font-weight:700;color:#fff">'+competence.average+' / 4</span></div>';
+  el.innerHTML=h;
+  document.getElementById('competenceTrainer').textContent='Two principles at Stage 2 (Conscious Incompetence): "Invisible over visible" and "Reduce decisions." These are the growth edges. Building more templates and making the morning routine event-triggered would move both forward.';
+})();
+
+// ═══ 4. GOALS — 30-Day Challenge + Growth Model + Resistance ═══
+(function(){
+  var el=document.getElementById('challengeDisplay');
+  var items=challenge.items||[];
+  if(!items.length){el.innerHTML='<div class="no-data">No challenge items</div>';return;}
+  var pct=Math.round(challenge.completed/Math.max(challenge.total,1)*100);
+  var h='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">'+
+    '<span style="font-size:.85em;color:#888">Due: '+(challenge.deadline||'TBD')+'</span>'+
+    '<span style="font-size:1.1em;font-weight:700;color:#fff">'+challenge.completed+'/'+challenge.total+' ('+pct+'%)</span></div>'+
+    '<div style="height:6px;background:#1f2230;border-radius:3px;margin-bottom:12px"><div style="height:100%;width:'+pct+'%;background:'+C.green+';border-radius:3px"></div></div>';
+  items.forEach(function(item){
+    h+='<div class="challenge-item">'+
+      '<div class="challenge-check'+(item.done?' challenge-done':'')+'">'+( item.done?'\u2713':'')+'</div>'+
+      '<span class="challenge-text'+(item.done?' done':'')+'">'+item.text+'</span></div>';
+  });
+  el.innerHTML=h;
+  document.getElementById('challengeTrainer').textContent='0/10 complete with 19 days left. The Testing Approach doc and AI Max test design are the highest-leverage items here \u2014 they feed Level 1 and Level 2 simultaneously. The admin items (Asana decision, invoice reduction) are 30-minute tasks. Batch them.';
+})();
+(function(){
+  var el=document.getElementById('growthTable');
+  var gm=amcc.growth_model||[];
+  if(!gm.length){el.innerHTML='<div class="no-data">No growth model data</div>';return;}
+  var h='<table><tr><th>Metric</th><th>Current</th><th>30d</th><th>90d</th></tr>';
+  gm.forEach(function(r){h+='<tr><td>'+r.metric+'</td><td style="color:#fff;font-weight:600">'+r.current+'</td><td style="color:#888">'+r.target_30d+'</td><td style="color:#666">'+r.target_90d+'</td></tr>';});
+  el.innerHTML=h+'</table>';
+})();
+(function(){
+  var el=document.getElementById('resistanceTable');
+  var rt=amcc.resistance_types||[];
+  if(!rt.length){el.innerHTML='<div class="no-data">No resistance types</div>';return;}
+  var h='<table><tr><th>Type</th><th>Counter</th></tr>';
+  rt.forEach(function(r){h+='<tr><td style="font-weight:600;font-size:.85em">'+r.type+'</td><td style="color:#888;font-size:.82em">'+r.counter+'</td></tr>';});
+  el.innerHTML=h+'</table>';
+})();
+
+// ═══ 5. PATTERNS — Heatmap table with legend ═══
+(function(){
+  var el=document.getElementById('patternTable');
+  if(!patterns.length){el.innerHTML='<div class="no-data">No patterns tracked</div>';return;}
+  var trajColors={'WORSENING':'#7f1d1d','STUCK':'#78350f','IMPROVING':'#14532d','NEW':'#1e3a5f','VALIDATED':'#581c87','ACTIVE':'#1e3a5f'};
+  var trajText={'WORSENING':'#fca5a5','STUCK':'#fcd34d','IMPROVING':'#86efac','NEW':'#93c5fd','VALIDATED':'#d8b4fe','ACTIVE':'#93c5fd'};
+  var h='<table><tr><th>Pattern</th><th style="text-align:center">Status</th><th style="text-align:center">Weeks</th><th style="text-align:center">Trajectory</th><th>Assessment</th></tr>';
+  patterns.forEach(function(p){
+    var traj=p.trajectory!=='\u2014'?p.trajectory:p.status;
+    var bg=trajColors[traj]||'#1f2230'; var fg=trajText[traj]||'#888';
+    var sBg=trajColors[p.status]||'#1f2230'; var sFg=trajText[p.status]||'#888';
+    h+='<tr><td style="font-weight:500">'+p.name+'</td>'+
+      '<td style="text-align:center"><span style="display:inline-block;padding:3px 10px;border-radius:4px;background:'+sBg+';color:'+sFg+';font-size:.75em;font-weight:600">'+p.status+'</span></td>'+
+      '<td style="text-align:center;color:#888">'+p.weeks+'</td>'+
+      '<td style="text-align:center"><span style="display:inline-block;padding:3px 10px;border-radius:4px;background:'+bg+';color:'+fg+';font-size:.75em;font-weight:600">'+traj+'</span></td>'+
+      '<td style="color:#777;font-size:.8em;max-width:300px">'+(p.assessment||'\u2014')+'</td></tr>';
+  });
+  el.innerHTML=h+'</table>';
+  var worsening=patterns.filter(function(p){return p.trajectory==='WORSENING'});
+  var stuck=patterns.filter(function(p){return p.trajectory==='STUCK'});
+  var note='';
+  if(worsening.length) note+=worsening.length+' pattern(s) worsening: '+worsening.map(function(p){return p.name}).join(', ')+'. These need structural fixes, not willpower. ';
+  if(stuck.length) note+=stuck.length+' pattern(s) stuck. Same intervention for 3+ weeks means the intervention is wrong \u2014 change the approach.';
+  if(!note) note='All patterns stable or improving. Keep monitoring.';
+  document.getElementById('patternTrainer').textContent=note;
+})();
+
+// ═══ 6. SCORECARD ═══
+if(scorecard.length){
+  new Chart(document.getElementById('scorecardChart'),{type:'bar',
+    data:{labels:scorecard.map(function(w){return w.week}),datasets:[
+      {label:'Artifacts',data:scorecard.map(function(w){return w.artifacts}),backgroundColor:C.purple,borderRadius:4},
+      {label:'Tools',data:scorecard.map(function(w){return w.tools}),backgroundColor:C.cyan,borderRadius:4},
+      {label:'Low-Lev Hrs',data:scorecard.map(function(w){return w.low_leverage_hours}),backgroundColor:C.amber,borderRadius:4}
+    ]},options:cDef});
+} else { document.getElementById('scorecardChart').parentElement.innerHTML='<div class="no-data">No scorecard data</div>'; }
+(function(){
+  var zeroArt=scorecard.filter(function(w){return w.artifacts===0});
+  var note='';
+  if(zeroArt.length===scorecard.length&&scorecard.length>0) note='Zero artifacts across all tracked weeks. Level 1 gate is 4 consecutive weeks. Current: 0. ';
+  var highLev=scorecard.filter(function(w){return w.low_leverage_hours>5});
+  if(highLev.length) note+=highLev.length+'/'+scorecard.length+' weeks exceeded 5h low-leverage. Every hour there is an hour not spent on the Testing Approach doc.';
+  if(!note) note='Scorecard tracking in progress. Keep logging weekly.';
+  document.getElementById('scorecardTrainer').textContent=note;
+})();
+(function(){
+  var el=document.getElementById('lowLevTable');
+  var traps=[
+    {name:'Invoice/PO coordination',weeks:'4+',fix:'Delegate + process doc',signal:'$0 activity for your career'},
+    {name:'Manual campaign link updates',weeks:'3',fix:'Build generator tool',signal:'Automate or template'},
+    {name:'Reactive deep dives',weeks:'2',fix:'Self-service dashboard',signal:'Do once, then automate'},
+    {name:'Meetings without clear output',weeks:'3+',fix:'Audit + decline or prep',signal:'What\'s your deliverable?'},
+    {name:'Manual budget spreadsheets',weeks:'recurring',fix:'Timebox or build helper',signal:'Cap at 30 min'},
+    {name:'Admin backlog not clearing',weeks:'3',fix:'Batch and timebox (40 min)',signal:'PAM PO is 24 days overdue'}
+  ];
+  var h='<table><tr><th>Time Trap</th><th style="text-align:center">Weeks</th><th>Fix</th><th>Signal</th></tr>';
+  traps.forEach(function(t){
+    h+='<tr><td style="font-weight:500">'+t.name+'</td><td style="color:#888;text-align:center">'+t.weeks+'</td>'+
+      '<td style="color:#888;font-size:.82em">'+t.fix+'</td>'+
+      '<td style="color:#666;font-size:.78em;font-style:italic">'+t.signal+'</td></tr>';
+  });
+  el.innerHTML=h+'</table>';
+})();
+
+// ═══ 7. AUTORESEARCH ═══
+if(budgets.length){
+  new Chart(document.getElementById('budgetChart'),{type:'bar',
+    data:{labels:budgets.map(function(b){return b.organ}),datasets:[
+      {label:'Actual',data:budgets.map(function(b){return b.actual}),backgroundColor:budgets.map(function(b){return b.utilization>100?C.red:C.blue}),borderRadius:4},
+      {label:'Budget',data:budgets.map(function(b){return b.budget}),backgroundColor:'rgba(255,255,255,0.06)',borderRadius:4}
+    ]},options:{...cDef,indexAxis:'y',plugins:{...cDef.plugins,tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+c.raw.toLocaleString()+'w'}}}}}});
+}
+(function(){
+  var s=changelog.savings||[];
+  if(!s.length){document.getElementById('savingsChart').parentElement.innerHTML='<div class="no-data">No savings yet</div>';return;}
+  new Chart(document.getElementById('savingsChart'),{type:'bar',
+    data:{labels:s.map(function(_,i){return 'Exp '+(i+1)}),datasets:[
+      {label:'Before',data:s.map(function(x){return x.before}),backgroundColor:'rgba(255,255,255,0.06)',borderRadius:4},
+      {label:'After',data:s.map(function(x){return x.after}),backgroundColor:C.green,borderRadius:4}
+    ]},options:{...cDef,plugins:{...cDef.plugins,tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+c.raw.toLocaleString()+'w'}}}}}});
+})();
+(function(){
+  var el=document.getElementById('expTable');
+  var exps=changelog.experiments||[];
+  if(!exps.length){el.innerHTML='<div class="no-data">No experiments</div>';return;}
+  var h='<table><tr><th>CE</th><th>Status</th></tr>';
+  exps.forEach(function(e){
+    var bc=e.status==='ADOPTED'?'b-adopted':e.status==='REVERTED'?'b-reverted':'b-queued';
+    h+='<tr><td>CE-'+e.id+'</td><td><span class="badge '+bc+'">'+e.status+'</span></td></tr>';
+  });
+  el.innerHTML=h+'</table>';
+})();
+(function(){
+  var el=document.getElementById('queueTable');
+  if(!expQueue.length){el.innerHTML='<div class="no-data">Queue empty</div>';return;}
+  var h='<table><tr><th>CE</th><th>Name</th><th>Status</th></tr>';
+  expQueue.forEach(function(e){
+    h+='<tr><td>CE-'+e.id+'</td><td style="font-size:.85em">'+e.name+'</td><td><span class="badge b-queued">'+e.status+'</span></td></tr>';
+  });
+  el.innerHTML=h+'</table>';
+})();
+(function(){
+  if(!staleness.length)return;
+  var colors=staleness.map(function(s){return s.days_stale<=1?C.green:s.days_stale<=3?C.amber:C.red});
+  new Chart(document.getElementById('stalenessChart'),{type:'bar',
+    data:{labels:staleness.map(function(s){return s.organ}),datasets:[
+      {label:'Days',data:staleness.map(function(s){return Math.max(s.days_stale,0)}),backgroundColor:colors,borderRadius:4}
+    ]},options:{...cDef,indexAxis:'y',scales:{...cDef.scales,x:{...cDef.scales.x,max:Math.max.apply(null,staleness.map(function(s){return s.days_stale}))+2}},
+      plugins:{...cDef.plugins,legend:{display:false},tooltip:{callbacks:{label:function(c){return 'Updated: '+staleness[c.dataIndex].updated}}}}}});
+})();
+</script>
+</body>
+</html>

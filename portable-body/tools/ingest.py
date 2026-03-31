@@ -39,26 +39,16 @@ DAILY_COLS = {
 
 ALL_MARKETS = ['US', 'CA', 'UK', 'DE', 'FR', 'IT', 'ES', 'JP', 'AU', 'MX']
 
-# Weekly tab metric blocks (row offsets from block start)
-# Each block: row 1=header, rows 2-31 = markets (US,JP,UK,DE,FR,IT,ES,CA,MX,AU + Brand/NB per market)
-WEEKLY_METRICS = {
+# Weekly tab metric blocks — auto-detected at runtime (see _detect_weekly_blocks)
+# These are fallback values only, used if auto-detection fails
+WEEKLY_METRICS_FALLBACK = {
     'spend': 1, 'regs': 40, 'cpa': 79, 'clicks': 118,
     'impressions': 157, 'cpc': 196, 'cvr': 235, 'ctr': 274,
 }
 
 # Market row offsets within each Weekly metric block (0-indexed from block start)
-WEEKLY_MARKET_ROWS = {
-    'US': (1, 2, 3),    # total, brand, nb
-    'JP': (4, 5, 6),
-    'UK': (7, 8, 9),
-    'DE': (10, 11, 12),
-    'FR': (13, 14, 15),
-    'IT': (16, 17, 18),
-    'ES': (19, 20, 21),
-    'CA': (22, 23, 24),
-    'MX': (25, 26, 27),
-    'AU': (28, 29, 30),
-}
+# Each market has 3 rows: total, brand, nb
+WEEKLY_MARKET_ORDER = ['US', 'JP', 'UK', 'DE', 'FR', 'IT', 'ES', 'CA', 'MX', 'AU']
 
 
 def safe_float(v):
@@ -109,15 +99,85 @@ class DashboardIngester:
         self.wb = openpyxl.load_workbook(xlsx_path, data_only=True)
         self.sheet_names = self.wb.sheetnames
 
+    def _detect_daily_cols(self, market):
+        """Auto-detect column layout for a daily market tab by reading the header row.
+
+        Returns a dict mapping metric names to column indices.
+        Falls back to DAILY_COLS if header detection fails.
+        """
+        if market not in self.sheet_names:
+            return DAILY_COLS
+        ws = self.wb[market]
+        header = list(ws.iter_rows(min_row=1, max_row=1, values_only=True))[0]
+
+        # Build keyword-to-metric mapping
+        col_keywords = {
+            'week': ['week'],
+            'date': ['date'],
+            'month': ['month'],
+            'cost': ['cost', 'spend'],
+            'clicks': ['click'],
+            'impressions': ['impression', 'impr'],
+            'regs': ['reg', 'registration', 'conv'],
+            'brand_cost': ['brand cost', 'brand spend'],
+            'brand_clicks': ['brand click'],
+            'brand_imp': ['brand imp', 'brand impression'],
+            'brand_regs': ['brand reg', 'brand conv'],
+            'nb_cost': ['nb cost', 'non-brand cost', 'non brand cost', 'nb spend'],
+            'nb_clicks': ['nb click', 'non-brand click', 'non brand click'],
+            'nb_imp': ['nb imp', 'non-brand imp', 'non brand imp'],
+            'nb_regs': ['nb reg', 'non-brand reg', 'non brand reg', 'nb conv'],
+        }
+
+        detected = {}
+        for col_idx, cell in enumerate(header):
+            cell_str = str(cell).strip().lower() if cell else ''
+            if not cell_str:
+                continue
+            for metric, keywords in col_keywords.items():
+                if metric not in detected:
+                    for kw in keywords:
+                        if kw in cell_str:
+                            detected[metric] = col_idx
+                            break
+
+        # Also scan for any additional columns beyond the known set
+        extra_cols = {}
+        for col_idx, cell in enumerate(header):
+            cell_str = str(cell).strip().lower() if cell else ''
+            if not cell_str or col_idx in detected.values():
+                continue
+            # Capture CPC, CVR, CTR, CPA columns if present
+            for metric in ['cpc', 'cvr', 'ctr', 'cpa']:
+                if metric in cell_str and metric not in detected and metric not in extra_cols:
+                    prefix = ''
+                    if 'brand' in cell_str:
+                        prefix = 'brand_'
+                    elif 'nb' in cell_str or 'non-brand' in cell_str or 'non brand' in cell_str:
+                        prefix = 'nb_'
+                    extra_cols[f'{prefix}{metric}'] = col_idx
+
+        # Merge detected + extras, fall back to DAILY_COLS for anything missing
+        result = dict(DAILY_COLS)  # start with defaults
+        result.update(detected)
+        result.update(extra_cols)
+        return result
+
     def _read_daily_tab(self, market):
-        """Read daily data from a market tab. Returns list of day dicts."""
+        """Read daily data from a market tab. Returns list of day dicts.
+
+        Auto-detects column layout from header row. Reads all rows including hidden ones.
+        """
         if market not in self.sheet_names:
             return []
         ws = self.wb[market]
+        cols = self._detect_daily_cols(market)
+
         days = []
         for row in ws.iter_rows(min_row=2, max_row=ws.max_row, values_only=True):
-            week_label = str(row[DAILY_COLS['week']]) if row[DAILY_COLS['week']] else ''
-            date_val = row[DAILY_COLS['date']]
+            week_label = str(row[cols['week']]) if cols['week'] < len(row) and row[cols['week']] else ''
+            date_col = cols['date']
+            date_val = row[date_col] if date_col < len(row) else None
             if not week_label or not date_val:
                 continue
             if isinstance(date_val, datetime.datetime):
@@ -125,29 +185,51 @@ class DashboardIngester:
             else:
                 date_str = str(date_val)
 
-            cost = safe_float(row[DAILY_COLS['cost']])
-            regs = safe_int(row[DAILY_COLS['regs']])
+            def get_float(key):
+                idx = cols.get(key)
+                if idx is not None and idx < len(row):
+                    return safe_float(row[idx])
+                return 0.0
+
+            def get_int(key):
+                idx = cols.get(key)
+                if idx is not None and idx < len(row):
+                    return safe_int(row[idx])
+                return 0
+
+            cost = get_float('cost')
+            regs = get_int('regs')
+            clicks = get_int('clicks')
             # Skip rows with no data (future dates)
-            if cost == 0 and regs == 0 and safe_int(row[DAILY_COLS['clicks']]) == 0:
+            if cost == 0 and regs == 0 and clicks == 0:
                 continue
+
+            month_col = cols.get('month')
+            month_val = str(row[month_col]) if month_col is not None and month_col < len(row) and row[month_col] else ''
 
             day = {
                 'week': week_label,
                 'date': date_str,
-                'month': str(row[DAILY_COLS['month']]) if row[DAILY_COLS['month']] else '',
+                'month': month_val,
                 'cost': cost,
-                'clicks': safe_int(row[DAILY_COLS['clicks']]),
-                'impressions': safe_int(row[DAILY_COLS['impressions']]),
+                'clicks': clicks,
+                'impressions': get_int('impressions'),
                 'regs': regs,
-                'brand_cost': safe_float(row[DAILY_COLS['brand_cost']]),
-                'brand_clicks': safe_int(row[DAILY_COLS['brand_clicks']]),
-                'brand_imp': safe_int(row[DAILY_COLS['brand_imp']]),
-                'brand_regs': safe_int(row[DAILY_COLS['brand_regs']]),
-                'nb_cost': safe_float(row[DAILY_COLS['nb_cost']]),
-                'nb_clicks': safe_int(row[DAILY_COLS['nb_clicks']]),
-                'nb_imp': safe_int(row[DAILY_COLS['nb_imp']]),
-                'nb_regs': safe_int(row[DAILY_COLS['nb_regs']]),
+                'brand_cost': get_float('brand_cost'),
+                'brand_clicks': get_int('brand_clicks'),
+                'brand_imp': get_int('brand_imp'),
+                'brand_regs': get_int('brand_regs'),
+                'nb_cost': get_float('nb_cost'),
+                'nb_clicks': get_int('nb_clicks'),
+                'nb_imp': get_int('nb_imp'),
+                'nb_regs': get_int('nb_regs'),
             }
+            # Add any extra detected metrics (CPC, CVR, CTR, CPA at daily level)
+            for key in cols:
+                if key not in day and key not in ('week', 'date', 'month'):
+                    idx = cols[key]
+                    if idx < len(row) and row[idx] is not None:
+                        day[key] = safe_float(row[idx])
             days.append(day)
         return days
 
@@ -234,13 +316,39 @@ class DashboardIngester:
         return None
 
     def _read_ieccp(self, target_week):
-        """Read ie%CCP values from the IECCP tab for the target week and prior week."""
+        """Read ie%CCP values from the IECCP tab for the target week and prior week.
+
+        The IECCP tab has multiple sections stacked vertically:
+          - Rows 1-12:  CPA (per market) — NOT ie%CCP, skip these
+          - Row 15:     "IECCP" header
+          - Rows 16-26: ie%CCP ratios (the actual metric we want)
+          - Row 28:     "IECCP Segment" header
+          - Rows 30-48: CCP Segment (Brand/NB CCP per registration values)
+          - Rows 52-70: CPA Segment (Brand/NB CPA)
+          - Rows 75-93: CCP (Brand/NB CCP guidance values, e.g. MX Brand=90, NB=30)
+          - Rows 96-107: CCP per Account (blended CCP per registration)
+
+        ie%CCP formula: CPA / CCP_per_Account
+          where CCP_per_Account = (Brand_CCP * Brand_Regs + NB_CCP * NB_Regs) / Total_Regs
+        ie%CCP < 1.0 means spend is efficient (CPA < CCP). Target is 1.0 (100%).
+        Values are ratios (0.0-1.0 range for healthy markets).
+
+        BUG FIX (2026-03-30): Previously scanned from row 1, which matched CPA
+        rows (rows 2-12) instead of IECCP rows (rows 16-26). CPA values like
+        $65.59 were multiplied by 100 to produce nonsensical 6559% ie%CCP.
+        Now scans only from the IECCP header (row 15) onward.
+        """
         if 'IECCP' not in self.sheet_names:
             return {}
         ws = self.wb['IECCP']
+
+        # Read all rows (no max_row/max_col limit)
+        all_rows = list(ws.iter_rows(values_only=True))
+        if not all_rows:
+            return {}
+
         # Row 1 = week headers (col 0 = label, cols 1+ = weeks)
-        # Rows 15-26 = IECCP values per market (row 26 = MX)
-        row1 = list(ws.iter_rows(min_row=1, max_row=1, values_only=True))[0]
+        row1 = all_rows[0]
         tw_col = None
         lw_col = None
         for i, v in enumerate(row1):
@@ -251,47 +359,177 @@ class DashboardIngester:
         if tw_col is None:
             return {}
 
-        # IECCP market rows: 16=US, 17=JP, 18=UK, 19=DE, 20=FR, 21=IT, 22=ES, 23=CA, 24=WW, 25=EU5, 26=MX
-        ieccp_rows = {'US': 16, 'JP': 17, 'UK': 18, 'DE': 19, 'FR': 20, 'IT': 21, 'ES': 22, 'CA': 23, 'MX': 26}
+        # Find the IECCP header row to start scanning from the correct section
+        ieccp_start = None
+        for row_idx, row in enumerate(all_rows):
+            cell = str(row[0]).strip() if row and row[0] else ''
+            if cell == 'IECCP':
+                ieccp_start = row_idx
+                break
+
+        if ieccp_start is None:
+            return {}
+
+        # Scan for market rows ONLY after the IECCP header
+        market_labels = {
+            'US': ['US', 'US SEM'],
+            'JP': ['JP', 'JP SEM'],
+            'UK': ['UK', 'UK SEM'],
+            'DE': ['DE', 'DE SEM'],
+            'FR': ['FR', 'FR SEM'],
+            'IT': ['IT', 'IT SEM'],
+            'ES': ['ES', 'ES SEM'],
+            'CA': ['CA', 'CA SEM'],
+            'MX': ['MX', 'MX SEM'],
+            'AU': ['AU', 'AU SEM'],
+        }
+
+        # Scan rows after IECCP header, stop at next section header or empty gap
+        market_row_map = {}
+        for row_idx in range(ieccp_start + 1, min(ieccp_start + 15, len(all_rows))):
+            row = all_rows[row_idx]
+            cell = str(row[0]).strip() if row and row[0] else ''
+            if not cell:
+                continue
+            # Stop if we hit the next section header
+            if cell in ('IECCP Segment', 'CCP Segment', 'CPA Segment', 'CCP', 'CCP per Acc'):
+                break
+            for market, labels in market_labels.items():
+                if market not in market_row_map and cell in labels:
+                    market_row_map[market] = row_idx
+                    break
+
         result = {}
-        for market, row_num in ieccp_rows.items():
-            row = list(ws.iter_rows(min_row=row_num, max_row=row_num, values_only=True))[0]
+        for market, row_idx in market_row_map.items():
+            row = all_rows[row_idx]
             tw_val = safe_float(row[tw_col]) if tw_col < len(row) else None
             lw_val = safe_float(row[lw_col]) if lw_col and lw_col < len(row) else None
             if tw_val:
                 result[market] = {'tw': tw_val, 'lw': lw_val}
+
+        # Also pick up WW and EU5 aggregates from the same section
+        for row_idx in range(ieccp_start + 1, min(ieccp_start + 15, len(all_rows))):
+            row = all_rows[row_idx]
+            cell = str(row[0]).strip() if row and row[0] else ''
+            if cell in ('WW', 'WW SEM'):
+                tw_val = safe_float(row[tw_col]) if tw_col < len(row) else None
+                lw_val = safe_float(row[lw_col]) if lw_col and lw_col < len(row) else None
+                if tw_val:
+                    result['WW'] = {'tw': tw_val, 'lw': lw_val}
+            elif cell in ('EU5', 'EU5 SEM'):
+                tw_val = safe_float(row[tw_col]) if tw_col < len(row) else None
+                lw_val = safe_float(row[lw_col]) if lw_col and lw_col < len(row) else None
+                if tw_val:
+                    result['EU5'] = {'tw': tw_val, 'lw': lw_val}
+
         return result
+
+    def _detect_weekly_blocks(self):
+        """Auto-detect metric block positions on the Weekly tab.
+
+        Scans column A for rows containing 'US SEM' or 'US' to find the start
+        of each metric block. Identifies the metric by scanning header rows above.
+
+        Returns dict: {metric_name: block_start_row (1-indexed)}
+        """
+        if 'Weekly' not in self.sheet_names:
+            return WEEKLY_METRICS_FALLBACK
+        ws = self.wb['Weekly']
+
+        # Read all of column A to find block starts (HA386 = col 209, row 386)
+        all_col_a = []
+        for row in ws.iter_rows(min_col=1, max_col=1, min_row=1, max_row=ws.max_row, values_only=True):
+            all_col_a.append(str(row[0]).strip() if row[0] else '')
+
+        # Find all rows where col A contains 'US SEM' or exactly 'US' (first market in each block)
+        us_labels = ['US SEM', 'US']
+        block_starts = []
+        for i, cell in enumerate(all_col_a):
+            if cell in us_labels:
+                block_starts.append(i + 1)  # convert to 1-indexed
+
+        if not block_starts:
+            return WEEKLY_METRICS_FALLBACK
+
+        # For each block start, look upward for the metric name in header rows
+        metric_keywords = {
+            'spend': ['spend', 'cost'],
+            'regs': ['reg', 'registration'],
+            'cpa': ['cpa', 'cost per acq', 'cost per reg'],
+            'clicks': ['click'],
+            'impressions': ['impression', 'impr'],
+            'cpc': ['cpc', 'cost per click'],
+            'cvr': ['cvr', 'conversion rate', 'conv rate'],
+            'ctr': ['ctr', 'click through', 'click-through'],
+        }
+
+        blocks = {}
+        for bs in block_starts:
+            metric_name = None
+            # Look up to 5 rows above for a header
+            for lookback in range(1, 6):
+                check_idx = bs - 1 - lookback  # 0-indexed
+                if check_idx < 0:
+                    break
+                cell = all_col_a[check_idx].lower()
+                if not cell:
+                    continue
+                for metric, keywords in metric_keywords.items():
+                    if metric not in blocks and any(kw in cell for kw in keywords):
+                        metric_name = metric
+                        break
+                if metric_name:
+                    break
+
+            if not metric_name:
+                # Fallback: assign by position order
+                ordered = ['spend', 'regs', 'cpa', 'clicks', 'impressions', 'cpc', 'cvr', 'ctr']
+                idx = len(blocks)
+                if idx < len(ordered):
+                    metric_name = ordered[idx]
+
+            if metric_name and metric_name not in blocks:
+                blocks[metric_name] = bs
+
+        # If we found fewer blocks than expected, merge with fallback
+        if len(blocks) < len(WEEKLY_METRICS_FALLBACK):
+            for metric, row in WEEKLY_METRICS_FALLBACK.items():
+                if metric not in blocks:
+                    blocks[metric] = row
+
+        return blocks
+
+    def _find_weekly_market_row(self, block_start_1indexed, market):
+        """Find the 1-indexed row for a market within a Weekly metric block.
+
+        Markets appear in 3-row groups (total, Brand, NB) in WEEKLY_MARKET_ORDER.
+        Returns (total_row, brand_row, nb_row) all 1-indexed.
+        """
+        if market not in WEEKLY_MARKET_ORDER:
+            return None
+        idx = WEEKLY_MARKET_ORDER.index(market)
+        total = block_start_1indexed + (idx * 3)
+        return (total, total + 1, total + 2)
 
     def _read_weekly_tab(self, market, target_week, num_weeks=52):
         """Read the Weekly tab for a market's historical weekly data.
 
+        Auto-detects metric block positions and reads the full column range.
         Returns a list of dicts with weekly metrics going back num_weeks from target_week.
-        Each dict has: week, spend, brand_spend, nb_spend, regs, brand_regs, nb_regs,
-        cpa, clicks, brand_clicks, nb_clicks, impressions, cpc, cvr, ctr.
         """
         if 'Weekly' not in self.sheet_names:
             return []
         ws = self.wb['Weekly']
 
-        # Map metric block start rows (1-indexed)
-        BLOCK_ROWS = {
-            'spend': 1, 'regs': 40, 'cpa': 79, 'clicks': 118,
-            'impressions': 157, 'cpc': 196, 'cvr': 235, 'ctr': 274,
-        }
+        # Auto-detect block positions
+        if not hasattr(self, '_weekly_blocks'):
+            self._weekly_blocks = self._detect_weekly_blocks()
+        BLOCK_ROWS = self._weekly_blocks
 
-        # Market row offsets within each block (0-indexed from block start)
-        # Each market has 3 rows: total, brand, nb
-        MARKET_OFFSETS = {
-            'US': 1, 'JP': 4, 'UK': 7, 'DE': 10, 'FR': 13,
-            'IT': 16, 'ES': 19, 'CA': 22, 'MX': 25, 'AU': 28,
-        }
-
-        if market not in MARKET_OFFSETS:
+        if market not in WEEKLY_MARKET_ORDER:
             return []
 
-        offset = MARKET_OFFSETS[market]
-
-        # Get week column headers from row 1
+        # Get week column headers from row 1 (read full width)
         row1 = list(ws.iter_rows(min_row=1, max_row=1, values_only=True))[0]
 
         # Find target week column
@@ -314,12 +552,16 @@ class DashboardIngester:
         # For each metric, read total/brand/nb rows
         rows_cache = {}
         for metric, block_start in BLOCK_ROWS.items():
-            total_row = block_start + offset
-            brand_row = block_start + offset + 1
-            nb_row = block_start + offset + 2
-            rows_cache[f'{metric}_total'] = get_row(total_row)
-            rows_cache[f'{metric}_brand'] = get_row(brand_row)
-            rows_cache[f'{metric}_nb'] = get_row(nb_row)
+            market_rows = self._find_weekly_market_row(block_start, market)
+            if market_rows is None:
+                continue
+            total_row, brand_row, nb_row = market_rows
+            try:
+                rows_cache[f'{metric}_total'] = get_row(total_row)
+                rows_cache[f'{metric}_brand'] = get_row(brand_row)
+                rows_cache[f'{metric}_nb'] = get_row(nb_row)
+            except Exception:
+                pass  # Row may not exist for newer blocks
 
         # Build weekly data
         weeks = []
@@ -357,6 +599,14 @@ class DashboardIngester:
                 'nb_cvr': val('cvr_nb', col) or None,
                 'ctr': val('ctr_total', col) or None,
             }
+
+            # Add any extra detected metrics beyond the standard 8
+            for metric in BLOCK_ROWS:
+                if metric not in ('spend', 'regs', 'cpa', 'clicks', 'impressions', 'cpc', 'cvr', 'ctr'):
+                    w[metric] = val(f'{metric}_total', col) or None
+                    w[f'brand_{metric}'] = val(f'{metric}_brand', col) or None
+                    w[f'nb_{metric}'] = val(f'{metric}_nb', col) or None
+
             # Skip weeks with no data
             if w['regs'] > 0 or w['spend'] > 0:
                 weeks.append(w)
@@ -364,83 +614,283 @@ class DashboardIngester:
         return weeks
 
 
-    def _read_monthly_actuals(self):
-        """Read 2026 Monthly tab for actual spend/regs by month, with Brand/NB split.
+    def _detect_monthly_metric_blocks(self):
+        """Auto-detect metric block positions on the 2026 Monthly tab.
 
-        Layout (rows 19-48):
-        Each market has 3 rows: total (X SEM), Brand, Non-Brand.
-        Spend actuals: cols 1-12 (Jan-Dec), cols 13-16 (Q1-Q4), col 17 (Total)
-        Reg actuals: cols 20-31 (Jan-Dec), cols 32-35 (Q1-Q4)
+        Scans column A for rows containing 'SEM' to find the start of each
+        metric block's actuals section. Each block has OP2 rows above and
+        actuals rows below, with markets in 3-row groups (total, Brand, NB).
+
+        Returns dict: {metric_name: {'op2_start': row, 'actuals_start': row, 'col_offset': col}}
         """
         if '2026 Monthly' not in self.sheet_names:
             return {}
         ws = self.wb['2026 Monthly']
+        # Read full sheet (BD323 = col 56, row 323)
+        all_rows = list(ws.iter_rows(min_row=1, max_row=323, max_col=56, values_only=True))
+        self._monthly_all_rows = all_rows  # cache for reuse
+
+        # Known metric keywords to look for in header/label cells
+        metric_keywords = {
+            'spend': ['spend', 'cost'],
+            'regs': ['reg', 'registration'],
+            'cpa': ['cpa', 'cost per'],
+            'clicks': ['click'],
+            'impressions': ['impression', 'impr'],
+            'cpc': ['cpc', 'cost per click'],
+            'cvr': ['cvr', 'conversion rate'],
+            'ctr': ['ctr', 'click through', 'click-through'],
+        }
+
+        # Strategy: scan column A (col 0) for rows containing market SEM labels
+        # like "US SEM". These mark the start of actuals sections. The metric
+        # block identity comes from nearby header rows.
+        blocks = {}
+        market_label = 'US SEM'  # US is always first market in each block
+
+        # Find all rows where col 0 contains 'US SEM' — each is an actuals block start
+        actuals_starts = []
+        for i, row in enumerate(all_rows):
+            cell = str(row[0]).strip() if row and row[0] else ''
+            if cell == market_label:
+                actuals_starts.append(i + 1)  # convert to 1-indexed
+
+        # For each actuals start, look upward for the metric block header
+        for act_start in actuals_starts:
+            # Look at rows above for a header clue (typically 1-3 rows up has the metric name)
+            metric_name = None
+            for lookback in range(1, 20):
+                check_row_idx = act_start - 1 - lookback  # 0-indexed
+                if check_row_idx < 0:
+                    break
+                row = all_rows[check_row_idx]
+                # Check first few cells for metric keywords
+                for cell_idx in range(min(3, len(row))):
+                    cell = str(row[cell_idx]).strip().lower() if row[cell_idx] else ''
+                    if not cell:
+                        continue
+                    for metric, keywords in metric_keywords.items():
+                        if metric not in blocks and any(kw in cell for kw in keywords):
+                            metric_name = metric
+                            break
+                    if metric_name:
+                        break
+                if metric_name:
+                    break
+
+            if not metric_name:
+                # Fallback: assign by position order (spend, regs, cpa, clicks, imp, cpc, cvr, ctr)
+                ordered = ['spend', 'regs', 'cpa', 'clicks', 'impressions', 'cpc', 'cvr', 'ctr']
+                idx = len(blocks)
+                if idx < len(ordered):
+                    metric_name = ordered[idx]
+
+            if metric_name and metric_name not in blocks:
+                # Find OP2 section: look for rows above actuals that have budget data
+                # OP2 is typically ~15 rows above actuals start
+                op2_start = None
+                for lookback in range(3, 20):
+                    check_idx = act_start - 1 - lookback  # 0-indexed
+                    if check_idx < 0:
+                        break
+                    row = all_rows[check_idx]
+                    cell = str(row[0]).strip() if row and row[0] else ''
+                    if cell == market_label:
+                        # This is the OP2 section's US SEM row
+                        op2_start = check_idx + 1  # 1-indexed
+                        break
+
+                blocks[metric_name] = {
+                    'actuals_start': act_start,
+                    'op2_start': op2_start,
+                }
+
+        return blocks
+
+    def _find_monthly_market_row(self, block_start_1indexed, market):
+        """Find the 1-indexed row for a market within a monthly metric block.
+
+        Markets appear in 3-row groups (total, Brand, NB) in a fixed order.
+        """
+        market_order = ['US', 'JP', 'UK', 'DE', 'FR', 'IT', 'ES', 'CA', 'MX', 'AU']
+        if market not in market_order:
+            return None
+        idx = market_order.index(market)
+        return block_start_1indexed + (idx * 3)
+
+    def _detect_monthly_col_layout(self):
+        """Auto-detect column layout for monthly metric blocks.
+
+        Scans header rows to find month columns (Jan-Dec) and their offsets.
+        Returns dict with 'months' mapping month labels to column indices.
+        """
+        if not hasattr(self, '_monthly_all_rows'):
+            return {'month_cols': {}}
+        rows = self._monthly_all_rows
+
         monthly_months = [
             '2026 Jan', '2026 Feb', '2026 Mar', '2026 Apr', '2026 May', '2026 Jun',
             '2026 Jul', '2026 Aug', '2026 Sep', '2026 Oct', '2026 Nov', '2026 Dec',
         ]
-        # Market total rows (0-indexed from row 19)
-        market_rows = {
-            'US': 19, 'JP': 22, 'UK': 25, 'DE': 28, 'FR': 31,
-            'IT': 34, 'ES': 37, 'CA': 40, 'MX': 43, 'AU': 46,
-        }
-        actuals = {}
-        all_rows = list(ws.iter_rows(min_row=1, max_row=50, max_col=40, values_only=True))
-        for market, total_row in market_rows.items():
-            if total_row > len(all_rows):
-                continue
-            total = all_rows[total_row - 1]  # 1-indexed to 0-indexed
-            brand = all_rows[total_row]       # next row
-            nb = all_rows[total_row + 1]      # row after that
-            months = {}
+        month_abbrs = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                       'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+        # Scan first 3 rows for month headers
+        month_cols = {}
+        for row_idx in range(min(3, len(rows))):
+            row = rows[row_idx]
+            for col_idx, cell in enumerate(row):
+                cell_str = str(cell).strip() if cell else ''
+                # Match "Jan", "Feb", etc. or "2026 Jan", etc.
+                for j, abbr in enumerate(month_abbrs):
+                    if cell_str == abbr or cell_str == monthly_months[j]:
+                        if monthly_months[j] not in month_cols:
+                            month_cols[monthly_months[j]] = col_idx
+
+        # If we didn't find labeled headers, fall back to known positions
+        if not month_cols:
             for j, month in enumerate(monthly_months):
-                spend = safe_float(total[1 + j])
-                regs = safe_int(total[20 + j])
-                brand_spend = safe_float(brand[1 + j])
-                brand_regs = safe_int(brand[20 + j])
-                nb_spend = safe_float(nb[1 + j])
-                nb_regs = safe_int(nb[20 + j])
-                # Skip months with no data
-                if spend == 0 and regs == 0:
+                month_cols[month] = 1 + j  # cols 1-12
+
+        return {'month_cols': month_cols, 'months': monthly_months}
+
+    def _read_monthly_actuals(self):
+        """Read 2026 Monthly tab for actual metrics by month, with Brand/NB split.
+
+        Auto-detects metric blocks (spend, regs, CPA, clicks, impressions, CPC,
+        CVR, CTR) by scanning the sheet structure. Reads up to BD323.
+        """
+        if '2026 Monthly' not in self.sheet_names:
+            return {}
+
+        blocks = self._detect_monthly_metric_blocks()
+        if not blocks:
+            return {}
+
+        col_layout = self._detect_monthly_col_layout()
+        month_cols = col_layout['month_cols']
+        monthly_months = col_layout.get('months', [])
+        rows = self._monthly_all_rows
+
+        if not month_cols or not monthly_months:
+            return {}
+
+        actuals = {m: {} for m in ALL_MARKETS}
+
+        for metric, block_info in blocks.items():
+            act_start = block_info['actuals_start']
+
+            for market in ALL_MARKETS:
+                total_row_1idx = self._find_monthly_market_row(act_start, market)
+                if total_row_1idx is None or total_row_1idx > len(rows):
                     continue
-                m = {
-                    'spend': spend, 'regs': regs,
-                    'brand_spend': brand_spend, 'brand_regs': brand_regs,
-                    'nb_spend': nb_spend, 'nb_regs': nb_regs,
-                }
-                # Derived metrics
-                m['cpa'] = spend / regs if regs > 0 else None
-                m['brand_cpa'] = brand_spend / brand_regs if brand_regs > 0 else None
-                m['nb_cpa'] = nb_spend / nb_regs if nb_regs > 0 else None
-                months[month] = m
-            actuals[market] = months
+
+                total = rows[total_row_1idx - 1]
+                brand = rows[total_row_1idx] if total_row_1idx < len(rows) else None
+                nb = rows[total_row_1idx + 1] if total_row_1idx + 1 < len(rows) else None
+
+                for month in monthly_months:
+                    col = month_cols.get(month)
+                    if col is None or col >= len(total):
+                        continue
+
+                    val = safe_float(total[col])
+                    brand_val = safe_float(brand[col]) if brand and col < len(brand) else 0.0
+                    nb_val = safe_float(nb[col]) if nb and col < len(nb) else 0.0
+
+                    if month not in actuals[market]:
+                        actuals[market][month] = {}
+
+                    actuals[market][month][metric] = val
+                    actuals[market][month][f'brand_{metric}'] = brand_val
+                    actuals[market][month][f'nb_{metric}'] = nb_val
+
+        # Derive CPA, CPC, CVR, CTR from raw metrics where not directly available
+        for market in ALL_MARKETS:
+            for month in monthly_months:
+                m = actuals[market].get(month, {})
+                if not m:
+                    continue
+                # Skip months with no spend and no regs
+                if m.get('spend', 0) == 0 and m.get('regs', 0) == 0:
+                    actuals[market].pop(month, None)
+                    continue
+                # Ensure regs are ints
+                for key in ['regs', 'brand_regs', 'nb_regs', 'clicks', 'brand_clicks',
+                            'nb_clicks', 'impressions', 'brand_impressions', 'nb_impressions']:
+                    if key in m:
+                        m[key] = safe_int(m[key])
+                # Derive CPA if not in a dedicated block
+                if 'cpa' not in blocks:
+                    spend = m.get('spend', 0)
+                    regs = m.get('regs', 0)
+                    m['cpa'] = spend / regs if regs > 0 else None
+                    bs = m.get('brand_spend', 0)
+                    br = m.get('brand_regs', 0)
+                    m['brand_cpa'] = bs / br if br > 0 else None
+                    ns = m.get('nb_spend', 0)
+                    nr = m.get('nb_regs', 0)
+                    m['nb_cpa'] = ns / nr if nr > 0 else None
+
         return actuals
 
     def _read_monthly_budget(self):
-        """Read 2026 Monthly tab for OP2 budget targets."""
+        """Read 2026 Monthly tab for OP2 budget targets across all metric blocks."""
         if '2026 Monthly' not in self.sheet_names:
             return {}
-        ws = self.wb['2026 Monthly']
-        budgets = {}
-        # Layout: Rows 3-12 are OP2 budget (one row per market SEM).
-        # Rows 17+ are Actual Spend — we must stop before those.
-        # Spend OP2: col 0=Channel, cols 1-12=monthly spend
-        # Reg OP2:   col 19=Channel, cols 20-31=monthly regs
-        monthly_months = [
-            '2026 Jan', '2026 Feb', '2026 Mar', '2026 Apr', '2026 May', '2026 Jun',
-            '2026 Jul', '2026 Aug', '2026 Sep', '2026 Oct', '2026 Nov', '2026 Dec',
-        ]
-        for row in ws.iter_rows(min_row=3, max_row=14, max_col=40, values_only=True):
-            market_label = str(row[0]).strip() if row[0] else ''
-            if not market_label or 'SEM' not in market_label:
+
+        # Ensure blocks are detected (may already be cached from _read_monthly_actuals)
+        if not hasattr(self, '_monthly_all_rows'):
+            blocks = self._detect_monthly_metric_blocks()
+        else:
+            blocks = self._detect_monthly_metric_blocks()
+
+        col_layout = self._detect_monthly_col_layout()
+        month_cols = col_layout['month_cols']
+        monthly_months = col_layout.get('months', [])
+        rows = self._monthly_all_rows
+
+        if not month_cols or not monthly_months:
+            return {}
+
+        budgets = {m: {} for m in ALL_MARKETS}
+
+        for metric, block_info in blocks.items():
+            op2_start = block_info.get('op2_start')
+            if op2_start is None:
                 continue
-            market = market_label.replace(' SEM', '').strip()
-            spend_vals = {}
-            reg_vals = {}
-            for j, month in enumerate(monthly_months):
-                spend_vals[month] = safe_float(row[1 + j])      # cols 1-12
-                reg_vals[month] = safe_int(row[20 + j])          # cols 20-31
-            budgets[market] = {'spend_op2': spend_vals, 'regs_op2': reg_vals}
+
+            for market in ALL_MARKETS:
+                total_row_1idx = self._find_monthly_market_row(op2_start, market)
+                if total_row_1idx is None or total_row_1idx > len(rows):
+                    continue
+
+                total = rows[total_row_1idx - 1]
+
+                op2_key = f'{metric}_op2'
+                if op2_key not in budgets[market]:
+                    budgets[market][op2_key] = {}
+
+                for month in monthly_months:
+                    col = month_cols.get(month)
+                    if col is None or col >= len(total):
+                        continue
+                    val = safe_float(total[col])
+                    if metric in ('regs', 'clicks', 'impressions'):
+                        val = safe_int(val)
+                    budgets[market][op2_key][month] = val
+
+        # Backward compatibility: also provide spend_op2 and regs_op2 at top level
+        for market in ALL_MARKETS:
+            if 'spend_op2' not in budgets[market] and budgets[market].get('spend_op2'):
+                pass  # already there
+            # Ensure the old keys exist for projection code
+            if 'spend_op2' in budgets[market]:
+                pass
+            elif budgets[market]:
+                # Already keyed as spend_op2 from the loop above
+                pass
+
         return budgets
 
     def _read_wow_yoy_tab(self):
@@ -616,8 +1066,8 @@ class DashboardIngester:
         op2_spend = None
         op2_regs = None
         if market in budgets:
-            op2_spend = budgets[market]['spend_op2'].get(month_label)
-            op2_regs = budgets[market]['regs_op2'].get(month_label)
+            op2_spend = budgets[market].get('spend_op2', {}).get(month_label)
+            op2_regs = budgets[market].get('regs_op2', {}).get(month_label)
 
         return {
             'month': month_label,
@@ -850,16 +1300,9 @@ class DashboardIngester:
             lines.append(f'  CPA: {rdollar(tw.get("nb_cpa"))} vs {rdollar(lw.get("nb_cpa"))} ({rpct(wow.get("nb_cpa",{}).get("pct"))})')
         lines.append('')
 
-        # ── Section 3: 8-week trend ──
+        # ── Section 3: 8-week trend (query hint only — data is in DuckDB) ──
         lines.append('## 8-week trend')
-        if trend:
-            lines.append('| Week | Regs | Brand | NB | Cost | CPA | CVR |')
-            lines.append('|------|------|-------|-----|------|-----|-----|')
-            for t in trend:
-                w = t['week'].split()[-1]
-                cvr_str = f'{t["cvr"]:.2%}' if t.get('cvr') else 'N/A'
-                cpa_str = rdollar(t.get('cpa'))
-                lines.append(f'| {w} | {t["regs"]} | {t["brand_regs"]} | {t["nb_regs"]} | {rspend(t["cost"])} | {cpa_str} | {cvr_str} |')
+        lines.append(f'<!-- Data: market_trend("{market}", weeks=8) -->')
         lines.append('')
 
         # ── Section 4: YoY comparison ──
@@ -902,10 +1345,9 @@ class DashboardIngester:
                 lines.append(f'- {metric_name}: {an["direction"]} avg by {abs(an["deviation_pct"]):.0%} (current: {an["current"]:.2f}, avg: {an["avg"]:.2f})')
             lines.append('')
 
-        # ── Section 7: Weekly tab history (longer-term trends + LY comparison) ──
+        # ── Section 7: Weekly tab history (query hints — data is in DuckDB) ──
         weekly_history = a.get('weekly_history', [])
         if weekly_history:
-            # Split into TY and LY based on week labels
             tw_year = self._get_week_year(a['target_week'])
             tw_wnum = self._get_week_number(a['target_week'])
 
@@ -914,7 +1356,12 @@ class DashboardIngester:
                 ty_weeks = [w for w in weekly_history if self._get_week_year(w['week']) == tw_year]
                 ty_recent = ty_weeks[-12:] if len(ty_weeks) > 12 else ty_weeks
 
-                # Get same period last year (target week ± 4 weeks)
+                if ty_recent:
+                    lines.append('## This year weekly trend (last 12 weeks)')
+                    lines.append(f'<!-- Data: market_trend("{market}", weeks=12) -->')
+                    lines.append('')
+
+                # Get same period last year
                 ly_weeks = []
                 for w in weekly_history:
                     wy = self._get_week_year(w['week'])
@@ -922,29 +1369,12 @@ class DashboardIngester:
                     if wy == tw_year - 1 and wn is not None and abs(wn - tw_wnum) <= 4:
                         ly_weeks.append(w)
 
-                if ty_recent:
-                    lines.append('## This year weekly trend (last 12 weeks)')
-                    lines.append('| Week | Regs | Brand | NB | Spend | CPA | NB CPC | NB CVR |')
-                    lines.append('|------|------|-------|-----|-------|-----|--------|--------|')
-                    for w in ty_recent:
-                        wk = w['week'].split()[-1]
-                        nb_cpc_str = f'${w["nb_cpc"]:.2f}' if w.get('nb_cpc') else 'N/A'
-                        nb_cvr_str = f'{w["nb_cvr"]:.2%}' if w.get('nb_cvr') else 'N/A'
-                        lines.append(f'| {wk} | {w["regs"]} | {w["brand_regs"]} | {w["nb_regs"]} | {rspend(w["spend"])} | {rdollar(w.get("cpa"))} | {nb_cpc_str} | {nb_cvr_str} |')
-                    lines.append('')
-
                 if ly_weeks:
                     lines.append(f'## Last year same period (W{tw_wnum-4} to W{tw_wnum+4})')
-                    lines.append('| Week | Regs | Brand | NB | Spend | CPA | NB CPC | NB CVR |')
-                    lines.append('|------|------|-------|-----|-------|-----|--------|--------|')
-                    for w in ly_weeks:
-                        wk = w['week'].split()[-1]
-                        nb_cpc_str = f'${w["nb_cpc"]:.2f}' if w.get('nb_cpc') else 'N/A'
-                        nb_cvr_str = f'{w["nb_cvr"]:.2%}' if w.get('nb_cvr') else 'N/A'
-                        lines.append(f'| {wk} | {w["regs"]} | {w["brand_regs"]} | {w["nb_regs"]} | {rspend(w["spend"])} | {rdollar(w.get("cpa"))} | {nb_cpc_str} | {nb_cvr_str} |')
+                    lines.append(f'<!-- Data: db("SELECT * FROM weekly_metrics WHERE market=\'{market}\' AND week LIKE \'{tw_year - 1}%\' ORDER BY week") -->')
                     lines.append('')
 
-                # Streak detection on key metrics
+                # Streak detection on key metrics (narrative — keep this)
                 streaks = []
                 if len(ty_recent) >= 3:
                     # NB CPC streak
@@ -1022,15 +1452,13 @@ class DashboardIngester:
                         lines.append(f'- {s}')
                     lines.append('')
 
-        # ── Section 8: Daily breakdown ──
+        # ── Section 8: Daily breakdown (query hint — data is in DuckDB) ──
         if daily and daily.get('daily'):
+            wk = tw['week'] if tw else '?'
             lines.append('## Daily breakdown')
-            lines.append('| Day | Regs | Brand | NB | Cost |')
-            lines.append('|-----|------|-------|-----|------|')
-            for d in daily['daily']:
-                lines.append(f'| {d["dow"]} | {d["regs"]} | {d["brand_regs"]} | {d["nb_regs"]} | {rspend(d["cost"])} |')
+            lines.append(f'<!-- Data: db("SELECT * FROM daily_metrics WHERE market=\'{market}\' AND week=\'{wk}\' ORDER BY date") -->')
 
-            # Data lag check
+            # Data lag check (narrative — keep this)
             all_days = daily['daily']
             if len(all_days) >= 5:
                 weekday_regs = [d['regs'] for d in all_days[:5]]
@@ -1319,7 +1747,7 @@ class DashboardIngester:
         return '\n'.join(lines)
 
 
-    def run(self, target_week=None, markets=None, output_dir=None):
+    def run(self, target_week=None, markets=None, output_dir=None, db_path=None):
         """Main entry point. Analyze all requested markets and produce output."""
         if markets is None:
             markets = ALL_MARKETS
@@ -1421,8 +1849,278 @@ class DashboardIngester:
             f.write(summary)
         print(f"  Wrote {summary_path}")
 
+        # Write to DuckDB if path provided
+        if db_path:
+            self._write_to_duckdb(results, target_week, monthly_actuals, monthly_budgets, db_path)
+
         print("\nDone.")
         return results
+
+    def _detect_anomalies(self, market, week_data, trend):
+        """Flag metrics deviating >20% from 8-week average.
+
+        Pure function — does not write to DB or modify inputs.
+        Returns a list of anomaly dicts for any metric whose current value
+        deviates more than 20% from the historical average.
+
+        Args:
+            market: Market code (e.g. 'AU')
+            week_data: Dict with current week metrics (must include 'week' key)
+            trend: List of prior-week dicts from market_trend() or weekly_history
+
+        Returns:
+            List of anomaly dicts, each containing:
+                market, week, metric, value, baseline, deviation_pct, direction
+        """
+        anomalies = []
+        metrics_to_check = ['regs', 'cpa', 'cvr', 'spend', 'clicks']
+
+        for metric in metrics_to_check:
+            current = week_data.get(metric)
+            if current is None:
+                continue
+
+            # Gather historical values, skipping None
+            historical = [w.get(metric) for w in trend if w.get(metric) is not None]
+
+            # Skip if fewer than 3 data points
+            if len(historical) < 3:
+                continue
+
+            baseline = sum(historical) / len(historical)
+
+            # Skip zero baseline (can't compute deviation)
+            if baseline == 0:
+                continue
+
+            deviation = (current - baseline) / baseline
+
+            if abs(deviation) > 0.20:
+                anomalies.append({
+                    'market': market,
+                    'week': week_data.get('week', ''),
+                    'metric': metric,
+                    'value': current,
+                    'baseline': round(baseline, 2),
+                    'deviation_pct': round(deviation * 100, 1),
+                    'direction': 'above' if deviation > 0 else 'below',
+                })
+
+        return anomalies
+
+    def _write_to_duckdb(self, results, target_week, monthly_actuals, monthly_budgets, db_path):
+        """Write all ingested data to DuckDB for persistent, queryable storage."""
+        import time
+        start_time = time.time()
+
+        try:
+            import duckdb
+        except ImportError:
+            print("  WARN: duckdb not installed, skipping DB write. pip install duckdb")
+            return
+
+        # Import query helpers for schema export and data events
+        sys.path.insert(0, os.path.expanduser('~/shared/tools/data'))
+        from query import schema_export, write_data_event, export_parquet
+
+        con = duckdb.connect(db_path)
+        source_file = os.path.basename(self.xlsx_path)
+        daily_count = 0
+        weekly_count = 0
+        monthly_count = 0
+
+        for market, analysis in results.items():
+            if 'error' in analysis:
+                continue
+
+            # ── Daily metrics ──
+            days = self._read_daily_tab(market)
+            for d in days:
+                try:
+                    con.execute("""
+                        INSERT OR REPLACE INTO daily_metrics
+                        (market, date, week, month, cost, clicks, impressions, regs,
+                         brand_cost, brand_clicks, brand_imp, brand_regs,
+                         nb_cost, nb_clicks, nb_imp, nb_regs, source_file)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """, [market, d['date'], d['week'], d.get('month', ''),
+                          d['cost'], d['clicks'], d['impressions'], d['regs'],
+                          d['brand_cost'], d['brand_clicks'], d['brand_imp'], d['brand_regs'],
+                          d['nb_cost'], d['nb_clicks'], d['nb_imp'], d['nb_regs'],
+                          source_file])
+                    daily_count += 1
+                except Exception as e:
+                    pass  # Skip rows with issues
+
+            # ── Weekly metrics (from weekly tab history) ──
+            weekly_history = analysis.get('weekly_history', [])
+            for w in weekly_history:
+                try:
+                    con.execute("""
+                        INSERT OR REPLACE INTO weekly_metrics
+                        (market, week, cost, clicks, impressions, regs,
+                         cpa, cpc, cvr, ctr,
+                         brand_cost, brand_clicks, brand_regs, brand_cpa, brand_cpc, brand_cvr,
+                         nb_cost, nb_clicks, nb_regs, nb_cpa, nb_cpc, nb_cvr,
+                         source_file)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """, [market, w['week'], w['spend'], w['clicks'], w['impressions'], w['regs'],
+                          w.get('cpa'), w.get('cpc'), w.get('cvr'), w.get('ctr'),
+                          w.get('brand_spend', 0), w.get('brand_clicks', 0), w.get('brand_regs', 0),
+                          w.get('brand_cpa'), w.get('brand_cpc'), w.get('brand_cvr'),
+                          w.get('nb_spend', 0), w.get('nb_clicks', 0), w.get('nb_regs', 0),
+                          w.get('nb_cpa'), w.get('nb_cpc'), w.get('nb_cvr'),
+                          source_file])
+                    weekly_count += 1
+                except Exception:
+                    pass
+
+            # ── IECCP ──
+            ieccp = analysis.get('ieccp')
+            if ieccp:
+                try:
+                    con.execute("""
+                        INSERT OR REPLACE INTO ieccp (market, week, value)
+                        VALUES (?, ?, ?)
+                    """, [market, target_week, ieccp['tw']])
+                except Exception:
+                    pass
+
+            # ── Projections ──
+            proj = analysis.get('projection')
+            if proj:
+                try:
+                    con.execute("""
+                        INSERT OR REPLACE INTO projections
+                        (market, week, month, days_elapsed, total_days,
+                         projected_regs, projected_spend, projected_cpa,
+                         op2_regs, op2_spend, vs_op2_regs_pct, vs_op2_spend_pct,
+                         source)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """, [market, target_week, proj['month'],
+                          proj['days_elapsed'], proj['total_days'],
+                          proj['projected_regs'], proj['projected_spend'], proj['projected_cpa'],
+                          proj.get('op2_regs'), proj.get('op2_spend'),
+                          proj.get('vs_op2_regs_pct'), proj.get('vs_op2_spend_pct'),
+                          'ingester'])
+                except Exception:
+                    pass
+
+            # ── Anomaly detection ──
+            # Build week_data from current_week analysis and use weekly_history as trend
+            current_week = analysis.get('current_week', {})
+            if current_week and weekly_history:
+                # Map ingester field names to the metric names _detect_anomalies expects
+                week_data = {
+                    'week': target_week,
+                    'regs': current_week.get('regs'),
+                    'cpa': current_week.get('cpa'),
+                    'cvr': current_week.get('cvr'),
+                    'spend': current_week.get('cost'),
+                    'clicks': current_week.get('clicks'),
+                }
+                # Build trend from weekly_history, mapping 'spend' key from ingester's 'spend' field
+                trend_for_anomaly = []
+                for w in weekly_history:
+                    trend_for_anomaly.append({
+                        'week': w.get('week'),
+                        'regs': w.get('regs'),
+                        'cpa': w.get('cpa'),
+                        'cvr': w.get('cvr'),
+                        'spend': w.get('spend'),
+                        'clicks': w.get('clicks'),
+                    })
+                detected = self._detect_anomalies(market, week_data, trend_for_anomaly)
+                # Clear previous anomalies for this market+week (idempotent re-runs)
+                try:
+                    con.execute(
+                        "DELETE FROM anomalies WHERE market = ? AND week = ?",
+                        [market, target_week],
+                    )
+                except Exception:
+                    pass
+                for anom in detected:
+                    try:
+                        con.execute("""
+                            INSERT INTO anomalies
+                            (id, market, week, metric, value, baseline, deviation_pct, direction)
+                            VALUES (nextval('anomalies_seq'), ?, ?, ?, ?, ?, ?, ?)
+                        """, [anom['market'], anom['week'], anom['metric'],
+                              anom['value'], anom['baseline'], anom['deviation_pct'],
+                              anom['direction']])
+                    except Exception as e:
+                        print(f"  WARN: anomaly insert failed for {market} {anom['metric']}: {e}")
+                if detected:
+                    print(f"  {market}: flagged {len(detected)} anomalies")
+
+        # ── Monthly metrics ──
+        for market in ALL_MARKETS:
+            actuals = monthly_actuals.get(market, {})
+            budget = monthly_budgets.get(market, {})
+            for month, m in actuals.items():
+                try:
+                    spend_op2 = budget.get('spend_op2', {}).get(month) if isinstance(budget.get('spend_op2'), dict) else None
+                    regs_op2 = budget.get('regs_op2', {}).get(month) if isinstance(budget.get('regs_op2'), dict) else None
+                    con.execute("""
+                        INSERT OR REPLACE INTO monthly_metrics
+                        (market, month, spend, regs, cpa, clicks, impressions,
+                         brand_spend, brand_regs, brand_cpa,
+                         nb_spend, nb_regs, nb_cpa,
+                         spend_op2, regs_op2, source_file)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """, [market, month,
+                          m.get('spend', 0), safe_int(m.get('regs', 0)), m.get('cpa'),
+                          safe_int(m.get('clicks', 0)), safe_int(m.get('impressions', 0)),
+                          m.get('brand_spend', 0), safe_int(m.get('brand_regs', 0)), m.get('brand_cpa'),
+                          m.get('nb_spend', 0), safe_int(m.get('nb_regs', 0)), m.get('nb_cpa'),
+                          spend_op2, safe_int(regs_op2) if regs_op2 else None,
+                          source_file])
+                    monthly_count += 1
+                except Exception:
+                    pass
+
+        # ── Ingest log ──
+        duration = time.time() - start_time
+        try:
+            con.execute("""
+                INSERT INTO ingest_log
+                (id, source_file, markets_processed, target_week,
+                 rows_daily, rows_weekly, rows_monthly, duration_seconds)
+                VALUES (nextval('ingest_log_seq'), ?, ?, ?, ?, ?, ?, ?)
+            """, [source_file, ','.join(results.keys()), target_week,
+                  daily_count, weekly_count, monthly_count, round(duration, 2)])
+        except Exception:
+            pass
+
+        con.close()
+        print(f"  DuckDB: wrote {daily_count} daily, {weekly_count} weekly, {monthly_count} monthly rows to {db_path} ({duration:.1f}s)")
+
+        # ── Data event notification (for agent polling) ──
+        try:
+            write_data_event(
+                target_week=target_week,
+                markets_processed=list(results.keys()),
+                row_counts={'daily': daily_count, 'weekly': weekly_count, 'monthly': monthly_count},
+                db_path=db_path,
+            )
+            print("  Wrote last_ingest.json (agent data event)")
+        except Exception as e:
+            print(f"  WARN: data event write failed: {e}")
+
+        # ── Parquet export (for cross-environment agent access) ──
+        try:
+            exported = export_parquet(db_path=db_path)
+            if exported:
+                print(f"  Parquet: exported {len(exported)} tables to ~/shared/tools/data/exports/")
+        except Exception as e:
+            print(f"  WARN: parquet export failed: {e}")
+
+        # ── Schema export (portability layer) ──
+        try:
+            schema_path = schema_export(db_path=db_path)
+            print(f"  Schema exported to {schema_path}")
+        except Exception as e:
+            print(f"  WARN: schema export failed: {e}")
 
     def _generate_ww_summary(self, results, target_week):
         """Generate a WW summary across all markets."""
@@ -1531,12 +2229,16 @@ def main():
     parser.add_argument('--week', help='Target week (e.g., "2026 W12"). Auto-detects if omitted.')
     parser.add_argument('--markets', help='Comma-separated market list (e.g., AU,MX). All if omitted.')
     parser.add_argument('--output-dir', help='Output directory for callout files.')
+    parser.add_argument('--db', default=os.path.expanduser('~/shared/tools/data/ps-analytics.duckdb'),
+                        help='DuckDB database path. Set to "none" to skip DB writes.')
     args = parser.parse_args()
 
     markets = args.markets.split(',') if args.markets else None
+    db_path = None if args.db == 'none' else args.db
 
     ingester = DashboardIngester(args.xlsx_path)
-    ingester.run(target_week=args.week, markets=markets, output_dir=args.output_dir)
+    ingester.run(target_week=args.week, markets=markets, output_dir=args.output_dir,
+                 db_path=db_path)
 
 
 if __name__ == '__main__':

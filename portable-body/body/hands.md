@@ -4,8 +4,8 @@
 
 *Operating principle: Reduce decisions, not options. Every task should have a clear next action, a pre-written draft if it involves communication, and a due date that drives My Day. Richard opens his list and acts — he doesn't plan.*
 
-Last updated: 2026-03-27 (Friday evening PT, autoresearch loop run 13)
-Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, annual review, flash session 3/27, bridge build, Onsite Events
+Last updated: 2026-03-31 (loop run 14)
+Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, annual review, flash session 3/27, bridge build, Onsite Events, W13 callout pipeline, prediction engine build, data layer overhaul
 
 ---
 
@@ -38,7 +38,7 @@ Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, annual review, f
 ### P3 — Monday (3/30)
 | # | Action | Due | Status | Notes |
 |---|--------|-----|--------|-------|
-| 12 | Baloo: keyword cost data + "don't use Google" blurb | 3/30 | NOT STARTED | Vijay needs this for early access launch EOD Monday |
+| 12 | Baloo: keyword cost data + "don't use Google" blurb | 3/30 | ✅ DONE | Delivered via ABCA-371 comment + Quip sheet (26 keywords) |
 | 13 | Baloo: follow up with Brandon on MBR click-cost guardrails | 3/30 | NOT STARTED | Close the loop from MBR concern |
 | 14 | Memorial Day round 2 creative assets feedback | 3/31 (Tue) | NOT STARTED | From Onsite Events meeting 3/27 |
 | 15 | Flash final assembly and submission | 3/30 | SECTIONS WRITTEN | MX, AU, Bid Strategy, Brand LP done. Paid App blocked (Andrew). |
@@ -97,16 +97,17 @@ Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, annual review, f
 | Lorena Q2 spend | 3/25 | 2 days (request, not hard deadline) |
 | AI Max test design | 3/28 | 0 days (due tomorrow, effectively overdue) |
 
-## New Signals (since 3/27)
-- ✅ Flash sections WRITTEN (3/27): MX highlight, AU update, Bid Strategy Test, Brand LP Tests, Paid App (blocked). Due 3/30 for final assembly.
-- ✅ Agent Bridge BUILT (3/27): Google Sheets/Docs communication layer live. Device.md updated.
-- ✅ Onsite Events ATTENDED (3/27): Prime Day brief process, translation SLA change, Memorial Day assets due 3/30.
-- 🆕 Frank Volinsky (MCS-3004, 3/27): Polaris weblab scoping started. ETA next week.
-- 🆕 Alex (Asana 3/27): Page Creation task, checking in with Vijeth. Due today.
-- 🆕 Apple Ads (3/27): System issue — campaigns overspent. Needs investigation.
-- 🆕 Kudoboard for Kate Vives — due April 1 (from Ariel Sencil).
-- 🆕 Karpathy request: identity field protection in compression (Brandon's pronouns were compressed out).
-- 📅 Monday 3/30: Baloo early access launch, Flash due, Memorial Day assets due, Lorena Q2 spend overdue.
+## New Signals (since 3/30)
+- ✅ Baloo keyword data DELIVERED (3/30): 26 keywords + URLs + tracking params in Quip sheet. ABCA-371 comment posted.
+- ✅ W13 WBR callouts PRODUCED (3/30): All 10 markets + WW summary + EU5 aggregate + blind review.
+- ✅ Prediction engine BUILT (3/28-3/30): Bayesian forecasting, auto-calibration, autonomy tracking.
+- ✅ Data layer OVERHAULED (3/28-3/30): query.py expanded, agent state functions, DuckDB MCP, PBT tests, migrations.
+- ✅ Attention tracker BUILT (3/28-3/30): Full app for local machine.
+- ✅ ie%CCP ingester bug FIXED (3/30): Was reading CPA instead of ie%CCP ratios.
+- ✅ Change Log CSVs INGESTED (3/30): 477 rows to DuckDB.
+- 🆕 Frank Volinsky (3/30): Polaris weblab sync scheduled for TODAY 11:30am PT. Wants to confirm requirements.
+- 🆕 ABMA-11245 (3/30): Richard followed up on Quick paid search integration SIM. Still unassigned.
+- 📅 TODAY 3/31: Team Meeting 9am, Frank sync 11:30am, Brandon 1:1 2pm, AU sync 4:30pm. Memorial Day feedback due. PSME party vote due.
 
 ---
 

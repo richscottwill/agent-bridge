@@ -1,0 +1,90 @@
+Keyword,Match Type,Campaign,Ad Group,Impressions,Clicks,Cost,Registrations,CPC,CPA,Action
+"""bulk products""",Phrase match,AU_Generic,Bulk_Products_Phrase,6233,652,3690.67,0,5.66,,"HIGH — $500+ spend, zero regs"
+"""bulk goods""",Phrase match,AU_Generic,Bulk_Products_Phrase,1793,182,1066.98,0,5.86,,"HIGH — $500+ spend, zero regs"
+"""wholesaler traders""",Phrase match,AU_Generic,Wholesalers_Enterprises_Phrase,1084,98,812.88,0,8.29,,"HIGH — $500+ spend, zero regs"
+"""products in large quantities""",Phrase match,AU_Generic,Bulk_Products_Phrase,1032,125,739.12,0,5.91,,"HIGH — $500+ spend, zero regs"
+"""cleaning products""",Phrase match,AU_Generic_P-V_Janitorial,Products_Phrase,2682,172,725.72,3,4.22,241.91,CPA above $200
+"""buy bulk""",Phrase match,AU_Generic,Bulk_Buy_Phrase,1121,142,719.94,0,5.07,,"HIGH — $500+ spend, zero regs"
+"""bulk distributor""",Phrase match,AU_Generic,Bulk_Distributors_Phrase,820,82,649.71,0,7.92,,"HIGH — $500+ spend, zero regs"
+"""wholesaler au""",Phrase match,AU_Generic,Wholesalers_Phrase,744,81,607.94,0,7.51,,"HIGH — $500+ spend, zero regs"
+"""wholesale products""",Phrase match,AU_Generic,Wholesales_Products_Phrase,1163,139,504.82,0,3.63,,"HIGH — $500+ spend, zero regs"
+"""amazon business information""",Phrase match,AU_Brand_Phrase,Navigation_Phrase,820,51,495.96,2,9.72,247.98,CPA above $200
+"""wholesale other""",Phrase match,AU_Generic_P-V_Apparel,Hosiery & Socks_Wholesales_Phrase,926,112,467.45,0,4.17,,"MEDIUM — $100+ spend, zero regs"
+"""buy bulk sweets""",Phrase match,AU_Generic_P-V_Food,Sweets_Bulk_Phrase,1167,126,454.58,2,3.61,227.29,CPA above $200
+"""bulk packaging""",Phrase match,AU_Generic,Bulk_Products_Phrase,650,80,443.42,0,5.54,,"MEDIUM — $100+ spend, zero regs"
+"""amazon company account""",Phrase match,AU_Brand_Phrase,Account_ Phrase,426,40,424.86,3,10.62,141.62,CPC above $10
+"""wholesale foods""",Phrase match,AU_Generic_P-V_Food,Food_Wholesale_Phrase,804,89,402.31,2,4.52,201.16,CPA above $200
+"""desk equipment""",Phrase match,AU_Generic_P-V_Office,Products_Phrase,1244,86,385.77,1,4.49,385.77,CPA above $200
+"""bags distributors""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Distributors_Phrase,694,86,383.48,0,4.46,,"MEDIUM — $100+ spend, zero regs"
+"""buy janitorial""",Phrase match,AU_Generic_P-V_Janitorial,Purchasing_Phrase,1219,59,330.68,0,5.6,,"MEDIUM — $100+ spend, zero regs"
+"""business cards business""",Phrase match,AU_Generic_P-V_Office,Office-Supplies_Phrase,910,53,319.47,1,6.03,319.47,CPA above $200
+"""clothing bulk""",Phrase match,AU_Generic_P-V_Shops,Clothing_Bulk_Phrase,563,65,317.4,0,4.88,,"MEDIUM — $100+ spend, zero regs"
+"""wholesale equipment""",Phrase match,AU_Generic,Wholesales_Products_Phrase,389,52,316.75,0,6.09,,"MEDIUM — $100+ spend, zero regs"
+"""cleaning buy""",Phrase match,AU_Generic_P-V_Janitorial,Purchasing_Phrase,1132,75,304.91,0,4.07,,"MEDIUM — $100+ spend, zero regs"
+"""business cards online""",Phrase match,AU_Generic_P-V_Office,Office-Supplies_Phrase,745,47,291.32,1,6.2,291.32,CPA above $200
+"""amazon business prime""",Phrase match,AU_Brand_Phrase,Prime_Phrase,318,25,286.22,0,11.45,,"MEDIUM — $100+ spend, zero regs"
+"""office supplies""",Phrase match,AU_Generic_P-V_Office,Office_Phrase,1278,88,280.58,0,3.19,,"MEDIUM — $100+ spend, zero regs"
+"""amazon prime business""",Phrase match,AU_Brand_Phrase,Prime_Phrase,205,21,269.21,3,12.82,89.74,CPC above $10
+"""t-shirts suppliers""",Phrase match,AU_Generic_P-V_Apparel,Tops_Suppliers_Phrase,444,54,268.33,0,4.97,,"MEDIUM — $100+ spend, zero regs"
+"""store fittings""",Phrase match,AU_Generic_P-V_Shops,Furniture_Phrase,598,55,267.03,1,4.86,267.03,CPA above $200
+"""makeup suppliers""",Phrase match,AU_Generic_P-V_Beauty,Makeup_Supplier_Phrase,463,45,264.08,1,5.87,264.08,CPA above $200
+"""purchasing bulk""",Phrase match,AU_Generic,Bulk_Buy_Phrase,462,60,260.08,0,4.33,,"MEDIUM — $100+ spend, zero regs"
+"""amazon business account""",Phrase match,AU_Brand_Phrase,Account_ Phrase,235,24,258.26,2,10.76,129.13,CPC above $10
+"""computers for business""",Phrase match,AU_Generic_P-V_Electronics,Computers_Phrase,1216,45,252.07,0,5.6,,"MEDIUM — $100+ spend, zero regs"
+"""amazon au business""",Phrase match,AU_Brand_Phrase,Pure_ Phrase,307,23,247.53,2,10.76,123.77,CPC above $10
+"""chocolate wholesalers""",Phrase match,AU_Generic_P-V_Food,Food_Wholesalers_Phrase,255,40,242.11,1,6.05,242.11,CPA above $200
+"""cosmetics wholesaler""",Phrase match,AU_Generic_P-V_Beauty,Wholesalers_Cosmetics_Phrase,563,43,236.16,0,5.49,,"MEDIUM — $100+ spend, zero regs"
+"""suppliers products""",Phrase match,AU_Generic,Suppliers_Products_Phrase,445,37,234.14,0,6.33,,"MEDIUM — $100+ spend, zero regs"
+"""wholesale casual""",Phrase match,AU_Generic_P-V_Apparel,Dresses_Wholesales_Phrase,460,55,217.28,0,3.95,,"MEDIUM — $100+ spend, zero regs"
+"""bulk bath products""",Phrase match,AU_Generic_P-V_Beauty,Skin-Care_Bulk_Phrase,338,42,216.94,1,5.17,216.94,CPA above $200
+"""au suppliers""",Phrase match,AU_Generic,Suppliers_Phrase,366,44,209.52,0,4.76,,"MEDIUM — $100+ spend, zero regs"
+"""bulk cups""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Phrase,343,38,206.79,1,5.44,206.79,CPA above $200
+"""bulk take out boxes""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Phrase,362,47,206.1,0,4.39,,"MEDIUM — $100+ spend, zero regs"
+"""shirts distributors""",Phrase match,AU_Generic_P-V_Apparel,Tops_Distributors_Phrase,426,67,202.13,0,3.02,,"MEDIUM — $100+ spend, zero regs"
+"""bulk water bottles""",Phrase match,AU_Generic_P-V_Food,Drinks_Bulk_Phrase,362,51,201.51,0,3.95,,"MEDIUM — $100+ spend, zero regs"
+"""commercial tv screens""",Phrase match,AU_Generic_P-V_Electronics,Televisions_Phrase,428,39,200.91,1,5.15,200.91,CPA above $200
+"""tissue paper distributor""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Distributor_Phrase,301,32,191.45,0,5.98,,"MEDIUM — $100+ spend, zero regs"
+"""foods wholesalers""",Phrase match,AU_Generic_P-V_Food,Food_Wholesalers_Phrase,474,42,188.19,0,4.48,,"MEDIUM — $100+ spend, zero regs"
+"""companies business""",Phrase match,AU_Generic,Enterprises_Shop_Phrase,318,25,188.0,0,7.52,,"MEDIUM — $100+ spend, zero regs"
+"""other suppliers""",Phrase match,AU_Generic_P-V_Apparel,Hosiery & Socks_Suppliers_Phrase,443,31,187.31,0,6.04,,"MEDIUM — $100+ spend, zero regs"
+"""office electronics""",Phrase match,AU_Generic_P-V_Office,Office_Phrase,550,39,184.9,0,4.74,,"MEDIUM — $100+ spend, zero regs"
+"""professional vacuums""",Phrase match,AU_Generic_P-V_Janitorial,Floor-Care_Phrase,527,37,182.59,0,4.93,,"MEDIUM — $100+ spend, zero regs"
+"""commercial kitchen supplies""",Phrase match,AU_Generic_P-V_Food,Food_Suppliers_Phrase,413,43,180.93,0,4.21,,"MEDIUM — $100+ spend, zero regs"
+"""suppliers purchases""",Phrase match,AU_Generic,Suppliers_Products_Phrase,182,22,176.74,0,8.03,,"MEDIUM — $100+ spend, zero regs"
+"""online shop for companies""",Phrase match,AU_Generic,Enterprises_Shop_Phrase,347,26,174.32,0,6.7,,"MEDIUM — $100+ spend, zero regs"
+"""bulk fresh foods""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,333,21,170.81,0,8.13,,"MEDIUM — $100+ spend, zero regs"
+"""buy wholesale""",Phrase match,AU_Generic,Wholesales_Buy_Phrase,221,25,153.55,0,6.14,,"MEDIUM — $100+ spend, zero regs"
+"""drinks wholesale market""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,144,27,153.42,0,5.68,,"MEDIUM — $100+ spend, zero regs"
+"""hats wholesale""",Phrase match,AU_Generic_P-V_Apparel,Outerwear_Wholesales_Phrase,273,26,153.17,0,5.89,,"MEDIUM — $100+ spend, zero regs"
+"""buy bulk online""",Phrase match,AU_Generic,Bulk_Buy_Phrase,193,26,148.88,0,5.73,,"MEDIUM — $100+ spend, zero regs"
+"""bulk beverages""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,270,43,145.61,0,3.39,,"MEDIUM — $100+ spend, zero regs"
+"""wholesale purchases""",Phrase match,AU_Generic,Wholesales_Buy_Phrase,291,25,145.04,0,5.8,,"MEDIUM — $100+ spend, zero regs"
+[how to create an amazon business account],Exact match,AU_Brand_Exact,Navigation_Exact,59,13,141.71,4,10.9,35.43,CPC above $10
+[how to set up a business amazon account],Exact match,AU_Brand_Exact,Navigation_Exact,61,13,138.73,3,10.67,46.24,CPC above $10
+"""commercial smart tv""",Phrase match,AU_Generic_P-V_Electronics,Televisions_Phrase,425,19,132.16,0,6.96,,"MEDIUM — $100+ spend, zero regs"
+"""hats bulk""",Phrase match,AU_Generic_P-V_Apparel,Outerwear_Bulk_Phrase,278,25,132.04,0,5.28,,"MEDIUM — $100+ spend, zero regs"
+"""bulk shampoo""",Phrase match,AU_Generic_P-V_Beauty,Hair-Styling_Bulk_Phrase,248,31,127.07,0,4.1,,"MEDIUM — $100+ spend, zero regs"
+"""wholesale foodstuffs""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,345,22,126.31,0,5.74,,"MEDIUM — $100+ spend, zero regs"
+[buy bulk],Exact match,AU_Generic,Bulk_Buy_Exact,126,17,121.87,0,7.17,,"MEDIUM — $100+ spend, zero regs"
+"""bulk canned food""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,228,21,121.45,0,5.78,,"MEDIUM — $100+ spend, zero regs"
+"""jars wholesale""",Phrase match,AU_Generic_P-V_Food,Plates_Wholesale_Phrase,182,28,118.27,0,4.22,,"MEDIUM — $100+ spend, zero regs"
+"""bulk herbs""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,229,27,117.96,0,4.37,,"MEDIUM — $100+ spend, zero regs"
+[amazon business information],Exact match,AU_Brand_Exact,Navigation_Exact,76,14,116.09,0,8.29,,"MEDIUM — $100+ spend, zero regs"
+"""seller stationery""",Phrase match,AU_Generic_P-V_Office,Sellers_Phrase,164,11,110.37,0,10.03,,"MEDIUM — $100+ spend, zero regs"
+"""amazon business cost""",Phrase match,AU_Brand_Phrase,Pure_ Phrase,33,9,109.28,0,12.14,,"MEDIUM — $100+ spend, zero regs"
+"""professional work gloves""",Phrase match,AU_Generic_P-V_Safety,Equipment-Gear_Phrase,287,27,107.92,0,4.0,,"MEDIUM — $100+ spend, zero regs"
+[amazon business au],Exact match,AU_Brand_Exact,Pure_Exact,75,14,107.87,0,7.71,,"MEDIUM — $100+ spend, zero regs"
+"""socks distributors""",Phrase match,AU_Generic_P-V_Apparel,Hosiery & Socks_Distributors_Phrase,152,23,106.54,0,4.63,,"MEDIUM — $100+ spend, zero regs"
+"""order stationery""",Phrase match,AU_Generic_P-V_Office,Stationery_Phrase,560,28,105.84,0,3.78,,"MEDIUM — $100+ spend, zero regs"
+[bulk suppliers],Exact match,AU_Generic,Bulk_Suppliers_Exact,172,14,105.23,0,7.52,,"MEDIUM — $100+ spend, zero regs"
+"""b2b wholesale""",Phrase match,AU_Generic,B2B_Wholesales_Phrase,118,17,105.0,0,6.18,,"MEDIUM — $100+ spend, zero regs"
+"""bulk toilet paper""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Bulk,242,24,103.7,0,4.32,,"MEDIUM — $100+ spend, zero regs"
+"""bags suppliers""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Suppliers_Phrase,134,22,103.67,0,4.71,,"MEDIUM — $100+ spend, zero regs"
+"""distributors toy""",Phrase match,AU_Generic_P-V_Shops,Toys Shop_Distributors_Phrase,140,25,102.35,0,4.09,,"MEDIUM — $100+ spend, zero regs"
+[setup amazon business account],Exact match,AU_Brand_Exact,Account_Exact,25,8,96.46,2,12.06,48.23,CPC above $10
+"""suppliers toys""",Phrase match,AU_Generic_P-V_Shops,Toys Shop_Suppliers_Phrase,45,7,80.54,0,11.51,,CPC above $10
+[business prime account cost],Exact match,AU_Brand_Exact,Prime_Exact,27,7,74.51,1,10.64,74.51,CPC above $10
+"""tumblers wholesalers""",Phrase match,AU_Generic_P-V_Food,Glassware_Wholesalers_Phrase,26,6,72.18,1,12.03,72.18,CPC above $10
+"""bulk dried fruit""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,84,7,70.82,0,10.12,,CPC above $10
+[amazon business cost],Exact match,AU_Brand_Exact,Pure_Exact,26,6,66.87,1,11.15,66.87,CPC above $10
+"""party accessories suppliers""",Phrase match,AU_Generic_P-V_Celebrations,Party_Suppliers_Phrase,82,5,53.0,0,10.6,,CPC above $10

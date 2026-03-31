@@ -35,13 +35,30 @@ All voice files are fully portable — they ARE Richard. No stripping needed.
 | long-term-goals.md | Nothing (fully portable) | The Five Levels strategic arc |
 
 ### Agent Files
-Agent definitions contain methodology (portable) and Amazon-specific references (strip). The methodology — how to analyze markets, write callouts, coach performance, run experiments — is the valuable part.
+Agent definitions contain methodology (portable) and Amazon-specific references (strip). The methodology — how to analyze markets, write callouts, coach performance, run experiments — is the valuable part. Post-consolidation: market-analyst.md and callout-writer.md are parameterized — strip market-specific data examples but keep the parameterization pattern.
 
 ### Research Files
 Research files contain Amazon Business data. Strip the specific numbers but keep the methodology and framework structure.
 
 ### Hooks
 hooks-inventory.md is already plain-text intent descriptions. No stripping needed — the intent is portable even if the implementation is platform-specific.
+
+### Specs
+Spec files (requirements, design, tasks) contain system architecture decisions. Strip Amazon-specific tool references and internal IDs. Keep the methodology, design patterns, and task structures — they document how to build these systems.
+
+### Tools
+| File | Strip | Keep |
+|------|-------|------|
+| ingest.py | Amazon dashboard column names, specific xlsx paths | Ingestion pattern, data transformation logic |
+| schema.sql | Amazon-specific table data | Schema structure, relationship patterns |
+| query.py | Amazon-specific queries | Query interface pattern |
+| sync.sh | GitHub repo URL, specific paths | Git sync pattern |
+| generate-charts.py | Amazon-specific data sources | Chart generation pattern, template system |
+
+### Steering (new files)
+| File | Strip | Keep |
+|------|-------|------|
+| architecture-eval-protocol.md | DuckDB references | Blind evaluation methodology, scoring rubric |
 
 ---
 

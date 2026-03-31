@@ -4,7 +4,7 @@
 
 *Operating principle: Routine as liberation. Every delegation, template, and automation here exists to eliminate a decision Richard was making repeatedly. The test for a new device function: "Does this remove a recurring decision?" If yes, build it. If it just moves the decision, skip it.*
 
-Last updated: 2026-03-31 (loop run 14 — completing cascade from incomplete run)
+Last updated: 2026-03-31 (Karpathy run 15 — CE-5 COMPRESS+REMOVE, 2409w→1386w)
 
 ---
 
@@ -22,9 +22,7 @@ These are live. They execute without Richard thinking.
 
 ### Morning Routine (Hook: `rw-morning-routine`)
 - **What it does:** One-click daily chain: Asana Sync → Draft Unread Replies → To-Do Refresh + Daily Brief → Calendar Blocks
-- **Trigger:** userTriggered (daily, one click)
-- **Judgment required:** Step 2 (draft replies) presents triage table for Richard's confirmation. Step 4 (calendar blocks) asks which to create. Everything else is autonomous.
-- **Includes:** Asana sync (was separate hook), task calendar blocks (was separate hook) — now consolidated into one flow.
+- **Trigger:** userTriggered (daily). Step 2 (draft replies) and Step 4 (calendar blocks) need Richard's confirmation. Everything else autonomous.
 
 ### Autoresearch Loop (Hook: `run-the-loop`)
 - **What it does:** Maintenance (refresh ground truth from email/calendar) → Cascade (update organ files) → Optionally 1 experiment
@@ -37,83 +35,49 @@ These are live. They execute without Richard thinking.
 - **Block Calendar Invite:** Prevents calendar events with external attendees. Personal blocks allowed.
 
 ### Karpathy Agent (Agent: `karpathy.md`)
-- **What it does:** Governs loop evolution, compression experimentation, and system metabolism. Sole authority on changes to heart.md, gut.md compression rules, and experiment queue. No other agent modifies these files without going through Karpathy.
-- **Trigger:** Invoked during loop runs (Phase 2-3), on demand ("run karpathy"), and weekly Fridays (metabolism report).
-- **Judgment required:** None for compression and budget enforcement. Richard's approval required for structural loop changes (phase order, accuracy thresholds, body metaphor).
-- **Agent file:** `~/shared/.kiro/agents/karpathy.md`
+- **What it does:** Loop governor + compression scientist. Sole authority on heart.md, gut.md, experiment queue.
+- **Trigger:** During loop runs, on demand ("run karpathy"), weekly Fridays (metabolism report).
+- **Agent file:** `~/.kiro/agents/body-system/karpathy.md`
 
 ### Eyes Chart Agent (Agent: `eyes-chart.md`)
-- **What it does:** Visualization specialist. Reads body organs (gut budgets, changelog experiments, tracker scorecard, NS patterns, aMCC streak) and market performance data (dashboard ingester JSON), generates a standalone HTML dashboard with interactive Chart.js charts.
-- **Trigger:** Via `update-dashboard` hook ONLY. This hook is the single entry point for all dashboard regeneration. No other process, agent, or loop step should invoke generate.py directly.
-- **Judgment required:** None. Read-only on all organs. Outputs HTML to `~/shared/tools/progress-charts/dashboard.html`.
-- **Tool:** `python3 ~/shared/tools/progress-charts/generate.py`
-- **Agent file:** `~/shared/.kiro/agents/eyes-chart.md`
-- **Hook:** `update-dashboard` (userTriggered)
+- **What it does:** Reads body organs + market data → generates standalone HTML dashboard (Chart.js).
+- **Trigger:** `update-dashboard` hook ONLY (single entry point). Read-only on all organs.
+- **Tool:** `python3 ~/shared/tools/progress-charts/generate.py` · Agent: `~/shared/.kiro/agents/eyes-chart.md`
 
 ### Wiki Team (Agents: `wiki-team/`)
-- **What it does:** 6-agent pipeline for doc creation: editor (orchestrator) → researcher → writer → critic → librarian + concierge (search/lookup). Publishes to `~/shared/artifacts/`. Context catalog (`~/shared/context/wiki/context-catalog.md`) enables fast source lookup for any agent.
-- **Trigger:** On demand ("write a wiki article", "search the wiki", "audit the wiki"). Editor orchestrates the pipeline.
-- **Judgment required:** None for pipeline execution. Richard approves final publish.
-- **Agent files:** `~/.kiro/agents/wiki-team/` (6 .md agents)
-- **Quality bar:** 8/10 minimum. Critic is a required gate, not optional.
+- **What it does:** 6-agent doc pipeline: editor → researcher → writer → critic → librarian + concierge. Publishes to `~/shared/artifacts/`. 15 artifacts. 8/10 quality bar (critic is required gate).
+- **Trigger:** On demand. Editor orchestrates. Agent files: `~/.kiro/agents/wiki-team/`
 
 ### Agent Bridge (Tool: `~/shared/tools/bridge/bridge.py`)
-- **What it does:** Google Sheets/Docs communication layer between Kiro (AgentSpace) and Richard's personal agent swarm. Provides async message bus, context snapshots, agent registry, and file management via Google API.
-- **Trigger:** Imported by hooks/scripts. `from bridge import Bridge; b = Bridge()`
-- **Surfaces:** Spreadsheet "agent bridge" (4 sheets: bus, context, registry, log) + Doc "agent bridge" (protocol + scratchpad)
-- **Spreadsheet ID:** `1IlM43kzxw8Vlu6aUWXUV1dr7ZIF7O7H2bD5x3kaKIHg`
-- **Doc ID:** `1koJV8a4Ig9BBDbrtQl-w8L4-2bUrz8lGwxUxEfIgQj8`
-- **Drive Folder ID:** `1aeRuldkc-OL1gyR7FQ-WrvbpERPsYChZ`
-- **Service Account:** `kiro-sheets-bridge@kiro-491503.iam.gserviceaccount.com`
-- **Credentials:** `~/shared/credentials/kiro-491503-6b65ab0501c6.json`
-- **Judgment required:** None for reads. Writes to bus/context are autonomous. New file creation in Drive folder is autonomous.
-- **Portability:** Bridge files are plain text (Google Sheets/Docs). Any agent with the service account can read/write. Protocol is documented in the Google Doc itself.
+- **What it does:** Google Sheets/Docs async message bus + context snapshots between Kiro and Richard's personal agent swarm.
+- **Trigger:** `from bridge import Bridge; b = Bridge()`
+- **Key IDs:** Spreadsheet `1IlM43kzxw8Vlu6aUWXUV1dr7ZIF7O7H2bD5x3kaKIHg` · Doc `1koJV8a4Ig9BBDbrtQl-w8L4-2bUrz8lGwxUxEfIgQj8` · Drive `1aeRuldkc-OL1gyR7FQ-WrvbpERPsYChZ`
+- **Service Account:** `kiro-sheets-bridge@kiro-491503.iam.gserviceaccount.com` · Creds: `~/shared/credentials/kiro-491503-6b65ab0501c6.json`
+- **Judgment required:** None. Autonomous reads/writes.
 
 ### Hedy Meeting Sync (Hook: `hedy-meeting-sync`)
-- **What it does:** Uses the Hedy MCP power to pull latest sessions, analyze Richard's communication patterns (speaking share, hedging, filler words, turn length), flag low-visibility meetings, audit/update Hedy session contexts and topic contexts for staleness, and cascade findings into organs.
-- **Trigger:** userTriggered (after meetings, or automatically during loop Phase 1)
-- **Judgment required:** None. Fully autonomous. Updates organs directly.
-- **Integration:** Hedy MCP power (18 tools — GetSessions, GetSessionDetails, GetSessionHighlights, GetSessionToDos, GetAllTopics, GetTopicDetails, ListSessionContexts, UpdateSessionContext, UpdateTopic, etc.)
-- **Feeds into:** Memory (relationship dynamics), Nervous System (communication patterns, Loop 7), Eyes (meeting prep — what was discussed last time)
+- **What it does:** Pulls Hedy sessions, analyzes communication patterns (speaking share, hedging, filler words), flags low-visibility meetings, updates session/topic contexts, cascades to organs.
+- **Trigger:** userTriggered (after meetings, or during loop Phase 1). Fully autonomous.
+- **Feeds into:** Memory (relationships), Nervous System (communication patterns, Loop 7), Eyes (meeting prep)
 
 ### SharePoint Sync (Hook: `sharepoint-sync`)
-- **What it does:** Converts eligible wiki articles from `~/shared/artifacts/` to .docx files and writes them to a OneDrive-synced SharePoint folder. Filters by audience (amazon-internal only) and status (configurable, default REVIEW+FINAL). Incremental sync via SHA-256 content hashing — only changed articles are re-exported. Dry-run first, then confirms with Richard before live sync.
+- **What it does:** Wiki articles → .docx → OneDrive → SharePoint. Filters: amazon-internal, REVIEW+FINAL. Incremental via SHA-256 hashing.
+- **Trigger:** userTriggered. Dry-run first, Richard confirms before live sync.
+- **Tool:** `python3 ~/shared/tools/sharepoint-sync/cli.py --mode directory` · Config: `~/shared/tools/sharepoint-sync/config.yaml`
+- **Local (Windows):** `c:/Users/prichwil/OneDrive - amazon.com/Artifacts/wiki-sync`
 
 ### PS Analytics Database (DuckDB)
-- **What it does:** Persistent analytical database for all structured paid search data. Stores daily, weekly, and monthly metrics for all 10 markets with Brand/NB splits, IECCP, projections, callout scores, competitor intel, OCI rollout status, change logs, and anomaly flags. Populated automatically by the dashboard ingester on each run. Any agent can query historical data with SQL instead of parsing markdown files. Write operations available via `db_write()` and `db_upsert()`.
-- **Trigger:** Auto-populated when dashboard ingester runs. Query on demand from any agent or script.
-- **DB path:** `~/shared/tools/data/ps-analytics.duckdb`
-- **Query helper:** `~/shared/tools/data/query.py` — CLI or importable (`from query import db, db_upsert, market_trend`)
-- **Tables (Phase A — active):** daily_metrics, weekly_metrics, monthly_metrics, ieccp, projections, callout_scores, experiments, ingest_log, change_log, anomalies, competitors, oci_status
-- **Tables (Phase B — schema only):** agent_actions, agent_observations, decisions, task_queue
-- **Convenience functions:** `market_week()`, `market_trend()`, `market_month()`, `projection()`, `callout_scores()`
-- **Write operations:** `db_write(sql, params)` for raw INSERT/UPDATE/DELETE, `db_upsert(table, data, key_cols)` for idempotent upserts
-- **Schema export:** `schema_export()` auto-runs after each ingestion, writes `~/shared/tools/data/schema.sql`
-- **Portability:** See `~/shared/tools/data/RECONSTRUCTION.md` for full rebuild procedure, table mapping, and query patterns
-- **Example:** `python3 ~/shared/tools/data/query.py "SELECT market, week, regs, cpa FROM weekly_metrics WHERE market='AU' ORDER BY week DESC LIMIT 8"`
-- **Judgment required:** None for reads. Write operations (db_write, db_upsert) are used by agents autonomously.
-- **Portability:** Single file, no server. DuckDB is columnar (optimized for analytical queries like trends, YoY comparisons, aggregations). Survives platform move — just copy the .duckdb file.
-- **Agent tools (new 3/30):**
-  - **DuckDB MCP Server** — Native MCP tool access to SQL. Agents call `execute_query`, `list_tables`, `list_columns` directly instead of shelling out. Config: `.kiro/settings/mcp.json` → `duckdb` server. Uses `uvx mcp-server-motherduck` with `--read-write`.
-  - **`db_validate(sql)`** — EXPLAIN-based SQL validation. Catches bad column/table names before execution. `from query import db_validate`
-  - **`schema()`** — Returns `{table: [{name, type, nullable}]}` dict. Agents introspect columns at runtime. `from query import schema`
-  - **`export_parquet()`** — Exports key tables as .parquet files to `~/shared/tools/data/exports/`. Swarm agents read these without DuckDB. `from query import export_parquet`
-  - **`write_data_event()`** — Writes `~/shared/tools/data/last_ingest.json` after ingestion. Agents poll this to know when fresh data exists. Auto-called by ingester.
-  - **Parquet exports** — `~/shared/tools/data/exports/*.parquet`. Auto-generated by ingester. Bridge can upload to Drive for cross-environment swarm access.
-- **Judgment required:** Yes — hook runs dry-run first, shows what will be created/updated/removed, and asks Richard to confirm before executing.
-- **Tool:** `python3 ~/shared/tools/sharepoint-sync/cli.py --mode directory`
-- **Config:** `~/shared/tools/sharepoint-sync/config.yaml`
-- **Output:** .docx files in OneDrive folder → auto-syncs to SharePoint document library
-- **Local (Windows):** `c:/Users/prichwil/OneDrive - amazon.com/Artifacts/wiki-sync`
-- **Portability:** Pure Python, no API keys. Config is YAML, manifest is JSON. Works on any machine with Python + OneDrive sync.
+- **What it does:** Persistent analytical DB for all structured PS data — daily/weekly/monthly metrics (10 markets, Brand/NB), IECCP, projections, callout scores, competitors, OCI status, change logs, anomalies. Auto-populated by dashboard ingester.
+- **DB path:** `~/shared/data/duckdb/ps-analytics.duckdb` · Query: `~/shared/tools/data/query.py` (CLI or `from query import db, market_trend`)
+- **Active tables:** daily_metrics, weekly_metrics, monthly_metrics, ieccp, projections, callout_scores, experiments, ingest_log, change_log, anomalies, competitors, oci_status. Schema-only: agent_actions, agent_observations, decisions, task_queue.
+- **Agent access:** DuckDB MCP Server (`execute_query`, `list_tables`, `list_columns` via `.kiro/settings/mcp.json`). Python: `db_validate()`, `schema()`, `export_parquet()`, `db_write()`, `db_upsert()`.
+- **Portability:** Single file, no server. Parquet exports at `~/shared/data/exports/`. Rebuild: `~/shared/tools/data/RECONSTRUCTION.md`.
 
 ---
 
-## 📋 Templates (pre-computed responses)
+## 📋 Templates
 
-Work that's been reduced to fill-in-the-blank. Richard copy-pastes and sends.
-
-Queued templates (not built): Email Templates, WBR Callout Template, Meeting Prep Template. Will be built via Tool Factory when prioritized.
+Queued (not built): Email Templates, WBR Callout Template, Meeting Prep Template. Will be built via Tool Factory when prioritized.
 
 ---
 
@@ -122,30 +86,23 @@ Queued templates (not built): Email Templates, WBR Callout Template, Meeting Pre
 Work that Richard has offloaded or should offload to specific humans. Each protocol defines: what's delegated, to whom, what Richard still owns, and the handoff mechanism.
 
 ### MX Invoice Routing → Carlos Palmos
-- **Status:** VOID — Carlos transitioned to CPS side of MX acquisition (~3/17). No longer owns PS invoicing.
-- **What to delegate:** Monthly Google Ads invoice processing for MX. PO matching, submission, follow-up.
-- **What Richard keeps:** Everything, until a new delegate is identified. Lorena is the new MX PS stakeholder but invoice routing hasn't been discussed with her yet.
-- **Next step:** Decide whether to delegate MX invoicing to Lorena or keep it. If Lorena, send process doc + PO numbers.
+- **Status:** VOID — Carlos transitioned to CPS (~3/17). Richard owns MX invoicing until new delegate identified. Next step: decide whether to delegate to Lorena (send process doc + PO numbers).
 
-### AU Day-to-Day (reversed)
+### AU Day-to-Day → Harjeet (reversed)
 - **Status:** REVERSED. Harjeet stepped away. Richard owns all AU PS.
 
 ### MX Keyword Sourcing → Lorena Alvarez Larrea
-- **Status:** IN PROGRESS. Lorena requested MX PS strategy overview + keyword data (3/19). She's engaging.
-- **What to delegate:** Ongoing keyword opportunity identification, negative keyword management for MX.
-- **What Richard keeps:** Strategy, bid decisions, testing framework.
-- **Handoff:** Send keyword export + strategy overview (draft sent 3/20). Follow up with a "here's how to identify new keywords" guide.
+- **Status:** IN PROGRESS. Lorena engaging (requested strategy overview + keyword data 3/19).
+- **Delegated:** Keyword opportunity identification, negative keyword management for MX. Richard keeps strategy, bid decisions, testing framework.
+- **Next:** Follow up with "how to identify new keywords" guide (draft sent 3/20).
 
-### WBR Coverage → Dwayne Palmer (restored)
-- **Status:** RESTORED. Dwayne back from OOO. Normal coverage resumes.
-- **What Richard keeps:** PS-specific callouts when asked. Backup coverage when Dwayne is out.
-- **Gap:** No backup process was created during the 2/23-3/6 coverage. Build a template so next time it's a 10-minute handoff, not a multi-day absorption.
+### WBR Coverage → Dwayne Palmer
+- **Status:** RESTORED. Normal coverage resumed. Richard keeps PS-specific callouts + backup when Dwayne is out.
+- **Gap:** No backup handoff template built. Need one for next OOO.
 
 ### OP1 Contributor Sections → Andrew, Stacey, Yun, Adi
-- **Status:** IN PROGRESS. Andrew active in Loop doc (3/18). Others not yet confirmed.
-- **What Richard keeps:** Overall narrative, integration across sections, Kate presentation.
-- **What's delegated:** Each contributor writes their workstream section (problem→test→result→scale).
-- **Gap:** No deadline set for contributor drafts. Need to send a "sections due by [date]" message.
+- **Status:** IN PROGRESS. Andrew active (3/18). Others not yet confirmed. Richard keeps overall narrative + Kate presentation.
+- **Gap:** No deadline set for contributor drafts.
 
 ---
 
@@ -153,17 +110,14 @@ Work that Richard has offloaded or should offload to specific humans. Each proto
 
 | # | Tool | Status |
 |---|------|--------|
-| 0 | **Paid Search Audit — Sheets Bridge setup** — Schedule Google Ads reports (AU, MX) to richscottwill@gmail.com → set up Gmail Apps Script auto-ingest (`paid_search_audit/gmail_auto_ingest.js`) at script.google.com → parses CSV attachments → writes to [Bridge_AB-Ads-Data](https://docs.google.com/spreadsheets/d/1mNnQSaQUCSHJXcrssFmvYDLqoKimWFm56UCVpeA3wjQ) AU/MX tabs → update `config.json` with real account CIDs/MCC IDs. Then audit runs end-to-end. | **Richard action needed** |
-| 1 | **Dashboard ingester** — manual weekly data extraction → automated | ✅ BUILT |
-| 1a | **PS Analytics DB (DuckDB)** — persistent queryable data layer for all structured PS data | ✅ BUILT |
-| 1b | **Context catalog** — universal source index for all agents | ✅ BUILT |
-| 2 | **Campaign link generator** — manual promo URL construction for AU/MX sitelinks | Backlog |
-| 3 | **Staleness detector** — auto-check file freshness, prevent context drift | Ready to build |
+| 0 | **Paid Search Audit** — Gmail Apps Script auto-ingest → [Bridge_AB-Ads-Data](https://docs.google.com/spreadsheets/d/1mNnQSaQUCSHJXcrssFmvYDLqoKimWFm56UCVpeA3wjQ). Needs: schedule reports, set up script, update config.json with CIDs. | **Richard action** |
+| 1 | **Dashboard ingester** | ✅ BUILT |
+| 1a | **PS Analytics DB (DuckDB)** | ✅ BUILT |
+| 1b | **Context catalog** | ✅ BUILT |
+| 2 | **Campaign link generator** — AU/MX sitelink URL construction | Backlog |
+| 3 | **Staleness detector** — auto-check file freshness | Ready to build |
 
-Additional proposals in backlog: WBR auto-briefing agent, Meeting prep auto-generator, Invoice routing workflow, Testing tracker, Keyword analysis pipeline.
-
-### Build Priority Rule
-From brain.md (Level 3): "Give your team leverage through automation." The first tool adopted by a teammate is the milestone. Prioritize tools that others can use, not just Richard.
+Backlog proposals: WBR auto-briefing, meeting prep auto-generator, invoice routing, testing tracker, keyword analysis pipeline. Build priority (brain.md Level 3): tools teammates adopt first.
 
 ---
 
@@ -173,24 +127,24 @@ Tracks installed system infrastructure only — hooks, agents, tools, and guards
 
 | Function | Status | Last Run | Notes |
 |----------|--------|----------|-------|
-| Morning Routine | ✅ Active | 3/30 | One-click: sync + drafts + brief + blocks |
-| Autoresearch Loop | ✅ Active | 3/31 | 14 runs completed |
-| Agent Bridge | ✅ Active | 3/27 | Google Sheets/Docs bridge to personal swarm. `~/shared/tools/bridge/bridge.py` |
-| Dashboard Ingester | ✅ Active | 3/30 | `python3 shared/tools/dashboard-ingester/ingest.py <xlsx>` — all 10 markets. ie%CCP bug fixed 3/30. |
-| Progress Charts | ✅ Active | 3/25 | Via `update-dashboard` hook only — single entry point for HTML dashboard |
-| Hedy Meeting Sync | ✅ Active | 3/23 | Via MCP power — no script needed |
-| Wiki Team | ✅ Active | 3/25 | 6-agent pipeline. 15 artifacts published. 8/10 quality bar. |
-| Context Catalog | ✅ Active | 3/25 | Universal source index. `~/shared/context/wiki/context-catalog.md` |
-| Karpathy Agent | ✅ Active | 3/24 | Loop governor + compression scientist. Gates all heart.md/gut.md changes. |
-| Eyes Chart Agent | ✅ Active | 3/25 | Visualization specialist. Read-only. Invokes progress-charts tool. |
-| Safety: Email Block | ✅ Active | Always on | preToolUse guard |
-| Safety: Calendar Block | ✅ Active | Always on | preToolUse guard |
-| SharePoint Sync | ✅ Active | 3/27 | Wiki → .docx → OneDrive → SharePoint. Hook: `sharepoint-sync` |
-| PS Analytics DB | ✅ Active | 3/30 | DuckDB at `~/shared/tools/data/ps-analytics.duckdb`. Auto-populated by ingester. |
-| DuckDB MCP Server | ✅ Active | 3/30 | Native SQL tool for agents. MCP: `duckdb` in mcp.json. Tools: execute_query, list_tables, list_columns. |
-| WBR Callout Pipeline | ✅ Active | 3/30 | Consolidated pipeline: context → 10 market-analyst runs → 10 callout-writer runs → reviewer. Hook: `wbr-callout-pipeline` (v2). Agents: `market-analyst.md` (parameterized, accepts market+week), `callout-writer.md` (parameterized), `callout-reviewer.md` (blind). Each agent reads `{market}-context.md` for market-specific rules. Agent state wired: analysts log actions + observations to DuckDB, query prior observations at run start for learned experience. W13 callouts produced for all 10 markets. Market order: AU, MX, US, CA, JP, UK, DE, FR, IT, ES. |
-| Prediction Engine | ✅ Active | 3/30 | Bayesian forecasting: conjugate priors, posterior updates, credible intervals, auto-calibration, autonomy tracking. 9 modules, 10 test files. CLI: `python3 ~/shared/tools/prediction/predict.py`. DuckDB tables: predictions, prediction_outcomes, calibration_log, autonomy_tasks, autonomy_history. |
-| Attention Tracker | 🔧 Built (not deployed) | 3/30 | Full app for local Windows machine: browser monitor, window monitor, idle detector, classifier, event processor, session tracker, state machine, summary, daemon. 34 test files. Needs deployment to Richard's local machine. |
+| Morning Routine | ✅ | 3/30 | Sync + drafts + brief + blocks |
+| Autoresearch Loop | ✅ | 3/31 | 14 runs. Protocol: heart.md |
+| Agent Bridge | ✅ | 3/27 | Google Sheets/Docs ↔ swarm |
+| Dashboard Ingester | ✅ | 3/30 | All 10 markets. ie%CCP fixed 3/30 |
+| Progress Charts | ✅ | 3/25 | Via `update-dashboard` hook |
+| Hedy Meeting Sync | ✅ | 3/23 | Via MCP power |
+| Wiki Team | ✅ | 3/25 | 6 agents. 15 artifacts. 8/10 bar |
+| Context Catalog | ✅ | 3/25 | `~/shared/context/wiki/context-catalog.md` |
+| Karpathy Agent | ✅ | 3/24 | Loop governor. Gates heart.md/gut.md |
+| Eyes Chart Agent | ✅ | 3/25 | Read-only visualization |
+| Safety: Email Block | ✅ | Always | preToolUse — prichwil-only sends |
+| Safety: Calendar Block | ✅ | Always | preToolUse — no external attendees |
+| SharePoint Sync | ✅ | 3/27 | Wiki → .docx → OneDrive → SharePoint |
+| PS Analytics DB | ✅ | 3/30 | DuckDB. Auto-populated by ingester |
+| DuckDB MCP Server | ✅ | 3/30 | Native SQL for agents via MCP |
+| WBR Callout Pipeline | ✅ | 3/30 | 10-market pipeline (v2). W13 produced. Hook: `wbr-callout-pipeline` |
+| Prediction Engine | ✅ | 3/30 | Bayesian forecasting. CLI: `~/shared/tools/prediction/predict.py` |
+| Attention Tracker | 🔧 | 3/30 | Built, not deployed. For Richard's local Windows machine |
 
 ---
 

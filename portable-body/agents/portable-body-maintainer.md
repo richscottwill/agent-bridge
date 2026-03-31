@@ -148,4 +148,4 @@ Gaps to watch for:
 - Cross-file references that break if files are loaded individually or in a different order
 - Missing "cold start" document — a single file a new AI reads first that explains everything
 
-Flag gaps in the changelog. Karpathy's CE-6 (portability) experiment will address them.
+Flag gaps in the changelog. Karpathy experiments will address portability gaps.

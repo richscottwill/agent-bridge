@@ -1,0 +1,1017 @@
+Keyword,Match Type,Campaign,Ad Group,Impressions,Clicks,Cost,Registrations,CPC,CPA,CTR %,Conv Rate %
+"""bulk products""",Phrase match,AU_Generic,Bulk_Products_Phrase,13444,1499,11011.12,0,7.35,,11.15,0.0
+"""cleaning products""",Phrase match,AU_Generic_P-V_Janitorial,Products_Phrase,13584,780,3610.84,0,4.63,,5.74,0.0
+[amazon business],Exact match,AU_Brand_Exact,Pure_Exact,9954,3630,2722.18,220,0.75,12.37,36.47,6.06
+"""business amazon""",Phrase match,AU_Brand_Phrase,Pure_ Phrase,3572,303,2557.79,23,8.44,111.21,8.48,7.59
+"""bulk distributor""",Phrase match,AU_Generic,Bulk_Distributors_Phrase,2348,252,2372.4,0,9.41,,10.73,0.0
+"""amazon business account""",Phrase match,AU_Brand_Phrase,Account_ Phrase,1810,181,2206.76,8,12.19,275.85,10.0,4.42
+"""wholesaler au""",Phrase match,AU_Generic,Wholesalers_Phrase,2284,250,2173.77,0,8.7,,10.95,0.0
+"""bulk goods""",Phrase match,AU_Generic,Bulk_Products_Phrase,2942,304,1942.8,0,6.39,,10.33,0.0
+"""professional beauty products""",Phrase match,AU_Generic_P-V_Beauty,Products_Cosmetics_Phrase,4700,328,1854.75,16,5.65,115.92,6.98,4.88
+"""buy bulk""",Phrase match,AU_Generic,Bulk_Buy_Phrase,2404,311,1801.7,0,5.79,,12.94,0.0
+"""amazon for business""",Phrase match,AU_Brand_Phrase,Pure_ Phrase,1699,238,1746.23,15,7.34,116.42,14.01,6.3
+"""bulk packaging""",Phrase match,AU_Generic,Bulk_Products_Phrase,1890,243,1607.78,0,6.62,,12.86,0.0
+"""products in large quantities""",Phrase match,AU_Generic,Bulk_Products_Phrase,1958,241,1574.29,0,6.53,,12.31,0.0
+"""bulk cleaning""",Phrase match,AU_Generic_P-V_Janitorial,Products_Bulk_Phrase,3482,205,1555.05,0,7.59,,5.89,0.0
+"""industrial cleaning products""",Phrase match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Phrase,5240,206,1473.23,0,7.15,,3.93,0.0
+"""purchasing bulk""",Phrase match,AU_Generic,Bulk_Buy_Phrase,1748,213,1437.12,0,6.75,,12.19,0.0
+"""bulk seller""",Phrase match,AU_Generic,Bulk_Sellers_Phrase,1028,119,1345.53,0,11.31,,11.58,0.0
+"""bulk paper products""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Bulk,2248,209,1245.96,0,5.96,,9.3,0.0
+"""bags distributors""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Distributors_Phrase,1900,246,1205.04,0,4.9,,12.95,0.0
+"""wholesale purchases""",Phrase match,AU_Generic,Wholesales_Buy_Phrase,1543,155,1204.47,0,7.77,,10.05,0.0
+"""wholesaler traders""",Phrase match,AU_Generic,Wholesalers_Enterprises_Phrase,1548,146,1192.7,0,8.17,,9.43,0.0
+"""amazon business portal""",Phrase match,AU_Brand_Phrase,Navigation_Phrase,976,102,1123.81,9,11.02,124.87,10.45,8.82
+"""clothing wholesalers""",Phrase match,AU_Generic_P-V_Shops,Wholesale_Clothing,1361,119,1112.84,0,9.35,,8.74,0.0
+"""amazon business au""",Phrase match,AU_Brand_Phrase,Pure_ Phrase,1116,117,1110.6,3,9.49,370.2,10.48,2.56
+"""shirts distributors""",Phrase match,AU_Generic_P-V_Apparel,Tops_Distributors_Phrase,2107,289,1101.87,0,3.81,,13.72,0.0
+"""amazon company account""",Phrase match,AU_Brand_Phrase,Account_ Phrase,1032,93,1098.97,9,11.82,122.11,9.01,9.68
+"""jars bulk""",Phrase match,AU_Generic_P-V_Food,Plates_Bulk_Phrase,1586,219,1051.04,8,4.8,131.38,13.81,3.65
+"""bulk cups""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Phrase,1785,183,1012.41,2,5.53,506.21,10.25,1.09
+"""wholesale products""",Phrase match,AU_Generic,Wholesales_Products_Phrase,2111,254,1008.03,0,3.97,,12.03,0.0
+"""wholesale other""",Phrase match,AU_Generic_P-V_Apparel,Hosiery & Socks_Wholesales_Phrase,2325,238,1006.9,0,4.23,,10.24,0.0
+"""professional salon products distributors""",Phrase match,AU_Generic_P-V_Beauty,Salon-Spa_Distributors_Phrase,2306,162,985.36,7,6.08,140.77,7.03,4.32
+"""purchasing in bulk""",Phrase match,AU_Generic,Bulk_Buy_Phrase,1446,195,984.95,0,5.05,,13.49,0.0
+"""buy janitorial""",Phrase match,AU_Generic_P-V_Janitorial,Purchasing_Phrase,3166,185,969.62,0,5.24,,5.84,0.0
+"""wholesale casual""",Phrase match,AU_Generic_P-V_Apparel,Dresses_Wholesales_Phrase,1835,192,958.74,0,4.99,,10.46,0.0
+"""desk equipment""",Phrase match,AU_Generic_P-V_Office,Products_Phrase,2998,197,924.59,0,4.69,,6.57,0.0
+"""clothing bulk""",Phrase match,AU_Generic_P-V_Shops,Clothing_Bulk_Phrase,1576,167,853.6,0,5.11,,10.6,0.0
+"""wholesale merchandise""",Phrase match,AU_Generic,Wholesales_Products_Phrase,698,84,849.32,0,10.11,,12.03,0.0
+"""amazon prime business""",Phrase match,AU_Brand_Phrase,Prime_Phrase,794,62,829.02,4,13.37,207.26,7.81,6.45
+"""t-shirts suppliers""",Phrase match,AU_Generic_P-V_Apparel,Tops_Suppliers_Phrase,1393,147,822.95,0,5.6,,10.55,0.0
+"""computers for business""",Phrase match,AU_Generic_P-V_Electronics,Computers_Phrase,3592,139,813.58,2,5.85,406.79,3.87,1.44
+"""bulk pet supplies""",Phrase match,AU_Generic_P-V_Shops,Bulk_Pet Shop_Phrase,1799,142,791.66,0,5.58,,7.89,0.0
+"""suppliers companies""",Phrase match,AU_Generic,Suppliers_Enterprises_Phrase,1013,78,786.06,0,10.08,,7.7,0.0
+"""buy bulk sweets""",Phrase match,AU_Generic_P-V_Food,Sweets_Bulk_Phrase,2005,220,775.98,4,3.53,194.0,10.97,1.82
+"""makeup suppliers""",Phrase match,AU_Generic_P-V_Beauty,Makeup_Supplier_Phrase,1509,120,747.34,6,6.23,124.56,7.95,5.0
+"""foods wholesalers""",Phrase match,AU_Generic_P-V_Food,Food_Wholesalers_Phrase,1781,159,740.15,2,4.66,370.08,8.93,1.26
+"""bulk buy food""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,2154,262,729.32,5,2.78,145.86,12.16,1.91
+"""wholesale electronic products""",Phrase match,AU_Generic_P-V_Electronics,Electronics_Wholesale_Phrase,1337,93,708.69,9,7.62,78.74,6.96,9.68
+[amazon business account],Exact match,AU_Brand_Exact,Account_Exact,1848,605,698.86,85,1.16,8.22,32.74,14.05
+[amazon business australia],Exact match,AU_Brand_Exact,Pure_Exact,1138,446,694.64,51,1.56,13.62,39.19,11.43
+"""store fittings""",Phrase match,AU_Generic_P-V_Shops,Furniture_Phrase,1877,139,678.71,0,4.88,,7.41,0.0
+"""bulk skin care products""",Phrase match,AU_Generic_P-V_Beauty,Skin-Care_Bulk_Phrase,1529,185,677.28,5,3.66,135.46,12.1,2.7
+"""amazon business information""",Phrase match,AU_Brand_Phrase,Navigation_Phrase,1285,77,673.79,3,8.75,224.6,5.99,3.9
+"""bottles wholesale""",Phrase match,AU_Generic_P-V_Food,Drinks_Wholesale_Phrase,1081,135,657.25,4,4.87,164.31,12.49,2.96
+"""wholesale glassware""",Phrase match,AU_Generic_P-V_Food,Cultlery_Wholesale_Phrase,703,98,629.39,4,6.42,157.35,13.94,4.08
+[business cards],Exact match,AU_Generic,Office Supplies_Exact,945,65,609.69,0,9.38,,6.88,0.0
+"""bulk take out boxes""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Phrase,929,118,609.44,3,5.16,203.15,12.7,2.54
+"""amazon business""",Phrase match,AU_Brand_Phrase,Pure_ Phrase,806,79,600.58,3,7.6,200.19,9.8,3.8
+"""wholesale goods""",Phrase match,AU_Generic,Wholesales_Products_Phrase,743,70,595.0,0,8.5,,9.42,0.0
+"""drinks wholesale market""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,724,101,586.44,4,5.81,146.61,13.95,3.96
+"""bulk for shop""",Phrase match,AU_Generic_P-V_Shops,Bulk_Phrase,1579,107,581.97,0,5.44,,6.78,0.0
+"""amazon business prime""",Phrase match,AU_Brand_Phrase,Prime_Phrase,605,49,561.33,2,11.46,280.67,8.1,4.08
+"""bulk chocolate""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,1157,154,546.64,0,3.55,,13.31,0.0
+"""office supplies""",Phrase match,AU_Generic_P-V_Office,Office_Phrase,2448,180,543.8,0,3.02,,7.35,0.0
+"""bulk water bottles""",Phrase match,AU_Generic_P-V_Food,Drinks_Bulk_Phrase,846,126,536.46,7,4.26,76.64,14.89,5.56
+"""office furniture""",Phrase match,AU_Generic_P-V_Office,Furniture_Phrase,1754,189,530.0,0,2.8,,10.78,0.0
+"""cleaning buy""",Phrase match,AU_Generic_P-V_Janitorial,Purchasing_Phrase,2089,121,519.66,0,4.29,,5.79,0.0
+"""hospitality equipment""",Phrase match,AU_Generic_P-V_Hospitality,Hospitality_Phrase,1411,124,518.55,0,4.18,,8.79,0.0
+[how to create an amazon business account],Exact match,AU_Brand_Exact,Navigation_Exact,221,56,514.69,9,9.19,57.19,25.34,16.07
+"""wholesale equipment""",Phrase match,AU_Generic,Wholesales_Products_Phrase,672,89,507.03,0,5.7,,13.24,0.0
+"""wholesaler""",Phrase match,AU_Generic,Wholesalers_Phrase,574,42,503.76,0,11.99,,7.32,0.0
+"""bulk buy easter eggs""",Phrase match,AU_Generic_P-V_Food,Sweets_Bulk_Phrase,681,83,494.58,4,5.96,123.65,12.19,4.82
+"""commercial kitchen supplies""",Phrase match,AU_Generic_P-V_Food,Food_Suppliers_Phrase,979,109,486.19,0,4.46,,11.13,0.0
+"""wholesale foodstuffs""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,1304,109,476.21,0,4.37,,8.36,0.0
+[amazon business au],Exact match,AU_Brand_Exact,Pure_Exact,300,54,476.04,2,8.82,238.02,18.0,3.7
+"""hotel accessories""",Phrase match,AU_Generic_P-V_Hospitality,Products_Phrase,940,73,472.17,0,6.47,,7.77,0.0
+"""cosmetics wholesaler""",Phrase match,AU_Generic_P-V_Beauty,Wholesalers_Cosmetics_Phrase,1164,92,469.59,2,5.1,234.8,7.9,2.17
+"""office equipment""",Phrase match,AU_Generic_P-V_Office,Office_Phrase,1565,95,469.33,0,4.94,,6.07,0.0
+"""wholesale foods""",Phrase match,AU_Generic_P-V_Food,Food_Wholesale_Phrase,1032,114,466.98,3,4.1,155.66,11.05,2.63
+"""business cards online""",Phrase match,AU_Generic_P-V_Office,Office-Supplies_Phrase,1350,76,460.25,0,6.06,,5.63,0.0
+"""items for companies""",Phrase match,AU_Generic,Enterprises_Products_Phrase,703,66,458.1,0,6.94,,9.39,0.0
+"""home office products""",Phrase match,AU_Generic_P-V_Office,Home-Office_Phrase,1243,95,441.49,0,4.65,,7.64,0.0
+[how to set up a business amazon account],Exact match,AU_Brand_Exact,Navigation_Exact,176,38,441.41,4,11.62,110.35,21.59,10.53
+"""wholesale items""",Phrase match,AU_Generic,Wholesales_Products_Phrase,377,49,439.88,0,8.98,,13.0,0.0
+"""headwear distributors""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Distributors_Phrase,675,80,435.06,0,5.44,,11.85,0.0
+"""cleaning distributors""",Phrase match,AU_Generic_P-V_Janitorial,Distributors_Phrase,1119,72,417.03,0,5.79,,6.43,0.0
+"""commercial smart tv""",Phrase match,AU_Generic_P-V_Electronics,Televisions_Phrase,1132,56,411.35,1,7.35,411.35,4.95,1.79
+"""commercial take out containers""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Phrase,1446,115,411.29,4,3.58,102.82,7.95,3.48
+"""sportswear suppliers""",Phrase match,AU_Generic_P-V_Apparel,Sportware_Suppliers_Phrase,856,66,408.39,0,6.19,,7.71,0.0
+"""bulk beverages""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,823,131,400.92,0,3.06,,15.92,0.0
+"""bulk drinks""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,760,130,393.9,1,3.03,393.9,17.11,0.77
+"""amazon au business""",Phrase match,AU_Brand_Phrase,Pure_ Phrase,512,48,391.68,3,8.16,130.56,9.38,6.25
+"""bulk buy sweets""",Phrase match,AU_Generic_P-V_Food,Sweets_Bulk_Phrase,761,100,385.63,1,3.86,385.63,13.14,1.0
+"""au suppliers""",Phrase match,AU_Generic,Suppliers_Phrase,731,79,385.58,0,4.88,,10.81,0.0
+"""jars wholesale""",Phrase match,AU_Generic_P-V_Food,Plates_Wholesale_Phrase,571,87,384.42,2,4.42,192.21,15.24,2.3
+"""wholesale chocolate""",Phrase match,AU_Generic_P-V_Food,Food_Wholesale_Phrase,361,50,383.17,0,7.66,,13.85,0.0
+"""other suppliers""",Phrase match,AU_Generic_P-V_Apparel,Hosiery & Socks_Suppliers_Phrase,1178,77,378.96,0,4.92,,6.54,0.0
+"""foodstuffs wholesale""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,787,71,377.15,1,5.31,377.15,9.02,1.41
+"""nail care products distributors""",Phrase match,AU_Generic_P-V_Beauty,Nail-Care_Distributors_Phrase,559,67,372.91,2,5.57,186.46,11.99,2.99
+"""wholesale sportswear""",Phrase match,AU_Generic_P-V_Apparel,Sportware_Wholesales_Phrase,679,57,371.37,0,6.52,,8.39,0.0
+"""suppliers products""",Phrase match,AU_Generic,Suppliers_Products_Phrase,646,53,370.54,0,6.99,,8.2,0.0
+"""wholesale accessories""",Phrase match,AU_Generic_P-V_Shops,Accessories_Wholesale_Phrase,680,60,362.53,0,6.04,,8.82,0.0
+[amazon business registration],Exact match,AU_Brand_Exact,Account_Exact,148,36,353.47,3,9.82,117.82,24.32,8.33
+"""socks distributors""",Phrase match,AU_Generic_P-V_Apparel,Hosiery & Socks_Distributors_Phrase,465,61,346.91,0,5.69,,13.12,0.0
+"""chocolate wholesalers""",Phrase match,AU_Generic_P-V_Food,Food_Wholesalers_Phrase,412,57,337.12,0,5.91,,13.83,0.0
+"""bulk easter sweets""",Phrase match,AU_Generic_P-V_Food,Sweets_Bulk_Phrase,535,77,335.15,0,4.35,,14.39,0.0
+"""drinks wholesalers""",Phrase match,AU_Generic_P-V_Food,Food_Wholesalers_Phrase,420,61,334.82,0,5.49,,14.52,0.0
+"""equipment hospitality""",Phrase match,AU_Generic_P-V_Hospitality,Hospitality_Phrase,1032,86,330.53,0,3.84,,8.33,0.0
+"""hats wholesale""",Phrase match,AU_Generic_P-V_Apparel,Outerwear_Wholesales_Phrase,602,53,328.66,0,6.2,,8.8,0.0
+"""wholesale soft drinks""",Phrase match,AU_Generic_P-V_Food,Drinks_Wholesale_Phrase,459,57,327.43,2,5.74,163.72,12.42,3.51
+"""tote bags distributors""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Distributors_Phrase,452,52,324.53,0,6.24,,11.5,0.0
+"""office filing system""",Phrase match,AU_Generic_P-V_Office,Office_Phrase,926,53,323.97,0,6.11,,5.72,0.0
+"""business cards business""",Phrase match,AU_Generic_P-V_Office,Office-Supplies_Phrase,944,53,319.47,0,6.03,,5.61,0.0
+"""accessories for companies""",Phrase match,AU_Generic,Enterprises_Phrase,459,46,319.16,0,6.94,,10.02,0.0
+[business prime],Exact match,AU_Brand_Exact,Prime_Exact,300,78,315.56,3,4.05,105.19,26.0,3.85
+"""tissue paper distributor""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Distributor_Phrase,546,52,308.99,0,5.94,,9.52,0.0
+"""wholesale drinks""",Phrase match,AU_Generic_P-V_Food,Food_Wholesale_Phrase,324,50,307.16,0,6.14,,15.43,0.0
+"""amazon business delivery""",Phrase match,AU_Brand_Phrase,Navigation_Phrase,300,32,306.85,2,9.59,153.43,10.67,6.25
+"""b2b products""",Phrase match,AU_Generic,B2B_Products_Phrase,464,30,306.35,0,10.21,,6.47,0.0
+"""beverages wholesale""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,251,44,305.93,0,6.95,,17.53,0.0
+[amazon business prime cost],Exact match,AU_Brand_Exact,Prime_Exact,118,23,303.89,0,13.21,,19.49,0.0
+"""buy commercial equipment""",Phrase match,AU_Generic,Commercial Customers_Products_Phrase,751,50,301.87,0,6.04,,6.66,0.0
+"""bulk party""",Phrase match,AU_Generic_P-V_Celebrations,Party_Bulk_Phrase,553,51,300.77,3,5.9,100.26,9.22,5.88
+[amazon business account au],Exact match,AU_Brand_Exact,Account_Exact,172,69,297.49,10,4.31,29.75,40.12,14.49
+"""wholesalers toys""",Phrase match,AU_Generic_P-V_Shops,Toys Shop_Wholesale_Phrase,597,59,294.72,0,5.0,,9.88,0.0
+[bulk suppliers],Exact match,AU_Generic,Bulk_Suppliers_Exact,305,30,294.64,0,9.82,,9.84,0.0
+"""items companies""",Phrase match,AU_Generic,Enterprises_Products_Phrase,429,30,293.93,0,9.8,,6.99,0.0
+"""companies business""",Phrase match,AU_Generic,Enterprises_Shop_Phrase,510,35,283.21,0,8.09,,6.86,0.0
+"""online shop for companies""",Phrase match,AU_Generic,Enterprises_Shop_Phrase,665,41,282.0,0,6.88,,6.17,0.0
+"""bulk bath products""",Phrase match,AU_Generic_P-V_Beauty,Skin-Care_Bulk_Phrase,385,57,281.38,1,4.94,281.38,14.81,1.75
+"""hats bulk""",Phrase match,AU_Generic_P-V_Apparel,Outerwear_Bulk_Phrase,527,50,279.0,0,5.58,,9.49,0.0
+"""bulk for store""",Phrase match,AU_Generic_P-V_Shops,Generic_Bulk_Phrase,928,54,278.19,0,5.15,,5.82,0.0
+"""t-shirts distributors""",Phrase match,AU_Generic_P-V_Apparel,Tops_Distributors_Phrase,403,56,277.73,0,4.96,,13.9,0.0
+"""bulk paper products""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Bulk_Phrase,553,39,270.55,0,6.94,,7.05,0.0
+"""bulk cleaning supplies""",Phrase match,AU_Generic_P-V_Janitorial,Supply_Bulk_Phrase,860,48,270.51,0,5.64,,5.58,0.0
+"""hospitality supplies""",Phrase match,AU_Generic_P-V_Hospitality,Hospitality_Phrase,687,51,266.77,0,5.23,,7.42,0.0
+"""bulk herbs""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,514,58,266.68,1,4.6,266.68,11.28,1.72
+"""bulk shampoo""",Phrase match,AU_Generic_P-V_Beauty,Hair-Styling_Bulk_Phrase,499,63,265.88,0,4.22,,12.63,0.0
+"""wholesale toilet paper""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Wholesale_Phrase,317,37,265.87,0,7.19,,11.67,0.0
+"""wholesale cooking ingredients""",Phrase match,AU_Generic_P-V_Food,Food_Wholesale_Phrase,512,68,264.41,0,3.89,,13.28,0.0
+"""business cards vendor""",Phrase match,AU_Generic,Office Supplies_Phrase,502,41,262.14,0,6.39,,8.17,0.0
+"""commercial tv screens""",Phrase match,AU_Generic_P-V_Electronics,Televisions_Phrase,585,54,261.6,1,4.84,261.6,9.23,1.85
+"""wholesale fabrics""",Phrase match,AU_Generic_P-V_Materials,Wholesales_Textiles_Phrase,567,49,259.45,0,5.29,,8.64,0.0
+"""professional vacuums""",Phrase match,AU_Generic_P-V_Janitorial,Floor-Care_Phrase,720,55,258.14,0,4.69,,7.64,0.0
+"""laptops for business""",Phrase match,AU_Generic_P-V_Electronics,Computers_Phrase,1240,57,255.56,0,4.48,,4.6,0.0
+[amazon business benefits],Exact match,AU_Brand_Exact,Account_Exact,144,23,254.7,2,11.07,127.35,15.97,8.7
+"""bakery box suppliers""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Suppliers_Phrase,135,22,254.27,1,11.56,254.27,16.3,4.55
+"""computers distributor""",Phrase match,AU_Generic_P-V_Electronics,Computers_Distributor_Phrase,511,38,248.26,3,6.53,82.75,7.44,7.89
+"""bulk canned food""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,441,46,247.98,2,5.39,123.99,10.43,4.35
+[amazon business account vs personal],Exact match,AU_Brand_Exact,Account_Exact,164,14,246.54,0,17.61,,8.54,0.0
+"""toilet tissue distributor""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Distributor_Phrase,278,24,241.11,0,10.05,,8.63,0.0
+"""home office essentials""",Phrase match,AU_Generic_P-V_Office,Home-Office_Phrase,617,46,240.48,0,5.23,,7.46,0.0
+"""professional floor mats""",Phrase match,AU_Generic_P-V_Janitorial,Floor-Care_Phrase,646,42,240.32,0,5.72,,6.5,0.0
+[amazon business information],Exact match,AU_Brand_Exact,Navigation_Exact,176,23,236.84,1,10.3,236.84,13.07,4.35
+"""office products""",Phrase match,AU_Generic_P-V_Office,Office_Phrase,576,38,234.63,0,6.17,,6.6,0.0
+"""bulk fresh foods""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,468,37,231.44,1,6.26,231.44,7.91,2.7
+"""bulk biscuits""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,366,42,231.23,2,5.51,115.62,11.48,4.76
+"""purchasing large quantities""",Phrase match,AU_Generic,Bulk_Buy_Phrase,264,31,231.1,0,7.45,,11.74,0.0
+"""amazon business registration""",Phrase match,AU_Brand_Phrase,Account_ Phrase,121,19,230.21,0,12.12,,15.7,0.0
+"""air fresheners distributor""",Phrase match,AU_Generic_P-V_Janitorial,Odour_Distributor_Phrase,285,40,227.63,0,5.69,,14.04,0.0
+"""equipment for companies""",Phrase match,AU_Generic,Enterprises_Products_Phrase,422,24,226.55,0,9.44,,5.69,0.0
+"""false eyelashes suppliers""",Phrase match,AU_Generic_P-V_Beauty,Makeup_Supplier_Phrase,278,36,224.99,2,6.25,112.5,12.95,5.56
+[amazon business cost],Exact match,AU_Brand_Exact,Pure_Exact,78,17,222.46,2,13.09,111.23,21.79,11.76
+"""electronics bulk""",Phrase match,AU_Generic_P-V_Shops,Electronics_Bulk_Phrase,504,39,221.82,0,5.69,,7.74,0.0
+"""hair wholesale""",Phrase match,AU_Generic_P-V_Beauty,Hair-Appliances_Wholesale_Phrase,506,49,219.62,1,4.48,219.62,9.68,2.04
+"""office electronics""",Phrase match,AU_Generic_P-V_Office,Office_Phrase,673,51,219.37,0,4.3,,7.58,0.0
+"""commercial trays""",Phrase match,AU_Generic_P-V_Food,Plates_Phrase,646,46,219.21,0,4.77,,7.12,0.0
+"""laundry supplies""",Phrase match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Phrase,528,47,218.57,0,4.65,,8.9,0.0
+"""bulk wipes""",Phrase match,AU_Generic_P-V_Janitorial,Tools_Bulk_Phrase,555,34,217.31,0,6.39,,6.13,0.0
+"""home office supplies""",Phrase match,AU_Generic_P-V_Office,Home-Office_Phrase,756,61,216.71,0,3.55,,8.07,0.0
+[amazon business account cost],Exact match,AU_Brand_Exact,Account_Exact,98,20,216.63,1,10.83,216.63,20.41,5.0
+"""bulk detergent""",Phrase match,AU_Generic_P-V_Janitorial,Detergent_Bulk_Phrase,613,44,215.63,0,4.9,,7.18,0.0
+"""order stationery""",Phrase match,AU_Generic_P-V_Office,Stationery_Phrase,1056,60,215.12,0,3.59,,5.68,0.0
+"""bulk foods""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,743,90,212.97,0,2.37,,12.11,0.0
+"""apparel suppliers""",Phrase match,AU_Generic_P-V_Shops,Suppliers_Clothing_Phrase,477,33,212.79,0,6.45,,6.92,0.0
+"""suppliers toys""",Phrase match,AU_Generic_P-V_Shops,Toys Shop_Suppliers_Phrase,155,20,212.35,0,10.62,,12.9,0.0
+[amazon business account australia],Exact match,AU_Brand_Exact,Account_Exact,222,65,211.67,10,3.26,21.17,29.28,15.38
+"""bulk seasoning""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,639,50,208.08,4,4.16,52.02,7.82,8.0
+"""drinks wholesaler""",Phrase match,AU_Generic_P-V_Food,Wholesalers_Food_Phrase,322,37,205.94,1,5.57,205.94,11.49,2.7
+"""detergent distributor""",Phrase match,AU_Generic_P-V_Janitorial,Detergent_Distributor_Phrase,449,38,203.14,0,5.35,,8.46,0.0
+"""shoes distributors""",Phrase match,AU_Generic_P-V_Apparel,Shoes_Distributors_Phrase,309,39,201.5,0,5.17,,12.62,0.0
+"""bulk fruit juice""",Phrase match,AU_Generic_P-V_Food,Drinks_Bulk_Phrase,266,24,198.19,0,8.26,,9.02,0.0
+"""bulk nail accessories""",Phrase match,AU_Generic_P-V_Beauty,Nail-Care_Bulk_Phrase,395,45,192.02,0,4.27,,11.39,0.0
+[laptops for business],Exact match,AU_Generic_P-V_Electronics,Computers_Exact,808,32,191.61,1,5.99,191.61,3.96,3.13
+"""bulk seeds""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,266,32,189.47,0,5.92,,12.03,0.0
+"""bulk disposable tableware""",Phrase match,AU_Generic_P-V_Food,Cultlery_Bulk_Phrase,543,61,188.53,0,3.09,,11.23,0.0
+"""bulk baby accessories""",Phrase match,AU_Generic_P-V_Apparel,Accessories Baby_Bulk_Phrase,306,52,186.84,0,3.59,,16.99,0.0
+"""hoodies distributors""",Phrase match,AU_Generic_P-V_Apparel,Tops_Distributors_Phrase,223,35,183.69,0,5.25,,15.7,0.0
+"""amazon business cost""",Phrase match,AU_Brand_Phrase,Pure_ Phrase,76,15,183.43,0,12.23,,19.74,0.0
+"""buy bulk online""",Phrase match,AU_Generic,Bulk_Buy_Phrase,235,35,182.8,0,5.22,,14.89,0.0
+"""suppliers purchases""",Phrase match,AU_Generic,Suppliers_Products_Phrase,188,23,182.67,0,7.94,,12.23,0.0
+"""b2b distribution""",Phrase match,AU_Generic,B2B_Enterprise_Phrase,118,13,181.17,0,13.94,,11.02,0.0
+[company items],Exact match,AU_Generic,Enterprises_Products_Exact,211,23,180.6,0,7.85,,10.9,0.0
+"""distributor supply""",Phrase match,AU_Generic,Procurement_Distributors_Phrase,135,12,180.41,0,15.03,,8.89,0.0
+"""storage wholesale""",Phrase match,AU_Generic_P-V_Crafts,Professional-Tools_Wholesale_Phrase,215,32,178.35,0,5.57,,14.88,0.0
+"""purchasing for companies""",Phrase match,AU_Generic,Purchasing_Enterprises_Phrase,289,18,177.25,0,9.85,,6.23,0.0
+[buy bulk],Exact match,AU_Generic,Bulk_Buy_Exact,230,24,176.3,0,7.35,,10.43,0.0
+"""beautician wholesaler""",Phrase match,AU_Generic_P-V_Beauty,Wholesalers_Cosmetics_Phrase,451,41,171.68,0,4.19,,9.09,0.0
+[business prime account cost],Exact match,AU_Brand_Exact,Prime_Exact,86,16,169.59,2,10.6,84.8,18.6,12.5
+"""bulk oils""",Phrase match,AU_Generic_P-V_Food,Condiments_Bulk_Phrase,367,42,168.1,1,4.0,168.1,11.44,2.38
+"""distributor industry""",Phrase match,AU_Generic,Distributors_Enterprises_Phrase,182,14,167.44,0,11.96,,7.69,0.0
+"""bulk spray bottles""",Phrase match,AU_Generic_P-V_Janitorial,Tools_Bulk_Phrase,270,31,166.92,0,5.38,,11.48,0.0
+"""socks suppliers""",Phrase match,AU_Generic_P-V_Apparel,Hosiery & Socks_Suppliers_Phrase,246,27,166.64,0,6.17,,10.98,0.0
+"""bulk soap""",Phrase match,AU_Generic_P-V_Janitorial,Soap_Bulk_Phrase,491,33,164.6,0,4.99,,6.72,0.0
+[professional vacuums],Exact match,AU_Generic_P-V_Janitorial,Floor-Care_Exact,433,27,164.14,0,6.08,,6.24,0.0
+[amazon business account benefits],Exact match,AU_Brand_Exact,Account_Exact,106,20,162.5,1,8.13,162.5,18.87,5.0
+"""glassware wholesalers""",Phrase match,AU_Generic_P-V_Food,Cultlery_Wholesalers_Phrase,191,29,161.66,2,5.57,80.83,15.18,6.9
+"""bulk trays""",Phrase match,AU_Generic_P-V_Food,Plates_Bulk_Phrase,278,26,160.62,1,6.18,160.62,9.35,3.85
+"""bulk accessories""",Phrase match,AU_Generic_P-V_Shops,Accessories_Bulk_Phrase,430,34,160.4,0,4.72,,7.91,0.0
+"""bulk boxed chocolate""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,279,37,160.03,2,4.33,80.02,13.26,5.41
+"""commercial food warmers""",Phrase match,AU_Generic_P-V_Food,Serving Line_Phrase,412,18,159.28,0,8.85,,4.37,0.0
+[bulk cleaning],Exact match,AU_Generic_P-V_Janitorial,Products_Bulk_Exact,230,22,157.48,0,7.16,,9.57,0.0
+[how to get amazon business account],Exact match,AU_Brand_Exact,Navigation_Exact,115,20,157.25,2,7.86,78.63,17.39,10.0
+[business amazon],Exact match,AU_Brand_Exact,Pure_Exact,232,72,155.44,2,2.16,77.72,31.03,2.78
+"""b2b wholesale""",Phrase match,AU_Generic,B2B_Wholesales_Phrase,149,25,155.27,0,6.21,,16.78,0.0
+"""company purchasing""",Phrase match,AU_Generic,Purchasing_Enterprises_Phrase,250,27,154.51,0,5.72,,10.8,0.0
+"""buy wholesale""",Phrase match,AU_Generic,Wholesales_Buy_Phrase,221,25,153.55,0,6.14,,11.31,0.0
+"""easter egg bulk buy""",Phrase match,AU_Generic_P-V_Food,Sweets_Bulk_Phrase,194,34,152.06,0,4.47,,17.53,0.0
+"""professional mops""",Phrase match,AU_Generic_P-V_Janitorial,Floor-Care_Phrase,468,37,151.06,0,4.08,,7.91,0.0
+"""b2b shop""",Phrase match,AU_Generic,B2B_Marketplace_Phrase,246,19,150.98,0,7.95,,7.72,0.0
+"""bulk fruit""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,282,25,150.49,1,6.02,150.49,8.87,4.0
+"""bulk condiments""",Phrase match,AU_Generic_P-V_Food,Condiments_Bulk_Phrase,243,29,147.96,0,5.1,,11.93,0.0
+"""wholesale cups""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Wholesale_Phrase,260,40,147.68,0,3.69,,15.38,0.0
+[setup amazon business account],Exact match,AU_Brand_Exact,Account_Exact,41,12,147.42,3,12.28,49.14,29.27,25.0
+"""bulk plates""",Phrase match,AU_Generic_P-V_Food,Plates_Bulk_Phrase,272,42,145.16,0,3.46,,15.44,0.0
+"""bulk snacks""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,204,37,144.99,0,3.92,,18.14,0.0
+[business prime duo],Exact match,AU_Brand_Exact,Prime_Exact,141,14,143.72,1,10.27,143.72,9.93,7.14
+"""wholesale gloves""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Wholesales_Phrase,153,20,143.57,0,7.18,,13.07,0.0
+"""bulk nail polish""",Phrase match,AU_Generic_P-V_Beauty,Nail-Care_Bulk_Phrase,119,22,142.88,1,6.49,142.88,18.49,4.55
+[easter egg bulk buy],Exact match,AU_Generic_P-V_Food,Sweets_Bulk_Exact,252,28,142.87,0,5.1,,11.11,0.0
+"""coffee wholesalers""",Phrase match,AU_Generic_P-V_Food,Food_Wholesalers_Phrase,320,32,142.58,1,4.46,142.58,10.0,3.13
+"""commercial computers""",Phrase match,AU_Generic_P-V_Electronics,Computers_Phrase,576,11,142.36,0,12.94,,1.91,0.0
+"""cell phone for business""",Phrase match,AU_Generic_P-V_Electronics,Cell-Phones_Phrase,311,25,142.15,1,5.69,142.15,8.04,4.0
+[clothing bulk],Exact match,AU_Generic_P-V_Shops,Clothing_Bulk_Exact,286,23,141.2,0,6.14,,8.04,0.0
+[cleaning buy],Exact match,AU_Generic_P-V_Janitorial,Purchasing_Exact,424,24,139.43,0,5.81,,5.66,0.0
+"""business prime""",Phrase match,AU_Brand_Phrase,Prime_Phrase,244,12,137.85,0,11.49,,4.92,0.0
+"""gift wholesaler""",Phrase match,AU_Generic_P-V_Shops,Wholesalers_Gifts_Phrase,259,29,136.55,0,4.71,,11.2,0.0
+"""furniture for shops""",Phrase match,AU_Generic_P-V_Shops,Furniture_Phrase,371,30,136.34,0,4.54,,8.09,0.0
+"""seller stationery""",Phrase match,AU_Generic_P-V_Office,Sellers_Phrase,251,18,136.28,0,7.57,,7.17,0.0
+[cleaning products],Exact match,AU_Generic_P-V_Janitorial,Products_Exact,432,28,136.07,0,4.86,,6.48,0.0
+[amazon business account fees],Exact match,AU_Brand_Exact,Account_Exact,81,11,134.92,0,12.27,,13.58,0.0
+"""paper wholesale""",Phrase match,AU_Generic_P-V_Office,Paper_Wholesale_Phrase,188,18,133.88,0,7.44,,9.57,0.0
+"""bulk laundry supplies""",Phrase match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Bulk_Phrase,337,22,133.09,0,6.05,,6.53,0.0
+"""bulk moisturizer""",Phrase match,AU_Generic_P-V_Beauty,Skin-Care_Bulk_Phrase,131,17,132.85,0,7.81,,12.98,0.0
+[commercial take out containers],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Exact,431,43,132.36,0,3.08,,9.98,0.0
+"""bulk toilet paper""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Bulk,334,30,129.53,0,4.32,,8.98,0.0
+"""professional work gloves""",Phrase match,AU_Generic_P-V_Safety,Equipment-Gear_Phrase,384,33,128.57,0,3.9,,8.59,0.0
+"""oils suppliers""",Phrase match,AU_Generic_P-V_Food,Condiments_Suppliers_Phrase,228,30,126.38,0,4.21,,13.16,0.0
+"""bulk hand soaps""",Phrase match,AU_Generic_P-V_Janitorial,Soap_Bulk_Phrase,343,20,125.39,0,6.27,,5.83,0.0
+"""pet supplies distributors""",Phrase match,AU_Generic_P-V_Shops,Pet Shop_Distributors_Phrase,109,16,122.98,0,7.69,,14.68,0.0
+"""toilet paper distributor""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Distributor_Phrase,172,19,122.7,0,6.46,,11.05,0.0
+"""equipment for businesses""",Phrase match,AU_Generic,Enterprises_Products_Phrase,262,22,121.21,0,5.51,,8.4,0.0
+"""hotel supplies online""",Phrase match,AU_Generic_P-V_Hospitality,Products_Phrase,276,21,119.46,0,5.69,,7.61,0.0
+"""wholesale event supplies""",Phrase match,AU_Generic_P-V_Celebrations,Wholesale_Phrase,214,25,117.67,2,4.71,58.84,11.68,8.0
+"""sunglasses distributors""",Phrase match,AU_Generic_P-V_Apparel,Eyewear_Distributors_Phrase,227,18,117.14,0,6.51,,7.93,0.0
+[wholesale foodstuffs],Exact match,AU_Generic_P-V_Food,Wholesales_Food_Exact,220,25,115.73,0,4.63,,11.36,0.0
+"""bulk flours""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,433,28,115.73,0,4.13,,6.47,0.0
+"""cooking suppliers""",Phrase match,AU_Generic_P-V_Food,Food_Suppliers_Phrase,376,26,114.91,2,4.42,57.46,6.91,7.69
+"""wholesale cooking""",Phrase match,AU_Generic_P-V_Food,Food_Wholesale_Phrase,200,23,113.62,0,4.94,,11.5,0.0
+"""vending machine distributor""",Phrase match,AU_Generic_P-V_Food,Vending_Distributor_Phrase,374,47,112.84,0,2.4,,12.57,0.0
+"""books wholesalers""",Phrase match,AU_Generic_P-V_Shops,Wholesalers_Books Shop_Phrase,182,20,111.07,0,5.55,,10.99,0.0
+[amazon business account sign in],Exact match,AU_Brand_Exact,Navigation_Exact,83,21,110.35,2,5.25,55.18,25.3,9.52
+"""tumblers wholesalers""",Phrase match,AU_Generic_P-V_Food,Glassware_Wholesalers_Phrase,67,10,110.23,0,11.02,,14.93,0.0
+"""hair accessories bulk""",Phrase match,AU_Generic_P-V_Shops,Accessories_Bulk_Phrase,214,18,109.8,0,6.1,,8.41,0.0
+"""soap supplier""",Phrase match,AU_Generic_P-V_Janitorial,Soap_Supplier_Phrase,153,21,109.45,0,5.21,,13.73,0.0
+"""sugar sellers""",Phrase match,AU_Generic_P-V_Food,Food_Sellers_Phrase,282,26,108.24,1,4.16,108.24,9.22,3.85
+"""distributors toy""",Phrase match,AU_Generic_P-V_Shops,Toys Shop_Distributors_Phrase,151,26,106.99,0,4.12,,17.22,0.0
+"""distributor companies""",Phrase match,AU_Generic,Distributors_Enterprises_Phrase,279,18,106.82,0,5.93,,6.45,0.0
+"""bulk dried fruit""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,211,18,106.37,0,5.91,,8.53,0.0
+[amazon prime business],Exact match,AU_Brand_Exact,Prime_Exact,142,51,104.27,4,2.04,26.07,35.92,7.84
+[bulk toilet paper],Exact match,AU_Generic_P-V_Janitorial,Paper_Bulk_Exact,235,21,104.15,0,4.96,,8.94,0.0
+"""butcher wholesale""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,216,13,103.88,0,7.99,,6.02,0.0
+"""bags suppliers""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Suppliers_Phrase,134,22,103.67,0,4.71,,16.42,0.0
+"""coffee machines sellers""",Phrase match,AU_Generic_P-V_Food,Coffee Machines_Sellers_Phrase,285,32,102.49,0,3.2,,11.23,0.0
+"""ingredients wholesale""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,418,31,102.22,1,3.3,102.22,7.42,3.23
+[bulk for shop],Exact match,AU_Generic_P-V_Shops,Bulk_Exact,273,23,101.27,0,4.4,,8.42,0.0
+[bulk paper towels],Exact match,AU_Generic_P-V_Janitorial,Paper_Bulk_Exact,173,15,100.7,0,6.71,,8.67,0.0
+[bulk drinks],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,81,17,99.7,1,5.86,99.7,20.99,5.88
+[amazon au business prime],Exact match,AU_Brand_Exact,Prime_Exact,47,16,98.38,4,6.15,24.6,34.04,25.0
+"""bulk party decorations""",Phrase match,AU_Generic_P-V_Celebrations,Party_Bulk_Phrase,249,18,96.21,1,5.35,96.21,7.23,5.56
+"""baby clothing sets suppliers""",Phrase match,AU_Generic_P-V_Apparel,Accessories Baby_Suppliers_Phrase,173,24,95.98,0,4.0,,13.87,0.0
+"""bulk bins""",Phrase match,AU_Generic_P-V_Janitorial,Waste_Bulk_Phrase,188,13,94.91,0,7.3,,6.91,0.0
+"""store furniture""",Phrase match,AU_Generic_P-V_Shops,Furniture_Phrase,193,29,93.77,0,3.23,,15.03,0.0
+"""party decorations suppliers""",Phrase match,AU_Generic_P-V_Celebrations,Party_Suppliers_Phrase,176,18,93.44,2,5.19,46.72,10.23,11.11
+"""wholesale skin care products""",Phrase match,AU_Generic_P-V_Beauty,Skin-Care_Wholesale_Phrase,301,23,92.49,0,4.02,,7.64,0.0
+"""bulk disposable wipes""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Bulk_Phrase,160,15,92.33,0,6.16,,9.38,0.0
+"""cosmetic salon wholesaler""",Phrase match,AU_Generic_P-V_Beauty,Wholesalers_Cosmetics_Phrase,227,15,89.93,0,6.0,,6.61,0.0
+[create amazon business account],Exact match,AU_Brand_Exact,Account_Exact,59,24,89.88,4,3.74,22.47,40.68,16.67
+"""wholesale lamps""",Phrase match,AU_Generic_P-V_Beauty,Hair-Appliances_Wholesale_Phrase,112,16,87.81,0,5.49,,14.29,0.0
+[foods wholesalers],Exact match,AU_Generic_P-V_Food,Food_Wholesalers_Exact,139,16,86.73,0,5.42,,11.51,0.0
+"""bulk waxing""",Phrase match,AU_Generic_P-V_Beauty,Hair-Removal_Bulk_Phrase,117,18,86.65,0,4.81,,15.38,0.0
+[amazon business login],Exact match,AU_Brand_Exact,Navigation_Exact,505,172,85.32,5,0.5,17.06,34.06,2.91
+[office accessories],Exact match,AU_Generic_P-V_Office,Office_Exact,294,19,84.54,0,4.45,,6.46,0.0
+[food wholesale market],Exact match,AU_Generic_P-V_Food,Wholesales_Food_Exact,180,26,83.62,0,3.22,,14.44,0.0
+[wholesale suppliers],Exact match,AU_Generic,Wholesales_Suppliers_Exact,34,7,83.46,0,11.92,,20.59,0.0
+"""umbrellas distributors""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Distributors_Phrase,84,19,83.37,0,4.39,,22.62,0.0
+"""gastronomy tools""",Phrase match,AU_Generic_P-V_Food,Tools_Phrase,334,20,82.76,1,4.14,82.76,5.99,5.0
+[amazon business account review],Exact match,AU_Brand_Exact,Account_Exact,97,4,82.61,0,20.65,,4.12,0.0
+[amazon business free],Exact match,AU_Brand_Exact,Account_Exact,90,7,82.59,0,11.8,,7.78,0.0
+[bulk cleaning supplies],Exact match,AU_Generic_P-V_Janitorial,Supply_Bulk_Exact,201,18,82.34,0,4.57,,8.96,0.0
+[bulk canned food],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,68,13,82.01,0,6.31,,19.12,0.0
+"""hotel equipment""",Phrase match,AU_Generic_P-V_Hospitality,Products_Phrase,158,13,80.57,0,6.2,,8.23,0.0
+[amazon business prime login],Exact match,AU_Brand_Exact,Prime_Exact,94,31,80.37,0,2.59,,32.98,0.0
+[wholesaler],Exact match,AU_Generic,Wholesalers_Exact,71,8,80.28,0,10.04,,11.27,0.0
+"""bulk disposable gloves""",Phrase match,AU_Generic_P-V_Janitorial,Gloves_Bulk_Phrase,195,18,80.11,0,4.45,,9.23,0.0
+"""dessert wholesale""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,201,10,80.02,0,8.0,,4.98,0.0
+"""skin care products distributors""",Phrase match,AU_Generic_P-V_Beauty,Skin-Care_Distributors_Phrase,243,16,79.89,1,4.99,79.89,6.58,6.25
+"""office supplies au""",Phrase match,AU_Generic_P-V_Office,Suppliers_Phrase,430,26,78.96,0,3.04,,6.05,0.0
+"""bulk canned goods""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,107,16,78.17,0,4.89,,14.95,0.0
+"""wholesale florist""",Phrase match,AU_Generic_P-V_Shops,Florist_Wholesale_Phrase,244,15,77.52,0,5.17,,6.15,0.0
+"""headwear suppliers""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Suppliers_Phrase,72,13,77.33,0,5.95,,18.06,0.0
+"""bulk presents""",Phrase match,AU_Generic_P-V_Shops,Bulk_Gifts_Phrase,133,14,77.02,0,5.5,,10.53,0.0
+[wholesale take out containers],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Wholesale_Exact,48,7,76.65,0,10.95,,14.58,0.0
+"""baby accessories suppliers""",Phrase match,AU_Generic_P-V_Apparel,Accessories Baby_Suppliers_Phrase,134,17,76.59,0,4.51,,12.69,0.0
+[commercial cake boxes],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Exact,182,21,75.88,2,3.61,37.94,11.54,9.52
+"""tv for conference room""",Phrase match,AU_Generic_P-V_Electronics,Televisions_Phrase,229,11,75.85,0,6.9,,4.8,0.0
+"""wholesale products for resale""",Phrase match,AU_Generic,Wholesales_Products_Phrase,118,17,75.72,0,4.45,,14.41,0.0
+"""computer parts distributor""",Phrase match,AU_Generic_P-V_Electronics,Computers_Distributor_Phrase,92,9,74.85,0,8.32,,9.78,0.0
+"""start-up equipment""",Phrase match,AU_Generic,Enterprises_Products_Phrase,57,8,74.59,0,9.32,,14.04,0.0
+"""clothing distributors""",Phrase match,AU_Generic_P-V_Shops,Clothing_Distributors_Phrase,199,17,74.59,0,4.39,,8.54,0.0
+"""sweaters distributors""",Phrase match,AU_Generic_P-V_Apparel,Tops_Distributors_Phrase,125,16,74.36,0,4.65,,12.8,0.0
+[bulk commercial toilet paper],Exact match,AU_Generic_P-V_Janitorial,Paper_Bulk_Exact,119,13,74.25,0,5.71,,10.92,0.0
+"""commercial serving trays""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Phrase,227,22,73.65,1,3.35,73.65,9.69,4.55
+"""industrial equipment""",Phrase match,AU_Generic_P-V_Industry,Products_Phrase,220,19,73.32,0,3.86,,8.64,0.0
+"""industrial laundry supplies""",Phrase match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Phrase,250,18,73.16,0,4.06,,7.2,0.0
+"""wholesale clothing""",Phrase match,AU_Generic,Wholesale_Phrase,64,8,72.99,0,9.12,,12.5,0.0
+"""bulk meat""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,204,12,72.8,0,6.07,,5.88,0.0
+"""electronic wholesale""",Phrase match,AU_Generic_P-V_Shops,Electronics_Wholesale_Phrase,136,12,72.77,0,6.06,,8.82,0.0
+[wholesale],Exact match,AU_Generic,Wholesale_Exact,125,9,72.65,0,8.07,,7.2,0.0
+"""professional carpet steamers""",Phrase match,AU_Generic_P-V_Janitorial,Floor-Care_Phrase,322,16,71.55,0,4.47,,4.97,0.0
+"""wholesale office""",Phrase match,AU_Generic_P-V_Office,Wholesale_Phrase,69,11,71.53,0,6.5,,15.94,0.0
+"""wholesale headwear""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Wholesales_Phrase,62,12,70.96,0,5.91,,19.35,0.0
+"""hotel supplies wholesale""",Phrase match,AU_Generic_P-V_Hospitality,Products_Wholesale_Phrase,59,6,70.94,0,11.82,,10.17,0.0
+"""wholesale baby accessories""",Phrase match,AU_Generic_P-V_Apparel,Swimwear_Wholesales_Phrase_Phrase_Phrase,52,11,70.87,0,6.44,,21.15,0.0
+"""bulk party bags""",Phrase match,AU_Generic_P-V_Celebrations,Party_Bulk_Phrase,151,14,70.72,0,5.05,,9.27,0.0
+"""bulk baking supplies""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,224,20,70.46,0,3.52,,8.93,0.0
+"""fabric wholesale""",Phrase match,AU_Generic_P-V_Materials,Wholesales_Textiles_Phrase,123,13,69.82,0,5.37,,10.57,0.0
+"""polo shirts distributors""",Phrase match,AU_Generic_P-V_Apparel,Tops_Distributors_Phrase,71,6,69.63,0,11.6,,8.45,0.0
+"""wholesale hospitality""",Phrase match,AU_Generic_P-V_Hospitality,Products_Wholesale_Phrase,206,16,68.69,0,4.29,,7.77,0.0
+"""professional amplifiers""",Phrase match,AU_Generic_P-V_Electronics,Power_Phrase,233,11,68.61,2,6.24,34.31,4.72,18.18
+[water bottles wholesale],Exact match,AU_Generic_P-V_Food,Drinks_Bulk_Exact,112,12,67.78,0,5.65,,10.71,0.0
+[au amazon business prime],Exact match,AU_Brand_Exact,Prime_Exact,38,10,67.28,0,6.73,,26.32,0.0
+[sweet shop bulk],Exact match,AU_Generic_P-V_Food,Sweets_Bulk_Exact,102,12,66.89,0,5.57,,11.76,0.0
+"""home office paper""",Phrase match,AU_Generic_P-V_Office,Home-Office_Phrase,175,10,66.84,0,6.68,,5.71,0.0
+"""toy wholesalers""",Phrase match,AU_Generic_P-V_Shops,Toys Shop_Wholesale_Phrase,75,9,66.76,0,7.42,,12.0,0.0
+"""gloves distributors""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Distributors_Phrase,131,12,65.61,0,5.47,,9.16,0.0
+"""bulk pots""",Phrase match,AU_Generic_P-V_Food,Cookware_Bulk_Phrase,196,18,65.33,0,3.63,,9.18,0.0
+"""bulk buy water""",Phrase match,AU_Generic_P-V_Food,Drinks_Bulk_Phrase,141,16,65.21,1,4.08,65.21,11.35,6.25
+"""bulk conditioner""",Phrase match,AU_Generic_P-V_Beauty,Hair-Styling_Bulk_Phrase,83,13,65.06,0,5.0,,15.66,0.0
+[drinks wholesale market],Exact match,AU_Generic_P-V_Food,Wholesales_Food_Exact,57,13,64.79,0,4.98,,22.81,0.0
+[wholesale canned goods],Exact match,AU_Generic_P-V_Food,Food_Wholesale_Exact,78,16,64.59,1,4.04,64.59,20.51,6.25
+[amazon for business prime],Exact match,AU_Brand_Exact,Prime_Exact,72,10,64.55,1,6.46,64.55,13.89,10.0
+"""companies online retailing""",Phrase match,AU_Generic,Enterprises_Shop_Phrase,294,14,64.44,0,4.6,,4.76,0.0
+"""tissues supplier""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Supplier_Phrase,110,12,63.87,0,5.32,,10.91,0.0
+"""product supply""",Phrase match,AU_Generic,Procurement_Products_Phrase,123,12,63.37,0,5.28,,9.76,0.0
+"""pasta wholesalers""",Phrase match,AU_Generic_P-V_Food,Food_Wholesalers_Phrase,45,5,63.37,0,12.67,,11.11,0.0
+"""wholesale mobile phone""",Phrase match,AU_Generic_P-V_Electronics,Cell-Phones_Wholesale_Phrase,92,10,63.0,0,6.3,,10.87,0.0
+"""water wholesalers""",Phrase match,AU_Generic_P-V_Food,Food_Wholesalers_Phrase,83,19,62.88,0,3.31,,22.89,0.0
+"""bulk headphones""",Phrase match,AU_Generic_P-V_Electronics,Headphones_Bulk_Phrase,101,8,62.37,0,7.8,,7.92,0.0
+"""bulk janitorial supplies""",Phrase match,AU_Generic_P-V_Janitorial,Supply_Bulk_Phrase,105,12,62.0,0,5.17,,11.43,0.0
+"""bulk commercial toilet paper""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Bulk_Phrase,89,11,61.77,0,5.62,,12.36,0.0
+"""wholesale appliances""",Phrase match,AU_Generic,Wholesales_Products_Phrase,71,5,61.73,0,12.35,,7.04,0.0
+[amazon business open account],Exact match,AU_Brand_Exact,Account_Exact,22,7,61.28,2,8.75,30.64,31.82,28.57
+"""book distributors""",Phrase match,AU_Generic_P-V_Shops,Book Shop_Distributors_Phrase,114,17,61.2,0,3.6,,14.91,0.0
+"""wipes distributor""",Phrase match,AU_Generic_P-V_Janitorial,Tools_Distributor_Phrase,80,7,60.92,0,8.7,,8.75,0.0
+[order books in bulk],Exact match,AU_Generic_P-V_Shops,Book Shop_Bulk_Exact,67,14,60.19,0,4.3,,20.9,0.0
+"""gift suppliers""",Phrase match,AU_Generic_P-V_Shops,Suppliers_Gifts_Phrase,96,11,59.78,0,5.43,,11.46,0.0
+"""toy distributors""",Phrase match,AU_Generic_P-V_Shops,Toys Shop_Distributors_Phrase,156,17,59.47,0,3.5,,10.9,0.0
+[bulk detergent],Exact match,AU_Generic_P-V_Janitorial,Detergent_Bulk_Exact,83,11,58.9,0,5.35,,13.25,0.0
+"""tote bags suppliers""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Suppliers_Phrase,118,14,58.6,0,4.19,,11.86,0.0
+"""cleaning wholesale""",Phrase match,AU_Generic_P-V_Janitorial,Wholesale_Phrase,216,15,58.59,0,3.91,,6.94,0.0
+"""hotel bathroom supplies""",Phrase match,AU_Generic_P-V_Hospitality,Products_Phrase,73,9,58.48,0,6.5,,12.33,0.0
+"""baby accessories distributors""",Phrase match,AU_Generic_P-V_Apparel,Underwear_Bulk_Phrase_Phrase,153,17,57.9,0,3.41,,11.11,0.0
+"""sweets suppliers""",Phrase match,AU_Generic_P-V_Food,Food_Suppliers_Phrase,170,15,57.57,0,3.84,,8.82,0.0
+"""bulk serving dishes""",Phrase match,AU_Generic_P-V_Food,Cultlery_Bulk_Phrase,97,14,57.08,0,4.08,,14.43,0.0
+[amazon business prime account],Exact match,AU_Brand_Exact,Prime_Exact,76,11,56.89,0,5.17,,14.47,0.0
+"""party accessories suppliers""",Phrase match,AU_Generic_P-V_Celebrations,Party_Suppliers_Phrase,84,6,56.33,0,9.39,,7.14,0.0
+"""bulk florist""",Phrase match,AU_Generic_P-V_Shops,Florist_Bulk_Phrase,74,12,56.28,0,4.69,,16.22,0.0
+"""wholesale boxed chocolate""",Phrase match,AU_Generic_P-V_Food,Food_Wholesale_Phrase,29,6,55.92,1,9.32,55.92,20.69,16.67
+"""sportswear distributors""",Phrase match,AU_Generic_P-V_Apparel,Underwear Men_Bulk_Phrase_Phrase,130,11,55.7,0,5.06,,8.46,0.0
+"""bulk straws""",Phrase match,AU_Generic_P-V_Food,Barware_Bulk_Phrase,44,8,55.31,0,6.91,,18.18,0.0
+[book wholesalers],Exact match,AU_Generic_P-V_Shops,Wholesalers_Books Shop,65,12,54.3,0,4.52,,18.46,0.0
+[commercial cleaning supply],Exact match,AU_Generic_P-V_Shops,Catalog_Exact,78,7,54.08,0,7.73,,8.97,0.0
+"""bulk disinfectants""",Phrase match,AU_Generic_P-V_Janitorial,Detergent_Bulk_Phrase,132,9,54.03,0,6.0,,6.82,0.0
+[amazon business prime au],Exact match,AU_Brand_Exact,Prime_Exact,39,11,53.86,1,4.9,53.86,28.21,9.09
+"""manufacturing items""",Phrase match,AU_Generic,Commercial Customers_Products_Phrase,98,6,53.75,0,8.96,,6.12,0.0
+"""business cards""",Phrase match,AU_Generic_P-V_Office,Office-Supplies_Phrase,261,14,53.45,0,3.82,,5.36,0.0
+"""bulk paper towels""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Bulk,111,8,53.43,0,6.68,,7.21,0.0
+"""bulk brushes""",Phrase match,AU_Generic_P-V_Beauty,Hair-Appliances_Bulk_Phrase,90,10,53.24,0,5.32,,11.11,0.0
+[bulk soft drinks],Exact match,AU_Generic_P-V_Food,Drinks_Bulk_Exact,76,10,52.94,1,5.29,52.94,13.16,10.0
+"""beauty parlour wholesaler""",Phrase match,AU_Generic_P-V_Beauty,Wholesalers_Cosmetics_Phrase,161,7,52.62,1,7.52,52.62,4.35,14.29
+[business cards vendor],Exact match,AU_Generic_P-V_Office,Office-Supplies_Exact,83,8,52.5,0,6.56,,9.64,0.0
+"""wholesale jackets""",Phrase match,AU_Generic_P-V_Apparel,Outerwear_Wholesales_Phrase,136,11,51.87,0,4.72,,8.09,0.0
+[janitorial products],Exact match,AU_Generic_P-V_Janitorial,Products_Exact,99,11,51.8,0,4.71,,11.11,0.0
+"""products start-ups""",Phrase match,AU_Generic,Enterprises_Products_Phrase,27,5,51.65,0,10.33,,18.52,0.0
+[wholesale meals],Exact match,AU_Generic_P-V_Food,Food_Wholesale_Exact,74,6,51.21,0,8.54,,8.11,0.0
+"""bulk pyjamas""",Phrase match,AU_Generic_P-V_Apparel,Sleepwear_Bulk_Phrase,18,5,49.93,0,9.99,,27.78,0.0
+"""bulk coats""",Phrase match,AU_Generic_P-V_Apparel,Outerwear_Bulk_Phrase,95,9,49.92,0,5.55,,9.47,0.0
+"""sweatshirts suppliers""",Phrase match,AU_Generic_P-V_Apparel,Tops_Suppliers_Phrase,133,11,49.54,0,4.5,,8.27,0.0
+"""bulk glassware""",Phrase match,AU_Generic_P-V_Food,Cultlery_Bulk_Phrase,133,21,49.01,1,2.33,49.01,15.79,4.76
+"""mens bulk polo shirts""",Phrase match,AU_Generic_P-V_Apparel,Tops Men_Bulk_Phrase,40,9,48.57,0,5.4,,22.5,0.0
+[office furniture],Exact match,AU_Generic_P-V_Office,Furniture_Exact,215,11,48.37,0,4.4,,5.12,0.0
+"""electrical suppliers""",Phrase match,AU_Generic_P-V_Crafts,Professional-Tools_Suppliers_Phrase,121,9,48.25,0,5.36,,7.44,0.0
+"""commercial purchasing""",Phrase match,AU_Generic,B2B_Distributors_Phrase,72,5,48.21,0,9.64,,6.94,0.0
+"""wholesale tissues""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Wholesale_Phrase,40,7,47.77,0,6.82,,17.5,0.0
+[wholesale headwear],Exact match,AU_Generic_P-V_Apparel,Accessories_Wholesales_Exact,41,12,47.43,0,3.95,,29.27,0.0
+[wholesale sportswear],Exact match,AU_Generic_P-V_Apparel,Sportware_Wholesales_Exact,86,7,47.21,0,6.74,,8.14,0.0
+"""wholesale bags""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Wholesales_Phrase,59,15,47.12,0,3.14,,25.42,0.0
+"""online platforms b2b""",Phrase match,AU_Generic,B2B_Marketplace_Phrase,198,7,46.47,0,6.64,,3.54,0.0
+"""equipment and supply""",Phrase match,AU_Generic,Procurement_Products_Phrase,116,6,46.31,0,7.72,,5.17,0.0
+[amazon business account login],Exact match,AU_Brand_Exact,Navigation_Exact,66,19,45.85,0,2.41,,28.79,0.0
+"""bulk trash liners""",Phrase match,AU_Generic_P-V_Janitorial,Waste_Bulk_Phrase,169,13,45.68,0,3.51,,7.69,0.0
+"""wholesale crisps""",Phrase match,AU_Generic_P-V_Food,Food_Wholesale_Phrase,43,8,45.42,0,5.68,,18.6,0.0
+"""pots wholesalers""",Phrase match,AU_Generic_P-V_Food,Cookware_Wholesalers_Phrase,93,10,45.09,0,4.51,,10.75,0.0
+[wholesale fragrance],Exact match,AU_Generic_P-V_Beauty,Fragrance_Wholesale_Exact,57,11,45.03,1,4.09,45.03,19.3,9.09
+"""equipment wholesale""",Phrase match,AU_Generic,Wholesales_Products_Phrase,50,8,44.89,0,5.61,,16.0,0.0
+"""wholesale oils""",Phrase match,AU_Generic_P-V_Food,Condiments_Wholesale_Phrase,58,11,44.48,0,4.04,,18.97,0.0
+"""products for start-ups""",Phrase match,AU_Generic,Enterprises_Products_Phrase,95,7,44.19,0,6.31,,7.37,0.0
+"""apparel bulk""",Phrase match,AU_Generic_P-V_Shops,Clothing_Bulk_Phrase,129,15,44.14,0,2.94,,11.63,0.0
+"""meat wholesale market""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,58,8,44.06,0,5.51,,13.79,0.0
+[bulk socks],Exact match,AU_Generic_P-V_Apparel,Hosiery & Socks_Bulk_Exact,28,5,44.06,0,8.81,,17.86,0.0
+[wholesaler for resellers],Exact match,AU_Generic,Resellers_Distributors_Exact,72,7,44.05,0,6.29,,9.72,0.0
+"""suppliers for companies""",Phrase match,AU_Generic,Suppliers_Enterprises_Phrase,28,3,43.96,0,14.65,,10.71,0.0
+[bulk paper towels],Exact match,AU_Generic_P-V_Janitorial,Paper_Bulk,100,7,43.77,0,6.25,,7.0,0.0
+[how to create a business amazon account],Exact match,AU_Brand_Exact,Account_Exact,25,3,43.75,1,14.58,43.75,12.0,33.33
+"""plastic supplier""",Phrase match,AU_Generic_P-V_Materials,Suppliers_Plastic_Phrase,120,14,43.71,0,3.12,,11.67,0.0
+[wholesale drinks],Exact match,AU_Generic_P-V_Food,Food_Wholesale_Exact,59,12,43.62,0,3.64,,20.34,0.0
+[wholesale sweets],Exact match,AU_Generic_P-V_Food,Food_Wholesale_Exact,54,9,43.38,0,4.82,,16.67,0.0
+"""book wholesales""",Phrase match,AU_Generic_P-V_Shops,Books Shop_Wholesales_Phrase,100,10,43.25,0,4.33,,10.0,0.0
+"""professional workbenches""",Phrase match,AU_Generic_P-V_Crafts,Professional-Tools_Phrase,107,11,42.48,0,3.86,,10.28,0.0
+"""detergent supplier""",Phrase match,AU_Generic_P-V_Janitorial,Detergent_Supplier_Phrase,38,4,42.09,0,10.52,,10.53,0.0
+"""skin care products suppliers""",Phrase match,AU_Generic_P-V_Beauty,Skin-Care_Supplier_Phrase,52,7,42.02,1,6.0,42.02,13.46,14.29
+[drinks wholesaler],Exact match,AU_Generic_P-V_Food,Wholesalers_Food_Exact,51,6,41.99,0,7.0,,11.76,0.0
+"""bulk cell phone accessories""",Phrase match,AU_Generic_P-V_Electronics,Cell-Phones_Bulk_Phrase,101,11,41.94,0,3.81,,10.89,0.0
+[cosmetics wholesaler],Exact match,AU_Generic_P-V_Beauty,Wholesalers_Cosmetics_Exact,61,9,41.79,0,4.64,,14.75,0.0
+"""professional air tools""",Phrase match,AU_Generic_P-V_Crafts,Professional-Tools_Phrase,151,5,41.74,0,8.35,,3.31,0.0
+[amazon business account sign up],Exact match,AU_Brand_Exact,Account_Exact,22,7,41.58,2,5.94,20.79,31.82,28.57
+"""wholesale socks""",Phrase match,AU_Generic_P-V_Apparel,Hosiery & Socks_Wholesales_Phrase,44,4,41.24,0,10.31,,9.09,0.0
+"""office accessories""",Phrase match,AU_Generic_P-V_Office,Office_Phrase,237,17,41.15,0,2.42,,7.17,0.0
+[amazon company account],Exact match,AU_Brand_Exact,Account_Exact,52,12,40.95,0,3.41,,23.08,0.0
+"""bulk socks""",Phrase match,AU_Generic_P-V_Apparel,Hosiery & Socks_Bulk_Phrase,92,12,40.64,0,3.39,,13.04,0.0
+[bulk boxed chocolate],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,88,13,40.57,0,3.12,,14.77,0.0
+"""wholesale outlet""",Phrase match,AU_Generic,Wholesales_Buy_Phrase,17,4,40.17,0,10.04,,23.53,0.0
+"""other distributors""",Phrase match,AU_Generic_P-V_Apparel,Hosiery & Socks_Distributors_Phrase,98,10,39.72,0,3.97,,10.2,0.0
+"""wholesale cutting boards""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Wholesale_Phrase,43,9,39.69,0,4.41,,20.93,0.0
+"""electrical testing products""",Phrase match,AU_Generic_P-V_Industrial,Measurement_Phrase,115,7,39.64,0,5.66,,6.09,0.0
+[pasta wholesalers],Exact match,AU_Generic_P-V_Food,Food_Wholesalers_Exact,45,8,39.4,0,4.93,,17.78,0.0
+"""industrial bolts""",Phrase match,AU_Generic_P-V_Industrial,Tools_Phrase,105,9,39.34,0,4.37,,8.57,0.0
+"""bookbags suppliers""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Suppliers_Phrase,93,7,39.33,0,5.62,,7.53,0.0
+[fragrance distributors],Exact match,AU_Generic_P-V_Beauty,Fragrance_Distributors_Exact,61,9,39.33,1,4.37,39.33,14.75,11.11
+"""bulk shorts""",Phrase match,AU_Generic_P-V_Apparel,Bottoms_Bulk_Phrase,44,5,39.26,0,7.85,,11.36,0.0
+"""bulk combs""",Phrase match,AU_Generic_P-V_Beauty,Hair-Appliances_Bulk_Phrase,25,3,38.76,0,12.92,,12.0,0.0
+"""bulk eyewear""",Phrase match,AU_Generic_P-V_Apparel,Eyewear_Bulk_Phrase,67,7,38.38,0,5.48,,10.45,0.0
+[cake boxes wholesalers],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Wholesalers_Exact,31,9,38.36,0,4.26,,29.03,0.0
+"""bulk coasters""",Phrase match,AU_Generic_P-V_Food,Barware_Bulk_Phrase,21,4,38.17,0,9.54,,19.05,0.0
+[jars bulk],Exact match,AU_Generic_P-V_Food,Plates_Bulk_Exact,12,3,36.9,0,12.3,,25.0,0.0
+"""wholesale paper towels""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Wholesale_Phrase,29,3,36.46,0,12.15,,10.34,0.0
+"""bulk soups""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,36,8,36.32,0,4.54,,22.22,0.0
+[bulk toilet tissue],Exact match,AU_Generic_P-V_Janitorial,Paper_Bulk,47,6,35.98,0,6.0,,12.77,0.0
+"""paper towels distributor""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Distributor_Phrase,177,8,35.97,0,4.5,,4.52,0.0
+[coffee machines sellers],Exact match,AU_Generic_P-V_Food,Coffee Machines_Sellers_Exact,129,5,35.63,0,7.13,,3.88,0.0
+"""bulk""",Phrase match,AU_Generic,Bulk_Phrase,142,7,35.59,0,5.08,,4.93,0.0
+[amazon business sign in],Exact match,AU_Brand_Exact,Navigation_Exact,63,14,35.47,0,2.53,,22.22,0.0
+"""christmas decorations wholesalers""",Phrase match,AU_Generic_P-V_Celebrations,Christmas_Wholesale_Phrase,86,6,35.14,1,5.86,35.14,6.98,16.67
+"""bulk jeans""",Phrase match,AU_Generic_P-V_Apparel,Bottoms_Bulk_Phrase,78,6,34.62,0,5.77,,7.69,0.0
+"""bulk cupcake boxes""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Phrase,31,4,34.5,0,8.63,,12.9,0.0
+[wholesale sugar],Exact match,AU_Generic_P-V_Food,Food_Wholesale_Exact,22,4,34.34,0,8.59,,18.18,0.0
+[wholesale hair extension],Exact match,AU_Generic_P-V_Beauty,Hair-Appliances_Wholesale_Exact,10,3,34.32,0,11.44,,30.0,0.0
+"""bulk hair care products""",Phrase match,AU_Generic_P-V_Beauty,Hair-Styling_Bulk_Phrase,78,13,34.25,0,2.63,,16.67,0.0
+[bulk products],Exact match,AU_Generic,Bulk_Products_Exact,18,4,34.22,0,8.56,,22.22,0.0
+"""human hair suppliers""",Phrase match,AU_Generic_P-V_Beauty,Hair-Appliances_Supplier_Phrase,24,5,34.15,0,6.83,,20.83,0.0
+[bulk take out containers],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Exact,32,6,34.01,0,5.67,,18.75,0.0
+"""wholesale gift distributors""",Phrase match,AU_Generic_P-V_Shops,Distributors_Gifts_Phrase,74,4,33.73,0,8.43,,5.41,0.0
+[hair wholesale],Exact match,AU_Generic_P-V_Beauty,Hair-Appliances_Wholesale_Exact,15,2,33.34,0,16.67,,13.33,0.0
+[bulk laptops],Exact match,AU_Generic_P-V_Electronics,Computers_Bulk_Exact,43,5,33.25,0,6.65,,11.63,0.0
+[bulk packaging],Exact match,AU_Generic,Bulk_Products_Exact,23,4,33.19,0,8.3,,17.39,0.0
+"""sunglasses suppliers""",Phrase match,AU_Generic_P-V_Apparel,Swimwear_Wholesales_Phrase_Phrase,66,3,33.14,0,11.05,,4.55,0.0
+[commercial cutlery],Exact match,AU_Generic_P-V_Food,Cultlery_Exact,48,4,33.04,0,8.26,,8.33,0.0
+[fabric wholesale],Exact match,AU_Generic_P-V_Materials,Wholesales_Textiles_Exact,46,7,32.96,0,4.71,,15.22,0.0
+[canned food wholesale],Exact match,AU_Generic_P-V_Food,Wholesales_Food_Exact,18,7,32.68,0,4.67,,38.89,0.0
+[wholesale peroxide],Exact match,AU_Generic_P-V_Beauty,Hair-Styling_Wholesale_Exact,13,3,32.62,0,10.87,,23.08,0.0
+"""bulk bin bags""",Phrase match,AU_Generic_P-V_Janitorial,Waste_Bulk_Phrase,205,6,32.61,0,5.44,,2.93,0.0
+"""wholesale canned goods""",Phrase match,AU_Generic_P-V_Food,Food_Wholesale_Phrase,39,7,32.48,1,4.64,32.48,17.95,14.29
+"""bulk women t-shirts""",Phrase match,AU_Generic_P-V_Apparel,Tops Women_Bulk_Phrase,45,7,32.23,0,4.6,,15.56,0.0
+"""bulk primers""",Phrase match,AU_Generic_P-V_Beauty,Makeup_Bulk_Phrase,10,2,32.18,0,16.09,,20.0,0.0
+[business prime au],Exact match,AU_Brand_Exact,Prime_Exact,40,8,32.17,1,4.02,32.17,20.0,12.5
+[wholesale canned food],Exact match,AU_Generic_P-V_Food,Food_Wholesale_Exact,27,4,32.13,0,8.03,,14.81,0.0
+"""corporate equipment""",Phrase match,AU_Generic,Enterprises_Products_Phrase,21,5,31.81,0,6.36,,23.81,0.0
+"""wholesale bath gel""",Phrase match,AU_Generic_P-V_Beauty,Bath_Wholesale_Phrase,57,4,31.78,0,7.95,,7.02,0.0
+[amazon business portal],Exact match,AU_Brand_Exact,Navigation_Exact,47,9,31.34,0,3.48,,19.15,0.0
+[bulk fragrance],Exact match,AU_Generic_P-V_Beauty,Fragrance_Bulk_Exact,40,8,31.25,0,3.91,,20.0,0.0
+[party decorations products],Exact match,AU_Generic_P-V_Celebrations,Party_Decorations_Exact,65,7,31.23,0,4.46,,10.77,0.0
+[bulk chocolate],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,75,8,30.66,0,3.83,,10.67,0.0
+[party suppliers],Exact match,AU_Generic_P-V_Celebrations,Party_Suppliers_Exact,75,3,30.37,1,10.12,30.37,4.0,33.33
+"""wipes supplier""",Phrase match,AU_Generic_P-V_Janitorial,Tools_Supplier_Phrase,34,4,30.22,0,7.56,,11.76,0.0
+"""disposable tableware suppliers""",Phrase match,AU_Generic_P-V_Food,Cultlery_Suppliers_Phrase,58,8,30.21,0,3.78,,13.79,0.0
+"""wholesale laptops""",Phrase match,AU_Generic_P-V_Electronics,Computers_Wholesale_Phrase,27,4,30.13,0,7.53,,14.81,0.0
+"""tea wholesalers""",Phrase match,AU_Generic_P-V_Food,Food_Wholesalers_Phrase,37,5,29.96,0,5.99,,13.51,0.0
+"""spray bottles supplier""",Phrase match,AU_Generic_P-V_Janitorial,Tools_Supplier_Phrase,52,6,29.71,0,4.95,,11.54,0.0
+[towels hotel],Exact match,AU_Generic_P-V_Hospitality,Products_Exact,20,2,29.64,0,14.82,,10.0,0.0
+"""bulk strings""",Phrase match,AU_Generic_P-V_Apparel,Underwear_Bulk_Phrase,28,3,29.43,0,9.81,,10.71,0.0
+[bulk bath robes],Exact match,AU_Generic_P-V_Apparel,Sleepwear_Bulk_Exact,11,4,29.35,0,7.34,,36.36,0.0
+"""bulk salon products""",Phrase match,AU_Generic_P-V_Beauty,Salon-Spa_Bulk_Phrase,88,9,29.31,1,3.26,29.31,10.23,11.11
+"""lids wholesalers""",Phrase match,AU_Generic_P-V_Food,Cookware_Wholesalers_Phrase,75,8,29.31,0,3.66,,10.67,0.0
+"""bulk mobile phone""",Phrase match,AU_Generic_P-V_Electronics,Cell-Phones_Bulk_Phrase,61,9,29.3,0,3.26,,14.75,0.0
+"""commercial toilet tissue dispensers""",Phrase match,AU_Generic_P-V_Janitorial,Fixtures_Phrase,111,9,28.86,0,3.21,,8.11,0.0
+[chocolate wholesalers],Exact match,AU_Generic_P-V_Food,Food_Wholesalers_Exact,50,8,28.56,0,3.57,,16.0,0.0
+"""buy hotel furniture""",Phrase match,AU_Generic_P-V_Hospitality,Furniture_Phrase,41,3,28.53,0,9.51,,7.32,0.0
+[bulk hair care products],Exact match,AU_Generic_P-V_Beauty,Hair-Styling_Bulk_Exact,45,5,28.53,0,5.71,,11.11,0.0
+[commercial glassware],Exact match,AU_Generic_P-V_Food,Cultlery_Exact,9,2,28.47,0,14.24,,22.22,0.0
+[professional mops],Exact match,AU_Generic_P-V_Janitorial,Floor-Care_Exact,118,5,28.44,0,5.69,,4.24,0.0
+"""wholesale shoes""",Phrase match,AU_Generic_P-V_Apparel,Shoes_Wholesales_Phrase,37,7,28.41,0,4.06,,18.92,0.0
+[industrial cleaning products],Exact match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Exact,40,4,28.19,0,7.05,,10.0,0.0
+[bulk janitorial],Exact match,AU_Generic_P-V_Janitorial,Products_Bulk_Exact,48,5,27.94,0,5.59,,10.42,0.0
+"""bulk polishes""",Phrase match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Bulk_Phrase,39,6,27.92,0,4.65,,15.38,0.0
+"""shorts distributors""",Phrase match,AU_Generic_P-V_Apparel,Bottoms_Distributors_Phrase,35,7,27.92,0,3.99,,20.0,0.0
+[bulk martini glasses],Exact match,AU_Generic_P-V_Food,Glassware_Bulk_Exact,4,2,27.75,0,13.88,,50.0,0.0
+"""shirts suppliers""",Phrase match,AU_Generic_P-V_Apparel,Tops_Suppliers_Phrase,80,7,27.73,0,3.96,,8.75,0.0
+[remote work items],Exact match,AU_Generic_P-V_Office,Remote-Work_Exact,18,2,27.49,0,13.75,,11.11,0.0
+[business cards],Exact match,AU_Generic_P-V_Office,Office-Supplies_Exact,126,6,27.4,0,4.57,,4.76,0.0
+[bulk straws],Exact match,AU_Generic_P-V_Food,Barware_Bulk_Exact,44,3,27.31,0,9.1,,6.82,0.0
+[store furniture],Exact match,AU_Generic_P-V_Shops,Furniture_Exact,27,5,27.21,0,5.44,,18.52,0.0
+"""wholesale dinnerware sets""",Phrase match,AU_Generic_P-V_Food,Cultlery_Wholesale_Phrase,9,2,27.12,0,13.56,,22.22,0.0
+"""disinfectants supplier""",Phrase match,AU_Generic_P-V_Janitorial,Detergent_Supplier_Phrase,44,3,26.94,0,8.98,,6.82,0.0
+"""hvac equipment""",Phrase match,AU_Generic_P-V_Industrial,HVAC_Phrase,57,4,26.92,0,6.73,,7.02,0.0
+"""bulk feminine hygiene products""",Phrase match,AU_Generic_P-V_Janitorial,Personal-Care_Bulk_Phrase,88,8,26.83,0,3.35,,9.09,0.0
+"""bulk cereal bars""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,14,4,26.46,0,6.62,,28.57,0.0
+"""wholesale plastic""",Phrase match,AU_Generic_P-V_Materials,Wholesales_Plastic_Phrase,98,4,26.44,0,6.61,,4.08,0.0
+[shirts suppliers],Exact match,AU_Generic_P-V_Apparel,Tops_Suppliers_Exact,52,5,26.44,0,5.29,,9.62,0.0
+"""wholesale bedding""",Phrase match,AU_Generic_P-V_Hospitality,Products_Wholesale_Phrase,40,7,26.44,0,3.78,,17.5,0.0
+[bulk baby clothing sets],Exact match,AU_Generic_P-V_Apparel,Accessories Baby_Bulk_Exact,31,5,26.36,0,5.27,,16.13,0.0
+"""mens bulk ties""",Phrase match,AU_Generic_P-V_Apparel,Accessories Men_Bulk_Phrase,29,5,26.27,0,5.25,,17.24,0.0
+[dinnerware sets suppliers],Exact match,AU_Generic_P-V_Food,Cultlery_Suppliers_Exact,11,3,26.11,0,8.7,,27.27,0.0
+[b2b marketplace],Exact match,AU_Generic,B2B_Marketplace_Exact,35,2,26.01,0,13.01,,5.71,0.0
+"""professional sanders""",Phrase match,AU_Generic_P-V_Crafts,Professional-Tools_Phrase,82,7,25.05,0,3.58,,8.54,0.0
+[bulk bottle openers],Exact match,AU_Generic_P-V_Food,Barware_Bulk_Exact,4,2,25.03,0,12.52,,50.0,0.0
+[wholesale cereals],Exact match,AU_Generic_P-V_Food,Food_Wholesale_Exact,16,4,25.03,0,6.26,,25.0,0.0
+"""companies suppliers""",Phrase match,AU_Generic,Suppliers_Enterprises_Phrase,46,2,24.87,0,12.44,,4.35,0.0
+"""office accessories wholesale""",Phrase match,AU_Generic_P-V_Office,Wholesale_Phrase,65,3,24.55,0,8.18,,4.62,0.0
+[hospitality furniture],Exact match,AU_Generic_P-V_Hospitality,Furniture_Exact,76,3,24.53,0,8.18,,3.95,0.0
+"""earphones distributor""",Phrase match,AU_Generic_P-V_Electronics,Headphones_Distributor_Phrase,17,4,24.47,0,6.12,,23.53,0.0
+"""bulk spoons""",Phrase match,AU_Generic_P-V_Food,Cultlery_Bulk_Phrase,76,6,24.25,0,4.04,,7.89,0.0
+[wholesale soap],Exact match,AU_Generic_P-V_Janitorial,Soap_Wholesale_Exact,28,3,24.21,0,8.07,,10.71,0.0
+"""bikinis suppliers""",Phrase match,AU_Generic_P-V_Apparel,Swimwear_Suppliers_Phrase,29,4,24.04,0,6.01,,13.79,0.0
+"""wholesale umbrellas""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Wholesales_Phrase,51,6,24.01,0,4.0,,11.76,0.0
+[drain openers],Exact match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Exact,45,2,23.86,0,11.93,,4.44,0.0
+[bulk baking supplies],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,38,5,23.84,0,4.77,,13.16,0.0
+[bulk cups],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Exact,21,2,23.83,0,11.92,,9.52,0.0
+"""pet supplies wholesaler""",Phrase match,AU_Generic_P-V_Shops,Pet Shop_Wholesale_Phrase,39,7,23.7,0,3.39,,17.95,0.0
+"""bulk appliances""",Phrase match,AU_Generic,Bulk_Products_Phrase,30,2,23.59,0,11.8,,6.67,0.0
+"""bulk noodles""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,35,3,23.55,0,7.85,,8.57,0.0
+"""bulk air fresheners""",Phrase match,AU_Generic_P-V_Janitorial,Odour_Bulk_Phrase,50,8,23.49,0,2.94,,16.0,0.0
+"""shoes in bulk""",Phrase match,AU_Generic_P-V_Shops,Clothing_Bulk_Phrase,88,5,23.45,0,4.69,,5.68,0.0
+"""dog supplies distributors""",Phrase match,AU_Generic_P-V_Shops,Pet Shop_Distributors_Phrase,61,5,23.4,0,4.68,,8.2,0.0
+"""soft drinks distributor""",Phrase match,AU_Generic_P-V_Food,Drinks_Distributor_Phrase,64,11,23.39,0,2.13,,17.19,0.0
+"""bulk t-shirts baby""",Phrase match,AU_Generic_P-V_Apparel,Tops Baby_Bulk_Phrase,24,3,23.26,0,7.75,,12.5,0.0
+"""industrial fittings""",Phrase match,AU_Generic_P-V_Industrial,Hydraulics_Phrase,53,6,23.22,0,3.87,,11.32,0.0
+"""bulk tissues""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Bulk,132,7,23.21,0,3.32,,5.3,0.0
+[wholesale dinnerware sets],Exact match,AU_Generic_P-V_Food,Cultlery_Wholesale_Exact,22,4,23.09,0,5.77,,18.18,0.0
+"""laptops distributor""",Phrase match,AU_Generic_P-V_Electronics,Computers_Distributor_Phrase,21,3,22.89,0,7.63,,14.29,0.0
+"""toy suppliers""",Phrase match,AU_Generic_P-V_Shops,Toys Shop_Suppliers_Phrase,28,7,22.81,0,3.26,,25.0,0.0
+"""wholesale body soap""",Phrase match,AU_Generic_P-V_Beauty,Bath_Wholesale_Phrase,72,4,22.57,0,5.64,,5.56,0.0
+[commercial tea machines],Exact match,AU_Generic_P-V_Food,Coffee Machines_Exact,7,2,22.56,0,11.28,,28.57,0.0
+"""wholesale meals""",Phrase match,AU_Generic_P-V_Food,Food_Wholesale_Phrase,83,7,22.53,0,3.22,,8.43,0.0
+[bulk toilet tissue],Exact match,AU_Generic_P-V_Janitorial,Paper_Bulk_Exact,26,5,22.23,0,4.45,,19.23,0.0
+[suppliers office],Exact match,AU_Generic_P-V_Office,Suppliers_Exact,49,3,22.18,0,7.39,,6.12,0.0
+[t-shirts distributors],Exact match,AU_Generic_P-V_Apparel,Tops_Distributors_Exact,21,4,22.06,0,5.52,,19.05,0.0
+"""bulk mens t-shirts""",Phrase match,AU_Generic_P-V_Apparel,Tops Men_Bulk_Phrase,20,5,21.94,0,4.39,,25.0,0.0
+"""gloves suppliers""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Suppliers_Phrase,20,4,21.88,0,5.47,,20.0,0.0
+"""mens wholesale shirts""",Phrase match,AU_Generic_P-V_Apparel,Tops Men_Wholesales_Phrase,47,4,21.87,0,5.47,,8.51,0.0
+"""industrial lighting products""",Phrase match,AU_Generic_P-V_Industrial,Electrical_Phrase,24,4,21.68,0,5.42,,16.67,0.0
+"""bulk cocktail glasses""",Phrase match,AU_Generic_P-V_Food,Glassware_Bulk_Phrase,10,3,21.67,1,7.22,21.67,30.0,33.33
+"""wholesale sweets""",Phrase match,AU_Generic_P-V_Food,Food_Wholesale_Phrase,46,3,21.66,0,7.22,,6.52,0.0
+[bulk snacks],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,44,6,21.61,0,3.6,,13.64,0.0
+"""paper towels supplier""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Supplier_Phrase,68,3,21.27,0,7.09,,4.41,0.0
+[bulk shampoo],Exact match,AU_Generic_P-V_Beauty,Hair-Styling_Bulk_Exact,32,5,21.27,1,4.25,21.27,15.63,20.0
+"""furniture hotel""",Phrase match,AU_Generic_P-V_Hospitality,Furniture_Phrase,62,4,21.25,0,5.31,,6.45,0.0
+"""bulk dairy""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,57,9,21.24,0,2.36,,15.79,0.0
+[wholesale chafing dishes],Exact match,AU_Generic_P-V_Food,Plates_Wholesale_Exact,5,2,21.13,0,10.57,,40.0,0.0
+"""boots distributors""",Phrase match,AU_Generic_P-V_Apparel,Shoes_Distributors_Phrase,30,4,20.96,0,5.24,,13.33,0.0
+"""bulk overalls""",Phrase match,AU_Generic_P-V_Apparel,Bottoms_Bulk_Phrase,19,3,20.91,0,6.97,,15.79,0.0
+"""job site lighting""",Phrase match,AU_Generic_P-V_Crafts,Professional-Tools_Phrase,29,5,20.87,0,4.17,,17.24,0.0
+[wholesale vodka],Exact match,AU_Generic_P-V_Food,Drinks_Wholesale_Exact,6,3,20.85,0,6.95,,50.0,0.0
+[bulk sunglasses],Exact match,AU_Generic_P-V_Apparel,Eyewear_Bulk_Exact,34,3,20.82,0,6.94,,8.82,0.0
+"""bulk cake boxes""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Phrase,25,6,20.73,0,3.46,,24.0,0.0
+[bulk plates],Exact match,AU_Generic_P-V_Food,Plates_Bulk_Exact,39,4,20.58,0,5.15,,10.26,0.0
+[gift wholesaler],Exact match,AU_Generic_P-V_Shops,Wholesalers_Gifts,29,4,20.55,0,5.14,,13.79,0.0
+"""jumpers suppliers""",Phrase match,AU_Generic_P-V_Apparel,Tops_Suppliers_Phrase,15,3,20.34,0,6.78,,20.0,0.0
+[bulk champagne glasses],Exact match,AU_Generic_P-V_Food,Glassware_Bulk_Exact,20,3,20.24,0,6.75,,15.0,0.0
+[all purpose cleaners],Exact match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Exact,21,2,20.12,0,10.06,,9.52,0.0
+"""eye protection safety""",Phrase match,AU_Generic_P-V_Safety,Equipment-Gear_Phrase,64,5,20.01,0,4.0,,7.81,0.0
+[purchasing bulk],Exact match,AU_Generic,Bulk_Buy_Exact,54,4,19.78,0,4.95,,7.41,0.0
+"""distributors industry""",Phrase match,AU_Generic_P-V_Industry,Distributors_Phrase,124,4,19.77,0,4.94,,3.23,0.0
+"""professional mop buckets""",Phrase match,AU_Generic_P-V_Janitorial,Floor-Care_Phrase,110,5,19.77,0,3.95,,4.55,0.0
+[order stationery],Exact match,AU_Generic_P-V_Office,Stationery_Exact,133,4,19.76,0,4.94,,3.01,0.0
+[amazon business contact],Exact match,AU_Brand_Exact,Navigation_Exact,15,1,19.74,0,19.74,,6.67,0.0
+[work from home equipment],Exact match,AU_Generic_P-V_Office,Wfh_Exact,20,3,19.56,0,6.52,,15.0,0.0
+"""wholesale makeup bags""",Phrase match,AU_Generic_P-V_Beauty,Makeup_Wholesale_Phrase,14,3,19.44,0,6.48,,21.43,0.0
+"""industrial degreasers""",Phrase match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Phrase,49,2,19.33,0,9.66,,4.08,0.0
+[wholesale chocolate],Exact match,AU_Generic_P-V_Food,Food_Wholesale_Exact,58,7,19.06,0,2.72,,12.07,0.0
+[wholesale disposable cameras],Exact match,AU_Generic_P-V_Electronics,Camera-Accessories_Wholesale_Exact,28,2,19.01,0,9.51,,7.14,0.0
+"""wholesale beach clothing""",Phrase match,AU_Generic_P-V_Apparel,Swimwear_Wholesales_Phrase,66,4,19.01,0,4.75,,6.06,0.0
+"""jeans suppliers""",Phrase match,AU_Generic_P-V_Apparel,Bottoms_Suppliers_Phrase,44,4,18.98,0,4.75,,9.09,0.0
+[polo shirts suppliers],Exact match,AU_Generic_P-V_Apparel,Tops_Suppliers_Exact,13,3,18.97,0,6.32,,23.08,0.0
+"""industrial packaging tape""",Phrase match,AU_Generic_P-V_Industrial,Packaging_Phrase,34,3,18.8,0,6.27,,8.82,0.0
+"""commercial pots""",Phrase match,AU_Generic_P-V_Food,Cookware_Phrase,64,7,18.77,0,2.68,,10.94,0.0
+"""canned food wholesale""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,37,4,18.74,0,4.68,,10.81,0.0
+"""wholesale brushes""",Phrase match,AU_Generic_P-V_Beauty,Hair-Appliances_Wholesale_Phrase,16,4,18.61,0,4.65,,25.0,0.0
+"""salt wholesale""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,67,7,18.58,0,2.65,,10.45,0.0
+"""hotel linen""",Phrase match,AU_Generic_P-V_Hospitality,Products_Phrase,102,2,18.4,0,9.2,,1.96,0.0
+[wholesale cake boxes],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Wholesale_Exact,26,8,18.36,0,2.3,,30.77,0.0
+[bulk water glasses],Exact match,AU_Generic_P-V_Food,Glassware_Bulk_Exact,16,3,18.01,0,6.0,,18.75,0.0
+"""bulk chopsticks""",Phrase match,AU_Generic_P-V_Food,Cultlery_Bulk_Phrase,31,3,17.95,0,5.98,,9.68,0.0
+[wholesale products for resale],Exact match,AU_Generic,Wholesales_Products_Exact,6,2,17.95,0,8.98,,33.33,0.0
+"""wholesale teapots""",Phrase match,AU_Generic_P-V_Food,Coffee Machines_Wholesale_Phrase,15,2,17.95,0,8.98,,13.33,0.0
+"""bulk hosiery""",Phrase match,AU_Generic_P-V_Apparel,Leggins & Tights_Bulk_Phrase,29,4,17.93,0,4.48,,13.79,0.0
+[drinks suppliers],Exact match,AU_Generic_P-V_Food,Food_Suppliers_Exact,19,5,17.81,0,3.56,,26.32,0.0
+"""bulk dog accessories""",Phrase match,AU_Generic_P-V_Shops,Bulk_Pet Shop_Phrase,47,3,17.71,0,5.9,,6.38,0.0
+[wholesale deodorants],Exact match,AU_Generic_P-V_Beauty,Skin-Care_Wholesale_Exact,13,4,17.57,0,4.39,,30.77,0.0
+"""cutlery wholesalers""",Phrase match,AU_Generic_P-V_Food,Cultlery_Wholesalers_Phrase,54,5,17.56,0,3.51,,9.26,0.0
+[bulk toilet paper],Exact match,AU_Generic_P-V_Janitorial,Paper_Bulk,99,4,17.45,0,4.36,,4.04,0.0
+"""bulk pans""",Phrase match,AU_Generic_P-V_Food,Cookware_Bulk_Phrase,39,4,17.38,0,4.35,,10.26,0.0
+"""bulk razors""",Phrase match,AU_Generic_P-V_Beauty,Hair-Appliances_Bulk_Phrase,43,5,17.37,0,3.47,,11.63,0.0
+"""conference table""",Phrase match,AU_Generic_P-V_Office,Furniture_Phrase,56,5,17.26,0,3.45,,8.93,0.0
+[bulk chopsticks],Exact match,AU_Generic_P-V_Food,Cultlery_Bulk_Exact,28,1,17.26,0,17.26,,3.57,0.0
+[wholesale merchandise],Exact match,AU_Generic,Wholesales_Products_Exact,20,2,17.23,0,8.62,,10.0,0.0
+[business cards online],Exact match,AU_Generic_P-V_Office,Office-Supplies_Exact,67,5,17.11,0,3.42,,7.46,0.0
+"""bulk cosmetic bags""",Phrase match,AU_Generic_P-V_Beauty,Makeup_Bulk_Phrase,6,3,17.07,0,5.69,,50.0,0.0
+[bulk shoes],Exact match,AU_Generic_P-V_Apparel,Eyewear_Wholesales_Exact,14,4,17.01,0,4.25,,28.57,0.0
+"""wholesale online shop""",Phrase match,AU_Generic,Wholesales_Buy_Phrase,12,4,17.0,0,4.25,,33.33,0.0
+"""wholesale deodorants""",Phrase match,AU_Generic_P-V_Beauty,Skin-Care_Wholesale_Phrase,10,3,16.85,0,5.62,,30.0,0.0
+[wigs distributors],Exact match,AU_Generic_P-V_Beauty,Hair-Appliances_Distributors_Exact,10,1,16.82,0,16.82,,10.0,0.0
+[commercial woks],Exact match,AU_Generic_P-V_Food,Pans_Exact,19,3,16.81,0,5.6,,15.79,0.0
+[wholesale nail files],Exact match,AU_Generic_P-V_Beauty,Nail-Care_Wholesale_Exact,3,1,16.8,1,16.8,16.8,33.33,100.0
+"""wholesale honey jars""",Phrase match,AU_Generic_P-V_Food,Plates_Wholesale_Phrase,5,3,16.79,0,5.6,,60.0,0.0
+"""bulk beer glasses""",Phrase match,AU_Generic_P-V_Food,Glassware_Bulk_Phrase,19,3,16.62,0,5.54,,15.79,0.0
+"""bulk knives""",Phrase match,AU_Generic_P-V_Food,Cultlery_Bulk_Phrase,44,5,16.62,0,3.32,,11.36,0.0
+"""wholesale aromatherapy products""",Phrase match,AU_Generic_P-V_Beauty,Massage_Wholesale_Phrase,32,3,16.6,0,5.53,,9.38,0.0
+[canned food wholesalers],Exact match,AU_Generic_P-V_Food,Food_Wholesalers_Exact,25,2,16.58,0,8.29,,8.0,0.0
+"""wholesale tanning products""",Phrase match,AU_Generic_P-V_Beauty,Skin-Care-Appliances_Wholesale_Phrase,18,2,16.57,0,8.29,,11.11,0.0
+[polo shirts distributors],Exact match,AU_Generic_P-V_Apparel,Tops_Distributors_Exact,12,2,16.56,0,8.28,,16.67,0.0
+[wholesale cornflakes],Exact match,AU_Generic_P-V_Food,Food_Wholesale_Exact,6,1,16.53,1,16.53,16.53,16.67,100.0
+[bulk hydrogen peroxide],Exact match,AU_Generic_P-V_Beauty,Hair-Appliances_Bulk_Exact,54,2,16.5,0,8.25,,3.7,0.0
+[bulk forks],Exact match,AU_Generic_P-V_Food,Cultlery_Bulk_Exact,16,1,16.45,0,16.45,,6.25,0.0
+"""industrial all purpose cleaners""",Phrase match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Phrase,33,3,16.39,0,5.46,,9.09,0.0
+[bulk pots],Exact match,AU_Generic_P-V_Food,Cookware_Bulk_Exact,2,1,16.33,0,16.33,,50.0,0.0
+"""hotel supplies""",Phrase match,AU_Generic_P-V_Hospitality,Products_Phrase,45,4,16.13,0,4.03,,8.89,0.0
+[wholesale biscuits],Exact match,AU_Generic_P-V_Food,Food_Wholesale_Exact,18,3,16.11,0,5.37,,16.67,0.0
+"""milk wholesalers""",Phrase match,AU_Generic_P-V_Food,Drinks_Wholesalers_Phrase,38,4,16.01,0,4.0,,10.53,0.0
+[wholesale water],Exact match,AU_Generic_P-V_Food,Food_Wholesale_Exact,48,4,15.93,0,3.98,,8.33,0.0
+[b2b supply],Exact match,AU_Generic,B2B_Procurement_Exact,1,1,15.85,0,15.85,,100.0,0.0
+[wholesale spray bottles],Exact match,AU_Generic_P-V_Janitorial,Tools_Wholesale_Exact,27,3,15.84,0,5.28,,11.11,0.0
+"""commercial glassware""",Phrase match,AU_Generic_P-V_Food,Cultlery_Phrase,12,1,15.63,0,15.63,,8.33,0.0
+[bulk sponges],Exact match,AU_Generic_P-V_Janitorial,Tools_Bulk_Exact,7,1,15.47,0,15.47,,14.29,0.0
+[bulk buy cadbury chocolate],Exact match,AU_Generic_P-V_Food,Sweets_Bulk_Exact,14,3,15.34,0,5.11,,21.43,0.0
+"""wholesale shorts""",Phrase match,AU_Generic_P-V_Apparel,Bottoms_Wholesales_Phrase,63,4,15.34,0,3.84,,6.35,0.0
+"""stationery procurement""",Phrase match,AU_Generic_P-V_Office,Procurement_Phrase,47,4,15.23,0,3.81,,8.51,0.0
+"""bulk soya milk""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,33,5,15.21,1,3.04,15.21,15.15,20.0
+"""hospitality bathroom supplies""",Phrase match,AU_Generic_P-V_Hospitality,Hospitality_Phrase,40,5,15.17,0,3.03,,12.5,0.0
+[wholesale clothing],Exact match,AU_Generic,Wholesale_Exact,29,2,14.98,0,7.49,,6.9,0.0
+[carpet cleaners],Exact match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Exact,199,2,14.92,0,7.46,,1.01,0.0
+[bulk cleaning chemicals],Exact match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Bulk_Exact,24,3,14.83,0,4.94,,12.5,0.0
+[hats bulk],Exact match,AU_Generic_P-V_Apparel,Outerwear_Bulk_Exact,17,2,14.81,0,7.41,,11.76,0.0
+"""bulk baby clothing sets""",Phrase match,AU_Generic_P-V_Apparel,Accessories Baby_Bulk_Phrase,12,4,14.78,0,3.7,,33.33,0.0
+[bulk whisky],Exact match,AU_Generic_P-V_Food,Drinks_Bulk_Exact,22,4,14.71,0,3.68,,18.18,0.0
+"""bulk take out containers""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Phrase,30,3,14.6,0,4.87,,10.0,0.0
+"""wholesale hair extension""",Phrase match,AU_Generic_P-V_Beauty,Hair-Appliances_Wholesale_Phrase,75,3,14.45,0,4.82,,4.0,0.0
+[bulk cake boxes],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Exact,13,3,14.37,0,4.79,,23.08,0.0
+"""bulk wigs""",Phrase match,AU_Generic_P-V_Beauty,Hair-Appliances_Bulk_Phrase,9,3,14.25,0,4.75,,33.33,0.0
+[makeup suppliers],Exact match,AU_Generic_P-V_Beauty,Makeup_Supplier_Exact,30,3,14.16,0,4.72,,10.0,0.0
+"""bulk laptops""",Phrase match,AU_Generic_P-V_Electronics,Computers_Bulk_Phrase,50,3,14.12,1,4.71,14.12,6.0,33.33
+[wholesale wipes],Exact match,AU_Generic_P-V_Janitorial,Tools_Wholesale_Exact,4,2,14.12,0,7.06,,50.0,0.0
+"""flower shop furniture""",Phrase match,AU_Generic_P-V_Shops,Furniture_Phrase,35,2,14.1,0,7.05,,5.71,0.0
+[stationery accessories],Exact match,AU_Generic_P-V_Office,Stationery_Exact,56,3,14.03,0,4.68,,5.36,0.0
+"""bulk janitorial""",Phrase match,AU_Generic_P-V_Janitorial,Products_Bulk_Phrase,33,2,14.02,0,7.01,,6.06,0.0
+[products for start-ups],Exact match,AU_Generic,Enterprises_Products_Exact,8,2,13.9,0,6.95,,25.0,0.0
+[hotel bathroom supplies],Exact match,AU_Generic_P-V_Hospitality,Products_Exact,3,1,13.89,0,13.89,,33.33,0.0
+"""commercial tea machines""",Phrase match,AU_Generic_P-V_Food,Coffee Machines_Phrase,6,1,13.88,0,13.88,,16.67,0.0
+"""commercial fondue""",Phrase match,AU_Generic_P-V_Food,Cookware_Phrase,15,1,13.71,0,13.71,,6.67,0.0
+[clothing wholesalers],Exact match,AU_Generic_P-V_Shops,Wholesale_Clothing,85,2,13.69,0,6.85,,2.35,0.0
+[scarves distributors],Exact match,AU_Generic_P-V_Apparel,Accessories_Distributors_Exact,6,1,13.6,0,13.6,,16.67,0.0
+"""bulk coffee""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,55,4,13.6,0,3.4,,7.27,0.0
+[commercial frying pans],Exact match,AU_Generic_P-V_Food,Pans_Exact,38,2,13.56,0,6.78,,5.26,0.0
+[wholesale accessories],Exact match,AU_Generic_P-V_Shops,Accessories_Wholesale_Exact,3,1,13.4,0,13.4,,33.33,0.0
+[wholesale nail polish],Exact match,AU_Generic_P-V_Beauty,Nail-Care_Wholesale_Exact,4,3,13.37,0,4.46,,75.0,0.0
+[bulk cereals],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,9,1,13.18,0,13.18,,11.11,0.0
+"""wholesale surveillance cameras""",Phrase match,AU_Generic_P-V_Electronics,Camera-Accessories_Wholesale_Phrase,19,2,13.18,0,6.59,,10.53,0.0
+[industrial cleaning chemicals],Exact match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Exact,12,2,13.09,0,6.55,,16.67,0.0
+[cleaning equipment],Exact match,AU_Generic_P-V_Janitorial,Products_Exact,30,2,13.08,0,6.54,,6.67,0.0
+"""bulk chopping boards""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Phrase,18,4,12.92,0,3.23,,22.22,0.0
+[commercial food warmers],Exact match,AU_Generic_P-V_Food,Serving Line_Exact,51,3,12.9,0,4.3,,5.88,0.0
+[bulk soap],Exact match,AU_Generic_P-V_Janitorial,Soap_Bulk_Exact,13,2,12.86,0,6.43,,15.38,0.0
+"""bulk knickers""",Phrase match,AU_Generic_P-V_Apparel,Underwear_Bulk_Phrase,18,2,12.83,0,6.42,,11.11,0.0
+[hotel amenities],Exact match,AU_Generic_P-V_Hospitality,Products_Exact,9,1,12.81,0,12.81,,11.11,0.0
+"""event distributors""",Phrase match,AU_Generic_P-V_Celebrations,Distributors_Phrase,17,4,12.69,0,3.17,,23.53,0.0
+"""bulk cutlery sets""",Phrase match,AU_Generic_P-V_Food,Cultlery_Bulk_Phrase,44,5,12.57,0,2.51,,11.36,0.0
+"""paper products supplier""",Phrase match,AU_Generic_P-V_Janitorial,Paper_Supplier_Phrase,33,5,12.36,0,2.47,,15.15,0.0
+[wholesale stationery],Exact match,AU_Generic_P-V_Office,Wholesale_Exact,24,3,12.32,0,4.11,,12.5,0.0
+[bulk baby accessories],Exact match,AU_Generic_P-V_Apparel,Accessories Baby_Bulk_Exact,33,3,12.16,0,4.05,,9.09,0.0
+"""wholesale bakers""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,23,4,12.12,0,3.03,,17.39,0.0
+[wholesale makeup],Exact match,AU_Generic_P-V_Beauty,Makeup_Wholesale_Exact,17,3,12.06,0,4.02,,17.65,0.0
+"""wholesale meat""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,94,2,11.97,0,5.99,,2.13,0.0
+[wholesale lipstick],Exact match,AU_Generic_P-V_Beauty,Makeup_Wholesale_Exact,14,3,11.95,0,3.98,,21.43,0.0
+[bulk deodorants],Exact match,AU_Generic_P-V_Beauty,Skin-Care_Bulk_Exact,5,2,11.93,0,5.97,,40.0,0.0
+[bulk disinfectants],Exact match,AU_Generic_P-V_Janitorial,Detergent_Bulk_Exact,15,1,11.91,0,11.91,,6.67,0.0
+[bulk buy food],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,81,8,11.89,0,1.49,,9.88,0.0
+"""bulk dish soap""",Phrase match,AU_Generic_P-V_Janitorial,Soap_Bulk_Phrase,31,1,11.89,0,11.89,,3.23,0.0
+[bulk body soap],Exact match,AU_Generic_P-V_Beauty,Bath_Bulk_Exact,17,2,11.87,0,5.94,,11.76,0.0
+[wholesale makeup bags],Exact match,AU_Generic_P-V_Beauty,Makeup_Wholesale_Exact,4,1,11.87,1,11.87,11.87,25.0,100.0
+[bulk champagne],Exact match,AU_Generic_P-V_Food,Drinks_Bulk_Exact,7,1,11.83,0,11.83,,14.29,0.0
+"""commercial milk frothers""",Phrase match,AU_Generic_P-V_Food,Coffee Machines_Phrase,7,3,11.77,0,3.92,,42.86,0.0
+[hotel supplies],Exact match,AU_Generic_P-V_Hospitality,Hospitality_Exact,32,3,11.75,0,3.92,,9.38,0.0
+"""wholesale computer peripherals""",Phrase match,AU_Generic_P-V_Electronics,Computers_Wholesale_Phrase,2,2,11.72,0,5.86,,100.0,0.0
+[commercial computers],Exact match,AU_Generic_P-V_Electronics,Computers_Exact,27,1,11.71,0,11.71,,3.7,0.0
+[cereals wholesale],Exact match,AU_Generic_P-V_Food,Wholesales_Food_Exact,7,1,11.61,0,11.61,,14.29,0.0
+"""present suppliers""",Phrase match,AU_Generic_P-V_Shops,Suppliers_Gifts,44,1,11.52,0,11.52,,2.27,0.0
+"""spectacle frames suppliers""",Phrase match,AU_Generic_P-V_Apparel,Swimwear_Wholesales_Phrase_Phrase,25,2,11.51,0,5.76,,8.0,0.0
+[products for the office],Exact match,AU_Generic_P-V_Office,Office_Exact,31,1,11.48,0,11.48,,3.23,0.0
+"""amazon business free""",Phrase match,AU_Brand_Phrase,Pure_ Phrase,9,1,11.47,0,11.47,,11.11,0.0
+"""industrial bathroom cleaners""",Phrase match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Phrase,52,1,11.44,0,11.44,,1.92,0.0
+[amazon prime pro],Exact match,AU_Brand_Exact,Prime_Exact,54,14,11.31,0,0.81,,25.93,0.0
+"""commercial sieves""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Phrase,71,2,11.11,0,5.56,,2.82,0.0
+"""cadburys mini eggs bulk""",Phrase match,AU_Generic_P-V_Food,Sweets_Bulk_Phrase,33,3,10.98,0,3.66,,9.09,0.0
+[bulk cupcake boxes],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Exact,24,2,10.95,0,5.48,,8.33,0.0
+"""bulk usb cables""",Phrase match,AU_Generic_P-V_Electronics,Computers_Bulk_Phrase,34,1,10.92,0,10.92,,2.94,0.0
+[bulk mens polo shirts],Exact match,AU_Generic_P-V_Apparel,Tops Men_Bulk_Exact,7,2,10.92,0,5.46,,28.57,0.0
+"""meat wholesalers""",Phrase match,AU_Generic_P-V_Food,Food_Wholesalers_Phrase,30,2,10.87,0,5.44,,6.67,0.0
+[bulk cutlery sets],Exact match,AU_Generic_P-V_Food,Cultlery_Bulk_Exact,29,3,10.86,0,3.62,,10.34,0.0
+[wholesale champagne glasses],Exact match,AU_Generic_P-V_Food,Glassware_Wholesale_Exact,8,2,10.85,0,5.43,,25.0,0.0
+[licorice wholesale],Exact match,AU_Generic_P-V_Food,Wholesales_Food_Exact,11,1,10.7,0,10.7,,9.09,0.0
+[bulk rice],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,69,4,10.66,0,2.67,,5.8,0.0
+[bulk eyewear],Exact match,AU_Generic_P-V_Apparel,Eyewear_Bulk_Exact,3,1,10.65,0,10.65,,33.33,0.0
+[products for companies],Exact match,AU_Generic,Enterprises_Products_Exact,8,2,10.62,0,5.31,,25.0,0.0
+[wholesale tote bags],Exact match,AU_Generic_P-V_Apparel,Accessories_Wholesales_Exact,16,2,10.62,0,5.31,,12.5,0.0
+"""cups wholesalers""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Wholesalers_Phrase,17,3,10.53,0,3.51,,17.65,0.0
+"""sugar wholesalers""",Phrase match,AU_Generic_P-V_Food,Food_Wholesalers_Phrase,12,3,10.48,0,3.49,,25.0,0.0
+"""bulk wheat""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,25,2,10.48,0,5.24,,8.0,0.0
+"""chemicals suppliers""",Phrase match,AU_Generic_P-V_Crafts,Professional-Tools_Suppliers_Phrase,62,3,10.47,0,3.49,,4.84,0.0
+[wholesale wigs],Exact match,AU_Generic_P-V_Beauty,Hair-Appliances_Wholesale_Exact,11,2,10.38,1,5.19,10.38,18.18,50.0
+"""bulk bra""",Phrase match,AU_Generic_P-V_Apparel,Underwear_Bulk_Phrase,17,2,10.37,0,5.19,,11.76,0.0
+[wholesale cupcake boxes],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Wholesale_Exact,10,2,10.36,1,5.18,10.36,20.0,50.0
+"""wholesale boots""",Phrase match,AU_Generic_P-V_Apparel,Shoes_Wholesales_Phrase,15,1,10.3,0,10.3,,6.67,0.0
+[bulk electronics],Exact match,AU_Generic_P-V_Shops,Electronics_Bulk_Exact,21,2,10.26,0,5.13,,9.52,0.0
+"""computer parts for business""",Phrase match,AU_Generic_P-V_Electronics,Computers_Phrase,40,2,10.23,0,5.12,,5.0,0.0
+"""bulk bath gel""",Phrase match,AU_Generic_P-V_Beauty,Bath_Bulk_Phrase,18,3,10.22,0,3.41,,16.67,0.0
+[leggings suppliers],Exact match,AU_Generic_P-V_Apparel,Hosiery & Socks_Suppliers_Exact,2,1,10.16,0,10.16,,50.0,0.0
+[womens bulk briefs],Exact match,AU_Generic_P-V_Apparel,Underwear Women_Bulk_Exact,5,2,10.05,0,5.03,,40.0,0.0
+"""industrial electrical products""",Phrase match,AU_Generic_P-V_Industrial,Electrical_Phrase,12,2,9.96,0,4.98,,16.67,0.0
+"""bulk hydrogen peroxide""",Phrase match,AU_Generic_P-V_Beauty,Hair-Appliances_Bulk_Phrase,39,1,9.96,0,9.96,,2.56,0.0
+"""bulk laundry""",Phrase match,AU_Generic_P-V_Food,Linens_Bulk_Phrase,38,4,9.91,0,2.48,,10.53,0.0
+[bulk tumblers],Exact match,AU_Generic_P-V_Food,Glassware_Bulk_Exact,14,4,9.89,0,2.47,,28.57,0.0
+"""wholesale massage""",Phrase match,AU_Generic_P-V_Beauty,Massage_Wholesale_Phrase,59,3,9.86,0,3.29,,5.08,0.0
+"""noodles wholesalers""",Phrase match,AU_Generic_P-V_Food,Food_Wholesalers_Phrase,45,3,9.86,0,3.29,,6.67,0.0
+"""office lighting""",Phrase match,AU_Generic_P-V_Office,Furniture_Phrase,119,1,9.83,0,9.83,,0.84,0.0
+[wholesale cleaning chemicals],Exact match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Wholesale_Exact,23,2,9.83,0,4.92,,8.7,0.0
+"""wholesale bath robes""",Phrase match,AU_Generic_P-V_Apparel,Sleepwear_Wholesales_Phrase,21,1,9.81,0,9.81,,4.76,0.0
+"""foods catalogue""",Phrase match,AU_Generic_P-V_Food,Food_Catalog_Phrase,15,2,9.78,0,4.89,,13.33,0.0
+"""wholesale vinegars""",Phrase match,AU_Generic_P-V_Food,Condiments_Wholesale_Phrase,31,2,9.72,0,4.86,,6.45,0.0
+[bulk serving trays],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Exact,16,1,9.7,0,9.7,,6.25,0.0
+"""cake boxes wholesalers""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Wholesalers_Phrase,25,3,9.66,0,3.22,,12.0,0.0
+"""janitorial wholesalers""",Phrase match,AU_Generic_P-V_Janitorial,Wholesale_Phrase,44,2,9.65,0,4.83,,4.55,0.0
+[gift bags bulk],Exact match,AU_Generic_P-V_Celebrations,Generic_Bulk_Exact,37,2,9.59,0,4.8,,5.41,0.0
+"""commercial coffee machines""",Phrase match,AU_Generic_P-V_Food,Coffee Machines_Phrase,18,3,9.57,0,3.19,,16.67,0.0
+[bulk eggs],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,24,2,9.56,0,4.78,,8.33,0.0
+[distributors toy],Exact match,AU_Generic_P-V_Shops,Toys Shop_Distributors,24,1,9.5,0,9.5,,4.17,0.0
+"""bulk pasta""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,19,4,9.45,1,2.36,9.45,21.05,25.0
+"""mens bulk t-shirts""",Phrase match,AU_Generic_P-V_Apparel,Tops Men_Bulk_Phrase,9,1,9.44,0,9.44,,11.11,0.0
+"""bulk respirators""",Phrase match,AU_Generic_P-V_Safety,Equipment-Gear_Bulk_Phrase,16,2,9.27,0,4.64,,12.5,0.0
+"""event wholesaler""",Phrase match,AU_Generic_P-V_Celebrations,Wholesale_Phrase,18,2,9.27,0,4.64,,11.11,0.0
+[bulk disposable cameras],Exact match,AU_Generic_P-V_Electronics,Camera-Accessories_Bulk_Exact,63,2,9.26,0,4.63,,3.17,0.0
+[computer parts distributor],Exact match,AU_Generic_P-V_Electronics,Computers_Distributor_Exact,11,1,9.25,1,9.25,9.25,9.09,100.0
+[flower sundries],Exact match,AU_Generic_P-V_Shops,Procurement_Florist_Exact,10,2,9.16,0,4.58,,20.0,0.0
+[cleaning chemicals],Exact match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Exact,43,1,9.1,0,9.1,,2.33,0.0
+[bulk cd],Exact match,AU_Generic_P-V_Electronics,CDs_Bulk_Exact,7,1,9.01,0,9.01,,14.29,0.0
+"""bulk decanters""",Phrase match,AU_Generic_P-V_Food,Glassware_Bulk_Phrase,5,1,8.96,0,8.96,,20.0,0.0
+"""wholesale take out containers""",Phrase match,AU_Generic_P-V_Food,Kitchen Tools_Wholesale_Phrase,38,3,8.59,0,2.86,,7.89,0.0
+"""wholesale bins""",Phrase match,AU_Generic_P-V_Janitorial,Waste_Wholesale_Phrase,78,1,8.58,0,8.58,,1.28,0.0
+"""bulk eggs""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,10,3,8.51,0,2.84,,30.0,0.0
+"""headphones distributor""",Phrase match,AU_Generic_P-V_Electronics,Headphones_Distributor_Phrase,55,2,8.45,0,4.22,,3.64,0.0
+"""hand soaps supplier""",Phrase match,AU_Generic_P-V_Janitorial,Soap_Supplier_Phrase,22,1,8.44,0,8.44,,4.55,0.0
+"""b2b online shop""",Phrase match,AU_Generic,B2B_Shop_Phrase,67,2,8.43,0,4.22,,2.99,0.0
+"""bulk champagne""",Phrase match,AU_Generic_P-V_Food,Drinks_Bulk_Phrase,39,1,8.37,0,8.37,,2.56,0.0
+[home office essentials],Exact match,AU_Generic_P-V_Office,Home-Office_Exact,77,1,8.37,0,8.37,,1.3,0.0
+[wholesale furniture for retailers],Exact match,AU_Generic_P-V_Shops,Furniture_Exact,10,2,8.25,0,4.13,,20.0,0.0
+"""commercial knives""",Phrase match,AU_Generic_P-V_Food,Cultlery_Phrase,28,2,8.19,0,4.1,,7.14,0.0
+[bulk easter sweets],Exact match,AU_Generic_P-V_Food,Sweets_Bulk_Exact,6,2,8.18,0,4.09,,33.33,0.0
+"""wholesale eyewear""",Phrase match,AU_Generic_P-V_Apparel,Eyewear_Wholesales_Phrase,10,2,8.14,0,4.07,,20.0,0.0
+[take out containers suppliers],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Suppliers_Exact,16,2,8.13,0,4.07,,12.5,0.0
+"""furniture suppliers for retailers""",Phrase match,AU_Generic_P-V_Shops,Furniture_Phrase,77,2,8.13,0,4.07,,2.6,0.0
+[commercial water glasses],Exact match,AU_Generic_P-V_Food,Glassware_Exact,7,2,8.11,1,4.06,8.11,28.57,50.0
+"""spices wholesale""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,22,2,8.1,1,4.05,8.1,9.09,50.0
+[mens wholesale shirts],Exact match,AU_Generic_P-V_Apparel,Tops Men_Wholesales_Exact,2,1,8.07,0,8.07,,50.0,0.0
+"""commercial frying pans""",Phrase match,AU_Generic_P-V_Food,Pans_Phrase,30,3,8.06,0,2.69,,10.0,0.0
+"""bulk women sweaters""",Phrase match,AU_Generic_P-V_Apparel,Tops Women_Bulk_Phrase,4,2,8.06,0,4.03,,50.0,0.0
+[toy wholesalers],Exact match,AU_Generic_P-V_Shops,Toys Shop_Wholesale,3,1,8.04,0,8.04,,33.33,0.0
+[industrial brooms],Exact match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Exact,51,1,8.0,0,8.0,,1.96,0.0
+[bulk vodka],Exact match,AU_Generic_P-V_Food,Drinks_Bulk_Exact,5,1,8.0,0,8.0,,20.0,0.0
+[buy janitorial],Exact match,AU_Generic_P-V_Janitorial,Purchasing_Exact,36,1,7.95,0,7.95,,2.78,0.0
+[commercial espresso machines],Exact match,AU_Generic_P-V_Food,Coffee Machines_Exact,22,1,7.94,0,7.94,,4.55,0.0
+"""hotel amenities bulk""",Phrase match,AU_Generic_P-V_Hospitality,Generic_Bulk_Phrase,16,1,7.94,0,7.94,,6.25,0.0
+"""wholesale stationery""",Phrase match,AU_Generic_P-V_Office,Wholesale_Phrase,14,2,7.93,0,3.97,,14.29,0.0
+"""commercial woks""",Phrase match,AU_Generic_P-V_Food,Pans_Phrase,38,1,7.92,0,7.92,,2.63,0.0
+[cleaning wholesale],Exact match,AU_Generic_P-V_Janitorial,Wholesale_Exact,6,2,7.91,0,3.96,,33.33,0.0
+[bulk cocktail shakers],Exact match,AU_Generic_P-V_Food,Barware_Bulk_Exact,2,2,7.89,0,3.95,,100.0,0.0
+[bulk peroxide],Exact match,AU_Generic_P-V_Beauty,Hair-Appliances_Bulk_Exact,29,2,7.87,0,3.94,,6.9,0.0
+"""bulk floor mats""",Phrase match,AU_Generic_P-V_Janitorial,Floor-Care_Bulk_Phrase,12,2,7.79,0,3.9,,16.67,0.0
+"""wholesale makeup""",Phrase match,AU_Generic_P-V_Beauty,Makeup_Wholesale_Phrase,14,1,7.74,0,7.74,,7.14,0.0
+"""shorts suppliers""",Phrase match,AU_Generic_P-V_Apparel,Bottoms_Suppliers_Phrase,19,2,7.53,0,3.77,,10.53,0.0
+[bulk gel nails],Exact match,AU_Generic_P-V_Beauty,Nail-Care_Bulk_Exact,4,1,7.48,0,7.48,,25.0,0.0
+"""soap distributor""",Phrase match,AU_Generic_P-V_Janitorial,Soap_Distributor_Phrase,37,3,7.42,0,2.47,,8.11,0.0
+"""industrial glass cleaners""",Phrase match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Phrase,69,1,7.26,0,7.26,,1.45,0.0
+[hospitality supplies],Exact match,AU_Generic_P-V_Hospitality,Hospitality_Exact,9,1,7.15,0,7.15,,11.11,0.0
+[wholesale cups],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Wholesale_Exact,4,2,7.04,0,3.52,,50.0,0.0
+[wholesale sponges],Exact match,AU_Generic_P-V_Janitorial,Tools_Wholesale_Exact,9,1,7.01,0,7.01,,11.11,0.0
+"""tracksuits suppliers""",Phrase match,AU_Generic_P-V_Apparel,Tops_Suppliers_Phrase,11,2,6.98,0,3.49,,18.18,0.0
+"""shoes suppliers""",Phrase match,AU_Generic_P-V_Apparel,Shoes_Suppliers_Phrase,30,3,6.9,0,2.3,,10.0,0.0
+"""bulk jackets""",Phrase match,AU_Generic_P-V_Apparel,Outerwear_Bulk_Phrase,8,2,6.74,0,3.37,,25.0,0.0
+[wholesale electronic products],Exact match,AU_Generic_P-V_Electronics,Electronics_Wholesale_Exact,19,1,6.73,0,6.73,,5.26,0.0
+[shop fittings],Exact match,AU_Generic_P-V_Shops,Furniture_Exact,3,1,6.71,0,6.71,,33.33,0.0
+[wholesale computers],Exact match,AU_Generic_P-V_Electronics,Computers_Wholesale_Exact,2,1,6.69,0,6.69,,50.0,0.0
+[wholesale cooking ingredients],Exact match,AU_Generic_P-V_Food,Food_Wholesale_Exact,8,1,6.66,0,6.66,,12.5,0.0
+"""bulk wine glasses""",Phrase match,AU_Generic_P-V_Food,Glassware_Bulk_Phrase,38,3,6.64,0,2.21,,7.89,0.0
+"""b2b companies""",Phrase match,AU_Generic,B2B_Enterprise_Phrase,26,1,6.61,0,6.61,,3.85,0.0
+"""wholesale disposable cameras""",Phrase match,AU_Generic_P-V_Electronics,Camera-Accessories_Wholesale_Phrase,12,2,6.6,0,3.3,,16.67,0.0
+"""waxing suppliers""",Phrase match,AU_Generic_P-V_Beauty,Hair-Removal_Supplier_Phrase,32,2,6.58,0,3.29,,6.25,0.0
+"""wholesale baby clothing sets""",Phrase match,AU_Generic_P-V_Apparel,Swimwear_Wholesales_Phrase_Phrase_Phrase,3,2,6.48,0,3.24,,66.67,0.0
+[acrylic nail suppliers],Exact match,AU_Generic_P-V_Beauty,Nail-Care_Supplier_Exact,6,1,6.47,0,6.47,,16.67,0.0
+"""party bags suppliers""",Phrase match,AU_Generic_P-V_Celebrations,Party_Suppliers_Phrase,12,1,6.45,0,6.45,,8.33,0.0
+[wholesale jeans],Exact match,AU_Generic_P-V_Apparel,Bottoms_Wholesales_Exact,3,1,6.45,0,6.45,,33.33,0.0
+[wholesale beard oil],Exact match,AU_Generic_P-V_Beauty,Hair-Appliances_Wholesale_Exact,3,2,6.45,0,3.23,,66.67,0.0
+"""bulk vegetables""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,72,2,6.44,0,3.22,,2.78,0.0
+[wholesale swim shorts],Exact match,AU_Generic_P-V_Apparel,Swimwear_Wholesales_Exact,2,1,6.43,0,6.43,,50.0,0.0
+[bulk computer parts],Exact match,AU_Generic_P-V_Electronics,Computers_Bulk_Exact,7,2,6.38,0,3.19,,28.57,0.0
+"""wholesale moisturizer""",Phrase match,AU_Generic_P-V_Beauty,Skin-Care_Wholesale_Phrase,10,1,6.24,0,6.24,,10.0,0.0
+[mens wholesale polo shirts],Exact match,AU_Generic_P-V_Apparel,Tops Men_Wholesales_Exact,2,1,6.2,0,6.2,,50.0,0.0
+[bulk pasta],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,20,3,6.15,0,2.05,,15.0,0.0
+"""wholesale tumblers""",Phrase match,AU_Generic_P-V_Food,Glassware_Wholesale_Phrase,16,2,6.13,0,3.07,,12.5,0.0
+[wholesale clothing sets baby],Exact match,AU_Generic_P-V_Apparel,Accessories Baby_Wholesales_Exact,8,1,6.05,0,6.05,,12.5,0.0
+"""suppliers items""",Phrase match,AU_Generic,Suppliers_Products_Phrase,26,1,6.0,0,6.0,,3.85,0.0
+[shoes in bulk],Exact match,AU_Generic_P-V_Shops,Clothing_Bulk_Exact,2,2,5.98,0,2.99,,100.0,0.0
+"""wholesale belts""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Wholesales_Phrase,23,1,5.96,0,5.96,,4.35,0.0
+"""boots suppliers""",Phrase match,AU_Generic_P-V_Apparel,Shoes_Suppliers_Phrase,21,1,5.91,0,5.91,,4.76,0.0
+"""insulation wholesale""",Phrase match,AU_Generic_P-V_Crafts,Professional-Tools_Wholesale_Phrase,5,1,5.91,0,5.91,,20.0,0.0
+[hotel supplies towels],Exact match,AU_Generic_P-V_Hospitality,Products_Exact,5,1,5.9,0,5.9,,20.0,0.0
+[wholesale tights],Exact match,AU_Generic_P-V_Apparel,Hosiery & Socks_Wholesales_Exact,2,1,5.89,0,5.89,,50.0,0.0
+"""wholesale tote bags""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Wholesales_Phrase,18,2,5.87,0,2.94,,11.11,0.0
+[wholesale wine],Exact match,AU_Generic_P-V_Food,Drinks_Wholesale_Exact,5,1,5.84,0,5.84,,20.0,0.0
+[wholesale soft drinks],Exact match,AU_Generic_P-V_Food,Drinks_Wholesale_Exact,7,3,5.83,0,1.94,,42.86,0.0
+[business multimedia projectors],Exact match,AU_Generic_P-V_Office,Office-Supplies_Exact,15,1,5.81,0,5.81,,6.67,0.0
+"""distributor purchasing""",Phrase match,AU_Generic,Procurement_Distributors_Phrase,12,1,5.79,0,5.79,,8.33,0.0
+[wholesale laundry detergent],Exact match,AU_Generic_P-V_Janitorial,Detergent_Wholesale_Exact,16,2,5.78,0,2.89,,12.5,0.0
+[wholesale items],Exact match,AU_Generic,Wholesales_Products_Exact,22,1,5.76,0,5.76,,4.55,0.0
+"""tracksuits distributors""",Phrase match,AU_Generic_P-V_Apparel,Tops_Distributors_Phrase,4,1,5.68,0,5.68,,25.0,0.0
+[bulk shot glasses],Exact match,AU_Generic_P-V_Food,Glassware_Bulk_Exact,19,2,5.66,0,2.83,,10.53,0.0
+"""wholesale shawls""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Wholesales_Phrase,16,1,5.59,0,5.59,,6.25,0.0
+[wholesale men's socks],Exact match,AU_Generic_P-V_Apparel,Socks & Hosiery Men_Wholesales_Exact,9,1,5.58,0,5.58,,11.11,0.0
+"""crisps wholesalers""",Phrase match,AU_Generic_P-V_Food,Food_Wholesalers_Phrase,6,2,5.58,0,2.79,,33.33,0.0
+"""hardware wholesale""",Phrase match,AU_Generic_P-V_Crafts,Professional-Tools_Wholesale_Phrase,8,1,5.57,0,5.57,,12.5,0.0
+[bulk gifts],Exact match,AU_Generic_P-V_Shops,Bulk_Gifts_Exact,12,1,5.57,0,5.57,,8.33,0.0
+[bulk air fresheners],Exact match,AU_Generic_P-V_Janitorial,Odour_Bulk_Exact,17,2,5.54,0,2.77,,11.76,0.0
+"""bulk mens polo shirts""",Phrase match,AU_Generic_P-V_Apparel,Tops Men_Bulk_Phrase,13,1,5.53,0,5.53,,7.69,0.0
+[wholesale bags],Exact match,AU_Generic_P-V_Apparel,Accessories_Wholesales_Exact,3,1,5.52,0,5.52,,33.33,0.0
+"""wholesale eyeshadow""",Phrase match,AU_Generic_P-V_Beauty,Makeup_Wholesale_Phrase,3,1,5.49,1,5.49,5.49,33.33,100.0
+[bulk party decorations],Exact match,AU_Generic_P-V_Celebrations,Party_Bulk_Exact,1,1,5.49,0,5.49,,100.0,0.0
+[commercial flasks],Exact match,AU_Generic_P-V_Food,Barware_Exact,6,2,5.48,0,2.74,,33.33,0.0
+"""professional air compressors""",Phrase match,AU_Generic_P-V_Crafts,Professional-Tools_Phrase,10,2,5.48,0,2.74,,20.0,0.0
+[wholesale paper towels],Exact match,AU_Generic_P-V_Janitorial,Paper_Wholesale_Exact,4,2,5.47,0,2.74,,50.0,0.0
+[umbrellas suppliers],Exact match,AU_Generic_P-V_Apparel,Accessories_Suppliers_Exact,7,1,5.45,0,5.45,,14.29,0.0
+[wholesale chopping boards],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Wholesale_Exact,9,2,5.43,0,2.72,,22.22,0.0
+[soap supplier],Exact match,AU_Generic_P-V_Janitorial,Soap_Supplier_Exact,2,1,5.38,0,5.38,,50.0,0.0
+"""wholesale body brushes""",Phrase match,AU_Generic_P-V_Beauty,Bath_Wholesale_Phrase,5,1,5.36,0,5.36,,20.0,0.0
+"""licensed professional beauty supply online""",Phrase match,AU_Generic_P-V_Beauty,Products_Cosmetics_Phrase,12,2,5.35,0,2.68,,16.67,0.0
+[tv for conference room],Exact match,AU_Generic_P-V_Electronics,Televisions_Exact,15,1,5.31,0,5.31,,6.67,0.0
+[bulk dish soap],Exact match,AU_Generic_P-V_Janitorial,Soap_Bulk_Exact,37,1,5.27,0,5.27,,2.7,0.0
+[wholesale belts],Exact match,AU_Generic_P-V_Apparel,Accessories_Wholesales_Exact,1,1,5.25,0,5.25,,100.0,0.0
+"""party suppliers""",Phrase match,AU_Generic_P-V_Celebrations,Party_Suppliers_Phrase,5,1,5.24,0,5.24,,20.0,0.0
+"""b2b items""",Phrase match,AU_Generic,B2B_Products_Phrase,6,1,5.17,0,5.17,,16.67,0.0
+"""bulk leggings""",Phrase match,AU_Generic_P-V_Apparel,Hosiery & Socks_Bulk_Phrase,14,1,5.1,0,5.1,,7.14,0.0
+"""bulk carpet cleaners""",Phrase match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Bulk_Phrase,26,1,5.1,0,5.1,,3.85,0.0
+[office equipment],Exact match,AU_Generic_P-V_Office,Office_Exact,20,2,5.08,0,2.54,,10.0,0.0
+"""mobile phone accessories distributor""",Phrase match,AU_Generic_P-V_Electronics,Cell-Phones_Distributor_Phrase,15,1,5.04,0,5.04,,6.67,0.0
+[bulk coffee],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,6,2,4.98,0,2.49,,33.33,0.0
+[headbands suppliers],Exact match,AU_Generic_P-V_Apparel,Accessories_Suppliers_Exact,1,1,4.94,0,4.94,,100.0,0.0
+[bulk cleaning gloves],Exact match,AU_Generic_P-V_Janitorial,Gloves_Bulk_Exact,7,1,4.89,0,4.89,,14.29,0.0
+"""professional kitchen mats""",Phrase match,AU_Generic_P-V_Janitorial,Floor-Care_Phrase,29,1,4.77,0,4.77,,3.45,0.0
+[hardware bulk],Exact match,AU_Generic_P-V_Crafts,Professional-Tools_Bulk_Exact,2,1,4.76,0,4.76,,50.0,0.0
+[office filing system],Exact match,AU_Generic_P-V_Office,Office_Exact,13,1,4.71,0,4.71,,7.69,0.0
+"""wholesale earphones""",Phrase match,AU_Generic_P-V_Electronics,Headphones_Wholesale_Phrase,10,1,4.69,0,4.69,,10.0,0.0
+"""bulk sponges""",Phrase match,AU_Generic_P-V_Janitorial,Tools_Bulk_Phrase,30,1,4.67,0,4.67,,3.33,0.0
+[bulk noodles],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,20,2,4.66,0,2.33,,10.0,0.0
+"""cell phone distributor""",Phrase match,AU_Generic_P-V_Electronics,Cell-Phones_Distributor_Phrase,4,1,4.65,0,4.65,,25.0,0.0
+[wholesale air fresheners],Exact match,AU_Generic_P-V_Janitorial,Odour_Wholesale_Exact,17,1,4.52,0,4.52,,5.88,0.0
+[degreasers],Exact match,AU_Generic_P-V_Janitorial,Industrial-Chemicals_Exact,41,1,4.51,0,4.51,,2.44,0.0
+[shoes distributors],Exact match,AU_Generic_P-V_Apparel,Shoes_Distributors_Exact,20,1,4.51,0,4.51,,5.0,0.0
+[cardigans suppliers],Exact match,AU_Generic_P-V_Apparel,Tops_Suppliers_Exact,6,1,4.49,0,4.49,,16.67,0.0
+[wholesale knickers],Exact match,AU_Generic_P-V_Apparel,Underwear_Wholesales_Exact,11,1,4.47,0,4.47,,9.09,0.0
+"""home office items""",Phrase match,AU_Generic_P-V_Office,Home-Office_Phrase,32,1,4.44,0,4.44,,3.13,0.0
+"""bulk film cameras""",Phrase match,AU_Generic_P-V_Electronics,Camera-Accessories_Bulk_Phrase,15,2,4.42,0,2.21,,13.33,0.0
+"""wholesale biscuits""",Phrase match,AU_Generic_P-V_Food,Food_Wholesale_Phrase,8,1,4.42,0,4.42,,12.5,0.0
+[wholesale massage tables],Exact match,AU_Generic_P-V_Beauty,Massage_Wholesale_Exact,2,1,4.41,0,4.41,,50.0,0.0
+[garden tools wholesale],Exact match,AU_Generic_P-V_Crafts,Hand-Tools_Wholesale_Exact,5,1,4.38,0,4.38,,20.0,0.0
+[nail files distributor],Exact match,AU_Generic_P-V_Beauty,Nail-Care_Distributors_Exact,1,1,4.33,0,4.33,,100.0,0.0
+[bulk ear protection],Exact match,AU_Generic_P-V_Safety,Equipment-Gear_Bulk_Exact,7,1,4.32,0,4.32,,14.29,0.0
+"""cat accessories wholesaler""",Phrase match,AU_Generic_P-V_Shops,Pet Shop_Wholesale_Phrase,8,1,4.29,0,4.29,,12.5,0.0
+[books bulk],Exact match,AU_Generic_P-V_Shops,Book Shop_Bulk_Exact,9,1,4.24,0,4.24,,11.11,0.0
+[wholesale rice],Exact match,AU_Generic_P-V_Food,Food_Wholesale_Exact,11,2,4.21,0,2.11,,18.18,0.0
+[wholesale digital picture frames],Exact match,AU_Generic_P-V_Electronics,Camera-Accessories_Wholesale_Exact,5,1,4.18,0,4.18,,20.0,0.0
+[bulk dog supplies],Exact match,AU_Generic_P-V_Shops,Bulk_Pet Shop_Exact,4,1,4.16,0,4.16,,25.0,0.0
+[bulk sugar],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,21,2,4.15,0,2.08,,9.52,0.0
+[bulk facial tissues],Exact match,AU_Generic_P-V_Janitorial,Paper_Bulk,13,1,4.11,0,4.11,,7.69,0.0
+"""cosmetic bags suppliers""",Phrase match,AU_Generic_P-V_Beauty,Makeup_Supplier_Phrase,4,1,4.1,0,4.1,,25.0,0.0
+"""shop fittings""",Phrase match,AU_Generic_P-V_Shops,Furniture_Phrase,6,2,4.04,0,2.02,,33.33,0.0
+[wholesale computer parts],Exact match,AU_Generic_P-V_Electronics,Computers_Wholesale_Exact,3,1,4.03,1,4.03,4.03,33.33,100.0
+[wholesale rum],Exact match,AU_Generic_P-V_Food,Drinks_Wholesale_Exact,2,1,4.0,0,4.0,,50.0,0.0
+[bulk cornflakes],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,7,1,4.0,0,4.0,,14.29,0.0
+[book distributors],Exact match,AU_Generic_P-V_Shops,Book Shop_Distributors_Exact,9,1,3.99,0,3.99,,11.11,0.0
+[bulk cat supplies],Exact match,AU_Generic_P-V_Shops,Bulk_Pet Shop_Exact,1,1,3.99,0,3.99,,100.0,0.0
+"""scrunchies suppliers""",Phrase match,AU_Generic_P-V_Apparel,Tops_Suppliers_Phrase,28,1,3.98,0,3.98,,3.57,0.0
+"""wholesale sweaters baby""",Phrase match,AU_Generic_P-V_Apparel,Tops Baby_Wholesales_Phrase,10,1,3.98,0,3.98,,10.0,0.0
+[bulk bakery box],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Exact,6,1,3.98,0,3.98,,16.67,0.0
+[bulk condiments],Exact match,AU_Generic_P-V_Food,Condiments_Bulk_Exact,2,1,3.97,0,3.97,,50.0,0.0
+"""wholesale mops""",Phrase match,AU_Generic_P-V_Janitorial,Floor-Care_Wholesale_Phrase,2,1,3.97,0,3.97,,50.0,0.0
+[wholesale baby clothing sets],Exact match,AU_Generic_P-V_Apparel,Accessories Baby_Wholesales_Exact,13,1,3.95,0,3.95,,7.69,0.0
+"""bulk women polo shirts""",Phrase match,AU_Generic_P-V_Apparel,Tops Women_Bulk_Phrase,7,1,3.94,0,3.94,,14.29,0.0
+[wholesale eyeshadow],Exact match,AU_Generic_P-V_Beauty,Makeup_Wholesale_Exact,2,1,3.94,0,3.94,,50.0,0.0
+[wholesale fish],Exact match,AU_Generic_P-V_Food,Wholesales_Food_Exact,1,1,3.91,0,3.91,,100.0,0.0
+"""b2b business""",Phrase match,AU_Generic,B2B_Shop_Phrase,8,1,3.9,0,3.9,,12.5,0.0
+"""hotel supplies towels""",Phrase match,AU_Generic_P-V_Hospitality,Products_Phrase,42,1,3.89,0,3.89,,2.38,0.0
+"""bulk mobile phone accessories""",Phrase match,AU_Generic_P-V_Electronics,Cell-Phones_Bulk_Phrase,6,1,3.89,0,3.89,,16.67,0.0
+[bulk christmas decorations],Exact match,AU_Generic_P-V_Celebrations,Christmas_Bulk_Exact,11,1,3.88,0,3.88,,9.09,0.0
+"""mens wholesale hosiery""",Phrase match,AU_Generic_P-V_Apparel,Socks & Hosiery Men_Wholesales_Phrase,2,1,3.88,0,3.88,,50.0,0.0
+[wholesale conditioner],Exact match,AU_Generic_P-V_Beauty,Hair-Styling_Wholesale_Exact,3,1,3.83,0,3.83,,33.33,0.0
+[bulk women shirts],Exact match,AU_Generic_P-V_Apparel,Tops Women_Bulk_Exact,4,1,3.82,0,3.82,,25.0,0.0
+"""bonnets suppliers""",Phrase match,AU_Generic_P-V_Apparel,Accessories_Suppliers_Phrase,3,1,3.82,0,3.82,,33.33,0.0
+[wholesale pots],Exact match,AU_Generic_P-V_Food,Cookware_Wholesale_Exact,6,1,3.82,0,3.82,,16.67,0.0
+"""bulk bikinis""",Phrase match,AU_Generic_P-V_Apparel,Swimwear_Bulk_Phrase,3,1,3.8,0,3.8,,33.33,0.0
+[bulk knives],Exact match,AU_Generic_P-V_Food,Cultlery_Bulk_Exact,11,1,3.8,0,3.8,,9.09,0.0
+"""gym equipment sellers""",Phrase match,AU_Generic_P-V_Gym,Gym-Equipment_Sellers_Phrase,3,1,3.77,0,3.77,,33.33,0.0
+[wholesale foundation],Exact match,AU_Generic_P-V_Beauty,Makeup_Wholesale_Exact,3,1,3.77,0,3.77,,33.33,0.0
+[hotel supplies soap],Exact match,AU_Generic_P-V_Hospitality,Products_Exact,11,1,3.77,0,3.77,,9.09,0.0
+[florist equipment],Exact match,AU_Generic_P-V_Shops,Florist_Exact,16,1,3.77,0,3.77,,6.25,0.0
+"""commercial coasters""",Phrase match,AU_Generic_P-V_Food,Barware_Phrase,14,2,3.73,0,1.87,,14.29,0.0
+"""bulk champagne glasses""",Phrase match,AU_Generic_P-V_Food,Glassware_Bulk_Phrase,2,1,3.57,0,3.57,,50.0,0.0
+"""wholesale laundry""",Phrase match,AU_Generic_P-V_Food,Linens_Wholesale_Phrase,2,1,3.56,0,3.56,,50.0,0.0
+"""wholesale floor mats""",Phrase match,AU_Generic_P-V_Janitorial,Floor-Care_Wholesale_Phrase,4,1,3.5,0,3.5,,25.0,0.0
+[wholesale cd],Exact match,AU_Generic_P-V_Electronics,CDs_Wholesale_Exact,10,1,3.48,0,3.48,,10.0,0.0
+[commercial pots],Exact match,AU_Generic_P-V_Food,Cookware_Exact,11,1,3.48,0,3.48,,9.09,0.0
+[ingredients wholesale],Exact match,AU_Generic_P-V_Food,Wholesales_Food_Exact,4,1,3.44,0,3.44,,25.0,0.0
+[wholesale sweaters baby],Exact match,AU_Generic_P-V_Apparel,Tops Baby_Wholesales_Exact,1,1,3.43,0,3.43,,100.0,0.0
+[wholesale trays],Exact match,AU_Generic_P-V_Food,Plates_Wholesale_Exact,1,1,3.4,0,3.4,,100.0,0.0
+"""industrial scales""",Phrase match,AU_Generic_P-V_Industrial,Measurement_Phrase,3,1,3.38,0,3.38,,33.33,0.0
+"""knickers suppliers""",Phrase match,AU_Generic_P-V_Apparel,Bottoms_Wholesales_Phrase_Phrase,19,1,3.36,0,3.36,,5.26,0.0
+[bulk vegetables],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,4,1,3.34,0,3.34,,25.0,0.0
+[business stationery suppliers],Exact match,AU_Generic_P-V_Office,Suppliers_Exact,16,1,3.33,0,3.33,,6.25,0.0
+[batteries wholesale],Exact match,AU_Generic_P-V_Crafts,Home-Accessories_Wholesale_Exact,4,1,3.3,0,3.3,,25.0,0.0
+"""shea butter distributors""",Phrase match,AU_Generic_P-V_Beauty,Skin-Care_Distributors_Phrase,9,1,3.29,0,3.29,,11.11,0.0
+[bulk refurbished phones],Exact match,AU_Generic_P-V_Electronics,Phones_Bulk_Exact,5,2,3.27,0,1.64,,40.0,0.0
+[work from home supplies],Exact match,AU_Generic_P-V_Office,Wfh_Exact,20,1,3.25,0,3.25,,5.0,0.0
+"""setting up an amazon business account""",Phrase match,AU_Brand_Phrase,Account_ Phrase,1,1,3.25,0,3.25,,100.0,0.0
+[cleaning wholesalers],Exact match,AU_Generic_P-V_Janitorial,Wholesale_Exact,7,1,3.24,0,3.24,,14.29,0.0
+[drinks wholesalers],Exact match,AU_Generic_P-V_Food,Food_Wholesalers_Exact,5,1,3.24,0,3.24,,20.0,0.0
+[bulk tissue paper],Exact match,AU_Generic_P-V_Janitorial,Paper_Bulk,7,1,3.24,0,3.24,,14.29,0.0
+[wholesale super glue],Exact match,AU_Generic_P-V_Industrial,Adhesive_Wholesale_Exact,2,1,3.22,0,3.22,,50.0,0.0
+"""commercial kettles""",Phrase match,AU_Generic_P-V_Food,Coffee Machines_Phrase,3,1,3.19,0,3.19,,33.33,0.0
+[wholesale tv],Exact match,AU_Generic_P-V_Electronics,Televisions_Wholesale_Exact,8,1,3.17,0,3.17,,12.5,0.0
+[bulk wheat],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,11,1,3.17,0,3.17,,9.09,0.0
+[bulk foods],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,17,2,3.16,0,1.58,,11.76,0.0
+[wholesale foods],Exact match,AU_Generic_P-V_Food,Food_Wholesale_Exact,33,2,3.11,0,1.56,,6.06,0.0
+[commercial ice cream machine],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Exact,42,1,3.02,0,3.02,,2.38,0.0
+"""wholesale shampoo""",Phrase match,AU_Generic_P-V_Beauty,Hair-Styling_Wholesale_Phrase,7,1,3.01,0,3.01,,14.29,0.0
+"""power tools wholesale""",Phrase match,AU_Generic_P-V_Crafts,Hand-Tools_Wholesale_Phrase,7,1,2.92,0,2.92,,14.29,0.0
+[tumblers wholesalers],Exact match,AU_Generic_P-V_Food,Glassware_Wholesalers_Exact,3,2,2.92,0,1.46,,66.67,0.0
+"""b2b online platform""",Phrase match,AU_Generic,B2B_Marketplace_Phrase,23,1,2.89,0,2.89,,4.35,0.0
+[cosmetic salon wholesaler],Exact match,AU_Generic_P-V_Beauty,Wholesalers_Cosmetics_Exact,8,1,2.85,0,2.85,,12.5,0.0
+[power tools wholesale],Exact match,AU_Generic_P-V_Crafts,Hand-Tools_Wholesale_Exact,3,1,2.85,0,2.85,,33.33,0.0
+"""bulk whisky""",Phrase match,AU_Generic_P-V_Food,Drinks_Bulk_Phrase,7,1,2.84,0,2.84,,14.29,0.0
+[home office supplies],Exact match,AU_Generic_P-V_Office,Home-Office_Exact,18,1,2.84,0,2.84,,5.56,0.0
+"""bulk refurbished phones""",Phrase match,AU_Generic_P-V_Electronics,Phones_Bulk_Phrase,5,1,2.79,0,2.79,,20.0,0.0
+[wholesale women polo shirts],Exact match,AU_Generic_P-V_Apparel,Tops Women_Wholesales_Exact,1,1,2.79,0,2.79,,100.0,0.0
+"""plates wholesalers""",Phrase match,AU_Generic_P-V_Food,Plates_Wholesalers_Phrase,12,1,2.77,0,2.77,,8.33,0.0
+"""vodka suppliers""",Phrase match,AU_Generic_P-V_Food,Drinks_Suppliers_Phrase,1,1,2.73,0,2.73,,100.0,0.0
+[bulk party bags],Exact match,AU_Generic_P-V_Celebrations,Party_Bulk_Exact,4,1,2.68,0,2.68,,25.0,0.0
+[sportswear suppliers],Exact match,AU_Generic_P-V_Apparel,Sportware_Suppliers_Exact,3,1,2.62,0,2.62,,33.33,0.0
+[wholesale speakers],Exact match,AU_Generic_P-V_Electronics,Audio_Wholesale_Exact,2,1,2.54,0,2.54,,50.0,0.0
+[suppliers products],Exact match,AU_Generic,Suppliers_Products_Exact,14,1,2.47,0,2.47,,7.14,0.0
+"""bulk human hair""",Phrase match,AU_Generic_P-V_Beauty,Hair-Appliances_Bulk_Phrase,15,1,2.4,0,2.4,,6.67,0.0
+[wholesale briefs],Exact match,AU_Generic_P-V_Apparel,Underwear_Wholesales_Exact,3,1,2.38,0,2.38,,33.33,0.0
+"""wholesale nuts""",Phrase match,AU_Generic_P-V_Food,Food_Wholesale_Phrase,29,1,2.3,0,2.3,,3.45,0.0
+[bulk strings],Exact match,AU_Generic_P-V_Apparel,Underwear_Bulk_Exact,3,1,2.28,0,2.28,,33.33,0.0
+[bulk tissues],Exact match,AU_Generic_P-V_Janitorial,Paper_Bulk_Exact,3,1,2.25,0,2.25,,33.33,0.0
+[sweaters suppliers],Exact match,AU_Generic_P-V_Apparel,Tops_Suppliers_Exact,2,1,2.16,0,2.16,,50.0,0.0
+[bulk biscuits],Exact match,AU_Generic_P-V_Food,Food_Bulk_Exact,21,1,2.15,0,2.15,,4.76,0.0
+[bulk conditioner],Exact match,AU_Generic_P-V_Beauty,Hair-Styling_Bulk_Exact,5,1,2.11,0,2.11,,20.0,0.0
+"""wholesale occasion""",Phrase match,AU_Generic_P-V_Celebrations,Wholesale_Phrase,25,1,2.05,0,2.05,,4.0,0.0
+"""swimsuits suppliers""",Phrase match,AU_Generic_P-V_Apparel,Swimwear_Suppliers_Phrase,11,1,2.03,0,2.03,,9.09,0.0
+[bulk brooms],Exact match,AU_Generic_P-V_Janitorial,Tools_Bulk_Exact,1,1,1.98,0,1.98,,100.0,0.0
+"""wholesale hotel""",Phrase match,AU_Generic_P-V_Hospitality,Products_Wholesale_Phrase,3,1,1.93,0,1.93,,33.33,0.0
+"""wholesale textiles""",Phrase match,AU_Generic_P-V_Materials,Wholesales_Textiles_Phrase,13,1,1.91,0,1.91,,7.69,0.0
+[wholesale pizza box],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Wholesale_Exact,2,1,1.91,0,1.91,,50.0,0.0
+"""bulk cereals""",Phrase match,AU_Generic_P-V_Food,Food_Bulk_Phrase,26,1,1.9,0,1.9,,3.85,0.0
+[wholesale shampoo],Exact match,AU_Generic_P-V_Beauty,Hair-Styling_Wholesale_Exact,11,1,1.9,0,1.9,,9.09,0.0
+[buy bulk online],Exact match,AU_Generic,Bulk_Buy_Exact,5,1,1.89,0,1.89,,20.0,0.0
+[bulk tissue paper],Exact match,AU_Generic_P-V_Janitorial,Paper_Bulk_Exact,17,1,1.88,0,1.88,,5.88,0.0
+[bulk shea butter],Exact match,AU_Generic_P-V_Beauty,Skin-Care_Bulk_Exact,6,1,1.84,0,1.84,,16.67,0.0
+[nail implements suppliers],Exact match,AU_Generic_P-V_Beauty,Nail-Care_Supplier_Exact,40,1,1.74,0,1.74,,2.5,0.0
+[bulk chopping boards],Exact match,AU_Generic_P-V_Food,Kitchen Tools_Bulk_Exact,2,1,1.66,0,1.66,,50.0,0.0
+"""bulk cutlery""",Phrase match,AU_Generic_P-V_Food,Cultlery_Bulk_Phrase,36,1,1.62,0,1.62,,2.78,0.0
+[dog treats suppliers],Exact match,AU_Generic_P-V_Pets,Food_Suppliers_Exact,2,1,1.61,0,1.61,,50.0,0.0
+"""baby clothing sets distributors""",Phrase match,AU_Generic_P-V_Apparel,Underwear_Bulk_Phrase_Phrase,13,1,1.61,0,1.61,,7.69,0.0
+[wholesale easter eggs],Exact match,AU_Generic_P-V_Food,Sweets_Wholesale_Exact,7,1,1.53,0,1.53,,14.29,0.0
+"""professional gym equipment""",Phrase match,AU_Generic_P-V_Gym,Gym-Equipment_Phrase,0,1,1.52,0,1.52,,,0.0
+[office supplies],Exact match,AU_Generic_P-V_Office,Office_Exact,42,1,1.43,0,1.43,,2.38,0.0
+"""pistachios wholesale""",Phrase match,AU_Generic_P-V_Food,Wholesales_Food_Phrase,3,1,1.39,0,1.39,,33.33,0.0
+"""industrial hinges""",Phrase match,AU_Generic_P-V_Industrial,Tools_Phrase,10,1,1.28,0,1.28,,10.0,0.0
+[bulk brushes],Exact match,AU_Generic_P-V_Beauty,Hair-Appliances_Bulk_Exact,4,1,1.26,0,1.26,,25.0,0.0
+[wholesaler au],Exact match,AU_Generic,Wholesalers_Exact,14,1,1.2,0,1.2,,7.14,0.0
+[bulk glassware],Exact match,AU_Generic_P-V_Food,Cultlery_Bulk_Exact,1,1,1.1,0,1.1,,100.0,0.0

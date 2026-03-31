@@ -2,7 +2,7 @@
 
 *The skeleton that holds everything together across sessions. Bootstrap sequence, directory conventions, environment rules, and the ground-truth files that define Richard's current state.*
 
-Last updated: 2026-03-27 (Friday evening PT)
+Last updated: 2026-03-31 (Tuesday PT)
 
 ---
 
@@ -106,11 +106,12 @@ Then read the organ you need for the task at hand (brain, eyes, hands, memory).
 | `~/shared/context/intake/` | Inbox. Unprocessed material. | Human drops, Agent processes | Drafts, raw notes, new docs |
 | `~/shared/context/wiki/` | Doc pipeline + context catalog | Wiki team agents | context-catalog.md, wiki-index.md, staging/, research/, reviews/ |
 | `~/shared/context/tools/` | Utility scripts. | Agent builds | Python scripts for MCP, sync, briefs |
+| `~/shared/data/duckdb/ps-analytics.duckdb` | PS Analytics database (DuckDB). All structured paid search data. | Dashboard ingester writes, all agents read+write | Query: `python3 ~/shared/tools/data/query.py "SQL"` or `from query import db`. MCP: `execute_query` tool (duckdb server). Read: `db()`, `market_trend()`, `market_week()`, `projection()`, `callout_scores()`. Write: `db_write()`, `db_upsert()`. Schema: `schema_export()` auto-runs after ingestion → `~/shared/tools/data/schema.sql`. Portability: `~/shared/tools/data/RECONSTRUCTION.md`. Data event: `~/shared/tools/data/last_ingest.json`. Parquet exports: `~/shared/data/exports/`. |
 | `~/shared/context/archive/` | Cold storage. | Agent | Archived artifacts, old versions |
 | `~/shared/context/meetings/` | Meeting series notes. One file per recurring meeting. | Agent summarizes from Hedy | stakeholder/, team/, manager/, peer/, adhoc/ — see README.md for full map |
 | `~/shared/artifacts/` | Published work product (7 categories) | Wiki team → Agent | testing/, strategy/, reporting/, tools/, communication/, program-details/, best-practices/ |
 | `~/shared/research/` | Standalone research outputs. | Agent | ad-copy-results.md, competitor-intel.md, oci-performance.md, daily-brief-latest.md, data files |
-| `~/shared/reference/` | Static references. | Human curates | index.md |
+| `~/shared/artifacts/` | Static references. | Human curates | index.md |
 | `~/.kiro/steering/` | Agent behavior config. | Human edits, Agent suggests | soul.md, rw-trainer.md, writing styles, prioritization, environment rules |
 
 ---

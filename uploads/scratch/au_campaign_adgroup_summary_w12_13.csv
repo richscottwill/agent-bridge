@@ -1,0 +1,361 @@
+Campaign,Ad Group,Impressions,Clicks,Cost,Registrations,CPC,CPA,CTR %,Conv Rate %
+AU_Generic,Bulk_Products_Phrase,9708,1039,5940.19,0,5.72,,10.7,0.0
+AU_Brand_Phrase,Pure_ Phrase,3058,318,2654.09,27,8.35,98.3,10.4,8.49
+AU_Generic_P-V_Food,Food_Bulk_Phrase,4991,559,2138.42,10,3.83,213.84,11.2,1.79
+AU_Brand_Exact,Pure_Exact,4266,1580,1287.14,107,0.81,12.03,37.04,6.77
+AU_Generic,Bulk_Buy_Phrase,1981,250,1190.37,0,4.76,,12.62,0.0
+AU_Brand_Exact,Account_Exact,1246,351,1161.42,66,3.31,17.6,28.17,18.8
+AU_Brand_Phrase,Navigation_Phrase,1363,101,921.82,8,9.13,115.23,7.41,7.92
+AU_Generic_P-V_Beauty,Products_Cosmetics_Phrase,2227,147,905.13,8,6.16,113.14,6.6,5.44
+AU_Generic,Wholesales_Products_Phrase,1572,196,847.46,0,4.32,,12.47,0.0
+AU_Generic,Wholesalers_Enterprises_Phrase,1084,98,812.88,0,8.29,,9.04,0.0
+AU_Brand_Phrase,Account_ Phrase,718,72,754.01,5,10.47,150.8,10.03,6.94
+AU_Generic_P-V_Food,Food_Wholesale_Phrase,1370,158,753.78,5,4.77,150.76,11.53,3.16
+AU_Generic_P-V_Food,Plates_Bulk_Phrase,1202,152,740.38,5,4.87,148.08,12.65,3.29
+AU_Generic_P-V_Janitorial,Products_Phrase,2682,172,725.72,3,4.22,241.91,6.41,1.74
+AU_Generic_P-V_Janitorial,Industrial-Chemicals_Phrase,2413,107,691.12,3,6.46,230.37,4.43,2.8
+AU_Generic_P-V_Food,Sweets_Bulk_Phrase,1538,176,677.54,3,3.85,225.85,11.44,1.7
+AU_Generic,Wholesalers_Phrase,887,95,674.27,0,7.1,,10.71,0.0
+AU_Generic_P-V_Food,Food_Wholesalers_Phrase,1104,127,661.42,2,5.21,330.71,11.5,1.57
+AU_Generic,Bulk_Distributors_Phrase,820,82,649.71,0,7.92,,10.0,0.0
+AU_Generic_P-V_Apparel,Accessories_Distributors_Phrase,1143,141,642.55,0,4.56,,12.34,0.0
+AU_Brand_Exact,Navigation_Exact,613,153,637.57,14,4.17,45.54,24.96,9.15
+AU_Generic_P-V_Janitorial,Purchasing_Phrase,2351,134,635.59,0,4.74,,5.7,0.0
+AU_Generic_P-V_Office,Office-Supplies_Phrase,1655,100,610.79,2,6.11,305.4,6.04,2.0
+AU_Brand_Phrase,Prime_Phrase,572,47,564.45,3,12.01,188.15,8.22,6.38
+AU_Generic_P-V_Office,Office_Phrase,2286,158,548.85,0,3.47,,6.91,0.0
+AU_Generic_P-V_Janitorial,Paper_Bulk,1027,99,547.9,7,5.53,78.27,9.64,7.07
+AU_Generic_P-V_Apparel,Hosiery & Socks_Wholesales_Phrase,962,116,508.69,0,4.39,,12.06,0.0
+AU_Brand_Exact,Prime_Exact,449,100,493.0,8,4.93,61.63,22.27,8.0
+AU_Generic_P-V_Beauty,Skin-Care_Bulk_Phrase,1021,110,486.69,3,4.42,162.23,10.77,2.73
+AU_Generic_P-V_Food,Kitchen Tools_Bulk_Phrase,779,96,470.82,1,4.9,470.82,12.32,1.04
+AU_Generic_P-V_Shops,Wholesale_Clothing,664,58,468.73,3,8.08,156.24,8.73,5.17
+AU_Generic,Suppliers_Products_Phrase,653,60,416.88,0,6.95,,9.19,0.0
+AU_Generic_P-V_Food,Wholesales_Food_Phrase,859,82,391.39,1,4.77,391.39,9.55,1.22
+AU_Generic_P-V_Janitorial,Products_Bulk_Phrase,1095,66,390.67,3,5.92,130.22,6.03,4.55
+AU_Generic,Enterprises_Products_Phrase,750,61,388.13,1,6.36,388.13,8.13,1.64
+AU_Generic_P-V_Office,Products_Phrase,1244,86,385.77,1,4.49,385.77,6.91,1.16
+AU_Generic_P-V_Beauty,Salon-Spa_Distributors_Phrase,846,60,382.93,4,6.38,95.73,7.09,6.67
+AU_Generic_P-V_Electronics,Televisions_Phrase,940,65,376.32,1,5.79,376.32,6.91,1.54
+AU_Generic_P-V_Janitorial,Distributors_Phrase,936,66,376.25,3,5.7,125.42,7.05,4.55
+AU_Generic_P-V_Beauty,Wholesalers_Cosmetics_Phrase,879,69,374.8,2,5.43,187.4,7.85,2.9
+AU_Generic,Enterprises_Shop_Phrase,785,54,373.26,0,6.91,,6.88,0.0
+AU_Generic_P-V_Shops,Furniture_Phrase,814,81,355.93,1,4.39,355.93,9.95,1.23
+AU_Generic_P-V_Electronics,Computers_Phrase,1870,68,354.28,0,5.21,,3.64,0.0
+AU_Generic_P-V_Shops,Clothing_Bulk_Phrase,648,75,354.12,0,4.72,,11.57,0.0
+AU_Generic_P-V_Hospitality,Products_Phrase,801,60,342.35,1,5.71,342.35,7.49,1.67
+AU_Generic_P-V_Apparel,Tops_Distributors_Phrase,688,96,339.94,0,3.54,,13.95,0.0
+AU_Generic_P-V_Food,Drinks_Wholesale_Phrase,559,62,332.94,3,5.37,110.98,11.09,4.84
+AU_Generic_P-V_Apparel,Tops_Suppliers_Phrase,584,66,321.32,0,4.87,,11.3,0.0
+AU_Generic_P-V_Beauty,Makeup_Supplier_Phrase,550,59,318.21,2,5.39,159.1,10.73,3.39
+AU_Generic,Wholesales_Buy_Phrase,513,51,301.68,0,5.92,,9.94,0.0
+AU_Generic_P-V_Shops,Bulk_Pet Shop_Phrase,575,51,292.0,2,5.73,146.0,8.87,3.92
+AU_Generic_P-V_Food,Drinks_Bulk_Phrase,486,64,261.36,0,4.08,,13.17,0.0
+AU_Generic_P-V_Office,Home-Office_Phrase,913,57,255.75,0,4.49,,6.24,0.0
+AU_Generic_P-V_Food,Cultlery_Wholesale_Phrase,363,44,245.98,4,5.59,61.5,12.12,9.09
+AU_Generic_P-V_Janitorial,Floor-Care_Phrase,892,52,241.78,0,4.65,,5.83,0.0
+AU_Generic_P-V_Food,Food_Bulk_Exact,380,54,240.47,1,4.45,240.47,14.21,1.85
+AU_Generic_P-V_Food,Food_Suppliers_Phrase,656,58,239.49,1,4.13,239.49,8.84,1.72
+AU_Generic_P-V_Apparel,Accessories_Suppliers_Phrase,266,43,224.24,0,5.21,,16.17,0.0
+AU_Generic_P-V_Apparel,Dresses_Wholesales_Phrase,460,55,217.28,0,3.95,,11.96,0.0
+AU_Generic_P-V_Janitorial,Supply_Bulk_Phrase,578,36,211.34,3,5.87,70.45,6.23,8.33
+AU_Generic,Suppliers_Phrase,366,44,209.52,0,4.76,,12.02,0.0
+AU_Generic_P-V_Apparel,Hosiery & Socks_Suppliers_Phrase,479,35,208.35,0,5.95,,7.31,0.0
+AU_Generic_P-V_Janitorial,Paper_Bulk_Exact,362,37,204.94,4,5.54,51.24,10.22,10.81
+AU_Generic_P-V_Office,Furniture_Phrase,692,70,203.16,1,2.9,203.16,10.12,1.43
+AU_Generic_P-V_Janitorial,Paper_Distributor_Phrase,390,34,198.67,0,5.84,,8.72,0.0
+AU_Generic_P-V_Materials,Wholesales_Textiles_Phrase,388,34,180.36,1,5.3,180.36,8.76,2.94
+AU_Generic_P-V_Beauty,Nail-Care_Bulk_Phrase,247,32,167.18,1,5.22,167.18,12.96,3.13
+AU_Generic_P-V_Apparel,Outerwear_Wholesales_Phrase,317,29,161.61,0,5.57,,9.15,0.0
+AU_Generic_P-V_Hospitality,Hospitality_Phrase,463,47,161.02,1,3.43,161.02,10.15,2.13
+AU_Generic_P-V_Apparel,Outerwear_Bulk_Phrase,341,30,159.59,0,5.32,,8.8,0.0
+AU_Generic_P-V_Food,Food_Wholesale_Exact,193,30,158.57,1,5.29,158.57,15.54,3.33
+AU_Generic_P-V_Janitorial,Products_Exact,425,32,157.62,2,4.93,78.81,7.53,6.25
+AU_Generic_P-V_Beauty,Hair-Appliances_Wholesale_Phrase,326,32,155.59,1,4.86,155.59,9.82,3.13
+AU_Generic_P-V_Electronics,Electronics_Wholesale_Phrase,304,23,151.97,5,6.61,30.39,7.57,21.74
+AU_Generic_P-V_Janitorial,Industrial-Chemicals_Bulk_Phrase,348,24,146.94,1,6.12,146.94,6.9,4.17
+AU_Generic_P-V_Shops,Accessories_Bulk_Phrase,298,25,146.41,1,5.86,146.41,8.39,4.0
+AU_Generic_P-V_Beauty,Hair-Styling_Bulk_Phrase,277,41,144.75,0,3.53,,14.8,0.0
+AU_Generic,Bulk_Buy_Exact,156,21,141.65,0,6.75,,13.46,0.0
+AU_Generic_P-V_Electronics,Computers_Distributor_Phrase,305,21,140.71,3,6.7,46.9,6.89,14.29
+AU_Generic_P-V_Janitorial,Tools_Bulk_Phrase,367,25,139.73,1,5.59,139.73,6.81,4.0
+AU_Generic_P-V_Apparel,Hosiery & Socks_Distributors_Phrase,205,29,137.3,0,4.73,,14.15,0.0
+AU_Generic_P-V_Janitorial,Paper_Wholesale_Phrase,182,19,135.71,1,7.14,135.71,10.44,5.26
+AU_Generic_P-V_Safety,Equipment-Gear_Phrase,350,32,127.93,0,4.0,,9.14,0.0
+AU_Generic_P-V_Celebrations,Party_Bulk_Phrase,282,24,123.11,1,5.13,123.11,8.51,4.17
+AU_Generic_P-V_Food,Cultlery_Bulk_Phrase,255,42,121.5,1,2.89,121.5,16.47,2.38
+AU_Generic_P-V_Food,Wholesales_Food_Exact,208,30,120.2,0,4.01,,14.42,0.0
+AU_Generic_P-V_Apparel,Accessories_Wholesales_Phrase,184,26,119.21,0,4.59,,14.13,0.0
+AU_Generic_P-V_Food,Plates_Wholesale_Phrase,182,28,118.27,0,4.22,,15.38,0.0
+AU_Generic_P-V_Shops,Accessories_Wholesale_Phrase,192,20,113.79,1,5.69,113.79,10.42,5.0
+AU_Generic_P-V_Office,Sellers_Phrase,164,11,110.37,0,10.03,,6.71,0.0
+AU_Generic_P-V_Shops,Bulk_Phrase,211,19,108.45,1,5.71,108.45,9.0,5.26
+AU_Generic_P-V_Shops,Toys Shop_Distributors_Phrase,149,26,107.18,1,4.12,107.18,17.45,3.85
+AU_Generic_P-V_Office,Stationery_Phrase,560,28,105.84,0,3.78,,5.0,0.0
+AU_Generic,Bulk_Suppliers_Exact,172,14,105.23,0,7.52,,8.14,0.0
+AU_Generic,B2B_Wholesales_Phrase,118,17,105.0,0,6.18,,14.41,0.0
+AU_Generic_P-V_Shops,Toys Shop_Suppliers_Phrase,69,13,102.1,0,7.85,,18.84,0.0
+AU_Generic_P-V_Celebrations,Party_Suppliers_Phrase,139,11,100.91,1,9.17,100.91,7.91,9.09
+AU_Generic,Purchasing_Enterprises_Phrase,177,13,97.63,1,7.51,97.63,7.34,7.69
+AU_Generic,Suppliers_Enterprises_Phrase,68,11,97.2,0,8.84,,16.18,0.0
+AU_Generic_P-V_Shops,Suppliers_Clothing_Phrase,206,17,95.68,1,5.63,95.68,8.25,5.88
+AU_Generic_P-V_Food,Wholesalers_Food_Phrase,183,21,93.06,0,4.43,,11.48,0.0
+AU_Generic_P-V_Food,Kitchen Tools_Exact,269,29,91.92,1,3.17,91.92,10.78,3.45
+AU_Generic_P-V_Shops,Generic_Bulk_Phrase,267,17,90.12,0,5.3,,6.37,0.0
+AU_Generic_P-V_Apparel,Shoes_Distributors_Phrase,159,17,89.37,0,5.26,,10.69,0.0
+AU_Generic_P-V_Shops,Wholesalers_Gifts_Phrase,117,17,88.84,2,5.23,44.42,14.53,11.76
+AU_Generic_P-V_Janitorial,Purchasing_Exact,175,15,87.18,1,5.81,87.18,8.57,6.67
+AU_Generic_P-V_Shops,Electronics_Bulk_Phrase,174,16,86.87,0,5.43,,9.2,0.0
+AU_Generic_P-V_Crafts,Professional-Tools_Wholesale_Phrase,96,16,86.09,0,5.38,,16.67,0.0
+AU_Generic_P-V_Janitorial,Soap_Bulk_Phrase,292,17,85.81,1,5.05,85.81,5.82,5.88
+AU_Generic,Enterprises_Phrase,168,17,84.39,2,4.96,42.2,10.12,11.76
+AU_Generic_P-V_Food,Kitchen Tools_Phrase,414,32,80.86,2,2.53,40.43,7.73,6.25
+AU_Generic_P-V_Crafts,Professional-Tools_Phrase,179,20,80.79,0,4.04,,11.17,0.0
+AU_Generic_P-V_Apparel,Accessories Baby_Bulk_Phrase,114,22,79.56,0,3.62,,19.3,0.0
+AU_Generic,B2B_Products_Phrase,116,8,79.04,0,9.88,,6.9,0.0
+AU_Generic,Distributors_Enterprises_Phrase,201,14,77.68,0,5.55,,6.97,0.0
+AU_Generic_P-V_Food,Drinks_Bulk_Exact,101,16,76.27,0,4.77,,15.84,0.0
+AU_Generic_P-V_Janitorial,Detergent_Bulk_Phrase,225,17,75.69,1,4.45,75.69,7.56,5.88
+AU_Generic_P-V_Electronics,Computers_Exact,265,15,74.34,0,4.96,,5.66,0.0
+AU_Generic_P-V_Food,Condiments_Bulk_Phrase,177,21,72.69,0,3.46,,11.86,0.0
+AU_Generic_P-V_Food,Glassware_Wholesalers_Phrase,26,6,72.18,1,12.03,72.18,23.08,16.67
+AU_Generic_P-V_Food,Condiments_Suppliers_Phrase,119,17,71.99,0,4.23,,14.29,0.0
+AU_Generic,Procurement_Products_Phrase,122,13,71.55,0,5.5,,10.66,0.0
+AU_Generic_P-V_Apparel,Swimwear_Wholesales_Phrase_Phrase_Phrase,52,11,70.87,0,6.44,,21.15,0.0
+AU_Generic_P-V_Office,Office-Supplies_Exact,187,13,70.54,0,5.43,,6.95,0.0
+AU_Generic_P-V_Food,Plates_Phrase,238,16,69.92,0,4.37,,6.72,0.0
+AU_Generic_P-V_Celebrations,Wholesale_Phrase,127,13,69.9,1,5.38,69.9,10.24,7.69
+AU_Generic_P-V_Apparel,Sportware_Wholesales_Phrase,150,12,69.61,0,5.8,,8.0,0.0
+AU_Generic_P-V_Janitorial,Products_Bulk_Exact,133,11,69.25,1,6.3,69.25,8.27,9.09
+AU_Generic_P-V_Food,Kitchen Tools_Wholesale_Phrase,139,17,67.61,0,3.98,,12.23,0.0
+AU_Generic_P-V_Janitorial,Industrial-Chemicals_Exact,91,8,67.26,0,8.41,,8.79,0.0
+AU_Generic,Commercial Customers_Products_Phrase,223,16,65.74,0,4.11,,7.17,0.0
+AU_Generic_P-V_Office,Paper_Wholesale_Phrase,74,9,63.36,1,7.04,63.36,12.16,11.11
+AU_Generic_P-V_Shops,Electronics_Wholesale_Phrase,104,9,61.23,0,6.8,,8.65,0.0
+AU_Generic_P-V_Shops,Toys Shop_Wholesale_Phrase,171,11,60.57,1,5.51,60.57,6.43,9.09
+AU_Generic_P-V_Janitorial,Paper_Bulk_Phrase,141,14,60.1,3,4.29,20.03,9.93,21.43
+AU_Generic_P-V_Shops,Suppliers_Gifts_Phrase,82,11,59.78,0,5.43,,13.41,0.0
+AU_Generic_P-V_Office,Office_Exact,177,14,59.24,0,4.23,,7.91,0.0
+AU_Generic_P-V_Food,Food_Wholesalers_Exact,104,14,57.08,0,4.08,,13.46,0.0
+AU_Generic,B2B_Marketplace_Phrase,154,9,56.88,0,6.32,,5.84,0.0
+AU_Generic_P-V_Janitorial,Soap_Supplier_Phrase,55,12,55.76,0,4.65,,21.82,0.0
+AU_Generic_P-V_Office,Wholesale_Phrase,84,7,55.6,1,7.94,55.6,8.33,14.29
+AU_Generic,Enterprises_Products_Exact,60,8,53.44,0,6.68,,13.33,0.0
+AU_Generic_P-V_Apparel,Sportware_Suppliers_Phrase,63,11,53.41,0,4.86,,17.46,0.0
+AU_Generic_P-V_Janitorial,Paper_Supplier_Phrase,99,9,52.46,0,5.83,,9.09,0.0
+AU_Generic_P-V_Crafts,Professional-Tools_Suppliers_Phrase,164,10,51.39,0,5.14,,6.1,0.0
+AU_Generic_P-V_Janitorial,Floor-Care_Exact,154,8,50.95,1,6.37,50.95,5.19,12.5
+AU_Generic_P-V_Apparel,Sleepwear_Bulk_Phrase,18,5,49.93,0,9.99,,27.78,0.0
+AU_Generic_P-V_Food,Sweets_Bulk_Exact,59,8,49.1,0,6.14,,13.56,0.0
+AU_Generic_P-V_Apparel,Bottoms_Bulk_Phrase,58,8,48.6,0,6.07,,13.79,0.0
+AU_Generic_P-V_Apparel,Accessories Baby_Suppliers_Phrase,79,13,47.86,0,3.68,,16.46,0.0
+AU_Generic_P-V_Janitorial,Detergent_Bulk_Exact,56,7,47.48,1,6.78,47.48,12.5,14.29
+AU_Generic_P-V_Beauty,Hair-Removal_Bulk_Phrase,59,9,45.55,0,5.06,,15.25,0.0
+AU_Generic_P-V_Beauty,Skin-Care_Distributors_Phrase,118,9,44.56,0,4.95,,7.63,0.0
+AU_Generic_P-V_Industrial,Measurement_Phrase,118,8,43.02,0,5.38,,6.78,0.0
+AU_Generic_P-V_Beauty,Skin-Care_Supplier_Phrase,52,7,42.02,1,6.0,42.02,13.46,14.29
+AU_Generic_P-V_Beauty,Nail-Care_Distributors_Phrase,127,9,41.41,0,4.6,,7.09,0.0
+AU_Generic_P-V_Food,Vending_Distributor_Phrase,125,18,41.17,0,2.29,,14.4,0.0
+AU_Generic_P-V_Industrial,Tools_Phrase,103,10,40.62,0,4.06,,9.71,0.0
+AU_Generic_P-V_Food,Food_Sellers_Phrase,144,9,40.44,0,4.49,,6.25,0.0
+AU_Generic_P-V_Food,Barware_Bulk_Phrase,32,5,39.99,0,8.0,,15.63,0.0
+AU_Generic_P-V_Janitorial,Waste_Bulk_Phrase,189,9,37.99,0,4.22,,4.76,0.0
+AU_Generic_P-V_Shops,Wholesalers_Books Shop_Phrase,46,6,37.87,0,6.31,,13.04,0.0
+AU_Generic_P-V_Apparel,Hosiery & Socks_Bulk_Exact,20,3,36.68,0,12.23,,15.0,0.0
+AU_Generic_P-V_Apparel,Eyewear_Distributors_Phrase,73,6,36.43,0,6.07,,8.22,0.0
+AU_Generic_P-V_Janitorial,Tools_Supplier_Phrase,56,5,35.69,1,7.14,35.69,8.93,20.0
+AU_Generic_P-V_Beauty,Fragrance_Wholesale_Exact,32,8,35.25,1,4.41,35.25,25.0,12.5
+AU_Generic,Wholesales_Products_Exact,21,4,35.18,0,8.8,,19.05,0.0
+AU_Generic_P-V_Beauty,Hair-Appliances_Supplier_Phrase,24,5,34.15,0,6.83,,20.83,0.0
+AU_Generic_P-V_Janitorial,Gloves_Bulk_Phrase,104,6,33.93,1,5.66,33.93,5.77,16.67
+AU_Generic_P-V_Shops,Distributors_Gifts_Phrase,38,4,33.73,0,8.43,,10.53,0.0
+AU_Generic_P-V_Apparel,Underwear_Bulk_Phrase,30,3,33.7,0,11.23,,10.0,0.0
+AU_Generic,Wholesalers_Exact,51,5,32.78,0,6.56,,9.8,0.0
+AU_Generic_P-V_Hospitality,Products_Wholesale_Phrase,101,9,31.16,0,3.46,,8.91,0.0
+AU_Generic_P-V_Electronics,Computers_Bulk_Exact,27,5,31.03,0,6.21,,18.52,0.0
+AU_Generic_P-V_Electronics,Cell-Phones_Phrase,105,6,30.82,0,5.14,,5.71,0.0
+AU_Generic_P-V_Food,Cultlery_Suppliers_Phrase,58,8,30.21,0,3.78,,13.79,0.0
+AU_Generic_P-V_Shops,Bulk_Exact,102,9,29.03,0,3.23,,8.82,0.0
+AU_Generic_P-V_Electronics,Cell-Phones_Wholesale_Phrase,33,4,28.82,0,7.21,,12.12,0.0
+AU_Generic_P-V_Hospitality,Furniture_Phrase,41,3,28.53,0,9.51,,7.32,0.0
+AU_Generic_P-V_Shops,Book Shop_Distributors_Phrase,43,8,28.26,0,3.53,,18.6,0.0
+AU_Generic_P-V_Apparel,Accessories_Wholesales_Exact,13,6,28.02,0,4.67,,46.15,0.0
+AU_Generic_P-V_Apparel,Sportware_Wholesales_Exact,25,4,27.65,0,6.91,,16.0,0.0
+AU_Generic,B2B_Enterprise_Phrase,16,3,27.54,0,9.18,,18.75,0.0
+AU_Generic_P-V_Industrial,HVAC_Phrase,45,4,26.92,0,6.73,,8.89,0.0
+AU_Generic_P-V_Janitorial,Detergent_Distributor_Phrase,111,8,26.73,0,3.34,,7.21,0.0
+AU_Generic_P-V_Industrial,Electrical_Phrase,31,5,26.64,0,5.33,,16.13,0.0
+AU_Generic_P-V_Shops,Clothing_Bulk_Exact,60,5,26.09,0,5.22,,8.33,0.0
+AU_Generic_P-V_Food,Plates_Wholesale_Exact,3,3,24.53,0,8.18,,100.0,0.0
+AU_Generic_P-V_Electronics,Headphones_Distributor_Phrase,17,4,24.47,0,6.12,,23.53,0.0
+AU_Generic_P-V_Apparel,Accessories Baby_Bulk_Exact,35,4,24.4,0,6.1,,11.43,0.0
+AU_Generic_P-V_Janitorial,Wholesale_Phrase,85,6,24.36,0,4.06,,7.06,0.0
+AU_Generic_P-V_Beauty,Salon-Spa_Bulk_Phrase,63,7,23.92,1,3.42,23.92,11.11,14.29
+AU_Generic_P-V_Beauty,Massage_Wholesale_Phrase,50,5,23.57,0,4.71,,10.0,0.0
+AU_Generic_P-V_Materials,Suppliers_Plastic_Phrase,83,7,23.52,0,3.36,,8.43,0.0
+AU_Generic_P-V_Food,Cultlery_Suppliers_Exact,6,2,23.34,0,11.67,,33.33,0.0
+AU_Generic_P-V_Apparel,Tops Baby_Bulk_Phrase,14,3,23.26,0,7.75,,21.43,0.0
+AU_Generic_P-V_Celebrations,Party_Suppliers_Exact,22,2,23.26,1,11.63,23.26,9.09,50.0
+AU_Generic_P-V_Industrial,Hydraulics_Phrase,38,6,23.22,0,3.87,,15.79,0.0
+AU_Generic_P-V_Shops,Clothing_Distributors_Phrase,70,5,23.21,0,4.64,,7.14,0.0
+AU_Generic_P-V_Electronics,Power_Phrase,125,4,23.08,1,5.77,23.08,3.2,25.0
+AU_Generic_P-V_Beauty,Wholesalers_Cosmetics_Exact,31,4,23.06,0,5.77,,12.9,0.0
+AU_Generic_P-V_Electronics,Computers_Wholesale_Phrase,14,3,22.98,0,7.66,,21.43,0.0
+AU_Generic_P-V_Beauty,Fragrance_Distributors_Exact,33,4,22.87,0,5.72,,12.12,0.0
+AU_Generic_P-V_Food,Coffee Machines_Sellers_Phrase,78,7,22.32,0,3.19,,8.97,0.0
+AU_Generic_P-V_Office,Suppliers_Exact,53,3,22.26,0,7.42,,5.66,0.0
+AU_Generic_P-V_Apparel,Tops_Distributors_Exact,21,4,22.06,0,5.52,,19.05,0.0
+AU_Generic_P-V_Food,Kitchen Tools_Wholesale_Exact,22,7,22.03,1,3.15,22.03,31.82,14.29
+AU_Generic_P-V_Office,Stationery_Exact,75,5,22.03,0,4.41,,6.67,0.0
+AU_Generic,Bulk_Phrase,45,5,21.46,0,4.29,,11.11,0.0
+AU_Generic_P-V_Office,Furniture_Exact,80,6,21.45,1,3.58,21.45,7.5,16.67
+AU_Generic_P-V_Janitorial,Odour_Distributor_Phrase,50,6,21.26,1,3.54,21.26,12.0,16.67
+AU_Generic_P-V_Food,Drinks_Wholesale_Exact,5,3,21.1,0,7.03,,60.0,0.0
+AU_Generic_P-V_Food,Wholesalers_Food_Exact,16,3,21.02,0,7.01,,18.75,0.0
+AU_Generic_P-V_Food,Cookware_Bulk_Phrase,93,5,21.0,0,4.2,,5.38,0.0
+AU_Generic_P-V_Apparel,Tops Men_Bulk_Phrase,26,3,20.95,0,6.98,,11.54,0.0
+AU_Generic_P-V_Shops,Florist_Wholesale_Phrase,64,4,20.59,0,5.15,,6.25,0.0
+AU_Generic_P-V_Beauty,Hair-Styling_Bulk_Exact,24,5,20.54,0,4.11,,20.83,0.0
+AU_Generic_P-V_Beauty,Skin-Care_Wholesale_Phrase,81,4,20.44,0,5.11,,4.94,0.0
+AU_Generic_P-V_Janitorial,Tools_Wholesale_Exact,14,3,20.42,0,6.81,,21.43,0.0
+AU_Generic_P-V_Food,Cookware_Wholesalers_Phrase,74,4,20.2,0,5.05,,5.41,0.0
+AU_Generic_P-V_Apparel,Underwear_Bulk_Phrase_Phrase,46,5,19.83,0,3.97,,10.87,0.0
+AU_Generic_P-V_Industry,Distributors_Phrase,96,4,19.77,0,4.94,,4.17,0.0
+AU_Generic_P-V_Beauty,Makeup_Wholesale_Phrase,14,3,19.44,0,6.48,,21.43,0.0
+AU_Generic,B2B_Distributors_Phrase,25,2,19.2,0,9.6,,8.0,0.0
+AU_Generic_P-V_Janitorial,Supply_Bulk_Exact,99,6,19.03,1,3.17,19.03,6.06,16.67
+AU_Generic_P-V_Electronics,Camera-Accessories_Wholesale_Exact,20,2,19.01,0,9.51,,10.0,0.0
+AU_Generic_P-V_Apparel,Tops Women_Bulk_Phrase,32,5,18.84,0,3.77,,15.63,0.0
+AU_Generic_P-V_Industrial,Packaging_Phrase,34,3,18.8,0,6.27,,8.82,0.0
+AU_Generic_P-V_Electronics,Cell-Phones_Bulk_Phrase,48,7,18.69,0,2.67,,14.58,0.0
+AU_Generic_P-V_Industry,Products_Phrase,79,6,18.54,1,3.09,18.54,7.59,16.67
+AU_Generic_P-V_Food,Tools_Phrase,69,6,18.41,1,3.07,18.41,8.7,16.67
+AU_Generic_P-V_Janitorial,Soap_Bulk_Exact,45,3,18.13,1,6.04,18.13,6.67,33.33
+AU_Generic_P-V_Shops,Florist_Bulk_Phrase,32,4,17.88,0,4.47,,12.5,0.0
+AU_Generic_P-V_Food,Cultlery_Wholesale_Exact,10,3,17.72,0,5.91,,30.0,0.0
+AU_Generic_P-V_Shops,Wholesalers_Books Shop,24,3,17.05,0,5.68,,12.5,0.0
+AU_Generic_P-V_Shops,Book Shop_Bulk_Exact,28,4,16.75,0,4.19,,14.29,0.0
+AU_Generic_P-V_Apparel,Hosiery & Socks_Bulk_Phrase,48,5,16.72,0,3.34,,10.42,0.0
+AU_Generic_P-V_Food,Condiments_Wholesale_Phrase,40,5,16.71,0,3.34,,12.5,0.0
+AU_Generic_P-V_Beauty,Skin-Care-Appliances_Wholesale_Phrase,18,2,16.57,0,8.29,,11.11,0.0
+AU_Generic_P-V_Shops,Books Shop_Wholesales_Phrase,33,4,16.09,1,4.02,16.09,12.12,25.0
+AU_Generic_P-V_Food,Glassware_Bulk_Exact,23,5,15.81,0,3.16,,21.74,0.0
+AU_Generic_P-V_Food,Kitchen Tools_Bulk_Exact,15,3,15.8,0,5.27,,20.0,0.0
+AU_Generic_P-V_Celebrations,Christmas_Wholesale_Phrase,40,2,15.79,0,7.9,,5.0,0.0
+AU_Generic_P-V_Janitorial,Detergent_Supplier_Phrase,20,2,15.48,0,7.74,,10.0,0.0
+AU_Generic_P-V_Janitorial,Industrial-Chemicals_Bulk_Exact,20,3,14.83,0,4.94,,15.0,0.0
+AU_Generic_P-V_Celebrations,Party_Decorations_Exact,25,3,14.39,0,4.8,,12.0,0.0
+AU_Generic_P-V_Food,Pans_Exact,13,2,14.25,0,7.13,,15.38,0.0
+AU_Generic_P-V_Apparel,Swimwear_Wholesales_Phrase,35,3,14.16,0,4.72,,8.57,0.0
+AU_Generic_P-V_Beauty,Hair-Appliances_Bulk_Phrase,22,4,14.03,0,3.51,,18.18,0.0
+AU_Generic_P-V_Janitorial,Odour_Bulk_Phrase,28,4,13.99,0,3.5,,14.29,0.0
+AU_Generic_P-V_Hospitality,Products_Exact,2,1,13.89,0,13.89,,50.0,0.0
+AU_Generic_P-V_Beauty,Skin-Care_Bulk_Exact,8,3,13.77,0,4.59,,37.5,0.0
+AU_Generic_P-V_Apparel,Accessories_Distributors_Exact,3,1,13.6,0,13.6,,33.33,0.0
+AU_Generic_P-V_Apparel,Bottoms_Suppliers_Phrase,43,4,13.33,0,3.33,,9.3,0.0
+AU_Generic_P-V_Apparel,Eyewear_Wholesales_Exact,5,3,13.12,0,4.37,,60.0,0.0
+AU_Generic_P-V_Food,Glassware_Bulk_Phrase,7,2,12.53,0,6.27,,28.57,0.0
+AU_Generic,B2B_Shop_Phrase,49,3,12.33,0,4.11,,6.12,0.0
+AU_Generic_P-V_Apparel,Sleepwear_Bulk_Exact,2,1,11.89,0,11.89,,50.0,0.0
+AU_Generic_P-V_Electronics,Headphones_Bulk_Phrase,12,2,11.72,0,5.86,,16.67,0.0
+AU_Generic_P-V_Janitorial,Fixtures_Phrase,48,4,11.58,0,2.9,,8.33,0.0
+AU_Generic_P-V_Shops,Suppliers_Gifts,27,1,11.52,0,11.52,,3.7,0.0
+AU_Generic_P-V_Janitorial,Personal-Care_Bulk_Phrase,37,4,11.31,0,2.83,,10.81,0.0
+AU_Generic_P-V_Beauty,Makeup_Wholesale_Exact,12,3,11.24,0,3.75,,25.0,0.0
+AU_Generic,Wholesales_Suppliers_Exact,8,2,10.8,0,5.4,,25.0,0.0
+AU_Generic_P-V_Apparel,Tops_Suppliers_Exact,20,3,10.65,0,3.55,,15.0,0.0
+AU_Generic_P-V_Materials,Wholesales_Textiles_Exact,24,2,10.62,0,5.31,,8.33,0.0
+AU_Generic_P-V_Food,Barware_Bulk_Exact,14,2,10.52,0,5.26,,14.29,0.0
+AU_Generic_P-V_Apparel,Hosiery & Socks_Suppliers_Exact,2,1,10.16,0,10.16,,50.0,0.0
+AU_Generic_P-V_Food,Linens_Bulk_Phrase,27,4,9.91,0,2.48,,14.81,0.0
+AU_Generic_P-V_Apparel,Sleepwear_Wholesales_Phrase,7,1,9.81,0,9.81,,14.29,0.0
+AU_Generic,Procurement_Distributors_Phrase,27,2,9.79,0,4.89,,7.41,0.0
+AU_Generic,B2B_Marketplace_Exact,4,1,9.62,0,9.62,,25.0,0.0
+AU_Generic_P-V_Shops,Toys Shop_Distributors,14,1,9.5,0,9.5,,7.14,0.0
+AU_Generic_P-V_Beauty,Makeup_Supplier_Exact,19,2,9.19,0,4.6,,10.53,0.0
+AU_Generic,Resellers_Distributors_Exact,21,2,9.06,0,4.53,,9.52,0.0
+AU_Generic,Bulk_Sellers_Phrase,3,1,8.8,0,8.8,,33.33,0.0
+AU_Generic_P-V_Apparel,Leggins & Tights_Bulk_Phrase,8,2,8.62,0,4.31,,25.0,0.0
+AU_Generic_P-V_Shops,Pet Shop_Wholesale_Phrase,17,3,8.52,0,2.84,,17.65,0.0
+AU_Generic_P-V_Office,Home-Office_Exact,42,1,8.37,0,8.37,,2.38,0.0
+AU_Generic_P-V_Shops,Furniture_Exact,6,2,8.25,0,4.13,,33.33,0.0
+AU_Generic_P-V_Hospitality,Furniture_Exact,37,1,8.14,0,8.14,,2.7,0.0
+AU_Generic_P-V_Food,Coffee Machines_Sellers_Exact,40,2,8.05,0,4.03,,5.0,0.0
+AU_Generic_P-V_Hospitality,Generic_Bulk_Phrase,16,1,7.94,0,7.94,,6.25,0.0
+AU_Generic_P-V_Janitorial,Wholesale_Exact,6,2,7.91,0,3.96,,33.33,0.0
+AU_Generic_P-V_Office,Wholesale_Exact,13,2,7.67,0,3.84,,15.38,0.0
+AU_Generic_P-V_Apparel,Tops Men_Bulk_Exact,4,1,7.31,0,7.31,,25.0,0.0
+AU_Generic_P-V_Apparel,Tops Men_Wholesales_Phrase,19,2,7.29,0,3.65,,10.53,0.0
+AU_Generic_P-V_Crafts,Hand-Tools_Wholesale_Exact,6,2,7.23,0,3.62,,33.33,0.0
+AU_Generic_P-V_Food,Food_Catalog_Phrase,14,1,7.0,0,7.0,,7.14,0.0
+AU_Generic_P-V_Food,Food_Suppliers_Exact,11,2,6.96,0,3.48,,18.18,0.0
+AU_Generic_P-V_Office,Suppliers_Phrase,90,2,6.91,0,3.46,,2.22,0.0
+AU_Generic_P-V_Shops,Bulk_Gifts_Phrase,16,2,6.84,0,3.42,,12.5,0.0
+AU_Generic_P-V_Electronics,Electronics_Wholesale_Exact,13,1,6.73,0,6.73,,7.69,0.0
+AU_Generic_P-V_Beauty,Hair-Removal_Supplier_Phrase,19,2,6.58,0,3.29,,10.53,0.0
+AU_Generic_P-V_Food,Kitchen Tools_Wholesalers_Phrase,21,2,6.58,0,3.29,,9.52,0.0
+AU_Generic_P-V_Apparel,Bottoms_Wholesales_Exact,3,1,6.45,0,6.45,,33.33,0.0
+AU_Generic_P-V_Apparel,Swimwear_Wholesales_Exact,1,1,6.43,0,6.43,,100.0,0.0
+AU_Generic_P-V_Food,Kitchen Tools_Wholesalers_Exact,8,3,6.29,0,2.1,,37.5,0.0
+AU_Generic_P-V_Food,Cultlery_Wholesalers_Phrase,9,2,6.01,0,3.01,,22.22,0.0
+AU_Generic_P-V_Apparel,Swimwear_Wholesales_Phrase_Phrase,11,1,5.97,0,5.97,,9.09,0.0
+AU_Generic_P-V_Beauty,Bath_Wholesale_Phrase,11,1,5.95,0,5.95,,9.09,0.0
+AU_Generic_P-V_Apparel,Shoes_Suppliers_Phrase,21,1,5.91,0,5.91,,4.76,0.0
+AU_Generic_P-V_Janitorial,Detergent_Wholesale_Exact,15,2,5.78,0,2.89,,13.33,0.0
+AU_Generic_P-V_Apparel,Bottoms_Wholesales_Phrase,19,1,5.72,0,5.72,,5.26,0.0
+AU_Generic_P-V_Celebrations,Generic_Bulk_Exact,22,1,5.7,0,5.7,,4.55,0.0
+AU_Generic_P-V_Food,Plates_Bulk_Exact,19,1,5.62,0,5.62,,5.26,0.0
+AU_Generic_P-V_Food,Pans_Phrase,10,2,5.57,0,2.79,,20.0,0.0
+AU_Generic_P-V_Shops,Bulk_Gifts_Exact,8,1,5.57,0,5.57,,12.5,0.0
+AU_Generic_P-V_Food,Barware_Exact,4,2,5.48,0,2.74,,50.0,0.0
+AU_Generic_P-V_Apparel,Accessories_Suppliers_Exact,4,1,5.45,0,5.45,,25.0,0.0
+AU_Generic_P-V_Janitorial,Soap_Supplier_Exact,2,1,5.38,1,5.38,5.38,50.0,100.0
+AU_Generic_P-V_Beauty,Nail-Care_Wholesale_Exact,3,2,5.34,0,2.67,,66.67,0.0
+AU_Generic_P-V_Food,Cultlery_Exact,11,1,5.32,0,5.32,,9.09,0.0
+AU_Generic_P-V_Janitorial,Soap_Distributor_Phrase,21,2,5.15,0,2.58,,9.52,0.0
+AU_Generic_P-V_Food,Drinks_Distributor_Phrase,9,2,5.13,0,2.57,,22.22,0.0
+AU_Generic_P-V_Janitorial,Gloves_Bulk_Exact,1,1,4.89,0,4.89,,100.0,0.0
+AU_Generic_P-V_Safety,Equipment-Gear_Bulk_Phrase,4,1,4.86,0,4.86,,25.0,0.0
+AU_Generic_P-V_Apparel,Eyewear_Bulk_Phrase,17,1,4.84,0,4.84,,5.88,0.0
+AU_Generic_P-V_Crafts,Professional-Tools_Bulk_Exact,2,1,4.76,0,4.76,,50.0,0.0
+AU_Generic_P-V_Electronics,Headphones_Wholesale_Phrase,10,1,4.69,0,4.69,,10.0,0.0
+AU_Generic_P-V_Electronics,Cell-Phones_Distributor_Phrase,4,1,4.65,0,4.65,,25.0,0.0
+AU_Generic_P-V_Apparel,Shoes_Distributors_Exact,6,1,4.51,0,4.51,,16.67,0.0
+AU_Generic_P-V_Beauty,Massage_Wholesale_Exact,1,1,4.41,0,4.41,,100.0,0.0
+AU_Generic_P-V_Food,Kitchen Tools_Suppliers_Exact,5,1,4.16,0,4.16,,20.0,0.0
+AU_Generic_P-V_Food,Glassware_Exact,3,1,4.13,1,4.13,4.13,33.33,100.0
+AU_Generic,Wholesale_Exact,11,1,4.12,0,4.12,,9.09,0.0
+AU_Generic_P-V_Electronics,Computers_Wholesale_Exact,2,1,4.03,1,4.03,4.03,50.0,100.0
+AU_Generic_P-V_Shops,Book Shop_Distributors_Exact,1,1,3.99,0,3.99,,100.0,0.0
+AU_Generic_P-V_Electronics,Camera-Accessories_Bulk_Exact,42,1,3.96,0,3.96,,2.38,0.0
+AU_Generic_P-V_Apparel,Accessories Baby_Wholesales_Exact,10,1,3.95,0,3.95,,10.0,0.0
+AU_Generic_P-V_Celebrations,Christmas_Bulk_Exact,3,1,3.88,0,3.88,,33.33,0.0
+AU_Generic_P-V_Beauty,Fragrance_Bulk_Exact,4,1,3.83,0,3.83,,25.0,0.0
+AU_Generic_P-V_Apparel,Tops Women_Bulk_Exact,2,1,3.82,0,3.82,,50.0,0.0
+AU_Generic_P-V_Food,Cookware_Wholesale_Exact,3,1,3.82,0,3.82,,33.33,0.0
+AU_Generic_P-V_Apparel,Swimwear_Bulk_Phrase,3,1,3.8,0,3.8,,33.33,0.0
+AU_Generic_P-V_Shops,Florist_Exact,15,1,3.77,0,3.77,,6.67,0.0
+AU_Generic_P-V_Shops,Wholesalers_Gifts,9,1,3.76,0,3.76,,11.11,0.0
+AU_Generic_P-V_Food,Serving Line_Exact,26,1,3.61,0,3.61,,3.85,0.0
+AU_Generic_P-V_Food,Linens_Wholesale_Phrase,2,1,3.56,0,3.56,,50.0,0.0
+AU_Generic_P-V_Janitorial,Floor-Care_Wholesale_Phrase,4,1,3.5,0,3.5,,25.0,0.0
+AU_Generic_P-V_Materials,Wholesales_Plastic_Phrase,38,1,3.4,0,3.4,,2.63,0.0
+AU_Generic_P-V_Apparel,Bottoms_Wholesales_Phrase_Phrase,12,1,3.36,0,3.36,,8.33,0.0
+AU_Generic_P-V_Office,Wfh_Exact,3,1,3.19,0,3.19,,33.33,0.0
+AU_Generic_P-V_Electronics,Televisions_Wholesale_Exact,2,1,3.17,0,3.17,,50.0,0.0
+AU_Generic_P-V_Crafts,Hand-Tools_Wholesale_Phrase,1,1,2.92,0,2.92,,100.0,0.0
+AU_Generic_P-V_Apparel,Swimwear_Suppliers_Phrase,9,1,2.85,0,2.85,,11.11,0.0
+AU_Generic_P-V_Electronics,Phones_Bulk_Phrase,5,1,2.79,0,2.79,,20.0,0.0
+AU_Generic_P-V_Food,Plates_Wholesalers_Phrase,12,1,2.77,0,2.77,,8.33,0.0
+AU_Generic_P-V_Food,Drinks_Suppliers_Phrase,1,1,2.73,0,2.73,,100.0,0.0
+AU_Generic_P-V_Electronics,Camera-Accessories_Bulk_Phrase,1,1,2.64,0,2.64,,100.0,0.0
+AU_Generic_P-V_Janitorial,Paper_Wholesale_Exact,2,1,2.62,0,2.62,,50.0,0.0
+AU_Generic_P-V_Janitorial,Floor-Care_Bulk_Phrase,7,1,2.57,0,2.57,,14.29,0.0
+AU_Generic_P-V_Janitorial,Odour_Bulk_Exact,6,1,2.56,0,2.56,,16.67,0.0
+AU_Generic_P-V_Apparel,Underwear_Wholesales_Exact,2,1,2.38,0,2.38,,50.0,0.0
+AU_Generic_P-V_Apparel,Accessories Men_Bulk_Phrase,8,1,2.36,0,2.36,,12.5,0.0
+AU_Generic_P-V_Beauty,Nail-Care_Supplier_Exact,32,1,1.74,0,1.74,,3.13,0.0
+AU_Generic_P-V_Pets,Food_Suppliers_Exact,2,1,1.61,0,1.61,,50.0,0.0
+AU_Generic_P-V_Food,Barware_Phrase,1,1,1.45,0,1.45,,100.0,0.0
+AU_Generic_P-V_Celebrations,Distributors_Phrase,4,1,1.4,0,1.4,,25.0,0.0
+AU_Generic_P-V_Beauty,Hair-Appliances_Bulk_Exact,2,1,1.26,0,1.26,,50.0,0.0

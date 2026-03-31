@@ -1,0 +1,34 @@
+Keyword,Match Type,Campaign,Ad Group,Impressions,Clicks,Cost,Registrations,CPC,CPA,Action
+"""alimentos al por mayor""",Phrase match,MX - Food,Food_Wholesale_Phrase,7037,605,1237.67,6,2.05,206.28,CPA above $200
+"""amazon empresarial""",Phrase match,MX - Brand Phrase,Pure_Phrase,1162,95,894.28,4,9.41,223.57,CPA above $200
+"""suministros oficina""",Phrase match,MX - Office,Generic_Phrase,9594,466,662.23,1,1.42,662.23,CPA above $200
+"""productos electrónicos al por mayor""",Phrase match,MX - Shops,Shops_Wholesales_Electronics_Phrase,1957,350,580.1,0,1.66,,"HIGH — $500+ spend, zero regs"
+"""proveedores vasos""",Phrase match,MX - Food,Glassware_Suppliers_Phrase,1827,178,429.13,2,2.41,214.57,CPA above $200
+"""productos para hostelería""",Phrase match,MX - Food,Products_Phrase,1799,147,342.2,1,2.33,342.2,CPA above $200
+"""distribuidor para negocios""",Phrase match,MX - Generic,Distributors_Enterprises_Phrase,1310,147,293.12,1,1.99,293.12,CPA above $200
+"""amazon para negocios""",Phrase match,MX - Brand Phrase,Pure_Phrase,134,39,288.9,0,7.41,,"MEDIUM — $100+ spend, zero regs"
+[factura amazon],Exact match,MX - Invoice AMZ,Invoice_Exact,498,59,276.03,1,4.68,276.03,CPA above $200
+[comercio al por mayor de artículos de papelería],Exact match,MX - Office,Wholesales_Exact,1089,142,262.64,0,1.85,,"MEDIUM — $100+ spend, zero regs"
+"""venta al por mayor de alimentos para mascotas""",Phrase match,MX - Shops,Shops_Wholesales_Pet Shop_Phrase,738,119,255.77,0,2.15,,"MEDIUM — $100+ spend, zero regs"
+"""vajilla profesional""",Phrase match,MX - Food,Cultlery_Phrase,872,100,239.41,1,2.39,239.41,CPA above $200
+"""amazon for business""",Phrase match,MX - Brand Phrase,Pure_Phrase,357,28,229.01,0,8.18,,"MEDIUM — $100+ spend, zero regs"
+"""factura de amazon""",Phrase match,MX - Invoice AMZ,Invoice_Phrase,99,24,221.47,0,9.23,,"MEDIUM — $100+ spend, zero regs"
+"""facturar amazon mexico""",Phrase match,MX - Invoice AMZ,Invoice_Phrase,288,45,217.47,0,4.83,,"MEDIUM — $100+ spend, zero regs"
+"""suministros para hostelería""",Phrase match,MX - Food,Generic_Phrase,1782,74,198.57,0,2.68,,"MEDIUM — $100+ spend, zero regs"
+"""venta mayorista de accesorios de moda""",Phrase match,MX - Shops,Shops_Wholesales_Accessories_Phrase,656,72,191.24,0,2.66,,"MEDIUM — $100+ spend, zero regs"
+"""proveedores de accesorios de moda""",Phrase match,MX - Shops,Shops_Suppliers_Accessories_Phrase,637,70,189.65,0,2.71,,"MEDIUM — $100+ spend, zero regs"
+"""proveedores de tiendas de mascotas""",Phrase match,MX - Shops,Shops_Suppliers_Pet Shop_Phrase,720,81,182.85,0,2.26,,"MEDIUM — $100+ spend, zero regs"
+"""cómo facturar en amazon""",Phrase match,MX - Invoice AMZ,Invoice_Phrase,324,39,177.07,0,4.54,,"MEDIUM — $100+ spend, zero regs"
+[sillas oficina],Exact match,MX - Office,Furniture_Exact,1386,98,177.06,0,1.81,,"MEDIUM — $100+ spend, zero regs"
+"""compras para negocios""",Phrase match,MX - Generic,Enterprises_Buy_Phrase,784,103,171.45,0,1.66,,"MEDIUM — $100+ spend, zero regs"
+"""distribuidores de calzado""",Phrase match,MX - Shops,Shops_Distributors_Clothing_Phrase,592,99,167.85,0,1.7,,"MEDIUM — $100+ spend, zero regs"
+"""ventas b2b""",Phrase match,MX - Generic,B2B_Enterprise_Phrase,666,19,160.51,0,8.45,,"MEDIUM — $100+ spend, zero regs"
+"""compras para empresas""",Phrase match,MX - Generic,Enterprises_Purchasing_Phrase,410,40,153.69,0,3.84,,"MEDIUM — $100+ spend, zero regs"
+"""tienda de hostelería""",Phrase match,MX - Food,Shop_Phrase,1275,122,141.6,0,1.16,,"MEDIUM — $100+ spend, zero regs"
+[productos de belleza al por mayor],Exact match,MX - Beauty,Makeup_Wholesale_Exact,592,61,136.46,0,2.24,,"MEDIUM — $100+ spend, zero regs"
+"""suministro de productos""",Phrase match,MX - Generic,Procurement_Products_Phrase,806,60,133.33,0,2.22,,"MEDIUM — $100+ spend, zero regs"
+"""proveedor equipamiento""",Phrase match,MX - Generic,Suppliers_Products_Phrase,397,38,124.55,0,3.28,,"MEDIUM — $100+ spend, zero regs"
+"""equipo de radio profesional""",Phrase match,MX - Electronics,Audio Components_Phrase,480,57,117.72,0,2.07,,"MEDIUM — $100+ spend, zero regs"
+"""herramientas manuales profesionales""",Phrase match,MX - Crafts,Hand Tools_Phrase,776,71,115.14,0,1.62,,"MEDIUM — $100+ spend, zero regs"
+"""tienda online para negocios""",Phrase match,MX - Generic,Enterprises_Shop_Phrase,947,42,106.81,0,2.54,,"MEDIUM — $100+ spend, zero regs"
+"""productos para empresas""",Phrase match,MX - Generic,Core_Enterprises_Products_Phrase,689,48,100.65,0,2.1,,"MEDIUM — $100+ spend, zero regs"

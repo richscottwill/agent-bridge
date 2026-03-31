@@ -87,7 +87,7 @@ Don't just show "6 hours of low-leverage work." Break it into categories so the 
 | Organ word budgets | gut.md | Horizontal bar (actual vs budget) |
 | Experiment savings | changelog.md | Before/after bar |
 | Experiment status | changelog.md | Status table with badges |
-| Experiment queue | heart.md | Queue table |
+| Experiment log | heart.md | Queue table |
 | Organ freshness | All organs | Horizontal bar (days since update) |
 
 ## How You Work
@@ -111,7 +111,7 @@ Don't just show "6 hours of low-leverage work." Break it into categories so the 
 - Pattern trajectories: `~/shared/context/body/nervous-system.md`
 - Streak + growth: `~/shared/context/body/amcc.md`
 - Five Levels: `~/shared/context/body/brain.md`
-- Experiment queue: `~/shared/context/body/heart.md`
+- Experiment log: `~/shared/context/body/heart.md`
 - Template: `~/shared/tools/progress-charts/template.html`
 - Generator: `~/shared/tools/progress-charts/generate.py`
 

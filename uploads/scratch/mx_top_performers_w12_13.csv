@@ -1,0 +1,132 @@
+Keyword,Match Type,Campaign,Ad Group,Impressions,Clicks,Cost,Registrations,CPC,CPA,CTR %,Conv Rate %
+[amazon business],Exact match,MX - Brand Exact,Pure_Exact,10793,4511,976.77,317,0.22,3.08,41.8,7.03
+[amazon business mexico],Exact match,MX - Brand Exact,Pure_Exact,1208,510,71.64,45,0.14,1.59,42.22,8.82
+"""tienda al por mayor en línea""",Phrase match,MX - Generic,Wholesales_Buy_Phrase,8277,1078,1967.32,18,1.82,109.3,13.02,1.67
+"""cuenta de empresa en amazon""",Phrase match,MX - Brand Phrase,Account_Phrase,2031,334,690.99,15,2.07,46.07,16.45,4.49
+"""al por mayor""",Phrase match,MX - Generic,Wholesales_Phrase,7945,971,1517.68,15,1.56,101.18,12.22,1.54
+[crear cuenta amazon business],Exact match,MX - Brand Exact,Account_Exact,70,24,29.91,14,1.25,2.14,34.29,58.33
+"""productos de belleza al por mayor""",Phrase match,MX - Beauty,Makeup_Wholesale_Phrase,4346,564,762.34,13,1.35,58.64,12.98,2.3
+"""productos al por mayor""",Phrase match,MX - Generic,Core_Wholesales_Products_Phrase,4325,500,1081.86,13,2.16,83.22,11.56,2.6
+"""amazon empresa""",Phrase match,MX - Brand Phrase,Pure_Phrase,3864,411,2172.67,13,5.29,167.13,10.64,3.16
+[amazon negocios],Exact match,MX - Brand Exact,Pure_Exact,143,64,13.27,11,0.21,1.21,44.76,17.19
+"""como facturar en amazon""",Phrase match,MX - Invoice AMZ,Invoice_Phrase,1366,234,1086.54,11,4.64,98.78,17.13,4.7
+"""cuenta amazon business""",Phrase match,MX - Brand Phrase,Account_Phrase,1284,247,539.98,8,2.19,67.5,19.24,3.24
+"""distribuidor de suministros""",Phrase match,MX - Crafts,Home Accessories_Distributor_Phrase,3792,321,862.15,8,2.69,107.77,8.47,2.49
+"""artículos al por mayor""",Phrase match,MX - Generic,Wholesales_Products_Phrase,7492,980,1318.97,8,1.35,164.87,13.08,0.82
+"""distribuidor de bebidas""",Phrase match,MX - Food,Food_Distributor_Phrase,2169,276,419.04,7,1.52,59.86,12.72,2.54
+"""proveedor productos""",Phrase match,MX - Generic,Core_Suppliers_Products_Phrase,5711,530,1081.83,7,2.04,154.55,9.28,1.32
+[comprar al por mayor amazon],Exact match,MX - Generic AMZ,Generic_Wholesales_Purchasing_Exact,50,27,20.47,6,0.76,3.41,54.0,22.22
+amazon compra por mayor,Broad match,MX - Generic AMZ,Generic_Wholesales_Broad,443,99,245.6,6,2.48,40.93,22.35,6.06
+"""comprar ropa para vender""",Phrase match,MX - Apparel,Clothing_Phrase,1659,243,257.99,6,1.06,43.0,14.65,2.47
+"""amazon para empresas""",Phrase match,MX - Brand Phrase,Pure_Phrase,780,132,602.2,6,4.56,100.37,16.92,4.55
+"""alimentos al por mayor""",Phrase match,MX - Food,Food_Wholesale_Phrase,7037,605,1237.67,6,2.05,206.28,8.6,0.99
+[amazon empresarial],Exact match,MX - Brand Exact,Pure_Exact,70,22,6.05,5,0.27,1.21,31.43,22.73
+"""crear una cuenta business en amazon""",Phrase match,MX - Brand Phrase,Account_Phrase,135,28,85.45,5,3.05,17.09,20.74,17.86
+[proveedores al por mayor],Exact match,MX - Generic,Wholesales_Suppliers_Exact,921,141,242.33,5,1.72,48.47,15.31,3.55
+"""mayorista de equipos""",Phrase match,MX - Crafts,Professional Tools_Wholesalers_Phrase,1046,90,284.69,5,3.16,56.94,8.6,5.56
+"""amazon negocios""",Phrase match,MX - Brand Phrase,Pure_Phrase,474,69,568.13,5,8.23,113.63,14.56,7.25
+"""amazon business cuenta""",Phrase match,MX - Brand Phrase,Account_Phrase,202,28,66.1,4,2.36,16.52,13.86,14.29
+"""proveedor para empresas""",Phrase match,MX - Generic,Suppliers_Enterprises_Phrase,1165,101,272.32,4,2.7,68.08,8.67,3.96
+"""distribuidor de productos de alimentación""",Phrase match,MX - Food,Food_Distributor_Phrase,2241,179,294.7,4,1.65,73.68,7.99,2.23
+"""ropa por mayoreo""",Phrase match,MX - Apparel,Clothing_Phrase,3771,509,430.69,4,0.85,107.67,13.5,0.79
+"""distribuidores de productos para el cabello""",Phrase match,MX - Beauty,Hair Styling_Distributors_Phrase,1655,244,520.92,4,2.13,130.23,14.74,1.64
+"""cuenta de empresa de amazon""",Phrase match,MX - Brand Phrase,Account_Phrase,924,125,522.35,4,4.18,130.59,13.53,3.2
+"""compras proveedor""",Phrase match,MX - Generic,Suppliers_Products_Phrase,3284,349,570.02,4,1.63,142.51,10.63,1.15
+"""proveedor de perfume""",Phrase match,MX - Beauty,Fragrance_Supplier_Phrase,2151,379,648.17,4,1.71,162.04,17.62,1.06
+"""amazon empresarial""",Phrase match,MX - Brand Phrase,Pure_Phrase,1162,95,894.28,4,9.41,223.57,8.18,4.21
+[cuenta amazon business],Exact match,MX - Brand Exact,Account_Exact,63,20,8.79,3,0.44,2.93,31.75,15.0
+[business amazon],Exact match,MX - Brand Exact,Pure_Exact,148,69,9.09,3,0.13,3.03,46.62,4.35
+[mayoreo],Exact match,MX - Generic,Core_Wholesalers_Exact,764,71,88.26,3,1.24,29.42,9.29,4.23
+"""amazon factura""",Phrase match,MX - Invoice AMZ,Invoice_Phrase,207,32,144.14,3,4.5,48.05,15.46,9.38
+"""distribuidores de smartphone""",Phrase match,MX - Electronics,Cell Phones_Distributor_Phrase,497,95,148.15,3,1.56,49.38,19.11,3.16
+"""facturar amazon""",Phrase match,MX - Invoice AMZ,Invoice_Phrase,245,27,148.84,3,5.51,49.61,11.02,11.11
+"""suministros de limpieza""",Phrase match,MX - Janitorial,Supply_Phrase,2030,135,197.21,3,1.46,65.74,6.65,2.22
+"""proveedores de cristalería""",Phrase match,MX - Food,Cultlery_Suppliers_Phrase,884,123,207.41,3,1.69,69.14,13.91,2.44
+"""mayorista de productos de papel""",Phrase match,MX - Janitorial,Paper_Wholesale_Phrase,1285,160,272.95,3,1.71,90.98,12.45,1.88
+"""mayorista españa""",Phrase match,MX - Generic,Core_Wholesalers_Phrase,1026,118,327.85,3,2.78,109.28,11.5,2.54
+"""ropa deportiva al por mayor""",Phrase match,MX - Apparel,Sportwear_Wholesales_Phrase,1524,208,344.62,3,1.66,114.87,13.65,1.44
+[cuenta de amazon business],Exact match,MX - Brand Exact,Account_Exact,31,6,5.37,2,0.9,2.69,19.35,33.33
+[mobiliario de oficina],Exact match,MX - Office,Furniture_Exact,29,3,7.08,2,2.36,3.54,10.34,66.67
+[empresa amazon],Exact match,MX - Generic AMZ,Generic_Bulk_Exact,83,16,7.99,2,0.5,4.0,19.28,12.5
+[amazon para negocios],Exact match,MX - Brand Exact,Pure_Exact,39,15,13.76,2,0.92,6.88,38.46,13.33
+[registrar amazon business],Exact match,MX - Brand Exact,Account_Exact,21,8,21.9,2,2.74,10.95,38.1,25.0
+"""compras al por mayor""",Phrase match,MX - Generic,Wholesales_Purchasing_Phrase,186,25,24.98,2,1.0,12.49,13.44,8.0
+[amazon business account],Exact match,MX - Brand Exact,Account_Exact,81,22,29.39,2,1.34,14.7,27.16,9.09
+"""artículos para vehículos""",Phrase match,MX - Automotive,Supply_Phrase,102,23,29.85,2,1.3,14.93,22.55,8.7
+"""distribuidores perfume""",Phrase match,MX - Beauty,Fragrance_Distributors_Phrase,102,16,34.13,2,2.13,17.07,15.69,12.5
+"""artículos de limpieza para negocios""",Phrase match,MX - Janitorial,Products_Phrase,584,23,64.86,2,2.82,32.43,3.94,8.7
+"""distribuidores de camisetas""",Phrase match,MX - Apparel,Tops_Distributor_Phrase,502,52,93.15,2,1.79,46.58,10.36,3.85
+"""proveedores de café""",Phrase match,MX - Food,Food_Suppliers_Phrase,605,50,100.78,2,2.02,50.39,8.26,4.0
+"""proveedor médico""",Phrase match,MX - Medical,Suppliers_Phrase,651,40,118.42,2,2.96,59.21,6.14,5.0
+"""compra para empresa""",Phrase match,MX - Generic,Purchasing_Enterprises_Phrase,502,48,137.72,2,2.87,68.86,9.56,4.17
+[escritorios para oficina],Exact match,MX - Office,Office Furniture_Exact,739,72,148.28,2,2.06,74.14,9.74,2.78
+"""distribuidor de productos lácteos""",Phrase match,MX - Food,Food_Distributor_Phrase,893,87,155.68,2,1.79,77.84,9.74,2.3
+"""productos lácteos al por mayor""",Phrase match,MX - Food,Food_Wholesale_Phrase,410,47,158.26,2,3.37,79.13,11.46,4.26
+"""comprar mercancías""",Phrase match,MX - Generic,Purchasing_Products_Phrase,1221,97,162.05,2,1.67,81.03,7.94,2.06
+"""suministros para restaurantes""",Phrase match,MX - Food,Generic_Restaurant_Phrase,2280,192,256.6,2,1.34,128.3,8.42,1.04
+"""proveedores comerciales""",Phrase match,MX - Generic,Suppliers_Enterprises_Phrase,1101,106,270.24,2,2.55,135.12,9.63,1.89
+"""equipamiento comercial""",Phrase match,MX - Generic,Enterprises_Products_Phrase,1379,117,293.88,2,2.51,146.94,8.48,1.71
+"""suministro distribuidor""",Phrase match,MX - Generic,Procurement_Suppliers_Phrase,1469,138,307.49,2,2.23,153.75,9.39,1.45
+"""amazon business""",Phrase match,MX - Brand Phrase,Pure_Phrase,655,101,307.7,2,3.05,153.85,15.42,1.98
+"""proveedores vasos""",Phrase match,MX - Food,Glassware_Suppliers_Phrase,1827,178,429.13,2,2.41,214.57,9.74,1.12
+amazon business para autónomos,Broad match,MX - Generic AMZ,Generic_Business Clients_Broad,14,3,0.29,1,0.1,0.29,21.43,33.33
+[ropa mayoreo],Exact match,MX - Apparel,Clothing_Exact,38,2,1.35,1,0.68,1.35,5.26,50.0
+[tijeras mayorista],Exact match,MX - Office,Basic Supplies_Wholesalers_Exact,2,1,1.91,1,1.91,1.91,50.0,100.0
+[maquillaje al por mayor],Exact match,MX - Beauty,Makeup_Wholesale_Exact,51,4,3.0,1,0.75,3.0,7.84,25.0
+"""distribuidor de baterías""",Phrase match,MX - Crafts,Home Accessories_Distributor_Phrase,46,1,3.05,1,3.05,3.05,2.17,100.0
+[cuenta de negocios de amazon],Exact match,MX - Brand Exact,Account_Exact,23,2,3.08,1,1.54,3.08,8.7,50.0
+[mayorista amazon],Exact match,MX - Generic AMZ,Generic_Wholesalers_Exact,11,5,4.38,1,0.88,4.38,45.45,20.0
+[aceite de motor al por mayor],Exact match,MX - Automotive,Car Care_Wholesale_Exact,24,4,6.73,1,1.68,6.73,16.67,25.0
+[amazon business méxico],Exact match,MX - Brand Exact,Pure_Exact,47,17,7.67,1,0.45,7.67,36.17,5.88
+"""amazon mexico factura""",Phrase match,MX - Invoice AMZ,Invoice_Phrase,17,2,7.7,1,3.85,7.7,11.76,50.0
+[toallas para hotel],Exact match,MX - Hospitality,Products_Exact,46,4,7.79,1,1.95,7.79,8.7,25.0
+[sillas para salas de reuniones],Exact match,MX - Office,Office Furniture_Exact,42,4,8.12,1,2.03,8.12,9.52,25.0
+[compra para empresas amazon],Exact match,MX - Generic AMZ,Generic_Purchasing_Enterprises_Exact,78,31,9.37,1,0.3,9.37,39.74,3.23
+"""seller central""",Phrase match,MX - Invoice AMZ,Invoice_Phrase,47,3,11.5,1,3.83,11.5,6.38,33.33
+"""comprar sudaderas al por mayor""",Phrase match,MX - Apparel,Tops_Wholesales_Phrase,83,8,11.69,1,1.46,11.69,9.64,12.5
+"""facturar en amazon""",Phrase match,MX - Invoice AMZ,Invoice_Phrase,66,5,11.96,1,2.39,11.96,7.58,20.0
+"""facturas amazon""",Phrase match,MX - Invoice AMZ,Invoice_Phrase,75,4,12.97,1,3.24,12.97,5.33,25.0
+[comprar ropa al por mayor],Exact match,MX - Apparel,Clothing_Exact,75,11,12.99,1,1.18,12.99,14.67,9.09
+"""proveedores leche""",Phrase match,MX - Food,Drinks_Suppliers_Phrase,106,8,13.79,1,1.72,13.79,7.55,12.5
+"""distribuidor bebidas""",Phrase match,MX - Food,Food_Distributor_Phrase,61,10,14.01,1,1.4,14.01,16.39,10.0
+"""productos de limpieza al por mayor""",Phrase match,MX - Janitorial,Tools_Wholesale_Phrase,146,15,14.17,1,0.94,14.17,10.27,6.67
+"""proveedores de chocolate""",Phrase match,MX - Food,Food_Suppliers_Phrase,90,13,15.69,1,1.21,15.69,14.44,7.69
+"""mobiliario de restaurante""",Phrase match,MX - Food,Furniture_Restaurant_Phrase,211,22,16.24,1,0.74,16.24,10.43,4.55
+"""proveedores aceite""",Phrase match,MX - Food,Condiments_Suppliers_Phrase,107,12,16.64,1,1.39,16.64,11.21,8.33
+[mayoristas de cosmética],Exact match,MX - Beauty,Wholesalers_Cosmetics_Exact,112,15,20.01,1,1.33,20.01,13.39,6.67
+[proveedor de productos para el cuidado de la piel],Exact match,MX - Beauty,Skin Care_Supplier_Exact,52,14,22.96,1,1.64,22.96,26.92,7.14
+[amazon negocios mexico],Exact match,MX - Brand Exact,Pure_Exact,65,25,23.44,1,0.94,23.44,38.46,4.0
+"""sillas para oficina economicas""",Phrase match,MX - Office,Office Furniture_Exact,95,18,27.73,1,1.54,27.73,18.95,5.56
+"""accesorios para bar""",Phrase match,MX - Food,Products_Restaurant_Phrase,227,13,28.25,1,2.17,28.25,5.73,7.69
+"""jabón para hotel""",Phrase match,MX - Hospitality,Products_Phrase,123,15,29.36,1,1.96,29.36,12.2,6.67
+[crear una cuenta business en amazon],Exact match,MX - Brand Exact,Account_Exact,22,9,33.32,1,3.7,33.32,40.91,11.11
+proveedor productos amazon,Broad match,MX - Generic AMZ,Generic_Suppliers_Products_Broad,100,13,34.97,1,2.69,34.97,13.0,7.69
+"""suministro de bombas""",Phrase match,MX - Crafts,Fixtures_Procurement_Phrase,316,20,41.39,1,2.07,41.39,6.33,5.0
+"""accesorios comerciales""",Phrase match,MX - Generic,Enterprises_Phrase,324,23,42.19,1,1.83,42.19,7.1,4.35
+"""pedir factura en amazon""",Phrase match,MX - Invoice AMZ,Invoice_Phrase,134,11,43.48,1,3.95,43.48,8.21,9.09
+[muebles para cafetería],Exact match,MX - Food,Furniture_Restaurant_Exact,202,27,43.67,1,1.62,43.67,13.37,3.7
+[cuenta de empresa en amazon],Exact match,MX - Brand Exact,Account_Exact,57,13,52.37,1,4.03,52.37,22.81,7.69
+"""ropa para hotel""",Phrase match,MX - Hospitality,Clothing_Phrase,165,21,53.69,1,2.56,53.69,12.73,4.76
+[distribuidores de maquillaje],Exact match,MX - Beauty,Makeup_Distributors_Exact,166,29,59.38,1,2.05,59.38,17.47,3.45
+"""proveedores vajillas""",Phrase match,MX - Food,Cultlery_Suppliers_Phrase,415,52,65.89,1,1.27,65.89,12.53,1.92
+"""facturar compras de amazon""",Phrase match,MX - Invoice AMZ,Invoice_Phrase,118,16,69.77,1,4.36,69.77,13.56,6.25
+"""amazon facturacion""",Phrase match,MX - Invoice AMZ,Invoice_Phrase,108,21,70.09,1,3.34,70.09,19.44,4.76
+[proveedor para mayoristas],Exact match,MX - Generic,Wholesales_Suppliers_Exact,288,45,77.74,1,1.73,77.74,15.63,2.22
+"""papeleras al por mayor""",Phrase match,MX - Office,Office Furniture_Wholesale_Phrase,614,48,79.22,1,1.65,79.22,7.82,2.08
+"""mayoristas de dulces""",Phrase match,MX - Food,Food_Wholesalers_Phrase,619,87,94.31,1,1.08,94.31,14.05,1.15
+"""mayorista de perfume""",Phrase match,MX - Beauty,Fragrance_Wholesale_Phrase,343,64,109.27,1,1.71,109.27,18.66,1.56
+[comprar al por mayor en línea],Exact match,MX - Generic,Wholesales_Exact,464,68,123.98,1,1.82,123.98,14.66,1.47
+"""facturacion amazon""",Phrase match,MX - Invoice AMZ,Invoice_Phrase,198,38,130.13,1,3.42,130.13,19.19,2.63
+"""venta al por mayor de artículos de limpieza""",Phrase match,MX - Janitorial,Wholesales_Phrase,687,72,134.33,1,1.87,134.33,10.48,1.39
+"""amazon business mexico""",Phrase match,MX - Brand Phrase,Pure_Phrase,197,34,136.61,1,4.02,136.61,17.26,2.94
+"""máquinas de café profesionales""",Phrase match,MX - Food,Coffee Machines_Phrase,749,87,136.65,1,1.57,136.65,11.62,1.15
+"""a cuenta amazon""",Phrase match,MX - Invoice AMZ,Invoice_Phrase,487,65,136.9,1,2.11,136.9,13.35,1.54
+"""mayorista de productos para el cuidado de la piel""",Phrase match,MX - Beauty,Skin Care_Wholesale_Phrase,542,77,160.71,1,2.09,160.71,14.21,1.3
+[mayorista de maquillaje],Exact match,MX - Beauty,Makeup_Wholesale_Exact,517,114,168.77,1,1.48,168.77,22.05,0.88
+"""equipo al por mayor""",Phrase match,MX - Generic,Wholesales_Products_Phrase,466,68,183.75,1,2.7,183.75,14.59,1.47
+"""mayoristas de artículos de limpieza""",Phrase match,MX - Janitorial,Wholesalers_Phrase,1379,117,195.2,1,1.67,195.2,8.48,0.85
+"""vajilla profesional""",Phrase match,MX - Food,Cultlery_Phrase,872,100,239.41,1,2.39,239.41,11.47,1.0
+[factura amazon],Exact match,MX - Invoice AMZ,Invoice_Exact,498,59,276.03,1,4.68,276.03,11.85,1.69
+"""distribuidor para negocios""",Phrase match,MX - Generic,Distributors_Enterprises_Phrase,1310,147,293.12,1,1.99,293.12,11.22,0.68
+"""productos para hostelería""",Phrase match,MX - Food,Products_Phrase,1799,147,342.2,1,2.33,342.2,8.17,0.68
+"""suministros oficina""",Phrase match,MX - Office,Generic_Phrase,9594,466,662.23,1,1.42,662.23,4.86,0.21

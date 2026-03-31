@@ -4,7 +4,7 @@
 
 *Operating principle: Subtraction before addition. The gut is the only organ whose primary job is removal. Every other organ wants to grow. The gut enforces the constraint that makes the whole system work: a fixed context budget. Information has a half-life. The gut tracks decay and acts on it.*
 
-Last updated: 2026-03-31 (loop run 14 — completing cascade)
+Last updated: 2026-03-31 (Karpathy run 15 — identity protection rule + Device compression + budget table refresh)
 Created: 2026-03-20
 
 ---
@@ -95,19 +95,19 @@ Word budgets are CONSTRAINTS (like a context window), not OBJECTIVES. The gut en
 | Organ | Budget | Actual | Utilization | Status |
 |-------|--------|--------|-------------|--------|
 | Memory | 3500w | 2436w | 70% | ✅ |
-| Heart | 3500w | 2602w | 74% | ✅ |
+| Heart | 3500w | 2647w | 76% | ✅ |
 | Brain | 2500w | 2120w | 85% | ✅ |
 | Eyes | 2500w | 1402w | 56% | ✅ |
 | aMCC | 2000w | 2204w | 110% | ⚠️ (within tolerance, post CE-3) |
 | Hands | 2000w | 1886w | 94% | ✅ |
-| Device | 2000w | 2409w | 120% | ⚠️ OVER — new tools added (prediction engine, attention tracker). Needs compression. |
-| Gut (this file) | 2000w | 1968w | 98% | ✅ |
+| Device | 2000w | 1386w | 69% | ✅ (compressed Run 15 — was 2,409w/120%) |
+| Gut (this file) | 2000w | 2097w | 105% | ⚠️ (identity protection rule added — safety content, non-negotiable) |
 | Nervous System | 1500w | 1297w | 86% | ✅ |
 | Spine | 1500w | 1490w | 99% | ✅ |
 
 **Total body budget:** 23,000w. Hard ceiling: 24,000w.
-**Actual body total:** ~19,814w (run 14). Under ceiling by ~4,186w.
-**Over-budget organs:** aMCC (110%) — within tolerance. Device (120%) — OVER, needs compression next experiment cycle.
+**Actual body total:** ~18,968w (run 15 — Karpathy). Under ceiling by ~5,032w.
+**Over-budget organs:** aMCC (110%) — within tolerance. Gut (105%) — identity protection rule, non-negotiable safety content.
 
 ### Compression Techniques
 
@@ -145,6 +145,14 @@ Word budgets are CONSTRAINTS (like a context window), not OBJECTIVES. The gut en
 - Procedural knowledge (how-to protocols, step-by-step instructions) that the agent has internalized after multiple runs can be compressed to 1-2 line summaries
 - Keep data tables intact — compress the descriptions around them
 - Test: can the agent still execute the protocol correctly from the compressed version? If yes, compress.
+
+**7. Identity field protection** (added Run 15, from intake request — Karpathy approved)
+- Identity fields are **non-compressible**. They must survive all COMPRESS, REMOVE, and REWORD experiments unchanged.
+- Protected fields: pronouns, preferred names, nicknames, "goes by" entries, gender identity markers.
+- Rationale: low token cost (~5-10 tokens per person), high harm if lost (misgendering in drafted communications, relationship damage). The cost-benefit is asymmetric — keeping them costs almost nothing; losing them causes real harm.
+- Applies to: Memory (relationship graph), any organ that stores person-level identity data.
+- Accuracy threshold: 100% — same as Brain/Memory factual accuracy. A compression that drops identity fields is treated as an INCORRECT result, triggering automatic REVERT.
+- As the relationship graph grows, this list of protected fields may expand. The principle is: if losing a field could cause the agent to misrepresent someone's identity in a communication, it's non-compressible.
 
 ---
 
@@ -216,7 +224,7 @@ Daily brief includes gut check when issues detected (e.g., "🫁 Eyes is 500w ov
 
 ## Governance
 
-**All changes to compression protocols, word budgets, bloat thresholds, and excretion rules in this file are governed by the Karpathy agent** (`~/shared/.kiro/agents/karpathy.md`). The heart loop applies these rules during execution. Karpathy owns the rules themselves — testing new techniques, adjusting budgets, and evolving the compression strategy over time.
+**All changes to compression protocols, word budgets, bloat thresholds, and excretion rules in this file are governed by the Karpathy agent** (`~/.kiro/agents/body-system/karpathy.md`). The heart loop applies these rules during execution. Karpathy owns the rules themselves — testing new techniques, adjusting budgets, and evolving the compression strategy over time.
 
 ## When to Read This File
 During heart loop cascade, when an organ feels bloated, when intake/ accumulates, monthly compression review, before adding content to any organ (check budget first).

@@ -4,7 +4,7 @@
 
 *Operating principle: Invisible over visible. Memory works best when Richard doesn't have to look things up. The relationship graph, tone notes, and meeting briefs should flow invisibly into drafts and prep — Richard gets a draft that already sounds right for the recipient without having to think about register.*
 
-Last updated: 2026-03-27 (loop run 13: Flash sections written, bridge built, Onsite Events, Polaris weblab scoping)
+Last updated: 2026-03-31 (loop run 14: W13 callouts produced, Baloo keywords delivered, Frank Volinsky sync scheduled, prediction engine + data layer built)
 
 ---
 
@@ -154,10 +154,10 @@ L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate R
 - Draft style: Match organized style, reference deadlines clearly.
 
 ### Frank Volinsky — MCS team, page builds/weblab
-- Last interaction: 3/27 (Taskei MCS-3004 comment: "Received. Our team will start scoping out and will get back with an ETA next week.")
+- Last interaction: 3/30 (scheduled Polaris weblab sync for 3/31 11:30am PT — "I want to make sure I have all the correct requirements before work starts." MCS-3004.)
 - Tone: Professional, brief
-- Current topic: WW PS Brand Polaris Redesign weblab scoping, MX Automotive/Beauty landing pages
-- Draft style: Brief, action-oriented.
+- Current topic: WW PS Brand Polaris Redesign weblab — requirements confirmation meeting TODAY. MX Automotive/Beauty landing pages.
+- Draft style: Brief, action-oriented. Come prepared with market priority list, page URLs, and weblab parameters.
 
 ---
 

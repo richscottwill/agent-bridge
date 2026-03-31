@@ -4,25 +4,16 @@
 
 *Operating principle: Structural over cosmetic. Eyes doesn't just report numbers — it pre-interprets them so Richard walks into meetings with a position, not a spreadsheet. The predicted QA section reduces the decision of "what will they ask?" to a pre-loaded answer.*
 
-Last updated: 2026-03-26 (loop run 11)
-Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy tests
+Last updated: 2026-03-31 (loop run 14)
+Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy tests, W13 dashboard data
 
 ---
 
 ## Market Health (Feb 2026)
 
-| Market | Regs | vs OP2 | YoY | Spend | CPA | OCI Status | Key Competitor | Notes |
-|--------|------|--------|-----|-------|-----|------------|----------------|-------|
-| US | 32.9K | +16% | +68% | $2.7M | $83 | Live (100%) | Walmart (37-55% IS) | OCI driving NB gains; Brand CPA up to $65-77 from Walmart |
-| UK | ~5K est | +24% | N/A | N/A | N/A | Live (100%) | weareuncapped (24% IS) | Surpassed OP2 despite -6% spend; ad copy test +86% CTR |
-| DE | ~4K est | -4% | N/A | N/A | N/A | Live (100%) | recht24-7.de (14% IS) | Missed OP2; NB -22% vs OP2, higher Y25 baseline |
-| FR | N/A | N/A | N/A | N/A | N/A | In Progress (E2E) | bruneau.fr (39-47% NB IS) | OCI E2E launched 2/26 |
-| IT | N/A | N/A | N/A | N/A | N/A | In Progress (E2E) | mondoffice/Shopify | OCI E2E launched 2/26; ad copy test early stage |
-| ES | N/A | N/A | N/A | N/A | N/A | In Progress (E2E) | amazon.co.uk AGL | OCI E2E launched 2/26 |
-| CA | 2.8K | +18.5% | +32.3% | $207K | $73 | In Progress (E2E 3/4) | Shopify (+13% CPC) | LP optimization: Bulk CVR +187%, Wholesale +180% |
-| JP | 1.6K | -47.5% | N/A | N/A | N/A | In Progress (E2E 2/26) | axalpha, shop-pro.jp | MHLW ended 1/31 — major reg driver gone |
-| AU | 1.1K | -1% | N/A | $159K | ~$140 target | Not planned | None significant | Traffic decline WoW from bid strategy + seasonal transition |
-| MX | 1.1K | +32% | +37% | $68K | N/A | Not planned | algo-mas.mx (11-13% IS) | Strong growth; invoice mgmt ongoing |
+<!-- Data: db("SELECT market, week, regs, cpa, cost, brand_regs, nb_regs, cvr FROM weekly_metrics ORDER BY market, week DESC") -->
+<!-- Data: db("SELECT market, status FROM oci_status") -->
+<!-- Data: db("SELECT market, competitor, impression_share, segment FROM competitors WHERE week = '2026 W13'") -->
 
 ### Market Deep Dives
 
@@ -36,35 +27,15 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 
 **JP — MHLW headwind.** MHLW campaign ended 1/31 — was a major registration driver. New competitors emerging on Yahoo (shop-pro.jp 12-15% IS).
 
-**AU — Intentional efficiency trade-off.** Traffic decline WoW attributed to bid strategy changes + Back to Biz ending. Deep dive pending. New acquisition promo: 20% off, AU$50 max. CPC $6 avg challenged by Lena (3/19).
+**AU — Polaris migration + CVR compression.** W13: 207 regs (-16% WoW), $24K spend (-13%), CPA $118 (+3%). CVR compressed -12% WoW (Brand -14%, NB -10%). Mon-Tue strong (53, 50 regs) before Wed-Sat collapsed (27, 22, 23, 8). NB CPC declining 7 consecutive weeks ($6.82 W6 → $4.81 W13, -29%). NB CPA flat at $187. Polaris URL migration completing mid-week may explain daily pattern. Two-campaign structure proposed (3/24). Lena's 3 priorities: keyword CPC/CPA, keyword-to-product mapping, Polaris migration.
 
-**MX — Steady growth.** +32% vs OP2, +37% YoY. Competitor algo-mas.mx at 11-13% IS on Brand, +20% CPC spikes.
+**MX — Steady growth, NB surge.** W13: 354 regs (+9% WoW), $23K spend (+15%), CPA $66 (+6%). NB regs +33% above recent avg. YoY: +91% regs, +37% spend. NB CPA $112 sustained from H2 2025 efficiency gains. Lorena now primary PS stakeholder. ie%CCP corrected to 93% (ingester bug fixed — was reading CPA as ie%CCP).
 
 ---
 
 ## OCI Performance
 
-### Rollout Timeline
-| Market | Status | Launch Date | Full Impact |
-|--------|--------|-------------|-------------|
-| US | Live | Jul 2025 → Sep 2025 (100% NB) | Oct 2025 |
-| UK | Live | Aug 2025 → Sep 2025 (100%) | Oct 2025 |
-| DE | Live | Nov 2025 → Dec 2025 (100%) | Jan 2026 |
-| CA | In Progress | Mar 2026 (E2E 3/4) | Jul 2026 |
-| JP | In Progress | Feb 2026 (E2E 2/26) | Jul 2026 |
-| FR | In Progress | Feb 2026 (E2E 2/26) | Jul 2026 |
-| IT | In Progress | Feb 2026 (E2E 2/26) | Jul 2026 |
-| ES | In Progress | Feb 2026 (E2E 2/26) | Jul 2026 |
-| AU | Not planned | N/A | N/A |
-| MX | Not planned | N/A | N/A |
-
-### Impact Summary
-| Market | Test Period | Reg Lift | CPA Improvement | Estimated OPS |
-|--------|-----------|----------|-----------------|---------------|
-| US | Jul-Oct 2025 | +24% (+32K regs) | ~50% NB CPA | $16.7MM |
-| UK | Aug-Oct 2025 | +23% (+2.4K regs) | Significant | N/A |
-| DE | Oct-Dec 2025 | +18% (+749 regs) | Significant | N/A |
-| **Total** | | **+35K regs** | | **$16.7MM+** |
+<!-- Data: db("SELECT market, status, launch_date, full_impact_date, reg_lift_pct, cpa_improvement FROM oci_status ORDER BY market") -->
 
 ### MCC Structure
 - Master MCC: DSAP - Amazon Business Parent MCC (873-788-1095)
@@ -80,6 +51,8 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 
 ## Competitive Landscape
 
+<!-- Data: db("SELECT market, competitor, impression_share, cpc_impact_pct, segment, notes FROM competitors ORDER BY market, competitor") -->
+
 ### US: Walmart Business
 - First appeared Jul 2024 on Brand Core terms
 - IS trajectory: 25% (Jul-Sep 2024) → 35% (Oct-Nov 2024) → 37-55% (Jan-Mar 2026)
@@ -87,27 +60,6 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 - Brand CPA impact: ~$40 avg → $65-$77 range
 - Pattern: Pulls back during holidays, ramps Jan-Mar
 - Response: Bid caps + NB efficiency via OCI. Do NOT escalate auction.
-
-### EU5 Competitors
-| Market | Competitor | IS | Impact |
-|--------|-----------|-----|--------|
-| UK | weareuncapped.com | 24% Brand | +45% Brand Core CPC. Persistent since Dec 2023. |
-| UK | Temu | 13% Generic NB | +14% NB CPC |
-| UK | Amazon Global Logistics UK | <10% ES Brand | +41% CPC (W8-W10 2026) |
-| DE | recht24-7.de | 14% Brand Core | +3% MoM CPC; reported for store closure |
-| FR | bruneau.fr | 39-47% Generic NB | Significant NB pressure |
-| FR | mirakl.com | 10% Brand Core | -5% clicks, -14% CVR |
-| IT | Shopify (mondoffice) | >10% Generic NB | -20% CVR on Generic |
-| IT | revolut.com | <10% | -36% CVR drop on Brand Core (W10) |
-| ES | amazon.co.uk (AGL) | <10% | +41% CPC (2/13-3/4) |
-
-### International Competitors
-| Market | Competitor | IS | Notes |
-|--------|-----------|-----|-------|
-| CA | Shopify.com | <10% Brand Core | Recurring, +13% CPC |
-| JP | axalpha.com | 10% Brand Core Google | New threat |
-| JP | shop-pro.jp | 12-15% Yahoo Brand Core | Strengthening |
-| MX | algo-mas.mx | 11-13% Brand | +20% CPC spikes |
 
 ### Key Trends
 1. Competition broadening: 1-2 per market (2023) → 3-5 (2026)
@@ -152,31 +104,31 @@ Shifted from bulk/wholesale/B2B messaging → price, quality, selection messagin
 
 ## Predicted Questions (next session)
 
-Based on calendar patterns, email threads, active projects as of 3/27/26 Friday evening PT.
+Based on calendar patterns, email threads, active projects as of 3/31/26 Tuesday PT.
 
-**Q1: "What's on my plate Monday?"**
-Baloo early access launches EOD Monday 3/30. Richard owes keyword cost data + "don't use Google" blurb (Vijay). Memorial Day round 2 creative assets due Monday 3/30 (Onsite Events). Flash due 3/30 (sections written, needs final assembly). Lorena Q2 spend still unanswered (4 days). Polaris rollout timeline still not created. Testing Approach doc still not started — 8 workdays at zero.
+**Q1: "What do I need for the Frank Volinsky sync at 11:30?"**
+Frank wants to confirm requirements for MCS-3004 (WW PS Brand Polaris Redesign weblab). Bring: market priority list (AU > MX > DE > UK > JP > FR > IT > ES > CA > US-ES per Brandon), current Polaris page URLs per market, weblab parameters (traffic split, duration, success metrics), do-no-harm criteria (minimal localization, follow US template). Alex's page creation task status. Weblab dial-up still targeting April 6-7.
 
-**Q2: "What happened with the Polaris weblab?"**
-Frank Volinsky (MCS-3004) acknowledged 3/27: "Received. Our team will start scoping out and will get back with an ETA next week." Alex checking in with Vijeth on page creation task (due today 3/27). Weblab dial-up still targeting April 6-7.
+**Q2: "What should I bring to the Brandon 1:1 at 2pm?"**
+10 workdays at zero on Testing Approach doc. Brandon's #1 feedback: visibility. But also: Baloo keyword data delivered ✅, W13 callouts produced for all 10 markets, prediction engine built, data layer overhauled, callout pipeline consolidated. Massive Level 3/5 output. The question is whether Brandon sees this as progress or as avoidance of Level 1. Also: Polaris weblab sync outcome from 11:30am, Lorena still unanswered (6 days), Memorial Day feedback due today.
 
-**Q3: "What came out of the Onsite Events meeting?"**
-Prime Day marketing brief process introduced. Translation SLA changing 3→4 days for <500w content. Memorial Day round 2 assets due Monday 3/30, feedback due Tuesday 3/31. Marquee event tags restricted. Teams retain existing homepage hero placements for Prime Day.
+**Q3: "What's the AU sync prep for 4:30pm?"**
+W13 AU data: 207 regs (-15.5% WoW), $24K spend (-12.9%), CPA $118 (+3%). Regs below recent avg by 21%. NB regs down 25%. CPC down 21%. Polaris migration completing. Two-campaign structure proposal (product-intent vs business-intent) from 3/24. Lena's 3 priorities: keyword CPC/CPA investigation, keyword-to-product mapping, Polaris migration. Rolling 4-week CPA dashboard still not started.
 
-**Q4: "Did Richard write anything today?"**
-Yes — Flash sections (MX highlight, AU update, Bid Strategy Test, Brand LP Tests, Paid App status). Also built the agent bridge (Google Sheets/Docs communication layer). But NOT the Testing Approach doc. The Flash writing shows Richard CAN write when the topic is concrete and data-driven. The Testing Approach doc's blank-page paralysis is the resistance.
+**Q4: "Did Richard make progress on the Testing Approach doc?"**
+No. 10 workdays. W13 was zero. Monday 3/30 had open blocks — Richard delivered Baloo keywords and followed up on ABMA-11245 instead. The pattern is consistent: Richard does valuable execution and system-building work but avoids the strategic artifact. The aMCC is at maximum alert.
 
-**Q5: "What's the Karpathy identity protection request?"**
-Brandon's pronouns (she/her) were compressed out of memory.md during a loop experiment. Richard caught it manually. Requesting: (1) gut.md rule making identity fields non-compressible, (2) heart.md standing adversarial eval question for Memory experiments ("What are Brandon's pronouns?"). Routed to Karpathy.
+**Q5: "What happened with the system builds over the weekend?"**
+Prediction engine (Bayesian, 9 modules, 10 test files), data layer overhaul (query.py expansion, agent state functions, DuckDB MCP, 6 PBT test files, migration scripts), WBR callout pipeline consolidation (3 parameterized agents, W13 callouts for all 10 markets), attention tracker (full app, 34 test files), ie%CCP ingester bug fix, change log ingestion (477 rows). Massive Level 3/5 output.
 
-Last updated: 2026-03-27 (Friday evening PT)
+Last updated: 2026-03-31 (Tuesday PT)
 
 ---
 
 ## Data Pipeline
 - WW Dashboard Y25 Final (full year baseline) — in intake
-- WW Dashboard Y26 W12 (current week) — PROCESSED 3/23 via dashboard ingester
-- WW Dashboard Y26 W11 (prior week) — in intake
+- WW Dashboard Y26 W13 (current week) — PROCESSED 3/30 via dashboard ingester + callout pipeline
+- Change Log CSVs (EU5, MX/AU, NA/JP) — INGESTED 3/30 (477 rows to DuckDB)
 - Weekly cadence: Richard drops new week's xlsx → run `python3 shared/tools/dashboard-ingester/ingest.py <path>` → callouts + JSON + WW summary auto-generated
 - Ingester location: `~/shared/tools/dashboard-ingester/ingest.py`
 - Output: per-market callout drafts in `~/shared/context/active/callouts/<market>/`, WW summary, JSON data extract
@@ -184,7 +136,7 @@ Last updated: 2026-03-27 (Friday evening PT)
 
 ## What's Coming
 - OCI ROW: CA/JP/EU3 E2E launched, full impact Jul 2026
-- AI Max: US test planned Q2 2026, no test design written yet (due 3/28)
-- Project Baloo: US Q2 launch, unlocks Shopping Ads for AB
-- AEO/Zero-click: Educational session attended 3/10, POV due today
-- Polaris Brand LP WW rollout: Brandon set priority order (3/20), translations due 3/26
+- AI Max: US test planned Q2 2026, no test design written yet (3d overdue — was due 3/28)
+- Project Baloo: Early access launched 3/30. Keywords delivered. Shopping Ads for AB.
+- AEO/Zero-click: Educational session attended 3/10, POV queued (Level 4)
+- Polaris Brand LP WW rollout: Frank Volinsky sync TODAY 11:30am PT to confirm requirements. Weblab dial-up targeting April 6-7.
