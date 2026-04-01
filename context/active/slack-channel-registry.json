@@ -325,5 +325,57 @@
       "candidates": []
     }
   },
-  "default_tier_for_new_channels": 3
+  "default_tier_for_new_channels": 3,
+  "proactive_searches": {
+    "description": "Keyword-based searches that run during ingestion alongside channel scans. Catches signals from channels Richard isn't in, DMs, and cross-org threads. Uses the Slack search tool with date filtering (since last scan). Results go through the same relevance filter as channel messages.",
+    "scan_cadence": "Every ingestion cycle (morning routine + system refresh)",
+    "dedup_rule": "If a search result was already captured by a channel scan (same channel_id + ts), skip it.",
+    "queries": {
+      "people": {
+        "description": "Search for messages from/mentioning key people — catches DMs, cross-posted messages, and activity in channels we don't scan.",
+        "queries": [
+          {"query": "from:@brandoxy", "reason": "Manager — catch all messages including DMs and channels we're not in", "priority": 1},
+          {"query": "from:@kataxt", "reason": "Skip-level director — strategic signals", "priority": 1},
+          {"query": "from:@alexieck", "reason": "AU POC — catch DMs and cross-channel activity", "priority": 2},
+          {"query": "from:@lorealea", "reason": "MX primary stakeholder — catch DMs and cross-channel activity", "priority": 2},
+          {"query": "from:@dtpalmer", "reason": "MCS/Website — WBR coverage partner", "priority": 2},
+          {"query": "from:@theimes", "reason": "VP — strategic direction signals", "priority": 2}
+        ],
+        "organ_targets": ["current", "memory", "hands"]
+      },
+      "projects": {
+        "description": "Search for active project keywords — catches discussions in channels we don't know about.",
+        "queries": [
+          {"query": "OCI polaris baloo", "reason": "Core active projects — cross-channel signals", "priority": 1},
+          {"query": "\"paid search\" \"amazon business\"", "reason": "Broader PS/AB discussions across the org", "priority": 2},
+          {"query": "\"AI Max\" OR \"ai max\" google ads", "reason": "AI Max testing — new initiative, signals may be scattered", "priority": 2},
+          {"query": "\"ad copy\" OR \"landing page\" testing AB", "reason": "Testing workstream signals", "priority": 3}
+        ],
+        "organ_targets": ["current", "eyes"]
+      },
+      "interests": {
+        "description": "Topics Richard is personally interested in for Level 3-5 work and professional development.",
+        "queries": [
+          {"query": "kiro power MCP agent", "reason": "Kiro ecosystem — Level 5 (agentic orchestration), tooling insights", "priority": 2},
+          {"query": "GenBI analytics ABMA", "reason": "GenBI/analytics — data tooling for PS", "priority": 3},
+          {"query": "AgentSpaces DevSpaces", "reason": "Platform Richard builds on — catch outages, new features, best practices", "priority": 2}
+        ],
+        "organ_targets": ["device", "brain"]
+      },
+      "org_affiliation": {
+        "description": "Broader org-level signals — Amazon Business, outbound marketing, paid acquisition.",
+        "queries": [
+          {"query": "\"amazon business\" marketing paid acquisition", "reason": "Org-level discussions that may reference PS team or Richard's work", "priority": 3},
+          {"query": "\"outbound marketing\" OR \"paid acquisition\" team", "reason": "Team-level mentions in other channels", "priority": 3}
+        ],
+        "organ_targets": ["current", "eyes"]
+      }
+    },
+    "volume_cap": {
+      "max_queries_per_cycle": 10,
+      "max_results_per_query": 20,
+      "max_signals_from_search": 10,
+      "notes": "Priority 1 queries always run. Priority 2 run if budget allows. Priority 3 run only on morning routine (not system refresh). This prevents search from dominating the ingestion cycle."
+    }
+  }
 }

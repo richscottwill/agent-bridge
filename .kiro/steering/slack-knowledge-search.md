@@ -4,7 +4,25 @@ inclusion: manual
 
 # Slack Knowledge Search
 
-## When to Search
+## Two Search Modes
+
+There are two distinct ways the system searches Slack:
+
+### 1. Proactive Search (scheduled — runs during ingestion)
+- Defined in `slack-channel-registry.json → proactive_searches`
+- Runs keyword queries during morning routine and system refresh alongside channel scans
+- Catches signals from channels Richard isn't in, DMs, and cross-org threads
+- Results go through the same relevance filter as channel messages → routed to organs
+- Queries cover: key people (from:@brandoxy, etc.), active projects (OCI, Polaris, Baloo), interests (Kiro, GenBI, AgentSpaces), and org affiliation (Amazon Business, paid acquisition)
+- This is NOT knowledge search — it's signal detection. It writes to organs.
+
+### 2. Knowledge Search (on-demand — triggered by conversation)
+- Triggered by Richard's questions or agent reasoning during live chat
+- Searches community channels for technical knowledge, best practices, and community experience
+- Results are presented in conversation, NOT written to organs
+- This file governs knowledge search behavior
+
+## When to Use Knowledge Search
 
 Search community Slack channels when:
 1. Richard asks about MCP servers, CLI tools, Kiro features, AgentSpaces, Bedrock,
@@ -31,7 +49,6 @@ Search community Slack channels when:
 - Do NOT write Knowledge Search results to Body organs or produce Slack Digests
 - Do NOT modify scan state — Knowledge Search operates independently from scheduled scans
 - Do NOT report failed searches to Richard — note the gap internally and proceed with your own knowledge
-- Do NOT search community channels during scheduled ingestion scans — they are knowledge sources only
 
 ## Community Channels
 
