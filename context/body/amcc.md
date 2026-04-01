@@ -4,7 +4,7 @@
 
 *Operating principle: Protect the habit loop. The aMCC's job is to make the hard thing the default, not the exception. The streak, the escalation ladder, the resistance taxonomy — these are structural nudges that make avoidance harder than action. The intervention should feel like gravity pulling toward the right choice, not a voice yelling to change direction.*
 
-Last updated: 2026-03-31 (loop run 14: 10 workdays at zero, massive Level 3/5 output, zero Level 1)
+Last updated: 2026-04-01 (loop run 15: 11 workdays at zero, AU weekly update sent but not the hard thing)
 
 ---
 
@@ -44,11 +44,11 @@ The streak is the single most important metric in this organ. It measures consec
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| Current streak | 0 days | 10 workdays since hard thing was set (3/20). No Testing Approach outline started. Monday 3/30: Richard delivered Baloo keyword data (ABCA-371), followed up on ABMA-11245 SIM, and the system produced W13 callouts for all 10 markets + built prediction engine + overhauled data layer + built attention tracker. Massive Level 3/5 output. Zero Level 1 output. W14 starts today. |
+| Current streak | 0 days | 11 workdays since hard thing was set (3/20). No Testing Approach outline started. Tuesday 3/31: Richard sent AU PS Weekly Update proactively (good visibility move — Level 2 work), moved meetings for offsite, cancelled AU sync this week. Lena replied with sharp follow-up questions. OCI WW launch milestone hit (FR/IT/ES/JP at 100%). Slack ingestion went live. Still zero Level 1 output. W14 day 2. |
 | Longest streak | 0 days | Tracking starts 3/20 |
 | Streak resets (total) | 1 | Initial reset from artifact drought |
 | Last hard choice | 3/23 | Deprioritized AEO in favor of higher-leverage Testing Approach doc — strategic decision, not avoidance. |
-| Last avoidance | 3/30 | Monday — open blocks after morning routine. Richard delivered Baloo keywords and followed up on ABMA-11245. Both are legitimate tasks. But the Testing Approach doc was available and unblocked. The system-building over the weekend (prediction engine, data layer, callout pipeline, attention tracker) is Level 3/5 work — impressive output, but it's the comfort zone. Building systems instead of writing the strategic artifact. |
+| Last avoidance | 3/31 | Tuesday — Richard sent AU PS Weekly Update (proactive, good visibility, Level 2 work) and managed meeting logistics for offsite. Both are legitimate. But the Testing Approach doc was available and unblocked. The AU update is exactly the kind of stakeholder communication Brandon wants to see — but it's not the hard thing. |
 
 ### Streak History
 Removed — current-state-only principle. Historical data lives in changelog.md.

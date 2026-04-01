@@ -1,0 +1,329 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-04-01T00:00:00Z",
+  "updated_by": "system",
+  "tiers": {
+    "1": "Priority \u2014 scanned every cycle",
+    "2": "Watch \u2014 scanned on interval or keyword trigger",
+    "3": "Archive/Ignore \u2014 never scanned"
+  },
+  "channels": [
+    {
+      "channel_id": "C0993SRL6FQ",
+      "channel_name": "rsw-channel",
+      "tier": 1,
+      "organ_targets": [
+        "hands",
+        "current"
+      ],
+      "scan_interval_hours": null,
+      "keyword_triggers": [],
+      "notes": "Richard's private channel. Always scan. Primary workspace for notes, reminders, and agent communication."
+    },
+    {
+      "channel_id": "C044UG8MCSZ",
+      "channel_name": "ab-paid-search-global",
+      "tier": 1,
+      "organ_targets": [
+        "current",
+        "hands",
+        "eyes"
+      ],
+      "scan_interval_hours": null,
+      "keyword_triggers": [],
+      "notes": "Global Paid Search team channel. Core team discussions, decisions, and status updates across all markets."
+    },
+    {
+      "channel_id": "C0470FHVBAR",
+      "channel_name": "ab-paid-search-eu",
+      "tier": 1,
+      "organ_targets": [
+        "current",
+        "eyes",
+        "hands"
+      ],
+      "scan_interval_hours": null,
+      "keyword_triggers": [],
+      "notes": "EU Paid Search channel. Covers DE, FR, IT, ES, UK markets. Key for weblab updates and EU-specific decisions."
+    },
+    {
+      "channel_id": "C044UGEJ76Z",
+      "channel_name": "ab-ps_jp",
+      "tier": 1,
+      "organ_targets": [
+        "current",
+        "eyes",
+        "hands"
+      ],
+      "scan_interval_hours": null,
+      "keyword_triggers": [],
+      "notes": "Japan Paid Search channel. JP market operations, OCI rollout tracking, and market-specific testing."
+    },
+    {
+      "channel_id": "C06R6R19LG0",
+      "channel_name": "ab-paid-search-oci",
+      "tier": 1,
+      "organ_targets": [
+        "current",
+        "eyes"
+      ],
+      "scan_interval_hours": null,
+      "keyword_triggers": [],
+      "notes": "OCI (Offsite Customer Interactions) channel. Cross-market OCI rollout status, Google MCC access, and partner coordination."
+    },
+    {
+      "channel_id": "C06997HRWG0",
+      "channel_name": "ab-outbound-marketing",
+      "tier": 1,
+      "organ_targets": [
+        "current",
+        "hands",
+        "memory"
+      ],
+      "scan_interval_hours": null,
+      "keyword_triggers": [],
+      "notes": "Brandon's team channel. Team-wide announcements, org updates, and cross-functional coordination. Manager messages always high-relevance."
+    },
+    {
+      "channel_id": "C065KKT53DJ",
+      "channel_name": "ab-paid-search-abix",
+      "tier": 1,
+      "organ_targets": [
+        "current",
+        "eyes"
+      ],
+      "scan_interval_hours": null,
+      "keyword_triggers": [],
+      "notes": "ABIX (Amazon Business Intelligence Exchange) Paid Search channel. Data and analytics discussions for PS team."
+    },
+    {
+      "channel_id": "C08HJT14HD2",
+      "channel_name": "baloo-search-and-mcs",
+      "tier": 2,
+      "organ_targets": [
+        "current",
+        "eyes"
+      ],
+      "scan_interval_hours": 24,
+      "keyword_triggers": [
+        "Baloo",
+        "MCS",
+        "redirect"
+      ],
+      "notes": "Baloo search engine and MCS (Managed Campaign Service) discussions. Watch for redirect expansion and search algorithm changes."
+    },
+    {
+      "channel_id": "C0ADCCWRYU9",
+      "channel_name": "mcs-ps-redirect-expansion",
+      "tier": 2,
+      "organ_targets": [
+        "current",
+        "eyes"
+      ],
+      "scan_interval_hours": 24,
+      "keyword_triggers": [
+        "redirect",
+        "MCS",
+        "expansion"
+      ],
+      "notes": "MCS-PS redirect expansion project channel. Track redirect rollout progress and PS integration milestones."
+    },
+    {
+      "channel_id": "C052PSHPUTT",
+      "channel_name": "ext-apptweak-amazon-business",
+      "tier": 2,
+      "organ_targets": [
+        "current",
+        "eyes"
+      ],
+      "scan_interval_hours": 48,
+      "keyword_triggers": [
+        "AppTweak",
+        "app store"
+      ],
+      "notes": "External vendor channel with AppTweak. App store optimization and competitive intelligence. Lower frequency scan."
+    },
+    {
+      "channel_id": "C06M4NND3AN",
+      "channel_name": "ab-paid-search-cps",
+      "tier": 2,
+      "organ_targets": [
+        "current",
+        "eyes"
+      ],
+      "scan_interval_hours": 48,
+      "keyword_triggers": [
+        "CPS",
+        "partnership"
+      ],
+      "notes": "CPS (Channel Partnership Solutions) channel. Partnership discussions and cross-channel coordination. Lower frequency scan."
+    }
+  ],
+  "community_channels": [
+    {
+      "channel_id": "C0A1JD8FCUV",
+      "channel_name": "agentspaces-interest",
+      "member_count": 15447,
+      "topics": [
+        "AgentSpaces",
+        "DevSpaces",
+        "MCP",
+        "Kiro",
+        "agent development"
+      ],
+      "notes": "Knowledge search only \u2014 not scanned by ingester. Large community for AgentSpaces, DevSpaces, MCP tooling, and Kiro development."
+    },
+    {
+      "channel_id": "C08GJKNC3KM",
+      "channel_name": "amazon-builder-genai-power-users",
+      "member_count": 35410,
+      "topics": [
+        "GenAI",
+        "Bedrock",
+        "AI tools",
+        "LLM"
+      ],
+      "notes": "Knowledge search only \u2014 not scanned by ingester. Largest GenAI community. Bedrock, LLM usage patterns, and AI tooling discussions."
+    },
+    {
+      "channel_id": "C09LU3K7KS8",
+      "channel_name": "cps-ai-win-share-learn",
+      "member_count": 5174,
+      "topics": [
+        "AI wins",
+        "best practices",
+        "automation"
+      ],
+      "notes": "Knowledge search only \u2014 not scanned by ingester. AI success stories, best practices, and automation patterns from CPS org."
+    },
+    {
+      "channel_id": "C096H6QNW6M",
+      "channel_name": "bedrock-agentcore-interest",
+      "member_count": 7020,
+      "topics": [
+        "Bedrock",
+        "AgentCore",
+        "agents"
+      ],
+      "notes": "Knowledge search only \u2014 not scanned by ingester. Bedrock AgentCore community for agent development patterns and updates."
+    },
+    {
+      "channel_id": "C0A1J4QG3CY",
+      "channel_name": "abma-genbi-analytics-interest",
+      "member_count": 141,
+      "topics": [
+        "GenBI",
+        "analytics",
+        "ABMA data"
+      ],
+      "notes": "Knowledge search only \u2014 not scanned by ingester. Small ABMA GenBI analytics community. Niche but relevant for data-driven PS insights."
+    },
+    {
+      "channel_id": "C096T4SK3EY",
+      "channel_name": "andes-workbench-interest",
+      "member_count": 20178,
+      "topics": [
+        "Andes Workbench",
+        "development tools"
+      ],
+      "notes": "Knowledge search only \u2014 not scanned by ingester. Andes Workbench community for development tooling and workflow automation."
+    }
+  ],
+  "people_watch": {
+    "derived_from": "memory.md relationship graph",
+    "last_derived": "2026-04-01T00:00:00Z",
+    "always_high_relevance": [
+      {
+        "slack_user_id": "U03H47TS508",
+        "alias": "brandoxy",
+        "name": "Brandon Munday",
+        "reason": "Richard's manager (L7) \u2014 all messages score +100 regardless of content"
+      }
+    ],
+    "boosted": [
+      {
+        "slack_user_id": "W017LQ6RFL3",
+        "alias": "alexieck",
+        "name": "Alexis Eck",
+        "reason": "AU POC, active stakeholder for AU market operations"
+      },
+      {
+        "slack_user_id": "U026XAVP2E6",
+        "alias": "lorealea",
+        "name": "Lorena Alvarez Larrea",
+        "reason": "MX primary PS stakeholder, key contact for MX market"
+      },
+      {
+        "slack_user_id": "U06AQT6EZED",
+        "alias": "yunchu",
+        "name": "Yun-Kang Chu",
+        "reason": "Peer, MX/Adobe/Modern Search collaboration"
+      },
+      {
+        "slack_user_id": "U02NX7TMMHB",
+        "alias": "staceygu",
+        "name": "Stacey Gu",
+        "reason": "US/EU ops, cross-market operational coordination"
+      },
+      {
+        "slack_user_id": "U0840CQJVUK",
+        "alias": "awirtz",
+        "name": "Andrew Wirtz",
+        "reason": "Data team, Flash inputs and analytics support"
+      },
+      {
+        "slack_user_id": "UNRESOLVED_dtpalmer",
+        "alias": "dtpalmer",
+        "name": "Dwayne Palmer",
+        "reason": "MCS/Website, WBR coverage. Slack user ID not yet resolved \u2014 resolve on next scan cycle."
+      },
+      {
+        "slack_user_id": "UNRESOLVED_kataxt",
+        "alias": "kataxt",
+        "name": "Kate Rundell",
+        "reason": "L8 Director, skip-level manager. Slack user ID not yet resolved \u2014 resolve on next scan cycle."
+      },
+      {
+        "slack_user_id": "W017DGBF7KQ",
+        "alias": "theimes",
+        "name": "Todd Heimes",
+        "reason": "L10 VP, org leader. Messages indicate strategic direction."
+      },
+      {
+        "slack_user_id": "U02V22BFQQ2",
+        "alias": "saajanc",
+        "name": "Saajan Chowhan",
+        "reason": "UK market contact, regional PS coordination"
+      },
+      {
+        "slack_user_id": "U03MS7JBCVC",
+        "alias": "danhaert",
+        "name": "Daniel Haertel",
+        "reason": "EU market contact, regional PS coordination"
+      },
+      {
+        "slack_user_id": "U05THBAQYLT",
+        "alias": "foongste",
+        "name": "Stella Foong",
+        "reason": "APAC market contact, regional PS coordination"
+      },
+      {
+        "slack_user_id": "U09FZ4Q4L4B",
+        "alias": "arthamm",
+        "name": "Mukesh Artham",
+        "reason": "MCS/OCI engineer, technical implementation partner"
+      },
+      {
+        "slack_user_id": "U0205E7TVPH",
+        "alias": "kpantham",
+        "name": "Kiran Pantham",
+        "reason": "MCS/OCI engineer, technical implementation partner"
+      }
+    ],
+    "candidate_tracking": {
+      "threshold": "3+ interactions in 7 days",
+      "candidates": []
+    }
+  },
+  "default_tier_for_new_channels": 3
+}

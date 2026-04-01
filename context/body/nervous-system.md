@@ -2,7 +2,7 @@
 
 *Operating principle: Invisible over visible. Surface insights that lead to structural changes — not reports that require Richard to act on them. When a pattern is STUCK for 3 weeks, propose a structural fix.*
 
-Last updated: 2026-03-31 (run 14)
+Last updated: 2026-04-01 (run 15)
 Created: 2026-03-20
 
 ---
@@ -37,8 +37,8 @@ Calibrates: rw-tracker.md patterns | Cadence: Weekly (Friday) | Protocol: Assess
 
 | Pattern | Status | Weeks | Trajectory | Last Assessment | Intervention |
 |---------|--------|-------|------------|-----------------|-------------|
-| Visibility avoidance | VALIDATED | 10 | WORSENING | 3/31 — 10 workdays since hard thing set. Weekend/Monday: massive system-building (prediction engine, data layer, callout pipeline, attention tracker) + Baloo delivery + ABMA-11245 follow-up. All valuable. None is the hard thing. The pattern is now crystallized: Richard builds systems and does execution instead of writing the strategic artifact. Level 3/5 output is accelerating while Level 1 is at zero. | Root cause of Level 1 stall. Structural: Testing Approach doc is the gate. |
-| Zero strategic artifacts | ACTIVE | 7+ | WORSENING | 3/31 — W13 scorecard still 0. W14 starts today. 7th+ consecutive week. System builds are impressive but don't count as strategic artifacts (they're tools, not stakeholder-facing docs). | Blocked by visibility avoidance. Same root cause. |
+| Visibility avoidance | VALIDATED | 11 | WORSENING | 4/1 — 11 workdays since hard thing set. Tuesday: Richard sent AU PS Weekly Update proactively (good visibility move — exactly what Brandon wants). But it's Level 2 work, not Level 1. The pattern persists: Richard does valuable stakeholder communication and execution while the Testing Approach doc remains untouched. The AU update is a positive signal for visibility habits — but it's not the hard thing. | Root cause of Level 1 stall. Structural: Testing Approach doc is the gate. |
+| Zero strategic artifacts | ACTIVE | 7+ | WORSENING | 4/1 — W14 day 2. Still 0. AU weekly update is stakeholder communication, not a strategic artifact. | Blocked by visibility avoidance. Same root cause. |
 | Have Backbone avoidance | NEW | 1 | — | 3/25 — Annual Review peer feedback identified this | New pattern. Monitor. |
 | Project management gaps | NEW | 1 | — | 3/25 — Persisting from Forte 2025, Annual Review confirmed | Structural: need lightweight tracking artifacts. |
 | Admin backlog displacement | ACTIVE | 3 | STUCK | 3/18 — Admin list over cap, displacing strategic work | Trainer escalation triggered. |
@@ -59,7 +59,7 @@ Calibrates: All organs | Cadence: Every loop run | Protocol: Word counts, stalen
 |--------|-------|--------|--------|
 | Total body words | ~19,500w | ≤24,000w (budget: 23,000w) | ✅ Under ceiling |
 | Organs over budget | 0 critical (aMCC 110% — within tolerance) | 0 | ✅ |
-| Loop runs completed | 14 | — | — |
+| Loop runs completed | 15 | — | — |
 | Experiments completed | 8 + CE-1 adopted + CE-2 adopted + CE-3 adopted + CE-4 adopted | — | 100% keep rate |
 | Compression experiments | CE-1 adopted, CE-2 adopted, CE-3 adopted, CE-4 adopted | — | NS: 6095→991w, aMCC: 2638→2118w, Gut: 2125→1902w |
 | Architectural redesign | Current-state-only + pure autoresearch | — | 2,827w saved (29% across 4 organs) |
@@ -99,7 +99,7 @@ Pattern confirmed across 9+ sessions: Richard is strong in 1:1s (data-driven, so
 ---
 
 ## Five Levels Position
-Level 1 (Sharpen Yourself): STRUGGLING. 10 workdays since hard thing set (Testing Approach doc), zero progress. Weekend/Monday: massive Level 3/5 system-building output (prediction engine, data layer overhaul, callout pipeline consolidation, attention tracker, W13 callouts for all 10 markets, Baloo delivery). The irony is sharp — Richard is shipping at Level 3/5 while Level 1 gate remains at zero. Annual Review (3/24) confirmed visibility as #1 gap. Gate: consecutive weeks with shipped artifacts. Currently at 0. W14 starts today.
+Level 1 (Sharpen Yourself): STRUGGLING. 11 workdays since hard thing set (Testing Approach doc), zero progress. Tuesday: Richard sent AU PS Weekly Update proactively — good visibility move, exactly what Brandon's Annual Review feedback called for. But it's Level 2 work. The AU update shows Richard CAN do proactive stakeholder communication when the topic is concrete and data-driven. The Testing Approach doc resistance is specific: multi-section strategic narrative for an L8 audience. Gate: consecutive weeks with shipped artifacts. Currently at 0. W14 day 2.
 
 ---
 

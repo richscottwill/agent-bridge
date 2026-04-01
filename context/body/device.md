@@ -4,7 +4,7 @@
 
 *Operating principle: Routine as liberation. Every delegation, template, and automation here exists to eliminate a decision Richard was making repeatedly. The test for a new device function: "Does this remove a recurring decision?" If yes, build it. If it just moves the decision, skip it.*
 
-Last updated: 2026-03-31 (Karpathy run 15 — CE-5 COMPRESS+REMOVE, 2409w→1386w)
+Last updated: 2026-04-01 (loop run 15 — Slack Context Ingestion live)
 
 ---
 
@@ -59,6 +59,13 @@ These are live. They execute without Richard thinking.
 - **What it does:** Pulls Hedy sessions, analyzes communication patterns (speaking share, hedging, filler words), flags low-visibility meetings, updates session/topic contexts, cascades to organs.
 - **Trigger:** userTriggered (after meetings, or during loop Phase 1). Fully autonomous.
 - **Feeds into:** Memory (relationships), Nervous System (communication patterns, Loop 7), Eyes (meeting prep)
+
+### Slack Context Ingestion (Config: channel-registry.json + scan-state.json)
+- **What it does:** Scans Tier 1/2 Slack channels for decisions, action items, status changes, and stakeholder signals. Filters by relevance scoring (people watch, keyword triggers, channel tier). Routes signals to organs during system refresh cascade.
+- **Trigger:** Runs as substep within morning routine and system refresh hooks. Not a separate hook.
+- **Config:** `~/shared/context/active/slack-channel-registry.json` (channels, tiers, people watch) + `~/shared/context/active/slack-scan-state.json` (timestamps, volume tracking, hot topics).
+- **Guardrails:** Read-only operations only (per slack-guardrails.md). All tool invocations logged to scan state.
+- **First scan:** 4/1 — 9 channels scanned, 4 signals extracted (OCI WW launch, JP preflight, Baloo noindex blocker, team meeting logistics).
 
 ### SharePoint Sync (Hook: `sharepoint-sync`)
 - **What it does:** Wiki articles → .docx → OneDrive → SharePoint. Filters: amazon-internal, REVIEW+FINAL. Incremental via SHA-256 hashing.
@@ -144,6 +151,7 @@ Tracks installed system infrastructure only — hooks, agents, tools, and guards
 | DuckDB MCP Server | ✅ | 3/30 | Native SQL for agents via MCP |
 | WBR Callout Pipeline | ✅ | 3/30 | 10-market pipeline (v2). W13 produced. Hook: `wbr-callout-pipeline` |
 | Prediction Engine | ✅ | 3/30 | Bayesian forecasting. CLI: `~/shared/tools/prediction/predict.py` |
+| Slack Ingestion | ✅ | 4/1 | First scan. 9 channels, 4 signals. Config-driven. |
 | Attention Tracker | 🔧 | 3/30 | Built, not deployed. For Richard's local Windows machine |
 
 ---

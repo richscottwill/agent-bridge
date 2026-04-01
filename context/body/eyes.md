@@ -4,8 +4,8 @@
 
 *Operating principle: Structural over cosmetic. Eyes doesn't just report numbers — it pre-interprets them so Richard walks into meetings with a position, not a spreadsheet. The predicted QA section reduces the decision of "what will they ask?" to a pre-loaded answer.*
 
-Last updated: 2026-03-31 (loop run 14)
-Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy tests, W13 dashboard data
+Last updated: 2026-04-01 (loop run 15)
+Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy tests, W13 dashboard data, Slack ingestion (first scan)
 
 ---
 
@@ -104,24 +104,24 @@ Shifted from bulk/wholesale/B2B messaging → price, quality, selection messagin
 
 ## Predicted Questions (next session)
 
-Based on calendar patterns, email threads, active projects as of 3/31/26 Tuesday PT.
+Based on calendar patterns, email threads, active projects, Slack signals as of 4/1/26 Wednesday PT.
 
-**Q1: "What do I need for the Frank Volinsky sync at 11:30?"**
-Frank wants to confirm requirements for MCS-3004 (WW PS Brand Polaris Redesign weblab). Bring: market priority list (AU > MX > DE > UK > JP > FR > IT > ES > CA > US-ES per Brandon), current Polaris page URLs per market, weblab parameters (traffic split, duration, success metrics), do-no-harm criteria (minimal localization, follow US template). Alex's page creation task status. Weblab dial-up still targeting April 6-7.
+**Q1: "What should I bring to the Adi sync at noon?"**
+Adi confirmed JP Google account for OCI preflight (all ref tags unique, search ads only). Follow up on AI ad-copy workflow progress (JP translation rules, D-Pel vs AI decision matrix). Check if Adi has updates on the "process-snap" sync Richard was supposed to schedule. Also: Stacey's JP ref tag question in Slack — Adi may have context.
 
-**Q2: "What should I bring to the Brandon 1:1 at 2pm?"**
-10 workdays at zero on Testing Approach doc. Brandon's #1 feedback: visibility. But also: Baloo keyword data delivered ✅, W13 callouts produced for all 10 markets, prediction engine built, data layer overhauled, callout pipeline consolidated. Massive Level 3/5 output. The question is whether Brandon sees this as progress or as avoidance of Level 1. Also: Polaris weblab sync outcome from 11:30am, Lorena still unanswered (6 days), Memorial Day feedback due today.
+**Q2: "What's happening with OCI JP launch?"**
+Major milestone: FR/IT/ES dialed to 100%, JP at 100%. CA on track for 04/07. First QBR goal of 2026 achieved (Kiran Pantham celebrated in OCI channel). Mukesh created MCM-147368188 for JP tracking template. Brandon confirmed Day7 MCM steps. Brandon deferred JP ref tag taxonomy update to post-launch — will discuss with Deepika Thursday. Richard is in the JP channel thread about ref tag changes.
 
-**Q3: "What's the AU sync prep for 4:30pm?"**
-W13 AU data: 207 regs (-15.5% WoW), $24K spend (-12.9%), CPA $118 (+3%). Regs below recent avg by 21%. NB regs down 25%. CPC down 21%. Polaris migration completing. Two-campaign structure proposal (product-intent vs business-intent) from 3/24. Lena's 3 priorities: keyword CPC/CPA investigation, keyword-to-product mapping, Polaris migration. Rolling 4-week CPA dashboard still not started.
+**Q3: "What does Lena want from the AU weekly update?"**
+Lena replied to Richard's AU PS Weekly Update (4/1) with 3 questions: (1) data dump with landing page URLs showing where traffic goes, (2) how many clicks redirect because customer is already logged in, (3) are we overstating CPAs due to repeat visitors. These are sharp analytical questions — Lena is digging into whether the CPA picture is worse than it looks or better. Richard needs to investigate Google Ads landing page report and potentially coordinate with analytics for logged-in redirect data.
 
 **Q4: "Did Richard make progress on the Testing Approach doc?"**
-No. 10 workdays. W13 was zero. Monday 3/30 had open blocks — Richard delivered Baloo keywords and followed up on ABMA-11245 instead. The pattern is consistent: Richard does valuable execution and system-building work but avoids the strategic artifact. The aMCC is at maximum alert.
+No. 11 workdays. W14 day 2. Kate meeting is 11 business days away. Yesterday Richard sent the AU weekly update (good — proactive communication, addresses visibility gap) and moved meetings around for the offsite. But the doc remains untouched. The AU update is Level 2 work. The Testing Approach doc is Level 1 gate.
 
-**Q5: "What happened with the system builds over the weekend?"**
-Prediction engine (Bayesian, 9 modules, 10 test files), data layer overhaul (query.py expansion, agent state functions, DuckDB MCP, 6 PBT test files, migration scripts), WBR callout pipeline consolidation (3 parameterized agents, W13 callouts for all 10 markets), attention tracker (full app, 34 test files), ie%CCP ingester bug fix, change log ingestion (477 rows). Massive Level 3/5 output.
+**Q5: "What's the Baloo noindex situation?"**
+Slack signal (baloo-search-and-mcs, 3/31): meta tag noindex requirement not implemented on Baloo pages. Not impacting SEO while behind VPN, but flagged as a launch blocker. 6 replies in thread — actively being discussed. Richard should monitor but this is a tech team issue, not PS.
 
-Last updated: 2026-03-31 (Tuesday PT)
+Last updated: 2026-04-01 (Wednesday PT)
 
 ---
 
@@ -135,8 +135,8 @@ Last updated: 2026-03-31 (Tuesday PT)
 - Feeds: WBR callouts, MBR narratives, QBR trends, daily Google Ads checks (MX, AU, Paid App)
 
 ## What's Coming
-- OCI ROW: CA/JP/EU3 E2E launched, full impact Jul 2026
+- OCI ROW: FR/IT/ES/JP dialed up to 100% (3/31 Slack). CA on track for 04/07. JP tracking template MCM (MCM-147368188) in progress. JP ref tag taxonomy update deferred to post-launch (Brandon decision). First QBR goal of 2026 achieved.
 - AI Max: US test planned Q2 2026, no test design written yet (3d overdue — was due 3/28)
 - Project Baloo: Early access launched 3/30. Keywords delivered. Shopping Ads for AB.
 - AEO/Zero-click: Educational session attended 3/10, POV queued (Level 4)
-- Polaris Brand LP WW rollout: Frank Volinsky sync TODAY 11:30am PT to confirm requirements. Weblab dial-up targeting April 6-7.
+- Polaris Brand LP WW rollout: Frank Volinsky CANCELLED sync (3/31) — got requirements from Alex. No action needed. Weblab dial-up still targeting April 6-7.

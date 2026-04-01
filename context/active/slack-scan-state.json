@@ -1,0 +1,130 @@
+{
+  "version": "1.0",
+  "last_scan": {
+    "timestamp": "2026-04-01T07:00:00Z",
+    "hook": "system-refresh",
+    "status": "success",
+    "signals_extracted": 4,
+    "channels_scanned": 9,
+    "errors": []
+  },
+  "channels": {
+    "C0993SRL6FQ": {
+      "channel_name": "rsw-channel",
+      "last_message_ts": null,
+      "last_scan_ts": "2026-04-01T07:00:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 0
+    },
+    "C044UG8MCSZ": {
+      "channel_name": "ab-paid-search-global",
+      "last_message_ts": null,
+      "last_scan_ts": "2026-04-01T07:00:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 0
+    },
+    "C0470FHVBAR": {
+      "channel_name": "ab-paid-search-eu",
+      "last_message_ts": null,
+      "last_scan_ts": "2026-04-01T07:00:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 0
+    },
+    "C044UGEJ76Z": {
+      "channel_name": "ab-ps_jp",
+      "last_message_ts": "1774984809.340639",
+      "last_scan_ts": "2026-04-01T07:00:00Z",
+      "messages_processed": 6,
+      "signals_extracted": 2
+    },
+    "C06R6R19LG0": {
+      "channel_name": "ab-paid-search-oci",
+      "last_message_ts": "1774987970.802409",
+      "last_scan_ts": "2026-04-01T07:00:00Z",
+      "messages_processed": 4,
+      "signals_extracted": 1
+    },
+    "C06997HRWG0": {
+      "channel_name": "ab-outbound-marketing",
+      "last_message_ts": "1774972057.611439",
+      "last_scan_ts": "2026-04-01T07:00:00Z",
+      "messages_processed": 4,
+      "signals_extracted": 0
+    },
+    "C065KKT53DJ": {
+      "channel_name": "ab-paid-search-abix",
+      "last_message_ts": null,
+      "last_scan_ts": "2026-04-01T07:00:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 0
+    },
+    "C08HJT14HD2": {
+      "channel_name": "baloo-search-and-mcs",
+      "last_message_ts": "1774993930.578499",
+      "last_scan_ts": "2026-04-01T07:00:00Z",
+      "messages_processed": 2,
+      "signals_extracted": 1
+    },
+    "C0ADCCWRYU9": {
+      "channel_name": "mcs-ps-redirect-expansion",
+      "last_message_ts": null,
+      "last_scan_ts": "2026-04-01T07:00:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 0
+    }
+  },
+  "dm_conversations": {},
+  "hot_topics": {
+    "active": [
+      {
+        "topic": "OCI WW Launch (JP/EU3)",
+        "first_seen": "2026-03-31T07:00:00Z",
+        "last_seen": "2026-03-31T20:12:00Z",
+        "channels": ["C044UGEJ76Z", "C06R6R19LG0"],
+        "key_participants": ["brandoxy", "arthamm", "kpantham", "aditthk", "prichwil"],
+        "signal_count": 3,
+        "status": "active"
+      }
+    ],
+    "cooled": []
+  },
+  "volume_tracking": {
+    "week_start": "2026-03-31",
+    "words_by_organ": {
+      "current": 180,
+      "hands": 30,
+      "memory": 0,
+      "eyes": 40,
+      "brain": 0
+    },
+    "total_words_this_week": 250
+  },
+  "discovered_channels": [],
+  "people_watch_candidates": [],
+  "tool_invocation_log": [
+    {
+      "timestamp": "2026-04-01T07:00:00Z",
+      "tool": "batch_get_conversation_history",
+      "channel": "C0993SRL6FQ,C044UG8MCSZ,C0470FHVBAR,C044UGEJ76Z",
+      "result": "success"
+    },
+    {
+      "timestamp": "2026-04-01T07:00:01Z",
+      "tool": "batch_get_conversation_history",
+      "channel": "C06R6R19LG0,C06997HRWG0,C065KKT53DJ",
+      "result": "success"
+    },
+    {
+      "timestamp": "2026-04-01T07:00:02Z",
+      "tool": "batch_get_user_info",
+      "channel": "N/A",
+      "result": "success"
+    },
+    {
+      "timestamp": "2026-04-01T07:00:03Z",
+      "tool": "batch_get_conversation_history",
+      "channel": "C08HJT14HD2,C0ADCCWRYU9",
+      "result": "success"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Active Context — Richard Williams
 
-Last updated: 2026-03-31 (Tuesday PT, autoresearch loop run 14)
+Last updated: 2026-04-01 (Wednesday PT, autoresearch loop run 15)
 
 ## Role & Scope
 - Amazon Business, Paid Acquisition / Paid Search
@@ -23,18 +23,19 @@ Last updated: 2026-03-31 (Tuesday PT, autoresearch loop run 14)
 - US: Stacey switched to Polaris on 3/24 ✅
 - WW: Weblabs needed for AU, JP, EU (DE + FR per Andrew's recco). Brandon confirmed do-no-harm: minimal localization, follow US template.
 - ✅ Weblab ticket SUBMITTED (3/21): "WW PS Brand Polaris Redesign" via Taskei. Weblab dial-up targeting April 6-7.
-- 🆕 Frank Volinsky (MCS-3004, 3/30): Scheduled sync with Richard for 3/31 11:30am PT — "I want to make sure I have all the correct requirements before work starts." Richard accepted.
+- ✅ Frank Volinsky (MCS-3004, 3/31): CANCELLED sync — Frank got requirements from Alex directly. "No other information is needed at this time." No action needed from Richard.
 - Alex (Asana 3/27): Added Richard to "Page Creation / Page Edit, ps-brand XF + Template" task. Alex checking in with Vijeth on status.
 - Brandon's priority: AU > MX > DE > UK > JP > FR > IT > ES > CA > US-ES
 - US-ES page: noindex/nofollow, Alex working with Yun
-- Action: Create one-page Polaris rollout timeline with dates and owners (OVERDUE — was due last week). Prep requirements for Frank sync TODAY.
+- Action: Create one-page Polaris rollout timeline with dates and owners (OVERDUE — was due last week).
 
 ### AU Paid Search Optimization
 - MCS → Polaris: FULL SWITCH confirmed by Lena (3/13). Alexis sent mapping (3/17). Migration completing 3/24-25.
-- W11: NB regs -9% WoW, CPA $132. Lena wants weekly CPA review.
+- W13: NB regs -9% WoW, CPA $132. Lena wants weekly CPA review.
 - .co.uk URL issue RESOLVED (3/16).
-- 🆕 Alexis (3/24): Two-campaign structure proposal (product-intent vs business-intent). Biweekly keyword review cadence agreed. MCS page replication from MX model discussed.
-- 🆕 Lena's 3 priorities (via Brandon 3/23): keyword CPC/CPA investigation, keyword-to-product mapping, Polaris migration.
+- 🆕 Richard sent AU PS Weekly Update (4/1): Updated weekly performance doc with W13 decline analysis (traffic-driven + CVR drop) and keyword-level performance report. Alexis thanked him. Lena replied with follow-up questions: (1) can we get data with landing page URLs? (2) how many clicks redirect because customer is already logged in? (3) are we overstating CPAs due to repeat visitors? ACTION NEEDED: respond to Lena's questions.
+- Alexis (3/24): Two-campaign structure proposal (product-intent vs business-intent). Biweekly keyword review cadence agreed. MCS page replication from MX model discussed.
+- Lena's 3 priorities (via Brandon 3/23): keyword CPC/CPA investigation, keyword-to-product mapping, Polaris migration.
 
 ### MX Paid Search
 - Kingpin Goals overdue (was due 3/17). Blocked by Andes data.
@@ -97,9 +98,11 @@ Last updated: 2026-03-31 (Tuesday PT, autoresearch loop run 14)
 - Brandon submitted appeal + Google support ticket (case 1-3869000041102).
 - Brandon + Richard had call with Mike at 2pm PT 3/25. Mike escalating internally.
 - 3/26 update: Google sent "access restored" notice but Brandon retested — still blocked. Mike filed internal escalation (case 6-7924000040915).
-- 🆕 3/26 11pm: Mike sent 3 follow-up questions: (1) loop him into case 6-7924000040915 thread, (2) confirm if new user access resolved the issue, (3) status of appeal for first user. Brandon needs to respond.
+- 3/26 11pm: Mike sent 3 follow-up questions: (1) loop him into case 6-7924000040915 thread, (2) confirm if new user access resolved the issue, (3) status of appeal for first user. Brandon needs to respond.
 - Impact: JP OCI launch being pushed back until access resolved.
 - Richard added to ab-paidsearch-oci-apac2@ email list (3/25).
+- 🆕 **OCI WW Launch milestone (Slack 3/31):** FR, IT, ES dialed up to 100%. JP already at 100%. CA on track for 04/07. Kiran Pantham celebrated first QBR goal of 2026. Brandon confirmed Day7 MCM steps. Mukesh Artham created MCM-147368188 for JP tracking template update. Brandon decided to wait on JP ref tag taxonomy update until after tech confirms OCI is working — will discuss with Deepika Thursday.
+- 🆕 **JP OCI preflight (Slack 3/31):** Brandon initiating JP OCI enable. Adi confirmed JP Google account: all ref tags unique, no KW/adgroup overrides, search ads only. Stacey raised ref tag taxonomy update question — Brandon deferred to post-launch. Richard asked Stacey about planned changes to JP ref tags (thread active).
 
 ### Adobe OCI Rollout
 - Discussion (3/19) with Suzane Huynh. AU OCI May 2026 timeline. Adobe Bi-Weekly TODAY (1pm PT).
@@ -114,6 +117,7 @@ Last updated: 2026-03-31 (Tuesday PT, autoresearch loop run 14)
 - Kate attended prior Baloo demo — positive reaction.
 - Early access launched EOD Monday 3/30.
 - Still need: follow up with Brandon on MBR click-cost guardrails.
+- 🆕 **Baloo noindex blocker (Slack 3/31):** Meta tag noindex requirement (V2083026891) not implemented on Baloo pages. Not impacting SEO while behind VPN, but flagged as a launch blocker. 6 replies in thread — being actively discussed. Richard should monitor — this could delay Baloo public launch.
 
 ### R&O Flash Review (3/26, Deep Dive & Debate — Hedy captured)
 - Flash content finalized: US Modern Search Structure highlight (renamed from "Portfolio Consolidation" — combines campaign + portfolio consolidation), CA moved to status update (tariff-driven, not team-influenced), AU moved from lowlight to announcements (repurpose Lena CPC content), WhatsApp simplified (remove description, add Amazon-wide scope).
@@ -175,13 +179,11 @@ Last updated: 2026-03-31 (Tuesday PT, autoresearch loop run 14)
 | Aarushi Jamwal | aarushij | Baloo Tech team. Assigned on ABCA-371 (Baloo Paid Search flow). |
 
 ## Pending Actions
-- [ ] 🚨 Testing Approach doc for Kate — THE hard thing. Apr 16 meeting. Draft exists. Bridge doc created (sections outlined). Andrew active. 10 WORKDAYS AT ZERO.
-- [ ] Memorial Day round 2 creative feedback — due TODAY 3/31
-- [ ] PSME Seattle Party vote — due TODAY 3/31
-- [ ] Kudoboard for Kate Vives — due tomorrow 4/1
-- [ ] Prep for Frank Volinsky Polaris weblab sync — TODAY 11:30am PT. Confirm requirements for MCS-3004.
-- [ ] Provide Lorena Q2 expected spend for MX PO submission (6d overdue — 3/25 request)
-- [ ] Reply to Lorena keyword data request (12d overdue — 3/19 request)
+- [ ] 🚨 Testing Approach doc for Kate — THE hard thing. Apr 16 meeting. Draft exists. Bridge doc created (sections outlined). Andrew active. 11 WORKDAYS AT ZERO.
+- [ ] Respond to Lena's AU PS Weekly Update follow-up questions (landing page URLs, repeat visitor CPA overstating) — NEW, high-visibility
+- [ ] Kudoboard for Kate Vives — due TODAY 4/1
+- [ ] Provide Lorena Q2 expected spend for MX PO submission (7d overdue — 3/25 request)
+- [ ] Reply to Lorena keyword data request (13d overdue — 3/19 request)
 - [ ] Create one-page Polaris rollout timeline with dates and owners (OVERDUE — was due last week)
 - [ ] Compile rolling 4-week keyword CPA dashboard for AU (due this week)
 - [ ] Coordinate with MCS team on tracking/attribution post-migration (overdue)

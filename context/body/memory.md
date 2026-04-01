@@ -4,7 +4,7 @@
 
 *Operating principle: Invisible over visible. Memory works best when Richard doesn't have to look things up. The relationship graph, tone notes, and meeting briefs should flow invisibly into drafts and prep — Richard gets a draft that already sounds right for the recipient without having to think about register.*
 
-Last updated: 2026-03-31 (loop run 14: W13 callouts produced, Baloo keywords delivered, Frank Volinsky sync scheduled, prediction engine + data layer built)
+Last updated: 2026-04-01 (loop run 15: Frank cancelled Polaris sync, Lena AU follow-up questions, OCI WW launch milestone, Slack ingestion live)
 
 ---
 
@@ -62,9 +62,9 @@ L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate R
 
 ### Lena Zak (lenazak) — Country Leader AB AU, L7, Sydney
 - Reports to: Nick Georgijev
-- Last interaction: 3/19 (forwarded AU Consumer CPC benchmark to Kate/Nick/Brandon, called $6 CPC "outrageous")
-- Tone: Direct, expects data. Signs "Thanks, Lena"
-- Current topic: AU CPC challenge, full Polaris migration (decided 3/13), weekly CPA review
+- Last interaction: 4/1 (replied to Richard's AU PS Weekly Update with follow-up questions about landing page URLs and repeat visitor CPA overstating)
+- Tone: Direct, expects data. Signs "Cheers, Lena"
+- Current topic: AU CPC challenge, full Polaris migration (decided 3/13), weekly CPA review, landing page URL analysis, repeat visitor CPA methodology
 - Draft style: Lead with data, be clear about timelines. She's escalated to leadership — respond with facts, not defensiveness.
 - Meeting dynamic (from Hedy): Lena drives AU syncs with authority. Asks pointed questions about CPA, benchmarks, and reporting formats. Requested standardized weekly CPA tracking table. Expects Richard to come prepared with data — not narratives. She's the hardest stakeholder to satisfy in Richard's portfolio. When she asks "why," she wants numbers, not explanations. Richard should always have AU metrics loaded before any Lena interaction.
 
@@ -154,10 +154,10 @@ L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate R
 - Draft style: Match organized style, reference deadlines clearly.
 
 ### Frank Volinsky — MCS team, page builds/weblab
-- Last interaction: 3/30 (scheduled Polaris weblab sync for 3/31 11:30am PT — "I want to make sure I have all the correct requirements before work starts." MCS-3004.)
+- Last interaction: 3/31 (CANCELLED Polaris weblab sync — got requirements from Alex directly. "No other information is needed at this time." MCS-3004.)
 - Tone: Professional, brief
-- Current topic: WW PS Brand Polaris Redesign weblab — requirements confirmation meeting TODAY. MX Automotive/Beauty landing pages.
-- Draft style: Brief, action-oriented. Come prepared with market priority list, page URLs, and weblab parameters.
+- Current topic: WW PS Brand Polaris Redesign weblab — requirements confirmed via Alex. MX Automotive/Beauty landing pages.
+- Draft style: Brief, action-oriented.
 
 ---
 

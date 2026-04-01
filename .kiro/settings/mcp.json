@@ -72,6 +72,58 @@
         "list_tables",
         "list_columns"
       ]
+    },
+    "ai-community-slack-mcp": {
+      "command": "ai-community-slack-mcp",
+      "args": [],
+      "autoApprove": [
+        "search",
+        "list_channels",
+        "batch_get_conversation_history",
+        "batch_get_thread_replies",
+        "batch_get_channel_info",
+        "batch_get_user_info",
+        "get_channel_sections",
+        "reaction_tool",
+        "download_file_content",
+        "list_drafts",
+        "lists_items_list",
+        "lists_items_info",
+        "self_dm"
+      ]
+    },
+    "radar-mcp": {
+      "command": "radar-mcp",
+      "args": [],
+      "autoApprove": []
+    },
+    "amazon-sharepoint-mcp": {
+      "command": "amazon-sharepoint-mcp",
+      "args": [],
+      "autoApprove": []
+    },
+    "search-marketing-agent-workspace-alpha-mcp": {
+      "command": "search-marketing-agent-workspace-alpha-mcp",
+      "args": [],
+      "autoApprove": []
+    },
+    "knowledge-discovery-mcp": {
+      "command": "knowledge-discovery-mcp",
+      "args": [],
+      "autoApprove": []
+    },
+    "campaign-management-dashboard-mcp": {
+      "command": "campaign-management-dashboard-mcp",
+      "args": [],
+      "autoApprove": []
+    },
+    "flow-builder-mcp": {
+      "command": "store",
+      "args": [
+        "flow",
+        "flow-builder-mcp"
+      ],
+      "autoApprove": []
     }
   },
   "powers": {

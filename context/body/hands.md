@@ -4,8 +4,8 @@
 
 *Operating principle: Reduce decisions, not options. Every task should have a clear next action, a pre-written draft if it involves communication, and a due date that drives My Day. Richard opens his list and acts — he doesn't plan.*
 
-Last updated: 2026-03-31 (loop run 14)
-Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, annual review, flash session 3/27, bridge build, Onsite Events, W13 callout pipeline, prediction engine build, data layer overhaul
+Last updated: 2026-04-01 (loop run 15)
+Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, Slack ingestion (first scan), AU PS Weekly Update thread
 
 ---
 
@@ -97,17 +97,16 @@ Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, annual review, f
 | Lorena Q2 spend | 3/25 | 2 days (request, not hard deadline) |
 | AI Max test design | 3/28 | 0 days (due tomorrow, effectively overdue) |
 
-## New Signals (since 3/30)
-- ✅ Baloo keyword data DELIVERED (3/30): 26 keywords + URLs + tracking params in Quip sheet. ABCA-371 comment posted.
-- ✅ W13 WBR callouts PRODUCED (3/30): All 10 markets + WW summary + EU5 aggregate + blind review.
-- ✅ Prediction engine BUILT (3/28-3/30): Bayesian forecasting, auto-calibration, autonomy tracking.
-- ✅ Data layer OVERHAULED (3/28-3/30): query.py expanded, agent state functions, DuckDB MCP, PBT tests, migrations.
-- ✅ Attention tracker BUILT (3/28-3/30): Full app for local machine.
-- ✅ ie%CCP ingester bug FIXED (3/30): Was reading CPA instead of ie%CCP ratios.
-- ✅ Change Log CSVs INGESTED (3/30): 477 rows to DuckDB.
-- 🆕 Frank Volinsky (3/30): Polaris weblab sync scheduled for TODAY 11:30am PT. Wants to confirm requirements.
-- 🆕 ABMA-11245 (3/30): Richard followed up on Quick paid search integration SIM. Still unassigned.
-- 📅 TODAY 3/31: Team Meeting 9am, Frank sync 11:30am, Brandon 1:1 2pm, AU sync 4:30pm. Memorial Day feedback due. PSME party vote due.
+## New Signals (since 3/31)
+- 🆕 Lena replied to AU PS Weekly Update (4/1): wants landing page URL data, repeat visitor analysis, CPA overstating investigation. High-visibility — respond promptly.
+- 🆕 Alexis thanked Richard for AU weekly update insights (4/1). Positive signal.
+- 🆕 Frank Volinsky CANCELLED Polaris weblab sync (3/31) — got requirements from Alex. No action needed.
+- 🆕 OCI WW Launch: FR/IT/ES/JP at 100%. CA on track 04/07. First QBR goal of 2026. Brandon deferred JP ref tag taxonomy to post-launch.
+- 🆕 Baloo noindex blocker flagged in Slack (3/31) — meta tag requirement not implemented, launch blocker. Tech team handling.
+- 🆕 Richard moved Adi sync, MX sync, Google sync, PSME demo to accommodate offsite schedule.
+- 🆕 Slack Context Ingestion LIVE — first scan completed. 9 channels scanned, 4 signals extracted.
+- 📅 TODAY 4/1: Richard/Adi sync 12pm PT. Finance actuals due EOD 4/3. Kudoboard for Kate Vives due.
+- 📅 TOMORROW 4/2: PSME Demo 8am, Deep Dive & Debate 9am, ACQ Promo OHs 9am, Richard/Brandon 12pm PT.
 
 ---
 
