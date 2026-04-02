@@ -286,4 +286,4 @@ The priors table is the learning mechanism. Over time, posterior_mean converges 
 
 ## Governance
 
-All changes to this file, the experiment queue, hyperparameters, and run protocol are governed by the Karpathy agent. No other agent or process modifies heart.md directly. The loop executes. Karpathy governs.
+All changes to this file, the experiment queue, hyperparameters, and run protocol are governed by Karpathy authority (see `~/.kiro/agents/body-system/karpathy.md`). "Karpathy authority" means: the executing agent acting under karpathy.md identity (during experiment runs) OR a Karpathy subagent (during governance proposals). The boundary is authority, not process isolation — this is necessary because A/B/C blind eval requires the executing agent to invoke subagents directly (subagents cannot invoke their own subagents). No agent operating outside Karpathy authority modifies heart.md. The loop executes. Karpathy governs.
