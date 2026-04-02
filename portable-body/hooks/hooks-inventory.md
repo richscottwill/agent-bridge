@@ -105,5 +105,5 @@ These hooks are Kiro-specific JSON format. On a different platform:
 - System Refresh → implement as a maintenance + experimentation loop with blind evaluation
 - WBR Callouts → implement as a sequential analyst → writer → reviewer pipeline with confidence scoring
 - Safety Guards → implement as pre-send checks in whatever email/calendar tool is available
-- Portable Body Sync → implement as a file diff + copy + git push + email workflow
+- Agent Bridge Sync → implement as a file diff + copy + git push + email workflow
 - The INTENT of each hook is what matters, not the JSON format

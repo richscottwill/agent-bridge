@@ -305,7 +305,7 @@ def parse_autonomy_spectrum():
     functions.append({"name":"Progress charts (body system)","category":"agent_human","section":"Agents"})
     functions.append({"name":"Body organ maintenance & updates","category":"agent_human","section":"System"})
     functions.append({"name":"Context file freshness monitoring","category":"agent_human","section":"System"})
-    functions.append({"name":"Portable body sync","category":"agent_human","section":"System"})
+    functions.append({"name":"Agent-bridge sync","category":"agent_human","section":"System"})
     cats = {"fully_agentic":0,"agent_human":0,"human":0,"delegated":0}
     for f in functions:
         if f["category"] in cats: cats[f["category"]] += 1

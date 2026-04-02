@@ -1,4 +1,4 @@
-# Portable Body — Richard Williams
+# Agent Bridge — Richard Williams
 
 A personal operating system for AI-augmented work. Text files that let any AI platform understand how Richard thinks, works, and operates — enabling cold-start bootstrap in 2-3 hours instead of weeks.
 

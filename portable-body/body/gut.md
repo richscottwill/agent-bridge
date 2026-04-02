@@ -196,7 +196,7 @@ The gut runs a bloat check during the heart loop cascade (Phase 2) and flags iss
 | Task in Hands older than 30 days with no status change | 30 days | Either it's blocked (move to Backlog with reason) or it's dead (archive) |
 | Predicted question never scored after 7 days | 7 days | Score it or archive it |
 | Contact in Memory with no interaction for 90 days | 90 days | Move to Dormant Contacts |
-| Portable body organ stale vs source | Any organ modified since last sync | Flag: "🧳 Portable body: [N] organs stale since last sync" |
+| Agent-bridge organ stale vs source | Any organ modified since last sync | Flag: "🧳 Agent-bridge: [N] organs stale since last sync" |
 
 ### Bloat Report (included in daily brief when issues detected)
 ```

@@ -7,7 +7,7 @@ status: "draft"
 created: "2026-03-25"
 updated: "2026-03-25"
 owner: "Richard Williams"
-tags: ["body-system", "agent", "hook", "steering", "tool", "mcp", "portable-body"]
+tags: ["body-system", "agent", "hook", "steering", "tool", "mcp", "agent-bridge"]
 depends_on: []
 consumed_by: ["wiki-concierge", "karpathy", "agent-bridge-sync"]
 summary: "Complete architecture guide for the body system, hook system, and agent swarm — how they connect, what each piece does, and how the whole system compounds."
@@ -281,7 +281,7 @@ The system is designed to survive a platform move with nothing but text files. E
 
 <!-- AGENT_CONTEXT
 machine_summary: "Complete architecture guide for Richard Williams' AI work system. Three layers: (1) Body System — 11 organ files holding current state within a 23,000-word budget (see Body System Architecture for full detail), (2) Hooks — 5 event-driven triggers including morning routine (daily keystone habit) and autoresearch loop (autonomous experimentation, 9 runs, 8 experiments, 100% keep rate), (3) Agent Swarm — 18+ specialized agents across body-system, WBR callouts (3 market pipelines), and wiki team (6 agents, pipeline: editor → researcher → writer → critic → librarian). System compounds via autoresearch, nervous system (9 calibration loops), and wiki externalization. Designed for portability — all plain text, cold start in 2-3 hours."
-key_entities: ["body system", "organs", "hooks", "agents", "autoresearch loop", "morning routine", "Karpathy", "gut", "word budget", "portable-body", "soul.md", "spine.md", "nervous system"]
+key_entities: ["body system", "organs", "hooks", "agents", "autoresearch loop", "morning routine", "Karpathy", "gut", "word budget", "agent-bridge", "soul.md", "spine.md", "nervous system"]
 action_verbs: ["bootstrap", "route", "experiment", "compress", "calibrate", "cascade", "externalize"]
 update_triggers: ["new agent added", "new hook added", "new organ added", "architecture structural change", "platform migration"]
 -->

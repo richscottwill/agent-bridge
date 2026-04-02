@@ -153,7 +153,7 @@ us, ca, jp, uk, de, fr, it, es, au, mx, eu5, najp, abix, ww
 wbr, callout, testing, reporting, automation, delegation, morning-routine
 
 ### System tags
-body-system, agent, hook, steering, tool, mcp, portable-body
+body-system, agent, hook, steering, tool, mcp, agent-bridge
 
 ### Artifact type tags
 market-wiki, test-design, pov, playbook, tool-spec, handoff, knowledge-share, dashboard, tracker, process-guide

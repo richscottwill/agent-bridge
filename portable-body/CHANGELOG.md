@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the portable body system.
+All notable changes to the agent-bridge system.
 
 Format: [Common Changelog](https://common-changelog.org/)
 

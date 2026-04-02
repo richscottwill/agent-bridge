@@ -204,7 +204,7 @@ Completed experiments are logged in changelog.md as one-line entries. Historical
 - **Random + weighted selection.** No pre-designed experiments. No named hypotheses. Karpathy picks organ (weighted: over-budget → staleness → random), section (random), technique (random). Volume over precision — most revert, learning emerges from patterns.
 - **Batch execution.** Multiple experiments per invocation, stopping on diminishing returns (3 consecutive reverts).
 - **Per-organ cooldown replaces global gate.** The old CHANGE_WEIGHT > 10 gate blocked experiments on 5/6 runs because maintenance always touches 100+ lines. The per-organ cooldown is surgically precise: don't experiment on an organ that maintenance just modified in the same invocation, but all other organs are fair game. The dual blind eval already catches accuracy loss — the cooldown is belt-and-suspenders. Adopted 3/26 after Karpathy assessment showed the gate was effectively dead code.
-- **Portability as continuous constraint.** Every organ change must work on a cold platform with only text files. The generic blind evaluator tests this on every experiment. portable-body/ is the test artifact — if the generic evaluator can't answer from a portable-body file, the body isn't portable.
+- **Portability as continuous constraint.** Every organ change must work on a cold platform with only text files. The generic blind evaluator tests this on every experiment. The agent-bridge repo is the test artifact — if the generic evaluator can't answer from a portable-body file, the body isn't portable.
 
 ## Governance
 
