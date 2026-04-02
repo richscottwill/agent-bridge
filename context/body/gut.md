@@ -239,7 +239,7 @@ Daily brief includes gut check when issues detected (e.g., "🫁 Eyes is 500w ov
 
 ## Governance
 
-**All changes to compression protocols, word budgets, bloat thresholds, and excretion rules in this file are governed by the Karpathy agent** (`~/.kiro/agents/body-system/karpathy.md`). The heart loop applies these rules during execution. Karpathy owns the rules themselves — testing new techniques, adjusting budgets, and evolving the compression strategy over time.
+**All changes to compression protocols, word budgets, bloat thresholds, and excretion rules in this file are governed by Karpathy authority** (`~/.kiro/agents/body-system/karpathy.md`). "Karpathy authority" means: the executing agent acting under karpathy.md identity (during experiment runs) OR a Karpathy subagent (during governance proposals). The heart loop applies these rules during execution. Karpathy owns the rules themselves — testing new techniques, adjusting budgets, and evolving the compression strategy over time.
 
 ## When to Read This File
 During heart loop cascade, when an organ feels bloated, when intake/ accumulates, monthly compression review, before adding content to any organ (check budget first).

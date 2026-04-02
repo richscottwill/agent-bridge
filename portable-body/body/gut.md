@@ -4,18 +4,19 @@
 
 *Operating principle: Subtraction before addition. The gut is the only organ whose primary job is removal. Every other organ wants to grow. The gut enforces the constraint that makes the whole system work: a fixed context budget. Information has a half-life. The gut tracks decay and acts on it.*
 
-Last updated: 2026-03-31 (Karpathy run 15 — identity protection rule + Device compression + budget table refresh)
+Last updated: 2026-04-02 (Karpathy run 16 — static budgets replaced with adaptive budgets, Bayesian size-accuracy tracking)
 Created: 2026-03-20
 
 ---
 
 ## Purpose
 
-Every other organ adds content. The gut removes content. It enforces the fixed context budget. The body gets smarter without getting bigger.
+Every other organ adds content. The gut removes content. It enforces the context budget. The body gets smarter without getting bigger.
 
 **Core principles:**
 1. **Information has a half-life.** A fact critical on Monday may be noise by Friday. The gut tracks decay and acts on it.
 2. **Current-state-only.** Organs hold CURRENT STATE, not history. No append-only logs, streak histories, session logs, scoring logs, or weekly rollups in any organ. changelog.md is the audit trail. archive/ is cold storage. If it grows monotonically, it doesn't belong in an organ.
+3. **Budgets are learned, not declared.** Per-organ budgets and the body ceiling are adaptive — they move based on experiment data. If a larger organ answers more questions correctly, the budget expands. If compression doesn't degrade accuracy, the budget contracts. The data decides.
 
 ---
 
@@ -84,30 +85,44 @@ For each file in `intake/`:
 
 ## Compression Protocol
 
-Run monthly (or when any organ exceeds its word budget). The goal is to maximize *usefulness per token* — organs should answer their questions accurately and self-containedly within the budget ceiling.
+Run when Bayesian priors signal an organ has room to shrink (COMPRESS posterior_mean > 0.7, n > 5), or when total body approaches 30,000w safety limit. The goal is to maximize *usefulness per token* — organs should answer their questions accurately and self-containedly.
 
-Word budgets are CONSTRAINTS (like a context window), not OBJECTIVES. The gut enforces the ceiling. Experiments optimize for usefulness within that ceiling. An organ at 95% of budget that answers everything correctly is fine — no need to compress further. An organ at 50% of budget that misses questions needs content added, not celebrated for being small.
+Budgets are LEARNED CONSTRAINTS, not static numbers. The gut tracks the size-accuracy relationship via experiment data. An organ at its natural ceiling (ADD experiments consistently revert) doesn't need compression. An organ with room to shrink (COMPRESS experiments consistently keep) should be compressed. The priors table is the signal.
 
 ### Word Budget Enforcement
 
-**STATUS: CE-1 budget rebalancing ADOPTED (Runs 8-9, ratified by Karpathy 3/24). Budgets below are locked baseline.**
+**STATUS: Adaptive budgets adopted (Run 16, Karpathy). Static per-organ budgets and 24,000w ceiling replaced with learned constraints. Baseline budgets below are starting points — they move based on experiment data.**
 
-| Organ | Budget | Actual | Utilization | Status |
-|-------|--------|--------|-------------|--------|
-| Memory | 3500w | 2436w | 70% | ✅ |
-| Heart | 3500w | 2647w | 76% | ✅ |
-| Brain | 2500w | 2120w | 85% | ✅ |
-| Eyes | 2500w | 1402w | 56% | ✅ |
-| aMCC | 2000w | 2204w | 110% | ⚠️ (within tolerance, post CE-3) |
-| Hands | 2000w | 1886w | 94% | ✅ |
-| Device | 2000w | 1386w | 69% | ✅ (compressed Run 15 — was 2,409w/120%) |
-| Gut (this file) | 2000w | 2097w | 105% | ⚠️ (identity protection rule added — safety content, non-negotiable) |
-| Nervous System | 1500w | 1297w | 86% | ✅ |
-| Spine | 1500w | 1490w | 99% | ✅ |
+**How it works:**
+- Every experiment logs `words_before`, `words_after`, `score_a`, `score_b`, `delta_ab` to DuckDB `autoresearch_experiments`
+- Over time, this builds a size-accuracy curve per organ: at what word count does accuracy plateau?
+- The `autoresearch_organ_health` table tracks word count and accuracy estimate per organ per run
+- Budgets adjust: if ADD experiments consistently KEEP (organ improves with more content), the budget drifts up. If COMPRESS experiments consistently KEEP (organ doesn't degrade when smaller), the budget drifts down.
+- The Bayesian priors on ADD vs COMPRESS per organ ARE the budget signal — no separate budget number needed
 
-**Total body budget:** 23,000w. Hard ceiling: 24,000w.
-**Actual body total:** ~18,968w (run 15 — Karpathy). Under ceiling by ~5,032w.
-**Over-budget organs:** aMCC (110%) — within tolerance. Gut (105%) — identity protection rule, non-negotiable safety content.
+**Baseline budgets (starting points, not ceilings):**
+
+| Organ | Baseline | Actual | Notes |
+|-------|----------|--------|-------|
+| Memory | 3500w | 2436w | Identity fields non-compressible (§7) |
+| Heart | 3500w | 2647w | Protocol file — size driven by clarity needs |
+| Brain | 2500w | 2120w | Safety floor: zero degradation allowed |
+| Eyes | 2500w | 1402w | Most likely to benefit from ADD experiments |
+| aMCC | 2000w | 2204w | Intervention protocol — size driven by coverage |
+| Hands | 2000w | 1886w | Task density varies with workload |
+| Device | 2000w | 1386w | Compressed Run 15 |
+| Gut (this file) | 2000w | ~2100w | Identity protection rule — safety content |
+| Nervous System | 1500w | 1297w | Calibration loops — stable |
+| Spine | 1500w | 1490w | Bootstrap — stable |
+
+**Body ceiling: adaptive.** Starting point 24,000w. Actual ceiling is wherever the aggregate size-accuracy curve plateaus. Tracked via `autoresearch_organ_health`. If total body grows but aggregate accuracy improves, the ceiling was too low. If total body grows and accuracy is flat, the ceiling was right.
+
+**Hard safety rule (non-negotiable):** If total body exceeds 30,000w, mandatory compression review regardless of accuracy data. This is a practical limit — beyond this, session context windows become a real constraint. This number CAN be revised, but only with evidence that sessions work well at higher word counts.
+
+**Over-budget handling (revised):** No organ is "over budget" in the static sense. Instead:
+- If an organ's ADD experiments consistently REVERT (posterior_mean for ADD on that organ < 0.3, n > 5), the organ is at its natural ceiling — stop adding, try COMPRESS/REWORD instead
+- If an organ's COMPRESS experiments consistently KEEP (posterior_mean for COMPRESS > 0.7, n > 5), the organ has room to shrink — prioritize it for compression
+- These signals emerge from the priors table, not from a declared budget number
 
 ### Compression Techniques
 
@@ -188,8 +203,8 @@ The gut runs a bloat check during the heart loop cascade (Phase 2) and flags iss
 
 | Signal | Threshold | Action |
 |--------|-----------|--------|
-| Organ over word budget | >110% of budget | Mandatory compression before next content addition |
-| Total body over 24K words | Any amount over | Identify largest organ, compress or archive |
+| Total body over 30,000w | Safety limit | Mandatory compression review — practical context window constraint |
+| ADD experiments consistently revert on an organ | posterior_mean(ADD) < 0.3, n > 5 | Organ at natural ceiling — stop adding, try COMPRESS/REWORD |
 | Intake folder > 10 unprocessed files | 10 files | Batch process in next loop run |
 | Archive folder > 50 files | 50 files | Review archive, permanently delete transient files |
 | Same fact in 3+ organs | Any occurrence | Deduplicate — keep in canonical organ, pointer in others |
@@ -200,8 +215,8 @@ The gut runs a bloat check during the heart loop cascade (Phase 2) and flags iss
 
 ### Bloat Report (included in daily brief when issues detected)
 ```
-🫁 GUT CHECK: [X] organs over budget. Total body: [X]w / 24,000w ceiling.
-- [Organ]: [X]w over → [specific compression action]
+🫁 GUT CHECK: Total body: [X]w / 30,000w safety limit.
+- [Organ]: ADD prior at [X] (n=[X]) — at natural ceiling, compress candidates only
 - Intake: [X] unprocessed files
 - [X] facts duplicated across organs
 ```
@@ -210,7 +225,7 @@ The gut runs a bloat check during the heart loop cascade (Phase 2) and flags iss
 
 ## Integration with the Heart Loop
 
-The gut's word budgets are enforced as hard ceilings by the autoresearch loop. Experiments optimize for usefulness per token (accuracy + completeness) within those ceilings. The loop may add content to an organ if it improves accuracy or completeness, as long as the organ stays within budget. The morning routine handles intake processing and bloat detection during daily runs.
+The gut's adaptive budgets are informed by the autoresearch loop. Experiments track the size-accuracy relationship per organ. The loop may add content to an organ if it improves accuracy — the priors on ADD vs COMPRESS per organ naturally discover each organ's optimal size. The morning routine handles intake processing and bloat detection during daily runs.
 
 ---
 
