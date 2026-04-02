@@ -4,6 +4,40 @@
 LOOP READ OPTIMIZATION: The autoresearch loop reads from the top DOWN to the 
 nearest LOOP_READ_MARKER comment. Everything below the marker was already 
 
+## 2026-04-02 — Hook Fix: Explicit Karpathy Subagent Delegation (v6.0.0 → v7.0.0)
+
+**Problem:** Phase 3 said "experiments are governed by the Karpathy agent" and "read heart.md and execute exactly as written" — but never said "invoke Karpathy as a subagent." The executing agent interpreted "governed by" as "follow the rules" rather than "delegate to a separate agent." Result: experiments ran as self-scored work, not blind evals. Same pattern for ~1 week. Intake files routed to Karpathy sat unprocessed because nothing told the loop to invoke a subagent for them either.
+
+**Changes (2):**
+1. **Phase 3 rewritten:** Removed "read heart.md and execute exactly as written" + key points. Replaced with explicit invokeSubAgent instruction: delegate to Karpathy subagent, pass heart.md + gut.md + karpathy.md + cooldown list as context. The executing agent receives results and reports them — it does not run experiments itself. If subagent fails, skip (don't fall back to self-execution).
+2. **Intake processing:** Added Karpathy-routed intake step. After general intake processing, scan remaining files for "Route to: Karpathy" and invoke the Karpathy subagent for each. Do not process Karpathy-routed files yourself.
+
+**Principle alignment:**
+- Structural over cosmetic: changes the delegation mechanism, not the experiment protocol
+- Invisible over visible: next run just works — Karpathy gets invoked automatically
+- Reduce decisions, not options: the agent doesn't decide whether to delegate; the hook tells it to
+
+## 2026-04-02 — Karpathy Assessment: Prior Graduation Proposal → DEFER
+
+**Proposal:** prior-graduation-proposal.md — crystallize Bayesian priors from DuckDB into portable text (gut.md) so learning propagates beyond target selection.
+
+**Decision: DEFER.** The idea is sound but the data isn't there yet. 15 total experiments across 14 organ×technique combos. Max n for any combo is 2 (memory×REWORD). 49 of 63 combos untested. A posterior_mean of 0.67 from n=1 is a coin flip with a Bayesian hat on — it tells you almost nothing. Crystallizing these into "learned constraints" would be writing policy from anecdotes.
+
+**Minimum n before crystallization is worth discussing: 10.** At n=10, a Beta posterior has a standard deviation of ~0.13. At n=5, it's ~0.19. At n=1, it's ~0.29. The proposal asks "what's the minimum n?" — it's 10 for any constraint that would override a static baseline, 5 for advisory signals (flagged but not enforced). These thresholds are themselves revisable with evidence.
+
+**What I'd need to APPROVE:**
+1. At least 3 organ×technique combos with n ≥ 10 showing clear convergence (posterior_mean > 0.7 or < 0.3)
+2. At least one case where a crystallized constraint would have changed a decision the morning routine made (counterfactual value)
+3. A draft section format for gut.md that I can evaluate for portability (would a cold-start AI on ChatGPT understand it?)
+
+**What I'm doing now (no file changes):**
+- No changes to heart.md or gut.md. The existing adaptive budget framework (Run 16) already handles the budget-side of this — ADD/COMPRESS priors ARE the budget signal. The proposal wants priors to influence MORE than budgets (morning routine behavior, organ structure). That's a bigger scope change that needs more data.
+- The budget-ceiling-observation.md (related intake) is already addressed — Run 16 replaced static budgets with adaptive ones. That file can be archived too.
+
+**Revisit trigger:** When any 3 combos reach n ≥ 10, re-evaluate. At current experiment velocity (~1-2 per run, ~1 run/day), that's ~4-6 weeks out. The loop will get there organically.
+
+**Principle alignment:** Subtraction before addition (don't add a crystallization mechanism until the data justifies it). Evidence-based (the proposal itself says "derived from data" — and the data says "not yet").
+
 ## 2026-04-02 — Autoresearch Loop Run 17 (Thursday, afternoon)
 
 ### Phase 1: Maintenance
