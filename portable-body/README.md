@@ -2,7 +2,7 @@
 
 A personal operating system for AI-augmented work. Text files that let any AI platform understand how Richard thinks, works, and operates — enabling cold-start bootstrap in 2-3 hours instead of weeks.
 
-Repository: https://github.com/richscottwill/portable-body
+Repository: https://github.com/richscottwill/agent-bridge
 
 Last synced: 2026-03-31 (Tuesday ad-hoc sync)
 
@@ -67,7 +67,7 @@ The system uses a body metaphor. Each organ is a self-contained markdown file.
 | `agents/karpathy.md` | Autoresearch engine, loop governor, compression scientist |
 | `agents/rw-trainer.md` | Deep performance coach |
 | `agents/eyes-chart.md` | Visualization specialist |
-| `agents/portable-body-maintainer.md` | This sync system |
+| `agents/agent-bridge-sync.md` | This sync system |
 | `agents/market-analyst.md` | Parameterized WBR market analyst (all 10 markets) |
 | `agents/callout-writer.md` | Parameterized WBR callout writer (all 10 markets) |
 | `agents/callout-reviewer.md` | Cross-market callout blind reviewer |

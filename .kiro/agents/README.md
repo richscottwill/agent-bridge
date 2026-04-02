@@ -8,7 +8,7 @@ agents/
 │   ├── karpathy.md       # Autoresearch engine, organ experiments, compression
 │   ├── rw-trainer.md     # Deep performance coach
 │   ├── eyes-chart.md     # Visualization / dashboard generator
-│   ├── portable-body-maintainer.md  # Weekly sync to portable-body repo
+│   ├── agent-bridge-sync.md  # Sync to agent-bridge GitHub repo (files + git push)
 │   └── loop-governor.md  # (reserved) Loop execution governance
 │
 ├── wbr-callouts/         # WBR callout pipeline (analyst → writer → reviewer)

@@ -37,7 +37,7 @@ Single source of truth for where every file type belongs.
 | uploads/scratch/ | Ephemeral agent outputs | Agents | Ephemeral |
 | research/ | Active research files | Richard, agents | As needed |
 | research/aeo/ | L4: AEO/AI Overviews research | Future | Future |
-| portable-body/ | Cold-start bootstrap kit | portable-body-maintainer | Weekly |
+| portable-body/ | Cold-start bootstrap kit | agent-bridge-sync | Weekly |
 | audit-reports/ | System audit outputs | Agents | On audit |
 | credentials/ | Auth files (PROTECTED — never move) | System | Never |
 | .agentspaces/ | Auth sqlite (PROTECTED — never move) | System | Never |

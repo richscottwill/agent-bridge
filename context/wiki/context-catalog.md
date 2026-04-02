@@ -283,7 +283,7 @@ Specialized agents organized into three teams. Invoked via the agent routing dir
 | Karpathy | `karpathy.md` | Loop governor. Sole authority on heart.md, gut.md, experiment queue, compression rules. Gates all structural changes. | When modifying heart.md, gut.md, or experiment queue. "Run karpathy." |
 | RW Trainer | `rw-trainer.md` | Deep coaching agent. Leverage assessment, Five Levels analysis, career growth planning, annual review prep. | Career coaching, pattern stuck 3+ times, growth planning. |
 | Eyes Chart | `eyes-chart.md` | Visualization specialist. Reads organs + market data, generates HTML dashboard via progress-charts tool. Read-only on all organs. | "Generate charts," "show dashboard," data visualization requests. |
-| Portable Body Maintainer | `portable-body-maintainer.md` | Syncs files to portable-body/, updates docs, sends snapshot email. | Friday calibration. "Sync portable body." |
+| Agent Bridge Sync | `agent-bridge-sync.md` | Syncs files to portable-body/, updates docs, pushes to agent-bridge GitHub repo. | Friday calibration. "Sync to git." |
 | Loop Governor | `loop-governor.md` | Legacy loop governance (may be superseded by Karpathy). | Rarely — check if still active. |
 
 ### WBR Callout Agents (`~/.kiro/agents/wbr-callouts/`)

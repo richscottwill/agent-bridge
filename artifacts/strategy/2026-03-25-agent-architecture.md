@@ -9,7 +9,7 @@ updated: "2026-03-25"
 owner: "Richard Williams"
 tags: ["body-system", "agent", "hook", "steering", "tool", "mcp", "portable-body"]
 depends_on: []
-consumed_by: ["wiki-concierge", "karpathy", "portable-body-maintainer"]
+consumed_by: ["wiki-concierge", "karpathy", "agent-bridge-sync"]
 summary: "Complete architecture guide for the body system, hook system, and agent swarm — how they connect, what each piece does, and how the whole system compounds."
 # Artifact metadata
 artifact-status: DRAFT
@@ -126,7 +126,7 @@ Agents are specialized AI personas that handle specific domains. They read organ
 | Karpathy | `agents/body-system/karpathy.md` | Loop governance, experiment queue, compression rules. Sole authority on heart.md and gut.md. No other agent modifies these files. |
 | RW Trainer | `agents/body-system/rw-trainer.md` | Career coaching, leverage assessment, Five Levels analysis. The performance coach. |
 | Eyes Chart | `agents/body-system/eyes-chart.md` | Visualization specialist. Reads organs + market data, generates HTML dashboard with Chart.js. Read-only on all organs. |
-| Portable Body Maintainer | `agents/body-system/portable-body-maintainer.md` | Syncs files to portable-body/, updates docs, sends snapshot email. Friday cadence. |
+| Agent Bridge Sync | `agents/body-system/agent-bridge-sync.md` | Syncs files to portable-body/, updates docs, pushes to agent-bridge GitHub repo. Friday cadence. |
 
 **WBR Callout Pipeline:**
 
@@ -183,7 +183,7 @@ The soul.md routing directory maps triggers to agents:
 | Wiki content creation | wiki-editor (orchestrates the rest) |
 | Wiki search/lookup | wiki-concierge (direct) |
 | Dashboard/visualization | eyes-chart |
-| Portable body sync | portable-body-maintainer |
+| Agent-bridge sync | agent-bridge-sync |
 
 **Key rule:** If the request clearly falls in one agent's domain, route to that agent. Don't try to handle it yourself. If unsure, handle it — only route when the match is clear.
 
@@ -242,7 +242,7 @@ The system is designed to survive a platform move with nothing but text files. E
 ~/.kiro/
 ├── steering/           # Agent behavior config (soul.md, writing styles, trainer)
 ├── agents/
-│   ├── body-system/    # Karpathy, trainer, eyes-chart, portable-body-maintainer
+│   ├── body-system/    # Karpathy, trainer, eyes-chart, agent-bridge-sync
 │   ├── wbr-callouts/   # Analyst, writer, reviewer agents (3 pipelines)
 │   └── wiki-team/      # Editor, researcher, writer, critic, librarian, concierge
 └── settings/           # MCP server config, hooks

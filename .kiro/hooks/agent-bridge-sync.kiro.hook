@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Agent Bridge Sync",
+  "description": "Syncs the portable-body/ directory with the living system, updates docs, sends the weekly snapshot email, and pushes to the agent-bridge GitHub repo. Can be run independently or as part of the Friday calibration.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Invoke the agent-bridge-sync agent to run a full sync.\n\nProtocol: ~/shared/.kiro/agents/body-system/agent-bridge-sync.md\n\nSteps:\n1. Read the agent-bridge-sync agent definition for the full protocol\n2. Read ~/shared/context/active/portable-layer.md for the file manifest\n3. Sync all portable files from their source locations to portable-body/\n4. Detect new files that should be included (new agents, hooks, steering, tools, research, specs)\n5. Update README.md, CHANGELOG.md, and SANITIZE.md in portable-body/\n6. Git add, commit, and push to the agent-bridge repo (origin main)\n7. Send the weekly snapshot email to richscottwill@gmail.com\n8. Report what changed, what was added, any portability gaps detected, and whether git push succeeded\n\nDoomsday mentality: operate as if the DevSpace will be deleted tomorrow. When in doubt, include the file."
+  }
+}

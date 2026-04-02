@@ -82,16 +82,17 @@ Last synced: 2026-03-31
 - **Steps:** Dry-run first → show changes → confirm → live sync
 - **Command:** `python3 ~/shared/tools/sharepoint-sync/cli.py --mode directory`
 
-## 10. Portable Body Sync (`portable-body-sync.kiro.hook`)
+## 10. Agent Bridge Sync (`agent-bridge-sync.kiro.hook`)
 - **Trigger:** Manual (on demand, or as part of Friday calibration)
-- **Intent:** Sync portable-body/ directory with the living system, update docs, send snapshot email
+- **Intent:** Sync portable-body/ directory with the living system, update docs, push to agent-bridge GitHub repo, send snapshot email
 - **Steps:**
-  1. Read portable-body-maintainer agent definition
+  1. Read agent-bridge-sync agent definition
   2. Read portable-layer.md manifest
   3. Sync all portable files from source locations
   4. Detect new files that should be included
   5. Update README.md, CHANGELOG.md, SANITIZE.md
-  6. Send weekly snapshot email to richscottwill@gmail.com
+  6. Git add, commit, and push to agent-bridge repo (origin main)
+  7. Send weekly snapshot email to richscottwill@gmail.com
 - **Doomsday mentality:** When in doubt, include the file.
 
 ---
@@ -104,5 +105,5 @@ These hooks are Kiro-specific JSON format. On a different platform:
 - System Refresh → implement as a maintenance + experimentation loop with blind evaluation
 - WBR Callouts → implement as a sequential analyst → writer → reviewer pipeline with confidence scoring
 - Safety Guards → implement as pre-send checks in whatever email/calendar tool is available
-- Portable Body Sync → implement as a file diff + copy + email workflow
+- Portable Body Sync → implement as a file diff + copy + git push + email workflow
 - The INTENT of each hook is what matters, not the JSON format
