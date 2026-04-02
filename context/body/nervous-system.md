@@ -2,7 +2,7 @@
 
 *Operating principle: Invisible over visible. Surface insights that lead to structural changes — not reports that require Richard to act on them. When a pattern is STUCK for 3 weeks, propose a structural fix.*
 
-Last updated: 2026-04-01 (run 15)
+Last updated: 2026-04-02 (run 17)
 Created: 2026-03-20
 
 ---
@@ -37,12 +37,12 @@ Calibrates: rw-tracker.md patterns | Cadence: Weekly (Friday) | Protocol: Assess
 
 | Pattern | Status | Weeks | Trajectory | Last Assessment | Intervention |
 |---------|--------|-------|------------|-----------------|-------------|
-| Visibility avoidance | VALIDATED | 11 | WORSENING | 4/1 — 11 workdays since hard thing set. Tuesday: Richard sent AU PS Weekly Update proactively (good visibility move — exactly what Brandon wants). But it's Level 2 work, not Level 1. The pattern persists: Richard does valuable stakeholder communication and execution while the Testing Approach doc remains untouched. The AU update is a positive signal for visibility habits — but it's not the hard thing. | Root cause of Level 1 stall. Structural: Testing Approach doc is the gate. |
-| Zero strategic artifacts | ACTIVE | 7+ | WORSENING | 4/1 — W14 day 2. Still 0. AU weekly update is stakeholder communication, not a strategic artifact. | Blocked by visibility avoidance. Same root cause. |
-| Have Backbone avoidance | NEW | 1 | — | 3/25 — Annual Review peer feedback identified this | New pattern. Monitor. |
-| Project management gaps | NEW | 1 | — | 3/25 — Persisting from Forte 2025, Annual Review confirmed | Structural: need lightweight tracking artifacts. |
-| Admin backlog displacement | ACTIVE | 3 | STUCK | 3/18 — Admin list over cap, displacing strategic work | Trainer escalation triggered. |
-| Reactive fire drills | ACTIVE | 3 | STUCK | 3/19 — AU CPC response displaced AEO POV (3rd consecutive week) | Systems problem: need pre-written response templates. |
+| Visibility avoidance | VALIDATED | 11 | WORSENING | 4/1 — 12 workdays at zero. AU weekly update = good L2 visibility, not L1. | Root cause of L1 stall. Gate: Testing Approach doc. |
+| Zero strategic artifacts | ACTIVE | 7+ | WORSENING | 4/1 — Still 0. Blocked by visibility avoidance. | Same root cause as above. |
+| Have Backbone avoidance | NEW | 1 | — | 3/25 — Annual Review peer feedback | Monitor. |
+| Project management gaps | NEW | 1 | — | 3/25 — Persisting from Forte 2025 | Structural: need lightweight tracking artifacts. |
+| Admin backlog displacement | ACTIVE | 3 | STUCK | 3/18 — Admin over cap, displacing strategic work | Trainer escalation triggered. |
+| Reactive fire drills | ACTIVE | 3 | STUCK | 3/19 — AU CPC displaced AEO POV (3rd week) | Need pre-written response templates. |
 
 ### Loop 4: Delegation Verification
 Calibrates: Device | Cadence: Weekly | Protocol: Check each active delegation — did the handoff happen? Is the delegate performing? Score as ON_TRACK/SLIPPING/FAILED.
@@ -57,15 +57,11 @@ Calibrates: All organs | Cadence: Every loop run | Protocol: Word counts, stalen
 
 | Metric | Value | Target | Status |
 |--------|-------|--------|--------|
-| Total body words | ~19,500w | ≤24,000w (budget: 23,000w) | ✅ Under ceiling |
-| Organs over budget | 0 critical (aMCC 110% — within tolerance) | 0 | ✅ |
-| Loop runs completed | 15 | — | — |
-| Experiments completed | 8 + CE-1 adopted + CE-2 adopted + CE-3 adopted + CE-4 adopted | — | 100% keep rate |
-| Compression experiments | CE-1 adopted, CE-2 adopted, CE-3 adopted, CE-4 adopted | — | NS: 6095→991w, aMCC: 2638→2118w, Gut: 2125→1902w |
-| Architectural redesign | Current-state-only + pure autoresearch | — | 2,827w saved (29% across 4 organs) |
+| Total body words | ~19,200w | ≤30,000w (safety limit) | ✅ Under limit |
+| Organs over budget | N/A — budgets are adaptive | — | 15 experiments, priors updating |
+| Loop runs completed | 17 | — | — |
+| Experiments completed | 15 (13 keep, 1 revert, 1 delta=0 keep) | — | 93% keep rate |
 | Staleness risk | Eyes market metrics (Feb data, 30+ days) | <20% stale | ⚠️ Needs Mar WBR |
-
-Note: Architectural redesign (3/25) removed append-only logs from organs and rewrote heart.md as pure autoresearch. Total body dropped from ~21,585w to ~18,120w.
 
 ### Loop 6: Principle Evolution
 Calibrates: Brain principles + soul.md | Cadence: Quarterly | Protocol: Deep review of whether decision principles still serve Richard. First review: W28 (90 days from creation).
@@ -86,20 +82,14 @@ Enforces research quality tiers for any external information entering the system
 ### Loop 9: Meeting Communication
 Calibrates: Hedy session data | Cadence: Weekly when Hedy data available | Protocol: Track speaking share, hedging, filler words, turn length. Flag low-visibility meetings or hedging patterns.
 
-Status: Hedy MCP integrated (Run 8). 7 sessions processed (2 today: R&O Flash review, Baloo early access).
+Status: Hedy MCP integrated (Run 8). 9+ sessions processed.
 
-3/26 scores:
-- R&O Flash Review (group, 37 min): Speaking share ~10% — BELOW 15% threshold. Richard received assignments (AU status update, UK/CA decision) but didn't drive discussion or propose framing. No hedging detected (limited speaking). No strategic contributions — reactive posture. Brandon and Andrew dominated. Visibility gap persists in group settings.
-- Baloo Early Access (1:1 with Vijay Kumar, 18 min): Speaking share ~40% — appropriate for 1:1 where other party is explaining. Direct and practical — provided cost data, suggested direct URL path, committed to deliverables by Monday. No hedging. Good closed loops (keyword data, Brandon follow-up, SIM documentation). This is Richard at his best: 1:1, data-driven, solution-oriented.
-
-3/27: No new Hedy sessions (Onsite Events was Zoom — Amazon Meetings Summary captured, not Hedy). No speaking data available for today.
-
-Pattern confirmed across 9+ sessions: Richard is strong in 1:1s (data-driven, solution-oriented, mentoring) but consistently below visibility threshold in group settings (Deep Dive, Weekly Sync). The gap is structural, not situational.
+Pattern (confirmed across 9+ sessions): Richard strong in 1:1s (data-driven, solution-oriented, mentoring) but consistently below 15% speaking share in group settings (Deep Dive, Weekly Sync). Gap is structural, not situational. 1:1 scores: ~40% share, no hedging, good closed loops. Group scores: ~10% share, reactive posture.
 
 ---
 
 ## Five Levels Position
-Level 1 (Sharpen Yourself): STRUGGLING. 11 workdays since hard thing set (Testing Approach doc), zero progress. Tuesday: Richard sent AU PS Weekly Update proactively — good visibility move, exactly what Brandon's Annual Review feedback called for. But it's Level 2 work. The AU update shows Richard CAN do proactive stakeholder communication when the topic is concrete and data-driven. The Testing Approach doc resistance is specific: multi-section strategic narrative for an L8 audience. Gate: consecutive weeks with shipped artifacts. Currently at 0. W14 day 2.
+Level 1 (Sharpen Yourself): STRUGGLING. 13 workdays since hard thing set (Testing Approach doc), zero progress. Brandon 1:1 TODAY at noon — Testing Approach will come up. Brandon's take on Lena: "she needs to cool her jets, Kate is realizing it" — positive for Richard's position but doesn't change L1 gate. Gate: consecutive weeks with shipped artifacts. Currently at 0. W14 day 4.
 
 ---
 

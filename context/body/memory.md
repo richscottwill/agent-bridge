@@ -4,7 +4,7 @@
 
 *Operating principle: Invisible over visible. Memory works best when Richard doesn't have to look things up. The relationship graph, tone notes, and meeting briefs should flow invisibly into drafts and prep — Richard gets a draft that already sounds right for the recipient without having to think about register.*
 
-Last updated: 2026-04-01 (loop run 15: Frank cancelled Polaris sync, Lena AU follow-up questions, OCI WW launch milestone, Slack ingestion v3 live — list_channels as source of truth, section-based depth, full DM scanning, reaction checking, no caps)
+Last updated: 2026-04-02 (loop run 17: REWORD experiment on relationship graph — compressed meeting dynamics, tightened descriptions, -14% words. All identity fields preserved.)
 
 ---
 
@@ -17,16 +17,19 @@ L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate R
 **Team (Brandon's directs):** Peter Ocampo L6 (Mobile App), Stacey Gu L6 (OCI/Bidding), Dwayne Palmer L6 (MCS/Website), Yun-Kang Chu L6 (Modern Search/Adobe), Andrew Wirtz L5 (DG/Algorithmic Ads), Adi Thakur L5 (Landing Pages/UX).
 
 **Active Projects (as of 3/25/26):**
-1. Testing Approach doc for Kate — THE hard thing. Apr 16 meeting. Draft exists (op1-ps-testing-framework-draft.md). Andrew active.
-2. Polaris Brand LP WW Rollout — US switched 3/24 (Stacey). Weblab dial-up April 6-7. Alex translations due 3/26. One-page timeline doc due this week.
-3. AU CPC/Keyword Optimization — Lena's 3 priorities: keyword CPC/CPA investigation, keyword-to-product mapping, Polaris migration. Brandon offered to join syncs. Two-campaign structure proposed (3/24).
-4. AU URL migration to Polaris — Lena confirmed full switch (3/13). Alexis mapping (3/17). Migration completing 3/24-25.
-5. Annual Review 2026 — Shared 3/24. Meets High Bar. #1 growth area: visibility. Persisting gaps: communication, project management.
-6. OCI ROW rollout — CA/JP/EU3 E2E launched. Full impact Jul 2026.
-7. OP1 doc — "Testing Approach & Year Ahead" for Kate. Meeting Apr 16. Andrew active.
-8. Ad copy testing — UK +86% CTR, +31% regs. IT early stage. EU4 translations done.
-9. AI Max test design — Due 3/28. Untouched.
-10. MX Auto/Beauty pages — Overdue since 3/20. Waiting Vijeth footer. Carlos→Lorena transition complete.
+
+| # | Project | Status | Level | Blocker |
+|---|---------|--------|-------|---------|
+| 1 | Testing Approach doc for Kate (Apr 16) | NOT STARTED — 12 workdays | L1/L2 | None (blank page paralysis) |
+| 2 | Polaris Brand LP WW Rollout | IN PROGRESS — weblab 4/6-7 | L2 | None |
+| 3 | AU CPC/Keyword Optimization | IN PROGRESS — Lena follow-up pending | L2 | None |
+| 4 | AU URL migration to Polaris | COMPLETING — 3/24-25 | L2 | None |
+| 5 | Annual Review 2026 | RECEIVED — Meets High Bar | L1 | None |
+| 6 | OCI ROW rollout | IN PROGRESS — FR/IT/ES/JP 100%, CA 4/7 | L2 | None |
+| 7 | OP1 doc (same as #1) | NOT STARTED | L1/L2 | Same as #1 |
+| 8 | Ad copy testing | IN PROGRESS — UK +86% CTR, IT early | L2 | IT volume |
+| 9 | AI Max test design | OVERDUE (was due 3/28) | L2 | None |
+| 10 | MX Auto/Beauty pages | OVERDUE (since 3/20) | L2 | Vijeth footer |
 
 **Key Metrics (Feb 2026):**
 - US: 32.9K regs (+16% OP2, +68% YoY), $2.7M spend, $83 CPA
@@ -54,109 +57,109 @@ L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate R
 
 ### Alexis Eck (alexieck) — AU Sr. Mktg Mgr, L6, Sydney
 - Reports to: Lena Zak
-- Last interaction: 3/24 (AU Paid Search sync — discussed MCS migration, keyword CPA optimization, campaign structure)
-- Tone: Professional but friendly. "Hi" openers, signs "Thanks, Alexis"
-- Current topic: AU MCS migration to Polaris (completing today/tomorrow), keyword CPA optimization, two-campaign structure proposal (product-intent vs business-intent), MCS page replication from MX model
-- Draft style: Match professional tone. Lead with data and implementation status.
-- Meeting dynamic (from Hedy 3/24): Alexis is collaborative and engaged. Agreed with Richard's two-campaign structure proposal. Offered practical advice on MCS team prioritization (global urgency > market-specific asks). Suggested linking AU requests to strategic initiatives for justification. Defers to Lena on strategic direction but is a strong execution partner. Richard is confident and solution-oriented in this 1:1 — good dynamic.
+- Last interaction: 3/24 (AU sync — MCS migration, keyword CPA, campaign structure)
+- Tone: Professional-friendly. "Hi" openers, signs "Thanks, Alexis"
+- Current topic: AU Polaris migration (completing), keyword CPA optimization, two-campaign structure (product-intent vs business-intent), MCS page replication from MX
+- Draft style: Professional. Lead with data and implementation status.
+- Meeting dynamic: Collaborative executor. Agreed on two-campaign structure. Defers to Lena on strategy.
 
 ### Lena Zak (lenazak) — Country Leader AB AU, L7, Sydney
 - Reports to: Nick Georgijev
-- Last interaction: 4/1 (replied to Richard's AU PS Weekly Update with follow-up questions about landing page URLs and repeat visitor CPA overstating)
-- Tone: Direct, expects data. Signs "Cheers, Lena"
-- Current topic: AU CPC challenge, full Polaris migration (decided 3/13), weekly CPA review, landing page URL analysis, repeat visitor CPA methodology
-- Draft style: Lead with data, be clear about timelines. She's escalated to leadership — respond with facts, not defensiveness.
-- Meeting dynamic (from Hedy): Lena drives AU syncs with authority. Asks pointed questions about CPA, benchmarks, and reporting formats. Requested standardized weekly CPA tracking table. Expects Richard to come prepared with data — not narratives. She's the hardest stakeholder to satisfy in Richard's portfolio. When she asks "why," she wants numbers, not explanations. Richard should always have AU metrics loaded before any Lena interaction.
+- Last interaction: 4/1 (replied to AU PS Weekly Update — 3 follow-up questions on LP URLs and repeat visitor CPA)
+- Tone: Direct, data-driven. Signs "Cheers, Lena"
+- Current topic: AU CPC challenge, full Polaris migration, weekly CPA review, LP URL analysis, repeat visitor CPA methodology
+- Draft style: Lead with data, clear timelines. She's escalated to leadership — facts, not defensiveness.
+- Meeting dynamic: Drives AU syncs with authority. Expects data. Hardest stakeholder — always have AU metrics loaded.
 
 ### Brandon Munday (brandoxy) — WW Head of Outbound Marketing, L7, Austin
 - Reports to: Kate Rundell
 - Pronouns: she/her
 - Last interaction: 3/24 (Annual Review 1:1 + Weekly Team Sync)
-- Tone: Professional but approachable. Richard's direct manager.
-- Current topic: Annual Review feedback (solid strength rating, promo criteria), Polaris Brand LP WW rollout, Weblab timing, testing methodology, artifact shipping as visibility mechanism
-- Draft style: Prepared, concise, lead with outcomes and strategic framing. Show leverage, not just activity.
-- Meeting dynamic (from Hedy 3/24): TWO sessions today. In the Annual Review 1:1 (32 min), Brandon was generous with praise — called out Think Big as Richard's standout LP, acknowledged customer obsession through PAM campaigns, and noted Richard's strengths are becoming "more varied." Key feedback: (1) "solid strength" is the ceiling until promo work begins, (2) proactively sharing outcomes (AU CPC, Polaris) is critical for visibility, (3) Richard needs to improve consistency with team mechanisms (change logs, process adherence) to earn trust with more regimented teammates, (4) balance documentation with execution — "I don't want Richard spending 80% of his time writing documents." Richard had a genuine comfort zone push — brought up the AI trainer's artifact insight and connected it to his communication style. Brandon responded positively. In the Weekly Team Sync (57 min), Richard's contributions were concentrated in testing updates and MX — still quieter than Andrew and Stacey in group settings. The visibility gap in group meetings persists.
+- Tone: Professional, approachable. Richard's direct manager.
+- Current topic: Annual Review (solid strength, promo criteria), Polaris WW rollout, testing methodology, artifact shipping as visibility
+- Draft style: Prepared, concise, outcomes + strategic framing. Show leverage.
+- Meeting dynamic: Annual Review 1:1 — Think Big standout LP, strengths "more varied." Key: (1) solid strength ceiling until promo, (2) proactive outcome sharing critical, (3) improve consistency, (4) balance docs with execution. Group settings: Richard quieter than Andrew/Stacey. Visibility gap persists.
 
 ### Yun-Kang Chu (yunchu) — Sr. Marketing Manager, L6, Austin
 - Reports to: Brandon Munday (peer)
-- Last interaction: 3/19 (contributed Shopping vs Text Ads data for AU CPC reply)
+- Last interaction: 3/19 (Shopping vs Text Ads data for AU CPC reply)
 - Tone: Very casual. "Hey Yun"
-- Current topic: AU CPC data coordination, MX PS, Adobe analytics, Modern Search OP1 section, WW redirect reporting
-- Draft style: Brief, direct. No formalities needed.
-- Meeting dynamic (from Hedy): Yun appears in team syncs but limited direct 1:1 transcript data. Based on context, Yun is a reliable peer who contributes data when asked (Shopping Ads data for CPC reply). Low-maintenance relationship.
+- Current topic: AU CPC data, MX PS, Adobe analytics, Modern Search OP1, WW redirect reporting
+- Draft style: Brief, direct. No formalities.
+- Meeting dynamic: Reliable peer, contributes data when asked. Low-maintenance.
 
 ### Carlos Palmos (cpalmos) — Marketing Manager MX, L5, Mexico City
 - Reports to: Pedro Maldonado
-- Last interaction: 3/24 (MX Campaign Tracking and Landing Page Updates — final PS sync before CPS transition)
+- Last interaction: 3/24 (final PS sync — CPS transition)
 - Tone: Professional
-- Current topic: TRANSITIONED to CPS side of MX acquisition as of ~3/17. No longer Richard's primary MX PS stakeholder.
-- Draft style: Professional, include specifics on invoices/POs and campaign details.
-- Meeting dynamic (from Hedy 3/24 — final session): The 3/24 MX sync was likely one of the last with Carlos on PS. The collaborative dynamic was strong to the end — Carlos shared updated keywords, ad text, and escalated the ref tag fix. Richard should maintain the relationship for cross-functional coordination (CPS/PS overlap in MX) but day-to-day PS ownership shifts to Lorena.
-- NOTE: MX invoice delegation to Carlos is now VOID — Carlos no longer owns PS. Invoice routing needs a new owner (Lorena or Richard keeps it).
+- Current topic: TRANSITIONED to CPS ~3/17. No longer PS stakeholder.
+- Draft style: Professional, include invoice/PO specifics.
+- Meeting dynamic: Collaborative to the end. Shared keywords, ad text, escalated ref tag fix.
+- NOTE: MX invoice delegation VOID — needs new owner (Lorena or Richard).
 
 ### Lorena Alvarez Larrea (lorealea) — MX Marketing Manager, L5
 - Reports to: Pedro Maldonado
-- Last interaction: 3/25 (email — added beauty LP inputs, needs Q2 expected spend for PO)
+- Last interaction: 3/25 (email — beauty LP inputs, Q2 spend for PO)
 - Tone: Professional, friendly. "Hi!" openers, signs "Thanks! Lorena Alvarez"
-- Current topic: MX PS strategy onboarding, beauty LP inputs added, Q2 spend/PO submission, keyword data request (3/19 — still pending Richard's response)
-- Draft style: Professional, thorough — relationship is new. Be responsive to her requests.
-- Note: Lorena is actively engaging and taking ownership. The Q2 spend request shows she's thinking ahead on PO management. Good sign for delegation.
+- Current topic: MX PS onboarding, beauty LP, Q2 spend/PO, keyword data (pending since 3/19)
+- Draft style: Professional, thorough — new relationship. Be responsive.
+- Note: Actively engaging, taking ownership. Q2 spend request = thinking ahead on PO. Good delegation signal.
 
 ### Dwayne Palmer (dtpalmer) — WW Head of Marketing Website, L6, Arlington
 - Reports to: Brandon Munday (peer)
-- Last interaction: 3/24 (Polaris Brand LP Rollout & Weblab Planning meeting)
+- Last interaction: 3/24 (Polaris Brand LP Rollout meeting)
 - Tone: Casual, appreciative. "Thanks so much"
-- Current topic: Polaris Brand LP WW rollout (weblab dial-up timing April 6-7), AEM template for minimal header, JP page translation, Weblab setup and data tracking
-- Draft style: Casual. "Hey Dwayne" opener.
-- Meeting dynamic (from Hedy 3/24): Dwayne led the MCS rollout meeting — walked through page status per market, showed AEM components, discussed header implementation. He's organized and thorough. Richard contributed on JP strategy (test without intake form) and weblab timing. Dwayne appreciated Richard's pre-work ("thank you for organizing all of this"). Straightforward working relationship — Dwayne handles MCS execution, Richard provides PS perspective.
+- Current topic: Polaris WW rollout (weblab 4/6-7), AEM template, JP translation
+- Draft style: Casual. "Hey Dwayne"
+- Meeting dynamic: Straightforward. Dwayne handles MCS execution, Richard provides PS perspective. Appreciates pre-work.
 
 ### Aditya Satish Thakur (Adi) — Marketing Manager, L5
 - Reports to: Brandon Munday (peer)
 - Last interaction: 3/25 (Adi sync — AI ad-copy workflow for JP, 43 min)
 - Tone: Casual, peer-level
-- Current topic: AI ad-copy workflow for JP (translation rules, 15-char limit, D-Pel vs AI decision matrix), Paid Acq Testing workspace, LP UX OP1 section, CA LP framework → EU5
+- Current topic: AI ad-copy workflow (JP translation, 15-char limit, D-Pel vs AI), Paid Acq Testing workspace, LP UX OP1
 - Draft style: Casual, peer-level.
-- Meeting dynamic (from Hedy — 4 sessions analyzed): Richard is a mentor to Adi. In their 1:1s, Richard teaches pacing, ICCP management, and analytical frameworks. Adi is growing — went from understanding ~70-80% of team discussions to actively contributing. In the 3/25 sync, Adi presented a structured AI workflow for JP ad creatives that Richard praised for clarity and scalability. Richard suggested expanding via knowledge bases and iterative testing. Adi is receptive and asks good follow-up questions. Richard is at his most articulate and strategic in these mentoring conversations. This is where Richard's expertise shines — he should document these teaching moments as frameworks.
+- Meeting dynamic: Richard mentors Adi — teaches pacing, ICCP, analytical frameworks. Adi growing (70-80% → active contributor). Richard most articulate in these sessions. Document teaching moments as frameworks.
 
 ### Harjeet Heer (hkheer) — Sr. Program Mgr ABIX, L6, Seattle
 - Reports to: Nick Georgijev
-- Last interaction: 3/11 (forwarded AU WBR to Richard)
+- Last interaction: 3/11 (forwarded AU WBR)
 - Tone: Professional, brief. Signs "Thanks, Harjeet"
-- Current topic: Stepped away from AU day-to-day, defers to Richard
+- Current topic: Stepped away from AU day-to-day
 - Draft style: Concise, show you've got it handled.
 
 ### Alex VanDerStuyf (afvans) — AEM/Translations
-- Last interaction: 3/20 (created Asana task "PS Polaris Brand pages update WW", shared with Richard. Outlined 6-step rollout per geo.)
+- Last interaction: 3/20 (Asana — PS Polaris Brand pages update WW, 6-step rollout)
 - Tone: Professional, organized. Signs "Thank you, -Alex"
-- Current topic: Polaris Brand LP WW rollout — owns AEM translations (due 3/26), Asana tracking, carousel updates per Dwayne
-- Draft style: Professional, reference specific PD submission IDs if needed.
+- Current topic: Polaris WW rollout — AEM translations (due 3/26), Asana tracking, carousel updates
+- Draft style: Professional, reference PD submission IDs if needed.
 
 ### Andrew Wirtz (awirtz) — DG/Algorithmic Ads, L5
 - Reports to: Brandon Munday (peer)
-- Last interaction: 3/24 (Weekly Team Sync — discussed EU weblab scope, budget pacing, Polaris rollout)
-- Tone: Professional, concise. Signs "Thank you, Andrew" or "Thank you!"
-- Current topic: Polaris Brand LP EU weblab selection (DE + FR confirmed), Testing Doc Loop, OP1 contributor, EU budget pacing
+- Last interaction: 3/24 (Weekly Team Sync — EU weblab, budget pacing, Polaris)
+- Tone: Professional, concise. Signs "Thank you, Andrew"
+- Current topic: Polaris EU weblab (DE + FR), Testing Doc Loop, OP1, EU budget pacing
 - Draft style: Professional, brief.
-- Meeting dynamic (from Hedy 3/24 — multiple sessions): Pattern confirmed again. In the weekly team sync, Andrew is highly vocal — walks through EU performance data in detail, drives spreadsheet discussions, and presents thoroughly. Richard's contributions in the same meeting are concentrated in his own updates (testing, MX) and he goes quiet during Andrew's segments. The visibility gap is real and consistent. Andrew respects Richard's input and they have a good peer dynamic, but in group settings Andrew's operational thoroughness dominates airtime. Richard needs to find moments to add strategic commentary during Andrew's updates — connecting EU patterns to AU/MX or framing cross-market insights.
+- Meeting dynamic: Highly vocal in groups — dominates airtime with EU data. Richard goes quiet. Visibility gap real and consistent. Richard needs strategic commentary during Andrew's updates.
 
 ### Vijay Kumar (vkumarmp) — Tech Lead, Baloo
 - Reports to: Unknown (Tech org)
-- Last interaction: 3/26 (Baloo Early Access cost planning, 18 min 1:1 — Hedy captured)
-- Tone: Professional, thorough. Explains context before asking questions. Appreciative ("Thank you so much, Richard").
-- Current topic: Baloo early access rollout (50 stakeholders, Tampermonkey script), cost guardrails for internal testing, SIM documentation
-- Draft style: Professional, include specifics on cost data and technical details.
-- Meeting dynamic (from Hedy 3/26): Vijay is organized and proactive — came prepared with the full early access plan and two proposals (direct URL vs Google search). Defers to Richard on PS cost implications. Good collaborative dynamic. Kate attended his demo and was positive. Vijay will tag Richard in Baloo SIM for ongoing alignment. Richard was direct and practical — provided $4.43 NB CPC data, suggested direct URL path, committed to deliverables by Monday. No hedging. Good closed loops.
+- Last interaction: 3/26 (Baloo Early Access cost planning, 18 min 1:1)
+- Tone: Professional, thorough. Appreciative.
+- Current topic: Baloo early access (50 stakeholders, Tampermonkey), cost guardrails, SIM docs
+- Draft style: Professional, include cost data and technical details.
+- Meeting dynamic: Organized, proactive. Defers to Richard on PS cost implications. Good collaborative dynamic.
 
 ### Caroline Miller (carolimy) — Product Marketing Manager, reports to Ann Vu
-- Last interaction: 3/27 (Biweekly AB Onsite Events — Prime Day brief process, translation SLA, Memorial Day assets)
+- Last interaction: 3/27 (Biweekly AB Onsite Events — Prime Day brief, translation SLA, Memorial Day)
 - Tone: Professional, organized. Signs "Cheers, Caroline Miller"
-- Current topic: Prime Day marketing brief process, Memorial Day Sale 2026 (round 2 assets due 3/30, feedback due 3/31)
-- Draft style: Match organized style, reference deadlines clearly.
+- Current topic: Prime Day marketing brief, Memorial Day Sale 2026
+- Draft style: Match organized style, reference deadlines.
 
 ### Frank Volinsky — MCS team, page builds/weblab
-- Last interaction: 3/31 (CANCELLED Polaris weblab sync — got requirements from Alex directly. "No other information is needed at this time." MCS-3004.)
+- Last interaction: 3/31 (CANCELLED Polaris sync — got requirements from Alex. MCS-3004.)
 - Tone: Professional, brief
-- Current topic: WW PS Brand Polaris Redesign weblab — requirements confirmed via Alex. MX Automotive/Beauty landing pages.
+- Current topic: WW PS Brand Polaris weblab — requirements confirmed. MX Auto/Beauty LPs.
 - Draft style: Brief, action-oriented.
 
 ---

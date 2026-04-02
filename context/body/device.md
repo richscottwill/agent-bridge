@@ -61,13 +61,11 @@ These are live. They execute without Richard thinking.
 - **Feeds into:** Memory (relationships), Nervous System (communication patterns, Loop 7), Eyes (meeting prep)
 
 ### Slack Context Ingestion (Config: channel-registry.json + scan-state.json)
-- **What it does:** Ingests all Slack channels Richard is in (via `list_channels` each cycle) plus DMs with new messages. Sidebar sections determine scan depth: WW Testing and AB PS get full ingestion (all messages + all threads), AB and AI get standard depth, Channels get light scanning. Proactive search goes beyond Richard's channels — permanent queries catch mentions of him and Brandon's activity anywhere, dynamic queries are constructed fresh each cycle based on today's context. Reaction checking on Richard-tagged messages prevents false "unanswered" alarms.
-- **Trigger:** Runs as substep within morning routine and system refresh hooks. Not a separate hook.
-- **Config:** `~/shared/context/active/slack-channel-registry.json` (ingestion strategy, search framework, reaction semantics, people watch) + `~/shared/context/active/slack-scan-state.json` (timestamps, hot topics, tool invocation log).
-- **Source of truth:** Richard's Slack channel list (`list_channels`). No static channel list in the registry. If Richard joins or leaves a channel, the system adapts automatically.
-- **Guardrails:** Read-only operations only (per slack-guardrails.md). All tool invocations logged to scan state.
-- **No artificial caps.** Ingest everything, synthesize ruthlessly. Bottleneck is at the output stage (what makes it into the brief), not the input stage (what we read from Slack).
-- **First scan:** 4/1 — v1 scanned 9 channels, 4 signals. v2 proactive search surfaced 9 additional signals including 4 Brandon action items from a channel not in the registry. v3 (current) uses `list_channels` as source of truth, section-based depth, full DM scanning, reaction checking.
+- **What it does:** Ingests all Slack channels Richard is in (via `list_channels`) plus DMs. Section-based depth: WW Testing/AB PS = full, AB/AI = standard, Channels = light. Proactive search beyond channel list (permanent + dynamic queries). Reaction checking on tagged messages.
+- **Trigger:** Substep within morning routine and system refresh hooks.
+- **Config:** `~/shared/context/active/slack-channel-registry.json` + `~/shared/context/active/slack-scan-state.json`
+- **Source of truth:** `list_channels` — adapts automatically to channel joins/leaves.
+- **Guardrails:** Read-only (per slack-guardrails.md). All invocations logged to scan state. No caps — ingest everything, synthesize ruthlessly.
 
 ### SharePoint Sync (Hook: `sharepoint-sync`)
 - **What it does:** Wiki articles → .docx → OneDrive → SharePoint. Filters: amazon-internal, REVIEW+FINAL. Incremental via SHA-256 hashing.
@@ -92,26 +90,13 @@ Queued (not built): Email Templates, WBR Callout Template, Meeting Prep Template
 
 ## 👥 Delegation Protocols (apps installed on other people)
 
-Work that Richard has offloaded or should offload to specific humans. Each protocol defines: what's delegated, to whom, what Richard still owns, and the handoff mechanism.
-
-### MX Invoice Routing → Carlos Palmos
-- **Status:** VOID — Carlos transitioned to CPS (~3/17). Richard owns MX invoicing until new delegate identified. Next step: decide whether to delegate to Lorena (send process doc + PO numbers).
-
-### AU Day-to-Day → Harjeet (reversed)
-- **Status:** REVERSED. Harjeet stepped away. Richard owns all AU PS.
-
-### MX Keyword Sourcing → Lorena Alvarez Larrea
-- **Status:** IN PROGRESS. Lorena engaging (requested strategy overview + keyword data 3/19).
-- **Delegated:** Keyword opportunity identification, negative keyword management for MX. Richard keeps strategy, bid decisions, testing framework.
-- **Next:** Follow up with "how to identify new keywords" guide (draft sent 3/20).
-
-### WBR Coverage → Dwayne Palmer
-- **Status:** RESTORED. Normal coverage resumed. Richard keeps PS-specific callouts + backup when Dwayne is out.
-- **Gap:** No backup handoff template built. Need one for next OOO.
-
-### OP1 Contributor Sections → Andrew, Stacey, Yun, Adi
-- **Status:** IN PROGRESS. Andrew active (3/18). Others not yet confirmed. Richard keeps overall narrative + Kate presentation.
-- **Gap:** No deadline set for contributor drafts.
+| Delegation | Delegate | Status | Notes |
+|-----------|----------|--------|-------|
+| MX Invoicing | Carlos → ? | VOID | Carlos transitioned to CPS 3/17. Needs new owner (Lorena or Richard keeps). |
+| AU Day-to-Day | Harjeet → Richard | REVERSED | Harjeet stepped away. Richard owns all AU PS. |
+| MX Keyword Sourcing | Lorena | IN PROGRESS | Lorena engaging. Richard keeps strategy/bids/testing. Send "how to identify keywords" guide. |
+| WBR Coverage | Dwayne | RESTORED | Normal coverage. Richard keeps PS callouts + backup. Gap: no backup handoff template. |
+| OP1 Contributors | Andrew, Stacey, Yun, Adi | IN PROGRESS | Andrew active. Others not confirmed. No deadline set for contributor drafts. |
 
 ---
 

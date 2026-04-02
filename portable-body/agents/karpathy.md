@@ -28,19 +28,18 @@ Valid experiment targets include body organs (`~/shared/context/body/*.md`) AND 
 
 ## Experiment Execution Protocol
 
-1. **Select target.** Organ or portable-body file (weighted: over-budget first, then lowest-accuracy), experiment type (COMPRESS, ADD, RESTRUCTURE, REMOVE, REWORD, MERGE, SPLIT), section within that organ.
-2. **Snapshot.** Record word count. Generate 5 eval questions (3 standard + 2 adversarial probing cross-organ boundaries/edge cases). Save snapshot for rollback.
-3. **Apply.** Execute the experiment on the section.
-4. **Orchestrated blind eval.** The main loop orchestrates a 4-step sequential evaluation:
-   - **Step 1:** Karpathy selects target, snapshots, applies experiment, generates 5 eval questions + ground truth answers. Returns modified file + questions + ground truth.
-   - **Step 2:** Main loop invokes Evaluator A (Amazon-context) → receives modified file + body.md + soul.md + questions. Just answers. No scoring.
-   - **Step 3:** Main loop invokes Evaluator B (Generic) → receives ONLY modified file + questions. Just answers. No scoring.
-   - **Step 4:** Main loop invokes Karpathy again → receives both evaluators' answers + ground truth. Karpathy scores and makes KEEP/REVERT decision.
-   - Evaluators are witnesses (they answer), Karpathy is the judge (it scores). Neither evaluator knows what changed or that the other exists.
-   - Full scoring rules, KEEP/REVERT thresholds, and PARTIAL handling: see heart.md Step 4-5.
-5. **Keep or revert.** Both evaluators ≥4/5 to KEEP. Any INCORRECT on Brain/Memory = automatic REVERT. Same gap flagged by both = real hole, must fix. All details in heart.md.
-6. **Log.** Record result in changelog.md. Include both evaluator scores and any gaps flagged.
-7. **Repeat.** Up to `max_experiments_per_batch` (5). Stop on 3 consecutive reverts.
+1. **Select target.** Query `autoresearch_selection_weights` view in DuckDB. Organ selection: over-budget first, then stale, then UCB-weighted random. Technique selection: UCB-weighted from priors for that organ. Exclude organs modified by maintenance this invocation. Exclude organ×technique combos with posterior_mean < 0.15 AND n > 10 (proven losers).
+2. **Snapshot.** Record word count. Generate eval questions scaled to experiment risk (low: 2-3, medium: 4-6, high/Brain/Memory: 5-8). Standing adversarial questions always included. Save original organ for Agent B.
+3. **Apply.** Execute the experiment on the section. Record start time.
+4. **A/B/C blind eval.** Three agents, none aware of the others:
+   - **Agent A:** modified organ + body.md + soul.md + questions → answers only
+   - **Agent B:** ORIGINAL organ + body.md + soul.md + same questions → answers only (the control)
+   - **Agent C (Tier 2 only):** modified organ + questions only, zero context → answers only (portability)
+   - **Karpathy (judge):** scores all answers against ground truth. Computes score_a, score_b, score_c, delta_ab.
+   - Tier 1 (quick): A + B only. Tier 2 (full): A + B + C. Brain/Memory always Tier 2.
+5. **Keep or revert.** delta_ab ≥ 0 to KEEP. Brain/Memory: delta_ab ≥ 0, zero INCORRECT. Full rules in heart.md Step 5.
+6. **Log + update priors.** Record to changelog.md (one-liner) + DuckDB `autoresearch_experiments` (full record). Update `autoresearch_priors`: KEEP → α+1, REVERT → β+1.
+7. **Repeat.** No cap — run until eligible targets are exhausted. Bayesian priors self-terminate by deprioritizing proven losers. Token efficiency from tiered eval + Bayesian target selection (stop trying what doesn't work).
 
 ## Environment Resilience
 
@@ -62,9 +61,9 @@ This is autoresearch applied to autoresearch — the loop experiments on its own
 - Hypothesis: [What will change and why]
 - Target organ: [Which organ, which section]
 - Type: [COMPRESS / ADD / RESTRUCTURE / REMOVE / REWORD / MERGE / SPLIT]
-- Baseline: [Word count, 5 eval questions, accuracy score, completeness score]
-- Result: [Word count after, accuracy score, completeness score]
-- Blind eval: [Amazon-context score: X/5, Generic score: X/5, Gaps flagged: ...]
+- Baseline: [Word count, eval question count, ground truth]
+- Result: [Word count after, score_a, score_b, delta_ab]
+- Blind eval: [A=X.X B=X.X C=X.X Δ=±X.X]
 - Decision: KEEP / REVERT / ITERATE
 ```
 
@@ -74,7 +73,7 @@ Total body budget: 23,000w (hard ceiling: 24,000w). Budgets are constraints, not
 
 ## Experiment Queue
 
-Experiments are generated randomly at runtime. No pre-designed queue. No named hypotheses. Karpathy selects organ (weighted: over-budget first, then staleness, then random), section (random), and technique (random: COMPRESS, REWORD, REMOVE, RESTRUCTURE, ADD, MERGE, SPLIT). Volume over precision — 5 per batch, most revert, learning emerges from patterns. Stop on 3 consecutive reverts.
+Experiments are generated randomly at runtime. No pre-designed queue. No named hypotheses. Karpathy selects organ and technique using UCB scores from `autoresearch_priors` in DuckDB — balancing exploitation (proven winners) with exploration (untested combos). Volume over precision — no caps, most revert, learning emerges from patterns. Proven losers (posterior_mean < 0.15, n > 10) are automatically excluded. The loop self-terminates when eligible targets are exhausted.
 
 ## When You Run
 

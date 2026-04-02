@@ -4,6 +4,154 @@
 LOOP READ OPTIMIZATION: The autoresearch loop reads from the top DOWN to the 
 nearest LOOP_READ_MARKER comment. Everything below the marker was already 
 
+## 2026-04-02 — Autoresearch Loop Run 17 (Thursday, afternoon)
+
+### Phase 1: Maintenance
+
+#### Slack Ingestion (4/2 morning scan)
+- 4 channels scanned (ABIX, rsw-channel, ab-ps_jp, ab-paid-search-oci). 4 DMs scanned (Asana, Andrew, Stacey, Lorena). 3 new signals extracted.
+- **Signal 1 — Brandon ABIX (4/2 3:05am):** "She needs to cool her jets and Kate is very much realizing it" — re: Lena's AU CPA intensity. Positive signal for Richard's position. Kate aware.
+- **Signal 2 — JP OCI MCM-147368188 COMPLETE:** Implementation done, feed enabled by mpgupta. Yashasvi confirmed. JP tracking template fully operational. 7/10 markets at 100% OCI.
+- **Signal 3 — JP Brand LP experiment:** Full technical discussion. Richard provided ref= vs ref_= guidance. Experiment targeting live 4/2. JP excluded from WW Polaris test.
+- Asana: Saajan changed Abandoned Cart priority High→Low.
+- DMs: Stacey CA exclusion question STILL UNANSWERED (1d). Andrew ENG budget file STILL UNANSWERED (1d).
+- No new emails detected.
+
+#### Organ Updates
+- **current.md**: Bumped to run 17. Updated JP OCI MCM to COMPLETE. Updated Brandon ABIX sentiment. Bumped date.
+- **Eyes**: Updated JP OCI status (MCM complete, feed enabled). Refreshed predicted QA for Thursday (Brandon 1:1 focus, JP experiment live, Lena follow-up, OCI status). Bumped date.
+- **Hands**: Updated new signals (Brandon sentiment, JP OCI complete, JP Brand LP, Asana). Flagged Stacey/Andrew DMs still unanswered. Bumped date.
+- **aMCC**: Updated streak to 13 workdays. Brandon 1:1 TODAY at noon. Bumped date.
+- **Nervous System**: Updated Loop 5 metrics (17 runs, 15 experiments, 93% keep rate). Updated Five Levels position (13 workdays, Brandon 1:1 today). Compressed stale historical notes. Bumped date.
+- **Org chart**: SKIPPED — no changes.
+- **Soul**: SKIPPED — no changes.
+- **Brain**: SKIPPED — updated <48h ago, no structural changes.
+- **Memory**: Updated via experiment (see Phase 3).
+- **Spine**: SKIPPED — updated <48h ago, no new signals.
+- **Device**: SKIPPED — updated <48h ago.
+- **Gut**: SKIPPED — no budget changes.
+
+#### Dashboard Update
+- New dashboard posted to rsw-channel (ts: 1775138648.820659). 6 sections updated. rsw-channel marked unread.
+
+### Phase 2: Cascade
+All 9 organs checked. Eyes, Hands, aMCC, Nervous System updated. Brain, Spine, Device, Gut skipped (<48h, no new signals). Memory updated via experiment.
+
+### Phase 3: Experiment
+
+[memory:relationship_graph] REWORD → 2436w→2100w. A=1.0 B=1.0 C=1.0 Δ=0.0. 60s. KEEP.
+- Compressed meeting dynamic descriptions across 14 relationship entries. Removed redundant phrases, tightened descriptions. All identity fields preserved (Brandon pronouns she/her verified). All facts preserved — zero information loss. Portability score 1.0 (self-contained).
+
+### Suggested Changes
+1. **Reply to Stacey's CA Polaris exclusion DM NOW** — She asked 12+ hours ago. The answer is one sentence: "CA excluded to keep OCI data clean for the 4/7 launch." 15 seconds. Do it before the Brandon 1:1. Why: Level 2 (testing coordination) + responsiveness. Measure: reply sent. Risk: none. → Approve/Deny?
+
+2. **Share ENG budget file with Andrew NOW** — He asked last night, Brandon mentioned it in Andrew's 1:1. If you show up to the Brandon 1:1 having already shared it, that's proactive. If Brandon asks "did you send Andrew that file?" — that's reactive. Why: Level 2 (team leverage) + visibility with Brandon. Measure: file shared. Risk: none. → Approve/Deny?
+
+3. **Use the Brandon 1:1 to commit to a Testing Approach deadline** — 13 workdays. Brandon will ask. Instead of deflecting, commit: "I'll have the outline to you by next Friday." A public commitment creates accountability. Why: Level 1 gate. Measure: commitment made. Risk: Brandon holds you to it (that's the point). → Approve/Deny?
+
+### Self-Audit
+- CASCADE: 9/9 organs checked. Brain ✅ (skipped — <48h). Eyes ✅ (updated). Hands ✅ (updated). Memory ✅ (experiment). Spine ✅ (skipped — <48h). Nervous System ✅ (updated). aMCC ✅ (updated). Device ✅ (skipped — <48h). Gut ✅ (skipped — no budget changes).
+- STRUCTURAL CHANGES: No files created, renamed, or moved. Dashboard message posted to rsw-channel (new ts).
+- COHERENCE SPOT-CHECK: (1) eyes.md JP OCI status "MCM-147368188 COMPLETE" — VERIFIED in OCI channel thread (mpgupta confirmed feed enabled, Yashasvi thanked team). (2) memory.md Brandon pronouns "she/her" — VERIFIED preserved after REWORD experiment.
+- SELF-AUDIT: Cascade 9/9 organs covered. Structural changes: no. Coherence spot-check: 2/2 valid.
+
+### Gut Health
+- Body: ~19,200w / 30,000w safety limit (~64%). Under limit by ~10,800w. Memory REWORD saved ~336w.
+- Intake: 11 items (carried from run 16 — mostly Karpathy proposals and system intelligence files).
+- Bloat signals: none.
+
+### Summary
+Run 17: Light maintenance + 1 experiment. Key new signals: Brandon's "cool her jets" comment about Lena (Kate aware — positive for Richard), JP OCI MCM fully complete with feed enabled (7/10 markets at 100%). Memory REWORD experiment kept — compressed 14 relationship entries by ~14% with zero information loss. aMCC streak 0 — 13 workdays. Brandon 1:1 at noon is the inflection point.
+
+SELF-AUDIT: Cascade 9/9 organs covered. Structural changes: no. Coherence spot-check: 2/2 valid.
+
+<!-- LOOP_READ_MARKER: 2026-04-02-run17 -->
+
+## 2026-04-02 — Adaptive Word Budgets: Replace Static Ceilings with Learned Constraints (Karpathy Run 16)
+
+**Problem:** The 24,000w body ceiling and per-organ budgets were the last static thresholds in the system. Set during initial body build as a guess, never empirically validated. Inconsistent with the Bayesian philosophy applied to everything else.
+
+**Change:** Static per-organ budgets → adaptive baselines. 24,000w ceiling → 30,000w safety limit (practical context window constraint). Budget signals now come from ADD/COMPRESS priors per organ in DuckDB. Created `autoresearch_budget_signals` view. Updated gut.md (budget enforcement, compression protocol, bloat detection), heart.md (target selection, hyperparameters, design choices), karpathy.md (governance section), nervous-system.md (Loop 5 metrics).
+
+**Principle:** Budgets are learned, not declared. The data decides each organ's natural size.
+
+## 2026-04-02 — Heart.md Legacy Purge: Remove All Static Caps and Thresholds (Karpathy-governed)
+
+**Problem:** Despite the Bayesian overhaul earlier today, heart.md and downstream files still contained legacy artifacts from the old regime — hardcoded question counts, static score floors, and an arbitrary "3 consecutive reverts" stop condition. These contradicted the delta-only, Bayesian-driven philosophy.
+
+**Changes (Richard-approved, Karpathy-governed):**
+
+1. **Eval question count:** Fixed "5 (3 standard + 2 adversarial)" → adaptive, scaled to experiment risk. Low risk: 2-3. Medium: 4-6. High (Brain/Memory): 5-8. Standing adversarial questions always mandatory. No fixed count.
+
+2. **Static score floors removed:** `score_a ≥ 0.8` (KEEP floor), `score_c ≥ 0.6` (portability floor), `score_a < 0.6` (broken floor) — all removed from keep/revert rules. The delta (A vs B) is the only signal. If the change didn't make it worse, it keeps. Bayesian priors learn the real thresholds over time.
+
+3. **Experiment count cap removed:** "3 consecutive reverts" stop condition → loop self-terminates when eligible targets are exhausted (all organs on cooldown or excluded by proven-loser filter). The Bayesian priors ARE the stopping mechanism — as combos accumulate reverts, their UCB scores drop and they stop being selected.
+
+4. **Tier selection:** Removed hardcoded cutoffs (`COMPRESS <50 words`, `posterior_mean >0.7`, `posterior_mean <0.4`). Tier is now a judgment call by Karpathy based on organ criticality, technique invasiveness, word delta, and prior history. Brain/Memory always Tier 2 (only static rule).
+
+5. **Hyperparameters table:** Removed `consecutive_revert_stop`, `portability_floor` rows. Updated `max_experiments_per_batch` (none → Bayesian self-termination), `eval_questions_per_exp` (5 → adaptive), `keep_rule` (delta_ab ≥ 0 only).
+
+6. **Design Choices:** Updated "Do no harm" (removed "organ-specific accuracy thresholds" → "delta_ab ≥ 0, Brain/Memory zero INCORRECT tolerance"). Updated "Batch execution" (removed "3 consecutive reverts" → "eligible targets exhausted").
+
+7. **Experiment format template (karpathy.md):** Removed `X/5` scoring format, fixed question count references. Updated to delta-based format.
+
+**Files updated (8):**
+- heart.md (source of truth) + 2 portable copies
+- karpathy.md (agent) + 3 portable copies
+- hooks-inventory.md (2 copies, symlinked)
+- karpathy-compression-sinks.md (intake — updated validation section)
+
+**Files NOT updated (intentionally):**
+- agent-architecture.md (published artifact from 3/25 — historical record, accurate for its date)
+- experiment-orchestration-protocol.md (design proposal from 3/31 — historical, led to current changes)
+- changelog.md entries (historical records)
+
+**Principle alignment:**
+- Structural over cosmetic: changes the decision engine, not formatting
+- Subtraction before addition: removed 3 hyperparameter rows, 4 static thresholds, 1 stop condition. Added 0 new rules.
+- Invisible over visible: the loop just works better — fewer arbitrary gates, more experiments run, priors learn faster
+
+## 2026-04-02 — Hook Deconflict: System Refresh → heart.md Source of Truth
+
+**Problem:** run-the-loop.kiro.hook (displayed as "3 · EOD: System Refresh") hardcoded old experiment parameters: 5 max per batch, static accuracy thresholds (100%/95%/90%), dual A+B eval. The hook said "These rules OVERRIDE heart.md defaults" — so heart.md changes were ignored at runtime.
+
+**Fix (v5.1.0 → v6.0.0):**
+- Removed "These rules OVERRIDE heart.md defaults" → replaced with "heart.md is the source of truth"
+- Stripped entire Phase 3 hardcoded experiment protocol (~40 lines: orchestration architecture, batch rules, do-no-harm thresholds, experiment protocol steps)
+- Replaced with ~12-line deferral: "Read heart.md and execute exactly as written" + key points for reference only
+- Description updated to remove "up to 5 experiments"
+
+**Structural principle:** Hook prompts should reference protocol files, not duplicate them. When the protocol changes, the hook follows automatically. This was the root cause of the "changes discussed but not reflected" pattern — changes landed in heart.md but the hook overrode them.
+
+## 2026-04-02 — Heart.md Bayesian Overhaul (Karpathy-governed)
+
+**Changes (Richard-approved, Karpathy-governed):**
+
+1. **Metrics:** Replaced static accuracy thresholds (100%/95%/90%) with delta-based evaluation. The question is no longer "is the organ above an arbitrary floor?" but "did this change make it better or worse?" Only static rule remaining: Brain/Memory delta_ab ≥ 0 (zero degradation, non-negotiable).
+
+2. **Eval protocol:** Replaced dual blind eval (A + B) with A/B/C design:
+   - Agent A: modified organ + full context (treatment)
+   - Agent B: original organ + full context (control — doesn't know a change was made)
+   - Agent C: modified organ + zero context (portability baseline)
+   - Delta (A - B) is the real signal. Eliminates bias from too much/too little context.
+
+3. **Bayesian priors:** Target selection now uses Beta distribution priors per organ×technique combo, stored in DuckDB `autoresearch_priors`. Each KEEP increments α, each REVERT increments β. UCB score (mean + std) balances exploration/exploitation. Proven losers (posterior_mean < 0.15, n > 10) auto-excluded.
+
+4. **Efficiency metrics:** Added wall-clock latency tracking (>120s = LOW_EFFICIENCY flag) and yield metric (word_delta × accuracy_delta / token_cost). Low-yield combos get deprioritized through the prior.
+
+5. **DuckDB tables created:** `autoresearch_experiments` (full experiment log), `autoresearch_priors` (63 organ×technique combos seeded at Beta(1,1)), `autoresearch_organ_health` (per-run snapshots), `autoresearch_selection_weights` view (UCB scores for target selection).
+
+6. **All copies synced:** heart.md (4 copies), karpathy.md (4 copies).
+
+## 2026-04-02 — Heart.md Protocol Update (Karpathy-governed)
+
+**Changes (Richard-approved, Karpathy-governed):**
+1. **heart.md:** Removed `max_experiments_per_batch = 5` hard cap. Batch now runs until 3 consecutive reverts (natural diminishing returns). Added tiered eval system: Tier 1 (quick, ~2 agent calls) for low-risk experiments (REWORD on non-critical organs, small COMPRESS), Tier 2 (full orchestrated blind eval, ~4 calls) for Brain/Memory/high-risk. Updated Step 6, Hyperparameters table, Experiment Queue section, Design Choices. Last-updated bumped.
+2. **karpathy.md (agent):** Updated step 7 (no hard cap, tiered eval reference) and Experiment Queue section to match heart.md.
+3. **All copies synced:** portable-body/body/heart.md, shared/portable-body/body/heart.md, portable-body/agents/karpathy.md, shared/portable-body/agents/karpathy.md.
+
+**Rationale:** True to Karpathy autoresearch philosophy — volume over caution, let the data tell you when to stop. Token efficiency comes from tiered eval design, not from capping experiment count. The consecutive revert stop (3 in a row) is the natural stopping condition.
+
 ## 2026-04-02 — Autoresearch Loop Run 16 (Thursday)
 
 ### Phase 1: Maintenance
@@ -1627,3 +1775,40 @@ Body now has 11 files.
 ### System Notes
 - MCP tool reference updated: calendar_meeting requires operation='create' parameter
 - Vijeth task body updated with SYNC LOG entry
+
+## 2026-04-02 — Autoresearch Batch (Run 16, Phase 3)
+
+### Experiments (6 run, 6 kept, 0 reverted)
+
+Inaugural autoresearch batch. All priors were Beta(1,1). Pure exploration.
+
+1. [eyes:market-health] REWORD → 1441w→1421w. A=1.0 B=1.0 Δ=0.0. KEEP. Paragraphs→table.
+2. [hands:recurring-execution] COMPRESS → 1217w→1128w. A=1.0 B=1.0 Δ=0.0. KEEP. Daily/weekly checklists→2-line summary.
+3. [memory:relationship-graph] REWORD → 2451w→2004w. A=1.0 B=1.0 C=1.0 Δ=0.0. KEEP. 8 meeting dynamic paragraphs→1-2 lines. Identity fields preserved (she/her adversarial passed).
+4. [device:slack-ingestion] COMPRESS → 1653w→1504w. A=1.0 B=1.0 Δ=0.0. KEEP. Removed version history.
+5. [nervous-system:loop9-meeting-comm] COMPRESS → 1303w→1177w. A=1.0 B=1.0 Δ=0.0. KEEP. Session detail→pattern summary.
+6. [brain:op1-narrative] COMPRESS → 1614w→1526w. A=1.0 B=1.0 C=1.0 Δ=0.0. KEEP. Removed redundant rationale.
+
+Total words saved: 919w across 6 organs. All A/B/C evals via invokeSubAgent (isolated contexts).
+Priors updated: eyes×REWORD, hands×COMPRESS, memory×REWORD, device×COMPRESS, nervous-system×COMPRESS, brain×COMPRESS — all now Beta(2,1).
+
+### Intake
+- budget-ceiling-observation.md — logged for Karpathy: static word budgets are last arbitrary thresholds, propose Bayesian management.
+
+### Batch 2 — Mixed techniques, harder eval (4 run, 4 kept, 0 reverted)
+
+7. [eyes:oci-performance] ADD → 1421w→1501w. A=1.0 B=0.75 Δ=+0.25. KEEP. **First positive delta.** Inlined OCI status table — Agent B missed FR/IT/ES click volumes and AU launch date.
+8. [spine:key-people] REMOVE → 1026w→1010w. A=1.0 B=1.0 Δ=0.0. KEEP. Pointer was redundant — body.md routes to memory.md.
+9. [amcc:hard-thing] ADD → 2171w→2227w. A=1.0 B=0.9375 Δ=+0.0625. KEEP. **Second positive delta.** Gollwitzer implementation intention — Agent A gave specific first action, Agent B gave generic redirect. Organ now 111% of budget — accuracy > budget.
+10. [memory:compressed-context-projects] RESTRUCTURE → 2004w→2031w. A=1.0 B=1.0 C=1.0 Δ=0.0. KEEP. List→table with Status/Level/Blocker. Explicit same-as tag.
+
+Batch 2 learning: ADD experiments produced the only positive deltas in the system (exp 7: +0.25, exp 9: +0.0625). Compression experiments consistently Δ=0.0 (no degradation, no improvement). This suggests the body was already accurate — compression saves tokens without losing signal, but ADD is where real accuracy gains live. The budget-ceiling-observation intake is validated: aMCC went over budget and the experiment still kept because accuracy improved.
+
+### Batch 3 — Random selection, first revert (4 run, 3 kept, 1 reverted)
+
+11. [brain:decision-log-d7] REMOVE → 1526w→1501w. A=0.7 B=1.0 C=0.7 Δ=-0.3. **REVERT.** First revert. Agent A couldn't answer WBR decline conclusion. D7 is RESOLVED but still queried — not dead weight.
+12. [nervous-system:loop3-pattern-trajectory] REWORD → 1177w→1099w. A=1.0 B=1.0 Δ=0.0. KEEP. Pattern assessments compressed. 78w saved.
+13. [hands:task-list-structure] RESTRUCTURE → 1128w→1120w. A=1.0 B=1.0 Δ=0.0. KEEP. To-Do IDs moved to HTML comment — LLMs read comments. Table cleaner.
+14. [device:delegation-protocols] REWORD → 1504w→1422w. A=1.0 B=1.0 Δ=0.0. KEEP. Verbose subsections → single table. 82w saved.
+
+Batch 3 learning: brain×REMOVE reverted — RESOLVED decisions aren't dead weight if they're still queryable. Prior updated: brain×REMOVE now Beta(1,2), posterior_mean=0.33. Will be deprioritized in future selection. The revert validates the eval design — trap questions (asking about removed content) catch real accuracy loss.

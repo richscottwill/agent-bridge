@@ -104,12 +104,6 @@ See memory.md → Reference Index for Quip document links.
 
 ---
 
-## Key People
-
-See memory.md → Relationship Graph for the full people directory with tone notes and draft style guidance.
-
----
-
 ## System History
 
 See changelog.md for full build history (3/12 onwards: trainer, loop, To-Do, Asana bridge, Hedy, wiki team, meetings, body metaphor migration, Slack ingestion).

@@ -32,15 +32,15 @@ Last synced: 2026-03-31
 
 ## 3. System Refresh / Autoresearch Loop (`run-the-loop.kiro.hook`)
 - **Trigger:** Manual (end of day, after meeting sync)
-- **Intent:** Maintain organs, cascade changes, run up to 5 experiments
+- **Intent:** Maintain organs, cascade changes, run experiments
 - **Steps:**
   1. Maintenance — refresh ground truth from email/calendar, process intake/
   2. Cascade — propagate changes to all 11 organs (skip if updated <48h + minor change)
-  3. Experiments — Karpathy-governed, up to 5 per run, orchestrated blind eval (4-step: Karpathy → Eval A → Eval B → Karpathy scores)
+  3. Experiments — Karpathy-governed, no cap, orchestrated blind eval (A/B/C: Karpathy → Eval A → Eval B → Karpathy scores)
   4. Suggestions — up to 3 proposals for Richard (must connect to Five Levels, be measurable, be reversible)
   5. Housekeeping + Git sync — deduplicate MCP autoApprove, push to GitHub
 - **Protocol:** heart.md is the source of truth
-- **Key rules:** Stop on 3 consecutive reverts. Do-no-harm: snapshot before edit, organ-specific accuracy thresholds (Brain/Memory 100%, Eyes/Hands 95%, others 90%)
+- **Key rules:** Loop self-terminates when eligible targets exhausted (Bayesian priors deprioritize proven losers). Do-no-harm: snapshot before edit, Brain/Memory zero degradation tolerance.
 
 ## 4. WBR Callout Pipeline (`wbr-callout-pipeline.kiro.hook`)
 - **Trigger:** Manual (weekly, for WBR prep)

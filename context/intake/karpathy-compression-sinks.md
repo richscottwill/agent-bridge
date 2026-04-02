@@ -380,10 +380,10 @@ These proposals have theoretical appeal but violate the portability principle or
 
 ### Phase 3 Validation
 Each compression must pass the standard eval:
-- 5 questions (3 standard + 2 adversarial)
-- Dual blind eval (Amazon-context + generic evaluator)
-- Both score ≥4/5
-- Brain/Memory: 100% accuracy (no INCORRECT allowed)
+- Eval questions scaled to risk (per heart.md Step 2)
+- A/B/C blind eval (treatment + context, control + context, treatment + zero context)
+- delta_ab ≥ 0 to KEEP
+- Brain/Memory: zero INCORRECT tolerance
 
 ---
 

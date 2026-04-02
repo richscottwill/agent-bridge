@@ -4,7 +4,7 @@
 
 *Operating principle: Structural over cosmetic. Eyes doesn't just report numbers — it pre-interprets them so Richard walks into meetings with a position, not a spreadsheet. The predicted QA section reduces the decision of "what will they ask?" to a pre-loaded answer.*
 
-Last updated: 2026-04-01 (loop run 15)
+Last updated: 2026-04-02 (loop run 17)
 Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy tests, W13 dashboard data, Slack ingestion (first scan)
 
 ---
@@ -17,25 +17,36 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 
 ### Market Deep Dives
 
-**US — Strong, OCI-powered growth.** Jan: 39K regs (+30% vs OP2, +86% YoY) — peak OCI impact. Feb: 32.9K normalizing but well above plan. Brand CPA pressure $65-77 (was ~$40 pre-Walmart). Response: bid caps on Brand, NB efficiency via OCI absorbs CPA increase at program level.
-
-**UK — Efficiency gains despite spend reduction.** Surpassed OP2 by 24% in Feb despite -6% spend. Ad copy test (Jan 29-Mar 2): +86% CTR, +31% regs, +70% CTR pre/post. weareuncapped.com at 24% IS since Dec 2023; Amazon Global Logistics UK emerging W8-W10.
-
-**DE — Slight miss, high baseline.** Missed OP2 by 4%; NB -22% vs OP2. Y25 was unusually strong. OCI lift tracking: W49-W51 showed +16-20% lift, 74-96% to expectation.
-
-**CA — LP optimization paying off.** Bulk CVR: 0.82% to 2.35% (+186.6%), Wholesale CVR: 0.75% to 2.10% (+180%). OCI E2E launched 3/4, full impact projected Jul 2026.
-
-**JP — MHLW headwind.** MHLW campaign ended 1/31 — was a major registration driver. New competitors emerging on Yahoo (shop-pro.jp 12-15% IS).
-
-**AU — Polaris migration + CVR compression.** W13: 207 regs (-16% WoW), $24K spend (-13%), CPA $118 (+3%). CVR compressed -12% WoW (Brand -14%, NB -10%). Mon-Tue strong (53, 50 regs) before Wed-Sat collapsed (27, 22, 23, 8). NB CPC declining 7 consecutive weeks ($6.82 W6 → $4.81 W13, -29%). NB CPA flat at $187. Polaris URL migration completing mid-week may explain daily pattern. Two-campaign structure proposed (3/24). Lena's 3 priorities: keyword CPC/CPA, keyword-to-product mapping, Polaris migration.
-
-**MX — Steady growth, NB surge.** W13: 354 regs (+9% WoW), $23K spend (+15%), CPA $66 (+6%). NB regs +33% above recent avg. YoY: +91% regs, +37% spend. NB CPA $112 sustained from H2 2025 efficiency gains. Lorena now primary PS stakeholder. ie%CCP corrected to 93% (ingester bug fixed — was reading CPA as ie%CCP).
+| Market | Period | Regs | vs OP2 | CPA | Key Signal |
+|--------|--------|------|--------|-----|-----------|
+| US | Jan | 39K | +30% | — | Peak OCI impact (+86% YoY) |
+| US | Feb | 32.9K | above plan | $65-77 Brand | Walmart IS driving Brand CPA up (was ~$40). Response: bid caps + NB OCI efficiency. |
+| UK | Feb | +24% vs OP2 | +24% | — | -6% spend, still beat plan. Ad copy test: +86% CTR, +31% regs. weareuncapped.com 24% IS since Dec 2023. |
+| DE | Feb | -4% vs OP2 | -4% | — | NB -22% vs OP2. Y25 baseline unusually strong. OCI lift W49-W51: +16-20%, 74-96% to expectation. |
+| CA | Feb | +18.5% vs OP2 | +18.5% | $73 | Bulk CVR 0.82%→2.35% (+187%), Wholesale 0.75%→2.10% (+180%). OCI E2E launched 3/4, full impact Jul 2026. |
+| JP | Feb | — | — | — | MHLW campaign ended 1/31 (major reg driver lost). Yahoo competitors emerging: shop-pro.jp 12-15% IS. |
+| AU | W13 | 207 (-16% WoW) | — | $118 (+3%) | CVR -12% WoW (Brand -14%, NB -10%). Daily: Mon-Tue strong (53, 50) then collapsed (27, 22, 23, 8). NB CPC declining 7wks ($6.82→$4.81, -29%). NB CPA flat $187. Polaris migration mid-week may explain. Two-campaign structure proposed (3/24). Lena priorities: CPC/CPA, keyword-product mapping, Polaris. |
+| MX | W13 | 354 (+9% WoW) | — | $66 (+6%) | NB regs +33% above avg. YoY: +91% regs, +37% spend. NB CPA $112 sustained from H2 2025 gains. Lorena now primary stakeholder. ie%CCP corrected to 93%. |
 
 ---
 
 ## OCI Performance
 
 <!-- Data: db("SELECT market, status, launch_date, full_impact_date, reg_lift_pct, cpa_improvement FROM oci_status ORDER BY market") -->
+
+### OCI Status by Market (as of 4/2)
+| Market | Status | Key Date | Notes |
+|--------|--------|----------|-------|
+| US | 100% live | Launched 2025 | Baseline. Peak Jan: 39K regs (+86% YoY). |
+| UK | 100% live | E2E launched | Tracking lift. |
+| DE | 100% live | E2E launched | W49-W51: +16-20% lift. Data loss 3/18-3/25 (DUB→ZAZ migration). |
+| FR | 100% live | Dialed up 3/30 | Confirmed 775 click events 3/24 UTC. |
+| IT | 100% live | Dialed up 3/30 | Confirmed 1,412 click events 3/24 UTC. |
+| ES | 100% live | Dialed up 3/30 | Confirmed 1,168 click events 3/24 UTC. |
+| JP | 100% live | Dialed up 3/31 | MCM-147368188 COMPLETE — tracking template implemented, feed enabled. Ref tag taxonomy deferred post-launch. |
+| CA | On track | Target 04/07 | E2E launched 3/4. Full impact projected Jul 2026. |
+| AU | Not started | Target May 2026 | MCC not created. Discussed with Suzane (Adobe) 3/19. |
+| MX | Not started | TBD | No MCC. |
 
 ### MCC Structure
 - Master MCC: DSAP - Amazon Business Parent MCC (873-788-1095)
@@ -104,24 +115,24 @@ Shifted from bulk/wholesale/B2B messaging → price, quality, selection messagin
 
 ## Predicted Questions (next session)
 
-Based on calendar patterns, email threads, active projects, Slack signals as of 4/1/26 Wednesday PT.
+Based on calendar patterns, email threads, active projects, Slack signals as of 4/2/26 Thursday PT.
 
-**Q1: "What should I bring to the Adi sync at noon?"**
-Adi confirmed JP Google account for OCI preflight (all ref tags unique, search ads only). Follow up on AI ad-copy workflow progress (JP translation rules, D-Pel vs AI decision matrix). Check if Adi has updates on the "process-snap" sync Richard was supposed to schedule. Also: Stacey's JP ref tag question in Slack — Adi may have context.
+**Q1: "What happened in the Brandon 1:1?"**
+Brandon 1:1 at 12pm today. Key topics: Testing Approach doc (12 workdays — Brandon will ask), Lena AU follow-up (Brandon offered help, said "she needs to cool her jets, Kate is realizing it"), JP Brand LP experiment (going live today), Andrew's ENG budget file request (Brandon mentioned in Andrew's 1:1). Prep: have a concrete commitment for Testing Approach timeline.
 
-**Q2: "What's happening with OCI JP launch?"**
-Major milestone: FR/IT/ES dialed to 100%, JP at 100%. CA on track for 04/07. First QBR goal of 2026 achieved (Kiran Pantham celebrated in OCI channel). Mukesh created MCM-147368188 for JP tracking template. Brandon confirmed Day7 MCM steps. Brandon deferred JP ref tag taxonomy update to post-launch — will discuss with Deepika Thursday. Richard is in the JP channel thread about ref tag changes.
+**Q2: "What's the JP Brand LP experiment status?"**
+Stacey confirmed ref_= carry-over works on a.com. Richard provided technical guidance on ref= vs ref_= usage (ref= for MCS traffic, ref_= for direct a.com traffic). Experiment targeting live today (4/2) after CTA experience check. Brandon confirmed. JP excluded from WW Brand Polaris test — running independently.
 
 **Q3: "What does Lena want from the AU weekly update?"**
-Lena replied to Richard's AU PS Weekly Update (4/1) with 3 questions: (1) data dump with landing page URLs showing where traffic goes, (2) how many clicks redirect because customer is already logged in, (3) are we overstating CPAs due to repeat visitors. These are sharp analytical questions — Lena is digging into whether the CPA picture is worse than it looks or better. Richard needs to investigate Google Ads landing page report and potentially coordinate with analytics for logged-in redirect data.
+Lena replied with 3 questions: (1) data with landing page URLs, (2) how many clicks redirect because customer already logged in, (3) are we overstating CPAs due to repeat visitors. Brandon's take: "She needs to cool her jets and Kate is very much realizing it." Still needs response — 2 days pending.
 
 **Q4: "Did Richard make progress on the Testing Approach doc?"**
-No. 11 workdays. W14 day 2. Kate meeting is 11 business days away. Yesterday Richard sent the AU weekly update (good — proactive communication, addresses visibility gap) and moved meetings around for the offsite. But the doc remains untouched. The AU update is Level 2 work. The Testing Approach doc is Level 1 gate.
+No. 12 workdays at zero. Kate meeting Apr 16. Brandon 1:1 today — this will come up.
 
-**Q5: "What's the Baloo noindex situation?"**
-Slack signal (baloo-search-and-mcs, 3/31): meta tag noindex requirement not implemented on Baloo pages. Not impacting SEO while behind VPN, but flagged as a launch blocker. 6 replies in thread — actively being discussed. Richard should monitor but this is a tech team issue, not PS.
+**Q5: "What's the OCI JP status?"**
+MCM-147368188 fully complete — implementation done, feed enabled by mpgupta. Yashasvi confirmed. JP OCI tracking template operational. 7/10 markets at 100% OCI. CA on track 04/07.
 
-Last updated: 2026-04-01 (Wednesday PT)
+Last updated: 2026-04-02 (Thursday PT)
 
 ---
 

@@ -1,12 +1,12 @@
 {
   "version": "1.0",
   "last_scan": {
-    "timestamp": "2026-04-02T07:00:00Z",
+    "timestamp": "2026-04-02T14:00:00Z",
     "hook": "run-the-loop",
     "status": "success",
-    "signals_extracted": 5,
-    "channels_scanned": 3,
-    "proactive_queries_run": 0,
+    "signals_extracted": 3,
+    "channels_scanned": 4,
+    "proactive_queries_run": 2,
     "errors": []
   },
   "channels": {
@@ -155,9 +155,9 @@
   "dashboard": {
     "implementation": "pinned_message",
     "canvas_supported": false,
-    "message_ts": "1775094852.537249",
+    "message_ts": "1775138648.820659",
     "channel_id": "C0993SRL6FQ",
-    "last_updated": "2026-04-02T07:00:00Z",
+    "last_updated": "2026-04-02T14:04:08Z",
     "notes": "Canvas tools (canvas_create, canvas_update) not available in ai-community-slack-mcp. Dashboard implemented as pinned message. Update via edit_message using message_ts."
   },
   "backfill_scans": {

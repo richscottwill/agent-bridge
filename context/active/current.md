@@ -1,6 +1,6 @@
 # Active Context — Richard Williams
 
-Last updated: 2026-04-02 (Thursday PT, autoresearch loop run 16)
+Last updated: 2026-04-02 (Thursday PT, autoresearch loop run 17)
 
 ## Role & Scope
 - Amazon Business, Paid Acquisition / Paid Search
@@ -35,7 +35,7 @@ Last updated: 2026-04-02 (Thursday PT, autoresearch loop run 16)
 - W13: NB regs -9% WoW, CPA $132. Lena wants weekly CPA review.
 - .co.uk URL issue RESOLVED (3/16).
 - 🆕 Richard sent AU PS Weekly Update (4/1): Updated weekly performance doc with W13 decline analysis (traffic-driven + CVR drop) and keyword-level performance report. Alexis thanked him. Lena replied with follow-up questions: (1) can we get data with landing page URLs? (2) how many clicks redirect because customer is already logged in? (3) are we overstating CPAs due to repeat visitors? ACTION NEEDED: respond to Lena's questions.
-- 🆕 Brandon (Slack 4/1 ABIX): "is there something you need from me for Lena's req? [I haven't looked at it yet, but LMK if so]" — Brandon offering support on Lena's follow-up. Richard confirmed alignment on WW streams strategy. ACTION: Reply to Brandon if help needed.
+- 🆕 Brandon (Slack 4/1-4/2 ABIX): Offering support on Lena's follow-up. Richard confirmed WW streams alignment. Brandon's take: "She needs to cool her jets and Kate is very much realizing it." Kate is aware of Lena's intensity — positive signal for Richard's position.
 - Alexis (3/24): Two-campaign structure proposal (product-intent vs business-intent). Biweekly keyword review cadence agreed. MCS page replication from MX model discussed.
 - Lena's 3 priorities (via Brandon 3/23): keyword CPC/CPA investigation, keyword-to-product mapping, Polaris migration.
 
@@ -121,7 +121,7 @@ Last updated: 2026-04-02 (Thursday PT, autoresearch loop run 16)
 - Richard added to ab-paidsearch-oci-apac2@ email list (3/25).
 - 🆕 **OCI WW Launch milestone (Slack 3/31):** FR, IT, ES dialed up to 100%. JP already at 100%. CA on track for 04/07. Kiran Pantham celebrated first QBR goal of 2026. Brandon confirmed Day7 MCM steps. Mukesh Artham created MCM-147368188 for JP tracking template update. Brandon decided to wait on JP ref tag taxonomy update until after tech confirms OCI is working — will discuss with Deepika Thursday.
 - 🆕 **JP OCI preflight (Slack 3/31):** Brandon initiating JP OCI enable. Adi confirmed JP Google account: all ref tags unique, no KW/adgroup overrides, search ads only. Stacey raised ref tag taxonomy update question — Brandon deferred to post-launch. Richard asked Stacey about planned changes to JP ref tags (thread active).
-- 🆕 **MCM approvals received (Slack 4/1):** All approvals for MCM-147368188 (JP tracking template) received. Tech cleared to proceed with execution. Brandon confirmed Day7 steps look good.
+- ✅ **MCM-147368188 COMPLETE (Slack 4/1-4/2):** All approvals received, implementation done, feed enabled by mpgupta. Yashasvi confirmed. JP OCI tracking template fully operational.
 - 🆕 **JP Brand LP Experiment (Slack 4/1-4/2):** Stacey confirmed ref_= carry-over works on a.com. Experiment targeting live 4/2 after CTA experience double-check. Brandon confirmed "sounds good." Stacey also asking (DM 4/1 11:38pm) about CA exclusion from Polaris 50/50 testing on 4/7 — Richard needs to reply with rationale (OCI data clean focus).
 - 🆕 **FRITES 100% OCI confirmed (Slack 3/30):** Brandon confirmed FRITES updated to send 100% of traffic through OCI after click volume double-confirmation with tech (FR: 775, IT: 1,412, ES: 1,168 events on 3/24 UTC).
 - 🆕 **DE data issue root cause (Slack 3/26):** Yun identified DE registration data loss 3/18-3/25 caused by Amazon-wide DUB→ZAZ/FRA infrastructure migration (Region_Flexibility project). DE maps to FRA (misconfigured), other EU4 maps to ZAZ (correct). Data after 3/25 should be fine. Brandon escalated in WBR — ABMA moved to Sev 2.5.

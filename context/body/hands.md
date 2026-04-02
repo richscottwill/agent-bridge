@@ -4,7 +4,7 @@
 
 *Operating principle: Reduce decisions, not options. Every task should have a clear next action, a pre-written draft if it involves communication, and a due date that drives My Day. Richard opens his list and acts — he doesn't plan.*
 
-Last updated: 2026-04-02 (loop run 16)
+Last updated: 2026-04-02 (loop run 17)
 Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, Slack ingestion, DM scan
 
 ---
@@ -27,19 +27,8 @@ Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, Slack ingestion,
 
 ## Recurring Execution Work (Google Ads: MX, AU, Paid App)
 
-### Daily Checks
-- [ ] MX account: check spend pacing, paused campaigns, keyword alerts
-- [ ] AU account: check spend pacing, bid strategy status, CPA vs target ($140)
-- [ ] Paid App account: check spend pacing, conversion tracking
-- [ ] Flag anomalies (spend spikes, CPA jumps, paused campaigns, disapproved ads)
-
-### Weekly Tasks (post-WBR data review)
-- [ ] Review WW Dashboard for MX/AU/Paid App — flag WoW changes >10%
-- [ ] MX: negative keyword review, search term report, competitor IS check
-- [ ] AU: CPA trend vs Lena's target, NB/Brand split, OCI readiness check
-- [ ] Paid App: performance vs benchmarks, creative rotation
-- [ ] Update Pre-WBR Callouts Quip if Richard is covering for Dwayne
-- [ ] Flag any metric that needs a WBR/MBR/QBR narrative
+**Daily:** Spend pacing + anomaly check across MX, AU ($140 CPA target), Paid App.
+**Weekly (post-WBR):** WW Dashboard review (flag >10% WoW), MX search terms + competitor IS, AU CPA vs target + OCI readiness, Paid App benchmarks. Update Pre-WBR Callouts Quip if covering for Dwayne.
 
 ---
 
@@ -50,14 +39,13 @@ Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, Slack ingestion,
 - Kingpin Goals → blocked by Andes data
 - MX/AU budgets → blocked by R&O tasks
 
-## New Signals (since 4/1)
-- 🆕 Brandon @mentioned Richard in ABIX (4/1 9:19pm): offering help on Lena's AU follow-up questions. Richard confirmed WW streams alignment. Brandon hasn't looked at Lena's req yet — LMK if help needed.
-- 🆕 Stacey DM (4/1 11:38pm): Asking about CA exclusion from Polaris 50/50 testing on 4/7. Needs reply with rationale.
-- 🆕 Andrew DM (4/1 9:18pm): Requesting ENG max budget calculation file (audience size × frequency). Brandon mentioned in Andrew's 1:1 for OP1 recalculation.
-- 🆕 Lorena DM (4/1): Richard told her he'd update after current task. She replied "Thank you!" Positive signal but Q2 spend still not sent (8d overdue).
-- 🆕 Vijeth completed ps-brand XF + Template (Asana 4/1). Alex confirmed all navs working. Polaris brand pages live for all GEOs.
-- 🆕 JP Brand LP experiment: Stacey confirmed ref_= carry-over works. Targeting live 4/2. Brandon confirmed.
-- 🆕 Kudoboard for Kate Vives: was due 4/1, now OVERDUE.
+## New Signals (since 4/2 morning)
+- 🆕 Brandon ABIX (4/2 3:05am): "She needs to cool her jets and Kate is very much realizing it" — re: Lena. Positive signal for Richard's position. Kate aware of Lena's intensity.
+- 🆕 JP OCI MCM-147368188 COMPLETE: Implementation done, feed enabled by mpgupta. Yashasvi confirmed. JP tracking template fully operational.
+- 🆕 JP Brand LP experiment: Stacey confirmed ref_= carry-over works. Richard provided technical guidance. Experiment targeting live today (4/2). JP excluded from WW Polaris test — running independently.
+- 🆕 Asana: Saajan changed Abandoned Cart priority from High to Low.
+- ⏳ Stacey DM (4/1 11:38pm): CA Polaris exclusion question — STILL UNANSWERED.
+- ⏳ Andrew DM (4/1 9:18pm): ENG budget file request — STILL UNANSWERED.
 - 📅 TODAY 4/2: PSME Demo 8am, Deep Dive & Debate 9am (Brandon) + ACQ Promo OHs 9am (conflict), Richard/Brandon 1:1 12pm. Focus blocks: Sweep 8am, Core 9am, Engine Room 1pm, Admin 4pm.
 - 📅 TOMORROW 4/3: AppTweak <> Amazon Business 11am. Finance actuals due EOD.
 
@@ -65,13 +53,21 @@ Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, Slack ingestion,
 
 ## Task List Structure (Microsoft To-Do)
 
-| List | Purpose | Cap | ID |
-|------|---------|-----|----|
-| 🧹 Sweep | Quick unblocking: send, confirm, triage | 5 | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESHAAA=` |
-| 🎯 Core | Strategic: test designs, frameworks, stakeholder docs | 4 | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESIAAA=` |
-| ⚙️ Engine Room | Hands-on: campaign builds, keyword changes, bids | 6 | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESJAAA=` |
-| 📋 Admin | Budget, POs, invoices, compliance, goal updates | 3 | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESKAAA=` |
-| 📦 Backlog | Deferred/blocked/future with justification | — | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADWyS4nAAA=` |
+| List | Purpose | Cap |
+|------|---------|-----|
+| 🧹 Sweep | Quick unblocking: send, confirm, triage | 5 |
+| 🎯 Core | Strategic: test designs, frameworks, stakeholder docs | 4 |
+| ⚙️ Engine Room | Hands-on: campaign builds, keyword changes, bids | 6 |
+| 📋 Admin | Budget, POs, invoices, compliance, goal updates | 3 |
+| 📦 Backlog | Deferred/blocked/future with justification | — |
+
+<!-- To-Do List IDs (for MCP tool calls):
+Sweep: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESHAAA=
+Core: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESIAAA=
+Engine Room: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESJAAA=
+Admin: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESKAAA=
+Backlog: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADWyS4nAAA=
+-->
 
 ## Key Outlook Folders
 | Folder | ID |

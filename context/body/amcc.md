@@ -4,7 +4,7 @@
 
 *Operating principle: Protect the habit loop. The aMCC's job is to make the hard thing the default, not the exception. The streak, the escalation ladder, the resistance taxonomy — these are structural nudges that make avoidance harder than action. The intervention should feel like gravity pulling toward the right choice, not a voice yelling to change direction.*
 
-Last updated: 2026-04-02 (loop run 16: 12 workdays at zero, Brandon 1:1 today — Testing Approach should come up)
+Last updated: 2026-04-02 (loop run 17: 13 workdays at zero, Brandon 1:1 TODAY at noon)
 
 ---
 
@@ -44,7 +44,7 @@ The streak is the single most important metric in this organ. It measures consec
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| Current streak | 0 days | 12 workdays since hard thing was set (3/20). No Testing Approach outline started. Wednesday 4/1: Richard engaged on Slack (ABIX alignment, JP ref tags, Lorena DM). No Level 1 output. W14 day 3. Brandon 1:1 TODAY — Testing Approach will likely come up. |
+| Current streak | 0 days | 13 workdays since hard thing was set (3/20). No Testing Approach outline started. Thursday 4/2: Brandon 1:1 at noon — Testing Approach WILL come up. W14 day 4. |
 | Longest streak | 0 days | Tracking starts 3/20 |
 | Streak resets (total) | 1 | Initial reset from artifact drought |
 | Last hard choice | 3/23 | Deprioritized AEO in favor of higher-leverage Testing Approach doc — strategic decision, not avoidance. |
@@ -120,6 +120,8 @@ The hard thing is determined by:
 | The Hard Thing | Why It's Hard | Why It Matters | Avoidance Pattern |
 |---------------|--------------|----------------|-------------------|
 | **Ship Testing Approach doc for Kate** | Multi-section doc requiring contributor coordination (Andrew, Stacey, Yun, Adi). Needs to synthesize 5 workstreams into a cohesive narrative. High-stakes audience (L8 skip-level). | Kate meeting Apr 16. This is THE artifact that positions PS as strategic, not tactical. Level 2 gate work. Highest stakeholder visibility in Richard's portfolio. | Perfectionism — wanting all contributor sections before sharing a draft. Coordination as delay. |
+
+**Implementation intention (Gollwitzer):** IF Richard opens a new chat session and the Testing Approach doc has not been worked on today, THEN the first action is: open `~/shared/research/op1-ps-testing-framework-draft.md` and write one section header + 3 bullet points. Not the whole doc. One section. 10 minutes. The blank page breaks when you write the first ugly sentence.
 
 ### Hard Thing History
 Removed — current-state-only principle. Historical data lives in changelog.md.

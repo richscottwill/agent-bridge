@@ -63,7 +63,7 @@ D5: Consolidate campaigns to strengthen OCI data signals. Reinforced #6 Compress
 D6: Lifecycle channel via ABMA partnership, 13%→30% match rate. Reinforced #5 Partnership, #1 Evidence. HIGH.
 
 ### D7: WBR Traffic Decline [RESOLVED — pending audit]
-D7: Attributed to bid strategy + seasonality, not systemic. MEDIUM confidence. Pending deep dive.
+D7: Bid strategy + seasonality, not systemic. MEDIUM. Pending deep dive. Archive candidate (90d from resolution).
 
 ### D8: OP1 Structure [FOUNDATIONAL]
 D8: Problem→test→result→scale across 5 workstreams. Reinforced #5 Partnership, #1 Evidence. HIGH.
@@ -134,15 +134,9 @@ Graduation is not a date — it's evidence. The nervous system (Loop 6) tracks t
 
 ## OP1 Strategic Narrative
 
-The OP1 doc is the flagship artifact for Kate's Apr 16 meeting. Brain owns the narrative structure and strategic positioning. Eyes owns the underlying data (metrics, OCI performance, competitor intel).
+Core argument: Every 2026 investment maps to a validated 2025 signal. PS transforming from keyword-driven to automated, audience-centric engine. Cross-functional collaboration is the differentiator.
 
-**Core argument:** Every 2026 investment maps to a validated 2025 signal. PS is transforming from keyword-driven acquisition to automated, audience-centric engine. Cross-functional collaboration (Legal, Data Science, MarTech, MCS, Customer Research) is the differentiator.
-
-**Structure:** 5 workstreams, each following problem → test → result → scale. See `~/shared/research/op1-ps-testing-framework-draft.md` for the full draft. See Eyes → OCI Performance and Market Health for the supporting data.
-
-**Workstreams:** OCI Bidding, Modern Search, Audiences, User Experience, Algorithmic Ads.
-
-**Why this structure matters (D8):** Positions PS as strategic partners who validate before scaling, not channel executors requesting budget. The problem→test→result→scale pattern IS the team's methodology — the doc demonstrates it, not just describes it.
+Structure: 5 workstreams (OCI Bidding, Modern Search, Audiences, User Experience, Algorithmic Ads), each problem→test→result→scale. Full draft: `~/shared/research/op1-ps-testing-framework-draft.md`. Data: Eyes → OCI Performance, Market Health.
 
 ---
 
