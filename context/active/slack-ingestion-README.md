@@ -119,6 +119,14 @@ Ceilings: Memory 700w/week, Brain 500w, Eyes 500w, Hands 400w, current.md flag a
 - Rate limits: log, skip remaining channels, resume next cycle
 - All tool invocations logged for audit
 
+## Canvas Capability Status
+
+**Validated: 2026-04-01** — The ai-community-slack-mcp server does NOT support canvas create or update operations. Available tools include `download_file_content` (which can read existing canvases) but there is no `canvas_create`, `canvas_update`, or equivalent tool.
+
+**Impact:** The Live Dashboard in rsw-channel is implemented as a **pinned message** (not a canvas). Updates are done via message editing (`post_message` for initial post, then editing the pinned message). The message timestamp is stored in `slack-scan-state.json → dashboard.message_ts` for future edits.
+
+**Re-check cadence:** If the Slack MCP server adds canvas tools in a future update, the dashboard can be migrated to a canvas. Check tool list periodically.
+
 ## Guardrails
 
 - Read-only ONLY during ingestion

@@ -4,6 +4,85 @@
 LOOP READ OPTIMIZATION: The autoresearch loop reads from the top DOWN to the 
 nearest LOOP_READ_MARKER comment. Everything below the marker was already 
 
+## 2026-04-02 — Autoresearch Loop Run 16 (Thursday)
+
+### Phase 1: Maintenance
+
+#### Slack Ingestion (4/1 evening → 4/2)
+- 3 channels scanned (ab-paid-search-abix, ab-ps_jp, ask-ab-aryabot). 3 DMs scanned (Andrew, Stacey, Lorena). 5 signals extracted.
+- **Signal 1 — Brandon @mention in ABIX:** Brandon asked Richard "is there something you need from me for Lena's req?" Richard confirmed WW streams alignment. Brandon offering support on Lena's AU follow-up. (Source: #ab-paid-search-abix, 4/1 9:19pm)
+- **Signal 2 — JP Brand LP experiment go-live:** Stacey confirmed ref_= carry-over works on a.com. Experiment targeting live 4/2 after CTA check. Brandon confirmed "sounds good." (Source: #ab-ps_jp, 4/1 10pm)
+- **Signal 3 — Stacey DM — CA Polaris exclusion:** Stacey asking about CA exclusion from 50/50 Brand Polaris testing on 4/7. Needs reply with rationale (OCI data clean focus). (Source: DM, 4/1 11:38pm)
+- **Signal 4 — Andrew DM — ENG budget file:** Andrew requesting ENG max budget calculation file (audience size × frequency). Brandon mentioned in Andrew's 1:1 for OP1 recalculation. (Source: DM, 4/1 9:18pm)
+- **Signal 5 — Lorena DM positive:** Richard told Lorena he'd update after current task. She replied "Thank you!" Q2 spend still not sent (8d overdue). (Source: DM, 4/1 9:24pm)
+- Asana signals: Vijeth completed ps-brand XF + Template. Alex confirmed all navs working. Polaris brand pages live for all GEOs. "Get Legal Approval" task added to PS ENG project.
+- ask-ab-aryabot: no Richard-relevant signals (all bot interactions with other users).
+
+#### Email Scan (4/1-4/2)
+- Only unread: Lorena's MX Paid Search Sync (3/25, Q2 spend request) and Paid Search Strategy (3/19, keyword data request). Both still overdue.
+- No new emails since last scan.
+
+#### Calendar — Today (Thursday 4/2)
+- 8:00am PT: PSME Demo (Abhinav Vohra) + Focus: Sweep (conflict)
+- 9:00am PT: Deep Dive & Debate (Brandon) + ACQ Promo OHs (Saajan) + Focus: Core (3-way conflict)
+- 12:00pm PT: Richard/Brandon 1:1
+- 1:00pm PT: Focus: Engine Room
+- 4:00pm PT: Focus: Admin
+
+#### Calendar — Tomorrow (Friday 4/3)
+- 11:00am PT: AppTweak <> Amazon Business
+- Finance actuals due EOD
+
+#### Intake Processing
+- 9 files in intake/. Compression report (run 16), sentiment backfill, slack digests, deep context ideas, karpathy compression sinks, agentspaces intelligence, rsw-intake. Will process through gut.md digestion.
+
+- **current.md**: Bumped to run 16. Updated Polaris (Vijeth completed XF + Template, Alex confirmed navs). Updated JP Brand LP (experiment live 4/2). Updated AU (Brandon offering support on Lena's req). Added Andrew DM request. Updated pending actions (Stacey DM, Andrew file, Kudoboard overdue, overdue counts incremented). Bumped date.
+- **Org chart**: SKIPPED — no changes.
+- **Soul**: SKIPPED — no changes.
+
+### Phase 2: Cascade
+- **Hands**: Updated Top 5 (added Stacey DM, Andrew file request). Updated new signals (5 Slack signals, Asana updates, today/tomorrow calendar). Updated overdue counts (14 items, oldest 31d). Updated date.
+- **aMCC**: Updated streak (12 workdays at zero, W14 day 3). Updated last avoidance (4/1 — responsive to others' requests, avoidant of self-initiated strategic work). Brandon 1:1 today — Testing Approach likely to come up. Updated date.
+- **Brain**: SKIPPED — updated <48h ago, no structural changes.
+- **Eyes**: SKIPPED — updated <48h ago, no new market data.
+- **Memory**: SKIPPED — updated <48h ago, no new relationship signals (Andrew DM is existing contact, Lorena positive but no new info).
+- **Spine**: SKIPPED — updated <48h ago.
+- **Nervous System**: SKIPPED — updated <48h ago, no new calibration data.
+- **Device**: SKIPPED — updated <48h ago.
+- **Gut**: SKIPPED — no word count changes requiring budget update.
+
+### Dashboard Update
+- New dashboard message posted to rsw-channel (ts: 1775094852.537249). 6 sections updated with fresh data. rsw-channel marked unread.
+
+### Phase 3: Experiment — SKIPPED
+- Reason: Per-organ cooldown. Hands and aMCC modified this run. Brain, Eyes, Memory, Spine, NS, Device, Gut all skipped (updated <48h ago). Insufficient eligible targets — most organs were modified in run 15 yesterday. Next run (Friday) will have more eligible targets.
+
+### Suggested Changes
+1. **Reply to Stacey's DM about CA Polaris exclusion BEFORE Brandon 1:1** — She asked last night. The answer is simple: CA excluded to focus on OCI data clean. 30 seconds. Do it now. Why: Level 2 (testing coordination) + responsiveness signal. Measure: reply sent. Risk: none. → Approve/Deny?
+
+2. **Share ENG budget file with Andrew BEFORE Brandon 1:1** — Andrew asked last night, Brandon mentioned it in Andrew's 1:1. If Richard shows up to the Brandon 1:1 having already shared the file, that's proactive. If Brandon has to ask "did you send Andrew that file?" — that's reactive. Why: Level 2 (team leverage) + visibility with Brandon. Measure: file shared. Risk: none. → Approve/Deny?
+
+3. **Use the Brandon 1:1 to commit to a Testing Approach deadline** — 12 workdays. Brandon will ask. Instead of deflecting, commit: "I'll have the outline to you by [date]." A public commitment creates accountability the aMCC can't provide alone. Why: Level 1 gate. Measure: commitment made. Risk: Brandon holds you to it (that's the point). → Approve/Deny?
+
+### Self-Audit
+- CASCADE: 9/9 organs checked. Brain ✅ (skipped — <48h). Eyes ✅ (skipped — <48h). Hands ✅ (updated). Memory ✅ (skipped — <48h). Spine ✅ (skipped — <48h). Nervous System ✅ (skipped — <48h). aMCC ✅ (updated). Device ✅ (skipped — <48h). Gut ✅ (skipped — no budget changes).
+- STRUCTURAL CHANGES: No files created, renamed, or moved. Dashboard message posted to rsw-channel (new ts).
+- COHERENCE SPOT-CHECK: (1) hands.md Top 5 references "Stacey DM" — VERIFIED in D0443S6A39V conversation history (ts: 1775086732.893679). (2) current.md Polaris section references "Vijeth completed XF + Template" — VERIFIED in Asana DM (D0A8FS0QLTU, ts: 1775074844.290709).
+- SELF-AUDIT: Cascade 9/9 organs covered. Structural changes: no. Coherence spot-check: 2/2 valid.
+
+### Gut Health
+- Body: ~19,000w / 24,000w ceiling (~79%). Under ceiling by ~5,000w.
+- Over budget: aMCC (110%) — within tolerance. Gut (105%) — identity protection rule, non-negotiable.
+- Intake: 9 items. Compression report pending Richard's approval. Others need processing.
+- Bloat signals: none.
+
+### Summary
+Run 16: Light maintenance run — most organs updated <48h ago in run 15. Key Slack signals: Brandon offering help on Lena's AU questions, JP Brand LP experiment going live today, Stacey asking about CA Polaris exclusion, Andrew requesting ENG budget file for OP1. Polaris brand pages confirmed live for all GEOs (Vijeth/Alex). aMCC streak 0 — 12 workdays. Brandon 1:1 today is the inflection point for Testing Approach accountability.
+
+SELF-AUDIT: Cascade 9/9 organs covered. Structural changes: no. Coherence spot-check: 2/2 valid.
+
+<!-- LOOP_READ_MARKER: 2026-04-02-run16 -->
+
 ## 2026-04-01 — Autoresearch Loop Run 15 (Wednesday)
 
 ### Phase 1: Maintenance

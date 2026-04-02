@@ -4,7 +4,7 @@
 
 *Operating principle: Protect the habit loop. The aMCC's job is to make the hard thing the default, not the exception. The streak, the escalation ladder, the resistance taxonomy — these are structural nudges that make avoidance harder than action. The intervention should feel like gravity pulling toward the right choice, not a voice yelling to change direction.*
 
-Last updated: 2026-04-01 (loop run 15: 11 workdays at zero, AU weekly update sent but not the hard thing)
+Last updated: 2026-04-02 (loop run 16: 12 workdays at zero, Brandon 1:1 today — Testing Approach should come up)
 
 ---
 
@@ -44,11 +44,11 @@ The streak is the single most important metric in this organ. It measures consec
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| Current streak | 0 days | 11 workdays since hard thing was set (3/20). No Testing Approach outline started. Tuesday 3/31: Richard sent AU PS Weekly Update proactively (good visibility move — Level 2 work), moved meetings for offsite, cancelled AU sync this week. Lena replied with sharp follow-up questions. OCI WW launch milestone hit (FR/IT/ES/JP at 100%). Slack ingestion went live. Still zero Level 1 output. W14 day 2. |
+| Current streak | 0 days | 12 workdays since hard thing was set (3/20). No Testing Approach outline started. Wednesday 4/1: Richard engaged on Slack (ABIX alignment, JP ref tags, Lorena DM). No Level 1 output. W14 day 3. Brandon 1:1 TODAY — Testing Approach will likely come up. |
 | Longest streak | 0 days | Tracking starts 3/20 |
 | Streak resets (total) | 1 | Initial reset from artifact drought |
 | Last hard choice | 3/23 | Deprioritized AEO in favor of higher-leverage Testing Approach doc — strategic decision, not avoidance. |
-| Last avoidance | 3/31 | Tuesday — Richard sent AU PS Weekly Update (proactive, good visibility, Level 2 work) and managed meeting logistics for offsite. Both are legitimate. But the Testing Approach doc was available and unblocked. The AU update is exactly the kind of stakeholder communication Brandon wants to see — but it's not the hard thing. |
+| Last avoidance | 4/1 | Wednesday — Richard engaged on Slack (ABIX alignment with Brandon on Lena's AU questions, JP ref tag discussion, Lorena DM). All legitimate stakeholder communication. But the Testing Approach doc was available and unblocked. Pattern: responsive to others' requests, avoidant of self-initiated strategic work. |
 
 ### Streak History
 Removed — current-state-only principle. Historical data lives in changelog.md.

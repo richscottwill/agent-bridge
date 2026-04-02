@@ -1,5 +1,9 @@
 # Design Document — Slack Context Ingestion
 
+> **NOTE (2026-04-01):** This design doc was the v1 spec. The live system has evolved significantly through iteration:
+> - **v3 (current):** `list_channels` is the source of truth — no static channel list. Richard's sidebar sections determine scan depth. Full DM scanning. Reaction checking. No artificial caps. Proactive search uses a hybrid model (permanent + dynamic queries constructed fresh each cycle). See `slack-channel-registry.json` for the live configuration.
+> - The channel registry, scan state, and guardrails files are still canonical. The design doc's static channel lists, word caps, and tier definitions are superseded.
+
 ## Overview
 
 Slack Context Ingestion adds Slack as a read-only context source for the Body system. The Slack MCP server (`ai-community-slack-mcp`) already provides full read access. The design challenge is filtering — Slack is high-volume, high-frequency, and mostly noise. This system extracts what matters (decisions, action items, status changes, stakeholder signals, hot topics) and routes it to existing organs without creating new routines, new visible steps, or new files Richard has to manage.

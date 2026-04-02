@@ -8,13 +8,12 @@ inclusion: manual
 
 There are two distinct ways the system searches Slack:
 
-### 1. Proactive Search (scheduled — runs during ingestion)
-- Defined in `slack-channel-registry.json → proactive_searches`
-- Runs keyword queries during morning routine and system refresh alongside channel scans
-- Catches signals from channels Richard isn't in, DMs, and cross-org threads
-- Results go through the same relevance filter as channel messages → routed to organs
-- Queries cover: key people (from:@brandoxy, etc.), active projects (OCI, Polaris, Baloo), interests (Kiro, GenBI, AgentSpaces), and org affiliation (Amazon Business, paid acquisition)
-- This is NOT knowledge search — it's signal detection. It writes to organs.
+### 1. Ingestion + Proactive Search (scheduled — runs during morning routine and system refresh)
+- **Channel ingestion:** Every cycle, call `list_channels` to get Richard's full channel list. His sidebar sections (WW Testing, AB PS, AB, AI, Channels) determine scan depth. All DMs with new messages get full ingestion. No static channel list — Slack is the source of truth.
+- **Proactive search:** Goes BEYOND Richard's channel list. Permanent queries (prichwil, "Richard Williams", from:@brandoxy, from:@kataxt) always run. Dynamic queries are constructed fresh each cycle based on today's context — projects, meetings, pending actions, hot topics.
+- **Reaction checking:** For messages tagging Richard, check emoji reactions to determine if he's already acknowledged them.
+- Strategy defined in `slack-channel-registry.json` (ingestion rules, search framework, reaction semantics, people watch).
+- This is signal detection. It writes to organs via the digest.
 
 ### 2. Knowledge Search (on-demand — triggered by conversation)
 - Triggered by Richard's questions or agent reasoning during live chat
@@ -33,7 +32,7 @@ Search community Slack channels when:
 ## How to Search
 
 1. Use the `search` tool with the topic as query
-2. Filter by community channels listed in slack-channel-registry.json → community_channels
+2. Community channels are in Richard's channel list under the "AI" and "Channels" sections — use those as primary search targets
 3. Prefer threads from the last 90 days
 4. Prefer threads with replies over unanswered questions
 5. For relevant threads, retrieve full replies via `batch_get_thread_replies`
@@ -49,10 +48,3 @@ Search community Slack channels when:
 - Do NOT write Knowledge Search results to Body organs or produce Slack Digests
 - Do NOT modify scan state — Knowledge Search operates independently from scheduled scans
 - Do NOT report failed searches to Richard — note the gap internally and proceed with your own knowledge
-
-## Community Channels
-
-Maintained in slack-channel-registry.json → community_channels section.
-Minimum set: agentspaces-interest, amazon-builder-genai-power-users,
-cps-ai-win-share-learn, bedrock-agentcore-interest, abma-genbi-analytics-interest,
-andes-workbench-interest.

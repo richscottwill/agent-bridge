@@ -61,7 +61,7 @@ These are principles I'm actively learning to live by. They apply to everything 
 
 ## My Systems
 - **The Body**: 11-organ system for context, decisions, execution, calibration, and willpower. Navigation: ~/shared/context/body/body.md
-- **RW Trainer**: AI performance coach (steering). Steering: ~/.kiro/steering/rw-trainer.md
+- **RW Trainer**: AI performance coach (agent). Invoked for deep coaching — see Agent Routing Directory.
 - **Morning Routine**: Reads fresh organs → Asana sync → draft replies → To-Do refresh → daily brief → calendar blocks. Hook: 1 · AM: Morning Routine
 - **Meeting Sync**: Multi-source meeting ingestion (Hedy + Outlook) → meetings/ series files. Hook: 2 · EOD: Meeting Sync. Protocol: ~/shared/context/meetings/README.md
 - **Autoresearch Loop**: Maintains organs, runs experiments, cascades changes. Hook: 3 · EOD: System Refresh (after Meeting Sync). Protocol: ~/shared/context/body/heart.md
@@ -93,7 +93,7 @@ When Richard's request touches an agent's domain, route to that agent instead of
 
 | Trigger | Agent | What it owns |
 |---------|-------|-------------|
-| Career coaching, annual review, 1:1 prep, growth planning, or pattern stuck 3+ times in one chat | `rw-trainer` | Deep coaching, leverage assessment, Five Levels analysis. Steering file handles quick checks; agent handles depth. |
+| Career coaching, annual review, 1:1 prep with Brandon or skip-level with Kate, growth planning, Friday retrospective, strategic artifact review (Testing Approach, OP1, AEO POV), tradeoffs between high-leverage tasks, or pattern stuck 3+ times in one chat | `rw-trainer` | Deep coaching, leverage assessment, Five Levels analysis. Reads full body system for context. Quick coaching checks are handled by aMCC (streak, hard thing, avoidance detection) — route to rw-trainer only for depth. |
 | Loop protocol changes, experiment queue, compression rules, word budgets, gut.md or heart.md edits | `karpathy` | Sole authority on heart.md, gut.md, experiment queue, compression techniques. No other agent modifies these files. |
 | "Write W__ callouts" or WBR callout work for any market (AU, MX, US, CA, JP, UK, DE, FR, IT, ES) | `market-analyst` → `callout-writer` | Single parameterized analyst + writer. Pass market and week parameters. Reads {market}-context.md for market-specific rules. Logs agent state to DuckDB. Run analyst first, then writer. |
 | "Review callouts" or quality check on all market callouts | `callout-reviewer` | Runs after all writers. Checks word counts, narrative quality, cross-market coherence. |
@@ -116,7 +116,7 @@ When Richard's request touches an agent's domain, route to that agent instead of
 2. Read ~/shared/context/body/spine.md for bootstrap sequence, tool access, and key IDs
 3. Read ~/shared/context/body/amcc.md — check the streak and the hard thing before doing anything else
 4. Read ~/shared/context/active/current.md for live state
-5. Read ~/.kiro/steering/rw-trainer.md for coaching context and leverage framework
+5. Read ~/shared/context/body/amcc.md for coaching context, streak, and the hard thing
 6. Use my writing style + memory.md relationship graph for any drafted communications
 7. When unsure about context, read the relevant organ before asking me
 8. Save any new learnings to ~/shared/context/intake/ for processing

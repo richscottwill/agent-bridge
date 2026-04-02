@@ -61,11 +61,13 @@ These are live. They execute without Richard thinking.
 - **Feeds into:** Memory (relationships), Nervous System (communication patterns, Loop 7), Eyes (meeting prep)
 
 ### Slack Context Ingestion (Config: channel-registry.json + scan-state.json)
-- **What it does:** Scans Tier 1/2 Slack channels for decisions, action items, status changes, and stakeholder signals. Filters by relevance scoring (people watch, keyword triggers, channel tier). Routes signals to organs during system refresh cascade.
+- **What it does:** Ingests all Slack channels Richard is in (via `list_channels` each cycle) plus DMs with new messages. Sidebar sections determine scan depth: WW Testing and AB PS get full ingestion (all messages + all threads), AB and AI get standard depth, Channels get light scanning. Proactive search goes beyond Richard's channels — permanent queries catch mentions of him and Brandon's activity anywhere, dynamic queries are constructed fresh each cycle based on today's context. Reaction checking on Richard-tagged messages prevents false "unanswered" alarms.
 - **Trigger:** Runs as substep within morning routine and system refresh hooks. Not a separate hook.
-- **Config:** `~/shared/context/active/slack-channel-registry.json` (channels, tiers, people watch) + `~/shared/context/active/slack-scan-state.json` (timestamps, volume tracking, hot topics).
+- **Config:** `~/shared/context/active/slack-channel-registry.json` (ingestion strategy, search framework, reaction semantics, people watch) + `~/shared/context/active/slack-scan-state.json` (timestamps, hot topics, tool invocation log).
+- **Source of truth:** Richard's Slack channel list (`list_channels`). No static channel list in the registry. If Richard joins or leaves a channel, the system adapts automatically.
 - **Guardrails:** Read-only operations only (per slack-guardrails.md). All tool invocations logged to scan state.
-- **First scan:** 4/1 — 9 channels scanned, 4 signals extracted (OCI WW launch, JP preflight, Baloo noindex blocker, team meeting logistics).
+- **No artificial caps.** Ingest everything, synthesize ruthlessly. Bottleneck is at the output stage (what makes it into the brief), not the input stage (what we read from Slack).
+- **First scan:** 4/1 — v1 scanned 9 channels, 4 signals. v2 proactive search surfaced 9 additional signals including 4 Brandon action items from a channel not in the registry. v3 (current) uses `list_channels` as source of truth, section-based depth, full DM scanning, reaction checking.
 
 ### SharePoint Sync (Hook: `sharepoint-sync`)
 - **What it does:** Wiki articles → .docx → OneDrive → SharePoint. Filters: amazon-internal, REVIEW+FINAL. Incremental via SHA-256 hashing.
@@ -151,7 +153,7 @@ Tracks installed system infrastructure only — hooks, agents, tools, and guards
 | DuckDB MCP Server | ✅ | 3/30 | Native SQL for agents via MCP |
 | WBR Callout Pipeline | ✅ | 3/30 | 10-market pipeline (v2). W13 produced. Hook: `wbr-callout-pipeline` |
 | Prediction Engine | ✅ | 3/30 | Bayesian forecasting. CLI: `~/shared/tools/prediction/predict.py` |
-| Slack Ingestion | ✅ | 4/1 | First scan. 9 channels, 4 signals. Config-driven. |
+| Slack Ingestion | ✅ | 4/1 | v3 live. list_channels as source of truth. Section-based depth. Full DM scanning. Reaction checking. No caps. |
 | Attention Tracker | 🔧 | 3/30 | Built, not deployed. For Richard's local Windows machine |
 
 ---

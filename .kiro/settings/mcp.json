@@ -89,7 +89,9 @@
         "list_drafts",
         "lists_items_list",
         "lists_items_info",
-        "self_dm"
+        "self_dm",
+        "post_message",
+        "batch_set_last_read"
       ]
     },
     "radar-mcp": {

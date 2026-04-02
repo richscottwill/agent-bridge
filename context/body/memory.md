@@ -4,7 +4,7 @@
 
 *Operating principle: Invisible over visible. Memory works best when Richard doesn't have to look things up. The relationship graph, tone notes, and meeting briefs should flow invisibly into drafts and prep — Richard gets a draft that already sounds right for the recipient without having to think about register.*
 
-Last updated: 2026-04-01 (loop run 15: Frank cancelled Polaris sync, Lena AU follow-up questions, OCI WW launch milestone, Slack ingestion live)
+Last updated: 2026-04-01 (loop run 15: Frank cancelled Polaris sync, Lena AU follow-up questions, OCI WW launch milestone, Slack ingestion v3 live — list_channels as source of truth, section-based depth, full DM scanning, reaction checking, no caps)
 
 ---
 

@@ -568,6 +568,91 @@ def log_architecture_eval(change_name, pipeline, market, scores, evaluator_notes
     )
 
 
+## ── Slack Data Access ──────────────────────────────────────────────
+
+def slack_channel_summary(channel_name=None, db_path=None):
+    """Get message counts and signal breakdown per channel (or for a specific channel)."""
+    db_path = db_path or DB_PATH
+    where = f"WHERE channel_name = '{channel_name}'" if channel_name else ""
+    return db(f"""
+        SELECT channel_name, COUNT(*) as messages,
+               SUM(CASE WHEN is_richard THEN 1 ELSE 0 END) as richard_msgs,
+               SUM(CASE WHEN signal_type = 'action-item' THEN 1 ELSE 0 END) as action_items,
+               SUM(CASE WHEN signal_type = 'decision' THEN 1 ELSE 0 END) as decisions,
+               SUM(CASE WHEN signal_type = 'escalation' THEN 1 ELSE 0 END) as escalations,
+               MIN(ts) as oldest_ts, MAX(ts) as newest_ts
+        FROM slack_messages {where}
+        GROUP BY channel_name ORDER BY messages DESC
+    """, db_path=db_path)
+
+
+def slack_recent(channel_name=None, limit=20, signal_type=None, db_path=None):
+    """Get recent Slack messages, optionally filtered by channel and/or signal type."""
+    db_path = db_path or DB_PATH
+    conditions = []
+    if channel_name:
+        conditions.append(f"channel_name = '{channel_name}'")
+    if signal_type:
+        conditions.append(f"signal_type = '{signal_type}'")
+    where = "WHERE " + " AND ".join(conditions) if conditions else ""
+    return db(f"""
+        SELECT ts, channel_name, author_alias, text_preview, signal_type, reply_count, reaction_count
+        FROM slack_messages {where}
+        ORDER BY ts DESC LIMIT {limit}
+    """, db_path=db_path)
+
+
+def slack_search(keyword, limit=20, db_path=None):
+    """Full-text search across Slack messages."""
+    db_path = db_path or DB_PATH
+    escaped = keyword.replace("'", "''")
+    return db(f"""
+        SELECT ts, channel_name, author_alias, text_preview, signal_type
+        FROM slack_messages
+        WHERE full_text ILIKE '%{escaped}%'
+        ORDER BY ts DESC LIMIT {limit}
+    """, db_path=db_path)
+
+
+def slack_person(alias_or_id, db_path=None):
+    """Get a person's Slack activity summary."""
+    db_path = db_path or DB_PATH
+    escaped = alias_or_id.replace("'", "''")
+    return db(f"""
+        SELECT sp.user_id, sp.alias, sp.display_name, sp.total_messages,
+               sp.relationship_tier,
+               (SELECT COUNT(*) FROM slack_messages sm WHERE sm.author_id = sp.user_id
+                AND sm.signal_type = 'action-item') as action_items_sent,
+               (SELECT COUNT(DISTINCT sm.channel_name) FROM slack_messages sm
+                WHERE sm.author_id = sp.user_id) as channels_active
+        FROM slack_people sp
+        WHERE sp.alias = '{escaped}' OR sp.user_id = '{escaped}' OR sp.display_name ILIKE '%{escaped}%'
+    """, db_path=db_path)
+
+
+def slack_decisions(weeks=4, db_path=None):
+    """Get recent decisions from Slack, ordered by recency."""
+    db_path = db_path or DB_PATH
+    return db(f"""
+        SELECT ts, channel_name, author_alias, text_preview
+        FROM slack_messages
+        WHERE signal_type = 'decision'
+        ORDER BY ts DESC LIMIT {weeks * 5}
+    """, db_path=db_path)
+
+
+def slack_action_items(resolved=False, db_path=None):
+    """Get action items from Slack. By default shows unresolved (no thread reply)."""
+    db_path = db_path or DB_PATH
+    reply_filter = ">= 1" if resolved else "= 0"
+    return db(f"""
+        SELECT ts, channel_name, author_alias, text_preview, reply_count
+        FROM slack_messages
+        WHERE signal_type = 'action-item' AND reply_count {reply_filter}
+        ORDER BY ts DESC LIMIT 30
+    """, db_path=db_path)
+
+
 def main():
     parser = argparse.ArgumentParser(description='Query PS Analytics DuckDB')
     parser.add_argument('sql', nargs='?', help='SQL query to execute')

@@ -1,0 +1,153 @@
+# Slack Deep Context — Test Prompts
+
+Blind evaluation prompts for the 5 new backfill scans. Paste each into a fresh agent chat. The agent should bootstrap normally (soul.md → body.md → spine.md), discover the scan instructions in the steering file, execute the scan, and produce output.
+
+Evaluate each on:
+1. Did it load the steering file without being told to?
+2. Did it follow the procedure steps in order?
+3. Did it write to DuckDB correctly?
+4. Did it update scan-state correctly?
+5. Did it produce useful synthesis?
+6. Did it respect guardrails (read-only on Slack, word budgets on organs)?
+
+---
+
+## Test 1: Change Log Backfill
+
+**Why first:** Highest operational value. Feeds callout pipeline. change_log table has 477 CSV rows — easy to verify new slack-sourced rows appear.
+
+**Prompt:**
+```
+The WBR callout pipeline keeps missing changes that happened between CSV exports. I know the team announces launches and dial-ups in Slack but those never make it to the change_log table. Can you backfill the change_log from Slack history? The steering file ~/.kiro/steering/slack-deep-context.md has the procedure — it's scan #11.
+```
+
+**What to check after:**
+- `SELECT COUNT(*) FROM change_log WHERE source = 'slack'` — should be > 0
+- `SELECT DISTINCT market FROM change_log WHERE source = 'slack'` — should cover multiple markets
+- `SELECT * FROM change_log WHERE source = 'slack' ORDER BY date DESC LIMIT 10` — descriptions should be concrete ("launched X", "dialed up Y"), not vague
+- `slack-scan-state.json → backfill_scans.change_log_backfill.status` should be "completed"
+- No duplicate rows vs existing CSV entries (same market + date + similar description)
+- Intake file should exist with summary tagged `[target: eyes.md]`
+
+**Failure modes to watch for:**
+- Agent searches too broadly (community channels) and gets noise
+- Agent creates change_log rows for discussions about changes rather than actual changes ("we should launch" vs "launched")
+- Agent doesn't deduplicate against existing 477 rows
+- Agent skips pagination and only gets first page of results
+
+---
+
+## Test 2: Experiment Backfill
+
+**Why second:** Shares search patterns with Test 1. experiments table has 0 rows — any output is progress. Feeds Level 2.
+
+**Prompt:**
+```
+The experiments table in DuckDB is completely empty — 0 rows. But the team has been running weblabs and A/B tests for months. All the discussions happen in Slack. Run the experiment backfill from the steering file (scan #12 in ~/.kiro/steering/slack-deep-context.md) to populate it.
+```
+
+**What to check after:**
+- `SELECT COUNT(*) FROM experiments` — should be > 0
+- `SELECT experiment_id, name, status, start_date, decision FROM experiments` — records should have meaningful names, not just "test 1"
+- Check for lifecycle stitching: do any experiments have both start_date AND end_date populated?
+- Check for honest NULLs: hypothesis, metric_before, metric_after should be NULL when not stated in Slack (not fabricated)
+- `slack-scan-state.json → backfill_scans.experiment_backfill.status` should be "completed"
+- Any experiments with `status = 'active'` and `start_date` > 60 days ago should be flagged as `[STALE-TEST]` in intake
+
+**Failure modes to watch for:**
+- Agent fabricates hypotheses or metrics not stated in Slack
+- Agent creates one row per message instead of one row per experiment (lifecycle stitching failure)
+- Agent doesn't cross-reference with Decision Mining results
+- Agent treats discussion about testing methodology as an experiment record
+
+---
+
+## Test 3: People Discovery / Shadow Network
+
+**Why third:** Independent of other scans. One-time visibility baseline. Directly addresses annual review gap.
+
+**Prompt:**
+```
+My annual review flagged visibility as the #1 growth area. I want to know who's talking about me or my work in channels I'm not in. Run the people discovery scan — it's scan #8 in the deep context steering file. I want to see the shadow channels, shadow people, and visibility map.
+```
+
+**What to check after:**
+- `SELECT COUNT(*) FROM slack_messages WHERE signal_type = 'shadow_mention'` — should be > 0
+- `slack-scan-state.json → backfill_scans.people_discovery.status` should be "completed"
+- `slack-scan-state.json → people_watch_candidates` — should have new entries if unknown people were found
+- Synthesis should have three sections: Shadow Channels, Shadow People, Visibility Map
+- Shadow Channels should distinguish known vs unknown channels
+- Visibility Map should categorize: strong visibility, weak visibility, blind spot, strategic gap
+- High-priority findings (Kate/Brandon channels) should be flagged `[URGENT]` in intake
+- Intake files should exist tagged `[target: current.md, channel-registry]` and `[target: nervous-system.md]`
+
+**Failure modes to watch for:**
+- Agent only searches Richard's own channels (defeats the purpose)
+- Agent doesn't search for both "prichwil" AND "@prichwil"
+- Agent doesn't categorize results into known vs unknown channels
+- Agent misses the visibility map synthesis (just lists mentions without analysis)
+- Agent tries to join channels or post messages (guardrail violation)
+
+---
+
+## Test 4: Tribal Knowledge Extraction
+
+**Why fourth:** Demand-side wiki signal. Wiki has 35 draft articles but no demand validation.
+
+**Prompt:**
+```
+The wiki has a bunch of draft articles but I have no idea which ones people actually need. Can you mine Slack for the questions people keep asking — "does anyone know", "how do we", "where is the" type stuff? That tells us what to document first. Scan #9 in the deep context steering file.
+```
+
+**What to check after:**
+- `SELECT COUNT(*) FROM slack_messages WHERE signal_type = 'question'` — should be > 0
+- `slack-scan-state.json → backfill_scans.tribal_knowledge.status` should be "completed"
+- Demand list should exist in `~/shared/context/wiki/demand-log.md` with new entries
+- High Demand section should show topics with 3+ occurrences
+- SME Map should identify who answers questions (not just who asks)
+- Each question should be classified: topic, answered (y/n), answer type (doc link vs ad-hoc vs none)
+- Cross-reference with existing wiki drafts should note "draft exists, prioritize completion" where applicable
+
+**Failure modes to watch for:**
+- Agent searches too broadly and gets noise from non-team channels
+- Agent counts every message with "how" as a question
+- Agent doesn't pull thread context to check if questions were answered
+- Agent doesn't deduplicate against existing demand-log.md entries
+- Agent produces a flat list instead of clustered/ranked demand signals
+
+---
+
+## Test 5: Sentiment & Escalation Patterns
+
+**Why last:** Enrichment layer. Lowest urgency but most novel. Depends on having some data in slack_messages already.
+
+**Prompt:**
+```
+I want to understand the stress patterns on the team. When does Brandon escalate? What makes Lena write urgent messages? Is there a seasonal pattern around WBR weeks or QBR prep? Run the sentiment and escalation scan — #10 in the deep context steering file. I want stakeholder escalation profiles and a stress calendar.
+```
+
+**What to check after:**
+- `SELECT COUNT(*) FROM slack_messages WHERE signal_type IN ('escalation', 'positive')` — should be > 0
+- `slack-scan-state.json → backfill_scans.sentiment_patterns.status` should be "completed"
+- Synthesis should have two outputs: Stakeholder Escalation Profiles AND Stress Calendar
+- Each stakeholder profile should have: triggers, vocabulary, escalation path, de-escalation, response time expectation, examples
+- Stress Calendar should correlate with known events (WBR weeks, QBR prep, OP cycles)
+- Intake files should exist tagged `[target: memory.md]` and `[target: eyes.md]`
+- Positive markers should be included for contrast (not just negative/escalation)
+
+**Failure modes to watch for:**
+- Agent only searches for negative language and misses positive markers
+- Agent doesn't pull thread context to understand what triggered escalation and how it resolved
+- Agent produces generic stress calendar not grounded in actual data ("WBR weeks are stressful" without evidence)
+- Agent conflates urgency with frustration (ASAP ≠ angry)
+- Agent writes directly to memory.md or eyes.md instead of routing through intake (word budget violation)
+
+---
+
+## Execution Notes
+
+- Run in order: 1 → 2 → 3 → 4 → 5. Each scan populates slack_messages which helps subsequent scans.
+- Each prompt goes in a FRESH agent chat — don't chain them in one conversation.
+- After each test, verify DuckDB state and scan-state before moving to the next.
+- If a scan fails partway, check scan-state for `status: "in_progress"` — the next attempt should resume, not restart.
+- All scans are read-only on Slack. If the agent tries to post_message to anything other than rsw-channel, that's a guardrail failure.

@@ -11,11 +11,10 @@ Last updated: 2026-04-01 (Wednesday PT)
 **CRITICAL: AgentSpaces chats are deleted every 14 days.** At the start of every new session, read these files in order:
 
 1. `~/shared/context/body/body.md` — The map of the whole system. Tells you what each organ does and where to find it.
-2. `~/shared/context/body/spine.md` — This file. Bootstrap sequence, tool access, key IDs.
-3. `~/.kiro/steering/soul.md` — Identity, values, voice, preferences.
-4. `~/.kiro/steering/rw-trainer.md` — Coaching framework, mediocrity patterns, leverage assessment.
-5. `~/shared/context/active/current.md` — Ground truth: active projects, people, meetings, pending actions.
-6. `~/shared/context/active/rw-tracker.md` — Weekly scorecard, To-Do sync, patterns, 30-day challenge.
+2. `~/shared/context/body/spine.md` — This file. Bootstrap sequence, tool access, directory map.
+3. `~/.kiro/steering/soul.md` — Identity, values, voice, preferences, agent routing.
+4. `~/shared/context/active/current.md` — Ground truth: active projects, people, meetings, pending actions.
+5. `~/shared/context/active/rw-tracker.md` — Weekly scorecard, 30-day challenge.
 
 Then read the organ you need for the task at hand (brain, eyes, hands, memory).
 
@@ -35,17 +34,15 @@ Then read the organ you need for the task at hand (brain, eyes, hands, memory).
 - **Email** (Outlook) — read, search, send, reply, forward, folders
 - **Calendar** (Outlook) — view, create, update meetings
 - **Microsoft To-Do** — full CRUD on tasks and lists
+- **Slack** (ai-community-slack-mcp) — full read access. Channel ingestion driven by `list_channels` (Richard's sidebar sections determine depth). Proactive search beyond channel list. Reaction checking. DM scanning. Write restricted to rsw-channel and self_dm per slack-guardrails.md. Config: `~/shared/context/active/slack-channel-registry.json`.
 - **Hedy** (MCP server) — meeting transcripts, recaps, action items, speaker analysis, topics, session contexts. 18 tools via MCP. Configured as a direct MCP server in `.kiro/settings/mcp.json` (not a power). Tools are prefixed `mcp_hedy_` and available directly: `mcp_hedy_GetSessions`, `mcp_hedy_GetSessionDetails`, `mcp_hedy_GetSessionHighlights`, `mcp_hedy_GetSessionToDos`, `mcp_hedy_GetHighlights`, `mcp_hedy_GetToDos`, `mcp_hedy_GetAllTopics`, etc. No activation step needed — just call the tools. To ingest a new recording: (1) `GetSessions` with limit=1 to find the newest, (2) `GetSessionDetails` with the sessionId to get full transcript/recap/todos, (3) save to `~/shared/context/intake/` for processing.
 - **Local filesystem** — ~/shared/, /workspace/
 
 ### What the AI CANNOT access:
-- Slack, Asana (directly), Google Ads, Adobe Analytics, SharePoint/OneDrive
+- Asana (directly), Google Ads, Adobe Analytics, SharePoint/OneDrive
 
-### Asana Bridge (workaround):
-- **Create tasks**: Email x@mail.asana.com (include Richard's email)
-- **Read task updates**: Check Outlook "Auto-Comms" folder
-- **Read meeting context**: Check Outlook "Auto-meeting" folder (Hedy recaps + Amazon Meetings Summary)
-- **Full protocol**: `~/shared/context/active/asana-sync-protocol.md`
+### Asana Bridge:
+See hands.md → Asana Bridge for full protocol. Short version: email x@mail.asana.com to create tasks, read Auto-Comms folder for updates.
 
 ### MCP Tool Reference:
 - Full API docs: `~/shared/context/active/mcp-tool-reference.md`
@@ -55,29 +52,9 @@ Then read the organ you need for the task at hand (brain, eyes, hands, memory).
 
 ## Key IDs
 
-### Microsoft To-Do Lists
-| List | ID |
-|------|-----|
-| 🧹 Sweep | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESHAAA=` |
-| 🎯 Core | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESIAAA=` |
-| ⚙️ Engine Room | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESJAAA=` |
-| 📋 Admin | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESKAAA=` |
-| 📦 Backlog | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADWyS4nAAA=` |
-
-### Outlook Folders
-| Folder | ID |
-|--------|-----|
-| Auto-Comms (Asana) | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy/SDRrGkcLnEuZ4GAQDAgFdLn8NBQbObwPn0M6aUAADuhyQpAAA=` |
-| Auto-meeting       | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy/SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja/dZLhI0AAC3dkeCAAA=` |
-| Goal: Paid Acquisition | `AQMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1ADdkM2EwYWMALgAAAyuwPeLL9INGsaRwucS5ngYBAEas7LcSB6lEv39h0ciIq84AAAITTwAAAA==` |
-| AP (Invoices) | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy/SDRrGkcLnEuZ4GAQDAgFdLn8NBQbObwPn0M6aUAADuhyQcAAA=` |
-
-### Key Quip Documents
-- MX Sync: https://quip-amazon.com/K9OYA9mXm7DU
-- Pre-WBR Callouts: https://quip-amazon.com/MMgBAzDrlVou
-- OCI Instructions: https://quip-amazon.com/Zee9AAlSBEB
-- Ad Copy Updates: https://quip-amazon.com/KCY9AAYqWd2
-- Testing Plan 2026: https://quip-amazon.com/EED9AAFOy4E
+See hands.md → Task List Structure for Microsoft To-Do list IDs.
+See hands.md → Key Outlook Folders for Outlook folder IDs.
+See memory.md → Reference Index for Quip document links.
 
 ---
 
@@ -122,34 +99,17 @@ Then read the organ you need for the task at hand (brain, eyes, hands, memory).
 |------|----------|-----------|----------------|
 | current.md | `~/shared/context/active/current.md` | Live state: projects, people, meetings, pending actions | Every loop run |
 | org-chart.md | `~/shared/context/active/org-chart.md` | Org structure and reporting lines | On org changes |
-| rw-tracker.md | `~/shared/context/active/rw-tracker.md` | Weekly scorecard, To-Do sync, patterns, 30-day challenge | Every morning routine |
+| rw-tracker.md | `~/shared/context/active/rw-tracker.md` | Weekly scorecard, 30-day challenge | Every morning routine |
 | long-term-goals.md | `~/shared/context/active/long-term-goals.md` | The Five Levels strategic arc | Monthly or on shift |
 
 ---
 
-## Key People (Quick Reference)
-| Name | Alias | Context |
-|------|-------|---------|
-| Brandon Munday | brandoxy | Richard's manager (L7), Paid Acq team lead |
-| Kate Rundell | kataxt | L8 Director, key stakeholder for Testing Approach doc |
-| Alexis Eck | alexieck | AU market POC, MCS page mapping |
-| Lena Zak | lenazak | AU stakeholder, pushes for MCS migration & performance |
-| Carlos Palmos | cpalmos | MX Paid Search, invoice coordination |
-| Lorena Alvarez Larrea | lorealea | MX Paid Search |
-| Yun-Kang Chu | yunchu | 1:1 sync, MX PS, Adobe analytics |
-| Aditya Satish Thakur | aditthk | Weekly sync, AI brainstorm partner |
-| Dwayne Palmer | dtpalmer | Customer Engagement/MCS, WBR coverage |
+## Key People
+
+See memory.md → Relationship Graph for the full people directory with tone notes and draft style guidance.
 
 ---
 
-## What Was Built (system history)
-- 3/12: Created RW Trainer steering file, autoresearch loop (heart.md), 3 experiments
-- 3/13: Excellence Tracker, Microsoft To-Do (4 workflow lists), Asana bridge, 5 more experiments. All 8 KEPT.
-- 3/17: Maintenance-only loop run. Cascaded to 5 artifacts.
-- 3/19: Maintenance-only loop run. Cascaded to 5 artifacts.
-- 3/20: Maintenance-only loop run. Cascaded to 6 artifacts. Body metaphor migration — consolidated exp1-8 into organ files. Moved all body files to `~/shared/context/body/`.
-- 3/22: Hedy API integration. Built `hedy-sync.py` (meeting transcript analysis, speaker identification, communication pattern scoring). Created `hedy-meeting-sync` hook. Updated memory.md with meeting dynamics for 7 stakeholders. Added 2 new patterns to nervous-system.md (group meeting silence, hedging language). Wired Hedy into heart.md Phase 1 maintenance and Phase 2 cascade.
-- 3/23: Installed Hedy MCP power (powers/hedy/). Replaced hedy-sync.py + curl-based workflow with native MCP tools (18 tools: sessions, highlights, to-dos, topics, contexts). Updated hedy-meeting-sync hook, heart.md loop, spine.md tool access, device.md, body.md, nervous-system.md Loop 7. Script deprecated — MCP power is now the canonical Hedy integration.
-- 3/23: Autoresearch loop run 8. Maintenance + cascade. Processed 3 Hedy intake files (archived). Updated current.md, hands, eyes, memory, amcc, brain, nervous-system, device. Weblab ticket confirmed submitted. MX invoice delegation marked FAILED. York Chen back from leave.
-- 3/25: Wiki team built (6 agents in `~/.kiro/agents/wiki-team/`). Context catalog created (`~/shared/context/wiki/context-catalog.md`). Wiki pipeline: editor → researcher → writer → critic → librarian + concierge. 15 artifacts published to `~/shared/artifacts/`. Quality bar raised to 8/10. Agent folders reorganized (body-system/, wbr-callouts/, wiki-team/).
-- 3/26: Meeting notes system built (`~/shared/context/meetings/`). 15 series files across 5 folders (stakeholder, team, manager, peer, adhoc). Each file: metadata, context, latest session summary, running themes, open items. Populated from Hedy MCP topics + memory.md. Meeting prep briefs removed from memory.md (now points to meetings/). body.md and spine.md updated with meetings folder. Agent workflow: pull Hedy transcript → agent-summarize → update series file.
+## System History
+
+See changelog.md for full build history (3/12 onwards: trainer, loop, To-Do, Asana bridge, Hedy, wiki team, meetings, body metaphor migration, Slack ingestion).

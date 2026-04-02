@@ -1,381 +1,210 @@
 {
-  "version": "1.0",
-  "last_updated": "2026-04-01T00:00:00Z",
+  "version": "3.0",
+  "last_updated": "2026-04-01T12:00:00Z",
   "updated_by": "system",
-  "tiers": {
-    "1": "Priority \u2014 scanned every cycle",
-    "2": "Watch \u2014 scanned on interval or keyword trigger",
-    "3": "Archive/Ignore \u2014 never scanned"
+
+  "philosophy": {
+    "core": "Richard's Slack channel list IS the source of truth. Call list_channels each cycle — that's what to scan. The registry defines HOW to scan and WHERE to search beyond the channel list. No static channel lists. No artificial caps. Ingest everything, synthesize ruthlessly.",
+    "two_layers": {
+      "layer_1_channel_ingestion": "Read every channel Richard is in. Depth determined by sidebar section. list_channels is called fresh each cycle — if Richard joins or leaves a channel, the system adapts automatically.",
+      "layer_2_proactive_search": "Search BEYOND Richard's channel list. Find mentions of him in channels he's not in. Find discussions about his projects in channels he doesn't know about. Discover channels he should join. This is where the dynamic thinking framework lives."
+    }
   },
-  "channels": [
-    {
-      "channel_id": "C0993SRL6FQ",
-      "channel_name": "rsw-channel",
-      "tier": 1,
-      "organ_targets": [
-        "hands",
-        "current"
-      ],
-      "scan_interval_hours": null,
-      "keyword_triggers": [],
-      "notes": "Richard's private channel. Always scan. Primary workspace for notes, reminders, and agent communication."
+
+  "channel_ingestion": {
+    "source": "list_channels (called fresh each cycle — channelTypes: public_and_private, dm, group_dm)",
+    "section_rules": {
+      "description": "Richard's sidebar sections determine ingestion depth. The agent reads the section name from list_channels and applies the matching rule. If a channel has no section or an unknown section, default to 'standard'.",
+      "rules": {
+        "WW Testing": {
+          "depth": "full",
+          "description": "Core working channels for worldwide testing workstream. Full ingestion: all messages + all threads + reaction checks on Richard-tagged messages.",
+          "five_levels": "L2 — Drive WW Testing"
+        },
+        "AB PS": {
+          "depth": "full",
+          "description": "Core paid search team channels. Full ingestion: all messages + all threads + reaction checks. This is where the team works day-to-day.",
+          "five_levels": "L1-L2 — daily execution and testing coordination"
+        },
+        "AB": {
+          "depth": "standard",
+          "description": "Broader Amazon Business org channels. Read all messages, pull threads selectively (3+ replies, Richard-tagged, People Watch authors). Good for org awareness, strategic signals, cross-team coordination.",
+          "five_levels": "L1-L2 — visibility, org awareness, stakeholder signals"
+        },
+        "AI": {
+          "depth": "standard",
+          "description": "AI and agent development channels. Read all messages, pull threads selectively. Rich with Level 3-5 signals: tool adoption, agent patterns, platform updates.",
+          "five_levels": "L3-L5 — automation, zero-click, agentic orchestration"
+        },
+        "Channels": {
+          "depth": "light",
+          "description": "General interest, announcements, personal channels. Skim for anything that mentions Richard, paid search, or Amazon Business. Don't pull threads unless directly relevant.",
+          "five_levels": "Peripheral — occasional org signals"
+        }
+      },
+      "dm_rules": {
+        "depth": "full",
+        "description": "DMs and group DMs are where candid coordination happens. The API returns ALL DMs (50+ with pagination), not just the sidebar top 10. Scan any DM with new messages since last scan — read or unread doesn't matter. The system needs the context regardless of whether Richard already saw it.",
+        "scanning_logic": [
+          "1. Call list_channels with channelTypes=['dm'] and limit=100. Paginate if next_cursor exists.",
+          "2. Call list_channels with channelTypes=['group_dm'] and limit=100.",
+          "3. For each DM: pull messages since last scan timestamp (from scan state). If new messages exist, ingest them.",
+          "4. Skip DMs with is_user_deleted=true and no new messages.",
+          "5. Full ingestion on any DM with new messages — all messages + threads since last scan."
+        ]
+      }
     },
-    {
-      "channel_id": "C044UG8MCSZ",
-      "channel_name": "ab-paid-search-global",
-      "tier": 1,
-      "organ_targets": [
-        "current",
-        "hands",
-        "eyes"
-      ],
-      "scan_interval_hours": null,
-      "keyword_triggers": [],
-      "notes": "Global Paid Search team channel. Core team discussions, decisions, and status updates across all markets."
+    "depth_definitions": {
+      "full": {
+        "messages": "ALL messages since last scan",
+        "threads": "ALL threads with any replies (reply_count > 0)",
+        "reactions": "Check reactions on messages tagging Richard",
+        "synthesis": "Full narrative synthesis — what happened, what's resolved, what's open"
+      },
+      "standard": {
+        "messages": "ALL messages since last scan",
+        "threads": "Threads with 3+ replies, threads tagging Richard, threads from People Watch authors",
+        "reactions": "Check reactions on messages tagging Richard",
+        "synthesis": "Signal extraction — decisions, action items, status changes, mentions"
+      },
+      "light": {
+        "messages": "ALL messages since last scan (skim for relevance)",
+        "threads": "Only threads that directly tag Richard or mention paid search / Amazon Business",
+        "reactions": "Only if Richard is tagged",
+        "synthesis": "Flag only if directly relevant to Richard's work"
+      }
     },
-    {
-      "channel_id": "C0470FHVBAR",
-      "channel_name": "ab-paid-search-eu",
-      "tier": 1,
-      "organ_targets": [
-        "current",
-        "eyes",
-        "hands"
+    "unread_optimization": "list_channels returns unread counts and last_read timestamps. Use these to prioritize: channels with unreads get scanned first. Channels with mention_count > 0 get highest priority. Use last_read as the 'oldest' parameter for batch_get_conversation_history — this naturally scopes to what Richard hasn't seen yet.",
+    "process": [
+      "1. Call list_channels (public_and_private) — get all channels with sections, unread counts, last_read timestamps",
+      "2. Call list_channels (dm) — get all DMs",
+      "3. Call list_channels (group_dm) — get all group DMs",
+      "4. Sort by priority: mention_count > 0 first, then unreads, then by section (WW Testing > AB PS > AB > AI > Channels)",
+      "5. For each channel, apply the depth rule from its section",
+      "6. batch_get_conversation_history using last_read as oldest (or last_scan_ts from scan state, whichever is older — catch messages Richard read but the system hasn't processed)",
+      "7. For threads: batch_get_thread_replies per depth rules",
+      "8. For Richard-tagged messages: reaction_tool to check acknowledgment",
+      "9. Synthesize per depth level",
+      "10. No caps on messages, threads, or signals. Read everything the depth rule says to read."
+    ]
+  },
+
+  "proactive_search": {
+    "description": "Layer 2: search BEYOND Richard's channel list. This is where the agent finds signals in channels Richard isn't in, discovers new channels, and catches cross-org discussions about his work. The channel ingestion handles everything Richard has joined. Proactive search handles everything else.",
+
+    "permanent": {
+      "description": "Always run. These catch signals that channel ingestion can't — mentions of Richard in channels he's not in.",
+      "queries": [
+        {"query": "prichwil", "reason": "Direct alias mention anywhere on Slack — channels Richard isn't in, cross-org threads"},
+        {"query": "\"Richard Williams\"", "reason": "Full name mention — catches references where alias isn't used"},
+        {"query": "from:@brandoxy", "reason": "Manager messages in channels Richard isn't in — Brandon is in more channels than Richard"},
+        {"query": "from:@kataxt", "reason": "Skip-level director — strategic signals in leadership channels Richard can't see"}
       ],
-      "scan_interval_hours": null,
-      "keyword_triggers": [],
-      "notes": "EU Paid Search channel. Covers DE, FR, IT, ES, UK markets. Key for weblab updates and EU-specific decisions."
+      "notes": "These overlap with channel ingestion for channels Richard IS in — that's fine. The dedup rule handles it. The value is catching what's OUTSIDE his channel list."
     },
-    {
-      "channel_id": "C044UGEJ76Z",
-      "channel_name": "ab-ps_jp",
-      "tier": 1,
-      "organ_targets": [
-        "current",
-        "eyes",
-        "hands"
+
+    "dynamic": {
+      "description": "Agent constructs fresh each cycle based on today's context. These go beyond Richard's channels to find signals he wouldn't otherwise see.",
+      "inputs_to_read": [
+        "current.md — active projects, pending actions, who Richard owes responses to",
+        "Today's calendar — who is Richard meeting? What topics?",
+        "scan_state.hot_topics — what's trending?",
+        "people_watch — who's active?",
+        "Email/Asana signals from this cycle",
+        "Channel ingestion results — what topics came up that might have broader discussion elsewhere?"
       ],
-      "scan_interval_hours": null,
-      "keyword_triggers": [],
-      "notes": "Japan Paid Search channel. JP market operations, OCI rollout tracking, and market-specific testing."
-    },
-    {
-      "channel_id": "C06R6R19LG0",
-      "channel_name": "ab-paid-search-oci",
-      "tier": 1,
-      "organ_targets": [
-        "current",
-        "eyes"
+      "query_philosophy": [
+        "DEFAULT TO BROAD. You're searching outside Richard's channels — cast wide.",
+        "PEOPLE SEARCHES find activity in channels Richard isn't in. from:@alias catches everything that person said anywhere.",
+        "TOPIC SEARCHES find discussions Richard doesn't know about. 'paid search' in a channel Richard isn't in could surface a reorg, a new tool, or someone asking about his team.",
+        "DISCOVERY SEARCHES find channels Richard should join. If a topic keeps surfacing in a channel he's not in, flag it.",
+        "LEVEL 3-5 SEARCHES mine community channels for automation patterns, AEO/AI Overviews discussions, agent orchestration insights, tool adoption signals.",
+        "No caps. Run as many queries as the context demands."
       ],
-      "scan_interval_hours": null,
-      "keyword_triggers": [],
-      "notes": "OCI (Offsite Customer Interactions) channel. Cross-market OCI rollout status, Google MCC access, and partner coordination."
-    },
-    {
-      "channel_id": "C06997HRWG0",
-      "channel_name": "ab-outbound-marketing",
-      "tier": 1,
-      "organ_targets": [
-        "current",
-        "hands",
-        "memory"
-      ],
-      "scan_interval_hours": null,
-      "keyword_triggers": [],
-      "notes": "Brandon's team channel. Team-wide announcements, org updates, and cross-functional coordination. Manager messages always high-relevance."
-    },
-    {
-      "channel_id": "C065KKT53DJ",
-      "channel_name": "ab-paid-search-abix",
-      "tier": 1,
-      "organ_targets": [
-        "current",
-        "eyes"
-      ],
-      "scan_interval_hours": null,
-      "keyword_triggers": [],
-      "notes": "ABIX (Amazon Business Intelligence Exchange) Paid Search channel. Data and analytics discussions for PS team."
-    },
-    {
-      "channel_id": "C08HJT14HD2",
-      "channel_name": "baloo-search-and-mcs",
-      "tier": 2,
-      "organ_targets": [
-        "current",
-        "eyes"
-      ],
-      "scan_interval_hours": 24,
-      "keyword_triggers": [
-        "Baloo",
-        "MCS",
-        "redirect"
-      ],
-      "notes": "Baloo search engine and MCS (Managed Campaign Service) discussions. Watch for redirect expansion and search algorithm changes."
-    },
-    {
-      "channel_id": "C0ADCCWRYU9",
-      "channel_name": "mcs-ps-redirect-expansion",
-      "tier": 2,
-      "organ_targets": [
-        "current",
-        "eyes"
-      ],
-      "scan_interval_hours": 24,
-      "keyword_triggers": [
-        "redirect",
-        "MCS",
-        "expansion"
-      ],
-      "notes": "MCS-PS redirect expansion project channel. Track redirect rollout progress and PS integration milestones."
-    },
-    {
-      "channel_id": "C052PSHPUTT",
-      "channel_name": "ext-apptweak-amazon-business",
-      "tier": 2,
-      "organ_targets": [
-        "current",
-        "eyes"
-      ],
-      "scan_interval_hours": 48,
-      "keyword_triggers": [
-        "AppTweak",
-        "app store"
-      ],
-      "notes": "External vendor channel with AppTweak. App store optimization and competitive intelligence. Lower frequency scan."
-    },
-    {
-      "channel_id": "C06M4NND3AN",
-      "channel_name": "ab-paid-search-cps",
-      "tier": 2,
-      "organ_targets": [
-        "current",
-        "eyes"
-      ],
-      "scan_interval_hours": 48,
-      "keyword_triggers": [
-        "CPS",
-        "partnership"
-      ],
-      "notes": "CPS (Channel Partnership Solutions) channel. Partnership discussions and cross-channel coordination. Lower frequency scan."
+      "thinking_framework": [
+        "WHO is talking about Richard's work outside his channels? Search for teammates and stakeholders who are in channels Richard isn't.",
+        "WHAT projects have cross-org visibility? Search for project names that might be discussed in leadership channels, cross-team channels, or community channels.",
+        "WHAT's happening in the Level 3-5 space? Search community channels for: tool adoption patterns, AI wins that could inspire Richard's team, agent architectures, Kiro/AgentSpaces updates, AEO/zero-click discussions.",
+        "WHAT channels should Richard join? If a search consistently surfaces relevant signals from a channel Richard isn't in, flag it as a join recommendation.",
+        "WHAT did channel ingestion surface that needs broader context? If a topic came up in a team channel, search for the same topic across all of Slack to get the full picture."
+      ]
     }
-  ],
-  "community_channels": [
-    {
-      "channel_id": "C0A1JD8FCUV",
-      "channel_name": "agentspaces-interest",
-      "member_count": 15447,
-      "topics": [
-        "AgentSpaces",
-        "DevSpaces",
-        "MCP",
-        "Kiro",
-        "agent development"
-      ],
-      "notes": "Knowledge search only \u2014 not scanned by ingester. Large community for AgentSpaces, DevSpaces, MCP tooling, and Kiro development."
+  },
+
+  "reaction_checking": {
+    "richard_user_id": "U040ECP305S",
+    "description": "Richard acknowledges messages with reactions instead of text replies. A reaction IS a response.",
+    "when_to_check": "Any message tagging Richard that appears to request action or a response.",
+    "semantics": {
+      "confirmed_done": ["white_check_mark", "heavy_check_mark", "check", "done", "completed"],
+      "acknowledged": ["eyes", "thumbsup", "+1", "ok_hand", "raised_hands", "pray", "point_up"],
+      "working_on_it": ["hourglass", "hourglass_flowing_sand", "hammer_and_wrench", "gear"],
+      "any_reaction": "Any reaction from U040ECP305S means he saw the message. Downgrade urgency."
     },
-    {
-      "channel_id": "C08GJKNC3KM",
-      "channel_name": "amazon-builder-genai-power-users",
-      "member_count": 35410,
-      "topics": [
-        "GenAI",
-        "Bedrock",
-        "AI tools",
-        "LLM"
-      ],
-      "notes": "Knowledge search only \u2014 not scanned by ingester. Largest GenAI community. Bedrock, LLM usage patterns, and AI tooling discussions."
-    },
-    {
-      "channel_id": "C09LU3K7KS8",
-      "channel_name": "cps-ai-win-share-learn",
-      "member_count": 5174,
-      "topics": [
-        "AI wins",
-        "best practices",
-        "automation"
-      ],
-      "notes": "Knowledge search only \u2014 not scanned by ingester. AI success stories, best practices, and automation patterns from CPS org."
-    },
-    {
-      "channel_id": "C096H6QNW6M",
-      "channel_name": "bedrock-agentcore-interest",
-      "member_count": 7020,
-      "topics": [
-        "Bedrock",
-        "AgentCore",
-        "agents"
-      ],
-      "notes": "Knowledge search only \u2014 not scanned by ingester. Bedrock AgentCore community for agent development patterns and updates."
-    },
-    {
-      "channel_id": "C0A1J4QG3CY",
-      "channel_name": "abma-genbi-analytics-interest",
-      "member_count": 141,
-      "topics": [
-        "GenBI",
-        "analytics",
-        "ABMA data"
-      ],
-      "notes": "Knowledge search only \u2014 not scanned by ingester. Small ABMA GenBI analytics community. Niche but relevant for data-driven PS insights."
-    },
-    {
-      "channel_id": "C096T4SK3EY",
-      "channel_name": "andes-workbench-interest",
-      "member_count": 20178,
-      "topics": [
-        "Andes Workbench",
-        "development tools"
-      ],
-      "notes": "Knowledge search only \u2014 not scanned by ingester. Andes Workbench community for development tooling and workflow automation."
-    }
-  ],
+    "impact": [
+      "confirmed_done reaction → not unanswered, lower urgency",
+      "acknowledged reaction → seen but may still need action, moderate urgency",
+      "any reaction → downgrade from 'X days stale' to 'acknowledged via reaction'",
+      "no reaction AND no reply → flag as unanswered, full urgency"
+    ],
+    "thread_context": "Also check if Richard replied in the thread, replied in a different thread on the same topic, or if someone else resolved the ask. Slack conversations are non-linear."
+  },
+
   "people_watch": {
     "derived_from": "memory.md relationship graph",
     "last_derived": "2026-04-01T00:00:00Z",
     "always_high_relevance": [
-      {
-        "slack_user_id": "U03H47TS508",
-        "alias": "brandoxy",
-        "name": "Brandon Munday",
-        "reason": "Richard's manager (L7) \u2014 all messages score +100 regardless of content"
-      }
+      {"slack_user_id": "U03H47TS508", "alias": "brandoxy", "name": "Brandon Munday", "reason": "Richard's manager (L7)"}
     ],
     "boosted": [
-      {
-        "slack_user_id": "W017LQ6RFL3",
-        "alias": "alexieck",
-        "name": "Alexis Eck",
-        "reason": "AU POC, active stakeholder for AU market operations"
-      },
-      {
-        "slack_user_id": "U026XAVP2E6",
-        "alias": "lorealea",
-        "name": "Lorena Alvarez Larrea",
-        "reason": "MX primary PS stakeholder, key contact for MX market"
-      },
-      {
-        "slack_user_id": "U06AQT6EZED",
-        "alias": "yunchu",
-        "name": "Yun-Kang Chu",
-        "reason": "Peer, MX/Adobe/Modern Search collaboration"
-      },
-      {
-        "slack_user_id": "U02NX7TMMHB",
-        "alias": "staceygu",
-        "name": "Stacey Gu",
-        "reason": "US/EU ops, cross-market operational coordination"
-      },
-      {
-        "slack_user_id": "U0840CQJVUK",
-        "alias": "awirtz",
-        "name": "Andrew Wirtz",
-        "reason": "Data team, Flash inputs and analytics support"
-      },
-      {
-        "slack_user_id": "UNRESOLVED_dtpalmer",
-        "alias": "dtpalmer",
-        "name": "Dwayne Palmer",
-        "reason": "MCS/Website, WBR coverage. Slack user ID not yet resolved \u2014 resolve on next scan cycle."
-      },
-      {
-        "slack_user_id": "UNRESOLVED_kataxt",
-        "alias": "kataxt",
-        "name": "Kate Rundell",
-        "reason": "L8 Director, skip-level manager. Slack user ID not yet resolved \u2014 resolve on next scan cycle."
-      },
-      {
-        "slack_user_id": "W017DGBF7KQ",
-        "alias": "theimes",
-        "name": "Todd Heimes",
-        "reason": "L10 VP, org leader. Messages indicate strategic direction."
-      },
-      {
-        "slack_user_id": "U02V22BFQQ2",
-        "alias": "saajanc",
-        "name": "Saajan Chowhan",
-        "reason": "UK market contact, regional PS coordination"
-      },
-      {
-        "slack_user_id": "U03MS7JBCVC",
-        "alias": "danhaert",
-        "name": "Daniel Haertel",
-        "reason": "EU market contact, regional PS coordination"
-      },
-      {
-        "slack_user_id": "U05THBAQYLT",
-        "alias": "foongste",
-        "name": "Stella Foong",
-        "reason": "APAC market contact, regional PS coordination"
-      },
-      {
-        "slack_user_id": "U09FZ4Q4L4B",
-        "alias": "arthamm",
-        "name": "Mukesh Artham",
-        "reason": "MCS/OCI engineer, technical implementation partner"
-      },
-      {
-        "slack_user_id": "U0205E7TVPH",
-        "alias": "kpantham",
-        "name": "Kiran Pantham",
-        "reason": "MCS/OCI engineer, technical implementation partner"
-      }
+      {"slack_user_id": "W017LQ6RFL3", "alias": "alexieck", "name": "Alexis Eck", "reason": "AU POC"},
+      {"slack_user_id": "U026XAVP2E6", "alias": "lorealea", "name": "Lorena Alvarez Larrea", "reason": "MX primary PS stakeholder"},
+      {"slack_user_id": "U06AQT6EZED", "alias": "yunchu", "name": "Yun-Kang Chu", "reason": "Peer, MX/Adobe/Modern Search"},
+      {"slack_user_id": "U02NX7TMMHB", "alias": "staceygu", "name": "Stacey Gu", "reason": "US/EU ops, OCI coordination"},
+      {"slack_user_id": "U0840CQJVUK", "alias": "awirtz", "name": "Andrew Wirtz", "reason": "Testing doc collaborator, EU"},
+      {"slack_user_id": "UNRESOLVED_dtpalmer", "alias": "dtpalmer", "name": "Dwayne Palmer", "reason": "MCS/Website, WBR coverage"},
+      {"slack_user_id": "UNRESOLVED_kataxt", "alias": "kataxt", "name": "Kate Rundell", "reason": "L8 Director, skip-level"},
+      {"slack_user_id": "W017DGBF7KQ", "alias": "theimes", "name": "Todd Heimes", "reason": "L10 VP"},
+      {"slack_user_id": "U02V22BFQQ2", "alias": "saajanc", "name": "Saajan Chowhan", "reason": "UK market"},
+      {"slack_user_id": "U03MS7JBCVC", "alias": "danhaert", "name": "Daniel Haertel", "reason": "EU market"},
+      {"slack_user_id": "U05THBAQYLT", "alias": "foongste", "name": "Stella Foong", "reason": "APAC market"},
+      {"slack_user_id": "U09FZ4Q4L4B", "alias": "arthamm", "name": "Mukesh Artham", "reason": "MCS/OCI engineer"},
+      {"slack_user_id": "U0205E7TVPH", "alias": "kpantham", "name": "Kiran Pantham", "reason": "MCS/OCI engineer"}
     ],
-    "candidate_tracking": {
-      "threshold": "3+ interactions in 7 days",
-      "candidates": []
-    }
+    "candidate_tracking": {"threshold": "3+ interactions in 7 days", "candidates": []}
   },
-  "default_tier_for_new_channels": 3,
-  "proactive_searches": {
-    "description": "Keyword-based searches that run during ingestion alongside channel scans. Catches signals from channels Richard isn't in, DMs, and cross-org threads. Uses the Slack search tool with date filtering (since last scan). Results go through the same relevance filter as channel messages.",
-    "scan_cadence": "Every ingestion cycle (morning routine + system refresh)",
-    "dedup_rule": "If a search result was already captured by a channel scan (same channel_id + ts), skip it.",
-    "queries": {
-      "people": {
-        "description": "Search for messages from/mentioning key people — catches DMs, cross-posted messages, and activity in channels we don't scan.",
-        "queries": [
-          {"query": "from:@brandoxy", "reason": "Manager — catch all messages including DMs and channels we're not in", "priority": 1},
-          {"query": "from:@kataxt", "reason": "Skip-level director — strategic signals", "priority": 1},
-          {"query": "from:@alexieck", "reason": "AU POC — catch DMs and cross-channel activity", "priority": 2},
-          {"query": "from:@lorealea", "reason": "MX primary stakeholder — catch DMs and cross-channel activity", "priority": 2},
-          {"query": "from:@dtpalmer", "reason": "MCS/Website — WBR coverage partner", "priority": 2},
-          {"query": "from:@theimes", "reason": "VP — strategic direction signals", "priority": 2}
-        ],
-        "organ_targets": ["current", "memory", "hands"]
-      },
-      "projects": {
-        "description": "Search for active project keywords — catches discussions in channels we don't know about.",
-        "queries": [
-          {"query": "OCI polaris baloo", "reason": "Core active projects — cross-channel signals", "priority": 1},
-          {"query": "\"paid search\" \"amazon business\"", "reason": "Broader PS/AB discussions across the org", "priority": 2},
-          {"query": "\"AI Max\" OR \"ai max\" google ads", "reason": "AI Max testing — new initiative, signals may be scattered", "priority": 2},
-          {"query": "\"ad copy\" OR \"landing page\" testing AB", "reason": "Testing workstream signals", "priority": 3}
-        ],
-        "organ_targets": ["current", "eyes"]
-      },
-      "interests": {
-        "description": "Topics Richard is personally interested in for Level 3-5 work and professional development.",
-        "queries": [
-          {"query": "kiro power MCP agent", "reason": "Kiro ecosystem — Level 5 (agentic orchestration), tooling insights", "priority": 2},
-          {"query": "GenBI analytics ABMA", "reason": "GenBI/analytics — data tooling for PS", "priority": 3},
-          {"query": "AgentSpaces DevSpaces", "reason": "Platform Richard builds on — catch outages, new features, best practices", "priority": 2}
-        ],
-        "organ_targets": ["device", "brain"]
-      },
-      "org_affiliation": {
-        "description": "Broader org-level signals — Amazon Business, outbound marketing, paid acquisition.",
-        "queries": [
-          {"query": "\"amazon business\" marketing paid acquisition", "reason": "Org-level discussions that may reference PS team or Richard's work", "priority": 3},
-          {"query": "\"outbound marketing\" OR \"paid acquisition\" team", "reason": "Team-level mentions in other channels", "priority": 3}
-        ],
-        "organ_targets": ["current", "eyes"]
-      }
-    },
-    "volume_cap": {
-      "max_queries_per_cycle": 10,
-      "max_results_per_query": 20,
-      "max_signals_from_search": 10,
-      "notes": "Priority 1 queries always run. Priority 2 run if budget allows. Priority 3 run only on morning routine (not system refresh). This prevents search from dominating the ingestion cycle."
-    }
+
+  "synthesis": {
+    "description": "The output stage. All the ingestion and search data gets compressed into actionable signals. No word caps. No signal caps. Write as much as the data warrants.",
+    "digest_rules": [
+      "Produce a Slack digest in intake/ only if there are actionable signals.",
+      "No word cap. If there are 20 signals, write 20 signals. Truncating input is worse than a longer digest.",
+      "Prioritize: action items for Richard > decisions that affect Richard > status changes on his projects > FYI signals > Level 3-5 insights.",
+      "[ACTION-RW] prefix on anything requiring Richard's direct action.",
+      "Include source attribution: channel, author, timestamp, thread link.",
+      "For Level 3-5 signals from community channels, include a 'LEVEL 3-5 INSIGHTS' section — what's happening in the ecosystem that Richard should know about for his growth trajectory.",
+      "Flag channel join recommendations if proactive search consistently surfaces relevant signals from channels Richard isn't in."
+    ]
+  },
+
+  "rsw_channel_behavior": {
+    "channel_id": "C0993SRL6FQ",
+    "intake_scanning": true,
+    "richard_user_id": "U040ECP305S",
+    "system_message_markers": [
+      "Daily Brief —",
+      "System Dashboard",
+      "📋",
+      "🖥️",
+      "[DRAFT for"
+    ],
+    "action_patterns": [
+      "remind me to",
+      "follow up with",
+      "todo:",
+      "TODO",
+      "need to",
+      "don't forget"
+    ]
   }
 }

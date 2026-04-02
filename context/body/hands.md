@@ -4,57 +4,26 @@
 
 *Operating principle: Reduce decisions, not options. Every task should have a clear next action, a pre-written draft if it involves communication, and a due date that drives My Day. Richard opens his list and acts — he doesn't plan.*
 
-Last updated: 2026-04-01 (loop run 15)
-Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, Slack ingestion (first scan), AU PS Weekly Update thread
+Last updated: 2026-04-02 (loop run 16)
+Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, Slack ingestion, DM scan
 
 ---
 
-## Priority Actions (ordered by urgency)
+## Priority Actions
 
-### P0 — THE HARD THING: Testing Approach Doc
-| # | Action | Due | Status | Est. Time | Blockers |
-|---|--------|-----|--------|-----------|----------|
-| 0 | **Start Testing Approach doc outline** — Kate meeting Apr 16. Draft exists (op1-ps-testing-framework-draft.md). Andrew active in Loop doc. This is the highest-leverage artifact. Directly addresses Annual Review #1 gap (visibility). | **Apr 16** | NOT STARTED | 2-3 hours (outline) | None — just start |
+<!-- Full task list: db("SELECT id, priority, description, due_date, status, blockers, category FROM task_queue WHERE status != 'DONE' ORDER BY priority, due_date") -->
+<!-- Overdue: db("SELECT id, description, due_date, DATEDIFF('day', due_date, CURRENT_DATE) as days_overdue FROM task_queue WHERE due_date < CURRENT_DATE AND status NOT IN ('DONE','BLOCKED') ORDER BY due_date") -->
 
-### P1 — This Week Deliverables
-| # | Action | Due | Status | Est. Time | Blockers |
-|---|--------|-----|--------|-----------|----------|
-| 1 | **Create one-page Polaris rollout timeline** with dates and owners (Brandon request 3/23) | **This week (OVERDUE)** | NOT STARTED | 30-45 min | None |
-| 2 | **AI Max test design** | **3/28 (OVERDUE)** | NOT STARTED | 2 hours | None |
-| 3 | **Respond to Lorena — Q2 expected spend for MX PO** | **ASAP (4d overdue)** | NOT STARTED | 15 min | None |
-| 4 | **Coordinate MCS tracking/attribution post-migration** | **This week (OVERDUE)** | NOT STARTED | 30 min | None |
-| 5 | **MX/AU confirm budgets** | **3/25 (2d OVERDUE)** | NOT STARTED | 15 min | R&O tasks |
+### Top 5 This Week (snapshot — refreshed each morning routine)
+| # | Action | Due | Status |
+|---|--------|-----|--------|
+| P0 | **Testing Approach doc outline** — Kate Apr 16. THE HARD THING. | Apr 16 | NOT STARTED (12 workdays) |
+| P1 | **Respond to Lena** — AU LP URL analysis + CPA overstating. Brandon offering support. | ASAP (2d) | NOT STARTED |
+| P1 | **Reply to Stacey DM** — CA exclusion from Polaris 4/7 testing | ASAP (1d) | NOT STARTED |
+| P1 | **Share ENG budget file with Andrew** — OP1 recalculation | ASAP (1d) | NOT STARTED |
+| P1 | **Respond to Lorena** — Q2 expected spend for MX PO | ASAP (8d overdue) | NOT STARTED |
 
-### P2 — Overdue Items
-| # | Action | Due | Status | Blockers |
-|---|--------|-----|--------|----------|
-| 6 | Flash topics | 3/17 (9 DAYS OVERDUE) | NOT STARTED | None |
-| 7 | Raise rest of year PO for PAM US | 3/1 (25 DAYS OVERDUE) | NOT STARTED | None |
-| 8 | PAM R&O input | 3/10 (16 DAYS OVERDUE) | NOT STARTED | None |
-| 9 | WW redirect — Adobe Ad Cloud reporting | 3/19 (7 DAYS OVERDUE) | NOT STARTED | Address at Adobe Bi-Weekly TODAY |
-| 10 | OCI TT/suffix — FR to 25% | 3/20 (6 DAYS OVERDUE) | NOT STARTED | None |
-| 11 | MX Auto page — Vijeth footer | 3/20 (6 DAYS OVERDUE) | NOT STARTED | Vijeth |
-
-### P3 — Monday (3/30)
-| # | Action | Due | Status | Notes |
-|---|--------|-----|--------|-------|
-| 12 | Baloo: keyword cost data + "don't use Google" blurb | 3/30 | ✅ DONE | Delivered via ABCA-371 comment + Quip sheet (26 keywords) |
-| 13 | Baloo: follow up with Brandon on MBR click-cost guardrails | 3/30 | NOT STARTED | Close the loop from MBR concern |
-| 14 | Memorial Day round 2 creative assets feedback | 3/31 (Tue) | NOT STARTED | From Onsite Events meeting 3/27 |
-| 15 | Flash final assembly and submission | 3/30 | SECTIONS WRITTEN | MX, AU, Bid Strategy, Brand LP done. Paid App blocked (Andrew). |
-| 16 | Kudoboard for Kate Vives | 4/1 (Wed) | NOT STARTED | From Ariel Sencil 3/27 |
-
-### P5 — This Week+
-| # | Action | Due | Status | Blockers |
-|---|--------|-----|--------|----------|
-| 16 | Compile rolling 4-week keyword CPA dashboard for AU | Next week | NOT STARTED | None |
-| 17 | AU URL migration to Polaris | W13 | Alexis mapping received, migration completing | None |
-| 18 | OP1 doc — contributor sections | W13 | Andrew active. Need Stacey, Yun, Adi. | Contributors |
-| 19 | Kingpin Goals — MX Jan/Feb/Mar | OVERDUE | BLOCKED — needs Andes data pull | Andes access |
-| 20 | Triage MS Advertising paused accounts | W13 | 10x emails, needs investigation | None |
-| 21 | MX invoice delegation — decide new owner | OVERDUE | Carlos VOID, needs Lorena or Richard | Decision needed |
-| 22 | Follow up with Brandon on "walk on water" promo criteria | W13 | NOT STARTED | None |
-| 23 | Proactively share AU CPC and Polaris outcomes with Lena | W13 | NOT STARTED | None |
+14 items overdue (oldest: PAM US PO, 31 days). 2 blocked (MX Auto page on Vijeth, Kingpin on Andes). 28 total tasks in queue.
 
 ## Recurring Execution Work (Google Ads: MX, AU, Paid App)
 
@@ -74,39 +43,23 @@ Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, Slack ingestion 
 
 ---
 
-## Dependencies Map
-- Action 1 (AEO POV) → no blockers, just write it
-- Actions 2-4 (admin) → no blockers, just do them
-- Action 5 (OFA) → waiting Bhawna resend
-- Actions 14-15 (Polaris LP) → depends on Alex translations (3/26)
-- Action 17 (budgets) → blocked by Actions 3-4 (R&O)
-- Action 22 (Kingpin) → blocked by Andes data pull
+## Dependencies
+- Testing Approach doc → no blockers, just start
+- Polaris timeline → no blockers
+- MX Auto page → blocked by Vijeth footer
+- Kingpin Goals → blocked by Andes data
+- MX/AU budgets → blocked by R&O tasks
 
-## What's Overdue
-| Task | Original Due | Days Overdue |
-|------|-------------|--------------|
-| Raise PO for PAM US | 3/1 | 26 days |
-| PAM R&O input | 3/10 | 17 days |
-| Flash topics | 3/17 | 10 days |
-| Kingpin Goals | 3/17 | 10 days (blocked) |
-| WW redirect Adobe reporting | 3/19 | 8 days |
-| OCI FR to 25% | 3/20 | 7 days |
-| MX Auto page (Vijeth) | 3/20 | 7 days |
-| MX invoice delegation | 3/21 | 6 days (VOID — Carlos transitioned, needs new owner) |
-| MX/AU confirm budgets | 3/25 | 2 days |
-| Lorena Q2 spend | 3/25 | 2 days (request, not hard deadline) |
-| AI Max test design | 3/28 | 0 days (due tomorrow, effectively overdue) |
-
-## New Signals (since 3/31)
-- 🆕 Lena replied to AU PS Weekly Update (4/1): wants landing page URL data, repeat visitor analysis, CPA overstating investigation. High-visibility — respond promptly.
-- 🆕 Alexis thanked Richard for AU weekly update insights (4/1). Positive signal.
-- 🆕 Frank Volinsky CANCELLED Polaris weblab sync (3/31) — got requirements from Alex. No action needed.
-- 🆕 OCI WW Launch: FR/IT/ES/JP at 100%. CA on track 04/07. First QBR goal of 2026. Brandon deferred JP ref tag taxonomy to post-launch.
-- 🆕 Baloo noindex blocker flagged in Slack (3/31) — meta tag requirement not implemented, launch blocker. Tech team handling.
-- 🆕 Richard moved Adi sync, MX sync, Google sync, PSME demo to accommodate offsite schedule.
-- 🆕 Slack Context Ingestion LIVE — first scan completed. 9 channels scanned, 4 signals extracted.
-- 📅 TODAY 4/1: Richard/Adi sync 12pm PT. Finance actuals due EOD 4/3. Kudoboard for Kate Vives due.
-- 📅 TOMORROW 4/2: PSME Demo 8am, Deep Dive & Debate 9am, ACQ Promo OHs 9am, Richard/Brandon 12pm PT.
+## New Signals (since 4/1)
+- 🆕 Brandon @mentioned Richard in ABIX (4/1 9:19pm): offering help on Lena's AU follow-up questions. Richard confirmed WW streams alignment. Brandon hasn't looked at Lena's req yet — LMK if help needed.
+- 🆕 Stacey DM (4/1 11:38pm): Asking about CA exclusion from Polaris 50/50 testing on 4/7. Needs reply with rationale.
+- 🆕 Andrew DM (4/1 9:18pm): Requesting ENG max budget calculation file (audience size × frequency). Brandon mentioned in Andrew's 1:1 for OP1 recalculation.
+- 🆕 Lorena DM (4/1): Richard told her he'd update after current task. She replied "Thank you!" Positive signal but Q2 spend still not sent (8d overdue).
+- 🆕 Vijeth completed ps-brand XF + Template (Asana 4/1). Alex confirmed all navs working. Polaris brand pages live for all GEOs.
+- 🆕 JP Brand LP experiment: Stacey confirmed ref_= carry-over works. Targeting live 4/2. Brandon confirmed.
+- 🆕 Kudoboard for Kate Vives: was due 4/1, now OVERDUE.
+- 📅 TODAY 4/2: PSME Demo 8am, Deep Dive & Debate 9am (Brandon) + ACQ Promo OHs 9am (conflict), Richard/Brandon 1:1 12pm. Focus blocks: Sweep 8am, Core 9am, Engine Room 1pm, Admin 4pm.
+- 📅 TOMORROW 4/3: AppTweak <> Amazon Business 11am. Finance actuals due EOD.
 
 ---
 
@@ -168,14 +121,4 @@ Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, Slack ingestion 
 
 ## Integrations & Access
 
-**What the agent CAN access:**
-- Email (Outlook) — read, search, send, reply, forward, folders
-- Calendar (Outlook) — view, create, update meetings
-- Microsoft To-Do — full CRUD on tasks and lists
-- Hedy (API) — meeting transcripts, recaps, action items, speaker analysis. Script: `~/shared/context/tools/hedy-sync.py`. Hook: `hedy-meeting-sync`.
-- Local filesystem — ~/shared/, /workspace/
-
-**What the agent CANNOT access:**
-- Slack, Asana (directly), Google Ads, Adobe Analytics, SharePoint/OneDrive
-
-**MCP tool reference**: `~/shared/context/active/mcp-tool-reference.md` — full API docs for aws-outlook-mcp (triple-nested JSON, shell escaping gotchas, Python helper function)
+See spine.md → Tool Access & Integrations for full list of what the agent can/cannot access.

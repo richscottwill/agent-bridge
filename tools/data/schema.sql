@@ -65,3 +65,76 @@ CREATE TABLE task_queue(id INTEGER PRIMARY KEY, task_type VARCHAR, market VARCHA
 CREATE TABLE weekly_metrics(market VARCHAR, "week" VARCHAR, date_range VARCHAR, num_days INTEGER, "cost" DOUBLE, clicks INTEGER, impressions INTEGER, regs INTEGER, cpa DOUBLE, cpc DOUBLE, cvr DOUBLE, ctr DOUBLE, brand_cost DOUBLE, brand_clicks INTEGER, brand_imp INTEGER, brand_regs INTEGER, brand_cpa DOUBLE, brand_cpc DOUBLE, brand_cvr DOUBLE, nb_cost DOUBLE, nb_clicks INTEGER, nb_imp INTEGER, nb_regs INTEGER, nb_cpa DOUBLE, nb_cpc DOUBLE, nb_cvr DOUBLE, ingested_at TIMESTAMP DEFAULT(current_timestamp), source_file VARCHAR, PRIMARY KEY(market, "week"));;
 
 -- weekly_metrics: 510 rows as of export
+
+
+-- ============================================================
+-- Slack Deep Context: Conversation Database
+-- Added: 2026-04-01
+-- Spec: .kiro/specs/slack-deep-context/
+-- ============================================================
+
+CREATE TABLE slack_messages(
+    ts VARCHAR PRIMARY KEY,
+    channel_id VARCHAR NOT NULL,
+    channel_name VARCHAR,
+    thread_ts VARCHAR,
+    author_id VARCHAR NOT NULL,
+    author_alias VARCHAR,
+    author_name VARCHAR,
+    text_preview VARCHAR,
+    full_text VARCHAR,
+    is_richard BOOLEAN DEFAULT(CAST('f' AS BOOLEAN)),
+    is_thread_reply BOOLEAN DEFAULT(CAST('f' AS BOOLEAN)),
+    reply_count INTEGER DEFAULT(0),
+    reaction_count INTEGER DEFAULT(0),
+    richard_reacted BOOLEAN DEFAULT(CAST('f' AS BOOLEAN)),
+    relevance_score INTEGER,
+    signal_type VARCHAR,
+    ingested_at TIMESTAMP DEFAULT(current_timestamp));;
+
+-- slack_messages: 0 rows as of schema creation
+
+CREATE TABLE slack_threads(
+    thread_ts VARCHAR PRIMARY KEY,
+    channel_id VARCHAR NOT NULL,
+    channel_name VARCHAR,
+    topic_summary VARCHAR,
+    participant_aliases VARCHAR,
+    message_count INTEGER,
+    decision_extracted VARCHAR,
+    action_items VARCHAR,
+    first_ts TIMESTAMP,
+    last_ts TIMESTAMP,
+    ingested_at TIMESTAMP DEFAULT(current_timestamp));;
+
+-- slack_threads: 0 rows as of schema creation
+
+CREATE TABLE slack_people(
+    user_id VARCHAR PRIMARY KEY,
+    alias VARCHAR,
+    display_name VARCHAR,
+    first_interaction DATE,
+    last_interaction DATE,
+    total_messages INTEGER DEFAULT(0),
+    dm_messages INTEGER DEFAULT(0),
+    channel_messages INTEGER DEFAULT(0),
+    channels_shared INTEGER DEFAULT(0),
+    avg_response_time_hours DOUBLE,
+    relationship_tier VARCHAR,
+    ingested_at TIMESTAMP DEFAULT(current_timestamp));;
+
+-- slack_people: 0 rows as of schema creation
+
+CREATE TABLE slack_topics(
+    topic VARCHAR,
+    "week" VARCHAR,
+    channel_count INTEGER,
+    message_count INTEGER,
+    participant_count INTEGER,
+    key_participants VARCHAR,
+    status VARCHAR DEFAULT('active'),
+    related_project VARCHAR,
+    ingested_at TIMESTAMP DEFAULT(current_timestamp),
+    PRIMARY KEY(topic, "week"));;
+
+-- slack_topics: 0 rows as of schema creation

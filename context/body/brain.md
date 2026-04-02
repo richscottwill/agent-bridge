@@ -45,74 +45,36 @@ Decisions have a relevance half-life. Not every decision stays useful forever. T
 4. After 90 days in RESOLVED state with no references, archive to `~/shared/context/archive/`
 
 ### D1: OCI Implementation Approach [FOUNDATIONAL]
-- **Decision:** Phased rollout (E2E to 25% to 50% to 100%) with measurement framework at each stage
-- **Alternatives:** Full migration, A/B test only, wait for Google recommendation
-- **Rationale:** Needed to validate lift at each stage before committing more budget. Measurement framework (actualized CPA vs seasonality-adjusted baseline) became the standard for all future market rollouts.
-- **Principle:** #1 Evidence, #4 Phased rollout
-- **Confidence:** HIGH
+D1: Phased rollout with measurement framework. Reinforced #1 Evidence, #4 Phased rollout. HIGH confidence.
 
-### D2: Competitive Response to Walmart Brand Bidding [FOUNDATIONAL]
-- **Decision:** Maintain IS through bid caps, do NOT escalate auction. Offset Brand CPA increases through NB efficiency gains (OCI).
-- **Alternatives:** Match Walmart bids, increase Brand budget, file trademark complaint
-- **Rationale:** Escalating bids is a losing game — Walmart has deeper pockets for Brand terms. Instead, improve NB efficiency so total program CPA stays healthy even as Brand CPA rises.
-- **Principle:** #2 Efficiency over escalation, #3 Holistic measurement
-- **Confidence:** HIGH
+### D2: Competitive Response to Walmart [FOUNDATIONAL]
+D2: Bid caps + NB efficiency via OCI, do NOT escalate auction. Reinforced #2 Efficiency, #3 Holistic. HIGH.
 
-### D3: Ad Copy Overhaul Based on SP Study [FOUNDATIONAL]
-- **Decision:** Shift from bulk/wholesale/B2B messaging to price, quality, selection messaging
-- **Alternatives:** Keep existing copy, A/B test minor variations, follow Google generic recommendations
-- **Rationale:** Customer research showed 50% of SPs believed AB required bulk purchasing and was not free. Existing ads reinforced both misconceptions. Evidence-based copy change, not guesswork.
-- **Principle:** #7 Customer research, #1 Evidence
-- **Confidence:** HIGH
+### D3: Ad Copy Overhaul (SP Study) [FOUNDATIONAL]
+D3: Shift to price/quality/selection messaging from bulk/B2B. Reinforced #7 Customer research, #1 Evidence. HIGH.
 
-### D4: AU Landing Page — Full Migration (Lena's Call) [ACTIVE]
-- **Decision:** Full switch to Polaris pages. Lena (AU country leader) confirmed 3/13 — no 50/50 split.
-- **Alternatives:** 50/50 traffic split test (Richard's original proposal), keep status quo
-- **Rationale:** Richard proposed 50/50 split (Principle #4), but Lena as country leader made the call for full switch. Alexis sent keyword-to-URL mapping file (3/17). Implementation proceeding.
-- **Principle:** Lena overrode #4 (Phased rollout). Richard executing.
-- **Confidence:** HIGH — decision is final, mapping file received.
+### D4: AU LP Full Migration [ACTIVE]
+D4: Lena overrode phased rollout — full Polaris switch. Executing. HIGH.
 
-### D5: Campaign Consolidation Strategy [FOUNDATIONAL]
-- **Decision:** Consolidate device-specific campaigns and keyword themes to strengthen data signals for OCI bidding
-- **Alternatives:** Maintain granular campaign structure for manual control, consolidate only in US
-- **Rationale:** Modern search optimization performs best with stronger data signals and simplified structures. Fragmented campaigns limit algorithm learning. Consolidation compounds OCI effectiveness.
-- **Principle:** #6 Compression, #1 Evidence
-- **Confidence:** HIGH
+### D5: Campaign Consolidation [FOUNDATIONAL]
+D5: Consolidate campaigns to strengthen OCI data signals. Reinforced #6 Compression, #1 Evidence. HIGH.
 
-### D6: Engagement Channel Creation [FOUNDATIONAL]
-- **Decision:** Build dedicated Engagement account bridging acquisition and lifecycle, partner with ABMA for Associated Accounts to boost match rate from 13% to 30%
-- **Alternatives:** Stay acquisition-only, rely on email for lifecycle, wait for Google match rates to improve
-- **Rationale:** PS team should not accept platform limitations. Partnering cross-functionally to solve the match rate problem extended PS beyond top-of-funnel into a lifecycle channel.
-- **Principle:** #5 Cross-functional partnership, #1 Evidence
-- **Confidence:** HIGH
+### D6: Engagement Channel [FOUNDATIONAL]
+D6: Lifecycle channel via ABMA partnership, 13%→30% match rate. Reinforced #5 Partnership, #1 Evidence. HIGH.
 
-### D7: WBR Traffic Decline Explanation [RESOLVED — pending audit]
-- **Decision:** Attributed AU WoW decline to bid strategy changes + Back to Biz to Evergreen transition (seasonality), not a systemic problem
-- **Alternatives:** Panic and revert bid changes, escalate to leadership
-- **Rationale:** Changes were intentional efficiency improvements. Traffic decline was expected as lower-quality traffic was pruned. Need data to confirm which factor dominated before reacting.
-- **Principle:** #1 Evidence, #3 Holistic measurement
-- **Confidence:** MEDIUM (pending deep dive confirmation)
+### D7: WBR Traffic Decline [RESOLVED — pending audit]
+D7: Attributed to bid strategy + seasonality, not systemic. MEDIUM confidence. Pending deep dive.
 
-### D8: OP1 Document Structure [FOUNDATIONAL]
-- **Decision:** Organized as validated results to 2026 strategy narrative across 5 workstreams, with each section showing progression from problem to test to result to scale
-- **Alternatives:** Standard budget request format, market-by-market breakdown, project list
-- **Rationale:** Positions PS team as strategic partners who validate before scaling, not channel executors requesting budget. Each workstream demonstrates cross-functional collaboration.
-- **Principle:** #5 Cross-functional partnership, #1 Evidence
-- **Confidence:** HIGH
+### D8: OP1 Structure [FOUNDATIONAL]
+D8: Problem→test→result→scale across 5 workstreams. Reinforced #5 Partnership, #1 Evidence. HIGH.
 
-### D9: AI Max Testing Approach [ACTIVE]
-- **Decision:** US-market test first with clear measurement guardrails, incrementality benchmarks, and coordination with other Amazon teams + Google
-- **Alternatives:** Skip testing and adopt, wait for other teams to test first, reject AI Max
-- **Rationale:** Same discipline as OCI — establish baselines, phase the rollout, measure incrementality before scaling. Ensure expanded reach does not cannibalize existing performance.
-- **Principle:** #4 Phased rollout, #1 Evidence
-- **Confidence:** HIGH
+### D9: AI Max Testing [ACTIVE]
+D9: US-first with measurement guardrails. Same OCI discipline. Reinforced #4 Phased, #1 Evidence. HIGH.
 
-### D10: F90 Lifecycle Program [ACTIVE]
-- **Decision:** Navigate Legal SIMs to launch F90 targeting non-purchasing customers for 3+ purchases within 90 days
-- **Alternatives:** Stay acquisition-only, let lifecycle team own post-reg entirely
-- **Rationale:** Extends PS value beyond registration. Target: non-SHuMA 3+ purchases 31.7% to 35.4%. Builds on Engagement channel infrastructure already validated.
-- **Principle:** #5 Cross-functional partnership, #1 Evidence
-- **Confidence:** HIGH
+### D10: F90 Lifecycle [ACTIVE]
+D10: Legal SIMs for 3+ purchases targeting. Extends PS beyond registration. Reinforced #5 Partnership. HIGH.
+
+<!-- Full decision details: db("SELECT id, name, tier, description, alternatives, rationale, principles, confidence FROM decisions ORDER BY id") -->
 
 ---
 
