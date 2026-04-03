@@ -1,155 +1,142 @@
 {
   "version": "1.0",
   "last_scan": {
-    "timestamp": "2026-04-02T14:00:00Z",
-    "hook": "run-the-loop",
-    "status": "success",
-    "signals_extracted": 3,
-    "channels_scanned": 4,
-    "proactive_queries_run": 2,
-    "errors": []
+    "timestamp": "2026-04-03T03:56:00Z",
+    "hook": "AM-1",
+    "status": "partial_success",
+    "signals_extracted": 12,
+    "channels_scanned": 6,
+    "proactive_queries_run": 4,
+    "errors": ["list_channels returned 302 — used search + batch_get_conversation_history with known channel IDs as fallback"]
   },
   "channels": {
     "C0993SRL6FQ": {
       "channel_name": "rsw-channel",
-      "last_message_ts": "1775059371.189549",
-      "last_scan_ts": "2026-04-01T16:02:00Z",
-      "messages_processed": 1,
-      "signals_extracted": 1,
-      "notes": "Dashboard posted 2026-04-01T16:02:51Z. Intake drop zone test picked up. Daily brief + focus update posted."
+      "last_message_ts": "1775139812.638539",
+      "last_scan_ts": "2026-04-03T03:56:00Z",
+      "messages_processed": 2,
+      "signals_extracted": 0,
+      "notes": "Dashboard updates only"
     },
     "C044UG8MCSZ": {
       "channel_name": "ab-paid-search-global",
-      "last_message_ts": null,
-      "last_scan_ts": "2026-04-01T10:30:00Z",
-      "messages_processed": 0,
-      "signals_extracted": 0
-    },
-    "C0470FHVBAR": {
-      "channel_name": "ab-paid-search-eu",
-      "last_message_ts": null,
-      "last_scan_ts": "2026-04-01T10:30:00Z",
-      "messages_processed": 0,
-      "signals_extracted": 0
-    },
-    "C044UGEJ76Z": {
-      "channel_name": "ab-ps_jp",
-      "last_message_ts": "1774984809.340639",
-      "last_scan_ts": "2026-04-01T10:30:00Z",
-      "messages_processed": 6,
-      "signals_extracted": 2
-    },
-    "C06R6R19LG0": {
-      "channel_name": "ab-paid-search-oci",
-      "last_message_ts": "1774987970.802409",
-      "last_scan_ts": "2026-04-01T10:30:00Z",
-      "messages_processed": 4,
-      "signals_extracted": 1
-    },
-    "C06997HRWG0": {
-      "channel_name": "ab-outbound-marketing",
-      "last_message_ts": "1774972057.611439",
-      "last_scan_ts": "2026-04-01T10:30:00Z",
-      "messages_processed": 4,
-      "signals_extracted": 0
+      "last_message_ts": "1775165483.998439",
+      "last_scan_ts": "2026-04-03T03:56:00Z",
+      "messages_processed": 5,
+      "signals_extracted": 3,
+      "notes": "FX rates, OP2 budget, Tech/Data Q3 priorities, net pacing check for Richard"
     },
     "C065KKT53DJ": {
       "channel_name": "ab-paid-search-abix",
-      "last_message_ts": null,
-      "last_scan_ts": "2026-04-01T10:30:00Z",
-      "messages_processed": 0,
-      "signals_extracted": 0
+      "last_message_ts": "1775099135.133409",
+      "last_scan_ts": "2026-04-03T03:56:00Z",
+      "messages_processed": 30,
+      "signals_extracted": 3,
+      "notes": "Lena AU situation continued. Brandon handling redirect questions. Decision: Richard to leave it."
     },
-    "C04UBQQFXEV": {
-      "channel_name": "ab-ps_partnership-accounts",
-      "last_message_ts": "1774907682.788249",
-      "last_scan_ts": "2026-04-01T10:30:00Z",
-      "messages_processed": 4,
-      "signals_extracted": 4,
-      "notes": "DISCOVERED this cycle via proactive search. Added to registry as Tier 1."
+    "C05KTAAG14J": {
+      "channel_name": "ab-paid-search-app",
+      "last_message_ts": "1775154403.215619",
+      "last_scan_ts": "2026-04-03T03:56:00Z",
+      "messages_processed": 9,
+      "signals_extracted": 3,
+      "notes": "Brandon asked about app totals for BK. Peter added Richard to Paid App group DM. PAM tracker update request from Peter."
     },
-    "C08HJT14HD2": {
-      "channel_name": "baloo-search-and-mcs",
-      "last_message_ts": "1774993930.578499",
-      "last_scan_ts": "2026-04-01T10:30:00Z",
+    "C06997HRWG0": {
+      "channel_name": "ab-outbound-marketing",
+      "last_message_ts": "1775156531.046569",
+      "last_scan_ts": "2026-04-03T03:56:00Z",
       "messages_processed": 2,
-      "signals_extracted": 1
+      "signals_extracted": 1,
+      "notes": "Deepika transition announced. Zheng (zxzhou@) now Data Science lead for OCI."
     },
-    "C0ADCCWRYU9": {
-      "channel_name": "mcs-ps-redirect-expansion",
-      "last_message_ts": null,
-      "last_scan_ts": "2026-04-01T10:30:00Z",
-      "messages_processed": 0,
-      "signals_extracted": 0
+    "C06R6R19LG0": {
+      "channel_name": "ab-paid-search-oci",
+      "last_message_ts": "1775155250.290299",
+      "last_scan_ts": "2026-04-03T03:56:00Z",
+      "messages_processed": 1,
+      "signals_extracted": 1,
+      "notes": "Deepika transition — zxzhou@ now Data Science support for OCI"
     }
   },
   "dm_conversations": {
     "D044JAKR8RZ": {
       "user_name": "Brandon Munday",
-      "last_message_ts": "1774995708.535039",
-      "last_scan_ts": "2026-04-01T10:30:00Z"
-    },
-    "D0AE0FP2Q7L": {
-      "user_name": "Alexis Eck",
-      "last_message_ts": "1774992888.162369",
-      "last_scan_ts": "2026-04-01T10:30:00Z"
-    },
-    "D0443S6A39V": {
-      "user_name": "Stacey Gu",
-      "last_message_ts": "1774895233.768859",
-      "last_scan_ts": "2026-04-01T10:30:00Z"
+      "last_message_ts": "1775162557.793439",
+      "last_scan_ts": "2026-04-03T03:56:00Z",
+      "notes": "App PO update needed. Lena quotes discussion. -$70k underspend Q1."
     }
   },
   "hot_topics": {
     "active": [
       {
-        "topic": "OCI WW Launch (JP/EU3)",
-        "first_seen": "2026-03-31T07:00:00Z",
-        "last_seen": "2026-04-01T10:30:00Z",
-        "channels": ["C044UGEJ76Z", "C06R6R19LG0", "C044UG8MCSZ", "C0470FHVBAR"],
-        "key_participants": ["brandoxy", "arthamm", "kpantham", "aditthk", "awirtz", "prichwil"],
-        "signal_count": 6,
+        "topic": "Q1 Closing / Budget Actuals",
+        "first_seen": "2026-04-02T03:00:00Z",
+        "last_seen": "2026-04-03T03:56:00Z",
+        "channels": ["C044UG8MCSZ", "C05KTAAG14J", "C0AQE73USF5"],
+        "key_participants": ["brandoxy", "yunchu", "bccho", "prichwil"],
+        "signal_count": 5,
         "status": "active"
       },
+      {
+        "topic": "AU Lena CPA / Redirect Situation",
+        "first_seen": "2026-04-01T17:00:00Z",
+        "last_seen": "2026-04-02T03:05:00Z",
+        "channels": ["C065KKT53DJ"],
+        "key_participants": ["brandoxy", "yunchu", "prichwil"],
+        "signal_count": 4,
+        "status": "active"
+      },
+      {
+        "topic": "Deepika Transition / Data Science Reorg",
+        "first_seen": "2026-04-02T18:25:00Z",
+        "last_seen": "2026-04-02T18:40:00Z",
+        "channels": ["C06997HRWG0", "C06R6R19LG0"],
+        "key_participants": ["brandoxy"],
+        "signal_count": 2,
+        "status": "new"
+      },
+      {
+        "topic": "Kate AI Channel Launch",
+        "first_seen": "2026-04-02T23:29:00Z",
+        "last_seen": "2026-04-02T23:32:00Z",
+        "channels": ["C0ANDU5LH47"],
+        "key_participants": ["kataxt"],
+        "signal_count": 7,
+        "status": "new"
+      },
+      {
+        "topic": "OCI WW Launch (JP/EU3)",
+        "first_seen": "2026-03-31T07:00:00Z",
+        "last_seen": "2026-04-02T18:56:00Z",
+        "channels": ["C044UGEJ76Z", "C06R6R19LG0", "C044UG8MCSZ"],
+        "key_participants": ["brandoxy", "aditthk", "staceygu"],
+        "signal_count": 4,
+        "status": "active"
+      }
+    ],
+    "cooled": [
       {
         "topic": "Enhanced Match / LiveRamp EU",
         "first_seen": "2026-03-30T21:54:00Z",
         "last_seen": "2026-03-31T13:44:00Z",
-        "channels": ["C04UBQQFXEV"],
-        "key_participants": ["brandoxy", "prichwil"],
-        "signal_count": 2,
-        "status": "active"
+        "status": "cooled"
       },
       {
         "topic": "F90 Legal Approval + Implementation",
         "first_seen": "2026-03-30T16:58:00Z",
         "last_seen": "2026-03-30T16:58:00Z",
-        "channels": ["C04UBQQFXEV"],
-        "key_participants": ["brandoxy", "prichwil"],
-        "signal_count": 1,
-        "status": "active"
+        "status": "cooled"
       }
-    ],
-    "cooled": []
-  },
-  "volume_tracking": {
-    "week_start": "2026-03-31",
-    "words_by_organ": {
-      "current": 230,
-      "hands": 180,
-      "memory": 30,
-      "eyes": 40,
-      "brain": 0
-    },
-    "total_words_this_week": 480
+    ]
   },
   "discovered_channels": [
     {
-      "channel_id": "C04UBQQFXEV",
-      "channel_name": "ab-ps_partnership-accounts",
-      "discovered": "2026-04-01T10:30:00Z",
-      "action": "Added to registry as Tier 1",
-      "reason": "Multiple Brandon action items (F90, Enhanced Match, Asana updates)"
+      "channel_id": "C0ANDU5LH47",
+      "channel_name": "ab-marketing-ai",
+      "discovered": "2026-04-03T03:56:00Z",
+      "action": "Recommend Richard join — Kate-created AI channel",
+      "reason": "Kate (L8) launched marketing-dedicated AI channel. 7 messages. Level 4/5 alignment."
     }
   ],
   "dashboard": {
@@ -157,140 +144,41 @@
     "canvas_supported": false,
     "message_ts": "1775138648.820659",
     "channel_id": "C0993SRL6FQ",
-    "last_updated": "2026-04-02T14:04:08Z",
-    "notes": "Canvas tools (canvas_create, canvas_update) not available in ai-community-slack-mcp. Dashboard implemented as pinned message. Update via edit_message using message_ts."
+    "last_updated": "2026-04-02T14:04:08Z"
   },
-  "backfill_scans": {
-    "dm_archaeology": { "status": "not_started" },
-    "voice_corpus": { "status": "not_started" },
-    "decision_mining": { "status": "not_started" },
-    "project_timelines": { "status": "not_started" },
-    "stakeholder_positions": { "status": "not_started" },
-    "pre_meeting_context": { "status": "not_started" },
-    "people_discovery": { "status": "completed", "triggered": "2026-04-01T17:15:00Z", "completed": "2026-04-01T17:18:00Z", "total_mentions_found": 255, "unknown_channels_discovered": 1, "unknown_people_discovered": 3, "messages_ingested": 0, "rate_limit_pauses": 0, "synthesis_routed_to": "intake/", "notes": "No true shadow channels found — all prichwil mentions are in channels Richard is already a member of. This is expected: Slack search cannot return results from private channels Richard isn't in. The one unknown channel (ab-paid-search-app C05KTAAG14J) was already known but not in the registry. New people discovered: arthamm, kpantham, ychowta (OCI tech team contacts)." },
-    "tribal_knowledge": { "status": "completed", "triggered": "2026-04-01T17:20:00Z", "completed": "2026-04-01T17:22:00Z", "questions_found": 0, "topics_clustered": 0, "high_demand_topics": 0, "messages_ingested": 0, "rate_limit_pauses": 0, "synthesis_routed_to": "wiki/demand-log.md", "notes": "No question-pattern messages found in PS team channels. Team communication style is direct requests and status updates rather than 'does anyone know' patterns. 6559 results found in public community channels but none relevant to PS team documentation gaps. Scan will be more productive after the conversation database has more data from daily ingestion." },
-    "sentiment_patterns": { "status": "completed", "triggered": "2026-04-01T17:25:00Z", "completed": "2026-04-01T17:28:00Z", "escalation_messages_found": 2, "positive_messages_found": 1, "stakeholders_profiled": 1, "stress_periods_identified": 3, "messages_ingested": 3, "rate_limit_pauses": 0, "synthesis_routed_to": "intake/" },
-    "change_log_backfill": { "status": "completed_v1", "triggered": "2026-04-01T17:00:00Z", "completed": "2026-04-01T17:05:00Z", "messages_scanned": 208, "entries_added": 25, "duplicates_skipped": 0, "markets_covered": ["AU", "US", "UK", "DE", "EU3", "FR", "JP", "CA", "WW"], "messages_ingested": 15, "rate_limit_pauses": 0, "synthesis_routed_to": "change_log table + intake/", "notes": "v1 run — limited to page 1 of search results and registry channels only. Re-run with full pagination and all channels pending." },
-    "experiment_backfill": { "status": "completed_v1", "triggered": "2026-04-01T17:10:00Z", "completed": "2026-04-01T17:12:00Z", "messages_scanned": 209, "experiments_found": 6, "complete_records": 4, "partial_records": 2, "messages_ingested": 0, "rate_limit_pauses": 0, "synthesis_routed_to": "experiments table + intake/", "notes": "v1 run — limited search scope. Re-run with full channel list pending." }
-  },
-  "enrichment_state": {
-    "last_relationship_refresh": null,
-    "last_wiki_pipeline_run": null,
-    "last_monthly_synthesis": null,
-    "last_quarterly_audit": null,
-    "last_tribal_knowledge_refresh": null
-  },
-  "people_watch_candidates": [],
   "tool_invocation_log": [
     {
-      "timestamp": "2026-04-01T10:30:00Z",
-      "tool": "batch_get_conversation_history",
-      "channel": "C0993SRL6FQ,C044UG8MCSZ,C0470FHVBAR,C044UGEJ76Z",
-      "result": "success"
-    },
-    {
-      "timestamp": "2026-04-01T10:30:01Z",
-      "tool": "batch_get_conversation_history",
-      "channel": "C06R6R19LG0,C06997HRWG0,C065KKT53DJ,C08HJT14HD2,C0ADCCWRYU9",
-      "result": "success"
-    },
-    {
-      "timestamp": "2026-04-01T10:30:02Z",
+      "timestamp": "2026-04-03T03:56:00Z",
       "tool": "search",
-      "query": "prichwil after:2026-03-28",
+      "query": "prichwil after:2026-04-01",
       "rationale": "Permanent — self mentions",
-      "result": "success — 9 matches, 5 actionable signals"
+      "result": "success — 3 matches, 3 actionable"
     },
     {
-      "timestamp": "2026-04-01T10:30:03Z",
+      "timestamp": "2026-04-03T03:56:01Z",
       "tool": "search",
-      "query": "from:@brandoxy after:2026-03-28",
+      "query": "from:@brandoxy after:2026-04-01",
       "rationale": "Permanent — manager messages",
-      "result": "success — 46 matches, 6 actionable signals"
+      "result": "success — 18 matches, 8 actionable"
     },
     {
-      "timestamp": "2026-04-01T10:30:04Z",
+      "timestamp": "2026-04-03T03:56:02Z",
       "tool": "search",
-      "query": "from:@kataxt after:2026-03-28",
+      "query": "from:@kataxt after:2026-04-01",
       "rationale": "Permanent — skip-level director",
-      "result": "success — 2 matches, 0 actionable (fun channel only)"
+      "result": "success — 7 matches, 1 actionable (new AI channel)"
     },
     {
-      "timestamp": "2026-04-01T10:30:05Z",
-      "tool": "search",
-      "query": "\"Richard Williams\" after:2026-03-28",
-      "rationale": "Permanent — full name mentions",
-      "result": "success — 0 matches"
+      "timestamp": "2026-04-03T03:56:03Z",
+      "tool": "batch_get_conversation_history",
+      "channel": "C0993SRL6FQ,C044UG8MCSZ,C065KKT53DJ,C05KTAAG14J",
+      "result": "success"
     },
     {
-      "timestamp": "2026-04-01T10:30:06Z",
-      "tool": "search",
-      "query": "OCI OR polaris OR weblab after:2026-03-28",
-      "rationale": "Dynamic — broad project cluster covering OCI launch, Polaris rollout, weblab status",
-      "result": "success — 481 matches (mostly noise from community channels), 3 actionable from team channels"
-    },
-    {
-      "timestamp": "2026-04-01T10:30:07Z",
-      "tool": "search",
-      "query": "from:@alexieck after:2026-03-28",
-      "rationale": "Dynamic — AU POC, Richard owes Lena response and AU sync was cancelled",
-      "result": "success — 1 match (DM confirming AU sync cancelled)"
-    },
-    {
-      "timestamp": "2026-04-01T10:30:08Z",
-      "tool": "search",
-      "query": "\"enhanced match\" OR LiveRamp after:2026-03-28",
-      "rationale": "Dynamic — new Asana assignment, Clara EU thread, Brandon DM context",
-      "result": "success — 1 match (Brandon's Enhanced Match request in partnership channel)"
-    },
-    {
-      "timestamp": "2026-04-01T10:30:09Z",
-      "tool": "search",
-      "query": "\"outbound marketing\" OR \"paid acquisition\" after:2026-03-28",
-      "rationale": "Dynamic — broad org discovery",
-      "result": "success — 0 matches"
-    },
-    {
-      "timestamp": "2026-04-01T10:30:10Z",
-      "tool": "search",
-      "query": "from:@dtpalmer after:2026-03-28",
-      "rationale": "Dynamic — MCS/Polaris weblab partner",
-      "result": "error — invalid_auth"
-    },
-    {
-      "timestamp": "2026-04-01T10:30:11Z",
-      "tool": "search",
-      "query": "from:@afvans after:2026-03-28",
-      "rationale": "Dynamic — Alex VanDerStuyf, active on Polaris pages (Asana update today)",
-      "result": "error — invalid_auth"
-    },
-    {
-      "timestamp": "2026-04-01T10:30:12Z",
-      "tool": "search",
-      "query": "from:@awirtz after:2026-03-28",
-      "rationale": "Dynamic — Andrew, testing doc collaborator, completed OCI TT/suffix",
-      "result": "error — invalid_auth"
-    },
-    {
-      "timestamp": "2026-04-01T10:30:13Z",
-      "tool": "search",
-      "query": "from:@aditthk after:2026-03-31",
-      "rationale": "Dynamic — Adi sync today, JP OCI preflight",
-      "result": "success — 0 matches"
-    },
-    {
-      "timestamp": "2026-04-01T10:30:14Z",
-      "tool": "search",
-      "query": "from:@staceygu after:2026-03-31",
-      "rationale": "Dynamic — Stacey asked about JP ref tags and Baloo speaking",
-      "result": "success — 0 matches (already captured via prichwil search)"
-    },
-    {
-      "timestamp": "2026-04-01T14:54:31Z",
-      "tool": "post_message",
-      "channel": "C0993SRL6FQ",
-      "rationale": "Live Dashboard — initial post with 6-section format (Today, Streak, Markets, Hot Topics, Waiting on Richard, Five Levels)",
-      "result": "success — message_ts: 1775055271.638269"
+      "timestamp": "2026-04-03T03:56:04Z",
+      "tool": "email_folders",
+      "channel": "inbox",
+      "result": "success — 30 conversations scanned"
     }
   ]
 }

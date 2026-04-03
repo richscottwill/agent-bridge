@@ -1,0 +1,13 @@
+{
+  "name": "Organ Change Detector",
+  "version": "1.0.0",
+  "description": "Detects edits to body organ files and checks for cross-organ coherence.",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["**/shared/context/body/*.md"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A body organ file was edited. Check: 1) Does this edit conflict with other organs? Flag any cross-organ inconsistencies. 2) If the edited file is heart.md or gut.md, verify the edit was made by the karpathy agent — these files are gated. If not by karpathy, flag the unauthorized edit. 3) Log the change to ~/shared/context/intake/organ-changes.md with timestamp, file name, and summary of change."
+  }
+}

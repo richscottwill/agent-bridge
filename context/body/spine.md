@@ -30,23 +30,30 @@ Then read the organ you need for the task at hand (brain, eyes, hands, memory).
 
 ## Tool Access & Integrations
 
-### What the AI CAN access:
-- **Email** (Outlook) — read, search, send, reply, forward, folders
-- **Calendar** (Outlook) — view, create, update meetings
-- **Microsoft To-Do** — full CRUD on tasks and lists
-- **Slack** (ai-community-slack-mcp) — full read access. Channel ingestion driven by `list_channels` (Richard's sidebar sections determine depth). Proactive search beyond channel list. Reaction checking. DM scanning. Write restricted to rsw-channel and self_dm per slack-guardrails.md. Config: `~/shared/context/active/slack-channel-registry.json`.
-- **Hedy** (MCP server) — meeting transcripts, recaps, action items, speaker analysis, topics, session contexts. 18 tools via MCP. Configured as a direct MCP server in `.kiro/settings/mcp.json` (not a power). Tools are prefixed `mcp_hedy_` and available directly: `mcp_hedy_GetSessions`, `mcp_hedy_GetSessionDetails`, `mcp_hedy_GetSessionHighlights`, `mcp_hedy_GetSessionToDos`, `mcp_hedy_GetHighlights`, `mcp_hedy_GetToDos`, `mcp_hedy_GetAllTopics`, etc. No activation step needed — just call the tools. To ingest a new recording: (1) `GetSessions` with limit=1 to find the newest, (2) `GetSessionDetails` with the sessionId to get full transcript/recap/todos, (3) save to `~/shared/context/intake/` for processing.
+### What the AI CAN access (16 MCP servers):
+- **Email, Calendar, To-Do** (aws-outlook-mcp) — full CRUD. Guarded: sends restricted to prichwil, no external calendar invites.
+- **Slack** (ai-community-slack-mcp) — full read. Write restricted to rsw-channel (C0993SRL6FQ) and self_dm per slack-guardrails.md.
+- **Hedy** (hedy) — meeting transcripts, recaps, action items, topics. Call tools directly (mcp_hedy_ prefix).
+- **DuckDB** (duckdb) — PS Analytics database. SQL read/write. All structured PS data.
+- **ARCC** (arcc) — security/compliance knowledge base. Mandatory first call for credential/infra requests.
+- **SharePoint/OneDrive** (amazon-sharepoint-mcp) — files, folders, lists, Loop pages. Read + write.
+- **Loop** (loop-mcp) — Microsoft Loop page reader. Read-only.
+- **KDS** (knowledge-discovery-mcp) — knowledge base Q&A. Read-only.
+- **Weblab** (weblab-mcp) — experiment data: allocations, metadata, TAA alarms, activation history. Read-only.
+- **Wiki** (xwiki-mcp) — w.amazon.com wiki pages. Read + write.
+- **Builder** (builder-mcp) — Quip docs, internal search, Taskei tickets, phonetool, code search, pipelines, Apollo, oncall, ticketing. Massive toolset.
+- **Taskei** (taskei-p-mcp) — dedicated Taskei integration. May overlap with builder-mcp.
+- **Asana** (enterprise-asana-mcp) — full read/write. SearchTasksInWorkspace, GetTaskDetails, UpdateTask, CreateTask, CreateTaskStory, GetTaskStories, GetGoal, SetParentForTask, etc. Guarded: only modify Richard's tasks (GID 1212732742544167). Audit all writes to asana-audit-log.jsonl. Command center protocol: `~/shared/context/active/asana-command-center.md`.
+- **Radar** (radar-mcp) — untested.
+- **Search Marketing** (search-marketing-agent-workspace-alpha-mcp) — AgentCore Gateway for PS tools. Untested.
 - **Local filesystem** — ~/shared/, /workspace/
 
 ### What the AI CANNOT access:
-- Asana (directly), Google Ads, Adobe Analytics, SharePoint/OneDrive
-
-### Asana Bridge:
-See hands.md → Asana Bridge for full protocol. Short version: email x@mail.asana.com to create tasks, read Auto-Comms folder for updates.
+- Google Ads (no MCP server exists)
+- Adobe Analytics (no MCP server exists)
 
 ### MCP Tool Reference:
-- Full API docs: `~/shared/context/active/mcp-tool-reference.md`
-- Triple-nested JSON responses, shell escaping gotchas, Python helper function
+- Full inventory with all tools, guardrails, and usage patterns: `~/shared/context/active/mcp-tool-reference.md`
 
 ---
 
@@ -60,17 +67,9 @@ See memory.md → Reference Index for Quip document links.
 
 ## Hook System
 
-| # | Hook | Trigger | When to Run |
-|---|------|---------|-------------|
-| 1 | 1 · AM: Morning Routine | userTriggered | Morning — reads fresh organs → Asana sync → drafts → brief → calendar blocks |
-| 2 | 2 · EOD: Meeting Sync | userTriggered | End of day — ingest today's meetings into series files |
-| 3 | 3 · EOD: System Refresh | userTriggered | End of day, after Meeting Sync — cascade into organs, then git push to personal repo |
-| 4 | Guard: Email | preToolUse | Always on |
-| 5 | Guard: Calendar | preToolUse | Always on |
-| 6 | On-Demand: PS Audit | userTriggered | When reviewing campaign data |
-| 7 | On-Demand: Dashboard | userTriggered | When you want visuals |
+**Daily sequence:** AM-1 (Ingest) → AM-2 (Triage) → AM-3 (Brief), then EOD-1 (Meeting Sync) → EOD-2 (System Refresh + Karpathy experiments on organs + output quality). Guards (Email, Calendar) are always-on preToolUse hooks. On-demand: WBR Callouts, SharePoint Sync, PS Audit, Agent Bridge.
 
-**Daily sequence: AM (1), then EOD (2 → 3 → git push).** Meeting Sync feeds System Refresh feeds git sync feeds tomorrow's Morning Routine. Guards are automatic. On-Demand hooks run when needed.
+Full hook details: see device.md → Installed Apps and hands.md → Hook System.
 
 ---
 
@@ -79,11 +78,11 @@ See memory.md → Reference Index for Quip document links.
 | Directory | Role | Owner | Contents |
 |-----------|------|-------|----------|
 | `~/shared/context/body/` | Body organs + device | Agent (maintained), Human (validated) | body.md, brain.md, eyes.md, hands.md, memory.md, spine.md, heart.md, device.md |
-| `~/shared/context/active/` | Ground truth. Live state. | Agent + Human | current.md, org-chart.md, rw-tracker.md, long-term-goals.md, session-bootstrap.md, asana-sync-protocol.md, mcp-tool-reference.md |
+| `~/shared/context/active/` | Ground truth. Live state. | Agent + Human | current.md, org-chart.md, rw-tracker.md, long-term-goals.md, asana-command-center.md, mcp-tool-reference.md |
 | `~/shared/context/intake/` | Inbox. Unprocessed material. | Human drops, Agent processes | Drafts, raw notes, new docs |
 | `~/shared/context/wiki/` | Doc pipeline + context catalog | Wiki team agents | context-catalog.md, wiki-index.md, staging/, research/, reviews/ |
 | `~/shared/context/tools/` | Utility scripts. | Agent builds | Python scripts for MCP, sync, briefs |
-| `~/shared/data/duckdb/ps-analytics.duckdb` | PS Analytics database (DuckDB). All structured paid search data. | Dashboard ingester writes, all agents read+write | Query: `python3 ~/shared/tools/data/query.py "SQL"` or `from query import db`. MCP: `execute_query` tool (duckdb server). Read: `db()`, `market_trend()`, `market_week()`, `projection()`, `callout_scores()`. Write: `db_write()`, `db_upsert()`. Schema: `schema_export()` auto-runs after ingestion → `~/shared/tools/data/schema.sql`. Portability: `~/shared/tools/data/RECONSTRUCTION.md`. Data event: `~/shared/tools/data/last_ingest.json`. Parquet exports: `~/shared/data/exports/`. |
+| `~/shared/data/duckdb/ps-analytics.duckdb` | PS Analytics database (DuckDB) | Dashboard ingester writes, all agents read+write | CLI: `python3 ~/shared/tools/data/query.py "SQL"`. Python: `from query import db, market_trend`. MCP: `execute_query`. Schema: `~/shared/tools/data/schema.sql`. Portability: `RECONSTRUCTION.md`. Exports: `~/shared/data/exports/`. |
 | `~/shared/context/archive/` | Cold storage. | Agent | Archived artifacts, old versions |
 | `~/shared/context/meetings/` | Meeting series notes. One file per recurring meeting. | Agent summarizes from Hedy | stakeholder/, team/, manager/, peer/, adhoc/ — see README.md for full map |
 | `~/shared/artifacts/` | Published work product (7 categories) | Wiki team → Agent | testing/, strategy/, reporting/, tools/, communication/, program-details/, best-practices/ |

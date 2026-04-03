@@ -4,7 +4,7 @@
 
 *Operating principle: Invisible over visible. Memory works best when Richard doesn't have to look things up. The relationship graph, tone notes, and meeting briefs should flow invisibly into drafts and prep — Richard gets a draft that already sounds right for the recipient without having to think about register.*
 
-Last updated: 2026-04-02 (loop run 17: REWORD experiment on relationship graph — compressed meeting dynamics, tightened descriptions, -14% words. All identity fields preserved.)
+Last updated: 2026-04-03 (EOD-1: Kate interaction updated — direct email thread 4/2-4/3 re: Testing Approach meeting cancellation. Megan Lim added.)
 
 ---
 
@@ -16,20 +16,16 @@ L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate R
 
 **Team (Brandon's directs):** Peter Ocampo L6 (Mobile App), Stacey Gu L6 (OCI/Bidding), Dwayne Palmer L6 (MCS/Website), Yun-Kang Chu L6 (Modern Search/Adobe), Andrew Wirtz L5 (DG/Algorithmic Ads), Adi Thakur L5 (Landing Pages/UX).
 
-**Active Projects (as of 3/25/26):**
+**Active Projects (as of 4/3/26):**
 
-| # | Project | Status | Level | Blocker |
-|---|---------|--------|-------|---------|
-| 1 | Testing Approach doc for Kate (Apr 16) | NOT STARTED — 12 workdays | L1/L2 | None (blank page paralysis) |
-| 2 | Polaris Brand LP WW Rollout | IN PROGRESS — weblab 4/6-7 | L2 | None |
-| 3 | AU CPC/Keyword Optimization | IN PROGRESS — Lena follow-up pending | L2 | None |
-| 4 | AU URL migration to Polaris | COMPLETING — 3/24-25 | L2 | None |
-| 5 | Annual Review 2026 | RECEIVED — Meets High Bar | L1 | None |
-| 6 | OCI ROW rollout | IN PROGRESS — FR/IT/ES/JP 100%, CA 4/7 | L2 | None |
-| 7 | OP1 doc (same as #1) | NOT STARTED | L1/L2 | Same as #1 |
-| 8 | Ad copy testing | IN PROGRESS — UK +86% CTR, IT early | L2 | IT volume |
-| 9 | AI Max test design | OVERDUE (was due 3/28) | L2 | None |
-| 10 | MX Auto/Beauty pages | OVERDUE (since 3/20) | L2 | Vijeth footer |
+| # | Project | Status | Level |
+|---|---------|--------|-------|
+| 1 | Testing Approach doc for Kate | NOT STARTED — 14 workdays. Apr 16 canceled but doc still needed. | L1/L2 |
+| 2 | Polaris Brand LP WW Rollout | IN PROGRESS — weblab 4/6-7 | L2 |
+| 3 | AU CPC/Keyword Optimization | IN PROGRESS — Lena follow-up pending (3d) | L2 |
+| 4 | OCI ROW rollout | IN PROGRESS — 7/10 markets at 100%, CA 4/7 | L2 |
+| 5 | Ad copy testing | IN PROGRESS — UK +86% CTR, IT low volume | L2 |
+| 6 | MX Auto/Beauty pages | OVERDUE (15d) — blocked by Vijeth footer | L2 |
 
 **Key Metrics (Feb 2026):**
 - US: 32.9K regs (+16% OP2, +68% YoY), $2.7M spend, $83 CPA
@@ -74,11 +70,11 @@ L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate R
 ### Brandon Munday (brandoxy) — WW Head of Outbound Marketing, L7, Austin
 - Reports to: Kate Rundell
 - Pronouns: she/her
-- Last interaction: 3/24 (Annual Review 1:1 + Weekly Team Sync)
+- Last interaction: 4/2 (1:1 — spend reporting, LiveRamp, Kate meeting canceled, Lena pattern)
 - Tone: Professional, approachable. Richard's direct manager.
-- Current topic: Annual Review (solid strength, promo criteria), Polaris WW rollout, testing methodology, artifact shipping as visibility
+- Current topic: $70K OP2 underspend (process failure), LiveRamp Enhanced Match, testing framework doc (reviewing before Kate sees it), Lena tactical overreach pattern, GenBI as stakeholder empowerment
 - Draft style: Prepared, concise, outcomes + strategic framing. Show leverage.
-- Meeting dynamic: Annual Review 1:1 — Think Big standout LP, strengths "more varied." Key: (1) solid strength ceiling until promo, (2) proactive outcome sharing critical, (3) improve consistency, (4) balance docs with execution. Group settings: Richard quieter than Andrew/Stacey. Visibility gap persists.
+- Meeting dynamic: 4/2 was substantive — 58 min covering financial stewardship, LiveRamp blockers, and strategic positioning. Brandon canceled Kate Apr 16 meeting to review doc first. Supportive of Richard owning AU narrative. Flagged Lena's decision-reversal pattern explicitly.
 
 ### Yun-Kang Chu (yunchu) — Sr. Marketing Manager, L6, Austin
 - Reports to: Brandon Munday (peer)
@@ -161,6 +157,18 @@ L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate R
 - Tone: Professional, brief
 - Current topic: WW PS Brand Polaris weblab — requirements confirmed. MX Auto/Beauty LPs.
 - Draft style: Brief, action-oriented.
+
+### Kate Rundell (kataxt) — L8 Director, WW Outbound Marketing, Seattle
+- Reports to: Todd Heimes (L10 VP)
+- Last interaction: 4/3 (email — "cancel for now and reassess." Kate: "I'm fine keeping it but wanted to make sure we had a plan.")
+- Tone: Executive. Concise, strategic framing. No small talk.
+- Current topic: Testing Approach doc (Brandon reviewing first, meeting officially canceled 4/3), AU CPC challenge (aware of Lena's intensity), AI channel launch.
+- Draft style: Lead with strategic impact, not tactical detail. Show how PS work connects to org-level goals. One page max. Data as evidence, not as the message.
+
+### Megan Lim (megalim) — EA to Kate Rundell
+- Last interaction: 4/3 (email — "I will decline from Kate's calendar" re: Testing Approach meeting)
+- Tone: Professional, brief.
+- Draft style: Professional, concise. Calendar/scheduling context only.
 
 ---
 

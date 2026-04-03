@@ -1,0 +1,13 @@
+{
+  "name": "Guard: Email",
+  "version": "4",
+  "description": "Blocks outbound email unless all recipients are Richard's own addresses.",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": [".*email_reply.*", ".*email_send.*", ".*email_forward.*"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Inspect ALL recipient fields. Richard's approved: prichwil@amazon.com, richscottwill@gmail.com. ALL Richard's → ACCESS GRANTED. ANY other → ACCESS DENIED. Ask approval. If denied, save as draft."
+  }
+}

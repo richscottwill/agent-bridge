@@ -268,7 +268,7 @@ Python utilities and dashboards that run autonomously or on-demand.
 | Tool | Path | What It Does | When to Use | Questions It Answers |
 |------|------|-------------|-------------|---------------------|
 | Dashboard Ingester | `~/shared/tools/dashboard-ingester/ingest.py` | Processes WW Dashboard Excel files. Extracts per-market metrics, generates callout drafts, JSON data, WW summary. Outputs to `callouts/{market}/`. | When Richard drops a new week's xlsx. Run: `python3 ingest.py <path-to-xlsx>` | "What are this week's numbers?" (generates the answer files) |
-| Progress Charts | `~/shared/tools/progress-charts/generate.py` | Reads body organs (gut budgets, changelog, tracker scorecard, NS patterns, aMCC streak) and market data (ingester JSON). Generates interactive HTML dashboard with Chart.js. | Via `update-dashboard` hook ONLY. Never invoke directly. | "Show me the dashboard." (generates `dashboard.html`) |
+| Progress Charts | `~/shared/tools/progress-charts/generate.py` | Reads body organs (gut budgets, changelog, tracker scorecard, NS patterns, aMCC streak) and market data (ingester JSON). Generates interactive HTML dashboard with Chart.js. | On demand via PS Audit hook or manual invocation. | "Show me the dashboard." (generates `dashboard.html`) |
 | Dashboard HTML | `~/shared/tools/progress-charts/dashboard.html` | The generated interactive dashboard. Read-only output. | When viewing system health visually. | "What does the system look like?" |
 
 ---
@@ -315,12 +315,17 @@ Active hooks that automate agent actions based on IDE events.
 
 | Hook | ID | Trigger | What It Does |
 |------|----|---------|-------------|
-| Morning Routine | `rw-morning-routine` | userTriggered | One-click daily chain: Asana Sync → Draft Unread Replies → To-Do Refresh + Daily Brief → Calendar Blocks |
-| Run the Loop | `run-the-loop` | userTriggered | Maintenance → cascade to organs → optionally 1 experiment |
-| Block Email Send | (preToolUse) | preToolUse | Prevents email_reply/send/forward unless only recipient is prichwil |
-| Block Calendar Invite | (preToolUse) | preToolUse | Prevents calendar events with external attendees |
-| Hedy Meeting Sync | `hedy-meeting-sync` | userTriggered | Pulls Hedy sessions, analyzes communication patterns, updates organs |
-| Update Dashboard | `update-dashboard` | userTriggered | Single entry point for HTML dashboard regeneration via eyes-chart agent |
+| .AM-1: Ingest | `am-1-ingest` | userTriggered | Slack scan + Asana sync + email scan → intake files |
+| .AM-2: Triage + Draft | `am-2-triage` | userTriggered | Process intake → update tasks + draft replies |
+| .AM-3: Brief + Blocks | `am-3-brief` | userTriggered | Daily brief + Slack posts + dashboard + calendar blocks |
+| .EOD-1: Meeting Sync | `eod-1-meeting-sync` | userTriggered | Hedy + Outlook → meetings/ series files |
+| .EOD-2: System Refresh | `eod-2-system-refresh` | userTriggered | Maintenance cascade + experiments + git sync |
+| 1 · WBR: Weekly Callouts | `wbr-callouts` | userTriggered | Full 10-market callout pipeline |
+| 2 · Sync to SharePoint | `sharepoint-sync` | userTriggered | Wiki → SharePoint via OneDrive |
+| 3 · PS Audit | `ps-audit` | userTriggered | Paid search audit pipeline |
+| 4 · Agent Bridge Sync | `agent-bridge-sync` | userTriggered | Sync portable-body/ to GitHub |
+| Guard: Email | (preToolUse) | preToolUse | Blocks email send unless only recipient is prichwil |
+| Guard: Calendar | (preToolUse) | preToolUse | Blocks calendar events with external attendees |
 
 ---
 

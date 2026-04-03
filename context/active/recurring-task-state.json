@@ -1,0 +1,108 @@
+{
+  "version": "1.0",
+  "tasks": {
+    "goal_updater": {
+      "cadence": "monthly",
+      "last_run": null,
+      "last_run_period": null,
+      "description": "Update all 14 Asana goals with current metrics"
+    },
+    "meta_calibration_priors": {
+      "cadence": "monthly",
+      "last_run": null,
+      "last_run_period": null,
+      "description": "Prior-guided vs random experiment selection comparison"
+    },
+    "meta_calibration_projections": {
+      "cadence": "weekly",
+      "last_run": null,
+      "last_run_period": null,
+      "description": "Audit last week's projection against actuals"
+    },
+    "meta_calibration_output_quality": {
+      "cadence": "quarterly",
+      "last_run": null,
+      "last_run_period": null,
+      "description": "Validate output-quality prior convergence"
+    },
+    "coherence_audit": {
+      "cadence": "monthly",
+      "last_run": "2026-03-20",
+      "last_run_period": "2026-03",
+      "description": "NS Loop 7: Cross-organ dependency matrix, gap/stale/dupe detection"
+    },
+    "weekly_scorecard": {
+      "cadence": "weekly",
+      "last_run": "2026-04-03",
+      "last_run_period": "2026-W14",
+      "description": "Friday EOD weekly scorecard rollup in rw-tracker.md"
+    },
+    "context_surface_refresh": {
+      "cadence": "weekly",
+      "last_run": null,
+      "last_run_period": null,
+      "description": "Update AU/MX pinned context tasks in Asana"
+    },
+    "agent_bridge_sync": {
+      "cadence": "weekly",
+      "last_run": null,
+      "last_run_period": null,
+      "description": "Sync portable-body/ to GitHub"
+    },
+    "decision_audit": {
+      "cadence": "monthly",
+      "last_run": null,
+      "last_run_period": null,
+      "description": "NS Loop 1: Score decisions VALIDATED/INVALIDATED/PENDING"
+    },
+    "pattern_trajectory": {
+      "cadence": "weekly",
+      "last_run": null,
+      "last_run_period": null,
+      "description": "NS Loop 3: Assess patterns IMPROVING/STUCK/WORSENING/RESOLVED"
+    },
+    "delegation_verification": {
+      "cadence": "weekly",
+      "last_run": null,
+      "last_run_period": null,
+      "description": "NS Loop 4: Check delegations ON_TRACK/SLIPPING/FAILED"
+    },
+    "principle_evolution": {
+      "cadence": "quarterly",
+      "last_run": null,
+      "last_run_period": null,
+      "description": "NS Loop 6: Deep review of decision principles. First review Jun 2026."
+    },
+    "meeting_communication": {
+      "cadence": "weekly",
+      "last_run": null,
+      "last_run_period": null,
+      "description": "NS Loop 9: Hedy speaking share, hedging, filler analysis"
+    },
+    "karpathy_metabolism_report": {
+      "cadence": "weekly",
+      "last_run": null,
+      "last_run_period": null,
+      "description": "Karpathy weekly metabolism report: body mass, experiments, learnings"
+    },
+    "relationship_enrichment": {
+      "cadence": "weekly",
+      "last_run": null,
+      "last_run_period": null,
+      "description": "EOD-2 enrichment: update Memory relationship graph from week's interactions"
+    },
+    "wiki_candidates": {
+      "cadence": "weekly",
+      "last_run": null,
+      "last_run_period": null,
+      "description": "EOD-2 enrichment: identify wiki article candidates from week's work"
+    },
+    "monthly_synthesis": {
+      "cadence": "monthly",
+      "last_run": null,
+      "last_run_period": null,
+      "description": "EOD-2 enrichment: monthly context synthesis across all sources"
+    }
+  },
+  "check_logic": "For each task: compute current_period from today's date and cadence (monthly=YYYY-MM, weekly=YYYY-WNN, quarterly=YYYY-QN). If last_run_period != current_period, the task is due. After running, update last_run and last_run_period."
+}

@@ -1,411 +1,339 @@
-# aws-outlook-mcp — Tool Reference
+# MCP Tool Reference
 
-Last updated: 2026-03-20
-Source: Reverse-engineered from working scripts in ~/shared/context/intake/
+Last updated: 2026-04-02 (Thursday PT)
+Config: ~/.kiro/settings/mcp.json
 
-## How to Call (CLI / Python)
-
-The `aws-outlook-mcp` binary speaks JSON-RPC 2.0 over stdin/stdout. Every call follows this pattern:
-
-### Request Format
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "method": "tools/call",
-  "params": {
-    "name": "<tool_name>",
-    "arguments": { ... }
-  }
-}
-```
-
-### Response Format (triple-nested JSON)
-```
-Layer 1: {"result": {"content": [{"type": "text", "text": "<layer2>"}]}, "jsonrpc": "2.0", "id": 1}
-Layer 2: {"content": [{"type": "text", "text": "<layer3>"}]}
-Layer 3: The actual data (JSON string — parse again)
-```
-
-### Invocation Methods
-
-**Method 1: echo pipe (simple requests, no special chars in body)**
-```bash
-echo '<json_request>' | timeout 15 aws-outlook-mcp 2>/dev/null
-```
-
-**Method 2: cat pipe (complex requests with HTML/special chars)**
-```bash
-# Write request to temp file first
-cat /path/to/request.json | timeout 15 aws-outlook-mcp 2>/dev/null
-```
-
-**Method 3: subprocess.run (Python)**
-```python
-p = subprocess.run(
-    ["aws-outlook-mcp"],
-    input=req_json_string,
-    capture_output=True,
-    text=True,
-    timeout=30
-)
-```
-
-### Python Helper Function (proven working)
-```python
-import json, os
-
-def mcp_call(tool_name, arguments):
-    req = json.dumps({
-        "jsonrpc": "2.0", "id": 1,
-        "method": "tools/call",
-        "params": {"name": tool_name, "arguments": arguments}
-    })
-    # Write to temp file to avoid shell escaping issues
-    tmpfile = os.path.expanduser("~/shared/context/intake/_mcp_req.json")
-    with open(tmpfile, "w") as f:
-        f.write(req)
-    cmd = f"cat {tmpfile} | timeout 15 aws-outlook-mcp 2>/dev/null"
-    result = os.popen(cmd).read().strip()
-    if not result:
-        return None
-    data = json.loads(result)
-    if "result" in data:
-        text = data["result"]["content"][0]["text"]
-        inner = json.loads(text)
-        return inner["content"][0]["text"]
-    return None
-```
+Every MCP server available to agents. Read before using any MCP tool.
 
 ---
 
-## Tools
+## Quick Reference
 
-### 1. email_search
-Search emails, optionally within a specific folder.
+| # | Server | Purpose | Access | Status |
+|---|--------|---------|--------|--------|
+| 1 | aws-outlook-mcp | Email, Calendar, To-Do | Full CRUD | Proven |
+| 2 | ai-community-slack-mcp | Slack channels, DMs, search | Read + limited write | Proven |
+| 3 | hedy | Meeting transcripts, topics, action items | Read + context updates | Proven |
+| 4 | duckdb | PS Analytics database (SQL) | Read + Write | Proven |
+| 5 | arcc | Security/compliance knowledge base | Read-only search | Proven |
+| 6 | amazon-sharepoint-mcp | SharePoint/OneDrive, Loop pages | Read + Write | Proven |
+| 7 | loop-mcp | Microsoft Loop pages | Read-only | Working |
+| 8 | knowledge-discovery-mcp | KDS knowledge base Q&A | Read-only query | Working |
+| 9 | radar-mcp | Radar | Unknown | Untested |
+| 10 | search-marketing-agent-workspace-alpha-mcp | AgentCore Gateway for PS | Unknown | Untested |
+| 11 | weblab-mcp | Weblab experiment data | Read-only | NEW 4/2 |
+| 12 | xwiki-mcp | w.amazon.com wiki pages | Read + Write | NEW 4/2 |
+| 13 | builder-mcp | Internal websites, Quip, code search, Taskei, pipelines | Read + some write | NEW 4/2 |
+| 14 | taskei-p-mcp | Taskei task management | Unknown | NEW 4/2 |
+| 15 | aaisd-redshift-mcp | Redshift queries | Unknown | Untested |
+| P1 | power-aws-agentcore | Bedrock AgentCore | Agent deployment | Power, not daily use |
 
-**Arguments:**
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| query | string | yes | Outlook search query (KQL syntax) |
-| max_results | int | no | Max emails to return (default varies) |
-| folderId | string | no | Outlook folder ID to search within |
-
-**Example — search inbox:**
-```json
-{"name": "email_search", "arguments": {
-  "query": "received:>=2026-03-17",
-  "max_results": 25
-}}
-```
-
-**Example — search Auto-Comms folder:**
-```json
-{"name": "email_search", "arguments": {
-  "query": "received:>=2026-03-17",
-  "max_results": 10,
-  "folderId": "AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy/SDRrGkcLnEuZ4GAQDAgFdLn8NBQbObwPn0M6aUAADuhyQpAAA="
-}}
-```
-
-**Example — search by sender:**
-```json
-{"name": "email_search", "arguments": {
-  "query": "from:Microsoft Advertising received:>=2026-03-17",
-  "max_results": 3
-}}
-```
-
-**Response (Layer 3):**
-```json
-{
-  "success": true,
-  "content": {
-    "message": "Found 25 emails (showing 0 to 25 of 122 total results).",
-    "emails": [
-      {
-        "conversationId": "AAQk...",
-        "topic": "Subject line",
-        "senders": ["Sender Name"],
-        "lastDeliveryTime": "2026-03-18T15:09:55+00:00",
-        "preview": "First ~200 chars of body...",
-        "unreadCount": 1,
-        "items": []
-      }
-    ],
-    "totalResults": 122,
-    "offset": 0,
-    "limit": 25
-  }
-}
-```
+Pending: enterprise-asana-mcp (access requested, not yet granted).
 
 ---
 
-### 2. email_read
-Read full email conversation by conversationId.
+## 1. aws-outlook-mcp
 
-**Arguments:**
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| conversationId | string | yes | From email_search results |
-| format | string | no | "text" or "html" (default: text) |
+Email, Calendar, Microsoft To-Do. Full CRUD.
 
-**Example:**
-```json
-{"name": "email_read", "arguments": {
-  "conversationId": "AAQkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAQAIGSNkSniVBLpvhqYlt3T8k=",
-  "format": "text"
-}}
-```
+Tools (14, all auto-approved): email_search, email_read, email_inbox, email_send, email_reply, email_draft, email_folders, email_list_folders, todo_tasks, todo_lists, todo_checklist, calendar_view, calendar_meeting, calendar_search.
 
-**Response (Layer 3):**
-```json
-{
-  "content": {
-    "emails": [
-      {
-        "from": {"name": "Sender Name", "email": "sender@amazon.com"},
-        "subject": "Subject line",
-        "body": "Full email body text..."
-      }
-    ]
-  }
-}
-```
+Guardrails:
+- preToolUse hook blocks email_send/reply/forward to anyone except prichwil@amazon.com
+- preToolUse hook blocks calendar events with external attendees
+- email_draft is always safe (doesn't send)
+- Personal calendar blocks are allowed
+
+Gotchas:
+- CLI invocation returns triple-nested JSON (parse 3 times)
+- HTML bodies with special chars need cat-pipe method (write to temp file first)
+- Always use timeout on CLI calls
+
+Key IDs: See bottom of this file for Outlook folder IDs and To-Do list IDs.
 
 ---
 
-### 3. email_send
-Send an email.
+## 2. ai-community-slack-mcp
 
-**Arguments:**
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| to | string[] | yes | Array of recipient email addresses |
-| subject | string | yes | Email subject |
-| body | string | yes | Email body (HTML supported) |
+Slack read access (channels, DMs, search, threads, files) plus limited write.
 
-**Example:**
-```json
-{"name": "email_send", "arguments": {
-  "to": ["prichwil@amazon.com"],
-  "subject": "Daily Brief — March 20, 2026",
-  "body": "<html><body><h1>Brief</h1><p>Content here</p></body></html>"
-}}
-```
+Tools (auto-approved reads): search, list_channels, batch_get_conversation_history, batch_get_thread_replies, batch_get_channel_info, batch_get_user_info, get_channel_sections, reaction_tool, download_file_content, list_drafts, lists_items_list, lists_items_info, self_dm, post_message, batch_set_last_read.
 
-**Note:** For HTML bodies with special characters, use the cat-pipe method (write request to temp file first) to avoid shell escaping issues.
+Additional tools (require approval): create_draft, open_conversation, add_channel_members, create_channel.
+
+Guardrails (per slack-guardrails.md):
+- post_message ONLY to C0993SRL6FQ (rsw-channel) or self_dm to prichwil
+- create_draft is always allowed (Richard reviews before sending)
+- NEVER post_message to any other channel
+- NEVER open_conversation to DM anyone other than Richard
+- NEVER add_channel_members or create_channel without explicit approval
+- All read operations are unrestricted
+
+Config: Channel registry at ~/shared/context/active/slack-channel-registry.json. Scan state at ~/shared/context/active/slack-scan-state.json. Section-based depth: WW Testing/AB PS = full, AB/AI = standard, Channels = light.
 
 ---
 
-### 4. email_reply
-Reply to an email conversation.
+## 3. hedy
 
-**Arguments:**
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| conversationId | string | yes | Conversation to reply to |
-| body | string | yes | Reply body |
-| replyAll | boolean | no | Reply to all recipients |
+Meeting transcripts, recaps, action items, speaker analysis, topics, session contexts. Remote MCP via npx mcp-remote.
 
-*(Inferred from autoApprove list — not yet used in scripts)*
+Tools (14, all auto-approved): GetSessions, GetSessionDetails, GetSessionHighlights, GetSessionToDos, GetHighlights, GetHighlightDetails, GetToDos, GetAllTopics, GetTopicDetails, GetTopicSessions, ListSessionContexts, GetSessionContext, UpdateSessionContext, UpdateTopic.
 
----
+Usage pattern:
+1. GetSessions (limit=1) to find newest recording
+2. GetSessionDetails (sessionId) for full transcript/recap/todos
+3. Save to ~/shared/context/intake/ for processing
 
-### 5. email_draft
-Create a draft email.
+No activation step needed. Tools prefixed mcp_hedy_ and available directly.
 
-**Arguments:**
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| to | string[] | yes | Recipients |
-| subject | string | yes | Subject |
-| body | string | yes | Body |
-
-*(Inferred from autoApprove list — not yet used in scripts)*
+Limitations:
+- Only captures meetings where Hedy bot was present
+- Transcript quality varies with audio quality and speaker count
+- Remote connection via npx can be slow on first call
 
 ---
 
-### 6. email_inbox
-List inbox emails.
+## 4. duckdb
 
-*(Inferred from autoApprove list — no usage examples found)*
+PS Analytics database. All structured paid search data: daily/weekly/monthly metrics (10 markets), IECCP, projections, callout scores, competitors, OCI status, change logs, anomalies.
 
----
+Tools (4, all auto-approved): execute_query, list_databases, list_tables, list_columns.
 
-### 7. email_folders / email_list_folders
-List email folders.
+DB path: ~/shared/tools/data/ps-analytics.duckdb
+Python CLI: python3 ~/shared/tools/data/query.py "SQL"
+Python import: from query import db, market_trend, market_week, projection, callout_scores
 
-*(Inferred from autoApprove list — no usage examples found)*
+Active tables: daily_metrics, weekly_metrics, monthly_metrics, ieccp, projections, callout_scores, experiments, ingest_log, change_log, anomalies, competitors, oci_status, slack_messages, agent_actions, agent_observations.
 
----
-
-### 8. calendar_view
-Get calendar events for a date range.
-
-**Arguments:**
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| start_date | string | yes | Start date (YYYY-MM-DD) |
-| end_date | string | yes | End date (YYYY-MM-DD) |
-
-**Example:**
-```json
-{"name": "calendar_view", "arguments": {
-  "start_date": "2026-03-18",
-  "end_date": "2026-03-19"
-}}
-```
-
-**Response (Layer 3) — array of events:**
-```json
-[
-  {
-    "meetingId": "AAkALg...",
-    "meetingChangeKey": "DwAA...",
-    "subject": "Meeting Name",
-    "start": "2026-03-18T16:00:00Z",
-    "end": "2026-03-18T17:00:00Z",
-    "location": "zoom/chime URL or room",
-    "status": "Busy|Free|Tentative",
-    "categories": [],
-    "organizer": {"name": "Name", "email": "alias@amazon.com"},
-    "isCanceled": false,
-    "isRecurring": true,
-    "isAllDay": false,
-    "response": "Accept|Organizer|NoResponseReceived"
-  }
-]
-```
+Schema export: ~/shared/tools/data/schema.sql (auto-generated after ingestion).
+Portability: Single file, no server. Rebuild instructions at ~/shared/tools/data/RECONSTRUCTION.md.
 
 ---
 
-### 9. calendar_search
-Search calendar events.
+## 5. arcc
 
-*(Inferred from autoApprove list — no usage examples found)*
+Agent Ready Curated Context. Security and compliance knowledge base search.
 
----
+Tools (1, auto-approved): search_arcc.
 
-### 10. calendar_meeting
-Create, read, update, or delete calendar meetings.
+Also supports: contentIds lookup for full document retrieval, comment_arcc for feedback.
 
-**Arguments:**
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| operation | string | yes | "create", "read", "update", or "delete" |
-| subject | string | yes (create) | Meeting subject |
-| start | string | yes (create) | Start time (ISO 8601, UTC) |
-| end | string | yes (create) | End time (ISO 8601, UTC) |
-| body | string | no | Meeting body/description |
-| showAs | string | no | "busy", "free", "tentative" |
-| reminderMinutes | int | no | Reminder before meeting |
+Usage: MANDATORY first call when request involves credentials, user data, network rules, file paths, or infrastructure (per pilot-steering.md). Query ARCC before examining code.
 
-**Example — create a focus block:**
-```json
-{"name": "calendar_meeting", "arguments": {
-  "operation": "create",
-  "subject": "Focus: Task Name",
-  "start": "2026-03-23T21:30:00Z",
-  "end": "2026-03-23T23:00:00Z",
-  "body": "Task context and instructions",
-  "showAs": "busy",
-  "reminderMinutes": 15
-}}
-```
-
-**Response:**
-```json
-{"success": true, "content": {"message": "Meeting created successfully", "meetingId": "AAkALg...", "changeKey": "DwAA...", "subject": "...", "start": "...", "end": "...", "location": ""}}
-```
+Scoped to 9 namespaces (configured in args).
 
 ---
 
-### 11. todo_lists
-List all To-Do lists.
+## 6. amazon-sharepoint-mcp
 
-**Arguments:**
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| operation | string | yes | "list" |
+SharePoint and OneDrive. Files, folders, lists, Loop pages. Read and write.
 
-**Example:**
-```json
-{"name": "todo_lists", "arguments": {"operation": "list"}}
-```
+Tools: sharepoint_search, sharepoint_list_sites, sharepoint_list_libraries, sharepoint_list_files, sharepoint_read_file, sharepoint_write_file, sharepoint_create_folder, sharepoint_rename_folder, sharepoint_delete_file, sharepoint_read_loop, sharepoint_list_lists, sharepoint_list_fields, sharepoint_list_items, sharepoint_list_views, sharepoint_list_view_fields, sharepoint_create_list, sharepoint_delete_list, sharepoint_create_field, sharepoint_update_field, sharepoint_delete_field, sharepoint_create_item, sharepoint_update_item, sharepoint_delete_item.
 
-**Response (Layer 3):**
-```json
-{
-  "lists": [
-    {
-      "displayName": "🧹 Sweep",
-      "id": "AAMk...",
-      "taskCount": 5
-    }
-  ]
-}
-```
+Auto-approved: sharepoint_search, sharepoint_read_loop.
+
+Used by: SharePoint Sync tool (wiki articles to OneDrive). Config: ~/shared/tools/sharepoint-sync/config.yaml.
+Local mirror: c:/Users/prichwil/OneDrive - amazon.com/Artifacts/wiki-sync (Windows machine).
+
+Gotchas:
+- libraryName is the library TITLE (e.g., "Documents"), NOT the URL path ("Shared Documents")
+- Use sharepoint_list_libraries first to get correct title
+- Loop pages use sharepoint_read_loop, not sharepoint_read_file
 
 ---
 
-### 12. todo_tasks
-Full CRUD on To-Do tasks.
+## 7. loop-mcp
 
-#### List tasks in a list
-```json
-{"name": "todo_tasks", "arguments": {
-  "operation": "list",
-  "listId": "AAMk..."
-}}
-```
+Microsoft Loop page reader. Converts Loop pages to markdown.
 
-**Response (Layer 3):**
-```json
-{
-  "content": {
-    "tasks": [
-      {
-        "id": "AAMk...",
-        "title": "Task title",
-        "status": "notStarted|completed",
-        "importance": "normal|high",
-        "dueDateTime": "2026-03-20" or "none",
-        "body": "Task body content..."
-      }
-    ]
-  }
-}
-```
+Tools: read_loop (auto-approved).
 
-#### Create a task
-```json
-{"name": "todo_tasks", "arguments": {
-  "operation": "create",
-  "listId": "AAMk...",
-  "title": "New task title",
-  "body": "Task body with details",
-  "dueDateTime": "2026-03-25",
-  "importance": "high"
-}}
-```
+Accepts Loop URLs (https://loop.cloud.microsoft/p/...) and SharePoint Loop URLs (https://*.sharepoint.com/:fl:/...).
 
-#### Update a task
-```json
-{"name": "todo_tasks", "arguments": {
-  "operation": "update",
-  "listId": "AAMk...",
-  "taskId": "AAMk...",
-  "title": "Updated title",
-  "body": "Updated body"
-}}
-```
+Overlap: amazon-sharepoint-mcp also has sharepoint_read_loop. Either works for Loop pages.
 
-**Response:**
-```json
-{"success": true, ...}
-```
+---
+
+## 8. knowledge-discovery-mcp
+
+Knowledge Discovery Service (KDS). AI-generated answers from curated knowledge bases.
+
+Tools: QuerySync (auto-approved), Feedback.
+
+Requires: conversationId (UUID v4), sessionId (UUID v4), useCase, customerId, question.
+
+Use cases are tenant-scoped. The available use cases depend on what's been configured for Richard's access. Useful for querying internal knowledge bases that have been onboarded to KDS.
+
+---
+
+## 9. radar-mcp
+
+Status: Untested. No auto-approved tools. Installed via toolbox registry.
+
+Needs investigation to determine what tools are available and whether they're relevant to PS work.
+
+---
+
+## 10. search-marketing-agent-workspace-alpha-mcp
+
+AgentCore Gateway for Search Marketing. Lambda-backed MCP tools.
+
+Status: Untested. No auto-approved tools. Remote MCP config.
+
+Likely provides PS-specific tools via AgentCore. Needs investigation to determine available tools and access.
+
+---
+
+## 11. weblab-mcp (NEW 4/2)
+
+Weblab experimentation platform. Read-only access to experiment data.
+
+Tools (4): check_weblab_taa (TAA alarm status via WSTLake Athena), weblab_details (experiment metadata via WeblabAPI), weblab_allocations (treatment allocations via WeblabAPI), weblab_activation_history (change history via WeblabAPI).
+
+Authentication: Midway cookie.
+
+Relevance to Richard's work:
+- Polaris Brand LP weblabs (JP 50/50, AU/EU dial-ups)
+- Baloo weblabs (early access, public launch)
+- OCI weblabs (EU3, JP)
+- Any future A/B tests the PS team runs
+
+Use cases:
+- Check allocation state before/after dial-up changes
+- Verify treatment configs match what was requested
+- Pull activation history to track when changes were made
+- Monitor TAA alarms for experiment health
+
+Docs: https://w.amazon.com/bin/view/Weblab/MCP
+Issues: https://issues.amazon.com/issues/create?assignedFolder=d9f99943-607b-4f73-a718-26855f8ce15d
+
+---
+
+## 12. xwiki-mcp (NEW 4/2)
+
+Read and write wiki pages on w.amazon.com.
+
+Tools: get_wiki_page (read), put_wiki_page (create/update).
+
+get_wiki_page: path parameter like "MyTeam/MyPage" maps to w.amazon.com/bin/view/MyTeam/MyPage.
+put_wiki_page: path, content (XWiki syntax xwiki/2.1), optional title and syntax.
+
+Relevance: Team processes, OCI implementation guides, internal documentation that lives on w.amazon.com. Could feed wiki-concierge with broader search capability beyond Richard's own wiki pipeline.
+
+Docs: https://w.amazon.com/bin/view/Users/joshcw/XWikiMcp
+
+---
+
+## 13. builder-mcp (NEW 4/2)
+
+Amazon Software Builder MCP. Massive toolset for internal Amazon development workflows.
+
+Key tool groups relevant to Richard:
+
+Reading internal websites (ReadInternalWebsites):
+- Quip documents (quip-amazon.com/ID)
+- Phonetool (employee lookup)
+- Taskei tasks (taskei.amazon.dev/tasks/TASK_ID)
+- SIM tickets (issues.amazon.com/issues/ISSUE_ID)
+- Wiki pages (w.amazon.com/bin/view/PATH)
+- Meetings (meetings.amazon.com/calendar/find/LOGIN)
+- Code reviews (code.amazon.com/reviews/CR-XXXXXXXX)
+- Paste (paste.amazon.com)
+- Oncall (oncall.corp.amazon.com)
+- Apollo environments
+- Pipelines (pipelines.amazon.com)
+- Kingpin goals
+
+Quip editing (QuipEditor):
+- Read documents with structure analysis
+- Add/edit/delete content at specific locations
+- Create new documents
+- Supports markdown and HTML
+
+Internal search (InternalSearch):
+- Domains: ALL, WIKI, BUILDER_HUB, PHONETOOL, SAGE_HORDE, BROADCAST, INSIDE, POLICY, EMAIL_LIST, and more
+- KQL query syntax with filters
+
+Code search (InternalCodeSearch):
+- Search code across Amazon repositories
+- Code snippets and repository search
+
+Taskei integration (TaskeiGetTask, TaskeiListTasks, TaskeiCreateTask, TaskeiUpdateTask, TaskeiGetRooms, TaskeiGetRoomResources):
+- Full CRUD on Taskei tasks/SIM issues
+- List tasks with filters (status, assignee, room, sprint, labels)
+- Create and update tasks with all fields
+- Get room resources (labels, sprints, kanban boards, workflow steps)
+
+Pipeline tools (GetPipelinesRelevantToUser, GetPipelineHealth, GetPipelineDetails):
+- Pipeline status and health metrics
+- Failed builds, deployments, tests
+- Pending approvals
+
+Apollo tools (ApolloReadActions):
+- Environment and stage details
+- Deployment history and changes
+- Capacity information
+
+Oncall tools (OncallReadActions):
+- Search teams, list user teams
+- Get shifts and schedules
+- Generate oncall reports
+
+Ticketing (TicketingReadActions, TicketingWriteActions):
+- Search SIM-T tickets
+- Get ticket details with threads
+- Create and update tickets
+- Add comments
+
+Workspace tools (BrazilWorkspace, WorkspaceGitDetails, CRRevisionCreator, CrCheckout):
+- Brazil workspace management
+- Git operations
+- Code review creation
+
+Build tools (BrazilBuildAnalyzerTool, BrazilPackageBuilderAnalyzerTool):
+- Build failure analysis
+- Package builder diagnostics
+
+Mechanic tools (MechanicDiscoverTools, MechanicDescribeTool, MechanicRunTool):
+- Host operations, AWS resource management
+- CloudWatch logs, EC2, ECS operations
+
+Other: SimAddComment, WorkspaceSearch, SearchAcronymCentral, GetSasRisks, GetSasCampaigns, ReadRemoteTestRun.
+
+Limitations:
+- No auto-approved tools (each call needs approval unless added)
+- Very large toolset; most tools are engineering-focused
+- Richard's primary use: Quip reading, internal search, Taskei tickets, phonetool lookups
+
+---
+
+## 14. taskei-p-mcp (NEW 4/2)
+
+Dedicated Taskei MCP server. Status: installed but untested.
+
+May overlap with builder-mcp's Taskei tools. Needs investigation to determine if it offers additional capabilities or is redundant.
+
+---
+
+## 15. aaisd-redshift-mcp
+
+Redshift query server. Status: untested.
+
+Potentially useful if Richard needs to query Redshift data directly (e.g., AAISD analytics). Needs investigation.
+
+---
+
+## P1. power-aws-agentcore (Kiro Power)
+
+Bedrock AgentCore. Build, test, deploy AI agents. Not daily-use tooling. Relevant only if Richard moves to Level 5 (Agentic Orchestration) and needs to deploy agents to AWS infrastructure.
+
+---
+
+## Pending Installations
+
+| Server | Status | What it does | When to install |
+|--------|--------|-------------|-----------------|
+| enterprise-asana-mcp | ✅ Live | Native Asana read/write — command center for task management | Connected |
 
 ---
 
@@ -414,25 +342,64 @@ Full CRUD on To-Do tasks.
 ### Outlook Folders
 | Folder | ID |
 |--------|-----|
-| Auto-Comms (Asana) | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy/SDRrGkcLnEuZ4GAQDAgFdLn8NBQbObwPn0M6aUAADuhyQpAAA=` |
-| Auto-meeting       | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy/SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja/dZLhI0AAC3dkeCAAA=` |
-| Goal: Paid Acquisition | `AQMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1ADdkM2EwYWMALgAAAyuwPeLL9INGsaRwucS5ngYBAEas7LcSB6lEv39h0ciIq84AAAITTwAAAA==` |
-| AP (Invoices) | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy/SDRrGkcLnEuZ4GAQDAgFdLn8NBQbObwPn0M6aUAADuhyQcAAA=` |
+| Auto-Comms (Asana) | AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy/SDRrGkcLnEuZ4GAQDAgFdLn8NBQbObwPn0M6aUAADuhyQpAAA= |
+| Auto-meeting | AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy/SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja/dZLhI0AAC3dkeCAAA= |
+| Goal: Paid Acquisition | AQMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1ADdkM2EwYWMALgAAAyuwPeLL9INGsaRwucS5ngYBAEas7LcSB6lEv39h0ciIq84AAAITTwAAAA== |
+| AP (Invoices) | AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy/SDRrGkcLnEuZ4GAQDAgFdLn8NBQbObwPn0M6aUAADuhyQcAAA= |
 
 ### To-Do Lists
 | List | ID |
 |------|-----|
-| 🧹 Sweep | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESHAAA=` |
-| 🎯 Core | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESIAAA=` |
-| ⚙️ Engine Room | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESJAAA=` |
-| 📋 Admin | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESKAAA=` |
-| 📦 Backlog | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADWyS4nAAA=` |
+| Sweep | AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESHAAA= |
+| Core | AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESIAAA= |
+| Engine Room | AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESJAAA= |
+| Admin | AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESKAAA= |
+| Backlog | AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADWyS4nAAA= |
 
-## Known Gotchas
+### Slack Channels (guardrailed)
+| Channel | ID | Write Access |
+|---------|-----|-------------|
+| rsw-channel | C0993SRL6FQ | YES (only channel with write) |
+| All others | various | READ ONLY |
 
-1. **Triple-nested JSON**: Response is JSON → JSON string → JSON string → actual data. Must parse 3 times.
-2. **Shell escaping**: HTML bodies with quotes/special chars break `echo` pipe. Use cat-pipe method (write to temp file, then `cat file | aws-outlook-mcp`).
-3. **Timeout**: Always use `timeout 15` or `timeout=30` — the binary can hang if the API is slow.
-4. **Folder IDs**: The Auto-Comms folder ID uses `/` in the base64 (not `-`). The To-Do list IDs use `-` instead of `/`. Both are valid — they're different Microsoft Graph resources.
-5. **Unicode in titles**: Microsoft To-Do stores emoji in task titles. Some render as boxes in terminal. The `clean_todo_titles.py` script handles replacement.
-6. **No streaming**: The binary processes one request per invocation and exits. No persistent connection.
+---
+
+## Tool Selection Guide
+
+| I need to... | Use this server | Tool |
+|-------------|----------------|------|
+| Search/read email | aws-outlook-mcp | email_search, email_read |
+| Draft an email | aws-outlook-mcp | email_draft |
+| Check calendar | aws-outlook-mcp | calendar_view |
+| Create focus block | aws-outlook-mcp | calendar_meeting |
+| Manage To-Do tasks | aws-outlook-mcp | todo_tasks |
+| Search Slack | ai-community-slack-mcp | search |
+| Read Slack channel | ai-community-slack-mcp | batch_get_conversation_history |
+| Read Slack thread | ai-community-slack-mcp | batch_get_thread_replies |
+| Draft Slack message | ai-community-slack-mcp | create_draft |
+| Get meeting transcript | hedy | GetSessionDetails |
+| Query PS metrics | duckdb | execute_query |
+| Check security policy | arcc | search_arcc |
+| Read SharePoint file | amazon-sharepoint-mcp | sharepoint_read_file |
+| Read Loop page | loop-mcp or amazon-sharepoint-mcp | read_loop |
+| Check weblab status | weblab-mcp | weblab_details, weblab_allocations |
+| Check weblab history | weblab-mcp | weblab_activation_history |
+| Read w.amazon.com wiki | xwiki-mcp | get_wiki_page |
+| Read Quip document | builder-mcp | QuipEditor |
+| Search internal docs | builder-mcp | InternalSearch |
+| Look up employee | builder-mcp | ReadInternalWebsites (phonetool) |
+| Read Taskei ticket | builder-mcp | TaskeiGetTask |
+| Create Taskei ticket | builder-mcp | TaskeiCreateTask |
+| Search code | builder-mcp | InternalCodeSearch |
+
+---
+
+## Auto-Approve Recommendations
+
+Servers with no auto-approved tools require manual approval per call. Consider adding auto-approve for frequently used read-only tools:
+
+- weblab-mcp: all 4 tools are read-only, safe to auto-approve
+- xwiki-mcp: get_wiki_page is read-only, safe to auto-approve
+- builder-mcp: ReadInternalWebsites, InternalSearch, QuipEditor (read mode), TaskeiGetTask, TaskeiListTasks are read-only and high-frequency for Richard's work
+
+Richard should decide which to auto-approve based on usage patterns.

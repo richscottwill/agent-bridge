@@ -1,0 +1,13 @@
+{
+  "name": "Guard: Calendar",
+  "version": "2",
+  "description": "Blocks calendar events with external attendees. Personal blocks allowed.",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": [".*calendar_meeting.*", ".*calendar_event.*"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Inspect ALL attendee fields. No attendees or ONLY prichwil → ACCESS GRANTED. ANY other → ACCESS DENIED. Ask approval. If denied, create without attendees."
+  }
+}

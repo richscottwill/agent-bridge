@@ -1,5 +1,7 @@
 ---
-inclusion: always
+inclusion: auto
+name: "Slack Communication Guardrails"
+description: "Rules for Slack messaging, DM posting, channel operations, ingestion cycles, audit logging"
 ---
 
 # Slack Communication Guardrails

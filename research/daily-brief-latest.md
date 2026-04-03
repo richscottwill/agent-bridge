@@ -1,66 +1,83 @@
-# Daily Brief — Wednesday, April 1, 2026
+# Daily Brief — Friday, April 3, 2026
 
-## TRAINER CHECK-IN
-Twelve workdays. Zero outline. W14 day 3. Kate meeting is 11 business days away. The Slack scan just surfaced 4 open Brandon requests you haven't responded to — OCI verification (2 days stale), Enhanced Match investigation, F90 implementation, and Asana updates. Your manager is waiting on you in multiple threads. That's not a visibility problem — that's a responsiveness problem. The Testing Approach doc is still the hard thing, but today you also need to close these Brandon loops before they become a pattern he notices.
+## 🏋️ TRAINER CHECK-IN
+**Streak:** 0 days (Testing Doc for Kate — 14 workdays at zero)
+**The Hard Thing:** Testing Document for Kate. Meeting canceled but Brandon reviewing doc first. Document still valuable. You have draft edits ready. Even 30 minutes today breaks the streak.
+**Friday:** Calibration day. Run Agent Bridge Sync before EOD.
 
-Action: Core block → Testing Approach outline (90 min). Sweep block → close all Brandon Slack threads + Lena response + Stacey replies. Don't let the Sweep eat the Core.
+## 🔔 HEADS UP
+- **Austin trip next week** — Brandon preregistered everyone for AUS20 building access. Breakfast tacos incoming (reply to Brandon's taco order question).
+- **Brandon DM** — asking about a WorkDocs doc version. Adding task for team to update. Check and respond.
+- **Prime Day Creative Phase 4** — inputs due EOD TODAY on Smartsheets.
 
-Context: AU PS Weekly Update bounced — Lena and Alexis didn't receive it. Resend to correct addresses. Brandon named you as POC for Clara's EU Paid Channels thread. F90 has Legal approval. New channel discovered (ab-ps_partnership-accounts) with critical action items.
+## 💬 SLACK OVERNIGHT
+- Brandon: 8 messages (mostly Austin logistics — building access, coffee, tacos)
+- Kate: silent since 4/2
+- Richard mentions: 1 (taco order question)
+- Hot topics: Q1 Closing/Budget, AU Lena CPA, Deepika Transition (zxzhou@ now OCI Data Science), Kate AI Channel (ab-marketing-ai — L4/L5 alignment, recommend joining)
 
-## SLACK OVERNIGHT
-- [ACTION-RW] VPN verify OCI live ad in IT/ES — Brandon waiting 2 days (#ab-paid-search-global)
-- [ACTION-RW] Enhanced Match — ask Abdul 4 questions, reach out to Adobe (#ab-ps_partnership-accounts)
-- [ACTION-RW] F90 Legal approved — continue Media/Tech embedding (#ab-ps_partnership-accounts)
-- [ACTION-RW] Update Asana with tech request info (#ab-ps_partnership-accounts)
-- LiveRamp EU — Brandon DM: partner with Abdul on availability chart + impact scoping
-- Brandon joining AU Lena sync → reducing to biweekly (DM)
-- Stacey: JP ref tag guidance needed + Baloo speaking role (DM + #ab-ps_jp)
-- Alexis: AU sync cancelled this week — org meeting conflict (DM)
-- New channel discovered: ab-ps_partnership-accounts — added to Tier 1
+## 📋 TODAY (from Asana)
 
-## TODAY'S MEETINGS
-- 12:00pm PT — Richard/Adi sync (25 min). Prep: AI ad-copy workflow follow-up, JP OCI preflight status, process-snap sync scheduling.
+### 🧹 Sweep (5/5 — at cap)
+1. Respond to Lena — AU LP URL analysis + CPA methodology (due 4/3) [L2]
+2. Reply to Stacey — CA exclusion from Polaris 4/7 testing (due 4/3) [L2]
+3. ie%CCP calc — insert MX spend/regs before 9th (due 4/3) [L2]
+4. Prime Day Creative Phase 4 inputs — Smartsheets (due 4/3) [L2] ← NEW
+5. Refmarker mapping audit PoC — AU (due 4/7) [L2] ← NEW
 
-## CALENDAR BLOCKS
-- 🧹 Sweep (8:00-8:30am): Close Brandon Slack threads (OCI verify, Enhanced Match, F90). Reply to Stacey DMs. Respond to Lena (resend bounced email + answer questions).
-- 🎯 Core (9:00-10:30am): Testing Approach doc outline. 5 headers, 2-3 bullets each. Share with Andrew. THE HARD THING.
-- ⚙️ Engine Room (1:00-1:45pm): VPN verify OCI IT/ES ad. OCI FR TT/suffix to 25%. MX/AU confirm budgets.
-- 📋 Admin (4:00-4:30pm): Flash topics. PAM R&O input. Finance actuals reminder (due 4/3).
+### 🎯 Core (4/4 — at cap)
+1. **Testing Document for Kate** (due 4/1, 2d overdue) [L2] ← THE HARD THING
+2. Update and close your goal(s) (due 4/3) [L1]
+3. Share ENG max budget calculation file with Andrew (due 4/3) [L2]
+4. Email overlay WW rollout/testing (due 3/27, 7d overdue) [L2]
 
-## PENDING REPLIES
-- Lena — AU PS Weekly Update follow-up (3 questions + bounced email resend)
-- Lorena — Q2 spend + keyword data (drafts ready in Outlook)
-- Stacey — Baloo speaking role + JP ref tag guidance
-- Brandon — OCI IT/ES verification (Slack thread, 2d stale)
-- Clara — EU Paid Channels (Brandon named you as POC, may need to schedule call)
+### ⚙️ Engine Room (4/6 — under cap)
+1. Weekly Reporting — Global WBR sheet (due 3/30, 4d overdue) [L2]
+2. Look over AU landing page switch (due 3/25, 9d overdue) [L2]
+3. Monthly: Individual Goals update (due 4/10) [L1]
+4. Make changes to AU/MX/PAM for the week [L2]
 
-## DUE THIS WEEK
-| Task | Due | List |
-|------|-----|------|
-| Testing Approach outline | TODAY | 🎯 Core |
-| VPN verify OCI IT/ES | TODAY | 🧹 Sweep |
-| Respond to Lena | TODAY | 🧹 Sweep |
-| Enhanced Match — ask Abdul | TODAY | 🧹 Sweep |
-| Reply to Stacey | TODAY | 🧹 Sweep |
-| Send Lorena replies | TODAY | 🧹 Sweep |
-| F90 Media/Tech embedding | Thu | 🧹 Sweep |
-| LiveRamp EU — Abdul chart | Fri | 🧹 Sweep |
-| Polaris weblab dial-up | Apr 7 | ⚙️ Engine Room |
-| Enhanced Match Legal Approval | Apr 7 | 🧹 Sweep |
+### 📋 Admin (3/3 — at cap)
+1. MBR callout (due 4/2, 1d overdue) [L2]
+2. Send AU team invoice for prev month (due 5/2) [L2]
+3. Monthly — Confirm actual budgets (due 4/1, 2d overdue) [L2]
 
-## HEADS UP
-- AU PS Weekly Update BOUNCED — delivery failed to lena@amazon.com and alexis@amazon.com. Wrong addresses. Resend to lenazak@amazon.com and alexieck@amazon.com.
-- Brandon named you as POC for Clara's EU Paid Channels thread (LiveRamp/Tumble blocked in EU). Clara may schedule a call.
-- Polaris pages: Vijeth completed minimal header/nav for all markets. 2 remaining items: ASIN updates + card issue for EU5 pages. Weblab dial-up still targeting Apr 6-7.
-- Asana: Brandon changed Enhanced Match Legal Approval due date to Apr 7. Two new tasks assigned to Richard.
-- Alex VanDerStuyf: ps-brand pages WW task — Vijeth tracking remaining items via SharePoint.
+### ⚠️ Overdue: 13 tasks
+Oldest: PAM US PO (31d), PAM R&O (22d), Flash topics (14d)
 
-## aMCC STATUS
-| Streak | Stalled | Window |
-|--------|---------|--------|
-| 0 | 12d | 1.5h (Core) |
+### 📦 Needs Triage: ~48 tasks (no Routine set)
 
-Hard thing: Testing Approach doc for Kate. 12 workdays at zero. Kate meeting Apr 16. The outline is 90 minutes of work. Today's Core block is 9:00-10:30am. No meetings until noon. No excuses.
+### Five Levels Breakdown
+- L1 (Sharpen): 2 tasks (goals updates)
+- L2 (Testing): 12 tasks (bulk of today's work)
+- L3 (Automation): 0
+- L4 (Zero-Click): 0
+- L5 (Agentic): 0 active pipeline tasks today
 
-## SYSTEM HEALTH
-Slack ingestion broadened — hybrid search strategy live. Discovered ab-ps_partnership-accounts channel (added Tier 1). 3 Slack auth errors (intermittent, retry next cycle).
+## 📊 ACTIVITY SIGNALS
+No activity monitor data from this scan (first scan with new setup — asana-scan-state.json has null timestamps). Activity monitoring will populate on next AM-1 run.
+
+## ⚠️ GOAL ALERTS
+- AU tests: 🟡 yellow — 0% progress, FY26 target
+- MX tests: 🟡 yellow — 0% progress, FY26 target
+- AU Brand LP test: 🟡 yellow — 0% progress, Q1 ended
+- MX Brand LP test: 🟡 yellow — 0% progress, Q1 ended
+- All 4 test goals at 0% — the Testing Document for Kate is the foundation for addressing this.
+
+## 🏭 ABPS AI Document Factory
+No snapshot data from this scan — ABPS AI pipeline scan was deferred. Run full AM-2 in a dedicated session to populate.
+
+## 🔧 SYSTEM HEALTH
+- Kiro Setup Optimization: COMPLETE. 16 tasks executed. 6 steering files converted to auto-inclusion, 8 skills created, 5 new hooks deployed, soul.md trimmed.
+- New hooks active: guard-asana (preToolUse), audit-asana-writes (postToolUse), context-preloader (promptSubmit), session-summary (agentStop), organ-change-detector (fileEdited)
+- Token savings: ~3,500 tokens/interaction from steering optimization
+- Backups: ~/kiro-steering-backup/
+- Friday: Run Agent Bridge Sync to version the steering changes
+
+## 📅 CALENDAR
+Blocks already created from earlier AM-3 run:
+- 🧹 Sweep Block: 8:00-9:15am (5 tasks)
+- 🎯 Core Block — THE HARD THING: 9:15am-12:00pm (4 tasks)
+- ⚙️ Engine Room Block: 12:00-1:00pm (3 tasks)
+- 📋 Admin Block: 1:00-1:45pm
+- AppTweak <> Amazon Business: 11:00-11:30am (conflicts with Core block)

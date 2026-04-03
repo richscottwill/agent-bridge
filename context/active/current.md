@@ -1,6 +1,6 @@
 # Active Context — Richard Williams
 
-Last updated: 2026-04-02 (Thursday PT, autoresearch loop run 17)
+Last updated: 2026-04-03 (Friday PT, EOD-1 meeting sync)
 
 ## Role & Scope
 - Amazon Business, Paid Acquisition / Paid Search
@@ -220,10 +220,20 @@ Last updated: 2026-04-02 (Thursday PT, autoresearch loop run 17)
 | Praveen Chandolu | chandop | OCI Tech. Working with Brandon on new APAC account setup. |
 
 ## Pending Actions
-- [ ] 🚨 Testing Approach doc for Kate — THE hard thing. Apr 16 meeting. Draft exists. Bridge doc created (sections outlined). Andrew active. 12 WORKDAYS AT ZERO.
+- [ ] 🚨 Testing Approach doc for Kate — THE hard thing. Apr 16 meeting OFFICIALLY CANCELED (4/3 email: Brandon told Kate "cancel for now and reassess as we clean it up." Kate: "I'm fine keeping it but wanted to make sure we had a plan." Megan declining from Kate's calendar.) Brandon reviewing doc first. Document still valuable. Continue refining.
+- [ ] $70K OP2 underspend — confirm March spend with BK Cho, set up automated ASP reminders (immediate)
+- [ ] Obtain TPS checklist from Abdul for F90 audience request (immediate)
+- [ ] Gather Enhanced Match specs from LiveRamp, draft one-page FAQ (by Apr 22)
+- [ ] Set up 15-min walkthrough with Andrew Wirtz for Kiro ASP workflow
+- [ ] Reframe AdWords knowledge base ticket as risk mitigation tied to $70K underspend
 - [ ] Respond to Lena's AU PS Weekly Update follow-up questions (landing page URLs, repeat visitor CPA overstating) — 1d, high-visibility. Brandon offering support in ABIX.
 - [ ] Reply to Stacey DM — CA exclusion from Polaris 50/50 testing on 4/7 (reason: OCI data clean focus)
 - [ ] Share ENG max budget calculation file with Andrew (DM 4/1) — Brandon mentioned in Andrew's 1:1 for OP1 recalculation
+- [ ] Finalize market expansion playbook with updated structure (next week from 4/2 — from Deep Dive)
+- [ ] Year-One Optimization one-pager mapping to KPIs (by Apr 16 — from Deep Dive)
+- [ ] Create living negative keyword list in global chat (immediate — from Deep Dive)
+- [ ] IECCP FAQ for new account playbook (by Apr 9 — from Deep Dive)
+- [ ] Follow up with Lorena (MX) and Alexis (AU) on WhatsApp rollout plans (from PSME demo 4/2)
 - [ ] Kudoboard for Kate Vives — was due 4/1, NOW OVERDUE
 - [ ] Provide Lorena Q2 expected spend for MX PO submission (8d overdue — 3/25 request). Richard told Lorena he'd update (Slack 4/1).
 - [ ] Reply to Lorena keyword data request (14d overdue — 3/19 request)

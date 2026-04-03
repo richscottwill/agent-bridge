@@ -4,8 +4,8 @@
 
 *Operating principle: Reduce decisions, not options. Every task should have a clear next action, a pre-written draft if it involves communication, and a due date that drives My Day. Richard opens his list and acts — he doesn't plan.*
 
-Last updated: 2026-04-02 (loop run 17)
-Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, Slack ingestion, DM scan
+Last updated: 2026-04-03 (EOD-2 run 19)
+Sources: rw-tracker.md, Asana My Tasks, ABPS AI Content, Slack scan, DM scan
 
 ---
 
@@ -14,16 +14,22 @@ Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, Slack ingestion,
 <!-- Full task list: db("SELECT id, priority, description, due_date, status, blockers, category FROM task_queue WHERE status != 'DONE' ORDER BY priority, due_date") -->
 <!-- Overdue: db("SELECT id, description, due_date, DATEDIFF('day', due_date, CURRENT_DATE) as days_overdue FROM task_queue WHERE due_date < CURRENT_DATE AND status NOT IN ('DONE','BLOCKED') ORDER BY due_date") -->
 
-### Top 5 This Week (snapshot — refreshed each morning routine)
+### Top 5 This Week (snapshot — refreshed EOD 4/3)
 | # | Action | Due | Status |
 |---|--------|-----|--------|
-| P0 | **Testing Approach doc outline** — Kate Apr 16. THE HARD THING. | Apr 16 | NOT STARTED (12 workdays) |
-| P1 | **Respond to Lena** — AU LP URL analysis + CPA overstating. Brandon offering support. | ASAP (2d) | NOT STARTED |
-| P1 | **Reply to Stacey DM** — CA exclusion from Polaris 4/7 testing | ASAP (1d) | NOT STARTED |
-| P1 | **Share ENG budget file with Andrew** — OP1 recalculation | ASAP (1d) | NOT STARTED |
-| P1 | **Respond to Lorena** — Q2 expected spend for MX PO | ASAP (8d overdue) | NOT STARTED |
+| P0 | **Testing Approach doc outline** — Kate Apr 16. THE HARD THING. 15 workdays at zero. | Apr 16 | NOT STARTED |
+| P1 | **Respond to Lena** — AU LP URL analysis + CPA overstating. Brandon offering support. | OVERDUE (4/3) | NOT STARTED |
+| P1 | **Reply to Stacey DM** — CA exclusion from Polaris 4/7 testing | OVERDUE (4/3) | NOT STARTED |
+| P1 | **Share ENG budget file with Andrew** — OP1 recalculation | Due 4/4 | NOT STARTED |
+| P1 | **Respond to Lorena** — Q2 expected spend for MX PO | OVERDUE (10d) | NOT STARTED |
 
-14 items overdue (oldest: PAM US PO, 31 days). 2 blocked (MX Auto page on Vijeth, Kingpin on Andes). 28 total tasks in queue.
+14 items overdue (oldest: PAM US PO, 35d). 2 blocked (MX Auto page on Vijeth 15d, Kingpin on Andes 18d). ~97 total tasks in My Tasks.
+
+### Blocker Registry (EOD 4/3)
+| Task | Blocker | Owner | First Detected | Days Blocked |
+|------|---------|-------|----------------|-------------|
+| MX Automotive page | Footer component | Vijeth | 2026-03-20 | 15 |
+| Kingpin Goals MX | Andes data unavailable | Andes team | 2026-03-17 | 18 |
 
 ## Recurring Execution Work (Google Ads: MX, AU, Paid App)
 
@@ -39,15 +45,15 @@ Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, Slack ingestion,
 - Kingpin Goals → blocked by Andes data
 - MX/AU budgets → blocked by R&O tasks
 
-## New Signals (since 4/2 morning)
-- 🆕 Brandon ABIX (4/2 3:05am): "She needs to cool her jets and Kate is very much realizing it" — re: Lena. Positive signal for Richard's position. Kate aware of Lena's intensity.
-- 🆕 JP OCI MCM-147368188 COMPLETE: Implementation done, feed enabled by mpgupta. Yashasvi confirmed. JP tracking template fully operational.
-- 🆕 JP Brand LP experiment: Stacey confirmed ref_= carry-over works. Richard provided technical guidance. Experiment targeting live today (4/2). JP excluded from WW Polaris test — running independently.
-- 🆕 Asana: Saajan changed Abandoned Cart priority from High to Low.
-- ⏳ Stacey DM (4/1 11:38pm): CA Polaris exclusion question — STILL UNANSWERED.
-- ⏳ Andrew DM (4/1 9:18pm): ENG budget file request — STILL UNANSWERED.
-- 📅 TODAY 4/2: PSME Demo 8am, Deep Dive & Debate 9am (Brandon) + ACQ Promo OHs 9am (conflict), Richard/Brandon 1:1 12pm. Focus blocks: Sweep 8am, Core 9am, Engine Room 1pm, Admin 4pm.
-- 📅 TOMORROW 4/3: AppTweak <> Amazon Business 11am. Finance actuals due EOD.
+## New Signals (EOD-2 4/3)
+- ✅ Daily reset: 6 Today tasks demoted to Urgent with Kiro_RW carry-forward + Next action set.
+- ✅ Recurring check: No recurring tasks completed today.
+- ⏳ Stacey DM (4/1): CA Polaris exclusion — OVERDUE (3d). One-sentence reply needed.
+- ⏳ Andrew DM (4/1): ENG budget file — OVERDUE (3d). Due 4/4.
+- ⏳ Lorena: Q2 MX spend — OVERDUE (10d).
+- ⏳ Lena: AU LP URL analysis — OVERDUE (due 4/3).
+- ⚠️ No L1 effort today — 15 workdays at zero. Testing Approach is the hard thing.
+- 📅 MONDAY 4/7: Clean Today slate. Polaris weblab dial-up 4/6-4/7. CA OCI launch.
 
 ---
 
@@ -83,35 +89,41 @@ Backlog: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-S
 
 | # | Hook | Trigger | Purpose |
 |---|------|---------|---------|
-| 1 | Morning Routine (`rw-morning-routine`) | userTriggered | One-click: Asana sync → draft replies → To-Do refresh → daily brief → calendar blocks |
-| 2 | Run the Loop (`run-the-loop`) | userTriggered | Maintenance → cascade to organs → optionally 1 experiment |
-| 3 | Block Email Send | preToolUse | Blocks email_reply/send/forward unless only recipient is prichwil |
-| 4 | Block Calendar Invite | preToolUse | Blocks calendar events with external attendees |
-| 5 | Hedy Meeting Sync (`hedy-meeting-sync`) | userTriggered | Pulls latest Hedy sessions, analyzes Richard's communication patterns, updates context files |
+| AM-1 | Ingest (`am-1-ingest`) | userTriggered | Slack scan + Asana sync + email scan → intake files |
+| AM-2 | Triage + Draft (`am-2-triage`) | userTriggered | Process intake → update tasks + draft replies |
+| AM-3 | Brief + Blocks (`am-3-brief`) | userTriggered | Daily brief + Slack posts + dashboard + calendar blocks |
+| EOD-1 | Meeting Sync (`eod-1-meeting-sync`) | userTriggered | Hedy + Outlook → meetings/ series files |
+| EOD-2 | System Refresh (`eod-2-system-refresh`) | userTriggered | Maintenance cascade + experiments + git sync |
+| 1 | WBR: Weekly Callouts (`wbr-callouts`) | userTriggered | Full 10-market callout pipeline |
+| 2 | Sync to SharePoint (`sharepoint-sync`) | userTriggered | Wiki → SharePoint via OneDrive |
+| 3 | PS Audit (`ps-audit`) | userTriggered | Paid search audit pipeline |
+| 4 | Agent Bridge Sync (`agent-bridge-sync`) | userTriggered | Sync portable-body/ to GitHub |
+| — | Guard: Email | preToolUse | Blocks email send unless only recipient is prichwil |
+| — | Guard: Calendar | preToolUse | Blocks calendar events with external attendees |
 
-**Morning Routine is the daily driver.** Run the Loop is for context refresh + experiments (can run independently or before the morning routine for deeper context).
+**AM-1→2→3 is the daily driver.** EOD-1→2 runs after meetings. Each hook loads only what it needs — failure is isolated.
 
-### Asana Bridge (workaround)
-- **Create tasks**: Email x@mail.asana.com (include Richard's email)
-- **Read task updates**: Check Auto-Comms folder for Asana notification emails
-- **Read meeting context**: Check Auto-meeting folder for Hedy recaps and Amazon Meetings Summary
-- **Task ID extraction**: "View task" URLs in notifications contain `/task/{id}`. Stored in To-Do task bodies as `ASANA: {id}`.
-- **Full protocol**: `~/shared/context/active/asana-sync-protocol.md`
+### Asana (Enterprise Asana MCP — LIVE)
+- **Full read/write access** via Enterprise Asana MCP. SearchTasksInWorkspace, GetTaskDetails, UpdateTask, CreateTask, CreateTaskStory, GetTaskStories, SetParentForTask, GetGoal, etc.
+- **Command center protocol**: `~/shared/context/active/asana-command-center.md`
+- **Guardrails**: Only modify tasks assigned to Richard (GID 1212732742544167). Audit all writes to `asana-audit-log.jsonl`.
+- **AM-2 writes**: Kiro_RW context, task creation from signals, bucket moves, due date changes, completions, comments.
+- **EOD-2 writes**: Carry-forward Kiro_RW, daily reset (Today → Urgent), blocker registry updates.
 
 ---
 
 ## Tool & Automation Opportunities
 
-| Tool | Status | Impact | Notes |
-|------|--------|--------|-------|
-| Campaign link generator | Backlog | Save time on promo URL updates | Would have saved time on AU sitelink update for Alexis |
-| WBR auto-briefing | Proposed | Replace manual WBR coverage | Agent pulls traffic/conversion data, drafts callouts |
-| Budget forecast helper | Proposed | Pre-fill RO spreadsheet from actuals + trend | Reduce manual budget spreadsheet time |
-| Invoice/PO automation | Proposed | Route invoices without manual intervention | Carlos can own MX, AU should be process not person |
-| Goal status updater | Proposed | Auto-generate Kingpin updates from campaign data | Never fall behind on goals again |
-| Testing tracker | Proposed | Structured log of all tests + results | OP1 doc is narrative; this is operational |
-| Competitive intel agent | Proposed | Monitor competitor ad copy and strategy shifts | Automated version of competitor-intel tracking |
-| AI search landscape monitor | Proposed | Track Google AI Overviews, Bing Chat changes | Relevant to AEO/zero-click future |
+| Tool | Status | Impact |
+|------|--------|--------|
+| Campaign link generator | Backlog | AU/MX sitelink URL construction |
+| WBR auto-briefing | Proposed | Agent drafts callouts from data |
+| Budget forecast helper | Proposed | Pre-fill RO from actuals + trend |
+| Invoice/PO automation | Proposed | Route without manual intervention |
+| Goal status updater | Proposed | Auto-generate Kingpin from campaign data |
+| Testing tracker | Proposed | Structured test log (operational, not narrative) |
+| Competitive intel agent | Proposed | Monitor competitor ad copy shifts |
+| AI search landscape monitor | Proposed | Track AI Overviews, zero-click changes |
 
 ---
 

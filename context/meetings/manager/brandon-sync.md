@@ -13,6 +13,30 @@ Brandon is Richard's direct manager. This is the most strategically important me
 Key dynamic: Brandon is generous with praise when earned but direct about growth areas. Richard's #1 growth area per annual review: visibility — "maintaining consistent visibility across all workstreams." Brandon wants Richard to proactively share outcomes, not wait to be asked.
 
 ## Latest Session
+### 2026-04-02 — Spend Reporting and LiveRamp Progress Sync (58 min)
+- $70K OP2 underspend identified: Richard failed to confirm March spend via required email to BK Cho. Task was on QROW to-do but missed. Funds at risk of XCM reclamation under "use it or lose it" rules.
+- Context: central team recently lost $2B in PS funding due to underspending — heightened scrutiny across all teams including AB. Pablo closely monitoring pacing.
+- Prevention: Brandon suggested automating monthly ASP confirmation reminders via QROW or Kiro. Andrew Wirtz already has a Kiro workflow for callouts — Richard to replicate.
+- Fund reallocation: Richard proposed transferring unspent US funds to Google ads or internally (e.g., to Stacey). York may facilitate transfers better than BK Cho (rigid on process).
+- AdWords knowledge base ticket still stalled despite tech acknowledging value. Brandon: reframe as risk mitigation tool tied to the $70K underspend to create urgency. Link to Q1 IECCP budget strategy.
+- LiveRamp F90 audience implementation stalled: TPS checklist and documentation not inserted into tech request. Abdul is key contact. Richard committed to obtaining docs immediately.
+- Enhanced Match: could increase match rates from 12% to ~20%. Requires separate legal approval — unknown data requirements, potential Google payload changes, new contract clauses. Richard to gather specs from LiveRamp and compile one-page FAQ for legal. Funding available from Morrow.
+- Lena Zak pattern: Brandon flagged repeated decision reversals (AU CPC keyword cuts, Polaris URL reverts) — tactical overreach without LTV context. Encouraged Richard to proactively share outlier analysis and own the AU optimization narrative.
+- GenBI: positioned as empowerment mechanism for stakeholders (Lena) to do self-service analysis. Richard validates findings instead of providing raw data. Shifts role from data provider to strategic advisor.
+- **Kate meeting CANCELED:** April 16 Testing Approach meeting canceled at Brandon's request. Kate needs time to review the document first. Brandon will review and determine how to use it — possibly without a formal meeting. Document itself remains valuable.
+- Richard has draft edits ready for testing framework. Will continue refining with Brandon after his review.
+- Decisions: Cancel Apr 16 Kate meeting. Richard leads Abdul/LiveRamp outreach. GenBI as self-service tool. $70K treated as process failure, focus on prevention.
+- Action items:
+  - Richard: obtain TPS checklist from Abdul for F90 audience (immediate)
+  - Richard: gather Enhanced Match specs from LiveRamp, draft one-page FAQ (by Apr 22)
+  - Richard: set up 15-min walkthrough with Andrew to capture Kiro ASP workflow
+  - Richard: cancel April 16 Kate meeting (done per Hedy)
+  - Richard: reframe AdWords knowledge base ticket as risk mitigation tied to $70K underspend
+  - Richard: set up automated monthly ASP confirmation reminders
+  - Brandon: review testing framework doc and advise on presentation approach (by Apr 5)
+  - Brandon: discuss Robert's resistance to audience inclusion in his 1:1 (Apr 3)
+
+## Previous Session
 ### 2026-03-24 — Annual Review 1:1 (32 min)
 - Brandon shared annual review: Overall Meets High Bar, LP Solid Strength
 - "Solid strength" is the ceiling for everyone unless actively being promoted — "walk on water" is reserved for promo cycles
@@ -46,17 +70,22 @@ Key dynamic: Brandon is generous with praise when earned but direct about growth
 ## Running Themes
 - Visibility gap: Richard needs to proactively share wins and outcomes, not just do the work
 - Strategic framing over status updates: Brandon wants "here's what I recommend" not "here's what happened"
-- AU CPC defense: building the data narrative to satisfy Lena without over-cutting keywords
-- Testing methodology: OP1 doc for Kate (Apr 16) is the big deliverable — Brandon: "that's why you're leading that testing document right now"
+- AU CPC defense: Lena pattern of tactical overreach and decision reversals — Richard needs to own the narrative with data
+- Testing methodology: Kate meeting OFFICIALLY CANCELED (4/3 email). Brandon reviewing doc first. Document still valuable but presentation approach TBD.
+- Financial stewardship: $70K underspend exposed process gap. Heightened scrutiny after $2B central team loss. Need automated confirmations.
+- LiveRamp/Enhanced Match: stalled on TPS docs and legal. Could unlock 12%→20% match rates.
+- GenBI as stakeholder empowerment: shift Richard from data provider to strategic advisor
 - Annual review growth areas: communication, project management, strategic proactivity (same as Forte 2025 — persisting gaps)
-- Team mechanisms: change logs, process adherence — earning trust with regimented teammates
-- Promo path: "solid strength" is ceiling until promo work begins; need to clarify "walk on water" criteria
+- Promo path: "solid strength" is ceiling until promo work begins
 
 ## Open Items
-- [ ] Outlier analysis: top 20 AU keywords by CPC/CPA (due 3/30)
-- [ ] Keyword-to-product mapping for Alexis (due 3/28)
-- [ ] One-page Polaris rollout timeline with dates and owners (due this week)
-- [ ] Testing Approach doc for Kate — THE hard thing (Apr 16 meeting)
+- [ ] Obtain TPS checklist from Abdul for F90 audience (immediate)
+- [ ] Gather Enhanced Match specs from LiveRamp, draft one-page FAQ (by Apr 22)
+- [ ] Set up 15-min walkthrough with Andrew for Kiro ASP workflow
+- [x] Cancel April 16 Kate meeting (DONE — 4/3 email thread: Brandon confirmed, Kate acknowledged, Megan declining from calendar)
+- [ ] Reframe AdWords knowledge base ticket as risk mitigation tied to $70K underspend
+- [ ] Set up automated monthly ASP confirmation reminders
+- [ ] Brandon: review testing framework doc (by Apr 5)
+- [ ] One-page Polaris rollout timeline with dates and owners (overdue)
 - [ ] Increase proactive outcome-sharing cadence
 - [ ] Follow up with Brandon on specific "walk on water" promo criteria
-- [ ] OCI APAC MCC access — Brandon escalated to Google (Mike Babich), still unresolved 3/26

@@ -82,5 +82,5 @@ These stay in `~/shared/context/active/` and are NOT absorbed into organs:
 | `org-chart.md` | Org structure and reporting lines | On org changes |
 | `rw-tracker.md` | Weekly scorecard, To-Do sync, patterns, 30-day challenge | Every morning routine |
 | `long-term-goals.md` | The Five Levels strategic arc | Monthly or on shift |
-| `asana-sync-protocol.md` | Asana email bridge protocol | On process change |
+| `asana-command-center.md` | Asana command center protocol, field GIDs, capabilities | On Asana changes |
 | `mcp-tool-reference.md` | MCP API docs and gotchas | On tool discovery |

@@ -202,6 +202,7 @@ Follow the Multi-Source Ingestion Protocol above. In short:
 | AB broad team | Q2IkbN9Eir93yiQguMfi | team/ab-broad-team.md |
 | (none) | — | team/biweekly-onsite-events.md |
 | (none) | — | team/pre-wbr-customer-engagement.md |
+| PSME/Superpowers | — | team/psme-marketing-superpowers.md |
 
 ## Portability Note
 

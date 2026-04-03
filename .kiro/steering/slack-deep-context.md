@@ -1,5 +1,6 @@
 ---
-inclusion: manual
+inclusion: fileMatch
+fileMatchPattern: ["hooks/*slack*", "hooks/eod-2*"]
 ---
 
 # Slack Deep Context — Backfill & Enrichment Steering
@@ -718,7 +719,7 @@ Produce a ranked demand list:
 
 ### Monthly Refresh
 
-Unlike other backfill scans that are one-time, tribal knowledge extraction should re-run monthly as part of the monthly synthesis (Task 7.4 in `run-the-loop.kiro.hook`).
+Unlike other backfill scans that are one-time, tribal knowledge extraction should re-run monthly as part of the monthly synthesis (enrichment process in `eod-2-system-refresh.kiro.hook`).
 
 **Monthly procedure (lighter than initial backfill):**
 1. Query `slack_messages WHERE signal_type = 'question' AND ingested_at > {30 days ago}` — check what's already captured from daily ingestion

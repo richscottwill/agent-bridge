@@ -39,11 +39,11 @@ Then read the organ you need for the task at hand (brain, eyes, hands, memory).
 - **Local filesystem** — ~/shared/, /workspace/
 
 ### What the AI CANNOT access:
-- Slack, Asana (directly), Google Ads, Adobe Analytics, SharePoint/OneDrive
+- Google Ads, Adobe Analytics
 
-### Asana Bridge (workaround):
-- **Create tasks**: Email x@mail.asana.com (include Richard's email)
-- **Read task updates**: Check Outlook "Auto-Comms" folder
+### Asana (Enterprise Asana MCP — LIVE)
+- **Full read/write access** via Enterprise Asana MCP. Command center protocol: `~/shared/context/active/asana-command-center.md`
+- **Guardrails**: Only modify tasks assigned to Richard (GID 1212732742544167). Audit all writes to `asana-audit-log.jsonl`.
 - **Read meeting context**: Check Outlook "Auto-meeting" folder (Hedy recaps + Amazon Meetings Summary)
 - **Full protocol**: `~/shared/context/active/asana-sync-protocol.md`
 

@@ -1,0 +1,44 @@
+{
+  "snapshot_date": "2026-04-03",
+  "scan_time": "2026-04-03T20:30:00Z",
+  "note": "PM scan (post-optimization test). Not a true morning snapshot — ran as validation of optimized AM-1.",
+  "bucket_counts": {
+    "sweep": 7,
+    "core": 4,
+    "engine_room": 4,
+    "admin": 3,
+    "backlog": 48
+  },
+  "over_cap": ["sweep"],
+  "today_tasks": [
+    "1213917967984980",
+    "1213917888972148",
+    "1213546434830000",
+    "1213817111703805",
+    "1213798673865639",
+    "1213917923114330"
+  ],
+  "overdue_tasks": [
+    "1213341921686564",
+    "1213839064321460",
+    "1213796951745232",
+    "1213828814410247",
+    "1213541622135762",
+    "1213530917597503",
+    "1213731008237682",
+    "1213917639154050",
+    "1213125740755931",
+    "1213637505601028",
+    "1213720297606981",
+    "1213560614815911",
+    "1213072707685834"
+  ],
+  "total_incomplete": 97,
+  "total_overdue": 13,
+  "hard_thing": {
+    "task_gid": "1213341921686564",
+    "name": "Testing Document for Kate",
+    "days_overdue": 2,
+    "workdays_at_zero": 14
+  }
+}

@@ -65,10 +65,10 @@ Flag time traps (manual invoice/PO, repetitive link updates, observer meetings),
 ### Tool Opportunities
 Canonical list: `~/shared/context/body/device.md` → Tool Factory. When Richard mentions repetitive work, ALWAYS ask: "Should we build a tool for this?"
 
-### Asana Integration
-- Create tasks: email x@mail.asana.com
-- Read updates: Outlook "Auto-Comms" folder
-- Read meeting context: Outlook "Auto-meeting" folder
+### Asana (Enterprise Asana MCP — LIVE)
+- **Full read/write access** via Enterprise Asana MCP. SearchTasksInWorkspace, GetTaskDetails, UpdateTask, CreateTask, CreateTaskStory, GetTaskStories, SetParentForTask, GetGoal, etc.
+- **Command center protocol**: `~/shared/context/active/asana-command-center.md`
+- **Guardrails**: Only modify tasks assigned to Richard (GID 1212732742544167). Audit all writes to `asana-audit-log.jsonl`.
 
 ## Coaching Protocols
 

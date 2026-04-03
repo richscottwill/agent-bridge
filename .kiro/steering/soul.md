@@ -1,3 +1,7 @@
+---
+inclusion: always
+---
+
 # Soul — Richard Williams
 
 ## Identity
@@ -52,23 +56,6 @@ These are principles I'm actively learning to live by. They apply to everything 
 
 **For the agent:** When recommending a change, building a tool, designing an experiment, or restructuring a task — check it against these 6 principles. If it violates one, flag it. If it embodies one, note which one. This is how we practice until it's automatic.
 
-## Influences (how I think)
-- **Elon Musk** — First principles over analogy. Vertical integration: own the full stack, don't outsource understanding. Truth-seeking over consensus. Digital Optimus: the end state is AI that extends human capability, not replaces it.
-- **Andrej Karpathy** — Build small, iterate fast, let the system teach you. Autoresearch: give the loop autonomy and measure what works. Approach AI as a craft, not a product.
-- **Charles Duhigg** — Habit loops (cue → routine → reward). Keystone habits cascade. Protect the loop structure.
-- **Greg McKeown** — Essentialism: the disciplined pursuit of less. Effortless: make the essential thing the easy thing. Routine as liberation.
-- **Peter Gollwitzer** — Implementation intentions. If-then plans close the intention-behavior gap.
-
-## My Systems
-- **The Body**: 11-organ system for context, decisions, execution, calibration, and willpower. Navigation: ~/shared/context/body/body.md
-- **RW Trainer**: AI performance coach (agent). Invoked for deep coaching — see Agent Routing Directory.
-- **Morning Routine**: Reads fresh organs → Asana sync → draft replies → To-Do refresh → daily brief → calendar blocks. Hook: 1 · AM: Morning Routine
-- **Meeting Sync**: Multi-source meeting ingestion (Hedy + Outlook) → meetings/ series files. Hook: 2 · EOD: Meeting Sync. Protocol: ~/shared/context/meetings/README.md
-- **Autoresearch Loop**: Maintains organs, runs experiments, cascades changes. Hook: 3 · EOD: System Refresh (after Meeting Sync). Protocol: ~/shared/context/body/heart.md
-- **Meeting Notes**: One file per meeting series. Stakeholder, team, manager, peer, ad-hoc. Navigation: ~/shared/context/meetings/README.md
-- **Task Management**: Asana (via email bridge to x@mail.asana.com) + Microsoft To-Do (5 lists: Sweep, Core, Engine Room, Admin, Backlog). Tracker: ~/shared/context/active/rw-tracker.md
-- **Wiki**: Doc pipeline (editor → researcher → writer → critic → librarian) + concierge for search. Navigation: ~/shared/context/wiki/wiki-index.md
-
 ## The Five Levels (north star)
 Sequential. Each funds the next. Don't skip ahead.
 1. **Sharpen Yourself** — consistent weekly artifact output. Key metric: consecutive weeks shipped. (ACTIVE — struggling)
@@ -79,14 +66,8 @@ Sequential. Each funds the next. Don't skip ahead.
 Full detail: ~/shared/context/body/brain.md → Strategic Priorities
 
 ## Key Context Files
-- Body map (start here): ~/shared/context/body/body.md — navigation layer for the whole system
-- Writing style (core): ~/.kiro/steering/richard-writing-style.md (auto-loaded; specialized guides: richard-style-email, richard-style-wbr, richard-style-mbr, richard-style-docs, richard-style-amazon — all manual inclusion)
-- Meeting notes: ~/shared/context/meetings/README.md — one file per meeting series, multi-source ingestion protocol
-- Active projects & people: ~/shared/context/active/current.md
-- Org chart: ~/shared/context/active/org-chart.md
-- RW Tracker (to-do, scorecard, patterns): ~/shared/context/active/rw-tracker.md
-- Session bootstrap: ~/shared/context/body/spine.md
-- All organs: ~/shared/context/body/ (brain, eyes, hands, memory, spine, heart, device, nervous-system, amcc, gut)
+#[[file:~/shared/context/body/body.md]]
+body.md is the navigation layer for the whole system — start there for all context file paths, organ locations, and system navigation.
 
 ## Agent Routing Directory
 When Richard's request touches an agent's domain, route to that agent instead of handling it yourself. Don't guess — delegate to the specialist.
@@ -95,13 +76,6 @@ When Richard's request touches an agent's domain, route to that agent instead of
 |---------|-------|-------------|
 | Career coaching, annual review, 1:1 prep with Brandon or skip-level with Kate, growth planning, Friday retrospective, strategic artifact review (Testing Approach, OP1, AEO POV), tradeoffs between high-leverage tasks, or pattern stuck 3+ times in one chat | `rw-trainer` | Deep coaching, leverage assessment, Five Levels analysis. Reads full body system for context. Quick coaching checks are handled by aMCC (streak, hard thing, avoidance detection) — route to rw-trainer only for depth. |
 | Loop protocol changes, experiment queue, compression rules, word budgets, gut.md or heart.md edits | `karpathy` | Sole authority on heart.md, gut.md, experiment queue, compression techniques. No other agent modifies these files. |
-| "Write W__ callouts" or WBR callout work for any market (AU, MX, US, CA, JP, UK, DE, FR, IT, ES) | `market-analyst` → `callout-writer` | Single parameterized analyst + writer. Pass market and week parameters. Reads {market}-context.md for market-specific rules. Logs agent state to DuckDB. Run analyst first, then writer. |
-| "Review callouts" or quality check on all market callouts | `callout-reviewer` | Runs after all writers. Checks word counts, narrative quality, cross-market coherence. |
-| Friday system refresh, agent-bridge sync, or "sync to git" | `agent-bridge-sync` | Syncs files to portable-body/, updates docs, pushes to agent-bridge GitHub repo, sends snapshot email. Invoked automatically at the end of the Friday system refresh (after loop completes). |
-| "Generate charts", "visualize progress", "show dashboard", or data visualization requests | `eyes-chart` | Reads body organs + market data, runs `python3 ~/shared/tools/progress-charts/generate.py`, outputs standalone HTML dashboard. Read-only on all organs. |
-| "Write a wiki article", "document X", "what should we document?", wiki content creation | `wiki-editor` | Orchestrates the wiki pipeline: editor → researcher → writer → critic → librarian. Start with the editor — it assigns work to the rest. |
-| "Search the wiki", "do we have a doc on X?", wiki lookup, or proactive doc surfacing | `wiki-concierge` | Searches published wiki articles, synthesizes answers, tracks demand signals. Feeds gaps back to wiki-editor. |
-| "Audit the wiki", "which docs are stale?", wiki quality review | `wiki-critic` | Runs periodic audits on published articles. Detects staleness, low usefulness, orphaned pages. |
 
 **Routing rules:**
 - If the request clearly falls in one agent's domain, invoke it directly — don't try to handle it yourself.

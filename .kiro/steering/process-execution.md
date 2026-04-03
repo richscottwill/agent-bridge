@@ -1,3 +1,9 @@
+---
+inclusion: auto
+name: "Process Execution Rules"
+description: "Background process template with nohup setsid for servers, npm commands, long-running processes"
+---
+
 # Process Execution Rule
 
 **Always use this template for background processes:**

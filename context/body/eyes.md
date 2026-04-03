@@ -65,12 +65,7 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 <!-- Data: db("SELECT market, competitor, impression_share, cpc_impact_pct, segment, notes FROM competitors ORDER BY market, competitor") -->
 
 ### US: Walmart Business
-- First appeared Jul 2024 on Brand Core terms
-- IS trajectory: 25% (Jul-Sep 2024) → 35% (Oct-Nov 2024) → 37-55% (Jan-Mar 2026)
-- Peak IS: 55% in W6 2026
-- Brand CPA impact: ~$40 avg → $65-$77 range
-- Pattern: Pulls back during holidays, ramps Jan-Mar
-- Response: Bid caps + NB efficiency via OCI. Do NOT escalate auction.
+First appeared Jul 2024 on Brand Core. IS: 25%→55% (peak W6 2026). Brand CPA: ~$40→$65-77. Pattern: ramps Jan-Mar, pulls back holidays. Response: bid caps + NB OCI efficiency. Do NOT escalate auction.
 
 ### Key Trends
 1. Competition broadening: 1-2 per market (2023) → 3-5 (2026)
@@ -84,13 +79,13 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 ## Ad Copy Testing
 
 ### Research Foundation (SP Study, Aug 2025)
-What SPs said matters most: Price (31% US), Product quality (25% US), Selection (21% US).
-What SPs said matters least: Bulk purchasing (27% US), Store location (24% US).
+SPs said matters most: Price (31% US), Product quality (25%), Selection (21%).
+SPs said matters least: Bulk purchasing (27%), Store location (24%).
 Why SPs didn't sign up: Believed bulk required (50%), savings wouldn't justify costs (31%).
-**Critical insight:** SPs believe AB is not free and requires bulk purchasing. Existing ads reinforced both.
+**Key insight:** SPs believe AB requires bulk purchasing and isn't free. Existing ads reinforced both.
 
-### What Changed
-Shifted from bulk/wholesale/B2B messaging → price, quality, selection messaging.
+### Messaging Shift
+Bulk/wholesale/B2B → price, quality, selection:
 - "Online Bulk Purchasing" → "Smart Business Buying"
 - "Online Wholesale Purchasing" → "For Businesses of All Sizes"
 - "Purchase at Wholesale Price" → "No Minimum Order Required"
@@ -113,26 +108,9 @@ Shifted from bulk/wholesale/B2B messaging → price, quality, selection messagin
 
 ---
 
-## Predicted Questions (next session)
+## Predicted Questions
 
-Based on calendar patterns, email threads, active projects, Slack signals as of 4/2/26 Thursday PT.
-
-**Q1: "What happened in the Brandon 1:1?"**
-Brandon 1:1 at 12pm today. Key topics: Testing Approach doc (12 workdays — Brandon will ask), Lena AU follow-up (Brandon offered help, said "she needs to cool her jets, Kate is realizing it"), JP Brand LP experiment (going live today), Andrew's ENG budget file request (Brandon mentioned in Andrew's 1:1). Prep: have a concrete commitment for Testing Approach timeline.
-
-**Q2: "What's the JP Brand LP experiment status?"**
-Stacey confirmed ref_= carry-over works on a.com. Richard provided technical guidance on ref= vs ref_= usage (ref= for MCS traffic, ref_= for direct a.com traffic). Experiment targeting live today (4/2) after CTA experience check. Brandon confirmed. JP excluded from WW Brand Polaris test — running independently.
-
-**Q3: "What does Lena want from the AU weekly update?"**
-Lena replied with 3 questions: (1) data with landing page URLs, (2) how many clicks redirect because customer already logged in, (3) are we overstating CPAs due to repeat visitors. Brandon's take: "She needs to cool her jets and Kate is very much realizing it." Still needs response — 2 days pending.
-
-**Q4: "Did Richard make progress on the Testing Approach doc?"**
-No. 12 workdays at zero. Kate meeting Apr 16. Brandon 1:1 today — this will come up.
-
-**Q5: "What's the OCI JP status?"**
-MCM-147368188 fully complete — implementation done, feed enabled by mpgupta. Yashasvi confirmed. JP OCI tracking template operational. 7/10 markets at 100% OCI. CA on track 04/07.
-
-Last updated: 2026-04-02 (Thursday PT)
+_Cleared at EOD 4/3. Regenerated each AM-2 from calendar + active threads + Slack signals._
 
 ---
 
@@ -146,8 +124,7 @@ Last updated: 2026-04-02 (Thursday PT)
 - Feeds: WBR callouts, MBR narratives, QBR trends, daily Google Ads checks (MX, AU, Paid App)
 
 ## What's Coming
-- OCI ROW: FR/IT/ES/JP dialed up to 100% (3/31 Slack). CA on track for 04/07. JP tracking template MCM (MCM-147368188) in progress. JP ref tag taxonomy update deferred to post-launch (Brandon decision). First QBR goal of 2026 achieved.
-- AI Max: US test planned Q2 2026, no test design written yet (3d overdue — was due 3/28)
+- AI Max: US test planned Q2 2026, no test design written yet (6d overdue — was due 3/28)
 - Project Baloo: Early access launched 3/30. Keywords delivered. Shopping Ads for AB.
 - AEO/Zero-click: Educational session attended 3/10, POV queued (Level 4)
-- Polaris Brand LP WW rollout: Frank Volinsky CANCELLED sync (3/31) — got requirements from Alex. No action needed. Weblab dial-up still targeting April 6-7.
+- Polaris Brand LP WW rollout: Weblab dial-up targeting April 6-7. Frank got requirements from Alex — no action needed.

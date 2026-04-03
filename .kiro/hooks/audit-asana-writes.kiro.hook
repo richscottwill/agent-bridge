@@ -1,0 +1,15 @@
+{
+  "name": "Audit: Asana Writes",
+  "version": "1.1.0",
+  "description": "Logs every Asana write operation to audit trail after execution.",
+  "when": {
+    "type": "postToolUse",
+    "toolTypes": [
+      "@mcp.*asana.*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Check the completed tool call. If it was a WRITE operation (UpdateTask, CreateTask, CreateTaskStory, SetParentForTask, AddTagForTask, RemoveTagForTask), append a JSON line to ~/shared/context/active/asana-audit-log.jsonl with: {\"timestamp\": \"ISO-8601\", \"tool\": \"tool_name\", \"task_gid\": \"gid\", \"task_name\": \"name\", \"project\": \"PROJECT_ID\", \"fields_modified\": [\"field1\", \"field2\"], \"result\": \"success|failure|blocked\", \"notes\": \"context\"}. PROJECT_ID values: determine from task context \u2014 AU, MX, WW_Testing, WW_Acquisition, Paid_App, My_Tasks, ABPS_AI_Content. If the task belongs to multiple projects, use the primary project (the one the write was initiated for). For pipeline writes, also include \"pipeline_agent\" and \"pipeline_stage\" fields. APPEND-ONLY: Never overwrite or truncate the audit log file \u2014 always append. If it was a READ operation, do nothing \u2014 no log entry needed."
+  }
+}

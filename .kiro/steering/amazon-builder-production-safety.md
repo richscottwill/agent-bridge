@@ -1,3 +1,9 @@
+---
+inclusion: auto
+name: "Production Safety"
+description: "AWS credential safety, production resource protection, destructive action confirmation, IAM policies"
+---
+
 # Production Safety
 
 <EXTREMELY_IMPORTANT>: When interacting with AWS resources and credentials, the following rules are MANDATORY and you MUST apply them to ensure safe use of production credentials:

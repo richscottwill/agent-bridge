@@ -143,10 +143,10 @@ Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, annual review, f
 
 **Morning Routine is the daily driver.** Run the Loop is for context refresh + experiments (can run independently or before the morning routine for deeper context).
 
-### Asana Bridge (workaround)
-- **Create tasks**: Email x@mail.asana.com (include Richard's email)
-- **Read task updates**: Check Auto-Comms folder for Asana notification emails
-- **Read meeting context**: Check Auto-meeting folder for Hedy recaps and Amazon Meetings Summary
+### Asana (Enterprise Asana MCP — LIVE)
+- **Full read/write access** via Enterprise Asana MCP. SearchTasksInWorkspace, GetTaskDetails, UpdateTask, CreateTask, CreateTaskStory, GetTaskStories, SetParentForTask, GetGoal, etc.
+- **Command center protocol**: `~/shared/context/active/asana-command-center.md`
+- **Guardrails**: Only modify tasks assigned to Richard (GID 1212732742544167). Audit all writes to `asana-audit-log.jsonl`.
 - **Task ID extraction**: "View task" URLs in notifications contain `/task/{id}`. Stored in To-Do task bodies as `ASANA: {id}`.
 - **Full protocol**: `~/shared/context/active/asana-sync-protocol.md`
 
@@ -177,6 +177,6 @@ Sources: rw-tracker.md, To-Do lists, email scan, calendar scan, annual review, f
 - Local filesystem — ~/shared/, /workspace/
 
 **What the agent CANNOT access:**
-- Slack, Asana (directly), Google Ads, Adobe Analytics, SharePoint/OneDrive
+- Google Ads, Adobe Analytics
 
 **MCP tool reference**: `~/shared/context/active/mcp-tool-reference.md` — full API docs for aws-outlook-mcp (triple-nested JSON, shell escaping gotchas, Python helper function)

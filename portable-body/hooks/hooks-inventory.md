@@ -2,108 +2,119 @@
 
 These are the automation hooks that run in the AgentSpaces environment. They're platform-specific (Kiro hook format), but the INTENT is portable. Any AI platform can implement these as equivalent workflows.
 
-Last synced: 2026-03-31
+Last synced: 2026-04-02
 
 ---
 
-## 1. Morning Routine (`rw-morning-routine.kiro.hook`)
-- **Trigger:** Manual (one-click, daily)
-- **Intent:** Run Richard's complete morning workflow in 4 steps (5 on Fridays)
-- **Steps:**
-  1. Asana Sync — scan email for Asana notifications, match to To-Do tasks, update
-  2. Draft Unread Replies — scan inbox, triage, draft replies in Richard's voice
-  3. To-Do Refresh + Daily Brief — refresh task lists, build daily brief email (dark navy HTML card layout), send to self
-  4. Calendar Blocks — create 4 focus blocks (Sweep/Core/Engine Room/Admin) in calendar gaps
-  5. (Fridays) Calibration — run nervous system loops, weekly retrospective
-- **Context loaded:** body.md, spine.md, org-chart.md, writing-style, current.md, memory.md, meetings/README.md, amcc.md, then trainer, prioritization, device, gut, tracker, brain, eyes, hands
-- **Key rules:** Full task management agency (move/create/delete/update tasks freely), backlog is ONLY for blocked/future items, hard thing always due TODAY, morning routine experiments engine runs adaptive A/B tests on brief format
+## AM Hooks (3 sequential — each feeds the next)
 
-## 2. Meeting Sync (`hedy-meeting-sync.kiro.hook`)
+### AM-1: Ingest (`am-1-ingest.kiro.hook`)
+- **Trigger:** Manual (daily, first thing)
+- **Intent:** Pure data collection — no decisions, no drafting, no organ writes
+- **Steps:**
+  1. Slack scan — channels (section-based depth), DMs, proactive search, relevance filter
+  2. Asana sync — scan Auto-Comms folder, match to To-Do tasks
+  3. Email scan — catalog unread emails with urgency tiers
+  4. DuckDB writes — batch-write all messages to conversation database
+- **Output:** intake/ files (Slack digest, email triage, Asana sync results, rsw-channel drops)
+- **Context loaded:** spine.md, current.md, slack-channel-registry.json, slack-scan-state.json, asana-sync-protocol.md
+- **~5 min. Failure here doesn't block AM-2/AM-3 (they use yesterday's data).**
+
+### AM-2: Triage + Draft (`am-2-triage.kiro.hook`)
+- **Trigger:** Manual (after AM-1)
+- **Intent:** Process AM-1 intake into actionable state — updated tasks, drafted replies
+- **Steps:**
+  1. Process intake files from AM-1 → update hands.md (new tasks, completed, context updates)
+  2. Update amcc.md streak status
+  3. Draft email replies in Richard's voice (Outlook drafts only — never send)
+  4. Update rw-tracker.md
+- **Output:** Fresh hands.md, amcc.md, email drafts in Outlook
+- **Context loaded:** spine.md, current.md, memory.md, writing-style, hands.md, amcc.md, rw-tracker.md, intake/ files
+- **~5 min. Key rule: NEVER call email_reply/send/forward — only email_draft.**
+
+### AM-3: Brief + Blocks (`am-3-brief.kiro.hook`)
+- **Trigger:** Manual (after AM-2)
+- **Intent:** Generate all morning outputs from AM-1 and AM-2 data
+- **Steps:**
+  1. Daily brief — dark navy HTML email to prichwil@amazon.com (auto-send)
+  2. Slack daily brief post to rsw-channel (condensed, ≤300 words)
+  3. Focus update post to rsw-channel (task changes, ≤150 words)
+  4. Dashboard update — edit pinned message in rsw-channel
+  5. Calendar blocks — 4 focus blocks (Sweep/Core/Engine Room/Admin)
+  6. Proactive draft suggestions — unanswered messages 24+ hours old
+  7. (Fridays) Calibration — nervous system loops, weekly retrospective
+- **Output:** Brief email, Slack posts, updated dashboard, calendar blocks
+- **Context loaded:** Full body system (body, spine, org-chart, trainer, prioritization, brain, eyes, device, gut, tracker, hands, amcc, scan state, experiments)
+- **~5 min. Morning routine experiments engine runs adaptive A/B tests on brief format.**
+
+## EOD Hooks (2 sequential)
+
+### EOD-1: Meeting Sync (`eod-1-meeting-sync.kiro.hook`)
 - **Trigger:** Manual (end of day, after meetings)
 - **Intent:** Multi-source meeting ingestion into the system
 - **Steps:**
-  1. Pull — get Hedy sessions, Amazon Meeting Summaries, email threads (all reads before any writes)
+  1. Pull — Hedy sessions, Amazon Meeting Summaries, email threads (all reads before writes)
   2. Analyze — speaking share, hedging, strategic contributions, action items, relationship updates
-  3. Update meetings/ series files — one file per recurring meeting, synthesize ONE clean entry from all sources
+  3. Update meetings/ series files — one file per recurring meeting, synthesize ONE clean entry
   4. Update organs — memory (relationships only), nervous system (communication patterns), current.md (pending actions)
   5. Audit Hedy contexts — keep session/topic contexts fresh
 - **Data sources:** Hedy MCP, Outlook Auto-meeting folder, email threads
-- **Key rule:** meetings/ series files are the single source of truth. Organs get only what's specific to their function.
+- **~5 min. meetings/ series files are the single source of truth.**
 
-## 3. System Refresh / Autoresearch Loop (`run-the-loop.kiro.hook`)
-- **Trigger:** Manual (end of day, after meeting sync)
-- **Intent:** Maintain organs, cascade changes, run experiments
+### EOD-2: System Refresh (`eod-2-system-refresh.kiro.hook`)
+- **Trigger:** Manual (end of day, after EOD-1)
+- **Intent:** Maintain organs, cascade changes, run experiments, sync to git
 - **Steps:**
-  1. Maintenance — refresh ground truth from email/calendar, process intake/
-  2. Cascade — propagate changes to all 11 organs (skip if updated <48h + minor change)
-  3. Experiments — Karpathy-governed, no cap, orchestrated blind eval (A/B/C: Karpathy → Eval A → Eval B → Karpathy scores)
-  4. Suggestions — up to 3 proposals for Richard (must connect to Five Levels, be measurable, be reversible)
-  5. Housekeeping + Git sync — deduplicate MCP autoApprove, push to GitHub
-- **Protocol:** heart.md is the source of truth
-- **Key rules:** Loop self-terminates when eligible targets exhausted (Bayesian priors deprioritize proven losers). Do-no-harm: snapshot before edit, Brain/Memory zero degradation tolerance.
+  1. Maintenance — refresh ground truth, process intake/, route Slack signals to organs
+  2. Dashboard + focus update — edit pinned message, post task changes
+  3. Cascade — propagate changes to all 11 organs (skip if updated <48h + minor)
+  4. Enrichments — weekly relationship refresh (Fri), wiki candidates (weekly), monthly synthesis (1st), quarterly audit (90d)
+  5. Experiments — Karpathy-governed (delegated to subagent), A/B/C blind eval
+  6. Suggestions — up to 3 proposals (must connect to Five Levels, be measurable, reversible)
+  7. Housekeeping + git sync — deduplicate MCP autoApprove, push to GitHub
+- **Protocol:** heart.md is the source of truth for experiments
+- **~10 min. Self-audit verifies cascade completeness and coherence.**
 
-## 4. WBR Callout Pipeline (`wbr-callout-pipeline.kiro.hook`)
+## Always-On Guards
+
+### Guard: Email (`block-email-send.kiro.hook`)
+- **Trigger:** Automatic (preToolUse — before any email send/reply/forward)
+- **Rule:** All recipients must be Richard's own addresses. Others require explicit approval. If denied, save as draft.
+
+### Guard: Calendar (`block-calendar-invite.kiro.hook`)
+- **Trigger:** Automatic (preToolUse — before any calendar event creation)
+- **Rule:** Personal blocks and Richard-only events allowed. External attendees require explicit approval.
+
+## On-Demand Hooks
+
+### WBR: Weekly Callouts (`wbr-callout-pipeline.kiro.hook`)
 - **Trigger:** Manual (weekly, for WBR prep)
-- **Intent:** Full 10-market WBR callout generation with blind review
-- **Steps:**
-  1. Dashboard Ingestion — ingest xlsx dashboard data via Python ingester
-  2. Context Load — body organs, market context files, previous callouts, change logs, emails, meetings
-  3. Analysis — invoke market-analyst agent per market (10 sequential runs)
-  4. Writing — invoke callout-writer agent per market (10 sequential runs)
-  5. Blind Review — invoke callout-reviewer (gets ONLY drafts + data briefs, no analysis)
-  6. Correction Loop — markets below 66% confidence get rewritten
+- **Intent:** Full 10-market callout pipeline: ingest → analyst → writer → blind review → correction loop
 - **Markets:** AU, MX (hands-on depth), US, CA, JP, UK, DE, FR, IT, ES
-- **Key rules:** Prose = only data-verifiable claims. Note section = internal PS context. Confidence score measures this separation.
 
-## 5. Email Safety Guard (`block-email-send.kiro.hook`)
-- **Trigger:** Automatic (before any email send/reply/forward)
-- **Intent:** Prevent accidental emails to external recipients
-- **Rule:** All recipients must be Richard's own addresses. Any other recipient requires explicit approval. If denied, save as draft instead.
-
-## 6. Calendar Safety Guard (`block-calendar-invite.kiro.hook`)
-- **Trigger:** Automatic (before any calendar event creation)
-- **Intent:** Prevent accidental meeting invites to external attendees
-- **Rule:** Events with no attendees (personal blocks) or only Richard are allowed. Any other attendee requires explicit approval.
-
-## 7. PS Daily Audit (`ps-daily-automation.kiro.hook`)
+### PS Audit (`ps-daily-automation.kiro.hook`)
 - **Trigger:** Manual (on demand)
-- **Intent:** Run paid search audit pipeline — pull data, analyze, generate reports
+- **Intent:** Paid search audit pipeline + progress charts generation
 - **Command:** `python -m paid_search_audit.cli --config paid_search_audit/config.json --output-dir ./reports`
 
-## 8. Dashboard Update (`update-dashboard.kiro.hook`)
-- **Trigger:** Manual (on demand)
-- **Intent:** Regenerate progress charts HTML dashboard from organ data
-- **Command:** `python3 ~/shared/tools/progress-charts/generate.py`
-- **Output:** 5 HTML pages in site/ directory (Chart.js, no external dependencies)
-
-## 9. SharePoint Sync (`sharepoint-sync.kiro.hook`)
-- **Trigger:** Manual (on demand)
-- **Intent:** Sync wiki articles to SharePoint via OneDrive
-- **Steps:** Dry-run first → show changes → confirm → live sync
-- **Command:** `python3 ~/shared/tools/sharepoint-sync/cli.py --mode directory`
-
-## 10. Agent Bridge Sync (`agent-bridge-sync.kiro.hook`)
-- **Trigger:** Manual (on demand, or as part of Friday calibration)
-- **Intent:** Sync portable-body/ directory with the living system, update docs, push to agent-bridge GitHub repo, send snapshot email
-- **Steps:**
-  1. Read agent-bridge-sync agent definition
-  2. Read portable-layer.md manifest
-  3. Sync all portable files from source locations
-  4. Detect new files that should be included
-  5. Update README.md, CHANGELOG.md, SANITIZE.md
-  6. Git add, commit, and push to agent-bridge repo (origin main)
-  7. Send weekly snapshot email to richscottwill@gmail.com
+### Agent Bridge Sync (`agent-bridge-sync.kiro.hook`)
+- **Trigger:** Manual (on demand, or as part of Friday EOD-2)
+- **Intent:** Sync portable-body/ to GitHub, send snapshot email
 - **Doomsday mentality:** When in doubt, include the file.
+
+### SharePoint Sync (`sharepoint-sync.kiro.hook`)
+- **Trigger:** Manual (on demand)
+- **Intent:** Wiki articles → .docx → OneDrive → SharePoint
+- **Command:** `python3 ~/shared/tools/sharepoint-sync/cli.py --mode directory`
 
 ---
 
 ## Portability Note
 
 These hooks are Kiro-specific JSON format. On a different platform:
-- Morning Routine → implement as a multi-step prompt/workflow with task management API access
-- Meeting Sync → implement as a transcript ingestion pipeline with multi-source synthesis
-- System Refresh → implement as a maintenance + experimentation loop with blind evaluation
-- WBR Callouts → implement as a sequential analyst → writer → reviewer pipeline with confidence scoring
+- AM-1/2/3 → implement as 3 sequential prompts/workflows with increasing context
+- EOD-1/2 → implement as 2 sequential prompts (meeting ingestion then maintenance)
 - Safety Guards → implement as pre-send checks in whatever email/calendar tool is available
-- Agent Bridge Sync → implement as a file diff + copy + git push + email workflow
+- On-demand hooks → implement as manual-trigger workflows
 - The INTENT of each hook is what matters, not the JSON format
+- Key design principle: each hook loads only the context it needs. Failure is isolated — AM-1 failing doesn't kill the brief.

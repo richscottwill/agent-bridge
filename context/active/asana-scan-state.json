@@ -1,0 +1,8 @@
+{
+  "last_scan_timestamp": null,
+  "per_task_timestamps": {},
+  "last_updated": "2026-04-03T12:00:00Z",
+  "protocol_version": "1.0",
+  "protocol_file": "~/shared/context/active/asana-activity-monitor-protocol.md",
+  "notes": "Infrastructure initialized. First scan will use 7-day lookback. Awaiting AM-1 hook execution to populate per_task_timestamps."
+}

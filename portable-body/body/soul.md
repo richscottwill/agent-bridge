@@ -66,7 +66,7 @@ These are principles I'm actively learning to live by. They apply to everything 
 - **Meeting Sync**: Multi-source meeting ingestion (Hedy + Outlook) → meetings/ series files. Hook: 2 · EOD: Meeting Sync. Protocol: ~/shared/context/meetings/README.md
 - **Autoresearch Loop**: Maintains organs, runs experiments, cascades changes. Hook: 3 · EOD: System Refresh (after Meeting Sync). Protocol: ~/shared/context/body/heart.md
 - **Meeting Notes**: One file per meeting series. Stakeholder, team, manager, peer, ad-hoc. Navigation: ~/shared/context/meetings/README.md
-- **Task Management**: Asana (via email bridge to x@mail.asana.com) + Microsoft To-Do (5 lists: Sweep, Core, Engine Room, Admin, Backlog). Tracker: ~/shared/context/active/rw-tracker.md
+- **Task Management**: Asana My Tasks (via Enterprise Asana MCP — full read/write). Command center: ~/shared/context/active/asana-command-center.md. Tracker: ~/shared/context/active/rw-tracker.md
 - **Wiki**: Doc pipeline (editor → researcher → writer → critic → librarian) + concierge for search. Navigation: ~/shared/context/wiki/wiki-index.md
 
 ## The Five Levels (north star)

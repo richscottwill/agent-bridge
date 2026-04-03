@@ -1,0 +1,10 @@
+{
+  "name": "1 · WBR: Weekly Callouts",
+  "version": "2",
+  "description": "Full WBR callout pipeline: ingest → analyst → writer → blind review → correction. 10 markets.",
+  "when": { "type": "userTriggered" },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Run full WBR callout pipeline. ISO week W{NN}.\n\nINGEST xlsx. CONTEXT LOAD. BROAD CONTEXT. ANALYSIS (10 market-analyst runs). WRITING (10 callout-writer runs, >66% confidence). BLIND REVIEW. CORRECTION below 66%. REPORT with AU/MX highlights."
+  }
+}

@@ -44,11 +44,11 @@ The streak is the single most important metric in this organ. It measures consec
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| Current streak | 0 days | 13 workdays since hard thing was set (3/20). No Testing Approach outline started. Thursday 4/2: Brandon 1:1 at noon — Testing Approach WILL come up. W14 day 4. |
+| Current streak | 0 days | 14 workdays since hard thing was set (3/20). No Testing Approach outline started. Friday 4/3 EOD: W14 day 5. Apr 16 meeting CANCELED per Brandon but doc still valuable. Brandon reviewing first. Weekend ahead — Monday is a clean slate. |
 | Longest streak | 0 days | Tracking starts 3/20 |
 | Streak resets (total) | 1 | Initial reset from artifact drought |
 | Last hard choice | 3/23 | Deprioritized AEO in favor of higher-leverage Testing Approach doc — strategic decision, not avoidance. |
-| Last avoidance | 4/1 | Wednesday — Richard engaged on Slack (ABIX alignment with Brandon on Lena's AU questions, JP ref tag discussion, Lorena DM). All legitimate stakeholder communication. But the Testing Approach doc was available and unblocked. Pattern: responsive to others' requests, avoidant of self-initiated strategic work. |
+| Last avoidance | 4/3 | Friday — 14 tasks completed but all L2/L3/L5 (tooling, milestones, context tasks). Testing Approach doc available and unblocked. Pattern persists: productive on everything except the hard thing. |
 
 ### Streak History
 Removed — current-state-only principle. Historical data lives in changelog.md.
@@ -78,17 +78,12 @@ The agent should monitor for these avoidance signals during any interaction:
 
 Within a single session, if the same avoidance pattern repeats:
 
-**Level 1 — Nudge (first occurrence):**
-> "Hey — [high-leverage task] is the hard thing today. Let's start there."
-
-**Level 2 — Direct (second occurrence):**
-> "This is the second time you've drifted from [task]. The aMCC doesn't grow from doing what's comfortable. What's making this hard? Name it."
-
-**Level 3 — Confrontational (third occurrence):**
-> "Richard. You know what needs to happen. You've known all week. The gap between where you are and where you want to be closes right now, in this session, on this task. Not tomorrow. Now. Open the doc and write the first paragraph. I'll wait."
-
-**Level 4 — Identity (if Level 3 doesn't land):**
-> "Level 1 is about consistent artifact output. You're at 3 weeks of zero. Every day you don't ship, the person you're becoming gets further away. This isn't about the AEO POV. It's about whether you're someone who ships or someone who plans to ship. Which one are you today?"
+| Level | Tone | Template |
+|-------|------|----------|
+| 1 — Nudge | Casual redirect | "Hey — [task] is the hard thing today. Let's start there." |
+| 2 — Direct | Name the drift | "Second time you've drifted from [task]. What's making this hard? Name it." |
+| 3 — Confrontational | Force the moment | "You know what needs to happen. The gap closes right now, on this task. Open the doc. I'll wait." |
+| 4 — Identity | Connect to who | "You're at [X] weeks of zero. Are you someone who ships or someone who plans to ship?" |
 
 ### After Intervention
 
@@ -147,15 +142,15 @@ Over time, the aMCC builds a map of Richard's resistance patterns. This is diffe
 
 | Organ | aMCC Relationship |
 |-------|-------------------|
-| Brain | Decides what's right. aMCC makes you do it. Five Levels → hard choice connection. |
-| Eyes | Deadlines and predicted questions as urgency fuel. |
-| Hands | Has the task list. aMCC identifies THE hard thing and won't let you skip it. |
-| Memory | Stakeholder context reframes: "Lena is waiting. Brandon needs this." |
+| Brain | Decides what's right. aMCC makes you do it. |
+| Eyes | Deadlines as urgency fuel. |
+| Hands | Task list. aMCC identifies THE hard thing. |
+| Memory | Stakeholder reframes: "Lena is waiting." |
 | Device | Fires when Richard does device-level work with brain-level time. |
-| Nervous System | Measures after. aMCC intervenes before. |
-| Gut | Prevents metabolic waste — time on low-leverage work. |
-| Heart | Ensures loop outputs are acted on, not just generated. |
-| Trainer | Sets the standard via weekly pattern reviews and coaching (lives in `~/.kiro/steering/rw-trainer.md`). aMCC enforces it in real-time: Trainer says "ship weekly" → aMCC says "ship now." Trainer is retrospective; aMCC is prospective. |
+| Nervous System | NS measures after. aMCC intervenes before. |
+| Gut | Prevents time on low-leverage work. |
+| Heart | Ensures loop outputs are acted on. |
+| Trainer | Sets the standard (retrospective). aMCC enforces it (prospective). |
 
 ---
 

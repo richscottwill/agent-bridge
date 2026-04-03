@@ -11,6 +11,29 @@
 Weekly team discussion focused on deeper strategic topics — Flash review, R&O process, testing approaches, market deep dives. This is the Thursday counterpart to the Wednesday weekly sync. Another visibility opportunity for Richard. Brandon uses this meeting for editorial review of Flash content and project status alignment.
 
 ## Latest Session
+### 2026-04-02 — Market Expansion Playbook Review (53 min)
+- Attendees: Brandon, Richard, Andrew, Stacey, Yun, Adi, Peter, Dwayne
+- Richard presented a comprehensive market expansion playbook for launching Paid Acquisition in new regions (AU, MX as case studies). End-to-end process covering pre-launch through Year-One optimization.
+- Pre-launch dependencies: retail search lead identification (recurring bottleneck — weeks to find contacts), non-Hydro MCC access, SAM payment profile + PUPO pay codes, associate hack for account-level tracking, NACTIF key/LIS additions from central team.
+- Translation: historically 4 weeks via Google. Internal Amazon tools being explored but untested for market expansions.
+- Keyword localization gap: central teams model from US/UK structures, but miss region-specific terms (e.g., "paper towels" vs "hand towels" in CA). Discussion on using GENBI with AI analysis to expand coverage from local product data.
+- Negative keyword list: centralized living document needed. Amazon Music CBCs detected recently. Brandon proposed pinning shared list in global chat. Ownership per region unresolved but deemed critical.
+- Landing page localization: US/UK URLs shared with expansion teams for adaptation. SSR and CP implementation must be verified on all localized pages before launch.
+- Tracking: keyword-level URLs under 64 chars, PDSL structure, BramRef tags, ABMA coordination for WBR logic, APMA MONO feed updates for new regions.
+- Budget forecasting: AWS B2B data as reference + significant buffer. Brandon suggested standardized input file and documented buffer guidelines.
+- Post-launch: team agreed on "Year-One Optimization" one-pager mapping quarterly activities (negative keyword reviews, LP audits, CX walkthroughs) to KPIs (CPA, CPC, registrations). Demonstrates ongoing resource needs despite OCI rollout.
+- IECCP FAQ proposed for new account playbook — local teams frequently ask why IECCP isn't available in new markets.
+- Communication cadences: no default weekly calls. Bi-weekly or tri-weekly 30-min syncs, flexible by timezone (e.g., every 3 weeks with AU).
+- Decisions: Playbook adopted as standard for all future launches. Separate Year-One Optimization framework to complement it. IECCP FAQ added to new account playbook. Negative keyword ownership documented per region. No mandatory weekly post-launch calls.
+- Action items:
+  - Richard: finalize and share market expansion playbook with updated structure (next week)
+  - Richard: develop Year-One Optimization one-pager mapping to KPIs (by Apr 16)
+  - Richard: create and maintain living negative keyword list in global chat (immediate)
+  - Richard: add IECCP FAQ to new account playbook (by Apr 9)
+  - Brandon: co-develop standardized forecasting inputs and buffer guidelines (by next R&O)
+  - Team: begin populating shared negative keyword list (immediate)
+
+## Previous Session
 ### 2026-03-26 — R&O Monthly Process / Flash Review (37 min)
 - Attendees: Brandon, Richard, Andrew, Stacey, Yun, Adi, Peter, Dwayne
 - Flash content review for March '26 Flash (due 3/27):
@@ -34,19 +57,20 @@ Weekly team discussion focused on deeper strategic topics — Flash review, R&O 
   - Richard: follow up with tech team on DE registration issue / EAAAAA project — within 5 days
 
 ## Running Themes
+- Market expansion playbook: Richard leading standardization of new market launch process — strong L2 visibility artifact
 - Flash editorial process: Brandon and Andrew drive structure, team contributes content
 - Late submissions: recurring issue, Brandon frustrated
 - AU positioning: proactive narrative (what we're doing) vs defensive (lowlight)
-- CA overperformance: market-driven (tariffs, Brand search) vs campaign-driven — important distinction for narrative
-- DE tech issues: SSR backfill + EAAAAA infrastructure — consolidation needed but premature
-- Richard's visibility: assigned specific Flash content (AU update) — opportunity to demonstrate proactive sharing
+- Negative keyword governance: cross-market consistency needed, ownership per region unresolved
+- Post-launch optimization: formalizing Year-One activities to demonstrate ongoing resource needs
+- Richard's visibility: presented full playbook to team — strong strategic contribution. Contrast with prior sessions where Richard was quiet.
 
 ## Open Items
-- [ ] Richard: AU status update for Flash (repurpose Lena CPC content) — by EOD 3/26
+- [ ] Richard: finalize market expansion playbook with updated structure (next week from 4/2)
+- [ ] Richard: Year-One Optimization one-pager mapping to KPIs (by Apr 16)
+- [ ] Richard: create living negative keyword list in global chat (immediate)
+- [ ] Richard: IECCP FAQ for new account playbook (by Apr 9)
+- [ ] Brandon: standardized forecasting inputs and buffer guidelines (next R&O)
 - [ ] Richard: UK/CA combined vs separate decision for R&O
 - [ ] Richard: clarify 10% growth metric definition
-- [ ] Andrew: video highlight revision (YouTube placements)
-- [ ] Andrew: Modern Search Structure linkage (campaign + portfolio consolidation)
-- [ ] Peter: escalate app resourcing to Kate/Todd
-- [ ] Richard: DE tech issue / EAAAAA investigation (within 5 days)
-- [ ] Flash final review and send: 3/30 (Andrew/Brandon)
+- [ ] Richard: DE tech issue / EAAAAA investigation

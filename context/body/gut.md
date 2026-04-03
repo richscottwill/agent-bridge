@@ -41,22 +41,11 @@ Every other organ adds content. The gut removes content. It enforces the context
 
 ## Digestion Protocol
 
-When new material arrives in `intake/`, the morning routine processes it. The gut adds structure to that processing:
+When new material arrives in `intake/`, the AM-2 hook processes it. The gut adds structure to that processing:
 
 ### Intake Triage
 
-For each file in `intake/`:
-
-| Question | If Yes | If No |
-|----------|--------|-------|
-| Does it contain facts that update an organ? | Extract facts → route to organ | → |
-| Does it contain a new decision or position? | Extract → Brain | → |
-| Does it contain performance data? | Extract → Eyes | → |
-| Does it contain a new task or action? | Extract → Hands | → |
-| Does it contain relationship/contact info? | Extract → Memory | → |
-| Does it contain a process or delegation? | Extract → Device | → |
-| Is the raw file still useful after extraction? | Keep in intake/ with `PROCESSED: [date]` tag | Archive to `archive/` |
-| Is it a one-time data dump (CSV, Excel, JSON)? | Extract key findings, archive the raw file | — |
+For each file in `intake/`: extract minimum viable facts, route to the organ where they're most actionable (decisions → Brain, metrics → Eyes, tasks → Hands, people → Memory, processes → Device). Tag source and date. Archive raw file after extraction unless still useful.
 
 ### File Format Rules
 | Format | Action |
@@ -126,40 +115,15 @@ Budgets are LEARNED CONSTRAINTS, not static numbers. The gut tracks the size-acc
 
 ### Compression Techniques
 
-**1. Resolve and archive completed items**
-- Hands: tasks marked DONE for 7+ days → move to a "Recently Completed" summary line, then archive after 14 days
-- Brain: decisions with OUTCOME = VALIDATED and no open questions → compress to one-line summary, archive full entry
-- Device: delegations with status ACTIVE for 30+ days → compress to one line in a "Completed Delegations" table
-- Eyes: predicted QA from past sessions → archive after scoring (nervous system has the scores)
-
-**2. Deduplicate across organs**
-- The same fact should live in exactly one organ. If it appears in two, keep it in the organ where it's most actionable and remove from the other.
-- Common duplicates to watch:
-  - Key people appearing in Memory (relationship graph) AND Spine (quick reference) AND current.md → canonical home is Memory. Others get a pointer: "See Memory."
-  - Metrics appearing in Eyes AND Memory (compressed context) → canonical home is Eyes.
-  - Task status appearing in Hands AND rw-tracker.md → canonical home is Hands. rw-tracker.md gets the scorecard view only.
-
-**3. Compress resolved patterns**
-- Nervous system tracks pattern trajectories. When a pattern reaches RESOLVED status:
-  - Remove from rw-tracker.md active patterns table
-  - Add one-line entry to nervous-system.md "Resolved Patterns" archive
-  - Remove any related trainer callouts from the daily brief template
-
-**4. Age-based decay**
-- Facts older than 90 days with no references in the last 30 days → flag for review
-- Meeting briefs for meetings that no longer recur → archive
-- Competitor data for competitors who haven't appeared in 60 days → compress to one-line historical note
-- Relationship graph entries for contacts with no interaction in 60 days → move to a "Dormant Contacts" section (don't delete — they may resurface)
-
-**5. Structural compression**
-- Replace verbose paragraphs with tables where possible
-- Replace repeated patterns with templates + variables
-- Replace full explanations with references to other organs: "See Brain → D1 for rationale"
-
-**6. Protocol compression** (added Run 8, from CE-2)
-- Procedural knowledge (how-to protocols, step-by-step instructions) that the agent has internalized after multiple runs can be compressed to 1-2 line summaries
-- Keep data tables intact — compress the descriptions around them
-- Test: can the agent still execute the protocol correctly from the compressed version? If yes, compress.
+| # | Technique | Rule |
+|---|-----------|------|
+| 1 | Resolve completed items | Hands: DONE 7d → summary line, 14d → archive. Brain: VALIDATED decisions → one-liner. Device: 30d+ delegations → one line. Eyes: scored QA → archive. |
+| 2 | Deduplicate across organs | One fact, one organ. Canonical homes: people → Memory, metrics → Eyes, tasks → Hands. Others get pointers. |
+| 3 | Compress resolved patterns | NS RESOLVED → remove from rw-tracker, one-liner in NS archive, remove trainer callouts. |
+| 4 | Age-based decay | 90d no references in 30d → flag. Non-recurring meetings → archive. Competitors 60d silent → one-liner. Contacts 90d → Dormant (don't delete). |
+| 5 | Structural compression | Paragraphs → tables. Repeated patterns → templates. Full explanations → organ cross-refs. |
+| 6 | Protocol compression | Internalized procedures → 1-2 line summaries. Keep data tables. Test: can agent still execute? |
+| 7 | Identity field protection | **Non-compressible.** Pronouns, preferred names, nicknames, gender identity. 100% accuracy — REVERT on any loss. See §7 details below. |
 
 **7. Identity field protection** (added Run 15, from intake request — Karpathy approved)
 - Identity fields are **non-compressible**. They must survive all COMPRESS, REMOVE, and REWORD experiments unchanged.
@@ -187,11 +151,7 @@ What gets removed from the body entirely (archived or deleted).
 | Superseded organ versions | After new version confirmed | Keep one version back |
 | Dormant contacts (60+ days) | Move to archive section in Memory | Restore if resurfaces |
 
-### Delete Rules
-Only delete content with zero future value: temp MCP/debug files (immediately), exact duplicate intake files, failed experiment .bak files (after confirmed).
-
-### Never Delete
-Organ files, changelog.md, Richard's manual files, steering files.
+**Delete** (zero future value only): temp MCP/debug files, exact duplicate intake files, failed .bak files. **Never delete:** organ files, changelog.md, Richard's manual files, steering files.
 
 ---
 
@@ -212,6 +172,7 @@ The gut runs a bloat check during the heart loop cascade (Phase 2) and flags iss
 | Predicted question never scored after 7 days | 7 days | Score it or archive it |
 | Contact in Memory with no interaction for 90 days | 90 days | Move to Dormant Contacts |
 | Agent-bridge organ stale vs source | Any organ modified since last sync | Flag: "🧳 Agent-bridge: [N] organs stale since last sync" |
+| DuckDB experiment table > 500 rows | 500 rows | Archive old experiments to parquet, keep last 100 in active table |
 
 ### Bloat Report (included in daily brief when issues detected)
 ```
@@ -225,11 +186,11 @@ The gut runs a bloat check during the heart loop cascade (Phase 2) and flags iss
 
 ## Integration with the Heart Loop
 
-The gut's adaptive budgets are informed by the autoresearch loop. Experiments track the size-accuracy relationship per organ. The loop may add content to an organ if it improves accuracy — the priors on ADD vs COMPRESS per organ naturally discover each organ's optimal size. The morning routine handles intake processing and bloat detection during daily runs.
+The gut's adaptive budgets are informed by the autoresearch loop. Experiments track the size-accuracy relationship per organ. The loop may add content to an organ if it improves accuracy — the priors on ADD vs COMPRESS per organ naturally discover each organ's optimal size. The AM hooks handle intake processing and bloat detection during daily runs.
 
 ---
 
-## Integration with the Morning Routine
+## Integration with AM-3 Brief
 
 Daily brief includes gut check when issues detected (e.g., "🫁 Eyes is 500w over budget," "🫁 3 intake files unprocessed for 5+ days"). On clean days, omit entirely. Silence means health.
 
@@ -239,7 +200,7 @@ Daily brief includes gut check when issues detected (e.g., "🫁 Eyes is 500w ov
 
 ## Governance
 
-**All changes to compression protocols, word budgets, bloat thresholds, and excretion rules in this file are governed by Karpathy authority** (`~/.kiro/agents/body-system/karpathy.md`). "Karpathy authority" means: the executing agent acting under karpathy.md identity (during experiment runs) OR a Karpathy subagent (during governance proposals). The heart loop applies these rules during execution. Karpathy owns the rules themselves — testing new techniques, adjusting budgets, and evolving the compression strategy over time.
+**All changes to compression protocols, word budgets, bloat thresholds, and excretion rules in this file are governed by Karpathy authority** (`~/.kiro/agents/body-system/karpathy.md`). "Karpathy authority" means: the executing agent acting under karpathy.md identity (during experiment runs) OR a Karpathy subagent (during governance proposals). The heart loop applies these rules during execution. Karpathy owns the rules themselves — testing new techniques, adjusting budgets, and evolving the compression strategy over time. Karpathy authority also extends to style guide experiments and output-quality evals — any experiment that modifies style guides, market context files, callout principles, or hook prompts falls under the same governance as organ compression experiments.
 
 ## When to Read This File
 During heart loop cascade, when an organ feels bloated, when intake/ accumulates, monthly compression review, before adding content to any organ (check budget first).

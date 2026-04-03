@@ -1,0 +1,167 @@
+# PS New Account Playbook
+
+## Pre-launch 
+
+**Goal setup** - Need to ensure to communicate no ie%CCP constraint with the team
+
+**Account set up**- 
+
+* Reach out to the country retail PS lead for non-hydra MCC access to create the account
+* **Advertiser verification steps:**
+    * 1) Navigate to your Regional MCC
+    * 2) Click Billing the Advertiser Verification.
+    * 3) Click verify advertiser and navigate through the process.
+
+**Payment Profile Set Up  & Billing**
+
+* ~~**Google**~~
+    * ~~Reach out to Google rep to create the account under our NA MCC~~
+        * ~~Google can help to set up different payment profile under one MCC even the payment profile is different against the MCC- See MX account under NA MCC as example~~
+    * Have the regional retail manager to confirm the AMZ address and Google address in the payee central for double checking the Google payment profile setup
+    * Have the  AB expansion team manager to create the PO and AB PS team need to update the PO number in the account budget for invoicing
+
+**Campaign Build**
+
+* Account Level
+    * Tracking- _Google auto tagging needs to be turned off_
+    * **Add Associate tag in the Final URL Suffix - [Sheet1: [Amazon Business] Associate Tag - Account List](https://quip-amazon.com/wEtMA8IyOfAE#temp:C:BFf0029db13d1884e7981ad1ec57)**
+* Keywords/Ads Translation- Use EU5 account’s campaign structure as example for Google’s translation
+    * Google’s Translation- Email Google rep for help- Google will need around 2 business weeks turnaround time
+        * In email, include the Account name and CID number for the account with the campaigns you need to translate. Make sure to request all active campaigns (or whichever individual campaigns you need), ad groups, positive and negative keywords, and sitelinks, RSAs and callouts. 
+        * Example file you will receive from Google: [CA_Enterprise__fr-CA_-en_fr-CA.csv](https://quip-amazon.com/-/blob/PHM9AA3dVbU/DOJc7CepITMJVRRuvd1fNQ?name=CA_Enterprise__fr-CA_-en_fr-CA.csv) 
+        * [Instructions for Translated campaign import](https://docs.google.com/document/d/1DG3sqXf_IPcaC1y8K5K1AqwvwBAQVo0wp3E7kEJpe00/edit)
+        * Keyword expansion opportunity insight
+            * Google team
+            * Local AB Marketing team
+            * GenBI- ask top ASIN products in the market
+* Negatives
+    * Reach out to the regional central team member to provide negative KW lists before the launch
+    * Add other AMZ account target terms as negatives such as AWS - WW negative lists 
+    * [PS Negative KW from Other Teams](https://quip-amazon.com/xnIQAgiK3zWH)
+        * Add “amazon music” as negative phrase
+* Campaign Settings
+    * Have campaigns in the account as the paused status a week before launch *to ensure everything is set up correctly
+    * Search Partners- Ensure the search partners are opted out for brand safety
+    * Location targeting: Checking other countries target locale (that our new market is negated) AND negate our other current targeting countries
+        * Our new launch only targets the new country we're supporting and negates all other countries
+* Landing Pages
+    * Provide the list of the MCS pages that are currently using to AB expansion team for review
+        * MCS Translation- Define Brand & NB landing page> ensure the landing pages are all translated for the launch
+        * Example: [Sheet1: MCS content check](https://quip-amazon.com/nHvRAF25MnQt#temp:C:Vac198fc2a980d04dfca1722a30c) [AU PS URLs: AU PS URLs](https://quip-amazon.com/tjd0AJLC6Xjg#temp:C:DDT31f1565ac19642ea9d6080417)
+    * Make list of pages that will need to be created/translated for testing by priority post-launch
+    * Ensure /cp in the PS MCS URLs
+    * *AB regional team to provide feedback for the landing pages to ensure the selection is available in the new market*
+* Tracking-RefTags
+    * Requirements:
+        * Keyword level URLs
+        * Refs must be <64 characters
+        * Refs must be unique to each unique instance of a kw
+    * Structure Template Example: SearchTrackingCodePrefix_Country_CampaignTheme_KwID-MTAdGID 
+            * MT: exact = x | phase = y | broad = z
+            * Example: pd_sl_MX_Brand_333551889008-x102808188665
+            * Upload the base keyword level URLs first> redownload the sheet to get keyword IDs and adgroup IDs> appendix tracking> reupload URLs via editor
+    *  SearchTrackingCodePrefix= pd_sl
+    * Example reftags (rules to communicate to ABMA)
+            * Brand: ref tag contains **pd_sl_MX_Brand**
+            * Non-Brand: ref tag contains **pd_sl_MX but doesn’t contain Brand**
+            * Communicated the above logic (Brand and NB) with ABMA for reporting
+                * https://issues.amazon.com/ABMA-5891 
+                * Add Reftags to Feature Registry
+                    * Location in Feature Registry: Amazon Business - Registrations > Offsite - Search (Paid)
+    * Add to [RefTag Master sheet](https://amazon.awsapps.com/workdocs-preview/index.html#/document/33d6f515e8565b2c5cb0f64482133583b5fd716d0b78bac5286bb0ae339df34e)
+        * Use existing RefTags as guide to create new tab for the new market
+    * **ref_=** when LP is directing to the **http://amazon.com/** domain
+
+
+
+
+**ABMA**
+
+* Email ABMA Google/Bing account names before launch 
+* Send ABMA ref tag structure (Brand & NB) via email or SIM ([SIM example](https://issues.amazon.com/issues/ABMA-5891)).
+    * X will be regional code
+    * • Brand: reg tag contains pd_sl_**X**_Brand
+        • Non-Brand: reg tag contains pd_sl_**X** but doesn’t contain Brand
+* *AMO EFID Process - Submit [SIM ticket](https://issues.amazon.com/issues/create?template=9f62f65c-2367-4b4d-9cff-312fe4418b43) to ABMA for requesting an EFID feed created for the new market launch to have the correct feed passing through regs via EFID for AMO. File should follow the same format and naming structure as other EFID files sent to Adobe AMO. *
+    *  *[SIM Example- https://issues.amazon.com/issues/ABMA-6039](https://issues.amazon.com/issues/ABMA-6039)*
+* *Ask ABMA to find the related job links for the EFID feed*
+    * *Filename structure: amazon_business_registrations_efid_MX_YYYYMMDD <<date of last included data is appended at end (ie. file ending in 20240228 contains registration data through Feb 28, 2024
+        File Location: sftp://amo9012rev@ftp5.adobe.net*
+    * *Dummy file example: transaction_date ref_marker keyword_id search_engine registration ef_id session_id 2023-01-14 pd_sl_MX_Brand_General_302400465533_avt_small pd_sl_MX_Brand_General_302400465533_avt_small google1CjwKCAiAqY6tBhAtEiwAHeRopaAe_QKQFWaNqwuglRs5sHcde4aNca6AyXCX0MRRWdsoySGXrJZf1RoC30gQAvD_BwE:G:s 132-7265682-6212642*
+
+
+**AMO**
+
+* ABMA reporting- need Google account name and Bing account name with CIDs
+* https://issues.amazon.com/ABMA-5891> Google is setup- Changes are pushed into prod. MX data will flow into WBR Deck once it is launched.
+* AMO sync - send email to AMO rep to grant them standard Google access.
+* ~~AMO Portfolios:~~
+    * ~~Create separate Brand and Non-Brand portfolios~~
+    * ~~Go to Portfolios and select “Create Portfolio”~~
+        * ~~Check hybrid if using Google bidding strategy (Max Clicks or TCPA) need to import AMO convs data to G ads/ if using Adobe bidding leave unchecked~~
+        * ~~Set Daily spend budget~~
+        * ~~If using Adobe bidding check “Auto adjust campaign bid limits”~~
+        * ~~Select “registration ef id” as objective (or needed conversion metric)~~
+        * ~~Add campaigns to portfolio~~
+            * ~~All campaigns need to be in Manual CPC bidding strategy to add to portfolio~~
+            * ~~Once the portfolios are created and the campaigns and portfolios are active, you can switch the campaigns to the desired bidding strategy.~~
+        * ~~AMO syncs at midnight and noon, but you can manually refresh if needed.~~
+
+
+**Budget Best Practiced**
+
+* Align Budget & OP1/2 goals with stakeholders 
+* Budget heavier in first two month to allow learning and can scale back accordingly in following months with optimizations
+
+**Create Launch Plan**
+
+* Example -[MX PS Launch Plan](https://quip-amazon.com/z1SqAw5x4qqt#OfK9AAHdtbF), [AU PS Launch](https://quip-amazon.com/711HAEvB2oeb)
+* Include:
+    * Details
+    * Tactical Implementation
+    * Launch and Testing Plan
+    * Action Items Checklist:
+        * Ensure the regional AB team check keywords, ads and landing pages to ensure the selections are all support in the local market.
+    * Timeline for Implementation through Go-Live.
+    * Appendix
+
+
+
+## Launch Timeline
+
+* Ad copies/KWs translation done 4 weeks before launch date
+* Stakeholder approval and edit done 3 weeks before launch date
+* Launch timeline will be dependent on time of PR go live
+* MCS site goes live
+* +2hrs: Paid Search Ads goes live [5 hours before PR launch to ensure ads are public
+* PR/Comms goes live at set time
+    * Example - MCS site goes live at 12am CST. Paid Search goes live at 2am CST. PR/Comms goes out at 7am CST.
+
+
+**On Launch**
+
+* If ads are disapproved from MCS not being live pre-launch, change Final URL for ads then change it to the correct URL again. Do NOT appeal ads and wait for approval as that will take several hours to days. Editing the ads will be approved much quicker
+* Assure traffic is coming in as expected.
+* Communicate successful launch with stakeholders.
+* Check for regs 2 days after launch via Hubble and validate they are coming into Adobe.
+
+
+
+## **Post Launch** 
+
+* Contact Stacey’/Adi internally to update the [weekly dashboard](https://amazon.awsapps.com/workdocs/index.html#/login?redirectPath=document%2F9924b88a02031acc159c44747e1ced917bc25233e26e8c4f150708649f33d05f) to include OP2 goals (spend/regs/CPA) in the weekly performance dashboard
+* Define what market launches (MX/CA/IT) will be compared and prepare data to have on hand for comparisons in reporting
+    * Examples:
+        * [CA 2019 and 2020 KPIs_Updated from Google Ads.xlsx](https://quip-amazon.com/-/blob/PHM9AA3dVbU/gX702OXMgv20-FJ7uMs9zw?name=CA%202019%20and%202020%20KPIs_Updated%20from%20Google%20Ads.xlsx) 
+        * [MX Reporting 2024 YTD.xlsx](https://quip-amazon.com/-/blob/PHM9AA3dVbU/olgkbkxogi2Q1wE3gmuiHQ?name=MX%20Reporting%202024%20YTD.xlsx) 
+* Create a Weekly Status Doc for Stakeholders:
+    * Example - [AB MX Paid Search Sync](https://quip-amazon.com/K9OYA9mXm7DU)
+* Continue to QA WBR and raise flags to the stakeholders as irregularities come up
+    * [MX WBR file](https://share.amazon.com/sites/ABIX/SitePages/Home.aspx?RootFolder=%2Fsites%2FABIX%2FShared%20Documents%2FABMX%2FWBR&FolderCTID=0x01200072CA3EA1AD1C054DBBD81D753A643E48&View=%7BCD74576B%2D54FE%2D4BF4%2DAB79%2D2FF5945D2872%7D)
+* Performance correlation with other channels
+    * Monitor when other channels launch and note any performance shifts. 
+    * Review WoW trends from other channels to determine impacts
+        * Example - Email sending larger amount of blasts prior to Prime Day then cutting down significantly post-PD. WoW reg trends aligned between the channels.
+        * Example - Push notifications from App launch and we see regs pick up
+
+

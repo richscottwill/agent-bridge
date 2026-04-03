@@ -85,6 +85,9 @@ Last updated: 2026-03-25
 - [MX Market Wiki](~/shared/artifacts/program-details/2026-03-25-mx-market-wiki.md): Mexico market wiki
   - slug: mx-market-wiki | status: DRAFT | audience: amazon-internal | level: N/A | tags: market-wiki, mx
 
+- [AU Paid Search — Market Overview](~/shared/artifacts/program-details/2026-04-03-au-paid-search-market-overview.md): Current-state reference doc — performance, initiatives, stakeholders, open questions
+  - slug: au-paid-search-market-overview | status: DRAFT | audience: amazon-internal | level: N/A | tags: market-wiki, au, market-overview
+
 - [OCI Implementation Guide](~/shared/artifacts/program-details/2026-03-25-oci-implementation-guide.md): Per-market OCI implementation guide
   - slug: oci-implementation-guide | status: DRAFT | audience: amazon-internal | level: N/A
 
@@ -93,6 +96,9 @@ Last updated: 2026-03-25
 
 - [Promo Events Calendar](~/shared/artifacts/program-details/2026-03-25-promo-events-calendar.md): Promotional events calendar
   - slug: promo-events-calendar | status: DRAFT | audience: amazon-internal | level: N/A
+
+- [AU Paid Search — Market Overview](~/shared/artifacts/program-details/2026-04-03-au-market-overview.md): Strategic market overview — current state, performance, initiatives, stakeholders, open questions
+  - slug: au-market-overview | status: DRAFT | audience: amazon-internal | level: N/A | tags: market-wiki, au
 
 ### Reporting (3)
 
@@ -147,15 +153,15 @@ _No system documentation articles published yet. System docs currently live in b
 |----------|-------|-----------------|
 | Testing & Experimentation | 11 | `testing/` |
 | Strategy & Frameworks | 7 | `strategy/` |
-| Program Details / PS Ops | 6 | `program-details/` |
+| Program Details / PS Ops | 7 | `program-details/` |
 | Reporting | 3 | `reporting/` |
 | Tools & Automation | 2 | `tools/` |
 | Communication | 3 | `communication/` |
 | Best Practices | 3 | `best-practices/` |
 | System Documentation | 0 | _(none yet)_ |
-| **Total** | **35** | |
+| **Total** | **36** | |
 
-Status: 35 DRAFT | 0 REVIEW | 0 FINAL
+Status: 36 DRAFT | 0 REVIEW | 0 FINAL
 Audience: 31 amazon-internal | 2 personal | 0 agent-only
 
 ---
@@ -191,8 +197,35 @@ ww-testing-tracker (STANDALONE)
   └── references all testing/ docs
 ```
 
+## Distribution Model
+
+Local wiki (`~/shared/artifacts/`) is the working branch. SharePoint is production.
+
+- **DRAFT** → article exists locally, still being written or revised
+- **REVIEW** → article is ready for Richard to review for SharePoint publish
+- **FINAL** → article has been human-approved and published to SharePoint
+
+Publishing to SharePoint is a deliberate, human-approved action — like a git push to main. The agent pipeline (editor → researcher → writer → critic → librarian) produces DRAFT and can promote to REVIEW. Only Richard promotes to FINAL and triggers the SharePoint publish.
+
+Distribution endpoints (MCP servers installed, target sites TBD):
+- `amazon-sharepoint-mcp` — SharePoint. Primary target for amazon-internal audience articles.
+- `xwiki-mcp` — XWiki. Optional alternative endpoint. May be preferred depending on team adoption and tooling.
+
+Target site and library for each endpoint will be configured when the first article is ready to publish.
+
+Publishing workflow (future — Level 3):
+1. Librarian marks article as REVIEW when quality checks pass
+2. Richard reviews the article and approves
+3. Agent publishes to SharePoint via MCP, updates status to FINAL
+4. Local copy remains source of truth; SharePoint is the read-only distribution copy
+
+Until the target site is configured, all articles remain local. No auto-publish, ever.
+
+---
+
 ## Update Log
 
 | Date | Article | Change |
 |------|---------|--------|
+| 2026-04-03 | au-paid-search-market-overview | New article — AU current-state reference doc synthesized from operational data |
 | 2026-03-25 | (all 34 artifacts) | Initial catalog — existing artifacts indexed into wiki system |

@@ -1,0 +1,10 @@
+{
+  "name": "3 · PS Audit",
+  "version": "1",
+  "description": "Paid search audit pipeline — data, analysis, reports.",
+  "when": { "type": "userTriggered" },
+  "then": {
+    "type": "runCommand",
+    "command": "python -m paid_search_audit.cli --config paid_search_audit/config.json --output-dir ./reports"
+  }
+}

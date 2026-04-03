@@ -1,5 +1,6 @@
 ---
-inclusion: manual
+inclusion: fileMatch
+fileMatchPattern: ["hooks/am-*", "hooks/eod-*"]
 ---
 
 # Task Prioritization — Backlog → Active Lists
@@ -45,12 +46,8 @@ The 4 active lists map to 4 daily calendar blocks:
 - If a market is performing well, deprioritize reactive tasks for that market — focus on scaling what's working
 
 ### Layer 5: Strategic Priorities (always-on filter)
-Richard's three pillars. At least one task from each should be represented in the active lists at all times:
-1. **WW Testing Framework** — testing methodology, AI Max test design, promo experiments, email overlay rollout
-2. **AU Registrations & Tests** — AU bid strategies, keyword optimization, landing page tests, NB testing (MRO/Trades)
-3. **MX Registrations & Tests** — MX campaigns (Beauty, Auto), keyword sourcing, reftag tracking, category LP performance
-
-If an active list has zero tasks tied to one of these pillars, scan Backlog for the highest-leverage task in that pillar and pull it forward.
+#[[file:~/shared/context/body/brain.md]]
+brain.md contains the live strategic priorities (Three Pillars). At least one task from each pillar should be represented in the active lists at all times. If an active list has zero tasks tied to one of these pillars, scan Backlog for the highest-leverage task in that pillar and pull it forward.
 
 ### Layer 6: Blocked vs. Unblocked
 - Tasks explicitly blocked (legal approval, Tech dependency, waiting on someone) stay in Backlog unless:

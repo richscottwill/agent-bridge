@@ -97,35 +97,89 @@
     "radar-mcp": {
       "command": "radar-mcp",
       "args": [],
-      "autoApprove": []
+      "autoApprove": [],
+      "disabled": true
     },
     "amazon-sharepoint-mcp": {
       "command": "amazon-sharepoint-mcp",
       "args": [],
-      "autoApprove": []
+      "autoApprove": [
+        "sharepoint_search",
+        "sharepoint_search",
+        "sharepoint_search",
+        "sharepoint_read_loop"
+      ]
     },
     "search-marketing-agent-workspace-alpha-mcp": {
       "command": "search-marketing-agent-workspace-alpha-mcp",
       "args": [],
-      "autoApprove": []
+      "autoApprove": [],
+      "disabled": true
     },
     "knowledge-discovery-mcp": {
       "command": "knowledge-discovery-mcp",
       "args": [],
-      "autoApprove": []
+      "autoApprove": [
+        "QuerySync",
+        "QuerySync",
+        "QuerySync"
+      ]
     },
-    "campaign-management-dashboard-mcp": {
-      "command": "campaign-management-dashboard-mcp",
+    "loop-mcp": {
+      "command": "loop-mcp",
       "args": [],
-      "autoApprove": []
+      "autoApprove": [
+        "loop_search",
+        "loop_read",
+        "loop_list",
+        "loop_get",
+        "loop_read_page",
+        "loop_list_pages",
+        "loop_list_workspaces",
+        "loop_get_page",
+        "loop_get_workspace",
+        "loop_search_pages",
+        "read_loop",
+        "read_loop",
+        "read_loop"
+      ]
     },
-    "flow-builder-mcp": {
-      "command": "store",
-      "args": [
-        "flow",
-        "flow-builder-mcp"
-      ],
-      "autoApprove": []
+    "xwiki-mcp": {
+      "command": "xwiki-mcp",
+      "args": []
+    },
+    "weblab-mcp": {
+      "command": "weblabmcp",
+      "args": []
+    },
+    "builder-mcp": {
+      "command": "builder-mcp",
+      "args": [],
+      "env": {
+        "TOOL_PERSONALIZATION_ENABLED": "true",
+        "TOOL_PERSONALIZATION_MIN_EXECUTIONS": "0",
+        "TOOL_PERSONALIZATION_TRAINING_DAYS": "0",
+        "TOOL_PERSONALIZATION_ROLLOUT_PERCENTAGE": "100"
+      },
+      "autoApprove": [
+        "ReadInternalWebsites"
+      ]
+    },
+    "taskei-p-mcp": {
+      "command": "taskei-p-mcp",
+      "args": []
+    },
+    "aaisd-redshift-mcp": {
+      "command": "redshift-mcp-server",
+      "args": [],
+      "disabled": true
+    },
+    "enterprise-asana-mcp": {
+      "command": "enterprise-asana-mcp",
+      "args": [],
+      "autoApprove": [
+        "*"
+      ]
     }
   },
   "powers": {

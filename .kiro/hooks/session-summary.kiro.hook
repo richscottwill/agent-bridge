@@ -1,0 +1,12 @@
+{
+  "name": "Session Summary",
+  "version": "1.0.0",
+  "description": "Writes session summary to intake after non-trivial agent sessions.",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Evaluate this session. If it involved tool calls, file modifications, or 3+ conversation turns, append a brief summary (2-3 lines) to ~/shared/context/intake/session-log.md with format: [YYYY-MM-DD] Topic: ... | Actions: ... | Decisions: ... If the session was trivial (single short response, no tool calls, no file writes), skip logging entirely."
+  }
+}

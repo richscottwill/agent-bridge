@@ -2,7 +2,7 @@
 
 *Operating principle: Invisible over visible. Surface insights that lead to structural changes — not reports that require Richard to act on them. When a pattern is STUCK for 3 weeks, propose a structural fix.*
 
-Last updated: 2026-04-02 (run 17)
+Last updated: 2026-04-03 (EOD-1: Kate meeting officially canceled via email thread. No new sessions today — Friday work blocks only.)
 Created: 2026-03-20
 
 ---
@@ -16,80 +16,77 @@ Evaluates the work every other organ does. Looks backward, measures what happene
 ## Calibration Loops
 
 ### Loop 1: Decision Audit
-Calibrates: Brain | Cadence: Monthly or when outcome window closes | Protocol: Score decisions as VALIDATED/PARTIALLY/INVALIDATED/PENDING. If INVALIDATED → flag principle for revision.
+Brain | Monthly | Score decisions VALIDATED/PARTIALLY/INVALIDATED/PENDING. INVALIDATED → flag principle.
 
-| Decision | Audited | Outcome | Principle Validated? | Notes |
-|----------|---------|---------|---------------------|-------|
-| D1: OCI Phased Rollout | — | PENDING | — | Audit when CA/JP/EU3 data available (Jul 2026) |
-| D2: Walmart Bid Caps | — | PENDING | — | Audit monthly: total program CPA |
-| D3: Ad Copy Overhaul | — | PENDING | — | UK +31% regs. Audit IT when volume sufficient. |
-| D4: AU Full Migration | — | PENDING | — | Lena overrode phased approach. Audit post-Polaris +30d. |
-| D7: WBR Traffic Decline | — | PENDING | — | MEDIUM confidence. Audit when deep dive data arrives. |
+| Decision | Outcome | Audit Trigger |
+|----------|---------|---------------|
+| D1: OCI Phased Rollout | PENDING | CA/JP/EU3 data (Jul 2026) |
+| D2: Walmart Bid Caps | PENDING | Monthly: total program CPA |
+| D3: Ad Copy Overhaul | PENDING | UK +31% regs. IT when volume sufficient. |
+| D4: AU Full Migration | PENDING | Post-Polaris +30d |
+| D7: WBR Traffic Decline | PENDING | Deep dive data |
 
 ### Loop 2: Prediction Scoring
-Calibrates: Eyes | Cadence: Every morning routine + weekly rollup | Protocol: Score predicted QA as HIT/MISS/SURPRISE. Target: ≥60% hit rate. <40% for 2 weeks → flag miscalibration.
-
-Current hit rate: —% (scoring starts W13, insufficient data)
-Weekly history removed — current-state-only principle. Weekly scores logged to changelog.md.
+Eyes | Daily + weekly | Score predicted QA: HIT/MISS/SURPRISE. Target ≥60%. Currently inactive — predicted QA cleared from Eyes (stale content experiment, Run 18). Reactivate when AM-2 generates fresh predictions.
 
 ### Loop 3: Pattern Trajectory
-Calibrates: rw-tracker.md patterns | Cadence: Weekly (Friday) | Protocol: Assess as IMPROVING/STUCK/WORSENING/RESOLVED. STUCK 3+ weeks → propose structural fix. Willpower problem → trainer. Systems problem → device.md.
+rw-tracker.md | Weekly (Friday) | IMPROVING/STUCK/WORSENING/RESOLVED. STUCK 3+ wk → structural fix. Willpower → trainer. Systems → device.
 
 | Pattern | Status | Weeks | Trajectory | Last Assessment | Intervention |
 |---------|--------|-------|------------|-----------------|-------------|
-| Visibility avoidance | VALIDATED | 11 | WORSENING | 4/1 — 12 workdays at zero. AU weekly update = good L2 visibility, not L1. | Root cause of L1 stall. Gate: Testing Approach doc. |
-| Zero strategic artifacts | ACTIVE | 7+ | WORSENING | 4/1 — Still 0. Blocked by visibility avoidance. | Same root cause as above. |
+| Visibility avoidance | VALIDATED | 11 | WORSENING | 4/1 — 12 workdays at zero. AU weekly = L2, not L1. | Root cause of L1 stall. Gate: Testing Approach doc. |
+| Zero strategic artifacts | ACTIVE | 7+ | WORSENING | 4/1 — Still 0. Blocked by visibility avoidance. | Same root cause. |
 | Have Backbone avoidance | NEW | 1 | — | 3/25 — Annual Review peer feedback | Monitor. |
-| Project management gaps | NEW | 1 | — | 3/25 — Persisting from Forte 2025 | Structural: need lightweight tracking artifacts. |
-| Admin backlog displacement | ACTIVE | 3 | STUCK | 3/18 — Admin over cap, displacing strategic work | Trainer escalation triggered. |
-| Reactive fire drills | ACTIVE | 3 | STUCK | 3/19 — AU CPC displaced AEO POV (3rd week) | Need pre-written response templates. |
+| Project management gaps | NEW | 1 | — | 3/25 — Persisting from Forte 2025 | Need lightweight tracking artifacts. |
+| Admin backlog displacement | ACTIVE | 3 | STUCK | 3/18 — Admin over cap, displacing strategic | Trainer escalation triggered. |
+| Reactive fire drills | ACTIVE | 3 | STUCK | 3/19 — AU CPC displaced AEO POV (3rd wk) | Need pre-written response templates. |
 
 ### Loop 4: Delegation Verification
-Calibrates: Device | Cadence: Weekly | Protocol: Check each active delegation — did the handoff happen? Is the delegate performing? Score as ON_TRACK/SLIPPING/FAILED.
+Device | Weekly | Score delegations ON_TRACK/SLIPPING/FAILED.
 
 | Delegation | Delegate | Status | Last Checked | Notes |
 |-----------|----------|--------|-------------|-------|
-| MX Invoicing | Carlos → Lorena | SLIPPING | 3/25 | Carlos departed. Lorena confirmed primary. Handoff incomplete. |
-| OP1 Contributors | Various | ON_TRACK | 3/25 | Last checked 3/25 |
+| MX Invoicing | Carlos → Lorena | SLIPPING | 3/25 | Carlos departed. Handoff incomplete. |
+| OP1 Contributors | Various | ON_TRACK | 3/25 | — |
 
 ### Loop 5: System Health
-Calibrates: All organs | Cadence: Every loop run | Protocol: Word counts, staleness, loop reliability, session continuity.
+All organs | Every run | Word counts, staleness, reliability.
 
 | Metric | Value | Target | Status |
 |--------|-------|--------|--------|
-| Total body words | ~19,200w | ≤30,000w (safety limit) | ✅ Under limit |
-| Organs over budget | N/A — budgets are adaptive | — | 15 experiments, priors updating |
-| Loop runs completed | 17 | — | — |
-| Experiments completed | 15 (13 keep, 1 revert, 1 delta=0 keep) | — | 93% keep rate |
-| Staleness risk | Eyes market metrics (Feb data, 30+ days) | <20% stale | ⚠️ Needs Mar WBR |
+| Total body words | ~19,200w | ≤30,000w | ✅ Under limit |
+| Budgets | Adaptive (Bayesian) | — | 15 experiments, priors updating |
+| Loop runs | 18 | — | — |
+| Experiments | 36 (22 keep, 14 revert) | — | 61% keep rate. Run 18: 43 experiments, diverse techniques. Output-quality evals added. |
+| Experiment targets | 112 (63 organ + 49 style/context) | — | 45 organ combos tested (71%). Style guide combos seeded, untested. |
+| Staleness risk | Eyes (Feb data, 30+ days) | <20% stale | ⚠️ Needs Mar WBR |
 
-### Loop 6: Principle Evolution
-Calibrates: Brain principles + soul.md | Cadence: Quarterly | Protocol: Deep review of whether decision principles still serve Richard. First review: W28 (90 days from creation).
-
-Status: Not yet due. First review scheduled ~Jun 2026.
-
-### Loop 7: Coherence Audit
-Calibrates: Cross-organ references | Cadence: Monthly or after structural changes | Protocol: Build dependency matrix, check for gaps (A should reference B but doesn't), stale references, duplications. Generate coherence score.
-
-Last audit: 3/20 (creation day — baseline). Next due: 4/20 or after next structural change.
-
-### Loop 8: Source Quality Filter
-Enforces research quality tiers for any external information entering the system.
-- TIER 1 (builders with proof): Git repos, benchmarks, production systems → justify experiments
-- TIER 2 (practitioners with results): Applied Tier 1 with documented outcomes → default reject unless context matches
-- TIER 3 (commentary): Discovery only → never cite as basis for changes
+### Loops 6-8: Deferred Calibration
+- **Loop 6 (Principle Evolution):** Brain + soul.md | Quarterly | First review Jun 2026.
+- **Loop 7 (Coherence Audit):** Cross-organ refs | Monthly | Last: 3/20. Next: 4/20.
+- **Loop 8 (Source Quality Filter):** T1 (builders with proof) → experiments. T2 (practitioners) → reject unless context matches. T3 (commentary) → discovery only.
 
 ### Loop 9: Meeting Communication
-Calibrates: Hedy session data | Cadence: Weekly when Hedy data available | Protocol: Track speaking share, hedging, filler words, turn length. Flag low-visibility meetings or hedging patterns.
+Hedy data | Weekly | Speaking share, hedging, filler words, turn length.
 
-Status: Hedy MCP integrated (Run 8). 9+ sessions processed.
+Hedy integrated (Run 8). 9+ sessions processed.
 
-Pattern (confirmed across 9+ sessions): Richard strong in 1:1s (data-driven, solution-oriented, mentoring) but consistently below 15% speaking share in group settings (Deep Dive, Weekly Sync). Gap is structural, not situational. 1:1 scores: ~40% share, no hedging, good closed loops. Group scores: ~10% share, reactive posture.
+Confirmed pattern: Strong in 1:1s (~40% share, no hedging) but <15% in groups (Deep Dive, Weekly Sync). Structural, not situational.
+
+**4/2 (2 sessions):**
+- Market Expansion Playbook Review (53 min): Richard PRESENTED — visibility breakthrough. Led session, team engaged, action items assigned TO him. Strong L2.
+- WhatsApp/Push Demo (52 min): Observational. No visibility concern — product demo. Follow-up: coordinate WhatsApp rollout for MX/AU with Lorena/Alexis.
 
 ---
 
 ## Five Levels Position
-Level 1 (Sharpen Yourself): STRUGGLING. 13 workdays since hard thing set (Testing Approach doc), zero progress. Brandon 1:1 TODAY at noon — Testing Approach will come up. Brandon's take on Lena: "she needs to cool her jets, Kate is realizing it" — positive for Richard's position but doesn't change L1 gate. Gate: consecutive weeks with shipped artifacts. Currently at 0. W14 day 4.
+Level 1 (Sharpen Yourself): STRUGGLING but gate shifted. Kate Apr 16 meeting OFFICIALLY CANCELED (4/3 email thread: Brandon "cancel for now and reassess as we clean it up," Kate "I'm fine keeping it but wanted to make sure we had a plan," Megan declining from calendar). Brandon reviewing the testing framework doc himself first — will determine how to use it. The document is still the artifact, but the deadline pressure is gone. New action items from 4/2 Deep Dive: market expansion playbook (presented to team — strong L2 visibility), Year-One Optimization one-pager (by Apr 16), IECCP FAQ (by Apr 9), negative keyword list (immediate). Multiple artifact opportunities emerged. The playbook presentation was Richard's strongest group visibility moment in 9+ sessions tracked. Gate: consecutive weeks with shipped artifacts. Currently at 0. W14 day 5 (Friday).
+
+**L1 Gate-Breaker Candidates (from 4/2 Deep Dive):**
+- Year-One Optimization one-pager — due Apr 16. Smaller scope than Testing Approach. Could be the first shipped artifact.
+- IECCP FAQ — due Apr 9. Even smaller. One-page reference doc.
+- Negative keyword list — immediate. Tactical but shippable today.
+- Market Expansion Playbook — already presented 4/2. Could be formalized into a written artifact.
 
 ---
 

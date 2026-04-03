@@ -1,6 +1,6 @@
 # RW Tracker — Richard Williams
 
-Last updated: 2026-04-01 (compression run 16 — Karpathy)
+Last updated: 2026-04-03 (EOD-2 Friday)
 
 ## System
 - **Task list**: Microsoft To-Do → 5 lists (🧹 Sweep, 🎯 Core, ⚙️ Engine Room, 📋 Admin, 📦 Backlog). IDs: see hands.md → Task List Structure.
@@ -9,13 +9,24 @@ Last updated: 2026-04-01 (compression run 16 — Karpathy)
 
 ## Weekly Scorecard
 
-### Week of 2026-03-31 (W14) — Day 3 (Wednesday)
+### Week of 2026-03-31 (W14) — Day 5 (Friday EOD)
 | Category | Target | Actual | Notes |
 |----------|--------|--------|-------|
-| Strategic artifacts shipped | 1 | 0 | Testing Approach doc is the target. 10 biz days to Kate meeting. 12 workdays at zero. |
-| Tools/automations built | 0 | 4 | Prediction engine, data layer overhaul, callout pipeline, attention tracker (all 3/28-3/30). Slack ingestion live 4/1. |
-| Hours on low-leverage work | <5 | ~3 | AU weekly update (good — proactive visibility), meeting logistics |
-| Meetings with clear output | 100% | TBD | Adi sync today 12pm |
+| Strategic artifacts shipped | 1 | 0 | Testing Approach doc still at zero. 14 workdays. Apr 16 meeting CANCELED per Brandon but doc still valuable. |
+| Tools/automations built | 0 | 5 | Prediction engine, data layer, callout pipeline, attention tracker (3/28-3/30). Asana integration live (4/3 — full EOD reconciliation, daily reset, Kiro_RW writes). |
+| Hours on low-leverage work | <5 | ~5 | AU weekly update, meeting logistics, Slack alignment, admin carry-forwards |
+| Meetings with clear output | 100% | 60% | Adi sync (clear), Brandon 1:1 (clear), AppTweak (TBD), others passive |
+
+### Friday 4/3 EOD-2 — Asana Reconciliation
+- **Completed today (My Tasks): 0** — all 6 Today tasks carried forward
+- **Completed today (ABPS Build): 20** — milestones, context tasks, build tasks from AM-1 optimization test
+- **Carried forward: 6 Today tasks** demoted to Urgent with Kiro_RW + Next action written on each
+- **New tasks since morning: 0**
+- **Net delta: 0** (no My Tasks movement)
+- **Recurring tasks completed:** None today.
+- **Five Levels today:** L1: 0 (15 workdays). L2: 0. L3: 0. L4: 0. L5: 0 strategic (ABPS Build completions are system tasks).
+- **Blockers:** MX Auto page on Vijeth (15d), Kingpin on Andes (ongoing).
+- **ABPS AI Content:** completed=2 (integration test + research subtask), advances=0, refreshes=0. 35 tasks in pipeline.
 
 ## 30-Day Challenge (by 2026-04-13)
 - [ ] Ship Testing Approach doc to Kate (meeting Apr 16) — THE HARD THING
