@@ -1,0 +1,10 @@
+{
+  "name": ".EOD-1: Meeting Sync",
+  "version": "4.0.0",
+  "description": "Hedy + Outlook + email → meetings/ series files + organ updates.",
+  "when": { "type": "userTriggered" },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Run EOD-1: Meeting Sync.\n\nRead and execute ~/shared/context/protocols/eod-meeting-sync.md.\n\nPull today's meetings from Hedy and Outlook, update meetings/ series files, update organs (memory, nervous-system, current, device). Report sessions processed and files updated."
+  }
+}

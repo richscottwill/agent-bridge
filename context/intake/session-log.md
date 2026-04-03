@@ -48,3 +48,39 @@
 - 13 recurring tasks flagged as due (most first-time) — deferred to Monday AM-2 batch.
 - Hands, rw-tracker, changelog updated. Audit log: 6 entries appended.
 - No experiments run. No organ cascade changes (all <48h).
+
+
+## 2026-04-03 EOD-2 System Refresh (Run 19) — Full Session
+- Topic: EOD-2 execution — Asana reconciliation, daily reset, git push | Actions: 6 Today tasks demoted to Urgent with Kiro_RW + Next action, rw-tracker/hands/changelog updated, audit log appended (6 entries), 157 files committed and pushed to agent-bridge GitHub repo | Decisions: Deferred 13 due recurring tasks to Monday AM-2 (too heavy for EOD context), git push initially skipped but corrected after Richard flagged it.
+
+
+## 2026-04-03 EOD-2 Hook Length Evaluation
+- Topic: Is the EOD-2 hook prompt too long? | Actions: Measured hook at ~10KB single JSON string, identified 13 distinct jobs inlined in one prompt. Diagnosed root cause of deferred recurring tasks and skipped git push — context overload. | Decisions: Proposed splitting into focused sub-hooks or extracting protocol files (10KB→~2KB references). Richard to decide approach. No changes made yet.
+
+
+## 2026-04-03 Hook Protocol-File Audit
+- Topic: Are all hooks using protocol-file references or inlining instructions? | Actions: Measured all 16 hooks — AM-2 (69KB), EOD-2 (10KB), AM-3 (8.5KB) inline everything; 13 other hooks are under 1.5KB and properly scoped. Root cause: incremental spec additions bloated the big three without refactoring. | Decisions: Richard to approve extraction of AM-2/EOD-2/AM-3 into thin hook triggers + external protocol markdown files. AM-2 first (worst offender).
+
+
+## 2026-04-03 Hook Consolidation Design Discussion
+- Topic: Can AM (3 hooks) and EOD (2 hooks) be consolidated to 1 each using protocol-file approach? | Actions: Analyzed current 5 routine hooks (AM-1/2/3 + EOD-1/2) totaling ~88KB inlined prompts. Designed thin-trigger pattern: 1 AM hook + 1 EOD hook, each referencing a protocol markdown file with sequential phases. | Decisions: Recommended 1 AM + 1 EOD hook with protocol files. Richard to approve before implementation. Awaiting "build it" signal.
+
+
+## 2026-04-03 Hook Architecture — Sequential Chat Windows Question
+- Topic: Can 1 hook spawn 3 sequential chat windows? | Actions: Confirmed Kiro limitation — no hook chaining, no multi-window orchestration. Evaluated 3 options: separate hooks (current), single hook with protocol phases, subagent-per-phase isolation. | Decisions: Recommended 3-hook model: AM-ingest-brief (autonomous, subagent phases), AM-triage (interactive, stays separate), EOD (autonomous, subagent phases). Down from 5 to 3 routine hooks. Protocol files for all. Richard to approve.
+
+
+## 2026-04-03 EOD Subagent Constraint — Karpathy Experiments
+- Topic: EOD can't use subagents for phase orchestration because Karpathy experiments require A/B/C blind eval via subagents — subagents can't invoke their own subagents. | Actions: None — constraint confirmation only. | Decisions: EOD must remain a direct agent turn (not subagent-orchestrated) to preserve experiment capability. This constrains the consolidation options for EOD hooks.
+
+
+## 2026-04-03 Hook Consolidation — Final Architecture Options
+- Topic: What are the viable solutions given Karpathy subagent constraint + AM-2 interactivity? | Actions: Evaluated 3 options (A: protocol files only, B: merge autonomous + protocol, C: merge AM autonomous + reorder EOD protocol). | Decisions: Recommended Option C — 4 routine hooks (AM-auto, AM-triage, EOD-1, EOD-2) with protocol files, EOD-2 reordered so reconciliation/git runs before experiments. Fixes tonight's dropped-git-push structurally. Richard to approve before build.
+
+
+## 2026-04-03 Hook Architecture — Final Decision
+- Topic: Confirmed Option C with protocol files for ALL 4 routine hooks (AM-auto, AM-triage, EOD-1, EOD-2). | Actions: Defined final architecture — 4 hooks at ~200 bytes each, 4 protocol markdown files in ~/shared/context/protocols/, 88KB inlined prompts extracted. AM-2's 69KB becomes a readable protocol file. | Decisions: Architecture approved by Richard. Ready to build. Awaiting "build it" signal.
+
+
+## 2026-04-03 Hook Consolidation — Built and Deployed
+- Topic: Build the protocol-file hook architecture (Option C) | Actions: Created 4 thin hook triggers (am-auto 773B, am-triage 938B, eod-meeting-sync 516B, eod-refresh 967B) + 4 protocol markdown files (am-auto.md 6KB, am-triage.md 17KB, eod-meeting-sync.md 1KB, eod-system-refresh.md 7KB). Deleted 5 old hooks (AM-1/2/3, EOD-1/2 totaling 92KB inlined). EOD-2 phases reordered: git push (Phase 5) before experiments (Phase 6). | Decisions: 5 routine hooks → 4. 92KB inlined → 3.2KB triggers + 31KB readable protocol files. AM-1+AM-3 merged into am-auto with subagent isolation. Structural fix for dropped-git-push problem.

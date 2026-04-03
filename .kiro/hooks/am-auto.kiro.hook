@@ -1,0 +1,10 @@
+{
+  "name": ".AM-Auto: Ingest + Brief",
+  "version": "1.0.0",
+  "description": "Autonomous morning phases: data collection (Slack, Asana, email) then daily brief + dashboard + calendar blocks. No interaction needed.",
+  "when": { "type": "userTriggered" },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Run the autonomous morning routine.\n\nRead and execute ~/shared/context/protocols/am-auto.md.\n\nPhase 1 (Ingest) runs first — pure data collection, no writes to organs. Phase 3 (Brief) runs second — produces the daily brief, dashboard, and calendar blocks from Phase 1 output.\n\nUse invokeSubAgent for each phase to isolate context. Pass state between phases via files (intake/, morning snapshot). Report completion of both phases with summary stats."
+  }
+}
