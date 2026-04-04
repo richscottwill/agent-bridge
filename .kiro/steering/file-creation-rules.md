@@ -1,9 +1,3 @@
----
-inclusion: auto
-name: "File Creation Rules"
-description: "Where to create files: workspace directory, home directory, shared folder for persistence"
----
-
 # File Creation Rules
 
 ## Where to Create Files

@@ -52,3 +52,20 @@
 - Net: 4 kept, 1 reverted. wiki-writer config at 2702w (down from 2761w baseline).
 - Cross-organ check: ✅ No conflicts. Changes target wiki-writer agent config, not body organs. No organ content modified.
 - Gated file check: ✅ N/A (changelog.md edited, not heart.md or gut.md). Experiments executed by Karpathy — authorized.
+
+## 2026-04-04 — changelog.md (Karpathy Run 22, Saturday batch 4)
+
+- **wiki-researcher agent config**: 3 output-quality experiments. RESTRUCTURE on Research sources priority (1476w→1510w, Δ=+0.09, KEEP — moved DuckDB and Slack above meeting transcripts). ADD on Research brief format (1510w→1535w, Δ=+0.08, KEEP — added Confidence assessment section). REWORD on Research principles (1535w→1548w, Δ=+0.09, KEEP — structured citation format [source: type, date, confidence]).
+- **wiki-critic agent config**: 3 output-quality experiments. REWORD on Score dimensions (2131w→2310w, Δ=+0.06, KEEP — concrete examples at each score level across 5 dimensions). ADD on Economy dimension (2310w→2355w, Δ=+0.04, KEEP — verb rule for list items). RESTRUCTURE on Thresholds (2355w→2397w, Δ=+0.04, KEEP — raised dimension floor from 6 to 7).
+- Net: 6 kept, 0 reverted. wiki-researcher at 1548w, wiki-critic at 2397w.
+- Cross-organ check: ✅ No conflicts. The dimension floor change (6→7) in wiki-critic is internal to the critic's scoring rubric and does not affect the overall 8/10 approval threshold documented in ABPS AI spec (Property 8, Requirements 3.5/10.7). The approval gate remains: average >= 8 → approve, average < 8 → revise. The floor change means no single dimension can score below 7 even if the average is >= 8 — a stricter quality bar, consistent with the spec's intent.
+- Gated file check: ✅ N/A (changelog.md edited, not heart.md or gut.md). Experiments executed by Karpathy — authorized.
+
+## 2026-04-04 — changelog.md (Karpathy Run 23, Saturday batch 5)
+
+- **wiki-editor agent config**: 2 output-quality experiments. MERGE on Work_Product type table (2175w→2148w, Δ=-0.06, REVERT — guide/playbook merge lost branching-logic distinction). ADD on Work_Product type heuristic (2175w→2214w, Δ=+0.05, KEEP — name-pattern heuristic for person names → reference, process verbs → guide).
+- **richard-style-docs steering file**: 3 output-quality experiments. REWORD on Experiment Documents structure (565w→579w, Δ=+0.04, KEEP). ADD on Universal Rules (579w→619w, Δ=+0.03, KEEP — 3-bullet max + verb-start rule). RESTRUCTURE on header rule (619w→659w, Δ=+0.05, KEEP — question/imperative headers).
+- **richard-style-amazon steering file**: 2 output-quality experiments. REWORD on Analytical Patterns metric rule (351w→373w, Δ=+0.05, KEEP — metric template). ADD on Confidence calibration table (373w→462w, Δ=+0.06, KEEP — HIGH/MEDIUM/LOW criteria with data thresholds, highest delta in batch).
+- Net: 6 kept, 1 reverted. Key finding: guide/playbook MERGE reverted on both wiki-writer (Run 21) and wiki-editor (Run 23) — the DO vs FOLLOW distinction is validated as a real semantic boundary.
+- Cross-organ check: ✅ No conflicts. Changes target agent configs and steering files, not body organs. The confidence calibration table in richard-style-amazon is additive and doesn't conflict with any organ content. The guide/playbook validation is consistent with the ABPS AI design doc's Work_Product type classification (guide, reference, decision, playbook, analysis).
+- Gated file check: ✅ N/A (changelog.md edited, not heart.md or gut.md). Experiments executed by Karpathy — authorized.

@@ -16,6 +16,13 @@ Apply this on top of Richard's natural voice when writing for leadership (L7+), 
 - Tables for comparisons, narrative for interpretation. Always add the "so what" after a table.
 - State confidence levels: "HIGH confidence" / "LOW confidence (insufficient volume)"
 
+Confidence calibration:
+| Level | Criteria | Example |
+|-------|----------|---------|
+| HIGH | 4+ weeks data, 1000+ events, consistent trend | "NB CPA decline is sustained — 7 consecutive weeks, HIGH confidence" |
+| MEDIUM | 2-3 weeks data OR <500 events OR mixed signals | "Polaris impact unclear — 2 weeks, traffic down but CVR up, MEDIUM confidence" |
+| LOW | <2 weeks, <100 events, single data point, or contradictory sources | "IT ad copy lift directional only — LOW confidence (97% fewer clicks than control)" |
+
 ## What NOT to Do
 - Don't add corporate filler ("synergize," "leverage our learnings going forward")
 - Don't remove Richard's parenthetical style — it makes docs more readable
@@ -24,7 +31,7 @@ Apply this on top of Richard's natural voice when writing for leadership (L7+), 
 - Don't strip first-person accountability. "I could have put more attention towards..." is stronger than "there were delays in planning."
 
 ## Analytical Patterns for Leadership Context
-- Always contextualize numbers: never just "$700 CPA" — always with comparison or interpretation
+- Always contextualize numbers using this pattern: [metric] [value] ([comparison]: [vs what], [interpretation]: [so what]). Example: 'AU NB CPA $118 (+3% WoW, -29% from 6wk ago) — bid strategy working, Polaris migration may cause short-term noise.'
 - Compare across dimensions: test vs control, PoP, market vs market, channel vs channel
 - Separate platform data from business data (Google Ads vs Hubble/internal)
 - Attribute causation carefully: "seems to have allowed" not "caused"

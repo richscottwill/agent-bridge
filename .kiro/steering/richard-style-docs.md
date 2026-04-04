@@ -5,8 +5,13 @@ inclusion: manual
 
 Covers: experiment docs, testing plans, investigation docs, instructional docs, post-mortems, OP1/strategic narratives.
 
+## Universal Rules
+- Max 3 bullet points per list before a paragraph break or new header. Lists longer than 3 items lose scannability.
+- Every list item must start with a verb or a number. Noun-only items are padding.
+- Headers must be questions or imperatives, never bare nouns. 'How to optimize AU NB CPA' not 'AU NB CPA Optimization'. 'When to escalate to Brandon' not 'Escalation Framework'. The header tells the reader what they'll get from the section.
+
 ## Experiment Documents
-- Structure: Question → Setup (account, timeline, targeting, creative) → Results (tables + interpretation) → Recommendation
+- Structure: Question → Setup → Results → Recommendation. Example: 'Does NB bid strategy reduce CPA?' → 6-week test, AU NB campaigns → CPA $168→$117 (-29%) → Adopt as baseline.
 - Tables always include: Impressions, Clicks, Cost, Registrations, CTR, CPC, CVR, CPA
 - Comparisons include absolute numbers AND percentages
 - Interpretation: States finding, then explains why it matters: "CPA from platform was $700, which is still high, but half of what the overall test did."

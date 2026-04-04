@@ -180,6 +180,8 @@ Classify the type of document the pipeline should produce:
 
 Decision heuristic: What does the reader need to do after reading? DO → guide. KNOW → reference. DECIDE → decision. FOLLOW → playbook. UNDERSTAND → analysis.
 
+Name-pattern heuristic: If the task name contains a person's name (e.g., 'Carlos → Lorena Handoff Guide'), it's likely a reference doc about that person's role/context. If it contains a process verb ('How to...', 'Setting up...', 'Running...'), it's a guide.
+
 ### Kiro_RW entry format
 
 Follow the brevity rule from `asana-command-center.md § Guardrail Protocol § 5`. Format: `M/D: <10 words max>`.

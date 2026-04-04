@@ -4,7 +4,7 @@
 >
 > Published articles live in `~/shared/artifacts/`. This index is the discovery layer over that folder.
 
-Last updated: 2026-03-25
+Last updated: 2026-04-04
 
 ---
 
@@ -51,7 +51,10 @@ Last updated: 2026-03-25
 - [AU NB Testing — MRO/Trades](~/shared/artifacts/testing/2026-03-25-au-nb-mro-trades-proposal.md): AU non-brand testing proposal for MRO/Trades vertical
   - slug: au-nb-mro-trades-proposal | status: DRAFT | audience: amazon-internal | level: 2
 
-### Strategy & Frameworks (7)
+- [Project Baloo — Shopping Ads for AB](~/shared/artifacts/testing/2026-04-04-project-baloo-overview.md): Overview of Shopping Ads for AB, early access status, cost framework, and test design
+  - slug: project-baloo-overview | status: DRAFT | audience: amazon-internal | level: 2
+
+### Strategy & Frameworks (9)
 
 - [Agentic Paid Search — Vision & Roadmap](~/shared/artifacts/strategy/2026-03-25-agentic-ps-vision.md): Vision and roadmap for agentic PS
   - slug: agentic-ps-vision | status: DRAFT | audience: amazon-internal | level: 5
@@ -74,7 +77,13 @@ Last updated: 2026-03-25
 - [ie%CCP Planning & Optimization Framework](~/shared/artifacts/strategy/2026-03-30-ieccp-planning-framework.md): How to understand, plan around, and optimize ie%CCP for budget decisions and performance analysis
   - slug: ieccp-planning-framework | status: DRAFT | audience: amazon-internal | level: 2
 
-### Paid Search Operations / Program Details (6)
+- [Q2 2026 Initiative Status & Priorities](~/shared/artifacts/strategy/2026-04-04-q2-initiative-status.md): Single-page scorecard of every active initiative entering Q2 — status, blockers, priorities
+  - slug: q2-initiative-status | status: DRAFT | audience: amazon-internal | level: 2
+
+- [OCI Impact Summary — The Business Case](~/shared/artifacts/strategy/2026-04-04-oci-business-case.md): Leadership-ready summary of OCI's total business impact for Kate/Todd conversations
+  - slug: oci-business-case | status: DRAFT | audience: amazon-internal | level: 2
+
+### Paid Search Operations / Program Details (8)
 
 - [AB Paid Search Program Wiki](~/shared/artifacts/program-details/2026-03-25-ab-paid-search-wiki.md): Master program wiki for AB Paid Search
   - slug: ab-paid-search-wiki | status: DRAFT | audience: amazon-internal | level: N/A
@@ -99,6 +108,12 @@ Last updated: 2026-03-25
 
 - [AU Paid Search — Market Overview](~/shared/artifacts/program-details/2026-04-03-au-market-overview.md): Strategic market overview — current state, performance, initiatives, stakeholders, open questions
   - slug: au-market-overview | status: DRAFT | audience: amazon-internal | level: N/A | tags: market-wiki, au
+
+- [Team Capacity & Workload Distribution](~/shared/artifacts/program-details/2026-04-04-team-workload-distribution.md): Who is doing what across 10 markets — coverage gaps, overload risks, delegation opportunities
+  - slug: team-workload-distribution | status: DRAFT | audience: amazon-internal | level: N/A | tags: team, capacity, brandon
+
+- [Polaris WW Rollout — Status & Decision Log](~/shared/artifacts/program-details/2026-04-04-polaris-rollout-status.md): Single source of truth for Polaris Brand LP rollout across all markets
+  - slug: polaris-rollout-status | status: DRAFT | audience: amazon-internal | level: 2 | tags: polaris, rollout, ww
 
 ### Reporting (3)
 
@@ -151,18 +166,18 @@ _No system documentation articles published yet. System docs currently live in b
 
 | Category | Count | Artifact Folder |
 |----------|-------|-----------------|
-| Testing & Experimentation | 11 | `testing/` |
-| Strategy & Frameworks | 7 | `strategy/` |
-| Program Details / PS Ops | 7 | `program-details/` |
+| Testing & Experimentation | 12 | `testing/` |
+| Strategy & Frameworks | 9 | `strategy/` |
+| Program Details / PS Ops | 10 | `program-details/` |
 | Reporting | 3 | `reporting/` |
 | Tools & Automation | 2 | `tools/` |
 | Communication | 3 | `communication/` |
 | Best Practices | 3 | `best-practices/` |
 | System Documentation | 0 | _(none yet)_ |
-| **Total** | **36** | |
+| **Total** | **42** | |
 
-Status: 36 DRAFT | 0 REVIEW | 0 FINAL
-Audience: 31 amazon-internal | 2 personal | 0 agent-only
+Status: 42 DRAFT | 0 REVIEW | 0 FINAL
+Audience: 36 amazon-internal | 2 personal | 0 agent-only
 
 ---
 
@@ -227,5 +242,16 @@ Until the target site is configured, all articles remain local. No auto-publish,
 
 | Date | Article | Change |
 |------|---------|--------|
+| 2026-04-04 | q2-initiative-status | New article — Q2 initiative scorecard for Brandon's team management |
+| 2026-04-04 | oci-business-case | New article — Leadership-ready OCI impact summary for Kate/Todd |
+| 2026-04-04 | team-workload-distribution | New article — Team capacity analysis, coverage gaps, delegation opportunities |
+| 2026-04-04 | polaris-rollout-status | New article — Polaris WW rollout single source of truth |
+| 2026-04-04 | project-baloo-overview | New article — Shopping Ads for AB overview, early access, test design |
+| 2026-04-04 | f90-lifecycle-strategy | Expanded from ~500 to ~1500 words — added full program mechanics, dependencies, launch plan, risks |
+| 2026-04-04 | ad-copy-testing-framework | Expanded from ~600 to ~1500 words — added SP study detail, methodology, localization, cross-initiative connections |
+| 2026-04-04 | email-overlay-ww-rollout | Expanded from ~600 to ~1500 words — added technical architecture, measurement framework, dependencies |
+| 2026-04-04 | ai-max-test-design | Expanded from ~600 to ~1500 words — added Google automation context, guardrails detail, risk assessment |
+| 2026-04-04 | campaign-link-generator-spec | Expanded from ~500 to ~1200 words — added reftag convention detail, validation scenarios, impact estimate |
+| 2026-04-04 | budget-forecast-helper-spec | Expanded from ~400 to ~1200 words — added technical design, projection logic, validation plan |
 | 2026-04-03 | au-paid-search-market-overview | New article — AU current-state reference doc synthesized from operational data |
 | 2026-03-25 | (all 34 artifacts) | Initial catalog — existing artifacts indexed into wiki system |
