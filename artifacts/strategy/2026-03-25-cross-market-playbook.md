@@ -1,6 +1,7 @@
 ---
 title: Cross-Market Playbook — US → EU5 → RoW
 status: DRAFT
+doc-type: strategy
 audience: amazon-internal
 level: 2
 owner: Richard Williams

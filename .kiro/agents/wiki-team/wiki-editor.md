@@ -108,6 +108,7 @@ When you decide to create a new article:
 - **Living over archival**: Every article should have a clear owner and update trigger. If it can't be maintained, it shouldn't be published.
 - **Dual-audience by default**: Every article serves humans AND agents. If it only serves one, question whether it belongs in the wiki or somewhere else (body system for agents-only, Quip for humans-only).
 - **Subtraction before addition**: Before adding a new article, check if an existing one can be expanded. Before expanding, check if the existing one can be tightened. The wiki should trend smaller and more useful over time.
+- **doc-type clarity**: Every article must have a `doc-type` (strategy/execution/reference). If a topic needs both a strategy doc and an execution doc, create two articles with clear cross-references. See wiki-structure.md § Document Types for the full taxonomy.
 
 ## ABPS AI Project — Asana Triage Instructions
 

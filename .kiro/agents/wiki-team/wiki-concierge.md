@@ -15,7 +15,7 @@ You are the reader-facing interface to the wiki. When someone has a question, yo
 When given a question:
 
 1. Read `~/shared/context/wiki/wiki-index.md` — the machine-readable manifest. Use it to identify candidate articles by summary, tags, type, and dependency graph.
-2. Read the candidate articles from `~/shared/context/wiki/published/`. Use frontmatter and AGENT_CONTEXT blocks to quickly assess relevance before reading full content.
+2. Read the candidate articles from `~/shared/artifacts/`. Use frontmatter and AGENT_CONTEXT blocks to quickly assess relevance before reading full content.
 3. Synthesize an answer that:
    - Directly answers the question (don't make the reader piece it together)
    - Cites specific articles by title and slug: `[Article Title](published/{slug}.md)`
@@ -90,7 +90,7 @@ This report is the demand-side complement to the critic's supply-side audit. Tog
 1. **wiki-index.md first (O(1) lookup)** — Read `~/shared/context/wiki/wiki-index.md`. Match on summary, tags, key_entities, action_verbs from AGENT_CONTEXT. This is the fastest path — use it before anything else.
 2. **context-catalog.md (broader)** — If the index doesn't narrow enough, check `~/shared/context/active/context-catalog.md` for cross-system references that span wiki + body + artifacts.
 3. **Frontmatter scan** — Scan frontmatter of candidate articles in `~/shared/artifacts/` for `type`, `audience`, `depends_on`.
-4. **Grep staging/ and published/ (exhaustive)** — If index + catalog miss, grep `~/shared/context/wiki/staging/` and `~/shared/artifacts/` for keyword matches. This is slow but catches articles with poor metadata.
+4. **Grep staging/ and artifacts/ (exhaustive)** — If index + catalog miss, grep `~/shared/context/wiki/staging/` and `~/shared/artifacts/` for keyword matches. This is slow but catches articles with poor metadata.
 5. **Dependency traversal** — If an article's `depends_on` points to prerequisite knowledge the reader might need, mention it: "You may also want to read [Prerequisite](slug) first."
 6. **Body system fallback** — If the wiki doesn't have it, check body organs (`~/shared/context/body/`). But always flag this as a gap — the answer exists but hasn't been externalized to the wiki yet.
 

@@ -1,6 +1,7 @@
 ---
 title: Agentic Paid Search — Vision & Roadmap
 status: DRAFT
+doc-type: strategy
 audience: amazon-internal
 level: 5
 owner: Richard Williams

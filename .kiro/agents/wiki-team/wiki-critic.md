@@ -87,7 +87,7 @@ The bar is 8/10. A 7 is a decent doc that answers the questions. An 8 is a doc t
 
 ## Mode 2: Audit (periodic)
 
-Run weekly or on-demand against the published wiki at `~/shared/context/wiki/published/`.
+Run weekly or on-demand against the published wiki at `~/shared/artifacts/`.
 
 For each published article, assess:
 

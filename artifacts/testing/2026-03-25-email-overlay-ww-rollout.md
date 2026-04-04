@@ -1,6 +1,7 @@
 ---
 title: Email Overlay WW Rollout Plan
 status: DRAFT
+doc-type: strategy
 audience: amazon-internal
 level: 2
 owner: Richard Williams

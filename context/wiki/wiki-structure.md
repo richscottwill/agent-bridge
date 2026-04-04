@@ -10,15 +10,14 @@ Categories align 1:1 with the `~/shared/artifacts/` folder structure.
 
 | Category | Slug | Artifact Folder | Description | Article count |
 |----------|------|-----------------|-------------|---------------|
-| Paid Search Operations | ps-ops | `program-details/` | Day-to-day PS workflows, account details, campaign structures | 6 |
-| Testing & Experimentation | testing | `testing/` | Test designs, methodologies, experiment frameworks | 11 |
-| Market Playbooks | markets | `program-details/` | Per-market wikis (AU, MX, etc.) — subset of program-details | (counted in ps-ops) |
+| Testing & Experimentation | testing | `testing/` | Test designs, methodologies, experiment frameworks | 13 |
+| Strategy & Frameworks | strategy | `strategy/` | POVs, playbooks, strategic narratives, OP1 docs | 11 |
+| Paid Search Operations | ps-ops | `program-details/` | Day-to-day PS workflows, account details, market wikis | 8 |
+| Reporting | reporting | `reporting/` | Dashboards, analysis docs, performance summaries | 2 |
 | Tools & Automation | tools | `tools/` | Tool specs, automation docs, process docs | 2 |
-| Strategy & Frameworks | strategy | `strategy/` | POVs, playbooks, strategic narratives, OP1 docs | 6 |
-| Reporting | reporting | `reporting/` | Dashboards, analysis docs, performance summaries | 3 |
-| Communication | communication | `communication/` | Stakeholder docs, handoff guides, knowledge-sharing artifacts | 3 |
+| Communication | communication | `communication/` | Stakeholder docs, handoff guides | 1 |
 | Best Practices | best-practices | `best-practices/` | Operational standards, how-tos, reusable frameworks | 3 |
-| System Documentation | system | _(wiki-only or future artifacts/system/)_ | Body system, agent architecture, hooks | 0 |
+| System Documentation | system | _(future)_ | Body system, agent architecture, hooks | 0 |
 
 ### Category → Folder Mapping Notes
 
@@ -30,49 +29,56 @@ Categories align 1:1 with the `~/shared/artifacts/` folder structure.
 
 ```
 Wiki (wiki-index.md)
-├── Testing & Experimentation (testing/)
-│   ├── testing-approach-kate (parent)
+├── Testing & Experimentation (testing/) — 13 articles
+│   ├── testing-approach-kate (parent — Kate doc)
 │   │   ├── workstream-oci-bidding
 │   │   ├── workstream-modern-search
 │   │   ├── workstream-audiences-lifecycle
 │   │   ├── workstream-user-experience
 │   │   └── workstream-algorithmic-ads
+│   ├── oci-rollout-playbook (strategy — business case + methodology)
 │   ├── ai-max-test-design
-│   ├── oci-rollout-methodology
 │   ├── ad-copy-testing-framework
 │   ├── email-overlay-ww-rollout
-│   └── au-nb-mro-trades-proposal
-├── Strategy & Frameworks (strategy/)
+│   ├── au-nb-mro-trades-proposal
+│   ├── project-baloo-overview
+│   └── enhanced-match-liveramp
+├── Strategy & Frameworks (strategy/) — 11 articles
+│   ├── ieccp-planning-framework
+│   ├── q2-initiative-status
+│   ├── oci-business-case
+│   ├── genai-search-traffic
+│   ├── f90-lifecycle-strategy
+│   ├── cross-market-playbook
+│   ├── aeo-ai-overviews-pov
 │   ├── agentic-ps-vision
 │   ├── body-system-architecture
-│   ├── agentic-marketing-landscape
-│   ├── aeo-ai-overviews-pov
-│   ├── cross-market-playbook
-│   └── f90-lifecycle-strategy
-├── Paid Search Operations / Market Playbooks (program-details/)
+│   └── agentic-marketing-landscape
+├── Program Details (program-details/) — 8 articles
 │   ├── ab-paid-search-wiki
 │   ├── au-market-wiki
 │   ├── mx-market-wiki
-│   ├── oci-implementation-guide
+│   ├── oci-execution-guide (execution — how-to)
 │   ├── ww-testing-tracker
-│   └── promo-events-calendar
-├── Reporting (reporting/)
+│   ├── market-reference
+│   ├── team-workload-distribution
+│   └── polaris-rollout-status
+├── Reporting (reporting/) — 2 articles
 │   ├── au-keyword-cpa-dashboard
+│   └── wbr-callout-guide
 │   ├── wbr-callout-guide
 │   └── competitive-intel-tracker
-├── Tools & Automation (tools/)
+├── Tools & Automation (tools/) — 2 articles
 │   ├── campaign-link-generator-spec
 │   └── budget-forecast-helper-spec
-├── Communication (communication/)
-│   ├── polaris-rollout-timeline
-│   ├── mx-ps-handoff-guide
-│   └── oci-methodology-knowledge-share
-├── Best Practices (best-practices/)
+├── Communication (communication/) — 1 article
+│   └── stakeholder-comms-guide
+├── Best Practices (best-practices/) — 3 articles
 │   ├── google-ads-campaign-structure
 │   ├── landing-page-testing-playbook
 │   └── invoice-po-process-guide
-└── System Documentation
-    └── (no published articles yet)
+└── System Documentation — 0 articles
+    └── (body system docs live in organs and steering files)
 ```
 
 ## Publishing Workflow

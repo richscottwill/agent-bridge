@@ -1,6 +1,7 @@
 ---
 title: AU Keyword CPA Dashboard — Design
 status: DRAFT
+doc-type: execution
 audience: amazon-internal
 level: 1
 owner: Richard Williams

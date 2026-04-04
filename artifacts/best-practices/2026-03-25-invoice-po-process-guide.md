@@ -1,6 +1,7 @@
 ---
 title: Invoice & PO Process Guide
 status: DRAFT
+doc-type: execution
 audience: amazon-internal
 level: N/A
 owner: Richard Williams

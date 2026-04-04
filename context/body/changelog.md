@@ -1,5 +1,32 @@
 # Changelog — Body System
 
+## Run 26 (2026-04-04, Randomized Batch 1 — Karpathy, 10 experiments, underexplored techniques: REMOVE/SPLIT/MERGE/RESTRUCTURE)
+
+[gut:Excretion Protocol] REMOVE (info_retrieval) → 2113w→1920w. A=0.125 B=1.0 Δ=-0.875. 40s. REVERT. Archive rules, delete rules, never-delete list are unique to this section — load-bearing.
+[amcc:Avoidance Ratio] REMOVE (info_retrieval) → 2090w→1960w. A=0.5 B=1.0 Δ=-0.5. 35s. REVERT. Empty table still defines measurement framework and formula — structural, not dead weight.
+[amcc:Growth Model] SPLIT (info_retrieval) → 2090w→2090w. A=1.0 B=1.0 Δ=0.0. 30s. KEEP. Split into Growth Signals (prose) + Growth Metrics (table) subsections.
+[memory:Reference Index] REMOVE (info_retrieval) → 1738w→1580w. A=0.5 B=1.0 C=0.3 Δ=-0.5. 45s. REVERT. Unique folder URLs and item counts not duplicated in Key Quip Docs. Brandon she/her ✅.
+[heart:Design Choices] COMPRESS (info_retrieval) → 3461w→3197w. A=1.0 B=1.0 Δ=0.0. 35s. KEEP. 15 bullets→7 by merging related points. 264w saved, zero accuracy loss.
+[heart:DuckDB Integration] RESTRUCTURE (info_retrieval) → 3197w→3198w. A=1.0 B=1.0 Δ=0.0. 30s. KEEP. Update Protocol moved first (actionable), Key Queries moved to end (reference).
+[nervous-system:Loop 3 Pattern table] MERGE (info_retrieval) → 928w→859w. A=1.0 B=1.0 Δ=0.0. 30s. KEEP. 6-row table→2 summary lines with explicit root cause. 69w saved.
+[device:Agent Bridge] REMOVE (info_retrieval) → 1242w→1150w. A=0.0 B=1.0 Δ=-1.0. 35s. REVERT. Unique operational IDs (spreadsheet, service account, creds path) only source of truth.
+[device:Tool Factory] RESTRUCTURE (info_retrieval) → 1242w→1242w. A=1.0 B=1.0 Δ=0.0. 30s. KEEP. Status-first ordering: ✅ BUILT → Ready to build → Backlog.
+[brain:OP1 Strategic Narrative] REMOVE (info_retrieval) → 1257w→1210w. A=0.375 B=1.0 C=0.2 Δ=-0.625. 40s. REVERT. 5 workstream names, core argument, file path not in D8. Brain safety: INCORRECT triggered.
+
+Running tallies:
+[gut×REMOVE: 1 kept / 2 total]
+[amcc×REMOVE: 0 kept / 2 total]
+[amcc×SPLIT: 1 kept / 1 total]
+[memory×REMOVE: 0 kept / 2 total]
+[heart×COMPRESS: 2 kept / 2 total]
+[heart×RESTRUCTURE: 1 kept / 1 total]
+[nervous-system×MERGE: 2 kept / 2 total]
+[device×REMOVE: 0 kept / 2 total]
+[device×RESTRUCTURE: 1 kept / 1 total]
+[brain×REMOVE: 0 kept / 2 total]
+
+Key findings: 5/10 KEEP, 5/10 REVERT — exactly the 50% revert rate predicted for underexplored techniques. ALL 5 REMOVE experiments REVERTED. Pattern: REMOVE fails when the section contains unique content (IDs, URLs, rules, formulas) not duplicated elsewhere. REMOVE succeeds only when content is truly redundant across organs. SPLIT, MERGE, RESTRUCTURE, and COMPRESS all KEPT — structural changes preserve information while improving organization. Heart Design Choices COMPRESS saved 264w (15→7 bullets) — largest single-experiment word savings this run. The "empty table" hypothesis (amcc Avoidance Ratio) disproven: empty structural tables define measurement frameworks even without data. Brain OP1 REMOVE confirmed: even 3-line sections can be load-bearing if they contain unique facts (workstream names).
+
 ## Run 25 (2026-04-04, Mega Batch 2 — Karpathy, 4 output-quality wiki agents + 4 info-retrieval organs + 2 output-quality wiki pipeline depth)
 
 [wiki-librarian:Publishing workflow] REWORD (output_quality) → 1296w→1478w. A=0.86 B=0.78 Δ=+0.08. 50s. KEEP. Imperative verbs, explicit file paths, STOP conditions for validation failures.

@@ -1,6 +1,7 @@
 ---
 title: Landing Page Testing Playbook
 status: DRAFT
+doc-type: execution
 audience: amazon-internal
 level: N/A
 owner: Richard Williams

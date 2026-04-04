@@ -1,6 +1,7 @@
 ---
 title: WBR Callout Template & Guide
 status: DRAFT
+doc-type: execution
 audience: amazon-internal
 level: 1
 owner: Richard Williams

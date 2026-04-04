@@ -49,13 +49,18 @@ Shopping Ads show product-level information (image, price, availability) before 
 
 | Milestone | Status | Date | Notes |
 |-----------|--------|------|-------|
-| Early access program | LAUNCHED | 3/30/2026 | 50 stakeholders, Tampermonkey extension |
-| Keywords delivered | COMPLETE | 3/30/2026 | Initial keyword set for US |
+| Early access program | LAUNCHED | 3/30/2026 | 60+ users onboarding through PS flow (Aayushi, Baloo PM) |
+| Keywords delivered | COMPLETE | 3/30/2026 | Richard filtered for high-intent product terms, shared via Quip |
+| PS flow validation | COMPLETE | 3/18/2026 | ps_kw parameter passthrough confirmed working |
 | Cost guardrails | IN PROGRESS | TBD | Vijay 1:1 (3/26) discussed cost planning |
 | Product feed setup | PENDING | TBD | Google Merchant Center configuration |
-| Full test launch | NOT STARTED | Q2 2026 target | Depends on cost guardrails and feed setup |
+| Full test launch | NOT STARTED | EO Aug 2026 target | Brandon confirmed: "tested against PS US traffic by EO Aug" |
 
-Early access launched on 3/30 with a Tampermonkey browser extension that allows 50 stakeholders to preview Shopping Ad placements for AB products. This is a preview/evaluation phase, not a live campaign. No spend is occurring yet.
+Brandon's message to the team (4/3): "PS team [Stacey, Richard, Adi especially], please look at the experience since this will be tested against PS US traffic by EO Aug." This gives a hard deadline and confirms the test scope is US PS traffic specifically.
+
+Early access launched on 3/30 with a Tampermonkey browser extension. Aayushi (Baloo PM) confirmed 60+ users will onboard through the PS flow. Richard created a separate Quip sheet with filtered keywords (high impressions/clicks/conversions, low CPC, product terms only — removed dropship, business cards, and B2B-adjacent terms like "cheap t shirts bulk").
+
+Key technical detail: the `ps_kw` (paid search keyword) parameter passthrough was initially broken when redirecting to the Baloo subdomain (shop.business.amazon.com). This was identified on 3/17 and resolved by 3/18 — Aayushi confirmed end-to-end flow validation works.
 
 ---
 

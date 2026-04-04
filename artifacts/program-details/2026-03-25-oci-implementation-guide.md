@@ -1,6 +1,8 @@
+> **⚠️ ARCHIVED — 2026-04-04. Replaced by oci-execution-guide. Do not update this file.**
+
 ---
 title: OCI Implementation Guide — Per-Market
-status: DRAFT
+status: archived
 audience: amazon-internal
 level: N/A
 owner: Richard Williams

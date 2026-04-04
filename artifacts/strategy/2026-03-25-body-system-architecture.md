@@ -1,6 +1,7 @@
 ---
 title: The Body System — Architecture for Personal AI Operating Systems
 status: DRAFT
+doc-type: strategy
 audience: personal
 level: 5
 owner: Richard Williams

@@ -10,7 +10,7 @@ Last updated: 2026-04-04
 
 ## Articles
 
-### Testing & Experimentation (11)
+### Testing & Experimentation (13)
 
 - [Testing Approach & Year Ahead](~/shared/artifacts/testing/2026-03-25-testing-approach-kate.md): Kate Rundell meeting doc — 5 workstreams, testing methodology, year-ahead plan
   - slug: testing-approach-kate | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
@@ -54,7 +54,10 @@ Last updated: 2026-04-04
 - [Project Baloo — Shopping Ads for AB](~/shared/artifacts/testing/2026-04-04-project-baloo-overview.md): Overview of Shopping Ads for AB, early access status, cost framework, and test design
   - slug: project-baloo-overview | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
 
-### Strategy & Frameworks (9)
+- [Enhanced Match / LiveRamp — Audience Expansion](~/shared/artifacts/testing/2026-04-04-enhanced-match-liveramp.md): LiveRamp Enhanced Match investigation, Brandon's 4 questions, EU DMA blocker, audience size drop
+  - slug: enhanced-match-liveramp | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
+
+### Strategy & Frameworks (12)
 
 - [Agentic Paid Search — Vision & Roadmap](~/shared/artifacts/strategy/2026-03-25-agentic-ps-vision.md): Vision and roadmap for agentic PS
   - slug: agentic-ps-vision | status: DRAFT | audience: amazon-internal | level: 5
@@ -67,6 +70,9 @@ Last updated: 2026-04-04
 
 - [AEO / AI Overviews POV](~/shared/artifacts/strategy/2026-03-25-aeo-ai-overviews-pov.md): AB Paid Search POV on AI Overviews and AEO
   - slug: aeo-ai-overviews-pov | status: DRAFT | audience: amazon-internal | level: 4
+
+- [Competitive Landscape](~/shared/artifacts/strategy/2026-03-25-competitive-landscape.md): Full competitive picture across 10 markets — who competes, trajectory, CPC impact, response strategy
+  - slug: competitive-landscape | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
 
 - [Cross-Market Playbook](~/shared/artifacts/strategy/2026-03-25-cross-market-playbook.md): US → EU5 → RoW scaling playbook
   - slug: cross-market-playbook | status: DRAFT | audience: amazon-internal | level: 2
@@ -81,7 +87,10 @@ Last updated: 2026-04-04
   - slug: q2-initiative-status | status: DRAFT | audience: amazon-internal | level: 2
 
 - [OCI Impact Summary — The Business Case](~/shared/artifacts/strategy/2026-04-04-oci-business-case.md): Leadership-ready summary of OCI's total business impact for Kate/Todd conversations
-  - slug: oci-business-case | status: DRAFT | audience: amazon-internal | level: 2
+  - slug: oci-business-case | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
+
+- [GenAI Search Traffic — What We Know](~/shared/artifacts/strategy/2026-04-04-genai-search-traffic.md): GenAI engines driving ~1% of WW traffic, ACE team building Amazon MCP shopping widget, implications for PS
+  - slug: genai-search-traffic | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 4
 
 ### Paid Search Operations / Program Details (8)
 
@@ -113,16 +122,13 @@ Last updated: 2026-04-04
 - [Market Reference](~/shared/artifacts/program-details/2026-03-25-market-reference.md): All 10 markets in one read — performance, OCI status, contacts, competitors
   - slug: market-reference | status: DRAFT | doc-type: reference | audience: amazon-internal | level: 2
 
-### Reporting (3)
+### Reporting (2)
 
 - [AU Keyword CPA Dashboard](~/shared/artifacts/reporting/2026-03-25-au-keyword-cpa-dashboard.md): AU keyword CPA dashboard design
   - slug: au-keyword-cpa-dashboard | status: DRAFT | audience: amazon-internal | level: 1
 
 - [WBR Callout Template & Guide](~/shared/artifacts/reporting/2026-03-25-wbr-callout-guide.md): WBR callout template and guide
   - slug: wbr-callout-guide | status: DRAFT | audience: amazon-internal | level: 1
-
-- [Competitive Intelligence Tracker](~/shared/artifacts/reporting/2026-03-25-competitive-intel-tracker.md): Competitive intelligence tracker across markets
-  - slug: competitive-intel-tracker | status: DRAFT | audience: amazon-internal | level: 2
 
 ### Tools & Automation (2)
 
@@ -160,17 +166,17 @@ _No system documentation articles published yet. System docs currently live in b
 
 | Category | Count | Artifact Folder |
 |----------|-------|-----------------|
-| Testing & Experimentation | 12 | `testing/` |
-| Strategy & Frameworks | 9 | `strategy/` |
+| Testing & Experimentation | 13 | `testing/` |
+| Strategy & Frameworks | 12 | `strategy/` |
 | Program Details / PS Ops | 8 | `program-details/` |
-| Reporting | 3 | `reporting/` |
+| Reporting | 2 | `reporting/` |
 | Tools & Automation | 2 | `tools/` |
 | Communication | 1 | `communication/` |
 | Best Practices | 3 | `best-practices/` |
 | System Documentation | 0 | _(none yet)_ |
-| **Total** | **38** | |
+| **Total** | **41** | |
 
-Status: 38 DRAFT | 0 REVIEW | 0 FINAL
+Status: 41 DRAFT | 0 REVIEW | 0 FINAL
 Audience: 33 amazon-internal | 2 personal | 0 agent-only
 
 Doc-type breakdown: ~18 strategy | ~10 execution | ~10 reference

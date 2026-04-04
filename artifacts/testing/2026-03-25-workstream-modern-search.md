@@ -4,6 +4,7 @@ slug: "kate-doc-modern-search"
 type: "playbook"
 audience: "org"
 status: "draft"
+doc-type: strategy
 created: "2026-03-25"
 updated: "2026-03-25"
 owner: "Richard Williams"

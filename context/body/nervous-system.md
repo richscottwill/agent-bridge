@@ -2,7 +2,7 @@
 
 *Operating principle: Invisible over visible. Surface insights that lead to structural changes — not reports that require Richard to act on them. When a pattern is STUCK for 3 weeks, propose a structural fix.*
 
-Last updated: 2026-04-03 (EOD-1: Kate meeting officially canceled via email thread. No new sessions today — Friday work blocks only.)
+Last updated: 2026-04-04 (Karpathy Run 26 — Loop 3 Pattern table merged: 6-row table→2 summary lines with root cause)
 Created: 2026-03-20
 
 ---
@@ -26,14 +26,9 @@ Eyes | Daily + weekly | Score predicted QA: HIT/MISS/SURPRISE. Target ≥60%. Cu
 ### Loop 3: Pattern Trajectory
 rw-tracker.md | Weekly (Friday) | IMPROVING/STUCK/WORSENING/RESOLVED. STUCK 3+ wk → structural fix. Willpower → trainer. Systems → device.
 
-| Pattern | Status | Weeks | Trajectory | Last Assessment | Intervention |
-|---------|--------|-------|------------|-----------------|-------------|
-| Visibility avoidance | VALIDATED | 11 | WORSENING | 4/1 — 12 workdays at zero. AU weekly = L2, not L1. | Root cause of L1 stall. Gate: Testing Approach doc. |
-| Zero strategic artifacts | ACTIVE | 7+ | WORSENING | 4/1 — Still 0. Blocked by visibility avoidance. | Same root cause. |
-| Have Backbone avoidance | NEW | 1 | — | 3/25 — Annual Review peer feedback | Monitor. |
-| Project management gaps | NEW | 1 | — | 3/25 — Persisting from Forte 2025 | Need lightweight tracking artifacts. |
-| Admin backlog displacement | ACTIVE | 3 | STUCK | 3/18 — Admin over cap, displacing strategic | Trainer escalation triggered. |
-| Reactive fire drills | ACTIVE | 3 | STUCK | 3/19 — AU CPC displaced AEO POV (3rd wk) | Need pre-written response templates. |
+Active patterns (3): visibility avoidance (11wk WORSENING — 12 workdays at zero, AU weekly = L2 not L1, root cause of L1 stall, gate: Testing Approach doc), admin displacement (3wk STUCK — admin over cap displacing strategic, trainer escalation triggered), reactive fire drills (3wk STUCK — AU CPC displaced AEO POV 3rd wk, need pre-written response templates).
+New patterns (2): Have Backbone avoidance (1wk, from annual review peer feedback — monitor), project management gaps (1wk, persisting from Forte 2025 — need lightweight tracking artifacts).
+Root cause: visibility avoidance gates L1 → blocks all downstream levels.
 
 ### Loop 4: Delegation Verification
 Device | Weekly | Score delegations ON_TRACK/SLIPPING/FAILED.
@@ -51,7 +46,7 @@ All organs | Every run | Word counts, staleness, reliability.
 | Total body words | ~19,200w | Adaptive (learned) | ✅ Tracking |
 | Budgets | Adaptive (Bayesian) | — | 15 experiments, priors updating |
 | Loop runs | 18 | — | — |
-| Experiments | 36 (22 keep, 14 revert) | — | 61% keep rate. Run 18: 43 experiments, diverse techniques. Output-quality evals added. |
+| Experiments | 46 (27 keep, 19 revert) | — | 59% keep rate. Run 26: 10 experiments (5 keep, 5 revert), randomized underexplored techniques. |
 | Experiment targets | 112 (63 organ + 49 style/context) | — | 45 organ combos tested (71%). Style guide combos seeded, untested. |
 | Staleness risk | Eyes (Feb data, 30+ days) | <20% stale | ⚠️ Needs Mar WBR |
 

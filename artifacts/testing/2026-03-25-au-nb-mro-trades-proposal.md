@@ -1,6 +1,7 @@
 ---
 title: AU NB Testing Proposal — MRO/Trades Vertical
 status: DRAFT
+doc-type: strategy
 audience: amazon-internal
 level: 2
 owner: Richard Williams

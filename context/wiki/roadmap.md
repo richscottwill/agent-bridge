@@ -1,108 +1,67 @@
-# Wiki Roadmap — Kate Doc: Paid Search Testing Approach & Year Ahead
+# Wiki Roadmap — AB Paid Search Knowledge Base
 
-Last updated: 2026-03-25
-Target: Kate Rundell (L8 Director) review meeting, April 16, 2026
-
-## Document Architecture
-
-This is a multi-section executive document. Each section was drafted independently, then synthesized into a final narrative. The document follows Amazon writing norms: narrative-driven, data-embedded, no filler.
-
-## Active (in pipeline)
-
-| # | Section | Slug | Stage | File |
-|---|---------|------|-------|------|
-| 1 | Methodology | kate-doc-methodology | writing complete | staging/kate-doc-methodology.md |
-| 2 | OCI Bidding | kate-doc-oci | writing complete | staging/kate-doc-oci.md |
-| 3 | Modern Search | kate-doc-modern-search | writing complete | staging/kate-doc-modern-search.md |
-| 4 | Audiences | kate-doc-audiences | writing complete | staging/kate-doc-audiences.md |
-| 5 | User Experience | kate-doc-ux | writing complete | staging/kate-doc-ux.md |
-| 6 | Algorithmic Ads | kate-doc-algo-ads | writing complete | staging/kate-doc-algo-ads.md |
-| 7 | Team Map & Cross-Functional Scope | kate-doc-team-map | writing complete | staging/kate-doc-team-map.md |
-| 8 | PS Operations | kate-doc-operations | writing complete | staging/kate-doc-operations.md |
-| 9 | Appendix | kate-doc-appendix | writing complete | staging/kate-doc-appendix.md |
-| 10 | Synthesis | kate-doc-synthesis | writing complete | staging/kate-doc-synthesis.md |
-
-## Research Brief Status
-
-| # | Section | Brief Path | Status |
-|---|---------|-----------|--------|
-| 1 | Methodology | research/kate-doc-methodology-research.md | complete |
-| 2 | OCI Bidding | (inline — data from eyes.md, oci-performance.md) | complete |
-| 3 | Modern Search | (inline — data from ad-copy-results.md) | complete |
-| 4 | Audiences | (inline — data from op1 draft, brain.md) | complete |
-| 5 | User Experience | (inline — data from op1 draft, MCS flash) | complete |
-| 6 | Algorithmic Ads | (inline — data from op1 draft, PA flash) | complete |
-| 7 | Team Map | research/kate-doc-team-map-research.md | complete |
-| 8 | PS Operations | research/kate-doc-operations-research.md | complete |
-| 9 | Appendix | (exhaustive — all sources compiled) | complete |
-
-## Sources Used
-
-### Body System Organs
-- brain.md: Decision principles, Five Levels, OP1 narrative structure
-- eyes.md: Market performance, OCI data, competitive landscape, ad copy results
-- memory.md: Relationship graph, meeting dynamics, team context
-- hands.md: Task tracker, recurring operations, meeting cadence
-- device.md: Automation inventory, delegation protocols, operational time estimates
-- current.md: Active projects, people, pending actions
-- org-chart.md: Team structure, cross-functional contacts
-
-### Research Files
-- op1-ps-testing-framework-draft.md: Full OP1 draft (5 workstreams)
-- ad-copy-results.md: SP study data, UK/IT test results
-- oci-performance.md: OCI rollout timeline, test vs control data
-- competitor-intel.md: Competitive landscape across all markets
-- ai-automation-impact.md: Operational time estimates
-
-### Email Threads
-- Paid Acquisition Flash [1/30/26] — Andrew Wirtz
-- AB MCS Flash | Nov-Dec 2025 — Dwayne Palmer
-- AB Brand & Paid Media | February Flash — Robert Skenes
-- OCI Transition Bi-Weekly Updates — Andrew Wirtz
-
-### Hedy Meeting Transcripts
-- Weekly Team Sync (3/24) — testing updates, market performance, JP pre-post framework
-- Brandon 1:1 Annual Review (3/24) — visibility feedback, promo criteria
-- AU Paid Search Sync (3/24) — MCS migration, keyword optimization
-- MX Campaign Tracking (3/24) — Carlos handoff, keyword updates
-
-### Style Guides
-- richard-style-amazon.md: Amazon writing norms
-- richard-style-docs.md: Long-form document style
-
-## Writing Standards Applied
-
-- Amazon writing norms: narrative-driven, data-embedded, no filler
-- "So what" after every table
-- "We" for team actions, credit cross-functional partners
-- Confidence levels stated explicitly (HIGH/LOW)
-- Connect every metric to registrations, OPS, or customer experience
-- Acknowledge trade-offs and risks, then state mitigation
-
-## Next Steps
-
-1. Richard reviews all section docs and synthesis
-2. Identify gaps or corrections in data
-3. Get contributor input (Andrew, Stacey, Yun, Adi) on their workstream sections
-4. Final polish and formatting for April 16 presentation
-
+Last updated: 2026-04-04 (wiki-editor)
 
 ---
 
-## Wiki Articles (in pipeline)
+## Active (in pipeline)
 
-Added: 2026-03-25 by wiki-librarian (context catalog session)
-Updated: 2026-03-25 by wiki-editor (all 5 moved to writing stage)
+| Topic | Slug | Stage | Doc-Type | Notes |
+|-------|------|-------|----------|-------|
+| AU Market Wiki | au-market-wiki | revision | reference | Critic scored 7.6-7.8. Needs: status indicators on initiatives, fold thin sections, add depends_on. |
+| Enhanced Match / LiveRamp | enhanced-match-liveramp | revision | strategy | Critic scored 7.0. Needs: remove ABMA section, tighten structure, add summary table. Blocked on Abdul's answers. |
+| ie%CCP Framework | ieccp-planning-framework | ready (conditional) | strategy | Critic scored 8.0-8.2. Needs: add Sources section (hard blocker). |
+| OCI Rollout Playbook | oci-rollout-playbook | ready (needs refresh) | strategy | Critic scored 8.2. Needs: update OCI status table (FR/IT/ES/JP now 100%). |
 
-| # | Topic | Slug | Stage | File | Category |
-|---|-------|------|-------|------|----------|
-| Q1 | Competitive Landscape: Who's Bidding Against Amazon Business | `competitive-landscape` | writing complete | staging/competitive-landscape.md | Strategy & Frameworks |
-| Q2 | OCI Rollout Playbook: From E2E to 100% in Any Market | `oci-playbook` | writing complete | staging/oci-playbook.md | Testing & Experimentation |
-| Q3 | Stakeholder Communication Guide: How to Talk to Each Audience | `stakeholder-comms-guide` | writing complete | staging/stakeholder-comms-guide.md | Strategy & Frameworks |
-| Q4 | Market Reference: AB Paid Search Across 10 Markets | `market-reference` | writing complete | staging/market-reference.md | Market Playbooks |
-| Q5 | Agent System Architecture: How the Body, Hooks, and Agents Work Together | `agent-architecture` | writing complete | staging/agent-architecture.md | System Documentation |
+## Queued (prioritized backlog)
 
-### Next Steps
-1. Route all 5 to wiki-critic for review
-2. Address critic feedback (publish, revise, or kill)
-3. If publish → wiki-librarian structures and publishes to wiki
+| Topic | Slug | Priority | Source | Why |
+|-------|------|----------|--------|-----|
+| OCI status refresh across 5 docs | (multi-doc) | P1 | Audit 4/4 | 7 articles show FR/IT/ES/JP as E2E when they're at 100%. Systemic staleness. |
+| Testing Approach Kate refresh | testing-approach-kate | P1 | Audit 4/4 | THE Level 1 artifact. Must be accurate before Brandon reviews. |
+| Audiences workstream LiveRamp update | workstream-audiences-lifecycle | P1 | Audit 4/4 | 78% audience drop not reflected. Enhanced Match investigation not referenced. |
+| AEO POV + GenAI signals | aeo-ai-overviews-pov | P2 | Audit 4/4 | GenAI search traffic article has concrete signals that upgrade the AEO timeline. |
+| Confidence calibration across all docs | (systematic) | P2 | Blind test 4/4 | Zero articles use HIGH/MEDIUM/LOW confidence framework from style guide. |
+| depends_on/consumed_by across all docs | (systematic) | P3 | Blind test 4/4 | Only 1 of 40 articles has these fields. Limits agent graph traversal. |
+| Bare-noun headers → questions/imperatives | (systematic) | P3 | Blind test 4/4 | 3 of 5 tested articles have bare-noun headers violating style guide. |
+
+## Completed (2026-04-04)
+
+| Topic | Slug | Published | Score |
+|-------|------|-----------|-------|
+| OCI Execution Guide | oci-execution-guide | 2026-04-04 | 8.4 |
+| OCI Business Case | oci-business-case | 2026-04-04 | 8.4 (prior review) |
+| Q2 Initiative Status | q2-initiative-status | 2026-04-04 | 7.8 (prior review) |
+| Team Workload Distribution | team-workload-distribution | 2026-04-04 | 7.4 (prior review) |
+| Polaris Rollout Status | polaris-rollout-status | 2026-04-04 | 7.4 (prior review) |
+| Project Baloo Overview | project-baloo-overview | 2026-04-04 | 7.2 (prior review) |
+| GenAI Search Traffic | genai-search-traffic | 2026-04-04 | not yet reviewed |
+| MX Market Wiki (merged) | mx-market-wiki | 2026-04-04 | 7.8 (prior review) |
+| WW Testing Tracker (rewritten) | ww-testing-tracker | 2026-04-04 | 8.0 |
+
+## Archived (2026-04-04)
+
+| Topic | Why | Date |
+|-------|-----|------|
+| OCI Implementation Guide | Merged into oci-execution-guide | 2026-04-04 |
+| OCI Methodology Knowledge Share | Merged into oci-execution-guide | 2026-04-04 |
+| OCI Rollout Methodology | Absorbed into playbook + execution guide | 2026-04-04 |
+| AU Market Overview (4/3) | Merged into au-market-wiki | 2026-04-04 |
+| AU Paid Search Market Overview (4/3) | Merged into au-market-wiki | 2026-04-04 |
+| MX PS Handoff Guide | Merged into mx-market-wiki | 2026-04-04 |
+| Polaris Rollout Timeline | Superseded by polaris-rollout-status | 2026-04-04 |
+| Competitive Intel Tracker | Superseded by competitive-landscape | 2026-04-04 |
+
+## Killed
+
+_None._
+
+
+## Orphan Decisions (2026-04-04)
+
+| File | Decision | Rationale |
+|------|----------|-----------|
+| competitive-landscape | ADD TO INDEX | Substantial doc (2000+ words), has AGENT_CONTEXT, actively referenced by other articles. Should be in Strategy & Frameworks. |
+| agent-architecture | KEEP AS ORPHAN | Overlaps with body-system-architecture (already indexed). Level 5 personal doc. Not needed in the wiki index — it serves the agent system, not human readers. |
+| ai-automation-impact | KEEP AS ORPHAN | Personal productivity tracking doc. Monthly measurement cycle. Not a team-facing wiki article. Stays in reporting/ as a personal artifact. |
+| testing-appendix | KEEP AS ORPHAN | Kate doc companion file. Content is referenced by testing-approach-kate. Not independently useful — it's an evidence locker, not a standalone article. |

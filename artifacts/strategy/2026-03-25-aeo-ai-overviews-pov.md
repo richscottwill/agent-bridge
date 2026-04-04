@@ -1,6 +1,7 @@
 ---
 title: AEO / AI Overviews POV — Amazon Business Paid Search
 status: DRAFT
+doc-type: strategy
 audience: amazon-internal
 level: 4
 owner: Richard Williams

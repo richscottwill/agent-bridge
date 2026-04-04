@@ -1,6 +1,7 @@
 ---
 title: AI Max Test Design - US Market
 status: DRAFT
+doc-type: strategy
 audience: amazon-internal
 level: 2
 owner: Richard Williams
@@ -35,6 +36,20 @@ Google is systematically moving advertisers from manual keyword control toward s
 AB PS is currently at stage 2 (OCI). AI Max moves us to stage 3. The question is not whether to adopt AI Max — Google's roadmap makes it inevitable. The question is whether to adopt it now (with measurement guardrails) or later (when the team has less control over the transition).
 
 Early adoption has a strategic advantage: the team learns AI Max's behavior on its own terms, with controlled tests, rather than being forced to adopt when Google deprecates manual controls. This is the same logic that drove early OCI adoption — and OCI delivered $16.7MM OPS.
+
+---
+
+## Internal Precedent: AWS AI Max Test (Dec 2025)
+
+AWS ran a 5-week AI Max test focused on traffic generation campaigns. Key findings from Yun's Slack summary (12/16/2025):
+
+- Testing campaigns accounted for only 15% of total spend
+- Selected campaigns opted in for AI Max with traffic as the primary goal (not sign-ups)
+- **Critical challenges:** Poor traffic quality — inadequate matching directed users to irrelevant landing pages and ads. Major visibility obstacles — no features available to track performance, limited reporting capabilities.
+
+Additionally, ebergen from the paid-search-amzn channel (6/11/2025) warned: "I wouldn't necessarily recommend using AI max at this point — based on what I've reviewed of the product and especially when considering amazon search as a whole and how much control we are granting google over our search campaigns."
+
+These internal signals reinforce the need for guardrails. AB's test design addresses both concerns: (1) the CPA guardrail prevents poor traffic quality from degrading performance, and (2) the weekly search term review catches irrelevant matching early. The key difference: AB will optimize for registrations (not traffic), which gives the algorithm a clearer signal than AWS's traffic-focused test.
 
 ---
 

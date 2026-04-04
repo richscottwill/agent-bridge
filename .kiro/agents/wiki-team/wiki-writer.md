@@ -22,6 +22,7 @@ Write output to `~/shared/context/wiki/staging/{topic-slug}.md`:
 ---
 title: "{Title}"
 slug: "{topic-slug}"
+doc-type: "{strategy|execution|reference}"
 type: "{guide|reference|decision|playbook|postmortem}"
 audience: "{team|org|self}"
 status: "draft"

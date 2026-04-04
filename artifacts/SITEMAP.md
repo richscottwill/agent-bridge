@@ -1,134 +1,101 @@
-# 🗺️ Artifact Sitemap
+# Artifact Sitemap
 
-_Last generated: 2026-03-25_
+_Last generated: 2026-04-04_
 
 ```
 AB PAID SEARCH — ARTIFACT DIRECTORY
 ====================================
 
-TESTING (11 docs)
-├── testing-approach-kate ........... Testing Approach & Year Ahead (Kate Apr 16)     [amazon-internal] [L2] [DRAFT]
-│   ├── workstream-oci-bidding ...... ↳ WS1: OCI Bidding deep-dive                   [amazon-internal] [L2] [DRAFT]
-│   ├── workstream-modern-search .... ↳ WS2: Modern Search (Redirects, AEO)           [amazon-internal] [L2] [DRAFT]
-│   ├── workstream-audiences ....... ↳ WS3: Audiences & Lifecycle (F90)               [amazon-internal] [L2] [DRAFT]
-│   ├── workstream-user-experience .. ↳ WS4: User Experience (Polaris, LPs)           [amazon-internal] [L2] [DRAFT]
-│   └── workstream-algorithmic-ads .. ↳ WS5: Algorithmic Ads (AI Max, Baloo)          [amazon-internal] [L2] [DRAFT]
-├── ai-max-test-design .............. AI Max Test Design — US Market                   [amazon-internal] [L2] [DRAFT]
-├── oci-rollout-methodology ......... OCI Rollout Methodology                          [amazon-internal] [L2] [DRAFT]
-├── ad-copy-testing-framework ....... Ad Copy Testing Framework (SP Study)             [amazon-internal] [L2] [DRAFT]
-├── email-overlay-ww-rollout ........ Email Overlay WW Rollout Plan                    [amazon-internal] [L2] [DRAFT]
-└── au-nb-mro-trades-proposal ....... AU NB Testing — MRO/Trades Vertical              [amazon-internal] [L2] [DRAFT]
+TESTING (13 docs)
+├── testing-approach-kate ........... Testing Approach & Year Ahead (Kate)             [strategy]  [L2] [DRAFT]
+│   ├── workstream-oci-bidding ...... ↳ WS1: OCI Bidding deep-dive                   [strategy]  [L2] [DRAFT]
+│   ├── workstream-modern-search .... ↳ WS2: Modern Search (Ad Copy)                  [strategy]  [L2] [DRAFT]
+│   ├── workstream-audiences ....... ↳ WS3: Audiences & Lifecycle (F90)               [strategy]  [L2] [DRAFT]
+│   ├── workstream-user-experience .. ↳ WS4: User Experience (Polaris, LPs)           [strategy]  [L2] [DRAFT]
+│   └── workstream-algorithmic-ads .. ↳ WS5: Algorithmic Ads (AI Max, Baloo)          [strategy]  [L2] [DRAFT]
+├── oci-rollout-playbook ............ OCI Rollout Playbook (strategy)                  [strategy]  [L2] [DRAFT]
+├── ai-max-test-design .............. AI Max Test Design — US Market                   [strategy]  [L2] [DRAFT]
+├── ad-copy-testing-framework ....... Ad Copy Testing Framework (SP Study)             [strategy]  [L2] [DRAFT]
+├── email-overlay-ww-rollout ........ Email Overlay WW Rollout Plan                    [strategy]  [L2] [DRAFT]
+├── au-nb-mro-trades-proposal ....... AU NB Testing — MRO/Trades Vertical              [strategy]  [L2] [DRAFT]
+├── project-baloo-overview .......... Project Baloo — Shopping Ads for AB              [strategy]  [L2] [DRAFT]
+└── enhanced-match-liveramp ......... Enhanced Match / LiveRamp Expansion              [strategy]  [L2] [DRAFT]
 
-STRATEGY (6 docs)
-├── agentic-ps-vision ............... Agentic Paid Search — Vision & Roadmap           [amazon-internal] [L5] [DRAFT]
-├── body-system-architecture ........ The Body System — Architecture                   [personal]        [L5] [DRAFT]
-├── agentic-marketing-landscape ..... Agentic Marketing — Industry Landscape           [personal]        [L4] [DRAFT]
-├── aeo-ai-overviews-pov ............ AEO / AI Overviews POV                           [amazon-internal] [L4] [DRAFT]
-├── cross-market-playbook ........... Cross-Market Playbook (US→EU5→RoW)               [amazon-internal] [L2] [DRAFT]
-└── f90-lifecycle-strategy .......... F90 Lifecycle Program Strategy                    [amazon-internal] [L2] [DRAFT]
+STRATEGY (11 docs)
+├── ieccp-planning-framework ........ ie%CCP Planning & Optimization                   [strategy]  [L2] [DRAFT]
+├── competitive-landscape ........... Competitive Landscape: Who's Bidding             [strategy]  [L2] [DRAFT]  *orphan — needs indexing*
+├── q2-initiative-status ............ Q2 2026 Initiative Status & Priorities           [strategy]  [L2] [DRAFT]
+├── oci-business-case ............... OCI Impact Summary — Business Case               [strategy]  [L2] [DRAFT]
+├── genai-search-traffic ............ GenAI Search Traffic — What We Know              [strategy]  [L4] [DRAFT]
+├── f90-lifecycle-strategy .......... F90 Lifecycle Program Strategy                    [strategy]  [L2] [DRAFT]
+├── cross-market-playbook ........... Cross-Market Playbook (US→EU5→RoW)               [strategy]  [L2] [DRAFT]
+├── aeo-ai-overviews-pov ............ AEO / AI Overviews POV                           [strategy]  [L4] [DRAFT]
+├── agentic-ps-vision ............... Agentic Paid Search — Vision & Roadmap           [strategy]  [L5] [DRAFT]
+├── body-system-architecture ........ The Body System — Architecture                   [strategy]  [L5] [DRAFT]
+└── agentic-marketing-landscape ..... Agentic Marketing — Industry Landscape           [strategy]  [L4] [DRAFT]
 
-REPORTING (3 docs)
-├── au-keyword-cpa-dashboard ........ AU Keyword CPA Dashboard Design                  [amazon-internal] [L1] [DRAFT]
-├── wbr-callout-guide ............... WBR Callout Template & Guide                     [amazon-internal] [L1] [DRAFT]
-└── competitive-intel-tracker ....... Competitive Intelligence Tracker                  [amazon-internal] [L2] [DRAFT]
+PROGRAM DETAILS (8 docs)
+├── ab-paid-search-wiki ............. AB Paid Search Program Wiki                      [reference] [--] [DRAFT]
+├── au-market-wiki .................. AU Paid Search — Market Wiki                     [reference] [--] [DRAFT]
+├── mx-market-wiki .................. MX Paid Search — Market Wiki                     [reference] [--] [DRAFT]
+├── oci-execution-guide ............. OCI Execution Guide (how-to)                     [execution] [--] [DRAFT]
+├── ww-testing-tracker .............. WW Testing Tracker (all tests)                   [reference] [L2] [DRAFT]
+├── market-reference ................ Market Reference: 10 Markets                     [reference] [L2] [DRAFT]
+├── team-workload-distribution ...... Team Capacity & Workload                         [reference] [--] [DRAFT]
+└── polaris-rollout-status .......... Polaris WW Rollout Status                        [reference] [L2] [DRAFT]
+
+REPORTING (2 docs)
+├── au-keyword-cpa-dashboard ........ AU Keyword CPA Dashboard Design                  [execution] [L1] [DRAFT]
+└── wbr-callout-guide ............... WBR Callout Template & Guide                     [execution] [L1] [DRAFT]
 
 TOOLS (2 docs)
-├── campaign-link-generator-spec .... Campaign Link Generator Spec                     [amazon-internal] [L3] [DRAFT]
-└── budget-forecast-helper-spec ..... Budget Forecast Helper Spec                      [amazon-internal] [L3] [DRAFT]
+├── campaign-link-generator-spec .... Campaign Link Generator Spec                     [execution] [L3] [DRAFT]
+└── budget-forecast-helper-spec ..... Budget Forecast Helper Spec                      [execution] [L3] [DRAFT]
 
-COMMUNICATION (3 docs)
-├── polaris-rollout-timeline ........ Polaris Brand LP Rollout Timeline                [amazon-internal] [L1] [DRAFT]
-├── mx-ps-handoff-guide ............. MX PS Handoff Guide (Carlos→Lorena)              [amazon-internal] [L1] [DRAFT]
-└── oci-methodology-knowledge-share . OCI Methodology — Knowledge Sharing              [amazon-internal] [L1] [DRAFT]
-
-PROGRAM DETAILS (5 docs)
-├── ab-paid-search-wiki ............. AB Paid Search Program Wiki                      [amazon-internal] [--] [DRAFT]
-├── au-market-wiki .................. AU Market Wiki                                   [amazon-internal] [--] [DRAFT]
-├── mx-market-wiki .................. MX Market Wiki                                   [amazon-internal] [--] [DRAFT]
-├── oci-implementation-guide ........ OCI Implementation Guide (Per-Market)            [amazon-internal] [--] [DRAFT]
-└── ww-testing-tracker .............. WW Testing Tracker (All Tests)                   [amazon-internal] [L2] [DRAFT]
+COMMUNICATION (1 doc)
+└── stakeholder-comms-guide ......... Stakeholder Communication Guide                  [execution] [L1] [DRAFT]
 
 BEST PRACTICES (3 docs)
-├── google-ads-campaign-structure ... Google Ads Campaign Structure Standards           [amazon-internal] [--] [DRAFT]
-├── landing-page-testing-playbook ... Landing Page Testing Playbook                    [amazon-internal] [--] [DRAFT]
-└── invoice-po-process-guide ........ Invoice & PO Process Guide                       [amazon-internal] [--] [DRAFT]
+├── google-ads-campaign-structure ... Google Ads Campaign Structure Standards           [execution] [--] [DRAFT]
+├── landing-page-testing-playbook ... Landing Page Testing Playbook                    [execution] [--] [DRAFT]
+└── invoice-po-process-guide ........ Invoice & PO Process Guide                       [execution] [--] [DRAFT]
 
 ====================================
-TOTAL: 33 artifacts | 33 DRAFT | 0 REVIEW | 0 FINAL
-AUDIENCE: 30 amazon-internal | 2 personal | 0 agent-only
-LEVELS: L1×5 | L2×15 | L3×2 | L4×2 | L5×2 | N/A×7
+TOTAL: 40 artifacts | 40 DRAFT | 0 REVIEW | 0 FINAL
+DOC-TYPES: ~18 strategy | ~12 execution | ~10 reference
+LEVELS: L1×4 | L2×18 | L3×2 | L4×3 | L5×3 | N/A×10
 ```
 
 ## Document Relationships
 
 ```
 testing-approach-kate (PARENT)
-  ├── workstream-oci-bidding ──────→ oci-rollout-methodology (reference)
-  │                                  oci-implementation-guide (reference)
-  │                                  oci-methodology-knowledge-share (reference)
-  ├── workstream-modern-search ───→ aeo-ai-overviews-pov (reference)
-  │                                  email-overlay-ww-rollout (reference)
-  ├── workstream-audiences ───────→ f90-lifecycle-strategy (reference)
-  ├── workstream-user-experience ─→ polaris-rollout-timeline (reference)
-  │                                  landing-page-testing-playbook (reference)
-  │                                  au-market-wiki (reference)
-  └── workstream-algorithmic-ads ─→ ai-max-test-design (reference)
+  ├── workstream-oci-bidding ──────→ oci-rollout-playbook (strategy), oci-execution-guide (execution)
+  ├── workstream-modern-search ───→ aeo-ai-overviews-pov, email-overlay-ww-rollout
+  ├── workstream-audiences ───────→ f90-lifecycle-strategy, enhanced-match-liveramp
+  ├── workstream-user-experience ─→ polaris-rollout-status, landing-page-testing-playbook, au-market-wiki
+  └── workstream-algorithmic-ads ─→ ai-max-test-design, project-baloo-overview
+
+oci-rollout-playbook (STRATEGY) ←→ oci-execution-guide (EXECUTION)
+  └── oci-business-case (LEADERSHIP SUMMARY)
 
 agentic-ps-vision (STANDALONE)
-  └── body-system-architecture (reference)
-      agentic-marketing-landscape (reference)
+  └── body-system-architecture, agentic-marketing-landscape
 
 cross-market-playbook (STANDALONE)
   └── references all workstream docs + market wikis
 
 ww-testing-tracker (STANDALONE)
   └── references all testing/ docs
+
+q2-initiative-status (STANDALONE)
+  └── references all active initiatives
+
+genai-search-traffic → aeo-ai-overviews-pov (enriches)
+enhanced-match-liveramp → f90-lifecycle-strategy (match rate dependency)
 ```
 
 ## How This Stays Current
 
-This sitemap is regenerated when:
-- A new artifact is created
-- An artifact status changes (DRAFT → REVIEW → FINAL)
-- The artifact directory structure changes
-
-The agent regenerates by scanning `~/shared/artifacts/` and reading front-matter from each file.
-# Reference Index
-
-A central index of documents and resources for quick access.
-
-## Quip — Outbound Marketing (Internal)
-Main folder: https://quip-amazon.com/UZ3VOhztKN4s/Outbound-Marketing-Internal
-
-### Top-Level Docs
-- [Paid Acq Projects](https://quip-amazon.com/bXT9AA5YdtN) — spreadsheet, active project tracker
-- [PO Process Options - Paid Search](https://quip-amazon.com/NXF9AAy02OQ) — PO/invoicing process
-- [Outbound Holiday Tracker](https://quip-amazon.com/dGM9AARtQnG) — spreadsheet
-- [MBet Process Improvement](https://quip-amazon.com/FZQ9AARARAN)
-
-### Subfolders
-- [Testing](https://quip-amazon.com/NfR9OA6clcH/) — 20 items, paid search testing docs
-- [Review](https://quip-amazon.com/MRQ9OA8fzMn/) — 15 items, WBR/review docs
-- [Planning](https://quip-amazon.com/QcL9OAla0aR/) — 4 items
-- [Onboarding/Best Practice](https://quip-amazon.com/JeH9OAHbCkF/) — 4 items
-- [Events](https://quip-amazon.com/Afc9OA7yLSI/) — 5 items
-- [Creative](https://quip-amazon.com/bfX9OAk81Ay/) — 1 item
-- [...NA](https://quip-amazon.com/JTP9OAfqvcL/) — North America
-- [..EU](https://quip-amazon.com/aXF9OAXXhSH/) — 8 items, European markets
-- [..JP](https://quip-amazon.com/Xca9OAoab2S/) — 5 items, Japan
-- [.ABIX](https://quip-amazon.com/dOP9OAN9Quw/) — 2 items, International Expansion
-- [.Mobile App](https://quip-amazon.com/XGH9OAGo2yM/) — 2 items
-- [.Partnerships](https://quip-amazon.com/FCE9OAGNr3n/) — 4 items
-
-## Quip — Sync Docs
-- [AB MX Paid Search Sync](https://quip-amazon.com/K9OYA9mXm7DU/AB-MX-Paid-Search-Sync)
-- [WW AB Traffic Marketing Pre-WBR Callouts](https://quip-amazon.com/MMgBAzDrlVou)
-
-## Key Contacts
-See ~/shared/context/active/org-chart.md
-
-## Project Briefs
-<!-- Link to or summarize active project context -->
-
-## Templates
-<!-- Reference reusable email/doc templates -->
+Regenerated when: new artifact created, status changes, or directory structure changes.
+The wiki-librarian regenerates by scanning ~/shared/artifacts/ and reading frontmatter.

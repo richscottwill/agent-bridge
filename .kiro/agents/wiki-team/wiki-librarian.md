@@ -24,8 +24,9 @@ Execute these steps in order. Do not skip validation.
 1. **Read the staged article:** `~/shared/context/wiki/staging/{topic-slug}.md`
 2. **Read the critic's review:** `~/shared/context/wiki/reviews/{topic-slug}-review.md` — confirm verdict is PUBLISH.
 3. **Validate before moving anything:**
-   - Verify all required frontmatter fields: `title`, `slug`, `type`, `audience`, `status`, `created`, `updated`, `owner`, `tags`, `depends_on`, `consumed_by`, `summary`.
-   - Resolve every `depends_on` slug — confirm each target exists in `~/shared/artifacts/`. If a slug doesn't resolve, STOP and flag the wiki-editor.
+   - Verify all required frontmatter fields: `title`, `status`, `doc-type`, `audience`, `level`, `owner`, `created`, `updated`, `update-trigger`, `tags`.
+   - `doc-type` must be one of: `strategy`, `execution`, `reference`. See wiki-structure.md § Document Types for definitions.
+   - Resolve every `depends_on` slug (if present) — confirm each target exists in `~/shared/artifacts/`. If a slug doesn't resolve, STOP and flag the wiki-editor.
    - Confirm `tags` match `~/shared/context/wiki/wiki-structure.md` taxonomy. Flag new tags for editor approval.
    - Confirm `<!-- AGENT_CONTEXT ... -->` block is present with `machine_summary`, `key_entities`, `action_verbs`, `update_triggers`.
    - Search for `<!-- TODO` — if any remain, STOP and return to wiki-writer.
@@ -67,7 +68,7 @@ Maintain the structure at `~/shared/context/wiki/wiki-structure.md`:
 | Failure | What Goes Wrong | Prevention |
 |---------|----------------|------------|
 | Publishing without updating wiki-index.md | Article exists in `~/shared/artifacts/` but agents can't discover it — invisible to the concierge and all automated lookups. | Step 5 is non-negotiable: append to `wiki-index.md` BEFORE deleting the staging copy. |
-| Missing frontmatter fields | Article publishes with incomplete metadata. Agents can't index by type, audience, or dependencies. Concierge returns partial results. | Run the full validation checklist in Step 3. Required fields: `title`, `slug`, `type`, `audience`, `status`, `created`, `updated`, `owner`, `tags`, `depends_on`, `consumed_by`, `summary`. |
+| Missing frontmatter fields | Article publishes with incomplete metadata. Agents can't index by type, audience, or dependencies. Concierge returns partial results. | Run the full validation checklist in Step 3. Required fields: `title`, `status`, `doc-type`, `audience`, `level`, `owner`, `created`, `updated`, `update-trigger`, `tags`. |
 | Broken cross-references in Related section | `depends_on` points to a slug that was archived or never published. Creates dead links in the dependency graph. | Resolve every `depends_on` slug against `~/shared/artifacts/` before publishing. If a target doesn't exist, STOP — don't publish with broken refs. |
 
 ## Machine-readable index (the novel part)

@@ -1,6 +1,8 @@
+> **⚠️ ARCHIVED — 2026-04-04. Replaced by polaris-rollout-status. Do not update this file.**
+
 ---
 title: Polaris Brand LP Rollout Timeline
-status: DRAFT
+status: archived
 audience: amazon-internal
 level: 1
 owner: Richard Williams

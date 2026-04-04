@@ -1,9 +1,19 @@
+---
+title: "ie%CCP Planning & Optimization Framework"
+status: DRAFT
+doc-type: strategy
+audience: amazon-internal
+level: 2
+owner: Richard Williams
+created: 2026-03-30
+updated: 2026-04-04
+update-trigger: CCP revision by finance, ie%CCP target changes, new market budget planning
+tags: [ieccp, budget, cpa, ccp, planning, mx]
+---
+
 # ie%CCP Planning & Optimization Framework
 
 > How to understand, plan around, and optimize ie%CCP for Paid Search budget decisions.
-
-slug: ieccp-planning-framework | status: DRAFT | audience: amazon-internal | level: 2
-Created: 2026-03-30
 
 ---
 
@@ -380,3 +390,11 @@ The first batch of incremental regs (to 75% ie%CCP) costs $143 each. The next ba
 **To improve ie%CCP:** cut NB (fast) or grow Brand (structural).
 **To model capacity:** NB regs = Brand regs × ratio (see formula table above).
 **To evaluate incremental spend:** ask about marginal CPA, not average CPA.
+
+
+<!-- AGENT_CONTEXT
+machine_summary: "Comprehensive framework for understanding and optimizing ie%CCP (CPA/CCP ratio) for Paid Search budget decisions. Covers the blended math (Brand subsidizes NB), four optimization scenarios (constrained/unconstrained budget x tight/loose target), marginal CPA curve, the four levers ranked by impact (Brand volume > NB CPA > NB spend level > CCP values), and MX FY26 case study with two ie%CCP scenarios. Key insight: Brand is the engine (every Brand reg at $21 CPA against $90 CCP generates $69 surplus that funds NB spend)."
+key_entities: ["ie%CCP", "CPA", "CCP", "Brand", "NB", "MX", "OP2", "marginal CPA", "budget planning", "finance"]
+action_verbs: ["calculate", "model", "optimize", "forecast", "decompose"]
+update_triggers: ["CCP revision by finance", "ie%CCP target changes for any market", "new market budget planning cycle", "Brand volume structural shift"]
+-->

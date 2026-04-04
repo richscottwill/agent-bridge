@@ -2,7 +2,7 @@
 
 *Pure experimentation engine. Inspired by [autoresearch](https://github.com/karpathy/autoresearch) — 630 lines, 700 experiments, measurable results. Small, fast, autonomous, compounding. No human input needed. Runs overnight, low token usage, high volume.*
 
-Last updated: 2026-04-04 (Karpathy Run 25 — Hyperparameters table compressed: Rationale column removed, Param|Value only)
+Last updated: 2026-04-04 (Karpathy Run 26 — Design Choices compressed 15→7 bullets, DuckDB Integration restructured: Update Protocol first)
 Created: 2026-03-20
 
 ---
@@ -263,22 +263,28 @@ Completed experiments are logged in changelog.md as one-line entries. Historical
 
 ## Design Choices
 
-- **Pure autoresearch.** The loop is experimentation only. Maintenance and cascade are handled by EOD-2 Phase 1-2. No human input needed during loop runs.
-- **Current-state-only organs.** Organs hold current state, not history. changelog.md is the audit trail. No append-only logs in organs.
-- **Body metaphor.** Organs replace numbered experiment files. Each organ is self-contained.
-- **Do no harm.** Brain/Memory: zero tolerance for degradation (delta_ab ≥ 0, zero INCORRECT). All other organs: delta_ab ≥ 0. Rollback is immediate and automatic.
-- **Usefulness over size.** Word budgets are adaptive — baselines in gut.md, actual ceilings learned from experiment data. An organ that improves with more content should grow. An organ that doesn't degrade when compressed should shrink. The ADD/COMPRESS priors per organ discover the natural size. The total body ceiling is wherever the aggregate size-accuracy curve plateaus — tracked in `autoresearch_organ_health`, not declared as a number.
-- **Advance or reset.** Every experiment meets ALL criteria (accuracy + completeness) or gets reverted. No partial advances.
-- **Dual blind eval.** Three-agent A/B/C design eliminates bias. Agent A evaluates the modified organ with full context. Agent B evaluates the ORIGINAL organ with full context (the control — doesn't know a change was made). Agent C evaluates the modified organ with zero context (portability). The delta between A and B is the real signal — not whether the organ is "above 90%" but whether the change made it better or worse. Karpathy judges all three. None of the evaluators know the others exist.
-- **Random + weighted selection.** No pre-designed experiments. No named hypotheses. Karpathy picks organ (weighted: over-budget → staleness → random), section (random), technique (random). Volume over precision — most revert, learning emerges from patterns.
-- **Batch execution.** No cap on experiments per invocation. The loop runs until eligible targets are exhausted — the Bayesian priors self-terminate by deprioritizing proven losers, and per-organ cooldown removes recently-touched organs. This is true to autoresearch: volume over caution, let the data tell you when to stop. Token efficiency comes from tiered eval (Tier 1 for low-risk, Tier 2 for high-risk) and Bayesian target selection (stop trying what doesn't work), not from capping volume.
-- **Per-organ cooldown replaces global gate.** The old CHANGE_WEIGHT > 10 gate blocked experiments on 5/6 runs because maintenance always touches 100+ lines. The per-organ cooldown is surgically precise: don't experiment on an organ that maintenance just modified in the same invocation, but all other organs are fair game. The dual blind eval already catches accuracy loss — the cooldown is belt-and-suspenders. Adopted 3/26 after Karpathy assessment showed the gate was effectively dead code.
-- **Portability as continuous constraint.** Every organ change must work on a cold platform with only text files. The generic blind evaluator tests this on every experiment. The agent-bridge repo is the test artifact — if the generic evaluator can't answer from a portable-body file, the body isn't portable.
-- **Output quality as first-class experiment dimension.** Information accuracy is necessary but not sufficient — the system's real purpose is producing high-quality output (emails, callouts, docs, task decisions). Style guides, market context files, callout principles, and hook prompts all affect output quality and are valid experiment targets. The same A/B design works for both eval types — Run 18 validated this with +0.15 delta on email drafts and doc outlines. Formalizing output-quality experiments extends the existing loop rather than adding a new system (subtraction before addition).
+- **Pure autoresearch, batch execution, random selection.** The loop is experimentation only — no maintenance, no cascade, no human input. No cap on experiments per invocation. Karpathy picks target (weighted: over-budget → staleness → random), section (random), technique (random). Volume over precision — most revert, learning emerges from patterns. Bayesian priors self-terminate by deprioritizing proven losers.
+- **Current-state-only organs, body metaphor.** Organs hold current state, not history. changelog.md is the audit trail. Each organ is self-contained — organs replace numbered experiment files.
+- **Do no harm, advance or reset.** Brain/Memory: zero tolerance for degradation (delta_ab ≥ 0, zero INCORRECT). All other organs: delta_ab ≥ 0. Every experiment meets ALL criteria or gets reverted. No partial advances. Rollback is immediate and automatic.
+- **Usefulness over size.** Word budgets are adaptive — baselines in gut.md, actual ceilings learned from experiment data. The ADD/COMPRESS priors per organ discover the natural size. The total body ceiling is wherever the aggregate size-accuracy curve plateaus — tracked in `autoresearch_organ_health`.
+- **Dual blind eval.** Three-agent A/B/C design eliminates bias. A=modified+context, B=original+context (control), C=modified+zero context (portability). The delta between A and B is the real signal. Karpathy judges all three. None of the evaluators know the others exist.
+- **Per-organ cooldown replaces global gate.** Don't experiment on an organ that maintenance just modified in the same invocation, but all other organs are fair game. Adopted 3/26 after the old CHANGE_WEIGHT > 10 gate was effectively dead code.
+- **Output quality as first-class dimension + portability as continuous constraint.** Style guides, market context files, callout principles, and hook prompts are valid experiment targets alongside organs. The same A/B design works for both eval types — Run 18 validated this. Every organ change must also work on a cold platform with only text files — the agent-bridge repo is the test artifact.
 
 ## DuckDB Integration
 
 All experiment data lives in `~/shared/data/duckdb/ps-analytics.duckdb`. The loop reads priors before each experiment and writes results after each decision. Organs hold the protocol (how to experiment). DuckDB holds the data (what happened, what works).
+
+### Update Protocol
+
+After every experiment decision:
+1. INSERT into `autoresearch_experiments` (full record)
+2. UPDATE `autoresearch_priors` (increment α or β)
+3. At end of batch: INSERT into `autoresearch_organ_health` (one row per organ with current word counts)
+
+The priors table is the learning mechanism. Over time, posterior_mean converges to the true keep rate for each target×technique combo. The UCB score ensures unexplored combos get tried (high uncertainty → high UCB) while proven winners get prioritized (high mean → high UCB). Proven losers (low mean, low uncertainty) naturally fall off.
+
+**Seeding new target categories:** When a new target category is added (e.g., style guides), `autoresearch_priors` needs new rows for every target × technique combination, initialized at Beta(1,1). The `eval_type` column in `autoresearch_experiments` distinguishes `information_retrieval` (organ experiments) from `output_quality` (style guide / context file / hook prompt experiments). Both types flow through the same Bayesian updating mechanism.
 
 ### Tables
 
@@ -294,7 +300,7 @@ All experiment data lives in `~/shared/data/duckdb/ps-analytics.duckdb`. The loo
 |------|---------|
 | `autoresearch_selection_weights` | UCB scores for target selection. posterior_mean + posterior_std = exploration/exploitation balance. |
 
-### Key Queries
+### Key Queries (Reference)
 
 ```sql
 -- What works? (highest keep rate with enough data)
@@ -317,17 +323,6 @@ FROM autoresearch_experiments WHERE eval_type = 'output_quality' ORDER BY run_id
 SELECT organ, run_id, word_count, utilization, accuracy_estimate 
 FROM autoresearch_organ_health ORDER BY organ, run_id;
 ```
-
-### Update Protocol
-
-After every experiment decision:
-1. INSERT into `autoresearch_experiments` (full record)
-2. UPDATE `autoresearch_priors` (increment α or β)
-3. At end of batch: INSERT into `autoresearch_organ_health` (one row per organ with current word counts)
-
-The priors table is the learning mechanism. Over time, posterior_mean converges to the true keep rate for each target×technique combo. The UCB score ensures unexplored combos get tried (high uncertainty → high UCB) while proven winners get prioritized (high mean → high UCB). Proven losers (low mean, low uncertainty) naturally fall off.
-
-**Seeding new target categories:** When a new target category is added (e.g., style guides), `autoresearch_priors` needs new rows for every target × technique combination, initialized at Beta(1,1). The `eval_type` column in `autoresearch_experiments` distinguishes `information_retrieval` (organ experiments) from `output_quality` (style guide / context file / hook prompt experiments). Both types flow through the same Bayesian updating mechanism.
 
 ## Governance
 

@@ -1,6 +1,8 @@
+> **⚠️ ARCHIVED — 2026-04-04. Replaced by oci-rollout-playbook + oci-execution-guide. Do not update this file.**
+
 ---
 title: OCI Rollout Methodology
-status: DRAFT
+status: archived
 audience: amazon-internal
 level: 2
 owner: Richard Williams

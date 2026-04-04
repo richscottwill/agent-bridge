@@ -4,6 +4,7 @@ slug: "market-reference"
 type: "reference"
 audience: "team"
 status: "draft"
+doc-type: reference
 created: "2026-03-25"
 updated: "2026-03-25"
 owner: "Richard Williams"

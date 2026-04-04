@@ -1,6 +1,8 @@
+> **⚠️ ARCHIVED — 2026-04-04. Replaced by mx-market-wiki. Do not update this file.**
+
 ---
 title: MX Paid Search Handoff Guide — Carlos → Lorena
-status: DRAFT
+status: archived
 audience: amazon-internal
 level: 1
 owner: Richard Williams

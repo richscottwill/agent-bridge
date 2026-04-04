@@ -1,6 +1,8 @@
+> **⚠️ ARCHIVED — 2026-04-04. Replaced by au-market-wiki. Do not update this file.**
+
 ---
 title: AU Paid Search — Market Overview
-status: DRAFT
+status: archived
 audience: amazon-internal
 level: N/A
 owner: Richard Williams

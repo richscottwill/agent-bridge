@@ -1,6 +1,7 @@
 ---
 title: AB Paid Search Program Wiki
 status: DRAFT
+doc-type: reference
 audience: amazon-internal
 level: N/A
 owner: Richard Williams

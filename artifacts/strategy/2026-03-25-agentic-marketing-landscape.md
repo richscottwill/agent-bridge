@@ -1,6 +1,7 @@
 ---
 title: Agentic Marketing — Industry Landscape & Amazon Context
 status: DRAFT
+doc-type: strategy
 audience: personal
 level: 4-5
 owner: Richard Williams

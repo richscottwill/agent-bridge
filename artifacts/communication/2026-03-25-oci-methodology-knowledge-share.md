@@ -1,6 +1,8 @@
+> **⚠️ ARCHIVED — 2026-04-04. Replaced by oci-execution-guide. Do not update this file.**
+
 ---
 title: OCI Methodology — Knowledge Sharing Doc
-status: DRAFT
+status: archived
 audience: amazon-internal
 level: 1
 owner: Richard Williams
