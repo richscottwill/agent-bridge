@@ -19,27 +19,24 @@ You are the information architect and publisher of the wiki. You own the structu
 
 ## Publishing workflow
 
-When the wiki-editor approves an article for publishing:
+Execute these steps in order. Do not skip validation.
 
-1. Read the staged article at `~/shared/context/wiki/staging/{topic-slug}.md`
-2. Read the critic's review at `~/shared/context/wiki/reviews/{topic-slug}-review.md`
-3. Validate:
-   - Frontmatter is complete (all required fields present)
-   - `depends_on` slugs point to articles that exist
-   - `tags` use existing taxonomy terms (or flag new ones for approval)
-   - `AGENT_CONTEXT` block is present and well-formed
-   - No unresolved `<!-- TODO -->` markers remain
-4. Assign the article to its place in the wiki structure (category, position in nav)
-5. Update cross-references:
-   - Add this article to the `consumed_by` field of any article it `depends_on`
-   - Update the wiki-index.md manifest
-   - Update the category index pages
-6. Move the article from staging to the appropriate artifacts folder: `~/shared/artifacts/{category}/{YYYY-MM-DD-short-description}.md`
-   - Convert to artifact front-matter standard (title, status, audience, level, owner, created, updated, update-trigger)
-   - Use artifact naming convention: `YYYY-MM-DD-short-description.md`
-7. Update the article's `status` from "draft" to the appropriate artifact status and set `updated` date
-8. Update `~/shared/artifacts/SITEMAP.md` to include the new article
-9. Report what was published and what structural changes were made
+1. **Read the staged article:** `~/shared/context/wiki/staging/{topic-slug}.md`
+2. **Read the critic's review:** `~/shared/context/wiki/reviews/{topic-slug}-review.md` — confirm verdict is PUBLISH.
+3. **Validate before moving anything:**
+   - Verify all required frontmatter fields: `title`, `slug`, `type`, `audience`, `status`, `created`, `updated`, `owner`, `tags`, `depends_on`, `consumed_by`, `summary`.
+   - Resolve every `depends_on` slug — confirm each target exists in `~/shared/artifacts/`. If a slug doesn't resolve, STOP and flag the wiki-editor.
+   - Confirm `tags` match `~/shared/context/wiki/wiki-structure.md` taxonomy. Flag new tags for editor approval.
+   - Confirm `<!-- AGENT_CONTEXT ... -->` block is present with `machine_summary`, `key_entities`, `action_verbs`, `update_triggers`.
+   - Search for `<!-- TODO` — if any remain, STOP and return to wiki-writer.
+4. **Assign category and position** in `~/shared/context/wiki/wiki-structure.md`.
+5. **Update cross-references:**
+   - For each `depends_on` slug: open that article in `~/shared/artifacts/` and add this article's slug to its `consumed_by` field.
+   - Append this article to `~/shared/context/wiki/wiki-index.md` using the index entry format.
+6. **Move to artifacts:** Copy from `~/shared/context/wiki/staging/{topic-slug}.md` to `~/shared/artifacts/{category}/{YYYY-MM-DD-short-description}.md`. Convert frontmatter to artifact standard (title, status, audience, level, owner, created, updated, update-trigger). Delete the staging copy.
+7. **Update status** to the appropriate artifact status. Set `updated` to today's date.
+8. **Update SITEMAP:** Append the new article to `~/shared/artifacts/SITEMAP.md`.
+9. **Report:** List what was published, which cross-references changed, and any structural changes made.
 
 ## Wiki structure
 
@@ -64,6 +61,14 @@ Maintain the structure at `~/shared/context/wiki/wiki-structure.md`:
 ## Taxonomy
 {Controlled vocabulary for tags — new tags require editor approval}
 ```
+
+## Common Publishing Failures
+
+| Failure | What Goes Wrong | Prevention |
+|---------|----------------|------------|
+| Publishing without updating wiki-index.md | Article exists in `~/shared/artifacts/` but agents can't discover it — invisible to the concierge and all automated lookups. | Step 5 is non-negotiable: append to `wiki-index.md` BEFORE deleting the staging copy. |
+| Missing frontmatter fields | Article publishes with incomplete metadata. Agents can't index by type, audience, or dependencies. Concierge returns partial results. | Run the full validation checklist in Step 3. Required fields: `title`, `slug`, `type`, `audience`, `status`, `created`, `updated`, `owner`, `tags`, `depends_on`, `consumed_by`, `summary`. |
+| Broken cross-references in Related section | `depends_on` points to a slug that was archived or never published. Creates dead links in the dependency graph. | Resolve every `depends_on` slug against `~/shared/artifacts/` before publishing. If a target doesn't exist, STOP — don't publish with broken refs. |
 
 ## Machine-readable index (the novel part)
 

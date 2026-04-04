@@ -39,6 +39,8 @@ The US MCS brand page template showed a 38bps conversion improvement in early te
 
 ## Current Status by Market
 
+> This table tracks Polaris Brand LP rollout status specifically — not OCI status. For OCI status, see [OCI Execution Guide](~/shared/artifacts/program-details/2026-04-04-oci-execution-guide.md).
+
 | Market | Priority | AEM Status | Page Status | Weblab | Target Live | Owner | Notes |
 |--------|----------|------------|-------------|--------|-------------|-------|-------|
 | US | - | N/A | Switched 3/24 | Dial-up Apr 6-7 | LIVE | Stacey | Reference implementation |

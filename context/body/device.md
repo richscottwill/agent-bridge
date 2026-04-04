@@ -85,10 +85,10 @@ These are live. They execute without Richard thinking.
 
 | Delegation | Delegate | Status | Notes |
 |-----------|----------|--------|-------|
-| MX Invoicing | TBD | VOID | Carlos → CPS 3/17. Needs new owner (Lorena or Richard). |
-| MX Keyword Sourcing | Lorena | IN PROGRESS | Richard keeps strategy/bids/testing. Send keyword guide. |
-| WBR Coverage | Dwayne | ACTIVE | Normal coverage. Richard keeps PS callouts + backup. Gap: no backup handoff template. |
-| OP1 Contributors | Andrew, Stacey, Yun, Adi | IN PROGRESS | Andrew active. Others unconfirmed. No deadline. |
+| MX Invoicing | TBD | VOID | VOID since Carlos→CPS 3/17. Decision: Lorena takes it or Richard keeps it. Decide by 4/11. |
+| MX Keyword Sourcing | Lorena | IN PROGRESS | Richard keeps strategy/bids/testing. Action: send keyword guide to Lorena. |
+| WBR Coverage | Dwayne | ACTIVE | Normal coverage. Richard keeps PS callouts + backup. Gap: no backup handoff template — build one. |
+| OP1 Contributors | Andrew, Stacey, Yun, Adi | IN PROGRESS | Andrew active. Confirm others. Set deadline for contributor sections. |
 
 ---
 

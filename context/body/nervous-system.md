@@ -18,13 +18,7 @@ Evaluates the work every other organ does. Looks backward, measures what happene
 ### Loop 1: Decision Audit
 Brain | Monthly | Score decisions VALIDATED/PARTIALLY/INVALIDATED/PENDING. INVALIDATED → flag principle.
 
-| Decision | Outcome | Audit Trigger |
-|----------|---------|---------------|
-| D1: OCI Phased Rollout | PENDING | CA/JP/EU3 data (Jul 2026) |
-| D2: Walmart Bid Caps | PENDING | Monthly: total program CPA |
-| D3: Ad Copy Overhaul | PENDING | UK +31% regs. IT when volume sufficient. |
-| D4: AU Full Migration | PENDING | Post-Polaris +30d |
-| D7: WBR Traffic Decline | PENDING | Deep dive data |
+5 decisions PENDING audit (D1, D2, D3, D4, D7). Triggers: CA/JP/EU3 data Jul 2026, monthly CPA, UK +31% regs (IT when volume), Polaris +30d, deep dive data.
 
 ### Loop 2: Prediction Scoring
 Eyes | Daily + weekly | Score predicted QA: HIT/MISS/SURPRISE. Target ≥60%. Currently inactive — predicted QA cleared from Eyes (stale content experiment, Run 18). Reactivate when AM-2 generates fresh predictions.

@@ -2,7 +2,7 @@
 
 *Pure experimentation engine. Inspired by [autoresearch](https://github.com/karpathy/autoresearch) — 630 lines, 700 experiments, measurable results. Small, fast, autonomous, compounding. No human input needed. Runs overnight, low token usage, high volume.*
 
-Last updated: 2026-04-03 (Karpathy — expanded experiment scope: style guides, market context, callout principles, hook prompts as valid targets; output-quality eval type with 5 scoring dimensions; evidence from Run 18 writing experiments)
+Last updated: 2026-04-04 (Karpathy Run 25 — Hyperparameters table compressed: Rationale column removed, Param|Value only)
 Created: 2026-03-20
 
 ---
@@ -226,22 +226,22 @@ Full data logged to DuckDB `autoresearch_experiments` table.
 
 ## Hyperparameters
 
-| Param | Value | Rationale |
-|-------|-------|-----------|
-| max_experiments_per_batch | none | No cap. Loop runs until eligible targets exhausted. Bayesian priors self-terminate by deprioritizing proven losers. |
-| total_body_ceiling | adaptive | No hard cap. Ceiling is wherever aggregate size-accuracy curve plateaus in `autoresearch_organ_health`. |
-| organ_budgets | adaptive | Baselines in gut.md. Actual ceilings learned from ADD/COMPRESS prior data per organ. |
-| staleness_threshold | 7 days | Flag organ section if older than this |
-| eval_questions_per_exp | adaptive (scales with risk) | Low risk: 2-3. Medium: 4-6. High (Brain/Memory): 5-8. Standing adversarial questions always included. |
-| eval_method | A/B/C blind | A=modified+context, B=original+context (control), C=modified+zero context (portability). Karpathy judges. |
-| keep_rule | delta_ab ≥ 0 | Change must not degrade. The delta is the only signal. |
-| brain_memory_rule | delta_ab ≥ 0, zero INCORRECT | Non-negotiable safety floor for critical organs |
-| latency_flag | 120s | Experiments exceeding this are flagged LOW_EFFICIENCY |
-| prior_distribution | Beta(α, β), initialized Beta(1,1) | Bayesian updating: KEEP → α+1, REVERT → β+1. Posterior mean = α/(α+β). |
-| target_selection | UCB (posterior_mean + posterior_std) | Upper confidence bound balances exploitation (high mean) with exploration (high uncertainty) |
-| experiment_word_budget_rule | adaptive (gut.md) | Experiments can increase word count if accuracy improves. Natural ceiling discovered via ADD prior convergence. |
-| experiment_cooldown_per_organ | same invocation | Don't experiment on an organ modified by maintenance in the current invocation |
-| yield_metric | (abs(word_delta) × max(delta_ab, 0)) / estimated_tokens | Higher = more efficient. Low-yield combos get deprioritized via prior. |
+| Param | Value |
+|-------|-------|
+| max_experiments_per_batch | none (Bayesian priors self-terminate) |
+| total_body_ceiling | adaptive (plateaus in `autoresearch_organ_health`) |
+| organ_budgets | adaptive (baselines in gut.md, learned from priors) |
+| staleness_threshold | 7 days |
+| eval_questions_per_exp | adaptive: low 2-3, medium 4-6, high 5-8 + standing adversarial |
+| eval_method | A/B/C blind (A=modified+context, B=original+context, C=modified+zero context) |
+| keep_rule | delta_ab ≥ 0 |
+| brain_memory_rule | delta_ab ≥ 0, zero INCORRECT |
+| latency_flag | 120s |
+| prior_distribution | Beta(α, β), initialized Beta(1,1) |
+| target_selection | UCB (posterior_mean + posterior_std) |
+| experiment_word_budget_rule | adaptive (gut.md) |
+| experiment_cooldown_per_organ | same invocation |
+| yield_metric | (abs(word_delta) × max(delta_ab, 0)) / estimated_tokens |
 
 ---
 

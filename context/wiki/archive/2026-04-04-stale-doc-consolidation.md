@@ -1,0 +1,25 @@
+# Stale Doc Consolidation — April 4, 2026
+
+## AU Docs Merged
+- `program-details/2026-03-25-au-market-wiki.md` — ARCHIVED (replaced by 2026-04-04-au-market-wiki.md)
+- `program-details/2026-04-03-au-market-overview.md` — ARCHIVED (content merged into 2026-04-04-au-market-wiki.md)
+- `program-details/2026-04-03-au-paid-search-market-overview.md` — ARCHIVED (duplicate of au-market-overview)
+- New canonical doc: `program-details/2026-04-04-au-market-wiki.md`
+
+## MX Docs Merged
+- `communication/2026-03-25-mx-ps-handoff-guide.md` — ARCHIVED (content merged into mx-market-wiki.md)
+- MX Market Wiki updated in place with handoff guide content
+
+## OCI Docs Consolidated (see separate archive note)
+- `testing/2026-03-25-oci-rollout-methodology.md` — ARCHIVED (absorbed into Playbook + Execution Guide)
+- `program-details/2026-03-25-oci-implementation-guide.md` — ARCHIVED (merged into Execution Guide)
+- `communication/2026-03-25-oci-methodology-knowledge-share.md` — ARCHIVED (merged into Execution Guide)
+
+## Polaris Timeline Superseded
+- `communication/2026-03-25-polaris-rollout-timeline.md` — ARCHIVED (superseded by program-details/2026-04-04-polaris-rollout-status.md)
+
+## doc-type System Introduced
+All articles now have a `doc-type` field: strategy | execution | reference
+- strategy: Why/what/results — for leadership (L7+)
+- execution: How-to/step-by-step — for doers
+- reference: Canonical data source — for anyone

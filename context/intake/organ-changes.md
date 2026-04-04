@@ -69,3 +69,50 @@
 - Net: 6 kept, 1 reverted. Key finding: guide/playbook MERGE reverted on both wiki-writer (Run 21) and wiki-editor (Run 23) — the DO vs FOLLOW distinction is validated as a real semantic boundary.
 - Cross-organ check: ✅ No conflicts. Changes target agent configs and steering files, not body organs. The confidence calibration table in richard-style-amazon is additive and doesn't conflict with any organ content. The guide/playbook validation is consistent with the ABPS AI design doc's Work_Product type classification (guide, reference, decision, playbook, analysis).
 - Gated file check: ✅ N/A (changelog.md edited, not heart.md or gut.md). Experiments executed by Karpathy — authorized.
+
+## 2026-04-04
+
+**File:** `shared/context/body/amcc.md`
+**Change:** Compressed resistance patterns table (lines 132-137). All six resistance types unchanged (Visibility avoidance, Blank page paralysis, Competence anxiety, Comfort zone gravity, Delegation guilt, Urgency addiction). Descriptions shortened (~50%), manifestation column tightened, counters rewritten as direct imperatives instead of quoted advice. Same information, punchier delivery. ~60 words removed.
+**Flags:**
+- ✅ Not a gated file (not heart.md or gut.md). No karpathy approval required.
+- ✅ No cross-organ conflicts. `nervous-system.md` references resistance types by name only (e.g., "Visibility avoidance: VALIDATED") — names are unchanged. `changelog.md` historical references are unaffected. The resistance tracking scorecard later in amcc.md (line ~163) uses the same type names and is unaffected.
+- ℹ️ Compression pass — aligns with gut.md principles. Counters shifted from third-person quotes ("The doc is a tool...") to second-person imperatives ("Share the ugly draft NOW"). Tone is more direct, consistent with aMCC's escalation design.
+
+## 2026-04-04 — memory.md
+
+**Change:** Compression pass on Active Projects table (rows 2-5). Removed redundant "IN PROGRESS —" prefixes from status column. Data unchanged — same projects, statuses, and details. Row 1 (Testing Approach) and row 6 (MX Auto/Beauty) unchanged.
+
+**Cross-organ check:** Consistent with hands.md (same project statuses, blockers, dependencies). No conflicts detected.
+
+**Gatekeeper:** N/A — memory.md is not gated by karpathy.
+
+## 2026-04-04 — changelog.md (Karpathy Run 24, Mega Batch 1)
+
+- **5 info-retrieval experiments:** amcc (REWORD, KEEP), nervous-system (COMPRESS, KEEP), gut (REWORD, KEEP), memory (COMPRESS, KEEP), device (REWORD, KEEP). All Δ=0.0 — accuracy preserved, actionability improved.
+- **5 output-quality experiments:** richard-style-email (REWORD, Δ=+0.06, KEEP), richard-style-slack (COMPRESS, Δ=+0.03, KEEP), richard-style-wbr (ADD, Δ=+0.05, KEEP), richard-style-mbr (RESTRUCTURE, Δ=+0.06, KEEP), richard-writing-style (REWORD, Δ=+0.05, KEEP).
+- Net: 10/10 KEEP — perfect batch. First experiments on richard-style-slack, richard-style-wbr, richard-style-mbr, and richard-writing-style.
+- Cross-organ check: ✅ No conflicts. Info-retrieval changes are isolated within each organ's section. gut.md REWORD (compression techniques table) stays within karpathy's jurisdiction. Style guide changes don't conflict with organ content. The "Common Failures" pattern from email was replicated to WBR and MBR — consistent structural improvement across style guides.
+- Gated file check: ✅ gut.md was modified by Karpathy (Run 24) — authorized. changelog.md is the log entry, not a gated file. heart.md was not modified.
+
+## 2026-04-04 — brain.md
+
+**Change:** Compressed Five Levels section (lines 83-107). All 5 levels unchanged — same names, same key metrics, same graduation criteria. Verbose bullet-point descriptions shortened to 1-2 line summaries. "Guiding Principle" paragraph removed (content is implicit in the graduation criteria table that follows). ~100 words removed, zero information loss.
+
+**Cross-organ check:**
+- ✅ `soul.md` Five Levels summary (same level names, same key metrics, same statuses) — consistent. No update needed.
+- ✅ `amcc.md` Level 1 streak tracking — L1 metric ("consecutive weeks with a strategic artifact shipped") unchanged.
+- ✅ `nervous-system.md` Loop 6 graduation criteria — graduation table in brain.md untouched by this edit.
+- ✅ `asana-command-center.md` Five Levels custom field (L1-L5 classification) — level names unchanged.
+- ✅ No cross-organ conflicts detected.
+
+**Gatekeeper:** N/A — brain.md is not gated by karpathy. However, this compression pattern is consistent with karpathy's autoresearch batches (Runs 20-24 earlier today).
+
+## 2026-04-04 — changelog.md (no-op)
+
+**File:** `shared/context/body/changelog.md`
+**Change:** File was saved/touched but diff is empty — no content modified.
+**Flags:**
+- ✅ No cross-organ conflicts (no content changed).
+- ✅ Not a gated file (not heart.md or gut.md). No karpathy approval required.
+- ℹ️ No-op save. No action needed.

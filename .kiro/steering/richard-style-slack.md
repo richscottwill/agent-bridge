@@ -46,12 +46,15 @@ Richard's Slack is his most unfiltered register. Fast, reactive, collaborative. 
 - Personal life moments with close colleagues: baby photos with Yun, squirrel plumbing stories with Adi
 
 ## Relationship Dynamics by Person
-- **Brandon (manager)**: Most active channel. Responsive, collaborative, occasionally playful. Matches Brandon's energy. Will push back gently: "maybe an alternative is to set an expiry date." Volunteers for tasks: "Yeah I can do that." Treats 1:1s as valuable: "our 1:1s usually help me refocus on what's important"
-- **Yun (senior peer/mentor)**: Respectful, appreciative. "whoa this is awesome, thanks Yun" / "this is great, thanks Yun." Shares personal moments (baby photos). Follows her lead on budget/pacing. Quick to act on her requests.
-- **Adi (mentee)**: Patient, teaching-oriented. Walks through technical concepts. Shares links and tools proactively. Flexible on scheduling: "yeah no problem, that sounds good." Humor surfaces: shopping list for snacks, "have a good weekend" on Wednesday.
-- **Stacey (peer)**: Efficient, collaborative. Quick confirmations. Explains technical context when asked: "mShop (Consumer app)..." Agrees and moves on: "Yeah I agree, because from the bid strategy perspective..."
-- **Andrew (peer)**: Helpful, direct. Answers technical questions quickly. Offers to set things up: "I can do that." Keeps it brief.
-- **Peter (cross-functional)**: Slightly more structured. Shares files with context. Offers options with reasoning (numbered list for Paid App next steps). Still casual: "okay awesome, thanks Peter" / "more work, but that hasn't stopped us before"
+
+| Person | Register | Key Pattern | Don't Do |
+|--------|----------|-------------|----------|
+| **Brandon** (manager) | Casual, collaborative, playful | Most active channel. Volunteers for tasks. Pushes back gently with alternatives. Treats 1:1s as valuable. | Don't be formal. Don't withhold updates — he flags visibility gaps. |
+| **Yun** (senior peer) | Respectful, appreciative | "whoa this is awesome, thanks Yun." Follows her lead on budget/pacing. Shares personal moments. | Don't be overly casual. Don't question her data. |
+| **Adi** (mentee) | Patient, teaching-oriented | Walks through technical concepts. Shares links proactively. Humor surfaces. Flexible on scheduling. | Don't lecture. Don't skip the explanation. |
+| **Stacey** (peer) | Efficient, collaborative | Quick confirmations. Explains technical context when asked. Agrees and moves on. | Don't over-explain. Don't add unnecessary context. |
+| **Andrew** (peer) | Helpful, direct | Answers technical questions quickly. Offers to set things up. Keeps it brief. | Don't be verbose. Don't add pleasantries. |
+| **Peter** (cross-functional) | Slightly more structured | Shares files with context. Offers numbered options with reasoning. Still casual. | Don't be too formal. Don't skip the reasoning. |
 
 ## Slack-Specific Habits
 - Responds to urgent pings even when sick or OOO: "I feel sick, but actually feeling pretty focused too"

@@ -153,13 +153,38 @@ If a `🔍 Review` subtask already exists, skip — the review has already been 
 
 ### Scoring: 5 dimensions (1-10 each)
 
-Use the same rubric as Mode 1 (wiki review), adapted for Asana HTML work products:
+Use these scoring anchors directly — do not cross-reference Mode 1 during Asana reviews.
 
-1. **Usefulness** — Does this help Richard or his stakeholders DO, DECIDE, or UNDERSTAND something? A doc that merely records information scores low.
+1. **Usefulness** — Does this help Richard or his stakeholders DO, DECIDE, or UNDERSTAND something?
+   - 10: Reader can act immediately. Agent can extract structured guidance.
+   - 7: Useful but requires additional context or interpretation.
+   - 4: Informational but not actionable.
+   - 1: No clear use case for any audience.
+
 2. **Clarity** — Can a reader who knows the domain follow it? Are `<strong>` headers meaningful? Is the structure scannable?
+   - 10: Crystal clear. Headers tell the story. No re-reading needed.
+   - 7: Clear with minor ambiguities.
+   - 4: Requires significant domain knowledge to parse.
+   - 1: Confusing or poorly organized.
+
 3. **Accuracy** — Are claims supported by the research brief? Are numbers current? Does the draft faithfully represent the source material?
-4. **Dual-audience** — Does the document serve both human readers (Richard, Kate, stakeholders) and agent consumers (structured enough for retrieval and reasoning)?
-5. **Economy** — Is every section earning its place? Could this be shorter without losing value? Does it duplicate content from other Asana tasks or body system organs?
+   - 10: Every claim traceable to a source. No stale data.
+   - 7: Mostly accurate, one or two unverified claims.
+   - 4: Several unsupported claims or outdated data.
+   - 1: Factually unreliable.
+
+4. **Dual-audience** — Does the document serve both human readers and agent consumers?
+   - 10: Both audiences fully served. Rich structure + narrative.
+   - 7: One audience well-served, the other adequate.
+   - 4: Primarily serves one audience.
+   - 1: Single-audience only.
+
+5. **Economy** — Is every section earning its place? Could this be shorter without losing value?
+   - 10: Tight. Every paragraph essential. No duplication.
+   - 7: Minor bloat or one redundant section.
+   - 4: Significant padding or duplication.
+   - 1: Could be cut by 50%+ without losing value.
+   - Sub-rule: Every list item must contain a verb. Noun-only list items are padding.
 
 ### Output: post review as Asana comment
 

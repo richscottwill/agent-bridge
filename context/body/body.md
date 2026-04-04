@@ -2,7 +2,7 @@
 
 *The navigation layer. Each organ is a self-contained file with real content — not a pointer to somewhere else. Read the organ you need, get the answer.*
 
-Last updated: 2026-03-20
+Last updated: 2026-04-04 (Karpathy Run 25 — Task Routing table: organ names→file paths)
 
 ---
 
@@ -58,17 +58,17 @@ These aren't rules to remember — they're how the body works. Each organ embodi
 
 ## Task Routing (load only what you need)
 
-| Task Type | Required Organs | Optional |
-|-----------|----------------|----------|
-| Draft an email/message | Memory (tone), Soul (voice), current.md | Brain (if strategic) |
-| Prioritize work | Brain (leverage), Hands (tasks), aMCC (hard thing) | Eyes (deadlines) |
-| Prepare for a meeting | Meetings (series file), Eyes (metrics) | Memory (relationships), Brain (positions) |
-| Assess market performance | Eyes (metrics, competitors) | Brain (decisions) |
-| Build/propose a tool | Device (tool factory), Brain (Level 3) | Hands (what's manual) |
+| Task Type | Required Files | Optional |
+|-----------|---------------|----------|
+| Draft an email/message | `memory.md`, `soul.md`, `current.md` | `brain.md` (if strategic) |
+| Prioritize work | `brain.md`, `hands.md`, `amcc.md` | `eyes.md` (deadlines) |
+| Prepare for a meeting | `meetings/{series}.md`, `eyes.md` | `memory.md`, `brain.md` |
+| Assess market performance | `eyes.md` | `brain.md` (decisions) |
+| Build/propose a tool | `device.md`, `brain.md` | `hands.md` (what's manual) |
 | Run the morning routine | ALL (see hook for load order) | — |
-| Run the loop | Heart (protocol), ALL organs (cascade) | — |
-| Check system health | Nervous System, Gut | All organs (staleness) |
-| Start a new session | Spine (bootstrap), Body (this file), aMCC (streak) | Then task-specific |
+| Run the loop | `heart.md`, ALL organs (cascade) | — |
+| Check system health | `nervous-system.md`, `gut.md` | All organs (staleness) |
+| Start a new session | `spine.md`, `body.md`, `amcc.md` | Then task-specific |
 
 ---
 

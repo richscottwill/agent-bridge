@@ -1,6 +1,7 @@
 ---
 title: F90 Lifecycle Program Strategy
 status: DRAFT
+doc-type: strategy
 audience: amazon-internal
 level: 2
 owner: Richard Williams
@@ -102,15 +103,7 @@ Data Science is providing customer segmentation for targeting. The segmentation 
 
 ## Strategic Context
 
-F90 sits at the intersection of three strategic priorities:
-
-1. **Level 2 (Drive WW Testing):** F90 is a structured test with a clear hypothesis, measurement framework, and phased rollout. It demonstrates the testing methodology the team is building.
-
-2. **Decision D6 (Engagement Channel):** F90 is the first program to use the Engagement channel infrastructure. If it works, the channel becomes a permanent part of the campaign structure.
-
-3. **Decision D10 (F90 Lifecycle):** The decision to extend PS beyond registration was deliberate. It changes the team's value proposition and creates a new metric (post-registration purchasing) that PS can own.
-
-The broader implication: if F90 works, PS becomes a full-funnel channel. Registration is the top of the funnel. F90 is the middle. The team's value is no longer measured solely by how many people sign up — it's measured by how many people sign up AND buy. That's a fundamentally different conversation with leadership.
+F90 sits at the intersection of Level 2 (structured testing with clear measurement), Decision D6 (Engagement channel infrastructure), and Decision D10 (extending PS beyond registration). If F90 works, PS becomes a full-funnel channel — registration is the top, F90 is the middle, and the team's value is measured by how many people sign up AND buy.
 
 ---
 

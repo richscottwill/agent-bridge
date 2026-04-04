@@ -87,15 +87,26 @@ This report is the demand-side complement to the critic's supply-side audit. Tog
 
 ### Search strategy (in order)
 
-1. **Index scan** — Read wiki-index.md. Match on summary, tags, key_entities, action_verbs from AGENT_CONTEXT. This is fast and usually sufficient.
-2. **Frontmatter scan** — If index doesn't narrow enough, scan frontmatter of candidate articles for `type`, `audience`, `depends_on`.
-3. **Full-text read** — Only read full article content for the top 1-3 candidates. Don't read everything.
-4. **Dependency traversal** — If an article's `depends_on` points to prerequisite knowledge the reader might need, mention it: "You may also want to read [Prerequisite](slug) first."
-5. **Body system fallback** — If the wiki doesn't have it, check body organs. But always flag this as a gap.
+1. **wiki-index.md first (O(1) lookup)** — Read `~/shared/context/wiki/wiki-index.md`. Match on summary, tags, key_entities, action_verbs from AGENT_CONTEXT. This is the fastest path — use it before anything else.
+2. **context-catalog.md (broader)** — If the index doesn't narrow enough, check `~/shared/context/active/context-catalog.md` for cross-system references that span wiki + body + artifacts.
+3. **Frontmatter scan** — Scan frontmatter of candidate articles in `~/shared/artifacts/` for `type`, `audience`, `depends_on`.
+4. **Grep staging/ and published/ (exhaustive)** — If index + catalog miss, grep `~/shared/context/wiki/staging/` and `~/shared/artifacts/` for keyword matches. This is slow but catches articles with poor metadata.
+5. **Dependency traversal** — If an article's `depends_on` points to prerequisite knowledge the reader might need, mention it: "You may also want to read [Prerequisite](slug) first."
+6. **Body system fallback** — If the wiki doesn't have it, check body organs (`~/shared/context/body/`). But always flag this as a gap — the answer exists but hasn't been externalized to the wiki yet.
 
 ### Answer format
 
 Keep answers tight. The wiki articles have the detail — your job is to point and synthesize, not to rewrite.
+
+```markdown
+**Found:** [N] results.
+**Top match:** [Title] ([slug], relevance [score]/10, updated [date]).
+**Summary:** [1 sentence — what this article covers and why it's relevant to the question.]
+**Also relevant:** [Title 1](slug), [Title 2](slug) — [one-line reason for each].
+**Not found:** [What was searched but didn't match — feeds the gap log.]
+```
+
+When the answer requires synthesis across multiple articles:
 
 ```markdown
 ## Answer

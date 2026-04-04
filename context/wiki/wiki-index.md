@@ -13,46 +13,46 @@ Last updated: 2026-04-04
 ### Testing & Experimentation (11)
 
 - [Testing Approach & Year Ahead](~/shared/artifacts/testing/2026-03-25-testing-approach-kate.md): Kate Rundell meeting doc — 5 workstreams, testing methodology, year-ahead plan
-  - slug: testing-approach-kate | status: DRAFT | audience: amazon-internal | level: 2
+  - slug: testing-approach-kate | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
   - children: workstream-oci-bidding, workstream-modern-search, workstream-audiences-lifecycle, workstream-user-experience, workstream-algorithmic-ads
 
 - [WS1: OCI Bidding](~/shared/artifacts/testing/2026-03-25-workstream-oci-bidding.md): OCI bidding deep-dive — problem, test, result, scale
-  - slug: workstream-oci-bidding | status: DRAFT | audience: amazon-internal | level: 2
+  - slug: workstream-oci-bidding | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
   - parent: testing-approach-kate
 
 - [WS2: Modern Search](~/shared/artifacts/testing/2026-03-25-workstream-modern-search.md): Redirects, AEO — problem, test, result, scale
-  - slug: workstream-modern-search | status: DRAFT | audience: amazon-internal | level: 2
+  - slug: workstream-modern-search | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
   - parent: testing-approach-kate
 
 - [WS3: Audiences & Lifecycle](~/shared/artifacts/testing/2026-03-25-workstream-audiences-lifecycle.md): F90, engagement — problem, test, result, scale
-  - slug: workstream-audiences-lifecycle | status: DRAFT | audience: amazon-internal | level: 2
+  - slug: workstream-audiences-lifecycle | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
   - parent: testing-approach-kate
 
 - [WS4: User Experience](~/shared/artifacts/testing/2026-03-25-workstream-user-experience.md): Landing pages, Polaris — problem, test, result, scale
-  - slug: workstream-user-experience | status: DRAFT | audience: amazon-internal | level: 2
+  - slug: workstream-user-experience | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
   - parent: testing-approach-kate
 
 - [WS5: Algorithmic Ads](~/shared/artifacts/testing/2026-03-25-workstream-algorithmic-ads.md): AI Max, Shopping — problem, test, result, scale
-  - slug: workstream-algorithmic-ads | status: DRAFT | audience: amazon-internal | level: 2
+  - slug: workstream-algorithmic-ads | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
   - parent: testing-approach-kate
 
 - [AI Max Test Design — US](~/shared/artifacts/testing/2026-03-25-ai-max-test-design.md): AI Max test design for US market
-  - slug: ai-max-test-design | status: DRAFT | audience: amazon-internal | level: 2
+  - slug: ai-max-test-design | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
 
-- [OCI Rollout Methodology](~/shared/artifacts/testing/2026-03-25-oci-rollout-methodology.md): OCI rollout methodology across markets
-  - slug: oci-rollout-methodology | status: DRAFT | audience: amazon-internal | level: 2
+- [OCI Rollout Playbook](~/shared/artifacts/testing/2026-03-25-oci-rollout-playbook.md): Business case, validated results, measurement framework — the strategy doc for OCI
+  - slug: oci-rollout-playbook | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
 
 - [Ad Copy Testing Framework](~/shared/artifacts/testing/2026-03-25-ad-copy-testing-framework.md): SP study framework for ad copy testing
-  - slug: ad-copy-testing-framework | status: DRAFT | audience: amazon-internal | level: 2
+  - slug: ad-copy-testing-framework | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
 
 - [Email Overlay WW Rollout](~/shared/artifacts/testing/2026-03-25-email-overlay-ww-rollout.md): WW rollout plan for email overlay
-  - slug: email-overlay-ww-rollout | status: DRAFT | audience: amazon-internal | level: 2
+  - slug: email-overlay-ww-rollout | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
 
 - [AU NB Testing — MRO/Trades](~/shared/artifacts/testing/2026-03-25-au-nb-mro-trades-proposal.md): AU non-brand testing proposal for MRO/Trades vertical
-  - slug: au-nb-mro-trades-proposal | status: DRAFT | audience: amazon-internal | level: 2
+  - slug: au-nb-mro-trades-proposal | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
 
 - [Project Baloo — Shopping Ads for AB](~/shared/artifacts/testing/2026-04-04-project-baloo-overview.md): Overview of Shopping Ads for AB, early access status, cost framework, and test design
-  - slug: project-baloo-overview | status: DRAFT | audience: amazon-internal | level: 2
+  - slug: project-baloo-overview | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
 
 ### Strategy & Frameworks (9)
 
@@ -86,34 +86,32 @@ Last updated: 2026-04-04
 ### Paid Search Operations / Program Details (8)
 
 - [AB Paid Search Program Wiki](~/shared/artifacts/program-details/2026-03-25-ab-paid-search-wiki.md): Master program wiki for AB Paid Search
-  - slug: ab-paid-search-wiki | status: DRAFT | audience: amazon-internal | level: N/A
+  - slug: ab-paid-search-wiki | status: DRAFT | doc-type: reference | audience: amazon-internal | level: N/A
 
-- [AU Market Wiki](~/shared/artifacts/program-details/2026-03-25-au-market-wiki.md): Australia market wiki
-  - slug: au-market-wiki | status: DRAFT | audience: amazon-internal | level: N/A | tags: market-wiki, au
+- [AU Paid Search — Market Wiki](~/shared/artifacts/program-details/2026-04-04-au-market-wiki.md): Canonical AU reference — performance, initiatives, stakeholders, open questions
+  - slug: au-market-wiki | status: DRAFT | doc-type: reference | audience: amazon-internal | level: N/A | tags: market-wiki, au
+  - replaces: au-market-wiki (old), au-market-overview, au-paid-search-market-overview
 
-- [MX Market Wiki](~/shared/artifacts/program-details/2026-03-25-mx-market-wiki.md): Mexico market wiki
-  - slug: mx-market-wiki | status: DRAFT | audience: amazon-internal | level: N/A | tags: market-wiki, mx
+- [MX Paid Search — Market Wiki](~/shared/artifacts/program-details/2026-03-25-mx-market-wiki.md): Canonical MX reference — includes Lorena onboarding context (formerly separate handoff guide)
+  - slug: mx-market-wiki | status: DRAFT | doc-type: reference | audience: amazon-internal | level: N/A | tags: market-wiki, mx
+  - replaces: mx-market-wiki (old), mx-ps-handoff-guide
 
-- [AU Paid Search — Market Overview](~/shared/artifacts/program-details/2026-04-03-au-paid-search-market-overview.md): Current-state reference doc — performance, initiatives, stakeholders, open questions
-  - slug: au-paid-search-market-overview | status: DRAFT | audience: amazon-internal | level: N/A | tags: market-wiki, au, market-overview
+- [OCI Execution Guide](~/shared/artifacts/program-details/2026-04-04-oci-execution-guide.md): Step-by-step OCI implementation — prerequisites, E2E launch, scaling, troubleshooting
+  - slug: oci-execution-guide | status: DRAFT | doc-type: execution | audience: amazon-internal | level: N/A
+  - replaces: oci-implementation-guide, oci-methodology-knowledge-share
 
-- [OCI Implementation Guide](~/shared/artifacts/program-details/2026-03-25-oci-implementation-guide.md): Per-market OCI implementation guide
-  - slug: oci-implementation-guide | status: DRAFT | audience: amazon-internal | level: N/A
-
-- [WW Testing Tracker](~/shared/artifacts/program-details/2026-03-25-ww-testing-tracker.md): All active and planned tests across markets
-  - slug: ww-testing-tracker | status: DRAFT | audience: amazon-internal | level: 2
-
-- [Promo Events Calendar](~/shared/artifacts/program-details/2026-03-25-promo-events-calendar.md): Promotional events calendar
-  - slug: promo-events-calendar | status: DRAFT | audience: amazon-internal | level: N/A
-
-- [AU Paid Search — Market Overview](~/shared/artifacts/program-details/2026-04-03-au-market-overview.md): Strategic market overview — current state, performance, initiatives, stakeholders, open questions
-  - slug: au-market-overview | status: DRAFT | audience: amazon-internal | level: N/A | tags: market-wiki, au
+- [WW Testing Tracker](~/shared/artifacts/program-details/2026-03-25-ww-testing-tracker.md): All active, planned, and completed tests across markets with portfolio health narrative
+  - slug: ww-testing-tracker | status: DRAFT | doc-type: reference | audience: amazon-internal | level: 2
 
 - [Team Capacity & Workload Distribution](~/shared/artifacts/program-details/2026-04-04-team-workload-distribution.md): Who is doing what across 10 markets — coverage gaps, overload risks, delegation opportunities
-  - slug: team-workload-distribution | status: DRAFT | audience: amazon-internal | level: N/A | tags: team, capacity, brandon
+  - slug: team-workload-distribution | status: DRAFT | doc-type: reference | audience: amazon-internal | level: N/A | tags: team, capacity, brandon
 
 - [Polaris WW Rollout — Status & Decision Log](~/shared/artifacts/program-details/2026-04-04-polaris-rollout-status.md): Single source of truth for Polaris Brand LP rollout across all markets
-  - slug: polaris-rollout-status | status: DRAFT | audience: amazon-internal | level: 2 | tags: polaris, rollout, ww
+  - slug: polaris-rollout-status | status: DRAFT | doc-type: reference | audience: amazon-internal | level: 2 | tags: polaris, rollout, ww
+  - replaces: polaris-rollout-timeline
+
+- [Market Reference](~/shared/artifacts/program-details/2026-03-25-market-reference.md): All 10 markets in one read — performance, OCI status, contacts, competitors
+  - slug: market-reference | status: DRAFT | doc-type: reference | audience: amazon-internal | level: 2
 
 ### Reporting (3)
 
@@ -134,16 +132,12 @@ Last updated: 2026-04-04
 - [Budget Forecast Helper Spec](~/shared/artifacts/tools/2026-03-25-budget-forecast-helper-spec.md): Tool spec for budget forecast helper
   - slug: budget-forecast-helper-spec | status: DRAFT | audience: amazon-internal | level: 3
 
-### Communication (3)
+### Communication (1)
 
-- [Polaris Brand LP Rollout Timeline](~/shared/artifacts/communication/2026-03-25-polaris-rollout-timeline.md): Polaris brand LP rollout timeline across markets
-  - slug: polaris-rollout-timeline | status: DRAFT | audience: amazon-internal | level: 1
+- [Stakeholder Communication Guide](~/shared/artifacts/communication/2026-03-25-stakeholder-comms-guide.md): How to talk to each audience — templates, tiers, proactive triggers
+  - slug: stakeholder-comms-guide | status: DRAFT | doc-type: execution | audience: personal | level: 1
 
-- [MX PS Handoff Guide](~/shared/artifacts/communication/2026-03-25-mx-ps-handoff-guide.md): Carlos → Lorena handoff guide for MX PS
-  - slug: mx-ps-handoff-guide | status: DRAFT | audience: amazon-internal | level: 1
-
-- [OCI Methodology — Knowledge Share](~/shared/artifacts/communication/2026-03-25-oci-methodology-knowledge-share.md): OCI methodology knowledge sharing doc
-  - slug: oci-methodology-knowledge-share | status: DRAFT | audience: amazon-internal | level: 1
+_Archived: Polaris Rollout Timeline (superseded by polaris-rollout-status), MX PS Handoff Guide (merged into mx-market-wiki), OCI Methodology Knowledge Share (merged into oci-execution-guide)_
 
 ### Best Practices (3)
 
@@ -168,16 +162,18 @@ _No system documentation articles published yet. System docs currently live in b
 |----------|-------|-----------------|
 | Testing & Experimentation | 12 | `testing/` |
 | Strategy & Frameworks | 9 | `strategy/` |
-| Program Details / PS Ops | 10 | `program-details/` |
+| Program Details / PS Ops | 8 | `program-details/` |
 | Reporting | 3 | `reporting/` |
 | Tools & Automation | 2 | `tools/` |
-| Communication | 3 | `communication/` |
+| Communication | 1 | `communication/` |
 | Best Practices | 3 | `best-practices/` |
 | System Documentation | 0 | _(none yet)_ |
-| **Total** | **42** | |
+| **Total** | **38** | |
 
-Status: 42 DRAFT | 0 REVIEW | 0 FINAL
-Audience: 36 amazon-internal | 2 personal | 0 agent-only
+Status: 38 DRAFT | 0 REVIEW | 0 FINAL
+Audience: 33 amazon-internal | 2 personal | 0 agent-only
+
+Doc-type breakdown: ~18 strategy | ~10 execution | ~10 reference
 
 ---
 
@@ -196,11 +192,14 @@ Audience: 36 amazon-internal | 2 personal | 0 agent-only
 
 ```
 testing-approach-kate (PARENT)
-  ├── workstream-oci-bidding ──────→ oci-rollout-methodology, oci-implementation-guide, oci-methodology-knowledge-share
+  ├── workstream-oci-bidding ──────→ oci-rollout-playbook (strategy), oci-execution-guide (execution)
   ├── workstream-modern-search ───→ aeo-ai-overviews-pov, email-overlay-ww-rollout
   ├── workstream-audiences ───────→ f90-lifecycle-strategy
-  ├── workstream-user-experience ─→ polaris-rollout-timeline, landing-page-testing-playbook, au-market-wiki
-  └── workstream-algorithmic-ads ─→ ai-max-test-design
+  ├── workstream-user-experience ─→ polaris-rollout-status, landing-page-testing-playbook, au-market-wiki
+  └── workstream-algorithmic-ads ─→ ai-max-test-design, project-baloo-overview
+
+oci-rollout-playbook (STRATEGY) ←→ oci-execution-guide (EXECUTION)
+  └── oci-business-case (LEADERSHIP SUMMARY)
 
 agentic-ps-vision (STANDALONE)
   └── body-system-architecture, agentic-marketing-landscape
@@ -210,6 +209,9 @@ cross-market-playbook (STANDALONE)
 
 ww-testing-tracker (STANDALONE)
   └── references all testing/ docs
+
+q2-initiative-status (STANDALONE)
+  └── references all active initiatives
 ```
 
 ## Distribution Model
@@ -242,16 +244,21 @@ Until the target site is configured, all articles remain local. No auto-publish,
 
 | Date | Article | Change |
 |------|---------|--------|
+| 2026-04-04 | (wiki-wide) | Introduced doc-type system (strategy/execution/reference). Consolidated 3 OCI docs into 2 (Playbook + Execution Guide). Merged AU Market Wiki + AU Market Overview into one canonical doc. Merged MX Handoff Guide into MX Market Wiki. Archived Polaris Timeline (superseded by Polaris Rollout Status). Added narrative to WW Testing Tracker. Total: 42 → 38 articles (4 archived via consolidation). |
+| 2026-04-04 | oci-execution-guide | New article — merged OCI Implementation Guide + OCI Methodology Knowledge Share |
+| 2026-04-04 | au-market-wiki | Rewritten — merged AU Market Wiki + AU Market Overview into one canonical doc |
+| 2026-04-04 | mx-market-wiki | Updated — merged MX PS Handoff Guide content into market wiki |
+| 2026-04-04 | ww-testing-tracker | Rewritten — added portfolio health narrative, blocker analysis, pipeline by workstream |
 | 2026-04-04 | q2-initiative-status | New article — Q2 initiative scorecard for Brandon's team management |
 | 2026-04-04 | oci-business-case | New article — Leadership-ready OCI impact summary for Kate/Todd |
 | 2026-04-04 | team-workload-distribution | New article — Team capacity analysis, coverage gaps, delegation opportunities |
-| 2026-04-04 | polaris-rollout-status | New article — Polaris WW rollout single source of truth |
+| 2026-04-04 | polaris-rollout-status | New article — Polaris WW rollout single source of truth (replaces polaris-rollout-timeline) |
 | 2026-04-04 | project-baloo-overview | New article — Shopping Ads for AB overview, early access, test design |
-| 2026-04-04 | f90-lifecycle-strategy | Expanded from ~500 to ~1500 words — added full program mechanics, dependencies, launch plan, risks |
-| 2026-04-04 | ad-copy-testing-framework | Expanded from ~600 to ~1500 words — added SP study detail, methodology, localization, cross-initiative connections |
-| 2026-04-04 | email-overlay-ww-rollout | Expanded from ~600 to ~1500 words — added technical architecture, measurement framework, dependencies |
-| 2026-04-04 | ai-max-test-design | Expanded from ~600 to ~1500 words — added Google automation context, guardrails detail, risk assessment |
-| 2026-04-04 | campaign-link-generator-spec | Expanded from ~500 to ~1200 words — added reftag convention detail, validation scenarios, impact estimate |
-| 2026-04-04 | budget-forecast-helper-spec | Expanded from ~400 to ~1200 words — added technical design, projection logic, validation plan |
-| 2026-04-03 | au-paid-search-market-overview | New article — AU current-state reference doc synthesized from operational data |
+| 2026-04-04 | f90-lifecycle-strategy | Expanded from ~500 to ~1500 words |
+| 2026-04-04 | ad-copy-testing-framework | Expanded from ~600 to ~1500 words |
+| 2026-04-04 | email-overlay-ww-rollout | Expanded from ~600 to ~1500 words |
+| 2026-04-04 | ai-max-test-design | Expanded from ~600 to ~1500 words |
+| 2026-04-04 | campaign-link-generator-spec | Expanded from ~500 to ~1200 words |
+| 2026-04-04 | budget-forecast-helper-spec | Expanded from ~400 to ~1200 words |
+| 2026-04-03 | au-paid-search-market-overview | New article (now archived — merged into au-market-wiki) |
 | 2026-03-25 | (all 34 artifacts) | Initial catalog — existing artifacts indexed into wiki system |

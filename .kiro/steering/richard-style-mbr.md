@@ -3,7 +3,7 @@ inclusion: manual
 ---
 # Richard Williams — MBR Write-up Style Guide
 
-## Structure (per market, per month)
+## Template (per market, per month)
 1. Monthly result: "[Market] delivered [X] registrations in [Month] ([+/-]% vs OP2) with a CPA of $[X]."
 2. YTD context: "YTD generated [X] registrations ([+/-]% vs OP2) with a CPA of $[X]."
 3. Explanation of the miss or beat — always with specific attribution
@@ -14,11 +14,16 @@ inclusion: manual
 - Still data-dense but with cleaner narrative flow.
 - Always explains OP2 misses: "The miss to OP2 is due to the reduction in spend since Aug to meet new iECCP target of 100%." Never leaves a miss unexplained.
 
-## Key Patterns
+## Data Rules
 - YTD always follows the monthly result — never just the month in isolation
 - MoM changes attributed to specific levers (investment shifts, CVR changes, seasonal demand)
 - Efficiency metrics (ie%CCP, CPA) always contextualized against targets
 - Brand vs NB breakdown when it explains the movement
+
+## Common Failures
+1. **Month without YTD.** Never report a single month in isolation. YTD immediately follows the monthly line — it shows whether the month is a blip or a trend.
+2. **Unexplained miss.** Every OP2 miss needs a specific cause: spend reduction, efficiency target change, seasonal demand shift. "We missed OP2" without attribution is incomplete.
+3. **MoM without levers.** Don't just state "registrations decreased 15% MoM." Name the lever: "NB investment decreased 10% MoM while Brand stayed flat, driving the registration decline."
 
 ## Examples (actual)
 

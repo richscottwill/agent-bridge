@@ -20,11 +20,11 @@ L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate R
 
 | # | Project | Status | Level |
 |---|---------|--------|-------|
-| 1 | Testing Approach doc for Kate | NOT STARTED — 14 workdays. Apr 16 canceled but doc still needed. | L1/L2 |
-| 2 | Polaris Brand LP WW Rollout | IN PROGRESS — weblab 4/6-7 | L2 |
-| 3 | AU CPC/Keyword Optimization | IN PROGRESS — Lena follow-up pending (3d) | L2 |
-| 4 | OCI ROW rollout | IN PROGRESS — 7/10 markets at 100%, CA 4/7 | L2 |
-| 5 | Ad copy testing | IN PROGRESS — UK +86% CTR, IT low volume | L2 |
+| 1 | Testing Approach doc for Kate | NOT STARTED — 14 workdays. Apr 16 canceled, doc still needed. | L1/L2 |
+| 2 | Polaris Brand LP WW Rollout | weblab 4/6-7 | L2 |
+| 3 | AU CPC/Keyword Optimization | Lena follow-up pending (3d) | L2 |
+| 4 | OCI ROW rollout | 7/10 at 100%, CA 4/7 | L2 |
+| 5 | Ad copy testing | UK +86% CTR, IT low volume | L2 |
 | 6 | MX Auto/Beauty pages | OVERDUE (15d) — blocked by Vijeth footer | L2 |
 
 **Key Metrics (Feb 2026):**

@@ -39,10 +39,10 @@ Example (actual — reply to Lena): "In terms of the responses you laid out belo
 - When redirecting, names the person and briefly explains why
 
 ## Common Draft Failures (from experiment data)
-These patterns consistently degrade email quality when the agent drafts without the style guide. Watch for them in every draft:
+Watch for these in every draft:
 
-1. **Generic team references instead of naming people.** Wrong: "I'll work with the team to get the data." Right: "I'll connect with Yun-Kang on redirect reporting and loop in Alexis on AU web analytics." Richard always names the specific person who owns the next action. If you don't know who, say so — don't hide behind "the team."
+1. **Name people, not teams.** Wrong: "I'll work with the team." Right: "I'll connect with Yun-Kang on redirect reporting and loop in Alexis on AU web analytics." If you don't know who, say so.
 
-2. **Vague timelines instead of specific dates.** Wrong: "within the next two weeks." Right: "by EOW" or "target Friday 4/11." Richard commits to dates, not ranges. If the date is uncertain, give the best estimate and flag the uncertainty: "targeting EOW, depends on Alexis's mapping timeline."
+2. **Commit to dates, not ranges.** Wrong: "within the next two weeks." Right: "by EOW" or "target Friday 4/11." Uncertain? Give best estimate + flag: "targeting EOW, depends on Alexis's mapping timeline."
 
-3. **Missing the political subtext.** When drafting for Tier 3 stakeholders (Lena, Nick), check memory.md for the relationship dynamic. Brandon's private read on Lena ("she needs to cool her jets") should inform the tone — measured, not scrambling — but never appear in the email. The draft should feel calm and in-control, not reactive.
+3. **Read the political subtext.** For Tier 3 stakeholders (Lena, Nick), check memory.md for relationship dynamics. Tone: measured and in-control, never reactive or scrambling. Brandon's private reads inform tone but never appear in the email.

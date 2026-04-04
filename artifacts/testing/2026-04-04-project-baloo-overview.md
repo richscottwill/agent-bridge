@@ -1,6 +1,7 @@
 ---
 title: Project Baloo - Shopping Ads for Amazon Business
 status: DRAFT
+doc-type: strategy
 audience: amazon-internal
 level: 2
 owner: Richard Williams
@@ -80,9 +81,9 @@ These questions are not yet answered. Cost guardrails must be finalized before a
 
 ---
 
-## Test Design (Proposed)
+## Test Design (Proposed — Pending Cost Guardrail Finalization)
 
-Following the OCI playbook (phased rollout with measurement):
+Following the OCI playbook (phased rollout with measurement). These parameters are proposals, not finalized — they require Google sync and cost guardrail agreement before launch.
 
 ### Phase 1: Limited Product Set (4 weeks)
 

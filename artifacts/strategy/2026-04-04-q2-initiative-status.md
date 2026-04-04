@@ -1,6 +1,7 @@
 ---
 title: Q2 2026 Initiative Status & Priorities
 status: DRAFT
+doc-type: strategy
 audience: amazon-internal
 level: 2
 owner: Richard Williams
@@ -59,23 +60,11 @@ Eight of ten markets are beating or matching OP2 on March projections. JP is the
 
 ## What's Working
 
-**OCI is the program's engine.** The phased rollout methodology is proven across 3 markets (US +24% regs/$16.7MM OPS, UK +23%, DE +18%) and is now scaling to 5 more. The EU3 dial-up (FR/IT/ES on 3/30) and JP (3/31) happened faster than projected. CA is on track for 4/7. By end of Q2, 8 of 10 markets should be on OCI.
-
-**Ad copy testing produced a step-change result.** UK's +86% CTR and +31% registrations from the SP study-driven messaging overhaul is the strongest non-OCI result in the program's history. The methodology (evidence-based copy from customer research, phased rollout, structured measurement) is ready to scale to DE/FR/ES/US where translations are already complete.
-
-**Eight of ten markets are at or above OP2.** The portfolio is healthy. MX is the standout growth market (+32% vs OP2). US continues to benefit from OCI (+16% vs OP2). CA's LP optimization is producing outsized results (Bulk CVR +187%).
-
----
+OCI is the headline: 7/10 markets at 100%, $16.7MM OPS from US alone. Ad copy testing produced the quarter's strongest non-OCI result (+86% CTR in UK). Eight of ten markets are beating or matching OP2 on March projections.
 
 ## What Needs Attention
 
-**The Testing Approach doc has not started.** This is the single most important artifact for Q2. It is the Level 1 gate (consistent strategic output), the Level 2 evidence (testing methodology), and the vehicle for Kate visibility. Brandon canceled the April 16 Kate meeting to review the doc first, which bought time but did not remove the obligation. 14 workdays at zero progress is a pattern, not a delay.
-
-**AI Max test design is overdue.** Was due 3/28, now 6 days late. The test design itself is straightforward (follows OCI methodology), but it requires a Google sync with Mike Babich to resolve open questions about negative keyword handling and OCI interaction. This needs to be scheduled and completed in the first two weeks of Q2.
-
-**Email overlay is stuck on a single dependency.** Nine markets are blocked by Vijay's tech scoping. This has been overdue since 3/27. If it is not resolved by mid-April, escalation through Brandon to Vijay's management chain is warranted. The initiative improves both CPA and customer experience — it should not be blocked by one person's bandwidth.
-
-**JP is underperforming.** -14% vs OP2 on March projections, driven by the MHLW campaign ending (1/31) and intensifying Yahoo competition. OCI just went live (3/31), which should help, but the structural MHLW gap will persist. York Chen is back from paternity leave (3/22) and owns the recovery plan.
+The Testing Approach doc has not started (14 workdays at zero). AI Max test design is 6 days overdue. Email overlay has 9 markets blocked by one dependency (Vijay). JP is -14% vs OP2 with a structural MHLW gap. Each has a defined path forward — the risk is not complexity, it's execution discipline.
 
 ---
 

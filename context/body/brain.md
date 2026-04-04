@@ -4,7 +4,7 @@
 
 *Operating principle: Subtraction before addition. When a new decision principle is proposed, check if it's already covered by an existing one. When prioritizing, eliminate before optimizing. The leverage framework exists to say no to good work so Richard can say yes to essential work.*
 
-Last updated: 2026-04-01 (loop run 15)
+Last updated: 2026-04-04 (Karpathy Run 25 — Five Levels compressed to 2 lines each, Leverage Assessment compressed to rule:example format)
 
 ---
 
@@ -83,37 +83,24 @@ D10: Legal SIMs for 3+ purchases targeting. Extends PS beyond registration. Rein
 Sequential. Each funds the next. Don't skip ahead.
 
 ### Level 1: Sharpen Yourself
-- Build consistent strategic output habits (weekly artifacts, not sporadic)
-- Close the gap between strategic thinking and shipped work
-- Systems already in place: Trainer, autoresearch loop (organs + output quality), context cascade
-- Key metric: consecutive weeks with a strategic artifact shipped
+Build consistent strategic output habits. Systems in place: Trainer, autoresearch loop, context cascade.
+Key metric: consecutive weeks with a strategic artifact shipped.
 
 ### Level 2: Drive & Communicate Worldwide Testing
-- Scalable tests that affect all PS accounts globally
-- Examples: OCI rollout, WW redirects, email overlay, Project Baloo, any legitimately automated initiative
-- Learn how to drive end-to-end: hypothesis → design → execution → communication → results
-- Proactive communication to the team is critical
-- Key metric: every active WW test has a written status that the team can reference without asking Richard
+Scalable tests across all PS accounts globally. Drive end-to-end: hypothesis → design → execution → communication → results.
+Key metric: every active WW test has a written status the team can reference without asking Richard.
 
 ### Level 3: Give Your Team Leverage Through Automation
-- Build tools a non-tech team can actually adopt (Q Developer, internal Amazon tooling)
-- Priority candidates: campaign link generator, WBR auto-briefing, budget forecast helper, invoice routing
-- Richard is the bridge — most willing to go outside the non-tech comfort zone
-- Key metric: at least one tool adopted by a teammate
+Build tools a non-tech team can actually adopt. Richard is the bridge — most willing to go outside the non-tech comfort zone.
+Key metric: at least one tool adopted by a teammate.
 
 ### Level 4: Own the Zero-Click Future
-- Paid search is evolving — zero-click, AI Overviews, Answer Engine Optimization
-- AEO POV fits here as a foundational artifact
-- Sequence after Levels 1-3 so credibility and bandwidth exist to drive it
-- Key metric: published POV or framework that shapes team strategy
+AEO POV as foundational artifact. Sequence after Levels 1-3 so credibility and bandwidth exist.
+Key metric: published POV or framework that shapes team strategy.
 
 ### Level 5: Full Agentic Orchestration of PS Work
-- End state: agent swarm runs paid search operations autonomously
-- Current state: agent assists Richard (AM hooks, EOD hooks, trainer, context cascade)
-- Gap: "agent assists" → "agent operates" is an architecture shift, not an incremental step
-- Key metric: a PS workflow that runs end-to-end without human intervention
-
-**Guiding Principle:** Each level funds the next. Consistency at Level 1 earns the right to drive at Level 2. Driving WW tests at Level 2 builds the operational credibility for Level 3. Adoption at Level 3 earns credibility for Level 4. Level 4 vision justifies the investment in Level 5.
+End state: agent swarm runs PS operations autonomously. Gap: "agent assists" → "agent operates" is an architecture shift.
+Key metric: a PS workflow that runs end-to-end without human intervention.
 
 ### Level Graduation Criteria
 
@@ -143,8 +130,8 @@ Structure: 5 workstreams (OCI Bidding, Modern Search, Audiences, User Experience
 ## Leverage Assessment Framework
 
 When multiple tasks compete for a spot, apply these tiebreakers:
-- **Strategic artifacts > tactical execution** — a test design doc beats a sitelink update
-- **Compounding work > one-and-done work** — a playbook beats a single campaign build
-- **Visibility work > invisible work** — Kingpin updates, Kate-facing docs, and team frameworks beat internal cleanup
-- **Automation opportunities > manual repetition** — if a task keeps recurring, flag it as a tool candidate and deprioritize the manual version
-- **30-day test:** "Will this matter in 30 days?" If no, it's a quick win at best — don't let it take a Core or Engine Room slot over something that compounds.
+- **Strategic artifacts > tactical execution:** a test design doc beats a sitelink update.
+- **Compounding work > one-and-done work:** a playbook beats a single campaign build.
+- **Visibility work > invisible work:** a Kingpin update beats internal cleanup.
+- **Automation opportunities > manual repetition:** if a task keeps recurring, flag it as a tool candidate.
+- **30-day test:** "Will this matter in 30 days?" If no, don't let it take a Core slot over something that compounds.

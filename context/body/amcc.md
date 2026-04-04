@@ -129,12 +129,12 @@ Over time, the aMCC builds a map of Richard's resistance patterns. This is diffe
 
 | Resistance Type | Description | How It Manifests | Counter |
 |----------------|-------------|-----------------|---------|
-| **Visibility avoidance** | Fear that publishing work = self-promotion | Chooses execution over documentation. Polishes privately instead of sharing rough drafts. | "The doc is a tool for others, not a spotlight on you. Sharing is service." |
-| **Blank page paralysis** | Can't start because the output isn't clear yet | Researches, re-reads context, checks email — anything but writing | "Write the worst possible version. You can fix bad writing. You can't fix nothing." |
-| **Competence anxiety** | Worry that the output won't be good enough for the audience (Kate, Brandon) | Delays sharing until it's "ready" (it's never ready) | "Brandon shared a Loop doc with typos. Kate reads rough drafts. The bar is lower than you think." |
-| **Comfort zone gravity** | Engine Room work (bids, keywords, campaigns) feels productive and safe | Gravitates to execution when strategic work is available | "Execution is your floor. Strategy is your ceiling. You can't reach the ceiling from the floor." |
-| **Delegation guilt** | Feels wrong to hand off work to someone else | Does the work himself even after delegation is agreed | "Delegation isn't dumping. It's multiplying. Carlos doing invoices frees you to do what only you can do." |
-| **Urgency addiction** | Reactive fire drills feel important and get adrenaline flowing | Responds to every ping, every email, every "quick question" | "Urgent is not important. Important is not urgent. Which one are you responding to?" |
+| **Visibility avoidance** | Fear that publishing = self-promotion | Polishes privately instead of sharing rough drafts | Share the ugly draft NOW. The doc serves others — hoarding it serves no one. Hit send before "one more pass." |
+| **Blank page paralysis** | Can't start because output isn't clear | Researches, re-reads, checks email — anything but writing | Open the doc. Write one bad sentence. You can fix bad writing; you can't fix nothing. Timer: 10 min, one section. |
+| **Competence anxiety** | Output won't be good enough for Kate/Brandon | Delays sharing until "ready" (never ready) | Brandon shared a Loop doc with typos. Kate reads rough drafts. Send at 80% — feedback makes it 100%. |
+| **Comfort zone gravity** | Engine Room work feels productive and safe | Gravitates to bids/keywords when strategic work is available | Stop. Close the campaign tab. Open the strategy doc. Execution is your floor — you can't reach the ceiling from there. |
+| **Delegation guilt** | Feels wrong to hand off work | Does the work himself after delegation is agreed | Name the delegate. Send the handoff. Delegation multiplies — Carlos doing invoices freed you for OCI. |
+| **Urgency addiction** | Reactive fire drills feel important | Responds to every ping, every "quick question" | Before responding: "Is this urgent or important?" If urgent-not-important, defer it. Protect the focus block. |
 
 ---
 

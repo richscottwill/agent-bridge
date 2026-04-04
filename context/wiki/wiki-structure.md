@@ -141,6 +141,49 @@ When an article passes the wiki-critic review and is approved for publishing:
 
 The `published/` directory is **deprecated**. Published articles go to `~/shared/artifacts/{category}/`, not to `published/`. This directory exists as an empty placeholder and should not be used. All publishing workflows target the artifacts folder.
 
+## Document Types (Strategy vs. Execution)
+
+Every article has a `doc-type` field that determines its audience and purpose:
+
+| doc-type | Audience | Purpose | Tone | Example |
+|----------|----------|---------|------|---------|
+| `strategy` | Leadership (L7+), cross-team stakeholders | Why we do this, what the results mean, how it connects to the business. Opens with impact, embeds data in narrative, ends with "so what." | Narrative-driven, Amazon writing norms | OCI Rollout Playbook, Competitive Landscape, ie%CCP Framework |
+| `execution` | Teammates, market owners, new hires | How to actually do the thing. Step-by-step, checklists, troubleshooting, templates. A person should be able to follow this doc without asking the author. | Direct, procedural, show-don't-tell | OCI Execution Guide, Campaign Structure Standards, Invoice Process Guide |
+| `reference` | Anyone (both audiences) | Canonical data source. Tables, trackers, contact lists. Updated on cadence, not written once. | Clean tables, minimal narrative, "last updated" prominent | Market Reference, WW Testing Tracker, Team Workload Distribution |
+
+### How to choose doc-type
+
+Ask: "Who reads this, and what do they do after reading it?"
+
+- If they **make a decision** (fund it, approve it, prioritize it) → `strategy`
+- If they **do a task** (build a campaign, submit an invoice, run a test) → `execution`
+- If they **look something up** (a market's CPA, a competitor's IS, a contact) → `reference`
+
+### Frontmatter addition
+
+Add `doc-type: strategy | execution | reference` to every artifact's frontmatter. Example:
+
+```yaml
+---
+title: OCI Rollout Playbook
+status: DRAFT
+doc-type: strategy
+audience: amazon-internal
+level: 2
+---
+```
+
+### When a topic needs both
+
+Some topics need both a strategy doc and an execution doc. The rule: **one topic, two docs, clear cross-references.** The strategy doc links to the execution doc ("for step-by-step implementation, see [Execution Guide]") and vice versa ("for the business case and results, see [Playbook]").
+
+Current examples:
+- OCI: Playbook (strategy) + Execution Guide (execution)
+- Ad Copy: Testing Framework (strategy) + Campaign Structure Standards has the execution rules
+- Polaris: Rollout Status (reference) + Landing Page Testing Playbook (execution)
+
+---
+
 ## Taxonomy (controlled vocabulary for tags)
 
 ### Domain tags

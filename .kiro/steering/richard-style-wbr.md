@@ -34,3 +34,12 @@ MX Week 10: "MX drove 300 registrations (+13% WoW), with +4% spend WoW, and 97% 
 JP Week 40: "JP: 1,180 registrations (+40% WoW, +183% YoY) and $20 CPA (-19% WoW, -35% YoY) Registrations continued to increase after the holiday in Week 38. Last week I worked a lot to make the phrase match campaigns more efficient by adding negatives, pausing redundant keywords, refining ad text, and adjusting budgets/bids, but this increase seems to be more because of our core terms being eligible for more traffic."
 
 AU Week 7: "WoW we didn't change budgets, but saw an improvement on both Brand and NB. On the Brand side, the 41% increase in registrations was due to our exact match Brand terms increasing in impressions by 40%... On the NB side, the bid strategies seem to be managing the campaigns more efficiently; increasing registrations by 15%, while reducing spend by 10%."
+
+## Common Callout Failures
+Watch for these in every callout draft:
+
+1. **Vague attribution.** Wrong: "performance improved." Right: "Brand registrations increased +19% due to exact match impressions +40%." Every movement needs a specific cause — bid strategy, CVR shift, seasonal event, budget change.
+
+2. **Missing YoY context.** Always include YoY comparison when available. WoW alone doesn't show whether the trend is structural or seasonal. Format: "YoY we spent [X]% with [+/-]% registrations."
+
+3. **ie%CCP without target comparison.** Never report ie%CCP in isolation. Always contextualize vs. target: "97% ie%CCP (vs. 100% target)" or "brought ie%CCP below the 100% target, averaging 97%."

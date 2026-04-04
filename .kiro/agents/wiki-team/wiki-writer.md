@@ -303,13 +303,13 @@ Follow this template. The expansion adds depth, evidence, recommendations, and a
 <strong>DOCUMENT TITLE</strong>
 
 <strong>Executive Summary</strong>
-Three to five sentences. The entire document distilled. An L8 director reading only this paragraph gets 80% of the value.
+Three to five sentences. The entire document distilled. An L8 director reading only this paragraph gets 80% of the value. Minimum: 3 sentences covering the finding, the recommendation, and the expected impact.
 
 <strong>Context</strong>
-Why this document exists. What changed. How it connects to the Five Levels or current priorities. Link to related Asana tasks or body system organs via <a href="url">references</a>.
+Why this document exists. What changed. How it connects to the Five Levels or current priorities. Link to related Asana tasks or body system organs via <a href="url">references</a>. Minimum: 2-3 paragraphs — the problem, the trigger, and the strategic connection.
 
 <strong>Section One: [Analysis/Finding/Recommendation]</strong>
-Detailed content. Lead with the insight, then the evidence. Every table gets a "so what" interpretation immediately after.
+Detailed content. Lead with the insight, then the evidence. Every table gets a "so what" interpretation immediately after. Minimum: 3 paragraphs with at least one list of supporting data points.
 
 <ul>
 <li><strong>Sub-point:</strong> Detail with supporting data</li>
@@ -317,10 +317,10 @@ Detailed content. Lead with the insight, then the evidence. Every table gets a "
 </ul>
 
 <strong>Section Two: [Analysis/Finding/Recommendation]</strong>
-Continue with depth. Use <em>emphasis</em> for confidence levels: <em>HIGH confidence</em> when volume and duration support conclusions, <em>LOW confidence</em> when they don't.
+Continue with depth. Use <em>emphasis</em> for confidence levels: <em>HIGH confidence</em> when volume and duration support conclusions, <em>LOW confidence</em> when they don't. Minimum: 3 paragraphs with at least one list.
 
 <strong>Section Three: [Analysis/Finding/Recommendation]</strong>
-Additional depth. Credit cross-functional partners by name or team.
+Additional depth. Credit cross-functional partners by name or team. Minimum: 3 paragraphs with at least one list.
 
 <strong>Section Four: [Data/Evidence]</strong>
 Supporting data organized in lists. Connect every metric to business impact.
@@ -332,6 +332,7 @@ Supporting data organized in lists. Connect every metric to business impact.
 </ol>
 
 <strong>Recommendations</strong>
+Minimum 3 items. Each must include what to do, why, and expected impact.
 <ul>
 <li><strong>Recommendation 1:</strong> What to do, why, expected impact</li>
 <li><strong>Recommendation 2:</strong> What to do, why, expected impact</li>
@@ -339,6 +340,7 @@ Supporting data organized in lists. Connect every metric to business impact.
 </ul>
 
 <strong>Next Steps</strong>
+Minimum 3 items. Each must include owner, date, and success criteria.
 <ol>
 <li>Action — owner — date — success criteria</li>
 <li>Action — owner — date — success criteria</li>

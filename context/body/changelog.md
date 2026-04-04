@@ -1,5 +1,59 @@
 # Changelog — Body System
 
+## Run 25 (2026-04-04, Mega Batch 2 — Karpathy, 4 output-quality wiki agents + 4 info-retrieval organs + 2 output-quality wiki pipeline depth)
+
+[wiki-librarian:Publishing workflow] REWORD (output_quality) → 1296w→1478w. A=0.86 B=0.78 Δ=+0.08. 50s. KEEP. Imperative verbs, explicit file paths, STOP conditions for validation failures.
+[wiki-librarian:Common Publishing Failures] ADD (output_quality) → 1296w→1478w. A=0.86 B=0.79 Δ=+0.07. 45s. KEEP. 3 failure patterns: missing index update, missing frontmatter, broken cross-refs.
+[wiki-concierge:Search strategy] REWORD (output_quality) → 963w→1073w. A=0.86 B=0.79 Δ=+0.07. 45s. KEEP. O(1) wiki-index lookup first, context-catalog second, grep exhaustive fallback.
+[wiki-concierge:Response Template] ADD (output_quality) → 963w→1073w. A=0.86 B=0.79 Δ=+0.07. 40s. KEEP. Structured Found/Top match/Summary/Also relevant/Not found template.
+[brain:Five Levels] REWORD (info_retrieval) → 1431w→1243w. A=1.0 B=1.0 Δ=0.0. 35s. KEEP. Each level compressed to 2 lines. Guiding Principle paragraph removed. All key metrics preserved.
+[brain:Leverage Assessment] COMPRESS (info_retrieval) → 1431w→1243w. A=1.0 B=1.0 Δ=0.0. 30s. KEEP. Each tiebreaker→rule: one-line example format.
+[heart:Hyperparameters] COMPRESS (info_retrieval) → 3621w→3478w. A=1.0 B=1.0 Δ=0.0. 30s. KEEP. Removed Rationale column. Param|Value only.
+[body:Task Routing] REWORD (info_retrieval) → 1028w→1005w. A=1.0 B=1.0 Δ=0.0. 30s. KEEP. Organ names→file paths. More actionable for agents.
+[wiki-writer:ABPS Expansion template] REWORD (output_quality) → 2702w→2778w. A=0.87 B=0.81 Δ=+0.06. 50s. KEEP. Minimum depth guidance per section added.
+[wiki-critic:ABPS Asana scoring] REWORD (output_quality) → 2397w→2539w. A=0.86 B=0.79 Δ=+0.07. 50s. KEEP. Inlined 10/7/4/1 scoring anchors directly in ABPS section.
+
+Running tallies:
+[wiki-librarian×REWORD: 1 kept / 1 total]
+[wiki-librarian×ADD: 1 kept / 1 total]
+[wiki-concierge×REWORD: 1 kept / 1 total]
+[wiki-concierge×ADD: 1 kept / 1 total]
+[brain×REWORD: 4 kept / 4 total]
+[brain×COMPRESS: 2 kept / 2 total]
+[heart×COMPRESS: 1 kept / 1 total]
+[body×REWORD: 1 kept / 1 total]
+[wiki-writer×REWORD: 2 kept / 2 total]
+[wiki-critic×REWORD: 2 kept / 2 total]
+
+Key findings: 10/10 KEEP — second consecutive perfect batch. Info-retrieval experiments all Δ=0.0 (accuracy preserved, brain compressed 188w with zero loss). Output-quality experiments averaged Δ=+0.07 across 6 wiki agent experiments. First experiments on wiki-librarian, wiki-concierge, heart, and body — all KEEP. Common Publishing Failures pattern (from email/WBR/MBR) successfully replicated to wiki-librarian. wiki-concierge Response Template (+0.07) and wiki-librarian Publishing Protocol (+0.08) were highest deltas. Brain Five Levels REWORD saved 188w while preserving all key metrics — strong signal for continued compression. Heart Hyperparameters COMPRESS saved 143w by removing redundant Rationale column.
+
+## Run 24 (2026-04-04, Mega Batch 1 — Karpathy, 5 info-retrieval + 5 output-quality)
+
+[amcc:Resistance Taxonomy] REWORD (info_retrieval) → 2100w→2090w. A=1.0 B=1.0 Δ=0.0. 40s. KEEP. Counters reworded to imperative verbs with specific triggers. Quotes→commands.
+[nervous-system:Loop 1 Decision Audit] COMPRESS (info_retrieval) → 975w→928w. A=1.0 B=1.0 Δ=0.0. 35s. KEEP. 5-row PENDING table→single summary line with all triggers.
+[gut:Compression Techniques table] REWORD (info_retrieval) → 2136w→2113w. A=1.0 B=1.0 Δ=0.0. 35s. KEEP. Each technique→imperative sentence. "Archive DONE items", "Enforce one fact".
+[memory:Active Projects table] COMPRESS (info_retrieval) → 1752w→1738w. A=1.0 B=1.0 C=1.0 Δ=0.0. 45s. KEEP. Removed "IN PROGRESS —" prefix from 4 rows. Identity fields preserved (Brandon she/her ✅).
+[device:Delegation Protocols] REWORD (info_retrieval) → 1228w→1242w. A=1.0 B=1.0 Δ=0.0. 35s. KEEP. Notes→actionable: deadlines, decisions, specific next steps.
+[richard-style-email:Common Draft Failures] REWORD (output_quality) → 623w→552w. A=0.87 B=0.81 Δ=+0.06. 55s. KEEP. 3 verbose patterns→1-line rule + 1-line example each. Section halved.
+[richard-style-slack:Relationship Dynamics] COMPRESS (output_quality) → 1082w→1070w. A=0.85 B=0.82 Δ=+0.03. 50s. KEEP. 6 prose sections→table with Person|Register|Key Pattern|Don't Do columns.
+[richard-style-wbr:Common Callout Failures] ADD (output_quality) → 464w→564w. A=0.87 B=0.82 Δ=+0.05. 55s. KEEP. Added 3 failure patterns: vague attribution, missing YoY, ie%CCP without target.
+[richard-style-mbr:entire file] RESTRUCTURE (output_quality) → 380w→464w. A=0.86 B=0.80 Δ=+0.06. 50s. KEEP. Structure→Voice→Key Patterns→Examples → Template→Voice→Data Rules→Common Failures→Examples.
+[richard-writing-style:Voice Evolution] REWORD (output_quality) → 603w→670w. A=0.86 B=0.81 Δ=+0.05. 50s. KEEP. Trainer-facing questions→agent-actionable 5-point checklist.
+
+Running tallies:
+[amcc×REWORD: 2 kept / 2 total]
+[nervous-system×COMPRESS: 2 kept / 2 total]
+[gut×REWORD: 2 kept / 2 total]
+[memory×COMPRESS: 1 kept / 2 total]
+[device×REWORD: 2 kept / 2 total]
+[richard-style-email×REWORD: 1 kept / 1 total]
+[richard-style-slack×COMPRESS: 1 kept / 1 total]
+[richard-style-wbr×ADD: 1 kept / 1 total]
+[richard-style-mbr×RESTRUCTURE: 1 kept / 1 total]
+[richard-writing-style×REWORD: 1 kept / 1 total]
+
+Key findings: 10/10 KEEP — perfect batch. Info-retrieval experiments all Δ=0.0 (accuracy preserved, actionability improved). Output-quality experiments averaged Δ=+0.05 across 5 style guides. Common Failures pattern (from email) successfully replicated to WBR and MBR — proven portable structure. MBR RESTRUCTURE (+0.06) and email REWORD (+0.06) tied for highest delta. First experiments on richard-style-slack, richard-style-wbr, richard-style-mbr, and richard-writing-style — all KEEP, strong signal for continued exploration.
+
 ## Run 23 (2026-04-04, Saturday batch 5 — Karpathy, wiki-editor + style guides output-quality)
 
 [wiki-editor:Work_Product type table] MERGE (output_quality) → 2175w→2148w. A=0.78 B=0.84 Δ=-0.06. 45s. REVERT. Guide/playbook merge lost branching-logic distinction. Cross-validates Run 21 exp 4 — guide/playbook split validated across both agents.

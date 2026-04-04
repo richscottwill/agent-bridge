@@ -115,12 +115,12 @@ Budgets are LEARNED CONSTRAINTS, not static numbers. The gut tracks the size-acc
 
 | # | Technique | Rule |
 |---|-----------|------|
-| 1 | Resolve completed items | Hands: DONE 7d → summary line, 14d → archive. Brain: VALIDATED decisions → one-liner. Device: 30d+ delegations → one line. Eyes: scored QA → archive. |
-| 2 | Deduplicate across organs | One fact, one organ. Canonical homes: people → Memory, metrics → Eyes, tasks → Hands. Others get pointers. |
-| 3 | Compress resolved patterns | NS RESOLVED → remove from rw-tracker, one-liner in NS archive, remove trainer callouts. |
-| 4 | Age-based decay | 90d no references in 30d → flag. Non-recurring meetings → archive. Competitors 60d silent → one-liner. Contacts 90d → Dormant (don't delete). |
-| 5 | Structural compression | Paragraphs → tables. Repeated patterns → templates. Full explanations → organ cross-refs. |
-| 6 | Protocol compression | Internalized procedures → 1-2 line summaries. Keep data tables. Test: can agent still execute? |
+| 1 | Resolve completed items | Archive DONE items: Hands 7d→summary, 14d→archive. Brain VALIDATED→one-liner. Device 30d+→one line. Eyes scored QA→archive. |
+| 2 | Deduplicate across organs | Enforce one fact, one organ. Canonical homes: people→Memory, metrics→Eyes, tasks→Hands. Others get pointers. |
+| 3 | Compress resolved patterns | Remove NS RESOLVED from rw-tracker, compress to one-liner in NS archive, strip trainer callouts. |
+| 4 | Age-based decay | Flag 90d-no-reference items. Archive non-recurring meetings. Compress 60d-silent competitors to one-liner. Move 90d contacts to Dormant (don't delete). |
+| 5 | Structural compression | Convert paragraphs→tables, repeated patterns→templates, full explanations→organ cross-refs. |
+| 6 | Protocol compression | Reduce internalized procedures to 1-2 line summaries. Preserve data tables. Validate: can agent still execute? |
 | 7 | Identity field protection | **Non-compressible.** Pronouns, preferred names, nicknames, gender identity. 100% accuracy — REVERT on any loss. See §7 details below. |
 
 **7. Identity field protection** (added Run 15, from intake request — Karpathy approved)

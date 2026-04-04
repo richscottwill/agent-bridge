@@ -124,15 +124,22 @@ Stacey owns the largest market (US) but has the most mature infrastructure (OCI 
 
 ## Delegation Opportunities
 
-| Task | Current Owner | Potential Delegate | Effort Saved | Blocker |
-|------|-------------|-------------------|-------------|---------|
-| Invoice/PO processing | Richard | Lorena (MX) or finance | 2-3 hrs/wk | Need to decide MX invoice owner |
-| WBR callout drafting | Dwayne/Richard | Dashboard ingester (automated) | 2-3 hrs/wk | Ingester built, adoption in progress |
-| R&O budget input | Richard | Budget forecast helper (tool) | 30-60 min/cycle | Blocked on OP2 plan numbers |
-| AU weekly CPA report | Richard | Automated dashboard | 1-2 hrs/wk | Dashboard not yet built |
-| Campaign link generation | Richard | Campaign link generator (tool) | 30-60 min/promo | Tool not yet built |
+### Actionable Now (no tools needed)
 
-The delegation opportunities total 6-9 hours per week if all tools and handoffs are completed. That is the difference between zero strategic output and 1-2 days per week for the Testing Approach doc and other Level 1 artifacts.
+| Task | Current Owner | Delegate To | Effort Saved |
+|------|-------------|-------------|-------------|
+| MX invoice/PO processing | Richard (unowned since Carlos left) | Lorena (MX) or Richard decides | ~2-3 hrs/wk |
+| WBR callout drafting | Dwayne/Richard | Dashboard ingester (already built, adoption in progress) | ~2-3 hrs/wk |
+
+### Requires Building (tools not yet built)
+
+| Task | Current Owner | Tool Needed | Effort Saved | Blocker |
+|------|-------------|-------------|-------------|---------|
+| R&O budget input | Richard | Budget forecast helper | ~30-60 min/cycle | OP2 plan numbers from finance |
+| AU weekly CPA report | Richard | Automated dashboard | ~1-2 hrs/wk | Dashboard not yet built |
+| Campaign link generation | Richard | Campaign link generator | ~30-60 min/promo | Tool not yet built |
+
+The actionable-now opportunities total ~4-6 hours per week. The tool-dependent opportunities add another ~2-3 hours but require building first.
 
 ---
 

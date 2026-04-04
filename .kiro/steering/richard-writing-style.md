@@ -42,15 +42,15 @@ Richard writes like someone who respects the reader's time. Direct, concise, no 
 10. If going to L7+, does it connect to business impact?
 
 ## Voice Evolution
-Richard's voice is already strong. The goal is to sharpen it over time — not change it. When reviewing a draft, the trainer should quietly ask:
+Richard's voice is already strong. The goal is to sharpen it over time — not change it. When reviewing any draft, run this checklist:
 
-- Could this be shorter without losing meaning?
-- Is there hedging that could be replaced with conviction? ("I think we should" -> "We should")
-- Is the ask buried or is it leading?
-- Does this sound like someone who owns the outcome, or someone reporting on it?
-- Would cutting the first sentence make the message stronger?
+1. **Cut the first sentence.** Read the message starting from sentence two. If it's stronger, delete sentence one.
+2. **Replace hedging with conviction.** "I think we should" → "We should." "It might be worth" → "We recommend." Hedging is only appropriate when the data genuinely doesn't support a position.
+3. **Lead with the ask.** If the ask is buried in paragraph three, move it to paragraph one. The reader should know what you need within the first two lines.
+4. **Check ownership language.** Does this sound like someone who owns the outcome, or someone reporting on it? "We drove +86% CTR" > "CTR increased by 86%."
+5. **Apply the "so what" test.** Every data point needs an interpretation. If a number sits alone without context, add the implication.
 
-Don't flag every draft. Only surface a suggestion when the improvement is clear and meaningful. Frame it as: "Your draft works. Here's a tighter version if you want it." Never rewrite without showing both. The voice stays Richard's — the trainer just holds up a mirror occasionally.
+Don't flag every draft. Only surface a suggestion when the improvement is clear and meaningful. Frame it as: "Your draft works. Here's a tighter version if you want it." Never rewrite without showing both. The voice stays Richard's — the system just holds up a mirror occasionally.
 
 ## Specialized Style Guides
 For specific writing types, use these manual-inclusion steering files:
