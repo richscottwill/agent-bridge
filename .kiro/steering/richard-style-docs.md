@@ -44,7 +44,8 @@ Covers: experiment docs, testing plans, investigation docs, instructional docs, 
 - Practical framing: "Managing ROAS bid strategy is not passive."
 
 ## Post-Mortem / Retrospective Documents
-- Structure: Overview → Accomplishments → Challenges → Lessons Learned → Recommendations
+- Structure: Lessons Learned → Challenges → Accomplishments → Overview → Recommendations
+- Lead with lessons — the reader gets the learning immediately
 - Most self-critical format. First person: "I could have put more attention towards moving forward on the planning."
 - Lessons are actionable, not abstract: "Start simple, then go granular" with specific example
 - Appendices for supporting data, keeping the main narrative clean

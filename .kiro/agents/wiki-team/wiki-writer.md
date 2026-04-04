@@ -98,14 +98,22 @@ update_triggers: ["{what would make this doc stale}"]
 - Bar: 8/10 on the critic's scale. Write for an L8 director with 15 minutes and zero patience.
 - Every paragraph must pass the "so what" test — if removing it doesn't change the reader's action, cut it.
 
+### Amazon narrative standard (non-negotiable)
+- **Prose is the default. Bullets are the exception.** Amazon documents are narrative-driven. Write in complete paragraphs with connective tissue between ideas. Bullet lists are for short enumerations (3-5 items max) — never as the primary content format. If a section is mostly bullets, rewrite it as prose.
+- **Embed data in sentences, not in standalone tables.** Instead of a table followed by interpretation, weave the numbers into the narrative: "OCI delivered +24% registration lift in the US ($16.7MM OPS), +23% in UK, and +18% in DE — totaling 35,196 incremental registrations across three markets." Tables are for comparisons where the reader needs to scan across dimensions, not for presenting sequential data points.
+- **Average 18-20 words per sentence.** Amazon's writing standard targets a reading ease score above 50. Short, clear sentences. One idea per sentence. No compound sentences with three clauses.
+- **Purpose statement in the first paragraph.** State what the document is, what decision it supports, and what the reader should do after reading it. If the reader stops after paragraph one, they should still understand the core message.
+- **Cut anything duplicative.** If a point is made in the executive summary AND in a section body AND in the conclusion, it appears once. The other two instances get cut or compressed to a reference.
+- **No formatting as content.** Bold, italic, and code formatting are emphasis tools, not structural elements. If removing all formatting makes the document unreadable, the writing is relying on formatting instead of prose. The document should read cleanly as plain text.
+
 ## Dual-audience optimization
 
-For humans:
+### For humans
 - Lead with the action or insight, not the background
 - Use examples from real work (anonymized if needed)
 - Include "why" alongside "what" — humans need motivation
 
-For agents:
+### For agents
 - Frontmatter is the index. Make it rich and accurate
 - The `AGENT_CONTEXT` HTML comment block is invisible to humans but parseable by agents
 - `update_triggers` tells maintenance agents when to flag this doc for refresh

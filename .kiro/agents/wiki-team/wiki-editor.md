@@ -83,7 +83,7 @@ Don't write (or archive existing) if:
 - The topic is fully covered by a body system organ (don't duplicate)
 - The audience is only Richard (that's what the body system is for)
 - The topic changes so fast that any doc would be stale within a week
-- Nobody has asked about this topic in the last 30 days
+- Nobody has asked about this topic in the last 14 days
 
 ## Pipeline execution
 

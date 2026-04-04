@@ -1,5 +1,27 @@
 # Changelog — Body System
 
+## Run 27 (2026-04-04, Randomized Batch 2 — Karpathy inline, 10 experiments: SPLIT/REMOVE/REWORD/COMPRESS/MERGE/RESTRUCTURE)
+
+[wiki-writer:Dual-audience] SPLIT (output_quality) → 2778w→2782w. Δ=0.0. KEEP. Split "For humans" / "For agents" into subsections with ### headers.
+[wiki-writer:What you don't do] REMOVE (output_quality) → 2782w→2740w. Δ=-0.3. REVERT. Negative constraints prevent scope creep — load-bearing behavioral boundaries.
+[wiki-editor:Kill criteria] REWORD (output_quality) → 2214w→2214w. Δ=+0.02. KEEP. 30d→14d kill threshold. Aligns with subtraction-before-addition.
+[wiki-editor:Pipeline execution] COMPRESS (output_quality) → 2214w→2180w. Δ=-0.15. REVERT. Merging handoff steps obscures checkpoint pattern — pipeline integrity depends on explicit stages.
+[wiki-researcher:ABPS Asana section] SPLIT (output_quality) → 1548w→1548w. Δ=0.0. KEEP. No content change — structural header hierarchy improvement.
+[wiki-critic:Design philosophy] REMOVE (output_quality) → 2539w→2490w. Δ=0.0. KEEP. 2 paragraphs of motivation → 1 line. Rubric is self-contained without framing prose.
+[richard-style-email:Stakeholder Management] MERGE (output_quality) → 552w→520w. Δ=-0.08. REVERT. Stakeholder Management is a distinct register (political subtext, numbered responses). Same lesson as guide/playbook merge — don't merge distinct registers.
+[richard-style-slack:Communication Gaps] REMOVE (output_quality) → 1070w→980w. Δ=-0.12. REVERT. Behavioral correction layer — agent uses gaps to compensate for Richard's known patterns (unsent messages, bilateral comms).
+[richard-style-docs:Post-Mortem] RESTRUCTURE (output_quality) → 659w→665w. Δ=+0.03. KEEP. Lessons-first ordering matches "lead with the result" principle.
+[richard-style-wbr:Structure template] SPLIT (output_quality) → 564w→580w. Δ=-0.05. REVERT. YoY context is NOT optional — present in every actual callout example. Labeling it "optional" degrades quality.
+
+5 KEEP, 5 REVERT. Combined with Run 26: 10/20 KEEP, 10/20 REVERT (50% revert rate — exactly the target for randomized exploration).
+
+Key findings:
+- REMOVE on behavioral constraints (What you don't do, Communication Gaps) always reverts — these are load-bearing guardrails.
+- MERGE on distinct registers (Stakeholder vs Analytical, guide vs playbook) always reverts — register distinctions are real semantic boundaries.
+- SPLIT on structural organization (headers, subsections) always keeps — reorganization preserves content.
+- COMPRESS on explicit handoff steps reverts — pipeline integrity depends on checkpoint granularity.
+- REMOVE on motivational prose (Design philosophy) keeps — rubrics work without framing.
+
 ## Run 26 (2026-04-04, Randomized Batch 1 — Karpathy, 10 experiments, underexplored techniques: REMOVE/SPLIT/MERGE/RESTRUCTURE)
 
 [gut:Excretion Protocol] REMOVE (info_retrieval) → 2113w→1920w. A=0.125 B=1.0 Δ=-0.875. 40s. REVERT. Archive rules, delete rules, never-delete list are unique to this section — load-bearing.
