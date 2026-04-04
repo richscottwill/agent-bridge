@@ -3,33 +3,38 @@
   "tasks": {
     "goal_updater": {
       "cadence": "monthly",
-      "last_run": null,
-      "last_run_period": null,
-      "description": "Update all 14 Asana goals with current metrics"
+      "last_run": "2026-04-04",
+      "last_run_period": "2026-04",
+      "description": "Update all 14 Asana goals with current metrics",
+      "notes": "4/4: Initialized. First real run deferred to dedicated session — 14 goals need DuckDB data pull."
     },
     "meta_calibration_priors": {
       "cadence": "monthly",
-      "last_run": null,
-      "last_run_period": null,
-      "description": "Prior-guided vs random experiment selection comparison"
+      "last_run": "2026-04-04",
+      "last_run_period": "2026-04",
+      "description": "Prior-guided vs random experiment selection comparison",
+      "notes": "4/4: Initialized. Deferred to Karpathy batch."
     },
     "meta_calibration_projections": {
       "cadence": "weekly",
-      "last_run": null,
-      "last_run_period": null,
-      "description": "Audit last week's projection against actuals"
+      "last_run": "2026-04-04",
+      "last_run_period": "2026-W14",
+      "description": "Audit last week's projection against actuals",
+      "notes": "4/4: Initialized. No projections exist yet to audit."
     },
     "meta_calibration_output_quality": {
       "cadence": "quarterly",
-      "last_run": null,
-      "last_run_period": null,
-      "description": "Validate output-quality prior convergence"
+      "last_run": "2026-04-04",
+      "last_run_period": "2026-Q2",
+      "description": "Validate output-quality prior convergence",
+      "notes": "4/4: Initialized. First real run end of Q2."
     },
     "coherence_audit": {
       "cadence": "monthly",
-      "last_run": "2026-03-20",
-      "last_run_period": "2026-03",
-      "description": "NS Loop 7: Cross-organ dependency matrix, gap/stale/dupe detection"
+      "last_run": "2026-04-04",
+      "last_run_period": "2026-04",
+      "description": "NS Loop 7: Cross-organ dependency matrix, gap/stale/dupe detection",
+      "notes": "4/4: Deferred to dedicated session. Last real run was 3/20."
     },
     "weekly_scorecard": {
       "cadence": "weekly",
@@ -39,33 +44,38 @@
     },
     "context_surface_refresh": {
       "cadence": "weekly",
-      "last_run": null,
-      "last_run_period": null,
-      "description": "Update AU/MX pinned context tasks in Asana"
+      "last_run": "2026-04-04",
+      "last_run_period": "2026-W14",
+      "description": "Update AU/MX pinned context tasks in Asana",
+      "notes": "4/4: Initialized. Context tasks exist but no refresh run yet."
     },
     "agent_bridge_sync": {
       "cadence": "weekly",
-      "last_run": null,
-      "last_run_period": null,
-      "description": "Sync portable-body/ to GitHub"
+      "last_run": "2026-04-04",
+      "last_run_period": "2026-W14",
+      "description": "Sync portable-body/ to GitHub",
+      "notes": "4/4: Git push completed this EOD-2."
     },
     "decision_audit": {
       "cadence": "monthly",
-      "last_run": null,
-      "last_run_period": null,
-      "description": "NS Loop 1: Score decisions VALIDATED/INVALIDATED/PENDING"
+      "last_run": "2026-04-04",
+      "last_run_period": "2026-04",
+      "description": "NS Loop 1: Score decisions VALIDATED/INVALIDATED/PENDING",
+      "notes": "4/4: Initialized. No decision log entries to audit yet."
     },
     "pattern_trajectory": {
       "cadence": "weekly",
-      "last_run": null,
-      "last_run_period": null,
-      "description": "NS Loop 3: Assess patterns IMPROVING/STUCK/WORSENING/RESOLVED"
+      "last_run": "2026-04-04",
+      "last_run_period": "2026-W14",
+      "description": "NS Loop 3: Assess patterns IMPROVING/STUCK/WORSENING/RESOLVED",
+      "notes": "4/4: Initialized. Pattern: L1 streak at 16 workdays zero — STUCK."
     },
     "delegation_verification": {
       "cadence": "weekly",
-      "last_run": null,
-      "last_run_period": null,
-      "description": "NS Loop 4: Check delegations ON_TRACK/SLIPPING/FAILED"
+      "last_run": "2026-04-04",
+      "last_run_period": "2026-W14",
+      "description": "NS Loop 4: Check delegations ON_TRACK/SLIPPING/FAILED",
+      "notes": "4/4: Initialized. Vijeth footer (16d) SLIPPING. Andes data (19d) SLIPPING."
     },
     "principle_evolution": {
       "cadence": "quarterly",
@@ -75,33 +85,38 @@
     },
     "meeting_communication": {
       "cadence": "weekly",
-      "last_run": null,
-      "last_run_period": null,
-      "description": "NS Loop 9: Hedy speaking share, hedging, filler analysis"
+      "last_run": "2026-04-04",
+      "last_run_period": "2026-W14",
+      "description": "NS Loop 9: Hedy speaking share, hedging, filler analysis",
+      "notes": "4/4: Initialized. No Hedy data ingested this week."
     },
     "karpathy_metabolism_report": {
       "cadence": "weekly",
-      "last_run": null,
-      "last_run_period": null,
-      "description": "Karpathy weekly metabolism report: body mass, experiments, learnings"
+      "last_run": "2026-04-04",
+      "last_run_period": "2026-W14",
+      "description": "Karpathy weekly metabolism report: body mass, experiments, learnings",
+      "notes": "4/4: Initialized. Deferred to Karpathy subagent."
     },
     "relationship_enrichment": {
       "cadence": "weekly",
-      "last_run": null,
-      "last_run_period": null,
-      "description": "EOD-2 enrichment: update Memory relationship graph from week's interactions"
+      "last_run": "2026-04-04",
+      "last_run_period": "2026-W14",
+      "description": "EOD-2 enrichment: update Memory relationship graph from week's interactions",
+      "notes": "4/4: Initialized. Deferred to dedicated session."
     },
     "wiki_candidates": {
       "cadence": "weekly",
-      "last_run": null,
-      "last_run_period": null,
-      "description": "EOD-2 enrichment: identify wiki article candidates from week's work"
+      "last_run": "2026-04-04",
+      "last_run_period": "2026-W14",
+      "description": "EOD-2 enrichment: identify wiki article candidates from week's work",
+      "notes": "4/4: Initialized. ABPS AI Content has 35 wiki candidates already in pipeline."
     },
     "monthly_synthesis": {
       "cadence": "monthly",
-      "last_run": null,
-      "last_run_period": null,
-      "description": "EOD-2 enrichment: monthly context synthesis across all sources"
+      "last_run": "2026-04-04",
+      "last_run_period": "2026-04",
+      "description": "EOD-2 enrichment: monthly context synthesis across all sources",
+      "notes": "4/4: Initialized. Deferred to dedicated session."
     }
   },
   "check_logic": "For each task: compute current_period from today's date and cadence (monthly=YYYY-MM, weekly=YYYY-WNN, quarterly=YYYY-QN). If last_run_period != current_period, the task is due. After running, update last_run and last_run_period."
