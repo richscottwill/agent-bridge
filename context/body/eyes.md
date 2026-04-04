@@ -65,14 +65,12 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 <!-- Data: db("SELECT market, competitor, impression_share, cpc_impact_pct, segment, notes FROM competitors ORDER BY market, competitor") -->
 
 ### US: Walmart Business
-First appeared Jul 2024 on Brand Core. IS: 25%→55% (peak W6 2026). Brand CPA: ~$40→$65-77. Pattern: ramps Jan-Mar, pulls back holidays. Response: bid caps + NB OCI efficiency. Do NOT escalate auction.
+Brand Core since Jul 2024. IS: 25%→55% (peak W6 2026). Brand CPA impact: ~$40→$65-77. Seasonal: ramps Jan-Mar, pulls back holidays. Response: bid caps + NB OCI efficiency. Do NOT escalate auction.
 
-### Key Trends
-1. Competition broadening: 1-2 per market (2023) → 3-5 (2026)
-2. Walmart is the only sustained aggressive Brand bidder in US
-3. EU competition is fragmentary — different competitors per market
-4. JP competition intensifying on Yahoo specifically
-5. Team's defense is efficiency, not escalation
+### Trends
+- Market-wide: 1-2 competitors/market (2023) → 3-5 (2026). Walmart only sustained US Brand bidder.
+- EU: fragmentary — different competitors per market. JP: intensifying on Yahoo.
+- Defense posture: efficiency over escalation.
 
 ---
 

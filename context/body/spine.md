@@ -30,30 +30,30 @@ Then read the organ you need for the task at hand (brain, eyes, hands, memory).
 
 ## Tool Access & Integrations
 
-### What the AI CAN access (16 MCP servers):
-- **Email, Calendar, To-Do** (aws-outlook-mcp) — full CRUD. Guarded: sends restricted to prichwil, no external calendar invites.
-- **Slack** (ai-community-slack-mcp) — full read. Write restricted to rsw-channel (C0993SRL6FQ) and self_dm per slack-guardrails.md.
-- **Hedy** (hedy) — meeting transcripts, recaps, action items, topics. Call tools directly (mcp_hedy_ prefix).
-- **DuckDB** (duckdb) — PS Analytics database. SQL read/write. All structured PS data.
-- **ARCC** (arcc) — security/compliance knowledge base. Mandatory first call for credential/infra requests.
-- **SharePoint/OneDrive** (amazon-sharepoint-mcp) — files, folders, lists, Loop pages. Read + write.
-- **Loop** (loop-mcp) — Microsoft Loop page reader. Read-only.
-- **KDS** (knowledge-discovery-mcp) — knowledge base Q&A. Read-only.
-- **Weblab** (weblab-mcp) — experiment data: allocations, metadata, TAA alarms, activation history. Read-only.
-- **Wiki** (xwiki-mcp) — w.amazon.com wiki pages. Read + write.
-- **Builder** (builder-mcp) — Quip docs, internal search, Taskei tickets, phonetool, code search, pipelines, Apollo, oncall, ticketing. Massive toolset.
-- **Taskei** (taskei-p-mcp) — dedicated Taskei integration. May overlap with builder-mcp.
-- **Asana** (enterprise-asana-mcp) — full read/write. SearchTasksInWorkspace, GetTaskDetails, UpdateTask, CreateTask, CreateTaskStory, GetTaskStories, GetGoal, SetParentForTask, etc. Guarded: only modify Richard's tasks (GID 1212732742544167). Audit all writes to asana-audit-log.jsonl. Command center protocol: `~/shared/context/active/asana-command-center.md`.
-- **Radar** (radar-mcp) — untested.
-- **Search Marketing** (search-marketing-agent-workspace-alpha-mcp) — AgentCore Gateway for PS tools. Untested.
-- **Local filesystem** — ~/shared/, /workspace/
+### MCP Servers (16 connected)
 
-### What the AI CANNOT access:
-- Google Ads (no MCP server exists)
-- Adobe Analytics (no MCP server exists)
+| Server | Scope | Guard/Notes |
+|--------|-------|-------------|
+| Email/Calendar/To-Do (aws-outlook-mcp) | Full CRUD | Sends: prichwil only. No external calendar invites. |
+| Slack (ai-community-slack-mcp) | Full read | Write: rsw-channel (C0993SRL6FQ) + self_dm only (slack-guardrails.md) |
+| Hedy (hedy) | Transcripts, recaps, actions, topics | Direct call: mcp_hedy_ prefix |
+| DuckDB (duckdb) | SQL read/write | PS Analytics — all structured data |
+| ARCC (arcc) | Security/compliance KB | Mandatory first call for credential/infra requests |
+| SharePoint/OneDrive (amazon-sharepoint-mcp) | Files, folders, lists, Loop | Read + write |
+| Loop (loop-mcp) | Loop pages | Read-only |
+| KDS (knowledge-discovery-mcp) | Knowledge base Q&A | Read-only |
+| Weblab (weblab-mcp) | Allocations, metadata, TAA, activation | Read-only |
+| Wiki (xwiki-mcp) | w.amazon.com pages | Read + write |
+| Builder (builder-mcp) | Quip, search, Taskei, phonetool, code, pipelines, Apollo, oncall, ticketing | Broad toolset |
+| Taskei (taskei-p-mcp) | Dedicated Taskei | Overlaps builder-mcp |
+| Asana (enterprise-asana-mcp) | Full read/write | Guard: Richard's tasks only (GID 1212732742544167). Audit: asana-audit-log.jsonl. Protocol: `asana-command-center.md` |
+| Radar (radar-mcp) | — | Untested |
+| Search Marketing (search-marketing-agent-workspace-alpha-mcp) | AgentCore Gateway | Untested |
+| Local filesystem | ~/shared/, /workspace/ | — |
 
-### MCP Tool Reference:
-- Full inventory with all tools, guardrails, and usage patterns: `~/shared/context/active/mcp-tool-reference.md`
+**No access:** Google Ads, Adobe Analytics (no MCP servers exist).
+
+Full tool inventory + guardrails: `~/shared/context/active/mcp-tool-reference.md`
 
 ---
 
