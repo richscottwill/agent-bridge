@@ -62,6 +62,23 @@ After each batch, note which experiment type × organ combinations produced KEEP
 
 This is autoresearch applied to autoresearch — the loop experiments on its own experiment selection.
 
+### Validated Anti-Patterns (from 58 experiments, 2026-04-04)
+
+These are hard-won from data. Respect them during target selection:
+
+1. **REMOVE on unique content = revert.** If a section contains IDs, URLs, rules, formulas, or behavioral constraints not duplicated elsewhere, REMOVE will fail. Pre-check uniqueness before attempting. (7/7 reverted.)
+2. **MERGE on distinct registers = revert.** Guide vs playbook, stakeholder vs analytical, human vs agent — these are real semantic boundaries. Don't merge categories that serve different query patterns. (3/3 reverted.)
+3. **REMOVE on behavioral constraints = revert.** "What you don't do" sections, communication gaps, negative constraints — these prevent scope creep. They're load-bearing guardrails. (2/2 reverted.)
+4. **UCB-only selection = selection bias.** Pure UCB exploitation produces 90%+ keep rates that look good but don't explore. Force 30% of experiments onto combos with <3 data points. Healthy batch = 50-70% keep rate.
+5. **Empty structural tables are load-bearing.** Tables define measurement frameworks even without data. Don't REMOVE them just because they're empty. (1/1 reverted.)
+
+### Validated Winning Patterns
+
+1. **REWORD with concrete examples** is the highest-yield technique. ~90% keep rate. Always include a worked example when adding a rule.
+2. **Common Failures sections** are a portable structural pattern. Proven across 4+ file types (email→wbr→mbr→librarian). When improving any style guide or agent file, add a Common Failures section.
+3. **SPLIT on structural organization** always keeps. Adding subsection headers preserves content while improving addressability.
+4. **RESTRUCTURE for actionable-first ordering** consistently keeps. Lessons before accomplishments. Update Protocol before Key Queries. Next Steps after Executive Summary.
+
 ## Experiment Format
 
 ```

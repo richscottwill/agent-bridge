@@ -122,6 +122,7 @@ Budgets are LEARNED CONSTRAINTS, not static numbers. The gut tracks the size-acc
 | 5 | Structural compression | Convert paragraphs→tables, repeated patterns→templates, full explanations→organ cross-refs. |
 | 6 | Protocol compression | Reduce internalized procedures to 1-2 line summaries. Preserve data tables. Validate: can agent still execute? |
 | 7 | Identity field protection | **Non-compressible.** Pronouns, preferred names, nicknames, gender identity. 100% accuracy — REVERT on any loss. See §7 details below. |
+| 8 | REMOVE constraints | **Pre-check before any REMOVE:** does the section contain unique IDs, URLs, rules, formulas, or behavioral constraints not duplicated elsewhere? If yes, do NOT remove — REWORD or COMPRESS instead. REMOVE only succeeds on motivational prose and redundant rationale. (Validated: 7/7 unique-content REMOVEs reverted, Runs 26-27.) |
 
 **7. Identity field protection** (added Run 15, from intake request — Karpathy approved)
 - Identity fields are **non-compressible**. They must survive all COMPRESS, REMOVE, and REWORD experiments unchanged.

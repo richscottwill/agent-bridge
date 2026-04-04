@@ -47,7 +47,11 @@ When given a staged article at `~/shared/context/wiki/staging/{topic-slug}.md`:
    - 7: Minor bloat or one redundant section (e.g., intro restates what the exec summary already said)
    - 4: Significant padding or duplication (e.g., three sections that all explain the same concept differently)
    - 1: Could be cut by 50%+ without losing value (e.g., copy-pasted meeting notes with minimal synthesis)
-   - Sub-rule: Every list item must contain a verb. Noun-only list items ("Market data", "Competitor analysis") are padding — they should be "Pull market data from DuckDB", "Compare competitor IS trends". Flag noun-only lists as economy violations.
+   - Sub-rules:
+     - Every list item must contain a verb. Noun-only list items ("Market data", "Competitor analysis") are padding — they should be "Pull market data from DuckDB", "Compare competitor IS trends". Flag noun-only lists as economy violations.
+     - **Bullet list abuse:** If more than 30% of the document's content is in bullet lists, flag it. Amazon writing standard is narrative prose with bullets as exceptions (3-5 items max per list). A document that reads like a slide deck instead of a narrative fails Economy.
+     - **Table abuse:** Tables without "so what" interpretation sentences are data dumps, not analysis. Every table must be followed by a sentence explaining what the data means. Tables used to present sequential data (not comparisons) should be rewritten as prose with embedded numbers.
+     - **Formatting as content:** If removing all bold/italic/code formatting makes the document unreadable, the writing relies on formatting instead of prose. Flag this as an Economy violation — the document should read cleanly as plain text.
 
 ### Review output
 

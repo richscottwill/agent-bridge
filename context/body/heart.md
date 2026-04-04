@@ -95,6 +95,7 @@ Valid targets include body organs AND non-organ files:
 - Query `autoresearch_priors` for the selected target
 - Sample technique proportional to UCB score (posterior_mean + posterior_std)
 - High UCB = either proven effective (high mean) or unexplored (high uncertainty) — both worth trying
+- **Selection bias check (from Run 26-27 learnings):** If the last 10+ experiments have a keep rate >85%, the selection is biased toward safe techniques. Force at least 30% of experiments to use techniques with <3 prior data points on the target. A healthy batch has 50-70% keep rate — not 90%+. Reverts are the learning signal.
 
 **Exclusions:**
 - Targets modified by maintenance in the current invocation (per-target cooldown)
@@ -116,12 +117,12 @@ Valid targets include body organs AND non-organ files:
 - Apply the selected technique to the selected section
 - Experiment types (not limited to compression):
   - **COMPRESS**: resolve completed items, deduplicate, age-decay, structural compression (paragraphs→tables), protocol compression
-  - **ADD**: inline a key fact that eliminates a tool call (e.g., a metric the agent always cross-references)
-  - **RESTRUCTURE**: reorder so the most-queried data is found faster
-  - **REMOVE**: delete content that's accurate but never queried (dead weight)
-  - **REWORD**: same info, fewer tokens, less ambiguity
-  - **MERGE**: combine sections that always get read together
-  - **SPLIT**: separate sections that serve different query patterns
+  - **ADD**: inline a key fact that eliminates a tool call (e.g., a metric the agent always cross-references). Portable pattern: "Common Failures" sections replicate across file types (validated email→wbr→mbr→librarian).
+  - **RESTRUCTURE**: reorder so the most-queried data is found faster. Lessons-first, actionable-first ordering consistently keeps.
+  - **REMOVE**: delete content that's accurate but never queried (dead weight). **Caution: REMOVE has the highest revert rate (~80%). Pre-check: does the section contain unique IDs, URLs, rules, formulas, or behavioral constraints not duplicated elsewhere? If yes, REMOVE will almost certainly revert. REMOVE only succeeds on motivational prose and redundant rationale.**
+  - **REWORD**: same info, fewer tokens, less ambiguity. **Highest keep rate across both eval types (~90%). Concrete examples > abstract rules is the dominant pattern.**
+  - **MERGE**: combine sections that always get read together. **Caution: MERGE reverts when sections serve distinct registers or semantic categories (guide vs playbook, stakeholder vs analytical). Only merge truly redundant content.**
+  - **SPLIT**: separate sections that serve different query patterns. **Structural splits (adding subsection headers) consistently keep. Splits that label content "optional" revert when the content isn't actually optional.**
 
 ### Step 4: Evaluate — A/B/C Blind Eval
 
@@ -270,6 +271,24 @@ Completed experiments are logged in changelog.md as one-line entries. Historical
 - **Dual blind eval.** Three-agent A/B/C design eliminates bias. A=modified+context, B=original+context (control), C=modified+zero context (portability). The delta between A and B is the real signal. Karpathy judges all three. None of the evaluators know the others exist.
 - **Per-organ cooldown replaces global gate.** Don't experiment on an organ that maintenance just modified in the same invocation, but all other organs are fair game. Adopted 3/26 after the old CHANGE_WEIGHT > 10 gate was effectively dead code.
 - **Output quality as first-class dimension + portability as continuous constraint.** Style guides, market context files, callout principles, and hook prompts are valid experiment targets alongside organs. The same A/B design works for both eval types — Run 18 validated this. Every organ change must also work on a cold platform with only text files — the agent-bridge repo is the test artifact.
+
+### Validated Patterns (from 58 experiments, Runs 19-27)
+
+These patterns emerged from data. They should inform technique selection but not override the Bayesian priors — the priors will converge to the same conclusions over time.
+
+| Pattern | Evidence | Implication |
+|---------|----------|-------------|
+| REWORD is the dominant technique | ~90% keep rate across both eval types, 15+ experiments | Default to REWORD when uncertain. Concrete examples > abstract rules. |
+| REMOVE on unique content always reverts | 7/7 reverted (IDs, URLs, rules, formulas, behavioral constraints) | Pre-check uniqueness before REMOVE. If content exists nowhere else, don't remove it. |
+| REMOVE on motivational prose keeps | 2/2 kept (design philosophy, guiding principles) | Rubrics and protocols work without framing prose. Safe to compress. |
+| MERGE on distinct registers always reverts | 3/3 reverted (guide/playbook, stakeholder/analytical) | Registers are real semantic boundaries. Don't merge categories that serve different query patterns. |
+| SPLIT on structural organization always keeps | 4/4 kept (subsection headers, human/agent split) | Reorganization preserves content. Safe technique. |
+| SPLIT labeling content "optional" reverts when it isn't | 1/1 reverted (WBR YoY context) | Check actual usage before labeling anything optional. |
+| COMPRESS on explicit handoff steps reverts | 1/1 reverted (wiki-editor pipeline) | Pipeline integrity depends on checkpoint granularity. |
+| Common Failures pattern is portable | 4/4 kept across email→wbr→mbr→librarian | Proven structural pattern for any style guide or agent file. |
+| Concrete examples > abstract rules | +0.04 to +0.08 delta consistently | When adding a rule, always include a worked example. |
+| Empty structural tables are load-bearing | 1/1 reverted (amcc avoidance ratio) | Tables define measurement frameworks even without data. |
+| UCB-only selection produces 90%+ keep rate (selection bias) | Runs 19-25: 92% keep rate | Force 30% exploration of untested combos. Healthy batch = 50-70% keep rate. |
 
 ## DuckDB Integration
 
