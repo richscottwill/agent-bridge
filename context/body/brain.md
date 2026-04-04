@@ -45,28 +45,28 @@ Decisions have a relevance half-life. Not every decision stays useful forever. T
 4. After 90 days in RESOLVED state with no references, archive to `~/shared/context/archive/`
 
 ### D1: OCI Implementation Approach [FOUNDATIONAL]
-D1: Phased rollout with measurement framework. Reinforced #1 Evidence, #4 Phased rollout. HIGH confidence.
+D1: Phased rollout with measurement framework. Reinforced #1, #4. HIGH.
 
 ### D2: Competitive Response to Walmart [FOUNDATIONAL]
-D2: Bid caps + NB efficiency via OCI, do NOT escalate auction. Reinforced #2 Efficiency, #3 Holistic. HIGH.
+D2: Bid caps + NB efficiency via OCI, do NOT escalate auction. Reinforced #2, #3. HIGH.
 
 ### D3: Ad Copy Overhaul (SP Study) [FOUNDATIONAL]
-D3: Shift to price/quality/selection messaging from bulk/B2B. Reinforced #7 Customer research, #1 Evidence. HIGH.
+D3: Shift to price/quality/selection messaging from bulk/B2B. Reinforced #7, #1. HIGH.
 
 ### D4: AU LP Full Migration [ACTIVE]
 D4: Lena overrode phased rollout — full Polaris switch. Executing. HIGH.
 
 ### D5: Campaign Consolidation [FOUNDATIONAL]
-D5: Consolidate campaigns to strengthen OCI data signals. Reinforced #6 Compression, #1 Evidence. HIGH.
+D5: Consolidate campaigns to strengthen OCI data signals. Reinforced #6, #1. HIGH.
 
 ### D6: Engagement Channel [FOUNDATIONAL]
-D6: Lifecycle channel via ABMA partnership, 13%→30% match rate. Reinforced #5 Partnership, #1 Evidence. HIGH.
+D6: Lifecycle channel via ABMA partnership, 13%→30% match rate. Reinforced #5, #1. HIGH.
 
 ### D7: WBR Traffic Decline [RESOLVED — pending audit]
 D7: Bid strategy + seasonality, not systemic. MEDIUM. Pending deep dive. Archive candidate (90d from resolution).
 
 ### D8: OP1 Structure [FOUNDATIONAL]
-D8: Problem→test→result→scale across 5 workstreams. Reinforced #5 Partnership, #1 Evidence. HIGH.
+D8: Problem→test→result→scale across 5 workstreams. Reinforced #5, #1. HIGH.
 
 ### D9: AI Max Testing [ACTIVE]
 D9: US-first with measurement guardrails. Same OCI discipline. Reinforced #4 Phased, #1 Evidence. HIGH.

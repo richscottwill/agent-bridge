@@ -84,13 +84,12 @@ L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate R
 - Draft style: Brief, direct. No formalities.
 - Meeting dynamic: Reliable peer, contributes data when asked. Low-maintenance.
 
-### Carlos Palmos (cpalmos) — Marketing Manager MX, L5, Mexico City
+### Carlos Palmos (cpalmos) — Mktg Mgr MX, L5, Mexico City
 - Reports to: Pedro Maldonado
 - Last interaction: 3/24 (final PS sync — CPS transition)
 - Tone: Professional
 - Current topic: TRANSITIONED to CPS ~3/17. No longer PS stakeholder.
-- Draft style: Professional, include invoice/PO specifics.
-- Meeting dynamic: Collaborative to the end. Shared keywords, ad text, escalated ref tag fix.
+- Draft style: Professional, invoice/PO specifics.
 - NOTE: MX invoice delegation VOID — needs new owner (Lorena or Richard).
 
 ### Lorena Alvarez Larrea (lorealea) — MX Marketing Manager, L5
@@ -122,13 +121,13 @@ L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate R
 - Last interaction: 3/11 (forwarded AU WBR)
 - Tone: Professional, brief. Signs "Thanks, Harjeet"
 - Current topic: Stepped away from AU day-to-day
-- Draft style: Concise, show you've got it handled.
+- Draft style: Concise, show competence.
 
 ### Alex VanDerStuyf (afvans) — AEM/Translations
-- Last interaction: 3/20 (Asana — PS Polaris Brand pages update WW, 6-step rollout)
+- Last interaction: 3/20 (Asana — Polaris Brand pages WW, 6-step rollout)
 - Tone: Professional, organized. Signs "Thank you, -Alex"
-- Current topic: Polaris WW rollout — AEM translations (due 3/26), Asana tracking, carousel updates
-- Draft style: Professional, reference PD submission IDs if needed.
+- Current topic: Polaris WW rollout — AEM translations, Asana tracking, carousel updates
+- Draft style: Professional, reference PD submission IDs.
 
 ### Andrew Wirtz (awirtz) — DG/Algorithmic Ads, L5
 - Reports to: Brandon Munday (peer)

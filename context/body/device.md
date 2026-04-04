@@ -81,12 +81,6 @@ These are live. They execute without Richard thinking.
 
 ---
 
-## 📋 Templates
-
-Queued (not built): Email Templates, WBR Callout Template, Meeting Prep Template. Will be built via Tool Factory when prioritized.
-
----
-
 ## 👥 Delegation Protocols
 
 | Delegation | Delegate | Status | Notes |
@@ -99,6 +93,8 @@ Queued (not built): Email Templates, WBR Callout Template, Meeting Prep Template
 ---
 
 ## 🛠️ Tool Factory
+
+Templates (Email, WBR Callout, Meeting Prep) queued — build when prioritized.
 
 | # | Tool | Status |
 |---|------|--------|
@@ -115,19 +111,17 @@ Backlog proposals: WBR auto-briefing, meeting prep auto-generator, invoice routi
 
 ## 📊 Device Health
 
-Tracks installed infrastructure status. Details in Installed Apps above. Delegations and proposals in their own sections.
-
-| Group | Functions | Status | Last Run |
-|-------|-----------|--------|----------|
-| AM Hooks | AM-1 Ingest, AM-2 Triage, AM-3 Brief | ✅ All | 4/2 |
-| EOD Hooks | EOD-1 Meeting Sync, EOD-2 System Refresh | ✅ All | 4/3, 4/2 |
-| Safety Guards | Email Block, Calendar Block | ✅ Always | preToolUse |
-| Agents | Karpathy, Eyes Chart, Wiki Team (6) | ✅ All | 3/24–3/25 |
-| Data Pipeline | Dashboard Ingester, PS Analytics DB, DuckDB MCP, WBR Callouts, Prediction Engine | ✅ All | 3/30 |
-| Content Tools | Agent Bridge, Progress Charts, Context Catalog, SharePoint Sync | ✅ All | 3/25–3/27 |
-| Slack Ingestion | v3 — AM-1, section-based depth, full DM | ✅ | 4/2 |
-| MCP Servers (new) | Weblab, XWiki, Builder, Taskei | 🆕 All | 4/2 |
-| Attention Tracker | Built, not deployed (local Windows) | 🔧 | 3/30 |
+| Group | Status | Last Run |
+|-------|--------|----------|
+| AM Hooks (AM-1, AM-2, AM-3) | ✅ | 4/2 |
+| EOD Hooks (EOD-1, EOD-2) | ✅ | 4/3, 4/2 |
+| Safety Guards (Email, Calendar) | ✅ | Always |
+| Agents (Karpathy, Eyes Chart, Wiki Team) | ✅ | 3/24–3/25 |
+| Data Pipeline (Ingester, DuckDB, Callouts, Predictions) | ✅ | 3/30 |
+| Content Tools (Bridge, Charts, Catalog, SharePoint) | ✅ | 3/25–3/27 |
+| Slack Ingestion v3 | ✅ | 4/2 |
+| MCP Servers (Weblab, XWiki, Builder, Taskei) | 🆕 | 4/2 |
+| Attention Tracker | 🔧 | 3/30 |
 
 ---
 
