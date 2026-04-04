@@ -74,7 +74,7 @@ For each file in `intake/`: extract minimum viable facts, route to the organ whe
 
 ## Compression Protocol
 
-Run when Bayesian priors signal an organ has room to shrink (COMPRESS posterior_mean > 0.7, n > 5), or when total body approaches 30,000w safety limit. The goal is to maximize *usefulness per token* — organs should answer their questions accurately and self-containedly.
+Run when Bayesian priors signal an organ has room to shrink (COMPRESS posterior_mean > 0.7, n > 5). The goal is to maximize *usefulness per token* — organs should answer their questions accurately and self-containedly.
 
 Budgets are LEARNED CONSTRAINTS, not static numbers. The gut tracks the size-accuracy relationship via experiment data. An organ at its natural ceiling (ADD experiments consistently revert) doesn't need compression. An organ with room to shrink (COMPRESS experiments consistently keep) should be compressed. The priors table is the signal.
 
@@ -104,9 +104,7 @@ Budgets are LEARNED CONSTRAINTS, not static numbers. The gut tracks the size-acc
 | Nervous System | 1500w | 1297w | Calibration loops — stable |
 | Spine | 1500w | 1490w | Bootstrap — stable |
 
-**Body ceiling: adaptive.** Starting point 24,000w. Actual ceiling is wherever the aggregate size-accuracy curve plateaus. Tracked via `autoresearch_organ_health`. If total body grows but aggregate accuracy improves, the ceiling was too low. If total body grows and accuracy is flat, the ceiling was right.
-
-**Hard safety rule (non-negotiable):** If total body exceeds 30,000w, mandatory compression review regardless of accuracy data. This is a practical limit — beyond this, session context windows become a real constraint. This number CAN be revised, but only with evidence that sessions work well at higher word counts.
+**Body ceiling: adaptive.** Starting point 24,000w. Actual ceiling is wherever the aggregate size-accuracy curve plateaus. Tracked via `autoresearch_organ_health`. If total body grows but aggregate accuracy improves, the ceiling was too low. If total body grows and accuracy is flat, the ceiling was right. There is no hard cap — the data decides.
 
 **Over-budget handling (revised):** No organ is "over budget" in the static sense. Instead:
 - If an organ's ADD experiments consistently REVERT (posterior_mean for ADD on that organ < 0.3, n > 5), the organ is at its natural ceiling — stop adding, try COMPRESS/REWORD instead
@@ -163,7 +161,7 @@ The gut runs a bloat check during the heart loop cascade (Phase 2) and flags iss
 
 | Signal | Threshold | Action |
 |--------|-----------|--------|
-| Total body over 30,000w | Safety limit | Mandatory compression review — practical context window constraint |
+| Total body word count increasing while accuracy flat/declining | Tracked in `autoresearch_organ_health` | Compression review — data shows body is past its useful size |
 | ADD experiments consistently revert on an organ | posterior_mean(ADD) < 0.3, n > 5 | Organ at natural ceiling — stop adding, try COMPRESS/REWORD |
 | Intake folder > 10 unprocessed files | 10 files | Batch process in next loop run |
 | Archive folder > 50 files | 50 files | Review archive, permanently delete transient files |
@@ -176,7 +174,7 @@ The gut runs a bloat check during the heart loop cascade (Phase 2) and flags iss
 
 ### Bloat Report (included in daily brief when issues detected)
 ```
-🫁 GUT CHECK: Total body: [X]w / 30,000w safety limit.
+🫁 GUT CHECK: Total body: [X]w.
 - [Organ]: ADD prior at [X] (n=[X]) — at natural ceiling, compress candidates only
 - Intake: [X] unprocessed files
 - [X] facts duplicated across organs

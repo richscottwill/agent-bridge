@@ -54,7 +54,7 @@ All organs | Every run | Word counts, staleness, reliability.
 
 | Metric | Value | Target | Status |
 |--------|-------|--------|--------|
-| Total body words | ~19,200w | ≤30,000w | ✅ Under limit |
+| Total body words | ~19,200w | Adaptive (learned) | ✅ Tracking |
 | Budgets | Adaptive (Bayesian) | — | 15 experiments, priors updating |
 | Loop runs | 18 | — | — |
 | Experiments | 36 (22 keep, 14 revert) | — | 61% keep rate. Run 18: 43 experiments, diverse techniques. Output-quality evals added. |

@@ -17,7 +17,8 @@
         "todo_checklist",
         "calendar_view",
         "calendar_meeting",
-        "calendar_search"
+        "calendar_search",
+        "enable_write_tools"
       ]
     },
     "arcc": {
@@ -142,7 +143,8 @@
         "read_loop",
         "read_loop",
         "read_loop"
-      ]
+      ],
+      "disabled": true
     },
     "xwiki-mcp": {
       "command": "xwiki-mcp",
@@ -189,7 +191,10 @@
         "args": [
           "awslabs.amazon-bedrock-agentcore-mcp-server@latest"
         ],
-        "disabled": false
+        "disabled": false,
+        "autoApprove": [
+          "search_agentcore_docs"
+        ]
       }
     }
   }

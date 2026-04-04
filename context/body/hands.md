@@ -4,7 +4,7 @@
 
 *Operating principle: Reduce decisions, not options. Every task should have a clear next action, a pre-written draft if it involves communication, and a due date that drives My Day. Richard opens his list and acts — he doesn't plan.*
 
-Last updated: 2026-04-03 (EOD-2 run 19)
+Last updated: 2026-04-04 (EOD-2 run 20)
 Sources: rw-tracker.md, Asana My Tasks, ABPS AI Content, Slack scan, DM scan
 
 ---
@@ -14,22 +14,22 @@ Sources: rw-tracker.md, Asana My Tasks, ABPS AI Content, Slack scan, DM scan
 <!-- Full task list: db("SELECT id, priority, description, due_date, status, blockers, category FROM task_queue WHERE status != 'DONE' ORDER BY priority, due_date") -->
 <!-- Overdue: db("SELECT id, description, due_date, DATEDIFF('day', due_date, CURRENT_DATE) as days_overdue FROM task_queue WHERE due_date < CURRENT_DATE AND status NOT IN ('DONE','BLOCKED') ORDER BY due_date") -->
 
-### Top 5 This Week (snapshot — refreshed EOD 4/3)
+### Top 5 This Week (snapshot — refreshed EOD 4/4)
 | # | Action | Due | Status |
 |---|--------|-----|--------|
-| P0 | **Testing Approach doc outline** — Kate Apr 16. THE HARD THING. 15 workdays at zero. | Apr 16 | NOT STARTED |
+| P0 | **Testing Approach doc outline** — Kate Apr 16. THE HARD THING. 16 workdays at zero. | Apr 16 | NOT STARTED |
+| P1 | **Refmarker mapping audit PoC — AU** — Lena initiated, Brandon PoC'd Richard. High visibility. | Due 4/7 | NOT STARTED |
 | P1 | **Respond to Lena** — AU LP URL analysis + CPA overstating. Brandon offering support. | OVERDUE (4/3) | NOT STARTED |
-| P1 | **Reply to Stacey DM** — CA exclusion from Polaris 4/7 testing | OVERDUE (4/3) | NOT STARTED |
-| P1 | **Share ENG budget file with Andrew** — OP1 recalculation | Due 4/4 | NOT STARTED |
+| P1 | **Share ENG budget file with Andrew** — OP1 recalculation | OVERDUE (4/4) | NOT STARTED |
 | P1 | **Respond to Lorena** — Q2 expected spend for MX PO | OVERDUE (10d) | NOT STARTED |
 
-14 items overdue (oldest: PAM US PO, 35d). 2 blocked (MX Auto page on Vijeth 15d, Kingpin on Andes 18d). ~97 total tasks in My Tasks.
+16 items overdue (oldest: PAM US PO, 34d). 2 blocked (MX Auto page on Vijeth 16d, Kingpin on Andes 19d). ~96 total tasks in My Tasks.
 
-### Blocker Registry (EOD 4/3)
+### Blocker Registry (EOD 4/4)
 | Task | Blocker | Owner | First Detected | Days Blocked |
 |------|---------|-------|----------------|-------------|
-| MX Automotive page | Footer component | Vijeth | 2026-03-20 | 15 |
-| Kingpin Goals MX | Andes data unavailable | Andes team | 2026-03-17 | 18 |
+| MX Automotive page | Footer component | Vijeth | 2026-03-20 | 16 |
+| Kingpin Goals MX | Andes data unavailable | Andes team | 2026-03-17 | 19 |
 
 ## Recurring Execution Work (Google Ads: MX, AU, Paid App)
 
@@ -45,15 +45,17 @@ Sources: rw-tracker.md, Asana My Tasks, ABPS AI Content, Slack scan, DM scan
 - Kingpin Goals → blocked by Andes data
 - MX/AU budgets → blocked by R&O tasks
 
-## New Signals (EOD-2 4/3)
-- ✅ Daily reset: 6 Today tasks demoted to Urgent with Kiro_RW carry-forward + Next action set.
-- ✅ Recurring check: No recurring tasks completed today.
-- ⏳ Stacey DM (4/1): CA Polaris exclusion — OVERDUE (3d). One-sentence reply needed.
-- ⏳ Andrew DM (4/1): ENG budget file — OVERDUE (3d). Due 4/4.
-- ⏳ Lorena: Q2 MX spend — OVERDUE (10d).
-- ⏳ Lena: AU LP URL analysis — OVERDUE (due 4/3).
-- ⚠️ No L1 effort today — 15 workdays at zero. Testing Approach is the hard thing.
-- 📅 MONDAY 4/7: Clean Today slate. Polaris weblab dial-up 4/6-4/7. CA OCI launch.
+## New Signals (EOD-2 4/4)
+- ✅ Daily reset: 8 Today tasks demoted to Urgent with Kiro_RW carry-forward + Next action set.
+- ✅ Completed: Flash topics due today (stale 18d close-out).
+- ✅ Recurring check: Flash topics not a recurring pattern — no next instance needed.
+- ⏳ Refmarker audit PoC — AU (Sweep): due 4/7, begin 4/6. Monday priority.
+- ⏳ Refmarker audit PoC — AU (Engine Room): due 4/10, begin 4/9.
+- ⏳ Lorena: Q2 MX spend — OVERDUE (10d). Monday.
+- ⏳ Lena: AU LP URL analysis — OVERDUE (1d).
+- ⏳ Andrew: ENG budget file — OVERDUE (due 4/4). Monday.
+- ⚠️ No L1 effort today — 16 workdays at zero. Testing Approach is the hard thing.
+- 📅 MONDAY 4/7: Clean Today slate. Polaris weblab dial-up 4/6-4/7. CA OCI launch. Refmarker audit begins.
 
 ---
 

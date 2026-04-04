@@ -67,7 +67,7 @@ When invoked (overnight, on-demand, or scheduled), the loop runs N experiments a
 Karpathy selects using a two-stage process:
 
 **Stage 1 — Organ selection** (priority order):
-1. Organs approaching 30,000w total body safety limit (mandatory compression)
+1. Organs where aggregate body accuracy is declining while word count is increasing (data-driven compression signal)
 2. Organs where COMPRESS prior is strong (posterior_mean > 0.7, n > 5) — known room to shrink
 3. Organs with stale sections (>7 days since last update)
 4. UCB-weighted random: query `autoresearch_selection_weights` view, sample proportional to UCB score (balances exploitation of known-good combos with exploration of untested ones)
@@ -193,7 +193,7 @@ Full data logged to DuckDB `autoresearch_experiments` table.
 | Param | Value | Rationale |
 |-------|-------|-----------|
 | max_experiments_per_batch | none | No cap. Loop runs until eligible targets exhausted. Bayesian priors self-terminate by deprioritizing proven losers. |
-| total_body_safety_limit | 30,000 | Hard safety cap. Mandatory compression review if exceeded. Revisable with evidence. |
+| total_body_ceiling | adaptive | No hard cap. Ceiling is wherever aggregate size-accuracy curve plateaus in `autoresearch_organ_health`. |
 | organ_budgets | adaptive | Baselines in gut.md. Actual ceilings learned from ADD/COMPRESS prior data per organ. |
 | staleness_threshold | 7 days | Flag organ section if older than this |
 | eval_questions_per_exp | adaptive (scales with risk) | Low risk: 2-3. Medium: 4-6. High (Brain/Memory): 5-8. Standing adversarial questions always included. |
@@ -231,7 +231,7 @@ Completed experiments are logged in changelog.md as one-line entries. Historical
 - **Current-state-only organs.** Organs hold current state, not history. changelog.md is the audit trail. No append-only logs in organs.
 - **Body metaphor.** Organs replace numbered experiment files. Each organ is self-contained.
 - **Do no harm.** Brain/Memory: zero tolerance for degradation (delta_ab ≥ 0, zero INCORRECT). All other organs: delta_ab ≥ 0. Rollback is immediate and automatic.
-- **Usefulness over size.** Word budgets are adaptive — baselines in gut.md, actual ceilings learned from experiment data. An organ that improves with more content should grow. An organ that doesn't degrade when compressed should shrink. The ADD/COMPRESS priors per organ discover the natural size. The 30,000w total body limit is a practical safety cap (context window constraint), not an optimization target.
+- **Usefulness over size.** Word budgets are adaptive — baselines in gut.md, actual ceilings learned from experiment data. An organ that improves with more content should grow. An organ that doesn't degrade when compressed should shrink. The ADD/COMPRESS priors per organ discover the natural size. The total body ceiling is wherever the aggregate size-accuracy curve plateaus — tracked in `autoresearch_organ_health`, not declared as a number.
 - **Advance or reset.** Every experiment meets ALL criteria (accuracy + completeness) or gets reverted. No partial advances.
 - **Dual blind eval.** Three-agent A/B/C design eliminates bias. Agent A evaluates the modified organ with full context. Agent B evaluates the ORIGINAL organ with full context (the control — doesn't know a change was made). Agent C evaluates the modified organ with zero context (portability). The delta between A and B is the real signal — not whether the organ is "above 90%" but whether the change made it better or worse. Karpathy judges all three. None of the evaluators know the others exist.
 - **Random + weighted selection.** No pre-designed experiments. No named hypotheses. Karpathy picks organ (weighted: over-budget → staleness → random), section (random), technique (random). Volume over precision — most revert, learning emerges from patterns.

@@ -14,10 +14,10 @@ Asana My Tasks is now the command center — replacing Microsoft To-Do as the ca
 
 | Field | GID | Type | Options (GID → Name) |
 |-------|-----|------|----------------------|
-| Routine | `1213608836755502` | enum | `1213608836755503` → Sweep (Low-friction), `1213608836755504` → Core Two (Deep Work), `1213608836755505` → Engine Room (Excel and Google ads), `1213608836755506` → Admin (Wind-down) |
+| Routine_RW | `1213608836755502` | enum | `1213608836755503` → Sweep (Low-friction), `1213608836755504` → Core Two (Deep Work), `1213608836755505` → Engine Room (Excel and Google ads), `1213608836755506` → Admin (Wind-down), `1213924412583429` → Wiki |
 | Priority_RW | `1212905889837829` | enum | `1212905889837830` → Today, `1212905889837831` → Urgent, `1212905889837833` → Not urgent |
 | Importance_RW | `1212905889837865` | enum | `1212905889837866` → Important |
-| Begin Date | `1213440376528542` | date | — |
+| Begin-Date_RW | `1213440376528542` | date | — |
 | Notes - Task | `1209637014993158` | text | — |
 
 ### Mapping to Microsoft To-Do Lists
@@ -76,12 +76,12 @@ These fields are available on ABPS AI project tasks and use the same GIDs as My 
 
 | Field | GID | Type | Notes |
 |-------|-----|------|-------|
-| Routine | `1213608836755502` | enum | Triage bucket assignment |
+| Routine_RW | `1213608836755502` | enum | Triage bucket assignment |
 | Priority_RW | `1212905889837829` | enum | Urgency signal |
 | Kiro_RW | `1213915851848087` | text | Agent scratchpad |
-| Begin Date | `1213440376528542` | date | Execution window start (`start_on`) |
+| Begin-Date_RW | `1213440376528542` | date | Execution window start (`start_on`) |
 | Importance_RW | `1212905889837865` | enum | Important (`1212905889837866`) |
-| Next action | `1213921400039514` | text | Next concrete step for the task |
+| Next-action_RW | `1213921400039514` | text | Next concrete step for the task |
 | Notes - Task | `1209637014993158` | text | Legacy notes field |
 | Five Levels | `1213917488341130` | multi_enum | L1–L5 classification. Options: L1 Sharpen (`1213917488341131`), L2 Testing (`1213917488341132`), L3 Automation (`1213917488341133`), L4 Zero-Click (`1213917488341134`), L5 Agentic (`1213917488341135`) |
 | Category | `1213917488341137` | multi_enum | Content category. Options: Testing (`1213917488341138`), Strategy (`1213917488341139`), Program Details (`1213917488341140`), Tools (`1213917488341141`), Communication (`1213917488341142`), Best Practices (`1213917488341143`) |
@@ -127,12 +127,13 @@ Children discovered via `GetPortfolioItems(portfolio_gid="1212775592612914")`: A
   - Milestones: `1212762061512776`
   - Next steps: `1212762061512777`
   - Comms Plan: `1212762061512778`
-- Terminal Sections: (none discovered — no Complete/Done section)
+  - Complete: `1213924252564467`
+- Terminal Sections: Complete (`1213924252564467`)
 - Custom Fields (project-specific):
   - Priority: `1212762061512785` (enum)
   - Task Progress: `1212762061512790` (enum)
 - Custom Fields (inherited from My Tasks):
-  - Priority_RW: `1212905889837829`, Importance_RW: `1212905889837865`, Notes - Task: `1209637014993158`, Begin Date: `1213440376528542`, Routine: `1213608836755502`, Kiro_RW: `1213915851848087`, Next action: `1213921400039514`
+  - Priority_RW: `1212905889837829`, Importance_RW: `1212905889837865`, Notes - Task: `1209637014993158`, Begin-Date_RW: `1213440376528542`, Routine_RW: `1213608836755502`, Kiro_RW: `1213915851848087`, Next-action_RW: `1213921400039514`
 - Some tasks also carry: Date diff (`1213440376802787`), MX Priority (`1212775592612935`), MX Task Progress (`1212762061512741`), Important/Urgent (`1200200115836714`), Time Left (`1207564683818996`) — these appear on multi-homed tasks shared with MX or Paid App
 - Pinned Context Task: `1213917747438931` (📌 AU — Market Context (Kiro))
 - Active: yes
@@ -140,10 +141,6 @@ Children discovered via `GetPortfolioItems(portfolio_gid="1212775592612914")`: A
 ##### Recurring Task Patterns (AU)
 
 The agent detects completed tasks matching these patterns during AM-2 Phase 1C and auto-creates the next instance with computed dates (Requirement 13.1).
-
-| Task Name Pattern | Cadence | Section | Date Computation |
-|-------------------|---------|---------|-----------------|
-| Weekly Reporting | Weekly | Next steps (`1212762061512777`) | due_on = prev_due_on + 7d; start_on = due_on - 2d |
 | AU meetings Agenda | Weekly | Next steps (`1212762061512777`) | due_on = prev_due_on + 7d; start_on = due_on - 2d |
 | MBR callout | Monthly | Milestones (`1212762061512776`) | due_on = same day next month; start_on = due_on - 5d |
 | Bi-monthly Flash | Bi-monthly | Milestones (`1212762061512776`) | due_on = prev_due_on + 14d; start_on = due_on - 3d |
@@ -160,12 +157,13 @@ The agent detects completed tasks matching these patterns during AM-2 Phase 1C a
   - Milestones: `1212775592612926`
   - Next steps: `1212775592612927`
   - Comms Plan: `1212775592612928`
-- Terminal Sections: (none discovered — no Complete/Done section)
+  - Complete: `1213924047255341`
+- Terminal Sections: Complete (`1213924047255341`)
 - Custom Fields (project-specific):
   - Priority: `1212775592612935` (enum)
   - Task Progress: `1212762061512741` (enum)
 - Custom Fields (inherited from My Tasks):
-  - Priority_RW: `1212905889837829`, Importance_RW: `1212905889837865`, Notes - Task: `1209637014993158`, Begin Date: `1213440376528542`, Routine: `1213608836755502`, Kiro_RW: `1213915851848087`, Next action: `1213921400039514`
+  - Priority_RW: `1212905889837829`, Importance_RW: `1212905889837865`, Notes - Task: `1209637014993158`, Begin-Date_RW: `1213440376528542`, Routine_RW: `1213608836755502`, Kiro_RW: `1213915851848087`, Next-action_RW: `1213921400039514`
 - Some tasks also carry: AU Priority (`1212762061512785`), AU Task Progress (`1212762061512790`), Important/Urgent (`1200200115836714`), Time Left (`1207564683818996`), Date diff (`1213440376802787`) — multi-homed tasks
 - Cross-team fields (on Vijeth/MCS tasks): MCSOpsSprint # (`1210696086448065`), MCS Status (`1210695351001980`), MCSOpsPlanned (`1211096369985794`), MCS-authoring-task-type (`1210831625635211`), MCS Initiative (`1210688295507229`), ReleaseTech (`1210696085033654`), MCS Sub-Initiative (`1210688295507253`)
 - Pinned Context Task: `1213917639688517` (📌 MX — Market Context (Kiro))
@@ -254,7 +252,7 @@ These projects are in Richard's workspace and actively managed, but are not chil
   - ATL/BTL?: `1212663856382198` (enum)
   - Tech PM: `1203721406585927` (people)
   - OPS Impact: `1211349736814429` (number)
-- Custom Fields (inherited from My Tasks): Priority_RW, Importance_RW, Notes - Task, Begin Date, Routine, Kiro_RW, Next action
+- Custom Fields (inherited from My Tasks): Priority_RW, Importance_RW, Notes - Task, Begin-Date_RW, Routine_RW, Kiro_RW, Next-action_RW
 - Some tasks also carry: Time Left (`1207564683818996`), Important/Urgent (`1200200115836714`), Date diff (`1213440376802787`)
 - Pinned Context Task: `1213917851621567` (📌 WW Testing — Project Context (Kiro))
 - Active: yes
@@ -269,7 +267,7 @@ These projects are in Richard's workspace and actively managed, but are not chil
   - Blocked: `1206011240457092`
   - Complete: `1206011240457091`
 - Terminal Sections: Complete (`1206011240457091`)
-- Custom Fields (inherited from My Tasks): Priority_RW, Importance_RW, Notes - Task, Begin Date, Routine, Kiro_RW, Next action
+- Custom Fields (inherited from My Tasks): Priority_RW, Importance_RW, Notes - Task, Begin-Date_RW, Routine_RW, Kiro_RW, Next-action_RW
 - Some tasks also carry: Time Left (`1207564683818996`), Status C-week (`1211898465243458`), Help Needed flag (`1211898253103683`)
 - Pinned Context Task: `1213917771203342` (📌 WW Acquisition — Team Context (Kiro))
 - Active: yes
@@ -287,7 +285,7 @@ These projects are in Richard's workspace and actively managed, but are not chil
 - Custom Fields (project-specific):
   - Important/Urgent: `1200200115836714` (enum)
   - Time Left: `1207564683818996` (number)
-- Custom Fields (inherited from My Tasks): Priority_RW, Importance_RW, Notes - Task, Begin Date, Routine, Kiro_RW, Next action
+- Custom Fields (inherited from My Tasks): Priority_RW, Importance_RW, Notes - Task, Begin-Date_RW, Routine_RW, Kiro_RW, Next-action_RW
 - Some tasks also carry: Date diff (`1213440376802787`), AU/MX Priority and Task Progress fields (multi-homed tasks)
 - Pinned Context Task: `1213917771155873` (📌 Paid App — Project Context (Kiro))
 - Active: yes
@@ -328,10 +326,10 @@ When setting up a new portfolio project or verifying configuration:
 |-------|-----|----|----|------------|--------|----------|
 | Priority_RW | `1212905889837829` | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Importance_RW | `1212905889837865` | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Routine | `1213608836755502` | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Routine_RW | `1213608836755502` | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Kiro_RW | `1213915851848087` | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Next action | `1213921400039514` | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Begin Date | `1213440376528542` | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Next-action_RW | `1213921400039514` | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Begin-Date_RW | `1213440376528542` | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Notes - Task | `1209637014993158` | ✅ | ✅ | ✅ | ✅ | ✅ |
 | AU Priority | `1212762061512785` | ✅ | — | — | — | — |
 | AU Task Progress | `1212762061512790` | ✅ | — | — | — | — |
@@ -346,7 +344,7 @@ When setting up a new portfolio project or verifying configuration:
 
 ## View Structure
 Richard's My Tasks view:
-- Grouped by: Routine (first), then Priority_RW
+- Grouped by: Routine_RW (first), then Priority_RW
 - Sorted by: Due date
 - Filtered: Incomplete tasks only
 
@@ -355,8 +353,8 @@ Richard's My Tasks view:
 ### AM-1: Ingest
 1. Pull all incomplete tasks assigned to Richard: `SearchTasksInWorkspace(assignee_any=1212732742544167, completed=false)`
 2. For tasks due today or overdue, get full details including custom fields
-3. Categorize by Routine field into Sweep/Core/Engine Room/Admin/Backlog
-4. Flag: tasks with Priority_RW = "Today" that have no Routine (needs triage)
+3. Categorize by Routine_RW field into Sweep/Core/Engine Room/Admin/Backlog
+4. Flag: tasks with Priority_RW = "Today" that have no Routine_RW (needs triage)
 5. Flag: tasks overdue by 7+ days (stale — decision needed: do, delegate, kill)
 
 ### AM-2: Triage + Draft
@@ -381,10 +379,10 @@ Richard's My Tasks view:
 During AM-2, the agent presents the task board and executes Richard's directions in real-time. This is the primary task management interface — not just ingestion, but active curation.
 
 **Supported operations:**
-- Move tasks between Routine buckets
+- Move tasks between Routine_RW buckets
 - Change due dates
 - Change Priority_RW (Today/Urgent/Not urgent)
-- Create new tasks with Routine + Priority pre-set
+- Create new tasks with Routine_RW + Priority pre-set
 - Write/update task descriptions (notes or html_notes)
 - Add comments (CreateTaskStory)
 - Complete tasks
@@ -400,7 +398,7 @@ UpdateTask(task_gid, custom_fields={"1212905889837829": "1212905889837831"})  //
 UpdateTask(task_gid, custom_fields={"1212905889837829": "1212905889837833"})  // Not urgent
 ```
 
-### Setting Routine
+### Setting Routine_RW
 ```
 UpdateTask(task_gid, custom_fields={"1213608836755502": "1213608836755503"})  // Sweep
 UpdateTask(task_gid, custom_fields={"1213608836755502": "1213608836755504"})  // Core Two
@@ -550,8 +548,8 @@ When any Asana API call fails during an ABPS_AI_Project operation:
 | Assignee = Richard | Before every ABPS write | Block write, log `result="blocked"`, alert in brief |
 | Audit log append | After every write (success or failure) | Append JSON line to `asana-audit-log.jsonl` |
 | Read-before-write | Before every `html_notes` update | Read current content, preserve Richard's additions |
-| Kiro_RW brevity | After every task modification | `M/D: <10 words`. Use consistent M/D date format. No verbose entries. |
-| Next action update | After every task modification | Set Next action field to the single most specific next step |
+| Kiro_RW brevity | After every task modification | `M/D: <concise status>`. Use M/D date format. No YYYY-MM-DD. 500-char field limit is the only constraint. |
+| Next-action_RW update | After every task modification | Set Next-action_RW field to the single most specific next step |
 | API retry | On any API failure | Log, retry once, flag for manual attention if retry fails |
 | Triage approval | Before executing triage field writes | Present to Richard, wait for approval |
 | Expansion approval | Before expanding draft to full doc | Require completed Approval subtask |
@@ -562,7 +560,7 @@ When any Asana API call fails during an ABPS_AI_Project operation:
 Kiro_RW is a glanceable scratchpad, not a journal. Every entry MUST be:
 - **Format:** `M/D: <status in under 10 words>`
 - **Date format:** Always `M/D` (e.g., `4/3`, `12/15`). Never `YYYY-MM-DD`, never `[M/D]`, never `MM/DD`.
-- **Length:** Under 10 words after the date. Cut ruthlessly.
+- **Length:** No hard word limit. Be concise but include what's useful — blockers, context, status, cross-references. The 500-char field limit is the only constraint.
 - **Examples:**
   - `4/3: Triaged. Core, quarterly, guide.`
   - `4/3: Research posted. Draft next.`
@@ -578,11 +576,11 @@ Kiro_RW is a glanceable scratchpad, not a journal. Every entry MUST be:
   - ❌ `pipeline: draft completed [2026-04-03]`
 - **Append rule:** New entries go on a new line below existing content. Oldest entries get dropped if approaching the 500-char limit.
 
-### 6. Next Action Field Protocol
+### 6. Next-action_RW Field Protocol
 
-The Next action field (GID: `1213921400039514`) must be updated on EVERY task modification — ABPS AI and My Tasks alike. It answers: "What is the single most specific thing to do next?"
+The Next-action_RW field (GID: `1213921400039514`) must be updated on EVERY task modification — ABPS AI and My Tasks alike. It answers: "What is the single most specific thing to do next?"
 
-- **Format:** One sentence, imperative verb, specific. Under 15 words.
+- **Format:** One sentence, imperative verb, specific. Must add information beyond the task title — don't repeat what the name already says. Focus on the specific next step, blocker, person to contact, or decision to make.
 - **Examples:**
   - `Draft 500w keyword strategy guide from research brief`
   - `Review critic feedback and approve or request revision`
@@ -610,7 +608,7 @@ These rules continue to apply for My Tasks operations outside the ABPS AI pipeli
 
 When the agent creates Asana tasks from Slack [ACTION-RW] signals or email action items, use this mapping to set Routine + Priority_RW:
 
-| Signal Type | Examples | Routine | Priority_RW |
+| Signal Type | Examples | Routine_RW | Priority_RW |
 |-------------|----------|---------|-------------|
 | Quick reply/send/confirm | "Reply to Vijeth", "Confirm budget with Kate", "Send AU update" | Sweep (Low-friction) | Today |
 | Strategic discussion/artifact | "Draft testing framework", "Write AEO POV", "Prepare OP1 section" | Core Two (Deep Work) | Urgent |
@@ -761,7 +759,7 @@ The `Kiro_RW` text field (GID: `1213915851848087`) is empty on every task. This 
 
 **TODAY (Priority_RW = Today): 11 tasks**
 
-| Task | Routine | Due | Overdue? | Subtasks | Key Detail |
+| Task | Routine_RW | Due | Overdue? | Subtasks | Key Detail |
 |------|---------|-----|----------|----------|------------|
 | Mondays - Write into EU SSR Acq Asana | Sweep | Mar 30 | 3d | 0 | Recurring weekly |
 | ie%CCP calc - insert MX spend/regs before 9th | Sweep | Apr 3 | — | 0 | Quip link in notes |
@@ -839,7 +837,7 @@ These recur but aren't using Asana's recurring task feature — they're manually
 
 **Key write patterns for the agent:**
 1. Set Kiro_RW field with context notes: `custom_fields={"1213915851848087": "text"}`
-2. Triage untriaged tasks by setting Routine + Priority_RW
+2. Triage untriaged tasks by setting Routine_RW + Priority_RW
 3. Mark recurring tasks complete and note in Kiro_RW when the next instance exists
 4. Add comments with status updates or blockers detected from other sources
 5. Create subtasks for decomposed work

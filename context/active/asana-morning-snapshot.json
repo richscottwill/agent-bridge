@@ -1,44 +1,205 @@
 {
-  "snapshot_date": "2026-04-03",
-  "scan_time": "2026-04-03T20:30:00Z",
-  "note": "PM scan (post-optimization test). Not a true morning snapshot — ran as validation of optimized AM-1.",
+  "snapshot_date": "2026-04-04",
+  "scan_time": "2026-04-04T07:00:00Z",
   "bucket_counts": {
-    "sweep": 7,
-    "core": 4,
-    "engine_room": 4,
-    "admin": 3,
-    "backlog": 48
+    "sweep": 10,
+    "core": 3,
+    "engine_room": 6,
+    "admin": 7,
+    "backlog": 70
   },
-  "over_cap": ["sweep"],
+  "over_cap": [
+    "sweep: 10 (cap 5) — OVER BY 5",
+    "admin: 7 (cap 3) — OVER BY 4"
+  ],
   "today_tasks": [
-    "1213917967984980",
-    "1213917888972148",
-    "1213546434830000",
-    "1213817111703805",
-    "1213798673865639",
-    "1213917923114330"
+    {
+      "gid": "1213923298187459",
+      "name": "Refmarker mapping audit PoC — AU",
+      "due_on": "2026-04-07",
+      "routine": "Sweep",
+      "project": "AU",
+      "priority_rw": "Today"
+    },
+    {
+      "gid": "1213917772329115",
+      "name": "Provide Lorena Q2 expected spend for MX PO",
+      "due_on": "2026-04-04",
+      "routine": "Sweep",
+      "project": "MX",
+      "priority_rw": "Today"
+    },
+    {
+      "gid": "1213923128960832",
+      "name": "Prime Day Creative Phase 4 inputs — Smartsheets",
+      "due_on": "2026-04-03",
+      "routine": "Sweep",
+      "project": null,
+      "priority_rw": "Today"
+    },
+    {
+      "gid": "1213917923114330",
+      "name": "Share ENG max budget calculation file with Andrew",
+      "due_on": "2026-04-04",
+      "routine": "Sweep",
+      "project": null,
+      "priority_rw": "Today"
+    },
+    {
+      "gid": "1213917691089036",
+      "name": "Refmarker mapping audit PoC — AU (Engine Room)",
+      "due_on": "2026-04-10",
+      "routine": "Engine Room",
+      "project": "AU",
+      "priority_rw": "Today"
+    },
+    {
+      "gid": "1213917691068688",
+      "name": "Send AU team invoice for prev month",
+      "due_on": "2026-05-02",
+      "routine": "Admin",
+      "project": null,
+      "priority_rw": "Today"
+    },
+    {
+      "gid": "1212808474749819",
+      "name": "Raise rest of year PO for PAM US",
+      "due_on": "2026-03-01",
+      "routine": "Admin",
+      "project": "Paid App",
+      "priority_rw": "Today"
+    },
+    {
+      "gid": "1213560614815911",
+      "name": "PAM R&O",
+      "due_on": "2026-03-10",
+      "routine": "Admin",
+      "project": null,
+      "priority_rw": "Today"
+    },
+    {
+      "gid": "1213637505601024",
+      "name": "R&O for MX/AU",
+      "due_on": "2026-03-23",
+      "routine": "Admin",
+      "project": null,
+      "priority_rw": "Today"
+    },
+    {
+      "gid": "1213230198995937",
+      "name": "WW redirect - Adobe Ad Cloud reporting",
+      "due_on": "2026-03-09",
+      "routine": "Core",
+      "project": null,
+      "priority_rw": "Today"
+    }
   ],
   "overdue_tasks": [
-    "1213341921686564",
-    "1213839064321460",
-    "1213796951745232",
-    "1213828814410247",
-    "1213541622135762",
-    "1213530917597503",
-    "1213731008237682",
-    "1213917639154050",
-    "1213125740755931",
-    "1213637505601028",
-    "1213720297606981",
-    "1213560614815911",
-    "1213072707685834"
+    {
+      "gid": "1212808474749819",
+      "name": "Raise rest of year PO for PAM US",
+      "due_on": "2026-03-01",
+      "days_overdue": 34
+    },
+    {
+      "gid": "1213230198995937",
+      "name": "WW redirect - Adobe Ad Cloud reporting",
+      "due_on": "2026-03-09",
+      "days_overdue": 26
+    },
+    {
+      "gid": "1213560614815911",
+      "name": "PAM R&O",
+      "due_on": "2026-03-10",
+      "days_overdue": 25
+    },
+    {
+      "gid": "1213720297606981",
+      "name": "Flash topics due today",
+      "due_on": "2026-03-17",
+      "days_overdue": 18
+    },
+    {
+      "gid": "1213730974261148",
+      "name": "Make changes to AU/MX/PAM for the week",
+      "due_on": "2026-03-18",
+      "days_overdue": 17
+    },
+    {
+      "gid": "1213072707685834",
+      "name": "MX Automotive page",
+      "due_on": "2026-03-20",
+      "days_overdue": 15
+    },
+    {
+      "gid": "1213637505601024",
+      "name": "R&O for MX/AU",
+      "due_on": "2026-03-23",
+      "days_overdue": 12
+    },
+    {
+      "gid": "1213637505601028",
+      "name": "MX/AU confirm budgets",
+      "due_on": "2026-03-25",
+      "days_overdue": 10
+    },
+    {
+      "gid": "1213839064321460",
+      "name": "Weekly Reporting - Global WBR sheet",
+      "due_on": "2026-03-30",
+      "days_overdue": 5
+    },
+    {
+      "gid": "1213828814410247",
+      "name": "Mondays - Write into EU SSR Acq Asana",
+      "due_on": "2026-03-30",
+      "days_overdue": 5
+    },
+    {
+      "gid": "1213341921686564",
+      "name": "Testing Document for Kate",
+      "due_on": "2026-04-01",
+      "days_overdue": 3
+    },
+    {
+      "gid": "1213530917597503",
+      "name": "Monthly - Confirm actual budgets",
+      "due_on": "2026-04-01",
+      "days_overdue": 3
+    },
+    {
+      "gid": "1213917888972148",
+      "name": "Reply to Stacey — CA exclusion from Polaris 4/7",
+      "due_on": "2026-04-03",
+      "days_overdue": 1
+    },
+    {
+      "gid": "1213917967984980",
+      "name": "Respond to Lena — AU LP URL analysis + CPA",
+      "due_on": "2026-04-03",
+      "days_overdue": 1
+    },
+    {
+      "gid": "1213546434830000",
+      "name": "ie%CCP calc - insert MX spend/regs before 9th",
+      "due_on": "2026-04-03",
+      "days_overdue": 1
+    },
+    {
+      "gid": "1213923128960832",
+      "name": "Prime Day Creative Phase 4 inputs — Smartsheets",
+      "due_on": "2026-04-03",
+      "days_overdue": 1
+    }
   ],
-  "total_incomplete": 97,
-  "total_overdue": 13,
+  "total_incomplete": 96,
+  "total_overdue": 16,
   "hard_thing": {
     "task_gid": "1213341921686564",
     "name": "Testing Document for Kate",
-    "days_overdue": 2,
-    "workdays_at_zero": 14
+    "days_overdue": 3,
+    "routine": "Core Two",
+    "priority_rw": "Urgent",
+    "importance_rw": "Important"
   }
 }

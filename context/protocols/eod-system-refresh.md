@@ -70,6 +70,20 @@ e. Five Levels — ABPS AI: all ABPS work counts as L5. Include in summary.
 
 f. Update rw-tracker with ABPS stats: completed, advances, refreshes, new_intake.
 
+### Step 10B — Completion Section Moves
+
+For each task completed today across all managed projects:
+1. Check if the task is in a non-terminal section (i.e., not already in a Complete section).
+2. If yes, move it to the project's terminal section via AddTaskToSection or section membership update.
+3. Terminal section GID map:
+   - AU Complete: `1213924252564467`
+   - MX Complete: `1213924047255341`
+   - WW Testing Complete: `1205997667578902`
+   - WW Acquisition Complete: `1206011240457091`
+   - Paid App Complete: `1205997667578889`
+4. Log each section move in the audit trail: `{"tool":"SectionMove","task_gid":"...","from_section":"...","to_section":"Complete","project":"...","result":"success"}`.
+5. Skip tasks that are already in a terminal section or have no project membership.
+
 ### Portfolio Project Reconciliation
 
 a. Read morning snapshot → portfolio_projects section.
@@ -102,6 +116,13 @@ Compile for rw-tracker.md: strategic artifacts shipped (Core + Important complet
 ---
 
 ## Phase 3: Organ Cascade + Maintenance
+
+### Compression Audit
+Before any organ updates, observe and log body size:
+1. Count words in each organ file (`~/shared/context/body/*.md`). Log to DuckDB `autoresearch_organ_health` (organ, word_count, date).
+2. Query DuckDB for organ-level Bayesian priors from `autoresearch_experiments`. Flag any organ where COMPRESS posterior_mean > 0.7 (n > 5) — these have data-backed evidence they can shrink without accuracy loss.
+3. Sum total body word count. Log it. No hard ceiling — the aggregate size-accuracy curve in DuckDB determines when the body is too large (accuracy plateaus or degrades as size increases).
+4. Report only when priors suggest action: `🫁 Body: [X]w. [organ] has compression signal (COMPRESS prior: [X], n=[X]).` If no organ has a compression signal, skip report entirely.
 
 ### Maintenance
 - Refresh ground truth in organs.

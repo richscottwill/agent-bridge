@@ -1,28 +1,27 @@
-# Asana Activity Signals
+# Asana Activity Monitor — 2026-04-04 (Saturday)
 
-Scan timestamp: 2026-04-03T12:00:00Z
-Tasks scanned: 0
-Signals detected: 0
-
-No activity scan has been executed yet. This file will be populated when the Activity Monitor runs during AM-1 or is triggered manually.
-
-The Activity Monitor protocol is defined at: `~/shared/context/active/asana-activity-monitor-protocol.md`
+Scan time: 2026-04-04T07:00:00Z
+Last scan: First scan (7-day lookback)
+Tasks checked for teammate activity: 4 (Today/Overdue priority tasks)
+Teammate signals detected: 0
 
 ---
 
-## Expected Format (template)
+## Activity Scan Results
 
-### 💬 Comments
+No teammate activity detected since last scan on the following priority tasks:
 
-- **[Task Name]** — [Author Name] ([timestamp]):
-  > [Comment text, first 200 chars]
+- **Testing Document for Kate** (1213341921686564) — All 20 stories by Richard. No teammate comments or changes.
+- **Respond to Lena — AU LP URL analysis** (1213917967984980) — All 8 stories by Richard. No teammate activity.
+- **Refmarker mapping audit PoC — AU** (1213923298187459) — All 6 stories by Richard. Task created 4/3.
+- **Provide Lorena Q2 expected spend for MX PO** (1213917772329115) — All 6 stories by Richard. Task created 4/3.
 
-### 📅 Due Date Changes
+---
 
-- **[Task Name]** — [Who changed it] ([timestamp]):
-  Changed due date [old date → new date]
+## Signal Summary
 
-### 👤 Reassignments
+- 💬 Comments awaiting response: 0
+- 📅 Due date changes by others: 0
+- 👤 Reassignments: 0
 
-- **[Task Name]** — [Who reassigned] ([timestamp]):
-  Reassigned to [New Assignee Name]
+No teammate activity since last scan. Saturday — expected low volume.

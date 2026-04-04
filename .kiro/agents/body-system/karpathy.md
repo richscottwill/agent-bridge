@@ -77,7 +77,7 @@ This is autoresearch applied to autoresearch — the loop experiments on its own
 
 ## Word Budget Governance
 
-Organ budgets are adaptive — baselines in gut.md, actual ceilings learned from experiment data. The ADD/COMPRESS priors per organ in DuckDB `autoresearch_priors` are the budget signal. Total body safety limit: 30,000w (mandatory compression review if exceeded — revisable with evidence). Baselines can drift up or down based on what the experiments show. The only static rule: if total body exceeds 30,000w, compress before any new content.
+Organ budgets are adaptive — baselines in gut.md, actual ceilings learned from experiment data. The ADD/COMPRESS priors per organ in DuckDB `autoresearch_priors` are the budget signal. Total body ceiling is adaptive — wherever the aggregate size-accuracy curve plateaus in `autoresearch_organ_health`. No hard cap. Baselines can drift up or down based on what the experiments show.
 
 ## Experiment Queue
 

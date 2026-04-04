@@ -1,8 +1,13 @@
 {
-  "last_scan_timestamp": null,
-  "per_task_timestamps": {},
-  "last_updated": "2026-04-03T12:00:00Z",
+  "last_scan_timestamp": "2026-04-04T07:00:00Z",
+  "per_task_timestamps": {
+    "1213341921686564": "2026-04-04T07:00:00Z",
+    "1213917967984980": "2026-04-04T07:00:00Z",
+    "1213923298187459": "2026-04-04T07:00:00Z",
+    "1213917772329115": "2026-04-04T07:00:00Z"
+  },
+  "last_updated": "2026-04-04T07:00:00Z",
   "protocol_version": "1.0",
   "protocol_file": "~/shared/context/active/asana-activity-monitor-protocol.md",
-  "notes": "Infrastructure initialized. First scan will use 7-day lookback. Awaiting AM-1 hook execution to populate per_task_timestamps."
+  "notes": "First full scan completed. Saturday — low activity expected. 4 priority tasks checked, 0 teammate signals. Next scan will use per_task_timestamps for incremental lookback."
 }
