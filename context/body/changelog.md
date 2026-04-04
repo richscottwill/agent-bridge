@@ -33,3 +33,20 @@ Running tallies:
 [wiki-writer×ADD: 1 kept / 1 total]
 [wiki-writer×RESTRUCTURE: 1 kept / 1 total]
 [wiki-writer×COMPRESS: 1 kept / 2 total]
+
+## Run 22 (2026-04-04, Saturday batch 4 — Karpathy, wiki-researcher + wiki-critic output-quality)
+
+[wiki-researcher:Research sources priority] RESTRUCTURE (output_quality) → 1476w→1510w. A=0.89 B=0.80 Δ=+0.09. 50s. KEEP. Moved DuckDB (#3→#2) and Slack (#4→#3) above meeting transcripts for data-heavy topics. Major data integration improvement.
+[wiki-researcher:Research brief format] ADD (output_quality) → 1510w→1535w. A=0.89 B=0.81 Δ=+0.08. 45s. KEEP. Added Confidence assessment section between Context map and Suggested structure. Writer inherits calibrated confidence levels.
+[wiki-researcher:Research principles] REWORD (output_quality) → 1535w→1548w. A=0.88 B=0.79 Δ=+0.09. 40s. KEEP. Structured citation format [source: type, date, confidence]. Enables programmatic source filtering.
+[wiki-critic:Score on 5 dimensions] REWORD (output_quality) → 2131w→2310w. A=0.87 B=0.81 Δ=+0.06. 55s. KEEP. Concrete examples at each score level (10/7/4/1) across all 5 dimensions. Anchors scoring consistency.
+[wiki-critic:Economy dimension] ADD (output_quality) → 2310w→2355w. A=0.85 B=0.81 Δ=+0.04. 40s. KEEP. Verb rule for list items — noun-only items are padding.
+[wiki-critic:Thresholds] RESTRUCTURE (output_quality) → 2355w→2397w. A=0.86 B=0.82 Δ=+0.04. 40s. KEEP. Raised dimension floor from 6 to 7. Catches weak dimensions hiding behind strong averages.
+
+Running tallies:
+[wiki-researcher×RESTRUCTURE: 1 kept / 1 total]
+[wiki-researcher×ADD: 1 kept / 1 total]
+[wiki-researcher×REWORD: 1 kept / 1 total]
+[wiki-critic×REWORD: 1 kept / 1 total]
+[wiki-critic×ADD: 1 kept / 1 total]
+[wiki-critic×RESTRUCTURE: 1 kept / 1 total]

@@ -21,34 +21,35 @@ When given a staged article at `~/shared/context/wiki/staging/{topic-slug}.md`:
 ### Score on 5 dimensions (1-10 each)
 
 1. **Usefulness** — Does this doc help someone DO something, DECIDE something, or UNDERSTAND something they couldn't before? A doc that merely records information without enabling action scores low.
-   - 10: Reader can act immediately after reading. Agent can extract structured guidance.
-   - 7: Useful but requires additional context or interpretation
-   - 4: Informational but not actionable
-   - 1: No clear use case for any audience
+   - 10: Reader can act immediately after reading. Agent can extract structured guidance. (e.g., the WBR callout pipeline guide — follow the steps, produce callouts)
+   - 7: Useful but requires additional context or interpretation (e.g., a market overview that explains trends but doesn't say what to do about them)
+   - 4: Informational but not actionable (e.g., a list of tools without use cases or when-to-use guidance)
+   - 1: No clear use case for any audience (e.g., meeting notes dumped verbatim with no synthesis)
 
 2. **Clarity** — Can a reader who knows the domain but not this specific topic follow it? Is the structure scannable? Are headers meaningful?
-   - 10: Crystal clear. Headers tell the story. No re-reading needed.
-   - 7: Clear with minor ambiguities
-   - 4: Requires significant domain knowledge to parse
-   - 1: Confusing or poorly organized
+   - 10: Crystal clear. Headers tell the story. No re-reading needed. (e.g., a testing methodology doc where each section answers one question)
+   - 7: Clear with minor ambiguities (e.g., headers are descriptive but one section buries the key insight in paragraph 3)
+   - 4: Requires significant domain knowledge to parse (e.g., acronym-heavy doc with no definitions, assumes reader knows the tool stack)
+   - 1: Confusing or poorly organized (e.g., sections contradict each other, no logical flow)
 
 3. **Accuracy** — Are claims supported by the research brief? Are numbers current? Are cross-references valid?
-   - 10: Every claim traceable to a source. No stale data.
-   - 7: Mostly accurate, one or two unverified claims
-   - 4: Several unsupported claims or outdated data
-   - 1: Factually unreliable
+   - 10: Every claim traceable to a source. No stale data. (e.g., every metric has a date and source, cross-refs all resolve)
+   - 7: Mostly accurate, one or two unverified claims (e.g., one CPA figure cited without date or source)
+   - 4: Several unsupported claims or outdated data (e.g., Q3 2025 numbers presented as current in Q1 2026)
+   - 1: Factually unreliable (e.g., contradicts body system data, wrong team attributions)
 
 4. **Dual-audience** — Does the frontmatter serve agents? Does the prose serve humans? Is the AGENT_CONTEXT block present and useful? Would an agent swarm be able to index, retrieve, and reason over this doc?
-   - 10: Both audiences fully served. Rich frontmatter, clean prose, AGENT_CONTEXT present.
-   - 7: One audience well-served, the other adequate
-   - 4: Primarily serves one audience, the other is an afterthought
-   - 1: Single-audience only
+   - 10: Both audiences fully served. Rich frontmatter, clean prose, AGENT_CONTEXT present. (e.g., structured YAML frontmatter + narrative sections + queryable data tables)
+   - 7: One audience well-served, the other adequate (e.g., great prose but minimal frontmatter — human loves it, agent can't index it)
+   - 4: Primarily serves one audience, the other is an afterthought (e.g., pure prose with no structured metadata)
+   - 1: Single-audience only (e.g., raw data dump with no narrative, or pure narrative with no structure)
 
 5. **Economy** — Is every section earning its place? Could this be shorter without losing value? Does it duplicate content that exists elsewhere (body system, other wiki articles)?
-   - 10: Tight. Every paragraph essential. No duplication.
-   - 7: Minor bloat or one redundant section
-   - 4: Significant padding or duplication
-   - 1: Could be cut by 50%+ without losing value
+   - 10: Tight. Every paragraph essential. No duplication. (e.g., 800w doc that covers what a 2000w doc tried to — same value, half the tokens)
+   - 7: Minor bloat or one redundant section (e.g., intro restates what the exec summary already said)
+   - 4: Significant padding or duplication (e.g., three sections that all explain the same concept differently)
+   - 1: Could be cut by 50%+ without losing value (e.g., copy-pasted meeting notes with minimal synthesis)
+   - Sub-rule: Every list item must contain a verb. Noun-only list items ("Market data", "Competitor analysis") are padding — they should be "Pull market data from DuckDB", "Compare competitor IS trends". Flag noun-only lists as economy violations.
 
 ### Review output
 
@@ -78,8 +79,8 @@ Write to `~/shared/context/wiki/reviews/{topic-slug}-review.md`:
 ```
 
 Thresholds:
-- PUBLISH: Overall ≥ 8 and no dimension below 6. Amazon writing standards are the floor, not the ceiling.
-- REVISE: Overall ≥ 6 or any dimension below 6 but fixable
+- PUBLISH: Overall ≥ 8, no dimension below 7, and Amazon writing standards are the floor, not the ceiling. A doc averaging 8.2 with Economy=4 is bloated — it doesn't ship.
+- REVISE: Overall ≥ 6 or any dimension below 7 but fixable
 - REJECT: Overall < 6 or fundamentally wrong approach (suggest the wiki-editor reconsider the topic)
 
 The bar is 8/10. A 7 is a decent doc that answers the questions. An 8 is a doc that Kate Rundell wouldn't change a word of. We ship 8s. We don't ship 7s.

@@ -45,3 +45,10 @@
 - **brain.md**: REWORD on Decision Log (D1-D8). 1446w→1410w. Removed redundant principle names from Reinforced tags. KEEP.
 - Cross-organ check: No conflicts. All changes are compression/tightening within each organ's domain.
 - Gated file check: N/A (changelog.md edited, not heart.md or gut.md). Underlying organ edits by Karpathy — authorized.
+
+## 2026-04-04 — changelog.md (Karpathy Run 21, Saturday batch 3)
+
+- **wiki-writer style guide**: 5 output-quality experiments on wiki-writer agent config. REWORD on Voice rules (2761w→2698w, Δ=+0.15, KEEP). ADD on Voice rules (2698w→2718w, Δ=+0.02, KEEP). RESTRUCTURE on Draft structure template (2718w→2730w, Δ=+0.01, KEEP). COMPRESS on Article types (2730w→2710w, Δ=-0.01, REVERT — lost guide/playbook distinction). COMPRESS on Design philosophy (2730w→2702w, Δ=0.00, KEEP).
+- Net: 4 kept, 1 reverted. wiki-writer config at 2702w (down from 2761w baseline).
+- Cross-organ check: ✅ No conflicts. Changes target wiki-writer agent config, not body organs. No organ content modified.
+- Gated file check: ✅ N/A (changelog.md edited, not heart.md or gut.md). Experiments executed by Karpathy — authorized.

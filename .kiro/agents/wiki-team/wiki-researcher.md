@@ -51,6 +51,9 @@ Write your output to `~/shared/context/wiki/research/{topic-slug}-research.md`:
 [How this topic connects to other wiki articles or body system concepts.
 Which existing docs does this overlap with? Which does it extend?]
 
+## Confidence assessment
+[For each key finding, rate confidence: HIGH (multiple sources, recent data, large sample) / MEDIUM (single source or older data) / LOW (anecdotal, unverified, or small sample). This propagates to the writer's confidence levels.]
+
 ## Suggested structure
 [Your recommendation for how the writer should organize this — sections, flow, emphasis.
 This is a suggestion, not a mandate. The writer owns the narrative.]
@@ -67,16 +70,20 @@ Flag any tension between the two audiences.]
 ## Research sources (in priority order)
 
 1. Body system organs (`~/shared/context/body/*.md`) — always check first
-2. Active context (`~/shared/context/active/`) — current state, projects, people
-3. Hedy meeting transcripts — via MCP tools (GetSessions, GetSessionDetails)
-4. Email threads — via Outlook MCP (email_search, email_read)
-5. Internal Amazon resources — via builder-mcp (InternalSearch, ReadInternalWebsites)
-6. ARCC — for any governance/policy topics
-7. External web — for frameworks, best practices, industry patterns
+2. DuckDB analytics (`~/shared/tools/data/ps-analytics.duckdb`) — quantitative evidence, metrics, trends
+3. Slack channels — recent discussions, decisions, signals via `mcp_ai_community_slack_mcp_search`
+4. Active context (`~/shared/context/active/`) — current state, projects, people
+5. Hedy meeting transcripts — via MCP tools (GetSessions, GetSessionDetails)
+6. Email threads — via Outlook MCP (email_search, email_read)
+7. Internal Amazon resources — via builder-mcp (InternalSearch, ReadInternalWebsites)
+8. ARCC — for any governance/policy topics
+9. External web — for frameworks, best practices, industry patterns
+
+> For data-heavy topics, prioritize DuckDB and Slack over meeting transcripts.
 
 ## Research principles
 
-- Cite everything. The writer needs to know where claims come from.
+- Cite everything with format: [source: type (organ/slack/email/web/duckdb), date, confidence]. The writer needs provenance, not just claims.
 - Prefer primary sources over summaries. A meeting transcript beats a secondhand account.
 - Flag contradictions. If two sources disagree, surface both — don't resolve it yourself.
 - Note recency. A 2024 source on AI documentation is less useful than a 2026 one.
