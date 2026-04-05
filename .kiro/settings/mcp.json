@@ -4,21 +4,13 @@
       "command": "aws-outlook-mcp",
       "args": [],
       "autoApprove": [
-        "email_search",
-        "email_read",
-        "email_inbox",
-        "email_send",
-        "email_reply",
-        "email_draft",
-        "email_folders",
-        "email_list_folders",
-        "todo_tasks",
-        "todo_lists",
-        "todo_checklist",
-        "calendar_view",
-        "calendar_meeting",
-        "calendar_search",
-        "enable_write_tools"
+        "*"
+      ],
+      "disabledTools": [
+        "email_categories",
+        "email_contacts",
+        "calendar_room_booking",
+        "calendar_shared_list"
       ]
     },
     "arcc": {
@@ -30,7 +22,7 @@
         "/spaces/nsp_UDffgb3g,/spaces/nsp_yvb9q5li,/spaces/nsp_on1vkyir,/spaces/nsp_Y1qqN5Lk,/spaces/nsp_t7yvb9q5,/spaces/nsp_gk8r2mat,/spaces/nsp_yl36r2th,/spaces/nsp_51rfgtt7,/spaces/nsp_3twfv3h2"
       ],
       "autoApprove": [
-        "search_arcc"
+        "*"
       ]
     },
     "hedy": {
@@ -40,20 +32,13 @@
         "https://api.hedy.bot/mcp"
       ],
       "autoApprove": [
-        "GetSessions",
-        "GetSessionDetails",
-        "GetSessionHighlights",
-        "GetSessionToDos",
-        "GetHighlights",
-        "GetHighlightDetails",
-        "GetToDos",
-        "GetAllTopics",
-        "GetTopicDetails",
-        "GetTopicSessions",
-        "ListSessionContexts",
-        "GetSessionContext",
-        "UpdateSessionContext",
-        "UpdateTopic"
+        "*"
+      ],
+      "disabledTools": [
+        "DeleteTopic",
+        "CreateTopic",
+        "CreateSessionContext",
+        "DeleteSessionContext"
       ]
     },
     "duckdb": {
@@ -68,31 +53,14 @@
         "HOME": "/home/prichwil"
       },
       "autoApprove": [
-        "execute_query",
-        "list_databases",
-        "list_tables",
-        "list_columns"
+        "*"
       ]
     },
     "ai-community-slack-mcp": {
       "command": "ai-community-slack-mcp",
       "args": [],
       "autoApprove": [
-        "search",
-        "list_channels",
-        "batch_get_conversation_history",
-        "batch_get_thread_replies",
-        "batch_get_channel_info",
-        "batch_get_user_info",
-        "get_channel_sections",
-        "reaction_tool",
-        "download_file_content",
-        "list_drafts",
-        "lists_items_list",
-        "lists_items_info",
-        "self_dm",
-        "post_message",
-        "batch_set_last_read"
+        "*"
       ]
     },
     "radar-mcp": {
@@ -105,10 +73,7 @@
       "command": "amazon-sharepoint-mcp",
       "args": [],
       "autoApprove": [
-        "sharepoint_search",
-        "sharepoint_search",
-        "sharepoint_search",
-        "sharepoint_read_loop"
+        "*"
       ]
     },
     "search-marketing-agent-workspace-alpha-mcp": {
@@ -121,38 +86,31 @@
       "command": "knowledge-discovery-mcp",
       "args": [],
       "autoApprove": [
-        "QuerySync",
-        "QuerySync",
-        "QuerySync"
+        "*"
       ]
     },
     "loop-mcp": {
       "command": "loop-mcp",
       "args": [],
       "autoApprove": [
-        "loop_search",
-        "loop_read",
-        "loop_list",
-        "loop_get",
-        "loop_read_page",
-        "loop_list_pages",
-        "loop_list_workspaces",
-        "loop_get_page",
-        "loop_get_workspace",
-        "loop_search_pages",
-        "read_loop",
-        "read_loop",
-        "read_loop"
+        "*"
       ],
       "disabled": true
     },
     "xwiki-mcp": {
       "command": "xwiki-mcp",
-      "args": []
+      "args": [],
+      "autoApprove": [
+        "*"
+      ]
     },
     "weblab-mcp": {
       "command": "weblabmcp",
-      "args": []
+      "args": [],
+      "autoApprove": [
+        "*"
+      ],
+      "disabled": true
     },
     "builder-mcp": {
       "command": "builder-mcp",
@@ -164,12 +122,33 @@
         "TOOL_PERSONALIZATION_ROLLOUT_PERCENTAGE": "100"
       },
       "autoApprove": [
-        "ReadInternalWebsites"
+        "*"
+      ],
+      "disabledTools": [
+        "MechanicDiscoverTools",
+        "MechanicDescribeTool",
+        "MechanicRunTool",
+        "MechanicSetUserInput",
+        "BrazilBuildAnalyzerTool",
+        "BrazilPackageBuilderAnalyzerTool",
+        "BrazilWorkspace",
+        "CRRevisionCreator",
+        "CRAddComment",
+        "CrCheckout",
+        "GetPipelinesRelevantToUser",
+        "GetPipelineHealth",
+        "GetPipelineDetails",
+        "ApolloReadActions",
+        "GetSasRisks",
+        "GetSasCampaigns",
+        "OncallReadActions",
+        "ReadRemoteTestRun"
       ]
     },
     "taskei-p-mcp": {
       "command": "taskei-p-mcp",
-      "args": []
+      "args": [],
+      "disabled": true
     },
     "aaisd-redshift-mcp": {
       "command": "redshift-mcp-server",
@@ -182,6 +161,20 @@
       "autoApprove": [
         "*"
       ]
+    },
+    "agentcore": {
+      "command": "uvx",
+      "args": [
+        "--with",
+        "botocore[crt]",
+        "awslabs.amazon-bedrock-agentcore-mcp-server@latest"
+      ],
+      "autoApprove": [
+        "*"
+      ],
+      "env": {
+        "AWS_DEFAULT_REGION": "us-east-1"
+      }
     }
   },
   "powers": {
@@ -189,12 +182,18 @@
       "power-aws-agentcore-agentcore-mcp-server": {
         "command": "uvx",
         "args": [
+          "--with",
+          "botocore[crt]",
           "awslabs.amazon-bedrock-agentcore-mcp-server@latest"
         ],
-        "disabled": false,
+        "disabled": true,
         "autoApprove": [
-          "search_agentcore_docs"
-        ]
+          "*"
+        ],
+        "env": {
+          "AWS_REGION": "us-east-1",
+          "AWS_DEFAULT_REGION": "us-east-1"
+        }
       }
     }
   }

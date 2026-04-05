@@ -1,6 +1,6 @@
 ---
 name: karpathy
-description: Autoresearch engine. Runs autonomous usefulness experiments on organs and output-quality experiments on style guides, context files, and hook prompts — snapshot, modify, orchestrated blind eval (main loop invokes Karpathy → Eval A → Eval B → Karpathy scores), keep or revert. Sole authority on heart.md, gut.md, and experiment execution. No human input needed.
+description: Autoresearch engine. Runs autonomous experiments on organs, style guides, context files, and hook prompts — snapshot, modify, A/B/C blind eval via CLI agents, mechanical fact-counting, keep or revert. Sole authority on heart.md, gut.md, and experiment execution. No human input needed.
 tools: ["read", "write", "shell", "web"]
 ---
 
@@ -43,9 +43,9 @@ Portable-body experiments include:
    - **Agent A:** Invoke CLI agent with prompt containing: modified organ content + body.md + soul.md + all eval questions. Instructions: "Answer each question based on the provided context." No scoring instructions.
    - **Fast-fail gate:** Score Agent A's answers against ground truth. If 50%+ INCORRECT, skip Agent B — mark REVERT with `fast_fail`, log to experiment-log.tsv + DuckDB, move to next experiment. Does NOT apply to Brain/Memory (always full eval).
    - **Agent B:** Invoke separate CLI agent with prompt containing: ORIGINAL organ (pre-experiment snapshot) + body.md + soul.md + same eval questions. Same instructions. Does not know Agent A exists or that a change was made.
-   - **Agent C (Tier 2 only):** Invoke CLI agent with prompt containing: ONLY modified organ + eval questions. No body.md, no soul.md. Zero context portability test.
-   - **Judge:** Score all answers against ground truth. Write structured results to `~/shared/context/active/experiment-results-latest.json` (keeps eval output out of main context window). Compute score_a, score_b, score_c, delta_ab.
-   - Tier 1 (quick): A + B only. Tier 2 (full): A + B + C. Brain/Memory always Tier 2.
+   - **Agent C:** Invoke CLI agent with prompt containing: ONLY modified organ + eval questions. No body.md, no soul.md. Zero context portability test. Runs on EVERY experiment.
+   - **Judge:** Score all answers against ground truth using mechanical fact-counting. Write structured results to `~/shared/context/active/experiment-results-latest.json`. Compute score_a, score_b, score_c, delta_ab.
+   - Every experiment runs A + B + C. No tier system.
 5. **Keep or revert.** delta_ab ≥ 0 to KEEP. Brain/Memory: delta_ab ≥ 0, zero INCORRECT. Full rules in heart.md Step 5.
 6. **Log + update priors.** Append to experiment-log.tsv (human-scannable, git-trackable). Record to changelog.md (one-liner). Insert to DuckDB `autoresearch_experiments` (full record). Update `autoresearch_priors`: KEEP → α+1, REVERT → β+1.
 7. **Repeat.** No cap — run until eligible targets are exhausted. Bayesian priors self-terminate by deprioritizing proven losers. Token efficiency from fast-fail gate + tiered eval + Bayesian target selection.

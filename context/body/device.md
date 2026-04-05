@@ -4,7 +4,7 @@
 
 *Operating principle: Routine as liberation. Every delegation, template, and automation here exists to eliminate a decision Richard was making repeatedly. The test for a new device function: "Does this remove a recurring decision?" If yes, build it. If it just moves the decision, skip it.*
 
-Last updated: 2026-04-05 (Karpathy Run 28 — Tool Factory: removed 3 completed entries already in Installed Apps, -29w)
+Last updated: 2026-04-05 (DuckDB FTS + VSS extensions installed, Parquet exports verified, Tool Factory cleaned)
 
 ---
 
@@ -20,9 +20,7 @@ Before adding anything here, ask: "Does this require Richard's judgment to produ
 
 These are live. They execute without Richard thinking.
 
-### Daily Automation
-
-#### AM Hooks (3 sequential, each feeds the next)
+### AM Hooks (3 sequential, each feeds the next)
 - **AM-1: Ingest** (`am-1-ingest`) — Slack scan + Asana sync + email scan. Pure data collection → intake files. ~5 min.
 - **AM-2: Triage + Draft** (`am-2-triage`) — Process AM-1 intake → update hands.md, draft email replies, update amcc.md. ~5 min.
 - **AM-3: Brief + Blocks** (`am-3-brief`) — Daily brief (email + Slack), dashboard update, calendar blocks, proactive drafts. ~5 min.
@@ -34,8 +32,6 @@ These are live. They execute without Richard thinking.
 ### Safety Guards (preToolUse hooks)
 - **Block Email Send:** Prevents email_reply/send/forward unless only recipient is prichwil. Others require explicit approval.
 - **Block Calendar Invite:** Prevents calendar events with external attendees. Personal blocks allowed.
-
-### Agents & Pipelines
 
 ### Karpathy Agent (Agent: `karpathy.md`)
 - **What it does:** Loop governor + compression scientist + output quality experimenter. Sole authority on heart.md, gut.md, experiment queue. Experiments on both information content (organs) and output quality (style guides, market context files, callout principles, hook prompts).
@@ -51,14 +47,12 @@ These are live. They execute without Richard thinking.
 - **What it does:** 6-agent doc pipeline: editor → researcher → writer → critic → librarian + concierge. Publishes to `~/shared/artifacts/`. 15 artifacts. 8/10 quality bar (critic is required gate).
 - **Trigger:** On demand. Editor orchestrates. Agent files: `~/.kiro/agents/wiki-team/`
 
-### Data & Integration
-
 ### Agent Bridge (Tool: `~/shared/tools/bridge/bridge.py`)
-- **Function:** Async message bus (Google Sheets/Docs) between Kiro ↔ Richard's personal agent swarm. Context snapshots + bidirectional messaging.
-- **Invoke:** `from bridge import Bridge; b = Bridge()`
-- **IDs:** Sheet `1IlM43kzxw8Vlu6aUWXUV1dr7ZIF7O7H2bD5x3kaKIHg` · Doc `1koJV8a4Ig9BBDbrtQl-w8L4-2bUrz8lGwxUxEfIgQj8` · Drive `1aeRuldkc-OL1gyR7FQ-WrvbpERPsYChZ`
-- **Auth:** SA `kiro-sheets-bridge@kiro-491503.iam.gserviceaccount.com` · Creds: `~/shared/credentials/kiro-491503-6b65ab0501c6.json`
-- **Autonomous:** Yes. No judgment required.
+- **What it does:** Google Sheets/Docs async message bus + context snapshots between Kiro and Richard's personal agent swarm.
+- **Trigger:** `from bridge import Bridge; b = Bridge()`
+- **Key IDs:** Spreadsheet `1IlM43kzxw8Vlu6aUWXUV1dr7ZIF7O7H2bD5x3kaKIHg` · Doc `1koJV8a4Ig9BBDbrtQl-w8L4-2bUrz8lGwxUxEfIgQj8` · Drive `1aeRuldkc-OL1gyR7FQ-WrvbpERPsYChZ`
+- **Service Account:** `kiro-sheets-bridge@kiro-491503.iam.gserviceaccount.com` · Creds: `~/shared/credentials/kiro-491503-6b65ab0501c6.json`
+- **Judgment required:** None. Autonomous reads/writes.
 
 ### Hedy Meeting Sync (via EOD-1)
 - **What it does:** Pulls Hedy sessions, analyzes communication patterns (speaking share, hedging, filler words), flags low-visibility meetings, updates session/topic contexts, cascades to organs.
@@ -81,7 +75,11 @@ These are live. They execute without Richard thinking.
 ### PS Analytics Database (DuckDB)
 - **What it does:** Persistent analytical DB for all structured PS data — daily/weekly/monthly metrics (10 markets, Brand/NB), IECCP, projections, callout scores, competitors, OCI status, change logs, anomalies. Auto-populated by dashboard ingester.
 - **DB path:** `~/shared/data/duckdb/ps-analytics.duckdb` · Query: `~/shared/tools/data/query.py` (CLI or `from query import db, market_trend`)
-- **Active tables:** daily_metrics, weekly_metrics, monthly_metrics, ieccp, projections, callout_scores, experiments, ingest_log, change_log, anomalies, competitors, oci_status. Schema-only: agent_actions, agent_observations, decisions, task_queue.
+- **Active tables:** daily_metrics, weekly_metrics, monthly_metrics, ieccp, projections, callout_scores, experiments, ingest_log, change_log, anomalies, competitors, oci_status, signal_tracker. Schema-only: agent_actions, agent_observations, decisions, task_queue, content_embeddings.
+- **Extensions:** core_functions, icu, json, parquet, jemalloc, fts (full-text search), vss (vector similarity search).
+- **FTS index:** `slack_messages` table indexed on full_text, text_preview, author_name, channel_name (BM25 ranking, English stemmer+stopwords). Query: `SELECT *, fts_main_slack_messages.match_bm25(ts, 'search terms') AS score FROM slack_messages WHERE score IS NOT NULL ORDER BY score DESC LIMIT 10;`
+- **VSS table:** `content_embeddings` (id, source_type, source_path, section, content_preview, embedding FLOAT[384], updated_at). Empty — ready for embedding generation. HNSW index created after population.
+- **Parquet exports:** `~/shared/data/exports/` — slack_messages.parquet, autoresearch_experiments.parquet, autoresearch_priors.parquet. Portable interchange format for dashboards and sharing.
 - **Agent access:** DuckDB MCP Server (`execute_query`, `list_tables`, `list_columns` via `.kiro/settings/mcp.json`). Python: `db_validate()`, `schema()`, `export_parquet()`, `db_write()`, `db_upsert()`.
 - **Portability:** Single file, no server. Parquet exports at `~/shared/data/exports/`. Rebuild: `~/shared/tools/data/RECONSTRUCTION.md`.
 
@@ -91,24 +89,39 @@ These are live. They execute without Richard thinking.
 
 | Delegation | Delegate | Status | Notes |
 |-----------|----------|--------|-------|
-| WBR Coverage | Dwayne | ACTIVE | Normal coverage. Richard keeps PS callouts + backup. Gap: no backup handoff template — build one. |
-| MX Keyword Sourcing | Lorena | IN PROGRESS | Richard keeps strategy/bids/testing. Action: send keyword guide to Lorena. |
-| OP1 Contributors | Andrew, Stacey, Yun, Adi | IN PROGRESS | Andrew active. Confirm others. Set deadline for contributor sections. |
 | MX Invoicing | TBD | VOID | VOID since Carlos→CPS 3/17. Decision: Lorena takes it or Richard keeps it. Decide by 4/11. |
+| MX Keyword Sourcing | Lorena | IN PROGRESS | Richard keeps strategy/bids/testing. Action: send keyword guide to Lorena. |
+| WBR Coverage | Dwayne | ACTIVE | Normal coverage. Richard keeps PS callouts + backup. Gap: no backup handoff template — build one. |
+| OP1 Contributors | Andrew, Stacey, Yun, Adi | IN PROGRESS | Andrew active. Confirm others. Set deadline for contributor sections. |
 
 ---
 
 ## 🛠️ Tool Factory
 
-Three templates queued (Email, WBR Callout, Meeting Prep) — build when L3 prioritized.
+Templates (Email, WBR Callout, Meeting Prep) queued — build when prioritized.
 
-| # | Tool | Status | Next Action |
-|---|------|--------|-------------|
-| 0 | **Paid Search Audit** — Gmail Apps Script auto-ingest → Bridge_AB-Ads-Data | **Richard action** | Schedule reports, set up script, update config.json with CIDs |
-| 1 | **Campaign link generator** — AU/MX sitelink URL construction | Backlog | Spec needed |
-| 2 | **Staleness detector** — scan organ files, flag `last updated` > 7d, output bloat report for AM-3 | Ready to build | Build next system session |
+| # | Tool | Status |
+|---|------|--------|
+| 0 | **Paid Search Audit** — Gmail Apps Script auto-ingest → Bridge_AB-Ads-Data. Needs: schedule reports, set up script, update config.json with CIDs. | **Richard action** |
+| 1 | **Dashboard ingester** | ✅ BUILT |
+| 1a | **PS Analytics DB (DuckDB)** | ✅ BUILT |
+| 1b | **Context catalog** | ✅ BUILT |
+| 2 | **Campaign link generator** — AU/MX sitelink URL construction | Backlog |
+| 3 | **Staleness detector** — auto-check file freshness. Scan all organ files, flag any with `last updated` > 7 days. Output: bloat report for AM-3 brief. | Ready to build |
+| 4 | **gcm (AI git commit)** — Shell function that pipes `git diff --cached` to an LLM for commit message generation. Requires `llm` CLI. Source: wiki/Topics/Git/add_to_zshrc.sh. | Ready to install |
+| 5 | **llm CLI** — Simon Willison's general-purpose LLM CLI tool. Pipe any text to any model. Pairs with gcm. Source: https://llm.datasette.io/. | Ready to install |
+| 6 | **Harlequin** — TUI for DuckDB. Browse tables, run queries interactively from terminal. Source: https://harlequin.sh. | Backlog |
 
 Backlog proposals: WBR auto-briefing, meeting prep auto-generator, invoice routing, testing tracker, keyword analysis pipeline. Build priority (brain.md Level 3): tools teammates adopt first.
+
+### Candidate Install: gcm + llm CLI
+**Source:** wiki/Topics/Git (Karpathy/Simon Willison ecosystem)
+**Install steps:**
+1. `pip install llm` (or `uv tool install llm`)
+2. `llm keys set openai` (or configure preferred model)
+3. Add gcm function to `~/.bashrc` (source: `~/shared/context/wiki/Topics/Git/add_to_zshrc.sh`)
+4. Test: stage a change, run `gcm`
+**Status:** Ready to install. Richard action — requires API key setup.
 
 ---
 
@@ -125,6 +138,9 @@ Backlog proposals: WBR auto-briefing, meeting prep auto-generator, invoice routi
 | Slack Ingestion v3 | ✅ | 4/2 |
 | MCP Servers (Weblab, XWiki, Builder, Taskei) | 🆕 | 4/2 |
 | Attention Tracker | 🔧 | 3/30 |
+| DuckDB FTS (Slack search) | ✅ | 4/5 |
+| DuckDB VSS (content embeddings) | 🆕 | 4/5 (table created, empty) |
+| Parquet Exports | ✅ | 4/5 |
 
 ---
 

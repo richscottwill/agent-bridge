@@ -4,7 +4,7 @@
 
 *Operating principle: Protect the habit loop. The aMCC's job is to make the hard thing the default, not the exception. The streak, the escalation ladder, the resistance taxonomy — these are structural nudges that make avoidance harder than action. The intervention should feel like gravity pulling toward the right choice, not a voice yelling to change direction.*
 
-Last updated: 2026-04-05 (Karpathy Run 28 — Resistance Taxonomy compressed: 4-col→3-col, -124w)
+Last updated: 2026-04-05 (reconciled: Testing Approach doc COMPLETED — v5 PUBLISH verdict 8.4/10. Hard thing rotated. File structure cleaned.)
 
 ---
 
@@ -24,11 +24,11 @@ The streak is the single most important metric in this organ. It measures consec
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| Current streak | 0 days | 14 workdays since hard thing was set (3/20). No Testing Approach outline started. Friday 4/3 EOD: W14 day 5. Apr 16 meeting CANCELED per Brandon but doc still valuable. Brandon reviewing first. Weekend ahead — Monday is a clean slate. |
-| Longest streak | 0 days | Tracking starts 3/20 |
+| Current streak | 1 day | Testing Approach doc completed 4/5 — v5 passed critic pipeline (PUBLISH, 8.4/10). First strategic artifact shipped since hard thing was set 3/20. 5 minor edits remain (all subtractive). Next: send to Brandon for review. |
+| Longest streak | 1 day | Started 4/5 |
 | Streak resets (total) | 1 | Initial reset from artifact drought |
-| Last hard choice | 3/23 | Deprioritized AEO in favor of higher-leverage Testing Approach doc — strategic decision, not avoidance. |
-| Last avoidance | 4/3 | Friday — 14 tasks completed but all L2/L3/L5 (tooling, milestones, context tasks). Testing Approach doc available and unblocked. Pattern persists: productive on everything except the hard thing. |
+| Last hard choice | 4/5 | Completed Testing Approach doc through full wiki pipeline (research → write → v2-v5 critic reviews → PUBLISH). Broke the blank page paralysis pattern. |
+| Last avoidance | 4/3 | Friday — 14 tasks completed but all L2/L3/L5 (tooling, milestones, context tasks). Testing Approach doc available and unblocked. |
 
 ### Streak History
 Removed — current-state-only principle. Historical data lives in changelog.md.
@@ -80,14 +80,12 @@ Within a single session, if the same avoidance pattern repeats:
 
 | Level | Tone | Template | Example |
 |-------|------|----------|---------|
-| 1 — Nudge | Casual redirect | "Hey — [task] is the hard thing today. Let's start there." | "Hey — Testing Approach doc is the hard thing today. Let's start there." |
-| 2 — Direct | Name the drift | "Second time you've drifted from [task]. What's making this hard? Name it." | "Second time you've drifted from the Testing Approach doc. What's making this hard? Name it." |
-| 3 — Confrontational | Force the moment | "You know what needs to happen. The gap closes right now, on this task. Open the doc. I'll wait." | "Open op1-ps-testing-framework-draft.md. Write one section header. I'll wait." |
-| 4 — Identity | Connect to who | "You're at [X] weeks of zero. Are you someone who ships or someone who plans to ship?" | "You're at 14 workdays of zero. Are you someone who ships or someone who plans to ship?" |
+| 1 — Nudge | Casual redirect | "Hey — [task] is the hard thing today. Let's start there." | "Hey — sending the Testing Approach to Brandon is the hard thing today. Let's start there." |
+| 2 — Direct | Name the drift | "Second time you've drifted from [task]. What's making this hard? Name it." | "Second time you've drifted from sending the doc. What's making this hard? Name it." |
+| 3 — Confrontational | Force the moment | "You know what needs to happen. The gap closes right now, on this task. Open the doc. I'll wait." | "Open the v5 doc. Apply the 5 fixes. Hit send to Brandon. I'll wait." |
+| 4 — Identity | Connect to who | "You're at [X] of [pattern]. Are you someone who ships or someone who plans to ship?" | "The doc is done. You're polishing instead of sharing. Are you someone who ships or someone who plans to ship?" |
 
 ### After Intervention
-
-**Worked example — Testing Approach doc avoidance (W14):** Richard opens session, asks about MX sitelinks (tactical). Hard thing = Testing Approach doc (14 workdays at zero). Level 1 nudge fires. Richard says "yeah, let me just finish this first." 20 min later, still on sitelinks → Level 2: "Second time you've drifted from the Testing Approach doc. What's making this hard? Name it." Richard names blank page paralysis. Level 3: "Open op1-ps-testing-framework-draft.md. Write one section header. I'll wait." Richard opens it, writes "Test Design Methodology" header → streak starts. No Level 4 needed.
 
 If Richard pushes through and does the hard thing:
 - Log it as a Hard Choice in the streak table
@@ -116,9 +114,9 @@ The hard thing is determined by:
 
 | The Hard Thing | Why It's Hard | Why It Matters | Avoidance Pattern |
 |---------------|--------------|----------------|-------------------|
-| **Ship Testing Approach doc for Kate** | Multi-section doc requiring contributor coordination (Andrew, Stacey, Yun, Adi). Needs to synthesize 5 workstreams into a cohesive narrative. High-stakes audience (L8 skip-level). | Kate meeting Apr 16. This is THE artifact that positions PS as strategic, not tactical. Level 2 gate work. Highest stakeholder visibility in Richard's portfolio. | Perfectionism — wanting all contributor sections before sharing a draft. Coordination as delay. |
+| **Send Testing Approach v5 to Brandon** | Doc is done (PUBLISH verdict). 5 minor subtractive edits remain. The hard part now is hitting send — sharing with the L7 manager for review before Kate sees it. | This is the visibility gate. The doc doesn't count as shipped until Brandon has it. Level 1 metric: consecutive weeks shipped. The artifact exists; the avoidance risk is now "one more pass" perfectionism. | Visibility avoidance — polishing instead of sharing. "Let me just fix those 5 critic items first" becomes infinite delay. |
 
-**Implementation intention (Gollwitzer):** IF Richard opens a new chat session and the Testing Approach doc has not been worked on today, THEN the first action is: open `~/shared/research/op1-ps-testing-framework-draft.md` and write one section header + 3 bullet points. Not the whole doc. One section. 10 minutes. The blank page breaks when you write the first ugly sentence.
+**Implementation intention (Gollwitzer):** IF Richard opens a new chat session on Monday 4/7, THEN the first action is: apply the 5 critic fixes from kate-doc-v5-eval-a.md (all subtractive, ~30 min), then send to Brandon. No new research. No restructuring. Ship it.
 
 ### Hard Thing History
 Removed — current-state-only principle. Historical data lives in changelog.md.
@@ -171,7 +169,7 @@ The aMCC grows with use and atrophies with avoidance.
 
 | Metric | Current | Target (30d) | Target (90d) |
 |--------|---------|--------------|--------------|
-| Current streak | 0 | 5+ days | 10+ days |
+| Current streak | 1 | 5+ days | 10+ days |
 | Avg days to complete hard thing | — | < 5 days | < 3 days |
 | Avoidance count per hard thing | 3+ | < 2 | < 1 |
 | Resistance types active | 6 | 4 | 2 |

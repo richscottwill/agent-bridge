@@ -98,20 +98,22 @@ Valid targets: organs (`~/shared/context/body/*.md` — information-retrieval ev
 - High UCB = either proven effective (high mean) or unexplored (high uncertainty) — both worth trying
 - **Selection bias check (from Run 26-27 learnings):** Force at least 30% of experiments onto techniques with <3 prior data points on the target. A healthy batch has ≤50% keep rate. Reverts are the learning signal.
 
-**Section selection:** Random within the target file.
+**Section selection:** Randomized. Number the sections in the target file, use shuf to pick one. Do not pick "the section that looks compressible" — that's selection bias. The experiment discovers what's compressible; the agent's intuition doesn't.
 
 ### Step 2: Snapshot
 - Record word count of target organ
-- Generate eval questions about the target section's content. Question count scales with experiment risk:
-  - Low risk (REWORD, small COMPRESS on non-critical organs): 2-3 questions
-  - Medium risk (RESTRUCTURE, REMOVE, larger changes): 4-6 questions
-  - High risk (Brain, Memory, any technique): 5-8 questions, include cross-organ boundary probes
-  - Standing adversarial questions are ALWAYS included when their organ is the target (see Step 4)
+- **Generate eval questions BEFORE applying the experiment.** Questions must be written while looking at the original content, not after seeing the result. This prevents unconscious question-easing.
+- Question count: 5 minimum for all experiments. Randomize difficulty by including a mix from all three levels:
+  - **Easy (1-2):** General concept questions answerable from section headers or topic sentences
+  - **Medium (1-2):** Specific facts requiring reading the section (names, dates, percentages)
+  - **Hard (1-2):** Precise details that compression is most likely to lose (IDs, formulas, multi-part facts like "CVR from X to Y", cross-references to other sections)
+  Use shuf to pick the difficulty mix. The difficulty distribution is itself a signal — track it in the experiment log.
+- Standing adversarial questions are ALWAYS included when their organ is the target (see Step 4)
   - No fixed count. Karpathy judges what coverage the experiment needs.
 - Save snapshot for rollback
 
 ### Step 3: Apply Experiment
-- Apply the selected technique to the selected section
+- Apply the selected technique to the selected section. **Apply boldly.** The eval is the safety net, not your judgment about whether the change will work. A timid edit that barely changes anything produces delta_ab = 0.0 and teaches nothing. A bold edit that breaks something produces a revert and teaches what's load-bearing. Prefer bold.
 - Experiment types (not limited to compression):
   - **COMPRESS**: resolve completed items, deduplicate, age-decay, structural compression (paragraphs→tables), protocol compression
   - **ADD**: inline a key fact that eliminates a tool call. Portable pattern: "Common Failures" sections.
@@ -131,14 +133,14 @@ Karpathy orchestrates the blind eval by invoking eval agents via CLI (`.json` ag
 
 **Agent B (control + context):** Invoked as separate CLI agent. Prompt contains: the ORIGINAL organ (pre-experiment snapshot) + body.md + soul.md + same eval questions. Instructions: answer each question. No scoring. Does not know a change was made. Does not know Agent A exists.
 
-**Agent C (Tier 2 only, treatment + zero context):** Invoked as CLI agent. Prompt contains: ONLY the MODIFIED organ + eval questions. No body.md, no soul.md, no system context. Answers only.
+**Agent C (treatment + zero context):** Invoked as CLI agent. Prompt contains: ONLY the MODIFIED organ + eval questions. No body.md, no soul.md, no system context. Answers only. Runs on EVERY experiment — portability data is always collected.
 
 **Karpathy (judge):** After all eval agents return, Karpathy scores all answers against ground truth. Writes structured results to `~/shared/context/active/experiment-results-latest.json` (overwritten each experiment — keeps eval output out of main context window):
 ```json
 {
   "experiment_id": "run28_exp3",
   "target": "eyes", "section": "competitors", "technique": "COMPRESS",
-  "eval_type": "information_retrieval", "eval_tier": 1,
+  "eval_type": "information_retrieval",
   "score_a": 0.9, "score_b": 0.8, "score_c": null, "delta_ab": 0.1,
   "fast_fail": false, "decision": "KEEP", "wall_clock_seconds": 45,
   "words_before": 2120, "words_after": 1980
@@ -146,9 +148,12 @@ Karpathy orchestrates the blind eval by invoking eval agents via CLI (`.json` ag
 ```
 Scoring method depends on eval type:
 
-**Information-retrieval evals** (organs): Score each answer CORRECT / PARTIAL / INCORRECT. Computes:
-- score_a, score_b, score_c (each 0.0 to 1.0, where CORRECT=1, PARTIAL=0.5, INCORRECT=0)
-- **Scoring detail-loss:** If Agent B gives a richer answer than Agent A for the same question (e.g., B says "CVR from 0.82% to 2.35%" while A says "+187%"), score A as PARTIAL on that question. The core fact is present but supporting detail was lost. This is how compression damage gets detected — the delta turns negative when detail is lost, even if the headline fact survives.
+**Information-retrieval evals** (organs): Score each answer mechanically using fact-counting. For each question:
+- Count the distinct facts in the ground truth answer (e.g., "CVR from 0.82% to 2.35% (+187%)" = 3 facts)
+- Count how many of those facts appear in the agent's answer
+- Score = facts_found / facts_in_ground_truth (e.g., agent says "+187%" = 1/3 = 0.33)
+- NOT FOUND = 0.0
+This removes judgment from scoring. The ground truth defines what a complete answer looks like; the score measures completeness mechanically.
 - delta_ab = score_a - score_b (the real signal: did the change help or hurt?)
 - Agent C score = portability baseline
 
@@ -166,14 +171,7 @@ Each dimension scored 0.0 to 1.0. Final score = average of all 5. delta_ab = sco
 
 For output-quality evals, Karpathy must also load the relevant style guide as context for the eval agents (e.g., richard-style-email.md when testing email drafts, richard-style-wbr.md when testing callout quality).
 
-**Eval tier determines which agents run:**
-
-| Tier | When | Agents | Cost |
-|------|------|--------|------|
-| Tier 1 (quick) | Low-risk experiments where the prior suggests high keep rate and the change is small | A + B only (skip C) | ~3 calls |
-| Tier 2 (full) | Brain/Memory always. Any experiment where Karpathy judges the risk warrants portability testing. | A + B + C | ~4 calls |
-
-Tier selected BEFORE the experiment runs. If in doubt, Tier 2. Brain and Memory always Tier 2. Tier assignment is a judgment call, not a formula — Karpathy considers organ criticality, technique invasiveness, word delta, and prior history.
+**Every experiment runs A + B + C.** No tier system. Portability data (Agent C) is collected on every experiment. The cost is ~3 CLI agent calls per experiment — this is the price of real data.
 
 **Eval question generation:**
 - Karpathy generates questions scaled to experiment risk (see Step 2). No fixed count.
