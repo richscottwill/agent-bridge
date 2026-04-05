@@ -181,13 +181,19 @@ Report summary only: `📚 Wiki lint: [N] healthy, [N] stale, [N] orphaned, [N] 
 
 ## Phase 6: Experiments
 
-**Last phase. Expendable if context is heavy.**
+**Not expendable. Run every EOD-2.**
 
-Invoke Karpathy as a CLI agent (`karpathy.json`). Do NOT run experiments yourself.
+Invoke Karpathy via the loop script: `bash ~/shared/tools/karpathy-loop.sh [target_total] "[cooldown_organs]"`
+
+The loop script launches Karpathy CLI in batches of ~10-15 experiments, relaunching with fresh context windows until the target is reached.
+
+**First-experiment verification (mandatory for ALL CLI agent pipelines):** Whenever launching a CLI agent batch that invokes other CLI agents (autoresearch eval agents, wiki pipeline agents, or any ad-hoc multi-agent workflow), monitor the first experiment/task through to completion. Confirm:
+1. CLI sub-agents are actually invoked (shell tool calls with `kiro-cli chat --agent` visible)
+2. Results come back from separate processes (not self-scored or self-completed)
+3. Output and decisions are correct
+Only then let the batch run unattended. If the first iteration self-scores or skips the CLI invocation, stop and fix the prompt. This applies to autoresearch, wiki pipelines, and any future multi-agent workflow.
 
 Karpathy CLI agent receives context: heart.md, gut.md, karpathy.md, list of organs modified in Phases 1-3 (cooldown list).
-
-The Karpathy CLI agent runs the autoresearch loop per heart.md protocol — including invoking eval agents A/B/C as independent CLI agents. The executing agent receives results and reports them.
 
 If Karpathy CLI invocation fails: skip experiments. Do not fall back to self-execution.
 

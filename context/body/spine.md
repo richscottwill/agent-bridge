@@ -10,6 +10,8 @@ Last updated: 2026-04-01 (Wednesday PT)
 
 **CRITICAL: AgentSpaces chats are deleted every 14 days.** At the start of every new session, read these files in order:
 
+**Richard:** Amazon Business, Paid Search (WW Outbound Marketing under Brandon Munday L7, she/her). Owns: AU, MX hands-on; US/EU5/JP/CA team-wide. Key focus: OCI bidding rollout (7/10 markets live), AI Max testing (US Q2 2026), AEO, Project Baloo, F90 Lifecycle. Timezone: PT (UTC-7).
+
 ### Core Bootstrap (always read)
 1. `~/shared/context/body/body.md` — The map of the whole system. Tells you what each organ does and where to find it.
 2. `~/shared/context/body/spine.md` — This file. Bootstrap sequence, tool access, directory map.
@@ -21,14 +23,6 @@ Last updated: 2026-04-01 (Wednesday PT)
 
 ### Task-Specific (read as needed)
 Then read the organ you need for the task at hand (brain, eyes, hands, memory).
-
----
-
-## Richard's Role & Markets
-- Amazon Business, Paid Search (WW Outbound Marketing under Brandon Munday L7)
-- Owns: AU (Australia), MX (Mexico) hands-on; US/EU5/JP/CA team-wide
-- Key focus: OCI bidding rollout, AI Max testing, Answer Engine Optimization, Project Baloo, F90 Lifecycle
-- Timezone: PT (UTC-7). System clock shows UTC — adjust accordingly.
 
 ---
 
@@ -83,16 +77,15 @@ Full hook details: see device.md → Installed Apps and hands.md → Hook System
 |-----------|------|-------|----------|
 | `~/shared/context/body/` | Body organs + device | Agent (maintained), Human (validated) | body.md, brain.md, eyes.md, hands.md, memory.md, spine.md, heart.md, device.md |
 | `~/shared/context/active/` | Ground truth. Live state. | Agent + Human | current.md, org-chart.md, rw-tracker.md, long-term-goals.md, asana-command-center.md, mcp-tool-reference.md |
-| `~/shared/context/intake/` | Inbox. Unprocessed material. | Human drops, Agent processes | Drafts, raw notes, new docs |
-| `~/shared/context/wiki/` | Doc pipeline + context catalog | Wiki team agents | context-catalog.md, wiki-index.md, staging/, research/, reviews/ |
-| `~/shared/context/tools/` | Utility scripts. | Agent builds | Python scripts for MCP, sync, briefs |
-| `~/shared/data/duckdb/ps-analytics.duckdb` | PS Analytics database (DuckDB) | Dashboard ingester writes, all agents read+write | CLI: `python3 ~/shared/tools/data/query.py "SQL"`. Python: `from query import db, market_trend`. MCP: `execute_query`. Schema: `~/shared/tools/data/schema.sql`. Portability: `RECONSTRUCTION.md`. Exports: `~/shared/data/exports/`. |
-| `~/shared/context/archive/` | Cold storage. | Agent | Archived artifacts, old versions |
-| `~/shared/context/meetings/` | Meeting series notes. One file per recurring meeting. | Agent summarizes from Hedy | stakeholder/, team/, manager/, peer/, adhoc/ — see README.md for full map |
-| `~/shared/artifacts/` | Published work product (7 categories) | Wiki team → Agent | testing/, strategy/, reporting/, tools/, communication/, program-details/, best-practices/ |
-| `~/shared/research/` | Standalone research outputs. | Agent | ad-copy-results.md, competitor-intel.md, oci-performance.md, daily-brief-latest.md, data files |
-| `~/shared/artifacts/` | Static references. | Human curates | index.md |
 | `~/.kiro/steering/` | Agent behavior config. | Human edits, Agent suggests | soul.md, rw-trainer.md, writing styles, prioritization, environment rules |
+| `~/shared/context/meetings/` | Meeting series notes. One file per recurring meeting. | Agent summarizes from Hedy | stakeholder/, team/, manager/, peer/, adhoc/ — see README.md for full map |
+| `~/shared/data/duckdb/ps-analytics.duckdb` | PS Analytics database (DuckDB) | Dashboard ingester writes, all agents read+write | CLI: `python3 ~/shared/tools/data/query.py "SQL"`. Python: `from query import db, market_trend`. MCP: `execute_query`. Schema: `~/shared/tools/data/schema.sql`. Portability: `RECONSTRUCTION.md`. Exports: `~/shared/data/exports/`. |
+| `~/shared/artifacts/` | Published work product (7 categories) + index.md | Wiki team → Agent, Human curates index | testing/, strategy/, reporting/, tools/, communication/, program-details/, best-practices/ |
+| `~/shared/research/` | Standalone research outputs. | Agent | ad-copy-results.md, competitor-intel.md, oci-performance.md, daily-brief-latest.md, data files |
+| `~/shared/context/intake/` | Inbox. Unprocessed material. | Human drops, Agent processes | Drafts, raw notes, new docs |
+| `~/shared/context/tools/` | Utility scripts. | Agent builds | Python scripts for MCP, sync, briefs |
+| `~/shared/context/wiki/` | Doc pipeline + context catalog | Wiki team agents | context-catalog.md, wiki-index.md, staging/, research/, reviews/ |
+| `~/shared/context/archive/` | Cold storage. | Agent | Archived artifacts, old versions |
 
 ---
 
@@ -106,6 +99,12 @@ Full hook details: see device.md → Installed Apps and hands.md → Hook System
 | long-term-goals.md | `~/shared/context/active/long-term-goals.md` | The Five Levels strategic arc | Monthly or on shift |
 
 ---
+
+## Common Failures in Using This Organ
+
+1. **Skipping body.md and going straight to an organ.** Body.md is the map — it tells you which organ to read. Without it, you guess wrong and load irrelevant context.
+2. **Reading all organs instead of task-specific ones.** The Task Routing table in body.md exists for a reason. Loading everything wastes context window and dilutes answers.
+3. **Using stale Key IDs.** Spine points to hands.md and memory.md for IDs. If those organs were updated and spine wasn't, the pointers may be stale. Always follow the pointer to the source.
 
 ## System History
 

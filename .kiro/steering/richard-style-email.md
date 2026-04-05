@@ -3,6 +3,15 @@ inclusion: manual
 ---
 # Richard Williams — Email Style Guide
 
+## Common Draft Failures (from experiment data)
+Watch for these in every draft:
+
+1. **Name people, not teams.** Wrong: "I'll work with the team." Right: "I'll connect with Yun-Kang on redirect reporting and loop in Alexis on AU web analytics." If you don't know who, say so.
+
+2. **Commit to dates, not ranges.** Wrong: "within the next two weeks." Right: "by EOW" or "target Friday 4/11." Uncertain? Give best estimate + flag: "targeting EOW, depends on Alexis's mapping timeline."
+
+3. **Read the political subtext.** For Tier 3 stakeholders (Lena, Nick), check memory.md for relationship dynamics. Tone: measured and in-control, never reactive or scrambling. Brandon's private reads inform tone but never appear in the email.
+
 ## Email (Operational / Coordination)
 - Purpose: Move work forward, unblock people, coordinate logistics
 - Length: 2-6 sentences typical. Rarely more than 2 short paragraphs.
@@ -30,19 +39,14 @@ Example (actual — MX invoice): "Hey all, here are the two invoices in question
 Example (actual — reply to Lena): "In terms of the responses you laid out below, thank you yes we will not be bidding on perishables/alcohol moving forward. We did a check on the keywords as well as adding negatives. On the point about landing pages; there's a risk to performance, and we'll still want to plan to move to paid search specific pages in the future, but we can definitely test."
 
 ## Sentence-Level Patterns
-- Parenthetical data drops throughout
+
+### Transitions & Connectors
 - "In terms of" as a transition phrase
 - "Also" to add a secondary point within the same paragraph
 - Conditional offers: "Definitely let us know if you need any work from our side"
+
+### Data & Reference Patterns
+- Parenthetical data drops throughout
 - Recommends with reasoning attached
 - References shared docs/attachments rather than re-explaining inline
 - When redirecting, names the person and briefly explains why
-
-## Common Draft Failures (from experiment data)
-Watch for these in every draft:
-
-1. **Name people, not teams.** Wrong: "I'll work with the team." Right: "I'll connect with Yun-Kang on redirect reporting and loop in Alexis on AU web analytics." If you don't know who, say so.
-
-2. **Commit to dates, not ranges.** Wrong: "within the next two weeks." Right: "by EOW" or "target Friday 4/11." Uncertain? Give best estimate + flag: "targeting EOW, depends on Alexis's mapping timeline."
-
-3. **Read the political subtext.** For Tier 3 stakeholders (Lena, Nick), check memory.md for relationship dynamics. Tone: measured and in-control, never reactive or scrambling. Brandon's private reads inform tone but never appear in the email.

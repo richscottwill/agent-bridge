@@ -27,6 +27,8 @@ When Richard faces a new decision, check:
 4. Does it involve cross-team work? He will lean into partnership, not solo execution
 5. Is someone pushing for speed over evidence? He will push back with a test proposal
 
+**Worked example — AU OCI launch decision:** Lena pushed for immediate full rollout. Template check: #4 (phased > big-bang), #1 (evidence first — CA showed +18.5% vs OP2), #5 (cross-team — MCS page builds needed). Speed pressure from Lena. Result: proposed phased approach with measurement framework. Three principles aligned → high confidence prediction.
+
 ---
 
 ## Decision Log
@@ -44,6 +46,19 @@ Decisions have a relevance half-life. Not every decision stays useful forever. T
 3. Compress the full entry to: `D[X]: [Name] — [Outcome]. Reinforced Principle #[N].`
 4. After 90 days in RESOLVED state with no references, archive to `~/shared/context/archive/`
 
+### Active Decisions (influencing current work)
+
+### D4: AU LP Full Migration [ACTIVE]
+D4: Lena overrode phased rollout — full Polaris switch. Executing. HIGH.
+
+### D9: AI Max Testing [ACTIVE]
+D9: US-first with measurement guardrails. Same OCI discipline. Reinforced #4 Phased, #1 Evidence. HIGH.
+
+### D10: F90 Lifecycle [ACTIVE]
+D10: Legal SIMs for 3+ purchases targeting. Extends PS beyond registration. Reinforced #5 Partnership. HIGH.
+
+### Foundational Decisions (shaped principles)
+
 ### D1: OCI Implementation Approach [FOUNDATIONAL]
 D1: Phased rollout with measurement framework. Reinforced #1, #4. HIGH.
 
@@ -53,9 +68,6 @@ D2: Bid caps + NB efficiency via OCI, do NOT escalate auction. Reinforced #2, #3
 ### D3: Ad Copy Overhaul (SP Study) [FOUNDATIONAL]
 D3: Shift to price/quality/selection messaging from bulk/B2B. Reinforced #7, #1. HIGH.
 
-### D4: AU LP Full Migration [ACTIVE]
-D4: Lena overrode phased rollout — full Polaris switch. Executing. HIGH.
-
 ### D5: Campaign Consolidation [FOUNDATIONAL]
 D5: Consolidate campaigns to strengthen OCI data signals. Reinforced #6, #1. HIGH.
 
@@ -64,12 +76,6 @@ D6: Lifecycle channel via ABMA partnership, 13%→30% match rate. Reinforced #5,
 
 ### D8: OP1 Structure [FOUNDATIONAL]
 D8: Problem→test→result→scale across 5 workstreams. Reinforced #5, #1. HIGH.
-
-### D9: AI Max Testing [ACTIVE]
-D9: US-first with measurement guardrails. Same OCI discipline. Reinforced #4 Phased, #1 Evidence. HIGH.
-
-### D10: F90 Lifecycle [ACTIVE]
-D10: Legal SIMs for 3+ purchases targeting. Extends PS beyond registration. Reinforced #5 Partnership. HIGH.
 
 <!-- Full decision details: db("SELECT id, name, tier, description, alternatives, rationale, principles, confidence FROM decisions ORDER BY id") -->
 
@@ -120,9 +126,7 @@ Graduation is not a date — it's evidence. The nervous system (Loop 6) tracks t
 
 ## OP1 Strategic Narrative
 
-Core argument: Every 2026 investment maps to a validated 2025 signal. PS transforming from keyword-driven to automated, audience-centric engine. Cross-functional collaboration is the differentiator.
-
-Structure: 5 workstreams (OCI Bidding, Modern Search, Audiences, User Experience, Algorithmic Ads), each problem→test→result→scale. Full draft: `~/shared/research/op1-ps-testing-framework-draft.md`. Data: Eyes → OCI Performance, Market Health.
+Core argument: Every 2026 investment maps to a validated 2025 signal. PS transforming from keyword-driven to automated, audience-centric engine. Cross-functional collaboration is the differentiator. 5 workstreams (OCI Bidding, Modern Search, Audiences, User Experience, Algorithmic Ads), each problem→test→result→scale. Full draft: `~/shared/research/op1-ps-testing-framework-draft.md`.
 
 ---
 
@@ -134,3 +138,5 @@ When multiple tasks compete for a spot, apply these tiebreakers:
 - **Visibility work > invisible work:** a Kingpin update beats internal cleanup.
 - **Automation opportunities > manual repetition:** if a task keeps recurring, flag it as a tool candidate.
 - **30-day test:** "Will this matter in 30 days?" If no, don't let it take a Core slot over something that compounds.
+
+**Worked example:** Richard has 3 tasks competing for a Core slot: (1) update MX sitelinks, (2) draft Testing Approach doc for Kate, (3) fix a broken Asana automation. Apply tiebreakers: #2 is a strategic artifact (beats #1 tactical), compounds (reusable framework), and is visibility work (Kate sees it). #3 is automation but one-and-done fix. #1 fails the 30-day test. Winner: #2.

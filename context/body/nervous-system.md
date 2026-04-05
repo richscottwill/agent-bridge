@@ -15,6 +15,18 @@ Evaluates the work every other organ does. Looks backward, measures what happene
 
 ## Calibration Loops
 
+| Loop | Organ | Cadence | Status |
+|------|-------|---------|--------|
+| 1 Decision Audit | Brain | Monthly | 5 PENDING |
+| 2 Prediction Scoring | Eyes | Daily+Weekly | Inactive (stale QA cleared) |
+| 3 Pattern Trajectory | rw-tracker | Weekly (Fri) | 3 active, 2 new |
+| 4 Delegation Verification | Device | Weekly | 1 SLIPPING, 1 ON_TRACK |
+| 5 System Health | All | Every run | ✅ Tracking |
+| 6 Principle Evolution | Brain+soul | Quarterly | Deferred → Jun 2026 |
+| 7 Coherence Audit | Cross-organ | Monthly | Deferred → 4/20 |
+| 8 Source Quality Filter | Per-source | Ongoing | Active |
+| 9 Meeting Communication | Hedy | Weekly | Active (9+ sessions) |
+
 ### Active Loops
 
 #### Loop 1: Decision Audit
@@ -29,24 +41,28 @@ Eyes | Daily + weekly | Score predicted QA: HIT/MISS/SURPRISE. Target ≥60%. Cu
 rw-tracker.md | Weekly (Friday) | IMPROVING/STUCK/WORSENING/RESOLVED. STUCK 3+ wk → structural fix. Willpower → trainer. Systems → device.
 
 #### Active Patterns (3)
-- Visibility avoidance (11wk WORSENING — 12 workdays at zero, AU weekly = L2 not L1, root cause of L1 stall, gate: Testing Approach doc)
-- Admin displacement (3wk STUCK — admin over cap displacing strategic, trainer escalation triggered)
-- Reactive fire drills (3wk STUCK — AU CPC displaced AEO POV 3rd wk, need pre-written response templates)
+| Pattern | Duration | Status | Gate/Fix |
+|---------|----------|--------|----------|
+| Visibility avoidance | 11wk | WORSENING | Testing Approach doc (L1 gate) |
+| Admin displacement | 3wk | STUCK | Trainer escalation triggered |
+| Reactive fire drills | 3wk | STUCK | Pre-written response templates needed |
 
 #### New Patterns (2)
-- Have Backbone avoidance (1wk, from annual review peer feedback — monitor)
-- Project management gaps (1wk, persisting from Forte 2025 — need lightweight tracking artifacts)
+| Pattern | Duration | Source |
+|---------|----------|--------|
+| Have Backbone avoidance | 1wk | Annual review peer feedback |
+| Project management gaps | 1wk | Forte 2025 — needs lightweight tracking |
 
 #### Root Cause
 Visibility avoidance gates L1 → blocks all downstream levels.
 
 ### Loop 4: Delegation Verification
-Device | Weekly | Score delegations ON_TRACK/SLIPPING/FAILED.
+Device | Weekly | Score: ON_TRACK / SLIPPING / FAILED.
 
-| Delegation | Delegate | Status | Last Checked | Notes |
-|-----------|----------|--------|-------------|-------|
-| MX Invoicing | Carlos → Lorena | SLIPPING | 3/25 | Carlos departed. Handoff incomplete. |
-| OP1 Contributors | Various | ON_TRACK | 3/25 | — |
+| Delegation | Delegate | Status | Last Checked | Action |
+|-----------|----------|--------|-------------|--------|
+| MX Invoicing | Carlos → Lorena | SLIPPING | 3/25 | Handoff incomplete — Carlos departed, Lorena not confirmed |
+| OP1 Contributors | Various | ON_TRACK | 3/25 | No action needed |
 
 ### Loop 5: System Health
 All organs | Every run | Word counts, staleness, reliability.
@@ -62,19 +78,28 @@ All organs | Every run | Word counts, staleness, reliability.
 
 ### Deferred Loops
 
-#### Loops 6-8: Deferred Calibration
-- **Loop 6 (Principle Evolution):** Brain + soul.md | Quarterly | First review Jun 2026.
-- **Loop 7 (Coherence Audit):** Cross-organ refs | Monthly | Last: 3/20. Next: 4/20.
-- **Loop 8 (Source Quality Filter):** T1 (builders with proof) → experiments. T2 (practitioners) → reject unless context matches. T3 (commentary) → discovery only.
+#### Loop 6: Principle Evolution
+Brain + soul.md | Quarterly | Next: Jun 2026
+Do decision principles still match actual behavior? Score each principle against last quarter's decisions.
+
+#### Loop 7: Coherence Audit
+Cross-organ refs | Monthly | Next: 4/20
+Are cross-organ pointers still valid? Check that facts referenced in one organ match the canonical source.
+
+#### Loop 8: Source Quality Filter
+Per-source | Ongoing
+T1 (builders+proof) → experiments. T2 (practitioners) → reject unless context matches. T3 (commentary) → discovery only.
 
 ### Loop 9: Meeting Communication
 Hedy data | Weekly | Speaking share, hedging, filler words, turn length.
 
+#### Baselines & Thresholds
 Hedy integrated (Run 8). 9+ sessions processed.
+- 1:1s: ~40% share (healthy baseline), hedging 0 (strong)
+- Groups: target ≥20% share, currently <15% (gap). Hedging not yet measured.
+- Confirmed pattern: Strong in 1:1s but <15% in groups (Deep Dive, Weekly Sync). Structural — Richard goes quiet when Andrew or others dominate airtime.
 
-Confirmed pattern: Strong in 1:1s (~40% share, no hedging) but <15% in groups (Deep Dive, Weekly Sync). Structural, not situational.
-
-**4/2 (2 sessions):**
+#### Latest Sessions (4/2)
 - Market Expansion Playbook Review (53 min): Richard PRESENTED — visibility breakthrough. Led session, team engaged, action items assigned TO him. Strong L2.
 - WhatsApp/Push Demo (52 min): Observational. No visibility concern — product demo. Follow-up: coordinate WhatsApp rollout for MX/AU with Lorena/Alexis.
 
@@ -96,6 +121,12 @@ Multiple artifact opportunities emerged from 4/2 Deep Dive. The playbook present
 New action items from 4/2 Deep Dive: market expansion playbook (strong L2 visibility), Year-One Optimization one-pager (by Apr 16), IECCP FAQ (by Apr 9), negative keyword list (immediate).
 
 ---
+
+## Common Failures in Using This Organ
+
+1. **Treating STUCK as a label, not a trigger.** STUCK 3+ weeks means a structural fix is needed — not more observation. Escalate: willpower patterns → trainer, system patterns → device. Example: "Admin displacement STUCK 3wk" → structural fix = pre-written response templates (device.md), not "keep monitoring."
+2. **Scoring predictions after the fact without logging.** If a prediction isn't scored within 7 days, it's stale. Archive it or score it — don't let it sit.
+3. **Ignoring the group meeting gap.** Richard's 1:1 communication is strong (~40% share). The gap is in groups (<15%). Don't conflate the two — track them separately.
 
 ## Governance
 

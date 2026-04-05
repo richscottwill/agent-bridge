@@ -63,3 +63,21 @@
 - `portable-body/body/heart.md` and `agent-bridge/body/heart.md` still have the OLD 4-dimension table with the Efficiency yield formula. These copies are now out of sync with the canonical heart.md.
 - `changelog.md` references the old Efficiency yield formula and "organ×technique" terminology — historical record, no update needed.
 - `karpathy.md` (both copies) references "organ×technique combos" in the Experiment Execution Protocol — terminology mismatch with the new "target×technique" in heart.md.
+
+## 2026-04-05 — heart.md (Step 5 quality-over-size clarification)
+
+**File:** `shared/context/body/heart.md`
+**Timestamp:** 2026-04-05
+**Change:** Added clarification to Step 5 (Keep or Revert) that output quality is the goal, not smaller files. New sentence: "The goal is output quality, not smaller files. A KEEP that adds 50 words but improves delta_ab by +0.1 is better than a KEEP that removes 100 words with delta_ab = 0.0."
+**Diff:** Single line — appended to the existing "The decision is based on delta (did it improve?), not absolute score (is it above a floor?)." sentence.
+**Cross-organ impact:** Consistent with gut.md. Gut's adaptive budget philosophy already states "If a larger organ answers more questions correctly, the budget expands" and "budgets are learned, not declared." The heart.md edit makes the same principle explicit at the experiment decision level — quality improvement justifies word count increases. No conflict detected.
+**Authorization:** ⚠️ heart.md is gated — only the karpathy agent has authority to modify this file. This edit was detected via fileEdited hook, not from a karpathy-invoked session. The change is philosophically aligned with existing heart.md and gut.md principles (delta-based decisions, adaptive budgets). If Richard made this edit directly to reinforce the quality-over-compression principle, ratify during next Karpathy loop run. If an unauthorized agent made it, flag for karpathy review.
+
+## 2026-04-05 — heart.md (scoring detail-loss rule)
+
+**File:** `shared/context/body/heart.md`
+**Timestamp:** 2026-04-05
+**Change:** Added "Scoring detail-loss" bullet to the information-retrieval evals section. New rule: if Agent B gives a richer answer than Agent A for the same question (e.g., B includes specific numbers while A gives only a percentage), score A as PARTIAL on that question. This makes compression damage detectable — delta turns negative when detail is lost, even if the headline fact survives.
+**Diff:** Single bullet added under `score_a, score_b, score_c` line in the eval scoring block.
+**Cross-organ impact:** None detected. Consistent with gut.md's adaptive budget philosophy (quality over compression). Consistent with the Step 5 "quality-over-size" clarification logged earlier today. The new rule operationalizes the same principle at the scoring level — detail loss is now measurable, not just philosophically discouraged.
+**Authorization:** ⚠️ heart.md is gated — only the karpathy agent has authority to modify this file. This edit was detected via fileEdited hook, not from a karpathy-invoked session. The change is substantive (adds a new scoring rule that affects how delta_ab is computed). If Richard made this edit directly or based on karpathy's recommendation, ratify during next Karpathy loop run. If an unauthorized agent made it, flag for karpathy review.

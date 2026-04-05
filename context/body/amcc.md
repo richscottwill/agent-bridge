@@ -78,14 +78,16 @@ The agent should monitor for these avoidance signals during any interaction:
 
 Within a single session, if the same avoidance pattern repeats:
 
-| Level | Tone | Template |
-|-------|------|----------|
-| 1 — Nudge | Casual redirect | "Hey — [task] is the hard thing today. Let's start there." |
-| 2 — Direct | Name the drift | "Second time you've drifted from [task]. What's making this hard? Name it." |
-| 3 — Confrontational | Force the moment | "You know what needs to happen. The gap closes right now, on this task. Open the doc. I'll wait." |
-| 4 — Identity | Connect to who | "You're at [X] weeks of zero. Are you someone who ships or someone who plans to ship?" |
+| Level | Tone | Template | Example |
+|-------|------|----------|---------|
+| 1 — Nudge | Casual redirect | "Hey — [task] is the hard thing today. Let's start there." | "Hey — Testing Approach doc is the hard thing today. Let's start there." |
+| 2 — Direct | Name the drift | "Second time you've drifted from [task]. What's making this hard? Name it." | "Second time you've drifted from the Testing Approach doc. What's making this hard? Name it." |
+| 3 — Confrontational | Force the moment | "You know what needs to happen. The gap closes right now, on this task. Open the doc. I'll wait." | "Open op1-ps-testing-framework-draft.md. Write one section header. I'll wait." |
+| 4 — Identity | Connect to who | "You're at [X] weeks of zero. Are you someone who ships or someone who plans to ship?" | "You're at 14 workdays of zero. Are you someone who ships or someone who plans to ship?" |
 
 ### After Intervention
+
+**Worked example — Testing Approach doc avoidance (W14):** Richard opens session, asks about MX sitelinks (tactical). Hard thing = Testing Approach doc (14 workdays at zero). Level 1 nudge fires. Richard says "yeah, let me just finish this first." 20 min later, still on sitelinks → Level 2: "Second time you've drifted from the Testing Approach doc. What's making this hard? Name it." Richard names blank page paralysis. Level 3: "Open op1-ps-testing-framework-draft.md. Write one section header. I'll wait." Richard opens it, writes "Test Design Methodology" header → streak starts. No Level 4 needed.
 
 If Richard pushes through and does the hard thing:
 - Log it as a Hard Choice in the streak table
@@ -140,17 +142,7 @@ Over time, the aMCC builds a map of Richard's resistance patterns. This is diffe
 
 ## Integration with Other Organs
 
-| Organ | aMCC Relationship |
-|-------|-------------------|
-| Brain | Decides what's right. aMCC makes you do it. |
-| Eyes | Deadlines as urgency fuel. |
-| Hands | Task list. aMCC identifies THE hard thing. |
-| Memory | Stakeholder reframes: "Lena is waiting." |
-| Device | Fires when Richard does device-level work with brain-level time. |
-| Nervous System | NS measures after. aMCC intervenes before. |
-| Gut | Prevents time on low-leverage work. |
-| Heart | Ensures loop outputs are acted on. |
-| Trainer | Sets the standard (retrospective). aMCC enforces it (prospective). |
+Brain decides what's right; aMCC makes you do it. Eyes provides deadline urgency. Hands has the task list; aMCC identifies THE hard thing from it. Memory provides stakeholder reframes ("Lena is waiting"). Device catches when Richard does device-level work with brain-level time. NS measures after; aMCC intervenes before. Gut prevents time on low-leverage work. Heart ensures loop outputs are acted on. Trainer sets the standard (retrospective); aMCC enforces it (prospective).
 
 ---
 
@@ -188,6 +180,13 @@ The aMCC grows with use and atrophies with avoidance.
 **End state:** Richard self-selects the hard thing, starts without prompting, ships without delay. The organ becomes quiet — not atrophied, but strong enough that behavior is automatic.
 
 ---
+
+## Common Failures in Using This Organ
+
+1. **Firing on legitimate fire drills.** Not every non-hard-thing task is avoidance. Manager requests, blocked dependencies, and genuine urgency don't reset the streak. Check the "What Does NOT Reset" list before intervening.
+2. **Escalating too fast.** Jumping to Level 3-4 confrontation on first drift. Start at Level 1 nudge. Most avoidance self-corrects with a casual redirect.
+3. **Treating the streak as the goal.** The streak measures behavior, but the goal is shipped artifacts. A 10-day streak with no deliverable is worse than a 3-day streak with a shipped doc.
+4. **Ignoring the resistance type.** Generic "do the hard thing" interventions miss the mark. Name the specific resistance (visibility avoidance, blank page paralysis, etc.) — the counter is different for each.
 
 ## When to Read This File
 Every session start (check streak + hard thing). When Richard drifts to comfort zone. When trainer flags a STUCK pattern.

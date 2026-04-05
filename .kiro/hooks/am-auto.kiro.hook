@@ -5,6 +5,6 @@
   "when": { "type": "userTriggered" },
   "then": {
     "type": "askAgent",
-    "prompt": "Run the autonomous morning routine.\n\nRead and execute ~/shared/context/protocols/am-auto.md.\n\nPhase 1 (Ingest) runs first — pure data collection, no writes to organs. Phase 3 (Brief) runs second — produces the daily brief, dashboard, and calendar blocks from Phase 1 output.\n\nUse invokeSubAgent for each phase to isolate context. Pass state between phases via files (intake/, morning snapshot). Report completion of both phases with summary stats."
+    "prompt": "Run the autonomous morning routine.\n\nRead and execute ~/shared/context/protocols/am-auto.md.\n\n## Phase 1: Ingest\nPure data collection — Slack scan, Asana sync, email scan. No writes to organs. Output goes to intake/ and morning snapshot files.\n\n## Phase 3: Brief\nRuns AFTER Phase 1 completes. Produces daily brief, dashboard update, and calendar blocks from Phase 1 output.\n\n## Execution\nUse invokeSubAgent for each phase to isolate context. Pass state between phases via files (intake/, morning snapshot). Report completion of both phases with summary stats."
   }
 }

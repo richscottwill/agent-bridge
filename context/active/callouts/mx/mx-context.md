@@ -74,25 +74,6 @@ Note: Q1 budgets higher than Q2+ because ie%CCP targets are less aggressive earl
 - Currency: USD confirmed (was a risk of switching to MXN)
 - Carlos manages PO creation and invoice routing
 
-## Active Email Threads (as of 3/16)
-
-### MX Invoice/PO Coordination (3/3)
-- Carlos requested invoice reassignment across POs for Jan ($65K) and Dec ($39K)
-- Jan invoice (2881861870) needs to move to PO MS-20200908
-- Dec invoice (2852759340) needs split between PO MS-18899171 and MS-19697814
-- Richard sent actual invoices from platform and warned of Google account suspension risk if past due dates
-- Recipients: Carlos Palmos, Rebeca Aguilar Arias, Laura Zumbado
-
-### ABMA-10985: MX Registrations - Unknown/Paid Search (1/30, Resolved 2/20)
-- Richard filed SIM investigating 16% WoW Brand registration decrease potentially related to 168% WoW increase in Unknown bucket
-- Hypothesis: paid search registrations landing in Unknown (seen before in MX)
-- Impact: affects ie%CCP calculation, which determines NB budget capacity
-- Resolved by ABMA with "No Action, Resolving older ticket" (no investigation completed)
-
-### FY26 Feb Prelim Actual (3/2)
-- BK Cho flagged underspending vs OP2 in central marketing and CPS
-- New budget rules: XCM tightening control on marketing spend
-
 ## Recurring Patterns
 - Brand CVR averages 4-5%, spikes to 5.5%+ during events
 - NB Generic campaigns consistently highest CPA; ongoing optimization target

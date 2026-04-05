@@ -22,20 +22,20 @@ Every other organ adds content. The gut removes content. It enforces the context
 
 ## Three Functions
 
-### 1. Digestion — Process raw material into nutrients
-**Input:** `~/shared/context/intake/` (raw files, notes, data drops)
-**Output:** Compressed facts routed to the correct organ
-**Waste:** The raw file, archived or deleted after extraction
+### Function 1: Digestion — Process raw material into nutrients
+- **Input:** `~/shared/context/intake/` (raw files, notes, data drops)
+- **Output:** Compressed facts routed to the correct organ
+- **Waste:** The raw file, archived or deleted after extraction
 
-### 2. Compression — Keep organs lean
-**Input:** All organ files
-**Output:** Tighter versions of the same content
-**Waste:** Redundant facts, resolved items, stale predictions
+### Function 2: Compression — Keep organs lean
+- **Input:** All organ files
+- **Output:** Tighter versions of the same content
+- **Waste:** Redundant facts, resolved items, stale predictions
 
-### 3. Excretion — Remove what the body no longer needs
-**Input:** Staleness signals, reference counts, completion status
-**Output:** Archived or deleted content
-**Waste:** Moved to `~/shared/context/archive/` or permanently removed
+### Function 3: Excretion — Remove what the body no longer needs
+- **Input:** Staleness signals, reference counts, completion status
+- **Output:** Archived or deleted content
+- **Waste:** Moved to `~/shared/context/archive/` or permanently removed
 
 ---
 
@@ -59,10 +59,11 @@ For each file in `intake/`: extract minimum viable facts, route to the organ whe
 | .py | Move to ~/shared/context/tools/ |
 
 ### Extraction Rules
-- Extract the *minimum viable fact*, not the full context. "AU regs were 1.1K in Feb, -1% vs OP2" is a nutrient. The full WBR callout doc is bulk.
-- Every extracted fact must have a source tag: `[source: filename, date]`
-- If a fact contradicts an existing organ fact, the newer source wins. Log the contradiction in changelog.md.
-- If a fact is ambiguous or unverifiable, tag it `[confidence: LOW]` and route it anyway. The nervous system will catch it during calibration.
+- Extract the *minimum viable fact*, not the full context. Bad: paste entire WBR callout doc. Good: "AU regs 1.1K Feb, -1% vs OP2" → route to Eyes.
+- Source tag every fact: `[source: filename, date]`
+- Contradiction: newer source wins. Log in changelog.md.
+- Ambiguous/unverifiable: tag `[confidence: LOW]`, route anyway. Nervous system catches it in calibration.
+- Worked example: Raw intake "AU Feb WBR shows 1.1K regs, CPA $118, -1% vs OP2, NB CPA down 29% from 6wk ago" → Extract: "AU Feb: 1.1K regs, CPA $118 (-1% OP2). NB CPA -29% 6wk. [source: WBR-Feb, 2026-03-05]" → Route to Eyes.
 
 ### Current Intake Backlog
 
@@ -113,16 +114,17 @@ Budgets are LEARNED CONSTRAINTS, not static numbers. The gut tracks the size-acc
 
 ### Compression Techniques
 
-| # | Technique | Rule |
-|---|-----------|------|
-| 1 | Resolve completed items | Archive DONE items: Hands 7d→summary, 14d→archive. Brain VALIDATED→one-liner. Device 30d+→one line. Eyes scored QA→archive. |
-| 2 | Deduplicate across organs | Enforce one fact, one organ. Canonical homes: people→Memory, metrics→Eyes, tasks→Hands. Others get pointers. |
-| 3 | Compress resolved patterns | Remove NS RESOLVED from rw-tracker, compress to one-liner in NS archive, strip trainer callouts. |
-| 4 | Age-based decay | Flag 90d-no-reference items. Archive non-recurring meetings. Compress 60d-silent competitors to one-liner. Move 90d contacts to Dormant (don't delete). |
-| 5 | Structural compression | Convert paragraphs→tables, repeated patterns→templates, full explanations→organ cross-refs. |
-| 6 | Protocol compression | Reduce internalized procedures to 1-2 line summaries. Preserve data tables. Validate: can agent still execute? |
-| 7 | Identity field protection | **Non-compressible.** Pronouns, preferred names, nicknames, gender identity. 100% accuracy — REVERT on any loss. See §7 details below. |
-| 8 | REMOVE constraints | **Pre-check before any REMOVE:** does the section contain unique IDs, URLs, rules, formulas, or behavioral constraints not duplicated elsewhere? If yes, do NOT remove — REWORD or COMPRESS instead. REMOVE only succeeds on motivational prose and redundant rationale. (Validated: 7/7 unique-content REMOVEs reverted, Runs 26-27.) |
+| # | Technique | Rule | Example |
+|---|-----------|------|---------|
+| 1 | Resolve completed | DONE→summary (7d), archive (14d). VALIDATED→one-liner. | "MX invoice handoff to Carlos — DONE 3/17" → archive after 3/31 |
+| 2 | Deduplicate | One fact, one organ. People→Memory, metrics→Eyes, tasks→Hands. | AU CPA in both Eyes and Memory → keep in Eyes, pointer in Memory |
+| 3 | Compress resolved | RESOLVED patterns→one-liner, strip trainer callouts. | "Admin displacement (3wk STUCK → structural fix applied)" → one-liner in NS |
+| 4 | Age decay | 90d no-ref→flag. 60d competitors→one-liner. 90d contacts→Dormant. | Competitor last seen 60d ago → "weareuncapped.com: UK, 24% IS (inactive)" |
+| 5 | Structural | Paragraphs→tables, patterns→templates, explanations→cross-refs. | 3-paragraph delegation description → one row in delegation table |
+| 6 | Protocol | Internalized procedures→1-2 line summaries. Preserve data tables. | Full bootstrap walkthrough → "Read spine.md → body.md → soul.md" |
+| 7 | Identity protection | **Non-compressible.** Pronouns, names, gender. 100% accuracy. See §7. | Brandon's she/her pronouns survive ALL compression passes unchanged |
+| 8 | REMOVE pre-check | Unique IDs/URLs/rules/formulas? → REWORD/COMPRESS, not REMOVE. (7/7 reverted.) | MCC ID 873-788-1095 exists only in Eyes → cannot REMOVE, only REWORD |
+| 9 | Cross-organ pointers | Same fact in 3+ organs → keep in canonical organ, replace others with pointer. Canonical: metrics→Eyes, people→Memory, tasks→Hands, decisions→Brain. | AU CPA in Eyes + Memory + Hands → keep in Eyes, pointer `(see Eyes)` in others |
 
 **7. Identity field protection** (added Run 15, from intake request — Karpathy approved)
 - Identity fields are **non-compressible**. They must survive all COMPRESS, REMOVE, and REWORD experiments unchanged.

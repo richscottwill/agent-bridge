@@ -20,7 +20,9 @@ Before adding anything here, ask: "Does this require Richard's judgment to produ
 
 These are live. They execute without Richard thinking.
 
-### AM Hooks (3 sequential, each feeds the next)
+### Daily Automation
+
+#### AM Hooks (3 sequential, each feeds the next)
 - **AM-1: Ingest** (`am-1-ingest`) — Slack scan + Asana sync + email scan. Pure data collection → intake files. ~5 min.
 - **AM-2: Triage + Draft** (`am-2-triage`) — Process AM-1 intake → update hands.md, draft email replies, update amcc.md. ~5 min.
 - **AM-3: Brief + Blocks** (`am-3-brief`) — Daily brief (email + Slack), dashboard update, calendar blocks, proactive drafts. ~5 min.
@@ -32,6 +34,8 @@ These are live. They execute without Richard thinking.
 ### Safety Guards (preToolUse hooks)
 - **Block Email Send:** Prevents email_reply/send/forward unless only recipient is prichwil. Others require explicit approval.
 - **Block Calendar Invite:** Prevents calendar events with external attendees. Personal blocks allowed.
+
+### Agents & Pipelines
 
 ### Karpathy Agent (Agent: `karpathy.md`)
 - **What it does:** Loop governor + compression scientist + output quality experimenter. Sole authority on heart.md, gut.md, experiment queue. Experiments on both information content (organs) and output quality (style guides, market context files, callout principles, hook prompts).
@@ -47,12 +51,14 @@ These are live. They execute without Richard thinking.
 - **What it does:** 6-agent doc pipeline: editor → researcher → writer → critic → librarian + concierge. Publishes to `~/shared/artifacts/`. 15 artifacts. 8/10 quality bar (critic is required gate).
 - **Trigger:** On demand. Editor orchestrates. Agent files: `~/.kiro/agents/wiki-team/`
 
+### Data & Integration
+
 ### Agent Bridge (Tool: `~/shared/tools/bridge/bridge.py`)
-- **What it does:** Google Sheets/Docs async message bus + context snapshots between Kiro and Richard's personal agent swarm.
-- **Trigger:** `from bridge import Bridge; b = Bridge()`
-- **Key IDs:** Spreadsheet `1IlM43kzxw8Vlu6aUWXUV1dr7ZIF7O7H2bD5x3kaKIHg` · Doc `1koJV8a4Ig9BBDbrtQl-w8L4-2bUrz8lGwxUxEfIgQj8` · Drive `1aeRuldkc-OL1gyR7FQ-WrvbpERPsYChZ`
-- **Service Account:** `kiro-sheets-bridge@kiro-491503.iam.gserviceaccount.com` · Creds: `~/shared/credentials/kiro-491503-6b65ab0501c6.json`
-- **Judgment required:** None. Autonomous reads/writes.
+- **Function:** Async message bus (Google Sheets/Docs) between Kiro ↔ Richard's personal agent swarm. Context snapshots + bidirectional messaging.
+- **Invoke:** `from bridge import Bridge; b = Bridge()`
+- **IDs:** Sheet `1IlM43kzxw8Vlu6aUWXUV1dr7ZIF7O7H2bD5x3kaKIHg` · Doc `1koJV8a4Ig9BBDbrtQl-w8L4-2bUrz8lGwxUxEfIgQj8` · Drive `1aeRuldkc-OL1gyR7FQ-WrvbpERPsYChZ`
+- **Auth:** SA `kiro-sheets-bridge@kiro-491503.iam.gserviceaccount.com` · Creds: `~/shared/credentials/kiro-491503-6b65ab0501c6.json`
+- **Autonomous:** Yes. No judgment required.
 
 ### Hedy Meeting Sync (via EOD-1)
 - **What it does:** Pulls Hedy sessions, analyzes communication patterns (speaking share, hedging, filler words), flags low-visibility meetings, updates session/topic contexts, cascades to organs.
@@ -85,22 +91,22 @@ These are live. They execute without Richard thinking.
 
 | Delegation | Delegate | Status | Notes |
 |-----------|----------|--------|-------|
-| MX Invoicing | TBD | VOID | VOID since Carlos→CPS 3/17. Decision: Lorena takes it or Richard keeps it. Decide by 4/11. |
-| MX Keyword Sourcing | Lorena | IN PROGRESS | Richard keeps strategy/bids/testing. Action: send keyword guide to Lorena. |
 | WBR Coverage | Dwayne | ACTIVE | Normal coverage. Richard keeps PS callouts + backup. Gap: no backup handoff template — build one. |
+| MX Keyword Sourcing | Lorena | IN PROGRESS | Richard keeps strategy/bids/testing. Action: send keyword guide to Lorena. |
 | OP1 Contributors | Andrew, Stacey, Yun, Adi | IN PROGRESS | Andrew active. Confirm others. Set deadline for contributor sections. |
+| MX Invoicing | TBD | VOID | VOID since Carlos→CPS 3/17. Decision: Lorena takes it or Richard keeps it. Decide by 4/11. |
 
 ---
 
 ## 🛠️ Tool Factory
 
-Templates (Email, WBR Callout, Meeting Prep) queued — build when prioritized.
+Three templates queued (Email, WBR Callout, Meeting Prep) — build when L3 prioritized.
 
-| # | Tool | Status |
-|---|------|--------|
-| 0 | **Paid Search Audit** — Gmail Apps Script auto-ingest → Bridge_AB-Ads-Data. Needs: schedule reports, set up script, update config.json with CIDs. | **Richard action** |
-| 1 | **Campaign link generator** — AU/MX sitelink URL construction | Backlog |
-| 2 | **Staleness detector** — auto-check file freshness. Spec: scan all organ files, flag any with `last updated` > 7 days. Compare against gut.md §4 age-based decay thresholds. Output: bloat report for AM-3 brief. | Ready to build |
+| # | Tool | Status | Next Action |
+|---|------|--------|-------------|
+| 0 | **Paid Search Audit** — Gmail Apps Script auto-ingest → Bridge_AB-Ads-Data | **Richard action** | Schedule reports, set up script, update config.json with CIDs |
+| 1 | **Campaign link generator** — AU/MX sitelink URL construction | Backlog | Spec needed |
+| 2 | **Staleness detector** — scan organ files, flag `last updated` > 7d, output bloat report for AM-3 | Ready to build | Build next system session |
 
 Backlog proposals: WBR auto-briefing, meeting prep auto-generator, invoice routing, testing tracker, keyword analysis pipeline. Build priority (brain.md Level 3): tools teammates adopt first.
 

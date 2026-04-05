@@ -36,8 +36,8 @@ One idea per sentence. No compound sentences with three clauses joined by commas
 ### Purpose statement first
 The Narrative Template structure: Purpose → Background → Problem/Opportunity → Recommendation → Next Steps. The purpose statement goes in the first paragraph: "State the purpose of your document. Explain what you need to happen, and why it matters to the business. If you're asking for a decision, state it up front."
 
-### Data embedded in narrative
-Instead of standalone tables followed by interpretation, weave numbers into prose: "We launched Tk improvements to Search YTD, yielding an incremental $Tk OPS (US: $Tk, ROW: $Tk)." Tables are for comparisons where the reader needs to scan across multiple dimensions — not for presenting sequential data points that could be a sentence.
+### Data in narrative
+Instead of standalone tables followed by interpretation, weave numbers into prose: "We launched Tk improvements to Search YTD, yielding an incremental $Tk OPS (US: $Tk, ROW: $Tk)." Tables are for comparisons where the reader needs to scan across multiple dimensions — not for presenting sequential data points that could be a sentence. Contextualize numbers: [metric] [value] ([comparison]: [vs what], [interpretation]: [so what]). Example: 'AU NB CPA $118 (+3% WoW, -29% from 6wk ago) — bid strategy working, Polaris migration may cause short-term noise.' Compare across dimensions: test vs control, PoP, market vs market, channel vs channel. Separate platform data from business data (Google Ads vs Hubble/internal). Attribute causation carefully: "seems to have allowed" not "caused". Include the "so what" — every data point connects to a recommendation. Honest about limitations: "we'd need a longer timeline" / "volume too low to draw conclusions". ie%CCP always contextualized against target. In testing plans, quantify expected improvement ranges: "5%-15%" not "significant".
 
 ### Cut anything duplicative
 From the Working Backwards Guide: "Every sentence and quote should add unique value. Cut anything that's duplicative. Ask, 'does the reader really need to know this to understand the core value and capabilities?'"
@@ -55,19 +55,4 @@ Confidence calibration:
 | MEDIUM | 2-3 weeks data OR <500 events OR mixed signals | "Polaris impact unclear — 2 weeks, traffic down but CVR up, MEDIUM confidence" |
 | LOW | <2 weeks, <100 events, single data point, or contradictory sources | "IT ad copy lift directional only — LOW confidence (97% fewer clicks than control)" |
 
-## What NOT to Do
-- Don't add corporate filler ("synergize," "leverage our learnings going forward")
-- Don't remove Richard's parenthetical style — it makes docs more readable
-- Don't over-formalize. Richard's OP1 doc is leadership-ready without sounding like a press release.
-- Don't add hedging language. Richard's directness is an asset.
-- Don't strip first-person accountability. "I could have put more attention towards..." is stronger than "there were delays in planning."
 
-## Analytical Patterns for Leadership Context
-- Always contextualize numbers using this pattern: [metric] [value] ([comparison]: [vs what], [interpretation]: [so what]). Example: 'AU NB CPA $118 (+3% WoW, -29% from 6wk ago) — bid strategy working, Polaris migration may cause short-term noise.'
-- Compare across dimensions: test vs control, PoP, market vs market, channel vs channel
-- Separate platform data from business data (Google Ads vs Hubble/internal)
-- Attribute causation carefully: "seems to have allowed" not "caused"
-- Include the "so what" — every data point connects to a recommendation
-- Honest about limitations: "we'd need a longer timeline" / "volume too low to draw conclusions"
-- ie%CCP always contextualized against target
-- In testing plans, quantify expected improvement ranges: "5%-15%" not "significant"

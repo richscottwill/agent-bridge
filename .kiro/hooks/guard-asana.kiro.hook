@@ -8,6 +8,6 @@
   },
   "then": {
     "type": "askAgent",
-    "prompt": "ASANA GUARDRAIL CHECK. Inspect the pending tool call. If it is a READ operation (any tool starting with Get, Search, List, or containing 'read', 'find', 'query') → respond ACCESS GRANTED. If it is a WRITE operation (UpdateTask, CreateTask, CreateTaskStory, SetParentForTask, AddTagForTask, RemoveTagForTask, or any tool that modifies data): check the target task. If the task is assigned to Richard (assignee GID 1212732742544167) → ACCESS GRANTED. If the task is NOT assigned to Richard or assignee is unknown → ACCESS DENIED. Do NOT proceed with the tool call. Log the decision."
+    "prompt": "ASANA GUARDRAIL. READ ops (Get/Search/List/read/find/query) → ACCESS GRANTED. WRITE ops (UpdateTask, CreateTask, CreateTaskStory, SetParentForTask, AddTagForTask, RemoveTagForTask): if assignee GID = 1212732742544167 (Richard) → ACCESS GRANTED, else → ACCESS DENIED, block call. Log decision."
   }
 }

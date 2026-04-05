@@ -19,6 +19,7 @@ inclusion: manual
 - MoM changes attributed to specific levers (investment shifts, CVR changes, seasonal demand)
 - Efficiency metrics (ie%CCP, CPA) always contextualized against targets
 - Brand vs NB breakdown when it explains the movement
+- Confidence signal: if a market has <2 weeks of data or <100 registrations in the period, flag as LOW confidence and state why (e.g., "LOW confidence — first full month post-migration, baseline still forming")
 
 ## Common Failures
 1. **Month without YTD.** Never report a single month in isolation. YTD immediately follows the monthly line — it shows whether the month is a blip or a trend.

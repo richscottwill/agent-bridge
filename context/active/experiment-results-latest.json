@@ -1,17 +1,8 @@
 {
-  "experiment_id": "run31_exp5",
-  "target": "heart",
-  "section": "Step 3 technique descriptions",
-  "technique": "REMOVE",
-  "eval_type": "information_retrieval",
-  "eval_tier": 1,
-  "score_a": 1.0,
-  "score_b": 1.0,
-  "score_c": null,
-  "delta_ab": 0.0,
-  "fast_fail": false,
-  "decision": "KEEP",
-  "wall_clock_seconds": 16,
-  "words_before": 4122,
-  "words_after": 4014
+  "experiment_id": "run41_exp1",
+  "target": "heart", "section": "Step 1: Select Target", "technique": "RESTRUCTURE",
+  "eval_type": "information_retrieval", "eval_tier": 2,
+  "score_a": 1.0, "score_b": 0.9, "score_c": 1.0, "delta_ab": 0.1,
+  "fast_fail": false, "decision": "KEEP", "wall_clock_seconds": 120,
+  "words_before": 3993, "words_after": 3913
 }
