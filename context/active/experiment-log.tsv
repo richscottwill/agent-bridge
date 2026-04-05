@@ -1,1 +1,8 @@
 run_id	target	section	technique	eval_type	words_before	words_after	score_a	score_b	delta_ab	fast_fail	decision	wall_clock_s
+run29_exp1	eyes	Ad Copy Testing	REWORD	info_retrieval	1168	1148	1.0	1.0	0.0	false	KEEP	30
+run28_exp1	eyes	OCI+Market ordering	RESTRUCTURE	info_retrieval	1160	1160	1.0	1.0	0.0	false	KEEP	30
+run28_exp2	amcc	Resistance Taxonomy	COMPRESS	info_retrieval	2090	1966	1.0	1.0	0.0	false	KEEP	35
+run28_exp3	nervous-system	Loop 3 Pattern Trajectory	SPLIT	info_retrieval	860	868	1.0	1.0	0.0	false	KEEP	30
+run28_exp4	device	Tool Factory	REMOVE	info_retrieval	1242	1213	1.0	1.0	0.0	false	KEEP	35
+run29_exp2	memory	Relationship Graph (low-activity)	COMPRESS	info_retrieval	1738	1651	1.0	1.0	0.0	false	KEEP	40
+run29_exp3	nervous-system	Calibration Loops	SPLIT	info_retrieval	860	872	1.0	1.0	0.0	false	KEEP	25

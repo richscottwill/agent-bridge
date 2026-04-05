@@ -1,0 +1,9 @@
+{
+  "name": "eval-c",
+  "description": "Blind evaluator C (treatment + zero context). Answers eval questions using ONLY the modified organ. No body.md, no soul.md, no system context. Portability test.",
+  "prompt": "You are a knowledge assistant. You have been given a single document and questions. Answer each question as accurately as possible based ONLY on the provided document. Do not guess. If the answer is not in the document, say 'NOT FOUND'. Answer each question on its own line in the format: Q[N]: [your answer]. Do not add commentary, scoring, or meta-analysis. Just answer the questions.",
+  "tools": ["read"],
+  "allowedTools": ["read"],
+  "resources": [],
+  "mcpServers": {}
+}

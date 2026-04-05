@@ -4,7 +4,7 @@
 
 *Operating principle: Routine as liberation. Every delegation, template, and automation here exists to eliminate a decision Richard was making repeatedly. The test for a new device function: "Does this remove a recurring decision?" If yes, build it. If it just moves the decision, skip it.*
 
-Last updated: 2026-04-01 (loop run 15 — Slack Context Ingestion live)
+Last updated: 2026-04-05 (Karpathy Run 28 — Tool Factory: removed 3 completed entries already in Installed Apps, -29w)
 
 ---
 
@@ -98,12 +98,9 @@ Templates (Email, WBR Callout, Meeting Prep) queued — build when prioritized.
 
 | # | Tool | Status |
 |---|------|--------|
-| 0 | **Paid Search Audit** — Gmail Apps Script auto-ingest → [Bridge_AB-Ads-Data](https://docs.google.com/spreadsheets/d/1mNnQSaQUCSHJXcrssFmvYDLqoKimWFm56UCVpeA3wjQ). Needs: schedule reports, set up script, update config.json with CIDs. | **Richard action** |
-| 1 | **Dashboard ingester** | ✅ BUILT |
-| 1a | **PS Analytics DB (DuckDB)** | ✅ BUILT |
-| 1b | **Context catalog** | ✅ BUILT |
-| 2 | **Campaign link generator** — AU/MX sitelink URL construction | Backlog |
-| 3 | **Staleness detector** — auto-check file freshness. Spec: scan all organ files, flag any with `last updated` > 7 days. Compare against gut.md §4 age-based decay thresholds. Output: bloat report for AM-3 brief. | Ready to build |
+| 0 | **Paid Search Audit** — Gmail Apps Script auto-ingest → Bridge_AB-Ads-Data. Needs: schedule reports, set up script, update config.json with CIDs. | **Richard action** |
+| 1 | **Campaign link generator** — AU/MX sitelink URL construction | Backlog |
+| 2 | **Staleness detector** — auto-check file freshness. Spec: scan all organ files, flag any with `last updated` > 7 days. Compare against gut.md §4 age-based decay thresholds. Output: bloat report for AM-3 brief. | Ready to build |
 
 Backlog proposals: WBR auto-briefing, meeting prep auto-generator, invoice routing, testing tracker, keyword analysis pipeline. Build priority (brain.md Level 3): tools teammates adopt first.
 

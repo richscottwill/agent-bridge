@@ -4,7 +4,7 @@
 
 *Operating principle: Protect the habit loop. The aMCC's job is to make the hard thing the default, not the exception. The streak, the escalation ladder, the resistance taxonomy — these are structural nudges that make avoidance harder than action. The intervention should feel like gravity pulling toward the right choice, not a voice yelling to change direction.*
 
-Last updated: 2026-04-02 (loop run 17: 13 workdays at zero, Brandon 1:1 TODAY at noon)
+Last updated: 2026-04-05 (Karpathy Run 28 — Resistance Taxonomy compressed: 4-col→3-col, -124w)
 
 ---
 
@@ -127,14 +127,14 @@ Removed — current-state-only principle. Historical data lives in changelog.md.
 
 Over time, the aMCC builds a map of Richard's resistance patterns. This is different from the trainer's mediocrity patterns — those are behavioral. These are psychological.
 
-| Resistance Type | Description | How It Manifests | Counter |
-|----------------|-------------|-----------------|---------|
-| **Visibility avoidance** | Fear that publishing = self-promotion | Polishes privately instead of sharing rough drafts | Share the ugly draft NOW. The doc serves others — hoarding it serves no one. Hit send before "one more pass." |
-| **Blank page paralysis** | Can't start because output isn't clear | Researches, re-reads, checks email — anything but writing | Open the doc. Write one bad sentence. You can fix bad writing; you can't fix nothing. Timer: 10 min, one section. |
-| **Competence anxiety** | Output won't be good enough for Kate/Brandon | Delays sharing until "ready" (never ready) | Brandon shared a Loop doc with typos. Kate reads rough drafts. Send at 80% — feedback makes it 100%. |
-| **Comfort zone gravity** | Engine Room work feels productive and safe | Gravitates to bids/keywords when strategic work is available | Stop. Close the campaign tab. Open the strategy doc. Execution is your floor — you can't reach the ceiling from there. |
-| **Delegation guilt** | Feels wrong to hand off work | Does the work himself after delegation is agreed | Name the delegate. Send the handoff. Delegation multiplies — Carlos doing invoices freed you for OCI. |
-| **Urgency addiction** | Reactive fire drills feel important | Responds to every ping, every "quick question" | Before responding: "Is this urgent or important?" If urgent-not-important, defer it. Protect the focus block. |
+| Resistance Type | Signal | Counter |
+|----------------|--------|---------|
+| **Visibility avoidance** | Polishes privately instead of sharing | Share ugly draft NOW. Hit send before "one more pass." |
+| **Blank page paralysis** | Researches/re-reads instead of writing | Write one bad sentence. Timer: 10 min, one section. |
+| **Competence anxiety** | Delays until "ready" (never ready) | Brandon shares docs with typos. Send at 80%. |
+| **Comfort zone gravity** | Gravitates to bids/keywords over strategy | Close campaign tab. Open strategy doc. Execution is your floor. |
+| **Delegation guilt** | Does work himself after delegation agreed | Name delegate. Send handoff. Delegation multiplies. |
+| **Urgency addiction** | Responds to every ping mid-focus | "Urgent or important?" If urgent-not-important, defer. |
 
 ---
 

@@ -117,17 +117,10 @@ L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate R
 - Meeting dynamic: Richard mentors Adi — teaches pacing, ICCP, analytical frameworks. Adi growing (70-80% → active contributor). Richard most articulate in these sessions. Document teaching moments as frameworks.
 
 ### Harjeet Heer (hkheer) — Sr. Program Mgr ABIX, L6, Seattle
-- Reports to: Nick Georgijev
-- Last interaction: 3/11 (forwarded AU WBR)
-- Tone: Professional, brief. Signs "Thanks, Harjeet"
-- Current topic: Stepped away from AU day-to-day
-- Draft style: Concise, show competence.
+- Reports to: Nick Georgijev. Last: 3/11. Stepped away from AU day-to-day. Tone: Professional, brief.
 
 ### Alex VanDerStuyf (afvans) — AEM/Translations
-- Last interaction: 3/20 (Asana — Polaris Brand pages WW, 6-step rollout)
-- Tone: Professional, organized. Signs "Thank you, -Alex"
-- Current topic: Polaris WW rollout — AEM translations, Asana tracking, carousel updates
-- Draft style: Professional, reference PD submission IDs.
+- Last: 3/20 (Asana — Polaris Brand pages WW). Topic: AEM translations, Asana tracking, carousel updates. Tone: Professional, organized. Draft: reference PD submission IDs.
 
 ### Andrew Wirtz (awirtz) — DG/Algorithmic Ads, L5
 - Reports to: Brandon Munday (peer)
@@ -138,21 +131,13 @@ L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate R
 - Meeting dynamic: Highly vocal in groups — dominates airtime with EU data. Richard goes quiet. Visibility gap real and consistent. Richard needs strategic commentary during Andrew's updates.
 
 ### Vijay Kumar (vkumarmp) — Tech Lead, Baloo
-- Reports to: Unknown (Tech org)
-- Last interaction: 3/26 (Baloo Early Access cost planning, 18 min 1:1)
-- Tone: Professional, thorough. Appreciative.
-- Current topic: Baloo early access (50 stakeholders, Tampermonkey), cost guardrails, SIM docs
-- Draft style: Professional, include cost data and technical details.
-- Meeting dynamic: Organized, proactive. Defers to Richard on PS cost implications. Good collaborative dynamic.
+- Last: 3/26 (cost planning, 18 min). Topic: Baloo early access (50 stakeholders, Tampermonkey), cost guardrails, SIM docs. Tone: Professional, thorough. Defers to Richard on PS cost implications.
 
 ### Caroline Miller (carolimy) — Product Marketing Manager, reports to Ann Vu
-- Last interaction: 3/27 (Biweekly AB Onsite Events — Prime Day brief, translation SLA, Memorial Day)
-- Tone: Professional, organized. Signs "Cheers, Caroline Miller"
-- Current topic: Prime Day marketing brief, Memorial Day Sale 2026
-- Draft style: Match organized style, reference deadlines.
+- Last: 3/27 (Biweekly AB Onsite Events). Topic: Prime Day marketing brief, Memorial Day Sale 2026. Tone: Professional, organized. Draft: match organized style, reference deadlines.
 
 ### Frank Volinsky — MCS team, page builds/weblab
-- Last interaction: 3/31 (CANCELLED Polaris sync — got requirements from Alex. MCS-3004.)
+- Last: 3/31 (CANCELLED Polaris sync — got requirements from Alex. MCS-3004.)
 - Tone: Professional, brief
 - Current topic: WW PS Brand Polaris weblab — requirements confirmed. MX Auto/Beauty LPs.
 - Draft style: Brief, action-oriented.

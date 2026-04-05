@@ -62,9 +62,6 @@ D5: Consolidate campaigns to strengthen OCI data signals. Reinforced #6, #1. HIG
 ### D6: Engagement Channel [FOUNDATIONAL]
 D6: Lifecycle channel via ABMA partnership, 13%→30% match rate. Reinforced #5, #1. HIGH.
 
-### D7: WBR Traffic Decline [RESOLVED — pending audit]
-D7: Bid strategy + seasonality, not systemic. MEDIUM. Pending deep dive. Archive candidate (90d from resolution).
-
 ### D8: OP1 Structure [FOUNDATIONAL]
 D8: Problem→test→result→scale across 5 workstreams. Reinforced #5, #1. HIGH.
 

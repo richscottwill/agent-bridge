@@ -113,10 +113,10 @@
     },
     "wiki_lint": {
       "cadence": "weekly",
-      "last_run": null,
-      "last_run_period": null,
+      "last_run": "2026-04-05",
+      "last_run_period": "2026-W14",
       "description": "Weekly wiki health lint: orphan detection, stale content flagging, broken cross-references, missing frontmatter, SITEMAP drift. Runs wiki-audit skill and writes results to wiki/health/ and wiki/audits/.",
-      "notes": "4/5: Created. Inspired by Karpathy llm-wiki lint pattern. First run next EOD-2 Phase 4."
+      "notes": "4/5: First run complete. 42 indexed, 67 on disk, 22 orphans (7 archived-on-disk, 9 unindexed, 6 expected). 0 stale. Action items: clean archived files, index historical tests."
     },
     "monthly_synthesis": {
       "cadence": "monthly",

@@ -2,7 +2,7 @@
 
 *Operating principle: Invisible over visible. Surface insights that lead to structural changes — not reports that require Richard to act on them. When a pattern is STUCK for 3 weeks, propose a structural fix.*
 
-Last updated: 2026-04-04 (Karpathy Run 26 — Loop 3 Pattern table merged: 6-row table→2 summary lines with root cause)
+Last updated: 2026-04-05 (Karpathy Run 28 — Loop 3 split into Active/New/Root Cause subsections)
 Created: 2026-03-20
 
 ---
@@ -15,7 +15,9 @@ Evaluates the work every other organ does. Looks backward, measures what happene
 
 ## Calibration Loops
 
-### Loop 1: Decision Audit
+### Active Loops
+
+#### Loop 1: Decision Audit
 Brain | Monthly | Score decisions VALIDATED/PARTIALLY/INVALIDATED/PENDING. INVALIDATED → flag principle.
 
 5 decisions PENDING audit (D1, D2, D3, D4, D7). Triggers: CA/JP/EU3 data Jul 2026, monthly CPA, UK +31% regs (IT when volume), Polaris +30d, deep dive data.
@@ -26,9 +28,17 @@ Eyes | Daily + weekly | Score predicted QA: HIT/MISS/SURPRISE. Target ≥60%. Cu
 ### Loop 3: Pattern Trajectory
 rw-tracker.md | Weekly (Friday) | IMPROVING/STUCK/WORSENING/RESOLVED. STUCK 3+ wk → structural fix. Willpower → trainer. Systems → device.
 
-Active patterns (3): visibility avoidance (11wk WORSENING — 12 workdays at zero, AU weekly = L2 not L1, root cause of L1 stall, gate: Testing Approach doc), admin displacement (3wk STUCK — admin over cap displacing strategic, trainer escalation triggered), reactive fire drills (3wk STUCK — AU CPC displaced AEO POV 3rd wk, need pre-written response templates).
-New patterns (2): Have Backbone avoidance (1wk, from annual review peer feedback — monitor), project management gaps (1wk, persisting from Forte 2025 — need lightweight tracking artifacts).
-Root cause: visibility avoidance gates L1 → blocks all downstream levels.
+#### Active Patterns (3)
+- Visibility avoidance (11wk WORSENING — 12 workdays at zero, AU weekly = L2 not L1, root cause of L1 stall, gate: Testing Approach doc)
+- Admin displacement (3wk STUCK — admin over cap displacing strategic, trainer escalation triggered)
+- Reactive fire drills (3wk STUCK — AU CPC displaced AEO POV 3rd wk, need pre-written response templates)
+
+#### New Patterns (2)
+- Have Backbone avoidance (1wk, from annual review peer feedback — monitor)
+- Project management gaps (1wk, persisting from Forte 2025 — need lightweight tracking artifacts)
+
+#### Root Cause
+Visibility avoidance gates L1 → blocks all downstream levels.
 
 ### Loop 4: Delegation Verification
 Device | Weekly | Score delegations ON_TRACK/SLIPPING/FAILED.
@@ -46,11 +56,13 @@ All organs | Every run | Word counts, staleness, reliability.
 | Total body words | ~19,200w | Adaptive (learned) | ✅ Tracking |
 | Budgets | Adaptive (Bayesian) | — | 15 experiments, priors updating |
 | Loop runs | 18 | — | — |
-| Experiments | 46 (27 keep, 19 revert) | — | 59% keep rate. Run 26: 10 experiments (5 keep, 5 revert), randomized underexplored techniques. |
+| Experiments | 50 (31 keep, 19 revert) | — | 62% keep rate. Run 28: 4 experiments (4 keep, 0 revert), first batch on fresh DuckDB priors. |
 | Experiment targets | 112 (63 organ + 49 style/context) | — | 45 organ combos tested (71%). Style guide combos seeded, untested. |
 | Staleness risk | Eyes (Feb data, 30+ days) | <20% stale | ⚠️ Needs Mar WBR |
 
-### Loops 6-8: Deferred Calibration
+### Deferred Loops
+
+#### Loops 6-8: Deferred Calibration
 - **Loop 6 (Principle Evolution):** Brain + soul.md | Quarterly | First review Jun 2026.
 - **Loop 7 (Coherence Audit):** Cross-organ refs | Monthly | Last: 3/20. Next: 4/20.
 - **Loop 8 (Source Quality Filter):** T1 (builders with proof) → experiments. T2 (practitioners) → reject unless context matches. T3 (commentary) → discovery only.

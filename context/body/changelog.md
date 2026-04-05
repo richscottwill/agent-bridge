@@ -174,3 +174,18 @@ Running tallies:
 [wiki-critic×REWORD: 1 kept / 1 total]
 [wiki-critic×ADD: 1 kept / 1 total]
 [wiki-critic×RESTRUCTURE: 1 kept / 1 total]
+
+## Run 28 (2026-04-05, Sunday EOD-2 Phase 6 — Karpathy)
+
+[eyes:OCI+Market ordering] RESTRUCTURE (info_retrieval) → 1160w→1160w. A=1.0 B=1.0 Δ=0.0. 30s. KEEP. OCI Performance moved above Market Health — actionable-first ordering.
+[amcc:Resistance Taxonomy] COMPRESS (info_retrieval) → 2090w→1966w. A=1.0 B=1.0 Δ=0.0. 35s. KEEP. 4-col→3-col table, merged Description into Signal, tightened Counter. -124w.
+[nervous-system:Loop 3] SPLIT (info_retrieval) → 860w→868w. A=1.0 B=1.0 Δ=0.0. 30s. KEEP. Dense paragraph→3 subsections (Active/New/Root Cause). +8w.
+[device:Tool Factory] REMOVE (info_retrieval) → 1242w→1213w. A=1.0 B=1.0 Δ=0.0. 35s. KEEP. Removed 3 completed entries (Dashboard ingester, PS Analytics DB, Context catalog) — already in Installed Apps. -29w.
+
+Running tallies:
+[eyes×RESTRUCTURE: 1 kept / 1 total]
+[amcc×COMPRESS: 1 kept / 1 total]
+[nervous-system×SPLIT: 1 kept / 1 total]
+[device×REMOVE: 1 kept / 1 total]
+
+Note: First batch on fresh DuckDB priors (tables created this run). 4/4 KEEP = 100% — expected for validated patterns on first pass. Selection bias check: all n=0 combos, so this IS exploration. Future batches will have priors to balance against. Total body: 16,190w (adaptive ceiling).
