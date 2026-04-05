@@ -4,7 +4,7 @@
 
 *Operating principle: Reduce decisions, not options. Every task should have a clear next action, a pre-written draft if it involves communication, and a due date that drives My Day. Richard opens his list and acts — he doesn't plan.*
 
-Last updated: 2026-04-04 (EOD-2 run 20)
+Last updated: 2026-04-05 (EOD-2 run 21)
 Sources: rw-tracker.md, Asana My Tasks, ABPS AI Content, Slack scan, DM scan
 
 ---
@@ -23,13 +23,13 @@ Sources: rw-tracker.md, Asana My Tasks, ABPS AI Content, Slack scan, DM scan
 | P1 | **Share ENG budget file with Andrew** — OP1 recalculation | OVERDUE (4/4) | NOT STARTED |
 | P1 | **Respond to Lorena** — Q2 expected spend for MX PO | OVERDUE (10d) | NOT STARTED |
 
-16 items overdue (oldest: PAM US PO, 34d). 2 blocked (MX Auto page on Vijeth 16d, Kingpin on Andes 19d). ~96 total tasks in My Tasks.
+17 items overdue (oldest: PAM US PO, 35d). 2 blocked (MX Auto page on Vijeth 17d, Kingpin on Andes 20d). ~97 total tasks in My Tasks.
 
-### Blocker Registry (EOD 4/4)
+### Blocker Registry (EOD 4/5)
 | Task | Blocker | Owner | First Detected | Days Blocked |
 |------|---------|-------|----------------|-------------|
-| MX Automotive page | Footer component | Vijeth | 2026-03-20 | 16 |
-| Kingpin Goals MX | Andes data unavailable | Andes team | 2026-03-17 | 19 |
+| MX Automotive page | Footer component | Vijeth | 2026-03-20 | 17 |
+| Kingpin Goals MX | Andes data unavailable | Andes team | 2026-03-17 | 20 |
 
 ## Recurring Execution Work (Google Ads: MX, AU, Paid App)
 
@@ -45,17 +45,15 @@ Sources: rw-tracker.md, Asana My Tasks, ABPS AI Content, Slack scan, DM scan
 - Kingpin Goals → blocked by Andes data
 - MX/AU budgets → blocked by R&O tasks
 
-## New Signals (EOD-2 4/4)
-- ✅ Daily reset: 8 Today tasks demoted to Urgent with Kiro_RW carry-forward + Next action set.
-- ✅ Completed: Flash topics due today (stale 18d close-out).
-- ✅ Recurring check: Flash topics not a recurring pattern — no next instance needed.
-- ⏳ Refmarker audit PoC — AU (Sweep): due 4/7, begin 4/6. Monday priority.
-- ⏳ Refmarker audit PoC — AU (Engine Room): due 4/10, begin 4/9.
-- ⏳ Lorena: Q2 MX spend — OVERDUE (10d). Monday.
-- ⏳ Lena: AU LP URL analysis — OVERDUE (1d).
-- ⏳ Andrew: ENG budget file — OVERDUE (due 4/4). Monday.
-- ⚠️ No L1 effort today — 16 workdays at zero. Testing Approach is the hard thing.
-- 📅 MONDAY 4/7: Clean Today slate. Polaris weblab dial-up 4/6-4/7. CA OCI launch. Refmarker audit begins.
+## New Signals (EOD-2 4/5)
+- ✅ Daily reset: 2 Today tasks demoted to Urgent (Andrew ENG file, Lorena Q2 spend).
+- ✅ Sunday — no completions, no new tasks.
+- ⏳ Refmarker audit PoC — AU (Sweep): due 4/7, begin 4/6. TOMORROW.
+- ⏳ Lorena: Q2 MX spend — OVERDUE (11d). Monday.
+- ⏳ Andrew: ENG budget file — OVERDUE (1d). Monday.
+- ⏳ Lena: AU LP URL analysis — OVERDUE (2d).
+- ⚠️ No L1 effort — 17 workdays at zero. Testing Approach is the hard thing.
+- 📅 MONDAY 4/7: Clean Today slate. Polaris weblab dial-up. CA OCI launch. Refmarker audit begins. Lorena + Andrew overdue items.
 
 ---
 

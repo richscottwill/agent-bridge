@@ -2,9 +2,14 @@
   "name": ".EOD-2: System Refresh",
   "version": "3.0.0",
   "description": "Asana EOD reconciliation, organ cascade, recurring task checks, Karpathy experiments, git sync. Ordered: critical work first, experiments last.",
-  "when": { "type": "userTriggered" },
+  "when": {
+    "type": "userTriggered"
+  },
   "then": {
     "type": "askAgent",
-    "prompt": "Run EOD-2: System Refresh.\n\nRead and execute ~/shared/context/protocols/eod-system-refresh.md.\n\nPhases are ordered by criticality — execute in order, do not skip ahead:\n1. Asana reconciliation (daily reset, carry-forward, recurring task check, blocker registry)\n2. Portfolio + ABPS AI reconciliation\n3. Organ cascade + maintenance + intake processing\n4. Recurring task state checks\n5. Housekeeping (git push, self-audit, changelog)\n6. Experiments (delegate to Karpathy subagent — last, expendable if context is heavy)\n\nAll Asana writes follow the Guardrail Protocol in asana-command-center.md. Protocol: heart.md for experiments."
-  }
+    "prompt": "Run EOD-2: System Refresh.\n\nRead and execute ~/shared/context/protocols/eod-system-refresh.md.\n\nPhases are ordered by criticality — execute in order, do not skip ahead:\n1. Asana reconciliation (daily reset, carry-forward, recurring task check, blocker registry)\n2. Portfolio + ABPS AI reconciliation\n3. Organ cascade + maintenance + intake processing\n4. Recurring task state checks\n5. Housekeeping (git push, self-audit, changelog)\n6. Experiments (delegate to Karpathy cli)\n\nAll Asana writes follow the Guardrail Protocol in asana-command-center.md. Protocol: heart.md for experiments."
+  },
+  "enabled": true,
+  "workspaceFolderName": "prichwil",
+  "shortName": "eod-refresh"
 }
