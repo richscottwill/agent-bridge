@@ -20,26 +20,6 @@ Intervenes in the gap between knowing and doing — the moment where Richard kno
 
 The streak is the single most important metric in this organ. It measures consecutive days where Richard chose the hard thing over the comfortable thing.
 
-**What counts as "choosing the hard thing":**
-- Shipping a strategic artifact (doc, framework, test design, POV) when execution work was available
-- Starting the overdue admin block before opening email
-- Writing the draft instead of "researching" it
-- Sending the delegation handoff instead of doing the work yourself
-- Declining or prepping for a meeting instead of attending passively
-- Publishing work to stakeholders instead of polishing it privately
-
-**What resets the streak:**
-- A full workday passes with zero progress on the #1 priority in Hands
-- Richard explicitly chooses a low-leverage task over an available high-leverage task (not blocked — available)
-- An artifact deadline passes without shipping (the AEO POV pattern)
-- Admin tasks go another day overdue when they could have been done in the morning block
-
-**What does NOT reset the streak:**
-- Legitimate fire drills requested by manager/leadership (AU CPC benchmark was legitimate)
-- Blocked tasks where the blocker is external and unresolvable today
-- Days with back-to-back meetings and genuinely no focus time
-- Choosing to rest or stop working at a reasonable hour (sustainability, not avoidance)
-
 ### Current Streak
 
 | Metric | Value | Notes |
@@ -52,6 +32,26 @@ The streak is the single most important metric in this organ. It measures consec
 
 ### Streak History
 Removed — current-state-only principle. Historical data lives in changelog.md.
+
+### What Counts as "Choosing the Hard Thing"
+- Shipping a strategic artifact (doc, framework, test design, POV) when execution work was available
+- Starting the overdue admin block before opening email
+- Writing the draft instead of "researching" it
+- Sending the delegation handoff instead of doing the work yourself
+- Declining or prepping for a meeting instead of attending passively
+- Publishing work to stakeholders instead of polishing it privately
+
+### What Resets the Streak
+- A full workday passes with zero progress on the #1 priority in Hands
+- Richard explicitly chooses a low-leverage task over an available high-leverage task (not blocked — available)
+- An artifact deadline passes without shipping (the AEO POV pattern)
+- Admin tasks go another day overdue when they could have been done in the morning block
+
+### What Does NOT Reset the Streak
+- Legitimate fire drills requested by manager/leadership (AU CPC benchmark was legitimate)
+- Blocked tasks where the blocker is external and unresolvable today
+- Days with back-to-back meetings and genuinely no focus time
+- Choosing to rest or stop working at a reasonable hour (sustainability, not avoidance)
 
 ---
 

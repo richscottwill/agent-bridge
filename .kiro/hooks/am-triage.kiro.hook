@@ -5,6 +5,6 @@
   "when": { "type": "userTriggered" },
   "then": {
     "type": "askAgent",
-    "prompt": "Run the interactive morning triage.\n\nRead and execute ~/shared/context/protocols/am-triage.md.\n\nThis is the interactive phase — present all proposals to Richard for approval before writing. Process intake signals, enrich My Tasks fields (Kiro_RW, Next action, dates, Priority_RW), scan ABPS AI Content pipeline (intake triage, date windows, pipeline stages, approvals, refreshes), scan portfolio projects (AU, MX, WW Testing, WW Acq, Paid App), and run the interactive command center.\n\nAll Asana writes follow the Guardrail Protocol in asana-command-center.md."
+    "prompt": "Run the interactive morning triage.\n\nRead and execute ~/shared/context/protocols/am-triage.md.\n\nExecution order: (1) Process intake signals and route to Asana tasks, (2) Enrich My Tasks fields (Kiro_RW, Next action, dates, Priority_RW) — batch-present all proposals, (3) Scan ABPS AI Content pipeline (intake triage, date windows, pipeline stages, approvals, refreshes), (4) Scan portfolio projects (AU, MX, WW Testing, WW Acq, Paid App), (5) Run interactive command center.\n\nPresent ALL proposals to Richard for approval before writing. Never write to Asana without explicit approval.\n\nAll Asana writes follow the Guardrail Protocol in asana-command-center.md."
   }
 }

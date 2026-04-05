@@ -6,3 +6,11 @@ run28_exp3	nervous-system	Loop 3 Pattern Trajectory	SPLIT	info_retrieval	860	868
 run28_exp4	device	Tool Factory	REMOVE	info_retrieval	1242	1213	1.0	1.0	0.0	false	KEEP	35
 run29_exp2	memory	Relationship Graph (low-activity)	COMPRESS	info_retrieval	1738	1651	1.0	1.0	0.0	false	KEEP	40
 run29_exp3	nervous-system	Calibration Loops	SPLIT	info_retrieval	860	872	1.0	1.0	0.0	false	KEEP	25
+run30_exp1	device	Device Health	COMPRESS	info_retrieval	1220	1159	0.67	1.0	-0.33	false	REVERT	49
+run30_exp2	spine	Session Bootstrap Sequence	SPLIT	info_retrieval	877	893	1.0	1.0	0.0	false	KEEP	60
+run30_exp3	amcc	Growth Model	REMOVE	info_retrieval	1963	1796	0.25	-	-	true	REVERT	45
+run31_exp1	brain	Five Levels / Current Level Status	SPLIT	info_retrieval	1232	1235	1.0	1.0	0.0	false	KEEP	19
+run31_exp2	nervous-system	Five Levels Position	SPLIT	info_retrieval	872	874	1.0	1.0	0.0	false	KEEP	14
+run31_exp3	am-triage	hook prompt	REWORD	output_quality	117	131	0.87	0.87	0.0	false	KEEP	45
+run31_exp4	eod-refresh	hook prompt	REWORD	output_quality	111	179	0.87	0.86	+0.01	false	KEEP	48
+run31_exp5	heart	Step 3 technique descriptions	REMOVE	info_retrieval	4122	4014	1.0	1.0	0.0	false	KEEP	16

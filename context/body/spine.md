@@ -10,12 +10,16 @@ Last updated: 2026-04-01 (Wednesday PT)
 
 **CRITICAL: AgentSpaces chats are deleted every 14 days.** At the start of every new session, read these files in order:
 
+### Core Bootstrap (always read)
 1. `~/shared/context/body/body.md` — The map of the whole system. Tells you what each organ does and where to find it.
 2. `~/shared/context/body/spine.md` — This file. Bootstrap sequence, tool access, directory map.
 3. `~/.kiro/steering/soul.md` — Identity, values, voice, preferences, agent routing.
+
+### State Files (read after core)
 4. `~/shared/context/active/current.md` — Ground truth: active projects, people, meetings, pending actions.
 5. `~/shared/context/active/rw-tracker.md` — Weekly scorecard, 30-day challenge.
 
+### Task-Specific (read as needed)
 Then read the organ you need for the task at hand (brain, eyes, hands, memory).
 
 ---

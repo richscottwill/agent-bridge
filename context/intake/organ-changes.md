@@ -43,3 +43,23 @@
 **Cross-organ conflicts:** None detected. device.md and soul.md references to karpathy remain consistent.
 
 **Gated file flag:** gut.md is Karpathy-gated. Edit source unverified — if manual, ratify during next Karpathy loop run.
+
+## 2026-04-05 — heart.md (selection bias threshold change)
+
+**File:** `shared/context/body/heart.md`
+**Timestamp:** 2026-04-05
+**Change:** Selection bias check threshold in Stage 2 (Technique selection) lowered from >85% keep rate to >50%. "Healthy batch" redefined from 50-70% keep rate to ≤50%. Added Karpathy autoresearch citation: "700 experiments, most fail, learning emerges from the pattern of failures." The edit makes the experiment philosophy more aggressive — most experiments should revert, not most should keep.
+**Diff:** Single line in Step 1 Stage 2 — `keep rate >85%` → `keep rate >50%`, `50-70% keep rate — not 90%+` → `≤50% keep rate. Most experiments should revert — that's the point.`
+**Cross-organ impact:** None detected. gut.md discusses per-organ experiment signals (ADD/COMPRESS posterior means) which operate at a different level than the batch-level selection bias check in heart.md. The two thresholds are independent — gut.md says when to stop adding to a specific organ, heart.md says when the overall experiment selection is too conservative. No conflict.
+**Authorization:** ⚠️ heart.md is gated — only the karpathy agent has authority to modify this file. This edit was detected via fileEdited hook, not from a karpathy-invoked session. The change is substantive (halves the keep-rate threshold, fundamentally shifts experiment philosophy toward more aggressive exploration). The Karpathy autoresearch citation suggests this may have been a deliberate karpathy-directed change. If Richard made this edit directly based on karpathy's recommendation, ratify during next Karpathy loop run. If an unauthorized agent made it, flag for karpathy review.
+
+## 2026-04-05 — heart.md
+
+**File:** shared/context/body/heart.md
+**Change summary:** Refactored "The Metric" section. Replaced 4-dimension table (Accuracy delta, Portability, Efficiency, Latency) with expanded 6-signal "Experiment Signals" table (Accuracy delta, Portability, Word delta, Latency, Eval question difficulty, Context size). Key conceptual shifts: (1) "organ" → "output" in primary metric description, (2) "organ×technique" → "target×technique" in threshold language, (3) Efficiency yield formula removed — replaced with word delta as a neutral covariate, (4) Latency reframed from penalty (>120s = LOW_EFFICIENCY) to neutral signal, (5) Two new signals added: eval question difficulty and context size, (6) Added "Over time" paragraph describing Bayesian learning across signal combinations. Secondary metrics line removed.
+**Karpathy gated:** ⚠️ FLAGGED — heart.md is karpathy-gated. The `Last updated` line still reads "Karpathy Run 26" (not updated to reflect this edit). This edit was NOT made by the karpathy agent — it appears to be a manual/direct edit. Per governance rules, heart.md edits require karpathy authority.
+**Cross-organ inconsistencies:**
+- `gut.md` references "organ×technique" terminology and Bayesian priors — heart.md now uses "target×technique" in the edited section but retains "organ×technique" elsewhere in the same file (line ~241). Terminology is inconsistent within heart.md itself.
+- `portable-body/body/heart.md` and `agent-bridge/body/heart.md` still have the OLD 4-dimension table with the Efficiency yield formula. These copies are now out of sync with the canonical heart.md.
+- `changelog.md` references the old Efficiency yield formula and "organ×technique" terminology — historical record, no update needed.
+- `karpathy.md` (both copies) references "organ×technique combos" in the Experiment Execution Protocol — terminology mismatch with the new "target×technique" in heart.md.

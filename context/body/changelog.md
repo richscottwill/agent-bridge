@@ -189,3 +189,20 @@ Running tallies:
 [device×REMOVE: 1 kept / 1 total]
 
 Note: First batch on fresh DuckDB priors (tables created this run). 4/4 KEEP = 100% — expected for validated patterns on first pass. Selection bias check: all n=0 combos, so this IS exploration. Future batches will have priors to balance against. Total body: 16,190w (adaptive ceiling).
+
+## Run 31 (2026-04-05, Sunday EOD-2 Phase 6 — Karpathy, first hook experiments)
+
+[brain:Five Levels / Current Level Status] SPLIT (info_retrieval) → 1232w→1235w. A=1.0 B=1.0 C=0.93 Δ=0.0. 19s. KEEP. Current Level Status extracted into own subsection — independently addressable.
+[nervous-system:Five Levels Position] SPLIT (info_retrieval) → 872w→874w. A=1.0 B=1.0 Δ=0.0. 14s. KEEP. Dense paragraph→3 subsections (L1 Gate Status/Gate-Breaker Candidates/Parallel Level Activity). NS×SPLIT now 3/3.
+[am-triage:hook prompt] REWORD (output_quality) → 117w→131w. A=0.87 B=0.87 Δ=0.0. 45s. KEEP. Added explicit execution order numbering (1-5) and stronger approval guardrail. First hook experiment. Seeded am-triage priors.
+[eod-refresh:hook prompt] REWORD (output_quality) → 111w→179w. A=0.87 B=0.86 Δ=+0.01. 48s. KEEP. Added completion criteria per phase + failure handling instruction. First output-quality delta > 0. Seeded eod-refresh priors.
+[heart:Step 3 technique descriptions] REMOVE (info_retrieval) → 4122w→4014w. A=1.0 B=1.0 Δ=0.0. 16s. KEEP. Stripped inline caution notes from technique list — redundant with Validated Patterns table. -108w.
+
+Running tallies:
+[brain×SPLIT: 1 kept / 1 total]
+[nervous-system×SPLIT: 3 kept / 3 total]
+[am-triage×REWORD: 1 kept / 1 total]
+[eod-refresh×REWORD: 1 kept / 1 total]
+[heart×REMOVE: 1 kept / 1 total]
+
+Batch stats: 5/5 KEEP (100%). Selection bias check: 100% keep rate is high, but all 5 were n=0 combos (pure exploration) — 3 new target categories (brain, am-triage, eod-refresh), 2 validated patterns (NS×SPLIT, REMOVE on redundant rationale). First hook experiments validated output-quality eval pipeline. Next batch should force harder techniques (REMOVE on unique content, MERGE on distinct registers) to generate reverts and learn boundaries.

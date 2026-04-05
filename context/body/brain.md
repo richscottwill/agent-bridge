@@ -110,7 +110,9 @@ Graduation is not a date — it's evidence. The nervous system (Loop 6) tracks t
 | 3 → 4 | Team adoption | 1+ tool built by Richard and actively used by a teammate for 30+ days |
 | 4 → 5 | Strategic authority | Published POV or framework that influenced a team-level decision (Kate or Brandon cited it) |
 
-**Current position:** Level 1 (struggling — 0 consecutive weeks, 14 workdays at zero). Level 2 work happening in parallel (OCI 7/10 markets at 100%, AU weekly updates, ad copy tests, W13 callouts, Flash sections). Level 3 accelerating (prediction engine, data layer, callout pipeline, attention tracker, Slack ingestion). Level 5 also active (agent bridge, DuckDB agent state, Asana integration). Level 1 gate not passed — Testing Approach doc for Kate is the convergence point (L2 artifact that proves L1 consistency).
+### Current Level Status
+
+**Position:** Level 1 (struggling — 0 consecutive weeks, 14 workdays at zero). Level 2 work happening in parallel (OCI 7/10 markets at 100%, AU weekly updates, ad copy tests, W13 callouts, Flash sections). Level 3 accelerating (prediction engine, data layer, callout pipeline, attention tracker, Slack ingestion). Level 5 also active (agent bridge, DuckDB agent state, Asana integration). Level 1 gate not passed — Testing Approach doc for Kate is the convergence point (L2 artifact that proves L1 consistency).
 
 **Rule:** You can DO work at multiple levels simultaneously, but you don't GRADUATE until the gate is met. The aMCC tracks Level 1 progress via the streak. The nervous system tracks all levels via Loop 6.
 

@@ -1,7 +1,7 @@
 {
-  "experiment_id": "run28_exp4",
-  "target": "device",
-  "section": "Tool Factory",
+  "experiment_id": "run31_exp5",
+  "target": "heart",
+  "section": "Step 3 technique descriptions",
   "technique": "REMOVE",
   "eval_type": "information_retrieval",
   "eval_tier": 1,
@@ -11,55 +11,7 @@
   "delta_ab": 0.0,
   "fast_fail": false,
   "decision": "KEEP",
-  "wall_clock_seconds": 35,
-  "words_before": 1242,
-  "words_after": 1213,
-  "questions": [
-    {
-      "q": "Is the Dashboard ingester built? Where is it documented?",
-      "answer": "Yes, built. Documented in Installed Apps \u2192 PS Analytics Database section and Data Pipeline in eyes.md"
-    },
-    {
-      "q": "What tools are in the Tool Factory backlog?",
-      "answer": "Paid Search Audit (Richard action), Campaign link generator (Backlog), Staleness detector (Ready to build)"
-    },
-    {
-      "q": "What is the DuckDB database path?",
-      "answer": "~/shared/data/duckdb/ps-analytics.duckdb"
-    }
-  ],
-  "agent_a_answers": [
-    {
-      "q": "Is the Dashboard ingester built? Where is it documented?",
-      "agent_answer": "Yes, built. PS Analytics Database section in Installed Apps documents it. Ingester at ~/shared/tools/dashboard-ingester/ingest.py",
-      "verdict": "CORRECT"
-    },
-    {
-      "q": "What tools are in the Tool Factory backlog?",
-      "agent_answer": "Paid Search Audit (Richard action), Campaign link generator (Backlog), Staleness detector (Ready to build)",
-      "verdict": "CORRECT"
-    },
-    {
-      "q": "What is the DuckDB database path?",
-      "agent_answer": "~/shared/data/duckdb/ps-analytics.duckdb",
-      "verdict": "CORRECT"
-    }
-  ],
-  "agent_b_answers": [
-    {
-      "q": "Is the Dashboard ingester built? Where is it documented?",
-      "agent_answer": "Yes, \u2705 BUILT. Listed in Tool Factory and documented in Installed Apps \u2192 PS Analytics Database",
-      "verdict": "CORRECT"
-    },
-    {
-      "q": "What tools are in the Tool Factory backlog?",
-      "agent_answer": "Paid Search Audit (Richard action), Dashboard ingester (BUILT), PS Analytics DB (BUILT), Context catalog (BUILT), Campaign link generator (Backlog), Staleness detector (Ready to build)",
-      "verdict": "CORRECT"
-    },
-    {
-      "q": "What is the DuckDB database path?",
-      "agent_answer": "~/shared/data/duckdb/ps-analytics.duckdb",
-      "verdict": "CORRECT"
-    }
-  ]
+  "wall_clock_seconds": 16,
+  "words_before": 4122,
+  "words_after": 4014
 }

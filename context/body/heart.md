@@ -52,22 +52,26 @@ Organs use information-retrieval evals (can the agent answer factual questions?)
 
 ## The Metric
 
-**Primary: delta over baseline** — did the experiment make the organ better or worse than it was before? Not "is it above an arbitrary floor?" but "is it better than what we had?"
+**Primary: delta over baseline** — did the experiment make the output better or worse than it was before? Not "is it above an arbitrary floor?" but "is it better than what we had?"
 
-Four dimensions, measured on every experiment:
+### Experiment Signals
 
-| Dimension | What It Measures | How |
-|-----------|-----------------|-----|
-| Accuracy delta (A vs B) | Did the change improve or degrade correctness? | Agent A (modified) vs Agent B (original) answer same questions. Delta = A - B. Positive = improvement. |
-| Portability (C) | Does the organ work without system context? | Agent C (modified organ, zero context) answers same questions. Baseline check — not compared to A or B. |
-| Efficiency | Was the experiment worth the tokens it cost? | yield = (abs(word_delta) × max(delta_ab, 0)) / estimated_tokens. Low yield = deprioritize that organ×technique combo. |
-| Latency | Did the experiment spin or stall? | Wall-clock seconds from start to decision. Experiments exceeding 120s are flagged LOW_EFFICIENCY. |
+Every experiment produces multiple signals. None are inherently good or bad — more words could mean richer content, higher latency could mean deeper reasoning. We track them all as covariates and use Bayesian updating to learn which signal patterns correlate with output quality over time.
 
-**No static accuracy thresholds.** Thresholds are learned via Bayesian updating (see DuckDB Integration below). Each organ×technique combination has a Beta distribution prior that updates with every experiment outcome. The posterior mean IS the threshold — organs that consistently revert get naturally tighter, organs that consistently keep get naturally looser.
+| Signal | What It Captures | How It's Measured | Interpretation |
+|--------|-----------------|-------------------|----------------|
+| Accuracy delta (A vs B) | Did the change improve or degrade correctness/quality? | Agent A (modified) vs Agent B (original) answer same questions or produce same work product. Delta = A - B. | Primary keep/revert signal. Positive = improvement. |
+| Portability (C) | Does the content work without system context? | Agent C (modified, zero context) answers same questions. | Gap between A and C reveals implicit dependencies. |
+| Word delta | How did content size change? | words_after - words_before. | Not a goal — a covariate. Compression that loses info reverts. Expansion that adds value keeps. |
+| Latency | How long did the experiment take? | Wall-clock seconds from start to decision. | Not a penalty — a signal. High latency may indicate complex reasoning or spinning. Track baseline per target×technique. |
+| Eval question difficulty | How hard were the eval questions? | Count + specificity of questions (IDs, dates, formulas vs general concepts). | Harder questions produce more informative deltas. Easy questions mask real degradation. |
+| Context size | How much context did the eval agents receive? | Word count of eval prompt (target + body.md + soul.md vs target only). | Larger context may compensate for content gaps. Vary to test robustness. |
+
+**No static thresholds for any signal.** All thresholds are learned via Bayesian updating. Each target×technique combination has a Beta distribution prior that updates with every experiment outcome. The posterior mean IS the threshold — targets that consistently revert get naturally tighter, targets that consistently keep get naturally looser.
 
 **Safety floor (non-negotiable):** Brain and Memory experiments require delta_ab ≥ 0 (no degradation allowed, ever). This is the only static rule. Everything else is learned.
 
-**Secondary:** staleness (<20% stale facts), word count vs budget (budget is a constraint, not an objective).
+**Over time:** The DuckDB experiment table accumulates signal data across hundreds of experiments. Patterns emerge: which signal combinations predict keeps vs reverts, which targets are sensitive to which signals, where the natural baselines are. This is Bayesian learning applied to the experiment process itself.
 
 ---
 
@@ -95,7 +99,7 @@ Valid targets include body organs AND non-organ files:
 - Query `autoresearch_priors` for the selected target
 - Sample technique proportional to UCB score (posterior_mean + posterior_std)
 - High UCB = either proven effective (high mean) or unexplored (high uncertainty) — both worth trying
-- **Selection bias check (from Run 26-27 learnings):** If the last 10+ experiments have a keep rate >85%, the selection is biased toward safe techniques. Force at least 30% of experiments to use techniques with <3 prior data points on the target. A healthy batch has 50-70% keep rate — not 90%+. Reverts are the learning signal.
+- **Selection bias check (from Run 26-27 learnings):** If the last 10+ experiments have a keep rate >50%, the selection is biased toward safe techniques. Force at least 30% of experiments to use techniques with <3 prior data points on the target. A healthy batch has ≤50% keep rate. Most experiments should revert — that's the point. Reverts are the learning signal. Per Karpathy's autoresearch: 700 experiments, most fail, learning emerges from the pattern of failures.
 
 **Exclusions:**
 - Targets modified by maintenance in the current invocation (per-target cooldown)
@@ -117,12 +121,12 @@ Valid targets include body organs AND non-organ files:
 - Apply the selected technique to the selected section
 - Experiment types (not limited to compression):
   - **COMPRESS**: resolve completed items, deduplicate, age-decay, structural compression (paragraphs→tables), protocol compression
-  - **ADD**: inline a key fact that eliminates a tool call (e.g., a metric the agent always cross-references). Portable pattern: "Common Failures" sections replicate across file types (validated email→wbr→mbr→librarian).
-  - **RESTRUCTURE**: reorder so the most-queried data is found faster. Lessons-first, actionable-first ordering consistently keeps.
-  - **REMOVE**: delete content that's accurate but never queried (dead weight). **Caution: REMOVE has the highest revert rate (~80%). Pre-check: does the section contain unique IDs, URLs, rules, formulas, or behavioral constraints not duplicated elsewhere? If yes, REMOVE will almost certainly revert. REMOVE only succeeds on motivational prose and redundant rationale.**
-  - **REWORD**: same info, fewer tokens, less ambiguity. **Highest keep rate across both eval types (~90%). Concrete examples > abstract rules is the dominant pattern.**
-  - **MERGE**: combine sections that always get read together. **Caution: MERGE reverts when sections serve distinct registers or semantic categories (guide vs playbook, stakeholder vs analytical). Only merge truly redundant content.**
-  - **SPLIT**: separate sections that serve different query patterns. **Structural splits (adding subsection headers) consistently keep. Splits that label content "optional" revert when the content isn't actually optional.**
+  - **ADD**: inline a key fact that eliminates a tool call. Portable pattern: "Common Failures" sections.
+  - **RESTRUCTURE**: reorder so the most-queried data is found faster.
+  - **REMOVE**: delete content that's accurate but never queried. See Validated Patterns for cautions.
+  - **REWORD**: same info, fewer tokens, less ambiguity.
+  - **MERGE**: combine sections that always get read together. See Validated Patterns for cautions.
+  - **SPLIT**: separate sections that serve different query patterns.
 
 ### Step 4: Evaluate — A/B/C Blind Eval
 
@@ -191,7 +195,7 @@ The decision is based on delta (did it improve?), not absolute score (is it abov
 **KEEP if ALL of the following:**
 - delta_ab ≥ 0 (the change did not make the organ worse than it was)
 - No INCORRECT on a standing adversarial question (identity protection, etc.)
-- Wall-clock time < 120s (if exceeded, flag LOW_EFFICIENCY but still KEEP if other criteria pass)
+- Wall-clock time is recorded as a signal (not a gate). Track baseline per target×technique — deviations inform future selection.
 
 **REVERT if ANY of the following:**
 - delta_ab < 0 (the change made things worse — the only signal that matters)
@@ -259,7 +263,7 @@ Full data logged to DuckDB `autoresearch_experiments` table + `experiment-log.ts
 | eval_method | A/B/C blind (A=modified+context, B=original+context, C=modified+zero context) |
 | keep_rule | delta_ab ≥ 0 |
 | brain_memory_rule | delta_ab ≥ 0, zero INCORRECT |
-| latency_flag | 120s |
+| latency_signal | recorded per experiment | Not a gate — a covariate. Track baseline per target×technique. |
 | prior_distribution | Beta(α, β), initialized Beta(1,1) |
 | target_selection | UCB (posterior_mean + posterior_std) |
 | experiment_word_budget_rule | adaptive (gut.md) |
@@ -310,7 +314,7 @@ These patterns emerged from data. They should inform technique selection but not
 | Common Failures pattern is portable | 4/4 kept across email→wbr→mbr→librarian | Proven structural pattern for any style guide or agent file. |
 | Concrete examples > abstract rules | +0.04 to +0.08 delta consistently | When adding a rule, always include a worked example. |
 | Empty structural tables are load-bearing | 1/1 reverted (amcc avoidance ratio) | Tables define measurement frameworks even without data. |
-| UCB-only selection produces 90%+ keep rate (selection bias) | Runs 19-25: 92% keep rate | Force 30% exploration of untested combos. Healthy batch = 50-70% keep rate. |
+| UCB-only selection produces 90%+ keep rate (selection bias) | Runs 19-25: 92% keep rate | Force 30% exploration of untested combos. Healthy batch ≤50% keep rate. Most experiments should revert. |
 
 ## DuckDB Integration
 
