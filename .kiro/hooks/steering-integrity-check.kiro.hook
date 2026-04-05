@@ -1,0 +1,13 @@
+{
+  "name": "Guard: Steering Integrity",
+  "version": "1.0.0",
+  "description": "Detects resurrection of deleted steering files or creation of duplicative always-loaded files.",
+  "when": {
+    "type": "fileCreated",
+    "patterns": ["**/.kiro/steering/*.md"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A new steering file was created in ~/.kiro/steering/. Read ~/.kiro/steering/context/steering-integrity.md and check:\n\n1. Is this file in the Deleted Files table? If yes, DELETE it immediately and warn: 'Blocked resurrection of [filename] — see steering-integrity.md for why this file was deleted.'\n\n2. Does this file have proper front matter with an inclusion mode? Files without front matter default to always-loaded, which burns tokens every session. If missing, flag it.\n\n3. If the file has inclusion: always, does its content duplicate soul.md, environment-rules.md, or any other always-loaded file? If >50% overlap, flag it and recommend merging instead.\n\nLog the check result to ~/shared/context/intake/organ-changes.md."
+  }
+}

@@ -76,10 +76,105 @@ Flag any tension between the two audiences.]
 5. Hedy meeting transcripts — via MCP tools (GetSessions, GetSessionDetails)
 6. Email threads — via Outlook MCP (email_search, email_read)
 7. Internal Amazon resources — via builder-mcp (InternalSearch, ReadInternalWebsites)
-8. ARCC — for any governance/policy topics
-9. External web — for frameworks, best practices, industry patterns
+8. **KDS (Knowledge Discovery Service)** — internal knowledge bases for organizational context, best practices, and institutional knowledge
+9. **ARCC (Agent Ready Curated Context)** — curated governance, compliance, and organizational context
+10. External web — for frameworks, best practices, industry patterns
 
 > For data-heavy topics, prioritize DuckDB and Slack over meeting transcripts.
+
+## KDS Research (Knowledge Discovery Service)
+
+For every research brief, query KDS to enrich findings with internal organizational knowledge. This step runs AFTER body system and DuckDB research, BEFORE external web search.
+
+### When to query KDS
+- Always query for wiki pipeline research briefs (not optional)
+- Extract 3-5 topic keywords from the article brief or editor assignment
+- Focus keywords on Amazon-specific terms, project names, and domain concepts
+
+### How to query KDS
+```
+1. Extract keywords from the topic/brief
+   Example: "Paid Search testing methodology" → keywords: "paid search testing", "AB test methodology Amazon", "experiment design paid search"
+
+2. Query KDS via knowledge_discovery_mcp QuerySync:
+   mcp_knowledge_discovery_mcp_QuerySync(
+     queryData={
+       "prompt": {
+         "question": "{keywords} Amazon Business Paid Search",
+         "conversationId": "{generate UUID v4}",
+         "useCase": "Trade-In",
+         "customerId": "prichwil",
+         "sessionId": "{generate UUID v4}"
+       }
+     }
+   )
+
+3. For each result, assess relevance to the article topic on a 0-10 scale:
+   - 8-10: Directly relevant — include as primary source in research brief
+   - 7: Relevant context — include as supporting source
+   - 4-6: Tangentially related — mention in "Open questions" if it suggests a gap
+   - 0-3: Not relevant — discard
+
+4. Format relevant findings in the research brief:
+   "[KDS] {finding_summary} (Source: {source_title}, retrieved {date})"
+```
+
+### KDS findings in research brief format
+Include KDS findings under a dedicated subsection in the research brief:
+
+```markdown
+### From KDS (Knowledge Discovery Service)
+- [KDS] {finding_summary} (Source: {source_title}) — Relevance: {score}/10
+- [KDS] {finding_summary} (Source: {source_title}) — Relevance: {score}/10
+```
+
+### KDS query limits
+- Maximum 3 queries per research brief (avoid over-querying)
+- If first query returns highly relevant results (8+), skip additional queries
+- If all queries return nothing relevant, note "KDS: no relevant findings for [{keywords}]" in the brief
+
+## ARCC Research (Agent Ready Curated Context)
+
+For every research brief, query ARCC for curated governance, compliance, and organizational context. This step runs alongside KDS research.
+
+### When to query ARCC
+- Always query for wiki pipeline research briefs
+- Especially important for topics touching: governance, compliance, policy, organizational structure, security, operational standards
+- Use the same topic keywords extracted for KDS, but focus on governance/org angles
+
+### How to query ARCC
+```
+1. Generate 1-2 ARCC-specific queries from the topic:
+   Example: "Paid Search testing methodology" → "paid search governance Amazon Business", "experiment approval process"
+
+2. Query ARCC:
+   mcp_arcc_search_arcc(
+     query="{keywords}",
+     context="Researching for wiki article on {topic}. Need governance, organizational, or compliance context.",
+     maxResults=5
+   )
+
+3. For each result, assess relevance:
+   - Relevant: governance context, org structure, compliance requirements, operational standards
+   - Not relevant: unrelated teams, outdated policies, different business units
+
+4. Format relevant findings:
+   "[ARCC] {finding_summary} (Source: {source_title}, Content ID: {id})"
+```
+
+### ARCC findings in research brief format
+Include ARCC findings under a dedicated subsection:
+
+```markdown
+### From ARCC (Curated Organizational Context)
+- [ARCC] {finding_summary} (Source: {source_title})
+- [ARCC] {governance_or_compliance_context} (Source: {source_title})
+```
+
+### ARCC query limits
+- Maximum 2 queries per research brief
+- If ARCC returns no relevant results, note "ARCC: no relevant governance/org context for [{keywords}]" in the brief
+- ARCC is particularly valuable for: policy references, team structure, approval workflows, compliance requirements
 
 ## Research principles
 

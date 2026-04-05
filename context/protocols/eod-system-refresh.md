@@ -11,10 +11,22 @@ All Asana writes follow the Guardrail Protocol in asana-command-center.md.
 ### Context Load
 heart.md, changelog.md, current.md, gut.md, slack-scan-state.json, asana-command-center.md.
 
+### Step 0 — Asana Delta Sync to DuckDB
+Execute the Delta Sync procedure from ~/shared/context/protocols/asana-duckdb-sync.md:
+1. Pull today's completions → UPDATE asana_tasks
+2. Detect new tasks since morning → INSERT into asana_tasks
+3. Update daily snapshot in asana_task_history
+4. Run coherence check (DuckDB vs hands.md, current.md, asana-command-center.md)
+5. Query schema_changes for today's drift events → include in summary if any
+
+After delta sync, DuckDB views are current. Use them for reconciliation below instead of re-querying Asana API.
+
 ### Step 1 — Pull Current State
-1. SearchTasksInWorkspace(assignee=1212732742544167, completed=false) → all incomplete tasks.
-2. SearchTasksInWorkspace(assignee=1212732742544167, completed=true, completed_on=today) → tasks completed today.
+1. Query DuckDB: `SELECT * FROM asana_tasks WHERE completed = FALSE AND deleted_at IS NULL` → all incomplete tasks.
+2. Query DuckDB: `SELECT * FROM asana_tasks WHERE completed = TRUE AND completed_at::DATE = CURRENT_DATE` → tasks completed today.
 3. Read morning snapshot: ~/shared/context/active/asana-morning-snapshot.json.
+4. Query DuckDB: `SELECT * FROM asana_overdue` → overdue tasks with days_overdue.
+5. Query DuckDB: `SELECT * FROM asana_by_routine` → bucket distribution for cap checks.
 
 ### Step 2 — Daily Reset
 For tasks that had Priority_RW=Today in the morning snapshot but remain incomplete:
@@ -124,10 +136,55 @@ Before any organ updates, observe and log body size:
 3. Sum total body word count. Log it. No hard ceiling — the aggregate size-accuracy curve in DuckDB determines when the body is too large (accuracy plateaus or degrades as size increases).
 4. Report only when priors suggest action: `🫁 Body: [X]w. [organ] has compression signal (COMPRESS prior: [X], n=[X]).` If no organ has a compression signal, skip report entirely.
 
+### Workflow Observability Check
+Before organ updates, assess cross-MCP pipeline health:
+
+1. **Degradation detection:** Query DuckDB for workflows with <80% success rate over 7 days:
+```sql
+SELECT workflow_name, success_rate, total_runs, avg_duration_s, last_run
+FROM workflow_reliability
+WHERE success_rate < 80 AND total_runs >= 3;
+```
+If results → flag in EOD-2 Slack DM:
+```
+⚠️ Degraded workflows (7-day window):
+• {workflow}: {success_rate}% success ({total_runs} runs)
+```
+
+2. **Workflow summary:** Query overall execution stats:
+```sql
+SELECT
+    COUNT(*) AS total_runs,
+    ROUND(COUNT(*) FILTER (WHERE status = 'completed') * 100.0 / NULLIF(COUNT(*), 0), 1) AS success_rate,
+    ROUND(AVG(duration_seconds), 1) AS avg_duration_s,
+    COUNT(*) FILTER (WHERE status = 'failed') AS failures
+FROM workflow_executions
+WHERE start_time > CURRENT_TIMESTAMP - INTERVAL '24 hours';
+```
+Include in system refresh report:
+```
+🔧 Workflows (24h): {total_runs} runs, {success_rate}% success, avg {avg_duration_s}s. {failures} failures.
+```
+
+3. If no workflow_executions data exists yet, skip silently — no error.
+
 ### Maintenance
 - Refresh ground truth in organs.
 - Process intake/ files. Route Slack signals.
 - Dashboard + focus update.
+
+### Context Enrichment (KDS/ARCC)
+Execute `~/shared/context/protocols/context-enrichment.md`:
+1. Read current.md → extract active project names and topics
+2. Generate 3-5 KDS queries from active projects
+3. Execute KDS queries, score relevance (0-10) against project context
+4. For findings with relevance >= 7: create intake files at `~/shared/context/intake/kds-{date}-{topic}.md`
+5. Route findings: strategic → brain.md, market data → eyes.md, relationships → memory.md
+6. Log all queries to enrichment_log in DuckDB
+7. If 3 consecutive runs returned 0 relevant results: regenerate queries from updated current.md
+8. Include enrichment summary in EOD-2 report: `🧠 Context enrichment: {N} queries, {M} relevant findings.`
+
+If KDS is unreachable, skip enrichment and continue — this is non-blocking.
 
 ### Cascade
 All organs. Skip <48h + minor changes. Volume control. Hot topics. People Watch.
@@ -164,6 +221,13 @@ Invoke the wiki-audit skill. The audit checks:
 Write results to ~/shared/context/wiki/health/health-YYYY-MM-DD.md and ~/shared/context/wiki/audits/audit-YYYY-MM-DD.md.
 Report summary only: `📚 Wiki lint: [N] healthy, [N] stale, [N] orphaned, [N] broken refs. [N] wiki candidates from signals.` If all clean, skip report.
 
+### Communication Analytics (weekly)
+Execute ~/shared/context/protocols/communication-analytics.md:
+- Compute weekly communication trends from meeting_analytics (trailing 4 weeks)
+- Check coaching signal: group meeting speaking share < 15% for 3+ consecutive weeks
+- Include trends in system refresh report
+- If coaching signal active: flag in EOD-2 Slack DM
+
 ### Enrichments
 - Weekly relationship (Friday). Wiki candidates (weekly). Wiki lint (weekly). Monthly synthesis (1st). Quarterly audit (90d).
 
@@ -173,6 +237,7 @@ Report summary only: `📚 Wiki lint: [N] healthy, [N] stale, [N] orphaned, [N] 
 
 **This phase is NOT expendable. Execute before experiments.**
 
+- **Steering integrity check (before staging):** Read `~/.kiro/steering/context/steering-integrity.md`. Verify no files from the Deleted Files table exist in `~/.kiro/steering/`. If found, delete them before staging. Verify all steering files have front matter with an explicit inclusion mode.
 - Git sync push: `git -C ~/shared add -A && git commit -m "EOD-2 [date]" && git push`
 - Deduplicate MCP.
 - Self-audit: cascade completeness, structural changes, coherence. Log to changelog.md.

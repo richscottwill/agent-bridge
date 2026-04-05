@@ -1,3 +1,9 @@
+---
+inclusion: auto
+name: "Production Safety"
+description: "AWS credentials, production resources, destructive actions, safety protections, IAM policies, resource deletion"
+---
+
 # Production Safety
 
 <EXTREMELY_IMPORTANT>: When interacting with AWS resources and credentials, the following rules are MANDATORY and you MUST apply them to ensure safe use of production credentials:
@@ -14,10 +20,10 @@
 ## Identifying Production Resources and Credentials
 
 **Credential types** - Identify by:
-- Checking `~/.aws/config` profile names for patterns like `ReadOnly`, `Admin`, `Prod`, or `Beta` (if using profiles)
-- Running `aws sts get-caller-identity` to check the role name in the ARN (add `--profile <name>` if using profiles)
-- Running `aws iam list-attached-role-policies --role-name <role>` to see attached policies. You MUST exercise caution when policies include `AdministratorAccess` or `FullAccess`.
+- Checking ~/.aws/config profile names for patterns like ReadOnly, Admin, Prod, or Beta (if using profiles)
+- Running aws sts get-caller-identity to check the role name in the ARN (add --profile <name> if using profiles)
+- Running aws iam list-attached-role-policies --role-name <role> to see attached policies. You MUST exercise caution when policies include AdministratorAccess or FullAccess.
 
 **Production resources** - Look for these indicators:
-- Resource names or tags containing `prod`, `production`, or `prd`
-- Absence of `dev`, `test`, `beta`, `alpha`, `staging`, or `sandbox` indicators
+- Resource names or tags containing prod, production, or prd
+- Absence of dev, test, beta, alpha, staging, or sandbox indicators

@@ -1,10 +1,10 @@
 {
   "name": ".AM-Triage: Curate + Draft",
-  "version": "1.0.0",
-  "description": "Interactive morning triage: intake signals, task enrichment, pipeline/portfolio scan, proposals for approval.",
+  "version": "2.0.0",
+  "description": "Interactive morning triage: intake signals, task enrichment, pipeline/portfolio scan, proposals for approval. Includes triage summary and historical context.",
   "when": { "type": "userTriggered" },
   "then": {
     "type": "askAgent",
-    "prompt": "Run the interactive morning triage.\n\nExecute ~/shared/context/protocols/am-triage.md.\n\nPresent ALL proposals for approval before writing. No Asana writes without explicit approval. Follow Guardrail Protocol in asana-command-center.md."
+    "prompt": "Run the interactive morning triage.\n\nExecute ~/shared/context/protocols/am-triage.md.\n\nPresent ALL proposals for approval before writing. No Asana writes without explicit approval. Follow Guardrail Protocol in asana-command-center.md.\n\n=== TRIAGE SUMMARY ===\nAfter triage completes, post summary to Richard's Slack DM:\nself_dm(login=\"prichwil\", text=\"📬 AM-2 Triage Complete\\n• New tasks: [N] (from [sources])\\n• Updated tasks: [N] (new signals on existing)\\n• Deferred: [N] (low priority, backlog)\\n• Dismissed: [N] (FYI only)\")\n\n=== HISTORICAL CONTEXT RETRIEVAL ===\nWhen triaging a signal, execute Step 4 from ~/shared/context/protocols/slack-conversation-intelligence.md:\n1. Extract signal author and 2-3 key topic words from the signal\n2. Query DuckDB for related past Slack messages:\n   SELECT ts, channel_name, author_name, text_preview, knowledge_context, timestamp FROM slack_messages WHERE author_name = '[signal_author]' AND fts_main_slack_messages.match_bm25(ts, '[signal_keywords]') IS NOT NULL AND timestamp > CURRENT_TIMESTAMP - INTERVAL '30 days' ORDER BY timestamp DESC LIMIT 5;\n3. Include conversation history in triage context for better task creation decisions\n4. If past messages show ongoing thread: note 'Continuing conversation — see {N} related messages'\n5. If past messages show resolved topic: note 'Previously discussed on {date} — verify if new request or follow-up'\nAlways query for signals from known stakeholders (Brandon, Kate, Todd). Skip if DuckDB FTS fails — non-blocking."
   }
 }

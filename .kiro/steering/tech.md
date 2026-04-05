@@ -1,5 +1,7 @@
 ---
-inclusion: always
+inclusion: auto
+name: "Tech Context"
+description: "MCP servers, hook architecture, Kiro configuration layers, DuckDB, Slack, Asana, Outlook, SharePoint, Hedy"
 ---
 
 # Tech Context
@@ -20,13 +22,12 @@ This workspace connects to six MCP servers for external tool access:
 Hooks automate recurring workflows via Kiro event triggers:
 
 ### Morning Routine (userTriggered, sequential)
-- **AM-1: Ingest** — Slack channel scan + Asana inbox + email triage. Writes signals to organs.
-- **AM-2: Triage + Draft** — Task prioritization, reply drafting, To-Do list management.
-- **AM-3: Brief + Blocks** — Daily brief generation, calendar block creation, dashboard update.
+- **AM-Auto** — Slack channel scan + Asana inbox + email triage + daily brief + calendar blocks.
+- **AM-Triage** — Interactive task prioritization, reply drafting, To-Do list management.
 
 ### End of Day (userTriggered, sequential)
 - **EOD-1: Meeting Sync** — Multi-source meeting ingestion (Hedy + Outlook) into meeting series files.
-- **EOD-2: System Refresh** — Autoresearch loop execution, organ maintenance, experiment queue processing.
+- **EOD-2: System Refresh** — Asana reconciliation, organ maintenance, experiment queue processing.
 
 ### Guards (preToolUse)
 - **guard-calendar** — Calendar write protection.
@@ -41,22 +42,7 @@ Hooks automate recurring workflows via Kiro event triggers:
 - **session-summary** (agentStop) — Writes session summary to intake after non-trivial sessions.
 - **organ-change-detector** (fileEdited) — Flags cross-organ inconsistencies when body files change.
 
-## Agent Routing
-
-Agent routing is defined in soul.md (rw-trainer, karpathy) and encoded as skills for specialized pipelines:
-
-- **/wbr-callouts** — WBR callout pipeline (analyst → writer → reviewer)
-- **/wiki-write** — Wiki article pipeline (editor → researcher → writer → critic → librarian)
-- **/wiki-search** — Wiki concierge for document lookup
-- **/wiki-audit** — Wiki staleness and quality auditing
-- **/coach** — RW Trainer deep coaching sessions
-- **/charts** — Data visualization and dashboard generation
-- **/bridge-sync** — Git sync to portable-body repo
-- **/sharepoint-sync** — SharePoint document sync
-
-## Configuration Approach
-
-The workspace uses three configuration layers:
+## Configuration Layers
 
 1. **Steering files** (`~/.kiro/steering/`) — Agent behavior rules, inclusion modes (always, auto, fileMatch, manual)
 2. **Skills** (`~/.kiro/skills/`) — Multi-step agent pipelines with SKILL.md instructions and optional scripts

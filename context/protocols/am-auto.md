@@ -95,14 +95,24 @@ body.md, spine.md, org-chart.md, rw-trainer.md, rw-task-prioritization.md, brain
 7. aMCC
 8. SYSTEM HEALTH
 
-### TODAY Section (from Asana My Tasks)
+### TODAY Section (from DuckDB asana_tasks + Asana views)
+Pull bucket counts and overdue list from DuckDB views instead of morning snapshot JSON:
+- Query: `SELECT * FROM asana_by_routine` → bucket counts for Sweep/Core/Engine Room/Admin/Backlog
+- Query: `SELECT * FROM asana_overdue ORDER BY days_overdue DESC` → overdue list with days_overdue
+- Query: `SELECT * FROM asana_tasks WHERE priority_rw = 'Today' AND completed = FALSE AND deleted_at IS NULL ORDER BY routine_rw` → Today tasks by bucket
+- Query: `SELECT * FROM asana_completion_rate` → trailing completion stats for SYSTEM HEALTH section
+
+Display:
 - 🧹 Sweep: Routine=Sweep AND Priority_RW=Today. Name + due date + L1-L5 tag.
-- 🎯 Core: Routine=Core Two AND Priority_RW=Today. THE HARD THING gets first slot.
+- 🎯 Core: Routine=Core AND Priority_RW=Today. THE HARD THING gets first slot.
 - ⚙️ Engine Room: Routine=Engine Room AND Priority_RW=Today.
 - 📋 Admin: Routine=Admin AND Priority_RW=Today.
-- ⚠️ Overdue: Count + oldest task + days overdue.
-- 📦 Needs Triage: Tasks with no Routine set.
-- Bucket counts: Sweep X/5, Core X/4, Engine Room X/6, Admin X/3.
+- ⚠️ Overdue: Count + oldest task + days overdue (from asana_overdue view).
+- 📦 Needs Triage: Tasks with no Routine set (routine_rw IS NULL in asana_tasks).
+- Bucket counts: Sweep X/5, Core X/4, Engine Room X/6, Admin X/3 (from asana_by_routine view).
+
+### ⚠️ Coherence Alerts
+Include any flags from the AM-1 full sync coherence check (stale references, unflagged overdue, empty projects, over-cap buckets, enrichment gaps, completed-but-still-listed). If zero flags: "✅ DuckDB ↔ Body coherence check passed."
 
 ### Five Levels Annotation
 For each task in TODAY, append [L1]-[L5] tag per asana-command-center.md mapping:
@@ -134,10 +144,10 @@ Read asana-morning-snapshot.json → abps_ai section:
 - Alerts: overdue, near-due, entering window this week, refresh due, flagged for Richard
 
 ### 📊 Portfolio Status
-Read asana-morning-snapshot.json → portfolio_projects section:
+Query DuckDB: `SELECT * FROM asana_by_project` → task counts per project (total, incomplete, completed, overdue).
 
 ABIX PS:
-- AU: task count, overdue, near-due — Health: 🟢/🟡/🔴 (updated date) [⚠️ STALE if >14d]
+- AU: task count, overdue, near-due — Health: 🟢/🟡/🔴 (from asana_by_project view) [⚠️ STALE if >14d]
 - MX: same format
 
 ABPS / Managed Projects:

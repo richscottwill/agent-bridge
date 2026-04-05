@@ -37,7 +37,68 @@ Execute these steps in order. Do not skip validation.
 6. **Move to artifacts:** Copy from `~/shared/context/wiki/staging/{topic-slug}.md` to `~/shared/artifacts/{category}/{YYYY-MM-DD-short-description}.md`. Convert frontmatter to artifact standard (title, status, audience, level, owner, created, updated, update-trigger). Delete the staging copy.
 7. **Update status** to the appropriate artifact status. Set `updated` to today's date.
 8. **Update SITEMAP:** Append the new article to `~/shared/artifacts/SITEMAP.md`.
-9. **Report:** List what was published, which cross-references changed, and any structural changes made.
+9. **Publish to XWiki (dual-publishing):**
+   a. Read the conversion rules from `~/shared/context/wiki/markdown-to-xwiki.md`
+   b. Convert the published article from markdown to XWiki 2.1 markup:
+      - Strip YAML frontmatter (extract title, tags for page metadata)
+      - Strip `<!-- AGENT_CONTEXT -->` block
+      - Apply conversion rules: headings (`#` → `=`), italic (`*` → `//`), links (`[text](url)` → `[[text>>url]]`), code blocks, lists, tables
+   c. Determine namespace: `PaidSearch/{ArticleTitle}` (spaces → hyphens in title)
+   d. Determine category tags from `~/shared/artifacts/index.md` artifact category
+   e. Publish via XWiki MCP:
+      ```
+      mcp_xwiki_mcp_put_wiki_page(
+        path="PaidSearch/{article-title-slug}",
+        title="{article_title}",
+        content="{xwiki_markup}",
+        syntax="xwiki/2.1"
+      )
+      ```
+   f. If XWiki publish succeeds: update publication_registry (see step 10)
+   g. If XWiki publish fails: log failure, retain SharePoint copy, flag for retry (see XWiki Failure Handling below)
+10. **Update publication registry in DuckDB:**
+    After SharePoint sync and XWiki publish, log both statuses:
+    ```sql
+    INSERT INTO publication_registry (article_id, article_title, local_path, sharepoint_url, xwiki_page_id, sharepoint_status, xwiki_status, sharepoint_last_published, xwiki_last_published, sync_status)
+    VALUES ('{slug}', '{title}', '{local_path}', '{sp_url}', 'PaidSearch/{slug}', 'published', 'published', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'in_sync')
+    ON CONFLICT (article_id) DO UPDATE SET
+      sharepoint_status = 'published',
+      xwiki_status = 'published',
+      sharepoint_last_published = CURRENT_TIMESTAMP,
+      xwiki_last_published = CURRENT_TIMESTAMP,
+      sync_status = 'in_sync';
+    ```
+11. **Report:** List what was published, which cross-references changed, XWiki publish status, and any structural changes made.
+
+## XWiki Failure Handling
+
+If the XWiki publish fails at step 9:
+1. Log the failure to workflow_executions in DuckDB (step_name: 'xwiki_publish', error_message: '{error}')
+2. Update publication_registry with xwiki_status = 'failed'
+3. The article remains published on SharePoint — SharePoint is the primary channel
+4. Flag the article for retry: note in the publishing report "XWiki publish failed for {title} — will retry on next sync run"
+5. On next sync run (or next librarian invocation), check publication_registry for xwiki_status = 'failed' and retry those articles first
+
+## Divergence Detection
+
+During any sync or publishing run, check for diverged articles:
+```sql
+SELECT article_id, article_title,
+    sharepoint_last_published, xwiki_last_published,
+    CASE
+        WHEN sharepoint_last_published > xwiki_last_published THEN 'sharepoint_ahead'
+        WHEN xwiki_last_published > sharepoint_last_published THEN 'xwiki_ahead'
+        ELSE 'in_sync'
+    END AS divergence
+FROM publication_registry
+WHERE sharepoint_status = 'published' AND xwiki_status = 'published'
+AND ABS(EPOCH(sharepoint_last_published - xwiki_last_published)) > 86400;
+```
+
+For diverged articles:
+- If SharePoint is ahead: re-convert and re-publish to XWiki
+- If XWiki is ahead (shouldn't happen — XWiki is secondary): flag for investigation
+- Update sync_status after resolution
 
 ## Wiki structure
 
