@@ -183,13 +183,13 @@ Report summary only: `📚 Wiki lint: [N] healthy, [N] stale, [N] orphaned, [N] 
 
 **Last phase. Expendable if context is heavy.**
 
-Delegate to Karpathy subagent. Do NOT run experiments yourself.
+Invoke Karpathy as a CLI agent (`karpathy.json`). Do NOT run experiments yourself.
 
-Invoke Karpathy subagent with context: heart.md, gut.md, karpathy.md, list of organs modified in Phases 1-3 (cooldown list).
+Karpathy CLI agent receives context: heart.md, gut.md, karpathy.md, list of organs modified in Phases 1-3 (cooldown list).
 
-The Karpathy subagent runs the autoresearch loop per heart.md protocol. The executing agent receives results and reports them.
+The Karpathy CLI agent runs the autoresearch loop per heart.md protocol — including invoking eval agents A/B/C as independent CLI agents. The executing agent receives results and reports them.
 
-If subagent invocation fails: skip experiments. Do not fall back to self-execution.
+If Karpathy CLI invocation fails: skip experiments. Do not fall back to self-execution.
 
 ### Suggestions
 Up to 3. Five Levels aligned, measurable, reversible.

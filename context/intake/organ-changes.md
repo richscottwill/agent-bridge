@@ -24,3 +24,22 @@
 **Diff:** Single line — `### Step 4: Evaluate — A/B Blind Eval` → `### Step 4: Evaluate — A/B/C Blind Eval`
 **Cross-organ impact:** None. This corrects a stale heading — the rest of the system (karpathy.md, portable-body/heart.md, agent-bridge/heart.md, session-log.md, hooks-inventory.md) already uses "A/B/C" terminology. The heading was the only remaining "A/B" reference.
 **Authorization:** ⚠️ Edit source unknown. heart.md is gated — only the karpathy agent has authority to modify this file. This edit was detected via fileEdited hook, not from a karpathy-invoked session. If Richard made this edit directly, it's a minor heading fix that aligns with existing terminology. If an unauthorized agent made it, flag for review.
+
+## 2026-04-05 — heart.md (eval invocation pattern change)
+
+**File:** `shared/context/body/heart.md`
+**Timestamp:** 2026-04-05
+**Change:** Step 4 eval agent invocation refactored from `invokeSubAgent` to CLI-based invocation (`.json` agent configs). Rationale stated in diff: "CLI invocation avoids the subagent-can't-invoke-subagent limitation."
+**Diff:** Single line — `Karpathy orchestrates the blind eval by invoking eval agents as subagents (same pattern as wiki pipeline blind reviews). Each eval agent receives its context via invokeSubAgent prompt...` → `Karpathy orchestrates the blind eval by invoking eval agents via CLI (.json agent configs). Each eval agent runs as an independent CLI agent with its own context...`
+**Cross-organ impact:** None detected. device.md references karpathy but not the specific invocation mechanism. The Governance section at the bottom of heart.md already states "Karpathy runs as a CLI agent (not a subagent) so it can invoke eval agents A/B/C as independent CLI agents" — this edit makes Step 4 consistent with that existing governance statement. The kiro-setup-optimization design doc references custom subagents as a Phase 2 opportunity for agent routing generally, but does not depend on the eval invocation pattern.
+**Authorization:** ⚠️ heart.md is gated — only the karpathy agent has authority to modify this file. This edit was detected via fileEdited hook, not from a karpathy-invoked session. The change is substantive (alters the eval pipeline's invocation mechanism) but makes Step 4 consistent with the Governance section already in heart.md. If Richard made this edit directly to resolve an internal inconsistency, it's a valid correction. If an unauthorized agent made it, flag for karpathy review.
+
+## 2026-04-05 — gut.md
+
+**Change:** Updated Karpathy authority definition in §Governance. Replaced "the executing agent acting under karpathy.md identity (during experiment runs) OR a Karpathy subagent (during governance proposals)" with "the Karpathy CLI agent (`karpathy.json`) running experiment batches, or any agent acting under karpathy.md identity during governance proposals."
+
+**Impact:** Semantic — aligns governance language with CLI-based experiment execution model. No functional change to who owns gut.md.
+
+**Cross-organ conflicts:** None detected. device.md and soul.md references to karpathy remain consistent.
+
+**Gated file flag:** gut.md is Karpathy-gated. Edit source unverified — if manual, ratify during next Karpathy loop run.

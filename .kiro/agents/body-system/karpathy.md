@@ -39,11 +39,11 @@ Portable-body experiments include:
 1. **Select target.** Query `autoresearch_selection_weights` view in DuckDB. Target selection: over-budget first (organs only), then stale, then UCB-weighted random. Targets include organs (information-retrieval evals) and style guides/context files/hook prompts (output-quality evals). Technique selection: UCB-weighted from priors for that target. Exclude targets modified by maintenance this invocation. Exclude target×technique combos with posterior_mean < 0.15 AND n > 10 (proven losers).
 2. **Snapshot.** Record word count. Generate eval questions scaled to experiment risk (low: 2-3, medium: 4-6, high/Brain/Memory: 5-8). Standing adversarial questions always included. Save original organ for Agent B.
 3. **Apply.** Execute the experiment on the section. Record start time.
-4. **A/B/C blind eval via subagents.** Invoke eval agents using `invokeSubAgent` (same pattern as wiki pipeline blind reviews). Each agent sees only what you provide in the prompt — no awareness of the other agent or the experiment.
-   - **Agent A:** Invoke subagent with prompt containing: modified organ content + body.md + soul.md + all eval questions. Instructions: "Answer each question based on the provided context." No scoring instructions.
+4. **A/B/C blind eval via CLI agents.** Invoke eval agents using CLI (`.json` agent configs). Each agent runs independently with its own context — no awareness of the other agents or the experiment.
+   - **Agent A:** Invoke CLI agent with prompt containing: modified organ content + body.md + soul.md + all eval questions. Instructions: "Answer each question based on the provided context." No scoring instructions.
    - **Fast-fail gate:** Score Agent A's answers against ground truth. If 50%+ INCORRECT, skip Agent B — mark REVERT with `fast_fail`, log to experiment-log.tsv + DuckDB, move to next experiment. Does NOT apply to Brain/Memory (always full eval).
-   - **Agent B:** Invoke separate subagent with prompt containing: ORIGINAL organ (pre-experiment snapshot) + body.md + soul.md + same eval questions. Same instructions. Does not know Agent A exists or that a change was made.
-   - **Agent C (Tier 2 only):** Invoke subagent with prompt containing: ONLY modified organ + eval questions. No body.md, no soul.md. Zero context portability test.
+   - **Agent B:** Invoke separate CLI agent with prompt containing: ORIGINAL organ (pre-experiment snapshot) + body.md + soul.md + same eval questions. Same instructions. Does not know Agent A exists or that a change was made.
+   - **Agent C (Tier 2 only):** Invoke CLI agent with prompt containing: ONLY modified organ + eval questions. No body.md, no soul.md. Zero context portability test.
    - **Judge:** Score all answers against ground truth. Write structured results to `~/shared/context/active/experiment-results-latest.json` (keeps eval output out of main context window). Compute score_a, score_b, score_c, delta_ab.
    - Tier 1 (quick): A + B only. Tier 2 (full): A + B + C. Brain/Memory always Tier 2.
 5. **Keep or revert.** delta_ab ≥ 0 to KEEP. Brain/Memory: delta_ab ≥ 0, zero INCORRECT. Full rules in heart.md Step 5.

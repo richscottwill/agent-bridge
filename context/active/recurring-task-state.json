@@ -95,7 +95,7 @@
       "last_run": "2026-04-04",
       "last_run_period": "2026-W14",
       "description": "Karpathy weekly metabolism report: body mass, experiments, learnings",
-      "notes": "4/4: Initialized. Deferred to Karpathy subagent."
+      "notes": "4/4: Initialized. Deferred to Karpathy CLI agent."
     },
     "relationship_enrichment": {
       "cadence": "weekly",

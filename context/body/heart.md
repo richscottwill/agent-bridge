@@ -126,15 +126,15 @@ Valid targets include body organs AND non-organ files:
 
 ### Step 4: Evaluate — A/B/C Blind Eval
 
-Karpathy orchestrates the blind eval by invoking eval agents as subagents (same pattern as wiki pipeline blind reviews). Each eval agent receives its context via `invokeSubAgent` prompt — the agent sees only what Karpathy provides. None knows the other exists.
+Karpathy orchestrates the blind eval by invoking eval agents via CLI (`.json` agent configs). Each eval agent runs as an independent CLI agent with its own context — no awareness of the other agents or the experiment. CLI invocation avoids the subagent-can't-invoke-subagent limitation.
 
-**Agent A (treatment + context):** Invoked as subagent. Prompt contains: the MODIFIED organ content + body.md + soul.md + eval questions. Instructions: answer each question. No scoring. No awareness of experiment.
+**Agent A (treatment + context):** Invoked as CLI agent. Prompt contains: the MODIFIED organ content + body.md + soul.md + eval questions. Instructions: answer each question. No scoring. No awareness of experiment.
 
-**Fast-fail gate (after Agent A, before Agent B):** Karpathy inspects Agent A's answers before invoking Agent B. Score Agent A's answers against ground truth. If 50%+ are INCORRECT, the experiment is obviously broken — skip Agent B, mark as REVERT with reason `fast_fail`, log to DuckDB and experiment-log.tsv, move to next experiment. This saves 1 subagent call on clearly bad experiments. Fast-fail does NOT apply to Brain/Memory experiments (always run full eval on critical organs).
+**Fast-fail gate (after Agent A, before Agent B):** Karpathy inspects Agent A's answers before invoking Agent B. Score Agent A's answers against ground truth. If 50%+ are INCORRECT, the experiment is obviously broken — skip Agent B, mark as REVERT with reason `fast_fail`, log to DuckDB and experiment-log.tsv, move to next experiment. This saves 1 CLI agent call on clearly bad experiments. Fast-fail does NOT apply to Brain/Memory experiments (always run full eval on critical organs).
 
-**Agent B (control + context):** Invoked as separate subagent. Prompt contains: the ORIGINAL organ (pre-experiment snapshot) + body.md + soul.md + same eval questions. Instructions: answer each question. No scoring. Does not know a change was made. Does not know Agent A exists.
+**Agent B (control + context):** Invoked as separate CLI agent. Prompt contains: the ORIGINAL organ (pre-experiment snapshot) + body.md + soul.md + same eval questions. Instructions: answer each question. No scoring. Does not know a change was made. Does not know Agent A exists.
 
-**Agent C (Tier 2 only, treatment + zero context):** Invoked as subagent. Prompt contains: ONLY the MODIFIED organ + eval questions. No body.md, no soul.md, no system context. Answers only.
+**Agent C (Tier 2 only, treatment + zero context):** Invoked as CLI agent. Prompt contains: ONLY the MODIFIED organ + eval questions. No body.md, no soul.md, no system context. Answers only.
 
 **Karpathy (judge):** After all eval agents return, Karpathy scores all answers against ground truth. Writes structured results to `~/shared/context/active/experiment-results-latest.json` (overwritten each experiment — keeps eval output out of main context window):
 ```json
@@ -367,4 +367,4 @@ FROM autoresearch_organ_health ORDER BY organ, run_id;
 
 ## Governance
 
-All changes to this file, the experiment queue, hyperparameters, and run protocol are governed by Karpathy authority (see `~/.kiro/agents/body-system/karpathy.md`). "Karpathy authority" means: the executing agent acting under karpathy.md identity (during experiment runs) OR a Karpathy subagent (during governance proposals). The boundary is authority, not process isolation — this is necessary because A/B/C blind eval requires the executing agent to invoke subagents directly (subagents cannot invoke their own subagents). No agent operating outside Karpathy authority modifies heart.md. The loop executes. Karpathy governs.
+All changes to this file, the experiment queue, hyperparameters, and run protocol are governed by Karpathy authority (see `~/.kiro/agents/body-system/karpathy.md`). "Karpathy authority" means: the Karpathy CLI agent (`karpathy.json`) running experiment batches, or any agent acting under karpathy.md identity during governance proposals. Karpathy runs as a CLI agent (not a subagent) so it can invoke eval agents A/B/C as independent CLI agents. No agent operating outside Karpathy authority modifies heart.md. The loop executes. Karpathy governs.
