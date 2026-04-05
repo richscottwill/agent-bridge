@@ -1,105 +1,103 @@
 ---
 title: "ie%CCP Planning & Optimization Framework"
-status: DRAFT
+status: FINAL
 doc-type: strategy
 audience: amazon-internal
 level: 2
 owner: Richard Williams
 created: 2026-03-30
-updated: 2026-04-04
-update-trigger: CCP revision by finance, ie%CCP target changes, new market budget planning
-tags: [ieccp, budget, cpa, ccp, planning, mx]
+updated: 2026-04-05
+update-trigger: CCP revision by finance, ie%CCP target changes for any market, new market budget planning cycle, Brand volume structural shift
 ---
 
 # ie%CCP Planning & Optimization Framework
 
-> How to understand, plan around, and optimize ie%CCP for Paid Search budget decisions.
+This framework explains how to understand, plan around, and optimize ie%CCP — the ratio of acquisition cost to customer value — for Paid Search budget decisions. Use it to model scenarios, evaluate incremental spend, and frame recommendations for finance. Reach for this doc when you need to answer "should we spend more on NB?" or explain to finance why the team is underspending vs allocation.
+
+## Context
+
+ie%CCP exists because Paid Search acquisition economics are not intuitive. Brand and NB have fundamentally different cost structures, and the blended metric that finance tracks — ie%CCP — obscures the subsidy relationship between them. Every budget conversation, callout, and optimization recommendation depends on understanding this relationship. The MX FY26 cycle made this urgent: Brand grew 2.7x YoY, creating surplus that the OP2 plan never anticipated, and the team needs a shared framework for deciding how much incremental NB spend that surplus justifies.
+
+## What ie%CCP measures
+
+ie%CCP answers one question: how much are we paying to acquire a customer, relative to what that customer is worth? The formula is CPA divided by CCP. A result of 75% means we pay 75 cents for every dollar of customer value — efficient and sustainable. A result of 100% means breakeven, no margin for error. Lower ie%CCP means more efficient, which means better.
+
+A 75% target is tighter (more demanding) than 100%. To move from 100% toward 75%, you either reduce CPA or increase CCP. Since CCP is set by finance, the lever is CPA.
+
+## How Brand subsidizes NB
+
+This is the single most important concept in ie%CCP planning. In a blended account, Brand and NB have very different efficiency profiles. Brand CPA runs $21 against $90 CCP — that is 23% ie%CCP, extremely efficient. NB CPA runs $134 against $30 CCP — that is 447% ie%CCP, deeply inefficient. Every Brand registration generates $69 of surplus ($90 CCP minus $21 CPA) that absorbs NB's $104 deficit ($134 CPA minus $30 CCP). The blended ie%CCP depends on the mix.
+
+This is why Brand growth is the single most powerful lever for ie%CCP. More Brand registrations mean more surplus, which means more room for NB spend. Brand is the engine. NB is the passenger.
+
+## How to read ie%CCP in a callout
+
+When ie%CCP trends down (say 100% to 85%), the account is getting more efficient. Either Brand is growing, NB CPA is improving, or NB spend was cut. Check which one — the story matters for the recommendation.
+
+When ie%CCP trends up (say 85% to 105%), the account is getting less efficient. Either Brand dipped, NB CPA worsened from rising CPCs, or NB spend increased into diminishing returns. Decompose the change before recommending action.
+
+When ie%CCP sits well below target (say 50% against a 75% target), the account is underspending. There is room to invest more in NB without breaching the target. This is either a budget constraint or a missed opportunity.
+
+## What changes the plan
+
+The OP2 plan is built on assumptions about Brand volume, NB CPA, and CCP values. When reality diverges, the plan needs to flex.
+
+| What changed | Direction | Effect on ie%CCP | Action |
+|-------------|-----------|-----------------|--------|
+| Brand regs higher than planned | Up | Improves (more surplus) | Can increase NB spend |
+| Brand regs lower than planned | Down | Worsens (less surplus) | Must cut NB spend |
+| NB CPA improved (lower) | Down | Improves (less deficit per NB reg) | Can add NB regs |
+| NB CPA worsened (higher) | Up | Worsens (more deficit per NB reg) | Must cut NB regs or spend |
+| CCP revised downward | Up | Worsens (less customer value) | Must cut spend |
+| CCP revised upward | Down | Improves (more customer value) | Can increase spend |
+
+The pattern: Brand volume and CCP revisions are the biggest ie%CCP shocks because they change the structural capacity of the account. NB CPA changes are incremental — they improve or worsen the margin on each registration but do not reshape the overall constraint. The most common real-world scenario is Brand outperforming plan, creating surplus that was not budgeted. The question becomes whether finance will fund the incremental NB spend to capture the available registrations.
+
+## How MX FY26 illustrates the framework
+
+This is where the framework meets reality. Finance allocated $1.8M for MX FY26. The team built an OP2 spend plan of $542K that respects the ie%CCP target. The $1.26M gap exists because NB is inefficient at 447% ie%CCP — every dollar of NB spend drags the blended ratio up, and the team can only run as much NB as Brand surplus absorbs.
+
+Then Brand grew 2.7x YoY in Q1 (HIGH confidence — structural, not temporary). Conservative estimates for FY26 project roughly 9,375 Brand registrations generating $844K in CCP and costing $197K in spend. That surplus changes the math entirely.
+
+At a 100% ie%CCP target, the account can support roughly 5,676 NB registrations at $134 CPA — total spend of $959K, blended CPA of $64, ie%CCP landing around 96%. At a tighter 75% target (April onward), the account supports roughly 4,573 NB registrations but requires NB CPA to improve to $115 — total spend of $745K, blended CPA of $53, ie%CCP around 79%.
+
+Both scenarios exceed OP2 significantly. The 100% scenario delivers 15,051 total registrations (+35% vs OP2) at $959K spend (+77%). The 75% scenario delivers 13,948 total registrations (+25% vs OP2) at $745K spend (+37%). The incremental registrations are available. The question is whether finance funds the NB spend to capture them.
+
+The marginal economics tell the rest of the story. The first batch of incremental registrations beyond OP2 (to 75% ie%CCP) costs $143 each. The next batch (75% to 100%) costs $194 each. Diminishing returns in action — each incremental NB registration costs more than the last, and the question is never "what is the average NB CPA?" but "what is the marginal CPA of the next batch, and does that still work within ie%CCP?"
+
+<!-- TODO: The -10% haircut on Brand estimates is stated without justification. Richard should specify why 10% vs 15% or 20%. -->
+
+## How to apply this to callouts and recommendations
+
+When writing a weekly callout or making an optimization recommendation, ie%CCP should frame the decision.
+
+"Should we increase NB spend?" — check whether Brand surplus supports it, what the marginal CPA would be, and whether ie%CCP stays within target.
+
+"Why did ie%CCP change this week?" — decompose into Brand volume, NB CPA, and mix shift. One-time events (Hot Sale, Prime Day) versus structural trends require different responses.
+
+"How should we respond to a CCP revision?" — model the new CCP against current spend levels. When MX CCP dropped from $150/$50 to $80/$30 in early 2026, it forced the $1.97M to $1.07M budget cut in FY25. That was the single biggest ie%CCP shock in the portfolio.
+
+"Finance is asking why we are underspending vs allocation." — the allocation is the ceiling. The ie%CCP target limits executable spend. The gap is NB spend that would breach the efficiency threshold. To close the gap, we need Brand growth, NB CPA improvement, or a looser ie%CCP target. Quantify each path.
+
+## Quick reference
+
+ie%CCP equals CPA divided by CCP. Lower is more efficient.
+
+A 75% target means CPA must be at or below 75% of CCP. A 100% target means breakeven. Brand is the engine — grow it to create surplus. NB is the passenger — optimize it, then scale it. CCP is the speed limit — set by finance, not by us.
+
+To improve ie%CCP: cut NB (fast) or grow Brand (structural). To model capacity: use the NB-per-Brand-reg ratio (see Appendix A). To evaluate incremental spend: ask about marginal CPA, not average CPA.
+
+## Related
+
+- [MX FY26 Budget Model](mx-fy26-budget-model)
+- [WBR Callout Playbook](wbr-callout-playbook)
+- [OCI Rollout Playbook](oci-rollout-playbook)
 
 ---
 
-## What ie%CCP Measures
+## Appendix A: Blended math and formula derivations
 
-ie%CCP answers one question: **how much are we paying to acquire a customer, relative to what that customer is worth?**
-
-**The formula:**
-
-```
-ie%CCP = CPA / CCP
-```
-
-- CPA = Cost Per Acquisition (what we spend to get one registration)
-- CCP = Customer Cost Parity (projected 3-year OPS value of that customer)
-
-**What the number means:**
-
-| ie%CCP | Plain English | Implication |
-|--------|--------------|-------------|
-| 50% | We pay half of what the customer is worth | Very efficient — room to invest more |
-| 75% | We pay 75¢ for every $1 of customer value | Efficient — tight but sustainable |
-| 100% | We pay exactly what the customer is worth | Breakeven — no margin for error |
-| 125% | We pay $1.25 for every $1 of customer value | Overspending — losing money on acquisition |
-
-**Lower ie%CCP = more efficient = better.**
-
-A 75% target is tighter (more demanding) than 100%. To move from 100% toward 75%, you need to either reduce CPA or increase CCP. Since CCP is set by finance, the lever is CPA.
-
----
-
-## Why It's Confusing
-
-ie%CCP trips people up because the relationships run in opposite directions depending on which variable you're looking at.
-
-**The trap:** "Lower target means we need to spend less" sounds like it means fewer registrations. But it actually means we need to be *more efficient* — which could mean the same registrations at lower cost, or it could mean fewer registrations if we can't improve efficiency.
-
-Here's a map of how the pieces connect:
-
-```
-ie%CCP = CPA / CCP
-
-To LOWER ie%CCP (more efficient):
-  → Lower CPA
-    → Cut NB spend (fewer expensive regs)
-    → Improve NB CVR (same spend, more regs)
-    → Lower NB CPC (same clicks, less spend)
-    → Shift mix toward Brand (Brand CPA << NB CPA)
-
-To RAISE ie%CCP (less efficient):
-  → Higher CPA
-    → Increase NB spend (diminishing returns push CPA up)
-    → NB CPC rises (auction pressure)
-    → Brand share decreases relative to NB
-```
-
-**The subsidy model:** In a blended account, Brand and NB have very different ie%CCP profiles:
-
-```
-Brand:  CPA $21  /  CCP $90  =  23% ie%CCP  (extremely efficient)
-NB:     CPA $134 /  CCP $30  =  447% ie%CCP (extremely inefficient)
-```
-
-Brand subsidizes NB. Every Brand registration generates $69 of "surplus" ($90 CCP - $21 CPA) that absorbs NB's $104 "deficit" ($134 CPA - $30 CCP). The blended ie%CCP depends on the mix.
-
-This is why Brand growth is the single most powerful lever for ie%CCP. More Brand regs = more surplus = more room for NB spend.
-
----
-
-## How to Read ie%CCP in a Callout
-
-When you see ie%CCP reported weekly or monthly, here's what to look for:
-
-**Trending down (e.g., 100% → 85%):** Getting more efficient. Either Brand is growing (more surplus), NB CPA is improving, or NB spend was cut. Check which one — the story matters.
-
-**Trending up (e.g., 85% → 105%):** Getting less efficient. Either Brand dipped, NB CPA worsened (CPC rising, CVR flat), or NB spend increased into diminishing returns.
-
-**Stable near target:** The account is in equilibrium. NB spend is calibrated to the Brand surplus. Watch for CPC trends that could break the balance.
-
-**Well below target (e.g., 50% when target is 75%):** Underspending. There's room to invest more in NB without breaching the target. This is either a budget constraint (PO/OP2 limits) or a missed opportunity.
-
----
-
-## The Blended Math
-
-ie%CCP is a blended metric. It equals Total Spend / Total CCP, which is the same as blended CPA / blended CCP.
+ie%CCP is a blended metric. It equals Total Spend divided by Total CCP, which is the same as blended CPA divided by blended CCP.
 
 ```
 Total Spend = (Brand Regs × Brand CPA) + (NB Regs × NB CPA)
@@ -107,294 +105,70 @@ Total CCP   = (Brand Regs × Brand CCP) + (NB Regs × NB CCP)
 ie%CCP      = Total Spend / Total CCP
 ```
 
-This means ie%CCP is driven by three things:
-1. The Brand/NB registration mix
-2. Brand CPA and NB CPA
-3. Brand CCP and NB CCP (set by finance)
-
-
-At a given ie%CCP target T, you can solve for the maximum NB regs the account can support:
+At a given ie%CCP target T, you can solve for the maximum NB registrations the account can support:
 
 ```
-T = (Brand×BrandCPA + NB×NB_CPA) / (Brand×BrandCCP + NB×NB_CCP)
+T = (Brand × BrandCPA + NB × NB_CPA) / (Brand × BrandCCP + NB × NB_CCP)
 
 Rearranging:
 NB = Brand × (T × BrandCCP - BrandCPA) / (NB_CPA - T × NB_CCP)
 ```
 
-Example with current MX values (Brand CPA $21, Brand CCP $90, NB CCP $30):
+Using current MX values (Brand CPA $21, Brand CCP $90, NB CCP $30):
 
 | ie%CCP Target | NB CPA | NB per Brand Reg | Interpretation |
 |---------------|--------|-----------------|----------------|
-| 75% | $115 | 0.503 | For every 2 Brand regs, ~1 NB reg allowed |
-| 75% | $134 | 0.417 | Worse NB CPA = fewer NB regs allowed |
-| 100% | $134 | 0.663 | Looser target = more NB room |
-| 100% | $115 | 0.911 | Better NB CPA + looser target = nearly 1:1 |
+| 75% | $115 | 0.503 | For every 2 Brand regs, roughly 1 NB reg allowed |
+| 75% | $134 | 0.417 | Worse NB CPA means fewer NB regs allowed |
+| 100% | $134 | 0.663 | Looser target means more NB room |
+| 100% | $115 | 0.911 | Better NB CPA plus looser target means nearly 1:1 |
 | 125% | $134 | 0.960 | Overspending territory — almost 1:1 |
 
-The ratio tells you how many NB registrations the account can "afford" per Brand registration at a given efficiency target. Brand is the engine; NB is the passenger.
+The ratio tells you how many NB registrations the account can afford per Brand registration at a given efficiency target.
 
----
+## Appendix B: The four optimization scenarios
 
-## Budget Planning: The Stakeholder View
+### When budget is constrained and the ie%CCP target is tighter
 
-### How Finance Sets the Budget
+This is the hardest scenario — less money and a lower blended CPA requirement. Cut NB spend aggressively, removing the most expensive campaigns and keywords first. NB CPA improves as you cut because you are removing the expensive tail. Protect Brand at all costs. Focus NB on highest-CVR campaigns only (Invoice, Product/Vertical over Generic).
 
-Finance allocates a total budget (e.g., $1.8M for MX FY26). This is the ceiling — the maximum the market could spend.
+MX H2 2025 is the real example. Budget was cut from $1.97M to $1.07M, ie%CCP target set at 100%. NB spend dropped roughly 60% from H1 to H2. NB registrations dropped roughly 40%. But NB CPA improved from $264 to $201 (minus 24%) because the remaining spend concentrated in efficient campaigns.
 
-But the team doesn't plan to spend all of it. The team builds an OP2 spend plan that respects the ie%CCP target. The gap between allocation and plan is the ie%CCP constraint at work.
+### When budget is constrained but the ie%CCP target is looser
 
-```
-Finance allocation:  $1.8M   ← "Here's what you could spend"
-OP2 spend plan:      $542K   ← "Here's what we can spend at 75-100% ie%CCP"
-Gap:                 $1.26M  ← Unspendable under current ie%CCP constraints
-```
+Easier than the first scenario. Less total spend, but more of it can go to NB because the ie%CCP ceiling is higher. Allocate more of the fixed budget to NB. Accept higher NB CPA on marginal registrations. The risk: if you push NB too hard within the budget, CPA rises and you may still breach the looser target.
 
-The gap exists because NB is inefficient (447% ie%CCP). Every dollar of NB spend drags the blended ratio up. The team can only run as much NB as Brand surplus can absorb.
+### When budget is unconstrained and the ie%CCP target is tighter
 
-### What Changes the Plan
+The growth scenario. Budget is not the constraint — efficiency is. Grow Brand first (highest leverage). Improve NB efficiency before scaling — negative keyword optimization, bid strategy tuning, CVR improvements. Scale NB only after efficiency gains are locked in. The sequence matters: improve efficiency, lock in gains, then scale.
 
-The OP2 plan is built on assumptions about Brand volume, NB CPA, and CCP values. When reality diverges, the plan needs to flex:
+MX Q1 2026 illustrates this. Brand grew 2.7x YoY organically, creating massive CCP surplus. NB spend increased to fill the surplus, but NB CPA stayed at $134 because bid strategies were chasing volume. ie%CCP landed at roughly 98% — right at the 100% target. If NB CPA had been improved first (via negative keywords, which happened in W11), the same Brand surplus could have funded even more NB registrations.
 
-| What Changed | Direction | Effect on ie%CCP | Action |
-|-------------|-----------|-----------------|--------|
-| Brand regs higher than planned | ↑ | Improves (more surplus) | Can increase NB spend |
-| Brand regs lower than planned | ↓ | Worsens (less surplus) | Must cut NB spend |
-| NB CPA improved (lower) | ↓ | Improves (less deficit per NB reg) | Can add NB regs |
-| NB CPA worsened (higher) | ↑ | Worsens (more deficit per NB reg) | Must cut NB regs or spend |
-| CCP revised downward | ↑ | Worsens (less customer value) | Must cut spend |
-| CCP revised upward | ↓ | Improves (more customer value) | Can increase spend |
+### When budget is unconstrained and the ie%CCP target is looser
 
-The most common real-world scenario: Brand outperforms plan, creating surplus that wasn't budgeted. The question becomes whether finance will fund the incremental NB spend to capture the available regs.
+The maximum-volume scenario. Rare in practice, useful as a ceiling estimate. Scale NB aggressively, accept diminishing returns, expand into lower-CVR campaigns. Use this scenario for "what is the maximum registrations we could drive?" analysis. The risk: CPA spirals as each incremental NB registration costs more.
 
----
+## Appendix C: The marginal CPA curve
 
-## Optimization Playbook: Four Scenarios
+Not all NB registrations cost the same. The first NB registrations are cheap (high-intent keywords, Invoice campaigns). As you scale, you push into lower-CVR, higher-CPC territory.
 
-### Scenario 1: Constrained Budget + Tighter ie%CCP Target
+The core 50% of NB spend runs roughly $100-110 CPA with a marginal cost around $100 per registration. The mid tier (next 30%) runs $120-130 CPA with marginal cost around $150. The tail (last 20%) runs $140-160 CPA with marginal cost above $190.
 
-*"Finance gave us less money AND wants us to be more efficient."*
+This is why cutting NB spend improves CPA disproportionately — you remove the expensive tail first. And why scaling NB spend worsens CPA disproportionately — you add expensive marginal registrations. When evaluating whether to increase NB spend, the question is always marginal CPA, not average CPA.
 
-This is the hardest scenario. You have less to spend and need a lower blended CPA.
+## Appendix D: Levers ranked by impact
 
-Levers:
-- Cut NB spend aggressively — remove the most expensive campaigns/keywords first
-- NB CPA improves as you cut (you're removing the expensive tail)
-- Protect Brand at all costs — Brand is the efficiency engine
-- Focus NB on highest-CVR campaigns only (Invoice, Product/Vertical over Generic)
-- Device optimization: shift to desktop (lower CPA) where possible
+Brand registration volume is the highest-leverage input. Every Brand registration at $21 CPA against $90 CCP generates $69 of surplus. That surplus funds NB spend. An additional 100 Brand registrations per month creates $6,900 of surplus — room for roughly 50-65 more NB registrations at current CPA. Brand growth is mostly organic, driven by brand awareness, market maturity, events, and paid social spillover. The PS team's job is to capture the demand through Brand coverage, Brand Phrase campaigns, and sitelink optimization during events. The biggest Brand moves come from outside PS: paid social campaigns, events (Hot Sale, Prime Day), and market maturity.
 
-The math: if you cut 25% of NB spend, you lose ~15-18% of NB regs (the expensive ones go first), and NB CPA improves ~10-15%. The blended ie%CCP drops because you removed the worst-performing spend.
+NB CPA is the second-highest lever. Lowering NB CPA from $134 to $115 reduces the deficit per registration from $104 to $85 — an 18% improvement that compounds across every NB registration. The levers within NB CPA include bid strategy optimization, negative keyword management, campaign structure consolidation, device optimization, and landing page improvements. A $20 NB CPA improvement across 500 NB registrations per month saves $10K per month — room for roughly 75 more NB registrations.
 
-Real example — MX H2 2025: Budget was cut from $1.97M to $1.07M, and ie%CCP target was set at 100%. NB spend dropped ~60% from H1 to H2. NB regs dropped ~40%. But NB CPA improved from $264 to $201 (-24%) because the remaining spend was concentrated in efficient campaigns.
+NB spend level is the most direct lever but has diminishing returns. More spend means higher CPA on marginal registrations. Pull this lever after Brand and NB CPA are optimized.
 
-### Scenario 2: Constrained Budget + Looser ie%CCP Target
-
-*"Finance gave us less money but is OK with lower efficiency."*
-
-Easier than Scenario 1. You have less total spend, but more of it can go to NB because the ie%CCP ceiling is higher.
-
-Levers:
-- Allocate more of the fixed budget to NB (since ie%CCP allows it)
-- Accept higher NB CPA on marginal regs
-- Still optimize within NB — but the threshold for "too expensive" is higher
-- Brand investment stays the same (it's already efficient)
-
-The risk: if you push NB too hard within the budget, CPA rises and you may still breach the looser target. Diminishing returns are real.
-
-### Scenario 3: Unconstrained Budget + Tighter ie%CCP Target
-
-*"Finance will fund whatever we can spend efficiently."*
-
-This is the growth scenario. Budget isn't the constraint — efficiency is. You can spend more, but only if ie%CCP stays below target.
-
-Levers:
-- Grow Brand (the highest-leverage move) — more Brand regs = more surplus = more NB capacity
-- Improve NB efficiency first, then scale — lower NB CPA before adding spend
-- Negative keyword optimization, bid strategy tuning, CVR improvements
-- Scale NB only after efficiency gains are locked in
-- Monitor marginal CPA — each incremental NB reg costs more than the last
-
-The sequence matters: improve efficiency → lock in gains → then scale. Scaling before efficiency improvements just pushes ie%CCP up.
-
-Real example — MX Q1 2026: Brand grew ~2.7x YoY organically. This created massive CCP surplus. NB spend increased to fill the surplus, but NB CPA stayed at $134 because bid strategies were chasing volume. ie%CCP landed at ~98% — right at the 100% target. If NB CPA had been improved first (via negative keywords, which happened in W11), the same Brand surplus could have funded even more NB regs.
-
-### Scenario 4: Unconstrained Budget + Looser ie%CCP Target
-
-*"Spend what you want, efficiency isn't the priority."*
-
-The maximum-volume scenario. Rare in practice, but useful as a ceiling estimate.
-
-Levers:
-- Scale NB aggressively — accept diminishing returns
-- Expand into lower-CVR campaigns (Generic, broad match)
-- Test new verticals, keywords, audiences
-- Use this scenario for "what's the maximum regs we could drive?" analysis
-
-The risk: CPA spirals. Each incremental NB reg costs more. The marginal CPA curve steepens quickly.
-
----
-
-## The Marginal CPA Curve
-
-Not all NB registrations cost the same. The first NB regs are cheap (high-intent keywords, Invoice campaigns). As you scale, you push into lower-CVR, higher-CPC territory.
-
-```
-NB Spend Level    →  NB CPA    →  Marginal CPA of Next Reg
-─────────────────────────────────────────────────────────────
-Core (first 50%)     ~$100-110     ~$100 (efficient base)
-Mid (next 30%)       ~$120-130     ~$150 (diminishing returns)
-Tail (last 20%)      ~$140-160     ~$190+ (expensive marginal regs)
-```
-
-This is why cutting NB spend improves CPA disproportionately — you're removing the expensive tail first. And why scaling NB spend worsens CPA disproportionately — you're adding expensive marginal regs.
-
-When evaluating whether to increase NB spend, the question isn't "what's the average NB CPA?" — it's "what's the marginal CPA of the next batch of regs, and does that still work within ie%CCP?"
-
-
----
-
-## The Levers (Ranked by Impact)
-
-### 1. Brand Registration Volume (highest leverage)
-
-Brand is the engine. Every Brand reg at $21 CPA against $90 CCP generates $69 of surplus. This surplus is what funds NB spend.
-
-Brand growth is mostly organic — driven by brand awareness, market maturity, events, and paid social spillover. PS can influence it through:
-- Brand coverage (ensuring ads show for all brand queries)
-- Brand Phrase campaigns (capturing adjacent brand intent)
-- Sitelink optimization during events
-
-But the biggest Brand moves come from outside PS: paid social campaigns, events (Hot Sale, Prime Day), and market maturity. PS's job is to capture the demand, not create it.
-
-Impact: +100 Brand regs/month = +$6,900 surplus = room for ~50-65 more NB regs at current CPA.
-
-### 2. NB CPA (second highest leverage)
-
-NB CPA determines how much "deficit" each NB reg creates. Lowering NB CPA from $134 to $115 reduces the deficit per reg from $104 to $85 — a 18% improvement that compounds across every NB reg.
-
-Levers within NB CPA:
-- Bid strategy optimization (CPT vs CPC, target adjustments)
-- Negative keyword management (query routing efficiency)
-- Campaign structure (consolidating Generic, focusing on high-CVR portfolios)
-- Device optimization (desktop vs mobile CPA gaps)
-- Landing page improvements (CVR gains)
-
-Impact: -$20 NB CPA across 500 NB regs/month = $10K/month savings = room for ~75 more NB regs.
-
-### 3. NB Spend Level (direct but diminishing)
-
-The most direct lever — just increase or decrease NB budgets. But it has diminishing returns: more spend = higher CPA on marginal regs.
-
-This is the lever you pull after Brand and NB CPA are optimized. It's the "volume knob" — turn it up for more regs at worse efficiency, turn it down for fewer regs at better efficiency.
-
-### 4. CCP Values (not in our control)
-
-CCP is set by finance based on projected 3-year OPS. When finance revises CCP, the ie%CCP math shifts immediately.
-
-History: MX CCP went from $150/$50 (mid-2025) → $80/$30 (early 2026) → $90/$30 (current). Each downward revision tightened the constraint. The move from $150/$50 to $80/$30 was the single biggest ie%CCP shock — it forced the $1.97M → $1.07M budget cut in FY25.
-
-We can't control CCP, but we need to monitor it and model scenarios for potential revisions.
-
----
-
-## Applying This to Callouts and Recommendations
-
-When writing a weekly callout or making an optimization recommendation, ie%CCP should frame the decision:
-
-**"Should we increase NB spend?"**
-→ Check: does Brand surplus support it? What's the marginal CPA? Will ie%CCP stay within target?
-
-**"Why did ie%CCP change this week?"**
-→ Decompose: was it Brand volume? NB CPA? Mix shift? One-time event?
-
-**"How should we respond to a CCP revision?"**
-→ Model: at the new CCP, what NB level keeps ie%CCP at target? How many regs do we lose?
-
-**"Finance is asking why we're underspending vs allocation."**
-→ Explain: the allocation is $X, but ie%CCP at [target]% limits executable spend to $Y. The gap is $Z of NB spend that would breach the efficiency threshold. To close the gap, we'd need [Brand growth / NB CPA improvement / looser ie%CCP target].
-
----
-
-## MX Case Study: FY26 Projection
-
-Using the framework above, here's how MX FY26 plays out under two ie%CCP scenarios.
-
-**Setup:**
-- Finance allocation: $1.8M
-- OP2 plan: $542K (built at Q1 100%, Q2+ 75% ie%CCP)
-- CCP: Brand $90, NB $30
-- Brand CPA: $21 (stable)
-- Q1 actuals: Brand running ~2.7x above LY (structural, not temporary)
-
-**Conservative Brand estimates (LY seasonal shape × 2.7x, then -10% haircut):**
-
-FY26 Brand: ~9,375 regs, $197K spend, $844K CCP
-
-**Scenario 1 — 100% ie%CCP (looser):**
-
-| Metric | Value |
-|--------|-------|
-| NB Regs | 5,676 |
-| NB CPA | $134 |
-| NB Spend | $762K |
-| Total Regs | 15,051 |
-| Total Spend | $959K |
-| Blended CPA | $64 |
-| ie%CCP | ~96% |
-
-**Scenario 2 — 75% ie%CCP (tighter, Apr-Dec):**
-
-| Metric | Value |
-|--------|-------|
-| NB Regs | 4,573 |
-| NB CPA | $115 |
-| NB Spend | $548K |
-| Total Regs | 13,948 |
-| Total Spend | $745K |
-| Blended CPA | $53 |
-| ie%CCP | ~79% |
-
-**vs OP2:**
-
-| Metric | OP2 | S1 (100%) | S2 (75%) |
-|--------|-----|-----------|----------|
-| Total Spend | $542K | $959K (+77%) | $745K (+37%) |
-| Total Regs | 11,178 | 15,051 (+35%) | 13,948 (+25%) |
-| Blended CPA | $48 | $64 (+33%) | $53 (+10%) |
-
-Both scenarios exceed OP2 because Brand is massively outperforming the assumptions OP2 was built on. The incremental regs are available — the question is whether finance funds the NB spend to capture them.
-
-**Marginal economics beyond OP2 targets:**
-
-| Step | Incremental NB Regs | Incremental NB Spend | Marginal CPA |
-|------|--------------------|--------------------|-------------|
-| OP2 target → S2 (75%) | 1,471 | $211K | $143 |
-| S2 (75%) → S1 (100%) | 1,103 | $214K | $194 |
-
-The first batch of incremental regs (to 75% ie%CCP) costs $143 each. The next batch (75% → 100%) costs $194 each. Diminishing returns in action.
-
----
-
-## Quick Reference
-
-**ie%CCP = CPA / CCP.** Lower = more efficient.
-
-**75% target** = tighter, more efficient. CPA must be ≤75% of CCP.
-**100% target** = looser, breakeven. CPA = CCP.
-
-**Brand** is the engine. Grow it to create surplus.
-**NB** is the passenger. Optimize it, then scale it.
-**CCP** is the speed limit. Set by finance, not by us.
-
-**To improve ie%CCP:** cut NB (fast) or grow Brand (structural).
-**To model capacity:** NB regs = Brand regs × ratio (see formula table above).
-**To evaluate incremental spend:** ask about marginal CPA, not average CPA.
-
+CCP values are not in our control. CCP is set by finance based on projected 3-year OPS. MX CCP went from $150/$50 (mid-2025) to $80/$30 (early 2026) to $90/$30 (current). Each downward revision tightened the constraint. We cannot control CCP, but we need to monitor it and model scenarios for potential revisions.
 
 <!-- AGENT_CONTEXT
-machine_summary: "Comprehensive framework for understanding and optimizing ie%CCP (CPA/CCP ratio) for Paid Search budget decisions. Covers the blended math (Brand subsidizes NB), four optimization scenarios (constrained/unconstrained budget x tight/loose target), marginal CPA curve, the four levers ranked by impact (Brand volume > NB CPA > NB spend level > CCP values), and MX FY26 case study with two ie%CCP scenarios. Key insight: Brand is the engine (every Brand reg at $21 CPA against $90 CCP generates $69 surplus that funds NB spend)."
+machine_summary: "Decision framework for ie%CCP (CPA/CCP ratio) in Paid Search budget planning. Main body covers the subsidy model (Brand at 23% ie%CCP subsidizes NB at 447%), how to read and decompose ie%CCP changes in callouts, and the MX FY26 case study showing 25-35% upside vs OP2 depending on ie%CCP target. Appendices carry formula derivations, four optimization scenarios, marginal CPA curve, and lever rankings."
 key_entities: ["ie%CCP", "CPA", "CCP", "Brand", "NB", "MX", "OP2", "marginal CPA", "budget planning", "finance"]
-action_verbs: ["calculate", "model", "optimize", "forecast", "decompose"]
+action_verbs: ["model", "decompose", "evaluate", "calculate", "forecast", "optimize"]
 update_triggers: ["CCP revision by finance", "ie%CCP target changes for any market", "new market budget planning cycle", "Brand volume structural shift"]
 -->

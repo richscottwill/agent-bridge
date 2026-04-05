@@ -67,6 +67,23 @@ These replace parsing metric tables from the data brief. DuckDB is the canonical
 5. Read `shared/context/active/callouts/callout-principles.md` to understand what the callout writer needs
 6. Optionally read the data brief at `shared/context/active/callouts/{market}/{market}-data-brief-2026-w{NN}.md` for any narrative context or notes — but do NOT parse metric tables from it. The numbers come from DuckDB.
 
+### Step 5b: Query cross-channel signal intelligence
+Query DuckDB `signal_tracker` for team conversation evidence related to this market's key topics:
+```sql
+SELECT topic, source_channel, source_author, source_preview, signal_strength, last_seen
+FROM signal_tracker
+WHERE topic LIKE '%{market}%' OR topic IN (select topic from signal_trending)
+  AND is_active = true
+ORDER BY signal_strength DESC LIMIT 10;
+```
+Also FTS search slack_messages for market-specific discussion:
+```sql
+SELECT ts, channel_name, author_name, text_preview,
+       fts_main_slack_messages.match_bm25(ts, '{market} {key_metric_topic}') AS score
+FROM slack_messages WHERE score IS NOT NULL ORDER BY score DESC LIMIT 5;
+```
+Include top results as "team conversation evidence" in the analysis brief. If a topic has reinforcement_count > 5 in the last 7 days, flag as "trending — team is actively discussing this." Cross-channel corroboration (channel_spread >= 3) strengthens the signal.
+
 ### Step 6: Analyze (generic workflow, market-specific rules from config)
 
 #### 1. Registration drivers (WHY did regs go up or down?)

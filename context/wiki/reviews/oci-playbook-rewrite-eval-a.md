@@ -1,0 +1,98 @@
+# Review: OCI Rollout Playbook — From E2E to 100% in Any Market
+
+**Reviewer:** wiki-critic (Blind Eval A)
+**Date:** 2026-04-04
+**Article:** `shared/context/wiki/staging/oci-rollout-playbook-rewrite.md`
+
+## Scores
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 9/10 | A teammate can follow this end-to-end and execute a rollout without asking the author. Phase gates, decision criteria, and measurement methodology are all present. |
+| Clarity | 8/10 | Headers answer questions ("How to prove the pipeline works"), structure follows the rollout chronologically, and each section has a clear purpose. Minor deductions below. |
+| Accuracy | 8/10 | Every major claim has a source citation. Numbers are dated. Cross-references to Execution Guide, Business Case, and body system docs are present. One concern noted below. |
+| Dual-audience | 9/10 | Rich YAML frontmatter with `consumed_by`, `update_triggers`, `tags`. AGENT_CONTEXT block has `machine_summary`, `key_entities`, `action_verbs`, `update_triggers`. Prose is human-readable narrative. Strong on both sides. |
+| Economy | 7/10 | The doc earns its length overall, but the market-by-market section has a repetitive structure that could be compressed, one sentence is duplicated verbatim, and the Related section bullet items use noun phrases instead of verbs. Details below. |
+| **Overall** | **8.2/10** | |
+
+## Verdict
+
+**REVISE**
+
+Overall average is 8.2, but Economy scores 7. The rule is explicit: no dimension below 7 for PUBLISH, and a 7 is a decent doc — we ship 8s. Economy needs to reach 8 before this publishes.
+
+## Required changes
+
+### 1. Compress the EU3 market paragraphs
+
+The FR, IT, and ES paragraphs follow an identical template: "launched E2E on February 26, 2026, and reached 100% in late March. The [challenge] is [specific detail]. OCI helps NB efficiency but does not [solve/address] the [pressure]." Three paragraphs saying the same structural thing with different nouns is padding.
+
+Replace:
+
+> FR launched E2E on February 26, 2026, and reached 100% in late March. The competitive challenge is bruneau.fr holding 39-47% NB impression share. OCI helps NB efficiency but does not solve the impression share pressure. That requires a different competitive response.
+>
+> IT launched E2E on February 26, 2026, and reached 100% in late March. The primary challenge is Brand-side: Brand Core CPC is up 131% year-over-year. OCI helps NB efficiency but does not address the Brand cost pressure.
+>
+> ES launched E2E on February 26, 2026, and reached 100% in late March. It is the smallest EU market. OCI's absolute impact will be proportionally smaller, but the efficiency improvement is still meaningful for the market's economics.
+
+With a single consolidated paragraph, something like:
+
+> FR, IT, and ES all launched E2E on February 26, 2026, and reached 100% in late March. Each faces a distinct challenge that OCI does not directly solve. FR contends with bruneau.fr holding 39-47% NB impression share, which requires a competitive response beyond bidding efficiency. IT faces Brand Core CPC up 131% year-over-year, a cost pressure on the Brand side that OCI's NB focus cannot address. ES is the smallest EU market, so OCI's absolute impact is proportionally smaller, though the efficiency gain still matters for market economics.
+
+This cuts three paragraphs to one without losing any information.
+
+### 2. Remove the duplicated "patience" sentence
+
+The sentence "Premature intervention is the most common mistake" appears in Phase 4:
+
+> The default posture is patience — OCI's learning period means early volatility is expected. Premature intervention is the most common mistake.
+
+And again in the decision guide closing paragraph:
+
+> The default posture is patience — OCI's learning period means early volatility is expected, and premature intervention is the most common mistake.
+
+Delete the second occurrence. Replace:
+
+> The decision guide covers the five most common situations a market owner will face during rollout. The default posture is patience — OCI's learning period means early volatility is expected, and premature intervention is the most common mistake.
+
+With:
+
+> The decision guide covers the five most common situations a market owner will face during rollout.
+
+The point was already made in Phase 4. Repeating it dilutes the emphasis.
+
+### 3. Add verbs to Related section bullet items
+
+Current:
+
+> - [OCI Execution Guide] — Step-by-step how-to: Google Ads navigation, monitoring, troubleshooting
+> - [OCI Business Case] — Leadership summary: $16.7MM headline, talking points for Kate/Todd
+> - [Eyes — OCI Performance] — Live OCI status and metrics
+> - [Brain — D1: OCI Implementation] — Decision rationale for phased approach
+> - [OCI Instructions (Quip)] — Technical setup guide
+> - [Competitive Landscape] — How OCI enables the efficiency-based competitive response
+
+Every list item must contain a verb. Replace with:
+
+> - [OCI Execution Guide] — Follow the step-by-step Google Ads navigation, monitoring checklists, and troubleshooting procedures
+> - [OCI Business Case] — Use the $16.7MM headline and talking points when briefing Kate/Todd
+> - [Eyes — OCI Performance] — Check live OCI status and metrics across markets
+> - [Brain — D1: OCI Implementation] — Review the decision rationale for the phased approach
+> - [OCI Instructions (Quip)] — Set up OCI conversion actions using the technical guide
+> - [Competitive Landscape] — Understand how OCI enables the efficiency-based competitive response
+
+### 4. Validated results table: embed the summary data in prose and cut the table
+
+The validated results table (US/UK/DE/Total) presents sequential data — three markets listed in chronological order. The paragraph immediately before it already states the same numbers in prose: "The US produced a 24% lift with 32,047 incremental registrations and $16.7MM in OPS... UK delivered a 23% lift with 2,400 incremental registrations... DE produced an 18% lift with 749 incremental registrations."
+
+The table duplicates the preceding paragraph. Delete the table. The prose already contains every number. If the table is retained for scannability, it must not repeat what the paragraph says — pick one surface for the data, not both.
+
+## Suggestions (non-blocking)
+
+1. **Source data freshness:** The source citation says "shared/research/oci-performance.md, updated 2026-03-12." The article's `updated` field is 2026-04-04. If the underlying research has been refreshed since March 12, the source citation should reflect the latest pull date. Not blocking because the numbers themselves appear current, but worth verifying.
+
+2. **UK "Significant" in the results table:** The NB CPA Improvement column shows "Significant" for UK and DE instead of a number. If the number exists, use it. If it does not exist, say "not isolated" rather than "Significant," which is vague. The prose already explains why UK attribution is complicated — the table should match that precision.
+
+3. **MCC section placement:** The MCC structure section sits between "Current rollout status" and "Known issues." It interrupts the narrative flow from status → issues → decisions. Consider moving it after "Known issues" or folding the key insight (new markets on existing MCCs roll out faster; new MCCs add delay) into the "Current rollout status" section as a single sentence. The MCC IDs are reference data that most readers will skip.
+
+4. **DE reference data table:** This is the strongest table in the doc — it is a genuine comparison (test vs. control) with interpretation. No change needed. Noting it as a positive example of correct table use.

@@ -1,0 +1,79 @@
+# Review: Agent System Architecture (Eval A — Rubric)
+
+Reviewer: wiki-critic
+Date: 2026-04-05
+Article: `shared/context/wiki/staging/agent-architecture.md`
+Revision context: Updated from 6 per-region WBR agents to 2 parameterized agents, new Agent Definition Pattern section, updated directory structure and portability framing.
+
+## Scores
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 8/10 | A new AI or human reader can bootstrap from this doc. The Decision Guide is genuinely actionable — each row answers "what do I do when X?" with a concrete sequence. |
+| Clarity | 8/10 | Three-layer structure is clean and scannable. Headers tell the story. The Agent Definition Pattern section explains the .md/.json split clearly enough that someone could recreate it on a new platform. |
+| Accuracy | 8/10 | Claims are sourced. The 13-agent count is consistent with the enumerated agents (4 + 3 + 6). The consolidation narrative (6 → 2 parameterized) is documented with a source reference. One minor concern: the "630 lines, 700 experiments" claim in the Autoresearch Loop section is presented without a date — if this is a cumulative figure, it will go stale. |
+| Dual-audience | 8/10 | Rich YAML frontmatter with `consumed_by`, `update-trigger`, and `artifact-level`. AGENT_CONTEXT block is present with machine_summary, key_entities, action_verbs, and update_triggers. Prose sections serve humans. An agent can index this doc and extract structured guidance. |
+| Economy | 6/10 | This is where the doc falls short. Details below. |
+| **Overall** | **7.6/10** | |
+
+## Verdict
+
+**REVISE**
+
+Economy drags the average below 8. The doc has strong bones — the narrative sections (Context, Agent Definition Pattern, How the System Compounds, Portability) are tight and well-written. But the middle of the doc is a catalog of tables and code blocks that present information without interpreting it. The tables need "so what" sentences, the Sources list needs verbs, and the Related section duplicates what the Sources section already provides.
+
+## Required Changes
+
+### 1. Table abuse — 7 tables without interpretation
+
+Six of the seven tables lack a "so what" sentence explaining what the data means. The Decision Guide table is the exception — it earns its place because each row is a complete if/then/why instruction.
+
+The worst offenders:
+
+**Active Hooks table (lines 73-79):** Five rows of hook data with no interpretation. Add a sentence after the table: something like "The first three hooks are Richard-triggered workflows that run the daily operating rhythm. The last two are always-on safety guards that prevent accidental external communication. The distinction matters: workflow hooks can be skipped on a given day, safety hooks cannot."
+
+**Body System Agents table (lines 116-121):** Four agents listed with definitions and ownership. Add a sentence after: "Karpathy is the only agent with write access to heart.md and gut.md — this is a deliberate constraint that prevents other agents from modifying the experimentation protocol or compression rules."
+
+**WBR Pipeline table (lines 132-136):** Three agents listed. The paragraph that follows (lines 138-139) about the consolidation is good — it explains the history. But the table itself needs a "so what" for the current state. Add: "Market-analyst and callout-writer are parameterized — they accept a market identifier and load market-specific rules at runtime, which means adding a new market requires only a new context file, not a new agent."
+
+**Wiki Team table (lines 151-158):** Six agents listed. Add: "The pipeline is sequential — each agent's output is the next agent's input. The wiki-editor is the only agent that can assign work or resolve conflicting feedback."
+
+**Routing Rules table (lines 173-181):** Seven routing patterns. Add: "The routing table is a decision tree, not a suggestion list. If a request matches a pattern, it goes to that agent. The fallback — handle directly — only applies when no pattern matches."
+
+### 2. Sources list — noun-only items (Economy violation)
+
+Every item in the Sources section (lines 259-269) is a noun phrase: "Body system architecture — source: ...". These should contain verbs per the Economy sub-rule. Rewrite as:
+
+- "Describes the body system architecture — source: `shared/context/body/body.md`"
+- "Documents the loop protocol and experiment results — source: `shared/context/body/heart.md`"
+- "Defines the hook system — source: `shared/context/body/device.md`"
+
+...and so on for all 11 items.
+
+### 3. Related section duplicates Sources
+
+The Related section (lines 251-256) lists 6 links. The Sources section (lines 259-269) lists 11 sources, 5 of which overlap with Related (body.md, heart.md, spine.md, device.md, gut.md, soul.md — all 6 Related items appear in Sources). Cut the Related section entirely. The Sources section already provides the cross-references with more context. If the Related links serve a navigation purpose that Sources doesn't, merge them into Sources with the verb-based format.
+
+### 4. Design philosophy bullet list — noun-only items
+
+Lines 30-32 list three design influences as noun phrases:
+
+```
+- Andrej Karpathy's autoresearch — small, fast, autonomous experimentation loops that compound
+- Charles Duhigg's habit loops — cue → routine → reward structures that eliminate decision fatigue
+- Greg McKeown's essentialism — subtraction before addition, routine as liberation
+```
+
+These lack verbs. Rewrite as a prose sentence: "The design draws from Karpathy's autoresearch (small, fast, autonomous experimentation loops that compound), Duhigg's habit loops (cue → routine → reward structures that eliminate decision fatigue), and McKeown's essentialism (subtraction before addition, routine as liberation)." This converts a 3-item noun-only list into a single narrative sentence — tighter and compliant.
+
+### 5. "630 lines, 700 experiments" needs a date
+
+Line 88: "inspired by Karpathy's autoresearch — 630 lines, 700 experiments, measurable results." This is a cumulative figure that will go stale. Add a date: "630 lines and 700+ experiments as of March 2026" or similar. Alternatively, cut the specific numbers and keep the principle: "inspired by Karpathy's autoresearch — small code, many experiments, measurable results."
+
+## Suggestions (non-blocking)
+
+1. The `artifact-audience: agent-only` frontmatter field seems wrong for a doc whose stated purpose is "A human observer should understand the design philosophy and operational flow." Consider changing to `agent-and-human` or `team`.
+
+2. The Three Layers ASCII diagram (lines 36-50) is a nice visual but it duplicates the sentence that follows it ("Each layer depends on the one below it..."). Consider whether the diagram alone is sufficient, or the sentence alone. Both together is minor redundancy.
+
+3. The `depends_on: []` field is empty. This doc references body.md, heart.md, spine.md, device.md, gut.md, nervous-system.md, and soul.md. Populating `depends_on` would help the audit system detect when upstream changes should trigger a review of this article.

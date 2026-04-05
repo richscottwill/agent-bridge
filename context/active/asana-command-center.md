@@ -70,25 +70,56 @@ The ABPS AI Portfolio contains two projects — Content (autonomous document fac
   - Shipped: `1213917833362766`
   - Ideas / Backlog: `1213917853421462`
 
-### Shared Custom Fields (inherited from My Tasks)
+### Shared Custom Fields (ABPS AI Content Project)
 
-These fields are available on ABPS AI project tasks and use the same GIDs as My Tasks:
+These fields are available on ABPS AI Content project tasks. All field names end with `_RW` (Richard Williams namespace).
 
-| Field | GID | Type | Notes |
-|-------|-----|------|-------|
-| Routine_RW | `1213608836755502` | enum | Triage bucket assignment |
-| Priority_RW | `1212905889837829` | enum | Urgency signal |
+| Field | GID | Type | Options (GID → Name) |
+|-------|-----|------|----------------------|
+| Pipeline_RW | `1213925755205188` | enum | `1213925755205189` → Idea, `1213925368050658` → Drafting, `1213925368050659` → Review, `1213925368050660` → Rewrite, `1213925368050661` → Published, `1213925368050662` → Archived |
+| Audience_RW | `1213917488341145` | enum | `1213917488341146` → Leadership, `1213925368050663` → Team, `1213917488341147` → Personal, `1213917488341148` → Agent |
+| Category_RW | `1213917488341137` | multi_enum | `1213917488341138` → Testing, `1213917488341139` → Strategy, `1213917488341140` → Program Details, `1213917488341141` → Tools, `1213917488341142` → Communication, `1213917488341143` → Best Practices |
+| Levels_RW | `1213917488341130` | multi_enum | `1213917488341131` → L1: Sharpen Yourself, `1213917488341132` → L2: Drive WW Testing, `1213917488341133` → L3: Team Automation, `1213917488341134` → L4: Zero-Click Future, `1213917488341135` → L5: Agentic Orchestration |
+| Frequency_RW | `1213921303350613` | enum | `1213921303350614` → One-time, `1213921303350615` → Weekly, `1213921303350616` → Monthly, `1213921303350617` → Quarterly |
+| Series_RW | `1213917488341099` | text | Groups related articles (e.g., "Kate Doc", "OCI") |
+| Path_RW | `1213917488341150` | text | Local file path (e.g., ~/shared/artifacts/strategy/2026-04-04-oci-business-case.md) |
+| Routine_RW | `1213608836755502` | enum | (inherited from My Tasks — all wiki tasks use Wiki option `1213924412583429`) |
+| Priority_RW | `1212905889837829` | enum | (inherited from My Tasks) |
+| Kiro_RW | `1213915851848087` | text | Agent scratchpad — pipeline state, sync timestamps, critic scores |
+| Next-action_RW | `1213921400039514` | text | Next concrete step for the task |
+| Begin-Date_RW | `1213440376528542` | date | Execution window start |
+
+### Pipeline Stage Workflow (replaces section-based tracking)
+
+Pipeline_RW is the canonical pipeline stage. Sections are now used for topic grouping, not pipeline tracking.
+
+| Pipeline_RW Value | Meaning | Who Moves It Here | Next Step |
+|-------------------|---------|-------------------|-----------|
+| Idea | Raw topic — not yet assigned to researcher | Editor or Richard | Editor triages → Drafting |
+| Drafting | Researcher gathering sources, writer drafting | Editor assigns | Writer completes → Review |
+| Review | Critic scoring (5 dimensions, 8/10 bar) | Writer moves after draft | Critic scores → Published or Rewrite |
+| Rewrite | Critic scored <8, revision notes provided | Critic moves back | Writer revises → Review (max 2 cycles) |
+| Published | Scored >=8, approved, content synced to Asana | Critic/Librarian | Librarian maintains |
+| Archived | Superseded, merged, or killed | Editor decides | No further action |
+
+### Audience_RW Mapping
+
+| Audience | Writing Standard | Review Rubric | Who Reads It |
+|----------|-----------------|---------------|-------------|
+| Leadership | Amazon narrative standard (prose-driven, 18-20 word sentences, purpose first, data embedded) | Strict — Kate wouldn't change a word | Kate, Todd, cross-org |
+| Team | Actionable execution standard (how-to, checklists OK, step-by-step) | Practical — teammate can follow without asking | Brandon, peers, market owners |
+| Personal | Lighter review — Richard's working docs | Functional — serves Richard's needs | Richard only |
+| Agent | Machine-readable, structured for extraction | Structural — frontmatter, AGENT_CONTEXT, cross-refs | Agent swarm |
 | Kiro_RW | `1213915851848087` | text | Agent scratchpad |
 | Begin-Date_RW | `1213440376528542` | date | Execution window start (`start_on`) |
-| Importance_RW | `1212905889837865` | enum | Important (`1212905889837866`) |
 | Next-action_RW | `1213921400039514` | text | Next concrete step for the task |
-| Notes - Task | `1209637014993158` | text | Legacy notes field |
-| Five Levels | `1213917488341130` | multi_enum | L1–L5 classification. Options: L1 Sharpen (`1213917488341131`), L2 Testing (`1213917488341132`), L3 Automation (`1213917488341133`), L4 Zero-Click (`1213917488341134`), L5 Agentic (`1213917488341135`) |
-| Category | `1213917488341137` | multi_enum | Content category. Options: Testing (`1213917488341138`), Strategy (`1213917488341139`), Program Details (`1213917488341140`), Tools (`1213917488341141`), Communication (`1213917488341142`), Best Practices (`1213917488341143`) |
-| Audience | `1213917488341145` | enum | Target audience. Options: Amazon-Internal (`1213917488341146`), Personal (`1213917488341147`), Agent-Only (`1213917488341148`) |
-| File Path | `1213917488341150` | text | Local file path for the work product artifact |
-| Content Channels Needed | `1213917488341084` | multi_enum | Distribution channels (Blog, Email, Website, Youtube, Facebook, Instagram, LinkedIn) |
-| Article Series | `1213917488341099` | text | Series grouping for related articles |
+| Levels_RW | `1213917488341130` | multi_enum | L1–L5 classification. Options: L1 Sharpen (`1213917488341131`), L2 Testing (`1213917488341132`), L3 Automation (`1213917488341133`), L4 Zero-Click (`1213917488341134`), L5 Agentic (`1213917488341135`) |
+| Category_RW | `1213917488341137` | multi_enum | Content category. Options: Testing (`1213917488341138`), Strategy (`1213917488341139`), Program Details (`1213917488341140`), Tools (`1213917488341141`), Communication (`1213917488341142`), Best Practices (`1213917488341143`) |
+| Audience_RW | `1213917488341145` | enum | Target audience. Options: Leadership (`1213917488341146`), Team (`1213925368050663`), Personal (`1213917488341147`), Agent (`1213917488341148`) |
+| Path_RW | `1213917488341150` | text | Local file path for the work product artifact |
+| Series_RW | `1213917488341099` | text | Series grouping for related articles |
+| Pipeline_RW | `1213925755205188` | enum | Pipeline stage. Options: Idea (`1213925755205189`), Drafting (`1213925368050658`), Review (`1213925368050659`), Rewrite (`1213925368050660`), Published (`1213925368050661`), Archived (`1213925368050662`) |
+| Frequency_RW | `1213921303350613` | enum | Update cadence |
 
 ### GID Discovery Protocol
 

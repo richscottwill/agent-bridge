@@ -126,15 +126,28 @@ Valid targets include body organs AND non-organ files:
 
 ### Step 4: Evaluate — A/B/C Blind Eval
 
-Three agents evaluate independently. None knows the others exist. None knows what changed. The main loop orchestrates.
+Karpathy orchestrates the blind eval by invoking eval agents as subagents (same pattern as wiki pipeline blind reviews). Each eval agent receives its context via `invokeSubAgent` prompt — the agent sees only what Karpathy provides. None knows the other exists.
 
-**Agent A (treatment + context):** Receives the MODIFIED organ + body.md + soul.md + eval questions. Answers only. No scoring.
+**Agent A (treatment + context):** Invoked as subagent. Prompt contains: the MODIFIED organ content + body.md + soul.md + eval questions. Instructions: answer each question. No scoring. No awareness of experiment.
 
-**Agent B (control + context):** Receives the ORIGINAL organ (pre-experiment snapshot) + body.md + soul.md + same eval questions. Answers only. No scoring. Does not know a change was made.
+**Fast-fail gate (after Agent A, before Agent B):** Karpathy inspects Agent A's answers before invoking Agent B. Score Agent A's answers against ground truth. If 50%+ are INCORRECT, the experiment is obviously broken — skip Agent B, mark as REVERT with reason `fast_fail`, log to DuckDB and experiment-log.tsv, move to next experiment. This saves 1 subagent call on clearly bad experiments. Fast-fail does NOT apply to Brain/Memory experiments (always run full eval on critical organs).
 
-**Agent C (treatment + zero context):** Receives ONLY the MODIFIED organ + eval questions. No body.md, no soul.md, no system context. Answers only. No scoring.
+**Agent B (control + context):** Invoked as separate subagent. Prompt contains: the ORIGINAL organ (pre-experiment snapshot) + body.md + soul.md + same eval questions. Instructions: answer each question. No scoring. Does not know a change was made. Does not know Agent A exists.
 
-**Karpathy (judge):** Receives all three agents' answers + ground truth. Scores each answer. Scoring method depends on eval type:
+**Agent C (Tier 2 only, treatment + zero context):** Invoked as subagent. Prompt contains: ONLY the MODIFIED organ + eval questions. No body.md, no soul.md, no system context. Answers only.
+
+**Karpathy (judge):** After all eval agents return, Karpathy scores all answers against ground truth. Writes structured results to `~/shared/context/active/experiment-results-latest.json` (overwritten each experiment — keeps eval output out of main context window):
+```json
+{
+  "experiment_id": "run28_exp3",
+  "target": "eyes", "section": "competitors", "technique": "COMPRESS",
+  "eval_type": "information_retrieval", "eval_tier": 1,
+  "score_a": 0.9, "score_b": 0.8, "score_c": null, "delta_ab": 0.1,
+  "fast_fail": false, "decision": "KEEP", "wall_clock_seconds": 45,
+  "words_before": 2120, "words_after": 1980
+}
+```
+Scoring method depends on eval type:
 
 **Information-retrieval evals** (organs): Score each answer CORRECT / PARTIAL / INCORRECT. Computes:
 - score_a, score_b, score_c (each 0.0 to 1.0, where CORRECT=1, PARTIAL=0.5, INCORRECT=0)
@@ -185,7 +198,15 @@ The decision is based on delta (did it improve?), not absolute score (is it abov
 - Brain/Memory: delta_ab < 0 OR any INCORRECT on any question (zero tolerance)
 - Both A and B flag the same question as INCORRECT (signals a pre-existing hole — log it, but still revert the experiment)
 
-**After decision, update DuckDB:**
+**After decision, update DuckDB + experiment-log.tsv:**
+
+Append one row to `~/shared/context/active/experiment-log.tsv` (tab-separated, human-scannable, git-trackable — the "wake up and see what happened" artifact):
+```
+run_id	target	section	technique	eval_type	words_before	words_after	score_a	score_b	delta_ab	fast_fail	decision	wall_clock_s
+run28_exp3	eyes	competitors	COMPRESS	info_retrieval	2120	1980	0.9	0.8	+0.1	false	KEEP	45
+```
+
+Then update DuckDB:
 ```sql
 -- Log the experiment
 INSERT INTO autoresearch_experiments (run_id, organ, section, technique, eval_type, eval_tier,
@@ -221,7 +242,8 @@ One line per experiment in changelog.md:
 ```
 Example: `[eyes:competitors] COMPRESS (info_retrieval) → 2120w→1980w. A=0.9 B=0.8 C=0.7 Δ=+0.1. 45s. KEEP.`
 Example: `[richard-style-email:checklist] REWORD (output_quality) → 850w→820w. A=0.82 B=0.67 Δ=+0.15. 60s. KEEP.`
-Full data logged to DuckDB `autoresearch_experiments` table.
+Example: `[eyes:competitors] COMPRESS (info_retrieval) → 2120w→2120w. A=0.3 B=- Δ=-. 12s. REVERT (fast_fail).`
+Full data logged to DuckDB `autoresearch_experiments` table + `experiment-log.tsv`.
 
 ---
 
@@ -270,7 +292,7 @@ Completed experiments are logged in changelog.md as one-line entries. Historical
 - **Usefulness over size.** Word budgets are adaptive — baselines in gut.md, actual ceilings learned from experiment data. The ADD/COMPRESS priors per organ discover the natural size. The total body ceiling is wherever the aggregate size-accuracy curve plateaus — tracked in `autoresearch_organ_health`.
 - **Dual blind eval.** Three-agent A/B/C design eliminates bias. A=modified+context, B=original+context (control), C=modified+zero context (portability). The delta between A and B is the real signal. Karpathy judges all three. None of the evaluators know the others exist.
 - **Per-organ cooldown replaces global gate.** Don't experiment on an organ that maintenance just modified in the same invocation, but all other organs are fair game. Adopted 3/26 after the old CHANGE_WEIGHT > 10 gate was effectively dead code.
-- **Output quality as first-class dimension + portability as continuous constraint.** Style guides, market context files, callout principles, and hook prompts are valid experiment targets alongside organs. The same A/B design works for both eval types — Run 18 validated this. Every organ change must also work on a cold platform with only text files — the agent-bridge repo is the test artifact.
+- **Output quality as first-class dimension + portability as continuous constraint.** Style guides, market context files, callout principles, and hook prompts are valid experiment targets alongside organs. The same A/B/C design works for both eval types — Run 18 validated this. Every organ change must also work on a cold platform with only text files — the agent-bridge repo is the test artifact.
 
 ### Validated Patterns (from 58 experiments, Runs 19-27)
 

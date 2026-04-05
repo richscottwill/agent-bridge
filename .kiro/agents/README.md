@@ -4,23 +4,18 @@
 
 ```
 agents/
-├── body-system/          # Richard's personal operating system agents
+├── body-system/          # .md definitions (source of truth for agent behavior)
 │   ├── karpathy.md       # Autoresearch engine, organ experiments, compression
 │   ├── rw-trainer.md     # Deep performance coach
 │   ├── eyes-chart.md     # Visualization / dashboard generator
-│   ├── agent-bridge-sync.md  # Sync to agent-bridge GitHub repo (files + git push)
-│   └── loop-governor.md  # (reserved) Loop execution governance
+│   └── agent-bridge-sync.md  # Sync to agent-bridge GitHub repo (files + git push)
 │
-├── wbr-callouts/         # WBR callout pipeline (analyst → writer → reviewer)
-│   ├── abix-analyst.md       # AU/MX analysis briefs
-│   ├── abix-callout-writer.md
-│   ├── najp-analyst.md       # US/CA/JP analysis briefs
-│   ├── najp-callout-writer.md
-│   ├── eu5-analyst.md        # UK/DE/FR/IT/ES analysis briefs
-│   ├── eu5-callout-writer.md
+├── wbr-callouts/         # .md definitions (source of truth for agent behavior)
+│   ├── market-analyst.md     # Any-market analysis briefs (replaces abix/najp/eu5 analysts)
+│   ├── callout-writer.md     # Any-market callout drafts (replaces abix/najp/eu5 writers)
 │   └── callout-reviewer.md   # Cross-market quality gate
 │
-├── wiki-team/            # Wiki management pipeline (6 agents)
+├── wiki-team/            # .md definitions (source of truth for agent behavior)
 │   ├── wiki-editor.md        # Editorial director, orchestrates the pipeline
 │   ├── wiki-researcher.md    # Gathers source material, produces research briefs
 │   ├── wiki-writer.md        # Transforms briefs into dual-audience articles
@@ -28,11 +23,24 @@ agents/
 │   ├── wiki-librarian.md     # Publishes, structures, maintains the index
 │   └── wiki-concierge.md     # Search, proactive surfacing, demand tracking
 │
-├── *.json                # AIM-managed + platform agents (flat, DO NOT move)
-│   ├── AIPowerUserCapabilities-gpu-*.json  # GPU Power User suite
-│   ├── AmazonBuilderCoreAIAgents-amzn-builder.json
-│   ├── AtlasAICapabilities-atlas.json
-│   ├── local-arcc-*.json     # ARCC pilot agents
+├── *.json                # CLI-invocable JSON configs (all agents)
+│   ├── karpathy.json         # ✅ Tested 2026-04-05
+│   ├── rw-trainer.json       # ✅ Tested 2026-04-05
+│   ├── eyes-chart.json       # ✅ Tested 2026-04-05
+│   ├── agent-bridge-sync.json # ✅ Tested 2026-04-05
+│   ├── market-analyst.json   # ✅ Tested 2026-04-05
+│   ├── callout-writer.json   # ✅ Tested 2026-04-05
+│   ├── callout-reviewer.json # ✅ Tested 2026-04-05
+│   ├── wiki-editor.json      # ✅ Tested 2026-03-31
+│   ├── wiki-writer.json      # ✅ Tested 2026-03-31
+│   ├── wiki-critic.json      # ✅ Tested 2026-03-31
+│   ├── wiki-researcher.json  # ✅ Tested 2026-03-31
+│   ├── wiki-librarian.json   # ✅ Tested 2026-03-31
+│   ├── wiki-concierge.json   # ✅ Tested 2026-03-31
+│   ├── AIPowerUserCapabilities-gpu-*.json  # GPU Power User suite (AIM-managed)
+│   ├── AmazonBuilderCoreAIAgents-amzn-builder.json (AIM-managed)
+│   ├── AtlasAICapabilities-atlas.json (AIM-managed)
+│   ├── local-arcc-*.json     # ARCC pilot agents (AIM-managed)
 │   ├── agentspaces-chat.json # Platform: Chat agent
 │   ├── agentspaces-code.json # Platform: Code agent
 │   └── title-generator.json  # Utility: conversation titles
@@ -40,22 +48,32 @@ agents/
 └── agent_config.json.example  # Template for new JSON agents
 ```
 
+## CLI invocation
+
+All custom agents are invocable via:
+```bash
+echo "your prompt" | kiro-cli chat --agent <name> --no-interactive --trust-all-tools --wrap never
+```
+
+The `.md` files in subdirectories remain the source of truth for agent behavior. The `.json` configs at root point to them via `resources` and load their full instructions at runtime.
+
 ## Why this layout
 
-- `.md` subagents (invoked by name via Kiro IDE) live in subfolders by team/function
-- `.json` agents (discovered by kiro-cli from flat directory) stay at root — kiro-cli does not recurse into subdirectories
+- `.md` definitions live in subfolders by team/function — these are the canonical agent specs
+- `.json` configs at root make agents discoverable by kiro-cli (which does not recurse into subdirectories)
+- Each `.json` references its `.md` via the `resources` field — no duplication of instructions
 - AIM-managed agents say "DO NOT EDIT MANUALLY" — don't move or rename them
 
 ## Where to put new agents
 
 | Agent type | Location |
 |-----------|----------|
-| Body system (coaching, experiments, visualization, sync) | `body-system/` |
-| WBR callout pipeline (analyst, writer, reviewer) | `wbr-callouts/` |
-| Wiki team (editor, researcher, writer, critic, librarian, concierge) | `wiki-team/` |
+| Body system (coaching, experiments, visualization, sync) | `.md` in `body-system/`, `.json` at root |
+| WBR callout pipeline (analyst, writer, reviewer) | `.md` in `wbr-callouts/`, `.json` at root |
+| Wiki team (editor, researcher, writer, critic, librarian, concierge) | `.md` in `wiki-team/`, `.json` at root |
 | AIM-managed (installed via `aim`) | Root (automatic) |
 | Platform / utility JSON agents | Root |
-| New custom .md subagent that doesn't fit above | Create a new subfolder with a clear name |
+| New custom agent | `.md` in appropriate subfolder, `.json` at root |
 
 ## Callout pipeline execution order
 

@@ -1,6 +1,6 @@
 # Wiki Roadmap — AB Paid Search Knowledge Base
 
-Last updated: 2026-04-04 (wiki-editor)
+Last updated: 2026-04-05 (wiki-editor)
 
 ---
 
@@ -8,6 +8,7 @@ Last updated: 2026-04-04 (wiki-editor)
 
 | Topic | Slug | Stage | Doc-Type | Notes |
 |-------|------|-------|----------|-------|
+| PS Five-Year Outlook (2026–2030) | five-year-outlook | research | strategy | P1. Leadership artifact for Kate/Brandon. 2026 section drafted, 2027-2030 need research. Assigned: wiki-researcher. |
 | AU Market Wiki | au-market-wiki | revision | reference | Critic scored 7.6-7.8. Needs: status indicators on initiatives, fold thin sections, add depends_on. |
 | Enhanced Match / LiveRamp | enhanced-match-liveramp | revision | strategy | Critic scored 7.0. Needs: remove ABMA section, tighten structure, add summary table. Blocked on Abdul's answers. |
 | ie%CCP Framework | ieccp-planning-framework | ready (conditional) | strategy | Critic scored 8.0-8.2. Needs: add Sources section (hard blocker). |

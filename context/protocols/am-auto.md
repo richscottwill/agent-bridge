@@ -65,8 +65,16 @@ Follow ~/shared/context/active/asana-activity-monitor-protocol.md.
 ### Email Scan
 Catalog unread. Produce email-triage in intake/. SKIP Auto-Comms folder Asana emails.
 
+### Signal Intelligence (after all channel ingestion)
+Per `~/shared/context/protocols/signal-intelligence.md`:
+1. For each ingested message/email/task comment, extract topic keywords and normalize to slug.
+2. FTS search slack_messages for reinforcement detection (BM25 > 2.0 = reinforcement, not new).
+3. INSERT or UPDATE signal_tracker: new topics get strength=1.0, reinforcements get +0.5 (Slack), +1.0 (Email), +0.75 (Asana).
+4. Run daily decay: `UPDATE signal_tracker SET signal_strength = signal_strength * 0.9 WHERE last_decayed < now - 20h`. Deactivate signals below 0.1.
+5. Query signal_trending view — include trending topics (2+ mentions in 7 days) in Phase 1 output.
+
 ### Phase 1 Output
-Report: channels scanned, signals extracted, Asana tasks by bucket + overdue count, snapshot written, activity signals detected, emails triaged.
+Report: channels scanned, signals extracted, Asana tasks by bucket + overdue count, snapshot written, activity signals detected, emails triaged, trending signals.
 
 ---
 
@@ -144,6 +152,7 @@ Alerts: near-due tasks, overdue tasks, stale projects, cross-team blockers.
 - Slack: Brief to rsw-channel. Focus update if changes. Include Asana task context inline: '[Task Name] (due [date], [Routine], [status])'.
 - Dashboard: Edit pinned message C0993SRL6FQ.
 - Calendar: Create time blocks sized by bucket counts. Sweep=15min×count, Core=45min×count, Engine Room=20min×count, Admin=15min×count. Min 30min, max 3h. Flag overload if total exceeds available time.
+- Meeting prep: For each meeting today, query signal_tracker for attendee topics (last 7 days) per signal-intelligence.md Use Case 5. Include in brief: "Brandon's hot topics: [list]. Shared topics with Richard: [list]."
 
 ### Friday Additions
 - Calibration.

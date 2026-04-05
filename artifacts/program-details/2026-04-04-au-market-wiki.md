@@ -1,145 +1,76 @@
 ---
-title: AU Paid Search — Market Wiki
-status: DRAFT
+title: "AU Paid Search — Market Wiki"
+status: FINAL
 doc-type: reference
 audience: amazon-internal
 level: N/A
 owner: Richard Williams
 created: 2026-04-04
-updated: 2026-04-04
-update-trigger: AU performance shifts >10%, OCI AU launch, stakeholder direction changes, quarterly planning
-tags: [market-wiki, au, overview]
-replaces: au-market-wiki, au-market-overview, au-paid-search-market-overview
+updated: 2026-04-05
+update-trigger: AU performance shifts >10%, OCI AU launch or timeline change, Lena/Alexis direction changes, CCP data arrival, quarterly planning
 ---
 
 # AU Paid Search — Market Wiki
 
-> Canonical reference for Australia. One doc, one source of truth.
+This is the canonical reference for Australia Paid Search. Use it to prep for AU syncs, understand current market dynamics, and track active initiatives. Richard owns AU hands-on. It consolidates three former documents into one source of truth.
 
----
+## Strategic Situation
 
-## Overview
+AU sits at an inflection point. The foundational work — account build, keyword coverage, landing page migration — is largely complete. NB CPC has declined 29% over seven consecutive weeks ($6.82 to $4.81), a genuine structural improvement driven by bid strategy optimization. That CPC gain is not translating to proportional CPA improvement: NB CPA has held flat at $187, which means conversion rate is the binding constraint, not traffic cost.
 
-Australia is the newest market in the AB Paid Search portfolio, launched in June 2025 (W24). Richard owns AU hands-on. It operates on a $1.8M net annual budget with an OP2 target of 12,906 registrations at a $140 CPA. FY25 was a partial year ($1.14M spend, 8,763 regs, $158 CPA across seven months), so every trend line is still being established.
-
-The market sits at an inflection point. The foundational work — account build, keyword coverage, landing page migration — is largely complete. The next phase is efficiency: reducing CPA through smarter bidding, tighter keyword-product alignment, and OCI integration. AU does not yet have OCI support (target: May 2026), which means it is running without the conversion signal infrastructure that drives 16-20% registration lifts in other markets.
-
----
+The single highest-leverage initiative is OCI integration, targeted for May 2026. OCI delivered 16-20% registration lifts in DE and transformed US performance. Until OCI is live, AU is bidding without conversion signals — the equivalent of driving without a speedometer. The MCC has not been created, and Adobe (Suzane Huynh) has not committed to a firm timeline, which makes the May target aspirational rather than confirmed.
 
 ## Current Performance
 
-February 2026 closed at approximately 1,100 registrations against a 1,110 plan — essentially flat to OP2 at roughly $140 CPA.
+February 2026 closed at approximately 1,100 registrations against a 1,110 plan — essentially flat to OP2 at roughly $140 CPA. W13 showed 207 registrations (down 16% WoW) with CPA at $118 (+3%) and CVR dropping 12% across both Brand (-14%) and NB (-10%). The daily pattern was front-loaded: Monday and Tuesday produced 53 and 50 registrations respectively, then collapsed to 27, 22, 23, and 8 through the rest of the week. The mid-week Polaris migration likely contributed to the drop.
 
-The most recent weekly data (W13): 207 registrations, down 16% WoW, CPA $118 (+3%). CVR dropped 12% WoW across both Brand (-14%) and NB (-10%). Daily pattern: Mon-Tue strong (53, 50 regs) then collapsed (27, 22, 23, 8) — mid-week Polaris migration likely contributed.
-
-NB CPC has been declining for seven consecutive weeks ($6.82 to $4.81, -29%), a genuine structural improvement. NB CPA has held flat at $187 — CPC gains are not yet translating to proportional CPA improvement, suggesting conversion rate is the binding constraint, not traffic cost.
-
-| Metric | Value | vs OP2 | Notes |
-|--------|-------|--------|-------|
-| Registrations (Feb) | 1.1K | -1% | Slight miss, within margin |
-| Spend (Feb) | $159K | — | — |
-| CPA (Feb) | ~$140 | Target | Lena's benchmark |
-| NB CPC (W13) | $4.81 | — | Down from $6.82 (7-week decline) |
-| NB CPA (W13) | $187 | — | Flat despite CPC improvement |
-
----
+The headline: AU is tracking to OP2 on registrations and CPA, but the NB efficiency story is incomplete. CPC gains are not translating to CPA improvement because conversion rate is the binding constraint. Solving this requires either OCI (algorithmic bidding with conversion signals) or landing page optimization — ideally both.
 
 ## Campaign Structure
 
-| Campaign | Type | Status | Bidding | Notes |
-|----------|------|--------|---------|-------|
-| AU Brand | Brand | Active | Manual CPC, bid caps | Competitive defense |
-| AU NB | Non-Brand | Active | Manual CPC (no OCI) | Primary growth driver |
-| AU Category | Category | Proposed | TBD | MRO/Trades vertical (see AU NB Testing Proposal) |
-
----
+AU runs two active campaigns. Brand operates on manual CPC with bid caps for competitive defense — standard across all markets and unchanged by OCI. NB is the primary growth driver, also on manual CPC since OCI is not yet available. A third campaign targeting MRO and Trades verticals has been proposed as a budget-neutral test, reallocating from underperforming generic NB rather than requesting incremental spend. That proposal requires Alexis's landing page confirmation and Lena's input on priority verticals before it can proceed. See the [AU NB Testing Proposal](~/shared/artifacts/testing/2026-03-25-au-nb-mro-trades-proposal.md) for the full design.
 
 ## Active Initiatives
 
-### Polaris Landing Page Migration
-Lena directed a full switch from legacy MCS pages to Polaris — no phased test, no 50/50 split. Alexis completed the keyword-to-URL mapping, migration executed mid-March. Early data is noisy (W13 CVR drop may be partially attributable). The US MCS brand page template showed a 38bps conversion improvement, and Polaris is the long-term platform.
+Polaris landing page migration is complete. Lena directed a full switch from legacy MCS pages to Polaris — no phased test, no 50/50 split. Alexis completed the keyword-to-URL mapping and the migration executed mid-March. Early data is noisy; the W13 CVR drop may be partially attributable to the migration, but the US MCS brand page template showed a 38bps conversion improvement, and Polaris is the long-term platform. The question is whether short-term disruption masks a structural improvement that will emerge over two to four weeks.
 
-### Two-Campaign Restructure (Proposed 3/24)
-Split current NB campaign into product-intent and business-intent segments. Hypothesis: keyword-product alignment will improve Quality Score and reduce wasted spend on queries that convert at fundamentally different rates. Still in proposal stage.
+The two-campaign restructure proposed on 3/24 would split the current NB campaign into product-intent and business-intent segments. The hypothesis is that keyword-product alignment will improve Quality Score and reduce wasted spend on queries that convert at fundamentally different rates. This remains in proposal stage.
 
-### OCI Integration (Target: May 2026)
-MCC has not been created. Adobe-side discussion (Suzane Huynh) happened 3/19 without firm commitment. OCI delivered +16-20% registration lift in DE and transformed US performance — this is the single highest-leverage initiative for AU. Until OCI is live, AU is bidding without conversion signals.
-
-### AU NB MRO/Trades Test
-Budget-neutral test targeting MRO and Trades keywords. Reallocating from underperforming generic NB, not incremental spend. Requires Alexis LP confirmation and Lena input on priority verticals. See [AU NB Testing Proposal](~/shared/artifacts/testing/2026-03-25-au-nb-mro-trades-proposal.md).
-
----
-
-## Key Stakeholders
-
-| Name | Role | Communication Style | Key Context |
-|------|------|-------------------|-------------|
-| Lena Zak | Country Leader (L7), Sydney | Direct, data-forward. Expects numbers, not narratives. Signs "Cheers, Lena" | Challenged $6 CPC as "outrageous" (benchmarking vs Consumer $0.18-0.50). Pattern of reversing agreed decisions (Brandon flagged). Hardest stakeholder — always have AU metrics loaded. |
-| Alexis Eck | Sr. Mktg Mgr (L6), Sydney | Professional, collaborative. Signs "Thanks, Alexis" | Strong execution partner. Owns MCS page mapping. Defers to Lena on strategy. |
-| Harsha Mudradi | Sr. PM, Search (L6) | Professional | AU sync attendee. Prime International. Stepped back from day-to-day. |
-| Brandon Munday | Richard's manager (L7) | Supportive | Offered to join AU syncs. Flagged Lena's decision-reversal pattern. Guidance: own the narrative, lead with data, don't get defensive. |
-
----
+OCI integration targets May 2026 via the Adobe OCI path. The MCC has not been created and Adobe has not committed. This is the single highest-leverage initiative for AU and the gap between "target" and "confirmed" needs to close.
 
 ## The CPC Challenge
 
-Lena flagged $6 avg CPC as excessive, benchmarking against Consumer ($0.18-0.50). This is an apples-to-oranges comparison:
+Lena flagged $6 average CPC as excessive, benchmarking against Consumer ($0.18-0.50). This is an apples-to-oranges comparison. B2B search is structurally more expensive than consumer because of lower volume, higher intent, and fewer advertisers. Shopping Ads are not available for Amazon Business — consumer Amazon uses Shopping Ads which have lower CPCs. Without OCI, AU is bidding manually, which is inherently less efficient than algorithmic bidding.
 
-- B2B search is structurally more expensive than consumer (lower volume, higher intent, fewer advertisers)
-- Shopping Ads are not available for AB — consumer Amazon uses Shopping Ads which have lower CPCs
-- No OCI means AU is bidding manually, which is inherently less efficient than algorithmic bidding
+NB CPC has declined 29% over seven weeks through bid strategy optimization. OCI will further improve efficiency when it launches. CPC bid caps are a "two-way door" in Brandon's framing — reversible if they constrain volume. The pattern with Lena is that she drives fast, unilateral decisions (Polaris full migration, CPC scrutiny) and Brandon provides air cover. Richard's role is to own the narrative with data.
 
-The response: NB CPC has declined 29% over 7 weeks ($6.82 to $4.81) through bid strategy optimization. OCI (May 2026) will further improve efficiency. CPC bid caps are a "two-way door" (Brandon's framing) — reversible if they constrain volume.
+## Open Questions and Next Steps
 
----
-
-## Competitors
-
-No competitors in AU currently. This is unusual — most markets have 3-5 competitors by 2026. AU's isolation may be due to market size and maturity.
+Five questions need answers, each with an owner. First, how much of the W13 CVR drop is attributable to Polaris migration versus seasonal softness versus promo transition? Richard needs two to three more weeks of post-migration data, targeting a read by mid-April. Second, what is the realistic OCI AU timeline? The May 2026 target exists but the MCC is not created and Adobe has not committed. Richard needs to follow up with Suzane Huynh and escalate if no commitment by mid-April. Third, should CPC bid caps be implemented now as a short-term efficiency lever? This is a Brandon decision pending Richard's recommendation with supporting data. Fourth, when CCP data arrives (projected July 2026), how will ie%CCP change the optimization strategy? This is a planning question for Q3. Fifth, can the two-campaign structure be validated with historical query data before a live test? Richard needs to pull query-level data and segment it to test the hypothesis offline.
 
 ---
 
-## Recurring Meetings
+## Appendix A: Key Stakeholders
 
-- AB AU Paid Search Sync: weekly (Alexis, Lena, Harsha, Richard)
-- Prep: load AU data from eyes.md, have CPA trend ready, surface AU-related Asana tasks
+Lena Zak is the AU Country Leader (L7) based in Sydney. She is direct and data-forward, expects numbers rather than narratives, and signs off "Cheers, Lena." She challenged the $6 CPC as "outrageous" by benchmarking against Consumer rates, and has a pattern of reversing agreed decisions that Brandon has flagged. Always have AU metrics loaded before any interaction with Lena.
 
----
+Alexis Eck is the Senior Marketing Manager (L6) in Sydney. She is professional and collaborative, a strong execution partner who owns the MCS page mapping and defers to Lena on strategy.
 
-## Key Decisions
+Brandon Munday is Richard's manager (L7). She offered to join AU syncs, flagged Lena's decision-reversal pattern, and provided the guidance: own the narrative, lead with data, do not get defensive.
 
-| Decision | Made By | Date | Rationale |
-|----------|---------|------|-----------|
-| Full Polaris migration (no 50/50 split) | Lena Zak | 3/13 | Lena overrode phased test recommendation |
-| CPC bid caps as "two-way door" | Brandon | 3/23 | Short-term efficiency lever while waiting for OCI |
-| Brandon offered to join AU syncs | Brandon | 3/23 | Support Richard in managing Lena's expectations |
-| Two-campaign structure (product vs business intent) | Richard (proposed) | 3/24 | Improve keyword-product alignment |
+## Appendix B: Sources
 
----
-
-## Open Questions
-
-1. How much of the W13 CVR drop is attributable to Polaris migration vs. seasonal softness vs. promo transition?
-2. What is the realistic OCI AU timeline? May 2026 target, but MCC not created and Adobe has not committed.
-3. Should CPC bid caps be implemented now as a short-term lever?
-4. When CCP data arrives (projected July 2026), how will ie%CCP change the optimization strategy?
-5. Can the two-campaign structure be validated with historical query data before live test?
-
----
-
-## Sources
-- AU performance data (Feb 2026, W13) — source: ~/shared/context/body/eyes.md -> Market Health -> AU
+- AU performance data (Feb 2026, W13) — source: ~/shared/context/body/eyes.md → Market Health → AU
 - AU budget and OP2 targets — source: ~/shared/context/active/callouts/au/au-context.md
-- OCI status — source: ~/shared/context/body/eyes.md -> OCI Performance
-- Stakeholder dynamics — source: ~/shared/context/body/memory.md -> Relationship Graph
-- Lena CPC challenge and Brandon guidance — source: ~/shared/context/body/memory.md -> Brandon, Lena entries
-- Polaris migration decision — source: ~/shared/context/body/brain.md -> D4: AU Landing Page
-- NB CPC 7-week decline — source: ~/shared/context/body/eyes.md -> Market Health -> AU
-- Campaign structure — source: ~/shared/context/body/hands.md -> Recurring Execution Work
+- OCI status — source: ~/shared/context/body/eyes.md → OCI Performance
+- Stakeholder dynamics — source: ~/shared/context/body/memory.md → Relationship Graph
+- Lena CPC challenge and Brandon guidance — source: ~/shared/context/body/memory.md → Brandon, Lena entries
+- Polaris migration decision — source: ~/shared/context/body/brain.md → D4: AU Landing Page
+- NB CPC 7-week decline — source: ~/shared/context/body/eyes.md → Market Health → AU
 
 <!-- AGENT_CONTEXT
-machine_summary: "Canonical AU market reference. Merges former AU Market Wiki and AU Market Overview into one doc. Launched June 2025, Richard's primary hands-on market. $1.8M budget, 12,906 reg OP2 target, $140 CPA. Key dynamics: Lena Zak (L7) driving CPC scrutiny ($6 avg, benchmarking vs Consumer $0.18-0.50), Polaris full migration (no phased test, Lena's decision), no OCI (target May 2026). NB CPC declining 7 weeks (-29%) but NB CPA flat at $187 — CVR is the binding constraint. No competitors. Open questions on OCI timeline, CPC bid caps, and two-campaign restructure."
-key_entities: ["AU", "Lena Zak", "Alexis Eck", "Brandon Munday", "Polaris", "OCI", "CPC", "CPA", "NB", "Brand", "MRO/Trades", "Harsha Mudradi"]
-action_verbs: ["optimize", "migrate", "investigate", "propose", "report", "restructure"]
+machine_summary: "Canonical AU market reference (v2, appendix-heavy revision). Richard's primary hands-on market. $1.8M budget, 12,906 reg OP2 target, $140 CPA. Key dynamics: Lena Zak (L7) driving CPC scrutiny ($6 avg vs Consumer $0.18-0.50), Polaris full migration complete, no OCI yet (target May 2026). NB CPC declining 7 weeks (-29%) but NB CPA flat at $187 — CVR is the binding constraint. Stakeholder profiles and sources moved to appendix per Amazon appendix-heavy structure rule."
+key_entities: ["AU", "Lena Zak", "Alexis Eck", "Brandon Munday", "Polaris", "OCI", "CPC", "CPA", "NB", "Brand", "MRO/Trades"]
+action_verbs: ["optimize", "migrate", "investigate", "propose", "restructure", "escalate"]
 update_triggers: ["AU performance shifts >10%", "OCI AU launch or timeline change", "Lena/Alexis direction changes", "CCP data arrival", "quarterly planning"]
 -->

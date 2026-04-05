@@ -1,0 +1,28 @@
+# Review: Workstream 5 — Algorithmic Ads (v5)
+
+Blind Eval A — 2026-04-05. No prior reviews seen for this version.
+
+## Scores
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 8/10 | Reader understands what DG delivered, why AI Max matters, and what risks the team is managing. The AI Max test design section enables decision-making on guardrails and timing. |
+| Clarity | 9/10 | Question-based headers tell the full story — a reader can scan headers alone and know the argument. Each section answers its header question without burying the lead. The DG-to-AI-Max progression is logical and easy to follow. |
+| Accuracy | 8/10 | All metrics are dated and internally consistent. CPC figures, Q4 YoY deltas, Prime Day ROAS, and BSE visitor counts are specific and time-stamped. One minor gap: the "12x YoY improvement" for Prime Day ROAS is stated but the prior-year ROAS baseline is not given — the reader has to trust the math. Acceptable for a strategy doc, but not a 10. |
+| Dual-audience | 9/10 | Rich YAML frontmatter with update triggers, tags, and audience level. AGENT_CONTEXT block has a machine summary, key entities, action verbs, and update triggers — an agent can index, retrieve, and reason over this doc. Prose serves humans well. Both audiences fully served. |
+| Economy | 8/10 | Main body is tight narrative prose — no bullet lists, no tables (all in appendix where they belong). Every paragraph advances the argument. Appendix tables each have interpretation paragraphs. One minor issue: the "Cross-functional partners" section reads as a roster dump rather than earning its place narratively — it lists who does what but doesn't connect to the strategic argument. It could be cut or folded into the sections where those partners are already mentioned (Raven Smith and CeCe Ramey appear in the DG section; Mike Babich and Daniel Carmody appear in the AI Max section). This is a minor drag, not a blocking issue. |
+| **Overall** | **8.4/10** | |
+
+## Verdict
+
+PUBLISH
+
+## Suggestions (optional, non-blocking)
+
+1. The "Cross-functional partners" section is the weakest paragraph. Every partner named there is already mentioned in context within the body sections. Consider cutting it entirely and ensuring each partner attribution lives where the work is described. This would tighten the doc by ~60 words without losing any information.
+
+2. The Prime Day "12x YoY improvement" claim would be stronger with the prior-year baseline stated explicitly — even a parenthetical like "(vs. $27K OPS / ~54% ROAS in 2024)" would let the reader verify the magnitude without trusting the multiplier.
+
+3. In the AI Max risk section, the sentence "The guardrail design needs to detect both within the first two weeks of the test" is good but could be sharper — what happens if the guardrails trigger? State the decision rule: "If cannibalization or budget inflation exceeds [threshold] in the first two weeks, the team will [pause / scale back / adjust]." This moves the section from describing risk to enabling a decision.
+
+4. Appendix C is prose, not a table — which is fine — but it reads slightly less structured than Appendices A and B. The parameters listed (baselines, phased rollout, incrementality benchmarks, cannibalization guardrails, budget inflation guardrails) are already covered in the main body. Consider whether Appendix C adds value beyond what the main body already states, or whether it should contain the detailed test protocol that the main body summarizes.

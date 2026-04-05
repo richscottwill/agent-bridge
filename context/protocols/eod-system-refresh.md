@@ -151,8 +151,21 @@ Read ~/shared/context/active/recurring-task-state.json. For each task:
 - **context_surface_refresh** (weekly): Update AU/MX pinned context tasks in Asana.
 - **agent_bridge_sync** (weekly/Friday): Sync portable-body/ to GitHub.
 
+### Due Task Procedure: wiki_lint (weekly)
+Invoke the wiki-audit skill. The audit checks:
+1. Orphan scan: files in ~/shared/artifacts/ not listed in wiki-index.md.
+2. Stale content: articles past their update-trigger window or with outdated data references.
+3. Broken cross-references: wikilinks pointing to archived/missing articles.
+4. Missing frontmatter: articles missing required fields (title, status, audience, level, update-trigger, doc-type).
+5. SITEMAP drift: compare SITEMAP.md article count against wiki-index.md.
+6. wiki-index consistency: section header counts vs actual article counts.
+7. **Signal-based freshness:** For each article, query signal_tracker for recent mentions of the article's topic. If recent_mentions > 3 AND article.updated > 14 days → flag as stale with active discussion. Per signal-intelligence.md Use Case 4.
+8. **Idea sourcing:** Query `signal_wiki_candidates` view for topics with strong multi-channel signals but no matching wiki article. Report as organic wiki candidates.
+Write results to ~/shared/context/wiki/health/health-YYYY-MM-DD.md and ~/shared/context/wiki/audits/audit-YYYY-MM-DD.md.
+Report summary only: `📚 Wiki lint: [N] healthy, [N] stale, [N] orphaned, [N] broken refs. [N] wiki candidates from signals.` If all clean, skip report.
+
 ### Enrichments
-- Weekly relationship (Friday). Wiki candidates (weekly). Monthly synthesis (1st). Quarterly audit (90d).
+- Weekly relationship (Friday). Wiki candidates (weekly). Wiki lint (weekly). Monthly synthesis (1st). Quarterly audit (90d).
 
 ---
 

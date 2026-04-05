@@ -20,6 +20,9 @@ Apply this on top of Richard's natural voice when writing for leadership (L7+), 
 
 These rules are derived from Amazon's Narrative Template, OP1 Template, MBR Template, Flash Template, Working Backwards Guide, and Doc Ninja-reviewed examples (Dog Safety Awareness, Contra-COGS MBR, Data Migration Narrative, Amazon Search OP1). They are non-negotiable for any document that goes to L7+.
 
+### Appendix-heavy structure
+The main body carries the narrative argument — results, insights, recommendations, decisions. Supporting material goes in the appendix: data tables, previous test results, program refreshers, team rosters, operational cadence, scope descriptions, and detailed methodology breakdowns. When the main body references supporting data, it cites the appendix section by name (e.g., "see Appendix: OCI Validated Results"). The one exception: a decision table or investment summary that IS the argument belongs in the main body. Everything else is appendix. This keeps the main body tight and readable while preserving all detail for readers who want to drill in. The appendix does not count against word count or Economy scoring.
+
 ### Prose over bullets
 Amazon documents are narrative-driven. Write in complete paragraphs with connective tissue between ideas. Bullet lists are for short enumerations (3-5 items max) — never as the primary content format. The Narrative Template says: "Use the AMZN Body style for the rest of the text in the document." The body style is prose paragraphs, not bullet lists.
 

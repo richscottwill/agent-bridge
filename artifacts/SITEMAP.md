@@ -1,28 +1,29 @@
 # Artifact Sitemap
 
-_Last generated: 2026-04-04_
+_Last generated: 2026-04-05_
 
 ```
 AB PAID SEARCH — ARTIFACT DIRECTORY
 ====================================
 
 TESTING (13 docs)
-├── testing-approach-kate ........... Testing Approach & Year Ahead (Kate)             [strategy]  [L2] [DRAFT]
-│   ├── workstream-oci-bidding ...... ↳ WS1: OCI Bidding deep-dive                   [strategy]  [L2] [DRAFT]
-│   ├── workstream-modern-search .... ↳ WS2: Modern Search (Ad Copy)                  [strategy]  [L2] [DRAFT]
-│   ├── workstream-audiences ....... ↳ WS3: Audiences & Lifecycle (F90)               [strategy]  [L2] [DRAFT]
-│   ├── workstream-user-experience .. ↳ WS4: User Experience (Polaris, LPs)           [strategy]  [L2] [DRAFT]
-│   └── workstream-algorithmic-ads .. ↳ WS5: Algorithmic Ads (AI Max, Baloo)          [strategy]  [L2] [DRAFT]
-├── oci-rollout-playbook ............ OCI Rollout Playbook (strategy)                  [strategy]  [L2] [DRAFT]
+├── testing-approach-kate ........... Testing Approach & Year Ahead (Kate)             [strategy]  [L2] [FINAL]
+│   ├── workstream-oci-bidding ...... ↳ WS1: OCI Bidding deep-dive                   [strategy]  [L2] [FINAL]
+│   ├── workstream-modern-search .... ↳ WS2: Modern Search (Ad Copy)                  [strategy]  [L2] [FINAL]
+│   ├── workstream-audiences ....... ↳ WS3: Audiences & Lifecycle (F90)               [strategy]  [L2] [FINAL]
+│   ├── workstream-user-experience .. ↳ WS4: User Experience (Polaris, LPs)           [strategy]  [L2] [FINAL]
+│   └── workstream-algorithmic-ads .. ↳ WS5: Algorithmic Ads (AI Max, Baloo)          [strategy]  [L2] [FINAL]
+├── oci-rollout-playbook ............ OCI Rollout Playbook (strategy)                  [strategy]  [L2] [FINAL]
 ├── ai-max-test-design .............. AI Max Test Design — US Market                   [strategy]  [L2] [DRAFT]
 ├── ad-copy-testing-framework ....... Ad Copy Testing Framework (SP Study)             [strategy]  [L2] [DRAFT]
 ├── email-overlay-ww-rollout ........ Email Overlay WW Rollout Plan                    [strategy]  [L2] [DRAFT]
 ├── au-nb-mro-trades-proposal ....... AU NB Testing — MRO/Trades Vertical              [strategy]  [L2] [DRAFT]
 ├── project-baloo-overview .......... Project Baloo — Shopping Ads for AB              [strategy]  [L2] [DRAFT]
-└── enhanced-match-liveramp ......... Enhanced Match / LiveRamp Expansion              [strategy]  [L2] [DRAFT]
+└── enhanced-match-liveramp ......... Enhanced Match / LiveRamp Expansion              [strategy]  [L2] [FINAL]
 
-STRATEGY (11 docs)
-├── ieccp-planning-framework ........ ie%CCP Planning & Optimization                   [strategy]  [L2] [DRAFT]
+STRATEGY (12 docs)
+├── agent-architecture .............. Agent System Architecture                        [strategy]  [L5] [DRAFT]
+├── ieccp-planning-framework ........ ie%CCP Planning & Optimization                   [strategy]  [L2] [FINAL]
 ├── competitive-landscape ........... Competitive Landscape: Who's Bidding             [strategy]  [L2] [DRAFT]  *orphan — needs indexing*
 ├── q2-initiative-status ............ Q2 2026 Initiative Status & Priorities           [strategy]  [L2] [DRAFT]
 ├── oci-business-case ............... OCI Impact Summary — Business Case               [strategy]  [L2] [DRAFT]
@@ -36,9 +37,9 @@ STRATEGY (11 docs)
 
 PROGRAM DETAILS (8 docs)
 ├── ab-paid-search-wiki ............. AB Paid Search Program Wiki                      [reference] [--] [DRAFT]
-├── au-market-wiki .................. AU Paid Search — Market Wiki                     [reference] [--] [DRAFT]
+├── au-market-wiki .................. AU Paid Search — Market Wiki                     [reference] [--] [FINAL]
 ├── mx-market-wiki .................. MX Paid Search — Market Wiki                     [reference] [--] [DRAFT]
-├── oci-execution-guide ............. OCI Execution Guide (how-to)                     [execution] [--] [DRAFT]
+├── oci-execution-guide ............. OCI Execution Guide (how-to)                     [execution] [--] [FINAL]
 ├── ww-testing-tracker .............. WW Testing Tracker (all tests)                   [reference] [L2] [DRAFT]
 ├── market-reference ................ Market Reference: 10 Markets                     [reference] [L2] [DRAFT]
 ├── team-workload-distribution ...... Team Capacity & Workload                         [reference] [--] [DRAFT]
@@ -61,7 +62,7 @@ BEST PRACTICES (3 docs)
 └── invoice-po-process-guide ........ Invoice & PO Process Guide                       [execution] [--] [DRAFT]
 
 ====================================
-TOTAL: 40 artifacts | 40 DRAFT | 0 REVIEW | 0 FINAL
+TOTAL: 40 artifacts | 29 DRAFT | 0 REVIEW | 11 FINAL
 DOC-TYPES: ~18 strategy | ~12 execution | ~10 reference
 LEVELS: L1×4 | L2×18 | L3×2 | L4×3 | L5×3 | N/A×10
 ```

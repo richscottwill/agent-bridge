@@ -5,6 +5,10 @@ description: "Write wiki articles using the full pipeline: editor assigns work, 
 
 # Wiki Write Pipeline
 
+## Pipeline Rules
+
+**Read `shared/context/wiki/wiki-pipeline-rules.md` before any pipeline operation.** It contains the non-negotiable rules for dual blind eval, publishing gates, appendix-heavy structure, and kiro-cli invocation patterns.
+
 ## Instructions
 
 The wiki pipeline is sequential: editor → researcher → writer → critic → librarian. The editor orchestrates — don't invoke wiki-writer or wiki-researcher directly unless the editor has already assigned the work.

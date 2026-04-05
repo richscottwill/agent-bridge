@@ -4,7 +4,7 @@
 >
 > Published articles live in `~/shared/artifacts/`. This index is the discovery layer over that folder.
 
-Last updated: 2026-04-04
+Last updated: 2026-04-05
 
 ---
 
@@ -13,34 +13,34 @@ Last updated: 2026-04-04
 ### Testing & Experimentation (13)
 
 - [Testing Approach & Year Ahead](~/shared/artifacts/testing/2026-03-25-testing-approach-kate.md): Kate Rundell meeting doc — 5 workstreams, testing methodology, year-ahead plan
-  - slug: testing-approach-kate | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
+  - slug: testing-approach-kate | status: FINAL | doc-type: strategy | audience: amazon-internal | level: 2
   - children: workstream-oci-bidding, workstream-modern-search, workstream-audiences-lifecycle, workstream-user-experience, workstream-algorithmic-ads
 
 - [WS1: OCI Bidding](~/shared/artifacts/testing/2026-03-25-workstream-oci-bidding.md): OCI bidding deep-dive — problem, test, result, scale
-  - slug: workstream-oci-bidding | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
+  - slug: workstream-oci-bidding | status: FINAL | doc-type: strategy | audience: amazon-internal | level: 2
   - parent: testing-approach-kate
 
 - [WS2: Modern Search](~/shared/artifacts/testing/2026-03-25-workstream-modern-search.md): Redirects, AEO — problem, test, result, scale
-  - slug: workstream-modern-search | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
+  - slug: workstream-modern-search | status: FINAL | doc-type: strategy | audience: amazon-internal | level: 2
   - parent: testing-approach-kate
 
 - [WS3: Audiences & Lifecycle](~/shared/artifacts/testing/2026-03-25-workstream-audiences-lifecycle.md): F90, engagement — problem, test, result, scale
-  - slug: workstream-audiences-lifecycle | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
+  - slug: workstream-audiences-lifecycle | status: FINAL | doc-type: strategy | audience: amazon-internal | level: 2
   - parent: testing-approach-kate
 
 - [WS4: User Experience](~/shared/artifacts/testing/2026-03-25-workstream-user-experience.md): Landing pages, Polaris — problem, test, result, scale
-  - slug: workstream-user-experience | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
+  - slug: workstream-user-experience | status: FINAL | doc-type: strategy | audience: amazon-internal | level: 2
   - parent: testing-approach-kate
 
 - [WS5: Algorithmic Ads](~/shared/artifacts/testing/2026-03-25-workstream-algorithmic-ads.md): AI Max, Shopping — problem, test, result, scale
-  - slug: workstream-algorithmic-ads | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
+  - slug: workstream-algorithmic-ads | status: FINAL | doc-type: strategy | audience: amazon-internal | level: 2
   - parent: testing-approach-kate
 
 - [AI Max Test Design — US](~/shared/artifacts/testing/2026-03-25-ai-max-test-design.md): AI Max test design for US market
   - slug: ai-max-test-design | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
 
-- [OCI Rollout Playbook](~/shared/artifacts/testing/2026-03-25-oci-rollout-playbook.md): Business case, validated results, measurement framework — the strategy doc for OCI
-  - slug: oci-rollout-playbook | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
+- [OCI Rollout Playbook](~/shared/artifacts/testing/2026-03-25-oci-rollout-playbook.md): Phased OCI rollout methodology (E2E → 25% → 50% → 100%), validated results (35K regs, $16.7MM OPS), measurement framework, cross-market patterns, decision guide
+  - slug: oci-rollout-playbook | status: FINAL | doc-type: strategy | audience: amazon-internal | level: 2
 
 - [Ad Copy Testing Framework](~/shared/artifacts/testing/2026-03-25-ad-copy-testing-framework.md): SP study framework for ad copy testing
   - slug: ad-copy-testing-framework | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
@@ -55,9 +55,14 @@ Last updated: 2026-04-04
   - slug: project-baloo-overview | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
 
 - [Enhanced Match / LiveRamp — Audience Expansion](~/shared/artifacts/testing/2026-04-04-enhanced-match-liveramp.md): LiveRamp Enhanced Match investigation, Brandon's 4 questions, EU DMA blocker, audience size drop
-  - slug: enhanced-match-liveramp | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 2
+  - slug: enhanced-match-liveramp | status: FINAL | doc-type: strategy | audience: amazon-internal | level: 2
 
-### Strategy & Frameworks (12)
+### Strategy & Frameworks (14)
+
+- [Agent System Architecture](~/shared/artifacts/strategy/2026-03-25-agent-architecture.md): Complete architecture guide — body system (11 organs), hooks (5 triggers), agent swarm (13 agents across 3 teams), dual-file definition pattern (.md portable + .json CLI), failure modes, portability, cold start protocol
+  - slug: agent-architecture | status: DRAFT | doc-type: strategy | audience: team | level: 5 | tags: body-system, agent, hook, steering, tool, mcp, agent-bridge
+  - depends_on: body-system-architecture
+  - Asana project: ABPS AI - Build
 
 - [Agentic Paid Search — Vision & Roadmap](~/shared/artifacts/strategy/2026-03-25-agentic-ps-vision.md): Vision and roadmap for agentic PS
   - slug: agentic-ps-vision | status: DRAFT | audience: amazon-internal | level: 5
@@ -81,7 +86,7 @@ Last updated: 2026-04-04
   - slug: f90-lifecycle-strategy | status: DRAFT | audience: amazon-internal | level: 2
 
 - [ie%CCP Planning & Optimization Framework](~/shared/artifacts/strategy/2026-03-30-ieccp-planning-framework.md): How to understand, plan around, and optimize ie%CCP for budget decisions and performance analysis
-  - slug: ieccp-planning-framework | status: DRAFT | audience: amazon-internal | level: 2
+  - slug: ieccp-planning-framework | status: FINAL | audience: amazon-internal | level: 2
 
 - [Q2 2026 Initiative Status & Priorities](~/shared/artifacts/strategy/2026-04-04-q2-initiative-status.md): Single-page scorecard of every active initiative entering Q2 — status, blockers, priorities
   - slug: q2-initiative-status | status: DRAFT | audience: amazon-internal | level: 2
@@ -92,13 +97,17 @@ Last updated: 2026-04-04
 - [GenAI Search Traffic — What We Know](~/shared/artifacts/strategy/2026-04-04-genai-search-traffic.md): GenAI engines driving ~1% of WW traffic, ACE team building Amazon MCP shopping widget, implications for PS
   - slug: genai-search-traffic | status: DRAFT | doc-type: strategy | audience: amazon-internal | level: 4
 
+- [PS Five-Year Outlook: 2026–2030](~/shared/artifacts/strategy/2026-04-05-ps-five-year-outlook.md): Five-year strategic outlook — four 2026 investment bets (AI Max, Baloo, F90, agentic tooling) grounded in OCI results, 2027 conditional on test outcomes, 2028-2030 scenario planning. Decision table with go/no-go gates and fallbacks.
+  - slug: ps-five-year-outlook | status: FINAL | doc-type: strategy | audience: leadership | level: 5
+  - depends_on: testing-approach-kate, agentic-ps-vision, aeo-ai-overviews-pov
+
 ### Paid Search Operations / Program Details (8)
 
 - [AB Paid Search Program Wiki](~/shared/artifacts/program-details/2026-03-25-ab-paid-search-wiki.md): Master program wiki for AB Paid Search
   - slug: ab-paid-search-wiki | status: DRAFT | doc-type: reference | audience: amazon-internal | level: N/A
 
 - [AU Paid Search — Market Wiki](~/shared/artifacts/program-details/2026-04-04-au-market-wiki.md): Canonical AU reference — performance, initiatives, stakeholders, open questions
-  - slug: au-market-wiki | status: DRAFT | doc-type: reference | audience: amazon-internal | level: N/A | tags: market-wiki, au
+  - slug: au-market-wiki | status: FINAL | doc-type: reference | audience: amazon-internal | level: N/A | tags: market-wiki, au
   - replaces: au-market-wiki (old), au-market-overview, au-paid-search-market-overview
 
 - [MX Paid Search — Market Wiki](~/shared/artifacts/program-details/2026-03-25-mx-market-wiki.md): Canonical MX reference — includes Lorena onboarding context (formerly separate handoff guide)
@@ -106,7 +115,7 @@ Last updated: 2026-04-04
   - replaces: mx-market-wiki (old), mx-ps-handoff-guide
 
 - [OCI Execution Guide](~/shared/artifacts/program-details/2026-04-04-oci-execution-guide.md): Step-by-step OCI implementation — prerequisites, E2E launch, scaling, troubleshooting
-  - slug: oci-execution-guide | status: DRAFT | doc-type: execution | audience: amazon-internal | level: N/A
+  - slug: oci-execution-guide | status: FINAL | doc-type: execution | audience: amazon-internal | level: N/A
   - replaces: oci-implementation-guide, oci-methodology-knowledge-share
 
 - [WW Testing Tracker](~/shared/artifacts/program-details/2026-03-25-ww-testing-tracker.md): All active, planned, and completed tests across markets with portfolio health narrative
@@ -167,16 +176,16 @@ _No system documentation articles published yet. System docs currently live in b
 | Category | Count | Artifact Folder |
 |----------|-------|-----------------|
 | Testing & Experimentation | 13 | `testing/` |
-| Strategy & Frameworks | 12 | `strategy/` |
+| Strategy & Frameworks | 13 | `strategy/` |
 | Program Details / PS Ops | 8 | `program-details/` |
 | Reporting | 2 | `reporting/` |
 | Tools & Automation | 2 | `tools/` |
 | Communication | 1 | `communication/` |
 | Best Practices | 3 | `best-practices/` |
 | System Documentation | 0 | _(none yet)_ |
-| **Total** | **41** | |
+| **Total** | **42** | |
 
-Status: 41 DRAFT | 0 REVIEW | 0 FINAL
+Status: 30 DRAFT | 0 REVIEW | 11 FINAL
 Audience: 33 amazon-internal | 2 personal | 0 agent-only
 
 Doc-type breakdown: ~18 strategy | ~10 execution | ~10 reference
@@ -250,6 +259,14 @@ Until the target site is configured, all articles remain local. No auto-publish,
 
 | Date | Article | Change |
 |------|---------|--------|
+| 2026-04-05 | agent-architecture | Published revision (v2). Updated: consolidated WBR agents (6→2 parameterized), added Agent Definition Pattern section (.md/.json dual-file), added Failure Modes, updated routing/portability/directory. Eval A R2: 8.6/10 PUBLISH, Eval B R2: 8.2/10 with post-review fixes. Added to wiki-index (was previously unindexed). Asana: ABPS AI - Build. |
+| 2026-04-05 | workstream-oci-bidding | Published as FINAL (v2). Critic Eval A: 8.6/10 — PUBLISH direct. Status DRAFT → FINAL. Replaced artifact in testing/. |
+| 2026-04-05 | workstream-modern-search | Published as FINAL (v2). Critic Eval A: 8.6/10 — PUBLISH direct. Status DRAFT → FINAL. Replaced artifact in testing/. |
+| 2026-04-05 | workstream-audiences-lifecycle | Published as FINAL (v3). Critic Eval A: 8.4/10 → revised per Economy feedback (cross-WS duplication, trimmed learning section). Status DRAFT → FINAL. Replaced artifact in testing/. |
+| 2026-04-05 | workstream-user-experience | Published as FINAL (v3). Critic Eval A: 8.0/10 → revised per Economy feedback (split Baloo paragraph, cut summary sentence, reframed baseline). Status DRAFT → FINAL. Replaced artifact in testing/. |
+| 2026-04-05 | workstream-algorithmic-ads | Published as FINAL (v3). Critic Eval A: 7.8/10 → revised per Accuracy+Economy feedback (trimmed Prime Day duplication, flagged AI Max status, cut Discovery Ads history, merged DG expansion). Status DRAFT → FINAL. Replaced artifact in testing/. |
+| 2026-04-05 | testing-approach-kate | Published as FINAL (v5 rewrite). Critic Eval A: 8.4/10, Eval B: 8.2/10. Status DRAFT → FINAL. Frontmatter normalized (audience→amazon-internal, added level/update-trigger). Replaced artifact in testing/. |
+| 2026-04-04 | oci-rollout-playbook | Published as FINAL (v2 rewrite). Critic Eval A: 8.4/10. Status DRAFT → FINAL. Replaced artifact in testing/. |
 | 2026-04-04 | (wiki-wide) | Introduced doc-type system (strategy/execution/reference). Consolidated 3 OCI docs into 2 (Playbook + Execution Guide). Merged AU Market Wiki + AU Market Overview into one canonical doc. Merged MX Handoff Guide into MX Market Wiki. Archived Polaris Timeline (superseded by Polaris Rollout Status). Added narrative to WW Testing Tracker. Total: 42 → 38 articles (4 archived via consolidation). |
 | 2026-04-04 | oci-execution-guide | New article — merged OCI Implementation Guide + OCI Methodology Knowledge Share |
 | 2026-04-04 | au-market-wiki | Rewritten — merged AU Market Wiki + AU Market Overview into one canonical doc |

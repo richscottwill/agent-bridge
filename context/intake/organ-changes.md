@@ -1,19 +1,26 @@
 # Organ Changes Log
 
-## 2026-04-04 — changelog.md (Karpathy Run 26)
-
-**File:** `shared/context/body/changelog.md`
-**Author:** Karpathy (autoresearch engine)
-**Summary:** Run 26 logged — 10 experiments across 6 organs using underexplored techniques (REMOVE/SPLIT/MERGE/RESTRUCTURE). 5 KEPT, 5 REVERTED. All 5 REMOVE experiments reverted (unique content pattern). KEEPs: amcc Growth Model SPLIT, heart Design Choices COMPRESS (-264w), heart DuckDB Integration RESTRUCTURE, nervous-system Loop 3 MERGE (-69w), device Tool Factory RESTRUCTURE. Gated files (heart.md, gut.md): heart had 2 authorized Karpathy modifications; gut REVERT means no net change. No cross-organ inconsistencies detected.
-
-## 2026-04-04 — changelog.md (Karpathy Run 27)
-
-**File:** `shared/context/body/changelog.md`
-**Author:** Karpathy (autoresearch engine)
-**Summary:** Run 27 logged — 10 output-quality experiments on wiki agents (wiki-writer, wiki-editor, wiki-researcher, wiki-critic) and style guides (richard-style-email, richard-style-slack, richard-style-docs, richard-style-wbr). 5 KEPT, 5 REVERTED (50% revert rate — target for randomized exploration). KEEPs: wiki-writer dual-audience SPLIT (structural headers), wiki-editor kill criteria REWORD (30d→14d threshold), wiki-researcher ABPS section SPLIT (structural), wiki-critic design philosophy REMOVE (-49w), richard-style-docs post-mortem RESTRUCTURE (lessons-first). REVERTs: wiki-writer REMOVE (behavioral constraints load-bearing), wiki-editor pipeline COMPRESS (checkpoint granularity needed), richard-style-email MERGE (distinct registers), richard-style-slack REMOVE (behavioral correction layer), richard-style-wbr SPLIT (YoY context not optional). No gated files modified (heart.md/gut.md untouched). No cross-organ inconsistencies — all changes target agent prompt files and style guides, not body organs. Wiki-editor kill criteria tightening (30d→14d) aligns with portfolio management staleness thresholds.
-
-## 2026-04-04 — heart.md (Experiment Technique Priors)
+## 2026-04-05 — heart.md (consolidated)
 
 **File:** `shared/context/body/heart.md`
-**Author:** Karpathy (autoresearch engine) — authorized (gated file, within jurisdiction)
-**Summary:** Step 3 experiment technique definitions enriched with learned priors from Runs 26-27. ADD: portable "Common Failures" pattern noted. RESTRUCTURE: lessons-first ordering keeps. REMOVE: caution added — ~80% revert rate, pre-check for unique IDs/URLs/rules/constraints before attempting. REWORD: flagged as highest keep rate (~90%), concrete examples > abstract rules. MERGE: caution for distinct registers/categories. SPLIT: structural splits keep, "optional" labeling reverts. No cross-organ inconsistencies. These annotations encode experiment selection intelligence directly into the protocol, reducing future revert waste.
+**Changes (net result after all edits):**
+1. Step 4 refactored: eval agents now invoked via `invokeSubAgent` (same pattern as wiki pipeline). A/B/C blind eval preserved — Agent C (zero context portability) runs on Tier 2 experiments.
+2. Fast-fail gate added between Agent A and Agent B: if Agent A scores 50%+ INCORRECT, skip Agent B and mark REVERT with `fast_fail`. Does NOT apply to Brain/Memory.
+3. Structured eval output: results written to `~/shared/context/active/experiment-results-latest.json` (overwritten each experiment, keeps eval output out of context window).
+4. experiment-log.tsv: one row per experiment appended to `~/shared/context/active/experiment-log.tsv` (human-scannable, git-trackable — analog of Karpathy autoresearch's results.tsv).
+5. Logging format updated: fast_fail experiments get logged with `B=- Δ=-` notation.
+
+**What was NOT changed:** Scoring logic (CORRECT/PARTIAL/INCORRECT), decision thresholds (delta_ab ≥ 0), Brain/Memory zero-tolerance rule, Bayesian prior mechanism, 7 techniques, target categories, tiered eval (Tier 1 = A+B, Tier 2 = A+B+C).
+
+**Authorization:** Karpathy-authority changes (loop protocol, eval pipeline). Richard directed implementation.
+**Cross-organ impact:** None. New files created (experiment-log.tsv, experiment-results-latest.json) are in active/ directory. karpathy.md and karpathy.json updated to match. All copies verified in sync.
+
+**Note:** Canonical eval questions concept was briefly added then removed in the same session. It was not from Karpathy's autoresearch — it was an agent invention. The frozen eval harness equivalent is the scoring protocol itself, which is already immutable in heart.md. No residual references remain in any file.
+
+## 2026-04-05 — heart.md (heading correction)
+
+**File:** `shared/context/body/heart.md`
+**Change:** Step 4 heading updated from "A/B Blind Eval" to "A/B/C Blind Eval"
+**Diff:** Single line — `### Step 4: Evaluate — A/B Blind Eval` → `### Step 4: Evaluate — A/B/C Blind Eval`
+**Cross-organ impact:** None. This corrects a stale heading — the rest of the system (karpathy.md, portable-body/heart.md, agent-bridge/heart.md, session-log.md, hooks-inventory.md) already uses "A/B/C" terminology. The heading was the only remaining "A/B" reference.
+**Authorization:** ⚠️ Edit source unknown. heart.md is gated — only the karpathy agent has authority to modify this file. This edit was detected via fileEdited hook, not from a karpathy-invoked session. If Richard made this edit directly, it's a minor heading fix that aligns with existing terminology. If an unauthorized agent made it, flag for review.

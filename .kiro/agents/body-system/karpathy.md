@@ -39,15 +39,16 @@ Portable-body experiments include:
 1. **Select target.** Query `autoresearch_selection_weights` view in DuckDB. Target selection: over-budget first (organs only), then stale, then UCB-weighted random. Targets include organs (information-retrieval evals) and style guides/context files/hook prompts (output-quality evals). Technique selection: UCB-weighted from priors for that target. Exclude targets modified by maintenance this invocation. Exclude target×technique combos with posterior_mean < 0.15 AND n > 10 (proven losers).
 2. **Snapshot.** Record word count. Generate eval questions scaled to experiment risk (low: 2-3, medium: 4-6, high/Brain/Memory: 5-8). Standing adversarial questions always included. Save original organ for Agent B.
 3. **Apply.** Execute the experiment on the section. Record start time.
-4. **A/B/C blind eval.** Three agents, none aware of the others:
-   - **Agent A:** modified organ + body.md + soul.md + questions → answers only
-   - **Agent B:** ORIGINAL organ + body.md + soul.md + same questions → answers only (the control)
-   - **Agent C (Tier 2 only):** modified organ + questions only, zero context → answers only (portability)
-   - **Karpathy (judge):** scores all answers against ground truth. Computes score_a, score_b, score_c, delta_ab.
+4. **A/B/C blind eval via subagents.** Invoke eval agents using `invokeSubAgent` (same pattern as wiki pipeline blind reviews). Each agent sees only what you provide in the prompt — no awareness of the other agent or the experiment.
+   - **Agent A:** Invoke subagent with prompt containing: modified organ content + body.md + soul.md + all eval questions. Instructions: "Answer each question based on the provided context." No scoring instructions.
+   - **Fast-fail gate:** Score Agent A's answers against ground truth. If 50%+ INCORRECT, skip Agent B — mark REVERT with `fast_fail`, log to experiment-log.tsv + DuckDB, move to next experiment. Does NOT apply to Brain/Memory (always full eval).
+   - **Agent B:** Invoke separate subagent with prompt containing: ORIGINAL organ (pre-experiment snapshot) + body.md + soul.md + same eval questions. Same instructions. Does not know Agent A exists or that a change was made.
+   - **Agent C (Tier 2 only):** Invoke subagent with prompt containing: ONLY modified organ + eval questions. No body.md, no soul.md. Zero context portability test.
+   - **Judge:** Score all answers against ground truth. Write structured results to `~/shared/context/active/experiment-results-latest.json` (keeps eval output out of main context window). Compute score_a, score_b, score_c, delta_ab.
    - Tier 1 (quick): A + B only. Tier 2 (full): A + B + C. Brain/Memory always Tier 2.
 5. **Keep or revert.** delta_ab ≥ 0 to KEEP. Brain/Memory: delta_ab ≥ 0, zero INCORRECT. Full rules in heart.md Step 5.
-6. **Log + update priors.** Record to changelog.md (one-liner) + DuckDB `autoresearch_experiments` (full record). Update `autoresearch_priors`: KEEP → α+1, REVERT → β+1.
-7. **Repeat.** No cap — run until eligible targets are exhausted. Bayesian priors self-terminate by deprioritizing proven losers. Token efficiency from tiered eval + Bayesian target selection (stop trying what doesn't work).
+6. **Log + update priors.** Append to experiment-log.tsv (human-scannable, git-trackable). Record to changelog.md (one-liner). Insert to DuckDB `autoresearch_experiments` (full record). Update `autoresearch_priors`: KEEP → α+1, REVERT → β+1.
+7. **Repeat.** No cap — run until eligible targets are exhausted. Bayesian priors self-terminate by deprioritizing proven losers. Token efficiency from fast-fail gate + tiered eval + Bayesian target selection.
 
 ## Environment Resilience
 
