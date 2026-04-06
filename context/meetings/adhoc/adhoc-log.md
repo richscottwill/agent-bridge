@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-04-02 — WhatsApp and Push Campaigns Demo (AI/MarTech)
+- Cross-team demo: Ravi, Chinmay, Anand, Kishore, Shrinivas, Pratiba, Sunil, Shannon, Alexis Eck, Lena Zak, Lorena Alvarez Larrea, Richard (observer)
+- WhatsApp campaign workflow in Marketly: 4 template types, Bullseye targeting, personalization via existing Postlac datasets
+- WhatsApp CTR 24x email, open rate 2.5-3x email (INM data)
+- Same handle for retail + AB currently — separate AB handle in development
+- No in-console preview yet (uses Sonar tool in prod)
+- Push campaigns now launchable via Omniaya AI (US marketplace P0)
+- Richard's role: observer. No direct action items for Richard from this session.
+- Hedy session: Mud2oHyNhKhYuNSwQsQo
+- Relevance: WhatsApp/push channels may be relevant for MX and AU engagement campaigns in future
+
 ## 2026-03-25 — OCI APAC MCC Access Call with Google (Mike Babich)
 - Brandon + Richard called Mike at 2pm PT
 - APAC MCC (852-899-4580) access blocked — "too many failed attempts" loop

@@ -11,6 +11,14 @@ Pure data collection. No drafting, no decisions, no organ writes.
 ### Context Load
 spine.md, current.md, slack-channel-registry.json, slack-scan-state.json, asana-command-center.md.
 
+### DuckDB Schema Verification (before any queries)
+Run `~/shared/context/protocols/duckdb-schema-verification.md` quick check:
+1. `SELECT current_database(), current_schema()` → must be `ps_analytics`, `main`
+2. `SELECT database_name, type FROM duckdb_databases() WHERE database_name = 'ps_analytics'` → type must be `motherduck`
+3. Quick table count: 46 tables + 39 views expected
+4. If any missing → run ensure-schema.sql statements for missing tables
+5. If database type is not `motherduck` → STOP and flag: MCP server not connected to MotherDuck
+
 ### Slack Scan
 1. list_channels (unreadOnly=true). Sort by mention_count then section.
 2. Apply depth rules. Relevance Filter (threshold 25).
@@ -33,8 +41,23 @@ spine.md, current.md, slack-channel-registry.json, slack-scan-state.json, asana-
 5. Write asana-digest to intake/ with categorized task list.
 6. Check for new tasks since last scan (Recently Assigned section or created in last 24h).
 
-### Morning Snapshot
-Write to ~/shared/context/active/asana-morning-snapshot.json:
+### Morning Snapshot (DuckDB + MotherDuck Time Travel)
+
+After Asana pull completes and `asana_tasks` is populated, create a MotherDuck named snapshot as the frozen morning baseline:
+
+```sql
+-- Create morning snapshot for time travel (EOD-2 will diff against this)
+CREATE SNAPSHOT am_YYYYMMDD OF ps_analytics;
+```
+
+Also insert today's task history snapshot for long-term trend analysis:
+```sql
+INSERT INTO asana_task_history (snapshot_date, task_gid, project_name, section_name, due_on, completed, priority_rw, routine_rw)
+SELECT CURRENT_DATE, task_gid, project_name, section_name, due_on, completed, priority_rw, routine_rw
+FROM asana_tasks WHERE deleted_at IS NULL;
+```
+
+**Legacy fallback:** Also write to `~/shared/context/active/asana-morning-snapshot.json` until all consumers are migrated to DuckDB queries. The JSON snapshot will be deprecated once EOD-2 time travel reconciliation is verified stable.
 
 ```json
 {
@@ -50,7 +73,14 @@ Write to ~/shared/context/active/asana-morning-snapshot.json:
 }
 ```
 
-This snapshot is the frozen baseline for EOD-2 reconciliation.
+### Log Hook Execution
+After all Phase 1 steps complete, log this AM-Auto run:
+```sql
+INSERT INTO hook_executions (hook_name, execution_date, start_time, end_time, duration_seconds,
+    phases_completed, asana_reads, asana_writes, slack_messages_sent, duckdb_queries, summary)
+VALUES ('am-auto', CURRENT_DATE, '[start]', '[end]', [duration],
+    [phases], [reads], [writes], [slack_msgs], [queries], '[summary]');
+```
 
 ### Activity Monitor
 Follow ~/shared/context/active/asana-activity-monitor-protocol.md.
@@ -83,7 +113,8 @@ Report: channels scanned, signals extracted, Asana tasks by bucket + overdue cou
 Produces the daily brief, dashboard, and calendar blocks from Phase 1 + Phase 2 output.
 
 ### Context Load
-body.md, spine.md, org-chart.md, rw-trainer.md, rw-task-prioritization.md, brain.md, eyes.md, device.md, gut.md, rw-tracker.md, hands.md (fresh), amcc.md (fresh), slack-scan-state.json, asana-command-center.md, ~/shared/context/intake/asana-activity.md, ~/shared/context/active/asana-morning-snapshot.json.
+body.md, spine.md, org-chart.md, rw-trainer.md, rw-task-prioritization.md, brain.md, eyes.md, device.md, gut.md, rw-tracker.md, hands.md (fresh), amcc.md (fresh), slack-scan-state.json, asana-command-center.md, ~/shared/context/intake/asana-activity.md.
+DuckDB is the primary data source for all task analytics — query `asana_tasks`, `asana_overdue`, `asana_by_routine`, `asana_by_project` views directly. The JSON morning snapshot is legacy fallback only.
 
 ### Brief Structure
 1. TRAINER CHECK-IN

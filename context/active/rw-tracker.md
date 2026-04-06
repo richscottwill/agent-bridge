@@ -52,6 +52,18 @@ Last updated: 2026-04-03 (EOD-2 Friday)
 See brain.md → Level Graduation Criteria. Weekly artifact. Monthly tool. Quarterly initiative.
 
 
+### Monday 4/6 EOD-2 — Asana Reconciliation
+- **Completed today (My Tasks): 0** — EOD-2 running early, no completions yet
+- **Carried forward: 0 Today tasks** — clean slate from Sunday reset
+- **New tasks since morning: 0**
+- **Net delta: 0**
+- **Overdue: 5 tasks** — Testing Doc for Kate (5d), Lena response (3d), Stacey reply (3d), Lorena Q2 spend (2d), Andrew ENG file (2d)
+- **Recurring tasks completed:** None
+- **Five Levels today:** L1: 0 (18 workdays). L2: 0. L3: 0. L4: 0. L5: 0.
+- **Blockers:** MX Auto page on Vijeth (18d), Kingpin on Andes (21d).
+- **ABPS AI Content:** Pending — Phase 2.
+- **Portfolio:** Pending — Phase 2.
+
 ### Sunday 4/5 EOD-2 — Asana Reconciliation
 - **Completed today (My Tasks): 0** — Sunday, no activity
 - **Carried forward: 2 Today tasks** demoted to Urgent (Andrew ENG file, Lorena Q2 spend)

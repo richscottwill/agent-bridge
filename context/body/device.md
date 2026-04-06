@@ -72,16 +72,16 @@ These are live. They execute without Richard thinking.
 - **Tool:** `python3 ~/shared/tools/sharepoint-sync/cli.py --mode directory` · Config: `~/shared/tools/sharepoint-sync/config.yaml`
 - **Local (Windows):** `c:/Users/prichwil/OneDrive - amazon.com/Artifacts/wiki-sync`
 
-### PS Analytics Database (DuckDB)
-- **What it does:** Persistent analytical DB for all structured PS data — daily/weekly/monthly metrics (10 markets, Brand/NB), IECCP, projections, callout scores, competitors, OCI status, change logs, anomalies. Auto-populated by dashboard ingester.
-- **DB path:** `~/shared/data/duckdb/ps-analytics.duckdb` · Query: `~/shared/tools/data/query.py` (CLI or `from query import db, market_trend`)
-- **Active tables:** daily_metrics, weekly_metrics, monthly_metrics, ieccp, projections, callout_scores, experiments, ingest_log, change_log, anomalies, competitors, oci_status, signal_tracker. Schema-only: agent_actions, agent_observations, decisions, task_queue, content_embeddings.
-- **Extensions:** core_functions, icu, json, parquet, jemalloc, fts (full-text search), vss (vector similarity search).
-- **FTS index:** `slack_messages` table indexed on full_text, text_preview, author_name, channel_name (BM25 ranking, English stemmer+stopwords). Query: `SELECT *, fts_main_slack_messages.match_bm25(ts, 'search terms') AS score FROM slack_messages WHERE score IS NOT NULL ORDER BY score DESC LIMIT 10;`
-- **VSS table:** `content_embeddings` (id, source_type, source_path, section, content_preview, embedding FLOAT[384], updated_at). Empty — ready for embedding generation. HNSW index created after population.
-- **Parquet exports:** `~/shared/data/exports/` — slack_messages.parquet, autoresearch_experiments.parquet, autoresearch_priors.parquet. Portable interchange format for dashboards and sharing.
-- **Agent access:** DuckDB MCP Server (`execute_query`, `list_tables`, `list_columns` via `.kiro/settings/mcp.json`). Python: `db_validate()`, `schema()`, `export_parquet()`, `db_write()`, `db_upsert()`.
-- **Portability:** Single file, no server. Parquet exports at `~/shared/data/exports/`. Rebuild: `~/shared/tools/data/RECONSTRUCTION.md`.
+### PS Analytics Database (DuckDB → MotherDuck Cloud)
+- **What it does:** Persistent cloud analytical DB for all structured PS data and system telemetry. 46 tables + 39 views covering: market metrics (10 markets, Brand/NB), Slack intelligence, Asana state mirror, meeting analytics, experiment tracking (Bayesian priors, outcomes, convergence), nervous system time series (patterns, delegations, decisions, communication), Five Levels tracking, projections/forecasting, pipeline observability, body health metrics, wiki pipeline, and signal intelligence.
+- **Cloud DB:** `md:ps_analytics` on MotherDuck (aws-us-east-1). Persistent — survives container recycles.
+- **MCP access:** DuckDB MCP Server (`execute_query`, `list_tables`, `list_columns`). Config: `.kiro/settings/mcp.json` with MOTHERDUCK_TOKEN env var.
+- **Schema guard:** `~/shared/tools/data/ensure-schema.sql` — idempotent CREATE IF NOT EXISTS for all tables. AM-Auto runs verification at startup.
+- **Local backup:** `~/shared/tools/data/ps-analytics.duckdb` (pre-migration snapshot, not actively written to).
+- **Extensions:** core_functions, icu, json, parquet, jemalloc, fts (full-text search), vss (vector similarity search), motherduck.
+- **FTS index:** `slack_messages` table indexed on full_text, text_preview, author_name, channel_name (BM25 ranking).
+- **Key analytical views:** prior_convergence (Bayesian budget signals), organ_size_accuracy (size-accuracy curve), projection_accuracy (forecast scoring), experiment_confirmation_rates (lagged eval), communication_trend (Loop 9), five_levels_heatmap, task_velocity, signal_decay_curve, workflow_reliability, hook_reliability, wiki_throughput, tracker_trend, audit_daily_summary, recurring_tasks_due.
+- **Portability:** MotherDuck accessible from any DuckDB client with the token. Local .duckdb file as cold backup. Parquet exports at `~/shared/data/exports/`.
 
 ---
 

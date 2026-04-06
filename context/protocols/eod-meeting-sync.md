@@ -55,3 +55,11 @@ For each session:
 
 ## Report
 Sessions processed, files updated, flags, action items extracted, Asana tasks created/updated.
+
+### Log Hook Execution
+```sql
+INSERT INTO hook_executions (hook_name, execution_date, start_time, end_time, duration_seconds,
+    phases_completed, asana_reads, asana_writes, slack_messages_sent, duckdb_queries, summary)
+VALUES ('eod-meeting-sync', CURRENT_DATE, '[start]', '[end]', [duration],
+    [phases], [reads], [writes], [slack_msgs], [queries], '[summary]');
+```

@@ -21,10 +21,34 @@ Execute the Delta Sync procedure from ~/shared/context/protocols/asana-duckdb-sy
 
 After delta sync, DuckDB views are current. Use them for reconciliation below instead of re-querying Asana API.
 
-### Step 1 — Pull Current State
+### Step 1 — Pull Current State (via DuckDB + Time Travel)
 1. Query DuckDB: `SELECT * FROM asana_tasks WHERE completed = FALSE AND deleted_at IS NULL` → all incomplete tasks.
 2. Query DuckDB: `SELECT * FROM asana_tasks WHERE completed = TRUE AND completed_at::DATE = CURRENT_DATE` → tasks completed today.
-3. Read morning snapshot: ~/shared/context/active/asana-morning-snapshot.json.
+3. **Time travel diff against morning state:** Instead of reading asana-morning-snapshot.json, clone the morning snapshot:
+   ```sql
+   -- Find today's most recent AM snapshot (created during AM-1)
+   SELECT snapshot_name, created_ts FROM md_information_schema.database_snapshots
+   WHERE database_name = 'ps_analytics' AND snapshot_name LIKE 'am_%'
+   ORDER BY created_ts DESC LIMIT 1;
+   -- Clone it for comparison
+   CREATE DATABASE morning_state FROM ps_analytics (SNAPSHOT_NAME 'am_YYYYMMDD');
+   ```
+   Then diff:
+   ```sql
+   -- Tasks completed since morning
+   SELECT c.task_gid, c.name FROM ps_analytics.main.asana_tasks c
+   WHERE c.completed = TRUE AND c.task_gid IN (SELECT task_gid FROM morning_state.main.asana_tasks WHERE completed = FALSE);
+   -- New tasks since morning
+   SELECT c.task_gid, c.name FROM ps_analytics.main.asana_tasks c
+   ANTI JOIN morning_state.main.asana_tasks m ON c.task_gid = m.task_gid;
+   -- Priority changes since morning
+   SELECT c.task_gid, c.name, m.priority_rw AS morning_priority, c.priority_rw AS current_priority
+   FROM ps_analytics.main.asana_tasks c
+   JOIN morning_state.main.asana_tasks m ON c.task_gid = m.task_gid
+   WHERE c.priority_rw != m.priority_rw OR (c.priority_rw IS NULL) != (m.priority_rw IS NULL);
+   ```
+   Clean up after: `DROP DATABASE morning_state;`
+   **Fallback:** If no AM snapshot exists (first run or snapshot missing), fall back to reading `~/shared/context/active/asana-morning-snapshot.json`.
 4. Query DuckDB: `SELECT * FROM asana_overdue` → overdue tasks with days_overdue.
 5. Query DuckDB: `SELECT * FROM asana_by_routine` → bucket distribution for cap checks.
 
@@ -98,9 +122,12 @@ For each task completed today across all managed projects:
 
 ### Portfolio Project Reconciliation
 
-a. Read morning snapshot → portfolio_projects section.
+a. Use the morning time travel clone (from Step 1) or query `asana_task_history` for morning snapshot data. If the morning_state database is still attached, use it directly. Otherwise query:
+```sql
+SELECT * FROM asana_task_history WHERE snapshot_date = CURRENT_DATE;
+```
 
-b. For each managed project (AU, MX, WW Testing, WW Acq, Paid App): GetTasksFromProject → compare against morning stats.
+b. For each managed project (AU, MX, WW Testing, WW Acq, Paid App): query `asana_tasks WHERE project_name = '[project]'` → compare against morning history.
 
 c. Surface changes: tasks completed, new overdue, enrichment coverage changes, recurring tasks created, blocker changes.
 
@@ -131,9 +158,27 @@ Compile for rw-tracker.md: strategic artifacts shipped (Core + Important complet
 
 ### Compression Audit
 Before any organ updates, observe and log body size:
-1. Count words in each organ file (`~/shared/context/body/*.md`). Log to DuckDB `autoresearch_organ_health` (organ, word_count, date).
-2. Query DuckDB for organ-level Bayesian priors from `autoresearch_experiments`. Flag any organ where COMPRESS posterior_mean > 0.7 (n > 5) — these have data-backed evidence they can shrink without accuracy loss.
-3. Sum total body word count. Log it. No hard ceiling — the aggregate size-accuracy curve in DuckDB determines when the body is too large (accuracy plateaus or degrades as size increases).
+1. Count words in each organ file (`~/shared/context/body/*.md`). Log to DuckDB `organ_word_counts` (organ_name, measured_date, word_count) AND `body_size_history` (with Bayesian prior signals):
+   ```sql
+   INSERT INTO organ_word_counts (organ_name, measured_date, word_count) VALUES ('[organ]', CURRENT_DATE, [count])
+   ON CONFLICT (organ_name, measured_date) DO UPDATE SET word_count = EXCLUDED.word_count;
+   
+   INSERT INTO body_size_history (measured_date, organ_name, word_count, add_prior_mean, compress_prior_mean, at_ceiling, has_compression_signal)
+   SELECT CURRENT_DATE, '[organ]', [count],
+       (SELECT alpha/(alpha+beta) FROM autoresearch_priors WHERE organ='[organ]' AND technique='ADD'),
+       (SELECT alpha/(alpha+beta) FROM autoresearch_priors WHERE organ='[organ]' AND technique='COMPRESS'),
+       (SELECT alpha/(alpha+beta) < 0.3 AND n_experiments >= 5 FROM autoresearch_priors WHERE organ='[organ]' AND technique='ADD'),
+       (SELECT alpha/(alpha+beta) > 0.7 AND n_experiments >= 5 FROM autoresearch_priors WHERE organ='[organ]' AND technique='COMPRESS')
+   ON CONFLICT (measured_date, organ_name) DO UPDATE SET word_count = EXCLUDED.word_count,
+       add_prior_mean = EXCLUDED.add_prior_mean, compress_prior_mean = EXCLUDED.compress_prior_mean,
+       at_ceiling = EXCLUDED.at_ceiling, has_compression_signal = EXCLUDED.has_compression_signal;
+   ```
+2. Query the `prior_convergence` view for budget signals:
+   ```sql
+   SELECT organ, technique, posterior_mean, n_experiments, budget_signal
+   FROM prior_convergence WHERE budget_signal IN ('AT_CEILING', 'COMPRESS_SIGNAL');
+   ```
+3. Sum total body word count. Log it. No hard ceiling — the `organ_size_accuracy` view tracks the size-accuracy curve.
 4. Report only when priors suggest action: `🫁 Body: [X]w. [organ] has compression signal (COMPRESS prior: [X], n=[X]).` If no organ has a compression signal, skip report entirely.
 
 ### Workflow Observability Check
@@ -193,10 +238,20 @@ All organs. Skip <48h + minor changes. Volume control. Hot topics. People Watch.
 
 ## Phase 4: Recurring Task State Checks
 
-Read ~/shared/context/active/recurring-task-state.json. For each task:
+Query DuckDB `recurring_task_state` table instead of reading JSON file. For each task:
+```sql
+SELECT task_key, cadence, last_run, last_run_period, description
+FROM recurring_task_state;
+```
 - Compute current_period from today's date and cadence (monthly=YYYY-MM, weekly=YYYY-WNN, quarterly=YYYY-QN).
 - If last_run_period != current_period → task is DUE.
-- Run all due tasks. After each, update last_run and last_run_period.
+- Run all due tasks. After each, update DuckDB:
+  ```sql
+  UPDATE recurring_task_state SET last_run = CURRENT_DATE, last_run_period = '[period]',
+      updated_at = CURRENT_TIMESTAMP, notes = '[notes]' WHERE task_key = '[key]';
+  ```
+- Also update the JSON file as fallback: `~/shared/context/active/recurring-task-state.json` (keep in sync until fully deprecated).
+- Quick check view: `SELECT * FROM recurring_tasks_due WHERE is_due = TRUE;`
 
 ### Due Task Procedures
 - **goal_updater** (monthly): Read asana-goal-updater-protocol.md. Execute Steps 1-8. Goal GIDs: 1213245014119128, 1213204514049680, 1213204514049684, 1213245014119125, 1213204514049688, 1213204514049691, 1213204514049694, 1213204514049706, 1213245014119131, 1213204514049667, 1213204514049671, 1213204514049810, 1213204514049812, 1213204514049830. Update children before parents. Draft-first.
@@ -237,10 +292,48 @@ Execute ~/shared/context/protocols/communication-analytics.md:
 
 **This phase is NOT expendable. Execute before experiments.**
 
+- **MotherDuck daily snapshot:** Create a named snapshot for time travel and audit:
+  ```sql
+  CREATE SNAPSHOT eod_YYYYMMDD OF ps_analytics;
+  ```
+  Use today's date (e.g., `eod_20260406`). This enables tomorrow's AM-1 to diff against today's EOD state. Named snapshots persist until explicitly dropped — clean up snapshots older than 30 days:
+  ```sql
+  -- List old snapshots
+  SELECT snapshot_name, created_ts FROM md_information_schema.database_snapshots
+  WHERE database_name = 'ps_analytics' AND snapshot_name LIKE 'eod_%'
+  AND created_ts < CURRENT_TIMESTAMP - INTERVAL '30 days';
+  -- Drop old ones (if any): ALTER SNAPSHOT old_name SET snapshot_name = '';
+  ```
+
+- **DuckDB daily tracker insert:** After all reconciliation is complete, insert today's summary:
+  ```sql
+  INSERT INTO daily_tracker (tracker_date, completed_count, carried_forward_count, new_tasks_count, net_delta,
+      bucket_sweep, bucket_core, bucket_engine, bucket_admin, bucket_backlog,
+      total_incomplete, total_overdue, l1_effort, l2_effort, l3_effort, l4_effort, l5_effort,
+      hard_thing_status, workdays_at_zero, blocker_count, abps_completed, portfolio_completed, notes)
+  VALUES (CURRENT_DATE, [completed], [carried], [new], [delta],
+      [sweep], [core], [engine], [admin], [backlog],
+      [incomplete], [overdue], [l1], [l2], [l3], [l4], [l5],
+      '[status]', [days], [blockers], [abps], [portfolio], '[notes]');
+  ```
+
+- **DuckDB L1 streak insert:**
+  ```sql
+  INSERT INTO l1_streak (tracker_date, workdays_at_zero, hard_thing_task_gid, hard_thing_name)
+  VALUES (CURRENT_DATE, [days], '[gid]', '[name]');
+  ```
+
 - **Steering integrity check (before staging):** Read `~/.kiro/steering/context/steering-integrity.md`. Verify no files from the Deleted Files table exist in `~/.kiro/steering/`. If found, delete them before staging. Verify all steering files have front matter with an explicit inclusion mode.
 - Git sync push: `git -C ~/shared add -A && git commit -m "EOD-2 [date]" && git push`
 - Deduplicate MCP.
 - Self-audit: cascade completeness, structural changes, coherence. Log to changelog.md.
+- **Log hook execution:**
+  ```sql
+  INSERT INTO hook_executions (hook_name, execution_date, start_time, end_time, duration_seconds,
+      phases_completed, phases_failed, asana_reads, asana_writes, slack_messages_sent, duckdb_queries, summary)
+  VALUES ('eod-refresh', CURRENT_DATE, '[start]', '[end]', [duration],
+      [completed], [failed], [reads], [writes], [slack_msgs], [queries], '[summary]');
+  ```
 
 ---
 

@@ -337,3 +337,15 @@ Present the curated task board. Execute Richard's directions in real-time.
 
 ### Agent-Initiated Proposals
 Propose changes based on: overdue tasks, bucket overflows, untriaged items, stale tasks, due date conflicts. Richard approves, modifies, or gives new directions.
+
+---
+
+## Log Hook Execution
+
+After Phase 2 completes (or Richard ends the session):
+```sql
+INSERT INTO hook_executions (hook_name, execution_date, start_time, end_time, duration_seconds,
+    phases_completed, asana_reads, asana_writes, slack_messages_sent, duckdb_queries, summary)
+VALUES ('am-triage', CURRENT_DATE, '[start]', '[end]', [duration],
+    [phases], [reads], [writes], [slack_msgs], [queries], '[summary]');
+```

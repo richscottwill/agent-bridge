@@ -30,3 +30,13 @@
 3. **amcc.md Integration section — references are directionally correct.** Brain (decides what's right), Eyes (deadline urgency), Hands (task list), Memory (stakeholder reframes), Device (catches device-level work), NS (measures after), Gut (prevents low-leverage), Heart (loop outputs), Trainer (retrospective standard) — all align with current organ purposes. No conflicts.
 
 4. **Growth Model targets vs current state.** amcc.md sets "Current streak: 1" with 30d target of 5+ and 90d target of 10+. This is consistent with the streak section at the top of the file. No conflict.
+
+## 2026-04-06 — device.md
+
+**Change:** PS Analytics Database section rewritten from local DuckDB to MotherDuck Cloud. Old: local file at `~/shared/data/duckdb/ps-analytics.duckdb` with `query.py` CLI. New: cloud DB `md:ps_analytics` on MotherDuck (aws-us-east-1), MCP-only access, `ensure-schema.sql` guard, local .duckdb as cold backup only. Added 46 tables + 39 views inventory, key analytical views list, motherduck extension. Removed: Python `query.py` CLI references, VSS table details, old agent access patterns.
+
+**Cross-organ inconsistencies detected:**
+- `heart.md` (DuckDB Integration section, ~line 313): Still references `~/shared/data/duckdb/ps-analytics.duckdb` as the active DB path. Needs update to `md:ps_analytics` on MotherDuck. ⚠️ heart.md is karpathy-gated — route update through karpathy.
+- `spine.md` (Key Paths table, ~line 82): Still references `~/shared/data/duckdb/ps-analytics.duckdb` with old CLI access pattern (`python3 ~/shared/tools/data/query.py`). Needs update to MotherDuck cloud path and MCP-only access pattern.
+
+**Karpathy gate:** Not applicable (device.md is not gated). However, the required follow-up fix to heart.md IS gated — must route through karpathy.
