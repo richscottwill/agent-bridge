@@ -1,184 +1,207 @@
 {
   "version": "1.0",
   "last_scan": {
-    "timestamp": "2026-04-03T03:56:00Z",
+    "timestamp": "2026-04-06T14:30:00Z",
     "hook": "AM-1",
-    "status": "partial_success",
-    "signals_extracted": 12,
-    "channels_scanned": 6,
-    "proactive_queries_run": 4,
-    "errors": ["list_channels returned 302 — used search + batch_get_conversation_history with known channel IDs as fallback"]
+    "status": "success",
+    "signals_extracted": 5,
+    "channels_scanned": 14,
+    "proactive_queries_run": 3,
+    "proactive_queries_failed": 1,
+    "errors": ["brandoxy search returned invalid_auth — transient Slack API issue"]
   },
   "channels": {
     "C0993SRL6FQ": {
       "channel_name": "rsw-channel",
-      "last_message_ts": "1775139812.638539",
-      "last_scan_ts": "2026-04-03T03:56:00Z",
-      "messages_processed": 2,
+      "last_message_ts": "1775266292.891139",
+      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "messages_processed": 0,
       "signals_extracted": 0,
-      "notes": "Dashboard updates only"
+      "notes": "Not scanned this cycle (no unreads)"
     },
     "C044UG8MCSZ": {
       "channel_name": "ab-paid-search-global",
-      "last_message_ts": "1775165483.998439",
-      "last_scan_ts": "2026-04-03T03:56:00Z",
-      "messages_processed": 5,
-      "signals_extracted": 3,
-      "notes": "FX rates, OP2 budget, Tech/Data Q3 priorities, net pacing check for Richard"
+      "last_message_ts": "1775252171.890429",
+      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 0,
+      "notes": "No new messages today. ABMA SIM escalation from 4/3 cooling."
     },
     "C065KKT53DJ": {
       "channel_name": "ab-paid-search-abix",
-      "last_message_ts": "1775099135.133409",
-      "last_scan_ts": "2026-04-03T03:56:00Z",
-      "messages_processed": 30,
-      "signals_extracted": 3,
-      "notes": "Lena AU situation continued. Brandon handling redirect questions. Decision: Richard to leave it."
+      "last_message_ts": "1775251844.058209",
+      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 0,
+      "notes": "No new messages today. MX budget/R&O from 4/3 acknowledged."
     },
     "C05KTAAG14J": {
       "channel_name": "ab-paid-search-app",
-      "last_message_ts": "1775154403.215619",
-      "last_scan_ts": "2026-04-03T03:56:00Z",
-      "messages_processed": 9,
-      "signals_extracted": 3,
-      "notes": "Brandon asked about app totals for BK. Peter added Richard to Paid App group DM. PAM tracker update request from Peter."
-    },
-    "C06997HRWG0": {
-      "channel_name": "ab-outbound-marketing",
-      "last_message_ts": "1775156531.046569",
-      "last_scan_ts": "2026-04-03T03:56:00Z",
-      "messages_processed": 2,
+      "last_message_ts": "1775256118.064909",
+      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "messages_processed": 0,
       "signals_extracted": 1,
-      "notes": "Deepika transition announced. Zheng (zxzhou@) now Data Science lead for OCI."
+      "notes": "No new messages today. Brandon PAM budget @mention STILL UNANSWERED 3+ days."
     },
     "C06R6R19LG0": {
       "channel_name": "ab-paid-search-oci",
-      "last_message_ts": "1775155250.290299",
-      "last_scan_ts": "2026-04-03T03:56:00Z",
+      "last_message_ts": "1775464822.476189",
+      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "messages_processed": 2,
+      "signals_extracted": 2,
+      "notes": "Brandon OCI URL transform question. Yashasvi replied — no transform happening, asked for marketplace details. Thread open."
+    },
+    "C0A9HBB9H2B": {
+      "channel_name": "baloo-interest",
+      "last_message_ts": "1775236663.236349",
+      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 0,
+      "notes": "No new messages today. Session invites expected."
+    },
+    "C0A1JD8FCUV": {
+      "channel_name": "agentspaces-interest",
+      "last_message_ts": "1775483845.989329",
+      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "messages_processed": 11,
+      "signals_extracted": 0,
+      "notes": "Community support traffic only. No direct relevance."
+    },
+    "C08GJKNC3KM": {
+      "channel_name": "amazon-builder-genai-power-users",
+      "last_message_ts": "1775484479.638529",
+      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "messages_processed": 4,
+      "signals_extracted": 1,
+      "notes": "L5 insight: custom skills for oncall/MCM/sev2 + custom MCP servers. Kiro IDE vs CLI discussion."
+    },
+    "C01NQLC114J": {
+      "channel_name": "marketing_managers_all",
+      "last_message_ts": "1775453429.471279",
+      "last_scan_ts": "2026-04-06T14:30:00Z",
       "messages_processed": 1,
       "signals_extracted": 1,
-      "notes": "Deepika transition — zxzhou@ now Data Science support for OCI"
+      "notes": "SlideForge tool cross-post — AI slide deck generator. L5 tool signal."
+    },
+    "C06M7R2SKQW": {
+      "channel_name": "ask-ab-aryabot",
+      "last_message_ts": "1775483880.422319",
+      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "messages_processed": 4,
+      "signals_extracted": 0,
+      "notes": "Bot interaction traffic. AB data queries active."
+    },
+    "C096H6QNW6M": {
+      "channel_name": "bedrock-agentcore-interest",
+      "last_message_ts": "1775473443.743369",
+      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "messages_processed": 1,
+      "signals_extracted": 0,
+      "notes": "Image gen question. No direct relevance."
+    },
+    "C096T4SK3EY": {
+      "channel_name": "andes-workbench-interest",
+      "last_message_ts": "1775478838.894299",
+      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "messages_processed": 4,
+      "signals_extracted": 0,
+      "notes": "Platform support traffic — Glue ARN errors, permissions."
+    },
+    "C03H1S5SYP4": {
+      "channel_name": "ask-ab-data",
+      "last_message_ts": null,
+      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 0,
+      "notes": "No new messages today."
+    },
+    "C018126JFSN": {
+      "channel_name": "homeowners",
+      "last_message_ts": "1775332219.906969",
+      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 0,
+      "notes": "Personal channel. Light scan — no work signals."
     }
   },
   "dm_conversations": {
     "D044JAKR8RZ": {
       "user_name": "Brandon Munday",
       "last_message_ts": "1775162557.793439",
-      "last_scan_ts": "2026-04-03T03:56:00Z",
-      "notes": "App PO update needed. Lena quotes discussion. -$70k underspend Q1."
+      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "notes": "Not scanned this cycle (no unreads in channel list)."
     }
   },
   "hot_topics": {
     "active": [
       {
+        "topic": "OCI URL Transform / Ref Tag Integrity",
+        "first_seen": "2026-04-06T03:30:00Z",
+        "last_seen": "2026-04-06T08:40:00Z",
+        "channels": ["C06R6R19LG0"],
+        "key_participants": ["brandoxy", "ychowta"],
+        "signal_count": 3,
+        "status": "active",
+        "notes": "Yashasvi says no transform. Brandon needs to reply with marketplace/log details."
+      },
+      {
+        "topic": "PAM Budget Availability",
+        "first_seen": "2026-04-03T22:41:00Z",
+        "last_seen": "2026-04-03T22:41:00Z",
+        "channels": ["C05KTAAG14J"],
+        "key_participants": ["brandoxy"],
+        "signal_count": 1,
+        "status": "stale",
+        "notes": "3+ days unanswered. Richard needs to respond."
+      },
+      {
+        "topic": "MX Budget / R&O Process Change",
+        "first_seen": "2026-04-03T19:46:00Z",
+        "last_seen": "2026-04-03T21:30:00Z",
+        "channels": ["C065KKT53DJ"],
+        "key_participants": ["yunchu", "brandoxy", "prichwil"],
+        "signal_count": 3,
+        "status": "active",
+        "notes": "Richard acknowledged via +1. No new activity."
+      },
+      {
+        "topic": "Baloo Early Access",
+        "first_seen": "2026-04-03T17:17:00Z",
+        "last_seen": "2026-04-03T17:17:00Z",
+        "channels": ["C0A9HBB9H2B"],
+        "key_participants": ["kpantham"],
+        "signal_count": 1,
+        "status": "active",
+        "notes": "Session invites expected by 4/6."
+      }
+    ],
+    "cooled": [
+      {
+        "topic": "ABMA SIM Escalation Protocol",
+        "first_seen": "2026-04-03T21:36:00Z",
+        "last_seen": "2026-04-03T21:36:00Z",
+        "status": "cooling",
+        "notes": "No new activity. Appears resolved."
+      },
+      {
         "topic": "Q1 Closing / Budget Actuals",
         "first_seen": "2026-04-02T03:00:00Z",
-        "last_seen": "2026-04-03T03:56:00Z",
-        "channels": ["C044UG8MCSZ", "C05KTAAG14J", "C0AQE73USF5"],
-        "key_participants": ["brandoxy", "yunchu", "bccho", "prichwil"],
-        "signal_count": 5,
-        "status": "active"
+        "last_seen": "2026-04-03T21:30:00Z",
+        "status": "cooled"
       },
       {
         "topic": "AU Lena CPA / Redirect Situation",
         "first_seen": "2026-04-01T17:00:00Z",
         "last_seen": "2026-04-02T03:05:00Z",
-        "channels": ["C065KKT53DJ"],
-        "key_participants": ["brandoxy", "yunchu", "prichwil"],
-        "signal_count": 4,
-        "status": "active"
-      },
-      {
-        "topic": "Deepika Transition / Data Science Reorg",
-        "first_seen": "2026-04-02T18:25:00Z",
-        "last_seen": "2026-04-02T18:40:00Z",
-        "channels": ["C06997HRWG0", "C06R6R19LG0"],
-        "key_participants": ["brandoxy"],
-        "signal_count": 2,
-        "status": "new"
-      },
-      {
-        "topic": "Kate AI Channel Launch",
-        "first_seen": "2026-04-02T23:29:00Z",
-        "last_seen": "2026-04-02T23:32:00Z",
-        "channels": ["C0ANDU5LH47"],
-        "key_participants": ["kataxt"],
-        "signal_count": 7,
-        "status": "new"
-      },
-      {
-        "topic": "OCI WW Launch (JP/EU3)",
-        "first_seen": "2026-03-31T07:00:00Z",
-        "last_seen": "2026-04-02T18:56:00Z",
-        "channels": ["C044UGEJ76Z", "C06R6R19LG0", "C044UG8MCSZ"],
-        "key_participants": ["brandoxy", "aditthk", "staceygu"],
-        "signal_count": 4,
-        "status": "active"
-      }
-    ],
-    "cooled": [
-      {
-        "topic": "Enhanced Match / LiveRamp EU",
-        "first_seen": "2026-03-30T21:54:00Z",
-        "last_seen": "2026-03-31T13:44:00Z",
-        "status": "cooled"
-      },
-      {
-        "topic": "F90 Legal Approval + Implementation",
-        "first_seen": "2026-03-30T16:58:00Z",
-        "last_seen": "2026-03-30T16:58:00Z",
         "status": "cooled"
       }
     ]
   },
-  "discovered_channels": [
-    {
-      "channel_id": "C0ANDU5LH47",
-      "channel_name": "ab-marketing-ai",
-      "discovered": "2026-04-03T03:56:00Z",
-      "action": "Recommend Richard join — Kate-created AI channel",
-      "reason": "Kate (L8) launched marketing-dedicated AI channel. 7 messages. Level 4/5 alignment."
-    }
-  ],
   "dashboard": {
     "implementation": "pinned_message",
     "canvas_supported": false,
     "message_ts": "1775138648.820659",
     "channel_id": "C0993SRL6FQ",
-    "last_updated": "2026-04-02T14:04:08Z"
-  },
-  "tool_invocation_log": [
-    {
-      "timestamp": "2026-04-03T03:56:00Z",
-      "tool": "search",
-      "query": "prichwil after:2026-04-01",
-      "rationale": "Permanent — self mentions",
-      "result": "success — 3 matches, 3 actionable"
-    },
-    {
-      "timestamp": "2026-04-03T03:56:01Z",
-      "tool": "search",
-      "query": "from:@brandoxy after:2026-04-01",
-      "rationale": "Permanent — manager messages",
-      "result": "success — 18 matches, 8 actionable"
-    },
-    {
-      "timestamp": "2026-04-03T03:56:02Z",
-      "tool": "search",
-      "query": "from:@kataxt after:2026-04-01",
-      "rationale": "Permanent — skip-level director",
-      "result": "success — 7 matches, 1 actionable (new AI channel)"
-    },
-    {
-      "timestamp": "2026-04-03T03:56:03Z",
-      "tool": "batch_get_conversation_history",
-      "channel": "C0993SRL6FQ,C044UG8MCSZ,C065KKT53DJ,C05KTAAG14J",
-      "result": "success"
-    },
-    {
-      "timestamp": "2026-04-03T03:56:04Z",
-      "tool": "email_folders",
-      "channel": "inbox",
-      "result": "success — 30 conversations scanned"
-    }
-  ]
+    "last_updated": "2026-04-04T01:31:32Z"
+  }
 }

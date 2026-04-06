@@ -1,126 +1,54 @@
-# Asana Digest — 2026-04-04 (Saturday)
+# Asana Digest — 2026-04-06
 
-Scan time: 2026-04-04T07:00:00Z
-Total incomplete tasks: 96
-Total overdue: 18+
-Tasks with Priority_RW = Today: 10
-Tasks needing triage (no Routine): 1
+Total incomplete: 109 | Overdue: 12 | Today priority: 9 | Near-due (0-2d): 6
 
----
+## By Routine
+Sweep: 7 | Core: 7 | Engine Room: 13 | Admin: 1 | Wiki: 43 | Unset: 25
 
-## 🧹 Sweep (Low-friction) — Cap: 5
+## Overdue Tasks
+| Task | Due | Days Overdue | Routine | Priority |
+|------|-----|-------------|---------|----------|
+| Create FR accounts | 2026-02-20 | 45d | Engine Room | Not urgent |
+| Source DE/IT/ES | 2026-02-20 | 45d | Engine Room | Not urgent |
+| MX Automotive page | 2026-03-20 | 17d | Engine Room | Urgent |
+| Duplicate Beauty and Auto page for MX | 2026-03-23 | 14d | (unset) | (unset) |
+| Look over AU landing page switch | 2026-03-25 | 12d | Engine Room | Urgent |
+| Email overlay WW rollout/testing | 2026-03-27 | 10d | Core | Urgent |
+| Paid App | 2026-03-31 | 6d | Engine Room | Today |
+| MCS landing page optimization P1 | 2026-03-31 | 6d | (unset) | (unset) |
+| Testing Document for Kate | 2026-04-01 | 5d | Core | Urgent |
+| MBR callout | 2026-04-02 | 4d | Admin | Today |
+| Respond to Lena — AU LP URL analysis + CPA methodology | 2026-04-03 | 3d | Sweep | Urgent |
+| Provide Lorena Q2 expected spend for MX PO | 2026-04-04 | 2d | Sweep | Urgent |
 
-### Priority: Today
-| GID | Name | Due | Project | Status |
-|-----|------|-----|---------|--------|
-| 1213923298187459 | Refmarker mapping audit PoC — AU | 4/7 | AU | Begin 4/6 |
-| 1213917772329115 | Provide Lorena Q2 expected spend for MX PO | **4/4 (TODAY)** | MX | 🔴 DUE TODAY |
-| 1213923128960832 | Prime Day Creative Phase 4 inputs — Smartsheets | **4/3 (OVERDUE 1d)** | — | 🔴 OVERDUE |
-| 1213917923114330 | Share ENG max budget calculation file with Andrew | **4/4 (TODAY)** | — | Urgent, carried fwd |
+## Today Tasks
 
-### Priority: Urgent
-| GID | Name | Due | Project | Status |
-|-----|------|-----|---------|--------|
-| 1213917888972148 | Reply to Stacey — CA exclusion from Polaris 4/7 | **4/3 (OVERDUE 1d)** | — | Stacey waiting 3d |
-| 1213917967984980 | Respond to Lena — AU LP URL analysis + CPA | **4/3 (OVERDUE 1d)** | AU | Lena 3 Qs unanswered |
-| 1213546434830000 | ie%CCP calc - insert MX spend/regs before 9th | **4/3 (OVERDUE 1d)** | — | Monthly recurring |
-| 1213828814410247 | Mondays - Write into EU SSR Acq Asana | **3/30 (OVERDUE 5d)** | — | Weekly recurring |
+### 🧹 Sweep (4)
+- Reply to Brandon — PAM budget needs assessment (due 4/6)
+- Update Kingpin for MX (due 4/7) ⚠️ Important, blocked by Andes data
+- Refmarker mapping audit PoC — AU (due 4/7)
+- AU meetings - Agenda (due 4/7)
 
-### Priority: Not urgent
-| GID | Name | Due | Project | Status |
-|-----|------|-----|---------|--------|
-| 1213917639154050 | AU meetings - Agenda | 4/7 | AU | Prep for Mon |
-| 1213828989831378 | Bi-monthly Flash | 5/21 | Paid App, AU, MX | Future |
+### 🎯 Core (1)
+- WW weblab dial-up (Richard) (due 4/7) — coordinate with Alex/Vijeth
 
----
+### ⚙️ Engine Room (1)
+- Weekly Reporting - Global WBR sheet (due 4/7) ⚠️ Important
 
-## 🎯 Core Two (Deep Work) — Cap: 4
+### 📋 Admin (1)
+- MBR callout (due 4/2) ⚠️ 4d OVERDUE, Important
+- Monthly - Confirm actual budgets (due 5/5) ⚠️ Important
 
-### Priority: Urgent
-| GID | Name | Due | Project | Status |
-|-----|------|-----|---------|--------|
-| 1213341921686564 | Testing Document for Kate | **4/1 (OVERDUE 3d)** | WW Testing | ⚡ THE HARD THING |
+### ⚠️ Stale (7+ days overdue)
+- Create FR accounts (45d) — decision needed: do, delegate, or kill
+- Source DE/IT/ES (45d) — decision needed: do, delegate, or kill
+- MX Automotive page (17d) — blocked on Vijeth footer
+- Duplicate Beauty and Auto page for MX (14d) — Vijeth/MCS task
+- Look over AU landing page switch (12d) — post-Polaris switch analysis
+- Email overlay WW rollout/testing (10d) — Core priority
 
-### Priority: Today
-| GID | Name | Due | Project | Status |
-|-----|------|-----|---------|--------|
-| 1213230198995937 | WW redirect - Adobe Ad Cloud reporting | **3/9 (OVERDUE 26d)** | — | 🔴 STALE |
-
-### Priority: Not urgent
-| GID | Name | Due | Project | Status |
-|-----|------|-----|---------|--------|
-| 1213764961716427 | WW weblab dial-up (Richard) | 4/7 | WW Testing | Begin 4/6 |
-
----
-
-## ⚙️ Engine Room (Excel and Google ads) — Cap: 6
-
-### Priority: Today
-| GID | Name | Due | Project | Status |
-|-----|------|-----|---------|--------|
-| 1213917691089036 | Refmarker mapping audit PoC — AU | 4/10 | AU | Brandon + Lena watching |
-
-### Priority: Urgent
-| GID | Name | Due | Project | Status |
-|-----|------|-----|---------|--------|
-| 1213917832711157 | Verify MX/AU net pacing against OP2 numbers | 4/7 | — | Yun flagged |
-| 1213839064321460 | Weekly Reporting - Global WBR sheet | **3/30 (OVERDUE 5d)** | Paid App, AU, MX | Weekly recurring |
-| 1213072707685834 | MX Automotive page | **3/20 (OVERDUE 15d)** | MX | Blocked on Vijeth |
-
-### Priority: Not urgent
-| GID | Name | Due | Project | Status |
-|-----|------|-----|---------|--------|
-| 1213690904654138 | Monthly: Individual Goals update | 4/10 | — | Important |
-| 1213730974261148 | Make changes to AU/MX/PAM for the week | **3/18 (OVERDUE 17d)** | — | Weekly recurring |
-
----
-
-## 📋 Admin (Wind-down) — Cap: 3
-
-### Priority: Today
-| GID | Name | Due | Project | Status |
-|-----|------|-----|---------|--------|
-| 1213917691068688 | Send AU team invoice for prev month | 5/2 | — | Monthly |
-| 1212808474749819 | Raise rest of year PO for PAM US | **3/1 (OVERDUE 34d)** | Paid App | 🔴 STALE |
-| 1213560614815911 | PAM R&O | **3/10 (OVERDUE 25d)** | — | 🔴 STALE |
-| 1213637505601024 | R&O for MX/AU | **3/23 (OVERDUE 12d)** | — | 🔴 STALE |
-| 1213530917597503 | Monthly - Confirm actual budgets | **4/1 (OVERDUE 3d)** | Paid App | Finance actuals |
-
-### Priority: Urgent
-| GID | Name | Due | Project | Status |
-|-----|------|-----|---------|--------|
-| 1213720297606981 | Flash topics due today | **3/17 (OVERDUE 18d)** | — | 🔴 STALE |
-| 1213637505601028 | MX/AU confirm budgets | **3/25 (OVERDUE 10d)** | — | Confirm with BK Cho |
-
----
-
-## 📦 Backlog (No Routine set) — Needs Triage
-
-| GID | Name | Due | Project | Priority_RW |
-|-----|------|-----|---------|-------------|
-| 1213917923727783 | Testing Approach & Year Ahead (Kate doc) | 4/14 | ABPS AI - Content | (none) — Important |
-
-*Note: 60+ additional tasks in backlog without Routine values — mostly ABPS AI Content/Build project tasks, portfolio project tasks, and long-term items. See full task list for details.*
-
----
-
-## Overdue Summary (due_on < 2026-04-04)
-
-| Days Overdue | GID | Name | Routine |
-|-------------|-----|------|---------|
-| 34d | 1212808474749819 | Raise rest of year PO for PAM US | Admin |
-| 26d | 1213230198995937 | WW redirect - Adobe Ad Cloud reporting | Core |
-| 25d | 1213560614815911 | PAM R&O | Admin |
-| 18d | 1213720297606981 | Flash topics due today | Admin |
-| 17d | 1213730974261148 | Make changes to AU/MX/PAM for the week | Engine Room |
-| 15d | 1213072707685834 | MX Automotive page | Engine Room |
-| 12d | 1213637505601024 | R&O for MX/AU | Admin |
-| 10d | 1213637505601028 | MX/AU confirm budgets | Admin |
-| 5d | 1213839064321460 | Weekly Reporting - Global WBR sheet | Engine Room |
-| 5d | 1213828814410247 | Mondays - Write into EU SSR Acq Asana | Sweep |
-| 3d | 1213341921686564 | Testing Document for Kate | Core |
-| 3d | 1213530917597503 | Monthly - Confirm actual budgets | Admin |
-| 1d | 1213917888972148 | Reply to Stacey — CA exclusion | Sweep |
-| 1d | 1213917967984980 | Respond to Lena — AU LP URL | Sweep |
-| 1d | 1213546434830000 | ie%CCP calc - insert MX spend/regs | Sweep |
-| 1d | 1213923128960832 | Prime Day Creative Phase 4 inputs | Sweep |
+## DuckDB Sync Stats
+- Tasks synced to ps_analytics.asana.asana_tasks: 53
+- Daily snapshot written to asana_task_history
+- 4 tasks returned 403 (restricted access)
+- Sync timestamp: 2026-04-06

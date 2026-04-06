@@ -3,6 +3,9 @@
     "aws-outlook-mcp": {
       "command": "aws-outlook-mcp",
       "args": [],
+      "env": {
+        "OUTLOOK_MCP_ENABLE_WRITES": "true"
+      },
       "autoApprove": [
         "*"
       ],

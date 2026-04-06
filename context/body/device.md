@@ -4,7 +4,7 @@
 
 *Operating principle: Routine as liberation. Every delegation, template, and automation here exists to eliminate a decision Richard was making repeatedly. The test for a new device function: "Does this remove a recurring decision?" If yes, build it. If it just moves the decision, skip it.*
 
-Last updated: 2026-04-05 (DuckDB FTS + VSS extensions installed, Parquet exports verified, Tool Factory cleaned)
+Last updated: 2026-04-06 (DuckDB schema migration: 8 schemas replacing flat main, PS analytics data model built, steering file added)
 
 ---
 
@@ -73,14 +73,23 @@ These are live. They execute without Richard thinking.
 - **Local (Windows):** `c:/Users/prichwil/OneDrive - amazon.com/Artifacts/wiki-sync`
 
 ### PS Analytics Database (DuckDB → MotherDuck Cloud)
-- **What it does:** Persistent cloud analytical DB for all structured PS data and system telemetry. 46 tables + 39 views covering: market metrics (10 markets, Brand/NB), Slack intelligence, Asana state mirror, meeting analytics, experiment tracking (Bayesian priors, outcomes, convergence), nervous system time series (patterns, delegations, decisions, communication), Five Levels tracking, projections/forecasting, pipeline observability, body health metrics, wiki pipeline, and signal intelligence.
-- **Cloud DB:** `md:ps_analytics` on MotherDuck (aws-us-east-1). Persistent — survives container recycles.
+- **What it does:** Persistent cloud analytical DB for all structured PS data and system telemetry. 8 schemas, 55 tables + 34 views.
+- **Cloud DB:** `md:ps_analytics` on MotherDuck (aws-us-east-1). Persistent — survives container recycles. `USE ps_analytics` is set.
 - **MCP access:** DuckDB MCP Server (`execute_query`, `list_tables`, `list_columns`). Config: `.kiro/settings/mcp.json` with MOTHERDUCK_TOKEN env var.
-- **Schema guard:** `~/shared/tools/data/ensure-schema.sql` — idempotent CREATE IF NOT EXISTS for all tables. AM-Auto runs verification at startup.
+- **Schema layout (migrated 2026-04-06):**
+  - `asana` — task management: asana_tasks, asana_task_history, asana_audit_log, daily_tracker, recurring_task_state, recurring_tasks (6 tables, 8 views)
+  - `signals` — cross-channel intelligence: signal_tracker, unified_signals, slack_messages, slack_people, slack_threads, slack_topics, signal_task_log (7 tables, 8 views)
+  - `karpathy` — body optimization: autoresearch_experiments, autoresearch_organ_health, autoresearch_priors, karpathy_experiment_log, experiment_outcomes, body_size_history, organ_word_counts (7 tables, 7 views)
+  - `ns` — nervous system loops: ns_communication, ns_decisions, ns_delegations, ns_loop_snapshots, ns_patterns, decisions (6 tables, 2 views)
+  - `ops` — system operations: hook_executions, workflow_executions, session_log, intake_metrics, data_freshness, builder_cache (6 tables, 2 views)
+  - `wiki` — publishing pipeline: wiki_pipeline_runs, publication_registry (2 tables, 1 view)
+  - `ps` — **Paid Search / Acquisition analytics** (WBR/MBR/QBR/annual): metrics, targets, forecasts, pacing, accounts, account_metrics, dashboard_uploads, markets, channels, change_log, competitive_signals, projections, health_alerts (13 tables, 5 views)
+  - `main` — personal productivity: five_levels_weekly, l1_streak, meeting_analytics, meeting_highlights, meeting_series, relationship_activity, content_embeddings, experiments (8 tables, 1 view)
+- **CRITICAL: Always use schema-qualified names** (e.g., `asana.asana_tasks`, not just `asana_tasks`). See steering file `duckdb-schema.md` for full reference.
+- **Schema guard:** `~/shared/tools/data/ensure-schema.sql` — needs update to match new schema layout.
 - **Local backup:** `~/shared/tools/data/ps-analytics.duckdb` (pre-migration snapshot, not actively written to).
 - **Extensions:** core_functions, icu, json, parquet, jemalloc, fts (full-text search), vss (vector similarity search), motherduck.
-- **FTS index:** `slack_messages` table indexed on full_text, text_preview, author_name, channel_name (BM25 ranking).
-- **Key analytical views:** prior_convergence (Bayesian budget signals), organ_size_accuracy (size-accuracy curve), projection_accuracy (forecast scoring), experiment_confirmation_rates (lagged eval), communication_trend (Loop 9), five_levels_heatmap, task_velocity, signal_decay_curve, workflow_reliability, hook_reliability, wiki_throughput, tracker_trend, audit_daily_summary, recurring_tasks_due.
+- **FTS index:** `signals.slack_messages` — needs rebuild after schema migration (FTS was on old main.slack_messages).
 - **Portability:** MotherDuck accessible from any DuckDB client with the token. Local .duckdb file as cold backup. Parquet exports at `~/shared/data/exports/`.
 
 ---

@@ -1,0 +1,1578 @@
+[
+  {
+    "gid": "1213915200699097",
+    "assignee": {
+      "gid": "1211524640973445"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1211898465243458",
+        "enum_value": null,
+        "name": "Status C-week",
+        "display_value": null
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": null,
+        "text_value": null
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": null
+      }
+    ],
+    "due_on": "2026-04-30",
+    "memberships": [
+      {
+        "section": {
+          "gid": "1206020650712112",
+          "name": "Backlog"
+        }
+      },
+      {
+        "section": {
+          "gid": "1206497184489067",
+          "name": "WW Doc Inputs"
+        }
+      }
+    ],
+    "name": "JP Polaris Google Experiment",
+    "notes": "Task Title: JP Polaris Brand Page Google Experiment Live\nDescription:\n\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd Polaris Update: Japan Brand Page Test Now Live\nWe have successfully launched the JP Polaris Brand page test as a Google Experiment with a 70:30 traffic split (30% Treatment group).\nTest Details:\n    Market: Japan (JP)\n    Split: 70% Control / 30% Treatment\n    Platform: Google Experiment\n    Status: Live\nJP Polaris Page URL: https://business.amazon.co.jp/ja/cp/ps-brand\nDate Live: 04/02/2026 CT 12 PM\n                  04/03/2026 JP 3 AM\n\n",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578874/task/1213915200699097",
+    "projects": [
+      {
+        "gid": "1205997667578874",
+        "name": "ABPS - JP"
+      },
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      }
+    ],
+    "start_on": null
+  },
+  {
+    "gid": "1213764961716427",
+    "assignee": {
+      "gid": "1212732742544167"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1212905889837829",
+        "enum_value": {
+          "gid": "1212905889837830",
+          "name": "Today"
+        },
+        "name": "Priority_RW",
+        "display_value": "Today"
+      },
+      {
+        "gid": "1212905889837865",
+        "enum_value": null,
+        "name": "Importance_RW",
+        "display_value": null
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": null,
+        "text_value": null
+      },
+      {
+        "gid": "1213440376528542",
+        "name": "Begin-Date_RW",
+        "display_value": "2026-04-06T00:00:00.000Z",
+        "date_value": {
+          "date": "2026-04-06",
+          "date_time": null
+        }
+      },
+      {
+        "gid": "1213608836755502",
+        "enum_value": {
+          "gid": "1213608836755504",
+          "name": "Core Two (Deep Work)"
+        },
+        "name": "Routine_RW",
+        "display_value": "Core Two (Deep Work)"
+      },
+      {
+        "gid": "1213915851848087",
+        "name": "Kiro_RW",
+        "display_value": "4/4: Due 4/7. Begin 4/6. WW Polaris weblab dial-up across AU, MX, JP, DE, FR. Richard's piece of the rollout.",
+        "text_value": "4/4: Due 4/7. Begin 4/6. WW Polaris weblab dial-up across AU, MX, JP, DE, FR. Richard's piece of the rollout."
+      },
+      {
+        "gid": "1213921400039514",
+        "name": "Next-action_RW",
+        "display_value": "Coordinate with Alex/Vijeth on weblab dial-up settings for each market before 4/7 go-live",
+        "text_value": "Coordinate with Alex/Vijeth on weblab dial-up settings for each market before 4/7 go-live"
+      },
+      {
+        "gid": "1211898465243458",
+        "enum_value": null,
+        "name": "Status C-week",
+        "display_value": null
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": null
+      }
+    ],
+    "due_on": "2026-04-07",
+    "memberships": [
+      {
+        "section": {
+          "gid": "1206497184489067",
+          "name": "WW Doc Inputs"
+        }
+      }
+    ],
+    "name": "WW weblab dial-up (Richard)",
+    "notes": "OCI is coming up (unrelated, but time intensive) \nStart date: dependent on when pages are ready; early April, 6-7. \nWeblab Markets: AU, MX, JP, DE, FR\nWeblab ticket: https://taskei.amazon.dev/tasks/MCS-3004",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578893/task/1213764961716427",
+    "projects": [
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      }
+    ],
+    "start_on": null
+  },
+  {
+    "gid": "1213279426032002",
+    "assignee": {
+      "gid": "1208504441751632"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1211898465243458",
+        "enum_value": null,
+        "name": "Status C-week",
+        "display_value": null
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": null,
+        "text_value": null
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": null
+      }
+    ],
+    "due_on": "2026-08-31",
+    "memberships": [
+      {
+        "section": {
+          "gid": "1213279426031998",
+          "name": "Untitled section"
+        }
+      },
+      {
+        "section": {
+          "gid": "1206497184489067",
+          "name": "WW Doc Inputs"
+        }
+      }
+    ],
+    "name": "Baloo Testing - US",
+    "notes": "Launching Baloo testing on PS Text Ads. Vijays' team is tapping a readiness date of 8/31. 2026 is scoped for US Only\n\nKingpin: https://kingpin.amazon.com/#/items/1089298",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578893/task/1213279426032002",
+    "projects": [
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      },
+      {
+        "gid": "1213279426031997",
+        "name": "PS-Owned Global Testing"
+      }
+    ],
+    "start_on": null
+  },
+  {
+    "gid": "1213279426032000",
+    "assignee": {
+      "gid": "1208504441751632"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1211898465243458",
+        "enum_value": null,
+        "name": "Status C-week",
+        "display_value": null
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": null,
+        "text_value": null
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": null
+      }
+    ],
+    "due_on": null,
+    "memberships": [
+      {
+        "section": {
+          "gid": "1213279426031998",
+          "name": "Untitled section"
+        }
+      },
+      {
+        "section": {
+          "gid": "1206497184489067",
+          "name": "WW Doc Inputs"
+        }
+      }
+    ],
+    "name": "MCS Carousel Testing",
+    "notes": "Re-test MCS carousel, including pricing.",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578893/task/1213279426032000",
+    "projects": [
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      },
+      {
+        "gid": "1213279426031997",
+        "name": "PS-Owned Global Testing"
+      }
+    ],
+    "start_on": null
+  },
+  {
+    "gid": "1213235338214791",
+    "assignee": {
+      "gid": "1212732742544167"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1212905889837829",
+        "enum_value": {
+          "gid": "1212905889837831",
+          "name": "Urgent"
+        },
+        "name": "Priority_RW",
+        "display_value": "Urgent"
+      },
+      {
+        "gid": "1212905889837865",
+        "enum_value": {
+          "gid": "1212905889837866",
+          "name": "Important"
+        },
+        "name": "Importance_RW",
+        "display_value": "Important"
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": null,
+        "text_value": null
+      },
+      {
+        "gid": "1213440376528542",
+        "name": "Begin-Date_RW",
+        "display_value": null,
+        "date_value": null
+      },
+      {
+        "gid": "1213608836755502",
+        "enum_value": {
+          "gid": "1213608836755504",
+          "name": "Core Two (Deep Work)"
+        },
+        "name": "Routine_RW",
+        "display_value": "Core Two (Deep Work)"
+      },
+      {
+        "gid": "1213915851848087",
+        "name": "Kiro_RW",
+        "display_value": "4/4: Core. Urgent. Important. AB Customer Redirect \ufffd\ufffd\ufffd redirecting logged-in AB customers from NB ads to a.com. WW rollout. SIM: MCS-1840, MCM: MCM-144193956.",
+        "text_value": "4/4: Core. Urgent. Important. AB Customer Redirect \ufffd\ufffd\ufffd redirecting logged-in AB customers from NB ads to a.com. WW rollout. SIM: MCS-1840, MCM: MCM-144193956."
+      },
+      {
+        "gid": "1213921400039514",
+        "name": "Next-action_RW",
+        "display_value": "Check redirect mapping Quip doc status, set a due date, define scope for remaining markets",
+        "text_value": "Check redirect mapping Quip doc status, set a due date, define scope for remaining markets"
+      },
+      {
+        "gid": "1211898465243458",
+        "enum_value": null,
+        "name": "Status C-week",
+        "display_value": null
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": null
+      },
+      {
+        "gid": "1213235373427479",
+        "enum_value": null,
+        "name": "Status C-week",
+        "display_value": null
+      },
+      {
+        "gid": "1211898253103663",
+        "name": "Impact (EU Reg)",
+        "display_value": null
+      },
+      {
+        "gid": "1212629048694011",
+        "name": "Marketplace/Region",
+        "display_value": null
+      },
+      {
+        "gid": "1212663856382198",
+        "enum_value": null,
+        "name": "ATL/BTL?",
+        "display_value": null
+      },
+      {
+        "gid": "1203721406585927",
+        "name": "Tech PM",
+        "display_value": ""
+      },
+      {
+        "gid": "1211349736814429",
+        "name": "OPS Impact",
+        "display_value": null
+      }
+    ],
+    "due_on": null,
+    "memberships": [
+      {
+        "section": {
+          "gid": "1206497184489067",
+          "name": "WW Doc Inputs"
+        }
+      },
+      {
+        "section": {
+          "gid": "1213235373781333",
+          "name": "Promotions"
+        }
+      }
+    ],
+    "name": "AB Customer Redirect",
+    "notes": "Redirecting logged-in AB customers from NonBrand ads directly to https://A.com (bypassing MCS). This was tested in 2025, and is now being rolled out WW \n\nPages for application: https://quip-amazon.com/DynAANZqukJp/PS-Customer-Redirect-Mapping\nSIM Req: https://issues.amazon.com/MCS-1840\nMCM: https://mcm.amazon.dev/cms/MCM-144193956",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578893/task/1213235338214791",
+    "projects": [
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      },
+      {
+        "gid": "1213235338214787",
+        "name": "PS ENG"
+      }
+    ],
+    "start_on": null
+  },
+  {
+    "gid": "1212760973200434",
+    "assignee": {
+      "gid": "1212732742544167"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1212905889837829",
+        "enum_value": {
+          "gid": "1212905889837833",
+          "name": "Not urgent"
+        },
+        "name": "Priority_RW",
+        "display_value": "Not urgent"
+      },
+      {
+        "gid": "1212905889837865",
+        "enum_value": {
+          "gid": "1212905889837866",
+          "name": "Important"
+        },
+        "name": "Importance_RW",
+        "display_value": "Important"
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": null,
+        "text_value": null
+      },
+      {
+        "gid": "1213440376528542",
+        "name": "Begin-Date_RW",
+        "display_value": null,
+        "date_value": null
+      },
+      {
+        "gid": "1213608836755502",
+        "enum_value": {
+          "gid": "1213608836755504",
+          "name": "Core Two (Deep Work)"
+        },
+        "name": "Routine_RW",
+        "display_value": "Core Two (Deep Work)"
+      },
+      {
+        "gid": "1213915851848087",
+        "name": "Kiro_RW",
+        "display_value": "4/4: F90 lifecycle program. 9 subtasks (audience request\ufffd\ufffd\ufffdmedia\ufffd\ufffd\ufffdenhanced match\ufffd\ufffd\ufffdGAds chain). Legal approved 3/30. Blocked on media team + tech implementation. Due 4/30. L2 Testing. Cross-deps: Paid Media Legal, Enhanced Match Legal, audience pipeline. Key people: Abdul (legal), media team, tech PM.",
+        "text_value": "4/4: F90 lifecycle program. 9 subtasks (audience request\ufffd\ufffd\ufffdmedia\ufffd\ufffd\ufffdenhanced match\ufffd\ufffd\ufffdGAds chain). Legal approved 3/30. Blocked on media team + tech implementation. Due 4/30. L2 Testing. Cross-deps: Paid Media Legal, Enhanced Match Legal, audience pipeline. Key people: Abdul (legal), media team, tech PM."
+      },
+      {
+        "gid": "1213921400039514",
+        "name": "Next-action_RW",
+        "display_value": "Coordinate with media team on audience request implementation \ufffd\ufffd\ufffd legal is cleared, execution chain starts here",
+        "text_value": "Coordinate with media team on audience request implementation \ufffd\ufffd\ufffd legal is cleared, execution chain starts here"
+      },
+      {
+        "gid": "1211898465243458",
+        "enum_value": null,
+        "name": "Status C-week",
+        "display_value": null
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": null
+      },
+      {
+        "gid": "1213235373427479",
+        "enum_value": null,
+        "name": "Status C-week",
+        "display_value": null
+      },
+      {
+        "gid": "1211898253103663",
+        "name": "Impact (EU Reg)",
+        "display_value": null
+      },
+      {
+        "gid": "1212629048694011",
+        "name": "Marketplace/Region",
+        "display_value": null
+      },
+      {
+        "gid": "1212663856382198",
+        "enum_value": null,
+        "name": "ATL/BTL?",
+        "display_value": null
+      },
+      {
+        "gid": "1203721406585927",
+        "name": "Tech PM",
+        "display_value": ""
+      },
+      {
+        "gid": "1211349736814429",
+        "name": "OPS Impact",
+        "display_value": null
+      },
+      {
+        "gid": "1200200115836714",
+        "enum_value": {
+          "gid": "1200200115840969",
+          "name": "Important/Non Urgent"
+        },
+        "name": "Important/Urgent",
+        "display_value": "Important/Non Urgent"
+      },
+      {
+        "gid": "1207564683818996",
+        "name": "Time Left",
+        "display_value": "0h 00m"
+      }
+    ],
+    "due_on": "2026-04-30",
+    "memberships": [
+      {
+        "section": {
+          "gid": "1205997667578894",
+          "name": "Prioritized"
+        }
+      },
+      {
+        "section": {
+          "gid": "1213235373781333",
+          "name": "Promotions"
+        }
+      }
+    ],
+    "name": "F90",
+    "notes": "Launch F90 DG ads \n\nLegal Owner: Brandon\nTech Owner: Richard\nLaunch/Creative Owner: Andrew\n\n2/23: We are now red to a 3/30 ETA. Following Media approval (not yet approved), Tech will need 4 weeks to create the file.  ",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578893/task/1212760973200434",
+    "projects": [
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      },
+      {
+        "gid": "1213235338214787",
+        "name": "PS ENG"
+      }
+    ],
+    "start_on": null
+  },
+  {
+    "gid": "1213341921686564",
+    "assignee": {
+      "gid": "1212732742544167"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1212905889837829",
+        "enum_value": {
+          "gid": "1212905889837831",
+          "name": "Urgent"
+        },
+        "name": "Priority_RW",
+        "display_value": "Urgent"
+      },
+      {
+        "gid": "1212905889837865",
+        "enum_value": {
+          "gid": "1212905889837866",
+          "name": "Important"
+        },
+        "name": "Importance_RW",
+        "display_value": "Important"
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": null,
+        "text_value": null
+      },
+      {
+        "gid": "1213440376528542",
+        "name": "Begin-Date_RW",
+        "display_value": "2026-02-26T00:00:00.000Z",
+        "date_value": {
+          "date": "2026-02-26",
+          "date_time": null
+        }
+      },
+      {
+        "gid": "1213608836755502",
+        "enum_value": {
+          "gid": "1213608836755504",
+          "name": "Core Two (Deep Work)"
+        },
+        "name": "Routine_RW",
+        "display_value": "Core Two (Deep Work)"
+      },
+      {
+        "gid": "1213915851848087",
+        "name": "Kiro_RW",
+        "display_value": "4/4: 3d overdue. THE HARD THING. Apr 16 meeting canceled but Brandon reviewing first. 6 subtasks \ufffd\ufffd\ufffd need contributor sections from Andrew, Stacey, Yun, Adi. Draft exists at ~/shared/research/op1-ps-testing-framework-draft.md.",
+        "text_value": "4/4: 3d overdue. THE HARD THING. Apr 16 meeting canceled but Brandon reviewing first. 6 subtasks \ufffd\ufffd\ufffd need contributor sections from Andrew, Stacey, Yun, Adi. Draft exists at ~/shared/research/op1-ps-testing-framework-draft.md."
+      },
+      {
+        "gid": "1213921400039514",
+        "name": "Next-action_RW",
+        "display_value": "Open the draft file and write one section header + 3 bullet points. Break the blank page.",
+        "text_value": "Open the draft file and write one section header + 3 bullet points. Break the blank page."
+      },
+      {
+        "gid": "1211898465243458",
+        "enum_value": null,
+        "name": "Status C-week",
+        "display_value": null
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": null
+      },
+      {
+        "gid": "1213440376802787",
+        "name": "Date diff",
+        "display_value": "4w 6d"
+      }
+    ],
+    "due_on": "2026-04-01",
+    "memberships": [
+      {
+        "section": {
+          "gid": "1213279426031998",
+          "name": "Untitled section"
+        }
+      },
+      {
+        "section": {
+          "gid": "1205997667578894",
+          "name": "Prioritized"
+        }
+      }
+    ],
+    "name": "Testing Document for Kate",
+    "notes": "Overall: What we\ufffd\ufffd\ufffdve done, as well as future for the year. Foundation for OP1.\nDoc captain: Richard\n\nQuestions to answer:\n    Impact for each test\n    Spotlight for each test\n    Overall narrative that shows what we do\n    Who should be in the audience? (Focus on Kate, but Alessio as well?)\n",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578893/task/1213341921686564",
+    "projects": [
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      },
+      {
+        "gid": "1213279426031997",
+        "name": "PS-Owned Global Testing"
+      }
+    ],
+    "start_on": null
+  },
+  {
+    "gid": "1213085905102041",
+    "assignee": {
+      "gid": "1212732742544167"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1212905889837829",
+        "enum_value": {
+          "gid": "1212905889837831",
+          "name": "Urgent"
+        },
+        "name": "Priority_RW",
+        "display_value": "Urgent"
+      },
+      {
+        "gid": "1212905889837865",
+        "enum_value": {
+          "gid": "1212905889837866",
+          "name": "Important"
+        },
+        "name": "Importance_RW",
+        "display_value": "Important"
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": null,
+        "text_value": null
+      },
+      {
+        "gid": "1213440376528542",
+        "name": "Begin-Date_RW",
+        "display_value": null,
+        "date_value": null
+      },
+      {
+        "gid": "1213608836755502",
+        "enum_value": {
+          "gid": "1213608836755504",
+          "name": "Core Two (Deep Work)"
+        },
+        "name": "Routine_RW",
+        "display_value": "Core Two (Deep Work)"
+      },
+      {
+        "gid": "1213915851848087",
+        "name": "Kiro_RW",
+        "display_value": "4/4: WW keyword gap analysis using market-level ASIN data. Core Two deep work. Important + Urgent. No due date set \ufffd\ufffd\ufffd needs one. L2 Testing. Cross-market impact: identifies keyword coverage gaps that affect all markets.",
+        "text_value": "4/4: WW keyword gap analysis using market-level ASIN data. Core Two deep work. Important + Urgent. No due date set \ufffd\ufffd\ufffd needs one. L2 Testing. Cross-market impact: identifies keyword coverage gaps that affect all markets."
+      },
+      {
+        "gid": "1213921400039514",
+        "name": "Next-action_RW",
+        "display_value": "Set a due date (suggest 4/18), then pull ASIN-level keyword data for gap analysis",
+        "text_value": "Set a due date (suggest 4/18), then pull ASIN-level keyword data for gap analysis"
+      },
+      {
+        "gid": "1211898465243458",
+        "enum_value": null,
+        "name": "Status C-week",
+        "display_value": null
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": null
+      }
+    ],
+    "due_on": null,
+    "memberships": [
+      {
+        "section": {
+          "gid": "1205997667578894",
+          "name": "Prioritized"
+        }
+      },
+      {
+        "section": {
+          "gid": "1213279426031998",
+          "name": "Untitled section"
+        }
+      }
+    ],
+    "name": "WW keyword gap fill based on market-level ASINs",
+    "notes": "People consistently point out kw coverage, so this would be a great exercise where we can confidently tell them we went through this rigorous work to ensure kw coverage",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578893/task/1213085905102041",
+    "projects": [
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      },
+      {
+        "gid": "1213279426031997",
+        "name": "PS-Owned Global Testing"
+      }
+    ],
+    "start_on": null
+  },
+  {
+    "gid": "1213125740755931",
+    "assignee": {
+      "gid": "1212732742544167"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1212905889837829",
+        "enum_value": {
+          "gid": "1212905889837831",
+          "name": "Urgent"
+        },
+        "name": "Priority_RW",
+        "display_value": "Urgent"
+      },
+      {
+        "gid": "1212905889837865",
+        "enum_value": {
+          "gid": "1212905889837866",
+          "name": "Important"
+        },
+        "name": "Importance_RW",
+        "display_value": "Important"
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": null,
+        "text_value": null
+      },
+      {
+        "gid": "1213440376528542",
+        "name": "Begin-Date_RW",
+        "display_value": "2026-03-02T00:00:00.000Z",
+        "date_value": {
+          "date": "2026-03-02",
+          "date_time": null
+        }
+      },
+      {
+        "gid": "1213608836755502",
+        "enum_value": {
+          "gid": "1213608836755504",
+          "name": "Core Two (Deep Work)"
+        },
+        "name": "Routine_RW",
+        "display_value": "Core Two (Deep Work)"
+      },
+      {
+        "gid": "1213915851848087",
+        "name": "Kiro_RW",
+        "display_value": "4/4: 8d overdue. 7 subtasks. Quip rollout doc exists. Legal + tech scoping done. Need to check current rollout status across markets.",
+        "text_value": "4/4: 8d overdue. 7 subtasks. Quip rollout doc exists. Legal + tech scoping done. Need to check current rollout status across markets."
+      },
+      {
+        "gid": "1213921400039514",
+        "name": "Next-action_RW",
+        "display_value": "Check Quip rollout doc for current market status, update subtask progress, flag any blocked markets",
+        "text_value": "Check Quip rollout doc for current market status, update subtask progress, flag any blocked markets"
+      },
+      {
+        "gid": "1211898465243458",
+        "enum_value": null,
+        "name": "Status C-week",
+        "display_value": null
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": null
+      },
+      {
+        "gid": "1213440376802787",
+        "name": "Date diff",
+        "display_value": "3w 4d"
+      }
+    ],
+    "due_on": "2026-03-27",
+    "memberships": [
+      {
+        "section": {
+          "gid": "1205997667578894",
+          "name": "Prioritized"
+        }
+      },
+      {
+        "section": {
+          "gid": "1213279426031998",
+          "name": "Untitled section"
+        }
+      }
+    ],
+    "name": "Email overlay WW rollout/testing",
+    "notes": "Email overlay: WW in-context rollout and testing\n\nGoal: WW in-context email overlay (H1 FY26 goal \ufffd\ufffd\ufffd currently 0% progress).\n\n7 subtasks covering: Quip detail, LP list, gather markets, rollout plan, DDD 2/12, comment to Frank/Vijay, tech scoping.\n\nNo activity in 7+ days. Decision needed: actively pursue this H1, delegate to teammate, or defer to H2.\n\nContext managed by Kiro agent.",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578893/task/1213125740755931",
+    "projects": [
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      },
+      {
+        "gid": "1213279426031997",
+        "name": "PS-Owned Global Testing"
+      }
+    ],
+    "start_on": null
+  },
+  {
+    "gid": "1212988092117041",
+    "assignee": {
+      "gid": "1212732742544167"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1212905889837829",
+        "enum_value": {
+          "gid": "1212905889837830",
+          "name": "Today"
+        },
+        "name": "Priority_RW",
+        "display_value": "Today"
+      },
+      {
+        "gid": "1212905889837865",
+        "enum_value": {
+          "gid": "1212905889837866",
+          "name": "Important"
+        },
+        "name": "Importance_RW",
+        "display_value": "Important"
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": "W7 paused IT accounts due to tax increase to 22%. Pivoting towards FR market. (US, DE, FR, ES)",
+        "text_value": "W7 paused IT accounts due to tax increase to 22%. Pivoting towards FR market. (US, DE, FR, ES)"
+      },
+      {
+        "gid": "1213440376528542",
+        "name": "Begin-Date_RW",
+        "display_value": null,
+        "date_value": null
+      },
+      {
+        "gid": "1213608836755502",
+        "enum_value": {
+          "gid": "1213608836755505",
+          "name": "Engine Room (Excel and Google ads)"
+        },
+        "name": "Routine_RW",
+        "display_value": "Engine Room (Excel and Google ads)"
+      },
+      {
+        "gid": "1213915851848087",
+        "name": "Kiro_RW",
+        "display_value": "4/4: 4d overdue. Brandon flagged -$70K Q1 underspend. IT paused due to 22% tax. Pivoting to FR. Need PO update + spend pacing check.",
+        "text_value": "4/4: 4d overdue. Brandon flagged -$70K Q1 underspend. IT paused due to 22% tax. Pivoting to FR. Need PO update + spend pacing check."
+      },
+      {
+        "gid": "1213921400039514",
+        "name": "Next-action_RW",
+        "display_value": "Check PAM US/EU spend pacing in tracker, flag underspend to Brandon, confirm FR pivot budget",
+        "text_value": "Check PAM US/EU spend pacing in tracker, flag underspend to Brandon, confirm FR pivot budget"
+      },
+      {
+        "gid": "1211898465243458",
+        "enum_value": {
+          "gid": "1211898465243461",
+          "name": "Green - On track"
+        },
+        "name": "Status C-week",
+        "display_value": "Green - On track"
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": "No"
+      },
+      {
+        "gid": "1211898253103663",
+        "name": "Impact (EU Reg)",
+        "display_value": null
+      },
+      {
+        "gid": "1211898253103687",
+        "enum_value": {
+          "gid": "1211898253103688",
+          "name": "Green - On track"
+        },
+        "name": "Status L-week",
+        "display_value": "Green - On track"
+      },
+      {
+        "gid": "1212629048694011",
+        "name": "Marketplace/Region",
+        "display_value": "FR, DE, ES, IT"
+      }
+    ],
+    "due_on": "2026-03-31",
+    "memberships": [
+      {
+        "section": {
+          "gid": "1212832868339114",
+          "name": "Paid Search"
+        }
+      },
+      {
+        "section": {
+          "gid": "1205997667578901",
+          "name": "In progress"
+        }
+      }
+    ],
+    "name": "Paid App",
+    "notes": "App installs are the top of the funnel for app users and new registrations. By increasing the number of installs, we would expect to see an increase in prospects resulting in an increase of AB App registrations.",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578893/task/1212988092117041",
+    "projects": [
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      },
+      {
+        "gid": "1211638878682721",
+        "name": "EU SSR Acquisition Roadmap"
+      }
+    ],
+    "start_on": null
+  },
+  {
+    "gid": "1212992331748509",
+    "assignee": {
+      "gid": "1212732742544167"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1212905889837829",
+        "enum_value": {
+          "gid": "1212905889837833",
+          "name": "Not urgent"
+        },
+        "name": "Priority_RW",
+        "display_value": "Not urgent"
+      },
+      {
+        "gid": "1212905889837865",
+        "enum_value": {
+          "gid": "1212905889837866",
+          "name": "Important"
+        },
+        "name": "Importance_RW",
+        "display_value": "Important"
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": "Removing Email overlay impacted results of test. Working on fix to allow for promo and email overlay. ",
+        "text_value": "Removing Email overlay impacted results of test. Working on fix to allow for promo and email overlay. "
+      },
+      {
+        "gid": "1213440376528542",
+        "name": "Begin-Date_RW",
+        "display_value": null,
+        "date_value": null
+      },
+      {
+        "gid": "1213608836755502",
+        "enum_value": {
+          "gid": "1213924412583429",
+          "name": "Wiki"
+        },
+        "name": "Routine_RW",
+        "display_value": "Wiki"
+      },
+      {
+        "gid": "1213915851848087",
+        "name": "Kiro_RW",
+        "display_value": "4/4: Core. Blocked on email overlay fix. Promo + email overlay conflict impacted test results. WW Testing + EU SSR + Promo Experiments projects.",
+        "text_value": "4/4: Core. Blocked on email overlay fix. Promo + email overlay conflict impacted test results. WW Testing + EU SSR + Promo Experiments projects."
+      },
+      {
+        "gid": "1213921400039514",
+        "name": "Next-action_RW",
+        "display_value": "Check with tech if email overlay fix is deployed, then resume promo test design",
+        "text_value": "Check with tech if email overlay fix is deployed, then resume promo test design"
+      },
+      {
+        "gid": "1211898465243458",
+        "enum_value": {
+          "gid": "1211898465243459",
+          "name": "Not Started"
+        },
+        "name": "Status C-week",
+        "display_value": "Not Started"
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": "No"
+      },
+      {
+        "gid": "1211898253103663",
+        "name": "Impact (EU Reg)",
+        "display_value": null
+      },
+      {
+        "gid": "1211898253103687",
+        "enum_value": null,
+        "name": "Status L-week",
+        "display_value": null
+      },
+      {
+        "gid": "1212629048694011",
+        "name": "Marketplace/Region",
+        "display_value": null
+      }
+    ],
+    "due_on": null,
+    "memberships": [
+      {
+        "section": {
+          "gid": "1205997667578901",
+          "name": "In progress"
+        }
+      },
+      {
+        "section": {
+          "gid": "1212832868339114",
+          "name": "Paid Search"
+        }
+      },
+      {
+        "section": {
+          "gid": "1212707241411308",
+          "name": "Untitled section"
+        }
+      }
+    ],
+    "name": "Promo Test",
+    "notes": "",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578893/task/1212992331748509",
+    "projects": [
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      },
+      {
+        "gid": "1211638878682721",
+        "name": "EU SSR Acquisition Roadmap"
+      },
+      {
+        "gid": "1212707241411307",
+        "name": "Paid Search Promo Experiments"
+      }
+    ],
+    "start_on": null
+  },
+  {
+    "gid": "1213493347703132",
+    "assignee": {
+      "gid": "1210930052337043"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1211898465243458",
+        "enum_value": {
+          "gid": "1211898465243461",
+          "name": "Green - On track"
+        },
+        "name": "Status C-week",
+        "display_value": "Green - On track"
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": "Phase One of the MCS Landing Page Optimization initiative officially launched in March 2026 with testing beginning in FR on 3/3 and expanding to EU4 in W11, following successful testing in Canada. This phase encompasses three key enhancements: the integration of localized, market-relevant verbiage within headline copy to better resonate with regional audiences; updates to the mobile experience and layout; and the implementation of current, on-brand visuals to ensure consistent brand presentation. The successful Canadian pilot validated the MCS optimizations made with an expected CVR lift of 50% in EU5 on tested LPs. Projected impact is included in OP2 registration, not additional. Results will be available EOM April due to OCI tech readiness data exclusions across EU3.",
+        "text_value": "Phase One of the MCS Landing Page Optimization initiative officially launched in March 2026 with testing beginning in FR on 3/3 and expanding to EU4 in W11, following successful testing in Canada. This phase encompasses three key enhancements: the integration of localized, market-relevant verbiage within headline copy to better resonate with regional audiences; updates to the mobile experience and layout; and the implementation of current, on-brand visuals to ensure consistent brand presentation. The successful Canadian pilot validated the MCS optimizations made with an expected CVR lift of 50% in EU5 on tested LPs. Projected impact is included in OP2 registration, not additional. Results will be available EOM April due to OCI tech readiness data exclusions across EU3."
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": "No"
+      },
+      {
+        "gid": "1211898253103663",
+        "name": "Impact (EU Reg)",
+        "display_value": "14000"
+      },
+      {
+        "gid": "1211898253103687",
+        "enum_value": {
+          "gid": "1211898253103688",
+          "name": "Green - On track"
+        },
+        "name": "Status L-week",
+        "display_value": "Green - On track"
+      },
+      {
+        "gid": "1212629048694011",
+        "name": "Marketplace/Region",
+        "display_value": "EU5"
+      }
+    ],
+    "due_on": "2026-03-31",
+    "memberships": [
+      {
+        "section": {
+          "gid": "1212832868339114",
+          "name": "Paid Search"
+        }
+      },
+      {
+        "section": {
+          "gid": "1206020650712107",
+          "name": "Backlog"
+        }
+      }
+    ],
+    "name": "MCS landing page optimization P1",
+    "notes": "",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578893/task/1213493347703132",
+    "projects": [
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      },
+      {
+        "gid": "1211638878682721",
+        "name": "EU SSR Acquisition Roadmap"
+      }
+    ],
+    "start_on": null
+  },
+  {
+    "gid": "1212832868560339",
+    "assignee": {
+      "gid": "1210930052337043"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1211898465243458",
+        "enum_value": {
+          "gid": "1211898465243459",
+          "name": "Not Started"
+        },
+        "name": "Status C-week",
+        "display_value": "Not Started"
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": "In alignment with Google\ufffd\ufffd\ufffds best practices and smart bidding protocols, we will consolidate split portfolios into a more cohesive structure, with the objective of enhancing signal quality for Google\ufffd\ufffd\ufffds algorithms and ensuring alignment with smart bidding optimization best practices. \n\nThe team plans to test this approach in Q1 by combining two portfolios into one in the DE market.\n\n",
+        "text_value": "In alignment with Google\ufffd\ufffd\ufffds best practices and smart bidding protocols, we will consolidate split portfolios into a more cohesive structure, with the objective of enhancing signal quality for Google\ufffd\ufffd\ufffds algorithms and ensuring alignment with smart bidding optimization best practices. \n\nThe team plans to test this approach in Q1 by combining two portfolios into one in the DE market.\n\n"
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": "No"
+      },
+      {
+        "gid": "1211898253103663",
+        "name": "Impact (EU Reg)",
+        "display_value": null
+      },
+      {
+        "gid": "1211898253103687",
+        "enum_value": null,
+        "name": "Status L-week",
+        "display_value": null
+      },
+      {
+        "gid": "1212629048694011",
+        "name": "Marketplace/Region",
+        "display_value": null
+      }
+    ],
+    "due_on": "2026-06-30",
+    "memberships": [
+      {
+        "section": {
+          "gid": "1212832868339114",
+          "name": "Paid Search"
+        }
+      },
+      {
+        "section": {
+          "gid": "1206020650712107",
+          "name": "Backlog"
+        }
+      }
+    ],
+    "name": "Portfolio Consolidation",
+    "notes": "",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578893/task/1212832868560339",
+    "projects": [
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      },
+      {
+        "gid": "1211638878682721",
+        "name": "EU SSR Acquisition Roadmap"
+      }
+    ],
+    "start_on": null
+  },
+  {
+    "gid": "1212832868560333",
+    "assignee": {
+      "gid": "1210930052337043"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1211898465243458",
+        "enum_value": {
+          "gid": "1211898465243461",
+          "name": "Green - On track"
+        },
+        "name": "Status C-week",
+        "display_value": "Green - On track"
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": "The implementation was initiated for a subset of IT portfolios on 1/5, with the remaining portfolios migrated on 1/15. Following the implementation of the new feed, data discrepancies between our dashboard and AMO decreased from -23% to +6% avg in IT, significantly improving reporting accuracy and insight quality. While the bidding objective change in IT has not yet driven incremental lift, the enhanced data reliability positions us well for more informed optimization decisions. We have also transitioned our reporting to align with the new registrations objective (and transitioned the portfolios currently using Daily spend target to the new objectives in EU2 on 3/3/26). Data will continue to inform optimizations post OCI implementation.",
+        "text_value": "The implementation was initiated for a subset of IT portfolios on 1/5, with the remaining portfolios migrated on 1/15. Following the implementation of the new feed, data discrepancies between our dashboard and AMO decreased from -23% to +6% avg in IT, significantly improving reporting accuracy and insight quality. While the bidding objective change in IT has not yet driven incremental lift, the enhanced data reliability positions us well for more informed optimization decisions. We have also transitioned our reporting to align with the new registrations objective (and transitioned the portfolios currently using Daily spend target to the new objectives in EU2 on 3/3/26). Data will continue to inform optimizations post OCI implementation."
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": "No"
+      },
+      {
+        "gid": "1211898253103663",
+        "name": "Impact (EU Reg)",
+        "display_value": "0"
+      },
+      {
+        "gid": "1211898253103687",
+        "enum_value": {
+          "gid": "1211898253103688",
+          "name": "Green - On track"
+        },
+        "name": "Status L-week",
+        "display_value": "Green - On track"
+      },
+      {
+        "gid": "1212629048694011",
+        "name": "Marketplace/Region",
+        "display_value": null
+      }
+    ],
+    "due_on": "2026-04-30",
+    "memberships": [
+      {
+        "section": {
+          "gid": "1212832868339114",
+          "name": "Paid Search"
+        }
+      },
+      {
+        "section": {
+          "gid": "1206020650712107",
+          "name": "Backlog"
+        }
+      }
+    ],
+    "name": "AMO Objective Change Test",
+    "notes": "A variance was identified between internal data feeds and those shared with Adobe, traced to Q4 2024 data science modifications. A structured remediation plan is underway: in January 2026, IT will test optimizing towards accurate feed parameters. This initiative necessitates a full 8-week testing phase and includes recalibration of all bid strategies to reestablish Adobe bidding algorithms, ensuring future campaigns operate on precise, unified data inputs with an expectation of an registration lift in IT.",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578893/task/1212832868560333",
+    "projects": [
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      },
+      {
+        "gid": "1211638878682721",
+        "name": "EU SSR Acquisition Roadmap"
+      }
+    ],
+    "start_on": null
+  },
+  {
+    "gid": "1212832868339127",
+    "assignee": {
+      "gid": "1210930052337043"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1211898465243458",
+        "enum_value": {
+          "gid": "1211898465243461",
+          "name": "Green - On track"
+        },
+        "name": "Status C-week",
+        "display_value": "Green - On track"
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": "Evidence-based ad copy testing is currently underway in the UK (launched 1/29) and IT (launched 2/19). We anticipate an increase in click-through rates, alongside an incremental rise in registrations, with a before and after lift of 85 regs in initial UK results and +3% CVR lift and improved CTR (15% control vs 28% test). In IT was saw a 15% lift in CTR. Due to success we rolled out Phase 2 in UK and IT (100% of NB) ahead of schedule, with phased rollouts scheduled across the EU in Q3 and Q4 2026 - post OCI implementation. Projected registration impact is included in OCI reg projections and not incremental lift.\n",
+        "text_value": "Evidence-based ad copy testing is currently underway in the UK (launched 1/29) and IT (launched 2/19). We anticipate an increase in click-through rates, alongside an incremental rise in registrations, with a before and after lift of 85 regs in initial UK results and +3% CVR lift and improved CTR (15% control vs 28% test). In IT was saw a 15% lift in CTR. Due to success we rolled out Phase 2 in UK and IT (100% of NB) ahead of schedule, with phased rollouts scheduled across the EU in Q3 and Q4 2026 - post OCI implementation. Projected registration impact is included in OCI reg projections and not incremental lift.\n"
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": "No"
+      },
+      {
+        "gid": "1211898253103663",
+        "name": "Impact (EU Reg)",
+        "display_value": "2000"
+      },
+      {
+        "gid": "1211898253103687",
+        "enum_value": {
+          "gid": "1211898253103688",
+          "name": "Green - On track"
+        },
+        "name": "Status L-week",
+        "display_value": "Green - On track"
+      },
+      {
+        "gid": "1212629048694011",
+        "name": "Marketplace/Region",
+        "display_value": "EU5"
+      }
+    ],
+    "due_on": "2026-12-31",
+    "memberships": [
+      {
+        "section": {
+          "gid": "1212832868339114",
+          "name": "Paid Search"
+        }
+      },
+      {
+        "section": {
+          "gid": "1206020650712107",
+          "name": "Backlog"
+        }
+      }
+    ],
+    "name": "Evidence Based Ad Copy Test",
+    "notes": "",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578893/task/1212832868339127",
+    "projects": [
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      },
+      {
+        "gid": "1211638878682721",
+        "name": "EU SSR Acquisition Roadmap"
+      }
+    ],
+    "start_on": null
+  },
+  {
+    "gid": "1212832868339125",
+    "assignee": {
+      "gid": "1210930052337043"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1211898465243458",
+        "enum_value": {
+          "gid": "1211898465243461",
+          "name": "Green - On track"
+        },
+        "name": "Status C-week",
+        "display_value": "Green - On track"
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": "Account consolidation is underway in OCI regions, with EU3 slated for August after OCI implementation is complete. \n\nUK and DE Product and Vertical campaigns have been consolidated in January 2026 to streamline the account and reduce management overhead.",
+        "text_value": "Account consolidation is underway in OCI regions, with EU3 slated for August after OCI implementation is complete. \n\nUK and DE Product and Vertical campaigns have been consolidated in January 2026 to streamline the account and reduce management overhead."
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": "No"
+      },
+      {
+        "gid": "1211898253103663",
+        "name": "Impact (EU Reg)",
+        "display_value": null
+      },
+      {
+        "gid": "1211898253103687",
+        "enum_value": {
+          "gid": "1211898253103688",
+          "name": "Green - On track"
+        },
+        "name": "Status L-week",
+        "display_value": "Green - On track"
+      },
+      {
+        "gid": "1212629048694011",
+        "name": "Marketplace/Region",
+        "display_value": "EU5"
+      }
+    ],
+    "due_on": "2026-12-31",
+    "memberships": [
+      {
+        "section": {
+          "gid": "1212832868339114",
+          "name": "Paid Search"
+        }
+      },
+      {
+        "section": {
+          "gid": "1206020650712107",
+          "name": "Backlog"
+        }
+      }
+    ],
+    "name": "Campaign Consolidation",
+    "notes": "",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578893/task/1212832868339125",
+    "projects": [
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      },
+      {
+        "gid": "1211638878682721",
+        "name": "EU SSR Acquisition Roadmap"
+      }
+    ],
+    "start_on": null
+  },
+  {
+    "gid": "1212832868339115",
+    "assignee": {
+      "gid": "1210930052337043"
+    },
+    "completed": false,
+    "completed_at": null,
+    "custom_fields": [
+      {
+        "gid": "1211898465243458",
+        "enum_value": {
+          "gid": "1211898465243461",
+          "name": "Green - On track"
+        },
+        "name": "Status C-week",
+        "display_value": "Green - On track"
+      },
+      {
+        "gid": "1209637014993158",
+        "name": "Notes - Task",
+        "display_value": "PS team has transitioned EU3 billing + accounts into the OCI MCC. Tech is on track for readiness with tracking testing beginning 2/26 and continuing through the end of March. Post tracking implementation our team will begin a 4 week learning period within Google while continuing to utilize AMO bidding objectives. \n\nFull transition to OCI planned for May 2026. ",
+        "text_value": "PS team has transitioned EU3 billing + accounts into the OCI MCC. Tech is on track for readiness with tracking testing beginning 2/26 and continuing through the end of March. Post tracking implementation our team will begin a 4 week learning period within Google while continuing to utilize AMO bidding objectives. \n\nFull transition to OCI planned for May 2026. "
+      },
+      {
+        "gid": "1211898253103683",
+        "name": "Help Needed flag",
+        "display_value": "No"
+      },
+      {
+        "gid": "1211898253103663",
+        "name": "Impact (EU Reg)",
+        "display_value": "0"
+      },
+      {
+        "gid": "1211898253103687",
+        "enum_value": {
+          "gid": "1211898253103688",
+          "name": "Green - On track"
+        },
+        "name": "Status L-week",
+        "display_value": "Green - On track"
+      },
+      {
+        "gid": "1212629048694011",
+        "name": "Marketplace/Region",
+        "display_value": "FR, ES, IT, CA, JP"
+      }
+    ],
+    "due_on": "2026-08-31",
+    "memberships": [
+      {
+        "section": {
+          "gid": "1212832868339114",
+          "name": "Paid Search"
+        }
+      },
+      {
+        "section": {
+          "gid": "1206020650712107",
+          "name": "Backlog"
+        }
+      }
+    ],
+    "name": "OCI Implementation",
+    "notes": "",
+    "permalink_url": "https://app.asana.com/1/8442528107068/project/1205997667578893/task/1212832868339115",
+    "projects": [
+      {
+        "gid": "1205997667578893",
+        "name": "ABPS - WW Testing & Projects"
+      },
+      {
+        "gid": "1211638878682721",
+        "name": "EU SSR Acquisition Roadmap"
+      }
+    ],
+    "start_on": null
+  }
+]

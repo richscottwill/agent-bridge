@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-04-06T14:30:00Z",
+  "signals_processed": {
+    "slack": {
+      "channels_scanned": 21,
+      "channels_with_mentions": 7,
+      "high_priority_signals": [
+        {"source": "slack_mention", "channel": "ab-paid-search-app", "author": "Brandon Munday", "topic": "PAM budget", "action": "existing_task", "task_gid": "1213959904341162", "days_stale": 3}
+      ],
+      "medium_priority_signals": [
+        {"source": "slack_message", "channel": "ab-paid-search-abix", "author": "Brandon Munday", "topic": "MX R&O process", "action": "acknowledged"},
+        {"source": "slack_message", "channel": "ab-paid-search-global", "author": "Brandon Munday", "topic": "ABMA SIM escalation", "action": "acknowledged"},
+        {"source": "slack_message", "channel": "ab-paid-search-oci", "author": "Brandon Munday", "topic": "OCI URL transform", "action": "monitoring"}
+      ]
+    },
+    "email": {
+      "total_unread": 13,
+      "high_priority": 4,
+      "medium_priority": 3,
+      "low_priority": 6,
+      "signals_requiring_task": [
+        {"source": "email", "sender": "Brandon Munday", "topic": "Refmarker audit PoC", "action": "existing_task", "task_gid": "1213923298187459"},
+        {"source": "email", "sender": "Lorena Alvarez Larrea", "topic": "MX Q2 spend", "action": "existing_task", "task_gid": "1213917772329115"},
+        {"source": "email", "sender": "Jonathan Anderson", "topic": "Prime Day Phase 4 inputs", "action": "no_asana_task"}
+      ]
+    },
+    "tasks_created": 0,
+    "tasks_updated": 0,
+    "signals_deferred": 0,
+    "signals_dismissed": 3
+  },
+  "signal_decay": {
+    "decayed": 0,
+    "deactivated": 0
+  }
+}

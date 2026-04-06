@@ -1,27 +1,28 @@
-# Asana Activity Monitor — 2026-04-04 (Saturday)
+# Asana Activity — 2026-04-06
 
-Scan time: 2026-04-04T07:00:00Z
-Last scan: First scan (7-day lookback)
-Tasks checked for teammate activity: 4 (Today/Overdue priority tasks)
-Teammate signals detected: 0
+## Teammate Signals
 
----
+### 📅 Due Date Changes
+- **Vijeth Shetty** changed due date on blocking task "Duplicate Beauty and Auto page for MX" to Mar 23 (on MX Automotive page dependency)
 
-## Activity Scan Results
+### ✅ Dependency Completions
+- **Vijeth Shetty** completed blocking task "Duplicate Beauty and Auto page for MX" (3/24) — then **Alex VanDerStuyf** marked it incomplete again (3/24). Status unclear — follow up needed.
 
-No teammate activity detected since last scan on the following priority tasks:
+### 👤 Task Assignments
+- **Alex VanDerStuyf** created and assigned "WW weblab dial-up (Richard)" — added description, set due date 3/26, assigned to Richard (3/23-3/25). This is a teammate-initiated task.
 
-- **Testing Document for Kate** (1213341921686564) — All 20 stories by Richard. No teammate comments or changes.
-- **Respond to Lena — AU LP URL analysis** (1213917967984980) — All 8 stories by Richard. No teammate activity.
-- **Refmarker mapping audit PoC — AU** (1213923298187459) — All 6 stories by Richard. Task created 4/3.
-- **Provide Lorena Q2 expected spend for MX PO** (1213917772329115) — All 6 stories by Richard. Task created 4/3.
+### 📝 Description Changes
+- **Alex VanDerStuyf** added description to "WW weblab dial-up (Richard)" (3/24)
 
----
+## Activity Summary
+| Signal | Count | Key People |
+|--------|-------|------------|
+| 📅 Due date changes (by others) | 1 | Vijeth Shetty |
+| ✅ Dependency completions | 1 | Vijeth Shetty |
+| 👤 Assignments from others | 1 | Alex VanDerStuyf |
+| 📝 Description edits by others | 1 | Alex VanDerStuyf |
+| 💬 Comments by others | 0 | — |
 
-## Signal Summary
-
-- 💬 Comments awaiting response: 0
-- 📅 Due date changes by others: 0
-- 👤 Reassignments: 0
-
-No teammate activity since last scan. Saturday — expected low volume.
+## Action Items from Activity
+1. **MX Automotive page**: Vijeth completed then Alex re-opened the blocking MCS task. Clarify with Vijeth/Alex whether the MX page creation is actually done.
+2. **WW weblab dial-up**: Alex assigned this — coordinate on weblab settings before 4/7 go-live.

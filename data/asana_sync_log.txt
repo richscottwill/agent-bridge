@@ -1,0 +1,6 @@
+STEP 1: SearchTasksInWorkspace...
+Traceback (most recent call last):
+  File "/home/prichwil/shared/context/tools/asana_sync_runner.py", line 142, in <module>
+    tasks_data = search_result if isinstance(search_result, list) else search_result.get("data", [])
+                                                                       ^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'

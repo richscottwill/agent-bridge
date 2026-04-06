@@ -40,3 +40,11 @@
 - `spine.md` (Key Paths table, ~line 82): Still references `~/shared/data/duckdb/ps-analytics.duckdb` with old CLI access pattern (`python3 ~/shared/tools/data/query.py`). Needs update to MotherDuck cloud path and MCP-only access pattern.
 
 **Karpathy gate:** Not applicable (device.md is not gated). However, the required follow-up fix to heart.md IS gated — must route through karpathy.
+
+## 2026-04-06 — device.md
+
+**Section:** PS Analytics Database (DuckDB → MotherDuck Cloud)
+**Change:** Updated to reflect schema migration from flat `main` schema to 8 named schemas (asana, signals, karpathy, ns, ops, wiki, ps, main). Updated table/view counts to 55 tables + 34 views. Added schema-qualified name requirement. Flagged ensure-schema.sql and FTS index as needing updates. Removed enumerated analytical views list (views still exist, just not listed). Added `USE ps_analytics` note.
+**Cross-organ check:** No conflicts. Consistent with duckdb-schema.md steering file and MCP capability/integration specs.
+**Karpathy gate:** N/A (device.md is not gated)
+**Action items surfaced by edit:** (1) ensure-schema.sql needs update, (2) FTS index on signals.slack_messages needs rebuild

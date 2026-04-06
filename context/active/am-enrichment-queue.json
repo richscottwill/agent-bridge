@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-04-06T14:30:00Z",
+  "my_tasks": [
+    {"task_gid": "1213875146955582", "task_name": "Get Enhanced Match details", "proposals": {"kiro_rw": null, "next_action": null, "start_on": null, "priority_rw": null}},
+    {"task_gid": "1213546434830000", "task_name": "ie%CCP calc - insert MX spend/regs before 9th", "proposals": {"kiro_rw": null, "next_action": null}},
+    {"task_gid": "1213828814410247", "task_name": "Mondays - Write into EU SSR Acq Asana", "proposals": {"kiro_rw": null, "next_action": null}},
+    {"task_gid": "1213917832711157", "task_name": "Verify MX/AU net pacing against OP2 numbers", "proposals": {"kiro_rw": null, "next_action": null}},
+    {"task_gid": "1213764961716427", "task_name": "WW weblab dial-up (Richard)", "proposals": {"kiro_rw": null, "next_action": null}},
+    {"task_gid": "1213965650410967", "task_name": "Deep Dive: Year-One Optimization one-pager", "proposals": {"kiro_rw": null, "next_action": null}},
+    {"task_gid": "1213968042348601", "task_name": "Deep Dive: Add IECCP FAQ to new account playbook", "proposals": {"kiro_rw": null, "next_action": null}},
+    {"task_gid": "1213959854928587", "task_name": "Deep Dive: Finalize market expansion playbook", "proposals": {"kiro_rw": null, "next_action": null}},
+    {"task_gid": "1213962513760099", "task_name": "Brandon 1:1: Set up automated monthly ASP confirmation reminders", "proposals": {"kiro_rw": null, "next_action": null}},
+    {"task_gid": "1213968042349624", "task_name": "Brandon 1:1: Reframe AdWords KB ticket as risk mitigation", "proposals": {"kiro_rw": null, "next_action": null}},
+    {"task_gid": "1213962513831534", "task_name": "Brandon 1:1: Walkthrough with Andrew on Kiro ASP workflow", "proposals": {"kiro_rw": null, "next_action": null}},
+    {"task_gid": "1213964668984060", "task_name": "Brandon 1:1: Draft Enhanced Match FAQ for legal", "proposals": {"kiro_rw": null, "next_action": null}},
+    {"task_gid": "1213962513816458", "task_name": "Brandon 1:1: Obtain TPS checklist from Abdul for F90 audience", "proposals": {"kiro_rw": null, "next_action": null}},
+    {"task_gid": "1213917923114330", "task_name": "Share ENG max budget calculation file with Andrew", "proposals": {"kiro_rw": null, "next_action": null}},
+    {"task_gid": "1213959904341162", "task_name": "Reply to Brandon — PAM budget needs assessment", "proposals": {"kiro_rw": null, "next_action": null}}
+  ],
+  "portfolio": {
+    "ABPS_AI_Content_Intake": [
+      {"task_gid": "1213954957625028", "task_name": "✅ Approve: Enhanced Match / LiveRamp", "proposals": {"priority_rw": "Not urgent", "routine_rw": "Wiki"}},
+      {"task_gid": "1213954957645131", "task_name": "✅ Approve: AU Paid Search — Market Wiki", "proposals": {"priority_rw": "Not urgent", "routine_rw": "Wiki"}},
+      {"task_gid": "1213953295002324", "task_name": "✅ Approve: OCI Execution Guide", "proposals": {"priority_rw": "Not urgent", "routine_rw": "Wiki"}}
+    ]
+  },
+  "summary": {
+    "total_proposals": 18,
+    "my_tasks_needing_enrichment": 15,
+    "portfolio_needing_triage": 3
+  }
+}

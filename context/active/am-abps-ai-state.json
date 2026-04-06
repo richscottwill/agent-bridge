@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-04-06T14:30:00Z",
+  "project_gid": "1213917352480610",
+  "sections": {
+    "Intake": {
+      "total": 6,
+      "untriaged": 3,
+      "tasks": [
+        {"gid": "1213954957625028", "name": "✅ Approve: Enhanced Match / LiveRamp", "routine": null, "priority": null, "triage_recommendation": "Wiki, Not urgent — approval task for published article"},
+        {"gid": "1213954957645131", "name": "✅ Approve: AU Paid Search — Market Wiki", "routine": null, "priority": null, "triage_recommendation": "Wiki, Not urgent — approval task for published article"},
+        {"gid": "1213953295002324", "name": "✅ Approve: OCI Execution Guide", "routine": null, "priority": null, "triage_recommendation": "Wiki, Not urgent — approval task for published article"}
+      ]
+    },
+    "Review": {
+      "total": 35,
+      "published": 6,
+      "in_review": 29,
+      "published_articles": [
+        {"gid": "1213925549385885", "name": "Paid Search Testing Approach & Year Ahead", "score": "8.4/10"},
+        {"gid": "1213925516246590", "name": "OCI Rollout Playbook", "score": "8.4/10"},
+        {"gid": "1213925733042547", "name": "OCI Execution Guide", "score": "8.6/8.8"},
+        {"gid": "1213925516128369", "name": "ie%CCP Planning & Optimization Framework", "score": "8.6/8.2"},
+        {"gid": "1213953288745383", "name": "AU Paid Search — Market Wiki", "score": "8.4/8.0"},
+        {"gid": "1213925516289208", "name": "Enhanced Match / LiveRamp", "score": "8.2/8.2"}
+      ]
+    },
+    "Active": {"total": 0},
+    "Archive": {"total": 25, "all_completed": true}
+  },
+  "near_due_escalation": [],
+  "overdue": [],
+  "pipeline_summary": {
+    "published": 6,
+    "in_review": 29,
+    "in_progress": 0,
+    "intake_untriaged": 3
+  }
+}

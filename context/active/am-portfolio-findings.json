@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-04-06T14:30:00Z",
+  "projects": {
+    "AU": {
+      "project_gid": "1212762061512767",
+      "incomplete_richard": 12,
+      "overdue_tasks": [
+        {"gid": "1213917967984980", "name": "Respond to Lena — AU LP URL analysis + CPA methodology", "due_on": "2026-04-03", "days_overdue": 3, "priority": "Urgent"},
+        {"gid": "1213796951745232", "name": "Look over AU landing page switch", "due_on": "2026-03-25", "days_overdue": 12, "priority": "Urgent"},
+        {"gid": "1213541622135762", "name": "MBR callout", "due_on": "2026-04-02", "days_overdue": 4, "priority": "Today"}
+      ],
+      "near_due_tasks": [
+        {"gid": "1213839064321460", "name": "Weekly Reporting - Global WBR sheet", "due_on": "2026-04-07", "days_until": 1},
+        {"gid": "1213917639154050", "name": "AU meetings - Agenda", "due_on": "2026-04-07", "days_until": 1},
+        {"gid": "1213923298187459", "name": "Refmarker mapping audit PoC — AU", "due_on": "2026-04-07", "days_until": 1}
+      ],
+      "recurring_completed": [
+        {"name": "AU meetings - Agenda", "completed_at": "2026-04-03", "next_instance_exists": true, "gid": "1213917639154050"}
+      ]
+    },
+    "MX": {
+      "project_gid": "1212775592612917",
+      "incomplete_richard": 8,
+      "overdue_tasks": [
+        {"gid": "1213917772329115", "name": "Provide Lorena Q2 expected spend for MX PO", "due_on": "2026-04-04", "days_overdue": 2, "priority": "Urgent"},
+        {"gid": "1213072707685834", "name": "MX Automotive page", "due_on": "2026-03-20", "days_overdue": 17, "priority": "Urgent"},
+        {"gid": "1213541622135762", "name": "MBR callout", "due_on": "2026-04-02", "days_overdue": 4, "priority": "Today"}
+      ],
+      "near_due_tasks": [
+        {"gid": "1213531566195255", "name": "Update Kingpin for MX", "due_on": "2026-04-07", "days_until": 1}
+      ]
+    },
+    "Paid App": {
+      "project_gid": "1205997667578886",
+      "incomplete_richard": 8,
+      "overdue_tasks": [
+        {"gid": "1213329816575017", "name": "Create FR accounts", "due_on": "2026-02-20", "days_overdue": 45, "priority": "Not urgent"},
+        {"gid": "1212760973200420", "name": "Source DE/IT/ES", "due_on": "2026-02-20", "days_overdue": 45, "priority": "Not urgent"}
+      ],
+      "event_countdown": {
+        "prime_day": {"approximate_date": "2026-06-15", "days_until": 70, "in_prep_window": false, "in_escalation_window": false},
+        "back_to_school": {"approximate_date": "2026-07-25", "days_until": 110, "in_prep_window": false}
+      }
+    },
+    "WW Testing": {
+      "error": "403 access denied — skipped",
+      "project_gid": "1205997667578893"
+    },
+    "WW Acquisition": {
+      "project_gid": "1206011235630048",
+      "incomplete_richard": 0,
+      "overdue_tasks": [],
+      "note": "All Richard's tasks completed or context task only"
+    }
+  },
+  "bucket_cap_alerts": {
+    "Sweep": {"count": 6, "cap": 5, "over_by": 1, "action": "queue_demotion"},
+    "Engine Room": {"count": 8, "cap": 6, "over_by": 2, "action": "queue_demotion"}
+  },
+  "kill_or_revive_candidates": [
+    {"gid": "1213329816575017", "name": "Create FR accounts", "days_overdue": 45, "recommendation": "Kill — Apple accounts paused"},
+    {"gid": "1212760973200420", "name": "Source DE/IT/ES", "days_overdue": 45, "recommendation": "Kill — Apple accounts paused"},
+    {"gid": "1213072707685834", "name": "MX Automotive page", "days_overdue": 17, "recommendation": "Revive — follow up with Vijeth on footer"}
+  ]
+}
