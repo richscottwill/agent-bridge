@@ -1,3 +1,11 @@
+### EOD-2 Run 22 — 2026-04-06 (Monday)
+- Phase 1: Asana reconciliation. 0 completions, 0 Today tasks (clean slate), 5 overdue, 97 incomplete. DuckDB synced with 47 tasks. Blockers: Vijeth 18d, Andes 21d.
+- Phase 2: ABPS AI: 35 active, 5 Published, 0 advances today. Portfolio: no changes.
+- Phase 3: Workflows 100% (1 run/24h). Body 22,727w, no compression signals. KDS enrichment skipped (auth). 23 intake files from prior runs.
+- Phase 4: 11 weekly tasks due for W15. 8 deferred to Friday. Projection calibration: no data.
+- Phase 5: MotherDuck snapshot eod_20260406. Git pushed. Daily tracker + L1 streak (18 workdays) logged.
+- Phase 6: Karpathy deferred — Monday, no fresh organ changes to experiment on.
+
 ### Karpathy Run 37 — 2026-04-05 (10 experiments, 7 kept, 3 reverted, 70% keep rate)
 - [brain:Decision Principles] ADD (info_retrieval) → 1299w→1369w. A=1.0 B=0.8 C=1.0 Δ=+0.2. 120s. KEEP.
 - [nervous-system:Deferred Loops 6-8] SPLIT (info_retrieval) → 1002w→1025w. A=1.0 B=1.0 C=1.0 Δ=0.0. 90s. KEEP.
