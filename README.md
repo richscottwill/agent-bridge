@@ -1,6 +1,6 @@
 # Richard Williams — Personal Operating System
 
-AI-augmented work system for Amazon Business Paid Search. Text files + DuckDB registry that let any AI platform understand how Richard thinks, works, and operates.
+AI-augmented work system for Paid Search marketing. Text files + DuckDB registry that let any AI platform understand how Richard thinks, works, and operates.
 
 ## Quick Start
 
