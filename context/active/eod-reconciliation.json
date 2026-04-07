@@ -1,0 +1,35 @@
+{
+  "date": "2026-04-07",
+  "completed_today": [],
+  "completed_weekend": [
+    {"task_gid": "1212760973200420", "name": "Source DE/IT/ES", "project": "Paid App", "completed_at": "2026-04-06T14:45:59Z"},
+    {"task_gid": "1213329816575017", "name": "Create FR accounts", "project": "unknown (403)", "completed_at": "2026-04-06"}
+  ],
+  "carried_forward": [
+    {"task_gid": "1213959904341162", "name": "Reply to Brandon — PAM budget needs assessment", "overdue_since": "2026-04-06", "action": "demoted Today→Urgent"},
+    {"task_gid": "1212988092117041", "name": "Paid App", "overdue_since": "2026-03-31", "action": "demoted Today→Urgent"},
+    {"task_gid": "1213541622135762", "name": "MBR callout", "overdue_since": "2026-04-02", "action": "demoted Today→Urgent"}
+  ],
+  "new_tasks_from_meetings": [
+    {"task_gid": "1213963678745039", "name": "Pull AU Polaris LP conversion rate data — share with Brandon + Dwayne", "project": "AU", "due": "2026-04-08", "source": "Brandon sync 4/6"},
+    {"task_gid": "1213964186504305", "name": "Send IECCP follow-up summary to Lorena + review keyword data", "project": "MX", "due": "2026-04-09", "source": "MX sync 4/6"}
+  ],
+  "recurring_proposals": [],
+  "blocker_updates": [],
+  "today_tasks_count": 10,
+  "five_levels": {
+    "l1_sharpen": 0,
+    "l2_testing": 2,
+    "l3_automation": 0,
+    "l4_zero_click": 0,
+    "l5_agentic": 0,
+    "unclassified": 8
+  },
+  "portfolio_changes": {
+    "note": "No AM snapshot available for diff. Weekend completions: Source DE/IT/ES (Paid App), Create FR accounts."
+  },
+  "abps_ai_changes": {
+    "note": "No changes detected since last EOD."
+  },
+  "snapshot_status": "eod_20260407 FAILED — MotherDuck plan limitation (named snapshots require Business Plan)"
+}

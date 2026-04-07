@@ -71,7 +71,14 @@ AM-Backend Hook (orchestrator)
 │       ├─ Pull today's calendar: calendar_view(start_date=today, view=day)
 │       └─ UPSERT into main.calendar_events (DuckDB)
 │
-├─ BARRIER: Wait for all 3 subagents to complete
+│   └─ Subagent D: Loop Page Sync (~1 min)
+│       ├─ Query docs.loop_pages for stale pages (>12h since last_ingested)
+│       ├─ For each stale page: sharepoint_read_loop(loopUrl)
+│       ├─ UPDATE docs.loop_pages with content_markdown, content_preview, word_count
+│       └─ Update ops.data_freshness for loop_pages source
+│       Protocol: ~/shared/context/protocols/loop-page-sync.md
+│
+├─ BARRIER: Wait for all subagents to complete
 │   └─ If any subagent fails: log failure, continue with available data, flag in output
 │
 ├─ Phase 2: SEQUENTIAL PROCESSING (orchestrator or single subagent, ~3 min)
@@ -261,25 +268,41 @@ AM-Backend Hook (orchestrator)
 
 ---
 
+### Subagent D: Loop Page Sync
+
+**Context files to load:**
+- loop-page-sync.md (sync protocol)
+
+**MCP servers used:** SharePoint MCP (sharepoint_read_loop), DuckDB MCP
+
+**Writes:**
+- docs.loop_pages (DuckDB — UPDATE content)
+- ops.data_freshness (DuckDB — UPDATE loop_pages row)
+
+**Does NOT touch:** Slack MCP, Asana MCP, Outlook MCP, any file outputs
+
+---
+
 ## Shared Resource Isolation
 
 The key to safe parallelism: no two subagents write to the same file or DuckDB table.
 
-| Resource | Subagent A (Slack) | Subagent B1 (Asana Sync) | Subagent B2 (Activity) | Subagent C (Email+Cal) |
-|----------|-------------------|-------------------------|----------------------|----------------------|
-| slack-digest.md | WRITE | — | — | — |
-| asana-digest.md | — | WRITE | — | — |
-| email-triage.md | — | — | — | WRITE |
-| asana-activity.md | — | — | WRITE | — |
-| slack-scan-state.json | WRITE | — | — | — |
-| asana-scan-state.json | — | — | WRITE | — |
-| asana-morning-snapshot.json | — | WRITE | — | — |
-| signals.slack_messages | WRITE | — | — | — |
-| signals.signal_tracker | WRITE | — | — | — |
-| signals.emails | — | — | — | WRITE |
-| asana.asana_tasks | — | WRITE | — | — |
-| asana.asana_task_history | — | WRITE | — | — |
-| main.calendar_events | — | — | — | WRITE |
+| Resource | Subagent A (Slack) | Subagent B1 (Asana Sync) | Subagent B2 (Activity) | Subagent C (Email+Cal) | Subagent D (Loop) |
+|----------|-------------------|-------------------------|----------------------|----------------------|-------------------|
+| slack-digest.md | WRITE | — | — | — | — |
+| asana-digest.md | — | WRITE | — | — | — |
+| email-triage.md | — | — | — | WRITE | — |
+| asana-activity.md | — | — | WRITE | — | — |
+| slack-scan-state.json | WRITE | — | — | — | — |
+| asana-scan-state.json | — | — | WRITE | — | — |
+| asana-morning-snapshot.json | — | WRITE | — | — | — |
+| signals.slack_messages | WRITE | — | — | — | — |
+| signals.signal_tracker | WRITE | — | — | — | — |
+| signals.emails | — | — | — | WRITE | — |
+| asana.asana_tasks | — | WRITE | — | — | — |
+| asana.asana_task_history | — | WRITE | — | — | — |
+| main.calendar_events | — | — | — | WRITE | — |
+| docs.loop_pages | — | — | — | — | WRITE |
 
 Zero overlap across all 4 subagents. Safe to run in parallel.
 
