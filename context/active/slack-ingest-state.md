@@ -1,3 +1,4 @@
+<!-- DOC-0361 | duck_id: protocol-slack-ingest-state -->
 # Slack Bulk Ingestion State
 
 Last run: 2026-04-02

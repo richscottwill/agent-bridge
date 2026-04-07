@@ -1,3 +1,4 @@
+<!-- DOC-0187 | duck_id: intake-slack-digest -->
 # Slack Digest — Monday, April 6, 2026
 Scan window: 2026-04-06T00:00:00Z → 2026-04-06T14:30:00Z
 Channels scanned: 14 | Signals extracted: 5 | Proactive searches: 3 (1 failed auth)

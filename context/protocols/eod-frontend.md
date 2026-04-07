@@ -1,3 +1,4 @@
+<!-- DOC-0349 | duck_id: protocol-eod-frontend -->
 # EOD-Frontend Protocol — Summary + Decisions + Report
 
 Interactive (light-touch). Reads pre-computed state from EOD-Backend. Presents summary and collects decisions.

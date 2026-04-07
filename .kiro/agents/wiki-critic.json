@@ -14,7 +14,7 @@
   "resources": [
     "file://.kiro/steering/richard-style-amazon.md",
     "file://shared/.kiro/agents/wiki-team/wiki-critic.md",
-    "file://shared/context/wiki/wiki-pipeline-rules.md"
+    "file://shared/wiki/wiki-pipeline-rules.md"
   ],
   "mcpServers": {}
 }

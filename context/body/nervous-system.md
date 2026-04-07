@@ -1,3 +1,4 @@
+<!-- DOC-0227 | duck_id: organ-nervous-system -->
 # Nervous System — Feedback, Calibration & Learning
 
 *Operating principle: Invisible over visible. Surface insights that lead to structural changes — not reports that require Richard to act on them. When a pattern is STUCK for 3 weeks, propose a structural fix.*

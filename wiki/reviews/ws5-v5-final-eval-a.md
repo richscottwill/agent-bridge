@@ -1,0 +1,25 @@
+<!-- DOC-0506 | duck_id: wiki-review-ws5-v5-final-eval-a -->
+# Review: Workstream 5 — Algorithmic Ads (v5)
+
+Blind Eval A — 2026-04-05. No prior reviews seen for this version.
+
+## Scores
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 9/10 | Purpose statement is explicit, DG results are decision-grade, AI Max test design in Appendix C is immediately actionable — a reader can execute the phased rollout from this doc. |
+| Clarity | 9/10 | Question-format headers tell the story. Logical flow: opportunity → proof → next bet → risk. DG vs. AI Max distinction is drawn cleanly. No re-reading needed. |
+| Accuracy | 8/10 | Blind eval — no research brief to cross-reference. Internal consistency is strong (84% CPC reduction math checks out, all metrics are dated or attributed). One unverifiable claim: "12x YoY improvement" for Prime Day ROAS is stated without showing the prior-year baseline. Marking 8 because the numbers are specific and internally consistent, but the blind-eval limitation caps confidence. |
+| Dual-audience | 8/10 | YAML frontmatter covers the essentials. AGENT_CONTEXT block has a strong machine_summary, key_entities, action_verbs, and update_triggers. Missing `depends_on` and `consumed_by` fields — these would enable graph traversal and orphan detection in audits. Not fatal, but a gap. |
+| Economy | 9/10 | Main body is tight narrative prose — zero bullet lists, zero tables, no formatting dependency. Every paragraph earns its place. Appendix tables all have "so what" interpretation sentences. One minor flag: the final sentence of the risk section ("If the US test validates efficiency and incremental growth, the learnings will inform a broader worldwide rollout strategy") is generic forward-looking filler that adds no information the reader doesn't already have. One sentence, not a pattern. |
+| **Overall** | **8.6/10** | |
+
+## Verdict
+PUBLISH
+
+## Suggestions (optional, non-blocking)
+
+1. Add `depends_on` and `consumed_by` to the AGENT_CONTEXT block. This doc depends on the Modern Search (WS2) article and is consumed by any AI Max test readiness check. Without these fields, the audit system cannot detect orphaning or stale cross-references.
+
+2. Consider cutting the final sentence of the risk section: "If the US test validates efficiency and incremental growth, the learnings will inform a broader worldwide rollout strategy." It restates what the phased rollout in Appendix C already makes obvious. Replacing it with nothing loses no value.
+
+3. The "12x YoY improvement" for Prime Day ROAS would be stronger with the prior-year baseline stated inline — e.g., "644% ROAS versus 54% the prior year" (or whatever the actual figure was). This makes the claim self-verifying without requiring the reader to look it up.

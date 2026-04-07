@@ -1,3 +1,4 @@
+<!-- DOC-0348 | duck_id: protocol-eod-backend -->
 # EOD-Backend Protocol — Meeting Sync + Reconciliation + Maintenance
 
 Fully autonomous. No interaction needed. Produces structured output for EOD-Frontend.

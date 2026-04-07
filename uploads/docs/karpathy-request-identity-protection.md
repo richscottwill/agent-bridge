@@ -1,3 +1,4 @@
+<!-- DOC-0233 | duck_id: other-karpathy-request-identity-protection -->
 # Karpathy Request: Identity Field Protection in Compression
 
 Date: 2026-03-27

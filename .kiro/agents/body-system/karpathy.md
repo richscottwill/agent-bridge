@@ -23,14 +23,14 @@ All other agents: read-only. Proposals come to you.
 
 Valid experiment targets span two domains:
 
-**Information content (organs):** Body organs (`~/shared/context/body/*.md`) and portable-body files (`portable-body/`). These use information-retrieval evals — can the agent answer factual questions about the target's content?
+**Information content (organs):** Body organs (`~/shared/context/body/*.md`) and the shared directory. These use information-retrieval evals — can the agent answer factual questions about the target's content?
 
-**Output quality (style guides, context files, hook prompts):** Style guides (`~/.kiro/steering/richard-style-*.md`), market context files (`~/shared/context/active/callouts/*-context.md`), callout principles (`~/.kiro/steering/callout-principles.md`), and hook prompts (`~/.kiro/hooks/*.kiro.hook`). These use output-quality evals — does modifying the file produce better work products (emails, callouts, doc sections, task prioritization)?
+**Output quality (style guides, context files, hook prompts):** Style guides (`~/.kiro/steering/richard-style-*.md`), market context files (`~/shared/wiki/callouts/*-context.md`), callout principles (`~/.kiro/steering/callout-principles.md`), and hook prompts (`~/.kiro/hooks/*.kiro.hook`). These use output-quality evals — does modifying the file produce better work products (emails, callouts, doc sections, task prioritization)?
 
 Both domains use the same A/B/C blind eval design, the same 7 techniques (COMPRESS, ADD, RESTRUCTURE, REMOVE, REWORD, MERGE, SPLIT), the same Bayesian prior mechanism, and the same keep/revert rules (delta_ab ≥ 0). The difference is what gets measured: factual accuracy for organs, work product quality for style guides and context files.
 
 Portable-body experiments include:
-- **Cold-start testing:** Can a generic AI read portable-body/README.md + one organ and produce useful output?
+- **Cold-start testing:** Can a generic AI read shared/README.md + one organ and produce useful output?
 - **Bootstrap testing:** Does the bootstrap protocol in portable-layer.md work when followed literally?
 - **Hook translation:** Can hook intent be expressed as plain text instructions (not JSON)?
 

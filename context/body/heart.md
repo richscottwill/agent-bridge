@@ -1,3 +1,4 @@
+<!-- DOC-0225 | duck_id: organ-heart -->
 # Heart — Autoresearch Loop
 
 *Pure experimentation engine. Inspired by [autoresearch](https://github.com/karpathy/autoresearch) — 630 lines, 700 experiments, measurable results. Small, fast, autonomous, compounding. No human input needed. Runs overnight, low token usage, high volume.*
@@ -30,7 +31,7 @@ The system uses a body metaphor. Each organ is a self-contained file. The loop e
 |----------|-------|-----------|-------------------|
 | Body organs | `~/shared/context/body/*.md` | information_retrieval | COMPRESS eyes competitors section → does accuracy hold? |
 | Style guides | `~/.kiro/steering/richard-style-*.md` | output_quality | REWORD the email drafting checklist → does the next Lena email score higher? |
-| Market context | `~/shared/context/active/callouts/*-context.md` | output_quality | ADD a narrative thread to AU context → does the AU callout draft improve? |
+| Market context | `~/shared/wiki/callouts/*-context.md` | output_quality | ADD a narrative thread to AU context → does the AU callout draft improve? |
 | Callout principles | `~/.kiro/steering/callout-principles.md` | output_quality | REMOVE a principle → does callout quality degrade? |
 | Hook prompts | `~/.kiro/hooks/*.kiro.hook` | output_quality | REWORD the AM-2 triage prompt → does task prioritization improve? |
 
@@ -43,9 +44,9 @@ Organs use information-retrieval evals (can the agent answer factual questions?)
 | `~/shared/context/body/` | Body organs + device |
 | `~/shared/context/active/` | Ground truth (current.md, org-chart.md, rw-tracker.md) |
 | `~/shared/context/intake/` | Inbox for new material |
-| `~/shared/context/tools/` | Utility scripts |
-| `~/shared/context/archive/` | Cold storage |
-| `~/shared/research/` | Standalone research, data files |
+| `~/shared/tools/` | Utility scripts |
+| `~/shared/wiki/archive/` | Cold storage |
+| `~/shared/wiki/research/` | Standalone research, data files |
 | `~/.kiro/steering/` | Agent behavior config (soul.md, rw-trainer.md) |
 
 ---
@@ -90,7 +91,7 @@ Karpathy selects using a three-stage process: exclude → select target → sele
 3. Targets with stale sections (>7 days since last update)
 4. UCB-weighted random: query `autoresearch_selection_weights` view, sample proportional to UCB score (balances exploitation of known-good combos with exploration of untested ones)
 
-Valid targets: organs (`~/shared/context/body/*.md` — information-retrieval evals), style guides (`~/.kiro/steering/richard-style-*.md`), market context (`~/shared/context/active/callouts/*-context.md`), callout principles (`~/.kiro/steering/callout-principles.md`), hook prompts (`~/.kiro/hooks/*.kiro.hook`) — all non-organ targets use output-quality evals.
+Valid targets: organs (`~/shared/context/body/*.md` — information-retrieval evals), style guides (`~/.kiro/steering/richard-style-*.md`), market context (`~/shared/wiki/callouts/*-context.md`), callout principles (`~/.kiro/steering/callout-principles.md`), hook prompts (`~/.kiro/hooks/*.kiro.hook`) — all non-organ targets use output-quality evals.
 
 **Stage 2 — Technique selection:**
 - Query `autoresearch_priors` for the selected target

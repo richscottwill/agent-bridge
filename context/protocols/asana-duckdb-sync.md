@@ -1,3 +1,4 @@
+<!-- DOC-0334 | duck_id: protocol-asana-duckdb-sync -->
 # Asana → DuckDB Sync Protocol
 
 Canonical sync procedure for keeping DuckDB `asana_tasks` in lockstep with Asana. Two modes: full sync (AM-1) and delta sync (EOD-2). Both end with a coherence check and schema drift detection.

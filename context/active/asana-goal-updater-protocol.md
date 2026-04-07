@@ -1,3 +1,4 @@
+<!-- DOC-0335 | duck_id: protocol-asana-goal-updater-protocol -->
 # Asana Goal Updater Protocol
 
 Last updated: 2026-04-03

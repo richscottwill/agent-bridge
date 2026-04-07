@@ -1,0 +1,204 @@
+<!-- DOC-0396 | duck_id: testing-ai-max-test-design -->
+---
+title: AI Max Test Design - US Market
+status: DRAFT
+doc-type: strategy
+audience: amazon-internal
+level: 2
+owner: Richard Williams
+created: 2026-03-25
+updated: 2026-04-04
+update-trigger: Google AI Max feature updates, test launch date set, Mike Babich input
+---
+
+# AI Max Test Design - US Market
+
+Status: OVERDUE (was due 3/28, now 6 days overdue)
+
+---
+
+## Executive Summary
+
+AI Max is Google's next-generation campaign automation that combines expanded keyword reach with automated asset generation. For AB Paid Search, it represents the next frontier after OCI: where OCI optimized bidding on existing keywords, AI Max expands the keyword universe itself. The US test will determine whether AI Max can deliver 15-25% incremental registrations without degrading CPA beyond acceptable thresholds.
+
+This is Decision D9 in the brain's decision log: US-first with measurement guardrails, applying the same phased discipline that made OCI successful. The test design follows the OCI playbook (evidence over intuition, phased rollout, structured measurement) but adapts it for AI Max's different risk profile — AI Max changes what keywords you bid on, not just how you bid.
+
+---
+
+## Why AI Max Matters
+
+Google is systematically moving advertisers from manual keyword control toward signal-based automation. The progression is clear:
+
+1. **Manual CPC** (legacy): advertiser sets every bid manually
+2. **Smart Bidding / OCI** (current): advertiser sets keywords, Google optimizes bids
+3. **AI Max** (next): Google expands keywords AND optimizes bids AND generates ad assets
+4. **Performance Max** (future): fully automated, advertiser provides signals only
+
+AB PS is currently at stage 2 (OCI). AI Max moves us to stage 3. The question is not whether to adopt AI Max — Google's roadmap makes it inevitable. The question is whether to adopt it now (with measurement guardrails) or later (when the team has less control over the transition).
+
+Early adoption has a strategic advantage: the team learns AI Max's behavior on its own terms, with controlled tests, rather than being forced to adopt when Google deprecates manual controls. This is the same logic that drove early OCI adoption — and OCI delivered $16.7MM OPS.
+
+---
+
+## Internal Precedent: AWS AI Max Test (Dec 2025)
+
+AWS ran a 5-week AI Max test focused on traffic generation campaigns. Key findings from Yun's Slack summary (12/16/2025):
+
+- Testing campaigns accounted for only 15% of total spend
+- Selected campaigns opted in for AI Max with traffic as the primary goal (not sign-ups)
+- **Critical challenges:** Poor traffic quality — inadequate matching directed users to irrelevant landing pages and ads. Major visibility obstacles — no features available to track performance, limited reporting capabilities.
+
+Additionally, ebergen from the paid-search-amzn channel (6/11/2025) warned: "I wouldn't necessarily recommend using AI max at this point — based on what I've reviewed of the product and especially when considering amazon search as a whole and how much control we are granting google over our search campaigns."
+
+These internal signals reinforce the need for guardrails. AB's test design addresses both concerns: (1) the CPA guardrail prevents poor traffic quality from degrading performance, and (2) the weekly search term review catches irrelevant matching early. The key difference: AB will optimize for registrations (not traffic), which gives the algorithm a clearer signal than AWS's traffic-focused test.
+
+---
+
+## Hypothesis
+
+AI Max's expanded reach and automated asset generation will increase registrations by 15-25% without degrading CPA beyond 10% of current baseline, when applied to NB campaigns in the US market.
+
+The 15% floor is calibrated to OCI's US result (+24%). We are setting a lower bar because AI Max is less proven and introduces more variables (keyword expansion + asset generation vs. OCI's bidding-only change). If AI Max hits even 10%, it is worth extending the test for more data.
+
+---
+
+## Test Parameters
+
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| Market | US | Largest volume, fastest signal, OCI baseline established |
+| Campaign type | NB (Non-Brand) | NB is where keyword expansion matters most. Brand keywords are fixed. |
+| Test duration | 4 weeks minimum | Matches OCI test methodology. 2 weeks learning + 2 weeks steady-state. |
+| Traffic split | 50/50 (AI Max vs manual control) | Equal exposure for clean comparison |
+| Primary metric | Registrations | Business outcome, not proxy metric |
+| Secondary metrics | CPA, CTR, impression share, search term quality | Monitor for side effects |
+| Budget | Match control spend exactly | No budget advantage for either variant |
+
+### Why US First
+
+US is the right market for three reasons:
+1. **Volume:** Largest market = fastest statistical significance
+2. **OCI baseline:** US has been on OCI since Sep 2025. We have a clean baseline to measure AI Max's incremental impact on top of OCI.
+3. **Google relationship:** Mike Babich (Google account manager) can provide AI Max best practices and troubleshoot issues in real-time.
+
+---
+
+## Measurement Framework
+
+### Phase 1: Baseline Capture (2 weeks pre-test)
+
+Before launching AI Max, capture current NB performance:
+
+| Metric | Source | Purpose |
+|--------|--------|---------|
+| Weekly registrations | Google Ads | Baseline for lift calculation |
+| Weekly CPA | Google Ads | Baseline for guardrail monitoring |
+| Search term report | Google Ads | Baseline query quality |
+| Impression share | Google Ads Auction Insights | Baseline competitive position |
+| Brand campaign performance | Google Ads | Cannibalization baseline |
+
+The Brand campaign baseline is critical. AI Max may expand into queries that overlap with Brand terms. If Brand registrations drop while AI Max registrations increase, that is cannibalization, not incremental growth.
+
+### Phase 2: Test Period (4 weeks)
+
+| Week | Focus | Action |
+|------|-------|--------|
+| Week 1 | Learning period | Monitor daily. Do not intervene unless CPA exceeds 150% of baseline. |
+| Week 2 | Stabilization | Review search term report. Add negative keywords for irrelevant queries. |
+| Week 3 | Steady-state | Compare test vs control on all metrics. |
+| Week 4 | Decision data | Final comparison. Statistical significance check. |
+
+Weekly review cadence with Google (Mike Babich) during the test period. Mike can flag known AI Max behaviors and help distinguish algorithm learning from genuine performance issues.
+
+### Phase 3: Evaluation
+
+| Metric | Test | Control | Difference | Significance |
+|--------|------|---------|------------|-------------|
+| Registrations | # | # | % | p-value |
+| CPA | $ | $ | % | p-value |
+| CTR | % | % | pp | p-value |
+| Search term quality | Score | Score | Delta | Qualitative |
+| Brand cannibalization | # Brand regs | # Brand regs | % | p-value |
+
+---
+
+## Guardrails
+
+Guardrails are non-negotiable. They exist to prevent AI Max from degrading performance while the algorithm learns.
+
+| Guardrail | Threshold | Action if Breached |
+|-----------|-----------|-------------------|
+| CPA ceiling | 110% of control average | Flag for review. Do not pause yet. |
+| CPA hard stop | 120% for 7 consecutive days | Pause AI Max. Investigate with Google. |
+| Search term quality | >20% irrelevant queries | Add negative keywords. If persistent, pause. |
+| Brand cannibalization | Brand regs drop >10% during test | Investigate. If AI Max is stealing Brand traffic, adjust targeting. |
+| Budget parity | Test spend within 5% of control | Adjust daily budgets to maintain parity. |
+
+The 7-day consecutive rule for the hard stop is important. AI Max will have volatile days during learning. A single bad day is not a signal. Seven consecutive bad days is a pattern.
+
+---
+
+## Open Questions for Google Sync
+
+These questions must be answered before test launch. If any answer is a dealbreaker, the test design needs revision.
+
+| Question | Why It Matters | Dealbreaker? |
+|----------|---------------|-------------|
+| Does AI Max respect existing negative keyword lists? | If not, AI Max will bid on queries we have explicitly excluded | YES - must respect negatives |
+| How does AI Max interact with OCI bidding? | AI Max + OCI is a compound change. Need to understand interaction effects. | NO - but affects measurement |
+| Can we exclude specific asset types (auto-generated headlines)? | Auto-generated headlines may not align with SP study messaging | NO - but affects brand consistency |
+| What is the minimum campaign budget for AI Max to learn? | Underfunded AI Max will underperform, biasing the test | NO - but affects test design |
+| Does AI Max expand into Shopping-like formats? | AB does not have Shopping Ads. If AI Max creates Shopping-like placements, they will not convert. | YES - must exclude Shopping |
+
+---
+
+## Risk Assessment
+
+| Risk | Likelihood | Impact | Mitigation |
+|------|-----------|--------|------------|
+| AI Max bids on Brand terms | MEDIUM | HIGH (cannibalization) | Monitor Brand campaign performance daily. Add Brand terms as negatives in AI Max campaign. |
+| Auto-generated headlines contradict SP study messaging | MEDIUM | MEDIUM (brand inconsistency) | Review generated assets weekly. Pin critical headlines. |
+| CPA spikes during learning | HIGH | LOW (expected, temporary) | Guardrails prevent sustained degradation. 7-day rule. |
+| AI Max generates irrelevant queries | MEDIUM | MEDIUM (wasted spend) | Weekly search term review. Aggressive negative keyword management. |
+| Test is inconclusive at 4 weeks | LOW | LOW (extend test) | If directionally positive but not significant, extend to 6 weeks. |
+
+---
+
+## Success Criteria and Next Steps
+
+| Outcome | Action | Timeline |
+|---------|--------|----------|
+| Regs +15% AND CPA within 110% | Scale to 100% NB. Plan EU rollout (UK/DE first). | Immediate |
+| Regs +10-15% AND CPA within 110% | Extend test 2 more weeks for confidence | +2 weeks |
+| Regs flat or CPA >110% | Revert. Document learnings. Revisit when Google improves AI Max. | Immediate |
+| Brand cannibalization detected | Pause. Restructure targeting to exclude Brand overlap. Retest. | +2 weeks |
+
+---
+
+## Coordination
+
+| Stakeholder | Role | Action Required |
+|------------|------|-----------------|
+| Mike Babich (Google) | AI Max feature access, best practices | Answer open questions before launch |
+| Stacey Gu | US campaign owner | Implement test/control split, monitor daily |
+| Brandon Munday | Approval | Sign off on test design and guardrails |
+| Andrew Wirtz | EU awareness | Brief on US results for EU rollout planning |
+
+---
+
+## Sources
+- AI Max test planned Q2 2026, US first - source: ~/shared/context/body/eyes.md -> What's Coming
+- Decision D9: phased rollout, incrementality benchmarks - source: ~/shared/context/body/brain.md -> D9: AI Max Testing Approach
+- Mike Babich (Google) as contact - source: ~/shared/context/body/spine.md -> Key People
+- OCI measurement framework as template - source: ~/shared/context/body/eyes.md -> OCI Performance -> Measurement
+- OCI US result (+24% regs, $16.7MM OPS) - source: ~/shared/context/body/eyes.md -> OCI Performance
+- SP study messaging alignment - source: ~/shared/context/body/eyes.md -> Ad Copy Testing -> Research Foundation
+- Google automation progression (Manual -> Smart Bidding -> AI Max -> PMax) - source: industry knowledge, Google I/O 2025 announcements
+- Project Baloo early access launched 3/30 - source: ~/shared/context/body/eyes.md -> What's Coming
+
+<!-- AGENT_CONTEXT
+machine_summary: "Test design for Google AI Max in US NB campaigns. 50/50 split, 4-week minimum, targeting 15-25% reg lift with CPA guardrail at 110% (hard stop at 120% for 7 consecutive days). 6 days overdue (was due 3/28). Depends on Google sync with Mike Babich to resolve 5 open questions. Brand cannibalization is the primary risk. Follows OCI test methodology (D9). If successful, scales to EU."
+key_entities: ["AI Max", "US", "NB campaigns", "Mike Babich", "Google", "Stacey Gu", "Brandon Munday", "OCI", "Brand cannibalization"]
+action_verbs: ["test", "measure", "guard", "scale", "revert", "coordinate"]
+update_triggers: ["Google AI Max feature updates", "Mike Babich answers open questions", "test launch date confirmed", "test results available"]
+-->

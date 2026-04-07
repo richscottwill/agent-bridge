@@ -7,8 +7,8 @@
   "allowedTools": ["read", "write"],
   "resources": [
     "file://shared/.kiro/agents/wiki-team/wiki-editor.md",
-    "file://shared/context/wiki/roadmap.md",
-    "file://shared/context/wiki/wiki-structure.md"
+    "file://shared/wiki/roadmap.md",
+    "file://shared/wiki/wiki-structure.md"
   ],
   "mcpServers": {}
 }

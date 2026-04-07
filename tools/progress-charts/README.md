@@ -31,7 +31,7 @@ Output: 5 HTML files in the site directory. Open `index.html` to start.
 | Parser | Source File | What it extracts |
 |--------|------------|-----------------|
 | `parse_gut_budgets()` | shared/context/body/gut.md | Organ word budget table: organ, budget, actual, utilization% |
-| `parse_changelog()` | shared/context/changelog.md | Word savings (before→after), loop run dates, body totals, experiment statuses (CE-N → ADOPTED/REVERTED/QUEUED) |
+| `parse_changelog()` | shared/context/body/changelog.md | Word savings (before→after), loop run dates, body totals, experiment statuses (CE-N → ADOPTED/REVERTED/QUEUED) |
 | `parse_tracker_scorecard()` | shared/context/active/rw-tracker.md | Weekly scorecard: artifacts shipped, tools built, low-leverage hours. Parsed from `### Week of YYYY-MM-DD (WN)` sections |
 | `parse_patterns()` | shared/context/body/nervous-system.md | Pattern table: name, status (VALIDATED/ACTIVE/NEW/RESOLVED/STUCK), weeks, trajectory (IMPROVING/STUCK/WORSENING), assessment |
 | `parse_amcc()` | shared/context/body/amcc.md | Streak (current/longest), resets, hard thing, resistance types with counters, growth model table |

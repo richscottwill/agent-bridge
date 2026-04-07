@@ -1,3 +1,4 @@
+<!-- DOC-0234 | duck_id: other-pending-artifact-fixes -->
 # Pending Artifact Fixes
 
 Created: 2026-03-25

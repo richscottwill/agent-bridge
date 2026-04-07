@@ -1,3 +1,4 @@
+<!-- DOC-0220 | duck_id: organ-changelog -->
 # Changelog — Body System
 
 ## Run 27 (2026-04-04, Randomized Batch 2 — Karpathy inline, 10 experiments: SPLIT/REMOVE/REWORD/COMPRESS/MERGE/RESTRUCTURE)

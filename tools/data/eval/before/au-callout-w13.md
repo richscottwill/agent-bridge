@@ -1,3 +1,4 @@
+<!-- DOC-0417 | duck_id: tool-au-callout-w13 -->
 # AU - W13 (Mar 22-28)
 
 AU drove 207 registrations (-16% WoW) on -13% spend, with $118 CPA (+3% WoW). March is projected at $125K spend and 1K registrations at $121 CPA, tracking OP2 at -15% spend and -5% registrations.

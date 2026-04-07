@@ -1,3 +1,4 @@
+<!-- DOC-0358 | duck_id: protocol-signal-intelligence -->
 # Signal Intelligence Protocol
 
 Cross-channel topic tracking with reinforcement and decay. Unifies Slack, Email, Asana, and Hedy signals into a single queryable layer in DuckDB.

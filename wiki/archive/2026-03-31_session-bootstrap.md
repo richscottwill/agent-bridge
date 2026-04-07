@@ -1,0 +1,159 @@
+<!-- DOC-0113 | duck_id: context-2026-03-31_session-bootstrap -->
+# RW Trainer — Session Bootstrap
+
+Last updated: 2026-03-18
+Updated by: Richard Williams + AI Trainer (Asana sync + hook system session)
+
+## What This Is
+Richard Williams is a Marketing Manager (L5) on Amazon Business Paid Search. He built an AI RW Trainer system to identify mediocrity patterns, hold him accountable, and push him toward becoming the best paid search marketer at Amazon. This file is the bootstrap for any new AI session to pick up where the last one left off.
+
+**IMPORTANT: AgentSpaces chats are deleted every 14 days. This file and the steering/context files below ARE the persistent memory. Read them all at session start.**
+
+## Files to Read at Session Start (in order)
+1. `~/.kiro/steering/rw-trainer.md` — The trainer's behavior rules, mediocrity patterns, and coaching framework
+2. `~/.kiro/steering/soul.md` — Richard's identity, role, preferences, key file pointers
+3. `~/.kiro/steering/richard-writing-style.md` — Core voice (auto-loaded). Specialized guides are manual-inclusion: `richard-style-email`, `richard-style-wbr`, `richard-style-mbr`, `richard-style-docs`, `richard-style-amazon`
+4. `~/shared/context/active/current.md` — Ground truth: active projects, people, meetings, pending actions
+5. `~/shared/context/active/rw-tracker.md` — Weekly scorecard, patterns, 30-day challenge
+6. `~/shared/context/active/org-chart.md` — Org structure
+7. `~/shared/context/body/heart.md` — Autoresearch loop architecture and experiment state
+8. This file — for meta-context about the system itself
+
+## Richard's Role & Markets
+- Amazon Business, Paid Search (WW Outbound Marketing under Brandon Munday L7)
+- Owns: AU (Australia), MX (Mexico) hands-on; US/EU5/JP/CA team-wide
+- Key focus: OCI bidding rollout, AI Max testing, Answer Engine Optimization, Project Baloo, F90 Lifecycle
+- Timezone: PT (UTC-7). System clock shows UTC — adjust accordingly.
+
+## Tool Access & Integrations
+
+### What the AI CAN access:
+- **Email** (Outlook) — read, search, send, reply, forward, folders
+- **Calendar** (Outlook) — view, create, update meetings
+- **Microsoft To-Do** — full CRUD on tasks and lists
+- **Quip** — read and edit documents
+- **Internal Amazon websites** — wiki, phonetool, code, etc.
+- **Local filesystem** — ~/shared/, /workspace/
+
+### What the AI CANNOT access:
+- Slack
+- Asana (directly)
+- Google Ads
+- Adobe Analytics
+- SharePoint/OneDrive Excel files
+- Richard's Windows laptop filesystem (C:\Users\prichwil\...)
+
+### Asana Bridge (workaround):
+- **Create tasks**: Email x@mail.asana.com (include Richard's email address)
+- **Read task updates**: Check Outlook folder "Auto-Comms" (folder ID: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy/SDRrGkcLnEuZ4GAQDAgFdLn8NBQbObwPn0M6aUAADuhyQpAAA=)
+- **Asana CSV export**: Richard periodically exports to ~/shared/context/intake/asana-tasks.csv
+- **Asana iCal feeds** (not yet tested):
+  - https://app.asana.com/-/0/ical?key=c24affd6860905210b218d8974e4dc06&domain=8442528107068
+  - https://calendarsync.asana.biz/ical?key=c24affd6860905210b218d8974e4dc06&domain=8442528107068
+
+### Microsoft To-Do Structure:
+Richard uses a workflow-based task system mirroring his Asana setup:
+- **🧹 Sweep** — Low-friction morning tasks (list ID: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESHAAA=)
+- **🎯 Core** — Deep work, strategic projects (list ID: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESIAAA=)
+- **⚙️ Engine Room** — Excel/Google Ads execution work (list ID: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESJAAA=)
+- **📋 Admin** — Wind-down, delegation, process work (list ID: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESKAAA=)
+- **📦 Backlog** — Deferred/blocked/future tasks with justification (list ID: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADWyS4nAAA=)
+
+Note: The old "🎯 RW Trainer" single list was migrated to these 4 lists on 3/13. It may still appear in To-Do but should be empty/deleted.
+
+Task bodies contain: STATUS, WHAT TO DO, DRAFT REPLIES/MESSAGES (in Richard's voice), KEY DETAILS, and WHY IT MATTERS callouts.
+
+**Before recreating any task, always check with showCompleted=true first** — Richard may have already completed or removed it.
+
+### Key Quip Documents:
+- MX Paid Search Sync: https://quip-amazon.com/K9OYA9mXm7DU/AB-MX-Paid-Search-Sync
+- AU PS Weekly Performance: https://quip-amazon.com/84SxAbCaICKb/AU-PS-Weekly-Performance
+- WW AB Traffic Marketing Pre-WBR Callouts: https://quip-amazon.com/MMgBAzDrlVou
+
+### Key Outlook Folders:
+- Auto-Comms (Asana notifications): folder ID above
+- Goal: Paid Acquisition: AQMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1ADdkM2EwYWMALgAAAyuwPeLL9INGsaRwucS5ngYBAEas7LcSB6lEv39h0ciIq84AAAITTwAAAA==
+- AP (Accounts Payable/Invoices): AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy/SDRrGkcLnEuZ4GAQDAgFdLn8NBQbObwPn0M6aUAADuhyQcAAA=
+
+## How the Trainer Works
+
+### Daily Flow:
+1. Richard starts a session and says what he's working on
+2. Trainer assesses: high-leverage or low-leverage?
+3. Trainer checks To-Do lists for overdue/upcoming items
+4. Trainer scans Auto-Comms for Asana updates
+5. Trainer pushes Richard through his workflow: Sweep → Core/Engine Room → Admin
+
+### Weekly (Fridays):
+"What did you ship this week that compounds? What did you spend time on that won't matter in 30 days?"
+
+### Task Creation Rules:
+- Every task gets: STATUS, WHAT TO DO, DRAFT REPLIES (in Richard's voice), KEY DETAILS, WHY IT MATTERS
+- Use workflow prefixes in titles when in the single list (not needed now with separate lists)
+- Priority emojis: 🔴 urgent/overdue, 🟡 important/upcoming, 🟢 improvement/delegation, 🧹 cleanup
+- When completing a To-Do task that has an Asana equivalent, ALWAYS remind Richard to close it in Asana too
+
+### Mediocrity Signals:
+- "I'll just do it myself" → build a system
+- Context-loading as procrastination → call it out, push to execute
+- Stale tasks (>2 weeks overdue) → triage: do, delegate, reschedule, or close
+- Attending meetings without prep or follow-up
+- Consumption without creation (attending sessions but not writing POVs)
+- Kingpin goals not updated → leadership visibility gap
+
+## Key People (Quick Reference)
+| Name | Alias | Context |
+|------|-------|---------|
+| Brandon Munday | brandoxy | Richard's manager (L7), Paid Acq team lead |
+| Kate Rundell | kataxt | L8 Director, key stakeholder for Testing Approach doc |
+| Alexis Eck | alexieck | AU market POC, MCS page mapping |
+| Lena Zak | lenazak | AU stakeholder, pushes for MCS migration |
+| Carlos Palmos | cpalmos | MX Paid Search, invoice coordination |
+| Lorena Alvarez Larrea | — | MX Paid Search |
+| Yun-Kang Chu | yunchu | 1:1 sync, MX PS, Adobe analytics |
+| Aditya Satish Thakur | — | Weekly sync, AI brainstorm partner |
+| Dwayne Palmer | dtpalmer | Customer Engagement/MCS, WBR coverage |
+| Megan Lim | megalim | Kate's EA — scheduling |
+
+## Agent Hooks — Daily Execution System
+
+Four hooks in `.kiro/hooks/`:
+
+| # | Hook | Type | Purpose |
+|---|------|------|---------|
+| 1 | **Morning Routine** (`rw-morning-routine`) | userTriggered | One-click daily: Asana sync → draft replies → To-Do refresh → daily brief → calendar blocks |
+| 2 | **Run the Loop** (`run-the-loop`) | userTriggered | Maintenance → cascade to body organs → optionally 1 experiment |
+| 3 | **Block Email Send** | preToolUse | Blocks email_reply/send/forward unless only recipient is prichwil |
+| 4 | **Block Calendar Invite** | preToolUse | Blocks calendar events with external attendees |
+
+**Morning Routine is the daily driver** — it consolidates what used to be 4 separate hooks (Asana sync, draft replies, morning routine, calendar blocks) into one flow. Run the Loop is for deeper context refresh + experiments (run independently or before morning routine).
+
+**Asana task ID extraction**: When tasks are created via x@mail.asana.com, Asana sends a confirmation to Auto-Comms with a "View task" URL containing the task ID (`/task/{id}`). The morning routine's Step 1 extracts these and stores them in To-Do task bodies as `ASANA: {id}`. See `~/shared/context/active/asana-sync-protocol.md`.
+
+## Autoresearch Loop
+The body/heart.md file defines the autonomous context optimization system. Key points:
+- 8 experiments completed, all KEPT → content now lives in body organ files (brain, eyes, hands, memory)
+- Phase 1 (Maintenance) refreshes ground truth from email/calendar
+- Phase 2 (Cascade) updates organ files
+- Phase 3 (Experiments) adds new content to organs
+- Run with: "run the loop"
+
+## What Was Accomplished in This Session (2026-03-13)
+1. Created the RW Trainer steering file
+2. Created the Excellence Tracker
+3. Set up Microsoft To-Do with 4 workflow lists (Sweep, Core, Engine Room, Admin)
+4. Populated tasks with detailed bodies including draft replies
+5. Established Asana bridge (email create + Auto-Comms read)
+6. Read and indexed MX and AU Quip sync docs
+7. Reconciled To-Do tasks against Asana export
+8. Identified and called out mediocrity patterns (stale tasks, context-loading as procrastination, Kingpin goals gap)
+9. Created this bootstrap file for session continuity
+
+## Open Items / Ongoing
+- 30-day challenge runs through 2026-04-13
+- Testing Approach meeting with Kate: April 16, 1-2pm PT
+- Brandon returned from OOO on 3/16 — first 1:1 was Mon 3/17
+- OCI rollout to AU/MX targeted for May 2026
+- AI Max US test planned for Q2 2026 — no test design written yet
+- Campaign link generator tool was marked complete by Richard (may need to verify what was built)
+- Asana iCal feeds provided but not yet tested for data extraction

@@ -1,0 +1,194 @@
+<!-- DOC-0107 | duck_id: comms-stakeholder-comms-guide -->
+---
+title: "Stakeholder Communication Guide: How to Talk to Each Audience"
+slug: "stakeholder-comms-guide"
+type: "guide"
+audience: "self"
+status: "draft"
+created: "2026-03-25"
+updated: "2026-03-25"
+owner: "Richard Williams"
+tags: ["communication", "stakeholder", "visibility", "meeting-prep", "ww"]
+depends_on: []
+consumed_by: ["wiki-concierge", "rw-trainer"]
+summary: "Playbook for proactive stakeholder communication — who cares about what, how to talk to them, and templates for common scenarios."
+# Artifact metadata
+artifact-status: DRAFT
+artifact-audience: personal
+artifact-level: 1
+update-trigger: "Quarterly after annual/forte reviews, or when a new stakeholder relationship becomes active"
+---
+
+# Stakeholder Communication Guide: How to Talk to Each Audience
+
+This doc exists because visibility is the #1 growth area identified in the 2026 Annual Review. Brandon's feedback: "maintaining consistent visibility across all workstreams" and "lightweight mechanisms for timely communication." Three or more peers flagged communication and knowledge sharing. This isn't a nice-to-have — it's the gate blocking Level 1 graduation.
+
+After reading the relevant section, you should be able to prep for any meeting or draft any communication without asking "what does this person care about?"
+
+## Context
+
+The visibility gap is structural, not motivational. Richard's analytical depth and testing expertise are recognized strengths. The gap is in proactively surfacing outcomes to the right people at the right time. The Annual Review confirmed what the nervous system has been tracking: visibility avoidance is a persistent pattern (5+ weeks, WORSENING as of 3/25).
+
+This guide maps four things for each stakeholder tier:
+1. What they care about (so you lead with the right content)
+2. How to talk to them (register, format, cadence)
+3. When to communicate proactively (don't wait to be asked)
+4. Templates for common scenarios (reduce the decision to copy-paste)
+
+## Stakeholder Tiers
+
+### Tier 4: Strategic Leadership — Kate Rundell (L8), Todd Heimes (L10)
+
+**What they care about:** Business impact (registrations, OPS, CPA at program level), validated results that justify investment, cross-functional collaboration as a differentiator, strategic positioning of PS as more than a channel executor.
+
+**How to talk to them:** Narrative-driven. Data embedded in story, not tabled in isolation. Every metric connects to registrations, OPS, or customer experience. Lead with the "so what" — result or recommendation first, then supporting data. Use "we" for team accomplishments. Credit cross-functional partners by name.
+
+**Format:** Amazon writing norms. No bullet-point updates — write in complete paragraphs with connective tissue. Tables for comparisons, narrative for interpretation. Always add the "so what" after a table. State confidence levels explicitly.
+
+**Cadence:** Kate sees Richard's work primarily through the Testing Approach doc (Apr 16 meeting) and WBR callouts. Todd sees it through Kate. Proactive communication to Kate should happen when: a test produces validated results, a cross-functional partnership delivers an outcome, or a strategic decision needs escalation.
+
+**Proactive triggers:**
+- OCI market goes live → send Kate a 3-sentence summary: what launched, expected impact, timeline to results
+- Ad copy test produces results → send summary with confidence level and next steps
+- Competitive landscape shifts materially → flag with data and recommended response
+
+**What NOT to do:** Don't send Kate tactical updates. Don't hedge. Don't present options without a recommendation. Kate's time is scarce — every communication should answer "so what?" in the first sentence.
+
+### Tier 3: Direct Manager — Brandon Munday (L7)
+
+**What Brandon cares about:** Visibility into Richard's workstreams (the #1 feedback), structured communication (change logs, process adherence), balance between documentation and execution, team leverage through automation, Polaris rollout progress, testing methodology.
+
+**How to talk to him:** Professional but approachable. Lead with outcomes and strategic framing. Show leverage, not just activity. In formal settings (Deep Dive & Debate, team sync): prepared, concise, connect tactical work to bigger picture. In Slack: drops to Tier 1 register — casual, playful, collaborative.
+
+**Format:** Concise updates with clear structure. Brandon values "lightweight mechanisms" — a 3-line Slack message with the outcome, the data point, and the next step is better than a 2-page doc he won't read until next week.
+
+**Cadence:** Weekly team sync (contribute actively, not just during your own updates), Deep Dive & Debate (Thursday — visibility opportunity), 1:1s as needed. Proactive Slack updates when outcomes land.
+
+**The visibility gap in practice:** In the weekly team sync (3/24), Richard's contributions were concentrated in testing updates and MX — quieter than Andrew and Stacey in group settings. The pattern is consistent. The fix: find moments to add strategic commentary during others' updates — connecting EU patterns to AU/MX, framing cross-market insights, or asking questions that demonstrate breadth.
+
+**Proactive triggers:**
+- Any outcome lands (Polaris switch, OCI E2E, ad copy results) → Slack Brandon within 24 hours
+- Blocking issue → flag early with proposed solution, don't wait for it to become a fire
+- Weekly: share one insight from AU/MX that connects to a team-wide pattern
+
+**What NOT to do:** Don't over-document at the expense of execution. Brandon explicitly said: "I don't want Richard spending 80% of his time writing documents." The balance is ship the artifact, then communicate the outcome — not write about planning to ship.
+
+### Tier 2: Market Stakeholders — Lena Zak (L7), Alexis Eck (L6), Lorena Alvarez Larrea (L5)
+
+**Lena Zak (AU Country Leader, L7):**
+- Cares about: CPA, benchmarks, reporting formats, data. When she asks "why," she wants numbers, not explanations.
+- How to talk to her: Data-forward. Always have AU metrics loaded before any Lena interaction. Lead with the number, then the interpretation. She requested a standardized weekly CPA tracking table — deliver it consistently.
+- Format: Tables with clear metrics. Numbered responses to numbered asks. No narrative fluff.
+- Cadence: Weekly AU Paid Search Sync. Proactive when CPA moves >10% in either direction.
+- She's the hardest stakeholder to satisfy. Come prepared or don't come.
+
+**Alexis Eck (AU Sr. Mktg Mgr, L6):**
+- Cares about: Implementation status, practical execution, MCS migration progress, keyword optimization.
+- How to talk to her: Professional but friendly. Collaborative. She's a strong execution partner who defers to Lena on strategic direction.
+- Format: Status updates with clear next steps. She appreciates pre-work ("thank you for organizing all of this").
+- Cadence: Weekly AU sync. Ad hoc on implementation questions.
+
+**Lorena Alvarez Larrea (MX, L5):**
+- Cares about: MX PS strategy overview, keyword data, campaign structure. Relationship is new (primary stakeholder since ~3/17 when Carlos transitioned to CPS).
+- How to talk to her: Professional — relationship is new. Be thorough. Come prepared with full MX PS overview for early syncs.
+- Format: Comprehensive for now (she's onboarding). Will shift to concise as relationship matures.
+- Cadence: Biweekly MX sync. Proactive on keyword opportunities and campaign changes.
+
+### Tier 1: Peers — Andrew, Stacey, Yun, Adi, Dwayne, Peter
+
+**General approach:** Casual. "Hey [name]" or no greeting. Abbreviated. Sign-off: "Thanks," or nothing. In Slack: no sign-off ever.
+
+**Per-peer dynamics:**
+
+| Peer | Dynamic | Communication Note |
+|------|---------|-------------------|
+| Andrew Wirtz | Highly vocal in group settings. Good peer dynamic. | Find moments to add strategic commentary during Andrew's EU updates — connect patterns cross-market. Don't compete for airtime; add value. |
+| Stacey Gu | OCI/Bidding collaborator. | Coordinate on OCI rollout status. She completed US Polaris switch (3/24). |
+| Yun-Kang Chu | Reliable data contributor. Low-maintenance. | Brief, direct. No formalities. Push on overdue items (WW redirect reporting). |
+| Adi Thakur | Richard is a mentor here. | This is where Richard's expertise shines — he explains complex concepts clearly and connects tactical work to bigger picture. Document these teaching moments as frameworks. |
+| Dwayne Palmer | MCS/website, organized and thorough. | Straightforward working relationship. Casual. Appreciates pre-work. |
+
+## Communication Templates
+
+### Template 1: Outcome Notification (to Brandon, Slack)
+
+```
+Hey Brandon — [outcome] landed. [One data point]. Next step: [action] by [date].
+```
+
+Example: "Hey Brandon — UK ad copy test wrapped. +86% CTR, +31% regs over 30 days. Next step: rolling to Phase 2 (all NB) this week."
+
+### Template 2: Proactive Status Update (to Kate/Brandon, email)
+
+```
+Subject: [Project] — [Status in 3 words]
+
+[One sentence: what happened and why it matters.]
+
+Key data: [2-3 metrics with interpretation]
+
+Next step: [What's happening next and when]
+
+Confidence: [HIGH/MEDIUM/LOW with brief rationale]
+```
+
+### Template 3: Data Response (to Lena, email)
+
+```
+Hi Lena,
+
+[Metric she asked for]: [number] ([comparison]).
+
+[One sentence interpretation — what it means, not just what it is.]
+
+[If action needed]: Recommended next step: [action].
+[If no action]: We'll continue monitoring and flag if [threshold].
+
+Thank you, Richard
+```
+
+### Template 4: Meeting Prep (self-use, before any stakeholder meeting)
+
+```
+Meeting: [name]
+Attendees: [who] — check memory.md for dynamics
+My position on open items:
+1. [Item]: [position + supporting data]
+2. [Item]: [position + supporting data]
+Proactive share: [one insight or outcome to volunteer]
+Question to ask: [one question that demonstrates breadth]
+```
+
+## Decision Guide
+
+| Situation | Action | Why |
+|-----------|--------|-----|
+| Outcome lands (test result, migration complete, etc.) | Notify Brandon within 24 hours via Slack. If Kate-visible, draft email for Richard to send. | Visibility is the #1 gap. Proactive > reactive. |
+| Lena asks a data question | Respond same day with numbers + interpretation. | She expects speed and precision. Delay erodes trust. |
+| Group meeting coming up | Prep one proactive insight to share during someone else's update. | The visibility gap is worst in group settings. One contribution per meeting minimum. |
+| Blocking issue emerges | Flag to Brandon with proposed solution before it becomes a fire. | "I flagged it early and here's my plan" > "Sorry, this blew up." |
+| Quarterly review approaching | Compile outcomes from the quarter with data. Connect to Five Levels progress. | Reviews are visibility events. Come with evidence, not narratives. |
+
+## Related
+
+- [Memory — Relationship Graph](~/shared/context/body/memory.md) — per-contact dynamics from Hedy analysis
+- [Org Chart](~/shared/context/active/org-chart.md) — reporting lines and team structure
+- [Richard Writing Style](~/.kiro/steering/richard-writing-style.md) — core voice and audience tiers
+- [Amazon Writing Norms](~/.kiro/steering/richard-style-amazon.md) — leadership-facing writing standards
+- [Brain — Five Levels](~/shared/context/body/brain.md) — Level 1 graduation requires consistent artifact shipping, which requires visibility
+
+## Sources
+- Annual Review feedback (visibility as #1 gap) — source: Annual Review 2026, shared 3/24, Brandon Munday
+- Peer feedback (communication, project management, Have Backbone) — source: Annual Review 2026, peer review section
+- Brandon's specific quotes — source: `shared/context/body/memory.md`, Brandon Munday relationship entry, Hedy 3/24
+- Meeting dynamics (group setting visibility gap) — source: `shared/context/body/memory.md`, Andrew Wirtz entry + Brandon entry
+- Lena communication preferences — source: `shared/context/body/memory.md`, Lena Zak relationship entry
+- Stakeholder tiers — source: `~/.kiro/steering/richard-writing-style.md`, Audience Tiers
+- Visibility avoidance pattern — source: `shared/context/body/nervous-system.md`, Loop 3 Pattern Trajectory
+
+<!-- AGENT_CONTEXT
+machine_summary: "Stakeholder communication playbook addressing Richard's #1 growth area (visibility) from 2026 Annual Review. Maps 4 stakeholder tiers: Strategic (Kate/Todd — narrative, business impact), Manager (Brandon — outcomes, lightweight mechanisms), Market (Lena/Alexis/Lorena — data-forward, market-specific), Peers (casual, strategic commentary in group settings). Includes templates for outcome notifications, status updates, data responses, and meeting prep."
+key_entities: ["Brandon Munday", "Kate Rundell", "Lena Zak", "Alexis Eck", "Lorena Alvarez Larrea", "Andrew Wirtz", "visibility gap", "Annual Review 2026", "Level 1"]
+action_verbs: ["communicate", "notify", "prep", "flag", "share", "respond"]
+update_triggers: ["annual or forte review completed", "new stakeholder relationship becomes active", "communication pattern changes detected by nervous system"]
+-->

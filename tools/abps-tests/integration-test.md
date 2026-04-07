@@ -1,3 +1,4 @@
+<!-- DOC-0418 | duck_id: tool-integration-test -->
 # ABPS AI Pipeline — End-to-End Integration Test
 
 **Purpose:** Manual test procedure to validate the full ABPS AI pipeline from Intake through Active/Archive.

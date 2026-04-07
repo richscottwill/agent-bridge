@@ -1,0 +1,27 @@
+<!-- DOC-0170 | duck_id: intake-budget-ceiling-observation -->
+# Observation: Static Word Budgets Are the Last Arbitrary Thresholds
+
+**Source:** Richard, 2026-04-02 system refresh conversation
+**Route to:** Karpathy
+
+## The Inconsistency
+
+Heart.md was overhauled to remove all static thresholds — no experiment count cap, no static score floors, adaptive eval depth, Bayesian self-termination via priors. But the 24,000w total body ceiling and per-organ word budgets in gut.md are still static numbers set during initial body build. Never tested or validated.
+
+## The Question
+
+What's the actual cost of an organ being 3,000w vs 2,000w? Two possibilities:
+1. If a bigger organ answers more questions correctly → the budget is actively preventing improvement
+2. If a bigger organ doesn't improve accuracy → the budget is redundant because delta-only keep/revert already handles it (ADD experiments that don't improve get reverted)
+
+Either way, the static budget isn't earning its place.
+
+## Proposed Direction
+
+Replace static budgets with a learned constraint. Track whether organ size correlates with eval accuracy across experiments. Let the data tell us where the ceiling actually is — same philosophy as every other threshold removal in the heart.md overhaul.
+
+The per-organ budgets and total body ceiling should be the next candidates for Bayesian management, not static governance.
+
+## Priority
+
+Not urgent — current budgets aren't blocking anything (no organ in mandatory-compress territory). But this should be on Karpathy's radar for the next protocol evolution.

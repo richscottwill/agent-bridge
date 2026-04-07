@@ -14,7 +14,7 @@ The Karpathy autoresearch pattern applied to documentation: measure, experiment,
 
 ## Mode 1: Review (pre-publish)
 
-When given a staged article at `~/shared/context/wiki/staging/{topic-slug}.md`:
+When given a staged article at `~/shared/wiki/{topic-slug}.md`:
 
 ### Score on 5 dimensions (1-10 each)
 
@@ -55,7 +55,7 @@ When given a staged article at `~/shared/context/wiki/staging/{topic-slug}.md`:
 
 ### Review output
 
-Write to `~/shared/context/wiki/reviews/{topic-slug}-review.md`:
+Write to `~/shared/wiki/reviews/{topic-slug}-review.md`:
 
 ```markdown
 # Review: {Title}
@@ -89,7 +89,7 @@ The bar is 8/10. A 7 is a decent doc that answers the questions. An 8 is a doc t
 
 ## Mode 2: Audit (periodic)
 
-Run weekly or on-demand against the published wiki at `~/shared/artifacts/`.
+Run weekly or on-demand against the published wiki at `~/shared/wiki/`.
 
 For each published article, assess:
 
@@ -106,7 +106,7 @@ For each published article, assess:
 
 ### Audit output
 
-Write to `~/shared/context/wiki/audits/audit-{date}.md`:
+Write to `~/shared/wiki/audits/audit-{date}.md`:
 
 ```markdown
 # Wiki Audit — {date}

@@ -1,0 +1,126 @@
+<!-- DOC-0494 | duck_id: wiki-review-testing-approach-kate-v2-eval-a -->
+# Review: Paid Search Testing Approach & Year Ahead (Blind Eval A)
+
+**Reviewer:** wiki-critic (Blind Eval A — no prior reviews seen)
+**Date:** 2026-04-05
+**Article:** `shared/context/wiki/staging/testing-approach-kate-v2.md`
+**Context:** Flagship strategy doc for Kate Rundell (L8 Director), April 16 review
+
+---
+
+## Scores
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 9/10 | Enables investment decisions — every 2026 ask maps to a validated 2025 result. Missing rolled-up 2026 aggregate target. |
+| Clarity | 8/10 | Excellent structure (methodology → workstreams → challenges → investment → team). Acronym density high for stated `audience: "org"`. |
+| Accuracy | 8/10 | Numbers internally consistent. SyRT baseline is Q2 2023 — nearly 3 years old with no re-validation note. 644% ROAS attributed ambiguously to two workstreams. |
+| Dual-audience | 8/10 | Strong frontmatter + AGENT_CONTEXT with update_triggers and depends_on. Machine_summary lacks structured queryable metrics. |
+| Economy | 7/10 | Four specific duplications drag this down. ~20% could be cut. Investment Summary table restates the intro. 644% ROAS appears in two sections. |
+| **Overall** | **8.0/10** | |
+
+## Verdict
+
+**REVISE**
+
+Overall is 8.0 and no dimension falls below 7, which technically meets the PUBLISH threshold. I am calling REVISE anyway. Here is why: the Economy problems are specific, fixable in 30 minutes, and the kind of thing an L8 director will notice. The standard is "Kate Rundell wouldn't change a word." She would cut the duplication. Shipping known redundancy to a flagship audience when the fixes are straightforward is not an 8 — it is a 7.9 rounded up. Fix the five items below and this publishes clean.
+
+---
+
+## Required Changes
+
+### 1. Cut the second intro paragraph
+
+The first paragraph is a strong executive summary. The second paragraph ("The team is transforming Paid Search from a keyword-driven acquisition channel into an automated, audience-centric engine...") is throat-clearing that restates the first paragraph's logic and previews a structure the headers already communicate. The cross-functional collaboration sentence is repeated in the Team section.
+
+**Cut this entirely:**
+> "The team is transforming Paid Search from a keyword-driven acquisition channel into an automated, audience-centric engine — grounded in evidence rather than speculation. Each section below covers one workstream: what we tested, what we learned, and how the validated results directly inform 2026 investment. Cross-functional collaboration spanning Legal, Data Science, MarTech, MCS, ABMA, Customer Research, and international market teams was required for every initiative, with the PS team serving as the connective tissue between platform capabilities and business objectives."
+
+The first paragraph already establishes the tested→validated→scale argument. The cross-functional point lands better in the Team section where it currently also lives. Let the workstream headers do the structural preview work.
+
+### 2. Remove the duplicate +13.6K stat from the Methodology section
+
+The "Scale or Stop" methodology example uses the Gated Guest → in-context registration pivot verbatim:
+
+> "The Gated Guest experiment showed -61% registrations after 4 weeks — we paused it, deep-dived the data, and pivoted to in-context registration, which delivered +13.6K annualized incremental registrations with 100% probability (APT). Failures are data, not setbacks."
+
+This exact stat (+13.6K annualized, 100% probability, APT) reappears in Workstream 4: User Experience. The methodology section should illustrate the principle without duplicating the workstream's headline number.
+
+**Replace with:**
+> "The Gated Guest experiment showed -61% registrations after 4 weeks — we paused it, deep-dived the data, and pivoted to in-context registration (see Workstream 4). Failures are data, not setbacks."
+
+This preserves the methodology illustration while making the UX workstream the single source of truth for the number.
+
+### 3. Fix the 644% ROAS double-attribution
+
+644% ROAS from Prime Day 2025 Engagement campaigns appears in two places:
+
+- **Workstream 3 (Audiences):** "During Prime Day 2025, Engagement campaigns generated $329K in OPS at 644% ROAS — a 12x improvement over the prior year."
+- **Workstream 5 (Algorithmic Ads):** "During Prime Day 2025, Engagement campaigns delivered 644% ROAS."
+
+This is the same data point in two workstreams. It is confusing — the reader cannot tell whether these are the same campaigns or different ones. The Engagement campaigns are an Audiences initiative, not an Algorithmic Ads initiative.
+
+**In Workstream 5, replace:**
+> "During Prime Day 2025, Engagement campaigns delivered 644% ROAS."
+
+**With a DG-specific metric or remove the sentence.** If Demand Gen had its own Prime Day performance, cite that. If not, cut the sentence — the $0.39 CPC and +53% YoY traffic growth already make the case for DG without borrowing a stat from another workstream.
+
+### 4. Tighten the Investment Summary to avoid restating the intro
+
+The 2026 Investment Summary table and its surrounding prose restate what the intro already established. The compounding paragraph after the table ("These workstreams compound: campaign consolidation strengthens OCI signals...") is valuable and should stay. But the "risk of not investing" paragraph and the final sentence ("These investments directly support the PS team's OP2 registration and OPS commitments...") restate the intro's core argument a third time.
+
+**Cut:**
+> "These investments directly support the PS team's OP2 registration and OPS commitments — the validated 2025 results provide the evidence base for the 2026 plan."
+
+The entire document already makes this argument. Restating it in the final sentence of the investment section is redundant.
+
+### 5. Add a one-line note on SyRT re-validation status
+
+In the Methodology section:
+
+> "Our Q2 2023 SyRT established that 82-92% of Non-Brand registrations are incremental (US NB: +16.4% lift, p<0.001), confirming the channel's value and informing budget allocation."
+
+This is a nearly 3-year-old finding presented as current. An L8 director may ask whether it has been re-validated. Either:
+- Add: "This baseline was re-validated in [date]" if it was, or
+- Add: "Re-validation is planned for [date]" if it was not.
+
+Do not leave a 2023 data point unaddressed in a 2026 strategy doc.
+
+---
+
+## Economy Sub-Rule Audit
+
+| Sub-Rule | Status | Notes |
+|----------|--------|-------|
+| Bullet list abuse (>30% in bullets) | **PASS** | Doc is primarily narrative prose. Bullet usage is minimal. |
+| Table abuse (no "so what" interpretation) | **PASS** | All 4 data tables are followed by interpretation sentences. The team roster table is reference data — appropriate use. |
+| Formatting as content (unreadable without formatting) | **PASS** | Bold numbered steps still read with numbers alone. Italic progression lines are stylistic, not structural. Doc reads cleanly as plain text. |
+| Every list item contains a verb | **PASS** | The 4-step methodology list items all contain verbs. No noun-only list violations. |
+
+The Economy score of 7 is driven entirely by duplication, not by sub-rule violations.
+
+---
+
+## Suggestions (non-blocking)
+
+1. **Acronym density for `audience: "org"`.** The frontmatter declares `audience: "org"` but the doc uses SyRT, OCI, DG, ABMA, MCS, MHLW, BIOAB, SHuMA, hvocijid, APT, PPR, F90, Polaris, Baloo, and Aladdin without inline definitions for most. If the actual audience is Kate + her directs (who know these terms), change the frontmatter to `audience: "leadership"`. If the audience truly is org-wide, add a glossary or inline definitions on first use. This is a clarity issue that does not block publishing but will cause friction for anyone outside the PS org.
+
+2. **Aggregate 2026 target.** The intro quantifies 2025 results ($16.7MM OPS, +35K regs) but does not state a rolled-up 2026 target. Kate will likely ask "what does success look like in aggregate?" Consider adding one sentence to the intro: "The 2026 plan targets [X] incremental registrations and $[Y]MM in OPS across [N] markets" — or explicitly state why an aggregate target is not provided (e.g., RoW markets are still ramping, aggregate will be set at QBR).
+
+3. **AGENT_CONTEXT enhancement.** The machine_summary is good narrative but lacks structured metrics an agent could query directly. Consider adding a `key_metrics` block:
+   ```yaml
+   key_metrics:
+     total_incremental_regs_2025: 35196
+     total_ops_2025_usd: 16700000
+     oci_markets_live: ["US", "UK", "DE", "FR", "IT", "ES", "JP"]
+     oci_markets_pending: ["CA"]
+     engagement_iops_2025_usd: 765000
+   ```
+
+4. **"Tumble service requirements"** and **"hvocijid duplicate parameters"** are unexplained. These are fine for the PS team but opaque to Kate's other directs who may read this. One parenthetical each would suffice.
+
+---
+
+## Summary
+
+This is a strong strategy doc — well-structured, evidence-grounded, and clearly written for its purpose. The five required changes are all subtractive (cuts and clarifications, not additions), which is the right direction. Fix the duplication, clarify the ROAS attribution, note the SyRT age, and this is a clean 8+ that ships with confidence for April 16.

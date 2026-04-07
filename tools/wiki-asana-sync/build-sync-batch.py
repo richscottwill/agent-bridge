@@ -192,7 +192,7 @@ def build_article_list():
                 'slug': slug,
                 'filename': filename,
                 'category': category,
-                'filepath': f"~/shared/artifacts/{category}/{filename}",
+                'filepath': f"~/shared/wiki/{category}/{filename}",
                 'doc_type': doc_type,
                 'level': meta.get('level', 'N/A'),
                 'audience': meta.get('audience', 'amazon-internal'),

@@ -1,3 +1,4 @@
+<!-- DOC-0414 | duck_id: tool-README -->
 # Git Sync — DevSpaces ↔ Local Machine
 
 Syncs `~/shared/` and `~/.kiro/` between the DevSpaces container and a personal git repo.

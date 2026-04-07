@@ -1,3 +1,4 @@
+<!-- DOC-0218 | duck_id: organ-body-diagram -->
 # Body System — Visual Architecture
 
 ```mermaid

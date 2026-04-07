@@ -1,3 +1,4 @@
+<!-- DOC-0328 | duck_id: protocol-am-backend -->
 # AM-Backend Protocol — Autonomous Data Collection + Processing
 
 Fully autonomous. No interaction needed. Produces structured output files consumed by AM-Frontend.

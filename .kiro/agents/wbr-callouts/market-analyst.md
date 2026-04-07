@@ -19,7 +19,7 @@ You process exactly ONE market per invocation. The pipeline hook decides which m
 When given a market and week number (e.g., market=AU, week=W13):
 
 ### Step 1: Load market-specific configuration
-Read the market context file at `shared/context/active/callouts/{market}/{market}-context.md`.
+Read the market context file at `shared/wiki/callouts/{market}/{market}-context.md`.
 Parse the `## Agent Configuration` section for these fields:
 - `has_yoy`: Whether YoY data exists for this market
 - `has_ieccp`: Whether ie%CCP tracking applies
@@ -60,12 +60,12 @@ For the target market, pull structured metrics from DuckDB. Use the `query.py` c
 These replace parsing metric tables from the data brief. DuckDB is the canonical source for all structured numbers.
 
 ### Step 5: Read narrative context from markdown (still read these)
-1. Read the market context at `shared/context/active/callouts/{market}/{market}-context.md` (already loaded in Step 1, but re-read the narrative sections: Key Narrative Threads, Active Initiatives, Recurring Patterns, etc.)
+1. Read the market context at `shared/wiki/callouts/{market}/{market}-context.md` (already loaded in Step 1, but re-read the narrative sections: Key Narrative Threads, Active Initiatives, Recurring Patterns, etc.)
 2. Read `shared/context/body/eyes.md` for the broader market health picture and competitive landscape
-3. Read the previous week's callout at `shared/context/active/callouts/{market}/{market}-2026-w{prev}.md` for continuity
-4. Read the previous week's analysis brief if it exists at `shared/context/active/callouts/{market}/{market}-analysis-2026-w{prev}.md`
-5. Read `shared/context/active/callouts/callout-principles.md` to understand what the callout writer needs
-6. Optionally read the data brief at `shared/context/active/callouts/{market}/{market}-data-brief-2026-w{NN}.md` for any narrative context or notes — but do NOT parse metric tables from it. The numbers come from DuckDB.
+3. Read the previous week's callout at `shared/wiki/callouts/{market}/{market}-2026-w{prev}.md` for continuity
+4. Read the previous week's analysis brief if it exists at `shared/wiki/callouts/{market}/{market}-analysis-2026-w{prev}.md`
+5. Read `shared/wiki/callouts/callout-principles.md` to understand what the callout writer needs
+6. Optionally read the data brief at `shared/wiki/callouts/{market}/{market}-data-brief-2026-w{NN}.md` for any narrative context or notes — but do NOT parse metric tables from it. The numbers come from DuckDB.
 
 ### Step 5b: Query cross-channel signal intelligence
 Query DuckDB `signal_tracker` for team conversation evidence related to this market's key topics:
@@ -153,7 +153,7 @@ db_upsert('projections', {
 ```
 Or use the DuckDB MCP `execute_query` tool with the equivalent INSERT ... ON CONFLICT UPDATE SQL.
 
-Also append the projection row to the market's tracking doc at `shared/context/active/callouts/{market}/{market}-projections.md`:
+Also append the projection row to the market's tracking doc at `shared/wiki/callouts/{market}/{market}-projections.md`:
 ```
 | W{NN} | {days}/{total} | {proj_regs} | ${proj_spend} | ${proj_cpa} | {mtd_regs} | ${mtd_spend} | [rationale] |
 ```
@@ -168,7 +168,7 @@ If the month just ended, fill in the Accuracy table with each week's error and c
 
 ### Step 7: Write outputs
 
-Write the analysis brief to `shared/context/active/callouts/{market}/{market}-analysis-2026-w{NN}.md`
+Write the analysis brief to `shared/wiki/callouts/{market}/{market}-analysis-2026-w{NN}.md`
 
 Structure the brief as:
 
@@ -205,7 +205,7 @@ Include a 1-sentence rationale showing the math or logic.]
 ```
 
 IF `config.regional_summary` is true:
-Also write a brief regional summary to `shared/context/active/callouts/eu5/eu5-analysis-2026-w{NN}.md` noting any cross-market patterns. Only write this if you are the last EU5 market to run, or append your market's patterns to the existing file.
+Also write a brief regional summary to `shared/wiki/callouts/eu5/eu5-analysis-2026-w{NN}.md` noting any cross-market patterns. Only write this if you are the last EU5 market to run, or append your market's patterns to the existing file.
 
 ### Step 8: Write agent state
 After completing analysis, log your actions and observations to DuckDB.

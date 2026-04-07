@@ -1,0 +1,86 @@
+<!-- DOC-0115 | duck_id: context-annual-review-2026-analysis -->
+# Annual Review 2026 — Analysis for System Integration
+
+Ingested: 2026-03-24
+Source: Annual Review PDF (Richard Williams, Q1 2026)
+
+## Summary Ratings
+- Overall: **Meets High Bar**
+- Leadership Principles: **Solid Strength**
+- Manager: Brandon Munday (brandoxy@)
+
+## Key Accomplishments (self + manager validated)
+- $674K iOPS at 184% ROAS for Engagement account
+- 51% YoY click increase despite 36% Brand impression drop (Walmart competition)
+- Creative DG format: -62% YoY cost-effectiveness
+- Paid App Marketing: US → UK, IT, JP expansion. 38% above annual install target. $1.55 blended CPI.
+- Managed transitions across 5+ key accounts (EU5, JP, MX, Microsoft invoicing, /cp migration, CPS DG testing)
+- DemandGen: reducing costs by over 90%
+
+## Manager Assessment (Brandon)
+### Strengths recognized:
+- "Expanding the team's scope and enabling WW initiatives"
+- "Adaptability, technical strength, ability to independently identify and solve complex problems"
+- "Think Big by expanding beyond traditional paid search"
+- "Excels when focused on individual initiatives, driving strong results through deep ownership and technical acumen"
+- "Ability to bridge marketing requirements with technical capabilities"
+
+### Growth areas flagged:
+- **#1: Customer Obsession + Earn Trust via VISIBILITY** — "maintaining consistent visibility across all workstreams"
+- "Proactive communication of progress, timelines, and risks"
+- "Supported by structured mechanisms and earlier cross-functional alignment"
+- "Lightweight mechanisms for timely communication"
+- "Structured stakeholder documentation that outline actions, timelines, and next steps"
+- "Consistent use of team mechanisms (including change logs)"
+
+## LP Assessment
+### Strengths: Think Big, Learn and Be Curious, Invent and Simplify, Bias for Action, Earn Trust
+### Growth: Customer Obsession, Earn Trust (visibility dimension), Have Backbone
+
+## Peer Feedback — Strongest Signals
+### Strengths (consensus):
+- Analytical depth / data-driven approach (multiple peers)
+- Testing expertise — "recognized testing expert" with measurable results
+- Ownership mindset — independently develops projections, proactive analysis
+- Bias for Action — swift decisions on account changes
+- Innovative ideas — "consistently brings innovative ideas"
+- Mentoring / onboarding — trains new team members
+
+### Growth (consensus):
+- **Communication / knowledge sharing** — "proactively share knowledge" + "simplify complex subjects for broader team benefit" (3+ peers)
+- **Project management** — "establishing clear milestones, actively managing timelines, and ensuring deadlines are met" (2+ peers)
+- **Have Backbone** — "express when he disagrees using his experience and knowledge" (1 peer, strong signal)
+- **End-to-end ownership** — "taking more end-to-end responsibility for projects" (1 peer)
+- **Proactive strategic leadership** — "provide more proactive insights and data-driven suggestions" (2+ peers)
+
+## YoY Trend (Forte 2025 → Annual Review 2026)
+### Growing:
+- Analytical expertise (consistent, deepening)
+- Testing capabilities (from growth area → recognized strength)
+- Ownership mindset (from basic → proactive initiative)
+- Collaborative nature (from "building relationships" → "Earn Trust" demonstrations)
+
+### Persisting gaps (SAME feedback both years):
+- Communication and knowledge sharing
+- Project management and execution speed
+- Strategic thinking and proactive leadership
+
+## Implications for the System
+
+### For aMCC (amcc.md):
+- The "visibility avoidance" resistance type is VALIDATED by the review. Brandon explicitly flagged it. This is not a perception — it's measured.
+- "Competence anxiety" may be driving the Have Backbone gap — Richard holds back opinions in meetings.
+
+### For Brain (brain.md):
+- Level 1 gate (consistent artifact output) is directly tied to the review's #1 growth area. Shipping artifacts = visibility = addressing the gap.
+- The Testing Approach doc for Kate is the perfect vehicle — it's a structured stakeholder document with actions, timelines, and next steps (exactly what Brandon asked for).
+
+### For Nervous System:
+- "Communication/visibility" should be tracked as a PERSISTING pattern (2 years). Escalation warranted.
+- "Project management" should be tracked as a PERSISTING pattern (2 years).
+- "Have Backbone" is a NEW signal from peers — add to pattern tracking.
+
+### For Trainer:
+- The review validates the trainer's existing mediocrity patterns (strategic avoidance, visibility avoidance).
+- New pattern to add: "Have Backbone avoidance" — holding back data-backed opinions in group settings.
+- The review gives concrete language for interventions: use Brandon's exact words ("lightweight mechanisms," "structured stakeholder documentation") when pushing Richard toward visibility work.

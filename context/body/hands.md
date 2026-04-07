@@ -1,3 +1,4 @@
+<!-- DOC-0224 | duck_id: organ-hands -->
 # Hands — Execution & Tooling
 
 *What gets done and how. Active tasks, dependencies, integrations, hooks, and the systems that turn decisions into action. The canonical action tracker.*
@@ -104,7 +105,7 @@ Backlog: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-S
 | 1 | WBR: Weekly Callouts (`wbr-callouts`) | userTriggered | Full 10-market callout pipeline |
 | 2 | Sync to SharePoint (`sharepoint-sync`) | userTriggered | Wiki → SharePoint via OneDrive |
 | 3 | PS Audit (`ps-audit`) | userTriggered | Paid search audit pipeline |
-| 4 | Agent Bridge Sync (`agent-bridge-sync`) | userTriggered | Sync portable-body/ to GitHub |
+| 4 | Agent Bridge Sync (`agent-bridge-sync`) | userTriggered | Sync shared/ to GitHub |
 | — | Guard: Email | preToolUse | Blocks email send unless only recipient is prichwil |
 | — | Guard: Calendar | preToolUse | Blocks calendar events with external attendees |
 

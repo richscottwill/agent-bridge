@@ -1,3 +1,4 @@
+<!-- DOC-0363 | duck_id: protocol-workflow-observability -->
 # Workflow Observability Protocol
 
 Cross-cutting concern — every cross-MCP workflow logs execution data to DuckDB.

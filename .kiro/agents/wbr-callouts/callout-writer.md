@@ -15,11 +15,11 @@ You process exactly ONE market per invocation.
 
 ## Your inputs
 Read these files in order:
-1. The structured analysis brief at `shared/context/active/callouts/{market}/{market}-analysis-2026-w{NN}.md` — this has already identified what changed, why, and the suggested narrative angle
-2. The market's context file at `shared/context/active/callouts/{market}/{market}-context.md` — parse the `## Agent Configuration` section for `has_yoy`, `has_ieccp`, `headline_extras`, `regional_summary`
-3. `shared/context/active/callouts/callout-principles.md` for style and structure rules (read this EVERY invocation)
-4. The previous week's callout at `shared/context/active/callouts/{market}/{market}-2026-w{prev}.md` for continuity and tone
-5. IF `regional_summary` is true in the config: read the EU5 regional summary at `shared/context/active/callouts/eu5/eu5-analysis-2026-w{NN}.md` for cross-market patterns
+1. The structured analysis brief at `shared/wiki/callouts/{market}/{market}-analysis-2026-w{NN}.md` — this has already identified what changed, why, and the suggested narrative angle
+2. The market's context file at `shared/wiki/callouts/{market}/{market}-context.md` — parse the `## Agent Configuration` section for `has_yoy`, `has_ieccp`, `headline_extras`, `regional_summary`
+3. `shared/wiki/callouts/callout-principles.md` for style and structure rules (read this EVERY invocation)
+4. The previous week's callout at `shared/wiki/callouts/{market}/{market}-2026-w{prev}.md` for continuity and tone
+5. IF `regional_summary` is true in the config: read the EU5 regional summary at `shared/wiki/callouts/eu5/eu5-analysis-2026-w{NN}.md` for cross-market patterns
 
 The analysis brief has already done the hard analytical work. Your job is to synthesize that analysis into polished, natural prose that reads like a human marketer wrote it.
 
@@ -86,14 +86,14 @@ The data brief contains per-market: current_week, last_week, wow (WoW changes), 
 Use trend data to identify continuation vs reversal vs anomaly. Use context.md narrative threads to explain why.
 
 ### File locations
-- Data briefs: `shared/context/active/callouts/{market}/{market}-data-brief-2026-w{NN}.md`
-- Market context: `shared/context/active/callouts/{market}/{market}-context.md`
-- Callout principles: `shared/context/active/callouts/callout-principles.md`
-- Previous callouts: `shared/context/active/callouts/{market}/{market}-2026-w{NN}.md`
-- Analysis briefs: `shared/context/active/callouts/{market}/{market}-analysis-2026-w{NN}.md`
-- Projections: `shared/context/active/callouts/{market}/{market}-projections.md`
-- Change log: `shared/context/active/callouts/{market}/{market}-change-log.md`
-- Output: `shared/context/active/callouts/{market}/{market}-2026-w{NN}.md`
+- Data briefs: `shared/wiki/callouts/{market}/{market}-data-brief-2026-w{NN}.md`
+- Market context: `shared/wiki/callouts/{market}/{market}-context.md`
+- Callout principles: `shared/wiki/callouts/callout-principles.md`
+- Previous callouts: `shared/wiki/callouts/{market}/{market}-2026-w{NN}.md`
+- Analysis briefs: `shared/wiki/callouts/{market}/{market}-analysis-2026-w{NN}.md`
+- Projections: `shared/wiki/callouts/{market}/{market}-projections.md`
+- Change log: `shared/wiki/callouts/{market}/{market}-change-log.md`
+- Output: `shared/wiki/callouts/{market}/{market}-2026-w{NN}.md`
 
 Write the callout to the output path. Include supplementary data below a `---` separator: weekly trend (regs), flagged anomalies, W{next} recommended spend (from the analysis brief; see callout-principles.md Spend Strategy by Market for the logic), W{next} watch (2-3 monitoring items), and W{next} optimization (2-3 actionable opportunities based on seasonality, holidays, events, or pending initiatives).
 

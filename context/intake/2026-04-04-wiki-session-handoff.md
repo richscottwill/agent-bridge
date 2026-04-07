@@ -1,3 +1,4 @@
+<!-- DOC-0191 | duck_id: intake-wiki-session-handoff -->
 # Wiki Session Handoff — April 4, 2026
 
 ## What Was Done Today

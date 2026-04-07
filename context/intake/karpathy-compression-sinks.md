@@ -1,3 +1,4 @@
+<!-- DOC-0176 | duck_id: intake-karpathy-compression-sinks -->
 # Compression Sinks Analysis — Karpathy
 
 *Where organ content can move to external stores (DuckDB, wiki, files) to reduce word counts while maintaining or improving information access.*

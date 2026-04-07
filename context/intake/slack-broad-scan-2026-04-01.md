@@ -1,3 +1,4 @@
+<!-- DOC-0186 | duck_id: intake-slack-broad-scan-2026-04-01 -->
 # Slack Broad Keyword Scan — April 1, 2026
 
 [Slack Backfill: broad keyword scan, Oct 2025–Apr 2026, 2026-04-01]

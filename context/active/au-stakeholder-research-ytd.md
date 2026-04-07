@@ -1,3 +1,4 @@
+<!-- DOC-0341 | duck_id: protocol-au-stakeholder-research-ytd -->
 # AU Stakeholder Research — YTD 2026
 
 ## Purpose

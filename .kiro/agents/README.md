@@ -98,4 +98,4 @@ concierge (always available — answers questions, tracks demand)
 
 The editor orchestrates. The concierge runs independently as the reader-facing search layer. Demand signals from the concierge feed back into the editor's roadmap.
 
-Wiki content lives at `~/shared/context/wiki/` with subdirectories for each pipeline stage: `research/`, `staging/`, `reviews/`, `published/`, `archive/`, `audits/`, `health/`.
+Wiki content lives at `~/shared/wiki/` with subdirectories for each pipeline stage: `research/`, `staging/`, `reviews/`, `published/`, `archive/`, `audits/`, `health/`.

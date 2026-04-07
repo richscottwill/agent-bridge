@@ -1,0 +1,123 @@
+<!-- DOC-0460 | duck_id: wiki-review-batch-5-workstreams-rescore -->
+# Batch 5 Rescore: Three Workstream Articles (v3)
+
+Reviewer: wiki-critic | Date: 2026-04-05 | Mode: Blind Eval A — Rescore
+Prior review: batch-5-workstreams-eval-a.md
+Focus: Did the specific fixes resolve the Economy and Accuracy issues flagged in the first pass?
+Appendix exempted from Economy scoring per standing instruction.
+
+---
+
+## Summary Table
+
+| Article | Usefulness | Clarity | Accuracy | Dual-audience | Economy | Avg | Verdict | Prior Avg | Delta |
+|---------|-----------|---------|----------|---------------|---------|-----|---------|-----------|-------|
+| WS3: Audiences & Lifecycle v3 | 9 | 9 | 8 | 9 | 8 | 8.6 | PUBLISH | 8.4 | +0.2 |
+| WS4: User Experience v3 | 8 | 9 | 8 | 9 | 8 | 8.4 | PUBLISH | 8.0 | +0.4 |
+| WS5: Algorithmic Ads v3 | 8 | 8 | 8 | 9 | 8 | 8.2 | PUBLISH | 7.8 | +0.4 |
+
+All three clear the 8/10 bar. No dimension below 7. All three move from REVISE to PUBLISH.
+
+---
+
+## WS3: Audiences & Lifecycle v3 — PUBLISH (8.6)
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 9/10 | Unchanged — three-phase audience strategy remains clear and actionable; F90 plan well-scoped with specific targets (31.7% → 35.4%, +366 bps) |
+| Clarity | 9/10 | Unchanged — logical progression from problem → infrastructure → results → next phase; question headers tell the story |
+| Accuracy | 8/10 | Unchanged — iOPS sourced to Paid Acquisition Flash (Andrew Wirtz); Prime Day numbers specific; F90 targets include baseline |
+| Dual-audience | 9/10 | Unchanged — full YAML frontmatter, AGENT_CONTEXT with machine_summary, key_entities, update_triggers |
+| Economy | 8/10 | All three fixes landed. See fix verification below |
+| **Overall** | **8.6** | |
+
+### Fix verification
+
+**Fix 1 — Prime Day deduplication (WS3/WS5 cross-workstream).** RESOLVED. The Prime Day reference is now trimmed to one sentence focused on Engagement channel validation: "Prime Day 2025 confirmed the channel operates at scale — 80K clicks at -10% cost YoY, $329K OPS at 644% ROAS." This is the right level of detail for WS3 — it validates the Engagement channel without duplicating the full Demand Gen performance story that belongs in WS5.
+
+**Fix 2 — BSE DG stats deduplication.** RESOLVED. The BSE detail is replaced with a cross-reference: "The Engagement account also enabled the Business Essentials launch through Demand Gen placements (see Workstream 5: Algorithmic Ads for DG performance data)." Clean handoff. WS5 now owns the DG performance data; WS3 owns the Engagement channel narrative.
+
+**Fix 3 — "What did we learn" section trimmed.** RESOLVED. The redundant operating model preamble is gone. The section now leads with the insight: "The 13% match rate was not a Google limitation to accept; it was an Amazon data integration opportunity to solve. That mindset — platform limitations are problems, not constraints — is what enabled the ABMA partnership and the match rate improvement." Two sentences. The insight lands immediately. No restating what the reader already knows.
+
+Economy moves from 7 → 8. The cross-workstream duplication was the primary drag, and it is cleanly resolved in both directions (WS3 defers DG data to WS5; WS5 defers Engagement channel detail to WS3).
+
+### Suggestions (non-blocking)
+
+- The "Cross-functional partners" section reads as a dense paragraph with six partner callouts in sequence. It is not a bullet list (good), but the density makes it hard to scan. Consider splitting into two paragraphs: one for the partners who built the 2025 infrastructure (ABMA, Traffic/Onsite, MarTech) and one for the partners driving the 2026 F90 program (Legal, SSR Activation, Brand/Paid Media). This is a readability suggestion, not an Economy issue.
+
+---
+
+## WS4: User Experience v3 — PUBLISH (8.4)
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 8/10 | Unchanged — full funnel portfolio covered; in-context registration result is strong; Baloo/Aladdin well-explained |
+| Clarity | 9/10 | Improved from 8 → 9. The Baloo split resolved the density problem in the 2026 portfolio section. See fix verification |
+| Accuracy | 8/10 | Unchanged — APT-validated result cited with confidence level; Polaris dates specific; CA CVR numbers specific |
+| Dual-audience | 9/10 | Unchanged — full frontmatter and AGENT_CONTEXT with good update_triggers |
+| Economy | 8/10 | All three fixes landed. See fix verification below |
+| **Overall** | **8.4** | |
+
+### Fix verification
+
+**Fix 1 — Baloo paragraph split.** RESOLVED. The 2026 portfolio section now separates Baloo into two clear paragraphs. The first paragraph explains what Baloo is: "By providing unauthenticated access for unrecognized traffic on a dedicated subdomain, Baloo allows users to explore the Amazon Business catalog and pricing prior to registration. This is distinct from Guest, which requires entering the registration funnel. Baloo targets customers in the product discovery phase who have not yet committed to registration."
+
+The second paragraph gives the Shopping Ads unlock its own space: "Critically, Baloo also unlocks Shopping Ads potential for AB. Unlike current text ads, Shopping Ads results are unlimited, giving Amazon increased opportunity to saturate shopping results in both Paid and Free Shopping Ad slots. This is a step-change in channel capability — the current text-ad-only constraint caps AB's share of the search results page, and Shopping Ads removes that cap." The Shopping Ads insight is no longer buried. It reads as the strategic headline it is. This also improves Clarity — the reader no longer has to untangle three ideas from one paragraph.
+
+**Fix 2 — Summary sentence cut.** RESOLVED. The slide-deck summary sentence ("Together, these initiatives address the full funnel: Baloo creates friction-free product engagement at the top...") is gone. The section now ends with the last initiative description and lets the structure speak for itself. Tighter.
+
+**Fix 3 — Baseline section: re-search friction reframed.** RESOLVED. The third data point now reads: "Customers who completed registration lost their product context entirely — they had to re-search for the same products they found on Google, creating a post-registration drop-off point with no measured recovery rate." This is structurally parallel to the first two friction points (85% LP drop-off, 60% registration drop-off) and honestly flags that the re-search drop-off was not measured. Better writing and better accuracy in one edit.
+
+Economy moves from 7 → 8. Clarity moves from 8 → 9 — the Baloo split is the driver. The 2026 portfolio section was the densest part of the article, and the split makes it scannable without losing any content.
+
+### Suggestions (non-blocking)
+
+- The Polaris section includes specific rollout dates (US March 24, weblab April 6-7, AEM translations March 26) and a market priority order (AU, MX, DE, UK, JP, FR, IT, ES, CA, US-ES). These are operational details that will stale quickly. Consider whether the market priority order belongs in the appendix rather than the main body — the main body point is "Polaris is rolling out worldwide and early data shows +235 bps CTR improvement." The per-market sequence is supporting detail.
+- The Gated Guest failure paragraph is well-placed as a learning, but the phrase "deep-dived setup, measurement, and CX" is vague. What specifically did the deep-dive reveal? If the answer is "the gating mechanism itself was the problem," say that directly. If the answer is more nuanced, a sentence would help.
+
+---
+
+## WS5: Algorithmic Ads v3 — PUBLISH (8.2)
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 8/10 | Unchanged — Demand Gen results clear and actionable; AI Max test design well-framed with specific risks and guardrails |
+| Clarity | 8/10 | Unchanged — logical flow from Demand Gen (proven) → AI Max (planned); question headers work |
+| Accuracy | 8/10 | Improved from 7 → 8. AI Max status language fixed. See fix verification |
+| Dual-audience | 9/10 | Unchanged — full frontmatter and AGENT_CONTEXT; depends_on chain to Modern Search correct |
+| Economy | 8/10 | Improved from 7 → 8. Discovery Ads padding removed; DG expansion section merged. See fix verification |
+| **Overall** | **8.2** | |
+
+### Fix verification
+
+**Fix 1 — Cross-workstream deduplication.** RESOLVED. The Prime Day reference is now tighter and focused on the DG channel validation: "Prime Day 2025 validated Demand Gen at scale — $329K OPS at 644% ROAS, a 12x YoY improvement. This confirmed that visual ad formats deliver during peak events, not just in steady-state." The 80K clicks and -10% cost detail (Engagement channel metrics) are gone — those belong in WS3. The BSE data (52K visitors, $0.30 CPC) stays here, which is correct — WS5 owns DG performance data. The deduplication is clean in both directions.
+
+**Fix 2 — AI Max test design status.** RESOLVED. The ambiguous "status of completion is the immediate open question" is replaced with: "The AI Max test design was due March 28, 2026. Richard should confirm completion status before this doc ships." This is honest — the author acknowledges the date has passed and flags it as a pre-publication verification step rather than leaving it as an unresolved ambiguity. The risks section also picks this up: "The AI Max test design was due March 28, 2026 — Richard should confirm completion status before this doc ships." Accuracy improves because the doc no longer presents a past-due date without acknowledging it.
+
+**Fix 3 — Discovery Ads history removed.** RESOLVED. The 2023 Discovery Ads paragraph and the LiveRamp targeting history (already covered in WS3) are replaced with a single sentence: "By 2025, Demand Gen had matured into a proven channel after two years of iteration on mid-funnel ad formats and audience targeting." One sentence replaces three. The reader gets the timeline context without the padding.
+
+**Fix 4 — DG expansion section merged.** RESOLVED. The thin "How is Demand Gen expanding in 2026?" section no longer exists as a standalone section. The video CPC data and Creative team work are now folded into the Demand Gen results section as a forward-looking paragraph: "BSE video launched in January 2026, replicating the proven DG image approach with short video creative and increased image variations developed in collaboration with the Creative team (Raven Smith, CeCe Ramey). With Demand Gen images now a proven channel, the team is expanding to video assets. Early testing shows video CPCs in line with image asset CPCs ($0.30 for both), indicating strong efficiency potential." This earns its place as part of the DG results narrative rather than standing alone as a thin section.
+
+Accuracy moves from 7 → 8. Economy moves from 7 → 8. Both blocking issues resolved.
+
+### Suggestions (non-blocking)
+
+- The AI Max section uses "Richard should confirm completion status before this doc ships" twice — once in the main body and once in the risks section. This is minor duplication. Consider keeping it only in the risks section (where open questions naturally live) and replacing the main body instance with a factual statement once Richard confirms.
+- The sentence "A search for 'office supplies for small company' could trigger an AB ad even if that exact phrase is not in our keyword list" is a good concrete example, but it reads slightly like marketing copy. Consider grounding it: "For example, a search for 'office supplies for small company' — a query not in our keyword list — could trigger an AB ad based on semantic intent matching." Minor tone adjustment.
+- The cannibalization and budget inflation risks are well-identified but the guardrail design is described at the category level ("monitoring existing keyword campaign performance for cost inflation") rather than the metric level. What specific metric triggers a pause? CPC increase of X%? Registration volume decline of Y%? If those thresholds exist in the test design, embedding them would strengthen the section. If they don't exist yet, that's worth flagging as a gap.
+
+---
+
+## Cross-cutting assessment
+
+All three articles addressed the specific fixes cleanly. The pattern:
+
+- **WS3 Economy fix** was primarily about cross-workstream deduplication (Prime Day, BSE stats) and trimming a redundant "lessons learned" preamble. All three edits landed precisely as specified. The article is tighter without losing any information — the cross-references to WS5 are clean handoffs.
+
+- **WS4 Economy fix** was about structural density (Baloo paragraph doing too much), a slide-deck summary sentence, and a baseline section reframe. The Baloo split is the biggest improvement — it elevated Clarity from 8 to 9 in addition to fixing Economy. The Shopping Ads unlock now reads as the strategic headline it deserves to be.
+
+- **WS5 Accuracy + Economy fix** was the most complex — four changes across two dimensions. The AI Max status language fix is the most important because it converts an ambiguity into an honest pre-publication checkpoint. The Discovery Ads removal and DG section merge are clean subtractions that tighten the article without losing value.
+
+The cross-workstream deduplication is now resolved in both directions. WS3 owns the Engagement channel narrative and defers DG performance data to WS5. WS5 owns the Demand Gen and algorithmic ads story and defers Engagement channel metrics to WS3. No stat line appears in both articles.
+
+All three articles now meet the 8/10 bar with no dimension below 8. They ship.

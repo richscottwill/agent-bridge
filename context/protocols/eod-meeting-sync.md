@@ -1,3 +1,4 @@
+<!-- DOC-0350 | duck_id: protocol-eod-meeting-sync -->
 # EOD Meeting Sync Protocol
 
 Hedy + Outlook + email → meetings/ series files + organ updates.

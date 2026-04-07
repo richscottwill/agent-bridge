@@ -1,0 +1,32 @@
+<!-- DOC-0085 | duck_id: callout-uk-analysis-2026-w12 -->
+# UK W12 Analysis Brief
+
+## Registration summary
+1,382 regs (+1% WoW), $90K spend (+2% WoW), $65 CPA (+2% WoW). Brand 469 (-15% WoW), NB 913 (+11% WoW). Projected: 6,050 regs, $395K spend vs OP2 5,174 regs, $461K spend (+17% regs, -14% spend).
+
+## Why registrations changed
+UK was flat WoW because NB strength offset Brand weakness. NB gained +92 regs WoW driven by clicks (+9%, 19,580 vs 17,997) with CVR holding (+2%, 4.66%). Brand lost -81 regs WoW on both CVR (-8%, 2.78% vs 3.01%) and clicks (-8%, 16,896 vs 18,284). The NB click surge is the story: this is the largest NB click volume in the 8-week window. Brand CVR dropping from 3.01% to 2.78% aligns with weareuncapped.com's persistent 24% IS on Brand Core, which continues to compress Brand auction quality.
+
+## Trend context
+UK has been remarkably stable: 1,325-1,467 regs across W5-W12, never deviating more than 7% from the 8-week mean of 1,387. W12 at 1,382 is essentially at the mean. The mix shift is the real trend: NB share has grown from 54% (W5) to 66% (W12). Brand has declined from 604 (W5) to 469 (W12), a 22% drop over 8 weeks. NB has grown from 721 to 913, a 27% increase. This is a structural mix shift, not a one-week anomaly.
+
+## Relevant actions and events
+1. OCI live at 100% since Sep 2025. NB efficiency is mature and driving the NB click expansion at stable CPA ($62 vs $61 LW).
+2. Ad copy test completed (Jan 29 - Mar 2): +86% CTR, +31% regs. The new messaging ("Smart Business Buying," "No Minimum Order Required") is now running. The sustained NB click growth may reflect continued benefit from the new copy.
+3. weareuncapped.com at 24% Brand IS since Dec 2023. Brand clicks down -8% WoW and Brand CVR down -8% WoW. This competitor continues to erode Brand performance.
+4. Amazon Global Logistics UK emerged W8-W10 with +41% CPC on ES Brand terms. Low IS (<10%) but worth monitoring.
+5. 4 of 5 EU5 markets declined WoW (DE -18%, IT -12%, ES -8%, FR -3%). UK was the only market to hold flat. This suggests UK's NB strength is genuine, not a reporting artifact.
+
+## YoY assessment
++95% YoY regs (1,382 vs 708). +96% YoY spend ($90K vs $46K). NB regs +205% YoY, Brand +15% YoY. NB CPA improved -13% YoY ($62 vs $72). The YoY comp is inflated because W12 2025 was weak (-16% WoW LY vs +1% TY). Even adjusting for the soft comp, the underlying growth is real: OCI was not live in W12 2025, and the ad copy test had not run. Both are structural improvements.
+
+## Monthly projection
+Projected 6,050 regs vs OP2 5,174 (+17%). Projected $395K spend vs OP2 $461K (-14%). Remaining 10 days: 6 weekdays, 4 weekend days. Used W12 daily rates (weekday ~210, weekend ~175) with a 3% seasonal discount based on LY W13 being flat WoW. UK is delivering 17% more regs on 14% less spend. CPA efficiency is the headline: $65 projected vs implied OP2 CPA of $89. OCI + ad copy test are compounding.
+
+## Flags
+- Brand erosion: 469 Brand regs is the lowest in the 8-week window. The W5-W12 decline from 604 to 469 (-22%) is not explained by seasonality alone. weareuncapped.com is the likely driver.
+- Mix dependency: 66% of regs are now NB. If NB efficiency degrades (CPC inflation, competitor entry), the total is exposed.
+- No data lag issues. Daily breakdown shows normal weekday/weekend pattern (163-240 range).
+
+## Suggested narrative angle
+UK held flat WoW as the only EU5 market to avoid a decline. NB regs hit an 8-week high (+11% WoW) on strong click volume, while Brand continued its multi-week decline (-15% WoW) under persistent competitor pressure. Monthly projection: +18% regs vs OP2 on -13% spend. The efficiency story is strong, but Brand erosion needs a response.

@@ -1,3 +1,4 @@
+<!-- DOC-0190 | duck_id: intake-wiki-expansion-session -->
 # Session Summary: Wiki Expansion & New Topics
 
 Date: 2026-04-04

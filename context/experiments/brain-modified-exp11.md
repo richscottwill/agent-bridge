@@ -1,0 +1,148 @@
+<!-- DOC-0145 | duck_id: experiment-brain-modified-exp11 -->
+# Brain — Decisions & Thinking
+
+*How Richard decides. Past decisions, extracted principles, strategic priorities, and the leverage framework. This is the canonical decision-making reference — no separate decision log needed.*
+
+*Operating principle: Subtraction before addition. When a new decision principle is proposed, check if it's already covered by an existing one. When prioritizing, eliminate before optimizing. The leverage framework exists to say no to good work so Richard can say yes to essential work.*
+
+Last updated: 2026-04-01 (loop run 15)
+
+---
+
+## Decision Principles (ranked by frequency of application)
+
+1. **Evidence over intuition** — Never scale without validated test results. Every initiative goes through structured testing before becoming baseline.
+2. **Efficiency over escalation** — When competitors increase pressure, respond with smarter execution (OCI, ad copy, LP optimization) rather than budget escalation or bid wars.
+3. **Holistic measurement over segmented goals** — Evaluate performance at the total program level, not Brand vs Non-Brand in isolation.
+4. **Phased rollout over full migration** — Prefer 50/50 splits, phased testing, and controlled rollouts over big-bang changes.
+5. **Cross-functional partnership over solo execution** — Position PS team as connective tissue between platform capabilities and business objectives, not just a channel executor.
+6. **Compression over complexity** — Consolidate campaigns, simplify structures, reduce operational overhead to let algorithms work better.
+7. **Customer research over assumptions** — Ground messaging and strategy in actual customer data (e.g., Sole Proprietor study drove ad copy overhaul).
+
+## Prediction Template
+
+When Richard faces a new decision, check:
+1. Does it map to an existing principle? Predict he will favor that direction
+2. Is there data available? He will want to see it before deciding
+3. Can it be phased? He will prefer phased over big-bang
+4. Does it involve cross-team work? He will lean into partnership, not solo execution
+5. Is someone pushing for speed over evidence? He will push back with a test proposal
+
+---
+
+## Decision Log
+
+Decisions have a relevance half-life. Not every decision stays useful forever. The decay protocol keeps the log lean.
+
+**Relevance tiers:**
+- **FOUNDATIONAL** — Shaped a principle or changed how the team operates. Stays indefinitely. (D1, D2, D3, D5, D6, D8)
+- **ACTIVE** — Still influencing current work or pending audit. Stays until outcome is resolved. (D4, D9, D10)
+- **RESOLVED** — Outcome confirmed, lesson extracted. Compress to one-liner, archive full entry after 90 days. (D7 is the first candidate)
+
+**Decay protocol (Karpathy governs, loop executes):**
+1. When a decision's outcome is VALIDATED or INVALIDATED (via nervous system Loop 1), tag it RESOLVED
+2. Extract the lesson into the relevant principle (strengthen, qualify, or retire)
+3. Compress the full entry to: `D[X]: [Name] — [Outcome]. Reinforced Principle #[N].`
+4. After 90 days in RESOLVED state with no references, archive to `~/shared/context/archive/`
+
+### D1: OCI Implementation Approach [FOUNDATIONAL]
+D1: Phased rollout with measurement framework. Reinforced #1 Evidence, #4 Phased rollout. HIGH confidence.
+
+### D2: Competitive Response to Walmart [FOUNDATIONAL]
+D2: Bid caps + NB efficiency via OCI, do NOT escalate auction. Reinforced #2 Efficiency, #3 Holistic. HIGH.
+
+### D3: Ad Copy Overhaul (SP Study) [FOUNDATIONAL]
+D3: Shift to price/quality/selection messaging from bulk/B2B. Reinforced #7 Customer research, #1 Evidence. HIGH.
+
+### D4: AU LP Full Migration [ACTIVE]
+D4: Lena overrode phased rollout — full Polaris switch. Executing. HIGH.
+
+### D5: Campaign Consolidation [FOUNDATIONAL]
+D5: Consolidate campaigns to strengthen OCI data signals. Reinforced #6 Compression, #1 Evidence. HIGH.
+
+### D6: Engagement Channel [FOUNDATIONAL]
+D6: Lifecycle channel via ABMA partnership, 13%→30% match rate. Reinforced #5 Partnership, #1 Evidence. HIGH.
+
+### D8: OP1 Structure [FOUNDATIONAL]
+D8: Problem→test→result→scale across 5 workstreams. Reinforced #5 Partnership, #1 Evidence. HIGH.
+
+### D9: AI Max Testing [ACTIVE]
+D9: US-first with measurement guardrails. Same OCI discipline. Reinforced #4 Phased, #1 Evidence. HIGH.
+
+### D10: F90 Lifecycle [ACTIVE]
+D10: Legal SIMs for 3+ purchases targeting. Extends PS beyond registration. Reinforced #5 Partnership. HIGH.
+
+<!-- Full decision details: db("SELECT id, name, tier, description, alternatives, rationale, principles, confidence FROM decisions ORDER BY id") -->
+
+---
+
+## Strategic Priorities — The Five Levels
+
+Sequential. Each funds the next. Don't skip ahead.
+
+### Level 1: Sharpen Yourself
+- Build consistent strategic output habits (weekly artifacts, not sporadic)
+- Close the gap between strategic thinking and shipped work
+- Systems already in place: Trainer, autoresearch loop, context cascade
+- Key metric: consecutive weeks with a strategic artifact shipped
+
+### Level 2: Drive & Communicate Worldwide Testing
+- Scalable tests that affect all PS accounts globally
+- Examples: OCI rollout, WW redirects, email overlay, Project Baloo, any legitimately automated initiative
+- Learn how to drive end-to-end: hypothesis → design → execution → communication → results
+- Proactive communication to the team is critical
+- Key metric: every active WW test has a written status that the team can reference without asking Richard
+
+### Level 3: Give Your Team Leverage Through Automation
+- Build tools a non-tech team can actually adopt (Q Developer, internal Amazon tooling)
+- Priority candidates: campaign link generator, WBR auto-briefing, budget forecast helper, invoice routing
+- Richard is the bridge — most willing to go outside the non-tech comfort zone
+- Key metric: at least one tool adopted by a teammate
+
+### Level 4: Own the Zero-Click Future
+- Paid search is evolving — zero-click, AI Overviews, Answer Engine Optimization
+- AEO POV fits here as a foundational artifact
+- Sequence after Levels 1-3 so credibility and bandwidth exist to drive it
+- Key metric: published POV or framework that shapes team strategy
+
+### Level 5: Full Agentic Orchestration of PS Work
+- End state: agent swarm runs paid search operations autonomously
+- Current state: agent assists Richard (morning routine, trainer, context cascade)
+- Gap: "agent assists" → "agent operates" is an architecture shift, not an incremental step
+- Key metric: a PS workflow that runs end-to-end without human intervention
+
+**Guiding Principle:** Each level funds the next. Consistency at Level 1 earns the right to drive at Level 2. Driving WW tests at Level 2 builds the operational credibility for Level 3. Adoption at Level 3 earns credibility for Level 4. Level 4 vision justifies the investment in Level 5.
+
+### Level Graduation Criteria
+
+Graduation is not a date — it's evidence. The nervous system (Loop 6) tracks these.
+
+| From → To | Gate | Evidence Required |
+|-----------|------|-------------------|
+| 1 → 2 | Consistent output | 4 consecutive weeks with a strategic artifact shipped (aMCC streak proxy) |
+| 2 → 3 | Test ownership | 3+ WW tests with written status docs that the team references without asking Richard |
+| 3 → 4 | Team adoption | 1+ tool built by Richard and actively used by a teammate for 30+ days |
+| 4 → 5 | Strategic authority | Published POV or framework that influenced a team-level decision (Kate or Brandon cited it) |
+
+**Current position:** Level 1 (struggling — 0 consecutive weeks, 11 workdays at zero). Level 2 work is happening in parallel (OCI rollout — FR/IT/ES/JP at 100%, CA 04/07; AU PS Weekly Update sent proactively 4/1 with keyword-level data; ad copy tests; Baloo keyword data delivered 3/30; W13 callouts produced for all 10 markets; Flash sections written 3/27) but Level 1 gate is not passed. Level 3 work accelerating (prediction engine, data layer overhaul, callout pipeline consolidation, attention tracker — all built 3/28-3/30; Slack Context Ingestion live 4/1). Level 5 work also happening (agent bridge built 3/27, agent state wired to DuckDB). Annual Review (3/24) validates: Brandon's #1 growth area is visibility, which is exactly what Level 1 artifact shipping addresses. Testing Approach doc for Kate is the convergence point — it's a Level 2 artifact that proves Level 1 consistency. 11 workdays since hard thing was set with zero progress. W14 day 2. Positive signal: AU weekly update shows Richard CAN do proactive stakeholder communication.
+
+**Rule:** You can DO work at multiple levels simultaneously, but you don't GRADUATE until the gate is met. The aMCC tracks Level 1 progress via the streak. The nervous system tracks all levels via Loop 6.
+
+---
+
+## OP1 Strategic Narrative
+
+Core argument: Every 2026 investment maps to a validated 2025 signal. PS transforming from keyword-driven to automated, audience-centric engine. Cross-functional collaboration is the differentiator.
+
+Structure: 5 workstreams (OCI Bidding, Modern Search, Audiences, User Experience, Algorithmic Ads), each problem→test→result→scale. Full draft: `~/shared/research/op1-ps-testing-framework-draft.md`. Data: Eyes → OCI Performance, Market Health.
+
+---
+
+## Leverage Assessment Framework
+
+When multiple tasks compete for a spot, apply these tiebreakers:
+- **Strategic artifacts > tactical execution** — a test design doc beats a sitelink update
+- **Compounding work > one-and-done work** — a playbook beats a single campaign build
+- **Visibility work > invisible work** — Kingpin updates, Kate-facing docs, and team frameworks beat internal cleanup
+- **Automation opportunities > manual repetition** — if a task keeps recurring, flag it as a tool candidate and deprioritize the manual version
+- **30-day test:** "Will this matter in 30 days?" If no, it's a quick win at best — don't let it take a Core or Engine Room slot over something that compounds.

@@ -1,3 +1,4 @@
+<!-- DOC-0429 | duck_id: tool-uk-callout-w13 -->
 # UK — W13 (Mar 22–28)
 
 UK drove 1.5K registrations (+14% WoW), with -5% spend WoW. CPA $56 (-17% WoW), a 12-week low. March is projected to end at 6.3K registrations and $396K spend. (vs. OP2: +22% registrations, -14% spend)

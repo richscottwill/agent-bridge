@@ -1,3 +1,4 @@
+<!-- DOC-0223 | duck_id: organ-gut -->
 # Gut — Digestion, Compression & Waste Removal
 
 *The body eats information constantly — email, calendar, meetings, signals, research. The gut decides what gets absorbed as nutrition (compressed into organs) and what gets expelled as waste (archived, pruned, or discarded). Without it, the body bloats until it can't move.*
@@ -35,7 +36,7 @@ Every other organ adds content. The gut removes content. It enforces the context
 ### Function 3: Excretion — Remove what the body no longer needs
 - **Input:** Staleness signals, reference counts, completion status
 - **Output:** Archived or deleted content
-- **Waste:** Moved to `~/shared/context/archive/` or permanently removed
+- **Waste:** Moved to `~/shared/wiki/archive/` or permanently removed
 
 ---
 
@@ -56,7 +57,7 @@ For each file in `intake/`: extract minimum viable facts, route to the organ whe
 | .pdf | Convert to .md (pdfplumber), archive original |
 | .xlsx | Process with openpyxl directly (no dedicated script built yet). Extract key findings → route to organ. Archive raw file. |
 | .eml | Skip — live email access. Archive. |
-| .py | Move to ~/shared/context/tools/ |
+| .py | Move to ~/shared/tools/ |
 
 ### Extraction Rules
 - Extract the *minimum viable fact*, not the full context. Bad: paste entire WBR callout doc. Good: "AU regs 1.1K Feb, -1% vs OP2" → route to Eyes.
@@ -140,7 +141,7 @@ Budgets are LEARNED CONSTRAINTS, not static numbers. The gut tracks the size-acc
 
 What gets removed from the body entirely (archived or deleted).
 
-### Archive Rules (moved to `~/shared/context/archive/`)
+### Archive Rules (moved to `~/shared/wiki/archive/`)
 
 | Content Type | Archive After | Condition |
 |-------------|--------------|-----------|

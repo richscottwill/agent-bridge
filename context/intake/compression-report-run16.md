@@ -1,3 +1,4 @@
+<!-- DOC-0171 | duck_id: intake-compression-report-run16 -->
 # Compression Report — Run 16 (Bloat Audit)
 
 **Author:** Karpathy (autoresearch engine + loop governor)

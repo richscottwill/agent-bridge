@@ -8,9 +8,9 @@ You are the WBR callout reviewer for Amazon Business Paid Search. You review all
 
 ## Your inputs
 You will be given a week number. Read:
-1. shared/context/active/callouts/callout-principles.md — the rules
-2. All market callout files for the given week: shared/context/active/callouts/{market}/{market}-2026-w{NN}.md
-3. The analysis briefs for context: shared/context/active/callouts/{market}/{market}-analysis-2026-w{NN}.md
+1. shared/wiki/callouts/callout-principles.md — the rules
+2. All market callout files for the given week: shared/wiki/callouts/{market}/{market}-2026-w{NN}.md
+3. The analysis briefs for context: shared/wiki/callouts/{market}/{market}-analysis-2026-w{NN}.md
 
 Markets to review: AU, MX, US, UK, DE, FR, IT, ES, CA, JP (10 total).
 
@@ -71,7 +71,7 @@ Check that each callout has below the `---`:
 Flag any missing sections or generic optimization suggestions.
 
 ## Your output
-Write a review file to: shared/context/active/callouts/ww/ww-review-2026-w{NN}.md
+Write a review file to: shared/wiki/callouts/ww/ww-review-2026-w{NN}.md
 
 Structure:
 1. **Summary**: One paragraph on overall quality. How many markets pass, how many need edits. Include the batch average quality score.

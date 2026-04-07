@@ -1,0 +1,179 @@
+{
+  "date": "2026-03-27",
+  "generated_at": "2026-03-27T16:59:40.489194+00:00",
+  "markets_audited": [
+    "AU"
+  ],
+  "summary": {
+    "total_spend_usd": "9950",
+    "total_registrations": 111,
+    "blended_cpa_usd": "89.63963963963963963963963964",
+    "critical_findings_count": 0,
+    "warning_findings_count": 3,
+    "markets_on_track": 0,
+    "markets_at_risk": 1
+  },
+  "market_sections": [
+    {
+      "market": "AU",
+      "pacing": {
+        "market": "AU",
+        "period": "March 2026",
+        "budget_target": "50000",
+        "actual_spend": "9950",
+        "pacing_pct": "22.84814814814814814814814815",
+        "projected_eom_spend": "49750",
+        "projected_variance_pct": "-0.500",
+        "status": "UNDERSPEND",
+        "days_elapsed": 27,
+        "days_remaining": 4
+      },
+      "projections": {
+        "market": "AU",
+        "audit_date": "2026-03-27",
+        "monthly": {
+          "period_label": "March 2026",
+          "period_type": "MONTHLY",
+          "days_elapsed": 27,
+          "days_remaining": 4,
+          "days_total": 31,
+          "actual_spend": "9950",
+          "projected_spend": "49750",
+          "target_spend": "50000",
+          "spend_vs_op2_pct": "-0.500",
+          "spend_pacing_pct": "22.84814814814814814814814815",
+          "actual_regs": 111,
+          "projected_regs": 555,
+          "target_regs": 1200,
+          "regs_vs_op2_pct": "-53.7500",
+          "regs_pacing_pct": "10.62037037037037037037037037",
+          "actual_cpa": "89.63963963963963963963963964",
+          "projected_cpa": "89.63963963963963963963963964",
+          "target_cpa": "41.67",
+          "daily_spend_run_rate": "9950",
+          "daily_regs_run_rate": "111",
+          "status": "UNDERSPEND"
+        },
+        "quarterly": {
+          "period_label": "Q1 FY26",
+          "period_type": "QUARTERLY",
+          "days_elapsed": 86,
+          "days_remaining": 4,
+          "days_total": 90,
+          "actual_spend": "9950",
+          "projected_spend": "49750",
+          "target_spend": "150000",
+          "spend_vs_op2_pct": "-66.83333333333333333333333333",
+          "spend_pacing_pct": "6.941860465116279069767441862",
+          "actual_regs": 111,
+          "projected_regs": 555,
+          "target_regs": 3600,
+          "regs_vs_op2_pct": "-84.58333333333333333333333333",
+          "regs_pacing_pct": "3.226744186046511627906976744",
+          "actual_cpa": "89.63963963963963963963963964",
+          "projected_cpa": "89.63963963963963963963963964",
+          "target_cpa": "41.67",
+          "daily_spend_run_rate": "9950",
+          "daily_regs_run_rate": "111",
+          "status": "UNDERSPEND"
+        },
+        "yearly": {
+          "period_label": "FY26",
+          "period_type": "YEARLY",
+          "days_elapsed": 86,
+          "days_remaining": 279,
+          "days_total": 365,
+          "actual_spend": "9950",
+          "projected_spend": "2786000",
+          "target_spend": "600000",
+          "spend_vs_op2_pct": "364.3333333333333333333333333",
+          "spend_pacing_pct": "7.038275193798449612403100774",
+          "actual_regs": 111,
+          "projected_regs": 31080,
+          "target_regs": 14400,
+          "regs_vs_op2_pct": "115.8333333333333333333333333",
+          "regs_pacing_pct": "3.271560077519379844961240310",
+          "actual_cpa": "89.63963963963963963963963964",
+          "projected_cpa": "89.63963963963963963963963964",
+          "target_cpa": "41.67",
+          "daily_spend_run_rate": "9950",
+          "daily_regs_run_rate": "111",
+          "status": "UNDERSPEND"
+        }
+      },
+      "anomalies": [],
+      "kpi_status": [
+        {
+          "market": "AU",
+          "metric_name": "spend",
+          "actual": "9950",
+          "target": "50000",
+          "prorated_target": "43548.38709677419354838709677",
+          "pacing_pct": "22.84814814814814814814814815",
+          "status": "AT_RISK",
+          "is_kingpin_goal": false,
+          "severity": "WARNING"
+        },
+        {
+          "market": "AU",
+          "metric_name": "registrations",
+          "actual": "111",
+          "target": "1200",
+          "prorated_target": "1045.161290322580645161290323",
+          "pacing_pct": "10.62037037037037037037037037",
+          "status": "AT_RISK",
+          "is_kingpin_goal": false,
+          "severity": "WARNING"
+        },
+        {
+          "market": "AU",
+          "metric_name": "cpa",
+          "actual": "89.63963963963963963963963964",
+          "target": "41.67",
+          "prorated_target": "41.67",
+          "pacing_pct": "215.1179257010790488112302367",
+          "status": "AT_RISK",
+          "is_kingpin_goal": false,
+          "severity": "WARNING"
+        }
+      ],
+      "top_campaigns": [],
+      "wow_changes": {
+        "spend_change_pct": null,
+        "clicks_change_pct": null,
+        "conversions_change_pct": null,
+        "cpa_change_pct": null,
+        "ctr_change_pct": null
+      }
+    }
+  ],
+  "action_items": [
+    {
+      "priority": 1,
+      "market": "AU",
+      "category": "GOAL",
+      "description": "AU spend is AT_RISK (23% of target)",
+      "suggested_action": "Address AU spend pacing — review budget allocation and campaign delivery settings",
+      "urgency": "THIS_WEEK"
+    },
+    {
+      "priority": 2,
+      "market": "AU",
+      "category": "GOAL",
+      "description": "AU registrations is AT_RISK (11% of target)",
+      "suggested_action": "Boost AU registrations — consider increasing bids, expanding keywords, or raising daily budgets",
+      "urgency": "THIS_WEEK"
+    },
+    {
+      "priority": 3,
+      "market": "AU",
+      "category": "GOAL",
+      "description": "AU cpa is AT_RISK (215% of target)",
+      "suggested_action": "Reduce AU CPA — review underperforming keywords, tighten targeting, or adjust bid strategy",
+      "urgency": "THIS_WEEK"
+    }
+  ],
+  "data_quality_notes": [
+    "Adobe unavailable for AU: Adobe API failure for AU: 401 Client Error: Unauthorized for url: https://analytics.adobe.io/api//reports — proceeding with Google Ads only"
+  ]
+}

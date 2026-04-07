@@ -1,3 +1,4 @@
+<!-- DOC-0357 | duck_id: protocol-rw-tracker -->
 # RW Tracker — Richard Williams
 
 Last updated: 2026-04-03 (EOD-2 Friday)

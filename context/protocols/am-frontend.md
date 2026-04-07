@@ -1,3 +1,4 @@
+<!-- DOC-0330 | duck_id: protocol-am-frontend -->
 # AM-Frontend Protocol — Brief + Triage + Command Center
 
 Interactive phase. Reads pre-computed state from AM-Backend. Does the work, puts it where Richard will find it, tells him what's ready.

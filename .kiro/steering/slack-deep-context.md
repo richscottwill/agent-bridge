@@ -105,8 +105,8 @@ When the Slack API returns a rate limit response:
 | Decisions (high-impact) | `brain.md` → decision log | Highest-impact only |
 | Decisions (full set) | DuckDB `decisions` table | Always — complete record |
 | Market/project data | `eyes.md` + `current.md` | Within word budget |
-| Meeting context | Meeting series files in `~/shared/context/meetings/` | Per-series |
-| Voice data | `~/shared/portable-body/voice/` | New file, not an organ |
+| Meeting context | Meeting series files in `~/shared/wiki/meetings/` | Per-series |
+| Voice data | `~/shared/context/voice/` | New file, not an organ |
 | Any overflow | `~/shared/context/intake/` | Tagged `[target: organ_name]` |
 
 ### Word Budget Compliance
@@ -266,7 +266,7 @@ Compare findings against `~/.kiro/steering/richard-writing-style.md`:
 
 ### Output
 
-Write analysis to `~/shared/portable-body/voice/richard-style-slack.md`
+Write analysis to `~/shared/context/voice/richard-style-slack.md`
 
 Structure the file by:
 1. Context sections: DM, Channel, Thread
@@ -278,7 +278,7 @@ This file is NOT an organ — it lives in portable-body and is loaded by agents 
 
 ### Routing
 
-- Output file: `~/shared/portable-body/voice/richard-style-slack.md`
+- Output file: `~/shared/context/voice/richard-style-slack.md`
 - Attribution: `[Slack Backfill: voice corpus, 12 months, {today's date}]`
 - No organ write needed — this is a standalone reference file
 
@@ -390,7 +390,7 @@ This file is NOT an organ — it lives in portable-body and is loaded by agents 
 - {description of discrepancy between Slack timeline and existing wiki/artifact}
 ```
 
-5. Cross-reference with existing wiki article drafts in `~/shared/artifacts/` and `~/shared/context/wiki/` — flag any discrepancies between the reconstructed timeline and documented history
+5. Cross-reference with existing wiki article drafts in `~/shared/wiki/` and `~/shared/wiki/` — flag any discrepancies between the reconstructed timeline and documented history
 
 ### Routing
 
@@ -505,7 +505,7 @@ For each meeting series, produce:
 
 ### Routing
 
-- Route per-series synthesis to the corresponding meeting series file in `~/shared/context/meetings/`
+- Route per-series synthesis to the corresponding meeting series file in `~/shared/wiki/meetings/`
 - Each series file gets a new section: `## Slack Context (Backfill)` with the synthesis
 - Check file size before writing — meeting files don't have formal word budgets but keep synthesis concise (200–400 words per series)
 - If a meeting file would become unwieldy, route overflow to `~/shared/context/intake/` tagged `[target: meetings/{series_file}]`
@@ -693,9 +693,9 @@ Produce a ranked demand list:
 
 ### Routing
 
-- Full demand list → append to `~/shared/context/wiki/demand-log.md`
+- Full demand list → append to `~/shared/wiki/demand-log.md`
 - Deduplicate against existing entries in demand-log.md before appending
-- Cross-reference with existing wiki article drafts in `~/shared/artifacts/` — if a draft already covers a high-demand topic, note it as "draft exists, prioritize completion"
+- Cross-reference with existing wiki article drafts in `~/shared/wiki/` — if a draft already covers a high-demand topic, note it as "draft exists, prioritize completion"
 - SME map → `~/shared/context/intake/` tagged `[target: memory.md]` (enriches relationship graph with expertise data)
 - Attribution: `[Slack Backfill: tribal knowledge, 12 months, {today's date}]`
 

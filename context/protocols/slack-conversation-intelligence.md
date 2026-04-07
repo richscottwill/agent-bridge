@@ -1,3 +1,4 @@
+<!-- DOC-0360 | duck_id: protocol-slack-conversation-intelligence -->
 # Slack Conversation Intelligence Protocol
 
 Enriches Slack messages with internal knowledge context and enables historical conversation retrieval.

@@ -1,0 +1,126 @@
+<!-- DOC-0392 | duck_id: testing-2023-06-audience-post-mortem -->
+---
+title: "Audience Targeting Post-mortem — LiveRamp Integration"
+status: DRAFT
+audience: amazon-internal
+level: L5-L7
+owner: Richard Williams
+created: 2023-06-01
+updated: 2026-03-25
+update-trigger: "LiveRamp program reactivated or MarTech scoping completes in OP1"
+tags: [audience-targeting, liveramp, post-mortem, privacy, CPS, BP]
+type: postmortem
+summary: "Post-mortem on LiveRamp audience targeting program (Q1-Q2 2023), suspended due to US privacy law. Key learnings on match rates, brand term dominance, and landing page alignment."
+---
+
+**Status: SUSPENDED** — This program is not active. Targeted campaigns were suspended in mid-2023 due to an unforeseen US privacy law. MarTech scoping is in OP1. Any reactivation depends on legal clearance.
+
+# Audience Targeting Post-mortem — LiveRamp Integration
+
+## Overview
+
+An unforeseen US privacy law forced suspension of all LiveRamp-based targeted campaigns in mid-2023, ending this program before it could reach maturity. What follows documents what we learned before the shutdown.
+
+In Q1 2023, we integrated LiveRamp to our marketing platforms, partnering with AB teams outside our immediate channels team to develop paid marketing strategies tailored to partner teams' goals. We conducted testing from March to June 2023.
+
+LiveRamp is the data management platform our channel marketing group selected. In collaboration with ABMA, the Paid Media team and the LiveRamp team, we constructed audience flows from our database, to S3, LiveRamp, and finally to our marketing platforms. The audiences (US-only) involved were:
+- Verified US AB Registrants
+- BCIvNext prospecting audience
+- BP members
+
+## Accomplishments
+
+**Tested our largest audience (AB registrants):** We used our largest list in our partnership with the BP team to drive BP signups. We created text ads for Brand paid search terms, BP terms, and more visual Discovery ads to drive traffic to the a.com/bp page, and drove an average of 3 signups per week at a $600 CPA while the account was being optimized. AB Brand terms accounted for 95% of spend.
+
+**Tested a prospecting audience (BCIvNext):** Despite limited traffic volume, we pulled data consistently from a Data Science propensity model that accesses A.com customer data — a technical milestone for the pipeline.
+
+## Challenges
+
+**Development and planning delays:** Frequent pauses while setting up LiveRamp. Credentials errors connecting to LiveRamp's instance of S3 created pockets of time where nothing was moving. Planning could have been more proactive — developing keyword lists, gathering creative, and communicating to stakeholders during downtime.
+
+**Audience match rates far below expectations:** Active users in Google Ads were much lower than planned. Our AB Registrants list (14 million users) matched to only 1.7 million active users on Google Ads (13% match rate) — well below the 30-50% we expected. The BCIvNext list started with 1.25 million users and matched at 11%, down to 140k active users. This limited which lists were viable for targeting.
+
+For reference, the US CPS account used the 140k-user BCIvNext audience and spent just over $600 total in two months. The BP account targeted the 1.7 million users in the All Registrants list and spent about $3k/week — still small compared to SSR accounts (JP, our smallest SSR account, spends $3k/day).
+
+## Lessons Learned and Recommendations
+
+**Start simple, then go granular:** We planned to launch 12 different audiences, and almost half were iterations of each other. For example, Verified US AB registrant, SMB all registrants, ENT all registrants (SMB and ENT are more granular lists contained within the Verified US AB registrants list). Faster progress could have been achieved by focusing on a few audiences at first. This also applied to planning — a simpler, iterative approach would likely have allowed us to launch earlier and given us more time to learn.
+
+**Landing page matters:** The landing page experience should align with the search and ad text to drive more efficient results. Current testing shows higher CVRs when using cohesive experiences. We have run CPS paid search activity with/without targeting specific audiences, and with/without Enterprise-focused landing page. (Appendix B for data tables)
+- US CPS targeted the BCIvNext audience and didn't have enough traffic volume to see performance ($600 spend throughout 2 months)
+- CA CPS targeted CPS-focused keywords that attempt to qualify users, but send them to the A.com registration flow, where there is little context on the page — CA CPS CVR was 83% lower than the CA SSR account
+- EU CPS targets CPS-focused keywords like CA, but sends users to a form fill to receive a whitepaper. This experience has a 32x higher CVR at driving MQLs/SQLs than the EU SSR accounts. A more cohesive experience from search to ad text to landing page drives more efficient outcomes.
+
+**Brand terms dominate:** AB Brand terms held the most influence in terms of cost and BP signups. When testing our largest 1st party audience with AB Brand terms, NB terms, BP terms, and Discovery ads, AB Brand terms made up 95% of the cost and 96% of all BP signups. The Registrants audience is still actively searching our brand terms — priority should be on brand terms rather than specific AB features/products (shipping, document storage, BP). A future test could explore product terms for activation/retention goals.
+
+---
+
+## Appendix A: Reference Documents
+- LiveRamp Audience library: Paid Media and Paid Search
+- BP Media Plan: Initial strategy and tactics developed by PS and Product Marketing team
+- BP Engagement Keywords
+- BP Dive Deep Report: Performance for BP on PS accounts (platform data and trends)
+- EU CPS 2023
+- CA CPS
+- US CPS
+
+## Appendix B: Account Comparisons
+
+### US CPS vs SSR
+Audience targeting (self-registration CPS) vs. keyword targeting (SSR registrations)
+
+| Metric | CPS US | SSR US |
+| --- | --- | --- |
+| Period | May–June 2023 | May–June 2023 |
+| Cost | $621 | $5,650,919 |
+| Clicks | 47 | 1,485,010 |
+| SSR Registrations | 0 | 16,065 |
+| CVR | 0% | 1.10% |
+| CPA | — | $353 |
+| Total MQL/SQL | 0 | 108 |
+
+**So what:** The BCIvNext audience in US CPS generated only $621 in spend over two months — the audience was too small to produce any measurable signal. With 47 clicks and zero registrations, this approach cannot be evaluated on performance. The 140k matched users simply didn't generate enough search volume on CPS-qualifying keywords to be viable as a standalone targeting strategy.
+
+### CA CPS vs SSR
+CPS-qualifying keyword targeting vs. SSR keyword targeting (self-registration)
+
+| Metric | CPS CA | SSR CA |
+| --- | --- | --- |
+| Period | April–June 2023 | April–June 2023 |
+| Cost | $26,181 | $766,934 |
+| Clicks | 2,119 | 393,960 |
+| SSR Registrations | 9 | 9,585 |
+| CVR | 0.40% | 2.40% |
+| CPA | $2,909 | $80 |
+| Total MQL/SQL | 0 | 17 |
+
+**So what:** CA CPS had 83% lower CVR than CA SSR despite targeting CPS-qualifying keywords. The gap is likely driven by landing page mismatch — CPS keywords sent users to the generic A.com registration flow with little enterprise context. The $2,909 CPA vs $80 SSR CPA confirms that keyword qualification alone, without a cohesive landing page experience, does not efficiently convert enterprise prospects.
+
+### EU CPS vs SSR
+CPS-qualifying keyword targeting (form fill lead gen) vs. SSR keyword targeting (self-registration)
+
+| Metric | CPS EU | SSR EU |
+| --- | --- | --- |
+| Period | April–June 2023 | April–June 2023 |
+| Cost | $141,692 | $4,645,263 |
+| Clicks | 23,217 | 2,593,609 |
+| SSR Registrations | 0 | 68,700 |
+| CVR (SSR) | 0% | 2.60% |
+| CPA (SSR) | — | $68 |
+| Unique MQL/SQL | 13 | 43 |
+| MQL+SQL CVR | 0.06% | 0% |
+| MQL+SQL CPA | $10,900 | $108,029 |
+
+*CPS EU: 39 unique MQLs+SQLs last quarter; 13 uniques that weren't recycled or disqualified due to Tier, invalid data, or other prospect quality issues.
+*SSR EU: Although SSR doesn't specifically drive for CPS and has worse MQL CVR/CPA, it drove 2 Engagements and 1 Reengagement (Quality). All Tier 3: 250MM-1.5B.
+
+**So what:** EU CPS is the strongest evidence for the landing page hypothesis. By sending CPS-qualifying keyword traffic to a whitepaper form fill (a cohesive enterprise experience), EU achieved a 32x higher MQL/SQL CVR than SSR accounts using generic registration pages. The $10,900 MQL CPA is high in absolute terms, but the 13 qualified leads represent genuine enterprise pipeline — a fundamentally different outcome than the zero MQLs from US and CA CPS approaches. The lesson: match the landing page to the intent signal in the keyword.
+
+<!-- AGENT_CONTEXT
+machine_summary: "Post-mortem on LiveRamp audience targeting program (Q1-Q2 2023). Program suspended due to US privacy law. Key findings: 13% match rate (vs 30-50% expected), Brand terms drove 95% of spend and 96% of BP signups, cohesive landing page experience produced 32x higher MQL CVR in EU. BCIvNext audience too small for viable CPS targeting."
+key_entities: ["LiveRamp", "BCIvNext", "BP", "ABMA", "Google Ads", "CPS", "SSR"]
+action_verbs: ["suspend", "test", "integrate", "target", "measure"]
+depends_on: ["liveramp-audience-library"]
+update_triggers: ["LiveRamp program reactivated", "US privacy law resolved", "MarTech scoping completes", "New audience targeting platform evaluated"]
+key_facts: ["Program suspended mid-2023 due to US privacy law", "13% match rate vs 30-50% expected", "Brand terms = 95% of spend, 96% of BP signups", "EU form fill = 32x higher MQL CVR than SSR", "BCIvNext: 1.25M users → 140k matched (11%)"]
+-->

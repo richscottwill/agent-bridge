@@ -41,7 +41,7 @@ The 4 active lists map to 4 daily calendar blocks:
 - Check Auto-meeting folder for meeting summaries (Hedy recaps + Amazon Meetings Summary) — surface action items and decisions from meetings Richard attended
 
 ### Layer 4: Weekly Callouts & Performance Data
-- Read the latest AU and MX weekly callout docs (~/shared/context/active/callouts/)
+- Read the latest AU and MX weekly callout docs (~/shared/wiki/callouts/)
 - If performance data shows a problem (traffic drop, CPA spike, reg decline), surface related backlog tasks
 - If a market is performing well, deprioritize reactive tasks for that market — focus on scaling what's working
 

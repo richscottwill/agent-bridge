@@ -1,3 +1,4 @@
+<!-- DOC-0345 | duck_id: protocol-current -->
 # Active Context — Richard Williams
 
 Last updated: 2026-04-03 (Friday PT, EOD-1 meeting sync)

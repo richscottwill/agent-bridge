@@ -1,3 +1,4 @@
+<!-- DOC-0177 | duck_id: intake-learnings-am2-enrichment-2026-04-04 -->
 # Learnings — AM-2 Enrichment Session (2026-04-04)
 
 ## Field Naming Convention: _RW = Agent Auto-Write

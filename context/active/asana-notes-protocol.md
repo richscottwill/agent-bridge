@@ -1,3 +1,4 @@
+<!-- DOC-0338 | duck_id: protocol-asana-notes-protocol -->
 # Asana Notes Protocol — Surface Discovery & Onboarding Docs
 
 Last updated: 2026-04-03

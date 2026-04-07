@@ -1,3 +1,4 @@
+<!-- DOC-0216 | duck_id: organ-amcc -->
 # Anterior MCC — Willpower Engine
 
 *The anterior midcingulate cortex grows when you do hard things you don't want to do. It atrophies when you choose comfort. This organ is the real-time intervention layer — it fires when Richard is about to choose the easier path, and it connects every hard choice to who he's becoming.*

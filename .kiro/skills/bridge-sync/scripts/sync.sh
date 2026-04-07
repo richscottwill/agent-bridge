@@ -6,7 +6,7 @@ set -euo pipefail
 
 echo "=== Agent Bridge Sync ==="
 echo "Step 1: Identifying changed files..."
-echo "Step 2: Copying to portable-body/..."
+echo "Step 2: Copying to shared/context/..."
 echo "Step 3: Updating documentation..."
 echo "Step 4: Committing to agent-bridge repo..."
 echo "Step 5: Pushing to GitHub..."

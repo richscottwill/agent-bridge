@@ -1,3 +1,4 @@
+<!-- DOC-0415 | duck_id: tool-RECONSTRUCTION -->
 # RECONSTRUCTION.md — PS Analytics Database Portability Guide
 
 *How to rebuild the DuckDB database from scratch on any platform with nothing but text files and Python.*

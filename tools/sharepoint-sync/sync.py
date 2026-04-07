@@ -217,7 +217,7 @@ class SyncEngine:
 
         # Paths
         self.articles_path = Path(
-            os.path.expanduser(sync_cfg.get("articles_path", "~/shared/artifacts/"))
+            os.path.expanduser(sync_cfg.get("articles_path", "~/shared/wiki/"))
         )
 
     # ------------------------------------------------------------------ #

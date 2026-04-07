@@ -1,0 +1,28 @@
+<!-- DOC-0207 | duck_id: meeting-oci-rollout -->
+# OCI Rollout Discussions
+
+## Metadata
+- Cadence: As needed (project-driven)
+- Attendees: Varies — Richard Williams, Stacey Gu, Brandon Munday, Suzane Huynh (Adobe), Google reps
+- Hedy Topic: OCI (ID: tFEsxgnyO4QYp2x7TNrI)
+- Hedy Sessions: 2
+- Outlook Series: Various (cross-functional)
+
+## Context
+OCI (Offline Conversion Import) is a key initiative for improving bidding and attribution. US/UK/DE live at 100%. CA/JP/EU3 E2E launched Feb-Mar 2026. Full impact projected Jul 2026. AU OCI planned May 2026. Key metric: +18-24% registration uplift on non-brand. APAC MCC access issues currently blocking JP launch.
+
+## Latest Session
+### 2026-03-25 — APAC MCC Access Escalation (via Google sync)
+- See google-ab-performance.md for details
+- JP OCI launch pushed back until APAC MCC access resolved
+
+## Running Themes
+- Market-by-market OCI rollout (US/UK/DE done, CA/JP/EU3 in progress, AU May 2026)
+- APAC MCC access issues (active blocker)
+- False positive value adjustments per marketplace
+- Adobe OCI reporting feed integration
+
+## Open Items
+- [ ] APAC MCC access resolution (blocking JP)
+- [ ] AU OCI May 2026 preparation
+- [ ] Adobe OCI reporting feed integration

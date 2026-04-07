@@ -1,3 +1,4 @@
+<!-- DOC-0232 | duck_id: other-experiment-orchestration-protocol -->
 # Experiment Protocol Overhaul — Two Issues
 
 Date: 2026-03-31

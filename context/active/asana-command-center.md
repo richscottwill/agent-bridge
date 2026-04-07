@@ -1,3 +1,4 @@
+<!-- DOC-0333 | duck_id: protocol-asana-command-center -->
 # Asana Command Center Protocol
 
 Last updated: 2026-04-15
@@ -82,7 +83,7 @@ These fields are available on ABPS AI Content project tasks. All field names end
 | Levels_RW | `1213917488341130` | multi_enum | `1213917488341131` → L1: Sharpen Yourself, `1213917488341132` → L2: Drive WW Testing, `1213917488341133` → L3: Team Automation, `1213917488341134` → L4: Zero-Click Future, `1213917488341135` → L5: Agentic Orchestration |
 | Frequency_RW | `1213921303350613` | enum | `1213921303350614` → One-time, `1213921303350615` → Weekly, `1213921303350616` → Monthly, `1213921303350617` → Quarterly |
 | Series_RW | `1213917488341099` | text | Groups related articles (e.g., "Kate Doc", "OCI") |
-| Path_RW | `1213917488341150` | text | Local file path (e.g., ~/shared/artifacts/strategy/2026-04-04-oci-business-case.md) |
+| Path_RW | `1213917488341150` | text | Local file path (e.g., ~/shared/wiki/strategy/2026-04-04-oci-business-case.md) |
 | Routine_RW | `1213608836755502` | enum | (inherited from My Tasks — all wiki tasks use Wiki option `1213924412583429`) |
 | Priority_RW | `1212905889837829` | enum | (inherited from My Tasks) |
 | Kiro_RW | `1213915851848087` | text | Agent scratchpad — pipeline state, sync timestamps, critic scores |

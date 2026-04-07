@@ -1,3 +1,4 @@
+<!-- DOC-0165 | duck_id: intake-agentspaces-kiro-intelligence -->
 # AgentSpaces & Kiro Intelligence — from Slack Scan
 
 Source: `#agentspaces-interest` (C0A1JD8FCUV), `#amazon-builder-genai-power-users` (C08GJKNC3KM)

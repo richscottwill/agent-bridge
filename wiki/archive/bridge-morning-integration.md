@@ -1,0 +1,40 @@
+<!-- DOC-0118 | duck_id: context-bridge-morning-integration -->
+# Bridge Integration — Morning Routine
+
+## What Changed
+Agent Bridge is now live. Google Sheets/Docs communication layer between Kiro and Richard's personal agent swarm.
+
+## Morning Routine Addition
+During the morning routine, after To-Do refresh and before daily brief, add:
+
+### Bridge Check (new step)
+```python
+import sys
+sys.path.insert(0, '/home/prichwil/shared/tools/bridge')
+from bridge import Bridge
+b = Bridge()
+
+# 1. Poll for pending messages targeting kiro
+msgs = b.poll(target='kiro', status='pending')
+# Also check broadcast messages
+broadcasts = b.poll(target='*', status='pending')
+
+# 2. Send heartbeat
+b.heartbeat('Morning routine')
+
+# 3. If there are messages, surface them in the daily brief
+# 4. If context snapshots are stale (>24h), push fresh ones
+```
+
+## Loop Integration
+During autoresearch loop Phase 1 (maintenance), add bridge poll as a ground truth source. Swarm messages may contain research, drafts, or nudges that should cascade into organs.
+
+## Weekly: Friday Context Push
+Every Friday, push full body snapshots to the context sheet. This is the portable body sync for the swarm.
+
+## Files
+- Toolkit: `~/shared/tools/bridge/bridge.py`
+- CLI: `~/shared/tools/bridge/cli.py`
+- Device entry: Added to device.md
+- Protocol: Google Doc "agent bridge"
+- Bus: Google Sheet "agent bridge" → bus tab

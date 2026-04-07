@@ -1,3 +1,4 @@
+<!-- DOC-0152 | duck_id: experiment-hands-modified-exp15 -->
 # Hands — Execution & Tooling
 
 *What gets done and how. Active tasks, dependencies, integrations, hooks, and the systems that turn decisions into action. The canonical action tracker.*

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PS Forecast Tracker — Actual vs Predicted</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f1117; color: #e0e0e0; }
+.header { padding: 24px 32px 16px; border-bottom: 1px solid #2a2d35; }
+.header h1 { font-size: 20px; font-weight: 600; color: #fff; }
+.header p { font-size: 13px; color: #888; margin-top: 4px; }
+.controls { display: flex; gap: 12px; padding: 16px 32px; border-bottom: 1px solid #2a2d35; flex-wrap: wrap; align-items: center; }
+.controls label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+.controls select, .controls button {
+  background: #1a1d27; border: 1px solid #2a2d35; color: #e0e0e0; padding: 6px 12px;
+  border-radius: 6px; font-size: 13px; cursor: pointer;
+}
+.controls select:hover, .controls button:hover { border-color: #4a9eff; }
+.controls button.active { background: #1a3a5c; border-color: #4a9eff; color: #4a9eff; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 24px 32px; }
+.card { background: #1a1d27; border: 1px solid #2a2d35; border-radius: 10px; padding: 20px; }
+.card-full { grid-column: 1 / -1; }
+.card h3 { font-size: 14px; font-weight: 600; color: #ccc; margin-bottom: 12px; }
+.chart-container { position: relative; height: 300px; }
+.chart-container-tall { position: relative; height: 400px; }
+.kpi-row { display: flex; gap: 16px; padding: 0 32px 16px; flex-wrap: wrap; }
+.kpi { background: #1a1d27; border: 1px solid #2a2d35; border-radius: 10px; padding: 16px 20px; flex: 1; min-width: 160px; }
+.kpi .label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+.kpi .value { font-size: 24px; font-weight: 700; color: #fff; margin-top: 4px; }
+.kpi .sub { font-size: 12px; color: #888; margin-top: 2px; }
+.kpi .good { color: #4ade80; }
+.kpi .warn { color: #fbbf24; }
+.kpi .bad { color: #f87171; }
+.score-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.score-table th { text-align: left; padding: 8px 12px; border-bottom: 1px solid #2a2d35; color: #888; font-weight: 500; font-size: 11px; text-transform: uppercase; }
+.score-table td { padding: 8px 12px; border-bottom: 1px solid #1f222b; }
+.score-table tr:hover { background: #1f222b; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.badge-green { background: #064e3b; color: #4ade80; }
+.badge-yellow { background: #713f12; color: #fbbf24; }
+.badge-red { background: #7f1d1d; color: #f87171; }
+.badge-blue { background: #1e3a5f; color: #60a5fa; }
+.badge-gray { background: #374151; color: #9ca3af; }
+.tab-row { display: flex; gap: 4px; }
+.tab { padding: 6px 16px; border-radius: 6px 6px 0 0; font-size: 13px; cursor: pointer; background: transparent; border: 1px solid transparent; color: #888; }
+.tab.active { background: #1a1d27; border-color: #2a2d35; border-bottom-color: #1a1d27; color: #4a9eff; }
+.no-data { text-align: center; padding: 60px 20px; color: #555; }
+.no-data .icon { font-size: 48px; margin-bottom: 12px; }
+.no-data p { font-size: 14px; }
+.confidence-bar { display: flex; align-items: center; gap: 8px; }
+.confidence-fill { height: 6px; border-radius: 3px; background: #2a2d35; flex: 1; position: relative; }
+.confidence-fill .inner { height: 100%; border-radius: 3px; }
+.legend-row { display: flex; gap: 16px; margin-bottom: 12px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #888; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+.legend-line { width: 20px; height: 2px; border-radius: 1px; }
+.legend-band { width: 20px; height: 10px; border-radius: 2px; opacity: 0.3; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 PS Forecast Tracker — Actual vs Predicted</h1>
+  <p>Weekly actuals compared against agent predictions with confidence intervals and accuracy scoring</p>
+</div>
+
+<div class="controls">
+  <div>
+    <label>Channel</label><br>
+    <div class="tab-row" id="channelTabs"></div>
+  </div>
+  <div style="margin-left: auto;">
+    <label>Metric</label><br>
+    <select id="metricSelect">
+      <option value="registrations">Registrations / Installs</option>
+      <option value="cost">Cost</option>
+      <option value="cpa">CPA / CPI</option>
+    </select>
+  </div>
+  <div>
+    <label>Horizon</label><br>
+    <select id="horizonSelect">
+      <option value="weekly">Weekly</option>
+      <option value="monthly">Monthly</option>
+      <option value="quarterly">Quarterly</option>
+      <option value="year_end">Year End</option>
+    </select>
+  </div>
+</div>
+
+<div class="kpi-row" id="kpiRow"></div>
+
+<div class="grid">
+  <div class="card card-full">
+    <h3 id="mainChartTitle">Registrations — Actual vs Predicted</h3>
+    <div class="legend-row">
+      <div class="legend-item"><div class="legend-dot" style="background:#4a9eff;"></div> Actual</div>
+      <div class="legend-item"><div class="legend-line" style="background:#f97316;"></div> Predicted</div>
+      <div class="legend-item"><div class="legend-band" style="background:#f97316;"></div> 80% Confidence Interval</div>
+    </div>
+    <div class="chart-container-tall"><canvas id="mainChart"></canvas></div>
+  </div>
+
+  <div class="card">
+    <h3>Prediction Accuracy Over Time</h3>
+    <div class="chart-container"><canvas id="accuracyChart"></canvas></div>
+  </div>
+
+  <div class="card">
+    <h3>Confidence Calibration</h3>
+    <div class="chart-container"><canvas id="calibrationChart"></canvas></div>
+  </div>
+
+  <div class="card card-full">
+    <h3>Prediction Scorecard</h3>
+    <div style="overflow-x: auto;">
+      <table class="score-table" id="scoreTable">
+        <thead><tr>
+          <th>Target Week</th><th>Metric</th><th>Predicted</th><th>Actual</th>
+          <th>Error %</th><th>Within CI</th><th>Confidence</th><th>Brier</th>
+        </tr></thead>
+        <tbody id="scoreBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card card-full" id="paidAppCard">
+    <h3>🚀 Paid App Marketing</h3>
+    <div class="no-data">
+      <div class="icon">📱</div>
+      <p>No data yet for Paid App Marketing.<br>
+      Metrics tracked: App Installs, Cost, CPI.<br>
+      Data will populate once weekly reporting begins.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+
+// === DATA ===
+const actuals = {
+  MX_PS: [
+    {week:'2026-01-05',registrations:142,cost:4800,cpa:33.80},
+    {week:'2026-01-12',registrations:158,cost:5100,cpa:32.28},
+    {week:'2026-01-19',registrations:135,cost:4600,cpa:34.07},
+    {week:'2026-01-26',registrations:161,cost:5200,cpa:32.30},
+    {week:'2026-02-02',registrations:170,cost:5400,cpa:31.76},
+    {week:'2026-02-09',registrations:155,cost:5000,cpa:32.26},
+    {week:'2026-02-16',registrations:178,cost:5600,cpa:31.46},
+    {week:'2026-02-23',registrations:165,cost:5300,cpa:32.12},
+    {week:'2026-03-02',registrations:182,cost:5800,cpa:31.87},
+    {week:'2026-03-09',registrations:190,cost:6000,cpa:31.58},
+    {week:'2026-03-16',registrations:175,cost:5500,cpa:31.43},
+    {week:'2026-03-23',registrations:195,cost:6200,cpa:31.79},
+    {week:'2026-03-30',registrations:188,cost:6000,cpa:31.91}
+  ],
+  AU_PS: [
+    {week:'2026-01-05',registrations:85,cost:6200,cpa:72.94},
+    {week:'2026-01-12',registrations:92,cost:6600,cpa:71.74},
+    {week:'2026-01-19',registrations:78,cost:5800,cpa:74.36},
+    {week:'2026-01-26',registrations:95,cost:6800,cpa:71.58},
+    {week:'2026-02-02',registrations:88,cost:6400,cpa:72.73},
+    {week:'2026-02-09',registrations:101,cost:7200,cpa:71.29},
+    {week:'2026-02-16',registrations:94,cost:6700,cpa:71.28},
+    {week:'2026-02-23',registrations:105,cost:7400,cpa:70.48},
+    {week:'2026-03-02',registrations:98,cost:7000,cpa:71.43},
+    {week:'2026-03-09',registrations:110,cost:7700,cpa:70.00},
+    {week:'2026-03-16',registrations:103,cost:7300,cpa:70.87},
+    {week:'2026-03-23',registrations:112,cost:7800,cpa:69.64},
+    {week:'2026-03-30',registrations:108,cost:7600,cpa:70.37}
+  ],
+  PAID_APP: []
+};
+
+const predictions = {
+  MX_PS: [
+    {predDate:'2026-02-23',week:'2026-03-02',horizon:'weekly',metric:'registrations',value:175,low:160,high:195,conf:0.72,actual:182,pctErr:3.85,withinCI:true,brier:0.0015},
+    {predDate:'2026-02-23',week:'2026-03-02',horizon:'weekly',metric:'cost',value:5600,low:5200,high:6100,conf:0.70,actual:5800,pctErr:3.45,withinCI:true,brier:0.0012},
+    {predDate:'2026-02-23',week:'2026-03-02',horizon:'weekly',metric:'cpa',value:32.00,low:30.50,high:33.50,conf:0.68,actual:31.87,pctErr:0.41,withinCI:true,brier:0.0000},
+    {predDate:'2026-02-23',week:'2026-03-09',horizon:'weekly',metric:'registrations',value:180,low:162,high:200,conf:0.65,actual:190,pctErr:5.26,withinCI:true,brier:0.0028},
+    {predDate:'2026-02-23',week:'2026-03-09',horizon:'weekly',metric:'cost',value:5700,low:5200,high:6300,conf:0.63,actual:6000,pctErr:5.00,withinCI:true,brier:0.0025},
+    {predDate:'2026-02-23',week:'2026-03-09',horizon:'weekly',metric:'cpa',value:31.67,low:30.00,high:33.50,conf:0.60,actual:31.58,pctErr:0.28,withinCI:true,brier:0.0000},
+    {predDate:'2026-02-23',week:'2026-03-16',horizon:'weekly',metric:'registrations',value:185,low:165,high:210,conf:0.58,actual:175,pctErr:5.71,withinCI:true,brier:0.0033},
+    {predDate:'2026-02-23',week:'2026-03-16',horizon:'weekly',metric:'cost',value:5900,low:5300,high:6600,conf:0.55,actual:5500,pctErr:7.27,withinCI:true,brier:0.0053},
+    {predDate:'2026-02-23',week:'2026-03-16',horizon:'weekly',metric:'cpa',value:31.89,low:29.50,high:34.00,conf:0.52,actual:31.43,pctErr:1.46,withinCI:true,brier:0.0002},
+    {predDate:'2026-02-23',week:'2026-03-30',horizon:'monthly',metric:'registrations',value:740,low:660,high:830,conf:0.55,actual:null,pctErr:null,withinCI:null,brier:null},
+    {predDate:'2026-02-23',week:'2026-03-30',horizon:'monthly',metric:'cost',value:23500,low:21000,high:26500,conf:0.52,actual:null,pctErr:null,withinCI:null,brier:null},
+    {predDate:'2026-02-23',week:'2026-03-30',horizon:'monthly',metric:'cpa',value:31.76,low:29.00,high:34.50,conf:0.50,actual:null,pctErr:null,withinCI:null,brier:null},
+    {predDate:'2026-01-05',week:'2026-03-30',horizon:'quarterly',metric:'registrations',value:2100,low:1850,high:2400,conf:0.45,actual:null,pctErr:null,withinCI:null,brier:null},
+    {predDate:'2026-01-05',week:'2026-03-30',horizon:'quarterly',metric:'cost',value:68000,low:60000,high:78000,conf:0.42,actual:null,pctErr:null,withinCI:null,brier:null},
+    {predDate:'2026-01-05',week:'2026-03-30',horizon:'quarterly',metric:'cpa',value:32.38,low:29.50,high:35.50,conf:0.40,actual:null,pctErr:null,withinCI:null,brier:null},
+    {predDate:'2026-03-30',week:'2026-04-06',horizon:'weekly',metric:'registrations',value:192,low:172,high:215,conf:0.70,actual:null,pctErr:null,withinCI:null,brier:null},
+    {predDate:'2026-03-30',week:'2026-04-06',horizon:'weekly',metric:'cost',value:6100,low:5600,high:6800,conf:0.68,actual:null,pctErr:null,withinCI:null,brier:null},
+    {predDate:'2026-03-30',week:'2026-04-06',horizon:'weekly',metric:'cpa',value:31.77,low:29.50,high:34.00,conf:0.65,actual:null,pctErr:null,withinCI:null,brier:null}
+  ],
+  AU_PS: [
+    {predDate:'2026-02-23',week:'2026-03-02',horizon:'weekly',metric:'registrations',value:100,low:88,high:115,conf:0.70,actual:98,pctErr:2.04,withinCI:true,brier:0.0004},
+    {predDate:'2026-02-23',week:'2026-03-02',horizon:'weekly',metric:'cost',value:7100,low:6500,high:7800,conf:0.68,actual:7000,pctErr:1.43,withinCI:true,brier:0.0002},
+    {predDate:'2026-02-23',week:'2026-03-02',horizon:'weekly',metric:'cpa',value:71.00,low:67.00,high:76.00,conf:0.65,actual:71.43,pctErr:0.60,withinCI:true,brier:0.0000},
+    {predDate:'2026-02-23',week:'2026-03-09',horizon:'weekly',metric:'registrations',value:105,low:90,high:122,conf:0.62,actual:110,pctErr:4.55,withinCI:true,brier:0.0021},
+    {predDate:'2026-02-23',week:'2026-03-09',horizon:'weekly',metric:'cost',value:7300,low:6600,high:8100,conf:0.60,actual:7700,pctErr:5.19,withinCI:true,brier:0.0027},
+    {predDate:'2026-02-23',week:'2026-03-09',horizon:'weekly',metric:'cpa',value:69.52,low:65.00,high:75.00,conf:0.58,actual:70.00,pctErr:0.69,withinCI:true,brier:0.0000},
+    {predDate:'2026-02-23',week:'2026-03-30',horizon:'monthly',metric:'registrations',value:420,low:370,high:480,conf:0.50,actual:null,pctErr:null,withinCI:null,brier:null},
+    {predDate:'2026-02-23',week:'2026-03-30',horizon:'monthly',metric:'cost',value:29500,low:26000,high:34000,conf:0.48,actual:null,pctErr:null,withinCI:null,brier:null},
+    {predDate:'2026-02-23',week:'2026-03-30',horizon:'monthly',metric:'cpa',value:70.24,low:66.00,high:76.00,conf:0.45,actual:null,pctErr:null,withinCI:null,brier:null},
+    {predDate:'2026-03-30',week:'2026-04-06',horizon:'weekly',metric:'registrations',value:115,low:100,high:132,conf:0.68,actual:null,pctErr:null,withinCI:null,brier:null},
+    {predDate:'2026-03-30',week:'2026-04-06',horizon:'weekly',metric:'cost',value:8000,low:7200,high:8900,conf:0.65,actual:null,pctErr:null,withinCI:null,brier:null},
+    {predDate:'2026-03-30',week:'2026-04-06',horizon:'weekly',metric:'cpa',value:69.57,low:65.00,high:75.00,conf:0.62,actual:null,pctErr:null,withinCI:null,brier:null}
+  ],
+  PAID_APP: []
+};
+
+const channelLabels = { MX_PS: 'Mexico PS', AU_PS: 'Australia PS', PAID_APP: 'Paid App Marketing' };
+const metricLabels = { registrations: 'Registrations', cost: 'Cost ($)', cpa: 'CPA ($)' };
+const metricFormats = {
+  registrations: v => v?.toLocaleString() ?? '—',
+  cost: v => v != null ? '$' + v.toLocaleString(undefined, {minimumFractionDigits:0, maximumFractionDigits:0}) : '—',
+  cpa: v => v != null ? '$' + v.toFixed(2) : '—'
+};
+
+let currentChannel = 'MX_PS';
+let currentMetric = 'registrations';
+let currentHorizon = 'weekly';
+let mainChart, accuracyChart, calibrationChart;
+
+// === INIT ===
+function init() {
+  const tabContainer = document.getElementById('channelTabs');
+  Object.entries(channelLabels).forEach(([key, label]) => {
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (key === currentChannel ? ' active' : '');
+    btn.textContent = label;
+    btn.onclick = () => { currentChannel = key; updateAll(); };
+    tabContainer.appendChild(btn);
+  });
+  document.getElementById('metricSelect').onchange = e => { currentMetric = e.target.value; updateAll(); };
+  document.getElementById('horizonSelect').onchange = e => { currentHorizon = e.target.value; updateAll(); };
+  updateAll();
+}
+
+function updateAll() {
+  // Update tab styles
+  document.querySelectorAll('#channelTabs .tab').forEach((btn, i) => {
+    btn.className = 'tab' + (Object.keys(channelLabels)[i] === currentChannel ? ' active' : '');
+  });
+  // Show/hide paid app card
+  document.getElementById('paidAppCard').style.display = currentChannel === 'PAID_APP' ? 'block' : 'none';
+  
+  if (currentChannel === 'PAID_APP') {
+    updateKPIs(); renderMainChart(); renderAccuracyChart(); renderCalibrationChart(); renderScoreTable();
+    return;
+  }
+  updateKPIs();
+  renderMainChart();
+  renderAccuracyChart();
+  renderCalibrationChart();
+  renderScoreTable();
+}
+
+function updateKPIs() {
+  const row = document.getElementById('kpiRow');
+  const preds = predictions[currentChannel]?.filter(p => p.horizon === currentHorizon && p.metric === currentMetric) || [];
+  const scored = preds.filter(p => p.actual != null);
+  const fmt = metricFormats[currentMetric];
+  
+  if (currentChannel === 'PAID_APP' || preds.length === 0) {
+    row.innerHTML = `
+      <div class="kpi"><div class="label">Status</div><div class="value" style="font-size:16px;">Awaiting Data</div></div>
+    `;
+    return;
+  }
+
+  const avgErr = scored.length > 0 ? (scored.reduce((s,p) => s + (p.pctErr||0), 0) / scored.length) : null;
+  const ciHitRate = scored.length > 0 ? (scored.filter(p => p.withinCI).length / scored.length * 100) : null;
+  const avgBrier = scored.length > 0 ? (scored.reduce((s,p) => s + (p.brier||0), 0) / scored.length) : null;
+  const latestPred = preds[preds.length - 1];
+  const latestActual = actuals[currentChannel]?.slice(-1)[0];
+
+  const errClass = avgErr != null ? (avgErr < 5 ? 'good' : avgErr < 10 ? 'warn' : 'bad') : '';
+  const ciClass = ciHitRate != null ? (ciHitRate >= 80 ? 'good' : ciHitRate >= 60 ? 'warn' : 'bad') : '';
+  const brierClass = avgBrier != null ? (avgBrier < 0.005 ? 'good' : avgBrier < 0.02 ? 'warn' : 'bad') : '';
+
+  row.innerHTML = `
+    <div class="kpi">
+      <div class="label">Latest Actual</div>
+      <div class="value">${latestActual ? fmt(latestActual[currentMetric]) : '—'}</div>
+      <div class="sub">${latestActual ? 'Week of ' + latestActual.week : ''}</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Next Prediction</div>
+      <div class="value">${latestPred && latestPred.actual == null ? fmt(latestPred.value) : '—'}</div>
+      <div class="sub">${latestPred && latestPred.actual == null ? 'Week of ' + latestPred.week + ' (conf: ' + (latestPred.conf*100).toFixed(0) + '%)' : 'All scored'}</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Avg Error %</div>
+      <div class="value ${errClass}">${avgErr != null ? avgErr.toFixed(1) + '%' : '—'}</div>
+      <div class="sub">${scored.length} scored prediction${scored.length !== 1 ? 's' : ''}</div>
+    </div>
+    <div class="kpi">
+      <div class="label">CI Hit Rate</div>
+      <div class="value ${ciClass}">${ciHitRate != null ? ciHitRate.toFixed(0) + '%' : '—'}</div>
+      <div class="sub">${scored.filter(p=>p.withinCI).length}/${scored.length} within 80% CI</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Avg Brier Score</div>
+      <div class="value ${brierClass}">${avgBrier != null ? avgBrier.toFixed(4) : '—'}</div>
+      <div class="sub">${avgBrier != null ? (avgBrier < 0.005 ? 'Excellent calibration' : avgBrier < 0.02 ? 'Good calibration' : 'Needs improvement') : ''}</div>
+    </div>
+  `;
+}
+
+function renderMainChart() {
+  const ctx = document.getElementById('mainChart').getContext('2d');
+  if (mainChart) mainChart.destroy();
+
+  const channelActuals = actuals[currentChannel] || [];
+  const channelPreds = (predictions[currentChannel] || []).filter(p => p.horizon === currentHorizon && p.metric === currentMetric);
+  
+  const metricLabel = currentMetric === 'registrations' && currentChannel === 'PAID_APP' ? 'App Installs' : metricLabels[currentMetric];
+  document.getElementById('mainChartTitle').textContent = `${metricLabel} — ${channelLabels[currentChannel]} (${currentHorizon})`;
+
+  if (channelActuals.length === 0 && channelPreds.length === 0) {
+    mainChart = new Chart(ctx, { type: 'line', data: { labels: ['No Data'], datasets: [] }, options: { plugins: { legend: { display: false } } } });
+    return;
+  }
+
+  // Merge all weeks
+  const allWeeks = [...new Set([
+    ...channelActuals.map(a => a.week),
+    ...channelPreds.map(p => p.week)
+  ])].sort();
+
+  const actualData = allWeeks.map(w => { const a = channelActuals.find(x => x.week === w); return a ? a[currentMetric] : null; });
+  const predData = allWeeks.map(w => { const p = channelPreds.find(x => x.week === w); return p ? p.value : null; });
+  const ciLow = allWeeks.map(w => { const p = channelPreds.find(x => x.week === w); return p ? p.low : null; });
+  const ciHigh = allWeeks.map(w => { const p = channelPreds.find(x => x.week === w); return p ? p.high : null; });
+
+  const labels = allWeeks.map(w => { const d = new Date(w + 'T00:00:00'); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); });
+
+  mainChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Actual',
+          data: actualData,
+          borderColor: '#4a9eff',
+          backgroundColor: '#4a9eff',
+          borderWidth: 2.5,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          tension: 0.3,
+          spanGaps: false
+        },
+        {
+          label: 'Predicted',
+          data: predData,
+          borderColor: '#f97316',
+          backgroundColor: '#f97316',
+          borderWidth: 2,
+          borderDash: [6, 3],
+          pointRadius: 4,
+          pointStyle: 'triangle',
+          pointHoverRadius: 6,
+          tension: 0.3,
+          spanGaps: false
+        },
+        {
+          label: 'CI Upper',
+          data: ciHigh,
+          borderColor: 'transparent',
+          backgroundColor: 'rgba(249, 115, 22, 0.12)',
+          fill: '+1',
+          pointRadius: 0,
+          tension: 0.3,
+          spanGaps: false
+        },
+        {
+          label: 'CI Lower',
+          data: ciLow,
+          borderColor: 'transparent',
+          backgroundColor: 'rgba(249, 115, 22, 0.12)',
+          fill: '-1',
+          pointRadius: 0,
+          tension: 0.3,
+          spanGaps: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a1d27',
+          borderColor: '#2a2d35',
+          borderWidth: 1,
+          titleColor: '#fff',
+          bodyColor: '#ccc',
+          callbacks: {
+            label: function(ctx) {
+              if (ctx.datasetIndex > 1) return null;
+              const fmt = metricFormats[currentMetric];
+              return ctx.dataset.label + ': ' + fmt(ctx.parsed.y);
+            }
+          }
+        }
+      },
+      scales: {
+        x: { grid: { color: '#1f222b' }, ticks: { color: '#666', font: { size: 11 } } },
+        y: { grid: { color: '#1f222b' }, ticks: { color: '#666', font: { size: 11 }, callback: v => metricFormats[currentMetric](v) } }
+      }
+    }
+  });
+}
+
+function renderAccuracyChart() {
+  const ctx = document.getElementById('accuracyChart').getContext('2d');
+  if (accuracyChart) accuracyChart.destroy();
+
+  const scored = (predictions[currentChannel] || [])
+    .filter(p => p.horizon === currentHorizon && p.metric === currentMetric && p.actual != null)
+    .sort((a, b) => a.week.localeCompare(b.week));
+
+  if (scored.length === 0) {
+    accuracyChart = new Chart(ctx, { type: 'bar', data: { labels: ['No scored predictions yet'], datasets: [] }, options: { plugins: { legend: { display: false } } } });
+    return;
+  }
+
+  const labels = scored.map(s => { const d = new Date(s.week + 'T00:00:00'); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); });
+  const errors = scored.map(s => s.pctErr);
+  const colors = errors.map(e => e < 3 ? '#4ade80' : e < 7 ? '#fbbf24' : '#f87171');
+
+  accuracyChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Error %',
+        data: errors,
+        backgroundColor: colors,
+        borderRadius: 4,
+        barThickness: 24
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ctx.parsed.y.toFixed(1) + '% error' } }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: '#666', font: { size: 11 } } },
+        y: { grid: { color: '#1f222b' }, ticks: { color: '#666', callback: v => v + '%' }, suggestedMax: 15 }
+      }
+    }
+  });
+}
+
+function renderCalibrationChart() {
+  const ctx = document.getElementById('calibrationChart').getContext('2d');
+  if (calibrationChart) calibrationChart.destroy();
+
+  // Show confidence vs actual hit rate across all metrics for this channel+horizon
+  const allPreds = (predictions[currentChannel] || []).filter(p => p.horizon === currentHorizon && p.actual != null);
+  
+  if (allPreds.length === 0) {
+    calibrationChart = new Chart(ctx, { type: 'scatter', data: { datasets: [] }, options: { plugins: { legend: { display: false } } } });
+    return;
+  }
+
+  // Bucket by confidence level
+  const buckets = {};
+  allPreds.forEach(p => {
+    const bucket = Math.round(p.conf * 10) / 10;
+    if (!buckets[bucket]) buckets[bucket] = { total: 0, hits: 0 };
+    buckets[bucket].total++;
+    if (p.withinCI) buckets[bucket].hits++;
+  });
+
+  const points = Object.entries(buckets).map(([conf, data]) => ({
+    x: parseFloat(conf) * 100,
+    y: (data.hits / data.total) * 100,
+    r: Math.max(6, data.total * 4)
+  }));
+
+  calibrationChart = new Chart(ctx, {
+    type: 'bubble',
+    data: {
+      datasets: [
+        {
+          label: 'Calibration',
+          data: points,
+          backgroundColor: 'rgba(74, 158, 255, 0.5)',
+          borderColor: '#4a9eff',
+          borderWidth: 1.5
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => `Confidence: ${ctx.parsed.x}%, Hit Rate: ${ctx.parsed.y.toFixed(0)}%`
+          }
+        },
+        annotation: {
+          annotations: {
+            perfectLine: {
+              type: 'line',
+              xMin: 0, xMax: 100, yMin: 0, yMax: 100,
+              borderColor: 'rgba(255,255,255,0.15)',
+              borderWidth: 1,
+              borderDash: [4, 4],
+              label: { display: true, content: 'Perfect Calibration', position: 'end', color: '#555', font: { size: 10 } }
+            }
+          }
+        }
+      },
+      scales: {
+        x: { title: { display: true, text: 'Stated Confidence %', color: '#666' }, min: 0, max: 100, grid: { color: '#1f222b' }, ticks: { color: '#666' } },
+        y: { title: { display: true, text: 'Actual Hit Rate %', color: '#666' }, min: 0, max: 110, grid: { color: '#1f222b' }, ticks: { color: '#666' } }
+      }
+    }
+  });
+}
+
+function renderScoreTable() {
+  const body = document.getElementById('scoreBody');
+  const preds = (predictions[currentChannel] || [])
+    .filter(p => p.horizon === currentHorizon && p.metric === currentMetric)
+    .sort((a, b) => a.week.localeCompare(b.week));
+
+  if (preds.length === 0) {
+    body.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#555;padding:24px;">No predictions for this view</td></tr>';
+    return;
+  }
+
+  const fmt = metricFormats[currentMetric];
+  body.innerHTML = preds.map(p => {
+    const errBadge = p.pctErr != null
+      ? `<span class="badge ${p.pctErr < 3 ? 'badge-green' : p.pctErr < 7 ? 'badge-yellow' : 'badge-red'}">${p.pctErr.toFixed(1)}%</span>`
+      : '<span class="badge badge-gray">Pending</span>';
+    const ciBadge = p.withinCI != null
+      ? `<span class="badge ${p.withinCI ? 'badge-green' : 'badge-red'}">${p.withinCI ? 'Yes' : 'No'}</span>`
+      : '<span class="badge badge-gray">—</span>';
+    const confColor = p.conf >= 0.7 ? '#4ade80' : p.conf >= 0.5 ? '#fbbf24' : '#f87171';
+    const brierVal = p.brier != null ? p.brier.toFixed(4) : '—';
+    const metricDisplay = currentMetric === 'registrations' && currentChannel === 'PAID_APP' ? 'installs' : currentMetric;
+    
+    return `<tr>
+      <td>${p.week}</td>
+      <td>${metricDisplay}</td>
+      <td>${fmt(p.value)} <span style="color:#555;font-size:11px;">[${fmt(p.low)}–${fmt(p.high)}]</span></td>
+      <td>${p.actual != null ? fmt(p.actual) : '<span style="color:#555;">—</span>'}</td>
+      <td>${errBadge}</td>
+      <td>${ciBadge}</td>
+      <td><div class="confidence-bar"><div class="confidence-fill"><div class="inner" style="width:${p.conf*100}%;background:${confColor};"></div></div><span style="font-size:11px;">${(p.conf*100).toFixed(0)}%</span></div></td>
+      <td>${brierVal}</td>
+    </tr>`;
+  }).join('');
+}
+
+init();
+</script>
+</body>
+</html>

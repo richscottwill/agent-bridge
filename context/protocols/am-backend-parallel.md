@@ -1,3 +1,4 @@
+<!-- DOC-0329 | duck_id: protocol-am-backend-parallel -->
 # AM-Backend Protocol — Parallel Architecture
 
 Replaces the sequential am-backend.md with a parallel-first design. Ingestion fans out to 3 concurrent subagents. Processing runs sequentially after all ingestion completes.
@@ -149,6 +150,24 @@ AM-Backend Hook (orchestrator)
 │   │   6. email-triage.md
 │   │   7. asana-digest.md
 │   │   8. asana-activity.md
+│   ├─ Refresh l1_streak for today (read current hard thing from amcc.md or current.md):
+│   │   ```sql
+│   │   INSERT INTO main.l1_streak (tracker_date, workdays_at_zero, hard_thing_task_gid, hard_thing_name)
+│   │   VALUES (CURRENT_DATE, [days], '[gid]', '[name]')
+│   │   ON CONFLICT (tracker_date) DO UPDATE SET
+│   │       hard_thing_task_gid = EXCLUDED.hard_thing_task_gid,
+│   │       hard_thing_name = EXCLUDED.hard_thing_name,
+│   │       notes = EXCLUDED.notes;
+│   │   ```
+│   │   Source the hard thing from amcc.md or current.md pending actions (first unchecked item marked as hard thing).
+│   │   workdays_at_zero: carry forward from previous day's value (query MAX(tracker_date) < CURRENT_DATE).
+│   ├─ Update data freshness for all synced tables:
+│   │   ```sql
+│   │   INSERT INTO ops.data_freshness (source_name, source_type, expected_cadence_hours, last_updated, last_checked, is_stale, downstream_workflows)
+│   │   VALUES ('asana_tasks', 'duckdb_table', 12, NOW(), NOW(), false, ARRAY['am_triage','portfolio_scan','daily_tracker'])
+│   │   ON CONFLICT (source_name) DO UPDATE SET last_updated = NOW(), last_checked = NOW(), is_stale = false;
+│   │   ```
+│   │   Repeat for: calendar_events, emails, slack_messages, signal_tracker, l1_streak.
 │   └─ Log hook execution to DuckDB
 │
 └─ DONE — AM-Frontend can now run
@@ -220,13 +239,23 @@ AM-Backend Hook (orchestrator)
 **Context files to load:**
 - spine.md (tool access)
 - memory.md (stakeholder priority list for sender classification)
+- email-calendar-duckdb-sync.md (DuckDB sync protocol — MANDATORY, contains SQL templates)
 
 **MCP servers used:** Outlook MCP, DuckDB MCP
 
+**Execution order (from email-calendar-duckdb-sync.md):**
+1. Pull emails → **INSERT into signals.emails (DuckDB)** — primary deliverable
+2. Pull calendar → **UPSERT into main.calendar_events (DuckDB)** — primary deliverable
+3. Update ops.data_freshness
+4. Write email-triage.md (file) — secondary output
+
+**CRITICAL:** DuckDB writes are the PRIMARY output. The file (email-triage.md) is secondary fallback. Do NOT skip DuckDB writes. The sync protocol file has explicit SQL templates with column mappings — follow them exactly.
+
 **Writes:**
+- signals.emails (DuckDB — INSERT/UPSERT) ← MUST happen
+- main.calendar_events (DuckDB — UPSERT) ← MUST happen
+- ops.data_freshness (DuckDB — UPDATE)
 - ~/shared/context/intake/email-triage.md (file)
-- signals.emails (DuckDB — INSERT/UPSERT)
-- main.calendar_events (DuckDB — UPSERT)
 
 **Does NOT touch:** Slack MCP, Asana MCP, any slack-* or asana-* files or tables
 

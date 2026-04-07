@@ -1,0 +1,13 @@
+<!-- DOC-0057 | duck_id: callout-it-context -->
+# IT Paid Search — Market Context
+
+Last updated: 2026-03-30
+
+## Agent Configuration
+- markets: [IT]
+- has_yoy: true
+- has_ieccp: false
+- headline_extras: []
+- regional_summary: true
+- spend_strategy: OP2 targets, OCI E2E ramping
+- projection_notes: OCI E2E ramping, Shopify/mondoffice NB competition

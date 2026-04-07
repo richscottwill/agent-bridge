@@ -22,6 +22,6 @@ sync:
   eligible_statuses:
     - REVIEW
     - FINAL
-  articles_path: "~/shared/artifacts/"
-  wiki_index_path: "~/shared/context/wiki/wiki-index.md"
+  articles_path: "~/shared/wiki/"
+  wiki_index_path: "~/shared/wiki/wiki-index.md"
   manifest_path: "~/shared/tools/sharepoint-sync/.sync-manifest.json"

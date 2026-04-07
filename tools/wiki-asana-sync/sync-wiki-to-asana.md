@@ -1,3 +1,4 @@
+<!-- DOC-0427 | duck_id: tool-sync-wiki-to-asana -->
 # Wiki-to-Asana Sync — Design
 
 ## Purpose
@@ -9,7 +10,7 @@ Keep wiki article content available in Asana so Richard can read articles from t
 - Write full article content into each task's html_notes field via Enterprise Asana MCP
 - Formatting: bold for headers, lists for bullets, no tables (converted to lists)
 - Runs during EOD-2 or on-demand
-- Source of truth: ~/shared/artifacts/ (file system)
+- Source of truth: ~/shared/wiki/ (file system)
 - Asana is the read-only distribution copy
 
 ### Tier 2: File attachment sync (REQUIRES PAT)
@@ -37,7 +38,7 @@ Keep wiki article content available in Asana so Richard can read articles from t
 - Sources section → preserved as a list
 
 ### Sync protocol:
-1. Read article from ~/shared/artifacts/{category}/{file}.md
+1. Read article from ~/shared/wiki/{category}/{file}.md
 2. Strip YAML frontmatter and AGENT_CONTEXT block
 3. Convert markdown to Asana HTML
 4. Find or create the corresponding task in ABPS AI Content project

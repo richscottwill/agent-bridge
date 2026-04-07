@@ -1,7 +1,7 @@
 {
   "name": "4 · Agent Bridge Sync",
   "version": "1",
-  "description": "Sync portable-body/ to GitHub, send snapshot email.",
+  "description": "Sync shared/context/ to GitHub, send snapshot email.",
   "when": { "type": "userTriggered" },
   "then": {
     "type": "askAgent",

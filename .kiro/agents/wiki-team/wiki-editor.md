@@ -32,7 +32,7 @@ wiki-editor (you)
 
 ## Content roadmap
 
-Maintain the roadmap at `~/shared/context/wiki/roadmap.md`:
+Maintain the roadmap at `~/shared/wiki/roadmap.md`:
 
 ```markdown
 # Wiki Roadmap

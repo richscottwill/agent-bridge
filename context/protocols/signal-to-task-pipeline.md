@@ -1,3 +1,4 @@
+<!-- DOC-0359 | duck_id: protocol-signal-to-task-pipeline -->
 # Signal-to-Task Pipeline
 
 Extends AM-1 (Ingest) and AM-2 (Triage). Auto-creates Asana tasks from high-priority email and Slack signals.

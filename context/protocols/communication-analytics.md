@@ -1,3 +1,4 @@
+<!-- DOC-0343 | duck_id: protocol-communication-analytics -->
 # Communication Analytics Protocol
 
 Runs during EOD-2 (weekly cadence). Computes meeting communication trends for Loop 9.

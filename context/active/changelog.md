@@ -1,3 +1,4 @@
+<!-- DOC-0342 | duck_id: protocol-changelog -->
 ### EOD-2 Run 22 — 2026-04-06 (Monday)
 - Phase 1: Asana reconciliation. 0 completions, 0 Today tasks (clean slate), 5 overdue, 97 incomplete. DuckDB synced with 47 tasks. Blockers: Vijeth 18d, Andes 21d.
 - Phase 2: ABPS AI: 35 active, 5 Published, 0 advances today. Portfolio: no changes.

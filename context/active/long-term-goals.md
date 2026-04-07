@@ -1,3 +1,4 @@
+<!-- DOC-0353 | duck_id: protocol-long-term-goals -->
 # Long-Term Goals — Richard Williams
 
 Created: 2026-03-20

@@ -1,0 +1,83 @@
+<!-- DOC-0074 | duck_id: callout-mx-analysis-2026-w13 -->
+# MX W13 Analysis Brief
+
+## Registration summary
+
+MX drove 354 registrations (+9% WoW), with +15% spend WoW, and 93% ie%CCP. CPA came in at $66 (+6% WoW). March is projected to end at ~$96K spend and ~1,510 registrations, at $63 CPA. (vs. OP2: +70% spend, +76% registrations)
+
+## Why registrations changed
+
+The +9% WoW recovery was click-driven (+9% WoW on both Brand and NB) rather than CVR-driven (flat WoW blended). Brand CVR dipped slightly from 6.03% to 5.79% (-4% WoW), offset by a +9% increase in Brand clicks. NB CVR ticked up from 1.38% to 1.46% (+5% WoW), with NB clicks also +9% WoW.
+
+The click growth on both sides suggests increased auction participation, likely from bid strategies responding to the W12 dip by bidding more aggressively into available inventory. Spend grew faster than registrations (+15% vs +9%), which pushed CPA up to $66 (+6% WoW). The CPA increase is a mechanical consequence of the click-led recovery: more clicks at similar conversion rates means more spend per registration.
+
+NB CVR of 1.46% is the key metric this week. W12 analysis flagged 1.3-1.4% as the expected post-negative-keyword baseline. W13's 1.46% sits above that range, suggesting the structural improvement from the W11 negative keyword work may be settling higher than initially estimated. The 12-week NB CVR trend: 1.18%, 1.26%, 1.24%, 1.22%, 1.15%, 1.22%, 1.34%, 1.19%, 1.13%, 1.12%, 1.56%, 1.38%, 1.46%. Pre-restructuring average (W2-W10) was ~1.20%. Post-restructuring (W11-W13) averages 1.47%. Even excluding the W11 spike, W12-W13 average 1.42%, confirming a durable ~20% improvement in NB query routing efficiency.
+
+Brand CVR of 5.79% is within the normal 4-6% range and consistent with the 12-week average of ~5.2%. The -4% WoW decline from 6.03% is minor fluctuation, not a trend.
+
+## Trend context
+
+W13's 354 regs continues the pattern of rising "dip" weeks: W9 (264), W10 (298), W12 (330), W13 (354). The alternating spike/dip pattern (W8: 368, W9: 264, W10: 298, W11: 392, W12: 326, W13: 354) is smoothing out. W13 didn't spike like W8 or W11, but it also didn't dip like W9 or W12. This is stabilization around a higher baseline of ~340-360 regs/week.
+
+NB regs of 140 are flagged as 33% above the recent average of 105. This is the highest NB week since W11 (146) and the second-highest in the 12-week trend. NB is structurally performing at a higher level post-negative-keyword restructuring.
+
+NB CPC rose to $1.95, the highest in the 12-week trend. The 5-week upward trend (W9: $1.82, W10: $1.84, W11: $1.90, W12: $1.81, W13: $1.95) resumed after W12's brief dip. The bid strategies are paying more per click as they chase volume. This is worth monitoring: NB CPA of $134 is already high in absolute terms, and rising CPC without proportional CVR gains will push it higher.
+
+Cost of $23K is flagged as 24% above the 8-week average of $18.7K. This is the highest weekly spend in the dataset. The spend increase is coming from both segments: Brand clicks +9% and NB clicks +9%, with NB CPC also rising. The ie%CCP framework absorbs this because Brand efficiency ($21 CPA on $80 CCP) subsidizes NB ($134 CPA on $30 CCP).
+
+ie%CCP improved from 90% (W12 weekly) to 93% (W13 weekly). MTD ie%CCP is approximately 98% ($84K CCP on $86K spend), approaching the 100% target. The improvement is driven by the registration mix: Brand regs (863 MTD) generate $69K CCP at $80 each, which carries the blended ratio despite NB's $134 CPA against $30 CCP.
+
+## Relevant actions and events
+
+1. Negative keyword restructuring (W11): Now three weeks post-implementation. NB CVR has settled at 1.42% (W12-W13 average), ~20% above the pre-change baseline of ~1.20%. The improvement is durable and no longer spiking. This is the new baseline.
+
+2. No new campaign changes in W13: The change log shows no actions taken since W11. The bid strategies are operating autonomously, and the click growth this week reflects their response to available inventory rather than manual intervention.
+
+3. Brand coverage scaling: Brand spend at ~$4.6K this week (214 regs × $21 CPA), continuing the ~10x YoY investment increase. Brand remains the efficiency engine: $21 CPA against $80 CCP.
+
+4. ie%CCP at 93% weekly, ~98% MTD: The 100% target is effectively within reach for March. No NB budget adjustments needed.
+
+5. Lorena PO submission: Lorena needs Q2 expected spend for PO submission, now 4 days overdue as of 3/29. Q2 OP2 budget is $123.6K ($35K Apr + $44K May + $45K Jun). Given Q1's overspend trajectory, the actual Q2 spend may differ. This is an action item, not a performance issue.
+
+## YoY assessment
+
+YoY performance remains strong: +91% regs (354 vs 185) on -32% spend ($23K vs $34K). CPA improved from $185 to $66 (-64% YoY).
+
+Brand drove the bulk of the growth: +182% YoY (214 vs 76 LY). NB grew +28% YoY (140 vs 109), the strongest NB YoY growth in the trend. NB CPA improved -57% YoY ($134 vs $309). The NB efficiency story continues to compound: -35% CPC ($1.95 vs ~$2.99 LY) and +50% CVR (1.46% vs 0.97% LY) from bid strategy maturity and negative keyword work.
+
+The WoW pattern was similar both years: TY +9% vs LY +6%. Both years showed a recovery in W13 after a W12 dip, confirming a consistent seasonal pattern. TY's baseline is 91% higher on 32% less spend.
+
+LY W14 was 192 regs on $32K spend ($167 CPA). If TY maintains the ~90% YoY lift, W14 should land around 350-370 regs. LY W14 was +4% WoW, so a flat-to-slightly-up W14 is the seasonal expectation.
+
+## Monthly projection
+
+MTD through W13 (28/31 days): 1,370 regs, $86K spend.
+
+Remaining 3 days (Mar 29-31): 1 weekend day (Sun), 2 weekdays (Mon, Tue). Using W12-W13 blended daily rates (weekday ~55 regs, weekend ~32 regs):
+
+- Projected remaining regs: (1 × 32) + (2 × 55) = 32 + 110 = 142
+- Projected total regs: 1,370 + 142 = ~1,510
+- Projected remaining spend: (1 × $2.5K) + (2 × $3.5K) = $2.5K + $7K = $9.5K
+- Projected total spend: $86K + $9.5K = ~$96K
+- Projected CPA: $63
+- Projected ie%CCP: ~98% (MTD ratio stabilizing near target)
+
+vs. OP2 ($57K spend, 859 regs, $66 CPA): +70% spend, +76% regs, -5% CPA. MX will significantly exceed OP2 on registrations while beating the CPA target. The overspend vs OP2 is justified by ie%CCP approaching 100%.
+
+The ingester's linear estimate of 1.5K regs and $96K spend aligns closely with the weighted projection this late in the month. With only 3 days remaining, the projection has low variance.
+
+## Flags
+
+1. NB CVR baseline confirmed at ~1.42%: Three weeks post-negative-keyword restructuring, the new baseline is clear. W12 (1.38%) and W13 (1.46%) bracket the range. This is ~20% above the pre-change average of 1.20%. No further monitoring needed on this metric.
+
+2. NB CPC at $1.95, 12-week high: The upward trend is resuming. Bid strategies are paying more per click as they chase volume. If NB CPC continues rising without CVR gains, NB CPA will increase. Not actionable yet, but worth tracking into April.
+
+3. CPA at $66, matching OP2 target: W13's CPA is the highest since W9 ($75). The increase is click-driven (more volume at similar CVR). Monthly CPA of $63 still beats OP2's $66 target, but the weekly trajectory is moving toward the ceiling.
+
+4. ie%CCP at ~98% MTD: Effectively at target. March will close at or near 100%. April OP2 budget drops to $35K (from $57K March), so the ie%CCP constraint will tighten significantly. NB spend will likely need to decrease in April.
+
+5. Lorena Q2 PO submission overdue: 4 days past due as of 3/29. Action item for Richard.
+
+## Suggested narrative angle
+
+MX registrations recovered to 354 (+9% WoW) on a click-driven rebound, with ie%CCP improving to 93% weekly and ~98% MTD. The recovery was volume-led: clicks grew +9% on both Brand and NB, while CVR held flat. NB CVR of 1.46% confirms the post-negative-keyword baseline at ~1.42%, a durable ~20% improvement over the pre-restructuring average. CPA rose to $66 (+6% WoW) as spend grew faster than registrations. YoY performance remains strong at +91% regs on -32% spend. March is projected at ~1,510 regs and $96K spend ($63 CPA) vs OP2 of 859 regs and $57K ($66 CPA). ie%CCP is on track to close March at ~98%.

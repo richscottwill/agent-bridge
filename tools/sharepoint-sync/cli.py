@@ -3,7 +3,7 @@
 Usage::
 
     python3 cli.py --mode site --dry-run
-    python3 cli.py --file ~/shared/artifacts/testing/article.md --force
+    python3 cli.py --file ~/shared/wiki/testing/article.md --force
     python3 cli.py --json --config /path/to/config.yaml
 """
 
@@ -20,7 +20,7 @@ def _build_parser() -> argparse.ArgumentParser:
     """Build and return the argument parser."""
     parser = argparse.ArgumentParser(
         prog="sharepoint-sync",
-        description="Sync wiki articles from ~/shared/artifacts/ to SharePoint.",
+        description="Sync wiki articles from ~/shared/wiki/ to SharePoint.",
     )
     parser.add_argument(
         "--mode",

@@ -1,3 +1,4 @@
+<!-- DOC-0337 | duck_id: protocol-asana-kiro-rw-protocol -->
 # Kiro_RW Population Protocol
 
 Generated: 2026-04-03

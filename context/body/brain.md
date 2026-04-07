@@ -1,3 +1,4 @@
+<!-- DOC-0219 | duck_id: organ-brain -->
 # Brain — Decisions & Thinking
 
 *How Richard decides. Past decisions, extracted principles, strategic priorities, and the leverage framework. This is the canonical decision-making reference — no separate decision log needed.*
@@ -44,7 +45,7 @@ Decisions have a relevance half-life. Not every decision stays useful forever. T
 1. When a decision's outcome is VALIDATED or INVALIDATED (via nervous system Loop 1), tag it RESOLVED
 2. Extract the lesson into the relevant principle (strengthen, qualify, or retire)
 3. Compress the full entry to: `D[X]: [Name] — [Outcome]. Reinforced Principle #[N].`
-4. After 90 days in RESOLVED state with no references, archive to `~/shared/context/archive/`
+4. After 90 days in RESOLVED state with no references, archive to `~/shared/wiki/archive/`
 
 ### Active Decisions (influencing current work)
 
@@ -126,7 +127,7 @@ Graduation is not a date — it's evidence. The nervous system (Loop 6) tracks t
 
 ## OP1 Strategic Narrative
 
-Core argument: Every 2026 investment maps to a validated 2025 signal. PS transforming from keyword-driven to automated, audience-centric engine. Cross-functional collaboration is the differentiator. 5 workstreams (OCI Bidding, Modern Search, Audiences, User Experience, Algorithmic Ads), each problem→test→result→scale. Full draft: `~/shared/research/op1-ps-testing-framework-draft.md`.
+Core argument: Every 2026 investment maps to a validated 2025 signal. PS transforming from keyword-driven to automated, audience-centric engine. Cross-functional collaboration is the differentiator. 5 workstreams (OCI Bidding, Modern Search, Audiences, User Experience, Algorithmic Ads), each problem→test→result→scale. Full draft: `~/shared/wiki/research/op1-ps-testing-framework-draft.md`.
 
 ---
 

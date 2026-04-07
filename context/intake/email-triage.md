@@ -1,3 +1,4 @@
+<!-- DOC-0173 | duck_id: intake-email-triage -->
 # Email Triage — Monday, April 6, 2026
 Unread: 14 | High-priority: 2 | Medium-priority: 5 | Low-priority: 5 | Self-sent (skip): 2
 Action needed: 4

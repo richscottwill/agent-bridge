@@ -1,3 +1,4 @@
+<!-- DOC-0422 | duck_id: tool-protocol-sheet -->
 # Protocol Sheet — Paste into "protocol" tab of agent bridge spreadsheet
 # Each section below becomes rows in the sheet. Column A = section, Column B = content.
 # The swarm agent should read this sheet FIRST before doing anything else.

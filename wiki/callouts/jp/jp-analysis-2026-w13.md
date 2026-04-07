@@ -1,0 +1,80 @@
+<!-- DOC-0064 | duck_id: callout-jp-analysis-2026-w13 -->
+# JP W13 Analysis Brief
+
+## Registration summary
+557 regs, +29% WoW. Spend $47K (+30% WoW). CPA $85 (+1% WoW). Brand 549 (+28% WoW). NB 8 (+167% WoW). Overall CVR 2.03% (+17% WoW). March projection: 2,250 regs at $175K spend ($78 CPA) vs OP2 2,360 regs at $164K ($70 CPA). -5% regs, +7% spend vs OP2.
+
+## Why registrations changed
+CVR recovery compounded by a click rebound. CVR jumped +17% WoW (2.03% vs 1.74%) and clicks grew +11% (27.4K vs 24.8K). Both levers moved in the same direction, amplifying the recovery.
+
+Brand drove the entire gain:
+- Brand regs +28% WoW (549 vs 429). CVR recovered +14% (2.24% vs 1.97%) and clicks grew +12% (24.5K vs 21.8K). Brand CPA dropped to $61 from $70 (-13%). The CVR recovery to 2.24% is the highest since W6 (1.93% was the post-MHLW baseline). This exceeds the post-MHLW range, suggesting W12's fiscal year-end suppression was the anomaly, not W13's recovery.
+- NB remains statistically irrelevant: 8 regs vs 3 LW. NB CPC spiked to $4.74 (up from $2.18 in W12), a 3-week rising streak. NB CPA at $1,754 is noise at these volumes.
+
+The W12 callout predicted fiscal year-end suppression would deepen in W13. The opposite happened. W13's recovery suggests W12 was the suppression trough, not the start of a deeper decline. The fiscal year-end impact may have been front-loaded into W12 rather than spreading across W12-W13.
+
+## Trend context
+W13 breaks the post-MHLW ceiling:
+- W6-W9: 406-498 range (post-MHLW baseline)
+- W10-W11: 518-528 (mini-recovery)
+- W12: 432 (fiscal year-end suppression)
+- W13: 557, the highest post-MHLW week
+
+557 regs exceeds the W10-W11 mini-recovery (518-528) that was previously dismissed as temporary. W13 is now the post-MHLW high watermark. Brand CVR at 2.24% is also the highest since the MHLW period ended.
+
+CPA trajectory: $85 is flat vs W12 ($85) despite the volume recovery, because spend also surged +30%. The CPA uptrend from W6-W12 ($67 → $85) has paused but not reversed. The volume recovery came with proportional spend increase, not efficiency improvement.
+
+Spend at $47K is the highest in the 8-week trend and 41% above the 8-week average ($34K). CPC also spiked 26% above average ($1.73 vs $1.37 avg). The volume recovery was partially bought through higher bids and spend, not purely organic demand.
+
+## Relevant actions and events
+- Budget increases in W12-W13: Yahoo Brand Plus budget raised from 40K to 65K Yen (3/16-3/18), Google Brand Plus portfolio +$220 across campaigns (3/17-3/18), Yahoo NB portfolio adjusted to 40K Yen (3/23), NB BAU tROAS lowered from 0.3 to 0.28 (3/23). The spend surge (+30% WoW) is partially explained by these budget and bid changes. The volume recovery is not purely organic; it was supported by deliberate spend acceleration.
+- Fiscal year-end (Mar 31): W12's suppression was expected to deepen in W13 but didn't materialize. The fiscal year-end impact may concentrate on the final 1-2 business days (Mar 30-31) rather than spreading across the full final two weeks. LY W13 dropped -10% from W12; TY W13 surged +29%. This is a significant divergence from the LY seasonal pattern.
+- Competitors: shop-pro.jp (12-15% Yahoo IS) and axalpha.com (10% Google IS) remain present. The +12% Brand click recovery in W13 suggests competitive pressure didn't intensify this week, or the budget increases offset it.
+- APAC MCC access issues continue to block OCI implementation. NB remains unoptimized and irrelevant at 0-8 regs/week.
+
+## YoY assessment
++44% regs YoY (557 vs 386). Spend +67% ($47K vs $28K).
+- Brand: +44% YoY (549 vs 381 implied). Strong growth but at significantly higher spend.
+- NB: +60% YoY (8 vs 5). Meaningless at these volumes.
+- Spending 67% more to get 44% more regs means CPA is worse YoY. CPA at $85 vs $73 LY (+16% YoY). The volume growth is real but not efficient.
+
+WoW pattern: TY +29% vs LY -10%. Major divergence. LY W13 continued the fiscal year-end decline; TY W13 reversed it. The budget increases in W13 likely explain the divergence from LY's seasonal pattern.
+
+LY W14-W15 recovered to 498-547 regs as the new fiscal year began. TY is already at 557 in W13, ahead of LY's post-fiscal-year recovery. If TY follows a similar April recovery pattern, W14+ could exceed 550.
+
+## Monthly projection
+28/31 days elapsed. MTD: 2,035 regs, $162K spend.
+
+Remaining 3 days (Mar 29-31): Sun Mar 29, Mon Mar 30, Tue Mar 31. 1 weekend day, 2 weekdays.
+
+Mar 31 is the fiscal year-end day. Apply heavy suppression to Mar 31.
+
+Daily rate estimation from W13 actuals:
+- Weekday avg: (83 + 109 + 93 + 117 + 91) / 5 = 99 regs/day, $8.2K spend/day
+- Weekend avg: (22 + 42) / 2 = 32 regs/day, $4.0K spend/day
+
+W13 was an unusually strong week (highest post-MHLW). The remaining 3 days include fiscal year-end suppression on Mar 31.
+
+Adjustments:
+- Sun Mar 29: 32 regs (weekend rate, no adjustment)
+- Mon Mar 30: 99 x 0.85 = 84 regs (pre-fiscal-year-end softness)
+- Tue Mar 31: 99 x 0.60 = 59 regs (fiscal year-end day, heavy suppression; LY Mar 31 was one of the weakest days)
+
+Remaining estimate: 32 + 84 + 59 = 175 regs, ~$13K spend.
+
+Cross-check: W12 projection estimated 515 regs for the final 10 days. Actual W13 delivered 557 in 7 days, significantly outperforming. The remaining 3 days are lower-volume (weekend + fiscal year-end).
+
+**Analyst projection: 2,250 regs at $175K spend, $78 CPA.**
+vs OP2: -5% regs, +7% spend.
+
+The reg miss narrowed significantly from W12's -14% to -5%. W13's strong performance nearly closed the gap. However, the spend overshoot (+7% vs OP2) means CPA at $78 is well above OP2's $70 target. JP is delivering close to plan on volume but at higher cost.
+
+## Flags
+- Spend anomaly: $47K is 41% above the 8-week average and the highest weekly spend in the trend. CPC is 26% above average. The volume recovery was partially bought, not organic. If budgets normalize, volume could pull back.
+- CPA stuck at $85: Despite +29% regs, CPA didn't improve because spend grew proportionally (+30%). The efficiency problem persists. JP is spending more to maintain volume, not finding cheaper conversions.
+- NB CPC rising streak: $1.65 (W10) → $2.03 → $2.18 → $4.74 (W13). Three consecutive weeks of NB CPC increases. At 8 regs/week this is noise, but the trend suggests NB auctions are getting more expensive without corresponding volume.
+- Fiscal year-end concentration: W12's suppression was expected to spread into W13 but didn't. The risk is that suppression concentrates on Mar 30-31 instead. Monitor daily data for the final 3 days.
+- OP2 gap closing but spend overshooting: Regs improved from -14% to -5% vs OP2, but spend went from -2% to +7% vs OP2. JP is buying its way closer to the reg target at the cost of CPA efficiency.
+
+## Suggested narrative angle
+Post-MHLW high watermark. W13's 557 regs (+29% WoW) is the strongest post-MHLW week, exceeding the W10-W11 mini-recovery. Brand CVR recovered to 2.24% (highest since W6) and clicks rebounded +12%, supported by budget increases across Yahoo and Google Brand Plus. CPA held flat at $85 as spend surged proportionally (+30%). March tracking -5% regs vs OP2 (narrowed from -14% at W12) but +7% spend vs OP2. The volume recovery is encouraging but partially bought. Fiscal year-end suppression may concentrate on Mar 30-31 rather than spreading across the final two weeks as expected.

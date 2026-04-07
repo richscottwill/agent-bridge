@@ -1,3 +1,4 @@
+<!-- DOC-0181 | duck_id: intake-output-quality-experiment-ideas -->
 # Output Quality Experiment Ideas
 
 Route to: Karpathy (experiment design)

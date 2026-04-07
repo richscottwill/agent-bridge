@@ -1,3 +1,4 @@
+<!-- DOC-0351 | duck_id: protocol-eod-system-refresh -->
 # EOD System Refresh Protocol
 
 Phases ordered by criticality. Execute in order. Do not skip ahead.
@@ -261,11 +262,11 @@ FROM recurring_task_state;
 - **coherence_audit** (monthly): Cross-organ dependency matrix, gap/stale/dupe detection.
 - **weekly_scorecard** (weekly/Friday): Compile weekly stats for rw-tracker.md.
 - **context_surface_refresh** (weekly): Update AU/MX pinned context tasks in Asana.
-- **agent_bridge_sync** (weekly/Friday): Sync portable-body/ to GitHub.
+- **agent_bridge_sync** (weekly/Friday): Sync shared/ to GitHub.
 
 ### Due Task Procedure: wiki_lint (weekly)
 Invoke the wiki-audit skill. The audit checks:
-1. Orphan scan: files in ~/shared/artifacts/ not listed in wiki-index.md.
+1. Orphan scan: files in ~/shared/wiki/ not listed in wiki-index.md.
 2. Stale content: articles past their update-trigger window or with outdated data references.
 3. Broken cross-references: wikilinks pointing to archived/missing articles.
 4. Missing frontmatter: articles missing required fields (title, status, audience, level, update-trigger, doc-type).
@@ -273,7 +274,7 @@ Invoke the wiki-audit skill. The audit checks:
 6. wiki-index consistency: section header counts vs actual article counts.
 7. **Signal-based freshness:** For each article, query signal_tracker for recent mentions of the article's topic. If recent_mentions > 3 AND article.updated > 14 days → flag as stale with active discussion. Per signal-intelligence.md Use Case 4.
 8. **Idea sourcing:** Query `signal_wiki_candidates` view for topics with strong multi-channel signals but no matching wiki article. Report as organic wiki candidates.
-Write results to ~/shared/context/wiki/health/health-YYYY-MM-DD.md and ~/shared/context/wiki/audits/audit-YYYY-MM-DD.md.
+Write results to ~/shared/wiki/health/health-YYYY-MM-DD.md and ~/shared/wiki/audits/audit-YYYY-MM-DD.md.
 Report summary only: `📚 Wiki lint: [N] healthy, [N] stale, [N] orphaned, [N] broken refs. [N] wiki candidates from signals.` If all clean, skip report.
 
 ### Communication Analytics (weekly)

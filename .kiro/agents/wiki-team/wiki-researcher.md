@@ -25,7 +25,7 @@ When given a topic (by Richard or by the wiki-editor):
 
 ## Research brief format
 
-Write your output to `~/shared/context/wiki/research/{topic-slug}-research.md`:
+Write your output to `~/shared/wiki/research/{topic-slug}-research.md`:
 
 ```markdown
 # Research Brief: {Topic}
@@ -327,7 +327,7 @@ After posting the pinned research brief, execute these steps in order:
 
 | Wiki Pipeline | ABPS AI Pipeline |
 |---------------|-----------------|
-| Output → `~/shared/context/wiki/research/{slug}-research.md` | Output → pinned comment on Asana task |
+| Output → `~/shared/wiki/research/{slug}-research.md` | Output → pinned comment on Asana task |
 | Invoked by wiki-editor | Invoked by AM-2 hook when task enters date window |
 | Research brief format: markdown with sections | Research brief format: Asana HTML with `<strong>` headers |
 | Sources: body system, internal, external | Sources: body system, DuckDB, Slack, email, web (ALL MCP tools) |

@@ -1,3 +1,4 @@
+<!-- DOC-0168 | duck_id: intake-asana-digest -->
 # Asana Digest — 2026-04-06
 
 Total incomplete: 109 | Overdue: 12 | Today priority: 9 | Near-due (0-2d): 6

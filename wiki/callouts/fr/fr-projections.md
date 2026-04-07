@@ -1,0 +1,45 @@
+<!-- DOC-0051 | duck_id: callout-fr-projections -->
+# FR Monthly Projections
+
+Tracks weekly projections vs actuals. Updated each week by the analyst agents.
+Calibration: Weighted MAPE (weight = days_elapsed / total_days). Score = 1 - WMAPE.
+Indicators: ✅ within 5% | 🟢 beating CPA target | 🔴 outside 5%
+
+---
+
+## Mar 2026
+
+OP2: 4,694 regs | $254,474 spend | $54 CPA
+
+### Registrations
+
+| Week | Days  | Projected | MTD   | vs OP2 |     |
+| ---- | ----- | --------- | ----- | ------ | --- |
+| W12  | 21/31 | 4,950     | 3,448 | +5%    | ✅   |
+| W13  | 28/31 | 5,100     | 4,609 | +9%    | 🔴   |
+
+### Spend
+
+| Week | Days  | Projected | MTD      | vs OP2 |     |
+| ---- | ----- | --------- | -------- | ------ | --- |
+| W12  | 21/31 | $296,000  | $211,350 | +16%   | 🔴   |
+| W13  | 28/31 | $311,000  | $281,000 | +22%   | 🔴   |
+
+### CPA
+
+| Week | Days  | Projected | OP2 |     |
+| ---- | ----- | --------- | --- | --- |
+| W12  | 21/31 | $60       | $54 | 🔴   |
+| W13  | 28/31 | $61       | $54 | 🔴   |
+
+### Rationale
+- W12: W12 daily rates (weekday ~185, weekend ~108). OCI E2E learning phase offsets LY seasonal uptick.
+- W13: W13 daily rates (weekday ~189, weekend ~124). Remaining 3 days: 2 weekdays + 1 weekend. NB click surge (+16%) drove spend +14% WoW. OCI rev data excluded 3/23-3/31, limiting bid optimization. Spend overshoot widening from +16% to +22%.
+
+### Accuracy (after month closes)
+
+| Week | Proj Regs | Actual | Error % | Weight | Wtd Error |
+| ---- | --------- | ------ | ------- | ------ | --------- |
+| —    | —         | —      | —       | —      | —         |
+
+WMAPE: — | Calibration: —

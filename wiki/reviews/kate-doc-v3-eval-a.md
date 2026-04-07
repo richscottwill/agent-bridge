@@ -1,0 +1,78 @@
+<!-- DOC-0481 | duck_id: wiki-review-kate-doc-v3-eval-a -->
+# Review: Paid Search Testing Approach & Year Ahead (V3 — Blind Eval A)
+
+**Reviewer:** wiki-critic
+**Date:** 2026-04-05
+**Mode:** Blind Eval — strict Amazon writing standards, Kate-level bar
+**Scope:** Main body only (pre-Appendix) scored for Economy. Appendix excluded from word count.
+
+## Scores
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 9/10 | Kate can make a funding/support decision from this doc. Every workstream traces 2025 result → 2026 investment → expected impact. Slight gap: the doc tells Kate what the team is doing but never explicitly states what it needs from her. |
+| Clarity | 8/10 | Excellent structure — five workstreams, consistent pattern (what we did → results → 2026 plan), investment summary as synthesis. Minor gap: OCI, NB CPA, iOPS, SHuMA, BIOAB, and MHLW are never expanded on first use. Kate likely knows them, but the doc should stand alone. |
+| Accuracy | 8/10 | Numbers are specific and internally consistent. Dates provided for key tests. Two concerns: (1) "CA on track for full deployment by April 7" will be stale within 48 hours of the doc date — needs a confirmation update before April 16; (2) JP -47.5% vs OP2 and DE -4% vs OP2 lack source attribution. Without access to the 8 source briefs in `depends_on`, I cannot verify every figure, but nothing contradicts itself. |
+| Dual-audience | 9/10 | Rich YAML frontmatter (`depends_on`, `consumed_by`, `tags`, `audience`). AGENT_CONTEXT block with `machine_summary`, `key_entities`, `update_triggers`. Agent can index, retrieve, and reason about staleness. Gap: no per-workstream structured data in AGENT_CONTEXT for granular agent extraction. |
+| Economy | 8/10 | Main body is tight narrative prose. Zero bullet lists. Two tables, both with interpretation sentences. Two duplications flagged (see Required Changes). Every section earns its place. The compounding paragraph and risk-of-not-investing paragraph both add unique value without restating. |
+| **Overall** | **8.4/10** | |
+
+## Verdict
+
+**PUBLISH**
+
+Overall 8.4, no dimension below 7. This doc meets the bar.
+
+## Required Changes
+
+Two duplications that should be resolved before the April 16 review:
+
+1. **Gated Guest / in-context registration pivot appears twice.** The "How We Test" section (paragraph 2) describes the Gated Guest failure → in-context registration pivot with the +13.6K figure. Workstream 4 (User Experience) repeats the same story with the same number. Kate will read both within two pages and notice the repetition.
+
+   **Fix:** In "How We Test," keep the pivot as a methodology example but drop the specific +13.6K number. Replace:
+   > "When the Gated Guest experiment showed -61% registrations after four weeks, the team paused, diagnosed the failure, and pivoted to in-context registration — which delivered +13.6K annualized incremental registrations."
+
+   With:
+   > "When the Gated Guest experiment showed -61% registrations after four weeks, the team paused, diagnosed the failure, and pivoted to in-context registration — the results are detailed in Workstream 4."
+
+   This preserves the methodology point (failures are data) without stealing Workstream 4's punchline.
+
+2. **644% ROAS appears in both Workstream 3 (Audiences) and Workstream 5 (Algorithmic Ads).** Both cite Prime Day 2025 Engagement campaigns at 644% ROAS. This is likely the same campaign result attributed to two workstreams. Kate will ask: which team owns this number?
+
+   **Fix:** Attribute the 644% ROAS to one workstream only — whichever owns the Engagement campaign execution. In the other workstream, reference it: "leveraging the Engagement infrastructure that delivered 644% ROAS during Prime Day (see Workstream 3)." If both workstreams genuinely contributed, say so explicitly in one place rather than citing the same figure independently in two places.
+
+3. **CA deployment date.** "CA is on track for full deployment by April 7" — this will be resolved before the April 16 review. Update to reflect actual status before delivery.
+
+## Suggestions (non-blocking)
+
+1. **Acronym expansion on first use.** Consider expanding OCI (Offline Conversion Import), iOPS (incremental OPS), SHuMA, BIOAB, and MHLW on first use — even if Kate knows them, the doc may circulate to her staff or be referenced later by someone without context. A parenthetical on first use costs five words and prevents confusion.
+
+2. **Explicit ask.** The doc is strong on "here's what we did and what we're doing" but never says "here's what we need from you, Kate." If there's a specific decision, resource ask, or blocker that requires her action, consider adding a single sentence at the end of the intro paragraph or after the investment summary: "We are seeking [X]." This would push Usefulness from 9 to 10.
+
+3. **AGENT_CONTEXT enrichment.** Consider adding a `workstream_summary` array to the AGENT_CONTEXT block with per-workstream key metrics and 2026 milestones in structured format. This would let agents extract workstream-level data without parsing prose. Example:
+   ```yaml
+   workstream_summary:
+     - name: "OCI Bidding"
+       key_metric: "+35,196 regs, $16.7MM OPS"
+       next_milestone: "5 RoW markets full impact Jul 2026"
+     - name: "Modern Search"
+       key_metric: "+86% CTR, +31% regs"
+       next_milestone: "EU4 rollout, AI Max prep"
+   ```
+
+4. **Sentence length.** The opening sentence runs 33 words. Most sentences in the body are well-controlled (18-25 range), but a few compound sentences in the workstream sections push past 30. Not a violation — just worth a pass to see if any can be split without losing flow.
+
+## Economy Sub-Rule Audit (Main Body)
+
+| Sub-Rule | Status | Notes |
+|----------|--------|-------|
+| Bullet list abuse (>30% in bullets) | ✅ PASS | Zero bullet lists in main body. Pure narrative prose. |
+| Table abuse (tables without interpretation) | ✅ PASS | Both tables (OCI results, Investment Summary) have interpretation paragraphs immediately following. |
+| Formatting as content | ✅ PASS | Removing all bold/italic, the doc reads cleanly. Bold `**2026:**` labels are convenient but not load-bearing. |
+| Verb in every list item | ✅ PASS | No list items in main body to evaluate. |
+
+## Summary Assessment
+
+This is a strong V3. The two-page body + appendix structure works — Kate gets the full story in the body, and the appendix provides depth without bloating the main narrative. The consistent workstream pattern (result → 2026 plan) makes it scannable. The investment summary table is the right synthesis artifact. The compounding argument is the doc's strongest strategic move — it reframes five workstreams as an interconnected system rather than a portfolio of independent bets.
+
+The two duplications are the only structural issues. Fix those, update the CA date, and this ships.

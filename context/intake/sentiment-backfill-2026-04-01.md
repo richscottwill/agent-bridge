@@ -1,3 +1,4 @@
+<!-- DOC-0184 | duck_id: intake-sentiment-backfill-2026-04-01 -->
 # Sentiment & Escalation Patterns — Backfill Synthesis
 
 [Slack Backfill: sentiment patterns, 6 months, 2026-04-01]

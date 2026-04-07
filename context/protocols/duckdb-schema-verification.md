@@ -1,3 +1,4 @@
+<!-- DOC-0346 | duck_id: protocol-duckdb-schema-verification -->
 # DuckDB Schema Verification Protocol
 
 Ensures schema writes land in the correct persistent MotherDuck cloud database. Run after any batch of CREATE TABLE/VIEW statements.

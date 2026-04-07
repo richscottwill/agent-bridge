@@ -1,3 +1,4 @@
+<!-- DOC-0362 | duck_id: protocol-slack-ingestion-README -->
 # Slack Context Ingestion - README
 
 Read-only Slack context source for the Body system. Extracts decisions, action items, status changes, escalations, and hot topics from Slack channels and routes them to existing organs. No new hooks, agents, or organ files.

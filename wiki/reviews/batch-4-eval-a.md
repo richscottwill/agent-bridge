@@ -1,0 +1,102 @@
+<!-- DOC-0457 | duck_id: wiki-review-batch-4-eval-a -->
+# Batch 4 — Blind Eval A
+
+Reviewer: wiki-critic | Date: 2026-04-05 | Mode: Review (pre-publish)
+
+---
+
+## 1. ie%CCP Planning & Optimization Framework (v2)
+
+### Scores
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 9/10 | Reader can model scenarios, decompose callout changes, and frame budget recs immediately after reading. The MX FY26 case study grounds every concept in real numbers. |
+| Clarity | 9/10 | Headers answer questions ("How Brand subsidizes NB," "How to read ie%CCP in a callout"). The subsidy explanation is the clearest version of this concept I've seen — $69 surplus, $104 deficit, done. Structure flows from concept → mechanics → application. |
+| Accuracy | 8/10 | Numbers are internally consistent and sourced in AGENT_CONTEXT. The TODO comment about the -10% haircut is honest — it flags an unsupported assumption rather than hiding it. One minor concern: the "roughly 9,375 Brand registrations" projection is stated at HIGH confidence but the -10% haircut is unjustified, which creates a small tension. |
+| Dual-audience | 9/10 | Rich YAML frontmatter with tags, depends_on, consumed_by. AGENT_CONTEXT block has machine_summary, key_entities, action_verbs, update_triggers. Prose is fully narrative. An agent can index this and extract the subsidy model; a human can read it and understand the framework. |
+| Economy | 8/10 | Main body is tight. Every section earns its place. The "What changes the plan" table has a clear interpretation paragraph following it. The "How to apply this to callouts" section uses quoted questions as structure — effective, not bloated. The Quick Reference section is a genuine value-add for fast lookups, not a restatement. Minor: the Context section and the opening paragraph overlap slightly on "why this exists," but the Context paragraph adds the MX FY26 urgency that the opener doesn't, so it earns its place. |
+| **Overall** | **8.6/10** | |
+
+### Verdict
+PUBLISH
+
+### Suggestions (non-blocking)
+- The TODO comment re: -10% haircut should be resolved before this goes stale. Either Richard justifies the 10% or the writer picks a defensible number. Not blocking because the TODO is transparent.
+- "How MX FY26 illustrates the framework" is the longest section. The two scenario paragraphs (100% target, 75% target) could be tightened by ~20% without losing the comparison — the numbers do the work, the surrounding prose restates what the numbers already show.
+
+---
+
+## 2. OCI Execution Guide (v2)
+
+### Scores
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 9/10 | Someone launching OCI in a new market can follow this end-to-end: prerequisites → launch → monitor → scale → troubleshoot. The phase gates (115%, 110%) are specific and actionable. The "What Not to Do" section prevents the three most common mistakes. |
+| Clarity | 9/10 | Headers are imperative and sequential: "Before You Start," "How to Launch OCI End-to-End," "How to Monitor After Launch," "How to Scale Through Phases." A reader who skips to any section gets a self-contained answer. The monitoring cadence (daily → weekly → formal eval at week 4) is crystal clear. |
+| Accuracy | 8/10 | US 24% lift, UK 23%, DE 18% — sourced to eyes.md. Gate criteria sourced to D1 methodology. Market status current as of April 2026. The hvocijid issue is documented honestly. One soft spot: "roughly 50% NB CPA improvement" for US is a big claim stated without a date range or baseline — it's in the opening paragraph where precision matters most. |
+| Dual-audience | 9/10 | Full YAML frontmatter including replaces field (nice — tells agents which old docs this supersedes). AGENT_CONTEXT has machine_summary, key_entities, action_verbs, update_triggers. Sources section at the bottom provides provenance. Cross-references to Rollout Playbook and Business Case are clean. |
+| Economy | 8/10 | Main body is lean. The "Before You Start" section reads as a checklist embedded in prose — six items, each with a verb, woven into a paragraph rather than a bullet list. "How to Scale Through Phases" efficiently compresses four phases into two paragraphs. No duplication between main body and appendices. The "What OCI Does" section could lose "Manual bidding doesn't scale across ten markets, and OCI has validated that premise" — the validated results immediately following already demonstrate this. Minor. |
+| **Overall** | **8.6/10** | |
+
+### Verdict
+PUBLISH
+
+### Suggestions (non-blocking)
+- Pin down the "roughly 50% NB CPA improvement" claim in the opening paragraph. Add a date range or baseline: "US delivered a 24% registration lift with NB CPA improving from $X to $Y (H2 2025 vs H1 2025)." The current phrasing is the only vague number in an otherwise precise doc.
+- The Sources section is a nice touch. Consider whether it belongs in the appendix or stays in the main body — it's borderline. Not blocking either way.
+
+---
+
+## 3. AU Paid Search — Market Wiki (v2)
+
+### Scores
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 9/10 | Serves its stated purpose: prep for AU syncs, understand market dynamics, track initiatives. The "Strategic Situation" section gives the one-paragraph briefing. "Open Questions and Next Steps" has five items, each with an owner and a timeline — a reader walks away knowing exactly what's unresolved and who's on it. |
+| Clarity | 8/10 | Headers are descriptive and the flow is logical: situation → performance → structure → initiatives → challenge → next steps. The CPC Challenge section is particularly well-structured — states Lena's concern, explains why it's apples-to-oranges, provides the counter-narrative. One minor clarity issue: "Current Performance" mixes February monthly data with W13 weekly data in the same paragraph without a clear transition, which could confuse a reader about which timeframe they're in. |
+| Accuracy | 8/10 | Performance numbers sourced to eyes.md and callout context. Stakeholder dynamics sourced to memory.md. The W13 daily pattern (53, 50, 27, 22, 23, 8) is specific enough to verify. The "Polaris migration likely contributed" is appropriately hedged. One concern: "approximately 1,100 registrations against a 1,110 plan" — the precision of 1,110 against the approximation of 1,100 is slightly awkward but not inaccurate. |
+| Dual-audience | 9/10 | Full frontmatter with depends_on and consumed_by. AGENT_CONTEXT has machine_summary, key_entities, action_verbs, update_triggers. The update_triggers are well-chosen — "AU performance shifts >10%", "OCI AU launch or timeline change", "Lena/Alexis direction changes." An agent can determine when this doc needs refreshing. |
+| Economy | 8/10 | Main body covers six sections in tight prose. No bullet list abuse — the "Open Questions and Next Steps" section embeds five items in narrative prose with verbs ("Richard needs to," "targeting a read by"). The CPC Challenge section could be slightly tighter — the Shopping Ads point and the "two-way door" framing are both useful but the paragraph runs long. The last sentence of that section ("Richard's role is to own the narrative with data") is more of a personal note than a wiki reference — it reads like coaching advice rather than market documentation. Consider cutting or moving to appendix. |
+| **Overall** | **8.4/10** | |
+
+### Verdict
+PUBLISH
+
+### Suggestions (non-blocking)
+- In "Current Performance," add a line break or transition between the February monthly summary and the W13 weekly data. Something as simple as "The most recent weekly data (W13) showed..." to signal the timeframe shift.
+- The sentence "Richard's role is to own the narrative with data" in the CPC Challenge section is stakeholder coaching, not market reference. Move it to the stakeholder appendix entry for Brandon/Lena or cut it.
+
+---
+
+## 4. Enhanced Match / LiveRamp — Audience Expansion for Paid Search (v2)
+
+### Scores
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 8/10 | The doc answers "what's the status, what's blocked, and who owns what" — exactly what a decision-maker needs. Brandon's four questions are listed verbatim, the audience drop is flagged as a prerequisite, and the connection to F90/OCI/email overlay explains why this matters. The limitation: this is a status tracker for an investigation, not a framework or execution guide. Its usefulness is high but time-bound — once Abdul answers the four questions, half the doc needs rewriting. |
+| Clarity | 8/10 | Structure flows logically: what's happening → what we need to know → what's at risk → how it connects → what's next. Headers are descriptive. The "Connection to Existing Initiatives" section ranks the three connections by leverage, which helps the reader prioritize. One minor issue: the "What's Happening" section packs two distinct updates (Brandon's investigation request and Robert's segment approval) into one paragraph — splitting them would improve scannability. |
+| Accuracy | 8/10 | Sources are specific: Slack DMs with dates, named individuals, specific numbers (5.6M to 1.2M, 78% decline). The 13% → 30% match rate improvement is sourced to brain.md. The DMA constraint is sourced to Brandon's Slack. One soft spot: "if Enhanced Match pushes the rate from 30% to 40-50%, F90's addressable audience nearly doubles" — the 40-50% figure is speculative and unsourced. It's framed as a conditional ("if"), which helps, but the "nearly doubles" math doesn't follow from 30% → 40-50% without knowing the audience composition. |
+| Dual-audience | 9/10 | Excellent AGENT_CONTEXT with machine_summary, key_entities, action_verbs, update_triggers, and a decision_guide field pointing to Appendix A. The frontmatter includes depends_on and consumed_by. The decision guide in Appendix A is particularly agent-friendly — five scenarios with clear if/then logic that an agent can parse and act on. |
+| Economy | 8/10 | Main body is five sections, each earning its place. No bullet abuse — the four questions are embedded in a narrative paragraph. The ABMA SIM protocol paragraph at the end of "Connection to Existing Initiatives" feels slightly orphaned — it's useful information but doesn't connect to Enhanced Match directly. It reads like a "while I'm here" addition. Consider moving it to a footnote or the appendix. The "Next Steps" section partially restates actions already mentioned in "Brandon's Four Questions" and "Current State" — minor duplication. |
+| **Overall** | **8.2/10** | |
+
+### Verdict
+PUBLISH
+
+### Suggestions (non-blocking)
+- The speculative "30% to 40-50%" match rate claim in "Connection to Existing Initiatives" should either be sourced or reframed: "if Enhanced Match meaningfully improves the match rate, F90's addressable audience grows proportionally" — less precise but more honest.
+- Move the ABMA SIM escalation protocol sentence to the appendix. It's operationally useful but tangential to the Enhanced Match narrative.
+- The "Next Steps" section could be tightened by referencing earlier sections rather than restating: "Richard's immediate actions: answer Brandon's four questions (see above), investigate the audience drop (see Current State), and get Abdul's regional availability chart."
+
+---
+
+## Batch Summary
+
+| Article | Usefulness | Clarity | Accuracy | Dual-audience | Economy | Overall | Verdict |
+|---------|-----------|---------|----------|---------------|---------|---------|---------|
+| ie%CCP Framework | 9 | 9 | 8 | 9 | 8 | **8.6** | PUBLISH |
+| OCI Execution Guide | 9 | 9 | 8 | 9 | 8 | **8.6** | PUBLISH |
+| AU Market Wiki | 9 | 8 | 8 | 9 | 8 | **8.4** | PUBLISH |
+| Enhanced Match / LiveRamp | 8 | 8 | 8 | 9 | 8 | **8.2** | PUBLISH |
+
+All four clear the 8/10 bar with no dimension below 7. Ship them.

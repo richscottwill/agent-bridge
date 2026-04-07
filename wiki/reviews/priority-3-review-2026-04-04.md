@@ -1,0 +1,88 @@
+<!-- DOC-0492 | duck_id: wiki-review-priority-3-review-2026-04-04 -->
+# Priority 3 Review — April 4, 2026
+
+Reviewer: wiki-critic (updated rubric with Amazon narrative standard + Economy sub-rules)
+
+---
+
+## Article 1: Paid Search Testing Approach & Year Ahead
+
+**File:** `shared/artifacts/testing/2026-03-25-testing-approach-kate.md`
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 9/10 | Kate can understand methodology, see 2025 results, and evaluate 2026 investment rationale. Every workstream has results + next steps. |
+| Clarity | 9/10 | Each workstream follows consistent pattern: progression → results → 2026 plan. Methodology section is a model. Headers tell the story. |
+| Accuracy | 8/10 | Numbers sourced and internally consistent. $16.7MM, +35K regs, DE test-vs-control all check out. Minor: data from 3/25, needs freshening for Apr 16 review. |
+| Dual-audience | 8/10 | AGENT_CONTEXT present with good machine_summary. Investment summary table is both human-scannable and agent-extractable. |
+| Economy | 7/10 | ~25-30% lists/tables, right at threshold. Team table is reference data without interpretation. "What We Do" sections are bullet lists that should be prose. Operational Backbone is a bullet list. Doc earns its length but last 3 sections could be tighter. |
+| **Overall** | **8.2/10** | |
+
+**Verdict: PUBLISH (conditional)**
+
+**Conditions for publication:**
+1. Convert "What We Do Within Paid Search" and "What We Also Do Beyond Paid Search" bullet lists into two prose paragraphs.
+2. Convert the Operational Backbone bullet list into prose: "The team monitors campaigns daily across 10 markets — spend pacing, CPA checks, bid strategy health. Weekly cadence includes WBR callout preparation, market performance reviews, and stakeholder syncs for AU and MX..."
+3. Add a "so what" sentence after the Team table: "This seven-person team delivers five concurrent strategic workstreams across 10 markets while maintaining 25-30 hours per week of operational work — the ratio of strategic to operational capacity is the binding constraint on how many initiatives can run simultaneously."
+4. Freshen any data that has moved since 3/25 before the April 16 Kate review (OCI market status, CA progress, any resolved risks).
+
+**Suggestions (non-blocking):**
+- The Appendix reference at the end could include a one-sentence summary of what's in the appendix.
+
+---
+
+## Article 2: OCI Rollout Playbook
+
+**File:** `shared/artifacts/testing/2026-03-25-oci-rollout-playbook.md`
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 9/10 | A teammate could replicate OCI rollout in a new market. Decision guide is practical and covers real scenarios. |
+| Clarity | 8/10 | Well-structured, logical flow from context → phases → measurement → troubleshooting. Minor density in some sections. |
+| Accuracy | 8/10 | Claims sourced. DE test-vs-control data specific and verifiable. Market status may be stale (written 3/25, markets have moved). |
+| Dual-audience | 8/10 | Rich frontmatter, AGENT_CONTEXT present with good machine_summary. |
+| Economy | 5/10 | FLAGGED: ~45-50% bullet/table content. Phase 1-4 are entirely numbered steps — should be narrative prose. 3 of 5 tables lack "so what" (MCC, Rollout Status, Market Considerations). Formatting-as-content: remove numbered lists and doc becomes unreadable. |
+| **Overall** | **7.6/10** | |
+
+**Verdict: REVISE**
+
+**Required changes:**
+1. Rewrite Phase 1-4 sections as narrative prose. Steps can remain as short enumerations (3-5 items) but the methodology explanation should be paragraphs. Example: "Phase 2 allocates 25% of NB traffic to OCI bidding while the remaining 75% serves as a control. Run this configuration for a minimum of four weeks to accumulate sufficient conversion data, then compare the OCI segment against the control on registrations, CPA, and ROAS."
+2. Add "so what" interpretation after MCC Structure table, Rollout Status table, and Market-Specific Considerations table.
+3. Convert Market-Specific Considerations table into prose paragraphs — each market gets 2-3 sentences of narrative.
+4. Break compound sentences (>25 words) into two sentences. Target 18-20 word average.
+5. Update market status to reflect April 2026 reality (FR/IT/ES/JP now at 100%, CA on track for 4/7).
+
+---
+
+## Article 3: ie%CCP Planning & Optimization Framework
+
+**File:** `shared/artifacts/strategy/2026-03-30-ieccp-planning-framework.md`
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 9/10 | Enables understanding ie%CCP from scratch, modeling scenarios, making budget recommendations, and writing callouts. Four scenarios are practical. MX case study grounds theory in reality. |
+| Clarity | 9/10 | Best-written doc in the portfolio. "Why It's Confusing" section anticipates reader confusion and addresses it head-on. Subsidy model explanation is clear. |
+| Accuracy | 8/10 | MX case study uses specific, internally consistent numbers. CCP values dated and sourced. Formula derivation mathematically correct. Minor: -10% haircut stated without justification. |
+| Dual-audience | 7/10 | Frontmatter present. AGENT_CONTEXT present. But doc is long (~2500w) and agent would need to extract formula, scenarios, and case study separately — no structured decision guide table. |
+| Economy | 7/10 | Right at 30% threshold. Code blocks for formulas are necessary. 1 table lacks "so what" ("What Changes the Plan"). Quick Reference is functional duplication but earns its place as genuine quick-reference. |
+| **Overall** | **8.0/10** | |
+
+**Verdict: PUBLISH (conditional)**
+
+**Conditions for publication:**
+1. Move the purpose statement from the blockquote into the first prose paragraph: "This framework explains how to understand, plan around, and optimize ie%CCP — the ratio of acquisition cost to customer value — for Paid Search budget decisions. Use it to model scenarios, evaluate incremental spend, and frame recommendations for finance."
+2. Add a "so what" sentence after the "What Changes the Plan" table: "The pattern: Brand volume and CCP revisions are the biggest ie%CCP shocks because they change the structural capacity of the account. NB CPA changes are incremental — they improve or worsen the margin on each registration but don't reshape the overall constraint."
+3. Break any remaining sentences over 25 words.
+
+**Note on Eval B's concern (tutorial format):** Eval B scored this 5.2 because it reads like a tutorial rather than a decision doc. The rubric scores it 8.0 because the content is genuinely useful and well-written. The resolution: the purpose statement fix (condition 1) reframes the doc as a decision tool rather than a teaching document. The MX case study already provides the decision-relevant content — it just needs to be more prominent. Consider adding a one-line "when to use this doc" to the opening: "Reach for this doc when you need to model a budget scenario, evaluate whether incremental NB spend is justified, or explain to finance why the team is underspending vs allocation."
+
+---
+
+## Summary
+
+| Article | Overall | Verdict | Key Issue |
+|---------|---------|---------|-----------|
+| Testing Approach Kate | 8.2 | PUBLISH (conditional) | Economy: last 3 sections need prose conversion |
+| OCI Rollout Playbook | 7.6 | REVISE | Economy: 45-50% lists/tables, needs narrative rewrite |
+| ie%CCP Framework | 8.0 | PUBLISH (conditional) | Purpose statement needs to move from blockquote to first paragraph |

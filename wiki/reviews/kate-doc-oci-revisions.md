@@ -1,0 +1,74 @@
+<!-- DOC-0475 | duck_id: wiki-review-kate-doc-oci-revisions -->
+# Revisions: kate-doc-oci.md
+
+Source: kate-doc-batch-review.md
+Verdict: REVISE
+Priority: HIGH (accuracy issues cascade to appendix and synthesis)
+
+---
+
+## Required Change 1: Fix US test period and NB CPA improvement
+
+**Location:** Performance Lift by Market table
+
+**Current text:**
+```
+| US | Jul-Oct 2025 | +24% | -45% | +32,047 | $16.7MM |
+```
+
+**Replace with:**
+```
+| US | Jul-Nov 2025 | +24% | ~50% | +32,047 | $16.7MM |
+```
+
+**Rationale:** oci-performance.md shows the 32,047 reg count includes November data (19.1K as of 10/31 + 7,853 in November). The test period label must include November. The NB CPA improvement is "~50%" per oci-performance.md, not "-45%."
+
+---
+
+## Required Change 2: Fix UK and DE NB CPA improvement
+
+**Location:** Performance Lift by Market table
+
+**Current text:**
+```
+| UK | Aug-Oct 2025 | +23% | -38% | +2,400 | — |
+| DE | Oct-Dec 2025 | +18% | -37% | +749 | — |
+```
+
+**Replace with:**
+```
+| UK | Aug-Oct 2025 | +23% | Significant | +2,400 | — |
+| DE | Oct-Dec 2025 | +18% | Significant | +749 | — |
+```
+
+**Rationale:** oci-performance.md uses "Significant" for UK and DE NB CPA improvement. The specific percentages (-38%, -37%) are not in the reference files. If these numbers come from a different source (e.g., MBR or Flash), add a footnote citing that source. Otherwise, use the language from the verified source.
+
+---
+
+## Required Change 3: Add % to Expectation column
+
+**Location:** Performance Lift by Market table
+
+**Current text:**
+```
+| Market | Test Period | Reg Lift | NB CPA Improvement | Estimated Regs | Estimated OPS |
+```
+
+**Replace with:**
+```
+| Market | Test Period | Reg Lift | NB CPA Improvement | Estimated Regs | Estimated OPS | % to Expectation |
+```
+
+And add the values: US 96%, UK 94%, DE 86%.
+
+**Rationale:** The prose below the table references these numbers ("The US met 96% of expectations, UK met 94%, and DE met 86%"). Including them in the table makes the data scannable and traceable. The source (oci-performance.md → DE OCI Lift Tracking) confirms the DE figure. The US and UK figures are referenced in the prose and should be in the table.
+
+---
+
+## Post-Revision Expected Score
+
+| Dimension | Current | Expected |
+|-----------|---------|----------|
+| Accuracy | 7/10 | 9/10 |
+| Overall | 7.6/10 | 8.2/10 |
+| Verdict | REVISE | PUBLISH |

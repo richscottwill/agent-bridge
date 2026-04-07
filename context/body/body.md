@@ -1,3 +1,4 @@
+<!-- DOC-0217 | duck_id: organ-body -->
 # Body — System Anatomy Map
 
 *The navigation layer. Each organ is a self-contained file with real content — not a pointer to somewhere else. Read the organ you need, get the answer.*
@@ -20,10 +21,10 @@ Last updated: 2026-04-04 (Karpathy Run 25 — Task Routing table: organ names→
 | 🔥 Anterior MCC | `~/shared/context/body/amcc.md` | Willpower engine, real-time avoidance detection, streak tracking, resistance taxonomy, escalation | Every session. When Richard drifts to comfort zone. The hard thing. |
 | 🫁 Gut | `~/shared/context/body/gut.md` | Digestion, compression, waste removal, word budgets, bloat detection | During loop cascade. When organs feel bloated. Monthly compression review. |
 | 📥 Intake | `~/shared/context/intake/` | Unprocessed notes, drafts, new docs | During heart loop Phase 1. Not for direct consumption. |
-| 🛠️ Tools | `~/shared/context/tools/` | Python utility scripts (MCP, sync, briefs). Hedy now via MCP power. | When building or running automation. |
-| 📰 Wiki | `~/shared/context/wiki/` | Doc pipeline + context catalog. Published output → Artifacts. | When creating docs or searching for context. |
-| 📦 Artifacts | `~/shared/artifacts/` | Published work product (7 categories). Level 1 evidence. | When shipping or referencing finished docs. |
-| 🗓️ Meetings | `~/shared/context/meetings/` | Meeting series notes, session summaries, stakeholder dynamics, open items. One file per series. | Meeting prep. Drafting follow-ups. Checking open items. Understanding stakeholder positions. |
+| 🛠️ Tools | `~/shared/tools/` | Python utility scripts (MCP, sync, briefs). Hedy now via MCP power. | When building or running automation. |
+| 📰 Wiki | `~/shared/wiki/` | Doc pipeline + context catalog. Published output → Artifacts. | When creating docs or searching for context. |
+| 📦 Artifacts | `~/shared/wiki/` | Published work product (7 categories). Level 1 evidence. | When shipping or referencing finished docs. |
+| 🗓️ Meetings | `~/shared/wiki/meetings/` | Meeting series notes, session summaries, stakeholder dynamics, open items. One file per series. | Meeting prep. Drafting follow-ups. Checking open items. Understanding stakeholder positions. |
 
 ---
 
@@ -48,7 +49,7 @@ These aren't rules to remember — they're how the body works. Each organ embodi
 4. **Need to write?** → Soul (`soul.md` → writing style guides)
 5. **Need market context?** → Eyes (`eyes.md` has metrics and competitors)
 6. **Need background?** → Memory (`memory.md` has compressed context and relationships)
-7. **Meeting prep?** → Meetings (`~/shared/context/meetings/` — read the series file for the meeting)
+7. **Meeting prep?** → Meetings (`~/shared/wiki/meetings/` — read the series file for the meeting)
 7. **Running the loop?** → Heart (`heart.md` has the protocol)
 8. **Offloading work?** → Device (`device.md` — automation, delegation, templates, tools)
 9. **Is this working?** → Nervous System (`nervous-system.md` — calibration, audits, pattern tracking)

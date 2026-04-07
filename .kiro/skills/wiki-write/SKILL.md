@@ -7,7 +7,7 @@ description: "Write wiki articles using the full pipeline: editor assigns work, 
 
 ## Pipeline Rules
 
-**Read `shared/context/wiki/wiki-pipeline-rules.md` before any pipeline operation.** It contains the non-negotiable rules for dual blind eval, publishing gates, appendix-heavy structure, and kiro-cli invocation patterns.
+**Read `shared/wiki/wiki-pipeline-rules.md` before any pipeline operation.** It contains the non-negotiable rules for dual blind eval, publishing gates, appendix-heavy structure, and kiro-cli invocation patterns.
 
 ## Instructions
 

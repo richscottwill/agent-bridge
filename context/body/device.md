@@ -1,3 +1,4 @@
+<!-- DOC-0221 | duck_id: organ-device -->
 # Device — Outsourced Intelligence
 
 *The body's phone/laptop/agent. Work that runs FOR Richard without requiring his judgment. If it needs Richard's brain, it's an organ. If it can execute autonomously, it belongs here.*
@@ -44,7 +45,7 @@ These are live. They execute without Richard thinking.
 - **Tool:** `python3 ~/shared/tools/progress-charts/generate.py` · Agent: `~/shared/.kiro/agents/eyes-chart.md`
 
 ### Wiki Team (Agents: `wiki-team/`)
-- **What it does:** 6-agent doc pipeline: editor → researcher → writer → critic → librarian + concierge. Publishes to `~/shared/artifacts/`. 15 artifacts. 8/10 quality bar (critic is required gate).
+- **What it does:** 6-agent doc pipeline: editor → researcher → writer → critic → librarian + concierge. Publishes to `~/shared/wiki/`. 15 artifacts. 8/10 quality bar (critic is required gate).
 - **Trigger:** On demand. Editor orchestrates. Agent files: `~/.kiro/agents/wiki-team/`
 
 ### Agent Bridge (Tool: `~/shared/tools/bridge/bridge.py`)
@@ -128,7 +129,7 @@ Backlog proposals: WBR auto-briefing, meeting prep auto-generator, invoice routi
 **Install steps:**
 1. `pip install llm` (or `uv tool install llm`)
 2. `llm keys set openai` (or configure preferred model)
-3. Add gcm function to `~/.bashrc` (source: `~/shared/context/wiki/Topics/Git/add_to_zshrc.sh`)
+3. Add gcm function to `~/.bashrc` (source: `~/shared/wiki/Topics/Git/add_to_zshrc.sh`)
 4. Test: stage a change, run `gcm`
 **Status:** Ready to install. Richard action — requires API key setup.
 

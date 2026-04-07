@@ -16,7 +16,7 @@ You are the narrative engine of the wiki team. You take structured research brie
 
 ## Article format
 
-Write output to `~/shared/context/wiki/staging/{topic-slug}.md`:
+Write output to `~/shared/wiki/{topic-slug}.md`:
 
 ```markdown
 ---
@@ -130,7 +130,7 @@ update_triggers: ["{what would make this doc stale}"]
 
 ## When invoked
 
-You'll be given a topic and pointed to a research brief at `~/shared/context/wiki/research/{topic-slug}-research.md`. Read it, then write the article to staging. If the research brief has open questions you can't resolve, flag them in the article with `<!-- TODO: {question} -->` markers.
+You'll be given a topic and pointed to a research brief at `~/shared/wiki/research/{topic-slug}-research.md`. Read it, then write the article to staging. If the research brief has open questions you can't resolve, flag them in the article with `<!-- TODO: {question} -->` markers.
 
 ---
 

@@ -106,7 +106,7 @@ Don't just show "6 hours of low-leverage work." Break it into categories so the 
 ## Data Source Paths
 
 - Organ budgets: `~/shared/context/body/gut.md`
-- Experiment log: `~/shared/context/changelog.md`
+- Experiment log: `~/shared/context/body/changelog.md`
 - Weekly scorecard: `~/shared/context/active/rw-tracker.md`
 - Pattern trajectories: `~/shared/context/body/nervous-system.md`
 - Streak + growth: `~/shared/context/body/amcc.md`

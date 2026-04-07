@@ -1,3 +1,4 @@
+<!-- DOC-0226 | duck_id: organ-memory -->
 # Memory — Learned Knowledge
 
 *What the system has learned and retained. Compressed context, relationship intelligence, meeting prep, and reference links. Long-term storage that compounds.*
@@ -177,7 +178,7 @@ Contacts with last interaction >14 days. Check before drafting — dynamics may 
 
 ## Meeting Prep & Session Notes
 
-**Moved to `~/shared/context/meetings/`** — one file per meeting series.
+**Moved to `~/shared/wiki/meetings/`** — one file per meeting series.
 
 For meeting prep, read the relevant series file:
 - Stakeholder syncs: `meetings/stakeholder/` (AU, MX, Google, Adobe, MCS/Polaris, OCI)
