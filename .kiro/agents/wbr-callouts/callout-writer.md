@@ -30,7 +30,7 @@ Write a callout draft following this exact structure:
 The callout prose (above the `---` separator) must be 100-120 words. Target 110. Count your words before finalizing. If over 120, cut from wherever the narrative is least interesting that week, not from a fixed section. If the YoY story is the headline, give it more weight and compress WoW. If WoW is the story, compress YoY.
 
 ### Structure
-1. **Headline** (standardized, 1-2 sentences): Total regs, WoW%, spend WoW%, CPA (with direction if meaningful change). Monthly projection vs OP2. This format is fixed across all markets.
+1. **Headline** (standardized, 1-2 sentences): Total regs, WoW%, spend WoW%, CPA (with direction if meaningful change). Monthly close or projection with vs OP2 comparison: include both regs and spend when registration targets exist in ps.targets, formatted as `(vs. OP2: +X% regs, -Y% spend)`. This format is fixed across all markets.
    - IF `has_ieccp` is true: always include ie%CCP in the headline.
    - IF `headline_extras` contains additional metrics, include them.
 2. **WoW paragraph** (flexible length): Explain WHY registrations changed. Lead with what "we" did or didn't do. Then describe Brand and NB performance together — don't just list metrics. Attribute changes to specific drivers (CVR, CPC, clicks, impressions). Connect to narrative threads from context.md.
