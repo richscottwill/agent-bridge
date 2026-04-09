@@ -11,7 +11,7 @@ from datetime import datetime
 
 sys.path.insert(0, os.path.expanduser('~/shared/tools/data'))
 
-from .types import PredictionResult
+from .ptypes import PredictionResult
 from .core import BayesianCore
 
 # Lazy DB imports

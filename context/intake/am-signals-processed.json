@@ -1,0 +1,34 @@
+{
+  "generated": "2026-04-08T16:45:00Z",
+  "slack_signals": {
+    "total": 6,
+    "action_required": [
+      {"topic": "PAM Budget", "urgency": "critical", "days_stale": 5, "source": "Brandon @mention in #ab-paid-search-app"},
+      {"topic": "Polaris LP Consolidated Feedback", "urgency": "high", "source": "Dwayne in mpdm — prepare feedback for weblab scope"},
+      {"topic": "Monthly Recaps + Goal Updates", "urgency": "medium", "source": "Brandon in #global — recaps due 4/7, goals due 4/8"}
+    ],
+    "fyi": [
+      {"topic": "Verification Delay SIM P411138647", "source": "Brandon in #global"},
+      {"topic": "Google Ads Access Audit", "source": "Brandon + Yun handling"},
+      {"topic": "Kate traveling India", "source": "#team-ab-marketing-fun"}
+    ]
+  },
+  "email_signals": {
+    "total": 25,
+    "action_required": [
+      {"subject": "AU PS Weekly Update", "sender": "Brandon Munday", "urgency": "high", "action": "respond — Brandon defending Richard's PS ownership to Lena"},
+      {"subject": "SSR Cost and Reg inputs for IECCP", "sender": "Stacey Gu", "urgency": "high", "action": "review — cost/reg inputs needed"},
+      {"subject": "EU Paid Channels Update", "sender": "Brandon Munday", "urgency": "high", "action": "review — LiveRamp blocker"},
+      {"subject": "MX Paid Search Sync", "sender": "Lorena Alvarez", "urgency": "medium", "action": "review — pending items"}
+    ]
+  },
+  "asana_activity": {
+    "teammate_signals": 0,
+    "notes": "No teammate activity detected in 2+ day window"
+  },
+  "signal_to_task_created": [],
+  "signal_to_task_skipped": [
+    {"topic": "Verification Delay SIM", "reason": "FYI only — monitor, no task needed yet"},
+    {"topic": "Google Ads Access Audit", "reason": "Brandon + Yun handling, no Richard action"}
+  ]
+}

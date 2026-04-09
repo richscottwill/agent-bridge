@@ -1,0 +1,69 @@
+# WBR Callouts — W14 (Mar 30 – Apr 5, 2026)
+
+---
+
+## 🇦🇺 AU
+
+AU: AU drove 170 registrations (-18% WoW) on $22K spend (-9% WoW), with $130 CPA (+11% WoW). March closed at $125K spend and 1.0K registrations ($121 CPA). (vs. OP2: -14% spend)
+
+The decline was NB-driven: NB regs fell -33% on a -28% CVR drop, while clicks were only -7%. Brand held at 96 regs (-2% WoW). NB CPA rose to $240 (+30% WoW). The 8-week trend shows sustained decline from W7 to W14, the lowest this year. NB CPC has fallen 8 consecutive weeks but CVR is dropping faster than CPC savings offset.
+
+Note: No YoY data available. Investigating whether NB CVR decline is structural or seasonal.
+
+---
+
+## 🇲🇽 MX
+
+MX: MX drove an estimated 303 registrations (-14% WoW) on $20K spend (-13% WoW), with $67 CPA (+1% WoW). Fri/Sat data is incomplete; projection uses W11-W13 day-of-week patterns. ie%CCP rose to 126% (vs 99% LW, 100% target). March closed at $96K spend and 1.5K registrations ($64 CPA), ahead of OP2 (+67% spend).
+
+Sun-Thu actuals show CVR declined on both Brand (-24%) and NB (-26% WoW), the primary driver over clicks. NB CPA has climbed 3 consecutive weeks to an estimated $133. YoY we spent -37% with +58% registrations. Brand regs +118% YoY.
+
+Note: ie%CCP at 126% needs investigation. April OP2 drops to $35K, requiring NB spend reduction.
+
+---
+
+## 🇺🇸 US
+
+US: US drove 7,611 registrations (-12% WoW), with +15% spend WoW, and $88 CPA (+30% WoW). ie%CCP 57% (vs. 41% LW, 100% target). March ended at $2.7M spend and 36,832 registrations ($74 CPA).
+
+WoW the decline was CVR-driven on both Brand (-15% CVR, -20% regs) and NB (-16% CVR, -9% regs). NB clicks actually increased +9%, but the CVR drop more than offset the volume gain. Spend increased +15% WoW despite lower registrations, pushing CPA up significantly.
+
+YoY we spent +22% with +50% registrations. NB regs doubled (+100% YoY) with NB CPA improving -33% ($136→$91). Brand regs -8% YoY.
+
+Note: Last 2 days show significantly lower volume (avg 158 regs vs weekday avg 1,459), indicating data lag. The true WoW decline is likely smaller than -12%.
+
+---
+
+## 🇨🇦 CA
+
+CA: CA drove 643 registrations (-18% WoW), with -2% spend WoW, and $79 CPA (+19% WoW). ie%CCP 54% (vs. 43% LW, 100% target). March ended at $229K spend and 3,228 registrations ($71 CPA).
+
+WoW the decline was concentrated in Brand (-24%, 536→409) driven by CVR -17% and clicks -8%. NB was more resilient at -5% (246→234). The Brand CVR softness mirrors the pattern seen in US this week.
+
+YoY we spent -2% with +37% registrations. NB regs +86% YoY with NB CPA improving -58% ($289→$121).
+
+Note: Last 2 days show significantly lower volume (avg 7 regs vs weekday avg 126), indicating data lag similar to US.
+
+---
+
+## 🇪🇺 EU5 (UK, DE, FR, IT, ES)
+
+EU5: EU5 drove 5,802 registrations combined, roughly flat WoW outside of two outliers. DE rebounded +111% (639→1,348) after its W13 trough, driven by a CVR surge (+162% Brand, +113% NB) — a recovery, not a breakout, as W14 regs remain below the W7-W11 average. ES declined for the third consecutive week (-25%, 710→636→477), click-driven (Brand -30%, NB -16%), and is the only EU5 market with negative YoY regs (-17%).
+
+UK, FR, and IT were stable: UK -1% with NB continuing to grow (+5%, +276% YoY); FR -1% with Brand and NB both flat; IT -1% with NB CVR improving +22% despite clicks -12%. ie%CCP ranged from 39% (DE) to 61% (IT), all well below the 100% target.
+
+YoY the EU5 story is strong spend growth (+7% to +78%) with mixed registration efficiency — UK (+114%) and IT (+10%) positive, ES (-17%) the concern.
+
+Note: DE's W13→W14 CVR swing needs investigation. ES click decline may indicate impression share loss.
+
+---
+
+## 🇯🇵 JP
+
+JP: JP drove 613 registrations (+12% WoW), with -4% spend WoW, and $75 CPA (-14% WoW). ie%CCP 39% (vs. 45% LW, 100% target). March ended at $183K spend and 2,252 registrations ($81 CPA).
+
+WoW the growth was Brand-driven: Brand regs +12% (540→606) on CVR +10% with clicks +2%. NB remains minimal (7 regs) and is not a meaningful contributor. Brand CPA improved to $58 (-6% WoW). W14 regs are 30% above the 8-week average, continuing an upward trend from the W9 low of 404.
+
+YoY we spent +53% with +23% registrations. Brand regs +22% YoY.
+
+Note: NB CPC has been rising 4 consecutive weeks ($1.65→$5.02), but NB volume is too small to impact overall performance.

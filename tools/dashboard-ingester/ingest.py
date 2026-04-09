@@ -614,6 +614,18 @@ class DashboardIngester:
         return weeks
 
 
+    def _find_monthly_sheet(self):
+        """Find the 2026 Monthly tab by glob-matching '2026 Monthly*'.
+
+        The actual sheet name varies (e.g. '2026 Monthly Q2 update').
+        Returns the latest matching sheet name (last alphabetically) or None.
+        """
+        matches = [name for name in self.sheet_names if name.startswith('2026 Monthly')]
+        if not matches:
+            return None
+        # Return the last match — later quarters sort after earlier ones
+        return matches[-1]
+
     def _detect_monthly_metric_blocks(self):
         """Auto-detect metric block positions on the 2026 Monthly tab.
 
@@ -623,9 +635,10 @@ class DashboardIngester:
 
         Returns dict: {metric_name: {'op2_start': row, 'actuals_start': row, 'col_offset': col}}
         """
-        if '2026 Monthly' not in self.sheet_names:
+        monthly_sheet = self._find_monthly_sheet()
+        if not monthly_sheet:
             return {}
-        ws = self.wb['2026 Monthly']
+        ws = self.wb[monthly_sheet]
         # Read full sheet (BD323 = col 56, row 323)
         all_rows = list(ws.iter_rows(min_row=1, max_row=323, max_col=56, values_only=True))
         self._monthly_all_rows = all_rows  # cache for reuse
@@ -760,7 +773,8 @@ class DashboardIngester:
         Auto-detects metric blocks (spend, regs, CPA, clicks, impressions, CPC,
         CVR, CTR) by scanning the sheet structure. Reads up to BD323.
         """
-        if '2026 Monthly' not in self.sheet_names:
+        monthly_sheet = self._find_monthly_sheet()
+        if not monthly_sheet:
             return {}
 
         blocks = self._detect_monthly_metric_blocks()
@@ -835,30 +849,89 @@ class DashboardIngester:
         return actuals
 
     def _read_monthly_budget(self):
-        """Read 2026 Monthly tab for OP2 budget targets across all metric blocks."""
-        if '2026 Monthly' not in self.sheet_names:
+        """Read 2026 Monthly tab for OP2 budget targets across all 3 horizontal blocks.
+
+        The monthly tab has a 3-block horizontal layout:
+          - Cols 0-17:  Spend OP2 (Media)
+          - Cols 19-36: Registration OP2
+          - Cols 38-55: CPA Goal
+
+        All blocks share the same vertical structure:
+          - Row 2: month headers (Jan-Dec + quarters)
+          - Rows 3-12: OP2 targets per market (US, JP, UK, DE, FR, IT, ES, CA, MX, AU)
+          - Row 13: WW, Row 14: EU5
+
+        Month columns within each block:
+          - Spend:  cols 1-12
+          - Regs:   cols 20-31
+          - CPA:    cols 39-50
+        """
+        monthly_sheet = self._find_monthly_sheet()
+        if not monthly_sheet:
             return {}
 
         # Ensure blocks are detected (may already be cached from _read_monthly_actuals)
         if not hasattr(self, '_monthly_all_rows'):
-            blocks = self._detect_monthly_metric_blocks()
-        else:
-            blocks = self._detect_monthly_metric_blocks()
+            # Load the sheet data
+            ws = self.wb[monthly_sheet]
+            all_rows = list(ws.iter_rows(min_row=1, max_row=323, max_col=56, values_only=True))
+            self._monthly_all_rows = all_rows
 
-        col_layout = self._detect_monthly_col_layout()
-        month_cols = col_layout['month_cols']
-        monthly_months = col_layout.get('months', [])
         rows = self._monthly_all_rows
 
-        if not month_cols or not monthly_months:
-            return {}
+        # Also run the existing vertical block detection for spend (backward compat)
+        blocks = self._detect_monthly_metric_blocks()
+
+        monthly_months = [
+            '2026 Jan', '2026 Feb', '2026 Mar', '2026 Apr', '2026 May', '2026 Jun',
+            '2026 Jul', '2026 Aug', '2026 Sep', '2026 Oct', '2026 Nov', '2026 Dec',
+        ]
+
+        # Market order in OP2 rows 3-12 (1-indexed): US=3, JP=4, UK=5, DE=6, FR=7, IT=8, ES=9, CA=10, MX=11, AU=12
+        op2_market_order = ['US', 'JP', 'UK', 'DE', 'FR', 'IT', 'ES', 'CA', 'MX', 'AU']
+
+        # Block definitions: (metric_key, first_month_col)
+        # Spend block: month cols 1-12, Regs block: month cols 20-31, CPA block: month cols 39-50
+        horizontal_blocks = [
+            ('spend_op2', 1),    # cols 1-12 for Jan-Dec
+            ('regs_op2', 20),    # cols 20-31 for Jan-Dec
+            ('cpa_op2', 39),     # cols 39-50 for Jan-Dec
+        ]
 
         budgets = {m: {} for m in ALL_MARKETS}
 
+        for metric_key, first_month_col in horizontal_blocks:
+            for mkt_idx, market in enumerate(op2_market_order):
+                row_idx = 3 + mkt_idx  # 1-indexed: US=row3, JP=row4, ..., AU=row12
+                if row_idx > len(rows):
+                    continue
+                row = rows[row_idx - 1]  # convert to 0-indexed
+
+                if metric_key not in budgets[market]:
+                    budgets[market][metric_key] = {}
+
+                for month_offset, month_label in enumerate(monthly_months):
+                    col = first_month_col + month_offset
+                    if col >= len(row):
+                        continue
+                    val = safe_float(row[col])
+                    if metric_key == 'regs_op2':
+                        val = safe_float(val)  # keep as float (fractional regs in OP2)
+                    budgets[market][metric_key][month_label] = val
+
+        # Also read from vertically-detected blocks (for any metrics beyond the 3 horizontal ones)
         for metric, block_info in blocks.items():
             op2_start = block_info.get('op2_start')
             if op2_start is None:
                 continue
+
+            op2_key = f'{metric}_op2'
+            # Skip if we already read this metric from horizontal blocks
+            if op2_key in ('spend_op2', 'regs_op2', 'cpa_op2'):
+                continue
+
+            col_layout = self._detect_monthly_col_layout()
+            month_cols = col_layout['month_cols']
 
             for market in ALL_MARKETS:
                 total_row_1idx = self._find_monthly_market_row(op2_start, market)
@@ -867,7 +940,6 @@ class DashboardIngester:
 
                 total = rows[total_row_1idx - 1]
 
-                op2_key = f'{metric}_op2'
                 if op2_key not in budgets[market]:
                     budgets[market][op2_key] = {}
 
@@ -879,17 +951,6 @@ class DashboardIngester:
                     if metric in ('regs', 'clicks', 'impressions'):
                         val = safe_int(val)
                     budgets[market][op2_key][month] = val
-
-        # Backward compatibility: also provide spend_op2 and regs_op2 at top level
-        for market in ALL_MARKETS:
-            if 'spend_op2' not in budgets[market] and budgets[market].get('spend_op2'):
-                pass  # already there
-            # Ensure the old keys exist for projection code
-            if 'spend_op2' in budgets[market]:
-                pass
-            elif budgets[market]:
-                # Already keyed as spend_op2 from the loop above
-                pass
 
         return budgets
 
@@ -1856,7 +1917,7 @@ class DashboardIngester:
         print("\nDone.")
         return results
 
-    def _detect_anomalies(self, market, week_data, trend):
+    def _detect_anomalies_for_db(self, market, week_data, trend):
         """Flag metrics deviating >20% from 8-week average.
 
         Pure function — does not write to DB or modify inputs.
@@ -1990,6 +2051,10 @@ class DashboardIngester:
             proj = analysis.get('projection')
             if proj:
                 try:
+                    # Ensure projected_regs satisfies CHECK (projected_regs > 0)
+                    proj_regs = proj['projected_regs']
+                    if proj_regs is not None and proj_regs <= 0:
+                        proj_regs = None  # let the column be NULL rather than violate CHECK
                     con.execute("""
                         INSERT OR REPLACE INTO projections
                         (market, week, month, days_elapsed, total_days,
@@ -1999,12 +2064,12 @@ class DashboardIngester:
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """, [market, target_week, proj['month'],
                           proj['days_elapsed'], proj['total_days'],
-                          proj['projected_regs'], proj['projected_spend'], proj['projected_cpa'],
+                          proj_regs, proj['projected_spend'], proj['projected_cpa'],
                           proj.get('op2_regs'), proj.get('op2_spend'),
                           proj.get('vs_op2_regs_pct'), proj.get('vs_op2_spend_pct'),
                           'ingester'])
-                except Exception:
-                    pass
+                except Exception as e:
+                    print(f"  WARN: projections insert failed for {market}: {e}")
 
             # ── Anomaly detection ──
             # Build week_data from current_week analysis and use weekly_history as trend
@@ -2030,7 +2095,7 @@ class DashboardIngester:
                         'spend': w.get('spend'),
                         'clicks': w.get('clicks'),
                     })
-                detected = self._detect_anomalies(market, week_data, trend_for_anomaly)
+                detected = self._detect_anomalies_for_db(market, week_data, trend_for_anomaly)
                 # Clear previous anomalies for this market+week (idempotent re-runs)
                 try:
                     con.execute(
@@ -2081,6 +2146,50 @@ class DashboardIngester:
 
         # ── Ingest log ──
         duration = time.time() - start_time
+
+        # ── OP2 targets → ps.targets (cost + registrations per market-month) ──
+        # ps.targets schema: (market, metric_name, period_key, target_value, source)
+        # This writes both 'cost' and 'registrations' rows so the pipeline can
+        # read OP2 targets for projection comparisons (vs_op2_spend_pct, vs_op2_regs_pct).
+        targets_count = 0
+        for market in ALL_MARKETS:
+            budget = monthly_budgets.get(market, {})
+            spend_op2 = budget.get('spend_op2', {})
+            regs_op2 = budget.get('regs_op2', {})
+            if not isinstance(spend_op2, dict):
+                spend_op2 = {}
+            if not isinstance(regs_op2, dict):
+                regs_op2 = {}
+            # Collect all month keys from both dicts
+            all_months = set(list(spend_op2.keys()) + list(regs_op2.keys()))
+            for month_key in all_months:
+                # Write cost target
+                cost_val = spend_op2.get(month_key)
+                if cost_val is not None and cost_val > 0:
+                    try:
+                        con.execute("""
+                            INSERT OR REPLACE INTO ps.targets
+                            (market, metric_name, period_key, target_value, source)
+                            VALUES (?, 'cost', ?, ?, 'ww_dashboard')
+                        """, [market, month_key, float(cost_val)])
+                        targets_count += 1
+                    except Exception as e:
+                        print(f"  WARN: ps.targets cost insert failed for {market} {month_key}: {e}")
+                # Write registrations target
+                regs_val = regs_op2.get(month_key)
+                if regs_val is not None and regs_val > 0:
+                    try:
+                        con.execute("""
+                            INSERT OR REPLACE INTO ps.targets
+                            (market, metric_name, period_key, target_value, source)
+                            VALUES (?, 'registrations', ?, ?, 'ww_dashboard')
+                        """, [market, month_key, float(regs_val)])
+                        targets_count += 1
+                    except Exception as e:
+                        print(f"  WARN: ps.targets regs insert failed for {market} {month_key}: {e}")
+        if targets_count > 0:
+            print(f"  ps.targets: wrote {targets_count} OP2 target rows (cost + registrations)")
+
         try:
             con.execute("""
                 INSERT INTO ingest_log

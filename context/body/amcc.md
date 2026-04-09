@@ -162,11 +162,11 @@ Tracks micro-avoidance moments within sessions. When the aMCC fires an intervent
 
 ## Growth Model
 
-The aMCC grows with use and atrophies with avoidance.
+The aMCC is a muscle — it grows with use and atrophies with avoidance.
 
-**Grows when:** Streak increases (interventions become less frequent), resistance types get resolved, hard things complete faster, avoidance count per hard thing decreases.
+**Growth signals:** Streak lengthens (fewer interventions needed), resistance types resolve (e.g., blank page paralysis → gone after 3 shipped docs), hard things complete faster (7d → 3d), avoidance count per hard thing drops.
 
-**Atrophies when:** Streak keeps resetting at 0-2, same resistance type persists 4+ weeks, hard things sit 7+ days without progress, Richard dismisses interventions without reason.
+**Atrophy signals:** Streak resets at 0-2 repeatedly, same resistance type persists 4+ weeks (e.g., visibility avoidance at 11wk = atrophy), hard things stall 7+ days, Richard dismisses interventions without reason.
 
 | Metric | Current | Target (30d) | Target (90d) |
 |--------|---------|--------------|--------------|
@@ -176,7 +176,7 @@ The aMCC grows with use and atrophies with avoidance.
 | Resistance types active | 6 | 4 | 2 |
 | Interventions per session | — | < 2 | < 1 |
 
-**End state:** Richard self-selects the hard thing, starts without prompting, ships without delay. The organ becomes quiet — not atrophied, but strong enough that behavior is automatic.
+**End state:** Richard self-selects the hard thing, starts without prompting, ships without delay. The organ goes quiet — not atrophied, but strong enough that the behavior is automatic. Like a well-trained reflex: the hard thing IS the default path.
 
 ---
 

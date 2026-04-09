@@ -1,0 +1,46 @@
+{
+  "timestamp": "2026-04-08T07:00:00-07:00",
+  "total_incomplete": 106,
+  "overdue": 8,
+  "today": 5,
+  "by_routine": {
+    "Sweep": {"total": 8, "today": 2, "overdue": 2, "cap": 5, "over_cap": true},
+    "Core": {"total": 10, "today": 1, "overdue": 3, "cap": 4, "over_cap": true},
+    "Engine Room": {"total": 9, "today": 2, "overdue": 3, "cap": 6, "over_cap": true},
+    "Admin": {"total": 5, "today": 0, "overdue": 0, "cap": 3, "over_cap": true},
+    "Wiki": {"total": 41, "today": 0, "overdue": 0},
+    "Backlog": {"total": 33, "today": 0, "overdue": 0}
+  },
+  "by_project": {
+    "ABPS AI - Content": {"incomplete": 43, "overdue": 0},
+    "My Tasks (no project)": {"incomplete": 24, "overdue": 0},
+    "AU": {"incomplete": 12, "overdue": 3},
+    "ABPS AI - Build": {"incomplete": 10, "overdue": 0},
+    "ABPS - WW Testing & Projects": {"incomplete": 7, "overdue": 4},
+    "Paid App": {"incomplete": 6, "overdue": 0},
+    "MX": {"incomplete": 4, "overdue": 1},
+    "ABPS - WW Acquisition": {"incomplete": 0, "overdue": 0}
+  },
+  "overdue_oldest": {
+    "name": "MX Automotive page",
+    "project": "MX",
+    "due_on": "2026-03-20",
+    "days_overdue": 19
+  },
+  "coherence_alerts": [
+    "Sweep at 8/5 — over cap by 3",
+    "Core at 10/4 — over cap by 6",
+    "Engine Room at 9/6 — over cap by 3",
+    "Admin at 5/3 — over cap by 2",
+    "36 tasks missing Kiro_RW context",
+    "34 tasks missing Next_Action",
+    "6 tasks overdue by 3+ days"
+  ],
+  "sync_stats": {
+    "upserted": 106,
+    "soft_deleted": 20,
+    "snapshot_rows": 106,
+    "asana_api_status": "ok",
+    "my_tasks_project_pull": "SSE error — used SearchTasksInWorkspace instead"
+  }
+}

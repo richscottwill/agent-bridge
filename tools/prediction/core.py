@@ -6,7 +6,7 @@ no side effects, no DB access. The Bayesian machinery is invisible to consumers.
 """
 
 import math
-from .types import PriorState, PosteriorState
+from .ptypes import PriorState, PosteriorState
 
 
 class BayesianCore:
@@ -117,7 +117,11 @@ class BayesianCore:
         new_mean = sum(metric_values) / n_new
 
         # Weighted combination of prior and evidence
-        prior_weight = prior.n_observations
+        # Cap prior weight to prevent stale history from dominating
+        # With 52 weeks of prior and 4 weeks of evidence, uncapped prior
+        # barely moves. Cap at 8 effective observations so recent evidence
+        # (4 weeks) represents ~33% of the posterior.
+        prior_weight = min(prior.n_observations, 8)
         total_weight = prior_weight + n_new
         posterior_mean = (prior_weight * prior.mean + n_new * new_mean) / total_weight
 

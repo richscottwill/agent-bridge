@@ -34,14 +34,16 @@ When Richard faces a new decision, check:
 
 ## Decision Log
 
-Decisions have a relevance half-life. Not every decision stays useful forever. The decay protocol keeps the log lean.
+Decisions have a relevance half-life. Not every decision stays useful forever.
 
 **Relevance tiers:**
 - **FOUNDATIONAL** — Shaped a principle or changed how the team operates. Stays indefinitely. (D1, D2, D3, D5, D6, D8)
 - **ACTIVE** — Still influencing current work or pending audit. Stays until outcome is resolved. (D4, D9, D10)
 - **RESOLVED** — Outcome confirmed, lesson extracted. Compress to one-liner, archive full entry after 90 days. (D7 is the first candidate)
 
-**Decay protocol (Karpathy governs, loop executes):**
+### Decay Protocol
+
+Karpathy governs, loop executes:
 1. When a decision's outcome is VALIDATED or INVALIDATED (via nervous system Loop 1), tag it RESOLVED
 2. Extract the lesson into the relevant principle (strengthen, qualify, or retire)
 3. Compress the full entry to: `D[X]: [Name] — [Outcome]. Reinforced Principle #[N].`
@@ -49,34 +51,22 @@ Decisions have a relevance half-life. Not every decision stays useful forever. T
 
 ### Active Decisions (influencing current work)
 
-### D4: AU LP Full Migration [ACTIVE]
-D4: Lena overrode phased rollout — full Polaris switch. Executing. HIGH.
+| ID | Decision | Detail | Principles |
+|----|----------|--------|-----------|
+| D4 | AU LP Full Migration | Lena overrode phased rollout — full Polaris switch. Executing. | — |
+| D9 | AI Max Testing | US-first with measurement guardrails. Same OCI discipline. | #4, #1 |
+| D10 | F90 Lifecycle | Legal SIMs for 3+ purchases targeting. Extends PS beyond registration. | #5 |
 
-### D9: AI Max Testing [ACTIVE]
-D9: US-first with measurement guardrails. Same OCI discipline. Reinforced #4 Phased, #1 Evidence. HIGH.
+### Foundational Decisions (shaped principles — stays indefinitely)
 
-### D10: F90 Lifecycle [ACTIVE]
-D10: Legal SIMs for 3+ purchases targeting. Extends PS beyond registration. Reinforced #5 Partnership. HIGH.
-
-### Foundational Decisions (shaped principles)
-
-### D1: OCI Implementation Approach [FOUNDATIONAL]
-D1: Phased rollout with measurement framework. Reinforced #1, #4. HIGH.
-
-### D2: Competitive Response to Walmart [FOUNDATIONAL]
-D2: Bid caps + NB efficiency via OCI, do NOT escalate auction. Reinforced #2, #3. HIGH.
-
-### D3: Ad Copy Overhaul (SP Study) [FOUNDATIONAL]
-D3: Shift to price/quality/selection messaging from bulk/B2B. Reinforced #7, #1. HIGH.
-
-### D5: Campaign Consolidation [FOUNDATIONAL]
-D5: Consolidate campaigns to strengthen OCI data signals. Reinforced #6, #1. HIGH.
-
-### D6: Engagement Channel [FOUNDATIONAL]
-D6: Lifecycle channel via ABMA partnership, 13%→30% match rate. Reinforced #5, #1. HIGH.
-
-### D8: OP1 Structure [FOUNDATIONAL]
-D8: Problem→test→result→scale across 5 workstreams. Reinforced #5, #1. HIGH.
+| ID | Decision | Detail | Principles |
+|----|----------|--------|-----------|
+| D1 | OCI Implementation | Phased rollout with measurement framework. | #1, #4 |
+| D2 | Competitive Response to Walmart | Bid caps + NB efficiency via OCI, do NOT escalate auction. | #2, #3 |
+| D3 | Ad Copy Overhaul (SP Study) | Shift to price/quality/selection messaging from bulk/B2B. | #7, #1 |
+| D5 | Campaign Consolidation | Consolidate campaigns to strengthen OCI data signals. | #6, #1 |
+| D6 | Engagement Channel | Lifecycle channel via ABMA partnership, 13%→30% match rate. | #5, #1 |
+| D8 | OP1 Structure | Problem→test→result→scale across 5 workstreams. | #5, #1 |
 
 <!-- Full decision details: db("SELECT id, name, tier, description, alternatives, rationale, principles, confidence FROM decisions ORDER BY id") -->
 

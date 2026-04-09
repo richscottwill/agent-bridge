@@ -89,6 +89,17 @@ Include flags from AM-Backend coherence check. If zero: "✅ DuckDB ↔ Body coh
 ### Activity Signals
 Read intake/asana-activity.md: 💬 comments, 📅 due date changes, 👤 reassignments.
 
+### Forecast Pacing (from WBR Pipeline)
+Query MotherDuck for forecast and OP2 pacing context:
+- `SELECT * FROM ps.market_status` — latest actuals + forecast + OP2 per market
+- `SELECT * FROM ps.monthly_pacing` — MTD regs/spend vs OP2 target
+- `SELECT market, hit_rate, mean_error_pct, ci_width_adjustment FROM ps.calibration_state` — engine calibration
+
+Display in brief:
+- 📊 Pacing: AU {pacing_regs_pct}% regs / {pacing_cost_pct}% spend vs OP2 | MX {pacing_regs_pct}% / {pacing_cost_pct}%
+- 🎯 Forecast accuracy: {hit_rate}% hit rate (last 20 predictions)
+- If any market pacing < 80% or > 120%: flag as ⚠️ pacing alert
+
 ### Goal Alerts
 If any goals at-risk or off-track: goal name, status, metric gap, recommended action.
 

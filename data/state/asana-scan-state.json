@@ -1,8 +1,15 @@
 {
-  "last_scan_timestamp": "2026-04-06T09:00:00Z",
+  "last_scan_timestamp": "2026-04-08T16:43:00Z",
   "per_task_timestamps": {},
-  "last_updated": "2026-04-06T09:00:00Z",
+  "last_updated": "2026-04-08T16:43:00Z",
   "protocol_version": "1.0",
   "protocol_file": "~/shared/context/active/asana-activity-monitor-protocol.md",
-  "notes": "Monday AM-1 scan. DuckDB state used (47 tasks). Full Asana API re-pull with GetTaskStories deferred — Asana MCP SearchTasksInWorkspace not invoked this cycle. Activity monitor: 0 signals (weekend). Next scan should do full Asana pull + per-task story check."
+  "notes": "2026-04-08 scan SUCCESS. 97 tasks scanned. 0 teammate signals detected. All post-cutoff activity was Richard's own or Asana automations. 1 task skipped due to SSE error (1213962513760099). Previous 403 failure resolved — Asana MCP auth working normally.",
+  "skipped_tasks": {
+    "1213962513760099": {
+      "name": "Brandon 1:1: Set up automated monthly ASP confirmation reminders",
+      "error": "MCP error -32603: No data found in SSE response",
+      "timestamp": "2026-04-08T16:43:00Z"
+    }
+  }
 }

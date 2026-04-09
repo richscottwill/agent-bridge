@@ -11,7 +11,7 @@ from datetime import datetime
 sys.path.insert(0, os.path.expanduser('~/shared/tools/data'))
 
 from .core import BayesianCore
-from .types import PriorState
+from .ptypes import PriorState
 
 # Lazy DB import
 _market_trend = None

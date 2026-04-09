@@ -167,6 +167,12 @@ Contacts with last interaction >14 days. Check before drafting — dynamics may 
 ### Harjeet Heer (hkheer) — Sr. Program Mgr ABIX, L6, Seattle
 - Reports to: Nick Georgijev. Last: 3/11. Stepped away from AU day-to-day. Tone: Professional, brief.
 
+### Cross-Cutting Dynamics
+- **AU chain of command:** Lena (L7, strategy) → Alexis (L6, execution) → Richard (PS perspective). Lena overrides phased approaches; always have data ready.
+- **MX transition:** Carlos (CPS) → Lorena (PS, as of 3/17). New relationship — professional register, not casual.
+- **Group visibility gap:** Richard strong in 1:1s (~40% share) but <15% in groups. Andrew dominates airtime. Richard needs strategic commentary during Andrew's updates.
+- **Brandon alignment:** Most active channel. She/her. Supportive of Richard owning AU narrative. Flagged Lena's decision-reversal pattern.
+
 ---
 
 ## Common Failures in Using This Organ

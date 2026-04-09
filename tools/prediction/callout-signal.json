@@ -1,0 +1,17 @@
+{
+  "week": "2026-W14",
+  "timestamp": "2026-04-08T13:53:45.349060",
+  "markets": [
+    "AU",
+    "MX",
+    "US",
+    "CA",
+    "JP",
+    "UK",
+    "DE",
+    "FR",
+    "IT",
+    "ES"
+  ],
+  "source": "wbr_pipeline"
+}

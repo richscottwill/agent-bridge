@@ -39,6 +39,9 @@ The Narrative Template structure: Purpose → Background → Problem/Opportunity
 ### Data in narrative
 Instead of standalone tables followed by interpretation, weave numbers into prose: "We launched Tk improvements to Search YTD, yielding an incremental $Tk OPS (US: $Tk, ROW: $Tk)." Tables are for comparisons where the reader needs to scan across multiple dimensions — not for presenting sequential data points that could be a sentence. Contextualize numbers: [metric] [value] ([comparison]: [vs what], [interpretation]: [so what]). Example: 'AU NB CPA $118 (+3% WoW, -29% from 6wk ago) — bid strategy working, Polaris migration may cause short-term noise.' Compare across dimensions: test vs control, PoP, market vs market, channel vs channel. Separate platform data from business data (Google Ads vs Hubble/internal). Attribute causation carefully: "seems to have allowed" not "caused". Include the "so what" — every data point connects to a recommendation. Honest about limitations: "we'd need a longer timeline" / "volume too low to draw conclusions". ie%CCP always contextualized against target. In testing plans, quantify expected improvement ranges: "5%-15%" not "significant".
 
+### No em-dashes
+Never use em-dashes (—) in drafted Amazon narrative documents. Replace with commas, periods, colons, or parentheticals. Scan every draft before finalizing.
+
 ### Cut anything duplicative
 From the Working Backwards Guide: "Every sentence and quote should add unique value. Cut anything that's duplicative. Ask, 'does the reader really need to know this to understand the core value and capabilities?'"
 

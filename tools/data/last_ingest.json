@@ -1,14 +1,22 @@
 {
-  "timestamp": "2026-03-30T22:37:27.698673+00:00",
-  "target_week": "2026 W13",
+  "timestamp": "2026-04-07T23:31:33.874003+00:00",
+  "target_week": "2026 W14",
   "markets": [
+    "US",
+    "CA",
+    "UK",
+    "DE",
+    "FR",
+    "IT",
+    "ES",
+    "JP",
     "AU",
     "MX"
   ],
   "row_counts": {
-    "daily": 1,
-    "weekly": 1,
-    "monthly": 1
+    "daily": 0,
+    "weekly": 0,
+    "monthly": 0
   },
   "db_path": "/home/prichwil/shared/tools/data/ps-analytics.duckdb"
 }

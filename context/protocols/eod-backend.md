@@ -179,7 +179,7 @@ Update DuckDB + JSON fallback after each.
 
 **Not expendable. Run every EOD.**
 
-Invoke Karpathy via loop script: `bash ~/shared/tools/karpathy-loop.sh [target_total] "[cooldown_organs]"`
+Invoke Karpathy via loop script: `bash ~/shared/tools/scripts/karpathy-loop.sh [target_total] "[cooldown_organs]"`
 
 First-experiment verification mandatory: confirm CLI sub-agents are actually invoked, results come from separate processes, output is correct. Only then let batch run unattended.
 

@@ -11,7 +11,7 @@ from datetime import datetime
 
 sys.path.insert(0, os.path.expanduser('~/shared/tools/data'))
 
-from .types import PredictionResult, CalibrationReport
+from .ptypes import PredictionResult, CalibrationReport
 from .core import BayesianCore
 from .models import ModelRegistry
 from .calibrator import Calibrator

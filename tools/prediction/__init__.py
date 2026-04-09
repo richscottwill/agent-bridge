@@ -6,9 +6,10 @@ Usage:
     result = engine.predict("Will AU regs be up next week?")
 """
 
-from .types import (
+from .ptypes import (
     PriorState, PosteriorState, ParsedQuestion,
     PredictionResult, PredictionScore, CalibrationReport,
+    SegmentForecast, MarketProjection, ScoringResult, PipelineResult,
 )
 
 # Lazy imports to avoid circular dependencies — engine/autonomy import on first use

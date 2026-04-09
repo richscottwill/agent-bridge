@@ -1,0 +1,96 @@
+{
+  "run_id": "run42_batch2",
+  "timestamp": "2026-04-07T04:38:58Z",
+  "experiments": 10,
+  "keeps": 8,
+  "reverts": 2,
+  "keep_rate": 0.8,
+  "net_word_delta": -174,
+  "biggest_win": "gut:Compression Protocol MERGE -195w at delta=0.0",
+  "anti_patterns_confirmed": [
+    "REMOVE on behavioral constraints (nervous-system Common Failures)",
+    "REMOVE on unique content (device install steps)"
+  ],
+  "experiments_detail": [
+    {
+      "id": "run42_exp1",
+      "target": "nervous-system",
+      "section": "Common Failures",
+      "technique": "REMOVE",
+      "delta_ab": -0.2,
+      "decision": "REVERT"
+    },
+    {
+      "id": "run42_exp2",
+      "target": "spine",
+      "section": "Session Bootstrap Sequence",
+      "technique": "COMPRESS",
+      "delta_ab": 0.0,
+      "decision": "KEEP"
+    },
+    {
+      "id": "run42_exp3",
+      "target": "amcc",
+      "section": "Growth Model",
+      "technique": "REWORD",
+      "delta_ab": 0.0,
+      "decision": "KEEP"
+    },
+    {
+      "id": "run42_exp4",
+      "target": "brain",
+      "section": "Decision Log",
+      "technique": "SPLIT",
+      "delta_ab": 0.0,
+      "decision": "KEEP"
+    },
+    {
+      "id": "run42_exp5",
+      "target": "richard-style-email",
+      "section": "Common Draft Failures",
+      "technique": "SPLIT",
+      "delta_ab": 0.0,
+      "decision": "KEEP"
+    },
+    {
+      "id": "run42_exp6",
+      "target": "richard-style-mbr",
+      "section": "Voice",
+      "technique": "SPLIT",
+      "delta_ab": 0.0,
+      "decision": "KEEP"
+    },
+    {
+      "id": "run42_exp7",
+      "target": "device",
+      "section": "Candidate Install gcm+llm",
+      "technique": "REMOVE",
+      "delta_ab": -0.27,
+      "decision": "REVERT"
+    },
+    {
+      "id": "run42_exp8",
+      "target": "gut",
+      "section": "Compression Protocol",
+      "technique": "MERGE",
+      "delta_ab": 0.0,
+      "decision": "KEEP"
+    },
+    {
+      "id": "run42_exp9",
+      "target": "richard-style-slack",
+      "section": "Slack-Specific Habits",
+      "technique": "SPLIT",
+      "delta_ab": 0.0,
+      "decision": "KEEP"
+    },
+    {
+      "id": "run42_exp10",
+      "target": "richard-style-docs",
+      "section": "Strategic Narrative",
+      "technique": "RESTRUCTURE",
+      "delta_ab": 0.0,
+      "decision": "KEEP"
+    }
+  ]
+}

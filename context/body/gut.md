@@ -27,16 +27,19 @@ Every other organ adds content. The gut removes content. It enforces the context
 - **Input:** `~/shared/context/intake/` (raw files, notes, data drops)
 - **Output:** Compressed facts routed to the correct organ
 - **Waste:** The raw file, archived or deleted after extraction
+- *Example:* WBR xlsx drops into intake → extract "AU Feb: 1.1K regs, CPA $118" → route to Eyes → archive xlsx.
 
 ### Function 2: Compression — Keep organs lean
 - **Input:** All organ files
 - **Output:** Tighter versions of the same content
 - **Waste:** Redundant facts, resolved items, stale predictions
+- *Example:* Memory has AU CPA in both relationship graph and key metrics → deduplicate, keep in Eyes, pointer in Memory.
 
 ### Function 3: Excretion — Remove what the body no longer needs
 - **Input:** Staleness signals, reference counts, completion status
 - **Output:** Archived or deleted content
 - **Waste:** Moved to `~/shared/wiki/archive/` or permanently removed
+- *Example:* Completed task "MX invoice handoff" with no open dependencies after 14 days → archive.
 
 ---
 
@@ -78,20 +81,11 @@ For each file in `intake/`: extract minimum viable facts, route to the organ whe
 
 Run when Bayesian priors signal an organ has room to shrink (COMPRESS posterior_mean > 0.7, n > 5). The goal is to maximize *usefulness per token* — organs should answer their questions accurately and self-containedly.
 
-Budgets are LEARNED CONSTRAINTS, not static numbers. The gut tracks the size-accuracy relationship via experiment data. An organ at its natural ceiling (ADD experiments consistently revert) doesn't need compression. An organ with room to shrink (COMPRESS experiments consistently keep) should be compressed. The priors table is the signal.
+Budgets are LEARNED CONSTRAINTS, not static numbers. Every experiment logs `words_before`, `words_after`, `score_a`, `score_b`, `delta_ab` to DuckDB `autoresearch_experiments`. Over time, this builds a size-accuracy curve per organ. The `autoresearch_organ_health` table tracks word count and accuracy estimate per organ per run. The Bayesian priors on ADD vs COMPRESS per organ ARE the budget signal — no separate budget number needed. ADD consistently KEEP = budget drifts up. COMPRESS consistently KEEP = budget drifts down. ADD consistently REVERT (posterior_mean < 0.3, n > 5) = organ at natural ceiling. COMPRESS consistently KEEP (posterior_mean > 0.7, n > 5) = prioritize for compression.
 
-### Word Budget Enforcement
+**Body ceiling: adaptive.** Starting point 24,000w. Actual ceiling = aggregate size-accuracy plateau in `autoresearch_organ_health`. No hard cap — the data decides.
 
-**STATUS: Adaptive budgets adopted (Run 16, Karpathy). Static per-organ budgets and 24,000w ceiling replaced with learned constraints. Baseline budgets below are starting points — they move based on experiment data.**
-
-**How it works:**
-- Every experiment logs `words_before`, `words_after`, `score_a`, `score_b`, `delta_ab` to DuckDB `autoresearch_experiments`
-- Over time, this builds a size-accuracy curve per organ: at what word count does accuracy plateau?
-- The `autoresearch_organ_health` table tracks word count and accuracy estimate per organ per run
-- Budgets adjust: if ADD experiments consistently KEEP (organ improves with more content), the budget drifts up. If COMPRESS experiments consistently KEEP (organ doesn't degrade when smaller), the budget drifts down.
-- The Bayesian priors on ADD vs COMPRESS per organ ARE the budget signal — no separate budget number needed
-
-**Baseline budgets (starting points, not ceilings):**
+### Baseline Budgets (starting points, not ceilings)
 
 | Organ | Baseline | Actual | Notes |
 |-------|----------|--------|-------|
@@ -105,13 +99,6 @@ Budgets are LEARNED CONSTRAINTS, not static numbers. The gut tracks the size-acc
 | Gut (this file) | 2000w | ~2100w | Identity protection rule — safety content |
 | Nervous System | 1500w | 1297w | Calibration loops — stable |
 | Spine | 1500w | 1490w | Bootstrap — stable |
-
-**Body ceiling: adaptive.** Starting point 24,000w. Actual ceiling is wherever the aggregate size-accuracy curve plateaus. Tracked via `autoresearch_organ_health`. If total body grows but aggregate accuracy improves, the ceiling was too low. If total body grows and accuracy is flat, the ceiling was right. There is no hard cap — the data decides.
-
-**Over-budget handling (revised):** No organ is "over budget" in the static sense. Instead:
-- If an organ's ADD experiments consistently REVERT (posterior_mean for ADD on that organ < 0.3, n > 5), the organ is at its natural ceiling — stop adding, try COMPRESS/REWORD instead
-- If an organ's COMPRESS experiments consistently KEEP (posterior_mean for COMPRESS > 0.7, n > 5), the organ has room to shrink — prioritize it for compression
-- These signals emerge from the priors table, not from a declared budget number
 
 ### Compression Techniques
 

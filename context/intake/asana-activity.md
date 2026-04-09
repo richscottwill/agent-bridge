@@ -1,29 +1,22 @@
-<!-- DOC-0166 | duck_id: intake-asana-activity -->
-# Asana Activity — 2026-04-06
+# Asana Activity Signals
 
-## Teammate Signals
+Scan timestamp: 2026-04-08T16:43:00Z
+Tasks scanned: 97
+Signals detected: 0
+Lookback window: 2026-04-06T09:00:00Z → 2026-04-08T16:43:00Z (2+ days due to yesterday's 403 failure)
 
-### 📅 Due Date Changes
-- **Vijeth Shetty** changed due date on blocking task "Duplicate Beauty and Auto page for MX" to Mar 23 (on MX Automotive page dependency)
+---
 
-### ✅ Dependency Completions
-- **Vijeth Shetty** completed blocking task "Duplicate Beauty and Auto page for MX" (3/24) — then **Alex VanDerStuyf** marked it incomplete again (3/24). Status unclear — follow up needed.
+No new teammate activity detected since last successful scan (2026-04-06T09:00:00Z).
 
-### 👤 Task Assignments
-- **Alex VanDerStuyf** created and assigned "WW weblab dial-up (Richard)" — added description, set due date 3/26, assigned to Richard (3/23-3/25). This is a teammate-initiated task.
+All 97 incomplete tasks were scanned. Stories found after the cutoff were exclusively:
+- Richard's own edits (Kiro_RW, Next-action_RW, priority changes, descriptions)
+- Asana system automations (Priority_RW rule-based changes, Begin-Date_RW auto-sets)
 
-### 📝 Description Changes
-- **Alex VanDerStuyf** added description to "WW weblab dial-up (Richard)" (3/24)
+No comments, due date changes, or reassignments by teammates were detected in the 2+ day window.
 
-## Activity Summary
-| Signal | Count | Key People |
-|--------|-------|------------|
-| 📅 Due date changes (by others) | 1 | Vijeth Shetty |
-| ✅ Dependency completions | 1 | Vijeth Shetty |
-| 👤 Assignments from others | 1 | Alex VanDerStuyf |
-| 📝 Description edits by others | 1 | Alex VanDerStuyf |
-| 💬 Comments by others | 0 | — |
+---
 
-## Action Items from Activity
-1. **MX Automotive page**: Vijeth completed then Alex re-opened the blocking MCS task. Clarify with Vijeth/Alex whether the MX page creation is actually done.
-2. **WW weblab dial-up**: Alex assigned this — coordinate on weblab settings before 4/7 go-live.
+## Errors / Skipped Tasks
+
+- **1213962513760099** (Brandon 1:1: Set up automated monthly ASP confirmation reminders): SSE connection error — `MCP error -32603: No data found in SSE response`. Task stories could not be retrieved. Recommend retry next scan.

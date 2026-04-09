@@ -1,11 +1,8 @@
 # Callout Principles
 
-This is a placeholder reference file. Load the full callout-principles.md steering file for complete guidance on:
+The source of truth for all callout writing rules is the callout-writer agent definition:
+`shared/.kiro/agents/wbr-callouts/callout-writer.md`
 
-- Callout tone and structure
-- Quality thresholds and confidence scoring
-- Market-specific formatting rules
-- Blind review criteria
-- Word count limits (max 150 words per callout)
+All style rules, word count targets, formatting conventions, and market-specific behaviors are defined there. Do not duplicate rules here — read the writer definition directly.
 
-The canonical source is the callout-principles.md steering file used by the WBR callout pipeline.
+Callouts are generated via the WBR callout pipeline hook at `shared/.kiro/hooks/wbr-callouts.kiro.hook`. Do not invoke the callout-writer or callout-reviewer agents directly — use the hook.

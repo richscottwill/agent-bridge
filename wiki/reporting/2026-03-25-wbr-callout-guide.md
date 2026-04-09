@@ -70,6 +70,21 @@ When Dwayne is OOO:
 
 Dashboard ingester auto-generates draft callouts. Start there, then add narrative context and competitive color.
 
+## Formatting Rules
+
+The source of truth for callout formatting is the callout-writer agent definition at `shared/.kiro/agents/wbr-callouts/callout-writer.md`. Key rules summarized here for human reference:
+
+- **Word count:** 100-120 words, target 110. Only prose paragraphs count.
+- **Volume changes:** Percentages, not raw numbers. The headline carries the totals.
+- **Week references:** Plain text (W7, not (W7)). Parentheses for percentages and dollar amounts.
+- **No OP2 in projection tables:** Projection tables show Regs, Spend, CPA, ie%CCP only. However, the monthly projection line in callout prose must always include vs OP2 spend.
+- **No em-dashes or arrows.**
+- **CPAs rounded to whole dollars, percentages to whole numbers.**
+
+## How to Run
+
+Callouts are generated via the WBR callout pipeline hook at `shared/.kiro/hooks/wbr-callouts.kiro.hook`. The hook orchestrates the full pipeline: ingest → analyst → writer → blind review → correction across all 10 markets. Do not invoke the callout-writer or callout-reviewer agents directly — use the hook.
+
 
 ## Sources
 - Pre-WBR Callouts Quip — source: ~/shared/context/body/spine.md → Key Quip Documents

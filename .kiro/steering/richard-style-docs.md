@@ -11,12 +11,12 @@ Covers: experiment docs, testing plans, investigation docs, instructional docs, 
 - Headers must be questions or imperatives, never bare nouns. 'How to optimize AU NB CPA' not 'AU NB CPA Optimization'. 'When to escalate to Brandon' not 'Escalation Framework'. The header tells the reader what they'll get from the section.
 
 ## Strategic Narrative (OP1 / Leadership Docs)
-- Each section: problem → test → validated result → 2026 investment
-- Most polished voice. Longer sentences. More connective tissue.
-- Key phrases: "validated results," "measurement framework," "cross-functional collaboration," "connective tissue between platform capabilities and business objectives"
 - Data embedded in narrative, not just tabled: "$16.7MM in OPS" / "+24% registration lift"
 - Everything connects — nothing presented as isolated. The word "compound" appears repeatedly.
+- Each section: problem → test → validated result → 2026 investment
 - Credits cross-functional partners by name or team
+- Most polished voice. Longer sentences. More connective tissue.
+- Key phrases: "validated results," "measurement framework," "cross-functional collaboration," "connective tissue between platform capabilities and business objectives"
 
 ## Experiment Documents
 - Structure: Question → Setup → Results → Recommendation. Example: 'Does NB bid strategy reduce CPA?' → 6-week test, AU NB campaigns → CPA $168→$117 (-29%) → Adopt as baseline.
@@ -70,3 +70,4 @@ Covers: experiment docs, testing plans, investigation docs, instructional docs, 
 1. **Bullets as primary content.** Amazon docs are narrative-driven. If a section is mostly bullets, rewrite as prose. Bullets for short enumerations (3-5 items max) only.
 2. **Headers as bare nouns.** Wrong: "AU NB CPA Optimization." Right: "How to optimize AU NB CPA." Headers must be questions or imperatives.
 3. **Data without interpretation.** Every table or data point needs a "so what" sentence. Don't present numbers and leave the reader to draw conclusions.
+4. **Em-dashes in draft.** Never use em-dashes (—) in drafted documents. Replace with commas, periods, colons, or parentheticals. Scan every draft before finalizing.

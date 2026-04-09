@@ -9,21 +9,18 @@ Last updated: 2026-04-01 (Wednesday PT)
 
 ## Session Bootstrap Sequence
 
-**CRITICAL: AgentSpaces chats are deleted every 14 days.** At the start of every new session, read these files in order:
+**⚠️ AgentSpaces chats deleted every 14 days.** Every new session starts here — no exceptions.
 
-**Richard:** Amazon Business, Paid Search (WW Outbound Marketing under Brandon Munday L7, she/her). Owns: AU, MX hands-on; US/EU5/JP/CA team-wide. Key focus: OCI bidding rollout (7/10 markets live), AI Max testing (US Q2 2026), AEO, Project Baloo, F90 Lifecycle. Timezone: PT (UTC-7).
+**Richard Williams:** L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7, she/her). Markets: AU/MX hands-on, US/EU5/JP/CA team-wide. Active: OCI rollout (7/10 markets live), AI Max (US Q2 2026), AEO, Project Baloo, F90 Lifecycle. Timezone: PT (UTC-7).
 
-### Core Bootstrap (always read)
-1. `~/shared/context/body/body.md` — The map of the whole system. Tells you what each organ does and where to find it.
-2. `~/shared/context/body/spine.md` — This file. Bootstrap sequence, tool access, directory map.
-3. `~/.kiro/steering/soul.md` — Identity, values, voice, preferences, agent routing.
-
-### State Files (read after core)
-4. `~/shared/context/active/current.md` — Ground truth: active projects, people, meetings, pending actions.
-5. `~/shared/context/active/rw-tracker.md` — Weekly scorecard, 30-day challenge.
-
-### Task-Specific (read as needed)
-Then read the organ you need for the task at hand (brain, eyes, hands, memory).
+| Order | File | What |
+|-------|------|------|
+| 1 | `~/shared/context/body/body.md` | System map — organ locations |
+| 2 | `~/shared/context/body/spine.md` | This file — bootstrap, tools, dirs |
+| 3 | `~/.kiro/steering/soul.md` | Identity, voice, routing |
+| 4 | `~/shared/context/active/current.md` | Live state: projects, people, actions |
+| 5 | `~/shared/context/active/rw-tracker.md` | Weekly scorecard, 30-day challenge |
+| 6 | Task-specific organ | brain, eyes, hands, memory as needed |
 
 ---
 

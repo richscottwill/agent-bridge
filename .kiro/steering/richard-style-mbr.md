@@ -10,8 +10,12 @@ inclusion: manual
 4. MoM trend: What changed from last month and why
 
 ## Voice
+
+### Register
 - More polished than WBR. Less "I" — more "we" and passive constructions.
 - Still data-dense but with cleaner narrative flow.
+
+### Miss Attribution Rule
 - Always explains OP2 misses: "The miss to OP2 is due to the reduction in spend since Aug to meet new iECCP target of 100%." Never leaves a miss unexplained.
 
 ## Data Rules
@@ -25,6 +29,7 @@ inclusion: manual
 1. **Month without YTD.** Never report a single month in isolation. YTD immediately follows the monthly line — it shows whether the month is a blip or a trend.
 2. **Unexplained miss.** Every OP2 miss needs a specific cause: spend reduction, efficiency target change, seasonal demand shift. "We missed OP2" without attribution is incomplete.
 3. **MoM without levers.** Don't just state "registrations decreased 15% MoM." Name the lever: "NB investment decreased 10% MoM while Brand stayed flat, driving the registration decline."
+4. **Em-dashes in draft.** Never use em-dashes (—) in drafted MBR write-ups. Replace with commas, periods, colons, or parentheticals. Scan every draft before finalizing.
 
 ## Examples (actual)
 

@@ -6,7 +6,7 @@ data-grounded. No hedging, no filler, no statistical jargon — ever.
 Agent consumers get structured dicts with all numeric fields.
 """
 
-from .types import PredictionResult
+from .ptypes import PredictionResult
 
 # These terms MUST NEVER appear in human-facing output
 BANNED_TERMS = [

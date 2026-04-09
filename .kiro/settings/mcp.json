@@ -63,9 +63,7 @@
     "ai-community-slack-mcp": {
       "command": "ai-community-slack-mcp",
       "args": [],
-      "autoApprove": [
-        "*"
-      ]
+      "disabled": true
     },
     "radar-mcp": {
       "command": "radar-mcp",
@@ -76,9 +74,7 @@
     "amazon-sharepoint-mcp": {
       "command": "amazon-sharepoint-mcp",
       "args": [],
-      "autoApprove": [
-        "*"
-      ]
+      "disabled": true
     },
     "search-marketing-agent-workspace-alpha-mcp": {
       "command": "search-marketing-agent-workspace-alpha-mcp",
@@ -89,9 +85,7 @@
     "knowledge-discovery-mcp": {
       "command": "knowledge-discovery-mcp",
       "args": [],
-      "autoApprove": [
-        "*"
-      ]
+      "disabled": true
     },
     "loop-mcp": {
       "command": "loop-mcp",
@@ -106,7 +100,8 @@
       "args": [],
       "autoApprove": [
         "*"
-      ]
+      ],
+      "disabled": true
     },
     "weblab-mcp": {
       "command": "weblabmcp",
@@ -179,6 +174,24 @@
       "env": {
         "AWS_DEFAULT_REGION": "us-east-1"
       }
+    },
+    "slack-mcp": {
+      "command": "slack-mcp",
+      "args": [],
+      "autoApprove": [
+        "list_my_channels",
+        "search",
+        "search",
+        "search",
+        "get_messages",
+        "get_messages",
+        "get_messages",
+        "get_messages",
+        "search",
+        "get_messages",
+        "search",
+        "post_message"
+      ]
     }
   },
   "powers": {

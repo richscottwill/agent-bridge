@@ -5,7 +5,7 @@ free-text questions. Accepts optional context dict to override parsed values.
 """
 
 import re
-from .types import ParsedQuestion
+from .ptypes import ParsedQuestion
 
 # Valid market codes
 MARKET_CODES = ['US', 'CA', 'UK', 'DE', 'FR', 'IT', 'ES', 'JP', 'AU', 'MX']

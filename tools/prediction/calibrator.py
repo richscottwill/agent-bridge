@@ -8,7 +8,7 @@ import sys
 import os
 sys.path.insert(0, os.path.expanduser('~/shared/tools/data'))
 
-from .types import PredictionScore, CalibrationReport
+from .ptypes import PredictionScore, CalibrationReport
 
 # Lazy DB imports — only called when methods actually execute
 _db = None

@@ -1,0 +1,47 @@
+{
+  "generated": "2026-04-08T16:45:00Z",
+  "projects": {
+    "AU": {
+      "incomplete": 12,
+      "overdue": 3,
+      "overdue_tasks": ["MX Automotive page (19d — multi-homed)", "Look over AU landing page switch (14d)", "Respond to Lena — AU LP URL analysis (5d)"],
+      "status_update": "not_checked_live",
+      "enrichment_gaps": 1,
+      "notes": "Polaris LP revert thread active — may affect AU LP tasks"
+    },
+    "MX": {
+      "incomplete": 4,
+      "overdue": 1,
+      "overdue_tasks": ["MX Automotive page (19d — blocked on Vijeth)"],
+      "status_update": "not_checked_live",
+      "enrichment_gaps": 1,
+      "notes": "IECCP follow-up due 4/9"
+    },
+    "WW Testing": {
+      "incomplete": 7,
+      "overdue": 4,
+      "overdue_tasks": ["Email overlay WW rollout/testing (12d)", "Paid App (8d)", "Testing Document for Kate (7d)", "WW weblab dial-up (1d)"],
+      "status_update": "not_checked_live",
+      "enrichment_gaps": 0,
+      "notes": "Testing doc for Kate is THE HARD THING — 7d overdue"
+    },
+    "Paid App": {
+      "incomplete": 6,
+      "overdue": 0,
+      "status_update": "not_checked_live",
+      "enrichment_gaps": 0,
+      "notes": "PAM budget question from Brandon 5d unanswered"
+    },
+    "WW Acquisition": {
+      "incomplete": 0,
+      "overdue": 0,
+      "notes": "Empty — all tasks completed or archived"
+    }
+  },
+  "recurring_task_proposals": [],
+  "blocker_updates": [
+    {"task": "MX Automotive page", "blocker": "Vijeth footer", "days_blocked": 19, "recommendation": "Escalate or kill"}
+  ],
+  "event_escalation_proposals": [],
+  "market_context_refresh": "not_executed_this_cycle"
+}

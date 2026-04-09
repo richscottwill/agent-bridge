@@ -1,168 +1,235 @@
 {
   "version": "1.0",
   "last_scan": {
-    "timestamp": "2026-04-06T14:30:00Z",
+    "timestamp": "2026-04-08T17:00:00Z",
     "hook": "AM-1",
     "status": "success",
-    "signals_extracted": 5,
-    "channels_scanned": 14,
-    "proactive_queries_run": 3,
-    "proactive_queries_failed": 1,
-    "errors": ["brandoxy search returned invalid_auth — transient Slack API issue"]
+    "signals_extracted": 6,
+    "channels_scanned": 18,
+    "proactive_queries_run": 7,
+    "proactive_queries_failed": 0,
+    "errors": []
   },
   "channels": {
     "C0993SRL6FQ": {
       "channel_name": "rsw-channel",
-      "last_message_ts": "1775266292.891139",
-      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "last_message_ts": "1775603982.687599",
+      "last_scan_ts": "2026-04-08T17:00:00Z",
       "messages_processed": 0,
       "signals_extracted": 0,
-      "notes": "Not scanned this cycle (no unreads)"
+      "notes": "No new human messages since Tuesday brief."
     },
     "C044UG8MCSZ": {
       "channel_name": "ab-paid-search-global",
-      "last_message_ts": "1775252171.890429",
-      "last_scan_ts": "2026-04-06T14:30:00Z",
-      "messages_processed": 0,
-      "signals_extracted": 0,
-      "notes": "No new messages today. ABMA SIM escalation from 4/3 cooling."
+      "last_message_ts": "1775657801.777209",
+      "last_scan_ts": "2026-04-08T17:00:00Z",
+      "messages_processed": 1,
+      "signals_extracted": 1,
+      "notes": "Brandon posted verification delay SIM P411138647. Google Ads access audit thread active (Brandon + Yun handling)."
     },
     "C065KKT53DJ": {
       "channel_name": "ab-paid-search-abix",
       "last_message_ts": "1775251844.058209",
-      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "last_scan_ts": "2026-04-08T17:00:00Z",
       "messages_processed": 0,
       "signals_extracted": 0,
-      "notes": "No new messages today. MX budget/R&O from 4/3 acknowledged."
+      "notes": "No new messages."
     },
     "C05KTAAG14J": {
       "channel_name": "ab-paid-search-app",
       "last_message_ts": "1775256118.064909",
-      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "last_scan_ts": "2026-04-08T17:00:00Z",
       "messages_processed": 0,
-      "signals_extracted": 1,
-      "notes": "No new messages today. Brandon PAM budget @mention STILL UNANSWERED 3+ days."
+      "signals_extracted": 0,
+      "notes": "No new messages. Brandon PAM budget @mention STILL UNANSWERED 5+ days."
     },
     "C06R6R19LG0": {
       "channel_name": "ab-paid-search-oci",
       "last_message_ts": "1775464822.476189",
-      "last_scan_ts": "2026-04-06T14:30:00Z",
-      "messages_processed": 2,
-      "signals_extracted": 2,
-      "notes": "Brandon OCI URL transform question. Yashasvi replied — no transform happening, asked for marketplace details. Thread open."
+      "last_scan_ts": "2026-04-08T17:00:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 0,
+      "notes": "No new messages. Brandon followed up on duplicate hvocijid thread via search."
+    },
+    "C05JFNNENV9": {
+      "channel_name": "mpdm-brandoxy-dtpalmer-prichwil",
+      "last_message_ts": "1775667229.902069",
+      "last_scan_ts": "2026-04-08T17:00:00Z",
+      "messages_processed": 6,
+      "signals_extracted": 4,
+      "notes": "ACTIVE: Polaris LP revert + Brand page transition. Richard responded with data clarification and testing preference (weblab for AU/MX). Dwayne following up on SIM, proposing consolidated feedback process."
+    },
+    "C0ARLFE5QTS": {
+      "channel_name": "mpdm-rskenes-prichwil-arbishar-brandoxy",
+      "last_message_ts": "1775244646.997819",
+      "last_scan_ts": "2026-04-08T17:00:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 0,
+      "notes": "No new messages. Maple/AB Customer segment SIM thread from 4/3."
+    },
+    "C0AQQC767L4": {
+      "channel_name": "mpdm-peteocam-vnichyp-prichwil",
+      "last_message_ts": "1775159611.652749",
+      "last_scan_ts": "2026-04-08T17:00:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 0,
+      "notes": "No new messages."
     },
     "C0A9HBB9H2B": {
       "channel_name": "baloo-interest",
       "last_message_ts": "1775236663.236349",
-      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "last_scan_ts": "2026-04-08T17:00:00Z",
       "messages_processed": 0,
       "signals_extracted": 0,
-      "notes": "No new messages today. Session invites expected."
+      "notes": "No new messages."
     },
-    "C0A1JD8FCUV": {
-      "channel_name": "agentspaces-interest",
-      "last_message_ts": "1775483845.989329",
-      "last_scan_ts": "2026-04-06T14:30:00Z",
-      "messages_processed": 11,
-      "signals_extracted": 0,
-      "notes": "Community support traffic only. No direct relevance."
-    },
-    "C08GJKNC3KM": {
-      "channel_name": "amazon-builder-genai-power-users",
-      "last_message_ts": "1775484479.638529",
-      "last_scan_ts": "2026-04-06T14:30:00Z",
-      "messages_processed": 4,
-      "signals_extracted": 1,
-      "notes": "L5 insight: custom skills for oncall/MCM/sev2 + custom MCP servers. Kiro IDE vs CLI discussion."
-    },
-    "C01NQLC114J": {
-      "channel_name": "marketing_managers_all",
-      "last_message_ts": "1775453429.471279",
-      "last_scan_ts": "2026-04-06T14:30:00Z",
-      "messages_processed": 1,
-      "signals_extracted": 1,
-      "notes": "SlideForge tool cross-post — AI slide deck generator. L5 tool signal."
-    },
-    "C06M7R2SKQW": {
-      "channel_name": "ask-ab-aryabot",
-      "last_message_ts": "1775483880.422319",
-      "last_scan_ts": "2026-04-06T14:30:00Z",
-      "messages_processed": 4,
-      "signals_extracted": 0,
-      "notes": "Bot interaction traffic. AB data queries active."
-    },
-    "C096H6QNW6M": {
-      "channel_name": "bedrock-agentcore-interest",
-      "last_message_ts": "1775473443.743369",
-      "last_scan_ts": "2026-04-06T14:30:00Z",
-      "messages_processed": 1,
-      "signals_extracted": 0,
-      "notes": "Image gen question. No direct relevance."
-    },
-    "C096T4SK3EY": {
-      "channel_name": "andes-workbench-interest",
-      "last_message_ts": "1775478838.894299",
-      "last_scan_ts": "2026-04-06T14:30:00Z",
-      "messages_processed": 4,
-      "signals_extracted": 0,
-      "notes": "Platform support traffic — Glue ARN errors, permissions."
-    },
-    "C03H1S5SYP4": {
-      "channel_name": "ask-ab-data",
+    "C08HJT14HD2": {
+      "channel_name": "baloo-search-and-mcs",
       "last_message_ts": null,
-      "last_scan_ts": "2026-04-06T14:30:00Z",
+      "last_scan_ts": "2026-04-08T17:00:00Z",
       "messages_processed": 0,
       "signals_extracted": 0,
-      "notes": "No new messages today."
+      "notes": "No new messages."
     },
-    "C018126JFSN": {
-      "channel_name": "homeowners",
-      "last_message_ts": "1775332219.906969",
-      "last_scan_ts": "2026-04-06T14:30:00Z",
+    "C0ADCCWRYU9": {
+      "channel_name": "mcs-ps-redirect-expansion",
+      "last_message_ts": null,
+      "last_scan_ts": "2026-04-08T17:00:00Z",
       "messages_processed": 0,
       "signals_extracted": 0,
-      "notes": "Personal channel. Light scan — no work signals."
+      "notes": "No new messages."
+    },
+    "C04UG37S04V": {
+      "channel_name": "paid-search-amzn",
+      "last_message_ts": "1775591527.171179",
+      "last_scan_ts": "2026-04-08T17:00:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 1,
+      "notes": "Google Ads access review thread. Brandon asking about distro signup. Captured via proactive search."
+    },
+    "C048SLEC8RK": {
+      "channel_name": "team-ab-marketing-fun",
+      "last_message_ts": "1775627412.590689",
+      "last_scan_ts": "2026-04-08T17:00:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 1,
+      "notes": "Kate posted from India (photos). Captured via proactive search."
+    },
+    "C0ANDU5LH47": {
+      "channel_name": "ab-marketing-ai",
+      "last_message_ts": null,
+      "last_scan_ts": "2026-04-08T17:00:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 0,
+      "notes": "No new messages since Kate's 4/3 posts about 1P/3P AI tools."
     }
   },
   "dm_conversations": {
     "D044JAKR8RZ": {
       "user_name": "Brandon Munday",
-      "last_message_ts": "1775162557.793439",
-      "last_scan_ts": "2026-04-06T14:30:00Z",
-      "notes": "Not scanned this cycle (no unreads in channel list)."
+      "last_message_ts": "1775501966.296089",
+      "last_scan_ts": "2026-04-08T17:00:00Z",
+      "notes": "Last message from Brandon: '(in the building)' on 4/7. No new messages since."
+    }
+  },
+  "proactive_searches": {
+    "prichwil": {
+      "total_results": 504,
+      "recent_relevant": "Top hits: mpdm Polaris LP thread (Brandon @mentioning Richard for Brand page ETA), PAM budget (still unanswered 5d), ab-paid-search-abix (Yun MX budget questions).",
+      "last_run": "2026-04-08T17:00:00Z"
+    },
+    "brandoxy": {
+      "total_results": 2305,
+      "recent_relevant": "Verification delay SIM in #global. Google Ads distro request in #paid-search-amzn. Polaris LP thread in mpdm. OCI follow-up with ychowta.",
+      "last_run": "2026-04-08T17:00:00Z"
+    },
+    "kataxt": {
+      "total_results": 125,
+      "recent_relevant": "Kate posted from India in #team-ab-marketing-fun (photos). No strategic signals.",
+      "last_run": "2026-04-08T17:00:00Z"
+    },
+    "pam-budget": {
+      "total_results": 9,
+      "recent_relevant": "No new mentions. Original 4/3 message still unanswered.",
+      "last_run": "2026-04-08T17:00:00Z"
+    },
+    "polaris-lp-brand-page": {
+      "total_results": 1,
+      "recent_relevant": "Only Richard's own Tuesday brief. Actual thread in mpdm captured via channel scan.",
+      "last_run": "2026-04-08T17:00:00Z"
     }
   },
   "hot_topics": {
     "active": [
       {
-        "topic": "OCI URL Transform / Ref Tag Integrity",
-        "first_seen": "2026-04-06T03:30:00Z",
-        "last_seen": "2026-04-06T08:40:00Z",
-        "channels": ["C06R6R19LG0"],
-        "key_participants": ["brandoxy", "ychowta"],
-        "signal_count": 3,
-        "status": "active",
-        "notes": "Yashasvi says no transform. Brandon needs to reply with marketplace/log details."
+        "topic": "Polaris LP Revert / Brand Page Transition",
+        "first_seen": "2026-04-07T15:17:00Z",
+        "last_seen": "2026-04-08T16:53:00Z",
+        "channels": ["C05JFNNENV9"],
+        "key_participants": ["brandoxy", "dtpalmer", "prichwil"],
+        "signal_count": 5,
+        "status": "active-progressing",
+        "notes": "Richard responded with data clarification and testing preference (weblab AU/MX). Dwayne following up on SIM, proposing consolidated feedback. Revert to legacy planned Thursday. Next: Richard prepare consolidated feedback."
       },
       {
         "topic": "PAM Budget Availability",
         "first_seen": "2026-04-03T22:41:00Z",
         "last_seen": "2026-04-03T22:41:00Z",
         "channels": ["C05KTAAG14J"],
-        "key_participants": ["brandoxy"],
-        "signal_count": 1,
-        "status": "stale",
-        "notes": "3+ days unanswered. Richard needs to respond."
+        "key_participants": ["brandoxy", "peteocam"],
+        "signal_count": 2,
+        "status": "critical",
+        "notes": "5+ days unanswered. Brandon direct @mention. Pete also asking about PAM tracker for DE -66% WoW decline. Richard MUST respond."
       },
       {
-        "topic": "MX Budget / R&O Process Change",
-        "first_seen": "2026-04-03T19:46:00Z",
-        "last_seen": "2026-04-03T21:30:00Z",
-        "channels": ["C065KKT53DJ"],
-        "key_participants": ["yunchu", "brandoxy", "prichwil"],
-        "signal_count": 3,
+        "topic": "Verification Delay SIM",
+        "first_seen": "2026-04-08T14:16:00Z",
+        "last_seen": "2026-04-08T14:16:00Z",
+        "channels": ["C044UG8MCSZ"],
+        "key_participants": ["brandoxy"],
+        "signal_count": 1,
+        "status": "new",
+        "notes": "Brandon shared P411138647. Monitor for Richard-relevant scope."
+      },
+      {
+        "topic": "Brand LP Consolidated Feedback",
+        "first_seen": "2026-04-08T16:48:00Z",
+        "last_seen": "2026-04-08T16:53:00Z",
+        "channels": ["C05JFNNENV9"],
+        "key_participants": ["dtpalmer", "prichwil", "brandoxy"],
+        "signal_count": 2,
+        "status": "new",
+        "notes": "Dwayne proposing structured feedback process. Richard should prepare consolidated PS team feedback for weblab/migration scope."
+      },
+      {
+        "topic": "Google Ads Access Audit",
+        "first_seen": "2026-04-07T16:58:00Z",
+        "last_seen": "2026-04-08T12:00:00Z",
+        "channels": ["C044UG8MCSZ", "C04UG37S04V"],
+        "key_participants": ["yunchu", "brandoxy", "vnichyp"],
+        "signal_count": 4,
         "status": "active",
-        "notes": "Richard acknowledged via +1. No new activity."
+        "notes": "Brandon + Yun handling. Team not on email distro. OCI emails need admin access. No Richard action needed."
+      },
+      {
+        "topic": "Monthly Recaps + Goal Updates",
+        "first_seen": "2026-04-06T16:07:00Z",
+        "last_seen": "2026-04-07T00:00:00Z",
+        "channels": ["C044UG8MCSZ"],
+        "key_participants": ["brandoxy", "staceygu"],
+        "signal_count": 1,
+        "status": "active",
+        "notes": "Recaps were due 4/7. Goals due 4/8. No completion signal in Slack."
+      },
+      {
+        "topic": "W14 Dashboard / NA Data Delay",
+        "first_seen": "2026-04-06T15:31:00Z",
+        "last_seen": "2026-04-07T14:59:00Z",
+        "channels": ["C044UG8MCSZ"],
+        "key_participants": ["aditthk", "yunchu"],
+        "signal_count": 2,
+        "status": "active",
+        "notes": "No new messages. EU5+AU+JP normal. NA data missing 4/3-4/4."
       },
       {
         "topic": "Baloo Early Access",
@@ -172,28 +239,30 @@
         "key_participants": ["kpantham"],
         "signal_count": 1,
         "status": "active",
-        "notes": "Session invites expected by 4/6."
+        "notes": "No new messages. Session invites still expected."
       }
     ],
     "cooled": [
       {
+        "topic": "OCI URL Transform / Ref Tag Integrity",
+        "first_seen": "2026-04-06T03:30:00Z",
+        "last_seen": "2026-04-06T08:40:00Z",
+        "status": "cooling",
+        "notes": "No new messages. Brandon followed up with ychowta on duplicate hvocijid issue."
+      },
+      {
+        "topic": "MX Budget / R&O Process Change",
+        "first_seen": "2026-04-03T19:46:00Z",
+        "last_seen": "2026-04-03T21:30:00Z",
+        "status": "cooling",
+        "notes": "No new activity."
+      },
+      {
         "topic": "ABMA SIM Escalation Protocol",
         "first_seen": "2026-04-03T21:36:00Z",
-        "last_seen": "2026-04-03T21:36:00Z",
-        "status": "cooling",
-        "notes": "No new activity. Appears resolved."
-      },
-      {
-        "topic": "Q1 Closing / Budget Actuals",
-        "first_seen": "2026-04-02T03:00:00Z",
-        "last_seen": "2026-04-03T21:30:00Z",
-        "status": "cooled"
-      },
-      {
-        "topic": "AU Lena CPA / Redirect Situation",
-        "first_seen": "2026-04-01T17:00:00Z",
-        "last_seen": "2026-04-02T03:05:00Z",
-        "status": "cooled"
+        "last_seen": "2026-04-06T16:24:00Z",
+        "status": "resolved",
+        "notes": "Resolved. All SIMs Sev 2.5 + Vijay Kumar watcher."
       }
     ]
   },

@@ -1,0 +1,47 @@
+{
+  "generated": "2026-04-08T16:45:00Z",
+  "my_tasks": {
+    "enrichment_proposals": [
+      {
+        "task_gid": "1213963678745039",
+        "name": "Pull AU Polaris LP conversion rate data",
+        "project": "AU",
+        "field": "kiro_rw",
+        "proposed_value": "4/8: Due today. Pull Polaris LP CVR data for Brand page transition thread.",
+        "reason": "Today priority, missing Kiro_RW context"
+      },
+      {
+        "task_gid": "1213964186504305",
+        "name": "Send IECCP follow-up summary to Lorena",
+        "project": "MX",
+        "field": "kiro_rw",
+        "proposed_value": "4/8: Due 4/9. Draft IECCP summary for Lorena per MX sync.",
+        "reason": "Today priority, missing Kiro_RW context"
+      },
+      {
+        "task_gid": "1213964668984060",
+        "name": "Brandon 1:1: Draft Enhanced Match FAQ for legal",
+        "project": null,
+        "fields": ["kiro_rw", "next_action_rw"],
+        "proposed_kiro": "4/8: Urgent. Draft FAQ doc for LiveRamp Enhanced Match legal review.",
+        "proposed_next_action": "Draft FAQ outline, pull LiveRamp data points",
+        "reason": "Urgent priority, missing both Kiro_RW and Next_Action"
+      }
+    ]
+  },
+  "portfolio": {
+    "enrichment_proposals": []
+  },
+  "bucket_cap_alerts": {
+    "sweep": {"count": 8, "cap": 5, "over_by": 3},
+    "core": {"count": 10, "cap": 4, "over_by": 6},
+    "engine_room": {"count": 9, "cap": 6, "over_by": 3},
+    "admin": {"count": 5, "cap": 3, "over_by": 2}
+  },
+  "overdue_kill_or_revive": [
+    {"task_gid": "1213072707685834", "name": "MX Automotive page", "project": "MX", "days_overdue": 19, "recommendation": "Kill or extend — blocked on Vijeth footer 19d"},
+    {"task_gid": "1213796951745232", "name": "Look over AU landing page switch", "project": "AU", "days_overdue": 14, "recommendation": "Review — may be superseded by Polaris LP revert thread"},
+    {"task_gid": "1213125740755931", "name": "Email overlay WW rollout/testing", "project": "WW Testing", "days_overdue": 12, "recommendation": "Extend or kill — stale 12d"},
+    {"task_gid": "1212988092117041", "name": "Paid App", "project": "WW Testing", "days_overdue": 8, "recommendation": "Extend or kill — stale 8d"}
+  ]
+}

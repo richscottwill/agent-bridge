@@ -6,11 +6,17 @@ inclusion: manual
 ## Common Draft Failures (from experiment data)
 Watch for these in every draft:
 
-1. **Name people, not teams.** Wrong: "I'll work with the team." Right: "I'll connect with Yun-Kang on redirect reporting and loop in Alexis on AU web analytics." If you don't know who, say so.
+### Failure 1: Naming Teams Instead of People
+Wrong: "I'll work with the team." Right: "I'll connect with Yun-Kang on redirect reporting and loop in Alexis on AU web analytics." If you don't know who, say so.
 
-2. **Commit to dates, not ranges.** Wrong: "within the next two weeks." Right: "by EOW" or "target Friday 4/11." Uncertain? Give best estimate + flag: "targeting EOW, depends on Alexis's mapping timeline."
+### Failure 2: Vague Timelines
+Wrong: "within the next two weeks." Right: "by EOW" or "target Friday 4/11." Uncertain? Give best estimate + flag: "targeting EOW, depends on Alexis's mapping timeline."
 
-3. **Read the political subtext.** For Tier 3 stakeholders (Lena, Nick), check memory.md for relationship dynamics. Tone: measured and in-control, never reactive or scrambling. Brandon's private reads inform tone but never appear in the email.
+### Failure 3: Em-Dashes in Draft
+Never use em-dashes (—) in drafted emails. Replace with commas, periods, colons, or parentheticals. Scan every draft before finalizing.
+
+### Failure 4: Missing Political Subtext
+For Tier 3 stakeholders (Lena, Nick), check memory.md for relationship dynamics. Tone: measured and in-control, never reactive or scrambling. Brandon's private reads inform tone but never appear in the email.
 
 ## Email (Operational / Coordination)
 - Purpose: Move work forward, unblock people, coordinate logistics

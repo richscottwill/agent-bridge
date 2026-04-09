@@ -1,0 +1,67 @@
+# ES W14 Data Brief
+
+## Headline numbers
+- Registrations: 477 (-25% WoW)
+- Spend: $30K (-21% WoW)
+- CPA: $63 (+6% WoW)
+- Brand regs: 288 (-19% WoW)
+- NB regs: 189 (-32% WoW)
+
+## ie%CCP
+- This week: 60%
+- Last week: 58%
+- Target: 100%
+
+## Registration drivers (what caused the WoW change?)
+Primary driver: clicks (-23% WoW) more than CVR (-2% WoW)
+
+Brand:
+  Regs: 288 vs 357 LW (-19%)
+  CVR: 2.92% vs 2.55% (+14%)
+  Clicks: 9859 vs 13993 (-30%)
+  CPA: $31 vs $35 (-12%)
+
+Non-Brand:
+  Regs: 189 vs 279 LW (-32%)
+  CVR: 1.80% vs 2.23% (-19%)
+  Clicks: 10519 vs 12528 (-16%)
+  CPA: $113 vs $92 (+23%)
+
+## 8-week trend
+<!-- Data: market_trend("ES", weeks=8) -->
+
+## YoY comparison
+- Regs: 477 TY vs 572 LY (-17%)
+- Spend: $30K TY vs $24K LY (+25%)
+- Brand regs: -8% YoY
+- NB regs: -27% YoY
+- NB CPA: $113 vs $62 LY (+83%)
+- WoW pattern: TY -25% vs LY -1% (same week)
+
+## Monthly projection inputs
+- Month: 2026 Mar (31/31 days elapsed, 0 remaining)
+- MTD actuals: $170K spend, 2862 regs (1712 Brand, 1150 NB)
+- OP2 targets: $145K spend, 2.4K regs
+- OP2 pace check: at 100% through the month, linear OP2 pace would be 2.4K regs and $145K spend
+- MTD vs OP2 pace: +19% regs, +18% spend
+- Simple linear projection (ingester estimate, not accounting for seasonality/holidays): $170K spend, 2.9K regs, $59 CPA
+- NOTE: Analyst should produce the actual projection accounting for weekday/weekend mix, holidays, LY patterns, and known upcoming changes.
+
+## Anomalies (>20% deviation from recent avg)
+- regs: below avg by 26% (current: 477.00, avg: 647.14)
+- cost: below avg by 21% (current: 30250.61, avg: 38245.13)
+- brand regs: below avg by 27% (current: 288.00, avg: 396.29)
+- nb regs: below avg by 25% (current: 189.00, avg: 250.86)
+- nb cvr: below avg by 22% (current: 0.02, avg: 0.02)
+
+## This year weekly trend (last 12 weeks)
+<!-- Data: market_trend("ES", weeks=12) -->
+
+## Last year same period (W10 to W18)
+<!-- Data: db("SELECT * FROM weekly_metrics WHERE market='ES' AND week LIKE '2025%' ORDER BY week") -->
+
+## Detected streaks
+- Regs declining 3 consecutive weeks (710 in W11 to 477 in W14)
+
+## Daily breakdown
+<!-- Data: db("SELECT * FROM daily_metrics WHERE market='ES' AND week='2026 W14' ORDER BY date") -->

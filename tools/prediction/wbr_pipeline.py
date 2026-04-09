@@ -119,8 +119,81 @@ def score_prior_predictions(con, current_week: str) -> ScoringResult:
             calibration = 1.0 + (mean_error - 15) / 100
         calibration = max(0.5, min(2.0, calibration))
 
+    # ── Gap 2 + Gap 4: Persist calibration + CI width adjustment per market ──
+    total_scored = hits + misses + surprises
+    if total_scored > 0:
+        hit_rate = hits / total_scored
+    else:
+        hit_rate = 0.0
+
+    # Gap 4: Compute CI width adjustment from hit rate
+    ci_width_adj = 1.0
+    if total_scored > 0:
+        if hit_rate < 0.60:
+            # CIs too narrow → widen
+            ci_width_adj = 1.0 + (0.70 - hit_rate) * 2
+        elif hit_rate > 0.85 and mean_error > 15:
+            # CIs too wide → narrow
+            ci_width_adj = max(0.7, 1.0 - (hit_rate - 0.85))
+        # else: ci_width_adj stays 1.0
+
+    # Persist per-market calibration state
+    cal_upsert_rows = []
+    for market in ALL_MARKETS:
+        # Compute per-market stats from scored forecasts (rolling last 20)
+        try:
+            market_stats = con.execute(f"""
+                SELECT
+                    COUNT(*) as total,
+                    SUM(CASE WHEN score = 'HIT' THEN 1 ELSE 0 END) as hits,
+                    AVG(error_pct) as avg_err
+                FROM (
+                    SELECT score, error_pct
+                    FROM ps.forecasts
+                    WHERE market = '{market}' AND scored = true
+                    AND metric_name = 'registrations'
+                    ORDER BY forecast_date DESC
+                    LIMIT 20
+                )
+            """).fetchone()
+
+            if market_stats and market_stats[0] and market_stats[0] > 0:
+                m_total = int(market_stats[0])
+                m_hits = int(market_stats[1] or 0)
+                m_hit_rate = m_hits / m_total
+                m_avg_err = float(market_stats[2] or 0)
+
+                # Per-market CI width adjustment
+                m_ci_adj = 1.0
+                if m_hit_rate < 0.60:
+                    m_ci_adj = 1.0 + (0.70 - m_hit_rate) * 2
+                elif m_hit_rate > 0.85 and m_avg_err > 15:
+                    m_ci_adj = max(0.7, 1.0 - (m_hit_rate - 0.85))
+
+                # Per-market calibration factor from rolling error
+                m_cal = 1.0
+                if m_avg_err > 15:
+                    m_cal = 1.0 + (m_avg_err - 15) / 100
+                m_cal = max(0.5, min(2.0, m_cal))
+
+                cal_upsert_rows.append((market, round(m_cal, 4), round(m_ci_adj, 4),
+                                        current_week, m_total, round(m_hit_rate, 4), round(m_avg_err, 2)))
+        except Exception as e:
+            print(f"  WARN: calibration stats query failed for {market}: {e}")
+
+    if cal_upsert_rows:
+        try:
+            con.executemany("""
+                INSERT OR REPLACE INTO ps.calibration_state
+                (market, metric_name, calibration_factor, ci_width_adjustment,
+                 last_scored_week, total_scored, hit_rate, mean_error_pct, updated_at)
+                VALUES (?, 'registrations', ?, ?, ?, ?, ?, ?, NOW())
+            """, cal_upsert_rows)
+        except Exception as e:
+            print(f"  WARN: calibration_state batch upsert failed: {e}")
+
     return ScoringResult(
-        predictions_scored=hits + misses + surprises,
+        predictions_scored=total_scored,
         hits=hits,
         misses=misses,
         surprises=surprises,
@@ -168,6 +241,22 @@ class WBRPipeline:
                 projections_written INTEGER,
                 predictions_scored INTEGER,
                 errors VARCHAR
+            )
+        """)
+
+        # calibration_state — persistent calibration across runs (Gap 2 + Gap 4)
+        self.con.execute("""
+            CREATE TABLE IF NOT EXISTS ps.calibration_state (
+                market VARCHAR,
+                metric_name VARCHAR,
+                calibration_factor DOUBLE,
+                ci_width_adjustment DOUBLE,
+                last_scored_week VARCHAR,
+                total_scored INTEGER,
+                hit_rate DOUBLE,
+                mean_error_pct DOUBLE,
+                updated_at TIMESTAMP,
+                PRIMARY KEY (market, metric_name)
             )
         """)
 
@@ -421,9 +510,42 @@ class WBRPipeline:
         """Stage 3: Score prior predictions against new actuals."""
         return score_prior_predictions(self.con, self._current_week_key())
 
+    def _stage_update_priors(self) -> int:
+        """Stage 3.5: Auto-update seasonal priors for markets with 52+ weeks (Gap 1).
+
+        Inserted between Score and Project so priors are fresh before projections.
+        Returns count of markets updated.
+        """
+        projector = BayesianProjector(self.con, 1.0)
+        updated = 0
+        for market in ALL_MARKETS:
+            try:
+                if projector._update_seasonal_priors(market):
+                    updated += 1
+            except Exception as e:
+                print(f"  WARN: seasonal prior update failed for {market}: {e}")
+        return updated
+
     def _stage_project(self, calibration_factor: float) -> list:
         """Stage 4: BayesianProjector for all 10 markets."""
-        projector = BayesianProjector(self.con, calibration_factor)
+        # Gap 2: Read persisted calibration from ps.calibration_state if available
+        # Fall back to the scoring result or 1.0
+        persisted_cal = calibration_factor
+        try:
+            cal_row = self.con.execute("""
+                SELECT AVG(calibration_factor) as avg_cal
+                FROM ps.calibration_state
+                WHERE metric_name = 'registrations' AND total_scored >= 3
+            """).fetchone()
+            if cal_row and cal_row[0] is not None:
+                persisted_cal = float(cal_row[0])
+                print(f"  Using persisted calibration factor: {persisted_cal:.3f} (from ps.calibration_state)")
+            else:
+                print(f"  No persisted calibration — using scoring result: {calibration_factor:.3f}")
+        except Exception:
+            print(f"  Calibration state read failed — using scoring result: {calibration_factor:.3f}")
+
+        projector = BayesianProjector(self.con, persisted_cal)
 
         # Determine target week (next week from current)
         year, wk = self._current_week_key().split('-W')
@@ -442,12 +564,54 @@ class WBRPipeline:
                 print(f"  WARN: projection failed for {market}: {e}")
                 traceback.print_exc()
 
-        # Write projections to ps.forecasts
+        # Write weekly projections to ps.forecasts
         written = self._write_projections(projections, next_wk_key)
+
+        # ── Gap 3: Monthly + Quarterly projections ──
+        # Derive current month and quarter from the week key
+        try:
+            year_int = int(year)
+            # Approximate month from week number
+            from datetime import timedelta
+            jan4 = datetime(year_int, 1, 4)
+            start_of_w1 = jan4 - timedelta(days=jan4.weekday())
+            target_date = start_of_w1 + timedelta(weeks=next_wk_num - 1)
+            current_month = target_date.month
+            current_quarter = (current_month - 1) // 3 + 1
+            month_key = f"{year_int}-M{current_month:02d}"
+            quarter_key = f"{year_int}-Q{current_quarter}"
+
+            monthly_projections = []
+            quarterly_projections = []
+            for market in ALL_MARKETS:
+                try:
+                    mp = projector.project_market_monthly(market, month_key)
+                    if mp:
+                        monthly_projections.append(mp)
+                except Exception as e:
+                    print(f"  WARN: monthly projection failed for {market}: {e}")
+
+                try:
+                    qp = projector.project_market_quarterly(market, quarter_key)
+                    if qp:
+                        quarterly_projections.append(qp)
+                except Exception as e:
+                    print(f"  WARN: quarterly projection failed for {market}: {e}")
+
+            # Write monthly + quarterly to ps.forecasts
+            m_written = self._write_projections(monthly_projections, month_key, period_type='monthly')
+            q_written = self._write_projections(quarterly_projections, quarter_key, period_type='quarterly')
+            written += m_written + q_written
+            print(f"  Monthly: {len(monthly_projections)} markets, Quarterly: {len(quarterly_projections)} markets")
+        except Exception as e:
+            print(f"  WARN: monthly/quarterly projections failed: {e}")
+            traceback.print_exc()
+
         print(f"  Project: {len(projections)} markets, {written} forecast rows written")
         return projections
 
-    def _write_projections(self, projections: list, target_period: str) -> int:
+    def _write_projections(self, projections: list, target_period: str,
+                           period_type: str = 'weekly') -> int:
         """Write MarketProjection list to ps.forecasts with scored=false."""
         forecast_date = datetime.now().strftime('%Y-%m-%d')
         written = 0
@@ -480,9 +644,9 @@ class WBRPipeline:
                         (market, channel, metric_name, forecast_date, target_period,
                          period_type, predicted_value, confidence_low, confidence_high,
                          method, scored)
-                        VALUES (?, 'ps', ?, ?, ?, 'weekly', ?, ?, ?, ?, false)
+                        VALUES (?, 'ps', ?, ?, ?, ?, ?, ?, ?, ?, false)
                     """, [proj.market, metric, forecast_date, target_period,
-                          value, ci_l, ci_h, proj.method])
+                          period_type, value, ci_l, ci_h, proj.method])
                     written += 1
                 except Exception as e:
                     print(f"  WARN: forecast write failed {proj.market}/{metric}: {e}")
@@ -686,6 +850,18 @@ class WBRPipeline:
             result.errors.append(f"Score: {e}")
             result.calibration = 1.0
             print(f"  ERROR: Score failed — {e}")
+            traceback.print_exc()
+
+        # ── Stage 3.5: Update Seasonal Priors (Gap 1) ──
+        try:
+            print("Stage 3.5: Update seasonal priors...")
+            priors_updated = self._stage_update_priors()
+            result.stages_completed.append('update_priors')
+            print(f"  Priors: {priors_updated} markets updated")
+        except Exception as e:
+            result.stages_failed.append('update_priors')
+            result.errors.append(f"Update priors: {e}")
+            print(f"  ERROR: Prior update failed — {e}")
             traceback.print_exc()
 
         # ── Stage 4: Project ──

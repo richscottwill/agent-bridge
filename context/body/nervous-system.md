@@ -37,6 +37,8 @@ Brain | Monthly | Score decisions VALIDATED/PARTIALLY/INVALIDATED/PENDING. INVAL
 
 ### Loop 2: Prediction Scoring
 Eyes | Daily + weekly | Score predicted QA: HIT/MISS/SURPRISE. Target ≥60%. Currently inactive — predicted QA cleared from Eyes (stale content experiment, Run 18). Reactivate when AM-2 generates fresh predictions.
+- **Reactivation trigger:** AM-2 hook writes ≥3 predicted questions to Eyes "Predicted Questions" section. Once present, Loop 2 auto-resumes daily scoring against meeting outcomes and Slack signals.
+- **Scoring protocol:** After each meeting/event, compare predicted questions to actual questions asked. HIT = question asked as predicted. MISS = predicted but not asked. SURPRISE = asked but not predicted. Weekly aggregate: hits/(hits+misses) ≥ 60% target.
 
 ### Loop 3: Pattern Trajectory
 rw-tracker.md | Weekly (Friday) | IMPROVING/STUCK/WORSENING/RESOLVED. STUCK 3+ wk → structural fix. Willpower → trainer. Systems → device.

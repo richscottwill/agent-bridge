@@ -28,6 +28,7 @@ Richard writes like someone who respects the reader's time. Direct, concise, no 
 - Excessive pleasantries before getting to the point
 - "Per my last email" or passive-aggressive phrasing
 - Bold or colored text in emails
+- Em-dashes (—). Never use em-dashes in any drafted output. Use a comma, period, colon, or parenthetical instead. Before finalizing any draft, scan for em-dashes and replace them.
 
 ## Drafting Checklist
 1. Does the greeting match the audience tier?
@@ -40,6 +41,7 @@ Richard writes like someone who respects the reader's time. Direct, concise, no 
 8. If data is included, is there a "so what" interpretation?
 9. If recommending something, is the reasoning included?
 10. If going to L7+, does it connect to business impact?
+11. Are there any em-dashes (—) in the draft? If so, replace with commas, periods, colons, or parentheticals.
 
 ## Voice Evolution
 Richard's voice is already strong. The goal is to sharpen it over time — not change it. When reviewing any draft, run this checklist:

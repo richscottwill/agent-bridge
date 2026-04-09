@@ -91,8 +91,6 @@ Karpathy selects using a three-stage process: exclude → select target → sele
 3. Targets with stale sections (>7 days since last update)
 4. UCB-weighted random: query `autoresearch_selection_weights` view, sample proportional to UCB score (balances exploitation of known-good combos with exploration of untested ones)
 
-Valid targets: organs (`~/shared/context/body/*.md` — information-retrieval evals), style guides (`~/.kiro/steering/richard-style-*.md`), market context (`~/shared/wiki/callouts/*-context.md`), callout principles (`~/.kiro/steering/callout-principles.md`), hook prompts (`~/.kiro/hooks/*.kiro.hook`) — all non-organ targets use output-quality evals.
-
 **Stage 2 — Technique selection:**
 - Query `autoresearch_priors` for the selected target
 - Sample technique proportional to UCB score (posterior_mean + posterior_std)

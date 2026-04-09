@@ -114,7 +114,7 @@ def db_upsert(table, data, key_cols, db_path=None):
 def market_week(market, week, db_path=None):
     """Get weekly metrics for a single market+week. Returns dict or None."""
     rows = db(
-        f"SELECT * FROM weekly_metrics WHERE market = '{market}' AND week = '{week}'",
+        f"SELECT * FROM ps.performance WHERE market = '{market}' AND period_type = 'weekly' AND period_key = '{week}'",
         db_path=db_path,
     )
     return rows[0] if rows else None
@@ -123,8 +123,8 @@ def market_week(market, week, db_path=None):
 def market_trend(market, weeks=8, db_path=None):
     """Get last N weeks of weekly metrics for a market, most recent first."""
     return db(
-        f"SELECT * FROM weekly_metrics WHERE market = '{market}' "
-        f"ORDER BY week DESC LIMIT {int(weeks)}",
+        f"SELECT * FROM ps.performance WHERE market = '{market}' AND period_type = 'weekly' "
+        f"ORDER BY period_start DESC LIMIT {int(weeks)}",
         db_path=db_path,
     )
 
@@ -132,7 +132,8 @@ def market_trend(market, weeks=8, db_path=None):
 def market_month(market, month, db_path=None):
     """Get monthly metrics + OP2 targets for a market+month. Returns dict or None."""
     rows = db(
-        f"SELECT * FROM monthly_metrics WHERE market = '{market}' AND month = '{month}'",
+        f"SELECT * FROM ps.performance WHERE market = '{market}' "
+        f"AND period_type = 'monthly' AND period_key = '{month}'",
         db_path=db_path,
     )
     return rows[0] if rows else None

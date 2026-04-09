@@ -44,6 +44,7 @@ class BayesianProjector:
         self.con = con
         self.calibration_factor = calibration_factor
         self.core = BayesianCore()
+        self._priors_updated = set()  # Gap 1: track which markets had priors updated this instance
 
     # ── Data fetching ──────────────────────────────────────────────────
 
@@ -77,6 +78,105 @@ class BayesianProjector:
             WHERE market = '{market}'
         """).fetchall()
         return {int(r[0]): float(r[1]) for r in rows}
+
+    def _update_seasonal_priors(self, market: str) -> bool:
+        """Gap 1: Auto-update seasonal priors from accumulated weekly data.
+
+        Only updates if:
+        - Market has 52+ weeks of data
+        - Market hasn't been updated this instance (class-level cache)
+        - Last update was >7 days ago (or never)
+
+        Returns True if priors were updated, False otherwise.
+        """
+        if market in self._priors_updated:
+            return False
+
+        # Check if last update was >7 days ago
+        try:
+            last_update = self.con.execute(f"""
+                SELECT MAX(updated_at) FROM ps.seasonal_priors
+                WHERE market = '{market}' AND source = 'auto_update'
+            """).fetchone()
+            if last_update and last_update[0]:
+                from datetime import datetime, timedelta
+                last_ts = last_update[0]
+                if hasattr(last_ts, 'timestamp'):
+                    if (datetime.now() - last_ts).days < 7:
+                        self._priors_updated.add(market)
+                        return False
+        except Exception:
+            pass  # If check fails, proceed with update
+
+        # Fetch all weekly history for this market
+        rows = self.con.execute(f"""
+            SELECT period_key, period_start, registrations
+            FROM ps.performance
+            WHERE market = '{market}' AND period_type = 'weekly'
+            AND registrations IS NOT NULL AND registrations > 0
+            ORDER BY period_start ASC
+        """).fetchall()
+
+        if len(rows) < 52:
+            self._priors_updated.add(market)
+            return False
+
+        # Compute seasonal factors: for each week_of_year, mean(regs) / overall_mean
+        from collections import defaultdict
+        week_buckets = defaultdict(list)
+        all_regs = []
+
+        for pk, ps_date, regs in rows:
+            reg_val = float(regs)
+            all_regs.append(reg_val)
+            # Extract week of year from period_key (e.g. '2026-W14' → 14)
+            try:
+                woy = int(str(pk).split('-W')[1])
+            except (IndexError, ValueError):
+                # Fallback: use position mod 52
+                woy = len(all_regs) % 52
+                if woy == 0:
+                    woy = 52
+            week_buckets[woy].append(reg_val)
+
+        overall_mean = sum(all_regs) / len(all_regs) if all_regs else 1.0
+        if overall_mean <= 0:
+            self._priors_updated.add(market)
+            return False
+
+        # Fetch existing stored priors
+        existing = self._fetch_seasonal_priors(market)
+
+        # Compute new data-derived factors and blend with existing — batch upsert
+        upsert_rows = []
+        for woy in range(1, 53):
+            bucket = week_buckets.get(woy, [])
+            if not bucket:
+                continue
+
+            data_factor = (sum(bucket) / len(bucket)) / overall_mean
+            existing_factor = existing.get(woy, 1.0)
+
+            # Blend: 0.8 * data-derived + 0.2 * existing (heavier on data now)
+            blended = 0.8 * data_factor + 0.2 * existing_factor
+
+            # Confidence based on sample size
+            confidence = min(0.95, 0.5 + len(bucket) * 0.1)
+            notes = f"n={len(bucket)}, data={data_factor:.3f}, prior={existing_factor:.3f}"
+            upsert_rows.append((market, woy, round(blended, 4), round(confidence, 2), notes))
+
+        if upsert_rows:
+            try:
+                self.con.executemany("""
+                    INSERT OR REPLACE INTO ps.seasonal_priors
+                    (market, week_of_year, seasonal_index, confidence, source, notes, updated_at)
+                    VALUES (?, ?, ?, ?, 'auto_update', ?, NOW())
+                """, upsert_rows)
+            except Exception as e:
+                logger.warning(f"{market}: batch seasonal prior upsert failed: {e}")
+
+        self._priors_updated.add(market)
+        return True
 
     def _fetch_ieccp(self, market: str) -> float | None:
         """Get latest ie%CCP from ps.performance for this market."""
@@ -386,6 +486,173 @@ class BayesianProjector:
             clicks=round(adj_clicks),
         )
 
+    # ── Gap 3: Monthly + Quarterly Bayesian models ───────────────────
+
+    def project_market_monthly(self, market: str, target_month_key: str) -> MarketProjection | None:
+        """Gap 3: Proper monthly Bayesian projection using monthly history.
+
+        Args:
+            market: Market code (e.g. 'AU')
+            target_month_key: e.g. '2026-M04'
+
+        Returns MarketProjection with period_type context, or None if insufficient data.
+        """
+        monthly = self._fetch_monthly_history(market)
+        if len(monthly) < 6:
+            # Not enough monthly data — fall back to None (caller can skip)
+            return None
+
+        # Build prior from monthly regs directly
+        hist_for_core = [{'value': float(m.get('regs', 0) or 0)} for m in monthly if m.get('regs')]
+        if len(hist_for_core) < 3:
+            return None
+
+        prior = self.core.build_prior(hist_for_core, 'value')
+
+        # Monthly seasonal adjustment: derive from monthly data itself
+        monthly_regs = [float(m.get('regs', 0) or 0) for m in monthly if m.get('regs')]
+        overall_mean = sum(monthly_regs) / len(monthly_regs) if monthly_regs else 1.0
+
+        # Group by month number for seasonal pattern
+        from collections import defaultdict
+        month_buckets = defaultdict(list)
+        for m in monthly:
+            pk = m.get('period_key', '')
+            regs = m.get('regs')
+            if not regs or not pk:
+                continue
+            try:
+                month_num = int(pk.split('-M')[1])
+                month_buckets[month_num].append(float(regs))
+            except (IndexError, ValueError):
+                continue
+
+        # Target month number
+        try:
+            target_month_num = int(target_month_key.split('-M')[1])
+        except (IndexError, ValueError):
+            target_month_num = 1
+
+        seasonal_adj = 1.0
+        if overall_mean > 0 and target_month_num in month_buckets:
+            bucket = month_buckets[target_month_num]
+            seasonal_adj = (sum(bucket) / len(bucket)) / overall_mean
+
+        # Update posterior with recent months
+        recent = hist_for_core[-3:] if len(hist_for_core) >= 3 else hist_for_core
+        posterior = self.core.update_posterior(prior, recent, self.calibration_factor)
+
+        base_regs = self.core.point_estimate(posterior, horizon=1)
+        adj_regs = max(0, base_regs * seasonal_adj)
+
+        # Cost projection from monthly data
+        monthly_costs = [float(m.get('cost', 0) or 0) for m in monthly if m.get('cost')]
+        monthly_regs_vals = [float(m.get('regs', 0) or 0) for m in monthly if m.get('regs')]
+        avg_cpa = (sum(monthly_costs) / sum(monthly_regs_vals)) if sum(monthly_regs_vals) > 0 else 0
+        adj_cost = adj_regs * avg_cpa
+
+        # CI
+        ci_low, ci_high = self.core.credible_interval(posterior, level=0.7)
+        ci_regs_low = max(0, ci_low * seasonal_adj)
+        ci_regs_high = ci_high * seasonal_adj
+
+        # OP2 comparison
+        vs_op2_spend_pct = None
+        try:
+            targets = self._fetch_monthly_targets(market)
+            month_targets = targets.get(target_month_key, {})
+            op2_cost = month_targets.get('cost')
+            if op2_cost and op2_cost > 0:
+                vs_op2_spend_pct = round((adj_cost / op2_cost - 1) * 100, 1)
+        except Exception:
+            pass
+
+        brand = SegmentForecast(regs=round(adj_regs * 0.5), cost=round(adj_cost * 0.5, 2), cpa=round(avg_cpa, 2), clicks=0)
+        nb = SegmentForecast(regs=round(adj_regs * 0.5), cost=round(adj_cost * 0.5, 2), cpa=round(avg_cpa, 2), clicks=0)
+
+        return MarketProjection(
+            market=market,
+            brand=brand,
+            nb=nb,
+            total_regs=round(adj_regs),
+            total_cost=round(adj_cost, 2),
+            ci_regs_low=round(ci_regs_low),
+            ci_regs_high=round(ci_regs_high),
+            vs_op2_spend_pct=vs_op2_spend_pct,
+            method='bayesian_monthly',
+            week=target_month_key,
+        )
+
+    def project_market_quarterly(self, market: str, target_quarter_key: str) -> MarketProjection | None:
+        """Gap 3: Quarterly projection by summing 3 monthly projections.
+
+        Args:
+            market: Market code
+            target_quarter_key: e.g. '2026-Q2'
+
+        Returns MarketProjection or None if monthly projections unavailable.
+        """
+        try:
+            year = int(target_quarter_key.split('-Q')[0])
+            quarter = int(target_quarter_key.split('-Q')[1])
+        except (IndexError, ValueError):
+            return None
+
+        # Months in this quarter
+        start_month = (quarter - 1) * 3 + 1
+        month_keys = [f"{year}-M{m:02d}" for m in range(start_month, start_month + 3)]
+
+        # Sum monthly projections
+        total_regs = 0
+        total_cost = 0
+        ci_low_sum = 0
+        ci_high_sum = 0
+        months_projected = 0
+
+        for mk in month_keys:
+            mp = self.project_market_monthly(market, mk)
+            if mp:
+                total_regs += mp.total_regs
+                total_cost += mp.total_cost
+                ci_low_sum += mp.ci_regs_low
+                ci_high_sum += mp.ci_regs_high
+                months_projected += 1
+
+        if months_projected == 0:
+            return None
+
+        # OP2 quarterly target (sum of 3 monthly targets)
+        vs_op2_spend_pct = None
+        try:
+            targets = self._fetch_monthly_targets(market)
+            q_op2_cost = 0
+            for mk in month_keys:
+                mt = targets.get(mk, {})
+                c = mt.get('cost')
+                if c:
+                    q_op2_cost += c
+            if q_op2_cost > 0:
+                vs_op2_spend_pct = round((total_cost / q_op2_cost - 1) * 100, 1)
+        except Exception:
+            pass
+
+        avg_cpa = total_cost / total_regs if total_regs > 0 else 0
+        brand = SegmentForecast(regs=round(total_regs * 0.5), cost=round(total_cost * 0.5, 2), cpa=round(avg_cpa, 2), clicks=0)
+        nb = SegmentForecast(regs=round(total_regs * 0.5), cost=round(total_cost * 0.5, 2), cpa=round(avg_cpa, 2), clicks=0)
+
+        return MarketProjection(
+            market=market,
+            brand=brand,
+            nb=nb,
+            total_regs=round(total_regs),
+            total_cost=round(total_cost, 2),
+            ci_regs_low=round(ci_low_sum),
+            ci_regs_high=round(ci_high_sum),
+            vs_op2_spend_pct=vs_op2_spend_pct,
+            method='bayesian_quarterly',
+            week=target_quarter_key,
+        )
+
     # ── Main projection method ─────────────────────────────────────────
 
     def project_market(self, market: str, target_week_num: int,
@@ -443,6 +710,21 @@ class BayesianProjector:
         ci_low, ci_high = self.core.credible_interval(posterior, level=0.7)
         ci_regs_low = max(0, ci_low * seasonal_adj)
         ci_regs_high = ci_high * seasonal_adj
+
+        # Gap 4: Apply CI width adjustment from ps.calibration_state
+        try:
+            ci_adj_row = self.con.execute(f"""
+                SELECT ci_width_adjustment FROM ps.calibration_state
+                WHERE market = '{market}' AND metric_name = 'registrations'
+            """).fetchone()
+            if ci_adj_row and ci_adj_row[0] is not None:
+                ci_width_adj = float(ci_adj_row[0])
+                if ci_width_adj != 1.0:
+                    ci_regs_low = total_regs - (total_regs - ci_regs_low) * ci_width_adj
+                    ci_regs_high = total_regs + (ci_regs_high - total_regs) * ci_width_adj
+                    ci_regs_low = max(0, ci_regs_low)
+        except Exception:
+            pass  # No calibration state yet — use raw CI
 
         # Ensure point estimate is within CI (widen if needed)
         if total_regs < ci_regs_low:

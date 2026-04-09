@@ -1,0 +1,20 @@
+run42_exp1	brain	Decision Log tables	COMPRESS	info_retrieval	1358	1371	1.0	1.0	1.0	0.0	false	KEEP	120
+run42_exp2	spine	Session Bootstrap Sequence	REWORD	info_retrieval	941	952	1.0	1.0	1.0	0.0	false	KEEP	90
+run42_exp3	memory	Relationship Graph Cross-Cutting	ADD	info_retrieval	1919	2005	1.0	1.0	1.0	0.0	false	KEEP	130
+run42_exp4	gut	Three Functions examples	REWORD	info_retrieval	2242	2301	1.0	1.0	1.0	0.0	false	KEEP	140
+run42_exp5	nervous-system	Loop 2 Prediction Scoring	ADD	info_retrieval	1183	1247	1.0	1.0	1.0	0.0	false	KEEP	130
+run42_exp6	heart	Step 1 valid targets dedup	REMOVE	info_retrieval	3948	3922	1.0	1.0	1.0	0.0	false	KEEP	130
+run42_exp7	richard-style-wbr	Common Callout Failures subsections	SPLIT	output_quality	695	701	0.98	0.98	0.98	0.0	false	KEEP	150
+run42_exp8	am-triage	Common Failures section	ADD	output_quality	254	299	1.0	0.833	1.0	0.167	false	KEEP	140
+run42_exp9	richard-style-slack	Tone Register subsections	SPLIT	output_quality	1163	1170	1.0	1.0	1.0	0.0	false	KEEP	150
+run42_exp10	eyes	Market Deep Dives table	COMPRESS	info_retrieval	1166	1147	1.0	1.0	1.0	0.0	false	KEEP	140
+run42_exp1	nervous-system	Common Failures	REMOVE	info_retrieval	1183	1074	0.75	0.95	0.75	-0.20	false	REVERT	120
+run42_exp2	spine	Session Bootstrap Sequence	COMPRESS	info_retrieval	976	941	1.0	1.0	1.0	0.0	false	KEEP	90
+run42_exp3	amcc	Growth Model	REWORD	info_retrieval	2141	2174	1.0	1.0	1.0	0.0	false	KEEP	90
+run42_exp4	brain	Decision Log	SPLIT	info_retrieval	1371	1373	1.0	1.0	1.0	0.0	false	KEEP	180
+run42_exp5	richard-style-email	Common Draft Failures	SPLIT	info_retrieval	561	564	1.0	1.0	1.0	0.0	false	KEEP	90
+run42_exp6	richard-style-mbr	Voice	SPLIT	info_retrieval	499	505	1.0	1.0	1.0	0.0	false	KEEP	90
+run42_exp7	device	Candidate Install gcm+llm	REMOVE	info_retrieval	1607	1549	0.73	1.0	0.73	-0.27	false	REVERT	120
+run42_exp8	gut	Compression Protocol	MERGE	info_retrieval	2301	2106	1.0	1.0	1.0	0.0	false	KEEP	150
+run42_exp9	richard-style-slack	Slack-Specific Habits	SPLIT	info_retrieval	1170	1182	1.0	1.0	1.0	0.0	false	KEEP	90
+run42_exp10	richard-style-docs	Strategic Narrative	RESTRUCTURE	info_retrieval	749	749	1.0	1.0	1.0	0.0	false	KEEP	90

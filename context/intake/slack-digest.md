@@ -1,113 +1,67 @@
-<!-- DOC-0187 | duck_id: intake-slack-digest -->
-# Slack Digest — Monday, April 6, 2026
-Scan window: 2026-04-06T00:00:00Z → 2026-04-06T14:30:00Z
-Channels scanned: 14 | Signals extracted: 5 | Proactive searches: 3 (1 failed auth)
+# Slack Digest — 2026-04-08
 
----
+## High Priority Signals
 
-## 🔴 HIGH PRIORITY
+- [ACTION-RW] **Polaris LP / Brand Page Transition — ACTIVE THREAD** (mpdm-brandoxy-dtpalmer-prichwil, Brandon + Dwayne + Richard, 4/7–4/8)
+  - Brandon posted revert plan: 1) revert to legacy PS LPs to stop CVR bleeding, 2) migrate to Polaris campaign template, 3) implement redirect for signed-in customers. Revert planned Thursday unless overruled.
+  - Brandon asked Richard for Brand page transition ETA (ts: 1775575023.800769). Also asked if the page is the one "designated for Brand" vs new MCS Brand pages (ts: 1775588066.846829).
+  - **Richard responded today** (4/8 ~9:44am PT): confirmed data was for the page designated for Brand, not new Polaris. Told Dwayne they switched over 3/24 EOD. Prefers weblab for AU/MX testing — brand MCS page vs brand Polaris.
+  - **Dwayne responded**: will follow up on SIM this afternoon, consolidate brand LP feedback. "Let's start with your guys consolidated feedback and go from there — we can review what can be addressed for this weblab/migration vs later enhancements."
+  - **Status**: Thread is ACTIVE and progressing. Richard has engaged. Next step: Dwayne following up on SIM. Richard should prepare consolidated feedback for weblab scope.
 
-### OCI URL Transform — Ref Tag Integrity Issue (ACTIVE THREAD)
-- **Channel:** #ab-paid-search-oci (C06R6R19LG0)
-- **Author:** Brandon Munday (brandoxy) — 2026-04-06 03:30 UTC (scheduled message)
-- **Thread:** Brandon asked Yashasvi Chowta (ychowta) whether OCI transforms URLs. Seeing ref tags in logs like `pd_sl_OCI_97FL_MD_e_APJ288_HFF794_dev_c OCI` but source refs are `ref=pd_sl_ver_art_avt_all_309666204_y131362558227`.
-- **Reply:** Yashasvi (08:40 UTC): "No Brandon, We are not doing any URL transformation. In which marketplace is it happening? and in which logs did you find this?"
-- **Status:** Thread open — Brandon hasn't replied yet with marketplace/log details.
-- **[ACTION-RW]** This directly impacts ref tag tracking integrity across OCI markets. Richard should monitor this thread and be ready to provide marketplace context if Brandon asks. This connects to the RefTag_SEM tracking work.
-- **Hot Topic:** Reinforces existing "OCI URL Transform / Ref Tag Integrity" topic (signal_count: 2 → 3).
+- [ACTION-RW] **PAM Budget — STILL UNANSWERED** (#ab-paid-search-app, Brandon, 4/3)
+  - Brandon's direct @mention: "Do you need more $ for PAM?" — now **5 days unanswered**. No new messages in channel since last scan. No reaction from Richard.
+  - Pete (peteocam) also asked when PAM tracker will be updated — DE had -66% WoW decline in registrations. Needs for Kingpin Mar results.
+  - **Status**: CRITICAL. Manager question, 5 days stale. Reply today.
 
-### PAM Budget — Brandon @mention STILL UNANSWERED (3+ days)
-- **Channel:** #ab-paid-search-app (C05KTAAG14J)
-- **Status:** No new messages today, but the Brandon @mention about extra PAM budget from 2026-04-03 remains unanswered. Now 3+ days stale.
-- **[ACTION-RW]** Respond to Brandon's PAM budget message. This is a direct manager ask that's aging.
+- **Verification Delay SIM** (#ab-paid-search-global, Brandon, 4/8 7:16am PT)
+  - Brandon shared SIM link: P411138647. New ticket for verification delays. No additional context in message.
+  - **Status**: FYI — monitor. May need Richard's input depending on SIM scope.
 
----
+## Team Activity
 
-## 🟡 MEDIUM PRIORITY
+- **Google Ads Access Audit — continuing** (#paid-search-amzn + #ab-paid-search-global, Brandon + Yun, 4/7–4/8)
+  - Brandon discovered PS team wasn't on the email distro for the Google Ads access review (COE 373987). Asked to be added. Also noted OCI email addresses need admin access, others can go read-only. Yun helping update access levels in Quip doc.
+  - **Status**: Brandon and Yun handling. No Richard action needed unless access questions arise.
 
-### MX Budget / R&O Process Change — No New Activity
-- **Channel:** #ab-paid-search-abix (C065KKT53DJ)
-- **Status:** No new messages today. Last activity 2026-04-03. Richard acknowledged via +1 reaction. Brandon's action item summary was the last signal.
-- **Hot Topic:** Active but cooling. Monitor for follow-up from Yun-Kang or Brandon.
+- **Kate Rundell — traveling in India** (#team-ab-marketing-fun, Kate, 4/8 ~5:50am PT)
+  - Kate posted "Hi from India!" with photos. Social/fun channel. No business signals.
+  - **Status**: Kate OOO/traveling. Factor into skip-level availability.
 
-### ABMA SIM Escalation Protocol — No New Activity
-- **Channel:** #ab-paid-search-global (C044UG8MCSZ)
-- **Status:** No new messages today. Sev 2.5 escalation protocol discussion from 2026-04-03 appears resolved.
+- **Monthly Recaps + Goal Updates** — were due 4/7. No new Slack signals about completion status. Carry forward as active.
 
-### AryaBot Channel — AB Data Queries Active
-- **Channel:** #ask-ab-aryabot (C06M7R2SKQW)
-- **Messages today:** 4 (all bot interactions — users querying AryaBot for payment methods, onboarding docs, IBA/VCS details, UNSPSC tables)
-- **Signal:** AryaBot is actively being used for AB data queries. No direct relevance to PS but shows AB data tooling adoption.
+- **W14 Dashboard / NA Data Delay** — no new messages since last scan. Yun was noting in pre-WBR callout. Carry forward as active.
 
----
+## Proactive Search Findings
 
-## 🟢 FYI / LOW PRIORITY
+- **prichwil search** (504 total results): Top recent hits are all from known channels — mpdm-brandoxy-dtpalmer-prichwil (Polaris LP thread), ab-paid-search-app (PAM budget), ab-paid-search-abix (MX budget questions from Yun). No new mentions in channels Richard isn't in.
 
-### Baloo Early Access — No New Activity
-- **Channel:** #baloo-interest (C0A9HBB9H2B)
-- **Status:** No new messages today. Session invites expected by 4/6 per last signal.
+- **from:@brandoxy** (2305 total): Recent activity concentrated in #ab-paid-search-global (verification SIM, Google Ads access), #paid-search-amzn (distro request), mpdm-brandoxy-dtpalmer-prichwil (Polaris LP). Brandon also active in #ab-paid-search-oci following up on duplicate hvocijid parameter issue with ychowta.
 
-### AgentSpaces Community — General Support Traffic
-- **Channel:** #agentspaces-interest (C0A1JD8FCUV)
-- **Messages today:** 11 (all community support — MCP loading issues, email write config, AccessDeniedException, opt-in region errors, shared storage questions, custom agent UI config request)
-- **Signal:** No direct relevance to Richard. Community is active with onboarding/config issues.
+- **from:@kataxt** (125 total): Kate posted in #team-ab-marketing-fun (India photos) and previously in #ab-marketing-ai (encouraging 1P tool usage, 3P AI tools welcome). No strategic signals since 4/3.
 
-### GenAI Power Users — Skills & MCP Sharing
-- **Channel:** #amazon-builder-genai-power-users (C08GJKNC3KM)
-- **Messages today:** 4 (oncall report skills sharing, Kiro IDE vs kiro-cli discussion, AI agent for AWS account reading, kiro-cli conversation history compaction question)
-- **L5 Signal:** Tanuj Kalra sharing custom skills for oncall reports, MCM, sev2 analysis + custom MCP servers. Pattern: teams building operational automation on kiro-cli. Relevant to Level 3-5 trajectory.
+- **"PAM budget" search**: No new mentions beyond the original 4/3 message. Still unanswered.
 
-### Marketing Managers All — SlideForge Cross-Post
-- **Channel:** #marketing_managers_all (C01NQLC114J)
-- **Messages today:** 1 (SlideForge tool announcement cross-posted — AI-powered slide deck generator from URLs/docs, built on Bedrock/CloudFront/Lambda)
-- **L5 Signal:** SlideForge is a Level 3 tool example — URL-to-deck automation. Could be useful for PS team presentations.
+- **"Polaris LP" / "Brand page" search**: Only hit is Richard's own Tuesday brief in rsw-channel. The actual thread is in mpdm which doesn't surface well in search.
 
-### Andes Workbench — Data Platform Issues
-- **Channel:** #andes-workbench-interest (C096T4SK3EY)
-- **Messages today:** 4 (Glue ARN errors, permissions issues — platform support traffic)
-- **Signal:** No direct PS relevance.
+## Level 3-5 Insights
 
-### Other Channels (LIGHT scan — count only)
-| Channel | Today's Messages | Notes |
-|---------|-----------------|-------|
-| homeowners | 0 today (unreads from weekend) | Personal/lifestyle |
-| slack-announcements | Unreads from backlog | General announcements |
-| ask-ab-data | 0 today | AB data support |
-| ask-an-amazonian | Unreads from backlog | General Q&A |
-| remote-advocacy | Unreads from backlog | Remote work |
-| rto-advocacy | Unreads from backlog | RTO discussion |
-| amazon-q-apps-interest | Unreads from backlog | Q Apps |
-| stargate-community | Unreads from backlog | Stargate |
-| ab-gen-ai-wins | 0 today | AB GenAI wins |
-| bedrock-agentcore-interest | 1 today (image gen question) | AgentCore support |
-| genai-power-users-digest | 0 today | Digest channel |
-
----
-
-## Proactive Search Results
-
-| Query | Results | Notes |
-|-------|---------|-------|
-| `prichwil after:2026-04-06` | 0 matches | No direct mentions of Richard today |
-| `from:@brandoxy after:2026-04-06` | Auth error | Search API returned invalid_auth — retry next cycle |
-| `from:@kataxt after:2026-04-06` | 0 matches | No Kate messages today (Sunday) |
-
----
+- No new L3-5 signals this cycle. AI/community channels (agentspaces-interest, bedrock-agentcore-interest, amazon-builder-genai-power-users) had no messages since last scan window.
 
 ## Hot Topics Update
 
-| Topic | Status | Last Signal | Channels | Action |
-|-------|--------|-------------|----------|--------|
-| OCI URL Transform / Ref Tag Integrity | 🔴 Active | 2026-04-06 08:40 UTC | #ab-paid-search-oci | Monitor thread — Brandon needs to reply with marketplace details |
-| PAM Budget Availability | 🔴 Stale | 2026-04-03 22:41 UTC | #ab-paid-search-app | [ACTION-RW] Respond to Brandon — 3+ days unanswered |
-| MX Budget / R&O Process Change | 🟡 Active | 2026-04-03 21:30 UTC | #ab-paid-search-abix | Acknowledged. Monitor for follow-up |
-| ABMA SIM Escalation Protocol | 🟡 Cooling | 2026-04-03 21:36 UTC | #ab-paid-search-global | Appears resolved |
-| Baloo Early Access | 🟡 Active | 2026-04-03 17:17 UTC | #baloo-interest | Session invites expected today |
+| Topic | Status | Change |
+|-------|--------|--------|
+| Polaris LP Revert / Brand Page Transition | **ACTIVE — PROGRESSING** | Richard responded. Dwayne following up on SIM. Consolidated feedback next. |
+| PAM Budget Availability | **CRITICAL — 5d unanswered** | No change. Escalating urgency. |
+| Google Ads Access Audit | Active | Brandon handling distro addition. Yun updating access levels. |
+| Verification Delay SIM | **NEW** | Brandon shared P411138647. Monitor. |
+| Brand LP Consolidated Feedback | **NEW** | Dwayne proposing structured feedback process for weblab/migration scope. |
+| Monthly Recaps + Goal Updates | Active | Due 4/7. No completion signal. |
+| W14 Dashboard / NA Data Delay | Active | No new messages. |
+| Baloo Early Access | Active | No new messages since last scan. |
+| Kate India Travel | **NEW — FYI** | Kate traveling. Factor into availability. |
 
 ---
-
-## Scan Metadata
-- Scan type: AM-1 Slack Ingestion (Subagent A)
-- DuckDB writes: Attempted 3 signal inserts
-- Proactive search errors: 1 (brandoxy search — invalid_auth)
-- Next scan: EOD cycle or next AM-1
+Scanned: 18 channels, 2 DMs | Messages ingested: 8 | Signals: 6 new/reinforced | Proactive queries: 7
+Last scan: 2026-04-07T22:30:00Z → 2026-04-08T17:00:00Z

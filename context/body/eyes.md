@@ -20,10 +20,9 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 
 | Market | Period | Regs | vs OP2 | CPA | Key Signal |
 |--------|--------|------|--------|-----|-----------|
-| US | Jan | 39K | +30% | — | Peak OCI impact (+86% YoY) |
-| US | Feb | 32.9K | above plan | $65-77 Brand | Walmart IS driving Brand CPA up (was ~$40). Response: bid caps + NB OCI efficiency. |
-| UK | Feb | +24% vs OP2 | +24% | — | -6% spend, still beat plan. Ad copy test: +86% CTR, +31% regs. weareuncapped.com 24% IS since Dec 2023. |
-| DE | Feb | -4% vs OP2 | -4% | — | NB -22% vs OP2. Y25 baseline unusually strong. OCI lift W49-W51: +16-20%, 74-96% to expectation. |
+| US | Feb | 32.9K | above plan | $65-77 Brand | Walmart IS 25%→55% driving Brand CPA up (was ~$40). Peak Jan: 39K (+86% YoY). Response: bid caps + NB OCI efficiency. |
+| UK | Feb | +24% vs OP2 | +24% | — | -6% spend, still beat plan. Ad copy: +86% CTR, +31% regs. weareuncapped.com 24% IS since Dec 2023. |
+| DE | Feb | -4% vs OP2 | -4% | — | NB -22% vs OP2. OCI lift W49-W51: +16-20%. |
 | CA | Feb | +18.5% vs OP2 | +18.5% | $73 | Bulk CVR 0.82%→2.35% (+187%), Wholesale 0.75%→2.10% (+180%). OCI E2E launched 3/4, full impact Jul 2026. |
 | JP | Feb | — | — | — | MHLW campaign ended 1/31 (major reg driver lost). Yahoo competitors emerging: shop-pro.jp 12-15% IS. |
 | AU | W13 | 207 (-16% WoW) | — | $118 (+3%) | CVR -12% WoW (Brand -14%, NB -10%). Daily: Mon-Tue strong (53, 50) then collapsed (27, 22, 23, 8). NB CPC declining 7wks ($6.82→$4.81, -29%). NB CPA flat $187. Polaris migration mid-week may explain. Two-campaign structure proposed (3/24). Lena priorities: CPC/CPA, keyword-product mapping, Polaris. |

@@ -280,3 +280,28 @@ Batch stats: 5/5 KEEP (100%). Selection bias check: 100% keep rate is high, but 
 - [richard-style-email:Sentence-Level Patterns subsections] SPLIT (output_quality) → 552w→561w. A=1.0 B=0.875 C=1.0 Δ=+0.125. 140s. KEEP.
 - [nervous-system:Loop 8 Source Quality Filter] REMOVE (info_retrieval) → 1050w→1025w. A=0.7 B=1.0 C=0.7 Δ=-0.3. 150s. REVERT.
 - [ADD×style-guides: 4 kept / 4 total] [RESTRUCTURE×style-guides: 2 kept / 2 total] [MERGE: 1 kept / 2 total] [SPLIT: 1 kept / 1 total] [REMOVE: 0 kept / 1 total]
+
+### Run 42 (2026-04-07, Karpathy batch — 10 experiments, 10 keep, 0 revert)
+- [brain:Decision Log tables] COMPRESS (info_retrieval) → 1358w→1371w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [spine:Session Bootstrap Sequence] REWORD (info_retrieval) → 941w→952w. A=1.0 B=1.0 C=1.0 Δ=0.0. 90s. KEEP.
+- [memory:Relationship Graph Cross-Cutting Dynamics] ADD (info_retrieval) → 1919w→2005w. A=1.0 B=1.0 C=1.0 Δ=0.0. 130s. KEEP.
+- [gut:Three Functions examples] REWORD (info_retrieval) → 2242w→2301w. A=1.0 B=1.0 C=1.0 Δ=0.0. 140s. KEEP.
+- [nervous-system:Loop 2 Prediction Scoring] ADD (info_retrieval) → 1183w→1247w. A=1.0 B=1.0 C=1.0 Δ=0.0. 130s. KEEP.
+- [heart:Step 1 valid targets dedup] REMOVE (info_retrieval) → 3948w→3922w. A=1.0 B=1.0 C=1.0 Δ=0.0. 130s. KEEP.
+- [richard-style-wbr:Common Callout Failures subsections] SPLIT (output_quality) → 695w→701w. A=0.98 B=0.98 C=0.98 Δ=0.0. 150s. KEEP.
+- [am-triage:Common Failures section] ADD (output_quality) → 254w→299w. A=1.0 B=0.833 C=1.0 Δ=+0.167. 140s. KEEP.
+- [richard-style-slack:Tone Register subsections] SPLIT (output_quality) → 1163w→1170w. A=1.0 B=1.0 C=1.0 Δ=0.0. 150s. KEEP.
+- [eyes:Market Deep Dives table] COMPRESS (info_retrieval) → 1166w→1147w. A=1.0 B=1.0 C=1.0 Δ=0.0. 140s. KEEP.
+- [COMPRESS×organs: 2 kept / 2 total] [REWORD×organs: 2 kept / 2 total] [ADD×organs: 2 kept / 2 total] [ADD×hooks: 1 kept / 1 total] [REMOVE×organs: 1 kept / 1 total] [SPLIT×style-guides: 2 kept / 2 total]
+
+### Karpathy Run 42 — 2026-04-07 (10 experiments, 8 keep, 2 revert)
+- [nervous-system:Common Failures] REMOVE (info_retrieval) → 1183w→1074w. A=0.75 B=0.95 C=0.75 Δ=-0.20. 120s. REVERT. (Anti-pattern: REMOVE on behavioral constraints. Lost 7-day prediction threshold.)
+- [spine:Session Bootstrap Sequence] COMPRESS (info_retrieval) → 976w→941w. A=1.0 B=1.0 C=1.0 Δ=0.0. 90s. KEEP. (Paragraphs→table, -35w.)
+- [amcc:Growth Model] REWORD (info_retrieval) → 2141w→2174w. A=1.0 B=1.0 C=1.0 Δ=0.0. 90s. KEEP. (Added concrete examples.)
+- [brain:Decision Log] SPLIT (info_retrieval) → 1371w→1373w. A=1.0 B=1.0 C=1.0 Δ=0.0. 180s. KEEP. (Decay Protocol as own subsection.)
+- [richard-style-email:Common Draft Failures] SPLIT (info_retrieval) → 561w→564w. A=1.0 B=1.0 C=1.0 Δ=0.0. 90s. KEEP. (Named subsections per failure.)
+- [richard-style-mbr:Voice] SPLIT (info_retrieval) → 499w→505w. A=1.0 B=1.0 C=1.0 Δ=0.0. 90s. KEEP. (Register + Miss Attribution subsections.)
+- [device:Candidate Install gcm+llm] REMOVE (info_retrieval) → 1607w→1549w. A=0.73 B=1.0 C=0.73 Δ=-0.27. 120s. REVERT. (Anti-pattern: REMOVE on unique content — install steps lost.)
+- [gut:Compression Protocol] MERGE (info_retrieval) → 2301w→2106w. A=1.0 B=1.0 C=1.0 Δ=0.0. 150s. KEEP. (Word Budget + Over-budget merged into intro. -195w, biggest win.)
+- [richard-style-slack:Slack-Specific Habits] SPLIT (info_retrieval) → 1170w→1182w. A=1.0 B=1.0 C=1.0 Δ=0.0. 90s. KEEP. (Availability/Delayed/Emoji subsections.)
+- [richard-style-docs:Strategic Narrative] RESTRUCTURE (info_retrieval) → 749w→749w. A=1.0 B=1.0 C=1.0 Δ=0.0. 90s. KEEP. (Actionable-first reorder.)
