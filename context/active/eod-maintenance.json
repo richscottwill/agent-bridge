@@ -1,34 +1,41 @@
 {
-  "date": "2026-04-08",
+  "date": "2026-04-09",
   "compression_audit": {
-    "status": "skipped",
-    "reason": "Wednesday — not a compression day"
+    "organ_word_counts": {
+      "body.md": 1021,
+      "brain.md": 1373,
+      "changelog.md": 3902,
+      "device.md": 1607,
+      "eyes.md": 1147,
+      "gut.md": 2106,
+      "hands.md": 1213,
+      "heart.md": 3922,
+      "memory.md": 2005,
+      "nervous-system.md": 1247,
+      "spine.md": 952,
+      "amcc.md": "not measured",
+      "current.md": 4201,
+      "asana-command-center.md": 8294
+    },
+    "total_body_words": 35816,
+    "signals": "No compression signals. Organ sizes stable. changelog.md (3902w) and heart.md (3922w) are the largest organs but within adaptive budgets."
   },
   "workflow_health": {
-    "status": "healthy",
-    "degraded_workflows": []
+    "degraded_workflows": [],
+    "note": "Insufficient data in last 7 days due to Austin offsite gap. No alerts."
   },
   "communication_analytics": {
-    "status": "skipped",
-    "reason": "Wednesday — communication analytics runs Friday only"
+    "note": "Not Thursday — skipped (Friday-only per protocol). Today is Thursday but Richard is at offsite."
   },
   "context_enrichment": {
-    "status": "skipped",
-    "reason": "Non-blocking — deferred to next enrichment window"
+    "note": "Skipped — Richard at Austin offsite, no active project context changes to enrich."
   },
   "organ_cascade": {
-    "status": "deferred",
-    "reason": "No organs >48h stale requiring immediate update. Meeting data logged to DuckDB. Series files need update (LP Testing new topic, OP1 new topic, Adobe new topic)."
-  },
-  "recurring_task_checks": {
-    "checked": ["weekly_scorecard", "context_surface_refresh", "meta_calibration_projections"],
-    "due": [],
-    "executed": []
-  },
-  "snapshot": {
-    "eod_snapshot": "FAILED — named snapshots not supported on current MotherDuck plan",
-    "daily_tracker": "SUCCESS — 1 row inserted for 2026-04-08",
-    "meeting_analytics": "SUCCESS — 3 rows inserted for 2026-04-08"
-  },
-  "git_sync": "pending"
+    "updates": [
+      "current.md: needs update with Austin offsite meetings (OP1 brainstorm, Adobe, LP Testing) — queued for next interactive session",
+      "memory.md: new relationship data from OP1 session (Joel, Robert, Kristine budget dynamics) — queued",
+      "eyes.md: no market data changes (no WBR this week due to offsite)"
+    ],
+    "skipped_reason": "All organs <48h since last update. No critical changes requiring immediate cascade."
+  }
 }

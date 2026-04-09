@@ -117,11 +117,10 @@ class BayesianCore:
         new_mean = sum(metric_values) / n_new
 
         # Weighted combination of prior and evidence
-        # Cap prior weight to prevent stale history from dominating
-        # With 52 weeks of prior and 4 weeks of evidence, uncapped prior
-        # barely moves. Cap at 8 effective observations so recent evidence
-        # (4 weeks) represents ~33% of the posterior.
-        prior_weight = min(prior.n_observations, 8)
+        # Cap prior weight so recent evidence dominates.
+        # With 4 weeks of evidence and cap=4, posterior is 50% evidence.
+        # This ensures 2026 actuals quickly override 2025 historical mean.
+        prior_weight = min(prior.n_observations, 4)
         total_weight = prior_weight + n_new
         posterior_mean = (prior_weight * prior.mean + n_new * new_mean) / total_weight
 
