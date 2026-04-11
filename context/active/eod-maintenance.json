@@ -1,41 +1,34 @@
 {
-  "date": "2026-04-09",
+  "date": "2026-04-10",
   "compression_audit": {
-    "organ_word_counts": {
-      "body.md": 1021,
-      "brain.md": 1373,
-      "changelog.md": 3902,
-      "device.md": 1607,
-      "eyes.md": 1147,
-      "gut.md": 2106,
-      "hands.md": 1213,
-      "heart.md": 3922,
-      "memory.md": 2005,
-      "nervous-system.md": 1247,
-      "spine.md": 952,
-      "amcc.md": "not measured",
-      "current.md": 4201,
-      "asana-command-center.md": 8294
-    },
-    "total_body_words": 35816,
-    "signals": "No compression signals. Organ sizes stable. changelog.md (3902w) and heart.md (3922w) are the largest organs but within adaptive budgets."
+    "status": "skipped",
+    "reason": "No organ updates since last EOD — Richard was at Austin Summit all week"
   },
   "workflow_health": {
-    "degraded_workflows": [],
-    "note": "Insufficient data in last 7 days due to Austin offsite gap. No alerts."
+    "status": "skipped",
+    "reason": "No workflow executions to audit — system idle during travel week"
   },
   "communication_analytics": {
-    "note": "Not Thursday — skipped (Friday-only per protocol). Today is Thursday but Richard is at offsite."
+    "status": "due_friday",
+    "note": "Friday communication analytics due but insufficient new meeting_analytics data in DuckDB to run trailing 4-week analysis. 8 sessions ingested but not yet written to DuckDB meeting_analytics table. Queue for next EOD after DuckDB insert."
   },
   "context_enrichment": {
-    "note": "Skipped — Richard at Austin offsite, no active project context changes to enrich."
+    "status": "skipped",
+    "reason": "Non-blocking — skip during heavy meeting ingestion run"
   },
   "organ_cascade": {
-    "updates": [
-      "current.md: needs update with Austin offsite meetings (OP1 brainstorm, Adobe, LP Testing) — queued for next interactive session",
-      "memory.md: new relationship data from OP1 session (Joel, Robert, Kristine budget dynamics) — queued",
-      "eyes.md: no market data changes (no WBR this week due to offsite)"
+    "status": "partial",
+    "updates_needed": [
+      "current.md — needs Austin Summit outcomes (AI-MAX test plan, paid app repositioning, LiveRamp enhanced match, comp review)",
+      "memory.md — new relationships: Alexia (CPS Senior Editor), Matt Freese (Google Hardware), Sid (Acquisition central team)",
+      "hands.md — new action items from 8 meetings",
+      "eyes.md — US exceeding goals by ~20%, EU mixed, Germany flat on OCI"
     ],
-    "skipped_reason": "All organs <48h since last update. No critical changes requiring immediate cascade."
+    "note": "Organ cascade deferred to next AM run — too many updates to process safely in EOD backend without Richard review"
+  },
+  "recurring_task_checks": {
+    "weekly_scorecard": "due_friday — deferred to AM run (no completions today to score)",
+    "agent_bridge_sync": "due_friday — will execute in Phase 5",
+    "wiki_lint": "due_friday — deferred to next session"
   }
 }
