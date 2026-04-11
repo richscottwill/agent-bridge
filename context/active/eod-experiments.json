@@ -1,9 +1,11 @@
 {
-  "date": "2026-04-09",
-  "karpathy_ran": false,
-  "skip_reason": "Austin offsite — Karpathy experiments deferred to next EOD with full context window available.",
-  "experiments_completed": 0,
-  "experiments_kept": 0,
-  "experiments_reverted": 0,
+  "date": "2026-04-10",
+  "karpathy_status": "target_reached",
+  "total_experiments": 130,
+  "keeps": 104,
+  "reverts": 26,
+  "keep_rate": "80%",
+  "new_experiments_run": 0,
+  "note": "Target already exceeded. No new experiments this run.",
   "suggestions": []
 }
