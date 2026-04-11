@@ -1,0 +1,70 @@
+{
+  "generated": "2026-04-10T16:15:00Z",
+  "project_gid": "1213917352480610",
+  "project_name": "ABPS AI - Content",
+
+  "pipeline_summary": {
+    "intake_untriaged": 3,
+    "in_progress": 0,
+    "review": 28,
+    "active": 0,
+    "archive_completed": 27,
+    "published": 6,
+    "drafting": 0,
+    "idea": 3
+  },
+
+  "intake_tasks_for_triage": [
+    {
+      "gid": "1213954957625028",
+      "name": "✅ Approve: Enhanced Match / LiveRamp — Audience Expansion",
+      "pipeline": "Idea",
+      "audience": "Team",
+      "frequency": "One-time",
+      "levels": "L2: Drive WW Testing",
+      "action": "QUEUE_FOR_FRONTEND — awaiting Richard's triage approval"
+    },
+    {
+      "gid": "1213954957645131",
+      "name": "✅ Approve: AU Paid Search — Market Wiki",
+      "pipeline": "Idea",
+      "audience": "Team",
+      "frequency": "Monthly",
+      "levels": "L1: Sharpen Yourself",
+      "action": "QUEUE_FOR_FRONTEND — awaiting Richard's triage approval"
+    },
+    {
+      "gid": "1213953295002324",
+      "name": "✅ Approve: OCI Execution Guide",
+      "pipeline": "Idea",
+      "audience": "Team",
+      "frequency": "One-time",
+      "levels": "L2: Drive WW Testing",
+      "action": "QUEUE_FOR_FRONTEND — awaiting Richard's triage approval"
+    }
+  ],
+
+  "published_articles": [
+    {"gid": "1213925549385885", "name": "Paid Search Testing Approach & Year Ahead", "score": "8.4/10"},
+    {"gid": "1213925516246590", "name": "OCI Rollout Playbook", "score": "8.4/10"},
+    {"gid": "1213925733042547", "name": "OCI Execution Guide", "score": "8.6/10"},
+    {"gid": "1213925516128369", "name": "ie%CCP Planning & Optimization Framework", "score": "8.6/10"},
+    {"gid": "1213953288745383", "name": "AU Paid Search — Market Wiki", "score": "8.4/10"},
+    {"gid": "1213925516289208", "name": "Enhanced Match / LiveRamp — Audience Expansion", "score": "8.2/10"}
+  ],
+
+  "review_pipeline_tasks": {
+    "count": 22,
+    "all_pipeline_review": true,
+    "staleness": "All last updated 4/4-4/5. Now 5-6 days since last Kiro_RW update. Not yet stale (7d threshold) but approaching.",
+    "near_due_tasks": 0,
+    "overdue_tasks": 0,
+    "note": "No due dates set on ABPS AI Content tasks — staleness tracked by Kiro_RW timestamp only."
+  },
+
+  "auto_execute_actions": [],
+  "queue_for_frontend": [
+    "3 Intake tasks awaiting Richard's triage approval",
+    "22 Review-stage tasks approaching staleness (5-6 days since last update)"
+  ]
+}

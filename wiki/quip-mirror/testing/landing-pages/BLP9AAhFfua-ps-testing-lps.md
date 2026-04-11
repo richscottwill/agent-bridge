@@ -1,0 +1,20 @@
+---
+quip_id: BLP9AAhFfua
+title: "PS Testing: Landing Pages (LP)"
+source_url: https://quip-amazon.com/BLP9AAhFfua
+doc_type: document
+creator: Richard Williams
+last_modified: 2025-11-19
+quip_folder: Testing/Landing Pages
+topics: [testing, landing-pages, conversion]
+mirror_date: 2026-04-10
+---
+
+# PS Testing: Landing Pages (LP)
+Source: https://quip-amazon.com/BLP9AAhFfua
+
+## Polaris Brand LP Redesign (US, Q3 2025)
++0.38% AB registrations (65.7% probability, 275 incremental regs annualized). +37bps reg CVR (10.03% vs 9.66%). Guardrails flat.
+
+## Redirect Current Customers from MCS to Shopping (US)
++5% AB OPS ($2.4M annualized), +6% AB Units Ordered. If rolled out to all NB /cp pages: $10.9M annualized. All NB PS ads: $30M annualized.

@@ -1,47 +1,37 @@
 {
-  "generated": "2026-04-08T16:45:00Z",
-  "projects": {
-    "AU": {
-      "incomplete": 12,
-      "overdue": 3,
-      "overdue_tasks": ["MX Automotive page (19d — multi-homed)", "Look over AU landing page switch (14d)", "Respond to Lena — AU LP URL analysis (5d)"],
-      "status_update": "not_checked_live",
-      "enrichment_gaps": 1,
-      "notes": "Polaris LP revert thread active — may affect AU LP tasks"
-    },
-    "MX": {
-      "incomplete": 4,
-      "overdue": 1,
-      "overdue_tasks": ["MX Automotive page (19d — blocked on Vijeth)"],
-      "status_update": "not_checked_live",
-      "enrichment_gaps": 1,
-      "notes": "IECCP follow-up due 4/9"
-    },
-    "WW Testing": {
-      "incomplete": 7,
-      "overdue": 4,
-      "overdue_tasks": ["Email overlay WW rollout/testing (12d)", "Paid App (8d)", "Testing Document for Kate (7d)", "WW weblab dial-up (1d)"],
-      "status_update": "not_checked_live",
-      "enrichment_gaps": 0,
-      "notes": "Testing doc for Kate is THE HARD THING — 7d overdue"
-    },
-    "Paid App": {
-      "incomplete": 6,
-      "overdue": 0,
-      "status_update": "not_checked_live",
-      "enrichment_gaps": 0,
-      "notes": "PAM budget question from Brandon 5d unanswered"
-    },
-    "WW Acquisition": {
-      "incomplete": 0,
-      "overdue": 0,
-      "notes": "Empty — all tasks completed or archived"
-    }
+  "generated_at": "2026-04-09T13:15:00Z",
+  "generated_by": "am-backend-parallel",
+
+  "portfolio_summary": {
+    "AU": {"incomplete": 19, "overdue": 3, "today": 2, "status_staleness": "unknown"},
+    "MX": {"incomplete": 6, "overdue": 1, "today": 1, "status_staleness": "unknown"},
+    "WW_Testing": {"incomplete": 10, "overdue": 3, "today": 0, "status_staleness": "unknown"},
+    "Paid_App": {"incomplete": 12, "overdue": 0, "today": 0, "status_staleness": "unknown"},
+    "WW_Acquisition": {"incomplete": 0, "overdue": 0, "today": 0, "status_staleness": "unknown"}
   },
-  "recurring_task_proposals": [],
-  "blocker_updates": [
-    {"task": "MX Automotive page", "blocker": "Vijeth footer", "days_blocked": 19, "recommendation": "Escalate or kill"}
+
+  "today_tasks": [
+    {"name": "Refmarker mapping audit PoC — AU", "project": "AU", "due": "2026-04-07", "routine": "Sweep"},
+    {"name": "Send IECCP follow-up summary to Lorena + review keyword data", "project": "MX", "due": "2026-04-09", "routine": "Sweep"},
+    {"name": "Refmarker mapping audit PoC — AU (execution)", "project": "AU", "due": "2026-04-10", "routine": "Engine Room"},
+    {"name": "Weekly Reporting - Global WBR sheet", "project": "AU", "due": "2026-04-13", "routine": "Engine Room"}
   ],
+
+  "recurring_task_proposals": [],
+  "blocker_updates": [],
   "event_escalation_proposals": [],
-  "market_context_refresh": "not_executed_this_cycle"
+  "budget_flags": [
+    {
+      "project": "Paid App",
+      "flag": "PAM US PO due 4/11 — Brandon asked about PAM budget 6d ago (unanswered). PO task at Urgent priority.",
+      "action": "Queue for frontend: Richard must reply to Brandon on PAM budget before raising PO"
+    }
+  ],
+  "context_refresh": {
+    "au_context_task": "No material change detected — skip refresh",
+    "mx_context_task": "No material change detected — skip refresh"
+  },
+
+  "new_projects_detected": [],
+  "schema_changes": []
 }

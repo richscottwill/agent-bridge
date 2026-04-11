@@ -1,16 +1,18 @@
 {
-  "generated": "2026-04-08T16:45:00Z",
-  "intake_untriaged": [
-    {"task_gid": "1213953295002324", "name": "Approve: OCI Execution Guide", "due_on": null},
-    {"task_gid": "1213954957645131", "name": "Approve: AU Paid Search — Market Wiki", "due_on": null},
-    {"task_gid": "1213954957625028", "name": "Approve: Enhanced Match / LiveRamp", "due_on": null}
-  ],
-  "intake_count": 3,
-  "in_progress_count": 0,
-  "review_count": 0,
-  "active_count": 0,
-  "near_due_escalated": [],
-  "overdue_flagged": [],
-  "total_content_tasks": 43,
-  "notes": "3 approval tasks sitting in Intake. No near-due or overdue content tasks."
+  "generated_at": "2026-04-09T13:15:00Z",
+  "generated_by": "am-backend-parallel",
+
+  "pipeline_state": {
+    "Intake": 3,
+    "In Progress": 0,
+    "Review": 42,
+    "Active": 0,
+    "Archive": 0
+  },
+
+  "untriaged_intake": 3,
+  "near_due_escalated": 0,
+  "overdue_flagged": 0,
+
+  "notes": "42 tasks in Review — bulk from initial pipeline load. 3 in Intake awaiting triage. No near-due or overdue ABPS AI tasks."
 }

@@ -1,67 +1,45 @@
-# Slack Digest — 2026-04-08
+# Slack Digest — 2026-04-10
 
-## High Priority Signals
+Scan: 2026-04-10T14:30:00Z | Channels: 37 | Signals: 7
 
-- [ACTION-RW] **Polaris LP / Brand Page Transition — ACTIVE THREAD** (mpdm-brandoxy-dtpalmer-prichwil, Brandon + Dwayne + Richard, 4/7–4/8)
-  - Brandon posted revert plan: 1) revert to legacy PS LPs to stop CVR bleeding, 2) migrate to Polaris campaign template, 3) implement redirect for signed-in customers. Revert planned Thursday unless overruled.
-  - Brandon asked Richard for Brand page transition ETA (ts: 1775575023.800769). Also asked if the page is the one "designated for Brand" vs new MCS Brand pages (ts: 1775588066.846829).
-  - **Richard responded today** (4/8 ~9:44am PT): confirmed data was for the page designated for Brand, not new Polaris. Told Dwayne they switched over 3/24 EOD. Prefers weblab for AU/MX testing — brand MCS page vs brand Polaris.
-  - **Dwayne responded**: will follow up on SIM this afternoon, consolidate brand LP feedback. "Let's start with your guys consolidated feedback and go from there — we can review what can be addressed for this weblab/migration vs later enhancements."
-  - **Status**: Thread is ACTIVE and progressing. Richard has engaged. Next step: Dwayne following up on SIM. Richard should prepare consolidated feedback for weblab scope.
+## 🔴 Critical (Action Required)
 
-- [ACTION-RW] **PAM Budget — STILL UNANSWERED** (#ab-paid-search-app, Brandon, 4/3)
-  - Brandon's direct @mention: "Do you need more $ for PAM?" — now **5 days unanswered**. No new messages in channel since last scan. No reaction from Richard.
-  - Pete (peteocam) also asked when PAM tracker will be updated — DE had -66% WoW decline in registrations. Needs for Kingpin Mar results.
-  - **Status**: CRITICAL. Manager question, 5 days stale. Reply today.
+- [ACTION-RW] **PAM Budget — 7d unanswered.** Brandon's direct @mention in #ab-paid-search-app asking "Do you need more $ for PAM?" remains without reply or reaction. Now 7 days. No new activity in channel. Richard was at Austin offsite Thu/Fri — this should have been handled face-to-face per Thursday's brief. **Confirm with Brandon today whether this was resolved in person. If not, reply immediately.**
+  - Source: C05KTAAG14J, brandoxy, 1775256118.064909
 
-- **Verification Delay SIM** (#ab-paid-search-global, Brandon, 4/8 7:16am PT)
-  - Brandon shared SIM link: P411138647. New ticket for verification delays. No additional context in message.
-  - **Status**: FYI — monitor. May need Richard's input depending on SIM scope.
+- [ACTION-RW] **MX Budget Line / Underspend — 7d unanswered.** Brandon asked in #ab-paid-search-abix if Richard needs Carlos to move budget out of PS lines (underspend risk). Yun also asked about MX OP2 budget discrepancy ($541K vs $1.5M). Both 7d unanswered. Same as PAM — should have been handled at offsite. **Confirm resolution or reply today.**
+  - Source: C065KKT53DJ, brandoxy/yunchu, 1775246999/1775245603
 
-## Team Activity
+- [ACTION-RW] **Polaris LP Brand Page ETA — still owed.** No new messages in mpdm-brandoxy-dtpalmer-prichwil since last scan. Brandon's question about Brand page transition timing from 4/8 remains unanswered. Revert to legacy was planned for Thursday. **Follow up with Brandon on whether revert happened and provide Brand page ETA.**
+  - Source: C05JFNNENV9, brandoxy, 1775575023.800769
 
-- **Google Ads Access Audit — continuing** (#paid-search-amzn + #ab-paid-search-global, Brandon + Yun, 4/7–4/8)
-  - Brandon discovered PS team wasn't on the email distro for the Google Ads access review (COE 373987). Asked to be added. Also noted OCI email addresses need admin access, others can go read-only. Yun helping update access levels in Quip doc.
-  - **Status**: Brandon and Yun handling. No Richard action needed unless access questions arise.
+## 🟡 Important
 
-- **Kate Rundell — traveling in India** (#team-ab-marketing-fun, Kate, 4/8 ~5:50am PT)
-  - Kate posted "Hi from India!" with photos. Social/fun channel. No business signals.
-  - **Status**: Kate OOO/traveling. Factor into skip-level availability.
+- [STATUS] **Deeplink Redirect Bug Impact Analysis — DONE.** Yun posted completed analysis in #ab-paid-search-global (Thu 4/9 2pm CT). Key finding: ~16,500 incremental lost mWeb registration sessions across all marketplaces during 39-day impact window. US most impacted (12,591 intercepted sessions). AU and UK saw highest relative increase (2% → 13%). Brandon asked about reg totals from the data — Yun followed up. Ticket: V2145343510.
+  - Source: C044UG8MCSZ, yunchu, 1775743328.863569
 
-- **Monthly Recaps + Goal Updates** — were due 4/7. No new Slack signals about completion status. Carry forward as active.
+- [STATUS] **Stacey shared XBR tool info** in #ab-paid-search-global — GenBI analytics interest channel + XBR session chat history link. Brandon and Yun reacted with ty-thankyou. FYI for team tooling awareness.
+  - Source: C044UG8MCSZ, staceygu, 1775752578/1775752989
 
-- **W14 Dashboard / NA Data Delay** — no new messages since last scan. Yun was noting in pre-WBR callout. Carry forward as active.
+- [STATUS] **Team offsite wrap-up.** Brandon DM was casual offsite coordination (kolaches, joining room, starting in 10 min). Team group DM (mpdm-team) had Google office visit photos from Thursday evening — Brandon, Yun, Aditya sharing AI-generated photos from Google campus visit. Fun team bonding content, no action items.
+  - Source: D044JAKR8RZ + C0A1WMDD3R8, multiple, 4/9-4/10
 
-## Proactive Search Findings
+- [FYI] **AB 3P Event Guidelines launched** — Colleen Carnagey announced in #team-ab-marketing. Comprehensive brand guidelines now on Brand Portal. Not directly PS-relevant but good org awareness.
+  - Source: C048VEWU7U3, carnagey, 1775758457.058289
 
-- **prichwil search** (504 total results): Top recent hits are all from known channels — mpdm-brandoxy-dtpalmer-prichwil (Polaris LP thread), ab-paid-search-app (PAM budget), ab-paid-search-abix (MX budget questions from Yun). No new mentions in channels Richard isn't in.
+## 🟢 FYI / Status Updates
 
-- **from:@brandoxy** (2305 total): Recent activity concentrated in #ab-paid-search-global (verification SIM, Google Ads access), #paid-search-amzn (distro request), mpdm-brandoxy-dtpalmer-prichwil (Polaris LP). Brandon also active in #ab-paid-search-oci following up on duplicate hvocijid parameter issue with ychowta.
-
-- **from:@kataxt** (125 total): Kate posted in #team-ab-marketing-fun (India photos) and previously in #ab-marketing-ai (encouraging 1P tool usage, 3P AI tools welcome). No strategic signals since 4/3.
-
-- **"PAM budget" search**: No new mentions beyond the original 4/3 message. Still unanswered.
-
-- **"Polaris LP" / "Brand page" search**: Only hit is Richard's own Tuesday brief in rsw-channel. The actual thread is in mpdm which doesn't surface well in search.
+- [FYI] **OCI CA Launch Monday 4/13** — No new activity since last scan. MCM submitted, Brandon handling. Status unchanged: confirmed.
+- [FYI] **SSR Refmarker Investigation** — No new activity. Status: resolved-monitor.
+- [FYI] **AppTweak NPS survey** — Anthony from AppTweak asked Pete to fill out NPS survey in #ext-apptweak. Not Richard-relevant.
+- [FYI] **AB GenAI Win** — AB JP team automated VOC pain point classification using Bedrock (50 hrs/yr → 33 min). Interesting L3-5 signal for automation narrative.
 
 ## Level 3-5 Insights
 
-- No new L3-5 signals this cycle. AI/community channels (agentspaces-interest, bedrock-agentcore-interest, amazon-builder-genai-power-users) had no messages since last scan window.
-
-## Hot Topics Update
-
-| Topic | Status | Change |
-|-------|--------|--------|
-| Polaris LP Revert / Brand Page Transition | **ACTIVE — PROGRESSING** | Richard responded. Dwayne following up on SIM. Consolidated feedback next. |
-| PAM Budget Availability | **CRITICAL — 5d unanswered** | No change. Escalating urgency. |
-| Google Ads Access Audit | Active | Brandon handling distro addition. Yun updating access levels. |
-| Verification Delay SIM | **NEW** | Brandon shared P411138647. Monitor. |
-| Brand LP Consolidated Feedback | **NEW** | Dwayne proposing structured feedback process for weblab/migration scope. |
-| Monthly Recaps + Goal Updates | Active | Due 4/7. No completion signal. |
-| W14 Dashboard / NA Data Delay | Active | No new messages. |
-| Baloo Early Access | Active | No new messages since last scan. |
-| Kate India Travel | **NEW — FYI** | Kate traveling. Factor into availability. |
+- **GenAI Power Users digest (4/9):** AIM auto-updates now at 100% rollout. ClawSpaces (sandboxed agent swarms) opening to everyone. Pippin creator says Kiro agent workflow won't be replaced by Pippin+SpecStudio for power users. "Dreaming" skill replicates human REM sleep for memory consolidation. AXI design principles for CLI tools that AI agents use more efficiently than MCP.
+- **AgentCore:** AWS Agent Registry now in preview — discover, share, reuse AI agents/tools across enterprise.
+- **Kiro Docker sandboxing** shared for preventing accidental production access — relevant to Richard's L5 agentic orchestration trajectory.
+- **"Taste in the Age of AI"** discussion — Senior Principal Engineer James Hood: judgment/taste increasingly important as AI handles coding. Codifying judgment in team context. Relevant to Richard's L1 (Sharpen Yourself) thinking about what skills matter.
 
 ---
-Scanned: 18 channels, 2 DMs | Messages ingested: 8 | Signals: 6 new/reinforced | Proactive queries: 7
-Last scan: 2026-04-07T22:30:00Z → 2026-04-08T17:00:00Z
+Hot Topics Updated: PAM Budget (7d→CRITICAL), MX Budget (7d→CRITICAL), Polaris LP (still owed), Deeplink Redirect (analysis complete), OCI CA (Monday launch confirmed), Team Offsite (complete)

@@ -1,0 +1,28 @@
+{
+  "allowedTools" : [ "read", "write", "shell", "@builder-mcp/ReadInternalWebsites", "@builder-mcp/InternalSearch" ],
+  "tools" : [ "read", "write", "shell", "@builder-mcp/*" ],
+  "toolsSettings" : {
+    "shell" : {
+      "allowedCommands" : [ "npm .*", "slidev .*", "find .*", "grep .*", "ls .*" ],
+      "autoAllowReadonly" : true
+    },
+    "write" : {
+      "allowedPaths" : [ "/workspace/**", "~/shared/**", "~/**" ]
+    }
+  },
+  "name" : "presentation-creator",
+  "description" : "Specialized agent for creating and managing Slidev presentations with comprehensive Slidev knowledge -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",
+  "prompt" : "You are a presentation creation specialist focused on Slidev presentations. You have deep knowledge of Slidev syntax, features, layouts, themes, animations, and best practices. Help users create, modify, and export professional presentations using Slidev's Markdown-based approach.",
+  "mcpServers" : {
+    "builder-mcp" : {
+      "command" : "builder-mcp"
+    }
+  },
+  "useLegacyMcpJson" : false,
+  "resources" : [ "file:///home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6442127345/context/presentation-creator.md" ],
+  "hooks" : {
+    "agentSpawn" : [ {
+      "command" : "aim agents publish-metrics --agent-name 'presentation-creator' --agent-package 'AgentSpacesAIM-1.0' || true"
+    } ]
+  }
+}

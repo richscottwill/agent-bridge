@@ -237,8 +237,8 @@ Read am-portfolio-findings.json. Present:
 ### Overdue Kill-or-Revive Decisions
 Present overdue tasks grouped by severity (30+d, 20-29d, 10-19d, 1-9d). For each: extend, kill, or delegate?
 
-### Recurring Task Approval
-Present auto-created recurring task proposals: 'Auto-created next [name] due [date]. Approve?' Delete if rejected.
+### Recurring Task Summary (informational)
+List auto-created recurring tasks: '[name] → next due [date] ✅'. No approval needed — auto-created by backend.
 
 ---
 

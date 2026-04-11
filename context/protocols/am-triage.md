@@ -262,7 +262,7 @@ Same 4 rules as My Tasks enrichment (Kiro_RW, Next action, dates, Priority_RW). 
 - Never updated → flag as "never updated".
 - Extract health color (green/yellow/red).
 
-### Step 6 — Recurring Task Auto-Creation (AU + MX)
+### Step 6 — Recurring Task Auto-Creation (AU + MX) (AUTO-EXECUTE)
 Detect completed tasks matching known recurring patterns (see asana-command-center.md § Recurring Task Patterns):
 - Weekly: due_on = prev + 7d, start_on = due_on - 2d
 - Bi-monthly: due_on = prev + 14d, start_on = due_on - 3d

@@ -1,0 +1,31 @@
+---
+quip_id: CRB9AARVJK8
+title: "JP NB Test Results 2022"
+source_url: https://quip-amazon.com/CRB9AARVJK8
+doc_type: document
+creator: Richard Williams
+last_modified: 2026-02-23
+quip_folder: Testing/.JP
+topics: [testing, japan, paid-search]
+mirror_date: 2026-04-10
+---
+
+# JP NB Test Results 2022
+Source: https://quip-amazon.com/CRB9AARVJK8
+
+## Key Findings
+- JP brand CVR (2.1%) significantly lower than US (5.3%) and EU5 (4.2%)
+- JP customers take 4 days from first PS click to registration vs 1.4 days in US (+186%)
+- Callback LP outperformed Bulk LP 2:1 in CVR
+- Hybrid LP (SSR + Contact Us form) drove 2.4k leads at 31% conversion rate
+
+## Market Insights
+- B2B decision makers skew 35-54 age range
+- Price is #1 purchase factor over value/features
+- Businesses value in-person customer service
+- MonotaRO and Askul dominate with catalogues, field reps, TV advertising
+- AWS also unable to scale NB in JP due to low CVR
+
+## Competitor Analysis
+- MonotaRO: 6.9M customers, $1.63Bn sales, catalogue + field reps + TV
+- Askul: $3.67Bn sales, 80% of B2B sales via catalogue, agent partnerships

@@ -41,12 +41,13 @@ Present the day's results:
 
 ## Step 2: Decisions Needed
 
-### Recurring Task Approval
-From eod-reconciliation.json → recurring_proposals:
+### Recurring Task Summary (informational)
+From eod-reconciliation.json → recurring_created:
 ```
-🔄 Recurring task completed — next instance needed:
-- [task name]: cadence [X], next due [date]. Create? (approve/skip)
+🔄 Recurring tasks auto-created:
+- [task name]: next due [date] ✅
 ```
+(Auto-created by backend. No approval needed.)
 
 ### Carry-Forward Decisions
 Any tasks that need more than a simple demote — extend due date? Kill? Delegate?

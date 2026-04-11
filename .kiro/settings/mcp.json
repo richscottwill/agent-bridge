@@ -1,29 +1,66 @@
 {
   "mcpServers": {
-    "aws-outlook-mcp": {
-      "command": "aws-outlook-mcp",
+    "builder-mcp": {
+      "command": "builder-mcp",
       "args": [],
-      "env": {
-        "OUTLOOK_MCP_ENABLE_WRITES": "true"
-      },
+      "disabled": false,
       "autoApprove": [
-        "*"
-      ],
-      "disabledTools": [
-        "email_categories",
-        "email_contacts",
-        "calendar_room_booking",
-        "calendar_shared_list"
+        "ReadInternalWebsites",
+        "QuipEditor",
+        "InternalSearch"
       ]
     },
-    "arcc": {
-      "command": "arcc",
+    "ai-community-slack-mcp": {
+      "command": "aim",
       "args": [
         "mcp",
-        "start",
-        "--scope",
-        "/spaces/nsp_UDffgb3g,/spaces/nsp_yvb9q5li,/spaces/nsp_on1vkyir,/spaces/nsp_Y1qqN5Lk,/spaces/nsp_t7yvb9q5,/spaces/nsp_gk8r2mat,/spaces/nsp_yl36r2th,/spaces/nsp_51rfgtt7,/spaces/nsp_3twfv3h2"
+        "start-server",
+        "ai-community-slack-mcp"
       ],
+      "disabled": false,
+      "autoApprove": [
+        "search",
+        "list_channels",
+        "batch_get_conversation_history",
+        "batch_get_thread_replies",
+        "batch_get_channel_info",
+        "batch_get_user_info",
+        "get_channel_sections",
+        "reaction_tool",
+        "download_file_content",
+        "list_drafts",
+        "lists_items_list",
+        "lists_items_info",
+        "self_dm",
+        "post_message",
+        "batch_set_last_read"
+      ]
+    },
+    "amazon-sharepoint-mcp": {
+      "command": "aim",
+      "args": [
+        "mcp",
+        "start-server",
+        "amazon-sharepoint-mcp"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "sharepoint_search",
+        "sharepoint_read_loop",
+        "sharepoint_list_sites",
+        "sharepoint_list_libraries",
+        "sharepoint_list_files",
+        "sharepoint_read_file"
+      ]
+    },
+    "enterprise-asana-mcp": {
+      "command": "aim",
+      "args": [
+        "mcp",
+        "start-server",
+        "enterprise-asana-mcp"
+      ],
+      "disabled": false,
       "autoApprove": [
         "*"
       ]
@@ -31,17 +68,13 @@
     "hedy": {
       "command": "npx",
       "args": [
+        "-y",
         "mcp-remote",
         "https://api.hedy.bot/mcp"
       ],
+      "disabled": false,
       "autoApprove": [
         "*"
-      ],
-      "disabledTools": [
-        "DeleteTopic",
-        "CreateTopic",
-        "CreateSessionContext",
-        "DeleteSessionContext"
       ]
     },
     "duckdb": {
@@ -49,149 +82,128 @@
       "args": [
         "mcp-server-motherduck",
         "--db-path",
-        "md:ps_analytics",
+        ":memory:",
         "--read-write"
       ],
       "env": {
-        "HOME": "/home/prichwil",
-        "MOTHERDUCK_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpY2hzY290dHdpbGxAZ21haWwuY29tIiwibWRSZWdpb24iOiJhd3MtdXMtZWFzdC0xIiwic2Vzc2lvbiI6InJpY2hzY290dHdpbGwuZ21haWwuY29tIiwicGF0IjoiVDNIYzFVQWYzT3o1bjVkLS03ckdHNlBjMlpUdVNNbFItT3RXMS1qNzVPUSIsInVzZXJJZCI6ImU2MDhlNDZiLTE4YzctNGE5Ny04M2I2LWE0N2ZhOThmNjBhYyIsImlzcyI6Im1kX3BhdCIsInJlYWRPbmx5IjpmYWxzZSwidG9rZW5UeXBlIjoicmVhZF93cml0ZSIsImlhdCI6MTc3NTQ0MzY0N30.tS0Cab3FQ8_CDZ1PqOo9z09KYHEUFHwuLVXRQrxcHig"
+        "motherduck_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpY2hzY290dHdpbGxAZ21haWwuY29tIiwibWRSZWdpb24iOiJhd3MtdXMtZWFzdC0xIiwic2Vzc2lvbiI6InJpY2hzY290dHdpbGwuZ21haWwuY29tIiwicGF0IjoiTlEyWEhRaEV4dmt0akFSSnhZVnpMdm1walFYN0JWempncjYtd0VPZllsZyIsInVzZXJJZCI6ImU2MDhlNDZiLTE4YzctNGE5Ny04M2I2LWE0N2ZhOThmNjBhYyIsImlzcyI6Im1kX3BhdCIsInJlYWRPbmx5IjpmYWxzZSwidG9rZW5UeXBlIjoicmVhZF93cml0ZSIsImlhdCI6MTc3NTg3MTM1NH0.Utt8wo6suM7yMPybOCF44KJZYqbHy3fM6nzzwvLacg4"
       },
+      "disabled": false,
       "autoApprove": [
         "*"
       ]
     },
-    "ai-community-slack-mcp": {
-      "command": "ai-community-slack-mcp",
-      "args": [],
-      "disabled": true
-    },
-    "radar-mcp": {
-      "command": "radar-mcp",
-      "args": [],
-      "autoApprove": [],
-      "disabled": true
-    },
-    "amazon-sharepoint-mcp": {
-      "command": "amazon-sharepoint-mcp",
-      "args": [],
-      "disabled": true
-    },
-    "search-marketing-agent-workspace-alpha-mcp": {
-      "command": "search-marketing-agent-workspace-alpha-mcp",
-      "args": [],
-      "autoApprove": [],
-      "disabled": true
-    },
-    "knowledge-discovery-mcp": {
-      "command": "knowledge-discovery-mcp",
-      "args": [],
-      "disabled": true
-    },
     "loop-mcp": {
-      "command": "loop-mcp",
-      "args": [],
-      "autoApprove": [
-        "*"
+      "command": "aim",
+      "args": [
+        "mcp",
+        "start-server",
+        "loop-mcp"
       ],
-      "disabled": true
+      "disabled": true,
+      "autoApprove": [
+        "read_loop"
+      ]
     },
     "xwiki-mcp": {
-      "command": "xwiki-mcp",
-      "args": [],
-      "autoApprove": [
-        "*"
+      "command": "aim",
+      "args": [
+        "mcp",
+        "start-server",
+        "xwiki-mcp"
       ],
-      "disabled": true
+      "disabled": true,
+      "autoApprove": [
+        "get_wiki_page"
+      ]
     },
     "weblab-mcp": {
-      "command": "weblabmcp",
-      "args": [],
+      "command": "aim",
+      "args": [
+        "mcp",
+        "start-server",
+        "weblab-mcp"
+      ],
+      "disabled": true,
       "autoApprove": [
         "*"
-      ],
-      "disabled": true
+      ]
     },
-    "builder-mcp": {
-      "command": "builder-mcp",
-      "args": [],
-      "env": {
-        "TOOL_PERSONALIZATION_ENABLED": "true",
-        "TOOL_PERSONALIZATION_MIN_EXECUTIONS": "0",
-        "TOOL_PERSONALIZATION_TRAINING_DAYS": "0",
-        "TOOL_PERSONALIZATION_ROLLOUT_PERCENTAGE": "100"
-      },
+    "knowledge-discovery-mcp": {
+      "command": "aim",
+      "args": [
+        "mcp",
+        "start-server",
+        "knowledge-discovery-mcp"
+      ],
+      "disabled": true,
       "autoApprove": [
         "*"
+      ]
+    },
+    "arcc": {
+      "command": "aim",
+      "args": [
+        "mcp",
+        "start-server",
+        "arcc"
       ],
-      "disabledTools": [
-        "MechanicDiscoverTools",
-        "MechanicDescribeTool",
-        "MechanicRunTool",
-        "MechanicSetUserInput",
-        "BrazilBuildAnalyzerTool",
-        "BrazilPackageBuilderAnalyzerTool",
-        "BrazilWorkspace",
-        "CRRevisionCreator",
-        "CRAddComment",
-        "CrCheckout",
-        "GetPipelinesRelevantToUser",
-        "GetPipelineHealth",
-        "GetPipelineDetails",
-        "ApolloReadActions",
-        "GetSasRisks",
-        "GetSasCampaigns",
-        "OncallReadActions",
-        "ReadRemoteTestRun"
+      "disabled": true,
+      "autoApprove": [
+        "search_arcc"
+      ]
+    },
+    "aws-outlook-mcp": {
+      "command": "aim",
+      "args": [
+        "mcp",
+        "start-server",
+        "aws-outlook-mcp"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "*"
       ]
     },
     "taskei-p-mcp": {
-      "command": "taskei-p-mcp",
-      "args": [],
-      "disabled": true
+      "command": "aim",
+      "args": [
+        "mcp",
+        "start-server",
+        "taskei-p-mcp"
+      ],
+      "disabled": true,
+      "autoApprove": []
+    },
+    "search-marketing-agent-workspace-alpha-mcp": {
+      "command": "aim",
+      "args": [
+        "mcp",
+        "start-server",
+        "search-marketing-agent-workspace-alpha-mcp"
+      ],
+      "disabled": true,
+      "autoApprove": []
+    },
+    "radar-mcp": {
+      "command": "aim",
+      "args": [
+        "mcp",
+        "start-server",
+        "radar-mcp"
+      ],
+      "disabled": true,
+      "autoApprove": []
     },
     "aaisd-redshift-mcp": {
-      "command": "redshift-mcp-server",
-      "args": [],
-      "disabled": true
-    },
-    "enterprise-asana-mcp": {
-      "command": "enterprise-asana-mcp",
-      "args": [],
-      "autoApprove": [
-        "*"
-      ]
-    },
-    "agentcore": {
-      "command": "uvx",
+      "command": "aim",
       "args": [
-        "--with",
-        "botocore[crt]",
-        "awslabs.amazon-bedrock-agentcore-mcp-server@latest"
+        "mcp",
+        "start-server",
+        "aaisd-redshift-mcp"
       ],
-      "autoApprove": [
-        "*"
-      ],
-      "env": {
-        "AWS_DEFAULT_REGION": "us-east-1"
-      }
-    },
-    "slack-mcp": {
-      "command": "slack-mcp",
-      "args": [],
-      "autoApprove": [
-        "list_my_channels",
-        "search",
-        "search",
-        "search",
-        "get_messages",
-        "get_messages",
-        "get_messages",
-        "get_messages",
-        "search",
-        "get_messages",
-        "search",
-        "post_message"
-      ]
+      "disabled": true,
+      "autoApprove": []
     }
   },
   "powers": {

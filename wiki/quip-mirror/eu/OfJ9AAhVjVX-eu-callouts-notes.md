@@ -1,0 +1,15 @@
+---
+quip_id: OfJ9AAhVjVX
+title: "EU Callouts notes"
+source_url: https://quip-amazon.com/OfJ9AAhVjVX
+doc_type: document
+creator: Richard Williams
+last_modified: 2025-01-11
+quip_folder: ..EU
+topics: [europe, eu5, paid-search]
+mirror_date: 2026-04-10
+---
+
+# EU Callouts Notes
+Source: https://quip-amazon.com/OfJ9AAhVjVX
+Weekly EU5 PS callouts (WK11-WK22 2024). Detailed WoW/YoY analysis by market. Key themes: DMA attribution impact, competition from Temu/Shopify/Uline, Brand Plus CPC +200%, GA campaign consolidation, bid strategy testing.

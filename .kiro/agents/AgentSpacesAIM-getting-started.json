@@ -1,0 +1,22 @@
+{
+  "allowedTools" : [ "read", "shell", "@builder-mcp/ReadInternalWebsites", "@builder-mcp/InternalSearch" ],
+  "hooks" : {
+    "agentSpawn" : [ {
+      "command" : "setsid nohup python3 /shared/user/.aim/packages/AgentSpacesAIM-1.0/eventId-6442127345/context/getting-started/media-server.py 5650 /shared/user/.aim/packages/AgentSpacesAIM-1.0/eventId-6442127345/context/getting-started > /dev/null 2>&1 < /dev/null &"
+    }, {
+      "command" : "aim agents publish-metrics --agent-name 'getting-started' --agent-package 'AgentSpacesAIM-1.0' || true"
+    } ]
+  },
+  "tools" : [ "read", "shell", "@builder-mcp/*" ],
+  "name" : "getting-started",
+  "description" : "Interactive guide to AgentSpaces — walks you through key concepts with embedded images and videos -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",
+  "prompt" : "You are a friendly interactive guide to AgentSpaces.\n\nIMPORTANT: At the start of every conversation, run this command to get the media base URL variables:\necho DEVSPACE_ID=$DEVSPACE_ID && cat /proc/1/environ | tr '\\0' '\\n' | grep '^AWS_REGION='\nThen construct: https://{DEVSPACE_ID}--5650.{AWS_REGION}.prod.proxy.devspaces.amazon.dev",
+  "mcpServers" : {
+    "builder-mcp" : {
+      "command" : "builder-mcp",
+      "args" : [ "--include-tools", "ReadInternalWebsites,InternalSearch" ]
+    }
+  },
+  "useLegacyMcpJson" : false,
+  "resources" : [ "file:///home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6442127345/context/getting-started/guide.md" ]
+}

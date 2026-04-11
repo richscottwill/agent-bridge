@@ -1,16 +1,17 @@
 <!-- DOC-0329 | duck_id: protocol-am-backend-parallel -->
 # AM-Backend Protocol — Parallel Architecture
 
-Replaces the sequential am-backend.md with a parallel-first design. Ingestion fans out to 3 concurrent subagents. Processing runs sequentially after all ingestion completes.
+Replaces the sequential am-backend.md with a parallel-first design. Ingestion fans out to 6 concurrent subagents. Processing runs sequentially after all ingestion completes.
 
 ---
 
 ## Why Parallel
 
-Phase 1 (Data Collection) has 3 independent data streams:
+Phase 1 (Data Collection) has independent data streams:
 - Slack scan → reads Slack MCP, writes slack-digest.md + DuckDB
 - Asana sync → reads Asana MCP, writes DuckDB + asana-digest.md
 - Email scan → reads Outlook MCP, writes email-triage.md
+- Hedy scan → reads Hedy MCP, writes hedy-digest.md + DuckDB signals
 
 These have zero data dependencies. Running them sequentially wastes ~10 min.
 
@@ -32,7 +33,7 @@ AM-Backend Hook (orchestrator)
 ├─ Phase 0: Schema Verification (orchestrator, ~10s)
 │   └─ DuckDB quick check — database, schema, table count
 │
-├─ Phase 1: PARALLEL INGESTION (4 subagents, ~4 min wall-clock)
+├─ Phase 1: PARALLEL INGESTION (6 subagents, ~4 min wall-clock)
 │   │
 │   ├─ Subagent A: Slack Ingestion (~4 min, longest)
 │   │   ├─ list_channels (unreadOnly=true)
@@ -71,12 +72,20 @@ AM-Backend Hook (orchestrator)
 │       ├─ Pull today's calendar: calendar_view(start_date=today, view=day)
 │       └─ UPSERT into main.calendar_events (DuckDB)
 │
-│   └─ Subagent D: Loop Page Sync (~1 min)
-│       ├─ Query docs.loop_pages for stale pages (>12h since last_ingested)
-│       ├─ For each stale page: sharepoint_read_loop(loopUrl)
-│       ├─ UPDATE docs.loop_pages with content_markdown, content_preview, word_count
-│       └─ Update ops.data_freshness for loop_pages source
-│       Protocol: ~/shared/context/protocols/loop-page-sync.md
+│   ├─ Subagent D: Loop Page Sync (~1 min)
+│   │   ├─ Query docs.loop_pages for stale pages (>12h since last_ingested)
+│   │   ├─ For each stale page: sharepoint_read_loop(loopUrl)
+│   │   ├─ UPDATE docs.loop_pages with content_markdown, content_preview, word_count
+│   │   └─ Update ops.data_freshness for loop_pages source
+│   │   Protocol: ~/shared/context/protocols/loop-page-sync.md
+│   │
+│   └─ Subagent E: Hedy Meeting Sync (~1 min)
+│       ├─ Pull recent meeting transcripts/recaps since last scan
+│       ├─ Extract action items, decisions, topics from meetings
+│       ├─ Classify by meeting series (stakeholder, team, manager, peer)
+│       ├─ Produce hedy-digest.md
+│       ├─ INSERT into signals.hedy_meetings (DuckDB)
+│       └─ Feed extracted topics into signal_tracker for cross-channel reinforcement
 │
 ├─ BARRIER: Wait for all subagents to complete
 │   └─ If any subagent fails: log failure, continue with available data, flag in output
@@ -84,7 +93,7 @@ AM-Backend Hook (orchestrator)
 ├─ Phase 2: SEQUENTIAL PROCESSING (orchestrator or single subagent, ~3 min)
 │   │
 │   ├─ Step 2A: Signal-to-Task Pipeline
-│   │   ├─ Read slack-digest.md + email-triage.md
+│   │   ├─ Read slack-digest.md + email-triage.md + hedy-digest.md
 │   │   ├─ High-priority signals → dedup check → CreateTask or AddComment
 │   │   ├─ Log to signal_task_log in DuckDB
 │   │   └─ Log pipeline execution to workflow_executions
@@ -134,7 +143,7 @@ AM-Backend Hook (orchestrator)
 │   │   └─ GetStatusUpdatesFromObject per project → stale/current/never
 │   │
 │   ├─ Step 4D: Project-Specific Automation
-│   │   ├─ Recurring task detection (AU + MX) → queue creation proposals
+│   │   ├─ Recurring task detection (AU + MX) → auto-create next instances
 │   │   ├─ Cross-team blocker detection (MX) → queue blocker updates
 │   │   ├─ Event countdown (Paid App) → queue escalation proposals
 │   │   └─ Budget/PO tracking (MX + Paid App) → queue critical flags
@@ -157,6 +166,7 @@ AM-Backend Hook (orchestrator)
 │   │   6. email-triage.md
 │   │   7. asana-digest.md
 │   │   8. asana-activity.md
+│   │   9. hedy-digest.md
 │   ├─ Refresh l1_streak for today (read current hard thing from amcc.md or current.md):
 │   │   ```sql
 │   │   INSERT INTO main.l1_streak (tracker_date, workdays_at_zero, hard_thing_task_gid, hard_thing_name)
@@ -174,7 +184,7 @@ AM-Backend Hook (orchestrator)
 │   │   VALUES ('asana_tasks', 'duckdb_table', 12, NOW(), NOW(), false, ARRAY['am_triage','portfolio_scan','daily_tracker'])
 │   │   ON CONFLICT (source_name) DO UPDATE SET last_updated = NOW(), last_checked = NOW(), is_stale = false;
 │   │   ```
-│   │   Repeat for: calendar_events, emails, slack_messages, signal_tracker, l1_streak.
+│   │   Repeat for: calendar_events, emails, slack_messages, signal_tracker, l1_streak, hedy_meetings.
 │   └─ Log hook execution to DuckDB
 │
 └─ DONE — AM-Frontend can now run
@@ -279,7 +289,34 @@ AM-Backend Hook (orchestrator)
 - docs.loop_pages (DuckDB — UPDATE content)
 - ops.data_freshness (DuckDB — UPDATE loop_pages row)
 
-**Does NOT touch:** Slack MCP, Asana MCP, Outlook MCP, any file outputs
+**Does NOT touch:** Slack MCP, Asana MCP, Outlook MCP, Hedy MCP, any file outputs
+
+---
+
+### Subagent E: Hedy Meeting Sync
+
+**Context files to load:**
+- spine.md (tool access)
+- memory.md (relationship graph for attendee context)
+- signal-intelligence.md (topic extraction for cross-channel reinforcement)
+
+**MCP servers used:** Hedy MCP, DuckDB MCP
+
+**Execution order:**
+1. Pull recent meeting recaps/transcripts since last AM scan (use Hedy MCP tools: list sessions, get recaps, get action items)
+2. For each meeting: extract action items, decisions, topics, attendees
+3. Classify by meeting series (stakeholder/team/manager/peer) using attendee names
+4. INSERT meeting data into signals.hedy_meetings (DuckDB)
+5. Extract topics → reinforce in signals.signal_tracker (DuckDB) with +1.0 weight (meeting mentions are high-signal)
+6. Write hedy-digest.md (file)
+
+**Writes:**
+- signals.hedy_meetings (DuckDB — INSERT)
+- signals.signal_tracker (DuckDB — UPDATE reinforcement only, shared with Subagent A but different source_channel values prevent conflicts)
+- ops.data_freshness (DuckDB — UPDATE hedy_meetings row)
+- ~/shared/context/intake/hedy-digest.md (file)
+
+**Does NOT touch:** Slack MCP, Asana MCP, Outlook MCP, SharePoint MCP, any slack-*/asana-*/email-* files
 
 ---
 
@@ -287,24 +324,26 @@ AM-Backend Hook (orchestrator)
 
 The key to safe parallelism: no two subagents write to the same file or DuckDB table.
 
-| Resource | Subagent A (Slack) | Subagent B1 (Asana Sync) | Subagent B2 (Activity) | Subagent C (Email+Cal) | Subagent D (Loop) |
-|----------|-------------------|-------------------------|----------------------|----------------------|-------------------|
-| slack-digest.md | WRITE | — | — | — | — |
-| asana-digest.md | — | WRITE | — | — | — |
-| email-triage.md | — | — | — | WRITE | — |
-| asana-activity.md | — | — | WRITE | — | — |
-| slack-scan-state.json | WRITE | — | — | — | — |
-| asana-scan-state.json | — | — | WRITE | — | — |
-| asana-morning-snapshot.json | — | WRITE | — | — | — |
-| signals.slack_messages | WRITE | — | — | — | — |
-| signals.signal_tracker | WRITE | — | — | — | — |
-| signals.emails | — | — | — | WRITE | — |
-| asana.asana_tasks | — | WRITE | — | — | — |
-| asana.asana_task_history | — | WRITE | — | — | — |
-| main.calendar_events | — | — | — | WRITE | — |
-| docs.loop_pages | — | — | — | — | WRITE |
+| Resource | Subagent A (Slack) | Subagent B1 (Asana Sync) | Subagent B2 (Activity) | Subagent C (Email+Cal) | Subagent D (Loop) | Subagent E (Hedy) |
+|----------|-------------------|-------------------------|----------------------|----------------------|-------------------|-------------------|
+| slack-digest.md | WRITE | — | — | — | — | — |
+| asana-digest.md | — | WRITE | — | — | — | — |
+| email-triage.md | — | — | — | WRITE | — | — |
+| asana-activity.md | — | — | WRITE | — | — | — |
+| hedy-digest.md | — | — | — | — | — | WRITE |
+| slack-scan-state.json | WRITE | — | — | — | — | — |
+| asana-scan-state.json | — | — | WRITE | — | — | — |
+| asana-morning-snapshot.json | — | WRITE | — | — | — | — |
+| signals.slack_messages | WRITE | — | — | — | — | — |
+| signals.signal_tracker | WRITE | — | — | — | — | WRITE* |
+| signals.emails | — | — | — | WRITE | — | — |
+| signals.hedy_meetings | — | — | — | — | — | WRITE |
+| asana.asana_tasks | — | WRITE | — | — | — | — |
+| asana.asana_task_history | — | WRITE | — | — | — | — |
+| main.calendar_events | — | — | — | WRITE | — | — |
+| docs.loop_pages | — | — | — | — | WRITE | — |
 
-Zero overlap across all 4 subagents. Safe to run in parallel.
+*signal_tracker: Both A and E write to this table but with different source_channel values ('slack' vs 'hedy'). No row-level conflicts — safe for parallel execution.
 
 ---
 
@@ -316,6 +355,8 @@ Zero overlap across all 4 subagents. Safe to run in parallel.
 | Subagent B1 (Asana Sync) fails | No DuckDB sync, no asana-digest | Phase 3-4 cannot run (depend on synced data). Frontend falls back to live Asana queries. |
 | Subagent B2 (Activity) fails | No asana-activity.md | Frontend skips activity signals section. Non-critical — no downstream dependencies. |
 | Subagent C (Email+Cal) fails | No email-triage.md, no calendar/email in DuckDB | Phase 2 signal-to-task skips email signals. Frontend falls back to live Outlook MCP for calendar. |
+| Subagent D (Loop) fails | No Loop page refresh | Stale content persists. Non-critical — no downstream dependencies. |
+| Subagent E (Hedy) fails | No hedy-digest.md, no meeting signals | Phase 2 signal-to-task skips Hedy signals. Frontend skips meeting recap section. Non-critical. |
 | DuckDB unreachable | Subagents A+B1 partially fail | Slack digest still written to file. Asana digest still written to file. DuckDB-dependent processing skipped. |
 | Slack MCP rate limit | Subagent A slows/partial | Partial digest written. Missing channels flagged. |
 | Asana MCP rate limit | Subagents B1+B2 slow | B1 and B2 both hit Asana API — potential contention. B1 (bulk reads) takes priority; B2 (per-task stories) is lower priority and can be retried. |
@@ -329,7 +370,7 @@ Zero overlap across all 4 subagents. Safe to run in parallel.
 | Phase | Sequential (current) | Parallel (proposed) |
 |-------|---------------------|-------------------|
 | Phase 0: Schema check | 10s | 10s |
-| Phase 1: Ingestion | ~12 min (4+5+3) | ~4 min (max of 4 parallel: Slack 4m, Asana Sync 3m, Activity 2m, Email 1m) |
+| Phase 1: Ingestion | ~12 min (4+5+3) | ~4 min (max of 6 parallel: Slack 4m, Asana Sync 3m, Activity 2m, Email 1m, Loop 1m, Hedy 1m) |
 | Phase 2: Processing | ~3 min | ~3 min |
 | Phase 3: Enrichment | ~2 min | ~2 min |
 | Phase 4: Portfolio | ~3 min | ~3 min |

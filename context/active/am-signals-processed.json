@@ -1,0 +1,63 @@
+{
+  "generated": "2026-04-10T16:15:00Z",
+  "phase": "2A",
+  "signals_processed": 6,
+  "actions": [
+    {
+      "signal": "PAM budget reply (7d Slack)",
+      "source": "slack",
+      "priority": "CRITICAL",
+      "action": "comment_added",
+      "task_gid": "1213959904341162",
+      "task_name": "Reply to Brandon — PAM budget needs assessment",
+      "task_status": "4d overdue",
+      "comment": "Slack signal now 7d old. Confirm with Brandon if resolved at offsite."
+    },
+    {
+      "signal": "MX budget line / underspend (7d Slack)",
+      "source": "slack",
+      "priority": "CRITICAL",
+      "action": "task_created",
+      "task_gid": "1214006611366954",
+      "task_name": "Reply to Brandon — MX budget line / underspend risk",
+      "routine": "Sweep",
+      "priority_rw": "Today",
+      "due_on": "2026-04-10"
+    },
+    {
+      "signal": "Polaris LP Brand page ETA (Slack)",
+      "source": "slack",
+      "priority": "CRITICAL",
+      "action": "comment_added",
+      "task_gid": "1214006150150818",
+      "task_name": "Reply to Brandon — Polaris LP Brand page ETA",
+      "task_status": "existing task"
+    },
+    {
+      "signal": "AU PS Weekly Update — Lena thread (Email)",
+      "source": "email",
+      "priority": "HIGH",
+      "action": "comment_added",
+      "task_gid": "1213917967984980",
+      "task_name": "Respond to Lena — AU LP URL analysis + CPA methodology",
+      "task_status": "7d overdue",
+      "comment": "Brandon defending Richard's PS ownership to Lena. Makes reply MORE urgent."
+    },
+    {
+      "signal": "SSR IECCP inputs (Email)",
+      "source": "email",
+      "priority": "HIGH",
+      "action": "comment_added",
+      "task_gid": "1214035135799172",
+      "task_name": "Reply to Stacey/York — SSR Cost and Reg inputs for IECCP",
+      "task_status": "existing task"
+    },
+    {
+      "signal": "Deeplink redirect impact analysis (Slack)",
+      "source": "slack",
+      "priority": "FYI",
+      "action": "no_task_needed",
+      "note": "Yun completed analysis. ~16,500 lost sessions. FYI only — no Richard action unless follow-up requested."
+    }
+  ]
+}

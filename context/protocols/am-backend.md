@@ -210,9 +210,10 @@ Same 4 rules as My Tasks. Queue proposals grouped by project → am-enrichment-q
 - >14 days → stale. Exactly 14 → NOT stale. Never updated → flag.
 - Extract health color.
 
-### Step 6 — Recurring Task Auto-Creation (AU + MX)
+### Step 6 — Recurring Task Auto-Creation (AU + MX) (AUTO-EXECUTE)
 Detect completed tasks matching known patterns (asana-command-center.md § Recurring Task Patterns).
-- Compute next dates. Queue creation proposals for AM-Frontend.
+- Compute next dates. Auto-create next instance with same Routine_RW + project + assignee.
+- Log each creation to audit trail. Include in AM-Frontend summary (informational, not approval).
 
 ### Step 7 — Cross-Team Blocker Detection (MX)
 - Read all MX tasks including Cross_Team_Tasks (NEVER write).

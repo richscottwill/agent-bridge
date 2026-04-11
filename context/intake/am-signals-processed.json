@@ -1,34 +1,42 @@
 {
-  "generated": "2026-04-08T16:45:00Z",
+  "generated_at": "2026-04-09T13:15:00Z",
+  "generated_by": "am-backend-parallel",
+
   "slack_signals": {
-    "total": 6,
-    "action_required": [
-      {"topic": "PAM Budget", "urgency": "critical", "days_stale": 5, "source": "Brandon @mention in #ab-paid-search-app"},
-      {"topic": "Polaris LP Consolidated Feedback", "urgency": "high", "source": "Dwayne in mpdm — prepare feedback for weblab scope"},
-      {"topic": "Monthly Recaps + Goal Updates", "urgency": "medium", "source": "Brandon in #global — recaps due 4/7, goals due 4/8"}
-    ],
-    "fyi": [
-      {"topic": "Verification Delay SIM P411138647", "source": "Brandon in #global"},
-      {"topic": "Google Ads Access Audit", "source": "Brandon + Yun handling"},
-      {"topic": "Kate traveling India", "source": "#team-ab-marketing-fun"}
-    ]
+    "total": 10,
+    "action_required": 3,
+    "decisions": 2,
+    "fyi": 5,
+    "critical": ["PAM Budget (6d unanswered)", "MX Budget Line (6d unanswered)", "Polaris LP Brand Page ETA (unanswered)"]
   },
+
   "email_signals": {
     "total": 25,
-    "action_required": [
-      {"subject": "AU PS Weekly Update", "sender": "Brandon Munday", "urgency": "high", "action": "respond — Brandon defending Richard's PS ownership to Lena"},
-      {"subject": "SSR Cost and Reg inputs for IECCP", "sender": "Stacey Gu", "urgency": "high", "action": "review — cost/reg inputs needed"},
-      {"subject": "EU Paid Channels Update", "sender": "Brandon Munday", "urgency": "high", "action": "review — LiveRamp blocker"},
-      {"subject": "MX Paid Search Sync", "sender": "Lorena Alvarez", "urgency": "medium", "action": "review — pending items"}
-    ]
+    "high_priority": 6,
+    "medium_priority": 1,
+    "low_priority": 18,
+    "unread_actionable": ["AU PS Weekly Update (Brandon defending Richard to Lena)", "EU Paid Channels Update (LiveRamp)", "SSR Cost/Reg inputs (Stacey)"]
   },
+
   "asana_activity": {
+    "tasks_scanned": 40,
     "teammate_signals": 0,
-    "notes": "No teammate activity detected in 2+ day window"
+    "notes": "No teammate activity detected since last scan"
   },
+
+  "calendar_context": {
+    "events_today": 7,
+    "key_event": "Google Search Summit in Austin (11a-3p PT) + dinner. Full offsite day.",
+    "ooo": ["Peter Ocampo (Apr 7-15)"]
+  },
+
   "signal_to_task_created": [],
-  "signal_to_task_skipped": [
-    {"topic": "Verification Delay SIM", "reason": "FYI only — monitor, no task needed yet"},
-    {"topic": "Google Ads Access Audit", "reason": "Brandon + Yun handling, no Richard action"}
-  ]
+  "signal_to_task_skipped": [],
+
+  "bucket_cap_check": {
+    "sweep": {"today": 2, "cap": 5, "status": "ok"},
+    "core": {"today": 0, "cap": 4, "status": "ok"},
+    "engine_room": {"today": 2, "cap": 6, "status": "ok"},
+    "admin": {"today": 0, "cap": 3, "status": "ok"}
+  }
 }

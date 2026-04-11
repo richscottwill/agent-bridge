@@ -75,9 +75,10 @@ Tasks with Priority_RW=Today in morning but still incomplete → demote to Urgen
 Update Kiro_RW: 'M/D: Carried fwd. [reason]. [next action].'
 Queue carry-forward list for EOD-Frontend presentation.
 
-### Step 3 — Recurring Task Detection
+### Step 3 — Recurring Task Auto-Creation (AUTO-EXECUTE)
 For each task completed today, check against known recurring patterns.
-If recurring and next instance missing → queue creation proposal for EOD-Frontend.
+If recurring and next instance missing → auto-create next instance with same Routine_RW + project + assignee.
+Log each creation to audit trail. Include in EOD-Frontend summary (informational, not approval).
 
 ### Step 4 — Completion Section Moves (AUTO-EXECUTE)
 Move completed tasks to terminal sections:

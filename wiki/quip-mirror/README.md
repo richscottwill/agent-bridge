@@ -1,0 +1,42 @@
+# Quip Mirror — Outbound Marketing (Internal)
+
+Source: https://quip-amazon.com/UZ3VOhztKN4s/Outbound-Marketing-Internal
+Pulled: 2026-04-10
+
+This directory mirrors the Outbound Marketing team's Quip folder structure.
+Documents and spreadsheets are saved as markdown with YAML frontmatter for agent consumption.
+Spreadsheets are saved as summary files with metadata — raw table data lives in Quip source.
+
+## Stats
+- 102 documents mirrored (markdown with frontmatter)
+- 25 spreadsheets mirrored (summary + frontmatter)
+- ~15 large spreadsheets skipped (size filter)
+- Total: 127 files on disk
+
+## Directory Structure
+
+```
+quip-mirror/
+├── eu/                    # EU market docs
+├── jp/                    # JP market docs (incl. meeting notes)
+├── abix/                  # ABIX (AU + MX)
+│   ├── au/
+│   └── mx/
+├── mobile-app/            # Mobile App + Paid App
+├── partnerships/          # CPS, AB Seller, Engagement
+│   ├── cps/
+│   ├── ab-seller/
+│   └── engagement/
+├── creative/
+├── events/
+├── onboarding/            # Onboarding + Best Practice + Data
+├── planning/              # OCI, OP docs
+├── review/                # MBR/QBR, WBR callouts, meetings
+├── testing/               # All testing docs by region + type
+│   ├── eu/
+│   ├── jp/
+│   ├── na/
+│   ├── landing-pages/
+│   └── paid-app/
+└── root/                  # Top-level loose docs
+```

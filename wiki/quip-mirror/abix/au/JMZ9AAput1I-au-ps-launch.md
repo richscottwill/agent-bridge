@@ -1,0 +1,15 @@
+---
+quip_id: JMZ9AAput1I
+title: "AU PS Launch"
+source_url: https://quip-amazon.com/JMZ9AAput1I
+doc_type: document
+creator: Richard Williams
+last_modified: 2026-04-02
+quip_folder: .ABIX/AU
+topics: [australia, abix, paid-search]
+mirror_date: 2026-04-10
+---
+
+# AU PS Launch
+Source: https://quip-amazon.com/JMZ9AAput1I
+$1.28M gross budget, launched 5/21/25. Google only (92% AU market share). Brand + NB (Product/Vertical) phrase/exact match. EOFY promo sitelink. June actual: 1,790 regs at $54 CPA. Y25 total: 8,763 regs at $158 CPA.

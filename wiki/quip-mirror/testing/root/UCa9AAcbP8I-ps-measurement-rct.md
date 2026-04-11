@@ -1,0 +1,27 @@
+---
+quip_id: UCa9AAcbP8I
+title: "Amazon Business - Paid Search Measurement"
+source_url: https://quip-amazon.com/UCa9AAcbP8I
+doc_type: document
+creator: Richard Williams
+last_modified: 2024-12-05
+quip_folder: Testing
+topics: [testing, experiments, paid-search]
+mirror_date: 2026-04-10
+---
+
+# Amazon Business - Paid Search Measurement (SyRT RCT)
+Source: https://quip-amazon.com/UCa9AAcbP8I
+
+## Key Finding
+US NB keywords drove 16.4% statistically significant lift on AB registrations.
+US Brand keywords: directionally positive but not significant.
+UK: Neither significant, NB directionally positive.
+
+## Incrementality
+US PS NB incrementality: 82-92% (16.4% lift / 18-20% channel share)
+
+## Design
+Synthetic Regional Testing (SyRT) — geographic RCT, gold standard.
+3-arm: T0 (NB only), T1 (Brand only), Control (no ads).
+US: 30/30/40 split. UK: 35/35/30 split.
