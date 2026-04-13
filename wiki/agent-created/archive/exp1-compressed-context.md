@@ -1,4 +1,13 @@
+---
+title: "Compressed Context — Richard Williams"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0122 | duck_id: context-exp1-compressed-context -->
+
 # Compressed Context — Richard Williams
 Last updated: 2026-03-20
 

@@ -1,4 +1,13 @@
+---
+title: "Revisions: kate-doc-appendix.md"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0472 | duck_id: wiki-review-kate-doc-appendix-revisions -->
+
 # Revisions: kate-doc-appendix.md
 
 Source: kate-doc-batch-review.md

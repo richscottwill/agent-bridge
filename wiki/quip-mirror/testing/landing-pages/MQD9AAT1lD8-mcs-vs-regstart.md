@@ -1,13 +1,19 @@
 ---
-quip_id: MQD9AAT1lD8
-title: "Paid Search MCS LP vs. Email Submit Page Test Results"
-source_url: https://quip-amazon.com/MQD9AAT1lD8
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-06-03
-quip_folder: Testing/Landing Pages
-topics: [testing, landing-pages, conversion]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/Landing Pages
+quip_id: MQD9AAT1lD8
+source_url: https://quip-amazon.com/MQD9AAT1lD8
+status: DRAFT
+title: Paid Search MCS LP vs. Email Submit Page Test Results
+topics:
+- testing
+- landing-pages
+- conversion
 ---
 
 # Paid Search MCS LP vs. Email Submit (Reg Start) Page Test Results

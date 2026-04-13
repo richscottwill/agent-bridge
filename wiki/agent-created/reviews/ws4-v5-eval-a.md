@@ -1,4 +1,13 @@
+---
+title: "Review: Workstream 4 — User Experience (v5, Blind Eval A)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0501 | duck_id: wiki-review-ws4-v5-eval-a -->
+
 # Review: Workstream 4 — User Experience (v5, Blind Eval A)
 
 Reviewer: wiki-critic | Date: 2026-04-05 | Mode: Blind (no prior reviews seen)

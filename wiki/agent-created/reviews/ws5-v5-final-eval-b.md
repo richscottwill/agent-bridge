@@ -1,4 +1,13 @@
+---
+title: "Eval B — Blind Subjective Reader Evaluation"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0507 | duck_id: wiki-review-ws5-v5-final-eval-b -->
+
 # Eval B — Blind Subjective Reader Evaluation
 
 **Article:** Workstream 5: Algorithmic Ads (v5)

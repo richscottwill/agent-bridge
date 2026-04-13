@@ -1,3 +1,12 @@
+---
+title: "WW Summary — W14"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
+
 # WW Summary — W14
 
 | Market | Regs | WoW% | Spend | WoW% | CPA | WoW% | YoY Regs% | Proj Regs | vs OP2 |

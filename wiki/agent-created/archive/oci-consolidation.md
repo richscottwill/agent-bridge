@@ -1,0 +1,34 @@
+---
+title: "OCI Doc Consolidation — April 4, 2026"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
+<!-- DOC-0433 | duck_id: wiki-archive-oci-consolidation -->
+
+# OCI Doc Consolidation — April 4, 2026
+
+## What happened
+Three OCI docs were consolidated into two:
+
+### Kept (strategy)
+- `testing/2026-03-25-oci-rollout-playbook.md` — OCI Rollout Playbook (strategy doc, doc-type: strategy)
+  - Business case, validated results, competitive context, measurement framework, decision guide
+
+### Created (execution)
+- `program-details/2026-04-04-oci-execution-guide.md` — OCI Execution Guide (execution doc, doc-type: execution)
+  - Merged content from Implementation Guide + Knowledge Share
+  - Step-by-step how-to, troubleshooting, per-market notes, quick reference
+
+### Archived (replaced)
+- `testing/2026-03-25-oci-rollout-methodology.md` — Thin version of the Playbook. Content absorbed into Playbook + Execution Guide.
+- `program-details/2026-03-25-oci-implementation-guide.md` — Tactical steps absorbed into Execution Guide.
+- `communication/2026-03-25-oci-methodology-knowledge-share.md` — Team reference absorbed into Execution Guide.
+
+## Why
+- Three docs covering the same topic created confusion about which to read
+- Strategy readers (Brandon/Kate) need the Playbook
+- Execution readers (teammates, new hires) need the Execution Guide
+- The doc-type system (strategy/execution/reference) makes this distinction consistent going forward

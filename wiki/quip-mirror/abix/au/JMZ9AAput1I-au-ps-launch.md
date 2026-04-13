@@ -1,13 +1,19 @@
 ---
-quip_id: JMZ9AAput1I
-title: "AU PS Launch"
-source_url: https://quip-amazon.com/JMZ9AAput1I
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-04-02
-quip_folder: .ABIX/AU
-topics: [australia, abix, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: .ABIX/AU
+quip_id: JMZ9AAput1I
+source_url: https://quip-amazon.com/JMZ9AAput1I
+status: DRAFT
+title: AU PS Launch
+topics:
+- australia
+- abix
+- paid-search
 ---
 
 # AU PS Launch

@@ -1,12 +1,19 @@
 ---
-quip_id: BTA9AASZEtA
-title: "/CP URL Transition"
-source_url: https://quip-amazon.com/BTA9AASZEtA
-doc_type: spreadsheet
+audience: amazon-internal
 creator: Richard Williams
-quip_folder: Testing/Landing Pages
-topics: [landing-pages, URL-transition, CP-pages, tracking]
+doc_type: spreadsheet
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/Landing Pages
+quip_id: BTA9AASZEtA
+source_url: https://quip-amazon.com/BTA9AASZEtA
+status: DRAFT
+title: /CP URL Transition
+topics:
+- landing-pages
+- URL-transition
+- CP-pages
+- tracking
 ---
 
 # /CP URL Transition

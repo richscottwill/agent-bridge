@@ -1,4 +1,13 @@
+---
+title: "Batch Review: Five Workstream Articles — Eval A"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0459 | duck_id: wiki-review-batch-5-workstreams-eval-a -->
+
 # Batch Review: Five Workstream Articles — Eval A
 
 Reviewer: wiki-critic | Date: 2026-04-05 | Mode: Blind Eval A

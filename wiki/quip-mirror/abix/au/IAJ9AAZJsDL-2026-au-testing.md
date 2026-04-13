@@ -1,13 +1,19 @@
 ---
-quip_id: IAJ9AAZJsDL
-title: "2026 AU Testing"
-source_url: https://quip-amazon.com/IAJ9AAZJsDL
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-03-18
-quip_folder: .ABIX/AU
-topics: [australia, abix, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: .ABIX/AU
+quip_id: IAJ9AAZJsDL
+source_url: https://quip-amazon.com/IAJ9AAZJsDL
+status: DRAFT
+title: 2026 AU Testing
+topics:
+- australia
+- abix
+- paid-search
 ---
 
 # 2026 AU Testing

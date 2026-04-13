@@ -1,13 +1,19 @@
 ---
-quip_id: AZW9AAdOQYk
-title: "PS LP Testing: Percolate / Guest"
-source_url: https://quip-amazon.com/AZW9AAdOQYk
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-01-08
-quip_folder: Testing/Landing Pages
-topics: [testing, landing-pages, conversion]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/Landing Pages
+quip_id: AZW9AAdOQYk
+source_url: https://quip-amazon.com/AZW9AAdOQYk
+status: DRAFT
+title: 'PS LP Testing: Percolate / Guest'
+topics:
+- testing
+- landing-pages
+- conversion
 ---
 
 # PS LP Testing: Percolate / Guest

@@ -1,13 +1,19 @@
 ---
-quip_id: KBL9AAquAv5
-title: "PS Testing: US Promo Test"
-source_url: https://quip-amazon.com/KBL9AAquAv5
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-12-10
-quip_folder: Testing
-topics: [testing, experiments, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing
+quip_id: KBL9AAquAv5
+source_url: https://quip-amazon.com/KBL9AAquAv5
+status: DRAFT
+title: 'PS Testing: US Promo Test'
+topics:
+- testing
+- experiments
+- paid-search
 ---
 
 # PS Testing: US Promo Test (BFCM)

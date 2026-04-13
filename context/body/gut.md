@@ -115,11 +115,15 @@ Budgets are LEARNED CONSTRAINTS, not static numbers. Every experiment logs `word
 | 9 | Cross-organ pointers | Same fact in 3+ organs → keep in canonical organ, replace others with pointer. Canonical: metrics→Eyes, people→Memory, tasks→Hands, decisions→Brain. | AU CPA in Eyes + Memory + Hands → keep in Eyes, pointer `(see Eyes)` in others |
 
 **7. Identity field protection** (added Run 15, from intake request — Karpathy approved)
+
+#### Rule
 - Identity fields are **non-compressible**. They must survive all COMPRESS, REMOVE, and REWORD experiments unchanged.
 - Protected fields: pronouns, preferred names, nicknames, "goes by" entries, gender identity markers.
-- Rationale: low token cost (~5-10 tokens per person), high harm if lost (misgendering in drafted communications, relationship damage). The cost-benefit is asymmetric — keeping them costs almost nothing; losing them causes real harm.
-- Applies to: Memory (relationship graph), any organ that stores person-level identity data.
 - Accuracy threshold: 100% — same as Brain/Memory factual accuracy. A compression that drops identity fields is treated as an INCORRECT result, triggering automatic REVERT.
+- Applies to: Memory (relationship graph), any organ that stores person-level identity data.
+
+#### Rationale
+- Low token cost (~5-10 tokens per person), high harm if lost (misgendering in drafted communications, relationship damage). The cost-benefit is asymmetric — keeping them costs almost nothing; losing them causes real harm.
 - As the relationship graph grows, this list of protected fields may expand. The principle is: if losing a field could cause the agent to misrepresent someone's identity in a communication, it's non-compressible.
 
 ---
@@ -152,16 +156,16 @@ The gut runs a bloat check during the heart loop cascade (Phase 2) and flags iss
 
 | Signal | Threshold | Action |
 |--------|-----------|--------|
-| Total body word count increasing while accuracy flat/declining | Tracked in `autoresearch_organ_health` | Compression review — data shows body is past its useful size |
-| ADD experiments consistently revert on an organ | posterior_mean(ADD) < 0.3, n > 5 | Organ at natural ceiling — stop adding, try COMPRESS/REWORD |
-| Intake folder > 10 unprocessed files | 10 files | Batch process in next loop run |
-| Archive folder > 50 files | 50 files | Review archive, permanently delete transient files |
-| Same fact in 3+ organs | Any occurrence | Deduplicate — keep in canonical organ, pointer in others |
-| Task in Hands older than 30 days with no status change | 30 days | Either it's blocked (move to Backlog with reason) or it's dead (archive) |
-| Predicted question never scored after 7 days | 7 days | Score it or archive it |
-| Contact in Memory with no interaction for 90 days | 90 days | Move to Dormant Contacts |
-| Agent-bridge organ stale vs source | Any organ modified since last sync | Flag: "🧳 Agent-bridge: [N] organs stale since last sync" |
-| DuckDB experiment table > 500 rows | 500 rows | Archive old experiments to parquet, keep last 100 in active table |
+| Body word count ↑ while accuracy flat/↓ | `autoresearch_organ_health` trend | Compression review — body past useful size |
+| ADD reverts consistently on organ | posterior_mean(ADD) < 0.3, n > 5 | Organ at ceiling — COMPRESS/REWORD only |
+| Intake backlog | > 10 unprocessed files | Batch process next loop |
+| Archive bloat | > 50 files | Review, delete transient |
+| Cross-organ duplication | Same fact in 3+ organs | Deduplicate → canonical organ + pointers |
+| Stale task in Hands | > 30 days, no status change | Backlog (if blocked) or archive (if dead) |
+| Unscored prediction | > 7 days | Score or archive |
+| Dormant contact in Memory | > 90 days no interaction | Move to Dormant |
+| Agent-bridge stale | Any organ modified since last sync | Flag: "🧳 Agent-bridge: [N] organs stale" |
+| DuckDB table size | > 500 rows | Archive old → parquet, keep last 100 active |
 
 ### Bloat Report (included in daily brief when issues detected)
 ```

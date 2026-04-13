@@ -74,6 +74,7 @@ The agent should monitor for these avoidance signals during any interaction:
 | **Meeting absorption** | Richard accepts or attends a meeting that has no clear output expected from him | Fire: "What's your deliverable from this meeting? If none, decline or send a delegate." |
 | **Delegation reversal** | Richard starts doing work that was delegated to someone else | Fire: "This was delegated to [person] on [date]. Are you taking it back? If so, the delegation failed — log it in device.md." |
 | **Email as escape** | Richard opens email or Slack mid-task when a focus block is active | Fire: "You have a 🔒 Focus block until [time]. Email can wait. What's the next sentence?" |
+| **Unread message accumulation** | Slack messages or emails from stakeholders sit unread/unanswered for 3+ days. Detectable via DuckDB: `signals.emails_unanswered` (emails needing response, with `days_old` and `priority`), `signals.slack_unanswered` (Slack @mentions where Richard hasn't replied or reacted, with `days_old`, `priority` [critical/high/medium/normal], `richard_responded_24h`, `richard_responded_ever`). Query: `SELECT * FROM signals.slack_unanswered WHERE richard_responded_ever = FALSE AND richard_reacted = FALSE` + `SELECT * FROM signals.emails_unanswered WHERE action_needed = 'respond'`. The longer they sit, the higher the avoidance signal — especially from Brandon (critical), Kate/Lena/Lorena (high). | Fire: "You have [N] Slack mentions and [N] emails unanswered for [X] days. [Person] is waiting. Reply or acknowledge now." |
 
 ### Escalation Ladder
 

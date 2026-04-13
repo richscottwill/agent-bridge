@@ -20,6 +20,7 @@ Read these files in order:
 3. `shared/wiki/callouts/callout-principles.md` for style and structure rules (read this EVERY invocation)
 4. The previous week's callout at `shared/wiki/callouts/{market}/{market}-2026-w{prev}.md` for continuity and tone
 5. IF `regional_summary` is true in the config: read the EU5 regional summary at `shared/wiki/callouts/eu5/eu5-analysis-2026-w{NN}.md` for cross-market patterns
+6. `shared/context/protocols/seasonality-calendar.md` — check if the reporting week overlaps with any holiday for this market. If it does, the holiday MUST be mentioned in the headline or WoW paragraph and WoW/YoY comparisons must be discounted by the measured impact factor. Missing a holiday attribution produces incorrect causal analysis.
 
 The analysis brief has already done the hard analytical work. Your job is to synthesize that analysis into polished, natural prose that reads like a human marketer wrote it.
 

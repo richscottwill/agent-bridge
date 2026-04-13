@@ -1,13 +1,20 @@
 ---
-quip_id: ZJR9AAdi0DC
-title: "Deep Dive & Debate"
-source_url: https://quip-amazon.com/ZJR9AAdi0DC
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-02-18
-quip_folder: Review
-topics: [review, mbr, qbr, reporting]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Review
+quip_id: ZJR9AAdi0DC
+source_url: https://quip-amazon.com/ZJR9AAdi0DC
+status: DRAFT
+title: Deep Dive & Debate
+topics:
+- review
+- mbr
+- qbr
+- reporting
 ---
 
 # Deep Dive & Debate

@@ -8,7 +8,10 @@
 #   2. Sync weekly/daily/ie%CCP data to MotherDuck ps.performance
 #   3. Score last week's predictions against this week's actuals
 #   4. Generate next-week/month/quarter projections (Brand/NB split + ie%CCP)
-#   5. Output: callout drafts, data briefs, projection tables, WW summary
+#   5. Populate ps.forecast_tracker in MotherDuck (weekly/monthly/quarterly/year-end)
+#   6. Build ps-forecast-tracker.xlsx visual dashboard
+#   7. Push xlsx to SharePoint (Kiro-Drive + Dashboards)
+#   8. Output: callout drafts, data briefs, projection tables, WW summary
 #
 # After this script completes, trigger the WBR callout skill for writing + review.
 
@@ -66,6 +69,11 @@ sync_to_motherduck('$JSON_PATH')
 "
 echo ""
 
+# ── Step 2b: Detect regime changes from change_log ──
+echo "Step 2b: Scanning for regime changes..."
+python3 "$SCRIPT_DIR/prediction/detect_regime_changes.py"
+echo ""
+
 # ── Step 3: Score last week's predictions ──
 echo "Step 3: Scoring $PREV_WEEK predictions..."
 python3 -c "
@@ -84,6 +92,30 @@ run('$CURRENT_WEEK')
 "
 echo ""
 
+# ── Step 5: Populate forecast tracker in MotherDuck ──
+echo "Step 5: Populating ps.forecast_tracker in MotherDuck..."
+python3 "$SCRIPT_DIR/prediction/populate_forecast_tracker.py"
+echo ""
+
+# ── Step 6: Update forecast tracker xlsx (template-based, preserves formatting) ──
+echo "Step 6: Updating ps-forecast-tracker.xlsx..."
+python3 "$SCRIPT_DIR/../dashboards/update-forecast-tracker.py"
+XLSX_OUT="$HOME/shared/dashboards/ps-forecast-tracker.xlsx"
+echo ""
+
+# ── Step 7: Push xlsx to SharePoint (Kiro-Drive + Dashboards) ──
+echo "Step 7: Pushing forecast tracker to SharePoint..."
+python3 -c "
+import subprocess, sys
+xlsx = '$XLSX_OUT'
+# Push to both SharePoint locations
+# Uses the SharePoint MCP via a simple Python wrapper
+print('  Uploading to Kiro-Drive/...')
+print('  Uploading to Dashboards/...')
+print('  (SharePoint push requires MCP — flagging for agent to complete)')
+" 2>&1 || true
+echo ""
+
 echo "═══════════════════════════════════════════"
 echo "  Pipeline complete."
 echo ""
@@ -93,6 +125,14 @@ echo "    Data briefs:    ~/shared/context/active/callouts/<market>/"
 echo "    Projections:    ~/shared/context/active/callouts/projections-${WEEK_SLUG#*-}.md"
 echo "    WW Summary:     ~/shared/context/active/callouts/ww-summary-*"
 echo "    JSON extract:   $JSON_PATH"
+echo "    Forecast DB:    ps.forecast_tracker (MotherDuck)"
+echo "    Forecast xlsx:  ~/shared/dashboards/ps-forecast-tracker.xlsx"
+echo "    SharePoint:     Kiro-Drive/ + Dashboards/ (push pending MCP)"
 echo ""
 echo "  Next: Trigger the WBR callout skill for writing + blind review."
+echo "  Note: SharePoint push requires MCP tools — run agent push after pipeline."
+echo ""
+echo "  # TODO (deferred 2026-04-13): Add step 8 — regenerate market-constraints.md"
+echo "  # from ps.regime_changes + ps.market_status + ps.forecast_tracker."
+echo "  # Target: enable after 4/20. See session-log.md open items."
 echo "═══════════════════════════════════════════"

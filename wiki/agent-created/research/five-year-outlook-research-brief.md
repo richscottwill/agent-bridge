@@ -1,4 +1,13 @@
+---
+title: "Research Brief: PS Five-Year Outlook (2026-2030)"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0438 | duck_id: wiki-five-year-outlook-research-brief -->
+
 # Research Brief: PS Five-Year Outlook (2026-2030)
 
 ## Request

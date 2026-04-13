@@ -1,13 +1,19 @@
 ---
-quip_id: NXF9AAy02OQ
-title: "PO Process Options - Paid Search"
-source_url: https://quip-amazon.com/NXF9AAy02OQ
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-07-29
-quip_folder: root
-topics: [process, finance, po-management]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: root
+quip_id: NXF9AAy02OQ
+source_url: https://quip-amazon.com/NXF9AAy02OQ
+status: DRAFT
+title: PO Process Options - Paid Search
+topics:
+- process
+- finance
+- po-management
 ---
 
 # PO Process Options - Paid Search

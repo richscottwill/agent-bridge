@@ -1,4 +1,13 @@
+---
+title: "Priority 3 Review — April 4, 2026"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0492 | duck_id: wiki-review-priority-3-review-2026-04-04 -->
+
 # Priority 3 Review — April 4, 2026
 
 Reviewer: wiki-critic (updated rubric with Amazon narrative standard + Economy sub-rules)

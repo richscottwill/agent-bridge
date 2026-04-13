@@ -1,4 +1,13 @@
+---
+title: "Revisions: kate-doc-operations.md"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0476 | duck_id: wiki-review-kate-doc-operations-revisions -->
+
 # Revisions: kate-doc-operations.md
 
 Source: kate-doc-batch-review.md

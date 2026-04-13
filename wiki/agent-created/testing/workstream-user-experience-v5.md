@@ -1,4 +1,13 @@
+---
+title: "Workstream 4: User Experience"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0510 | duck_id: wiki-workstream-user-experience -->
+
 ---
 title: "Workstream 4: User Experience"
 status: DRAFT

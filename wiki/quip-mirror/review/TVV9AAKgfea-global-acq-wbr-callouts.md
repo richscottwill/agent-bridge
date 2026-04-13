@@ -1,13 +1,21 @@
 ---
-quip_id: TVV9AAKgfea
-title: "Global Acq WBR Callouts"
-source_url: https://quip-amazon.com/TVV9AAKgfea
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
-last_modified: "2026-04-10"
+doc_type: document
+last_modified: '2026-04-10'
+mirror_date: '2026-04-10'
+owner: Richard Williams
 quip_folder: Review
-topics: [WBR, callouts, paid search, weekly performance, all markets]
-mirror_date: "2026-04-10"
+quip_id: TVV9AAKgfea
+source_url: https://quip-amazon.com/TVV9AAKgfea
+status: DRAFT
+title: Global Acq WBR Callouts
+topics:
+- WBR
+- callouts
+- paid search
+- weekly performance
+- all markets
 ---
 
 # Global Acq WBR Callouts

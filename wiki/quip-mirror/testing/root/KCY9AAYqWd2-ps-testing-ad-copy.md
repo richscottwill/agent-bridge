@@ -1,13 +1,20 @@
 ---
-quip_id: KCY9AAYqWd2
-title: "PS Testing: Ad Copy Updates"
-source_url: https://quip-amazon.com/KCY9AAYqWd2
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-12-16
-quip_folder: Testing
-topics: [testing, ad-copy, sole-proprietor, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing
+quip_id: KCY9AAYqWd2
+source_url: https://quip-amazon.com/KCY9AAYqWd2
+status: DRAFT
+title: 'PS Testing: Ad Copy Updates'
+topics:
+- testing
+- ad-copy
+- sole-proprietor
+- paid-search
 ---
 
 # PS Testing: Ad Copy Updates

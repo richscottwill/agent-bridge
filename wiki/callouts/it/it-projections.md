@@ -1,4 +1,13 @@
+---
+title: "IT Monthly Projections"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0060 | duck_id: callout-it-projections -->
+
 # IT Monthly Projections
 
 Tracks weekly projections vs actuals. Updated each week by the analyst agents.

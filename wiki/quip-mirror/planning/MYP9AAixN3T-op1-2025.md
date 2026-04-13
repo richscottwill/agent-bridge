@@ -1,13 +1,20 @@
 ---
-quip_id: MYP9AAixN3T
-title: "OP1 2025 - Paid Acquisition"
-source_url: https://quip-amazon.com/MYP9AAixN3T
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-02-04
-quip_folder: Planning/OP
-topics: [planning, op1, op2, budgets]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Planning/OP
+quip_id: MYP9AAixN3T
+source_url: https://quip-amazon.com/MYP9AAixN3T
+status: DRAFT
+title: OP1 2025 - Paid Acquisition
+topics:
+- planning
+- op1
+- op2
+- budgets
 ---
 
 # OP1 2025 - Paid Acquisition

@@ -1,13 +1,20 @@
 ---
-quip_id: OAA9AAOTvDS
-title: "2026 OP1 / OP2"
-source_url: https://quip-amazon.com/OAA9AAOTvDS
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-01-08
-quip_folder: Planning/OP
-topics: [planning, op1, op2, budgets]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Planning/OP
+quip_id: OAA9AAOTvDS
+source_url: https://quip-amazon.com/OAA9AAOTvDS
+status: DRAFT
+title: 2026 OP1 / OP2
+topics:
+- planning
+- op1
+- op2
+- budgets
 ---
 
 # 2026 OP1 / OP2

@@ -1,13 +1,19 @@
 ---
-quip_id: PbI9AAI6SDn
-title: "2025.06_JP_LP-Experiment"
-source_url: https://quip-amazon.com/PbI9AAI6SDn
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-01-23
-quip_folder: Testing/.JP
-topics: [testing, japan, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/.JP
+quip_id: PbI9AAI6SDn
+source_url: https://quip-amazon.com/PbI9AAI6SDn
+status: DRAFT
+title: 2025.06_JP_LP-Experiment
+topics:
+- testing
+- japan
+- paid-search
 ---
 
 # 2025.06 JP LP Experiment

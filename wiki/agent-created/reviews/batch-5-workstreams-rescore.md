@@ -1,4 +1,13 @@
+---
+title: "Batch 5 Rescore: Three Workstream Articles (v3)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0460 | duck_id: wiki-review-batch-5-workstreams-rescore -->
+
 # Batch 5 Rescore: Three Workstream Articles (v3)
 
 Reviewer: wiki-critic | Date: 2026-04-05 | Mode: Blind Eval A — Rescore

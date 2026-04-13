@@ -1,3 +1,12 @@
+---
+title: "Quip Mirror — Outbound Marketing (Internal)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
+
 # Quip Mirror — Outbound Marketing (Internal)
 
 Source: https://quip-amazon.com/UZ3VOhztKN4s/Outbound-Marketing-Internal

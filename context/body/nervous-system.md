@@ -62,22 +62,27 @@ Visibility avoidance gates L1 → blocks all downstream levels.
 ### Loop 4: Delegation Verification
 Device | Weekly | Score: ON_TRACK / SLIPPING / FAILED.
 
-| Delegation | Delegate | Status | Last Checked | Action |
-|-----------|----------|--------|-------------|--------|
-| MX Invoicing | Carlos → Lorena | SLIPPING | 3/25 | Handoff incomplete — Carlos departed, Lorena not confirmed |
-| OP1 Contributors | Various | ON_TRACK | 3/25 | No action needed |
+| Delegation | Delegate | Status | Last Checked | Action | Next Step |
+|-----------|----------|--------|-------------|--------|-----------|
+| MX Invoicing | Carlos → Lorena | SLIPPING | 3/25 | Handoff incomplete — Carlos departed, Lorena not confirmed | Confirm with Lorena or escalate to Pedro |
+| OP1 Contributors | Various | ON_TRACK | 3/25 | No action needed | — |
 
 ### Loop 5: System Health
 All organs | Every run | Word counts, staleness, reliability.
 
+#### Body Metrics
 | Metric | Value | Target | Status |
 |--------|-------|--------|--------|
 | Total body words | ~19,200w | Adaptive (learned) | ✅ Tracking |
 | Budgets | Adaptive (Bayesian) | — | 15 experiments, priors updating |
+| Staleness risk | Eyes (Feb data, 30+ days) | <20% stale | ⚠️ Needs Mar WBR |
+
+#### Experiment Metrics
+| Metric | Value | Target | Status |
+|--------|-------|--------|--------|
 | Loop runs | 18 | — | — |
 | Experiments | 50 (31 keep, 19 revert) | — | 62% keep rate. Run 28: 4 experiments (4 keep, 0 revert), first batch on fresh DuckDB priors. |
 | Experiment targets | 112 (63 organ + 49 style/context) | — | 45 organ combos tested (71%). Style guide combos seeded, untested. |
-| Staleness risk | Eyes (Feb data, 30+ days) | <20% stale | ⚠️ Needs Mar WBR |
 
 ### Deferred Loops
 

@@ -1,4 +1,13 @@
+---
+title: "Blind Eval B: Kate Doc V3 — Subjective Reader Evaluation"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0482 | duck_id: wiki-review-kate-doc-v3-eval-b -->
+
 # Blind Eval B: Kate Doc V3 — Subjective Reader Evaluation
 
 **Evaluator:** Wiki-Critic (Blind Eval B — no knowledge of Eval A)

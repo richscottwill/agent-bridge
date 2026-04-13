@@ -1,4 +1,13 @@
+---
+title: "JP W12 Analysis Brief"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0063 | duck_id: callout-jp-analysis-2026-w12 -->
+
 # JP W12 Analysis Brief
 
 ## Registration summary

@@ -1,42 +1,68 @@
 {
-  "generated_at": "2026-04-09T13:15:00Z",
+  "generated_at": "2026-04-13T13:40:00Z",
   "generated_by": "am-backend-parallel",
-
-  "slack_signals": {
-    "total": 10,
-    "action_required": 3,
-    "decisions": 2,
-    "fyi": 5,
-    "critical": ["PAM Budget (6d unanswered)", "MX Budget Line (6d unanswered)", "Polaris LP Brand Page ETA (unanswered)"]
+  "signal_sources": {
+    "slack": {"signals": 11, "channels_scanned": 28, "proactive_queries": 3},
+    "email": {"emails_processed": 25, "high_priority": 8, "medium_priority": 1, "low_priority": 16},
+    "asana_activity": {"tasks_scanned": 98, "teammate_signals": 0},
+    "calendar": {"events_today": 5, "meetings": 3, "all_day": 1, "reminders": 1},
+    "hedy": {"sessions_processed": 11, "open_action_items": 38, "topics_reinforced": 12, "notes": "11 sessions (4/2-4/9) processed. 38 open action items extracted. 12 topics fed into signal_tracker with hedy source_channel."}
   },
-
-  "email_signals": {
-    "total": 25,
-    "high_priority": 6,
-    "medium_priority": 1,
-    "low_priority": 18,
-    "unread_actionable": ["AU PS Weekly Update (Brandon defending Richard to Lena)", "EU Paid Channels Update (LiveRamp)", "SSR Cost/Reg inputs (Stacey)"]
+  "critical_signals": [
+    {
+      "source": "slack",
+      "topic": "PAM Budget",
+      "severity": "critical",
+      "days_stale": 10,
+      "action": "Confirm with Brandon whether resolved at offsite. If not, reply immediately."
+    },
+    {
+      "source": "slack",
+      "topic": "MX Budget / Underspend",
+      "severity": "critical",
+      "days_stale": 10,
+      "action": "Same — confirm offsite resolution or reply TODAY."
+    },
+    {
+      "source": "slack",
+      "topic": "Brand LP DDD Thursday",
+      "severity": "high",
+      "action": "Prepare consolidated feedback list for Thursday DDD."
+    },
+    {
+      "source": "slack",
+      "topic": "Lena MX LP Confusion",
+      "severity": "high",
+      "action": "Coordinate with Yun on data-backed response to Lena."
+    },
+    {
+      "source": "slack",
+      "topic": "OCI CA Launch",
+      "severity": "medium",
+      "action": "Monitor #ab-paid-search-oci today. Launch expected."
+    },
+    {
+      "source": "email",
+      "topic": "Search Marketing WBR Deck",
+      "severity": "high",
+      "action": "UNREAD — Brandon forwarded WBR data from Vasili. Review."
+    },
+    {
+      "source": "email",
+      "topic": "EU Paid Channels Update",
+      "severity": "high",
+      "action": "UNREAD — Brandon flagged LiveRamp unavailability outside US. Review."
+    }
+  ],
+  "signal_to_task_actions": {
+    "created": 0,
+    "existing_matched": 3,
+    "notes": "PAM Budget, MX Budget, and Brand page ETA all have existing Asana tasks. No new task creation needed."
   },
-
-  "asana_activity": {
-    "tasks_scanned": 40,
-    "teammate_signals": 0,
-    "notes": "No teammate activity detected since last scan"
-  },
-
-  "calendar_context": {
-    "events_today": 7,
-    "key_event": "Google Search Summit in Austin (11a-3p PT) + dinner. Full offsite day.",
-    "ooo": ["Peter Ocampo (Apr 7-15)"]
-  },
-
-  "signal_to_task_created": [],
-  "signal_to_task_skipped": [],
-
-  "bucket_cap_check": {
-    "sweep": {"today": 2, "cap": 5, "status": "ok"},
-    "core": {"today": 0, "cap": 4, "status": "ok"},
-    "engine_room": {"today": 2, "cap": 6, "status": "ok"},
-    "admin": {"today": 0, "cap": 3, "status": "ok"}
-  }
+  "today_calendar": [
+    "GenBI Demo (8:00 AM PT)",
+    "ACQ Promo OHs (9:00 AM PT)",
+    "Project Baloo (1:00 PM PT)",
+    "Callout Reminder (2:00 PM PT)"
+  ]
 }

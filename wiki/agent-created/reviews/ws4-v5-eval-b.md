@@ -1,4 +1,13 @@
+---
+title: "Eval B — Blind Subjective Reader Evaluation: Workstream 4: User Experience (v5)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0502 | duck_id: wiki-review-ws4-v5-eval-b -->
+
 # Eval B — Blind Subjective Reader Evaluation: Workstream 4: User Experience (v5)
 
 **Reader persona**: Kate reviewing the workstream detail behind the Testing Approach doc. 10 minutes.

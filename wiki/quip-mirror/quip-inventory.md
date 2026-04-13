@@ -1,3 +1,12 @@
+---
+title: "Quip Inventory — Outbound Marketing (Internal)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
+
 # Quip Inventory — Outbound Marketing (Internal)
 
 Source: https://quip-amazon.com/UZ3VOhztKN4s

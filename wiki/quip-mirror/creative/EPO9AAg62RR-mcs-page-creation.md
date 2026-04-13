@@ -1,13 +1,19 @@
 ---
-quip_id: EPO9AAg62RR
-title: "MCS Page Creation & Authoring"
-source_url: https://quip-amazon.com/EPO9AAg62RR
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-03-02
-quip_folder: Creative
-topics: [creative, mcs, landing-pages]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Creative
+quip_id: EPO9AAg62RR
+source_url: https://quip-amazon.com/EPO9AAg62RR
+status: DRAFT
+title: MCS Page Creation & Authoring
+topics:
+- creative
+- mcs
+- landing-pages
 ---
 
 # MCS Page Creation & Authoring

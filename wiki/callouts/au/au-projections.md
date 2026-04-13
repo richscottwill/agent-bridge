@@ -1,4 +1,13 @@
+---
+title: "AU Projection History"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0012 | duck_id: callout-au-projections -->
+
 # AU Projection History
 
 ## W12 Projection (made during W12 callout)

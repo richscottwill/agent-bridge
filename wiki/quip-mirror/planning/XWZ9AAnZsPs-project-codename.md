@@ -1,13 +1,18 @@
 ---
-quip_id: XWZ9AAnZsPs
-title: "Project [insert codename here]"
-source_url: https://quip-amazon.com/XWZ9AAnZsPs
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-03-25
-quip_folder: Planning
-topics: [planning, strategy]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Planning
+quip_id: XWZ9AAnZsPs
+source_url: https://quip-amazon.com/XWZ9AAnZsPs
+status: DRAFT
+title: Project [insert codename here]
+topics:
+- planning
+- strategy
 ---
 
 # Project [insert codename here]

@@ -1,4 +1,13 @@
+---
+title: "Paid Search Testing Approach & Year Ahead"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0508 | duck_id: wiki-testing-approach-kate -->
+
 ---
 title: "Paid Search Testing Approach & Year Ahead"
 slug: "kate-doc-synthesis"

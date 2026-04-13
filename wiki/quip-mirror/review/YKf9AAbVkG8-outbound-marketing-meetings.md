@@ -1,13 +1,20 @@
 ---
-quip_id: YKf9AAbVkG8
-title: "Outbound Marketing Meetings"
-source_url: https://quip-amazon.com/YKf9AAbVkG8
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-01-27
-quip_folder: Review
-topics: [review, mbr, qbr, reporting]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Review
+quip_id: YKf9AAbVkG8
+source_url: https://quip-amazon.com/YKf9AAbVkG8
+status: DRAFT
+title: Outbound Marketing Meetings
+topics:
+- review
+- mbr
+- qbr
+- reporting
 ---
 
 # Outbound Marketing Meetings

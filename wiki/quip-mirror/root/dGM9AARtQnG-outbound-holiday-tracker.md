@@ -1,12 +1,18 @@
 ---
-quip_id: dGM9AARtQnG
-title: "Outbound Holiday Tracker"
-source_url: https://quip-amazon.com/dGM9AARtQnG
-doc_type: spreadsheet
+audience: amazon-internal
 creator: Richard Williams
-quip_folder: Root
-topics: [team-ops, holiday-coverage, OOO]
+doc_type: spreadsheet
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Root
+quip_id: dGM9AARtQnG
+source_url: https://quip-amazon.com/dGM9AARtQnG
+status: DRAFT
+title: Outbound Holiday Tracker
+topics:
+- team-ops
+- holiday-coverage
+- OOO
 ---
 
 # Outbound Holiday Tracker

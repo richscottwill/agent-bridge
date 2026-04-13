@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PS Market Pacing Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#11111b;color:#cdd6f4;min-height:100vh;padding:24px}
+.card{background:#1e1e2e;border-radius:10px;padding:16px;margin-bottom:12px}
+h1{font-size:22px;font-weight:700}
+.sub{font-size:13px;color:#6c7086;margin-top:4px}
+.pill-row{display:flex;gap:6px;margin:12px 0}
+.pill{padding:6px 14px;border-radius:6px;font-size:13px;cursor:pointer;border:none}
+.pill-on{background:#89b4fa;color:#1e1e2e;font-weight:600}
+.pill-off{background:#313244;color:#a6adc8}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
+.kpi-card{background:#1e1e2e;border-radius:10px;padding:12px 16px}
+.kpi-label{font-size:11px;color:#6c7086;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.kpi-value{font-size:20px;font-weight:700}
+table{width:100%;border-collapse:collapse}
+th{color:#6c7086;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:8px 12px;border-bottom:1px solid #313244;text-align:left}
+td{padding:10px 12px;border-bottom:1px solid #1e1e2e;font-size:14px}
+.pacing-bar{display:flex;align-items:center;gap:8px}
+.pacing-track{width:140px;height:16px;background:#2a2a3e;border-radius:4px;overflow:hidden;position:relative}
+.pacing-fill{height:100%;border-radius:4px;transition:width .3s}
+.pacing-mark{position:absolute;top:0;left:79%;width:2px;height:100%;background:#ffffff44}
+.status{padding:3px 10px;border-radius:4px;font-size:12px;font-weight:600;display:inline-block}
+.spark{display:block}
+.month-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:12px}
+.month-card{background:#181825;border-radius:8px;padding:12px}
+.month-label{font-size:13px;color:#6c7086;margin-bottom:4px}
+.month-val{font-size:18px;font-weight:700}
+.month-sub{font-size:11px;color:#6c7086}
+.ts{font-size:11px;color:#45475a;text-align:center;margin-top:16px}
+</style>
+</head>
+<body>
+<div class="card" style="display:flex;justify-content:space-between;align-items:center">
+  <div><h1>Market Pacing Dashboard</h1><p class="sub">All 10 markets • 2026 YTD vs OP targets</p></div>
+  <div class="pill-row" id="metricPills"></div>
+</div>
+<div class="kpi-grid" id="kpiGrid"></div>
+<div class="card" style="padding:0;overflow:hidden">
+  <table><thead><tr id="tableHead"></tr></thead><tbody id="tableBody"></tbody></table>
+</div>
+<div class="card"><h2 style="font-size:16px;font-weight:700;margin-bottom:12px">Weekly Trend by Market</h2>
+  <div id="sparkGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px"></div>
+</div>
+<div class="ts" id="genTs"></div>
+<script>
+const DATA = {"weekly": {"AU": [{"wk": 1, "regs": 156, "cost": 14370.0, "cpa": 92.11}, {"wk": 2, "regs": 256, "cost": 28866.0, "cpa": 112.76}, {"wk": 3, "regs": 290, "cost": 36323.0, "cpa": 125.25}, {"wk": 4, "regs": 273, "cost": 30823.0, "cpa": 112.9}, {"wk": 5, "regs": 239, "cost": 40090.0, "cpa": 167.74}, {"wk": 6, "regs": 257, "cost": 42680.0, "cpa": 166.07}, {"wk": 7, "regs": 328, "cost": 42397.0, "cpa": 129.26}, {"wk": 8, "regs": 256, "cost": 37196.0, "cpa": 145.3}, {"wk": 9, "regs": 256, "cost": 36408.0, "cpa": 142.22}, {"wk": 10, "regs": 251, "cost": 31589.0, "cpa": 125.85}, {"wk": 11, "regs": 241, "cost": 30999.0, "cpa": 128.63}, {"wk": 12, "regs": 245, "cost": 28005.0, "cpa": 114.3}, {"wk": 13, "regs": 207, "cost": 24381.0, "cpa": 117.78}], "CA": [{"wk": 1, "regs": 613, "cost": 52536.0, "cpa": 85.7}, {"wk": 2, "regs": 641, "cost": 55082.0, "cpa": 85.93}, {"wk": 3, "regs": 716, "cost": 54929.0, "cpa": 76.72}, {"wk": 4, "regs": 741, "cost": 52505.0, "cpa": 70.86}, {"wk": 5, "regs": 751, "cost": 50865.0, "cpa": 67.73}, {"wk": 6, "regs": 731, "cost": 51663.0, "cpa": 70.68}, {"wk": 7, "regs": 700, "cost": 50197.0, "cpa": 71.71}, {"wk": 8, "regs": 691, "cost": 53490.0, "cpa": 77.41}, {"wk": 9, "regs": 689, "cost": 52280.0, "cpa": 75.88}, {"wk": 10, "regs": 644, "cost": 50478.0, "cpa": 78.38}, {"wk": 11, "regs": 749, "cost": 52053.0, "cpa": 69.5}, {"wk": 12, "regs": 681, "cost": 52806.0, "cpa": 77.54}, {"wk": 13, "regs": 812, "cost": 51998.0, "cpa": 64.04}], "DE": [{"wk": 1, "regs": 1079, "cost": 113543.0, "cpa": 105.23}, {"wk": 2, "regs": 1692, "cost": 194725.0, "cpa": 115.09}, {"wk": 3, "regs": 1725, "cost": 245075.0, "cpa": 142.07}, {"wk": 4, "regs": 1748, "cost": 235631.0, "cpa": 134.8}, {"wk": 5, "regs": 1431, "cost": 126820.0, "cpa": 88.62}, {"wk": 6, "regs": 1480, "cost": 154689.0, "cpa": 104.52}, {"wk": 7, "regs": 1510, "cost": 159905.0, "cpa": 105.9}, {"wk": 8, "regs": 1418, "cost": 162082.0, "cpa": 114.3}, {"wk": 9, "regs": 1364, "cost": 191460.0, "cpa": 140.37}, {"wk": 10, "regs": 1404, "cost": 157915.0, "cpa": 112.48}, {"wk": 11, "regs": 1499, "cost": 170477.0, "cpa": 113.73}, {"wk": 12, "regs": 1200, "cost": 138333.0, "cpa": 115.28}, {"wk": 13, "regs": 654, "cost": 109602.0, "cpa": 167.59}], "ES": [{"wk": 1, "regs": 389, "cost": 21415.0, "cpa": 55.05}, {"wk": 2, "regs": 507, "cost": 38433.0, "cpa": 75.81}, {"wk": 3, "regs": 680, "cost": 40819.0, "cpa": 60.03}, {"wk": 4, "regs": 666, "cost": 32865.0, "cpa": 49.35}, {"wk": 5, "regs": 678, "cost": 32961.0, "cpa": 48.61}, {"wk": 6, "regs": 640, "cost": 32606.0, "cpa": 50.95}, {"wk": 7, "regs": 648, "cost": 35380.0, "cpa": 54.6}, {"wk": 8, "regs": 623, "cost": 37174.0, "cpa": 59.67}, {"wk": 9, "regs": 640, "cost": 40504.0, "cpa": 63.29}, {"wk": 10, "regs": 638, "cost": 43563.0, "cpa": 68.28}, {"wk": 11, "regs": 711, "cost": 40265.0, "cpa": 56.63}, {"wk": 12, "regs": 644, "cost": 32664.0, "cpa": 50.72}, {"wk": 13, "regs": 645, "cost": 38165.0, "cpa": 59.17}], "FR": [{"wk": 1, "regs": 658, "cost": 30250.0, "cpa": 45.97}, {"wk": 2, "regs": 1116, "cost": 47676.0, "cpa": 42.72}, {"wk": 3, "regs": 1050, "cost": 70671.0, "cpa": 67.31}, {"wk": 4, "regs": 1079, "cost": 69957.0, "cpa": 64.84}, {"wk": 5, "regs": 1051, "cost": 64417.0, "cpa": 61.29}, {"wk": 6, "regs": 1017, "cost": 57855.0, "cpa": 56.89}, {"wk": 7, "regs": 1085, "cost": 62194.0, "cpa": 57.32}, {"wk": 8, "regs": 1120, "cost": 69766.0, "cpa": 62.29}, {"wk": 9, "regs": 1098, "cost": 77374.0, "cpa": 70.47}, {"wk": 10, "regs": 1079, "cost": 78871.0, "cpa": 73.1}, {"wk": 11, "regs": 1195, "cost": 71668.0, "cpa": 59.97}, {"wk": 12, "regs": 1144, "cost": 60811.0, "cpa": 53.16}, {"wk": 13, "regs": 1191, "cost": 69331.0, "cpa": 58.21}], "IT": [{"wk": 1, "regs": 723, "cost": 40763.0, "cpa": 56.38}, {"wk": 2, "regs": 1303, "cost": 76620.0, "cpa": 58.8}, {"wk": 3, "regs": 1375, "cost": 120319.0, "cpa": 87.5}, {"wk": 4, "regs": 1321, "cost": 115803.0, "cpa": 87.66}, {"wk": 5, "regs": 1368, "cost": 83525.0, "cpa": 61.06}, {"wk": 6, "regs": 1341, "cost": 77304.0, "cpa": 57.65}, {"wk": 7, "regs": 1273, "cost": 95006.0, "cpa": 74.63}, {"wk": 8, "regs": 1307, "cost": 102678.0, "cpa": 78.56}, {"wk": 9, "regs": 1335, "cost": 98316.0, "cpa": 73.64}, {"wk": 10, "regs": 1153, "cost": 98845.0, "cpa": 85.73}, {"wk": 11, "regs": 1443, "cost": 93470.0, "cpa": 64.77}, {"wk": 12, "regs": 1255, "cost": 77673.0, "cpa": 61.89}, {"wk": 13, "regs": 1357, "cost": 97115.0, "cpa": 71.57}], "JP": [{"wk": 1, "regs": 289, "cost": 13804.0, "cpa": 47.76}, {"wk": 2, "regs": 1006, "cost": 39541.0, "cpa": 39.3}, {"wk": 3, "regs": 972, "cost": 31015.0, "cpa": 31.91}, {"wk": 4, "regs": 1047, "cost": 37754.0, "cpa": 36.06}, {"wk": 5, "regs": 1008, "cost": 33739.0, "cpa": 33.47}, {"wk": 6, "regs": 495, "cost": 32933.0, "cpa": 66.53}, {"wk": 7, "regs": 436, "cost": 28287.0, "cpa": 64.88}, {"wk": 8, "regs": 440, "cost": 29473.0, "cpa": 66.98}, {"wk": 9, "regs": 406, "cost": 30296.0, "cpa": 74.62}, {"wk": 10, "regs": 528, "cost": 39247.0, "cpa": 74.33}, {"wk": 11, "regs": 518, "cost": 38339.0, "cpa": 74.01}, {"wk": 12, "regs": 432, "cost": 36527.0, "cpa": 84.55}, {"wk": 13, "regs": 557, "cost": 47457.0, "cpa": 85.2}], "MX": [{"wk": 1, "regs": 183, "cost": 7424.0, "cpa": 40.57}, {"wk": 2, "regs": 252, "cost": 8650.0, "cpa": 34.33}, {"wk": 3, "regs": 270, "cost": 12821.0, "cpa": 47.49}, {"wk": 4, "regs": 241, "cost": 14672.0, "cpa": 60.88}, {"wk": 5, "regs": 224, "cost": 16772.0, "cpa": 74.87}, {"wk": 6, "regs": 229, "cost": 15530.0, "cpa": 67.82}, {"wk": 7, "regs": 246, "cost": 13995.0, "cpa": 56.89}, {"wk": 8, "regs": 368, "cost": 18669.0, "cpa": 50.73}, {"wk": 9, "regs": 264, "cost": 19733.0, "cpa": 74.75}, {"wk": 10, "regs": 298, "cost": 20509.0, "cpa": 68.82}, {"wk": 11, "regs": 392, "cost": 22462.0, "cpa": 57.3}, {"wk": 12, "regs": 326, "cost": 20134.0, "cpa": 61.76}, {"wk": 13, "regs": 354, "cost": 23219.0, "cpa": 65.59}], "UK": [{"wk": 1, "regs": 1005, "cost": 60466.0, "cpa": 60.17}, {"wk": 2, "regs": 1541, "cost": 117937.0, "cpa": 76.53}, {"wk": 3, "regs": 1771, "cost": 141384.0, "cpa": 79.83}, {"wk": 4, "regs": 1599, "cost": 123497.0, "cpa": 77.23}, {"wk": 5, "regs": 1325, "cost": 78918.0, "cpa": 59.56}, {"wk": 6, "regs": 1424, "cost": 90065.0, "cpa": 63.25}, {"wk": 7, "regs": 1370, "cost": 94473.0, "cpa": 68.96}, {"wk": 8, "regs": 1336, "cost": 95850.0, "cpa": 71.74}, {"wk": 9, "regs": 1465, "cost": 104596.0, "cpa": 71.4}, {"wk": 10, "regs": 1395, "cost": 95498.0, "cpa": 68.46}, {"wk": 11, "regs": 1362, "cost": 87797.0, "cpa": 64.46}, {"wk": 12, "regs": 1338, "cost": 89886.0, "cpa": 67.18}, {"wk": 13, "regs": 1531, "cost": 85592.0, "cpa": 55.91}], "US": [{"wk": 1, "regs": 8117, "cost": 559432.0, "cpa": 68.92}, {"wk": 2, "regs": 9076, "cost": 639407.0, "cpa": 70.45}, {"wk": 3, "regs": 9154, "cost": 615693.0, "cpa": 67.26}, {"wk": 4, "regs": 8537, "cost": 598992.0, "cpa": 70.16}, {"wk": 5, "regs": 8847, "cost": 606584.0, "cpa": 68.56}, {"wk": 6, "regs": 8873, "cost": 701435.0, "cpa": 79.05}, {"wk": 7, "regs": 7747, "cost": 718117.0, "cpa": 92.7}, {"wk": 8, "regs": 7953, "cost": 666881.0, "cpa": 83.85}, {"wk": 9, "regs": 8031, "cost": 655795.0, "cpa": 81.66}, {"wk": 10, "regs": 7554, "cost": 599583.0, "cpa": 79.37}, {"wk": 11, "regs": 8307, "cost": 645300.0, "cpa": 77.68}, {"wk": 12, "regs": 8176, "cost": 598574.0, "cpa": 73.21}, {"wk": 13, "regs": 8796, "cost": 582890.0, "cpa": 66.27}]}, "monthly": {"AU": [{"month": "2026 Feb", "regs": 158681, "spend": 381439.0, "cpa": 0.03, "regs_op2": 381439, "spend_op2": null}, {"month": "2026 Jan", "regs": 142576, "spend": 498040.0, "cpa": 0.13, "regs_op2": 498040, "spend_op2": null}, {"month": "2026 Mar", "regs": 114974, "spend": 335519.0, "cpa": -0.08, "regs_op2": 335519, "spend_op2": null}], "CA": [{"month": "2026 Feb", "regs": 207630, "spend": 0, "cpa": 0.01, "regs_op2": null, "spend_op2": null}, {"month": "2026 Jan", "regs": 235294, "spend": 310.0, "cpa": 0.05, "regs_op2": 310, "spend_op2": null}, {"month": "2026 Mar", "regs": 207336, "spend": 27155.0, "cpa": -0.04, "regs_op2": 27155, "spend_op2": null}], "DE": [{"month": "2026 Apr", "regs": 0, "spend": 147592.0, "cpa": -147591.5, "regs_op2": 147592, "spend_op2": null}, {"month": "2026 Aug", "regs": 0, "spend": 186488.0, "cpa": -186488.21, "regs_op2": 186488, "spend_op2": null}, {"month": "2026 Dec", "regs": 0, "spend": 119244.0, "cpa": -119244.3, "regs_op2": 119244, "spend_op2": null}, {"month": "2026 Feb", "regs": 668136, "spend": 147592.0, "cpa": 11089.03, "regs_op2": 147592, "spend_op2": null}, {"month": "2026 Jan", "regs": 857233, "spend": 142845.0, "cpa": -269.83, "regs_op2": 142845, "spend_op2": null}, {"month": "2026 Jul", "regs": 0, "spend": 172614.0, "cpa": -172614.0, "regs_op2": 172614, "spend_op2": null}, {"month": "2026 Jun", "regs": 0, "spend": 147592.0, "cpa": -147591.5, "regs_op2": 147592, "spend_op2": null}, {"month": "2026 Mar", "regs": 576327, "spend": 147592.0, "cpa": -32617.77, "regs_op2": 147592, "spend_op2": null}, {"month": "2026 May", "regs": 0, "spend": 147592.0, "cpa": -147591.5, "regs_op2": 147592, "spend_op2": null}, {"month": "2026 Nov", "regs": 0, "spend": 147592.0, "cpa": -147591.5, "regs_op2": 147592, "spend_op2": null}, {"month": "2026 Oct", "regs": 0, "spend": 147592.0, "cpa": -147591.5, "regs_op2": 147592, "spend_op2": null}, {"month": "2026 Sep", "regs": 0, "spend": 147592.0, "cpa": -147591.5, "regs_op2": 147592, "spend_op2": null}], "ES": [{"month": "2026 Feb", "regs": 145664, "spend": 1915946.0, "cpa": -0.06, "regs_op2": 1915946, "spend_op2": null}, {"month": "2026 Jan", "regs": 155126, "spend": 1885599.0, "cpa": 0.14, "regs_op2": 1885599, "spend_op2": null}, {"month": "2026 Mar", "regs": 154658, "spend": 1676863.0, "cpa": -0.22, "regs_op2": 1676863, "spend_op2": null}], "FR": [{"month": "2026 Feb", "regs": 267189, "spend": 0, "cpa": 0, "regs_op2": null, "spend_op2": null}, {"month": "2026 Jan", "regs": 265268, "spend": 0, "cpa": 0, "regs_op2": null, "spend_op2": null}, {"month": "2026 Mar", "regs": 280680, "spend": 0, "cpa": 0, "regs_op2": null, "spend_op2": null}], "IT": [{"month": "2026 Feb", "regs": 373304, "spend": 0, "cpa": 0, "regs_op2": null, "spend_op2": null}, {"month": "2026 Jan", "regs": 413394, "spend": 0, "cpa": 0, "regs_op2": null, "spend_op2": null}, {"month": "2026 Mar", "regs": 367103, "spend": 0, "cpa": 0, "regs_op2": null, "spend_op2": null}], "JP": [{"month": "2026 Apr", "regs": 0, "spend": 605744.0, "cpa": -605744.08, "regs_op2": 605744, "spend_op2": null}, {"month": "2026 Aug", "regs": 0, "spend": 577109.0, "cpa": -577109.08, "regs_op2": 577109, "spend_op2": null}, {"month": "2026 Dec", "regs": 0, "spend": 570937.0, "cpa": -570936.58, "regs_op2": 570937, "spend_op2": null}, {"month": "2026 Feb", "regs": 120990, "spend": 652349.0, "cpa": 15786.8, "regs_op2": 652349, "spend_op2": null}, {"month": "2026 Jan", "regs": 146366, "spend": 707599.0, "cpa": 149633.45, "regs_op2": 707599, "spend_op2": null}, {"month": "2026 Jul", "regs": 0, "spend": 764309.0, "cpa": -764309.08, "regs_op2": 764309, "spend_op2": null}, {"month": "2026 Jun", "regs": 0, "spend": 658709.0, "cpa": -658709.08, "regs_op2": 658709, "spend_op2": null}, {"month": "2026 Mar", "regs": 161570, "spend": 657549.0, "cpa": -81221.83, "regs_op2": 657549, "spend_op2": null}, {"month": "2026 May", "regs": 0, "spend": 656384.0, "cpa": -656384.08, "regs_op2": 656384, "spend_op2": null}, {"month": "2026 Nov", "regs": 0, "spend": 791159.0, "cpa": -791159.08, "regs_op2": 791159, "spend_op2": null}, {"month": "2026 Oct", "regs": 0, "spend": 759063.0, "cpa": -759062.65, "regs_op2": 759063, "spend_op2": null}, {"month": "2026 Sep", "regs": 0, "spend": 711359.0, "cpa": -711359.08, "regs_op2": 711359, "spend_op2": null}], "MX": [{"month": "2026 Feb", "regs": 67927, "spend": 227982.0, "cpa": 0.28, "regs_op2": 227982, "spend_op2": null}, {"month": "2026 Jan", "regs": 56093, "spend": 311630.0, "cpa": -0.11, "regs_op2": 311630, "spend_op2": null}, {"month": "2026 Mar", "regs": 86323, "spend": 214249.0, "cpa": 0.53, "regs_op2": 214249, "spend_op2": null}], "UK": [{"month": "2026 Apr", "regs": 0, "spend": 108400.0, "cpa": -108400.08, "regs_op2": 108400, "spend_op2": null}, {"month": "2026 Aug", "regs": 0, "spend": 100580.0, "cpa": -100580.08, "regs_op2": 100580, "spend_op2": null}, {"month": "2026 Dec", "regs": 0, "spend": 98546.0, "cpa": -98545.65, "regs_op2": 98546, "spend_op2": null}, {"month": "2026 Feb", "regs": 384984, "spend": 125890.0, "cpa": 19774.08, "regs_op2": 125890, "spend_op2": null}, {"month": "2026 Jan", "regs": 491225, "spend": 135494.0, "cpa": 19632.6, "regs_op2": 135494, "spend_op2": null}, {"month": "2026 Jul", "regs": 0, "spend": 131879.0, "cpa": -131879.16, "regs_op2": 131879, "spend_op2": null}, {"month": "2026 Jun", "regs": 0, "spend": 131595.0, "cpa": -131595.35, "regs_op2": 131595, "spend_op2": null}, {"month": "2026 Mar", "regs": 358773, "spend": 127409.0, "cpa": 27248.49, "regs_op2": 127409, "spend_op2": null}, {"month": "2026 May", "regs": 0, "spend": 141250.0, "cpa": -141250.08, "regs_op2": 141250, "spend_op2": null}, {"month": "2026 Nov", "regs": 0, "spend": 176860.0, "cpa": -176860.45, "regs_op2": 176860, "spend_op2": null}, {"month": "2026 Oct", "regs": 0, "spend": 167778.0, "cpa": -167778.33, "regs_op2": 167778, "spend_op2": null}, {"month": "2026 Sep", "regs": 0, "spend": 149497.0, "cpa": -149497.08, "regs_op2": 149497, "spend_op2": null}], "US": [{"month": "2026 Apr", "regs": 0, "spend": 2831154.0, "cpa": -2831154.24, "regs_op2": 2831154, "spend_op2": null}, {"month": "2026 Aug", "regs": 0, "spend": 3010099.0, "cpa": -3010098.9, "regs_op2": 3010099, "spend_op2": null}, {"month": "2026 Dec", "regs": 0, "spend": 2673287.0, "cpa": -2673287.14, "regs_op2": 2673287, "spend_op2": null}, {"month": "2026 Feb", "regs": 2742228, "spend": 2588377.0, "cpa": 153850.94, "regs_op2": 2588377, "spend_op2": null}, {"month": "2026 Jan", "regs": 2705707, "spend": 2741497.0, "cpa": -35789.74, "regs_op2": 2741497, "spend_op2": null}, {"month": "2026 Jul", "regs": 0, "spend": 3052082.0, "cpa": -3052082.0, "regs_op2": 3052082, "spend_op2": null}, {"month": "2026 Jun", "regs": 0, "spend": 2806897.0, "cpa": -2806896.54, "regs_op2": 2806897, "spend_op2": null}, {"month": "2026 Mar", "regs": 2426346, "spend": 2744318.0, "cpa": -317971.73, "regs_op2": 2744318, "spend_op2": null}, {"month": "2026 May", "regs": 0, "spend": 2828493.0, "cpa": -2828492.91, "regs_op2": 2828493, "spend_op2": null}, {"month": "2026 Nov", "regs": 0, "spend": 2699575.0, "cpa": -2699575.27, "regs_op2": 2699575, "spend_op2": null}, {"month": "2026 Oct", "regs": 0, "spend": 3162885.0, "cpa": -3162884.85, "regs_op2": 3162885, "spend_op2": null}, {"month": "2026 Sep", "regs": 0, "spend": 2938558.0, "cpa": -2938558.16, "regs_op2": 2938558, "spend_op2": null}]}, "projections": {"AU": {"month": "2026 Mar", "projected_regs": 1030, "projected_spend": 125389.0, "op2_regs": 1082, "op2_spend": null, "vs_op2_regs_pct": -4.8, "vs_op2_spend_pct": null, "rationale": "W13 daily rates (wkday 35, wkend 16) for remaining 3 days (1 Sun + 2 wkday). CVR-driven decline in W13 likely from Polaris URL migration disruption. CPA improving on bid strategy efficiency."}, "CA": {"month": "2026 Mar", "projected_regs": 3234, "projected_spend": 229621.0, "op2_regs": 27155, "op2_spend": null, "vs_op2_regs_pct": -0.9, "vs_op2_spend_pct": null, "rationale": null}, "DE": {"month": "2026 Mar", "projected_regs": 5037, "projected_spend": 623300.0, "op2_regs": 147592, "op2_spend": null, "vs_op2_regs_pct": -1.0, "vs_op2_spend_pct": null, "rationale": null}, "ES": {"month": "2026 Mar", "projected_regs": 2914, "projected_spend": 171014.0, "op2_regs": 1676863, "op2_spend": null, "vs_op2_regs_pct": -1.0, "vs_op2_spend_pct": null, "rationale": null}, "FR": {"month": "2026 Mar", "projected_regs": 5119, "projected_spend": 310394.0, "op2_regs": 0, "op2_spend": null, "vs_op2_regs_pct": null, "vs_op2_spend_pct": null, "rationale": null}, "IT": {"month": "2026 Mar", "projected_regs": 5790, "projected_spend": 408723.0, "op2_regs": 0, "op2_spend": null, "vs_op2_regs_pct": null, "vs_op2_spend_pct": null, "rationale": null}, "JP": {"month": "2026 Mar", "projected_regs": 2274, "projected_spend": 181908.0, "op2_regs": 657549, "op2_spend": null, "vs_op2_regs_pct": -1.0, "vs_op2_spend_pct": null, "rationale": null}, "MX": {"month": "2026 Mar", "projected_regs": 1500, "projected_spend": 96000.0, "op2_regs": 859, "op2_spend": null, "vs_op2_regs_pct": 74.6, "vs_op2_spend_pct": null, "rationale": "W12-W13 blended daily rates. 3 remaining days (Sat/Sun/Mon): est 125 regs. ie%CCP at 99%, at target. No holidays remaining."}, "UK": {"month": "2026 Mar", "projected_regs": 6220, "projected_spend": 395000.0, "op2_regs": 5174, "op2_spend": 460638.0, "vs_op2_regs_pct": 20.2, "vs_op2_spend_pct": -14.2, "rationale": "W13 daily rates for remaining 2 weekend + 1 weekday. CVR at 12-week high (4.28%) may not fully sustain but MTD momentum strong. OCI mature + ad copy test Phase 2 compounding."}, "US": {"month": "2026 Mar", "projected_regs": 36603, "projected_spend": 2676156.0, "op2_regs": 2744318, "op2_spend": null, "vs_op2_regs_pct": -1.0, "vs_op2_spend_pct": null, "rationale": null}}, "markets": ["AU", "CA", "DE", "ES", "FR", "IT", "JP", "MX", "UK", "US"]};
+const markets = DATA.markets;
+let curMetric = 'regs';
+
+function init() {
+  const pills = document.getElementById('metricPills');
+  ['regs','cost'].forEach(m => {
+    const b = document.createElement('button');
+    b.className = 'pill ' + (m === curMetric ? 'pill-on' : 'pill-off');
+    b.textContent = m === 'regs' ? 'Registrations' : 'Cost';
+    b.onclick = () => { curMetric = m; render(); };
+    pills.appendChild(b);
+  });
+  document.getElementById('genTs').textContent = 'Generated: ' + new Date().toLocaleString() + ' • Data from ps-analytics.duckdb';
+  render();
+}
+
+function fmt(v, t) {
+  if (v == null) return '—';
+  if (t === 'cost') return '$' + Math.round(v).toLocaleString();
+  if (t === 'pct') return Number(v).toFixed(1) + '%';
+  return Math.round(v).toLocaleString();
+}
+
+function pacingColor(pct) { return pct >= 95 ? '#27ae60' : pct >= 80 ? '#f39c12' : '#e74c3c'; }
+function statusColor(s) { return s === 'on_track' ? '#27ae60' : s === 'at_risk' ? '#f39c12' : s === 'behind' ? '#e74c3c' : '#95a5a6'; }
+
+function computeMarketStats() {
+  return markets.map(m => {
+    const weeks = DATA.weekly[m] || [];
+    const proj = DATA.projections[m];
+    const ytd = weeks.reduce((s, w) => s + (curMetric === 'cost' ? w.cost : w.regs), 0);
+    const op2 = proj ? (curMetric === 'cost' ? proj.op2_spend : proj.op2_regs) : null;
+    // Annualize: 13 weeks of data, project to 52
+    const annualTarget = op2 ? op2 * 12 : null; // rough — OP2 is monthly
+    const monthActual = weeks.slice(-4).reduce((s, w) => s + (curMetric === 'cost' ? w.cost : w.regs), 0);
+    const monthTarget = op2 || 0;
+    const mtdPct = monthTarget > 0 ? (monthActual / monthTarget * 100) : 0;
+    const ytdPct = annualTarget > 0 ? (ytd / annualTarget * 100) : 0;
+    const status = mtdPct >= 95 ? 'on_track' : mtdPct >= 80 ? 'at_risk' : 'behind';
+    const sparkData = weeks.map(w => curMetric === 'cost' ? w.cost : w.regs);
+    return {
+      market: m, ytd, monthActual, monthTarget, mtdPct, annualTarget, ytdPct, status, sparkData,
+      vs_op2: proj ? (curMetric === 'cost' ? proj.vs_op2_spend_pct : proj.vs_op2_regs_pct) : null,
+      rationale: proj ? proj.rationale : null
+    };
+  }).sort((a, b) => b.ytd - a.ytd);
+}
+
+function render() {
+  document.querySelectorAll('.pill').forEach(b => {
+    b.className = 'pill ' + (b.textContent.toLowerCase().startsWith(curMetric === 'regs' ? 'r' : 'c') ? 'pill-on' : 'pill-off');
+  });
+  const stats = computeMarketStats();
+  const fmtType = curMetric === 'cost' ? 'cost' : 'regs';
+
+  // KPIs
+  const totalYTD = stats.reduce((s, m) => s + m.ytd, 0);
+  const onTrack = stats.filter(m => m.status === 'on_track').length;
+  const atRisk = stats.filter(m => m.status === 'at_risk').length;
+  const behind = stats.filter(m => m.status === 'behind').length;
+  document.getElementById('kpiGrid').innerHTML = [
+    { label: 'WW YTD ' + (curMetric === 'cost' ? 'Spend' : 'Regs'), value: fmt(totalYTD, fmtType) },
+    { label: 'Markets Tracked', value: stats.length },
+    { label: 'Weeks of Data', value: (DATA.weekly[markets[0]] || []).length },
+    { label: 'Status', value: `${onTrack} on track • ${atRisk} at risk • ${behind} behind` }
+  ].map(k => `<div class="kpi-card"><div class="kpi-label">${k.label}</div><div class="kpi-value">${k.value}</div></div>`).join('');
+
+  // Table
+  document.getElementById('tableHead').innerHTML = `
+    <th>Market</th><th style="text-align:right">YTD</th><th style="text-align:right">Latest Wk</th>
+    <th>vs OP2</th><th>Status</th>
+  `;
+  document.getElementById('tableBody').innerHTML = stats.map((m, i) => {
+    const lastWk = (DATA.weekly[m.market] || []).slice(-1)[0];
+    const lastVal = lastWk ? (curMetric === 'cost' ? lastWk.cost : lastWk.regs) : 0;
+    const statusLabel = m.status === 'on_track' ? 'On Track' : m.status === 'at_risk' ? 'At Risk' : 'Behind';
+    const vsOp2 = m.vs_op2 != null ? `<span style="color:${m.vs_op2 >= 0 ? '#27ae60' : '#e74c3c'};font-weight:600">${m.vs_op2 > 0 ? '+' : ''}${m.vs_op2}%</span>` : '—';
+    return `<tr style="background:${i % 2 === 0 ? '#1e1e2e' : '#181825'}">
+      <td style="font-weight:700">${m.market}</td>
+      <td style="text-align:right">${fmt(m.ytd, fmtType)}</td>
+      <td style="text-align:right">${fmt(lastVal, fmtType)}</td>
+      <td>${vsOp2}</td>
+      <td><span class="status" style="background:${statusColor(m.status)}22;color:${statusColor(m.status)}">${statusLabel}</span></td>
+    </tr>`;
+  }).join('');
+
+  // Sparklines
+  document.getElementById('sparkGrid').innerHTML = stats.map(m => {
+    const data = m.sparkData;
+    if (data.length < 2) return `<div style="background:#181825;border-radius:8px;padding:12px"><div style="font-weight:600">${m.market}</div><div style="color:#6c7086;font-size:12px">No trend data</div></div>`;
+    const max = Math.max(...data), min = Math.min(...data);
+    const range = max - min || 1;
+    const w = 160, h = 40, pad = 2;
+    const pts = data.map((v, i) => {
+      const x = pad + (i / (data.length - 1)) * (w - pad * 2);
+      const y = h - pad - ((v - min) / range) * (h - pad * 2);
+      return `${x},${y}`;
+    }).join(' ');
+    const last = data[data.length - 1], prev = data[data.length - 2];
+    const color = last >= prev ? '#27ae60' : '#e74c3c';
+    return `<div style="background:#181825;border-radius:8px;padding:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <span style="font-weight:600">${m.market}</span>
+        <span style="font-size:12px;color:${color}">${fmt(last, fmtType)}</span>
+      </div>
+      <svg width="${w}" height="${h}" class="spark"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2"/></svg>
+    </div>`;
+  }).join('');
+}
+
+init();
+</script>
+</body>
+</html>

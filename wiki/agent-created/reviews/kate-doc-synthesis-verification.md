@@ -1,4 +1,13 @@
+---
+title: "Verification Review: Paid Search Testing Approach & Year Ahead"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0479 | duck_id: wiki-review-kate-doc-synthesis-verification -->
+
 # Verification Review: Paid Search Testing Approach & Year Ahead
 
 **Reviewer:** wiki-critic (verification pass)

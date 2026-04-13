@@ -1,4 +1,13 @@
+---
+title: "PAM (Paid App Marketing) Discussions"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0208 | duck_id: meeting-pam -->
+
 # PAM (Paid App Marketing) Discussions
 
 ## Metadata

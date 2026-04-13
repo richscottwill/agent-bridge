@@ -1,4 +1,13 @@
+---
+title: "Session Notes — 2026-03-27 (Pre-Work, Bridge Build)"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0142 | duck_id: context-session-2026-03-27-bridge-build -->
+
 # Session Notes — 2026-03-27 (Pre-Work, Bridge Build)
 
 ## What Was Built

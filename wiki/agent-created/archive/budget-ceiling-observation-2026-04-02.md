@@ -1,4 +1,13 @@
+---
+title: "Observation: Static Word Budgets Are the Last Arbitrary Thresholds"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0119 | duck_id: context-budget-ceiling-observation-2026-04-02 -->
+
 # Observation: Static Word Budgets Are the Last Arbitrary Thresholds
 
 **Source:** Richard, 2026-04-02 system refresh conversation

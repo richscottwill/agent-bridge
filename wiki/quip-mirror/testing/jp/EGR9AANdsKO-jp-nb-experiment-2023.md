@@ -1,13 +1,19 @@
 ---
-quip_id: EGR9AANdsKO
-title: "2023.01_JP-NB_Experiment-Doc"
-source_url: https://quip-amazon.com/EGR9AANdsKO
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-02-23
-quip_folder: Testing/.JP
-topics: [testing, japan, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/.JP
+quip_id: EGR9AANdsKO
+source_url: https://quip-amazon.com/EGR9AANdsKO
+status: DRAFT
+title: 2023.01_JP-NB_Experiment-Doc
+topics:
+- testing
+- japan
+- paid-search
 ---
 
 # 2023.01 JP-NB Experiment Doc

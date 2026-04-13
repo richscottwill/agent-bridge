@@ -1,12 +1,19 @@
 ---
-quip_id: TVY9AAomVYU
-title: "Project Baloo Keywords/URLs"
-source_url: https://quip-amazon.com/TVY9AAomVYU
-doc_type: spreadsheet
+audience: amazon-internal
 creator: Richard Williams
-quip_folder: Testing/Landing Pages
-topics: [landing-pages, Project-Baloo, keywords, URLs]
+doc_type: spreadsheet
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/Landing Pages
+quip_id: TVY9AAomVYU
+source_url: https://quip-amazon.com/TVY9AAomVYU
+status: DRAFT
+title: Project Baloo Keywords/URLs
+topics:
+- landing-pages
+- Project-Baloo
+- keywords
+- URLs
 ---
 
 # Project Baloo Keywords/URLs

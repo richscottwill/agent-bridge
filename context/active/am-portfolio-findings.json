@@ -1,109 +1,73 @@
 {
-  "generated": "2026-04-10T16:15:00Z",
+  "generated_at": "2026-04-13T16:50:00Z",
+  "generated_by": "am-backend-parallel",
 
-  "portfolios": {
-    "abix_ps": {
-      "gid": "1212775592612914",
-      "children": ["AU (1212762061512767)", "MX (1212775592612917)"],
-      "new_projects": false,
-      "matches_amcc": true
-    },
-    "abps": {
-      "gid": "1212762061512816",
-      "children": ["ABPS - NA (1205997667578854)", "ABPS - JP (1205997667578874)", "ABPS - EU5 (1205997667578868)"],
-      "new_projects": false,
-      "matches_amcc": true
-    }
+  "portfolio_summary": {
+    "projects_scanned": 6,
+    "total_overdue": 9,
+    "total_incomplete": 129
   },
 
-  "project_enrichment": {
+  "per_project": {
     "AU": {
-      "gid": "1212762061512767",
-      "incomplete_tasks": 20,
+      "incomplete": 19,
+      "overdue": 4,
       "overdue_tasks": [
-        {"name": "Respond to Lena — AU LP URL analysis + CPA methodology", "days_overdue": 7, "action": "queued_revive"},
-        {"name": "Refmarker mapping audit PoC — AU (old)", "days_overdue": 3},
-        {"name": "Pull AU Polaris LP conversion rate data", "days_overdue": 2}
+        {"name": "Respond to Lena — AU LP URL analysis + CPA methodology", "days_overdue": 10},
+        {"name": "Refmarker mapping audit PoC — AU", "days_overdue": 6},
+        {"name": "Pull AU Polaris LP conversion rate data", "days_overdue": 5},
+        {"name": "Refmarker mapping audit PoC — AU (Engine Room)", "days_overdue": 3}
       ],
-      "near_due_tasks": [
-        {"name": "Refmarker mapping audit PoC — AU", "due_on": "2026-04-10", "action": "already_Today"}
-      ],
-      "recurring_completed": [],
-      "auto_execute_actions": []
+      "signals": ["OCI CA launch TOMORROW — monitor", "Lena response 10d overdue"]
     },
     "MX": {
-      "gid": "1212775592612917",
-      "incomplete_tasks": 11,
+      "incomplete": 6,
+      "overdue": 2,
       "overdue_tasks": [
-        {"name": "Send IECCP follow-up summary to Lorena + review keyword data", "days_overdue": 1}
+        {"name": "Page Creation - Duplicate Beauty and Auto page for MX", "days_overdue": 21},
+        {"name": "Send IECCP follow-up summary to Lorena", "days_overdue": 4}
       ],
-      "near_due_tasks": [],
-      "recurring_completed": [],
-      "auto_execute_actions": []
+      "signals": ["MX budget question 10d unanswered in Slack", "IECCP email from Stacey 7d old"]
     },
     "WW_Testing": {
-      "gid": "1205997667578893",
+      "incomplete": 9,
+      "overdue": 3,
       "overdue_tasks": [
-        {"name": "WW weblab dial-up (Richard)", "days_overdue": 3}
+        {"name": "Paid App", "days_overdue": 13},
+        {"name": "Testing Document for Kate", "days_overdue": 12},
+        {"name": "WW weblab dial-up (Richard)", "days_overdue": 6}
       ],
-      "near_due_tasks": [],
-      "auto_execute_actions": []
+      "signals": ["Testing doc is L1 gate blocker — hard thing block today 9:30a"]
     },
     "Paid_App": {
-      "gid": "1205997667578886",
-      "event_escalation": "No event keywords matched in current incomplete tasks. Next event: Prime Day (~mid-June). No escalation needed yet.",
-      "auto_execute_actions": []
-    }
-  },
-
-  "status_staleness": {
-    "AU": {"status": "never", "last_update": null, "classification": "NEVER"},
-    "MX": {"status": "never", "last_update": null, "classification": "NEVER"},
-    "ABPS_AI_Content": {"status": "never", "last_update": null, "classification": "NEVER"},
-    "WW_Testing": {"status": "never", "last_update": null, "classification": "NEVER"},
-    "Paid_App": {"status": "never", "last_update": null, "classification": "NEVER"},
-    "ABPS_NA": {"status": "never", "last_update": null, "classification": "NEVER"},
-    "ABPS_JP": {"status": "never", "last_update": null, "classification": "NEVER"},
-    "ABPS_EU5": {"status": "never", "last_update": null, "classification": "NEVER"},
-    "note": "All projects have NEVER had a status update posted. Queue for frontend: suggest Richard post initial status updates for AU and MX at minimum."
-  },
-
-  "pinned_context_refresh": {
-    "AU": {
-      "task_gid": "1213917747438931",
-      "last_updated": "4/3",
-      "material_changes_detected": true,
-      "changes": [
-        "Polaris LP Brand page ETA still owed (new signal)",
-        "Brandon defending PS ownership to Lena (new email signal)",
-        "Refmarker audit PoC due today (4/10)",
-        "Pull AU Polaris LP conversion rate data 2d overdue",
-        "OCI CA launch confirmed Monday 4/13"
-      ],
-      "action": "AUTO_REFRESH_QUEUED",
-      "note": "Material changes detected since 4/3. Context task needs refresh with new signals."
+      "incomplete": 10,
+      "overdue": 0,
+      "signals": ["PO task due today (Admin/Today/Important)"]
     },
-    "MX": {
-      "task_gid": "1213917639688517",
-      "last_updated": "4/3",
-      "material_changes_detected": true,
-      "changes": [
-        "MX budget underspend risk — 7d unanswered (new signal, new task created)",
-        "IECCP follow-up to Lorena 1d overdue",
-        "Lorena is now primary stakeholder (Carlos transitioned)"
+    "ABPS_AI_Content": {
+      "incomplete": 44,
+      "overdue": 0,
+      "intake_untriaged": 3,
+      "intake_tasks": [
+        "✅ Approve: OCI Execution Guide",
+        "✅ Approve: AU Paid Search — Market Wiki",
+        "✅ Approve: Enhanced Match / LiveRamp"
       ],
-      "action": "AUTO_REFRESH_QUEUED",
-      "note": "Material changes detected since 4/3. Context task needs refresh with budget signal."
+      "signals": ["3 tasks in Intake awaiting triage/approval"]
     }
   },
 
-  "hard_thing_streak": {
-    "current_hard_thing": "Send Testing Approach v5 to Brandon",
-    "streak": 0,
-    "last_hard_choice": "2026-04-05",
-    "last_avoidance": "2026-04-03",
-    "days_since_last_hard_choice": 5,
-    "assessment": "Streak has likely RESET. 5 days since last hard choice (4/5). No evidence of progress on sending Testing Approach to Brandon since 4/5. Austin offsite (4/8-4/9) may explain gap but today (4/10) is the test — will Richard send it?",
-    "frontend_prompt": "aMCC should fire on session start: Testing Approach v5 is done. 5 days since you finished it. Brandon still hasn't seen it. Open the doc, apply the 5 fixes, hit send. Today."
+  "cross_project_blockers": [
+    {
+      "blocker": "MX Beauty/Auto page blocked by Vijeth footer",
+      "affected_tasks": ["Page Creation - Duplicate Beauty and Auto page for MX"],
+      "days_blocked": 21,
+      "proposal": "Escalate to Vijeth or kill task"
+    }
+  ],
+
+  "event_countdown": {
+    "prime_day": {"approx_date": "2026-06-15", "days_away": 63, "status": "outside_prep_window"},
+    "notes": "No event tasks in escalation window"
   }
 }

@@ -1,12 +1,21 @@
 ---
-quip_id: cFb9AAeMyiG
-title: "BP Engagement - Keywords"
-source_url: https://quip-amazon.com/cFb9AAeMyiG
-doc_type: spreadsheet
+audience: amazon-internal
 creator: Richard Williams
-quip_folder: Partnerships/Engagement
-topics: [engagement, keywords, Business-Prime, 3PL, B2B-fulfillment, document-management]
+doc_type: spreadsheet
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/Engagement
+quip_id: cFb9AAeMyiG
+source_url: https://quip-amazon.com/cFb9AAeMyiG
+status: DRAFT
+title: BP Engagement - Keywords
+topics:
+- engagement
+- keywords
+- Business-Prime
+- 3PL
+- B2B-fulfillment
+- document-management
 ---
 
 # BP Engagement - Keywords

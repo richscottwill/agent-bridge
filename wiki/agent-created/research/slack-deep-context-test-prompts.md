@@ -1,4 +1,13 @@
+---
+title: "Slack Deep Context — Test Prompts"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0375 | duck_id: research-slack-deep-context-test-prompts -->
+
 # Slack Deep Context — Test Prompts
 
 Blind evaluation prompts for the 5 new backfill scans. Paste each into a fresh agent chat. The agent should bootstrap normally (soul.md → body.md → spine.md), discover the scan instructions in the steering file, execute the scan, and produce output.

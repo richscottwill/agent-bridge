@@ -1,12 +1,22 @@
 ---
-quip_id: JcZ9AACc8Tp
-title: "EU5 Monthly Budget"
-source_url: https://quip-amazon.com/JcZ9AACc8Tp
-doc_type: spreadsheet
+audience: amazon-internal
 creator: Yun-Kang Chu
-quip_folder: EU
-topics: [EU, budget, Google, Bing, PO-management, monthly-pacing, invoicing]
+doc_type: spreadsheet
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: EU
+quip_id: JcZ9AACc8Tp
+source_url: https://quip-amazon.com/JcZ9AACc8Tp
+status: DRAFT
+title: EU5 Monthly Budget
+topics:
+- EU
+- budget
+- Google
+- Bing
+- PO-management
+- monthly-pacing
+- invoicing
 ---
 
 # EU5 Monthly Budget

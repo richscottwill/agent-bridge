@@ -18,3 +18,13 @@ run42_exp7	device	Candidate Install gcm+llm	REMOVE	info_retrieval	1607	1549	0.73
 run42_exp8	gut	Compression Protocol	MERGE	info_retrieval	2301	2106	1.0	1.0	1.0	0.0	false	KEEP	150
 run42_exp9	richard-style-slack	Slack-Specific Habits	SPLIT	info_retrieval	1170	1182	1.0	1.0	1.0	0.0	false	KEEP	90
 run42_exp10	richard-style-docs	Strategic Narrative	RESTRUCTURE	info_retrieval	749	749	1.0	1.0	1.0	0.0	false	KEEP	90
+run43_exp1	brain	OP1 Strategic Narrative	REWORD	info_retrieval	1373	1391	1.0	1.0	1.0	0.0	false	KEEP	120
+run43_exp2	memory	Markets and Team	RESTRUCTURE	info_retrieval	2005	2003	1.0	1.0	1.0	0.0	false	KEEP	120
+run43_exp3	gut	Bloat Signals	REWORD	info_retrieval	2106	2055	1.0	1.0	1.0	0.0	false	KEEP	120
+run43_exp4	brain	Leverage Assessment Framework	COMPRESS	info_retrieval	1391	1373	1.0	1.0	1.0	0.0	false	KEEP	120
+run43_exp5	heart	Step 3 Apply Experiment	REMOVE	info_retrieval	3922	3892	0.923	1.0	0.923	-0.077	false	REVERT	120
+run43_exp6	nervous-system	Loop 4 Delegation Verification	ADD	info_retrieval	1247	1260	1.0	1.0	1.0	0.0	false	KEEP	120
+run43_exp7	richard-style-slack	Common Failures	SPLIT	info_retrieval	1205	1214	1.0	1.0	1.0	0.0	false	KEEP	120
+run43_exp8	gut	Identity field protection	SPLIT	info_retrieval	2055	2058	1.0	1.0	1.0	0.0	false	KEEP	120
+run43_exp9	heart	DuckDB Integration	REWORD	info_retrieval	3922	3872	1.0	1.0	1.0	0.0	false	KEEP	120
+run43_exp10	nervous-system	Loop 5 System Health	SPLIT	info_retrieval	1260	1276	1.0	1.0	1.0	0.0	false	KEEP	120

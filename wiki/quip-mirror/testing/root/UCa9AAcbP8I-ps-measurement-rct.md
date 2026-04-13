@@ -1,13 +1,19 @@
 ---
-quip_id: UCa9AAcbP8I
-title: "Amazon Business - Paid Search Measurement"
-source_url: https://quip-amazon.com/UCa9AAcbP8I
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-12-05
-quip_folder: Testing
-topics: [testing, experiments, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing
+quip_id: UCa9AAcbP8I
+source_url: https://quip-amazon.com/UCa9AAcbP8I
+status: DRAFT
+title: Amazon Business - Paid Search Measurement
+topics:
+- testing
+- experiments
+- paid-search
 ---
 
 # Amazon Business - Paid Search Measurement (SyRT RCT)

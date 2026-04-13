@@ -309,7 +309,7 @@ These patterns emerged from data. They should inform technique selection but not
 
 ## DuckDB Integration
 
-All experiment data lives in `~/shared/data/duckdb/ps-analytics.duckdb`. The loop reads priors before each experiment and writes results after each decision. Organs hold the protocol (how to experiment). DuckDB holds the data (what happened, what works).
+All experiment data lives in `~/shared/data/duckdb/ps-analytics.duckdb`. Organs hold protocol (how to experiment). DuckDB holds data (what happened, what works).
 
 ### Update Protocol
 
@@ -318,9 +318,9 @@ After every experiment decision:
 2. UPDATE `autoresearch_priors` (increment α or β)
 3. At end of batch: INSERT into `autoresearch_organ_health` (one row per organ with current word counts)
 
-The priors table is the learning mechanism. Over time, posterior_mean converges to the true keep rate for each target×technique combo. The UCB score ensures unexplored combos get tried (high uncertainty → high UCB) while proven winners get prioritized (high mean → high UCB). Proven losers (low mean, low uncertainty) naturally fall off.
+Posterior_mean converges to the true keep rate per target×technique. UCB score = posterior_mean + posterior_std — unexplored combos get tried (high uncertainty), proven winners get prioritized (high mean), proven losers naturally fall off.
 
-**Seeding new target categories:** When a new target category is added (e.g., style guides), `autoresearch_priors` needs new rows for every target × technique combination, initialized at Beta(1,1). The `eval_type` column in `autoresearch_experiments` distinguishes `information_retrieval` (organ experiments) from `output_quality` (style guide / context file / hook prompt experiments). Both types flow through the same Bayesian updating mechanism.
+**Seeding new targets:** New target category → new rows in `autoresearch_priors` for every target × technique combo, initialized Beta(1,1). `eval_type` column distinguishes `information_retrieval` (organs) from `output_quality` (style guides / context files / hooks). Both flow through the same Bayesian updating.
 
 ### Tables
 

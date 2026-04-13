@@ -1,13 +1,23 @@
 ---
-quip_id: SLO9AALz93k
-title: "JP Paid Search Tracker"
-source_url: https://quip-amazon.com/SLO9AALz93k
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
-last_modified: "2023-01-12"
+doc_type: document
+last_modified: '2023-01-12'
+mirror_date: '2026-04-10'
+owner: Richard Williams
 quip_folder: JP/Meeting
-topics: [JP, tracker, paid search, performance, meetings, callback, nonbrand]
-mirror_date: "2026-04-10"
+quip_id: SLO9AALz93k
+source_url: https://quip-amazon.com/SLO9AALz93k
+status: DRAFT
+title: JP Paid Search Tracker
+topics:
+- JP
+- tracker
+- paid search
+- performance
+- meetings
+- callback
+- nonbrand
 ---
 
 # JP Paid Search Tracker

@@ -1,13 +1,22 @@
 ---
-quip_id: PXA9AAUlEXZ
-title: "OCI Error Investigation"
-source_url: https://quip-amazon.com/PXA9AAUlEXZ
-doc_type: document
+audience: amazon-internal
 creator: Stacey Gu
-last_modified: "2025-07-08"
+doc_type: document
+last_modified: '2025-07-08'
+mirror_date: '2026-04-10'
+owner: Richard Williams
 quip_folder: Planning/OCI
-topics: [OCI, error investigation, tracking, hvocijid, Android, troubleshooting]
-mirror_date: "2026-04-10"
+quip_id: PXA9AAUlEXZ
+source_url: https://quip-amazon.com/PXA9AAUlEXZ
+status: DRAFT
+title: OCI Error Investigation
+topics:
+- OCI
+- error investigation
+- tracking
+- hvocijid
+- Android
+- troubleshooting
 ---
 
 # OCI Error Investigation

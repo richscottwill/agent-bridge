@@ -1,4 +1,13 @@
+---
+title: "Batch Review: Kate Doc — Paid Search Testing Approach & Year Ahead"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0473 | duck_id: wiki-review-kate-doc-batch-review -->
+
 # Batch Review: Kate Doc — Paid Search Testing Approach & Year Ahead
 
 Reviewer: wiki-critic

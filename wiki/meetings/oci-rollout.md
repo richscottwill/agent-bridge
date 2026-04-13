@@ -1,4 +1,13 @@
+---
+title: "OCI Rollout Discussions"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0207 | duck_id: meeting-oci-rollout -->
+
 # OCI Rollout Discussions
 
 ## Metadata

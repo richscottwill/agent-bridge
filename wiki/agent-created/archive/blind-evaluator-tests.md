@@ -1,4 +1,13 @@
+---
+title: "Blind Evaluator Test Suite"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0002 | duck_id: audit-blind-evaluator-tests -->
+
 # Blind Evaluator Test Suite
 
 Give a fresh agent ONLY ~/shared/DIRECTORY-MAP.md and these prompts. No other context.

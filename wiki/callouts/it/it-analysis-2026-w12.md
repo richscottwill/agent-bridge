@@ -1,4 +1,13 @@
+---
+title: "IT W12 Analysis Brief"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0054 | duck_id: callout-it-analysis-2026-w12 -->
+
 # IT W12 Analysis Brief
 
 ## Registration summary

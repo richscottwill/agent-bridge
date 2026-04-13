@@ -1,37 +1,39 @@
 {
-  "generated_at": "2026-04-09T13:15:00Z",
+  "generated_at": "2026-04-13T13:40:00Z",
   "generated_by": "am-backend-parallel",
-
   "portfolio_summary": {
-    "AU": {"incomplete": 19, "overdue": 3, "today": 2, "status_staleness": "unknown"},
-    "MX": {"incomplete": 6, "overdue": 1, "today": 1, "status_staleness": "unknown"},
-    "WW_Testing": {"incomplete": 10, "overdue": 3, "today": 0, "status_staleness": "unknown"},
-    "Paid_App": {"incomplete": 12, "overdue": 0, "today": 0, "status_staleness": "unknown"},
-    "WW_Acquisition": {"incomplete": 0, "overdue": 0, "today": 0, "status_staleness": "unknown"}
+    "AU": {"total": 17, "overdue": 4, "today": 4, "near_due": 3},
+    "MX": {"total": 5, "overdue": 1, "today": 1, "near_due": 1},
+    "WW Testing": {"total": 9, "overdue": 3, "today": 0, "near_due": 0},
+    "Paid App": {"total": 12, "overdue": 1, "today": 2, "near_due": 1},
+    "ABPS AI Content": {"total": 44, "overdue": 0, "today": 0, "near_due": 0},
+    "WW Acquisition": {"total": 0, "overdue": 0, "today": 0, "near_due": 0}
   },
-
-  "today_tasks": [
-    {"name": "Refmarker mapping audit PoC — AU", "project": "AU", "due": "2026-04-07", "routine": "Sweep"},
-    {"name": "Send IECCP follow-up summary to Lorena + review keyword data", "project": "MX", "due": "2026-04-09", "routine": "Sweep"},
-    {"name": "Refmarker mapping audit PoC — AU (execution)", "project": "AU", "due": "2026-04-10", "routine": "Engine Room"},
-    {"name": "Weekly Reporting - Global WBR sheet", "project": "AU", "due": "2026-04-13", "routine": "Engine Room"}
-  ],
-
-  "recurring_task_proposals": [],
-  "blocker_updates": [],
-  "event_escalation_proposals": [],
-  "budget_flags": [
-    {
-      "project": "Paid App",
-      "flag": "PAM US PO due 4/11 — Brandon asked about PAM budget 6d ago (unanswered). PO task at Urgent priority.",
-      "action": "Queue for frontend: Richard must reply to Brandon on PAM budget before raising PO"
-    }
-  ],
-  "context_refresh": {
-    "au_context_task": "No material change detected — skip refresh",
-    "mx_context_task": "No material change detected — skip refresh"
+  "abps_ai_state": {
+    "intake": 3,
+    "review": 41,
+    "in_progress": 0,
+    "active": 0,
+    "archive": 0,
+    "notes": "41 articles in Review section. 3 approval tasks in Intake. No articles currently in Active or In Progress."
   },
-
-  "new_projects_detected": [],
-  "schema_changes": []
+  "critical_flags": [
+    "PAM Budget — 10d unanswered Brandon @mention. MUST address TODAY.",
+    "MX Budget / Underspend — 10d unanswered. MUST address TODAY.",
+    "Testing Document for Kate — 12d overdue. Hard thing: send v5 to Brandon.",
+    "All 4 routine buckets over cap. Engine Room worst at 15/6.",
+    "36 tasks missing Kiro_RW and Next_Action_RW enrichment."
+  ],
+  "oci_ca_launch": {
+    "status": "launch-day-today",
+    "notes": "OCI CA launch is TODAY (4/13). Zero Slack activity in channel. Brandon handling MCM. Monitor."
+  },
+  "brand_lp_ddd": {
+    "status": "thursday-alignment",
+    "notes": "Brandon setting up Thursday DDD. Richard owes consolidated feedback list. FR/DE going with WW template. Carousel removal key concern."
+  },
+  "lena_confusion": {
+    "status": "needs-data-response",
+    "notes": "Lena confused on reg start vs MCS conversion rates. Yun clarified in Slack. Needs data-backed response."
+  }
 }

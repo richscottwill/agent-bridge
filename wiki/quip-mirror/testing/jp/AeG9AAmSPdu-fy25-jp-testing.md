@@ -1,13 +1,19 @@
 ---
-quip_id: AeG9AAmSPdu
-title: "FY25 JP Testing"
-source_url: https://quip-amazon.com/AeG9AAmSPdu
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-01-08
-quip_folder: Testing/.JP
-topics: [testing, japan, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/.JP
+quip_id: AeG9AAmSPdu
+source_url: https://quip-amazon.com/AeG9AAmSPdu
+status: DRAFT
+title: FY25 JP Testing
+topics:
+- testing
+- japan
+- paid-search
 ---
 
 # FY25 JP Testing

@@ -1,13 +1,19 @@
 ---
-quip_id: EZZ9AAR7EEz
-title: "MX Audit - Keyword Cleanup Framework"
-source_url: https://quip-amazon.com/EZZ9AAR7EEz
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-08-25
-quip_folder: .ABIX/MX
-topics: [mexico, abix, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: .ABIX/MX
+quip_id: EZZ9AAR7EEz
+source_url: https://quip-amazon.com/EZZ9AAR7EEz
+status: DRAFT
+title: MX Audit - Keyword Cleanup Framework
+topics:
+- mexico
+- abix
+- paid-search
 ---
 
 # MX Audit – Keyword Cleanup Framework

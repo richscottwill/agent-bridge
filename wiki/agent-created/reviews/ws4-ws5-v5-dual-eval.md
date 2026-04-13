@@ -1,4 +1,13 @@
+---
+title: "Dual Evaluation: WS4 User Experience v5 & WS5 Algorithmic Ads v5"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0503 | duck_id: wiki-review-ws4-ws5-v5-dual-eval -->
+
 # Dual Evaluation: WS4 User Experience v5 & WS5 Algorithmic Ads v5
 
 Reviewed: 2026-04-05

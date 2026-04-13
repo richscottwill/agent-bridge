@@ -1,4 +1,13 @@
+---
+title: "Blind Test — Evaluator B"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0465 | duck_id: wiki-review-blind-test-evaluator-b -->
+
 # Blind Test — Evaluator B
 
 > Independent evaluation. No prior reviews seen. Scored against wiki-critic.md rubric + richard-writing-style.md + richard-style-docs.md + richard-style-amazon.md as quality bar.

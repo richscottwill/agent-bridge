@@ -1,4 +1,13 @@
+---
+title: "Wiki Articles Batch Review — Batch 2"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0495 | duck_id: wiki-review-wiki-articles-batch-review -->
+
 # Wiki Articles Batch Review — Batch 2
 
 Reviewer: wiki-critic

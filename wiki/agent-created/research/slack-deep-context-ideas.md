@@ -1,4 +1,13 @@
+---
+title: "Slack Deep Context Ideas"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0374 | duck_id: research-slack-deep-context-ideas -->
+
 # Slack Deep Context Ideas
 
 *Ways to use Slack data — historical backfill, novel uses, and ongoing enrichment — to tighten the knowledge graph across the Body system.*

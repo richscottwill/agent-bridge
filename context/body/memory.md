@@ -13,11 +13,14 @@ Last updated: 2026-04-03 (EOD-1: Kate interaction updated — direct email threa
 
 L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate Rundell (L8). VP: Todd Heimes (L10). Seattle, SEA28. Hired Nov 2023.
 
-### Markets & Team
+### Team (Brandon's directs)
 
-**Markets:** Hands-on: AU (Alexis Eck L6, Lena Zak L7), MX (Lorena Alvarez Larrea L5 — primary PS stakeholder as of 3/17; Carlos Palmos L5 transitioned to CPS). Team-wide: US/EU5/JP/CA.
+Peter Ocampo L6 (Mobile App), Stacey Gu L6 (OCI/Bidding), Dwayne Palmer L6 (MCS/Website), Yun-Kang Chu L6 (Modern Search/Adobe), Andrew Wirtz L5 (DG/Algorithmic Ads), Adi Thakur L5 (Landing Pages/UX).
 
-**Team (Brandon's directs):** Peter Ocampo L6 (Mobile App), Stacey Gu L6 (OCI/Bidding), Dwayne Palmer L6 (MCS/Website), Yun-Kang Chu L6 (Modern Search/Adobe), Andrew Wirtz L5 (DG/Algorithmic Ads), Adi Thakur L5 (Landing Pages/UX).
+### Markets
+
+**Hands-on:** AU (Alexis Eck L6, Lena Zak L7), MX (Lorena Alvarez Larrea L5 — primary PS stakeholder as of 3/17; Carlos Palmos L5 transitioned to CPS).
+**Team-wide:** US/EU5/JP/CA.
 
 ### Active Projects (as of 4/3/26, priority order)
 

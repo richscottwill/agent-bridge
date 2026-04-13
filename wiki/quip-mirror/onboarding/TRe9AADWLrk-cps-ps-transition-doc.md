@@ -1,13 +1,19 @@
 ---
-quip_id: TRe9AADWLrk
-title: "CPS PS Transition Doc"
-source_url: https://quip-amazon.com/TRe9AADWLrk
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-02-14
-quip_folder: Onboarding/Docs
-topics: [onboarding, reference, transition]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Onboarding/Docs
+quip_id: TRe9AADWLrk
+source_url: https://quip-amazon.com/TRe9AADWLrk
+status: DRAFT
+title: CPS PS Transition Doc
+topics:
+- onboarding
+- reference
+- transition
 ---
 
 # CPS PS Transition Doc

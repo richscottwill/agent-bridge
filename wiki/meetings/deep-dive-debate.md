@@ -1,4 +1,13 @@
+---
+title: "Paid Acq: Deep Dive & Debate"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0203 | duck_id: meeting-deep-dive-debate -->
+
 # Paid Acq: Deep Dive & Debate
 
 ## Metadata

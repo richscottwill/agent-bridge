@@ -1,13 +1,19 @@
 ---
-quip_id: PSa9AAWBFPB
-title: "JP Performance: Post-MHLW Normalization Analysis"
-source_url: https://quip-amazon.com/PSa9AAWBFPB
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-02-17
-quip_folder: Testing/.JP
-topics: [testing, japan, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/.JP
+quip_id: PSa9AAWBFPB
+source_url: https://quip-amazon.com/PSa9AAWBFPB
+status: DRAFT
+title: 'JP Performance: Post-MHLW Normalization Analysis'
+topics:
+- testing
+- japan
+- paid-search
 ---
 
 # JP Performance: Post-MHLW Normalization Analysis

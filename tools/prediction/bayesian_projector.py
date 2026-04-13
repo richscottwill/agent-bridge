@@ -71,7 +71,14 @@ class BayesianProjector:
         return [dict(zip(cols, r)) for r in rows]
 
     def _fetch_seasonal_priors(self, market: str) -> dict:
-        """Pull seasonal factors from ps.seasonal_priors. Returns {week_num: factor}."""
+        """Pull seasonal factors from ps.seasonal_priors. Returns {week_num: factor}.
+        
+        TODO (deferred 2026-04-13): Incorporate 2025 YoY data into seasonal priors.
+        The 2025 WW Dashboard (AB SEM WW Dashboard_Y25 Final.xlsx) has weekly data per market
+        going back to 2022. This should be ingested into ps.seasonal_priors to give the model
+        real seasonal patterns instead of single-year estimates. HIGH PRIORITY for next WBR run.
+        See session-log.md [2026-04-13] consolidated open items.
+        """
         rows = self.con.execute(f"""
             SELECT week_of_year, seasonal_index
             FROM ps.seasonal_priors
@@ -705,6 +712,38 @@ class BayesianProjector:
         # Totals
         total_regs = brand.regs + nb.regs
         total_cost = brand.cost + nb.cost
+
+        # Apply regime change prior shifts from ps.regime_changes
+        try:
+            regime_rows = self.con.execute(f"""
+                SELECT change_type, expected_impact_pct, confidence, change_date
+                FROM ps.regime_changes
+                WHERE market = '{market}' AND metric_affected = 'registrations' AND active = TRUE
+                ORDER BY change_date
+            """).fetchall()
+            for rr in regime_rows:
+                change_type, impact_pct, conf, change_date = rr
+                # Only apply if the target week is AFTER the regime change
+                # Convert target_period_key (2026-W15) to approximate date
+                from datetime import date, timedelta
+                w1_start = date(2025, 12, 29)
+                target_date = w1_start + timedelta(weeks=target_week_num - 1)
+                if target_date >= change_date:
+                    # Scale impact by confidence: full confidence = full impact
+                    adj = 1.0 + (impact_pct * conf)
+                    total_regs = max(0, round(total_regs * adj))
+                    total_cost = max(0, round(total_cost * adj, 2))
+                    # Also adjust brand/nb proportionally
+                    brand = SegmentForecast(
+                        regs=max(0, round(brand.regs * adj)),
+                        cost=max(0, round(brand.cost * adj, 2)),
+                        cpa=brand.cpa, clicks=brand.clicks)
+                    nb = SegmentForecast(
+                        regs=max(0, round(nb.regs * adj)),
+                        cost=max(0, round(nb.cost * adj, 2)),
+                        cpa=nb.cpa, clicks=nb.clicks)
+        except Exception:
+            pass  # No regime_changes table or query error — proceed without
 
         # CI from posterior (adjusted by seasonality)
         ci_low, ci_high = self.core.credible_interval(posterior, level=0.7)

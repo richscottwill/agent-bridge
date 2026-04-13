@@ -1,4 +1,13 @@
+---
+title: "Batch 4 — Blind Eval A"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0457 | duck_id: wiki-review-batch-4-eval-a -->
+
 # Batch 4 — Blind Eval A
 
 Reviewer: wiki-critic | Date: 2026-04-05 | Mode: Review (pre-publish)

@@ -1,13 +1,19 @@
 ---
-quip_id: CTM9AAFeei5
-title: "Paid Search EU5 CVR investigation"
-source_url: https://quip-amazon.com/CTM9AAFeei5
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-02-13
-quip_folder: ..EU
-topics: [europe, eu5, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: ..EU
+quip_id: CTM9AAFeei5
+source_url: https://quip-amazon.com/CTM9AAFeei5
+status: DRAFT
+title: Paid Search EU5 CVR investigation
+topics:
+- europe
+- eu5
+- paid-search
 ---
 
 # Paid Search EU5 CVR Investigation

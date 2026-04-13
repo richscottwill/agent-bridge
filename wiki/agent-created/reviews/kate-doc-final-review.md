@@ -1,4 +1,13 @@
+---
+title: "Final Review: Kate Doc (Batch 1) — Post-Revision"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0474 | duck_id: wiki-review-kate-doc-final-review -->
+
 # Final Review: Kate Doc (Batch 1) — Post-Revision
 
 Reviewer: wiki-critic

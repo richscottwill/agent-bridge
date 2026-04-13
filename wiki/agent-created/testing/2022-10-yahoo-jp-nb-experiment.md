@@ -1,4 +1,13 @@
+---
+title: "Yahoo JP Nonbrand Experiment — Audience Layering"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0390 | duck_id: testing-2022-10-yahoo-jp-nb-experiment -->
+
 ---
 title: "Yahoo JP Nonbrand Experiment — Audience Layering"
 status: DRAFT

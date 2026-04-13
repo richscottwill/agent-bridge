@@ -1,4 +1,13 @@
+---
+title: "Annual Review 2026 — Analysis for System Integration"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0115 | duck_id: context-annual-review-2026-analysis -->
+
 # Annual Review 2026 — Analysis for System Integration
 
 Ingested: 2026-03-24

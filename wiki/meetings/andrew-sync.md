@@ -1,4 +1,13 @@
+---
+title: "Andrew Sync"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0198 | duck_id: meeting-andrew-sync -->
+
 # Andrew Sync
 
 ## Metadata

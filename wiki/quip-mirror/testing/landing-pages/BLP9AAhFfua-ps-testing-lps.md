@@ -1,13 +1,19 @@
 ---
-quip_id: BLP9AAhFfua
-title: "PS Testing: Landing Pages (LP)"
-source_url: https://quip-amazon.com/BLP9AAhFfua
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-11-19
-quip_folder: Testing/Landing Pages
-topics: [testing, landing-pages, conversion]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/Landing Pages
+quip_id: BLP9AAhFfua
+source_url: https://quip-amazon.com/BLP9AAhFfua
+status: DRAFT
+title: 'PS Testing: Landing Pages (LP)'
+topics:
+- testing
+- landing-pages
+- conversion
 ---
 
 # PS Testing: Landing Pages (LP)

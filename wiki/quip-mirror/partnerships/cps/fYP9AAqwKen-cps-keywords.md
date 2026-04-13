@@ -1,12 +1,20 @@
 ---
-quip_id: fYP9AAqwKen
-title: "CPS Keywords"
-source_url: https://quip-amazon.com/fYP9AAqwKen
-doc_type: spreadsheet
+audience: amazon-internal
 creator: Richard Williams
-quip_folder: Partnerships/CPS
-topics: [keywords, CPS, procurement, sourcing, Google-Ads]
+doc_type: spreadsheet
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/CPS
+quip_id: fYP9AAqwKen
+source_url: https://quip-amazon.com/fYP9AAqwKen
+status: DRAFT
+title: CPS Keywords
+topics:
+- keywords
+- CPS
+- procurement
+- sourcing
+- Google-Ads
 ---
 
 # CPS Keywords

@@ -99,3 +99,41 @@ When Richard's request touches an agent's domain, route to that agent instead of
 11. Every task recommendation should connect to the Five Levels — which level does this advance?
 12. Portability mindset: this system must survive a platform move with nothing but text files. When you create or modify any file, ask: "Would a new AI on a different platform understand this without access to our hooks, MCP servers, or subagents?" If not, make the intent explicit in plain text. The agent-bridge repo is the survival kit — flag anything that would break on cold start.
 13. **Environment routing:** If on SSH (DevSpaces/AgentSpaces) and the task would be more effective on local (e.g., file tool access outside ~/shared/, browser-based work, GUI tools), tell Richard. If on local and the task would be more effective on SSH (e.g., persistent shared/ access, DuckDB queries, hook execution, agent orchestration), tell Richard. Don't silently struggle with environment limitations — flag the mismatch.
+
+## Data & Context Routing
+
+The system has richer data than what's in the text files. Before guessing or asking Richard, check these sources. DuckDB is `ps_analytics` on MotherDuck — use `execute_query`. SharePoint is OneDrive `Kiro-Drive/` — use SharePoint MCP tools.
+
+**If you need...** → **Look here:**
+
+| Context Needed | DuckDB Source | File/MCP Fallback |
+|---------------|--------------|-------------------|
+| Task state, overdue, buckets, priorities | `asana.asana_tasks`, `asana.overdue`, `asana.by_routine` | Asana MCP (live) |
+| What happened on a project recently (decisions, milestones, blockers, launches) | `main.project_timeline` | slack-digest.md, hedy-digest.md |
+| Who Richard's been talking to, interaction frequency, relationship trends | `main.relationship_activity` | memory.md (static, may be stale) |
+| What a meeting covered, action items, running themes | `main.meeting_series` + `main.meeting_analytics` + `main.meeting_highlights` | ~/shared/wiki/meetings/*.md (long-form series files) |
+| Full meeting transcript or recap | — | Hedy MCP: `GetSessionDetails(sessionId)` |
+| What topics are trending across Slack, email, meetings | `signals.signal_tracker`, `signals.heat_map`, `signals.trending` | slack-digest.md |
+| What a specific person said about a topic | `signals.person_topics` or `signals.signal_tracker WHERE source_author = 'Name'` | Slack MCP search: `from:@alias topic` |
+| Topics that deserve a wiki article but don't have one | `signals.wiki_candidates` | — |
+| Email triage, who needs a response | `signals.emails_actionable`, `signals.emails_unanswered` | email-triage.md, Outlook MCP |
+| Today's calendar, upcoming meetings | `main.calendar_today`, `main.calendar_week` | Outlook MCP: `calendar_view` |
+| Market performance data (regs, spend, CPA, forecasts) | `ps.latest_forecasts`, `ps.monthly_pacing`, `ps.market_status` | State files: ~/shared/wiki/state-files/*-state.md |
+| Historical task trends, completion rates | `asana.asana_task_history`, `asana.completion_rate`, `asana.velocity` | — |
+| Where Richard's time goes vs where it should (L1-L5) | `main.five_levels_weekly` | brain.md → Strategic Priorities |
+| Loop page content (Brandon 1:1 notes, MBR doc, etc.) | `docs.loop_pages` | SharePoint MCP: `sharepoint_read_loop` |
+| Published wiki articles, pipeline state | `wiki.publication_registry`, `wiki.throughput` | ~/shared/wiki/ (local files) |
+| Streak, hard thing, daily tracker | `main.l1_streak`, `asana.daily_tracker` | amcc.md |
+| System health, data freshness, last sync times | `ops.data_freshness`, `ops.workflow_executions` | — |
+
+**SharePoint (OneDrive)** — durability layer, cross-device access, and published work product. Use SharePoint MCP tools (`sharepoint_list_files`, `sharepoint_read_file`, `sharepoint_read_loop`).
+
+- `Kiro-Drive/system-state/` — latest hook outputs: enrichment-queue, portfolio-findings, daily-brief, rw-tracker. Use for cold-start recovery when local files are missing.
+- `Kiro-Drive/state-files/` — market state files (.md + .docx per active market: AU, MX, WW Testing). Contains current metrics, weekly trends, active initiatives, and open items per market. Richer than DuckDB for narrative context.
+- `Kiro-Drive/portable-body/` — body system snapshots for platform migration or cold-start recovery.
+- `Kiro-Drive/meeting-briefs/` — meeting prep briefs pushed for cross-device access.
+- `Kiro-Drive/*.xlsx` — live dashboards: `ps-forecast-tracker.xlsx` (forecast vs actuals per market), `ps-testing-dashboard.xlsx` (test status across all markets), `command-center.xlsx` (task/project overview). These contain structured data that may be more current than DuckDB for weekly metrics.
+- `Dashboards/` — pacing and forecast dashboards: `ps-pacing-dashboard.xlsx` (MTD regs/spend vs OP2 per market), `ps-forecast-tracker.xlsx` (weekly forecast accuracy). Use when writing WBR callouts or answering "are we on track?" questions.
+- `Artifacts/` — published wiki articles and strategic documents as .docx, organized by category: `strategy/` (Testing Approach, AEO POV, market playbooks), `reporting/` (WBR callout guide, MBR templates), `markets/` (AU/MX/US market-specific docs), `operations/` (OCI guides, process docs), `testing/` (test designs, experiment frameworks), `research/` (ad copy results, competitor intel). When writing or enriching a wiki article, check here for the latest published version before drafting.
+
+**Rule:** Don't default to asking Richard for data that's already in DuckDB or SharePoint. Query first, ask second. If a table is empty or stale (`ops.data_freshness`), flag it — don't silently fall back to guessing.

@@ -1,4 +1,13 @@
+---
+title: "Eval B — Blind Subjective Review: Workstreams 3, 4, 5 (v4)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0500 | duck_id: wiki-review-ws3-ws4-ws5-v4-eval-b -->
+
 # Eval B — Blind Subjective Review: Workstreams 3, 4, 5 (v4)
 
 Reviewer: wiki-critic (Eval B, no visibility into Eval A)

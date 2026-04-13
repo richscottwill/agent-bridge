@@ -1,13 +1,19 @@
 ---
-quip_id: YLc9AAQDSpu
-title: "H1 2023 EU5 CPS Paid Search"
-source_url: https://quip-amazon.com/YLc9AAQDSpu
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-01-04
-quip_folder: Partnerships/CPS/EU
-topics: [cps, europe, partnerships]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/CPS/EU
+quip_id: YLc9AAQDSpu
+source_url: https://quip-amazon.com/YLc9AAQDSpu
+status: DRAFT
+title: H1 2023 EU5 CPS Paid Search
+topics:
+- cps
+- europe
+- partnerships
 ---
 
 # H1 2023 EU5 CPS Paid Search Results

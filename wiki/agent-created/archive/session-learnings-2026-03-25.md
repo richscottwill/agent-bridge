@@ -1,4 +1,13 @@
+---
+title: "Session Learnings — 2026-03-25"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0143 | duck_id: context-session-learnings-2026-03-25 -->
+
 # Session Learnings — 2026-03-25
 
 ## Wiki Team Pipeline

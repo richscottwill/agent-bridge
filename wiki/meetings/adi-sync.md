@@ -1,4 +1,13 @@
+---
+title: "Adi Sync"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0196 | duck_id: meeting-adi-sync -->
+
 # Adi Sync
 
 ## Metadata

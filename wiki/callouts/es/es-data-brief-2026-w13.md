@@ -1,4 +1,13 @@
+---
+title: "ES W13 Data Brief"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0039 | duck_id: callout-es-data-brief-2026-w13 -->
+
 # ES W13 Data Brief
 
 ## Headline numbers

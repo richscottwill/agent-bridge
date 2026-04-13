@@ -1,4 +1,13 @@
+---
+title: "Review: Agent System Architecture (Eval B — Reader Simulation, Revision 2)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0456 | duck_id: wiki-review-agent-architecture-eval-b-r2 -->
+
 # Review: Agent System Architecture (Eval B — Reader Simulation, Revision 2)
 
 **Reviewer persona**: Brandon Munday (L7, Richard's manager)

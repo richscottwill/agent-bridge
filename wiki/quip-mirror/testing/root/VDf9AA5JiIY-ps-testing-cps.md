@@ -1,13 +1,19 @@
 ---
-quip_id: VDf9AA5JiIY
-title: "PS Testing: CPS"
-source_url: https://quip-amazon.com/VDf9AA5JiIY
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-09-30
-quip_folder: Testing
-topics: [testing, experiments, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing
+quip_id: VDf9AA5JiIY
+source_url: https://quip-amazon.com/VDf9AA5JiIY
+status: DRAFT
+title: 'PS Testing: CPS'
+topics:
+- testing
+- experiments
+- paid-search
 ---
 
 # PS Testing: CPS

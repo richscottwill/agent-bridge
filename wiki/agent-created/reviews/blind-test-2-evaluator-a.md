@@ -1,4 +1,13 @@
+---
+title: "Blind Test 2 — Evaluator A (Strict Amazon Writing Standards)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0462 | duck_id: wiki-review-blind-test-2-evaluator-a -->
+
 # Blind Test 2 — Evaluator A (Strict Amazon Writing Standards)
 
 **Date:** 2026-04-04

@@ -1,13 +1,24 @@
 ---
-quip_id: Zee9AAlSBEB
-title: "OCI - Paid Search Instructions"
-source_url: https://quip-amazon.com/Zee9AAlSBEB
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
-last_modified: "2026-04-10"
+doc_type: document
+last_modified: '2026-04-10'
+mirror_date: '2026-04-10'
+owner: Richard Williams
 quip_folder: Review
-topics: [OCI, tracking, implementation, Google Ads, bidding, EU3, CA, JP]
-mirror_date: "2026-04-10"
+quip_id: Zee9AAlSBEB
+source_url: https://quip-amazon.com/Zee9AAlSBEB
+status: DRAFT
+title: OCI - Paid Search Instructions
+topics:
+- OCI
+- tracking
+- implementation
+- Google Ads
+- bidding
+- EU3
+- CA
+- JP
 ---
 
 # OCI - Paid Search Instructions

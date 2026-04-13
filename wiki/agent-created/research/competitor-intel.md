@@ -1,4 +1,13 @@
+---
+title: "Competitor Intelligence — Paid Search"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0370 | duck_id: research-competitor-intel -->
+
 # Competitor Intelligence — Paid Search
 
 Last updated: 2026-03-12

@@ -1,4 +1,13 @@
+---
+title: "IT W12 Data Brief"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0058 | duck_id: callout-it-data-brief-2026-w12 -->
+
 # IT W12 Data Brief
 
 ## Headline numbers

@@ -1,4 +1,13 @@
+---
+title: "IT City-Level Bid Modifiers Test"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0394 | duck_id: testing-2024-12-it-bid-modifiers-test -->
+
 ---
 title: "IT City-Level Bid Modifiers Test"
 status: DRAFT

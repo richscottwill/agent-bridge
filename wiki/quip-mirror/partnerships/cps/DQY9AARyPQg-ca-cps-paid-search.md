@@ -1,13 +1,19 @@
 ---
-quip_id: DQY9AARyPQg
-title: "CA CPS - Paid Search"
-source_url: https://quip-amazon.com/DQY9AARyPQg
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-03-31
-quip_folder: Partnerships/CPS/CA
-topics: [cps, canada, partnerships]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/CPS/CA
+quip_id: DQY9AARyPQg
+source_url: https://quip-amazon.com/DQY9AARyPQg
+status: DRAFT
+title: CA CPS - Paid Search
+topics:
+- cps
+- canada
+- partnerships
 ---
 
 # CA CPS - Paid Search

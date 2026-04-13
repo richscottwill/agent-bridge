@@ -1,4 +1,13 @@
+---
+title: "Weekly Paid Acquisition Team Sync"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0211 | duck_id: meeting-weekly-paid-acq -->
+
 # Weekly Paid Acquisition Team Sync
 
 ## Metadata

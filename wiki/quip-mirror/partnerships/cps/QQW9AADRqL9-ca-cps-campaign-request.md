@@ -1,13 +1,19 @@
 ---
-quip_id: QQW9AADRqL9
-title: "Paid Search Campaign Request Form - CA CPS"
-source_url: https://quip-amazon.com/QQW9AADRqL9
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2023-01-24
-quip_folder: Partnerships/CPS/CA
-topics: [cps, canada, partnerships]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/CPS/CA
+quip_id: QQW9AADRqL9
+source_url: https://quip-amazon.com/QQW9AADRqL9
+status: DRAFT
+title: Paid Search Campaign Request Form - CA CPS
+topics:
+- cps
+- canada
+- partnerships
 ---
 
 # Paid Search Campaign Request Form - CA CPS

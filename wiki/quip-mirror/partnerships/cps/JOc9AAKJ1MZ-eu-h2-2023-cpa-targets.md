@@ -1,12 +1,22 @@
 ---
-quip_id: JOc9AAKJ1MZ
-title: "EU H2 2023 CPA Targets"
-source_url: https://quip-amazon.com/JOc9AAKJ1MZ
-doc_type: spreadsheet
+audience: amazon-internal
 creator: Yun-Kang Chu
-quip_folder: Partnerships/CPS
-topics: [EU, CPS, CPA-targets, budget, MQL, SQL, H2-2023]
+doc_type: spreadsheet
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/CPS
+quip_id: JOc9AAKJ1MZ
+source_url: https://quip-amazon.com/JOc9AAKJ1MZ
+status: DRAFT
+title: EU H2 2023 CPA Targets
+topics:
+- EU
+- CPS
+- CPA-targets
+- budget
+- MQL
+- SQL
+- H2-2023
 ---
 
 # EU H2 2023 CPA Targets

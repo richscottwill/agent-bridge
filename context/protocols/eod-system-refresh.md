@@ -11,6 +11,7 @@ All Asana writes follow the Guardrail Protocol in asana-command-center.md.
 
 ### Context Load
 heart.md, changelog.md, current.md, gut.md, slack-scan-state.json, asana-command-center.md.
+MotherDuck: If ps_analytics not attached, execute `ATTACH 'md:ps_analytics'` then `USE ps_analytics`.
 
 ### Step 0 — Asana Delta Sync to DuckDB
 Execute the Delta Sync procedure from ~/shared/context/protocols/asana-duckdb-sync.md:
@@ -88,6 +89,25 @@ Check for tasks assigned to Richard since morning. Flag any needing Routine/Prio
 
 ### Step 8 — Update hands.md
 Priority Actions from current Asana state (including blocker registry).
+
+### Step 9 — State File Priority Patching
+For each registered state file in `~/shared/context/protocols/state-file-engine.md` where status = ACTIVE:
+1. Read the current state file .md from `~/shared/wiki/state-files/`
+2. Filter today's reconciliation data to market-relevant tasks:
+   - MX: tasks in MX project (GID from asana-command-center.md)
+   - AU: tasks in AU project
+   - WW Testing: tasks in WW Testing project
+3. Regenerate ONLY the Strategic Priorities section:
+   - Update priorities table with current deadlines and completion status
+   - Update blocked items from the blocker registry (Step 6 output)
+   - Update stakeholder actions from Asana comments and email signals
+4. Patch the local .md file (touch ONLY Strategic Priorities + Blocked Items + Stakeholder Actions)
+5. Validate: `python3 ~/shared/tools/state-files/validate_state_files.py`
+6. Convert: `python3 ~/shared/tools/state-files/convert_state_files.py`
+7. Log to DuckDB: `INSERT INTO workflow_executions (workflow_name, ...) VALUES ('state-file-eod-patch-[market]', ...)`
+
+**Key constraint:** Do NOT regenerate State of Business, Lessons Learned, or Appendices. Those are AM-only. EOD only patches action-oriented sections.
+Currently registered: MX (active), AU (planned), WW Testing (planned).
 
 ---
 
@@ -342,9 +362,9 @@ Execute ~/shared/context/protocols/communication-analytics.md:
 
 **Not expendable. Run every EOD-2.**
 
-Invoke Karpathy via the loop script: `bash ~/shared/tools/karpathy-loop.sh [target_total] "[cooldown_organs]"`
+Invoke Karpathy via the loop script: `bash ~/shared/tools/karpathy-loop.sh "[cooldown_organs]" [max_batches]`
 
-The loop script launches Karpathy CLI in batches of ~10-15 experiments, relaunching with fresh context windows until the target is reached.
+The loop script launches Karpathy CLI in batches of ~10 experiments, relaunching with fresh context windows until Bayesian priors exhaust eligible targets. No artificial experiment cap — the priors ARE the stopping mechanism (heart.md Step 6). The max_batches param (default 20) is a safety limit against infinite loops, not a target. Karpathy signals exhaustion by writing /tmp/karpathy-exhausted. Two consecutive empty batches also trigger a stop.
 
 **First-experiment verification (mandatory for ALL CLI agent pipelines):** Whenever launching a CLI agent batch that invokes other CLI agents (autoresearch eval agents, wiki pipeline agents, or any ad-hoc multi-agent workflow), monitor the first experiment/task through to completion. Confirm:
 1. CLI sub-agents are actually invoked (shell tool calls with `kiro-cli chat --agent` visible)

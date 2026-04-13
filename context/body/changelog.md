@@ -315,3 +315,16 @@ Batch stats: 5/5 KEEP (100%). Selection bias check: 100% keep rate is high, but 
 - Phase 5: Git synced (76834c5). MotherDuck snapshot failed (plan limitation). Changelog updated.
 - Phase 6: Skipped — Austin offsite context, Karpathy experiments deferred.
 - Phase 7: eod-reconciliation.json + eod-maintenance.json written.
+
+## Run 43 — 2026-04-11 (Karpathy batch, 10 experiments, 9 kept, 1 reverted)
+- [brain:OP1 Strategic Narrative] REWORD (info_retrieval) → 1373w→1391w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [memory:Markets and Team] RESTRUCTURE (info_retrieval) → 2005w→2003w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [gut:Bloat Signals] REWORD (info_retrieval) → 2106w→2055w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [brain:Leverage Assessment Framework] COMPRESS (info_retrieval) → 1391w→1373w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [heart:Step 3 Apply Experiment] REMOVE (info_retrieval) → 3922w→3892w. A=0.923 B=1.0 C=0.923 Δ=-0.077. 120s. REVERT.
+- [nervous-system:Loop 4 Delegation Verification] ADD (info_retrieval) → 1247w→1260w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [richard-style-slack:Common Failures] SPLIT (info_retrieval) → 1205w→1214w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [gut:Identity field protection] SPLIT (info_retrieval) → 2055w→2058w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [heart:DuckDB Integration] REWORD (info_retrieval) → 3922w→3872w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [nervous-system:Loop 5 System Health] SPLIT (info_retrieval) → 1260w→1276w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [REWORD×brain: 2 kept / 2 total] [COMPRESS×brain: 5 kept / 5 total] [RESTRUCTURE×memory: 5 kept / 5 total] [REWORD×gut: 5 kept / 5 total] [REMOVE×heart: 5 kept / 6 total] [ADD×nervous-system: 6 kept / 6 total] [SPLIT×richard-style-slack: 5 kept / 5 total] [SPLIT×gut: 3 kept / 3 total] [REWORD×heart: 1 kept / 2 total] [SPLIT×nervous-system: 7 kept / 7 total]

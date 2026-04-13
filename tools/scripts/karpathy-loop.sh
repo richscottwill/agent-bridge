@@ -1,19 +1,27 @@
 #!/bin/bash
-# Karpathy autoresearch loop — runs batches until target experiment count reached.
-# Each batch: Karpathy selects+applies experiments, THIS SCRIPT runs the blind eval via CLI agents.
-# Usage: bash ~/shared/tools/karpathy-loop.sh [total_experiments] [cooldown_organs]
+# Karpathy autoresearch loop — runs batches until Bayesian priors exhaust eligible targets.
+# No artificial cap. The priors ARE the stopping mechanism (heart.md Step 6).
+# Each batch: Karpathy selects+applies experiments, blind eval via CLI agents.
+# Usage: bash ~/shared/tools/karpathy-loop.sh [cooldown_organs] [max_batches]
+#   cooldown_organs: comma-separated organs modified this invocation (default: "hands.md")
+#   max_batches: safety limit on batch iterations (default: 20, ~200 experiments)
+#     This is NOT an experiment cap — it prevents infinite loops if exhaustion detection fails.
+#     Set higher if needed. The real stop is prior exhaustion.
 
-TARGET_TOTAL=${1:-100}
-COOLDOWN=${2:-"hands.md"}
+COOLDOWN=${1:-"hands.md"}
+MAX_BATCHES=${2:-20}
 BATCH_SIZE=10
 DB_PATH="/home/prichwil/shared/data/duckdb/ps-analytics.duckdb"
 LOG="$HOME/shared/context/active/karpathy-loop.log"
 KIRO_CLI="/agentspaces/kiro-cli/kiro-cli"
+BATCH_RESULT_FILE="/tmp/karpathy-batch-result.txt"
+EXHAUSTION_MARKER="/tmp/karpathy-exhausted"
 
-echo "$(date -Iseconds) Karpathy loop started. Target: $TARGET_TOTAL experiments." | tee -a "$LOG"
+# Clean up from previous runs
+rm -f "$EXHAUSTION_MARKER"
 
-while true; do
-  CURRENT=$(python3 -c "
+# Get starting experiment count
+START_COUNT=$(python3 -c "
 import duckdb
 con = duckdb.connect('$DB_PATH', read_only=True)
 r = con.execute('SELECT COUNT(*) FROM autoresearch_experiments').fetchone()
@@ -21,30 +29,54 @@ print(r[0])
 con.close()
 " 2>/dev/null)
 
-  if [ -z "$CURRENT" ]; then
-    echo "$(date -Iseconds) ERROR: Could not read experiment count" | tee -a "$LOG"
+echo "$(date -Iseconds) Karpathy loop started. Mode: prior-driven (no artificial cap)." | tee -a "$LOG"
+echo "$(date -Iseconds) Starting experiments: $START_COUNT. Cooldown: $COOLDOWN. Max batches: $MAX_BATCHES." | tee -a "$LOG"
+
+# Log eligible target stats
+python3 -c "
+import duckdb
+con = duckdb.connect('$DB_PATH', read_only=True)
+total = con.execute('SELECT COUNT(*) FROM autoresearch_priors').fetchone()[0]
+unexplored = con.execute('SELECT COUNT(*) FROM autoresearch_priors WHERE n_experiments = 0').fetchone()[0]
+underexplored = con.execute('SELECT COUNT(*) FROM autoresearch_priors WHERE n_experiments > 0 AND n_experiments < 3').fetchone()[0]
+proven_losers = con.execute(\"\"\"SELECT COUNT(*) FROM autoresearch_priors 
+  WHERE (alpha / (alpha + beta)) < 0.15 AND n_experiments > 10\"\"\").fetchone()[0]
+eligible = total - proven_losers
+print(f'Prior state: {total} combos, {unexplored} unexplored, {underexplored} underexplored, {proven_losers} proven losers, {eligible} eligible.')
+con.close()
+" 2>&1 | tee -a "$LOG"
+
+BATCH_NUM=0
+CONSECUTIVE_EMPTY=0
+
+while true; do
+  BATCH_NUM=$((BATCH_NUM + 1))
+
+  # Safety: max batch limit (prevents infinite loop, not an experiment cap)
+  if [ "$BATCH_NUM" -gt "$MAX_BATCHES" ]; then
+    echo "$(date -Iseconds) Safety limit: $MAX_BATCHES batches reached. Stopping." | tee -a "$LOG"
+    echo "$(date -Iseconds) This is a safety limit, not a target. Increase max_batches if priors still have eligible targets." | tee -a "$LOG"
     break
   fi
 
-  REMAINING=$((TARGET_TOTAL - CURRENT))
-  echo "$(date -Iseconds) Current: $CURRENT experiments. Remaining: $REMAINING." | tee -a "$LOG"
+  # Get current count before batch
+  PRE_BATCH=$(python3 -c "
+import duckdb
+con = duckdb.connect('$DB_PATH', read_only=True)
+r = con.execute('SELECT COUNT(*) FROM autoresearch_experiments').fetchone()
+print(r[0])
+con.close()
+" 2>/dev/null)
 
-  if [ "$REMAINING" -le 0 ]; then
-    echo "$(date -Iseconds) Target reached ($CURRENT >= $TARGET_TOTAL). Done." | tee -a "$LOG"
-    break
-  fi
+  echo "$(date -Iseconds) Batch $BATCH_NUM/$MAX_BATCHES. Experiments so far: $PRE_BATCH (started at $START_COUNT)." | tee -a "$LOG"
 
-  BATCH=$BATCH_SIZE
-  if [ "$REMAINING" -lt "$BATCH" ]; then
-    BATCH=$REMAINING
-  fi
+  # Launch Karpathy batch
+  echo "$(date -Iseconds) Launching Karpathy for ~$BATCH_SIZE experiments..." | tee -a "$LOG"
 
-  echo "$(date -Iseconds) Launching Karpathy for ~$BATCH experiments..." | tee -a "$LOG"
-
-  # Karpathy selects targets, applies experiments, writes eval prompts to /tmp/eval-*.txt,
-  # and writes experiment metadata to /tmp/exp-meta.json. It does NOT score — this script does.
   $KIRO_CLI chat --agent karpathy --no-interactive --trust-all-tools \
-    "Run ~$BATCH autoresearch experiments. Cooldown: $COOLDOWN. All targets fair game per your protocol.
+    "Run ~$BATCH_SIZE autoresearch experiments. Cooldown: $COOLDOWN. All targets fair game per your protocol.
+
+TERMINATION SIGNAL: If you cannot find any eligible target×technique combos (all on cooldown, all proven losers, or all exhausted), write the file /tmp/karpathy-exhausted with a one-line reason and stop. Do NOT invent experiments on ineligible targets just to fill the batch.
 
 IMPORTANT — EVAL PROTOCOL:
 For EACH experiment, after applying the change:
@@ -63,20 +95,59 @@ $KIRO_CLI chat --agent eval-c --no-interactive --trust-all-tools \"\$(cat /tmp/e
 8. Compute delta_ab. Keep or revert per heart.md Step 5.
 9. Log to DuckDB + experiment-log.tsv.
 
-You MUST run the kiro-cli commands above via shell tool. Do NOT answer eval questions yourself. The eval agents must run as separate processes." \
+You MUST run the kiro-cli commands above via shell tool. Do NOT answer eval questions yourself. The eval agents must run as separate processes.
+
+After completing all experiments in this batch, write a summary line to /tmp/karpathy-batch-result.txt:
+BATCH_COMPLETE: [N] experiments run, [K] kept, [R] reverted" \
     2>&1 | tee -a "$LOG"
 
-  echo "$(date -Iseconds) Batch complete." | tee -a "$LOG"
+  echo "$(date -Iseconds) Batch $BATCH_NUM complete." | tee -a "$LOG"
+
+  # Check exhaustion signal from Karpathy
+  if [ -f "$EXHAUSTION_MARKER" ]; then
+    REASON=$(cat "$EXHAUSTION_MARKER" 2>/dev/null)
+    echo "$(date -Iseconds) Karpathy signaled exhaustion: $REASON" | tee -a "$LOG"
+    break
+  fi
+
+  # Check if batch actually produced experiments (DuckDB count delta)
+  POST_BATCH=$(python3 -c "
+import duckdb
+con = duckdb.connect('$DB_PATH', read_only=True)
+r = con.execute('SELECT COUNT(*) FROM autoresearch_experiments').fetchone()
+print(r[0])
+con.close()
+" 2>/dev/null)
+
+  BATCH_DELTA=$((POST_BATCH - PRE_BATCH))
+  echo "$(date -Iseconds) Batch produced $BATCH_DELTA new experiments ($PRE_BATCH → $POST_BATCH)." | tee -a "$LOG"
+
+  # If batch produced zero experiments, Karpathy may be stuck or exhausted
+  if [ "$BATCH_DELTA" -eq 0 ]; then
+    CONSECUTIVE_EMPTY=$((CONSECUTIVE_EMPTY + 1))
+    echo "$(date -Iseconds) WARNING: Empty batch ($CONSECUTIVE_EMPTY consecutive)." | tee -a "$LOG"
+    if [ "$CONSECUTIVE_EMPTY" -ge 2 ]; then
+      echo "$(date -Iseconds) Two consecutive empty batches. Likely exhausted or stuck. Stopping." | tee -a "$LOG"
+      break
+    fi
+  else
+    CONSECUTIVE_EMPTY=0
+  fi
+
   sleep 2
 done
 
-echo "$(date -Iseconds) Loop complete." | tee -a "$LOG"
-python3 -c "
+# Final summary
+FINAL_COUNT=$(python3 -c "
 import duckdb
 con = duckdb.connect('$DB_PATH', read_only=True)
 total = con.execute('SELECT COUNT(*) FROM autoresearch_experiments').fetchone()[0]
 keeps = con.execute(\"SELECT COUNT(*) FROM autoresearch_experiments WHERE decision='KEEP'\").fetchone()[0]
 reverts = con.execute(\"SELECT COUNT(*) FROM autoresearch_experiments WHERE decision='REVERT'\").fetchone()[0]
-print(f'Total: {total}. Keeps: {keeps} ({100*keeps//max(total,1)}%). Reverts: {reverts} ({100*reverts//max(total,1)}%).')
+new = total - $START_COUNT
+print(f'Session: {new} new experiments. Total: {total}. Keeps: {keeps} ({100*keeps//max(total,1)}%). Reverts: {reverts} ({100*reverts//max(total,1)}%).')
 con.close()
-" 2>&1 | tee -a "$LOG"
+" 2>&1)
+
+echo "$(date -Iseconds) $FINAL_COUNT" | tee -a "$LOG"
+echo "$(date -Iseconds) Loop complete." | tee -a "$LOG"

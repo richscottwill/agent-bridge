@@ -1,4 +1,13 @@
+---
+title: "MX W13 Analysis Brief"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0074 | duck_id: callout-mx-analysis-2026-w13 -->
+
 # MX W13 Analysis Brief
 
 ## Registration summary

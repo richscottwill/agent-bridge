@@ -9,6 +9,10 @@ All Asana writes follow the Guardrail Protocol in asana-command-center.md § Gua
 
 ## Agentic Execution Rules (L5 Pattern)
 
+**CRITICAL: Steps 1–5 execute without pausing for human input.** Present the brief (Step 1), then immediately proceed through Steps 2–5. Do NOT stop after the brief to ask Richard questions, confirm priorities, or request decisions. The protocol has all the rules needed to make autonomous choices (routine ordering, urgency sorting, time estimates, enrichment rules). Step 6 (Interactive Command Center) is the ONLY point where Richard gives live directions — and only after Steps 1–5 are complete.
+
+If you encounter ambiguity during Steps 1–5 (e.g., unclear whether a task is resolved, conflicting signals), make the best-available decision, note it in the brief or Slack DM, and move on. Richard can adjust in Step 6.
+
 The agent DOES work, not just proposes it. For every task touched during AM-Frontend:
 
 1. **Write real content into Asana task descriptions** — draft emails, MBR/WBR callouts, Kingpin goal updates, monthly goal text, meeting agendas, stakeholder replies. The task description should contain work product Richard can review and send, not a blank page.
@@ -43,12 +47,25 @@ Pre-computed state files (from AM-Backend):
 - `~/shared/context/intake/asana-digest.md`
 - `~/shared/context/intake/asana-activity.md`
 
+### SharePoint Fallback (Cold Start / Missing Files)
+If any pre-computed state file is missing locally (container restart, first run on new environment):
+1. Check SharePoint `Kiro-Drive/system-state/` for the file via `sharepoint_read_file(inline=true)`.
+2. If found and Modified timestamp is <24h old → use it. Write to local path for subsequent reads.
+3. If not found or stale → skip gracefully. Frontend will fall back to live MCP queries.
+4. Log: "SharePoint pull: [filename] recovered from Kiro-Drive" or "SharePoint pull: [filename] not available, using live queries."
+See ~/shared/context/protocols/sharepoint-durability-sync.md for full pull logic.
+
 DuckDB-first queries (use instead of live MCP when AM-Backend has synced):
 - Tasks/overdue/buckets → `asana.asana_tasks`, `asana.overdue`, `asana.by_routine`
 - Email triage → `signals.emails_actionable`, `signals.emails_unanswered`
 - Calendar → `main.calendar_today`, `main.calendar_week`
 - Slack signals → `signals.slack_messages`, `signals.signal_tracker`
 - Audit trail → `asana.recent_audit`
+- **Project chronology → `main.project_timeline` (decisions, milestones, blockers, launches per project)**
+- **Relationship state → `main.relationship_activity` (weekly interaction counts, trends per person)**
+- **Meeting context → `main.meeting_series` (latest session dates, open items, running themes)**
+- **Wiki gaps → `signals.wiki_candidates` (strong cross-channel topics without articles)**
+- **Level allocation → `main.five_levels_weekly` (weekly time distribution across L1-L5)**
 - Staleness check: if `MAX(synced_at) < CURRENT_TIMESTAMP - INTERVAL '12 hours'`, auto-refresh from live MCP AND update DuckDB inline before proceeding.
 
 ---
@@ -64,6 +81,24 @@ DuckDB-first queries (use instead of live MCP when AM-Backend has synced):
 6. T-MINUS
 7. aMCC
 8. SYSTEM HEALTH
+
+### HEADS UP Section (from DuckDB + digests)
+Cross-reference slack-digest.md `[ACTION-RW]` items with structured DuckDB views:
+```sql
+-- Unanswered Slack mentions by priority (thread-aware)
+SELECT author_name, priority, days_old, channel_name, text_preview
+FROM signals.slack_unanswered
+WHERE richard_replied = FALSE
+ORDER BY priority, days_old DESC;
+
+-- Unanswered emails needing response
+SELECT sender_name, priority, days_old, subject
+FROM signals.emails_unanswered
+WHERE action_needed = 'respond'
+ORDER BY priority, days_old DESC;
+```
+Surface any item with days_old >= 3 as 🔴 CRITICAL. Items 1-2 days as 🟡 HIGH.
+Include reply_time_hours context for recently-answered items if pattern is concerning (e.g., avg reply > 48h to a stakeholder).
 
 ### TODAY Section (from DuckDB)
 - Query: `SELECT * FROM asana_by_routine` → bucket counts
@@ -106,6 +141,14 @@ If any goals at-risk or off-track: goal name, status, metric gap, recommended ac
 ### ABPS AI Document Factory
 Read am-abps-ai-state.json: Intake count, In Progress pipeline stages, Review status, Active count, Archive count, alerts.
 
+**Wiki Candidate Surfacing (from Phase 2.5):**
+Query `signals.wiki_candidates` and cross-reference against ABPS AI Content tasks. For candidates with quality_score >= 10.0 that don't have a matching pipeline task, surface in the brief:
+```
+📚 WIKI CANDIDATES (from cross-channel signals):
+- [topic] — quality: [X], channels: [N], authors: [N], strength: [X]
+  → No matching ABPS AI task. Consider creating one.
+```
+
 ### Portfolio Status
 Read am-portfolio-findings.json:
 - Per-project: task count, overdue, near-due, health color, staleness.
@@ -117,6 +160,13 @@ Query DuckDB for today's calendar: `SELECT * FROM main.calendar_today ORDER BY s
 For each meeting, query signal_tracker for attendee topics (last 7 days). Include: "Brandon's hot topics: [list]."
 If main.calendar_today is empty (sync hasn't run), fall back to live: calendar_view(start_date=today, view=day).
 
+**Enriched meeting prep (from Phase 2.5 outputs):**
+- Query `main.meeting_series` for the matching series file → include latest session summary, open items, running themes
+- Query `main.relationship_activity` for each attendee → include interaction trend and recent touchpoint count
+- Query `main.project_timeline` for events involving the attendee → include recent decisions and commitments
+- Read the meeting series file from `~/shared/wiki/meetings/` for full narrative context
+- This replaces the previous pattern of only loading signal_tracker topics — now the agent has the full meeting history, relationship state, and project chronology for each attendee
+
 ### Friday Additions
 - Calibration.
 - Remind Agent Bridge Sync.
@@ -125,6 +175,8 @@ If main.calendar_today is empty (sync hasn't run), fall back to live: calendar_v
 ---
 
 ## Step 2: Output Channels
+
+**Proceed immediately after Step 1 — do not pause for human input.** The brief has been presented; now execute.
 
 ### Email Brief (AUTO-SEND)
 Dark navy HTML email to prichwil@amazon.com. Full brief content formatted as styled HTML.
@@ -161,13 +213,63 @@ If calendar_today is empty, fall back to live: calendar_view(start_date=today, v
 Create time blocks via Outlook MCP calendar_meeting(operation='create') in gaps between existing meetings.
 
 ### Proactive Drafts
-Query DuckDB for unanswered signals 24h+. Generate drafts to ~/shared/context/intake/drafts/.
+Query DuckDB for unanswered signals 24h+:
+```sql
+-- Unanswered Slack mentions (thread-aware)
+SELECT author_name, priority, days_old, reply_time_hours, text_preview, channel_name
+FROM signals.slack_unanswered
+WHERE richard_replied = FALSE
+ORDER BY priority, days_old DESC;
+
+-- Unanswered emails
+SELECT sender_name, priority, days_old, subject
+FROM signals.emails_unanswered
+WHERE action_needed = 'respond'
+ORDER BY priority, days_old DESC;
+```
+For each unanswered signal 24h+, generate draft reply to ~/shared/context/intake/drafts/.
+Use relationship_activity for tone calibration (warm vs formal based on interaction trend).
 
 ---
 
 ## Step 3: Enrichment Execution (Agentic)
 
 Read am-enrichment-queue.json. Execute enrichment autonomously — don't ask, do.
+
+### Context Enrichment Queries (run ONCE before enriching any tasks)
+
+Before writing Kiro_RW or Next_Action_RW on any task, load richer context from Phase 2.5 outputs:
+
+```sql
+-- Project timeline: recent decisions and events per project (last 14 days)
+SELECT project_name, event_date, event_type, summary, people_involved
+FROM main.project_timeline
+WHERE event_date >= CURRENT_DATE - INTERVAL '14 days'
+ORDER BY project_name, event_date DESC;
+
+-- Relationship activity: who's active this week, interaction trends
+SELECT person_name, person_alias, slack_interactions, email_exchanges, meetings_shared, total_score, interaction_trend
+FROM main.relationship_activity
+WHERE week = DATE_TRUNC('week', CURRENT_DATE)::DATE
+ORDER BY total_score DESC;
+
+-- Wiki candidates: strong signal topics that could inform task context
+SELECT topic, total_strength, channel_spread, unique_authors, quality_score
+FROM signals.wiki_candidates
+ORDER BY quality_score DESC LIMIT 10;
+
+-- Meeting series: latest session context per series (for tasks tied to meeting outcomes)
+SELECT series_id, meeting_name, last_session_date, open_item_count, running_themes
+FROM main.meeting_series
+WHERE last_session_date >= CURRENT_DATE - INTERVAL '14 days'
+ORDER BY last_session_date DESC;
+```
+
+Use this context when writing enrichment content:
+- **Kiro_RW**: Include relevant project_timeline events. E.g., "4/6: Brandon decided data-led approach for AU LP. 4/8: OP1 workshop — LiveRamp is F90 play."
+- **Next_Action_RW**: Reference the most recent decision or commitment. E.g., "Pull AU CVR data per Brandon 4/6 decision — share with Brandon + Dwayne."
+- **html_notes drafts**: When drafting emails or Slack replies, check relationship_activity for interaction trend and meeting_series for latest session context. A draft to Lorena (trend: "warming", 5 touchpoints) should be warmer than a draft to a cold contact.
+- **Task descriptions**: Cross-reference wiki_candidates — if a task's topic matches a strong wiki candidate, note it: "📚 This topic is a wiki candidate (quality: X). Consider documenting learnings."
 
 ### For each task needing enrichment:
 1. Read task details (GetTaskDetails) for current state and context

@@ -1,4 +1,13 @@
+---
+title: "Asana ↔ To-Do Sync Protocol"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0116 | duck_id: context-asana-sync-protocol -->
+
 # Asana ↔ To-Do Sync Protocol
 
 Last updated: 2026-03-20

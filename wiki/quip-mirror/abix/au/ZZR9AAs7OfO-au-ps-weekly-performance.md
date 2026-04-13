@@ -1,13 +1,19 @@
 ---
-quip_id: ZZR9AAs7OfO
-title: "AU PS Weekly Performance"
-source_url: https://quip-amazon.com/ZZR9AAs7OfO
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-04-01
-quip_folder: .ABIX/AU
-topics: [australia, abix, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: .ABIX/AU
+quip_id: ZZR9AAs7OfO
+source_url: https://quip-amazon.com/ZZR9AAs7OfO
+status: DRAFT
+title: AU PS Weekly Performance
+topics:
+- australia
+- abix
+- paid-search
 ---
 
 # AU PS Weekly Performance

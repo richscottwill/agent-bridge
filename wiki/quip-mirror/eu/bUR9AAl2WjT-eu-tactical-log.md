@@ -1,13 +1,19 @@
 ---
-quip_id: bUR9AAl2WjT
-title: "EU tactical log"
-source_url: https://quip-amazon.com/bUR9AAl2WjT
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-12-19
-quip_folder: ..EU
-topics: [europe, eu5, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: ..EU
+quip_id: bUR9AAl2WjT
+source_url: https://quip-amazon.com/bUR9AAl2WjT
+status: DRAFT
+title: EU tactical log
+topics:
+- europe
+- eu5
+- paid-search
 ---
 
 # EU Tactical Log

@@ -1,12 +1,22 @@
 ---
-quip_id: LbQ9AAdtRdq
-title: "2022.11.7 EU CPS Conversions"
-source_url: https://quip-amazon.com/LbQ9AAdtRdq
-doc_type: spreadsheet
+audience: amazon-internal
 creator: Yun-Kang Chu
-quip_folder: Partnerships/CPS
-topics: [EU, CPS, conversions, Google-Ads, AMO, DE, UK]
+doc_type: spreadsheet
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/CPS
+quip_id: LbQ9AAdtRdq
+source_url: https://quip-amazon.com/LbQ9AAdtRdq
+status: DRAFT
+title: 2022.11.7 EU CPS Conversions
+topics:
+- EU
+- CPS
+- conversions
+- Google-Ads
+- AMO
+- DE
+- UK
 ---
 
 # 2022.11.7 EU CPS Conversions

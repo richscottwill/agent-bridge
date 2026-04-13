@@ -1,4 +1,13 @@
+---
+title: "UK W12 Analysis Brief"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0085 | duck_id: callout-uk-analysis-2026-w12 -->
+
 # UK W12 Analysis Brief
 
 ## Registration summary

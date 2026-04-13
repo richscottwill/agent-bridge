@@ -1,13 +1,19 @@
 ---
-quip_id: SCD9AATSR90
-title: "2023.10_JP_Pmax-Experiment"
-source_url: https://quip-amazon.com/SCD9AATSR90
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-02-23
-quip_folder: Testing/.JP
-topics: [testing, japan, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/.JP
+quip_id: SCD9AATSR90
+source_url: https://quip-amazon.com/SCD9AATSR90
+status: DRAFT
+title: 2023.10_JP_Pmax-Experiment
+topics:
+- testing
+- japan
+- paid-search
 ---
 
 # 2023.10 JP Pmax Experiment

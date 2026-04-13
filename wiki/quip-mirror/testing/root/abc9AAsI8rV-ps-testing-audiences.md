@@ -1,13 +1,19 @@
 ---
-quip_id: abc9AAsI8rV
-title: "PS Testing: Audiences"
-source_url: https://quip-amazon.com/abc9AAsI8rV
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-09-30
-quip_folder: Testing
-topics: [testing, experiments, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing
+quip_id: abc9AAsI8rV
+source_url: https://quip-amazon.com/abc9AAsI8rV
+status: DRAFT
+title: 'PS Testing: Audiences'
+topics:
+- testing
+- experiments
+- paid-search
 ---
 
 # PS Testing: Audiences (LiveRamp)

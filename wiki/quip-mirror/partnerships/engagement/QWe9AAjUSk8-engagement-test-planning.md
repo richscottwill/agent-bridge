@@ -1,13 +1,19 @@
 ---
-quip_id: QWe9AAjUSk8
-title: "Engagement Paid Search Account - Test Planning"
-source_url: https://quip-amazon.com/QWe9AAjUSk8
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-06-05
-quip_folder: Partnerships/Engagement
-topics: [engagement, partnerships, existing-customers]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/Engagement
+quip_id: QWe9AAjUSk8
+source_url: https://quip-amazon.com/QWe9AAjUSk8
+status: DRAFT
+title: Engagement Paid Search Account - Test Planning
+topics:
+- engagement
+- partnerships
+- existing-customers
 ---
 
 # Engagement Paid Search Account - Test Planning

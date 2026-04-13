@@ -1,4 +1,13 @@
+---
+title: "Revisions: kate-doc-synthesis.md"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0478 | duck_id: wiki-review-kate-doc-synthesis-revisions -->
+
 # Revisions: kate-doc-synthesis.md
 
 Source: kate-doc-batch-review.md

@@ -1,4 +1,13 @@
+---
+title: "Research Docs Audit — Pre-Existing Writing by Richard Williams"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0493 | duck_id: wiki-review-research-docs-audit -->
+
 # Research Docs Audit — Pre-Existing Writing by Richard Williams
 
 Reviewer: wiki-critic · Date: 2026-03-25

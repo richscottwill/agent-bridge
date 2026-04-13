@@ -1,4 +1,13 @@
+---
+title: "Revisions: kate-doc-oci.md"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0475 | duck_id: wiki-review-kate-doc-oci-revisions -->
+
 # Revisions: kate-doc-oci.md
 
 Source: kate-doc-batch-review.md

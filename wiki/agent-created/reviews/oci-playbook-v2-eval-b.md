@@ -1,4 +1,13 @@
+---
+title: "Blind Eval B: OCI Rollout Playbook v2"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0489 | duck_id: wiki-review-oci-playbook-v2-eval-b -->
+
 # Blind Eval B: OCI Rollout Playbook v2
 
 **Evaluator**: Eval B (subjective reader simulation — Brandon Munday L7, Kate Rundell L8 Director)

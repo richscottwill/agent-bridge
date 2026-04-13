@@ -1,4 +1,13 @@
+---
+title: "Master Brief — Richard Williams"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0129 | duck_id: context-exp8-master-brief -->
+
 # Master Brief — Richard Williams
 
 Last updated: 2026-03-20

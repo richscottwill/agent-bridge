@@ -1,4 +1,13 @@
+---
+title: "Wiki Index"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0449 | duck_id: wiki-meta-wiki-index -->
+
 # Wiki Index
 
 > A knowledge base for Amazon Business Paid Search. Covers operations, testing, market strategy, tools, and the agent system that manages it. Optimized for both human readers and AI agent consumption.

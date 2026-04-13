@@ -1,13 +1,19 @@
 ---
-quip_id: KDe9AAMBNvL
-title: "2023 Event Plans"
-source_url: https://quip-amazon.com/KDe9AAMBNvL
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-03-21
-quip_folder: Events
-topics: [events, promotions, sitelinks]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Events
+quip_id: KDe9AAMBNvL
+source_url: https://quip-amazon.com/KDe9AAMBNvL
+status: DRAFT
+title: 2023 Event Plans
+topics:
+- events
+- promotions
+- sitelinks
 ---
 
 # 2023 Event Plans

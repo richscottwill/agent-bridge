@@ -1,13 +1,19 @@
 ---
-quip_id: DRd9AAewJmz
-title: "On-boarding to EU"
-source_url: https://quip-amazon.com/DRd9AAewJmz
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-03-30
-quip_folder: Onboarding/Docs
-topics: [onboarding, reference, transition]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Onboarding/Docs
+quip_id: DRd9AAewJmz
+source_url: https://quip-amazon.com/DRd9AAewJmz
+status: DRAFT
+title: On-boarding to EU
+topics:
+- onboarding
+- reference
+- transition
 ---
 
 # On-boarding to EU

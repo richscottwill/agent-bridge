@@ -1,4 +1,13 @@
+---
+title: "Action Item Tracker — Richard Williams"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0127 | duck_id: context-exp6-action-tracker -->
+
 # Action Item Tracker — Richard Williams
 
 Last updated: 2026-03-20 (Friday, W12 Day 5)

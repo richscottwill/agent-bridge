@@ -1,13 +1,19 @@
 ---
-quip_id: NXb9AAss6tU
-title: "CA NB CVR analysis v1.27 v2"
-source_url: https://quip-amazon.com/NXb9AAss6tU
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-03-31
-quip_folder: Testing/.NA
-topics: [testing, north-america, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/.NA
+quip_id: NXb9AAss6tU
+source_url: https://quip-amazon.com/NXb9AAss6tU
+status: DRAFT
+title: CA NB CVR analysis v1.27 v2
+topics:
+- testing
+- north-america
+- paid-search
 ---
 
 # CA NB CVR Analysis v1.27 v2

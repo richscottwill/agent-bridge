@@ -1,13 +1,19 @@
 ---
-quip_id: aOE9AA8Vhsq
-title: "AB JP Paid Search Weekly Status"
-source_url: https://quip-amazon.com/aOE9AA8Vhsq
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2023-03-07
-quip_folder: ..JP/Meeting
-topics: [japan, meetings, status]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: ..JP/Meeting
+quip_id: aOE9AA8Vhsq
+source_url: https://quip-amazon.com/aOE9AA8Vhsq
+status: DRAFT
+title: AB JP Paid Search Weekly Status
+topics:
+- japan
+- meetings
+- status
 ---
 
 # AB JP Paid Search Weekly Status

@@ -1,13 +1,19 @@
 ---
-quip_id: dFZ9AA5fAz2
-title: "2024 JP NB Tests"
-source_url: https://quip-amazon.com/dFZ9AA5fAz2
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-02-23
-quip_folder: Testing/.JP
-topics: [testing, japan, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/.JP
+quip_id: dFZ9AA5fAz2
+source_url: https://quip-amazon.com/dFZ9AA5fAz2
+status: DRAFT
+title: 2024 JP NB Tests
+topics:
+- testing
+- japan
+- paid-search
 ---
 
 # 2024 JP NB Tests

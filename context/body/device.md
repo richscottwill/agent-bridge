@@ -21,14 +21,12 @@ Before adding anything here, ask: "Does this require Richard's judgment to produ
 
 These are live. They execute without Richard thinking.
 
-### AM Hooks (3 sequential, each feeds the next)
-- **AM-1: Ingest** (`am-1-ingest`) — Slack scan + Asana sync + email scan. Pure data collection → intake files. ~5 min.
-- **AM-2: Triage + Draft** (`am-2-triage`) — Process AM-1 intake → update hands.md, draft email replies, update amcc.md. ~5 min.
-- **AM-3: Brief + Blocks** (`am-3-brief`) — Daily brief (email + Slack), dashboard update, calendar blocks, proactive drafts. ~5 min.
+### AM Hooks (2 sequential: backend → frontend)
+- **AM-Backend** (`am-auto`) — Parallel ingestion (6 subagents: Slack, Asana Sync, Asana Activity, Email+Calendar, Loop Pages, Hedy) → sequential processing (signal routing, enrichment, portfolio scan) → SharePoint durability sync. ~12 min. Protocol: `am-backend-parallel.md`
+- **AM-Frontend** (`am-triage`) — Interactive: daily brief, email brief, calendar blocks, enrichment execution, ABPS AI triage, portfolio alerts, command center. Reads pre-computed state from backend (local first, SharePoint fallback). ~10 min. Protocol: `am-frontend.md`
 
-### EOD Hooks (2 sequential)
-- **EOD-1: Meeting Sync** (`eod-1-meeting-sync`) — Hedy + Outlook + email → meetings/ series files + organ updates. ~5 min.
-- **EOD-2: System Refresh** (`eod-2-system-refresh`) — Maintenance cascade + experiments (Karpathy) + dashboard + enrichments + git sync. ~10 min. Protocol: `~/shared/context/body/heart.md`
+### EOD Hook (1 unified: backend + frontend)
+- **EOD** (`eod`) — Backend: Hedy meeting ingestion, Asana reconciliation (delta sync, daily reset, recurring, completion moves, blockers), organ cascade, compression audit, workflow health, context enrichment, recurring state checks, DuckDB snapshots, git sync, Karpathy experiments, SharePoint durability sync. Frontend: day summary, decisions, portfolio report, system health, experiment results, Slack DM. ~20 min. Protocol: `eod-backend.md` + `eod-frontend.md`
 
 ### Safety Guards (preToolUse hooks)
 - **Block Email Send:** Prevents email_reply/send/forward unless only recipient is prichwil. Others require explicit approval.
@@ -72,6 +70,15 @@ These are live. They execute without Richard thinking.
 - **Trigger:** userTriggered. Dry-run first, Richard confirms before live sync.
 - **Tool:** `python3 ~/shared/tools/sharepoint-sync/cli.py --mode directory` · Config: `~/shared/tools/sharepoint-sync/config.yaml`
 - **Local (Windows):** `c:/Users/prichwil/OneDrive - amazon.com/Artifacts/wiki-sync`
+
+### SharePoint Durability Layer (Protocol: `sharepoint-durability-sync.md`)
+- **What it does:** Bidirectional sync between `~/shared/` and OneDrive `Kiro-Drive/`. Pushes AM/EOD output artifacts for cross-device access and container-death resilience. Pulls on cold start when local files are missing.
+- **Push triggers:** AM-Backend Phase 5.5, EOD-Backend Phase 7.5, wiki article publish, strategic artifact ship, Friday portable body snapshot.
+- **Pull triggers:** Cold start (missing local files), container restart between backend/frontend, on-demand artifact retrieval.
+- **SharePoint paths:** `Kiro-Drive/system-state/` (hook outputs), `Kiro-Drive/portable-body/` (snapshots), `Kiro-Drive/meeting-briefs/` (prep docs). Published artifacts go to `Artifacts/wiki-sync/` via the separate sharepoint-sync hook.
+- **NOT synced:** Organs, DuckDB, intake files, hooks, steering, audit logs.
+- **Error handling:** Non-blocking. Local files are source of truth. SharePoint is durability layer, not dependency.
+- **Three-layer durability:** filesystem (`~/shared/`) + SharePoint (`Kiro-Drive/`) + git (agent-bridge). Any two can fail and the system recovers.
 
 ### PS Analytics Database (DuckDB → MotherDuck Cloud)
 - **What it does:** Persistent cloud analytical DB for all structured PS data and system telemetry. 8 schemas, 55 tables + 34 views.
@@ -139,12 +146,14 @@ Backlog proposals: WBR auto-briefing, meeting prep auto-generator, invoice routi
 
 | Group | Status | Last Run |
 |-------|--------|----------|
-| AM Hooks (AM-1, AM-2, AM-3) | ✅ | 4/2 |
-| EOD Hooks (EOD-1, EOD-2) | ✅ | 4/3, 4/2 |
-| Safety Guards (Email, Calendar) | ✅ | Always |
+| AM Hooks (Backend + Frontend) | ✅ | 4/4 |
+| EOD Hook (Unified) | ✅ | 4/11 |
+| Safety Guards (Email, Calendar, Asana) | ✅ | Always |
+| Audit (Asana Writes) | ✅ | Always |
+| SharePoint Durability Sync | 🆕 | 4/12 (folders created, first data push pending) |
 | Agents (Karpathy, Eyes Chart, Wiki Team) | ✅ | 3/24–3/25 |
 | Data Pipeline (Ingester, DuckDB, Callouts, Predictions) | ✅ | 3/30 |
-| Content Tools (Bridge, Charts, Catalog, SharePoint) | ✅ | 3/25–3/27 |
+| Content Tools (Bridge, Charts, Catalog, SharePoint Wiki Sync) | ✅ | 3/25–3/27 |
 | Slack Ingestion v3 | ✅ | 4/2 |
 | MCP Servers (Weblab, XWiki, Builder, Taskei) | 🆕 | 4/2 |
 | Attention Tracker | 🔧 | 3/30 |

@@ -1,4 +1,13 @@
+---
+title: "MX FY26 Annual Projection"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0079 | duck_id: callout-mx-fy26-projection -->
+
 # MX FY26 Annual Projection
 
 Created: 2026-03-30

@@ -1,4 +1,13 @@
+---
+title: "WW Monthly Projections"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0082 | duck_id: callout-projections-ww -->
+
 # WW Monthly Projections
 
 Updated weekly. Analyst-produced projections vs OP2 with accuracy tracking.

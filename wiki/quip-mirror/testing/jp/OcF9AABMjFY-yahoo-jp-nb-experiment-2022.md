@@ -1,13 +1,19 @@
 ---
-quip_id: OcF9AABMjFY
-title: "2022.10_Yahoo-JP-NB_Experiment"
-source_url: https://quip-amazon.com/OcF9AABMjFY
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-02-23
-quip_folder: Testing/.JP
-topics: [testing, japan, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/.JP
+quip_id: OcF9AABMjFY
+source_url: https://quip-amazon.com/OcF9AABMjFY
+status: DRAFT
+title: 2022.10_Yahoo-JP-NB_Experiment
+topics:
+- testing
+- japan
+- paid-search
 ---
 
 # 2022.10 Yahoo-JP-NB Experiment

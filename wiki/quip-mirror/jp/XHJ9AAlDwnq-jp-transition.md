@@ -1,13 +1,18 @@
 ---
-quip_id: XHJ9AAlDwnq
-title: "JP Transition"
-source_url: https://quip-amazon.com/XHJ9AAlDwnq
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-04-01
-quip_folder: ..JP
-topics: [japan, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: ..JP
+quip_id: XHJ9AAlDwnq
+source_url: https://quip-amazon.com/XHJ9AAlDwnq
+status: DRAFT
+title: JP Transition
+topics:
+- japan
+- paid-search
 ---
 
 # JP Transition

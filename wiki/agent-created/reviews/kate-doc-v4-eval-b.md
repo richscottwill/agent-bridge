@@ -1,4 +1,13 @@
+---
+title: "Blind Eval B: Paid Search Testing Approach & Year Ahead (V4)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0483 | duck_id: wiki-review-kate-doc-v4-eval-b -->
+
 # Blind Eval B: Paid Search Testing Approach & Year Ahead (V4)
 
 **Evaluator:** wiki-critic (Eval B — no prior reviews seen)

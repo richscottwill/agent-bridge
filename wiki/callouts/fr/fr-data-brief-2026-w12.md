@@ -1,4 +1,13 @@
+---
+title: "FR W12 Data Brief"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0049 | duck_id: callout-fr-data-brief-2026-w12 -->
+
 # FR W12 Data Brief
 
 ## Headline numbers

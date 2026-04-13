@@ -1,4 +1,13 @@
+---
+title: "CA W13 Data Brief"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0020 | duck_id: callout-ca-data-brief-2026-w13 -->
+
 # CA W13 Data Brief
 
 ## Headline numbers

@@ -1,4 +1,13 @@
+---
+title: "Review: Paid Search Testing Approach & Year Ahead (V5)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0484 | duck_id: wiki-review-kate-doc-v5-eval-a -->
+
 # Review: Paid Search Testing Approach & Year Ahead (V5)
 
 Blind Eval A — 2026-04-05. Appendix excluded from Economy scoring per appendix-heavy structure rule.

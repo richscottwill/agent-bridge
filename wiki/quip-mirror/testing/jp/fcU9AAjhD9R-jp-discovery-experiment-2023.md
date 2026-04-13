@@ -1,13 +1,19 @@
 ---
-quip_id: fcU9AAjhD9R
-title: "2023.04_JP_Discovery-Experiment"
-source_url: https://quip-amazon.com/fcU9AAjhD9R
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-02-23
-quip_folder: Testing/.JP
-topics: [testing, japan, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/.JP
+quip_id: fcU9AAjhD9R
+source_url: https://quip-amazon.com/fcU9AAjhD9R
+status: DRAFT
+title: 2023.04_JP_Discovery-Experiment
+topics:
+- testing
+- japan
+- paid-search
 ---
 
 # 2023.04 JP Discovery Experiment

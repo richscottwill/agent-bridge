@@ -1,13 +1,19 @@
 ---
-quip_id: WKS9AAlN5pT
-title: "PS Testing: Secondary Language"
-source_url: https://quip-amazon.com/WKS9AAlN5pT
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-08-21
-quip_folder: Testing
-topics: [testing, experiments, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing
+quip_id: WKS9AAlN5pT
+source_url: https://quip-amazon.com/WKS9AAlN5pT
+status: DRAFT
+title: 'PS Testing: Secondary Language'
+topics:
+- testing
+- experiments
+- paid-search
 ---
 
 # PS Testing: Secondary Language

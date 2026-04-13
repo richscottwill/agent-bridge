@@ -1,4 +1,13 @@
+---
+title: "Wiki Structure"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0451 | duck_id: wiki-meta-wiki-structure -->
+
 # Wiki Structure
 
 > The wiki pipeline (research → staging → review) lives in `~/shared/wiki/`.

@@ -1,4 +1,13 @@
+---
+title: "AU Paid Search Sync"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0199 | duck_id: meeting-au-paid-search-sync -->
+
 # AU Paid Search Sync
 
 ## Metadata

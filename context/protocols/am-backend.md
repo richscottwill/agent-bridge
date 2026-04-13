@@ -27,11 +27,17 @@ Run `~/shared/context/protocols/duckdb-schema-verification.md` quick check:
 ### Slack Scan
 1. list_channels (unreadOnly=true). Sort by mention_count then section.
 2. Apply depth rules. Relevance Filter (threshold 25).
-3. Produce slack-digest in intake/.
-4. RSW-CHANNEL INTAKE.
-5. PROACTIVE SEARCH.
-6. Update slack-scan-state.json.
-7. DuckDB batch writes.
+3. batch_get_conversation_history for each channel.
+4. DuckDB batch writes (signals.slack_messages).
+5. THREAD REPLY FETCH: For messages with reply_count > 0 in today's ingestion,
+   call batch_get_thread_replies (batch up to 10 threads per call).
+   Insert all thread replies into signals.slack_messages with thread_ts set.
+   Priority: threads from Brandon/Kate/Lena channels first. Cap: 50 threads/run.
+6. Produce slack-digest in intake/.
+7. RSW-CHANNEL INTAKE.
+8. PROACTIVE SEARCH.
+9. Update slack-scan-state.json.
+10. DuckDB batch writes (signals.signal_tracker).
 
 ### Asana Full Sync to DuckDB
 Execute ~/shared/context/protocols/asana-duckdb-sync.md:

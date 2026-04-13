@@ -1,4 +1,13 @@
+---
+title: "Kingpin Goals — Context Update"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0137 | duck_id: context-kingpin-goals-context-20260316 -->
+
 # Kingpin Goals — Context Update
 
 Date: 2026-03-13

@@ -1,12 +1,21 @@
 ---
-quip_id: UUE9AAVEGuj
-title: "EU5 CVR Investigation"
-source_url: https://quip-amazon.com/UUE9AAVEGuj
-doc_type: spreadsheet
+audience: amazon-internal
 creator: Yun-Kang Chu
-quip_folder: EU
-topics: [EU, CVR, investigation, brand-vs-NB, UK, performance-analysis]
+doc_type: spreadsheet
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: EU
+quip_id: UUE9AAVEGuj
+source_url: https://quip-amazon.com/UUE9AAVEGuj
+status: DRAFT
+title: EU5 CVR Investigation
+topics:
+- EU
+- CVR
+- investigation
+- brand-vs-NB
+- UK
+- performance-analysis
 ---
 
 # EU5 CVR Investigation

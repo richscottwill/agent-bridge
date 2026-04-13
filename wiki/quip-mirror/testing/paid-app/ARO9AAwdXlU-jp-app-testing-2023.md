@@ -1,13 +1,19 @@
 ---
-quip_id: ARO9AAwdXlU
-title: "2023.08 - JP App Testing Results"
-source_url: https://quip-amazon.com/ARO9AAwdXlU
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2023-11-17
-quip_folder: Testing/Paid App
-topics: [testing, mobile-app, paid-app-marketing]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/Paid App
+quip_id: ARO9AAwdXlU
+source_url: https://quip-amazon.com/ARO9AAwdXlU
+status: DRAFT
+title: 2023.08 - JP App Testing Results
+topics:
+- testing
+- mobile-app
+- paid-app-marketing
 ---
 
 # 2023.08 - JP App Testing Results

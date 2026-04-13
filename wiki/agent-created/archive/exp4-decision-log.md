@@ -1,4 +1,13 @@
+---
+title: "Decision Log — Richard Williams"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0125 | duck_id: context-exp4-decision-log -->
+
 # Decision Log — Richard Williams
 
 Last updated: 2026-03-17

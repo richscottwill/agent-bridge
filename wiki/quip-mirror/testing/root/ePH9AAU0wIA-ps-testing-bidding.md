@@ -1,13 +1,19 @@
 ---
-quip_id: ePH9AAU0wIA
-title: "PS Testing: Bidding Algorithms"
-source_url: https://quip-amazon.com/ePH9AAU0wIA
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2023-11-14
-quip_folder: Testing
-topics: [testing, experiments, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing
+quip_id: ePH9AAU0wIA
+source_url: https://quip-amazon.com/ePH9AAU0wIA
+status: DRAFT
+title: 'PS Testing: Bidding Algorithms'
+topics:
+- testing
+- experiments
+- paid-search
 ---
 
 # PS Testing: Bidding Algorithms

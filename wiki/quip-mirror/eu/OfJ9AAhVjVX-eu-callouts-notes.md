@@ -1,13 +1,19 @@
 ---
-quip_id: OfJ9AAhVjVX
-title: "EU Callouts notes"
-source_url: https://quip-amazon.com/OfJ9AAhVjVX
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-01-11
-quip_folder: ..EU
-topics: [europe, eu5, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: ..EU
+quip_id: OfJ9AAhVjVX
+source_url: https://quip-amazon.com/OfJ9AAhVjVX
+status: DRAFT
+title: EU Callouts notes
+topics:
+- europe
+- eu5
+- paid-search
 ---
 
 # EU Callouts Notes

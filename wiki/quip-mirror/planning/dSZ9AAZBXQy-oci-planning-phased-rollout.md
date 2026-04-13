@@ -1,13 +1,25 @@
 ---
-quip_id: dSZ9AAZBXQy
-title: "OCI Planning - Phased Rollout"
-source_url: https://quip-amazon.com/dSZ9AAZBXQy
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
-last_modified: "2025-11-18"
+doc_type: document
+last_modified: '2025-11-18'
+mirror_date: '2026-04-10'
+owner: Richard Williams
 quip_folder: Planning/OCI
-topics: [OCI, rollout, US, UK, DE, phased testing, ROAS, bid strategy, tracking template]
-mirror_date: "2026-04-10"
+quip_id: dSZ9AAZBXQy
+source_url: https://quip-amazon.com/dSZ9AAZBXQy
+status: DRAFT
+title: OCI Planning - Phased Rollout
+topics:
+- OCI
+- rollout
+- US
+- UK
+- DE
+- phased testing
+- ROAS
+- bid strategy
+- tracking template
 ---
 
 # OCI Planning - Phased Rollout

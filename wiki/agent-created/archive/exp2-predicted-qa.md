@@ -1,4 +1,13 @@
+---
+title: "Predicted Questions — Next Session"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0123 | duck_id: context-exp2-predicted-qa -->
+
 # Predicted Questions — Next Session
 
 Based on: calendar patterns, email threads, active projects as of 3/20/26 (Friday).

@@ -1,4 +1,13 @@
+---
+title: "Meeting Notes — Agent Instructions"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0414 | duck_id: tool-README -->
+
 # Meeting Notes — Agent Instructions
 
 *Centralized meeting context for all of Richard's recurring and ad-hoc meetings. Each file represents a meeting series, not a single meeting.*

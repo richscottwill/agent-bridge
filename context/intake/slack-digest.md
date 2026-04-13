@@ -1,45 +1,73 @@
-# Slack Digest — 2026-04-10
+# Slack Digest — 2026-04-13 (Monday) PM Scan
 
-Scan: 2026-04-10T14:30:00Z | Channels: 37 | Signals: 7
+## 🔴 Action Required
 
-## 🔴 Critical (Action Required)
+- [ACTION-RW] **OCI CA Launch — Brandon checking MCM readiness NOW.** Brandon just messaged Mukesh (arthamm) in #ab-paid-search-oci: "do you have everything you need on the MCM? Are we planning to proceed with CA execution tomorrow?" This is the launch thread from 4/8. CA execution is planned for TOMORROW (4/14). Richard should confirm he's tracking this and doesn't have any blockers. (Channel: ab-paid-search-oci, ts: 1776097978.726279, 4:32 PM PT)
 
-- [ACTION-RW] **PAM Budget — 7d unanswered.** Brandon's direct @mention in #ab-paid-search-app asking "Do you need more $ for PAM?" remains without reply or reaction. Now 7 days. No new activity in channel. Richard was at Austin offsite Thu/Fri — this should have been handled face-to-face per Thursday's brief. **Confirm with Brandon today whether this was resolved in person. If not, reply immediately.**
-  - Source: C05KTAAG14J, brandoxy, 1775256118.064909
+- [ACTION-RW] **PAM Budget — STILL 10d unanswered.** No new activity in #ab-paid-search-app. Brandon's direct @mention from 4/3 remains without reply or reaction. This is day 10. Must reply or confirm resolution TODAY. (Channel: ab-paid-search-app)
 
-- [ACTION-RW] **MX Budget Line / Underspend — 7d unanswered.** Brandon asked in #ab-paid-search-abix if Richard needs Carlos to move budget out of PS lines (underspend risk). Yun also asked about MX OP2 budget discrepancy ($541K vs $1.5M). Both 7d unanswered. Same as PAM — should have been handled at offsite. **Confirm resolution or reply today.**
-  - Source: C065KKT53DJ, brandoxy/yunchu, 1775246999/1775245603
+- [ACTION-RW] **MX Budget Line — STILL 10d unanswered.** No new activity in #ab-paid-search-abix. Brandon + Yun questions from 4/3 remain open. Must confirm or reply TODAY. (Channel: ab-paid-search-abix)
 
-- [ACTION-RW] **Polaris LP Brand Page ETA — still owed.** No new messages in mpdm-brandoxy-dtpalmer-prichwil since last scan. Brandon's question about Brand page transition timing from 4/8 remains unanswered. Revert to legacy was planned for Thursday. **Follow up with Brandon on whether revert happened and provide Brand page ETA.**
-  - Source: C05JFNNENV9, brandoxy, 1775575023.800769
+## 📢 Key Signals
 
-## 🟡 Important
+- **GenBI Traffic Dataset Demo (NOW).** Yun posted in #ab-paid-search-global: "Mukesh is hosting a Traffic dataset on GenBI demo now!" Brandon reacted with 🦾 and replied "that's why he was responding to me so early this morning!" Stacey and another teammate also reacted with 👍. This is relevant to the team's data tooling — Mukesh building GenBI integration for traffic data. (Channel: ab-paid-search-global, ts: 1776092716.865119, 3:05 PM PT)
 
-- [STATUS] **Deeplink Redirect Bug Impact Analysis — DONE.** Yun posted completed analysis in #ab-paid-search-global (Thu 4/9 2pm CT). Key finding: ~16,500 incremental lost mWeb registration sessions across all marketplaces during 39-day impact window. US most impacted (12,591 intercepted sessions). AU and UK saw highest relative increase (2% → 13%). Brandon asked about reg totals from the data — Yun followed up. Ticket: V2145343510.
-  - Source: C044UG8MCSZ, yunchu, 1775743328.863569
+- **OCI CA execution timeline confirmed: TOMORROW (4/14).** Brandon's message to Mukesh confirms the MCM is being finalized and CA execution is planned for tomorrow. No reply from Mukesh yet as of scan time. (Channel: ab-paid-search-oci)
 
-- [STATUS] **Stacey shared XBR tool info** in #ab-paid-search-global — GenBI analytics interest channel + XBR session chat history link. Brandon and Yun reacted with ty-thankyou. FYI for team tooling awareness.
-  - Source: C044UG8MCSZ, staceygu, 1775752578/1775752989
+- **No new activity on Polaris LP / Brand Page Transition.** Thursday DDD still on track per last scan. No new messages in #ab-paid-search-global or the mpdm since 4/10.
 
-- [STATUS] **Team offsite wrap-up.** Brandon DM was casual offsite coordination (kolaches, joining room, starting in 10 min). Team group DM (mpdm-team) had Google office visit photos from Thursday evening — Brandon, Yun, Aditya sharing AI-generated photos from Google campus visit. Fun team bonding content, no action items.
-  - Source: D044JAKR8RZ + C0A1WMDD3R8, multiple, 4/9-4/10
+- **No new activity on Lena MX LP Confusion.** Still needs data-backed response. No new messages in #ab-paid-search-abix since 4/10.
 
-- [FYI] **AB 3P Event Guidelines launched** — Colleen Carnagey announced in #team-ab-marketing. Comprehensive brand guidelines now on Brand Portal. Not directly PS-relevant but good org awareness.
-  - Source: C048VEWU7U3, carnagey, 1775758457.058289
+## 💬 Conversations
 
-## 🟢 FYI / Status Updates
+### #ab-paid-search-global (AB PS — full depth)
+- 1 new message + 1 thread reply since last scan
+- Yun: GenBI Traffic dataset demo happening now with Mukesh
+- Brandon replied in thread, reacted with 🦾
+- No other new messages
 
-- [FYI] **OCI CA Launch Monday 4/13** — No new activity since last scan. MCM submitted, Brandon handling. Status unchanged: confirmed.
-- [FYI] **SSR Refmarker Investigation** — No new activity. Status: resolved-monitor.
-- [FYI] **AppTweak NPS survey** — Anthony from AppTweak asked Pete to fill out NPS survey in #ext-apptweak. Not Richard-relevant.
-- [FYI] **AB GenAI Win** — AB JP team automated VOC pain point classification using Bedrock (50 hrs/yr → 33 min). Interesting L3-5 signal for automation narrative.
+### #ab-paid-search-oci (WW Testing — full depth)
+- Brandon posted in existing OCI launch thread asking Mukesh about MCM readiness for CA execution tomorrow
+- No reply from Mukesh yet
 
-## Level 3-5 Insights
+### #ab-paid-search-abix (Channels — standard depth)
+- No new messages since last scan (4/10)
 
-- **GenAI Power Users digest (4/9):** AIM auto-updates now at 100% rollout. ClawSpaces (sandboxed agent swarms) opening to everyone. Pippin creator says Kiro agent workflow won't be replaced by Pippin+SpecStudio for power users. "Dreaming" skill replicates human REM sleep for memory consolidation. AXI design principles for CLI tools that AI agents use more efficiently than MCP.
-- **AgentCore:** AWS Agent Registry now in preview — discover, share, reuse AI agents/tools across enterprise.
-- **Kiro Docker sandboxing** shared for preventing accidental production access — relevant to Richard's L5 agentic orchestration trajectory.
-- **"Taste in the Age of AI"** discussion — Senior Principal Engineer James Hood: judgment/taste increasingly important as AI handles coding. Codifying judgment in team context. Relevant to Richard's L1 (Sharpen Yourself) thinking about what skills matter.
+### #ab-paid-search-app (Channels — standard depth)
+- No new messages since last scan. PAM budget @mention still unanswered.
+
+### #ask-ab-data (AB — standard depth)
+- 1 mention for Richard but messages are all from Dec 2025-Jan 2026 (stale backlog). No recent relevant content. The mention_count=1 is from old unread messages, not new activity.
+
+## 🔍 Proactive Search Results
+
+### "prichwil" search
+- Search returned invalid_auth error. Unable to run this cycle.
+
+### "from:@brandoxy" search (after 4/10)
+- 2 results found:
+  1. OCI channel: Brandon asking Mukesh about MCM readiness (4/13 4:32 PM) — CAPTURED above
+  2. Global channel: Brandon replying to Yun's GenBI thread (4/13 3:06 PM) — CAPTURED above
+
+### "from:@kataxt" search
+- Unable to run (invalid_auth on search endpoint)
+
+## 📊 Level 3-5 Insights
+
+### #amazon-builder-genai-power-users (5 new messages since last scan)
+- **Capability Routing across agents** (willetbw): Steering file as routing table for MCP delegation. Intent → MCP server → delegation target. Discusses context cost of loading 12 MCPs. Wiki writeup shared. Directly relevant to Richard's L5 agentic orchestration trajectory.
+- **Pizzeria — AI Team Kanban Board** (vamgan): Kanban board for AI agents with spec review, autonomous CR handling, reusable recipes. 15+ 👍 reactions. Agent task management pattern worth watching.
+- **Environment portability across AgentSpaces/CloudDesk/Kiro-CLI** (bowl): Asks about syncing persona across environments. Directly relevant to Richard's portable body system.
+- **Kiro skills format evolution** (nslick): Clarification on agentskills.io spec vs older formats.
+
+### #agentspaces-interest (6 new messages since last scan)
+- gpu-multiagent subagent visibility question
+- Weekly channel summary bot posted
+- Slack/email MCP access in Kiro-CLI question
+- Redshift cluster connection question
+- Bedrock model access in DevSpaces
 
 ---
-Hot Topics Updated: PAM Budget (7d→CRITICAL), MX Budget (7d→CRITICAL), Polaris LP (still owed), Deeplink Redirect (analysis complete), OCI CA (Monday launch confirmed), Team Offsite (complete)
+Scan: 2026-04-13T16:40:00Z | Channels: 12 scanned | Messages: 11 new | Signals: 4 new/reinforced | Decay: applied (0 deactivated)
+Search: prichwil (failed-auth), from:@brandoxy (2 results), from:@kataxt (failed-auth)
+Hot topics: OCI launch ACTIVE (Brandon checking MCM), PAM budget CRITICAL (10d), MX budget CRITICAL (10d)

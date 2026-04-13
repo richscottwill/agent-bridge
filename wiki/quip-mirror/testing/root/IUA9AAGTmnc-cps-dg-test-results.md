@@ -1,13 +1,19 @@
 ---
-quip_id: IUA9AAGTmnc
-title: "US/UK CPS DG Test results"
-source_url: https://quip-amazon.com/IUA9AAGTmnc
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-07-30
-quip_folder: Testing
-topics: [testing, experiments, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing
+quip_id: IUA9AAGTmnc
+source_url: https://quip-amazon.com/IUA9AAGTmnc
+status: DRAFT
+title: US/UK CPS DG Test results
+topics:
+- testing
+- experiments
+- paid-search
 ---
 
 # US/UK CPS DG Test Results

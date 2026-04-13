@@ -1,13 +1,19 @@
 ---
-quip_id: FAZ9AAzxU6P
-title: "DG Test results and CPS Y25 Testing Plan"
-source_url: https://quip-amazon.com/FAZ9AAzxU6P
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-12-02
-quip_folder: Testing
-topics: [testing, experiments, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing
+quip_id: FAZ9AAzxU6P
+source_url: https://quip-amazon.com/FAZ9AAzxU6P
+status: DRAFT
+title: DG Test results and CPS Y25 Testing Plan
+topics:
+- testing
+- experiments
+- paid-search
 ---
 
 # DG Test Results and CPS Y25 Testing Plan

@@ -1,13 +1,20 @@
 ---
-quip_id: WdY9AAy8tDh
-title: "Paid Acquisition SIMs"
-source_url: https://quip-amazon.com/WdY9AAy8tDh
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-02-23
-quip_folder: Review
-topics: [review, mbr, qbr, reporting]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Review
+quip_id: WdY9AAy8tDh
+source_url: https://quip-amazon.com/WdY9AAy8tDh
+status: DRAFT
+title: Paid Acquisition SIMs
+topics:
+- review
+- mbr
+- qbr
+- reporting
 ---
 
 # Paid Acquisition SIMs

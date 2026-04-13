@@ -1,13 +1,19 @@
 ---
-quip_id: QYQ9AAmBqdJ
-title: "App Marketing - Holidays Readiness List"
-source_url: https://quip-amazon.com/QYQ9AAmBqdJ
-doc_type: document
+audience: amazon-internal
 creator: Peter Ocampo
+doc_type: document
 last_modified: 2024-08-23
-quip_folder: Mobile App/Paid App
-topics: [mobile-app, paid-app-marketing, apple-search-ads]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Mobile App/Paid App
+quip_id: QYQ9AAmBqdJ
+source_url: https://quip-amazon.com/QYQ9AAmBqdJ
+status: DRAFT
+title: App Marketing - Holidays Readiness List
+topics:
+- mobile-app
+- paid-app-marketing
+- apple-search-ads
 ---
 
 # App Marketing - Holidays Readiness List

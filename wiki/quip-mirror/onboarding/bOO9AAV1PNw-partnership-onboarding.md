@@ -1,13 +1,19 @@
 ---
-quip_id: bOO9AAV1PNw
-title: "Partnership accounts - Onboarding"
-source_url: https://quip-amazon.com/bOO9AAV1PNw
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-03-06
-quip_folder: Onboarding/Docs
-topics: [onboarding, reference, transition]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Onboarding/Docs
+quip_id: bOO9AAV1PNw
+source_url: https://quip-amazon.com/bOO9AAV1PNw
+status: DRAFT
+title: Partnership accounts - Onboarding
+topics:
+- onboarding
+- reference
+- transition
 ---
 
 # Partnership Accounts - Onboarding

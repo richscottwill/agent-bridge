@@ -1,4 +1,13 @@
+---
+title: "Baloo Early Access — Cost & Rollout Planning"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0200 | duck_id: meeting-baloo-early-access -->
+
 # Baloo Early Access — Cost & Rollout Planning
 
 ## Metadata

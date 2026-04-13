@@ -198,3 +198,21 @@ Write all computed state to structured files for EOD-Frontend:
 2. `~/shared/context/active/eod-maintenance.json` — organ cascade results, workflow health, enrichment summary
 3. `~/shared/context/active/eod-experiments.json` — Karpathy experiment results (if any)
 4. Updated rw-tracker.md, hands.md, changelog.md (already written in earlier phases)
+
+---
+
+## Phase 7.5: SharePoint Durability Sync
+
+Execute ~/shared/context/protocols/sharepoint-durability-sync.md — EOD section.
+
+Push key output artifacts to OneDrive for cross-device access and container-death resilience:
+- eod-reconciliation.json → Kiro-Drive/system-state/
+- eod-maintenance.json → Kiro-Drive/system-state/
+- eod-experiments.json → Kiro-Drive/system-state/
+- daily-brief-latest.md → Kiro-Drive/system-state/
+
+On Fridays, also push:
+- Portable body snapshot → Kiro-Drive/portable-body/body-snapshot-YYYY-MM-DD.md
+- rw-tracker.md → Kiro-Drive/system-state/
+
+Non-blocking: if SharePoint fails, log warning and continue. Local files are source of truth.

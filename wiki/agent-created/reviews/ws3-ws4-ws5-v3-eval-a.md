@@ -1,4 +1,13 @@
+---
+title: "Blind Eval A: Workstreams 3, 4, 5 (v3)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0498 | duck_id: wiki-review-ws3-ws4-ws5-v3-eval-a -->
+
 # Blind Eval A: Workstreams 3, 4, 5 (v3)
 
 Reviewer: wiki-critic | Date: 2026-04-05 | Appendix excluded from Economy scoring per instructions.

@@ -1,13 +1,19 @@
 ---
-quip_id: HNL9AA4Zse1
-title: "Brand Core - Primelis Test"
-source_url: https://quip-amazon.com/HNL9AA4Zse1
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-08-14
-quip_folder: Testing/.NA
-topics: [testing, north-america, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/.NA
+quip_id: HNL9AA4Zse1
+source_url: https://quip-amazon.com/HNL9AA4Zse1
+status: DRAFT
+title: Brand Core - Primelis Test
+topics:
+- testing
+- north-america
+- paid-search
 ---
 
 # Brand Core - Primelis Test

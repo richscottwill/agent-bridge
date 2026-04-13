@@ -1,13 +1,19 @@
 ---
-quip_id: ETC9AAVBfHC
-title: "Onboarding Links & Reference"
-source_url: https://quip-amazon.com/ETC9AAVBfHC
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-10-09
-quip_folder: Onboarding/Docs
-topics: [onboarding, reference, transition]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Onboarding/Docs
+quip_id: ETC9AAVBfHC
+source_url: https://quip-amazon.com/ETC9AAVBfHC
+status: DRAFT
+title: Onboarding Links & Reference
+topics:
+- onboarding
+- reference
+- transition
 ---
 
 # Onboarding Links & Reference

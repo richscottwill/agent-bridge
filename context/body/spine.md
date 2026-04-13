@@ -74,8 +74,9 @@ Full hook details: see device.md → Installed Apps and hands.md → Hook System
 | Directory | Role | Owner | Contents |
 |-----------|------|-------|----------|
 | `~/shared/context/body/` | Body organs + device | Agent (maintained), Human (validated) | body.md, brain.md, eyes.md, hands.md, memory.md, spine.md, heart.md, device.md |
-| `~/shared/context/active/` | Ground truth. Live state. | Agent + Human | current.md, org-chart.md, rw-tracker.md, long-term-goals.md, asana-command-center.md, mcp-tool-reference.md |
+| `~/shared/context/active/` | Ground truth. Live state. | Agent + Human | current.md, org-chart.md, rw-tracker.md, long-term-goals.md, asana-command-center.md, mcp-tool-reference.md, hook-protocol-audit.md |
 | `~/.kiro/steering/` | Agent behavior config. | Human edits, Agent suggests | soul.md, rw-trainer.md, writing styles, prioritization, environment rules |
+| `~/shared/context/protocols/` | Hook execution protocols. | Agent builds, Human approves | am-*.md, eod-*.md, sharepoint-durability-sync.md, signal-*.md, etc. |
 | `~/shared/wiki/meetings/` | Meeting series notes. One file per recurring meeting. | Agent summarizes from Hedy | stakeholder/, team/, manager/, peer/, adhoc/ — see README.md for full map |
 | `~/shared/data/duckdb/ps-analytics.duckdb` | PS Analytics database (DuckDB) | Dashboard ingester writes, all agents read+write | CLI: `python3 ~/shared/tools/data/query.py "SQL"`. Python: `from query import db, market_trend`. MCP: `execute_query`. Schema: `~/shared/tools/data/schema.sql`. Portability: `RECONSTRUCTION.md`. Exports: `~/shared/data/exports/`. |
 | `~/shared/wiki/` | Published work product (7 categories) + index.md | Wiki team → Agent, Human curates index | testing/, strategy/, reporting/, tools/, communication/, program-details/, best-practices/ |
@@ -84,6 +85,22 @@ Full hook details: see device.md → Installed Apps and hands.md → Hook System
 | `~/shared/tools/` | Utility scripts. | Agent builds | Python scripts for MCP, sync, briefs |
 | `~/shared/wiki/` | Doc pipeline + context catalog | Wiki team agents | context-catalog.md, wiki-index.md, staging/, research/, reviews/ |
 | `~/shared/wiki/archive/` | Cold storage. | Agent | Archived artifacts, old versions |
+| OneDrive `Kiro-Drive/` | Durability layer + cross-device access | Agent pushes, Human reads | system-state/ (hook outputs), portable-body/ (snapshots), artifacts/ (published docs), meeting-briefs/ |
+
+---
+
+## Three-Layer Durability Model
+
+The system survives any single point of failure through three independent persistence layers:
+
+| Layer | Location | What It Stores | Survives |
+|-------|----------|---------------|----------|
+| Filesystem | `~/shared/` (DevSpaces persistent volume) | Everything — organs, protocols, tools, data | Container restart ✅, DevSpaces rebuild ❌ |
+| SharePoint | OneDrive `Kiro-Drive/` | Hook outputs, published artifacts, portable body snapshots | Container restart ✅, DevSpaces rebuild ✅, Platform migration ✅ |
+| Git | `agent-bridge` GitHub repo | Portable body, sanitized context, changelog | Container restart ✅, DevSpaces rebuild ✅, Platform migration ✅ |
+| MotherDuck | `md:ps_analytics` cloud DB | All structured data (Asana, signals, experiments, PS metrics) | Container restart ✅, DevSpaces rebuild ✅, Platform migration ✅ |
+
+**Recovery priority:** MotherDuck (structured data) → SharePoint (artifacts + state) → Git (portable body) → Filesystem (rebuild from other three).
 
 ---
 

@@ -1,4 +1,13 @@
+---
+title: "CA Change Log (2026)"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0017 | duck_id: callout-ca-change-log -->
+
 # CA Change Log (2026)
 
 Source: AB - Change Log - NA & JP.csv

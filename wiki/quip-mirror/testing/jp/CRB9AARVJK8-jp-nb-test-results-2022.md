@@ -1,13 +1,19 @@
 ---
-quip_id: CRB9AARVJK8
-title: "JP NB Test Results 2022"
-source_url: https://quip-amazon.com/CRB9AARVJK8
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-02-23
-quip_folder: Testing/.JP
-topics: [testing, japan, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/.JP
+quip_id: CRB9AARVJK8
+source_url: https://quip-amazon.com/CRB9AARVJK8
+status: DRAFT
+title: JP NB Test Results 2022
+topics:
+- testing
+- japan
+- paid-search
 ---
 
 # JP NB Test Results 2022

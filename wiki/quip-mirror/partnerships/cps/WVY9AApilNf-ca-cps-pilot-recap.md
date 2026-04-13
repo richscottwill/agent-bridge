@@ -1,13 +1,19 @@
 ---
-quip_id: WVY9AApilNf
-title: "CA Paid Search CPS Pilot Recap"
-source_url: https://quip-amazon.com/WVY9AApilNf
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-03-04
-quip_folder: Partnerships/CPS/CA
-topics: [cps, canada, partnerships]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/CPS/CA
+quip_id: WVY9AApilNf
+source_url: https://quip-amazon.com/WVY9AApilNf
+status: DRAFT
+title: CA Paid Search CPS Pilot Recap
+topics:
+- cps
+- canada
+- partnerships
 ---
 
 # CA Paid Search CPS Pilot Recap

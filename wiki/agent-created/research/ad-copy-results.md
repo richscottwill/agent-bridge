@@ -1,4 +1,13 @@
+---
+title: "Ad Copy Test Results — Evidence-Based Optimization"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0368 | duck_id: research-ad-copy-results -->
+
 # Ad Copy Test Results — Evidence-Based Optimization
 
 Last updated: 2026-03-12

@@ -1,4 +1,13 @@
+---
+title: "EU5 W13 Regional Analysis Brief"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0042 | duck_id: callout-eu5-analysis-2026-w13 -->
+
 # EU5 W13 Regional Analysis Brief
 
 ## Regional summary

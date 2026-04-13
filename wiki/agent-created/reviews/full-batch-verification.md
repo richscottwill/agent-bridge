@@ -1,4 +1,13 @@
+---
+title: "Full Batch Verification — Wiki Staging Docs"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0471 | duck_id: wiki-review-full-batch-verification -->
+
 # Full Batch Verification — Wiki Staging Docs
 
 **Reviewer:** wiki-critic

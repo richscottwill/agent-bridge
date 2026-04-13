@@ -1,13 +1,19 @@
 ---
-quip_id: ABW9AA8Xivl
-title: "EU CPS - Paid Search"
-source_url: https://quip-amazon.com/ABW9AA8Xivl
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-02-16
-quip_folder: Partnerships/CPS/EU
-topics: [cps, europe, partnerships]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/CPS/EU
+quip_id: ABW9AA8Xivl
+source_url: https://quip-amazon.com/ABW9AA8Xivl
+status: DRAFT
+title: EU CPS - Paid Search
+topics:
+- cps
+- europe
+- partnerships
 ---
 
 # EU CPS - Paid Search

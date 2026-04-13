@@ -1,4 +1,13 @@
+---
+title: "AU W12 Analysis Brief"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0006 | duck_id: callout-au-analysis-2026-w12 -->
+
 # AU W12 Analysis Brief
 
 ## Registration summary

@@ -1,4 +1,13 @@
+---
+title: "Eval B: WS1 (OCI Bidding) & WS2 (Modern Search) — Subjective Reader Evaluation"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0496 | duck_id: wiki-review-ws1-ws2-eval-b -->
+
 # Eval B: WS1 (OCI Bidding) & WS2 (Modern Search) — Subjective Reader Evaluation
 
 Reviewer: wiki-critic | Date: 2026-04-05 | Mode: Blind Eval B

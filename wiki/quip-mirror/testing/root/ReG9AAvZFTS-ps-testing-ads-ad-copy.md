@@ -1,13 +1,21 @@
 ---
-quip_id: ReG9AAvZFTS
-title: "PS Testing: Ads & Ad Copy"
-source_url: https://quip-amazon.com/ReG9AAvZFTS
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-04-17
-quip_folder: Testing
-topics: [testing, ad-copy, image-extensions, rsa, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing
+quip_id: ReG9AAvZFTS
+source_url: https://quip-amazon.com/ReG9AAvZFTS
+status: DRAFT
+title: 'PS Testing: Ads & Ad Copy'
+topics:
+- testing
+- ad-copy
+- image-extensions
+- rsa
+- paid-search
 ---
 
 # PS Testing: Ads & Ad Copy

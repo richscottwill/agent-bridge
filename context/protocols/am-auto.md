@@ -254,3 +254,16 @@ INSERT INTO hook_executions (hook_name, execution_date, start_time, end_time, du
 VALUES ('am-backend', CURRENT_DATE, '[start]', '[end]', [duration],
     [phases], [reads], [writes], [slack_msgs], [queries], '[summary]');
 ```
+
+---
+
+## Phase 6.5: SharePoint Durability Sync
+
+Execute ~/shared/context/protocols/sharepoint-durability-sync.md — AM section.
+
+Push key output artifacts to OneDrive for cross-device access:
+- am-enrichment-queue.json → Kiro-Drive/system-state/
+- am-portfolio-findings.json → Kiro-Drive/system-state/
+- daily-brief-latest.md → Kiro-Drive/system-state/
+
+Non-blocking: if SharePoint fails, log warning and continue.

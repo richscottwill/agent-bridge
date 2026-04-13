@@ -1,13 +1,18 @@
 ---
-quip_id: DWe9AA5KfMp
-title: "JP 2022 Paid Search"
-source_url: https://quip-amazon.com/DWe9AA5KfMp
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2023-01-10
-quip_folder: ..JP
-topics: [japan, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: ..JP
+quip_id: DWe9AA5KfMp
+source_url: https://quip-amazon.com/DWe9AA5KfMp
+status: DRAFT
+title: JP 2022 Paid Search
+topics:
+- japan
+- paid-search
 ---
 
 # JP 2022 Paid Search

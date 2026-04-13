@@ -1,13 +1,20 @@
 ---
-quip_id: GCI9AA5aLG0
-title: "Y23 CPS Paid Search Review"
-source_url: https://quip-amazon.com/GCI9AA5aLG0
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-08-15
-quip_folder: Review
-topics: [review, mbr, qbr, reporting]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Review
+quip_id: GCI9AA5aLG0
+source_url: https://quip-amazon.com/GCI9AA5aLG0
+status: DRAFT
+title: Y23 CPS Paid Search Review
+topics:
+- review
+- mbr
+- qbr
+- reporting
 ---
 
 # Y23 CPS Paid Search Review

@@ -1,13 +1,19 @@
 ---
-quip_id: DVL9AAJQkxm
-title: "Y24 Q3 CPS Performance Summary Draft"
-source_url: https://quip-amazon.com/DVL9AAJQkxm
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-08-06
-quip_folder: Partnerships/CPS
-topics: [cps, enterprise, partnerships]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/CPS
+quip_id: DVL9AAJQkxm
+source_url: https://quip-amazon.com/DVL9AAJQkxm
+status: DRAFT
+title: Y24 Q3 CPS Performance Summary Draft
+topics:
+- cps
+- enterprise
+- partnerships
 ---
 
 # Y24 Q3 CPS Performance Summary

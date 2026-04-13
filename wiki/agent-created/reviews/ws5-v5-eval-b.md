@@ -1,4 +1,13 @@
+---
+title: "Eval B — Subjective Reader Evaluation: Workstream 5: Algorithmic Ads (v5)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0505 | duck_id: wiki-review-ws5-v5-eval-b -->
+
 # Eval B — Subjective Reader Evaluation: Workstream 5: Algorithmic Ads (v5)
 
 **Evaluator persona**: Kate, reviewing the workstream detail behind the Testing Approach doc. 10-minute read.

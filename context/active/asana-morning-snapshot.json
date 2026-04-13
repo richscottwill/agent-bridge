@@ -1,166 +1,37 @@
 {
-  "date": "2026-04-10",
-  "synced_at": "2026-04-10T15:30:31.768343Z",
-  "total_incomplete": 100,
-  "project_count": 5,
-  "buckets": {
-    "Admin": 5,
-    "Backlog": 61,
-    "Core": 7,
-    "Engine Room": 11,
-    "Sweep": 15,
-    "Wiki": 1
+  "snapshot_date": "2026-04-13",
+  "day_of_week": "Monday",
+  "synced_at": "2026-04-13T07:00:00Z",
+  "summary": {
+    "total_incomplete": 129,
+    "due_today": 2,
+    "overdue": 11,
+    "overdue_oldest": {"name": "Page Creation - Duplicate Beauty and Auto page for MX", "days": 21},
+    "projects_synced": 6
   },
-  "today_tasks": [
-    {
-      "name": "Get Enhanced Match details",
-      "routine": "Sweep",
-      "due_on": "2026-04-07",
-      "project": null
-    },
-    {
-      "name": "Refmarker mapping audit PoC \u2014 AU (old)",
-      "routine": "Sweep",
-      "due_on": "2026-04-07",
-      "project": "AU"
-    },
-    {
-      "name": "Brandon 1:1: Obtain TPS checklist from Abdul for F90 audience",
-      "routine": "Sweep",
-      "due_on": "2026-04-07",
-      "project": null
-    },
-    {
-      "name": "Deep Dive: Add IECCP FAQ to new account playbook",
-      "routine": "Core",
-      "due_on": "2026-04-09",
-      "project": null
-    },
-    {
-      "name": "Brandon 1:1: Reframe AdWords KB ticket as risk mitigation",
-      "routine": "Engine Room",
-      "due_on": "2026-04-09",
-      "project": null
-    },
-    {
-      "name": "Send IECCP follow-up summary to Lorena + review keyword data",
-      "routine": "Sweep",
-      "due_on": "2026-04-09",
-      "project": "MX"
-    },
-    {
-      "name": "Deep Dive: Finalize market expansion playbook",
-      "routine": "Core",
-      "due_on": "2026-04-09",
-      "project": null
-    },
-    {
-      "name": "Refmarker mapping audit PoC \u2014 AU",
-      "routine": "Engine Room",
-      "due_on": "2026-04-10",
-      "project": "AU"
-    },
-    {
-      "name": "Monthly: Individual Goals update",
-      "routine": "Engine Room",
-      "due_on": "2026-04-10",
-      "project": null
-    }
+  "buckets": {
+    "Sweep": {"count": 6, "cap": 5, "over": true, "today_count": 3},
+    "Core": {"count": 10, "cap": 4, "over": true, "today_count": 0},
+    "Engine Room": {"count": 15, "cap": 6, "over": true, "today_count": 3},
+    "Admin": {"count": 4, "cap": 3, "over": true, "today_count": 1},
+    "Wiki": {"count": 46, "cap": null, "over": false, "today_count": 0},
+    "Backlog": {"count": 48, "cap": null, "over": false, "today_count": 0}
+  },
+  "due_today": [
+    {"gid": "1213983331865941", "name": "Weekly Reporting - Global WBR sheet", "routine": "Engine Room", "priority": "Today"},
+    {"gid": "1212808474749819", "name": "Paid App PO — Create Q2 + Amend Google PO to Q2", "routine": "Admin", "priority": "Today"}
   ],
-  "overdue": [
-    {
-      "name": "Make changes to AU/MX/PAM for the week",
-      "project": null,
-      "due_on": "2026-03-18",
-      "days_overdue": 23
-    },
-    {
-      "name": "Respond to Lena \u2014 AU LP URL analysis + CPA methodology",
-      "project": "AU",
-      "due_on": "2026-04-03",
-      "days_overdue": 7
-    },
-    {
-      "name": "Reply to Brandon \u2014 PAM budget needs assessment",
-      "project": null,
-      "due_on": "2026-04-06",
-      "days_overdue": 4
-    },
-    {
-      "name": "WW weblab dial-up (Richard)",
-      "project": "ABPS - WW Testing & Projects",
-      "due_on": "2026-04-07",
-      "days_overdue": 3
-    },
-    {
-      "name": "Get Enhanced Match details",
-      "project": null,
-      "due_on": "2026-04-07",
-      "days_overdue": 3
-    },
-    {
-      "name": "Refmarker mapping audit PoC \u2014 AU (old)",
-      "project": "AU",
-      "due_on": "2026-04-07",
-      "days_overdue": 3
-    },
-    {
-      "name": "Brandon 1:1: Obtain TPS checklist from Abdul for F90 audience",
-      "project": null,
-      "due_on": "2026-04-07",
-      "days_overdue": 3
-    },
-    {
-      "name": "Pull AU Polaris LP conversion rate data",
-      "project": "AU",
-      "due_on": "2026-04-08",
-      "days_overdue": 2
-    },
-    {
-      "name": "Deep Dive: Add IECCP FAQ to new account playbook",
-      "project": null,
-      "due_on": "2026-04-09",
-      "days_overdue": 1
-    },
-    {
-      "name": "Brandon 1:1: Reframe AdWords KB ticket as risk mitigation",
-      "project": null,
-      "due_on": "2026-04-09",
-      "days_overdue": 1
-    },
-    {
-      "name": "Send IECCP follow-up summary to Lorena + review keyword data",
-      "project": "MX",
-      "due_on": "2026-04-09",
-      "days_overdue": 1
-    },
-    {
-      "name": "Deep Dive: Finalize market expansion playbook",
-      "project": null,
-      "due_on": "2026-04-09",
-      "days_overdue": 1
-    },
-    {
-      "name": "Brandon 1:1: Set up automated monthly ASP confirmation reminders",
-      "project": null,
-      "due_on": "2026-04-09",
-      "days_overdue": 1
-    }
-  ],
-  "alerts": [
-    "\u26a0\ufe0f OVERDUE 23d: Make changes to AU/MX/PAM for the week (project: My Tasks)",
-    "\u26a0\ufe0f OVERDUE 7d: Respond to Lena \u2014 AU LP URL analysis + CPA methodology (project: AU)",
-    "\u26a0\ufe0f OVERDUE 4d: Reply to Brandon \u2014 PAM budget needs assessment (project: My Tasks)",
-    "\u26a0\ufe0f OVERDUE 3d: WW weblab dial-up (Richard) (project: ABPS - WW Testing & Projects)",
-    "\u26a0\ufe0f OVERDUE 3d: Get Enhanced Match details (project: My Tasks)",
-    "\u26a0\ufe0f OVERDUE 3d: Refmarker mapping audit PoC \u2014 AU (old) (project: AU)",
-    "\u26a0\ufe0f OVERDUE 3d: Brandon 1:1: Obtain TPS checklist from Abdul for F90 audience (project: My Tasks)",
-    "\u26a0\ufe0f EMPTY PROJECT: WW Acquisition (1206011235630048) has 0 incomplete tasks in DuckDB",
-    "\u26a0\ufe0f OVER CAP: Admin at 4/3",
-    "\u26a0\ufe0f OVER CAP: Core at 5/4",
-    "\u26a0\ufe0f OVER CAP: Engine Room at 7/6",
-    "\u26a0\ufe0f OVER CAP: Sweep at 9/5",
-    "\u26a0\ufe0f ENRICHMENT GAP: 62 tasks missing Kiro_RW context",
-    "\u26a0\ufe0f ENRICHMENT GAP: 62 tasks missing Next_Action_RW"
-  ]
+  "coherence": {
+    "overdue_3plus": 11,
+    "empty_kiro": 48,
+    "empty_next_action": 48,
+    "soft_deleted": 0,
+    "empty_projects": ["ABPS - JP"],
+    "all_buckets_over_cap": true
+  },
+  "schema_drift": {
+    "new_fields": [],
+    "new_projects": [],
+    "new_sections": []
+  }
 }

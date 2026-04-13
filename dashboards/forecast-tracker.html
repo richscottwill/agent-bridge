@@ -3,571 +3,209 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PS Forecast Tracker — Actual vs Predicted</title>
+<title>PS Forecast Tracker — All Markets</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f1117; color: #e0e0e0; }
-.header { padding: 24px 32px 16px; border-bottom: 1px solid #2a2d35; }
-.header h1 { font-size: 20px; font-weight: 600; color: #fff; }
-.header p { font-size: 13px; color: #888; margin-top: 4px; }
-.controls { display: flex; gap: 12px; padding: 16px 32px; border-bottom: 1px solid #2a2d35; flex-wrap: wrap; align-items: center; }
-.controls label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
-.controls select, .controls button {
-  background: #1a1d27; border: 1px solid #2a2d35; color: #e0e0e0; padding: 6px 12px;
-  border-radius: 6px; font-size: 13px; cursor: pointer;
-}
-.controls select:hover, .controls button:hover { border-color: #4a9eff; }
-.controls button.active { background: #1a3a5c; border-color: #4a9eff; color: #4a9eff; }
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 24px 32px; }
-.card { background: #1a1d27; border: 1px solid #2a2d35; border-radius: 10px; padding: 20px; }
-.card-full { grid-column: 1 / -1; }
-.card h3 { font-size: 14px; font-weight: 600; color: #ccc; margin-bottom: 12px; }
-.chart-container { position: relative; height: 300px; }
-.chart-container-tall { position: relative; height: 400px; }
-.kpi-row { display: flex; gap: 16px; padding: 0 32px 16px; flex-wrap: wrap; }
-.kpi { background: #1a1d27; border: 1px solid #2a2d35; border-radius: 10px; padding: 16px 20px; flex: 1; min-width: 160px; }
-.kpi .label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
-.kpi .value { font-size: 24px; font-weight: 700; color: #fff; margin-top: 4px; }
-.kpi .sub { font-size: 12px; color: #888; margin-top: 2px; }
-.kpi .good { color: #4ade80; }
-.kpi .warn { color: #fbbf24; }
-.kpi .bad { color: #f87171; }
-.score-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.score-table th { text-align: left; padding: 8px 12px; border-bottom: 1px solid #2a2d35; color: #888; font-weight: 500; font-size: 11px; text-transform: uppercase; }
-.score-table td { padding: 8px 12px; border-bottom: 1px solid #1f222b; }
-.score-table tr:hover { background: #1f222b; }
-.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
-.badge-green { background: #064e3b; color: #4ade80; }
-.badge-yellow { background: #713f12; color: #fbbf24; }
-.badge-red { background: #7f1d1d; color: #f87171; }
-.badge-blue { background: #1e3a5f; color: #60a5fa; }
-.badge-gray { background: #374151; color: #9ca3af; }
-.tab-row { display: flex; gap: 4px; }
-.tab { padding: 6px 16px; border-radius: 6px 6px 0 0; font-size: 13px; cursor: pointer; background: transparent; border: 1px solid transparent; color: #888; }
-.tab.active { background: #1a1d27; border-color: #2a2d35; border-bottom-color: #1a1d27; color: #4a9eff; }
-.no-data { text-align: center; padding: 60px 20px; color: #555; }
-.no-data .icon { font-size: 48px; margin-bottom: 12px; }
-.no-data p { font-size: 14px; }
-.confidence-bar { display: flex; align-items: center; gap: 8px; }
-.confidence-fill { height: 6px; border-radius: 3px; background: #2a2d35; flex: 1; position: relative; }
-.confidence-fill .inner { height: 100%; border-radius: 3px; }
-.legend-row { display: flex; gap: 16px; margin-bottom: 12px; flex-wrap: wrap; }
-.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #888; }
-.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
-.legend-line { width: 20px; height: 2px; border-radius: 1px; }
-.legend-band { width: 20px; height: 10px; border-radius: 2px; opacity: 0.3; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#e0e0e0}
+.header{padding:24px 32px 16px;border-bottom:1px solid #2a2d35}
+.header h1{font-size:20px;font-weight:600;color:#fff}
+.header p{font-size:13px;color:#888;margin-top:4px}
+.controls{display:flex;gap:12px;padding:16px 32px;border-bottom:1px solid #2a2d35;flex-wrap:wrap;align-items:center}
+.controls label{font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.5px}
+.tab-row{display:flex;gap:4px;flex-wrap:wrap}
+.tab{padding:6px 14px;border-radius:6px;font-size:13px;cursor:pointer;background:transparent;border:1px solid #2a2d35;color:#888}
+.tab.active{background:#1a3a5c;border-color:#4a9eff;color:#4a9eff}
+.tab:hover{border-color:#4a9eff}
+select{background:#1a1d27;border:1px solid #2a2d35;color:#e0e0e0;padding:6px 12px;border-radius:6px;font-size:13px;cursor:pointer}
+select:hover{border-color:#4a9eff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:24px 32px}
+.card{background:#1a1d27;border:1px solid #2a2d35;border-radius:10px;padding:20px}
+.card-full{grid-column:1/-1}
+.card h3{font-size:14px;font-weight:600;color:#ccc;margin-bottom:12px}
+.chart-box{position:relative;height:400px}
+.kpi-row{display:flex;gap:16px;padding:0 32px 16px;flex-wrap:wrap}
+.kpi{background:#1a1d27;border:1px solid #2a2d35;border-radius:10px;padding:16px 20px;flex:1;min-width:140px}
+.kpi .label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.5px}
+.kpi .value{font-size:22px;font-weight:700;color:#fff;margin-top:4px}
+.kpi .sub{font-size:12px;color:#888;margin-top:2px}
+.good{color:#4ade80}.warn{color:#fbbf24}.bad{color:#f87171}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:8px 12px;border-bottom:1px solid #2a2d35;color:#888;font-weight:500;font-size:11px;text-transform:uppercase}
+td{padding:8px 12px;border-bottom:1px solid #1f222b}
+tr:hover{background:#1f222b}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600}
+.badge-green{background:#064e3b;color:#4ade80}
+.badge-yellow{background:#713f12;color:#fbbf24}
+.badge-red{background:#7f1d1d;color:#f87171}
+.badge-gray{background:#374151;color:#9ca3af}
+.legend-row{display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#888}
+.legend-dot{width:10px;height:10px;border-radius:50%}
+.legend-line{width:20px;height:2px;border-radius:1px}
+.ts{font-size:11px;color:#444;text-align:right;padding:16px 32px}
 </style>
 </head>
 <body>
 <div class="header">
-  <h1>📊 PS Forecast Tracker — Actual vs Predicted</h1>
-  <p>Weekly actuals compared against agent predictions with confidence intervals and accuracy scoring</p>
+  <h1>📊 PS Forecast Tracker — All Markets</h1>
+  <p>Weekly actuals with month-end projections and OP2 targets • Data from ps-analytics.duckdb</p>
 </div>
-
 <div class="controls">
-  <div>
-    <label>Channel</label><br>
-    <div class="tab-row" id="channelTabs"></div>
-  </div>
-  <div style="margin-left: auto;">
-    <label>Metric</label><br>
-    <select id="metricSelect">
-      <option value="registrations">Registrations / Installs</option>
+  <div><label>Market</label><br><div class="tab-row" id="marketTabs"></div></div>
+  <div style="margin-left:auto"><label>Metric</label><br>
+    <select id="metricSel">
+      <option value="regs">Registrations</option>
       <option value="cost">Cost</option>
-      <option value="cpa">CPA / CPI</option>
-    </select>
-  </div>
-  <div>
-    <label>Horizon</label><br>
-    <select id="horizonSelect">
-      <option value="weekly">Weekly</option>
-      <option value="monthly">Monthly</option>
-      <option value="quarterly">Quarterly</option>
-      <option value="year_end">Year End</option>
+      <option value="cpa">CPA</option>
     </select>
   </div>
 </div>
-
 <div class="kpi-row" id="kpiRow"></div>
-
 <div class="grid">
   <div class="card card-full">
-    <h3 id="mainChartTitle">Registrations — Actual vs Predicted</h3>
+    <h3 id="chartTitle">Weekly Registrations</h3>
     <div class="legend-row">
-      <div class="legend-item"><div class="legend-dot" style="background:#4a9eff;"></div> Actual</div>
-      <div class="legend-item"><div class="legend-line" style="background:#f97316;"></div> Predicted</div>
-      <div class="legend-item"><div class="legend-band" style="background:#f97316;"></div> 80% Confidence Interval</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#4a9eff"></div> Actual</div>
+      <div class="legend-item"><div class="legend-line" style="background:#f97316"></div> Projected (month-end)</div>
     </div>
-    <div class="chart-container-tall"><canvas id="mainChart"></canvas></div>
+    <div class="chart-box"><canvas id="mainChart"></canvas></div>
   </div>
-
-  <div class="card">
-    <h3>Prediction Accuracy Over Time</h3>
-    <div class="chart-container"><canvas id="accuracyChart"></canvas></div>
-  </div>
-
-  <div class="card">
-    <h3>Confidence Calibration</h3>
-    <div class="chart-container"><canvas id="calibrationChart"></canvas></div>
-  </div>
-
   <div class="card card-full">
-    <h3>Prediction Scorecard</h3>
-    <div style="overflow-x: auto;">
-      <table class="score-table" id="scoreTable">
-        <thead><tr>
-          <th>Target Week</th><th>Metric</th><th>Predicted</th><th>Actual</th>
-          <th>Error %</th><th>Within CI</th><th>Confidence</th><th>Brier</th>
-        </tr></thead>
-        <tbody id="scoreBody"></tbody>
-      </table>
+    <h3>Weekly Detail</h3>
+    <div style="overflow-x:auto;max-height:500px;overflow-y:auto">
+      <table><thead><tr>
+        <th>Week</th><th style="text-align:right">Regs</th><th style="text-align:right">Cost</th>
+        <th style="text-align:right">CPA</th><th>WoW Δ</th>
+      </tr></thead><tbody id="weeklyBody"></tbody></table>
     </div>
   </div>
-
-  <div class="card card-full" id="paidAppCard">
-    <h3>🚀 Paid App Marketing</h3>
-    <div class="no-data">
-      <div class="icon">📱</div>
-      <p>No data yet for Paid App Marketing.<br>
-      Metrics tracked: App Installs, Cost, CPI.<br>
-      Data will populate once weekly reporting begins.</p>
-    </div>
+  <div class="card card-full" id="projCard">
+    <h3>Month-End Projection</h3>
+    <div id="projContent"></div>
   </div>
 </div>
-
+<div class="ts" id="genTs"></div>
 <script>
+const DATA = {"weekly": {"AU": [{"wk": 1, "week": "2026 W1", "regs": 156, "cost": 14370.0, "cpa": 92.11}, {"wk": 2, "week": "2026 W2", "regs": 256, "cost": 28866.0, "cpa": 112.76}, {"wk": 3, "week": "2026 W3", "regs": 290, "cost": 36323.0, "cpa": 125.25}, {"wk": 4, "week": "2026 W4", "regs": 273, "cost": 30823.0, "cpa": 112.9}, {"wk": 5, "week": "2026 W5", "regs": 239, "cost": 40090.0, "cpa": 167.74}, {"wk": 6, "week": "2026 W6", "regs": 257, "cost": 42680.0, "cpa": 166.07}, {"wk": 7, "week": "2026 W7", "regs": 328, "cost": 42397.0, "cpa": 129.26}, {"wk": 8, "week": "2026 W8", "regs": 256, "cost": 37196.0, "cpa": 145.3}, {"wk": 9, "week": "2026 W9", "regs": 256, "cost": 36408.0, "cpa": 142.22}, {"wk": 10, "week": "2026 W10", "regs": 251, "cost": 31589.0, "cpa": 125.85}, {"wk": 11, "week": "2026 W11", "regs": 241, "cost": 30999.0, "cpa": 128.63}, {"wk": 12, "week": "2026 W12", "regs": 245, "cost": 28005.0, "cpa": 114.3}, {"wk": 13, "week": "2026 W13", "regs": 207, "cost": 24381.0, "cpa": 117.78}], "CA": [{"wk": 1, "week": "2026 W1", "regs": 613, "cost": 52536.0, "cpa": 85.7}, {"wk": 2, "week": "2026 W2", "regs": 641, "cost": 55082.0, "cpa": 85.93}, {"wk": 3, "week": "2026 W3", "regs": 716, "cost": 54929.0, "cpa": 76.72}, {"wk": 4, "week": "2026 W4", "regs": 741, "cost": 52505.0, "cpa": 70.86}, {"wk": 5, "week": "2026 W5", "regs": 751, "cost": 50865.0, "cpa": 67.73}, {"wk": 6, "week": "2026 W6", "regs": 731, "cost": 51663.0, "cpa": 70.68}, {"wk": 7, "week": "2026 W7", "regs": 700, "cost": 50197.0, "cpa": 71.71}, {"wk": 8, "week": "2026 W8", "regs": 691, "cost": 53490.0, "cpa": 77.41}, {"wk": 9, "week": "2026 W9", "regs": 689, "cost": 52280.0, "cpa": 75.88}, {"wk": 10, "week": "2026 W10", "regs": 644, "cost": 50478.0, "cpa": 78.38}, {"wk": 11, "week": "2026 W11", "regs": 749, "cost": 52053.0, "cpa": 69.5}, {"wk": 12, "week": "2026 W12", "regs": 681, "cost": 52806.0, "cpa": 77.54}, {"wk": 13, "week": "2026 W13", "regs": 812, "cost": 51998.0, "cpa": 64.04}], "DE": [{"wk": 1, "week": "2026 W1", "regs": 1079, "cost": 113543.0, "cpa": 105.23}, {"wk": 2, "week": "2026 W2", "regs": 1692, "cost": 194725.0, "cpa": 115.09}, {"wk": 3, "week": "2026 W3", "regs": 1725, "cost": 245075.0, "cpa": 142.07}, {"wk": 4, "week": "2026 W4", "regs": 1748, "cost": 235631.0, "cpa": 134.8}, {"wk": 5, "week": "2026 W5", "regs": 1431, "cost": 126820.0, "cpa": 88.62}, {"wk": 6, "week": "2026 W6", "regs": 1480, "cost": 154689.0, "cpa": 104.52}, {"wk": 7, "week": "2026 W7", "regs": 1510, "cost": 159905.0, "cpa": 105.9}, {"wk": 8, "week": "2026 W8", "regs": 1418, "cost": 162082.0, "cpa": 114.3}, {"wk": 9, "week": "2026 W9", "regs": 1364, "cost": 191460.0, "cpa": 140.37}, {"wk": 10, "week": "2026 W10", "regs": 1404, "cost": 157915.0, "cpa": 112.48}, {"wk": 11, "week": "2026 W11", "regs": 1499, "cost": 170477.0, "cpa": 113.73}, {"wk": 12, "week": "2026 W12", "regs": 1200, "cost": 138333.0, "cpa": 115.28}, {"wk": 13, "week": "2026 W13", "regs": 654, "cost": 109602.0, "cpa": 167.59}], "ES": [{"wk": 1, "week": "2026 W1", "regs": 389, "cost": 21415.0, "cpa": 55.05}, {"wk": 2, "week": "2026 W2", "regs": 507, "cost": 38433.0, "cpa": 75.81}, {"wk": 3, "week": "2026 W3", "regs": 680, "cost": 40819.0, "cpa": 60.03}, {"wk": 4, "week": "2026 W4", "regs": 666, "cost": 32865.0, "cpa": 49.35}, {"wk": 5, "week": "2026 W5", "regs": 678, "cost": 32961.0, "cpa": 48.61}, {"wk": 6, "week": "2026 W6", "regs": 640, "cost": 32606.0, "cpa": 50.95}, {"wk": 7, "week": "2026 W7", "regs": 648, "cost": 35380.0, "cpa": 54.6}, {"wk": 8, "week": "2026 W8", "regs": 623, "cost": 37174.0, "cpa": 59.67}, {"wk": 9, "week": "2026 W9", "regs": 640, "cost": 40504.0, "cpa": 63.29}, {"wk": 10, "week": "2026 W10", "regs": 638, "cost": 43563.0, "cpa": 68.28}, {"wk": 11, "week": "2026 W11", "regs": 711, "cost": 40265.0, "cpa": 56.63}, {"wk": 12, "week": "2026 W12", "regs": 644, "cost": 32664.0, "cpa": 50.72}, {"wk": 13, "week": "2026 W13", "regs": 645, "cost": 38165.0, "cpa": 59.17}], "FR": [{"wk": 1, "week": "2026 W1", "regs": 658, "cost": 30250.0, "cpa": 45.97}, {"wk": 2, "week": "2026 W2", "regs": 1116, "cost": 47676.0, "cpa": 42.72}, {"wk": 3, "week": "2026 W3", "regs": 1050, "cost": 70671.0, "cpa": 67.31}, {"wk": 4, "week": "2026 W4", "regs": 1079, "cost": 69957.0, "cpa": 64.84}, {"wk": 5, "week": "2026 W5", "regs": 1051, "cost": 64417.0, "cpa": 61.29}, {"wk": 6, "week": "2026 W6", "regs": 1017, "cost": 57855.0, "cpa": 56.89}, {"wk": 7, "week": "2026 W7", "regs": 1085, "cost": 62194.0, "cpa": 57.32}, {"wk": 8, "week": "2026 W8", "regs": 1120, "cost": 69766.0, "cpa": 62.29}, {"wk": 9, "week": "2026 W9", "regs": 1098, "cost": 77374.0, "cpa": 70.47}, {"wk": 10, "week": "2026 W10", "regs": 1079, "cost": 78871.0, "cpa": 73.1}, {"wk": 11, "week": "2026 W11", "regs": 1195, "cost": 71668.0, "cpa": 59.97}, {"wk": 12, "week": "2026 W12", "regs": 1144, "cost": 60811.0, "cpa": 53.16}, {"wk": 13, "week": "2026 W13", "regs": 1191, "cost": 69331.0, "cpa": 58.21}], "IT": [{"wk": 1, "week": "2026 W1", "regs": 723, "cost": 40763.0, "cpa": 56.38}, {"wk": 2, "week": "2026 W2", "regs": 1303, "cost": 76620.0, "cpa": 58.8}, {"wk": 3, "week": "2026 W3", "regs": 1375, "cost": 120319.0, "cpa": 87.5}, {"wk": 4, "week": "2026 W4", "regs": 1321, "cost": 115803.0, "cpa": 87.66}, {"wk": 5, "week": "2026 W5", "regs": 1368, "cost": 83525.0, "cpa": 61.06}, {"wk": 6, "week": "2026 W6", "regs": 1341, "cost": 77304.0, "cpa": 57.65}, {"wk": 7, "week": "2026 W7", "regs": 1273, "cost": 95006.0, "cpa": 74.63}, {"wk": 8, "week": "2026 W8", "regs": 1307, "cost": 102678.0, "cpa": 78.56}, {"wk": 9, "week": "2026 W9", "regs": 1335, "cost": 98316.0, "cpa": 73.64}, {"wk": 10, "week": "2026 W10", "regs": 1153, "cost": 98845.0, "cpa": 85.73}, {"wk": 11, "week": "2026 W11", "regs": 1443, "cost": 93470.0, "cpa": 64.77}, {"wk": 12, "week": "2026 W12", "regs": 1255, "cost": 77673.0, "cpa": 61.89}, {"wk": 13, "week": "2026 W13", "regs": 1357, "cost": 97115.0, "cpa": 71.57}], "JP": [{"wk": 1, "week": "2026 W1", "regs": 289, "cost": 13804.0, "cpa": 47.76}, {"wk": 2, "week": "2026 W2", "regs": 1006, "cost": 39541.0, "cpa": 39.3}, {"wk": 3, "week": "2026 W3", "regs": 972, "cost": 31015.0, "cpa": 31.91}, {"wk": 4, "week": "2026 W4", "regs": 1047, "cost": 37754.0, "cpa": 36.06}, {"wk": 5, "week": "2026 W5", "regs": 1008, "cost": 33739.0, "cpa": 33.47}, {"wk": 6, "week": "2026 W6", "regs": 495, "cost": 32933.0, "cpa": 66.53}, {"wk": 7, "week": "2026 W7", "regs": 436, "cost": 28287.0, "cpa": 64.88}, {"wk": 8, "week": "2026 W8", "regs": 440, "cost": 29473.0, "cpa": 66.98}, {"wk": 9, "week": "2026 W9", "regs": 406, "cost": 30296.0, "cpa": 74.62}, {"wk": 10, "week": "2026 W10", "regs": 528, "cost": 39247.0, "cpa": 74.33}, {"wk": 11, "week": "2026 W11", "regs": 518, "cost": 38339.0, "cpa": 74.01}, {"wk": 12, "week": "2026 W12", "regs": 432, "cost": 36527.0, "cpa": 84.55}, {"wk": 13, "week": "2026 W13", "regs": 557, "cost": 47457.0, "cpa": 85.2}], "MX": [{"wk": 1, "week": "2026 W1", "regs": 183, "cost": 7424.0, "cpa": 40.57}, {"wk": 2, "week": "2026 W2", "regs": 252, "cost": 8650.0, "cpa": 34.33}, {"wk": 3, "week": "2026 W3", "regs": 270, "cost": 12821.0, "cpa": 47.49}, {"wk": 4, "week": "2026 W4", "regs": 241, "cost": 14672.0, "cpa": 60.88}, {"wk": 5, "week": "2026 W5", "regs": 224, "cost": 16772.0, "cpa": 74.87}, {"wk": 6, "week": "2026 W6", "regs": 229, "cost": 15530.0, "cpa": 67.82}, {"wk": 7, "week": "2026 W7", "regs": 246, "cost": 13995.0, "cpa": 56.89}, {"wk": 8, "week": "2026 W8", "regs": 368, "cost": 18669.0, "cpa": 50.73}, {"wk": 9, "week": "2026 W9", "regs": 264, "cost": 19733.0, "cpa": 74.75}, {"wk": 10, "week": "2026 W10", "regs": 298, "cost": 20509.0, "cpa": 68.82}, {"wk": 11, "week": "2026 W11", "regs": 392, "cost": 22462.0, "cpa": 57.3}, {"wk": 12, "week": "2026 W12", "regs": 326, "cost": 20134.0, "cpa": 61.76}, {"wk": 13, "week": "2026 W13", "regs": 354, "cost": 23219.0, "cpa": 65.59}], "UK": [{"wk": 1, "week": "2026 W1", "regs": 1005, "cost": 60466.0, "cpa": 60.17}, {"wk": 2, "week": "2026 W2", "regs": 1541, "cost": 117937.0, "cpa": 76.53}, {"wk": 3, "week": "2026 W3", "regs": 1771, "cost": 141384.0, "cpa": 79.83}, {"wk": 4, "week": "2026 W4", "regs": 1599, "cost": 123497.0, "cpa": 77.23}, {"wk": 5, "week": "2026 W5", "regs": 1325, "cost": 78918.0, "cpa": 59.56}, {"wk": 6, "week": "2026 W6", "regs": 1424, "cost": 90065.0, "cpa": 63.25}, {"wk": 7, "week": "2026 W7", "regs": 1370, "cost": 94473.0, "cpa": 68.96}, {"wk": 8, "week": "2026 W8", "regs": 1336, "cost": 95850.0, "cpa": 71.74}, {"wk": 9, "week": "2026 W9", "regs": 1465, "cost": 104596.0, "cpa": 71.4}, {"wk": 10, "week": "2026 W10", "regs": 1395, "cost": 95498.0, "cpa": 68.46}, {"wk": 11, "week": "2026 W11", "regs": 1362, "cost": 87797.0, "cpa": 64.46}, {"wk": 12, "week": "2026 W12", "regs": 1338, "cost": 89886.0, "cpa": 67.18}, {"wk": 13, "week": "2026 W13", "regs": 1531, "cost": 85592.0, "cpa": 55.91}], "US": [{"wk": 1, "week": "2026 W1", "regs": 8117, "cost": 559432.0, "cpa": 68.92}, {"wk": 2, "week": "2026 W2", "regs": 9076, "cost": 639407.0, "cpa": 70.45}, {"wk": 3, "week": "2026 W3", "regs": 9154, "cost": 615693.0, "cpa": 67.26}, {"wk": 4, "week": "2026 W4", "regs": 8537, "cost": 598992.0, "cpa": 70.16}, {"wk": 5, "week": "2026 W5", "regs": 8847, "cost": 606584.0, "cpa": 68.56}, {"wk": 6, "week": "2026 W6", "regs": 8873, "cost": 701435.0, "cpa": 79.05}, {"wk": 7, "week": "2026 W7", "regs": 7747, "cost": 718117.0, "cpa": 92.7}, {"wk": 8, "week": "2026 W8", "regs": 7953, "cost": 666881.0, "cpa": 83.85}, {"wk": 9, "week": "2026 W9", "regs": 8031, "cost": 655795.0, "cpa": 81.66}, {"wk": 10, "week": "2026 W10", "regs": 7554, "cost": 599583.0, "cpa": 79.37}, {"wk": 11, "week": "2026 W11", "regs": 8307, "cost": 645300.0, "cpa": 77.68}, {"wk": 12, "week": "2026 W12", "regs": 8176, "cost": 598574.0, "cpa": 73.21}, {"wk": 13, "week": "2026 W13", "regs": 8796, "cost": 582890.0, "cpa": 66.27}]}, "projections": {"AU": [{"month": "2026 Mar", "projected_regs": 1030, "projected_spend": 125389.0, "projected_cpa": 121.0, "op2_regs": 1082, "op2_spend": null, "vs_op2_regs_pct": -4.8, "rationale": "W13 daily rates (wkday 35, wkend 16) for remaining 3 days (1 Sun + 2 wkday). CVR-driven decline in W13 likely from Polaris URL migration disruption. CPA improving on bid strategy efficiency.", "source": "market-analyst"}], "CA": [{"month": "2026 Mar", "projected_regs": 3234, "projected_spend": 229621.0, "projected_cpa": 71.0, "op2_regs": 27155, "op2_spend": null, "vs_op2_regs_pct": -0.9, "rationale": null, "source": "ingester"}], "DE": [{"month": "2026 Mar", "projected_regs": 5037, "projected_spend": 623300.0, "projected_cpa": 123.74, "op2_regs": 147592, "op2_spend": null, "vs_op2_regs_pct": -1.0, "rationale": null, "source": "ingester"}], "ES": [{"month": "2026 Mar", "projected_regs": 2914, "projected_spend": 171014.0, "projected_cpa": 58.68, "op2_regs": 1676863, "op2_spend": null, "vs_op2_regs_pct": -1.0, "rationale": null, "source": "ingester"}], "FR": [{"month": "2026 Mar", "projected_regs": 5119, "projected_spend": 310394.0, "projected_cpa": 60.63, "op2_regs": 0, "op2_spend": null, "vs_op2_regs_pct": null, "rationale": null, "source": "ingester"}], "IT": [{"month": "2026 Mar", "projected_regs": 5790, "projected_spend": 408723.0, "projected_cpa": 70.6, "op2_regs": 0, "op2_spend": null, "vs_op2_regs_pct": null, "rationale": null, "source": "ingester"}], "JP": [{"month": "2026 Mar", "projected_regs": 2274, "projected_spend": 181908.0, "projected_cpa": 80.0, "op2_regs": 657549, "op2_spend": null, "vs_op2_regs_pct": -1.0, "rationale": null, "source": "ingester"}], "MX": [{"month": "2026 Mar", "projected_regs": 1500, "projected_spend": 96000.0, "projected_cpa": 64.0, "op2_regs": 859, "op2_spend": null, "vs_op2_regs_pct": 74.6, "rationale": "W12-W13 blended daily rates. 3 remaining days (Sat/Sun/Mon): est 125 regs. ie%CCP at 99%, at target. No holidays remaining.", "source": "market-analyst"}], "UK": [{"month": "2026 Mar", "projected_regs": 6220, "projected_spend": 395000.0, "projected_cpa": 64.0, "op2_regs": 5174, "op2_spend": 460638.0, "vs_op2_regs_pct": 20.2, "rationale": "W13 daily rates for remaining 2 weekend + 1 weekday. CVR at 12-week high (4.28%) may not fully sustain but MTD momentum strong. OCI mature + ad copy test Phase 2 compounding.", "source": "market-analyst"}], "US": [{"month": "2026 Mar", "projected_regs": 36603, "projected_spend": 2676156.0, "projected_cpa": 73.11, "op2_regs": 2744318, "op2_spend": null, "vs_op2_regs_pct": -1.0, "rationale": null, "source": "ingester"}]}, "markets": ["AU", "CA", "DE", "ES", "FR", "IT", "JP", "MX", "UK", "US"]};
+const markets = DATA.markets;
+let curMarket = markets[0] || 'AU';
+let curMetric = 'regs';
+let chart = null;
 
-// === DATA ===
-const actuals = {
-  MX_PS: [
-    {week:'2026-01-05',registrations:142,cost:4800,cpa:33.80},
-    {week:'2026-01-12',registrations:158,cost:5100,cpa:32.28},
-    {week:'2026-01-19',registrations:135,cost:4600,cpa:34.07},
-    {week:'2026-01-26',registrations:161,cost:5200,cpa:32.30},
-    {week:'2026-02-02',registrations:170,cost:5400,cpa:31.76},
-    {week:'2026-02-09',registrations:155,cost:5000,cpa:32.26},
-    {week:'2026-02-16',registrations:178,cost:5600,cpa:31.46},
-    {week:'2026-02-23',registrations:165,cost:5300,cpa:32.12},
-    {week:'2026-03-02',registrations:182,cost:5800,cpa:31.87},
-    {week:'2026-03-09',registrations:190,cost:6000,cpa:31.58},
-    {week:'2026-03-16',registrations:175,cost:5500,cpa:31.43},
-    {week:'2026-03-23',registrations:195,cost:6200,cpa:31.79},
-    {week:'2026-03-30',registrations:188,cost:6000,cpa:31.91}
-  ],
-  AU_PS: [
-    {week:'2026-01-05',registrations:85,cost:6200,cpa:72.94},
-    {week:'2026-01-12',registrations:92,cost:6600,cpa:71.74},
-    {week:'2026-01-19',registrations:78,cost:5800,cpa:74.36},
-    {week:'2026-01-26',registrations:95,cost:6800,cpa:71.58},
-    {week:'2026-02-02',registrations:88,cost:6400,cpa:72.73},
-    {week:'2026-02-09',registrations:101,cost:7200,cpa:71.29},
-    {week:'2026-02-16',registrations:94,cost:6700,cpa:71.28},
-    {week:'2026-02-23',registrations:105,cost:7400,cpa:70.48},
-    {week:'2026-03-02',registrations:98,cost:7000,cpa:71.43},
-    {week:'2026-03-09',registrations:110,cost:7700,cpa:70.00},
-    {week:'2026-03-16',registrations:103,cost:7300,cpa:70.87},
-    {week:'2026-03-23',registrations:112,cost:7800,cpa:69.64},
-    {week:'2026-03-30',registrations:108,cost:7600,cpa:70.37}
-  ],
-  PAID_APP: []
-};
-
-const predictions = {
-  MX_PS: [
-    {predDate:'2026-02-23',week:'2026-03-02',horizon:'weekly',metric:'registrations',value:175,low:160,high:195,conf:0.72,actual:182,pctErr:3.85,withinCI:true,brier:0.0015},
-    {predDate:'2026-02-23',week:'2026-03-02',horizon:'weekly',metric:'cost',value:5600,low:5200,high:6100,conf:0.70,actual:5800,pctErr:3.45,withinCI:true,brier:0.0012},
-    {predDate:'2026-02-23',week:'2026-03-02',horizon:'weekly',metric:'cpa',value:32.00,low:30.50,high:33.50,conf:0.68,actual:31.87,pctErr:0.41,withinCI:true,brier:0.0000},
-    {predDate:'2026-02-23',week:'2026-03-09',horizon:'weekly',metric:'registrations',value:180,low:162,high:200,conf:0.65,actual:190,pctErr:5.26,withinCI:true,brier:0.0028},
-    {predDate:'2026-02-23',week:'2026-03-09',horizon:'weekly',metric:'cost',value:5700,low:5200,high:6300,conf:0.63,actual:6000,pctErr:5.00,withinCI:true,brier:0.0025},
-    {predDate:'2026-02-23',week:'2026-03-09',horizon:'weekly',metric:'cpa',value:31.67,low:30.00,high:33.50,conf:0.60,actual:31.58,pctErr:0.28,withinCI:true,brier:0.0000},
-    {predDate:'2026-02-23',week:'2026-03-16',horizon:'weekly',metric:'registrations',value:185,low:165,high:210,conf:0.58,actual:175,pctErr:5.71,withinCI:true,brier:0.0033},
-    {predDate:'2026-02-23',week:'2026-03-16',horizon:'weekly',metric:'cost',value:5900,low:5300,high:6600,conf:0.55,actual:5500,pctErr:7.27,withinCI:true,brier:0.0053},
-    {predDate:'2026-02-23',week:'2026-03-16',horizon:'weekly',metric:'cpa',value:31.89,low:29.50,high:34.00,conf:0.52,actual:31.43,pctErr:1.46,withinCI:true,brier:0.0002},
-    {predDate:'2026-02-23',week:'2026-03-30',horizon:'monthly',metric:'registrations',value:740,low:660,high:830,conf:0.55,actual:null,pctErr:null,withinCI:null,brier:null},
-    {predDate:'2026-02-23',week:'2026-03-30',horizon:'monthly',metric:'cost',value:23500,low:21000,high:26500,conf:0.52,actual:null,pctErr:null,withinCI:null,brier:null},
-    {predDate:'2026-02-23',week:'2026-03-30',horizon:'monthly',metric:'cpa',value:31.76,low:29.00,high:34.50,conf:0.50,actual:null,pctErr:null,withinCI:null,brier:null},
-    {predDate:'2026-01-05',week:'2026-03-30',horizon:'quarterly',metric:'registrations',value:2100,low:1850,high:2400,conf:0.45,actual:null,pctErr:null,withinCI:null,brier:null},
-    {predDate:'2026-01-05',week:'2026-03-30',horizon:'quarterly',metric:'cost',value:68000,low:60000,high:78000,conf:0.42,actual:null,pctErr:null,withinCI:null,brier:null},
-    {predDate:'2026-01-05',week:'2026-03-30',horizon:'quarterly',metric:'cpa',value:32.38,low:29.50,high:35.50,conf:0.40,actual:null,pctErr:null,withinCI:null,brier:null},
-    {predDate:'2026-03-30',week:'2026-04-06',horizon:'weekly',metric:'registrations',value:192,low:172,high:215,conf:0.70,actual:null,pctErr:null,withinCI:null,brier:null},
-    {predDate:'2026-03-30',week:'2026-04-06',horizon:'weekly',metric:'cost',value:6100,low:5600,high:6800,conf:0.68,actual:null,pctErr:null,withinCI:null,brier:null},
-    {predDate:'2026-03-30',week:'2026-04-06',horizon:'weekly',metric:'cpa',value:31.77,low:29.50,high:34.00,conf:0.65,actual:null,pctErr:null,withinCI:null,brier:null}
-  ],
-  AU_PS: [
-    {predDate:'2026-02-23',week:'2026-03-02',horizon:'weekly',metric:'registrations',value:100,low:88,high:115,conf:0.70,actual:98,pctErr:2.04,withinCI:true,brier:0.0004},
-    {predDate:'2026-02-23',week:'2026-03-02',horizon:'weekly',metric:'cost',value:7100,low:6500,high:7800,conf:0.68,actual:7000,pctErr:1.43,withinCI:true,brier:0.0002},
-    {predDate:'2026-02-23',week:'2026-03-02',horizon:'weekly',metric:'cpa',value:71.00,low:67.00,high:76.00,conf:0.65,actual:71.43,pctErr:0.60,withinCI:true,brier:0.0000},
-    {predDate:'2026-02-23',week:'2026-03-09',horizon:'weekly',metric:'registrations',value:105,low:90,high:122,conf:0.62,actual:110,pctErr:4.55,withinCI:true,brier:0.0021},
-    {predDate:'2026-02-23',week:'2026-03-09',horizon:'weekly',metric:'cost',value:7300,low:6600,high:8100,conf:0.60,actual:7700,pctErr:5.19,withinCI:true,brier:0.0027},
-    {predDate:'2026-02-23',week:'2026-03-09',horizon:'weekly',metric:'cpa',value:69.52,low:65.00,high:75.00,conf:0.58,actual:70.00,pctErr:0.69,withinCI:true,brier:0.0000},
-    {predDate:'2026-02-23',week:'2026-03-30',horizon:'monthly',metric:'registrations',value:420,low:370,high:480,conf:0.50,actual:null,pctErr:null,withinCI:null,brier:null},
-    {predDate:'2026-02-23',week:'2026-03-30',horizon:'monthly',metric:'cost',value:29500,low:26000,high:34000,conf:0.48,actual:null,pctErr:null,withinCI:null,brier:null},
-    {predDate:'2026-02-23',week:'2026-03-30',horizon:'monthly',metric:'cpa',value:70.24,low:66.00,high:76.00,conf:0.45,actual:null,pctErr:null,withinCI:null,brier:null},
-    {predDate:'2026-03-30',week:'2026-04-06',horizon:'weekly',metric:'registrations',value:115,low:100,high:132,conf:0.68,actual:null,pctErr:null,withinCI:null,brier:null},
-    {predDate:'2026-03-30',week:'2026-04-06',horizon:'weekly',metric:'cost',value:8000,low:7200,high:8900,conf:0.65,actual:null,pctErr:null,withinCI:null,brier:null},
-    {predDate:'2026-03-30',week:'2026-04-06',horizon:'weekly',metric:'cpa',value:69.57,low:65.00,high:75.00,conf:0.62,actual:null,pctErr:null,withinCI:null,brier:null}
-  ],
-  PAID_APP: []
-};
-
-const channelLabels = { MX_PS: 'Mexico PS', AU_PS: 'Australia PS', PAID_APP: 'Paid App Marketing' };
-const metricLabels = { registrations: 'Registrations', cost: 'Cost ($)', cpa: 'CPA ($)' };
-const metricFormats = {
-  registrations: v => v?.toLocaleString() ?? '—',
-  cost: v => v != null ? '$' + v.toLocaleString(undefined, {minimumFractionDigits:0, maximumFractionDigits:0}) : '—',
-  cpa: v => v != null ? '$' + v.toFixed(2) : '—'
-};
-
-let currentChannel = 'MX_PS';
-let currentMetric = 'registrations';
-let currentHorizon = 'weekly';
-let mainChart, accuracyChart, calibrationChart;
-
-// === INIT ===
 function init() {
-  const tabContainer = document.getElementById('channelTabs');
-  Object.entries(channelLabels).forEach(([key, label]) => {
-    const btn = document.createElement('button');
-    btn.className = 'tab' + (key === currentChannel ? ' active' : '');
-    btn.textContent = label;
-    btn.onclick = () => { currentChannel = key; updateAll(); };
-    tabContainer.appendChild(btn);
+  const tabs = document.getElementById('marketTabs');
+  markets.forEach(m => {
+    const b = document.createElement('button');
+    b.className = 'tab' + (m === curMarket ? ' active' : '');
+    b.textContent = m;
+    b.onclick = () => { curMarket = m; render(); };
+    tabs.appendChild(b);
   });
-  document.getElementById('metricSelect').onchange = e => { currentMetric = e.target.value; updateAll(); };
-  document.getElementById('horizonSelect').onchange = e => { currentHorizon = e.target.value; updateAll(); };
-  updateAll();
+  document.getElementById('metricSel').onchange = e => { curMetric = e.target.value; render(); };
+  document.getElementById('genTs').textContent = 'Generated: ' + new Date().toLocaleString();
+  render();
 }
 
-function updateAll() {
-  // Update tab styles
-  document.querySelectorAll('#channelTabs .tab').forEach((btn, i) => {
-    btn.className = 'tab' + (Object.keys(channelLabels)[i] === currentChannel ? ' active' : '');
-  });
-  // Show/hide paid app card
-  document.getElementById('paidAppCard').style.display = currentChannel === 'PAID_APP' ? 'block' : 'none';
-  
-  if (currentChannel === 'PAID_APP') {
-    updateKPIs(); renderMainChart(); renderAccuracyChart(); renderCalibrationChart(); renderScoreTable();
-    return;
-  }
-  updateKPIs();
-  renderMainChart();
-  renderAccuracyChart();
-  renderCalibrationChart();
-  renderScoreTable();
+function fmt(v, type) {
+  if (v == null) return '—';
+  if (type === 'cost') return '$' + Math.round(v).toLocaleString();
+  if (type === 'cpa') return '$' + Number(v).toFixed(2);
+  return Math.round(v).toLocaleString();
 }
 
-function updateKPIs() {
+function render() {
+  document.querySelectorAll('#marketTabs .tab').forEach((b, i) => {
+    b.className = 'tab' + (markets[i] === curMarket ? ' active' : '');
+  });
+  const weeks = DATA.weekly[curMarket] || [];
+  const proj = (DATA.projections[curMarket] || [])[0];
+  renderKPIs(weeks, proj);
+  renderChart(weeks);
+  renderTable(weeks);
+  renderProjection(proj);
+}
+
+function renderKPIs(weeks, proj) {
   const row = document.getElementById('kpiRow');
-  const preds = predictions[currentChannel]?.filter(p => p.horizon === currentHorizon && p.metric === currentMetric) || [];
-  const scored = preds.filter(p => p.actual != null);
-  const fmt = metricFormats[currentMetric];
-  
-  if (currentChannel === 'PAID_APP' || preds.length === 0) {
-    row.innerHTML = `
-      <div class="kpi"><div class="label">Status</div><div class="value" style="font-size:16px;">Awaiting Data</div></div>
-    `;
-    return;
-  }
-
-  const avgErr = scored.length > 0 ? (scored.reduce((s,p) => s + (p.pctErr||0), 0) / scored.length) : null;
-  const ciHitRate = scored.length > 0 ? (scored.filter(p => p.withinCI).length / scored.length * 100) : null;
-  const avgBrier = scored.length > 0 ? (scored.reduce((s,p) => s + (p.brier||0), 0) / scored.length) : null;
-  const latestPred = preds[preds.length - 1];
-  const latestActual = actuals[currentChannel]?.slice(-1)[0];
-
-  const errClass = avgErr != null ? (avgErr < 5 ? 'good' : avgErr < 10 ? 'warn' : 'bad') : '';
-  const ciClass = ciHitRate != null ? (ciHitRate >= 80 ? 'good' : ciHitRate >= 60 ? 'warn' : 'bad') : '';
-  const brierClass = avgBrier != null ? (avgBrier < 0.005 ? 'good' : avgBrier < 0.02 ? 'warn' : 'bad') : '';
-
+  if (!weeks.length) { row.innerHTML = '<div class="kpi"><div class="label">No Data</div></div>'; return; }
+  const ytd = weeks.reduce((s, w) => s + (w[curMetric] || 0), 0);
+  const last = weeks[weeks.length - 1];
+  const prev = weeks.length > 1 ? weeks[weeks.length - 2] : null;
+  const wow = prev && prev[curMetric] ? ((last[curMetric] - prev[curMetric]) / prev[curMetric] * 100).toFixed(1) : null;
+  const wowClass = wow > 0 ? 'good' : wow < -5 ? 'bad' : 'warn';
   row.innerHTML = `
-    <div class="kpi">
-      <div class="label">Latest Actual</div>
-      <div class="value">${latestActual ? fmt(latestActual[currentMetric]) : '—'}</div>
-      <div class="sub">${latestActual ? 'Week of ' + latestActual.week : ''}</div>
-    </div>
-    <div class="kpi">
-      <div class="label">Next Prediction</div>
-      <div class="value">${latestPred && latestPred.actual == null ? fmt(latestPred.value) : '—'}</div>
-      <div class="sub">${latestPred && latestPred.actual == null ? 'Week of ' + latestPred.week + ' (conf: ' + (latestPred.conf*100).toFixed(0) + '%)' : 'All scored'}</div>
-    </div>
-    <div class="kpi">
-      <div class="label">Avg Error %</div>
-      <div class="value ${errClass}">${avgErr != null ? avgErr.toFixed(1) + '%' : '—'}</div>
-      <div class="sub">${scored.length} scored prediction${scored.length !== 1 ? 's' : ''}</div>
-    </div>
-    <div class="kpi">
-      <div class="label">CI Hit Rate</div>
-      <div class="value ${ciClass}">${ciHitRate != null ? ciHitRate.toFixed(0) + '%' : '—'}</div>
-      <div class="sub">${scored.filter(p=>p.withinCI).length}/${scored.length} within 80% CI</div>
-    </div>
-    <div class="kpi">
-      <div class="label">Avg Brier Score</div>
-      <div class="value ${brierClass}">${avgBrier != null ? avgBrier.toFixed(4) : '—'}</div>
-      <div class="sub">${avgBrier != null ? (avgBrier < 0.005 ? 'Excellent calibration' : avgBrier < 0.02 ? 'Good calibration' : 'Needs improvement') : ''}</div>
-    </div>
+    <div class="kpi"><div class="label">YTD ${curMetric}</div><div class="value">${fmt(ytd, curMetric)}</div><div class="sub">${weeks.length} weeks</div></div>
+    <div class="kpi"><div class="label">Latest Week</div><div class="value">${fmt(last[curMetric], curMetric)}</div><div class="sub">${last.week}</div></div>
+    <div class="kpi"><div class="label">WoW Change</div><div class="value ${wowClass}">${wow != null ? (wow > 0 ? '+' : '') + wow + '%' : '—'}</div></div>
+    ${proj ? `<div class="kpi"><div class="label">Month Proj (${proj.month})</div><div class="value">${fmt(curMetric === 'regs' ? proj.projected_regs : curMetric === 'cost' ? proj.projected_spend : proj.projected_cpa, curMetric)}</div><div class="sub">${proj.source || ''}</div></div>` : ''}
+    ${proj && proj.op2_regs ? `<div class="kpi"><div class="label">vs OP2</div><div class="value ${(proj.vs_op2_regs_pct||0) >= 0 ? 'good' : 'bad'}">${proj.vs_op2_regs_pct != null ? (proj.vs_op2_regs_pct > 0 ? '+' : '') + proj.vs_op2_regs_pct + '%' : '—'}</div></div>` : ''}
   `;
 }
 
-function renderMainChart() {
+function renderChart(weeks) {
   const ctx = document.getElementById('mainChart').getContext('2d');
-  if (mainChart) mainChart.destroy();
-
-  const channelActuals = actuals[currentChannel] || [];
-  const channelPreds = (predictions[currentChannel] || []).filter(p => p.horizon === currentHorizon && p.metric === currentMetric);
-  
-  const metricLabel = currentMetric === 'registrations' && currentChannel === 'PAID_APP' ? 'App Installs' : metricLabels[currentMetric];
-  document.getElementById('mainChartTitle').textContent = `${metricLabel} — ${channelLabels[currentChannel]} (${currentHorizon})`;
-
-  if (channelActuals.length === 0 && channelPreds.length === 0) {
-    mainChart = new Chart(ctx, { type: 'line', data: { labels: ['No Data'], datasets: [] }, options: { plugins: { legend: { display: false } } } });
-    return;
-  }
-
-  // Merge all weeks
-  const allWeeks = [...new Set([
-    ...channelActuals.map(a => a.week),
-    ...channelPreds.map(p => p.week)
-  ])].sort();
-
-  const actualData = allWeeks.map(w => { const a = channelActuals.find(x => x.week === w); return a ? a[currentMetric] : null; });
-  const predData = allWeeks.map(w => { const p = channelPreds.find(x => x.week === w); return p ? p.value : null; });
-  const ciLow = allWeeks.map(w => { const p = channelPreds.find(x => x.week === w); return p ? p.low : null; });
-  const ciHigh = allWeeks.map(w => { const p = channelPreds.find(x => x.week === w); return p ? p.high : null; });
-
-  const labels = allWeeks.map(w => { const d = new Date(w + 'T00:00:00'); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); });
-
-  mainChart = new Chart(ctx, {
+  if (chart) chart.destroy();
+  const labels = weeks.map(w => 'W' + w.wk);
+  const vals = weeks.map(w => w[curMetric]);
+  const metricLabel = {regs:'Registrations',cost:'Cost ($)',cpa:'CPA ($)'}[curMetric];
+  document.getElementById('chartTitle').textContent = `${metricLabel} — ${curMarket}`;
+  chart = new Chart(ctx, {
     type: 'line',
     data: {
       labels,
-      datasets: [
-        {
-          label: 'Actual',
-          data: actualData,
-          borderColor: '#4a9eff',
-          backgroundColor: '#4a9eff',
-          borderWidth: 2.5,
-          pointRadius: 4,
-          pointHoverRadius: 6,
-          tension: 0.3,
-          spanGaps: false
-        },
-        {
-          label: 'Predicted',
-          data: predData,
-          borderColor: '#f97316',
-          backgroundColor: '#f97316',
-          borderWidth: 2,
-          borderDash: [6, 3],
-          pointRadius: 4,
-          pointStyle: 'triangle',
-          pointHoverRadius: 6,
-          tension: 0.3,
-          spanGaps: false
-        },
-        {
-          label: 'CI Upper',
-          data: ciHigh,
-          borderColor: 'transparent',
-          backgroundColor: 'rgba(249, 115, 22, 0.12)',
-          fill: '+1',
-          pointRadius: 0,
-          tension: 0.3,
-          spanGaps: false
-        },
-        {
-          label: 'CI Lower',
-          data: ciLow,
-          borderColor: 'transparent',
-          backgroundColor: 'rgba(249, 115, 22, 0.12)',
-          fill: '-1',
-          pointRadius: 0,
-          tension: 0.3,
-          spanGaps: false
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      interaction: { mode: 'index', intersect: false },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: '#1a1d27',
-          borderColor: '#2a2d35',
-          borderWidth: 1,
-          titleColor: '#fff',
-          bodyColor: '#ccc',
-          callbacks: {
-            label: function(ctx) {
-              if (ctx.datasetIndex > 1) return null;
-              const fmt = metricFormats[currentMetric];
-              return ctx.dataset.label + ': ' + fmt(ctx.parsed.y);
-            }
-          }
-        }
-      },
-      scales: {
-        x: { grid: { color: '#1f222b' }, ticks: { color: '#666', font: { size: 11 } } },
-        y: { grid: { color: '#1f222b' }, ticks: { color: '#666', font: { size: 11 }, callback: v => metricFormats[currentMetric](v) } }
-      }
-    }
-  });
-}
-
-function renderAccuracyChart() {
-  const ctx = document.getElementById('accuracyChart').getContext('2d');
-  if (accuracyChart) accuracyChart.destroy();
-
-  const scored = (predictions[currentChannel] || [])
-    .filter(p => p.horizon === currentHorizon && p.metric === currentMetric && p.actual != null)
-    .sort((a, b) => a.week.localeCompare(b.week));
-
-  if (scored.length === 0) {
-    accuracyChart = new Chart(ctx, { type: 'bar', data: { labels: ['No scored predictions yet'], datasets: [] }, options: { plugins: { legend: { display: false } } } });
-    return;
-  }
-
-  const labels = scored.map(s => { const d = new Date(s.week + 'T00:00:00'); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); });
-  const errors = scored.map(s => s.pctErr);
-  const colors = errors.map(e => e < 3 ? '#4ade80' : e < 7 ? '#fbbf24' : '#f87171');
-
-  accuracyChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels,
       datasets: [{
-        label: 'Error %',
-        data: errors,
-        backgroundColor: colors,
-        borderRadius: 4,
-        barThickness: 24
+        label: 'Actual', data: vals,
+        borderColor: '#4a9eff', backgroundColor: '#4a9eff',
+        borderWidth: 2.5, pointRadius: 4, tension: 0.3
       }]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: { callbacks: { label: ctx => ctx.parsed.y.toFixed(1) + '% error' } }
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false },
+        tooltip: { callbacks: { label: c => fmt(c.parsed.y, curMetric) } }
       },
       scales: {
-        x: { grid: { display: false }, ticks: { color: '#666', font: { size: 11 } } },
-        y: { grid: { color: '#1f222b' }, ticks: { color: '#666', callback: v => v + '%' }, suggestedMax: 15 }
+        x: { grid: { color: '#1f222b' }, ticks: { color: '#666', font: { size: 11 } } },
+        y: { grid: { color: '#1f222b' }, ticks: { color: '#666', callback: v => fmt(v, curMetric) } }
       }
     }
   });
 }
 
-function renderCalibrationChart() {
-  const ctx = document.getElementById('calibrationChart').getContext('2d');
-  if (calibrationChart) calibrationChart.destroy();
-
-  // Show confidence vs actual hit rate across all metrics for this channel+horizon
-  const allPreds = (predictions[currentChannel] || []).filter(p => p.horizon === currentHorizon && p.actual != null);
-  
-  if (allPreds.length === 0) {
-    calibrationChart = new Chart(ctx, { type: 'scatter', data: { datasets: [] }, options: { plugins: { legend: { display: false } } } });
-    return;
-  }
-
-  // Bucket by confidence level
-  const buckets = {};
-  allPreds.forEach(p => {
-    const bucket = Math.round(p.conf * 10) / 10;
-    if (!buckets[bucket]) buckets[bucket] = { total: 0, hits: 0 };
-    buckets[bucket].total++;
-    if (p.withinCI) buckets[bucket].hits++;
-  });
-
-  const points = Object.entries(buckets).map(([conf, data]) => ({
-    x: parseFloat(conf) * 100,
-    y: (data.hits / data.total) * 100,
-    r: Math.max(6, data.total * 4)
-  }));
-
-  calibrationChart = new Chart(ctx, {
-    type: 'bubble',
-    data: {
-      datasets: [
-        {
-          label: 'Calibration',
-          data: points,
-          backgroundColor: 'rgba(74, 158, 255, 0.5)',
-          borderColor: '#4a9eff',
-          borderWidth: 1.5
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: ctx => `Confidence: ${ctx.parsed.x}%, Hit Rate: ${ctx.parsed.y.toFixed(0)}%`
-          }
-        },
-        annotation: {
-          annotations: {
-            perfectLine: {
-              type: 'line',
-              xMin: 0, xMax: 100, yMin: 0, yMax: 100,
-              borderColor: 'rgba(255,255,255,0.15)',
-              borderWidth: 1,
-              borderDash: [4, 4],
-              label: { display: true, content: 'Perfect Calibration', position: 'end', color: '#555', font: { size: 10 } }
-            }
-          }
-        }
-      },
-      scales: {
-        x: { title: { display: true, text: 'Stated Confidence %', color: '#666' }, min: 0, max: 100, grid: { color: '#1f222b' }, ticks: { color: '#666' } },
-        y: { title: { display: true, text: 'Actual Hit Rate %', color: '#666' }, min: 0, max: 110, grid: { color: '#1f222b' }, ticks: { color: '#666' } }
-      }
-    }
-  });
-}
-
-function renderScoreTable() {
-  const body = document.getElementById('scoreBody');
-  const preds = (predictions[currentChannel] || [])
-    .filter(p => p.horizon === currentHorizon && p.metric === currentMetric)
-    .sort((a, b) => a.week.localeCompare(b.week));
-
-  if (preds.length === 0) {
-    body.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#555;padding:24px;">No predictions for this view</td></tr>';
-    return;
-  }
-
-  const fmt = metricFormats[currentMetric];
-  body.innerHTML = preds.map(p => {
-    const errBadge = p.pctErr != null
-      ? `<span class="badge ${p.pctErr < 3 ? 'badge-green' : p.pctErr < 7 ? 'badge-yellow' : 'badge-red'}">${p.pctErr.toFixed(1)}%</span>`
-      : '<span class="badge badge-gray">Pending</span>';
-    const ciBadge = p.withinCI != null
-      ? `<span class="badge ${p.withinCI ? 'badge-green' : 'badge-red'}">${p.withinCI ? 'Yes' : 'No'}</span>`
+function renderTable(weeks) {
+  const body = document.getElementById('weeklyBody');
+  body.innerHTML = weeks.map((w, i) => {
+    const prev = i > 0 ? weeks[i - 1] : null;
+    const wow = prev && prev.regs ? ((w.regs - prev.regs) / prev.regs * 100).toFixed(1) : null;
+    const wowBadge = wow != null
+      ? `<span class="badge ${wow > 5 ? 'badge-green' : wow < -5 ? 'badge-red' : 'badge-yellow'}">${wow > 0 ? '+' : ''}${wow}%</span>`
       : '<span class="badge badge-gray">—</span>';
-    const confColor = p.conf >= 0.7 ? '#4ade80' : p.conf >= 0.5 ? '#fbbf24' : '#f87171';
-    const brierVal = p.brier != null ? p.brier.toFixed(4) : '—';
-    const metricDisplay = currentMetric === 'registrations' && currentChannel === 'PAID_APP' ? 'installs' : currentMetric;
-    
     return `<tr>
-      <td>${p.week}</td>
-      <td>${metricDisplay}</td>
-      <td>${fmt(p.value)} <span style="color:#555;font-size:11px;">[${fmt(p.low)}–${fmt(p.high)}]</span></td>
-      <td>${p.actual != null ? fmt(p.actual) : '<span style="color:#555;">—</span>'}</td>
-      <td>${errBadge}</td>
-      <td>${ciBadge}</td>
-      <td><div class="confidence-bar"><div class="confidence-fill"><div class="inner" style="width:${p.conf*100}%;background:${confColor};"></div></div><span style="font-size:11px;">${(p.conf*100).toFixed(0)}%</span></div></td>
-      <td>${brierVal}</td>
+      <td>${w.week}</td>
+      <td style="text-align:right">${fmt(w.regs, 'regs')}</td>
+      <td style="text-align:right">${fmt(w.cost, 'cost')}</td>
+      <td style="text-align:right">${fmt(w.cpa, 'cpa')}</td>
+      <td>${wowBadge}</td>
     </tr>`;
   }).join('');
+}
+
+function renderProjection(proj) {
+  const el = document.getElementById('projContent');
+  if (!proj) { el.innerHTML = '<p style="color:#555;padding:20px;text-align:center">No projection data for this market</p>'; return; }
+  el.innerHTML = `
+    <table><thead><tr><th>Field</th><th style="text-align:right">Value</th></tr></thead><tbody>
+      <tr><td>Month</td><td style="text-align:right">${proj.month}</td></tr>
+      <tr><td>Projected Regs</td><td style="text-align:right">${fmt(proj.projected_regs, 'regs')}</td></tr>
+      <tr><td>Projected Spend</td><td style="text-align:right">${fmt(proj.projected_spend, 'cost')}</td></tr>
+      <tr><td>Projected CPA</td><td style="text-align:right">${fmt(proj.projected_cpa, 'cpa')}</td></tr>
+      ${proj.op2_regs ? `<tr><td>OP2 Regs Target</td><td style="text-align:right">${fmt(proj.op2_regs, 'regs')}</td></tr>` : ''}
+      ${proj.vs_op2_regs_pct != null ? `<tr><td>vs OP2 Regs</td><td style="text-align:right;color:${proj.vs_op2_regs_pct >= 0 ? '#4ade80' : '#f87171'}">${proj.vs_op2_regs_pct > 0 ? '+' : ''}${proj.vs_op2_regs_pct}%</td></tr>` : ''}
+      <tr><td>Source</td><td style="text-align:right">${proj.source || '—'}</td></tr>
+      ${proj.rationale ? `<tr><td colspan="2" style="color:#888;font-size:12px;padding-top:12px">${proj.rationale}</td></tr>` : ''}
+    </tbody></table>
+  `;
 }
 
 init();

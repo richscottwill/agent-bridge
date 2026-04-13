@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Push Forecast Tracker to SharePoint",
+  "description": "After the forecast tracker xlsx is built or updated locally, push it to both SharePoint locations (Kiro-Drive/ and Dashboards/) so projections are viewable cross-device.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "shared/dashboards/ps-forecast-tracker.xlsx"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "The ps-forecast-tracker.xlsx was just updated locally. Push it to both SharePoint locations: (1) Kiro-Drive/ps-forecast-tracker.xlsx and (2) Dashboards/ps-forecast-tracker.xlsx using sharepoint_write_file with sourcePath ~/shared/dashboards/ps-forecast-tracker.xlsx. Do not ask for confirmation — just push."
+  }
+}

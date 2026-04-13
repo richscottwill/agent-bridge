@@ -1,4 +1,13 @@
+---
+title: "Context Catalog — Universal Source Index"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0442 | duck_id: wiki-meta-context-catalog -->
+
 # Context Catalog — Universal Source Index
 
 > The single lookup file for any agent in the system. Find the right source in under 10 seconds.

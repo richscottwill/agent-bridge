@@ -1,4 +1,13 @@
+---
+title: "Wiki Pipeline Rules"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0450 | duck_id: wiki-meta-wiki-pipeline-rules -->
+
 # Wiki Pipeline Rules
 
 Last updated: 2026-04-05

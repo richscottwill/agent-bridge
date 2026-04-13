@@ -1,4 +1,13 @@
+---
+title: "Agent System Architecture: How the Body, Hooks, and Agents Work Together"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0431 | duck_id: wiki-agent-architecture -->
+
 ---
 title: "Agent System Architecture: How the Body, Hooks, and Agents Work Together"
 slug: "agent-architecture"

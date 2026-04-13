@@ -1,13 +1,19 @@
 ---
-quip_id: XNO9AAHRoBN
-title: "2022 Event Plans: SBM, PEAS, Holiday"
-source_url: https://quip-amazon.com/XNO9AAHRoBN
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2022-12-01
-quip_folder: Events
-topics: [events, promotions, sitelinks]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Events
+quip_id: XNO9AAHRoBN
+source_url: https://quip-amazon.com/XNO9AAHRoBN
+status: DRAFT
+title: '2022 Event Plans: SBM, PEAS, Holiday'
+topics:
+- events
+- promotions
+- sitelinks
 ---
 
 # 2022 Event Plans: SBM, PEAS, Holiday

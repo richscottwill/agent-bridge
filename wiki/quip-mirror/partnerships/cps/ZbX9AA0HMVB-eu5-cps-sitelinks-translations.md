@@ -1,12 +1,23 @@
 ---
-quip_id: ZbX9AA0HMVB
-title: "EU5 CPS Sitelinks Translations"
-source_url: https://quip-amazon.com/ZbX9AA0HMVB
-doc_type: spreadsheet
+audience: amazon-internal
 creator: Yun-Kang Chu
-quip_folder: Partnerships/CPS
-topics: [EU, CPS, sitelinks, translations, DE, ES, FR, IT]
+doc_type: spreadsheet
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/CPS
+quip_id: ZbX9AA0HMVB
+source_url: https://quip-amazon.com/ZbX9AA0HMVB
+status: DRAFT
+title: EU5 CPS Sitelinks Translations
+topics:
+- EU
+- CPS
+- sitelinks
+- translations
+- DE
+- ES
+- FR
+- IT
 ---
 
 # EU5 CPS Sitelinks Translations

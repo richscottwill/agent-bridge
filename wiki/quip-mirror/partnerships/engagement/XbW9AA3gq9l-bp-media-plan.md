@@ -1,13 +1,19 @@
 ---
-quip_id: XbW9AA3gq9l
-title: "BP Media Plan - Paid Search"
-source_url: https://quip-amazon.com/XbW9AA3gq9l
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-01-04
-quip_folder: Partnerships/Engagement/BP
-topics: [business-prime, engagement, partnerships]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/Engagement/BP
+quip_id: XbW9AA3gq9l
+source_url: https://quip-amazon.com/XbW9AA3gq9l
+status: DRAFT
+title: BP Media Plan - Paid Search
+topics:
+- business-prime
+- engagement
+- partnerships
 ---
 
 # BP Media Plan - Paid Search

@@ -12,6 +12,14 @@ Pre-computed state files (from EOD-Backend):
 - `~/shared/context/active/eod-experiments.json`
 - rw-tracker.md (updated by backend), hands.md (updated by backend)
 
+### SharePoint Fallback (Cold Start / Missing Files)
+If any pre-computed state file is missing locally (container restart between backend and frontend):
+1. Check SharePoint `Kiro-Drive/system-state/` for the file via `sharepoint_read_file(inline=true)`.
+2. If found and Modified timestamp is <24h old → use it.
+3. If not found → skip gracefully. Present what's available.
+4. Log recovery to DuckDB workflow_executions.
+See ~/shared/context/protocols/sharepoint-durability-sync.md for full pull logic.
+
 ---
 
 ## Step 1: EOD Summary
@@ -124,7 +132,7 @@ self_dm(login="prichwil", text="📊 EOD Summary — [date]
 📈 L1:[N] L2:[N] L3:[N] L4:[N] L5:[N]
 🔒 [N] blockers | 🔧 Workflows: [rate]% success
 🧪 [N] experiments | 📚 Wiki: [status]
-💾 Git pushed. Changelog updated.")
+💾 Git pushed. SharePoint synced. Changelog updated.")
 ```
 
 ---

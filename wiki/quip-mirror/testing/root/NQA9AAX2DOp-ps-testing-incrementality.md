@@ -1,13 +1,19 @@
 ---
-quip_id: NQA9AAX2DOp
-title: "PS Testing: Incrementality Test"
-source_url: https://quip-amazon.com/NQA9AAX2DOp
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-09-30
-quip_folder: Testing
-topics: [testing, experiments, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing
+quip_id: NQA9AAX2DOp
+source_url: https://quip-amazon.com/NQA9AAX2DOp
+status: DRAFT
+title: 'PS Testing: Incrementality Test'
+topics:
+- testing
+- experiments
+- paid-search
 ---
 
 # PS Testing: Incrementality Test

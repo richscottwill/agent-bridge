@@ -1,13 +1,18 @@
 ---
-quip_id: ETF9AASoPAb
-title: "JP Paid Search Competitive Analysis"
-source_url: https://quip-amazon.com/ETF9AASoPAb
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-04-07
-quip_folder: ..JP
-topics: [japan, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: ..JP
+quip_id: ETF9AASoPAb
+source_url: https://quip-amazon.com/ETF9AASoPAb
+status: DRAFT
+title: JP Paid Search Competitive Analysis
+topics:
+- japan
+- paid-search
 ---
 
 # JP Paid Search Competitive Analysis

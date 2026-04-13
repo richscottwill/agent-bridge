@@ -1,4 +1,13 @@
+---
+title: "Metric Snapshot — Paid Search by Market"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0126 | duck_id: context-exp5-metric-snapshot -->
+
 # Metric Snapshot — Paid Search by Market
 
 Last updated: 2026-03-13

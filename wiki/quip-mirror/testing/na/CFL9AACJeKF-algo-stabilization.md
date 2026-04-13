@@ -1,13 +1,19 @@
 ---
-quip_id: CFL9AACJeKF
-title: "Testing: Algorithm Stabilization"
-source_url: https://quip-amazon.com/CFL9AACJeKF
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2023-11-14
-quip_folder: Testing/.NA
-topics: [testing, north-america, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/.NA
+quip_id: CFL9AACJeKF
+source_url: https://quip-amazon.com/CFL9AACJeKF
+status: DRAFT
+title: 'Testing: Algorithm Stabilization'
+topics:
+- testing
+- north-america
+- paid-search
 ---
 
 # Testing: Algorithm Stabilization

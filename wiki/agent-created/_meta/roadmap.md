@@ -1,4 +1,13 @@
+---
+title: "Wiki Roadmap — AB Paid Search Knowledge Base"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0448 | duck_id: wiki-meta-roadmap -->
+
 # Wiki Roadmap — AB Paid Search Knowledge Base
 
 Last updated: 2026-04-05 (wiki-editor)

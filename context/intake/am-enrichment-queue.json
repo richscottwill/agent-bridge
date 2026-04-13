@@ -1,57 +1,32 @@
 {
-  "generated_at": "2026-04-09T13:15:00Z",
+  "generated_at": "2026-04-13T13:40:00Z",
   "generated_by": "am-backend-parallel",
-
   "my_tasks": {
-    "enrichment_gaps": {
-      "missing_kiro_rw": 42,
-      "missing_next_action": 42,
-      "missing_routine": 41,
-      "missing_priority": 42,
-      "note": "Mostly My Tasks items from SearchTasksInWorkspace compact results — need GetTaskDetails to populate"
-    },
-    "proposals": []
-  },
-
-  "portfolio": {
-    "near_due_auto_escalated": [],
-    "near_due_queued": [
+    "enrichment_proposals": [
       {
-        "task_gid": "1212808474749819",
-        "name": "Raise rest of year PO for PAM US",
-        "project": "Paid App",
-        "due_on": "2026-04-11",
-        "days_until_due": 2,
-        "current_priority": "Urgent",
-        "proposal": "Escalate to Today — due Friday, PAM budget question from Brandon still unanswered"
+        "task_gid": "1214044682239803",
+        "name": "Cross-marketing Refmarker audit",
+        "project": "WW Testing",
+        "proposal": "Missing Kiro_RW and Next_Action_RW. Priority=Urgent, Routine=Admin. Suggest: Kiro_RW='Refmarker audit for cross-marketing attribution. Coordinate with Yun on data pull.' Next_Action_RW='Pull refmarker mapping from Google Ads for cross-marketing campaigns.'"
       }
+    ],
+    "bucket_cap_violations": [
+      {"bucket": "Engine Room", "count": 15, "cap": 6, "over_by": 9},
+      {"bucket": "Core", "count": 10, "cap": 4, "over_by": 6},
+      {"bucket": "Sweep", "count": 6, "cap": 5, "over_by": 1},
+      {"bucket": "Admin", "count": 4, "cap": 3, "over_by": 1}
     ],
     "overdue_kill_or_revive": [
-      {
-        "task_gid": null,
-        "name": "Page Creation - Duplicate Beauty and Auto page for MX",
-        "project": "MX",
-        "due_on": "2026-03-23",
-        "days_overdue": 17,
-        "proposal": "Kill or reassign — MCS task blocked by Vijeth footer issue. 17d overdue."
-      },
-      {
-        "task_gid": null,
-        "name": "Paid App (WW Testing)",
-        "project": "WW Testing",
-        "due_on": "2026-03-31",
-        "days_overdue": 9,
-        "proposal": "Extend to 4/18 — check PAM US/EU spend pacing first"
-      },
-      {
-        "task_gid": null,
-        "name": "Testing Document for Kate",
-        "project": "WW Testing",
-        "due_on": "2026-04-01",
-        "days_overdue": 8,
-        "proposal": "THE HARD THING. Do not extend. Must ship this week. L1 gate blocker."
-      }
+      {"task_gid": "1212988092117041", "name": "Paid App", "project": "WW Testing", "due": "2026-03-31", "days_overdue": 13},
+      {"task_gid": "1213341921686564", "name": "Testing Document for Kate", "project": "WW Testing", "due": "2026-04-01", "days_overdue": 12},
+      {"task_gid": "1213917967984980", "name": "Respond to Lena — AU LP URL analysis", "project": "AU", "due": "2026-04-03", "days_overdue": 10}
     ],
-    "enrichment_proposals": []
+    "today_no_routine": []
+  },
+  "portfolio": {
+    "near_due_escalated": [
+      {"task_gid": "1213796951745232", "name": "Look over AU landing page switch", "project": "AU", "due": "2026-04-15", "days_until": 2, "current_priority": "Urgent"},
+      {"task_gid": "1213072707685834", "name": "MX Automotive page", "project": "MX", "due": "2026-04-15", "days_until": 2, "current_priority": "Urgent"}
+    ]
   }
 }

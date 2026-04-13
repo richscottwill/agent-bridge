@@ -1,12 +1,20 @@
 ---
-quip_id: dGY9AAktaBd
-title: "JP 5th Anniversary Campaign Keywords"
-source_url: https://quip-amazon.com/dGY9AAktaBd
-doc_type: spreadsheet
+audience: amazon-internal
 creator: Richard Williams
-quip_folder: JP/Reporting
-topics: [JP, keywords, campaign, anniversary, brand-terms]
+doc_type: spreadsheet
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: JP/Reporting
+quip_id: dGY9AAktaBd
+source_url: https://quip-amazon.com/dGY9AAktaBd
+status: DRAFT
+title: JP 5th Anniversary Campaign Keywords
+topics:
+- JP
+- keywords
+- campaign
+- anniversary
+- brand-terms
 ---
 
 # JP 5th Anniversary Campaign Keywords

@@ -1,4 +1,13 @@
+---
+title: "JP App Testing Results — Apple Search Ads"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0393 | duck_id: testing-2023-08-jp-app-testing-results -->
+
 ---
 title: "JP App Testing Results — Apple Search Ads"
 status: DRAFT

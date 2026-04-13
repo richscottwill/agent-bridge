@@ -1,13 +1,19 @@
 ---
-quip_id: YEG9AAoOEiO
-title: "PS Testing: UK MAC Impact"
-source_url: https://quip-amazon.com/YEG9AAoOEiO
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-03-04
-quip_folder: Testing
-topics: [testing, experiments, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing
+quip_id: YEG9AAoOEiO
+source_url: https://quip-amazon.com/YEG9AAoOEiO
+status: DRAFT
+title: 'PS Testing: UK MAC Impact'
+topics:
+- testing
+- experiments
+- paid-search
 ---
 
 # PS Testing: UK MAC Impact

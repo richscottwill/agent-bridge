@@ -1,4 +1,13 @@
+---
+title: "Markdown to XWiki Markup Conversion Rules"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0447 | duck_id: wiki-meta-markdown-to-xwiki -->
+
 # Markdown to XWiki Markup Conversion Rules
 
 Reference for the wiki-librarian when publishing articles to w.amazon.com via XWiki MCP.

@@ -1,13 +1,19 @@
 ---
-quip_id: eTF9AAkPHUu
-title: "AB MX Paid Search Sync"
-source_url: https://quip-amazon.com/eTF9AAkPHUu
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-03-25
-quip_folder: .ABIX/MX
-topics: [mexico, abix, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: .ABIX/MX
+quip_id: eTF9AAkPHUu
+source_url: https://quip-amazon.com/eTF9AAkPHUu
+status: DRAFT
+title: AB MX Paid Search Sync
+topics:
+- mexico
+- abix
+- paid-search
 ---
 
 # AB MX Paid Search Sync

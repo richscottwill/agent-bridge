@@ -1,4 +1,13 @@
+---
+title: "Review: OCI Rollout Playbook — From E2E to 100% in Any Market"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0486 | duck_id: wiki-review-oci-playbook-rewrite-eval-a -->
+
 # Review: OCI Rollout Playbook — From E2E to 100% in Any Market
 
 **Reviewer:** wiki-critic (Blind Eval A)

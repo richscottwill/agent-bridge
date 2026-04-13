@@ -1,4 +1,13 @@
+---
+title: "JP W13 Data Brief"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0068 | duck_id: callout-jp-data-brief-2026-w13 -->
+
 # JP W13 Data Brief
 
 ## Headline numbers

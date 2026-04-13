@@ -1,13 +1,19 @@
 ---
-quip_id: dSM9AAaMwDD
-title: "New EU5 Bidding Strategy"
-source_url: https://quip-amazon.com/dSM9AAaMwDD
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2023-12-28
-quip_folder: ..EU
-topics: [europe, eu5, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: ..EU
+quip_id: dSM9AAaMwDD
+source_url: https://quip-amazon.com/dSM9AAaMwDD
+status: DRAFT
+title: New EU5 Bidding Strategy
+topics:
+- europe
+- eu5
+- paid-search
 ---
 
 # New EU5 Bidding Strategy

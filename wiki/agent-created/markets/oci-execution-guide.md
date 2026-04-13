@@ -1,0 +1,95 @@
+---
+title: "OCI Execution Guide"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
+<!-- DOC-0322 | duck_id: program-oci-execution-guide -->
+
+---
+title: OCI Execution Guide
+status: DRAFT
+doc-type: execution
+audience: amazon-internal
+level: N/A
+owner: Richard Williams
+created: 2026-04-04
+updated: 2026-04-04
+update-trigger: new OCI market launches, phase transitions, troubleshooting discoveries, team questions
+replaces: oci-implementation-guide, oci-methodology-knowledge-share
+tags: [oci, execution, how-to, google-ads, nb, ww]
+---
+
+# OCI Execution Guide
+
+This guide is the step-by-step execution reference for implementing OCI in any AB Paid Search market. Follow it to launch, monitor, scale, and troubleshoot OCI. For the business case, validated results, and strategic rationale, see the [OCI Rollout Playbook](~/shared/artifacts/testing/2026-03-25-oci-rollout-playbook.md). For the leadership summary and talking points, see the [OCI Business Case](~/shared/artifacts/strategy/2026-04-04-oci-business-case.md).
+
+## What OCI Does
+
+OCI (Offline Conversion Import) sends actual Amazon Business registration data back to Google Ads so the bidding algorithm optimizes for real conversions instead of proxy signals. Before OCI, Google guessed which searches would produce registrations. With OCI, it knows. Manual bidding does not scale across ten markets, and OCI has validated that premise: US delivered a 24% registration lift with roughly 50% NB CPA improvement and $16.7MM in OPS, UK saw a 23% lift, and DE produced an 18% lift with the cleanest test-versus-control data in the portfolio. The methodology is validated. The remaining markets are execution, not experimentation.
+
+## What Not to Do
+
+Do not judge OCI by its first week. The algorithm needs two to four weeks to learn, and CPA will spike before normalizing. This is expected behavior, not a failure signal. Never apply OCI to Brand campaigns — Brand requires manual bid caps for competitive defense against players like Walmart, and algorithmic bidding would undermine that control. Always use seasonality-adjusted baselines rather than raw pre-versus-post comparisons, because raw comparisons confuse seasonal effects with OCI effects. Do not set an aggressive Target CPA at launch; start with the current four-week average and tighten later once the algorithm has learned. Finally, do not compare OCI markets to non-OCI markets directly — AU and MX do not have OCI, so their CPA trajectory is fundamentally different.
+
+## Before You Start
+
+Before launching OCI in any market, confirm six things. First, verify conversion tracking is active and healthy in Google Ads (Tools → Conversions). Second, confirm the target campaign has at least thirty conversions per month — below that threshold, the algorithm lacks sufficient signal. Third, capture a four-week baseline of performance data so you have a clean comparison point. Fourth, confirm Brand campaigns are excluded from OCI and will remain on manual bid caps. Fifth, brief the market stakeholder on expected behavior — specifically that CPA may spike in week one and that this is normal. Sixth, confirm the MCC structure for the target market. The MCC hierarchy is documented in the [OCI Rollout Playbook](~/shared/artifacts/testing/2026-03-25-oci-rollout-playbook.md) under the MCC Structure section.
+
+## Launching OCI: End-to-End
+
+Start with the highest-volume NB campaign in the market, because that campaign will generate the fastest learning signal. If the market has multiple NB campaigns, pick the one with the most conversions per month. Never start with Brand.
+
+In Google Ads, navigate to the campaign's Settings and change the bidding strategy from Manual CPC to either "Maximize Conversions" or "Target CPA." If using Target CPA, set the target to the current four-week average CPA — do not set an aggressive target. If using Maximize Conversions, set a daily budget cap at 120% of current daily spend to give the algorithm room to bid without runaway costs.
+
+
+## Monitoring
+
+The first two weeks require daily monitoring. Check CPA against the four-week trailing average, confirm conversion volume is maintaining or increasing versus baseline, review the search terms report for quality degradation (irrelevant queries creeping in), watch for "Limited by budget" warnings which signal OCI needs more room, and verify conversion tracking status for any errors. By week three, shift to weekly monitoring. CPA should be at or below baseline by this point. If it is not, see the troubleshooting section below.
+
+At the four-week mark, evaluate formally. Compare the OCI period CPA against the pre-OCI baseline using seasonality-adjusted numbers. If CPA is within 115% of baseline, proceed to scaling. If CPA is between 115% and 120%, extend the test for two more weeks. If CPA exceeds 120% for seven or more consecutive days, pause and investigate.
+
+## Scaling Through Phases
+
+Scaling follows a gated progression. Phase 2 allocates 25% of NB spend to OCI bidding for two to four weeks, with a gate of CPA within 115% of baseline to proceed. Phase 3 expands to 50% of NB spend for another two to four weeks, with a tighter gate of CPA within 110% of baseline. Phase 4 is full deployment at 100% of NB spend, with ongoing weekly CPA review and monthly deep dives.
+
+At each phase transition, expand OCI to the next traffic percentage, monitor for the specified duration, and check CPA against the gate threshold. If the gate passes, proceed. If it fails, hold at the current phase, investigate the cause, and adjust before retrying. After reaching 100% NB deployment, Brand campaigns remain on manual CPC with bid caps. Establish new baselines for ongoing monitoring and begin evaluating whether Brand OCI is worth testing in mature markets — it is lower-impact but worth exploring once NB is stable.
+
+## Troubleshooting
+
+When CPA spikes in week one, the cause is almost always the algorithm learning. The fix is patience — evaluate at week three or four, and do not intervene. If CPA remains elevated at week four, the target is likely too aggressive or the campaign has insufficient volume. Raise the target CPA by 10-15% and confirm the campaign has at least thirty conversions per month.
+
+Conversion tracking errors typically stem from tag implementation issues. Verify the Google Tag is firing correctly, check for duplicate tags, and confirm the conversion action is active. Search term quality degradation usually means broad match is expanding too aggressively — add negative keywords and review the search term report weekly.
+
+If the campaign shows "Limited by budget," OCI is bidding higher than manual was, which means it needs more room. Increase the daily budget or narrow targeting. Conversion lag is normal — wait 72 hours before evaluating daily CPA and use a seven-day rolling average instead of daily snapshots. The known hvocijid duplication issue (parameter appended twice on landing pages) affects EU3 and existing markets but not JP. It is under investigation and should not block rollout.
+
+If CPA remains volatile after week four, check whether the volatility is OCI-specific or market-wide by comparing the Brand CPA trend. If Brand is also volatile, the cause is market-level (seasonal or competitive), not OCI.
+
+## Current Market Status
+
+As of April 2026, seven of ten markets are at full OCI deployment. US, UK, and DE have been live since late 2025 and serve as the reference implementations. FR, IT, ES, and JP were dialed up in late March 2026. CA is on track for launch the week of April 7. AU targets May 2026 via the Adobe OCI path through Suzane Huynh, though the MCC has not yet been created. MX has no MCC and no timeline. For detailed per-market considerations including competitive dynamics and market-specific nuances, see the [OCI Rollout Playbook](~/shared/artifacts/testing/2026-03-25-oci-rollout-playbook.md).
+
+## Related Docs
+
+- [OCI Rollout Playbook](~/shared/artifacts/testing/2026-03-25-oci-rollout-playbook.md) — Strategy doc: business case, validated results, MCC structure, per-market notes, measurement framework
+- [OCI Business Case](~/shared/artifacts/strategy/2026-04-04-oci-business-case.md) — Leadership summary: $16.7MM headline, talking points for Kate/Todd
+- [OCI Instructions (Quip)](https://quip-amazon.com/Zee9AAlSBEB) — Technical setup guide (original Quip doc)
+
+---
+
+## Sources
+- Phased rollout steps (E2E→25%→50%→100%) — source: ~/shared/context/body/brain.md → D1: OCI Implementation Approach
+- Gate criteria (115%, 110%) — source: derived from D1 methodology + operational experience
+- Market status — source: ~/shared/context/body/eyes.md → OCI Performance
+- Troubleshooting — source: operational experience documented in eyes.md → OCI Performance
+- hvocijid issue — source: ~/shared/context/body/eyes.md → OCI Performance → Known Issues
+- "What NOT to do" lessons — source: operational experience across US/UK/DE rollouts
+
+<!-- AGENT_CONTEXT
+machine_summary: "Consolidated OCI execution guide for AB Paid Search. Merges the former OCI Implementation Guide and OCI Methodology Knowledge Share into one doc. Covers: what OCI does, what not to do (6 rules as prose), prerequisites, step-by-step E2E launch as narrative, scaling phases with gate criteria, troubleshooting (8 issues as prose), and current market status. 7/10 markets at 100%, CA targeting 4/7, AU May 2026, MX TBD. Duplicative content (MCC table, per-market notes, market status table) removed — cross-references the OCI Rollout Playbook instead."
+key_entities: ["OCI", "Google Ads", "NB campaigns", "E2E launch", "Target CPA", "Maximize Conversions", "hvocijid", "MCC"]
+action_verbs: ["implement", "monitor", "troubleshoot", "scale", "evaluate", "check"]
+update_triggers: ["new OCI market launches", "new troubleshooting issue discovered", "phase transition in any market", "team questions about OCI"]
+-->

@@ -1,13 +1,20 @@
 ---
-quip_id: PcT9AAjVFnR
-title: "2024 Paid Acq MBR / QBR"
-source_url: https://quip-amazon.com/PcT9AAjVFnR
-doc_type: document
+audience: amazon-internal
 creator: Stacey Gu
+doc_type: document
 last_modified: 2025-08-08
-quip_folder: Review
-topics: [review, mbr, qbr, reporting]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Review
+quip_id: PcT9AAjVFnR
+source_url: https://quip-amazon.com/PcT9AAjVFnR
+status: DRAFT
+title: 2024 Paid Acq MBR / QBR
+topics:
+- review
+- mbr
+- qbr
+- reporting
 ---
 
 # 2024 Paid Acq MBR / QBR

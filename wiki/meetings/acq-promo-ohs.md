@@ -1,4 +1,13 @@
+---
+title: "ACQ Promo Office Hours"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0193 | duck_id: meeting-acq-promo-ohs -->
+
 # ACQ Promo Office Hours
 
 ## Metadata

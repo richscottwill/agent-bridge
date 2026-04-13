@@ -1,4 +1,13 @@
+---
+title: "Brandon 1:1 Sync"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-13
+---
 <!-- DOC-0202 | duck_id: meeting-brandon-sync -->
+
 # Brandon 1:1 Sync
 
 ## Metadata
@@ -14,6 +23,25 @@ Brandon is Richard's direct manager. This is the most strategically important me
 Key dynamic: Brandon is generous with praise when earned but direct about growth areas. Richard's #1 growth area per annual review: visibility — "maintaining consistent visibility across all workstreams." Brandon wants Richard to proactively share outcomes, not wait to be asked.
 
 ## Latest Session
+### 2026-04-06 — Compensation Review and AU Landing Page Sync (18 min)
+- Richard received 10.5% base pay increase in 2026 IECCP cycle — strong outcome reflecting OCI contributions and initiative leadership.
+- No new RSUs awarded — existing grants cover 2027 planning period. Additional RSUs expected in 2028 cycle.
+- Amazon reviews comp twice yearly. 2027 planning underway, finalization expected April 2027.
+- Brandon advised against pilot RSU early-sale program (fixed $214/share for 2028) — "bad deal" unless stock declines significantly.
+- Lena Zak reached out to Dwayne Palmer directly requesting AU-specific landing page and redirect changes — bypassing global alignment.
+- Brandon intervened: told Dwayne to pause and align with global plan. "I don't know why he was being so accommodating."
+- Decision: be data-led. Richard to pull AU Polaris conversion rate data to inform recommendation to Lena.
+- Three-way alignment (Richard, Brandon, Dwayne) required before communicating with Lena.
+- Brandon: "We don't want to say we're not doing this just because. We want to be data-led."
+- Even if Lena wants to keep current setup another week, that's fine — but recommendation should be based on data.
+- Decisions: No immediate AU LP changes until conversion data analyzed. All future changes must align with global public pages/redirects strategy. Team will be data-led in resolving stakeholder disagreements.
+- Action items:
+  - Richard: Pull AU Polaris LP conversion rate data, share with Brandon + Dwayne (ASAP) — 7d OVERDUE
+  - Richard: Prepare preliminary insights for recommendation on revert vs maintain
+  - Brandon: Coordinate with Dwayne to prevent premature changes
+  - Brandon: Finalize communication to Lena after data review
+
+## Previous Session
 ### 2026-04-02 — Spend Reporting and LiveRamp Progress Sync (58 min)
 - $70K OP2 underspend identified: Richard failed to confirm March spend via required email to BK Cho. Task was on QROW to-do but missed. Funds at risk of XCM reclamation under "use it or lose it" rules.
 - Context: central team recently lost $2B in PS funding due to underspending — heightened scrutiny across all teams including AB. Pablo closely monitoring pacing.
@@ -71,15 +99,21 @@ Key dynamic: Brandon is generous with praise when earned but direct about growth
 ## Running Themes
 - Visibility gap: Richard needs to proactively share wins and outcomes, not just do the work
 - Strategic framing over status updates: Brandon wants "here's what I recommend" not "here's what happened"
-- AU CPC defense: Lena pattern of tactical overreach and decision reversals — Richard needs to own the narrative with data
+- Lena Zak pattern: tactical overreach, decision reversals, and now bypassing global alignment entirely (went directly to Dwayne for AU LP changes without coordinating). Three sessions in a row (3/23, 4/2, 4/6) with Lena escalation. Brandon's consistent response: own the narrative with data, don't react emotionally.
+- Data-led stakeholder management: Brandon's framing for resolving disagreements — "we don't want to say we're not doing this just because." Pull the data, make the recommendation, then communicate. Applied to AU LP dispute with Lena.
 - Testing methodology: Kate meeting OFFICIALLY CANCELED (4/3 email). Brandon reviewing doc first. Document still valuable but presentation approach TBD.
 - Financial stewardship: $70K underspend exposed process gap. Heightened scrutiny after $2B central team loss. Need automated confirmations.
 - LiveRamp/Enhanced Match: stalled on TPS docs and legal. Could unlock 12%→20% match rates.
 - GenBI as stakeholder empowerment: shift Richard from data provider to strategic advisor
 - Annual review growth areas: communication, project management, strategic proactivity (same as Forte 2025 — persisting gaps)
 - Promo path: "solid strength" is ceiling until promo work begins
+- Compensation: 10.5% base increase in 2026 IECCP. No new RSUs until 2028 cycle. Brandon advises against early-sale pilot.
 
 ## Open Items
+- [ ] Pull AU Polaris LP conversion rate data, share with Brandon + Dwayne (ASAP — 7d OVERDUE from 4/6)
+- [ ] Prepare preliminary insights for recommendation on AU LP revert vs maintain
+- [ ] Brandon: Coordinate with Dwayne to prevent premature AU LP changes
+- [ ] Brandon: Finalize communication to Lena after data review
 - [ ] Obtain TPS checklist from Abdul for F90 audience (immediate)
 - [ ] Gather Enhanced Match specs from LiveRamp, draft one-page FAQ (by Apr 22)
 - [ ] Set up 15-min walkthrough with Andrew for Kiro ASP workflow

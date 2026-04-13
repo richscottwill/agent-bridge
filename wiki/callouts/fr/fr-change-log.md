@@ -1,4 +1,13 @@
+---
+title: "FR Change Log (2026)"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0047 | duck_id: callout-fr-change-log -->
+
 # FR Change Log (2026)
 
 Source: AB - Change Log - EU5.csv

@@ -1,4 +1,13 @@
+---
+title: "Revisions: market-reference.md"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0485 | duck_id: wiki-review-market-reference-revisions -->
+
 # Revisions: market-reference.md
 
 Reviewer: wiki-critic

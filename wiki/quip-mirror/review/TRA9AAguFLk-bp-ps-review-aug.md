@@ -1,13 +1,20 @@
 ---
-quip_id: TRA9AAguFLk
-title: "BP Paid Search Review 8/28/23"
-source_url: https://quip-amazon.com/TRA9AAguFLk
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-04-22
-quip_folder: Review
-topics: [review, mbr, qbr, reporting]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Review
+quip_id: TRA9AAguFLk
+source_url: https://quip-amazon.com/TRA9AAguFLk
+status: DRAFT
+title: BP Paid Search Review 8/28/23
+topics:
+- review
+- mbr
+- qbr
+- reporting
 ---
 
 # BP Paid Search Review 8/28/23

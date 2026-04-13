@@ -26,7 +26,23 @@ Every mention of a topic across any channel creates or reinforces a signal in `s
 | Hedy | EOD-1 meeting sync | Meeting transcript topic extraction, agenda items | session id |
 
 ### Topic Normalization
-Topics are lowercase, hyphenated slugs: `oci-rollout`, `au-cpa-trends`, `budget-pam`, `enhanced-match`, `kate-skip-level`. The agent normalizes on ingest — "OCI rollout", "OCI Rollout", "oci rollout status" all map to `oci-rollout`.
+Topics are lowercase, hyphenated slugs: `oci-rollout`, `au-cpa-cvr`, `mx-budget-ieccp`, `polaris-brand-lp`, `liveramp-enhanced-match`, `kate-skip-level`. The agent normalizes on ingest — "OCI rollout", "OCI Rollout", "oci rollout status" all map to `oci-rollout`.
+
+**CRITICAL: Slug consistency across channels.** Slack ingestion tends to use display names ("Brand LP Polaris Transition") while Hedy uses slugs ("polaris-lp-testing"). Both must normalize to the same canonical slug. Without this, the same topic fragments across rows and never reaches cross-channel quality thresholds. Canonical slug format: `{project-or-topic}-{subtopic}` — always lowercase, always hyphenated.
+
+**Canonical slug registry** (add new entries as topics emerge):
+| Canonical Slug | Variants to Normalize |
+|---------------|----------------------|
+| `polaris-brand-lp` | Brand LP Polaris Transition, polaris-lp-testing, polaris-lp-revert, brand-page-transition, brand-lp-consolidated-feedback, Polaris LP Brand Page ETA Request |
+| `mx-budget-ieccp` | MX Budget Underspend, MX Budget Line, ABMA Expansion Market SIM |
+| `au-cpa-cvr` | Lena MX LP Confusion, AU CPA trends, au-cpa-trends |
+| `oci-rollout` | OCI CA Launch, OCI CA Launch Monday, OCI WW Launch |
+| `pam-budget` | PAM Budget Availability |
+| `liveramp-enhanced-match` | LiveRamp Enhanced Match, F90 Enhanced Match |
+| `f90-lifecycle` | F90 Lifecycle, F90 audience |
+| `deep-linking-ref-tags` | Deep Linking, Ref Tags, deep links |
+| `op1-strategy` | OP1 Strategy, OP1 brainstorm |
+| `ai-search-aeo` | AEO, AI Overviews, AI search, zero-click |
 
 ---
 

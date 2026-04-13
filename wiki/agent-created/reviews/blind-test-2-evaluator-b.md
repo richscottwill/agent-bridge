@@ -1,4 +1,13 @@
+---
+title: "Blind Test 2 — Evaluator B (Subjective Reader Evaluation)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0463 | duck_id: wiki-review-blind-test-2-evaluator-b -->
+
 # Blind Test 2 — Evaluator B (Subjective Reader Evaluation)
 
 *Evaluator persona: Simulating Brandon Munday (L7, Richard's manager) and Kate Rundell (L8 Director). Brandon reads 20+ docs a week, values leverage over activity, wants lightweight mechanisms. Kate wants one page, strategic framing, data as evidence not the message. Both can spot mediocre writing in 30 seconds.*

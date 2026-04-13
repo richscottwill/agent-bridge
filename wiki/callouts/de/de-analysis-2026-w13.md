@@ -1,4 +1,13 @@
+---
+title: "DE W13 Analysis Brief"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0026 | duck_id: callout-de-analysis-2026-w13 -->
+
 # DE W13 Analysis Brief
 
 ## Registration summary

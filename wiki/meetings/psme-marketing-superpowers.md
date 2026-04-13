@@ -1,4 +1,13 @@
+---
+title: "Bi-Weekly: Unlock Marketing Superpowers (PSME)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0210 | duck_id: meeting-psme-marketing-superpowers -->
+
 # Bi-Weekly: Unlock Marketing Superpowers (PSME)
 
 ## Metadata

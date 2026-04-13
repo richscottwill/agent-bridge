@@ -1,13 +1,19 @@
 ---
-quip_id: NNS9AA8S5bA
-title: "BP Results"
-source_url: https://quip-amazon.com/NNS9AA8S5bA
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-01-04
-quip_folder: Partnerships/Engagement/BP
-topics: [business-prime, engagement, partnerships]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/Engagement/BP
+quip_id: NNS9AA8S5bA
+source_url: https://quip-amazon.com/NNS9AA8S5bA
+status: DRAFT
+title: BP Results
+topics:
+- business-prime
+- engagement
+- partnerships
 ---
 
 # BP Results

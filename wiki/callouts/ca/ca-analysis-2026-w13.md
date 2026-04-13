@@ -1,4 +1,13 @@
+---
+title: "CA W13 Analysis Brief"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0016 | duck_id: callout-ca-analysis-2026-w13 -->
+
 # CA W13 Analysis Brief
 
 ## Registration summary

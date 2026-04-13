@@ -1,4 +1,13 @@
+---
+title: "Hedy Meeting Analysis — Richard Williams"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0132 | duck_id: context-hedy-meeting-analysis-2026-03-22 -->
+
 # Hedy Meeting Analysis — Richard Williams
 
 Source: Hedy API (28 sessions, Sep 2025 – Jan 2026)

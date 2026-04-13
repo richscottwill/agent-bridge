@@ -1,13 +1,19 @@
 ---
-quip_id: JNa9AA24e9W
-title: "Adobe Activity Map"
-source_url: https://quip-amazon.com/JNa9AA24e9W
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-01-08
-quip_folder: Onboarding/Data
-topics: [onboarding, data, analytics]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Onboarding/Data
+quip_id: JNa9AA24e9W
+source_url: https://quip-amazon.com/JNa9AA24e9W
+status: DRAFT
+title: Adobe Activity Map
+topics:
+- onboarding
+- data
+- analytics
 ---
 
 # Adobe Activity Map

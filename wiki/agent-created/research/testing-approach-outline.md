@@ -1,4 +1,13 @@
+---
+title: "Paid Search Testing Approach: From Validated Results to Scalable Growth"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0376 | duck_id: research-testing-approach-outline -->
+
 # Paid Search Testing Approach: From Validated Results to Scalable Growth
 
 *Outline for Kate Rundell (L8). Brandon reviewing first. Structure: problem → test → result → scale across 5 workstreams. Strategic narrative — not a status update.*

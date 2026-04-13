@@ -1,4 +1,13 @@
+---
+title: "Eval B: Workstream 3 — Audiences and Lifecycle (v3)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0497 | duck_id: wiki-review-ws3-v3-eval-b -->
+
 # Eval B: Workstream 3 — Audiences and Lifecycle (v3)
 
 Reviewer: wiki-critic (blind, no knowledge of Eval A)

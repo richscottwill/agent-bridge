@@ -1,4 +1,13 @@
+---
+title: "Review: Paid Search Five-Year Outlook: 2026–2030"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0467 | duck_id: wiki-review-five-year-outlook-v1-eval-b -->
+
 # Review: Paid Search Five-Year Outlook: 2026–2030
 
 Eval: B (Reader Simulation — Kate Rundell, L8 Director)

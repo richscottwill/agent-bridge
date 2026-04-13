@@ -1,13 +1,19 @@
 ---
-quip_id: ISQ9AAo3soI
-title: "AB Channel Marketing - SQL Databases & Queries"
-source_url: https://quip-amazon.com/ISQ9AAo3soI
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-08-28
-quip_folder: Onboarding/Data
-topics: [onboarding, data, analytics]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Onboarding/Data
+quip_id: ISQ9AAo3soI
+source_url: https://quip-amazon.com/ISQ9AAo3soI
+status: DRAFT
+title: AB Channel Marketing - SQL Databases & Queries
+topics:
+- onboarding
+- data
+- analytics
 ---
 
 # AB Channel Marketing - SQL Databases & Queries

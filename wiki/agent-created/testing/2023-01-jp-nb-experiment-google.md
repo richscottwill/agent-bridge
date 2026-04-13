@@ -1,4 +1,13 @@
+---
+title: "JP Google Nonbrand Experiment — LP Test + Keyword Performance"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0391 | duck_id: testing-2023-01-jp-nb-experiment-google -->
+
 ---
 title: "JP Google Nonbrand Experiment — LP Test + Keyword Performance"
 status: DRAFT

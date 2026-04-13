@@ -1,4 +1,13 @@
+---
+title: "OCI Performance by Market"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0372 | duck_id: research-oci-performance -->
+
 # OCI Performance by Market
 
 Last updated: 2026-03-12

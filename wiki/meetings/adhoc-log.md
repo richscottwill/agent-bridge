@@ -1,4 +1,13 @@
+---
+title: "Ad-Hoc Meeting Log"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0195 | duck_id: meeting-adhoc-log -->
+
 # Ad-Hoc Meeting Log
 
 *One-off meetings, cross-team syncs, and meetings that don't belong to a recurring series. Logged in reverse chronological order. Compress or archive entries older than 30 days.*

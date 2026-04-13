@@ -1,4 +1,13 @@
+---
+title: "Review: Agent System Architecture — Eval A (Revision 2)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0454 | duck_id: wiki-review-agent-architecture-eval-a-r2 -->
+
 # Review: Agent System Architecture — Eval A (Revision 2)
 
 Reviewer: wiki-critic (Eval A — rubric)

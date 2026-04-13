@@ -49,3 +49,77 @@
 **Cross-organ check:** No conflicts. Consistent with duckdb-schema.md steering file and MCP capability/integration specs.
 **Karpathy gate:** N/A (device.md is not gated)
 **Action items surfaced by edit:** (1) ensure-schema.sql needs update, (2) FTS index on signals.slack_messages needs rebuild
+
+## 2026-04-12 — device.md
+
+**Section:** Installed Apps → AM Hooks + EOD Hooks
+**Change:** Hook architecture consolidated from 5 hooks (AM-1/AM-2/AM-3 + EOD-1/EOD-2) to 3 hooks (AM-Backend/AM-Frontend + EOD). AM-Backend (`am-auto`) replaces AM-1/AM-2/AM-3 with parallel 6-subagent ingestion → sequential processing → SharePoint sync (~12 min). AM-Frontend (`am-triage`) is interactive: briefs, calendar blocks, triage, command center (~10 min). EOD (`eod`) unifies EOD-1 + EOD-2 into single backend+frontend hook (~20 min). New protocol files referenced: `am-backend-parallel.md`, `am-frontend.md`, `eod-backend.md`, `eod-frontend.md`.
+
+**Karpathy gate:** N/A (device.md is not gated).
+
+**Cross-organ inconsistencies detected (stale references to old hook names):**
+
+1. **tech.md** (steering) — Still references "EOD-1: Meeting Sync" and "EOD-2: System Refresh" as separate hooks. Needs update to unified EOD hook.
+2. **kiro-limitations.md** (steering) — Multiple references to AM-1 → AM-2 → AM-3 chaining pattern and AM-1/AM-2 output sharing workaround. Needs rewrite to reflect AM-Backend/AM-Frontend architecture.
+3. **slack-deep-context.md** (steering) — fileMatchPattern references `hooks/eod-2*`. Needs update to match new hook naming (`hooks/eod*`). Also references `eod-2-system-refresh.kiro.hook` by name.
+4. **duckdb-schema.md** (steering) — References "EOD-2 (delta sync)" in DuckDB-First Principle section. Needs update to "EOD" or "EOD-Backend".
+5. **wiki-editor.md** (agent) — References "AM-2" as the triage invoker for ABPS AI tasks, AM-2 date window checks, and AM-2 presentation format. Needs update to "AM-Frontend".
+6. **wiki-writer.md** (agent) — References "AM-2 detects the approval" for Stage 5 expansion trigger. Needs update to "AM-Frontend".
+7. **wiki-researcher.md** (agent) — References "AM-2 hook" as invocation trigger for ABPS AI tasks. Needs update to "AM-Frontend".
+8. **steering-integrity.md** (steering) — References "EOD-2 housekeeping" for batch commits. Needs update to "EOD".
+9. **device.md itself** — Device Health table at bottom still references old groupings: "AM Hooks (AM-1, AM-2, AM-3)" and "EOD Hooks (EOD-1, EOD-2)". Needs update to match new hook names.
+10. **kiro-setup-optimization spec** (completed spec) — Multiple references to old hook names in requirements.md, design.md, tasks.md. Lower priority since spec is completed, but worth noting for historical accuracy.
+
+**Action items:**
+- Update tech.md, kiro-limitations.md, slack-deep-context.md, duckdb-schema.md, steering-integrity.md (steering files — no gate)
+- Update wiki-editor.md, wiki-writer.md, wiki-researcher.md (agent files — no gate)
+- Update device.md Device Health table (self-consistency fix — no gate)
+- heart.md may also reference old hook names — check and route through karpathy if so
+
+## 2026-04-12 — device.md
+
+**Section:** Installed Apps → SharePoint Durability Layer
+**Change:** SharePoint paths line updated. Removed `Kiro-Drive/artifacts/` (published docs) from the durability layer path list. Added clarifying note: "Published artifacts go to `Artifacts/wiki-sync/` via the separate sharepoint-sync hook." This reflects the earlier session's decision to rename `Kiro-Drive/artifacts/` to `_artifacts-deprecated` since it was redundant with the separate `Artifacts/wiki-sync/` pipeline managed by the sharepoint-sync hook.
+
+**Karpathy gate:** N/A (device.md is not gated).
+
+**Cross-organ consistency:** ✅ No conflicts detected.
+- `sharepoint-durability-sync.md` already correctly separates `Kiro-Drive/` paths from `Artifacts/wiki-sync/` and explicitly notes artifacts are managed by the sharepoint-sync hook, not the durability protocol.
+- `hook-protocol-audit.md` already reflects the two separate SharePoint pipelines.
+- `sharepoint-sync.kiro.hook` (v2.0.0) correctly targets `Artifacts/wiki-sync/`.
+- Session log documents the rename of `Kiro-Drive/artifacts/` → `_artifacts-deprecated`.
+- No other organ files reference the removed `Kiro-Drive/artifacts/` path (only historical session-log entries, which is correct).
+
+**Action items:** None. All related files were updated in the same session.
+
+## 2026-04-13 — amcc.md
+
+**Section:** Real-Time Intervention Protocol → Trigger Detection table
+**Change:** Added new avoidance signal row: "Unread message accumulation." Detects when Slack messages or emails from stakeholders sit unread for 3+ days. Data sources: email-triage.md (UNREAD flags), Slack digest (unanswered items), DuckDB `signals.emails_unanswered`. Escalation weighted by stakeholder importance (Brandon, Lena, Lorena flagged explicitly). aMCC response template: "You have [N] messages unread for [X] days. [Person] is waiting. Reading takes 2 minutes — reply or acknowledge now."
+
+**Karpathy gate:** N/A (amcc.md is not gated — only heart.md and gut.md are gated).
+
+**Cross-organ consistency:** ✅ No conflicts detected.
+- Data sources referenced (`signals.emails_unanswered`, email-triage.md, Slack digest) all exist and are populated by AM-Backend ingestion (device.md).
+- Stakeholder names (Brandon, Lena, Lorena) align with memory.md relationship graph and current.md active contacts.
+- Does NOT overlap with Nervous System Loop 3 (pattern tracking is weekly/retrospective; this detector is real-time/prospective — complementary, not redundant).
+- Does NOT conflict with Device.md email/Slack ingestion (device collects data; aMCC uses it for intervention).
+- The "Email as escape" detector (existing row) covers mid-task email checking during focus blocks — different trigger than unread accumulation over days. No overlap.
+
+**Action items:** None. Clean addition — no follow-up edits needed in other organs.
+
+## 2026-04-13 (second edit) — amcc.md
+
+**Section:** Real-Time Intervention Protocol → Trigger Detection table → "Unread message accumulation" row
+**Change:** Upgraded the unread message accumulation detector with specific DuckDB query references and priority tiers. Old version referenced generic sources (email-triage.md, Slack digest, `signals.emails_unanswered`). New version adds: (1) `signals.slack_unanswered` view with specific columns (`days_old`, `priority` [critical/high/medium/normal], `richard_responded_24h`, `richard_responded_ever`, `richard_reacted`), (2) explicit queries: `SELECT * FROM signals.slack_unanswered WHERE richard_responded_ever = FALSE AND richard_reacted = FALSE` + `SELECT * FROM signals.emails_unanswered WHERE action_needed = 'respond'`, (3) stakeholder priority tiers: Brandon (critical), Kate/Lena/Lorena (high). Fire template updated to split Slack mentions and emails separately.
+
+**Karpathy gate:** N/A (amcc.md is not gated — only heart.md and gut.md are gated).
+
+**Cross-organ consistency:** ✅ No conflicts detected.
+- `signals.slack_unanswered` view confirmed in DuckDB — all referenced columns exist: `days_old` (DOUBLE), `priority` (VARCHAR), `richard_responded_24h` (BOOLEAN), `richard_responded_ever` (BOOLEAN), `richard_reacted` (BOOLEAN).
+- `signals.emails_unanswered` view confirmed — `action_needed` (VARCHAR), `days_old` (BIGINT), `priority` (VARCHAR) all exist.
+- Stakeholder priority tiers (Brandon=critical, Kate/Lena/Lorena=high) align with memory.md relationship graph and org chart.
+- Kate added to high-priority tier (was not in previous version) — correct, she's the L8 Director.
+- No overlap with other detectors. No conflicts with other organs.
+
+**Action items:** None. Clean upgrade — schema-verified, no follow-up edits needed.

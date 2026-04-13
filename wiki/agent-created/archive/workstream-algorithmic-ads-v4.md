@@ -1,4 +1,13 @@
+---
+title: "Workstream 5: Algorithmic Ads"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0509 | duck_id: wiki-workstream-algorithmic-ads -->
+
 ---
 title: "Workstream 5: Algorithmic Ads"
 status: DRAFT

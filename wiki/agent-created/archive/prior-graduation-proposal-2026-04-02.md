@@ -1,4 +1,13 @@
+---
+title: "Proposal: Prior Graduation Mechanism"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0138 | duck_id: context-prior-graduation-proposal-2026-04-02 -->
+
 # Proposal: Prior Graduation Mechanism
 
 **Source:** Richard + system agent, 2026-04-02 system refresh

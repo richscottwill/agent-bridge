@@ -1,12 +1,20 @@
 ---
-quip_id: bXT9AA5YdtN
-title: "Paid Acq Projects"
-source_url: https://quip-amazon.com/bXT9AA5YdtN
-doc_type: spreadsheet
+audience: amazon-internal
 creator: Richard Williams
-quip_folder: Root
-topics: [projects, paid-search, task-tracking, associate-tags, URL-transition]
+doc_type: spreadsheet
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Root
+quip_id: bXT9AA5YdtN
+source_url: https://quip-amazon.com/bXT9AA5YdtN
+status: DRAFT
+title: Paid Acq Projects
+topics:
+- projects
+- paid-search
+- task-tracking
+- associate-tags
+- URL-transition
 ---
 
 # Paid Acq Projects

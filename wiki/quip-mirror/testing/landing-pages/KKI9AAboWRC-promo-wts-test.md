@@ -1,13 +1,19 @@
 ---
-quip_id: KKI9AAboWRC
-title: "PS Testing: Promo WTS"
-source_url: https://quip-amazon.com/KKI9AAboWRC
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-12-09
-quip_folder: Testing/Landing Pages
-topics: [testing, landing-pages, conversion]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/Landing Pages
+quip_id: KKI9AAboWRC
+source_url: https://quip-amazon.com/KKI9AAboWRC
+status: DRAFT
+title: 'PS Testing: Promo WTS'
+topics:
+- testing
+- landing-pages
+- conversion
 ---
 
 # PS Testing: Promo WTS

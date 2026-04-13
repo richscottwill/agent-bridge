@@ -1,13 +1,19 @@
 ---
-quip_id: ZaW9AAwBxg8
-title: "Google PO FAQs"
-source_url: https://quip-amazon.com/ZaW9AAwBxg8
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-02-04
-quip_folder: ..EU
-topics: [europe, eu5, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: ..EU
+quip_id: ZaW9AAwBxg8
+source_url: https://quip-amazon.com/ZaW9AAwBxg8
+status: DRAFT
+title: Google PO FAQs
+topics:
+- europe
+- eu5
+- paid-search
 ---
 
 # Google PO FAQs

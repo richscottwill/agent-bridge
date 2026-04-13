@@ -1,13 +1,22 @@
 ---
-quip_id: PVL9AACnGJv
-title: "JP Meeting notes"
-source_url: https://quip-amazon.com/PVL9AACnGJv
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
-last_modified: "2023-12-27"
+doc_type: document
+last_modified: '2023-12-27'
+mirror_date: '2026-04-10'
+owner: Richard Williams
 quip_folder: JP/Meeting
-topics: [JP, meetings, nonbrand, AVT, callback, strategy]
-mirror_date: "2026-04-10"
+quip_id: PVL9AACnGJv
+source_url: https://quip-amazon.com/PVL9AACnGJv
+status: DRAFT
+title: JP Meeting notes
+topics:
+- JP
+- meetings
+- nonbrand
+- AVT
+- callback
+- strategy
 ---
 
 # JP Meeting notes

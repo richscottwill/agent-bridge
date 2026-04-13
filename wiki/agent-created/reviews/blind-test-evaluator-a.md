@@ -1,4 +1,13 @@
+---
+title: "Blind Test Evaluation — Evaluator A"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0464 | duck_id: wiki-review-blind-test-evaluator-a -->
+
 # Blind Test Evaluation — Evaluator A
 
 **Date:** 2026-04-04

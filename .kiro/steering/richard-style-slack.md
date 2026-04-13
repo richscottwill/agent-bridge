@@ -93,10 +93,13 @@ Richard's Slack is his most unfiltered register. Fast, reactive, collaborative. 
 
 ## Common Failures in Drafting Slack as Richard
 
+### Message Structure Failures
 1. **Writing one long message instead of multiple short sends.** Richard breaks thoughts across rapid-fire lines. A 4-sentence paragraph should be 4 separate messages.
+4. **Over-formatting with bullets and headers.** Slack is stream-of-consciousness. Bullets and headers belong in email/docs, not Slack.
+
+### Register & Tone Failures
 2. **Using the wrong register for the recipient.** Brandon gets playful casual. Lena gets data-first directness. Lorena gets professional thoroughness. Check the Relationship Dynamics table before drafting.
 3. **Adding pleasantries before substance.** After "Hey [name]", go straight to the point. No "Hope you're doing well" or "Just wanted to check in."
-4. **Over-formatting with bullets and headers.** Slack is stream-of-consciousness. Bullets and headers belong in email/docs, not Slack.
 
 ## What NOT to Do When Writing as Richard in Slack
 - Don't use exclamation points (he almost never does)

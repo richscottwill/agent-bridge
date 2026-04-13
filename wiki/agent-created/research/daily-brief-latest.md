@@ -1,4 +1,13 @@
+---
+title: "Daily Brief — Monday, April 6, 2026"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0371 | duck_id: research-daily-brief-latest -->
+
 # Daily Brief — Monday, April 6, 2026
 
 Generated: 2026-04-06T11:51Z | Phase 3 AM-Auto

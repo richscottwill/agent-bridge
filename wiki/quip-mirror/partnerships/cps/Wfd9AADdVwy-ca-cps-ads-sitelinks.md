@@ -1,12 +1,20 @@
 ---
-quip_id: Wfd9AADdVwy
-title: "CA CPS - Ad and Sitelinks"
-source_url: https://quip-amazon.com/Wfd9AADdVwy
-doc_type: spreadsheet
+audience: amazon-internal
 creator: Richard Williams
-quip_folder: Partnerships/CPS
-topics: [CA, CPS, ad-copy, sitelinks, Google-Ads]
+doc_type: spreadsheet
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/CPS
+quip_id: Wfd9AADdVwy
+source_url: https://quip-amazon.com/Wfd9AADdVwy
+status: DRAFT
+title: CA CPS - Ad and Sitelinks
+topics:
+- CA
+- CPS
+- ad-copy
+- sitelinks
+- Google-Ads
 ---
 
 # CA CPS - Ad and Sitelinks

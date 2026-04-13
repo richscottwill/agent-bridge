@@ -13,7 +13,12 @@ sharepoint:
   #   macOS:  ~/Library/CloudStorage/OneDrive-Amazon/SharePoint/WikiSync
   #   Linux:  ~/OneDrive/SharePoint/WikiSync
   #   Or use a local staging folder: ~/shared/tools/sharepoint-sync/output
-  output_path: "c:/Users/prichwil/OneDrive - amazon.com/Artifacts/wiki-sync"
+  # Local staging directory — .docx files land here before MCP upload.
+  # The old Windows OneDrive path was: c:/Users/prichwil/OneDrive - amazon.com/Artifacts/wiki-sync
+  output_path: "~/shared/tools/sharepoint-sync/output"
+  # SharePoint upload target (used by sp-upload.py)
+  sp_library: "Documents"
+  sp_folder: "Artifacts/wiki-sync"
 
 sync:
   # Only "directory" mode is supported with OneDrive sync.

@@ -1,4 +1,13 @@
+---
+title: "MCS / Polaris Brand LP Coordination"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0205 | duck_id: meeting-mcs-polaris-rollout -->
+
 # MCS / Polaris Brand LP Coordination
 
 ## Metadata

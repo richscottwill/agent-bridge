@@ -1,4 +1,13 @@
+---
+title: "Archive"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0114 | duck_id: context-README -->
+
 # Archive
 
 Files moved here are no longer actively maintained but kept for reference.

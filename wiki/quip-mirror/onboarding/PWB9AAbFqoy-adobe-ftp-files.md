@@ -1,13 +1,19 @@
 ---
-quip_id: PWB9AAbFqoy
-title: "Adobe FTP files"
-source_url: https://quip-amazon.com/PWB9AAbFqoy
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2026-03-26
-quip_folder: Onboarding/Data
-topics: [onboarding, data, analytics]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Onboarding/Data
+quip_id: PWB9AAbFqoy
+source_url: https://quip-amazon.com/PWB9AAbFqoy
+status: DRAFT
+title: Adobe FTP files
+topics:
+- onboarding
+- data
+- analytics
 ---
 
 # Adobe FTP Files

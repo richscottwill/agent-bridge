@@ -1,13 +1,19 @@
 ---
-quip_id: QTb9AASIOQn
-title: "CA MCS Updates"
-source_url: https://quip-amazon.com/QTb9AASIOQn
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-11-13
-quip_folder: Partnerships/CPS/CA
-topics: [cps, canada, partnerships]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/CPS/CA
+quip_id: QTb9AASIOQn
+source_url: https://quip-amazon.com/QTb9AASIOQn
+status: DRAFT
+title: CA MCS Updates
+topics:
+- cps
+- canada
+- partnerships
 ---
 
 # CA MCS Updates

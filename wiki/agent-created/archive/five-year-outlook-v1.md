@@ -1,4 +1,13 @@
+---
+title: "Paid Search Five-Year Outlook: 2026–2030"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0437 | duck_id: wiki-five-year-outlook -->
+
 ---
 title: "Paid Search Five-Year Outlook: 2026–2030"
 slug: "five-year-outlook"

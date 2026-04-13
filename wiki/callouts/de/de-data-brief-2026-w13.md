@@ -1,4 +1,13 @@
+---
+title: "DE W13 Data Brief"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0030 | duck_id: callout-de-data-brief-2026-w13 -->
+
 # DE W13 Data Brief
 
 ## Headline numbers

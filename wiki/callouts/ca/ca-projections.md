@@ -1,4 +1,13 @@
+---
+title: "CA Monthly Projections"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0021 | duck_id: callout-ca-projections -->
+
 # CA Monthly Projections
 
 Tracks weekly projections vs actuals. Updated each week by the analyst agents.

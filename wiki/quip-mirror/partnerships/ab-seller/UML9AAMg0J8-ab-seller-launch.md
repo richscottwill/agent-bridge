@@ -1,13 +1,18 @@
 ---
-quip_id: UML9AAMg0J8
-title: "2023.01_AB-Seller_Launch"
-source_url: https://quip-amazon.com/UML9AAMg0J8
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-02-06
-quip_folder: Partnerships/AB Seller
-topics: [ab-seller, partnerships]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/AB Seller
+quip_id: UML9AAMg0J8
+source_url: https://quip-amazon.com/UML9AAMg0J8
+status: DRAFT
+title: 2023.01_AB-Seller_Launch
+topics:
+- ab-seller
+- partnerships
 ---
 
 # 2023.01 AB-Seller Launch

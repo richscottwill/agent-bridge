@@ -1,4 +1,13 @@
+---
+title: "Bi-Weekly Google + AB Performance Sync"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0204 | duck_id: meeting-google-ab-performance -->
+
 # Bi-Weekly Google + AB Performance Sync
 
 ## Metadata

@@ -1,4 +1,13 @@
+---
+title: "WW — W12 (Mar 15–21)"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0102 | duck_id: callout-ww-summary-2026-w12 -->
+
 # WW — W12 (Mar 15–21)
 
 WW drove 15.8K registrations (-4% WoW), with -9% spend WoW. CPA improved to $72 (-5% WoW). March is projected to end at $5.2M spend and 67.8K registrations. (vs. OP2: flat spend, +11% registrations)

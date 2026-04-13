@@ -1,13 +1,19 @@
 ---
-quip_id: Aee9AAqhAAa
-title: "US CPS - Paid Search"
-source_url: https://quip-amazon.com/Aee9AAqhAAa
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-02-15
-quip_folder: Partnerships/CPS/US
-topics: [cps, united-states, partnerships]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/CPS/US
+quip_id: Aee9AAqhAAa
+source_url: https://quip-amazon.com/Aee9AAqhAAa
+status: DRAFT
+title: US CPS - Paid Search
+topics:
+- cps
+- united-states
+- partnerships
 ---
 
 # US CPS - Paid Search

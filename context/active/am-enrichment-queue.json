@@ -1,150 +1,54 @@
 {
-  "generated": "2026-04-10T16:15:00Z",
-  "phases": ["2B", "2C", "3A"],
+  "generated_at": "2026-04-13T16:50:00Z",
+  "generated_by": "am-backend-parallel",
 
-  "overdue_triage": {
-    "description": "Tasks 7+ days overdue requiring kill-or-revive decision",
-    "items": [
-      {
-        "task_gid": "1213531814325315",
-        "name": "Make changes to AU/MX/PAM for the week",
-        "days_overdue": 23,
-        "due_on": "2026-03-18",
-        "project": "My Tasks",
-        "proposal": "KILL",
-        "rationale": "23 days overdue, weekly recurring pattern. This week's version should be a fresh task if still needed. The original is stale beyond recovery."
-      },
-      {
-        "task_gid": "1213917967984980",
-        "name": "Respond to Lena — AU LP URL analysis + CPA methodology",
-        "days_overdue": 7,
-        "due_on": "2026-04-03",
-        "project": "AU",
-        "proposal": "REVIVE",
-        "rationale": "Still highly relevant — Brandon is actively defending Richard's PS ownership to Lena in email thread. Reply reinforces ownership narrative. Reset due to today."
-      },
-      {
-        "task_gid": "1213959904341162",
-        "name": "Reply to Brandon — PAM budget needs assessment",
-        "days_overdue": 4,
-        "due_on": "2026-04-06",
-        "project": "My Tasks",
-        "proposal": "REVIVE",
-        "rationale": "Critical — Brandon's direct @mention 7d unanswered. Budget decision pending. Confirm if resolved at offsite, otherwise reply today."
-      }
-    ]
-  },
-
-  "bucket_cap_demotions": {
-    "description": "Buckets over cap — lowest-priority tasks proposed for Backlog demotion",
-    "buckets": [
-      {
-        "bucket": "Sweep",
-        "current": 9,
-        "cap": 5,
-        "over_by": 4,
-        "demotion_candidates": [
-          "Tasks with Priority_RW = Not urgent in Sweep bucket are first candidates",
-          "Tasks overdue 7+ days in Sweep → kill-or-revive (see overdue_triage)"
-        ],
-        "note": "Frontend should present Sweep task list sorted by due date for Richard to pick 4 to demote"
-      },
-      {
-        "bucket": "Core",
-        "current": 5,
-        "cap": 4,
-        "over_by": 1,
-        "note": "1 task over cap. Frontend should present for Richard to pick 1 to demote or defer."
-      },
-      {
-        "bucket": "Engine Room",
-        "current": 7,
-        "cap": 6,
-        "over_by": 1,
-        "note": "1 task over cap. Frontend should present for Richard to pick 1 to demote."
-      },
-      {
-        "bucket": "Admin",
-        "current": 4,
-        "cap": 3,
-        "over_by": 1,
-        "note": "1 task over cap. Frontend should present for Richard to pick 1 to demote."
-      }
-    ]
-  },
-
-  "my_tasks_enrichment": {
-    "description": "Proposals for tasks missing enrichment fields (Phase 3A)",
-    "stats": {
-      "tasks_missing_kiro_rw": 62,
-      "tasks_missing_next_action_rw": 62,
-      "today_tasks_count": 9
-    },
-    "today_tasks_proposals": [
-      {
-        "task_name": "Get Enhanced Match details",
-        "due_on": "2026-04-07",
-        "days_overdue": 3,
-        "proposed_next_action": "Email Abdul for Enhanced Match legal requirements and LiveRamp integration details",
-        "proposed_kiro": "[4/10] 3d overdue. Blocked on Abdul's response. Check if discussed at offsite."
-      },
-      {
-        "task_name": "Refmarker mapping audit PoC — AU (old)",
-        "due_on": "2026-04-07",
-        "days_overdue": 3,
-        "proposed_next_action": "Check if superseded by newer Refmarker mapping audit PoC — AU task. If so, complete this one.",
-        "proposed_kiro": "[4/10] 3d overdue. May be duplicate of newer refmarker task due 4/10."
-      },
-      {
-        "task_name": "Brandon 1:1: Obtain TPS checklist from Abdul for F90 audience",
-        "due_on": "2026-04-07",
-        "days_overdue": 3,
-        "proposed_next_action": "Slack Abdul for TPS checklist. If discussed at offsite, log outcome and complete.",
-        "proposed_kiro": "[4/10] 3d overdue. Brandon 1:1 prep item. Check if resolved at Austin offsite."
-      },
-      {
-        "task_name": "Deep Dive: Add IECCP FAQ to new account playbook",
-        "due_on": "2026-04-09",
-        "days_overdue": 1,
-        "proposed_next_action": "Draft FAQ section from ie%CCP Planning Framework wiki article. 30-min Core block.",
-        "proposed_kiro": "[4/10] 1d overdue. Source material exists in published wiki article."
-      },
-      {
-        "task_name": "Brandon 1:1: Reframe AdWords KB ticket as risk mitigation",
-        "due_on": "2026-04-09",
-        "days_overdue": 1,
-        "proposed_next_action": "Draft 3-sentence risk framing for Brandon. Reference KB ticket impact on campaign management.",
-        "proposed_kiro": "[4/10] 1d overdue. Brandon 1:1 prep item."
-      },
-      {
-        "task_name": "Send IECCP follow-up summary to Lorena + review keyword data",
-        "due_on": "2026-04-09",
-        "days_overdue": 1,
-        "proposed_next_action": "Draft IECCP summary email to Lorena. Pull keyword data from DuckDB for MX review.",
-        "proposed_kiro": "[4/10] 1d overdue. MX project task. Lorena expecting follow-up."
-      },
-      {
-        "task_name": "Deep Dive: Finalize market expansion playbook",
-        "due_on": "2026-04-09",
-        "days_overdue": 1,
-        "proposed_next_action": "Review Cross-Market Playbook wiki article. Identify gaps for finalization.",
-        "proposed_kiro": "[4/10] 1d overdue. Core deep work. Source material in wiki."
-      },
-      {
-        "task_name": "Refmarker mapping audit PoC — AU",
-        "due_on": "2026-04-10",
-        "days_overdue": 0,
-        "proposed_next_action": "Pull refmarker data from AU campaigns. Build PoC mapping in spreadsheet.",
-        "proposed_kiro": "[4/10] Due today. AU project task. Lena-initiated, Brandon assigned Richard as PoC."
-      },
-      {
-        "task_name": "Monthly: Individual Goals update",
-        "due_on": "2026-04-10",
-        "days_overdue": 0,
-        "proposed_next_action": "Update Kingpin goals with April progress. 15-min Admin block.",
-        "proposed_kiro": "[4/10] Due today. Monthly recurring admin task."
-      }
+  "my_tasks": {
+    "bucket_cap_violations": [
+      {"bucket": "Sweep", "count": 6, "cap": 5, "over_by": 1, "proposal": "Demote lowest-priority Sweep task to Backlog"},
+      {"bucket": "Core", "count": 10, "cap": 4, "over_by": 6, "proposal": "Review Core tasks — 6 over cap. Demote or reschedule non-urgent items."},
+      {"bucket": "Engine Room", "count": 15, "cap": 6, "over_by": 9, "proposal": "Engine Room severely over cap. Triage: which are truly this week?"},
+      {"bucket": "Admin", "count": 4, "cap": 3, "over_by": 1, "proposal": "Demote lowest-priority Admin task to Backlog"}
     ],
-    "note": "62 tasks missing Kiro_RW and Next_Action_RW. Frontend should present batch enrichment option to Richard — agent can propose values for top-priority tasks first."
-  }
+    "enrichment_proposals": [],
+    "notes": "All Today/Urgent tasks with Routine already have Kiro_RW and Next_Action. 48 Backlog/unset tasks missing enrichment — low priority."
+  },
+
+  "overdue_kill_or_revive": [
+    {
+      "task_gid": "1213530860284714",
+      "name": "Page Creation - Duplicate Beauty and Auto page for MX",
+      "project": "MX",
+      "days_overdue": 21,
+      "priority_rw": null,
+      "routine_rw": null,
+      "proposal": "KILL or REVIVE? 21d overdue, no priority, no routine. Blocked by Vijeth footer. Decision needed."
+    },
+    {
+      "task_gid": "1212988092117041",
+      "name": "Paid App",
+      "project": "WW Testing",
+      "days_overdue": 13,
+      "priority_rw": "Urgent",
+      "routine_rw": "Engine Room",
+      "proposal": "REVIVE with new due date? 13d overdue but marked Urgent."
+    },
+    {
+      "task_gid": "1213341921686564",
+      "name": "Testing Document for Kate",
+      "project": "WW Testing",
+      "days_overdue": 12,
+      "priority_rw": "Urgent",
+      "routine_rw": "Core",
+      "proposal": "REVIVE — L1 gate blocker. Hard thing. Calendar block today at 9:30a. Set new due date."
+    },
+    {
+      "task_gid": "1213917967984980",
+      "name": "Respond to Lena — AU LP URL analysis + CPA methodology",
+      "project": "AU",
+      "days_overdue": 10,
+      "priority_rw": "Urgent",
+      "routine_rw": "Sweep",
+      "proposal": "REVIVE with today's date. 10d overdue — stakeholder response."
+    }
+  ]
 }

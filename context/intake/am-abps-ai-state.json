@@ -1,18 +1,34 @@
 {
-  "generated_at": "2026-04-09T13:15:00Z",
+  "generated_at": "2026-04-13T13:40:00Z",
   "generated_by": "am-backend-parallel",
-
-  "pipeline_state": {
-    "Intake": 3,
-    "In Progress": 0,
-    "Review": 42,
-    "Active": 0,
-    "Archive": 0
+  "content_project": {
+    "intake": {
+      "count": 3,
+      "tasks": [
+        "Approve: AU Paid Search Market Wiki",
+        "Approve: Enhanced Match / LiveRamp",
+        "Approve: OCI Execution Guide"
+      ]
+    },
+    "in_progress": {"count": 0, "tasks": []},
+    "review": {
+      "count": 41,
+      "sample": [
+        "AB Paid Search Program Wiki",
+        "AEO / AI Overviews POV",
+        "AI Max Test Design — US Market",
+        "AU Keyword CPA Dashboard",
+        "Enhanced Match / LiveRamp",
+        "F90 Lifecycle Program Strategy"
+      ]
+    },
+    "active": {"count": 0, "tasks": []},
+    "archive": {"count": 0, "tasks": []}
   },
-
-  "untriaged_intake": 3,
-  "near_due_escalated": 0,
-  "overdue_flagged": 0,
-
-  "notes": "42 tasks in Review — bulk from initial pipeline load. 3 in Intake awaiting triage. No near-due or overdue ABPS AI tasks."
+  "pipeline_health": {
+    "bottleneck": "Review section (41 tasks). No articles moving to Active. Critic pipeline may need attention.",
+    "intake_triage_needed": true,
+    "near_due_escalations": [],
+    "overdue_flags": []
+  }
 }

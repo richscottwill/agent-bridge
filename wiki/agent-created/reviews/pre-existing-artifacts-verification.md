@@ -1,4 +1,13 @@
+---
+title: "Pre-Existing Artifacts Verification"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0491 | duck_id: wiki-review-pre-existing-artifacts-verification -->
+
 # Pre-Existing Artifacts Verification
 
 **Date:** 2026-03-25

@@ -1,4 +1,13 @@
+---
+title: "Final Synthesis Review: Paid Search Testing Approach & Year Ahead"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0477 | duck_id: wiki-review-kate-doc-synthesis-final-review -->
+
 # Final Synthesis Review: Paid Search Testing Approach & Year Ahead
 
 **Reviewer:** wiki-critic

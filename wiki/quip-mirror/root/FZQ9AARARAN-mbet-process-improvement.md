@@ -1,13 +1,19 @@
 ---
-quip_id: FZQ9AARARAN
-title: "MBet Process Improvement"
-source_url: https://quip-amazon.com/FZQ9AARARAN
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-09-04
-quip_folder: root
-topics: [process, finance, po-management]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: root
+quip_id: FZQ9AARARAN
+source_url: https://quip-amazon.com/FZQ9AARARAN
+status: DRAFT
+title: MBet Process Improvement
+topics:
+- process
+- finance
+- po-management
 ---
 
 # MBet Process Improvement

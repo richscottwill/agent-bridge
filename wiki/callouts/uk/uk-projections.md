@@ -1,4 +1,13 @@
+---
+title: "UK Monthly Projections"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0091 | duck_id: callout-uk-projections -->
+
 # UK Monthly Projections
 
 Tracks weekly projections vs actuals. Updated each week by the analyst agents.

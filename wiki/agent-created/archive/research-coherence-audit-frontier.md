@@ -1,4 +1,13 @@
+---
+title: "Research: Frontier Practices for Self-Improving Agent Systems"
+status: archived
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0141 | duck_id: context-research-coherence-audit-frontier -->
+
 # Research: Frontier Practices for Self-Improving Agent Systems
 
 *Intake file for processing into body organs. Research conducted 2026-03-20 for the monthly coherence audit protocol.*

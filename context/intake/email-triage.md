@@ -1,46 +1,50 @@
-# Email Triage — 2026-04-10
+# Email Triage — 2026-04-13
 
 ## High Priority (respond)
-- **AU PS Weekly Update** from Brandon Munday (2d) — Brandon defending Richard's PS ownership to Lena: "Richard is running Paid Search, so I ask we keep the communication on PS performance with Richard." UNREAD — needs Richard's follow-up reply to Lena thread.
-- **Reminder: SSR Cost and Reg inputs for IECCP** from Stacey Gu (4d) — Forwarded from York Chen. SSR Cost and Reg inputs needed. UNREAD — check if Richard has PS inputs due.
+- **Reminder: SSR Cost and Reg inputs for IECCP** from Stacey Gu (7d ago) — Forwarded from York Chen. IECCP cost/reg inputs needed. Check if Richard's input is still outstanding.
+- **ACTION REQUIRED: FY26 April RO Input - Due [Apr 15th]** from Lisa Moussa (3d ago) — CPS budget transfer request. Due Apr 15. Check if PS input needed.
 
 ## High Priority (review)
-- **Weekly Paid Acq Team Meeting** from Brandon Munday (today) — Zoom meeting link for today's team meeting. UNREAD.
-- **EU Paid Channels Update | Blockers & Support Needed** from Brandon Munday (3d) — LiveRamp disconnect between ENG stakeholders (Kristine/Daron vs Clara). Abdul had opportunity list. UNREAD.
-- **MX Paid Search Sync** from Lorena Alvarez Larrea (4d) — MX sync meeting update. Read.
-- **HOLD: Testing Approach & Year Ahead** from Kate Rundell (7d) — "Declining per email thread." Kate's calendar hold declined. Read.
+- **Richard/Brandon 1:1** from Brandon Munday (today) — Zoom link for 1:1. Calendar invite update.
+- **AU PS Weekly Update** from Brandon Munday (3d ago) — Brandon replied to Lena re: PS & MCS cohesive plan. 3 unread messages in thread.
+- **PSME Seattle Happy Hour** from Todd Heimes (3d ago) — Team party Apr 23, 3-5 PM PT at Flight Club Seattle. RSVP.
+- **[EXTERNAL] AMO Access Levels** from Brandon Munday (3d ago) — Brandon asking Jen about limited Ad Cloud access. FYI.
+- **Search Marketing WBR Deck** from Brandon Munday (3d ago) — FYI: WBR deck data from Vasili. Has attachments. 1 unread.
+- **[EXTERNAL] Mike for AE!** from Brandon Munday (3d ago) — Fun team email. No action needed.
+- **EU Paid Channels Update | Blockers & Support Needed** from Brandon Munday (6d ago) — LiveRamp disconnect between ENG stakeholders. 1 unread.
+- **MX Paid Search Sync** from Lorena Alvarez Larrea (7d ago) — MX sync thread. Empty preview.
 
-## Medium Priority (respond)
-- **AU Paid Search / MCS Updates** from Dwayne Palmer (3d) — Dwayne starting thread with PS team re: AU PS and MCS workstreams, Polaris page results. UNREAD — Richard should weigh in on PS perspective.
+## Medium Priority (review)
+- **AU Paid Search / MCS Updates** from Dwayne Palmer (6d ago) — Dwayne starting AU PS/MCS thread with Lena. Polaris results shared.
 
 ## Low / No Action
-- ACTION REQUIRED: FY26 April RO Input - Due [Apr 15th] from Lisa Moussa — CPS budget transfer request (not PS-relevant)
+- Monday Brief — April 13, 2026 from Richard Williams — Self-sent daily brief
+- Friday Brief — April 10, 2026 from Richard Williams — Self-sent daily brief
 - Thursday Brief — April 9, 2026 from Richard Williams — Self-sent daily brief
 - Wednesday Brief — April 8, 2026 from Richard Williams — Self-sent daily brief
-- V-CARE Data Study *Cupcake* from V-CARE — Automated recruitment survey
-- [EXTERNAL] National Parking Control from Sam Keilthy — External spam
 - Tuesday Brief — April 7, 2026 from Richard Williams — Self-sent daily brief
-- V-CARE Data Study *Parakeet* from V-CARE — Automated recruitment survey
-- Biweekly AB Onsite Events from Joshua Braziel — Meeting canceled, restarting next week
-- Final reminder: Amazon Communications Survey — Expired survey (due Apr 7)
-- Monday Brief — Apr 6 (x2) from Richard Williams — Self-sent daily briefs
-- AWS Password Updated (x2) from AWS — Automated notification
-- NA AB Big Spring Sale Financial Update from Joshua Braziel — FYI broadcast
-- REMINDER: Prime Day Creative Inputs Due from Jonathan Anderson — Phase 4 inputs (check if PS had any)
-- Reminder: Amazon Communications Survey — Expired survey
-- Corporate Access Request Approved — Automated (AUS-3-CAMPUS access)
-- Member added to list: baloo-ea-phase1 from ELMO — Automated list add
+- Monday Brief — Apr 6 from Richard Williams — Self-sent daily brief
+- [2-2841000041098] Google Ads Support from Spike Gronim — Account access request, Spike handling
+- New Smart Home Beta Testing from Zadka Mikelson — Beta invite, not relevant
+- V-CARE Pelican from V-CARE Team — Automated study invite
+- V-CARE Cupcake from V-CARE Team — Automated study invite
+- V-CARE Parakeet from V-CARE Team — Automated study invite
+- [EXTERNAL] National Parking Control from Sam Keilthy — External spam
+- Biweekly AB Onsite Events from Joshua Braziel — Canceled this week, restarting next week
+- Amazon Communications Survey from Survey Team — Expired survey reminder
 
-## Today's Calendar — Fri Apr 10, 2026
-
-| Time | Meeting | Organizer | Location |
-|------|---------|-----------|----------|
-| All day | peteocam@ OOTO - Apr 07 - Apr 15 | Peter Ocampo | — |
-| All day | Jeff OOTO | Jeff Twining | — |
-| Apr 9 3:30p–5:30p PT | [Confirmed] AB x Google Dinner | Mike Babich | Canje, 1914 E 6th St, Austin TX |
-
-Note: Light calendar day — no scheduled meetings. Peter and Jeff both OOO. Google dinner was last night (Apr 9 evening). Richard may still be in Austin from Google Search Summit.
+## Today's Calendar
+| Time (PT) | Meeting | Organizer | Location |
+|-----------|---------|-----------|----------|
+| All Day | peteocam@ OOTO - Apr 07-15 | Peter Ocampo | — |
+| 8:00a–8:45a | Demo: Traffic Dataset on GenBI | Mukesh Gupta | Zoom |
+| 9:00a–9:30a | ACQ Promo OHs | Saajan Chowhan | Zoom |
+| 9:30a–10:15a | 🎯 HARD THING: Testing Approach v5 → Brandon | Richard Williams | — |
+| 10:15a–10:45a | 🧹 Sweep: IECCP summary to Lorena + Refmarker audit | Richard Williams | — |
+| 11:30a–12:30p | 📋 Admin: Paid App PO — Create Q2 + Amend Google PO | Richard Williams | — |
+| 1:00p–1:45p | Project Baloo Early Access Sessions 1 | Aarushi Jamwal | Ruby 02.406 / Zoom |
+| 2:00p–2:45p | ⚙️ Engine Room: WBR callouts (W14) + AU agenda | Richard Williams | — |
+| 2:00p–2:30p | Reminder: Update Weekly Callouts | Brandon Munday | — |
 
 ---
-Synced: 2026-04-10T15:28 UTC | 25 emails | 6 high / 1 medium / 18 low | 3 calendar events
-DuckDB: ✅ signals.emails (25 rows) | ✅ main.calendar_events (3 rows) | ✅ ops.data_freshness updated
+Synced: 2026-04-13 ~9:15 AM PT | 25 emails processed | 9 calendar events | 10 high / 1 medium / 14 low

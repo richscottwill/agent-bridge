@@ -1,4 +1,13 @@
+---
+title: "FR Paid Search — Market Context"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0048 | duck_id: callout-fr-context -->
+
 # FR Paid Search — Market Context
 
 Last updated: 2026-03-30

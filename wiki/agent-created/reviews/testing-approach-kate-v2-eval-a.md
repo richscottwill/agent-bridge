@@ -1,4 +1,13 @@
+---
+title: "Review: Paid Search Testing Approach & Year Ahead (Blind Eval A)"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0494 | duck_id: wiki-review-testing-approach-kate-v2-eval-a -->
+
 # Review: Paid Search Testing Approach & Year Ahead (Blind Eval A)
 
 **Reviewer:** wiki-critic (Blind Eval A — no prior reviews seen)

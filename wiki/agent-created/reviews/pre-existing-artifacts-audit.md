@@ -1,4 +1,13 @@
+---
+title: "Pre-Existing Artifacts Audit"
+status: DRAFT
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0490 | duck_id: wiki-review-pre-existing-artifacts-audit -->
+
 # Pre-Existing Artifacts Audit
 
 **Date:** 2026-03-25

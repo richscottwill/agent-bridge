@@ -1,13 +1,19 @@
 ---
-quip_id: LJb9AAugth6
-title: "2024.12.10 - IT Bid Modifiers Test"
-source_url: https://quip-amazon.com/LJb9AAugth6
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2025-02-18
-quip_folder: Testing/.EU
-topics: [testing, europe, paid-search]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Testing/.EU
+quip_id: LJb9AAugth6
+source_url: https://quip-amazon.com/LJb9AAugth6
+status: DRAFT
+title: 2024.12.10 - IT Bid Modifiers Test
+topics:
+- testing
+- europe
+- paid-search
 ---
 
 # 2024.12.10 - IT Bid Modifiers Test

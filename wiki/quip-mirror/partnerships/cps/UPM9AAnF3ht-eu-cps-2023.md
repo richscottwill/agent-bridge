@@ -1,13 +1,19 @@
 ---
-quip_id: UPM9AAnF3ht
-title: "EU CPS 2023"
-source_url: https://quip-amazon.com/UPM9AAnF3ht
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-01-04
-quip_folder: Partnerships/CPS/EU
-topics: [cps, europe, partnerships]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/CPS/EU
+quip_id: UPM9AAnF3ht
+source_url: https://quip-amazon.com/UPM9AAnF3ht
+status: DRAFT
+title: EU CPS 2023
+topics:
+- cps
+- europe
+- partnerships
 ---
 
 # EU CPS 2023

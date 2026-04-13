@@ -1,13 +1,19 @@
 ---
-quip_id: JOK9AAJ1qah
-title: "CPS meeting notes"
-source_url: https://quip-amazon.com/JOK9AAJ1qah
-doc_type: document
+audience: amazon-internal
 creator: Richard Williams
+doc_type: document
 last_modified: 2024-08-20
-quip_folder: Partnerships/CPS
-topics: [cps, enterprise, partnerships]
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/CPS
+quip_id: JOK9AAJ1qah
+source_url: https://quip-amazon.com/JOK9AAJ1qah
+status: DRAFT
+title: CPS meeting notes
+topics:
+- cps
+- enterprise
+- partnerships
 ---
 
 # CPS Meeting Notes

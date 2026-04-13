@@ -1,4 +1,13 @@
+---
+title: "Paid Search Testing Framework: From Validated Results to Scalable Growth"
+status: REVIEW
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-12
+updated: 2026-04-12
+---
 <!-- DOC-0373 | duck_id: research-op1-ps-testing-framework-draft -->
+
 # Paid Search Testing Framework: From Validated Results to Scalable Growth
 
 This document establishes the technical foundation for OP1 by detailing the evolution of the Paid Search testing framework. Last year's tests have become this year's baseline; this approach ensures that 2026 investments are grounded in validated performance rather than speculation. By building on the cumulative effect of last year's results, the team has established a baseline that will unlock a more scalable, automated, and audience-centric acquisition engine in 2026.

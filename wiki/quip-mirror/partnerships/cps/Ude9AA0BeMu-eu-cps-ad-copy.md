@@ -1,12 +1,24 @@
 ---
-quip_id: Ude9AA0BeMu
-title: "EU CPS Ad Copy"
-source_url: https://quip-amazon.com/Ude9AA0BeMu
-doc_type: spreadsheet
+audience: amazon-internal
 creator: Yun-Kang Chu
-quip_folder: Partnerships/CPS
-topics: [EU, CPS, ad-copy, localization, UK, DE, FR, IT, ES]
+doc_type: spreadsheet
 mirror_date: 2026-04-10
+owner: Richard Williams
+quip_folder: Partnerships/CPS
+quip_id: Ude9AA0BeMu
+source_url: https://quip-amazon.com/Ude9AA0BeMu
+status: DRAFT
+title: EU CPS Ad Copy
+topics:
+- EU
+- CPS
+- ad-copy
+- localization
+- UK
+- DE
+- FR
+- IT
+- ES
 ---
 
 # EU CPS Ad Copy

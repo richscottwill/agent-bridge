@@ -117,17 +117,23 @@ Graduation is not a date — it's evidence. The nervous system (Loop 6) tracks t
 
 ## OP1 Strategic Narrative
 
-Core argument: Every 2026 investment maps to a validated 2025 signal. PS transforming from keyword-driven to automated, audience-centric engine. Cross-functional collaboration is the differentiator. 5 workstreams (OCI Bidding, Modern Search, Audiences, User Experience, Algorithmic Ads), each problem→test→result→scale. Full draft: `~/shared/wiki/research/op1-ps-testing-framework-draft.md`.
+**Thesis:** 2026 investments are justified by validated 2025 signals — no speculative bets. PS is shifting from keyword-driven execution to an automated, audience-centric engine. The differentiator is cross-functional collaboration (MarTech, Legal, Data Science, MCS, ABMA).
+
+**Structure:** 5 workstreams, each following problem→test→result→scale:
+1. OCI Bidding  2. Modern Search  3. Audiences  4. User Experience  5. Algorithmic Ads
+
+Full draft: `~/shared/wiki/research/op1-ps-testing-framework-draft.md`
 
 ---
 
 ## Leverage Assessment Framework
 
-When multiple tasks compete for a spot, apply these tiebreakers:
-- **Strategic artifacts > tactical execution:** a test design doc beats a sitelink update.
-- **Compounding work > one-and-done work:** a playbook beats a single campaign build.
-- **Visibility work > invisible work:** a Kingpin update beats internal cleanup.
-- **Automation opportunities > manual repetition:** if a task keeps recurring, flag it as a tool candidate.
-- **30-day test:** "Will this matter in 30 days?" If no, don't let it take a Core slot over something that compounds.
+| # | Tiebreaker | Example |
+|---|-----------|---------|
+| 1 | Strategic artifacts > tactical execution | Test design doc beats sitelink update |
+| 2 | Compounding > one-and-done | Playbook beats single campaign build |
+| 3 | Visibility > invisible | Kingpin update beats internal cleanup |
+| 4 | Automation > manual repetition | Recurring task → flag as tool candidate |
+| 5 | 30-day test: "Will this matter in 30 days?" | If no, don't let it take a Core slot |
 
-**Worked example:** Richard has 3 tasks competing for a Core slot: (1) update MX sitelinks, (2) draft Testing Approach doc for Kate, (3) fix a broken Asana automation. Apply tiebreakers: #2 is a strategic artifact (beats #1 tactical), compounds (reusable framework), and is visibility work (Kate sees it). #3 is automation but one-and-done fix. #1 fails the 30-day test. Winner: #2.
+**Worked example:** 3 tasks compete for Core: (1) update MX sitelinks, (2) draft Testing Approach doc for Kate, (3) fix broken Asana automation. #2 wins — strategic artifact (#1), compounds (#2), visibility to Kate (#3). #3 is one-and-done. #1 fails 30-day test (#5).
