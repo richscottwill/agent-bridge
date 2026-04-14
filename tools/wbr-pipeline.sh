@@ -9,7 +9,7 @@
 #   3. Score last week's predictions against this week's actuals
 #   4. Generate next-week/month/quarter projections (Brand/NB split + ie%CCP)
 #   5. Populate ps.forecast_tracker in MotherDuck (weekly/monthly/quarterly/year-end)
-#   6. Build ps-forecast-tracker.xlsx visual dashboard
+#   6. Update ps-forecast-tracker.xlsx (template-based, _Data sheet only)
 #   7. Push xlsx to SharePoint (Kiro-Drive + Dashboards)
 #   8. Output: callout drafts, data briefs, projection tables, WW summary
 #

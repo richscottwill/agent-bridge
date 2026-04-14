@@ -7,13 +7,35 @@ Database: `ps_analytics` (MotherDuck). Always use schema-qualified names.
 
 ---
 
-## Step 1 — Pull Inbox Emails
+## Step 1 — Pull Emails (All Folders, Date-Bounded)
+
+### Step 1A — Determine scan window
+
+Query `ops.data_freshness` for the last successful email sync date:
+
+```sql
+SELECT last_updated::DATE AS last_scan_date
+FROM ps_analytics.ops.data_freshness
+WHERE source_name = 'emails';
+```
+
+- If a row exists: `startDate` = that date (YYYY-MM-DD). This **includes** the last-scanned day to catch late-arriving emails.
+- If no row exists (first run): `startDate` = today minus 3 days as a safe bootstrap window.
+- `endDate` = today (YYYY-MM-DD).
+
+### Step 1B — Search all folders
 
 ```
-email_inbox(limit=25, unreadOnly=false)
+email_search(query="*", startDate="{startDate}", endDate="{endDate}", limit=250)
 ```
 
-This returns recent emails with: conversationId, topic (subject), senders, lastDeliveryTime, preview, unreadCount, hasAttachments.
+This searches across **all folders** (inbox, sent, custom folders, subfolders, newly created folders) and returns emails within the date window. Each result includes: conversationId, topic (subject), senders, lastDeliveryTime, preview, hasAttachments, folder.
+
+**Why `email_search` instead of `email_inbox`:** `email_inbox` only returns inbox emails. `email_search` with a date range covers every folder — including custom rules-based folders and any folder created after this protocol was written.
+
+**Why include the last-scanned day:** Emails can arrive late (server-side rules, delayed delivery, calendar invites updating). Re-scanning the overlap day with UPSERT ensures nothing is missed. The ON CONFLICT clause makes this idempotent.
+
+**Pagination:** If 250 results are returned (limit hit), increment `offset` by 250 and repeat until fewer than 250 results come back. In practice, a 1-3 day window rarely exceeds 250.
 
 ### Sender Priority Classification
 
@@ -52,7 +74,7 @@ INSERT INTO signals.emails (
     '{action_needed}',               -- from classification above
     '{preview first 200 chars}',
     {hasAttachments},
-    'inbox',
+    '{folder}',                      -- actual folder from email_search result (no longer hardcoded to inbox)
     NOW()
 )
 ON CONFLICT (email_id) DO UPDATE SET
@@ -169,18 +191,20 @@ Synced: {timestamp} | {total} emails processed | {high_count} high / {medium_cou
 
 - **Outlook MCP failure:** Log error to `~/shared/context/intake/email-sync-error-{date}.md`. Write empty email-triage.md with error note. Do NOT skip calendar sync if email fails (and vice versa).
 - **DuckDB write failure:** Log the specific SQL error. Retry once. If still failing, write the file output anyway and flag: "⚠️ DuckDB write failed for {table}. Data is in email-triage.md only."
-- **Empty inbox:** Valid state. Write 0 rows to DuckDB. Write email-triage.md with "No unread emails."
+- **Empty inbox:** Valid state. Write 0 rows to DuckDB. Write email-triage.md with "No emails in scan window."
+- **ops.data_freshness missing:** First run. Use startDate = today minus 3 days. The INSERT ON CONFLICT in Step 5 handles bootstrapping the row.
 - **Calendar API failure:** Log error. Email sync should still complete independently.
 
 ---
 
 ## Execution Order (mandatory)
 
-1. Pull emails (Outlook MCP)
-2. **Write emails to DuckDB** ← this is the step that was being skipped
-3. Pull calendar (Outlook MCP)
-4. **Write calendar to DuckDB** ← this is the step that was being skipped
-5. Update data freshness (DuckDB)
-6. Write email-triage.md (file)
+1. Query ops.data_freshness for last scan date (DuckDB)
+2. Pull emails across all folders since last scan date (Outlook MCP — `email_search`)
+3. **Write emails to DuckDB** ← this is the step that was being skipped
+4. Pull calendar (Outlook MCP)
+5. **Write calendar to DuckDB** ← this is the step that was being skipped
+6. Update data freshness (DuckDB)
+7. Write email-triage.md (file)
 
 DuckDB writes come BEFORE file output. If DuckDB fails, the file output still happens as fallback. But DuckDB is the primary target.

@@ -10,9 +10,9 @@ Run as part of WBR pipeline between ingestion and projections.
 Usage: python3 detect_regime_changes.py
 """
 import duckdb, os, uuid, re
-
-TOKEN = os.environ.get('MOTHERDUCK_TOKEN',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpY2hzY290dHdpbGxAZ21haWwuY29tIiwibWRSZWdpb24iOiJhd3MtdXMtZWFzdC0xIiwic2Vzc2lvbiI6InJpY2hzY290dHdpbGwuZ21haWwuY29tIiwicGF0IjoiVDNIYzFVQWYzT3o1bjVkLS03ckdHNlBjMlpUdVNNbFItT3RXMS1qNzVPUSIsInVzZXJJZCI6ImU2MDhlNDZiLTE4YzctNGE5Ny04M2I2LWE0N2ZhOThmNjBhYyIsImlzcyI6Im1kX3BhdCIsInJlYWRPbmx5IjpmYWxzZSwidG9rZW5UeXBlIjoicmVhZF93cml0ZSIsImlhdCI6MTc3NTQ0MzY0N30.tS0Cab3FQ8_CDZ1PqOo9z09KYHEUFHwuLVXRQrxcHig')
+sys_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
+import sys; sys.path.insert(0, sys_path)
+from prediction.config import MOTHERDUCK_TOKEN as TOKEN
 
 # Default impact estimates by change_type (priors)
 DEFAULTS = {

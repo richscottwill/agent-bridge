@@ -1,13 +1,13 @@
 {
   "enabled": true,
   "name": "Open Items Reminder",
-  "description": "At the start of each new chat session, scan ~/shared/context/intake/session-log.md for entries tagged OPEN, containing 'awaiting', 'pending', 'deferred', or 'not actioned'. Surface them as a brief reminder of unfinished items from prior sessions.",
-  "version": "1",
+  "description": "Every 3 hours, scan session-log.md for OPEN/deferred items and surface them as a brief reminder.",
+  "version": "2",
   "when": {
     "type": "promptSubmit"
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Before responding to the user's message, quickly scan ~/shared/context/intake/session-log.md for the most recent entries (last 7 days). Look for any items tagged OPEN, or containing words like 'awaiting', 'pending', 'deferred', 'not actioned', 'not yet built'. If you find any, prepend a brief 2-3 line reminder to your response: 'Open from prior sessions: [item1], [item2]...' If nothing is open, skip silently. Do NOT let this delay or block the user's actual request — it's a background check only."
+    "prompt": "Check if it has been more than 3 hours since you last surfaced open items (track this by checking if you've already shown open items in this conversation). If you have already shown them in this conversation, skip silently. If this is the first message in a new conversation OR it has been a long conversation (>3 hours), scan ~/shared/context/intake/session-log.md for the most recent entries (last 7 days). Look for any items tagged OPEN, or containing words like 'awaiting', 'pending', 'deferred', 'not actioned', 'not yet built'. If you find any, prepend a brief 2-3 line reminder to your response: 'Open from prior sessions: [item1], [item2]...' If nothing is open, skip silently. Do NOT let this delay or block the user's actual request — it's a background check only."
   }
 }

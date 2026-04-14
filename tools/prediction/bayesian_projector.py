@@ -453,13 +453,142 @@ class BayesianProjector:
 
     # ── Segment projection helper ──────────────────────────────────────
 
+    def _yoy_estimate(self, history: list, segment: str, target_week_num: int) -> float | None:
+        """Compute YoY-adjusted estimate using both level and trajectory.
+        
+        Two components blended 50/50:
+        1. Level: same week last year × median recent YoY growth ratio
+        2. Trajectory: applies last year's multi-week trend shape to this year's recent level.
+           e.g., if LY W14→W15→W16 went 100→95→105, that's a +10.5% move from W14→W16.
+           Apply that same shape to this year's W14 actual to project W16.
+        
+        Returns None if insufficient history (< 52 weeks).
+        """
+        metric_key = f'{segment}_regs'
+        
+        if len(history) < 56:
+            return None
+        
+        # Build lookup: period_key → regs value
+        lookup = {}
+        for w in history:
+            pk = w.get('period_key', '')
+            val = float(w.get(metric_key, 0) or 0)
+            if pk and val > 0:
+                lookup[pk] = val
+        
+        # --- Component 1: Level (same week LY × YoY growth) ---
+        target_key_ly = f'2025-W{target_week_num:02d}'
+        ly_value = lookup.get(target_key_ly)
+        
+        # Compute median YoY growth from recent weeks
+        yoy_ratios = []
+        for wk_offset in range(0, 8):
+            wk = target_week_num - 1 - wk_offset
+            if wk < 1:
+                break
+            cy_key = f'2026-W{wk:02d}'
+            ly_key = f'2025-W{wk:02d}'
+            cy_val = lookup.get(cy_key)
+            ly_val = lookup.get(ly_key)
+            if cy_val and ly_val and ly_val > 0:
+                yoy_ratios.append(cy_val / ly_val)
+        
+        level_est = None
+        if ly_value and ly_value > 0 and yoy_ratios:
+            yoy_ratios.sort()
+            median_yoy = yoy_ratios[len(yoy_ratios) // 2]
+            level_est = ly_value * median_yoy
+        
+        # --- Component 2: Trajectory (LY's week-over-week shape applied to CY) ---
+        # Look at a 5-week window around target week last year: [target-2 .. target+2]
+        # Compute the ratio of target week to the average of the 2 weeks before it
+        trajectory_est = None
+        ly_before = []
+        for offset in [1, 2, 3]:
+            wk = target_week_num - offset
+            if wk >= 1:
+                val = lookup.get(f'2025-W{wk:02d}')
+                if val and val > 0:
+                    ly_before.append(val)
+        
+        ly_target = lookup.get(target_key_ly)
+        
+        if ly_before and ly_target and ly_target > 0:
+            ly_before_avg = sum(ly_before) / len(ly_before)
+            if ly_before_avg > 0:
+                # Last year's shape: how did target week compare to preceding weeks?
+                ly_shape_ratio = ly_target / ly_before_avg
+                
+                # Apply same shape to this year's recent weeks
+                cy_before = []
+                for offset in [1, 2, 3]:
+                    wk = target_week_num - offset
+                    if wk >= 1:
+                        val = lookup.get(f'2026-W{wk:02d}')
+                        if val and val > 0:
+                            cy_before.append(val)
+                
+                if cy_before:
+                    cy_before_avg = sum(cy_before) / len(cy_before)
+                    trajectory_est = cy_before_avg * ly_shape_ratio
+        
+        # Blend level and trajectory (50/50 when both available)
+        if level_est and trajectory_est:
+            return (level_est + trajectory_est) / 2
+        elif level_est:
+            return level_est
+        elif trajectory_est:
+            return trajectory_est
+        else:
+            return None
+
+    def _recent_trend_estimate(self, history: list, segment: str, 
+                                target_week_num: int) -> float | None:
+        """Extrapolate from recent 6-week trend.
+        
+        Fits a simple linear trend to the last 6 weeks and projects forward 1 week.
+        Returns None if < 4 recent data points.
+        """
+        metric_key = f'{segment}_regs'
+        recent = [float(w.get(metric_key, 0) or 0) for w in history[:6]]
+        recent = [v for v in recent if v > 0]
+        
+        if len(recent) < 4:
+            return None
+        
+        # Recent is newest-first, reverse for regression (oldest=0, newest=n-1)
+        recent = list(reversed(recent))
+        n = len(recent)
+        mean_x = (n - 1) / 2.0
+        mean_y = sum(recent) / n
+        
+        ss_xy = sum((i - mean_x) * (v - mean_y) for i, v in enumerate(recent))
+        ss_xx = sum((i - mean_x) ** 2 for i in range(n))
+        
+        if ss_xx == 0:
+            return mean_y
+        
+        slope = ss_xy / ss_xx
+        # Project 1 step beyond the last point
+        return mean_y + slope * (n - mean_x)
+
     def _project_segment(self, history: list, segment: str,
                          target_week_num: int, seasonal_adj: float) -> SegmentForecast:
-        """Project a single segment (brand or nb) using BayesianCore."""
+        """Project a single segment (brand or nb) using multi-signal blending.
+        
+        Blends three signals:
+        1. Bayesian posterior × seasonal adjustment (structural model)
+        2. YoY-adjusted estimate (same week last year × recent YoY growth)
+        3. Recent trend extrapolation (6-week linear trend projected forward)
+        
+        Weights: Bayesian 40%, YoY 30%, Trend 30% (when all available).
+        Falls back gracefully when signals are missing.
+        """
         prefix = f'{segment}_'
         metric_key = f'{prefix}regs'
 
-        # Build history dicts for BayesianCore (it expects list of dicts with metric key)
+        # Build history dicts for BayesianCore
         hist_for_core = [{'value': float(w.get(metric_key, 0) or 0)} for w in reversed(history)]
         if not hist_for_core or all(h['value'] == 0 for h in hist_for_core):
             return SegmentForecast(regs=0, cost=0, cpa=0, clicks=0)
@@ -468,8 +597,34 @@ class BayesianProjector:
         recent_evidence = [{'value': float(w.get(metric_key, 0) or 0)} for w in history[:4]]
         posterior = self.core.update_posterior(prior, recent_evidence, self.calibration_factor)
 
-        base_regs = self.core.point_estimate(posterior, horizon=1)
-        adj_regs = max(0, base_regs * seasonal_adj)
+        # Signal 1: Bayesian posterior × seasonal
+        bayesian_est = max(0, self.core.point_estimate(posterior, horizon=1) * seasonal_adj)
+        
+        # Signal 2: YoY-adjusted estimate
+        yoy_est = self._yoy_estimate(history, segment, target_week_num)
+        
+        # Signal 3: Recent trend extrapolation
+        trend_est = self._recent_trend_estimate(history, segment, target_week_num)
+        
+        # Blend available signals
+        signals = []
+        weights = []
+        
+        signals.append(bayesian_est)
+        weights.append(0.4)
+        
+        if yoy_est is not None and yoy_est > 0:
+            signals.append(yoy_est)
+            weights.append(0.3)
+        
+        if trend_est is not None and trend_est > 0:
+            signals.append(trend_est)
+            weights.append(0.3)
+        
+        # Normalize weights
+        total_w = sum(weights)
+        adj_regs = sum(s * w / total_w for s, w in zip(signals, weights))
+        adj_regs = max(0, adj_regs)
 
         # Cost projection: use recent average cost-per-reg ratio
         recent_costs = [float(w.get(f'{prefix}cost', 0) or 0) for w in history[:8]]
@@ -716,19 +871,19 @@ class BayesianProjector:
         # Apply regime change prior shifts from ps.regime_changes
         try:
             regime_rows = self.con.execute(f"""
-                SELECT change_type, expected_impact_pct, confidence, change_date
+                SELECT change_type, expected_impact_pct, confidence, change_date, end_date
                 FROM ps.regime_changes
                 WHERE market = '{market}' AND metric_affected = 'registrations' AND active = TRUE
                 ORDER BY change_date
             """).fetchall()
             for rr in regime_rows:
-                change_type, impact_pct, conf, change_date = rr
+                change_type, impact_pct, conf, change_date, end_date = rr
                 # Only apply if the target week is AFTER the regime change
-                # Convert target_period_key (2026-W15) to approximate date
+                # AND before end_date (if set — regime changes can expire)
                 from datetime import date, timedelta
                 w1_start = date(2025, 12, 29)
                 target_date = w1_start + timedelta(weeks=target_week_num - 1)
-                if target_date >= change_date:
+                if target_date >= change_date and (end_date is None or target_date < end_date):
                     # Scale impact by confidence: full confidence = full impact
                     adj = 1.0 + (impact_pct * conf)
                     total_regs = max(0, round(total_regs * adj))

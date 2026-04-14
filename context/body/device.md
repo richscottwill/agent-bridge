@@ -5,7 +5,7 @@
 
 *Operating principle: Routine as liberation. Every delegation, template, and automation here exists to eliminate a decision Richard was making repeatedly. The test for a new device function: "Does this remove a recurring decision?" If yes, build it. If it just moves the decision, skip it.*
 
-Last updated: 2026-04-06 (DuckDB schema migration: 8 schemas replacing flat main, PS analytics data model built, steering file added)
+Last updated: 2026-04-13 (Forecast pipeline rebuild: _Data sheet architecture, regime changes, weighted predictions, template-based updater)
 
 ---
 
@@ -48,6 +48,28 @@ These are live. They execute without Richard thinking.
 
 ### Agent Bridge (Tool: `~/shared/tools/bridge/bridge.py`)
 - **What it does:** Google Sheets/Docs async message bus + context snapshots between Kiro and Richard's personal agent swarm.
+
+### WBR Forecast Pipeline (Tool: `~/shared/tools/wbr-pipeline.sh`)
+- **What it does:** End-to-end weekly pipeline: ingest WW Dashboard xlsx → sync to MotherDuck → detect regime changes → score prior predictions → generate Bayesian weekly projections (regime-change-aware) → populate forecast_tracker (weighted predictions + actuals backfill) → update forecast xlsx (_Data sheet only) → push to SharePoint.
+- **Trigger:** Weekly, after WW Dashboard xlsx is available. Manual: `bash ~/shared/tools/wbr-pipeline.sh <xlsx_path>`
+- **Key scripts:**
+  - `wbr-pipeline.sh` — orchestrator (8 steps)
+  - `prediction/populate_forecast_tracker.py` — Bayesian projections + weighted predictions (λ=0.2 exponential decay) + actuals backfill. Monthly/quarterly/year-end derived from weekly sums.
+  - `prediction/detect_regime_changes.py` — scans ps.change_log for structural changes, auto-inserts into ps.regime_changes
+  - `prediction/bayesian_projector.py` — Bayesian engine with seasonal priors, regime change prior shifts, ie%CCP constraints
+  - `dashboards/update-forecast-tracker.py` — writes ONLY to hidden _Data sheet in xlsx, preserving all visible sheet formatting
+  - `prediction/config.py` — shared MotherDuck token + constants (single source)
+- **Architecture:** Hidden `_Data` sheet holds all raw values. Visible market sheets use formulas referencing `_Data`. Script never touches visible sheets.
+- **Hook:** `forecast-sharepoint-push` (fileEdited) auto-pushes xlsx to SharePoint Kiro-Drive/ + Dashboards/ after update.
+- **Legacy:** `build-forecast-tracker.py.legacy` — replaced by template-based updater.
+
+### Open Items Reminder (Hook: `open-items-reminder`)
+- **What it does:** On first message of a new conversation, scans session-log.md for OPEN/deferred items and surfaces them. Skips if already shown in current conversation. 3-hour cooldown.
+- **Trigger:** promptSubmit (with conversation-level dedup)
+
+### Forecast SharePoint Push (Hook: `forecast-sharepoint-push`)
+- **What it does:** Auto-pushes ps-forecast-tracker.xlsx to both SharePoint locations when the file is updated locally.
+- **Trigger:** fileEdited on shared/dashboards/ps-forecast-tracker.xlsx
 - **Trigger:** `from bridge import Bridge; b = Bridge()`
 - **Key IDs:** Spreadsheet `1IlM43kzxw8Vlu6aUWXUV1dr7ZIF7O7H2bD5x3kaKIHg` · Doc `1koJV8a4Ig9BBDbrtQl-w8L4-2bUrz8lGwxUxEfIgQj8` · Drive `1aeRuldkc-OL1gyR7FQ-WrvbpERPsYChZ`
 - **Service Account:** `kiro-sheets-bridge@kiro-491503.iam.gserviceaccount.com` · Creds: `~/shared/credentials/kiro-491503-6b65ab0501c6.json`
@@ -152,7 +174,11 @@ Backlog proposals: WBR auto-briefing, meeting prep auto-generator, invoice routi
 | Audit (Asana Writes) | ✅ | Always |
 | SharePoint Durability Sync | 🆕 | 4/12 (folders created, first data push pending) |
 | Agents (Karpathy, Eyes Chart, Wiki Team) | ✅ | 3/24–3/25 |
-| Data Pipeline (Ingester, DuckDB, Callouts, Predictions) | ✅ | 3/30 |
+| Data Pipeline (Ingester, DuckDB, Callouts, Predictions) | ✅ | 4/13 |
+| Forecast Pipeline (WBR → MotherDuck → xlsx → SharePoint) | ✅ | 4/13 |
+| Regime Change Detection | ✅ | 4/13 |
+| Forecast SharePoint Push Hook | ✅ | 4/13 |
+| Open Items Reminder Hook | ✅ | 4/13 |
 | Content Tools (Bridge, Charts, Catalog, SharePoint Wiki Sync) | ✅ | 3/25–3/27 |
 | Slack Ingestion v3 | ✅ | 4/2 |
 | MCP Servers (Weblab, XWiki, Builder, Taskei) | 🆕 | 4/2 |

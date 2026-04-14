@@ -364,12 +364,13 @@ This ensures signals.slack_unanswered.richard_replied is accurate — it can det
 **MCP servers used:** Outlook MCP, DuckDB MCP
 
 **Execution order (from email-calendar-duckdb-sync.md):**
-1. Pull emails → **INSERT into signals.emails (DuckDB)** — primary deliverable
-2. Pull calendar → **UPSERT into main.calendar_events (DuckDB)** — primary deliverable
-3. Update ops.data_freshness
-4. Write email-triage.md (file) — secondary output
+1. Query ops.data_freshness for last scan date (DuckDB)
+2. Pull emails across all folders since last scan date → **INSERT into signals.emails (DuckDB)** — primary deliverable
+3. Pull calendar → **UPSERT into main.calendar_events (DuckDB)** — primary deliverable
+4. Update ops.data_freshness
+5. Write email-triage.md (file) — secondary output
 
-**CRITICAL:** DuckDB writes are the PRIMARY output. The file (email-triage.md) is secondary fallback. Do NOT skip DuckDB writes. The sync protocol file has explicit SQL templates with column mappings — follow them exactly.
+**CRITICAL:** DuckDB writes are the PRIMARY output. The file (email-triage.md) is secondary fallback. Do NOT skip DuckDB writes. The sync protocol file has explicit SQL templates with column mappings — follow them exactly. Email scan covers ALL folders (inbox, sent, custom, subfolders) using `email_search` with a date window from the last successful scan. See email-calendar-duckdb-sync.md Step 1 for details.
 
 **Writes:**
 - signals.emails (DuckDB — INSERT/UPSERT) ← MUST happen

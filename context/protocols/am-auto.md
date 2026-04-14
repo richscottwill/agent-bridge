@@ -62,7 +62,7 @@ Follow ~/shared/context/active/asana-activity-monitor-protocol.md.
 5. Update asana-scan-state.json.
 
 ### Email Scan
-Catalog unread. Produce email-triage in intake/. SKIP Auto-Comms folder Asana emails.
+Search all folders since last scan date (from ops.data_freshness). Produce email-triage in intake/. SKIP Auto-Comms folder Asana emails.
 
 ### Signal Intelligence
 Per `~/shared/context/protocols/signal-intelligence.md`:

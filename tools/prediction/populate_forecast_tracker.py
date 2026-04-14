@@ -16,11 +16,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'
 import logging
 logging.disable(logging.WARNING)  # Suppress all debug/info/warning from BayesianProjector
 from prediction.bayesian_projector import BayesianProjector, ALL_MARKETS
-
-TOKEN = os.environ.get('MOTHERDUCK_TOKEN',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpY2hzY290dHdpbGxAZ21haWwuY29tIiwibWRSZWdpb24iOiJhd3MtdXMtZWFzdC0xIiwic2Vzc2lvbiI6InJpY2hzY290dHdpbGwuZ21haWwuY29tIiwicGF0IjoiVDNIYzFVQWYzT3o1bjVkLS03ckdHNlBjMlpUdVNNbFItT3RXMS1qNzVPUSIsInVzZXJJZCI6ImU2MDhlNDZiLTE4YzctNGE5Ny04M2I2LWE0N2ZhOThmNjBhYyIsImlzcyI6Im1kX3BhdCIsInJlYWRPbmx5IjpmYWxzZSwidG9rZW5UeXBlIjoicmVhZF93cml0ZSIsImlhdCI6MTc3NTQ0MzY0N30.tS0Cab3FQ8_CDZ1PqOo9z09KYHEUFHwuLVXRQrxcHig')
-ML = {1:'Jan',2:'Feb',3:'Mar',4:'Apr',5:'May',6:'Jun',
-      7:'Jul',8:'Aug',9:'Sep',10:'Oct',11:'Nov',12:'Dec'}
+from prediction.config import MOTHERDUCK_TOKEN as TOKEN, ML
 
 # Decay rate for time-weighted predictions
 # λ = 0.2: N-1 = 0.82, N-2 = 0.67, N-4 = 0.45, N-8 = 0.20, N-16 = 0.04
@@ -109,129 +105,17 @@ def run():
                 if wk == 1: print(f"  {market} W{wk}: {e}")
         print(f"  {market}: {ok}/52 weeks")
 
-    # ── Step 2: Monthly projections (M01-M12) per market ──
-    print("\n=== Monthly ===")
-    for market in ALL_MARKETS:
-        ok = 0
-        for mo in range(1, 13):
-            try:
-                p = projector.project_market_monthly(market, f"2026-M{mo:02d}")
-                if p and p.total_regs is not None:
-                    con.execute("UPDATE ps.forecast_tracker SET predicted=?, ci_low=?, ci_high=?, updated_at=current_timestamp WHERE market=? AND metric_name='registrations' AND horizon='monthly' AND period_label=?",
-                        [round(p.total_regs), round(p.ci_regs_low), round(p.ci_regs_high), market, ML[mo]])
-                    ci_cost_lo = round(p.total_cost * 0.85, 2)
-                    ci_cost_hi = round(p.total_cost * 1.15, 2)
-                    con.execute("UPDATE ps.forecast_tracker SET predicted=?, ci_low=?, ci_high=?, updated_at=current_timestamp WHERE market=? AND metric_name='cost' AND horizon='monthly' AND period_label=?",
-                        [round(p.total_cost, 2), ci_cost_lo, ci_cost_hi, market, ML[mo]])
-                    ok += 1
-            except Exception as e:
-                if mo == 1: print(f"  {market} M{mo}: {e}")
-        print(f"  {market}: {ok}/12 months")
+    # Steps 2-4 REMOVED (2026-04-13): Monthly/quarterly/year-end projections are now
+    # derived from weekly sums in step 5b. Independent Bayesian monthly/quarterly projections
+    # were producing values that didn't reconcile with weekly sums. Weekly is the source of truth.
 
-    # ── Step 3: Quarterly (sum of monthly predictions) ──
-    print("\n=== Quarterly ===")
-    QM = {'Q1':['Jan','Feb','Mar'],'Q2':['Apr','May','Jun'],'Q3':['Jul','Aug','Sep'],'Q4':['Oct','Nov','Dec']}
-    for market in ALL_MARKETS:
-        for ql, mos in QM.items():
-            for metric in ['registrations', 'cost']:
-                row = con.execute(
-                    "SELECT SUM(predicted), ROUND(SQRT(SUM(POWER(GREATEST(ci_high-predicted,1),2)))), ROUND(SQRT(SUM(POWER(GREATEST(predicted-ci_low,1),2)))) FROM ps.forecast_tracker WHERE market=? AND metric_name=? AND horizon='monthly' AND period_label IN (?,?,?)",
-                    [market, metric, mos[0], mos[1], mos[2]]).fetchone()
-                if row[0] is not None:
-                    pred = round(row[0])
-                    ci_hi_width = row[1] or 0
-                    ci_lo_width = row[2] or 0
-                    con.execute("UPDATE ps.forecast_tracker SET predicted=?, ci_low=?, ci_high=?, updated_at=current_timestamp WHERE market=? AND metric_name=? AND horizon='quarterly' AND period_label=?",
-                        [pred, round(max(0, pred - ci_lo_width)), round(pred + ci_hi_width), market, metric, ql])
-        print(f"  {market}: Q1-Q4")
+    # ── Step 5: Aggregates (WW, EU5) — applied AFTER step 5b derives higher horizons ──
+    # (Moved to after 5b so aggregates use the derived values)
 
-    # ── Step 4: Year-end (sum of quarterly) ──
-    print("\n=== Year-End ===")
-    for market in ALL_MARKETS:
-        for metric in ['registrations', 'cost']:
-            row = con.execute(
-                "SELECT SUM(predicted), ROUND(SQRT(SUM(POWER(GREATEST(ci_high-predicted,1),2)))), ROUND(SQRT(SUM(POWER(GREATEST(predicted-ci_low,1),2)))) FROM ps.forecast_tracker WHERE market=? AND metric_name=? AND horizon='quarterly'",
-                [market, metric]).fetchone()
-            if row[0] is not None:
-                pred = round(row[0])
-                ci_hi_w = row[1] or 0
-                ci_lo_w = row[2] or 0
-                con.execute("UPDATE ps.forecast_tracker SET predicted=?, ci_low=?, ci_high=?, updated_at=current_timestamp WHERE market=? AND metric_name=? AND horizon='year_end' AND period_label='2026'",
-                    [pred, round(max(0, pred - ci_lo_w)), round(pred + ci_hi_w), market, metric])
-        print(f"  {market}: 2026 YE")
-
-    # ── Step 5: Aggregates (WW, EU5) ──
-    print("\n=== Aggregates ===")
-    for agg, srcs in [('WW', ALL_MARKETS), ('EU5', ['UK','DE','FR','IT','ES'])]:
-        sl = ",".join(f"'{m}'" for m in srcs)
-        for hz in ['weekly','monthly','quarterly','year_end']:
-            con.execute(f"""UPDATE ps.forecast_tracker ft SET predicted=a.p, ci_low=a.cl, ci_high=a.ch, updated_at=current_timestamp
-                FROM (SELECT period_label, metric_name, ROUND(SUM(predicted)) p, ROUND(SUM(ci_low)) cl, ROUND(SUM(ci_high)) ch
-                    FROM ps.forecast_tracker WHERE market IN ({sl}) AND horizon='{hz}' GROUP BY period_label, metric_name) a
-                WHERE ft.market='{agg}' AND ft.horizon='{hz}' AND ft.period_label=a.period_label AND ft.metric_name=a.metric_name""")
-        print(f"  {agg}")
-
-    # ── Step 5a: Store current monthly/quarterly/year-end predictions as revisions in ps.forecasts ──
-    print("\n=== Storing forecast revisions ===")
-    import uuid
-    from datetime import date as dt_date
-    today = dt_date.today()
-    stored = 0
-    try:
-        # Monthly: read current predictions from forecast_tracker, store as revision
-        for market in ALL_MARKETS:
-            for metric in ['registrations', 'cost']:
-                rows = con.execute(f"""SELECT period_label, period_order, predicted, ci_low, ci_high 
-                    FROM ps.forecast_tracker WHERE market='{market}' AND metric_name='{metric}' 
-                    AND horizon='monthly' AND predicted IS NOT NULL""").fetchall()
-                for r in rows:
-                    period_label, period_order, pred, ci_lo, ci_hi = r
-                    # Map period_label (Jan) → target_period (2026-M01)
-                    mo_num = {v: k for k, v in ML.items()}.get(period_label)
-                    if not mo_num:
-                        continue
-                    target_period = f"2026-M{mo_num:02d}"
-                    # Check if we already stored a revision for this market/metric/period today
-                    existing = con.execute(
-                        "SELECT COUNT(*) FROM ps.forecasts WHERE market=? AND metric_name=? AND target_period=? AND forecast_date=? AND method LIKE 'bayesian%'",
-                        [market, metric, target_period, today]).fetchone()[0]
-                    if existing == 0:
-                        con.execute(
-                            "INSERT INTO ps.forecasts (forecast_id, market, channel, metric_name, forecast_date, target_period, period_type, predicted_value, confidence_low, confidence_high, method, created_at) VALUES (?, ?, 'ps', ?, ?, ?, 'monthly', ?, ?, ?, 'bayesian_populate', current_timestamp)",
-                            [str(uuid.uuid4()), market, metric, today, target_period, pred, ci_lo, ci_hi])
-                        stored += 1
-                
-                # Quarterly
-                for ql, mo_nums in [('Q1',[1,2,3]),('Q2',[4,5,6]),('Q3',[7,8,9]),('Q4',[10,11,12])]:
-                    qr = con.execute(f"""SELECT predicted, ci_low, ci_high FROM ps.forecast_tracker 
-                        WHERE market='{market}' AND metric_name='{metric}' AND horizon='quarterly' AND period_label='{ql}'""").fetchone()
-                    if qr and qr[0]:
-                        target_period = f"2026-{ql}"
-                        existing = con.execute(
-                            "SELECT COUNT(*) FROM ps.forecasts WHERE market=? AND metric_name=? AND target_period=? AND forecast_date=? AND method LIKE 'bayesian%'",
-                            [market, metric, target_period, today]).fetchone()[0]
-                        if existing == 0:
-                            con.execute(
-                                "INSERT INTO ps.forecasts (forecast_id, market, channel, metric_name, forecast_date, target_period, period_type, predicted_value, confidence_low, confidence_high, method, created_at) VALUES (?, ?, 'ps', ?, ?, ?, 'quarterly', ?, ?, ?, 'bayesian_populate', current_timestamp)",
-                                [str(uuid.uuid4()), market, metric, today, target_period, qr[0], qr[1], qr[2]])
-                            stored += 1
-                
-                # Year-end
-                yr = con.execute(f"""SELECT predicted, ci_low, ci_high FROM ps.forecast_tracker 
-                    WHERE market='{market}' AND metric_name='{metric}' AND horizon='year_end' AND period_label='2026'""").fetchone()
-                if yr and yr[0]:
-                    existing = con.execute(
-                        "SELECT COUNT(*) FROM ps.forecasts WHERE market=? AND metric_name=? AND target_period='2026-YE' AND forecast_date=? AND method LIKE 'bayesian%'",
-                        [market, metric, today]).fetchone()[0]
-                    if existing == 0:
-                        con.execute(
-                            "INSERT INTO ps.forecasts (forecast_id, market, channel, metric_name, forecast_date, target_period, period_type, predicted_value, confidence_low, confidence_high, method, created_at) VALUES (?, ?, 'ps', ?, ?, '2026-YE', 'year_end', ?, ?, ?, 'bayesian_populate', current_timestamp)",
-                            [str(uuid.uuid4()), market, metric, today, yr[0], yr[1], yr[2]])
-                        stored += 1
-        print(f"  {stored} new forecast revisions stored")
-    except Exception as e:
-        print(f"  Revision storage error: {e}")
-        traceback.print_exc()
+    # Step 5a REMOVED (2026-04-13): Was storing derived monthly/quarterly/year-end sums
+    # as independent forecast revisions in ps.forecasts — polluted revision history.
+    # Weekly revisions in ps.forecasts are the only source of truth.
+    # Monthly/quarterly/year-end can always be reconstructed by summing weekly.
 
     # ── Step 5b: Weighted predictions for WEEKLY, then derive higher horizons by summing ──
     print("\n=== Weighted Predictions (exponential decay λ=%.1f) ===" % DECAY_LAMBDA)
@@ -273,7 +157,7 @@ def run():
         
         print(f"  {wt_updated} weekly predictions updated with weighted averages")
         
-        # Step 5b-2: Derive MONTHLY from sum of weekly predictions
+        # Step 5b-2: Derive MONTHLY from weekly: actuals for completed weeks + predictions for future
         MONTH_WEEKS = {1:(1,4),2:(5,8),3:(9,13),4:(14,17),5:(18,22),6:(23,26),
                        7:(27,31),8:(32,35),9:(36,39),10:(40,44),11:(45,48),12:(49,52)}
         mo_updated = 0
@@ -286,15 +170,18 @@ def run():
                     ci_low = sub.total_lo,
                     ci_high = sub.total_hi,
                     updated_at = current_timestamp
-                    FROM (SELECT market, ROUND(SUM(predicted)) as total_pred, ROUND(SUM(ci_low)) as total_lo, ROUND(SUM(ci_high)) as total_hi
+                    FROM (SELECT market, 
+                          ROUND(SUM(COALESCE(actual, predicted))) as total_pred,
+                          ROUND(SUM(COALESCE(actual, ci_low))) as total_lo,
+                          ROUND(SUM(COALESCE(actual, ci_high))) as total_hi
                           FROM ps.forecast_tracker
                           WHERE metric_name='{metric}' AND horizon='weekly' AND period_label IN ({wk_labels}) AND predicted IS NOT NULL
                           GROUP BY market) sub
                     WHERE ft.market=sub.market AND ft.metric_name='{metric}' AND ft.horizon='monthly' AND ft.period_label='{mo_label}'""")
                 mo_updated += 1
-        print(f"  {mo_updated} monthly predictions derived from weekly sums")
+        print(f"  {mo_updated} monthly projections derived (actuals + predictions)")
         
-        # Step 5b-3: Derive QUARTERLY from sum of monthly predictions
+        # Step 5b-3: Derive QUARTERLY from monthly: actuals for completed months + predictions for future
         QM = {'Q1':['Jan','Feb','Mar'],'Q2':['Apr','May','Jun'],'Q3':['Jul','Aug','Sep'],'Q4':['Oct','Nov','Dec']}
         for ql, mos in QM.items():
             mo_labels = ",".join(f"'{m}'" for m in mos)
@@ -304,26 +191,32 @@ def run():
                     ci_low = sub.total_lo,
                     ci_high = sub.total_hi,
                     updated_at = current_timestamp
-                    FROM (SELECT market, ROUND(SUM(predicted)) as total_pred, ROUND(SUM(ci_low)) as total_lo, ROUND(SUM(ci_high)) as total_hi
+                    FROM (SELECT market, 
+                          ROUND(SUM(COALESCE(actual, predicted))) as total_pred,
+                          ROUND(SUM(COALESCE(actual, ci_low))) as total_lo,
+                          ROUND(SUM(COALESCE(actual, ci_high))) as total_hi
                           FROM ps.forecast_tracker
                           WHERE metric_name='{metric}' AND horizon='monthly' AND period_label IN ({mo_labels}) AND predicted IS NOT NULL
                           GROUP BY market) sub
                     WHERE ft.market=sub.market AND ft.metric_name='{metric}' AND ft.horizon='quarterly' AND ft.period_label='{ql}'""")
-        print(f"  Quarterly predictions derived from monthly sums")
+        print(f"  Quarterly projections derived (actuals + predictions)")
         
-        # Step 5b-4: Derive YEAR-END from sum of quarterly predictions
+        # Step 5b-4: Derive YEAR-END from quarterly: actuals for completed quarters + predictions for future
         for metric in ['registrations', 'cost']:
             con.execute(f"""UPDATE ps.forecast_tracker ft SET 
                 predicted = sub.total_pred,
                 ci_low = sub.total_lo,
                 ci_high = sub.total_hi,
                 updated_at = current_timestamp
-                FROM (SELECT market, ROUND(SUM(predicted)) as total_pred, ROUND(SUM(ci_low)) as total_lo, ROUND(SUM(ci_high)) as total_hi
+                FROM (SELECT market, 
+                      ROUND(SUM(COALESCE(actual, predicted))) as total_pred,
+                      ROUND(SUM(COALESCE(actual, ci_low))) as total_lo,
+                      ROUND(SUM(COALESCE(actual, ci_high))) as total_hi
                       FROM ps.forecast_tracker
                       WHERE metric_name='{metric}' AND horizon='quarterly' AND predicted IS NOT NULL
                       GROUP BY market) sub
                 WHERE ft.market=sub.market AND ft.metric_name='{metric}' AND ft.horizon='year_end'""")
-        print(f"  Year-end predictions derived from quarterly sums")
+        print(f"  Year-end projections derived (actuals + predictions)")
         
         # Verify reconciliation for AU
         wk_sum = con.execute("SELECT SUM(predicted) FROM ps.forecast_tracker WHERE market='AU' AND metric_name='registrations' AND horizon='weekly'").fetchone()[0]
@@ -335,6 +228,17 @@ def run():
     except Exception as e:
         print(f"  Weighted prediction error: {e}")
         traceback.print_exc()
+
+    # ── Step 5c: Aggregates (WW, EU5) — AFTER derivation so they use correct values ──
+    print("\n=== Aggregates ===")
+    for agg, srcs in [('WW', ALL_MARKETS), ('EU5', ['UK','DE','FR','IT','ES'])]:
+        sl = ",".join(f"'{m}'" for m in srcs)
+        for hz in ['weekly','monthly','quarterly','year_end']:
+            con.execute(f"""UPDATE ps.forecast_tracker ft SET predicted=a.p, ci_low=a.cl, ci_high=a.ch, updated_at=current_timestamp
+                FROM (SELECT period_label, metric_name, ROUND(SUM(predicted)) p, ROUND(SUM(ci_low)) cl, ROUND(SUM(ci_high)) ch
+                    FROM ps.forecast_tracker WHERE market IN ({sl}) AND horizon='{hz}' GROUP BY period_label, metric_name) a
+                WHERE ft.market='{agg}' AND ft.horizon='{hz}' AND ft.period_label=a.period_label AND ft.metric_name=a.metric_name""")
+        print(f"  {agg}")
 
     # ── Step 6: Backfill actuals from ps.dive_weekly into forecast_tracker ──
     print("\n=== Backfill Actuals ===")
@@ -415,6 +319,144 @@ def run():
         print(f"  Aggregate actuals (WW, EU5) backfilled")
     except Exception as e:
         print(f"  Aggregate backfill error: {e}")
+
+    # ── Reconciliation Checks ──
+    # These describe what should be true about the data. Violations are warnings,
+    # not hard stops — but they mean something is probably wrong.
+    print("\n=== Reconciliation Checks ===")
+    warnings = []
+
+    # 1. A month's projection should never be less than the actuals already recorded
+    #    for its completed weeks. If April has 2 weeks of actuals totaling 16,000,
+    #    the April projection better be at least 16,000.
+    try:
+        rows = con.execute("""
+            SELECT w.market, w.metric_name, m.period_label as month,
+                ROUND(SUM(w.actual)) as ytd_actuals_in_month,
+                m.predicted as month_projection
+            FROM ps.forecast_tracker w
+            JOIN ps.forecast_tracker m 
+                ON w.market = m.market AND w.metric_name = m.metric_name
+            WHERE w.horizon = 'weekly' AND w.actual IS NOT NULL
+            AND m.horizon = 'monthly' AND m.predicted IS NOT NULL
+            AND (
+                (m.period_label = 'Jan' AND w.period_label IN ('W1','W2','W3','W4'))
+                OR (m.period_label = 'Feb' AND w.period_label IN ('W5','W6','W7','W8'))
+                OR (m.period_label = 'Mar' AND w.period_label IN ('W9','W10','W11','W12','W13'))
+                OR (m.period_label = 'Apr' AND w.period_label IN ('W14','W15','W16','W17'))
+                OR (m.period_label = 'May' AND w.period_label IN ('W18','W19','W20','W21','W22'))
+                OR (m.period_label = 'Jun' AND w.period_label IN ('W23','W24','W25','W26'))
+            )
+            GROUP BY w.market, w.metric_name, m.period_label, m.predicted
+            HAVING SUM(w.actual) > m.predicted * 1.001
+        """).fetchall()
+        for r in rows:
+            msg = f"  ⚠ {r[0]} {r[2]} {r[1]}: month projection ({r[4]:,.0f}) is less than actuals already in ({r[3]:,.0f})"
+            warnings.append(msg)
+            print(msg)
+    except Exception as e:
+        print(f"  Check 1 error: {e}")
+
+    # 2. Year-end projection should be at least as large as YTD actuals.
+    #    If we've already recorded 125K US regs through W15, the year-end
+    #    number can't be 100K.
+    try:
+        rows = con.execute("""
+            SELECT w.market, w.metric_name,
+                ROUND(SUM(w.actual)) as ytd_actuals,
+                ye.predicted as ye_projection
+            FROM ps.forecast_tracker w
+            JOIN ps.forecast_tracker ye
+                ON w.market = ye.market AND w.metric_name = ye.metric_name
+            WHERE w.horizon = 'weekly' AND w.actual IS NOT NULL
+            AND ye.horizon = 'year_end' AND ye.predicted IS NOT NULL
+            GROUP BY w.market, w.metric_name, ye.predicted
+            HAVING SUM(w.actual) > ye.predicted
+        """).fetchall()
+        for r in rows:
+            msg = f"  ⚠ {r[0]} year-end {r[1]}: projection ({r[3]:,.0f}) is less than YTD actuals ({r[2]:,.0f})"
+            warnings.append(msg)
+            print(msg)
+    except Exception as e:
+        print(f"  Check 2 error: {e}")
+
+    # 3. Weekly predictions for weeks that have actuals should be close to those actuals.
+    #    A prediction that's off by more than 50% from the actual for a completed week
+    #    suggests the model didn't incorporate the data properly.
+    try:
+        rows = con.execute("""
+            SELECT market, period_label, metric_name, predicted, actual,
+                ROUND(ABS(actual - predicted) / NULLIF(predicted, 0) * 100, 1) as abs_err_pct
+            FROM ps.forecast_tracker
+            WHERE horizon = 'weekly' AND actual IS NOT NULL AND predicted IS NOT NULL
+            AND ABS(actual - predicted) / NULLIF(predicted, 0) > 0.5
+            AND metric_name = 'registrations'
+            ORDER BY ABS(actual - predicted) / NULLIF(predicted, 0) DESC
+            LIMIT 10
+        """).fetchall()
+        if rows:
+            print(f"  ℹ {len(rows)} weekly predictions are >50% off from actuals (top misses):")
+            for r in rows:
+                print(f"    {r[0]} {r[1]}: predicted {r[3]:,.0f}, actual {r[4]:,.0f} ({r[5]:+.0f}%)")
+    except Exception as e:
+        print(f"  Check 3 error: {e}")
+
+    # 4. Monthly projections should add up to quarterly projections.
+    #    If Jan+Feb+Mar projections sum to 30K but Q1 says 25K, something broke
+    #    in the derivation chain.
+    try:
+        QM = {'Q1':['Jan','Feb','Mar'],'Q2':['Apr','May','Jun'],'Q3':['Jul','Aug','Sep'],'Q4':['Oct','Nov','Dec']}
+        for ql, mos in QM.items():
+            mo_labels = ",".join(f"'{m}'" for m in mos)
+            rows = con.execute(f"""
+                SELECT m.market, m.metric_name,
+                    ROUND(SUM(m.predicted)) as mo_sum,
+                    q.predicted as q_pred
+                FROM ps.forecast_tracker m
+                JOIN ps.forecast_tracker q
+                    ON m.market = q.market AND m.metric_name = q.metric_name
+                WHERE m.horizon = 'monthly' AND m.period_label IN ({mo_labels}) AND m.predicted IS NOT NULL
+                AND q.horizon = 'quarterly' AND q.period_label = '{ql}' AND q.predicted IS NOT NULL
+                GROUP BY m.market, m.metric_name, q.predicted
+                HAVING ABS(SUM(m.predicted) - q.predicted) > 5
+            """).fetchall()
+            for r in rows:
+                msg = f"  ⚠ {r[0]} {ql} {r[1]}: monthly sum ({r[2]:,.0f}) ≠ quarterly ({r[3]:,.0f})"
+                warnings.append(msg)
+                print(msg)
+    except Exception as e:
+        print(f"  Check 4 error: {e}")
+
+    # 5. Aggregate markets (WW, EU5) should equal the sum of their components.
+    #    If US+UK+...+AU year-end regs sum to 800K but WW says 750K, the
+    #    aggregation step didn't run or ran in the wrong order.
+    try:
+        for agg, srcs in [('WW', ALL_MARKETS), ('EU5', ['UK','DE','FR','IT','ES'])]:
+            sl = ",".join(f"'{m}'" for m in srcs)
+            rows = con.execute(f"""
+                SELECT a.metric_name, a.horizon,
+                    a.predicted as agg_pred,
+                    ROUND(SUM(c.predicted)) as component_sum
+                FROM ps.forecast_tracker a
+                JOIN ps.forecast_tracker c
+                    ON a.metric_name = c.metric_name AND a.horizon = c.horizon AND a.period_label = c.period_label
+                WHERE a.market = '{agg}' AND c.market IN ({sl})
+                AND a.predicted IS NOT NULL AND c.predicted IS NOT NULL
+                AND a.horizon = 'year_end'
+                GROUP BY a.metric_name, a.horizon, a.predicted
+                HAVING ABS(SUM(c.predicted) - a.predicted) > 10
+            """).fetchall()
+            for r in rows:
+                msg = f"  ⚠ {agg} {r[1]} {r[0]}: aggregate ({r[2]:,.0f}) ≠ component sum ({r[3]:,.0f})"
+                warnings.append(msg)
+                print(msg)
+    except Exception as e:
+        print(f"  Check 5 error: {e}")
+
+    if not warnings:
+        print("  ✓ All checks passed")
+    else:
+        print(f"\n  {len(warnings)} warning(s) found — review before publishing")
 
     # ── Verify ──
     miss = con.execute("SELECT COUNT(*) FROM ps.forecast_tracker WHERE predicted IS NULL").fetchone()[0]

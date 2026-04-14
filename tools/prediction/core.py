@@ -118,9 +118,10 @@ class BayesianCore:
 
         # Weighted combination of prior and evidence
         # Cap prior weight so recent evidence dominates.
-        # With 4 weeks of evidence and cap=4, posterior is 50% evidence.
-        # This ensures 2026 actuals quickly override 2025 historical mean.
-        prior_weight = min(prior.n_observations, 4)
+        # With 4 weeks of evidence and cap=2, posterior is 67% evidence.
+        # Lower cap ensures fast-moving markets (US, MX) adapt quickly
+        # to structural shifts rather than being anchored to historical mean.
+        prior_weight = min(prior.n_observations, 2)
         total_weight = prior_weight + n_new
         posterior_mean = (prior_weight * prior.mean + n_new * new_mean) / total_weight
 

@@ -123,3 +123,36 @@
 - No overlap with other detectors. No conflicts with other organs.
 
 **Action items:** None. Clean upgrade — schema-verified, no follow-up edits needed.
+
+## 2026-04-13 (third edit) — device.md
+
+**Section:** Header timestamp + Installed Apps → WBR Forecast Pipeline + Device Health table
+**Change:** `Last updated` timestamp changed from `2026-04-06 (DuckDB schema migration)` to `2026-04-13 (Forecast pipeline rebuild: _Data sheet architecture, regime changes, weighted predictions, template-based updater)`. This reflects the WBR Forecast Pipeline section being rewritten/expanded. Key additions visible in current device.md state:
+- WBR Forecast Pipeline now fully documented with 8-step orchestrator (`wbr-pipeline.sh`), 5 key scripts (populate_forecast_tracker.py, detect_regime_changes.py, bayesian_projector.py, update-forecast-tracker.py, config.py)
+- Architecture principle: hidden `_Data` sheet holds raw values, visible market sheets use formulas referencing `_Data` — script never touches visible sheets
+- Regime change detection integrated (scans `ps.change_log` → auto-inserts into `ps.regime_changes`)
+- Bayesian projections with seasonal priors, regime change prior shifts, ie%CCP constraints
+- Weighted predictions with λ=0.2 exponential decay
+- Forecast SharePoint Push hook documented (`forecast-sharepoint-push`, fileEdited trigger)
+- Legacy script noted: `build-forecast-tracker.py.legacy` replaced by template-based updater
+- Device Health table updated: Data Pipeline and Forecast Pipeline both show ✅ with 4/13 last run. Regime Change Detection, Forecast SharePoint Push Hook, and Open Items Reminder Hook all added as ✅ 4/13.
+
+**Karpathy gate:** N/A (device.md is not gated — only heart.md and gut.md are gated).
+
+**Cross-organ consistency check:**
+
+1. **device.md ↔ eyes.md — Data Pipeline section.** Eyes.md still references the old ingester path (`~/shared/tools/dashboard-ingester/ingest.py`) and manual cadence ("Richard drops new week's xlsx → run ingest.py"). The new forecast pipeline in device.md (`~/shared/tools/wbr-pipeline.sh`) is a superset that includes ingestion + forecasting + xlsx update + SharePoint push. Eyes.md Data Pipeline section is now stale — it doesn't mention the forecast pipeline, regime changes, or Bayesian projections. **Low urgency** — eyes.md describes the sensing layer (what data comes in), device.md describes the automation (how it runs). They serve different purposes, but eyes.md should at minimum reference the forecast pipeline as the downstream consumer.
+
+2. **device.md ↔ hands.md — Hook System table.** Hands.md Hook System table (bottom of file) still lists the old 5-hook architecture (AM-1/AM-2/AM-3 + EOD-1/EOD-2). This was already flagged in the 2026-04-12 organ change entry. The new `forecast-sharepoint-push` hook is also not listed in hands.md. **Existing stale reference — already tracked.**
+
+3. **device.md ↔ spine.md — Tool paths.** Spine.md should reference `~/shared/tools/wbr-pipeline.sh` as a key tool path. Not checked in this pass but worth verifying on next spine refresh.
+
+4. **device.md internal consistency — Device Health table.** ✅ Consistent. New entries (Forecast Pipeline, Regime Change Detection, Forecast SharePoint Push Hook, Open Items Reminder Hook) all show ✅ 4/13, matching the `Last updated` timestamp. SharePoint Durability Sync shows 🆕 4/12 (folders created, first data push pending) — still accurate per prior session.
+
+5. **DuckDB tables referenced.** `ps.change_log`, `ps.regime_changes`, `ps.projections` — these should exist in the ps schema. The 2026-04-06 device.md entry documented 13 tables in the ps schema including `change_log` and `projections`. `regime_changes` appears to be new — verify it exists. **Action: confirm `ps.regime_changes` table exists in MotherDuck.**
+
+**Action items:**
+- (Low) Update eyes.md Data Pipeline section to reference forecast pipeline as downstream consumer
+- (Already tracked) Update hands.md Hook System table to reflect new hook architecture + forecast-sharepoint-push hook
+- (Low) Verify `ps.regime_changes` table exists in MotherDuck on next DuckDB interaction
+- (Low) Verify spine.md includes wbr-pipeline.sh in tool paths on next spine refresh
