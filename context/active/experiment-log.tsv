@@ -28,3 +28,13 @@ run43_exp7	richard-style-slack	Common Failures	SPLIT	info_retrieval	1205	1214	1.
 run43_exp8	gut	Identity field protection	SPLIT	info_retrieval	2055	2058	1.0	1.0	1.0	0.0	false	KEEP	120
 run43_exp9	heart	DuckDB Integration	REWORD	info_retrieval	3922	3872	1.0	1.0	1.0	0.0	false	KEEP	120
 run43_exp10	nervous-system	Loop 5 System Health	SPLIT	info_retrieval	1260	1276	1.0	1.0	1.0	0.0	false	KEEP	120
+run44_exp1	spine	Ground Truth Files	ADD	info_retrieval	1141	1209	1.0	1.0	0.93	0.0	false	KEEP	120
+run44_exp2	heart	Design Choices	RESTRUCTURE	info_retrieval	3872	3875	1.0	1.0	1.0	0.0	false	KEEP	130
+run44_exp3	gut	Three Functions	COMPRESS	info_retrieval	2058	2033	1.0	1.0	1.0	0.0	false	KEEP	120
+run44_exp4	eyes	OCI Performance	REWORD	info_retrieval	1147	1167	1.0	1.0	1.0	0.0	false	KEEP	110
+run44_exp5	amcc	The Streak	ADD	info_retrieval	3154	3239	1.0	1.0	1.0	0.0	false	KEEP	120
+run44_exp6	spine	Hook System	REWORD	info_retrieval	1209	1229	0.9	1.0	0.9	-0.1	false	REVERT	120
+run44_exp7	eyes	Whats Coming	ADD	info_retrieval	1167	1199	1.0	1.0	1.0	0.0	false	KEEP	110
+run44_exp8	richard-style-wbr	Examples	SPLIT	output_quality	920	928	0.86	0.90	0.84	-0.04	false	REVERT	140
+run44_exp9	device	Installed Apps	REWORD	info_retrieval	2085	2078	1.0	1.0	1.0	0.0	false	KEEP	120
+run44_exp10	richard-style-slack	Greeting and Sign-off	SPLIT	output_quality	1214	1214	0.96	0.96	0.96	0.0	false	KEEP	130

@@ -54,6 +54,11 @@ Removed — current-state-only principle. Historical data lives in changelog.md.
 - Days with back-to-back meetings and genuinely no focus time
 - Choosing to rest or stop working at a reasonable hour (sustainability, not avoidance)
 
+### Common Failures in Streak Tracking
+1. **Counting "research" as progress.** Reading about the hard thing is not doing the hard thing. The streak requires tangible output — a draft, a sent message, a published artifact.
+2. **Resetting on blocked days.** If the #1 priority is genuinely blocked (external dependency, waiting on stakeholder), the streak holds. Check Hands for blocker status before resetting.
+3. **Confusing volume with leverage.** 14 tasks completed ≠ hard thing done. The streak tracks the ONE high-leverage choice, not task count.
+
 ---
 
 ## Real-Time Intervention Protocol
@@ -226,8 +231,11 @@ The aMCC is a muscle — it grows with use and atrophies with avoidance.
 
 ## Common Failures in Using This Organ
 
+### Intervention Timing Failures
 1. **Firing on legitimate fire drills.** Not every non-hard-thing task is avoidance. Manager requests, blocked dependencies, and genuine urgency don't reset the streak. Check the "What Does NOT Reset" list before intervening.
 2. **Escalating too fast.** Jumping to Level 3-4 confrontation on first drift. Start at Level 1 nudge. Most avoidance self-corrects with a casual redirect.
+
+### Measurement Failures
 3. **Treating the streak as the goal.** The streak measures behavior, but the goal is shipped artifacts. A 10-day streak with no deliverable is worse than a 3-day streak with a shipped doc.
 4. **Ignoring the resistance type.** Generic "do the hard thing" interventions miss the mark. Name the specific resistance (visibility avoidance, blank page paralysis, etc.) — the counter is different for each.
 

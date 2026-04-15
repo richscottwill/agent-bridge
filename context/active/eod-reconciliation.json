@@ -1,108 +1,40 @@
 {
-  "date": "2026-04-10",
-  "day_of_week": "Friday",
-  "location": "Austin (Google Summit week)",
-  "completed_today": [],
-  "carried_forward": [],
-  "new_tasks": [],
-  "recurring_proposals": [],
-  "blocker_updates": [],
-  "five_levels": {
-    "l1": 0,
-    "l2": 0,
-    "l3": 0,
-    "l4": 0,
-    "l5": 0
+  "date": "2026-04-15",
+  "completed_today": [
+    {"task_gid": "1214068429496105", "name": "Respond to Yun — MX NB page performance doc", "routine": "Sweep", "level": "L2"},
+    {"task_gid": "1214068429588691", "name": "RSVP: Kate's AB Marketing Happy Hour", "routine": "Sweep", "level": "L3"},
+    {"task_gid": "1214068429586218", "name": "RSVP: PSME Seattle Happy Hour", "routine": "Sweep", "level": "L3"}
+  ],
+  "carried_forward": [
+    {"task_gid": "1213917967984980", "name": "Respond to Lena — AU LP URL analysis + CPA methodology", "days_overdue": 12, "reason": "Draft written but not sent", "next_action": "Pull AU LP URL report, send reply"},
+    {"task_gid": "1213964186504305", "name": "Send IECCP follow-up summary to Lorena", "days_overdue": 6, "reason": "Not started", "next_action": "Draft IECCP summary email"},
+    {"task_gid": "1213917691089036", "name": "Refmarker mapping audit PoC — AU", "days_overdue": 5, "reason": "Not started", "next_action": "Export Google Ads refmarker report"},
+    {"task_gid": "1212808474749819", "name": "Paid App PO — Create Q2 + Amend Google PO", "days_overdue": 2, "reason": "Blocked on PAM budget confirmation", "next_action": "Confirm budget with Brandon"},
+    {"task_gid": "1213993242326093", "name": "AU meetings - Agenda", "days_overdue": 1, "reason": "Not prepped", "next_action": "Prep agenda items"},
+    {"task_gid": "1213796951745232", "name": "Look over AU landing page switch", "days_overdue": 0, "reason": "Due today, not done", "next_action": "Coordinate NB LP revert with Dwayne"},
+    {"task_gid": "1213072707685834", "name": "MX Automotive page", "days_overdue": 0, "reason": "Due today, not done", "next_action": "Build MX Auto + Beauty campaigns"}
+  ],
+  "new_tasks_from_meetings": [
+    "Submit SIM for MX broken images + Canada optimizations",
+    "Create before/after PowerPoint for MX stakeholder call",
+    "Email Lorena re: MX unspent budget",
+    "Follow up with LiveRamp on updated match rate",
+    "Coordinate VPN access for Adi (OCI Canada validation)",
+    "Follow up with VJ on ref tag persistence ticket (P0)",
+    "Review Q2 CCP suggestions in shared file",
+    "Daily ad disapproval checks until Google resolves"
+  ],
+  "recurring_created": [],
+  "blocker_updates": [
+    {"task": "MX Automotive page", "blocker": "Vijeth footer component", "days_blocked": 18},
+    {"task": "Kingpin Goals MX", "blocker": "Andes data unavailable", "days_blocked": 21}
+  ],
+  "five_levels": {"l1": 0, "l2": 1, "l3": 0, "l4": 0, "l5": 0},
+  "bucket_distribution": {
+    "null": 43, "Wiki": 23, "Core": 13, "Engine Room": 13, "Admin": 4, "Sweep": 4
   },
-  "meetings_ingested": {
-    "session_count": 8,
-    "sessions": [
-      {
-        "id": "FzLY7b6cUxWUC7UN00AD",
-        "title": "MX Paid Search Budget and IECCP Discussion",
-        "date": "2026-04-06",
-        "duration_min": 14,
-        "topic": "MX",
-        "key_points": "Lorena explained +15% spend vs B2WR due to 100% IECCP target. Finance may push to 75%. Richard to send IECCP follow-up summary + keyword data.",
-        "action_items_richard": ["Send IECCP follow-up summary to Lorena", "Send simplified keyword performance report (top/bottom performers)"],
-        "action_items_others": ["Lorena: Share IECCP supporting data + keyword performance report"]
-      },
-      {
-        "id": "qNhbj07kQtXig6lnaFe7",
-        "title": "Compensation Review and AU Landing Page Sync",
-        "date": "2026-04-06",
-        "duration_min": 18,
-        "topic": "Brandon 1:1",
-        "key_points": "10.5% base pay increase. No RSUs (covered through 2027). AU LP conversion rate data needed for Lena pushback. Brandon told Dwayne to hold on AU LP changes until data-led recommendation.",
-        "action_items_richard": ["Pull AU Polaris LP conversion rate data", "Share with Brandon + Dwayne", "Align on communication to Lena"],
-        "action_items_others": ["Brandon: Coordinate with Dwayne on no-change until data reviewed"]
-      },
-      {
-        "id": "pV4Rlf6vsEIa2a7WFUgz",
-        "title": "Adi Landing Page Optimization",
-        "date": "2026-04-08",
-        "duration_min": 33,
-        "topic": "LP Testing",
-        "key_points": "Adi presented LP optimization results. PULT/PULCIN pages saw 81% mobile traffic. Conversion rate recovered after removing intermediate page + design fixes. Team agreed on best practice for URL-level conversion monitoring.",
-        "action_items_richard": ["Document changes with screenshots", "Draft monitoring best practice for conversion rates by URL/locale", "Schedule design review with Adi"],
-        "action_items_others": ["Alex: Share updated Polaris brand page screenshot"]
-      },
-      {
-        "id": "MerPk0qtzBgEHgP0pBiO",
-        "title": "Paid Acquisition OP1 Strategy and Innovation Workshop",
-        "date": "2026-04-08",
-        "duration_min": 96,
-        "topic": "OP1",
-        "key_points": "Major brainstorm: paid app repositioned as traffic driver (80% engagement). LiveRamp enhanced match could double audience to ~40%. Deep linking test proposed. F90 pending media approval. Industry vertical segmentation explored but complex. MIE (Marketing Intelligent Engine) coming for PS-specific AI recommendations.",
-        "action_items_richard": ["Reach out to LiveRamp for enhanced match", "Implement deep link test with Ref tags in paid app", "Coordinate with Joel/Robert on MIE", "Update NTA tickets for media approval"],
-        "action_items_others": ["Andrew: Investigate AB app targeting in engagement campaigns", "Stacey: Document brainstorm ideas for Kate"]
-      },
-      {
-        "id": "4dQnNjazvfzOwbH75xJL",
-        "title": "Adobe Health and Optimization Review",
-        "date": "2026-04-08",
-        "duration_min": 65,
-        "topic": "Google/Adobe vendors",
-        "key_points": "Platform health score 64%. Underutilized: alerts, spreadsheets, booksheets, hybrid optimization. ASP data latency issue. G-clid tracking blocked by shadow domain. Weighted objective model discussed (registrations should be highest weight). PMax not viable without OCI support.",
-        "action_items_richard": ["Explore Adobe Analytics access for optimization", "Coordinate alert setup with Stacey", "Investigate ASP data latency"],
-        "action_items_others": ["Stacey: Lead alert creation for CPA/registration anomalies", "Adi: Run simulation models for weighted objectives"]
-      },
-      {
-        "id": "W4BfuXS0KnZ5QeZ8JJRe",
-        "title": "Sid Acquisition Discussion",
-        "date": "2026-04-09",
-        "duration_min": 55,
-        "topic": "Acquisition",
-        "key_points": "Sid presented full acquisition channel overview. On-site drives 50%+ of registrations. Email declining due to fatigue. Push notifications new channel but only 30% deliverability. AI search content high conversion but low traffic. Attribution model (HEMM) still not implemented.",
-        "action_items_richard": ["Share AI search content document with team", "Follow up on retargeting for newly acquired customers"],
-        "action_items_others": []
-      },
-      {
-        "id": "DWvbZjVJZEgcCiE7bIef",
-        "title": "Jasper AI Demo",
-        "date": "2026-04-09",
-        "duration_min": 113,
-        "topic": "AI",
-        "key_points": "Alexia demoed Jasper AI for content creation (0-to-50% drafting). EU5 SEO localization app. Content output grew 8→33 assets (2023→2024). Tax/compliance topics high converters in 2026. ABMA analytics agent demoed (WBR summaries, deep-dive chatbot). Team discussed event messaging gaps.",
-        "action_items_richard": ["Follow up with Lorena (MX) and Alexis (AU) on WhatsApp rollout plans", "Check Slack notification settings for Baloo group"],
-        "action_items_others": ["Product team: Improve table export from AI chat", "Product team: Extend session history beyond 3 days"]
-      },
-      {
-        "id": "vagAcJ6vqTRUWoLJhDZX",
-        "title": "Google Summit 2026.04",
-        "date": "2026-04-09",
-        "duration_min": 153,
-        "topic": "Google/Adobe vendors",
-        "key_points": "Google betas renamed to Search+/YouTube+/X-functional+. AI-MAX testing: 3 methods proposed (single campaign experiment recommended). Key concern: OCI keyword-level tracking compatibility with AI-MAX expanded matches. Smart Bidding Exploration: up to 19% more conversions. Search Partner Network re-enabled (was off since 2015). YouTube retargeting via channel audiences. Elasticity testing proposed. H1 performance: US exceeding goals by ~20%, EU mixed. OP1 forecasting tension: don't want to over-commit registrations.",
-        "action_items_richard": ["Verify AI-MAX impact on OCI keyword tracking with specialists", "Run small-scale AI-MAX test on low-risk campaign", "Compile candidate campaigns for AI-MAX testing", "Draft one-page AI-MAX test proposal"],
-        "action_items_others": ["Google team: Schedule PM deep-dive session", "Google team: Fix broken AI-MAX dashboard"]
-      }
-    ],
-    "tasks_created": 0,
-    "tasks_updated": 0,
-    "dependencies_logged": 0
-  },
-  "portfolio_changes": {},
-  "abps_ai_changes": {},
-  "notes": "Richard was at Google Summit in Austin all week (Apr 8-9). No tasks completed today. Heavy meeting load with strategic content. Key themes: AI-MAX test design, paid app repositioning to traffic, LiveRamp enhanced match, OP1 planning tension."
+  "total_incomplete": 100,
+  "total_overdue": 8,
+  "meetings_ingested": 3,
+  "daily_reset_demotions": 7
 }

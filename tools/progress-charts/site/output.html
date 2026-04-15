@@ -5,18 +5,20 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-:root{--bg:#0b0e11;--surface:#131820;--surface2:#1a2230;--border:#1e2a3a;--border2:#253345;
+:root{--bg:#0f1117;--surface:#14161e;--surface2:#1a1d27;--border:#1e2028;--border2:#2a2d35;
   --text:#d0d8e0;--text2:#8899aa;--text3:#5a6a7a;--white:#f0f4f8;
-  --accent:#4da8da;--accent2:#2d7eb5;--accent-dim:rgba(77,168,218,0.12);
-  --green:#34d399;--red:#f87171;--amber:#fbbf24;--purple:#a78bfa}
+  --accent:#4a9eff;--accent2:#3b82f6;--accent-dim:rgba(74,158,255,0.12);
+  --green:#4ade80;--red:#f87171;--amber:#fbbf24;--purple:#a78bfa}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);padding:0;min-height:100vh;-webkit-font-smoothing:antialiased}
 .page{max-width:1200px;margin:0 auto;padding:24px 20px}
-nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);background:rgba(19,24,32,0.92)}
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);background:rgba(20,22,30,0.92)}
 .nav-brand{color:var(--white);font-weight:700;font-size:.9em;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:4px;letter-spacing:1.5px;text-transform:uppercase}
 .nav-link{color:var(--text2);text-decoration:none;padding:14px 18px;font-size:.8em;font-weight:500;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
-.nav-link:hover{color:var(--text);background:rgba(77,168,218,0.06)}
+.nav-link:hover{color:var(--text);background:rgba(74,158,255,0.06)}
 .nav-link.active{color:var(--accent);border-bottom-color:var(--accent)}
+.nav-back{color:var(--text3);text-decoration:none;padding:14px 14px 14px 0;font-size:.75em;font-weight:500;letter-spacing:.3px;margin-right:4px;border-right:1px solid var(--border);transition:color .15s}
+.nav-back:hover{color:var(--accent)}
 h1{color:var(--white);font-size:1.35em;margin-bottom:4px;font-weight:600;letter-spacing:.2px}
 h2{color:var(--text);font-size:.95em;margin:28px 0 12px;font-weight:600;letter-spacing:.2px}
 .sub{color:var(--text2);font-size:.78em;margin-bottom:24px;line-height:1.5}
@@ -62,12 +64,12 @@ td{padding:8px;border-bottom:1px solid var(--border)}
 .ch-done{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
 .ch-text{color:var(--text)}.ch-text.done{color:var(--text3);text-decoration:line-through}
 .overview-card{background:var(--surface);border-radius:8px;padding:20px;border:1px solid var(--border);text-decoration:none;display:block;transition:all .2s}
-.overview-card:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(77,168,218,0.08)}
+.overview-card:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(74,158,255,0.08)}
 .oc-title{color:var(--text2);font-weight:600;font-size:.78em;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px}
 .oc-metric{font-size:1.8em;font-weight:700;margin:8px 0;color:var(--white)}
 .oc-sub{color:var(--text2);font-size:.78em;line-height:1.5}
 </style></head><body>
-<nav><span class="nav-brand">Body System</span><a href="index.html" class="nav-link">Overview</a><a href="growth.html" class="nav-link">Growth</a><a href="willpower.html" class="nav-link">Willpower</a><a href="output.html" class="nav-link active">Output</a><a href="autoresearch.html" class="nav-link">Autoresearch</a></nav>
+<nav><a href="../index.html" class="nav-back" target="_top">← Command Center</a><span class="nav-brand">Body System</span><a href="index.html" class="nav-link">Overview</a><a href="growth.html" class="nav-link">Growth</a><a href="willpower.html" class="nav-link">Willpower</a><a href="output.html" class="nav-link active">Output</a><a href="autoresearch.html" class="nav-link">Autoresearch</a></nav>
 <div class="page">
 <h1>Weekly Output</h1>
 <div class="sub">What you shipped, what you built, and where your time went. This is the evidence layer for the Five Levels.</div>
@@ -83,7 +85,7 @@ td{padding:8px;border-bottom:1px solid var(--border)}
 <div class="card"><div class="chart-box"><canvas id="scChart"></canvas></div>
   <div style="font-size:.75em;color:var(--text3);margin-top:8px;line-height:1.5">
     <b style="color:var(--accent)">Artifacts</b> Strategic docs, frameworks, test designs, POVs published that week. Target: 1/week. This is the Level 1 gate metric. &middot;
-    <b style="color:rgba(77,168,218,0.7)">Tools</b> Automations or tools completed and usable by Richard or teammates. Target: 1/month. Level 3 gate metric. &middot;
+    <b style="color:rgba(74,158,255,0.7)">Tools</b> Automations or tools completed and usable by Richard or teammates. Target: 1/month. Level 3 gate metric. &middot;
     <b style="color:var(--text2)">Low-Leverage Hours</b> Time on work that does not advance the Five Levels. Target: under 5 hours/week.
   </div>
 </div>
@@ -103,9 +105,9 @@ td{padding:8px;border-bottom:1px solid var(--border)}
 <script>
 var scorecard=[{"week": "W12", "date": "2026-03-16", "artifacts": 0, "tools": 0, "low_leverage_hours": 4}, {"week": "W11", "date": "2026-03-10", "artifacts": 0, "tools": 0, "low_leverage_hours": 6}];
 var fiveLevels=[{"level": 1, "name": "Sharpen Yourself", "description": "Build consistent strategic output habits (weekly artifacts, not sporadic)", "status": "FUTURE"}, {"level": 2, "name": "Drive & Communicate Worldwide Testing", "description": "Scalable tests that affect all PS accounts globally", "status": "ACTIVE"}, {"level": 3, "name": "Give Your Team Leverage Through Automation", "description": "Build tools a non-tech team can actually adopt (Q Developer, internal Amazon too", "status": "FUTURE"}, {"level": 4, "name": "Own the Zero-Click Future", "description": "Paid search is evolving \u2014 zero-click, AI Overviews, Answer Engine Optimization", "status": "FUTURE"}, {"level": 5, "name": "Full Agentic Orchestration of PS Work", "description": "End state: agent swarm runs paid search operations autonomously", "status": "FUTURE"}];
-var C={accent:'#4da8da',accent60:'rgba(77,168,218,0.6)',accent30:'rgba(77,168,218,0.3)',neutral:'#8899aa',alert:'#f87171',white:'#f0f4f8'};
+var C={accent:'#4a9eff',accent60:'rgba(74,158,255,0.6)',accent30:'rgba(74,158,255,0.3)',neutral:'#8899aa',alert:'#f87171',white:'#f0f4f8'};
 Chart.defaults.color='#8899aa';
-var cDef={responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#888',font:{size:11}}}},scales:{x:{ticks:{color:'#666'},grid:{color:'#1f2230'}},y:{ticks:{color:'#666'},grid:{color:'#1f2230'}}}};
+var cDef={responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#888',font:{size:11}}}},scales:{x:{ticks:{color:'#666'},grid:{color:'#1f222b'}},y:{ticks:{color:'#666'},grid:{color:'#1f222b'}}}};
 if(scorecard.length){
   new Chart(document.getElementById('scChart'),{type:'bar',data:{labels:scorecard.map(function(w){return w.week}),datasets:[
     {label:'Artifacts',data:scorecard.map(function(w){return w.artifacts}),backgroundColor:C.purple,borderRadius:4},
@@ -120,10 +122,10 @@ if(scorecard.length){
   var gates=['4 consecutive artifact weeks','3+ WW tests with written status','1+ tool adopted by teammate','Published POV that influenced a decision','One autonomous PS workflow'];
   var nextSteps=['Ship the Testing Approach doc outline this week.','Write status docs for OCI + ad copy test.','Finish campaign link generator. Ship to a teammate.','Publish AEO POV. Get it cited.','Convert morning routine to fully event-triggered.'];
   var fills=[35,15,0,0,0];
-  var colors={ACTIVE:'#4da8da',NEXT:'#4b5563',QUEUED:'#374151',FUTURE:'#1f2230'};
+  var colors={ACTIVE:'#4a9eff',NEXT:'#4b5563',QUEUED:'#374151',FUTURE:'#1f222b'};
   var h='';
   fiveLevels.forEach(function(lv,i){
-    var c=colors[lv.status]||'#1f2230';
+    var c=colors[lv.status]||'#1f222b';
     var bc=lv.status==='ACTIVE'?'lb-active':lv.status==='NEXT'?'lb-next':lv.status==='QUEUED'?'lb-queued':'lb-future';
     h+='<div class="level-track"><div class="level-header"><span class="level-name">'+lv.level+'. '+lv.name+'</span>'+
       '<span style="color:#888;font-size:.8em;margin-right:6px">'+fills[i]+'%</span><span class="lb '+bc+'">'+lv.status+'</span></div>'+

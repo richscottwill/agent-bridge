@@ -1,11 +1,30 @@
 {
-  "date": "2026-04-10",
-  "karpathy_status": "target_reached",
-  "total_experiments": 130,
-  "keeps": 104,
-  "reverts": 26,
-  "keep_rate": "80%",
-  "new_experiments_run": 0,
-  "note": "Target already exceeded. No new experiments this run.",
-  "suggestions": []
+  "date": "2026-04-15",
+  "run_id": "run44",
+  "status": "batch_1_complete_batch_2_running",
+  "experiments_batch_1": [
+    {"id": "run44_exp1", "target": "spine", "section": "Ground Truth Files", "technique": "ADD", "eval_type": "info_retrieval", "words": "1141→1209", "scores": {"a": 1.0, "b": 1.0, "c": 0.93}, "delta": 0.0, "decision": "KEEP"},
+    {"id": "run44_exp2", "target": "heart", "section": "Design Choices", "technique": "RESTRUCTURE", "eval_type": "info_retrieval", "words": "3872→3875", "scores": {"a": 1.0, "b": 1.0, "c": 1.0}, "delta": 0.0, "decision": "KEEP"},
+    {"id": "run44_exp3", "target": "gut", "section": "Three Functions", "technique": "COMPRESS", "eval_type": "info_retrieval", "words": "2058→2033", "scores": {"a": 1.0, "b": 1.0, "c": 1.0}, "delta": 0.0, "decision": "KEEP"},
+    {"id": "run44_exp4", "target": "eyes", "section": "OCI Performance", "technique": "REWORD", "eval_type": "info_retrieval", "words": "1147→1167", "scores": {"a": 1.0, "b": 1.0, "c": 1.0}, "delta": 0.0, "decision": "KEEP"},
+    {"id": "run44_exp5", "target": "amcc", "section": "The Streak", "technique": "ADD", "eval_type": "info_retrieval", "words": "3154→3239", "scores": {"a": 1.0, "b": 1.0, "c": 1.0}, "delta": 0.0, "decision": "KEEP"},
+    {"id": "run44_exp6", "target": "spine", "section": "Hook System", "technique": "REWORD", "eval_type": "info_retrieval", "words": "1209→1229", "scores": {"a": 0.9, "b": 1.0, "c": 0.9}, "delta": -0.1, "decision": "REVERT"},
+    {"id": "run44_exp7", "target": "eyes", "section": "Whats Coming", "technique": "ADD", "eval_type": "info_retrieval", "words": "1167→1199", "scores": {"a": 1.0, "b": 1.0, "c": 1.0}, "delta": 0.0, "decision": "KEEP"},
+    {"id": "run44_exp8", "target": "richard-style-wbr", "section": "Examples", "technique": "SPLIT", "eval_type": "output_quality", "words": "TBD", "scores": {"a": "TBD", "b": "TBD", "c": "TBD"}, "delta": "TBD", "decision": "TBD"},
+    {"id": "run44_exp9", "target": "device", "section": "TBD", "technique": "TBD", "eval_type": "info_retrieval", "words": "TBD", "scores": {"a": "TBD", "b": "TBD", "c": "TBD"}, "delta": "TBD", "decision": "TBD"},
+    {"id": "run44_exp10", "target": "richard-style-slack", "section": "Greeting and Sign-off", "technique": "SPLIT", "eval_type": "output_quality", "words": "1214→1214", "scores": {"a": 0.96, "b": 0.96, "c": 0.96}, "delta": 0.0, "decision": "KEEP"}
+  ],
+  "batch_1_summary": {
+    "total": 10,
+    "kept": 8,
+    "reverted": 1,
+    "pending": 1,
+    "keep_rate": "80%",
+    "note": "Batch 2 running in background. Final results will update this file."
+  },
+  "suggestions": [
+    "The amcc Common Failures pattern continues to keep (5/5 across organs+style guides). Consider adding to remaining organs that lack it.",
+    "spine × REWORD reverted — table format lost detail on Hook System. Paragraph format is load-bearing for that section.",
+    "gut × COMPRESS (bullets→table) kept with -25 words. Tables are effective for structured lists with consistent columns."
+  ]
 }

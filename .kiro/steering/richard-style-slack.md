@@ -13,11 +13,13 @@ Richard's Slack is his most unfiltered register. Fast, reactive, collaborative. 
 - Edits messages after sending to correct or add nuance — marked with "(edited)"
 - Will paste raw data (SQL queries, URLs, screenshots) inline without preamble
 
-## Greeting & Sign-off
+## Greeting
 - "Hey [name]" or "Hey all" — almost always
 - "Hey both" when addressing two people
-- No sign-off. Ever. Messages just end.
 - Occasionally no greeting at all — jumps straight into the response
+
+## Sign-off
+- No sign-off. Ever. Messages just end.
 
 ## Tone & Register
 

@@ -281,14 +281,6 @@ Completed experiments are logged in changelog.md as one-line entries. Historical
 
 ## Design Choices
 
-- **Pure autoresearch, batch, random.** Experimentation only. Karpathy picks target→section→technique (weighted: over-budget→staleness→random). Volume over precision. Bayesian priors self-terminate proven losers.
-- **Current-state organs.** Organs hold current state, not history. changelog.md = audit trail. Each organ self-contained.
-- **Do no harm.** Brain/Memory: delta_ab ≥ 0, zero INCORRECT. All others: delta_ab ≥ 0. Rollback immediate.
-- **Usefulness over size.** Adaptive budgets (gut.md baselines, learned ceilings). ADD/COMPRESS priors discover natural size. Body ceiling = accuracy plateau in `autoresearch_organ_health`.
-- **Dual blind eval.** A=modified+context, B=original+context, C=modified+zero context. Delta A-B is the signal. Karpathy judges. Evaluators unaware of each other.
-- **Per-organ cooldown.** No experimenting on organs modified by maintenance this invocation. All others fair game.
-- **Output quality + portability.** Style guides, context files, hook prompts are valid targets. A/B/C works for both eval types (Run 18). Every change must work on cold platform — agent-bridge is the test artifact.
-
 ### Validated Patterns (from 58 experiments, Runs 19-27)
 
 These patterns emerged from data. They should inform technique selection but not override the Bayesian priors — the priors will converge to the same conclusions over time.
@@ -306,6 +298,16 @@ These patterns emerged from data. They should inform technique selection but not
 | Concrete examples > abstract rules | +0.04 to +0.08 delta consistently | When adding a rule, always include a worked example. |
 | Empty structural tables are load-bearing | 1/1 reverted (amcc avoidance ratio) | Tables define measurement frameworks even without data. |
 | UCB-only selection produces 90%+ keep rate (selection bias) | Runs 19-25: 92% keep rate | Force 30% exploration of untested combos. Healthy batch ≤50% keep rate. Most experiments should revert. |
+
+### Core Principles
+
+- **Pure autoresearch, batch, random.** Experimentation only. Karpathy picks target→section→technique (weighted: over-budget→staleness→random). Volume over precision. Bayesian priors self-terminate proven losers.
+- **Current-state organs.** Organs hold current state, not history. changelog.md = audit trail. Each organ self-contained.
+- **Do no harm.** Brain/Memory: delta_ab ≥ 0, zero INCORRECT. All others: delta_ab ≥ 0. Rollback immediate.
+- **Usefulness over size.** Adaptive budgets (gut.md baselines, learned ceilings). ADD/COMPRESS priors discover natural size. Body ceiling = accuracy plateau in `autoresearch_organ_health`.
+- **Dual blind eval.** A=modified+context, B=original+context, C=modified+zero context. Delta A-B is the signal. Karpathy judges. Evaluators unaware of each other.
+- **Per-organ cooldown.** No experimenting on organs modified by maintenance this invocation. All others fair game.
+- **Output quality + portability.** Style guides, context files, hook prompts are valid targets. A/B/C works for both eval types (Run 18). Every change must work on cold platform — agent-bridge is the test artifact.
 
 ## DuckDB Integration
 

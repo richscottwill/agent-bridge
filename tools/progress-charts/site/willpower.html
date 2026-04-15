@@ -5,18 +5,20 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-:root{--bg:#0b0e11;--surface:#131820;--surface2:#1a2230;--border:#1e2a3a;--border2:#253345;
+:root{--bg:#0f1117;--surface:#14161e;--surface2:#1a1d27;--border:#1e2028;--border2:#2a2d35;
   --text:#d0d8e0;--text2:#8899aa;--text3:#5a6a7a;--white:#f0f4f8;
-  --accent:#4da8da;--accent2:#2d7eb5;--accent-dim:rgba(77,168,218,0.12);
-  --green:#34d399;--red:#f87171;--amber:#fbbf24;--purple:#a78bfa}
+  --accent:#4a9eff;--accent2:#3b82f6;--accent-dim:rgba(74,158,255,0.12);
+  --green:#4ade80;--red:#f87171;--amber:#fbbf24;--purple:#a78bfa}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);padding:0;min-height:100vh;-webkit-font-smoothing:antialiased}
 .page{max-width:1200px;margin:0 auto;padding:24px 20px}
-nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);background:rgba(19,24,32,0.92)}
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);background:rgba(20,22,30,0.92)}
 .nav-brand{color:var(--white);font-weight:700;font-size:.9em;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:4px;letter-spacing:1.5px;text-transform:uppercase}
 .nav-link{color:var(--text2);text-decoration:none;padding:14px 18px;font-size:.8em;font-weight:500;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
-.nav-link:hover{color:var(--text);background:rgba(77,168,218,0.06)}
+.nav-link:hover{color:var(--text);background:rgba(74,158,255,0.06)}
 .nav-link.active{color:var(--accent);border-bottom-color:var(--accent)}
+.nav-back{color:var(--text3);text-decoration:none;padding:14px 14px 14px 0;font-size:.75em;font-weight:500;letter-spacing:.3px;margin-right:4px;border-right:1px solid var(--border);transition:color .15s}
+.nav-back:hover{color:var(--accent)}
 h1{color:var(--white);font-size:1.35em;margin-bottom:4px;font-weight:600;letter-spacing:.2px}
 h2{color:var(--text);font-size:.95em;margin:28px 0 12px;font-weight:600;letter-spacing:.2px}
 .sub{color:var(--text2);font-size:.78em;margin-bottom:24px;line-height:1.5}
@@ -62,12 +64,12 @@ td{padding:8px;border-bottom:1px solid var(--border)}
 .ch-done{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
 .ch-text{color:var(--text)}.ch-text.done{color:var(--text3);text-decoration:line-through}
 .overview-card{background:var(--surface);border-radius:8px;padding:20px;border:1px solid var(--border);text-decoration:none;display:block;transition:all .2s}
-.overview-card:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(77,168,218,0.08)}
+.overview-card:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(74,158,255,0.08)}
 .oc-title{color:var(--text2);font-weight:600;font-size:.78em;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px}
 .oc-metric{font-size:1.8em;font-weight:700;margin:8px 0;color:var(--white)}
 .oc-sub{color:var(--text2);font-size:.78em;line-height:1.5}
 </style></head><body>
-<nav><span class="nav-brand">Body System</span><a href="index.html" class="nav-link">Overview</a><a href="growth.html" class="nav-link">Growth</a><a href="willpower.html" class="nav-link active">Willpower</a><a href="output.html" class="nav-link">Output</a><a href="autoresearch.html" class="nav-link">Autoresearch</a></nav>
+<nav><a href="../index.html" class="nav-back" target="_top">← Command Center</a><span class="nav-brand">Body System</span><a href="index.html" class="nav-link">Overview</a><a href="growth.html" class="nav-link">Growth</a><a href="willpower.html" class="nav-link active">Willpower</a><a href="output.html" class="nav-link">Output</a><a href="autoresearch.html" class="nav-link">Autoresearch</a></nav>
 <div class="page">
 <h1>Willpower and Patterns</h1>
 <div class="sub">The gap between knowing and doing. The aMCC (anterior midcingulate cortex) grows when you do hard things you do not want to do, and atrophies when you choose comfort.</div>
@@ -126,7 +128,7 @@ var challenge={"items": [{"text": "Ship Testing Approach doc to Kate (meeting Ap
   var items=challenge.items||[];
   var pct=Math.round(challenge.completed/Math.max(challenge.total,1)*100);
   var h='<div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:.85em;color:#888">Progress</span><span style="font-weight:700;color:#fff">'+pct+'%</span></div>'+
-    '<div style="height:6px;background:#1f2230;border-radius:3px;margin-bottom:12px"><div style="height:100%;width:'+pct+'%;background:var(--accent);border-radius:3px"></div></div>';
+    '<div style="height:6px;background:#1f222b;border-radius:3px;margin-bottom:12px"><div style="height:100%;width:'+pct+'%;background:var(--accent);border-radius:3px"></div></div>';
   items.forEach(function(item){
     h+='<div class="ch-item"><div class="ch-box'+(item.done?' ch-done':'')+'">'+( item.done?'\u2713':'')+'</div><span class="ch-text'+(item.done?' done':'')+'">'+item.text+'</span></div>';
   });
@@ -166,7 +168,7 @@ var challenge={"items": [{"text": "Ship Testing Approach doc to Kate (meeting Ap
       barLeft='<div style="position:absolute;right:50%;height:100%;width:'+w+'px;background:rgba(248,113,113,0.4);border-radius:2px 0 0 2px"></div>';
     } else if(score>0){
       var w=score*40;
-      barRight='<div style="position:absolute;left:50%;height:100%;width:'+w+'px;background:rgba(77,168,218,0.5);border-radius:0 2px 2px 0"></div>';
+      barRight='<div style="position:absolute;left:50%;height:100%;width:'+w+'px;background:rgba(74,158,255,0.5);border-radius:0 2px 2px 0"></div>';
     }
     var scoreColor=score<0?'#f87171':score>0?'var(--accent)':'var(--text3)';
     h+='<tr><td style="font-weight:500">'+p.name+'</td>'+

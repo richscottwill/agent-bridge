@@ -328,3 +328,15 @@ Batch stats: 5/5 KEEP (100%). Selection bias check: 100% keep rate is high, but 
 - [heart:DuckDB Integration] REWORD (info_retrieval) → 3922w→3872w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
 - [nervous-system:Loop 5 System Health] SPLIT (info_retrieval) → 1260w→1276w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
 - [REWORD×brain: 2 kept / 2 total] [COMPRESS×brain: 5 kept / 5 total] [RESTRUCTURE×memory: 5 kept / 5 total] [REWORD×gut: 5 kept / 5 total] [REMOVE×heart: 5 kept / 6 total] [ADD×nervous-system: 6 kept / 6 total] [SPLIT×richard-style-slack: 5 kept / 5 total] [SPLIT×gut: 3 kept / 3 total] [REWORD×heart: 1 kept / 2 total] [SPLIT×nervous-system: 7 kept / 7 total]
+
+### Karpathy Run 44 — 2026-04-15 (10 experiments: 8 kept, 2 reverted)
+- [spine:Ground Truth Files] ADD (info_retrieval) → 1141w→1209w. A=1.0 B=1.0 C=0.93 Δ=0.0. 120s. KEEP.
+- [heart:Design Choices] RESTRUCTURE (info_retrieval) → 3872w→3875w. A=1.0 B=1.0 C=1.0 Δ=0.0. 130s. KEEP.
+- [gut:Three Functions] COMPRESS (info_retrieval) → 2058w→2033w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [eyes:OCI Performance] REWORD (info_retrieval) → 1147w→1167w. A=1.0 B=1.0 C=1.0 Δ=0.0. 110s. KEEP.
+- [amcc:The Streak] ADD (info_retrieval) → 3154w→3239w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [spine:Hook System] REWORD (info_retrieval) → 1209w→1229w. A=0.9 B=1.0 C=0.9 Δ=-0.1. 120s. REVERT (detail loss: EOD-2 scope dropped).
+- [eyes:Whats Coming] ADD (info_retrieval) → 1167w→1199w. A=1.0 B=1.0 C=1.0 Δ=0.0. 110s. KEEP.
+- [richard-style-wbr:Examples] SPLIT (output_quality) → 920w→928w. A=0.86 B=0.90 C=0.84 Δ=-0.04. 140s. REVERT (structure match degraded).
+- [device:Installed Apps] REWORD (info_retrieval) → 2085w→2078w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [richard-style-slack:Greeting and Sign-off] SPLIT (output_quality) → 1214w→1214w. A=0.96 B=0.96 C=0.96 Δ=0.0. 130s. KEEP.

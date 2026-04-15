@@ -37,16 +37,18 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 ### OCI Status by Market (as of 4/2)
 | Market | Status | Key Date | Notes |
 |--------|--------|----------|-------|
-| US | 100% live | Launched 2025 | Baseline. Peak Jan: 39K regs (+86% YoY). |
-| UK | 100% live | E2E launched | Tracking lift. |
-| DE | 100% live | E2E launched | W49-W51: +16-20% lift. Data loss 3/18-3/25 (DUB→ZAZ migration). |
-| FR | 100% live | Dialed up 3/30 | Confirmed 775 click events 3/24 UTC. |
-| IT | 100% live | Dialed up 3/30 | Confirmed 1,412 click events 3/24 UTC. |
-| ES | 100% live | Dialed up 3/30 | Confirmed 1,168 click events 3/24 UTC. |
-| JP | 100% live | Dialed up 3/31 | MCM-147368188 COMPLETE — tracking template implemented, feed enabled. Ref tag taxonomy deferred post-launch. |
-| CA | On track | Target 04/07 | E2E launched 3/4. Full impact projected Jul 2026. |
-| AU | Not started | Target May 2026 | MCC not created. Discussed with Suzane (Adobe) 3/19. |
-| MX | Not started | TBD | No MCC. |
+| US | ✅ 100% live | Launched 2025 | Baseline. Peak Jan: 39K regs (+86% YoY). |
+| UK | ✅ 100% live | E2E launched | Tracking lift. |
+| DE | ✅ 100% live | E2E launched | W49-W51: +16-20% lift. Data loss 3/18-3/25 (DUB→ZAZ migration). |
+| FR | ✅ 100% live | Dialed up 3/30 | 775 click events confirmed 3/24 UTC. |
+| IT | ✅ 100% live | Dialed up 3/30 | 1,412 click events confirmed 3/24 UTC. |
+| ES | ✅ 100% live | Dialed up 3/30 | 1,168 click events confirmed 3/24 UTC. |
+| JP | ✅ 100% live | Dialed up 3/31 | MCM-147368188 COMPLETE — tracking template + feed enabled. Ref tag taxonomy deferred. |
+| CA | 🟡 On track | Target 04/07 | E2E launched 3/4. Full impact projected Jul 2026. |
+| AU | 🔴 Not started | Target May 2026 | MCC not created. Discussed with Suzane (Adobe) 3/19. |
+| MX | 🔴 Not started | TBD | No MCC. |
+
+**Rollout: 7/10 live (70%).** Next: CA (Apr), AU (May), MX (TBD).
 
 ### MCC Structure
 - Master MCC: DSAP - Amazon Business Parent MCC (873-788-1095)
@@ -122,7 +124,10 @@ _Cleared at EOD 4/3. Regenerated each AM-2 from calendar + active threads + Slac
 - Feeds: WBR callouts, MBR narratives, QBR trends, daily Google Ads checks (MX, AU, Paid App)
 
 ## What's Coming
-- AI Max: US test planned Q2 2026, no test design written yet (6d overdue — was due 3/28)
-- Project Baloo: Early access launched 3/30. Keywords delivered. Shopping Ads for AB.
-- AEO/Zero-click: Educational session attended 3/10, POV queued (Level 4)
-- Polaris Brand LP WW rollout: Weblab dial-up targeting April 6-7. Frank got requirements from Alex — no action needed.
+
+| Initiative | Status | Level | Key Detail |
+|-----------|--------|-------|------------|
+| AI Max | ⚠️ Test design 6d overdue (due 3/28) | L2 | US test planned Q2 2026. No test design written yet. |
+| Project Baloo | 🟢 Early access launched 3/30 | L2 | Shopping Ads for AB. Keywords delivered. |
+| AEO/Zero-click | 📋 POV queued | L4 | Educational session attended 3/10. |
+| Polaris Brand LP | 🟢 No action needed | — | WW rollout weblab dial-up targeting April 6-7. Frank got requirements from Alex. |

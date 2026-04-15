@@ -23,23 +23,11 @@ Every other organ adds content. The gut removes content. It enforces the context
 
 ## Three Functions
 
-### Function 1: Digestion — Process raw material into nutrients
-- **Input:** `~/shared/context/intake/` (raw files, notes, data drops)
-- **Output:** Compressed facts routed to the correct organ
-- **Waste:** The raw file, archived or deleted after extraction
-- *Example:* WBR xlsx drops into intake → extract "AU Feb: 1.1K regs, CPA $118" → route to Eyes → archive xlsx.
-
-### Function 2: Compression — Keep organs lean
-- **Input:** All organ files
-- **Output:** Tighter versions of the same content
-- **Waste:** Redundant facts, resolved items, stale predictions
-- *Example:* Memory has AU CPA in both relationship graph and key metrics → deduplicate, keep in Eyes, pointer in Memory.
-
-### Function 3: Excretion — Remove what the body no longer needs
-- **Input:** Staleness signals, reference counts, completion status
-- **Output:** Archived or deleted content
-- **Waste:** Moved to `~/shared/wiki/archive/` or permanently removed
-- *Example:* Completed task "MX invoice handoff" with no open dependencies after 14 days → archive.
+| Function | Input | Output | Waste | Example |
+|----------|-------|--------|-------|---------|
+| **Digestion** — raw→nutrients | `~/shared/context/intake/` (raw files, notes, data drops) | Compressed facts routed to correct organ | Raw file, archived/deleted after extraction | WBR xlsx → extract "AU Feb: 1.1K regs, CPA $118" → Eyes → archive xlsx |
+| **Compression** — keep organs lean | All organ files | Tighter versions of same content | Redundant facts, resolved items, stale predictions | Memory has AU CPA in relationship graph + key metrics → deduplicate, keep in Eyes, pointer in Memory |
+| **Excretion** — remove unneeded | Staleness signals, reference counts, completion status | Archived or deleted content | Moved to `~/shared/wiki/archive/` or permanently removed | Completed "MX invoice handoff" with no open deps after 14d → archive |
 
 ---
 

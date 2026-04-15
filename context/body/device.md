@@ -22,11 +22,11 @@ Before adding anything here, ask: "Does this require Richard's judgment to produ
 These are live. They execute without Richard thinking.
 
 ### AM Hooks (2 sequential: backend → frontend)
-- **AM-Backend** (`am-auto`) — Parallel ingestion (6 subagents: Slack, Asana Sync, Asana Activity, Email+Calendar, Loop Pages, Hedy) → sequential processing (signal routing, enrichment, portfolio scan) → SharePoint durability sync. ~12 min. Protocol: `am-backend-parallel.md`
-- **AM-Frontend** (`am-triage`) — Interactive: daily brief, email brief, calendar blocks, enrichment execution, ABPS AI triage, portfolio alerts, command center. Reads pre-computed state from backend (local first, SharePoint fallback). ~10 min. Protocol: `am-frontend.md`
+- **AM-Backend** (`am-auto`) — Parallel ingestion (6 subagents: Slack, Asana Sync, Asana Activity, Email+Calendar, Loop Pages, Hedy) → sequential processing (signal routing, enrichment, portfolio scan) → SharePoint sync. ~12 min. Protocol: `am-backend-parallel.md`
+- **AM-Frontend** (`am-triage`) — Interactive: daily brief, email brief, calendar blocks, enrichment execution, ABPS AI triage, portfolio alerts, command center. Reads backend state (local first, SharePoint fallback). ~10 min. Protocol: `am-frontend.md`
 
 ### EOD Hook (1 unified: backend + frontend)
-- **EOD** (`eod`) — Backend: Hedy meeting ingestion, Asana reconciliation (delta sync, daily reset, recurring, completion moves, blockers), organ cascade, compression audit, workflow health, context enrichment, recurring state checks, DuckDB snapshots, git sync, Karpathy experiments, SharePoint durability sync. Frontend: day summary, decisions, portfolio report, system health, experiment results, Slack DM. ~20 min. Protocol: `eod-backend.md` + `eod-frontend.md`
+- **EOD** (`eod`) — Backend: Hedy meeting ingestion, Asana reconciliation (delta sync, daily reset, recurring, completion moves, blockers), organ cascade, compression audit, workflow health, context enrichment, DuckDB snapshots, git sync, Karpathy experiments, SharePoint sync. Frontend: day summary, decisions, portfolio report, system health, experiment results, Slack DM. ~20 min. Protocol: `eod-backend.md` + `eod-frontend.md`
 
 ### Safety Guards (preToolUse hooks)
 - **Block Email Send:** Prevents email_reply/send/forward unless only recipient is prichwil. Others require explicit approval.

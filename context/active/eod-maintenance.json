@@ -1,34 +1,35 @@
 {
-  "date": "2026-04-10",
+  "date": "2026-04-15",
   "compression_audit": {
-    "status": "skipped",
-    "reason": "No organ updates since last EOD — Richard was at Austin Summit all week"
+    "total_body_words": null,
+    "signals": "Not computed this run — deferred to next full audit"
   },
   "workflow_health": {
-    "status": "skipped",
-    "reason": "No workflow executions to audit — system idle during travel week"
+    "total_runs_24h": 1,
+    "success_rate": 100,
+    "failures": 0,
+    "degraded_workflows": [],
+    "note": "EOD routine is the only workflow run today"
   },
   "communication_analytics": {
-    "status": "due_friday",
-    "note": "Friday communication analytics due but insufficient new meeting_analytics data in DuckDB to run trailing 4-week analysis. 8 sessions ingested but not yet written to DuckDB meeting_analytics table. Queue for next EOD after DuckDB insert."
+    "note": "Weekly — runs Friday only. Skipped (Tuesday)."
   },
   "context_enrichment": {
-    "status": "skipped",
-    "reason": "Non-blocking — skip during heavy meeting ingestion run"
+    "queries": 0,
+    "findings": 0,
+    "note": "KDS enrichment skipped — not invoked this run"
   },
   "organ_cascade": {
-    "status": "partial",
-    "updates_needed": [
-      "current.md — needs Austin Summit outcomes (AI-MAX test plan, paid app repositioning, LiveRamp enhanced match, comp review)",
-      "memory.md — new relationships: Alexia (CPS Senior Editor), Matt Freese (Google Hardware), Sid (Acquisition central team)",
-      "hands.md — new action items from 8 meetings",
-      "eyes.md — US exceeding goals by ~20%, EU mixed, Germany flat on OCI"
-    ],
-    "note": "Organ cascade deferred to next AM run — too many updates to process safely in EOD backend without Richard review"
+    "organs_updated": ["hands.md"],
+    "organs_skipped": "All others — no significant changes requiring cascade",
+    "intake_files_processed": 0
   },
-  "recurring_task_checks": {
-    "weekly_scorecard": "due_friday — deferred to AM run (no completions today to score)",
-    "agent_bridge_sync": "due_friday — will execute in Phase 5",
-    "wiki_lint": "due_friday — deferred to next session"
+  "git_sync": {
+    "status": "pushed",
+    "commit_message": "EOD 2026-04-15: 3 meetings ingested, daily reset (7 Today→Urgent), 3 completions, admin-block-fix spec, AU handoff doc, brand LP feedback"
+  },
+  "motherduck_snapshot": {
+    "status": "blocked",
+    "reason": "Named snapshots not supported on current plan"
   }
 }
