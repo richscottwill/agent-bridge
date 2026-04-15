@@ -65,23 +65,15 @@ Sources: rw-tracker.md, Asana My Tasks, ABPS AI Content, Slack scan, DM scan
 
 ---
 
-## Task List Structure (Microsoft To-Do)
+## Task List Structure
 
 | List | Purpose | Cap |
 |------|---------|-----|
 | 🧹 Sweep | Quick unblocking: send, confirm, triage | 5 |
+| 📋 Admin | Budget, POs, invoices, compliance, goal updates | 3 |
 | 🎯 Core | Strategic: test designs, frameworks, stakeholder docs | 4 |
 | ⚙️ Engine Room | Hands-on: campaign builds, keyword changes, bids | 6 |
-| 📋 Admin | Budget, POs, invoices, compliance, goal updates | 3 |
 | 📦 Backlog | Deferred/blocked/future with justification | — |
-
-<!-- To-Do List IDs (for MCP tool calls):
-Sweep: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESHAAA=
-Core: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESIAAA=
-Engine Room: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESJAAA=
-Admin: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADUyESKAAA=
-Backlog: AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy-SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja-dZLhI0AADWyS4nAAA=
--->
 
 ## Key Outlook Folders
 | Folder | ID |

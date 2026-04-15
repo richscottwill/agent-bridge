@@ -75,6 +75,9 @@ The agent should monitor for these avoidance signals during any interaction:
 | **Delegation reversal** | Richard starts doing work that was delegated to someone else | Fire: "This was delegated to [person] on [date]. Are you taking it back? If so, the delegation failed — log it in device.md." |
 | **Email as escape** | Richard opens email or Slack mid-task when a focus block is active | Fire: "You have a 🔒 Focus block until [time]. Email can wait. What's the next sentence?" |
 | **Unread message accumulation** | Slack messages or emails from stakeholders sit unread/unanswered for 3+ days. Detectable via DuckDB: `signals.emails_unanswered` (emails needing response, with `days_old` and `priority`), `signals.slack_unanswered` (Slack @mentions where Richard hasn't replied or reacted, with `days_old`, `priority` [critical/high/medium/normal], `richard_responded_24h`, `richard_responded_ever`). Query: `SELECT * FROM signals.slack_unanswered WHERE richard_responded_ever = FALSE AND richard_reacted = FALSE` + `SELECT * FROM signals.emails_unanswered WHERE action_needed = 'respond'`. The longer they sit, the higher the avoidance signal — especially from Brandon (critical), Kate/Lena/Lorena (high). | Fire: "You have [N] Slack mentions and [N] emails unanswered for [X] days. [Person] is waiting. Reply or acknowledge now." |
+| **Career conversation avoidance** | Richard hasn't raised promotion/career trajectory with Brandon in 30+ days. No champion identification. No "what do you need from me" deal-making. Detectable via: meeting series notes (brandon-sync.md — scan for career/promo/growth topics), DuckDB `main.meeting_highlights` for Brandon meetings. | Fire: "When did you last talk to Brandon about YOUR career — not tasks, not projects, your trajectory? The Magic Loop requires you to make the deal explicit. 'I'll deliver X. You help me get to Y.' Have you said those words?" (Ref: amazon-politics.md §1) |
+| **Stakeholder relationship decay** | Key cross-team relationships (Kate, Lena, Lorena, Stacey, Andrew) have no interaction in 14+ days. Detectable via DuckDB `main.relationship_activity`. | Fire: "You haven't engaged [person] in [X] days. Relationships atrophy like muscles. A 2-minute Slack check-in costs nothing and keeps you in their mental model. Send it now." (Ref: amazon-politics.md §4) |
+| **Pre-meeting passivity** | Richard attends a meeting with a senior stakeholder (Kate, Todd, cross-team directors) without back-channeling or pre-selling his position 1:1 beforehand. | Fire: "You're walking into [meeting] cold. Have you pre-sold your position to anyone in the room? Back-channeling isn't politics — it's giving people a chance to feel consulted. One 5-min DM changes the outcome." (Ref: amazon-politics.md §4) |
 
 ### Escalation Ladder
 
@@ -137,12 +140,49 @@ Over time, the aMCC builds a map of Richard's resistance patterns. This is diffe
 | **Comfort zone gravity** | Gravitates to bids/keywords over strategy | Close campaign tab. Open strategy doc. Execution is your floor. |
 | **Delegation guilt** | Does work himself after delegation agreed | Name delegate. Send handoff. Delegation multiplies. |
 | **Urgency addiction** | Responds to every ping mid-focus | "Urgent or important?" If urgent-not-important, defer. |
+| **Promotion passivity** | Waits to be recognized instead of asking. Avoids career conversations with Brandon. Doesn't line up champions. Assumes good work speaks for itself. | "Good work doesn't self-promote. Have you told Brandon what you want this half? Have you identified your champion VPs? The squeaky wheel gets greased — and the quiet one waits." (Ref: amazon-politics.md §1) |
+| **Relationship underinvestment** | Skips 1:1 prep, doesn't back-channel before key meetings, doesn't pre-sell ideas to stakeholders, lets cross-team relationships go cold. | "Relationships control your progress, not being right. When did you last back-channel with [stakeholder] before a group decision? Pre-sell the idea 1:1 before the meeting." (Ref: amazon-politics.md §4) |
+| **Political naivety** | Assumes reorgs/scope changes are purely business-driven. Doesn't read the subtext of org moves. Doesn't protect scope or position proactively. | "Every reorg has a public narrative and private motives. What's the subtext here? Who benefits? Are you positioned as essential or replaceable?" (Ref: amazon-politics.md §3) |
+
+---
+
+## Political Awareness Layer
+
+The aMCC doesn't just catch task avoidance — it catches *career* avoidance. Some of Richard's hardest things aren't documents or deliverables. They're conversations, asks, and relationship investments that feel uncomfortable but compound over time.
+
+**Reference:** `~/shared/context/body/amazon-politics.md` — load for full framework. Key principles below.
+
+### When the Hard Thing Is Political
+
+Sometimes the hard thing isn't "write the doc" — it's "send the doc to Brandon and ask what it means for your trajectory." The aMCC should recognize when the real avoidance is the political act, not the tactical one.
+
+**Signals that the hard thing is political:**
+- The deliverable is done but hasn't been shared with the person who matters
+- A career conversation is overdue (30+ days since last explicit discussion with Brandon)
+- A key relationship has gone cold (14+ days, no interaction)
+- A scope/ownership question is unresolved and Richard is "waiting to see what happens" instead of positioning
+- A meeting with senior stakeholders is approaching and Richard hasn't pre-sold his position
+
+**Intervention framing for political hard things:**
+- Level 1: "The doc is done. The hard part now is hitting send and asking Brandon what this means for your path."
+- Level 2: "You're avoiding the career conversation, not the work. Name what makes it uncomfortable."
+- Level 3: "You know the polite fiction: 'My career is very important to me. I need to understand how important it is to Amazon.' You don't need those exact words. But you need SOME version of that ask. When?"
+- Level 4: "The quiet worker who waits gets passed over by the pushy one who asks. That's not cynicism — that's how every promotion committee works. Are you the one who asks or the one who waits?"
+
+### Key Political Principles the aMCC Enforces
+
+1. **Ask or wait forever.** Managers don't guess what you want. If you haven't told Brandon explicitly, he's focused on the people who have.
+2. **Champions take 6 months.** If you need VP/Director feedback for a promo packet, start NOW. Over-subscribe (need 4? ask 7).
+3. **Back-channel before every important meeting.** Pre-selling isn't manipulation — it's giving people a chance to feel consulted. The person who back-channels wins even with a weaker proposal.
+4. **Relationships > being right.** Evidence-based testing methodology is correct. But being correct without relationships = being ignored. Invest in the relationship, then the evidence lands.
+5. **Solve problems for your boss.** The Magic Loop: "I'll do everything you need. You make sure I'm rewarded." Make the deal explicit.
+6. **Scope comes to those who say yes.** The garbage can strategy — take the unsexy work nobody wants. That's how you accumulate scope without fighting for it.
 
 ---
 
 ## Integration with Other Organs
 
-Brain decides what's right; aMCC makes you do it. Eyes provides deadline urgency. Hands has the task list; aMCC identifies THE hard thing from it. Memory provides stakeholder reframes ("Lena is waiting"). Device catches when Richard does device-level work with brain-level time. NS measures after; aMCC intervenes before. Gut prevents time on low-leverage work. Heart ensures loop outputs are acted on. Trainer sets the standard (retrospective); aMCC enforces it (prospective).
+Brain decides what's right; aMCC makes you do it. Eyes provides deadline urgency. Hands has the task list; aMCC identifies THE hard thing from it. Memory provides stakeholder reframes ("Lena is waiting"). Device catches when Richard does device-level work with brain-level time. NS measures after; aMCC intervenes before. Gut prevents time on low-leverage work. Heart ensures loop outputs are acted on. Trainer sets the standard (retrospective); aMCC enforces it (prospective). Amazon Politics provides the playbook for political hard things — promotion asks, champion building, back-channeling, polite fictions, scope positioning.
 
 ---
 
@@ -158,6 +198,9 @@ Tracks micro-avoidance moments within sessions. When the aMCC fires an intervent
 | Comfort zone gravity | — | — | — | — |
 | Delegation guilt | — | — | — | — |
 | Urgency addiction | — | — | — | — |
+| Promotion passivity | — | — | — | — |
+| Relationship underinvestment | — | — | — | — |
+| Political naivety | — | — | — | — |
 
 ---
 
@@ -174,7 +217,7 @@ The aMCC is a muscle — it grows with use and atrophies with avoidance.
 | Current streak | 1 | 5+ days | 10+ days |
 | Avg days to complete hard thing | — | < 5 days | < 3 days |
 | Avoidance count per hard thing | 3+ | < 2 | < 1 |
-| Resistance types active | 6 | 4 | 2 |
+| Resistance types active | 9 | 6 | 3 |
 | Interventions per session | — | < 2 | < 1 |
 
 **End state:** Richard self-selects the hard thing, starts without prompting, ships without delay. The organ goes quiet — not atrophied, but strong enough that the behavior is automatic. Like a well-trained reflex: the hard thing IS the default path.

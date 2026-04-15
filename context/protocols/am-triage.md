@@ -19,6 +19,26 @@ spine.md, current.md, memory.md, richard-writing-style.md, hands.md, amcc.md, rw
 - Email signals → same routing.
 - Asana digest → update hands.md Priority Actions.
 
+### Admin Keyword Detection (override — runs BEFORE generic mapping)
+Before applying the Signal-to-Routine mapping table below, check the signal text (task name, description, or source message) against the Admin keyword list. Matching is case-insensitive.
+
+**Admin Keywords:** `budget`, `PO`, `purchase order`, `invoice`, `spend`, `R&O`, `reconciliation`, `actuals`, `forecast`, `compliance`
+
+**Rule:** If the signal text matches ANY keyword (case-insensitive substring match), route directly to Routine_RW = Admin with Priority_RW = Today. This overrides the generic Signal-to-Routine mapping below — do not fall through to the table for matched signals.
+
+Signals that do NOT match any Admin keyword continue to the Signal-to-Routine mapping table as normal.
+
+### Admin Early-Start Due Date Enforcement
+When AM-2 triage routes a task to Routine_RW = Admin (whether by keyword detection above or by the Signal-to-Routine mapping table below), apply the following due date enforcement:
+
+- **IF task has no due date** (due_on IS NULL): flag to Richard: "Admin task [name] has no due date — set one?" Do not auto-assign a due date — Richard decides.
+- **IF task has a due date AND no start date** (due_on IS SET, start_on IS NULL): auto-set start_on = due_on − 7 business days. This ensures the task surfaces in the Admin block a full week before it's due, shifting Admin from "do by deadline" to "start early."
+- **IF task already has a start date** (start_on IS SET): do not modify. Existing start dates are preserved.
+
+**Why 7 business days:** Budget confirmations, R&O submissions, and PO tasks require lead time — they involve cross-team coordination (Lorena, Andrew, Brandon) and cannot be completed in a single session. A 7-business-day window gives Richard a full work week to process them in the bounded Admin block (30 min/day) before the deadline.
+
+**Calculation note:** 7 business days = 7 weekdays (Mon–Fri), skipping weekends. For example, a task due on a Friday would have start_on set to the previous Friday (not the previous Wednesday).
+
 ### Signal-to-Routine Mapping
 | Signal Type | Routine | Priority_RW |
 |-------------|---------|-------------|
@@ -32,7 +52,92 @@ spine.md, current.md, memory.md, richard-writing-style.md, hands.md, amcc.md, rw
 Detect keywords: 'decided', 'agreed', 'confirmed', 'approved', 'going with', 'final call', 'locked in'. For each: extract decision text, thread link, participants, date. Queue for Project Notes 'Recent Decisions' update. Present to Richard for approval before writing.
 
 ### Bucket Cap Check
-Sweep: 5, Core: 4, Engine Room: 6, Admin: 3. Over cap → flag lowest-priority for demotion.
+Sweep: 5, Core: 4, Engine Room: 6, Admin: 3.
+
+**Sweep, Core, Admin:** Over cap → flag lowest-priority for demotion (present to Richard).
+
+**Engine Room: Auto-Demotion + Task Decomposition**
+
+Engine Room cap is 6. When Engine Room exceeds cap, auto-demote (no approval needed) — the current system proposes but never executes because Richard defers the decision. Auto-execution removes that friction.
+
+**Step 1 — Identify excess tasks:**
+Query all incomplete Engine Room tasks, sorted by priority (lowest first), then by due date (no due date = lowest), then by creation date (oldest = lowest):
+
+```
+SELECT task_gid, name, due_on, priority_rw, created_at
+FROM asana_tasks
+WHERE routine_rw LIKE '%Engine Room%'
+  AND completed = FALSE
+ORDER BY
+  CASE priority_rw
+    WHEN 'Not urgent' THEN 1
+    WHEN NULL THEN 2
+    WHEN 'Today' THEN 3
+    WHEN 'Urgent' THEN 4
+    ELSE 0
+  END ASC,
+  CASE WHEN due_on IS NULL THEN 1 ELSE 0 END ASC,
+  due_on ASC,
+  created_at ASC
+```
+
+Tasks beyond position 6 in this sorted list are excess.
+
+**Step 2 — Auto-demote excess tasks:**
+For each excess task (auto-execute, no approval needed):
+1. UpdateTask: clear Routine_RW — set to null (Backlog). `custom_fields: {'1213608836755502': null}`
+2. UpdateTask: update Kiro_RW (GID: `1213915851848087`) — append: `"M/D: Demoted from Engine Room (cap enforcement). [reason: e.g., lowest priority, no due date]."`
+   - M/D = current date in month/day format, no leading zeros.
+3. Log write to asana-audit-log.jsonl per Guardrail Protocol.
+4. Notify Richard of all demotions in the daily brief summary (batch, not per-task).
+
+**Step 3 — BAU/Mandatory Task Decomposition:**
+After demotion, check each demoted task for BAU/mandatory indicators:
+- **Recurring:** task has a recurrence pattern, or matches a known recurring task in asana-command-center.md § Recurring Task Patterns
+- **External stakeholders:** task name or description references teammates (Lorena, Andrew, Brandon, etc.) or cross-team dependencies
+- **Business-critical tag:** Priority_RW was Urgent before demotion, or task is tagged with a business-critical label
+
+**IF a demoted task is BAU/mandatory:**
+1. Decompose the parent task into 2–3 smaller subtasks that represent the minimum viable work to keep the mandatory obligation moving.
+2. For each subtask, identify the most related block based on the subtask's nature:
+   - Quick send/confirm/reply actions → piggyback onto Sweep
+   - Data pulls, spreadsheet updates → keep in Engine Room (if space) or Backlog
+   - Budget/PO/invoice components → route to Admin
+3. Create subtasks via CreateTask(parent=demoted_task_gid, assignee='1212732742544167') with appropriate Routine_RW for the target block.
+4. Update each subtask's Kiro_RW: `"M/D: Decomposed from [parent task name] (Engine Room cap). Piggybacked onto [block]."`
+5. Update the demoted parent's Kiro_RW: append `"Decomposed into [N] subtasks across [blocks]."`
+6. Present decomposition to Richard in the daily brief: "Engine Room cap enforced. [parent task] demoted to Backlog but decomposed into [N] subtasks piggybacked onto [blocks] — mandatory work still gets through."
+
+**IF a demoted task is NOT BAU/mandatory:**
+- No decomposition. Task stays in Backlog until Richard manually retriages it.
+
+**Preservation:** Engine Room cap value (6) is unchanged. Only the enforcement mechanism changes — from "propose and wait" to "auto-execute and notify." Tasks that remain within cap are untouched.
+
+### Admin Escalation Check (SINGLE CHECKPOINT — AM-2 ONLY)
+After bucket cap enforcement, check for overdue Admin tasks that need escalation to Sweep.
+
+**Query:** All incomplete tasks where Routine_RW = Admin (or Admin (Wind-down)) AND days_overdue >= 3.
+
+```
+SELECT task_gid, name, due_on, DATEDIFF('day', due_on, CURRENT_DATE) AS days_overdue
+FROM asana_tasks
+WHERE routine_rw LIKE '%Admin%'
+  AND completed = FALSE
+  AND due_on IS NOT NULL
+  AND DATEDIFF('day', due_on, CURRENT_DATE) >= 3
+```
+
+**For each matching task, auto-execute (no approval needed):**
+1. UpdateTask: change Routine_RW from Admin to Sweep (custom_fields: `{'1213608836755502': '1213608836755503'}`).
+2. UpdateTask: update Kiro_RW (GID: `1213915851848087`) — append: `"M/D: Escalated to Sweep (3d+ overdue)."`
+   - M/D = current date in month/day format, no leading zeros (e.g., `4/14`, `12/1`).
+3. Log write to asana-audit-log.jsonl per Guardrail Protocol.
+
+**Threshold:** Exactly 3 days overdue. Tasks 1–2 days overdue stay in Admin. Tasks 3+ days overdue escalate.
+
+**Scope:** This is the ONLY escalation checkpoint in the system. Per McKeown's Effortless principle, one simple check in AM-2 is better than triplicated logic across AM-auto and EOD. If Admin is in position 2 and routing is fixed, escalation should rarely fire — it's a safety net, not a primary mechanism.
+
+**Preservation:** Admin tasks within their due date window (not overdue, or overdue < 3 days) remain in Admin with cap of 3. No premature escalation.
 
 ### Flags
 - Priority_RW=Today but no Routine → flag for Richard.

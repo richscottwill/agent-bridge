@@ -1,37 +1,28 @@
 {
-  "snapshot_date": "2026-04-13",
-  "day_of_week": "Monday",
-  "synced_at": "2026-04-13T07:00:00Z",
-  "summary": {
-    "total_incomplete": 129,
-    "due_today": 2,
-    "overdue": 11,
-    "overdue_oldest": {"name": "Page Creation - Duplicate Beauty and Auto page for MX", "days": 21},
-    "projects_synced": 6
+  "generated_at": "2026-04-14T07:00:00Z",
+  "sync_type": "full",
+  "total_incomplete": 94,
+  "soft_deleted": 9,
+  "snapshot_rows": 124,
+  "new_since_yesterday": 17,
+  "overdue_3plus": 7,
+  "today_tasks": 9,
+  "by_routine": {
+    "Wiki": 46,
+    "Engine Room": 15,
+    "Core": 10,
+    "Sweep": 5,
+    "Admin": 4,
+    "Backlog": 14
   },
-  "buckets": {
-    "Sweep": {"count": 6, "cap": 5, "over": true, "today_count": 3},
-    "Core": {"count": 10, "cap": 4, "over": true, "today_count": 0},
-    "Engine Room": {"count": 15, "cap": 6, "over": true, "today_count": 3},
-    "Admin": {"count": 4, "cap": 3, "over": true, "today_count": 1},
-    "Wiki": {"count": 46, "cap": null, "over": false, "today_count": 0},
-    "Backlog": {"count": 48, "cap": null, "over": false, "today_count": 0}
+  "by_project": {
+    "ABPS AI - Content": 44,
+    "AU": 15,
+    "Paid App": 12,
+    "ABPS - WW Testing & Projects": 9,
+    "MX": 7
   },
-  "due_today": [
-    {"gid": "1213983331865941", "name": "Weekly Reporting - Global WBR sheet", "routine": "Engine Room", "priority": "Today"},
-    {"gid": "1212808474749819", "name": "Paid App PO — Create Q2 + Amend Google PO to Q2", "routine": "Admin", "priority": "Today"}
-  ],
-  "coherence": {
-    "overdue_3plus": 11,
-    "empty_kiro": 48,
-    "empty_next_action": 48,
-    "soft_deleted": 0,
-    "empty_projects": ["ABPS - JP"],
-    "all_buckets_over_cap": true
-  },
-  "schema_drift": {
-    "new_fields": [],
-    "new_projects": [],
-    "new_sections": []
-  }
+  "over_cap": ["Engine Room (15/6)", "Core (10/4)", "Admin (4/3)"],
+  "coherence_alerts": 3,
+  "oldest_overdue": {"name": "Paid App", "days": 14}
 }

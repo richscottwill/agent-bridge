@@ -209,7 +209,7 @@ FROM (
         STRING_AGG(DISTINCT name, ', ' ORDER BY name) FILTER (WHERE NOT completed) as topic_list
     FROM asana.asana_tasks 
     WHERE deleted_at IS NULL 
-    AND (name ILIKE '%testing approach%' OR name ILIKE '%framework%' OR name ILIKE '%admin%' OR routine_rw = 'Admin')
+    AND (name ILIKE '%testing approach%' OR name ILIKE '%framework%' OR name ILIKE '%admin%' OR routine_rw LIKE '%Admin%')
     -- ... similar for L2-L5
 )
 ON CONFLICT DO NOTHING;

@@ -19,6 +19,7 @@ Last updated: 2026-04-04 (Karpathy Run 25 — Task Routing table: organ names→
 | 📱 Device | `~/shared/context/body/device.md` | Automation, delegation, templates, monitors, tool factory | When offloading work. When "I'll just do it myself" triggers. |
 | 🧬 Nervous System | `~/shared/context/body/nervous-system.md` | Calibration, feedback loops, decision audits, prediction scoring, pattern tracking, system health | Fridays (weekly calibration). Monthly deep review. When something feels off. |
 | 🔥 Anterior MCC | `~/shared/context/body/amcc.md` | Willpower engine, real-time avoidance detection, streak tracking, resistance taxonomy, escalation | Every session. When Richard drifts to comfort zone. The hard thing. |
+| 🏛️ Amazon Politics | `~/shared/context/body/amazon-politics.md` | Corporate politics, promotion mechanics, PIPs, reorgs, influence tactics, leverage, polite fictions (Ethan Evans VP reference) | Career coaching. 1:1 prep. Skip-level prep. Promotion planning. Org dynamics. Stakeholder conflict. |
 | 🫁 Gut | `~/shared/context/body/gut.md` | Digestion, compression, waste removal, word budgets, bloat detection | During loop cascade. When organs feel bloated. Monthly compression review. |
 | 📥 Intake | `~/shared/context/intake/` | Unprocessed notes, drafts, new docs | During heart loop Phase 1. Not for direct consumption. |
 | 🛠️ Tools | `~/shared/tools/` | Python utility scripts (MCP, sync, briefs). Hedy now via MCP power. | When building or running automation. |

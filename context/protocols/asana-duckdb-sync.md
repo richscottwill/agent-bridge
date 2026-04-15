@@ -380,7 +380,7 @@ These views are pre-created and available for any protocol to query:
 |------|---------|-------------|
 | `asana_overdue` | Tasks past due, not completed | name, project_name, due_on, days_overdue |
 | `asana_by_project` | Task counts per project | project_name, total_tasks, incomplete, overdue |
-| `asana_by_routine` | Bucket distribution | routine_bucket, total_tasks, today_count, overdue_count |
+| `asana_by_routine` | Bucket distribution (normalized — groups "Sweep (Low-friction)" under "Sweep", etc.) | routine_rw, task_count |
 | `asana_completion_rate` | Trailing 7/30 day completion stats | avg_daily_completions_7d, total_completed_7d, etc. |
 
 ---

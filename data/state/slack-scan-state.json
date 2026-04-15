@@ -1,140 +1,138 @@
 {
   "version": "1.0",
   "last_scan": {
-    "timestamp": "2026-04-13T16:40:00Z",
-    "hook": "AM-1-PM",
+    "timestamp": "2026-04-15T01:30:00Z",
+    "hook": "AM-PM",
     "status": "success",
-    "signals_extracted": 4,
-    "channels_scanned": 12,
-    "proactive_queries_run": 2,
-    "proactive_queries_failed": 2,
-    "errors": ["prichwil search returned invalid_auth", "kataxt search returned invalid_auth", "list_channels(public_and_private, unreadOnly=true) returned invalid_auth — used non-unread list instead"]
+    "signals_extracted": 12,
+    "channels_scanned": 8,
+    "proactive_queries_run": 0,
+    "proactive_queries_failed": 0,
+    "errors": []
   },
   "channels": {
     "C0993SRL6FQ": {
       "channel_name": "rsw-channel",
-      "last_message_ts": "1775839805.202289",
-      "last_scan_ts": "2026-04-13T16:40:00Z",
+      "last_message_ts": "1776099354.546099",
+      "last_scan_ts": "2026-04-14T14:30:00Z",
       "messages_processed": 0,
       "signals_extracted": 0,
-      "notes": "No new messages."
+      "notes": "Not scanned this cycle — no unread."
     },
     "C044UG8MCSZ": {
       "channel_name": "ab-paid-search-global",
-      "last_message_ts": "1776092716.865119",
-      "last_scan_ts": "2026-04-13T16:40:00Z",
-      "messages_processed": 2,
-      "signals_extracted": 1,
-      "notes": "Yun posted GenBI Traffic dataset demo with Mukesh. Brandon replied in thread. Reactions from Stacey and others."
+      "last_message_ts": "1776204076.865959",
+      "last_scan_ts": "2026-04-15T01:30:00Z",
+      "messages_processed": 3,
+      "signals_extracted": 2,
+      "notes": "Brandon: review Q2 CCP/ieCCP. Polaris pages status thread (US & JP only). Stacey posted Q1 IECCP file."
     },
     "C065KKT53DJ": {
       "channel_name": "ab-paid-search-abix",
-      "last_message_ts": "1775853213.078439",
-      "last_scan_ts": "2026-04-13T16:40:00Z",
-      "messages_processed": 0,
-      "signals_extracted": 0,
-      "notes": "No new messages. MX budget question STILL UNANSWERED 10d."
+      "last_message_ts": "1776207375.450539",
+      "last_scan_ts": "2026-04-15T01:30:00Z",
+      "messages_processed": 28,
+      "signals_extracted": 6,
+      "notes": "MAJOR: Brandon handoff doc request (2pm PT draft). Yun: MX LP optimization call tmrw, broken images, performance doc request. Brandon: extra time on doc, meeting next week. Richard active in conversation."
     },
     "C05KTAAG14J": {
       "channel_name": "ab-paid-search-app",
-      "last_message_ts": "1775256118.064909",
-      "last_scan_ts": "2026-04-13T16:40:00Z",
-      "messages_processed": 0,
-      "signals_extracted": 0,
-      "notes": "No new messages. Brandon PAM budget @mention STILL UNANSWERED 10d. CRITICAL."
+      "last_message_ts": "1776193561.518599",
+      "last_scan_ts": "2026-04-15T01:30:00Z",
+      "messages_processed": 3,
+      "signals_extracted": 2,
+      "notes": "Yun: IT tax fixed, Richard check invoices. PAM budget STILL UNANSWERED 11d."
     },
     "C06R6R19LG0": {
       "channel_name": "ab-paid-search-oci",
-      "last_message_ts": "1776097978.726279",
-      "last_scan_ts": "2026-04-13T16:40:00Z",
-      "messages_processed": 1,
-      "signals_extracted": 1,
-      "notes": "NEW: Brandon asking Mukesh about MCM readiness for CA execution TOMORROW (4/14). OCI launch is ACTIVE."
-    },
-    "C05JFNNENV9": {
-      "channel_name": "mpdm-brandoxy-dtpalmer-prichwil",
-      "last_message_ts": "1775588066.846829",
-      "last_scan_ts": "2026-04-13T16:40:00Z",
-      "messages_processed": 0,
-      "signals_extracted": 0,
-      "notes": "No new messages. Brand page ETA still owed to Brandon."
-    },
-    "C0A1WMDD3R8": {
-      "channel_name": "mpdm-team-group",
-      "last_message_ts": "1775852186.480639",
-      "last_scan_ts": "2026-04-13T16:40:00Z",
-      "messages_processed": 0,
-      "signals_extracted": 0,
-      "notes": "No new messages since last scan."
-    },
-    "C048VEWU7U3": {
-      "channel_name": "team-ab-marketing",
-      "last_message_ts": "1775758457.058289",
-      "last_scan_ts": "2026-04-13T16:40:00Z",
+      "last_message_ts": "1776177030.415219",
+      "last_scan_ts": "2026-04-14T14:30:00Z",
       "messages_processed": 0,
       "signals_extracted": 0,
       "notes": "No new messages since last scan."
     },
     "C08GJKNC3KM": {
       "channel_name": "amazon-builder-genai-power-users",
-      "last_message_ts": "1776098054.056499",
-      "last_scan_ts": "2026-04-13T16:40:00Z",
-      "messages_processed": 5,
-      "signals_extracted": 2,
-      "notes": "L3-5: Capability routing steering file (willetbw), Pizzeria AI kanban (vamgan, 15+ thumbsup), environment portability question, kiro skills format question."
+      "last_message_ts": "1776215368.464469",
+      "last_scan_ts": "2026-04-15T01:30:00Z",
+      "messages_processed": 25,
+      "signals_extracted": 3,
+      "notes": "L3-5: gpu-debugger launched, Opus 4.6 degradation continues, Kiro branch protection bypass (security concern), RavenAI tools, Product vault concept, skills-based routing trend."
     },
-    "C08T2E4KQPJ": {
-      "channel_name": "amazon-builder-genai-power-users-digest",
-      "last_message_ts": "1775857355.932239",
-      "last_scan_ts": "2026-04-13T16:40:00Z",
-      "messages_processed": 0,
-      "signals_extracted": 0,
-      "notes": "No new messages."
+    "C05L7H41J7M": {
+      "channel_name": "ab-paid-search-eng",
+      "last_message_ts": "1776208002.271159",
+      "last_scan_ts": "2026-04-15T01:30:00Z",
+      "messages_processed": 3,
+      "signals_extracted": 1,
+      "notes": "Adi asked Yun about Business Essentials spend increase. Yun confirmed $1M annual budget pacing for ENG."
     },
     "C096H6QNW6M": {
       "channel_name": "bedrock-agentcore-interest",
-      "last_message_ts": "1776070392.783919",
-      "last_scan_ts": "2026-04-13T16:40:00Z",
-      "messages_processed": 0,
+      "last_message_ts": "1776199758.802559",
+      "last_scan_ts": "2026-04-15T01:30:00Z",
+      "messages_processed": 4,
       "signals_extracted": 0,
-      "notes": "No new messages since last scan."
-    },
-    "C0A1JD8FCUV": {
-      "channel_name": "agentspaces-interest",
-      "last_message_ts": "1776096843.982929",
-      "last_scan_ts": "2026-04-13T16:40:00Z",
-      "messages_processed": 6,
-      "signals_extracted": 0,
-      "notes": "General support questions. gpu-multiagent visibility, Redshift access, Bedrock model access, Kiro CLI login issues. No direct relevance to Richard."
+      "notes": "Autonomous coding agents pattern (Stripe 04/23), WebSocket + AgentCore questions. No direct relevance."
     }
   },
   "dm_conversations": {
     "D044JAKR8RZ": {
       "user_name": "Brandon Munday",
-      "last_message_ts": "1775742742.325869",
-      "last_scan_ts": "2026-04-13T16:40:00Z",
-      "notes": "No new messages since last scan."
+      "last_message_ts": "1776102559.510259",
+      "last_scan_ts": "2026-04-14T14:30:00Z",
+      "notes": "Not scanned this cycle."
     }
   },
   "proactive_searches": {
     "prichwil": {
       "total_results": 0,
-      "recent_relevant": "Search failed (invalid_auth). No new data.",
-      "last_run": "2026-04-13T16:40:00Z"
+      "recent_relevant": "Not run this cycle.",
+      "last_run": "2026-04-14T14:30:00Z"
     },
     "from:@brandoxy": {
-      "total_results": 2,
-      "recent_relevant": "2 messages found: (1) OCI channel — Brandon asking Mukesh about MCM readiness for CA execution tomorrow. (2) Global channel — Brandon replying to Yun GenBI thread.",
-      "last_run": "2026-04-13T16:40:00Z"
+      "total_results": 2300,
+      "recent_relevant": "Covered via channel history. Key: handoff doc request, CCP review, Polaris pages question.",
+      "last_run": "2026-04-14T14:30:00Z"
     },
     "from:@kataxt": {
-      "total_results": 0,
-      "recent_relevant": "Search failed (invalid_auth). No new data.",
-      "last_run": "2026-04-13T16:40:00Z"
+      "total_results": 128,
+      "recent_relevant": "Not run this cycle. Kate signals captured via ABIX channel (Brandon relaying Kate's position on HC).",
+      "last_run": "2026-04-14T14:30:00Z"
     }
   },
   "hot_topics": {
     "active": [
+      {
+        "topic": "MX/AU Handoff to Richard",
+        "first_seen": "2026-04-13T17:15:50Z",
+        "last_seen": "2026-04-14T22:56:15Z",
+        "channels": ["C065KKT53DJ"],
+        "key_participants": ["brandoxy", "prichwil", "yunchu", "kataxt"],
+        "signal_count": 8,
+        "status": "active-handoff-this-week",
+        "notes": "UPDATED: Kate not overly concerned about HC. Brandon adding feedback to doc. Extra time due to new hire starting in 1-2 weeks. Meeting next week to review together."
+      },
+      {
+        "topic": "OCI CA Launch",
+        "first_seen": "2026-04-08T20:07:00Z",
+        "last_seen": "2026-04-14T14:30:30Z",
+        "channels": ["C06R6R19LG0"],
+        "key_participants": ["brandoxy", "arthamm"],
+        "signal_count": 5,
+        "status": "active-execution-today",
+        "notes": "No new messages. Execution day passed."
+      },
+      {
+        "topic": "ABIX Weekly Callout",
+        "first_seen": "2026-04-13T21:45:12Z",
+        "last_seen": "2026-04-13T21:45:49Z",
+        "channels": ["C065KKT53DJ"],
+        "key_participants": ["brandoxy", "prichwil"],
+        "signal_count": 1,
+        "status": "action-due-today",
+        "notes": "Brandon asked Richard for callout by EOD today. Richard confirmed."
+      },
       {
         "topic": "PAM Budget Availability",
         "first_seen": "2026-04-03T22:41:00Z",
@@ -143,79 +141,79 @@
         "key_participants": ["brandoxy", "peteocam"],
         "signal_count": 2,
         "status": "critical",
-        "notes": "10d unanswered. Brandon direct @mention. No reaction, no reply. MUST reply or confirm resolution TODAY."
+        "notes": "11d unanswered. Brandon direct @mention. No reaction, no reply. MUST reply or confirm resolution."
       },
       {
-        "topic": "MX Budget Line / Underspend",
-        "first_seen": "2026-04-03T19:46:00Z",
-        "last_seen": "2026-04-03T22:03:00Z",
+        "topic": "GenBI Campaign Reg Data",
+        "first_seen": "2026-04-13T15:05:16Z",
+        "last_seen": "2026-04-13T21:58:07Z",
+        "channels": ["C065KKT53DJ", "C044UG8MCSZ"],
+        "key_participants": ["brandoxy", "arthamm", "yunchu"],
+        "signal_count": 3,
+        "status": "active-eta-1-2-days",
+        "notes": "No new updates. Mukesh ETA 1-2 days from yesterday."
+      },
+      {
+        "topic": "MX LP Optimization Call",
+        "first_seen": "2026-04-14T15:19:08Z",
+        "last_seen": "2026-04-14T16:13:25Z",
         "channels": ["C065KKT53DJ"],
-        "key_participants": ["brandoxy", "yunchu"],
-        "signal_count": 2,
-        "status": "critical",
-        "notes": "10d unanswered. Brandon + Yun questions. MUST confirm or reply TODAY."
+        "key_participants": ["yunchu", "prichwil"],
+        "signal_count": 4,
+        "status": "active-call-tomorrow",
+        "notes": "NEW: Cristobal Jiminez from MX team reaching out to Adi for CA LP optimization. Call 12 PM CST tomorrow. Yun flagged broken MX NB page images. Richard to create doc of changes for Alex."
       },
       {
-        "topic": "OCI CA Launch",
-        "first_seen": "2026-04-08T20:07:00Z",
-        "last_seen": "2026-04-13T16:32:58Z",
-        "channels": ["C06R6R19LG0"],
-        "key_participants": ["brandoxy", "arthamm"],
-        "signal_count": 4,
-        "status": "active-execution-tomorrow",
-        "notes": "UPDATED: Brandon checking MCM readiness with Mukesh. CA execution planned for TOMORROW (4/14). No reply from Mukesh yet."
+        "topic": "Q2 CCP Review",
+        "first_seen": "2026-04-14T19:52:47Z",
+        "last_seen": "2026-04-14T22:01:16Z",
+        "channels": ["C044UG8MCSZ"],
+        "key_participants": ["brandoxy", "staceygu"],
+        "signal_count": 2,
+        "status": "review-requested",
+        "notes": "NEW: Stacey posted Q1 ieCCP file. Brandon asked team to review Q2 proposed CCP. Yun and Adi reacted eyes."
+      },
+      {
+        "topic": "IT Tax Fix Verification",
+        "first_seen": "2026-04-14T19:06:01Z",
+        "last_seen": "2026-04-14T19:06:01Z",
+        "channels": ["C05KTAAG14J"],
+        "key_participants": ["yunchu", "prichwil"],
+        "signal_count": 1,
+        "status": "action-needed",
+        "notes": "NEW: Yun says IT tax fixed. Richard needs to check if taxed invoices are closed and get reissued ones."
       },
       {
         "topic": "Polaris LP Revert / Brand Page Transition",
         "first_seen": "2026-04-07T15:17:00Z",
-        "last_seen": "2026-04-10T20:16:00Z",
+        "last_seen": "2026-04-14T20:47:57Z",
         "channels": ["C05JFNNENV9", "C044UG8MCSZ"],
         "key_participants": ["brandoxy", "dtpalmer", "prichwil", "yunchu", "awirtz"],
-        "signal_count": 10,
+        "signal_count": 11,
         "status": "active-ddd-thursday",
-        "notes": "Thursday DDD still on track. No new messages. Richard owes consolidated feedback list."
-      },
-      {
-        "topic": "Lena MX LP Confusion (Reg Start vs MCS)",
-        "first_seen": "2026-04-10T20:31:00Z",
-        "last_seen": "2026-04-10T20:33:00Z",
-        "channels": ["C065KKT53DJ"],
-        "key_participants": ["brandoxy", "yunchu", "lorealea"],
-        "signal_count": 1,
-        "status": "new-needs-response",
-        "notes": "Needs data-backed response to Lena. No new activity."
-      },
-      {
-        "topic": "GenBI Traffic Dataset Demo",
-        "first_seen": "2026-04-13T15:05:16Z",
-        "last_seen": "2026-04-13T15:06:21Z",
-        "channels": ["C044UG8MCSZ"],
-        "key_participants": ["yunchu", "brandoxy", "arthamm"],
-        "signal_count": 1,
-        "status": "new-fyi",
-        "notes": "NEW: Mukesh hosting Traffic dataset on GenBI demo. Brandon and team engaged. Relevant to data tooling."
-      },
-      {
-        "topic": "Deeplink Redirect Bug Impact",
-        "first_seen": "2026-04-09T14:01:00Z",
-        "last_seen": "2026-04-09T16:46:00Z",
-        "channels": ["C044UG8MCSZ"],
-        "key_participants": ["yunchu", "brandoxy"],
-        "signal_count": 3,
-        "status": "analysis-complete",
-        "notes": "No new activity. Stable."
+        "notes": "UPDATED: Brandon asking which markets have Brand Polaris (expects US & JP only). Thread active with 5 replies."
       }
     ],
     "cooled": [
       {
+        "topic": "MX Budget Line / Underspend",
+        "status": "merged-into-handoff",
+        "notes": "Merged into MX/AU Handoff topic."
+      },
+      {
+        "topic": "Lena MX LP Confusion",
+        "status": "merged-into-handoff",
+        "notes": "Merged into MX/AU Handoff topic. Kate now involved."
+      },
+      {
         "topic": "SSR Refmarker Investigation",
         "status": "resolved",
-        "notes": "No new activity. Resolved."
+        "notes": "No new activity."
       },
       {
         "topic": "Austin Team Offsite",
         "status": "complete",
-        "notes": "Offsite complete."
+        "notes": "Complete."
       },
       {
         "topic": "Verification Delay SIM",
@@ -223,13 +221,13 @@
         "notes": "No new discussion."
       },
       {
-        "topic": "Brand LP Consolidated Feedback",
-        "status": "merged-into-polaris-topic",
-        "notes": "Merged into Polaris LP topic."
-      },
-      {
         "topic": "Google Ads Access Audit",
         "status": "cooling",
+        "notes": "No new activity."
+      },
+      {
+        "topic": "Deeplink Redirect Bug Impact",
+        "status": "stable",
         "notes": "No new activity."
       }
     ]

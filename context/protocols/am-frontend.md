@@ -106,11 +106,14 @@ Include reply_time_hours context for recently-answered items if pattern is conce
 - Query: `SELECT * FROM asana_tasks WHERE priority_rw = 'Today' AND completed = FALSE AND deleted_at IS NULL ORDER BY routine_rw` → Today tasks
 - Query: `SELECT * FROM asana_completion_rate` → trailing completion stats
 
-Display:
+Display (block order: Sweep → Admin → Core → Engine Room):
 - 🧹 Sweep: Routine=Sweep AND Priority_RW=Today. Name + due date + L1-L5 tag.
+  - **Escalation marker:** Any task in Sweep whose Kiro_RW contains "Escalated to Sweep" (set by AM-2 Admin Escalation Check) SHALL be rendered with an `⚠️ ADMIN ESCALATION` prefix before the task name. These are Admin tasks auto-promoted to Sweep because they were 3+ days overdue — they need visibility as former Admin items, not just generic Sweep tasks.
+- 📋 Admin (⏱️ 30-min time bound): Routine=Admin AND Priority_RW=Today.
+  - **Time bound:** The Admin block is bounded to 30 minutes maximum. If tasks remain after 30 minutes, carry forward to tomorrow's Admin block — do NOT bleed into Core time. This protects the flow conditions (Csikszentmihalyi) for Core: clear goals, no interruptions, bounded challenge.
+  - **Habit loop reward:** After Admin block completes (all tasks done OR 30-min bound reached), surface in the brief and Slack DM: `"✅ Admin clear. [N] tasks done. Core block starts now."` This is the immediate feedback Csikszentmihalyi requires for flow entry and the reward Duhigg requires for habit formation. [N] = count of Admin tasks with Priority_RW=Today.
 - 🎯 Core: Routine=Core AND Priority_RW=Today. THE HARD THING gets first slot.
 - ⚙️ Engine Room: Routine=Engine Room AND Priority_RW=Today.
-- 📋 Admin: Routine=Admin AND Priority_RW=Today.
 - ⚠️ Overdue: Count + oldest task + days overdue.
 - 📦 Needs Triage: Tasks with no Routine set.
 - Bucket counts: Sweep X/5, Core X/4, Engine Room X/6, Admin X/3.
@@ -183,6 +186,7 @@ Dark navy HTML email to prichwil@amazon.com. Full brief content formatted as sty
 
 ### Slack Brief
 Post to rsw-channel (C0993SRL6FQ). Include Asana task context inline.
+- **Admin block completion reward:** After the Admin section, include: `"✅ Admin clear. [N] tasks done. Core block starts now."` where [N] = count of Admin tasks with Priority_RW=Today. This surfaces the habit loop reward (Duhigg) in the channel Richard checks first.
 
 ### Dashboard Update
 Edit pinned message in rsw-channel.
@@ -194,7 +198,7 @@ If calendar_today is empty, fall back to live: calendar_view(start_date=today, v
 **Per-Task Block Rules (mandatory):**
 1. Create ONE calendar block per Today-priority task — never group tasks into bucket blocks.
 2. Each block: minimum 15 minutes, maximum 1.5 hours.
-3. Block order follows the routine sequence: 🧹 Sweep first → 🎯 Core → ⚙️ Engine Room → 📋 Admin last.
+3. Block order follows the routine sequence: 🧹 Sweep first → 📋 Admin (30 min max) → 🎯 Core → ⚙️ Engine Room last.
 4. Within each routine, order by urgency: overdue first, then by due date ascending.
 5. Time estimates must be realistic for a human doing the actual work:
    - Quick Slack reply / confirm / triage: 15 min
@@ -205,10 +209,12 @@ If calendar_today is empty, fall back to live: calendar_view(start_date=today, v
    - Campaign build / keyword work: 30–45 min
    - Budget/PO/invoice review: 20–30 min
    - Test design / framework drafting: 45 min–1.5 hr
-6. Block body must contain: task context (what, why, who's waiting), specific next action, cross-references to related signals/meetings, and any prep notes.
-7. Skip blocks that would overlap existing meetings — fit around fixed calendar.
-8. Flag overload if total block time exceeds available time between meetings.
-9. Delete any previous day's work blocks before creating new ones (clean slate each morning).
+6. **Admin block hard cap:** The Admin calendar block SHALL NOT exceed 30 minutes. If total Admin task time estimates exceed 30 minutes, include only what fits within 30 minutes (highest urgency first) and note remaining tasks as "carry forward to tomorrow's Admin block." This protects Core's flow window (Csikszentmihalyi).
+7. Block body must contain: task context (what, why, who's waiting), specific next action, cross-references to related signals/meetings, and any prep notes.
+8. **Admin block completion message:** The Admin calendar block description SHALL end with the habit loop reward template: `"✅ Admin clear. [N] tasks done. Core block starts now."` where [N] = number of Admin tasks scheduled in the block. This fires the cue-routine-reward chain (Duhigg) and signals flow entry readiness (Csikszentmihalyi).
+9. Skip blocks that would overlap existing meetings — fit around fixed calendar.
+10. Flag overload if total block time exceeds available time between meetings.
+11. Delete any previous day's work blocks before creating new ones (clean slate each morning).
 
 Create time blocks via Outlook MCP calendar_meeting(operation='create') in gaps between existing meetings.
 
@@ -344,27 +350,109 @@ List auto-created recurring tasks: '[name] → next due [date] ✅'. No approval
 
 ---
 
-## Step 6: Interactive Command Center
+## Step 6: Dashboard Refresh — Command Center, Forecast Tracker, WBR Callouts
 
-Available for Richard's live directions after the agent has already done its autonomous work. The agent has already enriched tasks, written drafts, created calendar blocks, and killed zombies. This step is for Richard to give additional directions or adjustments.
+**Proceed immediately after Step 5 — do not pause for human input.** The command center is the set of dashboards Richard uses to monitor performance and make decisions. Refresh all of them with the latest data.
 
-### Agent-Initiated Actions (done before Richard speaks)
-- Enrich all tasks with content, drafts, and next actions
-- Kill zombie tasks (30+ days overdue with clear kill signals)
-- Create calendar blocks with task-specific context
-- Draft emails and Slack messages for overdue communications
-- Write MBR/WBR/Kingpin content into task descriptions
+### 6A. Run Full Dashboard Pipeline
 
-### Supported Operations (Richard-directed)
+Execute `python3 ~/shared/dashboards/refresh-all.py` which runs in sequence:
+1. `extract-ly-data.py` → extracts daily data into ps-forecast-tracker.xlsx
+2. `refresh-forecast.py` → builds `data/forecast-data.json` (weekly actuals, predictions, CI bands, OP2 targets for all 10 markets)
+3. `refresh-callouts.py` → builds `data/callout-data.json` (WBR callout narratives, metrics, brand/NB detail, projections, anomalies for all markets)
+4. `generate-command-center.py` → builds `data/command-center-data.json` (block state, overdue tasks, signals, emails from AM-auto outputs)
+
+If any script fails, log the error and continue with remaining scripts. Report failures in the triage summary (Step 7).
+
+### 6B. Populate Actionable Intelligence Sections
+
+After the dashboard pipeline runs, the agent populates four intelligence sections in `command-center-data.json`. These replace the old overdue/emails/slack/pacing grid with decision-ready intelligence.
+
+**Data sources for each section:**
+
+#### Commitments — Things I Said I Would Do
+
+**Integrity principle:** Richard wants to be a man of integrity — accountable to his own words first, then to what others ask. Breaking your own promise is worse than missing someone else's request. This distinction is permanent and applies to every future run.
+
+**Ordering rule (mandatory for every run):**
+1. **Richard said it** (`said_by: "richard"`) — things Richard explicitly volunteered or committed to in meetings, Slack, or email. These come first, always. Scan transcripts for Richard's voice saying "I will", "I'll", "let me", "I'm going to", "I'm putting that down", "I can do that."
+2. **Others asked — manager** (`said_by: "other"`, `asker_weight: "manager"`) — things Brandon asked Richard to do. Brandon's asks carry the most weight after Richard's own words.
+3. **Others asked — stakeholder** (`said_by: "other"`, `asker_weight: "stakeholder"`) — things Kate, Lena, Lorena, or other key stakeholders asked.
+4. **Others asked — peer** (`said_by: "other"`, `asker_weight: "peer"`) — things Yun, Stacey, Andrew, Adi, or other peers asked.
+
+Within each group, sort by: overdue severity (days_old DESC), then relationship importance.
+
+**Asker weight hierarchy:** Brandon (L7 manager) > Kate (L8 skip-level) > Lena/Lorena (market stakeholders) > Stacey/Andrew/Adi/Yun (peers).
+
+**Required fields per commitment:** `text`, `source`, `person`, `days_old`, `overdue`, `said_by` ("richard" or "other"), `asker_weight` (for "other" items: "manager", "stakeholder", "peer"), `quote` (verbatim — Richard's own words if he said it, the asker's words if they asked).
+
+**Data sources:**
+- **Hedy meeting transcripts** (last 7 days): Scan `user_todos` and cleaned transcripts. Distinguish Richard's voice from others — only tag `said_by: "richard"` when Richard is the speaker.
+- **Slack messages** (last 14 days): Query `signals.slack_messages` where `author_name = 'Richard Williams'` for commitment language.
+- **Asana tasks with Kiro_RW containing dates**: Tasks where Richard committed to a specific action by a date.
+- **Email sent items**: Check for promises made in replies.
+
+For each commitment, record all required fields above. The dashboard renders Richard's commitments first, then a visual "Others asked" divider, then others' asks grouped by weight.
+
+#### 🔄 Delegate — Things I Could Hand Off
+Identify tasks Richard is doing that someone else could own:
+- Tasks in Engine Room that are BAU/recurring and have a natural owner (e.g., AU team post-handoff, Yun for MX).
+- Tasks where someone else flagged the issue (e.g., Yun found broken images → Yun should submit the SIM).
+- Tasks that are below Richard's level (L5 doing L3 work) per the Five Levels framework.
+- Tasks where a teammate has more context or access.
+
+For each: `task`, `to` (suggested delegate), `reason`.
+
+#### 📢 Communicate — Things to Share with Team
+Extract information Brandon shared with Richard that the team should know:
+- **Brandon 1:1 decisions**: Org changes, strategy shifts, timeline updates, stakeholder feedback.
+- **Weekly meeting outcomes**: Format changes (OCI Flash), reporting cadence changes (IECCP quarterly), compliance checks (Polaris markets).
+- **Signals from Kate/Todd**: Anything from skip-level that affects team direction.
+- **Cross-team context**: What other teams are doing that affects PS (MCS, ABMA, Legal).
+
+For each: `text`, `context` (source meeting + why it matters).
+
+#### ⭐ Above the Rest — Things That Put Me Above the Rest
+Surface high-leverage actions from career conversations and Brandon's coaching:
+- **Annual review growth areas**: What Brandon said Richard needs to do differently (3/24 meeting).
+- **Comp review signals**: What drove the 10.5% increase, what would drive more (4/6 meeting).
+- **Brandon's explicit coaching**: "One voice should be you", "proactive sharing of results", "earning trust through regimented mechanisms".
+- **Promo criteria**: What "walk on water" looks like, what artifacts to ship, what visibility to create.
+- **Current opportunities**: Tasks that, if done well, would demonstrate above-and-beyond performance.
+
+For each: `action` (specific thing to do), `why` (Brandon's words or career logic).
+
+**Execution:** The agent reads Hedy session details, DuckDB signals, and Asana task state to populate these sections. The `generate-command-center.py` script handles the static data (blocks, tasks); the agent enriches with the four intelligence sections after the script runs.
+
+### 6C. Verify Dashboard Data Freshness
+
+After pipeline completes, verify output files exist and are current:
+- `data/forecast-data.json` — check `max_week` matches current week
+- `data/callout-data.json` — check `generated` timestamp is today
+- `data/command-center-data.json` — check `generated` timestamp is today
+
+If any file is stale or missing, flag in the brief: "⚠️ Dashboard [name] failed to refresh — [reason]."
+
+### 6C. Push Updated Dashboards to SharePoint
+
+Sync the Excel dashboards to SharePoint for cross-device access:
+- `ps-forecast-tracker.xlsx` → `Kiro-Drive/Dashboards/`
+- `ps-pacing-dashboard.xlsx` → `Kiro-Drive/Dashboards/`
+- `command-center.xlsx` → `Kiro-Drive/`
+
+Only push if the local file's modified time is newer than the last push (check via `sharepoint_list_files` modified date).
+
+### 6D. Interactive Adjustments (Richard-directed, if needed)
+
+After dashboards are refreshed, Richard may give live directions:
 - Move tasks between Routine buckets
-- Change due dates
-- Change Priority_RW (Today/Urgent/Not urgent)
+- Change due dates or Priority_RW
 - Create new tasks with Routine + Priority pre-set
-- Write/update task descriptions (notes or html_notes)
+- Write/update task descriptions
 - Add comments (CreateTaskStory)
-- Complete tasks
-- Create subtasks
-- Set Importance_RW
+- Complete tasks, create subtasks, set Importance_RW
+- Re-run a specific dashboard script with different parameters
+- Trigger WBR callout pipeline for a specific market
 
 ---
 

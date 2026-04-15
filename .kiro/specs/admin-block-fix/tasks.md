@@ -1,0 +1,233 @@
+# Implementation Plan
+
+- [x] 1. Write bug condition exploration test
+  - **Property 1: Bug Condition** - Admin Block Sequencing and Routing Failure
+  - **CRITICAL**: This test MUST FAIL on unfixed code — failure confirms the bug exists
+  - **DO NOT attempt to fix the test or the code when it fails**
+  - **NOTE**: This test encodes the expected behavior — it will validate the fix when it passes after implementation
+  - **GOAL**: Surface counterexamples that demonstrate the Admin block failure across all three bug dimensions
+  - **Scoped PBT Approach**: Scope the property to the concrete failing cases identified in the design:
+    - Block sequence: verify Admin is in position 4 (last) in hands.md Task List Structure table
+    - Routing: query DuckDB `SELECT task_gid, name, routine_rw FROM asana_tasks WHERE completed = FALSE AND (name ILIKE '%budget%' OR name ILIKE '%PO%' OR name ILIKE '%invoice%' OR name ILIKE '%spend%' OR name ILIKE '%R&O%' OR name ILIKE '%reconciliation%' OR name ILIKE '%actuals%' OR name ILIKE '%forecast%' OR name ILIKE '%compliance%' OR name ILIKE '%purchase order%') AND (routine_rw IS NULL OR routine_rw NOT LIKE '%Admin%')` — expect 17+ misrouted tasks
+    - Completions: query `SELECT COUNT(*) FROM asana_tasks WHERE routine_rw LIKE '%Admin%' AND completed = TRUE AND completed_at >= '2026-03-01'` — expect 0
+    - Non-standard values: query `SELECT DISTINCT routine_rw FROM asana_tasks WHERE routine_rw IN ('Sweep (Low-friction)', 'Admin (Wind-down)', 'Engine Room (Excel and Google ads)')` — expect 3 values
+    - Engine Room overcapacity: query `SELECT COUNT(*) FROM asana_tasks WHERE routine_rw LIKE '%Engine Room%' AND completed = FALSE` — expect 22 (cap is 6)
+  - Test assertions should match Expected Behavior Properties from design:
+    - Admin block SHALL be in position 2 (after Sweep, before Core)
+    - Admin-type keyword tasks SHALL have routine_rw = Admin
+    - Admin tasks overdue 3+ days SHALL escalate to Sweep
+  - Run test on UNFIXED code
+  - **EXPECTED OUTCOME**: Test FAILS (this is correct — it proves the bug exists across sequencing, routing, and escalation)
+  - Document counterexamples found: zero completions since March 1, 17+ misrouted tasks, 3 non-standard Routine_RW values, Engine Room at 22/6 cap
+  - Mark task complete when test is written, run, and failure is documented
+  - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5_
+
+- [x] 2. Write preservation property tests (BEFORE implementing fix)
+  - **Property 2: Preservation** - Non-Admin Routing and Hook Structure Unchanged
+  - **IMPORTANT**: Follow observation-first methodology
+  - Observe on UNFIXED code — verify these behaviors exist and record outputs:
+    - Sweep routing: query `SELECT COUNT(*) FROM asana_tasks WHERE routine_rw LIKE '%Sweep%' AND completed = FALSE` — record count, verify cap logic exists in am-triage.md (cap: 5)
+    - Core routing: query `SELECT COUNT(*) FROM asana_tasks WHERE routine_rw LIKE '%Core%' AND completed = FALSE` — record count, verify cap logic (cap: 4)
+    - Engine Room routing: query `SELECT COUNT(*) FROM asana_tasks WHERE routine_rw LIKE '%Engine Room%' AND completed = FALSE` — record count, verify cap logic (cap: 6)
+    - Wiki routing: verify Routine_RW = Wiki tasks are unaffected
+    - Backlog treatment: verify tasks with null Routine_RW are treated as requiring triage
+    - AM-1 ingest structure: verify am-auto.md Phase 1 (Slack Scan, Asana Full Sync, Email Scan) sections exist unchanged
+    - AM-3 brief generation: verify brief renders all block categories
+    - EOD-2 daily reset: verify eod-system-refresh.md Phase 1 Step 2 (Today → Urgent demotion) exists
+    - Signal-to-Routine mapping: verify "Quick reply/send/confirm → Sweep", "Strategic discussion/artifact/framework → Core", "Campaign/keyword/bid/spreadsheet → Engine Room" mappings exist in am-triage.md
+  - Write property-based tests capturing observed behavior patterns:
+    - For all non-admin signal types, routing produces same Routine_RW assignment before and after fix
+    - Sweep/Core/Engine Room caps remain 5/4/6 respectively
+    - AM-1/AM-2/AM-3/EOD-2 hook structure (phase count, section headers) is unchanged
+    - Existing Routine_RW enum values (Sweep, Core Two, Engine Room, Admin, Wiki) are preserved — no new values added
+    - 4-block model preserved — no new blocks introduced
+  - Run tests on UNFIXED code
+  - **EXPECTED OUTCOME**: Tests PASS (this confirms baseline behavior to preserve)
+  - Mark task complete when tests are written, run, and passing on unfixed code
+  - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8_
+
+- [x] 3. Protocol changes — block resequencing and routing fixes
+
+  - [x] 3.1 Reorder block table in hands.md: Sweep → Admin → Core → Engine Room
+    - In `~/shared/context/body/hands.md` → Task List Structure table
+    - Change row order from Sweep → Core → Engine Room → Admin to Sweep → Admin → Core → Engine Room
+    - Admin moves from position 4 (last, never reached) to position 2 — following Newport's shallow work batching principle (Admin is shallow work that should be bounded and scheduled, not left as residual) and Duhigg's habit loop (cue: Sweep complete → routine: Admin block → reward: clear queue before deep work)
+    - Update emoji numbering to reflect new execution sequence: 🧹 Sweep (1st), 📋 Admin (2nd), 🎯 Core (3rd), ⚙️ Engine Room (4th)
+    - Preserve all other table content (Purpose, Cap columns unchanged)
+    - _Bug_Condition: blockPosition('Admin') == 4 (last position) → change to position 2_
+    - _Expected_Behavior: Admin block executes in 2nd position, before cognitive depletion_
+    - _Preservation: Sweep stays 1st, all caps unchanged (5/3/4/6), Backlog row unchanged_
+    - _Requirements: 2.1, 2.2_
+
+  - [x] 3.2 Expand admin keyword detection in am-triage.md
+    - In `~/shared/context/protocols/am-triage.md` → Phase 1 Signal Routing section
+    - Add an Admin Keyword Detection step BEFORE the Signal-to-Routine mapping table
+    - Keyword list: `budget`, `PO`, `purchase order`, `invoice`, `spend`, `R&O`, `reconciliation`, `actuals`, `forecast`, `compliance`
+    - Logic: if signal text matches ANY keyword (case-insensitive), route to Routine_RW = Admin regardless of other signal characteristics — this overrides the generic mapping
+    - _Bug_Condition: isAdminType AND routine_rw NOT IN {'Admin', 'Admin (Wind-down)'} — keywords not caught by current mapping_
+    - _Expected_Behavior: all admin-type keyword signals route to Admin_
+    - _Preservation: non-admin signals continue through existing mapping table unchanged_
+    - _Requirements: 2.4, 2.6, 2.7_
+
+  - [x] 3.3 Add early-start due date enforcement for Admin tasks in am-triage.md
+    - In `~/shared/context/protocols/am-triage.md` → after the new Admin Keyword Detection step
+    - When AM-2 triage routes a task to Admin:
+      - IF task has no due date (due_on IS NULL): flag to Richard: "Admin task [name] has no due date — set one?"
+      - IF task has a due date: auto-set start_on = due_on - 7 business days (so the task surfaces in Admin block a full week before it's due)
+    - This shifts Admin from "do by deadline" to "start early" — budget confirmations and R&O submissions get worked on in advance
+    - _Bug_Condition: admin-type tasks with no due date are invisible to escalation; tasks with due dates only surface when already urgent_
+    - _Expected_Behavior: all Admin tasks surface 7 days before due, giving Richard a full week to complete them in the Admin block_
+    - _Preservation: tasks already having start_on dates are not modified_
+    - _Requirements: 2.4, 2.6_
+
+  - [x] 3.4 Add 3-day overdue Admin escalation in am-triage.md (SINGLE CHECKPOINT — AM-2 ONLY)
+    - In `~/shared/context/protocols/am-triage.md` → after the Bucket Cap Check section
+    - Add "Admin Escalation Check" section:
+      - Query all Admin tasks where days_overdue >= 3
+      - For each: auto-execute Routine_RW change from Admin to Sweep
+      - Update Kiro_RW: "M/D: Escalated to Sweep (3d+ overdue)."
+    - Threshold is exactly 3 days (not 2, not 4)
+    - **NOTE: This is the ONLY escalation checkpoint.** Per McKeown's Effortless principle, one simple check is better than triplicated logic. Do NOT add escalation to AM-auto or EOD.
+    - _Bug_Condition: no escalation mechanism exists — overdue Admin tasks stay in Admin forever_
+    - _Expected_Behavior: Admin tasks overdue 3+ days auto-escalate to Sweep_
+    - _Preservation: Admin tasks within due date window stay in Admin (cap: 3)_
+    - _Requirements: 2.3, 2.5, 2.8, 3.4_
+
+  - [x] 3.5 Add escalation marker + Admin block time bound + habit loop reward to AM-3 brief
+    - When Admin tasks are escalated to Sweep, the AM-3 brief SHALL include them in the Sweep section with an ⚠️ ADMIN ESCALATION prefix
+    - Add Admin block time bound: 30 minutes maximum. If tasks remain after 30 minutes, carry forward to tomorrow's Admin block — do NOT bleed into Core time. This protects flow conditions (Csikszentmihalyi) for Core.
+    - Add concrete habit loop reward: after Admin block completes (all tasks done or 30-min bound reached), surface: "✅ Admin clear. [N] tasks done. Core block starts now." This is the immediate feedback for flow entry (Csikszentmihalyi) and the reward for habit formation (Duhigg).
+    - _Expected_Behavior: escalated Admin tasks are visually flagged; Admin is time-bounded; habit loop reward fires_
+    - _Preservation: non-escalated tasks in all blocks render unchanged in brief_
+    - _Requirements: 2.1, 2.5_
+
+  - [x] 3.6 Mirror keyword detection in am-auto.md (routing only — NO escalation)
+    - In `~/shared/context/protocols/am-auto.md` → Phase 2 Signal Routing section
+    - Add the same Admin Keyword Detection logic from am-triage.md (task 3.2)
+    - Keyword list identical: `budget`, `PO`, `purchase order`, `invoice`, `spend`, `R&O`, `reconciliation`, `actuals`, `forecast`, `compliance`
+    - This ensures autonomous signal processing (AM-Backend) also catches admin-type tasks
+    - **NOTE: Do NOT add escalation logic to am-auto.md.** Escalation lives in AM-2 only (task 3.4).
+    - _Bug_Condition: am-auto.md Signal-to-Routine mapping has same narrow keyword gap as am-triage.md_
+    - _Expected_Behavior: autonomous processing routes admin-type signals to Admin_
+    - _Preservation: non-admin signal routing in am-auto.md unchanged_
+    - _Requirements: 2.4, 2.7_
+
+  - [x] 3.7 Remove Microsoft To-Do references from hands.md
+    - In `~/shared/context/body/hands.md` → Task List Structure section
+    - Remove "(Microsoft To-Do)" from the section title
+    - Remove the entire To-Do List IDs comment block (Sweep, Core, Engine Room, Admin, Backlog list IDs)
+    - Richard no longer uses Microsoft To-Do — Asana Routine_RW is the canonical block system
+    - This is subtraction before addition (McKeown)
+    - _Preservation: block categories, caps, and purposes unchanged — only the To-Do metadata is removed_
+    - _Requirements: N/A (cleanup)_
+
+  - [x] 3.8 Add Engine Room auto-demotion + task decomposition to am-triage.md
+    - In `~/shared/context/protocols/am-triage.md` → Bucket Cap Check section
+    - Change Engine Room cap enforcement from "flag lowest-priority for demotion" to "auto-demote lowest-priority tasks beyond cap to Backlog, notify Richard"
+    - Additionally: when a demoted Engine Room task is BAU/mandatory (recurring, has external stakeholders, or is tagged as business-critical), the AM hook SHALL decompose it into smaller subtasks and piggyback them onto related work in other blocks — ensuring mandatory work still gets through even when the parent is demoted
+    - This ensures the cap is actually enforced (current system proposes but never executes because Richard defers the decision)
+    - _Bug_Condition: Engine Room at 22/6 cap — cap check exists but doesn't auto-execute_
+    - _Expected_Behavior: Engine Room stays at or below cap of 6; mandatory BAU work survives via decomposition_
+    - _Preservation: Engine Room cap value (6) unchanged; only enforcement mechanism changes_
+    - _Requirements: 1.3 (implicit)_
+
+  - [x] 3.9 Verify bug condition exploration test now passes
+    - **Property 1: Expected Behavior** - Admin Block Reaches Execution and Routes Correctly
+    - **IMPORTANT**: Re-run the SAME test from task 1 — do NOT write a new test
+    - The test from task 1 encodes the expected behavior for sequencing, routing, and escalation
+    - After protocol changes (3.1–3.8):
+      - Block sequence in hands.md should now show Admin in position 2 → test assertion passes
+      - Admin keyword detection exists in am-triage.md and am-auto.md → routing assertions pass
+      - 3-day escalation logic exists in am-triage.md, am-auto.md, and eod-system-refresh.md → escalation assertions pass
+    - Run bug condition exploration test from step 1
+    - **EXPECTED OUTCOME**: Test PASSES (confirms protocol-level bug is fixed)
+    - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5_
+
+  - [x] 3.10 Verify preservation tests still pass
+    - **Property 2: Preservation** - Non-Admin Routing and Hook Structure Unchanged
+    - **IMPORTANT**: Re-run the SAME tests from task 2 — do NOT write new tests
+    - Run preservation property tests from step 2
+    - After protocol changes, verify:
+      - Sweep/Core/Engine Room routing logic unchanged
+      - Caps unchanged (5/4/6)
+      - AM-1/AM-2/AM-3/EOD-2 hook structure intact
+      - Existing Routine_RW enum values preserved
+      - 4-block model preserved
+    - **EXPECTED OUTCOME**: Tests PASS (confirms no regressions from protocol changes)
+    - _Requirements: 3.1, 3.2, 3.3, 3.5, 3.6, 3.7, 3.8_
+
+- [x] 4. Checkpoint — Protocol changes complete
+  - Verify all protocol files have been updated: hands.md, am-triage.md, am-auto.md
+  - Verify block order in hands.md: Sweep (1st) → Admin (2nd) → Core (3rd) → Engine Room (4th)
+  - Verify Microsoft To-Do references removed from hands.md
+  - Verify admin keyword detection exists in both am-triage.md and am-auto.md with identical keyword lists
+  - Verify early-start due date enforcement (start_on = due_on - 7 business days) exists in am-triage.md
+  - Verify 3-day escalation logic exists in am-triage.md ONLY (not in am-auto.md or eod-system-refresh.md)
+  - Verify Admin block 30-minute time bound is documented
+  - Verify habit loop reward ("✅ Admin clear") is documented in AM-3 brief protocol
+  - Verify Engine Room auto-demotion + decomposition logic exists in am-triage.md
+  - Verify AM-3 escalation marker (⚠️ ADMIN ESCALATION) is documented
+  - Verify exploration test (task 1) passes and preservation tests (task 2) pass
+  - Ask Richard if questions arise before proceeding to Asana data cleanup
+
+- [x] 5. Asana data cleanup — normalize non-standard Routine_RW values
+  - Query DuckDB to identify tasks with non-standard Routine_RW values:
+    - `SELECT task_gid, name, routine_rw FROM asana_tasks WHERE routine_rw IN ('Sweep (Low-friction)', 'Admin (Wind-down)', 'Engine Room (Excel and Google ads)') AND completed = FALSE`
+  - The 3 non-standard values are actually the canonical Asana enum display names (parenthetical suffixes are cosmetic labels)
+  - Verify protocol string-matching handles both short names ("Sweep", "Admin", "Engine Room") and full display names ("Sweep (Low-friction)", "Admin (Wind-down)", "Engine Room (Excel and Google ads)")
+  - If protocols use exact string matching: update to use LIKE '%Sweep%', '%Admin%', '%Engine Room%' patterns
+  - Present findings to Richard: "These 5 tasks have non-standard Routine_RW display names. The enum GIDs are correct — the protocols need to match on both forms. Confirm?"
+  - _Bug_Condition: isNonStandard := routine_rw IN {'Sweep (Low-friction)', 'Admin (Wind-down)', 'Engine Room (Excel and Google ads)'}_
+  - _Requirements: 1.5 (implicit — routing fragmentation)_
+
+- [x] 6. Asana data cleanup — route untagged admin-type tasks to Admin
+  - Query DuckDB to identify the 17 misrouted/untagged admin-type tasks:
+    - `SELECT task_gid, name, routine_rw, due_on FROM asana_tasks WHERE completed = FALSE AND (name ILIKE '%budget%' OR name ILIKE '%PO%' OR name ILIKE '%invoice%' OR name ILIKE '%spend%' OR name ILIKE '%R&O%' OR name ILIKE '%reconciliation%' OR name ILIKE '%actuals%' OR name ILIKE '%forecast%' OR name ILIKE '%compliance%' OR name ILIKE '%purchase order%') AND (routine_rw IS NULL OR routine_rw NOT LIKE '%Admin%')`
+  - Present batch to Richard for approval before executing writes
+  - For each approved task:
+    - UpdateTask: set Routine_RW = Admin (custom_fields: {'1213608836755502': '1213608836755506'})
+    - For tasks with due dates: set start_on = due_on - 7 business days (early-start enforcement)
+    - For tasks missing due dates (due_on IS NULL): flag to Richard: "Admin task [name] has no due date — set one?"
+    - Update Kiro_RW: "M/D: Routed to Admin. Begin date set to [date]."
+  - Follow Guardrail Protocol: verify assignee.gid === '1212732742544167', audit all writes to asana-audit-log.jsonl
+  - _Bug_Condition: isMisrouted := isAdminType AND routine_rw NOT IN {'Admin', 'Admin (Wind-down)'}_
+  - _Requirements: 2.4, 2.6, 2.7_
+
+- [x] 6b. Surface 66 null-Routine_RW tasks for Richard's manual triage
+  - Query DuckDB: `SELECT task_gid, name, due_on, project_name FROM asana_tasks WHERE routine_rw IS NULL AND completed = FALSE ORDER BY due_on ASC NULLS LAST`
+  - Present the full list to Richard grouped by project
+  - Richard manually decides which block each belongs in — the agent does NOT auto-assign
+  - This addresses the systemic triage gap: 66 tasks = 66 unmade decisions (Kahneman decision fatigue)
+  - The agent's role is to surface the list and make it easy to decide (reduce friction per McKeown), not to decide for Richard
+  - _Requirements: N/A (systemic gap beyond admin-specific bug)_
+
+- [x] 7. Asana data cleanup — Engine Room auto-demotion + decomposition
+  - Query DuckDB for Engine Room overcapacity:
+    - `SELECT task_gid, name, due_on, priority_rw, DATEDIFF('day', due_on, CURRENT_DATE) as days_overdue FROM asana_tasks WHERE routine_rw LIKE '%Engine Room%' AND completed = FALSE ORDER BY priority_rw NULLS LAST, due_on NULLS LAST`
+  - Engine Room has 22 open tasks vs cap of 6 — auto-demote the 16 lowest-priority tasks to Backlog, notify Richard
+  - Criteria for demotion: no due date, lowest Priority_RW, oldest creation date, no recent activity
+  - For any demoted task that is BAU/mandatory (recurring, has external stakeholders, or is tagged as business-critical):
+    - Decompose into smaller subtasks
+    - Piggyback subtasks onto related work in other blocks (e.g., a large "MX campaign restructure" becomes 3 subtasks spread across Sweep/Admin/Engine Room)
+    - This ensures mandatory work still gets through even when the parent task is demoted
+  - For each demotion:
+    - UpdateTask: clear Routine_RW (set to null/Backlog)
+    - Update Kiro_RW: "M/D: Demoted from Engine Room (cap enforcement). [reason]."
+  - Follow Guardrail Protocol for all writes
+  - _Bug_Condition: Engine Room at 22/6 cap — structural overflow crowds all other blocks_
+  - _Requirements: 1.3 (implicit — overcapacity compounds Admin block failure)_
+
+- [x] 8. Checkpoint — All changes complete
+  - Ensure all tests pass (exploration test from task 1, preservation tests from task 2)
+  - Verify protocol changes (tasks 3.1–3.8) are consistent across files
+  - Verify Asana data cleanup (tasks 5–7) completed successfully:
+    - Non-standard Routine_RW values addressed
+    - Admin-type tasks correctly routed with early-start dates enforced
+    - 66 null-Routine_RW tasks surfaced for Richard's manual triage
+    - Engine Room auto-demoted to cap; mandatory BAU work decomposed into subtasks
+  - Run final DuckDB validation queries:
+    - Admin-type tasks with correct routing: `SELECT COUNT(*) FROM asana_tasks WHERE routine_rw LIKE '%Admin%' AND completed = FALSE`
+    - Engine Room within cap: `SELECT COUNT(*) FROM asana_tasks WHERE routine_rw LIKE '%Engine Room%' AND completed = FALSE` — should be ≤ 6
+    - No null-routed admin-type tasks remaining
+    - Microsoft To-Do references removed from hands.md
+  - Ask Richard if questions arise

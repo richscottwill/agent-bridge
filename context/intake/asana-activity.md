@@ -1,32 +1,34 @@
-# Asana Activity Signals
+# Asana Activity — 2026-04-14
 
-Scan timestamp: 2026-04-13T16:45:00Z
-Tasks scanned: 38
-Signals detected: 1
+## Teammate Activity (since last scan: 2026-04-14T13:30:00Z)
 
----
+### Comments Needing Response
+- **AB Customer Redirect** (ABPS - WW Testing & Projects) — **Brandon**: "can you please add the implementation details for this? I think it should be closed" (2026-04-13T22:11:16Z)
+  - ⚠️ Asana generated a reminder at 22:24Z Apr 14: "Reminder: Brandon mentioned you yesterday"
+  - Status: **STILL UNANSWERED** — originally captured in prior scan but no response detected. Brandon is waiting.
 
-## 2026-04-13
+### Due Date Changes
+- None detected since last scan.
 
-### 💬 Comments
+### Reassignments
+- None detected since last scan.
 
-No new teammate comments detected.
+### Completed by Others
+- None detected since last scan.
 
-### 📅 Due Date Changes
-
-No new teammate due date changes detected.
-
-### 👤 Reassignments
-
-No new teammate reassignments detected.
-
-### 🔄 Project Changes
-
-- **Promo Test** — Yun Chu (2026-04-13T13:56:19Z):
-  Removed task from EU SSR Acquisition Roadmap project. This is a project Yun manages — may indicate project restructuring or cleanup. The task remains in PS-Owned Global Testing, ABPS - WW Testing & Projects, and Paid Search Promo Experiments.
+### Other Activity (informational)
+- **Paid App** (EU SSR Acquisition Roadmap) — Yun Chu removed task from EU SSR board (2026-04-13T13:56:12Z, pre-scan)
+- **Paid Search Promo Experiments** (EU SSR Acquisition Roadmap) — Yun Chu removed task from EU SSR board (2026-04-13T13:56:19Z, pre-scan)
+  - Note: Both Yun removals were before last scan but included for completeness — likely EU SSR board cleanup.
 
 ---
 
-## Errors / Skipped Tasks
+## Summary
 
-- 1213962513760099 (Brandon 1:1: Set up automated monthly ASP confirmation reminders): MCP error -32603: No data found in SSE response. 4th consecutive failure — this task may have a data issue in Asana.
+**Action required:**
+1. Brandon's comment on AB Customer Redirect is now 1+ day old with no response. He's asking Richard to add implementation details and close the task. This is a direct ask from your manager — respond today.
+
+**No new teammate signals detected** in the evening scan window (13:30Z–03:30Z). The scan window was quiet — most activity was Richard's own routine changes (Engine Room cap enforcement, task routing).
+
+---
+Scanned: 30 tasks | 1 actionable activity (Brandon reminder) | Last scan: 2026-04-14T13:30:00Z → 2026-04-15T03:30:00Z

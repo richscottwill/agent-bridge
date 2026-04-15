@@ -97,6 +97,17 @@ Per ~/shared/context/protocols/signal-to-task-pipeline.md:
 - Email signals → same routing.
 - Asana digest → queue hands.md update for AM-Frontend.
 
+### Admin Keyword Detection (override — runs BEFORE generic mapping)
+Before applying the Signal-to-Routine mapping table below, check the signal text (task name, description, or source message) against the Admin keyword list. Matching is case-insensitive.
+
+**Admin Keywords:** `budget`, `PO`, `purchase order`, `invoice`, `spend`, `R&O`, `reconciliation`, `actuals`, `forecast`, `compliance`
+
+**Rule:** If the signal text matches ANY keyword (case-insensitive substring match), route directly to Routine_RW = Admin with Priority_RW = Today. This overrides the generic Signal-to-Routine mapping below — do not fall through to the table for matched signals.
+
+Signals that do NOT match any Admin keyword continue to the Signal-to-Routine mapping table as normal.
+
+**NOTE:** Escalation logic (3-day overdue Admin → Sweep) is NOT applied here. Escalation lives in AM-2 only (am-triage.md § Admin Escalation Check). Per McKeown's Effortless principle, one simple checkpoint beats triplicated logic.
+
 ### Signal-to-Routine Mapping
 | Signal Type | Routine | Priority_RW |
 |-------------|---------|-------------|
@@ -257,6 +268,29 @@ VALUES ('am-backend', CURRENT_DATE, '[start]', '[end]', [duration],
 
 ---
 
+## Phase 6.1: Dashboard Refresh
+
+Run the full dashboard refresh pipeline to update all Command Center views:
+
+```bash
+python3 ~/shared/dashboards/refresh-all.py
+```
+
+This executes in sequence:
+1. `extract-ly-data.py` — pull daily data from WW Dashboard Excel → `_Daily_Data` sheet
+2. `refresh-forecast.py` — read `_Data` + `_Daily_Data` → `data/forecast-data.json`
+3. `refresh-callouts.py` — read forecast JSON + callout markdown → `data/callout-data.json`
+4. `generate-command-center.py` — read AM output files → `data/command-center-data.json`
+
+Non-blocking: if any step fails, log warning and continue to Phase 6.5.
+
+The Command Center index page (`~/shared/dashboards/index.html`) auto-loads these JSON files:
+- `data/callout-data.json` → WW Summary + Market Table
+- `data/command-center-data.json` → Daily Blocks + Actionable Items
+- `data/forecast-data.json` → Forecast Tracker dashboard
+
+---
+
 ## Phase 6.5: SharePoint Durability Sync
 
 Execute ~/shared/context/protocols/sharepoint-durability-sync.md — AM section.
@@ -265,5 +299,6 @@ Push key output artifacts to OneDrive for cross-device access:
 - am-enrichment-queue.json → Kiro-Drive/system-state/
 - am-portfolio-findings.json → Kiro-Drive/system-state/
 - daily-brief-latest.md → Kiro-Drive/system-state/
+- command-center-data.json → Kiro-Drive/system-state/
 
 Non-blocking: if SharePoint fails, log warning and continue.

@@ -7,7 +7,8 @@
       "autoApprove": [
         "ReadInternalWebsites",
         "QuipEditor",
-        "InternalSearch"
+        "InternalSearch",
+        "WorkspaceSearch"
       ]
     },
     "ai-community-slack-mcp": {

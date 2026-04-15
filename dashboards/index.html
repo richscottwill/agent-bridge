@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Command Center</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#eaeaea;overflow:hidden;height:100vh}
+/* ── Layout shell ── */
+.shell{display:flex;flex-direction:column;height:100vh}
+.topbar{padding:12px 20px 0;flex-shrink:0}
+.topbar h1{font-size:18px;font-weight:700;color:#fff;margin-bottom:2px}
+.topbar .sub{font-size:11px;color:#888;margin-bottom:8px}
+.nav{display:flex;gap:6px;padding:0 20px 8px;border-bottom:1px solid #1e2028;flex-shrink:0;flex-wrap:wrap}
+.nav a{display:block;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;color:#888;background:#14161e;border:1px solid #1e2028;transition:all .15s;cursor:pointer}
+.nav a:hover{border-color:#3b82f6;color:#d4d4d4}
+.nav a.active{background:#172040;border-color:#3b82f6;color:#93b4f5}
+.content{flex:1;position:relative;min-height:0}
+.content iframe{width:100%;height:100%;border:none;position:absolute;top:0;left:0}
+.home-wrap{height:100%;overflow-y:auto;padding:12px 20px 20px}
+
+/* ── Hero ── */
+.hero{background:linear-gradient(135deg,#172040 0%,#1a2a4a 100%);border:1px solid #2a3a5c;border-radius:8px;padding:12px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.hero-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#4a9eff;white-space:nowrap}
+.hero-text{font-size:13px;font-weight:600;color:#fff;flex:1}
+.hero-meta{font-size:11px;color:#6b8acd;white-space:nowrap}
+
+/* ── Critical flags ── */
+.critical-bar{background:rgba(127,29,29,.12);border:1px solid rgba(248,113,113,.18);border-radius:6px;padding:8px 14px;margin-bottom:10px;display:flex;gap:0;align-items:stretch}
+.critical-flag{flex:1;padding:4px 12px;font-size:11px;color:#dca0a0;line-height:1.4;border-left:1px solid rgba(248,113,113,.15);position:relative}
+.critical-flag:first-child{border-left:none}
+.critical-dismiss{position:absolute;top:2px;right:2px;background:none;border:none;color:#666;font-size:12px;cursor:pointer;padding:2px 5px;border-radius:3px;line-height:1}
+.critical-dismiss:hover{color:#e8a0a0;background:rgba(248,113,113,.1)}
+
+/* ── Blocks ── */
+.section-label{font-size:10px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
+.block-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+@media(max-width:900px){.block-grid{grid-template-columns:repeat(2,1fr)}}
+.block{background:#14161e;border:1px solid #1e2028;border-radius:6px;padding:10px 12px}
+.block.over-cap{border-color:rgba(251,191,36,.3)}
+.block-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.block-name{font-size:12px;font-weight:600;color:#d4d4d4}
+.block-count{font-size:10px;color:#888;background:#1e2028;padding:1px 7px;border-radius:4px}
+.block-count.over{color:#fbbf24;background:rgba(113,63,18,.3)}
+.block-cap{font-size:10px;color:#666}
+.block-tasks{max-height:130px;overflow-y:auto;margin-top:4px}
+.task-row{font-size:11px;padding:3px 0;border-bottom:1px solid #181a22;line-height:1.3;display:flex;align-items:baseline;gap:4px;cursor:pointer}
+.task-row:last-child{border-bottom:none}
+.task-row:hover{background:#181a22;border-radius:3px}
+.task-name{color:#d4d4d4;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.task-meta-inline{font-size:9px;color:#666;white-space:nowrap}
+.wip-warning{font-size:10px;color:#fbbf24;margin-top:4px;padding:4px 8px;background:rgba(113,63,18,.15);border-radius:4px}
+
+/* ── Badges ── */
+.badge{display:inline-block;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:600;margin-left:4px;vertical-align:middle}
+.badge-red{background:rgba(127,29,29,.4);color:#e8a0a0}
+.badge-orange{background:rgba(113,63,18,.4);color:#e0c080}
+.badge-gray{background:rgba(55,65,81,.4);color:#9ca3af}
+.badge-blue{background:rgba(30,58,138,.4);color:#93b4f5}
+
+/* ── Intel sections ── */
+.intel-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+@media(max-width:1000px){.intel-grid{grid-template-columns:1fr}}
+.intel-card{background:#14161e;border:1px solid #1e2028;border-radius:6px;padding:10px 12px}
+.intel-card h3{font-size:11px;font-weight:600;color:#777;text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
+.intel-card h3 .count{font-size:10px;color:#555;font-weight:400}
+.intel-list{}
+.intel-item{font-size:11px;padding:4px 0;border-bottom:1px solid #181a22;display:flex;align-items:center;gap:6px;position:relative;cursor:pointer;transition:opacity .2s}
+.intel-item:last-child{border-bottom:none}
+.intel-item:hover{background:#181a22;border-radius:3px}
+.intel-item.top-item{border-left:2px solid #3b82f6;padding-left:8px;background:rgba(59,130,246,.04)}
+.intel-text{flex:1;color:#d4d4d4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.intel-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.intel-source{font-size:9px;color:#666;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.intel-dismiss{background:none;border:none;color:#444;font-size:11px;cursor:pointer;padding:1px 4px;border-radius:3px;line-height:1}
+.intel-dismiss:hover{color:#aaa;background:rgba(255,255,255,.05)}
+
+/* ── Status pills ── */
+.status-pill{font-size:9px;padding:1px 6px;border-radius:3px;font-weight:600;cursor:pointer;border:none;line-height:1.4}
+.status-pill.not-started{background:rgba(55,65,81,.4);color:#9ca3af}
+.status-pill.in-progress{background:rgba(30,58,138,.3);color:#93b4f5}
+.status-pill.done{background:rgba(6,78,59,.4);color:#4ade80}
+
+/* ── Expanded detail overlay ── */
+.detail-panel{display:none;position:fixed;top:0;right:0;width:400px;height:100vh;background:#14161e;border-left:1px solid #2a2d35;z-index:100;overflow-y:auto;padding:20px;box-shadow:-4px 0 20px rgba(0,0,0,.4)}
+.detail-panel.open{display:block}
+.detail-close{position:absolute;top:12px;right:12px;background:none;border:none;color:#888;font-size:18px;cursor:pointer;padding:4px 8px}
+.detail-close:hover{color:#fff}
+.detail-panel h2{font-size:14px;font-weight:600;color:#fff;margin-bottom:12px;padding-right:30px}
+.detail-section{margin-bottom:12px}
+.detail-label{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.detail-text{font-size:12px;color:#d4d4d4;line-height:1.5}
+.detail-quote{font-size:12px;color:#777;font-style:italic;line-height:1.5}
+
+/* ── Integrity Ledger ── */
+.ledger{background:#14161e;border:1px solid #1e2028;border-radius:6px;padding:12px 16px;margin-top:10px}
+.ledger h3{font-size:11px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.ledger-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}
+@media(max-width:800px){.ledger-grid{grid-template-columns:1fr 1fr}}
+.ledger-stat{text-align:center}
+.ledger-stat .num{font-size:22px;font-weight:700;color:#fff}
+.ledger-stat .label{font-size:10px;color:#666;margin-top:2px}
+.ledger-stat .sub{font-size:10px;color:#555;margin-top:1px}
+.ledger-reflection{margin-top:10px;display:flex;gap:8px;align-items:center}
+.ledger-reflection label{font-size:11px;color:#666;white-space:nowrap}
+.ledger-reflection input{flex:1;background:#1a1d27;border:1px solid #2a2d35;color:#d4d4d4;padding:6px 10px;border-radius:4px;font-size:12px;font-family:inherit}
+.ledger-reflection input::placeholder{color:#444}
+.ledger-reflection button{background:#172040;border:1px solid #2a3a5c;color:#93b4f5;padding:6px 12px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
+.ledger-reflection button:hover{background:#1a2a4a}
+
+/* ── Utilities ── */
+.g{color:#4ade80}.w{color:#d4d4d4}.b{color:#f87171}.y{color:#fbbf24}
+.ts{font-size:10px;color:#444;text-align:right;padding-top:6px}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  .block-grid{grid-template-columns:1fr!important}
+  .intel-grid{grid-template-columns:1fr!important}
+  .ledger-grid{grid-template-columns:1fr!important}
+  .hero{flex-direction:column;align-items:flex-start;gap:4px}
+  .detail-panel{width:100%!important}
+}
+@media(max-width:500px){
+  .home-wrap{padding:8px 10px 16px}
+  .topbar{padding:8px 10px 0}
+  .nav{padding:0 10px 6px}
+}
+
+/* ── Initiator badge ── */
+.init-badge{font-size:8px;padding:1px 5px;border-radius:3px;font-weight:600;white-space:nowrap;flex-shrink:0}
+.init-me{background:rgba(30,58,138,.25);color:#7da2d4}
+.init-mgr{background:rgba(113,63,18,.25);color:#d4b070}
+.init-other{background:rgba(55,65,81,.3);color:#9ca3af}
+
+/* ── TOC ── */
+.toc{display:flex;gap:6px;padding:4px 20px;flex-wrap:wrap;align-items:center;border-bottom:1px solid #1e2028;flex-shrink:0;background:#12141c}
+.toc-label{font-size:9px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-right:2px}
+.toc a{font-size:10px;color:#888;text-decoration:none;padding:2px 8px;border-radius:3px;transition:all .15s}
+.toc a:hover{color:#93b4f5;background:rgba(30,58,138,.15)}
+.toc .toc-sep{color:#333;font-size:10px}
+
+/* ── Scratchpad ── */
+.scratchpad{background:#14161e;border:1px solid #1e2028;border-radius:6px;padding:12px 16px;margin-top:10px}
+.scratchpad h3{font-size:11px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.sp-tabs{display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
+.sp-tab{padding:4px 10px;border-radius:4px;font-size:11px;cursor:pointer;background:#1a1d27;border:1px solid #2a2d35;color:#888;transition:all .15s}
+.sp-tab:hover{border-color:#3b82f6;color:#d4d4d4}
+.sp-tab.active{background:#172040;border-color:#3b82f6;color:#93b4f5}
+.sp-add{padding:4px 8px;border-radius:4px;font-size:11px;cursor:pointer;background:none;border:1px dashed #2a2d35;color:#555}
+.sp-add:hover{border-color:#3b82f6;color:#93b4f5}
+.sp-area{width:100%;min-height:100px;max-height:200px;background:#1a1d27;border:1px solid #2a2d35;color:#d4d4d4;padding:8px 10px;border-radius:4px;font-size:12px;font-family:inherit;resize:vertical;line-height:1.5}
+.sp-area::placeholder{color:#444}
+.sp-area:focus{outline:none;border-color:#3b82f6}
+.sp-footer{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.sp-footer .sp-saved{font-size:10px;color:#555}
+.sp-footer button{background:#172040;border:1px solid #2a3a5c;color:#93b4f5;padding:4px 10px;border-radius:4px;font-size:10px;cursor:pointer}
+.sp-footer button:hover{background:#1a2a4a}
+.sp-footer .sp-delete{background:none;border:1px solid rgba(248,113,113,.2);color:#e8a0a0}
+.sp-footer .sp-delete:hover{background:rgba(127,29,29,.15)}
+</style>
+</head>
+<body>
+<div class="shell">
+<div class="topbar">
+  <h1>Command Center</h1>
+  <div class="sub">Richard Williams — Paid Search <span id="dataTs"></span></div>
+</div>
+<div class="nav" id="nav">
+  <a data-view="home" class="active">Command Center</a>
+  <a data-view="forecast-tracker.html">Forecast Tracker</a>
+  <a data-view="callout-dashboard.html">WBR Callouts</a>
+</div>
+<div class="toc" id="tocSection"></div>
+<div class="content" id="content">
+  <div class="home-wrap" id="homeContent">
+    <div id="heroSection"></div>
+
+    <div id="blockSection"></div>
+    <div id="intelSection"></div>
+    <div id="ledgerSection"></div>
+    <div id="scratchpadSection"></div>
+    <div class="ts" id="genTs"></div>
+  </div>
+  <iframe id="dashFrame" style="display:none"></iframe>
+</div>
+</div>
+
+<!-- Detail slide-out panel -->
+<div class="detail-panel" id="detailPanel">
+  <button class="detail-close" onclick="closeDetail()">&times;</button>
+  <div id="detailContent"></div>
+</div>
+
+<script>
+/* ── Nav ── */
+const nav=document.getElementById('nav'),home=document.getElementById('homeContent'),frame=document.getElementById('dashFrame');
+nav.addEventListener('click',e=>{const a=e.target.closest('a[data-view]');if(!a)return;e.preventDefault();const v=a.dataset.view;nav.querySelectorAll('a').forEach(x=>x.classList.remove('active'));a.classList.add('active');const toc=document.getElementById('tocSection');if(v==='home'){home.style.display='block';frame.style.display='none';if(toc)toc.style.display='flex'}else{home.style.display='none';frame.style.display='block';frame.src=v+'?t='+Date.now();if(toc)toc.style.display='none'}});
+
+/* ── Detail panel ── */
+let CC=null; // global data ref
+function openDetail(section,idx){
+  if(!CC)return;
+  const items=CC[section];if(!items||!items[idx])return;
+  const item=items[idx];
+  const panel=document.getElementById('detailPanel');
+  const content=document.getElementById('detailContent');
+  let html='';
+  if(section==='commitments'||section==='completed_commitments'){
+    const initLabel=item.said_by==='richard'?'You volunteered this':item.said_by==='other'?(extractName(item.person)?extractName(item.person)+' asked this of you':'Someone asked this of you'):'';
+    html=`<h2>${item.text}</h2>
+      ${initLabel?`<div class="detail-section"><div class="detail-label">Initiated By</div><div class="detail-text">${initLabel}</div></div>`:''}
+      ${item.quote?`<div class="detail-section"><div class="detail-label">Quote</div><div class="detail-quote">\u201c${item.quote}\u201d</div></div>`:''}
+      <div class="detail-section"><div class="detail-label">Source</div><div class="detail-text">${item.source||''}${item.person?' \u2014 '+item.person:''}</div></div>
+      ${item.context?`<div class="detail-section"><div class="detail-label">Context</div><div class="detail-text">${item.context}</div></div>`:''}
+      <div class="detail-section"><div class="detail-label">Age</div><div class="detail-text">${item.days_old||0} day(s)</div></div>
+      ${item.status==='done'?`<div class="detail-section"><div class="detail-label">Status</div><div class="detail-text g">\u2705 Completed</div></div>
+        ${item.completed_via?`<div class="detail-section"><div class="detail-label">How It Was Delivered</div><div class="detail-text">${item.completed_via}</div></div>`:''}
+        ${item.completed_message?`<div class="detail-section"><div class="detail-label">What Was Communicated</div><div class="detail-text" style="color:#aaa">${item.completed_message}</div></div>`:''}
+        ${item.days_old!=null?`<div class="detail-section"><div class="detail-label">Time to Fulfill</div><div class="detail-text">${item.days_old} day(s) from commitment to completion</div></div>`:''}`
+      :''}`; 
+  } else if(section==='delegate'){
+    html=`<h2>${item.task}</h2>
+      <div class="detail-section"><div class="detail-label">Hand Off To</div><div class="detail-text">${item.to||''}</div></div>
+      <div class="detail-section"><div class="detail-label">Rationale</div><div class="detail-text">${item.reason||''}</div></div>
+      ${item.quote?`<div class="detail-section"><div class="detail-label">Quote</div><div class="detail-quote">\u201c${item.quote}\u201d</div></div>`:''}
+      ${item.context?`<div class="detail-section"><div class="detail-label">Context</div><div class="detail-text">${item.context}</div></div>`:''}`;
+  } else if(section==='communicate'){
+    html=`<h2>${item.text}</h2>
+      <div class="detail-section"><div class="detail-label">Audience</div><div class="detail-text">${item.audience||''}</div></div>
+      ${item.quote?`<div class="detail-section"><div class="detail-label">Quote</div><div class="detail-quote">\u201c${item.quote}\u201d</div></div>`:''}
+      ${item.context?`<div class="detail-section"><div class="detail-label">Context</div><div class="detail-text">${item.context}</div></div>`:''}`;
+  } else if(section==='differentiate'||section==='completed_differentiate'){
+    html=`<h2>${item.action}</h2>
+      <div class="detail-section"><div class="detail-label">Why It Matters</div><div class="detail-text">${item.why||''}</div></div>
+      ${item.quote?`<div class="detail-section"><div class="detail-label">Quote</div><div class="detail-quote">\u201c${item.quote}\u201d</div></div>`:''}
+      ${item.context?`<div class="detail-section"><div class="detail-label">Context</div><div class="detail-text">${item.context}</div></div>`:''}
+      ${item.status==='done'?`<div class="detail-section"><div class="detail-label">Status</div><div class="detail-text g">\u2705 Completed</div></div>
+        ${item.completed_via?`<div class="detail-section"><div class="detail-label">How It Was Delivered</div><div class="detail-text">${item.completed_via}</div></div>`:''}
+        ${item.completed_message?`<div class="detail-section"><div class="detail-label">What Was Communicated</div><div class="detail-text" style="color:#aaa">${item.completed_message}</div></div>`:''}`
+      :''}`;
+  }
+  content.innerHTML=html;
+  panel.classList.add('open');
+}
+function openBlockDetail(blockIdx,taskIdx){
+  if(!CC||!CC.blocks)return;
+  const block=CC.blocks[blockIdx];if(!block)return;
+  const task=block.tasks[taskIdx];if(!task)return;
+  const panel=document.getElementById('detailPanel');
+  const content=document.getElementById('detailContent');
+  content.innerHTML=`<h2>${task.name}</h2>
+    <div class="detail-section"><div class="detail-label">Block</div><div class="detail-text">${block.name}</div></div>
+    <div class="detail-section"><div class="detail-label">Project</div><div class="detail-text">${task.project||'\u2014'}</div></div>
+    <div class="detail-section"><div class="detail-label">Due</div><div class="detail-text">${task.due||'No date'}${task.overdue?' <span class="b">('+task.days_overdue+'d overdue)</span>':''}</div></div>
+    <div class="detail-section"><div class="detail-label">Priority</div><div class="detail-text">${task.priority||'\u2014'}</div></div>
+    ${task.next_action?`<div class="detail-section"><div class="detail-label">Next Action</div><div class="detail-text" style="color:#6b8acd">${task.next_action}</div></div>`:''}
+    ${task.kiro?`<div class="detail-section"><div class="detail-label">Kiro Notes</div><div class="detail-text" style="color:#888">${task.kiro}</div></div>`:''}`;
+  panel.classList.add('open');
+}
+function closeDetail(){document.getElementById('detailPanel').classList.remove('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDetail()});
+
+/* ── Helpers ── */
+function priBadge(p){
+  if(p==='Today')return'<span class="badge badge-orange">TODAY</span>';
+  if(p==='Urgent')return'<span class="badge badge-red">URGENT</span>';
+  return'';
+}
+function odBadge(d){return d>0?'<span class="badge badge-gray">'+d+'d</span>':''}
+function initBadge(saidBy,person){
+  if(saidBy==='richard')return'<span class="init-badge init-me">I said</span>';
+  if(saidBy==='other'){
+    // Try to extract a first name from the person field
+    const name=extractName(person);
+    if(name)return'<span class="init-badge init-other">'+name+' asked</span>';
+    return'<span class="init-badge init-other">Asked of me</span>';
+  }
+  if(saidBy==='brandon')return'<span class="init-badge init-mgr">Brandon asked</span>';
+  return'';
+}
+function extractName(person){
+  if(!person)return'';
+  // "Brandon Munday" → "Brandon", "Lena Zak" → "Lena", "For Deep Dive Thursday" → ""
+  const p=person.trim();
+  if(p.toLowerCase().startsWith('for '))return'';
+  const parts=p.split(/[\s,(/]+/);
+  const first=parts[0];
+  // Skip if it looks like a role/event, not a name
+  if(first.length<2||/^(for|the|all|full|au|mx|us|ww)$/i.test(first))return'';
+  return first;
+}
+function statusPill(s){
+  const st=s||'not_started';
+  const labels={'not_started':'\u2b1c','in_progress':'\ud83d\udd04','done':'\u2705'};
+  const cls={'not_started':'not-started','in_progress':'in-progress','done':'done'};
+  return'<span class="status-pill '+(cls[st]||'not-started')+'">'+(labels[st]||'\u2b1c')+'</span>';
+}
+
+/* ── Dismiss state ── */
+function getDismissed(key){return JSON.parse(localStorage.getItem('cc_d_'+key)||'[]')}
+function setDismissed(key,arr){localStorage.setItem('cc_d_'+key,JSON.stringify(arr))}
+function dismissItem(section,idx){
+  const d=getDismissed(section);if(!d.includes(idx))d.push(idx);setDismissed(section,d);
+  const el=document.getElementById('ii-'+section+'-'+idx);
+  if(el){el.style.opacity='0';setTimeout(()=>{el.style.display='none'},200)}
+}
+function dismissFlag(idx){
+  const d=getDismissed('flags');if(!d.includes(idx))d.push(idx);setDismissed('flags',d);
+  const el=document.getElementById('cf-'+idx);if(el)el.style.display='none';
+  const remaining=document.querySelectorAll('.critical-flag:not([style*="display: none"])');
+  if(!remaining.length)document.getElementById('criticalSection').innerHTML='';
+}
+
+/* ── Scratchpad persistence ── */
+function getScratchpadData(){
+  const d=JSON.parse(localStorage.getItem('cc_scratchpad')||'{}');
+  if(!d.tabs||!d.tabs.length)d.tabs=[{id:'scratch-1',name:'Scratch',content:''}];
+  if(!d.active)d.active=d.tabs[0].id;
+  return d;
+}
+function saveScratchpadData(d){localStorage.setItem('cc_scratchpad',JSON.stringify(d))}
+let spData=null;
+function renderScratchpad(){
+  spData=getScratchpadData();
+  const activeTab=spData.tabs.find(t=>t.id===spData.active)||spData.tabs[0];
+  const tabsHtml=spData.tabs.map(t=>
+    `<button class="sp-tab${t.id===spData.active?' active':''}" onclick="switchTab('${t.id}')">${t.name}</button>`
+  ).join('');
+  const lastSaved=activeTab.saved?'Saved '+new Date(activeTab.saved).toLocaleTimeString():'';
+  document.getElementById('scratchpadSection').innerHTML=`
+    <div class="scratchpad">
+      <h3 id="sec-scratchpad">Scratchpad</h3>
+      <div class="sp-tabs">
+        ${tabsHtml}
+        <button class="sp-add" onclick="addTab()" title="New tab">+</button>
+      </div>
+      <textarea class="sp-area" id="spArea" placeholder="Quick notes, meeting capture, ideas..." oninput="autoSaveTab()">${activeTab.content||''}</textarea>
+      <div class="sp-footer">
+        <span class="sp-saved" id="spSaved">${lastSaved}</span>
+        <div style="display:flex;gap:6px">
+          ${spData.tabs.length>1?`<button class="sp-delete" onclick="deleteTab()">Delete tab</button>`:''}
+          <button onclick="renameTab()">Rename</button>
+        </div>
+      </div>
+    </div>`;
+}
+function switchTab(id){
+  spData.active=id;
+  saveScratchpadData(spData);
+  renderScratchpad();
+}
+function addTab(){
+  const name=prompt('Tab name:','Meeting notes');
+  if(!name)return;
+  const id='sp-'+Date.now();
+  spData.tabs.push({id,name,content:''});
+  spData.active=id;
+  saveScratchpadData(spData);
+  renderScratchpad();
+}
+function deleteTab(){
+  if(spData.tabs.length<=1)return;
+  if(!confirm('Delete this tab?'))return;
+  spData.tabs=spData.tabs.filter(t=>t.id!==spData.active);
+  spData.active=spData.tabs[0].id;
+  saveScratchpadData(spData);
+  renderScratchpad();
+}
+function renameTab(){
+  const tab=spData.tabs.find(t=>t.id===spData.active);
+  if(!tab)return;
+  const name=prompt('New name:',tab.name);
+  if(!name)return;
+  tab.name=name;
+  saveScratchpadData(spData);
+  renderScratchpad();
+}
+let spTimer=null;
+function autoSaveTab(){
+  clearTimeout(spTimer);
+  spTimer=setTimeout(()=>{
+    const area=document.getElementById('spArea');
+    if(!area||!spData)return;
+    const tab=spData.tabs.find(t=>t.id===spData.active);
+    if(!tab)return;
+    tab.content=area.value;
+    tab.saved=new Date().toISOString();
+    saveScratchpadData(spData);
+    const el=document.getElementById('spSaved');
+    if(el)el.textContent='Saved '+new Date(tab.saved).toLocaleTimeString();
+  },500);
+}
+
+/* ── Load data ── */
+fetch('data/command-center-data.json?'+Date.now()).then(r=>r.json()).then(cc=>{
+  CC=cc;
+  const dataVersion=cc.generated||'';
+  const storedVersion=localStorage.getItem('cc_data_version')||'';
+  if(storedVersion!==dataVersion){
+    ['flags','commitments','delegate','communicate','differentiate'].forEach(k=>localStorage.removeItem('cc_d_'+k));
+    localStorage.setItem('cc_data_version',dataVersion);
+  }
+  document.getElementById('dataTs').textContent='\u2022 Updated '+new Date(cc.generated).toLocaleString();
+  document.getElementById('genTs').textContent='Generated: '+new Date().toLocaleString();
+
+  renderHero(cc);
+  renderToc();
+  renderBlocks(cc);
+  renderIntel(cc);
+  renderLedger(cc);
+  renderScratchpad();
+}).catch(e=>{console.error(e);document.getElementById('blockSection').innerHTML='<div style="color:#f87171;padding:20px">Failed to load command center data</div>'});
+
+/* ── Hero ── */
+function renderHero(cc){
+  const d=cc.differentiate;if(!d||!d.length)return;
+  const top=d[0];
+  document.getElementById('heroSection').innerHTML=
+    `<div class="hero">
+      <div class="hero-label">\u26a1 Highest Leverage</div>
+      <div class="hero-text">${top.action}</div>
+      <div class="hero-meta">${statusPill(top.status)}</div>
+    </div>`;
+}
+
+/* ── Table of Contents ── */
+function renderToc(){
+  document.getElementById('tocSection').innerHTML=`
+      <span class="toc-label">Jump to</span>
+      <a href="#sec-blocks">Blocks</a>
+      <span class="toc-sep">\u00b7</span>
+      <a href="#sec-intel">Intelligence</a>
+      <span class="toc-sep">\u00b7</span>
+      <a href="#sec-ledger">Ledger</a>
+      <span class="toc-sep">\u00b7</span>
+      <a href="#sec-scratchpad">Scratchpad</a>`;
+}
+
+/* ── Critical flags ── */
+function renderCritical(cc){
+  if(!cc.critical_flags||!cc.critical_flags.length)return;
+  const dismissed=getDismissed('flags');
+  const visible=cc.critical_flags.filter((_,i)=>!dismissed.includes(i));
+  if(!visible.length)return;
+  document.getElementById('criticalSection').innerHTML=
+    '<div class="critical-bar">'+
+    cc.critical_flags.map((f,i)=>{
+      if(dismissed.includes(i))return'';
+      return`<div class="critical-flag" id="cf-${i}">${f}<button class="critical-dismiss" onclick="dismissFlag(${i})" title="Dismiss">\u00d7</button></div>`;
+    }).join('')+'</div>';
+}
+
+/* ── Daily Blocks with WIP enforcement ── */
+function renderBlocks(cc){
+  const bhtml=(cc.blocks||[]).map((b,bi)=>{
+    const isOver=b.count>b.cap;
+    const countCls=isOver?'block-count over':'block-count';
+    const blockCls=isOver?'block over-cap':'block';
+    const info=[];
+    if(b.today_count>0)info.push(b.today_count+' today');
+    if(b.overdue_count>0)info.push(b.overdue_count+' overdue');
+    const tasks=(b.tasks||[]).slice(0,8).map((t,ti)=>{
+      return`<div class="task-row" onclick="openBlockDetail(${bi},${ti})">
+        <span class="task-name">${t.name}${priBadge(t.priority)}${odBadge(t.days_overdue)}</span>
+        <span class="task-meta-inline">${t.project||''}</span>
+      </div>`;
+    }).join('');
+    const wip=isOver?`<div class="wip-warning">\u26a0 Over capacity (${b.count}/${b.cap}) \u2014 defer, delegate, or drop</div>`:'';
+    return`<div class="${blockCls}">
+      <div class="block-header"><span class="block-name">${b.name}</span><span class="${countCls}">${b.count}/${b.cap}</span></div>
+      <div class="block-cap">${b.desc}${info.length?' \u2022 '+info.join(' \u2022 '):''}</div>
+      <div class="block-tasks">${tasks||'<div style="color:#555;font-size:11px">Empty</div>'}</div>
+      ${wip}</div>`;
+  }).join('');
+  document.getElementById('blockSection').innerHTML=
+    '<div class="section-label" id="sec-blocks">Daily Blocks</div><div class="block-grid">'+bhtml+'</div>';
+}
+
+/* ── Intel sections (collapsed, click to expand in side panel) ── */
+function renderIntel(cc){
+  const sections=[
+    {key:'commitments',title:'Commitments',items:(cc.commitments||[]).filter(i=>i.status!=='done'),getText:i=>i.text,getMeta:i=>(i.source||'')+(i.days_old?' \u2022 '+i.days_old+'d':''),getExtra:i=>initBadge(i.said_by,i.person)},
+    {key:'differentiate',title:'Above the Rest',items:(cc.differentiate||[]).filter(i=>i.status!=='done').slice(0,3),getText:i=>i.action,getMeta:i=>'',getExtra:()=>''},
+    {key:'delegate',title:'Delegate',items:cc.delegate||[],getText:i=>i.task,getMeta:i=>i.to||'',getExtra:()=>''},
+    {key:'communicate',title:'Communicate',items:cc.communicate||[],getText:i=>i.text,getMeta:i=>i.audience||'',getExtra:()=>''},
+  ];
+  let html='';
+  sections.forEach(s=>{
+    const dismissed=getDismissed(s.key);
+    const visible=s.items.filter((_,i)=>!dismissed.includes(i));
+    html+=`<div class="intel-card"><h3>${s.title} <span class="count">${visible.length}</span></h3><div class="intel-list">`;
+    s.items.forEach((item,i)=>{
+      if(dismissed.includes(i))return;
+      const isTop=i<2;
+      const topCls=isTop?' top-item':'';
+      // Store original index for detail panel lookup
+      const origIdx=(cc[s.key]||[]).indexOf(item);
+      html+=`<div class="intel-item${topCls}" id="ii-${s.key}-${i}" onclick="openDetail('${s.key}',${origIdx>=0?origIdx:i})">
+        <span class="intel-text">${s.getText(item)}</span>
+        <span class="intel-right">
+          ${s.getExtra(item)}
+          <span class="intel-source">${s.getMeta(item)}</span>
+          ${item.days_old?odBadge(item.days_old):''}
+          <button class="intel-dismiss" onclick="event.stopPropagation();dismissItem('${s.key}',${i})" title="Dismiss">\u00d7</button>
+        </span>
+      </div>`;
+    });
+    html+='</div></div>';
+  });
+  document.getElementById('intelSection').innerHTML=
+    '<div class="section-label" id="sec-intel">Actionable Intelligence</div><div class="intel-grid">'+html+'</div>';
+}
+
+/* ── Integrity Ledger ── */
+function renderLedger(cc){
+  // Separate done vs active commitments
+  const allCommitments=cc.commitments||[];
+  const doneCommitments=allCommitments.filter(c=>c.status==='done');
+  const activeCommitments=allCommitments.filter(c=>c.status!=='done');
+  const overdueActive=activeCommitments.filter(c=>c.overdue);
+  const total=allCommitments.length;
+  const done=doneCommitments.length;
+  const avgOverdueAge=overdueActive.length?Math.round(overdueActive.reduce((s,c)=>s+(c.days_old||0),0)/overdueActive.length):0;
+  const avgCompletionTime=doneCommitments.length?Math.round(doneCommitments.reduce((s,c)=>s+(c.days_old||0),0)/doneCommitments.length):0;
+  const pct=total?Math.round(done/total*100):0;
+  const pctColor=pct>=70?'g':pct>=40?'y':'b';
+  const compTimeColor=avgCompletionTime<=2?'g':avgCompletionTime<=5?'y':'b';
+
+  // Also collect done differentiate items
+  const doneDiff=(cc.differentiate||[]).filter(d=>d.status==='done');
+
+  // Build completed items list (clickable)
+  let completedHtml='';
+  if(doneCommitments.length||doneDiff.length){
+    completedHtml='<div style="margin-top:10px;border-top:1px solid #1e2028;padding-top:8px"><div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Completed</div>';
+    // Store completed items on CC for detail panel access
+    CC.completed_commitments=doneCommitments;
+    CC.completed_differentiate=doneDiff;
+    doneCommitments.forEach((c,i)=>{
+      completedHtml+=`<div class="intel-item" style="font-size:11px;cursor:pointer;padding:3px 0" onclick="openDetail('completed_commitments',${i})">
+        <span style="color:#4ade80;margin-right:4px">\u2713</span>
+        <span class="intel-text">${c.text}</span>
+        <span style="font-size:9px;color:#555">${c.source||''}</span>
+      </div>`;
+    });
+    doneDiff.forEach((d,i)=>{
+      completedHtml+=`<div class="intel-item" style="font-size:11px;cursor:pointer;padding:3px 0" onclick="openDetail('completed_differentiate',${i})">
+        <span style="color:#4ade80;margin-right:4px">\u2713</span>
+        <span class="intel-text">${d.action}</span>
+      </div>`;
+    });
+    completedHtml+='</div>';
+  }
+
+  document.getElementById('ledgerSection').innerHTML=`
+    <div class="ledger">
+      <h3 id="sec-ledger">Integrity Ledger</h3>
+      <div class="ledger-grid">
+        <div class="ledger-stat">
+          <div class="num ${pctColor}">${pct}%</div>
+          <div class="label">Promises Kept</div>
+          <div class="sub">${done}/${total} commitments</div>
+        </div>
+        <div class="ledger-stat">
+          <div class="num ${compTimeColor}">${avgCompletionTime}d</div>
+          <div class="label">Avg Time to Fulfill</div>
+          <div class="sub">${done} completed</div>
+        </div>
+        <div class="ledger-stat">
+          <div class="num ${overdueActive.length>3?'b':overdueActive.length>0?'y':'g'}">${overdueActive.length}</div>
+          <div class="label">Overdue</div>
+          <div class="sub">avg age: ${avgOverdueAge}d</div>
+        </div>
+        <div class="ledger-stat">
+          <div class="num">${activeCommitments.length}</div>
+          <div class="label">Active</div>
+          <div class="sub">open commitments</div>
+        </div>
+      </div>
+      ${completedHtml}
+    </div>`;
+}
+</script>
+</body>
+</html>

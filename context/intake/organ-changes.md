@@ -156,3 +156,21 @@
 - (Already tracked) Update hands.md Hook System table to reflect new hook architecture + forecast-sharepoint-push hook
 - (Low) Verify `ps.regime_changes` table exists in MotherDuck on next DuckDB interaction
 - (Low) Verify spine.md includes wbr-pipeline.sh in tool paths on next spine refresh
+
+## 2026-04-14 — amazon-politics.md
+
+**Section:** New organ file (full creation)
+**Change:** New reference organ created: "Amazon Politics & Career Dynamics." Contains distilled knowledge from two Ethan Evans (former Amazon VP) interviews on developing.dev. Six sections: (1) Promotion Mechanics — Magic Loop, outsized events, champions, polite fictions, headcount thresholds, the queue; (2) Performance Management & PIPs — URA system, PIPs as terminal, manager firing power, hidden reasons; (3) Reorgs & Scope — why reorgs happen, managing out via reorg, scope defense/attack tactics; (4) Influence & Political Navigation — warm+firm framework, polite fictions, leverage, back-channeling, porcupine strategy, dealing with difficult people, mutiny protocol, weak managers; (5) Career Strategy — high growth orgs, solving boss's problems, creating scope, relationships > being right; (6) Application to Richard's Situation — direct mapping to Brandon 1:1s, Kate skip-level, Testing Approach as outsized event, promotion champion identification, cross-team friction handling.
+
+**Karpathy gate:** N/A — amazon-politics.md is not gated (only heart.md and gut.md are gated). No authorization issue.
+
+**body.md registration:** ✅ Already registered in body.md organ table as "🏛️ Amazon Politics" with correct file path, function description, and "when to read" guidance.
+
+**Cross-organ consistency:** ✅ No conflicts detected.
+- **↔ brain.md:** Complementary, not overlapping. Brain.md covers Richard's decision principles and Five Levels. Amazon-politics.md covers Amazon's political system as reference knowledge. The promotion mechanics (Magic Loop, outsized event) inform career coaching without contradicting brain.md's leverage framework or strategic priorities.
+- **↔ amcc.md:** Section 6 references Testing Approach doc as "outsized event opportunity" — aligns with aMCC's current hard thing tracking and Level 1 gate.
+- **↔ memory.md:** Stakeholder names (Brandon, Kate, Lorena, Lena) consistent with relationship graph.
+- **↔ soul.md:** "When to load" guidance (career coaching, 1:1 prep, skip-level prep, promotion planning) aligns with soul.md's agent routing directory — rw-trainer handles career coaching depth, amazon-politics.md provides the reference knowledge rw-trainer would consume.
+- **↔ spine.md:** No conflicts. Spine doesn't need to reference this file directly — it's loaded on-demand per body.md's "when to read" guidance, not during bootstrap.
+
+**Action items:** None. Clean creation — body.md already updated, no follow-up edits needed in other organs.

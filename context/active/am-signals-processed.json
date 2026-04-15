@@ -1,36 +1,28 @@
 {
-  "generated_at": "2026-04-13T16:50:00Z",
-  "generated_by": "am-backend-parallel",
-
-  "signal_to_task": {
-    "created": [],
-    "commented": [],
-    "notes": "No new high-priority signals warranting auto-task creation this cycle. Critical items (PAM budget, MX budget) already have existing tasks."
-  },
-
-  "decision_signals": [
-    {
-      "source": "slack",
-      "channel": "ab-paid-search-oci",
-      "signal": "OCI CA execution planned for TOMORROW (4/14). Brandon checking MCM readiness with Mukesh.",
-      "action": "queue_for_frontend",
-      "priority": "high"
-    },
-    {
-      "source": "slack",
-      "channel": "ab-paid-search-global",
-      "signal": "GenBI Traffic Dataset demo by Mukesh. Brandon engaged. New data tooling for team.",
-      "action": "fyi",
-      "priority": "low"
-    }
+  "generated": "2026-04-15T01:48:00Z",
+  "version": "pm-scan",
+  "signals_processed": 12,
+  "tasks_created": [
+    {"gid": "1214068429496105", "name": "Respond to Yun — MX NB page performance doc", "source": "slack", "routine": "Sweep", "priority": "Today", "due": "2026-04-16"},
+    {"gid": "1214068275460844", "name": "Review Q2 CCP/ieCCP files from Stacey", "source": "slack", "routine": "Sweep", "priority": "Not urgent", "due": "2026-04-17"},
+    {"gid": "1214068429466521", "name": "Verify IT tax fix — check closed invoices + reissued ones", "source": "slack", "routine": "Admin", "priority": "Not urgent", "due": "2026-04-16"},
+    {"gid": "1214068319315340", "name": "Prep for MX LP optimization call (tomorrow 12 PM CST)", "source": "slack", "routine": "Sweep", "priority": "Today", "due": "2026-04-15"},
+    {"gid": "1214068429586218", "name": "RSVP: PSME Seattle Happy Hour", "source": "email", "routine": "Sweep", "priority": "Today", "due": "2026-04-15"},
+    {"gid": "1214068429588691", "name": "RSVP: Kate's AB Marketing Happy Hour", "source": "email", "routine": "Sweep", "priority": "Today", "due": "2026-04-15"},
+    {"gid": "1214068319365234", "name": "Approve OFA invoice workflow (Mohd Sadeq)", "source": "email", "routine": "Admin", "priority": "Today", "due": "2026-04-15"},
+    {"gid": "1214068319383964", "name": "Submit ABMA BTL requests (deadline today 4/14)", "source": "email", "routine": "Admin", "priority": "Urgent", "due": "2026-04-14"}
   ],
-
-  "wiki_candidates": [],
-
-  "trending_topics": [
-    {"topic": "oci-rollout", "strength": "high", "channels": 1, "status": "active-execution-tomorrow"},
-    {"topic": "pam-budget", "strength": "critical", "channels": 1, "status": "10d-unanswered"},
-    {"topic": "mx-budget-ieccp", "strength": "critical", "channels": 2, "status": "10d-unanswered"},
-    {"topic": "polaris-brand-lp", "strength": "medium", "channels": 2, "status": "ddd-thursday"}
+  "existing_tasks_matched": [
+    {"gid": "1213959904341162", "name": "Reply to Brandon — PAM budget needs assessment", "signal": "PAM budget 11d unanswered", "status": "exists, needs enrichment"},
+    {"gid": "1213235338214791", "name": "AB Customer Redirect", "signal": "Brandon comment — add details + close", "status": "exists, needs action"}
+  ],
+  "signals_skipped": [
+    {"signal": "Polaris pages status across markets", "reason": "FYI only, no task needed"},
+    {"signal": "ENG spend context", "reason": "FYI only, awareness signal"}
+  ],
+  "critical_flags": [
+    "PAM budget reply to Brandon — 11 DAYS UNANSWERED. Task exists (1213959904341162) but no Routine_RW or Priority_RW set. Queued for enrichment.",
+    "AB Customer Redirect — Brandon asked to add details and close. 1+ day old. Direct manager ask.",
+    "ABMA BTL deadline was 4/14 EOD — may have passed. Created task but flagged as potentially missed."
   ]
 }
