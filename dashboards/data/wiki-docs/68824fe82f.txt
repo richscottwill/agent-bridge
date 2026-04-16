@@ -1,0 +1,6 @@
+# 2023.11 - Brand LP Test - CPS Column
+Source: https://quip-amazon.com/LLJ9AAmkj0W
+
+Weblab: AB_MARKETING_WEBSITE_WEBLAB_PS_CP_818731
+Result: Negative impact. -2.53% B2B Registrations (8.3% probability), -6.65% User Additions, -0.38% GCCP.
+Action: Reverted to control. Suggested refining text to max 4 rows.

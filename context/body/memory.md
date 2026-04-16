@@ -13,15 +13,6 @@ Last updated: 2026-04-03 (EOD-1: Kate interaction updated — direct email threa
 
 L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7). Skip: Kate Rundell (L8). VP: Todd Heimes (L10). Seattle, SEA28. Hired Nov 2023.
 
-### Team (Brandon's directs)
-
-Peter Ocampo L6 (Mobile App), Stacey Gu L6 (OCI/Bidding), Dwayne Palmer L6 (MCS/Website), Yun-Kang Chu L6 (Modern Search/Adobe), Andrew Wirtz L5 (DG/Algorithmic Ads), Adi Thakur L5 (Landing Pages/UX).
-
-### Markets
-
-**Hands-on:** AU (Alexis Eck L6, Lena Zak L7), MX (Lorena Alvarez Larrea L5 — primary PS stakeholder as of 3/17; Carlos Palmos L5 transitioned to CPS).
-**Team-wide:** US/EU5/JP/CA.
-
 ### Active Projects (as of 4/3/26, priority order)
 
 | # | Project | Status | Level | Priority Signal |
@@ -38,6 +29,15 @@ Peter Ocampo L6 (Mobile App), Stacey Gu L6 (OCI/Bidding), Dwayne Palmer L6 (MCS/
 - CA: 2.8K regs (+18.5% OP2), $207K, $73 CPA
 - AU: 1.1K regs (-1% OP2), $159K, ~$140 CPA target
 - MX: 1.1K regs (+32% OP2, +37% YoY), $68K
+
+### Team (Brandon's directs)
+
+Peter Ocampo L6 (Mobile App), Stacey Gu L6 (OCI/Bidding), Dwayne Palmer L6 (MCS/Website), Yun-Kang Chu L6 (Modern Search/Adobe), Andrew Wirtz L5 (DG/Algorithmic Ads), Adi Thakur L5 (Landing Pages/UX).
+
+### Markets
+
+**Hands-on:** AU (Alexis Eck L6, Lena Zak L7), MX (Lorena Alvarez Larrea L5 — primary PS stakeholder as of 3/17; Carlos Palmos L5 transitioned to CPS).
+**Team-wide:** US/EU5/JP/CA.
 
 ### Key Decisions/Positions
 - Holistic measurement over segmented Brand/NB goals

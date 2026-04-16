@@ -26,25 +26,51 @@ BLOCKS = [
 ]
 
 
+def _get_motherduck_token():
+    """Extract MotherDuck token from env or Kiro MCP config."""
+    token = os.environ.get("MOTHERDUCK_TOKEN") or os.environ.get("motherduck_token")
+    if token:
+        return token
+    # Try reading from Kiro MCP config
+    for cfg_path in [
+        Path.home() / ".kiro/settings/mcp.json",
+        Path("../../.kiro/settings/mcp.json"),
+    ]:
+        try:
+            cfg = json.loads(cfg_path.read_text())
+            env = cfg.get("mcpServers", {}).get("duckdb", {}).get("env", {})
+            t = env.get("motherduck_token") or env.get("MOTHERDUCK_TOKEN")
+            if t:
+                return t
+        except Exception:
+            pass
+    return None
+
+
 def query_duckdb(sql):
-    """Query MotherDuck via duckdb Python package or CLI."""
-    # Try Python package first (needs MOTHERDUCK_TOKEN env var)
+    """Query MotherDuck via duckdb Python package, with token auto-discovery from MCP config."""
+    token = _get_motherduck_token()
+    # Try Python package (use fetchall to avoid numpy dependency)
     try:
         import duckdb as ddb
-        token = os.environ.get("MOTHERDUCK_TOKEN") or os.environ.get("motherduck_token")
         if token:
             con = ddb.connect(f"md:ps_analytics?motherduck_token={token}")
         else:
             con = ddb.connect("md:ps_analytics")
-        result = con.execute(sql).fetchdf()
-        return result.to_dict('records')
+        result = con.execute(sql)
+        columns = [desc[0] for desc in result.description]
+        rows = result.fetchall()
+        return [dict(zip(columns, row)) for row in rows]
     except Exception as e:
         print(f"DuckDB Python failed: {e}")
-    # Fallback to CLI
+    # Fallback to CLI with token in env
     try:
+        env = os.environ.copy()
+        if token:
+            env["motherduck_token"] = token
         result = subprocess.run(
             ["duckdb", "md:ps_analytics", "-json", "-c", sql],
-            capture_output=True, text=True, timeout=30
+            capture_output=True, text=True, timeout=30, env=env
         )
         if result.returncode == 0 and result.stdout.strip():
             return json.loads(result.stdout.strip())

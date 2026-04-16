@@ -2,15 +2,15 @@
   "useLegacyMcpJson": false,
   "name": "metrics-dashboard",
   "description": "Generates weekly AgentSpaces adoption metrics by querying Pendergrass data repos, computing WoW changes, and persisting results to ~/shared/agentspaces-metrics/ -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",
-  "resources": ["file:///home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6442127345/context/metrics-dashboard/*"],
+  "resources": ["file:///home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6444395178/context/metrics-dashboard/*"],
   "mcpServers": {"builder-mcp": {
     "args": [
       "--agent-sop-paths",
-      "/home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6442127345/agent-sops",
+      "/home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6444395178/agent-sops",
       "--agent-sop-filter",
       "generate-weekly-metrics",
       "--skill-paths",
-      "/home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6442127345/skills",
+      "/home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6444395178/skills",
       "--skill-name-filter",
       "metrics-query,pendergrass-schema-discovery"
     ],

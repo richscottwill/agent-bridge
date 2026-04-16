@@ -1,0 +1,3 @@
+# Onboarding Links & Reference
+Source: https://quip-amazon.com/ETC9AAVBfHC
+Team Quip folder, IT setup, permissions (Google Ads, Quicksight, DataCentral, Adobe), Slack channels, reporting tools (WBR dashboard, Quicksight, Hubble, AMO), finance resources. Comprehensive new hire reference.

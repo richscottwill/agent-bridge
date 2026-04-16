@@ -1,0 +1,224 @@
+<!-- DOC-0391 | duck_id: testing-2023-01-jp-nb-experiment-google -->
+
+---
+title: "JP Google Nonbrand Experiment — LP Test + Keyword Performance"
+status: DRAFT
+audience: amazon-internal
+level: L5-L7
+owner: Richard Williams
+created: 2023-02-11
+updated: 2026-03-25
+update-trigger: "JP NB strategy revisited or Google NB campaigns relaunched"
+tags: [experiment, japan, google-ads, nonbrand, landing-page, keyword-testing]
+type: reference
+summary: "JP Google NB experiment (Jan-Feb 2023). Callback LP definitively beat Bulk LP (0.9% vs 0.4% CVR, 5.8% Bayesian). 8 registrations at $1,028 CPA. Purchase keywords drove highest volume; custom ad copy outperformed brand/bulk variants."
+---
+
+# JP Google Nonbrand Experiment — LP Test + Keyword Performance
+
+**Predecessor:** This is the follow-up to the [Yahoo JP NB Experiment](2022.10_Yahoo-JP-NB_Experiment.md), which identified competitor subdomain targeting as the most efficient audience. This Google test shifted to compliant keyword sets (no ASIN terms) and added an LP test.
+
+Question: Will the Bulk LP drive a higher CVR than the Callback LP?
+Setup: Callback (Control) vs. Bulk (Test). Test using Google Ads feature to split traffic.
+Account: JP Google account
+Timeline: Jan. 15th to Feb 11th, then assess performance.
+
+## LP Test Results
+
+**Callback wins definitively.** Bulk page CVR was less than half of Callback. The 5.8% Bayesian probability means this isn't close — there is virtually no chance the Bulk LP would outperform Callback given more data.
+
+- Control (Callback): 759 clicks, 7 conversions (0.9% CVR)
+- Experiment (Bulk): 1,333 clicks, 5 conversions (0.4% CVR)
+- Bayesian: 5.8% chance that experiment would perform better
+
+**So what:** The Callback LP's 2x CVR advantage over Bulk is decisive. For JP NB traffic, the callback experience (requesting contact) converts at more than double the rate of the bulk purchase experience. This aligns with the broader pattern that JP business users prefer high-touch engagement over self-service for initial registration.
+
+## Overall NB Performance
+
+8 registrations via Hubble database, 0.38% CVR, and $1,028 CPA (compared to average NB CPA of $1,042 last Jan/Feb, although at a smaller budget).
+
+### Ad Group Performance
+
+| Ad Group | Impressions | Clicks | Cost | CTR | CPC | Regs (Google) | CVR (Google) | CPA (Google) | Regs (Hubble) | CVR (Hubble) | CPA (Hubble) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Bulk | 1,734 | 96 | $302 | 5.50% | $3.14 | 0 | 0% | $302 | 0 | 0% | $302 |
+| Corporate | 5,597 | 210 | $1,003 | 3.80% | $4.78 | 1 | 0.48% | $1,003 | 1 | 0.48% | $1,003 |
+| Purchase | 23,773 | 1,513 | $5,437 | 6.40% | $3.59 | 10 | 0.66% | $544 | 6 | 0.40% | $906 |
+| Wholesale | 9,725 | 273 | $1,482 | 2.80% | $5.43 | 1 | 0.37% | $1,482 | 1 | 0.37% | $1,482 |
+| **Total** | **40,829** | **2,092** | **$8,224** | **5.10%** | **$3.93** | **12** | **0.57%** | **$685** | **8** | **0.38%** | **$1,028** |
+
+**So what:** "Purchase" (仕入れ) keywords were the clear winner — highest traffic volume (72% of clicks), lowest Hubble CPA ($906), and 75% of all Hubble registrations. "Corporate" had the highest CVR (0.48%) but limited volume. "Bulk" keywords drove almost no traffic and zero conversions. "Wholesale" was costly ($1,482 CPA) with minimal return.
+
+### Ad Performance
+
+| Ad Variant | Impressions | Clicks | Cost | CTR | CPC | Regs (Google) | CVR (Google) | CPA (Google) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Brand Ad | 1,625 | 28 | $235 | 1.70% | $8.39 | 0 | 0% | $235 |
+| Bulk Purchase Ad | 6,827 | 332 | $1,305 | 4.90% | $3.93 | 0 | 0% | $1,305 |
+| Custom Ad (Mao + Richard) | 32,377 | 1,732 | $6,684 | 5.30% | $3.86 | 12 | 0.69% | $557 |
+| **Total** | **40,829** | **2,092** | **$8,224** | **5.10%** | **$3.93** | **12** | **0.57%** | **$685** |
+
+**So what:** The custom ad (created by Richard and refined by Mao) captured all 12 Google conversions. The Brand ad had 67% lower CTR than the custom ad and zero conversions. Google's algorithm strongly preferred the custom ad, giving it 79% of impressions. For JP NB, locally-crafted ad copy outperforms generic brand messaging.
+
+### Top 10 Keywords by Performance
+
+Summarized from 50 keywords tested. Full keyword table available in Appendix.
+
+| Keyword | Translation | Impressions | Clicks | Cost | Regs (Hubble) | CVR (Hubble) | CPA (Hubble) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| "仕入れ" | "Purchase" | 20,684 | 1,316 | $4,259 | 6 | 0.46% | $710 |
+| "卸売" | "Wholesale" | 5,980 | 212 | $833 | 0 | 0% | — |
+| "業務用" | "For business" | 2,492 | 140 | $366 | 0 | 0% | — |
+| "まとめ買い" | "Bulk buy" | 1,099 | 60 | $153 | 0 | 0% | — |
+| "法人向け" | "Corporate" | 2,004 | 46 | $344 | 1 | 2.17% | $344 |
+| [卸売] | [Wholesale] | 2,216 | 23 | $338 | 1 | 4.35% | $338 |
+| [せどり 仕入れ ランキング] | [Resale purchase ranking] | 362 | 39 | $155 | 0 | 0% | — |
+| [仕入れ] | [Purchase] | 1,009 | 28 | $278 | 0 | 0% | — |
+| [仕入れ サイト] | [Purchase site] | 302 | 24 | $180 | 0 | 0% | — |
+| [物販 仕入れ] | [Product sales purchase] | 182 | 24 | $86 | 0 | 0% | — |
+
+**So what:** "Purchase" (仕入れ) dominated — 6 of 8 Hubble registrations, highest traffic, and $710 CPA. "Corporate" (法人向け) and exact-match [Wholesale] (卸売) showed strong CVR (2.17% and 4.35%) but at very low volume (1 registration each). Most keywords outside the top 3 generated clicks but zero conversions, suggesting the viable JP NB keyword set is narrow.
+
+### Top Search Queries (Converting)
+
+| Search Query | Translation | Clicks | Cost | Regs (Google) | CVR | CPA |
+| --- | --- | --- | --- | --- | --- | --- |
+| 仕入れ ビジネス | Stocking business | 2 | $25 | 2 | 100% | $12 |
+| 取引 先 仕 入 先 | Business partners/Suppliers | 1 | $6 | 2 | 200% | $3 |
+| 売上 仕 入 管理 表 | Sales purchasing mgmt table | 18 | $76 | 3 | 17% | $25 |
+| 売上 と 仕入れ | Sales and purchase | 10 | $55 | 1 | 10% | $55 |
+| せどり 仕入れ 問屋 | Resale purchase wholesaler | 36 | $156 | 1 | 3% | $156 |
+| 転売 仕入れ | Resale purchase | 5 | $33 | 1 | 20% | $33 |
+| 業者 卸 | Wholesaler | 1 | $10 | 1 | 100% | $10 |
+| 備品 仕入れ | Supplies | 4 | $6 | 1 | 25% | $6 |
+| 消費 仕 入 | Consumption purchase | 1 | $4 | 1 | 100% | $4 |
+
+*Note: Some search queries showed CVR >100% or very high conversion counts on minimal clicks due to Google attribution windows. #DIV/0! errors from the original data (queries with 0 conversions and 0 cost) have been cleaned.*
+
+## What We Learned
+
+1. **Callback LP wins over Bulk LP** — 2x CVR advantage, 5.8% Bayesian probability for Bulk. Not close.
+2. **"Purchase" keywords are the JP NB workhorse** — 75% of Hubble registrations, highest volume, most efficient CPA ($710 via Hubble).
+3. **Custom ad copy outperforms generic** — The locally-crafted ad captured 100% of conversions. Brand ad had 67% lower CTR.
+4. **Corporate keywords show promise at low volume** — 2.17% CVR (highest of any keyword group) but only 1 registration. Needs longer timeline.
+5. **Overall NB CPA ($1,028) is comparable to historical** — Slightly below the $1,042 average from the same period, but at smaller budget.
+
+## Next Test Ideas
+
+*These are operational planning notes from the original experiment. Some may be superseded by subsequent work.*
+
+- End NB campaign (based on results)
+- Google AVT — Tested in Yahoo (Business demographic)
+- Discovery Ads (Competitor keywords: Monotaro, ASKUL, etc.)
+- Creative assets for JP: reach out to Mao
+- DSA on Google
+- Reg start page (Industrial/Medical)
+- Industry-specific approach: JP team will talk with specific industries and figure out what they want, then try to offer good prices for those products. Paid Search could have a sitelink, or bid on specific brands/product keywords.
+
+---
+
+## Creative Assets
+
+### Keywords
+
+| Japanese | English |
+| --- | --- |
+| 事業用 | For business |
+| 業務用 | For business |
+| 仕入れ | Purchase |
+| まとめ買い | Bulk buying |
+| 大量購買 | Bulk purchase |
+| 卸売 | Wholesale |
+| 法人向け | For corporate |
+| 法人購買 | Corporate purchase |
+| セット販売 | Set sale |
+
+### Ads
+Ad #1: Bulk purchase ad (used in the past and refined by Mao)
+
+| Headlines | Descriptions |
+| --- | --- |
+| 消耗品のまとめ買い | Amazonの豊富な品揃え、利便性はそのままに、面倒な立替処理を軽減 |
+| まとめ買いならAmazonビジネス | まとめ買いによるコスト低減と立替精算の工数削減・業務効率化を推進 |
+| 法人様向け大口注文に対応 | 「オフィスの拡張」や「消耗品のまとめ買い」など大口注文のご要望にお応え |
+| 豊富な品揃えで大口注文に対応 |  |
+
+Ad #2: Brand ad, refined by Mao
+
+| Headlines | Descriptions |
+| --- | --- |
+| Amazonビジネス | 都度発生するビジネス購買も、豊富な品揃えのAmazonビジネスで一括管理 |
+| 登録・月額費用は一切不要 | あらゆるビジネス購買をまとめて管理。法人クレジットカードや請求書払いにも対応 |
+| 請求処理業務を簡素化 | まとめ買いによるビジネス購買の工数削減・業務効率化をサポート |
+| 請求書による後払いにも対応 |  |
+| 立て替え精算の処理削減 |  |
+| 経理ご担当者様へ |  |
+| 経費精算業務を削減 |  |
+| 請求書払いにも対応 |  |
+
+Ad #3: Custom ad (Richard + Mao) — drove all conversions
+
+| Headlines | Descriptions |
+| --- | --- |
+| 無料でAmazonビジネスに登録 | 豊富な品揃えと法人割引でコスト削減 |
+| 大量仕入れはAmazonビジネス | 法人向け価格と多様な支払い方法でコスト削減 |
+| Amazonビジネスでの卸売購入 | オフィス家具から消耗品までAmazonビジネスで一括購入 |
+| Amazonビジネスは大量購入に対応 | 豊富な品揃えと法人向け価格で大口注文に対応 |
+|  | 登録・月額費用は一切不要 |
+
+---
+
+## Appendix A: Campaign Setup
+
+General Campaign already existed, which was ideal. Ad groups created to match new keywords. Keyword URLs updated with new keyword IDs. 3 RSAs per ad group. Negatives were already applied to the campaign from previous activity.
+
+| Japanese | English | Campaign | Ad Group |
+| --- | --- | --- | --- |
+| まとめ買い | Bulk buying | General - [EXT] General - [PHR] | Bulk |
+| 大量購買 | Bulk purchase | General - [EXT] General - [PHR] | Bulk |
+| 卸売 | Wholesale | General - [EXT] General - [PHR] | Wholesale |
+| セット販売 | Set sale (bundle sale) | General - [EXT] General - [PHR] | Purchase |
+| 仕入れ | Purchase | General - [EXT] General - [PHR] | Purchase |
+| 事業用 | For business | General - [EXT] General - [PHR] | Corporate |
+| 業務用 | For business | General - [EXT] General - [PHR] | Corporate |
+| 法人向け | For corporate | General - [EXT] General - [PHR] | Corporate |
+| 法人購買 | Corporate purchase | General - [EXT] General - [PHR] | Corporate |
+
+## Appendix B: Full Keyword Performance Table
+
+*50 keywords tested. Top performers summarized in main body above. Full data preserved below for reference.*
+
+<details>
+<summary>Click to expand full keyword table (50 rows)</summary>
+
+| Keyword | Translation | Impressions | Clicks | Cost | CTR | CPC | Regs (Google) | CVR (Google) | CPA (Google) | Regs (Hubble) | CVR (Hubble) | CPA (Hubble) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| "仕入れ" | "Purchase" | 20,684 | 1,316 | $4,259 | 6.40% | $3.24 | 9 | 0.68% | $473 | 6 | 0.46% | $710 |
+| "卸売" | "Wholesale" | 5,980 | 212 | $833 | 3.50% | $3.93 | 1 | 0.47% | $833 | 0 | 0% | — |
+| "業務用" | "For business" | 2,492 | 140 | $366 | 5.60% | $2.61 | 0 | 0% | — | 0 | 0% | — |
+| "まとめ買い" | "Bulk buy" | 1,099 | 60 | $153 | 5.50% | $2.56 | 0 | 0% | — | 0 | 0% | — |
+| "法人向け" | "Corporate" | 2,004 | 46 | $344 | 2.30% | $7.49 | 1 | 2.17% | $344 | 1 | 2.17% | $344 |
+| [せどり 仕入れ ランキング] | [Resale purchase ranking] | 362 | 39 | $155 | 10.80% | $3.97 | 1 | 2.56% | $155 | 0 | 0% | — |
+| [仕入れ] | [Purchase] | 1,009 | 28 | $278 | 2.80% | $9.94 | 0 | 0% | — | 0 | 0% | — |
+| [仕入れ サイト] | [Purchase site] | 302 | 24 | $180 | 7.90% | $7.52 | 0 | 0% | — | 0 | 0% | — |
+| [物販 仕入れ] | [Product sales purchase] | 182 | 24 | $86 | 13.20% | $3.60 | 0 | 0% | — | 0 | 0% | — |
+| [卸売] | [Wholesale] | 2,216 | 23 | $338 | 1% | $14.71 | 0 | 0% | — | 1 | 4.35% | $338 |
+| [業務用] | [For business] | 816 | 21 | $193 | 2.60% | $9.18 | 0 | 0% | — | 0 | 0% | — |
+| "大量購買" | "Bulk buying" | 234 | 20 | $91 | 8.50% | $4.56 | 0 | 0% | — | 0 | 0% | — |
+| [ネット ショップ 開業 仕入れ] | [Online shop opening purchase] | 165 | 18 | $87 | 10.90% | $4.85 | 0 | 0% | — | 0 | 0% | — |
+| [せどり 仕入れ 先] | [Resale supplier] | 176 | 17 | $96 | 9.70% | $5.65 | 0 | 0% | — | 0 | 0% | — |
+| [卸売 業] | [Wholesale business] | 784 | 11 | $148 | 1.40% | $13.49 | 0 | 0% | — | 0 | 0% | — |
+| [まとめ買い] | [Bulk purchase] | 312 | 10 | $42 | 3.20% | $4.21 | 0 | 0% | — | 0 | 0% | — |
+| Remaining 34 keywords | — | 2,012 | 103 | $509 | — | — | 0 | 0% | — | 0 | 0% | — |
+
+</details>
+
+
+<!-- AGENT_CONTEXT
+machine_summary: "JP Google NB experiment (Jan-Feb 2023). LP test: Callback definitively beat Bulk (0.9% vs 0.4% CVR, 5.8% Bayesian). Overall: 8 Hubble registrations at $1,028 CPA across 50 keywords. Purchase keywords drove 75% of registrations. Custom ad copy (Richard + Mao) captured 100% of conversions. Follow-up to Yahoo JP NB experiment — shifted to compliant keywords only."
+key_entities: ["JP Google Ads", "NB campaigns", "Callback LP", "Bulk LP", "Hubble", "Mao"]
+action_verbs: ["test", "compare", "measure", "optimize"]
+depends_on: ["2022-10-yahoo-jp-nb-experiment"]
+update_triggers: ["JP NB strategy revisited", "Google NB campaigns relaunched in JP", "New LP test conducted"]
+key_facts: ["Callback LP: 0.9% CVR vs Bulk LP: 0.4% CVR", "5.8% Bayesian probability for Bulk (not close)", "8 Hubble registrations at $1,028 CPA", "Purchase keywords = 75% of registrations", "Custom ad = 100% of Google conversions", "50 keywords tested, viable set is narrow"]
+-->

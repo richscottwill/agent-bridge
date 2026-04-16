@@ -1,34 +1,26 @@
-# Asana Activity — 2026-04-14
+# Asana Activity — April 15, 2026
 
-## Teammate Activity (since last scan: 2026-04-14T13:30:00Z)
+## New Comments (action needed)
+- **AB Customer Redirect** (WW Testing): Brandon commented: "can you please add the implementation details for this? I think it should be closed" — 2026-04-13T22:11Z. Asana generated reminder at 2026-04-14T22:24Z. **Still unanswered — 2 days old.**
 
-### Comments Needing Response
-- **AB Customer Redirect** (ABPS - WW Testing & Projects) — **Brandon**: "can you please add the implementation details for this? I think it should be closed" (2026-04-13T22:11:16Z)
-  - ⚠️ Asana generated a reminder at 22:24Z Apr 14: "Reminder: Brandon mentioned you yesterday"
-  - Status: **STILL UNANSWERED** — originally captured in prior scan but no response detected. Brandon is waiting.
+## Due Date Changes
+- None detected in scan window.
 
-### Due Date Changes
-- None detected since last scan.
+## Reassignments
+- None detected in scan window.
 
-### Reassignments
-- None detected since last scan.
+## Dependency Completions
+- **MX Automotive page** (MX): Frank Volinsky completed the blocking task "Page Creation / Duplicate Beauty and Auto page for MX" — 2026-04-14T13:13Z. **MX Auto page is now unblocked.** Richard can proceed with campaign build.
 
-### Completed by Others
-- None detected since last scan.
+## Other Activity
+- **Initial Testing (Baloo)**: Asana auto-escalated Priority_RW from Not urgent to Urgent (2026-04-14T07:00Z) — due date approaching (4/17 Friday).
+- **Deep Dive: Year-One Optimization one-pager**: Asana auto-escalated Priority_RW to Today (2026-04-15T07:46Z) — begin date reached.
+- No new teammate comments, reassignments, or due date changes detected beyond the above.
 
-### Other Activity (informational)
-- **Paid App** (EU SSR Acquisition Roadmap) — Yun Chu removed task from EU SSR board (2026-04-13T13:56:12Z, pre-scan)
-- **Paid Search Promo Experiments** (EU SSR Acquisition Roadmap) — Yun Chu removed task from EU SSR board (2026-04-13T13:56:19Z, pre-scan)
-  - Note: Both Yun removals were before last scan but included for completeness — likely EU SSR board cleanup.
-
----
-
-## Summary
-
-**Action required:**
-1. Brandon's comment on AB Customer Redirect is now 1+ day old with no response. He's asking Richard to add implementation details and close the task. This is a direct ask from your manager — respond today.
-
-**No new teammate signals detected** in the evening scan window (13:30Z–03:30Z). The scan window was quiet — most activity was Richard's own routine changes (Engine Room cap enforcement, task routing).
+## Scan Notes
+- Project GIDs from spec (AU PS, MX PS, WW Testing, WW Acq, Paid App) returned 404/403 errors — likely stale. Used task-level scanning from scan state + workspace search instead.
+- Skipped task 1213962513760099 (Brandon 1:1: ASP reminders) — 6 consecutive API failures.
+- Skipped task 1213968042349624 — API 404 (not a recognized ID).
 
 ---
-Scanned: 30 tasks | 1 actionable activity (Brandon reminder) | Last scan: 2026-04-14T13:30:00Z → 2026-04-15T03:30:00Z
+Scanned: 2026-04-15T07:55:00Z | 30 tasks checked | 2 actionable activities found

@@ -183,6 +183,19 @@ Sometimes the hard thing isn't "write the doc" — it's "send the doc to Brandon
 5. **Solve problems for your boss.** The Magic Loop: "I'll do everything you need. You make sure I'm rewarded." Make the deal explicit.
 6. **Scope comes to those who say yes.** The garbage can strategy — take the unsexy work nobody wants. That's how you accumulate scope without fighting for it.
 
+### Worked Example — Political Avoidance Detection
+
+**Situation:** Testing Approach doc is drafted. Richard has been "polishing" it for 3 days instead of sending to Brandon.
+
+**aMCC detection:** Deliverable done but not shared (signal #1). Brandon 1:1 was 5 days ago (approaching cold). The real avoidance isn't the doc — it's the implicit career question: "Is this good enough to show Kate?"
+
+**Intervention sequence:**
+- Level 1: "The doc is done. Send it to Brandon today. The polishing is avoidance."
+- Level 2 (if deflected): "You're not avoiding the doc. You're avoiding Brandon's reaction. Name what scares you."
+- Level 3 (if still stuck): "Brandon already said she'd review it. The longer you wait, the less time she has. Send it with: 'Here's my draft. I'd appreciate your feedback before we decide next steps with Kate.'"
+
+**Key insight:** The tactical task (write doc) was complete. The political task (share it and accept feedback) was the actual hard thing. The aMCC caught the gap between "done" and "shipped."
+
 ---
 
 ## Integration with Other Organs

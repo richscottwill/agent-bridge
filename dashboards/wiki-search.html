@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wiki Search — Kiro Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#eaeaea;height:100vh;overflow:hidden;display:flex;flex-direction:column}
+.search-bar{padding:14px 20px 10px;flex-shrink:0;background:#12141c;border-bottom:1px solid #1e2028}
+.search-bar h2{font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.search-bar h2 span{font-size:12px;color:#555;font-weight:400}
+.search-row{display:flex;gap:8px;align-items:center}
+.search-input{flex:1;background:#1a1d27;border:1px solid #2a2d35;color:#eaeaea;padding:10px 14px;border-radius:6px;font-size:14px;font-family:inherit;outline:none;transition:border-color .15s}
+.search-input:focus{border-color:#3b82f6}
+.search-input::placeholder{color:#555}
+.sort-select{background:#1a1d27;border:1px solid #2a2d35;color:#aaa;padding:8px 10px;border-radius:6px;font-size:12px;font-family:inherit;outline:none;cursor:pointer;min-width:140px}
+.sort-select:focus{border-color:#3b82f6}
+.filter-section{flex-shrink:0;border-bottom:1px solid #1a1d24;padding:6px 20px;display:flex;flex-direction:column;gap:4px}
+.filter-row{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
+.filter-label{font-size:9px;color:#555;text-transform:uppercase;letter-spacing:1px;min-width:55px;flex-shrink:0}
+.f{padding:3px 8px;border-radius:3px;font-size:10px;cursor:pointer;background:#14161e;border:1px solid #1e2028;color:#777;transition:all .12s;white-space:nowrap}
+.f:hover{border-color:#3b82f6;color:#d4d4d4}
+.f.on{background:#172040;border-color:#3b82f6;color:#93b4f5}
+.f .fc{font-size:9px;color:#555;margin-left:2px}
+.f.on .fc{color:#6b8acd}
+.result-count{font-size:11px;color:#555;margin-left:auto;flex-shrink:0}
+.main{flex:1;display:flex;min-height:0;position:relative}
+.results{flex:1;overflow-y:auto;padding:10px 20px 20px}
+.rc{background:#14161e;border:1px solid #1e2028;border-radius:6px;padding:10px 14px;margin-bottom:6px;cursor:pointer;transition:all .12s}
+.rc:hover{border-color:#2a3a5c;background:#161a24}
+.rc-head{display:flex;align-items:flex-start;gap:6px}
+.rc-title{font-size:13px;font-weight:600;color:#d4d4d4;flex:1;line-height:1.3}
+.rc-title mark{background:rgba(59,130,246,.25);color:#93b4f5;border-radius:2px;padding:0 1px}
+.rc-badges{display:flex;gap:3px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+.b{display:inline-block;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:600;white-space:nowrap}
+.b-cat{background:rgba(30,58,138,.3);color:#7da2d4}
+.b-final{background:rgba(6,78,59,.4);color:#4ade80}
+.b-draft{background:rgba(55,65,81,.4);color:#9ca3af}
+.b-review{background:rgba(113,63,18,.4);color:#e0c080}
+.b-mkt{background:rgba(6,78,59,.2);color:#6bc4a0;font-size:8px}
+.b-topic{background:rgba(113,63,18,.15);color:#c4a060;font-size:8px}
+.b-tag{background:rgba(88,28,135,.2);color:#c084fc;font-size:8px}
+.rc-snip{font-size:11px;color:#777;line-height:1.4;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rc-snip mark{background:rgba(59,130,246,.2);color:#93b4f5;border-radius:2px;padding:0 1px}
+.rc-meta{display:flex;gap:10px;margin-top:4px;font-size:10px;color:#555;flex-wrap:wrap}
+.viewer{display:none;width:50%;max-width:700px;min-width:350px;background:#12141c;border-left:1px solid #2a2d35;flex-direction:column;overflow:hidden}
+.viewer.open{display:flex}
+.viewer-head{padding:12px 16px;border-bottom:1px solid #1e2028;display:flex;align-items:flex-start;gap:8px;flex-shrink:0}
+.viewer-title{font-size:14px;font-weight:700;color:#fff;flex:1;line-height:1.3}
+.viewer-close{background:none;border:none;color:#888;font-size:18px;cursor:pointer;padding:2px 6px;border-radius:3px;flex-shrink:0}
+.viewer-close:hover{color:#fff;background:rgba(255,255,255,.05)}
+.viewer-meta{padding:8px 16px;border-bottom:1px solid #1e2028;display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0}
+.viewer-body{flex:1;overflow-y:auto;padding:16px;font-size:13px;color:#d4d4d4;line-height:1.7}
+.viewer-body h1{font-size:18px;font-weight:700;color:#fff;margin:16px 0 8px;border-bottom:1px solid #1e2028;padding-bottom:6px}
+.viewer-body h2{font-size:15px;font-weight:700;color:#eee;margin:14px 0 6px}
+.viewer-body h3{font-size:13px;font-weight:700;color:#ccc;margin:10px 0 4px}
+.viewer-body p{margin:6px 0}
+.viewer-body ul,.viewer-body ol{margin:6px 0 6px 20px}
+.viewer-body li{margin:3px 0}
+.viewer-body code{background:#1a1d27;padding:1px 4px;border-radius:3px;font-size:12px;color:#93b4f5}
+.viewer-body pre{background:#1a1d27;padding:10px;border-radius:4px;overflow-x:auto;margin:8px 0;font-size:12px;line-height:1.5}
+.viewer-body pre code{background:none;padding:0}
+.viewer-body blockquote{border-left:3px solid #3b82f6;padding-left:12px;color:#999;margin:8px 0}
+.viewer-body table{border-collapse:collapse;width:100%;margin:8px 0;font-size:12px}
+.viewer-body th,.viewer-body td{border:1px solid #2a2d35;padding:6px 8px;text-align:left}
+.viewer-body th{background:#1a1d27;color:#aaa;font-weight:600}
+.viewer-body hr{border:none;border-top:1px solid #1e2028;margin:12px 0}
+.viewer-body a{color:#3b82f6;text-decoration:none}
+.viewer-body a:hover{text-decoration:underline}
+.viewer-body strong{color:#eee}
+.viewer-body em{color:#bbb}
+.viewer-loading{padding:40px;text-align:center;color:#555}
+.wiki-toc{background:#14161e;border:1px solid #1e2028;border-radius:6px;padding:10px 14px;margin-bottom:14px}
+.wiki-toc summary{font-size:12px;font-weight:700;color:#888;cursor:pointer;user-select:none}
+.wiki-toc summary:hover{color:#d4d4d4}
+.wiki-toc ul{list-style:none;margin:6px 0 0;padding:0}
+.wiki-toc li{margin:2px 0}
+.wiki-toc a{font-size:12px;color:#7da2d4;text-decoration:none}
+.wiki-toc a:hover{color:#93b4f5;text-decoration:underline}
+.wiki-toc .toc-h3{padding-left:14px}
+.stale-banner{background:rgba(113,63,18,.2);border:1px solid rgba(113,63,18,.4);color:#e0c080;padding:8px 12px;border-radius:6px;margin-bottom:12px;font-size:12px;display:flex;align-items:center;gap:6px}
+.stale-banner .stale-icon{font-size:16px}
+.backlinks{background:#14161e;border:1px solid #1e2028;border-radius:6px;padding:10px 14px;margin-top:16px}
+.backlinks-title{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.backlinks a{display:inline-block;font-size:11px;color:#7da2d4;text-decoration:none;padding:2px 8px;background:rgba(30,58,138,.15);border-radius:3px;margin:2px 3px 2px 0;cursor:pointer}
+.backlinks a:hover{background:rgba(30,58,138,.3);color:#93b4f5}
+.backlinks .bl-count{font-size:9px;color:#555;margin-left:2px}
+.upload-zone{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,17,23,.9);z-index:100;align-items:center;justify-content:center;flex-direction:column}
+.upload-zone.active{display:flex}
+.upload-box{border:2px dashed #3b82f6;border-radius:12px;padding:40px 60px;text-align:center;color:#93b4f5;font-size:14px;pointer-events:none}
+.upload-box .icon{font-size:40px;margin-bottom:10px;opacity:.5}
+.recent-header{font-size:12px;color:#555;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid #1a1d24}
+.empty{text-align:center;padding:50px 20px;color:#555}
+.empty .icon{font-size:40px;margin-bottom:10px;opacity:.3}
+.empty h3{font-size:15px;color:#777;margin-bottom:4px}
+.empty p{font-size:12px;max-width:380px;margin:0 auto;line-height:1.5}
+.stats{display:flex;gap:14px;padding:6px 20px;border-top:1px solid #1a1d24;flex-shrink:0;background:#12141c;font-size:10px;color:#555;flex-wrap:wrap}
+.stats .s{display:flex;align-items:center;gap:3px}
+.stats .sn{color:#888;font-weight:600}
+.results::-webkit-scrollbar,.viewer-body::-webkit-scrollbar{width:5px}
+.results::-webkit-scrollbar-track,.viewer-body::-webkit-scrollbar-track{background:#0f1117}
+.results::-webkit-scrollbar-thumb,.viewer-body::-webkit-scrollbar-thumb{background:#2a2d35;border-radius:3px}
+.results::-webkit-scrollbar-thumb:hover,.viewer-body::-webkit-scrollbar-thumb:hover{background:#3b82f6}
+@media(max-width:800px){.viewer{width:100%!important;max-width:100%!important;position:absolute;top:0;left:0;right:0;bottom:0;z-index:10}}
+</style>
+</head>
+<body>
+<div class="search-bar">
+  <h2>Wiki Search <span id="totalCount"></span></h2>
+  <div class="search-row">
+    <input type="text" class="search-input" id="searchInput" placeholder="Search by keyword, topic, market, or concept — fuzzy matching enabled" autofocus>
+    <select class="sort-select" id="sortSelect">
+      <option value="relevance">Sort: Relevance</option>
+      <option value="updated-desc">Updated (newest)</option>
+      <option value="updated-asc">Updated (oldest)</option>
+      <option value="words-desc">Longest first</option>
+      <option value="words-asc">Shortest first</option>
+      <option value="title-asc">Title A→Z</option>
+      <option value="title-desc">Title Z→A</option>
+    </select>
+  </div>
+</div>
+<div class="filter-section" id="filterSection"></div>
+<div class="main">
+  <div class="results" id="results"></div>
+  <div class="viewer" id="viewer">
+    <div class="viewer-head">
+      <div class="viewer-title" id="viewerTitle"></div>
+      <button class="viewer-close" onclick="closeViewer()">&times;</button>
+    </div>
+    <div class="viewer-meta" id="viewerMeta"></div>
+    <div class="viewer-body" id="viewerBody"><div class="viewer-loading">Select a document to view</div></div>
+  </div>
+</div>
+<div class="upload-zone" id="uploadZone">
+  <div class="upload-box"><div class="icon">📄</div><div>Drop markdown file to preview</div>
+  <div style="font-size:11px;color:#555;margin-top:6px">File will be indexed in-memory for this session</div></div>
+</div>
+<div class="stats" id="statsBar"></div>
+<script>
+// ═══════════════════════════════════════════════════════════════
+// Wiki Search v3 — 7 features: recent feed, TOC, stale banner,
+// backlinks, tag taxonomy, file upload, fuzzy/semantic search
+// ═══════════════════════════════════════════════════════════════
+
+let IX=null;
+const F={category:'all',status:'all',market:'all',topic:'all',tag:'all'};
+let currentSort='relevance';
+let viewingDoc=null;
+let uploadedDocs=[];  // in-memory uploaded docs
+
+// ── Feature 7: Synonym map for fuzzy/semantic search ──
+const SYNONYMS={
+  'lp':['landing page','landing pages','polaris'],
+  'landing page':['lp','polaris','landing pages'],
+  'landing pages':['lp','polaris','landing page'],
+  'polaris':['lp','landing page','landing pages'],
+  'ad copy':['creative','creatives','headline','headlines','rsa'],
+  'creative':['ad copy','creatives','headline','rsa'],
+  'creatives':['ad copy','creative','headline','rsa'],
+  'headline':['ad copy','creative','rsa','headlines'],
+  'rsa':['ad copy','creative','responsive search ad'],
+  'budget':['spend','forecast','pacing','cost'],
+  'spend':['budget','cost','pacing','forecast'],
+  'forecast':['budget','spend','pacing','projection'],
+  'pacing':['budget','spend','forecast'],
+  'test':['testing','experiment','experiments','a/b test','weblab'],
+  'testing':['test','experiment','experiments','a/b test','weblab'],
+  'experiment':['test','testing','experiments','weblab'],
+  'weblab':['test','testing','experiment'],
+  'bid':['bidding','cpc','cpa','bid strategy'],
+  'bidding':['bid','cpc','cpa','bid strategy'],
+  'cpc':['bid','bidding','cost per click','cpa'],
+  'cpa':['bid','bidding','cost per acquisition','cpc'],
+  'cvr':['conversion rate','conversion','conversions'],
+  'conversion':['cvr','conversion rate','conversions'],
+  'nb':['new buyer','new buyers','new business','acquisition'],
+  'new buyer':['nb','acquisition','new buyers'],
+  'acquisition':['nb','new buyer','new buyers'],
+  'aeo':['ai overview','ai overviews','zero click','zero-click'],
+  'ai overview':['aeo','ai overviews','zero click'],
+  'wbr':['weekly business review','callout','callouts'],
+  'callout':['wbr','callouts','weekly business review'],
+  'mbr':['monthly business review'],
+  'oci':['one click install','one-click install'],
+  'f90':['lifecycle','first 90 days'],
+  'lifecycle':['f90','first 90 days'],
+  'keyword':['keywords','search term','search terms','query'],
+  'keywords':['keyword','search terms','queries'],
+  'sitelink':['sitelinks','site link','ad extension'],
+  'sitelinks':['sitelink','site links','ad extensions'],
+  'roi':['return on investment','roas','efficiency'],
+  'roas':['return on ad spend','roi','efficiency'],
+  'reg':['registration','registrations','regs','sign up','signup'],
+  'regs':['registration','registrations','reg','sign up'],
+  'registration':['reg','regs','registrations','sign up','signup'],
+};
+
+// Trigram generator for fuzzy matching
+function trigrams(s){
+  const t=new Set();
+  const p='  '+s.toLowerCase()+'  ';
+  for(let i=0;i<p.length-2;i++)t.add(p.slice(i,i+3));
+  return t;
+}
+function trigramSimilarity(a,b){
+  const ta=trigrams(a),tb=trigrams(b);
+  let shared=0;
+  ta.forEach(t=>{if(tb.has(t))shared++});
+  return shared/(ta.size+tb.size-shared);
+}
+
+// Expand query with synonyms
+function expandQuery(q){
+  const tokens=q.split(/\s+/).filter(t=>t.length>=2);
+  const expanded=new Set(tokens);
+  // Check multi-word synonyms first
+  const ql=q.toLowerCase();
+  for(const[key,syns]of Object.entries(SYNONYMS)){
+    if(ql.includes(key)){
+      syns.forEach(s=>s.split(/\s+/).forEach(w=>expanded.add(w)));
+    }
+  }
+  // Then single-word synonyms
+  tokens.forEach(tk=>{
+    const syns=SYNONYMS[tk];
+    if(syns)syns.forEach(s=>s.split(/\s+/).forEach(w=>expanded.add(w)));
+  });
+  return[...expanded];
+}
+
+// ── Load ──
+fetch('data/wiki-search-index.json?'+Date.now()).then(r=>r.json()).then(data=>{
+  IX=data;
+  document.getElementById('totalCount').textContent=data.total_docs+' docs';
+  buildFilters(data);
+  buildStats(data);
+  doSearch();
+}).catch(e=>{
+  console.error(e);
+  document.getElementById('results').innerHTML='<div class="empty"><div class="icon">⚠️</div><h3>Index not found</h3><p>Run build-wiki-index.py</p></div>';
+});
+
+// ── Filters (with tag row) ──
+function buildFilters(data){
+  const sec=document.getElementById('filterSection');
+  const rows=[
+    {key:'category',label:'Type',items:data.categories||{},all:true},
+    {key:'status',label:'Status',items:data.statuses||{},all:true},
+    {key:'market',label:'Market',items:data.markets||{},all:true},
+    {key:'topic',label:'Topic',items:data.topics||{},all:true},
+  ];
+  // Feature 5: Add tag filter row if tags exist
+  if(data.tags&&Object.keys(data.tags).length>0){
+    rows.push({key:'tag',label:'Tags',items:data.tags,all:true});
+  }
+  sec.innerHTML=rows.map(r=>{
+    const sorted=Object.entries(r.items).sort((a,b)=>b[1]-a[1]);
+    const allBtn='<button class="f on" data-fk="'+r.key+'" data-fv="all">All</button>';
+    const btns=sorted.map(([k,v])=>'<button class="f" data-fk="'+r.key+'" data-fv="'+esc(k)+'">'+esc(k)+' <span class="fc">'+v+'</span></button>').join('');
+    const extra=r.key==='tag'?'<span class="result-count" id="resultCount"></span>':'';
+    // Move result count to last row
+    return '<div class="filter-row"><span class="filter-label">'+r.label+'</span>'+allBtn+btns+extra+'</div>';
+  }).join('');
+  // If no tag row, put result count on topic row
+  if(!data.tags||Object.keys(data.tags).length===0){
+    const topicRow=sec.querySelector('.filter-row:last-child');
+    if(topicRow&&!document.getElementById('resultCount')){
+      topicRow.insertAdjacentHTML('beforeend','<span class="result-count" id="resultCount"></span>');
+    }
+  }
+  sec.addEventListener('click',e=>{
+    const btn=e.target.closest('.f');
+    if(!btn)return;
+    const fk=btn.dataset.fk,fv=btn.dataset.fv;
+    F[fk]=fv;
+    sec.querySelectorAll('.f[data-fk="'+fk+'"]').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    doSearch();
+  });
+}
+
+function buildStats(data){
+  const bar=document.getElementById('statsBar');
+  const st=data.statuses||{};
+  let h='<span class="s"><span class="sn">'+data.total_docs+'</span> docs</span>';
+  if(st.FINAL)h+='<span class="s"><span class="sn">'+st.FINAL+'</span> final</span>';
+  if(st.DRAFT)h+='<span class="s"><span class="sn">'+st.DRAFT+'</span> draft</span>';
+  if(st.REVIEW)h+='<span class="s"><span class="sn">'+st.REVIEW+'</span> review</span>';
+  h+='<span class="s">Updated '+new Date(data.generated).toLocaleString()+'</span>';
+  h+='<span class="s" style="margin-left:auto;color:#444">/ to focus · Esc to clear · drag .md to upload</span>';
+  bar.innerHTML=h;
+}
+
+// ── Sort ──
+document.getElementById('sortSelect').addEventListener('change',e=>{
+  currentSort=e.target.value;
+  doSearch();
+});
+
+// ── Search ──
+const si=document.getElementById('searchInput');
+let dt=null;
+si.addEventListener('input',()=>{clearTimeout(dt);dt=setTimeout(doSearch,120)});
+
+function doSearch(){
+  if(!IX)return;
+  const q=si.value.trim().toLowerCase();
+  let docs=[...IX.documents,...uploadedDocs];
+
+  // Apply filters
+  if(F.category!=='all')docs=docs.filter(d=>d.category===F.category);
+  if(F.status!=='all')docs=docs.filter(d=>d.status===F.status);
+  if(F.market!=='all')docs=docs.filter(d=>d.markets&&d.markets.includes(F.market));
+  if(F.topic!=='all')docs=docs.filter(d=>d.topics&&d.topics.includes(F.topic));
+  if(F.tag!=='all')docs=docs.filter(d=>d.tags&&d.tags.some(t=>t===F.tag));
+
+  // Feature 1: Recent changes feed when no query
+  if(!q){
+    const noFilters=F.category==='all'&&F.status==='all'&&F.market==='all'&&F.topic==='all'&&F.tag==='all';
+    if(noFilters||currentSort==='relevance'){
+      // Default: sort by updated descending (recent changes feed)
+      docs=[...docs].sort((a,b)=>(b.updated||'').localeCompare(a.updated||''));
+    } else {
+      docs=sortDocs(docs);
+    }
+    render(docs.slice(0,60),q,noFilters&&currentSort==='relevance');
+    updCount(docs.length);
+    return;
+  }
+
+  // Feature 7: Expand query with synonyms + fuzzy matching
+  const origTokens=q.split(/\s+/).filter(t=>t.length>=2);
+  const expandedTokens=expandQuery(q);
+  const synOnly=expandedTokens.filter(t=>!origTokens.includes(t));
+
+  const scored=docs.map(doc=>{
+    let sc=0;
+    const tl=doc.title.toLowerCase();
+    const sl=doc.snippet.toLowerCase();
+    const st=doc.search_text||'';
+
+    // Exact full-query matches (highest weight)
+    if(tl.includes(q))sc+=100;
+    if(sl.includes(q))sc+=40;
+    if(q.length>3&&st.includes(q))sc+=20;
+
+    // Original token matches
+    origTokens.forEach(tk=>{
+      if(tl.includes(tk))sc+=30;
+      if(doc.headings.some(h=>h.toLowerCase().includes(tk)))sc+=15;
+      if(doc.tags.some(t=>t.toLowerCase().includes(tk)))sc+=20;
+      if((doc.markets||[]).some(m=>m.toLowerCase()===tk))sc+=25;
+      if((doc.topics||[]).some(t=>t.toLowerCase().includes(tk)))sc+=20;
+      if(doc.keywords.some(k=>k.includes(tk)))sc+=8;
+      if(doc.category.toLowerCase().includes(tk))sc+=5;
+      if(doc.status.toLowerCase()===tk)sc+=5;
+      if(sl.includes(tk))sc+=10;
+      if(st.includes(tk))sc+=3;
+    });
+
+    // Synonym expansion matches (lower weight — 40% of original)
+    synOnly.forEach(tk=>{
+      if(tl.includes(tk))sc+=12;
+      if(doc.headings.some(h=>h.toLowerCase().includes(tk)))sc+=6;
+      if(doc.tags.some(t=>t.toLowerCase().includes(tk)))sc+=8;
+      if((doc.topics||[]).some(t=>t.toLowerCase().includes(tk)))sc+=8;
+      if(doc.keywords.some(k=>k.includes(tk)))sc+=3;
+      if(sl.includes(tk))sc+=4;
+      if(st.includes(tk))sc+=1;
+    });
+
+    // Trigram fuzzy matching on title (catches typos + partial matches)
+    if(q.length>=4){
+      const sim=trigramSimilarity(q,doc.title.toLowerCase());
+      if(sim>0.15)sc+=Math.round(sim*50);
+    }
+
+    // Boosts
+    if(doc.status==='FINAL')sc*=1.15;
+    if(doc.updated){
+      const age=(Date.now()-new Date(doc.updated).getTime())/(864e5);
+      if(age<7)sc*=1.2;else if(age<30)sc*=1.1;
+    }
+    return{doc,score:sc};
+  });
+
+  let results=scored.filter(s=>s.score>0);
+  if(currentSort==='relevance'){
+    results.sort((a,b)=>b.score-a.score);
+  } else {
+    results=sortDocs(results.map(s=>s.doc)).map(d=>({doc:d,score:0}));
+  }
+  const final=results.map(s=>s.doc);
+  updCount(final.length);
+  render(final.slice(0,80),q,false);
+}
+
+function sortDocs(docs){
+  const s=currentSort;
+  if(s==='relevance')return docs;
+  const arr=[...docs];
+  if(s==='updated-desc')arr.sort((a,b)=>(b.updated||'').localeCompare(a.updated||''));
+  if(s==='updated-asc')arr.sort((a,b)=>(a.updated||'').localeCompare(b.updated||''));
+  if(s==='words-desc')arr.sort((a,b)=>(b.word_count||0)-(a.word_count||0));
+  if(s==='words-asc')arr.sort((a,b)=>(a.word_count||0)-(b.word_count||0));
+  if(s==='title-asc')arr.sort((a,b)=>a.title.localeCompare(b.title));
+  if(s==='title-desc')arr.sort((a,b)=>b.title.localeCompare(a.title));
+  return arr;
+}
+
+function updCount(n){
+  const el=document.getElementById('resultCount');
+  if(el)el.textContent=n+' result'+(n!==1?'s':'');
+}
+
+// ── Render ──
+function render(docs,q,isRecentFeed){
+  const c=document.getElementById('results');
+  if(!docs.length){
+    c.innerHTML=q
+      ?'<div class="empty"><div class="icon">🔍</div><h3>No results for "'+esc(q)+'"</h3><p>Try different keywords or broaden filters. Synonyms are checked automatically.</p></div>'
+      :'<div class="empty"><div class="icon">📚</div><h3>No documents match these filters</h3><p>Adjust filters above or clear search.</p></div>';
+    return;
+  }
+  const tokens=q?q.split(/\s+/).filter(t=>t.length>=2):[];
+  let html='';
+  // Feature 1: Recent changes header
+  if(isRecentFeed)html+='<div class="recent-header">📝 Recently Updated</div>';
+  html+=docs.map(doc=>{
+    const title=tokens.length?hl(doc.title,tokens):esc(doc.title);
+    const snip=tokens.length?hl(doc.snippet,tokens):esc(doc.snippet);
+    const sc=doc.status==='FINAL'?'b-final':doc.status==='REVIEW'?'b-review':'b-draft';
+    const mkts=(doc.markets||[]).slice(0,4).map(m=>'<span class="b b-mkt">'+m+'</span>').join('');
+    const tops=(doc.topics||[]).slice(0,3).map(t=>'<span class="b b-topic">'+esc(t)+'</span>').join('');
+    const tgs=(doc.tags||[]).slice(0,2).map(t=>'<span class="b b-tag">'+esc(t)+'</span>').join('');
+    const isViewing=viewingDoc===doc.id;
+    // Stale indicator on card
+    let staleTag='';
+    if(doc.updated){
+      const age=(Date.now()-new Date(doc.updated).getTime())/(864e5);
+      if(age>90)staleTag='<span class="b" style="background:rgba(113,63,18,.2);color:#e0c080">⚠ stale</span>';
+    }
+    return '<div class="rc" style="'+(isViewing?'border-color:#3b82f6;background:#161a24':'')+'" onclick="openDoc(\''+doc.id+'\')">'+
+      '<div class="rc-head"><div class="rc-title">'+title+'</div>'+
+      '<div class="rc-badges">'+(doc.status?'<span class="b '+sc+'">'+doc.status+'</span>':'')+'<span class="b b-cat">'+esc(doc.category)+'</span>'+mkts+tops+tgs+staleTag+'</div></div>'+
+      '<div class="rc-snip">'+snip+'</div>'+
+      '<div class="rc-meta">'+
+        (doc.word_count?'<span>'+doc.word_count.toLocaleString()+' words</span>':'')+
+        (doc.updated?'<span>'+doc.updated+'</span>':'')+
+        (doc.audience?'<span>'+esc(doc.audience)+'</span>':'')+
+        (doc.doc_type?'<span>'+esc(doc.doc_type)+'</span>':'')+
+        ((doc.related_docs||[]).length?'<span style="color:#7da2d4">🔗 '+doc.related_docs.length+' related</span>':'')+
+      '</div></div>';
+  }).join('');
+  c.innerHTML=html;
+}
+
+// ── Document viewer ──
+function openDoc(id){
+  viewingDoc=id;
+  const allDocs=[...(IX?IX.documents:[]),...uploadedDocs];
+  const doc=allDocs.find(d=>d.id===id);
+  if(!doc)return;
+  const v=document.getElementById('viewer');
+  v.classList.add('open');
+  document.getElementById('viewerTitle').textContent=doc.title;
+  const sc=doc.status==='FINAL'?'b-final':doc.status==='REVIEW'?'b-review':'b-draft';
+  const mkts=(doc.markets||[]).map(m=>'<span class="b b-mkt">'+m+'</span>').join('');
+  const tops=(doc.topics||[]).map(t=>'<span class="b b-topic">'+esc(t)+'</span>').join('');
+  const tags=(doc.tags||[]).map(t=>'<span class="b b-tag" style="cursor:pointer" onclick="event.stopPropagation();F.tag=\''+esc(t)+'\';refreshTagFilter(\''+esc(t)+'\');doSearch()">'+esc(t)+'</span>').join('');
+  document.getElementById('viewerMeta').innerHTML=
+    (doc.status?'<span class="b '+sc+'">'+doc.status+'</span>':'')+
+    '<span class="b b-cat">'+esc(doc.category)+'</span>'+
+    mkts+tops+tags+
+    (doc.word_count?'<span class="b" style="background:rgba(55,65,81,.25);color:#777">'+doc.word_count.toLocaleString()+' words</span>':'')+
+    (doc.updated?'<span class="b" style="background:rgba(55,65,81,.25);color:#777">'+doc.updated+'</span>':'');
+
+  const body=document.getElementById('viewerBody');
+  body.innerHTML='<div class="viewer-loading">Loading document…</div>';
+
+  // Check if uploaded doc (has inline body)
+  if(doc._body){
+    renderViewerBody(body,doc,doc._body);
+    doSearch();
+    return;
+  }
+
+  fetch('data/wiki-docs/'+id+'.txt?'+Date.now())
+    .then(r=>{if(!r.ok)throw new Error('Not found');return r.text()})
+    .then(md=>renderViewerBody(body,doc,md))
+    .catch(()=>{body.innerHTML='<div class="viewer-loading">Could not load document body.<br>Snippet:<br><br>'+esc(doc.snippet)+'</div>'});
+  doSearch();
+}
+
+function renderViewerBody(body,doc,md){
+  let html='';
+
+  // Feature 3: Stale banner
+  if(doc.updated){
+    const age=Math.floor((Date.now()-new Date(doc.updated).getTime())/(864e5));
+    if(age>90){
+      html+='<div class="stale-banner"><span class="stale-icon">⚠️</span> Last updated '+age+' days ago — this document may need verification</div>';
+    }
+  }
+
+  // Render markdown
+  const rendered=renderMarkdown(md);
+
+  // Feature 2: Auto-TOC
+  const tmp=document.createElement('div');
+  tmp.innerHTML=rendered;
+  const headers=tmp.querySelectorAll('h1,h2,h3');
+  if(headers.length>2){
+    html+='<details class="wiki-toc" open><summary>Contents ('+headers.length+')</summary><ul>';
+    headers.forEach((hdr,i)=>{
+      hdr.id='toc-'+i;
+      const cls=hdr.tagName==='H3'?' class="toc-h3"':'';
+      html+='<li'+cls+'><a href="#toc-'+i+'" onclick="event.preventDefault();document.getElementById(\'toc-'+i+'\').scrollIntoView({behavior:\'smooth\'})">'+hdr.textContent+'</a></li>';
+    });
+    html+='</ul></details>';
+  }
+
+  html+=tmp.innerHTML;
+
+  // Feature 4: Backlinks / related docs
+  const rels=doc.related_docs||[];
+  if(rels.length>0){
+    html+='<div class="backlinks"><div class="backlinks-title">🔗 Related Pages</div>';
+    rels.forEach(r=>{
+      html+='<a onclick="event.preventDefault();openDoc(\''+r.id+'\')">'+esc(r.title)+'<span class="bl-count">'+r.shared+'</span></a>';
+    });
+    html+='</div>';
+  }
+
+  body.innerHTML=html;
+}
+
+function refreshTagFilter(tag){
+  const sec=document.getElementById('filterSection');
+  const btns=sec.querySelectorAll('.f[data-fk="tag"]');
+  btns.forEach(b=>{b.classList.toggle('on',b.dataset.fv===tag)});
+}
+
+function closeViewer(){
+  viewingDoc=null;
+  document.getElementById('viewer').classList.remove('open');
+  doSearch();
+}
+
+// ── Simple markdown renderer ──
+function renderMarkdown(md){
+  let h=md.replace(/<!--[\s\S]*?-->/g,'');
+  h=h.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  h=h.replace(/```(\w*)\n([\s\S]*?)```/g,(_,lang,code)=>'<pre><code>'+code+'</code></pre>');
+  h=h.replace(/`([^`]+)`/g,'<code>$1</code>');
+  h=h.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  h=h.replace(/\*(.+?)\*/g,'<em>$1</em>');
+  h=h.replace(/~~(.+?)~~/g,'<s>$1</s>');
+  h=h.replace(/^### (.+)$/gm,'<h3>$1</h3>');
+  h=h.replace(/^## (.+)$/gm,'<h2>$1</h2>');
+  h=h.replace(/^# (.+)$/gm,'<h1>$1</h1>');
+  h=h.replace(/^---+$/gm,'<hr>');
+  h=h.replace(/^&gt; (.+)$/gm,'<blockquote>$1</blockquote>');
+  h=h.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>');
+  h=h.replace(/^[\-\*] (.+)$/gm,'<li>$1</li>');
+  h=h.replace(/^\d+\. (.+)$/gm,'<li>$1</li>');
+  h=h.replace(/(<li>[\s\S]*?<\/li>)/g,'<ul>$1</ul>');
+  h=h.replace(/<\/ul>\s*<ul>/g,'');
+  h=h.replace(/^\|(.+)\|$/gm,(match)=>{
+    const cells=match.split('|').filter(c=>c.trim());
+    if(cells.every(c=>/^[\s\-:]+$/.test(c)))return'';
+    return '<tr>'+cells.map(c=>'<td>'+c.trim()+'</td>').join('')+'</tr>';
+  });
+  h=h.replace(/(<tr>[\s\S]*?<\/tr>)/g,'<table>$1</table>');
+  h=h.replace(/<\/table>\s*<table>/g,'');
+  h=h.replace(/^(?!<[hupoltbd]|<\/|<br|<hr|<block|<pre|<code|<table|<tr|<s>)(.+)$/gm,'<p>$1</p>');
+  h=h.replace(/<p>\s*<\/p>/g,'');
+  return h;
+}
+
+// ── Feature 6: File upload via drag-and-drop ──
+const uz=document.getElementById('uploadZone');
+let dragCounter=0;
+document.addEventListener('dragenter',e=>{
+  e.preventDefault();
+  dragCounter++;
+  if(e.dataTransfer.types.includes('Files'))uz.classList.add('active');
+});
+document.addEventListener('dragleave',e=>{
+  e.preventDefault();
+  dragCounter--;
+  if(dragCounter<=0){uz.classList.remove('active');dragCounter=0;}
+});
+document.addEventListener('dragover',e=>e.preventDefault());
+document.addEventListener('drop',e=>{
+  e.preventDefault();
+  uz.classList.remove('active');
+  dragCounter=0;
+  const files=e.dataTransfer.files;
+  for(let i=0;i<files.length;i++){
+    const file=files[i];
+    if(!file.name.endsWith('.md')&&!file.name.endsWith('.txt')&&!file.name.endsWith('.markdown'))continue;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      const text=ev.target.result;
+      const id='upload-'+Date.now()+'-'+i;
+      // Parse basic frontmatter
+      let title=file.name.replace(/\.(md|txt|markdown)$/,'').replace(/[-_]/g,' ');
+      const titleMatch=text.match(/^#\s+(.+)/m);
+      if(titleMatch)title=titleMatch[1].trim();
+      // Build a minimal doc object
+      const words=text.split(/\s+/).length;
+      const headings=[];
+      text.split('\n').forEach(line=>{
+        const m=line.match(/^#{1,3}\s+(.+)/);
+        if(m)headings.push(m[1].trim());
+      });
+      const snippet=text.replace(/[#*_`~>|]/g,'').replace(/\n+/g,' ').slice(0,400);
+      const doc={
+        id,title,path:'uploaded/'+file.name,source:'upload',category:'Uploaded',
+        status:'',audience:'',doc_type:'',level:'',tags:[],markets:[],topics:[],
+        headings,snippet,keywords:[],updated:new Date().toISOString().slice(0,10),
+        created:new Date().toISOString().slice(0,10),word_count:words,
+        search_text:text.toLowerCase().slice(0,2000),related_docs:[],_body:text
+      };
+      uploadedDocs.push(doc);
+      // Update count
+      document.getElementById('totalCount').textContent=(IX?IX.total_docs:0)+uploadedDocs.length+' docs';
+      doSearch();
+      openDoc(id);
+    };
+    reader.readAsText(file);
+  }
+});
+
+// ── Utilities ──
+function esc(s){return s?s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'):''}
+function hl(text,tokens){
+  if(!tokens.length)return esc(text);
+  let r=esc(text);
+  tokens.forEach(t=>{
+    const e=t.replace(/[.*+?^${}()|[\]\\]/g,'\\' + '$' + '&');
+    r=r.replace(new RegExp('('+e+')','gi'),'<mark>$1</mark>');
+  });
+  return r;
+}
+
+// ── Keyboard ──
+document.addEventListener('keydown',e=>{
+  if(e.key==='/'&&document.activeElement!==si){e.preventDefault();si.focus()}
+  if(e.key==='Escape'){
+    if(viewingDoc){closeViewer();return}
+    if(si.value){si.value='';doSearch();return}
+    Object.keys(F).forEach(k=>F[k]='all');
+    document.querySelectorAll('.f').forEach(b=>{
+      b.classList.toggle('on',b.dataset.fv==='all');
+    });
+    doSearch();
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+# JP — W15 (Apr 6 – Apr 12)
+
+JP: JP drove 595 registrations (-2% WoW), with -11% spend WoW and $68 CPA (-10% WoW). April is projected at $145K spend and 2.4K registrations at $61 CPA. (vs. OP2: +25% regs, 0% spend)
+
+WoW registrations were essentially flat (-2%) while spend dropped -11%, improving CPA to $68, the lowest in 4 weeks. Brand held steady at 591 regs (-1%) on flat clicks (0%) and -2% CVR. NB remains negligible (4 regs). The spend reduction came from lower Brand CPC (-11%), not budget cuts, suggesting improved auction efficiency. YoY we spent +23% with +9% registrations, reflecting JP's mature Brand position.
+
+Note: JP is pacing at 31% of OP2 regs through W15. I will maintain current spend levels. Golden Week (late April) may shift traffic patterns in W17-W18.
+
+---
+
+**Weekly trend (regs):** W8: 450 → W9: 470 → W10: 490 → W11: 500 → W12: 520 → W13: 540 → W14: 606 → W15: 595
+
+**Anomalies:** None significant. CPA improved on lower spend.
+
+**W16 recommended spend:** $40K (hold steady; CPA efficiency is strong)
+
+**W16 watch:**
+- Brand CVR at 2.3%: -2% WoW, minor softening
+- CPC decline: -11% WoW, monitor for sustained auction efficiency
+- Golden Week approaching: expect traffic shifts W17-W18
+
+**W16 optimization:**
+- Evaluate whether CPC decline is competitive or seasonal
+- Focus on Brand exact match impression share and competitive positioning
+- Pre-plan Golden Week budget adjustments
+
+
+---
+
+## Projections (not part of callout word count)
+
+
+### Projections — Next Week (2026-W16)
+
+| Market | Regs (Brand/NB) | Spend | CPA | ie%CCP | vs OP2 Spend |
+|--------|----------------|-------|-----|--------|-------------|
+| JP | 604 (598/6) [520–684] | $36,322 | $60 | N/A | +8.5% |
+
+
+### Projections — Current Month (2026-M04)
+
+| Market | Regs (Brand/NB) | Spend | CPA | ie%CCP | vs OP2 Spend |
+|--------|----------------|-------|-----|--------|-------------|
+| JP | 2,390 (2,366/24) [1,886–2,879] | $144,629 | $61 | N/A | -0.3% |
+
+
+### Projections — Current Quarter (2026-Q2)
+
+| Market | Regs (Brand/NB) | Spend | CPA | ie%CCP | vs OP2 Spend |
+|--------|----------------|-------|-----|--------|-------------|
+| JP | 8,771 (8,693/78) [6,129–11,362] | $515,523 | $59 | N/A | +23.9% |
+
+*Method: Bayesian Brand/NB split with YoY seasonality and ie%CCP constraints. CIs are 70% credible intervals.*
+*Market strategy: JP=brand-dominant (NB negligible, weight Brand heavily).*

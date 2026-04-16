@@ -1,0 +1,307 @@
+<!-- DOC-0402 | duck_id: state-file-ww-testing -->
+
+# WW Paid Search Testing — State of the Business
+
+**Reporting period:** Week 14 (Mar 29–Apr 4, 2026) · **Program owner:** Richard Williams · **Primary stakeholder:** Kate Rundell (L8 Director) · **Manager:** Brandon Munday (L7)
+**Data through:** AU/WW W14 actuals; MX W13 actuals.
+
+---
+
+## Introduction
+
+This document provides the trailing-week operational state of the Amazon Business Worldwide Paid Search Testing program. The program spans five workstreams — OCI Bidding, Modern Search (Ad Copy), Audiences & Lifecycle, User Experience, and Algorithmic Ads — across 10 markets (US, UK, DE, FR, IT, ES, JP, CA, AU, MX). Richard Williams owns end-to-end test methodology, status tracking, and the Testing Approach document (v5, 8.4/10 PUBLISH verdict) pending Brandon Munday's review. The methodology follows a hypothesis → phased rollout → measurement → scale or stop framework. SyRT validated Non-Brand as 82–92% incremental, confirming the measurement foundation. The Testing Approach doc (v5) was scheduled for discussion at the April 16 meeting, which was canceled; the document remains valuable and needs to ship to Brandon independently.
+
+## Goals
+
+1. Ensure every active test across all five workstreams has a written status document by April 30, 2026, with zero undocumented tests.
+2. Ship the Testing Approach document (v5, 8.4/10 PUBLISH verdict) to Brandon Munday for review by April 18, 2026.
+3. Expand OCI to remaining markets — CA launch on April 7, AU target May 2026, MX timeline TBD — achieving 100% coverage of active markets by Q4 2026.
+4. Complete the AI Max test design document for US Q2 2026 pilot by April 14, 2026 (currently 4 days overdue).
+
+## Tenets
+
+1. **Evidence before scale.** No test result ships to full traffic without a statistically valid measurement period. Confidence intervals matter more than directional signals.
+2. **Phased rollout over big-bang.** Every test follows hypothesis → pilot → measure → expand or kill. This protects budget and preserves learning even when tests fail.
+3. **Failures are data.** A failed test that produces a clear insight (e.g., Gated Guest at -61%) is more valuable than an untested assumption. Document failures with the same rigor as wins.
+4. **Cross-functional partnership.** Testing at scale requires MarTech, Legal, Data Science, MCS, and market teams. The PS team designs and owns methodology; execution is collaborative.
+
+---
+
+## State of the Business
+
+The WW PS Testing program drove 15,077 total registrations in W14 (-4.9% WoW) on $1.18M spend (+4.9% WoW) across all 10 markets. Spend +4.9% WoW against regs -4.9% WoW signals efficiency compression. DE posted a +111% bounce-back, the strongest single-market recovery in the dataset. MX declined -32.6%, the largest single-market drop. AU fell -18.3%, extending a 6-week decline streak. The five workstreams are at varying stages of maturity, with OCI Bidding nearest to full deployment and Algorithmic Ads earliest in the pipeline.
+
+**Input metrics (controllable levers — by workstream):**
+
+| Workstream | Active Markets | Status | Key Input |
+|---|---|---|---|
+| OCI Bidding | US, UK, DE, FR, IT, ES, JP at 100% | CA launch Apr 7. AU May 2026. MX TBD. | OCI conversion signal feeding Smart Bidding |
+| Modern Search (Ad Copy) | UK Phase 1 complete. EU4 translations done. | Phase 2 rollout underway | Ad copy variants by market |
+| Audiences & Lifecycle | US (Engagement channel live) | F90 Lifecycle next. Legal SIMs pending. | Audience segment targeting + lifecycle triggers |
+| User Experience | WW (Polaris Brand LP dial-up Apr 6–7) | Baloo early access launched 3/30 | Landing page variants, registration flows |
+| Algorithmic Ads | US (DG CPC testing) | AI Max US test planned Q2 2026 (4d overdue) | Demand Gen CPC bids, AI Max campaign structure |
+
+**Output metrics (lagging results — by workstream):**
+
+| Workstream | Key Result | Confidence | Impact |
+|---|---|---|---|
+| OCI Bidding — US | +24% reg uplift, ~50% NB CPA improvement, +32,047 regs, $16.7MM OPS | High | Validated at scale |
+| OCI Bidding — UK | +23% reg uplift | High | Validated at scale |
+| OCI Bidding — DE | +18% reg uplift | High | Validated at scale |
+| Ad Copy — UK Phase 1 | +86% CTR, +31% regs | High | Phase 1 complete |
+| Ad Copy — IT | Inconclusive | Low confidence | Insufficient sample |
+| Audiences — Engagement | $765K iOPS 2025 | High | Channel validated |
+| Audiences — Prime Day 2025 | $329K OPS at 644% ROAS | High | Event validated |
+| UX — Gated Guest | -61% conversion | High (negative) | Failed — killed |
+| UX — In-context reg | +13.6K annualized regs | Medium | Scaling |
+| Algorithmic Ads — DG CPC | $0.39 vs $2.43 keyword (-84% CPC) | Early | Volume TBD |
+
+OCI Bidding remains the highest-impact workstream: US alone generated +32,047 incremental registrations and $16.7MM in Ordered Product Sales. The 7 markets at 100% OCI (US, UK, DE, FR, IT, ES, JP) represent the program's proven foundation. CA is on track for April 7 launch. AU targets May 2026 but has no MCC created yet. MX timeline is TBD with no MCC created.
+
+The Ad Copy workstream delivered strong UK Phase 1 results (+86% CTR, +31% registrations) but IT produced low-confidence results due to insufficient sample size. EU4 translations are complete and Phase 2 rollout is underway. The Audiences workstream validated the Engagement channel at $765K iOPS for 2025 and Prime Day 2025 at $329K OPS with 644% ROAS. The F90 Lifecycle program is next but blocked on Legal SIMs.
+
+The UX workstream produced the program's clearest failure signal: Gated Guest registration flow reduced conversion by 61%, confirming that friction-adding registration gates destroy funnel performance. This test was killed. In contrast, the in-context registration approach projects +13.6K annualized registrations. Baloo early access launched March 30 and Polaris Brand LP is in WW rollout with weblab dial-up scheduled for April 6–7.
+
+Algorithmic Ads is the earliest-stage workstream. Demand Gen CPC testing shows $0.39 CPC versus $2.43 for keyword campaigns (-84%), but volume and conversion quality are unvalidated. The AI Max US test design is planned for Q2 2026 but the design document is 4 days overdue.
+
+**Cost of inaction (null case):** If the Testing Approach document does not ship to Brandon within the next 7 days, the April 16 meeting cancellation becomes a permanent delay rather than a scheduling blip. The document (v5, 8.4/10 PUBLISH verdict) represents 4 months of methodology work; each week of delay is a week where the PS team lacks a formalized, leadership-endorsed testing framework. Without it, test prioritization remains ad hoc, market teams lack a shared methodology reference, and Kate's org has no artifact demonstrating PS testing maturity. Separately, the AI Max test design is 4 days overdue. Each additional day of delay compresses the Q2 2026 US pilot timeline, risking a slip to Q3 that would push learnings past the H2 planning cycle. On OCI, AU's May 2026 target requires MCC creation in the next 2–3 weeks; without it, the launch slips to Q3 and AU continues operating without conversion signal optimization — forgoing the 18–24% reg uplift observed in comparable markets.
+
+---
+
+## Lessons Learned
+
+Three operational insights from the trailing four-week window (W11–W14) inform the immediate tactical posture:
+
+1. **OCI produces consistent 18–24% reg uplift across geographies, confirming the methodology is market-agnostic.** US delivered +24%, UK +23%, DE +18%. The variance is narrow enough to project similar results for CA (launching April 7), AU (May 2026), and eventually MX. The implication: OCI expansion is not a question of whether it works but how fast the remaining markets can be onboarded. The binding constraint is MCC creation and Google Ads account setup, not methodology validation.
+
+2. **Failed tests produce the clearest strategic signals when documented with the same rigor as wins.** Gated Guest's -61% conversion result was the most actionable finding in the UX workstream — it definitively eliminated a registration flow variant that multiple stakeholders had advocated for. The lesson is not that the test failed but that the failure, properly documented, prevented a WW rollout that would have destroyed conversion at scale. The Testing Approach document codifies this principle: every test gets a written status regardless of outcome.
+
+3. **The Testing Approach document is the single highest-leverage artifact the PS team can ship, and it has been in draft for 4 months.** The v5 document scored 8.4/10 on the PUBLISH verdict. It is ready. The April 16 meeting with Kate was canceled, but the document does not require a meeting to ship — it requires Brandon's review and endorsement. Every week the document sits unshipped is a week where the PS team's testing methodology exists only in Richard's head and scattered Quip docs rather than in a leadership-endorsed, team-wide reference. This is the hard thing.
+
+---
+
+## Strategic Priorities
+
+**Next 24–48 hours:**
+
+| Priority | Action | Owner | Deadline | Goal Link |
+|---|---|---|---|---|
+| 1 | Ship Testing Approach doc (v5) to Brandon for review — the hard thing | Richard | Apr 18 | Goal 2 |
+| 2 | Complete AI Max test design document (4 days overdue) | Richard | Apr 14 | Goal 4 |
+| 3 | Validate CA OCI launch readiness for Apr 7 go-live | Richard + CA market team | Apr 7 | Goal 3 |
+| 4 | Execute Polaris Brand LP weblab dial-up (WW rollout, Apr 6–7) | UX workstream | Apr 7 | Goal 1 |
+| 5 | Submit Legal SIMs for F90 Lifecycle program to unblock Audiences workstream | Richard | Apr 18 | Goal 1 |
+
+**Blocked items:**
+- AI Max test design: 4 days overdue. Design document incomplete. Blocks Q2 2026 US pilot timeline.
+- AU OCI: May 2026 target but no MCC created. Cannot begin account setup until MCC exists.
+- MX OCI: Timeline TBD. No MCC created. Lowest priority in the OCI expansion queue.
+- F90 Lifecycle: Legal SIMs not submitted. Cannot launch lifecycle targeting without Legal clearance.
+- Ad Copy IT: Low-confidence results. Insufficient sample size prevents scaling decision.
+
+**Stakeholder actions required:**
+- Brandon: Review and endorse Testing Approach doc (v5). This is the gating action for formalizing PS testing methodology.
+- Kate: Reschedule or async-approve the Testing Approach discussion (Apr 16 meeting canceled).
+- CA market team: Confirm OCI launch readiness and Google Ads account configuration for Apr 7.
+- Legal: Process F90 Lifecycle SIMs to unblock Audiences workstream.
+
+---
+
+## Appendix A: Weekly WW Trend (W11–W14)
+
+| Week | WW Regs | WoW Δ | WW Spend | WoW Δ | Notes |
+|---|---|---|---|---|---|
+| W11 | 16,200 | — | $1.10M | — | Baseline |
+| W12 | 15,800 | -2.5% | $1.08M | -1.8% | Seasonal softness |
+| W13 | 15,855 | +0.3% | $1.12M | +3.7% | DE bounce-back began |
+| W14 | 15,077 | -4.9% | $1.18M | +4.9% | MX -32.6%, AU -18.3%, DE +111% |
+
+## Appendix B: OCI Rollout Status by Market
+
+| Market | OCI Status | Launch Date | Reg Uplift | Notes |
+|---|---|---|---|---|
+| US | 100% | Completed | +24% | +32,047 regs, $16.7MM OPS |
+| UK | 100% | Completed | +23% | Validated at scale |
+| DE | 100% | Completed | +18% | Validated at scale |
+| FR | 100% | Completed | — | Live, measuring |
+| IT | 100% | Completed | — | Live, measuring |
+| ES | 100% | Completed | — | Live, measuring |
+| JP | 100% | Completed | — | Live, measuring |
+| CA | On track | Apr 7, 2026 | Projected 18–24% | MCC ready |
+| AU | Planned | May 2026 | Projected 18–24% | No MCC created |
+| MX | TBD | TBD | Projected 18–24% | No MCC created |
+
+## Appendix C: Monthly Projection — WW Testing Impact
+
+| Metric | March Actual | April Projection | Notes |
+|---|---|---|---|
+| WW Regs (all markets) | ~62,000 | ~60,000 | Seasonal softness expected |
+| OCI-attributed regs | ~38,000 | ~40,000 | CA launch adds incremental |
+| Active tests | 12 | 14 | AI Max + F90 Lifecycle if unblocked |
+| Tests with written status | 9/12 (75%) | 14/14 (100%) target | Goal 1 |
+
+## Appendix D: Workstream Summary — Test Results
+
+| Workstream | Test | Market | Result | Confidence | Status |
+|---|---|---|---|---|---|
+| OCI Bidding | Smart Bidding w/ OCI signal | US | +24% regs, $16.7MM OPS | High | Scaled |
+| OCI Bidding | Smart Bidding w/ OCI signal | UK | +23% regs | High | Scaled |
+| OCI Bidding | Smart Bidding w/ OCI signal | DE | +18% regs | High | Scaled |
+| Modern Search | Ad Copy Phase 1 | UK | +86% CTR, +31% regs | High | Complete |
+| Modern Search | Ad Copy Phase 1 | IT | Inconclusive | Low | Needs larger sample |
+| Audiences | Engagement Channel | US | $765K iOPS | High | Validated |
+| Audiences | Prime Day 2025 | US | $329K OPS, 644% ROAS | High | Event complete |
+| UX | Gated Guest | WW | -61% conversion | High | Killed |
+| UX | In-context registration | WW | +13.6K annualized | Medium | Scaling |
+| UX | Baloo early access | WW | Launched 3/30 | Early | Measuring |
+| UX | Polaris Brand LP | WW | Dial-up Apr 6–7 | Early | Rollout |
+| Algorithmic Ads | DG CPC | US | $0.39 vs $2.43 CPC (-84%) | Early | Volume TBD |
+
+## Appendix E: Change Log (2026 YTD — Testing Program)
+
+| Date | Change | Workstream | Owner |
+|---|---|---|---|
+| 1/15 | OCI launched in FR, IT, ES | OCI Bidding | Market teams |
+| 2/1 | Ad Copy UK Phase 1 started | Modern Search | Richard |
+| 2/15 | Engagement channel validated ($765K iOPS) | Audiences | Richard |
+| 3/1 | Gated Guest test killed (-61%) | UX | Richard |
+| 3/5 | In-context reg test scaled | UX | Richard |
+| 3/15 | Ad Copy UK Phase 1 complete (+86% CTR) | Modern Search | Richard |
+| 3/20 | EU4 translations completed | Modern Search | Richard |
+| 3/25 | DG CPC testing started | Algorithmic Ads | Richard |
+| 3/30 | Baloo early access launched | UX | Richard |
+| 4/6 | Polaris Brand LP weblab dial-up (WW) | UX | Richard |
+
+## Appendix F: Variance Bridge — Methodology Validation
+
+The WW Testing program uses SyRT (Synthetic Randomized Testing) as the primary incrementality measurement framework. SyRT validated Non-Brand registrations as 82–92% incremental, establishing the measurement foundation for all NB-focused tests. OCI uplift figures (18–24% across US, UK, DE) are measured against pre-OCI baselines using a 4-week pre/post comparison with holdout groups where available. Ad Copy results use standard A/B testing with statistical significance thresholds (p < 0.05 for high confidence, p < 0.10 for medium). The IT Ad Copy test did not reach significance due to insufficient sample size (< 500 conversions in the test period).
+
+The Testing Approach document (v5) formalizes these measurement standards and defines the hypothesis → phased rollout → measurement → scale or stop framework that governs all five workstreams. Until Brandon endorses the document, these standards exist as operational practice but not as formalized team policy.
+
+---
+
+## Appendix H: Placeholder Schema for Automated Refresh
+
+This schema defines the contract between the Kiro agent swarm (LLM output) and the DOCX template (deterministic patching). The agent generates a JSON payload mapping these keys to generated strings. A patching script replaces the placeholders in the Word XML without touching surrounding formatting.
+
+| Placeholder Tag | Section | Data Source | Update Cadence |
+|---|---|---|---|
+| `{{REPORTING_PERIOD}}` | Header | Calendar + dashboard week | Weekly |
+| `{{INTRO_PARAGRAPH}}` | Introduction | Semi-static; update on structural changes | Monthly |
+| `{{SOTB_PARAGRAPH_1}}` | State of Business — headline | Weekly metrics JSON (all 10 markets) | Weekly |
+| `{{SOTB_WORKSTREAM_TABLE}}` | State of Business — input by workstream | Test status tracker + OCI status | Weekly |
+| `{{SOTB_RESULTS_TABLE}}` | State of Business — output by workstream | Test results with confidence levels | Weekly |
+| `{{SOTB_ANALYSIS}}` | State of Business — narrative bridge | LLM synthesis of workstream progress | Weekly |
+| `{{SOTB_NULL_CASE}}` | State of Business — cost of inaction | Testing Approach doc delay + OCI expansion timeline | Weekly |
+| `{{SOTB_FLAGS}}` | State of Business — conditional flags | Anomaly engine; only present during anomalous weeks | Conditional |
+| `{{LESSONS_1}}` | Lessons Learned — insight 1 | LLM synthesis of trailing 3-week window | Weekly |
+| `{{LESSONS_2}}` | Lessons Learned — insight 2 | LLM synthesis | Weekly |
+| `{{LESSONS_3}}` | Lessons Learned — insight 3 | LLM synthesis | Weekly |
+| `{{PRIORITIES_TABLE}}` | Strategic Priorities — action table | Asana tasks + overdue items + calendar | Daily |
+| `{{BLOCKED_ITEMS}}` | Strategic Priorities — blockers | Asana blocked tasks | Daily |
+| `{{STAKEHOLDER_ACTIONS}}` | Strategic Priorities — external deps | Memory.md relationship graph + Asana | Daily |
+| `{{APPENDIX_A_TREND}}` | Appendix A — WW weekly trend | DuckDB weekly_metrics (all markets) | Weekly |
+| `{{APPENDIX_B_OCI}}` | Appendix B — OCI rollout status | eyes.md OCI section + DuckDB | On change |
+| `{{APPENDIX_D_TESTS}}` | Appendix D — workstream test results | Testing wiki articles | On change |
+| `{{APPENDIX_E_CHANGELOG}}` | Appendix E — change log | Testing program change log | On change |
+
+### JSON Output Contract
+
+```json
+{
+  "REPORTING_PERIOD": "Week 15 (Apr 5–11, 2026)",
+  "SOTB_PARAGRAPH_1": "The WW PS Testing program drove 14,800 registrations...",
+  "SOTB_WORKSTREAM_TABLE": "[markdown table string]",
+  "SOTB_RESULTS_TABLE": "[markdown table string]",
+  "SOTB_ANALYSIS": "OCI Bidding remains the highest-impact...",
+  "SOTB_NULL_CASE": "If the Testing Approach document does not ship...",
+  "SOTB_FLAGS": "[conditional — only present if anomalies detected]",
+  "LESSONS_1": "First insight...",
+  "LESSONS_2": "Second insight...",
+  "LESSONS_3": "Third insight...",
+  "PRIORITIES_TABLE": "[markdown table string]",
+  "BLOCKED_ITEMS": "[markdown list]",
+  "STAKEHOLDER_ACTIONS": "[markdown list]"
+}
+```
+
+Static sections (Goals, Tenets, Appendix B OCI status, Appendix D test results) are NOT in the JSON — they persist unchanged in the template until manually revised or a test status changes.
+
+---
+
+## Appendix G: Source Links
+
+All source documents referenced in or feeding this state file. Links open in browser.
+
+### Kiro-Drive (OneDrive)
+
+| Document | Purpose | Link |
+|---|---|---|
+| ps-forecast-tracker.xlsx | WW PS forecast model, budget scenarios | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/ps-forecast-tracker.xlsx?web=1) |
+| ps-testing-dashboard.xlsx | Active test tracker across all markets | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/ps-testing-dashboard.xlsx?web=1) |
+| command-center.xlsx | Operational command center — tasks, status, owners | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/command-center.xlsx?web=1) |
+
+### Artifacts — Testing Workstream (OneDrive)
+
+| Document | Purpose | Link |
+|---|---|---|
+| testing-approach-kate-v5.docx | Testing Approach doc (v5, PUBLISH verdict 8.4/10) | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-approach-kate-v5.docx?web=1) |
+| testing-methodology.docx | Core testing methodology reference | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-methodology.docx?web=1) |
+| testing-approach-outline.docx | Testing Approach structural outline | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-approach-outline.docx?web=1) |
+| testing-appendix.docx | Testing Approach appendix materials | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-appendix.docx?web=1) |
+| oci-rollout-playbook.docx | OCI rollout playbook (all markets) | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/oci-rollout-playbook.docx?web=1) |
+| oci-rollout-methodology.docx | OCI rollout methodology | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/oci-rollout-methodology.docx?web=1) |
+| workstream-oci-bidding.docx | OCI Bidding workstream detail | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-oci-bidding.docx?web=1) |
+| workstream-modern-search.docx | Modern Search (Ad Copy) workstream detail | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-modern-search.docx?web=1) |
+| workstream-audiences-lifecycle.docx | Audiences & Lifecycle workstream detail | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-audiences-lifecycle.docx?web=1) |
+| workstream-user-experience.docx | User Experience workstream detail | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-user-experience.docx?web=1) |
+| workstream-algorithmic-ads.docx | Algorithmic Ads workstream detail | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-algorithmic-ads.docx?web=1) |
+| ai-max-test-design.docx | AI Max test design document | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/ai-max-test-design.docx?web=1) |
+| project-baloo-overview.docx | Project Baloo overview | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/project-baloo-overview.docx?web=1) |
+| enhanced-match-liveramp.docx | Enhanced Match / LiveRamp integration | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/enhanced-match-liveramp.docx?web=1) |
+| email-overlay-ww-rollout.docx | Email overlay WW rollout plan | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/email-overlay-ww-rollout.docx?web=1) |
+| ad-copy-testing-framework.docx | Ad copy testing framework | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/ad-copy-testing-framework.docx?web=1) |
+| ps-team-map.docx | PS team map and responsibilities | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/ps-team-map.docx?web=1) |
+| ps-operations.docx | PS operations reference | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/ps-operations.docx?web=1) |
+
+### Artifacts — WW / Cross-Market (OneDrive)
+
+| Document | Purpose | Link |
+|---|---|---|
+| ww-review-2026-w13.docx | WW weekly review W13 | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/ww/ww-review-2026-w13.docx?web=1) |
+| ww-summary-2026-w14.docx | WW summary W14 | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/ww/ww-summary-2026-w14.docx?web=1) |
+| wbr-w14-callouts.docx | WBR callouts all markets W14 | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/ww/wbr-w14-callouts.docx?web=1) |
+| projections-ww.docx | WW projections | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/ww/projections-ww.docx?web=1) |
+| ww-testing-tracker.docx | WW testing tracker | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/ww-testing-tracker.docx?web=1) |
+
+### Quip Documents
+
+| Document | Purpose | Link |
+|---|---|---|
+| OCI Planning | OCI rollout planning and status | [Open](https://quip-amazon.com/dSZ9AAZBXQy) |
+| PS Testing Ad Copy | Ad copy testing tracker | [Open](https://quip-amazon.com/KCY9AAYqWd2) |
+| Project Baloo Keywords | Baloo keyword research | [Open](https://quip-amazon.com/TVY9AAomVYU) |
+| LP Testing | Landing page testing tracker | [Open](https://quip-amazon.com/BLP9AAhFfua) |
+| Pre-WBR Callouts | WBR callout working doc | [Open](https://quip-amazon.com/MMgBAzDrlVou) |
+
+### SharePoint Team Sites
+
+| Document | Purpose | Link |
+|---|---|---|
+| AB AU MBR January 2026 | AU Monthly Business Review (Lena) | [Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/AB%20AU%20MBR/AB%20AU%20MBR%20January%202026.pdf) |
+| AB AU WBR Deck W10 | AU Weekly Business Review W10 | [Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/AB%20AU%20WBR/AB%20AU%20WBR%20Deck(WK-10-2026).docx) |
+| AB AU Q4 2025 QBR | AU Quarterly Business Review Q4 2025 | [Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/AB%20AU%20QBR/AB_AU_Q42025_QBR.docx) |
+| AB AU Marketing Strategy | AU Marketing offsite strategy | [Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/GTM/Marketing%20GTM/AB_AU_MarOffsite_Marketing_v6.docx) |
+| Search Marketing Toolkit BRD | SMT Release One BRD | [Open](https://amazon.sharepoint.com/sites/ABMarketingTech/Shared%20Documents/ABMarketingPaidMedia/BRD_ReleaseOne_SMT.docx) |
+| Project Bazaar PR-FAQ | Bazaar Paid Search PR-FAQ | [Open](https://amazon.sharepoint.com/sites/ABMarketingTech/Shared%20Documents/ABMarketingPaidMedia/PRFAQ%20-%20ProjectBazaar_PaidSearch_20240621.docx) |
+| PS Background & Vision | Paid Search background and vision doc | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Documents/Resources/PaidSearch_Background&Vision_07182024.docx) |
+| Kate doc v3 (end) | Testing doc Kate v3 — end sections | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Documents/Testing/Kate%20doc%20v3%20-%202026-end.docx) |
+| Kate doc v3 (sections) | Testing doc Kate v3 — section breakdown | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Documents/Testing/Kate%20doc%20v3%20-%202026-sections.docx) |
+| Paid Acq Flash | Paid Acquisition flash report | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Downloads/Paid%20Acq%20Flash.pdf) |
+| 2024 Paid Acq MBR/QBR | 2024 Paid Acquisition MBR/QBR | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Downloads/2024%20Paid%20Acq%20MBR%20_%20QBR.docx) |
+
+---
+
+*This document is designed for daily automated refresh via the Kiro agent swarm. Sections marked with placeholder tags in the DOCX template version are populated by the LLM output JSON and patched into the Word file via deterministic XML injection. The narrative sections above represent the current human-authored baseline that the agent will maintain and update as new weekly data arrives.*
+
+*Template location: OneDrive Kiro-Drive/state-files/ww-testing-state.md*

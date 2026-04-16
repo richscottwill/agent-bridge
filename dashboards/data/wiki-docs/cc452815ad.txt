@@ -1,0 +1,26 @@
+<!-- DOC-0043 | duck_id: callout-fr-2026-w12 -->
+
+# FR — W12 (Mar 15–21)
+
+FR drove 1.2K registrations (-3% WoW), with -15% spend WoW. CPA decreased to $52 (-12% WoW), an 8-week low. March is projected to end at 5.0K registrations and $296K spend. (vs. OP2: +5% registrations, +17% spend)
+
+The decline was entirely Brand-driven: Brand fell -10% on -12% clicks, though CVR held. NB grew +3% on +6% CVR. Spend dropped -15% while regs fell only -3%, as CPA improved on both sides: Brand $37 (-7%), NB $63 (-17%). bruneau.fr holds 39-47% NB IS, but NB grew through it.
+YoY we spent +59% with +14% registrations. OCI E2E 3 weeks in, no lift yet.
+Note: Beating plan on regs (+5%) but overspending by 17%. OCI efficiency gains are the next milestone.
+
+---
+
+Weekly trend (regs): W5: 1,017 | W6: 1,042 | W7: 1,100 | W8: 1,117 | W9: 1,126 | W10: 1,057 | W11: 1,200 | W12: 1,163
+
+Flagged anomalies:
+- CPA at 8-week low ($52)
+
+W13 watch:
+- Whether NB CVR improvement (+6% WoW) sustains or was a one-week bounce
+- Spend overshoot vs OP2 (+17%); sustainable only if reg beat holds
+- mirakl.com Brand IS trend; any increase would compound the Brand click decline
+
+W13 optimization:
+- OCI E2E is 3 weeks in; review early bidding signals for any efficiency direction
+- No FR holidays in W13; clean week to assess whether the CPA improvement is durable
+- Consider reallocating some Brand budget to NB where CVR is improving and bruneau.fr competition hasn't capped growth

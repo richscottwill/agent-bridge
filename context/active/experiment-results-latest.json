@@ -1,17 +1,19 @@
 {
-  "batch": "run44",
-  "timestamp": "2026-04-15T07:49:00Z",
-  "experiments": [
-    {"id": "run44_exp1", "target": "spine", "section": "Ground Truth Files", "technique": "ADD", "eval_type": "info_retrieval", "words_before": 1141, "words_after": 1209, "score_a": 1.0, "score_b": 1.0, "score_c": 0.93, "delta_ab": 0.0, "decision": "KEEP"},
-    {"id": "run44_exp2", "target": "heart", "section": "Design Choices", "technique": "RESTRUCTURE", "eval_type": "info_retrieval", "words_before": 3872, "words_after": 3875, "score_a": 1.0, "score_b": 1.0, "score_c": 1.0, "delta_ab": 0.0, "decision": "KEEP"},
-    {"id": "run44_exp3", "target": "gut", "section": "Three Functions", "technique": "COMPRESS", "eval_type": "info_retrieval", "words_before": 2058, "words_after": 2033, "score_a": 1.0, "score_b": 1.0, "score_c": 1.0, "delta_ab": 0.0, "decision": "KEEP"},
-    {"id": "run44_exp4", "target": "eyes", "section": "OCI Performance", "technique": "REWORD", "eval_type": "info_retrieval", "words_before": 1147, "words_after": 1167, "score_a": 1.0, "score_b": 1.0, "score_c": 1.0, "delta_ab": 0.0, "decision": "KEEP"},
-    {"id": "run44_exp5", "target": "amcc", "section": "The Streak", "technique": "ADD", "eval_type": "info_retrieval", "words_before": 3154, "words_after": 3239, "score_a": 1.0, "score_b": 1.0, "score_c": 1.0, "delta_ab": 0.0, "decision": "KEEP"},
-    {"id": "run44_exp6", "target": "spine", "section": "Hook System", "technique": "REWORD", "eval_type": "info_retrieval", "words_before": 1209, "words_after": 1229, "score_a": 0.9, "score_b": 1.0, "score_c": 0.9, "delta_ab": -0.1, "decision": "REVERT"},
-    {"id": "run44_exp7", "target": "eyes", "section": "Whats Coming", "technique": "ADD", "eval_type": "info_retrieval", "words_before": 1167, "words_after": 1199, "score_a": 1.0, "score_b": 1.0, "score_c": 1.0, "delta_ab": 0.0, "decision": "KEEP"},
-    {"id": "run44_exp8", "target": "richard-style-wbr", "section": "Examples", "technique": "SPLIT", "eval_type": "output_quality", "words_before": 920, "words_after": 928, "score_a": 0.86, "score_b": 0.90, "score_c": 0.84, "delta_ab": -0.04, "decision": "REVERT"},
-    {"id": "run44_exp9", "target": "device", "section": "Installed Apps", "technique": "REWORD", "eval_type": "info_retrieval", "words_before": 2085, "words_after": 2078, "score_a": 1.0, "score_b": 1.0, "score_c": 1.0, "delta_ab": 0.0, "decision": "KEEP"},
-    {"id": "run44_exp10", "target": "richard-style-slack", "section": "Greeting and Sign-off", "technique": "SPLIT", "eval_type": "output_quality", "words_before": 1214, "words_after": 1214, "score_a": 0.96, "score_b": 0.96, "score_c": 0.96, "delta_ab": 0.0, "decision": "KEEP"}
-  ],
-  "summary": {"total": 10, "kept": 8, "reverted": 2, "keep_rate": 0.8}
+  "batch": "run46",
+  "timestamp": "2026-04-15T08:36:00Z",
+  "experiments": 10,
+  "kept": 9,
+  "reverted": 1,
+  "results": [
+    {"id": "run46_exp1", "target": "spine", "section": "Directory Map", "technique": "COMPRESS", "eval_type": "information_retrieval", "words_before": 1209, "words_after": 1176, "score_a": 0.762, "score_b": 0.762, "score_c": 0.762, "delta_ab": 0.0, "decision": "KEEP"},
+    {"id": "run46_exp2", "target": "heart", "section": "Hyperparameters", "technique": "RESTRUCTURE", "eval_type": "information_retrieval", "words_before": 3875, "words_after": 3875, "score_a": 1.0, "score_b": 1.0, "score_c": 1.0, "delta_ab": 0.0, "decision": "KEEP"},
+    {"id": "run46_exp3", "target": "brain", "section": "Decision Log", "technique": "REMOVE", "eval_type": "information_retrieval", "words_before": 1373, "words_after": 1311, "score_a": 0.8, "score_b": 1.0, "score_c": 0.8, "delta_ab": -0.2, "decision": "REVERT", "revert_reason": "delta_ab < 0, Brain INCORRECT on Q2 (Decay Protocol removed)"},
+    {"id": "run46_exp4", "target": "eod-refresh", "section": "Backend/Frontend", "technique": "SPLIT", "eval_type": "output_quality", "words_before": 339, "words_after": 403, "score_a": 0.98, "score_b": 0.98, "score_c": 0.92, "delta_ab": 0.0, "decision": "KEEP"},
+    {"id": "run46_exp5", "target": "memory", "section": "Compressed Context", "technique": "RESTRUCTURE", "eval_type": "information_retrieval", "words_before": 2003, "words_after": 2003, "score_a": 1.0, "score_b": 1.0, "score_c": 1.0, "delta_ab": 0.0, "decision": "KEEP"},
+    {"id": "run46_exp6", "target": "richard-style-wbr", "section": "Voice", "technique": "SPLIT", "eval_type": "output_quality", "words_before": 920, "words_after": 923, "score_a": 0.96, "score_b": 0.96, "score_c": 0.96, "delta_ab": 0.0, "decision": "KEEP"},
+    {"id": "run46_exp7", "target": "nervous-system", "section": "Loop 9 Baselines", "technique": "REWORD", "eval_type": "information_retrieval", "words_before": 1276, "words_after": 1313, "score_a": 1.0, "score_b": 1.0, "score_c": 1.0, "delta_ab": 0.0, "decision": "KEEP"},
+    {"id": "run46_exp8", "target": "richard-style-email", "section": "Full File", "technique": "RESTRUCTURE", "eval_type": "output_quality", "words_before": 828, "words_after": 828, "score_a": 1.0, "score_b": 1.0, "score_c": 0.98, "delta_ab": 0.0, "decision": "KEEP"},
+    {"id": "run46_exp9", "target": "audit-asana-writes", "section": "Full Hook", "technique": "ADD", "eval_type": "output_quality", "words_before": 239, "words_after": 310, "score_a": 1.0, "score_b": 1.0, "score_c": 1.0, "delta_ab": 0.0, "decision": "KEEP"},
+    {"id": "run46_exp10", "target": "amcc", "section": "Political Awareness Layer", "technique": "ADD", "eval_type": "information_retrieval", "words_before": 3246, "words_after": 3413, "score_a": 1.0, "score_b": 1.0, "score_c": 1.0, "delta_ab": 0.0, "decision": "KEEP"}
+  ]
 }

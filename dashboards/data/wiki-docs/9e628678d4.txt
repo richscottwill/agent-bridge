@@ -1,0 +1,158 @@
+<!-- DOC-0425 | duck_id: tool-spec-campaign-link-generator-spec -->
+
+---
+title: Campaign Link Generator Spec
+status: DRAFT
+audience: amazon-internal
+level: 3
+owner: Richard Williams
+created: 2026-03-25
+updated: 2026-04-04
+update-trigger: reftag convention changes, new markets added, tool built
+---
+
+# Campaign Link Generator - Tool Spec
+
+---
+
+## Problem Statement
+
+Every promotional cycle (Memorial Day, Prime Day, Back to Business, Hot Sale, etc.) requires updating sitelink URLs across multiple markets with correct reftags, landing page paths, and UTM parameters. This is currently a manual process that takes 30-60 minutes per promo cycle and is the most common source of attribution errors in the program.
+
+A wrong reftag means lost attribution. If a sitelink points to `?ref=ps_au_nb_memorial-day-2026` but the actual campaign is Brand, the registration gets attributed to the wrong campaign type. This compounds across 10 markets and 4-6 promo cycles per year, creating systematic measurement noise that undermines the data-driven decision-making the team depends on.
+
+The problem is not complexity. The reftag convention is simple and well-defined. The problem is repetition and human error under time pressure. Promo cycles have hard deadlines, sitelinks need to be updated across multiple markets simultaneously, and the person doing the work (Richard) is usually juggling other priorities. This is exactly the profile for automation: rule-based, repetitive, error-prone, and time-sensitive.
+
+---
+
+## Proposed Solution
+
+A tool that takes structured inputs (market, promo name, landing page, campaign type) and outputs correctly formatted URLs with reftags. No ambiguity, no manual URL construction, no copy-paste errors.
+
+### Input Specification
+
+| Field | Type | Example | Required | Validation |
+|-------|------|---------|----------|------------|
+| Market | Dropdown/enum | AU, MX, US, UK, DE, FR, IT, ES, CA, JP | Yes | Must be one of 10 valid markets |
+| Promo name | Text (kebab-case) | memorial-day-2026 | Yes | Auto-convert spaces to hyphens, lowercase |
+| Landing page path | Text | /cp/ps-brand | Yes | Must start with / |
+| Campaign type | Dropdown/enum | brand, nb, engagement | Yes | Must be valid type |
+| Custom reftag suffix | Text | (optional override) | No | Overrides auto-generated reftag |
+
+### Output Specification
+
+For each input, the tool generates:
+
+```
+Campaign URL:  https://business.amazon.com.au/en/cp/ps-brand?ref=ps_au_nb_memorial-day-2026
+Sitelink URL:  https://business.amazon.com.au/en/cp/ps-brand?ref=ps_au_sl_memorial-day-2026
+```
+
+The tool should also generate a summary table for bulk operations:
+
+| Market | Type | Full URL | Reftag |
+|--------|------|----------|--------|
+| AU | NB | https://business.amazon.com.au/en/cp/ps-brand?ref=ps_au_nb_memorial-day-2026 | ps_au_nb_memorial-day-2026 |
+| AU | Sitelink | https://business.amazon.com.au/en/cp/ps-brand?ref=ps_au_sl_memorial-day-2026 | ps_au_sl_memorial-day-2026 |
+
+---
+
+## Reftag Convention
+
+The reftag convention is the single source of truth for campaign attribution:
+
+`ps_[market]_[type]_[promo/campaign]`
+
+| Component | Values | Notes |
+|-----------|--------|-------|
+| ps | Always "ps" | Identifies paid search (vs. organic, social, email) |
+| market | au, mx, us, uk, de, fr, it, es, ca, jp | Lowercase ISO-style market codes |
+| type | brand, nb, sl (sitelink), eng (engagement), cat (category) | Campaign type identifier |
+| promo | kebab-case promo/campaign name | e.g., memorial-day-2026, back-to-biz-q3 |
+
+### Market Domain Mapping
+
+| Market | Domain | Language Path |
+|--------|--------|--------------|
+| US | business.amazon.com | /en |
+| CA | business.amazon.ca | /en |
+| UK | business.amazon.co.uk | /en |
+| DE | business.amazon.de | /de |
+| FR | business.amazon.fr | /fr |
+| IT | business.amazon.it | /it |
+| ES | business.amazon.es | /es |
+| JP | business.amazon.co.jp | /ja |
+| AU | business.amazon.com.au | /en |
+| MX | business.amazon.com.mx | /es |
+
+---
+
+## Implementation Options
+
+| Option | Effort | Adoption Potential | Level 3 Fit |
+|--------|--------|-------------------|-------------|
+| Python script | Low (2-3 hours) | Richard only | No - only Richard uses it |
+| Google Sheets formula | Medium (4-6 hours) | Team-wide | YES - teammates use Sheets daily |
+| Internal web tool | High (1-2 weeks) | Team-wide | Yes, but overkill for v1 |
+
+### Recommended Path
+
+1. **v1: Python script** (validation). Build in 2-3 hours. Test with AU sitelink update scenario. Confirm the logic is correct and the output format is useful.
+
+2. **v2: Google Sheets** (adoption). Convert the Python logic to Sheets formulas. Create a shared Sheet where any teammate can input market/promo/type and get URLs. This is the Level 3 play — it is the version teammates will actually use.
+
+3. **v3 (optional): Web tool** (if adoption warrants). Only build if the Sheets version gets regular use and teammates request a more polished interface.
+
+Option 2 (Google Sheets) is the Level 3 play because it meets teammates where they already work. Andrew, Stacey, and York all use Google Sheets daily. A Python script requires technical setup they will not do. A web tool requires infrastructure they do not need. Sheets is the path of least resistance.
+
+---
+
+## Validation Scenarios
+
+Before declaring v1 complete, test against these real scenarios:
+
+| Scenario | Expected Output |
+|----------|----------------|
+| AU Brand sitelink for Back to Biz | `https://business.amazon.com.au/en/cp/ps-brand?ref=ps_au_sl_back-to-biz-q3` |
+| MX NB campaign for Hot Sale | `https://business.amazon.com.mx/es/cp/ps-nb?ref=ps_mx_nb_hot-sale-2026` |
+| US Engagement for F90 | `https://business.amazon.com/en/cp/ps-engagement?ref=ps_us_eng_f90-lifecycle` |
+| JP Brand for fiscal year-end | `https://business.amazon.co.jp/ja/cp/ps-brand?ref=ps_jp_brand_fy-end-2026` |
+
+---
+
+## Impact Estimate
+
+| Metric | Current | With Tool | Improvement |
+|--------|---------|-----------|-------------|
+| Time per promo cycle | 30-60 min | 5-10 min | 80-85% reduction |
+| Reftag errors per quarter | 2-3 (estimated) | 0 (validated output) | 100% reduction |
+| Markets covered per cycle | 2-3 (Richard's markets) | 10 (any teammate) | 3-5x coverage |
+
+The time savings alone justify the tool. But the real value is error elimination. A single wrong reftag can corrupt weeks of attribution data, leading to incorrect CPA calculations and misguided optimization decisions.
+
+---
+
+## Next Steps
+
+- [ ] Build v1 as Python script (2-3 hours)
+- [ ] Test with AU sitelink update scenario
+- [ ] If useful, convert to Google Sheets for team adoption
+- [ ] Share with Andrew and Stacey for feedback on format
+- [ ] Track adoption: does anyone besides Richard use it within 30 days?
+
+---
+
+## Sources
+- Tool proposed in device.md - source: ~/shared/context/body/device.md -> Tool Factory -> #2 Campaign link generator
+- Impact estimate (30-60 min per promo cycle) - source: ~/shared/context/body/device.md -> Tool Factory table
+- Level 3 goal (team adoption) - source: ~/shared/context/body/brain.md -> Five Levels -> Level 3
+- Reftag convention - source: ~/shared/context/body/hands.md -> Reftag tracking references
+- Market domains - source: ~/shared/context/body/eyes.md -> Market Health (market list)
+- MX reftag tracking anomaly (W8-W9 drop) - source: ~/shared/context/body/hands.md -> Engine Room -> MX reftags
+
+<!-- AGENT_CONTEXT
+machine_summary: "Tool spec for a campaign link generator that outputs correctly formatted URLs with reftags for promo cycles. Eliminates manual URL construction errors (2-3 per quarter estimated). Reftag convention: ps_[market]_[type]_[promo]. Build as Python first (v1), then Google Sheets for team adoption (v2, Level 3 play). 80-85% time reduction per promo cycle. Sheets is the adoption path because teammates already use it daily."
+key_entities: ["reftag", "campaign links", "sitelinks", "promo cycles", "Google Sheets", "Level 3", "attribution"]
+action_verbs: ["generate", "validate", "format", "convert", "adopt"]
+update_triggers: ["reftag convention changes", "new markets added", "tool built", "promo cycle", "team adoption tracked"]
+-->

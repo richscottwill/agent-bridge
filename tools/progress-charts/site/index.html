@@ -122,39 +122,51 @@ td{padding:8px;border-bottom:1px solid var(--border)}
 <div class="card" id="challengeOverview"></div>
 
 <script>
-var fiveLevels=[{"level": 1, "name": "Sharpen Yourself", "description": "Build consistent strategic output habits (weekly artifacts, not sporadic)", "status": "FUTURE"}, {"level": 2, "name": "Drive & Communicate Worldwide Testing", "description": "Scalable tests that affect all PS accounts globally", "status": "ACTIVE"}, {"level": 3, "name": "Give Your Team Leverage Through Automation", "description": "Build tools a non-tech team can actually adopt (Q Developer, internal Amazon too", "status": "FUTURE"}, {"level": 4, "name": "Own the Zero-Click Future", "description": "Paid search is evolving \u2014 zero-click, AI Overviews, Answer Engine Optimization", "status": "FUTURE"}, {"level": 5, "name": "Full Agentic Orchestration of PS Work", "description": "End state: agent swarm runs paid search operations autonomously", "status": "FUTURE"}];
-var challenge={"items": [{"text": "Ship Testing Approach doc to Kate (meeting Apr 16) \u2014 Andrew active in Loop doc \u2705", "done": false}, {"text": "Update Kingpin Goals with Jan-Mar data \u2014 2 DAYS OVERDUE, blocked by Andes", "done": false}, {"text": "Build one automation tool (campaign link generator)", "done": false}, {"text": "Publish AEO POV for AB Paid Search \u2014 2 DAYS LEFT", "done": false}, {"text": "Write AI Max test design \u2014 due 3/28", "done": false}, {"text": "Reduce invoice/PO time to <30 min/week", "done": false}, {"text": "Decide on Asana with Brandon \u2014 raise in next 1:1", "done": false}, {"text": "Draft cross-market playbook (US\u2192EU5\u2192RoW)", "done": false}, {"text": "Audit and reduce observer-only meetings \u2014 PSME Demo today is a test case", "done": false}, {"text": "Implement AU URL migration to Polaris pages \u2014 Alexis sent mapping, Lena confirmed full switch", "done": false}], "completed": 0, "total": 10, "deadline": "2026-04-13"};
+fetch('../data/body-system-data.json?'+Date.now()).then(r=>r.json()).then(function(D){
+  var fiveLevels=D.five_levels||[];
+  var streak=D.streak||{};
 
-(function(){
-  var el=document.getElementById('levelsOverview');
-  var gates=['4 consecutive artifact weeks','3+ WW tests with written status','1+ tool adopted by teammate','Published POV that influenced a decision','One autonomous PS workflow'];
-  var nextSteps=['Ship the Testing Approach doc outline this week.','Write status docs for OCI and ad copy test.','Finish campaign link generator. Ship to a teammate.','Publish AEO POV. Get it cited.','Convert morning routine to fully event-triggered.'];
-  var fills=[35,15,0,0,0];
-  var colors={ACTIVE:'#4a9eff',NEXT:'#4b5563',QUEUED:'#374151',FUTURE:'#1f222b'};
-  var h='';
-  fiveLevels.forEach(function(lv,i){
-    var c=colors[lv.status]||'#1f222b';
-    var bc=lv.status==='ACTIVE'?'lb-active':lv.status==='NEXT'?'lb-next':lv.status==='QUEUED'?'lb-queued':'lb-future';
-    h+='<div class="level-track"><div class="level-header"><span class="level-name">'+lv.level+'. '+lv.name+'</span>'+
-      '<span style="color:var(--text3);font-size:.8em;margin-right:6px">'+fills[i]+'%</span><span class="lb '+bc+'">'+lv.status+'</span></div>'+
-      '<div class="level-bar"><div class="level-fill" style="width:'+fills[i]+'%;background:'+c+'"></div></div>'+
-      '<div style="font-size:.73em;color:var(--text3);margin-top:2px">Gate: '+gates[i]+'</div>';
-    if(lv.status==='ACTIVE'||lv.status==='NEXT') h+='<div style="font-size:.73em;color:var(--accent);margin-top:2px">Next: '+nextSteps[i]+'</div>';
-    h+='</div>';
-  });
-  el.innerHTML=h;
-})();
-(function(){
-  var el=document.getElementById('challengeOverview');
-  var items=challenge.items||[];
-  var pct=Math.round(challenge.completed/Math.max(challenge.total,1)*100);
-  var h='<div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="color:var(--text2);font-size:.85em">'+challenge.completed+'/'+challenge.total+' complete</span><span style="color:var(--white);font-weight:600">'+pct+'%</span></div>'+
-    '<div style="height:4px;background:var(--surface2);border-radius:2px;margin-bottom:14px"><div style="height:100%;width:'+pct+'%;background:var(--accent);border-radius:2px"></div></div>';
-  items.forEach(function(item){
-    h+='<div class="ch-item"><div class="ch-box'+(item.done?' ch-done':'')+'">'+( item.done?'\u2713':'')+'</div>'+
-      '<span class="ch-text'+(item.done?' done':'')+'">'+item.text+'</span></div>';
-  });
-  el.innerHTML=h;
-})();
+  // Update overview cards with live data
+  var cards=document.querySelectorAll('.overview-card');
+  if(cards[0]){cards[0].querySelector('.oc-metric').textContent=D.body_utilization+'% utilized';cards[0].querySelector('.oc-sub').textContent=D.body_total.toLocaleString()+'w body mass against '+D.body_budget.toLocaleString()+'w budget. '+D.total_experiments+' experiments run, '+D.keep_rate+'% keep rate. '+D.words_saved.toLocaleString()+'w saved through compression.';}
+  if(cards[1]){cards[1].querySelector('.oc-metric').innerHTML='<span style="color:var(--red)">'+streak.current+' days at zero</span>';cards[1].querySelector('.oc-sub').textContent=D.patterns.length+' behavioral patterns tracked. '+D.patterns.filter(function(p){return p.status==='WORSENING'}).length+' worsening. Hard thing: '+streak.hard_thing;}
+  if(cards[2]){var wo=D.weekly_output||[];cards[2].querySelector('.oc-metric').textContent=wo.length?wo[0].tasks_completed+' tasks (latest week)':'No output data';cards[2].querySelector('.oc-sub').textContent=wo.length+' weeks of completion data tracked.';}
+  if(cards[3]){cards[3].querySelector('.oc-metric').textContent=D.body_total.toLocaleString()+'w / '+D.body_budget.toLocaleString()+'w';cards[3].querySelector('.oc-sub').textContent=D.total_runs+' loop runs. '+D.total_experiments+' experiments, '+D.total_kept+' kept ('+D.keep_rate+'%). '+D.over_budget_count+' organ(s) over budget.';}
+
+  // Five Levels
+  (function(){
+    var el=document.getElementById('levelsOverview');
+    var colors={ACTIVE:'#4a9eff',NEXT:'#4b5563',QUEUED:'#374151',FUTURE:'#1f222b'};
+    var fills=[10,15,0,0,0]; // L1 struggling, L2 active
+    var h='';
+    fiveLevels.forEach(function(lv,i){
+      var c=colors[lv.status]||'#1f222b';
+      var bc=lv.status==='ACTIVE'?'lb-active':lv.status==='NEXT'?'lb-next':lv.status==='QUEUED'?'lb-queued':'lb-future';
+      h+='<div class="level-track"><div class="level-header"><span class="level-name">'+lv.level+'. '+lv.name+'</span>'+
+        '<span style="color:var(--text3);font-size:.8em;margin-right:6px">'+fills[i]+'%</span><span class="lb '+bc+'">'+lv.status+'</span></div>'+
+        '<div class="level-bar"><div class="level-fill" style="width:'+fills[i]+'%;background:'+c+'"></div></div>'+
+        '<div style="font-size:.73em;color:var(--text3);margin-top:2px">Gate: '+lv.gate+'</div>';
+      if(lv.status==='ACTIVE'||lv.status==='NEXT') h+='<div style="font-size:.73em;color:var(--accent);margin-top:2px">'+lv.description+'</div>';
+      h+='</div>';
+    });
+    el.innerHTML=h;
+  })();
+
+  // Streak summary instead of 30-day challenge
+  (function(){
+    var el=document.getElementById('challengeOverview');
+    var sh=D.streak_history||[];
+    if(!sh.length){el.innerHTML='<div class="no-data">No streak data</div>';return;}
+    var h='<div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="color:var(--text2);font-size:.85em">L1 Streak</span><span style="color:var(--red);font-weight:600">'+streak.current+' workdays at zero</span></div>';
+    h+='<div style="font-size:.85em;color:var(--text2);margin-bottom:12px">Hard thing: <strong style="color:var(--white)">'+streak.hard_thing+'</strong></div>';
+    sh.slice(0,7).forEach(function(s){
+      var color=s.workdays_at_zero>10?'var(--red)':s.workdays_at_zero>5?'var(--amber)':'var(--green)';
+      h+='<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border);font-size:.82em"><span style="color:var(--text3)">'+s.tracker_date+'</span><span style="color:'+color+';font-weight:600">'+s.workdays_at_zero+'d</span><span style="color:var(--text3);font-size:.9em;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(s.hard_thing_name||'')+'</span></div>';
+    });
+    el.innerHTML=h;
+  })();
+
+  document.getElementById('genFooter').textContent='DATA: '+new Date(D.generated).toLocaleString()+' · STANDALONE HTML · CHART.JS VIA CDN · PORTABLE';
+}).catch(function(e){console.error(e);document.getElementById('levelsOverview').innerHTML='<div style="color:#f87171">Failed to load data — run refresh-body-system.py</div>'});
 </script>
-<div style="color:var(--text3);font-size:.62em;text-align:center;margin-top:48px;padding:16px;letter-spacing:.5px">GENERATED 2026-03-25 09:16 &middot; STANDALONE HTML &middot; CHART.JS VIA CDN &middot; PORTABLE</div></div></body></html>
+<div style="color:var(--text3);font-size:.62em;text-align:center;margin-top:48px;padding:16px;letter-spacing:.5px" id="genFooter">LOADING DATA&hellip;</div></div></body></html>

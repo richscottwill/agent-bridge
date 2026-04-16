@@ -1,0 +1,3 @@
+# Outbound Marketing - AI Usage
+
+Team AI usage tracker. Documents which team members use which AI tools (Q, Cedric, PartyRock, Aryabot, Zoom AI) for what use cases: WBR/goal performance callouts, meeting summarization, forte feedback generation, SQL/script/formula generation, and survey analysis. Includes estimated time savings and noted limitations.

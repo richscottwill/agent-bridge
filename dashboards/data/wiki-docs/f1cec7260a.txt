@@ -1,0 +1,271 @@
+<!-- DOC-0403 | duck_id: state-file-au-ps -->
+
+# Australia Paid Search — State of the Business
+
+**Reporting period:** Week 14 (Mar 29–Apr 4, 2026) · **Market owner:** Richard Williams · **Primary stakeholder:** Lena Zak (L7) · **Execution partner:** Alexis Eck (L6)
+**Data through:** AU W14 actuals; MX W13 actuals; WW W14 actuals.
+
+---
+
+## Introduction
+
+This document provides the trailing-week operational state of the Amazon Business Australia Paid Search program. AU is Richard Williams's hands-on market, managed through Google Ads under the DSAP parent MCC. The program launched in June 2025 and operates under a CPA efficiency constraint — no ie%CCP target exists yet because CCP data is not expected until July 2026. FY26 OP2 targets $1.8M budget, 12,906 registrations, and $140 CPA. FY25 (June–December only) delivered $1.14M spend, 8,763 registrations, and $158 CPA. Lena Zak (L7) is the primary stakeholder with three stated priorities: keyword CPC/CPA investigation, keyword-to-product mapping, and Polaris migration. Alexis Eck (L6) is the collaborative execution partner. OCI is planned for May 2026 but no MCC has been created. Keyword-level registration data is unavailable until Q3 2026; all Non-Brand keyword analysis is directional.
+
+## Goals
+
+1. Achieve a blended CPA at or below $140 for FY26 (OP2 target), delivering 12,906 registrations on $1.8M budget.
+2. Complete the Polaris Brand landing page migration and validate tracking integrity by April 30, 2026.
+3. Prepare for OCI launch in May 2026 — MCC creation, Google Ads account configuration, and conversion signal setup.
+4. Establish a biweekly keyword review cadence with Alexis Eck by April 18, 2026, covering top-20 outlier keywords by CPC/CPA.
+5. Pilot the two-campaign structure (product-intent vs business-intent) by May 15, 2026, with a 4-week measurement period before scaling.
+
+## Tenets
+
+1. **CPA efficiency is the primary constraint.** Without ie%CCP data (expected July 2026), CPA at or below $140 is the governing metric. Every spend decision must demonstrate CPA discipline.
+2. **Surgical keyword optimization over broad cuts.** Brandon's guidance (3/23 sync): focus on outlier keyword analysis (top 20 by CPC/CPA), not broad keyword removal. CPC caps are a "two-way door" until OCI.
+3. **Data-first stakeholder management.** Lena requires numbers. Every response to Lena must include specific data points, trend context, and actionable recommendations. Never send a qualitative-only update.
+4. **Phased testing before scale.** The two-campaign structure pilot must run for 4 weeks with a defined success metric before WW consideration. No big-bang restructuring.
+
+---
+
+## State of the Business
+
+AU drove 170 registrations in W14 (-18.3% WoW) on $22K spend (-9.5% WoW), producing a blended CPA of $130 (+10.8% WoW). This extends the registration decline streak to 6 consecutive weeks: 328 in W7 to 207 in W13 to 170 in W14, a cumulative -48% decline from the W7 peak. NB registrations fell to 47% below the trailing average, and NB CVR dropped to 37% below the trailing average. The Polaris URL migration completed mid-week in W13 correlates exactly with the mid-W13 CVR collapse (Mon-Tue 53/50 regs → Wed-Sat 27/22/23/8).
+
+**Input metrics (controllable levers):**
+
+| Input Metric | W14 Value | WoW Δ | Trend |
+|---|---|---|---|
+| Total spend | $22,000 | -9.5% | Second consecutive weekly decline |
+| Brand clicks | — | — | CVR decline driving reg drop, not click volume |
+| NB clicks | — | — | Click volume stable; conversion efficiency degraded |
+| NB CPC | $4.81 (W13) | -29% from W6 peak | 7-week decline streak |
+| Polaris migration | Completed mid-W13 | — | CVR collapse correlates with migration timing |
+
+**Output metrics (lagging results):**
+
+| Output Metric | W14 Value | WoW Δ | vs OP2 Run Rate |
+|---|---|---|---|
+| Total registrations | 170 | -18.3% | Below 248/wk needed for 12,906 FY26 |
+| Brand registrations | ~73 (est.) | -18% | CVR 7.37% (-14% WoW in W13) |
+| NB registrations | ~97 (est.) | -13% | 47% below trailing avg |
+| Blended CPA | $130 | +10.8% | Below $140 target (favorable) |
+| Brand CPA | ~$41 (W13) | +10% WoW | Stable |
+| NB CPA | ~$187 (W13) | Flat | Above target; CPC decline not yet flowing to CPA |
+| NB CVR | 2.58% (W13) | -10% WoW | 37% below trailing avg |
+
+W13 detail: 207 registrations (-16% WoW), $24K spend (-13% WoW), CPA $118 (+3% WoW). Brand delivered 98 registrations (-18%) at 7.37% CVR (-14%) and $41 CPA (+10%). NB delivered 109 registrations (-13%) at 2.58% CVR (-10%) and $187 CPA (flat), with CPC at $4.81 continuing a 7-week decline streak (-29% from the W6 peak). The CPC decline is a positive efficiency signal, but it has not yet translated to CPA improvement because CVR degradation is offsetting the CPC gains.
+
+March is projected to close at approximately 1,030 registrations, $125K spend, and $121 CPA — versus OP2 targets of 1,082 registrations, $148K spend, and $136 CPA. This represents -5% on registrations, -15% on spend, and -11% on CPA (favorable). The CPA outperformance is driven by spend discipline rather than conversion efficiency; the registration shortfall against OP2 is a volume concern that the 6-week decline streak amplifies.
+
+No YoY comparison is available — AU launched in June 2025. The earliest YoY data will be available in June 2026.
+
+**Cost of inaction (null case):** If the Polaris URL migration tracking integrity is not validated within the next 7 days, the team cannot distinguish between a genuine CVR decline and a tracking artifact. The W13 daily pattern (strong Mon-Tue, collapsed Wed-Sat) aligns precisely with migration timing, but without validation, every subsequent week's data is suspect. At the current W14 run rate of 170 registrations per week, AU would deliver approximately 8,840 FY26 registrations — 31% below the 12,906 OP2 target and $570K below the $1.8M budget plan. Separately, OCI launch is targeted for May 2026 but no MCC has been created. MCC creation requires 2–3 weeks of lead time for Google Ads account setup and conversion signal configuration. If MCC creation does not begin by mid-April, the May launch slips to June or later, forgoing the 18–24% registration uplift observed in comparable OCI markets (US +24%, UK +23%, DE +18%). At AU's current 170 regs/week baseline, a 20% OCI uplift would add approximately 34 registrations per week — 1,768 annualized registrations worth approximately $230K at $130 CPA.
+
+---
+
+## Lessons Learned
+
+Three operational insights from the trailing four-week window (W11–W14) inform the immediate tactical posture:
+
+1. **The Polaris URL migration is the most likely cause of the CVR collapse, and tracking validation is the prerequisite for every other optimization.** The W13 daily registration pattern — 53 and 50 on Monday-Tuesday, then 27, 22, 23, and 8 on Wednesday through Saturday — aligns precisely with the mid-week migration completion. Until tracking integrity is confirmed, the team cannot determine whether the 6-week decline streak reflects genuine demand softness, a tracking artifact, or a combination. Every keyword optimization, bid adjustment, and campaign restructuring decision is compromised by this uncertainty. Validation is not an optimization — it is the foundation that makes optimization possible.
+
+2. **NB CPC's 7-week decline streak (-29% from W6 peak) has not yet translated to CPA improvement.** CPC at $4.81 in W13 is the lowest in the dataset, driven by bid strategy refinement and negative keyword routing. However, NB CPA remains flat at $187 because CVR degradation (-10% WoW in W13, 37% below trailing average in W14) is absorbing the CPC savings. The CPC decline creates latent CPA improvement potential: if CVR recovers to the trailing average (approximately 3.5%), NB CPA would drop to approximately $137 at current CPC levels — below the $140 OP2 target. The CVR recovery is gated on Polaris tracking validation.
+
+3. **Brandon's "outlier, not broad" keyword guidance reframes the AU optimization approach.** The March 23 sync established that keyword optimization should focus on the top 20 outliers by CPC/CPA, not broad keyword removal. CPC caps are a "two-way door" — reversible until OCI launches and provides conversion signal data. This means the biweekly keyword review with Alexis should produce a rolling top-20 outlier dashboard, not a keyword removal list. The two-campaign structure pilot (product-intent vs business-intent) was approved and should proceed as a phased test, not a wholesale restructuring.
+
+---
+
+## Strategic Priorities
+
+**Next 24–48 hours:**
+
+| Priority | Action | Owner | Deadline | Goal Link |
+|---|---|---|---|---|
+| 1 | Validate Polaris URL tracking integrity — confirm conversion tags fire correctly post-migration | Richard | Apr 14 | Goal 2 |
+| 2 | Respond to Lena's AU PS Weekly Update follow-up questions (landing page URLs, repeat visitor CPA) | Richard | Apr 13 | Tenet 3 |
+| 3 | Compile rolling 4-week keyword CPA dashboard (top 20 outliers by CPC/CPA) for Alexis biweekly review | Richard | Apr 18 | Goal 4 |
+| 4 | Initiate OCI MCC creation for AU — required for May 2026 launch | Richard | Apr 18 | Goal 3 |
+| 5 | Pilot two-campaign structure design (product-intent vs business-intent) — define success metrics and 4-week measurement plan | Richard | May 1 | Goal 5 |
+
+**Blocked items:**
+- OCI MCC: Not created. Cannot begin Google Ads account setup or conversion signal configuration until MCC exists. Blocks May 2026 launch.
+- Keyword-level registration data: Unavailable until Q3 2026. All NB keyword analysis remains directional. Blocks precise keyword-to-registration attribution.
+- ie%CCP target: CCP data not expected until July 2026. AU operates on CPA constraint only until then.
+
+**Stakeholder actions required:**
+- Lena: Confirm whether the two-campaign structure pilot scope meets her keyword-to-product mapping priority.
+- Alexis: Schedule first biweekly keyword review session (target: week of Apr 14).
+- Brandon: Approve OCI MCC creation request for AU.
+- MarTech: Validate Polaris conversion tag implementation post-migration.
+
+---
+
+## Appendix A: Weekly Trend (W7–W14)
+
+| Week | Regs | Brand | NB | Spend | CPA | NB CPA | NB CVR | NB CPC |
+|---|---|---|---|---|---|---|---|---|
+| W7 | 328 | — | — | — | — | — | — | — |
+| W8 | 295 | — | — | — | — | — | — | — |
+| W9 | 280 | — | — | — | — | — | — | — |
+| W10 | 260 | — | — | — | — | — | — | — |
+| W11 | 245 | — | — | $27K | $110 | — | — | $5.20 |
+| W12 | 230 | — | — | $26K | $113 | — | — | $5.00 |
+| W13 | 207 | 98 | 109 | $24K | $118 | $187 | 2.58% | $4.81 |
+| W14 | 170 | ~73 | ~97 | $22K | $130 | — | — | — |
+
+**6-week decline streak:** W7 (328) → W8 (295) → W9 (280) → W10 (260) → W11 (245) → W12 (230) → W13 (207) → W14 (170). Cumulative decline: -48% from W7 peak.
+
+## Appendix B: YoY Comparison
+
+No YoY data available. AU Paid Search launched June 2025. First YoY comparison will be available June 2026.
+
+## Appendix C: March 2026 Monthly Projection
+
+| Metric | Projected EOM | OP2 Target | vs OP2 |
+|---|---|---|---|
+| Registrations | ~1,030 | 1,082 | -5% |
+| Spend | ~$125K | $148K | -15% |
+| CPA | ~$121 | $136 | -11% (better) |
+
+## Appendix D: FY26 Plan Summary
+
+| Metric | FY25 Actual (Jun–Dec) | FY26 OP2 | Run Rate (W14) |
+|---|---|---|---|
+| Total spend | $1.14M | $1.8M | $1.14M annualized |
+| Total registrations | 8,763 | 12,906 | 8,840 annualized |
+| Blended CPA | $158 | $140 | $130 |
+
+At the W14 run rate, AU would deliver approximately 8,840 registrations on $1.14M spend at $130 CPA — 31% below the OP2 registration target but 7% below the CPA target (favorable). The gap is a volume problem, not an efficiency problem. OCI (projected +18–24% uplift) and Polaris tracking validation are the two highest-leverage interventions to close the volume gap.
+
+## Appendix E: Change Log (2026 YTD)
+
+| Date | Change | Owner |
+|---|---|---|
+| 1/12 | Adjusted bid strategies across Brand and NB campaigns | Richard |
+| 1/20 | Increased Brand max CPC targets | Richard |
+| 1/27 | Added negative keywords to NB campaigns | Richard |
+| 2/3 | Transitioned NB to portfolio bid strategy | Richard |
+| 2/10 | Adjusted NB budget allocation (-10%) | Richard |
+| 2/17 | Added negative keywords (Brand Exact routing) | Richard |
+| 2/24 | Increased Brand Phrase budget +15% | Richard |
+| 3/1 | Polaris Brand LP migration initiated | Richard |
+| 3/5 | Completed mid-week Polaris URL migration | Richard |
+| 3/5 | Applied CPC caps to top-20 NB outlier keywords | Richard |
+
+## Appendix F: Variance Bridge — Data Source Reconciliation
+
+AU currently operates without OCI (Online Conversion Integration). All conversion data flows through Google Ads native tracking. No variance bridge between advertising platform and internal ERP is required at this time. When OCI launches for AU (target May 2026), this section will document the expected 5–15% discrepancy between Ordered Product Sales and Shipped Product Sales, and the reconciliation methodology.
+
+**Known data limitations:**
+- ie%CCP: Not available. CCP data expected July 2026. AU operates on CPA constraint only.
+- Keyword-level registrations: Unavailable until Q3 2026. All NB keyword analysis is directional.
+- YoY comparison: Not available until June 2026 (AU launched June 2025).
+- Polaris tracking integrity: Unvalidated post-migration. W13 daily pattern suggests potential tracking disruption.
+
+---
+
+## Appendix H: Placeholder Schema for Automated Refresh
+
+This schema defines the contract between the Kiro agent swarm (LLM output) and the DOCX template (deterministic patching). The agent generates a JSON payload mapping these keys to generated strings. A patching script replaces the placeholders in the Word XML without touching surrounding formatting.
+
+| Placeholder Tag | Section | Data Source | Update Cadence |
+|---|---|---|---|
+| `{{REPORTING_PERIOD}}` | Header | Calendar + dashboard week | Weekly |
+| `{{INTRO_PARAGRAPH}}` | Introduction | Semi-static; update on stakeholder/structural changes | Monthly |
+| `{{SOTB_PARAGRAPH_1}}` | State of Business — headline | Weekly metrics JSON | Weekly |
+| `{{SOTB_INPUT_TABLE}}` | State of Business — input metrics | Weekly metrics JSON | Weekly |
+| `{{SOTB_OUTPUT_TABLE}}` | State of Business — output metrics | Weekly metrics JSON | Weekly |
+| `{{SOTB_ANALYSIS}}` | State of Business — narrative bridge | LLM synthesis of input→output causation | Weekly |
+| `{{SOTB_ANOMALY_FLAG}}` | State of Business — anomaly detection | Anomaly engine (>20% deviation from 8wk avg) | Weekly |
+| `{{SOTB_NULL_CASE}}` | State of Business — cost of inaction | CPA model + OCI readiness constraints | Weekly |
+| `{{SOTB_FLAGS}}` | State of Business — conditional flags | Anomaly engine; only present during anomalous weeks | Conditional |
+| `{{LESSONS_1}}` | Lessons Learned — insight 1 | LLM synthesis of trailing 3-week window | Weekly |
+| `{{LESSONS_2}}` | Lessons Learned — insight 2 | LLM synthesis | Weekly |
+| `{{LESSONS_3}}` | Lessons Learned — insight 3 | LLM synthesis | Weekly |
+| `{{PRIORITIES_TABLE}}` | Strategic Priorities — action table | Asana tasks + overdue items + calendar | Daily |
+| `{{BLOCKED_ITEMS}}` | Strategic Priorities — blockers | Asana blocked tasks | Daily |
+| `{{STAKEHOLDER_ACTIONS}}` | Strategic Priorities — external deps | Memory.md relationship graph + Asana | Daily |
+| `{{APPENDIX_A_TREND}}` | Appendix A — weekly trend table | DuckDB weekly_metrics | Weekly |
+| `{{APPENDIX_C_PROJECTION}}` | Appendix C — monthly projection | Analyst projection model | Weekly |
+| `{{APPENDIX_E_CHANGELOG}}` | Appendix E — change log | DuckDB change_log table | On change |
+
+### JSON Output Contract
+
+```json
+{
+  "REPORTING_PERIOD": "Week 15 (Apr 5–11, 2026)",
+  "SOTB_PARAGRAPH_1": "AU drove 185 registrations...",
+  "SOTB_INPUT_TABLE": "[markdown table string]",
+  "SOTB_OUTPUT_TABLE": "[markdown table string]",
+  "SOTB_ANALYSIS": "The W15 registration change was...",
+  "SOTB_ANOMALY_FLAG": "NB CVR at 37% below trailing average.",
+  "SOTB_NULL_CASE": "If Polaris tracking is not validated...",
+  "SOTB_FLAGS": "[conditional — only present if anomalies detected]",
+  "LESSONS_1": "First insight...",
+  "LESSONS_2": "Second insight...",
+  "LESSONS_3": "Third insight...",
+  "PRIORITIES_TABLE": "[markdown table string]",
+  "BLOCKED_ITEMS": "[markdown list]",
+  "STAKEHOLDER_ACTIONS": "[markdown list]"
+}
+```
+
+Static sections (Goals, Tenets, Appendix B/D) are NOT in the JSON — they persist unchanged in the template until manually revised.
+
+---
+
+## Appendix G: Source Links
+
+All source documents referenced in or feeding this state file. Links open in browser.
+
+### Kiro-Drive (OneDrive)
+
+| Document | Purpose | Link |
+|---|---|---|
+| ps-forecast-tracker.xlsx | WW PS forecast model, budget scenarios | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/ps-forecast-tracker.xlsx?web=1) |
+| ps-testing-dashboard.xlsx | Active test tracker across all markets | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/ps-testing-dashboard.xlsx?web=1) |
+| command-center.xlsx | Operational command center — tasks, status, owners | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/command-center.xlsx?web=1) |
+
+### Artifacts — AU Callouts & Analysis (OneDrive)
+
+| Document | Period | Link |
+|---|---|---|
+| au-2026-w14.docx | W14 callout | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-2026-w14.docx?web=1) |
+| au-2026-w13.docx | W13 callout | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-2026-w13.docx?web=1) |
+| au-2026-w12.docx | W12 callout | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-2026-w12.docx?web=1) |
+| au-2026-w11.docx | W11 callout | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-2026-w11.docx?web=1) |
+| au-analysis-2026-w13.docx | W13 deep analysis | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-analysis-2026-w13.docx?web=1) |
+| au-analysis-2026-w12.docx | W12 deep analysis | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-analysis-2026-w12.docx?web=1) |
+| au-data-brief-2026-w14.docx | W14 data brief | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-data-brief-2026-w14.docx?web=1) |
+| au-data-brief-2026-w13.docx | W13 data brief | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-data-brief-2026-w13.docx?web=1) |
+| au-data-brief-2026-w12.docx | W12 data brief | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-data-brief-2026-w12.docx?web=1) |
+| au-change-log.docx | 2026 YTD change log | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-change-log.docx?web=1) |
+| au-context.docx | AU market context doc | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-context.docx?web=1) |
+| au-projections.docx | Monthly projections tracker | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-projections.docx?web=1) |
+
+### Quip Documents
+
+| Document | Purpose | Link |
+|---|---|---|
+| 2026 AU Testing | AU testing tracker | [Open](https://quip-amazon.com/IAJ9AAZJsDL) |
+| AU PS Launch | AU PS launch planning | [Open](https://quip-amazon.com/JMZ9AAput1I) |
+| AU PS Weekly Performance | Weekly performance tracker | [Open](https://quip-amazon.com/ZZR9AAs7OfO) |
+| Pre-WBR Callouts | WBR callout working doc | [Open](https://quip-amazon.com/MMgBAzDrlVou) |
+
+### SharePoint Team Sites
+
+| Document | Purpose | Link |
+|---|---|---|
+| AB AU MBR January 2026 | AU Monthly Business Review (Lena) | [Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/AB%20AU%20MBR/AB%20AU%20MBR%20January%202026.pdf) |
+| AB AU WBR Deck W10 | AU Weekly Business Review W10 | [Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/AB%20AU%20WBR/AB%20AU%20WBR%20Deck(WK-10-2026).docx) |
+| AB AU Q4 2025 QBR | AU Quarterly Business Review Q4 2025 | [Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/AB%20AU%20QBR/AB_AU_Q42025_QBR.docx) |
+| AB AU Q3 2025 QBR | AU Quarterly Business Review Q3 2025 | [Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/AB%20AU%20QBR/AB_AU_Q32025_QBR.docx) |
+| AB AU Marketing Strategy | AU Marketing offsite strategy | [Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/GTM/Marketing%20GTM/AB_AU_MarOffsite_Marketing_v6.docx) |
+| AB EE Marketing Framework | Emerging Expansion marketing collaboration | [Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Downloads/AB%20Emerging%20Expansion%20(EE)%20Marketing%20Collaboration%20Framework-1-19.docx) |
+
+---
+
+*This document is designed for daily automated refresh via the Kiro agent swarm. Sections marked with placeholder tags in the DOCX template version are populated by the LLM output JSON and patched into the Word file via deterministic XML injection. The narrative sections above represent the current human-authored baseline that the agent will maintain and update as new weekly data arrives.*
+
+*Template location: OneDrive Kiro-Drive/state-files/au-paid-search-state.md*

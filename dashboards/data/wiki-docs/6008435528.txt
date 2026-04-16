@@ -1,0 +1,3 @@
+# OCI/ROAS Bid Strategies
+Source: https://quip-amazon.com/ZfB9AA8dyA6
+Best practices for OCI and ROAS bid strategy configuration.

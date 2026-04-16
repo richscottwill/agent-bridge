@@ -18,6 +18,8 @@ STEPS = [
     ("Refresh forecast JSON", "refresh-forecast.py"),
     ("Refresh callout JSON", "refresh-callouts.py"),
     ("Generate command center JSON", "generate-command-center.py"),
+    ("Refresh body system JSON", "refresh-body-system.py"),
+    ("Build wiki search index", "build-wiki-index.py"),
 ]
 
 def main():

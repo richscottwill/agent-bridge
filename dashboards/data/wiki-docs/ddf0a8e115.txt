@@ -1,0 +1,55 @@
+# US W14 Data Brief
+
+## Headline numbers
+- Registrations: 7611 (-12% WoW)
+- Spend: $668K (+15% WoW)
+- CPA: $88 (+30% WoW)
+- Brand regs: 2126 (-20% WoW)
+- NB regs: 5485 (-9% WoW)
+
+## ie%CCP
+- This week: 57%
+- Last week: 41%
+- Target: 100%
+
+## Registration drivers (what caused the WoW change?)
+Primary driver: CVR (-15% WoW) more than clicks (+3% WoW)
+
+Brand:
+  Regs: 2126 vs 2674 LW (-20%)
+  CVR: 3.41% vs 4.00% (-15%)
+  Clicks: 62371 vs 66876 (-7%)
+  CPA: $79 vs $64 (+24%)
+
+Non-Brand:
+  Regs: 5485 vs 5996 LW (-9%)
+  CVR: 5.01% vs 5.98% (-16%)
+  Clicks: 109472 vs 100320 (+9%)
+  CPA: $91 vs $69 (+33%)
+
+## 8-week trend
+<!-- Data: market_trend("US", weeks=8) -->
+
+## YoY comparison
+- Regs: 7611 TY vs 5062 LY (+50%)
+- Spend: $668K TY vs $548K LY (+22%)
+- Brand regs: -8% YoY
+- NB regs: +100% YoY
+- NB CPA: $91 vs $136 LY (-33%)
+- WoW pattern: TY -12% vs LY +2% (same week)
+
+## Monthly projection inputs
+- Month: 2026 Mar (31/31 days elapsed, 0 remaining)
+- MTD actuals: $2.7M spend, 36832 regs (11256 Brand, 25576 NB)
+- Simple linear projection (ingester estimate, not accounting for seasonality/holidays): $2.7M spend, 36.8K regs, $74 CPA
+- NOTE: Analyst should produce the actual projection accounting for weekday/weekend mix, holidays, LY patterns, and known upcoming changes.
+
+## This year weekly trend (last 12 weeks)
+<!-- Data: market_trend("US", weeks=12) -->
+
+## Last year same period (W10 to W18)
+<!-- Data: db("SELECT * FROM weekly_metrics WHERE market='US' AND week LIKE '2025%' ORDER BY week") -->
+
+## Daily breakdown
+<!-- Data: db("SELECT * FROM daily_metrics WHERE market='US' AND week='2026 W14' ORDER BY date") -->
+⚠️ DATA LAG: last 2 days avg 158 regs vs weekday avg 1459

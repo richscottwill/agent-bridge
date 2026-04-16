@@ -1,0 +1,6 @@
+# MBet Process Improvement
+Source: https://quip-amazon.com/FZQ9AARARAN
+
+Pain points: MBet offshore team adds lag (+2 days) and errors. 84 POs annually = 126+ hours of 0-value work. MSP/R&O disparity. PO budget accrual distorts Finance docs.
+
+Solutions proposed: PAS (Pre-Approved Spends) via XCM alignment, reduce approver levels for OP2-approved budgets, increase offshore responsibilities, switch to SmartSheets.

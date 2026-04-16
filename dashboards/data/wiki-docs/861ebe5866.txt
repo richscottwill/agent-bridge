@@ -1,0 +1,54 @@
+# AU — W15 (Apr 6 – Apr 12)
+
+AU: AU drove 168 registrations (-1% WoW), with +17% spend WoW and $154 CPA (+18% WoW). April is projected at 359 registrations at $108 CPA. (vs. OP2: -66% regs, -74% spend)
+
+WoW registrations were flat despite a +17% spend increase, pushing CPA to $154. NB drove the upside: +23% regs on +10% clicks, though CVR softened -6% to 2.0%. Brand fell -20% as post-Easter exact match impressions continued normalizing (+19% impressions but -11% CVR). The LP revert from Polaris is now live, and I expect CVR recovery over W16-W17 to pull CPA back below $140. NB CPC continues its multi-week decline, now at $4.50.
+
+Note: April pacing is significantly behind OP2. I will hold spend flat and focus on CPA recovery through the LP revert before scaling.
+
+---
+
+**Weekly trend (regs):** W8: 244 → W9: 268 → W10: 283 → W11: 244 → W12: 244 → W13: 213 → W14: 170 → W15: 168
+
+**Anomalies:** CPA at $154 (+18% WoW), Brand regs -20% WoW, NB CVR at 2.0% (below 2.6% avg)
+
+**W16 recommended spend:** $24K (hold flat; CPA recovery is priority over volume)
+
+**W16 watch:**
+- LP revert CVR impact: target 4.0% overall CVR (currently 2.9%)
+- Brand impression normalization post-Easter
+- CPA trajectory: 4 consecutive weeks rising, $154 approaching $160 threshold
+
+**W16 optimization:**
+- Monitor NB CVR daily for LP revert signal
+- Review Brand exact match impression share for competitive displacement
+- Anzac Day (Apr 25) falls on Saturday, minimal expected impact
+
+
+---
+
+## Projections (not part of callout word count)
+
+
+### Projections — Next Week (2026-W16)
+
+| Market | Regs (Brand/NB) | Spend | CPA | ie%CCP | vs OP2 Spend |
+|--------|----------------|-------|-----|--------|-------------|
+| AU | 111 (76/35) [66–156] | $12,811 | $115 | N/A | -61.7% |
+
+
+### Projections — Current Month (2026-M04)
+
+| Market | Regs (Brand/NB) | Spend | CPA | ie%CCP | vs OP2 Spend |
+|--------|----------------|-------|-----|--------|-------------|
+| AU | 359 (285/74) [195–637] | $38,685 | $108 | N/A | -73.3% |
+
+
+### Projections — Current Quarter (2026-Q2)
+
+| Market | Regs (Brand/NB) | Spend | CPA | ie%CCP | vs OP2 Spend |
+|--------|----------------|-------|-----|--------|-------------|
+| AU | 806 (732/74) [272–2,289] | $49,893 | $62 | N/A | -88.5% |
+
+*Method: Bayesian Brand/NB split with YoY seasonality and ie%CCP constraints. CIs are 70% credible intervals.*
+*Market strategy: AU=efficiency (hit OP2 at lowest CPA, no ie%CCP).*

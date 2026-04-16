@@ -1,0 +1,21 @@
+# 2024 JP NB Tests
+Source: https://quip-amazon.com/dFZ9AA5fAz2
+
+## Test Summary Table
+| Test | Launch | End | Result |
+|---|---|---|---|
+| NB Percolate | 1/16/2024 | 2/23/2024 | — |
+| Wholesale/Bulk KW NB | 1/30/2024 | 5/20/2024 | $921 CPA, $22k cost |
+| B2B NB Computer | 4/23/2024 | 5/20/2024 | $400 spend, 1 reg |
+| WTS KWs Test | 5/29/2024 | 7/18/2024 | 1 reg, $9.4k cost |
+| New Ad Copy Test | 7/18/2024 | — | Mixed results |
+| KW Insertion Test | Oct 2024 | — | $3k CPA |
+| Yahoo Sitelink Test | 5/24/2024 | — | +6 regs/week |
+
+## Key Results
+- Wholesale/Bulk KW: Most successful JP NB campaign ($921 CPA) but still 10x WW avg of $85
+- WTS KWs: Top JP ASINs + biz modifier in phrase match — only 1 reg from $9.4k spend
+- New Ad Copy: Yahoo CTR improved (44% vs 40%), Google CTR worse (41% vs 57%)
+- KW Insertion: Electronics phrase match — $3.3k CPA, not viable
+- Yahoo Sitelink: Added Google sitelinks to Yahoo, drove +6 regs/week
+- Discovery→DG migration: 42k more clicks but 0 regs after switching to Max Click bidding

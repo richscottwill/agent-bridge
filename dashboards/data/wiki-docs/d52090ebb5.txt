@@ -1,0 +1,36 @@
+<!-- DOC-0025 | duck_id: callout-de-analysis-2026-w12 -->
+
+# DE W12 Analysis Brief
+
+## Registration summary
+1,242 regs (-18% WoW), $138K spend (-19% WoW), $111 CPA (-1% WoW). Brand 716 (-21% WoW), NB 526 (-13% WoW). Projected: 6,100 regs, $664K spend vs OP2 6,129 regs, $658K spend (flat regs, +1% spend).
+
+## Why registrations changed
+The -18% WoW decline is overstated by data lag. Fri and Sat reported 44 and 20 regs respectively vs a weekday average of 236. The data brief flags this directly: "last 2 days avg 32 regs vs weekday avg 236." If Fri/Sat normalize to even 150 regs each (conservative, below weekday avg), W12 would be ~1,478 regs, which is -2% WoW instead of -18%. The real decline is likely 2-5%, not 18%.
+
+That said, even the Mon-Thu data shows softness. Clicks drove the decline (-11% WoW) more than CVR (-8% WoW). Brand was hit harder: clicks -7% and CVR -15% (2.60% vs 3.05%). NB clicks dropped -15% but CVR actually improved +2%. The Brand CVR drop from 3.05% to 2.60% is the largest single-week Brand CVR decline in the 8-week window.
+
+## Trend context
+DE has been range-bound at 1,366-1,512 for W5-W11, with W12's reported 1,242 the first break below that range. But the data lag makes this unreliable. The real trend question is whether the Mon-Thu softness (avg 230 regs/day vs W11's implied ~216/day) represents a genuine dip or normal variance. CPA has been elevated: $89-$140 range over 8 weeks, with W9 spiking to $140. W12's $111 is mid-range.
+
+## Relevant actions and events
+1. OCI live at 100% since Dec 2025. DE showed +16-20% lift in W49-W51 testing, 74-96% to expectation. OCI is mature but the lift is lower than US (+24%) and UK (+23%).
+2. recht24-7.de at 14% Brand IS, reported for store closure. If this competitor exits, Brand CPC pressure should ease. The +3% MoM CPC trend from this competitor may be peaking.
+3. Y25 was unusually strong baseline. DE missed OP2 by 4% in Feb. The -9% YoY regs in W12 reflects this tough comp, not deterioration.
+4. Cross-market pattern: 4 of 5 EU5 markets declined WoW. DE's decline is the steepest, but the data lag makes it the least reliable reading. The cross-market softness suggests a shared factor (mid-March seasonality, reporting lag, or platform-level change).
+5. Duplicate hvocijid parameter issue in EU landing page URLs is under investigation. If this is causing conversion tracking errors, it could explain the Brand CVR drop.
+
+## YoY assessment
+-9% YoY regs (1,242 vs 1,360). +15% YoY spend ($138K vs $121K). Brand -2% YoY, NB -16% YoY. NB CPA +30% YoY ($156 vs $120). The YoY picture is concerning: spending more, getting fewer regs, at higher CPA. But context matters: Y25 was an outlier baseline, and the data lag inflates the W12 gap. LY W12 was -2% WoW; TY is reported -18% but likely -2 to -5% after lag correction.
+
+## Monthly projection
+Projected 6,100 regs vs OP2 6,129 (flat, -0.5%). Projected $664K spend vs OP2 $658K (+1%). Remaining 10 days: 6 weekdays, 4 weekend days. The projection adds ~250 regs for Fri/Sat data lag correction to MTD (bringing adjusted MTD to ~4,424), then applies W12 adjusted daily rates (weekday ~215, weekend ~130) with a -4% seasonal discount matching LY W13-vs-W12 pattern. DE is tracking essentially on plan after lag correction. Without lag correction, the projection would be ~5,984 (-2.4% vs OP2). CPA at $109 is slightly above OP2 implied $107.
+
+## Flags
+- Data lag: Fri/Sat data is incomplete. The -18% WoW headline is unreliable. True WoW change is likely -2% to -5%.
+- Brand CVR: 2.60% is the lowest in the 8-week window. If this persists after data lag correction, investigate the hvocijid duplicate parameter issue as a potential cause.
+- NB CPA: $156 is +30% YoY. OCI is live but NB efficiency is not matching US/UK patterns. DE's NB auction is structurally more expensive.
+- OP2 risk: -3% regs vs plan with +1% overspend. Not critical, but DE is the only EU5 market tracking below OP2 on regs.
+
+## Suggested narrative angle
+DE reported -18% WoW but Fri/Sat data is incomplete (32 avg regs vs 236 weekday avg). Adjusted decline is likely -2% to -5%. Brand CVR dropped to an 8-week low (2.60%), which needs monitoring after data normalizes. Monthly projection: -3% regs vs OP2. DE remains the tightest EU5 market against plan.

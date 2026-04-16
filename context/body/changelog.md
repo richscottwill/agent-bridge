@@ -340,3 +340,27 @@ Batch stats: 5/5 KEEP (100%). Selection bias check: 100% keep rate is high, but 
 - [richard-style-wbr:Examples] SPLIT (output_quality) → 920w→928w. A=0.86 B=0.90 C=0.84 Δ=-0.04. 140s. REVERT (structure match degraded).
 - [device:Installed Apps] REWORD (info_retrieval) → 2085w→2078w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
 - [richard-style-slack:Greeting and Sign-off] SPLIT (output_quality) → 1214w→1214w. A=0.96 B=0.96 C=0.96 Δ=0.0. 130s. KEEP.
+
+### Karpathy Run 45 — 2026-04-15 (10 experiments, 8 kept, 2 reverted)
+[amcc:Common Failures] SPLIT (info_retrieval) → 3239w→3246w. A=0.833 B=0.833 C=1.0 Δ=0.0. 120s. KEEP.
+[eyes:Ad Copy Testing Results] SPLIT (info_retrieval) → 1199w→1201w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[memory:Relationship Staleness Index] COMPRESS (info_retrieval) → 2003w→1989w. A=0.818 B=1.0 C=0.818 Δ=-0.182. 120s. REVERT.
+[nervous-system:Loop 1 Decision Audit] RESTRUCTURE (info_retrieval) → 1276w→1276w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[gut:Governance/When to Read] REMOVE (info_retrieval) → 2033w→2003w. A=0.867 B=1.0 C=0.667 Δ=-0.133. 120s. REVERT.
+[richard-style-slack:Cadence and Structure] REWORD (output_quality) → 1214w→1222w. A=0.96 B=0.96 C=0.92 Δ=0.0. 150s. KEEP.
+[richard-style-email:Sentence-Level Patterns] MERGE (output_quality) → 832w→828w. A=0.98 B=0.98 C=0.88 Δ=0.0. 150s. KEEP.
+[am-triage:Data Query Sections] MERGE (output_quality) → 390w→373w. A=1.0 B=1.0 C=1.0 Δ=0.0. 150s. KEEP.
+[audit-asana-writes:Batch Handling/Critical Rules] RESTRUCTURE (output_quality) → 248w→239w. A=1.0 B=1.0 C=1.0 Δ=0.0. 150s. KEEP.
+[richard-style-amazon:Writing Hygiene] MERGE (output_quality) → 951w→949w. A=1.0 B=1.0 C=1.0 Δ=0.0. 150s. KEEP.
+
+### Karpathy Run 46 — 2026-04-15 (10 experiments, 9 kept, 1 reverted)
+[spine:Directory Map] COMPRESS (info_retrieval) → 1209w→1176w. A=0.762 B=0.762 C=0.762 Δ=0.0. 150s. KEEP.
+[heart:Hyperparameters] RESTRUCTURE (info_retrieval) → 3875w→3875w. A=1.0 B=1.0 C=1.0 Δ=0.0. 150s. KEEP.
+[brain:Decision Log] REMOVE (info_retrieval) → 1373w→1311w. A=0.8 B=1.0 C=0.8 Δ=-0.2. 150s. REVERT (Decay Protocol is unique content).
+[eod-refresh:Backend/Frontend] SPLIT (output_quality) → 339w→403w. A=0.98 B=0.98 C=0.92 Δ=0.0. 150s. KEEP.
+[memory:Compressed Context] RESTRUCTURE (info_retrieval) → 2003w→2003w. A=1.0 B=1.0 C=1.0 Δ=0.0. 150s. KEEP.
+[richard-style-wbr:Voice] SPLIT (output_quality) → 920w→923w. A=0.96 B=0.96 C=0.96 Δ=0.0. 150s. KEEP.
+[nervous-system:Loop 9 Baselines] REWORD (info_retrieval) → 1276w→1313w. A=1.0 B=1.0 C=1.0 Δ=0.0. 150s. KEEP.
+[richard-style-email:Full File] RESTRUCTURE (output_quality) → 828w→828w. A=1.0 B=1.0 C=0.98 Δ=0.0. 150s. KEEP.
+[audit-asana-writes:Full Hook] ADD (output_quality) → 239w→310w. A=1.0 B=1.0 C=1.0 Δ=0.0. 150s. KEEP.
+[amcc:Political Awareness Layer] ADD (info_retrieval) → 3246w→3413w. A=1.0 B=1.0 C=1.0 Δ=0.0. 150s. KEEP.

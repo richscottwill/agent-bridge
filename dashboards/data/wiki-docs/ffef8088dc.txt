@@ -1,0 +1,101 @@
+<!-- DOC-0450 | duck_id: wiki-meta-wiki-pipeline-rules -->
+
+# Wiki Pipeline Rules
+
+Last updated: 2026-04-05
+
+These rules are non-negotiable. Any agent operating in the wiki pipeline must follow them. Any session that touches wiki articles must read this file first.
+
+## 1. Dual blind eval is mandatory
+
+Every article must pass two separate evaluations before publishing:
+- **Eval A** (rubric): Strict Amazon writing standards scoring on 5 dimensions (Usefulness, Clarity, Accuracy, Dual-audience, Economy). Applied by the wiki-critic agent.
+- **Eval B** (reader simulation): Subjective scoring simulating the target reader (Kate for Leadership docs, Brandon for Team docs, Richard for Personal docs). Applied by the wiki-critic agent with a different persona prompt.
+
+Each eval runs as a **separate kiro-cli invocation**. Never batched together. Never batched across articles. One article, one eval, one invocation. The critic must not see the other eval's output.
+
+The bar: overall average ≥ 8/10 on BOTH evals, no dimension below 7 on either.
+
+Invocation pattern:
+```
+echo "<prompt>" | kiro-cli chat --agent wiki-critic --no-interactive --trust-all-tools --wrap never
+```
+
+## 2. No premature publishing
+
+The librarian publishes ONLY when:
+- Eval A verdict is PUBLISH (≥8, no dimension below 7)
+- Eval B verdict is SHIPS (≥8, no dimension below 7)
+- Both review files exist in `shared/wiki/reviews/`
+
+If either eval says REVISE, the article goes back to the wiki-writer. The librarian does not publish articles with REVISE verdicts under any circumstances.
+
+The orchestrating agent (not the CLI agents) is the quality gate. If a CLI agent skips a step or produces incomplete work, the orchestrating agent catches it and enforces the full pipeline.
+
+## 3. Appendix-heavy structure is the default
+
+Main body carries the narrative argument — results, insights, recommendations, decisions. Supporting material goes to the appendix: data tables, previous test results, program refreshers, team rosters, operational cadence, scope descriptions, detailed methodology breakdowns.
+
+When the main body references supporting data, it cites the appendix section by name (e.g., "see Appendix: OCI Validated Results").
+
+The one exception: a decision table or investment summary that IS the argument belongs in the main body.
+
+The appendix does not count against word count or Economy scoring.
+
+This rule is codified in `richard-style-amazon.md` and applies to all docs, not just Leadership.
+
+## 4. No trainer voice in published docs
+
+Phrases like "Failures are data, not setbacks" are agent coaching language from the rw-trainer system. They do not belong in published documents. The wiki-writer must not use coaching phrases, motivational framing, or internal system language in any article.
+
+The test: would Richard say this sentence to Kate or Brandon in a meeting? If not, cut it.
+
+## 5. Content accuracy requires Richard's input
+
+When a doc contains claims about timelines, deliverables, or status that the agent cannot verify, the doc must flag them explicitly rather than guessing. Use `<!-- TODO: Richard to confirm [specific question] -->` markers.
+
+Do not present exploratory work as missed deliverables. Do not invent due dates. Do not state completion status without verification.
+
+## 6. Kate-level docs: nothing under 8
+
+For any document with Audience = Leadership:
+- Every dimension must score 8+ on BOTH evals (not just the average)
+- The OP1/decision framing must be in the first paragraph
+- Two-page main body maximum (appendix carries the rest)
+- Kate should get 95% of the value without reading the appendix
+
+## Pipeline execution order
+
+```
+wiki-writer (revision/rewrite)
+  → wiki-critic Eval A (separate invocation)
+  → wiki-critic Eval B (separate invocation)
+  → orchestrating agent reconciles both evals
+  → if both pass: wiki-librarian publishes
+  → if either fails: wiki-writer revises, then re-eval
+  → max 2 revision cycles before escalating to Richard
+```
+
+## kiro-cli invocation pattern
+
+All wiki agents run via kiro-cli non-interactive mode:
+```bash
+echo "<prompt>" | kiro-cli chat --agent <agent-name> --no-interactive --trust-all-tools --wrap never
+```
+
+MCP timeout is set to 30s: `kiro-cli settings mcp.noInteractiveTimeout 30`
+
+Available agents: `wiki-writer`, `wiki-critic`, `wiki-editor`, `wiki-researcher`, `wiki-librarian`, `wiki-concierge`
+
+Agent configs are JSON files at `~/.kiro/agents/wiki-*.json`. Each loads its full definition from `shared/.kiro/agents/wiki-team/` via the resources field.
+
+## File locations
+
+- Pipeline rules (this file): `shared/wiki/wiki-pipeline-rules.md`
+- Agent definitions: `shared/.kiro/agents/wiki-team/`
+- Agent JSON configs: `~/.kiro/agents/wiki-*.json`
+- Style guides: `.kiro/steering/richard-style-*.md`
+- Staging: `shared/wiki/`
+- Reviews: `shared/wiki/reviews/`
+- Published artifacts: `shared/wiki/`
+- Wiki index: `shared/wiki/wiki-index.md`

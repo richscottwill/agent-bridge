@@ -1,0 +1,63 @@
+<!-- DOC-0067 | duck_id: callout-jp-data-brief-2026-w12 -->
+
+# JP W12 Data Brief
+
+## Headline numbers
+- Registrations: 443 (-16% WoW)
+- Spend: $37K (-5% WoW)
+- CPA: $82 (+13% WoW)
+- Brand regs: 439 (-16% WoW)
+- NB regs: 4 (-20% WoW)
+
+## ie%CCP
+- This week: 43%
+- Last week: 38%
+- Target: 100%
+
+## Registration drivers (what caused the WoW change?)
+Primary driver: CVR (-10% WoW) more than clicks (-7% WoW)
+
+Brand:
+  Regs: 439 vs 522 LW (-16%)
+  CVR: 2.02% vs 2.11% (-4%)
+  Clicks: 21786 vs 24752 (-12%)
+  CPA: $68 vs $66 (+4%)
+
+Non-Brand:
+  Regs: 4 vs 5 LW (-20%)
+  CVR: 0.13% vs 0.26% (-49%)
+  Clicks: 3015 vs 1934 (+56%)
+  CPA: $1,642 vs $786 (+109%)
+
+## 8-week trend
+<!-- Data: market_trend("JP", weeks=8) -->
+
+## YoY comparison
+- Regs: 443 TY vs 427 LY (+4%)
+- Spend: $37K TY vs $31K LY (+17%)
+- Brand regs: +3% YoY
+- NB regs: +300% YoY
+- NB CPA: $1,642 vs $2,088 LY (-21%)
+- WoW pattern: TY -16% vs LY -28% (same week)
+
+## Monthly projection inputs
+- Month: 2026 Mar (21/31 days elapsed, 10 remaining)
+- MTD actuals: $114K spend, 1502 regs (1492 Brand, 10 NB)
+- OP2 targets: $164K spend, 2.4K regs
+- OP2 pace check: at 68% through the month, linear OP2 pace would be 1.6K regs and $111K spend
+- MTD vs OP2 pace: -6% regs, +2% spend
+- Simple linear projection (ingester estimate, not accounting for seasonality/holidays): $166K spend, 2.1K regs, $78 CPA
+- NOTE: Analyst should produce the actual projection accounting for weekday/weekend mix, holidays, LY patterns, and known upcoming changes.
+
+## Anomalies (>20% deviation from recent avg)
+- cpa: above avg by 28% (current: 82.45, avg: 64.64)
+- brand regs: below avg by 20% (current: 439.00, avg: 548.86)
+
+## This year weekly trend (last 12 weeks)
+<!-- Data: market_trend("JP", weeks=12) -->
+
+## Last year same period (W8 to W16)
+<!-- Data: db("SELECT * FROM weekly_metrics WHERE market='JP' AND week LIKE '2025%' ORDER BY week") -->
+
+## Daily breakdown
+<!-- Data: db("SELECT * FROM daily_metrics WHERE market='JP' AND week='2026 W12' ORDER BY date") -->

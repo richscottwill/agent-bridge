@@ -1,0 +1,114 @@
+{
+  "generated": "2026-04-15T16:55:00+00:00",
+  "commitments": [
+    {
+      "text": "Check closed IT tax invoices + get reissued ones",
+      "source": "Slack #ab-paid-search-app",
+      "person": "Yun",
+      "said_by": "other",
+      "days_old": 1,
+      "status": "not_started",
+      "context": "Yun confirmed IT tax is fixed. Richard needs to verify closure and get reissued invoices.",
+      "quote": "IT tax should be fixed — check if taxed ones are closed and get reissued ones"
+    },
+    {
+      "text": "Respond to Brandon on PAM budget — does Richard need more $ from extra US budget?",
+      "source": "Slack #ab-paid-search-app",
+      "person": "Brandon Munday",
+      "said_by": "other",
+      "days_old": 1,
+      "status": "not_started",
+      "context": "Brandon asking if Richard needs more money for PAM from extra US budget. Must vet on reg impact before responding.",
+      "quote": "Do you need more $ for PAM from extra US budget?"
+    },
+    {
+      "text": "Review ieCCP/CCP files from Stacey, flag concerns for Q2",
+      "source": "Slack #ab-paid-search-global",
+      "person": "Brandon Munday",
+      "said_by": "other",
+      "days_old": 2,
+      "status": "not_started",
+      "context": "Brandon asked team to review Q2 CCP files from Stacey and flag any concerns."
+    },
+    {
+      "text": "Answer Brandon: which markets have Brand Polaris pages?",
+      "source": "Slack #ab-paid-search-global",
+      "person": "Brandon Munday",
+      "said_by": "other",
+      "days_old": 2,
+      "status": "not_started",
+      "context": "Brandon expects US & JP only. Richard should confirm or correct."
+    },
+    {
+      "text": "Add implementation details to AB Customer Redirect, then close",
+      "source": "Asana comment",
+      "person": "Brandon Munday",
+      "said_by": "other",
+      "days_old": 2,
+      "status": "not_started",
+      "context": "Brandon commented on Asana task: 'can you please add the implementation details for this? I think it should be closed'",
+      "quote": "can you please add the implementation details for this? I think it should be closed"
+    },
+    {
+      "text": "Send Lorena Q2 expected spend for MX PO",
+      "source": "Asana task",
+      "person": "Lorena",
+      "said_by": "other",
+      "days_old": 11,
+      "status": "not_started",
+      "overdue": true,
+      "context": "11 days overdue. Lorena is blocked on this figure to create the MX PO."
+    }
+  ],
+  "delegate": [
+    {
+      "task": "MCS landing page optimization P1 — check if still relevant after Polaris revert",
+      "to": "MCS team / Dwayne",
+      "reason": "MCS-owned initiative. Richard's role is coordination, not execution. Check if Polaris revert changes scope.",
+      "context": "15d overdue. May be obsolete after LP revert decision."
+    },
+    {
+      "task": "Create FR accounts — 54d overdue",
+      "to": "Kill or delegate to market lead",
+      "reason": "54 days overdue, no activity. Likely obsolete. Either kill or hand to EU market owner.",
+      "context": "Engine Room task with no movement. Candidate for removal."
+    }
+  ],
+  "communicate": [
+    {
+      "text": "Brand Polaris pages status — confirm which markets are live",
+      "audience": "Brandon",
+      "context": "Brandon asked in #ab-paid-search-global. Quick response needed — he expects US & JP only."
+    },
+    {
+      "text": "MX LP optimization call prep — share testing approach with Cristobal",
+      "audience": "Cristobal / MX team",
+      "context": "Call today. Three parallel efforts: CA optimizations via SIM, A/B testing Carlos's new NB LP, WW brand Polaris rollout."
+    },
+    {
+      "text": "Kate testing doc v5 — send to Brandon for review before Kate",
+      "audience": "Brandon",
+      "context": "14d overdue. THE HARD THING. Apply 5 critic fixes, then send to Brandon as gatekeeper before Kate sees it."
+    }
+  ],
+  "differentiate": [
+    {
+      "action": "Ship Testing Document for Kate — v5 with critic fixes applied",
+      "why": "14 days overdue. L1 hard thing. This is the single highest-leverage artifact Richard can ship this week. Directly advances Level 2 (Drive WW Testing) and demonstrates strategic thinking to Kate (L8).",
+      "status": "not_started",
+      "context": "Core block 12:30-2PM today. 5 subtractive edits remain from kate-doc-v5-eval-a.md."
+    },
+    {
+      "action": "Respond to Brandon's PAM budget question with reg impact analysis",
+      "why": "Shows strategic thinking — not just 'yes I want money' but 'here's what the incremental spend would yield in regs.' Positions Richard as a partner, not a requester.",
+      "status": "not_started",
+      "context": "Brandon offered extra US budget for PAM. Richard needs to model reg impact before responding."
+    },
+    {
+      "action": "Close AB Customer Redirect with implementation details",
+      "why": "Brandon explicitly asked for this. Quick win that demonstrates responsiveness and thoroughness. Clears a visible open item from Brandon's view.",
+      "status": "not_started",
+      "context": "Brandon commented 2 days ago asking Richard to add details and close it."
+    }
+  ]
+}

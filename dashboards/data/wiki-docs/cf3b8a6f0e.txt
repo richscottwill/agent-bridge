@@ -1,0 +1,74 @@
+# EU5 — W15 (Apr 6 – Apr 12)
+
+EU5: EU5 drove 5,127 registrations (-7% WoW), with +5% spend WoW and $79 CPA (+13% WoW). IT (-25%) and FR (-23%) drove the decline on sharp CVR drops, while ES rebounded +26% on Brand click growth.
+
+IT fell -25% as CVR dropped -18% and Brand CPA nearly doubled to $61 from $31 LW. FR declined -23% on -16% clicks and -8% CVR, with Brand regs -23% on reduced traffic. DE softened -7% as Brand fell -15% while NB grew +5% on +27% clicks. UK held flat on +7% spend with Brand CVR +9% offsetting -7% clicks. ES gained +26% on +35% Brand clicks and +10% CVR. YoY, UK leads at +143% regs on +89% spend; IT is the concern at -19% regs on +29% spend.
+
+Note: IT CPA at $102 and FR CVR declines need investigation. I will review bid strategies in both markets for W16.
+
+---
+
+**EU5 weekly trend (total regs):**
+- UK: W14: 1,450 → W15: 1,449 (flat)
+- DE: W14: 1,302 → W15: 1,212 (-7%)
+- FR: W14: 1,146 → W15: 886 (-23%)
+- IT: W14: 1,316 → W15: 981 (-25%)
+- ES: W14: 475 → W15: 599 (+26%)
+
+**Anomalies:**
+- IT: CPA $102 (+41% WoW), regs -25% WoW, Brand CPA doubled
+- FR: Regs -23% WoW, clicks -16%, CVR -8%
+- DE: Cost +10% WoW with regs -7%, CPA +18%
+- ES: Regs +26% WoW, Brand clicks +35%
+
+**W16 watch:**
+- IT and FR CVR recovery: both markets saw sharp CVR declines
+- ES click sustainability: +35% Brand clicks needs validation
+- DE NB click surge (+27%): quality check needed
+- UK stability: flat regs on +7% spend, monitor CPA pressure
+
+**W16 optimization:**
+- Review IT Brand bid strategies: CPA doubled in one week
+- Investigate FR click decline source (competitive or budget-driven)
+- Monitor DE NB click quality for CVR impact
+
+
+---
+
+## Projections (not part of callout word count)
+
+
+### Projections — Next Week (2026-W16)
+
+| Market | Regs (Brand/NB) | Spend | CPA | ie%CCP | vs OP2 Spend |
+|--------|----------------|-------|-----|--------|-------------|
+| UK | 1,460 (454/1,006) [1,350–1,570] | $85,923 | $59 | N/A | -13.8% |
+| DE | 986 (538/448) [699–1,274] | $84,628 | $86 | N/A | -46.7% |
+| FR | 1,035 (430/605) [922–1,148] | $58,052 | $56 | N/A | -1.0% |
+| IT | 1,180 (764/416) [1,019–1,340] | $90,351 | $77 | N/A | -1.9% |
+| ES | 580 (317/263) [502–658] | $35,034 | $60 | N/A | +23.4% |
+
+
+### Projections — Current Month (2026-M04)
+
+| Market | Regs (Brand/NB) | Spend | CPA | ie%CCP | vs OP2 Spend |
+|--------|----------------|-------|-----|--------|-------------|
+| UK | 5,626 (1,839/3,787) [4,949–6,303] | $328,874 | $58 | N/A | -23.8% |
+| DE | 3,608 (1,993/1,615) [1,844–5,372] | $293,697 | $81 | N/A | -57.3% |
+| FR | 3,865 (1,639/2,226) [3,169–4,564] | $222,937 | $58 | N/A | -12.2% |
+| IT | 4,475 (2,898/1,577) [3,490–5,460] | $360,797 | $81 | N/A | -9.5% |
+| ES | 2,114 (1,147/967) [1,632–2,592] | $131,193 | $62 | N/A | +6.7% |
+
+
+### Projections — Current Quarter (2026-Q2)
+
+| Market | Regs (Brand/NB) | Spend | CPA | ie%CCP | vs OP2 Spend |
+|--------|----------------|-------|-----|--------|-------------|
+| UK | 18,143 (5,462/12,681) [14,522–21,763] | $899,082 | $50 | N/A | -28.2% |
+| DE | 10,232 (5,672/4,560) [2,223–19,664] | $574,454 | $56 | N/A | -73.6% |
+| FR | 12,003 (5,253/6,750) [8,281–15,732] | $637,205 | $53 | N/A | -15.6% |
+| IT | 13,633 (8,516/5,117) [8,371–18,891] | $1,134,587 | $83 | N/A | -1.8% |
+| ES | 6,499 (3,491/3,008) [3,931–9,060] | $408,492 | $63 | N/A | -5.6% |
+
+*Method: Bayesian Brand/NB split with YoY seasonality and ie%CCP constraints. CIs are 70% credible intervals.*
+*Market strategies: EU5=balanced (50-65% ie%CCP normal range).*

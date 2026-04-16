@@ -1,0 +1,3 @@
+# EU CPS - Performance Over Time
+
+Monthly CPS performance tracker for EU5 markets (CA, DE, UK, FR, IT, ES) plus US Enterprise. Apr 2022 - Apr 2023. Tracks impressions, clicks, cost, CTR, CPC, form starts, form submits, 3-month rolling averages, pending/complete registrations, and CPAs at each funnel stage. Includes consolidated EU CPS totals.

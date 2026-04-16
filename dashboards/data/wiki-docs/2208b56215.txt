@@ -1,0 +1,59 @@
+<!-- DOC-0049 | duck_id: callout-fr-data-brief-2026-w12 -->
+
+# FR W12 Data Brief
+
+## Headline numbers
+- Registrations: 1163 (-3% WoW)
+- Spend: $61K (-15% WoW)
+- CPA: $52 (-12% WoW)
+- Brand regs: 493 (-10% WoW)
+- NB regs: 670 (+3% WoW)
+
+## ie%CCP
+- This week: 53%
+- Last week: 59%
+- Target: 100%
+
+## Registration drivers (what caused the WoW change?)
+Primary driver: clicks (-8% WoW) more than CVR (+5% WoW)
+
+Brand:
+  Regs: 493 vs 549 LW (-10%)
+  CVR: 2.20% vs 2.16% (+2%)
+  Clicks: 22423 vs 25440 (-12%)
+  CPA: $37 vs $40 (-7%)
+
+Non-Brand:
+  Regs: 670 vs 651 LW (+3%)
+  CVR: 2.93% vs 2.77% (+6%)
+  Clicks: 22833 vs 23518 (-3%)
+  CPA: $63 vs $76 (-17%)
+
+## 8-week trend
+<!-- Data: market_trend("FR", weeks=8) -->
+
+## YoY comparison
+- Regs: 1163 TY vs 1024 LY (+14%)
+- Spend: $61K TY vs $38K LY (+59%)
+- Brand regs: +22% YoY
+- NB regs: +8% YoY
+- NB CPA: $63 vs $38 LY (+65%)
+- WoW pattern: TY -3% vs LY -18% (same week)
+
+## Monthly projection inputs
+- Month: 2026 Mar (21/31 days elapsed, 10 remaining)
+- MTD actuals: $211K spend, 3448 regs (1522 Brand, 1926 NB)
+- OP2 targets: $254K spend, 4.7K regs
+- OP2 pace check: at 68% through the month, linear OP2 pace would be 3.2K regs and $172K spend
+- MTD vs OP2 pace: +8% regs, +23% spend
+- Simple linear projection (ingester estimate, not accounting for seasonality/holidays): $298K spend, 5.1K regs, $58 CPA
+- NOTE: Analyst should produce the actual projection accounting for weekday/weekend mix, holidays, LY patterns, and known upcoming changes.
+
+## This year weekly trend (last 12 weeks)
+<!-- Data: market_trend("FR", weeks=12) -->
+
+## Last year same period (W8 to W16)
+<!-- Data: db("SELECT * FROM weekly_metrics WHERE market='FR' AND week LIKE '2025%' ORDER BY week") -->
+
+## Daily breakdown
+<!-- Data: db("SELECT * FROM daily_metrics WHERE market='FR' AND week='2026 W12' ORDER BY date") -->

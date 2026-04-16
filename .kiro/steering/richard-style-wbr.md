@@ -14,9 +14,11 @@ Every WBR callout follows this pattern:
 
 ## Voice
 - Dense, analytical. Every word carries data.
+- Parenthetical data is extremely frequent: "(+13% clicks/+19% registrations)" / "(cost-efficiency)" / "(resolved, increased budgets)"
+
+### Pronoun Usage
 - "We" for intentional team actions: "WoW we focused on reducing CPA" / "WoW we pulled budgets back"
 - "I" for personal decisions and accountability: "I will continue to test" / "I have adjusted CPA targets" / "This mistake was not caught until mid-month, so I have updated my reporting"
-- Parenthetical data is extremely frequent: "(+13% clicks/+19% registrations)" / "(cost-efficiency)" / "(resolved, increased budgets)"
 
 ## Key Patterns
 - Always separates Brand and NB performance

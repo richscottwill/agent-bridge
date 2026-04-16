@@ -1,0 +1,34 @@
+<!-- DOC-0200 | duck_id: meeting-baloo-early-access -->
+
+# Baloo Early Access — Cost & Rollout Planning
+
+## Metadata
+- Cadence: Ad-hoc (may become recurring as Baloo launch approaches)
+- Attendees: Richard Williams, Vijay Kumar (vkumarmp, Tech lead for Baloo)
+- Hedy Topic: Baloo (ID: n7WMdRSB3fXXzuP3cCXJ)
+- Outlook Series: None (ad-hoc)
+
+## Context
+Vijay Kumar leads the Baloo tech implementation. Baloo creates a new subdomain (shop.business.amazon.com) that opens up Amazon Business product browsing to non-registered users — the primary launch channel is Paid Search. Richard's role is providing PS cost data and guardrails for the early access rollout to prevent internal testing from inflating paid media costs. Brandon raised the cost concern during a prior MBR. Kate attended a Baloo demo and was positive.
+
+## Latest Session
+### 2026-03-26 — Baloo Early Access and Cost Impact Review (18 min)
+- Vijay explained the early access plan: 50 stakeholders (AB pillar directors and L7s) will install a Tampermonkey script to enable Baloo weblabs and test the experience.
+- Two access paths proposed: (1) direct URL to shop.business.amazon.com, (2) Google search to simulate the real PS launch experience.
+- Brandon's MBR concern: internal clicks via Google search inflate paid media costs. Hedy captured "$20 per click" but actual NB CPC is ~$4.43 — still non-trivial at scale.
+- Decision: stakeholders will use direct URL for routine testing. Google search path reserved for leadership demos only (5-6 clicks max).
+- Richard agreed to provide keyword cost data and a blurb explaining why Google search testing should be avoided.
+- Vijay will launch early access end of Monday 3/30. Will share enablement instructions via Slack.
+- Communication: Vijay will tag Richard in the internal Baloo SIM for visibility. Richard's team doesn't use BCOM's SIM mechanism.
+- Kate attended a prior Baloo demo and was "so happy" — positive leadership signal.
+
+## Running Themes
+- Cost containment: internal testing must not inflate paid media metrics
+- Stakeholder awareness: Baloo impacts all AB pillars — broad early access needed
+- PS as primary launch channel: stakeholders need to understand the Google search experience
+
+## Open Items
+- [ ] Richard: provide keyword cost data + "don't use Google search" blurb — by Monday 3/30
+- [ ] Richard: follow up with Brandon on MBR click-cost concern and guardrails — by Monday 3/30
+- [ ] Vijay: launch early access (Tampermonkey script + Slack instructions) — end of Monday 3/30
+- [ ] Vijay: tag Richard in Baloo SIM for ongoing visibility

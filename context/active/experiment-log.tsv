@@ -38,3 +38,23 @@ run44_exp7	eyes	Whats Coming	ADD	info_retrieval	1167	1199	1.0	1.0	1.0	0.0	false	
 run44_exp8	richard-style-wbr	Examples	SPLIT	output_quality	920	928	0.86	0.90	0.84	-0.04	false	REVERT	140
 run44_exp9	device	Installed Apps	REWORD	info_retrieval	2085	2078	1.0	1.0	1.0	0.0	false	KEEP	120
 run44_exp10	richard-style-slack	Greeting and Sign-off	SPLIT	output_quality	1214	1214	0.96	0.96	0.96	0.0	false	KEEP	130
+run45_exp1	amcc	Common Failures	SPLIT	info_retrieval	3239	3246	0.833	0.833	1.0	0.0	false	KEEP	120
+run45_exp2	eyes	Ad Copy Testing Results	SPLIT	info_retrieval	1199	1201	1.0	1.0	1.0	0.0	false	KEEP	120
+run45_exp3	memory	Relationship Staleness Index	COMPRESS	info_retrieval	2003	1989	0.818	1.0	0.818	-0.182	false	REVERT	120
+run45_exp4	nervous-system	Loop 1 Decision Audit	RESTRUCTURE	info_retrieval	1276	1276	1.0	1.0	1.0	0.0	false	KEEP	120
+run45_exp5	gut	Governance/When to Read	REMOVE	info_retrieval	2033	2003	0.867	1.0	0.667	-0.133	false	REVERT	120
+run45_exp6	richard-style-slack	Cadence and Structure	REWORD	output_quality	1214	1222	0.96	0.96	0.92	0.0	false	KEEP	150
+run45_exp7	richard-style-email	Sentence-Level Patterns	MERGE	output_quality	832	828	0.98	0.98	0.88	0.0	false	KEEP	150
+run45_exp8	am-triage	Data Query Sections	MERGE	output_quality	390	373	1.0	1.0	1.0	0.0	false	KEEP	150
+run45_exp9	audit-asana-writes	Batch Handling/Critical Rules	RESTRUCTURE	output_quality	248	239	1.0	1.0	1.0	0.0	false	KEEP	150
+run45_exp10	richard-style-amazon	Writing Hygiene	MERGE	output_quality	951	949	1.0	1.0	1.0	0.0	false	KEEP	150
+run46_exp1	spine	Directory Map	COMPRESS	information_retrieval	1209	1176	0.762	0.762	0.762	0.0	false	KEEP	150
+run46_exp2	heart	Hyperparameters	RESTRUCTURE	information_retrieval	3875	3875	1.0	1.0	1.0	0.0	false	KEEP	150
+run46_exp3	brain	Decision Log	REMOVE	information_retrieval	1373	1311	0.8	1.0	0.8	-0.2	false	REVERT	150
+run46_exp4	eod-refresh	Backend/Frontend	SPLIT	output_quality	339	403	0.98	0.98	0.92	0.0	false	KEEP	150
+run46_exp5	memory	Compressed Context	RESTRUCTURE	information_retrieval	2003	2003	1.0	1.0	1.0	0.0	false	KEEP	150
+run46_exp6	richard-style-wbr	Voice	SPLIT	output_quality	920	923	0.96	0.96	0.96	0.0	false	KEEP	150
+run46_exp7	nervous-system	Loop 9 Baselines	REWORD	information_retrieval	1276	1313	1.0	1.0	1.0	0.0	false	KEEP	150
+run46_exp8	richard-style-email	Full File	RESTRUCTURE	output_quality	828	828	1.0	1.0	0.98	0.0	false	KEEP	150
+run46_exp9	audit-asana-writes	Full Hook	ADD	output_quality	239	310	1.0	1.0	1.0	0.0	false	KEEP	150
+run46_exp10	amcc	Political Awareness Layer	ADD	information_retrieval	3246	3413	1.0	1.0	1.0	0.0	false	KEEP	150

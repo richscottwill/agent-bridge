@@ -256,7 +256,40 @@ Write all computed state to structured files for AM-Frontend consumption.
 2. `~/shared/context/active/am-portfolio-findings.json` — portfolio scan results (task counts, overdue, near-due, staleness, blockers, budget alerts)
 3. `~/shared/context/active/am-abps-ai-state.json` — ABPS AI Content pipeline state
 4. `~/shared/context/active/am-signals-processed.json` — signal routing results (tasks created, deferred, dismissed)
-5. Intake files (slack-digest.md, email-triage.md, asana-digest.md, asana-activity.md) — already written in Phase 1
+5. `~/shared/context/active/am-command-center-intel.json` — actionable intelligence for Command Center dashboard (commitments, delegate, communicate, differentiate)
+6. Intake files (slack-digest.md, email-triage.md, asana-digest.md, asana-activity.md) — already written in Phase 1
+
+### Command Center Intel Generation
+Compile `am-command-center-intel.json` from signals collected in Phases 1-5. This file powers the four Actionable Intelligence cards on the Command Center dashboard.
+
+**Commitments** — promises Richard made or others made to him. Sources:
+- Slack signals where action = "respond" (someone asked Richard to do something)
+- Asana unanswered comments (someone is waiting on Richard)
+- Overdue tasks blocking teammates (implicit commitment)
+- Format: `{text, source, person, said_by (richard|other), days_old, status (not_started|in_progress|done), context, quote?}`
+
+**Delegate** — tasks Richard should hand off. Sources:
+- Overdue kill-or-revive candidates marked DELEGATE
+- Tasks in projects Richard doesn't own (Cross_Team_Tasks)
+- Format: `{task, to, reason, context}`
+
+**Communicate** — messages Richard needs to send. Sources:
+- Unanswered Slack questions from Brandon/Kate/skip-level
+- Pending status updates (project staleness flags)
+- Meeting prep items requiring pre-communication
+- Format: `{text, audience, context}`
+
+**Differentiate** — highest-leverage actions that set Richard apart. Sources:
+- THE HARD THING from amcc.md (always slot 1 if active)
+- Critical enrichment proposals with strategic impact
+- Brandon/Kate requests that demonstrate strategic thinking
+- Format: `{action, why, status (not_started|in_progress|done), context}`
+
+**Rules:**
+- Max 8 commitments, 4 delegate, 4 communicate, 4 differentiate
+- Deduplicate against existing items (match on text similarity)
+- Carry forward non-done items from previous day's file (read before write)
+- Mark items done when corresponding Asana task is completed or Slack reply detected
 
 ### Log Hook Execution
 ```sql
@@ -298,6 +331,7 @@ Execute ~/shared/context/protocols/sharepoint-durability-sync.md — AM section.
 Push key output artifacts to OneDrive for cross-device access:
 - am-enrichment-queue.json → Kiro-Drive/system-state/
 - am-portfolio-findings.json → Kiro-Drive/system-state/
+- am-command-center-intel.json → Kiro-Drive/system-state/
 - daily-brief-latest.md → Kiro-Drive/system-state/
 - command-center-data.json → Kiro-Drive/system-state/
 

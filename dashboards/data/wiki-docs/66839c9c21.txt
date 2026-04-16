@@ -1,0 +1,100 @@
+<!-- DOC-0042 | duck_id: callout-eu5-analysis-2026-w13 -->
+
+# EU5 W13 Regional Analysis Brief
+
+## Regional summary
+EU5 total: 5,378 reported regs (-6% WoW), but DE data lag inflates the decline. Lag-corrected EU5 estimate: ~5,900-6,100 regs (+3% to +7% WoW). Spend: $400K (flat WoW). UK (+14%), IT (+8%), FR (+4%) recovered from W12 mid-March softness. ES was flat. DE reported -46% but is lag-affected. Combined projection: ~26,000 regs vs OP2 ~24,000 (+8%).
+
+## Cross-market pattern: Recovery from W12 softness, except ES
+
+W12 saw 4 of 5 markets decline. W13 reverses that: 3 of 4 non-lag markets recovered (UK +14%, IT +8%, FR +4%), ES held flat. The recovery is consistent with WW trends (+4.3% WoW) and suggests W12's mid-March softness was transient.
+
+The recovery mechanism varied by market:
+- UK: CVR-led (+17% blended CVR). Both segments improved on conversion quality, not click volume.
+- IT: Click-led (NB clicks +23%). Volume expansion through budget increases, not conversion improvement.
+- FR: Click-led (NB clicks +16%). Same pattern as IT: budget-driven NB expansion.
+- ES: Mixed. NB clicks +13% offset Brand CVR decline (-11%). Net flat.
+- DE: Unreadable due to data lag. Thu-Sat data suggests recovery to ~1,200-1,300 range.
+
+Key distinction: UK's recovery was efficiency-driven (more conversions per click). FR, IT, and ES recovered through spend expansion (more clicks at similar or worse conversion rates). This explains why UK's CPA improved (-17%) while FR (+10%), IT (+16%), and ES (+17%) saw CPA increases.
+
+## Market-by-market WoW drivers
+
+| Market | WoW% | Primary Driver | Brand | NB | Data Lag? |
+| ------ | ---- | -------------- | ----- | --- | --------- |
+| UK | +14% | CVR +17% across both segments | +31% | +6% | No |
+| DE | -46% (reported) | Data lag. True likely flat to +8% | -47% (reported) | -44% (reported) | Yes (severe) |
+| FR | +4% | NB clicks +16%, CVR -3% | +2% | +5% | No |
+| IT | +8% | NB clicks +23%, CVR flat | +2% | +23% | No |
+| ES | flat | NB clicks +13% offset Brand CVR -11% | -8% | +12% | No |
+
+Key observation: NB grew in all 4 non-lag markets (UK +6%, FR +5%, IT +23%, ES +12%). Brand was mixed: UK bounced +31% from its W12 trough, IT +2%, FR +2%, but ES -8%. The universal Brand decline from W12 has partially reversed, with UK leading the recovery.
+
+## Spend efficiency diverged sharply
+
+W13 split EU5 into two efficiency tiers:
+- UK: Spend -5%, regs +14%. CPA improved -17% to $56. Efficiency compounding.
+- FR/IT/ES: Spend +14-25%, regs +4-8%. CPA worsened +10-17%. Buying growth.
+- DE: Unreadable. Reported spend -21% but lag-corrected CPA likely $85-$100.
+
+The divergence is structural: UK has mature OCI (~30 weeks) and baked-in ad copy gains. FR/IT/ES have early OCI (4 weeks) and are expanding NB through budget increases rather than efficiency improvements. The spend-to-reg ratio will only improve as OCI matures in these three markets.
+
+## YoY picture
+
+| Market | YoY Regs | YoY Spend | Brand YoY | NB YoY | NB CPA YoY |
+| ------ | -------- | --------- | --------- | ------ | ---------- |
+| UK | +117% | +82% | +26% | +286% | -24% |
+| DE | -50% (lag) | +5% | -49% (lag) | -51% (lag) | +107% (lag) |
+| FR | +9% | +106% | +3% | +15% | +116% |
+| IT | +2% | +73% | +7% | -7% | +191% |
+| ES | +12% | +84% | +16% | +7% | +82% |
+
+UK remains the standout: massive YoY growth with improving NB CPA. Every other market is spending significantly more YoY for modest reg growth. NB CPA inflation is severe across the board (except UK): FR +116%, IT +191%, ES +82%. DE's YoY numbers are meaningless under lag. OCI maturation in FR/IT/ES is the single most important lever for EU5 efficiency.
+
+## Monthly projections vs OP2
+
+| Market | Proj Regs | OP2 Regs | vs OP2 | Proj Spend | OP2 Spend | vs OP2 |
+| ------ | --------- | -------- | ------ | ---------- | --------- | ------ |
+| UK | 6,300 | 5,174 | +22% | $396K | $461K | -14% |
+| DE | 5,900 | 6,129 | -4% | $624K | $658K | -5% |
+| FR | 5,100 | 4,694 | +9% | $311K | $254K | +22% |
+| IT | 5,800 | 5,563 | +4% | $409K | $384K | +7% |
+| ES | 2,900 | 2,395 | +21% | $171K | $127K | +35% |
+
+Combined EU5: ~26,000 projected regs vs ~23,955 OP2 (+9%). Combined spend: ~$1,911K vs ~$1,884K OP2 (+1%). The reg beat is strong across 4 of 5 markets. DE is the only market below plan (-4%). The spend picture is mixed: UK is under-spending (-14%), DE is under-spending (-5%), but FR (+22%), IT (+7%), and ES (+35%) are over-spending. The net EU5 spend is essentially on plan (+1%), but the distribution is uneven.
+
+## OCI status and implications
+
+| Market | OCI Status | Weeks Live | W13 Signal |
+| ------ | ---------- | ---------- | ---------- |
+| UK | Live 100% | ~31 weeks | NB CPC at 12-week low ($2.74). CVR at 12-week high (5.12%). Compounding. |
+| DE | Live 100% | ~17 weeks | Unreadable due to data lag. |
+| FR | E2E launched | 4 weeks | Rev data excluded 3/23-3/31. Bidding unoptimized for final week. |
+| IT | E2E launched | 4 weeks | Rev data excluded 3/23-3/31. Same constraint as FR. |
+| ES | E2E launched | 4 weeks | Rev data excluded 3/23-3/31. Same constraint as FR/IT. |
+
+The OCI revenue data exclusion (3/23-3/31) across FR, IT, and ES is a new development. For the final week of March, the bidding algorithms in these three markets are operating without conversion feedback. This could suppress efficiency or cause erratic bidding. The exclusion is necessary for OCI calibration but creates a short-term blind spot.
+
+## Competitive pressure summary
+
+| Market | Key Competitor | Segment | IS | W13 Impact |
+| ------ | -------------- | ------- | -- | ---------- |
+| UK | weareuncapped.com | Brand | 24% | Brand recovered +31% despite persistent IS. Competitor may be less impactful than assumed. |
+| DE | recht24-7.de | Brand | 14% | Brand Core max CPC raised $15 to $21 to address impression limitations. |
+| FR | bruneau.fr | NB | 39-47% | NB grew +5% through the pressure. CVR fell -9%. |
+| IT | Shopify/mondoffice | NB | >10% | NB CVR stuck at 8-week low (1.73%) for 2nd consecutive week. |
+| ES | amazon.co.uk (AGL) | Brand | <10% | Brand CVR -11%, Brand regs at 9-week low (364). Pressure intensifying. |
+
+Brand competitive dynamics shifted in W13: UK's Brand recovered strongly, DE raised bids aggressively, but ES Brand continued to erode under AGL pressure. NB competition remains concentrated in FR (bruneau.fr) and IT (Shopify/mondoffice), with IT showing the more concerning pattern (CVR stuck at lows).
+
+## Regional flags
+
+1. DE data lag is systemic: Two consecutive weeks of severe lag (W12 Fri/Sat, W13 Sun-Wed). This is no longer a one-off. Pipeline investigation is needed.
+2. Spend efficiency split: UK improving, FR/IT/ES deteriorating. The gap will widen until OCI matures in the EU3.
+3. OCI revenue data exclusion: FR/IT/ES bidding algorithms are blind 3/23-3/31. Watch for erratic spend or CPA in the final days of March.
+4. ES spend overshoot: +35% vs OP2 is unsustainable. The reg beat (+21%) does not justify the premium. ES needs efficiency improvement, not more spend.
+5. Brand Core bid increases: Both DE ($15 to $21) and IT ($19 to $24) raised max CPC on 3/23 to address impression limitations. W14 should show whether these unlock meaningful volume.
+6. NB CPA inflation: 4 of 5 markets have NB CPA up 82-191% YoY. Only UK has improved (-24%). This is the defining structural challenge for EU5.
+
+## Suggested regional narrative
+EU5 recovered from W12's mid-March softness, with UK (+14%), IT (+8%), and FR (+4%) all gaining WoW. DE's reported -46% is data lag (two consecutive weeks now). ES was flat. The recovery split into two modes: UK improved through CVR efficiency (4.28%, 12-week high), while FR/IT/ES expanded through NB budget increases at declining efficiency. Monthly projections: 4 of 5 markets beating OP2 on regs, combined +9%. DE remains -4% vs plan, the tightest market. UK is the efficiency leader (+22% regs on -14% spend). ES's +35% spend overshoot is the biggest risk. OCI maturation in FR/IT/ES (4 weeks in, revenue data excluded through month-end) is the key lever for closing the NB CPA gap with UK.

@@ -1,53 +1,62 @@
 {
-  "generated": "2026-04-15T01:48:00Z",
-  "version": "pm-scan",
-  "portfolios": {
-    "ABIX_PS": {
-      "gid": "1212775592612914",
-      "projects": [
-        {"gid": "1212762061512767", "name": "AU", "owner": "Richard Williams", "status_update": null, "stale": true},
-        {"gid": "1212775592612917", "name": "MX", "owner": "Richard Williams", "status_update": null, "stale": true}
+  "generated": "2026-04-15T06:55:00-07:00",
+  "projects": {
+    "AU": {
+      "open_tasks": 8,
+      "overdue": 5,
+      "key_findings": [
+        "MBR callout completed 4/8 but still showing overdue in DuckDB (sync lag)",
+        "AU LP switch task due today — Engine Room block",
+        "AU meetings agenda 8d overdue — recurring, needs date push",
+        "Refmarker audit PoC 8d overdue — Sweep block",
+        "Weekly WBR sheet 8d overdue — Engine Room"
+      ],
+      "blocker": "Polaris LP revert completed W15. CVR recovery expected 1-2 weeks."
+    },
+    "MX": {
+      "open_tasks": 5,
+      "overdue": 3,
+      "key_findings": [
+        "MX Automotive page UNBLOCKED — Frank completed blocking task 4/14",
+        "Lorena Q2 expected spend 11d overdue — blocks Lorena's PO submission",
+        "Kingpin update 8d overdue — blocked on Andes data",
+        "MX LP optimization call today 10AM PT with Cristobal"
+      ],
+      "blocker": "Lorena blocked on Q2 spend figure from Richard."
+    },
+    "WW_Testing": {
+      "open_tasks": 18,
+      "overdue": 4,
+      "key_findings": [
+        "Testing Document for Kate: THE HARD THING, 14d overdue",
+        "WW weblab dial-up 8d overdue",
+        "Email overlay WW rollout due 4/18 (3 days)",
+        "AB Customer Redirect: Brandon asked for closure (comment 4/13, unanswered 2d)"
       ]
     },
-    "ABPS": {
-      "gid": "1212762061512816",
-      "projects": [
-        {"gid": "1205997667578854", "name": "ABPS - NA", "owner": "Richard Williams", "status_update": null, "stale": true},
-        {"gid": "1205997667578874", "name": "ABPS - JP", "owner": "Richard Williams", "status_update": null, "stale": true},
-        {"gid": "1205997667578868", "name": "ABPS - EU5", "owner": "Richard Williams", "status_update": null, "stale": true}
+    "Paid_App": {
+      "open_tasks": 13,
+      "overdue": 4,
+      "key_findings": [
+        "Create FR accounts + Source DE/IT/ES: 54d overdue each — kill candidates",
+        "Paid App PO 2d overdue — needs Q2 PO creation",
+        "Weekly WBR sheet 2d overdue",
+        "Monthly budget confirmation due 5/5"
+      ]
+    },
+    "ABPS_AI": {
+      "open_tasks": 19,
+      "overdue": 0,
+      "key_findings": [
+        "19 wiki articles in pipeline, all Wiki block, Not urgent",
+        "Key articles: OCI Impact Summary, AEO POV, Cross-Market Playbook"
       ]
     }
   },
-  "status_staleness": {
-    "all_projects_stale": true,
-    "projects_without_status": ["AU", "MX", "ABPS - NA", "ABPS - JP", "ABPS - EU5", "WW Testing", "WW Acq", "Paid App"],
-    "recommendation": "All 8 projects have ZERO status updates. Consider posting status updates for AU and MX at minimum — these are Richard's hands-on markets."
-  },
-  "overdue_portfolio_tasks": [
-    {"gid": "1212988092117041", "name": "Paid App", "project": "WW Testing", "days_overdue": 14, "priority": "Urgent"},
-    {"gid": "1213341921686564", "name": "Testing Document for Kate", "project": "WW Testing", "days_overdue": 13, "priority": "Urgent"},
-    {"gid": "1213917967984980", "name": "Respond to Lena — AU LP URL analysis", "project": "AU", "days_overdue": 11, "priority": "Today"},
-    {"gid": "1213764961716427", "name": "WW weblab dial-up (Richard)", "project": "WW Testing", "days_overdue": 7, "priority": "Urgent"},
-    {"gid": "1213964186504305", "name": "Send IECCP follow-up to Lorena", "project": "MX", "days_overdue": 5, "priority": "Today"},
-    {"gid": "1213917691089036", "name": "Refmarker mapping audit PoC — AU", "project": "AU", "days_overdue": 4, "priority": "Today"},
-    {"gid": "1212808474749819", "name": "Paid App PO — Create Q2", "project": "Paid App", "days_overdue": 1, "priority": "Today"}
-  ],
-  "near_due_escalations": {
-    "auto_executed": [],
-    "note": "No tasks in 0-2 day window needed Priority_RW escalation to Today (all already set or no tasks in range)."
-  },
-  "recurring_tasks": {
-    "completed_recurring": [],
-    "note": "No completed recurring tasks found in AU/MX in last 2 days needing recreation."
-  },
-  "market_context_refresh": {
-    "AU_pinned": "1213917747438931",
-    "MX_pinned": "1213917639688517",
-    "signals_today": [
-      "AU: Handoff doc first draft due, Kate not concerned about HC, Harsha OOO until 4/22",
-      "MX: LP optimization call tomorrow 12 PM CST with Cristobal, broken NB page images, IECCP follow-up overdue"
-    ],
-    "refresh_needed": true,
-    "note": "Queue for frontend — market context tasks should be updated with today's signals."
-  }
+  "cross_project_signals": [
+    "Brandon is active: ABIX document feedback, Q2 CCP review, PAM budget question",
+    "Frank unblocked MX Auto page — Richard can proceed with campaign build",
+    "No high-priority emails from stakeholders today",
+    "Kate's Happy Hour at 4PM — social, no prep needed"
+  ]
 }

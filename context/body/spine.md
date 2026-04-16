@@ -74,17 +74,16 @@ Full hook details: see device.md → Installed Apps and hands.md → Hook System
 | Directory | Role | Owner | Contents |
 |-----------|------|-------|----------|
 | `~/shared/context/body/` | Body organs + device | Agent (maintained), Human (validated) | body.md, brain.md, eyes.md, hands.md, memory.md, spine.md, heart.md, device.md |
-| `~/shared/context/active/` | Ground truth. Live state. | Agent + Human | current.md, org-chart.md, rw-tracker.md, long-term-goals.md, asana-command-center.md, mcp-tool-reference.md, hook-protocol-audit.md |
-| `~/.kiro/steering/` | Agent behavior config. | Human edits, Agent suggests | soul.md, rw-trainer.md, writing styles, prioritization, environment rules |
-| `~/shared/context/protocols/` | Hook execution protocols. | Agent builds, Human approves | am-*.md, eod-*.md, sharepoint-durability-sync.md, signal-*.md, etc. |
-| `~/shared/wiki/meetings/` | Meeting series notes. One file per recurring meeting. | Agent summarizes from Hedy | stakeholder/, team/, manager/, peer/, adhoc/ — see README.md for full map |
-| `~/shared/data/duckdb/ps-analytics.duckdb` | PS Analytics database (DuckDB) | Dashboard ingester writes, all agents read+write | CLI: `python3 ~/shared/tools/data/query.py "SQL"`. Python: `from query import db, market_trend`. MCP: `execute_query`. Schema: `~/shared/tools/data/schema.sql`. Portability: `RECONSTRUCTION.md`. Exports: `~/shared/data/exports/`. |
-| `~/shared/wiki/` | Published work product (7 categories) + index.md | Wiki team → Agent, Human curates index | testing/, strategy/, reporting/, tools/, communication/, program-details/, best-practices/ |
-| `~/shared/wiki/research/` | Standalone research outputs. | Agent | ad-copy-results.md, competitor-intel.md, oci-performance.md, daily-brief-latest.md, data files |
+| `~/shared/context/active/` | Ground truth. Live state. | Agent + Human | current.md, org-chart.md, rw-tracker.md, long-term-goals.md, asana-command-center.md, mcp-tool-reference.md |
+| `~/.kiro/steering/` | Agent behavior config | Human edits, Agent suggests | soul.md, rw-trainer.md, writing styles, prioritization, environment rules |
+| `~/shared/context/protocols/` | Hook execution protocols | Agent builds, Human approves | am-*.md, eod-*.md, sharepoint-durability-sync.md, signal-*.md, etc. |
+| `~/shared/wiki/meetings/` | Meeting series notes (one per recurring meeting) | Agent via Hedy | stakeholder/, team/, manager/, peer/, adhoc/ |
+| `~/shared/data/duckdb/ps-analytics.duckdb` | PS Analytics DB | All agents read+write | CLI: `python3 ~/shared/tools/data/query.py "SQL"`. Python: `from query import db, market_trend`. MCP: `execute_query`. Schema: `schema.sql`. Exports: `~/shared/data/exports/`. |
+| `~/shared/wiki/` | Published work product (7 categories) + doc pipeline | Wiki team → Agent | testing/, strategy/, reporting/, tools/, communication/, program-details/, best-practices/. Also: context-catalog.md, wiki-index.md, staging/, research/, reviews/ |
+| `~/shared/wiki/research/` | Standalone research | Agent | ad-copy-results.md, competitor-intel.md, oci-performance.md, daily-brief-latest.md |
+| `~/shared/wiki/archive/` | Cold storage | Agent | Archived artifacts, old versions |
 | `~/shared/context/intake/` | Inbox. Unprocessed material. | Human drops, Agent processes | Drafts, raw notes, new docs |
-| `~/shared/tools/` | Utility scripts. | Agent builds | Python scripts for MCP, sync, briefs |
-| `~/shared/wiki/` | Doc pipeline + context catalog | Wiki team agents | context-catalog.md, wiki-index.md, staging/, research/, reviews/ |
-| `~/shared/wiki/archive/` | Cold storage. | Agent | Archived artifacts, old versions |
+| `~/shared/tools/` | Utility scripts | Agent builds | Python scripts for MCP, sync, briefs |
 | OneDrive `Kiro-Drive/` | Durability layer + cross-device access | Agent pushes, Human reads | system-state/ (hook outputs), portable-body/ (snapshots), artifacts/ (published docs), meeting-briefs/ |
 
 ---

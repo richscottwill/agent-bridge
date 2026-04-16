@@ -1,0 +1,107 @@
+<!-- DOC-0380 | duck_id: strategy-agentic-ps-vision -->
+
+---
+title: Agentic Paid Search — Vision & Roadmap
+status: DRAFT
+doc-type: strategy
+audience: amazon-internal
+level: 5
+owner: Richard Williams
+created: 2026-03-25
+updated: 2026-03-25
+update-trigger: new agentic capability built, Level 5 progress, industry shifts
+---
+
+# Agentic Paid Search — Vision & Roadmap
+
+## The Thesis
+
+Paid search management is one of the most automatable functions in marketing. The work is data-heavy, rule-based, repetitive, and measurable — exactly the profile that AI agents handle well. Within 2-3 years, the teams that have built agentic infrastructure will operate at 3-5x the efficiency of teams that haven't. AB PS is building that infrastructure now.
+
+This isn't about replacing people. It's about changing what people spend time on. Today, Richard spends ~60% of his time on execution (bids, keywords, campaigns, invoices) and ~40% on strategy (test design, stakeholder communication, cross-market playbooks). The goal is to invert that ratio.
+
+## Current State (March 2026)
+
+| Function | Automation Level | Notes |
+|----------|-----------------|-------|
+| Morning routine (triage, brief, blocks) | Agent-assisted | One-click, human reviews |
+| WBR callout drafting | Agent-assisted | Dashboard ingester + writer agents |
+| Email triage & draft replies | Agent-assisted | Morning routine Step 2 |
+| Meeting prep | Agent-assisted | Memory + relationship graph |
+| Context maintenance | Autonomous | Autoresearch loop, 9 runs |
+| Bid management | Manual | OCI handles NB, Brand still manual |
+| Keyword research | Manual | — |
+| Campaign builds | Manual | — |
+| Invoice processing | Manual | — |
+| Strategic artifact creation | Human + agent | Agent drafts, human refines |
+| Stakeholder communication | Human + agent | Agent drafts, human sends |
+| Test design | Human | Agent provides data, human designs |
+
+The pattern is clear: context and triage are agent-assisted. Execution and creation are still manual. The next frontier is Stage 2 — agent-executed, human-approved — starting with campaign builds and invoice routing.
+
+## The Five Stages of Agentic PS
+
+### Stage 1: Agent-Assisted (NOW)
+Agent handles context, triage, drafting. Human makes all decisions and executes.
+- Morning routine, email drafts, meeting prep, WBR callouts
+- Human effort: ~80% of pre-agent level
+
+### Stage 2: Agent-Executed, Human-Approved
+Agent executes routine tasks, human approves before they go live.
+- Campaign builds from templates, keyword expansion from seed lists, invoice routing
+- Human effort: ~50% of pre-agent level
+
+### Stage 3: Agent-Autonomous with Guardrails
+Agent operates independently within defined parameters. Human reviews exceptions.
+- Bid adjustments within CPA guardrails, negative keyword management, anomaly detection
+- Human effort: ~30% of pre-agent level
+
+### Stage 4: Agent-Orchestrated
+Multiple agents coordinate across functions. Human sets strategy and reviews outcomes.
+- Cross-market campaign launches, competitive response playbooks, automated reporting
+- Human effort: ~15% of pre-agent level
+
+### Stage 5: Self-Improving System
+Agents run experiments on their own processes, optimize without human intervention.
+- The autoresearch loop applied to campaign management, not just context management
+- Human effort: strategic direction only
+
+## What Makes This Novel
+
+For industry context and competitive positioning, see [Agentic Marketing Landscape](~/shared/artifacts/strategy/2026-03-25-agentic-marketing-landscape.md).
+
+## Why This Matters for AB
+
+- 10 markets, 1 person hands-on (Richard) — agentic infrastructure is the only way to scale
+- OCI already proved that algorithmic > manual for bidding — same principle applies to everything else
+- Brandon's Annual Review feedback: "visibility" — agents free up time for the strategic work that creates visibility
+- Kate's org is watching — if PS demonstrates agentic efficiency, it becomes a model for other marketing functions
+
+## Risks
+
+- Over-automation: agents make mistakes that humans would catch (guardrails are critical)
+- Context drift: if the body system isn't maintained, agents operate on stale data
+- Platform dependency: if AgentSpaces/DevSpaces changes, the system needs to be portable (portable-body/ exists for this)
+- Perception: "Richard uses AI" could be seen as a shortcut rather than an innovation (frame as methodology, not tool)
+
+The biggest risk isn't technical — it's perception. "Richard uses AI" needs to be framed as "Richard built a methodology that scales PS operations." The artifacts are the proof.
+
+## Next Steps
+- [ ] Document current agentic capabilities for Brandon (Level 3 artifact)
+- [ ] Build one Stage 2 capability (campaign build from template)
+- [ ] Present agentic PS vision at Deep Dive (when Level 1 gate is passed)
+- [ ] Write up the body system architecture as a shareable framework
+
+## Sources
+- Current automation state — source: ~/shared/context/body/device.md → Installed Apps + Autonomy Spectrum
+- Five Levels — source: ~/shared/context/body/brain.md → Strategic Priorities
+- Annual Review visibility feedback — source: ~/shared/context/body/memory.md → Brandon entry (3/24)
+- Autoresearch loop — source: ~/shared/context/body/heart.md
+- 10 markets, 1 person — source: ~/shared/context/body/hands.md → Recurring Execution Work
+
+<!-- AGENT_CONTEXT
+machine_summary: "Vision and roadmap for agentic paid search automation. Five stages from agent-assisted (current) to self-improving system. Current state: context/triage are agent-assisted, execution is manual. Goal: invert the 60% execution / 40% strategy ratio."
+key_entities: ["Five Stages", "autoresearch loop", "body system", "OCI", "AI Max", "Brandon Munday", "Kate Rundell"]
+action_verbs: ["automate", "build", "document", "present", "scale"]
+update_triggers: ["new agentic capability built", "Level 5 progress", "industry shifts", "Stage 2 capability launched"]
+-->

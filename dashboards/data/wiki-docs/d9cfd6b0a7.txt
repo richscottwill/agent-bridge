@@ -1,0 +1,210 @@
+<!-- DOC-0451 | duck_id: wiki-meta-wiki-structure -->
+
+# Wiki Structure
+
+> The wiki pipeline (research → staging → review) lives in `~/shared/wiki/`.
+> The OUTPUT — published articles — lives in `~/shared/wiki/{category}/`.
+> The wiki infrastructure is the production process; artifacts is the product.
+
+## Categories
+
+Categories align 1:1 with the `~/shared/wiki/` folder structure.
+
+| Category | Slug | Artifact Folder | Description | Article count |
+|----------|------|-----------------|-------------|---------------|
+| Testing & Experimentation | testing | `testing/` | Test designs, methodologies, experiment frameworks | 13 |
+| Strategy & Frameworks | strategy | `strategy/` | POVs, playbooks, strategic narratives, OP1 docs | 11 |
+| Paid Search Operations | ps-ops | `program-details/` | Day-to-day PS workflows, account details, market wikis | 8 |
+| Reporting | reporting | `reporting/` | Dashboards, analysis docs, performance summaries | 2 |
+| Tools & Automation | tools | `tools/` | Tool specs, automation docs, process docs | 2 |
+| Communication | communication | `communication/` | Stakeholder docs, handoff guides | 1 |
+| Best Practices | best-practices | `best-practices/` | Operational standards, how-tos, reusable frameworks | 3 |
+| System Documentation | system | _(future)_ | Body system, agent architecture, hooks | 0 |
+
+### Category → Folder Mapping Notes
+
+- **Paid Search Operations** and **Market Playbooks** both map to `program-details/`. Market wikis (au-market-wiki, mx-market-wiki) are a subset — tagged `market-wiki` for filtering.
+- **System Documentation** has no artifact folder yet. System docs (body system, agent architecture) currently live in `~/shared/context/body/` and steering files. If system docs become publishable artifacts, create `artifacts/system/`.
+- The wiki index uses the artifact folder as the canonical location. The slug is for wiki navigation; the folder is for file placement.
+
+## Navigation Hierarchy
+
+```
+Wiki (wiki-index.md)
+├── Testing & Experimentation (testing/) — 13 articles
+│   ├── testing-approach-kate (parent — Kate doc)
+│   │   ├── workstream-oci-bidding
+│   │   ├── workstream-modern-search
+│   │   ├── workstream-audiences-lifecycle
+│   │   ├── workstream-user-experience
+│   │   └── workstream-algorithmic-ads
+│   ├── oci-rollout-playbook (strategy — business case + methodology)
+│   ├── ai-max-test-design
+│   ├── ad-copy-testing-framework
+│   ├── email-overlay-ww-rollout
+│   ├── au-nb-mro-trades-proposal
+│   ├── project-baloo-overview
+│   └── enhanced-match-liveramp
+├── Strategy & Frameworks (strategy/) — 11 articles
+│   ├── ieccp-planning-framework
+│   ├── q2-initiative-status
+│   ├── oci-business-case
+│   ├── genai-search-traffic
+│   ├── f90-lifecycle-strategy
+│   ├── cross-market-playbook
+│   ├── aeo-ai-overviews-pov
+│   ├── agentic-ps-vision
+│   ├── body-system-architecture
+│   └── agentic-marketing-landscape
+├── Program Details (program-details/) — 8 articles
+│   ├── ab-paid-search-wiki
+│   ├── au-market-wiki
+│   ├── mx-market-wiki
+│   ├── oci-execution-guide (execution — how-to)
+│   ├── ww-testing-tracker
+│   ├── market-reference
+│   ├── team-workload-distribution
+│   └── polaris-rollout-status
+├── Reporting (reporting/) — 2 articles
+│   ├── au-keyword-cpa-dashboard
+│   └── wbr-callout-guide
+│   ├── wbr-callout-guide
+│   └── competitive-intel-tracker
+├── Tools & Automation (tools/) — 2 articles
+│   ├── campaign-link-generator-spec
+│   └── budget-forecast-helper-spec
+├── Communication (communication/) — 1 article
+│   └── stakeholder-comms-guide
+├── Best Practices (best-practices/) — 3 articles
+│   ├── google-ads-campaign-structure
+│   ├── landing-page-testing-playbook
+│   └── invoice-po-process-guide
+└── System Documentation — 0 articles
+    └── (body system docs live in organs and steering files)
+```
+
+## Publishing Workflow
+
+When an article passes the wiki-critic review and is approved for publishing:
+
+1. **Source**: Read the staged article at `~/shared/wiki/{topic-slug}.md`
+2. **Review**: Read the critic's review at `~/shared/wiki/reviews/{topic-slug}-review.md`
+3. **Validate**:
+   - Frontmatter is complete (all required fields present)
+   - `depends_on` slugs point to articles that exist
+   - `tags` use existing taxonomy terms (or flag new ones for approval)
+   - `AGENT_CONTEXT` block is present and well-formed
+   - No unresolved `<!-- TODO -->` markers remain
+4. **Convert to artifact format**:
+   - Rename to artifact naming convention: `YYYY-MM-DD-short-description.md`
+   - Replace wiki frontmatter with artifact front-matter standard:
+     ```
+     ---
+     title: [Document title]
+     status: DRAFT | REVIEW | FINAL
+     audience: amazon-internal | personal | agent-only
+     level: [1-5 or N/A]
+     owner: [who maintains this doc]
+     created: YYYY-MM-DD
+     updated: YYYY-MM-DD
+     update-trigger: [what context change should trigger a refresh]
+     ---
+     ```
+   - Preserve the article body content, AGENT_CONTEXT block, and Sources section
+5. **Publish**: Move the converted article to `~/shared/wiki/{category}/`
+   - Map the wiki category to the correct artifact folder (see table above)
+6. **Update cross-references**:
+   - Update `wiki-index.md` with the new article entry pointing to `~/shared/wiki/`
+   - Update the SITEMAP.md in `~/shared/wiki/`
+   - Add this article to the `consumed_by` field of any article it `depends_on`
+7. **Clean up**: Remove the staged version from `~/shared/wiki/`
+8. **Log**: Add entry to the wiki-index.md update log
+
+### Key principle: The wiki pipeline stays in `~/shared/wiki/`. The output goes to `~/shared/wiki/`.
+
+```
+~/shared/wiki/          ← PROCESS (research, drafts, reviews)
+  ├── research/                 ← Research briefs
+  ├── staging/                  ← Draft articles (wiki-writer writes here)
+  ├── reviews/                  ← Review reports (wiki-critic writes here)
+  ├── archive/                  ← Deprecated articles
+  ├── health/                   ← Health check reports
+  ├── wiki-index.md             ← Index OVER ~/shared/wiki/
+  ├── wiki-structure.md         ← This file (taxonomy, workflow)
+  └── roadmap.md                ← Content pipeline
+
+~/shared/wiki/             ← PRODUCT (published articles)
+  ├── testing/
+  ├── strategy/
+  ├── reporting/
+  ├── tools/
+  ├── communication/
+  ├── program-details/
+  ├── best-practices/
+  ├── SITEMAP.md
+  └── README.md
+```
+
+### Deprecated: `~/shared/wiki/published/`
+
+The `published/` directory is **deprecated**. Published articles go to `~/shared/wiki/{category}/`, not to `published/`. This directory exists as an empty placeholder and should not be used. All publishing workflows target the artifacts folder.
+
+## Document Types (Strategy vs. Execution)
+
+Every article has a `doc-type` field that determines its audience and purpose:
+
+| doc-type | Audience | Purpose | Tone | Example |
+|----------|----------|---------|------|---------|
+| `strategy` | Leadership (L7+), cross-team stakeholders | Why we do this, what the results mean, how it connects to the business. Opens with impact, embeds data in narrative, ends with "so what." | Narrative-driven, Amazon writing norms | OCI Rollout Playbook, Competitive Landscape, ie%CCP Framework |
+| `execution` | Teammates, market owners, new hires | How to actually do the thing. Step-by-step, checklists, troubleshooting, templates. A person should be able to follow this doc without asking the author. | Direct, procedural, show-don't-tell | OCI Execution Guide, Campaign Structure Standards, Invoice Process Guide |
+| `reference` | Anyone (both audiences) | Canonical data source. Tables, trackers, contact lists. Updated on cadence, not written once. | Clean tables, minimal narrative, "last updated" prominent | Market Reference, WW Testing Tracker, Team Workload Distribution |
+
+### How to choose doc-type
+
+Ask: "Who reads this, and what do they do after reading it?"
+
+- If they **make a decision** (fund it, approve it, prioritize it) → `strategy`
+- If they **do a task** (build a campaign, submit an invoice, run a test) → `execution`
+- If they **look something up** (a market's CPA, a competitor's IS, a contact) → `reference`
+
+### Frontmatter addition
+
+Add `doc-type: strategy | execution | reference` to every artifact's frontmatter. Example:
+
+```yaml
+---
+title: OCI Rollout Playbook
+status: DRAFT
+doc-type: strategy
+audience: amazon-internal
+level: 2
+---
+```
+
+### When a topic needs both
+
+Some topics need both a strategy doc and an execution doc. The rule: **one topic, two docs, clear cross-references.** The strategy doc links to the execution doc ("for step-by-step implementation, see [Execution Guide]") and vice versa ("for the business case and results, see [Playbook]").
+
+Current examples:
+- OCI: Playbook (strategy) + Execution Guide (execution)
+- Ad Copy: Testing Framework (strategy) + Campaign Structure Standards has the execution rules
+- Polaris: Rollout Status (reference) + Landing Page Testing Playbook (execution)
+
+---
+
+## Taxonomy (controlled vocabulary for tags)
+
+### Domain tags
+paid-search, brand, non-brand, oci, ad-copy, landing-page, bid-strategy, budget, cpa, cvr, cpc
+
+### Market tags
+us, ca, jp, uk, de, fr, it, es, au, mx, eu5, najp, abix, ww
+
+### Process tags
+wbr, callout, testing, reporting, automation, delegation, morning-routine
+
+### System tags
+body-system, agent, hook, steering, tool, mcp, agent-bridge
+
+### Artifact type tags
+market-wiki, test-design, pov, playbook, tool-spec, handoff, knowledge-share, dashboard, tracker, process-guide

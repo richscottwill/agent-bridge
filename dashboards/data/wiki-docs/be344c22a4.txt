@@ -1,0 +1,34 @@
+<!-- DOC-0470 | duck_id: wiki-review-five-year-outlook-v2-review -->
+
+# Review: Paid Search Five-Year Outlook: 2026–2030 (v2)
+
+Eval: A (Rubric)
+Reviewer: wiki-critic
+Date: 2026-04-05
+Audience: Leadership (Kate Rundell L8, Brandon Munday L7)
+Previous scores: U8 / C7 / A8 / D6 / E6 = 7.0 (REVISE)
+
+## Scores
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 9/10 | Purpose now opens with an explicit decision ask ("requests leadership endorsement of the 2026 test plan… all within existing budget allocation") and the bet table gives Kate four go/no-go gates she can track. Each bet has a defined fallback. Kate can act on this document without assembling the implications herself. |
+| Clarity | 8/10 | Main body is roughly 1,700 words — well within the two-page Kate-level maximum. Year sections carry confidence labels in headers. The appendix-heavy structure correctly pushes 2028–2030 speculation out of the main argument. The downside paragraph consolidates hedges into one place. Headers tell the story: Purpose → Executive Summary → 2026 → 2027 → Downside → Appendices. |
+| Accuracy | 8/10 | OCI deployment claim now precise with market-by-market dates and timeline for remaining three markets. AI Max "14% more conversions" correctly attributed to Google aggregate with the AB conversion-event caveat. The $15T Gartner projection explicitly flagged as aspirational. Confidence tiering in frontmatter is honest. External citation ranges (AI Overview CTR impact: 25–48% of queries, 35–61% organic CTR reduction) are presented as ranges rather than false-precision midpoints — appropriate handling. |
+| Dual-audience | 8/10 | AGENT_CONTEXT block is comprehensive: `depends_on`, `consumed_by`, `tags`, `category`, `refresh_trigger`, `decision_framework`, `key_entities`, and a `machine_summary` that lets an agent extract the core thesis without parsing the full document. YAML frontmatter includes confidence tiering and update triggers. Prose serves humans with narrative structure and scannable headers. Minor gap: frontmatter says `audience: amazon-internal` but the actual audience is Leadership — a metadata inconsistency an agent would misindex. |
+| Economy | 8/10 | "Broader Agentic Evolution" section eliminated. 2029–2030 merged into a single appendix section. Per-year hedges consolidated into one downside paragraph. The bet table is the argument — it earns its main-body placement. No bullet lists in the main body. No formatting-as-content issues. The table has a framing sentence before it and a contextualizing paragraph after (no table-abuse flag). Appendix B's reference list is in the appendix and doesn't count. Tight throughout. |
+| **Overall** | **8.2/10** | |
+
+## Verdict
+PUBLISH
+
+All six required changes from v1 addressed. No dimension below 7. Average exceeds 8.
+
+## Suggestions (optional, non-blocking)
+
+1. **Frontmatter audience field**: Change `audience: amazon-internal` to `audience: leadership` (or add a separate `target_reader` field listing Kate and Brandon). The current value is technically correct but too broad — an agent querying "which docs are for Kate?" would miss this one.
+
+2. **Purpose paragraph 2 overlap**: The second Purpose paragraph ("The core thesis is twofold…") previews what the year sections demonstrate. It earns its place as thesis framing, but the final sentence ("The question is not whether these shifts happen, but how fast the external environment accelerates or constrains them") is a rhetorical flourish that doesn't add information Kate needs. Consider cutting it or replacing it with a concrete statement about what "fast" versus "slow" means for the team's investment posture.
+
+3. **Appendix C confidence label**: The appendix opens with "Confidence: LOW. This section is scenario planning, not operational planning." — clear and useful. Consider adding the same one-line confidence framing to Appendix A ("Sources are tiered by confidence: HIGH = internally measured, MEDIUM = external/not AB-specific, LOW = industry forecasts") since the body text of Appendix A already uses these tiers but doesn't define them until mid-paragraph. The v1 review suggested this and the writer partially addressed it by adding explanatory sentences, but a lead-in definition line would make it scannable.
+
+4. **Agentic tooling bet specificity**: The bet table's "If it doesn't" column for agentic tooling reads "No sunk cost — infrastructure persists and delivers value for Richard regardless." This is the only bet where the fallback references Richard by name rather than describing a team-level outcome. Kate may read this as a personal project rather than a team investment. Consider rephrasing to "Infrastructure persists for team use; no incremental cost if adoption is slower than planned."

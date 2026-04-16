@@ -1,0 +1,16 @@
+# IT — W14 (Mar 29–4)
+
+IT drove 1.3K registrations (-1% WoW), with -2% spend WoW. CPA $71. Mar is projected to end at $411K spend and 5.7K registrations, and $72 CPA.
+On the Brand side, registrations fell -5% (924 to 879), clicks -5%. On the NB side, registrations increased +8% (423 to 455), CVR +22%, clicks -12%.
+YoY we spent +73% with +10% registrations. NB regs +23% YoY. Brand regs +5% YoY. NB CPA +97% YoY ($76 vs $149).
+
+Note: W14 WoW last year was -9% regs.
+
+---
+
+Weekly trend (regs): W7: 1274 | W8: 1305 | W9: 1332 | W10: 1149 | W11: 1441 | W12: 1250 | W13: 1347 | W14: 1334
+
+Flagged anomalies:
+- nb regs above recent avg by 21%
+
+Daily: Sun 196, Mon 119, Tue 173, Wed 187, Thu 286, Fri 242, Sat 131

@@ -1,0 +1,27 @@
+<!-- DOC-0062 | duck_id: callout-jp-2026-w13 -->
+
+# JP — W13 (Mar 22–28)
+
+JP drove 557 registrations (+29% WoW), the highest in the 8-week trend, with +30% spend WoW. CPA $85 (+1% WoW). March is projected to end at $182K spend and 2.3K registrations, at $80 CPA. (vs. OP2: +7% spend, -5% registrations)
+Blended CVR recovered to 2.03% (+17% WoW), an 8-week high, and clicks rebounded +12%, supported by budget increases. Brand CVR hit 2.24% (+14% WoW) with CPA dropping to $61 (-13%). CPA held flat as spend grew proportionally. NB contributed 8 regs.
+YoY we spent +67% with +44% registrations. CPA at $85 vs $73 LY; volume growth is real but not efficient.
+Note: Fiscal year-end (Mar 31) suppression may concentrate on the final 1-2 business days. Budget specifics: Yahoo Brand Plus 40K→50K→65K Yen (3/16-3/18), Google Brand Plus +$220 (3/17-3/18), NB BAU tROAS 0.3→0.28 (3/23). MHLW was a government regulatory campaign that ended 1/31; its expiry is the structural driver of JP's volume decline from ~1,000 regs/week (W2-W5) to ~440 (W6-W9). W13's 557 is the highest week since that transition.
+
+---
+
+Weekly trend (regs): W6: 495 | W7: 436 | W8: 440 | W9: 406 | W10: 528 | W11: 518 | W12: 432 | W13: 557
+
+Flagged anomalies:
+- Spend at $47K, 41% above 8-week average (highest in trend)
+- CPC 26% above 8-week average ($1.73 vs $1.37)
+- NB CPC rising 3 consecutive weeks ($1.65 to $4.74)
+
+W14 watch:
+- Fiscal year-end daily data for Mar 30-31; suppression may be concentrated
+- Whether spend normalizes after budget increases or sustains at $47K level
+- April new fiscal year recovery; LY W14-W15 recovered to 498-547
+
+W14 optimization:
+- April 1 new fiscal year should lift Brand demand; LY saw recovery in W14-W15
+- Monitor whether budget increases sustain volume or just inflate CPC
+- NB unoptimized at 0-8 regs/week; access issues blocking optimization

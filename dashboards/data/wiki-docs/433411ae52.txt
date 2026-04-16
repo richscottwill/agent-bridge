@@ -1,0 +1,3 @@
+# EU Changes Log
+
+Multi-tab change log tracking campaign optimizations across EU5 markets (UK, DE, IT, FR, ES). Each tab records date, campaign, ad group, changes made, reason, and owner. Primarily Dec 2023 changes including disabling Search Partners and pausing high-CPA ad groups.

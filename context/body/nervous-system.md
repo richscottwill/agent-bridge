@@ -33,7 +33,7 @@ Evaluates the work every other organ does. Looks backward, measures what happene
 #### Loop 1: Decision Audit
 Brain | Monthly | Score decisions VALIDATED/PARTIALLY/INVALIDATED/PENDING. INVALIDATED → flag principle.
 
-5 decisions PENDING audit (D1, D2, D3, D4, D7). Triggers: CA/JP/EU3 data Jul 2026, monthly CPA, UK +31% regs (IT when volume), Polaris +30d, deep dive data.
+Triggers: CA/JP/EU3 data Jul 2026, monthly CPA, UK +31% regs (IT when volume), Polaris +30d, deep dive data. 5 decisions PENDING audit (D1, D2, D3, D4, D7).
 
 ### Loop 2: Prediction Scoring
 Eyes | Daily + weekly | Score predicted QA: HIT/MISS/SURPRISE. Target ≥60%. Currently inactive — predicted QA cleared from Eyes (stale content experiment, Run 18). Reactivate when AM-2 generates fresh predictions.
@@ -102,10 +102,14 @@ T1 (builders+proof) → experiments. T2 (practitioners) → reject unless contex
 Hedy data | Weekly | Speaking share, hedging, filler words, turn length.
 
 #### Baselines & Thresholds
-Hedy integrated (Run 8). 9+ sessions processed.
-- 1:1s: ~40% share (healthy baseline), hedging 0 (strong)
-- Groups: target ≥20% share, currently <15% (gap). Hedging not yet measured.
-- Confirmed pattern: Strong in 1:1s but <15% in groups (Deep Dive, Weekly Sync). Structural — Richard goes quiet when Andrew or others dominate airtime.
+Hedy integrated (Run 8). 9+ sessions processed. Measurement: speaking share (% of total talk time), hedging frequency, filler words, turn length.
+
+| Setting | Speaking Share | Hedging | Status |
+|---------|--------------|---------|--------|
+| 1:1s | ~40% (healthy) | 0 (strong) | ✅ At baseline |
+| Groups | <15% (gap) | Not yet measured | ⚠️ Target ≥20% |
+
+**Root cause:** Richard goes quiet when Andrew or others dominate airtime. Confirmed across Deep Dive and Weekly Sync sessions. This is structural, not situational — it happens consistently in multi-person settings.
 
 #### Latest Sessions (4/2)
 - Market Expansion Playbook Review (53 min): Richard PRESENTED — visibility breakthrough. Led session, team engaged, action items assigned TO him. Strong L2.

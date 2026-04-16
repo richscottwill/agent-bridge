@@ -1,0 +1,3 @@
+# Paid Acquisition SIMs
+Source: https://quip-amazon.com/WdY9AAy8tDh
+SIM tracker for ABMA requests, PS team SIMs. Moved to Loop. Key open items: PS ENG inclusion in iECCP, EU traffic investigation, LiveRamp F90 ENG legal.

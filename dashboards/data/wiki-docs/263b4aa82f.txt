@@ -1,0 +1,4 @@
+# PS Testing: UK MAC Impact
+Source: https://quip-amazon.com/YEG9AAoOEiO
+
+Conclusion: No significant positive impact of MAC campaigns on UK Brand performance. MAC-active periods showed -25% impressions, -9% clicks, -10% regs vs non-active. CPA identical ($63). Seasonality analysis confirms no lift.

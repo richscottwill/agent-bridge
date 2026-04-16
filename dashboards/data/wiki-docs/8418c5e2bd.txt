@@ -1,0 +1,55 @@
+<!-- DOC-0199 | duck_id: meeting-au-paid-search-sync -->
+
+# AU Paid Search Sync
+
+## Metadata
+- Cadence: Weekly
+- Attendees: Richard Williams, Alexis Eck (L6, Sydney), Lena Zak (L7, AU Country Leader, Sydney), Harsha Mudradi
+- Hedy Topic: AU (ID: N6kHmgM0rOdDdah7iNNf)
+- Hedy Sessions: 4
+- Outlook Series: AB AU Paid Search Sync
+
+## Context
+Richard owns all AU paid search optimization and stakeholder communication. Lena is the hardest stakeholder to satisfy — she's data-demanding, expects numbers not narratives, and has escalated to leadership (challenged $6 avg CPC vs consumer benchmarks). Alexis is collaborative and a strong execution partner who defers to Lena on strategic direction. AU launched June 2025. No Shopping Ads available for AB. OCI planned May 2026. Weekly CPA target ~$140.
+
+Key dynamic: Richard must always have AU metrics loaded before any Lena interaction. Lead with data, be clear about timelines. Alexis is the day-to-day partner; Lena sets direction.
+
+## Latest Session
+### 2026-03-24 — AU Paid Search Performance and MCS Migration (34 min)
+- Improved efficiency this week: lower spend but stable registration volume — positive ROI movement
+- All non-selling keyword categories (perishables, alcohol) paused and added as negatives — contributing to CPA improvement
+- MCS → Polaris migration completing today/tomorrow
+- Two-campaign structure proposed: product-intent vs business-intent keywords. Alexis agreed — "I think this is a really good idea. It's a solid idea."
+- Biweekly keyword review cadence agreed — Richard: "My intuition is every two weeks... over time there's going to be diminishing returns"
+- Alexis offered to help with keyword-level analysis: "Don't hesitate to use me. I'm really happy to help you on that."
+- Strategy question raised: should targeting focus on product intent (what businesses buy) or business intent (search terms implying business ownership like "business cards")? Current structure mixes both — separation would improve bid strategy optimization.
+- Alexis: "I'm not sure if it's the expectation for us in the country to define it or for you guys within the central team to provide it to us." — Richard acknowledged it's both, with product-intent as the near-term focus and business-intent as future expansion.
+- Tracking concern: new MCS pages with multiple navigation points could dilute registration conversion. Current MCS-driven registrations are low (1-2/week) — easy to detect changes post-migration.
+- Ref tag tracking should persist unless overridden. Main risk is user drift from increased navigation options.
+- MCS page replication from MX model discussed — Alexis: "We would be eager to try and replicate the Mexico custom pages." Richard: needs strategic justification (e.g., paper product test) to prioritize with MCS team. Global urgency > market-specific asks.
+- Alexis: "If you're having this conversation with the MCS team and you need support from us to prioritize, feel free to include us in the loop."
+- Decisions: Two-campaign structure pilot approved. Biweekly keyword review cadence. Rolling 4-week CPA view for trend analysis. MCS migration proceeds with close monitoring.
+- Action items:
+  - Richard: compile rolling 4-week keyword CPA dashboard (due ~4/2)
+  - Richard: verify tracking integrity on new Polaris LP pages with MCS team
+  - Richard: finalize negative keyword list for non-selling categories
+  - Richard: establish biweekly keyword review cadence
+
+## Running Themes
+- AU CPC defense: B2B inherently higher than consumer; building data narrative for Lena
+- Polaris migration: full switch confirmed, tracking integrity validation in progress
+- Keyword optimization: surgical approach (outlier analysis) over broad cuts
+- Two-campaign structure: product-intent vs business-intent — pilot approved
+- OCI timeline: May 2026 — will help with bidding and attribution
+- Lena's 3 priorities: keyword CPC/CPA investigation, keyword-to-product mapping, Polaris migration
+- MCS page replication: MX model as template, needs global urgency justification
+- Alexis as collaborative partner: "don't hesitate to use me"
+
+## Open Items
+- [ ] Rolling 4-week keyword CPA dashboard (due ~4/2)
+- [ ] Verify tracking integrity on Polaris LP pages post-migration
+- [ ] Finalize negative keyword list (alcohol, perishables, etc.)
+- [ ] Pilot business-intent vs product-intent campaign structure
+- [ ] Assess feasibility of replicating MX custom MCS pages for AU (needs strategic justification)
+- [ ] Coordinate with MCS team on tracking/attribution post-migration
+- [ ] Establish biweekly keyword review cadence

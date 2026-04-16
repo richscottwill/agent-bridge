@@ -1,0 +1,14 @@
+<!-- DOC-0066 | duck_id: callout-jp-context -->
+
+# JP Paid Search — Market Context
+
+Last updated: 2026-03-30
+
+## Agent Configuration
+- markets: [JP]
+- has_yoy: true
+- has_ieccp: false
+- headline_extras: []
+- regional_summary: false
+- spend_strategy: OP2 targets, post-MHLW baseline
+- projection_notes: MHLW loss is structural, fiscal year end March 31

@@ -1,0 +1,3 @@
+# Paid Search Campaign Request Form - CA CPS
+Source: https://quip-amazon.com/QQW9AADRqL9
+Template for CPS campaign requests. Fields: budget, timing, LP, audiences, keywords, ad copy, ref markers, PO.

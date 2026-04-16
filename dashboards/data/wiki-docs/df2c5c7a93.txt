@@ -1,0 +1,3 @@
+# Deep Dive & Debate
+Source: https://quip-amazon.com/ZJR9AAdi0DC
+Team knowledge base: OCI setup instructions, account consolidation, AI tools (Jasper, Amazon Q, Cedric), Adobe reporting, PO/MBET process, ref tag restructure, dashboard automation, Gen AI efficiency improvements, Connections feedback.

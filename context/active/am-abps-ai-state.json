@@ -1,45 +1,17 @@
 {
-  "generated": "2026-04-15T01:48:00Z",
-  "version": "pm-scan",
-  "project_gid": "1213917352480610",
-  "total_tasks": 44,
-  "sections": {
-    "Intake": {
-      "count": 3,
-      "tasks": [
-        {"gid": "1213953295002324", "name": "✅ Approve: OCI Execution Guide", "kiro_rw": "Approved, moved to Review"},
-        {"gid": "1213954957645131", "name": "✅ Approve: AU Paid Search — Market Wiki", "kiro_rw": "Approved, moved to Review"},
-        {"gid": "1213954957625028", "name": "✅ Approve: Enhanced Match / LiveRamp", "kiro_rw": "Approved, moved to Review"}
-      ],
-      "note": "3 tasks in Intake but all already approved and moved to Review pipeline. Section may need cleanup."
+  "generated": "2026-04-15T06:55:00-07:00",
+  "pipeline_state": {
+    "total_articles": 19,
+    "by_status": {
+      "intake": 0,
+      "in_progress": 0,
+      "review": 0,
+      "active": 19
     },
-    "Review": {
-      "count": 41,
-      "published_final": [
-        "ie%CCP Planning & Optimization Framework (8.6/8.2)",
-        "Enhanced Match / LiveRamp (8.2/8.2)",
-        "Paid Search Testing Approach (8.4/8.2)",
-        "OCI Rollout Playbook (8.4/7.8)",
-        "OCI Execution Guide (8.6/8.8)",
-        "AU Paid Search — Market Wiki (8.4/8.0)"
-      ],
-      "needs_refresh": [
-        "F90 Lifecycle Program Strategy",
-        "AU Keyword CPA Dashboard — Design",
-        "Q2 2026 Initiative Status & Priorities",
-        "MX Paid Search — Market Wiki",
-        "WW Testing Tracker",
-        "Cross-Market Playbook"
-      ],
-      "note": "41 tasks in Review. 6 published FINAL. Remaining 35 have 4/4 wiki sync status — need review cycle refresh."
-    }
+    "near_due": [],
+    "overdue": [],
+    "refresh_needed": []
   },
-  "near_due_tasks": [],
-  "overdue_tasks": [],
-  "intake_needing_triage": [],
-  "recommendations": [
-    "Move 3 approved Intake tasks to Review section in Asana (they're already marked approved)",
-    "35 Review tasks have stale 4/4 wiki sync status — batch refresh recommended",
-    "6 published FINAL articles should be moved to a Published/Done section"
-  ]
+  "triage_needed": [],
+  "notes": "All 19 ABPS AI articles are in Wiki block, Not urgent. No near-due or overdue items. No intake triage needed."
 }

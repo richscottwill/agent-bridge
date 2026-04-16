@@ -1,0 +1,65 @@
+{
+  "cached_at": "2026-04-15T20:00:00+00:00",
+  "exp_summary": {
+    "latest_run": 26,
+    "total_runs": 11,
+    "total_experiments": 115,
+    "total_kept": 92,
+    "total_reverted": 23
+  },
+  "experiment_history": [
+    {"id":115,"run_id":26,"organ":"brain","section":"OP1 Strategic Narrative","technique":"REMOVE","decision":"REVERT","words_before":1257,"words_after":1210,"word_delta":-47,"score_a":0.375,"score_b":1.0,"started_at":"2026-04-04 15:14:10","notes":null},
+    {"id":114,"run_id":26,"organ":"device","section":"Tool Factory","technique":"RESTRUCTURE","decision":"KEEP","words_before":1242,"words_after":1242,"word_delta":0,"score_a":1.0,"score_b":1.0,"started_at":"2026-04-04 15:14:10","notes":null},
+    {"id":112,"run_id":26,"organ":"nervous-system","section":"Loop 3 Pattern table","technique":"MERGE","decision":"KEEP","words_before":928,"words_after":859,"word_delta":-69,"score_a":1.0,"score_b":1.0,"started_at":"2026-04-04 15:14:10","notes":null},
+    {"id":111,"run_id":26,"organ":"heart","section":"DuckDB Integration","technique":"RESTRUCTURE","decision":"KEEP","words_before":3197,"words_after":3198,"word_delta":1,"score_a":1.0,"score_b":1.0,"started_at":"2026-04-04 15:14:10","notes":null},
+    {"id":110,"run_id":26,"organ":"heart","section":"Design Choices","technique":"COMPRESS","decision":"KEEP","words_before":3461,"words_after":3197,"word_delta":-264,"score_a":1.0,"score_b":1.0,"started_at":"2026-04-04 15:14:10","notes":null},
+    {"id":108,"run_id":26,"organ":"amcc","section":"Growth Model","technique":"SPLIT","decision":"KEEP","words_before":2090,"words_after":2090,"word_delta":0,"score_a":1.0,"score_b":1.0,"started_at":"2026-04-04 15:14:10","notes":null},
+    {"id":105,"run_id":25,"organ":"wiki-critic","section":"ABPS Asana scoring","technique":"REWORD","decision":"KEEP","words_before":2397,"words_after":2539,"word_delta":142,"score_a":0.86,"score_b":0.79,"started_at":"2026-04-04 20:09:00","notes":"Inlined 10/7/4/1 scoring anchors"},
+    {"id":103,"run_id":25,"organ":"body","section":"Task Routing","technique":"REWORD","decision":"KEEP","words_before":1028,"words_after":1005,"word_delta":-23,"score_a":1.0,"score_b":1.0,"started_at":"2026-04-04 20:07:00","notes":"Organ names replaced with file paths"},
+    {"id":102,"run_id":25,"organ":"heart","section":"Hyperparameters","technique":"COMPRESS","decision":"KEEP","words_before":3621,"words_after":3478,"word_delta":-143,"score_a":1.0,"score_b":1.0,"started_at":"2026-04-04 20:06:00","notes":"Removed Rationale column"},
+    {"id":101,"run_id":25,"organ":"brain","section":"Leverage Assessment","technique":"COMPRESS","decision":"KEEP","words_before":1431,"words_after":1243,"word_delta":-188,"score_a":1.0,"score_b":1.0,"started_at":"2026-04-04 20:05:00","notes":"Each tiebreaker compressed to rule"}
+  ],
+  "experiment_by_organ": [
+    {"organ":"brain","exp_count":12,"kept":7,"total_delta":-660},
+    {"organ":"memory","exp_count":11,"kept":8,"total_delta":-1080},
+    {"organ":"device","exp_count":10,"kept":8,"total_delta":-649},
+    {"organ":"eyes","exp_count":9,"kept":7,"total_delta":-509},
+    {"organ":"nervous-system","exp_count":8,"kept":8,"total_delta":-590},
+    {"organ":"amcc","exp_count":8,"kept":5,"total_delta":-292},
+    {"organ":"gut","exp_count":7,"kept":5,"total_delta":-426},
+    {"organ":"spine","exp_count":7,"kept":6,"total_delta":-1026},
+    {"organ":"hands","exp_count":6,"kept":3,"total_delta":-215},
+    {"organ":"heart","exp_count":3,"kept":3,"total_delta":-406},
+    {"organ":"body","exp_count":1,"kept":1,"total_delta":-23}
+  ],
+  "organ_health": [
+    {"organ":"gut","word_count":2113,"utilization":1.006,"accuracy_estimate":1.0},
+    {"organ":"amcc","word_count":2090,"utilization":1.045,"accuracy_estimate":1.0},
+    {"organ":"memory","word_count":1738,"utilization":0.497,"accuracy_estimate":1.0},
+    {"organ":"heart","word_count":3198,"utilization":0.914,"accuracy_estimate":1.0},
+    {"organ":"nervous-system","word_count":859,"utilization":0.573,"accuracy_estimate":1.0},
+    {"organ":"device","word_count":1242,"utilization":0.621,"accuracy_estimate":1.0},
+    {"organ":"brain","word_count":1257,"utilization":0.503,"accuracy_estimate":1.0}
+  ],
+  "streak_history": [
+    {"tracker_date":"2026-04-15","workdays_at_zero":18,"artifact_shipped":false,"artifact_name":null,"hard_thing_name":"Testing Document for Kate","notes":null},
+    {"tracker_date":"2026-04-14","workdays_at_zero":0,"artifact_shipped":false,"artifact_name":null,"hard_thing_name":"Send Testing Approach v5 to Brandon","notes":"AM-Backend: Doc is v5 PUBLISH (8.4/10). 5 minor fixes remain."},
+    {"tracker_date":"2026-04-13","workdays_at_zero":0,"artifact_shipped":false,"artifact_name":null,"hard_thing_name":"Send Testing Approach v5 to Brandon","notes":null},
+    {"tracker_date":"2026-04-09","workdays_at_zero":0,"artifact_shipped":false,"artifact_name":null,"hard_thing_name":"Send Testing Approach v5 to Brandon","notes":"Testing Doc 8d overdue."},
+    {"tracker_date":"2026-04-08","workdays_at_zero":0,"artifact_shipped":false,"artifact_name":null,"hard_thing_name":"Send Testing Approach v5 to Brandon","notes":"Testing doc 7d overdue."},
+    {"tracker_date":"2026-04-07","workdays_at_zero":0,"artifact_shipped":false,"artifact_name":null,"hard_thing_name":"Send Testing Approach v5 to Brandon","notes":"Streak at 1 day from 4/5 completion."},
+    {"tracker_date":"2026-04-06","workdays_at_zero":18,"artifact_shipped":false,"artifact_name":null,"hard_thing_name":"Send Testing Approach v5 to Brandon","notes":"Kate meeting canceled but doc still valuable."},
+    {"tracker_date":"2026-04-05","workdays_at_zero":17,"artifact_shipped":false,"artifact_name":null,"hard_thing_name":"Testing Document for Kate","notes":null},
+    {"tracker_date":"2026-04-04","workdays_at_zero":16,"artifact_shipped":false,"artifact_name":null,"hard_thing_name":"Testing Document for Kate","notes":null},
+    {"tracker_date":"2026-04-03","workdays_at_zero":15,"artifact_shipped":false,"artifact_name":null,"hard_thing_name":"Testing Document for Kate","notes":null}
+  ],
+  "patterns": [
+    {"pattern_name":"Visibility avoidance","status":"WORSENING","weeks_active":11,"gate_or_fix":"Testing Approach doc (L1 gate)","first_detected":"2026-01-26","updated_at":"2026-04-06 03:14:37"},
+    {"pattern_name":"Admin displacement","status":"STUCK","weeks_active":3,"gate_or_fix":"Pre-written response templates needed","first_detected":"2026-03-17","updated_at":"2026-04-06 03:14:37"},
+    {"pattern_name":"Reactive fire drills","status":"STUCK","weeks_active":3,"gate_or_fix":"Pre-written response templates needed","first_detected":"2026-03-17","updated_at":"2026-04-06 03:14:37"},
+    {"pattern_name":"Have Backbone avoidance","status":"IMPROVING","weeks_active":1,"gate_or_fix":"Annual review peer feedback","first_detected":"2026-03-31","updated_at":"2026-04-06 03:14:37"},
+    {"pattern_name":"Project management gaps","status":"IMPROVING","weeks_active":1,"gate_or_fix":"Forte 2025 — lightweight tracking","first_detected":"2026-03-31","updated_at":"2026-04-06 03:14:37"}
+  ],
+  "five_levels_weekly": [],
+  "weekly_output": []
+}

@@ -1,0 +1,3 @@
+# EU CPS Ad Copy
+
+EU5 CPS ad copy for MIT Gated LP and State of Procurement Gated LP campaigns. 15 headlines and 4 descriptions per market, localized into EN (UK), DE, FR, IT, and ES. Character counts included. Covers procurement optimization, digital procurement, sustainable procurement, and business buying themes.

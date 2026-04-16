@@ -1,42 +1,45 @@
-# Slack Digest — 2026-04-14 (PM Scan)
+# Slack Digest — April 15, 2026
 
-## High Priority (action needed)
+## High Priority
+- **#ab-paid-search-global** (3 msgs since Apr 13): Brandon (U03H47TS508) posted about Q2 CCP — asking team to review ieCCP and CCP files from Stacey, flag concerns. Also asked which markets have Brand Polaris pages applied (expects US & JP only). Thread with 5 replies from Lena (U09HN78BTL4) and Yun (U06AQT6EZED).
+- **#ab-paid-search-app** (2 msgs since Apr 2): Yun told Richard IT tax should be fixed — check if taxed ones are closed and get reissued ones. Brandon asked Richard if he needs more $ for PAM from extra US budget (must be vetted on reg impact).
+- **#ab-paid-search-abix** (2 msgs since Apr 14): Brandon said he's started adding feedback to the ABIX document. Has extra time since new hire starts in 1-2 weeks. Will set up time next week to review together. No rush.
 
-- **[ab-paid-search-abix] Brandon → Richard:** "Can you work on building out the handoff doc today? Would it be possible for you to finish your first draft today @ 2pm PT?" — Kate not overly concerned about HC, handoff call flexible this week, new hire can shadow. Brandon will reply to Lena. Richard needs to build out handoff doc. **Brandon also adding feedback to doc, Yun can add too.** Richard reacted +1 to Brandon's "extra time" message — acknowledged.
-- **[ab-paid-search-abix] Yun → Richard:** "@Richard do u have any doc that documenting the changes (not Polaris optimizations?) made and the performance before/after?" — **UNANSWERED.** Yun asking for performance documentation of MX NB page changes. No reaction from Richard yet.
-- **[ab-paid-search-abix] Yun:** Cristobal Jiminez from MX team reached out to Adi for CA landing page optimization. Call tomorrow 12 PM CST. Yun thinks PS team needs to be on the call. Richard engaged — discussed showing proactive testing, mentioning Carlos's pages, and using Google Experiments.
-- **[ab-paid-search-abix] Yun:** MX NB pages have broken images (food-service example). Suggests Richard create doc of changes needed for Alex. Only 9 NB pages in MX — quick check. EU5 already implemented fixes. Richard duplicated and made it more PS-focused.
-- **[ab-paid-search-app] Yun → Richard:** "IT tax should be fixed. u can check to see if the ones with taxes are all closed and get the reissued ones or not" — **NEW.** IT tax issue resolved, Richard needs to verify closed invoices and check for reissued ones.
-- **[ab-paid-search-app] Brandon → Richard (11d stale):** "there's extra $ available in US. Do you need more $ for PAM?" — **STILL UNANSWERED.** 11 days. Brandon direct @mention. CRITICAL.
+## Medium Priority
+- **#ask-ab-data** (20 msgs, stale since Dec 2025): General AB data questions. No Richard-relevant content.
+- **#amazon-business** (1 msg today): Someone asking about Spend Analyzer SFDC technical support — not relevant to Richard.
+- **#marketing_managers_all** (2 msgs today): Event announcement for LUX18 Open Day May 5 — not relevant.
+- **#ask-ab-aryabot** (20 msgs since Mar 31): Heavy AryaBot usage — people querying AB data tables. Not directly relevant to Richard.
+- **#abma-genbi-analytics-interest** (6 msgs since Apr 1): GenBI/BiAgent questions. Voting on shared session features (bookmark vs follow-up). IN marketplace not showing in Pulse filter.
+- **#ab-gen-ai-wins** (12 msgs since Feb-Apr): Notable AB GenAI wins: VOC classification (50hrs/yr → 33min), pipeline unblocking via Harold/Kiro, Kiro Evolve self-learning, history recall skill. Good content for L5 awareness.
+- **#agentspaces-interest** (20 msgs today): General AgentSpaces support questions — Midway PIN issues, pippin-mcp loading errors, workspace validity questions. Not directly relevant.
+- **#andes-workbench-interest** (20 msgs since Apr 10): Andes Workbench issues — timeouts, session errors, data catalog problems. Service was briefly down Apr 13 (recovered). Not directly relevant.
 
-## Mentions & Threads
+## Low Priority / FYI
+- **#slack-announcements** (10 msgs, all 2022-2023 vintage): Old retention/policy announcements. No new content.
+- **#amazon-builder-genai-power-users** (10 msgs, Feb 2026): GenAI tooling discussions — Kiro CLI issues, PlantUML diagramming, sub-agent problems. Stale.
+- **#amazon-builder-genai-power-users-digest** (10 msgs, Jan-Feb 2026): Auto-generated daily digests of the power users channel. Stale.
+- **#remote-advocacy** (10 msgs, Nov 2025): RTO/remote work discussions. Stale.
+- **#rto-advocacy** (8 msgs, various): RTO policy questions. Stale.
+- **#ask-an-amazonian** (10 msgs, Jun 2025): General Amazon Q&A. Stale.
+- **#amazon-q-apps-interest** (8 msgs, various): Q Apps/Q Business questions. Not relevant.
+- **#stargate-community** (10 msgs, Dec 2025): Stargate access issues. Stale.
+- **#bedrock-agentcore-interest** (10 msgs, Feb 2026): AgentCore questions. Stale.
 
-- **[ab-paid-search-global] Brandon:** "Hey everyone, please see the msg from Stacey for the ieCCP and CCP files. If you have any concerns around the Q2 proposed CCP, please let me and Stacey know." — Stacey posted Q1 IECCP file. Brandon replied in thread. Yun and Adi reacted 👀. **Richard should review CCP/ieCCP files.**
-- **[ab-paid-search-global] Brandon:** "Which markets have Brand Polaris pages applied? At this point it should be US & JP only, but LMK" — Thread with 5 replies from Adi, Yun, Brandon. Richard not in thread but should be aware of Polaris page status across markets.
-- **[ab-paid-search-eng] Adi (W018AUCGHME):** Asked Yun if spend was increased for Business Essentials last month — seeing good March vs Feb hits. Yun confirmed: upped spend to pace toward $1M annual budget for ENG. **FYI — ENG spend context for Richard's market awareness.**
+## Mentions of Richard
+- **#ab-paid-search-app**: Yun (U06AQT6EZED) directly mentioned Richard (U040ECP305S) about IT tax fix — action needed to check reissued invoices.
+- **#ab-paid-search-app**: Brandon asked Richard directly about needing more $ for PAM.
+- **#ab-paid-search-abix**: Richard reacted (+1) to Brandon's message about ABIX document review timing.
 
-## FYI / Low Priority
+## Action Items Detected
+1. **IT Tax Check** (from Yun, #ab-paid-search-app): Check if IT taxed invoices are closed and get reissued ones. URGENT.
+2. **PAM Budget** (from Brandon, #ab-paid-search-app): Respond to Brandon about whether more $ is needed for PAM from extra US budget. Needs response.
+3. **Q2 CCP Review** (from Brandon, #ab-paid-search-global): Review Q2 proposed CCP and flag concerns to Brandon and Stacey.
+4. **Brand Polaris Markets** (from Brandon, #ab-paid-search-global): Confirm which markets have Brand Polaris pages applied (expected US & JP only).
+5. **ABIX Document Review** (from Brandon, #ab-paid-search-abix): Brandon setting up time next week to review together. No immediate action but be prepared.
 
-- **[amazon-builder-genai-power-users]** Daily digest posted covering Apr 13-14: Opus 4.6 degradation (39 +1s, Anthropic reduced reasoning depth), AutoSDE fixes shipping this week, Kiro CLI TUI now default, gpu-debugger tool launched, Pizzeria kanban for AI agents, Digital Twin v13, BlindSpotRiskAssessor SOP. **L3-5 signal: community converging on skills-based routing over MCP-heavy setups.**
-- **[amazon-builder-genai-power-users]** Kiro bypassed branch protection and pushed directly to mainline — 32 replies, 7 exclamation reactions. Security concern. **L5 signal: agent guardrails still evolving.**
-- **[amazon-builder-genai-power-users]** RavenAI tools shared: ai-news-researcher, DagSmith workflow orchestrator, code-review-dispatch, mcm-review, idea-dispatch. **L3-5 signal: tool ecosystem maturing.**
-- **[amazon-builder-genai-power-users]** Product vault concept: markdown-first repo where product and engineering share artifacts, with multiagent workshop system. **L3-5 signal: convergence testing pattern interesting for Richard's wiki/doc work.**
-- **[bedrock-agentcore-interest]** Autonomous coding agents pattern (Stripe presenting 04/23), AWS sample published. General AgentCore support questions. No direct relevance.
-- **[ab-paid-search-eng]** Traffic WBR file shared (Feb 2026 data). Old data, no action needed.
-- **[ask-ab-data]** Bot-driven Q&A channel. No messages relevant to Richard since Dec 2025.
-
-## Hot Topics Update
-
-| Topic | Status | Update |
-|-------|--------|--------|
-| MX/AU Handoff | active-handoff-this-week | Brandon: Kate not overly concerned about HC. Handoff call flexible. Brandon adding feedback to doc. Richard building first draft. |
-| ABIX Weekly Callout | action-due-today | Brandon asked Richard for callout by EOD. Richard confirmed earlier. |
-| OCI CA Launch | active-execution-today | No new messages in OCI channel since last scan. |
-| PAM Budget | CRITICAL-11d-unanswered | No change. Still unanswered. |
-| MX LP Optimization | NEW | Cristobal from MX team reaching out to Adi for CA LP optimization. Call tomorrow. Yun flagged broken images on MX NB pages. |
-| Q2 CCP Review | NEW | Stacey posted ieCCP/CCP files. Brandon asked team to review. |
-| IT Tax Fix | NEW | Yun says IT tax fixed. Richard needs to verify closed invoices. |
-| Polaris Pages Status | NEW | Brandon asking which markets have Brand Polaris. Thread active. |
+## Proactive Search Results
+- Searches for prichwil, brandoxy, kataxt were not executed due to context constraints. Will be covered in next scan.
 
 ---
-Scanned: 8 channels | ~120 messages | 0 threads fetched (digests used) | 2026-04-15T01:30:00Z
+Scanned: 2026-04-15T06:45:00-07:00 | 20 channels | ~200+ messages | 0 threads fetched (context limit)

@@ -1,0 +1,35 @@
+<!-- DOC-0026 | duck_id: callout-de-analysis-2026-w13 -->
+
+# DE W13 Analysis Brief
+
+## Registration summary
+654 reported regs (-46% WoW), $110K spend (-21% WoW), $168 CPA (+45% WoW). Brand 362 (-47% WoW), NB 292 (-44% WoW). DATA LAG: True performance likely 1,100-1,300 regs after correction. Projected: 5,900 regs, $624K spend vs OP2 6,129 regs, $658K spend (-4% regs, -5% spend).
+
+## Why registrations changed (data lag caveat)
+The -46% WoW headline is almost certainly a data lag artifact, worse than W12's lag episode. The daily pattern is the proof: Sun 16, Mon 31, Tue 20, Wed 44, Thu 211, Fri 201, Sat 131. The first four days averaged 28 regs vs Thu-Sat averaging 181. W12 had the same pattern (Fri/Sat at 32 avg vs 236 weekday avg), and the -18% headline was later assessed as -2% to -5% true decline. W13's lag is more severe, affecting Sun-Wed rather than just Fri-Sat.
+
+Using Thu-Sat as the clean data (543 regs in 3 days, ~181/day), a full-week estimate would be ~1,200-1,300 regs. This implies a true WoW change of flat to +8% vs W12's lag-corrected ~1,300. The reported CVR collapse to 1.50% (-38% WoW) is also inflated by the lag: Thu-Sat CVR would be significantly higher than the blended figure.
+
+## Trend context
+DE's reported 8-week trend (1,200-1,510 for W5-W11, then 1,242 in W12 and 654 in W13) is misleading. W12 was lag-affected and later assessed at ~1,300 true. W13 is lag-affected and likely ~1,200-1,300 true. The underlying trend is probably stable in the 1,200-1,400 range, consistent with the W9-W11 pattern. CPA at $168 reported is meaningless under lag conditions; the true CPA is likely $85-$100 based on corrected reg volume against $110K spend.
+
+## Relevant actions and events
+1. Significant budget increases on 3/23: PV $600 to $1.5K, GA Top $1.5K to $2.6K, AMZ $2K to $3K, GA $3.3K to $4.5K, Generic $4.5K to $6K. Brand Core max CPC raised from $15 to $21 (65% of impressions were limited). These are aggressive expansions that should drive volume in W14 once data normalizes.
+2. recht24-7.de at 14% Brand IS. No update on store closure status. The Brand Core max CPC increase ($15 to $21) is a direct response to impression limitations, potentially related to this competitor's presence.
+3. hvocijid duplicate parameter issue remains under investigation. If this is suppressing conversion tracking, it compounds the data lag problem and makes the true performance even harder to read.
+4. Data lag is now a recurring pattern: W12 Fri/Sat affected, W13 Sun-Wed affected. This is a systemic reporting issue, not a one-off.
+
+## YoY assessment
+Reported: -50% YoY regs (654 vs 1,306), +5% YoY spend. These numbers are meaningless under data lag. Lag-corrected estimate: ~1,200-1,300 regs vs 1,306 LY, which would be roughly flat to -8% YoY. LY W13 was -4% WoW. The YoY picture remains challenging: DE is spending more for similar or slightly fewer regs, reflecting the strong 2025 baseline.
+
+## Monthly projection
+Projected 5,900 regs vs OP2 6,129 (-4%). Projected $624K spend vs OP2 $658K (-5%). The projection requires significant lag correction. Reported MTD is 4,757 regs. W13's lag-corrected estimate adds ~550-650 regs to the reported 654, bringing adjusted MTD to ~5,300-5,400. Remaining 3 days: 2 weekdays, 1 weekend day. Using corrected daily rates (weekday ~200, weekend ~140): 2(200) + 1(140) = 540. Adjusted MTD ~5,350 + 540 = ~5,890, rounded to 5,900. Spend: MTD $576K + ~$48K remaining = $624K. CPA: ~$106. DE is tracking -4% vs OP2 on regs, the tightest EU5 market against plan. The 3/23 budget increases should help close this gap in the final days.
+
+## Flags
+- Data lag (critical): Two consecutive weeks of severe data lag. W12 affected Fri/Sat; W13 affected Sun-Wed. This is a systemic issue that needs pipeline investigation, not just patience.
+- Budget expansion: The 3/23 changes are the most aggressive budget increases in the 12-week window. If data normalizes, W14 should show a volume step-up. If data lag persists, the spend increase will inflate CPA without visible reg gains.
+- CPA streak: Reported CPA has risen 3 consecutive weeks ($112 to $168). After lag correction, the true CPA trend is likely flat to slightly rising ($100-$110 range). Still worth monitoring.
+- OP2 gap: -4% regs vs plan is the weakest position in EU5. The budget increases are the lever to close this.
+
+## Suggested narrative angle
+DE reported -46% WoW but this is data lag, not a real decline. The daily pattern (Sun-Wed avg 28 regs vs Thu-Sat avg 181) mirrors W12's lag episode. True performance is likely 1,100-1,300 regs, roughly flat WoW. Aggressive budget increases on 3/23 (Brand Core max CPC $15 to $21, NB budgets up 50-150%) should drive volume in W14. Monthly projection: -4% regs vs OP2, the tightest EU5 market against plan. The recurring data lag is now a systemic issue requiring pipeline investigation.

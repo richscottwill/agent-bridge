@@ -1,132 +1,87 @@
 {
-  "generated": "2026-04-15T01:48:00Z",
-  "version": "pm-scan",
-  "enrichment_proposals": [
-    {
-      "task_gid": "1206497728159526",
-      "name": "Paid App - Prime Day Event",
-      "proposal": "Set Routine_RW=Engine Room, Priority_RW=Not urgent, due_on=2026-06-01. Kiro_RW: 4/14 PM scan — future event, no action until May.",
-      "reason": "Missing all custom fields, has due date 6/1"
-    },
-    {
-      "task_gid": "1213917923114330",
-      "name": "Share ENG max budget calculation file with Andrew",
-      "proposal": "Set Routine_RW=Sweep, Priority_RW=Not urgent. Kiro_RW: 4/14 PM scan — quick share task, no due date set.",
-      "reason": "Missing all custom fields, no due date"
-    },
-    {
-      "task_gid": "1213731008237682",
-      "name": "Come prepared: Bi-weekly with Adi to brainstorm usable AI",
-      "proposal": "Set Routine_RW=Core Two, Priority_RW=Not urgent. Kiro_RW: 4/14 PM scan — recurring prep task.",
-      "reason": "Missing all custom fields"
-    },
-    {
-      "task_gid": "1213637505601024",
-      "name": "R&O for MX/AU (help to input amount, and remind about confirming budgets)",
-      "proposal": "Set Routine_RW=Admin, Priority_RW=Urgent. Kiro_RW: 4/14 PM scan — admin/budget task, no due date.",
-      "reason": "Admin keyword detected (R&O, budgets), missing Routine_RW"
-    },
-    {
-      "task_gid": "1213560614815911",
-      "name": "PAM R&O",
-      "proposal": "Set Routine_RW=Admin, Priority_RW=Urgent. Kiro_RW: 4/14 PM scan — PAM R&O is admin/budget work.",
-      "reason": "Admin keyword detected (R&O, PAM), missing Routine_RW"
-    },
-    {
-      "task_gid": "1213690904654138",
-      "name": "Monthly: Individual Goals update",
-      "proposal": "Set Routine_RW=Admin, Priority_RW=Not urgent. Kiro_RW: 4/14 PM scan — monthly admin task.",
-      "reason": "Missing all custom fields"
-    },
-    {
-      "task_gid": "1213917691068688",
-      "name": "Send AU team invoice for prev month",
-      "proposal": "Set Routine_RW=Admin, Priority_RW=Urgent. Kiro_RW: 4/14 PM scan — invoice task, admin bucket.",
-      "reason": "Admin keyword detected (invoice), missing Routine_RW"
-    },
-    {
-      "task_gid": "1213917832711157",
-      "name": "Verify MX/AU net pacing against OP2 numbers",
-      "proposal": "Set Routine_RW=Engine Room, Priority_RW=Urgent. Kiro_RW: 4/14 PM scan — pacing verification.",
-      "reason": "Missing all custom fields"
-    },
-    {
-      "task_gid": "1213959904341162",
-      "name": "Reply to Brandon — PAM budget needs assessment",
-      "proposal": "Set Routine_RW=Sweep, Priority_RW=Today. Kiro_RW: 4/14 PM scan — CRITICAL 11d unanswered from Brandon.",
-      "reason": "CRITICAL signal — 11d unanswered direct @mention from manager"
-    },
-    {
-      "task_gid": "1214044802323478",
-      "name": "Raise PO for US PAM for $70K underreported amount",
-      "proposal": "Set Routine_RW=Admin, Priority_RW=Urgent. Kiro_RW: 4/14 PM scan — PO/budget admin task.",
-      "reason": "Admin keyword detected (PO), missing Routine_RW"
-    },
-    {
-      "task_gid": "1214068215142846",
-      "name": "PAM: Confirm FR pivot campaign structure",
-      "proposal": "Set Routine_RW=Engine Room, Priority_RW=Urgent. Kiro_RW: 4/14 PM scan — campaign structure work.",
-      "reason": "Missing all custom fields"
-    },
-    {
-      "task_gid": "1214068272596724",
-      "name": "PAM: Flag underspend risk to Brandon",
-      "proposal": "Set Routine_RW=Sweep, Priority_RW=Today. Kiro_RW: 4/14 PM scan — manager communication, ties to PAM budget signal.",
-      "reason": "Admin keyword detected (spend), missing Routine_RW"
-    },
-    {
-      "task_gid": "1214068215114017",
-      "name": "PAM: Check US/EU spend pacing vs Q2 budget",
-      "proposal": "Set Routine_RW=Engine Room, Priority_RW=Urgent. Kiro_RW: 4/14 PM scan — spend pacing check.",
-      "reason": "Admin keyword detected (spend, budget), missing Routine_RW"
-    }
-  ],
-  "admin_keyword_routing": [
-    {
-      "task_gid": "1213637505601024",
-      "name": "R&O for MX/AU",
-      "current_routine": null,
-      "proposed_routine": "Admin",
-      "keyword_match": "R&O, budgets"
-    },
-    {
-      "task_gid": "1213560614815911",
-      "name": "PAM R&O",
-      "current_routine": null,
-      "proposed_routine": "Admin",
-      "keyword_match": "R&O"
-    },
-    {
-      "task_gid": "1213917691068688",
-      "name": "Send AU team invoice for prev month",
-      "current_routine": null,
-      "proposed_routine": "Admin",
-      "keyword_match": "invoice"
-    },
-    {
-      "task_gid": "1214044802323478",
-      "name": "Raise PO for US PAM for $70K underreported amount",
-      "current_routine": null,
-      "proposed_routine": "Admin",
-      "keyword_match": "PO"
-    },
-    {
-      "task_gid": "1214044802323482",
-      "name": "Raise PO for Q2 instead of increasing to FY",
-      "current_routine": null,
-      "proposed_routine": "Admin",
-      "keyword_match": "PO"
-    }
-  ],
-  "bucket_cap_status": {
-    "sweep": {"count": 9, "cap": 5, "over": true, "note": "4 over cap after new task creation. Some are overdue and should be killed or completed."},
-    "core": {"count": 13, "cap": 4, "over": true, "note": "9 over cap. Heavy Core Two load — many are wiki or deep work."},
-    "engine_room": {"count": 21, "cap": 6, "over": true, "note": "15 over cap. Largest bucket. Many overdue."},
-    "admin": {"count": 5, "cap": 3, "over": true, "note": "2 over cap after new tasks."},
-    "wiki": {"count": 45, "cap": null, "over": false, "note": "Wiki has no cap — 44 ABPS AI content tasks."}
+  "generated": "2026-04-15T06:55:00-07:00",
+  "my_tasks": {
+    "escalations_auto_executed": [
+      {
+        "task_gid": "1213541622135762",
+        "name": "MBR callout",
+        "action": "Admin→Sweep escalation (13d overdue, 3d+ threshold)",
+        "note": "Task already completed 2026-04-08. Routine_RW updated to Sweep per admin-block-fix spec task 3.4. No functional impact."
+      }
+    ],
+    "enrichment_proposals": [
+      {
+        "task_gid": "1213341921686564",
+        "name": "Testing Document for Kate",
+        "proposal": "14d overdue. THE HARD THING. Core block 12:30-2PM today. Kiro_RW update: '4/15: 14d overdue. Core block today 12:30-2PM. Ship v5 to Brandon.'",
+        "priority": "critical"
+      },
+      {
+        "task_gid": "1213764961716427",
+        "name": "WW weblab dial-up (Richard)",
+        "proposal": "8d overdue, Urgent. Needs status update or date push. Kiro_RW: '4/15: 8d overdue. Confirm weblab status with Brandon.'",
+        "priority": "high"
+      },
+      {
+        "task_gid": "1213917772329115",
+        "name": "Provide Lorena Q2 expected spend for MX PO",
+        "proposal": "11d overdue, blocks Lorena. Admin-type task in Sweep. Kiro_RW: '4/15: 11d overdue. Lorena blocked. Send expected spend figure today.'",
+        "priority": "critical"
+      },
+      {
+        "task_gid": "1212808474749819",
+        "name": "Paid App PO — Create Q2 + Amend Google PO to Q2",
+        "proposal": "2d overdue, Urgent. Admin-type task in Sweep (Low-friction). Kiro_RW: '4/15: 2d overdue. PO action needed — Admin block today.'",
+        "priority": "high"
+      }
+    ],
+    "overdue_kill_or_revive": [
+      {
+        "task_gid": "1213329816575017",
+        "name": "Create FR accounts",
+        "days_overdue": 54,
+        "recommendation": "KILL — 54d overdue, Not urgent, Engine Room. No activity. Likely obsolete."
+      },
+      {
+        "task_gid": "1212760973200420",
+        "name": "Source DE/IT/ES",
+        "days_overdue": 54,
+        "recommendation": "KILL — 54d overdue, Not urgent, Engine Room. No activity. Likely obsolete."
+      },
+      {
+        "task_gid": "1213530860284714",
+        "name": "Page Creation - Duplicate Beauty and Auto page for MX",
+        "days_overdue": 23,
+        "recommendation": "REVIVE — Frank completed the blocking task 4/14. MX Auto page now unblocked. Update due date to this week."
+      },
+      {
+        "task_gid": "1212988092117041",
+        "name": "Paid App (workstream)",
+        "days_overdue": 15,
+        "recommendation": "REVIVE — Active workstream. Push due date to 4/30. Update Kiro_RW with current status."
+      },
+      {
+        "task_gid": "1213493347703132",
+        "name": "MCS landing page optimization P1",
+        "days_overdue": 15,
+        "recommendation": "REVIVE or DELEGATE — MCS-owned. Check if still relevant after Polaris revert."
+      }
+    ],
+    "bucket_cap_violations": [
+      {
+        "block": "Core Two (Deep Work)",
+        "count": 10,
+        "cap": 4,
+        "over_by": 6,
+        "recommendation": "6 tasks over cap. Candidates for demotion: F90 (Not urgent, due 4/30), Promo Test (Not urgent, no due), AppsFlyer setup (Not urgent, due 7/1), WW keyword gap fill (no due), AB Customer Redirect (no due — but Brandon asked for closure)."
+      },
+      {
+        "block": "Backlog (null Routine_RW)",
+        "count": 114,
+        "cap": "N/A",
+        "note": "114 unassigned tasks. 36 match admin-type keywords (budget/PO/invoice/spend/R&O). Per admin-block-fix spec, these should be triaged."
+      }
+    ]
   },
-  "admin_escalations": {
-    "executed": [],
-    "note": "MBR callout (1213541622135762) was 13d overdue Admin but already completed — no escalation needed."
-  }
+  "portfolio": {}
 }

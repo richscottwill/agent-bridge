@@ -91,12 +91,13 @@ Bulk/wholesale/B2B → price, quality, selection:
 - "Purchase at Wholesale Price" → "No Minimum Order Required"
 
 ### Results
-**UK AMZ Portfolio (Phase 1, Jan 29 - Mar 2, 2026):**
+
+#### UK AMZ Portfolio (Phase 1, Jan 29 - Mar 2, 2026)
 - Test vs Control: +86% CTR, +333% clicks, +230% cost
 - Pre/Post: +70% CTR, +28% clicks, +31% regs despite -25% impressions
 - Confidence: HIGH (30-day test, meaningful volume)
 
-**IT (Phase 1, Feb 19 - Mar 5, 2026):**
+#### IT (Phase 1, Feb 19 - Mar 5, 2026)
 - +15% CTR directionally, but volume too low (-97% clicks vs control)
 - Confidence: LOW (insufficient volume)
 

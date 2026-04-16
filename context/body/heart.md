@@ -246,26 +246,25 @@ Full data logged to DuckDB `autoresearch_experiments` table + `experiment-log.ts
 
 | Param | Value |
 |-------|-------|
+| keep_rule | delta_ab ≥ 0 |
+| brain_memory_rule | delta_ab ≥ 0, zero INCORRECT |
+| eval_method | A/B/C blind (A=modified+context, B=original+context, C=modified+zero context) |
+| eval_questions_per_exp | adaptive: low 2-3, medium 4-6, high 5-8 + standing adversarial |
+| prior_distribution | Beta(α, β), initialized Beta(1,1) |
+| target_selection | UCB (posterior_mean + posterior_std) |
+| experiment_cooldown_per_organ | same invocation |
+| staleness_threshold | 7 days |
 | max_experiments_per_batch | none (Bayesian priors self-terminate) |
 | total_body_ceiling | adaptive (plateaus in `autoresearch_organ_health`) |
 | organ_budgets | adaptive (baselines in gut.md, learned from priors) |
-| staleness_threshold | 7 days |
-| eval_questions_per_exp | adaptive: low 2-3, medium 4-6, high 5-8 + standing adversarial |
-| eval_method | A/B/C blind (A=modified+context, B=original+context, C=modified+zero context) |
-| keep_rule | delta_ab ≥ 0 |
-| brain_memory_rule | delta_ab ≥ 0, zero INCORRECT |
-| latency_signal | recorded per experiment | Not a gate — a covariate. Track baseline per target×technique. |
-| prior_distribution | Beta(α, β), initialized Beta(1,1) |
-| target_selection | UCB (posterior_mean + posterior_std) |
 | experiment_word_budget_rule | adaptive (gut.md) |
-| experiment_cooldown_per_organ | same invocation |
+| latency_signal | recorded per experiment — covariate, not a gate |
 | yield_metric | (abs(word_delta) × max(delta_ab, 0)) / estimated_tokens |
+| experiment_generation | random at runtime — no pre-designed queue, no named hypotheses |
 
 ---
 
 ## Experiment Queue
-
-No pre-designed experiments. No named hypotheses. No queue.
 
 Experiments are generated randomly at runtime by Karpathy. Each batch run:
 1. **Select organ** (weighted: over-budget first → staleness → random)

@@ -1,28 +1,100 @@
 {
-  "generated": "2026-04-15T01:48:00Z",
-  "version": "pm-scan",
-  "signals_processed": 12,
-  "tasks_created": [
-    {"gid": "1214068429496105", "name": "Respond to Yun — MX NB page performance doc", "source": "slack", "routine": "Sweep", "priority": "Today", "due": "2026-04-16"},
-    {"gid": "1214068275460844", "name": "Review Q2 CCP/ieCCP files from Stacey", "source": "slack", "routine": "Sweep", "priority": "Not urgent", "due": "2026-04-17"},
-    {"gid": "1214068429466521", "name": "Verify IT tax fix — check closed invoices + reissued ones", "source": "slack", "routine": "Admin", "priority": "Not urgent", "due": "2026-04-16"},
-    {"gid": "1214068319315340", "name": "Prep for MX LP optimization call (tomorrow 12 PM CST)", "source": "slack", "routine": "Sweep", "priority": "Today", "due": "2026-04-15"},
-    {"gid": "1214068429586218", "name": "RSVP: PSME Seattle Happy Hour", "source": "email", "routine": "Sweep", "priority": "Today", "due": "2026-04-15"},
-    {"gid": "1214068429588691", "name": "RSVP: Kate's AB Marketing Happy Hour", "source": "email", "routine": "Sweep", "priority": "Today", "due": "2026-04-15"},
-    {"gid": "1214068319365234", "name": "Approve OFA invoice workflow (Mohd Sadeq)", "source": "email", "routine": "Admin", "priority": "Today", "due": "2026-04-15"},
-    {"gid": "1214068319383964", "name": "Submit ABMA BTL requests (deadline today 4/14)", "source": "email", "routine": "Admin", "priority": "Urgent", "due": "2026-04-14"}
-  ],
-  "existing_tasks_matched": [
-    {"gid": "1213959904341162", "name": "Reply to Brandon — PAM budget needs assessment", "signal": "PAM budget 11d unanswered", "status": "exists, needs enrichment"},
-    {"gid": "1213235338214791", "name": "AB Customer Redirect", "signal": "Brandon comment — add details + close", "status": "exists, needs action"}
-  ],
-  "signals_skipped": [
-    {"signal": "Polaris pages status across markets", "reason": "FYI only, no task needed"},
-    {"signal": "ENG spend context", "reason": "FYI only, awareness signal"}
-  ],
-  "critical_flags": [
-    "PAM budget reply to Brandon — 11 DAYS UNANSWERED. Task exists (1213959904341162) but no Routine_RW or Priority_RW set. Queued for enrichment.",
-    "AB Customer Redirect — Brandon asked to add details and close. 1+ day old. Direct manager ask.",
-    "ABMA BTL deadline was 4/14 EOD — may have passed. Created task but flagged as potentially missed."
-  ]
+  "generated": "2026-04-15T06:55:00-07:00",
+  "signals": {
+    "slack": {
+      "high_priority": [
+        {
+          "source": "#ab-paid-search-app",
+          "from": "Yun",
+          "signal": "IT tax fix confirmed — Richard needs to check closed invoices + get reissued ones",
+          "action": "respond",
+          "task_created": false,
+          "existing_task": "1214068319383964"
+        },
+        {
+          "source": "#ab-paid-search-app",
+          "from": "Brandon",
+          "signal": "Asking if Richard needs more $ for PAM from extra US budget — must vet on reg impact",
+          "action": "respond",
+          "task_created": false,
+          "existing_task": "1213959904341162"
+        },
+        {
+          "source": "#ab-paid-search-global",
+          "from": "Brandon",
+          "signal": "Q2 CCP review — review ieCCP/CCP files from Stacey, flag concerns",
+          "action": "review",
+          "task_created": false
+        },
+        {
+          "source": "#ab-paid-search-global",
+          "from": "Brandon",
+          "signal": "Which markets have Brand Polaris pages? Expects US & JP only",
+          "action": "respond",
+          "task_created": false
+        }
+      ],
+      "medium_priority": [
+        {
+          "source": "#ab-paid-search-abix",
+          "from": "Brandon",
+          "signal": "Started adding ABIX document feedback. Setting up review time next week. No rush.",
+          "action": "note",
+          "task_created": false
+        }
+      ],
+      "total_channels_scanned": 20,
+      "total_messages": 200
+    },
+    "email": {
+      "respond_needed": [
+        {
+          "subject": "[EXTERNAL] IN AB X Mobile App marketing",
+          "from": "Karthikeyan",
+          "signal": "Apple App Store account invite reminder — direct request",
+          "priority": "low"
+        }
+      ],
+      "review_needed": [
+        {
+          "subject": "Ads disapproved (77) : Amazon Business US - ENT",
+          "from": "Google Ads Policy",
+          "signal": "77 ads impacted by policy — worth a glance"
+        },
+        {
+          "subject": "BALOO-8 refmarker attribution",
+          "from": "Cansu Ozturk",
+          "signal": "Couldn't reproduce refmarker issue on amazon.com"
+        }
+      ],
+      "total_emails": 18
+    },
+    "asana_activity": {
+      "unanswered_comments": [
+        {
+          "task_gid": "1213072707685834",
+          "task_name": "AB Customer Redirect",
+          "from": "Brandon",
+          "comment": "can you please add the implementation details for this? I think it should be closed",
+          "age_days": 2,
+          "priority": "high"
+        }
+      ],
+      "dependency_completions": [
+        {
+          "task_name": "MX Automotive page",
+          "blocker_completed_by": "Frank Volinsky",
+          "completed_at": "2026-04-14T13:13Z",
+          "impact": "MX Auto page now unblocked — Richard can proceed with campaign build"
+        }
+      ]
+    },
+    "wiki_candidates": []
+  },
+  "signal_to_task_log": {
+    "tasks_created": 0,
+    "tasks_updated": 0,
+    "signals_deduped": 5,
+    "notes": "All high-priority signals already have existing Asana tasks. No new task creation needed."
+  }
 }

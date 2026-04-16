@@ -1,0 +1,296 @@
+<!-- DOC-0477 | duck_id: wiki-review-kate-doc-synthesis-final-review -->
+
+# Final Synthesis Review: Paid Search Testing Approach & Year Ahead
+
+**Reviewer:** wiki-critic
+**Date:** 2026-03-25
+**Document:** kate-doc-synthesis.md (THE doc for Kate Rundell, April 16)
+**Scope:** Synthesis review against 9 supporting section docs, source data, and style guides
+**Bar:** 8/10 minimum
+
+---
+
+## Part 1: Does the Synthesis Properly Reference the Section Docs?
+
+### Accurate Representation
+
+The synthesis compresses each workstream faithfully. Spot-checked every major claim:
+
+| Synthesis Claim | Section Doc Source | Accurate? |
+|----------------|-------------------|-----------|
+| OCI: +35,196 regs, $16.7MM+ OPS | kate-doc-oci.md table | Yes |
+| US NB CPA ~50% improvement | kate-doc-oci.md table | Yes |
+| UK ad copy: +86% CTR (test-vs-control), +70% CTR (pre/post), +31% regs | kate-doc-modern-search.md | Yes, both metrics present with clarifying note |
+| 50% of SPs believed AB required bulk purchasing | kate-doc-modern-search.md (SP study table) | Yes |
+| Engagement: $765K iOPS, 644% ROAS Prime Day | kate-doc-audiences.md | Yes |
+| Match rate 13% to 30% | kate-doc-audiences.md | Yes |
+| In-context reg: +13.6K annualized, 100% probability | kate-doc-ux.md | Yes |
+| CA Bulk CVR: 0.82% to 2.35% (+187%) | kate-doc-ux.md | Yes |
+| DG CPC $0.39 vs $2.43 keyword (-84%) | kate-doc-algo-ads.md | Yes |
+| SyRT: 82-92% NB incremental, p<0.001 | kate-doc-methodology.md | Yes |
+| 7-person team, 10 markets, 12+ stakeholder groups | kate-doc-team-map.md | Yes (team-map says 13, synthesis says 12+) |
+| ~25-30 hrs/week operational overhead | kate-doc-operations.md | Yes (referenced implicitly, not with the number) |
+
+**Verdict:** No unsupported claims in the synthesis. Every number traces back to a section doc.
+
+### Important Findings the Synthesis Misses
+
+These are in the section docs but absent from the synthesis. Some are acceptable compressions; others are gaps Kate should see.
+
+**Acceptable omissions (detail belongs in section docs):**
+- DE test-vs-control weekly data (W44/W45) -- too granular for synthesis
+- IT ad copy results (LOW confidence) -- correctly excluded
+- Polaris rollout market-by-market status -- operational detail
+- MCC structure -- technical detail
+- Competitive intel per-market breakdown -- too granular
+
+**Gaps that matter for Kate:**
+
+1. **No mention of the Gated Guest failure in the UX workstream section.** The methodology section mentions it in passing ("The Gated Guest experiment showed -61% registrations after 4 weeks"), but the UX workstream section does not tell the pivot story. kate-doc-ux.md tells the full arc: Gated Guest failed, deep dive, pivot to in-context registration, +13.6K regs. This is the strongest "we learn from failures" narrative in the entire doc set, and the synthesis buries it. Kate should see the pivot, not just the result.
+
+2. **F90 Legal blocker is understated.** kate-doc-audiences.md says "LiveRamp 1P positive targeting approval is on track for US by end of April 2026, but expansion to additional regions is blocked pending resolution of Tumble service requirements." The synthesis says "Legal is reviewing audience-transmission solutions." Kate should know what is actually blocking RoW expansion.
+
+3. **The operational capacity constraint is implicit, not explicit.** kate-doc-operations.md quantifies it: "~25-30 hours per week on operational work" for a 7-person team. The synthesis says "Both are delivered by the same seven-person team" but does not give Kate the number. She needs the capacity math to justify headcount or prioritization decisions.
+
+4. **No mention of the hvocijid duplicate parameter issue.** kate-doc-oci.md flags this as a known issue affecting EU3 + existing markets. If Kate asks "what is the risk to the RoW rollout?" this is the answer. The synthesis should at least acknowledge it exists.
+
+### Does the Synthesis Add Value Beyond Concatenation?
+
+**Yes -- and this is its strongest quality.** The synthesis does three things the section docs cannot:
+
+1. **The compounding argument.** The closing paragraph of the Investment Summary -- "campaign consolidation strengthens OCI signals, OCI enables smarter bidding on the audiences the Engagement channel reaches, and Baloo creates the friction-free landing experience that AI Max's dynamic page selection requires" -- is the single most important sentence in the entire doc set. No section doc can make this argument because each only sees its own workstream. The synthesis connects them.
+
+2. **The investment summary table.** This table is the payoff of the entire document. It maps 2025 validated signal to 2026 investment to expected impact for all five workstreams in one view. Kate can look at this table and understand the entire ask.
+
+3. **The "How We Test" framing.** By leading with methodology before workstreams, the synthesis establishes that the team has a system -- not just a collection of projects. This is the strategic positioning that justifies PS as partners, not executors.
+
+---
+
+## Part 2: Scores (8/10 Minimum Bar)
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 8/10 | Kate can act on this. The investment summary table answers "why invest in PS?" directly. Each workstream shows validated result to 2026 ask. Missing: explicit OP2 connection and risk framing (what happens if we DON'T invest). |
+| Clarity | 9/10 | Excellent structure. Kate can skim headers and get 80% of the value. Each workstream follows the same pattern. The investment summary table is scannable. The UK CTR clarification (pre/post vs test-vs-control) is well-handled. |
+| Accuracy | 8/10 | All numbers match section docs and source data. US OCI: Jul-Nov 2025, ~50% NB CPA, +35,196 total regs, $16.7MM+ OPS -- all verified. UK CTR: +70% pre/post and +86% test-vs-control clearly labeled. One residual issue: kate-doc-methodology.md still shows "-45% NB CPA" in its measurement framework table (line 58) -- not in the synthesis itself, but a cross-doc inconsistency Kate could stumble on if she reads the methodology section. |
+| Dual-audience | 6/10 | The prose serves Kate well. The frontmatter has depends_on which is good. But there is NO AGENT_CONTEXT block. This is the flagship doc -- it should have the richest machine-readable summary in the entire set. Every other section doc has one. The synthesis is the only doc that does not. |
+| Economy | 8/10 | Tight for a synthesis doc. Each workstream section is appropriately compressed. The team section and operational backbone are brief but sufficient. Nothing should be cut. |
+| **Overall** | **7.8/10** | |
+
+**The dual-audience score drags the overall below 8.** The synthesis is an 8+ for Kate. It is not an 8 for the dual-audience standard because it lacks the AGENT_CONTEXT block that every other doc in the set has.
+
+---
+
+## Part 3: Amazon Writing Standards Check
+
+| Standard | Met? | Evidence |
+|----------|------|----------|
+| Leads with results, not setup | Partial | Opening paragraph leads with what the document IS ("establishes the testing methodology"), not what it SAYS (+35K regs, $16.7MM OPS). The results are there -- they are just not in the first sentence. |
+| Every table followed by a "so what" | Yes | OCI table to competitive offset paragraph. Modern Search table to "Despite 25% fewer impressions..." Investment summary to compounding paragraph. |
+| Confidence levels stated | Yes | UK ad copy: "Confidence: HIGH." Methodology section explains HIGH vs LOW criteria. |
+| Cross-functional partners credited | Yes | MarTech, Data Science, Legal, Google, Adobe, MCS, ABMA, Customer Research all named. |
+| Connects to business impact (regs, OPS) | Yes | +35,196 regs, $16.7MM+ OPS, +13.6K annualized regs, $765K iOPS, 644% ROAS. Every workstream ties to registrations or OPS. |
+| Narrative-driven with data embedded | Yes | Data is woven into the narrative, not dumped in tables with commentary. The competitive context paragraph in OCI is a good example. |
+| Avoids hedging, filler, corporate language | Yes | No "synergize," "leverage," or "going forward." Direct and specific throughout. "Failures are data, not setbacks" is the right tone. |
+
+**One gap:** The doc does not explicitly state confidence levels for the 2026 projections. The 2025 results have confidence levels. The 2026 investments are presented as logical extensions of validated results, but Kate might ask: "How confident are you that OCI will replicate in EU4?" The synthesis should acknowledge the DMA privacy risk that kate-doc-oci.md discusses.
+
+---
+
+## Part 4: What's Missing for Kate Specifically
+
+### 1. Executive Summary (CRITICAL)
+
+Kate has 15 minutes. The document opens with a positioning paragraph that is good but not an executive summary. She needs the headline in the first 3 sentences.
+
+**What's there:** "This document establishes the Paid Search team's testing methodology and 2026 investment roadmap."
+
+**What Kate needs:** The results first, then the ask. Something like: "In 2025, the PS team's testing methodology delivered +35,196 incremental registrations and $16.7MM+ in OPS across three markets, while building five compounding workstreams now ready to scale worldwide. The 2026 roadmap: expand OCI bidding to five additional markets (full impact by July), launch Project Baloo (Shopping Ads unlock), and extend PS into lifecycle engagement via F90. Every 2026 investment maps to a validated 2025 result."
+
+The current opening tells Kate what the document IS. It should tell her what the document SAYS.
+
+### 2. OP2 Connection (IMPORTANT)
+
+Kate needs to justify PS investment to Todd. The doc never mentions OP2 by name except in passing market performance references. It should explicitly connect:
+- How the 2026 investments map to OP2 targets
+- What the PS team's OP2 registration and OPS commitments are
+- How the validated 2025 results de-risk the 2026 OP2 plan
+
+### 3. Risk of NOT Investing (IMPORTANT)
+
+The doc makes the positive case well. It does not make the negative case. Kate needs to answer Todd's implicit question: "What happens if we don't fund this?"
+
+Missing risk framing:
+- If OCI does not scale to RoW, those 5 markets continue on Adobe's deprecated bidding -- no CPA improvement, no reg uplift
+- If Baloo does not launch, Shopping Ads remain unavailable for AB -- a channel that competitors can access
+- If F90 does not launch, PS remains acquisition-only while the Engagement infrastructure sits underutilized
+- If the team does not get capacity relief, 5 strategic workstreams compete with 25-30 hrs/week of operational overhead across 7 people
+
+### 4. Capacity Constraint (IMPORTANT)
+
+The synthesis says "Both are delivered by the same seven-person team" but does not quantify the constraint. kate-doc-operations.md has the number: ~25-30 hours/week on operational work. Kate should see this math:
+
+- 7 people x 40 hrs = 280 hrs/week total capacity
+- ~25-30 hrs/week on operations = ~10% of total capacity
+- Remaining ~250 hrs/week funds 5 strategic workstreams across 10 markets
+- That is ~50 hrs/week per workstream -- and each workstream spans multiple markets and cross-functional partnerships
+
+This is the capacity argument for headcount or prioritization. Without it, Kate sees the output but not the constraint.
+
+### 5. Acknowledgment of What's Not Working
+
+The doc is relentlessly positive about results. Kate will respect honesty about challenges more than a highlight reel. The section docs contain honest assessments:
+- DE missed OP2 by 4% (kate-doc-oci.md)
+- JP is -47.5% vs OP2 with MHLW headwind (eyes.md / kate-doc-appendix.md)
+- IT ad copy test had insufficient volume (kate-doc-modern-search.md)
+- F90 is blocked by Legal (kate-doc-audiences.md)
+
+The synthesis should have a brief "Challenges and Risks" section that acknowledges these. Amazon leadership docs that only show wins lose credibility.
+
+---
+
+## Part 5: Cross-Doc Consistency (Final Check)
+
+| Metric | OCI Doc | Appendix | Synthesis | Methodology | Source | Consistent? |
+|--------|---------|----------|-----------|-------------|--------|-------------|
+| US OCI NB CPA | ~50% | ~50% | ~50% | **-45%** | ~50% (oci-performance.md) | ISSUE: Methodology doc has old figure |
+| US OCI test period | Jul-Nov 2025 | Jul-Nov 2025 | (not shown as column) | -- | Jul-Oct testing + Nov additional | Yes |
+| UK CTR pre/post | +70% | +70% | +70% (with +86% clarification) | +86% (test-vs-control in example) | -- | Yes |
+| UK CTR test-vs-control | +86% | +86% | +86% (clarifying note) | +86% | -- | Yes |
+| Total regs | +35,196 | +35,196 | +35,196 | -- | 32,047+2,400+749 = 35,196 | Yes |
+| Total OPS | $16.7MM+ | $16.7MM+ | $16.7MM+ | $16.7MM | $16.7MM (oci-performance.md) | Yes |
+| DG CPC | -- | $0.39 | $0.39 | -- | kate-doc-algo-ads.md: $0.39 | Yes |
+| In-context regs | -- | +13.6K | +13.6K | +13.6K | kate-doc-ux.md: +13.6K | Yes |
+| CA Bulk CVR | -- | +186.6% | +187% | +187% | kate-doc-ux.md: +186.6% | Yes (rounding) |
+
+**One issue:** kate-doc-methodology.md line 58 still shows "-45% NB CPA" in the measurement framework table example column. This was fixed in the OCI doc, appendix, and synthesis but not cascaded to the methodology doc. If Kate reads the methodology section and then the OCI section, she will see conflicting numbers.
+
+---
+
+## Verdict: REVISE
+
+**Overall: 7.8/10 -- below the 8/10 bar.**
+
+The synthesis is excellent as a Kate-facing narrative. The structure is right, the data is accurate, the compounding argument lands, and the investment summary table is the strongest single artifact in the doc set. It is 90% of the way to an 8.
+
+The gap is specific and fixable.
+
+---
+
+## Required Changes (blocking)
+
+### R1: Add AGENT_CONTEXT block
+
+The synthesis is the only doc in the 10-doc set without an AGENT_CONTEXT block. This drops the dual-audience score to 6/10, which drops the overall below 8.
+
+**Add to the end of the document, before the closing:**
+
+```
+<!-- AGENT_CONTEXT
+machine_summary: "Flagship synthesis doc for Kate Rundell (Apr 16, 2026). PS team testing methodology across 5 workstreams: OCI Bidding (+35,196 regs, $16.7MM+ OPS, scaling to 5 RoW markets by Jul 2026), Modern Search (+86% CTR test-vs-control, +31% regs from research-driven ad copy), Audiences ($765K iOPS, match rate 13% to 30%, F90 lifecycle launch), User Experience (+13.6K annualized regs from in-context, Project Baloo US Q2), Algorithmic Ads ($0.39 DG CPC, AI Max US test Q2). Core argument: every 2026 investment maps to a validated 2025 result. Workstreams compound -- consolidation feeds OCI, OCI feeds audience bidding, Baloo feeds AI Max. 7-person team, 10 markets, 12+ cross-functional partners."
+key_entities: ["Kate Rundell", "OCI", "Baloo", "F90", "AI Max", "SyRT", "Demand Gen", "Polaris", "Walmart", "LiveRamp", "ABMA", "MarTech"]
+action_verbs: ["validate", "scale", "compound", "invest", "test"]
+depends_on: ["kate-doc-methodology", "kate-doc-oci", "kate-doc-modern-search", "kate-doc-audiences", "kate-doc-ux", "kate-doc-algo-ads", "kate-doc-team-map", "kate-doc-operations", "kate-doc-appendix"]
+consumed_by: ["Kate Rundell Apr 16 review", "OP2 planning", "Todd Heimes PS investment decision"]
+update_triggers: ["OCI RoW market status change", "Baloo launch date confirmed", "F90 Legal approval", "AI Max test results", "any workstream data update"]
+-->
+```
+
+### R2: Replace the opening paragraph with an executive summary
+
+Kate has 15 minutes. The first paragraph should give her the headline, not describe the document.
+
+**Current text (first two paragraphs after the title):**
+
+> This document establishes the Paid Search team's testing methodology and 2026 investment roadmap. Every 2026 initiative maps to a validated 2025 result. The team is transforming Paid Search from a keyword-driven acquisition channel into an automated, audience-centric engine that drives incremental growth at scale -- grounded in evidence rather than speculation.
+>
+> Each section covers one workstream: what we tested, what we learned, and how the validated results directly inform 2026 investment. Each initiative required cross-functional collaboration spanning Legal, Data Science, MarTech, MCS, ABMA, Customer Research, and international market teams, with the PS team serving as the connective tissue between platform capabilities and business objectives.
+
+**Replace with:**
+
+> In 2025, the Paid Search team's testing methodology delivered +35,196 incremental registrations and $16.7MM+ in OPS across US, UK, and DE -- while building five compounding workstreams now ready to scale worldwide. The 2026 roadmap: expand OCI bidding to five additional markets (full impact by July), launch Project Baloo to unlock Shopping Ads for AB, and extend PS into lifecycle engagement through the F90 program. Every 2026 investment maps to a validated 2025 result.
+>
+> The team is transforming Paid Search from a keyword-driven acquisition channel into an automated, audience-centric engine -- grounded in evidence rather than speculation. Each section below covers one workstream: what we tested, what we learned, and how the validated results directly inform 2026 investment. Cross-functional collaboration spanning Legal, Data Science, MarTech, MCS, ABMA, Customer Research, and international market teams was required for every initiative, with the PS team serving as the connective tissue between platform capabilities and business objectives.
+
+### R3: Fix the methodology doc's residual -45% figure
+
+kate-doc-methodology.md, line 58, measurement framework table:
+
+**Current:**
+
+> | Bidding changes (OCI) | Actualized CPA vs. seasonality-adjusted baseline | US: +24% reg lift, -45% NB CPA | Isolates OCI effect from seasonal patterns |
+
+**Replace with:**
+
+> | Bidding changes (OCI) | Actualized CPA vs. seasonality-adjusted baseline | US: +24% reg lift, ~50% NB CPA improvement | Isolates OCI effect from seasonal patterns |
+
+This is a cross-doc fix, not a synthesis fix, but Kate could read the methodology section and see the inconsistency.
+
+---
+
+## Suggestions (non-blocking, but would push this to a 9)
+
+### S1: Add a "Challenges and Risks" section before the Investment Summary
+
+3-4 sentences acknowledging:
+- DE missed OP2 by 4% (high Y25 baseline)
+- JP is -47.5% vs OP2 (MHLW campaign ended)
+- F90 is blocked by Legal SIMs (US approval on track for April, RoW blocked by Tumble service)
+- OCI RoW rollout has a known technical issue (hvocijid duplicate parameters under investigation)
+
+This earns credibility. Amazon leadership docs that only show wins get questioned harder.
+
+### S2: Add the capacity constraint number
+
+In the Operational Backbone section, change:
+
+**Current:** "Both are delivered by the same seven-person team."
+
+**Suggested:** "Both are delivered by the same seven-person team, which spends approximately 25-30 hours per week on operational work -- monitoring, reporting, budget management, and stakeholder coordination across 10 markets. The remaining capacity funds the five strategic workstreams."
+
+### S3: Add a one-sentence risk framing to the Investment Summary
+
+After the compounding paragraph, add:
+
+"The risk of not investing: OCI-eligible markets remain on deprecated Adobe bidding with no CPA improvement path, Baloo delays leave Shopping Ads unavailable for AB while competitors access them, and the Engagement infrastructure built in 2025 sits underutilized without F90 activation."
+
+### S4: Connect to OP2 explicitly
+
+Somewhere in the opening or investment summary, add a sentence like:
+
+"These investments directly support the PS team's OP2 registration and OPS commitments -- the validated 2025 results provide the evidence base for the 2026 plan."
+
+### S5: Strengthen the Gated Guest to in-context pivot story in the UX section
+
+The UX workstream section currently says: "The team partnered with MCS to launch in-context registration, delivering +13.6K annualized incremental registrations with 100% probability (APT)."
+
+The section doc tells a better story. One sentence would do it:
+
+**Replace with:** "After the Gated Guest experiment showed -61% registrations, the team paused, deep-dived the data, and pivoted to in-context registration -- which delivered +13.6K annualized incremental registrations with 100% probability (APT)."
+
+The failure-to-success arc is the most compelling evidence of the team's testing discipline.
+
+---
+
+## What Would Make This a 9
+
+If R1-R3 are applied and S1-S5 are incorporated, this document would score:
+
+| Dimension | Current | Projected |
+|-----------|---------|-----------|
+| Usefulness | 8 | 9 (exec summary + risk framing + OP2 connection) |
+| Clarity | 9 | 9 (already strong) |
+| Accuracy | 8 | 9 (methodology fix closes the last inconsistency) |
+| Dual-audience | 6 | 8 (AGENT_CONTEXT block) |
+| Economy | 8 | 8 (additions are brief and earn their place) |
+| **Overall** | **7.8** | **8.6** |
+
+The gap between 8.6 and 9 is the difference between a doc Kate reads and a doc Kate quotes to Todd. The exec summary and risk framing are what get quoted.
+
+---
+
+## Bottom Line
+
+This is a strong document that is 2-3 edits away from being excellent. The narrative structure is right. The data is accurate. The compounding argument is the best strategic insight in the entire doc set. The required changes are mechanical (AGENT_CONTEXT block, exec summary rewrite, one cross-doc number fix). The suggestions are what separate "good doc" from "doc Kate uses to justify PS investment to Todd."
+
+Ship it after R1-R3. Ship it with confidence after S1-S5.

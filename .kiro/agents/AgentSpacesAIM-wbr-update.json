@@ -2,15 +2,15 @@
   "useLegacyMcpJson": false,
   "name": "wbr-update",
   "description": "Generates weekly AgentSpaces WBR updates by pulling metrics from Pendergrass, loading the previous week's update for context, and walking you through Top Concerns, Accomplishments, and Program Updates. Outputs to Quip and persists locally for search. -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",
-  "resources": ["file:///home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6442127345/context/wbr-update/*"],
+  "resources": ["file:///home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6444395178/context/wbr-update/*"],
   "mcpServers": {"builder-mcp": {
     "args": [
       "--agent-sop-paths",
-      "/home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6442127345/agent-sops",
+      "/home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6444395178/agent-sops",
       "--agent-sop-filter",
       "generate-weekly-metrics,generate-wbr-update",
       "--skill-paths",
-      "/home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6442127345/skills",
+      "/home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6444395178/skills",
       "--skill-name-filter",
       "metrics-query,amazon-writing"
     ],

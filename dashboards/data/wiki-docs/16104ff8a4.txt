@@ -1,0 +1,3 @@
+# JP Transition
+Source: https://quip-amazon.com/XHJ9AAlDwnq
+JP PS transition doc. POCs (Ken, Minami, Mao, Yahoo team). Campaign structure: Brand Exact (IS bidding), Brand Phrase (portfolio conversions), Brand2/Invoice, NB (Pmax/Discovery only). First-touch attribution. JP-specific ref tag format. No dedicated Google rep.

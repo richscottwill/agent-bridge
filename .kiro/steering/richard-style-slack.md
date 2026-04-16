@@ -6,12 +6,14 @@ inclusion: manual
 Richard's Slack is his most unfiltered register. Fast, reactive, collaborative. This is where the real working relationship lives.
 
 ## Cadence & Structure
-- Messages are short — often a single sentence or fragment per send
-- Breaks thoughts across multiple messages rather than composing one block (stream-of-consciousness pacing)
-- Rarely uses bullet points or formatting in Slack; just sends rapid-fire lines
-- Parenthetical asides carry over from email but feel more conversational: "(Our overall cost last week was $6K)" / "(actually, looks like might still be able to use)"
-- Edits messages after sending to correct or add nuance — marked with "(edited)"
-- Will paste raw data (SQL queries, URLs, screenshots) inline without preamble
+- One thought per message. Never compose a multi-sentence block — send each line separately (stream-of-consciousness pacing)
+- Parenthetical data drops mid-message: "(Our overall cost last week was $6K)" / "(actually, looks like might still be able to use)"
+- Edits after sending to correct or add nuance — marked with "(edited)"
+- Pastes raw data (SQL queries, URLs, screenshots) inline without preamble
+- Example of correct pacing (3 separate sends, not one block):
+  - "yeah I checked the data"
+  - "looks like NB CPA is down 29% from 6wk ago"
+  - "I'll put together a summary and send it over"
 
 ## Greeting
 - "Hey [name]" or "Hey all" — almost always

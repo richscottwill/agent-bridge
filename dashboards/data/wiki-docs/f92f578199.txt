@@ -1,0 +1,3 @@
+# EU Tactical Log
+Source: https://quip-amazon.com/bUR9AAl2WjT
+Operational log of EU5 bid/budget changes, structure consolidation, Modern Search implementation, tracking/attribution fixes, CPT testing, DE-en launch. Case studies for bid adjustments, budget types, and recency.

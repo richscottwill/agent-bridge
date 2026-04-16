@@ -1,0 +1,3 @@
+# Paid Search EU5 CVR Investigation
+Source: https://quip-amazon.com/CTM9AAFeei5
+Deep investigation into EU5 Brand CVR decline. Key finding: attribution logic issue where regs were being lost to Direct/Unknown channels. Resolution: ABMA updated attribution, recovering +4-8% regs per market. DMA hypothesis: marketing channels declining while Direct/Unknown growing 189-790% YoY.

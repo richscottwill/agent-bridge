@@ -1,0 +1,415 @@
+<!-- DOC-0397 | duck_id: testing-appendix -->
+
+---
+title: "Appendix: Supporting Evidence"
+slug: "kate-doc-appendix"
+type: "reference"
+audience: "org"
+status: "draft"
+created: "2026-03-25"
+updated: "2026-03-25T2100"
+owner: "Richard Williams"
+tags: ["appendix", "data", "evidence", "kate-doc"]
+summary: "Exhaustive evidence locker: data tables, source links, competitive intel, cross-team contacts."
+---
+
+# Appendix: Supporting Evidence
+
+This appendix is the audit trail for the Testing Approach document. The workstream sections contain summary data; this appendix contains the complete datasets with additional detail columns (weekly breakdowns, confidence levels, date ranges). Use the workstream docs for the narrative. Use this appendix to verify a specific number or trace a claim to its source.
+
+**How to use this appendix:** Each section corresponds to a workstream or data category. Jump to the section letter for the data behind that workstream's narrative: A (OCI), B (Ad Copy), C (Competitive), D (Market Performance), E (Landing Pages), F (Engagement & Algo Ads), G (SyRT Incrementality), H (Investment Summary), I (Contacts), J (Sources).
+
+Tables in this appendix provide the complete data behind the summary figures in each workstream section. Where a workstream section shows a summary table, this appendix contains the full dataset with additional detail columns (e.g., weekly breakdowns, confidence levels, date ranges). The workstream docs are designed to be read standalone; this appendix is the audit trail.
+
+---
+
+## A. OCI Performance Data
+
+### A.1 Rollout Timeline (All Markets)
+
+| Market | Status | Launch Date | Phase | Full Impact |
+|--------|--------|-------------|-------|-------------|
+| US | Live | Jul 2025 (Phase 1) → Sep 2025 (100% NB) | 100% | Oct 2025 |
+| UK | Live | Aug 2025 (Test) → Sep 2025 (100%) | 100% | Oct 2025 |
+| DE | Live | Nov 2025 (Test) → Dec 2025 (100%) | 100% | Jan 2026 |
+| CA | In Progress | Mar 2026 (E2E testing launched 3/4) | E2E | Jul 2026 (projected) |
+| JP | In Progress | Feb 2026 (E2E testing launched 2/26) | E2E | Jul 2026 (projected) |
+| FR | In Progress | Feb 2026 (E2E testing launched 2/26) | E2E | Jul 2026 (projected) |
+| IT | In Progress | Feb 2026 (E2E testing launched 2/26) | E2E | Jul 2026 (projected) |
+| ES | In Progress | Feb 2026 (E2E testing launched 2/26) | E2E | Jul 2026 (projected) |
+| AU | Not planned | N/A | — | N/A |
+| MX | Not planned | N/A | — | N/A |
+
+### A.2 OCI Impact Summary (Rolled-Out Markets)
+
+| Market | Test Period | Reg Lift | NB CPA Improvement | Estimated Regs | Estimated OPS | % to Expectation |
+|--------|-----------|----------|---------------------|----------------|---------------|------------------|
+| US | Jul-Nov 2025 | +24% | ~50% | +32,047 | $16.7MM | 96% |
+| UK | Aug-Oct 2025 | +23% | Significant | +2,400 | — | 94% |
+| DE | Oct-Dec 2025 | +18% | Significant | +749 | — | 86% |
+| **Total** | | | | **+35,196** | **$16.7MM+** | |
+
+### A.3 DE OCI Test vs. Control (Weekly Detail)
+
+| Week | Segment | Cost | Regs | ROAS | CPA |
+|------|---------|------|------|------|-----|
+| W44 (10/26-11/1) | NB Control | $44,592 | 36 | 3% | $1,239 |
+| W44 | NB Test (OCI) | $64,565 | 200 | 13% | $323 |
+| W44 | **Difference** | **+45%** | **+456%** | **+333%** | **-74%** |
+| W45 (11/2-11/8) | NB Control | $56,790 | 55 | 3% | $1,033 |
+| W45 | NB Test (OCI) | $66,182 | 253 | 13% | $262 |
+| W45 | **Difference** | **+17%** | **+360%** | **+333%** | **-75%** |
+
+### A.4 DE OCI Lift Tracking (Dec 2025)
+
+| Week | Lift | % to Expectation |
+|------|------|------------------|
+| W49 | +20% | 95% |
+| W50 | +20% | 96% |
+| W51 | +16% | 74% |
+
+### A.5 OCI MCC Structure
+
+| MCC | ID | Markets |
+|-----|-----|---------|
+| Master MCC | DSAP - Amazon Business Parent MCC (873-788-1095) | All |
+| NA MCC | 683-476-0964 | US, CA, MX |
+| EU MCC | 549-849-5609 | UK, DE, FR, IT, ES |
+| JP MCC | 852-899-4580 | JP |
+| AU | Not created | — |
+
+### A.6 US Monthly Performance (Jan-Feb 2026)
+
+| Month | Regs | vs OP2 | YoY | Spend | CPA |
+|-------|------|--------|-----|-------|-----|
+| Jan 2026 | 39K | +30% | +86% | — | — |
+| Feb 2026 | 32.9K | +16% | +68% | $2.7M | $83 |
+
+---
+
+## B. Ad Copy Test Data
+
+### B.1 SP Study Findings (Aug 2025)
+
+**What SPs said matters most when choosing suppliers:**
+| Factor | US | UK |
+|--------|----|----|
+| Price | 31% | 22% |
+| Product quality | 25% | 33% |
+| Selection | 21% | 15% |
+
+**What SPs said matters least:**
+| Factor | US | UK |
+|--------|----|----|
+| Ability to buy in bulk | 27% | 19% |
+| Location of store | 24% | 23% |
+| Rewards program | 22% | 25% |
+
+**Why SPs without B2B accounts didn't sign up:**
+| Reason | US | UK |
+|--------|----|----|
+| Believed B2B required bulk purchasing | 50% | 49% |
+| Savings wouldn't justify perceived costs | 31% | 26% |
+| Business wouldn't qualify | 19% | 18% |
+
+### B.2 Ad Copy Changes (Before/After)
+
+**Headlines:**
+| Before | After | Rationale |
+|--------|-------|-----------|
+| Online Bulk Purchasing | Smart Business Buying | Updated brand messaging |
+| Online Wholesale Purchasing | For Businesses of All Sizes | Addresses qualification concern |
+| Purchase at Wholesale Price | No Minimum Order Required | Addresses bulk misconception |
+| Wholesale & Bulk Prices | Quantity Discounts | Reframes value without bulk framing |
+
+**Descriptions:**
+| Before | After |
+|--------|-------|
+| Access Millions of Business Products and Bulk Download VAT Invoices. Join Now. | Register for Amazon Business to Unlock Exclusive Pricing and Quantity Discounts. |
+| Business Prices and Bulk Discounts Specifically for Businesses. Create a Free Account. | Access Millions of Quality Products with Business-Only Pricing. No Minimum Order Required. |
+
+### B.3 UK AMZ Portfolio Results (Phase 1, Jan 29 - Mar 2, 2026)
+
+**Test vs Control (same period):**
+| Metric | Control | Test | Difference |
+|--------|---------|------|------------|
+| Impressions | 8,391 | 19,586 | +133% |
+| Clicks | 1,271 | 5,504 | +333% |
+| Cost | $4,663 | $15,402 | +230% |
+| CTR | 15.15% | 28.10% | +86% |
+
+**Pre/Post Comparison (AMZ Portfolio):**
+| Metric | Before (Dec 27-Jan 28) | After (Jan 29-Mar 2) | Change |
+|--------|----------------------|---------------------|--------|
+| Impressions | 37,388 | 28,010 | -25% |
+| Clicks | 5,308 | 6,778 | +28% |
+| Cost | $19,253 | $20,072 | +4% |
+| Registrations | 273 | 358 | **+31%** |
+| CTR | 14% | 24% | **+70%** |
+| CVR | 5.10% | 5.30% | +3% |
+
+**Confidence: HIGH** (30-day test, meaningful volume)
+
+### B.4 IT Results (Phase 1, Feb 19 - Mar 5, 2026)
+
+| Metric | Control | Test | Difference |
+|--------|---------|------|------------|
+| Clicks | 14,764 | 392 | -97% |
+| Impressions | 127,527 | 2,944 | -98% |
+| Cost | $34,029 | $544 | -98% |
+| CTR | 11.58% | 13.32% | +15% |
+
+**Confidence: LOW** (insufficient volume)
+
+### B.5 Ad Copy Phasing Plan
+
+| Phase | Scope | Status |
+|-------|-------|--------|
+| Phase 1 | NB 50% campaigns (High CPA) | In progress |
+| Phase 2 | All NB | Queued |
+| Phase 3 | Brand Plus | Queued |
+
+EU4 translations completed via GlobalLink (submission ID 2028024, delivered 2/18/2026). Languages: IT, DE, FR, ES.
+
+---
+
+## C. Competitive Intelligence
+
+### C.1 US: Walmart Business
+
+| Period | IS Range | Brand CPA Impact |
+|--------|----------|------------------|
+| Jul-Sep 2024 (first appeared) | 25% avg | CPC: $1.6 → $2.4 |
+| Oct-Nov 2024 | 35% | CPC: $2.6-$2.9 |
+| Jan-Mar 2026 | 37-55% | Brand CPA: $65-$77 (was ~$40) |
+| W6 2026 (peak) | 55% | — |
+
+Pattern: Pulls back during holidays, ramps Jan-Mar. Response: Bid caps + NB efficiency via OCI.
+
+### C.2 EU5 Competitors
+
+| Market | Competitor | IS | First Seen | Impact |
+|--------|-----------|-----|-----------|--------|
+| UK | weareuncapped.com | 24% Brand | Dec 2023 | +45% Brand Core CPC |
+| UK | Temu | 13% Generic NB | W10 2024 | +14% NB CPC |
+| UK | Amazon Global Logistics UK | <10% ES Brand | W8-W10 2026 | +41% CPC |
+| DE | recht24-7.de | 14% Brand Core | Jul 2025 | +3% MoM CPC; reported for store closure |
+| FR | bruneau.fr | 39-47% Generic NB | W38 2025 | Significant NB pressure |
+| FR | mirakl.com | 10% Brand Core | W5 2026 | -5% clicks, -14% CVR |
+| IT | Shopify (mondoffice) | >10% Generic NB | W43 2025 | -20% CVR on Generic |
+| IT | revolut.com | <10% | W9-10 2026 | -36% CVR drop on Brand Core |
+| ES | amazon.co.uk (AGL) | <10% | W8-W10 2026 | +41% CPC |
+
+### C.3 International Competitors
+
+| Market | Competitor | IS | Notes |
+|--------|-----------|-----|-------|
+| CA | Shopify.com | <10% Brand Core | Recurring, +13% CPC |
+| JP | axalpha.com | 10% Brand Core Google | New threat |
+| JP | shop-pro.jp | 12-15% Yahoo Brand Core | Strengthening |
+| MX | algo-mas.mx | 11-13% Brand | +20% CPC spikes |
+
+### C.4 Key Competitive Trends
+1. Competition broadening: 1-2 per market (2023) → 3-5 (2026)
+2. Walmart is the only sustained aggressive Brand bidder in US
+3. EU competition is fragmentary — different competitors per market
+4. JP competition intensifying on Yahoo specifically
+5. Team's defense is efficiency, not escalation
+
+---
+
+## D. Market Performance
+
+For current market performance data, see [Eyes — Market Health](~/shared/context/body/eyes.md) or [Market Reference](market-reference).
+
+---
+
+## E. Landing Page Data
+
+### E.1 CA LP Optimization Results
+
+| Page | Before CVR | After CVR | Improvement | Mobile EFID CVR Gain |
+|------|-----------|-----------|-------------|---------------------|
+| Bulk | 0.82% | 2.35% | +186.6% | +88.4% |
+| Wholesale | 0.75% | 2.10% | +180.0% | +116.5% |
+
+### E.2 In-Context Registration (US)
+- Result: +13.6K annualized incremental registrations
+- Probability: 100% (APT/Weblab)
+- CTA change: "Create a free account" → "Start browsing"
+
+### E.3 Gated Guest (US — Stopped)
+- Result: -61% registrations, -24% OPS after 4 weeks
+- Action: Paused, deep-dived, pivoted to in-context registration
+
+### E.4 MCS Performance (Nov-Dec 2025, from MCS Flash)
+
+| Metric | Sep-25 | Oct-25 | Nov-25 | Dec-25 | MoM | YoY |
+|--------|--------|--------|--------|--------|-----|-----|
+| Unique Visitors | 2.58M | 2.78M | 2.69M | 2.13M | -21% | -15% |
+| Visitors to Reg Start | 285.8K | 285.4K | 260.4K | 241.6K | -7% | +23% |
+| CTR to Reg | 14.15% | 13.29% | 12.84% | 15.19% | +235bps | +635bps |
+| Registration Submits | 77.0K | 72.2K | 70.5K | 64.3K | -9% | +29% |
+| CVR (Submits/Starts) | 26.92% | 25.30% | 27.06% | 26.63% | -43bps | +226bps |
+
+The +635bps YoY CTR improvement was driven by WW Polaris launches coupled with OCI rollout.
+
+### E.5 Polaris Brand LP Rollout Status (as of 3/25/26)
+
+| Market | Status | Owner | Notes |
+|--------|--------|-------|-------|
+| US | ✅ Switched 3/24 | Stacey | Complete |
+| AU | AEM translations due 3/26 | Alex VanDerStuyf | Priority #1 |
+| MX | AEM translations due 3/26 | Alex VanDerStuyf | Priority #2 |
+| DE | Weblab planned | Andrew | April 6-7 dial-up |
+| UK | Weblab planned | Andrew | April 6-7 dial-up |
+| JP | AEM translations due 3/26 | Alex VanDerStuyf | Pre-post framework (no Weblab) |
+| FR | Weblab planned | Andrew | TBD |
+| IT | TBD | — | — |
+| ES | TBD | — | — |
+| CA | AEM translations due 3/26 | Alex VanDerStuyf | OCI E2E running simultaneously |
+
+---
+
+## F. Engagement & Algorithmic Ads Data
+
+### F.1 Demand Gen Performance
+
+| Metric | DG Campaigns | Keyword Campaigns | Difference |
+|--------|-------------|-------------------|------------|
+| CPC (2025 avg) | $0.39 | $2.43 | -84% |
+| CPC (Video, early 2026) | $0.30 | — | In line with image |
+
+### F.2 Q4 2025 DG Performance
+
+| Metric | Q4 2025 vs Q4 2024 |
+|--------|---------------------|
+| Traffic | +53% YoY |
+| Spend | -35% YoY |
+| CPC | -58% YoY |
+
+### F.3 Prime Day 2025 Engagement
+
+| Metric | Value |
+|--------|-------|
+| Clicks | 80K |
+| Cost vs PY | -10% YoY |
+| OPS | $329K |
+| ROAS | 644% |
+| vs Prior Year | 12x improvement |
+
+### F.4 Business Essentials (DG)
+- Visitors: 52K in first year
+- CPC: $0.30
+- BSE video launched Jan 2026
+
+### F.5 Engagement Channel Total
+- 2025 iOPS: $765K
+- Google match rate: 13% → 30% (via Associated Accounts)
+
+---
+
+## G. SyRT Incrementality Data
+
+| SyRT Arm | Market | Registration Lift | Statistical Significance | Incrementality |
+|----------|--------|-------------------|--------------------------|----------------|
+| Non-Brand | US | +16.4% | p<0.001 | 82-92% incremental |
+| Brand | US | Directionally positive | Not statistically significant | Lower — high-intent users |
+| Non-Brand | UK | Positive | Significant | Confirmed NB as primary driver |
+
+**So what:** SyRT proved the channel's value — 82-92% of NB registrations would not have happened without Paid Search. This data justified NB budget allocation and validated the channel's existence beyond demand capture. Test period: Q2 2023. Multi-arm design to isolate Brand vs. Non-Brand effects.
+
+---
+
+## H. 2026 Investment Summary
+
+| Workstream | 2025 Validated Signal | 2026 Investment | Expected Impact |
+|---|---|---|---|
+| OCI Bidding | +18-24% reg uplift; ~50% NB CPA improvement; +35K regs / $16.7MM OPS | Scale to FR, IT, ES, CA, JP (Jul 2026) | Replicate double-digit reg uplift in RoW |
+| Modern Search | +86% CTR / +31% regs (research-driven copy); consolidation improved data density | Keyword theme consolidation WW; EU5 ad copy rollout; structural prep for AI Max | Further campaign count reduction; stronger OCI signals |
+| Audiences | $765K iOPS; 30% match rate (from 13%); Engagement channel proven | F90 Lifecycle Engagement launch | +366 bps in non-SHuMA 3+ purchase rate |
+| User Experience | +13.6K annualized regs (in-context); +187% CVR (CA Bulk); 85% LP drop-off identified and addressed | Project Baloo (US Q2); EU5 LP framework; Aladdin (Q4) | Friction-free product engagement; Shopping Ads unlock |
+| Algorithmic Ads | $0.39 DG CPC vs. $2.43 keyword; +53% YoY traffic; 644% ROAS (Prime Day) | DG Video expansion; AI Max US test; BSE scaling | Scalable mid-funnel at proven efficiency |
+
+---
+
+## I. Cross-Team Contact List
+
+### PS Team (Brandon Munday's Directs)
+| Name | Alias | Level | Location | Focus |
+|------|-------|-------|----------|-------|
+| Brandon Munday | brandoxy | L7 | Austin | WW Head of Outbound Marketing |
+| Peter Ocampo | peteocam | L6 | Seattle | Global Head of AB Mobile App |
+| Stacey Gu | staceygu | L6 | Seattle | OCI/Bidding, US performance |
+| Dwayne Palmer | dtpalmer | L6 | Arlington | WW Head of Marketing Website |
+| Yun-Kang Chu | yunchu | L6 | Austin | Modern Search, Adobe, MX |
+| Andrew Wirtz | awirtz | L5 | Seattle | DG/Algorithmic Ads, EU5 |
+| Aditya Thakur | aditthk | L5 | Austin | Landing Pages/UX, CA, JP |
+| Richard Williams | prichwil | L5 | Seattle | AU/MX, WW testing, competitive |
+
+### Key Cross-Functional Partners
+| Name | Alias | Team | Relevance |
+|------|-------|------|-----------|
+| Joel Mallory | malloryj | MarTech | OCI infrastructure, LiveRamp |
+| Suzane Huynh | — | Adobe | OCI reporting, Ad Cloud |
+| Mike Babich | — | Google | Biweekly sync, OCI, AI Max |
+| Alexis Eck | alexieck | AB AU | AU PS POC, MCS migration |
+| Lena Zak | lenazak | AB AU | AU country leader |
+| Lorena Alvarez Larrea | lorealea | AB MX | MX PS stakeholder |
+| Saajan Chowhan | — | SSR Activation | F90, promo strategy |
+| Raven Smith | kesmthj | Creative | DG video, BSE creative |
+| Robert Skenes | rskenes | Brand & Paid Media | LiveRamp 1P, ADSP |
+| Abdul Bishar | arbishar | Brand & Paid Media | Paid media measurement |
+| Daron Manso | darona | Traffic Engagement | Engagement channel strategy |
+| Frank Volinsky | — | MCS Tech | LP builds, Weblab metrics |
+| Alex VanDerStuyf | afvans | AEM | Polaris translations |
+| Kevin Townsend | townkevi | CPS Campaigns | LP coordination, JP |
+| Kristine Weber | krstima | Marketing Ops | Pre-WBR organizer |
+
+---
+
+## J. Source Documents
+
+### Internal Quip Documents
+- MX Sync: https://quip-amazon.com/K9OYA9mXm7DU/AB-MX-Paid-Search-Sync
+- Pre-WBR Callouts: https://quip-amazon.com/MMgBAzDrlVou
+- OCI Instructions: https://quip-amazon.com/Zee9AAlSBEB
+- Ad Copy Updates: https://quip-amazon.com/KCY9AAYqWd2
+- Testing Plan 2026: https://quip-amazon.com/EED9AAFOy4E
+- Paid Acq Projects: https://quip-amazon.com/bXT9AA5YdtN
+- PO Process Options: https://quip-amazon.com/NXF9AAy02OQ
+
+### Internal Wiki Pages
+- Paid Search Wiki: https://w.amazon.com/bin/view/Amazon_Business/Marketing/Channel_Marketing/WW_PaidSearch
+- App Wiki: https://w.amazon.com/bin/view/Amazon_Business/Marketing/Channel_Marketing/Mobile_App/
+- AB Marketing Wiki: https://w.amazon.com/bin/view/Amazon_Business/Marketing/
+- 2026 Projects: https://w.amazon.com/bin/view/Amazon_Business/Marketing/WW_Central_Marketing/Paid_Acquisition/Overview/#H2026Projects
+
+### Email Flashes (source material)
+- Paid Acquisition Flash: Paid Search + App [1/30/26] — Andrew Wirtz (BCC: ab-marketing)
+- AB MCS Flash | Nov-Dec 2025 — Dwayne Palmer (BCC: theimes-org, ab-marketing)
+- AB Brand & Paid Media | February Flash — Robert Skenes
+- Amazon Business Paid Search OCI Transition Bi-Weekly Update [Dec 31st] — Andrew Wirtz
+- Amazon Business Paid Search OCI Transition Bi-Weekly Update [Dec 4th] — Andrew Wirtz
+- Paid Acquisition Flash: Paid Search / App - OCI Update — Andrew Wirtz (May 2025)
+- FY25 AB Marketing Year-End Close — York Chen
+
+### Research Documents
+- AB Sole Proprietor Experience Study (Aug 2025, WorkDocs)
+- SyRT Incrementality Test Results (Q2 2023)
+- OCI Paid Search Instructions Quip
+- 2026 MBR/QBR Quip
+- Global Acq WBR Callouts (W1-W10 2026)
+
+### Contact Lists
+- ab-paid-acquisition@amazon.com — PS team contact
+- ab-marketing — broader AB marketing distribution
+- ab-ssr-directs@amazon.com — SSR leadership
+- SIM ticket template: https://issues.amazon.com/issues/create?template=24171e7a-43a9-4cc9-bc12-bfb1f22e0b28
+
+<!-- AGENT_CONTEXT
+machine_summary: "Exhaustive evidence locker for the Kate doc (Testing Approach & Year Ahead). 10 sections (A-J) covering: OCI performance data (US +24% lift, $16.7MM OPS, DE test-vs-control W44-W45), ad copy test data (UK +86% CTR test-vs-control, +70% pre/post, IT low confidence), competitive intel (Walmart 37-55% IS, EU5 per-market), market performance (Feb 2026 all markets), LP data (CA +187% CVR, in-context +13.6K regs, Polaris rollout status), engagement/algo ads (DG $0.39 CPC, Prime Day 644% ROAS), SyRT incrementality (NB 82-92% incremental), 2026 investment summary, cross-team contacts, and source documents."
+key_entities: ["OCI", "SyRT", "Walmart", "Polaris", "Demand Gen", "LiveRamp", "F90", "AI Max"]
+action_verbs: ["reference", "verify", "audit", "trace"]
+update_triggers: ["any workstream data update", "new test results", "OCI market status change", "team roster change", "new source document added"]
+-->

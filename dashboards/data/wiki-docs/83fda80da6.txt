@@ -1,0 +1,3 @@
+# 2026 AU Testing
+Source: https://quip-amazon.com/IAJ9AAZJsDL
+Testing plan: Adobe bid strategy (Phase 1 Q1, Phase 2 Q3), LP optimization (Brand Polaris, event support), event sitelinks, image extensions, location/device/demographics modifiers, DG campaigns. MX case study: Adobe reduced NB CPA 25%.

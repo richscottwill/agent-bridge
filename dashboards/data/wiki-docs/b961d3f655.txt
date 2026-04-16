@@ -1,0 +1,3 @@
+# JP CPS - Paid Search
+Source: https://quip-amazon.com/PRL9AACSMZl
+Template/setup doc for JP CPS account. Enterprise-specific keywords, Discovery Ads, audience targeting via LiveRamp planned. LP: amazon.com/businessprime. Sitelinks to Enterprise, Bulk, Discover More, Education pages.
