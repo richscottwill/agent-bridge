@@ -13,77 +13,77 @@
 body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);padding:0;min-height:100vh;-webkit-font-smoothing:antialiased}
 .page{max-width:1200px;margin:0 auto;padding:24px 20px}
 nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);background:rgba(20,22,30,0.92)}
-.nav-brand{color:var(--white);font-weight:700;font-size:.9em;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:4px;letter-spacing:1.5px;text-transform:uppercase}
-.nav-link{color:var(--text2);text-decoration:none;padding:14px 18px;font-size:.8em;font-weight:500;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
+.nav-brand{color:var(--white);font-weight:700;font-size:1.02em;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:4px;letter-spacing:1.5px;text-transform:uppercase}
+.nav-link{color:var(--text2);text-decoration:none;padding:14px 18px;font-size:0.92em;font-weight:500;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
 .nav-link:hover{color:var(--text);background:rgba(74,158,255,0.06)}
 .nav-link.active{color:var(--accent);border-bottom-color:var(--accent)}
-.nav-back{color:var(--text3);text-decoration:none;padding:14px 14px 14px 0;font-size:.75em;font-weight:500;letter-spacing:.3px;margin-right:4px;border-right:1px solid var(--border);transition:color .15s}
+.nav-back{color:var(--text3);text-decoration:none;padding:14px 14px 14px 0;font-size:0.87em;font-weight:500;letter-spacing:.3px;margin-right:4px;border-right:1px solid var(--border);transition:color .15s}
 .nav-back:hover{color:var(--accent)}
-h1{color:var(--white);font-size:1.35em;margin-bottom:4px;font-weight:600;letter-spacing:.2px}
-h2{color:var(--text);font-size:.95em;margin:28px 0 12px;font-weight:600;letter-spacing:.2px}
-.sub{color:var(--text2);font-size:.78em;margin-bottom:24px;line-height:1.5}
+h1{color:var(--white);font-size:1.47em;margin-bottom:4px;font-weight:600;letter-spacing:.2px}
+h2{color:var(--text);font-size:1.07em;margin:28px 0 12px;font-weight:600;letter-spacing:.2px}
+.sub{color:var(--text2);font-size:0.9em;margin-bottom:24px;line-height:1.5}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px;margin-bottom:16px}
 .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:16px}
 .card{background:var(--surface);border-radius:8px;padding:18px;border:1px solid var(--border)}
-.card-title{color:var(--text2);font-size:.72em;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;font-weight:500}
+.card-title{color:var(--text2);font-size:0.84em;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;font-weight:500}
 .chart-box{position:relative;height:280px}
 .chart-box-sm{position:relative;height:200px}
 .stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
 .stat{background:var(--surface);border-radius:6px;padding:12px 16px;border:1px solid var(--border);min-width:100px}
-.stat .v{font-size:1.5em;font-weight:700;color:var(--white)}
-.stat .l{font-size:.62em;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
-table{width:100%;border-collapse:collapse;font-size:.82em}
-th{text-align:left;color:var(--text3);font-weight:500;padding:8px;border-bottom:1px solid var(--border);font-size:.85em;text-transform:uppercase;letter-spacing:.5px}
+.stat .v{font-size:1.62em;font-weight:700;color:var(--white)}
+.stat .l{font-size:0.74em;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
+table{width:100%;border-collapse:collapse;font-size:0.94em}
+th{text-align:left;color:var(--text3);font-weight:500;padding:8px;border-bottom:1px solid var(--border);font-size:0.97em;text-transform:uppercase;letter-spacing:.5px}
 td{padding:8px;border-bottom:1px solid var(--border)}
-.badge{font-size:.68em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;display:inline-block;letter-spacing:.3px}
+.badge{font-size:0.8em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;display:inline-block;letter-spacing:.3px}
 .b-worsening{background:rgba(248,113,113,0.15);color:var(--red)}.b-stuck{background:rgba(251,191,36,0.15);color:var(--amber)}
 .b-improving{background:rgba(52,211,153,0.15);color:var(--green)}.b-new{background:var(--accent-dim);color:var(--accent)}
 .b-validated{background:rgba(167,139,250,0.15);color:var(--purple)}.b-active{background:var(--accent-dim);color:var(--accent)}
 .b-adopted{background:rgba(52,211,153,0.15);color:var(--green)}.b-reverted{background:rgba(248,113,113,0.15);color:var(--red)}
 .b-queued{background:rgba(90,106,122,0.15);color:var(--text2)}
 .no-data{color:var(--text3);font-style:italic;padding:20px;text-align:center}
-.trainer{font-size:.78em;color:var(--text3);margin-top:12px;line-height:1.5;padding:10px 0;border-top:1px solid var(--border)}
+.trainer{font-size:0.9em;color:var(--text3);margin-top:12px;line-height:1.5;padding:10px 0;border-top:1px solid var(--border)}
 .level-track{margin-bottom:10px;padding:14px;background:var(--bg);border-radius:6px;border:1px solid var(--border)}
 .level-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.level-name{font-weight:600;font-size:.9em;color:var(--white)}
+.level-name{font-weight:600;font-size:1.02em;color:var(--white)}
 .level-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;margin:6px 0}
 .level-fill{height:100%;border-radius:2px}
-.lb{font-size:.62em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.lb{font-size:0.74em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
 .lb-active{background:var(--accent-dim);color:var(--accent)}.lb-next{background:rgba(90,106,122,0.15);color:var(--text2)}
 .lb-queued{background:rgba(90,106,122,0.08);color:var(--text3)}.lb-future{background:rgba(90,106,122,0.05);color:var(--text3)}
 .comp-row{margin-bottom:14px}
 .comp-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-.comp-name{font-weight:600;font-size:.85em;color:var(--text)}
-.comp-stage{font-size:.7em;color:var(--text3)}
+.comp-name{font-weight:600;font-size:0.97em;color:var(--text)}
+.comp-stage{font-size:0.82em;color:var(--text3)}
 .comp-track{display:flex;height:22px;background:var(--surface2);border-radius:4px;overflow:hidden}
-.comp-stop{flex:1;display:flex;align-items:center;justify-content:center;font-size:.58em;font-weight:600;color:rgba(255,255,255,0.1);border-right:1px solid var(--border)}
+.comp-stop{flex:1;display:flex;align-items:center;justify-content:center;font-size:0.7em;font-weight:600;color:rgba(255,255,255,0.1);border-right:1px solid var(--border)}
 .comp-stop:last-child{border-right:none}
 .comp-stop.filled{color:rgba(255,255,255,0.9)}
-.ch-item{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.85em}
-.ch-box{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:.65em}
+.ch-item{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:0.97em}
+.ch-box{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:0.77em}
 .ch-done{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
 .ch-text{color:var(--text)}.ch-text.done{color:var(--text3);text-decoration:line-through}
 .overview-card{background:var(--surface);border-radius:8px;padding:20px;border:1px solid var(--border);text-decoration:none;display:block;transition:all .2s}
 .overview-card:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(74,158,255,0.08)}
-.oc-title{color:var(--text2);font-weight:600;font-size:.78em;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px}
-.oc-metric{font-size:1.8em;font-weight:700;margin:8px 0;color:var(--white)}
-.oc-sub{color:var(--text2);font-size:.78em;line-height:1.5}
+.oc-title{color:var(--text2);font-weight:600;font-size:0.9em;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px}
+.oc-metric{font-size:1.92em;font-weight:700;margin:8px 0;color:var(--white)}
+.oc-sub{color:var(--text2);font-size:0.9em;line-height:1.5}
 </style></head><body>
 <nav><a href="../index.html" class="nav-back" target="_top">← Command Center</a><span class="nav-brand">Body System</span><a href="index.html" class="nav-link">Overview</a><a href="growth.html" class="nav-link">Growth</a><a href="willpower.html" class="nav-link">Willpower</a><a href="output.html" class="nav-link active">Output</a><a href="autoresearch.html" class="nav-link">Autoresearch</a></nav>
 <div class="page">
 <h1>Weekly Output</h1>
 <div class="sub">What you shipped, what you built, and where your time went. This is the evidence layer for the Five Levels.</div>
 
-<p style="color:var(--text);font-size:.9em;line-height:1.7;margin-bottom:16px">
+<p style="color:var(--text);font-size:1.02em;line-height:1.7;margin-bottom:16px">
   The standard is simple: every week, at least one strategic artifact. Every month, at least one tool or automation. Every quarter, at least one initiative that changes how the team operates. These map directly to the Five Levels &mdash; artifacts prove Level 1 consistency, tools advance Level 3 adoption, and initiatives build toward Level 5 orchestration.
 </p>
-<p style="color:var(--text2);font-size:.85em;line-height:1.7;margin-bottom:24px">
+<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:24px">
   Across 2 tracked weeks: 0 artifacts shipped, 0 tools built, ~10 hours spent on low-leverage work. Every tracked week has zero artifacts &mdash; this is the #1 pattern to break. The Annual Review confirmed it: visibility is the gap, and artifacts are how you close it. The Testing Approach doc for Kate is the convergence point. Low-leverage work includes invoice/PO coordination, manual campaign link updates, reactive deep dives, meetings without clear output, and manual budget spreadsheets. Each hour there is an hour not spent on the hard thing.
 </p>
 
 <h2>Weekly Scorecard</h2>
 <div class="card"><div class="chart-box"><canvas id="scChart"></canvas></div>
-  <div style="font-size:.75em;color:var(--text3);margin-top:8px;line-height:1.5">
+  <div style="font-size:0.87em;color:var(--text3);margin-top:8px;line-height:1.5">
     <b style="color:var(--accent)">Artifacts</b> Strategic docs, frameworks, test designs, POVs published that week. Target: 1/week. This is the Level 1 gate metric. &middot;
     <b style="color:rgba(74,158,255,0.7)">Tools</b> Automations or tools completed and usable by Richard or teammates. Target: 1/month. Level 3 gate metric. &middot;
     <b style="color:var(--text2)">Low-Leverage Hours</b> Time on work that does not advance the Five Levels. Target: under 5 hours/week.
@@ -91,13 +91,13 @@ td{padding:8px;border-bottom:1px solid var(--border)}
 </div>
 
 <h2>Five Levels</h2>
-<p style="color:var(--text2);font-size:.85em;line-height:1.7;margin-bottom:12px">
+<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:12px">
   Sequential. Each level funds the next. You can do work at multiple levels simultaneously, but you do not graduate until the gate is met. The aMCC tracks Level 1 progress via the streak. The nervous system tracks all levels via calibration loops.
 </p>
 <div class="card" id="levelsDisplay"></div>
 
 <h2>Low-Leverage Patterns</h2>
-<p style="color:var(--text2);font-size:.85em;line-height:1.7;margin-bottom:12px">
+<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:12px">
   Recurring time traps identified by the trainer. Each has been observed for multiple weeks. The fix column shows the structural intervention &mdash; not "try harder" but "change the default." The signal column is what the trainer says when this pattern appears.
 </p>
 <div class="card" id="lowLevTable"></div>
@@ -132,10 +132,10 @@ fetch('../data/body-system-data.json?'+Date.now()).then(r=>r.json()).then(functi
       var c=colors[lv.status]||'#1f222b';
       var bc=lv.status==='ACTIVE'?'lb-active':lv.status==='NEXT'?'lb-next':lv.status==='QUEUED'?'lb-queued':'lb-future';
       h+='<div class="level-track"><div class="level-header"><span class="level-name">'+lv.level+'. '+lv.name+'</span>'+
-        '<span style="color:#888;font-size:.8em;margin-right:6px">'+fills[i]+'%</span><span class="lb '+bc+'">'+lv.status+'</span></div>'+
+        '<span style="color:#888;font-size:0.92em;margin-right:6px">'+fills[i]+'%</span><span class="lb '+bc+'">'+lv.status+'</span></div>'+
         '<div class="level-bar"><div class="level-fill" style="width:'+fills[i]+'%;background:'+c+'"></div></div>'+
-        '<div style="font-size:.73em;color:#666;margin-top:2px">'+lv.description+'</div>'+
-        '<div style="font-size:.73em;color:#888;margin-top:1px;font-style:italic">Gate: '+lv.gate+'</div>';
+        '<div style="font-size:0.85em;color:#666;margin-top:2px">'+lv.description+'</div>'+
+        '<div style="font-size:0.85em;color:#888;margin-top:1px;font-style:italic">Gate: '+lv.gate+'</div>';
       h+='</div>';
     });
     el.innerHTML=h;
@@ -154,7 +154,7 @@ fetch('../data/body-system-data.json?'+Date.now()).then(r=>r.json()).then(functi
     ];
     var h='<table><tr><th>Time Trap</th><th style="text-align:center">Weeks</th><th>Fix</th><th>Signal</th></tr>';
     traps.forEach(function(t){
-      h+='<tr><td style="font-weight:500">'+t.name+'</td><td style="color:#888;text-align:center">'+t.weeks+'</td><td style="color:#888;font-size:.82em">'+t.fix+'</td><td style="color:#666;font-size:.78em;font-style:italic">'+t.signal+'</td></tr>';
+      h+='<tr><td style="font-weight:500">'+t.name+'</td><td style="color:#888;text-align:center">'+t.weeks+'</td><td style="color:#888;font-size:0.94em">'+t.fix+'</td><td style="color:#666;font-size:0.9em;font-style:italic">'+t.signal+'</td></tr>';
     });
     el.innerHTML=h+'</table>';
   })();
@@ -162,4 +162,4 @@ fetch('../data/body-system-data.json?'+Date.now()).then(r=>r.json()).then(functi
   document.getElementById('genFooter').textContent='DATA: '+new Date(D.generated).toLocaleString()+' · STANDALONE HTML · CHART.JS VIA CDN · PORTABLE';
 }).catch(function(e){console.error(e);document.getElementById('scChart').parentElement.innerHTML='<div style="color:#f87171">Failed to load data</div>'});
 </script>
-<div style="color:var(--text3);font-size:.62em;text-align:center;margin-top:48px;padding:16px;letter-spacing:.5px" id="genFooter">LOADING DATA&hellip;</div></div></body></html>
+<div style="color:var(--text3);font-size:0.74em;text-align:center;margin-top:48px;padding:16px;letter-spacing:.5px" id="genFooter">LOADING DATA&hellip;</div></div></body></html>

@@ -310,4 +310,4 @@ Each event gets a project_name tag (AU, MX, WW Testing, Polaris, OCI, etc.) and 
 
 ## Portability Note
 
-All outputs are either DuckDB tables (portable via MotherDuck) or plain markdown files (portable by definition). No hooks, MCP, or subagent access required to read the outputs. A new AI on a different platform can pick up any series file or query any DuckDB table and understand the context cold.
+All outputs are either DuckDB tables (queried via MCP) or plain markdown files (portable by definition). No hooks, MCP, or subagent access required to read the outputs. A new AI on a different platform can pick up any series file or query any DuckDB table and understand the context cold.

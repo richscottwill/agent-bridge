@@ -37,7 +37,7 @@ For each registered state file where status = ACTIVE:
 
 **Failure handling:** If DuckDB has no new data for a market (same week as last generation), skip that market. Log skip reason. Don't regenerate stale content.
 
-**Data source note:** `ps.metrics` in MotherDuck is the canonical weekly data source. It is populated by Step 2D.5 (PS Metrics Sync) which aggregates daily_metrics from the local DuckDB file into MotherDuck's EAV format. The dashboard ingester writes daily_metrics when Richard drops a new xlsx; Step 2D.5 bridges the gap to ps.metrics. If ps.metrics is stale, the state file engine skips — it does NOT fall back to callout markdown files or raw daily data.
+**Data source note:** `ps.metrics` in DuckDB (queried via MCP `execute_query`) is the canonical weekly data source. It is populated by Step 2D.5 (PS Metrics Sync) which aggregates daily_metrics into the EAV format. The dashboard ingester writes daily_metrics when Richard drops a new xlsx; Step 2D.5 bridges the gap to ps.metrics. If ps.metrics is stale, the state file engine skips — it does NOT fall back to callout markdown files or raw daily data.
 
 ### Layer 2: EOD-Refresh Step 9 — Priority Patching (daily)
 

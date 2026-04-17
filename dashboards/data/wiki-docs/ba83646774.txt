@@ -1,0 +1,466 @@
+<!-- DOC-0437 | duck_id: wiki-five-year-outlook -->
+
+---
+title: "Paid Search Five-Year Outlook: 2026–2030"
+slug: "five-year-outlook"
+doc-type: "strategy"
+type: "guide"
+audience: "org"
+status: "draft"
+created: "2026-04-05"
+updated: "2026-04-05"
+owner: "Richard Williams"
+tags: ["paid-search", "strategy", "five-year", "agentic", "AI-overviews", "OCI", "outlook"]
+depends_on: ["testing-approach-kate", "aeo-ai-overviews-pov", "agentic-ps-vision"]
+consumed_by: ["wiki-critic", "wiki-librarian", "kate-rundell", "brandon-munday"]
+summary: "Five-year PS trajectory from validated 2025 results through speculative 2030 scenarios, with parallel agentic evolution track."
+---
+
+# Paid Search Five-Year Outlook: 2026–2030
+
+This document projects the trajectory of Amazon Business Paid Search from 2026 through 2030. It is written for Kate Rundell and Brandon Munday to support OP1 planning and multi-year investment decisions. After reading it, you will understand what is grounded in evidence, what is a committed bet, and what is speculative — and what we do differently if the speculative scenarios don't materialize.
+
+The core thesis: Paid Search is transitioning from a keyword-driven acquisition channel to an automated, audience-centric engine. OCI, campaign consolidation, and lifecycle engagement are the first phase. AI Max, Shopping Ads via Baloo, and agentic operations are the second. The external environment — AI Overviews, agentic commerce protocols, procurement AI — will determine the pace. Our job is to build the infrastructure that compounds regardless of which external scenario plays out.
+
+Confidence degrades honestly by year. 2026 is almost entirely grounded in validated results and committed investments (HIGH confidence). 2027 is grounded in 2026 outcomes with committed bets (MEDIUM confidence). 2028 through 2030 is scenario planning informed by external signals (LOW confidence). The appendix carries all supporting data, source citations, and methodology detail.
+
+---
+
+## 2026 — Validate and Scale
+
+*Confidence: HIGH — investments committed, tests designed, team executing.*
+
+### What we know
+
+OCI delivered 35,196 incremental registrations and $16.7MM in OPS across US, UK, and DE in 2025. The US saw +24% registration uplift and approximately 50% NB CPA improvement. UK delivered +23% lift with 2,400 incremental registrations. DE delivered +18% lift with 749 incremental registrations. Seven of ten markets are at 100% OCI deployment: US, UK, DE, FR, IT, ES, and JP. The validated pattern — keyword-level end-to-end testing through phased 25/50/100% rollout with seasonality-adjusted baselines — is replicable across remaining markets. [source: eyes.md, Kate Testing Approach doc; confidence: HIGH]
+
+Modern Search consolidation strengthened the data signals OCI requires to optimize. The UK ad copy test (Jan 29 through Mar 2) delivered +86% CTR and +31% registrations at HIGH confidence, validating the messaging shift from bulk/wholesale to price/quality/selection. That shift was grounded in the Sole Proprietor study (Aug 2025), which found 50% of SPs believed AB required bulk purchasing. EU4 translations are complete via GlobalLink. Campaign consolidation continues as structural preparation for AI Max. [source: eyes.md; confidence: HIGH]
+
+Project Baloo launched early access on March 30. Unauthenticated catalog exploration before registration unlocks Shopping Ads for AB — a format previously unavailable because AB required authentication before product browsing. US Q2 2026 is the target for broader rollout. A noindex blocker (V2083026891) is flagged but not impacting SEO while behind VPN. This is the single largest structural change to the registration funnel since in-context registration, which delivered +13,600 annualized incremental registrations at 100% probability via APT. [source: current.md, eyes.md; confidence: HIGH for launch, MEDIUM for impact]
+
+F90 Lifecycle Engagement extends PS from acquisition into activation. The goal is increasing non-SHuMA 3+ purchase rate from 31.7% to 35.4% (+366 basis points). The Engagement channel already drove $765K in iOPS in 2025 and $329K OPS at 644% ROAS during Prime Day 2025. Legal SIMs are in progress for the 3+ purchases targeting criteria. [source: Kate Testing Approach doc; confidence: HIGH]
+
+The competitive landscape is intensifying. In the US, Walmart Business Brand impression share climbed from 25% to 55% at peak (W6 2026), pushing Brand CPA from approximately $40 to $65-77. Market-wide, competitor density has grown from one to two competitors per market in 2023 to three to five in 2026. The team's posture is efficiency over escalation — we do not chase impression share at unsustainable CPAs. [source: eyes.md; confidence: HIGH]
+
+### What we are betting on
+
+AI Max US testing is planned for Q2 2026. Google claims 14% more conversions at similar CPA for early adopters, but that figure is an aggregate across retail and lead-gen advertisers. AB's conversion event — completed registration with business verification — is structurally different. The test design has not been written yet. The approach will follow the same phased methodology used for OCI: clear baseline, controlled rollout, go/no-go gates. AI Max is not a replacement for OCI. It is a complementary layer that benefits from consolidated campaign structure and stronger data signals. [source: eyes.md, current.md; confidence: MEDIUM — no AB-specific data]
+
+CA targets April 7 for full OCI deployment, with monthly registration impact expected by July. AU targets May 2026 pending MCC creation. MX has no timeline. These are execution, not experimentation — the methodology is proven, the question is operational readiness. [source: Kate Testing Approach doc; confidence: HIGH for CA/AU, LOW for MX]
+
+The agentic capability target for 2026 is one tool adopted by a teammate — moving from "Richard uses agents" to "the team uses agents." Candidates include the WBR callout pipeline (already producing 10-market callouts), campaign link generator, or budget forecast helper. The constraint is not technical capability but team adoption of non-traditional workflows. [source: device.md, agentic-ps-vision.md; confidence: HIGH for capability, MEDIUM for adoption]
+
+### What we are watching
+
+AI Overview appearance rates on AB's top NB keywords. The AEO POV identifies this as the first measurement priority. Industry data shows AI Overviews reduce organic CTR by 35-61% where they appear, but B2B transactional queries ("create amazon business account") may be partially protected — AI Overviews rarely appear for transactional keywords. We do not have AB-specific data yet. The measurement plan — tracking top 50 NB keywords monthly — starts this year. Until that data exists, any projection about search volume shifts is speculation. [source: AEO POV, Stackmatix 2026, Conductor/Seer 2026; confidence: MEDIUM for industry data, LOW for AB-specific impact]
+
+Google's AI Mode ads experiment. Google launched Shopping Ads in AI Mode on January 11, 2026, with formal announcement by Vidhya Srinivasan (VP Ads & Commerce) on February 11. Currently US-only, English, mobile and desktop, labeled "experiment." Ad placement logic is layered on semantic understanding of the entire conversation thread, not just a single query. No B2B registration ad format exists in AI Mode yet. [source: Ayko, SearchEngineJournal, PPC.land; confidence: MEDIUM — product exists, no B2B use case]
+
+Baloo's impact on registration quality. Lower-friction registration could mean higher volume but lower intent. The measurement framework needs to track 90-day post-registration purchasing behavior, not just registration CPA. [source: internal analysis; confidence: MEDIUM]
+
+### What changes if we are wrong
+
+If AI Max underperforms on B2B registration campaigns, we continue with the OCI-plus-consolidation approach that is already delivering double-digit uplift. The downside is limited — we lose the test period investment but retain the structural improvements (consolidated campaigns, stronger data signals) that benefit any bidding approach.
+
+If Baloo's unauthenticated browsing degrades registration quality, we tighten the funnel by adding qualification signals before the registration prompt. The Shopping Ads opportunity would narrow but not disappear.
+
+If AI Overviews expand aggressively into B2B transactional queries in 2026 (earlier than expected), the mitigation is the AEO action plan: structured landing pages for AI extraction, early testing of ads-in-AI-Overviews when available, and accelerated investment in lifecycle channels less affected by zero-click. The F90 investment is already a hedge against this scenario.
+
+
+---
+
+## 2027 — Optimize and Extend
+
+*Confidence: MEDIUM — grounded in 2026 outcomes, committed directional bets.*
+
+### What we know (projected from 2026 results)
+
+By the start of 2027, OCI will be deployed across all ten markets. The five markets launching in 2026 (CA, AU, JP, FR, IT, ES — MX timeline dependent) will have at least six months of performance data. If they follow the US/UK/DE pattern, we expect double-digit registration uplift in each market, with the magnitude varying by market maturity and competitive density. The total OCI-attributable registration impact across all markets should be measurable and reportable at the annual level. [source: extrapolation from 2025 OCI results; confidence: MEDIUM]
+
+AI Max test results from Q2-Q3 2026 will determine the 2027 bidding strategy. If AI Max delivers incremental lift on top of OCI (the expected outcome based on Google's architecture — AI Max uses OCI signals as inputs), the 2027 play is worldwide AI Max rollout following the same phased methodology. If AI Max underperforms, we stay with OCI-plus-consolidation and revisit when Google iterates the product. Either outcome is actionable. [source: planned Q2 2026 test; confidence: MEDIUM]
+
+Baloo will have six-plus months of performance data by early 2027. Shopping Ads contribution to the registration funnel will be measurable. The 90-day post-registration quality data will tell us whether unauthenticated browsing attracts high-intent or low-intent registrants. This data shapes the 2027 UX investment — either doubling down on Shopping Ads or tightening qualification signals. [source: Baloo Q2 2026 launch; confidence: MEDIUM]
+
+F90 Lifecycle Engagement will have its first full-year results. The 31.7% to 35.4% non-SHuMA 3+ purchase rate target will either be validated or revised. If validated, the 2027 play is expanding the lifecycle model to additional customer segments and extending the engagement window beyond 90 days. [source: Kate Testing Approach doc; confidence: MEDIUM]
+
+### What we are betting on
+
+The ad copy messaging framework validated in UK and EU4 will be the global standard. Every market will run the price/quality/selection messaging, with local adaptations based on market-specific SP research. The bulk/wholesale messaging era ends. [confidence: HIGH — already validated]
+
+AI Overviews measurement data from 2026 will inform the first AB-specific AEO strategy. If AI Overviews appear on fewer than 10% of our top NB keywords, the impact is negligible and we continue the keyword-plus-audience approach. If appearance rates exceed 25%, we accelerate the AEO action plan: structured data on landing pages, early testing of ads-in-AI-Overviews, and content optimization for AI extraction. The threshold for strategic response is 25% appearance rate on our top 50 NB keywords. [source: AEO POV; confidence: MEDIUM — threshold is a judgment call]
+
+The agentic capability moves to Stage 2 — agent-executed, human-approved. Campaign builds from templates, keyword expansion from seed lists, and invoice routing become agent-executed with human approval gates. The target is reducing the 60/40 execution-to-strategy ratio to 40/60. At least two teammates are using agent tools for routine tasks. [source: agentic-ps-vision.md; confidence: MEDIUM for capability, LOW for team adoption pace]
+
+### What we are watching
+
+Google's AI Mode ads expansion beyond Shopping. If Google introduces registration or lead-gen ad formats in AI Mode, AB needs to be an early tester. The conversation-intent bidding model (semantic understanding of the full conversation thread, not just a single query) would fundamentally change how we structure campaigns. We are watching for any Google announcement about B2B ad formats in AI Mode. [source: Google AI Mode announcements; confidence: LOW — speculative timeline]
+
+Competitor adoption of OCI and AI Max. If Walmart Business, Staples, or other competitors adopt the same bidding infrastructure, the efficiency advantage narrows. The differentiation shifts from bidding technology to audience signals, creative quality, and landing page experience — areas where AB's product depth and customer data provide structural advantages. [source: competitive analysis; confidence: MEDIUM]
+
+The agentic commerce protocols — Google's Universal Commerce Protocol (UCP) and OpenAI's Agentic Commerce Protocol (ACP). Both launched in 2025-2026 for consumer retail. Neither supports B2B registration flows today. We are watching for any extension to B2B use cases. If either protocol adds "create a business account" as a supported action, AB needs to make its registration flow agent-readable — structured data, API endpoints for account creation. This is a monitoring item, not an investment item, for 2027. [source: Google Business, Atwix; confidence: MEDIUM for protocol existence, LOW for B2B applicability]
+
+### What changes if we are wrong
+
+If AI Max worldwide rollout fails to deliver incremental lift beyond OCI alone, the cost is the rollout investment but the OCI foundation remains intact. We would shift AI Max budget to Demand Gen expansion and Shopping Ads scaling via Baloo — channels that have already demonstrated efficiency.
+
+If F90 Lifecycle Engagement misses the 35.4% target, we diagnose whether the issue is targeting precision (match rates, audience definition) or offer relevance (what we show recently acquired customers). The Engagement channel infrastructure remains valuable regardless — it proved its worth at $765K iOPS and 644% ROAS during Prime Day.
+
+If a competitor leapfrogs AB on agentic bidding infrastructure, the response is acceleration, not panic. The five-workstream methodology is the moat — competitors can adopt the same tools but cannot replicate the compounding effects of OCI-plus-consolidation-plus-lifecycle-plus-UX-plus-algorithmic working as an integrated system.
+
+---
+
+## 2028 — Adapt to the New Search Landscape
+
+*Confidence: LOW — scenario planning informed by external signals.*
+
+### What we know (projected)
+
+By 2028, the team will have two full years of AI Overview measurement data. The impact on AB's NB keyword portfolio will be quantified, not estimated. The strategic response — whether aggressive AEO investment or continued keyword-plus-audience optimization — will be grounded in AB-specific evidence rather than industry averages. [confidence: MEDIUM for having the data, LOW for predicting what it shows]
+
+The agentic capability should be at Stage 3 — agent-autonomous with guardrails. Bid adjustments within CPA guardrails, negative keyword management, and anomaly detection operate independently. Human review focuses on exceptions and strategic decisions. The execution-to-strategy ratio target is 20/80. [source: agentic-ps-vision.md; confidence: LOW — depends on 2026-2027 adoption trajectory]
+
+OCI will be a mature, optimized system across all markets. The incremental gains from OCI itself will plateau — the next efficiency frontier is the combination of OCI signals with AI Max's automated targeting and Baloo's Shopping Ads format. The compounding effect of all five workstreams operating simultaneously should be measurable as a system, not just as individual workstreams. [confidence: MEDIUM]
+
+### What we are betting on
+
+Google will extend AI Mode ads to B2B registration or lead-gen formats. This is not confirmed — it is a directional bet based on Google's pattern of launching consumer formats first and extending to B2B within 12-18 months. If this happens, AB's early OCI investment becomes the critical differentiator: first-party conversion signals are the currency of AI Mode bidding, and AB will have two-plus years of OCI signal history that competitors launching OCI in 2027-2028 will lack. [source: Google AI Mode trajectory, industry pattern analysis; confidence: LOW — speculative]
+
+The registration funnel will be partially agent-discoverable. Not full agentic commerce (that is 2029-2030 territory), but structured data on AB landing pages that AI systems can parse, cite, and recommend. This is the AEO POV's Level 4 vision applied to the registration flow: AB becomes the answer that AI systems surface, not just the ad that appears above the AI answer. [source: AEO POV; confidence: LOW]
+
+Gartner projects that 90% of B2B buying will be AI-agent intermediated by 2028, pushing $15 trillion through AI agent exchanges. We treat this as directionally correct but timeline-aggressive. The actual penetration of AI-intermediated B2B procurement in 2028 is more likely 10-20% of transactions, concentrated in commoditized categories with standardized purchasing flows. AB registration — a free account creation, not a purchase — sits at the edge of this trend. [source: Gartner via DigitalCommerce360, Nov 2025; confidence: LOW — forecast, not measurement]
+
+### What we are watching
+
+The 40% cancellation rate. Gartner predicts that more than 40% of agentic AI projects will be canceled by 2027 due to escalating costs and unclear business value. This applies to enterprise agentic adoption broadly, including marketing automation. If the cancellation wave hits marketing teams that over-invested in agentic infrastructure without clear ROI, it creates a window for teams (like ours) that built incrementally with measurable outcomes at each stage. We are watching for signs of agentic disillusionment in the marketing industry — budget cuts, vendor consolidation, "back to basics" narratives. [source: Gartner via DigitalApplied; confidence: MEDIUM for the prediction, LOW for timing]
+
+Platform consolidation. Google, Microsoft, and Meta are all building agentic advertising products. By 2028, the question is whether these converge into a unified agentic advertising layer or remain platform-specific silos. If they converge, campaign management simplifies dramatically. If they remain siloed, the operational complexity increases and the case for agentic operations (multi-agent systems managing multiple platforms) strengthens. [confidence: LOW — speculative]
+
+AB's internal technology roadmap. Project Aladdin (registration plus checkout merge, originally targeted Q4 2026) and any successor projects that change the registration funnel architecture will reshape what PS can optimize for. The closer the registration event moves to a purchase event, the more standard advertising tools (including AI Max and Shopping Ads) work out of the box. [source: Kate Testing Approach doc; confidence: LOW for timeline]
+
+### What changes if we are wrong
+
+If AI Mode ads do not extend to B2B by 2028, the keyword-plus-audience-plus-OCI approach continues to work. The risk is opportunity cost — we prepared for a format that did not arrive — but the preparation (structured data, agent-readable landing pages) has independent value for SEO and AEO regardless.
+
+If the agentic disillusionment wave hits harder than expected and internal support for agentic investment weakens, the team's position is strong: every agentic capability we built has a measurable ROI (WBR callouts save X hours/week, campaign builds save Y hours/month). We are not dependent on the hype cycle because we built for sustainability, not demonstration.
+
+If B2B procurement AI adoption is slower than Gartner projects (the likely scenario), we lose nothing. The registration flow improvements benefit human users and AI agents equally. The investment is not wasted — it is early.
+
+---
+
+## 2029 — Operate in the Hybrid Channel
+
+*Confidence: LOW — scenario planning with multiple branching paths.*
+
+### What we know (projected)
+
+By 2029, the search landscape will have bifurcated. Some portion of business buyers will still use traditional keyword search — typing queries, clicking ads, navigating landing pages. Another portion will use conversational AI interfaces — asking agents for recommendations, receiving curated options, completing actions within the AI environment. The ratio between these two modes is unknowable today. What we can project is that AB PS will need to operate effectively in both modes simultaneously. [confidence: LOW for the ratio, MEDIUM for the bifurcation itself]
+
+The agentic capability should be at Stage 4 — agent-orchestrated. Multiple agents coordinate across functions: cross-market campaign launches, competitive response playbooks, automated reporting and anomaly resolution. Human effort concentrates on strategic direction, stakeholder communication, and exception handling. The execution-to-strategy ratio target is 10/90. [source: agentic-ps-vision.md; confidence: LOW — depends on three years of compounding capability]
+
+Three full years of AI Overview data will reveal the actual trajectory for B2B queries. The industry's initial panic (35-61% organic CTR reduction) will have been calibrated against AB-specific reality. The strategic response will be mature and evidence-based, not reactive. [confidence: MEDIUM for having the data, LOW for predicting the outcome]
+
+### What we are betting on
+
+The registration flow is fully agent-accessible. Business buyers using AI procurement tools can discover AB, understand the value proposition, and initiate registration through agent-to-agent interaction. This does not require AB to adopt UCP or ACP specifically — it requires structured data, API endpoints, and machine-readable content that any agent framework can consume. The investment is in making AB's registration flow a first-class citizen in the agentic web, not in betting on a specific protocol. [source: UCP/ACP analysis, AEO POV Level 4; confidence: LOW — directional, not specific]
+
+Paid search bidding operates on conversation-intent signals, not keyword-level signals. If Google's AI Mode ads have expanded to B2B by this point, the bidding model will have shifted from "what keyword did the user type" to "what is the user trying to accomplish across a multi-turn conversation." OCI's first-party conversion signals become even more valuable in this model — they tell Google's system what a successful registration looks like, regardless of the query path that led there. [source: Google AI Mode architecture analysis; confidence: LOW]
+
+The team's agentic infrastructure is a competitive advantage, not just an efficiency tool. Other marketing teams that started their agentic journey in 2027-2028 (after the hype cycle correction) are two to three years behind. The compounding effect of early investment — not just in tools but in workflows, guardrails, and institutional knowledge — creates a moat that is difficult to replicate quickly. [source: agentic-ps-vision.md; confidence: MEDIUM for the advantage, LOW for the magnitude]
+
+### What we are watching
+
+Protocol convergence or fragmentation. By 2029, the UCP/ACP landscape will have either consolidated into a dominant standard (like HTTP for the web) or fragmented into platform-specific silos (like mobile app stores). If convergence, AB needs to support the winning protocol. If fragmentation, AB needs a protocol-agnostic agent interface. We are watching for industry standards bodies, major retailer adoption patterns, and Google/OpenAI partnership or competition dynamics. [confidence: LOW — too many variables]
+
+The regulatory environment for AI-intermediated commerce. Governments are likely to regulate AI purchasing agents — disclosure requirements, liability frameworks, consumer protection extensions to B2B. Any regulation that requires AI agents to disclose their recommendations or that holds platforms liable for agent-driven purchases will reshape the agentic commerce landscape. We are watching for EU AI Act enforcement patterns and US regulatory proposals. [confidence: LOW — regulatory timelines are unpredictable]
+
+Internal organizational evolution. If Kate's org adopts agentic operations broadly (not just PS), the team's role shifts from "PS team that uses agents" to "the team that built the agentic playbook for the org." This is the Level 5 visibility play — demonstrating that the methodology scales beyond one function. [source: agentic-ps-vision.md; confidence: LOW for timing, MEDIUM for direction]
+
+### What changes if we are wrong
+
+If the search landscape does not bifurcate — if traditional keyword search remains dominant through 2029 — the keyword-plus-audience-plus-OCI approach continues to deliver. The agentic infrastructure investments still pay off through operational efficiency even if the external channel does not shift. The risk is over-investment in agent-accessible registration flows that few agents actually use. The mitigation is that those investments (structured data, API endpoints, machine-readable content) improve the human experience too.
+
+If agentic capability stalls at Stage 3 (autonomous with guardrails) rather than reaching Stage 4 (orchestrated), the team still operates at significantly higher efficiency than 2026. The gap between Stage 3 and Stage 4 is coordination complexity, not fundamental capability. The team can operate effectively at Stage 3 indefinitely while building toward Stage 4 incrementally.
+
+If the competitive advantage from early agentic investment is smaller than projected — because tools commoditize faster than expected or because competitors catch up quickly — the fallback is the five-workstream methodology itself. The methodology is the moat, not the tools. Competitors can buy the same agent platforms but cannot replicate the integrated system of OCI-plus-consolidation-plus-lifecycle-plus-UX-plus-algorithmic that compounds across workstreams.
+
+---
+
+## 2030 — Position for the Next Transformation
+
+*Confidence: LOW — directional vision, not operational plan.*
+
+### What we know (projected)
+
+By 2030, the PS team will have five years of compounding investment in automated, audience-centric acquisition. The OCI foundation launched in 2024-2025 will have been iterated through multiple generations of Google's bidding infrastructure. The team's operational model — whether at agentic Stage 4 or Stage 5 — will be fundamentally different from the manual, keyword-driven approach of 2023. [confidence: MEDIUM for the transformation having occurred, LOW for the specific state]
+
+The agentic AI market is projected to reach $52-57 billion by 2030-2031, growing at 42-46% CAGR from $9.89 billion in 2026. Multi-agent systems command 53% market share. These numbers describe the ecosystem AB PS operates within, not AB's specific investment. The relevant signal is that agentic infrastructure will be mainstream, not experimental — the question is whether AB PS is a leader or a follower in its category. [source: MarketsAndMarkets, AlexGenovese; confidence: MEDIUM for market size direction, LOW for specific numbers]
+
+### What we are betting on
+
+The PS function has transformed from "manage keyword campaigns" to "orchestrate automated acquisition across search, conversational AI, and agent-mediated channels." The team's value is not in executing campaigns — agents handle that. The team's value is in designing the system: which signals to optimize for, which audiences to prioritize, which channels to invest in, and how to measure incrementality across a fragmented acquisition landscape. [confidence: LOW — this is vision, not projection]
+
+Richard's Five Stages framework reaches Stage 5 — self-improving system — for at least one function. The autoresearch loop concept (agents running experiments on their own processes and optimizing without human intervention) applies to campaign management, not just context management. This is the most speculative projection in the document. It depends on tool maturity, organizational trust, and regulatory environment all aligning. [source: agentic-ps-vision.md; confidence: LOW]
+
+AB's registration flow is a first-class participant in agentic commerce. Business buyers discover and register for AB through AI procurement agents, conversational interfaces, and traditional search — and the PS team's measurement framework attributes value across all three channels. The "paid search" label may no longer describe the function accurately. "Paid acquisition" or "automated acquisition" better captures the scope. [confidence: LOW — directional]
+
+### What we are watching
+
+The next platform shift. Every five to seven years, a fundamental change reshapes digital marketing: search (2000s), mobile (2010s), automation/AI (2020s). By 2030, the next shift may be emerging — spatial computing, ambient commerce, or something not yet named. The team's agentic infrastructure should be portable enough to adapt. The body system's portable architecture (portable-body/) was designed for exactly this kind of platform transition. [confidence: LOW — speculative by definition]
+
+Organizational structure evolution. If agentic operations become the norm across Kate's org, the PS team's structure may evolve. Fewer execution-focused roles, more strategy-and-systems roles. The 7-person team managing 10 markets may become a 5-person team managing 15 markets at higher efficiency, or a 7-person team managing 10 markets plus three new channels. The headcount question depends on whether leadership views agentic efficiency as a cost reduction or a capability expansion opportunity. [confidence: LOW]
+
+### What changes if we are wrong
+
+If the transformation is slower than projected — if 2030 looks more like an optimized version of 2027 than a fundamentally different operating model — the team is still in a strong position. Every investment along the five-year path delivers incremental value at each stage. OCI delivers value in 2025. AI Max delivers value in 2026-2027. Lifecycle engagement delivers value in 2026-2027. Agentic operations deliver value in 2027-2028. None of these investments require the full five-year vision to materialize in order to justify themselves.
+
+If the agentic commerce vision does not materialize by 2030 — if business buyers still primarily use traditional search to find and register for AB — the keyword-plus-audience approach continues to work, enhanced by five years of OCI signal history, AI Max optimization, and lifecycle engagement infrastructure. The worst case is that we built capabilities we did not need yet. The best case is that we built them three years before competitors.
+
+---
+
+## Broader Agentic Evolution — Parallel Track
+
+*This section runs alongside the PS-specific projections. It covers the enterprise multi-agent landscape, agentic commerce protocols, and how Richard's Five Stages framework maps to the external trajectory.*
+
+### The external landscape validates the direction
+
+Enterprise adoption of agentic AI is accelerating faster than most technology cycles. Gartner reports that 52% of executives have agents in production as of early 2026, and 40% of enterprise applications will embed task-specific AI agents by end of 2026 — up from less than 5% in 2025. CrewAI's survey found 100% of surveyed enterprises planning to expand agentic AI in 2026, with 62% already in production. The agentic AI market is valued at $9.89 billion in 2026 and projected to reach $52-57 billion by 2030-2031. [source: Gartner, CrewAI State of Agentic AI 2026, MarketsAndMarkets; confidence: MEDIUM — adoption numbers are real, sustainability is uncertain]
+
+The critical counterpoint: Gartner also predicts more than 40% of agentic AI projects will be canceled by 2027 due to escalating costs and unclear business value. Both projections can be true simultaneously — rapid adoption followed by rapid disillusionment is the standard technology hype cycle. The teams that survive the correction are those that built incrementally with measurable outcomes at each stage, not those that made large speculative bets on agentic transformation. Richard's approach — Stage 1 delivering value before investing in Stage 2 — is explicitly designed for this pattern. [source: Gartner via DigitalApplied; confidence: MEDIUM]
+
+### Five Stages mapped to external trajectory
+
+Richard's Five Stages of Agentic PS map to the broader enterprise agentic evolution, but on a faster timeline because the PS function is unusually well-suited to automation (data-heavy, rule-based, measurable).
+
+Stage 1 (Agent-Assisted, current) corresponds to where most enterprise marketing teams are in early 2026 — using AI for content generation, data summarization, and workflow assistance. Richard's system is more sophisticated than most (persistent memory, multi-agent architecture, body system) but the functional output is similar: agents assist, humans decide and execute.
+
+Stage 2 (Agent-Executed, 2026-2027 target) corresponds to where Gartner expects 40% of enterprise apps to be by end of 2026. Agents execute defined tasks with human approval. The difference is that Richard's system will have the guardrails, measurement framework, and rollback procedures that most enterprise deployments lack — which is why 40% of those deployments get canceled.
+
+Stage 3 (Agent-Autonomous, 2027-2028 target) corresponds to Forrester's projection that 50% of enterprises will deploy multi-agent systems for real-time decision-making by 2027. Agents operate independently within defined parameters. This is where the sustainability question becomes critical — autonomous agents that make mistakes at scale are worse than manual processes. The guardrail architecture (CPA limits, anomaly detection, human escalation triggers) is the differentiator.
+
+Stage 4 (Agent-Orchestrated, 2028-2029 target) corresponds to the multi-agent coordination that AWS Bedrock AgentCore and similar platforms are productionizing. Multiple specialized agents working together across business workflows. Richard's existing system (Kiro plus body system plus hooks) is a functional prototype of what AgentCore makes enterprise-grade. The gap is scale, reliability, and organizational trust.
+
+Stage 5 (Self-Improving, 2029-2030 target) has no clear external parallel yet. Self-improving agent systems that run experiments on their own processes are discussed in research but not deployed in production marketing environments. This stage is aspirational. The autoresearch loop (agents optimizing their own context management) is the closest existing example, but extending it to campaign management requires a level of organizational trust and measurement sophistication that does not exist yet. [source: agentic-ps-vision.md, Gartner, Forrester, AWS; confidence: HIGH for Stages 1-2 mapping, MEDIUM for Stage 3, LOW for Stages 4-5]
+
+### Agentic commerce protocols and AB's position
+
+Two competing protocols define the emerging agentic commerce landscape. Google's Universal Commerce Protocol (UCP), announced January 11, 2026 by Sundar Pichai at NRF, is an open standard for AI agents to handle the full shopping journey from discovery through checkout. Launch partners include Shopify, Target, Walmart, Etsy, and Wayfair, with payment support from Visa, Mastercard, Stripe, and American Express. UCP enables purchases inside AI Mode and the Gemini app without visiting a product page. [source: Google Business; confidence: HIGH for product existence]
+
+OpenAI's Agentic Commerce Protocol (ACP), launched September 29, 2025 with Stripe, powers Instant Checkout in ChatGPT. ACP is dialogue-based — conversational agents guide users through the buying process. The UCP-versus-ACP dynamic mirrors the "open web versus walled garden" tension that has defined digital commerce for two decades. [source: Atwix, MTSoln; confidence: HIGH for product existence]
+
+Neither protocol currently supports B2B registration flows. AB's registration event — creating a free business account — is structurally different from a product purchase. Extending either protocol to support "create a business account" is architecturally possible but not on any published roadmap. The practical implication: AB should make its registration flow agent-readable (structured data, clear value proposition in machine-parseable format, API endpoints for account creation) without betting on a specific protocol. This is a 2027-2028 investment, not 2026. [source: protocol analysis; confidence: MEDIUM for direction, LOW for timing]
+
+### The marketing-specific agentic forecast
+
+Marketing is one of the fastest-adopting functions for agentic AI. Gartner projects 75% AI adoption in marketing by 2027. Forrester estimates 35% efficiency gains from generative AI in martech. Enterprise ROI from agentic AI averages 171%, with 74% of executives achieving returns within the first year. Survey data shows 72% of marketers are comfortable letting AI agents summarize data, and 80% would deploy agents for audience targeting and competitor analysis. [source: Gartner, Forrester, DigitalApplied, MagicBlocks; confidence: MEDIUM — survey data, not measured outcomes]
+
+The B2B procurement AI forecast is more aggressive. Gartner projects that 90% of B2B buying will be AI-agent intermediated by 2028, pushing $15 trillion through AI agent exchanges. AI agents will outnumber human sellers 10x by 2028. McKinsey frames the future workforce as a triad of people, AI agents, and robots, with 57% of work hours technically automatable. [source: Gartner via DigitalCommerce360, McKinsey; confidence: LOW-MEDIUM — these are forecasts, not measurements]
+
+We treat these projections as directionally correct but timeline-aggressive. The actual pace of AI-intermediated B2B procurement will depend on trust, regulation, and the practical challenge of making complex B2B purchasing decisions through agent interfaces. AB's position is to be ready when the shift accelerates, not to bet the strategy on a specific year.
+
+---
+
+## Decision Guide
+
+| Year | Primary question | If yes | If no |
+|------|-----------------|--------|-------|
+| 2026 | Does AI Max deliver incremental lift on B2B registration? | Worldwide rollout 2027 | Stay with OCI-plus-consolidation |
+| 2026 | Does Baloo maintain registration quality? | Scale Shopping Ads, expand to EU | Tighten qualification signals |
+| 2027 | Do AI Overviews appear on >25% of top NB keywords? | Accelerate AEO action plan | Continue keyword-plus-audience approach |
+| 2027 | Does agentic Stage 2 deliver measurable efficiency? | Invest in Stage 3 capabilities | Slow agentic investment, focus on tool adoption |
+| 2028 | Does Google extend AI Mode ads to B2B? | Early tester, conversation-intent bidding | Continue keyword-level bidding with OCI |
+| 2028 | Does the agentic cancellation wave hit marketing? | Position as sustainable alternative | Accelerate agentic investment while competitors retreat |
+| 2029 | Is B2B procurement AI-intermediated at meaningful scale? | Full agent-accessible registration flow | Maintain structured data, defer API investment |
+| 2030 | Has the PS function transformed beyond keyword campaigns? | Redefine team structure and scope | Optimize the proven model |
+
+Each decision has a clear trigger, a clear action, and a clear fallback. No decision requires betting the strategy on a single outcome. The five-workstream foundation delivers value regardless of which scenario materializes.
+
+---
+
+## Related
+
+- [PS Testing Approach — Kate Rundell](testing-approach-kate)
+- [AEO / AI Overviews POV](aeo-ai-overviews-pov)
+- [Agentic PS Vision & Roadmap](agentic-ps-vision)
+- [OCI Playbook](oci-playbook)
+- [Competitive Landscape](competitive-landscape)
+- [Body System — Brain (Five Levels)](~/shared/context/body/brain.md)
+- [Body System — Eyes (What's Coming)](~/shared/context/body/eyes.md)
+- [Body System — Device (Agentic Capabilities)](~/shared/context/body/device.md)
+
+---
+
+## Appendix A: OCI Validated Results by Market
+
+| Market | Reg Uplift | Incremental Regs | OPS Impact | Deployment Status | Confidence |
+|--------|-----------|-----------------|------------|-------------------|------------|
+| US | +24% | +32,047 | $16.7MM | 100% deployed | HIGH |
+| UK | +23% | +2,400 | — | 100% deployed | HIGH |
+| DE | +18% | +749 | — | 100% deployed | HIGH |
+| FR | — | — | — | 100% deployed | HIGH (deployment), no impact data yet |
+| IT | — | — | — | 100% deployed | HIGH (deployment), no impact data yet |
+| ES | — | — | — | 100% deployed | HIGH (deployment), no impact data yet |
+| JP | — | — | — | 100% deployed | HIGH (deployment), no impact data yet |
+| CA | — | — | — | Targeting April 7 | MEDIUM |
+| AU | — | — | — | Targeting May 2026 | MEDIUM |
+| MX | — | — | — | No timeline | LOW |
+
+Total validated: +35,196 incremental registrations, $16.7MM+ OPS across US/UK/DE. [source: eyes.md, Kate Testing Approach doc]
+
+## Appendix B: Ad Copy Test Results — UK Phase 1
+
+| Metric | Test | Control | Delta |
+|--------|------|---------|-------|
+| CTR | — | — | +86% |
+| Registrations | — | — | +31% |
+| Clicks | — | — | +28% |
+| Impressions | — | — | -25% |
+
+Test period: Jan 29 through Mar 2, 2026. Messaging shift: bulk/wholesale/B2B to price/quality/selection. Validated by SP Study (Aug 2025): 50% of SPs believed AB required bulk purchasing. EU4 translations complete via GlobalLink. [source: eyes.md; confidence: HIGH]
+
+## Appendix C: Competitive Landscape — US Brand
+
+| Metric | 2023 | 2026 |
+|--------|------|------|
+| Competitors per market | 1-2 | 3-5 |
+| Walmart Business Brand IS (peak) | — | 55% (W6 2026) |
+| Brand CPA range | ~$40 | $65-77 |
+
+Defense posture: efficiency over escalation. We do not chase impression share at unsustainable CPAs. [source: eyes.md; confidence: HIGH]
+
+## Appendix D: F90 Lifecycle Engagement
+
+| Metric | Value | Source |
+|--------|-------|--------|
+| Non-SHuMA 3+ purchase rate (current) | 31.7% | Kate Testing Approach doc |
+| Non-SHuMA 3+ purchase rate (target) | 35.4% (+366 bps) | Kate Testing Approach doc |
+| Engagement channel iOPS (2025) | $765K | Kate Testing Approach doc |
+| Prime Day 2025 Engagement OPS | $329K | Kate Testing Approach doc |
+| Prime Day 2025 Engagement ROAS | 644% | Kate Testing Approach doc |
+| Google B2B customer match rate | 13% → 30% (with Associated Accounts) | Kate Testing Approach doc |
+
+Legal SIMs in progress for 3+ purchases targeting criteria. [confidence: HIGH]
+
+## Appendix E: AI Overview Impact — Industry Data
+
+| Source | Finding | Confidence |
+|--------|---------|------------|
+| Stackmatix 2026 | AI Overviews reduce organic CTR by 35-61% where they appear | MEDIUM |
+| AtomicAGI 2026-03 | Paid CTR from 19.7% to 6.34% where AIO appears | MEDIUM |
+| Multiple sources, 2026 Q1 | AI Overviews appear on ~25-48% of queries | MEDIUM |
+| Gartner via Stackmatix | 25% drop in organic CTR by end of 2026 | MEDIUM |
+| DeepMarketing.it 2026-03 | 60-68% of Google searches end without a click | MEDIUM |
+| Stackmatix | "AI Overviews rarely appear for local keywords and transactional queries" | MEDIUM |
+| SEOMator, DiscoveredLabs | AI-referred traffic converts at higher rates (23x and 2.4x — wide variance) | LOW |
+
+Critical caveat: B2B registration queries are transactional and may be partially protected from AI Overview displacement. AB-specific measurement does not exist yet. [source: research brief; confidence: MEDIUM for industry data, LOW for AB-specific applicability]
+
+## Appendix F: Agentic Commerce Protocols
+
+### Google Universal Commerce Protocol (UCP)
+- Announced: Jan 11, 2026 by Sundar Pichai at NRF
+- Scope: open standard for AI agents to handle full shopping journey
+- Launch partners: Shopify, Target, Walmart, Etsy, Wayfair
+- Payment: Visa, Mastercard, Stripe, American Express
+- Current status: consumer retail only, no B2B registration use case
+- [source: Google Business; confidence: HIGH for existence, LOW for B2B applicability]
+
+### OpenAI Agentic Commerce Protocol (ACP)
+- Launched: Sept 29, 2025 by OpenAI + Stripe
+- Scope: powers Instant Checkout in ChatGPT, dialogue-based purchasing
+- Current status: consumer retail only, no B2B registration use case
+- [source: Atwix; confidence: HIGH for existence, LOW for B2B applicability]
+
+### Implication for AB
+Neither protocol supports B2B registration flows today. AB would need to make its registration flow agent-readable — structured data, API endpoints for account creation. This is a 2027-2028 consideration, not 2026. [confidence: LOW for timing, MEDIUM for directional relevance]
+
+## Appendix G: Enterprise Agentic AI Adoption Data
+
+| Source | Projection | Confidence |
+|--------|-----------|------------|
+| Gartner Aug 2025 | 40% of enterprise apps embed task-specific AI agents by end 2026 (up from <5% in 2025) | MEDIUM |
+| Gartner 2026 | 52% of executives report agents in production | MEDIUM |
+| CrewAI 2026 | 100% of surveyed enterprises planning to expand agentic AI; 62% already in production | MEDIUM |
+| Gartner via DigitalApplied | >40% of agentic AI projects canceled by 2027 (escalating costs, unclear value) | MEDIUM |
+| MarketsAndMarkets | Agentic AI market: $9.89B (2026) → $52-57B (2030-2031), 42-46% CAGR | MEDIUM |
+| MarketsAndMarkets | Multi-agent systems: 53.3% market share, 43.5% CAGR | MEDIUM |
+| Gartner Nov 2025 | 90% of B2B buying AI-agent intermediated by 2028, $15T through AI agent exchanges | LOW |
+| Gartner Nov 2025 | AI agents outnumber human sellers 10x by 2028 | LOW |
+| Gartner May 2024 | 50% of procurement contract management AI-enabled by 2027 | LOW-MEDIUM |
+| McKinsey | 57% of work hours technically automatable; AI fluency demand grew 7x in 2 years | MEDIUM |
+| Forrester via SparkCo | 50% of enterprises deploy multi-agent systems for real-time decisions by 2027, +15-20% revenue | LOW-MEDIUM |
+
+## Appendix H: Marketing-Specific Agentic Forecasts
+
+| Source | Projection | Confidence |
+|--------|-----------|------------|
+| Gartner 2024 via SparkCo | 75% AI adoption in marketing by 2027 | MEDIUM |
+| Forrester 2024 via SparkCo | 35% efficiency gains from generative AI in martech | MEDIUM |
+| DigitalApplied | Enterprise agentic AI ROI: average 171%, 74% achieving returns within first year | MEDIUM |
+| MagicBlocks | 72% of marketers comfortable with AI agent data summarization | MEDIUM |
+| MagicBlocks | 80% would deploy agents for audience targeting and competitor analysis | MEDIUM |
+
+## Appendix I: Platform Evolution — What Google Has Shipped vs. Not Shipped
+
+### Shipped (FACT)
+- AI Max for Search: global rollout Sept 2025, keyword-free search available Jan 2026
+- Performance Max: ~45% of Google Ads conversions (Google-wide, NOT AB-specific)
+- AI Mode: conversational search with Shopping Ads (piloted Jan 2026, announced Feb 2026)
+- Universal Commerce Protocol: open standard for agentic commerce (Jan 2026)
+- Channel-performance reporting in PMax (2025-2026)
+
+### Not Shipped (SPECULATION)
+- Ads in AI Mode for B2B registration — no product exists
+- Outcome-based billing for registrations — no product exists
+- Agent-to-agent discovery marketplace — no product exists
+- Direct integration with buyer-side procurement agents — no product exists
+
+The gap between what Google has shipped and what the five-year outlook requires is significant. Every projection beyond 2027 that depends on Google platform evolution is speculative. [confidence: HIGH for shipped items, LOW for unshipped items]
+
+## Appendix J: Source Index
+
+| Source | Type | Date | Used In |
+|--------|------|------|---------|
+| eyes.md | Internal (body system) | 2026-04-02 | OCI results, ad copy, AI Max, competitive |
+| Kate Testing Approach doc | Internal (artifact) | 2026-04-03 | OCI, F90, team constraints, workstreams |
+| current.md | Internal (body system) | 2026-04-03 | Baloo, AI Max, competitive |
+| AEO POV | Internal (artifact) | 2026-03-25 | AI Overviews, AEO strategy |
+| Agentic PS Vision | Internal (artifact) | 2026-03-25 | Five Stages, agentic roadmap |
+| device.md | Internal (body system) | 2026-04-01 | Current agentic state |
+| hands.md | Internal (body system) | 2026-04-04 | Team constraints |
+| Stackmatix 2026 | External (industry) | 2026 Q1 | AI Overview CTR impact |
+| Conductor/Seer 2026 | External (industry) | 2026 Q1 | AI Overview CTR impact |
+| Ahrefs 2026 | External (industry) | 2026 Q1 | AI Overview CTR impact |
+| AtomicAGI 2026-03 | External (industry) | 2026-03 | Paid CTR impact from AIO |
+| Gartner (multiple) | External (analyst) | 2024-2026 | Enterprise agentic adoption, B2B procurement |
+| CrewAI 2026 | External (survey) | 2026 | Enterprise agentic adoption |
+| MarketsAndMarkets | External (analyst) | 2026 | Agentic AI market size |
+| McKinsey | External (analyst) | 2025-2026 | Workforce automation, agentic strategy |
+| Forrester | External (analyst) | 2024-2026 | Multi-agent systems, martech efficiency |
+| Google Business | External (vendor) | 2026-01 | UCP announcement |
+| Atwix | External (industry) | 2025-09 | ACP announcement |
+| Ayko, SearchEngineJournal | External (industry) | 2026-01 | AI Mode ads |
+| PPC.land, Adfinite | External (industry) | 2026-02 | AI Mode ads formal announcement |
+| DeepMarketing.it | External (industry) | 2026-03 | Zero-click search data |
+
+## Appendix K: Contradictions and Unknowns
+
+These are unresolved tensions in the source material that the main body acknowledges but does not resolve.
+
+1. The 40% cancellation rate versus 40% adoption rate. Gartner says 40% of enterprise apps will embed agents by end 2026 AND more than 40% of agentic projects will be canceled by 2027. Both can be true — rapid adoption followed by rapid disillusionment. Implication: build for sustainability, not hype.
+
+2. AI Overview CTR impact varies from 35% to 65%. The variance suggests measurement methodology differences across sources, not an actual range of outcomes. AB-specific data does not exist. Do not plan around a specific number.
+
+3. B2B procurement AI is forecast, not measured. The $15 trillion and 90% figures are Gartner projections from November 2025. No one has measured actual AI-intermediated B2B purchasing at scale. The timeline could be 2028 or 2035.
+
+4. UCP and ACP are consumer/retail protocols. Neither has a B2B registration use case. Extending them to "create a free business account" is architecturally possible but not on anyone's published roadmap.
+
+5. PMax "45% of conversions" is Google-wide. AB's conversion event (business registration with verification) is structurally different from e-commerce purchase. Do not assume AB will see the same PMax contribution.
+
+6. No AB-specific AI Max data exists. Google's 14% conversion lift is an aggregate across early adopters. B2B registration performance is unknown until Richard's Q2 test runs.
+
+<!-- AGENT_CONTEXT
+machine_summary: "Five-year strategic outlook for Amazon Business Paid Search (2026-2030). 2026 focuses on scaling validated OCI results (+35K regs, $16.7MM OPS) and testing AI Max and Baloo. 2027 extends based on 2026 outcomes. 2028+ is scenario planning around AI Overviews, agentic commerce protocols (UCP/ACP), and B2B procurement AI. Parallel track maps Richard's Five Stages of Agentic PS to external enterprise agentic evolution. Confidence degrades honestly: HIGH (2026) → MEDIUM (2027) → LOW (2028-2030)."
+key_entities: ["OCI", "AI Max", "Baloo", "F90 Lifecycle", "AI Overviews", "UCP", "ACP", "Five Stages", "Kate Rundell", "Brandon Munday", "Walmart Business", "Google AI Mode", "AWS Bedrock AgentCore"]
+action_verbs: ["validate", "scale", "test", "monitor", "adapt", "position", "invest", "measure"]
+update_triggers: ["AI Max Q2 2026 test results", "Baloo US rollout data", "AI Overview appearance rate on AB keywords", "Google AI Mode B2B ad format announcement", "UCP/ACP B2B extension", "agentic project cancellation wave data", "annual OCI performance review"]
+-->

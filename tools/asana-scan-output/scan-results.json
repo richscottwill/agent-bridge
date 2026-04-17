@@ -1,0 +1,277 @@
+{
+  "scan_timestamp": "2026-04-16T14:18:52Z",
+  "tasks_scanned": 100,
+  "signals": [
+    {
+      "task_gid": "1213235338214791",
+      "task_name": "AB Customer Redirect",
+      "signal_type": "comment_added",
+      "author_name": "Brandon",
+      "author_gid": "1208504441751632",
+      "created_at": "2026-04-13T22:11:16.331Z",
+      "text": "https://app.asana.com/1/8442528107068/profile/1212732742544165 can you please add the implementation details for this? I think it should be closed",
+      "resource_subtype": "comment_added",
+      "story_gid": "1214052865694418"
+    },
+    {
+      "task_gid": "1214074477110993",
+      "task_name": "Sitelink Audit/Update",
+      "signal_type": "reassigned",
+      "author_name": "Brandon",
+      "author_gid": "1208504441751632",
+      "created_at": "2026-04-15T15:49:31.282Z",
+      "text": "Brandon assigned to you",
+      "resource_subtype": "assigned",
+      "story_gid": "1214076119578307"
+    },
+    {
+      "task_gid": "1214074477110993",
+      "task_name": "Sitelink Audit/Update",
+      "signal_type": "due_date_changed",
+      "author_name": "Brandon",
+      "author_gid": "1208504441751632",
+      "created_at": "2026-04-15T15:49:55.775Z",
+      "text": "Brandon changed the due date to Tomorrow",
+      "resource_subtype": "due_date_changed",
+      "story_gid": "1214075940252014"
+    },
+    {
+      "task_gid": "1214074477111007",
+      "task_name": "DDD walkthrough with team",
+      "signal_type": "due_date_changed",
+      "author_name": "Brandon",
+      "author_gid": "1208504441751632",
+      "created_at": "2026-04-15T15:56:03.153Z",
+      "text": "Brandon changed the due date to Today",
+      "resource_subtype": "due_date_changed",
+      "story_gid": "1214076250994002"
+    },
+    {
+      "task_gid": "1214074477111007",
+      "task_name": "DDD walkthrough with team",
+      "signal_type": "reassigned",
+      "author_name": "Brandon",
+      "author_gid": "1208504441751632",
+      "created_at": "2026-04-15T15:56:06.205Z",
+      "text": "Brandon assigned to you",
+      "resource_subtype": "assigned",
+      "story_gid": "1214076121000318"
+    }
+  ],
+  "errors": [
+    {
+      "task_gid": "1213953295002324",
+      "task_name": "Approve: OCI Execution Guide",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1214050694901572",
+      "task_name": "Slack thread-level ingestion",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1214044682239803",
+      "task_name": "Cross-marketing Refmarker audit",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213917747438931",
+      "task_name": "AU \u2014 Market Context (Kiro)",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213917639688517",
+      "task_name": "MX \u2014 Market Context (Kiro)",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1214006311270752",
+      "task_name": "Reply to Dwayne \u2014 AU PS/MCS Updates thread",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213962513760099",
+      "task_name": "Brandon 1:1: ASP reminders",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213968042348601",
+      "task_name": "Deep Dive: Add IECCP FAQ to new account playbook",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213959854928587",
+      "task_name": "Deep Dive: Finalize market expansion playbook",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213964668984060",
+      "task_name": "Brandon 1:1: Draft Enhanced Match FAQ for legal",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213983342210449",
+      "task_name": "MBR callout",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213983090951838",
+      "task_name": "Update Kingpin for MX",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213917747384849",
+      "task_name": "AU Market Context (Agent-Maintained)",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213958643249348",
+      "task_name": "Agent System Architecture \u2014 wiki article",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Rate limited'}"
+    },
+    {
+      "task_gid": "1213917833386312",
+      "task_name": "Dashboard Ingester",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213930231361406",
+      "task_name": "Attention Tracker",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213917853456301",
+      "task_name": "Bayesian Prediction Engine",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213917853456285",
+      "task_name": "WBR Callout Pipeline",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213930231347406",
+      "task_name": "Agent Bridge (Google Sheets/Docs)",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213917968634410",
+      "task_name": "PS Analytics Data Layer (DuckDB)",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213917833443720",
+      "task_name": "Morning Routine (AM-1/2/3)",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213917853447785",
+      "task_name": "Asana Command Center Integration",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213925516289208",
+      "task_name": "Enhanced Match / LiveRamp \u2014 Audience Expansion",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213925733042547",
+      "task_name": "OCI Execution Guide",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213925516128369",
+      "task_name": "ie%CCP Planning & Optimization Framework",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213925516246590",
+      "task_name": "OCI Rollout Playbook",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213925648150955",
+      "task_name": "Invoice & PO Process Guide",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    },
+    {
+      "task_gid": "1213925733287816",
+      "task_name": "Landing Page Testing Playbook",
+      "error": "{'code': -32603, 'message': 'Token exchange failed: Invalid grant'}"
+    }
+  ],
+  "per_task_timestamps": {
+    "1213125740755931": "2026-04-16T14:18:52Z",
+    "1212992331748509": "2026-04-15T14:36:56.414Z",
+    "1213085905102041": "2026-04-15T15:37:45.041Z",
+    "1213336296972484": "2026-04-16T14:18:52Z",
+    "1206497728159518": "2026-04-15T14:36:58.975Z",
+    "1212808474749819": "2026-04-15T07:36:51.904Z",
+    "1213341921686564": "2026-04-15T14:35:42.422Z",
+    "1213072707685838": "2026-04-15T01:01:59.010Z",
+    "1213003036439750": "2026-04-15T01:02:24.862Z",
+    "1213336296972490": "2026-04-16T14:18:52Z",
+    "1212811293275565": "2026-04-16T14:18:52Z",
+    "1212811293275567": "2026-04-16T14:18:52Z",
+    "1213230198995937": "2026-04-16T14:18:52Z",
+    "1213072707685843": "2026-04-15T01:02:13.269Z",
+    "1212915141732002": "2026-04-15T01:02:15.595Z",
+    "1213379551525584": "2026-04-16T14:18:52Z",
+    "1213072707685846": "2026-04-15T01:02:04.589Z",
+    "1213125740755945": "2026-04-15T01:01:56.121Z",
+    "1212760973200416": "2026-04-15T01:01:53.852Z",
+    "1213235338214791": "2026-04-15T14:37:28.968Z",
+    "1212988092117041": "2026-04-15T01:01:26.909Z",
+    "1213336296972493": "2026-04-16T14:18:52Z",
+    "1213332849519450": "2026-04-16T14:18:52Z",
+    "1213336296972488": "2026-04-16T14:18:52Z",
+    "1212760973200434": "2026-04-16T14:18:52Z",
+    "1213072707685849": "2026-04-15T01:02:01.745Z",
+    "1213530917597503": "2026-04-16T14:18:52Z",
+    "1213278917849558": "2026-04-16T07:52:12.718Z",
+    "1214068275460844": "2026-04-16T07:52:12.638Z",
+    "1214074477110993": "2026-04-16T07:52:12.710Z",
+    "1214044682239823": "2026-04-16T07:52:12.758Z",
+    "1214081017092577": "2026-04-16T07:52:12.684Z",
+    "1214074477111007": "2026-04-16T07:47:00.790Z",
+    "1213965650410967": "2026-04-16T07:09:41.613Z",
+    "1214081017200478": "2026-04-16T02:44:15.268Z",
+    "1214081017124426": "2026-04-16T02:42:55.730Z",
+    "1214081017044930": "2026-04-16T02:42:50.056Z",
+    "1214080130329568": "2026-04-15T23:40:47.659Z",
+    "1214080207515561": "2026-04-15T23:40:16.591Z",
+    "1214079536513059": "2026-04-15T22:02:41.408Z",
+    "1214075341408685": "2026-04-15T18:12:09.178Z",
+    "1214075341408681": "2026-04-15T18:11:45.681Z",
+    "1214075340745325": "2026-04-15T15:12:20.842Z",
+    "1213764961716427": "2026-04-15T14:35:44.845Z",
+    "1213796951745232": "2026-04-15T07:56:52.552Z",
+    "1213917691089036": "2026-04-15T07:36:49.435Z",
+    "1213964186504305": "2026-04-15T07:36:47.407Z",
+    "1213917967984980": "2026-04-15T07:36:45.566Z",
+    "1214068319365234": "2026-04-15T07:18:35.734Z",
+    "1214068215114017": "2026-04-15T02:07:07.868Z",
+    "1214068215142846": "2026-04-15T02:07:05.543Z",
+    "1213690904654138": "2026-04-15T02:06:59.206Z",
+    "1214068272596724": "2026-04-15T02:06:51.945Z",
+    "1213959904341162": "2026-04-15T02:06:49.630Z",
+    "1214044802323482": "2026-04-15T02:06:27.850Z",
+    "1214044802323478": "2026-04-15T02:06:25.848Z",
+    "1213917691068688": "2026-04-15T02:06:23.364Z",
+    "1214044682239817": "2026-04-15T01:01:51.471Z",
+    "1213983077428492": "2026-04-15T00:48:18.458Z",
+    "1213993229524626": "2026-04-15T00:47:55.039Z",
+    "1213983332107930": "2026-04-15T00:47:52.675Z",
+    "1214057202961389": "2026-04-14T07:38:28.683Z",
+    "1214055207544514": "2026-04-14T04:16:45.393Z",
+    "1213875146955582": "2026-04-14T04:16:33.211Z",
+    "1214054954497349": "2026-04-14T03:14:54.028Z",
+    "1214053404599901": "2026-04-13T23:04:57.468Z",
+    "1213917771155873": "2026-04-16T14:18:52Z",
+    "1213953288745383": "2026-04-16T14:23:28Z",
+    "1214047624490628": "2026-04-13T17:50:56.614Z",
+    "1213925549385885": "2026-04-16T14:24:41Z",
+    "1213954957625028": "2026-04-13T16:58:26.743Z",
+    "1213954957645131": "2026-04-13T16:58:17.319Z"
+  }
+}

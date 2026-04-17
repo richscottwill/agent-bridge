@@ -1,54 +1,84 @@
 {
-  "generated": "2026-04-15T17:40:51.825945+00:00",
+  "generated": "2026-04-16T16:20:54.531895+00:00",
   "blocks": [
     {
       "name": "Sweep",
       "emoji": "\ud83e\uddf9",
       "cap": 5,
       "desc": "Quick unblocking",
-      "count": 3,
+      "count": 6,
       "today_count": 1,
-      "overdue_count": 1,
+      "overdue_count": 4,
       "tasks": [
+        {
+          "name": "Update Kingpin for MX",
+          "due": "2026-05-05",
+          "overdue": false,
+          "days_overdue": 0,
+          "priority": "Not urgent",
+          "project": "MX",
+          "next_action": "Check if Andes data is now available",
+          "kiro": "4/4: Due 4/7. Blocked by Andes data."
+        },
         {
           "name": "Bi-monthly Flash",
           "due": "2026-05-21",
           "overdue": false,
           "days_overdue": 0,
           "priority": "Not urgent",
-          "project": "Paid App",
-          "next_action": "No action until May \u2014 bi-monthly cycle. Will auto-escalate as due date approaches.",
-          "kiro": "4/4: Due 5/21. Bi-monthly recurring. Next cycle \u2014 no action until May. 3 projects (AU, MX, Paid App)."
+          "project": "AU",
+          "next_action": "No action until May.",
+          "kiro": "4/4: Due 5/21. Bi-monthly recurring."
         },
         {
           "name": "Prep for MX LP optimization call (tomorrow 12 PM CST)",
           "due": "2026-04-15",
-          "overdue": false,
-          "days_overdue": 0,
+          "overdue": true,
+          "days_overdue": 1,
           "priority": "Today",
           "project": null,
           "next_action": "Confirm attendance, prep talking points (proactive testing, Carlos pages, Google Experiments), review 9 MX NB pages for broken images",
           "kiro": "4/14: Created from Slack signal. MX LP call tomorrow. Due 4/15."
         },
         {
+          "name": "Respond to Lena \u2014 AU LP URL analysis + CPA methodology",
+          "due": "2026-04-03",
+          "overdue": true,
+          "days_overdue": 13,
+          "priority": "Urgent",
+          "project": "AU",
+          "next_action": "Pull AU LP URL report from Google Ads",
+          "kiro": "4/6: 3d overdue. Draft reply written."
+        },
+        {
+          "name": "Send IECCP follow-up summary to Lorena + review keyword data",
+          "due": "2026-04-09",
+          "overdue": true,
+          "days_overdue": 7,
+          "priority": "Urgent",
+          "project": "MX",
+          "next_action": "Draft IECCP summary email, send to Lorena",
+          "kiro": "4/9: Due TODAY. Draft IECCP summary for Lorena."
+        },
+        {
           "name": "Paid App PO \u2014 Create Q2 + Amend Google PO to Q2",
           "due": "2026-04-13",
           "overdue": true,
-          "days_overdue": 2,
+          "days_overdue": 3,
           "priority": "Urgent",
           "project": "Paid App",
-          "next_action": "Confirm PAM budget with Brandon, then create Q2 PO + amend Google PO to Q2-only.",
-          "kiro": "4/13: TWO actions today: (1) Create new Q2 Paid App PO, (2) Amend existing Google PO (5LN2R) from full-year to Q2. Must confirm PAM budget with Brandon first."
+          "next_action": "Confirm PAM budget with Brandon, then create Q2 PO",
+          "kiro": "4/13: TWO actions today: Create Q2 PO + Amend Google PO."
         }
       ],
-      "over_cap": false
+      "over_cap": true
     },
     {
       "name": "Admin",
       "emoji": "\ud83d\udccb",
       "cap": 3,
       "desc": "30 min bound",
-      "count": 3,
+      "count": 4,
       "today_count": 1,
       "overdue_count": 0,
       "tasks": [
@@ -69,8 +99,18 @@
           "days_overdue": 0,
           "priority": "Urgent",
           "project": "ABPS - WW Testing & Projects",
-          "next_action": "Pull refmarker mapping from Google Ads for cross-marketing campaigns.",
-          "kiro": "4/13: Refmarker audit for cross-marketing attribution. Coordinate with Yun on data pull. Priority=Urgent."
+          "next_action": "Pull refmarker mapping from Google Ads",
+          "kiro": "4/13: Refmarker audit for cross-marketing attribution."
+        },
+        {
+          "name": "MBR callout",
+          "due": "2026-05-02",
+          "overdue": false,
+          "days_overdue": 0,
+          "priority": "Urgent",
+          "project": "AU",
+          "next_action": "Review AU+MX MBR draft callouts",
+          "kiro": "4/7: Carried fwd. Overdue since 4/2."
         },
         {
           "name": "Monthly - Confirm actual budgets",
@@ -79,18 +119,18 @@
           "days_overdue": 0,
           "priority": "Urgent",
           "project": "Paid App",
-          "next_action": "Pull April finance actuals, cross-ref with Andrew's ENG budget and PAM underspend flag",
-          "kiro": "4/4: Due 5/5. Monthly recurring (5th unless weekend). Cross-ref with Andrew ENG budget request and PAM underspend."
+          "next_action": "Pull April finance actuals",
+          "kiro": "4/4: Due 5/5. Monthly recurring."
         }
       ],
-      "over_cap": false
+      "over_cap": true
     },
     {
       "name": "Core",
       "emoji": "\ud83c\udfaf",
       "cap": 4,
       "desc": "Strategic work",
-      "count": 10,
+      "count": 13,
       "today_count": 1,
       "overdue_count": 2,
       "tasks": [
@@ -101,8 +141,8 @@
           "days_overdue": 0,
           "priority": "Not urgent",
           "project": "ABPS - WW Testing & Projects",
-          "next_action": "Coordinate with media team on audience request implementation \u2014 legal is cleared, execution chain starts here",
-          "kiro": "4/4: F90 lifecycle program. 9 subtasks. Legal approved 3/30. Blocked on media team + tech implementation. Due 4/30. L2 Testing."
+          "next_action": "Coordinate with media team on audience request",
+          "kiro": "4/4: F90 lifecycle program. 9 subtasks."
         },
         {
           "name": "AppsFlyer setup (tentative date)",
@@ -111,8 +151,28 @@
           "days_overdue": 0,
           "priority": "Not urgent",
           "project": "Paid App",
-          "next_action": "Check in on AppsFlyer vendor timeline in May \u2014 no action until then",
-          "kiro": "4/4: AppsFlyer mobile attribution setup. Due 7/1. Long-horizon. Important but not urgent. Blocked on external vendor timeline. Paid App project. No action needed until closer to launch window."
+          "next_action": "Check in on AppsFlyer vendor timeline in May",
+          "kiro": "4/15: Demoted from Core. Due 7/1. Backlog."
+        },
+        {
+          "name": "\ud83d\udccb AU \u2014 Market Context (Kiro)",
+          "due": null,
+          "overdue": false,
+          "days_overdue": 0,
+          "priority": "Not urgent",
+          "project": "AU",
+          "next_action": "No action \u2014 pinned context doc",
+          "kiro": "4/3: Pinned reference."
+        },
+        {
+          "name": "\ud83d\udccb MX \u2014 Market Context (Kiro)",
+          "due": null,
+          "overdue": false,
+          "days_overdue": 0,
+          "priority": "Not urgent",
+          "project": "MX",
+          "next_action": "No action \u2014 pinned context doc",
+          "kiro": "4/3: Pinned reference."
         },
         {
           "name": "Promo Test",
@@ -121,8 +181,8 @@
           "days_overdue": 0,
           "priority": "Not urgent",
           "project": "ABPS - WW Testing & Projects",
-          "next_action": "Check with tech if email overlay fix is deployed, then resume promo test design",
-          "kiro": "4/4: Core. Blocked on email overlay fix. Promo + email overlay conflict impacted test results."
+          "next_action": "Check with tech if email overlay fix is deployed",
+          "kiro": "4/15: Demoted from Core. Not urgent, no due date."
         },
         {
           "name": "\ud83d\udccb Paid App \u2014 Project Context (Kiro)",
@@ -131,12 +191,12 @@
           "days_overdue": 0,
           "priority": "Not urgent",
           "project": "Paid App",
-          "next_action": "No action \u2014 pinned context doc, refreshed weekly in EOD-2",
-          "kiro": "4/3: Project context doc. Pinned reference \u2014 not a task to complete. Updated by agent during EOD-2 system refresh."
+          "next_action": "No action \u2014 pinned context doc",
+          "kiro": "4/3: Pinned reference."
         },
         {
           "name": "Deep Dive: Year-One Optimization one-pager",
-          "due": "2026-04-16",
+          "due": null,
           "overdue": false,
           "days_overdue": 0,
           "priority": "Today",
@@ -148,21 +208,21 @@
           "name": "Testing Document for Kate",
           "due": "2026-04-01",
           "overdue": true,
-          "days_overdue": 14,
+          "days_overdue": 15,
           "priority": "Urgent",
           "project": "ABPS - WW Testing & Projects",
-          "next_action": "Apply 5 critic fixes from kate-doc-v5-eval-a.md, then send to Brandon",
-          "kiro": "4/9: 8d overdue. THE HARD THING. v5 PUBLISH verdict 8.4/10. 5 subtractive edits remain. Ship Friday AM."
+          "next_action": "Apply 5 critic fixes from kate-doc-v5-eval-a.md",
+          "kiro": "4/15: 14d overdue. Core block 12:30-2PM. Ship v5 to Brandon."
         },
         {
           "name": "WW weblab dial-up (Richard)",
           "due": "2026-04-07",
           "overdue": true,
-          "days_overdue": 8,
+          "days_overdue": 9,
           "priority": "Urgent",
           "project": "ABPS - WW Testing & Projects",
-          "next_action": "Coordinate with Alex/Vijeth on weblab dial-up settings for each market before 4/7 go-live",
-          "kiro": "4/9: Carried fwd. Austin offsite. Resume next week."
+          "next_action": "Coordinate with Alex/Vijeth on weblab dial-up settings",
+          "kiro": "4/15: 8d overdue. Confirm weblab status with Brandon."
         },
         {
           "name": "Email overlay WW rollout/testing",
@@ -175,14 +235,24 @@
           "kiro": "4/8: In development. Extended to 4/18."
         },
         {
+          "name": "MX Polaris NB LP Test (Beauty+Auto)",
+          "due": "2026-04-30",
+          "overdue": false,
+          "days_overdue": 0,
+          "priority": "Urgent",
+          "project": "MX",
+          "next_action": null,
+          "kiro": "4/15: Demoted from Engine Room. Due 4/30."
+        },
+        {
           "name": "AB Customer Redirect",
           "due": null,
           "overdue": false,
           "days_overdue": 0,
           "priority": "Urgent",
           "project": "ABPS - WW Testing & Projects",
-          "next_action": "Check redirect mapping Quip doc status, set a due date, define scope for remaining markets",
-          "kiro": "4/4: Core. Urgent. Important. AB Customer Redirect \u2014 redirecting logged-in AB customers from NB ads to a.com. WW rollout. SIM: MCS-1840, MCM: MCM-144193956."
+          "next_action": "Check redirect mapping Quip doc status",
+          "kiro": "4/15: Brandon asked to close. Add impl details first."
         },
         {
           "name": "WW keyword gap fill based on market-level ASINs",
@@ -191,8 +261,8 @@
           "days_overdue": 0,
           "priority": "Urgent",
           "project": "ABPS - WW Testing & Projects",
-          "next_action": "Set a due date (suggest 4/18), then pull ASIN-level keyword data for gap analysis",
-          "kiro": "4/4: WW keyword gap analysis using market-level ASIN data. Core Two deep work. Important + Urgent. No due date set \u2014 needs one. L2 Testing."
+          "next_action": "Set a due date, then pull ASIN-level keyword data",
+          "kiro": "4/4: WW keyword gap analysis. No due date set."
         }
       ],
       "over_cap": true
@@ -202,9 +272,9 @@
       "emoji": "\u2699\ufe0f",
       "cap": 6,
       "desc": "Hands-on execution",
-      "count": 5,
+      "count": 7,
       "today_count": 2,
-      "overdue_count": 1,
+      "overdue_count": 4,
       "tasks": [
         {
           "name": "Weekly Reporting - Global WBR sheet",
@@ -212,35 +282,35 @@
           "overdue": false,
           "days_overdue": 0,
           "priority": "Not urgent",
-          "project": "Paid App",
-          "next_action": "Pull W14 data from dashboards into Global WBR sheet columns for AU, MX, and Paid App",
-          "kiro": "4/13: PRIORITY #1 today. Pull W14 data from dashboards. Always takes weekly priority over other work."
+          "project": "AU",
+          "next_action": "Pull W14 data from dashboards",
+          "kiro": "4/13: PRIORITY #1 today."
         },
         {
-          "name": "Create campaign for new vs. all, and prioritize new if possible.",
+          "name": "Create campaign for new vs. all",
           "due": null,
           "overdue": false,
           "days_overdue": 0,
           "priority": "Not urgent",
           "project": "Paid App",
-          "next_action": "Park until Q2 PAM PO is confirmed, then design the new vs. all campaign split",
-          "kiro": "4/15: Demoted from Engine Room (cap enforcement). No due date. Backlog."
+          "next_action": "Park until Q2 PAM PO is confirmed",
+          "kiro": "4/15: Demoted from Engine Room. No due date."
         },
         {
-          "name": "Look over AU landing page switch (campaign settings etc, traffic, regs)",
+          "name": "Look over AU landing page switch",
           "due": "2026-04-15",
-          "overdue": false,
-          "days_overdue": 0,
+          "overdue": true,
+          "days_overdue": 1,
           "priority": "Today",
           "project": "AU",
-          "next_action": "Coordinate NB LP revert with Dwayne per SIM follow-up",
-          "kiro": "4/8: Revert NB back to older pages per Polaris LP thread. Extend to 4/15."
+          "next_action": "Coordinate NB LP revert with Dwayne",
+          "kiro": "4/8: Revert NB back to older pages."
         },
         {
           "name": "MX Automotive page",
           "due": "2026-04-15",
-          "overdue": false,
-          "days_overdue": 0,
+          "overdue": true,
+          "days_overdue": 1,
           "priority": "Today",
           "project": "MX",
           "next_action": "Build MX Auto + Beauty campaigns in Google Ads",
@@ -250,23 +320,43 @@
           "name": "Paid App",
           "due": "2026-03-31",
           "overdue": true,
-          "days_overdue": 15,
+          "days_overdue": 16,
           "priority": "Urgent",
           "project": "ABPS - WW Testing & Projects",
-          "next_action": "Check PAM US/EU spend pacing in tracker, flag underspend to Brandon, confirm FR pivot budget",
-          "kiro": "4/15: Demoted from Engine Room (cap enforcement). Urgent/Important, 15d overdue since 3/31. BAU workstream \u2014 decomposed into subtasks."
+          "next_action": "Check PAM US/EU spend pacing in tracker",
+          "kiro": "4/15: Demoted from Engine Room. 15d overdue since 3/31."
+        },
+        {
+          "name": "Refmarker mapping audit PoC \u2014 AU",
+          "due": "2026-04-10",
+          "overdue": true,
+          "days_overdue": 6,
+          "priority": "Urgent",
+          "project": "AU",
+          "next_action": "Export Google Ads refmarker report",
+          "kiro": "4/9: Due 4/10. Build refmarker-to-LP mapping."
+        },
+        {
+          "name": "AU meetings - Agenda",
+          "due": "2026-04-22",
+          "overdue": false,
+          "days_overdue": 0,
+          "priority": "Urgent",
+          "project": "AU",
+          "next_action": "Prep agenda items for AU sync",
+          "kiro": "4/15: Auto-created. Weekly AU agenda prep."
         }
       ],
-      "over_cap": false
+      "over_cap": true
     }
   ],
   "today_tasks": [
     {
       "name": "Prep for MX LP optimization call (tomorrow 12 PM CST)",
       "due": "2026-04-15",
-      "overdue": false,
-      "days_overdue": 0,
-      "routine": "Sweep (Low-friction)",
+      "overdue": true,
+      "days_overdue": 1,
+      "routine": "Sweep",
       "project": null,
       "next_action": "Confirm attendance, prep talking points (proactive testing, Carlos pages, Google Experiments), review 9 MX NB pages for broken images",
       "block_order": 0
@@ -276,89 +366,167 @@
       "due": "2026-04-16",
       "overdue": false,
       "days_overdue": 0,
-      "routine": "Admin (Wind-down)",
+      "routine": "Admin",
       "project": null,
       "next_action": "Check invoice system for IT tax-affected invoices, confirm closed, check reissued",
       "block_order": 1
     },
     {
       "name": "Deep Dive: Year-One Optimization one-pager",
-      "due": "2026-04-16",
+      "due": null,
       "overdue": false,
       "days_overdue": 0,
-      "routine": "Core Two (Deep Work)",
+      "routine": "Core",
       "project": null,
       "next_action": "Week of 4/14: review one-pager draft, fill in market-specific KPI targets",
       "block_order": 2
     },
     {
-      "name": "Look over AU landing page switch (campaign settings etc, traffic, regs)",
+      "name": "Look over AU landing page switch",
       "due": "2026-04-15",
-      "overdue": false,
-      "days_overdue": 0,
-      "routine": "Engine Room (Excel and Google ads)",
+      "overdue": true,
+      "days_overdue": 1,
+      "routine": "Engine Room",
       "project": "AU",
-      "next_action": "Coordinate NB LP revert with Dwayne per SIM follow-up",
+      "next_action": "Coordinate NB LP revert with Dwayne",
       "block_order": 3
     },
     {
       "name": "MX Automotive page",
       "due": "2026-04-15",
-      "overdue": false,
-      "days_overdue": 0,
-      "routine": "Engine Room (Excel and Google ads)",
+      "overdue": true,
+      "days_overdue": 1,
+      "routine": "Engine Room",
       "project": "MX",
       "next_action": "Build MX Auto + Beauty campaigns in Google Ads",
       "block_order": 3
+    },
+    {
+      "name": "MCS LP Review: Connect with Lorena on paid social/PS synergy",
+      "due": "2026-04-17",
+      "overdue": false,
+      "days_overdue": 0,
+      "routine": "",
+      "project": "MX",
+      "next_action": null,
+      "block_order": 4
+    },
+    {
+      "name": "Sitelink Audit/Update",
+      "due": "2026-04-17",
+      "overdue": false,
+      "days_overdue": 0,
+      "routine": "",
+      "project": "ABPS - WW Testing & Projects",
+      "next_action": null,
+      "block_order": 4
+    },
+    {
+      "name": "DDD walkthrough with team",
+      "due": null,
+      "overdue": false,
+      "days_overdue": 0,
+      "routine": "",
+      "project": null,
+      "next_action": null,
+      "block_order": 4
     }
   ],
   "overdue_tasks": [
     {
       "name": "Paid App",
-      "days_overdue": 15,
+      "days_overdue": 16,
       "project": "ABPS - WW Testing & Projects",
-      "routine": "Engine Room (Excel and Google ads)",
+      "routine": "Engine Room",
       "priority": "Urgent",
       "due": "2026-03-31"
     },
     {
       "name": "Testing Document for Kate",
-      "days_overdue": 14,
+      "days_overdue": 15,
       "project": "ABPS - WW Testing & Projects",
-      "routine": "Core Two (Deep Work)",
+      "routine": "Core",
       "priority": "Urgent",
       "due": "2026-04-01"
     },
     {
+      "name": "Respond to Lena \u2014 AU LP URL analysis + CPA methodology",
+      "days_overdue": 13,
+      "project": "AU",
+      "routine": "Sweep",
+      "priority": "Urgent",
+      "due": "2026-04-03"
+    },
+    {
       "name": "WW weblab dial-up (Richard)",
-      "days_overdue": 8,
+      "days_overdue": 9,
       "project": "ABPS - WW Testing & Projects",
-      "routine": "Core Two (Deep Work)",
+      "routine": "Core",
       "priority": "Urgent",
       "due": "2026-04-07"
     },
     {
+      "name": "Send IECCP follow-up summary to Lorena + review keyword data",
+      "days_overdue": 7,
+      "project": "MX",
+      "routine": "Sweep",
+      "priority": "Urgent",
+      "due": "2026-04-09"
+    },
+    {
+      "name": "Refmarker mapping audit PoC \u2014 AU",
+      "days_overdue": 6,
+      "project": "AU",
+      "routine": "Engine Room",
+      "priority": "Urgent",
+      "due": "2026-04-10"
+    },
+    {
       "name": "Paid App PO \u2014 Create Q2 + Amend Google PO to Q2",
-      "days_overdue": 2,
+      "days_overdue": 3,
       "project": "Paid App",
-      "routine": "Sweep (Low-friction)",
+      "routine": "Sweep",
       "priority": "Urgent",
       "due": "2026-04-13"
+    },
+    {
+      "name": "Look over AU landing page switch",
+      "days_overdue": 1,
+      "project": "AU",
+      "routine": "Engine Room",
+      "priority": "Today",
+      "due": "2026-04-15"
+    },
+    {
+      "name": "MX Automotive page",
+      "days_overdue": 1,
+      "project": "MX",
+      "routine": "Engine Room",
+      "priority": "Today",
+      "due": "2026-04-15"
+    },
+    {
+      "name": "Prep for MX LP optimization call (tomorrow 12 PM CST)",
+      "days_overdue": 1,
+      "project": null,
+      "routine": "Sweep",
+      "priority": "Today",
+      "due": "2026-04-15"
     }
   ],
   "pacing": [
     {
       "market": "MX",
-      "pacing_regs_pct": 63.7,
-      "pacing_cost_pct": 75.1,
-      "mtd_regs": 504,
+      "pacing_regs_pct": 65.1,
+      "pacing_cost_pct": 72.5,
+      "mtd_regs": 515,
       "op2_target": 791.2857142857142
     },
     {
       "market": "UK",
       "pacing_regs_pct": 32.3,
-      "pacing_cost_pct": 21.1,
-      "mtd_regs": 1453,
+      "pacing_cost_pct": 22.7,
+      "mtd_regs": 1449,
       "op2_target": 4491.8
     },
     {
@@ -369,122 +537,174 @@
       "op2_target": 1919.7992
     },
     {
+      "market": "US",
+      "pacing_regs_pct": 30.6,
+      "pacing_cost_pct": 24.0,
+      "mtd_regs": 9523,
+      "op2_target": 31075.56
+    },
+    {
       "market": "ES",
       "pacing_regs_pct": 30.5,
-      "pacing_cost_pct": 32.8,
+      "pacing_cost_pct": 37.2,
       "mtd_regs": 599,
       "op2_target": 1964.3
     },
     {
-      "market": "US",
-      "pacing_regs_pct": 29.7,
-      "pacing_cost_pct": 24.0,
-      "mtd_regs": 9236,
-      "op2_target": 31075.56
-    },
-    {
       "market": "CA",
-      "pacing_regs_pct": 27.8,
-      "pacing_cost_pct": 25.1,
-      "mtd_regs": 680,
+      "pacing_regs_pct": 28.5,
+      "pacing_cost_pct": 26.3,
+      "mtd_regs": 698,
       "op2_target": 2446.9
     },
     {
       "market": "FR",
       "pacing_regs_pct": 21.5,
-      "pacing_cost_pct": 23.9,
+      "pacing_cost_pct": 27.2,
       "mtd_regs": 886,
       "op2_target": 4116.79
     },
     {
       "market": "DE",
       "pacing_regs_pct": 21.1,
-      "pacing_cost_pct": 16.4,
-      "mtd_regs": 1210,
+      "pacing_cost_pct": 18.6,
+      "mtd_regs": 1212,
       "op2_target": 5747.36
     },
     {
       "market": "IT",
-      "pacing_regs_pct": 19.6,
-      "pacing_cost_pct": 25.0,
-      "mtd_regs": 990,
+      "pacing_regs_pct": 19.5,
+      "pacing_cost_pct": 28.4,
+      "mtd_regs": 981,
       "op2_target": 5041.84
     },
     {
       "market": "AU",
-      "pacing_regs_pct": 15.5,
-      "pacing_cost_pct": 17.8,
-      "mtd_regs": 166,
+      "pacing_regs_pct": 15.7,
+      "pacing_cost_pct": 17.5,
+      "mtd_regs": 168,
       "op2_target": 1071.2448979591836
     }
   ],
-  "actionable_emails": [],
-  "slack_signals": [
-    "**#ab-paid-search-global** (3 msgs since Apr 13): Brandon (U03H47TS508) posted about Q2 CCP \u2014 asking team to review ieCCP and CCP files from Stacey, flag concerns. Also asked which markets have Brand ",
-    "**#ab-paid-search-app** (2 msgs since Apr 2): Yun told Richard IT tax should be fixed \u2014 check if taxed ones are closed and get reissued ones. Brandon asked Richard if he needs more $ for PAM from extr",
-    "**#ab-paid-search-abix** (2 msgs since Apr 14): Brandon said he's started adding feedback to the ABIX document. Has extra time since new hire starts in 1-2 weeks. Will set up time next week to review "
+  "actionable_emails": [
+    "**Brandon OOO** from Munday, Brandon (0d ago) \u2014 Marked as Free, no reminders. [review]",
+    "**Mentioned you in \"Monthly Callouts.loop\"** from Munday, Brandon (1d ago) \u2014 Brandon mentioned you in Monthly Callouts page. [review]",
+    "**Mentioned you in \"Monthly Callouts.loop\"** from Munday, Brandon (1d ago) \u2014 Second mention in Monthly Callouts page. [review]",
+    "**\ud83d\udce5 Brandon assigned you a task: DDD walkthrough with team** from Brandon via Asana (1d ago) \u2014 New task assignment from Brandon. [respond]",
+    "**\ud83d\udce5 Brandon assigned you a task: Sitelink Audit/Update** from Brandon via Asana (1d ago) \u2014 New task assignment from Brandon. [respond]"
   ],
+  "slack_signals": [],
   "critical_flags": [],
   "tasks_created_today": [],
   "enrichment_proposals": [],
   "commitments": [
     {
-      "text": "Check closed IT tax invoices + get reissued ones",
-      "source": "Slack #ab-paid-search-app",
-      "person": "Yun",
-      "said_by": "other",
-      "days_old": 1,
-      "status": "not_started",
-      "context": "Yun confirmed IT tax is fixed. Richard needs to verify closure and get reissued invoices.",
-      "quote": "IT tax should be fixed \u2014 check if taxed ones are closed and get reissued ones"
-    },
-    {
-      "text": "Respond to Brandon on PAM budget \u2014 does Richard need more $ from extra US budget?",
-      "source": "Slack #ab-paid-search-app",
-      "person": "Brandon Munday",
-      "said_by": "other",
-      "days_old": 1,
-      "status": "not_started",
-      "context": "Brandon asking if Richard needs more money for PAM from extra US budget. Must vet on reg impact before responding.",
-      "quote": "Do you need more $ for PAM from extra US budget?"
-    },
-    {
-      "text": "Review ieCCP/CCP files from Stacey, flag concerns for Q2",
-      "source": "Slack #ab-paid-search-global",
-      "person": "Brandon Munday",
-      "said_by": "other",
-      "days_old": 2,
-      "status": "not_started",
-      "context": "Brandon asked team to review Q2 CCP files from Stacey and flag any concerns."
-    },
-    {
-      "text": "Answer Brandon: which markets have Brand Polaris pages?",
-      "source": "Slack #ab-paid-search-global",
-      "person": "Brandon Munday",
-      "said_by": "other",
-      "days_old": 2,
-      "status": "not_started",
-      "context": "Brandon expects US & JP only. Richard should confirm or correct."
-    },
-    {
-      "text": "Add implementation details to AB Customer Redirect, then close",
-      "source": "Asana comment",
-      "person": "Brandon Munday",
-      "said_by": "other",
-      "days_old": 2,
-      "status": "not_started",
-      "context": "Brandon commented on Asana task: 'can you please add the implementation details for this? I think it should be closed'",
-      "quote": "can you please add the implementation details for this? I think it should be closed"
-    },
-    {
+      "text_hash": "b167850d92f7413c4f4d3f21ff47da71",
       "text": "Send Lorena Q2 expected spend for MX PO",
       "source": "Asana task",
       "person": "Lorena",
       "said_by": "other",
-      "days_old": 11,
       "status": "not_started",
+      "context": "11 days overdue. Lorena is blocked on this figure to create the MX PO.",
+      "quote": null,
+      "days_old": 11,
       "overdue": true,
-      "context": "11 days overdue. Lorena is blocked on this figure to create the MX PO."
+      "first_seen": "2026-04-04",
+      "last_seen": "2026-04-16",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "f3beee4c63dd5ba8715a5bea028ef9f7",
+      "text": "Answer Brandon: which markets have Brand Polaris pages?",
+      "source": "Slack #ab-paid-search-global",
+      "person": "Brandon Munday",
+      "said_by": "other",
+      "status": "not_started",
+      "context": "Brandon expects US & JP only. Richard should confirm or correct.",
+      "quote": null,
+      "days_old": 2,
+      "overdue": false,
+      "first_seen": "2026-04-13",
+      "last_seen": "2026-04-16",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "f13ea863e1beb461a74c1a93c4df9d6f",
+      "text": "Review ieCCP/CCP files from Stacey, flag concerns for Q2",
+      "source": "Slack #ab-paid-search-global",
+      "person": "Brandon Munday",
+      "said_by": "other",
+      "status": "not_started",
+      "context": "Brandon asked team to review Q2 CCP files from Stacey and flag any concerns.",
+      "quote": null,
+      "days_old": 2,
+      "overdue": false,
+      "first_seen": "2026-04-13",
+      "last_seen": "2026-04-16",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "71c2e3cb91f66b1670b44c38c2115eec",
+      "text": "Add implementation details to AB Customer Redirect, then close",
+      "source": "Asana comment",
+      "person": "Brandon Munday",
+      "said_by": "other",
+      "status": "not_started",
+      "context": "Brandon commented on Asana task: 'can you please add the implementation details for this? I think it should be closed'",
+      "quote": "can you please add the implementation details for this? I think it should be closed",
+      "days_old": 2,
+      "overdue": false,
+      "first_seen": "2026-04-13",
+      "last_seen": "2026-04-16",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "9a65f2cdf73e52370b8babb904d26eb4",
+      "text": "Check closed IT tax invoices + get reissued ones",
+      "source": "Slack #ab-paid-search-app",
+      "person": "Yun",
+      "said_by": "other",
+      "status": "not_started",
+      "context": "Yun confirmed IT tax is fixed. Richard needs to verify closure and get reissued invoices.",
+      "quote": "IT tax should be fixed \u2014 check if taxed ones are closed and get reissued ones",
+      "days_old": 1,
+      "overdue": false,
+      "first_seen": "2026-04-14",
+      "last_seen": "2026-04-16",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "f9f107e5b0c8bed4ebf6b489d72d56b8",
+      "text": "Respond to Brandon on PAM budget \u2014 does Richard need more $ from extra US budget?",
+      "source": "Slack #ab-paid-search-app",
+      "person": "Brandon Munday",
+      "said_by": "other",
+      "status": "not_started",
+      "context": "Brandon asking if Richard needs more money for PAM from extra US budget. Must vet on reg impact before responding.",
+      "quote": "Do you need more $ for PAM from extra US budget?",
+      "days_old": 1,
+      "overdue": false,
+      "first_seen": "2026-04-14",
+      "last_seen": "2026-04-16",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
     }
   ],
   "delegate": [
@@ -538,8 +758,8 @@
       "context": "Brandon commented 2 days ago asking Richard to add details and close it."
     }
   ],
-  "total_overdue": 4,
-  "total_today": 5,
-  "total_signals": 3,
-  "total_emails": 0
+  "total_overdue": 10,
+  "total_today": 8,
+  "total_signals": 0,
+  "total_emails": 5
 }

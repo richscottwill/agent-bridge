@@ -15,7 +15,7 @@ Asana My Tasks is now the command center — replacing Microsoft To-Do as the ca
 
 | Field | GID | Type | Options (GID → Name) |
 |-------|-----|------|----------------------|
-| Routine_RW | `1213608836755502` | enum | `1213608836755503` → Sweep (Low-friction), `1213608836755504` → Core Two (Deep Work), `1213608836755505` → Engine Room (Excel and Google ads), `1213608836755506` → Admin (Wind-down), `1213924412583429` → Wiki |
+| Routine_RW | `1213608836755502` | enum | `1213608836755503` → Sweep, `1213608836755504` → Core, `1213608836755505` → Engine Room, `1213608836755506` → Admin, `1213924412583429` → Wiki |
 | Priority_RW | `1212905889837829` | enum | `1212905889837830` → Today, `1212905889837831` → Urgent, `1212905889837833` → Not urgent |
 | Importance_RW | `1212905889837865` | enum | `1212905889837866` → Important |
 | Begin-Date_RW | `1213440376528542` | date | — |
@@ -25,10 +25,10 @@ Asana My Tasks is now the command center — replacing Microsoft To-Do as the ca
 
 | To-Do List | Asana Routine Value | When |
 |------------|-------------------|------|
-| 🧹 Sweep | Sweep (Low-friction) | Quick unblocking: send, confirm, triage. Cap: 5 |
-| 🎯 Core | Core Two (Deep Work) | Strategic: test designs, frameworks, stakeholder docs. Cap: 4 |
-| ⚙️ Engine Room | Engine Room (Excel and Google ads) | Hands-on: campaign builds, keyword changes, bids. Cap: 6 |
-| 📋 Admin | Admin (Wind-down) | Budget, POs, invoices, compliance, goal updates. Cap: 3 |
+| 🧹 Sweep | Sweep | Quick unblocking: send, confirm, triage. Cap: 5 |
+| 🎯 Core | Core | Strategic: test designs, frameworks, stakeholder docs. Cap: 4 |
+| ⚙️ Engine Room | Engine Room | Hands-on: campaign builds, keyword changes, bids. Cap: 6 |
+| 📋 Admin | Admin | Budget, POs, invoices, compliance, goal updates. Cap: 3 |
 | 📦 Backlog | (no Routine set) | Deferred/blocked/future — tasks without a Routine value |
 
 ### Priority Mapping
@@ -642,10 +642,10 @@ When the agent creates Asana tasks from Slack [ACTION-RW] signals or email actio
 
 | Signal Type | Examples | Routine_RW | Priority_RW |
 |-------------|----------|---------|-------------|
-| Quick reply/send/confirm | "Reply to Vijeth", "Confirm budget with Kate", "Send AU update" | Sweep (Low-friction) | Today |
-| Strategic discussion/artifact | "Draft testing framework", "Write AEO POV", "Prepare OP1 section" | Core Two (Deep Work) | Urgent |
-| Campaign/keyword/bid work | "Update MX bids", "Add negative keywords", "Pull WBR data", "Build campaign" | Engine Room (Excel and Google ads) | Today |
-| Admin/budget/invoice | "Submit PO", "Review invoice", "Update compliance tracker", "Budget reconciliation" | Admin (Wind-down) | Today |
+| Quick reply/send/confirm | "Reply to Vijeth", "Confirm budget with Kate", "Send AU update" | Sweep | Today |
+| Strategic discussion/artifact | "Draft testing framework", "Write AEO POV", "Prepare OP1 section" | Core | Urgent |
+| Campaign/keyword/bid work | "Update MX bids", "Add negative keywords", "Pull WBR data", "Build campaign" | Engine Room | Today |
+| Admin/budget/invoice | "Submit PO", "Review invoice", "Update compliance tracker", "Budget reconciliation" | Admin | Today |
 | Unclear/ambiguous | Signal doesn't clearly map to a bucket | (none — Backlog) | (none — flag for triage) |
 
 **Decision detection keywords:** When a Slack thread contains any of these keywords, the agent queues the decision for Project Notes "Recent Decisions & Changes" update:

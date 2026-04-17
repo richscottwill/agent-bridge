@@ -1,59 +1,41 @@
-# Hedy Meeting Digest — 2026-04-13
+# Hedy Meeting Digest — 2026-04-16
 
-Scan: 2026-04-13T13:55 PT | Sessions: 11 (4/2–4/9) | Open Action Items: 38
+Scan: 2026-04-16T07:30 PT | Sessions: 4 (4/14–4/15) | Open Action Items: 15
 
 ---
 
-## 🔴 CRITICAL — Overdue Action Items from Meetings
+## 🔴 CRITICAL — Action Items Due Today or Overdue
 
-### Brandon 1:1 (4/2) — Spend Reporting & LiveRamp
-- **Obtain TPS checklist from Abdul for F90 audience request** — due "today" (4/2) → 11d overdue
-- **Set up 15-min walkthrough with Andrew Wirtz for Kiro ASP workflow** — due "today" → 11d overdue
-- **Reframe AdWords knowledge base request as risk mitigation tied to $70K underspend** — due "today" → 11d overdue
-- **Cancel April 16 meeting with Kate Rundell** — ✅ Already done (email 4/3)
-- **Gather Enhanced Match specs from LiveRamp** — due 4/23, on track
+### Brandon 1:1 (4/14) — Polaris, Baloo, and Mexico Testing Sync
+- **Submit SIM to Alex to fix broken images on Mexico brand pages and apply Canada optimizations** — due "today" (4/14) → 2d overdue
+- **Create PowerPoint slide with before-and-after screenshots of Mexico LP A/B test** — due "today" (4/14) → 2d overdue
+- **Compile consolidated list of recommended Andes changes for Polaris brand pages** — due "today" (4/14) → 2d overdue
+- **Initiate email thread with Lorena to clarify Mexico unspent budget** — due "today" (4/14) → 2d overdue
+- **Follow up with LiveRamp on updated match rate analysis** — due 4/16, due today
 
-### Brandon 1:1 (4/6) — Compensation Review & AU LP Sync
-- **Pull AU Polaris LP conversion rate data** — due "today" (4/6) → 7d overdue. Matches Asana task (due 4/8, 5d overdue).
-- **Share CVR data with Brandon + Dwayne** — due "today" → 7d overdue
+### Baloo Phase 1 Demo (4/14)
+- **Ensure Baloo SIM updated with ref tag issue and attribution risks** — due "today" (4/14) → 2d overdue
+- **Test Baloo experience using Tampermonkey script and document findings** — due "tomorrow" (4/15) → 1d overdue
 
-### MX Budget & IECCP (4/6)
-- **Review Lorena's IECCP follow-up email** — no due date, still open
-- **Follow up with Lorena on IECCP/MX budget implications** — no due date, still open. Matches Asana "Send IECCP follow-up summary to Lorena" (due 4/9, 4d overdue).
-
-### Deep Dive & Debate (4/2) — Market Expansion Playbook
-- **Finalize market expansion playbook** — due "next week" (from 4/2) → overdue
-- **Year-One Optimization one-pager** — due 4/16, 3 days away
-- **Living negative keyword list in global chat** — due "today" (4/2) → 11d overdue
-- **IECCP FAQ for new account playbook** — due 4/9 → 4d overdue
-- **Coordinate with Brandon on forecasting inputs** — due "next week" → overdue
+### OCI Rollout & Market Performance (4/14)
+- **Prepare landing page narrative for Mexico stakeholder call** — due "tomorrow" (4/15) → 1d overdue (call was 4/15)
+- **Conduct daily checks for new ad disapprovals** — recurring daily, ongoing
 
 ---
 
 ## 🟡 HIGH PRIORITY — This Week's Action Items
 
-### OP1 Strategy Workshop (4/8) — Offsite
-- Reach out to LiveRamp for F90 enhanced match — due "next week" (this week)
-- Update NTA tickets for new audience media approval — due "in 3 days" (4/11) → 2d overdue
-- Implement test campaign with deep links + ref tags in Google Ads — due "next Friday" (4/18)
-- Follow up with Fernando on AU Polaris LP performance — due "tomorrow" (4/9) → 4d overdue
-- Coordinate with Blaine's team on Polaris template improvements — due "next week"
-- Monitor AI-generated search results using Yoav's tool — recurring weekly
+### Polaris Brand LP & Canada Optimization (4/15)
+- Connect with Lorena Alvarez Larrea to discuss paid social and paid search synergy — due "tomorrow" (4/16), due today
+- Follow up with MCS team on status of global Polaris template finalization — due "next week"
+- Submit additional optimization ideas for Polaris pages with Adi Thakur — no due date
+- Share results from Polaris-branded page test in Mexico — due "in 2 weeks" (~4/30)
 
-### Polaris LP Optimization with Adi (4/8)
-- Consolidate Polaris feedback with Adi — due "in 2 days" (4/10) → 3d overdue. Aligns with Thursday DDD prep.
-- Capture pre/post screenshots for Polaris pages — due "this week"
-- Propose CVR monitoring best practice by URL/locale — due "next week"
+### Baloo Phase 1 Demo (4/14)
+- Follow up with VJ (Mauro) on ref tag persistence ticket review — due "next week"
 
-### Sid Acquisition Discussion (4/9) — Offsite
-- Follow up on retargeting for newly acquired customers — due "next week"
-- Review AI search content + paid search overview doc — due "when received"
-- Explore email conversion timing/relevance improvements — due "in 3 days" (4/12) → 1d overdue
-
-### Jasper AI Demo (4/9) — Offsite
-- Follow up with Lorena (MX) + Alexis (AU) on WhatsApp rollout — no due date
-- Submit SIM for GRI traffic analysis feature — due "today" (4/9) → 4d overdue
-- Check Slack notification settings for Baloo group — due "today" → 4d overdue
+### OCI Rollout (4/14)
+- Coordinate with Chantant team for Canada VPN access for OCI validation — no due date
 
 ---
 
@@ -61,35 +43,43 @@ Scan: 2026-04-13T13:55 PT | Sessions: 11 (4/2–4/9) | Open Action Items: 38
 
 | Topic | Sessions | Weight | Cross-Channel Match |
 |-------|----------|--------|-------------------|
-| polaris-lp-testing | 4 (Brandon 4/6, Adi 4/8, OP1 4/8, DDD 4/2) | +4.0 | ✅ Slack (Brand LP DDD Thursday), Asana (AU LP tasks) |
-| liveramp-enhanced-match | 2 (Brandon 4/2, OP1 4/8) | +2.0 | ✅ Email (EU Paid Channels Update) |
-| mx-budget-ieccp | 2 (MX 4/6, DDD 4/2) | +2.0 | ✅ Slack (MX Budget CRITICAL 10d) |
-| op1-strategy | 2 (OP1 4/8, DDD 4/2) | +2.0 | — |
-| au-cpa-cvr | 2 (Brandon 4/6, Adi 4/8) | +2.0 | ✅ Slack (Lena confusion), Asana (Respond to Lena) |
-| ai-search-aeo | 2 (Sid 4/9, OP1 4/8) | +2.0 | ✅ Slack (L3-5 insights) |
-| market-expansion-playbook | 1 (DDD 4/2) | +1.0 | ✅ Asana (overdue task) |
-| jasper-ai-content | 1 (Jasper 4/9) | +1.0 | — |
-| google-summit-ai-max | 1 (Google 4/9) | +1.0 | — |
-| adobe-optimization | 1 (Adobe 4/8) | +1.0 | — |
-| f90-lifecycle | 2 (Brandon 4/2, OP1 4/8) | +2.0 | ✅ Asana (F90 tasks) |
-| deep-linking-ref-tags | 1 (OP1 4/8) | +1.0 | ✅ Slack (deeplink redirect bug) |
+| polaris-lp-testing | 3 (MCS 4/15, Brandon 4/14, OCI 4/14) | +4.0 | ✅ Slack (Brand LP DDD), Asana (Polaris tasks) |
+| baloo-phase1 | 2 (Demo 4/14, Brandon 4/14) | +3.0 | ✅ Slack (Baloo project channel) |
+| ref-tag-persistence | 2 (Demo 4/14, Brandon 4/14) | +3.0 | 🆕 New signal — marketing attribution risk |
+| mx-polaris-test | 2 (MCS 4/15, Brandon 4/14) | +2.0 | ✅ Slack (MX testing), Asana (MX tasks) |
+| oci-rollout-canada | 1 (OCI 4/14) | +2.0 | ✅ Slack (OCI channel) |
+| paid-social-halo-effect | 1 (MCS 4/15) | +2.0 | 🆕 New signal — MX paid social → branded search CTR |
+| ieccp-quarterly | 1 (OCI 4/14) | +2.0 | ✅ Slack (IECCP discussions) |
+| ad-disapprovals | 1 (OCI 4/14) | +2.0 | 🆕 Transient Google issue across US/JP/CA |
+| liveramp-enhanced-match | 1 (Brandon 4/14) | +1.0 | ✅ Prior signal reinforced (now 4 hits) |
+| au-testing-document | 1 (Brandon 4/14) | +2.0 | ✅ Asana (AU testing framework) |
+| mx-budget-transparency | 1 (Brandon 4/14) | +2.0 | ✅ Slack (MX Budget CRITICAL) |
+| canada-mobile-optimization | 1 (MCS 4/15) | +2.0 | ✅ SSR/VR published |
 
 ---
 
 ## 🧠 Key Decisions from Meetings
 
-1. **OP1 Workshop (4/8):** LiveRamp Enhanced Match is the F90 play. Deep links + ref tags for Google Ads test campaign. AI search monitoring via Yoav's tool. Polaris template improvements coordinated with Blaine's team.
-2. **Brandon 1:1 (4/2):** $70K OP2 underspend is a process failure. ASP confirmation automation needed. Kate meeting canceled — Brandon reviewing Testing Approach doc first. GenBI as stakeholder empowerment tool.
-3. **DDD (4/2):** Market expansion playbook needs structure overhaul. Year-One Optimization one-pager maps to KPIs. IECCP FAQ for new account playbook. Negative keyword list starting with Amazon Music.
-4. **Adi LP Sync (4/8):** Polaris feedback consolidation needed. CVR monitoring by URL/locale as new best practice. Pre/post screenshots for change documentation.
-5. **Google Summit (4/9):** AI-MAX, Smart Bidding Exploration, Search Partner Network, YouTube retargeting, elasticity testing — all OP1 inputs.
+1. **MCS Stakeholder Call (4/15):** All paid search landing pages will migrate to Polaris branding. Legacy PADESARJAD pages deprecated — no further investment. Mexico serves as early test market. Paid social halo effect on branded search recognized — monitor directionally.
+2. **Brandon 1:1 (4/14):** Richard to lead as single point of contact for global Polaris initiatives. Baloo interface deep dive scheduled for next Thursday. AU testing document under review. Only US and JP currently live on Polaris via weblab.
+3. **OCI Rollout (4/14):** OCI Canada at 25%, targeting 100% by week-end. OCI Flash report launching May 11 as weekly update. IECCP reporting shifting from monthly to quarterly (aligned with Kate/Fernando). Ad disapprovals confirmed as transient Google issue.
+4. **Baloo Demo (4/14):** Baloo Phase 1 launched on shop.business.amazon.com. URL flipping identified as major technical challenge — use relative URLs. Ref tag persistence issue flagged as high-priority for marketing attribution. Separate widget group created for Baloo campaigns.
+
+---
+
+## 📋 Meeting Summary
+
+| Meeting | Date | Duration | Type | Attendees | Key Topic |
+|---------|------|----------|------|-----------|-----------|
+| Polaris Brand LP & Canada Optimization | 4/15 10:02 AM PT | 26 min | stakeholder | Richard, Dwayne, Adi, Brandon, Lorena | Canada 15% mobile CVR improvement; MX Polaris test; paid social halo |
+| Polaris, Baloo & Mexico Testing Sync | 4/14 1:31 PM PT | 38 min | manager | Richard, Brandon | AU doc review; MX broken images; Polaris global rollout prep |
+| OCI Rollout & Market Performance | 4/14 12:33 PM PT | 58 min | team | Brandon, Richard, Stacey, Andrew | OCI Canada launch; IECCP quarterly; ad disapprovals |
+| Baloo Phase 1 Demo & Feedback | 4/14 9:03 AM PT | 31 min | stakeholder | Richard, Vijay, VJ, Mauro, +7 | Baloo subdomain demo; ref tag issue; URL flipping |
 
 ---
 
 ## DuckDB Status
 
-- meeting_analytics: 11 rows (4/2–4/9) — already synced
-- meeting_highlights: populated
-- meeting_series: populated
-- signals.hedy_meetings: TABLE DOES NOT EXIST — needs creation
-- signal_tracker: Hedy topics queued for reinforcement (see below)
+- signals.hedy_meetings: 4 rows inserted (4/14–4/15) — ✅ TABLE CREATED + POPULATED
+- signals.signal_tracker: 12 new topics + 1 reinforced (liveramp-enhanced-match)
+- ops.data_freshness: hedy_meetings updated to current timestamp

@@ -1,137 +1,238 @@
 {
   "version": "1.0",
   "last_scan": {
-    "timestamp": "2026-04-15T01:30:00Z",
-    "hook": "AM-PM",
+    "timestamp": "2026-04-16T14:01:00Z",
+    "hook": "AM-1",
     "status": "success",
-    "signals_extracted": 12,
-    "channels_scanned": 8,
-    "proactive_queries_run": 0,
+    "signals_extracted": 20,
+    "channels_scanned": 16,
+    "messages_ingested": 225,
+    "proactive_queries_run": 3,
     "proactive_queries_failed": 0,
+    "duckdb_writes": {
+      "slack_messages_inserted": 225,
+      "signals_decayed": 24,
+      "signals_deactivated": 0,
+      "new_signals": 5,
+      "reinforced_signals": 1
+    },
     "errors": []
   },
   "channels": {
     "C0993SRL6FQ": {
       "channel_name": "rsw-channel",
-      "last_message_ts": "1776099354.546099",
-      "last_scan_ts": "2026-04-14T14:30:00Z",
-      "messages_processed": 0,
+      "section": "Channels",
+      "last_message_ts": "1776262185.681689",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
+      "messages_processed": 2,
       "signals_extracted": 0,
-      "notes": "Not scanned this cycle — no unread."
+      "notes": "System messages only (daily briefs). No external signals."
     },
     "C044UG8MCSZ": {
       "channel_name": "ab-paid-search-global",
-      "last_message_ts": "1776204076.865959",
-      "last_scan_ts": "2026-04-15T01:30:00Z",
-      "messages_processed": 3,
+      "section": "Channels",
+      "last_message_ts": "1776282352.930129",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
+      "messages_processed": 2,
       "signals_extracted": 2,
-      "notes": "Brandon: review Q2 CCP/ieCCP. Polaris pages status thread (US & JP only). Stacey posted Q1 IECCP file."
+      "notes": "Brandon: Loop callout clarifications due Fri 2pm CT. Adit: WW Dashboard W15 updated."
     },
     "C065KKT53DJ": {
       "channel_name": "ab-paid-search-abix",
-      "last_message_ts": "1776207375.450539",
-      "last_scan_ts": "2026-04-15T01:30:00Z",
-      "messages_processed": 28,
-      "signals_extracted": 6,
-      "notes": "MAJOR: Brandon handoff doc request (2pm PT draft). Yun: MX LP optimization call tmrw, broken images, performance doc request. Brandon: extra time on doc, meeting next week. Richard active in conversation."
+      "section": "Channels",
+      "last_message_ts": "1776287199.767209",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
+      "messages_processed": 4,
+      "signals_extracted": 3,
+      "notes": "Yun: R&O reminder for MX/AU. Brandon: liked MX data, interested in social influence on PS. Richard replied to R&O thread."
     },
     "C05KTAAG14J": {
       "channel_name": "ab-paid-search-app",
-      "last_message_ts": "1776193561.518599",
-      "last_scan_ts": "2026-04-15T01:30:00Z",
-      "messages_processed": 3,
-      "signals_extracted": 2,
-      "notes": "Yun: IT tax fixed, Richard check invoices. PAM budget STILL UNANSWERED 11d."
+      "section": "Channels",
+      "last_message_ts": "1775154403.215619",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 0,
+      "notes": "No new messages. PAM Budget still unanswered (13d)."
     },
     "C06R6R19LG0": {
       "channel_name": "ab-paid-search-oci",
-      "last_message_ts": "1776177030.415219",
-      "last_scan_ts": "2026-04-14T14:30:00Z",
+      "section": "WW Testing",
+      "last_message_ts": "1776098157.982929",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
+      "messages_processed": 0,
+      "signals_extracted": 0,
+      "notes": "No new messages."
+    },
+    "C08GJKNC3KM": {
+      "channel_name": "amazon-builder-genai-power-users",
+      "section": "AI",
+      "last_message_ts": "1776333672.874119",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
+      "messages_processed": 54,
+      "signals_extracted": 6,
+      "notes": "L3-5: Kiro Status Page launched, KiRoom/AgentSpaces/MeshClaw/Cmux comparison, context auto-load poll (No wins), AI TPM concept, Pizzeria task mgmt, secure MCP streaming."
+    },
+    "C05L7H41J7M": {
+      "channel_name": "ab-paid-search-eng",
+      "section": "AB PS",
+      "last_message_ts": "1776208002.271159",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
       "messages_processed": 0,
       "signals_extracted": 0,
       "notes": "No new messages since last scan."
     },
-    "C08GJKNC3KM": {
-      "channel_name": "amazon-builder-genai-power-users",
-      "last_message_ts": "1776215368.464469",
-      "last_scan_ts": "2026-04-15T01:30:00Z",
-      "messages_processed": 25,
-      "signals_extracted": 3,
-      "notes": "L3-5: gpu-debugger launched, Opus 4.6 degradation continues, Kiro branch protection bypass (security concern), RavenAI tools, Product vault concept, skills-based routing trend."
-    },
-    "C05L7H41J7M": {
-      "channel_name": "ab-paid-search-eng",
-      "last_message_ts": "1776208002.271159",
-      "last_scan_ts": "2026-04-15T01:30:00Z",
-      "messages_processed": 3,
-      "signals_extracted": 1,
-      "notes": "Adi asked Yun about Business Essentials spend increase. Yun confirmed $1M annual budget pacing for ENG."
-    },
     "C096H6QNW6M": {
       "channel_name": "bedrock-agentcore-interest",
-      "last_message_ts": "1776199758.802559",
-      "last_scan_ts": "2026-04-15T01:30:00Z",
-      "messages_processed": 4,
+      "section": "AI",
+      "last_message_ts": "1776334256.759499",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
+      "messages_processed": 14,
+      "signals_extracted": 2,
+      "notes": "AgentCore managed harness coming Apr 21. Memory issues, A2A protocol questions, billing anomaly."
+    },
+    "C04UBQQFXEV": {
+      "channel_name": "ab-ps-partnership-accounts",
+      "section": "AB PS",
+      "last_message_ts": "1776272701.302399",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
+      "messages_processed": 6,
+      "signals_extracted": 2,
+      "notes": "Brandon + Yun: LiveRamp $255K stays in PS ENG. Enhanced Match timeline TBD."
+    },
+    "C04UG37S04V": {
+      "channel_name": "paid-search-amzn",
+      "section": "AB",
+      "last_message_ts": "1776347324.505679",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
+      "messages_processed": 2,
+      "signals_extracted": 2,
+      "notes": "Google DSA sunset → AI MAX. Google Ads access security warning."
+    },
+    "C0645SLNLE6": {
+      "channel_name": "ab-central-marketing",
+      "section": "AB",
+      "last_message_ts": "1776295237.633819",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
+      "messages_processed": 1,
       "signals_extracted": 0,
-      "notes": "Autonomous coding agents pattern (Stripe 04/23), WebSocket + AgentCore questions. No direct relevance."
+      "notes": "Customer study request for Apple VM. Not directly relevant."
+    },
+    "C03H1S5SYP4": {
+      "channel_name": "ask-ab-data",
+      "section": "AB",
+      "last_message_ts": "1776294972.612679",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
+      "messages_processed": 6,
+      "signals_extracted": 0,
+      "notes": "Bot errors and general data queries. No Richard-relevant signals."
+    },
+    "C06M7R2SKQW": {
+      "channel_name": "ask-ab-aryabot",
+      "section": "AI",
+      "last_message_ts": "1776347550.642489",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
+      "messages_processed": 19,
+      "signals_extracted": 0,
+      "notes": "General aryabot queries. No Richard-relevant signals."
+    },
+    "C0A1JD8FCUV": {
+      "channel_name": "agentspaces-interest",
+      "section": "AI",
+      "last_message_ts": "1776276219.594739",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
+      "messages_processed": 50,
+      "signals_extracted": 1,
+      "notes": "Web-based AgentSpaces, model selection persistence, OTP deprecation concern. General community support."
+    },
+    "C0ASET2V16X": {
+      "channel_name": "ab-psme-seattle",
+      "section": "AB",
+      "last_message_ts": "1776116448.560289",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
+      "messages_processed": 1,
+      "signals_extracted": 0,
+      "notes": "New channel. Intro post about free food. No work signals."
     }
   },
   "dm_conversations": {
     "D044JAKR8RZ": {
       "user_name": "Brandon Munday",
-      "last_message_ts": "1776102559.510259",
-      "last_scan_ts": "2026-04-14T14:30:00Z",
-      "notes": "Not scanned this cycle."
+      "user_id": "U03H47TS508",
+      "last_message_ts": "1776268274.869749",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
+      "messages_processed": 11,
+      "signals_extracted": 3,
+      "notes": "Brandon: WW sitelink audit Asana task. MX ieCCP doc confirmed. MX handoff doc simplification (reference CA pages)."
+    },
+    "D0A8FS0QLTU": {
+      "user_name": "Asana Bot",
+      "user_id": "U0191BZPGBY",
+      "last_message_ts": "1776270337.625659",
+      "last_scan_ts": "2026-04-16T14:01:00Z",
+      "messages_processed": 3,
+      "signals_extracted": 1,
+      "notes": "MCSOpsPlanned changed to No. Richard added as collaborator."
     }
   },
   "proactive_searches": {
     "prichwil": {
-      "total_results": 0,
-      "recent_relevant": "Not run this cycle.",
-      "last_run": "2026-04-14T14:30:00Z"
+      "total_results": 2,
+      "recent_relevant": "Both in channels Richard is in (ABIX R&O reminder, Global callout request). No external mentions.",
+      "last_run": "2026-04-16T14:01:00Z"
     },
     "from:@brandoxy": {
-      "total_results": 2300,
-      "recent_relevant": "Covered via channel history. Key: handoff doc request, CCP review, Polaris pages question.",
-      "last_run": "2026-04-14T14:30:00Z"
+      "total_results": 9,
+      "recent_relevant": "Global: Loop callout request. ABIX: MX data positive, social influence interest. Partnership-Accounts: Enhanced Match $255K decision. DM: sitelink audit, ieCCP doc, MX handoff simplification.",
+      "last_run": "2026-04-16T14:01:00Z"
     },
     "from:@kataxt": {
-      "total_results": 128,
-      "recent_relevant": "Not run this cycle. Kate signals captured via ABIX channel (Brandon relaying Kate's position on HC).",
-      "last_run": "2026-04-14T14:30:00Z"
+      "total_results": 0,
+      "recent_relevant": "No Kate messages in scan window.",
+      "last_run": "2026-04-16T14:01:00Z"
     }
   },
   "hot_topics": {
     "active": [
       {
-        "topic": "MX/AU Handoff to Richard",
-        "first_seen": "2026-04-13T17:15:50Z",
-        "last_seen": "2026-04-14T22:56:15Z",
-        "channels": ["C065KKT53DJ"],
-        "key_participants": ["brandoxy", "prichwil", "yunchu", "kataxt"],
-        "signal_count": 8,
-        "status": "active-handoff-this-week",
-        "notes": "UPDATED: Kate not overly concerned about HC. Brandon adding feedback to doc. Extra time due to new hire starting in 1-2 weeks. Meeting next week to review together."
+        "topic": "Loop Callout Updates",
+        "first_seen": "2026-04-15T19:45:52Z",
+        "last_seen": "2026-04-15T19:45:52Z",
+        "channels": ["C044UG8MCSZ"],
+        "key_participants": ["brandoxy", "prichwil", "aditthk"],
+        "signal_count": 1,
+        "status": "action-due-friday-2pm-ct",
+        "notes": "NEW: Brandon added comments in Loop for Richard and Adit. Due Fri Apr 17 @ 2pm CT."
       },
       {
-        "topic": "OCI CA Launch",
-        "first_seen": "2026-04-08T20:07:00Z",
-        "last_seen": "2026-04-14T14:30:30Z",
-        "channels": ["C06R6R19LG0"],
-        "key_participants": ["brandoxy", "arthamm"],
-        "signal_count": 5,
-        "status": "active-execution-today",
-        "notes": "No new messages. Execution day passed."
-      },
-      {
-        "topic": "ABIX Weekly Callout",
-        "first_seen": "2026-04-13T21:45:12Z",
-        "last_seen": "2026-04-13T21:45:49Z",
-        "channels": ["C065KKT53DJ"],
+        "topic": "WW Sitelink Audit",
+        "first_seen": "2026-04-15T15:51:14Z",
+        "last_seen": "2026-04-15T15:51:14Z",
+        "channels": ["D044JAKR8RZ"],
         "key_participants": ["brandoxy", "prichwil"],
         "signal_count": 1,
+        "status": "new-task-unacknowledged",
+        "notes": "NEW: Brandon created Asana task for WW sitelink audit. Richard has not acknowledged."
+      },
+      {
+        "topic": "R&O Input MX/AU",
+        "first_seen": "2026-04-15T19:57:02Z",
+        "last_seen": "2026-04-15T21:06:39Z",
+        "channels": ["C065KKT53DJ"],
+        "key_participants": ["yunchu", "prichwil"],
+        "signal_count": 2,
         "status": "action-due-today",
-        "notes": "Brandon asked Richard for callout by EOD today. Richard confirmed."
+        "notes": "NEW: Yun reminded R&O due today. Richard asked about file location (strikethrough — may be resolved)."
+      },
+      {
+        "topic": "MX/AU Handoff to Richard",
+        "first_seen": "2026-04-13T17:15:50Z",
+        "last_seen": "2026-04-14T23:05:09Z",
+        "channels": ["C065KKT53DJ", "D044JAKR8RZ"],
+        "key_participants": ["brandoxy", "prichwil", "yunchu", "kataxt"],
+        "signal_count": 9,
+        "status": "active-handoff-this-week",
+        "notes": "UPDATED: Brandon simplified MX doc — reference CA pages instead of showing 'before' state. No new ABIX activity."
       },
       {
         "topic": "PAM Budget Availability",
@@ -140,28 +241,28 @@
         "channels": ["C05KTAAG14J"],
         "key_participants": ["brandoxy", "peteocam"],
         "signal_count": 2,
-        "status": "critical",
-        "notes": "11d unanswered. Brandon direct @mention. No reaction, no reply. MUST reply or confirm resolution."
+        "status": "critical-13d-unanswered",
+        "notes": "13d unanswered. No new activity. MUST reply or confirm resolution."
       },
       {
-        "topic": "GenBI Campaign Reg Data",
-        "first_seen": "2026-04-13T15:05:16Z",
-        "last_seen": "2026-04-13T21:58:07Z",
-        "channels": ["C065KKT53DJ", "C044UG8MCSZ"],
-        "key_participants": ["brandoxy", "arthamm", "yunchu"],
+        "topic": "Enhanced Match / LiveRamp",
+        "first_seen": "2026-04-15T16:43:28Z",
+        "last_seen": "2026-04-15T17:05:01Z",
+        "channels": ["C04UBQQFXEV"],
+        "key_participants": ["brandoxy", "yunchu"],
         "signal_count": 3,
-        "status": "active-eta-1-2-days",
-        "notes": "No new updates. Mukesh ETA 1-2 days from yesterday."
+        "status": "decision-made",
+        "notes": "UPDATED: $255K LiveRamp fee stays in PS ENG. Enhanced Match timeline TBD, expected slow."
       },
       {
-        "topic": "MX LP Optimization Call",
-        "first_seen": "2026-04-14T15:19:08Z",
-        "last_seen": "2026-04-14T16:13:25Z",
-        "channels": ["C065KKT53DJ"],
-        "key_participants": ["yunchu", "prichwil"],
-        "signal_count": 4,
-        "status": "active-call-tomorrow",
-        "notes": "NEW: Cristobal Jiminez from MX team reaching out to Adi for CA LP optimization. Call 12 PM CST tomorrow. Yun flagged broken MX NB page images. Richard to create doc of changes for Alex."
+        "topic": "Google DSA Sunset",
+        "first_seen": "2026-04-15T18:20:37Z",
+        "last_seen": "2026-04-15T18:20:37Z",
+        "channels": ["C04UG37S04V"],
+        "key_participants": [],
+        "signal_count": 1,
+        "status": "new-industry-change",
+        "notes": "NEW: Google sunsetting DSA, auto-upgrading to AI MAX. All PS teams affected."
       },
       {
         "topic": "Q2 CCP Review",
@@ -171,7 +272,7 @@
         "key_participants": ["brandoxy", "staceygu"],
         "signal_count": 2,
         "status": "review-requested",
-        "notes": "NEW: Stacey posted Q1 ieCCP file. Brandon asked team to review Q2 proposed CCP. Yun and Adi reacted eyes."
+        "notes": "No new activity this scan. Still pending review."
       },
       {
         "topic": "IT Tax Fix Verification",
@@ -181,7 +282,7 @@
         "key_participants": ["yunchu", "prichwil"],
         "signal_count": 1,
         "status": "action-needed",
-        "notes": "NEW: Yun says IT tax fixed. Richard needs to check if taxed invoices are closed and get reissued ones."
+        "notes": "No new activity. Richard still needs to check taxed invoices."
       },
       {
         "topic": "Polaris LP Revert / Brand Page Transition",
@@ -190,44 +291,44 @@
         "channels": ["C05JFNNENV9", "C044UG8MCSZ"],
         "key_participants": ["brandoxy", "dtpalmer", "prichwil", "yunchu", "awirtz"],
         "signal_count": 11,
-        "status": "active-ddd-thursday",
-        "notes": "UPDATED: Brandon asking which markets have Brand Polaris (expects US & JP only). Thread active with 5 replies."
+        "status": "active",
+        "notes": "No new activity this scan."
+      },
+      {
+        "topic": "MX LP Optimization Call",
+        "first_seen": "2026-04-14T15:19:08Z",
+        "last_seen": "2026-04-14T16:13:25Z",
+        "channels": ["C065KKT53DJ"],
+        "key_participants": ["yunchu", "prichwil"],
+        "signal_count": 4,
+        "status": "call-was-yesterday",
+        "notes": "Call was scheduled for yesterday (Apr 15). No follow-up messages seen. Check if it happened."
       }
     ],
     "cooled": [
+      {
+        "topic": "OCI CA Launch",
+        "status": "cooling",
+        "notes": "No new activity. Execution day passed."
+      },
+      {
+        "topic": "GenBI Campaign Reg Data",
+        "status": "cooling",
+        "notes": "No new updates. Mukesh ETA was 1-2 days from Apr 14."
+      },
+      {
+        "topic": "ABIX Weekly Callout",
+        "status": "merged-into-loop-callouts",
+        "notes": "Merged into Loop Callout Updates topic."
+      },
       {
         "topic": "MX Budget Line / Underspend",
         "status": "merged-into-handoff",
         "notes": "Merged into MX/AU Handoff topic."
       },
       {
-        "topic": "Lena MX LP Confusion",
-        "status": "merged-into-handoff",
-        "notes": "Merged into MX/AU Handoff topic. Kate now involved."
-      },
-      {
         "topic": "SSR Refmarker Investigation",
         "status": "resolved",
-        "notes": "No new activity."
-      },
-      {
-        "topic": "Austin Team Offsite",
-        "status": "complete",
-        "notes": "Complete."
-      },
-      {
-        "topic": "Verification Delay SIM",
-        "status": "cooling",
-        "notes": "No new discussion."
-      },
-      {
-        "topic": "Google Ads Access Audit",
-        "status": "cooling",
-        "notes": "No new activity."
-      },
-      {
-        "topic": "Deeplink Redirect Bug Impact",
-        "status": "stable",
         "notes": "No new activity."
       }
     ]

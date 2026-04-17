@@ -13,71 +13,71 @@
 body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);padding:0;min-height:100vh;-webkit-font-smoothing:antialiased}
 .page{max-width:1200px;margin:0 auto;padding:24px 20px}
 nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);background:rgba(20,22,30,0.92)}
-.nav-brand{color:var(--white);font-weight:700;font-size:.9em;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:4px;letter-spacing:1.5px;text-transform:uppercase}
-.nav-link{color:var(--text2);text-decoration:none;padding:14px 18px;font-size:.8em;font-weight:500;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
+.nav-brand{color:var(--white);font-weight:700;font-size:1.02em;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:4px;letter-spacing:1.5px;text-transform:uppercase}
+.nav-link{color:var(--text2);text-decoration:none;padding:14px 18px;font-size:0.92em;font-weight:500;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
 .nav-link:hover{color:var(--text);background:rgba(74,158,255,0.06)}
 .nav-link.active{color:var(--accent);border-bottom-color:var(--accent)}
-.nav-back{color:var(--text3);text-decoration:none;padding:14px 14px 14px 0;font-size:.75em;font-weight:500;letter-spacing:.3px;margin-right:4px;border-right:1px solid var(--border);transition:color .15s}
+.nav-back{color:var(--text3);text-decoration:none;padding:14px 14px 14px 0;font-size:0.87em;font-weight:500;letter-spacing:.3px;margin-right:4px;border-right:1px solid var(--border);transition:color .15s}
 .nav-back:hover{color:var(--accent)}
-h1{color:var(--white);font-size:1.35em;margin-bottom:4px;font-weight:600;letter-spacing:.2px}
-h2{color:var(--text);font-size:.95em;margin:28px 0 12px;font-weight:600;letter-spacing:.2px}
-.sub{color:var(--text2);font-size:.78em;margin-bottom:24px;line-height:1.5}
+h1{color:var(--white);font-size:1.47em;margin-bottom:4px;font-weight:600;letter-spacing:.2px}
+h2{color:var(--text);font-size:1.07em;margin:28px 0 12px;font-weight:600;letter-spacing:.2px}
+.sub{color:var(--text2);font-size:0.9em;margin-bottom:24px;line-height:1.5}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px;margin-bottom:16px}
 .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:16px}
 .card{background:var(--surface);border-radius:8px;padding:18px;border:1px solid var(--border)}
-.card-title{color:var(--text2);font-size:.72em;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;font-weight:500}
+.card-title{color:var(--text2);font-size:0.84em;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;font-weight:500}
 .chart-box{position:relative;height:280px}
 .chart-box-sm{position:relative;height:200px}
 .stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
 .stat{background:var(--surface);border-radius:6px;padding:12px 16px;border:1px solid var(--border);min-width:100px}
-.stat .v{font-size:1.5em;font-weight:700;color:var(--white)}
-.stat .l{font-size:.62em;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
-table{width:100%;border-collapse:collapse;font-size:.82em}
-th{text-align:left;color:var(--text3);font-weight:500;padding:8px;border-bottom:1px solid var(--border);font-size:.85em;text-transform:uppercase;letter-spacing:.5px}
+.stat .v{font-size:1.62em;font-weight:700;color:var(--white)}
+.stat .l{font-size:0.74em;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
+table{width:100%;border-collapse:collapse;font-size:0.94em}
+th{text-align:left;color:var(--text3);font-weight:500;padding:8px;border-bottom:1px solid var(--border);font-size:0.97em;text-transform:uppercase;letter-spacing:.5px}
 td{padding:8px;border-bottom:1px solid var(--border)}
-.badge{font-size:.68em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;display:inline-block;letter-spacing:.3px}
+.badge{font-size:0.8em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;display:inline-block;letter-spacing:.3px}
 .b-worsening{background:rgba(248,113,113,0.15);color:var(--red)}.b-stuck{background:rgba(251,191,36,0.15);color:var(--amber)}
 .b-improving{background:rgba(52,211,153,0.15);color:var(--green)}.b-new{background:var(--accent-dim);color:var(--accent)}
 .b-validated{background:rgba(167,139,250,0.15);color:var(--purple)}.b-active{background:var(--accent-dim);color:var(--accent)}
 .b-adopted{background:rgba(52,211,153,0.15);color:var(--green)}.b-reverted{background:rgba(248,113,113,0.15);color:var(--red)}
 .b-queued{background:rgba(90,106,122,0.15);color:var(--text2)}
 .no-data{color:var(--text3);font-style:italic;padding:20px;text-align:center}
-.trainer{font-size:.78em;color:var(--text3);margin-top:12px;line-height:1.5;padding:10px 0;border-top:1px solid var(--border)}
+.trainer{font-size:0.9em;color:var(--text3);margin-top:12px;line-height:1.5;padding:10px 0;border-top:1px solid var(--border)}
 .level-track{margin-bottom:10px;padding:14px;background:var(--bg);border-radius:6px;border:1px solid var(--border)}
 .level-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.level-name{font-weight:600;font-size:.9em;color:var(--white)}
+.level-name{font-weight:600;font-size:1.02em;color:var(--white)}
 .level-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;margin:6px 0}
 .level-fill{height:100%;border-radius:2px}
-.lb{font-size:.62em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.lb{font-size:0.74em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
 .lb-active{background:var(--accent-dim);color:var(--accent)}.lb-next{background:rgba(90,106,122,0.15);color:var(--text2)}
 .lb-queued{background:rgba(90,106,122,0.08);color:var(--text3)}.lb-future{background:rgba(90,106,122,0.05);color:var(--text3)}
 .comp-row{margin-bottom:14px}
 .comp-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-.comp-name{font-weight:600;font-size:.85em;color:var(--text)}
-.comp-stage{font-size:.7em;color:var(--text3)}
+.comp-name{font-weight:600;font-size:0.97em;color:var(--text)}
+.comp-stage{font-size:0.82em;color:var(--text3)}
 .comp-track{display:flex;height:22px;background:var(--surface2);border-radius:4px;overflow:hidden}
-.comp-stop{flex:1;display:flex;align-items:center;justify-content:center;font-size:.58em;font-weight:600;color:rgba(255,255,255,0.1);border-right:1px solid var(--border)}
+.comp-stop{flex:1;display:flex;align-items:center;justify-content:center;font-size:0.7em;font-weight:600;color:rgba(255,255,255,0.1);border-right:1px solid var(--border)}
 .comp-stop:last-child{border-right:none}
 .comp-stop.filled{color:rgba(255,255,255,0.9)}
-.ch-item{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.85em}
-.ch-box{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:.65em}
+.ch-item{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:0.97em}
+.ch-box{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:0.77em}
 .ch-done{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
 .ch-text{color:var(--text)}.ch-text.done{color:var(--text3);text-decoration:line-through}
 .overview-card{background:var(--surface);border-radius:8px;padding:20px;border:1px solid var(--border);text-decoration:none;display:block;transition:all .2s}
 .overview-card:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(74,158,255,0.08)}
-.oc-title{color:var(--text2);font-weight:600;font-size:.78em;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px}
-.oc-metric{font-size:1.8em;font-weight:700;margin:8px 0;color:var(--white)}
-.oc-sub{color:var(--text2);font-size:.78em;line-height:1.5}
+.oc-title{color:var(--text2);font-weight:600;font-size:0.9em;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px}
+.oc-metric{font-size:1.92em;font-weight:700;margin:8px 0;color:var(--white)}
+.oc-sub{color:var(--text2);font-size:0.9em;line-height:1.5}
 </style></head><body>
 <nav><a href="../index.html" class="nav-back" target="_top">← Command Center</a><span class="nav-brand">Body System</span><a href="index.html" class="nav-link">Overview</a><a href="growth.html" class="nav-link active">Growth</a><a href="willpower.html" class="nav-link">Willpower</a><a href="output.html" class="nav-link">Output</a><a href="autoresearch.html" class="nav-link">Autoresearch</a></nav>
 <div class="page">
 <h1>Autonomy and Competence</h1>
 <div class="sub">Two dimensions of growth: how much of your work is agent-assisted (autonomy), and how automatic your operating principles have become (competence).</div>
 
-<p style="color:var(--text);font-size:.9em;line-height:1.7;margin-bottom:16px">
+<p style="color:var(--text);font-size:1.02em;line-height:1.7;margin-bottom:16px">
   The end state is Level 5: full agentic orchestration of paid search work. Today, 43 distinct work functions have been identified across campaign operations, reporting, strategic work, admin, communication, delegation, and system maintenance. Of those, 2 run without any human involvement, 13 involve an agent but still need a human trigger or approval, and 25 are fully manual.
 </p>
-<p style="color:var(--text2);font-size:.85em;line-height:1.7;margin-bottom:32px">
+<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:32px">
   The biggest manual bucket is campaign operations &mdash; 9 functions including bid management, keyword research, search term review, and spend pacing. This is Level 3 territory: building tools that automate these tasks and getting teammates to adopt them. Strategic work (test design, OP1 writing, POVs) will likely stay human, but the preparation and data gathering that feeds it can be agent-assisted.
 </p>
 
@@ -85,28 +85,28 @@ td{padding:8px;border-bottom:1px solid var(--border)}
 <div class="grid">
   <div class="card"><div class="card-title">Autonomy Spectrum</div><div class="chart-box"><canvas id="autoChart"></canvas></div></div>
   <div class="card"><div class="card-title">Breakdown by Category</div><div id="autoTable"></div>
-    <div style="font-size:.72em;color:var(--text3);margin-top:8px;line-height:1.5">
+    <div style="font-size:0.84em;color:var(--text3);margin-top:8px;line-height:1.5">
       <b style="color:var(--accent)">Fully Agentic</b> Zero touch &middot; <b style="color:rgba(74,158,255,0.7)">Agent + Human</b> Agent works, human triggers &middot; <b style="color:var(--text2)">Delegated</b> Another human &middot; <b style="color:var(--text3)">Human</b> Manual
     </div>
-    <div style="font-size:.58em;color:var(--text3);margin-top:4px;font-style:italic">Agents/tools from device.md (high). Campaign ops from hands.md (high). Strategic/communication estimated from role scope (medium).</div>
+    <div style="font-size:0.7em;color:var(--text3);margin-top:4px;font-style:italic">Agents/tools from device.md (high). Campaign ops from hands.md (high). Strategic/communication estimated from role scope (medium).</div>
   </div>
 </div>
 
 <h2>Full Inventory</h2>
-<p style="color:var(--text2);font-size:.85em;line-height:1.7;margin-bottom:12px">
+<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:12px">
   Every function Richard performs, classified by who or what does it. The color dot indicates autonomy level. This inventory was built from device.md (tools and agents), hands.md (tasks and recurring work), current.md (active projects), and standard paid search marketing manager responsibilities.
 </p>
 <div class="card" id="autoBySection"></div>
 
 <h2>Competence Stages</h2>
-<p style="color:var(--text);font-size:.9em;line-height:1.7;margin-bottom:16px">
+<p style="color:var(--text);font-size:1.02em;line-height:1.7;margin-bottom:16px">
   Six operating principles drawn from Duhigg (habit loops), McKeown (essentialism), and Gollwitzer (implementation intentions). Each is scored on a 4-stage competence model: from unconscious incompetence (Stage 1, not even aware of the gap) through conscious competence (Stage 3, can do it but requires effort) to unconscious competence (Stage 4, automatic behavior).
 </p>
-<p style="color:var(--text2);font-size:.85em;line-height:1.7;margin-bottom:16px">
+<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:16px">
   The current average is 2.7/4. Four principles are at Stage 3 &mdash; the system actively checks alignment and the behavior happens with effort. Two are at Stage 2: "Invisible over visible" (system improvements are still noticeable rather than seamless) and "Reduce decisions, not options" (most templates are unbuilt, so decisions that could be pre-loaded still require active thought). The goal is Stage 4 across all six &mdash; when the checking becomes unnecessary because the behavior is automatic.
 </p>
 <div class="card">
-  <div style="display:flex;justify-content:space-between;font-size:.7em;color:var(--text3);margin-bottom:10px">
+  <div style="display:flex;justify-content:space-between;font-size:0.82em;color:var(--text3);margin-bottom:10px">
     <span>Stage 1: Unconscious Incompetence</span>
     <span>Stage 2: Conscious Incompetence</span>
     <span>Stage 3: Conscious Competence</span>
@@ -127,10 +127,10 @@ Chart.defaults.plugins.tooltip.bodyColor='#ccc';
 <div class="grid">
   <div class="card"><div class="card-title">Work Classification</div><div class="chart-box"><canvas id="autoChart"></canvas></div></div>
   <div class="card"><div class="card-title">Breakdown by Category</div><div id="autoTable"></div>
-    <div style="font-size:.72em;color:#888;margin-top:8px;line-height:1.5">
+    <div style="font-size:0.84em;color:#888;margin-top:8px;line-height:1.5">
       <b style="color:var(--accent)">Fully Agentic</b> Zero touch &middot; <b style="color:var(--accent)">Agent + Human</b> Agent works, human triggers &middot; <b style="color:var(--text2)">Delegated</b> Another human &middot; <b style="color:var(--text3)">Human</b> Manual
     </div>
-    <div style="font-size:.6em;color:#666;margin-top:4px;font-style:italic">Agents/tools from device.md (high). Campaign ops from hands.md (high). Strategic/communication estimated from role scope (medium).</div>
+    <div style="font-size:0.72em;color:#666;margin-top:4px;font-style:italic">Agents/tools from device.md (high). Campaign ops from hands.md (high). Strategic/communication estimated from role scope (medium).</div>
   </div>
 </div>
 <div class="trainer">58% of your work is still fully manual. Campaign ops (9 functions) is the biggest bucket &mdash; that is Level 3 territory. Strategic work stays human, but prep can be agent-assisted. Every function that moves from red to blue is a step toward Level 5.</div>
@@ -140,7 +140,7 @@ Chart.defaults.plugins.tooltip.bodyColor='#ccc';
 
 <h2>Competence Stages &mdash; Average 2.7/4</h2>
 <div class="card">
-  <div style="display:flex;justify-content:space-between;font-size:.7em;color:#888;margin-bottom:10px">
+  <div style="display:flex;justify-content:space-between;font-size:0.82em;color:#888;margin-bottom:10px">
     <span style="color:#fca5a5">Stage 1: Unconscious Incompetence</span>
     <span style="color:#fcd34d">Stage 2: Conscious Incompetence</span>
     <span style="color:#93c5fd">Stage 3: Conscious Competence</span>
@@ -178,7 +178,7 @@ Chart.defaults.plugins.tooltip.bodyColor='#ccc';
   var h='<table><tr><th>Category</th><th style="text-align:center">#</th><th>Examples</th></tr>';
   cats.forEach(function(cat){
     var count=s[cat.k]||0;var examples=funcs.filter(function(f){return f.category===cat.k}).map(function(f){return f.name}).slice(0,3).join(', ');
-    h+='<tr><td style="color:'+cat.c+';font-weight:600;white-space:nowrap">'+cat.l+'</td><td style="text-align:center">'+count+'</td><td style="color:#888;font-size:.78em">'+examples+'</td></tr>';
+    h+='<tr><td style="color:'+cat.c+';font-weight:600;white-space:nowrap">'+cat.l+'</td><td style="text-align:center">'+count+'</td><td style="color:#888;font-size:0.9em">'+examples+'</td></tr>';
   });
   el.innerHTML=h+'</table>';
 })();
@@ -193,7 +193,7 @@ Chart.defaults.plugins.tooltip.bodyColor='#ccc';
   Object.keys(sections).sort().forEach(function(sec){
     sections[sec].forEach(function(f,i){
       var c=catColors[f.category]||'#888';
-      h+='<tr><td style="color:#888;font-size:.8em">'+(i===0?sec:'')+'</td><td>'+f.name+'</td>'+
+      h+='<tr><td style="color:#888;font-size:0.92em">'+(i===0?sec:'')+'</td><td>'+f.name+'</td>'+
         '<td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+c+'"></span></td></tr>';
     });
   });
@@ -207,14 +207,14 @@ Chart.defaults.plugins.tooltip.bodyColor='#ccc';
   var stageColors=['rgba(136,153,170,0.2)','rgba(136,153,170,0.35)','rgba(74,158,255,0.4)','rgba(74,158,255,0.7)'];
   var h='';
   p.forEach(function(pr){
-    h+='<div class="comp-row"><div class="comp-label"><span class="comp-name">'+pr.name+' <span style="color:#888;font-size:.8em;font-weight:400">('+pr.source+')</span></span>'+
+    h+='<div class="comp-row"><div class="comp-label"><span class="comp-name">'+pr.name+' <span style="color:#888;font-size:0.92em;font-weight:400">('+pr.source+')</span></span>'+
       '<span class="comp-stage">Stage '+pr.score+'</span></div><div class="comp-track">';
     for(var i=0;i<4;i++){var filled=i<pr.score;h+='<div class="comp-stop'+(filled?' filled':'')+'" style="'+(filled?'background:'+stageColors[i]:'')+'"></div>';}
-    h+='</div><div style="font-size:.73em;color:#888;margin-top:2px">'+pr.evidence+'</div></div>';
+    h+='</div><div style="font-size:0.85em;color:#888;margin-top:2px">'+pr.evidence+'</div></div>';
   });
-  h+='<div style="margin-top:10px;padding:8px 12px;background:#12141c;border-radius:6px;display:flex;justify-content:space-between"><span style="font-size:.85em;color:#888">Average</span><span style="font-size:1.1em;font-weight:700;color:#fff">'+competence.average+' / 4</span></div>';
+  h+='<div style="margin-top:10px;padding:8px 12px;background:#12141c;border-radius:6px;display:flex;justify-content:space-between"><span style="font-size:0.97em;color:#888">Average</span><span style="font-size:1.22em;font-weight:700;color:#fff">'+competence.average+' / 4</span></div>';
   el.innerHTML=h;
 })();
 </script>
-<div style="color:var(--text3);font-size:.62em;text-align:center;margin-top:48px;padding:16px;letter-spacing:.5px" id="genFooter">STANDALONE HTML · CHART.JS VIA CDN · PORTABLE</div>
+<div style="color:var(--text3);font-size:0.74em;text-align:center;margin-top:48px;padding:16px;letter-spacing:.5px" id="genFooter">STANDALONE HTML · CHART.JS VIA CDN · PORTABLE</div>
 <script>fetch('../data/body-system-data.json?'+Date.now()).then(r=>r.json()).then(function(D){document.getElementById('genFooter').textContent='DATA: '+new Date(D.generated).toLocaleString()+' · STANDALONE HTML · CHART.JS VIA CDN · PORTABLE'}).catch(function(){})</script></div></body></html>

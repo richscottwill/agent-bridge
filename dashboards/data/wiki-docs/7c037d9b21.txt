@@ -1,0 +1,182 @@
+<!-- DOC-0111 | duck_id: context-2026-03-31_morning-routine-experiments -->
+
+# Morning Routine — Experiment Engine
+
+This is a living experiment system. Not a static queue. Each experiment starts with a prior (why we think it'll work), runs for 3-5 days, gets scored on behavioral signals, and the result informs what to test next. The agent generates new hypotheses based on what it learns — not from a pre-built list.
+
+Last updated: 2026-03-24
+
+---
+
+## How It Works
+
+### 1. Generate Hypothesis
+Before each experiment, state:
+- **What** you're changing (one variable only)
+- **Why** you think it'll work (prior — cite research, observed pattern, or intuition)
+- **Predicted effect** on Richard's behavior (specific and measurable)
+- **How you'll know** (what signals to watch for)
+
+### 2. Run the Experiment
+- Apply the change to the morning routine for 3-5 consecutive runs
+- Log each run: date, what was different, Richard's response
+- Don't change anything else during the experiment (isolate the variable)
+
+### 3. Score and Decide
+After 3-5 runs, assess:
+- **KEEP**: Net positive signal from day 3+ (discount days 1-2 for novelty/aversion wash-out). Adopt as new baseline.
+- **REVERT**: Net negative from day 3+, or neutral after 5 runs. Not worth the complexity.
+- **ITERATE**: Mixed signal — refine the hypothesis and run a tighter version.
+
+**Wash-out rule**: For VISIBLE changes (format, layout, tone), ignore days 1-2 of signal. For INVISIBLE/STRUCTURAL changes (pre-written drafts, if-then framing, friction reduction, task reordering), score from day 1 — these don't trigger novelty effects.
+
+### 4. Generate Next Hypothesis
+Based on what you learned, generate the next experiment. Don't pull from a queue — think about:
+- What friction did Richard hit today?
+- What section did he skip or ask about?
+- What task didn't get done despite being in the brief?
+- What research suggests a better approach?
+- What's the biggest gap between the brief's intent and Richard's actual behavior?
+
+Use web search for new ideas when the current learning plateaus.
+
+---
+
+## Behavioral Signals (how to score)
+
+| Signal | Score | Example |
+|--------|-------|---------|
+| Explicit positive | +2 | "good", "helpful", "like this", "keep doing this" |
+| Task completion improved | +1 | Hard thing done on the day it was briefed, admin cleared same day |
+| Fewer follow-up questions | +1 | Richard doesn't ask "where is X" or "what about Y" |
+| No comment | 0 | Most days. Neutral. |
+| Skipped a section | -1 | Richard ignores a brief section or asks for info that was in it |
+| Explicit negative | -2 | "too long", "confusing", "I don't need this" |
+| Asked for something the brief should have contained | -1 | "What's on my calendar?" when meetings were listed |
+| Changed the system himself | SIGNAL | Richard edits the hook or asks for a change — strong signal about what's not working |
+
+---
+
+## Research Priors (inform hypothesis generation)
+
+### Experiment Design: Subtle vs Visible Changes
+
+**CRITICAL FINDING: Prefer invisible structural changes over visible cosmetic ones.**
+
+- **Novelty effect**: Visible changes (new format, new emojis, new section order) produce initial engagement spikes that decay within 3-7 days. Early positive signals from visible changes are unreliable. Wait for steady-state before scoring.
+- **Change aversion**: The inverse — visible changes can also produce initial negative reactions that fade as the person adapts. A "too long" complaint on day 1 may disappear by day 3.
+- **Default effects persist even when disclosed** (Bryce et al.): Structural nudges (what's pre-loaded, what's the path of least resistance) maintain effectiveness even when the person knows they're being nudged.
+- **Hawthorne effect**: Richard knowing an experiment is running could change his behavior. Cleaner approach: make changes subtle enough that he doesn't consciously register them.
+
+**Implication for experiment design:**
+- Prefer STRUCTURAL changes (what's pre-written, what's the default action, what friction is removed) over COSMETIC changes (format, layout, tone)
+- When testing a structural change, DON'T announce it. Just do it. Measure behavior, not opinion.
+- When testing a visible change, discount the first 2-3 days of signal (novelty/aversion wash-out period). Only score from day 3+.
+- The best experiments are ones Richard never notices but that change his completion rate.
+
+### Duhigg Habit Loop (The Power of Habit)
+
+The morning routine IS a habit loop. Design it as one:
+- **CUE**: Richard triggers the hook (one click). This is the cue. It should be the same every day — same time, same action. Consistency of the cue is what makes the routine automatic.
+- **ROUTINE**: The 4-step sequence (Asana sync → drafts → To-Do refresh + brief → calendar blocks). This should be IDENTICAL in structure every day. The content changes but the shape doesn't. Predictability reduces cognitive load and lets the brain automate.
+- **REWARD**: The brief email + calendar blocks populated + My Day set. Richard opens his calendar and everything is laid out. The reward is the feeling of "I know exactly what to do today" — reduced anxiety, clear path. This reward must be IMMEDIATE and TANGIBLE.
+
+**Keystone habit principle**: The morning routine is a keystone habit — it cascades into other behaviors (checking calendar blocks, completing tasks in order, using pre-written drafts). Protect the keystone. Don't experiment with the cue or the reward — only experiment within the routine itself.
+
+**Implication**: 
+- NEVER change the overall structure (4 steps, 4 blocks, brief email). That's the habit skeleton.
+- Experiment WITHIN the blocks: what's in the body, how tasks are framed, what's pre-written.
+- The cue (one-click trigger) and reward (populated calendar + brief) should be invariant.
+
+### McKeown Essentialism + Effortless
+
+- **Routine as liberation**: McKeown argues routines aren't restrictive — they eliminate decision fatigue so energy goes to what matters. The morning routine should make the NON-essential decisions for Richard (what order, what time, what to say) so his willpower is preserved for the essential decisions (strategy, stakeholder positioning, the hard thing).
+- **"Build one routine around something essential"**: The morning routine's essential output is: Richard knows the hard thing and has a protected block for it. Everything else is supporting infrastructure.
+- **Effortless action**: The goal is to make the right behavior the path of least resistance. Pre-written drafts mean sending a message is copy-paste, not composition. Calendar blocks mean starting work is opening the next event, not deciding what to do. Due dates set to today mean My Day is pre-populated, not manually curated.
+- **Eliminate before optimizing**: Before testing a new addition to the brief, ask: can I remove something instead? The essentialist move is subtraction, not addition.
+
+**Implication**:
+- The experiment engine should test REMOVALS as often as additions
+- "What happens if I remove the Heads Up section?" is a valid experiment
+- The brief should trend shorter over time, not longer
+- Every section must earn its place by demonstrably affecting Richard's behavior
+
+### Implementation Intentions (Gollwitzer, 1999)
+- If-then plans have a medium-to-large effect (d=0.65) on goal attainment across 94 studies
+- Effect is larger when plans are contingent, the person is motivated, and plans are rehearsed
+- **Implication**: Calendar block bodies should include if-then framing as a structural nudge. "When you open this block, the first thing you do is [X]." This is invisible — Richard won't notice the framing change, but it may increase completion.
+- **Status**: CANDIDATE — strong evidence, structural change, low visibility. Good next experiment.
+
+### Cognitive Load Theory
+- Working memory handles ~4 items at once
+- **Implication**: Each calendar block should have max 2-3 tasks. The brief should have max 4-5 sections visible at a glance. Progressive disclosure (details in block bodies, not in brief) reduces load.
+- **Status**: PARTIALLY APPLIED (block-based approach already limits per-block items)
+
+### Circadian alignment
+- Creative/strategic work in morning peak, execution in afternoon, admin in low-energy periods
+- **Implication**: Core block placement matters. Currently placed in largest gap — should bias toward morning.
+- **Status**: PARTIALLY APPLIED
+
+---
+
+## Experiment Log
+
+### Experiment 1: Block-Based Calendar (BASELINE)
+- **What**: Replaced task-specific calendar blocks with 4 typed blocks (Sweep/Core/Engine Room/Admin)
+- **Prior**: Grouping by work type reduces context-switching. Richard thinks in modes, not individual tasks.
+- **Predicted effect**: Fewer "what should I do next" moments. Tasks within a block feel like a natural batch.
+- **Status**: ACTIVE (started 2026-03-24)
+- **Runs**:
+
+| Date | What Changed | Richard's Response | Score |
+|------|-------------|-------------------|-------|
+| 2026-03-24 | First run. 4 blocks created. Overdue tasks set to today. | Richard asked for tasks to be split into smaller batches (max 2 per block) — then asked for block-based approach. Net positive: he shaped the system toward this. | +1 |
+
+- **Running score**: +1
+- **Decision**: Continue. Need 2-3 more runs before deciding.
+- **Next observation**: Does Richard complete more tasks from the blocks vs the old task-specific approach? Does he reference the block bodies during the day?
+
+### Experiment 2: (NEXT — generate after Experiment 1 concludes)
+- **What**: TBD — will be generated based on Experiment 1 results and any friction observed
+- **Prior**: TBD
+- **Predicted effect**: TBD
+
+---
+
+## Hypothesis Generation Triggers
+
+When any of these happen, generate a new experiment hypothesis:
+- Richard explicitly asks for a change → strong signal, but design the experiment as a structural change, not just what he asked for literally
+- A task sits in My Day for 3+ consecutive days → the routine isn't creating enough activation energy. Test a structural nudge (pre-written draft, if-then framing, friction reduction)
+- Richard completes the hard thing → what was different about that day's routine? Was it structural (better draft, less friction) or cosmetic (different format)? Replicate the structural element.
+- Richard skips a block → is it placed wrong? Too late? Wrong tasks? Or is the block itself unnecessary? Test REMOVING it before fixing it (essentialism).
+- A meeting goes poorly (Hedy data) → was the meeting prep insufficient, or was it present but not consumed? Different problems, different experiments.
+- The brief email goes unread for 2+ hours → is it too long? Test removing a section rather than reformatting.
+- Web research surfaces a technique with strong evidence → test it as a structural change if possible
+
+### Duhigg Framework for Hypothesis Generation
+When generating a new experiment, map it to the habit loop:
+1. Am I changing the CUE? → DON'T. The cue should be invariant.
+2. Am I changing the ROUTINE structure? → DON'T. The 4-step, 4-block shape should be invariant.
+3. Am I changing what's INSIDE the routine? → GOOD. This is where experiments live.
+4. Am I changing the REWARD? → BE CAREFUL. The reward (populated calendar + clear brief) should feel the same. You can make it better but don't make it different.
+
+### McKeown Framework for Hypothesis Generation
+Before adding something, ask:
+1. Can I REMOVE something instead? Subtraction experiments are underrated.
+2. Does this change make the essential thing easier? If not, skip it.
+3. Will Richard notice this change? If yes, it's cosmetic. Prefer invisible.
+4. Does this reduce a decision Richard has to make? If yes, it's high-value.
+
+---
+
+## No-Brainer Upgrades (apply immediately, no experiment needed)
+
+If research or observation reveals something with overwhelming evidence and zero downside, apply it directly. Log it here so we know what changed and when.
+
+| Date | Change | Source | Why No Experiment Needed |
+|------|--------|--------|------------------------|
+| 2026-03-24 | Block-based calendar (Sweep/Core/ER/Admin) | Richard's explicit request | He asked for it — strongest possible signal |
+| 2026-03-24 | Backlog strict rules (only blocked/future) | Richard's explicit request | Direct instruction |
+| 2026-03-24 | Full task management agency | Richard's explicit request | Direct instruction |
+| — | Implementation intentions in block bodies | Gollwitzer meta-analysis (d=0.65, 94 studies) | CANDIDATE — strong evidence but test first since it changes the block body format Richard is used to |

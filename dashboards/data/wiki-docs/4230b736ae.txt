@@ -1,0 +1,54 @@
+<!-- DOC-0131 | duck_id: context-flash-session-2026-03-26 -->
+
+# Flash Writing Session — 2026-03-26
+
+## What happened
+Richard wrote sections for the March '26 Paid Acquisition Flash (due 3/30). Iterative drafting session covering MX highlight, AU updates, and project statuses (Bid Strategy Test, Brand LP Tests, Paid App).
+
+## Final sections written
+
+### MX Growth Within Constraints (Highlight)
+To align with stricter ie%CCP targets, we tightened MX NB bid strategy constraints in 2025, using various levers to direct algorithms to more efficiently bid within search auctions. This reduced NB CPA from $267 to $112 by H2. YTD 2026, despite +16% CPC increases, we've sustained that efficiency ($117 NB CPA) through continued keyword restructuring that improved query routing to higher-intent traffic. The result: MX average monthly registrations have grown +14% vs. H2 2025 while exceeding OP2 by 16%. Without sustaining these efficiencies, higher NB CPAs would have reduced volume enough to miss OP2 by 9%. We plan to further improve by launching category-specific landing pages in Q2.
+
+### AU Updates (Update)
+We are partnering with the AU team on efficiency improvements: auditing keyword coverage to ensure alignment with AU selection, identifying and optimizing the highest-cost keywords by CPA, and establishing reviews to audit keyword structure and performance. We have also moved to Polaris landing pages, and will monitor performance.
+
+### Bid Strategy Test (Project Status)
+AU bid strategy launched in Week 4 has delivered 6 consecutive weeks of NB CPC decline (-21%) and helped us decrease NB CPA from $168 to $117. We will no longer consider this a test.
+
+### Brand LP Tests (Project Status)
+US Brand campaigns switched to Polaris Paid Search landing pages in March. Weblab submitted for WW rollout process, and dial-up is targeting April 6-7.
+
+### Paid App - Expansion and Measurement (Project Status)
+Blocked — needs Andrew's input. No March data for DE/IT/ES Apple Search Ads.
+
+## Writing style observations (for future MBR style guide update)
+
+1. **Mechanism precision without over-specificity**: Richard prefers "using various levers to direct algorithms to more efficiently bid" over naming specific mechanisms that invite scrutiny. Broad enough to be accurate, specific enough to show understanding.
+
+2. **Preferred phrasing reuse**: Once Richard validates a phrase ("improved query routing to higher-intent traffic"), he reuses it consistently across drafts. Don't vary for variety's sake.
+
+3. **Decisive closers over hedging**: "We will no longer consider this a test" vs "continuing to monitor and assess." When the call is made, state it.
+
+4. **Counterfactual framing**: Richard uses "without X, Y would have happened" to show impact. Scopes it explicitly ("MX paid search overall") when mixing segment-specific data with total-market outcomes.
+
+5. **Constraint→response→outcome narrative**: The strongest framing starts with the external constraint (ie%CCP targets), then the response (bid strategy changes), then the outcome (sustained efficiency + growth). This is more compelling than results-first for flash audiences.
+
+6. **H2 vs YoY comparison choice**: When YoY comps are inflated by ramp-up periods, Richard prefers comparing against the most recent mature baseline (H2). More defensible, less flashy.
+
+7. **Sensitivity awareness in scoping**: Deliberately omitted AU from Brand LP Tests status because of Polaris urgency sensitivity with Lena's team. Covered AU Polaris in AU Updates instead.
+
+8. **"helped us decrease" for partial attribution**: When a result has multiple contributing factors, uses "helped" to attribute contribution without overclaiming.
+
+9. **Comma minimization**: Prefers max two commas per sentence in flash writing. Splits sentences rather than chaining clauses.
+
+10. **Word count discipline**: Highlights ~100 words, Updates ~50 words, Project Statuses ~35 words.
+
+## System updates made
+- Dashboard ingester: Added `_read_monthly_actuals()` method that reads the 2026 Monthly tab actuals (rows 19-48) with Brand/NB split. Outputs to `monthly-actuals.json`.
+- Monthly actuals now included in per-market analysis results and standalone JSON file.
+
+## Data reference
+- MX monthly actuals: `shared/tools/dashboard-ingester/data/monthly-actuals.json`
+- Flash quip context: `shared/context/active/flash/paid acq flash quip`
+- MBR/QBR context: `shared/context/active/mbr-qbr/2026-mbr-qbr`

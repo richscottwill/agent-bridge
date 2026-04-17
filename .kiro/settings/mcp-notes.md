@@ -28,26 +28,29 @@
 
 ---
 
-## DuckDB / MotherDuck
+## DuckDB (via MotherDuck MCP)
 
-**What it is:** An in-process SQL database. The MCP server lets agents run SQL queries, browse schemas, and interact with local DuckDB files, in-memory databases, or MotherDuck cloud databases.
+**What it is:** An in-process SQL database. The MCP server lets agents run SQL queries, browse schemas, and interact with MotherDuck cloud databases. This is the ONLY way to access DuckDB — do NOT use Python `duckdb.connect()` with MotherDuck tokens directly.
 
 **Server type:** Local Python package via uvx (not an AIM package)
 **Package:** `mcp-server-motherduck` on PyPI
 **Requires:** Python 3.10+, uvx/uv
 
-**Current config:** In-memory database with read-write enabled. Good for ad-hoc analysis, CSV/Parquet ingestion, and temporary data work.
+**Current config:** Connected to `ps_analytics` on MotherDuck cloud. Read-write enabled.
+
+**POLICY (as of 2026-04-16):** All DuckDB access goes through DuckDB MCP (`execute_query`). Python scripts that need DuckDB data should either:
+1. Read from local JSON cache files that the agent populates via MCP, OR
+2. Be invoked by the agent which queries MCP and passes results as arguments.
+Do NOT use `duckdb.connect()` with `motherduck_token` in Python scripts. The MCP server handles authentication and connection management.
 
 **Key flags:**
-- `--db-path :memory:` — in-memory (default). Use a file path like `my.duckdb` for persistence
-- `--db-path md:` — connects to MotherDuck cloud
-- `--read-write` — enables write operations (default is read-only for file-based DBs; in-memory is always writable)
-- `--motherduck-token TOKEN` — required for MotherDuck cloud connections
+- `--db-path md:` — connects to MotherDuck cloud (current config)
+- `--read-write` — enables write operations
+- `--motherduck-token TOKEN` — handled by MCP config, not by scripts
 - `--allow-switch-databases` — lets the agent switch between databases at runtime
-- `--ephemeral-connections` — keeps file unlocked so other processes can write to it
 
 **Available tools:**
-- `execute_query` — run any SQL query
+- `execute_query` — run any SQL query (this is the primary interface)
 - `list_databases` — show attached databases
 - `list_tables` — show tables/views with comments
 - `list_columns` — show column types and comments for a table

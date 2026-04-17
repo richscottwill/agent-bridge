@@ -1,19 +1,19 @@
 <!-- DOC-0346 | duck_id: protocol-duckdb-schema-verification -->
 # DuckDB Schema Verification Protocol
 
-Ensures schema writes land in the correct persistent MotherDuck cloud database. Run after any batch of CREATE TABLE/VIEW statements.
+Ensures schema writes land in the correct persistent database. Run after any batch of CREATE TABLE/VIEW statements.
+
+All DuckDB access goes through DuckDB MCP (`execute_query`). Do NOT use Python `duckdb.connect()` with MotherDuck tokens directly. The MCP server handles the connection.
 
 ---
 
 ## Why This Exists
 
-On 4/6/2026, 10 tables from the mcp-capability-expansion spec were found missing despite being "created" in a prior session. Root cause: tables were written to a transient/shadow database rather than the persistent file. Migration to MotherDuck cloud (4/6) eliminates the local file persistence problem, but verification remains important to catch MCP server connection issues.
-
-The DuckDB MCP server connects to `md:ps_analytics` on MotherDuck (aws-us-east-1).
+On 4/6/2026, 10 tables from the mcp-capability-expansion spec were found missing despite being "created" in a prior session. Root cause: tables were written to a transient/shadow database rather than the persistent file. The DuckDB MCP server connects to `ps_analytics` on MotherDuck. Verification catches MCP server connection issues.
 
 ## Verification Steps
 
-After any batch of CREATE TABLE or CREATE VIEW statements, immediately run:
+After any batch of CREATE TABLE or CREATE VIEW statements, immediately run via `execute_query`:
 
 ### Step 1: Confirm Database Identity
 ```sql
@@ -21,11 +21,11 @@ SELECT current_database(), current_schema();
 ```
 Expected: `ps_analytics`, `main`. If different → STOP.
 
-### Step 2: Confirm MotherDuck Connection
+### Step 2: Confirm MCP Connection
 ```sql
 SELECT database_name, path, type FROM duckdb_databases() WHERE database_name = 'ps_analytics';
 ```
-Expected type: `motherduck`. If type is `duckdb` → MCP server fell back to local file. Restart MCP server (touch .kiro/settings/mcp.json, then restart from panel).
+If query succeeds, MCP is connected. If it fails, restart MCP server (touch .kiro/settings/mcp.json, then restart from panel).
 
 ### Step 3: Confirm Tables Exist
 ```sql
@@ -69,15 +69,14 @@ These 10 tables + 3 views must exist in `ps-analytics.main`:
 2. competitive_intelligence
 3. workflow_reliability
 
-## Quick Verification Query (copy-paste)
+## Quick Verification Query (copy-paste via execute_query)
 ```sql
 -- Full schema check: 46 tables + 39 views expected
 SELECT table_type, COUNT(*) AS count FROM information_schema.tables 
 WHERE table_schema = 'main' GROUP BY table_type;
 
--- MotherDuck connection check
+-- Connection check
 SELECT database_name, type FROM duckdb_databases() WHERE database_name = 'ps_analytics';
--- Expected: type = 'motherduck'
 
 -- Snapshot availability check
 SELECT snapshot_name, created_ts FROM md_information_schema.database_snapshots

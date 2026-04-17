@@ -19,10 +19,10 @@ Pure data collection. No drafting, no decisions, no organ writes.
 ### DuckDB Schema Verification
 Run `~/shared/context/protocols/duckdb-schema-verification.md` quick check:
 1. `SELECT current_database(), current_schema()` → must be `ps_analytics`, `main`
-2. `SELECT database_name, type FROM duckdb_databases() WHERE database_name = 'ps_analytics'` → type must be `motherduck`
+2. `SELECT database_name, type FROM duckdb_databases() WHERE database_name = 'ps_analytics'` → confirm connected
 3. Quick table count: 46 tables + 39 views expected
 4. If any missing → run ensure-schema.sql statements for missing tables
-5. If database type is not `motherduck` → STOP and flag: MCP server not connected to MotherDuck
+5. All DuckDB access goes through DuckDB MCP (`execute_query`). Do NOT use Python `duckdb.connect()` with MotherDuck tokens.
 
 ### Slack Scan
 1. list_channels (unreadOnly=true). Sort by mention_count then section.
@@ -314,13 +314,40 @@ This executes in sequence:
 2. `refresh-forecast.py` — read `_Data` + `_Daily_Data` → `data/forecast-data.json`
 3. `refresh-callouts.py` — read forecast JSON + callout markdown → `data/callout-data.json`
 4. `generate-command-center.py` — read AM output files → `data/command-center-data.json`
+   - Also syncs commitments to DuckDB `main.commitment_ledger` (text-hash dedup, 30-day rolling)
+   - Also reads `data/ledger-actions.json` for user feedback (done/dismissed/restored) and applies to DuckDB
+   - Also writes `~/shared/context/active/ledger-feedback-queue.json` with cascade instructions
 
-Non-blocking: if any step fails, log warning and continue to Phase 6.5.
+Non-blocking: if any step fails, log warning and continue to Phase 6.2.
 
 The Command Center index page (`~/shared/dashboards/index.html`) auto-loads these JSON files:
 - `data/callout-data.json` → WW Summary + Market Table
 - `data/command-center-data.json` → Daily Blocks + Actionable Items
 - `data/forecast-data.json` → Forecast Tracker dashboard
+
+---
+
+## Phase 6.2: Ledger Feedback Cascade
+
+Process user feedback from the Command Center Integrity Ledger. Read `~/shared/context/active/ledger-feedback-queue.json`.
+
+For each pending item where `cascaded` is false:
+
+### Asana Cascade
+If `cascade_actions` contains `system: "asana"`:
+- **complete_task**: SearchTasksInWorkspace(text=search_text, completed='false'). If found, UpdateTask(completed='true') + CreateTaskStory with the user's note.
+- **add_comment**: SearchTasksInWorkspace(text=search_text). If found, CreateTaskStory with the dismissal reason.
+
+### Slack Cascade
+If `cascade_actions` contains `system: "slack"`:
+- **suggest_reply**: Queue a draft reply suggestion for AM-Frontend. Do NOT auto-send — present the note as a draft for Richard to review.
+
+### After Processing
+- Set `cascaded: true` on each processed item.
+- Write updated queue back to the file.
+- Log cascade results to `ops.workflow_executions` in DuckDB.
+
+Non-blocking: if any cascade fails, log warning, mark as `cascade_failed`, and continue.
 
 ---
 

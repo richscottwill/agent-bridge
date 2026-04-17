@@ -1,28 +1,33 @@
 {
-  "generated_at": "2026-04-14T07:00:00Z",
-  "sync_type": "full",
-  "total_incomplete": 94,
-  "soft_deleted": 9,
-  "snapshot_rows": 124,
-  "new_since_yesterday": 17,
-  "overdue_3plus": 7,
-  "today_tasks": 9,
+  "generated_at": "2026-04-16T14:20:00Z",
+  "sync_type": "partial_duckdb_only",
+  "data_staleness": "24h (last Asana pull: 2026-04-15T13:52:36Z)",
+  "total_incomplete": 105,
+  "soft_deleted": 63,
+  "snapshot_rows": 105,
+  "overdue_3plus": 4,
+  "overdue_total": 7,
+  "today_tasks": 2,
   "by_routine": {
-    "Wiki": 46,
-    "Engine Room": 15,
+    "Backlog": 84,
     "Core": 10,
-    "Sweep": 5,
-    "Admin": 4,
-    "Backlog": 14
+    "Engine Room": 5,
+    "Admin": 3,
+    "Sweep": 3
   },
   "by_project": {
-    "ABPS AI - Content": 44,
-    "AU": 15,
-    "Paid App": 12,
+    "My Tasks": 87,
     "ABPS - WW Testing & Projects": 9,
-    "MX": 7
+    "Paid App": 7,
+    "AU": 1,
+    "MX": 1
   },
-  "over_cap": ["Engine Room (15/6)", "Core (10/4)", "Admin (4/3)"],
-  "coherence_alerts": 3,
-  "oldest_overdue": {"name": "Paid App", "days": 14}
+  "over_cap": [
+    "Core (10/4)"
+  ],
+  "coherence_alerts": 10,
+  "oldest_overdue": {
+    "name": "Paid App",
+    "days": 16
+  }
 }

@@ -3,7 +3,7 @@
 
 Canonical sync procedure for keeping DuckDB `signals.emails` and `main.calendar_events` populated from Outlook MCP. Runs as part of AM-Backend Subagent C.
 
-Database: `ps_analytics` (MotherDuck). Always use schema-qualified names.
+Database: `ps_analytics` (via DuckDB MCP). Always use schema-qualified names.
 
 ---
 

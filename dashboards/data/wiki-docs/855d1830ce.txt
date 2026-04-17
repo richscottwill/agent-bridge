@@ -1,0 +1,88 @@
+<!-- DOC-0509 | duck_id: wiki-workstream-algorithmic-ads -->
+
+---
+title: "Workstream 5: Algorithmic Ads"
+status: DRAFT
+doc-type: strategy
+audience: amazon-internal
+level: 2
+owner: Richard Williams
+created: 2026-03-25
+updated: 2026-04-05
+update-trigger: "AI Max test design completed, AI Max US test launches, DG Video results available, BSE video performance data, Hydra coordination status change"
+tags: [demand-gen, ai-max, algorithmic, kate-doc]
+---
+
+# Workstream 5: Algorithmic Ads
+
+This document explains how the Paid Search team tested and scaled algorithmic ad formats — Demand Gen and the upcoming AI Max — to extend reach beyond traditional keyword campaigns. It supports the Testing Approach narrative for Kate and provides the evidence base for the 2026 AI Max test. After reading, you should understand the proven Demand Gen results, the AI Max test design and guardrails, and the dependencies on the Modern Search workstream.
+
+## What opportunity do algorithmic ads address?
+
+Traditional keyword campaigns only reach users who search for terms in our keyword list. This creates a ceiling — we can optimize bids and copy within that ceiling (see Workstreams 1 and 2), but we cannot reach users whose search behavior signals business purchasing intent without matching our exact keywords. Algorithmic ad formats break through that ceiling by using Google's machine learning to identify relevant audiences and placements beyond manual keyword targeting.
+
+By 2025, Demand Gen had matured into a proven channel after two years of iteration on mid-funnel ad formats and audience targeting.
+
+## What did Demand Gen deliver?
+
+Demand Gen ads drove cost-efficient traffic at a fraction of keyword campaign costs. The 2025 average CPC was $0.39 for Demand Gen versus $2.43 for keyword campaigns — an 84% reduction. This is not a volume play; it is an efficiency play that extends PS reach into mid-funnel visual placements where keyword campaigns cannot compete.
+
+The efficiency gains compounded in Q4 2025. The channel delivered 53% more traffic YoY while spending 35% less, with CPC improving 58% YoY. More traffic at less cost — the channel scales without proportional budget increases (see Appendix: Q4 2025 Performance).
+
+Prime Day 2025 validated Demand Gen at scale — $329K OPS at 644% ROAS, a 12x YoY improvement. This confirmed that visual ad formats deliver during peak events, not just in steady-state.
+
+The Engagement account also enabled the Business Essentials launch through DG image placements, delivering 52K visitors in the first year at a $0.30 CPC. BSE video launched in January 2026, replicating the proven DG image approach with short video creative and increased image variations developed in collaboration with the Creative team (Raven Smith, CeCe Ramey). Early testing shows video CPCs in line with image asset CPCs at $0.30, indicating strong efficiency potential.
+
+## What is AI Max and why does it matter?
+
+AI Max represents Google's next evolution in campaign intelligence. It expands keyword matching beyond exact and phrase match to semantically related queries, dynamically selects landing page experiences based on user intent, and unlocks enhanced audience signals from Google's cross-property data.
+
+For AB specifically, AI Max will show ads to users searching queries that do not contain our exact keywords but signal business purchasing intent. A search for "office supplies for small company" could trigger an AB ad even if that exact phrase is not in our keyword list. This expands the addressable audience beyond what manual keyword targeting can reach.
+
+AI Max requires consolidated campaign structures to function effectively — the Modern Search consolidation work (Workstream 2) directly enables this test. Without consolidated structures, AI Max cannot aggregate sufficient signal to optimize effectively.
+
+## How is the team managing AI Max risk?
+
+The team is developing the AI Max test design for a planned US test in Q2 2026, following the same measurement discipline used for OCI — clear baselines, phased rollout, incrementality benchmarks.
+
+Two specific risks require guardrails. The first is cannibalization of existing keyword performance — AI Max's expanded matching could bid on queries already covered by existing campaigns, inflating costs without incremental registrations. The second is budget inflation from broad matching — without controls, expanded reach could consume budget on low-intent queries that drive clicks but not registrations. The guardrail design needs to detect both within the first two weeks of the test.
+
+The team is coordinating with other Amazon teams (Hydra/Retail PS, Daniel Carmody's team) and Google (Mike Babich) to avoid internal auction overlap — if both teams run AI Max simultaneously without coordination, internal auction overlap could inflate CPCs for both. The dependency on Modern Search consolidation means any delays in campaign restructuring directly delay AI Max readiness. If the US test validates efficiency and incremental growth, the learnings will inform a broader worldwide rollout strategy.
+
+## Cross-functional partners
+
+Creative (Raven Smith, CeCe Ramey) is developing DG video assets, BSE creative, and image variations. Google (Mike Babich) is advising on AI Max planning and DG best practices. Hydra/Retail PS (Daniel Carmody's team) is coordinating AI Max testing across Amazon teams to avoid auction overlap. Traffic and Onsite Marketing co-developed the Engagement account strategy for DG campaigns. ABMA provided LiveRamp audience integration for DG targeting.
+
+---
+
+## Appendix
+
+### Appendix A: Demand Gen vs. keyword campaign efficiency
+
+| Metric | Demand Gen | Keyword Campaigns | Difference |
+|--------|-----------|-------------------|------------|
+| CPC (2025 avg) | $0.39 | $2.43 | -84% |
+| CPC (Video, early 2026) | $0.30 | — | In line with image |
+
+The 84% CPC reduction reflects the fundamental difference in how these channels operate. Keyword campaigns compete in search auctions with direct competitors. Demand Gen places visual ads in mid-funnel placements (YouTube, Discover, Gmail) where competition dynamics are different and CPCs are structurally lower.
+
+### Appendix B: Q4 2025 Demand Gen performance
+
+| Metric | Q4 2025 vs. Q4 2024 |
+|--------|---------------------|
+| Traffic | +53% YoY |
+| Spend | -35% YoY |
+| CPC | -58% YoY |
+
+The Q4 results demonstrate that Demand Gen scales efficiently. The 53% traffic increase at 35% lower spend means the cost-per-visit improved by approximately 60%. This is driven by improved audience targeting (LiveRamp integration) and creative optimization (image variations). Prime Day 2025 was the peak validation event within this period — Engagement campaigns delivered $329K in OPS at 644% ROAS, a 12x improvement over the prior year, confirming that the Demand Gen channel operates at scale during peak events.
+
+### Appendix C: AI Max test parameters
+
+AI Max US test is planned for Q2 2026. Key parameters include clear baselines before launch, phased US-first rollout, incrementality benchmarks, cannibalization guardrails (monitoring existing keyword campaign performance for cost inflation without incremental registrations), and budget inflation guardrails (monitoring query-level data for low-intent click patterns). Coordination with Hydra/Retail PS (Daniel Carmody) and Google (Mike Babich) is required to prevent internal auction overlap.
+
+<!-- AGENT_CONTEXT
+machine_summary: "Algorithmic Ads workstream: Demand Gen proven at $0.39 CPC vs $2.43 keyword (-84%), Q4 2025 +53% traffic at -35% spend. Prime Day 2025: 644% ROAS, $329K OPS, 12x YoY. Business Essentials: 52K visitors at $0.30 CPC. 2026: DG Video expansion (early CPCs match image at $0.30), AI Max US test Q2 2026 (expanded keyword matching + dynamic LP selection). AI Max guardrails target cannibalization and budget inflation risks. Requires consolidated campaign structures from Modern Search workstream. Coordination with Hydra/Retail PS and Google required."
+key_entities: ["Demand Gen", "AI Max", "DG Video", "Business Essentials", "Prime Day", "ROAS", "Hydra", "Raven Smith", "CeCe Ramey", "Mike Babich", "Daniel Carmody"]
+action_verbs: ["test", "expand", "guard", "coordinate", "scale"]
+update_triggers: ["AI Max test design completed", "AI Max US test launches", "DG Video results available", "BSE video performance data", "Hydra coordination status change"]
+-->

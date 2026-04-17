@@ -252,6 +252,216 @@ def enrich_intel_with_status(items, key_field="text"):
     return items
 
 
+def apply_ledger_actions():
+    """Apply pending ledger actions from the dashboard.
+    
+    Reads from shared/dashboards/data/ledger-actions.json (written by export script
+    or manually from localStorage). Applies status changes to DuckDB and writes
+    a feedback queue for AM-Auto to cascade to Asana and other systems.
+    """
+    actions_path = HOME / "shared/dashboards/data/ledger-actions.json"
+    feedback_path = ACTIVE / "ledger-feedback-queue.json"
+    
+    if not actions_path.exists():
+        return
+    try:
+        data = json.loads(actions_path.read_text())
+        actions = data.get("actions", [])
+        if not actions:
+            return
+        
+        today = date.today().isoformat()
+        feedback_items = []
+        
+        for a in actions:
+            text_hash = a.get("text_hash", "")
+            status = a.get("status", "")
+            note = a.get("note", "")
+            if not text_hash or not status:
+                continue
+            safe_hash = text_hash.replace("'", "''")
+            safe_note = note.replace("'", "''")
+            
+            # Update DuckDB
+            if status == "done":
+                query_duckdb(f"UPDATE main.commitment_ledger SET status='done', completed_date='{today}', dismissed_date=NULL, completed_message='{safe_note}' WHERE text_hash='{safe_hash}'")
+            elif status == "dismissed":
+                query_duckdb(f"UPDATE main.commitment_ledger SET status='dismissed', dismissed_date='{today}', completed_date=NULL, completed_message='{safe_note}' WHERE text_hash='{safe_hash}'")
+            elif status == "not_started":
+                query_duckdb(f"UPDATE main.commitment_ledger SET status='not_started', completed_date=NULL, dismissed_date=NULL, completed_message=NULL WHERE text_hash='{safe_hash}'")
+            
+            # Queue for AM-Auto cascade
+            feedback_items.append({
+                "text_hash": text_hash,
+                "text": a.get("text", ""),
+                "status": status,
+                "note": note,
+                "timestamp": a.get("timestamp", ""),
+                "tags": a.get("tags", []),
+                "source": a.get("source", ""),
+                "person": a.get("person", ""),
+                "cascade_actions": build_cascade_actions(a),
+            })
+        
+        print(f"Applied {len(actions)} ledger actions to DuckDB")
+        
+        # Write feedback queue for AM-Auto to process
+        existing_feedback = {}
+        if feedback_path.exists():
+            try:
+                existing_feedback = json.loads(feedback_path.read_text())
+            except:
+                pass
+        
+        pending = existing_feedback.get("pending", [])
+        # Merge — dedup by text_hash, newer wins
+        existing_hashes = {p["text_hash"] for p in pending}
+        for fi in feedback_items:
+            if fi["text_hash"] not in existing_hashes:
+                pending.append(fi)
+            else:
+                # Replace with newer
+                pending = [p if p["text_hash"] != fi["text_hash"] else fi for p in pending]
+        
+        feedback_path.write_text(json.dumps({
+            "generated": datetime.now(tz=timezone.utc).isoformat(),
+            "pending": pending,
+        }, indent=2, default=str))
+        print(f"Wrote {len(pending)} items to feedback queue for AM-Auto cascade")
+        
+        # Clear the actions file
+        actions_path.write_text(json.dumps({"actions": []}, indent=2))
+    except Exception as e:
+        print(f"Failed to apply ledger actions: {e}")
+
+
+def build_cascade_actions(action):
+    """Determine what downstream systems need updating based on the action.
+    
+    Returns a list of cascade instructions for AM-Auto to execute.
+    """
+    cascades = []
+    status = action.get("status", "")
+    text = action.get("text", "")
+    note = action.get("note", "")
+    source = action.get("source", "")
+    
+    if status == "done":
+        # If source is Asana, mark the linked task complete
+        if "asana" in source.lower():
+            cascades.append({
+                "system": "asana",
+                "action": "complete_task",
+                "search_text": text,
+                "comment": f"Marked done from Command Center. {note}".strip(),
+            })
+        # If source is Slack, suggest a reply
+        if "slack" in source.lower():
+            cascades.append({
+                "system": "slack",
+                "action": "suggest_reply",
+                "search_text": text,
+                "note": note,
+            })
+    elif status == "dismissed":
+        # If source is Asana, add a comment explaining dismissal
+        if "asana" in source.lower():
+            cascades.append({
+                "system": "asana",
+                "action": "add_comment",
+                "search_text": text,
+                "comment": f"Dismissed from Command Center. Reason: {note or 'No longer applicable'}",
+            })
+    
+    return cascades
+
+
+def sync_commitments_to_duckdb(intel_commitments):
+    """Sync commitments from AM-auto intel to DuckDB commitment_ledger.
+    
+    - UPSERT new commitments (text-hash dedup)
+    - Update days_old / overdue / context for existing ones
+    - Prune entries older than 30 days (unless still active)
+    - Read back ALL non-pruned entries as the canonical list
+    """
+    import hashlib
+    today = date.today().isoformat()
+
+    # 1. Upsert each intel commitment into DuckDB
+    for c in intel_commitments:
+        text = c.get("text", "")
+        if not text:
+            continue
+        text_hash = hashlib.md5(text.encode()).hexdigest()
+        source = (c.get("source") or "").replace("'", "''")
+        person = (c.get("person") or "").replace("'", "''")
+        said_by = c.get("said_by") or ""
+        context = (c.get("context") or "").replace("'", "''")
+        quote = (c.get("quote") or "").replace("'", "''")
+        days_old = c.get("days_old", 0)
+        overdue = "TRUE" if c.get("overdue") else "FALSE"
+        status = c.get("status") or "not_started"
+        safe_text = text.replace("'", "''")
+
+        # INSERT OR REPLACE — preserves status if already set to done/dismissed by user
+        query_duckdb(f"""
+            INSERT INTO main.commitment_ledger (text_hash, text, source, person, said_by, status, context, quote, days_old, overdue, first_seen, last_seen)
+            VALUES ('{text_hash}', '{safe_text}', '{source}', '{person}', '{said_by}', '{status}', '{context}', '{quote}', {days_old}, {overdue}, '{today}', '{today}')
+            ON CONFLICT (text_hash) DO UPDATE SET
+                days_old = EXCLUDED.days_old,
+                overdue = EXCLUDED.overdue,
+                context = CASE WHEN EXCLUDED.context != '' THEN EXCLUDED.context ELSE commitment_ledger.context END,
+                last_seen = '{today}',
+                -- Don't overwrite user-set status (done/dismissed) with not_started
+                status = CASE
+                    WHEN commitment_ledger.status IN ('done', 'dismissed') THEN commitment_ledger.status
+                    ELSE EXCLUDED.status
+                END
+        """)
+
+    # 2. Prune entries older than 30 days that are done or dismissed
+    query_duckdb(f"""
+        DELETE FROM main.commitment_ledger
+        WHERE last_seen < CURRENT_DATE - INTERVAL 30 DAY
+          AND status IN ('done', 'dismissed')
+    """)
+
+    # 3. Read back all commitments (canonical source)
+    rows = query_duckdb("""
+        SELECT text_hash, text, source, person, said_by, status, context, quote,
+               days_old, overdue, first_seen, last_seen, completed_date, dismissed_date,
+               completed_via, completed_message
+        FROM main.commitment_ledger
+        ORDER BY
+            CASE status WHEN 'not_started' THEN 0 WHEN 'in_progress' THEN 1 WHEN 'done' THEN 2 WHEN 'dismissed' THEN 3 END,
+            days_old DESC
+    """)
+
+    commitments = []
+    for r in rows:
+        commitments.append({
+            "text_hash": r.get("text_hash", ""),
+            "text": r.get("text", ""),
+            "source": r.get("source", ""),
+            "person": r.get("person", ""),
+            "said_by": r.get("said_by", ""),
+            "status": r.get("status", "not_started"),
+            "context": r.get("context", ""),
+            "quote": r.get("quote", ""),
+            "days_old": r.get("days_old", 0),
+            "overdue": bool(r.get("overdue", False)),
+            "first_seen": str(r.get("first_seen", "")),
+            "last_seen": str(r.get("last_seen", "")),
+            "completed_date": str(r.get("completed_date", "") or ""),
+            "dismissed_date": str(r.get("dismissed_date", "") or ""),
+            "completed_via": r.get("completed_via", ""),
+            "completed_message": r.get("completed_message", ""),
+        })
+
+    print(f"Commitments: {len(commitments)} total ({sum(1 for c in commitments if c['status']=='not_started')} active, {sum(1 for c in commitments if c['status']=='done')} done, {sum(1 for c in commitments if c['status']=='dismissed')} dismissed)")
+    return commitments
+
+
 def main():
     print("Querying DuckDB for task state...")
 
@@ -349,10 +559,14 @@ def main():
 
     # ── Load intel sections from AM-auto output ──
     am_intel = load_json(ACTIVE / "am-command-center-intel.json") or {}
-    commitments = enrich_intel_with_status(am_intel.get("commitments", []), "text")
     delegate_items = am_intel.get("delegate", [])
     communicate_items = am_intel.get("communicate", [])
     differentiate_items = enrich_intel_with_status(am_intel.get("differentiate", []), "action")
+
+    # ── Commitments: DuckDB is canonical (30-day rolling, text-hash dedup) ──
+    # First, apply any pending user actions from the dashboard
+    apply_ledger_actions()
+    commitments = sync_commitments_to_duckdb(am_intel.get("commitments", []))
 
     # ── Assemble output ──
     output = {

@@ -13,80 +13,80 @@
 body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);padding:0;min-height:100vh;-webkit-font-smoothing:antialiased}
 .page{max-width:1200px;margin:0 auto;padding:24px 20px}
 nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);background:rgba(20,22,30,0.92)}
-.nav-brand{color:var(--white);font-weight:700;font-size:.9em;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:4px;letter-spacing:1.5px;text-transform:uppercase}
-.nav-link{color:var(--text2);text-decoration:none;padding:14px 18px;font-size:.8em;font-weight:500;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
+.nav-brand{color:var(--white);font-weight:700;font-size:1.02em;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:4px;letter-spacing:1.5px;text-transform:uppercase}
+.nav-link{color:var(--text2);text-decoration:none;padding:14px 18px;font-size:0.92em;font-weight:500;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
 .nav-link:hover{color:var(--text);background:rgba(74,158,255,0.06)}
 .nav-link.active{color:var(--accent);border-bottom-color:var(--accent)}
-.nav-back{color:var(--text3);text-decoration:none;padding:14px 14px 14px 0;font-size:.75em;font-weight:500;letter-spacing:.3px;margin-right:4px;border-right:1px solid var(--border);transition:color .15s}
+.nav-back{color:var(--text3);text-decoration:none;padding:14px 14px 14px 0;font-size:0.87em;font-weight:500;letter-spacing:.3px;margin-right:4px;border-right:1px solid var(--border);transition:color .15s}
 .nav-back:hover{color:var(--accent)}
-h1{color:var(--white);font-size:1.35em;margin-bottom:4px;font-weight:600;letter-spacing:.2px}
-h2{color:var(--text);font-size:.95em;margin:28px 0 12px;font-weight:600;letter-spacing:.2px}
-.sub{color:var(--text2);font-size:.78em;margin-bottom:24px;line-height:1.5}
+h1{color:var(--white);font-size:1.47em;margin-bottom:4px;font-weight:600;letter-spacing:.2px}
+h2{color:var(--text);font-size:1.07em;margin:28px 0 12px;font-weight:600;letter-spacing:.2px}
+.sub{color:var(--text2);font-size:0.9em;margin-bottom:24px;line-height:1.5}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px;margin-bottom:16px}
 .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:16px}
 .card{background:var(--surface);border-radius:8px;padding:18px;border:1px solid var(--border)}
-.card-title{color:var(--text2);font-size:.72em;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;font-weight:500}
+.card-title{color:var(--text2);font-size:0.84em;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;font-weight:500}
 .chart-box{position:relative;height:280px}
 .chart-box-sm{position:relative;height:200px}
 .stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
 .stat{background:var(--surface);border-radius:6px;padding:12px 16px;border:1px solid var(--border);min-width:100px}
-.stat .v{font-size:1.5em;font-weight:700;color:var(--white)}
-.stat .l{font-size:.62em;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
-table{width:100%;border-collapse:collapse;font-size:.82em}
-th{text-align:left;color:var(--text3);font-weight:500;padding:8px;border-bottom:1px solid var(--border);font-size:.85em;text-transform:uppercase;letter-spacing:.5px}
+.stat .v{font-size:1.62em;font-weight:700;color:var(--white)}
+.stat .l{font-size:0.74em;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
+table{width:100%;border-collapse:collapse;font-size:0.94em}
+th{text-align:left;color:var(--text3);font-weight:500;padding:8px;border-bottom:1px solid var(--border);font-size:0.97em;text-transform:uppercase;letter-spacing:.5px}
 td{padding:8px;border-bottom:1px solid var(--border)}
-.badge{font-size:.68em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;display:inline-block;letter-spacing:.3px}
+.badge{font-size:0.8em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;display:inline-block;letter-spacing:.3px}
 .b-worsening{background:rgba(248,113,113,0.15);color:var(--red)}.b-stuck{background:rgba(251,191,36,0.15);color:var(--amber)}
 .b-improving{background:rgba(52,211,153,0.15);color:var(--green)}.b-new{background:var(--accent-dim);color:var(--accent)}
 .b-validated{background:rgba(167,139,250,0.15);color:var(--purple)}.b-active{background:var(--accent-dim);color:var(--accent)}
 .b-adopted{background:rgba(52,211,153,0.15);color:var(--green)}.b-reverted{background:rgba(248,113,113,0.15);color:var(--red)}
 .b-queued{background:rgba(90,106,122,0.15);color:var(--text2)}
 .no-data{color:var(--text3);font-style:italic;padding:20px;text-align:center}
-.trainer{font-size:.78em;color:var(--text3);margin-top:12px;line-height:1.5;padding:10px 0;border-top:1px solid var(--border)}
+.trainer{font-size:0.9em;color:var(--text3);margin-top:12px;line-height:1.5;padding:10px 0;border-top:1px solid var(--border)}
 .level-track{margin-bottom:10px;padding:14px;background:var(--bg);border-radius:6px;border:1px solid var(--border)}
 .level-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.level-name{font-weight:600;font-size:.9em;color:var(--white)}
+.level-name{font-weight:600;font-size:1.02em;color:var(--white)}
 .level-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;margin:6px 0}
 .level-fill{height:100%;border-radius:2px}
-.lb{font-size:.62em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.lb{font-size:0.74em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
 .lb-active{background:var(--accent-dim);color:var(--accent)}.lb-next{background:rgba(90,106,122,0.15);color:var(--text2)}
 .lb-queued{background:rgba(90,106,122,0.08);color:var(--text3)}.lb-future{background:rgba(90,106,122,0.05);color:var(--text3)}
 .comp-row{margin-bottom:14px}
 .comp-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-.comp-name{font-weight:600;font-size:.85em;color:var(--text)}
-.comp-stage{font-size:.7em;color:var(--text3)}
+.comp-name{font-weight:600;font-size:0.97em;color:var(--text)}
+.comp-stage{font-size:0.82em;color:var(--text3)}
 .comp-track{display:flex;height:22px;background:var(--surface2);border-radius:4px;overflow:hidden}
-.comp-stop{flex:1;display:flex;align-items:center;justify-content:center;font-size:.58em;font-weight:600;color:rgba(255,255,255,0.1);border-right:1px solid var(--border)}
+.comp-stop{flex:1;display:flex;align-items:center;justify-content:center;font-size:0.7em;font-weight:600;color:rgba(255,255,255,0.1);border-right:1px solid var(--border)}
 .comp-stop:last-child{border-right:none}
 .comp-stop.filled{color:rgba(255,255,255,0.9)}
-.ch-item{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.85em}
-.ch-box{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:.65em}
+.ch-item{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:0.97em}
+.ch-box{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:0.77em}
 .ch-done{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
 .ch-text{color:var(--text)}.ch-text.done{color:var(--text3);text-decoration:line-through}
 .overview-card{background:var(--surface);border-radius:8px;padding:20px;border:1px solid var(--border);text-decoration:none;display:block;transition:all .2s}
 .overview-card:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(74,158,255,0.08)}
-.oc-title{color:var(--text2);font-weight:600;font-size:.78em;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px}
-.oc-metric{font-size:1.8em;font-weight:700;margin:8px 0;color:var(--white)}
-.oc-sub{color:var(--text2);font-size:.78em;line-height:1.5}
+.oc-title{color:var(--text2);font-weight:600;font-size:0.9em;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px}
+.oc-metric{font-size:1.92em;font-weight:700;margin:8px 0;color:var(--white)}
+.oc-sub{color:var(--text2);font-size:0.9em;line-height:1.5}
 </style></head><body>
 <nav><a href="../index.html" class="nav-back" target="_top">← Command Center</a><span class="nav-brand">Body System</span><a href="index.html" class="nav-link">Overview</a><a href="growth.html" class="nav-link">Growth</a><a href="willpower.html" class="nav-link">Willpower</a><a href="output.html" class="nav-link">Output</a><a href="autoresearch.html" class="nav-link active">Autoresearch</a></nav>
 <div class="page">
 <h1>Autoresearch Engine</h1>
 <div class="sub">How the body system maintains itself. Inspired by Karpathy&#39;s autoresearch: 630 lines, 700 experiments, measurable results. Small, fast, autonomous, compounding.</div>
 
-<p style="color:var(--text);font-size:.9em;line-height:1.7;margin-bottom:16px">
+<p style="color:var(--text);font-size:1.02em;line-height:1.7;margin-bottom:16px">
   The body is an 11-organ system that holds context, makes decisions, tracks patterns, and enforces willpower. Each organ is a self-contained markdown file with a word budget enforced by the gut. The autoresearch loop runs experiments on these organs autonomously &mdash; snapshot the current state, apply a modification (compress, add, restructure, remove, reword, merge, or split), evaluate with two independent blind subagents, and keep or revert based on accuracy and completeness scores.
 </p>
-<p style="color:var(--text2);font-size:.85em;line-height:1.7;margin-bottom:16px">
+<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:16px">
   The primary metric is usefulness per token: does the organ answer the questions it is supposed to answer, accurately and self-containedly, without requiring additional file reads? Word count is a constraint (ceiling), not an objective. An organ at 95% of budget that answers everything correctly is fine. An organ at 50% that misses questions needs content added, not celebrated for being small.
 </p>
-<p style="color:var(--text2);font-size:.85em;line-height:1.7;margin-bottom:24px">
+<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:24px">
   After 0 loop runs, the system has run 2 experiments with a 100% keep rate. 4,821 words have been saved through compression while maintaining accuracy thresholds (100% for Brain and Memory, 95% for Eyes and Hands, 90% for all others). The body currently holds 16,094 words against a 21,000-word ceiling, leaving 4,906 words of headroom for future content.
 </p>
 
 <div class="stats" id="statsBar">Loading...</div>
 <h2>Organ Word Budgets</h2>
-<p style="color:var(--text2);font-size:.85em;line-height:1.7;margin-bottom:12px">
+<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:12px">
   1 organ(s) over budget; compression experiments are queued. The total body budget is 21,000w with a hard ceiling of 24,000 words. Current utilization is 77 percent.
 </p>
 <div class="grid">
@@ -95,7 +95,7 @@ td{padding:8px;border-bottom:1px solid var(--border)}
 </div>
 
 <h2>Experiment History</h2>
-<p style="color:var(--text2);font-size:.85em;line-height:1.7;margin-bottom:12px">
+<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:12px">
   Every experiment follows the same protocol: select a target organ, snapshot it, apply a technique, evaluate with dual blind subagents (one with full system context, one generic), and keep or revert. The compressing agent never evaluates its own work. 2 experiments have been adopted so far. The perfect keep rate suggests the experiments could be more aggressive &mdash; pushing closer to accuracy thresholds rather than staying safe. 3 experiments are queued for future runs.
 </p>
 <div class="grid">
@@ -107,7 +107,7 @@ td{padding:8px;border-bottom:1px solid var(--border)}
 </div>
 
 <h2>Organ Freshness</h2>
-<p style="color:var(--text2);font-size:.85em;line-height:1.7;margin-bottom:12px">
+<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:12px">
   All organs have been updated within the last 3 days. The staleness threshold is 7 days &mdash; any section older than that gets flagged in the daily brief. The morning routine handles maintenance; the autoresearch loop handles experiments.
 </p>
 <div class="card"><div class="chart-box-sm"><canvas id="stalenessChart"></canvas></div></div>
@@ -173,7 +173,7 @@ fetch('../data/body-system-data.json?'+Date.now()).then(r=>r.json()).then(functi
     expHistory.forEach(function(e){
       var delta=e.word_delta||0;
       var deltaStr=delta>0?'+'+delta:delta;
-      h+='<tr><td>'+e.id+'</td><td style="font-size:.85em">'+e.organ+'</td><td style="font-size:.8em;color:#888">'+(e.section||'')+'</td><td style="font-size:.8em">'+e.technique+'</td><td style="text-align:right;color:'+(delta<0?C.accent:delta>0?C.alert:'#888')+'">'+deltaStr+'w</td><td><span class="badge '+(bc[e.decision]||'b-queued')+'">'+e.decision+'</span></td></tr>';
+      h+='<tr><td>'+e.id+'</td><td style="font-size:0.97em">'+e.organ+'</td><td style="font-size:0.92em;color:#888">'+(e.section||'')+'</td><td style="font-size:0.92em">'+e.technique+'</td><td style="text-align:right;color:'+(delta<0?C.accent:delta>0?C.alert:'#888')+'">'+deltaStr+'w</td><td><span class="badge '+(bc[e.decision]||'b-queued')+'">'+e.decision+'</span></td></tr>';
     });
     el.innerHTML=h+'</table>';
   })();
@@ -201,5 +201,5 @@ fetch('../data/body-system-data.json?'+Date.now()).then(r=>r.json()).then(functi
   })();
 }).catch(function(e){console.error(e);document.querySelector('.stats').innerHTML='<div class="stat" style="color:#f87171">Failed to load data — run refresh-body-system.py</div>'});
 </script>
-<div style="color:var(--text3);font-size:.62em;text-align:center;margin-top:48px;padding:16px;letter-spacing:.5px" id="genFooter">LOADING DATA&hellip;</div>
+<div style="color:var(--text3);font-size:0.74em;text-align:center;margin-top:48px;padding:16px;letter-spacing:.5px" id="genFooter">LOADING DATA&hellip;</div>
 <script>fetch('../data/body-system-data.json?'+Date.now()).then(r=>r.json()).then(function(D){document.getElementById('genFooter').textContent='DATA: '+new Date(D.generated).toLocaleString()+' · STANDALONE HTML · CHART.JS VIA CDN · PORTABLE'}).catch(function(){})</script></div></body></html>

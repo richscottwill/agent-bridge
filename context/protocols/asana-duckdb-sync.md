@@ -36,11 +36,14 @@ DB path: `/home/prichwil/shared/data/duckdb/ps-analytics.duckdb`
 ### Routine Enum Values
 | GID | Name | Column Value |
 |-----|------|-------------|
-| `1213608836755503` | Sweep (Low-friction) | Sweep |
-| `1213608836755504` | Core Two (Deep Work) | Core |
-| `1213608836755505` | Engine Room (Excel and Google ads) | Engine Room |
-| `1213608836755506` | Admin (Wind-down) | Admin |
+| `1213608836755503` | Sweep | Sweep |
+| `1213608836755504` | Core | Core |
+| `1213608836755505` | Engine Room | Engine Room |
+| `1213608836755506` | Admin | Admin |
 | `1213924412583429` | Wiki | Wiki |
+
+Note: Asana UI shows parenthetical suffixes (e.g. "Sweep (Low-friction)") but
+DuckDB always stores the short name. The ROUTINE_MAP below handles normalization.
 
 ### Priority Enum Values
 | GID | Name | Column Value |
@@ -97,11 +100,17 @@ FIELD_MAP = {
 # For enum fields, map to short names:
 ROUTINE_MAP = {
     'Sweep (Low-friction)': 'Sweep',
+    'Sweep': 'Sweep',
     'Core Two (Deep Work)': 'Core',
+    'Core': 'Core',
     'Engine Room (Excel and Google ads)': 'Engine Room',
+    'Engine Room': 'Engine Room',
     'Admin (Wind-down)': 'Admin',
+    'Admin': 'Admin',
     'Wiki': 'Wiki',
 }
+# Always normalize to short name. Asana API returns the full display name;
+# DuckDB stores only the short name. Both forms map to the same value.
 # Priority and Importance: use display name as-is (Today, Urgent, Not urgent, Important)
 ```
 
@@ -380,7 +389,7 @@ These views are pre-created and available for any protocol to query:
 |------|---------|-------------|
 | `asana_overdue` | Tasks past due, not completed | name, project_name, due_on, days_overdue |
 | `asana_by_project` | Task counts per project | project_name, total_tasks, incomplete, overdue |
-| `asana_by_routine` | Bucket distribution (normalized — groups "Sweep (Low-friction)" under "Sweep", etc.) | routine_rw, task_count |
+| `asana_by_routine` | Bucket distribution (short names: Sweep, Core, Engine Room, Admin, Wiki) | routine_rw, task_count |
 | `asana_completion_rate` | Trailing 7/30 day completion stats | avg_daily_completions_7d, total_completed_7d, etc. |
 
 ---

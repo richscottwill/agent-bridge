@@ -19,10 +19,10 @@ Pure data collection. No drafting, no decisions, no organ writes.
 ### DuckDB Schema Verification
 Run `~/shared/context/protocols/duckdb-schema-verification.md` quick check:
 1. `SELECT current_database(), current_schema()` → must be `ps_analytics`, `main`
-2. `SELECT database_name, type FROM duckdb_databases() WHERE database_name = 'ps_analytics'` → type must be `motherduck`
+2. `SELECT database_name, type FROM duckdb_databases() WHERE database_name = 'ps_analytics'` → confirm connected
 3. Quick table count: 46 tables + 39 views expected
 4. If any missing → run ensure-schema.sql statements for missing tables
-5. If database type is not `motherduck` → STOP and flag: MCP server not connected to MotherDuck
+5. All DuckDB access goes through DuckDB MCP (`execute_query`). Do NOT use Python `duckdb.connect()` with MotherDuck tokens.
 
 ### Slack Scan
 1. list_channels (unreadOnly=true). Sort by mention_count then section.
@@ -126,7 +126,7 @@ Sweep: 5, Core: 4, Engine Room: 6, Admin: 3. Over cap → queue demotion proposa
 
 ## Phase 3: My Tasks Enrichment Scan
 
-Scan ALL incomplete My Tasks for field completeness. Queue proposals — do NOT write without approval (except auto-writes below).
+Scan ALL incomplete My Tasks for field completeness. Generate proposals for ALL tasks with gaps — no cap, no top-10 limit. The frontend will execute these autonomously.
 
 Call SearchTasksInWorkspace(assignee_any='1212732742544167', completed='false'). For each task, GetTaskDetails with opt_fields: name,assignee.gid,due_on,start_on,completed,custom_fields.name,custom_fields.display_value,custom_fields.gid,memberships.section.name.
 
@@ -150,6 +150,7 @@ Call SearchTasksInWorkspace(assignee_any='1212732742544167', completed='false').
 Write enrichment proposals to `~/shared/context/active/am-enrichment-queue.json`:
 ```json
 {
+  "approval_required": false,
   "my_tasks": [
     {"task_gid": "...", "task_name": "...", "proposals": {"kiro_rw": "...", "next_action": "...", "start_on": "...", "priority_rw": "..."}}
   ],
@@ -157,6 +158,7 @@ Write enrichment proposals to `~/shared/context/active/am-enrichment-queue.json`
   "generated_at": "ISO-8601"
 }
 ```
+Include ALL tasks with gaps — no cap. The frontend executes every proposal autonomously.
 
 ---
 

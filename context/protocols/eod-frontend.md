@@ -5,6 +5,28 @@ Interactive (light-touch). Reads pre-computed state from EOD-Backend. Presents s
 
 ---
 
+## HARD GATE — Backend Completion Check (MANDATORY)
+
+**Before presenting ANY frontend output, verify all three backend JSON files exist with today's date:**
+
+1. Check `~/shared/context/active/eod-reconciliation.json` — must exist, `generated` field must be today's date.
+2. Check `~/shared/context/active/eod-maintenance.json` — must exist, `generated` field must be today's date.
+3. Check `~/shared/context/active/eod-experiments.json` — must exist, `generated` field must be today's date.
+
+**If ANY file is missing or stale:**
+- Do NOT proceed to Step 1.
+- Do NOT present a partial summary.
+- Instead, go back and complete the missing backend phase that produces the missing file.
+- If the backend phase genuinely cannot run (tool unavailable, MCP down), create the JSON with `{"generated": "YYYY-MM-DD", "status": "skipped", "reason": "[specific reason]"}` so the skip is explicit and visible.
+
+**If all three files pass the gate**, read the eod-phase-tracker.md checklist. If any backend phase shows ❌ or is unchecked, the first line of the EOD summary MUST be:
+```
+⚠️ INCOMPLETE RUN — Phases [list] were skipped: [reasons]
+```
+This warning goes BEFORE the task table, not buried in System Health.
+
+---
+
 ## Context Load
 Pre-computed state files (from EOD-Backend):
 - `~/shared/context/active/eod-reconciliation.json`
@@ -16,7 +38,7 @@ Pre-computed state files (from EOD-Backend):
 If any pre-computed state file is missing locally (container restart between backend and frontend):
 1. Check SharePoint `Kiro-Drive/system-state/` for the file via `sharepoint_read_file(inline=true)`.
 2. If found and Modified timestamp is <24h old → use it.
-3. If not found → skip gracefully. Present what's available.
+3. If not found → this triggers the HARD GATE above. Go complete the backend phase.
 4. Log recovery to DuckDB workflow_executions.
 See ~/shared/context/protocols/sharepoint-durability-sync.md for full pull logic.
 

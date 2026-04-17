@@ -13,72 +13,72 @@
 body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);padding:0;min-height:100vh;-webkit-font-smoothing:antialiased}
 .page{max-width:1200px;margin:0 auto;padding:24px 20px}
 nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);background:rgba(20,22,30,0.92)}
-.nav-brand{color:var(--white);font-weight:700;font-size:.9em;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:4px;letter-spacing:1.5px;text-transform:uppercase}
-.nav-link{color:var(--text2);text-decoration:none;padding:14px 18px;font-size:.8em;font-weight:500;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
+.nav-brand{color:var(--white);font-weight:700;font-size:1.02em;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:4px;letter-spacing:1.5px;text-transform:uppercase}
+.nav-link{color:var(--text2);text-decoration:none;padding:14px 18px;font-size:0.92em;font-weight:500;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
 .nav-link:hover{color:var(--text);background:rgba(74,158,255,0.06)}
 .nav-link.active{color:var(--accent);border-bottom-color:var(--accent)}
-.nav-back{color:var(--text3);text-decoration:none;padding:14px 14px 14px 0;font-size:.75em;font-weight:500;letter-spacing:.3px;margin-right:4px;border-right:1px solid var(--border);transition:color .15s}
+.nav-back{color:var(--text3);text-decoration:none;padding:14px 14px 14px 0;font-size:0.87em;font-weight:500;letter-spacing:.3px;margin-right:4px;border-right:1px solid var(--border);transition:color .15s}
 .nav-back:hover{color:var(--accent)}
-h1{color:var(--white);font-size:1.35em;margin-bottom:4px;font-weight:600;letter-spacing:.2px}
-h2{color:var(--text);font-size:.95em;margin:28px 0 12px;font-weight:600;letter-spacing:.2px}
-.sub{color:var(--text2);font-size:.78em;margin-bottom:24px;line-height:1.5}
+h1{color:var(--white);font-size:1.47em;margin-bottom:4px;font-weight:600;letter-spacing:.2px}
+h2{color:var(--text);font-size:1.07em;margin:28px 0 12px;font-weight:600;letter-spacing:.2px}
+.sub{color:var(--text2);font-size:0.9em;margin-bottom:24px;line-height:1.5}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px;margin-bottom:16px}
 .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:16px}
 .card{background:var(--surface);border-radius:8px;padding:18px;border:1px solid var(--border)}
-.card-title{color:var(--text2);font-size:.72em;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;font-weight:500}
+.card-title{color:var(--text2);font-size:0.84em;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;font-weight:500}
 .chart-box{position:relative;height:280px}
 .chart-box-sm{position:relative;height:200px}
 .stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
 .stat{background:var(--surface);border-radius:6px;padding:12px 16px;border:1px solid var(--border);min-width:100px}
-.stat .v{font-size:1.5em;font-weight:700;color:var(--white)}
-.stat .l{font-size:.62em;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
-table{width:100%;border-collapse:collapse;font-size:.82em}
-th{text-align:left;color:var(--text3);font-weight:500;padding:8px;border-bottom:1px solid var(--border);font-size:.85em;text-transform:uppercase;letter-spacing:.5px}
+.stat .v{font-size:1.62em;font-weight:700;color:var(--white)}
+.stat .l{font-size:0.74em;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
+table{width:100%;border-collapse:collapse;font-size:0.94em}
+th{text-align:left;color:var(--text3);font-weight:500;padding:8px;border-bottom:1px solid var(--border);font-size:0.97em;text-transform:uppercase;letter-spacing:.5px}
 td{padding:8px;border-bottom:1px solid var(--border)}
-.badge{font-size:.68em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;display:inline-block;letter-spacing:.3px}
+.badge{font-size:0.8em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;display:inline-block;letter-spacing:.3px}
 .b-worsening{background:rgba(248,113,113,0.15);color:var(--red)}.b-stuck{background:rgba(251,191,36,0.15);color:var(--amber)}
 .b-improving{background:rgba(52,211,153,0.15);color:var(--green)}.b-new{background:var(--accent-dim);color:var(--accent)}
 .b-validated{background:rgba(167,139,250,0.15);color:var(--purple)}.b-active{background:var(--accent-dim);color:var(--accent)}
 .b-adopted{background:rgba(52,211,153,0.15);color:var(--green)}.b-reverted{background:rgba(248,113,113,0.15);color:var(--red)}
 .b-queued{background:rgba(90,106,122,0.15);color:var(--text2)}
 .no-data{color:var(--text3);font-style:italic;padding:20px;text-align:center}
-.trainer{font-size:.78em;color:var(--text3);margin-top:12px;line-height:1.5;padding:10px 0;border-top:1px solid var(--border)}
+.trainer{font-size:0.9em;color:var(--text3);margin-top:12px;line-height:1.5;padding:10px 0;border-top:1px solid var(--border)}
 .level-track{margin-bottom:10px;padding:14px;background:var(--bg);border-radius:6px;border:1px solid var(--border)}
 .level-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.level-name{font-weight:600;font-size:.9em;color:var(--white)}
+.level-name{font-weight:600;font-size:1.02em;color:var(--white)}
 .level-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;margin:6px 0}
 .level-fill{height:100%;border-radius:2px}
-.lb{font-size:.62em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.lb{font-size:0.74em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
 .lb-active{background:var(--accent-dim);color:var(--accent)}.lb-next{background:rgba(90,106,122,0.15);color:var(--text2)}
 .lb-queued{background:rgba(90,106,122,0.08);color:var(--text3)}.lb-future{background:rgba(90,106,122,0.05);color:var(--text3)}
 .comp-row{margin-bottom:14px}
 .comp-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-.comp-name{font-weight:600;font-size:.85em;color:var(--text)}
-.comp-stage{font-size:.7em;color:var(--text3)}
+.comp-name{font-weight:600;font-size:0.97em;color:var(--text)}
+.comp-stage{font-size:0.82em;color:var(--text3)}
 .comp-track{display:flex;height:22px;background:var(--surface2);border-radius:4px;overflow:hidden}
-.comp-stop{flex:1;display:flex;align-items:center;justify-content:center;font-size:.58em;font-weight:600;color:rgba(255,255,255,0.1);border-right:1px solid var(--border)}
+.comp-stop{flex:1;display:flex;align-items:center;justify-content:center;font-size:0.7em;font-weight:600;color:rgba(255,255,255,0.1);border-right:1px solid var(--border)}
 .comp-stop:last-child{border-right:none}
 .comp-stop.filled{color:rgba(255,255,255,0.9)}
-.ch-item{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.85em}
-.ch-box{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:.65em}
+.ch-item{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:0.97em}
+.ch-box{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:0.77em}
 .ch-done{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
 .ch-text{color:var(--text)}.ch-text.done{color:var(--text3);text-decoration:line-through}
 .overview-card{background:var(--surface);border-radius:8px;padding:20px;border:1px solid var(--border);text-decoration:none;display:block;transition:all .2s}
 .overview-card:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(74,158,255,0.08)}
-.oc-title{color:var(--text2);font-weight:600;font-size:.78em;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px}
-.oc-metric{font-size:1.8em;font-weight:700;margin:8px 0;color:var(--white)}
-.oc-sub{color:var(--text2);font-size:.78em;line-height:1.5}
+.oc-title{color:var(--text2);font-weight:600;font-size:0.9em;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px}
+.oc-metric{font-size:1.92em;font-weight:700;margin:8px 0;color:var(--white)}
+.oc-sub{color:var(--text2);font-size:0.9em;line-height:1.5}
 </style></head><body>
 <nav><a href="../index.html" class="nav-back" target="_top">← Command Center</a><span class="nav-brand">Body System</span><a href="index.html" class="nav-link active">Overview</a><a href="growth.html" class="nav-link">Growth</a><a href="willpower.html" class="nav-link">Willpower</a><a href="output.html" class="nav-link">Output</a><a href="autoresearch.html" class="nav-link">Autoresearch</a></nav>
 <div class="page">
 <h1>Body System</h1>
 <div class="sub">A personal operating system for closing the gap between intention and execution. Built on the body metaphor: 11 organs that hold context, make decisions, track patterns, and enforce willpower. Maintained by an autoresearch loop inspired by Karpathy. This is the control panel.</div>
 
-<p style="color:var(--text);font-size:.9em;line-height:1.7;margin-bottom:24px">
+<p style="color:var(--text);font-size:1.02em;line-height:1.7;margin-bottom:24px">
   The system was created on March 20, 2026 to solve a specific problem: Richard knows what to do but struggles to consistently do it. The Annual Review confirmed it &mdash; "Meets High Bar" overall, but the #1 growth area is visibility. Not skill. Not effort. Visibility: shipping strategic artifacts, sharing work proactively, documenting decisions so the team can reference them without asking. The body system exists to make that behavior automatic rather than effortful.
 </p>
 
-<p style="color:var(--text2);font-size:.85em;line-height:1.7;margin-bottom:32px">
+<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:32px">
   Right now, the system is 0 loop runs old. It has run 2 experiments with a 100% keep rate, saving 4,821 words of context bloat. 35% of Richard's work functions involve an agent in some capacity, though 58% remain fully manual. The willpower streak is at 0 days. The hard thing is the Testing Approach doc for Kate's April 16 meeting. 0 of 10 30-day challenge items are complete.
 </p>
 
@@ -110,13 +110,13 @@ td{padding:8px;border-bottom:1px solid var(--border)}
 </div>
 
 <h2>The Five Levels</h2>
-<p style="color:var(--text2);font-size:.85em;line-height:1.7;margin-bottom:16px">
+<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:16px">
   The strategic north star. Each level funds the next &mdash; you do not graduate until the gate is met. Level 1 (consistent artifact output) is the foundation. Level 5 (full agentic orchestration) is the end state. Right now, Levels 1 and 2 are active, with Level 1 struggling. The Testing Approach doc is the artifact that bridges both: it proves Level 1 consistency while advancing Level 2 testing ownership.
 </p>
 <div class="card" id="levelsOverview"></div>
 
 <h2>30-Day Challenge</h2>
-<p style="color:var(--text2);font-size:.85em;line-height:1.7;margin-bottom:16px">
+<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:16px">
   Ten items due by 2026-04-13. A mix of strategic artifacts (Testing Approach doc, AEO POV, AI Max test design), system improvements (campaign link generator, Asana decision), and operational cleanup (invoice reduction, meeting audit, Polaris migration). 0/10 complete. The highest-leverage items are the Testing Approach doc and AI Max test design &mdash; they feed Level 1 and Level 2 simultaneously.
 </p>
 <div class="card" id="challengeOverview"></div>
@@ -143,10 +143,10 @@ fetch('../data/body-system-data.json?'+Date.now()).then(r=>r.json()).then(functi
       var c=colors[lv.status]||'#1f222b';
       var bc=lv.status==='ACTIVE'?'lb-active':lv.status==='NEXT'?'lb-next':lv.status==='QUEUED'?'lb-queued':'lb-future';
       h+='<div class="level-track"><div class="level-header"><span class="level-name">'+lv.level+'. '+lv.name+'</span>'+
-        '<span style="color:var(--text3);font-size:.8em;margin-right:6px">'+fills[i]+'%</span><span class="lb '+bc+'">'+lv.status+'</span></div>'+
+        '<span style="color:var(--text3);font-size:0.92em;margin-right:6px">'+fills[i]+'%</span><span class="lb '+bc+'">'+lv.status+'</span></div>'+
         '<div class="level-bar"><div class="level-fill" style="width:'+fills[i]+'%;background:'+c+'"></div></div>'+
-        '<div style="font-size:.73em;color:var(--text3);margin-top:2px">Gate: '+lv.gate+'</div>';
-      if(lv.status==='ACTIVE'||lv.status==='NEXT') h+='<div style="font-size:.73em;color:var(--accent);margin-top:2px">'+lv.description+'</div>';
+        '<div style="font-size:0.85em;color:var(--text3);margin-top:2px">Gate: '+lv.gate+'</div>';
+      if(lv.status==='ACTIVE'||lv.status==='NEXT') h+='<div style="font-size:0.85em;color:var(--accent);margin-top:2px">'+lv.description+'</div>';
       h+='</div>';
     });
     el.innerHTML=h;
@@ -157,11 +157,11 @@ fetch('../data/body-system-data.json?'+Date.now()).then(r=>r.json()).then(functi
     var el=document.getElementById('challengeOverview');
     var sh=D.streak_history||[];
     if(!sh.length){el.innerHTML='<div class="no-data">No streak data</div>';return;}
-    var h='<div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="color:var(--text2);font-size:.85em">L1 Streak</span><span style="color:var(--red);font-weight:600">'+streak.current+' workdays at zero</span></div>';
-    h+='<div style="font-size:.85em;color:var(--text2);margin-bottom:12px">Hard thing: <strong style="color:var(--white)">'+streak.hard_thing+'</strong></div>';
+    var h='<div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="color:var(--text2);font-size:0.97em">L1 Streak</span><span style="color:var(--red);font-weight:600">'+streak.current+' workdays at zero</span></div>';
+    h+='<div style="font-size:0.97em;color:var(--text2);margin-bottom:12px">Hard thing: <strong style="color:var(--white)">'+streak.hard_thing+'</strong></div>';
     sh.slice(0,7).forEach(function(s){
       var color=s.workdays_at_zero>10?'var(--red)':s.workdays_at_zero>5?'var(--amber)':'var(--green)';
-      h+='<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border);font-size:.82em"><span style="color:var(--text3)">'+s.tracker_date+'</span><span style="color:'+color+';font-weight:600">'+s.workdays_at_zero+'d</span><span style="color:var(--text3);font-size:.9em;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(s.hard_thing_name||'')+'</span></div>';
+      h+='<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border);font-size:0.94em"><span style="color:var(--text3)">'+s.tracker_date+'</span><span style="color:'+color+';font-weight:600">'+s.workdays_at_zero+'d</span><span style="color:var(--text3);font-size:1.02em;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(s.hard_thing_name||'')+'</span></div>';
     });
     el.innerHTML=h;
   })();
@@ -169,4 +169,4 @@ fetch('../data/body-system-data.json?'+Date.now()).then(r=>r.json()).then(functi
   document.getElementById('genFooter').textContent='DATA: '+new Date(D.generated).toLocaleString()+' · STANDALONE HTML · CHART.JS VIA CDN · PORTABLE';
 }).catch(function(e){console.error(e);document.getElementById('levelsOverview').innerHTML='<div style="color:#f87171">Failed to load data — run refresh-body-system.py</div>'});
 </script>
-<div style="color:var(--text3);font-size:.62em;text-align:center;margin-top:48px;padding:16px;letter-spacing:.5px" id="genFooter">LOADING DATA&hellip;</div></div></body></html>
+<div style="color:var(--text3);font-size:0.74em;text-align:center;margin-top:48px;padding:16px;letter-spacing:.5px" id="genFooter">LOADING DATA&hellip;</div></div></body></html>

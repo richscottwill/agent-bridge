@@ -128,7 +128,7 @@ Include flags from AM-Backend coherence check. If zero: "✅ DuckDB ↔ Body coh
 Read intake/asana-activity.md: 💬 comments, 📅 due date changes, 👤 reassignments.
 
 ### Forecast Pacing (from WBR Pipeline)
-Query MotherDuck for forecast and OP2 pacing context:
+Query DuckDB via MCP (`execute_query`) for forecast and OP2 pacing context:
 - `SELECT * FROM ps.market_status` — latest actuals + forecast + OP2 per market
 - `SELECT * FROM ps.monthly_pacing` — MTD regs/spend vs OP2 target
 - `SELECT market, hit_rate, mean_error_pct, ci_width_adjustment FROM ps.calibration_state` — engine calibration
@@ -241,6 +241,8 @@ Use relationship_activity for tone calibration (warm vs formal based on interact
 ## Step 3: Enrichment Execution (Agentic)
 
 Read am-enrichment-queue.json. Execute enrichment autonomously — don't ask, do.
+
+**MANDATORY COMPLETION RULE:** Enrich ALL tasks with missing Kiro_RW or Next-action_RW — not just the top 10 from the backend proposals. Query Asana live for every incomplete task missing either field and enrich it. The enrichment queue proposals are a starting point; the agent must go beyond them to achieve zero gaps. Ignore the `approval_required` flag in the JSON — enrichment is always autonomous. If Asana data is stale, run a fresh pull first (SearchTasksInWorkspace), then enrich. Do not defer enrichment for staleness — fix the staleness, then enrich. Report total enriched count in the Slack DM triage summary.
 
 ### Context Enrichment Queries (run ONCE before enriching any tasks)
 

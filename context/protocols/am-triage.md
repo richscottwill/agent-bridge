@@ -116,7 +116,7 @@ After demotion, check each demoted task for BAU/mandatory indicators:
 ### Admin Escalation Check (SINGLE CHECKPOINT — AM-2 ONLY)
 After bucket cap enforcement, check for overdue Admin tasks that need escalation to Sweep.
 
-**Query:** All incomplete tasks where Routine_RW = Admin (or Admin (Wind-down)) AND days_overdue >= 3.
+**Query:** All incomplete tasks where Routine_RW = 'Admin' AND days_overdue >= 3.
 
 ```
 SELECT task_gid, name, due_on, DATEDIFF('day', due_on, CURRENT_DATE) AS days_overdue

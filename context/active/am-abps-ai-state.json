@@ -1,17 +1,41 @@
 {
-  "generated": "2026-04-15T06:55:00-07:00",
-  "pipeline_state": {
-    "total_articles": 19,
-    "by_status": {
-      "intake": 0,
-      "in_progress": 0,
-      "review": 0,
-      "active": 19
-    },
-    "near_due": [],
-    "overdue": [],
-    "refresh_needed": []
+  "generated_at": "2026-04-16T14:30:00Z",
+  "pipeline": "am-backend-phase3b",
+  "project_gid": "1213917352480610",
+  "project_name": "ABPS AI - Content",
+
+  "sync_status": {
+    "duckdb_task_count": 0,
+    "is_stale": true,
+    "last_synced": "2026-04-15T13:52:36Z",
+    "note": "ABPS AI Content project has 0 tasks in DuckDB. This is a confirmed sync gap — the asana-digest flagged 'Empty projects: ABPS AI (0 tasks)'. The parent agent needs to run GetTasksFromProject(1213917352480610) and UPSERT results into DuckDB."
   },
-  "triage_needed": [],
-  "notes": "All 19 ABPS AI articles are in Wiki block, Not urgent. No near-due or overdue items. No intake triage needed."
+
+  "intake_triage": {
+    "untriaged_count": 0,
+    "note": "Cannot assess — DuckDB has no ABPS AI tasks. Requires fresh Asana pull."
+  },
+
+  "pipeline_state": {
+    "in_progress": 0,
+    "review": 0,
+    "active": 0,
+    "note": "Cannot assess — DuckDB has no ABPS AI tasks."
+  },
+
+  "near_due_escalation": [],
+  "overdue_flags": [],
+
+  "refresh_cadence_check": {
+    "status": "cannot_assess",
+    "note": "No tasks in DuckDB to check refresh cadence against. Parent agent should pull fresh data from Asana MCP."
+  },
+
+  "action_items_for_parent": [
+    {
+      "action": "fresh_asana_pull",
+      "priority": "high",
+      "description": "Call GetTasksFromProject(project_gid='1213917352480610') to get all ABPS AI Content tasks, then UPSERT into asana.asana_tasks"
+    }
+  ]
 }

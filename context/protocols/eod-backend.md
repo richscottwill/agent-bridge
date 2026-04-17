@@ -164,7 +164,7 @@ Update DuckDB + JSON fallback after each.
 
 **Not expendable. Execute before experiments.**
 
-- MotherDuck EOD snapshot: `CREATE SNAPSHOT eod_YYYYMMDD OF ps_analytics;`
+- DuckDB EOD snapshot (via MCP `execute_query`): `CREATE SNAPSHOT eod_YYYYMMDD OF ps_analytics;`
 - Clean up snapshots > 30 days.
 - DuckDB daily_tracker insert (completed, carried, new, delta, buckets, levels, hard thing).
 - DuckDB l1_streak insert.

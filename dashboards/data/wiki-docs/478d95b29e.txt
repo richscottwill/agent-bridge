@@ -1,0 +1,30 @@
+<!-- DOC-0123 | duck_id: context-exp2-predicted-qa -->
+
+# Predicted Questions — Next Session
+
+Based on: calendar patterns, email threads, active projects as of 3/20/26 (Friday).
+
+## Q1: "Did I ship the AEO POV?"
+Predicted answer: Due TODAY (3/20, Friday). Calendar block at 1-2:30pm PT for deep write session. As of this morning, NOT STARTED. This would be the first strategic artifact in 3 consecutive weeks (W10-W12 = 0 artifacts). Recording available from Eslam (3/16). No blockers — just needs writing time. If not done today, the pattern is entrenched.
+Sources: rw-tracker.md (W12 scorecard), exp6-action-tracker.md, calendar (AEO POV block)
+Confidence: HIGH
+
+## Q2: "What's the Polaris Brand LP rollout plan?"
+Predicted answer: Brandon emailed Stacey/Adi on 3/20 to switch BR pages to Polaris (weblab complete). Alex VanDerStuyf submitted AEM translations for AU, MX, JP, CA (EN+FR) — due 3/26. Brandon's priority: AU → MX → DE → UK → JP → FR → IT → ES → CA → US-ES. Weblab strategy: US done (informs CA/MX), choose 2 EU countries (UK or DE + 1 EU3), JP, AU. EU5 AEM blocked (ops ticket, est. 3/24). Richard CC'd — needs to coordinate PS ad URLs with new page rollout timing.
+Sources: Brandon email (3/20), current.md (Polaris Brand LP section)
+Confidence: HIGH
+
+## Q3: "What's the W12 scorecard?"
+Predicted answer: Friday W12 Day 5. Zero strategic artifacts shipped for 3 consecutive weeks. AEO POV is the last chance to break the streak. Admin backlog still has 3 overdue items (Flash topics 3d, PAM PO 19d, PAM R&O 10d). Google invoice OFA approvals partially done (1 approved, 2 timed out — asked Bhawna to resend). PO comment replied to BK. Lorena MX strategy draft sent. Brandon Polaris email is new work but not Richard-owned execution.
+Sources: rw-tracker.md, exp6-action-tracker.md, sent items (3/20)
+Confidence: HIGH
+
+## Q4: "What happened at AppTweak and Yun 1:1?"
+Predicted answer: AppTweak sync at 11am PT (Anthony Asuncion). Yun 1:1 at 12pm PT — topics: WW redirect Adobe reporting (overdue), Polaris Brand LP coordination (US-ES page, Alex working with Yun), AU CPC debrief, MX updates. ARCC Workshop conflicts with AppTweak (both 11am) — Richard accepted both.
+Sources: calendar (3/20), exp7-meeting-briefs.md
+Confidence: HIGH
+
+## Q5: "What's still overdue?"
+Predicted answer: As of 3/20: PAM US PO (19 days), PAM R&O (10 days), Flash topics (3 days), Kingpin Goals (3 days, blocked by Andes), WW redirect Adobe reporting (1 day overdue). OCI FR 25% and MX Auto page due today. Admin block scheduled 8:15-8:45am PT. Total admin ~35 min.
+Sources: exp6-action-tracker.md, rw-tracker.md
+Confidence: HIGH

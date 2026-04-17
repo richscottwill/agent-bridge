@@ -11,7 +11,7 @@ All Asana writes follow the Guardrail Protocol in asana-command-center.md.
 
 ### Context Load
 heart.md, changelog.md, current.md, gut.md, slack-scan-state.json, asana-command-center.md.
-MotherDuck: If ps_analytics not attached, execute `ATTACH 'md:ps_analytics'` then `USE ps_analytics`.
+DuckDB: All queries go through DuckDB MCP (`execute_query`). Do NOT use Python `duckdb.connect()` with MotherDuck tokens. The MCP server is already connected to `ps_analytics`. If a query fails, check MCP server status — do not fall back to direct Python connections.
 
 ### Step 0 — Asana Delta Sync to DuckDB
 Execute the Delta Sync procedure from ~/shared/context/protocols/asana-duckdb-sync.md:
@@ -313,7 +313,7 @@ Execute ~/shared/context/protocols/communication-analytics.md:
 
 **This phase is NOT expendable. Execute before experiments.**
 
-- **MotherDuck daily snapshot:** Create a named snapshot for time travel and audit:
+- **DuckDB daily snapshot (via MCP):** Create a named snapshot for time travel and audit using `execute_query`:
   ```sql
   CREATE SNAPSHOT eod_YYYYMMDD OF ps_analytics;
   ```

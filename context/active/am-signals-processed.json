@@ -1,100 +1,187 @@
 {
-  "generated": "2026-04-15T06:55:00-07:00",
-  "signals": {
-    "slack": {
-      "high_priority": [
-        {
-          "source": "#ab-paid-search-app",
-          "from": "Yun",
-          "signal": "IT tax fix confirmed — Richard needs to check closed invoices + get reissued ones",
-          "action": "respond",
-          "task_created": false,
-          "existing_task": "1214068319383964"
-        },
-        {
-          "source": "#ab-paid-search-app",
-          "from": "Brandon",
-          "signal": "Asking if Richard needs more $ for PAM from extra US budget — must vet on reg impact",
-          "action": "respond",
-          "task_created": false,
-          "existing_task": "1213959904341162"
-        },
-        {
-          "source": "#ab-paid-search-global",
-          "from": "Brandon",
-          "signal": "Q2 CCP review — review ieCCP/CCP files from Stacey, flag concerns",
-          "action": "review",
-          "task_created": false
-        },
-        {
-          "source": "#ab-paid-search-global",
-          "from": "Brandon",
-          "signal": "Which markets have Brand Polaris pages? Expects US & JP only",
-          "action": "respond",
-          "task_created": false
-        }
+  "generated_at": "2026-04-16T14:30:00Z",
+  "pipeline": "am-backend-phase2",
+  "signals_processed": 7,
+  "tasks_queued_for_creation": 3,
+  "tasks_matched_existing": 3,
+  "awareness_only": 1,
+
+  "signal_results": [
+    {
+      "signal_id": "loop-callout-updates",
+      "source": "slack-digest",
+      "topic": "Loop Callout Clarifications — Due Fri Apr 17 @ 2pm CT",
+      "action_type": "existing_task_found",
+      "matched_tasks": [
+        {"task_gid": "1213983342210449", "name": "MBR callout"},
+        {"task_gid": "1213925648113679", "name": "WBR Callout Template & Guide"}
       ],
-      "medium_priority": [
-        {
-          "source": "#ab-paid-search-abix",
-          "from": "Brandon",
-          "signal": "Started adding ABIX document feedback. Setting up review time next week. No rush.",
-          "action": "note",
-          "task_created": false
-        }
-      ],
-      "total_channels_scanned": 20,
-      "total_messages": 200
+      "note": "Brandon needs callout clarifications in Loop by Fri 2pm CT (1pm PT). MBR callout task exists but has no due date — needs date set. Richard acknowledged with ✍️ reaction but hasn't completed.",
+      "frontend_action": "flag_for_date_update",
+      "urgency": "high",
+      "due": "2026-04-17T13:00:00-07:00"
     },
-    "email": {
-      "respond_needed": [
-        {
-          "subject": "[EXTERNAL] IN AB X Mobile App marketing",
-          "from": "Karthikeyan",
-          "signal": "Apple App Store account invite reminder — direct request",
-          "priority": "low"
-        }
+    {
+      "signal_id": "ro-input-mx-au",
+      "source": "slack-digest",
+      "topic": "R&O Input — MX and AU Numbers Due TODAY",
+      "action_type": "existing_task_found",
+      "matched_tasks": [
+        {"task_gid": "1213637505601024", "name": "R&O for MX/AU (help to input amount, and remind about confirming budgets)"}
       ],
-      "review_needed": [
-        {
-          "subject": "Ads disapproved (77) : Amazon Business US - ENT",
-          "from": "Google Ads Policy",
-          "signal": "77 ads impacted by policy — worth a glance"
-        },
-        {
-          "subject": "BALOO-8 refmarker attribution",
-          "from": "Cansu Ozturk",
-          "signal": "Couldn't reproduce refmarker issue on amazon.com"
-        }
-      ],
-      "total_emails": 18
+      "note": "Yun reminded Richard R&O is due today. Task exists but has no due date set. Richard asked about file location (may have resolved). Needs confirmation.",
+      "frontend_action": "flag_for_date_update_and_completion",
+      "urgency": "critical",
+      "due": "2026-04-16"
     },
-    "asana_activity": {
-      "unanswered_comments": [
-        {
-          "task_gid": "1213072707685834",
-          "task_name": "AB Customer Redirect",
-          "from": "Brandon",
-          "comment": "can you please add the implementation details for this? I think it should be closed",
-          "age_days": 2,
-          "priority": "high"
-        }
-      ],
-      "dependency_completions": [
-        {
-          "task_name": "MX Automotive page",
-          "blocker_completed_by": "Frank Volinsky",
-          "completed_at": "2026-04-14T13:13Z",
-          "impact": "MX Auto page now unblocked — Richard can proceed with campaign build"
-        }
-      ]
+    {
+      "signal_id": "ww-sitelink-audit",
+      "source": "slack-digest + asana-activity",
+      "topic": "WW Sitelink Audit — Brandon assigned via DM + Asana",
+      "action_type": "no_match_in_duckdb",
+      "note": "Brandon created Asana task and DM'd Richard (Apr 15). Task confirmed in asana-activity (due Apr 17). NOT in DuckDB yet — 24h stale data. Task exists in Asana but needs fresh sync to appear in DuckDB. Richard has NOT acknowledged to Brandon.",
+      "frontend_action": "queue_acknowledgment_to_brandon",
+      "urgency": "high",
+      "due": "2026-04-17",
+      "task_creation": "NOT_NEEDED — task already exists in Asana, just not synced to DuckDB"
     },
-    "wiki_candidates": []
+    {
+      "signal_id": "mx-duplicate-invoice",
+      "source": "email-triage",
+      "topic": "MX Duplicate Invoice — Diana $56K (PO Q1: MS-20200908)",
+      "action_type": "no_matching_task",
+      "note": "Diana flagged duplicate invoice for MX Paid Search POs for January — same amount $56,242.90 appears twice. No existing task covers this specific issue. 'Verify IT tax fix' task exists but is about IT invoices, not MX duplicate. This needs a new task.",
+      "frontend_action": "queue_task_creation",
+      "urgency": "high",
+      "proposed_task": {
+        "name": "Resolve MX duplicate invoice — Diana ($56K, PO Q1 MS-20200908)",
+        "routine_rw": "Admin (Wind-down)",
+        "priority_rw": "Urgent",
+        "due_on": "2026-04-18",
+        "notes": "Diana flagged duplicate invoicing for MX Paid Search POs for January. Same invoice amount of $56,242.90 appears twice. Source: email 2026-04-15."
+      }
+    },
+    {
+      "signal_id": "ddd-walkthrough",
+      "source": "asana-activity + email-triage",
+      "topic": "DDD walkthrough with team — Due TODAY (Apr 16)",
+      "action_type": "no_match_in_duckdb",
+      "note": "Brandon assigned DDD walkthrough to Richard (Apr 15), due TODAY Apr 16. Subtask of Baloo Testing - US. NOT in DuckDB — 24h stale data. Task exists in Asana per activity monitor. This is a Brandon-assigned task with TODAY deadline.",
+      "frontend_action": "flag_critical_today",
+      "urgency": "critical",
+      "due": "2026-04-16",
+      "task_creation": "NOT_NEEDED — task already exists in Asana, just not synced to DuckDB"
+    },
+    {
+      "signal_id": "ab-customer-redirect",
+      "source": "asana-activity",
+      "topic": "AB Customer Redirect — Brandon comment 3d unanswered",
+      "action_type": "existing_task_found",
+      "matched_tasks": [
+        {"task_gid": "found_in_core_bucket", "name": "AB Customer Redirect"}
+      ],
+      "note": "Brandon asked Richard to add implementation details and close this task (Apr 13). 3 days unanswered. Task is in Core bucket with no due date.",
+      "frontend_action": "flag_unanswered_manager_comment",
+      "urgency": "high",
+      "days_unanswered": 3
+    },
+    {
+      "signal_id": "google-dsa-sunset",
+      "source": "slack-digest",
+      "topic": "Google DSA Sunset → AI MAX Auto-Upgrade",
+      "action_type": "awareness_only",
+      "note": "Google sunsetting DSA, all campaigns auto-upgrade to AI MAX. No existing task. This is an awareness item — may not need a dedicated task unless team needs to prepare specific campaigns.",
+      "frontend_action": "none",
+      "urgency": "low"
+    }
+  ],
+
+  "decisions_detected": [
+    {
+      "decision_id": "enhanced-match-255k",
+      "source": "slack-digest",
+      "topic": "Enhanced Match / LiveRamp $255K stays in PS ENG",
+      "decided_by": "Brandon",
+      "date": "2026-04-15",
+      "summary": "LiveRamp Enhanced Match $255K stays in PS ENG budget. No budget transfer needed. Timeline TBD and slow.",
+      "impact": "No action needed now. Track for MX/AU market planning."
+    },
+    {
+      "decision_id": "mx-handoff-simplified",
+      "source": "slack-digest",
+      "topic": "MX handoff doc simplified — reference CA pages",
+      "decided_by": "Brandon",
+      "date": "2026-04-14",
+      "summary": "Don't show 'before' page for MX. Reference CA pages instead.",
+      "impact": "Simplifies MX handoff doc work."
+    },
+    {
+      "decision_id": "google-dsa-ai-max",
+      "source": "slack-digest",
+      "topic": "Google DSA sunset → AI MAX auto-upgrade",
+      "decided_by": "Google (external)",
+      "date": "2026-04-15",
+      "summary": "All DSA campaigns will be automatically upgraded to AI MAX.",
+      "impact": "Team awareness needed. No immediate action unless specific campaigns need prep."
+    }
+  ],
+
+  "bucket_cap_check": {
+    "sweep": {"count": 3, "cap": 5, "status": "under_cap"},
+    "core": {"count": 10, "cap": 4, "status": "OVER_CAP", "over_by": 6},
+    "engine_room": {"count": 5, "cap": 6, "status": "under_cap"},
+    "admin": {"count": 3, "cap": 3, "status": "AT_CAP"},
+    "backlog": {"count": 84, "note": "No routine set"}
   },
-  "signal_to_task_log": {
-    "tasks_created": 0,
-    "tasks_updated": 0,
-    "signals_deduped": 5,
-    "notes": "All high-priority signals already have existing Asana tasks. No new task creation needed."
+
+  "cap_violations": [
+    {
+      "bucket": "Core Two (Deep Work)",
+      "count": 10,
+      "cap": 4,
+      "over_by": 6,
+      "action": "queue_demotion_proposals",
+      "note": "Core is at 10/4 — needs aggressive triage. 6 tasks must be demoted to Backlog or reclassified. Candidates: tasks with no due date, tasks marked Not urgent, pinned context tasks."
+    }
+  ],
+
+  "kill_or_revive_candidates": [
+    {
+      "task_gid": "1212988092117041",
+      "name": "Paid App",
+      "routine": "Engine Room",
+      "priority": "Urgent",
+      "due": "2026-03-31",
+      "days_overdue": 16,
+      "recommendation": "REVIVE — Paid App workstream is active (PO task, event calendar). Needs date reset or decomposition."
+    },
+    {
+      "task_gid": "1213341921686564",
+      "name": "Testing Document for Kate",
+      "routine": "Core Two",
+      "priority": "Urgent",
+      "due": "2026-04-01",
+      "days_overdue": 15,
+      "recommendation": "REVIVE — THE HARD THING. v5 completed, needs to be sent to Brandon. Reset due date to this week."
+    },
+    {
+      "task_gid": "1213764961716427",
+      "name": "WW weblab dial-up (Richard)",
+      "routine": "Core Two",
+      "priority": "Urgent",
+      "due": "2026-04-07",
+      "days_overdue": 9,
+      "recommendation": "REVIEW — 9 days overdue. Is this blocked or abandoned? Needs decision."
+    }
+  ],
+
+  "metrics_sync": {
+    "status": "skipped",
+    "reason": "sync_metrics.py found 0 weeks with daily data not yet in ps.metrics. Nothing to sync."
+  },
+
+  "state_file_engine": {
+    "status": "skipped",
+    "reason": "State file engine protocol exists but ps.metrics has no new data. Engine skips when data is stale per protocol rules."
   }
 }

@@ -6,7 +6,7 @@ AI-augmented work system for Paid Search marketing. Text files + DuckDB registry
 
 1. Read `context/body/body.md` — maps the whole system
 2. Read `context/body/spine.md` — bootstrap sequence and key IDs
-3. Query `ps_analytics.docs.documents` in MotherDuck — the document registry
+3. Query `ps_analytics.docs.documents` via DuckDB MCP — the document registry
 
 ## Structure
 
@@ -17,7 +17,7 @@ AI-augmented work system for Paid Search marketing. Text files + DuckDB registry
 | `tools/` | Automation scripts — asana, comms, bridge, prediction, data, sharepoint-sync |
 | `data/` | DuckDB databases, exports, processed data, state files |
 | `uploads/` | Human drop zone — sheets, changelogs, docs |
-| `dashboards/` | HTML dashboards (Dives live in MotherDuck) |
+| `dashboards/` | HTML dashboards (data queried via DuckDB MCP) |
 | `.kiro/` | Agents, hooks, specs, steering, skills, settings |
 
 ## Document Registry
@@ -44,9 +44,9 @@ WHERE duck_id ILIKE '%keyword%';
 | `wiki/strategy/agent-architecture.md` | Agent system architecture |
 | `wiki/strategy/five-year-outlook-v2.md` | PS five-year outlook |
 
-## MotherDuck
+## DuckDB
 
-Database: `ps_analytics` on MotherDuck. Key schemas:
+Database: `ps_analytics` on MotherDuck, accessed exclusively via DuckDB MCP (`execute_query`). Key schemas:
 - `ps` — paid search metrics, forecasts, projections, pacing
 - `docs` — document registry (duck_id, canonical paths, stages)
 - `asana` — task sync, daily tracker

@@ -11,47 +11,47 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#e0e0e0}
 .header{padding:24px 32px 16px;border-bottom:1px solid #2a2d35}
-.header h1{font-size:20px;font-weight:600;color:#fff}
-.header p{font-size:13px;color:#888;margin-top:4px}
+.header h1{font-size:22px;font-weight:600;color:#fff}
+.header p{font-size:15px;color:#888;margin-top:4px}
 .controls{display:flex;gap:12px;padding:16px 32px;border-bottom:1px solid #2a2d35;flex-wrap:wrap;align-items:center}
-.controls label{font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.5px}
+.controls label{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:.5px}
 .tab-row{display:flex;gap:4px;flex-wrap:wrap}
-.tab{padding:6px 14px;border-radius:6px;font-size:13px;cursor:pointer;background:transparent;border:1px solid #2a2d35;color:#888}
+.tab{padding:6px 14px;border-radius:6px;font-size:15px;cursor:pointer;background:transparent;border:1px solid #2a2d35;color:#888}
 .tab.active{background:#1a3a5c;border-color:#4a9eff;color:#4a9eff}
 .tab:hover{border-color:#4a9eff}
-select{background:#1a1d27;border:1px solid #2a2d35;color:#e0e0e0;padding:6px 12px;border-radius:6px;font-size:13px;cursor:pointer}
+select{background:#1a1d27;border:1px solid #2a2d35;color:#e0e0e0;padding:6px 12px;border-radius:6px;font-size:15px;cursor:pointer}
 select:hover{border-color:#4a9eff}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:24px 32px}
 .card{background:#1a1d27;border:1px solid #2a2d35;border-radius:10px;padding:20px}
 .card-full{grid-column:1/-1}
-.card h3{font-size:14px;font-weight:600;color:#ccc;margin-bottom:12px}
+.card h3{font-size:16px;font-weight:600;color:#ccc;margin-bottom:12px}
 .chart-box{position:relative;height:400px}
 .kpi-row{display:flex;gap:16px;padding:0 32px 16px;flex-wrap:wrap}
 .kpi{background:#1a1d27;border:1px solid #2a2d35;border-radius:10px;padding:16px 20px;flex:1;min-width:140px}
-.kpi .label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.5px}
-.kpi .value{font-size:22px;font-weight:700;color:#fff;margin-top:4px}
-.kpi .sub{font-size:12px;color:#888;margin-top:2px}
+.kpi .label{font-size:13px;color:#888;text-transform:uppercase;letter-spacing:.5px}
+.kpi .value{font-size:24px;font-weight:700;color:#fff;margin-top:4px}
+.kpi .sub{font-size:14px;color:#888;margin-top:2px}
 .good{color:#4ade80}.warn{color:#e0e0e0}.bad{color:#f87171}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{text-align:left;padding:8px 12px;border-bottom:1px solid #2a2d35;color:#888;font-weight:500;font-size:11px;text-transform:uppercase}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{text-align:left;padding:8px 12px;border-bottom:1px solid #2a2d35;color:#888;font-weight:500;font-size:13px;text-transform:uppercase}
 td{padding:8px 12px;border-bottom:1px solid #1f222b}
 tr:hover{background:#1f222b}
-.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:13px;font-weight:600}
 .badge-green{background:#064e3b;color:#4ade80}
 .badge-yellow{background:#2a2d35;color:#e0e0e0}
 .badge-red{background:#7f1d1d;color:#f87171}
 .badge-gray{background:#374151;color:#9ca3af}
 .legend-row{display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap}
-.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#888}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:14px;color:#888}
 .legend-dot{width:10px;height:10px;border-radius:50%}
 .legend-line{width:20px;height:2px;border-radius:1px}
-.ts{font-size:11px;color:#444;text-align:right;padding:16px 32px}
+.ts{font-size:13px;color:#444;text-align:right;padding:16px 32px}
 /* ── TOC ── */
 .toc{display:flex;gap:6px;padding:6px 32px;flex-wrap:wrap;align-items:center;border-bottom:1px solid #2a2d35;background:#12141c}
-.toc-label{font-size:9px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-right:2px}
-.toc a{font-size:10px;color:#888;text-decoration:none;padding:2px 8px;border-radius:3px;transition:all .15s}
+.toc-label{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-right:2px}
+.toc a{font-size:12px;color:#888;text-decoration:none;padding:2px 8px;border-radius:3px;transition:all .15s}
 .toc a:hover{color:#93b4f5;background:rgba(30,58,138,.15)}
-.toc .toc-sep{color:#333;font-size:10px}
+.toc .toc-sep{color:#333;font-size:12px}
 </style>
 </head>
 <body>
@@ -91,9 +91,9 @@ tr:hover{background:#1f222b}
   <div class="card card-full" id="sec-projections">
     <h3>Projections</h3>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px" id="projGrid">
-      <div><h4 style="font-size:12px;color:#6c7086;text-transform:uppercase;margin-bottom:8px">Month-End</h4><div id="monthProj"></div></div>
-      <div><h4 style="font-size:12px;color:#6c7086;text-transform:uppercase;margin-bottom:8px">Quarter-End</h4><div id="quarterProj"></div></div>
-      <div><h4 style="font-size:12px;color:#6c7086;text-transform:uppercase;margin-bottom:8px">Year-End</h4><div id="yearProj"></div></div>
+      <div><h4 style="font-size:14px;color:#6c7086;text-transform:uppercase;margin-bottom:8px">Month-End</h4><div id="monthProj"></div></div>
+      <div><h4 style="font-size:14px;color:#6c7086;text-transform:uppercase;margin-bottom:8px">Quarter-End</h4><div id="quarterProj"></div></div>
+      <div><h4 style="font-size:14px;color:#6c7086;text-transform:uppercase;margin-bottom:8px">Year-End</h4><div id="yearProj"></div></div>
     </div>
   </div>
   <div class="card card-full" id="sec-detail">
@@ -276,7 +276,7 @@ function renderTable(weeks) {
       ? `<span class="badge ${wow > 5 ? 'badge-green' : wow < -5 ? 'badge-red' : 'badge-yellow'}">${wow > 0 ? '+' : ''}${wow}%</span>`
       : '<span class="badge badge-gray">—</span>';
     const rowStyle = isFuture ? 'opacity:0.5' : '';
-    const predLabel = isFuture ? ' <span style="color:#f97316;font-size:10px">pred</span>' : '';
+    const predLabel = isFuture ? ' <span style="color:#f97316;font-size:12px">pred</span>' : '';
     const orange = 'color:#f97316';
 
     // Regs column: actual or predicted
@@ -325,7 +325,7 @@ function renderProjections() {
   if (monthTarget) {
     mel.innerHTML = projTable(monthTarget.period, monthTarget);
   } else {
-    mel.innerHTML = '<p style="color:#555;font-size:13px">No monthly data</p>';
+    mel.innerHTML = '<p style="color:#555;font-size:15px">No monthly data</p>';
   }
 
   // Render quarter-end
@@ -333,14 +333,14 @@ function renderProjections() {
   if (qTarget) {
     qel.innerHTML = projTable(qTarget.period, qTarget);
   } else {
-    qel.innerHTML = '<p style="color:#555;font-size:13px">No quarterly data</p>';
+    qel.innerHTML = '<p style="color:#555;font-size:15px">No quarterly data</p>';
   }
 
   // Render year-end
   const yel = document.getElementById('yearProj');
   if (yearly.pred_regs_annual) {
     yel.innerHTML = `
-      <table style="font-size:13px"><tbody>
+      <table style="font-size:15px"><tbody>
         <tr><td style="color:#888">Pred Regs</td><td style="text-align:right;font-weight:600">${fmt(yearly.pred_regs_annual, 'regs')}</td></tr>
         <tr><td style="color:#888">YTD Actual</td><td style="text-align:right">${fmt(yearly.actual_regs_ytd, 'regs')}</td></tr>
         ${yearly.actual_cost_ytd ? `<tr><td style="color:#888">YTD Spend</td><td style="text-align:right">${fmt(yearly.actual_cost_ytd, 'cost')}</td></tr>` : ''}
@@ -348,14 +348,14 @@ function renderProjections() {
         <tr><td style="color:#888">Months w/ Actuals</td><td style="text-align:right">${yearly.months_with_actuals}/12</td></tr>
       </tbody></table>`;
   } else {
-    yel.innerHTML = '<p style="color:#555;font-size:13px">No yearly data</p>';
+    yel.innerHTML = '<p style="color:#555;font-size:15px">No yearly data</p>';
   }
 }
 
 function projTable(label, d) {
   const hasActual = d.actual_regs != null;
   return `
-    <table style="font-size:13px"><tbody>
+    <table style="font-size:15px"><tbody>
       <tr><td style="color:#888">Period</td><td style="text-align:right;font-weight:600">${label}</td></tr>
       ${hasActual ? `<tr><td style="color:#888">Actual Regs</td><td style="text-align:right">${fmt(d.actual_regs, 'regs')}</td></tr>` : ''}
       <tr><td style="color:#888">Pred Regs</td><td style="text-align:right;color:#f97316">${fmt(d.pred_regs, 'regs')}</td></tr>

@@ -1,40 +1,66 @@
 {
   "date": "2026-04-15",
+  "timezone": "America/Los_Angeles",
   "completed_today": [
-    {"task_gid": "1214068429496105", "name": "Respond to Yun — MX NB page performance doc", "routine": "Sweep", "level": "L2"},
-    {"task_gid": "1214068429588691", "name": "RSVP: Kate's AB Marketing Happy Hour", "routine": "Sweep", "level": "L3"},
-    {"task_gid": "1214068429586218", "name": "RSVP: PSME Seattle Happy Hour", "routine": "Sweep", "level": "L3"}
+    {"gid": "1213072707685834", "name": "MX Automotive page"},
+    {"gid": "1213730974261148", "name": "Make changes to AU/MX/PAM for the week"},
+    {"gid": "1213993242326093", "name": "AU meetings - Agenda"},
+    {"gid": "1213637505601024", "name": "R&O for MX/AU"},
+    {"gid": "1214068429466521", "name": "Verify IT tax fix — check closed invoices + reissued ones"},
+    {"gid": "1213993242268778", "name": "Mondays - Write into EU SSR Acq Asana"},
+    {"gid": "1214075341408690", "name": "ABIX R&O"},
+    {"gid": "1213560614815911", "name": "PAM R&O"},
+    {"gid": "1214068319315340", "name": "Prep for MX LP optimization call"},
+    {"gid": "1214075340745321", "name": "(unnamed task)"},
+    {"gid": "1214068429496105", "name": "Respond to Yun — MX NB page performance doc"},
+    {"gid": "1214068429588691", "name": "RSVP: Kate's AB Marketing Happy Hour"},
+    {"gid": "1214068429586218", "name": "RSVP: PSME Seattle Happy Hour"}
   ],
+  "completed_count": 13,
   "carried_forward": [
-    {"task_gid": "1213917967984980", "name": "Respond to Lena — AU LP URL analysis + CPA methodology", "days_overdue": 12, "reason": "Draft written but not sent", "next_action": "Pull AU LP URL report, send reply"},
-    {"task_gid": "1213964186504305", "name": "Send IECCP follow-up summary to Lorena", "days_overdue": 6, "reason": "Not started", "next_action": "Draft IECCP summary email"},
-    {"task_gid": "1213917691089036", "name": "Refmarker mapping audit PoC — AU", "days_overdue": 5, "reason": "Not started", "next_action": "Export Google Ads refmarker report"},
-    {"task_gid": "1212808474749819", "name": "Paid App PO — Create Q2 + Amend Google PO", "days_overdue": 2, "reason": "Blocked on PAM budget confirmation", "next_action": "Confirm budget with Brandon"},
-    {"task_gid": "1213993242326093", "name": "AU meetings - Agenda", "days_overdue": 1, "reason": "Not prepped", "next_action": "Prep agenda items"},
-    {"task_gid": "1213796951745232", "name": "Look over AU landing page switch", "days_overdue": 0, "reason": "Due today, not done", "next_action": "Coordinate NB LP revert with Dwayne"},
-    {"task_gid": "1213072707685834", "name": "MX Automotive page", "days_overdue": 0, "reason": "Due today, not done", "next_action": "Build MX Auto + Beauty campaigns"}
+    {"gid": "1213341921686564", "name": "Testing Document for Kate", "days_overdue": "ongoing", "note": "THE HARD THING — send v5 to Brandon"},
+    {"gid": "1214080130329568", "name": "Make changes to AU/MX/PAM for the week", "days_overdue": 0},
+    {"gid": "1213796951745232", "name": "Look over AU landing page switch", "days_overdue": 1},
+    {"gid": "1214068319365234", "name": "Approve OFA invoice workflow", "days_overdue": 1},
+    {"gid": "1213917691089036", "name": "Refmarker mapping audit PoC — AU", "days_overdue": 2}
   ],
   "new_tasks_from_meetings": [
-    "Submit SIM for MX broken images + Canada optimizations",
-    "Create before/after PowerPoint for MX stakeholder call",
-    "Email Lorena re: MX unspent budget",
-    "Follow up with LiveRamp on updated match rate",
-    "Coordinate VPN access for Adi (OCI Canada validation)",
-    "Follow up with VJ on ref tag persistence ticket (P0)",
-    "Review Q2 CCP suggestions in shared file",
-    "Daily ad disapproval checks until Google resolves"
+    {"gid": "1214081017044930", "name": "MCS LP Review: Share MX Polaris test results (beauty/auto)", "due": "2026-04-29", "project": "MX"},
+    {"gid": "1214081017092577", "name": "MCS LP Review: Connect with Lorena on paid social/PS synergy", "due": "2026-04-17", "project": "MX"},
+    {"gid": "1214081017124426", "name": "MCS LP Review: Follow up on global Polaris template finalization", "due": "2026-04-22", "project": "MX"}
   ],
-  "recurring_created": [],
-  "blocker_updates": [
-    {"task": "MX Automotive page", "blocker": "Vijeth footer component", "days_blocked": 18},
-    {"task": "Kingpin Goals MX", "blocker": "Andes data unavailable", "days_blocked": 21}
+  "recurring_auto_created": [
+    {"gid": "1214081017200478", "name": "AU meetings - Agenda", "due": "2026-04-22", "project": "AU", "pattern": "weekly"}
   ],
-  "five_levels": {"l1": 0, "l2": 1, "l3": 0, "l4": 0, "l5": 0},
-  "bucket_distribution": {
-    "null": 43, "Wiki": 23, "Core": 13, "Engine Room": 13, "Admin": 4, "Sweep": 4
+  "dependencies_logged": [
+    {"person": "Lorena Alvarez Larrea", "action": "Reach out to Vijay Kumar (Andes) for Baloo international roadmap", "source": "MCS LP Review 4/15"},
+    {"person": "MCS Team (Alex)", "action": "Finalize global Polaris template for brand pages by 4/16", "source": "MCS LP Review 4/15"},
+    {"person": "Dwayne Palmer", "action": "Coordinate with MCS and PA teams on Polaris migration rollout plan", "source": "MCS LP Review 4/15"}
+  ],
+  "meeting_summary": {
+    "sessions_processed": 1,
+    "session_name": "Polaris Brand LP and Canada Optimization Review",
+    "duration_minutes": 26,
+    "key_decisions": [
+      "All paid search landing pages will migrate to Polaris branding",
+      "Legacy PADESARJAD pages will be deprecated",
+      "Mexico serves as early test market for Polaris",
+      "Halo effect from paid social to branded search recognized — monitor directionally"
+    ],
+    "key_insight": "Lorena reported strong paid social → branded search CTR halo in MX. Brandon interested. No hard attribution possible but directional evidence strong."
   },
-  "total_incomplete": 100,
-  "total_overdue": 8,
-  "meetings_ingested": 3,
-  "daily_reset_demotions": 7
+  "five_levels": {
+    "l1_sharpen": 0,
+    "l2_testing": 5,
+    "l3_automation": 1,
+    "l4_zero_click": 0,
+    "l5_agentic": 0,
+    "unclassified": 7
+  },
+  "streak": {
+    "current": 1,
+    "hard_thing": "Send Testing Approach v5 to Brandon",
+    "hard_thing_status": "Calendar block was 12:30-2 PM PT today. Check if progress was made.",
+    "avoidance_signal": "13 tasks completed — all L2/L3/Admin. No L1 artifact shipped."
+  }
 }

@@ -128,7 +128,7 @@ sharepoint_read_file(serverRelativeUrl="/personal/prichwil_amazon_com/Documents/
 | Category | Why Not |
 |----------|---------|
 | Organs (body.md, brain.md, etc.) | Change every session. SharePoint latency creates stale reads. Live workspace is source of truth. |
-| DuckDB / MotherDuck data | Structured data. Not file-based. Query via SQL. |
+| DuckDB data | Structured data. Not file-based. Query via DuckDB MCP (`execute_query`). |
 | Intake files | Ephemeral. Processed and deleted within the same session. |
 | Hook configs, steering files | IDE-bound. No cross-device need. |
 | Audit logs (JSONL) | Append-only. Stays on filesystem + DuckDB. |
