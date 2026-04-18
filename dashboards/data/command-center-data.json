@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-16T16:20:54.531895+00:00",
+  "generated": "2026-04-17T12:57:29.242246+00:00",
   "blocks": [
     {
       "name": "Sweep",
@@ -34,7 +34,7 @@
           "name": "Prep for MX LP optimization call (tomorrow 12 PM CST)",
           "due": "2026-04-15",
           "overdue": true,
-          "days_overdue": 1,
+          "days_overdue": 2,
           "priority": "Today",
           "project": null,
           "next_action": "Confirm attendance, prep talking points (proactive testing, Carlos pages, Google Experiments), review 9 MX NB pages for broken images",
@@ -44,7 +44,7 @@
           "name": "Respond to Lena \u2014 AU LP URL analysis + CPA methodology",
           "due": "2026-04-03",
           "overdue": true,
-          "days_overdue": 13,
+          "days_overdue": 14,
           "priority": "Urgent",
           "project": "AU",
           "next_action": "Pull AU LP URL report from Google Ads",
@@ -54,7 +54,7 @@
           "name": "Send IECCP follow-up summary to Lorena + review keyword data",
           "due": "2026-04-09",
           "overdue": true,
-          "days_overdue": 7,
+          "days_overdue": 8,
           "priority": "Urgent",
           "project": "MX",
           "next_action": "Draft IECCP summary email, send to Lorena",
@@ -64,7 +64,7 @@
           "name": "Paid App PO \u2014 Create Q2 + Amend Google PO to Q2",
           "due": "2026-04-13",
           "overdue": true,
-          "days_overdue": 3,
+          "days_overdue": 4,
           "priority": "Urgent",
           "project": "Paid App",
           "next_action": "Confirm PAM budget with Brandon, then create Q2 PO",
@@ -80,13 +80,13 @@
       "desc": "30 min bound",
       "count": 4,
       "today_count": 1,
-      "overdue_count": 0,
+      "overdue_count": 1,
       "tasks": [
         {
           "name": "Verify IT tax fix \u2014 check closed invoices + reissued ones",
           "due": "2026-04-16",
-          "overdue": false,
-          "days_overdue": 0,
+          "overdue": true,
+          "days_overdue": 1,
           "priority": "Today",
           "project": null,
           "next_action": "Check invoice system for IT tax-affected invoices, confirm closed, check reissued",
@@ -98,7 +98,7 @@
           "overdue": false,
           "days_overdue": 0,
           "priority": "Urgent",
-          "project": "ABPS - WW Testing & Projects",
+          "project": "WW Testing",
           "next_action": "Pull refmarker mapping from Google Ads",
           "kiro": "4/13: Refmarker audit for cross-marketing attribution."
         },
@@ -108,7 +108,7 @@
           "overdue": false,
           "days_overdue": 0,
           "priority": "Urgent",
-          "project": "AU",
+          "project": "MX",
           "next_action": "Review AU+MX MBR draft callouts",
           "kiro": "4/7: Carried fwd. Overdue since 4/2."
         },
@@ -140,7 +140,7 @@
           "overdue": false,
           "days_overdue": 0,
           "priority": "Not urgent",
-          "project": "ABPS - WW Testing & Projects",
+          "project": "WW Testing",
           "next_action": "Coordinate with media team on audience request",
           "kiro": "4/4: F90 lifecycle program. 9 subtasks."
         },
@@ -200,7 +200,7 @@
           "overdue": false,
           "days_overdue": 0,
           "priority": "Today",
-          "project": null,
+          "project": "My Tasks",
           "next_action": "Week of 4/14: review one-pager draft, fill in market-specific KPI targets",
           "kiro": "4/6: Due 4/16. Draft framework written. Begin 4/15."
         },
@@ -208,9 +208,9 @@
           "name": "Testing Document for Kate",
           "due": "2026-04-01",
           "overdue": true,
-          "days_overdue": 15,
+          "days_overdue": 16,
           "priority": "Urgent",
-          "project": "ABPS - WW Testing & Projects",
+          "project": "WW Testing",
           "next_action": "Apply 5 critic fixes from kate-doc-v5-eval-a.md",
           "kiro": "4/15: 14d overdue. Core block 12:30-2PM. Ship v5 to Brandon."
         },
@@ -218,9 +218,9 @@
           "name": "WW weblab dial-up (Richard)",
           "due": "2026-04-07",
           "overdue": true,
-          "days_overdue": 9,
+          "days_overdue": 10,
           "priority": "Urgent",
-          "project": "ABPS - WW Testing & Projects",
+          "project": "WW Testing",
           "next_action": "Coordinate with Alex/Vijeth on weblab dial-up settings",
           "kiro": "4/15: 8d overdue. Confirm weblab status with Brandon."
         },
@@ -230,7 +230,7 @@
           "overdue": false,
           "days_overdue": 0,
           "priority": "Urgent",
-          "project": "ABPS - WW Testing & Projects",
+          "project": "WW Testing",
           "next_action": "Continue email overlay development work",
           "kiro": "4/8: In development. Extended to 4/18."
         },
@@ -300,7 +300,7 @@
           "name": "Look over AU landing page switch",
           "due": "2026-04-15",
           "overdue": true,
-          "days_overdue": 1,
+          "days_overdue": 2,
           "priority": "Today",
           "project": "AU",
           "next_action": "Coordinate NB LP revert with Dwayne",
@@ -310,7 +310,7 @@
           "name": "MX Automotive page",
           "due": "2026-04-15",
           "overdue": true,
-          "days_overdue": 1,
+          "days_overdue": 2,
           "priority": "Today",
           "project": "MX",
           "next_action": "Build MX Auto + Beauty campaigns in Google Ads",
@@ -320,9 +320,9 @@
           "name": "Paid App",
           "due": "2026-03-31",
           "overdue": true,
-          "days_overdue": 16,
+          "days_overdue": 17,
           "priority": "Urgent",
-          "project": "ABPS - WW Testing & Projects",
+          "project": "WW Testing",
           "next_action": "Check PAM US/EU spend pacing in tracker",
           "kiro": "4/15: Demoted from Engine Room. 15d overdue since 3/31."
         },
@@ -330,7 +330,7 @@
           "name": "Refmarker mapping audit PoC \u2014 AU",
           "due": "2026-04-10",
           "overdue": true,
-          "days_overdue": 6,
+          "days_overdue": 7,
           "priority": "Urgent",
           "project": "AU",
           "next_action": "Export Google Ads refmarker report",
@@ -355,7 +355,7 @@
       "name": "Prep for MX LP optimization call (tomorrow 12 PM CST)",
       "due": "2026-04-15",
       "overdue": true,
-      "days_overdue": 1,
+      "days_overdue": 2,
       "routine": "Sweep",
       "project": null,
       "next_action": "Confirm attendance, prep talking points (proactive testing, Carlos pages, Google Experiments), review 9 MX NB pages for broken images",
@@ -364,8 +364,8 @@
     {
       "name": "Verify IT tax fix \u2014 check closed invoices + reissued ones",
       "due": "2026-04-16",
-      "overdue": false,
-      "days_overdue": 0,
+      "overdue": true,
+      "days_overdue": 1,
       "routine": "Admin",
       "project": null,
       "next_action": "Check invoice system for IT tax-affected invoices, confirm closed, check reissued",
@@ -377,7 +377,7 @@
       "overdue": false,
       "days_overdue": 0,
       "routine": "Core",
-      "project": null,
+      "project": "My Tasks",
       "next_action": "Week of 4/14: review one-pager draft, fill in market-specific KPI targets",
       "block_order": 2
     },
@@ -385,7 +385,7 @@
       "name": "Look over AU landing page switch",
       "due": "2026-04-15",
       "overdue": true,
-      "days_overdue": 1,
+      "days_overdue": 2,
       "routine": "Engine Room",
       "project": "AU",
       "next_action": "Coordinate NB LP revert with Dwayne",
@@ -395,7 +395,7 @@
       "name": "MX Automotive page",
       "due": "2026-04-15",
       "overdue": true,
-      "days_overdue": 1,
+      "days_overdue": 2,
       "routine": "Engine Room",
       "project": "MX",
       "next_action": "Build MX Auto + Beauty campaigns in Google Ads",
@@ -417,7 +417,7 @@
       "overdue": false,
       "days_overdue": 0,
       "routine": "",
-      "project": "ABPS - WW Testing & Projects",
+      "project": "WW Testing",
       "next_action": null,
       "block_order": 4
     },
@@ -427,7 +427,7 @@
       "overdue": false,
       "days_overdue": 0,
       "routine": "",
-      "project": null,
+      "project": "My Tasks",
       "next_action": null,
       "block_order": 4
     }
@@ -435,23 +435,23 @@
   "overdue_tasks": [
     {
       "name": "Paid App",
-      "days_overdue": 16,
-      "project": "ABPS - WW Testing & Projects",
+      "days_overdue": 17,
+      "project": "WW Testing",
       "routine": "Engine Room",
       "priority": "Urgent",
       "due": "2026-03-31"
     },
     {
       "name": "Testing Document for Kate",
-      "days_overdue": 15,
-      "project": "ABPS - WW Testing & Projects",
+      "days_overdue": 16,
+      "project": "WW Testing",
       "routine": "Core",
       "priority": "Urgent",
       "due": "2026-04-01"
     },
     {
       "name": "Respond to Lena \u2014 AU LP URL analysis + CPA methodology",
-      "days_overdue": 13,
+      "days_overdue": 14,
       "project": "AU",
       "routine": "Sweep",
       "priority": "Urgent",
@@ -459,15 +459,15 @@
     },
     {
       "name": "WW weblab dial-up (Richard)",
-      "days_overdue": 9,
-      "project": "ABPS - WW Testing & Projects",
+      "days_overdue": 10,
+      "project": "WW Testing",
       "routine": "Core",
       "priority": "Urgent",
       "due": "2026-04-07"
     },
     {
       "name": "Send IECCP follow-up summary to Lorena + review keyword data",
-      "days_overdue": 7,
+      "days_overdue": 8,
       "project": "MX",
       "routine": "Sweep",
       "priority": "Urgent",
@@ -475,7 +475,7 @@
     },
     {
       "name": "Refmarker mapping audit PoC \u2014 AU",
-      "days_overdue": 6,
+      "days_overdue": 7,
       "project": "AU",
       "routine": "Engine Room",
       "priority": "Urgent",
@@ -483,7 +483,7 @@
     },
     {
       "name": "Paid App PO \u2014 Create Q2 + Amend Google PO to Q2",
-      "days_overdue": 3,
+      "days_overdue": 4,
       "project": "Paid App",
       "routine": "Sweep",
       "priority": "Urgent",
@@ -491,7 +491,7 @@
     },
     {
       "name": "Look over AU landing page switch",
-      "days_overdue": 1,
+      "days_overdue": 2,
       "project": "AU",
       "routine": "Engine Room",
       "priority": "Today",
@@ -499,7 +499,7 @@
     },
     {
       "name": "MX Automotive page",
-      "days_overdue": 1,
+      "days_overdue": 2,
       "project": "MX",
       "routine": "Engine Room",
       "priority": "Today",
@@ -507,11 +507,19 @@
     },
     {
       "name": "Prep for MX LP optimization call (tomorrow 12 PM CST)",
-      "days_overdue": 1,
+      "days_overdue": 2,
       "project": null,
       "routine": "Sweep",
       "priority": "Today",
       "due": "2026-04-15"
+    },
+    {
+      "name": "Verify IT tax fix \u2014 check closed invoices + reissued ones",
+      "days_overdue": 1,
+      "project": null,
+      "routine": "Admin",
+      "priority": "Today",
+      "due": "2026-04-16"
     }
   ],
   "pacing": [
@@ -587,11 +595,7 @@
     }
   ],
   "actionable_emails": [
-    "**Brandon OOO** from Munday, Brandon (0d ago) \u2014 Marked as Free, no reminders. [review]",
-    "**Mentioned you in \"Monthly Callouts.loop\"** from Munday, Brandon (1d ago) \u2014 Brandon mentioned you in Monthly Callouts page. [review]",
-    "**Mentioned you in \"Monthly Callouts.loop\"** from Munday, Brandon (1d ago) \u2014 Second mention in Monthly Callouts page. [review]",
-    "**\ud83d\udce5 Brandon assigned you a task: DDD walkthrough with team** from Brandon via Asana (1d ago) \u2014 New task assignment from Brandon. [respond]",
-    "**\ud83d\udce5 Brandon assigned you a task: Sitelink Audit/Update** from Brandon via Asana (1d ago) \u2014 New task assignment from Brandon. [respond]"
+    "**[ABMA-11500] ABMA :Channel Marketing -{Paid Search MX - WBR error}** from Lorena Alvarez Larrea (1d ago) \u2014 Lorena commented asking about SPARKLE campaign driving traffic to MCS. Needs clarification "
   ],
   "slack_signals": [],
   "critical_flags": [],
@@ -610,7 +614,7 @@
       "days_old": 11,
       "overdue": true,
       "first_seen": "2026-04-04",
-      "last_seen": "2026-04-16",
+      "last_seen": "2026-04-17",
       "completed_date": "",
       "dismissed_date": "",
       "completed_via": null,
@@ -628,7 +632,7 @@
       "days_old": 2,
       "overdue": false,
       "first_seen": "2026-04-13",
-      "last_seen": "2026-04-16",
+      "last_seen": "2026-04-17",
       "completed_date": "",
       "dismissed_date": "",
       "completed_via": null,
@@ -646,7 +650,7 @@
       "days_old": 2,
       "overdue": false,
       "first_seen": "2026-04-13",
-      "last_seen": "2026-04-16",
+      "last_seen": "2026-04-17",
       "completed_date": "",
       "dismissed_date": "",
       "completed_via": null,
@@ -664,7 +668,7 @@
       "days_old": 2,
       "overdue": false,
       "first_seen": "2026-04-13",
-      "last_seen": "2026-04-16",
+      "last_seen": "2026-04-17",
       "completed_date": "",
       "dismissed_date": "",
       "completed_via": null,
@@ -682,7 +686,7 @@
       "days_old": 1,
       "overdue": false,
       "first_seen": "2026-04-14",
-      "last_seen": "2026-04-16",
+      "last_seen": "2026-04-17",
       "completed_date": "",
       "dismissed_date": "",
       "completed_via": null,
@@ -700,7 +704,7 @@
       "days_old": 1,
       "overdue": false,
       "first_seen": "2026-04-14",
-      "last_seen": "2026-04-16",
+      "last_seen": "2026-04-17",
       "completed_date": "",
       "dismissed_date": "",
       "completed_via": null,
@@ -758,8 +762,8 @@
       "context": "Brandon commented 2 days ago asking Richard to add details and close it."
     }
   ],
-  "total_overdue": 10,
+  "total_overdue": 11,
   "total_today": 8,
   "total_signals": 0,
-  "total_emails": 5
+  "total_emails": 1
 }

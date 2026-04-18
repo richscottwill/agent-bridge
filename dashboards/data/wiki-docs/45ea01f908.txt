@@ -1,5 +1,3 @@
-<!-- DOC-0026 | duck_id: callout-de-analysis-2026-w13 -->
-
 # DE W13 Analysis Brief
 
 ## Registration summary

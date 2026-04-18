@@ -1,17 +1,3 @@
-<!-- DOC-0400 | duck_id: testing-au-nb-mro-trades-proposal -->
-
----
-title: AU NB Testing Proposal — MRO/Trades Vertical
-status: DRAFT
-doc-type: strategy
-audience: amazon-internal
-level: 2
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-03-25
-update-trigger: AU sync feedback, keyword volume data pulled, Alexis LP confirmation
----
-
 # AU NB Testing Proposal — MRO/Trades Vertical
 
 ---

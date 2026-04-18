@@ -1,5 +1,3 @@
-<!-- DOC-0029 | duck_id: callout-de-data-brief-2026-w12 -->
-
 # DE W12 Data Brief
 
 ## Headline numbers

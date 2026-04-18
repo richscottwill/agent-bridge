@@ -1,0 +1,90 @@
+# Pending: Four-Bucket doc-type Vocabulary Expansion
+
+**Status: staged, not applied.** Do not execute this change before 2026-05-02. Apply only if the blackboard experiment passes its kill review (see `blackboard-schema.md`).
+
+**Why staged:** Richard asked to pre-commit the decision so it's not re-debated in two weeks. This file carries the proposal, the rationale, and the exact changes. On 5/2, if blackboard passes, apply this file's contents. If blackboard fails, delete this file and the vocabulary stays as-is.
+
+**Anchoring risk:** Before applying on 5/2, the reviewing agent should briefly re-read the four-bucket rationale with fresh eyes, not rubber-stamp. If the reasoning still holds, apply. If new information contradicts it, revise or drop.
+
+## Summary of the change
+
+Expand the `doc-type` frontmatter field vocabulary from 2 values (`strategy`, `reference`) to 4 values. No new field. No parallel `doc_class`. Existing articles get retagged once.
+
+| doc-type | Half-life | Decay trigger | What lives here |
+|---|---|---|---|
+| `tactical` | 3–6 months | Calendar OR platform event | Tests, campaigns, Google tactics, one-off experiments, status-of-initiative docs |
+| `reference` | 9–18 months | Friction event (SOP fails in execution) | SOPs, playbooks, how-to guides, process docs |
+| `strategy` | 12–36 months | Explicit human rewrite | Frameworks, mental models, long-term POVs, Kate-level artifacts |
+| `snapshot` | Never decays | N/A — fixed in time | Meeting readouts, workshop summaries, historical tests, transcripts |
+
+`foundational: true` remains orthogonal. It's a boolean on any bucket that says "agent retrieval always protects this document." Applied today on 6 docs (see blackboard-schema.md).
+
+## Rationale
+
+**Why four buckets not three:** Gemini's original proposal (tactical / operational / foundational) had no home for meeting readouts and historical records. Those are ~20+ articles in the current corpus. Without a `snapshot` bucket they'd false-positive as "stale" in every audit — because they're fixed-date artifacts that aren't supposed to be updated.
+
+**Why not add `doc_class`:** The field `doc-type` already exists in the corpus with 2 values. Adding a parallel `doc_class` field creates schema drift between the two. Expanding the existing vocabulary is free and keeps one classification axis.
+
+**Why not auto-STALE status flipping:** Rejected because silently mutating frontmatter corrupts article integrity and violates the visibility principle. Decay signals belong in `roadmap.md` (workflow state), not in the article (document state).
+
+**Why reject Grok's per-pull `decay_assessment[]` field:** Three reasons. (1) Cost — every research task becomes 3 extra questions × N retrieved docs. (2) Schema incoherence — assessments are per-(document, research instance), not per-article; they don't fit cleanly in the per-article blackboard. (3) Duplication — wiki-critic Mode 2 audit already handles this work at scale. Moving it per-pull makes every retrieval pay the cost.
+
+## Changes to apply on 2026-05-02 (if blackboard passes)
+
+### 1. Update wiki-pipeline-rules.md
+
+Add a new Section 8 after the existing Section 7 (Blackboard):
+
+```markdown
+## 8. doc-type vocabulary (4 buckets)
+
+Every article must declare `doc-type` in frontmatter with one of four values. Researcher picks the bucket; critic validates during review.
+
+- **tactical** — tests, campaigns, platform tactics, status-of-initiative docs. Half-life 3–6 months. Wiki-critic audit flags any tactical doc not updated in 90 days.
+- **reference** — SOPs, playbooks, how-to guides. Half-life 9–18 months. Decays on friction events (someone tried to follow it and it broke). Two contradiction events → rewrite.
+- **strategy** — frameworks, mental models, Kate-level artifacts. Half-life 12–36 months. Decays only on explicit human rewrite. Has optional `review_due` frontmatter field.
+- **snapshot** — meeting readouts, workshop summaries, historical tests, transcripts. Never decays. Wiki-critic audit skips these entirely.
+
+Decay alerts go to `roadmap.md` Queued section. Document state (frontmatter `status`) is not mutated by audit. Foundational docs (`foundational: true`) are skipped by decay audit regardless of bucket.
+```
+
+### 2. Update wiki-critic.md audit mode
+
+Add to Mode 2 (audit) in `shared/.kiro/agents/wiki-team/wiki-critic.md`:
+
+```markdown
+### Bucket-aware decay rules
+
+When auditing an article, read `doc-type` first and apply the corresponding rule:
+- `tactical` — flag if `updated` is older than 90 days. Write to roadmap.md Queued.
+- `reference` — check `demand-log.md` for contradiction events since last `updated` date. Flag if ≥2.
+- `strategy` — check `review_due` frontmatter field (optional). Flag if overdue.
+- `snapshot` — skip. These are fixed-date artifacts.
+- `foundational: true` — skip regardless of bucket.
+```
+
+### 3. Retag the corpus
+
+Run a one-time pass across ~290 articles. Heuristic starting points:
+
+- Files with `meeting-` prefix OR in `meetings/` folder → `snapshot`
+- Files with `-test-`, `-experiment-`, `status`, `q[1-4]-`, dated test results → `tactical`
+- Files with `playbook`, `guide`, `sop`, `how-to` → `reference`
+- Everything else → `strategy` (default — most conservative bucket, longest half-life)
+
+Agent proposes, Richard reviews bucket assignments in batch. 30 min agent + 10 min Richard.
+
+### 4. Update blackboard-schema.md
+
+No schema change required. The blackboard reads `doc-type` from frontmatter — it doesn't duplicate it.
+
+## What NOT to do on 5/2
+
+- Do not add `decay_assessment[]` to blackboard. Use wiki-critic audit mode instead.
+- Do not add `STALE` as a status value. Decay alerts stay in roadmap.md.
+- Do not wire a retrieval discount based on document age. Buckets + `foundational:true` already handle this.
+- Do not add a `confidence` field. Not needed until a workflow reads it.
+
+## Kill condition for the vocabulary itself
+
+If after 60 days of use the bucket distribution is lopsided (>70% of corpus ends up in one bucket), the vocabulary isn't discriminating well. Re-evaluate split. This is a weaker kill condition than blackboard because vocabulary changes are cheap to reverse.

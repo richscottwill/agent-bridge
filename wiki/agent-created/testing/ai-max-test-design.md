@@ -211,3 +211,57 @@ key_entities: ["AI Max", "US", "NB campaigns", "Mike Babich", "Google", "Stacey 
 action_verbs: ["test", "measure", "guard", "scale", "revert", "coordinate"]
 update_triggers: ["Google AI Max feature updates", "Mike Babich answers open questions", "test launch date confirmed", "test results available"]
 -->
+
+
+---
+
+## Google Summit Readout — April 9, 2026
+
+The Google search team sent their reps to Austin for a 153-minute session on April 9. The takeaways directly inform this test design.
+
+### AI Max test methodology
+
+Google outlined three methods for testing AI Max readiness on AB campaigns. The first is a structured A/B with one AI Max campaign running alongside matched-structure standard campaigns, measuring CPA and registration volume over a four-to-six-week window. The second is a phased rollout, starting with ten to twenty percent of spend on AI Max and expanding if performance holds. The third is a portfolio-level shadow, where AI Max runs in reporting-only mode against existing campaigns, producing bid recommendations without executing. The shadow option is lowest risk but slowest to surface actionable results.
+
+For AB's context, method one is the cleanest but requires campaign structure that supports matched-structure comparison. Campaigns that have been consolidated (per the Modern Search workstream) are better candidates than fragmented markets.
+
+### Smart Bidding Exploration results
+
+Smart Bidding Exploration tests, run by Google against their broader advertiser base, showed a nineteen percent lift on average. The caveat is that the lift measurement includes advertisers who were not yet on any automated bidding, so the baseline is generous. For advertisers already on smart bidding, the incremental lift from Exploration is smaller — Google did not commit a specific number but suggested five to ten percent as a working estimate.
+
+AB's non-brand campaigns on OCI markets are already on sophisticated bid strategies. Expect the lower end of the range rather than the nineteen percent headline number.
+
+### Search Partner Network re-enabled
+
+Google confirmed Search Partner Network was re-enabled for AB campaigns. SPN inventory had been restricted for approximately a year due to quality concerns. Google's position is that the quality issues are resolved. Test conservatively — enable on one market, monitor traffic quality via post-click engagement metrics for two weeks, then expand if quality holds.
+
+### YouTube retargeting
+
+Google pitched YouTube retargeting as an engagement channel expansion. Upload a LiveRamp audience of AB customers, run YouTube ads against that audience, measure the downstream effect on AB engagement metrics. Contingent on LiveRamp Enhanced Match delivering sufficient audience size. Not a priority for OP1 2026 but a candidate for OP1 2027.
+
+### AI search visibility reporting gap
+
+AWS confirmed what we already suspected. AI Max sponsored ads may show on AI search result pages (Google AI Overviews, Gemini results), but the platform cannot tell us whether a given impression was on an AI slot or a standard slot. No reporting on AI-slot-specific visibility. This is a known limitation across the industry. Google did not commit a timeline for closing the gap.
+
+Yoav's tool (third-party AI search monitor) tracks AB content visibility in AI results but uses synthetic searches rather than real user traffic. Useful for competitive benchmarking; not a replacement for platform-level attribution.
+
+### What we did not get
+
+Three items we asked about did not resolve. Paid search specific data in Google's MIE-equivalent tool is not yet available for advertisers. Exact-slot AI search attribution is not available. Enhanced audience segmentation beyond the current LiveRamp integration is not in Google's near-term roadmap.
+
+### Next steps from the Summit
+
+1. Confirm AI Max test method selection for OP1 2027 by April 30.
+2. Enable Search Partner Network on US market only, measure for two weeks, then decide on expansion.
+3. Document the AI search visibility reporting gap for the next Zero-Click POV update.
+
+See also: [Austin Offsite Strategic Readouts](../strategy/austin-offsite-strategic-readouts).
+
+
+## Related
+
+- [OCI Program](oci-program) — the methodology template AI Max builds on
+- [Paid Search Testing Approach](testing-approach-kate-v5) — AI Max is Workstream 5
+- [Austin Offsite Strategic Readouts](../strategy/austin-offsite-strategic-readouts) — where the Google Summit readout originated
+- [MIE Marketing Intelligent Engine](../strategy/mie-marketing-intelligent-engine) — Amazon's AI tool for paid search (parallel development)
+- [OP1 2027 Innovation Shortlist](../strategy/op1-2027-innovation-shortlist) — AI Max positioned as 2027 bet

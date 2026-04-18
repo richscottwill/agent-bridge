@@ -1,5 +1,3 @@
-<!-- DOC-0206 | duck_id: meeting-mx-paid-search-sync -->
-
 # MX Paid Search Sync
 
 ## Metadata

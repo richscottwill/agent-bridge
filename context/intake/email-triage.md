@@ -1,44 +1,44 @@
-# Email Triage — Thu Apr 16, 2026
+# Email Triage — 2026-04-17
 
-## High Priority
+## High Priority (respond)
+- **[ABMA-11500] ABMA :Channel Marketing -{Paid Search MX - WBR error}** from Lorena Alvarez Larrea (1d ago) — Lorena commented asking about SPARKLE campaign driving traffic to MCS. Needs clarification on MX WBR error context.
 
-- **Brandon OOO** from Munday, Brandon (0d ago) — Marked as Free, no reminders. [review]
-- **Mentioned you in "Monthly Callouts.loop"** from Munday, Brandon (1d ago) — Brandon mentioned you in Monthly Callouts page. [review]
-- **Mentioned you in "Monthly Callouts.loop"** from Munday, Brandon (1d ago) — Second mention in Monthly Callouts page. [review]
-- **📥 Brandon assigned you a task: DDD walkthrough with team** from Brandon via Asana (1d ago) — New task assignment from Brandon. [respond]
-- **📥 Brandon assigned you a task: Sitelink Audit/Update** from Brandon via Asana (1d ago) — New task assignment from Brandon. [respond]
-
-## Medium Priority
-
-- **[Support Required] Duplicated invoice for MX** from De la Fuente, Diana (1d ago) — Support request needing input. [respond]
-- **D15 AB SEM WW Dashboard_Y26 W15** from no-reply@amazon.awsapps.com (1d ago) — New dashboard version uploaded. [review]
-- **BALOO-8 BalooEarlyAccess refmarker attribution persist** from Aarushi Jamwal (2d ago) — Refmarker attribution update. [review]
+## Medium Priority (review)
+- **[P415868362] PS IT brand page update** from Alex VanDerStuyf (1d ago) — Completed, can be closed. IT brand page rollback for PS Italy done.
+- **[Issues] PS IT brand page update** from Alex VanDerStuyf (1d ago) — PS team requesting rollback of business.amazon.it/it/cp/ps-brand to legacy version.
 
 ## Low / No Action
-
-- Kelly OOO for L7 Training — Rogers, Kelly — OOO notice [review]
-- Amazon Business Comms Recap: March 2026 — Serfes, Kristin — Monthly comms recap [review]
-- ACQ Promo OHs — Chowhan, Saajan — Biweekly OH schedule change [review]
-- 🚀 Launch announcement – Custom Deal Assistant (CDA) Web-UI 🚀 — Moos, Gabriel — Launch FYI [review]
-- Minami in SEA (4/27-5/1) — Matsushima, Minami — Travel notice [none]
-- [MCS-2553] Extend in-context reg start page Paid Search LPs WW — Abhudya Singh — Taskei status update [none]
-- Start your day by getting in the Loop — Microsoft Loop — System notification [none]
-- Thursday - tasks due soon: 7, tasks assigned: 1 — Asana — Daily digest [none]
-- Kiro is here to help you build faster — Amazonian News — Newsletter [none]
-- 👉 You have unread notifications — Asana — System notification [none]
-- [EXTERNAL] IN AB X Mobile App marketing — Williams, Richard — Sent by you [none]
-- Action Required: Confirmation of Services/Products Request — Williams, Richard — Approved [none]
-- Heads up! We noticed that you recently deleted files — SharePoint Online — System alert [none]
-- Reminder: SSR Cost and Reg inputs for IECCP — Williams, Richard — Sent by you [none]
+- [MCS-3004] A/B Testing & Personalization - WW PS Brand Polaris Redesign from Matis Bodaghi — Taskei comment asking Dwayne about restart timing
+- [Support Required] Duplicated invoice for MX from Williams, Richard — Sent: acknowledged to Diana, working with Google
+- Your Upcoming Restricted Stock Unit Vest from stock-plan-notifications — RSU vest scheduled 15-MAY-2026
+- [HOLD] AB Marketing Reftag Bonanza & Working Session from Weber, Kristine — OOO auto-reply
+- [EXTERNAL] Hedy Session Recap: Polaris LP Optimization from Hedy AI — Automated recap
+- [EXTERNAL] Alert: Keyword clicks -50% 7-day rolling from Adobe — Warning alert, worth monitoring
+- [EXTERNAL] New AI Strategy Benchmarking Tool from Jasper — Newsletter
+- [EXTERNAL] Campaign Report OCI Tracking completed from Adobe — Automated notice
+- Brandon OOO from Williams, Richard — Sent item
+- Daily Brief — Thu Apr 16, 2026 from Williams, Richard — Self-sent daily brief
+- Start your day by getting in the Loop from Microsoft Loop — Brandon mentioned you in Monthly Callouts
+- Kelly OOO for L7 Training from Rogers, Kelly — OOO notice
+- Amazon Business Comms Recap: March 2026 from Serfes, Kristin — Monthly comms recap FYI
+- ACQ Promo OHs from Chowhan, Saajan — Daily syncs moved to biweekly OHs
+- Thursday tasks due soon from Asana — Automated task digest
+- Kiro is here to help you build faster from Amazonian News — Newsletter
+- Launch announcement – CDA Web-UI from Moos, Gabriel — FYI launch announcement
+- You have unread notifications from Asana — Automated notification
+- [MCS-2553] Extend in-context reg start page PS LPs WW from Abhudya Singh — Pending Release status update
+- Minami in SEA (4/27-5/1) from Matsushima, Minami — FYI: visiting Seattle for CAT offsite
+- [EXTERNAL] IN AB X Mobile App marketing from Williams, Richard — Sent: invite confirmation
+- Action Required: Confirmation APPLE INC from Williams, Richard — Sent: approved
+- OneDrive deleted files notice from SharePoint Online — System notification
+- Reminder: SSR Cost and Reg inputs for IECCP from Williams, Richard — Sent reminder
 
 ## Today's Calendar
-
-| Time (UTC) | Event | Organizer | Status |
-|---|---|---|---|
-| All day (ends today) | peteocam@ OOTO - Apr 07 - Apr 15 | Ocampo, Peter | Free |
-| 9:30-10:30 AM PT | DDD: Polaris Brand PS Pages | Munday, Brandon | Busy |
-| 10:30-11:00 AM PT | AU Test: Adobe Alignment | Munday, Brandon | Busy |
-| 12:00-2:00 PM PT | Yun @ dr appt | Chu, Yun-Kang | Free |
+- All Day — Yun OOO (Chu, Yun-Kang)
+- 7:00 AM — Dentist cleaning (Williams, Richard)
+- 7:30 AM — Activation WBR (Darwish, Ahmed, Zoom)
+- 9:00 AM — Paid Acq: Deep Dive & Debate - AI Edition! (Munday, Brandon, AUS20 13.205 | Ruby 04.201)
+- 11:00 AM — AppTweak <> Amazon Business (Anthony Asuncion)
 
 ---
-Synced: 2026-04-16T15:22Z | 15 emails processed | 5 high / 3 medium / 7 low (today's scan) | 4 calendar events synced
+Synced: 2026-04-17T~09:30 UTC | 27 emails | 5 calendar events | 1 high / 2 medium / 24 low

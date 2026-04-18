@@ -1,5 +1,3 @@
-<!-- DOC-0442 | duck_id: wiki-meta-context-catalog -->
-
 # Context Catalog — Universal Source Index
 
 > The single lookup file for any agent in the system. Find the right source in under 10 seconds.

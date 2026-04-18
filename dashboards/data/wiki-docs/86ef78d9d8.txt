@@ -1,5 +1,3 @@
-<!-- DOC-0197 | duck_id: meeting-adobe-biweekly -->
-
 # Amazon Business // Adobe Bi-Weekly Call
 
 ## Metadata

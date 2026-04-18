@@ -1,5 +1,3 @@
-<!-- DOC-0471 | duck_id: wiki-review-full-batch-verification -->
-
 # Full Batch Verification — Wiki Staging Docs
 
 **Reviewer:** wiki-critic

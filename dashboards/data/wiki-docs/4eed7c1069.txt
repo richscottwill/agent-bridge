@@ -1,0 +1,158 @@
+# Wiki Lint Audit — 2026-04-17 (W16)
+
+Companion to `health-2026-04-17.md`. Full orphan list, proposed index restructure, and systematic issues.
+
+## Full orphan list (55 articles on disk, not in wiki-index.md)
+
+### Kiro steering packages — 13 files, not wiki articles
+
+These are steering files for the Paid Acq team rollout (different doc type, no frontmatter by design). Should be moved out of `agent-created/` root.
+
+```
+./01-kiro-environment-matrix.md
+./02-kiro-no-external-write-rule.md
+./03-kiro-steering-packages.md
+./04-kiro-sharepoint-protocol.md
+./05-kiro-slack-mcp.md
+./06-kiro-outlook-mcp.md
+./07-kiro-writing-with-kiro.md
+./08-kiro-asana-mcp.md
+./09-kiro-excel-source-of-truth.md
+./10-kiro-team-wiki.md
+./11-kiro-hooks-cookbook.md
+./12-kiro-team-orchestration.md
+./kiro-paid-acq-team-readme.md
+```
+
+**Proposed action:** `mkdir kiro-steering/` and move all 13. Update `wiki-pipeline-rules.md` to document this is a separate doc family.
+
+### True orphans — 42 wiki articles missing from index
+
+Grouped by folder, ordered by likely priority.
+
+**markets/ (2 orphans)**
+- `cpc-benchmark-defense-playbook` — strategy doc, drafted 2026-04-17
+- `polaris-program` — consolidation merge (absorbed polaris-rollout-status + timelines)
+
+**operations/ (10 orphans)**
+- `ai-tool-wbr-callout-workflow` — 2026-04-17 draft
+- `forecast-system` — 2026-04-17 consolidation (merged forecast-model + reconciliation)
+- `kiro-cli-pretooluse-hook-bug` — 2026-04-17, audience=agent
+- `market-expansion-playbook` — 2026-04-17 draft
+- `meeting-ingestion-pipeline` — 2026-04-17, audience=agent
+- `mx-ps-handoff-guide` — marked `status: archived` (should be moved to `archive/`)
+- `negative-keyword-ownership-model` — 2026-04-17 draft
+- `op1-op2-vocabulary-guide` — 2026-04-17 draft
+- `sharepoint-quip-deprecation-migration` — 2026-04-17 draft
+- (note: `budget-forecast-helper-spec` and `campaign-link-generator-spec` ARE in index, keep)
+
+**reporting/ (1 orphan)**
+- `ai-automation-impact` — personal tracking doc (per roadmap.md decision: "KEEP AS ORPHAN")
+
+**research/ (7 orphans — all REVIEW status)**
+- `ad-copy-results`
+- `competitor-intel`
+- `daily-brief-latest`
+- `five-year-outlook-research-brief`
+- `liveramp-program` — consolidation merge
+- `slack-deep-context-ideas`
+- `slack-deep-context-test-prompts`
+
+**strategy/ (10 orphans)**
+- `austin-offsite-strategic-readouts` — 2026-04-17 draft
+- `f90-program` — consolidation merge (absorbed f90-lifecycle-strategy)
+- `five-year-outlook-v2` — renamed from ps-five-year-outlook
+- `grok-swarm` — agent personas, audience=personal
+- `mie-marketing-intelligent-engine` — 2026-04-17 draft
+- `on-site-placement-catalog` — 2026-04-17 draft
+- `op1-2027-innovation-shortlist` — 2026-04-17 draft, audience=leadership
+- `quiet-worker-antipattern` — 2026-04-17, audience=personal
+- `scope-defense-playbook` — 2026-04-17 draft
+- `sid-acquisition-funnel-map` — 2026-04-17 draft
+
+**testing/ (12 orphans)**
+- `2022-10-yahoo-jp-nb-experiment` — historical snapshot
+- `2023-01-jp-nb-experiment-google` — historical snapshot
+- `2023-06-audience-post-mortem` — historical snapshot
+- `2023-08-jp-app-testing-results` — historical snapshot
+- `2024-12-it-bid-modifiers-test` — historical snapshot
+- `baloo-ref-tag-attribution-risk` — 2026-04-17 draft
+- `oci-program` — consolidation merge (absorbed playbook + execution-guide + business-case)
+- `paid-app-attribution-debate` — 2026-04-17, audience=leadership
+- `ps-operations` — reference
+- `ps-team-map` — reference
+- `testing-appendix` — Kate doc companion (per roadmap.md: "KEEP AS ORPHAN")
+- `testing-approach-kate-v5` — renamed from testing-approach-kate (foundational=true)
+- `testing-methodology` — reference
+
+## Proposed index restructure
+
+Rather than line-by-line index updates, propose a full index regeneration based on actual corpus. Breakdown:
+
+| Group | Add to index | Keep as orphan | Move |
+|---|---|---|---|
+| Kiro steering (13) | No | No | Move to `kiro-steering/` subfolder |
+| Consolidation merges (6: polaris-program, forecast-system, f90-program, oci-program, liveramp-program, five-year-outlook-v2) | Yes — replace old slugs | — | — |
+| 2026-04-17 drafts (~18) | Yes — add to appropriate sections | — | — |
+| Historical snapshots (5 testing/ files) | Yes — new "Historical Tests" section | — | — |
+| REVIEW research/ docs (7) | Yes — new "Research Briefs" section | — | — |
+| Personal/agent orphans per roadmap (3: ai-automation-impact, testing-appendix, grok-swarm) | No | Yes | Keep in roadmap "Orphan Decisions" |
+| Reference docs in testing/ that aren't tests (3: ps-operations, ps-team-map, testing-methodology) | Yes — move to operations/ or keep in testing/ reference section | — | Consider move |
+
+**Recommendation:** defer the full index regen to a dedicated maintenance task (est. 45 min agent + 15 min Richard review). Track as P1 action in `roadmap.md`.
+
+## Systematic issues
+
+### 1. doc-type field adoption (51 articles missing)
+
+- 51 of 88 articles (58%) have no `doc-type`.
+- Pending 4-bucket vocabulary expansion (see `_meta/pending-vocabulary-update.md`) requires a full retag pass after 2026-05-02 if the blackboard experiment passes.
+- **Decision-forcing function:** the vocabulary update is contingent on blackboard success, which is itself at 0% adoption. Both are staged but neither is moving.
+
+### 2. Frontmatter quoting inconsistency
+
+Some articles wrap values in double quotes (`status: "DRAFT"`), others don't (`status: DRAFT`). Both parse, but inconsistency is a sign nobody is enforcing a schema linter. Files drafted 2026-04-17 use quoted form; earlier files use unquoted.
+
+**Recommendation:** pick one (unquoted — YAML-idiomatic), add a pre-commit lint. Not urgent — parsers handle both.
+
+### 3. Audience vocabulary drift
+
+Values seen in corpus:
+- `amazon-internal` (majority)
+- `team` (2026-04-17 drafts)
+- `personal`
+- `leadership`
+- `agent` (new — for agent-facing docs like meeting-ingestion-pipeline)
+- `org`
+- `self`
+
+Seven values with overlap. `team` vs `amazon-internal` vs `org` are effectively the same audience. `self` and `personal` are the same.
+
+**Recommendation:** consolidate to 4 values (`team`, `leadership`, `personal`, `agent`). Cheap normalization pass, no blackboard dependency.
+
+### 4. Confidence calibration across all docs (from roadmap P2)
+
+Zero articles use HIGH/MEDIUM/LOW confidence framework from style guide. Still unresolved. Track.
+
+### 5. depends_on / consumed_by field adoption (from roadmap P3)
+
+Only 1-2 of 88 articles have these fields. Still unresolved. The blackboard schema wanted to encode this machine-readably, but blackboards are at 0% coverage. Track.
+
+### 6. Archive discipline
+
+`operations/mx-ps-handoff-guide.md` has `status: archived` but sits in operations/, not archive/. Move to archive/ folder.
+
+## SITEMAP drift check
+
+No `SITEMAP.md` file found in corpus. Skip this check.
+
+## wiki-index consistency check
+
+Index claims 42 articles; summary table claims 42 (13+13+8+2+2+1+3+0=42). Self-consistent. But drifted badly from reality (88 actual).
+
+## Audit metadata
+
+- Run date: 2026-04-17 PT
+- Articles scanned: 88
+- Total scan time: ~2 minutes (find + Python frontmatter parse)
+- Tools used: find, Python (frontmatter regex), DuckDB (`signals.wiki_candidates`, `signals.trending`)

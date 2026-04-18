@@ -1,17 +1,3 @@
-<!-- DOC-0379 | duck_id: strategy-agentic-marketing-landscape -->
-
----
-title: Agentic Marketing — Industry Landscape & Amazon Context
-status: DRAFT
-doc-type: strategy
-audience: personal
-level: 4-5
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-03-25
-update-trigger: major industry announcements, Amazon internal agentic initiatives, new tools
----
-
 # Agentic Marketing — Industry Landscape & Amazon Context
 
 ## The Macro Shift

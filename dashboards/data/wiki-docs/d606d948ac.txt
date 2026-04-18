@@ -1,26 +1,3 @@
-<!-- DOC-0382 | duck_id: strategy-competitive-landscape -->
-
----
-title: "Competitive Landscape: Who's Bidding Against Amazon Business"
-slug: "competitive-landscape"
-type: "reference"
-audience: "org"
-status: "draft"
-created: "2026-03-25"
-updated: "2026-03-25"
-owner: "Richard Williams"
-tags: ["paid-search", "brand", "non-brand", "cpc", "competitive-intel", "ww"]
-depends_on: []
-replaces: "competitive-intel-tracker"
-consumed_by: ["wiki-concierge", "abix-analyst", "najp-analyst", "eu5-analyst", "abix-callout-writer", "najp-callout-writer", "eu5-callout-writer", "callout-reviewer"]
-summary: "Full competitive picture across 10 AB Paid Search markets — who competes, their trajectory, CPC impact, and our response strategy."
-# Artifact metadata
-artifact-status: DRAFT
-artifact-audience: amazon-internal
-artifact-level: 2
-update-trigger: "Monthly after MBR data refresh, or when a new competitor appears with >10% IS in any market"
----
-
 # Competitive Landscape: Who's Bidding Against Amazon Business
 
 This doc gives you the full competitive picture for AB Paid Search across all 10 markets. After reading it, you should be able to answer: who competes with us, how aggressive they are, what it costs us, and what we're doing about it — without asking follow-up questions.
@@ -122,7 +99,7 @@ EU competition is the hardest to manage because it's different in every market. 
 ## Related
 
 - [Eyes — Competitive Landscape](~/shared/context/body/eyes.md) — live competitive data updated each loop run
-- [Competitor Intel Research](~/shared/research/competitor-intel.md) — raw competitive data from WBR callouts
+- [Competitor Intel Research](../research/competitor-intel.md) — raw competitive data from WBR callouts
 - [Brain — D2: Competitive Response](~/shared/context/body/brain.md) — the decision rationale for efficiency over escalation
 - [OCI Rollout Playbook](oci-playbook) — how OCI enables the efficiency-based competitive response
 

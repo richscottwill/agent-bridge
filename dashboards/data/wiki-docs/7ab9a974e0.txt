@@ -1,5 +1,3 @@
-<!-- DOC-0209 | duck_id: meeting-pre-wbr-customer-engagement -->
-
 # Pre-WBR Customer Engagement
 
 ## Metadata

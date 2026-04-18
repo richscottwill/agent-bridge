@@ -1,5 +1,3 @@
-<!-- DOC-0118 | duck_id: context-bridge-morning-integration -->
-
 # Bridge Integration — Morning Routine
 
 ## What Changed

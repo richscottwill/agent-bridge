@@ -1,5 +1,3 @@
-<!-- DOC-0009 | duck_id: callout-au-context -->
-
 # AU Paid Search — Market Context
 
 Last updated: 2026-03-16

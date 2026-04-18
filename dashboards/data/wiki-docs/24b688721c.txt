@@ -1,18 +1,3 @@
-<!-- DOC-0413 | duck_id: testing-workstream-user-experience -->
-
----
-title: "Workstream 4: User Experience"
-status: FINAL
-doc-type: strategy
-audience: amazon-internal
-level: 2
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-04-05
-update-trigger: "Polaris weblab results available, Baloo launch date confirmed, EU5 LP framework results, Aladdin timeline change, Guest auto-expiration weblab results"
-tags: [ux, landing-pages, polaris, baloo, kate-doc]
----
-
 # Workstream 4: User Experience
 
 This document explains how the Paid Search team reduced funnel leakage at the landing page and registration stages, delivering +13.6K annualized incremental registrations in the US and +187% CVR improvement in CA. It provides the evidence base for the 2026 UX portfolio including Project Baloo and Project Aladdin. After reading, you should understand the baseline problem, the validated solutions, and how the 2026 investments compound across the funnel.
@@ -70,3 +55,12 @@ key_entities: ["in-context registration", "Polaris", "Baloo", "Aladdin", "Gated 
 action_verbs: ["optimize", "migrate", "redirect", "test", "scale", "unlock"]
 update_triggers: ["Polaris weblab results available", "Baloo launch date confirmed", "EU5 LP framework results", "Aladdin timeline change", "Guest auto-expiration weblab results"]
 -->
+
+
+## Related
+
+- [Polaris Program](../markets/polaris-program) — WW Brand LP rollout
+- [Project Baloo Overview](project-baloo-overview) — 2026 UX flagship investment
+- [Baloo Ref Tag Attribution Risk](baloo-ref-tag-attribution-risk) — open attribution risk on Baloo
+- [Paid Search Testing Approach](testing-approach-kate-v5) — this workstream in full context
+- [Landing Page Testing Playbook](../operations/landing-page-testing-playbook)

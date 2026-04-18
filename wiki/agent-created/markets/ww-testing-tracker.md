@@ -125,3 +125,22 @@ key_entities: ["OCI", "ad copy", "Polaris", "AI Max", "email overlay", "F90", "B
 action_verbs: ["track", "launch", "monitor", "evaluate", "scale", "unblock"]
 update_triggers: ["test status changes", "new test launched", "test results available", "blocker resolved"]
 -->
+
+
+## Related program references
+
+Each workstream has a canonical program document. Link out from tracker rows to the program docs for deeper context.
+
+- **OCI** — [OCI Program](../testing/oci-program)
+- **Polaris Brand LP** — [Polaris Program](polaris-program)
+- **F90 Lifecycle** — [F90 Program](../strategy/f90-program)
+- **LiveRamp / Enhanced Match** — [LiveRamp Program](../research/liveramp-program)
+- **AI Max** — [AI Max Test Design](../testing/ai-max-test-design)
+- **Project Baloo** — [Project Baloo Overview](../testing/project-baloo-overview) • [Baloo Ref Tag Attribution Risk](../testing/baloo-ref-tag-attribution-risk)
+- **Testing methodology** — [Paid Search Testing Approach](../testing/testing-approach-kate-v5) • [Testing Methodology](../testing/testing-methodology)
+- **OP1 2027 bets** — [OP1 2027 Innovation Shortlist](../strategy/op1-2027-innovation-shortlist)
+- **MIE (Marketing Intelligent Engine)** — [MIE Marketing Intelligent Engine](../strategy/mie-marketing-intelligent-engine)
+- **Sid Acquisition channel map** — [Sid Acquisition Funnel Map](../strategy/sid-acquisition-funnel-map)
+- **Forecast system** — [Forecast System](../operations/forecast-system)
+- **CPC defense** — [CPC Benchmark Defense Playbook](cpc-benchmark-defense-playbook)
+- **Austin offsite readouts** — [Austin Offsite Strategic Readouts](../strategy/austin-offsite-strategic-readouts)

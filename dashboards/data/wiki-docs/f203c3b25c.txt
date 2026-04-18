@@ -1,5 +1,3 @@
-<!-- DOC-0078 | duck_id: callout-mx-data-brief-2026-w13 -->
-
 # MX W13 Data Brief
 
 ## Headline numbers

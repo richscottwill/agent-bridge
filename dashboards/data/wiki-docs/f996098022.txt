@@ -1,5 +1,3 @@
-<!-- DOC-0116 | duck_id: context-asana-sync-protocol -->
-
 # Asana ↔ To-Do Sync Protocol
 
 Last updated: 2026-03-20

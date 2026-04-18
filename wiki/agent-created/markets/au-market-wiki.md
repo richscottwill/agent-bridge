@@ -41,7 +41,7 @@ The headline: AU is tracking to OP2 on registrations and CPA, but the NB efficie
 
 ## Campaign Structure
 
-AU runs two active campaigns. Brand operates on manual CPC with bid caps for competitive defense — this is standard across all markets and will not change with OCI. NB is the primary growth driver, also on manual CPC since OCI is not yet available. A third campaign targeting MRO and Trades verticals has been proposed as a budget-neutral test, reallocating from underperforming generic NB rather than requesting incremental spend. That proposal requires Alexis's landing page confirmation and Lena's input on priority verticals before it can proceed. See the [AU NB Testing Proposal](~/shared/artifacts/testing/2026-03-25-au-nb-mro-trades-proposal.md) for the full design.
+AU runs two active campaigns. Brand operates on manual CPC with bid caps for competitive defense — this is standard across all markets and will not change with OCI. NB is the primary growth driver, also on manual CPC since OCI is not yet available. A third campaign targeting MRO and Trades verticals has been proposed as a budget-neutral test, reallocating from underperforming generic NB rather than requesting incremental spend. That proposal requires Alexis's landing page confirmation and Lena's input on priority verticals before it can proceed. See the [AU NB Testing Proposal](../testing/au-nb-mro-trades-proposal.md) for the full design.
 
 ## Active Initiatives
 
@@ -88,3 +88,13 @@ key_entities: ["AU", "Lena Zak", "Alexis Eck", "Brandon Munday", "Polaris", "OCI
 action_verbs: ["optimize", "migrate", "investigate", "propose", "report", "restructure"]
 update_triggers: ["AU performance shifts >10%", "OCI AU launch or timeline change", "Lena/Alexis direction changes", "CCP data arrival", "quarterly planning"]
 -->
+
+
+## Related
+
+- [OCI Program](../testing/oci-program) — AU OCI target May 2026
+- [Polaris Program](polaris-program) — AU Polaris full migration complete
+- [CPC Benchmark Defense Playbook](cpc-benchmark-defense-playbook) — framework for the Lena CPC response
+- [AU NB MRO Trades Proposal](../testing/au-nb-mro-trades-proposal) — proposed AU category test
+- [AU Keyword CPA Dashboard](../reporting/au-keyword-cpa-dashboard) — weekly review tooling
+- [Paid Search Testing Approach](../testing/testing-approach-kate-v5) — testing methodology

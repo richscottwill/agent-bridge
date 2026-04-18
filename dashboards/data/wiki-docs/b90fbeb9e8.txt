@@ -1,0 +1,52 @@
+# F90 Rollout State
+
+F90 — First 90 Days — is paid search's first true activation play. It targets recently-acquired non-SHuMA customers to drive three-plus purchases and high-value action adoption. It fundamentally changes the PS team operating model from pure acquisition to acquisition plus activation. This document captures the current rollout state for internal reference.
+
+## Why F90 matters
+
+The stated goal is lifting the non-SHuMA 3+ purchase rate from 31.7 percent to 35.4 percent, a 366 basis point improvement year over year. If F90 ships, paid search begins funding activation alongside acquisition. This has organizational implications: budget attribution shifts, WBR reporting gets a new line item, and the team's narrative with Kate changes from "we acquire" to "we acquire and we activate."
+
+The Engagement account, already live for existing AB customers, proved the pattern. Engagement delivered $765K in iOPS in 2025 through LiveRamp-suppressed campaigns, Engagement ad formats, and Associated Accounts expansion. F90 extends this to recently-acquired non-purchasers, the customers most at risk of churning before their first meaningful purchase.
+
+## Current state
+
+**Audience built.** The F90 audience definition is locked. Recently-acquired customers who have not completed three purchases within the first ninety days since registration.
+
+**NTA tickets updated.** Richard updated the tickets to include the new audience. Media approval is the next gate.
+
+**Media approval pending.** From Joel and Robert's feedback captured in the OP1 workshop, the approval is moving slowly. TPS submissions and technical approvals are the bottleneck. There is no confirmed approval date.
+
+**LiveRamp Enhanced Match blocking.** The current match rate is twenty percent (twelve percent baseline plus associate-email expansion). Enhanced Match projects a doubling to roughly forty percent. Without Enhanced Match, the F90 audience Google can actually recognize is small enough that campaign delivery will be constrained.
+
+## Dependencies
+
+LiveRamp Enhanced Match provisioning is the primary dependency. Richard owns the LiveRamp relationship with Hannah Neustadt. The provisioning process requires legal review and technical integration on LiveRamp's side. Timeline is described as "probably slow" by Brandon, with no commitment date.
+
+A secondary dependency is vertical-based audience segmentation. Adding an industry classification to the LiveRamp registrant feed would allow F90 to segment activation campaigns by customer vertical, which could materially improve creative relevance and conversion. This is scoped as an OP1 2027 addition rather than a F90 launch blocker.
+
+## Budget
+
+The $255K LiveRamp fee stays in the PS ENG budget of $1.85M total for 2026. Brandon confirmed April 15 that the fee will only be drawn once Enhanced Match is live. Yun confirmed no budget transfer or release. The fee line is reserved regardless of timeline.
+
+## Risks
+
+The three primary risks are legal approval delay on new audience types, LiveRamp technical integration slipping into H2 2026, and Enhanced Match underdelivering the projected forty percent match rate. Any one of these pushes F90 into 2027 launch territory.
+
+## Next Steps
+
+1. Confirm Enhanced Match provisioning timeline with Hannah Neustadt by April 24.
+2. Track NTA media approval status weekly; escalate if no update by April 30.
+3. Scope vertical segmentation addition for OP1 2027 if F90 core launch holds through Q2.
+
+## Related
+
+- [F90 Lifecycle Strategy](f90-lifecycle-strategy)
+- [Enhanced Match LiveRamp Explainer](enhanced-match-liveramp-explainer)
+- [OP1 2027 Innovation Shortlist](op1-2027-innovation-shortlist)
+
+<!-- AGENT_CONTEXT
+machine_summary: "F90 activation channel current state. Audience built, NTA tickets updated. Blocked by media approval and LiveRamp Enhanced Match provisioning. Goal: 31.7%->35.4% non-SHuMA 3+ purchase rate. LiveRamp $255K fee reserved in PS ENG $1.85M budget."
+key_entities: ["F90", "LiveRamp Enhanced Match", "Hannah Neustadt", "NTA approval", "non-SHuMA", "Engagement account"]
+action_verbs: ["activate", "match", "approve", "provision"]
+update_triggers: ["Enhanced Match approved", "NTA media approval received", "F90 launches"]
+-->

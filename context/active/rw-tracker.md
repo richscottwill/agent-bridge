@@ -88,3 +88,23 @@ See brain.md → Level Graduation Criteria. Weekly artifact. Monthly tool. Quart
 - **Portfolio:** 11 completions across My Tasks, AU, MX. Productive day before offsite.
 - **Meetings ingested:** 3 from Austin offsite Apr 8 (OP1 brainstorm 96min, Adobe bi-weekly 1060min, LP Testing 33min)
 - **Calendar today:** Google Search Summit + AB x Google lunch + dinner (Austin, TX)
+
+
+### Week of 2026-04-13 (W16) — Friday EOD
+| Category | Target | Actual | Notes |
+|----------|--------|--------|-------|
+| Strategic artifacts shipped | 1 | 0 | Testing Approach v5 still at zero. **20 workdays at zero L1.** |
+| Tools/automations built/adopted | 0 | 1 | AI tool demo — L3 adoption signal (Adi committed to 4/25, Andrew to 4/28). This counts if teammate actually adopts it in-market. |
+| Hours on low-leverage work | <5 | ~4 | WBR data prep + weekly AU/MX/PAM changes |
+| Meetings with clear output | 100% | 100% | AI Tool Demo had explicit action items + commitments (only team meeting this week) |
+
+### Friday 4/17 EOD — Asana Reconciliation
+- **Completed today (My Tasks): 0** — no genuine work completions
+- **ABPS AI Content bulk closes: 44** — project deprecation, not work (per soul.md 2026-04-17 rule; wiki articles + SharePoint Artifacts/ are now sole source of truth)
+- **Carried forward: 5 Today tasks** demoted to Urgent (DDD walkthrough, Sitelink Audit, Lorena sync, AU LP switch, Year-One one-pager)
+- **New tasks since morning: 0** (Hedy todos from AI Tool Demo are carry-overs on existing WhatsApp threads)
+- **Net delta: -5**
+- **Five Levels today:** L1: 0, L2: 0, L3: 1 (AI Tool Demo session), L4: 0, L5: 0
+- **Blockers:** MX Auto page (Vijeth, 29d), Kingpin Goals MX (Andes, 32d). Both unchanged.
+- **Wiki pipeline:** 24 new DRAFTs + 7 consolidation merges. 0 DRAFT→FINAL promotions — critic-review is bottleneck.
+- **Adi DM:** asked for Kiro setup walkthrough in next 1:1. Concrete L3 adoption signal — worth protecting.

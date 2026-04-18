@@ -1,17 +1,3 @@
-<!-- DOC-0380 | duck_id: strategy-agentic-ps-vision -->
-
----
-title: Agentic Paid Search — Vision & Roadmap
-status: DRAFT
-doc-type: strategy
-audience: amazon-internal
-level: 5
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-03-25
-update-trigger: new agentic capability built, Level 5 progress, industry shifts
----
-
 # Agentic Paid Search — Vision & Roadmap
 
 ## The Thesis
@@ -68,7 +54,7 @@ Agents run experiments on their own processes, optimize without human interventi
 
 ## What Makes This Novel
 
-For industry context and competitive positioning, see [Agentic Marketing Landscape](~/shared/artifacts/strategy/2026-03-25-agentic-marketing-landscape.md).
+For industry context and competitive positioning, see [Agentic Marketing Landscape](agentic-marketing-landscape.md).
 
 ## Why This Matters for AB
 

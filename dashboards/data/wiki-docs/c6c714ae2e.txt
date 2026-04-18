@@ -1,0 +1,96 @@
+# OP1 OP2 Vocabulary Guide
+
+This guide decodes the acronym stack paid search teams use every week. It is written for new hires, expansion market partners who do not share the Amazon marketing vocabulary, and any cross-functional partner who opens a WBR callout and immediately asks "what is a CCP." Keep it short, keep it accurate, keep it linked.
+
+## Planning and reporting
+
+**OP1.** Operating Plan 1, Amazon's first-pass annual plan. Submitted mid-year for the following year. Generally aspirational, used to signal strategic intent. OP1 2027 is in planning now.
+
+**OP2.** Operating Plan 2, the final approved plan with committed budgets. Generally conservative relative to OP1. OP2 is the number we measure against in weekly and monthly reporting.
+
+**MBR.** Monthly Business Review. Leadership-level review, typically L8 and up.
+
+**QBR.** Quarterly Business Review. Broader attendance, typically includes cross-functional partners.
+
+**WBR.** Weekly Business Review. The weekly reporting cadence where callouts are produced.
+
+**R&O.** Revenue and Outlook process. Monthly budget reconciliation and forward projection. Inputs due on defined cadence.
+
+**Flash.** Paid Acquisition team's weekly summary document, submitted by EOD on the designated day. Captures highlights, lowlights, announcements, and status updates.
+
+## Registration taxonomy
+
+**SSR.** Small and Medium Business registrations. The primary acquisition target for paid search in most markets.
+
+**SHuMA.** A registration classification used in activation and lifecycle analysis.
+
+**F90.** First 90 Days. The activation window during which recently-acquired customers are targeted to complete three or more purchases.
+
+**HVA.** High-Value Action. A customer behavior that correlates with long-term account value, such as adding users to the business account or enabling specific features.
+
+## Paid search specifics
+
+**CCP.** Cost per Conversion Point. A calculated value used for bidding. The "3-month refresh cadence" applies to CCP to keep the model current.
+
+**IECCP.** An enhanced CCP model. When a market launches, IECCP is typically not yet available — markets use standard CCP for roughly the first year.
+
+**OCI.** Omnichannel Conversion Intelligence. Amazon-specific bidding signal passed to Google. Drives meaningful CPC improvement post-launch. Primary 2025-2026 infrastructure initiative.
+
+**NB.** Non-brand campaigns. Keywords that do not contain "Amazon" or "Amazon Business."
+
+**Brand.** Campaigns targeting branded queries.
+
+**CPA.** Cost per Acquisition. Registration CPA for paid search.
+
+**CPC.** Cost per Click.
+
+**Ref tag.** URL parameter identifying the source campaign and placement. Example: `ref_=pd_sl_something`. Preserved through the registration flow to enable attribution.
+
+## Tools and systems
+
+**GENBI.** Generative business intelligence tool for querying Amazon data in natural language.
+
+**ABMA.** The team that owns paid search attribution modeling and the WBR logic.
+
+**Adobe.** Current bidding and measurement platform for paid search. Being evaluated against MIE for 2027.
+
+**MIE.** Marketing Intelligent Engine. See [MIE reference doc](mie-marketing-intelligent-engine).
+
+**MCC.** Multi-Client Center in Google Ads. Markets are organized under MCC hierarchies.
+
+**LiveRamp.** Identity resolution platform. Powers AB customer audiences for engagement campaigns. See [LiveRamp Program](../research/liveramp-program).
+
+## Organization and projects
+
+**Polaris.** The replacement brand landing page template. Rolling out market by market.
+
+**Baloo.** New subdomain `shop.business.amazon.com` enabling ungated AB product browsing. Primary launch channel: paid search.
+
+**PADESARJAD.** Legacy brand page template. Deprecated as of April 16.
+
+**MCS.** Marketing Content Service. Owns MCS landing pages.
+
+**BP.** Business Prime.
+
+**CPS.** Consumer Payments Services or similar; contextually clear.
+
+**PAM.** Paid Acquisition Marketing. The team Richard sits on, reporting to Brandon.
+
+## Next Steps
+
+1. Expand glossary as new terms emerge.
+2. Link to this guide from onboarding docs for new paid search team members.
+3. Update whenever OCI or MIE changes the surrounding terminology.
+
+## Related
+
+- [Kiro Paid Acq Team Readme](kiro-paid-acq-team-readme)
+- [MIE Marketing Intelligent Engine](mie-marketing-intelligent-engine)
+- [LiveRamp Program](../research/liveramp-program)
+
+<!-- AGENT_CONTEXT
+machine_summary: "Plain-English glossary for paid search vocabulary. Covers planning (OP1/OP2/MBR/QBR/WBR/R&O/Flash), registration taxonomy (SSR/SHuMA/F90/HVA), paid search mechanics (CCP/IECCP/OCI/NB/Brand/CPA/CPC/Ref tag), tools (GENBI/ABMA/Adobe/MIE/MCC/LiveRamp), and projects (Polaris/Baloo)."
+key_entities: ["OP1", "OP2", "IECCP", "OCI", "Polaris", "Baloo", "LiveRamp"]
+action_verbs: ["decode", "define", "reference", "onboard"]
+update_triggers: ["new acronym in team usage", "program rename", "vocabulary shift"]
+-->

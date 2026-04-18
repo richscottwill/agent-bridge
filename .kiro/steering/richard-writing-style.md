@@ -1,5 +1,6 @@
 ---
 inclusion: auto
+foundational: true
 ---
 # Richard Williams — Core Voice
 

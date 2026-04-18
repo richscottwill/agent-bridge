@@ -1,5 +1,3 @@
-<!-- DOC-0001 | duck_id: audit-2026-03-27 -->
-
 # Paid Search Daily Audit — 2026-03-27
 
 ## Summary

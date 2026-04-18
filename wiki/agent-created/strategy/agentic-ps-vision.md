@@ -76,7 +76,7 @@ Agents run experiments on their own processes, optimize without human interventi
 
 ## What Makes This Novel
 
-For industry context and competitive positioning, see [Agentic Marketing Landscape](~/shared/artifacts/strategy/2026-03-25-agentic-marketing-landscape.md).
+For industry context and competitive positioning, see [Agentic Marketing Landscape](agentic-marketing-landscape.md).
 
 ## Why This Matters for AB
 

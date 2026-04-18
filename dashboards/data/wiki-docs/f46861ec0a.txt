@@ -1,0 +1,56 @@
+# LiveRamp Identity Resolution Primer
+
+This primer explains the mechanics of LiveRamp identity resolution for anyone who needs to understand the system rather than just use it. It is written for the paid search team and cross-functional partners who encounter LiveRamp in audience discussions, Enhanced Match conversations, or legal review.
+
+## The core abstraction: RampID
+
+LiveRamp's atomic unit is the RampID, a persistent identifier that resolves to a single real-world individual across their various identities (email addresses, phone numbers, device IDs, cookie hashes). LiveRamp's value is not any single matching technique — it is the cumulative graph of identity linkages built over time across their data partners.
+
+When we send LiveRamp a hashed customer email, LiveRamp looks up whether that hash resolves to a known RampID in their graph. If yes, the RampID is returned. Downstream platforms like Google Ads receive the RampID (or a platform-specific derivation) and can match it against their own known identities.
+
+The hash-then-resolve flow means we never expose raw customer identities to LiveRamp or Google. Both parties work with hashed or tokenized values.
+
+## Match rate math
+
+Match rate is the percentage of customer identities LiveRamp can resolve to a RampID that the downstream platform recognizes. It is a two-sided problem. LiveRamp might recognize an identity (step one) but Google might not have a matching RampID link in its own graph (step two). The reported match rate is the intersection of both.
+
+For Amazon Business, the current twenty percent match rate means that for every one hundred customer emails we send, LiveRamp and Google jointly recognize twenty. The other eighty are either unknown to LiveRamp, known to LiveRamp but not linked to Google in their graph, or filtered out by regional data policies.
+
+## Associated account logic
+
+Many B2B users register with a work email but have a personal account on Amazon consumer with a different email. Associated account logic identifies these linked identities and sends both to LiveRamp. This is how we moved match rate from twelve percent to twenty percent — not by finding more customers, but by giving LiveRamp more identity signals per customer.
+
+Enhanced Match extends this by incorporating additional signal types from LiveRamp's expanded graph. Phone numbers, device IDs, and additional email variants enter the matching pool. The projected doubling to forty percent reflects LiveRamp's internal benchmarks for advertisers who have completed Enhanced Match setup.
+
+## EU DMA impact
+
+European Union Digital Markets Act restrictions materially reduce match rate for EU markets. DMA limits the data signals that can pass between large platforms. For AB, this shows up in UK and DE OCI performance — UK OCI delivers a twenty-three percent registration lift versus US at twenty-four percent, partly because UK has less signal density post-DMA. DE sits at eighteen percent for similar reasons plus higher CPC environment.
+
+EU expansion markets should plan for longer stabilization windows due to DMA constraints. The phased implementation approach captured in the OP1 Testing Framework accounts for this.
+
+## Amazon Ads integration
+
+Amazon Ads has its own identity resolution system that overlaps with LiveRamp's in some ways. For AB paid search on Google, LiveRamp is the primary identity layer. For AB on Amazon-owned surfaces (on-site, email, push), Amazon's internal identity system handles resolution natively. The paid search team does not need to worry about Amazon Ads identity for Google campaigns, but should understand that when Amazon Ads teams discuss "audiences," they typically mean something different from LiveRamp audiences.
+
+## Compliance
+
+LiveRamp operations must comply with regional data regulations. EU DMA is the most restrictive, followed by California CCPA. Legal review is required before any new audience type is activated. Hannah Neustadt coordinates the legal review process on LiveRamp's side.
+
+## Next Steps
+
+1. Share this primer with Hannah Neustadt before the next Enhanced Match conversation to confirm accuracy.
+2. Update when DMA regulations or LiveRamp graph coverage materially changes.
+3. Link from Enhanced Match test design doc for team members who need the mechanics context.
+
+## Related
+
+- [Enhanced Match LiveRamp Explainer](enhanced-match-liveramp-explainer)
+- [Enhanced Match LiveRamp Test Design](enhanced-match-liveramp)
+- [F90 Rollout State](f90-rollout-state)
+
+<!-- AGENT_CONTEXT
+machine_summary: "LiveRamp identity resolution mechanics. RampID is the atomic unit. Hash-then-resolve flow preserves privacy. Match rate is two-sided (LiveRamp recognition + downstream platform link). Associated account logic raised AB match from 12% to 20%. EU DMA reduces match rate in UK/DE."
+key_entities: ["LiveRamp", "RampID", "Hannah Neustadt", "Associated Accounts", "EU DMA", "Amazon Ads"]
+action_verbs: ["resolve", "match", "link", "hash"]
+update_triggers: ["regulation change", "LiveRamp graph update", "Enhanced Match provisioned"]
+-->

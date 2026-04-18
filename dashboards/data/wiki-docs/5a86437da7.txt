@@ -1,5 +1,3 @@
-<!-- DOC-0487 | duck_id: wiki-review-oci-playbook-rewrite-eval-b -->
-
 # Blind Eval B: OCI Rollout Playbook Rewrite
 
 **Evaluator**: Subjective reader simulation — Brandon Munday (L7) and Kate Rundell (L8)

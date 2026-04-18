@@ -174,3 +174,48 @@
 - **↔ spine.md:** No conflicts. Spine doesn't need to reference this file directly — it's loaded on-demand per body.md's "when to read" guidance, not during bootstrap.
 
 **Action items:** None. Clean creation — body.md already updated, no follow-up edits needed in other organs.
+
+## 2026-04-17 — hands.md
+
+**Summary:** Top 5 This Week snapshot refreshed from EOD 4/6 → EOD 4/16. Priority queue overhauled:
+- P0: Testing Approach doc (send v5 to Brandon, 19 workdays at zero), ABIX Handoff Doc (Brandon presenting to Kate this week), Loop Callout Clarifications (due Fri 4/17 1pm PT)
+- P1: R&O Input MX/AU (Yun reminded 4/15), WW Sitelink Audit (Brandon assigned 4/15)
+- Previous P1s removed: Refmarker mapping audit, Respond to Lena, Share ENG budget file, Provide Lorena Q2 spend
+- Overdue count: 17+ → 22+. Oldest overdue: PAM US PO now 45d (was 37d). Blocked items: Vijeth 28d (was 18d), Andes 31d (was 21d).
+
+**Cross-organ inconsistencies flagged:**
+1. **amcc.md stale (last updated 4/5):** Streak shows 1 day from 4/5 completion. If Testing Approach v5 still hasn't been sent to Brandon 12 days later, streak should likely be 0. amcc.md needs reconciliation.
+2. **Blocker Registry header** still says "EOD 4/6" — should be updated to match the 4/16 snapshot refresh.
+3. **current.md aligned** — pending actions match new hands.md priorities.
+
+**Gated file:** No — hands.md is not gated.
+
+## 2026-04-17 — eyes.md
+
+**Section:** "Data Pipeline" and "What's Coming" headings (lines ~117–133)
+**Change:** Cosmetic heading restructure only. Former top-level `## Data Pipeline` and `## What's Coming` sections nested under a new parent heading `## Pipeline & Outlook`, becoming `### Data Pipeline` and `### What's Coming`. No content added, removed, or modified — purely organizational.
+
+**Karpathy gate:** N/A — eyes.md is not gated (only heart.md and gut.md are gated).
+
+**Cross-organ consistency:** ✅ No conflicts detected.
+- No other organ files reference these specific heading names or anchor links.
+- Content unchanged — all pipeline paths, tool references, and initiative statuses remain identical.
+- body.md eyes.md entry unaffected (references the file, not internal headings).
+
+**Action items:** None. Clean structural edit — no follow-up needed.
+
+## 2026-04-17 — device.md
+
+**Section:** Tool Inventory (lines ~139–155)
+**Change:** Reorganized tool inventory table into two subsections: "Built & Shipped" (tools 1, 1a, 1b — Dashboard ingester, PS Analytics DB, Context catalog) and "Backlog & Candidates" (tools 0, 2, 3, 4+ — Paid Search Audit, Campaign link generator, Staleness detector, gcm). No tools added or removed. No status changes. Pure structural reorganization — the single flat table is now split by completion state for clarity.
+
+**Karpathy gate:** N/A — device.md is not gated (only heart.md and gut.md are gated).
+
+**Cross-organ consistency:** ✅ No conflicts detected.
+- No other organ files reference the device.md tool inventory table by heading name or tool numbering.
+- Tool statuses unchanged — no downstream inconsistencies introduced.
+- Aligns with principle #2 (structural over cosmetic) — this makes the built/backlog distinction scannable without changing any data.
+
+**Action items:** None. Clean organizational edit — no follow-up needed.
+
+[2026-04-17] hands.md — Sources line updated from "ABPS AI Content" to "ABPS AI Build". Aligns with soul.md deprecation note (2026-04-17: ABPS AI Content project deprecated). No cross-organ conflicts — no other body organ references the deprecated name. Edit not to heart.md/gut.md, no karpathy gating required.

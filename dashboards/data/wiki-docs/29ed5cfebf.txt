@@ -1,5 +1,3 @@
-<!-- DOC-0114 | duck_id: context-README -->
-
 # Archive
 
 Files moved here are no longer actively maintained but kept for reference.

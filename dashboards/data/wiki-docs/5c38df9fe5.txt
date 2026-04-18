@@ -1,0 +1,156 @@
+# F90 Program
+
+F90 — First 90 Days — is paid search's first activation play. It targets recently-acquired non-SHuMA customers at 30, 60, and 90 days post-registration to drive three-plus purchases and high-value action adoption. If F90 ships, paid search stops being a pure top-of-funnel channel and starts being measured on post-registration customer behavior. This document is the canonical F90 reference — strategy, mechanics, current state, dependencies, and launch plan.
+
+## Executive summary
+
+F90 extends Amazon Business Paid Search beyond registration into post-registration purchasing behavior. The program targets non-SHuMA customers — those who registered through paid search but have not yet made three or more purchases within 90 days of signup. The goal is to move the 3+ purchase rate from 31.7% to 35.4%, a 366 basis point improvement that fundamentally changes the PS team's value proposition from "we drive registrations" to "we drive registrations AND purchases."
+
+This is Decision D10 in Richard's brain decision log. It builds on the Engagement channel infrastructure (D6) and positions PS as a full-funnel channel — the first time the team has owned anything beyond the registration event.
+
+## The problem
+
+Paid search has historically been measured on one metric: registrations. A customer clicks an ad, lands on a page, and signs up. That's where PS's accountability ends. But a registration without purchasing behavior is a hollow metric — it inflates the funnel without generating OPS (Ordered Product Sales).
+
+The data tells a specific story. Of customers acquired through paid search, 31.7% make three or more purchases within their first 90 days. The remaining 68.3% either make fewer than three purchases or none at all. These non-purchasing registrants represent a significant gap between acquisition cost and realized customer value — and that gap is what ie%CCP measures at the program level.
+
+F90 exists to close that gap. By re-engaging non-purchasers at structured intervals, the program aims to convert passive registrants into active buyers. The 35.4% target represents the minimum improvement needed to materially shift the program's unit economics.
+
+## How F90 works
+
+### Stage 1: Registration event
+
+A customer registers via paid search. The registration event is captured in Google Ads (via OCI where available) and in Amazon's internal systems. This is the existing workflow — F90 doesn't change anything about acquisition.
+
+### Stage 2: Identification
+
+At day 30, 60, and 90 post-registration, F90 identifies customers who have not yet reached the 3+ purchase threshold. This identification depends on the ABMA match rate — the ability to connect a Google Ads click to an Amazon customer record.
+
+The match rate is the critical dependency. At 13% (original baseline), F90 could only identify and target a small fraction of non-purchasers. At 20% (current state post-Associated Accounts), the addressable audience nearly doubled. At 40% (projected via Enhanced Match), it nearly doubles again. The match rate improvement is the single biggest lever for F90's effectiveness. See [LiveRamp Program](liveramp-program) for the full match rate progression.
+
+### Stage 3: Re-engagement
+
+Identified non-purchasers receive targeted re-engagement through two channels.
+
+**Paid Search (RLSA).** Remarketing Lists for Search Ads allow the team to bid differently when a known non-purchaser searches for business-related terms. The bid adjustment reflects the higher value of converting an existing registrant versus acquiring a new one.
+
+**Email.** Direct email outreach with product recommendations, category highlights, and purchase incentives. This channel requires Legal SIM approval (obtained) and depends on the match rate for audience size.
+
+The dual-channel approach is deliberate. RLSA captures intent (the customer is actively searching). Email creates intent (the customer receives a prompt). Together they cover both pull and push engagement.
+
+### Stage 4: Measurement
+
+Each cohort is tracked on three metrics.
+
+| Metric | Definition | Baseline | Target |
+|--------|-----------|----------|--------|
+| 3+ purchase rate | % of cohort making 3+ purchases within 90 days | 31.7% | 35.4% |
+| Time to first purchase | Median days from registration to first order | TBD | TBD |
+| Incremental OPS | OPS attributable to F90 re-engagement vs. organic purchasing | $0 | TBD |
+
+The 3+ purchase rate is the primary metric because it's the threshold where customer LTV justifies acquisition cost. One or two purchases may not cover the CPA; three or more almost certainly does.
+
+## Current launch state
+
+**Audience built.** F90 audience definition locked. Recently-acquired customers who have not completed three purchases within the first ninety days since registration.
+
+**NTA tickets updated.** Richard updated the tickets to include the new audience. Media approval is the next gate.
+
+**Media approval pending.** From Joel and Robert's feedback captured in the OP1 workshop, approval is moving slowly. TPS submissions and technical approvals are the bottleneck. No confirmed approval date.
+
+**LiveRamp Enhanced Match blocking.** The current match rate is 20%. Without Enhanced Match doubling that to 40%, the F90 audience Google can actually recognize stays small enough that campaign delivery will be constrained. Enhanced Match is the primary dependency — see [LiveRamp Program](liveramp-program) for provisioning detail.
+
+**Budget reserved.** The $255K LiveRamp fee stays in PS ENG budget of $1.85M total for 2026. Brandon confirmed April 15 that the fee only draws once Enhanced Match is live. Yun confirmed no budget transfer or release — reserved regardless of timeline.
+
+## Dependencies
+
+### Legal (approved)
+
+Legal SIMs for targeting existing customers with re-engagement messaging have been navigated and approved. This was the earliest blocker — without Legal clearance, the program couldn't exist. Cleared Q4 2025.
+
+### Engagement channel (built)
+
+The Engagement campaign type exists in Google Ads across relevant markets. This is the RLSA infrastructure — campaigns configured for remarketing audiences with separate bidding strategies. Built as part of Decision D6 (Engagement Channel Creation). Engagement delivered $765K in iOPS in 2025, proving the channel model before F90 extends it.
+
+### ABMA match rate (primary blocker)
+
+The Associated Accounts partnership with ABMA is the critical path item. Current match rate: 20%. Target for F90 viability: 25-30%. The improvement comes from ABMA's ability to connect Google click IDs to Amazon customer records through associated account data. See [LiveRamp Program](liveramp-program) for match rate progression.
+
+At 20%, the addressable audience is small but workable for initial testing. At 40% via Enhanced Match, the program becomes viable for full US launch. The match rate improvement is not a technical problem — it's a data partnership that requires ABMA to expand their matching methodology.
+
+### F90 targeting (pending match rate)
+
+The actual targeting logic — identifying non-purchasers at 30/60/90 days and building RLSA audiences — cannot fully land until the match rate reaches a viable threshold. Hard dependency, not soft.
+
+### Data Science partnership (in progress)
+
+Data Science is providing customer segmentation for targeting. The segmentation model will identify which non-purchasers are most likely to convert with re-engagement (high-propensity) versus those who registered with no purchase intent (low-propensity). Targeting high-propensity non-purchasers first maximizes the program's early results.
+
+### Vertical segmentation (OP1 2027 addition)
+
+Adding an industry classification to the LiveRamp registrant feed would allow F90 to segment activation campaigns by customer vertical, which could materially improve creative relevance and conversion. Scoped as an OP1 2027 addition rather than a F90 launch blocker.
+
+## Cross-functional partners
+
+| Team | Role | Contact | Status |
+|------|------|---------|--------|
+| ABMA | Associated Accounts, match rate improvement | — | Active partnership, match rate improvement in progress |
+| Legal | SIM approval for targeting existing customers | — | Approved |
+| Data Science | Customer segmentation, LTV modeling, propensity scoring | — | Active, segmentation model in development |
+| MCS | Lifecycle page destinations (where redirected customers land) | Dwayne Palmer | Pending — define engagement landing pages |
+| Adobe | Audience segment creation, Ad Cloud reporting | Suzane Huynh | Pending — depends on match rate milestone |
+| LiveRamp | Enhanced Match provisioning | Hannah Neustadt | Richard-owned, timeline TBD |
+
+## Launch plan
+
+| Phase | Scope | Timeline | Gate |
+|-------|-------|----------|------|
+| Phase 1 | US only, high-propensity non-purchasers | Q2 2026 (pending match rate) | Match rate ≥ 25% |
+| Phase 2 | US expanded to all non-purchasers | Q3 2026 | Phase 1 shows ≥ 2pp improvement in 3+ purchase rate |
+| Phase 3 | UK, DE (OCI markets with match rate support) | Q4 2026 | Phase 2 validated |
+
+US first because it has the largest volume, the most mature OCI infrastructure, and the strongest ABMA partnership. UK and DE follow because they're the next-largest OCI markets. Markets without OCI (AU, MX) are excluded from initial rollout — F90 depends on conversion signal infrastructure those markets don't have yet.
+
+## Risks
+
+| Risk | Likelihood | Impact | Mitigation |
+|------|-----------|--------|------------|
+| Match rate stays below 25% | MEDIUM | HIGH — program can't launch | Escalate through Brandon to ABMA leadership. Explore alternative matching methods. |
+| Non-purchasers don't respond to re-engagement | LOW | MEDIUM — program underperforms | Data Science propensity model filters for high-likelihood converters. Start with best audience. |
+| Email channel cannibalization | LOW | LOW — measurement isolates channels | Run RLSA and email as separate test cells initially to measure incremental lift per channel. |
+| Legal SIM scope changes | LOW | HIGH — program paused | SIMs already approved. Monitor for policy changes. |
+| LiveRamp technical integration slips into H2 2026 | MEDIUM | HIGH — F90 pushes to 2027 | Track Hannah Neustadt provisioning progress weekly. |
+| Enhanced Match under-delivers 40% projection | MEDIUM | MEDIUM — addressable audience smaller than planned | Scope F90 on 30% match baseline as fallback. |
+
+## Next steps
+
+1. Confirm Enhanced Match provisioning timeline with Hannah Neustadt by April 24.
+2. Track NTA media approval status weekly; escalate if no update by April 30.
+3. Partner with Data Science to finalize propensity model for Phase 1 audience selection.
+4. Define engagement landing pages with Dwayne/MCS by Phase 1 gate.
+5. Scope vertical segmentation addition for OP1 2027 if F90 core launch holds through Q2.
+
+## Sources
+
+- F90 target: non-SHuMA 31.7% → 35.4% — `~/shared/context/body/brain.md` → D10: F90 Lifecycle Program
+- Legal SIMs navigated — `~/shared/context/body/brain.md` → D10
+- ABMA partnership, match rate 13% → 20%-30% — `~/shared/context/body/brain.md` → D6: Engagement Channel Creation
+- Engagement channel created, $765K iOPS — `~/shared/context/body/brain.md` → D6
+- $255K LiveRamp fee in PS ENG $1.85M budget — Slack ABIX, 2026-04-15
+- ie%CCP framework and customer value — [IECCP Planning Framework](ieccp-planning-framework)
+- RLSA campaign structure — [Google Ads Campaign Structure](google-ads-campaign-structure)
+- Level 2 testing methodology — `~/shared/context/body/brain.md` → Five Levels → Level 2
+
+## Related
+
+- [LiveRamp Program](../research/liveramp-program)
+- [OP1 2027 Innovation Shortlist](op1-2027-innovation-shortlist)
+- [Paid Search Testing Approach](../testing/testing-approach-kate-v5)
+- [IECCP Planning Framework](ieccp-planning-framework)
+
+<!-- AGENT_CONTEXT
+machine_summary: "F90 program canonical reference. Strategy: activate non-SHuMA customers at 30/60/90 days, move 3+ purchase rate 31.7% → 35.4%. Current state: audience built, NTA tickets updated, Media approval pending, LiveRamp Enhanced Match blocking. US Phase 1 Q2 2026 pending match rate ≥25%. Phase 2 Q3 2026. Phase 3 UK/DE Q4 2026. $255K LiveRamp fee reserved."
+key_entities: ["F90", "non-SHuMA", "ABMA", "match rate", "LiveRamp", "Enhanced Match", "Engagement channel", "RLSA", "Hannah Neustadt", "Data Science", "Legal SIM"]
+action_verbs: ["activate", "match", "target", "re-engage", "measure"]
+update_triggers: ["ABMA match rate reaches 25%", "Enhanced Match provisioned", "NTA media approval received", "F90 Phase 1 launches", "first cohort results"]
+-->

@@ -1,16 +1,3 @@
-<!-- DOC-0213 | duck_id: ops-google-ads-campaign-structure -->
-
----
-title: Google Ads Campaign Structure Standards
-status: DRAFT
-audience: amazon-internal
-level: N/A
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-03-25
-update-trigger: campaign structure changes, new campaign types, OCI expansion
----
-
 # Google Ads Campaign Structure Standards — AB Paid Search
 
 ---

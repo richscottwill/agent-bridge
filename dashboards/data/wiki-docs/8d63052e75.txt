@@ -1,25 +1,3 @@
-<!-- DOC-0431 | duck_id: wiki-agent-architecture -->
-
----
-title: "Agent System Architecture: How the Body, Hooks, and Agents Work Together"
-slug: "agent-architecture"
-type: "guide"
-doc-type: strategy
-audience: "team"
-status: "draft"
-created: "2026-03-25"
-updated: "2026-04-05"
-owner: "Richard Williams"
-tags: ["body-system", "agent", "hook", "steering", "tool", "mcp", "agent-bridge"]
-depends_on: ["body-system-architecture"]
-consumed_by: ["wiki-concierge", "karpathy", "agent-bridge-sync"]
-summary: "Complete architecture guide for the body system, hook system, and agent swarm — how they connect, what each piece does, and how the whole system compounds."
-artifact-status: DRAFT
-artifact-audience: team
-artifact-level: 5
-update-trigger: "On structural changes — new agents, new hooks, new organs, architecture shifts"
----
-
 # Agent System Architecture: How the Body, Hooks, and Agents Work Together
 
 This doc explains the full architecture of Richard Williams' AI-assisted work system. The system comprises 11 organ files, 5 hooks, 13 custom agents organized into 3 teams, and 9 calibration loops. A new AI on a different platform should be able to read this and understand how the pieces fit together, what each component does, and how to bootstrap from cold start. A human observer should understand the design philosophy and operational flow.
@@ -54,7 +32,7 @@ Each layer depends on the one below it. Agents read organs to do their work. Hoo
 
 ## Layer 1: The Body System
 
-The body is a set of 11 self-contained markdown files ("organs"), each responsible for a specific domain of Richard's work context. For the full body system architecture — organ map, design principles, data flow, and word budget system — see [Body System Architecture](~/shared/artifacts/program-details/2026-03-25-body-system-architecture.md).
+The body is a set of 11 self-contained markdown files ("organs"), each responsible for a specific domain of Richard's work context. For the full body system architecture — organ map, design principles, data flow, and word budget system — see [Body System Architecture](body-system-architecture.md).
 
 11 organs, 23,000-word budget (hard ceiling 24,000), self-maintaining via autoresearch loop. Each organ answers its own questions without requiring cross-file reads. When an organ references another, it uses a pointer ("See Brain → D1") rather than duplicating content.
 
@@ -178,6 +156,40 @@ Soul.md routes requests to the matching agent — career coaching goes to rw-tra
 
 ---
 
+## Agent Operating Norms
+
+These are cross-agent behavioral norms — how every agent should operate, regardless of which domain it owns. They're not domain rules. They apply everywhere.
+
+**Pick sensible defaults instead of asking on low-stakes choices.** Soul.md principle #6 says to reduce decisions, not options. When an agent has a choice between "pick the reasonable default and proceed" and "ask Richard which of three equivalent orderings he'd prefer," picking the default is almost always correct. Asking on low-stakes choices adds friction and fragments flow. Reserve clarifying questions for genuinely high-stakes or irreversible choices where Richard's input changes the outcome. If you're not sure whether a choice is low-stakes, the tie-breaker is reversibility: if you can undo it with a single tool call, just do it.
+
+**Treat "needs a dedicated run" framing as caution-as-procrastination when the data is already in context.** An agent sometimes wants to defer work into a separate future session — "this deserves more focus," "let me come back to this," "I'll queue it for a dedicated run." Sometimes that's correct (genuinely complex multi-step work, genuinely expensive to roll back). More often, it's caution dressed up as rigor. The test: is the data already in context? Is the operation reversible? Is Richard going to have to re-explain everything in the next session? If yes to all three, do the work now. Queuing a reversible in-context task is the agent equivalent of perfectionism.
+
+**Act on reversible, in-context work without asking.** Closely related to the above. Richard said "complete all action items" once, you've read every file, every operation has an undo path — don't stop between each item to request confirmation. The confirmation was already given. Run the work, report what happened. If something genuinely changes scope or risk profile mid-execution (a "reversible" turns out to require `git reset --hard`, or a file write lands in an ambiguous location), stop and flag. Otherwise finish.
+
+**Silent-when-clean reporting.** If a health check, audit, or status pass finds nothing wrong, the correct report is a one-liner confirming it ran and was clean. Long "here's everything I checked and everything was fine" narrations train Richard to ignore reports. Short clean reports preserve signal for when something actually needs attention.
+
+These four norms share a root: every one of them is a form of "reduce friction on forward progress while keeping the safety rails that matter." They are operational expressions of the same principle — routine as liberation. Agents that internalize them stop being decision-fatigue amplifiers and start being decision-fatigue absorbers.
+
+---
+
+## Wiki System Topology
+
+The wiki system has three surfaces that serve different readers: a human-facing index (`~/shared/wiki/agent-created/_meta/wiki-index.md`), an agent-facing JSON search index (`~/shared/dashboards/data/wiki-search-index.json`), and published SharePoint copies (`Documents/Artifacts/<category>/*.docx`). Each serves a different purpose and a different access pattern:
+
+- **wiki-index.md** — humans reading in an editor or browser, scanning for what exists. Markdown, grouped by category, descriptions inline.
+- **wiki-search-index.json** — the dashboard at `http://localhost:8080/wiki-search.html` and any agent doing programmatic lookup. Includes full-text search blobs, category/market/topic filters, backlink graph, SharePoint publication status.
+- **SharePoint Artifacts** — stakeholders clicking a link from an email or Teams message. Rendered `.docx`, organized by category folder, readable on any device.
+
+**The crawler is authoritative.** `build-wiki-index.py` scans the filesystem once and derives both `wiki-index.md` and `wiki-search-index.json` from the same pass. Humans don't hand-edit the index; the crawler regenerates it on every wiki-maintenance run. This eliminates drift between surfaces — what the dashboard can search is exactly what the human-readable index lists. When the two used to be maintained separately, the human index drifted by 40+ articles at a time. One-source-of-truth solved that structurally, not procedurally.
+
+**Cache-and-derive for expensive external calls.** The SharePoint MCP is the slow link — 7 category folders × up to 200 files each takes roughly 30 seconds of real time and hits SharePoint's API 7+ times per invocation. The builder doesn't call SharePoint. Instead, the wiki-maintenance hook calls SharePoint once per cycle, writes `data/sharepoint-artifacts.json`, and the builder reads that cache. Two benefits: the builder stays dependency-free (pure Python, no MCP calls), and external systems don't get hammered when someone runs the builder manually for debugging.
+
+The cache-and-derive pattern generalizes. Any time an expensive external source needs to influence multiple downstream derivations, interpose a JSON snapshot. The snapshot gets refreshed on a known cadence (wiki-maintenance weekly, or manually via the hook's Phase 2). Downstream scripts are fast, testable offline, and don't carry MCP dependencies into their toolchain. Good examples: Slack search results cached into `signal_tracker` DuckDB tables, Asana task scans cached into `asana.asana_tasks`, Hedy transcripts cached into `meeting_highlights`. The same pattern — external system is slow, multiple readers, truth lives in the cache.
+
+**Consequence for agents.** When asked about wiki contents, an agent should query the JSON index (`shared/dashboards/data/wiki-search-index.json`) or read `wiki-index.md` directly. Don't invoke the builder. Don't hit SharePoint. The cache exists precisely so reads are fast and dependency-free. Only the wiki-maintenance flow (or an explicit Richard-triggered refresh) should rebuild. This is the cache-and-derive pattern in action: many readers, one writer, rebuild on a schedule.
+
+---
+
 ## Failure Modes and Recovery
 
 **Experiment corruption.** An experiment can corrupt an organ if the dual-blind evaluators both miss a regression. Recovery: the autoresearch loop's revert mechanism restores the pre-experiment version from the last known-good snapshot. Brain and Memory organs require 100% accuracy specifically to minimize this risk.
@@ -256,10 +268,12 @@ Cold start protocol: a new AI reads `portable-body/README.md` → `body/body.md`
 - Defines the session bootstrap sequence — source: `shared/context/body/spine.md`
 - Explains portability as a continuous design constraint — source: `shared/context/body/heart.md`
 - Records the agent consolidation from 6 per-region to 2 parameterized — source: `~/.kiro/specs/agent-consolidation/`, completed March 2026
+- Documents cross-agent operating norms (sensible defaults, caution-as-procrastination, silent-when-clean) — source: `~/.kiro/steering/soul.md` principle #6 and session-log observations from 2026-04-17 wiki-maintenance runs
+- Documents wiki system topology and cache-and-derive pattern — source: `shared/dashboards/build-wiki-index.py` and `data/sharepoint-artifacts.json`, shipped 2026-04-17
 
 <!-- AGENT_CONTEXT
-machine_summary: "Complete architecture guide for Richard Williams' AI work system. Three layers: (1) Body System — 11 organ files holding current state within a 23,000-word budget, (2) Hooks — 5 event-driven triggers including morning routine (daily keystone habit), autoresearch loop (autonomous experimentation with 700+ experiments as of March 2026), and safety guards, (3) Agent Swarm — 13 custom agents across body-system (4), WBR callouts (3, parameterized for all 10 markets), and wiki team (6, pipeline: editor → researcher → writer → critic → librarian). All agents use a dual-file pattern: .md definitions (portable, source of truth) + .json configs (platform-specific CLI invocation). System compounds via autoresearch (organ accuracy 90-100%), nervous system (9 calibration loops), and wiki externalization. Designed for portability — all plain text, cold start in 2-3 hours."
-key_entities: ["body system", "organs", "hooks", "agents", "autoresearch loop", "morning routine", "Karpathy", "gut", "word budget", "agent-bridge", "soul.md", "spine.md", "nervous system", "kiro-cli", "json config", "md definition", "market-analyst", "callout-writer"]
-action_verbs: ["bootstrap", "route", "experiment", "compress", "calibrate", "cascade", "externalize", "invoke"]
-update_triggers: ["new agent added", "new hook added", "new organ added", "architecture structural change", "platform migration", "agent definition pattern change"]
+machine_summary: "Complete architecture guide for Richard Williams' AI work system. Three layers: (1) Body System — 11 organ files holding current state within a 23,000-word budget, (2) Hooks — 5 event-driven triggers including morning routine (daily keystone habit), autoresearch loop (autonomous experimentation with 700+ experiments as of March 2026), and safety guards, (3) Agent Swarm — 13 custom agents across body-system (4), WBR callouts (3, parameterized for all 10 markets), and wiki team (6, pipeline: editor → researcher → writer → critic → librarian). All agents use a dual-file pattern: .md definitions (portable, source of truth) + .json configs (platform-specific CLI invocation). Agent Operating Norms: pick sensible defaults, act on reversible in-context work without asking, treat 'needs a dedicated run' as caution-as-procrastination when data is in context, silent-when-clean reporting. Wiki System Topology: three surfaces (human wiki-index.md, agent JSON search index, SharePoint published copies) with the crawler authoritative — build-wiki-index.py regenerates both local surfaces from one scan, reading cached SharePoint artifacts from data/sharepoint-artifacts.json. Cache-and-derive pattern generalizes to Slack, Asana, Hedy caches. System compounds via autoresearch (organ accuracy 90-100%), nervous system (9 calibration loops), and wiki externalization. Designed for portability — all plain text, cold start in 2-3 hours."
+key_entities: ["body system", "organs", "hooks", "agents", "autoresearch loop", "morning routine", "Karpathy", "gut", "word budget", "agent-bridge", "soul.md", "spine.md", "nervous system", "kiro-cli", "json config", "md definition", "market-analyst", "callout-writer", "agent operating norms", "sensible defaults", "cache-and-derive", "wiki topology", "build-wiki-index.py", "sharepoint-artifacts.json"]
+action_verbs: ["bootstrap", "route", "experiment", "compress", "calibrate", "cascade", "externalize", "invoke", "cache", "derive", "default", "act-on-reversible"]
+update_triggers: ["new agent added", "new hook added", "new organ added", "architecture structural change", "platform migration", "agent definition pattern change", "new cross-agent operating norm", "wiki topology change (new surface, new cache, crawler rewrite)"]
 -->

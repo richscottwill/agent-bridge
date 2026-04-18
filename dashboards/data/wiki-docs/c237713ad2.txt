@@ -1,5 +1,3 @@
-<!-- DOC-0434 | duck_id: wiki-archive-stale-doc-consolidation -->
-
 # Stale Doc Consolidation — April 4, 2026
 
 ## AU Docs Merged

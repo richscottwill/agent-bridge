@@ -1,5 +1,3 @@
-<!-- DOC-0479 | duck_id: wiki-review-kate-doc-synthesis-verification -->
-
 # Verification Review: Paid Search Testing Approach & Year Ahead
 
 **Reviewer:** wiki-critic (verification pass)

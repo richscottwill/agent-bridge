@@ -1,0 +1,616 @@
+{
+  "generated": "2026-04-17T19:02:13-07:00",
+  "source": "sharepoint-mcp list_files Artifacts/*",
+  "note": "Snapshot of SharePoint Documents/Artifacts/ published .docx files. Used by build-wiki-index.py to mark local wiki articles as published=yes/no. Refresh via wiki-maintenance Phase 2 or manual sharepoint_list_files calls.",
+  "artifacts": [
+    {
+      "stem": "workstream-user-experience-v5",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-user-experience-v5.docx",
+      "modified": "2026-04-12T14:03:17Z",
+      "size": 40422
+    },
+    {
+      "stem": "testing-appendix",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-appendix.docx",
+      "modified": "2026-04-12T14:03:16Z",
+      "size": 46624
+    },
+    {
+      "stem": "ps-team-map",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/ps-team-map.docx",
+      "modified": "2026-04-12T14:03:15Z",
+      "size": 41361
+    },
+    {
+      "stem": "workstream-audiences-lifecycle",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-audiences-lifecycle.docx",
+      "modified": "2026-04-12T14:03:14Z",
+      "size": 39510
+    },
+    {
+      "stem": "testing-approach-outline",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-approach-outline.docx",
+      "modified": "2026-04-12T14:03:13Z",
+      "size": 40463
+    },
+    {
+      "stem": "workstream-modern-search",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-modern-search.docx",
+      "modified": "2026-04-12T14:03:12Z",
+      "size": 40769
+    },
+    {
+      "stem": "workstream-algorithmic-ads",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-algorithmic-ads.docx",
+      "modified": "2026-04-12T14:03:11Z",
+      "size": 40609
+    },
+    {
+      "stem": "testing-methodology",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-methodology.docx",
+      "modified": "2026-04-12T14:03:10Z",
+      "size": 40848
+    },
+    {
+      "stem": "workstream-oci-bidding",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-oci-bidding.docx",
+      "modified": "2026-04-12T14:03:10Z",
+      "size": 40807
+    },
+    {
+      "stem": "workstream-user-experience",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-user-experience.docx",
+      "modified": "2026-04-12T14:03:07Z",
+      "size": 40424
+    },
+    {
+      "stem": "testing-approach-kate-v5",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-approach-kate-v5.docx",
+      "modified": "2026-04-12T14:03:06Z",
+      "size": 43405
+    },
+    {
+      "stem": "ps-operations",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/ps-operations.docx",
+      "modified": "2026-04-12T14:02:58Z",
+      "size": 40090
+    },
+    {
+      "stem": "project-baloo-overview",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/project-baloo-overview.docx",
+      "modified": "2026-04-12T14:02:57Z",
+      "size": 41518
+    },
+    {
+      "stem": "oci-rollout-playbook",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/oci-rollout-playbook.docx",
+      "modified": "2026-04-12T14:02:55Z",
+      "size": 43679
+    },
+    {
+      "stem": "oci-rollout-methodology",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/oci-rollout-methodology.docx",
+      "modified": "2026-04-12T14:02:54Z",
+      "size": 38994
+    },
+    {
+      "stem": "enhanced-match-liveramp",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/enhanced-match-liveramp.docx",
+      "modified": "2026-04-12T14:02:53Z",
+      "size": 40311
+    },
+    {
+      "stem": "email-overlay-ww-rollout",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/email-overlay-ww-rollout.docx",
+      "modified": "2026-04-12T14:02:52Z",
+      "size": 41054
+    },
+    {
+      "stem": "au-nb-mro-trades-proposal",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/au-nb-mro-trades-proposal.docx",
+      "modified": "2026-04-12T14:02:51Z",
+      "size": 38530
+    },
+    {
+      "stem": "ai-max-test-design",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/ai-max-test-design.docx",
+      "modified": "2026-04-12T14:02:50Z",
+      "size": 42529
+    },
+    {
+      "stem": "2024-12-it-bid-modifiers-test",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/2024-12-it-bid-modifiers-test.docx",
+      "modified": "2026-04-12T14:02:48Z",
+      "size": 38574
+    },
+    {
+      "stem": "2023-06-audience-post-mortem",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/2023-06-audience-post-mortem.docx",
+      "modified": "2026-04-12T14:02:47Z",
+      "size": 41081
+    },
+    {
+      "stem": "ad-copy-testing-framework",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/ad-copy-testing-framework.docx",
+      "modified": "2026-04-12T14:02:46Z",
+      "size": 41171
+    },
+    {
+      "stem": "2023-08-jp-app-testing-results",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/2023-08-jp-app-testing-results.docx",
+      "modified": "2026-04-12T14:02:45Z",
+      "size": 42239
+    },
+    {
+      "stem": "2023-01-jp-nb-experiment-google",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/2023-01-jp-nb-experiment-google.docx",
+      "modified": "2026-04-12T14:02:37Z",
+      "size": 44215
+    },
+    {
+      "stem": "2022-10-yahoo-jp-nb-experiment",
+      "category": "testing",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/2022-10-yahoo-jp-nb-experiment.docx",
+      "modified": "2026-04-12T14:02:36Z",
+      "size": 39794
+    },
+    {
+      "stem": "q2-initiative-status",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/q2-initiative-status.docx",
+      "modified": "2026-04-12T14:02:35Z",
+      "size": 40381
+    },
+    {
+      "stem": "oci-business-case",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/oci-business-case.docx",
+      "modified": "2026-04-12T14:02:34Z",
+      "size": 41178
+    },
+    {
+      "stem": "ieccp-planning-framework",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/ieccp-planning-framework.docx",
+      "modified": "2026-04-12T14:02:32Z",
+      "size": 44812
+    },
+    {
+      "stem": "f90-lifecycle-strategy",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/f90-lifecycle-strategy.docx",
+      "modified": "2026-04-12T14:02:31Z",
+      "size": 41428
+    },
+    {
+      "stem": "cross-market-playbook",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/cross-market-playbook.docx",
+      "modified": "2026-04-12T14:02:30Z",
+      "size": 38945
+    },
+    {
+      "stem": "genai-search-traffic",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/genai-search-traffic.docx",
+      "modified": "2026-04-12T14:02:29Z",
+      "size": 39956
+    },
+    {
+      "stem": "body-system-architecture",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/body-system-architecture.docx",
+      "modified": "2026-04-12T14:02:28Z",
+      "size": 39433
+    },
+    {
+      "stem": "agentic-marketing-landscape",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/agentic-marketing-landscape.docx",
+      "modified": "2026-04-12T14:02:27Z",
+      "size": 39192
+    },
+    {
+      "stem": "competitive-landscape",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/competitive-landscape.docx",
+      "modified": "2026-04-12T14:02:26Z",
+      "size": 41884
+    },
+    {
+      "stem": "agentic-ps-vision",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/agentic-ps-vision.docx",
+      "modified": "2026-04-12T14:02:24Z",
+      "size": 39603
+    },
+    {
+      "stem": "agent-architecture",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/agent-architecture.docx",
+      "modified": "2026-04-12T14:02:16Z",
+      "size": 45469
+    },
+    {
+      "stem": "aeo-ai-overviews-pov",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/aeo-ai-overviews-pov.docx",
+      "modified": "2026-04-12T14:02:15Z",
+      "size": 38934
+    },
+    {
+      "stem": "05-the-engineer",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/05-the-engineer.docx",
+      "modified": "2026-04-12T14:02:14Z",
+      "size": 39011
+    },
+    {
+      "stem": "04-the-operator",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/04-the-operator.docx",
+      "modified": "2026-04-12T14:02:13Z",
+      "size": 38859
+    },
+    {
+      "stem": "03-the-questioner",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/03-the-questioner.docx",
+      "modified": "2026-04-12T14:02:12Z",
+      "size": 38704
+    },
+    {
+      "stem": "02-the-director",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/02-the-director.docx",
+      "modified": "2026-04-12T14:02:11Z",
+      "size": 38651
+    },
+    {
+      "stem": "01-grok-synthesizer",
+      "category": "strategy",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/01-grok-synthesizer.docx",
+      "modified": "2026-04-12T14:02:10Z",
+      "size": 38471
+    },
+    {
+      "stem": "seasonality-calendar-2026",
+      "category": "markets",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/seasonality-calendar-2026.docx",
+      "modified": "2026-04-12T17:33:02Z",
+      "size": 41942
+    },
+    {
+      "stem": "ww-testing-tracker",
+      "category": "markets",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/ww-testing-tracker.docx",
+      "modified": "2026-04-12T14:01:13Z",
+      "size": 40448
+    },
+    {
+      "stem": "team-workload-distribution",
+      "category": "markets",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/team-workload-distribution.docx",
+      "modified": "2026-04-12T14:01:12Z",
+      "size": 41454
+    },
+    {
+      "stem": "oci-implementation-guide",
+      "category": "markets",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/oci-implementation-guide.docx",
+      "modified": "2026-04-12T14:01:11Z",
+      "size": 39361
+    },
+    {
+      "stem": "polaris-rollout-status",
+      "category": "markets",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/polaris-rollout-status.docx",
+      "modified": "2026-04-12T14:01:09Z",
+      "size": 41168
+    },
+    {
+      "stem": "oci-execution-guide",
+      "category": "markets",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/oci-execution-guide.docx",
+      "modified": "2026-04-12T14:01:08Z",
+      "size": 40830
+    },
+    {
+      "stem": "mx-market-wiki",
+      "category": "markets",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/mx-market-wiki.docx",
+      "modified": "2026-04-12T14:01:06Z",
+      "size": 40322
+    },
+    {
+      "stem": "market-reference",
+      "category": "markets",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/market-reference.docx",
+      "modified": "2026-04-12T14:00:59Z",
+      "size": 41890
+    },
+    {
+      "stem": "au-paid-search-market-overview",
+      "category": "markets",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/au-paid-search-market-overview.docx",
+      "modified": "2026-04-12T14:00:58Z",
+      "size": 40281
+    },
+    {
+      "stem": "au-market-wiki",
+      "category": "markets",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/au-market-wiki.docx",
+      "modified": "2026-04-12T14:00:57Z",
+      "size": 40616
+    },
+    {
+      "stem": "au-market-overview",
+      "category": "markets",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/au-market-overview.docx",
+      "modified": "2026-04-12T14:00:56Z",
+      "size": 40116
+    },
+    {
+      "stem": "ab-paid-search-wiki",
+      "category": "markets",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/ab-paid-search-wiki.docx",
+      "modified": "2026-04-12T14:00:54Z",
+      "size": 39611
+    },
+    {
+      "stem": "stakeholder-comms-guide",
+      "category": "operations",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/stakeholder-comms-guide.docx",
+      "modified": "2026-04-12T14:01:48Z",
+      "size": 42718
+    },
+    {
+      "stem": "polaris-rollout-timeline",
+      "category": "operations",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/polaris-rollout-timeline.docx",
+      "modified": "2026-04-12T14:01:47Z",
+      "size": 38629
+    },
+    {
+      "stem": "oci-playbook-rewrite",
+      "category": "operations",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/oci-playbook-rewrite.docx",
+      "modified": "2026-04-12T14:01:45Z",
+      "size": 43941
+    },
+    {
+      "stem": "oci-methodology-knowledge-share",
+      "category": "operations",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/oci-methodology-knowledge-share.docx",
+      "modified": "2026-04-12T14:01:44Z",
+      "size": 38832
+    },
+    {
+      "stem": "mx-ps-handoff-guide",
+      "category": "operations",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/mx-ps-handoff-guide.docx",
+      "modified": "2026-04-12T14:01:43Z",
+      "size": 39098
+    },
+    {
+      "stem": "landing-page-testing-playbook",
+      "category": "operations",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/landing-page-testing-playbook.docx",
+      "modified": "2026-04-12T14:01:37Z",
+      "size": 38952
+    },
+    {
+      "stem": "invoice-po-process-guide",
+      "category": "operations",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/invoice-po-process-guide.docx",
+      "modified": "2026-04-12T14:01:36Z",
+      "size": 38970
+    },
+    {
+      "stem": "google-ads-campaign-structure",
+      "category": "operations",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/google-ads-campaign-structure.docx",
+      "modified": "2026-04-12T14:01:36Z",
+      "size": 38785
+    },
+    {
+      "stem": "campaign-link-generator-spec",
+      "category": "operations",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/campaign-link-generator-spec.docx",
+      "modified": "2026-04-12T14:01:34Z",
+      "size": 40608
+    },
+    {
+      "stem": "budget-forecast-helper-spec",
+      "category": "operations",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/budget-forecast-helper-spec.docx",
+      "modified": "2026-04-12T14:01:33Z",
+      "size": 40823
+    },
+    {
+      "stem": "wbr-callout-guide",
+      "category": "reporting",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/reporting/wbr-callout-guide.docx",
+      "modified": "2026-04-12T14:01:51Z",
+      "size": 39057
+    },
+    {
+      "stem": "au-keyword-cpa-dashboard",
+      "category": "reporting",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/reporting/au-keyword-cpa-dashboard.docx",
+      "modified": "2026-04-12T14:01:50Z",
+      "size": 38415
+    },
+    {
+      "stem": "ai-automation-impact",
+      "category": "reporting",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/reporting/ai-automation-impact.docx",
+      "modified": "2026-04-12T14:01:49Z",
+      "size": 43289
+    },
+    {
+      "stem": "slack-deep-context-ideas",
+      "category": "research",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/slack-deep-context-ideas.docx",
+      "modified": "2026-04-12T14:02:09Z",
+      "size": 47327
+    },
+    {
+      "stem": "op1-ps-testing-framework-draft",
+      "category": "research",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/op1-ps-testing-framework-draft.docx",
+      "modified": "2026-04-12T14:02:08Z",
+      "size": 43973
+    },
+    {
+      "stem": "slack-deep-context-test-prompts",
+      "category": "research",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/slack-deep-context-test-prompts.docx",
+      "modified": "2026-04-12T14:02:06Z",
+      "size": 40374
+    },
+    {
+      "stem": "testing-approach-outline",
+      "category": "research",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/testing-approach-outline.docx",
+      "modified": "2026-04-12T14:02:05Z",
+      "size": 41157
+    },
+    {
+      "stem": "oci-performance",
+      "category": "research",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/oci-performance.docx",
+      "modified": "2026-04-12T14:02:04Z",
+      "size": 38679
+    },
+    {
+      "stem": "five-year-outlook-research-brief",
+      "category": "research",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/five-year-outlook-research-brief.docx",
+      "modified": "2026-04-12T14:01:56Z",
+      "size": 51637
+    },
+    {
+      "stem": "daily-brief-latest",
+      "category": "research",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/daily-brief-latest.docx",
+      "modified": "2026-04-12T14:01:55Z",
+      "size": 37705
+    },
+    {
+      "stem": "competitor-intel",
+      "category": "research",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/competitor-intel.docx",
+      "modified": "2026-04-12T14:01:54Z",
+      "size": 39257
+    },
+    {
+      "stem": "ad-copy-results",
+      "category": "research",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/ad-copy-results.docx",
+      "modified": "2026-04-12T14:01:52Z",
+      "size": 39349
+    },
+    {
+      "stem": "wiki-structure",
+      "category": "_meta",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/wiki-structure.docx",
+      "modified": "2026-04-12T13:58:55Z",
+      "size": 41208
+    },
+    {
+      "stem": "wiki-pipeline-rules",
+      "category": "_meta",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/wiki-pipeline-rules.docx",
+      "modified": "2026-04-12T13:58:54Z",
+      "size": 39048
+    },
+    {
+      "stem": "wiki-index",
+      "category": "_meta",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/wiki-index.docx",
+      "modified": "2026-04-12T13:58:53Z",
+      "size": 43344
+    },
+    {
+      "stem": "roadmap",
+      "category": "_meta",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/roadmap.docx",
+      "modified": "2026-04-12T13:58:52Z",
+      "size": 39071
+    },
+    {
+      "stem": "markdown-to-xwiki",
+      "category": "_meta",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/markdown-to-xwiki.docx",
+      "modified": "2026-04-12T13:58:51Z",
+      "size": 38599
+    },
+    {
+      "stem": "health-2026-04-05",
+      "category": "_meta",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/health-2026-04-05.docx",
+      "modified": "2026-04-12T13:58:50Z",
+      "size": 38120
+    },
+    {
+      "stem": "health-2026-04-04",
+      "category": "_meta",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/health-2026-04-04.docx",
+      "modified": "2026-04-12T13:58:49Z",
+      "size": 41670
+    },
+    {
+      "stem": "demand-log",
+      "category": "_meta",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/demand-log.docx",
+      "modified": "2026-04-12T13:58:47Z",
+      "size": 37008
+    },
+    {
+      "stem": "context-catalog",
+      "category": "_meta",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/context-catalog.docx",
+      "modified": "2026-04-12T13:58:46Z",
+      "size": 54697
+    },
+    {
+      "stem": "audit-2026-04-05",
+      "category": "_meta",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/audit-2026-04-05.docx",
+      "modified": "2026-04-12T13:58:45Z",
+      "size": 37525
+    },
+    {
+      "stem": "audit-2026-04-04",
+      "category": "_meta",
+      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/audit-2026-04-04.docx",
+      "modified": "2026-04-12T13:58:44Z",
+      "size": 42715
+    }
+  ]
+}

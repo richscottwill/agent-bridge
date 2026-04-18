@@ -1,18 +1,3 @@
-<!-- DOC-0406 | duck_id: testing-project-baloo-overview -->
-
----
-title: Project Baloo - Shopping Ads for Amazon Business
-status: DRAFT
-doc-type: strategy
-audience: amazon-internal
-level: 2
-owner: Richard Williams
-created: 2026-04-04
-updated: 2026-04-04
-update-trigger: early access data available, cost guardrails finalized, full test decision, Google updates
-tags: baloo, shopping-ads, google, us, new-channel
----
-
 # Project Baloo - Shopping Ads for Amazon Business
 
 > Overview of Project Baloo (Shopping Ads for AB), early access status, cost implications, and decision framework for full test. Designed for Brandon's awareness and team planning.
@@ -167,3 +152,12 @@ key_entities: ["Baloo", "Shopping Ads", "Google Merchant Center", "Vijay Kumar",
 action_verbs: ["evaluate", "test", "guard", "attribute", "scale"]
 update_triggers: ["early access data available", "cost guardrails finalized", "full test decision", "Google updates", "consumer Amazon conflict resolved"]
 -->
+
+
+## Related
+
+- [Baloo Ref Tag Attribution Risk](baloo-ref-tag-attribution-risk) — open P0 attribution issue
+- [Polaris Program](../markets/polaris-program) — complementary Brand LP rollout
+- [Paid Search Testing Approach](testing-approach-kate-v5) — Workstream 4 context
+- [OP1 2027 Innovation Shortlist](../strategy/op1-2027-innovation-shortlist) — Baloo dependencies for 2027 bets
+- [Sid Acquisition Funnel Map](../strategy/sid-acquisition-funnel-map) — channel context

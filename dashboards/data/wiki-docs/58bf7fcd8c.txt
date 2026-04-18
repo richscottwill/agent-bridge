@@ -1,5 +1,3 @@
-<!-- DOC-0135 | duck_id: context-hedy-sync-2026-03-25 -->
-
 # Hedy Meeting Sync — 2026-03-25
 
 ## Sessions Processed (5 from 3/24)

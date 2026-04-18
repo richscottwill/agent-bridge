@@ -132,162 +132,109 @@ Write to `~/shared/wiki/audits/audit-{date}.md`:
 | Average usefulness score | X/10 |
 ```
 
-## ABPS AI Project — Asana Review Instructions
+## Review workflow (filesystem-based, canonical as of 2026-04-17)
 
-When operating inside the ABPS AI - Content project (GID: `1213917352480610`), your output surface changes from wiki staging files to Asana comments. Everything else — the 5-dimension scoring, the 8/10 bar, the specificity of feedback — stays the same.
+The review pipeline runs through the local filesystem. There are no Asana writes. The review queue, the draft, and the review output all live in `~/shared/wiki/agent-created/`.
 
-> **Guardrail Protocol:** All ABPS AI writes MUST follow the Guardrail Protocol in `~/shared/context/active/asana-command-center.md` § Guardrail Protocol. Before any write: verify assignee = Richard (`1212732742544167`), append to audit log with `pipeline_agent="wiki-critic"`, update Kiro_RW with timestamp. On API failure: log, retry once, flag if still failing.
+### Trigger
 
-### Trigger conditions
+You review a draft when:
+- A new entry appears in `~/shared/wiki/agent-created/_meta/review-queue.md` (format: `- [ ] {slug} — drafted YYYY-MM-DD — awaiting wiki-critic`)
+- The wiki-editor explicitly routes a draft to you
+- Richard requests a review
 
-You are invoked when ALL of the following are true:
-- The task is in the Review section (GID: `1213917923779848`)
-- A subtask matching `✏️ Draft: [name]` exists and is completed
-- NO subtask matching `🔍 Review: [name]` exists yet (prevents double-review)
+### Inputs — what you read
 
-If a `🔍 Review` subtask already exists, skip — the review has already been done for this draft iteration.
+1. **The draft** — `~/shared/wiki/agent-created/{category}/{slug}.md`. Read the full file including frontmatter.
+2. **The research brief** — `~/shared/wiki/research/{slug}-research.md`. Use this to verify the draft is grounded in the source material.
+3. **Prior review (if any)** — `~/shared/wiki/agent-created/reviews/{slug}-critic.md`. If the draft is a revision, read the prior critic feedback to confirm it was addressed.
 
-### Input: what you read
+### Output — write the review
 
-1. **The draft** — Read the task's `html_notes` via `GetTaskDetails(task_gid, opt_fields='name,html_notes,custom_fields.name,custom_fields.display_value')`. This is the ~500w draft the wiki-writer produced.
-2. **The research brief** — Read the pinned comment via `GetTaskStories(task_gid)`. Find the story with `is_pinned=true`. This is the source material the draft should be grounded in.
-3. **Kiro_RW context** — Read the `Kiro_RW` custom field (GID: `1213915851848087`) for pipeline state, triage context, scope statement, and any prior revision notes.
+Write to `~/shared/wiki/agent-created/reviews/{slug}-critic.md`:
 
-### Scoring: 5 dimensions (1-10 each)
+```markdown
+# Review: {Title}
+Reviewed: YYYY-MM-DD HH:MM
+Slug: {slug}
+Draft version: {from frontmatter updated date}
 
-Use these scoring anchors directly — do not cross-reference Mode 1 during Asana reviews.
+## Scores
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | X/10 | {one line} |
+| Clarity | X/10 | {one line} |
+| Accuracy | X/10 | {one line} |
+| Dual-audience | X/10 | {one line} |
+| Economy | X/10 | {one line} |
+| **Average** | **X.X/10** | |
 
-1. **Usefulness** — Does this help Richard or his stakeholders DO, DECIDE, or UNDERSTAND something?
-   - 10: Reader can act immediately. Agent can extract structured guidance.
-   - 7: Useful but requires additional context or interpretation.
-   - 4: Informational but not actionable.
-   - 1: No clear use case for any audience.
+## Verdict
+{APPROVE | REVISE | ESCALATE}
 
-2. **Clarity** — Can a reader who knows the domain follow it? Are `<strong>` headers meaningful? Is the structure scannable?
-   - 10: Crystal clear. Headers tell the story. No re-reading needed.
-   - 7: Clear with minor ambiguities.
-   - 4: Requires significant domain knowledge to parse.
-   - 1: Confusing or poorly organized.
+## Feedback
+{Detailed assessment — what works, what doesn't, why.}
 
-3. **Accuracy** — Are claims supported by the research brief? Are numbers current? Does the draft faithfully represent the source material?
-   - 10: Every claim traceable to a source. No stale data.
-   - 7: Mostly accurate, one or two unverified claims.
-   - 4: Several unsupported claims or outdated data.
-   - 1: Factually unreliable.
+## Required changes (if REVISE)
+{Specific edits. Quote the text to change, provide the replacement. Same format as callout-reviewer.}
 
-4. **Dual-audience** — Does the document serve both human readers and agent consumers?
-   - 10: Both audiences fully served. Rich structure + narrative.
-   - 7: One audience well-served, the other adequate.
-   - 4: Primarily serves one audience.
-   - 1: Single-audience only.
-
-5. **Economy** — Is every section earning its place? Could this be shorter without losing value?
-   - 10: Tight. Every paragraph essential. No duplication.
-   - 7: Minor bloat or one redundant section.
-   - 4: Significant padding or duplication.
-   - 1: Could be cut by 50%+ without losing value.
-   - Sub-rule: Every list item must contain a verb. Noun-only list items are padding.
-
-### Output: post review as Asana comment
-
-Post the review as a comment on the task using `CreateTaskStory(task_gid, html_text=...)`:
-
-```html
-<body>
-<strong>🔍 Review: [Task Name]</strong>
-
-<strong>Scores</strong>
-<ul>
-<li>Usefulness: [N]/10 — [one-line assessment]</li>
-<li>Clarity: [N]/10 — [one-line assessment]</li>
-<li>Accuracy: [N]/10 — [one-line assessment]</li>
-<li>Dual-audience: [N]/10 — [one-line assessment]</li>
-<li>Economy: [N]/10 — [one-line assessment]</li>
-</ul>
-
-<strong>Average: [N.N]/10</strong>
-
-<strong>Verdict: [APPROVE / REVISE / ESCALATE]</strong>
-
-<strong>Feedback</strong>
-[Detailed feedback on what works and what needs improvement]
-
-<strong>Revision Notes</strong> (if score < 8)
-<ol>
-<li>[Specific change needed]</li>
-<li>[Specific change needed]</li>
-</ol>
-</body>
+## Suggestions (optional, non-blocking)
+{Nice-to-haves that don't block approval.}
 ```
 
 ### Decision logic: the 8/10 threshold
 
-The threshold is exactly 8. Not 7.9. Not 8.1. Compute the arithmetic mean of all 5 dimension scores.
+Compute the arithmetic mean of the 5 dimension scores.
 
-**IF average score >= 8 (APPROVE):**
-1. Post the review comment (verdict: APPROVE).
-2. Create an Approval subtask for Richard:
+**IF average >= 8 (APPROVE):**
+1. Write the review file with verdict = APPROVE.
+2. Update the draft's frontmatter: `status: REVIEW` (moves from DRAFT to REVIEW in the Pipeline view).
+3. Rebuild the wiki search index: `python3 ~/shared/dashboards/build-wiki-index.py`.
+4. Update the review queue entry in `~/shared/wiki/agent-created/_meta/review-queue.md` — change `- [ ]` to `- [x]` and append ` → APPROVE (avg X.X/10, promoted to REVIEW)`.
+5. Signal the editor/librarian by appending to `~/shared/wiki/agent-created/_meta/ready-for-final.md`:
    ```
-   CreateTask(
-     name="✅ Approve: [parent task name]",
-     resource_subtype="approval",
-     parent=task_gid,
-     assignee="1212732742544167",
-     project="1213917352480610"
-   )
+   - [ ] {slug} — approved YYYY-MM-DD by wiki-critic (avg X.X/10) — awaiting editor approval to publish
    ```
-   This creates a subtask with `approval_status: "pending"`. Richard approves by completing it.
-3. Create and complete the review subtask:
+6. Log to `~/shared/wiki/agent-created/_meta/draft-log.md`:
    ```
-   CreateTask(name="🔍 Review: [parent task name]", parent=task_gid, assignee="1212732742544167", project="1213917352480610")
+   YYYY-MM-DD HH:MM — wiki-critic reviewed {slug} — verdict APPROVE (avg X.X/10)
    ```
-   Then: `UpdateTask(subtask_gid, completed="true")`
-4. Log stage transition: `CreateTaskStory(task_gid, text="[wiki-critic] Review stage completed — YYYY-MM-DD HH:MM. Verdict: APPROVE (avg [N.N]/10). Approval subtask created for Richard.")`
-5. Update Kiro_RW: append `pipeline: review completed [date], score=[N.N]/10, verdict=APPROVE`
 
-**IF average score < 8 (REVISE) — first occurrence:**
-1. Post the review comment (verdict: REVISE) with detailed revision notes.
-2. Create and complete the review subtask:
+**IF average < 8 (REVISE) — first occurrence:**
+1. Write the review file with verdict = REVISE and detailed revision notes.
+2. Keep the draft's `status: DRAFT` (no frontmatter change — it stays in DRAFT column).
+3. Update the review queue entry: `- [x]` + ` → REVISE (avg X.X/10, consecutive_sub8=1) — returning to wiki-writer`.
+4. Log to `_meta/draft-log.md`:
    ```
-   CreateTask(name="🔍 Review: [parent task name]", parent=task_gid, assignee="1212732742544167", project="1213917352480610")
+   YYYY-MM-DD HH:MM — wiki-critic reviewed {slug} — verdict REVISE (avg X.X/10, consecutive_sub8=1)
    ```
-   Then: `UpdateTask(subtask_gid, completed="true")`
-3. Return the task to Stage 2 — the wiki-writer will revise the draft using the revision notes from the review comment.
-4. Move the task back to In Progress section (GID: `1213917923741223`) so the draft stage detection picks it up again.
-5. Log stage transition: `CreateTaskStory(task_gid, text="[wiki-critic] Review stage completed — YYYY-MM-DD HH:MM. Verdict: REVISE (avg [N.N]/10). Returning to wiki-writer for revision.")`
-6. Update Kiro_RW: append `pipeline: review completed [date], score=[N.N]/10, verdict=REVISE, consecutive_sub8=1`
-7. Track the consecutive sub-8 count in Kiro_RW. Parse the existing Kiro_RW for `consecutive_sub8=N` — if found, increment. If not found, set to 1.
+5. Signal the writer to revise — append a line to `~/shared/wiki/agent-created/_meta/revision-queue.md`:
+   ```
+   - [ ] {slug} — REVISE requested YYYY-MM-DD — see reviews/{slug}-critic.md for required changes
+   ```
 
-**IF average score < 8 and consecutive_sub8 reaches 2 (ESCALATE):**
-1. Post the review comment (verdict: ESCALATE).
-2. Create and complete the review subtask (same as above).
-3. Do NOT return to Stage 2. Do NOT invoke wiki-writer again.
-4. Log stage transition: `CreateTaskStory(task_gid, text="[wiki-critic] Review stage completed — YYYY-MM-DD HH:MM. Verdict: ESCALATE (avg [N.N]/10). Two consecutive sub-8 scores — flagging for Richard's manual direction.")`
-5. Update Kiro_RW: append `pipeline: review completed [date], score=[N.N]/10, verdict=ESCALATE, consecutive_sub8=2, FLAGGED FOR RICHARD`
-6. Flag the task for Richard in the daily brief (AM-3). The agent stops iterating on this task until Richard provides direction.
+Track the consecutive sub-8 count in the review file header (add `Consecutive sub-8: N`) so the next review knows the count.
+
+**IF average < 8 AND consecutive_sub8 reaches 2 (ESCALATE):**
+1. Write the review file with verdict = ESCALATE.
+2. Do NOT return to the writer. Do NOT request revision.
+3. Update the review queue entry: `- [x]` + ` → ESCALATE (avg X.X/10, two consecutive sub-8 — flagging for Richard)`.
+4. Append to `~/shared/wiki/agent-created/_meta/escalations.md`:
+   ```
+   - [ ] {slug} — ESCALATED YYYY-MM-DD after 2 consecutive sub-8 reviews — awaiting Richard's manual direction
+   ```
+5. Log to `_meta/draft-log.md`.
 
 ### Consecutive sub-8 tracking
 
-The consecutive sub-8 count is tracked in the Kiro_RW field so it persists across AM-2 runs:
-- After each review, write `consecutive_sub8=N` to Kiro_RW.
-- On APPROVE: reset to 0 (or omit — approval clears the counter).
-- On REVISE: increment from previous value (or set to 1 if no prior value).
-- On ESCALATE (consecutive_sub8=2): stop. No third attempt.
+The count is tracked in the review file header (`Consecutive sub-8: N`) so it persists across reviews:
+- On APPROVE: reset to 0 (or omit the line — approval clears the counter).
+- On REVISE: increment from previous value (or set to 1 if no prior review exists).
+- On ESCALATE (consecutive_sub8=2): stop. No third attempt without Richard's direction.
 
-When reading Kiro_RW before a review, parse for the most recent `consecutive_sub8=N` value to determine whether this is the first or second sub-8 review.
+When reading a draft for review, check the prior review file first to determine whether this is a first or second sub-8 attempt.
 
-### What changes vs. wiki review mode
-
-| Wiki Pipeline | Asana Pipeline | Change |
-|---------------|----------------|--------|
-| Read from `wiki/staging/{slug}.md` | Read from `html_notes` via `GetTaskDetails` | Input surface |
-| Write to `wiki/reviews/{slug}-review.md` | Post as comment via `CreateTaskStory(html_text)` | Output surface |
-| Verdict: PUBLISH / REVISE / REJECT | Verdict: APPROVE / REVISE / ESCALATE | Terminology |
-| PUBLISH → wiki-librarian publishes | APPROVE → create Approval subtask for Richard | Approval gate |
-| REVISE → wiki-writer edits staging file | REVISE → return to Stage 2, wiki-writer updates html_notes | Revision loop |
-| REJECT → wiki-editor reconsiders topic | ESCALATE → flag for Richard after 2 consecutive sub-8 | Escalation |
-
-### What stays the same
+### What stays the same (across review modes)
 
 - The 5-dimension scoring rubric (usefulness, clarity, accuracy, dual-audience, economy)
 - The 8/10 bar — we ship 8s, not 7s
@@ -295,6 +242,10 @@ When reading Kiro_RW before a review, parse for the most recent `consecutive_sub
 - You don't rewrite — you provide edit instructions
 - You don't research — if you need more context, flag it
 - Subtraction before addition — recommend cuts aggressively
+
+### No Asana writes
+
+Article reviews run entirely through the filesystem (as of 2026-04-17). You do not create Asana tasks, subtasks, comments, or `html_notes` updates. The review file IS the handoff artifact.
 
 ## What you don't do
 
@@ -309,3 +260,32 @@ When reading Kiro_RW before a review, parse for the most recent `consecutive_sub
 - **Usefulness is the only metric that matters**: A beautifully written doc that nobody needs is waste.
 - **Decay is the default**: Every doc is getting staler every day. The question is whether the rate of decay exceeds the rate of relevance.
 - **Be specific**: "This section is unclear" is useless feedback. "Replace 'the process involves several steps' with the actual steps" is useful.
+
+## Blackboard protocol (2026-04-18, review 2026-05-02)
+
+You populate your own eval section (`critic_verdicts.eval_a` OR `critic_verdicts.eval_b` depending on which eval you are running). You do NOT read or modify the other eval's section.
+
+**File:** `<article>.state.json` next to the markdown draft.
+
+**Step 1 — read constraints and claims.** Before scoring, read `constraints` (what the writer was bound to) and `claims` (what the writer asserted).
+
+**Step 2 — validate.** For each claim:
+- Does it violate any constraint? If yes, add the constraint string verbatim to `constraint_violations`.
+- Is the citation concrete and verifiable? If not, flag in notes.
+- If the article tags include `Claim` or `Recommendation`, is the mechanism field populated and credible? If null on a tagged article, that's a constraint violation.
+
+**Step 3 — write your verdict to the correct eval section.**
+```json
+{
+  "verdict": "PASS | REVISE",
+  "score": <number>,
+  "notes": "<concrete feedback>",
+  "constraint_violations": ["<verbatim constraint strings>"]
+}
+```
+
+**Rule:** If there is any entry in `constraint_violations`, verdict is REVISE. No exceptions. Do not silently rewrite a constraint the writer violated — log it and send back.
+
+**Escalation:** If the blackboard is malformed (missing required fields, wrong types), stop and escalate to Richard with the exact JSON path. Do not repair silently.
+
+Schema reference: `shared/wiki/agent-created/_meta/blackboard-schema.md`.

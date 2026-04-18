@@ -1,5 +1,3 @@
-<!-- DOC-0002 | duck_id: audit-blind-evaluator-tests -->
-
 # Blind Evaluator Test Suite
 
 Give a fresh agent ONLY ~/shared/DIRECTORY-MAP.md and these prompts. No other context.

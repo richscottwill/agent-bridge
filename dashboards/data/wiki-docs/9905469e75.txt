@@ -1,5 +1,3 @@
-<!-- DOC-0507 | duck_id: wiki-review-ws5-v5-final-eval-b -->
-
 # Eval B — Blind Subjective Reader Evaluation
 
 **Article:** Workstream 5: Algorithmic Ads (v5)

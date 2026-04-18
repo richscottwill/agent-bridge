@@ -1,139 +1,28 @@
 {
-  "generated_at": "2026-04-16T14:30:00Z",
-  "pipeline": "am-backend-phase3",
-  "approval_required": true,
-
+  "generated": "2026-04-17T12:36:00Z",
+  "phase": "am-backend",
   "my_tasks": {
-    "summary": {
-      "total_active": 105,
-      "missing_kiro_rw": 46,
-      "missing_next_action": 47,
-      "missing_both_dates": 50,
-      "missing_priority_with_routine": 0
+    "bucket_caps": {
+      "sweep": {"count": 11, "cap": 5, "over_by": 6, "action": "demote_lowest_priority"},
+      "core": {"count": 13, "cap": 4, "over_by": 9, "action": "demote_lowest_priority"},
+      "engine_room": {"count": 15, "cap": 6, "over_by": 9, "action": "demote_lowest_priority"},
+      "admin": {"count": 5, "cap": 3, "over_by": 2, "action": "demote_lowest_priority"}
     },
-    "enrichment_proposals": [
-      {
-        "task_gid": "1214068275460844",
-        "name": "Review Q2 CCP/ieCCP files from Stacey",
-        "gaps": ["kiro_rw", "next_action_rw"],
-        "proposed_kiro": "Q2 CCP/ieCCP review from Stacey. Relates to quarterly CCP refresh cadence (Brandon confirmed keep using dashboard CCPs for March). Check if Q2 files are ready.",
-        "proposed_next_action": "Open Stacey's Q2 CCP/ieCCP files, compare against current dashboard values, flag any significant deltas"
-      },
-      {
-        "task_gid": "1213730974261148",
-        "name": "Make changes to AU/MX/PAM for the week",
-        "gaps": ["kiro_rw", "next_action_rw"],
-        "proposed_kiro": "Weekly campaign changes task. Recurring pattern — Engine Room work for AU/MX/PAM bid and budget adjustments.",
-        "proposed_next_action": "Review W15 dashboard data, identify bid/budget changes needed for AU, MX, and PAM campaigns"
-      },
-      {
-        "task_gid": "1213423234257246",
-        "name": "Get Enhanced Match Legal Approval",
-        "gaps": ["kiro_rw", "next_action_rw"],
-        "proposed_kiro": "LiveRamp Enhanced Match legal approval. Brandon confirmed $255K stays in PS ENG (4/15). Timeline TBD and slow. FAQ draft due by Apr 22.",
-        "proposed_next_action": "Gather Enhanced Match specs from LiveRamp, draft one-page FAQ for legal review"
-      },
-      {
-        "task_gid": "1213637505601024",
-        "name": "R&O for MX/AU (help to input amount, and remind about confirming budgets)",
-        "gaps": ["kiro_rw", "next_action_rw", "due_on"],
-        "proposed_kiro": "R&O input for MX and AU numbers. Yun reminded Richard this is due TODAY (4/16). Richard asked about file location.",
-        "proposed_next_action": "Confirm R&O file location with Yun, input MX and AU numbers",
-        "proposed_due": "2026-04-16"
-      },
-      {
-        "task_gid": "1213560614815911",
-        "name": "PAM R&O",
-        "gaps": ["kiro_rw", "next_action_rw"],
-        "proposed_kiro": "PAM R&O input. Part of the broader R&O cycle. PAM budget availability has been unanswered for 13 days (critical signal).",
-        "proposed_next_action": "Reply to Brandon on PAM budget availability, then input PAM R&O numbers"
-      },
-      {
-        "task_gid": "1213964668984060",
-        "name": "Brandon 1:1: Draft Enhanced Match FAQ for legal",
-        "gaps": ["kiro_rw", "next_action_rw"],
-        "proposed_kiro": "Brandon 1:1 action item. Enhanced Match FAQ for legal. LiveRamp $255K confirmed in PS ENG budget (4/15). Timeline TBD.",
-        "proposed_next_action": "Draft one-page Enhanced Match FAQ covering: what it is, data flow, legal implications, timeline"
-      },
-      {
-        "task_gid": "1213690904654138",
-        "name": "Monthly: Individual Goals update",
-        "gaps": ["kiro_rw", "next_action_rw"],
-        "proposed_kiro": "Monthly individual goals update in Asana/system. Recurring admin task.",
-        "proposed_next_action": "Update individual goals with April progress — reference Five Levels metrics"
-      },
-      {
-        "task_gid": "1213962513760099",
-        "name": "Brandon 1:1: Set up automated monthly ASP confirmation reminders",
-        "gaps": ["kiro_rw", "next_action_rw"],
-        "proposed_kiro": "Brandon 1:1 action item. $70K OP2 underspend — need automated ASP reminders. Relates to confirm budgets task.",
-        "proposed_next_action": "Design automated ASP confirmation workflow — monthly reminder to confirm actual spend with BK Cho"
-      },
-      {
-        "task_gid": "1213968042348601",
-        "name": "Deep Dive: Add IECCP FAQ to new account playbook",
-        "gaps": ["kiro_rw", "next_action_rw"],
-        "proposed_kiro": "Deep Dive action item. IECCP FAQ for new account playbook. York is integrating MX spend data into ieCCP doc (confirmed 4/15).",
-        "proposed_next_action": "Write IECCP FAQ section for new account playbook — cover what ieCCP is, how to read it, when to refresh"
-      },
-      {
-        "task_gid": "1213917691068688",
-        "name": "Send AU team invoice for prev month",
-        "gaps": ["kiro_rw", "next_action_rw"],
-        "proposed_kiro": "Monthly recurring: send AU team invoice. Last AU invoice sent Mar 3 (Feb invoice). April invoice for March is due.",
-        "proposed_next_action": "Pull March AU Google Ads invoice data, prepare and send to AU team"
-      }
+    "overdue_kill_or_revive": [
+      {"gid": "1213329816575017", "name": "Create FR accounts", "project": "Paid App", "due": "2026-02-20", "days_overdue": 56},
+      {"gid": "1212760973200420", "name": "Source DE/IT/ES", "project": "Paid App", "due": "2026-02-20", "days_overdue": 56},
+      {"gid": "1213530860284714", "name": "Page Creation - MX Beauty/Auto", "project": "MX", "due": "2026-03-23", "days_overdue": 25},
+      {"gid": "1212988092117041", "name": "Paid App (WW Testing)", "project": "WW Testing", "due": "2026-03-31", "days_overdue": 17},
+      {"gid": "1213341921686564", "name": "Testing Document for Kate", "project": "WW Testing", "due": "2026-04-01", "days_overdue": 16},
+      {"gid": "1213917967984980", "name": "Respond to Lena — AU LP URL", "project": "AU", "due": "2026-04-03", "days_overdue": 14},
+      {"gid": "1213764961716427", "name": "WW weblab dial-up", "project": "WW Testing", "due": "2026-04-07", "days_overdue": 10}
     ],
-    "note": "Showing top 10 of 47 tasks needing enrichment. Full list available in DuckDB: SELECT * FROM asana.asana_tasks WHERE deleted_at IS NULL AND completed = FALSE AND (kiro_rw IS NULL OR next_action_rw IS NULL)"
+    "enrichment_proposals": [],
+    "near_due_escalations": [
+      {"gid": "1214074477110993", "name": "Sitelink Audit/Update", "due": "2026-04-17", "action": "auto_escalate_today"},
+      {"gid": "1214081017092577", "name": "MCS LP Review: Lorena synergy", "due": "2026-04-17", "action": "auto_escalate_today"},
+      {"gid": "1213125740755931", "name": "Email overlay WW rollout", "due": "2026-04-18", "action": "flag_tomorrow"}
+    ]
   },
-
-  "portfolio": {
-    "au": {
-      "tasks_scanned": 1,
-      "overdue": [
-        {
-          "task_gid": "1213796951745232",
-          "name": "Look over AU landing page switch",
-          "due": "2026-04-15",
-          "days_overdue": 1,
-          "priority": "Today",
-          "action": "flag_for_frontend",
-          "note": "1 day overdue. Already priority Today. Needs completion or date reset."
-        }
-      ],
-      "near_due_escalated": [],
-      "enrichment_proposals": []
-    },
-    "mx": {
-      "tasks_scanned": 1,
-      "overdue": [
-        {
-          "task_gid": "1213072707685834",
-          "name": "MX Automotive page",
-          "due": "2026-04-15",
-          "days_overdue": 1,
-          "priority": "Today",
-          "action": "flag_for_frontend",
-          "note": "1 day overdue. Already priority Today. Blocked by Vijeth footer — needs status check."
-        }
-      ],
-      "near_due_escalated": [],
-      "enrichment_proposals": []
-    }
-  },
-
-  "core_over_cap_triage": {
-    "current_count": 10,
-    "cap": 4,
-    "over_by": 6,
-    "demotion_candidates": [
-      {"task_gid": "noted", "name": "Promo Test", "reason": "No due date, Not urgent priority — candidate for Backlog"},
-      {"task_gid": "noted", "name": "AppsFlyer setup (tentative date)", "reason": "Due Jul 1, Not urgent — candidate for Backlog"},
-      {"task_gid": "noted", "name": "F90", "reason": "Due Apr 30, Not urgent — could move to Engine Room or Backlog"},
-      {"task_gid": "noted", "name": "WW keyword gap fill based on market-level ASINs", "reason": "No due date, Urgent but no clear timeline — candidate for Backlog"},
-      {"task_gid": "noted", "name": "📋 Paid App — Project Context (Kiro)", "reason": "Pinned reference, not actionable work — should not count toward cap"},
-      {"task_gid": "noted", "name": "AB Customer Redirect", "reason": "No due date, Urgent — Brandon wants it closed (3d unanswered comment). Quick action: add implementation details and complete."}
-    ],
-    "recommendation": "Move Promo Test, AppsFlyer, and WW keyword gap fill to Backlog. Complete AB Customer Redirect (Brandon asked to close it). Reclassify Paid App Context as pinned reference. This brings Core to 5/4 — still over by 1. F90 (Apr 30) could stay if actively worked."
-  }
+  "portfolio": {}
 }

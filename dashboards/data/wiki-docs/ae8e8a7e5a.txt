@@ -1,5 +1,3 @@
-<!-- DOC-0018 | duck_id: callout-ca-context -->
-
 # CA Paid Search — Market Context
 
 Last updated: 2026-03-30

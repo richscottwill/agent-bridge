@@ -175,3 +175,12 @@ key_entities: ["Baloo", "Shopping Ads", "Google Merchant Center", "Vijay Kumar",
 action_verbs: ["evaluate", "test", "guard", "attribute", "scale"]
 update_triggers: ["early access data available", "cost guardrails finalized", "full test decision", "Google updates", "consumer Amazon conflict resolved"]
 -->
+
+
+## Related
+
+- [Baloo Ref Tag Attribution Risk](baloo-ref-tag-attribution-risk) — open P0 attribution issue
+- [Polaris Program](../markets/polaris-program) — complementary Brand LP rollout
+- [Paid Search Testing Approach](testing-approach-kate-v5) — Workstream 4 context
+- [OP1 2027 Innovation Shortlist](../strategy/op1-2027-innovation-shortlist) — Baloo dependencies for 2027 bets
+- [Sid Acquisition Funnel Map](../strategy/sid-acquisition-funnel-map) — channel context

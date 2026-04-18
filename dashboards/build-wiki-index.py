@@ -20,6 +20,35 @@ from collections import Counter
 WIKI_ROOT = Path(__file__).parent.parent / "wiki"
 OUTPUT = Path(__file__).parent / "data" / "wiki-search-index.json"
 DOCS_DIR = Path(__file__).parent / "data" / "wiki-docs"
+SHAREPOINT_CACHE = Path(__file__).parent / "data" / "sharepoint-artifacts.json"
+WIKI_INDEX_MD = WIKI_ROOT / "agent-created" / "_meta" / "wiki-index.md"
+
+
+def load_sharepoint_cache():
+    """Load SharePoint artifacts cache if present. Returns dict keyed by slug stem.
+
+    Each value has: {category, path, modified, size}.
+    Returns empty dict if cache missing — builder still works, just no published status.
+    """
+    if not SHAREPOINT_CACHE.exists():
+        return {}, None
+    try:
+        data = json.loads(SHAREPOINT_CACHE.read_text())
+    except Exception as e:
+        print(f"Warning: SharePoint cache malformed: {e}")
+        return {}, None
+    lookup = {}
+    for art in data.get("artifacts", []):
+        stem = art.get("stem", "").lower()
+        if stem:
+            # If the same stem appears in multiple categories, prefer the first match.
+            # (This is rare; stems should be globally unique.)
+            lookup.setdefault(stem, art)
+    generated = data.get("generated")
+    return lookup, generated
+
+
+SP_LOOKUP, SP_GENERATED = load_sharepoint_cache()
 
 # ── Market detection ──
 MARKET_PATTERNS = {
@@ -118,31 +147,33 @@ def detect_topics(text):
 
 # ── Frontmatter parser ──
 def parse_frontmatter(text):
-    """Extract YAML-like frontmatter from markdown."""
+    """Extract YAML-like frontmatter from markdown.
+
+    Handles docs with multiple leading --- blocks (e.g. a wrapper added on top
+    of an original frontmatter). The first block's keys take precedence, but
+    all blocks are stripped from the body.
+    """
     fm = {}
-    if not text.startswith("---"):
-        return fm, text
-    end = text.find("---", 3)
-    if end == -1:
-        return fm, text
-    block = text[3:end].strip()
-    body = text[end + 3:].strip()
-    if body.startswith("---"):
-        end2 = body.find("---", 3)
-        if end2 != -1:
-            block2 = body[3:end2].strip()
-            body = body[end2 + 3:].strip()
-            for line in block2.split("\n"):
-                m = re.match(r'^(\w[\w\-]*)\s*:\s*(.+)', line)
-                if m:
-                    fm[m.group(1).strip()] = m.group(2).strip().strip('"').strip("'")
-    for line in block.split("\n"):
-        m = re.match(r'^(\w[\w\-]*)\s*:\s*(.+)', line)
-        if m:
-            key = m.group(1).strip()
-            val = m.group(2).strip().strip('"').strip("'")
-            if key not in fm:
-                fm[key] = val
+    body = text
+    # Strip any number of leading frontmatter blocks, merging keys first-wins.
+    while True:
+        if not body.startswith("---"):
+            break
+        end = body.find("---", 3)
+        if end == -1:
+            break
+        block = body[3:end].strip()
+        body = body[end + 3:].lstrip("\n")
+        # Strip any inline HTML comment between FM blocks (doc-id markers)
+        body = re.sub(r'^\s*<!--[^>]*-->\s*\n*', '', body, count=1)
+        for line in block.split("\n"):
+            m = re.match(r'^(\w[\w\-]*)\s*:\s*(.+)', line)
+            if m:
+                key = m.group(1).strip()
+                val = m.group(2).strip().strip('"').strip("'")
+                # First occurrence wins (outer wrapper is freshest)
+                if key not in fm:
+                    fm[key] = val
     return fm, body
 
 
@@ -306,6 +337,23 @@ def index_file(filepath):
     doc_file = DOCS_DIR / f"{doc_id}.txt"
     doc_file.write_text(body, encoding="utf-8")
 
+    # SharePoint publication status (from cache)
+    sp_info = SP_LOOKUP.get(filepath.stem.lower())
+    published = bool(sp_info)
+    sharepoint_path = sp_info["path"] if sp_info else ""
+    sharepoint_modified = sp_info["modified"] if sp_info else ""
+    # Stale detection: SP copy is older than local 'updated' field
+    sharepoint_stale = False
+    if published and sharepoint_modified and fm.get("updated"):
+        # Compare date portions only (ISO format). local 'updated' may be date-only.
+        try:
+            sp_date = sharepoint_modified[:10]
+            local_date = fm.get("updated", "")[:10]
+            if local_date > sp_date:
+                sharepoint_stale = True
+        except Exception:
+            pass
+
     return {
         "id": doc_id,
         "title": title,
@@ -328,6 +376,10 @@ def index_file(filepath):
         "word_count": len(body.split()),
         "search_text": search_text[:2000],
         "archived": is_archived,
+        "published": published,
+        "sharepoint_path": sharepoint_path,
+        "sharepoint_modified": sharepoint_modified,
+        "sharepoint_stale": sharepoint_stale,
     }
 
 
@@ -596,6 +648,177 @@ def compute_groups(docs):
     return groups
 
 
+def write_wiki_index_md(docs, sp_generated=None):
+    """Write ~/shared/wiki/agent-created/_meta/wiki-index.md from the scanned docs.
+
+    Only includes agent-created articles (source starts with 'wiki-' and not meta/reviews).
+    Grouped into 8 sections matching the dashboard category filter.
+    """
+    ac_docs = [d for d in docs
+               if d["source"].startswith("wiki-")
+               and d["source"] not in ("wiki-reviews", "wiki-meta")
+               and not d.get("archived")
+               and (not d.get("group_key") or d.get("group_role") == "latest")]
+
+    # Bucket into 8 sections
+    # Historical tests = dated filenames in testing/
+    testing_historical = []
+    agent_sys = []
+    by_cat = {
+        "Testing & Experimentation": [],
+        "Strategy & Frameworks": [],
+        "Markets / PS Operations": [],
+        "Operations & Process": [],
+        "Reporting": [],
+        "Research Briefs": [],
+    }
+    AGENT_SLUGS = {"agent-architecture", "body-system-architecture", "grok-swarm",
+                   "kiro-cli-pretooluse-hook-bug", "meeting-ingestion-pipeline"}
+    SKIP_ORPHAN_SLUGS = {"ai-automation-impact", "testing-appendix"}
+    skipped = []
+
+    for doc in ac_docs:
+        stem = Path(doc["path"]).stem
+        if stem in SKIP_ORPHAN_SLUGS:
+            skipped.append(doc); continue
+        if stem in AGENT_SLUGS or doc.get("audience") == "agent":
+            agent_sys.append(doc); continue
+        if doc["source"] == "wiki-testing":
+            fn = Path(doc["path"]).name
+            if fn[:4].isdigit() and len(fn) > 4 and fn[4] == "-":
+                testing_historical.append(doc)
+            else:
+                by_cat["Testing & Experimentation"].append(doc)
+        elif doc["source"] == "wiki-strategy":
+            by_cat["Strategy & Frameworks"].append(doc)
+        elif doc["source"] == "wiki-markets":
+            by_cat["Markets / PS Operations"].append(doc)
+        elif doc["source"] == "wiki-operations":
+            by_cat["Operations & Process"].append(doc)
+        elif doc["source"] == "wiki-reporting":
+            by_cat["Reporting"].append(doc)
+        elif doc["source"] == "wiki-research":
+            by_cat["Research Briefs"].append(doc)
+        elif doc["source"] == "wiki-article":
+            by_cat["Strategy & Frameworks"].append(doc)
+
+    sections = [
+        ("Testing & Experimentation", by_cat["Testing & Experimentation"],
+         "Active test designs, methodologies, experiment frameworks, and workstream deep-dives."),
+        ("Historical Tests (snapshot)", testing_historical,
+         "Dated test artifacts preserved as snapshots — do not decay-audit these."),
+        ("Strategy & Frameworks", by_cat["Strategy & Frameworks"],
+         "POVs, playbooks, mental models, strategic narratives, leadership-facing docs."),
+        ("Markets / PS Operations", by_cat["Markets / PS Operations"],
+         "Market wikis (AU/MX/US), team capacity, cross-market programs."),
+        ("Operations & Process", by_cat["Operations & Process"],
+         "SOPs, playbooks, tool specs, vocabulary guides, process documentation."),
+        ("Reporting", by_cat["Reporting"],
+         "Dashboards, WBR/MBR templates, analysis docs."),
+        ("Research Briefs", by_cat["Research Briefs"],
+         "Investigation outputs, vendor/competitor intel, experimental research dossiers."),
+        ("Agent / System Documentation", agent_sys,
+         "Agent architecture, body system, agent personas, meta-docs about the system itself."),
+    ]
+
+    def entry(doc):
+        title = doc["title"] or Path(doc["path"]).stem.replace("-", " ").title()
+        desc = doc["snippet"] or "(no description)"
+        if len(desc) > 180:
+            desc = desc[:180].rsplit(" ", 1)[0] + "..."
+        stem = Path(doc["path"]).stem
+        parts = [f"slug: {stem}", f"status: {doc.get('status') or 'DRAFT'}"]
+        if doc.get("doc_type"): parts.append(f"doc-type: {doc['doc_type']}")
+        if doc.get("audience"): parts.append(f"audience: {doc['audience']}")
+        if doc.get("level"): parts.append(f"level: {doc['level']}")
+        if doc.get("published"):
+            marker = "published"
+            if doc.get("sharepoint_stale"):
+                marker = "published (stale — local newer)"
+            parts.append(f"sharepoint: {marker}")
+        else:
+            parts.append("sharepoint: local-only")
+        out = f"- [{title}](~/shared/wiki/{doc['path']}): {desc}\n  - {' | '.join(parts)}"
+        return out
+
+    lines = [
+        "---",
+        'title: "Wiki Index"',
+        "status: FINAL",
+        "audience: amazon-internal",
+        "owner: Richard Williams",
+        "created: 2026-04-12",
+        f"updated: {datetime.now().strftime('%Y-%m-%d')}",
+        "doc-type: reference",
+        "auto_generated: true",
+        "---",
+        "<!-- DOC-0449 | duck_id: wiki-meta-wiki-index -->",
+        "<!-- AUTO-GENERATED by build-wiki-index.py. Do not edit by hand; changes will be overwritten. -->",
+        "",
+        "# Wiki Index",
+        "",
+        "> Knowledge base for Amazon Business Paid Search. Auto-generated from a filesystem scan of `~/shared/wiki/agent-created/` by `build-wiki-index.py`. SharePoint publication status pulled from `data/sharepoint-artifacts.json`.",
+        "",
+        f"Last generated: {datetime.now().isoformat(timespec='seconds')}",
+    ]
+    if sp_generated:
+        lines.append(f"SharePoint cache as of: {sp_generated}")
+    lines += ["", "---", "", "## Articles", ""]
+
+    totals = {}
+    for name, bucket, blurb in sections:
+        lines.append(f"### {name} ({len(bucket)})")
+        lines.append("")
+        lines.append(f"_{blurb}_")
+        lines.append("")
+        totals[name] = len(bucket)
+        for doc in sorted(bucket, key=lambda d: Path(d["path"]).stem):
+            lines.append(entry(doc))
+            lines.append("")
+        lines.append("")
+
+    lines += ["---", "", "## Summary", "", "| Category | Count |", "|----------|-------|"]
+    total = 0
+    for name, _, _ in sections:
+        lines.append(f"| {name} | {totals[name]} |")
+        total += totals[name]
+    lines.append(f"| **Total (indexed)** | **{total}** |")
+    lines.append("")
+
+    all_in = [d for _, bkt, _ in sections for d in bkt]
+    st = Counter(d["status"] or "UNSET" for d in all_in)
+    published = sum(1 for d in all_in if d.get("published"))
+    stale = sum(1 for d in all_in if d.get("sharepoint_stale"))
+    lines.append(f"**Status:** {st.get('REVIEW',0)} REVIEW | {st.get('DRAFT',0)} DRAFT | {st.get('FINAL',0)} FINAL | {st.get('UNSET',0)} unset")
+    lines.append(f"**SharePoint:** {published} published | {total - published} local-only | {stale} published-stale (local newer than SP)")
+    lines.append("")
+
+    lines += ["---", "", "## Intentional orphans (not indexed)", ""]
+    lines.append("Docs that exist in the corpus but intentionally not tracked as wiki articles:")
+    lines.append("")
+    for d in skipped:
+        lines.append(f"- `{Path(d['path']).stem}` — `{d['path']}`. Rationale: see `_meta/roadmap.md` Orphan Decisions table.")
+    lines.append("")
+    lines.append("Plus the 13 Kiro steering packages in `kiro-steering/` — these are steering files for the Paid Acq team rollout, not wiki articles.")
+    lines.append("")
+
+    lines += ["---", "", "## Distribution model", "",
+              "Local wiki (`~/shared/wiki/agent-created/`) is the working branch. SharePoint `Documents/Artifacts/` is production.",
+              "",
+              "- **DRAFT** — article exists locally, still being written or revised.",
+              "- **REVIEW** — article is ready for Richard to review for SharePoint publish.",
+              "- **FINAL** — article has been human-approved and published to SharePoint.",
+              "- **sharepoint: published** — a matching `<slug>.docx` exists under `Documents/Artifacts/<category>/`.",
+              "- **sharepoint: published (stale)** — the SharePoint copy is older than the local `updated` date. Needs a re-push.",
+              "- **sharepoint: local-only** — no matching `<slug>.docx` on SharePoint.",
+              "",
+              "The wiki-search dashboard (`shared/dashboards/wiki-search.html`) is the browsing UI over this index.",
+              ""]
+
+    WIKI_INDEX_MD.write_text("\n".join(lines))
+    return total, published, stale
+
+
 def main():
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     DOCS_DIR.mkdir(parents=True, exist_ok=True)
@@ -666,6 +889,11 @@ def main():
     market_counts = Counter(m for d in unique_docs for m in d["markets"])
     topic_counts = Counter(d["primary_topic"] for d in unique_docs if d["primary_topic"])
     doctype_counts = Counter(d["doc_type"] for d in unique_docs if d["doc_type"])
+    # SharePoint publication stats (agent-created articles only — others don't sync to SP)
+    ac_for_sp = [d for d in unique_docs if d["source"].startswith("wiki-") and d["source"] not in ("wiki-reviews", "wiki-meta")]
+    sp_published = sum(1 for d in ac_for_sp if d.get("published"))
+    sp_stale = sum(1 for d in ac_for_sp if d.get("sharepoint_stale"))
+    sp_local_only = len(ac_for_sp) - sp_published
 
     # Build group summary for UI
     group_summary = {}
@@ -688,6 +916,13 @@ def main():
         "markets": dict(market_counts),
         "topics": dict(topic_counts),
         "doc_types": dict(doctype_counts),
+        "sharepoint": {
+            "cache_generated": SP_GENERATED,
+            "published": sp_published,
+            "local_only": sp_local_only,
+            "stale": sp_stale,
+            "total_agent_created": len(ac_for_sp),
+        },
         "tags": tag_counts,
         "groups": group_summary,
         "documents": docs,
@@ -700,8 +935,16 @@ def main():
     print(f"Topics: {dict(topic_counts)}")
     print(f"Tags: {len(tag_counts)} unique")
     print(f"Groups: {len(group_summary)} ({grouped_count} docs grouped)")
+    print(f"SharePoint: {sp_published} published / {sp_local_only} local-only / {sp_stale} published-stale (cache: {SP_GENERATED or 'MISSING'})")
     print(f"Doc body files: {DOCS_DIR}")
     print(f"Output: {OUTPUT}")
+
+    # Write human-readable meta index
+    try:
+        md_total, md_pub, md_stale = write_wiki_index_md(docs, SP_GENERATED)
+        print(f"Wiki index .md: {WIKI_INDEX_MD} ({md_total} articles, {md_pub} published, {md_stale} stale)")
+    except Exception as e:
+        print(f"Warning: failed to write wiki-index.md: {e}")
 
 
 if __name__ == "__main__":

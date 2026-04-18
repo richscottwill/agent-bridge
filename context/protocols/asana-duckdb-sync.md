@@ -16,12 +16,13 @@ DB path: `/home/prichwil/shared/data/duckdb/ps-analytics.duckdb`
 | Project | GID |
 |---------|-----|
 | My Tasks | `1212732838073807` |
-| ABPS AI Content | `1213917352480610` |
 | AU | `1212762061512767` |
 | MX | `1212775592612917` |
 | WW Testing | `1205997667578893` |
 | WW Acquisition | `1206011235630048` |
 | Paid App | `1205997667578886` |
+
+**Wiki articles are NOT synced via Asana.** The wiki artifact pipeline lives in `~/shared/wiki/agent-created/` (source of truth) → SharePoint `Documents/Artifacts/` (published .docx) → Kiro dashboard `shared/dashboards/wiki-search.html` (search + pipeline view). Do not add article-tracking projects to this sync.
 
 ### Custom Field GIDs (column mapping)
 | Column | Field GID | Type |

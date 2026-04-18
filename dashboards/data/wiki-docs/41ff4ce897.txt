@@ -1,5 +1,3 @@
-<!-- DOC-0212 | duck_id: meeting-yun-sync -->
-
 # Yun 1:1 Sync
 
 ## Metadata

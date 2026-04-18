@@ -1,18 +1,3 @@
-<!-- DOC-0386 | duck_id: strategy-ieccp-planning-framework -->
-
----
-title: "ie%CCP Planning & Optimization Framework"
-status: DRAFT
-doc-type: strategy
-audience: amazon-internal
-level: 2
-owner: Richard Williams
-created: 2026-03-30
-updated: 2026-04-04
-update-trigger: CCP revision by finance, ie%CCP target changes, new market budget planning
-tags: [ieccp, budget, cpa, ccp, planning, mx]
----
-
 # ie%CCP Planning & Optimization Framework
 
 > How to understand, plan around, and optimize ie%CCP for Paid Search budget decisions.

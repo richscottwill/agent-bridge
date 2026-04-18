@@ -31,3 +31,12 @@
 - [audit-asana-writes:Prompt ordering] RESTRUCTURE (output_quality) → 171w→172w. A=0.95 B=0.94 Δ=+0.01. 50s. KEEP.
 - [amcc:Integration with Other Organs] COMPRESS (info_retrieval) → 1966w→1934w. A=1.00 B=1.00 Δ=0.00. 45s. KEEP.
 - [REMOVE×nervous-system: 0 kept / 1 total] [MERGE×brain: 0 kept / 1 total] [COMPRESS×spine: 0 kept / 1 total] [ADD×memory: 2 kept / 2 total] [COMPRESS×email-style: 0 kept / 1 total] [MERGE×amazon-style: 1 kept / 1 total] [RESTRUCTURE×docs-style: 1 kept / 1 total] [ADD×eod-refresh: 1 kept / 1 total] [RESTRUCTURE×audit-asana: 1 kept / 1 total] [COMPRESS×amcc: 2 kept / 2 total]
+
+## 2026-04-17 EOD (Run 20)
+- Asana: 5 Today→Urgent demotions. 0 genuine completions. 44 ABPS AI Content bulk closes (project deprecation). 2 ongoing blockers (MX Auto page 29d, Kingpin 32d).
+- Meeting: AI Tool Demo 51m — Richard led walkthrough of AI-powered WBR callout workflow. L3 signal. Team commitments by 4/21 (master prompt), 4/25 (Adi MX), 4/28 (Andrew UK).
+- Wiki: 24 new DRAFTs + 7 consolidation merges. 0 DRAFT→FINAL promotions.
+- Body: 28,792w (14 organs). No compression signals.
+- Recurring: wiki_lint disabled (protocol change). weekly_scorecard completed.
+- Phase 6 Karpathy: skipped with explicit JSON (deferred to next scheduled hook).
+- Hard thing: 20 workdays at zero L1.

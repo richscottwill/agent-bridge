@@ -1,17 +1,3 @@
-<!-- DOC-0325 | duck_id: program-team-workload-distribution -->
-
----
-title: Team Capacity & Workload Distribution
-status: DRAFT
-audience: amazon-internal
-level: N/A
-owner: Richard Williams
-created: 2026-04-04
-updated: 2026-04-04
-update-trigger: team changes, market ownership shifts, new initiatives assigned, quarterly planning
-tags: team, capacity, workload, brandon, operations
----
-
 # Team Capacity & Workload Distribution
 
 > Who is doing what across 10 markets. Designed for Brandon's team management — identifying coverage gaps, overload risks, and delegation opportunities.

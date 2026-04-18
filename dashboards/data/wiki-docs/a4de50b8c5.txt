@@ -1,5 +1,3 @@
-<!-- DOC-0439 | duck_id: wiki-health-health-2026-04-04 -->
-
 # Wiki Health Check — 2026-04-04
 
 Run by: wiki-librarian

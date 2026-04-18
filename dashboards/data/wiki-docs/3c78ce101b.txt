@@ -1,5 +1,3 @@
-<!-- DOC-0134 | duck_id: context-hedy-sync-2026-03-23-0009 -->
-
 # Hedy Session Sync — 2026-03-23 00:09 UTC
 Sessions processed: 28
 Mode: resync

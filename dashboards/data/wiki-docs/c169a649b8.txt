@@ -1,5 +1,3 @@
-<!-- DOC-0007 | duck_id: callout-au-analysis-2026-w13 -->
-
 # AU W13 Analysis Brief
 
 ## Registration summary

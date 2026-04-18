@@ -102,3 +102,12 @@ key_entities: ["Demand Gen", "AI Max", "DG Video", "Business Essentials", "Prime
 action_verbs: ["test", "expand", "guard", "coordinate", "scale"]
 update_triggers: ["AI Max test design completed", "AI Max US test launches", "DG Video results available", "BSE video performance data", "Hydra coordination status change"]
 -->
+
+
+## Related
+
+- [AI Max Test Design](ai-max-test-design) — US-market test, Google Summit readout folded in
+- [OCI Program](oci-program) — the measurement discipline AI Max inherits
+- [Paid Search Testing Approach](testing-approach-kate-v5) — this workstream in full context
+- [LiveRamp Program](../research/liveramp-program) — LiveRamp audiences for Demand Gen + YouTube retargeting
+- [Project Baloo Overview](project-baloo-overview) — the landing page AI Max needs

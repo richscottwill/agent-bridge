@@ -1,5 +1,3 @@
-<!-- DOC-0193 | duck_id: meeting-acq-promo-ohs -->
-
 # ACQ Promo Office Hours
 
 ## Metadata

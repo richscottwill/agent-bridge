@@ -1,5 +1,3 @@
-<!-- DOC-0122 | duck_id: context-exp1-compressed-context -->
-
 # Compressed Context — Richard Williams
 Last updated: 2026-03-20
 

@@ -1,0 +1,87 @@
+# Wiki Review Queue
+
+Drafts awaiting wiki-critic review. The critic reads this queue, scores pending drafts on the 5-dimension rubric, and flips status to REVIEW on approval or signals revision via `_meta/revision-queue.md`.
+
+Format: `- [ ] {slug} — drafted YYYY-MM-DD — awaiting wiki-critic`
+
+---
+
+## Batch drafted 2026-04-17 — post-consolidation state
+
+After the 2026-04-17 consolidation pass, the 24 new drafts plus overlapping legacy files were merged into 18 canonical program/topic documents. The list below reflects the canonical slugs only.
+
+### Program docs (merged from multiple sources)
+
+- [ ] liveramp-program — drafted 2026-04-17 — awaiting wiki-critic (merged from liveramp-identity-primer, enhanced-match-liveramp-explainer, enhanced-match-liveramp)
+- [ ] f90-program — drafted 2026-04-17 — awaiting wiki-critic (merged from f90-lifecycle-strategy, f90-rollout-state)
+- [ ] polaris-program — drafted 2026-04-17 — awaiting wiki-critic (merged from polaris-rollout-status, polaris-rollout-timeline × 2)
+- [ ] oci-program — drafted 2026-04-17 — awaiting wiki-critic (merged from oci-business-case, oci-execution-guide, oci-implementation-guide, oci-rollout-playbook, oci-rollout-methodology, workstream-oci-bidding, oci-playbook-rewrite, oci-methodology-knowledge-share, oci-performance)
+- [ ] forecast-system — drafted 2026-04-17 — awaiting wiki-critic (merged from forecast-model-multi-signal-blend, forecast-reconciliation-checks)
+- [ ] grok-swarm — drafted 2026-04-17 — awaiting wiki-critic (merged from 01-grok-synthesizer, 02-the-director, 03-the-questioner, 04-the-operator, 05-the-engineer)
+
+### Standalone drafts (new from context scan)
+
+- [ ] ai-tool-wbr-callout-workflow — drafted 2026-04-17 — awaiting wiki-critic
+- [ ] market-expansion-playbook — drafted 2026-04-17 — awaiting wiki-critic
+- [ ] op1-2027-innovation-shortlist — drafted 2026-04-17 — awaiting wiki-critic
+- [ ] baloo-ref-tag-attribution-risk — drafted 2026-04-17 — awaiting wiki-critic
+- [ ] sid-acquisition-funnel-map — drafted 2026-04-17 — awaiting wiki-critic
+- [ ] cpc-benchmark-defense-playbook — drafted 2026-04-17 — awaiting wiki-critic
+- [ ] mie-marketing-intelligent-engine — drafted 2026-04-17 — awaiting wiki-critic
+- [ ] negative-keyword-ownership-model — drafted 2026-04-17 — awaiting wiki-critic
+- [ ] paid-app-attribution-debate — drafted 2026-04-17 — awaiting wiki-critic
+- [ ] on-site-placement-catalog — drafted 2026-04-17 — awaiting wiki-critic
+- [ ] sharepoint-quip-deprecation-migration — drafted 2026-04-17 — awaiting wiki-critic
+- [ ] op1-op2-vocabulary-guide — drafted 2026-04-17 — awaiting wiki-critic
+- [ ] kiro-cli-pretooluse-hook-bug — drafted 2026-04-17 — awaiting wiki-critic
+- [ ] austin-offsite-strategic-readouts — drafted 2026-04-17 — awaiting wiki-critic
+- [ ] meeting-ingestion-pipeline — drafted 2026-04-17 — awaiting wiki-critic
+- [ ] quiet-worker-antipattern — drafted 2026-04-17 — awaiting wiki-critic
+- [ ] scope-defense-playbook — drafted 2026-04-17 — awaiting wiki-critic
+
+### Folded in (no separate review needed)
+
+- google-summit-ai-max-learnings → absorbed into ai-max-test-design.md as "Google Summit Readout" section
+
+### Pre-existing canonical docs touched by consolidation (no re-review needed unless content changed)
+
+- au-market-wiki (gained Related section)
+- mx-market-wiki (gained Related section)
+- project-baloo-overview (gained Related section)
+- workstream-algorithmic-ads (gained Related section)
+- workstream-user-experience (gained Related section)
+- ww-testing-tracker (gained Related program references section)
+- testing-approach-kate-v5 (gained Related program references section)
+- ai-max-test-design (gained Google Summit Readout section + Related section)
+
+
+---
+
+## Proposals added 2026-04-17 — wiki-maintenance W16 run
+
+Top 5 candidates surfaced by the W16 maintenance run. All come from DuckDB `signals.wiki_candidates` (multi-channel signal strength) except the last, which came from the hook-contribution queue.
+
+- [ ] **polaris-program (enrich)** — quality 20.5, 6 mentions, 3 channels over 9.8 days. Signal: Polaris Brand LP rollout is hottest trending topic. Article exists but pre-dates recent Slack/hedy discussion. Action: wiki-editor assigns enrichment — pull last 7 days of polaris-brand-lp Slack thread + April hedy meetings.
+
+- [ ] **ieccp-planning-framework + mx-market-wiki (cross-link + enrich)** — quality 13.5, 3 mentions, 2 channels. Signal: MX budget/ie%CCP conversations clustering in hedy (Kate sync) + ab-paid-search-abix. Action: enrich mx-market-wiki's budget section; add backlink from ieccp-planning-framework.
+
+- [ ] **oci-program (enrich)** — quality 11.5, 3 mentions, 2 channels. Signal: OCI rollout still trending despite being one of the oldest topics. Action: verify all FR/IT/ES/JP status markers reflect 100% rollout per audit 4/4 note; pull any recent OCI learnings from slack + hedy.
+
+- [ ] **au-market-wiki (enrich CPA/CVR section)** — quality 9.5, 2 mentions, 2 channels. Signal: AU CPA/CVR conversations recurring. Action: add or strengthen CPA/CVR performance section; cross-link au-keyword-cpa-dashboard.
+
+- [ ] **paid-app-attribution-debate (enrich) OR new `pam-budget-availability`** — quality 6.0, 1 channel, 1 mention (Brandon signal from 4/16). Signal: PAM Budget Availability flagged as top priority in AM-Auto brief. Action: either absorb into existing paid-app-attribution-debate article under a "Budget context" section, OR draft a tactical doc if Brandon's @mention turns into a sustained thread. P2 — wait one more signal before drafting new.
+
+## Proposals added 2026-04-17 — hook-contribution candidate (P3)
+
+- [ ] **distributed-contribution-hook-pattern (new)** — source: session-summary hook, 2026-04-17T18:16. Signal: the hook-observe + central-consume pattern itself merits documentation. Audience would be agent + personal. Low priority: this is meta-infrastructure, not paid-search content. Could fold into agent-architecture.md as a new section instead of a standalone article. Defer — not worth a dedicated doc unless the pattern expands to more than 4 contributing hooks.
+
+## Proposals added 2026-04-17 (evening run) — hook-contribution cluster
+
+- [ ] **agent-architecture (enrich)** — source: session-summary hook, 4 candidates 2026-04-17T18:32/18:42/18:44/18:58. Signal: four related observations in one session cluster into two coherent sections for the agent-architecture doc: (1) **Agent operating norms** — pick sensible defaults instead of asking on low-stakes choices, treat "needs a dedicated run" framing as caution-as-procrastination when the operation is reversible and data is in context. (2) **Wiki system topology** — the wiki has three surfaces (human-readable index, auto-crawled dashboard JSON, SharePoint published copies); make the crawler authoritative and derive the rest; use cache-and-derive for expensive external calls (SharePoint MCP, Slack search) to run once per cycle. Both sections are meta-infrastructure and fit agent-architecture's audience (agent + personal). **Grouping rationale:** tight thematic cluster — 2 signals on operating norms, 2 on wiki topology — one article-level proposal, two new sections. Supersedes the earlier "distributed-contribution-hook-pattern" deferral by folding the pattern observation into section 2 of this enrichment.
+
+## Actions for Richard
+
+- Confirm which of the 5 signal-driven enrichments to prioritize for next week's wiki-team runs (default: polaris-program + oci-program are P1 given mention volume).
+- Decide: absorb distributed-contribution-hook-pattern into agent-architecture — **now combined with 3 adjacent signals into a single `agent-architecture (enrich)` proposal above. Just needs your thumbs-up to dispatch wiki-editor.**
+- Separately: the morning maintenance run surfaced 46-article index drift and 0% blackboard adoption. See health-2026-04-17.md + audit-2026-04-17.md (morning) and -run2.md files (evening). Index drift is now fixed (82 indexed, 0 orphans). Blackboard still at 0% — track to 4/30 build-start check.
+- Low priority: 9 legacy `~/shared/artifacts/*` cross-refs need a systematic swap-pass. ~15 min effort, 6 files affected. Say the word and I'll queue it.

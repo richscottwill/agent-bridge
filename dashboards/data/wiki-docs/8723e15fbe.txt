@@ -1,5 +1,3 @@
-<!-- DOC-0207 | duck_id: meeting-oci-rollout -->
-
 # OCI Rollout Discussions
 
 ## Metadata

@@ -1,18 +1,3 @@
-<!-- DOC-0385 | duck_id: strategy-genai-search-traffic -->
-
----
-title: GenAI Search Traffic — What We Know and What It Means for PS
-status: DRAFT
-doc-type: strategy
-audience: amazon-internal
-level: 4
-owner: Richard Williams
-created: 2026-04-04
-updated: 2026-04-04
-update-trigger: ACE team updates, GenAI traffic measurement available, Google AI Overview changes
-tags: [aeo, genai, ai-overviews, zero-click, ace, chatgpt, mcp]
----
-
 # GenAI Search Traffic — What We Know and What It Means for PS
 
 ---

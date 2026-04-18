@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-16T15:54:01.600893+00:00",
+  "generated": "2026-04-17T12:57:29.431056+00:00",
   "five_levels": [
     {
       "level": 1,
@@ -45,8 +45,8 @@
       "actual": 1348,
       "budget": 2500,
       "utilization": 54,
-      "days_stale": 1,
-      "updated": "2026-04-15"
+      "days_stale": 0,
+      "updated": "2026-04-17"
     },
     {
       "organ": "Memory",
@@ -54,7 +54,7 @@
       "actual": 1997,
       "budget": 3500,
       "utilization": 57,
-      "days_stale": 1,
+      "days_stale": 2,
       "updated": "2026-04-15"
     },
     {
@@ -63,44 +63,44 @@
       "actual": 3869,
       "budget": 3500,
       "utilization": 111,
-      "days_stale": 1,
+      "days_stale": 2,
       "updated": "2026-04-15"
     },
     {
       "organ": "Eyes",
       "organ_key": "eyes",
-      "actual": 1122,
+      "actual": 1126,
       "budget": 2500,
       "utilization": 45,
-      "days_stale": 1,
-      "updated": "2026-04-15"
+      "days_stale": 0,
+      "updated": "2026-04-17"
     },
     {
       "organ": "Amcc",
       "organ_key": "amcc",
-      "actual": 3407,
+      "actual": 3044,
       "budget": 2000,
-      "utilization": 170,
-      "days_stale": 1,
-      "updated": "2026-04-15"
+      "utilization": 152,
+      "days_stale": 0,
+      "updated": "2026-04-17"
     },
     {
       "organ": "Hands",
       "organ_key": "hands",
-      "actual": 1136,
+      "actual": 1185,
       "budget": 2000,
-      "utilization": 57,
-      "days_stale": 2,
-      "updated": "2026-04-14"
+      "utilization": 59,
+      "days_stale": 0,
+      "updated": "2026-04-17"
     },
     {
       "organ": "Device",
       "organ_key": "device",
-      "actual": 2072,
+      "actual": 2088,
       "budget": 2000,
       "utilization": 104,
-      "days_stale": 1,
-      "updated": "2026-04-15"
+      "days_stale": 0,
+      "updated": "2026-04-17"
     },
     {
       "organ": "Nervous System",
@@ -108,7 +108,7 @@
       "actual": 1307,
       "budget": 1500,
       "utilization": 87,
-      "days_stale": 1,
+      "days_stale": 2,
       "updated": "2026-04-15"
     },
     {
@@ -117,7 +117,7 @@
       "actual": 1170,
       "budget": 1500,
       "utilization": 78,
-      "days_stale": 1,
+      "days_stale": 2,
       "updated": "2026-04-15"
     },
     {
@@ -126,7 +126,7 @@
       "actual": 2027,
       "budget": 2000,
       "utilization": 101,
-      "days_stale": 1,
+      "days_stale": 2,
       "updated": "2026-04-15"
     },
     {
@@ -135,13 +135,13 @@
       "actual": 1051,
       "budget": 0,
       "utilization": 0,
-      "days_stale": 2,
+      "days_stale": 3,
       "updated": "2026-04-14"
     }
   ],
-  "body_total": 20506,
+  "body_total": 20212,
   "body_budget": 23000,
-  "body_utilization": 89,
+  "body_utilization": 88,
   "over_budget_count": 4,
   "total_runs": 11,
   "total_experiments": 115,
@@ -161,7 +161,7 @@
       "word_delta": -47,
       "score_a": 0.375,
       "score_b": 1.0,
-      "started_at": "2026-04-04 15:14:10.222373",
+      "started_at": "2026-04-04 15:14:10",
       "notes": null
     },
     {
@@ -176,22 +176,7 @@
       "word_delta": 0,
       "score_a": 1.0,
       "score_b": 1.0,
-      "started_at": "2026-04-04 15:14:10.222373",
-      "notes": null
-    },
-    {
-      "id": 113,
-      "run_id": 26,
-      "organ": "device",
-      "section": "Agent Bridge",
-      "technique": "REMOVE",
-      "decision": "REVERT",
-      "words_before": 1242,
-      "words_after": 1150,
-      "word_delta": -92,
-      "score_a": 0.0,
-      "score_b": 1.0,
-      "started_at": "2026-04-04 15:14:10.222373",
+      "started_at": "2026-04-04 15:14:10",
       "notes": null
     },
     {
@@ -206,7 +191,7 @@
       "word_delta": -69,
       "score_a": 1.0,
       "score_b": 1.0,
-      "started_at": "2026-04-04 15:14:10.222373",
+      "started_at": "2026-04-04 15:14:10",
       "notes": null
     },
     {
@@ -221,7 +206,7 @@
       "word_delta": 1,
       "score_a": 1.0,
       "score_b": 1.0,
-      "started_at": "2026-04-04 15:14:10.222373",
+      "started_at": "2026-04-04 15:14:10",
       "notes": null
     },
     {
@@ -236,22 +221,7 @@
       "word_delta": -264,
       "score_a": 1.0,
       "score_b": 1.0,
-      "started_at": "2026-04-04 15:14:10.222373",
-      "notes": null
-    },
-    {
-      "id": 109,
-      "run_id": 26,
-      "organ": "memory",
-      "section": "Reference Index",
-      "technique": "REMOVE",
-      "decision": "REVERT",
-      "words_before": 1738,
-      "words_after": 1580,
-      "word_delta": -158,
-      "score_a": 0.5,
-      "score_b": 1.0,
-      "started_at": "2026-04-04 15:14:10.222373",
+      "started_at": "2026-04-04 15:14:10",
       "notes": null
     },
     {
@@ -266,37 +236,7 @@
       "word_delta": 0,
       "score_a": 1.0,
       "score_b": 1.0,
-      "started_at": "2026-04-04 15:14:10.222373",
-      "notes": null
-    },
-    {
-      "id": 107,
-      "run_id": 26,
-      "organ": "amcc",
-      "section": "Avoidance Ratio",
-      "technique": "REMOVE",
-      "decision": "REVERT",
-      "words_before": 2090,
-      "words_after": 1960,
-      "word_delta": -130,
-      "score_a": 0.5,
-      "score_b": 1.0,
-      "started_at": "2026-04-04 15:14:10.222373",
-      "notes": null
-    },
-    {
-      "id": 106,
-      "run_id": 26,
-      "organ": "gut",
-      "section": "Excretion Protocol",
-      "technique": "REMOVE",
-      "decision": "REVERT",
-      "words_before": 2113,
-      "words_after": 1920,
-      "word_delta": -193,
-      "score_a": 0.125,
-      "score_b": 1.0,
-      "started_at": "2026-04-04 15:14:10.222373",
+      "started_at": "2026-04-04 15:14:10",
       "notes": null
     },
     {
@@ -312,22 +252,7 @@
       "score_a": 0.86,
       "score_b": 0.79,
       "started_at": "2026-04-04 20:09:00",
-      "notes": "Inlined 10/7/4/1 scoring anchors directly in ABPS section. No cross-reference to Mode 1 needed."
-    },
-    {
-      "id": 104,
-      "run_id": 25,
-      "organ": "wiki-writer",
-      "section": "ABPS Expansion template",
-      "technique": "REWORD",
-      "decision": "KEEP",
-      "words_before": 2702,
-      "words_after": 2778,
-      "word_delta": 76,
-      "score_a": 0.87,
-      "score_b": 0.81,
-      "started_at": "2026-04-04 20:08:00",
-      "notes": "Minimum depth guidance per section: Exec Summary 3 sentences, Context 2-3 paragraphs, Analysis 3+ paragraphs with list, Recommendations 3+ items, Next Steps 3+ items"
+      "notes": "Inlined 10/7/4/1 scoring anchors"
     },
     {
       "id": 103,
@@ -342,7 +267,7 @@
       "score_a": 1.0,
       "score_b": 1.0,
       "started_at": "2026-04-04 20:07:00",
-      "notes": "Organ names replaced with file paths. More actionable for agents."
+      "notes": "Organ names replaced with file paths"
     },
     {
       "id": 102,
@@ -357,7 +282,7 @@
       "score_a": 1.0,
       "score_b": 1.0,
       "started_at": "2026-04-04 20:06:00",
-      "notes": "Removed Rationale column. Param|Value only. Rationale already in protocol sections above."
+      "notes": "Removed Rationale column"
     },
     {
       "id": 101,
@@ -372,82 +297,7 @@
       "score_a": 1.0,
       "score_b": 1.0,
       "started_at": "2026-04-04 20:05:00",
-      "notes": "Each tiebreaker compressed to rule: one-line example format"
-    },
-    {
-      "id": 100,
-      "run_id": 25,
-      "organ": "brain",
-      "section": "Five Levels",
-      "technique": "REWORD",
-      "decision": "KEEP",
-      "words_before": 1431,
-      "words_after": 1243,
-      "word_delta": -188,
-      "score_a": 1.0,
-      "score_b": 1.0,
-      "started_at": "2026-04-04 20:04:00",
-      "notes": "Each level compressed to 2 lines. Guiding Principle paragraph removed. All key metrics preserved."
-    },
-    {
-      "id": 99,
-      "run_id": 25,
-      "organ": "wiki-concierge",
-      "section": "Response Template",
-      "technique": "ADD",
-      "decision": "KEEP",
-      "words_before": 963,
-      "words_after": 1073,
-      "word_delta": 110,
-      "score_a": 0.86,
-      "score_b": 0.79,
-      "started_at": "2026-04-04 20:03:00",
-      "notes": "Structured Found/Top match/Summary/Also relevant/Not found template"
-    },
-    {
-      "id": 98,
-      "run_id": 25,
-      "organ": "wiki-concierge",
-      "section": "Search strategy",
-      "technique": "REWORD",
-      "decision": "KEEP",
-      "words_before": 963,
-      "words_after": 1073,
-      "word_delta": 110,
-      "score_a": 0.86,
-      "score_b": 0.79,
-      "started_at": "2026-04-04 20:02:00",
-      "notes": "O(1) wiki-index lookup first, context-catalog second, grep exhaustive fallback"
-    },
-    {
-      "id": 97,
-      "run_id": 25,
-      "organ": "wiki-librarian",
-      "section": "Common Publishing Failures",
-      "technique": "ADD",
-      "decision": "KEEP",
-      "words_before": 1296,
-      "words_after": 1478,
-      "word_delta": 182,
-      "score_a": 0.86,
-      "score_b": 0.79,
-      "started_at": "2026-04-04 20:01:00",
-      "notes": "3 failure patterns: missing index update, missing frontmatter, broken cross-refs"
-    },
-    {
-      "id": 96,
-      "run_id": 25,
-      "organ": "wiki-librarian",
-      "section": "Publishing workflow",
-      "technique": "REWORD",
-      "decision": "KEEP",
-      "words_before": 1296,
-      "words_after": 1478,
-      "word_delta": 182,
-      "score_a": 0.86,
-      "score_b": 0.78,
-      "started_at": "2026-04-04 20:00:00",
-      "notes": "Imperative verbs, explicit file paths, STOP conditions for validation failures"
+      "notes": "Each tiebreaker compressed to rule"
     }
   ],
   "experiment_by_organ": [
@@ -522,49 +372,42 @@
     {
       "organ": "gut",
       "word_count": 2113,
-      "word_budget": null,
       "utilization": 1.006,
       "accuracy_estimate": 1.0
     },
     {
       "organ": "amcc",
       "word_count": 2090,
-      "word_budget": null,
       "utilization": 1.045,
       "accuracy_estimate": 1.0
     },
     {
       "organ": "memory",
       "word_count": 1738,
-      "word_budget": null,
       "utilization": 0.497,
       "accuracy_estimate": 1.0
     },
     {
       "organ": "heart",
       "word_count": 3198,
-      "word_budget": null,
       "utilization": 0.914,
       "accuracy_estimate": 1.0
     },
     {
       "organ": "nervous-system",
       "word_count": 859,
-      "word_budget": null,
       "utilization": 0.573,
       "accuracy_estimate": 1.0
     },
     {
       "organ": "device",
       "word_count": 1242,
-      "word_budget": null,
       "utilization": 0.621,
       "accuracy_estimate": 1.0
     },
     {
       "organ": "brain",
       "word_count": 1257,
-      "word_budget": null,
       "utilization": 0.503,
       "accuracy_estimate": 1.0
     }
@@ -572,25 +415,17 @@
   "streak": {
     "current": 18,
     "artifact_shipped": false,
-    "hard_thing": "Send Testing Approach v5 to Brandon",
-    "tracker_date": "2026-04-16"
+    "hard_thing": "Testing Document for Kate",
+    "tracker_date": "2026-04-15"
   },
   "streak_history": [
-    {
-      "tracker_date": "2026-04-16",
-      "workdays_at_zero": 18,
-      "artifact_shipped": false,
-      "artifact_name": null,
-      "hard_thing_name": "Send Testing Approach v5 to Brandon",
-      "notes": null
-    },
     {
       "tracker_date": "2026-04-15",
       "workdays_at_zero": 18,
       "artifact_shipped": false,
       "artifact_name": null,
       "hard_thing_name": "Testing Document for Kate",
-      "notes": "AM-Backend: Hard thing = Testing Approach doc, 14d overdue. Core block 12:30-2PM today. Workdays at zero carried from yesterday (18)."
+      "notes": null
     },
     {
       "tracker_date": "2026-04-14",
@@ -598,7 +433,7 @@
       "artifact_shipped": false,
       "artifact_name": null,
       "hard_thing_name": "Send Testing Approach v5 to Brandon",
-      "notes": "AM-Backend: Hard thing unchanged from amcc.md. Doc is v5 PUBLISH (8.4/10). 5 minor fixes remain. Ship to Brandon."
+      "notes": "AM-Backend: Doc is v5 PUBLISH (8.4/10). 5 minor fixes remain."
     },
     {
       "tracker_date": "2026-04-13",
@@ -614,7 +449,7 @@
       "artifact_shipped": false,
       "artifact_name": null,
       "hard_thing_name": "Send Testing Approach v5 to Brandon",
-      "notes": "AM-Backend: Testing Doc 8d overdue. Team at Austin offsite today."
+      "notes": "Testing Doc 8d overdue."
     },
     {
       "tracker_date": "2026-04-08",
@@ -622,7 +457,7 @@
       "artifact_shipped": false,
       "artifact_name": null,
       "hard_thing_name": "Send Testing Approach v5 to Brandon",
-      "notes": "AM-Backend: carried forward from 4/7. Testing doc 7d overdue."
+      "notes": "Testing doc 7d overdue."
     },
     {
       "tracker_date": "2026-04-07",
@@ -630,7 +465,7 @@
       "artifact_shipped": false,
       "artifact_name": null,
       "hard_thing_name": "Send Testing Approach v5 to Brandon",
-      "notes": "Streak at 1 day from 4/5 completion. Hard thing: apply 5 critic fixes then send to Brandon."
+      "notes": "Streak at 1 day from 4/5 completion."
     },
     {
       "tracker_date": "2026-04-06",
@@ -638,7 +473,7 @@
       "artifact_shipped": false,
       "artifact_name": null,
       "hard_thing_name": "Send Testing Approach v5 to Brandon",
-      "notes": "Hard thing updated from live context. Kate meeting canceled but doc still valuable \u2014 Brandon reviewing first."
+      "notes": "Kate meeting canceled but doc still valuable."
     },
     {
       "tracker_date": "2026-04-05",
@@ -672,7 +507,7 @@
       "weeks_active": 11,
       "gate_or_fix": "Testing Approach doc (L1 gate)",
       "first_detected": "2026-01-26",
-      "updated_at": "2026-04-06 03:14:37.492909"
+      "updated_at": "2026-04-06 03:14:37"
     },
     {
       "pattern_name": "Admin displacement",
@@ -680,7 +515,7 @@
       "weeks_active": 3,
       "gate_or_fix": "Pre-written response templates needed",
       "first_detected": "2026-03-17",
-      "updated_at": "2026-04-06 03:14:37.492909"
+      "updated_at": "2026-04-06 03:14:37"
     },
     {
       "pattern_name": "Reactive fire drills",
@@ -688,7 +523,7 @@
       "weeks_active": 3,
       "gate_or_fix": "Pre-written response templates needed",
       "first_detected": "2026-03-17",
-      "updated_at": "2026-04-06 03:14:37.492909"
+      "updated_at": "2026-04-06 03:14:37"
     },
     {
       "pattern_name": "Have Backbone avoidance",
@@ -696,7 +531,7 @@
       "weeks_active": 1,
       "gate_or_fix": "Annual review peer feedback",
       "first_detected": "2026-03-31",
-      "updated_at": "2026-04-06 03:14:37.492909"
+      "updated_at": "2026-04-06 03:14:37"
     },
     {
       "pattern_name": "Project management gaps",
@@ -704,7 +539,7 @@
       "weeks_active": 1,
       "gate_or_fix": "Forte 2025 \u2014 lightweight tracking",
       "first_detected": "2026-03-31",
-      "updated_at": "2026-04-06 03:14:37.492909"
+      "updated_at": "2026-04-06 03:14:37"
     }
   ],
   "weekly_output": []

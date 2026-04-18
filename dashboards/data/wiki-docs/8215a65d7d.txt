@@ -1,20 +1,3 @@
-<!-- DOC-0398 | duck_id: testing-approach-kate -->
-
----
-title: "Paid Search Testing Approach & Year Ahead"
-slug: "kate-doc-synthesis"
-type: "playbook"
-audience: "org"
-status: "draft"
-doc-type: strategy
-created: "2026-03-25"
-updated: "2026-03-25"
-owner: "Richard Williams"
-tags: ["testing", "strategy", "OP1", "paid-search", "kate-doc", "synthesis"]
-depends_on: ["kate-doc-methodology", "kate-doc-oci", "kate-doc-modern-search", "kate-doc-audiences", "kate-doc-ux", "kate-doc-algo-ads", "kate-doc-team-map", "kate-doc-operations"]
-summary: "Complete PS testing methodology, 2025 results, 2026 roadmap, team scope, and operations for Kate Rundell's April 16 review."
----
-
 # Paid Search Testing Approach & Year Ahead
 
 *Prepared for Kate Rundell — April 16, 2026*

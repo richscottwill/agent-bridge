@@ -24,7 +24,7 @@ summary: "JP Google NB experiment (Jan-Feb 2023). Callback LP definitively beat 
 
 # JP Google Nonbrand Experiment — LP Test + Keyword Performance
 
-**Predecessor:** This is the follow-up to the [Yahoo JP NB Experiment](2022.10_Yahoo-JP-NB_Experiment.md), which identified competitor subdomain targeting as the most efficient audience. This Google test shifted to compliant keyword sets (no ASIN terms) and added an LP test.
+**Predecessor:** This is the follow-up to the [Yahoo JP NB Experiment](2022-10-yahoo-jp-nb-experiment.md), which identified competitor subdomain targeting as the most efficient audience. This Google test shifted to compliant keyword sets (no ASIN terms) and added an LP test.
 
 Question: Will the Bulk LP drive a higher CVR than the Callback LP?
 Setup: Callback (Control) vs. Bulk (Test). Test using Google Ads feature to split traffic.

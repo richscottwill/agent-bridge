@@ -1,5 +1,3 @@
-<!-- DOC-0019 | duck_id: callout-ca-data-brief-2026-w12 -->
-
 # CA W12 Data Brief
 
 ## Headline numbers

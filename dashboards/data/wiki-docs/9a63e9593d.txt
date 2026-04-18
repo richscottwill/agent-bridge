@@ -1,5 +1,3 @@
-<!-- DOC-0011 | duck_id: callout-au-data-brief-2026-w13 -->
-
 # AU W13 Data Brief
 
 ## Headline numbers

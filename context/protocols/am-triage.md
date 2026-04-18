@@ -190,149 +190,32 @@ Combine all field writes into one UpdateTask per task. Log each to asana-audit-l
 
 ---
 
-## Phase 1B — ABPS AI Project Scan
+## Phase 1B — Wiki Article Pipeline Review
 
-Scan ABPS AI - Content project (GID: `1213917352480610`). The autonomous document factory.
+Wiki articles live in `~/shared/wiki/agent-created/` and the Kiro dashboard Pipeline view (`shared/dashboards/wiki-search.html`). **Do not create, update, or comment on Asana tasks for article work.**
 
-### Guardrail Protocol
-All writes MUST follow asana-command-center.md § Guardrail Protocol:
-- PRE-WRITE: Verify assignee.gid === '1212732742544167'
-- AUDIT LOG: Append to asana-audit-log.jsonl (extended format with project, pipeline_agent, pipeline_stage)
-- READ-BEFORE-WRITE: Before html_notes updates, check for Richard's additions
-- API FAILURE: Log → retry once → flag if retry fails
+### Step 1 — Read Wiki Pipeline State
+Load `~/shared/context/active/am-wiki-state.json` (written by AM-Backend Phase 4). It contains:
+- Stale FINAL articles (updated >30 days ago)
+- SharePoint drift (local FINAL is newer than `Documents/Artifacts/*.docx`)
+- New-article candidates from signals
+- Articles with broken cross-references or missing frontmatter
 
-### Step 1 — Scan Intake for Untriaged Tasks
-- GetTasksFromProject(project_gid='1213917352480610') → all incomplete tasks.
-- GetTaskDetails for each → read custom fields, dates, section.
-- FILTER: tasks in Intake section (GID: `1213917352480612`) where Routine (GID: `1213608836755502`) is NOT set.
-- Skip tasks with Routine already set (already triaged).
-
-### Step 2 — Analyze Each Untriaged Task
-For each untriaged Intake task, prepare triage recommendations:
-- Routine bucket (Sweep/Core/Engine Room/Admin)
-- Priority_RW (Today/Urgent/Not urgent)
-- Frequency (GID: `1213921303350613`): weekly/monthly/quarterly/one-time
-  - One-time: `1213921303350614`
-  - Weekly: `1213921303350615`
-  - Monthly: `1213921303350616`
-  - Quarterly: `1213921303350617`
-- Work_Product type: guide, reference, decision, playbook, analysis
-- Date defaults:
-  - No start_on AND no due_on → Begin=today, Due=today+7
-  - No start_on AND due_on set → Begin=today
-  - start_on set AND no due_on → Due=today+7
-  - Both set → keep originals
-  - ASANA CONSTRAINT: start_on requires due_on
-- One-sentence scope statement.
-
-### Step 3 — Present Triage to Richard
-Do NOT auto-execute. Present for approval:
+### Step 2 — Present Findings
 ```
-📥 ABPS AI Intake — [N] untriaged task(s):
-
-- TASK: [name] (GID: [gid])
-  - Routine: [bucket]
-  - Priority_RW: [level]
-  - Frequency: [cadence]
-  - Work_Product: [type]
-  - Begin Date: [YYYY-MM-DD] [← default if applicable]
-  - Due Date: [YYYY-MM-DD] [← default if applicable]
-  - Scope: [one sentence]
-- ACTION: Approve, adjust, or skip?
+📚 WIKI PIPELINE — [N] items:
+- Stale FINAL articles: [count] (open in dashboard to review)
+- SharePoint drift: [count] articles need re-publish
+- New-article candidates: [top 3 by signal strength]
+- Health flags: [count] broken refs, [count] missing frontmatter
+- ACTION: Open dashboard Pipeline view to triage?
 ```
 
-### Step 3B — Execute Approved Triage
-Set Routine, Priority_RW, Frequency, Kiro_RW via UpdateTask(custom_fields={...}). Apply date defaults in same call. Append date default notation to Kiro_RW.
-
-### Step 3C — Section Move + Research Subtask
-After field writes:
-
-**IF Begin Date <= today:**
-1. Move to In Progress (section GID: `1213917923741223`)
-2. Create research subtask: `CreateTask(name='📋 Research: [parent task name]', parent=task_gid, assignee='1212732742544167', project='1213917352480610')`
-3. Update Kiro_RW: append '→ Moved to In Progress, research subtask created.'
-
-**IF Begin Date > today:**
-- Leave in Intake with fields applied.
-- Update Kiro_RW: append '→ Stays in Intake (begin date future: [start_on]).'
-- No subtask creation.
-
-### Step 3D — Pipeline Stage 1: Research (wiki-researcher)
-For tasks in In Progress (GID: `1213917923741223`):
-1. GetSubtasksForTask → find incomplete '📋 Research: [name]' subtask.
-2. IF incomplete research subtask exists AND Begin Date <= today:
-   - Invoke wiki-researcher with: task GID, description, Kiro_RW, Work_Product type.
-   - Researcher posts pinned comment: CreateTaskStory(html_text=..., is_pinned='true')
-   - Completes research subtask.
-   - Logs stage transition as comment.
-   - Updates Kiro_RW: 'pipeline: research completed [date]'
-3. IF research subtask already completed → skip.
-4. IF no research subtask → check for later pipeline subtasks.
-
-### Step 3E — Pipeline Stage 2: Draft (wiki-writer)
-For tasks in In Progress where research is complete but no draft subtask:
-1. Verify pinned research comment exists (GetTaskStories, is_pinned=true).
-2. Invoke wiki-writer with: task GID, description, pinned research, Kiro_RW, Work_Product type.
-3. Writer loads style guides (richard-writing-style.md, richard-style-docs.md, richard-style-amazon.md).
-4. Writes ~500w draft in html_notes (allowed tags: body, strong, em, u, s, code, a, ul, ol, li).
-5. Draft structure: bold title, executive summary (2-3 sentences), 3-5 bold-headed sections, Next Steps.
-6. Creates + completes '✏️ Draft: [name]' subtask.
-7. Moves task to Review section (GID: `1213917923779848`).
-8. Logs stage transition. Updates Kiro_RW.
-
-### Step 3F — Pipeline Stage 3: Review (wiki-critic)
-For tasks in Review (GID: `1213917923779848`) where draft is complete but no review subtask:
-1. Invoke wiki-critic with: task GID, html_notes (draft), pinned research, Kiro_RW.
-2. Scores 5 dimensions: usefulness, clarity, accuracy, dual-audience, economy (1-10 each).
-3. Posts review as comment. Creates + completes '🔍 Review: [name]' subtask.
-4. Decision:
-   - **Average >= 8 (APPROVE):** Create approval subtask: `CreateTask(name='✅ Approve: [name]', resource_subtype='approval', parent=task_gid, assignee='1212732742544167', project='1213917352480610')`
-   - **Average < 8, consecutive_sub8 < 2 (REVISE):** Post revision notes. Move back to In Progress. Increment consecutive_sub8 in Kiro_RW.
-   - **Average < 8, consecutive_sub8 reaches 2 (ESCALATE):** Flag for Richard. No third revision attempt.
-5. Threshold is exactly 8 — not 7.9, not 8.1.
-
-### Step 3G — Pipeline Stage 4: Approval Detection
-For tasks in Review with an approval subtask (resource_subtype='approval'):
-
-**CASE A — APPROVED (completed === true):**
-1. Read-before-write on html_notes (preserve Richard's additions).
-2. Invoke wiki-writer for expansion (~500w → ~2000w). Load style guides.
-3. Full doc structure: title, executive summary, context, analysis sections, recommendations, next steps with owners/dates.
-4. Check Frequency field:
-   - **One-time** (GID: `1213921303350614`): Move to Archive (GID: `1213917833240629`), mark completed. Do NOT register in recurring-task-state.json.
-   - **Weekly/Monthly/Quarterly**: Move to Active (GID: `1213917968512184`). Register in recurring-task-state.json with key `abps_ai_{task_gid}`.
-5. Log expansion. Update Kiro_RW.
-
-**CASE B — PENDING (completed === false):**
-- Check for Richard's comments after approval subtask creation → rejection signal.
-- If rejection: move back to In Progress, complete the approval subtask, reset consecutive_sub8, log.
-- If no comment: still pending, skip.
-
-### Step 3H — Date Window Check
-Scan triaged Intake tasks where Begin Date has arrived:
-- start_on <= today AND NOT completed AND still in Intake → initiate pipeline (move to In Progress, create research subtask).
-- start_on > today → skip.
-
-### Step 3I — Near-Due Escalation
-- due_on within 0-2 days AND NOT completed AND NOT in Active/Archive → set Priority_RW to Today (GID: `1212905889837830`).
-- Update Kiro_RW: 'M/D: Near-due. Priority escalated.'
-- Auto-execute (safety measure, no approval needed).
-
-### Step 3J — Overdue Flagging
-- due_on < today AND NOT completed AND no approved Approval subtask → flag as overdue.
-- Update Kiro_RW: 'M/D: Overdue [N]d. Extend or close.'
-- Recommend: extend due date, reduce scope, or kill.
-- Include in daily brief.
-
-### Step 3K — Refresh Cadence Check
-For tasks in Active (GID: `1213917968512184`) with Frequency != one-time:
-1. Read recurring-task-state.json → find entry `abps_ai_{task_gid}`.
-2. Compute current_period (weekly=YYYY-WNN, monthly=YYYY-MM, quarterly=YYYY-QN).
-3. If last_run_period != current_period → refresh is due.
-4. Refresh: read current html_notes, invoke wiki-researcher for fresh context, invoke wiki-writer to update.
-5. Add dated revision line: `<strong>Updated YYYY-MM-DD: [what changed]</strong>`
-6. Post comment: '🔄 Refresh completed: [summary]'
-7. Update recurring-task-state.json.
+### Step 3 — Execute Richard's Directions
+- **Open dashboard:** Remind Richard the Pipeline view lives at `shared/dashboards/wiki-search.html` and supports drag-free status bumps (DRAFT → REVIEW → FINAL) via the arrow buttons on each card.
+- **Promote to FINAL:** Update the article's frontmatter `status: FINAL` and trigger SharePoint publish via librarian.
+- **Start a new article:** Create the .md file in `~/shared/wiki/agent-created/[category]/[slug].md` with the standard frontmatter template. Do NOT create an Asana task.
+- **Archive:** Move to `~/shared/wiki/agent-created/archive/` and update frontmatter `status: ARCHIVED`.
 
 ---
 

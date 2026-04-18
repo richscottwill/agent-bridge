@@ -1,5 +1,3 @@
-<!-- DOC-0055 | duck_id: callout-it-analysis-2026-w13 -->
-
 # IT W13 Analysis Brief
 
 ## Registration summary

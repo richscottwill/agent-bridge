@@ -1,5 +1,3 @@
-<!-- DOC-0069 | duck_id: callout-jp-projections -->
-
 # JP Monthly Projections
 
 Tracks weekly projections vs actuals. Updated each week by the analyst agents.

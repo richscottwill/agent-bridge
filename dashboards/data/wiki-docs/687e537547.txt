@@ -1,5 +1,3 @@
-<!-- DOC-0466 | duck_id: wiki-review-competitive-landscape-revisions -->
-
 # Revisions: competitive-landscape.md
 
 Reviewer: wiki-critic

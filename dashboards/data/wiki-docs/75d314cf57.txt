@@ -1,17 +1,3 @@
-<!-- DOC-0383 | duck_id: strategy-cross-market-playbook -->
-
----
-title: Cross-Market Playbook — US → EU5 → RoW
-status: DRAFT
-doc-type: strategy
-audience: amazon-internal
-level: 2
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-03-25
-update-trigger: new initiative scaling, market priority changes, Brandon direction
----
-
 # Cross-Market Playbook — US → EU5 → RoW
 
 ---

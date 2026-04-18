@@ -1,5 +1,3 @@
-<!-- DOC-0125 | duck_id: context-exp4-decision-log -->
-
 # Decision Log — Richard Williams
 
 Last updated: 2026-03-17

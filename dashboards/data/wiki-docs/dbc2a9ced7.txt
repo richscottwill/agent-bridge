@@ -1,5 +1,3 @@
-<!-- DOC-0115 | duck_id: context-annual-review-2026-analysis -->
-
 # Annual Review 2026 — Analysis for System Integration
 
 Ingested: 2026-03-24

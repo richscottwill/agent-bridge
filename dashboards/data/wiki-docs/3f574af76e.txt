@@ -1,5 +1,3 @@
-<!-- DOC-0127 | duck_id: context-exp6-action-tracker -->
-
 # Action Item Tracker — Richard Williams
 
 Last updated: 2026-03-20 (Friday, W12 Day 5)

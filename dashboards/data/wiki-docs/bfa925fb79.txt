@@ -1,5 +1,3 @@
-<!-- DOC-0494 | duck_id: wiki-review-testing-approach-kate-v2-eval-a -->
-
 # Review: Paid Search Testing Approach & Year Ahead (Blind Eval A)
 
 **Reviewer:** wiki-critic (Blind Eval A — no prior reviews seen)

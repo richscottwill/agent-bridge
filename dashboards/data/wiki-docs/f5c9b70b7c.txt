@@ -1,5 +1,3 @@
-<!-- DOC-0464 | duck_id: wiki-review-blind-test-evaluator-a -->
-
 # Blind Test Evaluation — Evaluator A
 
 **Date:** 2026-04-04

@@ -1,0 +1,50 @@
+# AI Tool WBR Callout Workflow
+
+This playbook captures the AI-assisted WBR callout workflow Andrew Wirtz demonstrated on April 17. The workflow cuts WBR callout draft time from hours to minutes by offloading data correlation and anomaly detection to a code-reasoning AI tool. Adopt it to reclaim Monday morning for higher-leverage work.
+
+## Why this works
+
+Prior AI tools hallucinated when asked to reason over spreadsheet data. The current generation runs Python on uploaded files and returns the code alongside the conclusion, so you can validate its logic before trusting it. Andrew reports zero hallucinations over several weeks of use. The tool's ability to correlate multiple files without explicit instructions — for example, joining AMO registration data to the dashboard file to explain brand-versus-core traffic splits — is the single biggest time saver.
+
+## Inputs
+
+Start with two uploaded files per week. The first is the WBR dashboard export with weekly registrations, CPA, and spend. The second is the AMO daily projection export at the portfolio and campaign level. A third optional upload is the Adobe keyword-level report when you need to dig into landing page or keyword performance. The tool reads column headers and infers relationships without explicit mapping instructions.
+
+## Master prompt structure
+
+Andrew uses a single long-running chat with a master prompt at the top. The prompt captures brand-versus-core taxonomy, callout voice conventions, confidence level rules, federal holiday context for the covered markets, and the output format (Markdown, two-to-three sentence callouts). New tasks can be dropped into the same chat without contaminating the callout context — the tool distinguishes one-off queries from core analysis.
+
+Stacey has asked Andrew to share the master prompt with the team. Once circulated, store it in SharePoint under `Kiro-Drive/system-state/` so the team pulls from a canonical version rather than forking copies.
+
+## Workflow
+
+Each Monday morning, open the master chat and upload the week's dashboard and AMO files. Ask for the callout in one sentence, specifying the week and market. The tool returns a ranked list of callouts with supporting data and a "so what" sentence per finding. Ask for code validation on any metric you plan to cite publicly. Drop the Markdown output into Quip and edit for voice rather than substance.
+
+For quarterly projections, the same chat can project Q2 registrations by asking it to apply prior-year quarter-over-quarter growth to the current run rate. It returns the calculation method alongside the numbers, which lets you audit the logic before including it in leadership updates.
+
+## Constraints
+
+The tool does not have direct access to internal systems. QuickSight, WBR, and ABMA pulls still require manual file export. Session memory lives inside the single chat thread — separate chats do not share context. Markdown is the canonical output format because copy-paste to Quip preserves formatting. Avoid asking the tool to write final leadership-facing callouts — use it for the data analysis layer and keep the voice editing human.
+
+## Local variant
+
+Chinmay and Ravi demoed a locally-installed Gandalf-based version that runs without cloud calls and reads files directly. It is appropriate for sensitive data but requires Python setup, adequate RAM, and a maintained prompt template. Most users should stick with the cloud chat version.
+
+## Next Steps
+
+1. Obtain master prompt from Andrew by April 21.
+2. Pilot workflow on week 16 WBR callouts (Monday April 20).
+3. Store the master prompt in `Kiro-Drive/system-state/ai-wbr-master-prompt.md`.
+4. Schedule follow-up session to walk through local Gandalf setup for interested team members.
+
+## Related
+
+- [WBR Callout Guide](wbr-callout-guide)
+- [Kiro Writing Assistance](07-kiro-writing-with-kiro)
+
+<!-- AGENT_CONTEXT
+machine_summary: "AI-assisted WBR callout workflow using file upload, code-based reasoning, Markdown output. Andrew Wirtz developed. Cuts draft time from hours to minutes. Master prompt to be shared and stored in SharePoint."
+key_entities: ["Andrew Wirtz", "WBR callouts", "ChatGPT code reasoning", "Gandalf", "AMO data", "Adobe keyword reports"]
+action_verbs: ["upload", "correlate", "validate", "draft"]
+update_triggers: ["master prompt shared", "new AI tool release", "WBR dashboard schema change"]
+-->

@@ -1,5 +1,3 @@
-<!-- DOC-0063 | duck_id: callout-jp-analysis-2026-w12 -->
-
 # JP W12 Analysis Brief
 
 ## Registration summary

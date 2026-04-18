@@ -1,5 +1,3 @@
-<!-- DOC-0211 | duck_id: meeting-weekly-paid-acq -->
-
 # Weekly Paid Acquisition Team Sync
 
 ## Metadata

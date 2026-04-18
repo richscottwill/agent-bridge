@@ -1,0 +1,118 @@
+# Steering Packages — Pick Your Kit
+
+**Doc:** 03
+**Audience:** Paid Acquisition teammates + their Kiro agents
+**Status:** FINAL
+**Last updated:** 2026-04-17
+
+## Environment Awareness (for your agent)
+
+Before acting on anything in this doc, identify the user's environment and tell them what applies:
+
+| Capability | Remote IDE (DevSpaces) | Local IDE (laptop Kiro) | AgentSpaces (chat) |
+|---|---|---|---|
+| Install steering files at your Kiro steering folder (`.kiro/steering/` inside your workspace, or `~/.kiro/steering/` for user-level) | ✅ (in container) | ✅ (on laptop) | ⚠️ Steering must be in user's Kiro config outside AgentSpaces — ask the user to install via Remote or Local IDE, then AgentSpaces inherits |
+| Auto-load on every chat | ✅ | ✅ | ✅ (once installed) |
+| Edit steering files inline | ✅ | ✅ | ❌ (no file editor) |
+
+**If you're in AgentSpaces chat**, tell the user: "To install these steering files, use your Remote IDE or Local Kiro IDE. I can show you the content here but can't write to your Kiro steering folder (`.kiro/steering/` inside your workspace, or `~/.kiro/steering/` for user-level) from AgentSpaces."
+
+---
+
+Steering files are markdown files in `.kiro/steering/` that Kiro auto-loads into every conversation with your agent. They're how you give your agent standing instructions without repeating them in every prompt.
+
+The problem: too many steering files = context pollution = worse agent. Too few = agent keeps making the same mistakes.
+
+The solution: **packages**. Pick the packages that match your work. Start minimal, add as needed.
+
+## How to install a package
+
+1. Create your Kiro steering folder (`.kiro/steering/` inside your workspace, or `~/.kiro/steering/` for user-level) if it doesn't exist.
+2. Copy the file(s) listed under the package into that folder.
+3. Restart your chat or reload the IDE window.
+
+All steering files in this kit have `inclusion: always` front-matter unless noted, so they auto-load into every conversation.
+
+## Core package (everyone)
+
+These three files should be in every Paid Acq teammate's steering folder. They're short, they enforce the hard rule, and they ground the agent in team identity without bloating context.
+
+| File | Purpose |
+|---|---|
+| `no-external-write-rule.md` | The hard rule: agents never send/post/reply/forward to anyone but the user. Drafts and self-DMs only. |
+| `team-identity.md` | Who we are (Paid Acq under Brandon Munday → Kate Rundell → Todd Heimes), what we care about (evidence-based decisions, cross-team collaboration, scaling what works), writing register basics. |
+| `environment-awareness.md` | Which Kiro environment you're in (AgentSpaces, DevSpaces, chat-cli, local IDE) and what that means for file access and MCP availability. |
+
+Install these first. Everything else assumes they're loaded.
+
+## MCP packages (opt-in per tool)
+
+Install the one that matches the MCP you've enabled in your Kiro MCP config (`.kiro/settings/mcp.json` inside the workspace you opened, or `~/.kiro/settings/mcp.json` for user-level). Don't install a package for an MCP you don't have — you'll just clutter context.
+
+| File | Install when |
+|---|---|
+| `sharepoint-patterns.md` | You've enabled `amazon-sharepoint-mcp` (for OneDrive + team SharePoint). |
+| `slack-etiquette.md` | You've enabled the Slack MCP. |
+| `outlook-etiquette.md` | You've enabled the Outlook MCP. |
+| `asana-patterns.md` | You've enabled Asana MCP and use Asana for task tracking. Skip if you don't. |
+
+Each file teaches your agent the right way to use that MCP — starter prompts, safe autoApprove lists, and the drafts-only-for-external-writes enforcement specific to that tool.
+
+## Work-type packages (opt-in per role)
+
+Pick based on what you actually do day-to-day. These layer on top of Core.
+
+| File | For |
+|---|---|
+| `writing-starter.md` | Anyone drafting callouts, WBR narratives, emails, or stakeholder docs. Loads writing style basics and the draft-don't-send pattern. |
+| `data-analysis.md` | Anyone reading/writing Excel files as team source-of-truth data. Loads append-to-logs rules, overwrite bans, versioned filename convention. |
+| `hooks-primer.md` | Anyone running automations (Adobe data watch, morning briefs, callout linters). Use `inclusion: manual` if you only want it available on demand. |
+
+## Advanced packages (opt-in once you're past the basics)
+
+Don't install these on day one. Add them when you've been running the kit for a few weeks and you're ready to contribute to shared artifacts.
+
+| File | For |
+|---|---|
+| `wiki-contributor.md` | When you want your agent to search the team wiki and suggest edits. Loads wiki search workflow + suggestion intake rules. |
+| `orchestration-participant.md` | When you want your agent to contribute callouts, ad-hoc reports, or events to the team's shared orchestration layer. Loads intake folder patterns. |
+
+## Suggested starting loadout
+
+New teammate, paid acq work, has access to SharePoint + Slack + Outlook:
+
+```
+~/.kiro/steering/
+├── no-external-write-rule.md    ← Core
+├── team-identity.md              ← Core
+├── environment-awareness.md      ← Core
+├── sharepoint-patterns.md        ← MCP
+├── slack-etiquette.md            ← MCP
+├── outlook-etiquette.md          ← MCP
+└── writing-starter.md            ← Work-type
+```
+
+7 files, all short, all load in under 3K tokens total. You can add `asana-patterns.md`, `data-analysis.md`, `hooks-primer.md` as you adopt those tools.
+
+## Rules for good steering files
+
+If you end up writing your own, follow these:
+
+- **Short.** Under 200 lines. Under 100 is better. Steering loads into every conversation — every line costs context.
+- **Rules, not narrative.** Your agent needs "do X, not Y," not the backstory.
+- **No duplication.** Don't restate what another steering file already covers.
+- **Inclusion mode:**
+  - `inclusion: always` for rules that should apply every time.
+  - `inclusion: fileMatch` + `fileMatchPattern:` for file-type-specific rules (e.g., only load when reading `.xlsx`).
+  - `inclusion: manual` for context you want available but not auto-loaded — reference with `#steering-name` in chat.
+- **One concept per file.** Easier to add/remove packages that way.
+
+## How this kit evolves
+
+This package system is our starting point. As the team runs it, we'll:
+
+- Cut files that aren't pulling weight.
+- Split files that got too long.
+- Add packages for new tools and roles.
+
+Suggest changes by dropping an edit proposal in `~/shared/wiki/intake/suggestions/kiro-steering-packages-<your-alias>-<date>.md` and pinging Richard.

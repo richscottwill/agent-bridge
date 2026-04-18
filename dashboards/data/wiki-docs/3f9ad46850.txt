@@ -1,5 +1,3 @@
-<!-- DOC-0473 | duck_id: wiki-review-kate-doc-batch-review -->
-
 # Batch Review: Kate Doc — Paid Search Testing Approach & Year Ahead
 
 Reviewer: wiki-critic

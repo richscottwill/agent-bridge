@@ -1,0 +1,52 @@
+# LiveRamp Enhanced Match Explainer
+
+LiveRamp identity resolution is the backbone of Amazon Business's audience-based paid media. It is also the most frequently misunderstood piece of our infrastructure. This explainer captures the mechanics, the current match rate progression, and what Enhanced Match will unlock. It is a companion to the existing test design document — focused on how the system works rather than what we are testing.
+
+## What LiveRamp does
+
+LiveRamp resolves identity across channels. We send LiveRamp a hashed list of Amazon Business customer emails. LiveRamp matches those identities against its own consumer graph, then sends the matched identities downstream to Google Ads, paid media platforms, and other audience destinations. The match enables us to target or suppress specific users across channels without ever exposing raw identity data.
+
+## Current match rate
+
+The match rate has stepped up twice since the initial integration.
+
+**Baseline: 12 percent.** The first pass sent only registered AB customer emails. LiveRamp recognized about twelve percent in Google Ads, which was the initial ceiling. Two thirds of our customer base was invisible in paid media audiences.
+
+**Current: 20 percent.** The second pass added associated account emails — consumer-side emails linked to B2B customers. Many AB users sign up with a work email but are more active on Amazon consumer with a personal email. Adding that linkage roughly doubled recognized identities.
+
+**Projected with Enhanced Match: 40 percent.** Enhanced Match uses LiveRamp's expanded identity graph and additional matching signals. Based on vendor projections and peer-team benchmarks, we expect another doubling. This is not guaranteed — the forty percent is a planning number, not a commitment.
+
+## Why match rate matters
+
+Every audience-based campaign is capped by the match rate. A Suppression campaign that excludes current AB customers from acquisition targeting only suppresses the twelve to twenty percent LiveRamp can match. The remaining eighty percent of customers appear to Google as unrecognized prospects, and we pay CPC to re-acquire them. The Engagement account delivered $765K in iOPS in 2025 against a twenty percent match ceiling — Enhanced Match doubling that audience should proportionally expand the impact.
+
+F90 activation campaigns face the same ceiling. The F90 audience of recently-acquired non-purchasers is small in absolute terms; a twenty percent match rate makes it constrained in Google. Enhanced Match is the primary unblocker for F90 at scale.
+
+## Enhanced Match provisioning
+
+Richard owns the LiveRamp relationship with Hannah Neustadt (Customer Success Director). Provisioning requires legal review, technical integration, and data feed modifications on LiveRamp's side. Brandon's April 15 framing: "we will only use the fee once Enhanced Match gets set up — probably slow." No confirmed timeline.
+
+The $255K LiveRamp fee is reserved in the 2026 PS ENG budget of $1.85M total. Yun confirmed no budget release until Enhanced Match is operational.
+
+## What we do not get from Enhanced Match
+
+Enhanced Match does not change attribution mechanics. It does not create new ad formats. It does not replace OCI or Adobe. It does not grant visibility into AI search placements. It is a specific upgrade to identity matching, not a general capability expansion. Treat it as a tool that unlocks existing capabilities at higher scale, not a new capability.
+
+## Next Steps
+
+1. Push Hannah Neustadt for Enhanced Match provisioning timeline by April 24.
+2. Document F90 audience size projections at twenty percent versus forty percent match for OP1 planning.
+3. Update this doc when Enhanced Match provisioning moves.
+
+## Related
+
+- [Enhanced Match LiveRamp Test Design](enhanced-match-liveramp)
+- [F90 Rollout State](f90-rollout-state)
+- [OP1 2027 Innovation Shortlist](op1-2027-innovation-shortlist)
+
+<!-- AGENT_CONTEXT
+machine_summary: "LiveRamp identity resolution. Match rate 12% baseline, 20% with associated accounts, projected 40% with Enhanced Match. $255K fee reserved pending provisioning. Hannah Neustadt is the vendor contact."
+key_entities: ["LiveRamp", "Hannah Neustadt", "Enhanced Match", "match rate", "Associated Accounts"]
+action_verbs: ["match", "resolve", "suppress", "target"]
+update_triggers: ["Enhanced Match provisioned", "match rate measurement updated", "LiveRamp contract renewal"]
+-->

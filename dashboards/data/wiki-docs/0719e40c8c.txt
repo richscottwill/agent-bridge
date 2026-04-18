@@ -1,18 +1,3 @@
-<!-- DOC-0409 | duck_id: testing-workstream-algorithmic-ads -->
-
----
-title: "Workstream 5: Algorithmic Ads"
-status: FINAL
-doc-type: strategy
-audience: amazon-internal
-level: 2
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-04-05
-update-trigger: "AI Max test design completed, AI Max US test launches, DG Video results available, BSE video performance data, Hydra coordination status change"
-tags: [demand-gen, ai-max, algorithmic, kate-doc]
----
-
 # Workstream 5: Algorithmic Ads
 
 This document explains how the Paid Search team tested and scaled algorithmic ad formats — Demand Gen and the upcoming AI Max — to extend reach beyond traditional keyword campaigns. It provides the evidence base for the 2026 AI Max test. After reading, you should understand the proven Demand Gen results, the AI Max test design and guardrails, and the dependencies on the Modern Search workstream.
@@ -94,3 +79,12 @@ key_entities: ["Demand Gen", "AI Max", "DG Video", "Business Essentials", "Prime
 action_verbs: ["test", "expand", "guard", "coordinate", "scale"]
 update_triggers: ["AI Max test design completed", "AI Max US test launches", "DG Video results available", "BSE video performance data", "Hydra coordination status change"]
 -->
+
+
+## Related
+
+- [AI Max Test Design](ai-max-test-design) — US-market test, Google Summit readout folded in
+- [OCI Program](oci-program) — the measurement discipline AI Max inherits
+- [Paid Search Testing Approach](testing-approach-kate-v5) — this workstream in full context
+- [LiveRamp Program](../research/liveramp-program) — LiveRamp audiences for Demand Gen + YouTube retargeting
+- [Project Baloo Overview](project-baloo-overview) — the landing page AI Max needs

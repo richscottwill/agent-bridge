@@ -1,5 +1,3 @@
-<!-- DOC-0485 | duck_id: wiki-review-market-reference-revisions -->
-
 # Revisions: market-reference.md
 
 Reviewer: wiki-critic

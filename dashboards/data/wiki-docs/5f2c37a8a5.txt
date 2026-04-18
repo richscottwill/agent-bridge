@@ -1,17 +1,3 @@
-<!-- DOC-0365 | duck_id: reporting-au-keyword-cpa-dashboard -->
-
----
-title: AU Keyword CPA Dashboard — Design
-status: DRAFT
-doc-type: execution
-audience: amazon-internal
-level: 1
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-03-25
-update-trigger: weekly AU data pull, Lena feedback, dashboard ingester integration
----
-
 # AU Keyword CPA Dashboard — Design
 
 **STATUS: Design phase. Dashboard not yet built. First data pull pending.**

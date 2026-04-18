@@ -1,17 +1,3 @@
-<!-- DOC-0395 | duck_id: testing-ad-copy-testing-framework -->
-
----
-title: Ad Copy Testing Framework
-status: DRAFT
-doc-type: strategy
-audience: amazon-internal
-level: 2
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-04-04
-update-trigger: new market test results, phase transitions, new copy variants
----
-
 # Ad Copy Testing Framework
 
 ---

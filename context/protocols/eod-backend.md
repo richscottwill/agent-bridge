@@ -98,8 +98,8 @@ Tasks assigned to Richard since morning needing triage. Queue for EOD-Frontend.
 ### Step 7 — Five Levels Classification
 Classify completed + carry-forward tasks by L1-L5. Compute daily effort distribution.
 
-### Step 8 — Portfolio + ABPS AI Reconciliation
-a. ABPS AI Content: completions, pipeline advances, refreshes, daily reset.
+### Step 8 — Portfolio + Wiki Reconciliation
+a. Wiki pipeline: read ~/shared/wiki/agent-created/_meta/draft-log.md for today's drafts and critic review queue updates. Count articles promoted DRAFT→REVIEW→FINAL.
 b. Portfolio projects: compare against morning state. Surface changes.
 c. Context surface refresh (weekly or on significant changes): AU (`1213917747438931`), MX (`1213917639688517`).
 
@@ -154,7 +154,9 @@ All organs. Skip <48h + minor changes. Volume control. Hot topics. People Watch.
 ## Phase 4: Recurring Task State Checks
 
 Query DuckDB recurring_task_state. For each due task, execute its procedure:
-- goal_updater (monthly), meta_calibration_priors (monthly), meta_calibration_projections (weekly), coherence_audit (monthly), weekly_scorecard (Friday), context_surface_refresh (weekly), agent_bridge_sync (Friday), wiki_lint (weekly).
+- goal_updater (monthly), meta_calibration_priors (monthly), meta_calibration_projections (weekly), coherence_audit (monthly), weekly_scorecard (Friday), context_surface_refresh (weekly), agent_bridge_sync (Friday).
+
+NOTE: wiki_lint was removed from EOD as of 2026-04-18. Wiki maintenance runs as a separate manual hook: `shared/.kiro/hooks/wiki-maintenance.kiro.hook`. Trigger it manually (usually Friday). This keeps daily EOD lean. If `wiki_lint` still appears in recurring_task_state, mark it disabled — do not execute here.
 
 Update DuckDB + JSON fallback after each.
 

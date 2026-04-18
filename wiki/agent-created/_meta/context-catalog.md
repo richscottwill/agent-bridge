@@ -5,6 +5,7 @@ audience: amazon-internal
 owner: Richard Williams
 created: 2026-04-12
 updated: 2026-04-12
+foundational: true
 ---
 <!-- DOC-0442 | duck_id: wiki-meta-context-catalog -->
 

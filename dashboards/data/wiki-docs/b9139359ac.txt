@@ -1,5 +1,3 @@
-<!-- DOC-0433 | duck_id: wiki-archive-oci-consolidation -->
-
 # OCI Doc Consolidation — April 4, 2026
 
 ## What happened

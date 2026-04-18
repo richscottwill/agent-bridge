@@ -1,5 +1,3 @@
-<!-- DOC-0123 | duck_id: context-exp2-predicted-qa -->
-
 # Predicted Questions — Next Session
 
 Based on: calendar patterns, email threads, active projects as of 3/20/26 (Friday).

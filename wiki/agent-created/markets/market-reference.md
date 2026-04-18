@@ -148,7 +148,7 @@ For current weekly data, see the latest WW summary at `~/shared/context/active/c
 
 ### AU — Richard's Market, Efficiency Focus
 
-> Full detail: [AU Market Wiki](~/shared/artifacts/program-details/2026-03-25-au-market-wiki.md)
+> Full detail: [AU Market Wiki](au-market-wiki.md)
 
 | Field | Value |
 |-------|-------|
@@ -159,7 +159,7 @@ For current weekly data, see the latest WW summary at `~/shared/context/active/c
 
 ### MX — Richard's Market, ie%CCP Constrained
 
-> Full detail: [MX Market Wiki](~/shared/artifacts/program-details/2026-03-25-mx-market-wiki.md)
+> Full detail: [MX Market Wiki](mx-market-wiki.md)
 
 | Field | Value |
 |-------|-------|
@@ -170,7 +170,7 @@ For current weekly data, see the latest WW summary at `~/shared/context/active/c
 
 ## Cross-Market Patterns
 
-For cross-market scaling methodology, see [Cross-Market Playbook](~/shared/artifacts/strategy/2026-03-25-cross-market-playbook.md). For competitive patterns, see [Competitive Landscape](competitive-landscape).
+For cross-market scaling methodology, see [Cross-Market Playbook](../strategy/cross-market-playbook.md). For competitive patterns, see [Competitive Landscape](competitive-landscape).
 
 ## Decision Guide
 

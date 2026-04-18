@@ -1,5 +1,3 @@
-<!-- DOC-0200 | duck_id: meeting-baloo-early-access -->
-
 # Baloo Early Access — Cost & Rollout Planning
 
 ## Metadata

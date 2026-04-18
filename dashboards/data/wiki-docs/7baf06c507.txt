@@ -1,25 +1,3 @@
-<!-- DOC-0107 | duck_id: comms-stakeholder-comms-guide -->
-
----
-title: "Stakeholder Communication Guide: How to Talk to Each Audience"
-slug: "stakeholder-comms-guide"
-type: "guide"
-audience: "self"
-status: "draft"
-created: "2026-03-25"
-updated: "2026-03-25"
-owner: "Richard Williams"
-tags: ["communication", "stakeholder", "visibility", "meeting-prep", "ww"]
-depends_on: []
-consumed_by: ["wiki-concierge", "rw-trainer"]
-summary: "Playbook for proactive stakeholder communication — who cares about what, how to talk to them, and templates for common scenarios."
-# Artifact metadata
-artifact-status: DRAFT
-artifact-audience: personal
-artifact-level: 1
-update-trigger: "Quarterly after annual/forte reviews, or when a new stakeholder relationship becomes active"
----
-
 # Stakeholder Communication Guide: How to Talk to Each Audience
 
 This doc exists because visibility is the #1 growth area identified in the 2026 Annual Review. Brandon's feedback: "maintaining consistent visibility across all workstreams" and "lightweight mechanisms for timely communication." Three or more peers flagged communication and knowledge sharing. This isn't a nice-to-have — it's the gate blocking Level 1 graduation.

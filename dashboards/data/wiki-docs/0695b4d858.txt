@@ -1,5 +1,3 @@
-<!-- DOC-0208 | duck_id: meeting-pam -->
-
 # PAM (Paid App Marketing) Discussions
 
 ## Metadata

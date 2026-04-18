@@ -1,16 +1,3 @@
-<!-- DOC-0425 | duck_id: tool-spec-campaign-link-generator-spec -->
-
----
-title: Campaign Link Generator Spec
-status: DRAFT
-audience: amazon-internal
-level: 3
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-04-04
-update-trigger: reftag convention changes, new markets added, tool built
----
-
 # Campaign Link Generator - Tool Spec
 
 ---

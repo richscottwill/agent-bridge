@@ -78,3 +78,12 @@ key_entities: ["in-context registration", "Polaris", "Baloo", "Aladdin", "Gated 
 action_verbs: ["optimize", "migrate", "redirect", "test", "scale", "unlock"]
 update_triggers: ["Polaris weblab results available", "Baloo launch date confirmed", "EU5 LP framework results", "Aladdin timeline change", "Guest auto-expiration weblab results"]
 -->
+
+
+## Related
+
+- [Polaris Program](../markets/polaris-program) — WW Brand LP rollout
+- [Project Baloo Overview](project-baloo-overview) — 2026 UX flagship investment
+- [Baloo Ref Tag Attribution Risk](baloo-ref-tag-attribution-risk) — open attribution risk on Baloo
+- [Paid Search Testing Approach](testing-approach-kate-v5) — this workstream in full context
+- [Landing Page Testing Playbook](../operations/landing-page-testing-playbook)

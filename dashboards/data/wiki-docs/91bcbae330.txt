@@ -1,17 +1,3 @@
-<!-- DOC-0316 | duck_id: program-ab-paid-search-wiki -->
-
----
-title: AB Paid Search Program Wiki
-status: DRAFT
-doc-type: reference
-audience: amazon-internal
-level: N/A
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-03-25
-update-trigger: team changes, new initiatives, account structure changes
----
-
 # Amazon Business Paid Search — Program Wiki
 
 ---

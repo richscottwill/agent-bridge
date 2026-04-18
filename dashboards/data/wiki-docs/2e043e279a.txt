@@ -1,0 +1,56 @@
+# OP1 2027 Innovation Shortlist
+
+This document captures the paid acquisition innovation ideas generated during the April 8 Austin OP1 Strategy Workshop. It is the forward-looking companion to the existing OP1 Testing Framework draft, which covers what we have proven. This shortlist covers what we want to test next and why it matters for 2027.
+
+## Context
+
+The workshop ran ninety-six minutes and organized ideas into three buckets: registration, engagement, and profit. Stacey led whiteboard capture. Richard, Andrew, Dwayne, Peter, Yun, Adi, and Sid contributed. The intent was to surface big ideas regardless of feasibility, then triage later. This document represents the triage.
+
+## Registration bets
+
+**MCS visitor retargeting.** Build a LiveRamp audience of visitors who reach the MCS page but do not complete registration. Use Adobe session data and retail email matching to recognize them. Expand beyond the current AB-customer-only retargeting setup. Richard already has the mechanism wired for AB customers; extending to prospects requires legal approval.
+
+**LiveRamp Enhanced Match.** Today's match rate is twenty percent after adding associate emails to the customer feed, up from twelve percent initially. Enhanced Match projects another doubling to roughly forty percent. Richard owns the LiveRamp relationship and should close on Enhanced Match provisioning. Direct impact on every audience-based campaign.
+
+**F90 activation channel.** The audience is built and NTA tickets are updated. Media approval is the blocker. F90 targets recently acquired non-SHuMA customers to drive three-plus purchases, with a stated goal of lifting the non-SHuMA 3+ purchase rate from 31.7 percent to 35.4 percent. This is PS's first true activation play and fundamentally changes the channel operating model.
+
+## Engagement bets
+
+**Paid App attribution shift.** If eighty percent of paid app install traffic is existing customers, the budget belongs with Christine's engagement team, not SSR. Test deep linking with Ref tags to split acquisition versus engagement cleanly. Move the budget once the split is proven. Christine's team has surplus budget and SSR is stingy.
+
+**Deep link + Ref tag persistence.** Paid app campaigns currently land users on the home page with no tracking context. Deep linking to Ruby's saving sky page, with Ref tags preserved through the app flow, would give the first clean view of paid app lifetime value.
+
+**App-installed audience targeting.** If we can build a LiveRamp audience of users who already have the AB app installed, we can run engagement-specific demand-gen against them. Small audience, high intent. Low execution cost if feasible.
+
+## Profit bets
+
+**Vertical-based audience segmentation.** LiveRamp sends registrant data with an SMB-versus-enterprise split today. Adding a vertical column (IECCP, Bersaria, healthcare, construction) would allow bid adjustments by vertical economics. Cheap traffic in some verticals, expensive in others — current bucketing loses the signal.
+
+## Infrastructure bets
+
+**Programmatic data access.** Google Ads and Adobe data accessible via SQL would unlock anomaly detection, automation, and natural language querying. Replication latency should shrink from two to three days toward near-real-time.
+
+**MIE (Marketing Intelligent Engine).** AI tool specifically for paid search, under construction by tech. Provides bid and portfolio recommendations at the campaign level. Does not auto-execute. Potential Adobe replacement. Expected 2027.
+
+## Polaris and Baloo dependencies
+
+Polaris brand pages are rolling out market by market (AU > MX > DE sequence). Baloo (shop.business.amazon.com) is targeted for Q2 2026 launch but has open URL flip and Ref tag attribution issues. Both affect OP1 2027 assumptions about landing page fidelity.
+
+## Next Steps
+
+1. Share this shortlist with Kate by April 22 for prioritization input.
+2. Confirm LiveRamp Enhanced Match provisioning timeline with Hannah Neustadt by April 24.
+3. Scope deep-link Ref tag test with Peter and Andrew by April 30.
+
+## Related
+
+- [Paid Search Testing Approach & Year Ahead](../testing/testing-approach-kate-v5)
+- [Sid Acquisition Funnel Map](sid-acquisition-funnel-map)
+- [F90 Program](../strategy/f90-program)
+
+<!-- AGENT_CONTEXT
+machine_summary: "OP1 2027 innovation shortlist from 4/8 Austin workshop. Eight bets across registration (MCS retargeting, Enhanced Match, F90), engagement (paid app attribution, deep linking), profit (vertical segmentation), and infrastructure (programmatic data, MIE)."
+key_entities: ["Austin offsite", "OP1 2027", "LiveRamp Enhanced Match", "F90", "MIE", "Paid App", "Baloo", "Polaris"]
+action_verbs: ["retarget", "segment", "deep-link", "attribute"]
+update_triggers: ["Kate feedback on shortlist", "Enhanced Match provisioning", "F90 media approval"]
+-->

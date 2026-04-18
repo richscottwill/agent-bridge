@@ -1,5 +1,3 @@
-<!-- DOC-0490 | duck_id: wiki-review-pre-existing-artifacts-audit -->
-
 # Pre-Existing Artifacts Audit
 
 **Date:** 2026-03-25

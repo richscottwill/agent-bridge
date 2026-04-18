@@ -1,5 +1,3 @@
-<!-- DOC-0076 | duck_id: callout-mx-context -->
-
 # MX Paid Search — Market Context
 
 Last updated: 2026-03-16

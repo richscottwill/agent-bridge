@@ -1,5 +1,3 @@
-<!-- DOC-0403 | duck_id: state-file-au-ps -->
-
 # Australia Paid Search — State of the Business
 
 **Reporting period:** Week 14 (Mar 29–Apr 4, 2026) · **Market owner:** Richard Williams · **Primary stakeholder:** Lena Zak (L7) · **Execution partner:** Alexis Eck (L6)

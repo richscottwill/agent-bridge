@@ -1,5 +1,3 @@
-<!-- DOC-0483 | duck_id: wiki-review-kate-doc-v4-eval-b -->
-
 # Blind Eval B: Paid Search Testing Approach & Year Ahead (V4)
 
 **Evaluator:** wiki-critic (Eval B — no prior reviews seen)

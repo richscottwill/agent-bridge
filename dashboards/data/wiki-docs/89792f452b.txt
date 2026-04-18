@@ -1,5 +1,3 @@
-<!-- DOC-0402 | duck_id: state-file-ww-testing -->
-
 # WW Paid Search Testing — State of the Business
 
 **Reporting period:** Week 14 (Mar 29–Apr 4, 2026) · **Program owner:** Richard Williams · **Primary stakeholder:** Kate Rundell (L8 Director) · **Manager:** Brandon Munday (L7)

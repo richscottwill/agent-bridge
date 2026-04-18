@@ -1,5 +1,3 @@
-<!-- DOC-0067 | duck_id: callout-jp-data-brief-2026-w12 -->
-
 # JP W12 Data Brief
 
 ## Headline numbers

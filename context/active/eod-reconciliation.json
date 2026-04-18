@@ -1,66 +1,118 @@
 {
-  "date": "2026-04-15",
+  "generated": "2026-04-17",
+  "date": "2026-04-17",
   "timezone": "America/Los_Angeles",
-  "completed_today": [
-    {"gid": "1213072707685834", "name": "MX Automotive page"},
-    {"gid": "1213730974261148", "name": "Make changes to AU/MX/PAM for the week"},
-    {"gid": "1213993242326093", "name": "AU meetings - Agenda"},
-    {"gid": "1213637505601024", "name": "R&O for MX/AU"},
-    {"gid": "1214068429466521", "name": "Verify IT tax fix — check closed invoices + reissued ones"},
-    {"gid": "1213993242268778", "name": "Mondays - Write into EU SSR Acq Asana"},
-    {"gid": "1214075341408690", "name": "ABIX R&O"},
-    {"gid": "1213560614815911", "name": "PAM R&O"},
-    {"gid": "1214068319315340", "name": "Prep for MX LP optimization call"},
-    {"gid": "1214075340745321", "name": "(unnamed task)"},
-    {"gid": "1214068429496105", "name": "Respond to Yun — MX NB page performance doc"},
-    {"gid": "1214068429588691", "name": "RSVP: Kate's AB Marketing Happy Hour"},
-    {"gid": "1214068429586218", "name": "RSVP: PSME Seattle Happy Hour"}
-  ],
-  "completed_count": 13,
+  "status": "complete",
+  "completed_today": [],
+  "completed_today_note": "No genuine work completions today. 44 ABPS AI Content tasks marked complete are bulk deprecation moves per 2026-04-17 soul.md rule (Asana ABPS AI Content project deprecated, wiki articles now source of truth in shared/wiki/agent-created/ + SharePoint Artifacts/).",
   "carried_forward": [
-    {"gid": "1213341921686564", "name": "Testing Document for Kate", "days_overdue": "ongoing", "note": "THE HARD THING — send v5 to Brandon"},
-    {"gid": "1214080130329568", "name": "Make changes to AU/MX/PAM for the week", "days_overdue": 0},
-    {"gid": "1213796951745232", "name": "Look over AU landing page switch", "days_overdue": 1},
-    {"gid": "1214068319365234", "name": "Approve OFA invoice workflow", "days_overdue": 1},
-    {"gid": "1213917691089036", "name": "Refmarker mapping audit PoC — AU", "days_overdue": 2}
+    {
+      "gid": "1214074477111007",
+      "name": "DDD walkthrough with team",
+      "from": "Today",
+      "to": "Urgent",
+      "reason": "Not explicitly completed — AI tool demo session today was different scope",
+      "next_action": "Confirm walkthrough completed or schedule follow-up"
+    },
+    {
+      "gid": "1214074477110993",
+      "name": "Sitelink Audit/Update",
+      "from": "Today",
+      "to": "Urgent",
+      "reason": "Not started today",
+      "next_action": "Audit sitelinks across AU/MX/PAM next week"
+    },
+    {
+      "gid": "1214081017092577",
+      "name": "MCS LP Review: Connect with Lorena on paid social/PS synergy",
+      "from": "Today",
+      "to": "Urgent",
+      "reason": "Not completed today",
+      "next_action": "Ping Lorena next week on MX paid social/PS synergy"
+    },
+    {
+      "gid": "1213796951745232",
+      "name": "Look over AU landing page switch",
+      "from": "Today",
+      "to": "Urgent",
+      "reason": "Max-clicks switch made 4/17, check Monday",
+      "next_action": "Monday: check AU account post max-clicks switch, review budgets"
+    },
+    {
+      "gid": "1213965650410967",
+      "name": "Deep Dive: Year-One Optimization one-pager",
+      "from": "Today",
+      "to": "Urgent",
+      "reason": "Due 4/16, not started — L3 strategic artifact drift",
+      "next_action": "Monday: review draft, fill in market-specific KPI targets"
+    }
   ],
-  "new_tasks_from_meetings": [
-    {"gid": "1214081017044930", "name": "MCS LP Review: Share MX Polaris test results (beauty/auto)", "due": "2026-04-29", "project": "MX"},
-    {"gid": "1214081017092577", "name": "MCS LP Review: Connect with Lorena on paid social/PS synergy", "due": "2026-04-17", "project": "MX"},
-    {"gid": "1214081017124426", "name": "MCS LP Review: Follow up on global Polaris template finalization", "due": "2026-04-22", "project": "MX"}
+  "new_tasks": [
+    {
+      "source": "meeting:IvUNtHCncikQcZvODFj1",
+      "source_name": "AI Tool Demo and Workflow Integration (Hedy)",
+      "todos_from_session": [
+        "Follow up with Lorena Alvarez Larrea (MX) on WhatsApp campaign rollout plans",
+        "Follow up with Alexis Eck (AU) on WhatsApp campaign rollout plans"
+      ],
+      "note": "Both items are carry-overs from prior WhatsApp discussions, not net-new. Adi asked in DM for Kiro setup help in next 1:1 — L3 signal (tool adoption)."
+    }
   ],
-  "recurring_auto_created": [
-    {"gid": "1214081017200478", "name": "AU meetings - Agenda", "due": "2026-04-22", "project": "AU", "pattern": "weekly"}
+  "recurring_proposals": [],
+  "recurring_created": [],
+  "blocker_updates": [
+    {
+      "task": "MX Auto page",
+      "blocker": "Vijeth footer component",
+      "days_blocked": 29,
+      "status": "ongoing"
+    },
+    {
+      "task": "Kingpin Goals MX",
+      "blocker": "Andes data unavailable",
+      "days_blocked": 32,
+      "status": "ongoing"
+    }
   ],
-  "dependencies_logged": [
-    {"person": "Lorena Alvarez Larrea", "action": "Reach out to Vijay Kumar (Andes) for Baloo international roadmap", "source": "MCS LP Review 4/15"},
-    {"person": "MCS Team (Alex)", "action": "Finalize global Polaris template for brand pages by 4/16", "source": "MCS LP Review 4/15"},
-    {"person": "Dwayne Palmer", "action": "Coordinate with MCS and PA teams on Polaris migration rollout plan", "source": "MCS LP Review 4/15"}
-  ],
-  "meeting_summary": {
-    "sessions_processed": 1,
-    "session_name": "Polaris Brand LP and Canada Optimization Review",
-    "duration_minutes": 26,
-    "key_decisions": [
-      "All paid search landing pages will migrate to Polaris branding",
-      "Legacy PADESARJAD pages will be deprecated",
-      "Mexico serves as early test market for Polaris",
-      "Halo effect from paid social to branded search recognized — monitor directionally"
-    ],
-    "key_insight": "Lorena reported strong paid social → branded search CTR halo in MX. Brandon interested. No hard attribution possible but directional evidence strong."
-  },
   "five_levels": {
-    "l1_sharpen": 0,
-    "l2_testing": 5,
-    "l3_automation": 1,
-    "l4_zero_click": 0,
-    "l5_agentic": 0,
-    "unclassified": 7
+    "l1": 0,
+    "l2": 0,
+    "l3": 1,
+    "l4": 0,
+    "l5": 0,
+    "note": "L3 = AI Tool Demo session (Richard led team walkthrough of AI callout workflow — tool adoption signal). L1 Testing Approach still at zero — 20 workdays."
   },
-  "streak": {
-    "current": 1,
-    "hard_thing": "Send Testing Approach v5 to Brandon",
-    "hard_thing_status": "Calendar block was 12:30-2 PM PT today. Check if progress was made.",
-    "avoidance_signal": "13 tasks completed — all L2/L3/Admin. No L1 artifact shipped."
+  "hard_thing": {
+    "name": "Send Testing Approach v5 to Brandon",
+    "status": "not_started",
+    "workdays_at_zero": 20
+  },
+  "meetings_today": [
+    {
+      "session_id": "IvUNtHCncikQcZvODFj1",
+      "title": "AI Tool Demo and Workflow Integration",
+      "duration_min": 51,
+      "attendees": ["Richard", "Adi Thakur", "Andrew Wirtz", "Stacey Gu", "Yun-Kang Chu", "Dwayne Palmer", "Peter Ocampo"],
+      "key_outcomes": [
+        "Richard demoed AI tool for WBR callouts + master prompt workflow",
+        "Team decisions: adopt AI tool for WBR support, standardize Markdown output, create SharePoint shared-prompt repo",
+        "Commitments: Richard to share master prompt + schedule setup session by 4/21; Adi MX test by 4/25; Andrew UK validation by 4/28"
+      ],
+      "richard_communication": "Adequate presence, strategic value, direct clarity, responsive listening. Missed opportunity: could have invited Adi/Andrew input earlier."
+    }
+  ],
+  "portfolio_changes": {
+    "AU": {"new_today": 0, "completed_today": 0, "note": "Max-clicks switch made on genbi campaign per Brandon ask"},
+    "MX": {"new_today": 0, "completed_today": 0},
+    "WW_Testing": {"new_today": 0, "completed_today": 0},
+    "Paid_App": {"new_today": 0, "completed_today": 0},
+    "ABPS_AI_Content_DEPRECATED": {"bulk_completed": 44, "note": "Project deprecated per 2026-04-17 soul.md rule. All tasks closed. Wiki articles now source of truth."}
+  },
+  "wiki_pipeline": {
+    "drafts_created_today": 24,
+    "promoted_today": 0,
+    "merges_today": 7,
+    "consolidation_pass": "Batch of 18 DRAFTs generated from 2-week context scan. 7 merges consolidated 37 files to ~10 canonical docs (OCI, Grok swarm, F90, Polaris, Forecast, LiveRamp). All DRAFT status awaiting wiki-critic review.",
+    "source": "shared/wiki/agent-created/_meta/draft-log.md"
   }
 }

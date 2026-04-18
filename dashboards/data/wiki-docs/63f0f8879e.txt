@@ -1,5 +1,3 @@
-<!-- DOC-0435 | duck_id: wiki-audit-audit-2026-04-04 -->
-
 # Wiki Audit — 2026-04-04
 
 ## Summary

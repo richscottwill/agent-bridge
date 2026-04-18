@@ -1,5 +1,3 @@
-<!-- DOC-0201 | duck_id: meeting-biweekly-onsite-events -->
-
 # Biweekly AB Onsite Events Stakeholder Meeting
 
 ## Metadata

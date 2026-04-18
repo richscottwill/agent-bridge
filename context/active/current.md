@@ -1,7 +1,7 @@
 <!-- DOC-0345 | duck_id: protocol-current -->
 # Active Context — Richard Williams
 
-Last updated: 2026-04-03 (Friday PT, EOD-1 meeting sync)
+Last updated: 2026-04-17 (Friday PT, EOD cascade)
 
 ## Role & Scope
 - Amazon Business, Paid Acquisition / Paid Search
@@ -24,12 +24,13 @@ Last updated: 2026-04-03 (Friday PT, EOD-1 meeting sync)
 - US: Stacey switched to Polaris on 3/24 ✅
 - WW: Weblabs needed for AU, JP, EU (DE + FR per Andrew's recco). Brandon confirmed do-no-harm: minimal localization, follow US template.
 - ✅ Weblab ticket SUBMITTED (3/21): "WW PS Brand Polaris Redesign" via Taskei. Weblab dial-up targeting April 6-7.
-- ✅ Frank Volinsky (MCS-3004, 3/31): CANCELLED sync — Frank got requirements from Alex directly. "No other information is needed at this time." No action needed from Richard.
-- ✅ Vijeth Shetty completed ps-brand XF + Template task (Asana 4/1). Alex confirmed: "all nav's look great!" Minimal-nav live for all GEOs. ASIN/Carousel component and EU5 page creation remaining.
-- Alex (Asana 3/27): Added Richard to "Page Creation / Page Edit, ps-brand XF + Template" task. Alex checking in with Vijeth on status.
+- ✅ Vijeth Shetty completed ps-brand XF + Template task (Asana 4/1). Alex confirmed: "all nav's look great!"
 - Brandon's priority: AU > MX > DE > UK > JP > FR > IT > ES > CA > US-ES
-- US-ES page: noindex/nofollow, Alex working with Yun
-- Action: Create one-page Polaris rollout timeline with dates and owners (OVERDUE — was due last week).
+- 🆕 **MCS Decision (4/15):** All paid search LPs will migrate to Polaris branding. Legacy PADESARJAD pages deprecated — no further investment. MX is early test market.
+- 🆕 **Brandon 1:1 (4/14):** Richard to lead as single point of contact for global Polaris initiatives. Only US and JP currently live on Polaris via weblab.
+- 🆕 **DDD: Polaris Brand PS Pages (4/16):** Meeting held today. Transcript pending Hedy ingestion.
+- 🆕 **MX Handoff Doc (4/14 DM):** Brandon: "you don't even need to show the 'before' page for MX. Just reference CA pages."
+- Action: Create one-page Polaris rollout timeline with dates and owners (OVERDUE).
 
 ### AU Paid Search Optimization
 - MCS → Polaris: FULL SWITCH confirmed by Lena (3/13). Alexis sent mapping (3/17). Migration completing 3/24-25.
@@ -174,6 +175,20 @@ Last updated: 2026-04-03 (Friday PT, EOD-1 meeting sync)
 - Continue using GlobalLink until 3/31. Switch to ATMS for project submissions starting 3/31.
 - Training materials shared 3/24 (Kiyo Walker).
 
+### Google DSA Sunset → AI MAX (NEW — 4/15)
+- Google sunsetting DSA; all campaigns auto-upgrade to AI MAX for 2026.
+- Impact: All PS teams need to prepare for DSA → AI MAX migration. Flag for team awareness.
+
+### Enhanced Match / LiveRamp Budget (4/15)
+- $255K LiveRamp fee stays in PS ENG budget ($1.8M total). No budget transfer needed.
+- Brandon: "We'll only use the fee once Enhanced Match gets setup (timeline TBD...prob slow)."
+- Yun confirmed: keeping PS ENG $1.8M in R&O, not releasing any $.
+
+### ABIX Handoff Doc (NEW — 4/13, CRITICAL)
+- Brandon + Yun started handoff doc in Loop. Brandon asked Richard to input (4/13).
+- Brandon presenting to Kate THIS WEEK about handoff plan.
+- Status: OPEN — Richard hasn't confirmed input yet.
+
 ## Recurring Meetings
 | Meeting | Cadence | Key Attendees |
 |---------|---------|---------------|
@@ -221,61 +236,47 @@ Last updated: 2026-04-03 (Friday PT, EOD-1 meeting sync)
 | Praveen Chandolu | chandop | OCI Tech. Working with Brandon on new APAC account setup. |
 
 ## Pending Actions
-- [ ] 🚨 Testing Approach doc for Kate — THE hard thing. Apr 16 meeting OFFICIALLY CANCELED (4/3 email: Brandon told Kate "cancel for now and reassess as we clean it up." Kate: "I'm fine keeping it but wanted to make sure we had a plan." Megan declining from Kate's calendar.) Brandon reviewing doc first. Document still valuable. Continue refining.
-- [ ] $70K OP2 underspend — confirm March spend with BK Cho, set up automated ASP reminders (immediate)
-- [ ] Obtain TPS checklist from Abdul for F90 audience request (immediate)
+- [ ] 🚨 Testing Approach doc for Kate — THE hard thing. Apr 16 meeting OFFICIALLY CANCELED. Brandon reviewing doc first. v5 has PUBLISH verdict (8.4/10). 5 minor subtractive edits remain. **19 workdays at zero L1.**
+- [ ] 🔴 ABIX Handoff Doc — Brandon asked Richard to input (4/13 Slack). Brandon presenting to Kate THIS WEEK. Loop doc link shared. **CRITICAL — Kate visibility.**
+- [ ] 🔴 Loop Callout Clarifications — Brandon needs updates by Fri 4/17 @ 2pm CT (1pm PT). Richard reacted ✍️ but not completed.
+- [ ] 🔴 R&O Input MX/AU — Yun reminded 4/15. Due TODAY. Confirm file location and input numbers.
+- [ ] 🔴 WW Sitelink Audit — Brandon assigned via DM + Asana (4/15). Review task, acknowledge, assess scope.
+- [ ] 🔴 Write back to Dwayne — AU Adobe Alignment session feedback (carried fwd from today)
+- [ ] 🔴 AU: check genbi campaign data, change to max clicks with guardrails (carried fwd from today)
+- [ ] 🔴 Resolve Google dupe invoice — keep Diana/team updated (carried fwd from today)
+- [ ] 🔴 DDD walkthrough with team — Brandon assigned via Asana (4/15)
+- [ ] Submit SIM to Alex to fix broken MX brand page images + apply CA optimizations (2d overdue from Brandon 1:1 4/14)
+- [ ] Create PowerPoint slide: MX LP A/B test before-and-after screenshots (2d overdue from Brandon 1:1 4/14)
+- [ ] Compile consolidated Andes changes list for Polaris brand pages (2d overdue from Brandon 1:1 4/14)
+- [ ] Initiate email thread with Lorena re: MX unspent budget (2d overdue from Brandon 1:1 4/14)
+- [ ] Follow up with LiveRamp on updated match rate analysis (due today 4/16)
+- [ ] Ensure Baloo SIM updated with ref tag issue + attribution risks (2d overdue from Baloo demo 4/14)
+- [ ] Test Baloo experience via Tampermonkey script, document findings (1d overdue)
+- [ ] Connect with Lorena on paid social / PS synergy (from MCS 4/15, due today)
+- [ ] Follow up on global Polaris template finalization with MCS (due next week)
+- [ ] PAM Budget reply to Brandon — 13 DAYS UNANSWERED. CRITICAL.
+- [ ] $70K OP2 underspend — confirm March spend with BK Cho, set up automated ASP reminders
 - [ ] Gather Enhanced Match specs from LiveRamp, draft one-page FAQ (by Apr 22)
-- [ ] Set up 15-min walkthrough with Andrew Wirtz for Kiro ASP workflow
-- [ ] Reframe AdWords knowledge base ticket as risk mitigation tied to $70K underspend
-- [ ] Respond to Lena's AU PS Weekly Update follow-up questions (landing page URLs, repeat visitor CPA overstating) — 1d, high-visibility. Brandon offering support in ABIX.
-- [ ] Reply to Stacey DM — CA exclusion from Polaris 50/50 testing on 4/7 (reason: OCI data clean focus)
-- [ ] Share ENG max budget calculation file with Andrew (DM 4/1) — Brandon mentioned in Andrew's 1:1 for OP1 recalculation
-- [ ] Finalize market expansion playbook with updated structure (next week from 4/2 — from Deep Dive)
-- [ ] Year-One Optimization one-pager mapping to KPIs (by Apr 16 — from Deep Dive)
-- [ ] Create living negative keyword list in global chat (immediate — from Deep Dive)
-- [ ] IECCP FAQ for new account playbook (by Apr 9 — from Deep Dive)
-- [ ] Follow up with Lorena (MX) and Alexis (AU) on WhatsApp rollout plans (from PSME demo 4/2)
-- [ ] Kudoboard for Kate Vives — was due 4/1, NOW OVERDUE
-- [ ] Provide Lorena Q2 expected spend for MX PO submission (8d overdue — 3/25 request). Richard told Lorena he'd update (Slack 4/1).
-- [ ] Reply to Lorena keyword data request (14d overdue — 3/19 request)
-- [ ] Create one-page Polaris rollout timeline with dates and owners (OVERDUE — was due last week)
-- [ ] Compile rolling 4-week keyword CPA dashboard for AU (due this week)
-- [ ] Coordinate with MCS team on tracking/attribution post-migration (overdue)
-- [ ] Follow up with Brandon on Baloo MBR click-cost guardrails
-- [ ] Schedule 15-min "process-snap" sync to map undocumented hand-offs (from Adi sync 3/25)
-- [ ] UK/CA combined vs separate decision for R&O report
-- [ ] Clarify 10% growth metric definition — before next flash
-- [ ] DE tech issue / EAAAAA investigation — within 5 days (from 3/26)
-- [ ] AI Max test design (4d OVERDUE — was due 3/28)
-- [ ] Bridge: paste Code.gs into Apps Script editor, run createTriggers()
-- [ ] Admin: Flash topics (14d overdue), PAM US PO (31d overdue), PAM R&O (22d overdue)
-- [ ] WW redirect — Adobe Ad Cloud reporting (13d overdue)
-- [ ] OCI TT/suffix — FR to 25% (12d overdue)
-- [ ] MX Auto page — Vijeth footer (12d overdue)
-- [ ] MX/AU confirm budgets (7d overdue)
-- [ ] Delegate MX invoicing — Carlos VOID, needs new owner (Lorena or Richard keeps it)
-- [ ] Kingpin Goals MX — overdue, blocked by Andes
+- [ ] Respond to Lena's AU PS Weekly Update follow-up questions (landing page URLs, repeat visitor CPA overstating)
+- [ ] Provide Lorena Q2 expected spend for MX PO submission (22d overdue — 3/25 request)
+- [ ] Reply to Lorena keyword data request (28d overdue — 3/19 request)
+- [ ] Create one-page Polaris rollout timeline with dates and owners (OVERDUE)
+- [ ] Year-One Optimization one-pager mapping to KPIs (was due Apr 16)
+- [ ] IECCP FAQ for new account playbook (was due Apr 9)
+- [ ] AI Max test design (OVERDUE — was due 3/28)
+- [ ] Kingpin Goals MX — overdue, blocked by Andes (31d)
+- [ ] MX Auto page — Vijeth footer (28d blocked)
+- [ ] Admin: PAM US PO (45d overdue), PAM R&O (36d overdue)
+- [ ] WW redirect — Adobe Ad Cloud reporting (27d overdue)
 - [ ] Triage MS Advertising paused accounts (10x emails)
-- [ ] Follow up with Brandon on specific "walk on water" promo criteria
-- [ ] Proactively share AU CPC and Polaris outcomes with Lena and stakeholders
 - [ ] Apple Ads: investigate system issue (campaigns overspent — 3/27 notice)
 - [ ] ABMA-11245: follow up if no response to 3/30 comment
+- [x] Review Q2 CCP/ieCCP files from Stacey — DONE 4/16
 - [x] Polaris brand pages: Vijeth completed XF + Template, Alex confirmed navs working — 4/1
-- [x] Baloo: keyword cost data + "don't use Google" blurb — DONE 3/30 (ABCA-371 comment, Quip sheet)
-- [x] Flash sections written (MX highlight, AU update, Bid Strategy, Brand LP, Paid App) — 3/27
+- [x] Baloo: keyword cost data + "don't use Google" blurb — DONE 3/30
+- [x] Flash sections written — 3/27
 - [x] Agent Bridge built and live — 3/27
-- [x] Onsite Events meeting attended — 3/27
-- [x] Polaris weblab acknowledged by MCS team (Frank) — 3/27
 - [x] W13 WBR callouts produced for all 10 markets — 3/30
-- [x] ie%CCP ingester bug fixed — 3/30
-- [x] Change Log CSVs ingested to DuckDB (477 rows) — 3/30
-- [x] Bayesian Prediction Engine built — 3/30
-- [x] Data layer overhaul (query.py, agent state, DuckDB MCP, PBT tests) — 3/30
-- [x] Attention Tracker built — 3/30
-- [x] Annual Review shared with Richard (3/24)
-- [x] ATMS Training session attended (3/24)
-- [x] System Snapshot (portable body sync) sent (3/24)
-- [x] US Polaris switch — Stacey completed (3/24)
 
 ## Key Quip Documents
 - MX Sync: https://quip-amazon.com/K9OYA9mXm7DU/AB-MX-Paid-Search-Sync

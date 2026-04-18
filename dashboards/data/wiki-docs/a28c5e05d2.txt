@@ -1,16 +1,3 @@
-<!-- DOC-0424 | duck_id: tool-spec-budget-forecast-helper-spec -->
-
----
-title: Budget Forecast Helper Spec
-status: DRAFT
-audience: amazon-internal
-level: 3
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-04-04
-update-trigger: R&O cycle changes, dashboard ingester updates, OP2 plan refresh
----
-
 # Budget Forecast Helper - Tool Spec
 
 ---

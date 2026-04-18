@@ -1,5 +1,3 @@
-<!-- DOC-0457 | duck_id: wiki-review-batch-4-eval-a -->
-
 # Batch 4 — Blind Eval A
 
 Reviewer: wiki-critic | Date: 2026-04-05 | Mode: Review (pre-publish)

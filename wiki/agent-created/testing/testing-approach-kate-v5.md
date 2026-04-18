@@ -5,6 +5,7 @@ audience: amazon-internal
 owner: Richard Williams
 created: 2026-04-12
 updated: 2026-04-12
+foundational: true
 ---
 <!-- DOC-0508 | duck_id: wiki-testing-approach-kate -->
 
@@ -182,3 +183,16 @@ depends_on: ["kate-doc-methodology", "kate-doc-oci", "kate-doc-modern-search", "
 consumed_by: ["Kate Rundell Apr 16 review", "OP1 planning", "OP2 planning", "Todd Heimes PS investment decision"]
 update_triggers: ["OCI RoW market status change", "Baloo launch date confirmed", "F90 Legal approval", "AI Max test results", "any workstream data update"]
 -->
+
+
+## Related program references
+
+Each workstream in this document has a canonical program doc for deeper context.
+
+- Workstream 1 (OCI) — [OCI Program](oci-program)
+- Workstream 3 (Audiences) — [LiveRamp Program](../research/liveramp-program) • [F90 Program](../strategy/f90-program)
+- Workstream 4 (User Experience) — [Polaris Program](../markets/polaris-program) • [Project Baloo Overview](project-baloo-overview)
+- Workstream 5 (Algorithmic Ads) — [AI Max Test Design](ai-max-test-design)
+- Methodology deep-dive — [Testing Methodology](testing-methodology)
+- Forward-looking bets — [OP1 2027 Innovation Shortlist](../strategy/op1-2027-innovation-shortlist)
+- Channel context — [Sid Acquisition Funnel Map](../strategy/sid-acquisition-funnel-map) • [On-Site Placement Catalog](../strategy/on-site-placement-catalog)

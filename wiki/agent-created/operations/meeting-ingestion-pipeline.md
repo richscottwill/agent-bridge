@@ -1,0 +1,73 @@
+---
+title: "Meeting Ingestion Pipeline — Hedy to Asana"
+slug: "meeting-ingestion-pipeline"
+doc-type: "execution"
+type: "reference"
+audience: "agent"
+status: "DRAFT"
+level: "L3"
+category: "operations"
+created: "2026-04-17"
+updated: "2026-04-17"
+owner: "Richard Williams"
+tags: ["hedy", "meetings", "action-items", "asana", "duckdb", "ingestion"]
+depends_on: []
+summary: "End-to-end flow from Hedy meeting capture through action item extraction to Asana task creation and DuckDB analytics."
+---
+
+# Meeting Ingestion Pipeline
+
+Meetings produce value when the decisions survive the calendar slot. Hedy captures every meeting Richard attends. The ingestion pipeline extracts the action items, turns them into Asana tasks, and persists the analytics to DuckDB so we can answer "what did Carlos commit to" six weeks later. This document consolidates the pipeline, which currently lives scattered across four protocol files.
+
+## The three-stage flow
+
+The pipeline runs in three stages across two daily routines.
+
+**Stage one: Hedy capture.** Hedy records the meeting and produces a transcript, cleaned transcript, meeting minutes, recap, highlights, and user to-dos. This happens automatically during every meeting on the calendar. No operator intervention required.
+
+**Stage two: EOD-1 ingestion.** The `eod-meeting-sync` protocol pulls new Hedy sessions since the last ingestion, writes them to `~/shared/wiki/meetings/<series>.md` as part of the series file, inserts metadata rows into `meeting_analytics` and `meeting_highlights` in DuckDB, and extracts action items for the task pipeline.
+
+**Stage three: Meeting-to-task pipeline.** For each extracted action item, the pipeline checks whether a matching Asana task exists. If not, it creates one with the appropriate routine, priority, and owner based on the meeting context. If the task exists, it appends the meeting reference to the task's Kiro_RW field so future readers can trace the task back to its origin meeting.
+
+## Protocol files
+
+Four protocol files contain pieces of the pipeline. To understand the full flow, read them in this order.
+
+`am-auto.md` describes the morning context load that includes meeting analytics reading. `eod-meeting-sync.md` covers the evening ingestion step, including Hedy API calls, DuckDB inserts, and file writes. `meeting-to-task-pipeline.md` covers action item extraction and Asana task creation. `eod-system-refresh.md` covers the finalization step, including snapshot writes and SharePoint durability sync.
+
+## DuckDB tables
+
+Two tables hold meeting data. `meeting_analytics` stores per-session metadata (session ID, title, date, duration, recap, series assignment). `meeting_highlights` stores per-meeting extracted highlights (decisions, action items, insights) with a foreign key to the session.
+
+Queries against these tables power meeting series analysis, action-item aging reports, and the relationship graph in `memory.md`.
+
+## Hedy API coverage
+
+The Hedy MCP exposes nine tools. `GetSessions` lists recent meetings. `GetSessionDetails` returns the full transcript, recap, minutes, and user to-dos for a single session. `GetSessionHighlights` returns just the highlights. `GetSessionToDos` returns just the to-dos. Four additional tools handle highlights, topics, and session contexts. The ingestion pipeline uses `GetSessions` and `GetSessionDetails` primarily.
+
+## Data freshness invariants
+
+The pipeline enforces three invariants. First, `meeting_analytics` latest date should be within one day of today — otherwise the ingestion missed a day. Second, every Hedy session ID in `meeting_analytics` should have a corresponding entry in `meeting_highlights` (or an explicit "no highlights" marker). Third, every action item surfaced by Hedy should have either an Asana task or a documented skip reason.
+
+The `ops.data_freshness` table records the last successful ingestion timestamp. A value older than forty-eight hours triggers an alert in the morning brief.
+
+## Failure modes
+
+Three failures recur. Hedy API timeouts cause ingestion to stall — retry with exponential backoff, but log the skip. Meeting series file conflicts (two operators editing the same file) cause merge failures — the ingestion should default to append, not overwrite. MotherDuck disconnection causes DuckDB writes to fail silently if the fallback to in-memory DuckDB is not detected — check the connection before every write.
+
+## Next Steps
+
+1. Consolidate the four protocol files into a single architecture doc referenced here.
+2. Add a meeting series visualization to the dashboard that shows the full series timeline with action item outcomes.
+3. Document the Hedy topic-versus-series mapping so new topics route correctly.
+
+## Related
+
+- [AB Acquisition Channel Map](sid-acquisition-funnel-map)
+
+<!-- AGENT_CONTEXT
+machine_summary: "Meeting ingestion pipeline runs in three stages: Hedy capture (automatic), EOD-1 ingestion (protocol-driven), meeting-to-task pipeline (Asana creation). DuckDB tables: meeting_analytics, meeting_highlights. Freshness invariant: within 48 hours."
+key_entities: ["Hedy", "meeting_analytics", "meeting_highlights", "Asana task pipeline", "MotherDuck", "ops.data_freshness"]
+action_verbs: ["capture", "ingest", "extract", "persist"]
+update_triggers: ["Hedy API change", "protocol consolidation", "pipeline failure pattern"]
+-->

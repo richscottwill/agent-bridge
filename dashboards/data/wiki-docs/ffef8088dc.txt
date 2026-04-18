@@ -1,5 +1,3 @@
-<!-- DOC-0450 | duck_id: wiki-meta-wiki-pipeline-rules -->
-
 # Wiki Pipeline Rules
 
 Last updated: 2026-04-05
@@ -63,6 +61,23 @@ For any document with Audience = Leadership:
 - The OP1/decision framing must be in the first paragraph
 - Two-page main body maximum (appendix carries the rest)
 - Kate should get 95% of the value without reading the appendix
+
+## 7. Blackboard protocol (diagnostic — review 2026-05-02)
+
+**Status: experimental.** Every markdown draft under active pipeline work must be accompanied by a sidecar state file: `<article>.state.json` next to `<article>.md`. Schema lives at `_meta/blackboard-schema.md`.
+
+**Read/write loop:**
+
+- **Researcher** — creates the blackboard (if not present) and populates `constraints` with hard priors extracted from source material. One declarative sentence per constraint.
+- **Writer** — reads `constraints` before drafting. Logs every substantive assertion to `claims` as drafting progresses. If frontmatter `tags` contains `Claim` or `Recommendation`, `mechanism` is required on each claim; otherwise null. Every claim requires a citation.
+- **Critic (Eval A and Eval B)** — reads both the draft and the blackboard. Validates each claim against constraints and citations. If the draft violates any constraint, logs the violating constraint verbatim in `critic_verdicts.eval_X.constraint_violations` and sets verdict to REVISE. Does not silently rewrite. Does not see the other eval's blackboard section.
+- **Librarian** — advances `status` to FINAL only when both evals are PASS. Publishes markdown + blackboard together.
+
+**Escalation rule:** If any stage finds a blackboard field malformed or missing, stop and escalate to Richard with the exact JSON path. Do not repair silently.
+
+**Kill condition — 2026-05-02:** If blackboards reliably carry handoff state across the pipeline for 2 weeks, delete `_meta/draft-log.md` (blackboards replace its function). If blackboards are inconsistently populated or haven't improved critic catch rate, delete the schema and all `.state.json` files and revert to `draft-log.md`. Keep-or-kill — no middle path.
+
+**Deferred additions** (do not implement until review gate): prediction field for post-mortems, Kate-persona split in eval_b, retrieval discount based on document age.
 
 ## Pipeline execution order
 

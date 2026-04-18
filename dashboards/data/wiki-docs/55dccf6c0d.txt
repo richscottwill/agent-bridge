@@ -1,5 +1,3 @@
-<!-- DOC-0374 | duck_id: research-slack-deep-context-ideas -->
-
 # Slack Deep Context Ideas
 
 *Ways to use Slack data — historical backfill, novel uses, and ongoing enrichment — to tighten the knowledge graph across the Body system.*

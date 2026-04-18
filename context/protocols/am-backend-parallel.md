@@ -82,8 +82,8 @@ AM-Backend Hook (orchestrator)
 │   │  │  Step B1: Asana Sync + DuckDB (~3 min)                  │
 │   │  │    ├─ SearchTasksInWorkspace (Richard, incomplete)      │
 │   │  │    ├─ GetTasksFromProject for ALL portfolio projects    │
-│   │  │    │   (My Tasks, ABPS AI Content, AU, MX, WW Testing, │
-│   │  │    │    WW Acquisition, Paid App)                       │
+│   │  │    │   (My Tasks, AU, MX, WW Testing, WW Acquisition,   │
+│   │  │    │    Paid App) — wiki articles are NOT tracked here  │
 │   │  │    ├─ UPSERT into asana.asana_tasks                    │
 │   │  │    ├─ INSERT daily snapshot into asana.asana_task_history│
 │   │  │    ├─ Soft-delete stale tasks                           │
@@ -239,13 +239,12 @@ AM-Backend Hook (orchestrator)
 │   │   ├─ Apply 4 enrichment rules (Kiro_RW, Next Action, dates, Priority_RW)
 │   │   └─ Generate ALL proposals (no cap) to ~/shared/context/active/am-enrichment-queue.json § my_tasks
 │   │
-│   └─ Step 3B: ABPS AI Content Scan
-│       ├─ Intake triage detection (untriaged tasks in Intake section)
-│       ├─ Pipeline state detection (In Progress, Review, Active)
-│       ├─ Near-due escalation (AUTO-EXECUTE: 0-2 days → Today)
-│       ├─ Overdue flagging (queue for frontend)
-│       ├─ Refresh cadence check (Active + recurring frequency)
-│       └─ Write ~/shared/context/active/am-abps-ai-state.json
+│   └─ Step 3B: Wiki Article Pipeline Sync
+│       ├─ Rebuild wiki-search-index.json: `python3 ~/shared/dashboards/build-wiki-index.py`
+│       ├─ Detect stale FINAL articles (updated >30 days)
+│       ├─ SharePoint drift check (local .md newer than Documents/Artifacts/.docx)
+│       ├─ Pull new-article candidates from signals.wiki_candidates
+│       └─ Write ~/shared/context/active/am-wiki-state.json
 │
 ├─ Phase 4: PORTFOLIO SCAN (orchestrator or single subagent, ~3 min)
 │   │
@@ -279,7 +278,7 @@ AM-Backend Hook (orchestrator)
 │   ├─ Verify all 4 output files exist (MUST be in ~/shared/context/active/):
 │   │   1. ~/shared/context/active/am-enrichment-queue.json
 │   │   2. ~/shared/context/active/am-portfolio-findings.json
-│   │   3. ~/shared/context/active/am-abps-ai-state.json
+│   │   3. ~/shared/context/active/am-wiki-state.json
 │   │   4. ~/shared/context/active/am-signals-processed.json
 │   ├─ Verify intake files exist:
 │   │   5. slack-digest.md
@@ -309,7 +308,7 @@ AM-Backend Hook (orchestrator)
 │   ├─ Execute ~/shared/context/protocols/sharepoint-durability-sync.md — AM section
 │   ├─ Push: ~/shared/context/active/am-enrichment-queue.json → Kiro-Drive/system-state/
 │   ├─ Push: ~/shared/context/active/am-portfolio-findings.json → Kiro-Drive/system-state/
-│   ├─ Push: ~/shared/context/active/am-abps-ai-state.json → Kiro-Drive/system-state/
+│   ├─ Push: ~/shared/context/active/am-wiki-state.json → Kiro-Drive/system-state/
 │   ├─ Push: ~/shared/context/active/am-signals-processed.json → Kiro-Drive/system-state/
 │   ├─ Push: daily-brief-latest.md → Kiro-Drive/system-state/
 │   ├─ Push: state files (.md + .docx per active market) → Kiro-Drive/state-files/
@@ -340,16 +339,16 @@ GetTasksFromProject, GetPortfolioItems — all via Asana MCP. execute_query via 
 **Execution:**
 1. SearchTasksInWorkspace(assignee_any="1212732742544167", completed=false, sort_by=due_date)
 2. GetTaskDetails for each task (batch — opt_fields include custom_fields, projects, memberships)
-3. GetTasksFromProject for ALL 7 projects: My Tasks, ABPS AI Content, AU, MX, WW Testing, WW Acquisition, Paid App
+3. GetTasksFromProject for 6 projects: My Tasks, AU, MX, WW Testing, WW Acquisition, Paid App
 4. Merge by task_gid, map custom fields, UPSERT into asana.asana_tasks
 5. Soft-delete missing tasks
 6. Daily snapshot to asana.asana_task_history
 7. Coherence check (6 checks)
 8. Schema drift detection
 
-**CRITICAL — ABPS AI Content (1213917352480610):** This project MUST be included in
-GetTasksFromProject calls. Previous runs showed 0 tasks in DuckDB because this
-project was being skipped. It is in the project list above — verify it's called.
+**Wiki articles are NOT tracked in Asana.** Article pipeline state lives in
+~/shared/wiki/agent-created/ (source), SharePoint Documents/Artifacts/ (published),
+and the Kiro dashboard Pipeline view. Do not add article-tracking projects to this sync.
 
 **Writes:**
 - asana.asana_tasks (DuckDB — UPSERT)

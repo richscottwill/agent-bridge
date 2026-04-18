@@ -1,5 +1,3 @@
-<!-- DOC-0112 | duck_id: context-2026-03-31_portable-layer -->
-
 # Portable Layer — System Architecture Manifest
 
 What travels with Richard vs what stays with the environment. Updated whenever the system structure changes.

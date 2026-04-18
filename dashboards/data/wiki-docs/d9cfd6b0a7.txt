@@ -1,5 +1,3 @@
-<!-- DOC-0451 | duck_id: wiki-meta-wiki-structure -->
-
 # Wiki Structure
 
 > The wiki pipeline (research → staging → review) lives in `~/shared/wiki/`.

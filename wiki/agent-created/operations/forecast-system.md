@@ -1,0 +1,114 @@
+---
+title: "Forecast System — Multi-Signal Model and Reconciliation"
+slug: "forecast-system"
+doc-type: "execution"
+type: "reference"
+audience: "team"
+status: "DRAFT"
+level: "L3"
+category: "operations"
+created: "2026-04-17"
+updated: "2026-04-17"
+owner: "Richard Williams"
+tags: ["forecasting", "bayesian", "multi-signal", "reconciliation", "invariants", "coalesce-bug", "seasonal-priors"]
+depends_on: []
+summary: "The PS forecast system — multi-signal blend (Bayesian + YoY + trend), seasonal prior handling, regime changes, and five reconciliation checks that prevent silent drift."
+---
+
+# Forecast System
+
+The paid search forecast system was rewritten on April 14 after the original Bayesian-only model produced 36-47 percent errors on recent weeks, and a separate COALESCE bug silently understated the US April projection by six thousand registrations. This document captures both halves of the rewrite — the multi-signal model that replaced the stuck Bayesian projector, and the reconciliation checks that catch bugs before they cascade.
+
+## Why the rewrite happened
+
+The original model used a pure Bayesian projector with seasonal priors clamped between 0.8 and 1.2. For markets where the current year was diverging from the prior-year seasonal shape, the clamp crushed predictions toward historical averages even when recent actuals were trending differently. US week 14 projected 7,294 registrations against 9,236 actual, a 36 percent miss. AU week 15 was 47 percent off. The model was stuck, not responsive.
+
+Separately, a COALESCE bug in the monthly and year-end projection derivation caused those numbers to sum only predicted weeks, ignoring actuals for completed weeks. US April projection understated by six thousand registrations. The fix cascaded through monthly, quarterly, and year-end aggregates.
+
+Both failure modes shared the same root cause: the system trusted a single signal (prior seasonality for the model, predicted values for the aggregator) without checking it against competing evidence. The rewrite fixes both by blending signals at projection time and reconciling aggregates against actuals on every execution.
+
+## The multi-signal model
+
+### Three signals blended
+
+The new model blends three signals at each projection horizon.
+
+The **Bayesian posterior** provides the base level, informed by historical patterns and priors. This is the original model's contribution, now weighted rather than solo.
+
+The **year-over-year estimate** takes last year's same-week value and applies the current year-to-date growth rate, producing a level-plus-trajectory view. This signal catches regime changes that seasonal priors miss.
+
+The **recent-trend estimate** uses a six-week linear extrapolation to capture short-term momentum. This signal catches acceleration or deceleration that hasn't yet become a year-over-year pattern.
+
+The blend weights are forty percent Bayesian, thirty percent YoY, thirty percent recent trend. The weights are empirical, tuned to minimize error against the last sixteen weeks of actuals across five markets. The blend is resilient: if one signal goes wrong (a seasonal distortion in the prior, a regime change in YoY, a noise spike in recent trend), the other two dampen the error.
+
+### Seasonal prior unclamp
+
+Ninety-eight seasonal priors were unclamped from the 0.8-to-1.2 range to their true historical values. Priors can now range from 0.6 to 1.4, reflecting actual seasonal variation. This removed the implicit smoothing that was dragging predictions toward historical averages.
+
+### Prior weight cap reduction
+
+The prior weight cap in the posterior update was lowered from 4 to 2. Previously, 170 weeks of low historical data could outweigh four weeks of fresh evidence. The new cap ensures recent data gets proportional weight, making the model responsive to regime changes.
+
+### Regime change handling
+
+Regime changes such as Mexico's Semana Santa now require an end date in the `ps.regime_changes` table. The MX Semana Santa regime was set to end April 7, preventing the model from permanently suppressing predictions after the holiday. This is an operational discipline requirement — every regime change needs an end date or it will bias forecasts indefinitely.
+
+## The five reconciliation checks
+
+Forecasts that are silently wrong are worse than forecasts that are visibly wrong. The reconciliation layer runs five invariants on every pipeline execution to catch the specific bug classes that have caused problems. Warnings go to the pipeline log. Structural failures halt the downstream Excel update.
+
+### Check 1 — monthly projection at least completed-week actuals
+
+For any month with completed weeks, the monthly projected total must be greater than or equal to the sum of actuals for those weeks. A violation means the projection is missing actuals — exactly the COALESCE bug pattern. **Structural failure.**
+
+### Check 2 — year-end projection at least year-to-date actuals
+
+Same logic at the annual horizon. The year-end number cannot be less than what has already happened. **Structural failure.**
+
+### Check 3 — weekly prediction miss threshold
+
+For completed weeks, if the prediction was off by more than fifty percent of actual, surface as an informational warning. Not a halt — predictions miss sometimes — but a signal that the model is drifting or a regime change is underway.
+
+### Check 4 — monthly-to-quarterly sum parity
+
+The sum of the three monthly projections in a quarter must equal the quarterly projection within 0.1 percent tolerance for rounding. A violation means aggregation logic is inconsistent. **Structural failure.**
+
+### Check 5 — aggregate-market sum parity
+
+Total across markets must equal the sum of individual market components within 0.1 percent. Violations usually indicate a market was missed or double-counted. **Structural failure.**
+
+## Operational pattern
+
+The checks run at the end of `populate_forecast_tracker.py` on every execution. Pipeline output shows a reconciliation section with pass/fail for each check. On structural failure, the Excel update does not run — the dashboard stays stale rather than publishing bad numbers. Informational warnings publish but appear in the pipeline log with a flag.
+
+Weekly, the paid search team scans the log for warnings. If three or more checks fire in a single execution, investigate the model before relying on the forecast for any leadership-facing report.
+
+## What reconciliation does not catch
+
+The checks validate internal consistency. They do not validate that predictions are accurate. A forecast that is internally consistent but systematically ten percent off every week will pass all five checks. Accuracy is measured separately through the error-rate monitoring on completed weeks.
+
+The checks also do not validate input data quality. If Adobe data for a market is missing for a week, the pipeline proceeds with a zero value for that week, which can pass reconciliation but produce meaningless projections. Upstream data validation is the responsibility of the ingestion layer.
+
+## Operational implications
+
+The forecast is now responsive rather than stuck. The tradeoff is that weekly predictions can swing more week-to-week as new signals arrive. Treat single-week projections with the confidence interval visible in the dashboard, not as point estimates. The multi-week rolling average remains the stable reference for leadership reporting.
+
+## Next steps
+
+1. Monitor prediction error each week; flag if any market exceeds twenty percent error for three consecutive weeks.
+2. Review regime change end dates quarterly to ensure no stale suppressions remain.
+3. Add reconciliation output to the forecast tracker dashboard as a visible health indicator.
+4. Define an escalation threshold — three warnings in one execution triggers automated alert.
+5. Document the blend weights in the forecast tracker dashboard README.
+6. Document this reconciliation pattern for reuse when the team builds new forecasting pipelines.
+
+## Related
+
+- [Sid Acquisition Funnel Map](sid-acquisition-funnel-map)
+
+<!-- AGENT_CONTEXT
+machine_summary: "PS forecast system. Multi-signal blend: Bayesian 40%, YoY 30%, recent trend 30%. Seasonal priors unclamped from 0.8-1.2 to true values. Prior weight cap 4 → 2. Regime changes require end dates. Five reconciliation checks: monthly ≥ actuals, year-end ≥ YTD, weekly miss >50%, monthly-to-quarterly parity, aggregate-market parity. Rewrite fixed US W14 error +36% → +2%, AU W15 -47% → +3%."
+key_entities: ["Bayesian projector", "YoY estimate", "recent trend", "seasonal priors", "reconciliation checks", "COALESCE bug", "populate_forecast_tracker.py", "regime changes"]
+action_verbs: ["blend", "project", "reconcile", "unclamp", "validate"]
+update_triggers: ["forecast error threshold exceeded", "regime change added", "blend weights re-tuned", "new check added", "escalation threshold defined"]
+-->

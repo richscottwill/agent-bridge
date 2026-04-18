@@ -32,7 +32,7 @@ replaces: mx-market-wiki, mx-ps-handoff-guide
 
 MX is Richard's second hands-on market and the strongest growth market in the portfolio relative to plan (+32% vs OP2). Primary stakeholder transitioned from Carlos Palmos to Lorena Alvarez Larrea (~3/17/2026) when Carlos moved to CPS. MX does not have OCI support and has no timeline for it.
 
-The market operates under an ie%CCP constraint that limits NB spend. Brand growth has been strong (~2.7x YoY organically in Q1 2026), creating CCP surplus that could fund more NB spend — but only if NB CPA improves or the ie%CCP target loosens. See [ie%CCP Planning Framework](~/shared/artifacts/strategy/2026-03-30-ieccp-planning-framework.md) for the full budget model with MX case study.
+The market operates under an ie%CCP constraint that limits NB spend. Brand growth has been strong (~2.7x YoY organically in Q1 2026), creating CCP surplus that could fund more NB spend — but only if NB CPA improves or the ie%CCP target loosens. See [ie%CCP Planning Framework](../strategy/ieccp-planning-framework.md) for the full budget model with MX case study.
 
 ---
 
@@ -125,7 +125,7 @@ MX is outperforming plan by 32% on registrations. The ie%CCP at 93% is near the 
 
 Invoice routing status: **NEEDS NEW OWNER** (was Carlos). Discuss with Lorena at next sync.
 
-For full invoice process, see [Invoice & PO Process Guide](~/shared/artifacts/best-practices/2026-03-25-invoice-po-process-guide.md).
+For full invoice process, see [Invoice & PO Process Guide](../operations/invoice-po-process-guide.md).
 
 ---
 
@@ -153,3 +153,11 @@ key_entities: ["MX", "Lorena Alvarez Larrea", "Carlos Palmos", "Pedro Maldonado"
 action_verbs: ["onboard", "transition", "investigate", "route", "expand", "monitor"]
 update_triggers: ["MX sync outcomes", "Lorena direction changes", "invoice owner decided", "reftag investigation resolved", "ie%CCP target change"]
 -->
+
+
+## Related
+
+- [OCI Program](../testing/oci-program) — MX OCI currently descoped
+- [Polaris Program](polaris-program) — MX early test market
+- [MX PS Handoff Guide](../operations/mx-ps-handoff-guide) — Carlos → Lorena transition
+- [Paid Search Testing Approach](../testing/testing-approach-kate-v5) — testing methodology

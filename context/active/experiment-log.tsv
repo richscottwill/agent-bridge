@@ -58,3 +58,8 @@ run46_exp7	nervous-system	Loop 9 Baselines	REWORD	information_retrieval	1276	131
 run46_exp8	richard-style-email	Full File	RESTRUCTURE	output_quality	828	828	1.0	1.0	0.98	0.0	false	KEEP	150
 run46_exp9	audit-asana-writes	Full Hook	ADD	output_quality	239	310	1.0	1.0	1.0	0.0	false	KEEP	150
 run46_exp10	amcc	Political Awareness Layer	ADD	information_retrieval	3246	3413	1.0	1.0	1.0	0.0	false	KEEP	150
+run47_exp1	eyes	Data Pipeline + Whats Coming	MERGE	information_retrieval	1201	1205	1.0	1.0	1.0	0.0	false	KEEP	300
+run47_exp2	device	Tool Factory	SPLIT	information_retrieval	2078	2094	1.0	1.0	1.0	0.0	false	KEEP	300
+run47_exp3	brain	Foundational Decisions table	COMPRESS	information_retrieval	1373	1263	0.638	1.0	0.583	-0.362	false	REVERT	600
+run47_exp4	amcc	Integration+CommonFailures+GrowthModel	MERGE	information_retrieval	3413	3050	0.833	1.0	0.833	-0.167	false	REVERT	600
+run47_exp5	richard-style-email	Full file	RESTRUCTURE	output_quality	828	828	0.88	0.89	0.82	-0.01	false	REVERT	600

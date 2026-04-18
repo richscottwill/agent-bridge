@@ -1,5 +1,3 @@
-<!-- DOC-0202 | duck_id: meeting-brandon-sync -->
-
 # Brandon 1:1 Sync
 
 ## Metadata

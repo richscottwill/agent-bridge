@@ -1,5 +1,3 @@
-<!-- DOC-0472 | duck_id: wiki-review-kate-doc-appendix-revisions -->
-
 # Revisions: kate-doc-appendix.md
 
 Source: kate-doc-batch-review.md

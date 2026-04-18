@@ -1,5 +1,3 @@
-<!-- DOC-0016 | duck_id: callout-ca-analysis-2026-w13 -->
-
 # CA W13 Analysis Brief
 
 ## Registration summary

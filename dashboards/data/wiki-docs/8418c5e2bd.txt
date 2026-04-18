@@ -1,5 +1,3 @@
-<!-- DOC-0199 | duck_id: meeting-au-paid-search-sync -->
-
 # AU Paid Search Sync
 
 ## Metadata

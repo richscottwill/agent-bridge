@@ -1,0 +1,50 @@
+# Market Expansion Playbook
+
+This playbook consolidates the pre-launch, launch, and year-one operations required to stand up paid search in a new market. It is written from the Australia and Mexico launches and is intended to become the standard reference for every future market. Brandon approved it as standard process on April 2.
+
+## Pre-launch dependencies
+
+Every new market launch starts with four blocking dependencies that take weeks to resolve. Identify the retail page search regional lead and secure access to their non-Hydro MCC account. This routinely takes two to three weeks, so begin at least six weeks before the target launch date. Confirm billing by setting up a SAM payment profile with the correct regional pay code from PUPO. Coordinate with the regional AB marketing stakeholder on the PO submission — they own the PO for expansion markets, not us. Request the associate hack for account-level tracking and the NACTIF key or LIS additions from the central team to prevent duplicate coverage.
+
+## Campaign build
+
+Use an existing market's campaign structure as the template, typically UK for EU-like markets and US for everything else. Duplicate keyword lists and ad copy, then send to translation. Google translation takes four weeks; evaluate the internal Amazon translation tool for faster turnaround if the market permits. Once translations return, share the final ad copy with the regional AB team for feedback. Localization of landing pages happens in parallel, owned by the expansion team, and requires a second review from local AB marketing to confirm selection availability in-market.
+
+## Keyword localization
+
+Local markets use different product vocabulary — paper towels might be hand towels in one region, for example. Central teams rarely have this insight. Cross-reference GENBI top-selling product categories against your starter keyword list and ask Google or the local team for gaps. Keep the granular keyword list under your team's control; the central team should see only what is needed to coordinate negative keywords.
+
+## Negative keyword governance
+
+Each market maintains its own negative keyword list with three to five variants per region. Pin a shared global negative keyword list in team Slack for cross-market additions like Amazon Music or other brand conflicts. Ownership sits with the region's PS lead, with the Slack pin as the canonical running log.
+
+## Tracking and attribution
+
+Set up keyword-level URL tracking with Ref tags under the sixty-four character URL limit, using the PDSL structure with BramRef tags numbered sequentially. Coordinate with ABMA to configure WBR logic. Update APMA MONO to include the new region in the data feed. For non-MCS landing pages like BP or CPS, give ABMA advance notice so they can model the attribution correctly.
+
+## Forecasting
+
+Use AWS B2B data as the CPA and CPC reference baseline. Add a forty percent buffer on CPA and CPC for the first two months to avoid overcommitting. First-year registration goals are usually loosely tracked by the expansion team because PS is often the only live channel. Include the forecast methodology and buffer in the R&O input so leadership can see the assumptions.
+
+## Year-one operations
+
+Post-launch, the market enters a year-one optimization window. Hold a bi-weekly thirty-minute sync with the local team — no weekly calls as a standing policy. Run quarterly negative keyword reviews, a landing page audit after the first ninety days, and a customer experience walkthrough at six months. Maintain an IECCP FAQ for local teams since IECCP is unavailable in most new markets for roughly the first year.
+
+## Next Steps
+
+1. Build the one-page pre-launch checklist with owners, milestones, and dependencies by April 24.
+2. Draft the IECCP FAQ for new-market local teams by April 22.
+3. Build the standardized forecasting input file with AWS data links and buffer guidance by April 30.
+
+## Related
+
+- [Cross Market Playbook](cross-market-playbook)
+- [AU Market Wiki](au-market-wiki)
+- [MX Market Wiki](mx-market-wiki)
+
+<!-- AGENT_CONTEXT
+machine_summary: "Pre-launch, launch, and year-one paid search operations for new market expansion. Built from AU/MX launches. Covers access, billing, translation, keywords, negatives, tracking, forecasting, and post-launch cadence."
+key_entities: ["AU launch", "MX launch", "SAM payment profile", "PUPO", "GENBI", "AWS B2B data", "Brandon Munday"]
+action_verbs: ["launch", "localize", "track", "forecast"]
+update_triggers: ["new market launch planned", "IECCP becomes available in a new region", "translation tool change"]
+-->

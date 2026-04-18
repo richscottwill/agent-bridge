@@ -1,5 +1,3 @@
-<!-- DOC-0111 | duck_id: context-2026-03-31_morning-routine-experiments -->
-
 # Morning Routine — Experiment Engine
 
 This is a living experiment system. Not a static queue. Each experiment starts with a prior (why we think it'll work), runs for 3-5 days, gets scored on behavioral signals, and the result informs what to test next. The agent generates new hypotheses based on what it learns — not from a pre-built list.

@@ -1,5 +1,3 @@
-<!-- DOC-0454 | duck_id: wiki-review-agent-architecture-eval-a-r2 -->
-
 # Review: Agent System Architecture — Eval A (Revision 2)
 
 Reviewer: wiki-critic (Eval A — rubric)

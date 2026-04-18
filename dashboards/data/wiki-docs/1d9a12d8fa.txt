@@ -1,5 +1,3 @@
-<!-- DOC-0204 | duck_id: meeting-google-ab-performance -->
-
 # Bi-Weekly Google + AB Performance Sync
 
 ## Metadata

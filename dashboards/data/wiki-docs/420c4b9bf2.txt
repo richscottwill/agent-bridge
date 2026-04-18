@@ -1,5 +1,3 @@
-<!-- DOC-0129 | duck_id: context-exp8-master-brief -->
-
 # Master Brief — Richard Williams
 
 Last updated: 2026-03-20

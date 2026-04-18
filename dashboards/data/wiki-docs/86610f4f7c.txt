@@ -1,5 +1,3 @@
-<!-- DOC-0196 | duck_id: meeting-adi-sync -->
-
 # Adi Sync
 
 ## Metadata

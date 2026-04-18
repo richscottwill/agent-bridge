@@ -1,5 +1,3 @@
-<!-- DOC-0465 | duck_id: wiki-review-blind-test-evaluator-b -->
-
 # Blind Test — Evaluator B
 
 > Independent evaluation. No prior reviews seen. Scored against wiki-critic.md rubric + richard-writing-style.md + richard-style-docs.md + richard-style-amazon.md as quality bar.

@@ -64,7 +64,7 @@ Overall: $1,457 CPA. NB didn't perform well overall, but the competitor subdomai
 
 4. **Overall NB CPA is too high for sustained investment.** $1,457 CPA is not viable at scale, but the subdomain finding suggests a path to efficient NB if audience targeting is refined.
 
-**Connection to follow-up:** The Google NB experiment ([2023.01_JP-NB_Experiment-Doc](2023.01_JP-NB_Experiment-Doc.md)) was designed to test compliant keywords on Google with learnings from this Yahoo test. The key change: compliant keyword sets only, no ASIN terms.
+**Connection to follow-up:** The Google NB experiment ([2023-01 JP NB Google](2023-01-jp-nb-experiment-google.md)) was designed to test compliant keywords on Google with learnings from this Yahoo test. The key change: compliant keyword sets only, no ASIN terms.
 
 ---
 

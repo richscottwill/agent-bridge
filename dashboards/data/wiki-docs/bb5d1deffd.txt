@@ -1,18 +1,3 @@
-<!-- DOC-0411 | duck_id: testing-workstream-modern-search -->
-
----
-title: "Workstream 2: Modern Search"
-status: FINAL
-doc-type: strategy
-audience: amazon-internal
-level: 2
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-04-05
-update-trigger: "EU4 ad copy results available, IT test reaches sufficient volume, AI Max test launches, new market consolidation completed"
-tags: [modern-search, ad-copy, consolidation, kate-doc]
----
-
 # Workstream 2: Modern Search
 
 This document explains how the Paid Search team restructured campaigns and rewrote ad copy based on customer research, delivering +31% registrations and +70% CTR in the UK. It supports the Testing Approach narrative for Kate and connects directly to the OCI and Algorithmic Ads workstreams. After reading, you should understand why consolidation was necessary, what the SP study revealed, and how the team is scaling these changes worldwide.

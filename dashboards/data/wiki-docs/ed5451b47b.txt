@@ -1,0 +1,92 @@
+# Wiki Lint Audit — 2026-04-17 Evening (W16 second pass)
+
+Companion to `health-2026-04-17-run2.md`. Morning's full findings are in `audit-2026-04-17.md` — this run focuses on the delta after the morning fixes landed, plus the broken-ref scan scope expansion.
+
+## 1. Orphan scan — CLEAN
+
+Morning's 46-article drift is resolved. Builder count of 82 in `wiki-index.md` matches the post-move corpus: 74 articles under agent-created/ (excluding kiro-steering, reviews, _meta, intake, archive) + 8 kiro-steering packages indexed via the agent-created path. No orphans.
+
+## 2. Stale content scan — CLEAN
+
+Ran: articles with `updated` > 90 days ago AND `foundational: true` not set. Using 2026-04-17 as reference, the oldest `updated` in the corpus is within the 90-day window. 0 flagged.
+
+Note: the doc-type bucket rules (tactical=90d, reference=18mo, strategy=3yr, snapshot=skip, foundational=skip) are still not in effect — 5/2 blackboard kill review pending. Today's audit used the pre-vocabulary rule.
+
+## 3. Broken cross-ref scan
+
+### Within-corpus — 0 broken
+
+All relative `.md` links pointing inside `agent-created/` resolve. Morning's 2 legacy JP NB test refs are fixed and stayed fixed.
+
+### Pointing outside — 9 broken, legacy only
+
+All 9 broken refs point to paths like `~/shared/artifacts/*` or `~/shared/research/*` which were the pre-consolidation layout. When articles moved into `agent-created/`, intra-article links were not all updated. These don't break the wiki — they break legacy references that point at files that no longer live at those paths.
+
+```
+strategy/competitive-landscape.md      → ~/shared/research/competitor-intel.md
+                                         (should be: agent-created/research/competitor-intel.md)
+strategy/agent-architecture.md         → ~/shared/artifacts/program-details/2026-03-25-body-system-architecture.md
+                                         (should be: agent-created/strategy/body-system-architecture.md)
+strategy/agentic-ps-vision.md          → ~/shared/artifacts/strategy/2026-03-25-agentic-marketing-landscape.md
+                                         (should be: agent-created/strategy/agentic-marketing-landscape.md)
+markets/mx-market-wiki.md              → ~/shared/artifacts/strategy/2026-03-30-ieccp-planning-framework.md
+                                         (should be: agent-created/strategy/ieccp-planning-framework.md)
+markets/mx-market-wiki.md              → ~/shared/artifacts/best-practices/2026-03-25-invoice-po-process-guide.md
+                                         (should be: agent-created/operations/invoice-po-process-guide.md)
+markets/au-market-wiki.md              → ~/shared/artifacts/testing/2026-03-25-au-nb-mro-trades-proposal.md
+                                         (should be: agent-created/testing/au-nb-mro-trades-proposal.md)
+markets/market-reference.md            → ~/shared/artifacts/program-details/2026-03-25-au-market-wiki.md
+markets/market-reference.md            → ~/shared/artifacts/program-details/2026-03-25-mx-market-wiki.md
+markets/market-reference.md            → ~/shared/artifacts/strategy/2026-03-25-cross-market-playbook.md
+```
+
+**Proposed action:** one systematic `strReplace` pass across the 6 affected files to swap `~/shared/artifacts/<cat>/YYYY-MM-DD-<slug>.md` → `agent-created/<cat>/<slug>.md`. Estimated effort: 15 minutes. Low priority — these refs are buried inside article bodies, rarely clicked.
+
+## 4. Missing frontmatter — CLEAN for required fields
+
+All 74 non-kiro-steering articles have `title`, `status`, `audience`, `owner`. Kiro-steering packages have `title`, `status`, `audience`, `owner` as markdown intro lines rather than YAML frontmatter (different doc family, see `03-kiro-steering-packages.md` for the convention).
+
+### 22 articles missing `doc-type`
+
+Same finding as morning. Blocked on 5/2 four-bucket vocabulary decision. If kill review passes, the retag pass covers these 22 plus the existing `strategy`-valued ones that need re-bucketing.
+
+## 5. SharePoint-stale — CLEAN
+
+Dashboard reports 0 published-stale docs (local `updated` newer than SharePoint `Modified`). All 48 published articles have SP copies that match or post-date the local version. Next publish batch should target the 24 DRAFT articles once critic reviews them — not a stale-refresh issue, a pipeline-throughput issue.
+
+## 6. Local-only REVIEW articles — NONE
+
+All 50 REVIEW articles are published to SharePoint. Zero "ready but unpushed" articles. The REVIEW↔published invariant is intact.
+
+## 7. Signal-based freshness — no new gaps
+
+Same 5 topics as morning. All 5 already have matching articles or are in review-queue. No new topic with strong signal and no matching article.
+
+## 8. Blackboard health — status check only
+
+0/74 `.state.json` sidecars. Build deferred to 2026-04-30 per roadmap. Not flagging.
+
+## Systematic issues (unchanged from morning)
+
+### Frontmatter quoting inconsistency
+
+Same finding: some articles use `status: "DRAFT"` (quoted), others `status: DRAFT` (unquoted). Cosmetic. Not blocking.
+
+### Audience vocabulary drift (7 values, overlap)
+
+Same finding: consolidate to 4 values (`team`, `leadership`, `personal`, `agent`). Roadmap P2.
+
+### Confidence calibration
+
+Zero articles use HIGH/MEDIUM/LOW framework. Roadmap P3.
+
+### depends_on / consumed_by
+
+1-2 of 74 articles have these fields. Roadmap P3.
+
+## Audit metadata
+
+- Run: 2026-04-17T19:00 PT (evening, second pass of the day)
+- Articles scanned: 74 under agent-created/ (+ 13 kiro-steering for index coverage, not scope-of-audit)
+- Wall-clock: ~45s (SharePoint refresh + builder + Python audit passes)
+- Tools: SharePoint MCP, build-wiki-index.py, DuckDB (`signals.wiki_candidates`)

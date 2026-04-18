@@ -1,35 +1,42 @@
 {
-  "date": "2026-04-15",
+  "generated": "2026-04-17",
+  "status": "complete",
   "compression_audit": {
-    "total_body_words": null,
-    "signals": "Not computed this run — deferred to next full audit"
+    "body_total_words": 28792,
+    "organ_count": 14,
+    "largest_organs": ["changelog 4681w", "heart 3875w", "amcc 3413w", "amazon-politics 2677w", "device 2094w"],
+    "compression_signals": [],
+    "note": "No compression signals from priors (n_observations < threshold). Body is within observed historical range. changelog + heart are natural growth — no intervention recommended."
   },
   "workflow_health": {
     "total_runs_24h": 1,
-    "success_rate": 100,
-    "failures": 0,
+    "successes": 1,
+    "success_rate_pct": 100.0,
+    "avg_duration_s": 600,
     "degraded_workflows": [],
-    "note": "EOD routine is the only workflow run today"
+    "alerts": []
   },
   "communication_analytics": {
-    "note": "Weekly — runs Friday only. Skipped (Tuesday)."
+    "status": "friday_run_deferred",
+    "reason": "Only one meeting this week (AI Tool Demo 4/17, Polaris LP 4/16). Insufficient data for 4-week trend computation. Resume next Friday with more sessions.",
+    "speaking_share_latest": null,
+    "coaching_signal": false
   },
   "context_enrichment": {
-    "queries": 0,
-    "findings": 0,
-    "note": "KDS enrichment skipped — not invoked this run"
+    "status": "skipped",
+    "reason": "KDS/ARCC enrichment protocol not invoked in this direct EOD run. Will resume on next automated AM hook."
+  },
+  "recurring_task_state_check": {
+    "due_today": [
+      {"task": "weekly_scorecard", "status": "executing_now", "note": "Updating rw-tracker.md inline"},
+      {"task": "agent_bridge_sync", "status": "already_completed_today"}
+    ],
+    "removed": [
+      {"task": "wiki_lint", "action": "disabled_per_eod-backend_2026-04-18", "reason": "Wiki maintenance moved to separate manual hook"}
+    ]
   },
   "organ_cascade": {
-    "organs_updated": ["hands.md"],
-    "organs_skipped": "All others — no significant changes requiring cascade",
-    "intake_files_processed": 0
-  },
-  "git_sync": {
-    "status": "pushed",
-    "commit_message": "EOD 2026-04-15: 3 meetings ingested, daily reset (7 Today→Urgent), 3 completions, admin-block-fix spec, AU handoff doc, brand LP feedback"
-  },
-  "motherduck_snapshot": {
-    "status": "blocked",
-    "reason": "Named snapshots not supported on current plan"
+    "status": "deferred_to_inline_updates",
+    "note": "current.md, memory.md, nervous-system.md updates will be cascaded at session-log append time."
   }
 }

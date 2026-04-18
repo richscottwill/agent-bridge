@@ -122,7 +122,7 @@ The system has richer data than what's in the text files. Before guessing or ask
 | Historical task trends, completion rates | `asana.asana_task_history`, `asana.completion_rate`, `asana.velocity` | — |
 | Where Richard's time goes vs where it should (L1-L5) | `main.five_levels_weekly` | brain.md → Strategic Priorities |
 | Loop page content (Brandon 1:1 notes, MBR doc, etc.) | `docs.loop_pages` | SharePoint MCP: `sharepoint_read_loop` |
-| Published wiki articles, pipeline state | `wiki.publication_registry`, `wiki.throughput` | ~/shared/wiki/ (local files) |
+| Published wiki articles, pipeline state | `wiki.publication_registry`, `wiki.throughput` | Kiro dashboard (`shared/dashboards/wiki-search.html`, Pipeline view), `~/shared/wiki/agent-created/` (local), SharePoint `Documents/Artifacts/` (published .docx) — **Asana `ABPS AI - Content` is deprecated as of 2026-04-17; do not write to it** |
 | Streak, hard thing, daily tracker | `main.l1_streak`, `asana.daily_tracker` | amcc.md |
 | System health, data freshness, last sync times | `ops.data_freshness`, `ops.workflow_executions` | — |
 

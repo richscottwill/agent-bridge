@@ -1,5 +1,3 @@
-<!-- DOC-0143 | duck_id: context-session-learnings-2026-03-25 -->
-
 # Session Learnings — 2026-03-25
 
 ## Wiki Team Pipeline

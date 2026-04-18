@@ -1,5 +1,3 @@
-<!-- DOC-0461 | duck_id: wiki-review-batch-critic-review -->
-
 # Batch Critic Review — April 4, 2026
 
 > Wiki-critic review of all articles created or significantly modified on 2026-04-04.

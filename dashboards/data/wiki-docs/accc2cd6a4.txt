@@ -1,5 +1,3 @@
-<!-- DOC-0066 | duck_id: callout-jp-context -->
-
 # JP Paid Search — Market Context
 
 Last updated: 2026-03-30

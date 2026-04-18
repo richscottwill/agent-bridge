@@ -1,21 +1,3 @@
-<!-- DOC-0437 | duck_id: wiki-five-year-outlook -->
-
----
-title: "Paid Search Five-Year Outlook: 2026–2030"
-slug: "five-year-outlook"
-doc-type: "strategy"
-type: "guide"
-audience: "org"
-status: "draft"
-created: "2026-04-05"
-updated: "2026-04-05"
-owner: "Richard Williams"
-tags: ["paid-search", "strategy", "five-year", "agentic", "AI-overviews", "OCI", "outlook"]
-depends_on: ["testing-approach-kate", "aeo-ai-overviews-pov", "agentic-ps-vision"]
-consumed_by: ["wiki-critic", "wiki-librarian", "kate-rundell", "brandon-munday"]
-summary: "Five-year PS trajectory from validated 2025 results through speculative 2030 scenarios, with parallel agentic evolution track."
----
-
 # Paid Search Five-Year Outlook: 2026–2030
 
 This document projects the trajectory of Amazon Business Paid Search from 2026 through 2030. It is written for Kate Rundell and Brandon Munday to support OP1 planning and multi-year investment decisions. After reading it, you will understand what is grounded in evidence, what is a committed bet, and what is speculative — and what we do differently if the speculative scenarios don't materialize.

@@ -42,23 +42,7 @@ Asana My Tasks is now the command center — replacing Microsoft To-Do as the ca
 
 ## ABPS AI Project
 
-The ABPS AI Portfolio contains two projects — Content (autonomous document factory) and Build (system development). The Content project is the primary workspace for agent-created and agent-maintained work products.
-
-### ABPS AI - Content (Document Factory)
-- Project GID: `1213917352480610`
-- Owner: Richard Williams (`1212732742544167`)
-- URL: https://app.asana.com/1/8442528107068/project/1213917352480610
-- Sections:
-  - Intake: `1213917352480612`
-  - In Progress: `1213917923741223`
-  - Review: `1213917923779848`
-  - Active: `1213917968512184`
-  - Archive: `1213917833240629`
-- Frequency Field GID: `1213921303350613`
-  - One-time: `1213921303350614`
-  - Weekly: `1213921303350615`
-  - Monthly: `1213921303350616`
-  - Quarterly: `1213921303350617`
+The ABPS AI Portfolio contains one active project — Build (system development). The wiki/article pipeline that previously lived in an ABPS AI Content project has been retired in favor of a filesystem + dashboard + SharePoint workflow.
 
 ### ABPS AI - Build (System Development)
 - Project GID: `1213379551525587`
@@ -71,76 +55,24 @@ The ABPS AI Portfolio contains two projects — Content (autonomous document fac
   - Shipped: `1213917833362766`
   - Ideas / Backlog: `1213917853421462`
 
-### Shared Custom Fields (ABPS AI Content Project)
+### Wiki / Article Pipeline — Not in Asana
 
-These fields are available on ABPS AI Content project tasks. All field names end with `_RW` (Richard Williams namespace).
+Wiki articles and strategic documents are tracked outside Asana. Do not create, update, or comment on Asana tasks for article work.
 
-| Field | GID | Type | Options (GID → Name) |
-|-------|-----|------|----------------------|
-| Pipeline_RW | `1213925755205188` | enum | `1213925755205189` → Idea, `1213925368050658` → Drafting, `1213925368050659` → Review, `1213925368050660` → Rewrite, `1213925368050661` → Published, `1213925368050662` → Archived |
-| Audience_RW | `1213917488341145` | enum | `1213917488341146` → Leadership, `1213925368050663` → Team, `1213917488341147` → Personal, `1213917488341148` → Agent |
-| Category_RW | `1213917488341137` | multi_enum | `1213917488341138` → Testing, `1213917488341139` → Strategy, `1213917488341140` → Program Details, `1213917488341141` → Tools, `1213917488341142` → Communication, `1213917488341143` → Best Practices |
-| Levels_RW | `1213917488341130` | multi_enum | `1213917488341131` → L1: Sharpen Yourself, `1213917488341132` → L2: Drive WW Testing, `1213917488341133` → L3: Team Automation, `1213917488341134` → L4: Zero-Click Future, `1213917488341135` → L5: Agentic Orchestration |
-| Frequency_RW | `1213921303350613` | enum | `1213921303350614` → One-time, `1213921303350615` → Weekly, `1213921303350616` → Monthly, `1213921303350617` → Quarterly |
-| Series_RW | `1213917488341099` | text | Groups related articles (e.g., "Kate Doc", "OCI") |
-| Path_RW | `1213917488341150` | text | Local file path (e.g., ~/shared/wiki/strategy/2026-04-04-oci-business-case.md) |
-| Routine_RW | `1213608836755502` | enum | (inherited from My Tasks — all wiki tasks use Wiki option `1213924412583429`) |
-| Priority_RW | `1212905889837829` | enum | (inherited from My Tasks) |
-| Kiro_RW | `1213915851848087` | text | Agent scratchpad — pipeline state, sync timestamps, critic scores |
-| Next-action_RW | `1213921400039514` | text | Next concrete step for the task |
-| Begin-Date_RW | `1213440376528542` | date | Execution window start |
+- **Source of truth:** `~/shared/wiki/agent-created/{category}/{slug}.md` with frontmatter-driven status (DRAFT → REVIEW → FINAL → ARCHIVED).
+- **Search + pipeline view:** Kiro dashboard at `shared/dashboards/wiki-search.html`. Pipeline view supports status transitions via arrow buttons; the localStorage overlay allows promotion without editing frontmatter directly.
+- **Published copies:** SharePoint `Documents/Artifacts/{category}/{slug}.docx`, maintained by the wiki-librarian.
+- **Index rebuild:** `python3 ~/shared/dashboards/build-wiki-index.py` crawls the local tree and writes `shared/dashboards/data/wiki-search-index.json`. Runs automatically in AM-Backend Phase 4.
+- **New-article signals:** `signals.wiki_candidates` (DuckDB view) identifies topics with strong multi-channel signal but no matching article. Surfaced in `am-wiki-state.json` for AM-Triage review.
 
-### Pipeline Stage Workflow (replaces section-based tracking)
+### GID Discovery Protocol (Build Project)
 
-Pipeline_RW is the canonical pipeline stage. Sections are now used for topic grouping, not pipeline tracking.
+When setting up or verifying the Build project:
 
-| Pipeline_RW Value | Meaning | Who Moves It Here | Next Step |
-|-------------------|---------|-------------------|-----------|
-| Idea | Raw topic — not yet assigned to researcher | Editor or Richard | Editor triages → Drafting |
-| Drafting | Researcher gathering sources, writer drafting | Editor assigns | Writer completes → Review |
-| Review | Critic scoring (5 dimensions, 8/10 bar) | Writer moves after draft | Critic scores → Published or Rewrite |
-| Rewrite | Critic scored <8, revision notes provided | Critic moves back | Writer revises → Review (max 2 cycles) |
-| Published | Scored >=8, approved, content synced to Asana | Critic/Librarian | Librarian maintains |
-| Archived | Superseded, merged, or killed | Editor decides | No further action |
-
-### Audience_RW Mapping
-
-| Audience | Writing Standard | Review Rubric | Who Reads It |
-|----------|-----------------|---------------|-------------|
-| Leadership | Amazon narrative standard (prose-driven, 18-20 word sentences, purpose first, data embedded) | Strict — Kate wouldn't change a word | Kate, Todd, cross-org |
-| Team | Actionable execution standard (how-to, checklists OK, step-by-step) | Practical — teammate can follow without asking | Brandon, peers, market owners |
-| Personal | Lighter review — Richard's working docs | Functional — serves Richard's needs | Richard only |
-| Agent | Machine-readable, structured for extraction | Structural — frontmatter, AGENT_CONTEXT, cross-refs | Agent swarm |
-| Kiro_RW | `1213915851848087` | text | Agent scratchpad |
-| Begin-Date_RW | `1213440376528542` | date | Execution window start (`start_on`) |
-| Next-action_RW | `1213921400039514` | text | Next concrete step for the task |
-| Levels_RW | `1213917488341130` | multi_enum | L1–L5 classification. Options: L1 Sharpen (`1213917488341131`), L2 Testing (`1213917488341132`), L3 Automation (`1213917488341133`), L4 Zero-Click (`1213917488341134`), L5 Agentic (`1213917488341135`) |
-| Category_RW | `1213917488341137` | multi_enum | Content category. Options: Testing (`1213917488341138`), Strategy (`1213917488341139`), Program Details (`1213917488341140`), Tools (`1213917488341141`), Communication (`1213917488341142`), Best Practices (`1213917488341143`) |
-| Audience_RW | `1213917488341145` | enum | Target audience. Options: Leadership (`1213917488341146`), Team (`1213925368050663`), Personal (`1213917488341147`), Agent (`1213917488341148`) |
-| Path_RW | `1213917488341150` | text | Local file path for the work product artifact |
-| Series_RW | `1213917488341099` | text | Series grouping for related articles |
-| Pipeline_RW | `1213925755205188` | enum | Pipeline stage. Options: Idea (`1213925755205189`), Drafting (`1213925368050658`), Review (`1213925368050659`), Rewrite (`1213925368050660`), Published (`1213925368050661`), Archived (`1213925368050662`) |
-| Frequency_RW | `1213921303350613` | enum | Update cadence |
-
-### GID Discovery Protocol
-
-When setting up a new ABPS AI project or verifying configuration:
-
-1. `AsanaSearch(query="ABPS AI", resource_type="project")` → find project GIDs
+1. `AsanaSearch(query="ABPS AI - Build", resource_type="project")` → confirm project GID
 2. `GetProjectSections(project_gid)` → record all section GIDs
-3. `GetTaskDetails` on any project task → inspect `custom_fields` array for field GIDs (Frequency, Routine, etc.)
-4. If a custom field doesn't exist: create it via Asana UI (no CreateCustomField tool in MCP), then re-read
-5. Record all discovered GIDs in this section of `asana-command-center.md`
-
-### Section Workflow (Content Project)
-
-| Section | Purpose | Tasks Move Here When |
-|---------|---------|---------------------|
-| Intake | Raw ideas from Richard | Richard creates task or agent proposes |
-| In Progress | Pipeline active (research/draft) | Begin Date <= today, triage approved |
-| Review | Draft complete, awaiting critic + approval | wiki-writer finishes ~500w draft |
-| Active | Approved, expanded, living documents | Richard approves + wiki-writer expands |
-| Archive | One-time docs, completed | One-time frequency, post-expansion |
+3. `GetTaskDetails` on any Build task → inspect `custom_fields` array for field GIDs
+4. Record all discovered GIDs in this section of `asana-command-center.md`
 
 ## Portfolio Projects
 
@@ -455,7 +387,7 @@ Every Asana write operation — whether from AM-2, a pipeline agent (wiki-editor
 
 ### 1. Pre-Write Verification (Assignee Check)
 
-Before ANY write operation (`UpdateTask`, `CreateTask`, `CreateTaskStory`) on an ABPS_AI_Project task:
+Before ANY write operation (`UpdateTask`, `CreateTask`, `CreateTaskStory`) on an ABPS_AI_Build task:
 
 ```
 1. GetTaskDetails(task_gid) → read assignee
@@ -467,7 +399,7 @@ Before ANY write operation (`UpdateTask`, `CreateTask`, `CreateTaskStory`) on an
    c. Flag in daily brief: "⛔ Blocked write on [task_name] — not assigned to Richard"
 ```
 
-For My Tasks writes: the existing guard-asana hook enforces ownership. For ABPS_AI_Project writes: this protocol is the enforcement layer. Both use the same principle — only modify tasks assigned to Richard.
+For My Tasks writes: the existing guard-asana hook enforces ownership. For ABPS_AI_Build writes: this protocol is the enforcement layer. Both use the same principle — only modify tasks assigned to Richard.
 
 ### 2. Audit Log (Every Write Operation)
 
@@ -476,7 +408,7 @@ Every write operation appends one JSON line to `~/shared/context/active/asana-au
 **Format for ABPS AI Project writes (extended fields):**
 
 ```json
-{"timestamp":"2026-04-15T08:30:00Z","tool":"UpdateTask","task_gid":"1234567890123","task_name":"AEO Strategy Guide","project":"ABPS_AI_Project","pipeline_agent":"wiki-writer","pipeline_stage":"draft","fields_modified":["html_notes"],"result":"success","notes":"500w draft written"}
+{"timestamp":"2026-04-17T08:30:00Z","tool":"UpdateTask","task_gid":"1234567890123","task_name":"Agent System Architecture","project":"ABPS_AI_Build","pipeline_agent":null,"pipeline_stage":null,"fields_modified":["custom_fields.Kiro_RW"],"result":"success","notes":"Status updated"}
 ```
 
 **Field definitions:**
@@ -487,7 +419,7 @@ Every write operation appends one JSON line to `~/shared/context/active/asana-au
 | `tool` | string | yes | Asana MCP tool name: `UpdateTask`, `CreateTask`, `CreateTaskStory` |
 | `task_gid` | string | yes | Asana task GID |
 | `task_name` | string | yes (ABPS) | Human-readable task name for audit readability |
-| `project` | string | yes (ABPS) | `"ABPS_AI_Project"` for Content project tasks, `"ABPS_AI_Build"` for Build project tasks, `"My_Tasks"` for My Tasks writes |
+| `project` | string | yes (ABPS) | `"ABPS_AI_Build"` for Build project tasks, `"My_Tasks"` for My Tasks writes |
 | `pipeline_agent` | string | ABPS only | Which wiki agent acted: `wiki-editor`, `wiki-researcher`, `wiki-writer`, `wiki-critic`, or `null` for non-pipeline writes |
 | `pipeline_stage` | string | ABPS only | Current stage: `triage`, `research`, `draft`, `review`, `expansion`, `refresh`, or `null` |
 | `fields_modified` | array | yes | List of fields changed: `["html_notes"]`, `["custom_fields.Kiro_RW"]`, `["completed"]`, etc. |
@@ -510,7 +442,7 @@ My Tasks writes continue using the existing format with `rule` and `note` fields
 
 ### 3. Read-Before-Write Pattern (html_notes Protection)
 
-Before ANY `UpdateTask(html_notes=...)` call on an ABPS_AI_Project task:
+Before ANY `UpdateTask(html_notes=...)` call on an ABPS_AI_Build task:
 
 ```
 1. GetTaskDetails(task_gid) → read current html_notes content
@@ -543,7 +475,7 @@ This pattern applies to ALL html_notes writes: drafts (Stage 2), expansions (Sta
 
 ### 4. API Failure Retry Logic
 
-When any Asana API call fails during an ABPS_AI_Project operation:
+When any Asana API call fails during an ABPS_AI_Build operation:
 
 ```
 1. ON FIRST FAILURE:
@@ -626,7 +558,7 @@ The Next-action_RW field (GID: `1213921400039514`) must be updated on EVERY task
   - After expansion: next action = refresh cadence note or "Complete — living doc"
   - On overdue/escalation: next action = Richard's decision needed
 - **API call:** `UpdateTask(task_gid, custom_fields={"1213921400039514": "next action text"})`
-- **Applies to:** ALL tasks the agent touches — ABPS AI Content, ABPS AI Build, My Tasks, any project.
+- **Applies to:** ALL tasks the agent touches — ABPS AI Build, My Tasks, any project.
 
 ### Legacy Guardrails (My Tasks — unchanged)
 
@@ -667,7 +599,6 @@ Each Asana task maps to a Five Levels alignment based on its project membership 
 | L3 | Team Automation | Team visibility tasks, meeting prep, cross-team collaboration tasks | (detected by content/context) |
 | L4 | Zero-Click Future | AI/AEO research tasks, "Using AI for paid search", AEO POV work | (detected by task name/content) |
 | L5 | Agentic Orchestration | Agentic loop tasks, Kiro_RW as persistent memory, full AM→EOD loop | (detected by task name/content) |
-| L5 | Agentic Orchestration | ABPS AI - Content (document factory) | `1213917352480610` |
 | L5 | Agentic Orchestration | ABPS AI - Build (system development) | `1213379551525587` |
 
 **Mapping rules (priority order):**
@@ -958,7 +889,6 @@ These recur but aren't using Asana's recurring task feature — they're manually
 | PS ENG | 1213235338214787 | Member |
 | EU SSR Acquisition Roadmap | 1211638878682721 | Member |
 | Paid Search Promo Experiments | 1212707241411307 | Member |
-| ABPS AI - Content | 1213917352480610 | Owner |
 | ABPS AI - Build | 1213379551525587 | Owner |
 
 ### Agentic Opportunities by Capability

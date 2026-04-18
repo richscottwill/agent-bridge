@@ -139,12 +139,19 @@ These are live. They execute without Richard thinking.
 
 Templates (Email, WBR Callout, Meeting Prep) queued — build when prioritized.
 
+### Built & Shipped
+
 | # | Tool | Status |
 |---|------|--------|
-| 0 | **Paid Search Audit** — Gmail Apps Script auto-ingest → Bridge_AB-Ads-Data. Needs: schedule reports, set up script, update config.json with CIDs. | **Richard action** |
 | 1 | **Dashboard ingester** | ✅ BUILT |
 | 1a | **PS Analytics DB (DuckDB)** | ✅ BUILT |
 | 1b | **Context catalog** | ✅ BUILT |
+
+### Backlog & Candidates
+
+| # | Tool | Status |
+|---|------|--------|
+| 0 | **Paid Search Audit** — Gmail Apps Script auto-ingest → Bridge_AB-Ads-Data. Needs: schedule reports, set up script, update config.json with CIDs. | **Richard action** |
 | 2 | **Campaign link generator** — AU/MX sitelink URL construction | Backlog |
 | 3 | **Staleness detector** — auto-check file freshness. Scan all organ files, flag any with `last updated` > 7 days. Output: bloat report for AM-3 brief. | Ready to build |
 | 4 | **gcm (AI git commit)** — Shell function that pipes `git diff --cached` to an LLM for commit message generation. Requires `llm` CLI. Source: wiki/Topics/Git/add_to_zshrc.sh. | Ready to install |

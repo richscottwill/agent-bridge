@@ -1,5 +1,3 @@
-<!-- DOC-0194 | duck_id: meeting-activation -->
-
 # Activation Strategy Discussions
 
 ## Metadata

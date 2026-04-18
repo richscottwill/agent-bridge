@@ -1,0 +1,168 @@
+---
+title: "Polaris Program — WW Brand Landing Page Rollout"
+slug: "polaris-program"
+doc-type: "execution"
+type: "playbook"
+audience: "team"
+status: "DRAFT"
+level: "L2"
+category: "markets"
+created: "2026-04-17"
+updated: "2026-04-17"
+owner: "Richard Williams"
+tags: ["polaris", "landing-page", "mcs", "brand", "rollout", "weblab", "aem", "padesarjad"]
+depends_on: []
+summary: "Canonical Polaris program reference — why Polaris, market-by-market status, decision log, measurement framework, and dependencies."
+---
+
+# Polaris Program
+
+Polaris is the next-generation brand landing page platform for Amazon Business Paid Search, replacing legacy PADESARJAD and MCS pages across all ten markets. Richard is the single point of contact for global Polaris initiatives per Brandon's April 14 direction. This document is the canonical Polaris reference — strategy, market-by-market status, decision log, dependencies, and measurement framework.
+
+## Why Polaris matters
+
+Legacy MCS pages were built market-by-market with inconsistent templates, limited mobile optimization, and no standardized measurement framework. Polaris fixes four problems at once.
+
+First, **consistent template across markets.** One design system, localized per market. Reduces page build time from weeks to days.
+
+Second, **mobile-first design.** Legacy pages were desktop-optimized. Polaris is responsive by default. Mobile traffic is growing across all markets — the April 16 MCS decision confirmed Polaris as the only path forward for paid search LPs.
+
+Third, **weblab-ready measurement.** Polaris pages integrate with Amazon's weblab infrastructure for A/B testing. Legacy pages required manual pre/post analysis that introduced measurement uncertainty.
+
+Fourth, **faster iteration.** Template changes propagate to all markets. A CTA improvement tested in US can roll to EU5 in days, not weeks.
+
+The US MCS brand page template showed a 38bps conversion improvement in early testing. If this holds across markets, the compounding effect across ten markets is material.
+
+## Strategic decisions
+
+On **April 16, 2026**, the MCS team confirmed all paid search landing pages will migrate to Polaris. Legacy PADESARJAD pages are deprecated — no further investment. Mexico is the early test market for structural changes. US and JP are already live on Polaris via weblab.
+
+On **April 14, 2026**, Brandon confirmed Richard as the single point of contact for global Polaris coordination. This closes the gap where market-specific owners were each running their own rollout negotiations with MCS.
+
+## Market priority
+
+Brandon's priority order from March 23, holding: **AU > MX > DE > UK > JP > FR > IT > ES > CA > US-ES**. The sequence reflects market impact, existing Polaris readiness, and the Lena-challenge context in Australia. Each market follows a standard rollout pattern: AEM translation → page build → weblab setup → dial-up → full switch.
+
+## Current status by market
+
+| Market | Priority | AEM Status | Page Status | Weblab | Target Live | Owner | Notes |
+|--------|----------|------------|-------------|--------|-------------|-------|-------|
+| US | — | N/A | Switched 3/24 | Dial-up Apr 6-7 | **LIVE** | Stacey | Reference implementation |
+| AU | 1 | Delivered | Migrated 3/24-25 | N/A (full switch) | **LIVE** | Richard/Alexis | Lena directed full switch, no 50/50 |
+| MX | 2 | Delivered | Active build | Pending | Apr 2026 | Richard/Lorena | Early test market. Vijeth XF + Template complete 4/1. Alex confirmed nav. |
+| DE | 3 | Andrew recommended | Pending | Pending | Apr-May 2026 | Andrew | German translation |
+| UK | 4 | English (no translation) | Pending | Pending | Apr-May 2026 | Andrew | No translation needed |
+| JP | 5 | Delivered | **LIVE via weblab** | Dial-up active | **LIVE** | York Chen | Stacey running ref_= carry-over experiment on .com |
+| FR | 6 | Pending EU5 ops ticket | Pending | Pending | May-Jun 2026 | Andrew | Blocked by ops ticket |
+| IT | 7 | Pending EU5 ops ticket | Pending | Pending | Jun 2026 | Andrew | Blocked by ops ticket |
+| ES | 8 | Pending EU5 ops ticket | Pending | Pending | Jun 2026 | Andrew | Blocked by ops ticket |
+| CA | 9 | Delivered | Pending build | Pending | May 2026 | Richard | English. CA excluded from Polaris 50/50 per 4/1 for OCI data hygiene. |
+| US-ES | 10 | Alex + Yun coordinating | noindex/nofollow | N/A | TBD | Yun | Spanish US page |
+
+## Decision log
+
+| Date | Decision | Made by | Rationale | Impact |
+|------|----------|---------|-----------|--------|
+| 2026-03-13 | AU full switch (no 50/50 split) | Lena Zak | Lena overrode phased test recommendation. "Just switch it." | AU migrating without measurement baseline. Risk accepted. |
+| 2026-03-20 | Priority order AU > MX > DE > UK > JP > FR > IT > ES > CA > US-ES | Brandon | Market priority and translation readiness | Defines rollout sequence |
+| 2026-03-20 | Do-no-harm approach: minimal localization, follow US template | Brandon | Speed over customization; localize only what's necessary | Reduces AEM scope per market |
+| 2026-03-24 | US switched to Polaris | Stacey | US page ready, weblab infrastructure in place | Reference implementation live |
+| 2026-03-24 | JP test without intake form (proposed) | Richard | Intake form may not be relevant for JP market | Pending York's input |
+| 2026-04-01 | CA excluded from Polaris 50/50 testing | — | Keep OCI data clean through CA OCI dial-up | CA rollout delayed until post-OCI |
+| 2026-04-14 | Richard is the single POC for global Polaris | Brandon | Fragmented market-specific coordination caused gaps | Richard owns WW rollout end-to-end |
+| 2026-04-16 | All PS LPs migrate to Polaris; PADESARJAD deprecated | MCS team | Consistent template, mobile-first, weblab-ready | Legacy pages receive no further investment |
+
+### Key decision: AU full switch
+
+Lena's decision to skip the 50/50 phased test is a departure from the team's standard methodology (Decision Principle 4: phased rollout over full migration). Brandon is aware and has flagged Lena's pattern of reversing previously agreed decisions. The risk is that if Polaris underperforms in AU, there is no control group to compare against — the team relies on pre/post analysis with all its confounding factors.
+
+The W13 data showed AU CVR dropped 12% WoW, with the mid-week Polaris migration as a possible contributor. Isolating the Polaris signal from seasonal factors and the Back-to-Biz to Evergreen promo transition is difficult without a control group. Brandon's framing: push back on over-simplified Polaris UX, ensure market-relevant content density remains.
+
+## Blockers
+
+| Blocker | Markets affected | Owner | Status | Escalation |
+|---------|-----------------|-------|--------|-----------|
+| EU5 AEM ops ticket | FR, IT, ES | Andrew | Pending (~3/24 estimate) | Andrew → Brandon if not resolved by mid-April |
+| Weblab setup per market | All non-US | MCS (Frank) | Pending page builds | Taskei ticket per market |
+| Vijeth footer delivery | MX Auto | Vijeth | Ongoing | Weekly coordination |
+| Legacy brand page in-context email | All markets on legacy | MCS | Q2-Q4 2026 build | Not a launch blocker, fast-follow |
+| US-ES coordination | US-ES | Alex + Yun | In progress | Low priority (noindex/nofollow) |
+
+The EU5 ops ticket is the primary blocker for the second half of the rollout. FR, IT, and ES cannot begin AEM translation until resolved. This affects three of ten markets.
+
+Dwayne flagged on April 17 that legacy brand pages do not have in-context email, and that capability will not reach them. In-context email for Polaris pages is still being built — targeted for Q2 testing on the homepage, available for other templates Q3 or Q4. Treat in-context email as a later enhancement, not a launch-blocking dependency.
+
+## Measurement framework
+
+### Per-market weblab (standard approach)
+
+| Metric | Success threshold | Rollback threshold |
+|--------|------------------|-------------------|
+| Conversion improvement (CP) | 45% | 35% |
+| Registration volume | No degradation | >10% drop for 2+ weeks |
+| Bounce rate | Improvement or flat | >20% increase |
+
+The 45% CP success threshold and 35% rollback threshold were established for the US weblab. The same thresholds apply to all markets unless market-specific factors warrant adjustment.
+
+### AU exception (pre/post analysis)
+
+Because Lena directed a full switch without a weblab, AU measurement relies on pre/post comparison:
+
+1. Capture 4 weeks of pre-migration performance (completed)
+2. Compare post-migration performance at 2, 4, and 8 weeks
+3. Adjust for known confounders: seasonality, promo transitions, CPC trends
+4. Report with explicit confidence level (likely MEDIUM due to lack of control)
+
+### MX early test market
+
+Mexico's CVR decline on the initial Polaris weblab is the active investigation item. Reviewed on Deep Dive and Debate April 2. Root cause under investigation. Brandon's April 14 directive: reference CA pages for MX handoff rather than US, since CA landing page mechanics are closer to MX's.
+
+## Cross-initiative dependencies
+
+| Initiative | Dependency | Impact |
+|-----------|-----------|--------|
+| Ad Copy Testing | New ad copy must align with Polaris LP messaging | Disconnect between ad and LP hurts CVR |
+| OCI | Polaris pages must have correct conversion tracking | OCI depends on accurate conversion signals |
+| Email Overlay | Overlay must work on Polaris page templates | Adobe Target implementation needs Polaris compatibility |
+| Category Pages | MX Auto/Beauty are Polaris-based | Category page template is a Polaris variant |
+
+## Alex's Asana task
+
+Alex VanDerStuyf tracks the WW rollout in Asana: "PS Polaris Brand pages update WW" with a six-step rollout per geo. Steps: (1) AEM translation submission, (2) Translation delivery, (3) Page build, (4) QA review, (5) Weblab setup, (6) Go-live.
+
+## Next steps
+
+1. Create one-page dashboard view of market-by-market Polaris status (owner, weblab dial-up date, full-switch date, CPA monitoring status). Target by April 24.
+2. Resolve MX CVR decline root cause.
+3. Track Vijeth's footer delivery for MX Auto page weekly.
+4. Escalate EU5 ops ticket if unresolved by April 22.
+5. Monitor AU post-migration data for CVR recovery through end of Q2.
+
+## Sources
+
+- US switched 3/24 (Stacey) — `~/shared/context/active/current.md` → Polaris Brand LP Rollout
+- Brandon priority order — `~/shared/context/active/current.md` → Polaris Brand LP Rollout (3/20 sync)
+- Weblab dial-up Apr 6-7 — `~/shared/context/active/current.md` → Polaris Brand LP Rollout
+- AU full switch (Lena's decision 3/13) — `~/shared/context/body/brain.md` → D4: AU Landing Page
+- Do-no-harm approach — `~/shared/context/active/current.md` → Polaris Brand LP Rollout (Brandon confirmed)
+- Success threshold 45% CP, rollback 35% — `~/shared/context/body/eyes.md` → Predicted QA
+- W13 AU CVR drop — `~/shared/context/body/eyes.md` → Market Health → AU
+- Alex Asana task — `~/shared/context/body/memory.md` → Alex VanDerStuyf
+- Frank/MCS requirements — `~/shared/context/body/memory.md` → Frank Volinsky
+- MCS decision 4/16 (Polaris migration for all paid search LPs) — `~/shared/context/active/current.md` → Polaris Brand LP Rollout
+- Richard single POC (Brandon 4/14) — `~/shared/context/active/current.md` → Polaris Brand LP Rollout
+- Dwayne in-context email limitation (4/17) — `~/shared/context/active/current.md` → Polaris Brand LP Rollout
+
+## Related
+
+- [AU Market Wiki](au-market-wiki)
+- [MX Market Wiki](mx-market-wiki)
+- [OCI Program](../testing/oci-program)
+- [MCS Polaris Rollout Meeting](mcs-polaris-rollout)
+
+<!-- AGENT_CONTEXT
+machine_summary: "Canonical Polaris program reference. US/AU/JP live. MX early test market with CVR investigation. Brandon priority: AU > MX > DE > UK > JP > FR > IT > ES > CA > US-ES. EU5 blocked by AEM ops ticket. AU uses pre/post analysis (no control). Measurement: 45% CP success, 35% rollback. April 16 MCS decision: all PS LPs migrate to Polaris, PADESARJAD deprecated. Richard is single WW POC as of April 14."
+key_entities: ["Polaris", "MCS", "AEM", "PADESARJAD", "weblab", "Stacey", "Alex VanDerStuyf", "Andrew Wirtz", "Lena Zak", "Brandon Munday", "Vijeth", "Frank Volinsky"]
+action_verbs: ["migrate", "translate", "build", "test", "measure", "rollback", "coordinate"]
+update_triggers: ["market go-live dates", "weblab results", "AEM translations delivered", "EU5 ops ticket resolved", "MX CVR root cause found", "in-context email ships"]
+-->

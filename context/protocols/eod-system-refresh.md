@@ -111,21 +111,19 @@ Currently registered: MX (active), AU (planned), WW Testing (planned).
 
 ---
 
-## Phase 2: Portfolio + ABPS AI Reconciliation
+## Phase 2: Portfolio Reconciliation
 
-### ABPS AI Content Reconciliation
+### Wiki Article Pipeline Reconciliation
 
-a. Pull ABPS AI state: GetTasksFromProject(project_gid='1213917352480610', opt_fields='name,assignee.name,due_on,completed,completed_at,memberships.section.name,custom_fields.name,custom_fields.display_value'). Compare against morning snapshot abps_ai section.
+Wiki articles are tracked in the Kiro dashboard (`shared/dashboards/wiki-search.html` Pipeline view) and stored in `~/shared/wiki/agent-created/`, with published copies in SharePoint `Documents/Artifacts/`. Reconciliation does NOT touch Asana for article work.
 
-b. ABPS completions today: tasks completed today with section and pipeline stage. Include in rw-tracker: 'ABPS AI: [N] completed, [N] pipeline advances, [N] refreshes.'
+a. Rebuild the wiki search index: `python3 ~/shared/dashboards/build-wiki-index.py`. This crawls `~/shared/wiki/agent-created/` and refreshes `shared/dashboards/data/wiki-search-index.json`. Status badges (DRAFT/REVIEW/FINAL) come from article frontmatter.
 
-c. Pipeline progress: detect stage advances (research→draft, draft→review, review→approved, approved→active/archive).
+b. Articles updated today: diff the local wiki tree against yesterday's snapshot. Report in rw-tracker: 'Wiki: [N] articles updated, [N] new drafts, [N] promoted to REVIEW, [N] promoted to FINAL.'
 
-d. ABPS daily reset: same as My Tasks — demote Today→Urgent for incomplete ABPS tasks. Update Kiro_RW with carry-forward context.
+c. SharePoint sync check: for any article whose frontmatter status is FINAL and whose local .md is newer than the corresponding `Documents/Artifacts/*/[slug].docx` in SharePoint, flag for the librarian to re-publish. Do not auto-publish — FINAL promotion is a human decision.
 
-e. Five Levels — ABPS AI: all ABPS work counts as L5. Include in summary.
-
-f. Update rw-tracker with ABPS stats: completed, advances, refreshes, new_intake.
+d. Five Levels — Wiki work: classify article updates by Level based on frontmatter `level:` field or category mapping. Include in Five Levels summary.
 
 ### Step 10B — Completion Section Moves
 
@@ -284,18 +282,16 @@ FROM recurring_task_state;
 - **context_surface_refresh** (weekly): Update AU/MX pinned context tasks in Asana.
 - **agent_bridge_sync** (weekly/Friday): Sync shared/ to GitHub.
 
-### Due Task Procedure: wiki_lint (weekly)
-Invoke the wiki-audit skill. The audit checks:
-1. Orphan scan: files in ~/shared/wiki/ not listed in wiki-index.md.
-2. Stale content: articles past their update-trigger window or with outdated data references.
-3. Broken cross-references: wikilinks pointing to archived/missing articles.
-4. Missing frontmatter: articles missing required fields (title, status, audience, level, update-trigger, doc-type).
-5. SITEMAP drift: compare SITEMAP.md article count against wiki-index.md.
-6. wiki-index consistency: section header counts vs actual article counts.
-7. **Signal-based freshness:** For each article, query signal_tracker for recent mentions of the article's topic. If recent_mentions > 3 AND article.updated > 14 days → flag as stale with active discussion. Per signal-intelligence.md Use Case 4.
-8. **Idea sourcing:** Query `signal_wiki_candidates` view for topics with strong multi-channel signals but no matching wiki article. Report as organic wiki candidates.
-Write results to ~/shared/wiki/health/health-YYYY-MM-DD.md and ~/shared/wiki/audits/audit-YYYY-MM-DD.md.
-Report summary only: `📚 Wiki lint: [N] healthy, [N] stale, [N] orphaned, [N] broken refs. [N] wiki candidates from signals.` If all clean, skip report.
+### Due Task Procedure: wiki_lint (DEPRECATED 2026-04-18)
+
+Removed from daily EOD. Wiki maintenance runs as a separate manual hook: `shared/.kiro/hooks/wiki-maintenance.kiro.hook`. Trigger it manually (usually Friday). The hook covers:
+- Consuming wiki-candidates.md from distributed hook contributions
+- Orphan scan, stale content, broken cross-refs, missing frontmatter, SITEMAP drift, wiki-index consistency
+- Signal-based freshness and idea sourcing from DuckDB
+- Blackboard health check (until 2026-05-02 kill review)
+- Roadmap update
+
+If `wiki_lint` still appears in recurring_task_state, mark it disabled — do not execute the old procedure here.
 
 ### Communication Analytics (weekly)
 Execute ~/shared/context/protocols/communication-analytics.md:
@@ -305,7 +301,7 @@ Execute ~/shared/context/protocols/communication-analytics.md:
 - If coaching signal active: flag in EOD-2 Slack DM
 
 ### Enrichments
-- Weekly relationship (Friday). Wiki candidates (weekly). Wiki lint (weekly). Monthly synthesis (1st). Quarterly audit (90d).
+- Weekly relationship (Friday). Monthly synthesis (1st). Quarterly audit (90d). Wiki maintenance moved to separate hook (shared/.kiro/hooks/wiki-maintenance.kiro.hook) — manual trigger, no longer daily.
 
 ---
 

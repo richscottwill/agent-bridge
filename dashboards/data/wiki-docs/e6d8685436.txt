@@ -1,5 +1,3 @@
-<!-- DOC-0041 | duck_id: callout-eu5-analysis-2026-w12 -->
-
 # EU5 W12 Regional Analysis Brief
 
 ## Regional summary

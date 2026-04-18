@@ -1,5 +1,3 @@
-<!-- DOC-0040 | duck_id: callout-es-projections -->
-
 # ES Monthly Projections
 
 Tracks weekly projections vs actuals. Updated each week by the analyst agents.

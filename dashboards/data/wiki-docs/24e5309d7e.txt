@@ -1,0 +1,59 @@
+# Polaris Brand LP Rollout Timeline
+
+Polaris is the new brand landing page template replacing legacy PADESARJAD pages across all paid search markets. Richard is the single point of contact for global Polaris initiatives per Brandon's April 14 direction. This timeline captures market sequence, dates, owners, and dependencies in one place. It is the reference Brandon asked for and has been overdue on the action list.
+
+## Context
+
+The April 16 MCS decision confirmed that all paid search landing pages will migrate to Polaris branding. Legacy PADESARJAD pages are deprecated — no further investment. The strategic intent is consistency across markets, reduced MCS maintenance burden, and alignment with the broader MCS template unification roadmap. Mexico is the early test market. US and JP are already live on Polaris via weblab.
+
+## Market sequence
+
+Brandon's priority stack from March 23: **AU > MX > DE > UK > JP > FR > IT > ES > CA > US-ES**. The sequence reflects impact weighted by market size, existing Polaris readiness, and the Lena-challenge context in Australia. Each market follows a standard rollout pattern: Vijeth-led XF and template completion, weblab ticket submission, weblab dial-up, full switch.
+
+## Current state
+
+**United States.** Stacey switched to Polaris on March 24. Live.
+
+**Australia.** Lena confirmed full switch March 13. Alexis sent mapping March 17. Migration completed March 24-25. Monitoring CPA weekly.
+
+**Mexico.** Early test market. LP testing confirmed CVR decline on initial Polaris version. Brandon directive April 14: reference CA pages for MX handoff. Vijeth completed ps-brand XF plus Template task April 1. Alex confirmed "all nav's look great."
+
+**Japan.** Live on Polaris via weblab. Stacey running ref_= carry-over experiment on .com.
+
+**Germany.** Next in priority stack after MX.
+
+**UK, FR, IT, ES, CA, US-ES.** Queued behind DE.
+
+## Weblab dial-up
+
+Weblab ticket submitted March 21 as "WW PS Brand Polaris Redesign" via Taskei. Weblab dial-up initially targeted April 6-7. Individual market dial-up timing varies based on tech readiness and approval. CA currently excluded from Polaris 50/50 testing to keep OCI data clean, per April 1 decision.
+
+## Dependencies and blockers
+
+**Legacy brand page limitation.** Dwayne flagged on April 17 that legacy brand pages do not have in-context email, and that capability will not reach them. In-context email for Polaris pages is still being built — targeted for Q2 testing on the homepage, available for other templates Q3 or Q4. Treat in-context email as a later enhancement, not a launch-blocking dependency.
+
+**Vijeth footer dependency.** MX Auto page remains blocked on Vijeth footer. MX Beauty has Lorena's inputs as of March 25. Coordinate with Vijeth weekly.
+
+**MCS template unification.** All markets eventually converge on the same template. Market-specific deviations (localized hero images, region-specific value props) require separate approval and should be the exception.
+
+## Known issues
+
+Australia saw CVR decline on initial Polaris weblab — data reviewed on Deep Dive and Debate April 2. Root cause being investigated. Brandon's framing: push back on over-simplified Polaris UX, ensure market-relevant content density remains.
+
+## Next Steps
+
+1. Create the one-page dashboard view of market-by-market Polaris status (owner, weblab dial-up date, full-switch date, CPA monitoring status). Target by April 24.
+2. Resolve MX CVR decline root cause.
+3. Track Vijeth's footer delivery for MX Auto page weekly.
+
+## Related
+
+- [Polaris Rollout Status](polaris-rollout-status)
+- [MCS Polaris Rollout Meeting](mcs-polaris-rollout)
+
+<!-- AGENT_CONTEXT
+machine_summary: "Polaris brand LP rollout: AU > MX > DE > UK > JP > FR > IT > ES > CA > US-ES. US and JP live. AU migrated March 24-25. MX early test market. CA excluded from Polaris 50/50 for OCI data hygiene. In-context email Q2-Q4 dependency."
+key_entities: ["Polaris", "MCS", "Vijeth", "Stacey", "Alexis", "Lena Zak", "legacy PADESARJAD"]
+action_verbs: ["migrate", "dial-up", "weblab", "sequence"]
+update_triggers: ["any market moves phases", "MX CVR root cause resolved", "in-context email ships"]
+-->

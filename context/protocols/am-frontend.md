@@ -145,7 +145,7 @@ If any goals at-risk or off-track: goal name, status, metric gap, recommended ac
 Read am-abps-ai-state.json: Intake count, In Progress pipeline stages, Review status, Active count, Archive count, alerts.
 
 **Wiki Candidate Surfacing (from Phase 2.5):**
-Query `signals.wiki_candidates` and cross-reference against ABPS AI Content tasks. For candidates with quality_score >= 10.0 that don't have a matching pipeline task, surface in the brief:
+Query `signals.wiki_candidates` and cross-reference against `~/shared/wiki/agent-created/` (and the new-candidate list in `am-wiki-state.json`). For candidates with quality_score >= 10.0 that don't yet have a draft, surface in the brief:
 ```
 📚 WIKI CANDIDATES (from cross-channel signals):
 - [topic] — quality: [X], channels: [N], authors: [N], strength: [X]

@@ -1,17 +1,3 @@
-<!-- DOC-0401 | duck_id: testing-email-overlay-ww-rollout -->
-
----
-title: Email Overlay WW Rollout Plan
-status: DRAFT
-doc-type: strategy
-audience: amazon-internal
-level: 2
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-04-04
-update-trigger: Vijay tech scoping response, Adobe Ad Cloud reporting complete, market launches
----
-
 # Email Overlay WW Rollout Plan
 
 ---

@@ -162,33 +162,25 @@ Include ALL tasks with gaps — no cap. The frontend executes every proposal aut
 
 ---
 
-## Phase 4: ABPS AI Content Scan
+## Phase 4: Wiki Article Pipeline Sync
 
-Scan ABPS AI - Content project (GID: `1213917352480610`).
+Wiki articles live in `~/shared/wiki/agent-created/` (source of truth). Sync to SharePoint and refresh the dashboard index. **No Asana writes for article work.**
 
-### Step 1 — Scan Intake for Untriaged Tasks
-- GetTasksFromProject → all incomplete tasks.
-- FILTER: Intake section (GID: `1213917352480612`) where Routine_RW is NOT set.
+### Step 1 — Rebuild Wiki Search Index
+Run: `python3 ~/shared/dashboards/build-wiki-index.py`
 
-### Step 2 — Analyze Each Untriaged Task
-Prepare triage recommendations (Routine, Priority_RW, Frequency, Work_Product, dates, scope). Queue for AM-Frontend.
+This crawls `~/shared/wiki/agent-created/` and writes `shared/dashboards/data/wiki-search-index.json`. The Kiro dashboard Pipeline view reads this index. Status (DRAFT/REVIEW/FINAL) is parsed from article frontmatter.
 
-### Step 3 — Pipeline State Detection
-For tasks in In Progress, Review, Active:
-- Detect pipeline stage (research pending, draft pending, review pending, approval pending, refresh due).
-- Queue pipeline actions for AM-Frontend presentation.
+### Step 2 — Detect Stale Articles
+Query the refreshed index for articles whose `updated:` field is >30 days old and `status: FINAL`. Flag them for review — not for auto-update. Refresh is a human-approved action.
 
-### Step 4 — Near-Due Escalation (AUTO-EXECUTE)
-- due_on within 0-2 days AND NOT completed AND NOT in Active/Archive → set Priority_RW to Today.
-- Update Kiro_RW: 'M/D: Near-due. Priority escalated.'
-- This is a safety measure — executes without approval.
+### Step 3 — SharePoint Drift Check
+For each local FINAL article, compare modification time against its SharePoint .docx counterpart in `Documents/Artifacts/[category]/[slug].docx`. Flag any local-newer articles as "pending re-publish" in `~/shared/context/active/am-wiki-state.json`.
 
-### Step 5 — Overdue Flagging
-- due_on < today AND NOT completed → queue overdue flag for AM-Frontend.
-- Compute days overdue, recommended action.
+Do not auto-publish — the librarian promotes to SharePoint.
 
-### Step 6 — Refresh Cadence Check
-For Active tasks with Frequency != one-time: check recurring-task-state.json. Queue refresh actions for AM-Frontend.
+### Step 4 — New-Article Candidates from Signals
+Query `signals.wiki_candidates` (DuckDB view) — topics with strong multi-channel signals but no matching article. Include top candidates in `am-wiki-state.json` for frontend presentation.
 
 ---
 
@@ -251,7 +243,7 @@ Write all computed state to structured files for AM-Frontend consumption.
 ### Output Files
 1. `~/shared/context/active/am-enrichment-queue.json` — all enrichment proposals (My Tasks + Portfolio)
 2. `~/shared/context/active/am-portfolio-findings.json` — portfolio scan results (task counts, overdue, near-due, staleness, blockers, budget alerts)
-3. `~/shared/context/active/am-abps-ai-state.json` — ABPS AI Content pipeline state
+3. `~/shared/context/active/am-wiki-state.json` — wiki pipeline state (stale FINAL articles, SharePoint drift, new-article candidates from signals)
 4. `~/shared/context/active/am-signals-processed.json` — signal routing results (tasks created, deferred, dismissed)
 5. Intake files (slack-digest.md, email-triage.md, asana-digest.md, asana-activity.md) — already written in Phase 1
 

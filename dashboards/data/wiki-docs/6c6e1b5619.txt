@@ -1,17 +1,3 @@
-<!-- DOC-0366 | duck_id: reporting-wbr-callout-guide -->
-
----
-title: WBR Callout Template & Guide
-status: DRAFT
-doc-type: execution
-audience: amazon-internal
-level: 1
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-03-25
-update-trigger: new market added, callout format changes, dashboard ingester updates
----
-
 # WBR Callout Template & Guide
 
 ---

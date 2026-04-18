@@ -1,3 +1,6 @@
+---
+foundational: true
+---
 # Callout Principles
 
 The source of truth for all callout writing rules is the callout-writer agent definition:

@@ -1,162 +1,49 @@
 {
-  "generated_at": "2026-04-16T14:30:00Z",
-  "pipeline": "am-backend-phase4",
-
-  "portfolio_discovery": {
-    "abix_ps": {
-      "portfolio_gid": "1212775592612914",
-      "known_children": ["AU (1212762061512767)", "MX (1212775592612917)"],
-      "status": "requires_parent_verification",
-      "note": "Parent agent should call GetPortfolioItems(1212775592612914) to check for new projects not in asana-command-center.md"
+  "generated": "2026-04-17T12:36:00Z",
+  "phase": "am-backend",
+  "projects": {
+    "AU": {
+      "gid": "1212762061512767",
+      "incomplete_count": 14,
+      "overdue_count": 9,
+      "oldest_overdue": "2026-04-02 (MBR callout, 15d)",
+      "due_today": [],
+      "flags": ["9 overdue tasks — bulk triage needed"]
     },
-    "abps": {
-      "portfolio_gid": "1212762061512816",
-      "known_children": ["ABPS - NA (1205997667578854)", "ABPS - JP (1205997667578874)", "ABPS - EU5 (1205997667578868)"],
-      "status": "requires_parent_verification",
-      "note": "Parent agent should call GetPortfolioItems(1212762061512816) to check for new projects"
+    "MX": {
+      "gid": "1212775592612917",
+      "incomplete_count": 13,
+      "overdue_count": 6,
+      "oldest_overdue": "2026-03-23 (Page Creation MX, 25d)",
+      "due_today": ["MCS LP Review: Lorena synergy"],
+      "flags": ["6 overdue tasks", "Lorena synergy due today"]
+    },
+    "WW_Testing": {
+      "gid": "1205997667578893",
+      "incomplete_count": 7,
+      "overdue_count": 4,
+      "oldest_overdue": "2026-03-31 (Paid App, 17d)",
+      "due_today": ["Sitelink Audit/Update"],
+      "flags": ["Testing Document for Kate 16d overdue — L2 critical artifact"]
+    },
+    "Paid_App": {
+      "gid": "1205997667578886",
+      "incomplete_count": 14,
+      "overdue_count": 4,
+      "oldest_overdue": "2026-02-20 (Create FR accounts, 56d)",
+      "due_today": [],
+      "flags": ["2 tasks 56d overdue — kill or revive", "Q2 PO 4d overdue"]
+    },
+    "ABPS_AI_Content": {
+      "gid": "1213917352480610",
+      "incomplete_count": 45,
+      "intake_untriaged": 3,
+      "review_count": 42,
+      "flags": ["3 approval tasks in Intake awaiting Richard", "42 articles in Review — bulk approval needed"]
     }
   },
-
-  "per_project_scan": {
-    "au": {
-      "project_gid": "1212762061512767",
-      "richard_tasks": 1,
-      "overdue_tasks": [
-        {
-          "task_gid": "1213796951745232",
-          "name": "Look over AU landing page switch (campaign settings etc, traffic, regs)",
-          "section": "Planning",
-          "due": "2026-04-15",
-          "days_overdue": 1,
-          "priority": "Today",
-          "routine": "Engine Room",
-          "action": "flag_for_frontend"
-        }
-      ],
-      "near_due_escalated": [],
-      "enrichment_gaps": {
-        "missing_kiro": false,
-        "missing_next_action": false
-      },
-      "market_signals_today": [
-        "AU CPA challenge — Lena claiming $80 paid media CPA (view-through vs click-through attribution dispute)",
-        "R&O input for AU due TODAY",
-        "AU landing page switch task 1d overdue"
-      ]
-    },
-    "mx": {
-      "project_gid": "1212775592612917",
-      "richard_tasks": 1,
-      "overdue_tasks": [
-        {
-          "task_gid": "1213072707685834",
-          "name": "MX Automotive page",
-          "section": "Planning",
-          "due": "2026-04-15",
-          "days_overdue": 1,
-          "priority": "Today",
-          "routine": "Engine Room",
-          "action": "flag_for_frontend"
-        }
-      ],
-      "near_due_escalated": [],
-      "enrichment_gaps": {
-        "missing_kiro": false,
-        "missing_next_action": false
-      },
-      "market_signals_today": [
-        "MX duplicate invoice $56K — Diana flagged (email)",
-        "R&O input for MX due TODAY",
-        "MX ieCCP doc — York integrating MX spend data (resolved)",
-        "MX handoff doc simplified — reference CA pages (Brandon decision)"
-      ]
-    }
-  },
-
-  "status_staleness": {
-    "note": "Status update staleness check requires Asana MCP GetStatusUpdatesFromObject calls. Parent agent should execute for each active project.",
-    "projects_to_check": [
-      {"gid": "1212762061512767", "name": "AU"},
-      {"gid": "1212775592612917", "name": "MX"},
-      {"gid": "1205997667578893", "name": "WW Testing & Projects"},
-      {"gid": "1205997667578886", "name": "Paid App"},
-      {"gid": "1213917352480610", "name": "ABPS AI Content"}
-    ]
-  },
-
-  "recurring_task_automation": {
-    "au": {
-      "completed_recurring_last_7d": 0,
-      "tasks_to_create": [],
-      "note": "No completed recurring tasks detected in AU project in last 7 days."
-    },
-    "mx": {
-      "completed_recurring_last_7d": 0,
-      "tasks_to_create": [],
-      "note": "No completed recurring tasks detected in MX project in last 7 days."
-    }
-  },
-
-  "cross_team_blockers": {
-    "mx": [
-      {
-        "blocker": "MX Automotive page — blocked by Vijeth footer",
-        "task_gid": "1213072707685834",
-        "days_blocked": "unknown — task is 1d overdue",
-        "action": "queue_for_frontend"
-      },
-      {
-        "blocker": "MX duplicate invoice $56K — Diana needs Richard's input",
-        "source": "email",
-        "action": "queue_task_creation"
-      }
-    ]
-  },
-
-  "event_countdown": {
-    "prime_day": {
-      "estimated_date": "2026-06-15",
-      "days_away": 60,
-      "in_prep_window": false,
-      "in_escalation_window": false,
-      "days_until_prep_window": 30,
-      "note": "Prime Day is 60 days out. Prep window starts at 30 days (May 16). No escalation needed yet."
-    }
-  },
-
-  "paid_app_scan": {
-    "total_tasks": 7,
-    "overdue": [
-      {
-        "task_gid": "1212808474749819",
-        "name": "Paid App PO — Create Q2 + Amend Google PO to Q2",
-        "due": "2026-04-13",
-        "days_overdue": 3,
-        "priority": "Urgent",
-        "action": "flag_for_frontend"
-      }
-    ],
-    "event_keyword_matches": [],
-    "note": "Paid App PO is 3d overdue. No event-keyword tasks detected."
-  },
-
-  "market_context_refresh": {
-    "au_context_task": "1213917747438931",
-    "mx_context_task": "1213917639688517",
-    "status": "requires_parent_asana_mcp",
-    "material_changes_detected": {
-      "au": [
-        "Lena $80 paid media CPA claim (view-through attribution dispute)",
-        "R&O input due today",
-        "AU LP switch task 1d overdue"
-      ],
-      "mx": [
-        "Duplicate invoice $56K from Diana",
-        "R&O input due today",
-        "MX handoff doc simplified (reference CA pages)",
-        "York integrating MX spend into ieCCP doc"
-      ]
-    },
-    "note": "Material changes detected for both AU and MX. Parent agent should execute read-before-write UpdateTask on pinned context tasks (1213917747438931 for AU, 1213917639688517 for MX) to append today's signals."
+  "event_calendar": {
+    "prime_day": {"approx_date": "2026-06-15", "days_away": 59, "in_prep_window": false},
+    "back_to_school": {"approx_date": "2026-07-27", "days_away": 101, "in_prep_window": false}
   }
 }

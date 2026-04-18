@@ -1,5 +1,3 @@
-<!-- DOC-0012 | duck_id: callout-au-projections -->
-
 # AU Projection History
 
 ## W12 Projection (made during W12 callout)

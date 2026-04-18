@@ -1,26 +1,3 @@
-<!-- DOC-0320 | duck_id: program-market-reference -->
-
----
-title: "Market Reference: AB Paid Search Across 10 Markets"
-slug: "market-reference"
-type: "reference"
-audience: "team"
-status: "draft"
-doc-type: reference
-created: "2026-03-25"
-updated: "2026-03-25"
-owner: "Richard Williams"
-tags: ["paid-search", "us", "ca", "jp", "uk", "de", "fr", "it", "es", "au", "mx", "ww", "oci", "cpa"]
-depends_on: ["competitive-landscape", "oci-playbook"]
-consumed_by: ["wiki-concierge", "abix-analyst", "najp-analyst", "eu5-analyst", "abix-callout-writer", "najp-callout-writer", "eu5-callout-writer", "callout-reviewer"]
-summary: "Unified reference for all 10 AB Paid Search markets — performance, OCI status, contacts, competitors, and active initiatives in one read."
-# Artifact metadata
-artifact-status: DRAFT
-artifact-audience: amazon-internal
-artifact-level: 2
-update-trigger: "Monthly after MBR data refresh, or when a market's OCI status changes"
----
-
 # Market Reference: AB Paid Search Across 10 Markets
 
 This doc answers "tell me everything about AB Paid Search in [market]" in one read. Any agent writing a callout, any stakeholder asking about a market, or any teammate picking up coverage should find what they need here without loading 3-4 separate files.
@@ -140,7 +117,7 @@ For current weekly data, see the latest WW summary at `~/shared/context/active/c
 
 ### AU — Richard's Market, Efficiency Focus
 
-> Full detail: [AU Market Wiki](~/shared/artifacts/program-details/2026-03-25-au-market-wiki.md)
+> Full detail: [AU Market Wiki](au-market-wiki.md)
 
 | Field | Value |
 |-------|-------|
@@ -151,7 +128,7 @@ For current weekly data, see the latest WW summary at `~/shared/context/active/c
 
 ### MX — Richard's Market, ie%CCP Constrained
 
-> Full detail: [MX Market Wiki](~/shared/artifacts/program-details/2026-03-25-mx-market-wiki.md)
+> Full detail: [MX Market Wiki](mx-market-wiki.md)
 
 | Field | Value |
 |-------|-------|
@@ -162,7 +139,7 @@ For current weekly data, see the latest WW summary at `~/shared/context/active/c
 
 ## Cross-Market Patterns
 
-For cross-market scaling methodology, see [Cross-Market Playbook](~/shared/artifacts/strategy/2026-03-25-cross-market-playbook.md). For competitive patterns, see [Competitive Landscape](competitive-landscape).
+For cross-market scaling methodology, see [Cross-Market Playbook](../strategy/cross-market-playbook.md). For competitive patterns, see [Competitive Landscape](competitive-landscape).
 
 ## Decision Guide
 

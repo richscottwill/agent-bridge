@@ -1,5 +1,3 @@
-<!-- DOC-0198 | duck_id: meeting-andrew-sync -->
-
 # Andrew Sync
 
 ## Metadata

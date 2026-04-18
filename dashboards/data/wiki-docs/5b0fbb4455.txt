@@ -1,0 +1,59 @@
+# Scope Defense Playbook
+
+Senior ICs face recurring scope-defense situations: a peer team hires into an area we own, a country leader asks to run "their own" version of a process we run globally, a partner team starts duplicating infrastructure because our cadence does not match theirs. Each is a two-way door that turns into a one-way door if handled badly. This playbook gives a tested response framework, drawn from the Evans corporate-politics synthesis and recent AU stakeholder patterns.
+
+## The pattern
+
+Scope encroachment follows a predictable sequence. A stakeholder expresses a specific pain (our cadence is slow, our reports are wrong, our tooling does not meet their needs). A solution emerges that duplicates or replaces part of our ownership. The solution appears reasonable in isolation but cumulative scope loss follows if every such solution is accepted.
+
+The trap is that the initial pain is almost always legitimate. Dismissing it validates the scope grab. Capitulating validates the scope grab. The playbook sits between the two.
+
+## Step 1: Align with your manager first
+
+Before any response to the encroaching party, confirm your manager has the same read. Bring specifics: what was said, who heard it, what precedent it sets. If your manager is not aligned, the defense will fail — the encroaching party will escalate to your manager's peer and your own position will not hold.
+
+The alignment conversation is five minutes, not fifty. State what happened, state the risk, ask whether the manager agrees this is scope erosion. Note the answer. Do not debate.
+
+## Step 2: Acknowledge the underlying pain
+
+In your response, lead with the legitimate concern. If the stakeholder said the cadence is slow, agree that a slow cadence is a problem and commit to a specific improvement within a defined window. If the report is wrong, agree to investigate and fix within a week.
+
+Acknowledging the pain costs nothing and removes the strongest argument the encroaching party has. You take ownership of the problem rather than defending against the framing that you are not addressing it.
+
+## Step 3: Apply the porcupine defense
+
+The porcupine strategy from the Evans framework: make yourself uncomfortable to attack. Show specific work already in flight, specific data showing why the proposed alternative will not perform, specific commitments with dates. The goal is not confrontation — it is making the scope grab expensive relative to working with you.
+
+For paid search, the porcupine quills are our data infrastructure, our cross-functional partnerships (MarTech, Legal, DS, ABMA, MCS), our measurement rigor, and our multi-year test history. None of these can be stood up quickly by a new team. Surface them in specific rather than abstract terms.
+
+## Step 4: Find the ally above
+
+Scope defense wins or loses based on which leader the story lands with. Identify the senior person whose priorities are most affected by the scope erosion and make sure the story reaches them first, framed as a risk to their priorities, not just yours. Brandon plays this role for paid search scope questions at the L8 level. Kate plays it at the L9 level.
+
+The ally-above conversation is not about asking for protection. It is about ensuring accurate framing reaches the person who will eventually be asked to adjudicate. If your manager is not the ally above, identify who is.
+
+## Step 5: Close the open loop
+
+Every scope-defense situation should close with a specific commitment that reframes the conversation. "We will fix the cadence within two weeks and publish weekly progress." "We will investigate the report and share the root cause by Friday." The commitment moves the conversation from "who should own this" to "what should the owner do next." The second framing favors the incumbent.
+
+## When to escalate
+
+Escalate only when the scope grab has persisted through Steps 1-5 and the encroaching party is moving forward regardless. Escalation is the last tool, not the first. It is expensive to relationships and rarely produces better outcomes than a well-executed playbook.
+
+## Next Steps
+
+1. Apply this playbook to any active scope situation within the next two weeks.
+2. Debrief with Brandon on any instance where the playbook failed to produce alignment.
+3. Update when new patterns emerge from specific situations.
+
+## Related
+
+- [Amazon Politics Playbook](amazon-politics-playbook)
+- [CPC Benchmark Defense Playbook](cpc-benchmark-defense-playbook)
+
+<!-- AGENT_CONTEXT
+machine_summary: "Scope defense playbook for senior ICs. Five steps: align with manager first, acknowledge the pain, porcupine defense (specific work in flight), find the ally above, close with specific commitment. Escalation is last resort."
+key_entities: ["scope erosion", "porcupine defense", "Brandon ally", "Kate ally", "Evans framework"]
+action_verbs: ["align", "acknowledge", "defend", "commit"]
+update_triggers: ["new scope situation surfaces", "playbook failure to learn from", "Evans framework updates"]
+-->

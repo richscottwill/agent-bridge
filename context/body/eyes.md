@@ -115,7 +115,9 @@ _Cleared at EOD 4/3. Regenerated each AM-2 from calendar + active threads + Slac
 
 ---
 
-## Data Pipeline
+## Pipeline & Outlook
+
+### Data Pipeline
 - WW Dashboard Y25 Final (full year baseline) — in intake
 - WW Dashboard Y26 W13 (current week) — PROCESSED 3/30 via dashboard ingester + callout pipeline
 - Change Log CSVs (EU5, MX/AU, NA/JP) — INGESTED 3/30 (477 rows to DuckDB)
@@ -124,7 +126,7 @@ _Cleared at EOD 4/3. Regenerated each AM-2 from calendar + active threads + Slac
 - Output: per-market callout drafts in `~/shared/wiki/callouts/<market>/`, WW summary, JSON data extract
 - Feeds: WBR callouts, MBR narratives, QBR trends, daily Google Ads checks (MX, AU, Paid App)
 
-## What's Coming
+### What's Coming
 
 | Initiative | Status | Level | Key Detail |
 |-----------|--------|-------|------------|

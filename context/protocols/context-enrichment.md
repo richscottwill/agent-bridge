@@ -161,7 +161,7 @@ SELECT * FROM signals.wiki_candidates;
    - This is critical because Slack ingestion uses display names ("Brand LP Polaris Transition") while Hedy uses slugs ("polaris-lp-testing"). Without normalization, the same topic fragments across rows and never reaches the quality threshold.
 2. Query the view: `SELECT * FROM signals.wiki_candidates`
 3. Cross-reference against wiki.publication_registry — exclude topics that already have articles
-4. Cross-reference against ABPS AI Content project tasks — exclude topics already in pipeline
+4. Cross-reference against `~/shared/wiki/agent-created/` — exclude topics that already have drafts in flight
 5. Remaining = genuine wiki gaps. Append to am-signals-processed.json under `wiki_candidates` key
 6. If any candidate has quality_score >= 10.0: flag as "strong candidate" for frontend
 

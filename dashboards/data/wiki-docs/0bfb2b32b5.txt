@@ -1,5 +1,3 @@
-<!-- DOC-0085 | duck_id: callout-uk-analysis-2026-w12 -->
-
 # UK W12 Analysis Brief
 
 ## Registration summary

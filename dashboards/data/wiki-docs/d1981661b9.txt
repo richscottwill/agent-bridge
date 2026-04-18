@@ -1,17 +1,3 @@
-<!-- DOC-0215 | duck_id: ops-landing-page-testing-playbook -->
-
----
-title: Landing Page Testing Playbook
-status: DRAFT
-doc-type: execution
-audience: amazon-internal
-level: N/A
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-03-25
-update-trigger: new LP test results, Polaris migration milestones, category page launches
----
-
 # Landing Page Testing Playbook
 
 ---

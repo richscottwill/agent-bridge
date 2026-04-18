@@ -1,19 +1,3 @@
-<!-- AGENT_CONTEXT
-depends_on:
-  - shared/artifacts/testing/2026-04-03-testing-approach-outline.md
-  - shared/artifacts/strategy/2026-03-25-agentic-ps-vision.md
-  - shared/artifacts/strategy/2026-03-25-aeo-ai-overviews-pov.md
-consumed_by:
-  - wiki-index
-  - quarterly-strategy-review
-tags: [strategy, five-year, paid-search, agentic, AI-Max, OCI, leadership]
-category: strategy
-refresh_trigger: annual review, major Google Ads platform change, OCI expansion results
-decision_framework: year-by-year grounded-vs-speculative with contingency planning
-key_entities: [OCI, AI Max, Baloo, F90, UCP, ACP, AI Overviews, Five Stages]
-machine_summary: "Five-year strategic outlook for AB Paid Search. 2026 is grounded in validated OCI results (35K incremental regs, $16.7M OPS) with four investment bets (AI Max, Baloo, F90, agentic tooling). 2027 depends on 2026 test results. 2028-2030 is scenario planning. Parallel agentic evolution track maps PS team's Five Stages to external market trajectory."
--->
-
 # Paid Search Five-Year Outlook: 2026–2030
 
 ## Purpose

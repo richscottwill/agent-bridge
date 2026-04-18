@@ -1,5 +1,3 @@
-<!-- DOC-0482 | duck_id: wiki-review-kate-doc-v3-eval-b -->
-
 # Blind Eval B: Kate Doc V3 — Subjective Reader Evaluation
 
 **Evaluator:** Wiki-Critic (Blind Eval B — no knowledge of Eval A)

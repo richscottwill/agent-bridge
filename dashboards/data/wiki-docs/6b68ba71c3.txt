@@ -1,5 +1,3 @@
-<!-- DOC-0028 | duck_id: callout-de-context -->
-
 # DE Paid Search — Market Context
 
 Last updated: 2026-03-30

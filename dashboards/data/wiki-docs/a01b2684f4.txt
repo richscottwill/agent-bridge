@@ -1,5 +1,3 @@
-<!-- DOC-0110 | duck_id: context-2026-03-31_au-ps-w9-13-optimization -->
-
 # AU Paid Search W9-13: Keyword-Level Optimization
 
 Generated: 2026-03-31

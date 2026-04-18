@@ -1,41 +1,28 @@
 {
-  "generated_at": "2026-04-16T14:30:00Z",
-  "pipeline": "am-backend-phase3b",
-  "project_gid": "1213917352480610",
-  "project_name": "ABPS AI - Content",
-
-  "sync_status": {
-    "duckdb_task_count": 0,
-    "is_stale": true,
-    "last_synced": "2026-04-15T13:52:36Z",
-    "note": "ABPS AI Content project has 0 tasks in DuckDB. This is a confirmed sync gap — the asana-digest flagged 'Empty projects: ABPS AI (0 tasks)'. The parent agent needs to run GetTasksFromProject(1213917352480610) and UPSERT results into DuckDB."
+  "generated": "2026-04-17T12:36:00Z",
+  "phase": "am-backend",
+  "content_project": {
+    "gid": "1213917352480610",
+    "total_tasks": 45,
+    "by_section": {
+      "Intake": 3,
+      "In Progress": 0,
+      "Review": 42,
+      "Active": 0,
+      "Archive": 0
+    },
+    "intake_untriaged": [
+      {"gid": "1213954957625028", "name": "✅ Approve: Enhanced Match / LiveRamp — Audience Expansion", "type": "approval"},
+      {"gid": "1213954957645131", "name": "✅ Approve: AU Paid Search — Market Wiki", "type": "approval"},
+      {"gid": "1213953295002324", "name": "✅ Approve: OCI Execution Guide", "type": "approval"}
+    ],
+    "near_due": [],
+    "overdue": [],
+    "pipeline_summary": "42 articles in Review stage. 3 approval tasks pending in Intake. No articles in Active/Published — pipeline is bottlenecked at Review."
   },
-
-  "intake_triage": {
-    "untriaged_count": 0,
-    "note": "Cannot assess — DuckDB has no ABPS AI tasks. Requires fresh Asana pull."
-  },
-
-  "pipeline_state": {
-    "in_progress": 0,
-    "review": 0,
-    "active": 0,
-    "note": "Cannot assess — DuckDB has no ABPS AI tasks."
-  },
-
-  "near_due_escalation": [],
-  "overdue_flags": [],
-
-  "refresh_cadence_check": {
-    "status": "cannot_assess",
-    "note": "No tasks in DuckDB to check refresh cadence against. Parent agent should pull fresh data from Asana MCP."
-  },
-
-  "action_items_for_parent": [
-    {
-      "action": "fresh_asana_pull",
-      "priority": "high",
-      "description": "Call GetTasksFromProject(project_gid='1213917352480610') to get all ABPS AI Content tasks, then UPSERT into asana.asana_tasks"
-    }
-  ]
+  "build_project": {
+    "gid": "1213379551525587",
+    "total_tasks": 8,
+    "active_development": ["Dashboard Ingester", "Attention Tracker", "Bayesian Prediction Engine", "WBR Callout Pipeline", "Agent Bridge", "PS Analytics Data Layer", "Morning Routine", "Asana Command Center"]
+  }
 }

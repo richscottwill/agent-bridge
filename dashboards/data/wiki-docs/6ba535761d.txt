@@ -1,5 +1,3 @@
-<!-- DOC-0478 | duck_id: wiki-review-kate-doc-synthesis-revisions -->
-
 # Revisions: kate-doc-synthesis.md
 
 Source: kate-doc-batch-review.md

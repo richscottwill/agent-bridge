@@ -7,6 +7,6 @@
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Evaluate this session. If it involved tool calls, file modifications, or 3+ conversation turns, append a brief summary (2-3 lines) to ~/shared/context/intake/session-log.md with format: [YYYY-MM-DD] Topic: ... | Actions: ... | Decisions: ... If the session was trivial (single short response, no tool calls, no file writes), skip logging entirely."
+    "prompt": "Evaluate this session. If it involved tool calls, file modifications, or 3+ conversation turns, append a brief summary (2-3 lines) to ~/shared/context/intake/session-log.md with format: [YYYY-MM-DD] Topic: ... | Actions: ... | Decisions: ... If the session was trivial (single short response, no tool calls, no file writes), skip logging entirely.\n\nSEPARATELY: If during this session Richard revealed a pattern, decision, or learning that could become or enrich a wiki article (e.g., new framework, recurring process, strategic stance, market insight, best practice), append ONE line to ~/shared/context/intake/wiki-candidates.md. Format: `[YYYY-MM-DDTHH:MM session-summary] signal: <one sentence> | source: this-session | proposed: <slug or \"enrich: existing-slug\">`. One line. No analysis. No drafting. Skip silently if nothing stood out."
   }
 }

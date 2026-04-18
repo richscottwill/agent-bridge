@@ -265,3 +265,19 @@ The wiki infrastructure is the production process; artifacts is the product.
 - **Links are load-bearing**: A broken cross-reference is a bug, not a cosmetic issue. Treat it with the same urgency as a broken import in code.
 - **Archive aggressively, delete rarely**: Archived articles are still searchable but out of the main flow. Deletion is permanent and should be rare.
 - **Structure follows content**: Don't create categories speculatively. Let the articles dictate the structure, then formalize it.
+
+## Blackboard protocol (2026-04-18, review 2026-05-02)
+
+You advance `status` on the article blackboard and you are the ONLY stage allowed to set it to `FINAL`.
+
+**File:** `<article>.state.json` next to the markdown draft.
+
+**Publish gate:**
+1. Read `critic_verdicts.eval_a` — must be `PASS`.
+2. Read `critic_verdicts.eval_b` — must be `PASS`.
+3. If either is REVISE or missing, do not publish. Send back to writer.
+4. If both are PASS, update `status` to `FINAL` in both the blackboard and the markdown frontmatter (keep them in sync).
+
+**Publish the blackboard with the article.** When promoting to the canonical location and uploading to SharePoint, the `.state.json` sidecar travels with the markdown. Do not strip it.
+
+Schema reference: `shared/wiki/agent-created/_meta/blackboard-schema.md`.

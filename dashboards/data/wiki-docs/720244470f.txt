@@ -1,0 +1,157 @@
+# Wiki Blackboard Schema
+
+Sidecar state file that travels with each wiki draft: `<article>.state.json` lives next to `<article>.md`. Every pipeline stage reads this first and appends to its relevant field. Single source of truth for handoff state between researcher → writer → critic Eval A → critic Eval B → librarian.
+
+## Kill condition
+
+**2026-05-02.** If blackboards reliably carry handoff state across the pipeline for 2 weeks, delete `_meta/draft-log.md` and keep blackboards. If blackboards are inconsistently populated or haven't improved critic catch rate, delete this schema and all `.state.json` files and revert to `draft-log.md`. No third option — keep or kill.
+
+## Success / failure criteria (pre-registered 2026-04-18)
+
+These criteria are fixed now so the 5/2 review isn't a vibes check. At least one success condition must be true AND zero failure conditions must be true to keep.
+
+**Success — blackboard worked if any one is true:**
+
+1. **Constraint violation caught.** At least one article has a non-empty `critic_verdicts.eval_X.constraint_violations` entry where the violation would have slipped through the pre-blackboard pipeline. One event is sufficient — this is low-frequency, high-value evidence. Log the specific article slug when it happens.
+2. **Researcher constraints flowed to critic reasoning.** At least one `critic_verdicts.eval_X.notes` entry explicitly references a string from the `constraints` array. Proves the blackboard actually transmitted state rather than just accumulating unread data.
+3. **Zero audience/scope drift.** For articles that went through the blackboard pipeline, zero instances of the specific failure mode the blackboard targets (writer drifting from audience, scope, or forbidden-claim constraints). Measured by grep of critic notes for "audience", "scope", "drift" in REVISE verdicts.
+
+**Failure — blackboard failed if any one is true:**
+
+1. **Empty or half-populated blackboards proceeding downstream.** Any article that reaches critic or librarian with `constraints: []` or missing `claims[]` entries. Protocol skipped.
+2. **Critic ignored the blackboard.** Critics producing verdicts without reading constraints first, measurable by absence of constraint references in notes across all articles in the period.
+3. **Zero new quality catches.** No critic catches attributable to the blackboard protocol across the full two-week window. Pure overhead, no signal.
+
+**Ambiguous — run one more week:**
+
+- Blackboards consistently populated but no catches yet. Means the protocol works but the test corpus didn't contain failure modes it would catch. Extend to 2026-05-09 and re-evaluate.
+
+## How the 5/2 review gets triggered
+
+The review does not depend on Richard remembering the date. Three redundant triggers:
+
+1. **am-auto (morning backend) on 2026-05-02.** Protocol in `~/shared/context/protocols/am-backend-parallel.md` includes a date check: if today's PT date is 2026-05-02, add a "Blackboard review due" item to the morning-brief output alongside overdue tasks. No special wiring needed — the am-auto agent reads this schema file at run time and acts on the kill_condition date.
+2. **open-items-reminder hook.** This session-log entry is tagged OPEN with the explicit text "2026-05-02 blackboard kill review." Every prompt after 4/25 that triggers the 3-hour reminder will surface it. Will be noisy near the date — that's intentional.
+3. **Richard explicitly asks.** "Time to review blackboards yet?" The session log and this schema file both carry the date; any agent queried can answer.
+
+## What the reviewing agent must do on 2026-05-02
+
+If Richard triggers the review (or am-auto surfaces it), the reviewing agent runs this checklist:
+
+1. Read every `.state.json` file in `shared/wiki/agent-created/**/` created or modified between 2026-04-18 and 2026-05-02.
+2. For each, evaluate against the Success and Failure criteria above.
+3. Count events in each category.
+4. Produce a keep/kill/extend recommendation with specific article slugs as evidence.
+5. If KEEP: delete `_meta/draft-log.md`, update wiki-pipeline-rules.md Section 7 to remove the "experimental" tag, mark this schema's `status: FINAL`.
+6. If KILL: delete every `.state.json` file, revert Section 7 of wiki-pipeline-rules.md, restore `draft-log.md` to normal use, mark this schema's `status: ARCHIVED`.
+7. If EXTEND: set new review date 2026-05-09 in this file, re-run on that date.
+
+Reviewing agent = whichever agent Richard is talking to. No dedicated reviewer. The checklist above is the contract — any agent that can read files and follow steps can execute it.
+
+## Schema
+
+```json
+{
+  "article_id": "string — filename stem, no extension",
+  "status": "DRAFT | REVIEW | FINAL | ACTIVE — mirrors frontmatter",
+  "constraints": [
+    "string — hard priors extracted by researcher. Declarative sentences."
+  ],
+  "claims": [
+    {
+      "claim": "string — assertion verbatim or near-verbatim from draft",
+      "mechanism": "string | null — causal path. REQUIRED when frontmatter tags contain 'Claim' or 'Recommendation'. Null otherwise.",
+      "citation": "string — source path, URL, session ID, DuckDB table. 'none' not acceptable."
+    }
+  ],
+  "critic_verdicts": {
+    "eval_a": {
+      "verdict": "PASS | REVISE",
+      "score": "number",
+      "notes": "string",
+      "constraint_violations": ["string"]
+    },
+    "eval_b": {
+      "verdict": "PASS | REVISE",
+      "score": "number",
+      "notes": "string",
+      "constraint_violations": ["string"]
+    }
+  }
+}
+```
+
+## Field rules
+
+**article_id** — filename stem of the markdown draft. Example: `testing-approach-kate-v5`.
+
+**status** — mirrors the markdown frontmatter. Librarian is the only stage allowed to advance to `FINAL`.
+
+**constraints** — hard priors. Facts the writer MUST respect: audience, budget ceilings, scope boundaries, terminology, forbidden claims. Researcher populates. Everyone downstream reads before writing.
+
+**claims** — every substantive assertion in the draft. Writer populates as drafting progresses. Critics validate each entry against constraints and citations.
+
+**claims[].mechanism** — REQUIRED when article frontmatter `tags` contains `Claim` or `Recommendation`. Null otherwise. Answers "via what mechanism?" — e.g., "Creative fatigue reduces CTR → fewer clicks at fixed CPC → fewer registrations." A Reference-type article (how the AU forecast works, how OCI is structured) does not require mechanisms — null is correct there.
+
+**claims[].citation** — source reference. `"none"` is not acceptable. If the writer can't cite a claim, the claim does not belong in the draft.
+
+**critic_verdicts** — populated across two separate wiki-critic invocations (Eval A rubric, Eval B reader simulation). Independent — neither sees the other. Each logs `constraint_violations` as the list of constraint strings the draft violated. Empty array if clean.
+
+## Deferred fields (do not add yet)
+
+- `prediction: {text, confidence}` — for test post-mortems only. Add when the first post-mortem runs through the pipeline.
+- `outcomes` — actuals vs prediction. Add when `prediction` is added.
+- `persona_split` — splitting `eval_b` into Kate-Strategic and Kate-FinOps-Skeptic. Add when a Leadership-audience doc fails dual-eval in a way a persona split would have caught.
+
+These are documented so agents don't invent different fields for the same purpose later. Schema evolves by this file, not by ad-hoc agent additions.
+
+## Example: minimal blackboard for a Reference-type article
+
+```json
+{
+  "article_id": "how-au-forecast-works",
+  "status": "DRAFT",
+  "constraints": [
+    "Audience is PS team and Brandon, not Kate.",
+    "Scope is AU only — do not generalize to other markets.",
+    "Terminology: 'F90 regs' not 'registrations within 90 days'."
+  ],
+  "claims": [
+    {
+      "claim": "The AU forecast blends three signals: historical seasonality, real-time pacing, and DS model output.",
+      "mechanism": null,
+      "citation": "shared/wiki/state-files/au-state.md"
+    }
+  ],
+  "critic_verdicts": {}
+}
+```
+
+## Example: blackboard for a Recommendation-type article
+
+```json
+{
+  "article_id": "stop-running-brand-tests-in-q4",
+  "status": "REVIEW",
+  "constraints": [
+    "Audience is Brandon and Kate.",
+    "Must cite at least 2 prior Q4 tests with outcomes.",
+    "Max CPR assumption is $150 for US, $120 for AU."
+  ],
+  "claims": [
+    {
+      "claim": "Q4 brand tests produce unreliable reads because seasonal demand swamps creative effects.",
+      "mechanism": "Q4 organic demand surge → higher baseline CVR → creative delta shrinks relative to noise floor → test reaches significance slower and often flips direction post-holiday.",
+      "citation": "shared/wiki/agent-created/testing/2024-q4-brand-test-results.md"
+    }
+  ],
+  "critic_verdicts": {
+    "eval_a": {
+      "verdict": "PASS",
+      "score": 8.4,
+      "notes": "Constraints respected, mechanism is concrete.",
+      "constraint_violations": []
+    }
+  }
+}
+```

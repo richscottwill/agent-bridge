@@ -1,0 +1,263 @@
+---
+title: "OCI Program — Business Case, Playbook, and Execution Guide"
+slug: "oci-program"
+doc-type: "strategy"
+type: "playbook"
+audience: "team"
+status: "DRAFT"
+level: "L2"
+category: "testing"
+created: "2026-04-17"
+updated: "2026-04-17"
+owner: "Richard Williams"
+tags: ["oci", "bidding", "non-brand", "google-ads", "mcc", "dma", "walmart", "kate-doc"]
+depends_on: []
+summary: "Canonical OCI program reference — business case, phased playbook, execution guide, market-by-market status, measurement framework, DE proof-point data."
+---
+
+# OCI Program
+
+This document is the canonical OCI reference for the Amazon Business Paid Search team. It replaces nine earlier documents that split the OCI program across business-case, playbook, methodology, execution-guide, knowledge-share, and per-market files with ~30 percent content overlap. Everything a team member, stakeholder, or new contributor needs about OCI lives here.
+
+## The one-line story
+
+OCI (Offline Conversion Import) has generated 35,196 incremental registrations and $16.7MM+ in Ordered Product Sales across three markets in six months, making it the single highest-impact initiative in AB Paid Search history.
+
+## What OCI does
+
+OCI sends actual Amazon Business registration data back to Google Ads so the bidding algorithm optimizes for real conversions instead of proxy signals like clicks or page views. Before OCI, Google's algorithm was guessing which searches would produce registrations. With OCI, it knows.
+
+The impact is concentrated on Non-Brand campaigns, where query selection matters most. Brand traffic converts regardless of bidding strategy (people searching "Amazon Business" already know what they want). Non-Brand traffic is where the algorithm earns its keep — choosing which generic queries are worth bidding on based on actual registration outcomes.
+
+At the program level, this is strategically critical: when NB CPA drops 50 percent via OCI, the team can absorb Brand CPA increases from competitors like Walmart (who drove US Brand CPA from roughly $40 to $65-77) without total program CPA degrading. This is the structural foundation of the efficiency-over-escalation competitive strategy — Decision D1.
+
+## What OCI does not do
+
+OCI does not fix Brand CPA. Brand traffic converts regardless of bidding algorithm. Brand campaigns stay on manual CPC with bid caps for competitive defense, and OCI remains Non-Brand-focused.
+
+## Validated results
+
+OCI consistently delivers 18-24 percent registration lift across markets of different sizes and maturities.
+
+| Market | Test Period | Reg Lift | NB CPA Improvement | Incremental Regs | Estimated OPS | Confidence |
+|--------|------------|----------|-------------------|------------------|---------------|------------|
+| US | Jul-Oct 2025 | +24% | ~50% | +32,047 | $16.7MM | HIGH |
+| UK | Aug-Oct 2025 | +23% | Significant | +2,400 | Not isolated | HIGH |
+| DE | Oct-Dec 2025 | +18% | Significant | +749 | Not isolated | HIGH |
+| **Total** | | | | **+35,196** | **$16.7MM+** | |
+
+The US result is the flagship: 32,047 incremental registrations at $520 CCP — $16.7MM in projected three-year OPS. This is not a forecast. It is based on actualized registrations multiplied by finance's CCP value.
+
+Brand CPA improved -10 to -14 percent across all three markets with +1 percent registration lift, aligned with expectations given the lower improvement opportunity on high-intent Brand terms.
+
+### The DE proof point
+
+DE provides the cleanest test-versus-control data because test and control segments ran simultaneously.
+
+| Week | Segment | Cost | Regs | ROAS | CPA |
+|------|---------|------|------|------|-----|
+| W44 | NB Control | $44,592 | 36 | 3% | $1,239 |
+| W44 | NB Test (OCI) | $64,565 | 200 | 13% | $323 |
+| W44 | Difference | +45% cost | +456% regs | +333% ROAS | **-74% CPA** |
+| W45 | NB Control | $56,790 | 55 | 3% | $1,033 |
+| W45 | NB Test (OCI) | $66,182 | 253 | 13% | $262 |
+| W45 | Difference | +17% cost | +360% regs | +333% ROAS | **-75% CPA** |
+
+NB CPA dropped 74-75 percent in the OCI segment. The cost increase is more than offset by the registration increase. When someone asks "does OCI actually work?" — this is the table to show.
+
+## Rollout status
+
+As of April 2026, OCI is live or in progress across eight of ten markets.
+
+| Market | Status | Key Date | Notes |
+|--------|--------|----------|-------|
+| US | 100% NB live | Sep 2025 | Reference implementation. Jan 2026 peak: 39K regs (+86% YoY). |
+| UK | 100% NB live | Sep 2025 | Jan 2026: surpassed OP2 by 41%. |
+| DE | 100% NB live | Dec 2025 | Cleanest test/control data. Dec OCI lift: W49 +20%, W50 +20%, W51 +16%. |
+| FR | 100% NB live | Late March 2026 | Full impact expected by July. |
+| IT | 100% NB live | Late March 2026 | Full impact expected by July. |
+| ES | 100% NB live | Late March 2026 | Full impact expected by July. |
+| JP | 100% NB live | Late March 2026 | MCM-147368188 completed 4/1. Tracking template fully operational. |
+| CA | Full deployment | Targeted week of April 20, 2026 | MCM readiness confirmed. Brandon coordinating with Mukesh. Team at Austin offsite this week — CA execution falls to the week after. |
+| AU | Targeted May 2026 | — | Adobe OCI path via Suzane Huynh. MCC not yet created. |
+| MX | Not planned | — | No MCC, no timeline. |
+
+The methodology is validated. Remaining markets are execution, not experimentation.
+
+## MCC structure
+
+- Master MCC: DSAP — Amazon Business Parent MCC (873-788-1095)
+- NA MCC: 683-476-0964 (US, CA, MX)
+- EU MCC: 549-849-5609 (UK, DE, FR, IT, ES)
+- APAC MCC: 852-899-4580 — JP. Access issues escalated through Mike Babich in March; resolved for new user provisioning through ab-paidsearch-oci-apac2@.
+
+## The phased rollout
+
+The core insight is that phased rollout with measurement at each stage eliminates risk. Never go from zero to 100 percent. Always validate lift before committing more budget. This is Decision D1 — evidence over intuition.
+
+AB Paid Search was the first non-retail business unit at Amazon to implement OCI. The methodology was developed through the US rollout starting July 2025, refined in UK (August 2025) and DE (November 2025), and is now applied to remaining markets.
+
+### Phase 1 — End-to-end pipeline test
+
+Two to four weeks. Goal: confirm registrations flow correctly from Amazon's systems to Google Ads. Set up the OCI conversion action, configure the data feed, trigger test registrations, and verify they appear in Google Ads within 24 to 48 hours. Conversion counts should match Amazon's internal data within a 5 percent tolerance for attribution lag. If the pipeline works and there are no duplicate parameter errors, the market is ready for Phase 2.
+
+The US required two weeks of debugging as the first market. UK, DE, and the current wave each took one to two weeks.
+
+### Phase 2 — 25 percent traffic
+
+Four to six weeks. Allocate 25 percent of NB traffic to OCI bidding; the remaining 75 percent serves as a control. Run for a minimum of four weeks to accumulate sufficient conversion data. Compare the OCI segment against the control on registrations, CPA, and ROAS. **Exit criterion:** statistically meaningful lift in registrations or CPA improvement versus control. Gate: CPA within 115 percent of baseline.
+
+### Phase 3 — 50 percent traffic
+
+Four to six weeks. Expand to 50 percent of NB traffic. Watch for diminishing returns (does lift per incremental percentage hold?) and cannibalization (is OCI generating incremental registrations or stealing from control?). **Exit criterion:** lift holds at 50 percent with no cannibalization evidence. Gate: CPA within 110 percent of baseline.
+
+### Phase 4 — 100 percent NB
+
+Full migration. Migrate remaining traffic, decommission control campaigns, establish new baselines. Brand campaigns stay on manual CPC with bid caps. Monitor weekly CPA and registration tracking for the first eight weeks post-migration. Flag regressions greater than 10 percent week-over-week for investigation.
+
+Brand OCI is lower-impact but worth testing in mature markets once NB is stable.
+
+## Measurement framework
+
+The measurement approach depends on rollout phase.
+
+**During Phases 2 and 3 (test-versus-control).** Compare the OCI segment against the control on cost, registrations, ROAS, and CPA. Always report both absolute numbers and percentages. A 50 percent CPA improvement sounds impressive until you see it is based on ten registrations.
+
+**After Phase 4 (seasonality-adjusted baseline).** No control group exists. Take the same week from the prior year, adjust for known factors (budget changes, competitor activity, market events), and compare actualized CPA against the adjusted baseline. Report in the format "OCI lift tracking: W[X] +[Y]% ([Z]% to expectation)." The DE W49-W51 2025 example: W49 showed +20 percent lift at 95 percent to expectation; W50 showed +20 percent at 96 percent; W51 showed +16 percent at 74 percent.
+
+| Metric | How measured | Frequency |
+|--------|-------------|-----------|
+| Registration lift | Test vs control (phased) or pre/post (full) | Weekly |
+| CPA | Actualized CPA vs seasonality-adjusted baseline | Weekly |
+| Impression share | Google Ads auction insights | Weekly |
+| Search term quality | Manual review of new queries | Biweekly |
+
+## Execution guide
+
+This section is the step-by-step reference for implementing OCI in any market.
+
+### Before you start
+
+Before launching OCI in any market, confirm six things.
+
+1. **Conversion tracking is active and healthy** in Google Ads (Tools → Conversions).
+2. **Target campaign has at least 30 conversions per month.** Below that threshold the algorithm lacks sufficient signal.
+3. **Four-week baseline of performance data captured** so you have a clean comparison point.
+4. **Brand campaigns are excluded from OCI** and will remain on manual bid caps.
+5. **Market stakeholder briefed on expected behavior** — specifically that CPA may spike in week one and that this is normal.
+6. **MCC structure confirmed for the target market.** See the MCC table above.
+
+### Launching OCI end-to-end
+
+Start with the highest-volume NB campaign in the market. That campaign will generate the fastest learning signal. If the market has multiple NB campaigns, pick the one with the most conversions per month. Never start with Brand.
+
+In Google Ads, navigate to the campaign's Settings and change the bidding strategy from Manual CPC to either "Maximize Conversions" or "Target CPA." If using Target CPA, set the target to the current four-week average CPA — do not set an aggressive target. If using Maximize Conversions, set a daily budget cap at 120 percent of current daily spend to give the algorithm room to bid without runaway costs.
+
+### Monitoring
+
+The first two weeks require daily monitoring.
+
+- CPA against the four-week trailing average
+- Conversion volume maintaining or increasing versus baseline
+- Search terms report for quality degradation (irrelevant queries creeping in)
+- "Limited by budget" warnings — these signal OCI needs more room
+- Conversion tracking status for errors
+
+By week three, shift to weekly monitoring. CPA should be at or below baseline by this point. If it is not, see the troubleshooting section.
+
+At the four-week mark, evaluate formally. Compare the OCI period CPA against the pre-OCI baseline using seasonality-adjusted numbers.
+
+- CPA within 115 percent of baseline → proceed to scaling
+- CPA between 115 and 120 percent → extend the test for two more weeks
+- CPA exceeds 120 percent for seven or more consecutive days → pause and investigate
+
+### Troubleshooting
+
+| Issue | Likely cause | Fix |
+|-------|------------|-----|
+| CPA spiking week 1 | Algorithm learning | Wait. Evaluate at week 3-4. Do not intervene. |
+| CPA still high at week 4 | Target too aggressive or low volume | Raise target CPA by 10-15%. Confirm ≥30 conversions/month. |
+| Conversion tracking errors | Tag implementation | Verify Google Tag, check for duplicate tags, confirm conversion action is active. |
+| Search term quality drop | Broad match expansion | Add negative keywords. Review search term report weekly. |
+| Budget limited | OCI bidding higher than manual | Increase daily budget or narrow targeting. |
+| Duplicate hvocijid in URLs | Parameter appended twice on landing pages | Under investigation (EU3 + existing markets). Affects EU3 but not JP. Does not block rollout. |
+| Conversion lag | Delayed conversion attribution | Wait 72 hours before evaluating daily CPA. Use 7-day rolling average. |
+| CPA remains volatile after week 4 | Market-level (seasonal/competitive) vs OCI-specific | Compare Brand CPA trend. If Brand is also volatile, cause is market-level. |
+
+### What not to do
+
+Do not judge OCI by its first week. The algorithm needs two to four weeks to learn, and CPA will spike before normalizing. This is expected behavior, not a failure signal.
+
+Never apply OCI to Brand campaigns. Brand requires manual bid caps for competitive defense against players like Walmart, and algorithmic bidding would undermine that control.
+
+Always use seasonality-adjusted baselines rather than raw pre-versus-post comparisons, because raw comparisons confuse seasonal effects with OCI effects.
+
+Do not set an aggressive Target CPA at launch. Start with the current four-week average and tighten later once the algorithm has learned.
+
+Do not compare OCI markets to non-OCI markets directly. AU and MX do not have OCI, so their CPA trajectory is fundamentally different.
+
+## Why UK and DE underperformed the US
+
+UK performance was slightly below US due to EU DMA privacy restrictions limiting the data signals available to the bidding algorithm. DE was further impacted by privacy-driven variability in OCI values and higher cost-per-clicks (+27 percent versus UK), which constrained efficient volume capture at scale. These learnings directly inform the EU4 rollout — we are building longer stabilization windows into markets with DMA-driven data restrictions.
+
+See [LiveRamp Program](../research/liveramp-program) for the broader DMA impact on audience-based campaigns in EU.
+
+## Cross-functional partners
+
+**MarTech (Joel Mallory).** Built the OCI implementation infrastructure. Currently investigating the hvocijid duplication issue.
+
+**Data Science (Yogesh).** Developed the OCI value framework and incrementality modeling.
+
+**Legal.** Approved the conversion data flow to Google.
+
+**Google (Mike Babich).** Provides biweekly sync on OCI performance, learning phases, and account structure. Escalated APAC MCC access resolution.
+
+**Adobe (Suzane Huynh).** Manages the OCI reporting feed and supported the transition from Adobe bidding. Owns the AU OCI integration path.
+
+## Active risks and open questions
+
+**Duplicate hvocijid parameters** are appearing in landing page URLs across EU3 and existing markets, causing "Duplicate query param found" errors in event processing. JP is not affected. Under investigation with Joel Mallory. If unresolved, this could degrade OCI signal quality in affected markets and delay the measurement validation phase for EU4.
+
+**DMA privacy constraints** that reduced DE performance to 86 percent of expectation will apply to FR, IT, and ES. Longer stabilization windows mitigate this, but expect EU4 markets to track closer to DE's 86 percent than the US's 96 percent.
+
+**AU OCI timeline.** May 2026 target exists but the MCC has not been created and Adobe has not committed. This is the single highest-leverage initiative for AU. See [AU Market Wiki](../markets/au-market-wiki).
+
+**MX OCI.** No MCC, no timeline. Currently descoped from 2026 rollout.
+
+## Cross-initiative connections
+
+**Modern Search.** Campaign consolidation strengthens the data signals that OCI bidding requires to optimize. Markets that have completed consolidation before OCI launch show faster learning and better lift.
+
+**Audiences / F90.** OCI enables smarter bidding on the audiences the Engagement channel reaches. See [F90 Program](../strategy/f90-program).
+
+**Polaris.** Polaris pages must have correct conversion tracking for OCI to function. See [Polaris Program](../markets/polaris-program).
+
+**Email overlay.** Adobe Target implementation needs OCI-compatible tagging.
+
+## Sources
+
+- US OCI results — `~/shared/context/body/eyes.md` → OCI Performance
+- DE W44-W45 test vs control data — WBR Callouts W44-W45 2025
+- MCC structure and access — `~/shared/context/active/current.md` → OCI APAC MCC Access
+- DMA privacy impact — [LiveRamp Program](../research/liveramp-program)
+- $16.7MM OPS calculation — 32,047 incremental regs × $520 CCP
+- Phased rollout methodology — Decision D1 in Richard's brain decision log
+- JP MCM-147368188 completion — Slack ABIX, 2026-04-01
+
+## Related
+
+- [OP1 PS Testing Framework Draft](../testing/testing-approach-kate-v5) — OCI as Workstream 1
+- [Testing Methodology](../testing/testing-methodology) — Phased rollout framework and SyRT
+- [LiveRamp Program](../research/liveramp-program) — DMA impact on audiences
+- [F90 Program](../strategy/f90-program) — OCI + audience integration
+- [Polaris Program](../markets/polaris-program) — LP conversion tracking dependency
+- [AU Market Wiki](../markets/au-market-wiki) — AU OCI timeline
+- [MX Market Wiki](../markets/mx-market-wiki) — MX OCI status
+- [OCI Instructions (Quip)](https://quip-amazon.com/Zee9AAlSBEB) — Technical setup guide
+
+<!-- AGENT_CONTEXT
+machine_summary: "Canonical OCI program reference. Consolidates 9 earlier files (business case, playbook, methodology, execution guide, knowledge share, per-market). 35,196 incremental regs + $16.7MM OPS across US/UK/DE. US +24%, UK +23%, DE +18%. 8/10 markets live or in progress. Phased rollout E2E → 25% → 50% → 100% with CPA gates 115% and 110%. DE W44-W45 shows -74-75% NB CPA in test vs control. DMA drops EU to 86% of expectation. AU May 2026 target. MX descoped."
+key_entities: ["OCI", "Google Ads", "Mike Babich", "Suzane Huynh", "Joel Mallory", "Yogesh", "Walmart", "DMA", "hvocijid", "MCC", "Decision D1"]
+action_verbs: ["bid", "optimize", "scale", "validate", "measure", "rollout"]
+update_triggers: ["new market launch", "phase transition", "hvocijid resolved", "AU MCC created", "MX OCI planning", "DMA policy change", "quarterly results"]
+-->

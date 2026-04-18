@@ -1,18 +1,3 @@
-<!-- DOC-0389 | duck_id: strategy-q2-initiative-status -->
-
----
-title: Q2 2026 Initiative Status & Priorities
-status: DRAFT
-doc-type: strategy
-audience: amazon-internal
-level: 2
-owner: Richard Williams
-created: 2026-04-04
-updated: 2026-04-04
-update-trigger: initiative status changes, new initiatives launched, quarterly planning
-tags: q2, initiatives, status, brandon, team
----
-
 # Q2 2026 Initiative Status & Priorities
 
 > Single-page view of every active AB Paid Search initiative entering Q2 2026. Designed for Brandon's team management and upward reporting to Kate.

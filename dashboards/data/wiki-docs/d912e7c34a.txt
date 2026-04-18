@@ -1,5 +1,3 @@
-<!-- DOC-0370 | duck_id: research-competitor-intel -->
-
 # Competitor Intelligence — Paid Search
 
 Last updated: 2026-03-12

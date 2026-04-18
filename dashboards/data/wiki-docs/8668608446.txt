@@ -1,0 +1,50 @@
+# Forecast Reconciliation Checks
+
+Forecasts silently wrong are worse than forecasts visibly wrong. The April 14 COALESCE bug understated the US April projection by $6K registrations and cascaded through monthly, quarterly, and year-end aggregates for weeks before anyone caught it. This document describes the five reconciliation checks added to `populate_forecast_tracker.py` to prevent repeats of that class of bug.
+
+## Why these checks exist
+
+Every forecasting system has the same risk: aggregate numbers silently drift from their components. Monthly projections that sum only predicted weeks (ignoring actuals for completed weeks) look reasonable on a spreadsheet but systematically understate once weeks start outperforming predictions. Year-end projections built from the same structure drift in the same direction. By the time a human notices, several weeks of planning decisions have been based on the drift.
+
+The reconciliation layer runs five invariants on every pipeline execution. Warnings go to the pipeline log. Structural failures halt the downstream Excel update. The goal is not to guarantee correctness but to surface the specific bug classes that have caused problems.
+
+## The five checks
+
+**Check 1: Monthly projection at least completed-week actuals.** For any month with completed weeks, the monthly projected total must be greater than or equal to the sum of actuals for those weeks. A violation means the projection is missing actuals — exactly the COALESCE bug pattern. Structural failure.
+
+**Check 2: Year-end projection at least year-to-date actuals.** Same logic at the annual horizon. The year-end number cannot be less than what has already happened. Structural failure.
+
+**Check 3: Weekly prediction miss threshold.** For completed weeks, if the prediction was off by more than fifty percent of actual, surface as an informational warning. Not a halt — predictions miss sometimes — but a signal that the model is drifting or a regime change is underway.
+
+**Check 4: Monthly-to-quarterly sum parity.** The sum of the three monthly projections in a quarter must equal the quarterly projection within 0.1 percent tolerance for rounding. A violation means aggregation logic is inconsistent. Structural failure.
+
+**Check 5: Aggregate-market sum parity.** Total across markets must equal the sum of individual market components within 0.1 percent. Violations usually indicate a market was missed or double-counted. Structural failure.
+
+## Operational pattern
+
+The checks run at the end of `populate_forecast_tracker.py` on every execution. Pipeline output shows a reconciliation section with pass/fail for each check. On structural failure, the Excel update does not run — the dashboard stays stale rather than publishing bad numbers. Informational warnings publish but appear in the pipeline log with a flag.
+
+Weekly, the paid search team scans the log for warnings. If three or more checks fire in a single execution, investigate the model before relying on the forecast for any leadership-facing report.
+
+## What these checks do not catch
+
+The checks validate internal consistency. They do not validate that predictions are accurate. A forecast that is internally consistent but systematically ten percent off every week will pass all five checks. Accuracy is measured separately through the error-rate monitoring on completed weeks.
+
+The checks also do not validate input data quality. If Adobe data for a market is missing for a week, the pipeline proceeds with a zero value for that week, which can pass reconciliation but produce meaningless projections. Upstream data validation is the responsibility of the ingestion layer.
+
+## Next Steps
+
+1. Add reconciliation output to the forecast tracker dashboard as a visible health indicator.
+2. Define an escalation threshold — three warnings in one execution triggers automated alert.
+3. Document this pattern for reuse when the team builds new forecasting pipelines.
+
+## Related
+
+- [Forecast Model Multi-Signal Blend](forecast-model-multi-signal-blend)
+
+<!-- AGENT_CONTEXT
+machine_summary: "Five reconciliation checks run on every forecast pipeline execution. Check 1 monthly >= completed actuals, Check 2 year-end >= YTD actuals, Check 3 weekly miss >50% informational, Check 4 monthly-to-quarterly sum parity, Check 5 aggregate-market parity."
+key_entities: ["populate_forecast_tracker.py", "COALESCE bug", "reconciliation checks", "structural failure", "informational warning"]
+action_verbs: ["reconcile", "validate", "halt", "warn"]
+update_triggers: ["new check added", "escalation threshold defined", "dashboard health indicator added"]
+-->

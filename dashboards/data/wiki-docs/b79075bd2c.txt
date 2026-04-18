@@ -1,5 +1,3 @@
-<!-- DOC-0113 | duck_id: context-2026-03-31_session-bootstrap -->
-
 # RW Trainer — Session Bootstrap
 
 Last updated: 2026-03-18

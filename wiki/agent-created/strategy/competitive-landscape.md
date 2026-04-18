@@ -130,7 +130,7 @@ EU competition is the hardest to manage because it's different in every market. 
 ## Related
 
 - [Eyes — Competitive Landscape](~/shared/context/body/eyes.md) — live competitive data updated each loop run
-- [Competitor Intel Research](~/shared/research/competitor-intel.md) — raw competitive data from WBR callouts
+- [Competitor Intel Research](../research/competitor-intel.md) — raw competitive data from WBR callouts
 - [Brain — D2: Competitive Response](~/shared/context/body/brain.md) — the decision rationale for efficiency over escalation
 - [OCI Rollout Playbook](oci-playbook) — how OCI enables the efficiency-based competitive response
 

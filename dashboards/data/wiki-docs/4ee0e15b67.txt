@@ -1,5 +1,3 @@
-<!-- DOC-0495 | duck_id: wiki-review-wiki-articles-batch-review -->
-
 # Wiki Articles Batch Review — Batch 2
 
 Reviewer: wiki-critic

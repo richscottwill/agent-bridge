@@ -1,18 +1,3 @@
-<!-- DOC-0509 | duck_id: wiki-workstream-algorithmic-ads -->
-
----
-title: "Workstream 5: Algorithmic Ads"
-status: DRAFT
-doc-type: strategy
-audience: amazon-internal
-level: 2
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-04-05
-update-trigger: "AI Max test design completed, AI Max US test launches, DG Video results available, BSE video performance data, Hydra coordination status change"
-tags: [demand-gen, ai-max, algorithmic, kate-doc]
----
-
 # Workstream 5: Algorithmic Ads
 
 This document explains how the Paid Search team tested and scaled algorithmic ad formats — Demand Gen and the upcoming AI Max — to extend reach beyond traditional keyword campaigns. It supports the Testing Approach narrative for Kate and provides the evidence base for the 2026 AI Max test. After reading, you should understand the proven Demand Gen results, the AI Max test design and guardrails, and the dependencies on the Modern Search workstream.

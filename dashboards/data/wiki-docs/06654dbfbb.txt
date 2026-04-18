@@ -1,17 +1,3 @@
-<!-- DOC-0381 | duck_id: strategy-body-system-architecture -->
-
----
-title: The Body System — Architecture for Personal AI Operating Systems
-status: DRAFT
-doc-type: strategy
-audience: personal
-level: 5
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-03-25
-update-trigger: new organ added, architecture changes, system shared externally
----
-
 # The Body System — Architecture for Personal AI Operating Systems
 
 ## What This Is

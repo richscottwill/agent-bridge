@@ -1,5 +1,3 @@
-<!-- DOC-0117 | duck_id: context-brandon-sync-au-cpc-polaris -->
-
 # Brandon Sync: AU CPC and Polaris Rollout — 2026-03-23
 
 Source: Hedy session 4veBOAWYumVzlJciaLVg | Brandon sync topic | 34 min

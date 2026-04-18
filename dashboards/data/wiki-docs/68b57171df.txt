@@ -1,18 +1,3 @@
-<!-- DOC-0121 | duck_id: context-competitive-intel-tracker -->
-
----
-title: Competitive Intelligence Tracker
-status: ARCHIVED
-archived: 2026-03-25
-archive-reason: "Superseded by strategy/competitive-landscape.md"
-audience: amazon-internal
-level: 2
-owner: Richard Williams
-created: 2026-03-25
-updated: 2026-03-25
-update-trigger: weekly auction insights data, new competitor detected, IS change >5%
----
-
 # Competitive Intelligence Tracker — ARCHIVED
 
 > **ARCHIVED 2026-03-25.** Superseded by `strategy/competitive-landscape.md`. Do not update this file.

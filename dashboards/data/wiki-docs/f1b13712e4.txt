@@ -1,5 +1,3 @@
-<!-- DOC-0080 | duck_id: callout-mx-projections -->
-
 # MX Monthly Projections
 
 Tracks weekly projections vs actuals. Updated each week by the analyst agents.
