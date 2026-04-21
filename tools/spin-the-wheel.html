@@ -3,33 +3,84 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Spin the Wheel</title>
+<title>Paid Acq Wheel — AB Paid Search</title>
 <style>
   :root {
-    --bg: #0f1419;
-    --panel: #1a2028;
-    --panel-2: #242b35;
+    --ab-navy: #232f3e;
+    --ab-navy-2: #1a2432;
+    --ab-navy-3: #141b27;
+    --ab-orange: #ff9900;
+    --ab-orange-2: #ffab1f;
+    --ab-blue: #146eb4;
+    --ab-blue-2: #1a7ec7;
+    --ab-link: #1a73e8;
+    --ab-green: #137333;
     --text: #e8eef5;
-    --muted: #8a95a5;
-    --accent: #ff9900;
-    --accent-2: #146eb4;
+    --muted: #95a1b5;
+    --border: #2d3a4c;
+    --panel: #1f2a3a;
+    --panel-2: #273347;
     --danger: #d13438;
     --success: #2da44e;
-    --border: #2d3743;
+    --serp-bg: #ffffff;
+    --serp-text: #202124;
+    --serp-muted: #70757a;
   }
   * { box-sizing: border-box; }
   html, body {
     margin: 0; padding: 0; min-height: 100%;
-    background: var(--bg); color: var(--text);
+    background: linear-gradient(180deg, var(--ab-navy-3) 0%, var(--ab-navy) 100%);
+    color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   }
-  .app {
-    max-width: 1100px; margin: 0 auto; padding: 24px;
-    display: grid; grid-template-columns: 1fr 360px; gap: 24px;
+  .topbar {
+    background: var(--ab-navy-2);
+    border-bottom: 3px solid var(--ab-orange);
+    padding: 14px 24px;
+    display: flex; align-items: center; gap: 14px;
   }
-  @media (max-width: 860px) { .app { grid-template-columns: 1fr; } }
-  h1 { margin: 0 0 4px 0; font-size: 22px; letter-spacing: 0.2px; }
-  .subtitle { color: var(--muted); font-size: 13px; margin-bottom: 18px; }
+  .logo {
+    font-weight: 700; font-size: 18px; letter-spacing: -0.2px;
+    color: var(--text);
+  }
+  .logo .smile { color: var(--ab-orange); }
+  .logo .business {
+    display: inline-block; background: var(--ab-orange); color: var(--ab-navy);
+    padding: 1px 6px; border-radius: 3px; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.5px; margin-left: 4px; vertical-align: 1px;
+  }
+  .topbar .divider { color: var(--muted); }
+  .topbar .team { color: var(--muted); font-size: 13px; }
+  .topbar .team strong { color: var(--text); }
+  .app {
+    max-width: 1180px; margin: 0 auto; padding: 20px 24px 32px;
+    display: grid; grid-template-columns: 1fr 380px; gap: 20px;
+  }
+  @media (max-width: 900px) { .app { grid-template-columns: 1fr; } }
+  .query-card {
+    background: var(--serp-bg); color: var(--serp-text);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .query-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--serp-muted); font-weight: 600; margin-bottom: 6px;
+  }
+  .query-bar {
+    display: flex; align-items: center; gap: 10px;
+    border: 1px solid #dfe1e5; border-radius: 24px;
+    padding: 8px 16px; background: white;
+    transition: box-shadow 0.15s;
+  }
+  .query-bar:focus-within {
+    box-shadow: 0 1px 6px rgba(32,33,36,0.28); border-color: transparent;
+  }
+  .query-bar svg { flex-shrink: 0; }
+  .query-bar input {
+    flex: 1; border: none; outline: none; font-size: 16px;
+    font-family: inherit; color: var(--serp-text); background: transparent;
+  }
+  .query-meta { font-size: 12px; color: var(--serp-muted); margin-top: 8px; }
   .wheel-wrap {
     background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
     padding: 20px; display: flex; flex-direction: column; align-items: center;
@@ -41,39 +92,75 @@
     width: 0; height: 0;
     border-left: 18px solid transparent;
     border-right: 18px solid transparent;
-    border-top: 28px solid var(--accent);
+    border-top: 28px solid var(--ab-orange);
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
     z-index: 2;
   }
   .hub {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 72px; height: 72px; border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #3a4552, #1a2028 70%);
-    border: 3px solid var(--accent);
+    width: 88px; height: 88px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--ab-orange) 0%, #e88800 100%);
+    border: 4px solid var(--ab-navy-2);
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; user-select: none;
-    font-weight: 700; font-size: 14px; letter-spacing: 1px; color: var(--text);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+    font-weight: 800; font-size: 13px; letter-spacing: 1.5px; color: var(--ab-navy);
+    box-shadow: 0 6px 20px rgba(255,153,0,0.4);
     z-index: 2; transition: transform 0.1s;
   }
-  .hub:hover { transform: translate(-50%, -50%) scale(1.05); }
-  .hub:active { transform: translate(-50%, -50%) scale(0.95); }
-  .hub.spinning { cursor: not-allowed; opacity: 0.7; }
-  .result {
-    margin-top: 18px; min-height: 42px; padding: 10px 16px;
-    border-radius: 8px; font-size: 18px; font-weight: 600; text-align: center;
+  .hub:hover { transform: translate(-50%, -50%) scale(1.06); }
+  .hub:active { transform: translate(-50%, -50%) scale(0.94); }
+  .hub.spinning { cursor: not-allowed; opacity: 0.8; }
+  .result-card {
+    margin-top: 18px; width: 100%; max-width: 620px;
+    min-height: 50px; padding: 14px 18px;
+    border-radius: 10px;
     background: var(--panel-2); border: 1px solid var(--border);
-    width: 100%; max-width: 560px;
+    color: var(--muted); text-align: center; font-size: 14px;
   }
-  .result.winner { background: rgba(45,166,78,0.15); border-color: var(--success); color: #6fdd8d; }
+  .result-card.winner {
+    background: var(--serp-bg); color: var(--serp-text);
+    text-align: left; border-color: transparent;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    padding: 16px 20px;
+  }
+  .ad-tag {
+    display: inline-block; padding: 1px 6px; border: 1px solid var(--ab-green);
+    color: var(--ab-green); font-size: 11px; font-weight: 700;
+    border-radius: 3px; margin-right: 8px; vertical-align: 2px;
+    letter-spacing: 0.3px;
+  }
+  .result-url { color: var(--serp-text); font-size: 13px; }
+  .result-title {
+    font-size: 20px; color: var(--ab-link); font-weight: 400;
+    margin: 4px 0 6px 0; line-height: 1.3;
+  }
+  .result-title strong { font-weight: 600; }
+  .result-desc { font-size: 14px; color: #4d5156; line-height: 1.5; }
+  .result-meta {
+    margin-top: 10px; padding-top: 10px; border-top: 1px solid #ebebeb;
+    display: flex; gap: 14px; flex-wrap: wrap;
+    font-size: 12px; color: var(--serp-muted);
+  }
+  .result-meta .chip {
+    background: #f1f3f4; color: var(--serp-text);
+    padding: 2px 8px; border-radius: 10px;
+  }
+  .stats-bar {
+    display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap;
+    font-size: 12px; color: var(--muted);
+  }
+  .stats-bar .chip {
+    background: var(--panel-2); padding: 4px 10px; border-radius: 12px;
+    border: 1px solid var(--border);
+  }
   .sidebar {
     background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
     padding: 16px; display: flex; flex-direction: column; gap: 14px;
-    max-height: calc(100vh - 48px); overflow-y: auto;
+    max-height: calc(100vh - 80px); overflow-y: auto;
   }
   .section-title {
     font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
-    color: var(--muted); margin: 4px 0 2px 0; font-weight: 600;
+    color: var(--muted); margin: 4px 0 2px 0; font-weight: 700;
   }
   .row { display: flex; gap: 8px; }
   input[type="text"], textarea {
@@ -82,20 +169,20 @@
     padding: 8px 10px; font-size: 14px; font-family: inherit;
     width: 100%;
   }
-  input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--accent); }
+  input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--ab-orange); }
   button {
-    background: var(--accent-2); color: white; border: none; border-radius: 6px;
+    background: var(--ab-blue); color: white; border: none; border-radius: 6px;
     padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer;
     transition: background 0.15s, transform 0.1s;
   }
-  button:hover { background: #1a7ec7; }
+  button:hover { background: var(--ab-blue-2); }
   button:active { transform: scale(0.97); }
   button.ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
   button.ghost:hover { background: var(--panel-2); color: var(--text); }
   button.danger { background: transparent; color: var(--danger); border: 1px solid var(--border); }
   button.danger:hover { background: rgba(209,52,56,0.1); }
-  button.accent { background: var(--accent); color: #1a2028; }
-  button.accent:hover { background: #ffab1f; }
+  button.accent { background: var(--ab-orange); color: var(--ab-navy); }
+  button.accent:hover { background: var(--ab-orange-2); }
   .names-list { display: flex; flex-direction: column; gap: 6px; }
   .name-row {
     display: flex; align-items: center; gap: 10px;
@@ -106,18 +193,20 @@
   .name-row .swatch { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
   .name-row .name { flex: 1; font-size: 14px; }
   .name-row .count { font-size: 11px; color: var(--muted); }
-  .name-row input[type="checkbox"] { accent-color: var(--accent); cursor: pointer; }
+  .name-row input[type="checkbox"] { accent-color: var(--ab-orange); cursor: pointer; }
   .name-row button.x { background: transparent; color: var(--muted); padding: 2px 6px; font-size: 16px; }
   .name-row button.x:hover { color: var(--danger); background: transparent; }
-  .history-list { display: flex; flex-direction: column; gap: 4px; max-height: 200px; overflow-y: auto; }
+  .history-list { display: flex; flex-direction: column; gap: 4px; max-height: 220px; overflow-y: auto; }
   .history-row {
-    display: flex; justify-content: space-between; gap: 8px;
-    padding: 6px 10px; border-radius: 4px; background: var(--panel-2);
+    display: flex; flex-direction: column; gap: 2px;
+    padding: 8px 10px; border-radius: 6px; background: var(--panel-2);
     font-size: 12px;
   }
-  .history-row .who { font-weight: 600; }
+  .history-row .top { display: flex; justify-content: space-between; gap: 8px; }
+  .history-row .who { font-weight: 700; color: var(--text); }
   .history-row .when { color: var(--muted); font-size: 11px; }
-  .footer { color: var(--muted); font-size: 11px; text-align: center; margin-top: 12px; }
+  .history-row .task { color: var(--muted); font-size: 11px; font-style: italic; }
+  .footer { color: var(--muted); font-size: 11px; text-align: center; margin-top: 12px; line-height: 1.5; }
   .toast {
     position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
     background: var(--success); color: white; padding: 10px 18px;
@@ -126,53 +215,71 @@
     pointer-events: none;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(-6px); }
-  .stats { display: flex; gap: 12px; font-size: 12px; color: var(--muted); }
-  .stats .chip { background: var(--panel-2); padding: 4px 10px; border-radius: 12px; }
+  .confetti {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 50;
+  }
 </style>
 </head>
 <body>
+<div class="topbar">
+  <div class="logo">amazon<span class="smile">~</span><span class="business">business</span></div>
+  <span class="divider">|</span>
+  <div class="team">Paid Acq · <strong>Weekly Volunteer Wheel</strong></div>
+</div>
+
 <div class="app">
   <div>
-    <h1>🎡 Spin the Wheel</h1>
-    <div class="subtitle">Randomize a choice from your team. Share the URL — the wheel travels with its names.</div>
+    <div class="query-card">
+      <div class="query-label">🔎 Query for this week</div>
+      <div class="query-bar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9aa0a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="taskInput" placeholder="who volunteers to... present the WBR recap?" />
+      </div>
+      <div class="query-meta">About <strong id="adCount">7</strong> candidates · randomized in <strong>0.04 seconds</strong></div>
+    </div>
+
     <div class="wheel-wrap">
       <div class="wheel-stage">
         <canvas id="wheel" width="560" height="560"></canvas>
         <div class="pointer" aria-hidden="true"></div>
-        <div class="hub" id="spinBtn" title="Click to spin">SPIN</div>
+        <div class="hub" id="spinBtn" title="Click to spin">BID</div>
       </div>
-      <div class="result" id="result">Add some names, then click SPIN.</div>
-      <div class="stats" style="margin-top: 10px;">
-        <span class="chip" id="activeCount">0 active</span>
-        <span class="chip" id="totalSpins">0 spins</span>
+      <div class="result-card" id="result">
+        Type the volunteer task above, then click BID to run the auction.
+      </div>
+      <div class="stats-bar">
+        <span class="chip" id="activeCount">0 candidates</span>
+        <span class="chip" id="totalSpins">0 auctions run</span>
+        <span class="chip" id="lastWinner">—</span>
       </div>
     </div>
   </div>
 
   <aside class="sidebar">
     <div>
-      <div class="section-title">Add Name</div>
+      <div class="section-title">Add Teammate</div>
       <div class="row">
-        <input type="text" id="nameInput" placeholder="Type a name, press Enter" />
+        <input type="text" id="nameInput" placeholder="Name, then Enter" />
         <button id="addBtn">Add</button>
       </div>
     </div>
 
     <div>
       <div class="section-title">Bulk Add (one per line)</div>
-      <textarea id="bulkInput" rows="3" placeholder="Alice&#10;Bob&#10;Carol"></textarea>
+      <textarea id="bulkInput" rows="3" placeholder="Name 1&#10;Name 2"></textarea>
       <div class="row" style="margin-top: 6px;">
         <button id="bulkAddBtn" class="ghost" style="flex:1;">Add All</button>
       </div>
     </div>
 
     <div>
-      <div class="section-title">Names (☑ = on the wheel)</div>
+      <div class="section-title">Candidates (☑ = eligible)</div>
       <div class="names-list" id="namesList"></div>
     </div>
 
     <div>
-      <div class="section-title">Recent Winners</div>
+      <div class="section-title">Volunteer History</div>
       <div class="history-list" id="historyList"></div>
     </div>
 
@@ -180,78 +287,78 @@
       <button id="shareBtn" class="accent" style="flex:1;">📋 Copy Shareable Link</button>
     </div>
     <div class="row">
-      <button id="exportBtn" class="ghost" style="flex:1;">Export JSON</button>
-      <button id="importBtn" class="ghost" style="flex:1;">Import JSON</button>
+      <button id="slackBtn" class="ghost" style="flex:1;">📣 Copy Slack Message</button>
+    </div>
+    <div class="row">
+      <button id="exportBtn" class="ghost" style="flex:1;">Export</button>
+      <button id="importBtn" class="ghost" style="flex:1;">Import</button>
       <input type="file" id="importFile" accept="application/json" style="display:none;" />
     </div>
     <div class="row">
       <button id="clearHistoryBtn" class="danger" style="flex:1;">Clear History</button>
-      <button id="resetBtn" class="danger" style="flex:1;">Reset All</button>
+      <button id="resetBtn" class="danger" style="flex:1;">Reset</button>
     </div>
-    <div class="footer">State saved to this browser. Share link encodes names so others see the same wheel.</div>
+    <div class="footer">
+      Paid Acq team wheel. State saves to this browser.<br>
+      Share link carries candidates + task.
+    </div>
   </aside>
 </div>
 
 <div class="toast" id="toast">Copied</div>
+<canvas class="confetti" id="confettiCanvas"></canvas>
 
 <script>
-/* ============================================================
- * Spin the Wheel — single-file, no dependencies.
- * State is persisted in localStorage + shareable via URL hash.
- * ============================================================ */
+/* ==================================================================
+ * Paid Acq Wheel — Amazon Business Paid Search team randomizer
+ * Single-file, no deps. localStorage + URL-hash state sharing.
+ * ================================================================== */
 
-const STORAGE_KEY = 'spinWheel_v1';
+const STORAGE_KEY = 'paidAcqWheel_v2';
+const DEFAULT_TEAM = ['Brandon', 'Stacey', 'Yun', 'Richard', 'Andrew', 'Adi', 'Peter'];
+const PLACEHOLDER_TASKS = [
+  'present the WBR recap?',
+  'bring donuts next week?',
+  'take meeting notes?',
+  'kick off the standup?',
+  'run the retro?',
+  'demo their market this week?',
+  'own the weekly callout?',
+  'grab lunch for the team?'
+];
+
+/* AB paid-search palette for wheel sectors */
 const PALETTE = [
-  '#ff9900','#146eb4','#2da44e','#d13438','#8764b8',
+  '#ff9900','#146eb4','#232f3e','#2da44e','#8764b8',
   '#e3008c','#00b7c3','#ca5010','#498205','#c239b3',
-  '#038387','#8e562e','#567c8d','#d83b01','#5c2d91'
+  '#038387','#8e562e','#ffab1f','#1a7ec7'
 ];
 
 const state = {
   names: [],        // { id, label, enabled, wins }
-  history: [],      // { label, at }
+  history: [],      // { label, at, task }
+  task: '',
   spinning: false,
   currentAngle: 0,
 };
 
-// ------------- persistence -------------
+/* ------------- persistence ------------- */
 function save() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      names: state.names,
-      history: state.history,
+      names: state.names, history: state.history, task: state.task,
     }));
-  } catch (e) { /* quota/private mode — ignore */ }
+  } catch (e) {}
 }
 function loadFromStorage() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    return JSON.parse(raw);
-  } catch (e) { return null; }
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); }
+  catch (e) { return null; }
 }
 function loadFromHash() {
   if (!location.hash || location.hash.length < 2) return null;
-  try {
-    const json = decodeURIComponent(atob(location.hash.slice(1)));
-    return JSON.parse(json);
-  } catch (e) { return null; }
+  try { return JSON.parse(decodeURIComponent(atob(location.hash.slice(1)))); }
+  catch (e) { return null; }
 }
-
-function loadInitial() {
-  // URL hash wins (so shared links work even if the receiver has prior state)
-  const hash = loadFromHash();
-  const stored = loadFromStorage();
-  if (hash && Array.isArray(hash.names) && hash.names.length) {
-    // Merge: take names from hash, preserve local history.
-    state.names = hash.names.map(normalizeName);
-    state.history = (stored && Array.isArray(stored.history)) ? stored.history : [];
-  } else if (stored) {
-    state.names = (stored.names || []).map(normalizeName);
-    state.history = stored.history || [];
-  }
-}
-
 function normalizeName(n) {
   return {
     id: n.id || ('n_' + Math.random().toString(36).slice(2, 9)),
@@ -260,8 +367,24 @@ function normalizeName(n) {
     wins: Number.isFinite(n.wins) ? n.wins : 0,
   };
 }
+function loadInitial() {
+  const hash = loadFromHash();
+  const stored = loadFromStorage();
+  if (hash && Array.isArray(hash.names) && hash.names.length) {
+    state.names = hash.names.map(normalizeName);
+    state.task = hash.task || '';
+    state.history = (stored && Array.isArray(stored.history)) ? stored.history : [];
+  } else if (stored) {
+    state.names = (stored.names || []).map(normalizeName);
+    state.history = stored.history || [];
+    state.task = stored.task || '';
+  }
+  if (state.names.length === 0) {
+    state.names = DEFAULT_TEAM.map(label => normalizeName({ label, enabled: true }));
+  }
+}
 
-// ------------- rendering -------------
+/* ------------- rendering ------------- */
 const canvas = document.getElementById('wheel');
 const ctx = canvas.getContext('2d');
 
@@ -269,62 +392,50 @@ function activeNames() { return state.names.filter(n => n.enabled && n.label); }
 
 function drawWheel() {
   const names = activeNames();
-  const size = canvas.width;
-  const cx = size / 2, cy = size / 2;
-  const r = size / 2 - 8;
+  const size = canvas.width, cx = size / 2, cy = size / 2, r = size / 2 - 8;
   ctx.clearRect(0, 0, size, size);
 
-  // outer ring
   ctx.save();
   ctx.translate(cx, cy);
   ctx.rotate(state.currentAngle);
 
   if (names.length === 0) {
-    ctx.beginPath();
-    ctx.arc(0, 0, r, 0, Math.PI * 2);
-    ctx.fillStyle = '#242b35';
-    ctx.fill();
-    ctx.restore();
-    return;
+    ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2);
+    ctx.fillStyle = '#273347'; ctx.fill();
+    ctx.restore(); return;
   }
 
   const slice = (Math.PI * 2) / names.length;
   for (let i = 0; i < names.length; i++) {
-    const start = i * slice;
-    const end = start + slice;
-    // wedge
+    const start = i * slice, end = start + slice;
     ctx.beginPath();
     ctx.moveTo(0, 0);
     ctx.arc(0, 0, r, start, end);
     ctx.closePath();
     ctx.fillStyle = PALETTE[i % PALETTE.length];
     ctx.fill();
-    ctx.strokeStyle = 'rgba(0,0,0,0.25)';
+    ctx.strokeStyle = 'rgba(0,0,0,0.3)';
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    // label
     ctx.save();
     ctx.rotate(start + slice / 2);
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = '#ffffff';
-    const fontSize = Math.max(11, Math.min(22, 180 / Math.max(6, names.length)));
-    ctx.font = `600 ${fontSize}px -apple-system, "Segoe UI", Arial, sans-serif`;
-    const label = truncate(names[i].label, Math.max(10, Math.floor(r / (fontSize * 0.55))));
-    // subtle shadow for contrast
-    ctx.shadowColor = 'rgba(0,0,0,0.45)';
-    ctx.shadowBlur = 2;
-    ctx.fillText(label, r - 14, 0);
+    const fontSize = Math.max(12, Math.min(24, 200 / Math.max(5, names.length)));
+    ctx.font = `700 ${fontSize}px -apple-system, "Segoe UI", Arial, sans-serif`;
+    const label = truncate(names[i].label, Math.max(10, Math.floor(r / (fontSize * 0.5))));
+    ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 3;
+    ctx.fillText(label, r - 16, 0);
     ctx.restore();
   }
 
-  // inner ring
-  ctx.beginPath();
-  ctx.arc(0, 0, r, 0, Math.PI * 2);
-  ctx.strokeStyle = '#0f1419';
-  ctx.lineWidth = 6;
-  ctx.stroke();
+  /* inner ring + AB orange border */
+  ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2);
+  ctx.strokeStyle = '#1a2432'; ctx.lineWidth = 8; ctx.stroke();
+  ctx.beginPath(); ctx.arc(0, 0, r - 4, 0, Math.PI * 2);
+  ctx.strokeStyle = '#ff9900'; ctx.lineWidth = 2; ctx.stroke();
 
   ctx.restore();
 }
@@ -337,38 +448,33 @@ function renderNames() {
   state.names.forEach((n, i) => {
     const row = document.createElement('div');
     row.className = 'name-row' + (n.enabled ? '' : ' excluded');
+    const cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.checked = n.enabled;
+    cb.title = n.enabled ? 'Eligible' : 'Excluded';
+    cb.addEventListener('change', () => { n.enabled = cb.checked; save(); renderAll(); });
     const swatch = document.createElement('span');
     swatch.className = 'swatch';
-    swatch.style.background = n.enabled ? PALETTE[activeIndex(n.id) % PALETTE.length] : '#3a4552';
-    const cb = document.createElement('input');
-    cb.type = 'checkbox';
-    cb.checked = n.enabled;
-    cb.title = n.enabled ? 'On the wheel' : 'Excluded';
-    cb.addEventListener('change', () => { n.enabled = cb.checked; save(); renderAll(); });
+    const ai = activeIndex(n.id);
+    swatch.style.background = n.enabled && ai >= 0 ? PALETTE[ai % PALETTE.length] : '#3a4552';
     const label = document.createElement('span');
-    label.className = 'name';
-    label.textContent = n.label;
+    label.className = 'name'; label.textContent = n.label;
     const count = document.createElement('span');
     count.className = 'count';
     count.textContent = n.wins ? `×${n.wins}` : '';
     const del = document.createElement('button');
-    del.className = 'x';
-    del.textContent = '×';
-    del.title = 'Remove';
-    del.addEventListener('click', () => {
-      state.names.splice(i, 1);
-      save(); renderAll();
-    });
+    del.className = 'x'; del.textContent = '×'; del.title = 'Remove';
+    del.addEventListener('click', () => { state.names.splice(i, 1); save(); renderAll(); });
     row.append(cb, swatch, label, count, del);
     container.appendChild(row);
   });
-  document.getElementById('activeCount').textContent = `${activeNames().length} active`;
-  document.getElementById('totalSpins').textContent = `${state.history.length} spins`;
+  document.getElementById('activeCount').textContent = `${activeNames().length} candidates`;
+  document.getElementById('adCount').textContent = activeNames().length;
+  document.getElementById('totalSpins').textContent = `${state.history.length} auctions run`;
+  const last = state.history[state.history.length - 1];
+  document.getElementById('lastWinner').textContent = last ? `Last: ${last.label}` : '—';
 }
 
-function activeIndex(id) {
-  return activeNames().findIndex(n => n.id === id);
-}
+function activeIndex(id) { return activeNames().findIndex(n => n.id === id); }
 
 function renderHistory() {
   const container = document.getElementById('historyList');
@@ -376,30 +482,30 @@ function renderHistory() {
   if (state.history.length === 0) {
     const empty = document.createElement('div');
     empty.className = 'history-row';
-    empty.innerHTML = '<span class="who" style="color:var(--muted);font-weight:400;">No spins yet.</span>';
-    container.appendChild(empty);
-    return;
+    empty.innerHTML = '<span style="color:var(--muted);">No volunteers yet.</span>';
+    container.appendChild(empty); return;
   }
-  const recent = state.history.slice(-20).reverse();
+  const recent = state.history.slice(-25).reverse();
   recent.forEach(h => {
     const row = document.createElement('div');
     row.className = 'history-row';
-    const who = document.createElement('span');
-    who.className = 'who';
-    who.textContent = h.label;
-    const when = document.createElement('span');
-    when.className = 'when';
-    when.textContent = formatWhen(h.at);
-    row.append(who, when);
+    const top = document.createElement('div'); top.className = 'top';
+    const who = document.createElement('span'); who.className = 'who'; who.textContent = h.label;
+    const when = document.createElement('span'); when.className = 'when'; when.textContent = formatWhen(h.at);
+    top.append(who, when);
+    row.appendChild(top);
+    if (h.task) {
+      const task = document.createElement('span');
+      task.className = 'task'; task.textContent = `→ ${h.task}`;
+      row.appendChild(task);
+    }
     container.appendChild(row);
   });
 }
 
 function formatWhen(iso) {
-  const d = new Date(iso);
-  const now = new Date();
-  const diffMs = now - d;
-  const mins = Math.round(diffMs / 60000);
+  const d = new Date(iso), now = new Date();
+  const mins = Math.round((now - d) / 60000);
   if (mins < 1) return 'just now';
   if (mins < 60) return `${mins}m ago`;
   const hrs = Math.round(mins / 60);
@@ -409,118 +515,173 @@ function formatWhen(iso) {
 
 function renderAll() { drawWheel(); renderNames(); renderHistory(); }
 
-// ------------- spinning -------------
+/* ------------- spin ------------- */
 function spin() {
   if (state.spinning) return;
   const names = activeNames();
-  if (names.length < 2) {
-    setResult('Need at least 2 active names.', false);
-    return;
-  }
+  if (names.length < 2) { setResult('Need at least 2 eligible candidates.', null); return; }
+
+  state.task = document.getElementById('taskInput').value.trim();
+  save();
+
   state.spinning = true;
   document.getElementById('spinBtn').classList.add('spinning');
-  setResult('Spinning…', false);
+  setResult('Running auction…', null);
 
-  // Pick winner, then compute target angle that lands winner under the top pointer.
   const winnerIdx = Math.floor(Math.random() * names.length);
   const slice = (Math.PI * 2) / names.length;
-  // pointer is at the top (−π/2). We want the middle of winnerIdx slice to align with −π/2.
   const sliceMid = winnerIdx * slice + slice / 2;
-  const targetAngle = (-Math.PI / 2) - sliceMid;
-  // Add several full spins for drama.
   const turns = 6 + Math.random() * 2;
-  const finalAngle = targetAngle - turns * Math.PI * 2;
-
   const start = state.currentAngle;
-  const delta = finalAngle - ((start % (Math.PI * 2)) > 0 ? (start % (Math.PI * 2)) : (start % (Math.PI * 2)));
-  // Simpler: animate from `start` to `start + (finalAngleShifted - start)`.
-  const endAngle = start + (finalAngle - (start - (turns * Math.PI * 2) * Math.sign(0))); // see below
-  // Easier approach: just target `start - (turns*2π + sliceMid + π/2 + start mod 2π)`.
-  // Rewriting cleanly:
   const normStart = ((start % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
   const needed = ((-Math.PI / 2) - sliceMid - normStart) % (Math.PI * 2);
-  // needed is in (-2π, 2π); force negative (clockwise feel) then add spins
   const neededNeg = needed > 0 ? needed - Math.PI * 2 : needed;
-  const totalDelta = neededNeg - turns * Math.PI * 2;
-  const target = start + totalDelta;
+  const target = start + neededNeg - turns * Math.PI * 2;
 
-  const duration = 4800; // ms
-  const t0 = performance.now();
-
+  const duration = 4800, t0 = performance.now();
   function easeOutQuint(t) { return 1 - Math.pow(1 - t, 5); }
 
   function frame(now) {
     const t = Math.min(1, (now - t0) / duration);
-    const eased = easeOutQuint(t);
-    state.currentAngle = start + (target - start) * eased;
+    state.currentAngle = start + (target - start) * easeOutQuint(t);
     drawWheel();
-    if (t < 1) {
-      requestAnimationFrame(frame);
-    } else {
+    if (t < 1) { requestAnimationFrame(frame); }
+    else {
       state.spinning = false;
       document.getElementById('spinBtn').classList.remove('spinning');
       const winner = names[winnerIdx];
       winner.wins = (winner.wins || 0) + 1;
-      state.history.push({ label: winner.label, at: new Date().toISOString() });
-      save();
-      renderAll();
-      setResult(`🎉 ${winner.label}`, true);
+      state.history.push({ label: winner.label, at: new Date().toISOString(), task: state.task });
+      save(); renderAll();
+      showWinner(winner.label, state.task);
+      launchConfetti();
     }
   }
   requestAnimationFrame(frame);
 }
 
-function setResult(text, isWinner) {
+function setResult(text, _) {
   const el = document.getElementById('result');
+  el.classList.remove('winner');
   el.textContent = text;
-  el.classList.toggle('winner', !!isWinner);
 }
 
-// ------------- add / remove names -------------
+function showWinner(name, task) {
+  const el = document.getElementById('result');
+  el.classList.add('winner');
+  const taskText = task ? task : 'the thing this week';
+  const titleText = `${name} has been volunteered to ${escHtml(taskText)}`;
+  el.innerHTML = `
+    <div class="result-url"><span class="ad-tag">Ad</span>paid-acq.amazon.business › volunteer-auction › ${new Date().getFullYear()}</div>
+    <div class="result-title"><strong>${escHtml(name)}</strong> — Weekly Volunteer · Paid Acq Auction</div>
+    <div class="result-desc">Congratulations! <strong>${escHtml(name)}</strong> has been volunteered to <em>${escHtml(taskText)}</em>. Winner selected via randomized auction across ${activeNames().length} eligible candidates. No refunds.</div>
+    <div class="result-meta">
+      <span class="chip">Quality Score: 10/10</span>
+      <span class="chip">CTR: 100%</span>
+      <span class="chip">Avg. Position: 1</span>
+      <span class="chip">Conversion: Guaranteed</span>
+    </div>
+  `;
+}
+
+function escHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ------------- confetti ------------- */
+function launchConfetti() {
+  const c = document.getElementById('confettiCanvas');
+  const cx = c.getContext('2d');
+  c.width = window.innerWidth; c.height = window.innerHeight;
+  const colors = ['#ff9900', '#146eb4', '#ffab1f', '#1a7ec7', '#2da44e'];
+  const pieces = [];
+  for (let i = 0; i < 80; i++) {
+    pieces.push({
+      x: Math.random() * c.width,
+      y: -20 - Math.random() * 100,
+      vx: (Math.random() - 0.5) * 4,
+      vy: 2 + Math.random() * 4,
+      rot: Math.random() * Math.PI,
+      vr: (Math.random() - 0.5) * 0.2,
+      size: 6 + Math.random() * 6,
+      color: colors[Math.floor(Math.random() * colors.length)]
+    });
+  }
+  const t0 = performance.now();
+  function frame(now) {
+    const elapsed = now - t0;
+    cx.clearRect(0, 0, c.width, c.height);
+    pieces.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.vy += 0.08; p.rot += p.vr;
+      cx.save(); cx.translate(p.x, p.y); cx.rotate(p.rot);
+      cx.fillStyle = p.color;
+      cx.fillRect(-p.size/2, -p.size/4, p.size, p.size/2);
+      cx.restore();
+    });
+    if (elapsed < 3000) requestAnimationFrame(frame);
+    else cx.clearRect(0, 0, c.width, c.height);
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ------------- add / remove ------------- */
 function addName(label) {
   const clean = String(label || '').trim();
   if (!clean) return;
-  if (state.names.some(n => n.label.toLowerCase() === clean.toLowerCase())) return; // dedupe
+  if (state.names.some(n => n.label.toLowerCase() === clean.toLowerCase())) return;
   state.names.push(normalizeName({ label: clean, enabled: true }));
-  save();
-  renderAll();
+  save(); renderAll();
 }
-
 function bulkAdd(text) {
-  const lines = text.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
-  lines.forEach(addName);
+  text.split(/\r?\n/).map(s => s.trim()).filter(Boolean).forEach(addName);
 }
 
-// ------------- share -------------
+/* ------------- share ------------- */
 function buildShareURL() {
-  const payload = { names: state.names.map(n => ({ id: n.id, label: n.label, enabled: n.enabled, wins: 0 })) };
+  const payload = {
+    names: state.names.map(n => ({ id: n.id, label: n.label, enabled: n.enabled, wins: 0 })),
+    task: state.task,
+  };
   const hash = btoa(encodeURIComponent(JSON.stringify(payload)));
   return location.origin + location.pathname + '#' + hash;
 }
 
-async function copyShareLink() {
-  const url = buildShareURL();
-  try {
-    await navigator.clipboard.writeText(url);
-    toast('Link copied to clipboard');
-  } catch (e) {
-    // fallback
+async function copyText(text) {
+  try { await navigator.clipboard.writeText(text); return true; }
+  catch (e) {
     const ta = document.createElement('textarea');
-    ta.value = url; document.body.appendChild(ta);
+    ta.value = text; document.body.appendChild(ta);
     ta.select(); document.execCommand('copy'); ta.remove();
-    toast('Link copied');
+    return true;
   }
 }
 
+async function copyShareLink() {
+  const ok = await copyText(buildShareURL());
+  toast(ok ? 'Share link copied' : 'Copy failed');
+}
+
+async function copySlackMessage() {
+  const last = state.history[state.history.length - 1];
+  const url = buildShareURL();
+  let msg;
+  if (last) {
+    msg = `🎡 *Paid Acq Weekly Volunteer Wheel* — ${last.label} has been volunteered to ${last.task || 'the thing this week'}.\nSee the auction results: ${url}`;
+  } else {
+    msg = `🎡 *Paid Acq Weekly Volunteer Wheel* — spin to randomize:\n${url}`;
+  }
+  const ok = await copyText(msg);
+  toast(ok ? 'Slack message copied' : 'Copy failed');
+}
+
 function exportJSON() {
-  const blob = new Blob([JSON.stringify({ names: state.names, history: state.history }, null, 2)],
+  const blob = new Blob([JSON.stringify({ names: state.names, history: state.history, task: state.task }, null, 2)],
     { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `spin-wheel-${new Date().toISOString().slice(0,10)}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
+  a.download = `paid-acq-wheel-${new Date().toISOString().slice(0,10)}.json`;
+  a.click(); URL.revokeObjectURL(url);
 }
 
 function importJSON(file) {
@@ -530,8 +691,9 @@ function importJSON(file) {
       const data = JSON.parse(reader.result);
       if (Array.isArray(data.names)) state.names = data.names.map(normalizeName);
       if (Array.isArray(data.history)) state.history = data.history;
-      save();
-      renderAll();
+      if (typeof data.task === 'string') state.task = data.task;
+      save(); renderAll();
+      document.getElementById('taskInput').value = state.task;
       toast('Imported');
     } catch (e) { toast('Invalid file'); }
   };
@@ -540,12 +702,11 @@ function importJSON(file) {
 
 function toast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
+  t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 1600);
 }
 
-// ------------- wire up -------------
+/* ------------- wire up ------------- */
 document.getElementById('spinBtn').addEventListener('click', spin);
 document.getElementById('addBtn').addEventListener('click', () => {
   const inp = document.getElementById('nameInput');
@@ -558,7 +719,14 @@ document.getElementById('bulkAddBtn').addEventListener('click', () => {
   const ta = document.getElementById('bulkInput');
   bulkAdd(ta.value); ta.value = '';
 });
+document.getElementById('taskInput').addEventListener('input', e => {
+  state.task = e.target.value; save();
+});
+document.getElementById('taskInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); spin(); }
+});
 document.getElementById('shareBtn').addEventListener('click', copyShareLink);
+document.getElementById('slackBtn').addEventListener('click', copySlackMessage);
 document.getElementById('exportBtn').addEventListener('click', exportJSON);
 document.getElementById('importBtn').addEventListener('click', () => document.getElementById('importFile').click());
 document.getElementById('importFile').addEventListener('change', e => {
@@ -566,26 +734,34 @@ document.getElementById('importFile').addEventListener('change', e => {
   e.target.value = '';
 });
 document.getElementById('clearHistoryBtn').addEventListener('click', () => {
-  if (!confirm('Clear all spin history? (Keeps names.)')) return;
-  state.history = [];
-  state.names.forEach(n => n.wins = 0);
+  if (!confirm('Clear volunteer history? (Keeps candidates.)')) return;
+  state.history = []; state.names.forEach(n => n.wins = 0);
   save(); renderAll();
 });
 document.getElementById('resetBtn').addEventListener('click', () => {
-  if (!confirm('Remove all names and history?')) return;
-  state.names = []; state.history = [];
+  if (!confirm('Remove all candidates and history?')) return;
+  state.names = []; state.history = []; state.task = '';
+  document.getElementById('taskInput').value = '';
   save(); renderAll();
 });
 
-// init
+/* init */
 loadInitial();
-// seed with a gentle hint if empty
-if (state.names.length === 0) {
-  state.names = ['Alice', 'Bob', 'Carol', 'Dev'].map(label => normalizeName({ label, enabled: true }));
-  save();
+save();
+/* rotate placeholder until user types */
+const ti = document.getElementById('taskInput');
+ti.value = state.task || '';
+if (!state.task) {
+  let pi = Math.floor(Math.random() * PLACEHOLDER_TASKS.length);
+  ti.placeholder = 'who volunteers to ' + PLACEHOLDER_TASKS[pi];
+  setInterval(() => {
+    if (!ti.value && document.activeElement !== ti) {
+      pi = (pi + 1) % PLACEHOLDER_TASKS.length;
+      ti.placeholder = 'who volunteers to ' + PLACEHOLDER_TASKS[pi];
+    }
+  }, 3500);
 }
 renderAll();
-// If a share hash was loaded, strip it so subsequent edits don't get overridden on reload.
 if (location.hash) history.replaceState(null, '', location.pathname);
 </script>
 </body>
