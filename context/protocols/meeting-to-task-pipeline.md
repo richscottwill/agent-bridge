@@ -37,6 +37,54 @@ For each extracted action item:
 
 ---
 
+## Step 2.5: Consolidation Check (MANDATORY — before creating any task)
+
+**Principle: A new top-level task only earns its place if the action is Urgent + Important (or externally-bound with a hard deadline). Everything else becomes a subtask, a bullet in an existing task's notes, or a comment on a parent.**
+
+Why: Tasks have an Asana MCP cost per create/update. Standalone granular tasks fragment the agenda, multiply bucket-cap pressure, and lose the program narrative. Rolling weekly/operational items under a program parent keeps the system readable and reduces tool calls.
+
+### Step 2.5a — Classify by urgency × importance × containment
+
+| Urgent? | Important? | External hard deadline? | Action |
+|---|---|---|---|
+| Yes | Yes | — | **Standalone** top-level task |
+| Yes | No | Yes (cross-team, ≤ 2 days) | **Standalone** one-off |
+| Yes | No | No | **Subtask** of the right parent |
+| No | Yes | No | **Subtask** of the right parent |
+| No | No | — | **Bullet in parent notes** OR skip |
+
+"Urgent" = due in ≤ 3 days OR blocking someone else.
+"Important" = meaningfully advances L1-L5 OR stakeholder-visible (Brandon/Kate/Todd).
+
+### Step 2.5b — Parent program lookup
+
+Before calling `CreateTask`, check the parent-program table in `~/shared/context/protocols/signal-to-task-pipeline.md` § Step 2.5b. Examples specific to meetings:
+
+- **MX Paid Search Sync / MCS LP Review** action items → subtask of the matching MX program parent (or the in-scope MCS LP Review task). Don't create a new top-level task per meeting item.
+- **AU meetings** action items → subtask of "AU meetings - Agenda" (the recurring weekly parent) OR subtask of the relevant AU program task.
+- **Brandon 1:1 / Paid Acq Deep Dive** action items → subtask of the prep task for that 1:1.
+- **Kate / stakeholder reviews** → usually warrant standalone (external visibility), but batch under a milestone task if multiple arrive from one meeting.
+- **Hedy-captured "will follow up" items** with no deadline → bullet in parent notes, not a new task.
+
+### Step 2.5c — When "bullet in parent notes" is right
+
+For action items that are smaller than a subtask (a detail, a reference, a reminder), `UpdateTask` the parent to append one bullet under an "### Active signals / notes" subheading:
+
+```
+- [YYYY-MM-DD] [meeting_name] ([session_id]): [one-line summary]
+```
+
+### Step 2.5d — Confirm bar
+
+Before each `CreateTask`, answer:
+1. Does a parent program already exist for this action item? If yes → subtask or notes-bullet.
+2. Is this Urgent + Important OR externally-bound? If no → not top-level.
+3. Could multiple action items from this meeting be batched under one parent? If yes → batch.
+
+Default to subtask or notes-bullet when in doubt.
+
+---
+
 ## Step 3: Deduplication Check (Richard's items only)
 
 For each of Richard's action items:

@@ -40,7 +40,7 @@ body.md, spine.md, org-chart.md, rw-trainer.md, rw-task-prioritization.md, brain
 Pre-computed state files (from AM-Backend):
 - `~/shared/context/active/am-enrichment-queue.json`
 - `~/shared/context/active/am-portfolio-findings.json`
-- `~/shared/context/active/am-abps-ai-state.json`
+- `~/shared/context/active/am-wiki-state.json`
 - `~/shared/context/active/am-signals-processed.json`
 - `~/shared/context/intake/slack-digest.md`
 - `~/shared/context/intake/email-triage.md`
@@ -141,15 +141,18 @@ Display in brief:
 ### Goal Alerts
 If any goals at-risk or off-track: goal name, status, metric gap, recommended action.
 
-### ABPS AI Document Factory
-Read am-abps-ai-state.json: Intake count, In Progress pipeline stages, Review status, Active count, Archive count, alerts.
+### Wiki Pipeline Status
+Read `am-wiki-state.json` (from AM-Backend Phase 3B: `build-wiki-index.py` + `signals.wiki_candidates` + SharePoint artifacts cache). Surface:
+- Pipeline counts (draft / review / final / active / published) — one line
+- Stale article count (if >0)
+- Wiki candidates with quality_score >= 10.0 that are **not yet covered** by any local article
 
-**Wiki Candidate Surfacing (from Phase 2.5):**
-Query `signals.wiki_candidates` and cross-reference against `~/shared/wiki/agent-created/` (and the new-candidate list in `am-wiki-state.json`). For candidates with quality_score >= 10.0 that don't yet have a draft, surface in the brief:
+**Note:** The `ABPS AI - Content` Asana project is deprecated as of 2026-04-17. Do not query or write to it. Wiki work is tracked in DuckDB `wiki.publication_registry`, the Kiro dashboard (`shared/dashboards/wiki-search.html` Pipeline view), `~/shared/wiki/agent-created/`, and SharePoint `Documents/Artifacts/`.
+
 ```
-📚 WIKI CANDIDATES (from cross-channel signals):
-- [topic] — quality: [X], channels: [N], authors: [N], strength: [X]
-  → No matching ABPS AI task. Consider creating one.
+📚 WIKI CANDIDATES (uncovered topics from cross-channel signals):
+- [topic] — quality: [X], channels: [N], authors: [N]
+  → No existing article. Route to wiki-editor agent if still strong next week.
 ```
 
 ### Portfolio Status
@@ -299,26 +302,39 @@ Same pattern, grouped by project. Filter to Richard's tasks only.
 
 ---
 
-## Step 4: ABPS AI Triage
+## Step 4: Wiki Pipeline Triage
 
-Read am-abps-ai-state.json. Present untriaged Intake tasks for approval.
+**NOTE:** The `ABPS AI - Content` Asana project is deprecated as of 2026-04-17 (see soul.md). Wiki state now lives in DuckDB (`wiki.publication_registry`, `wiki.throughput`), the Kiro dashboard (`shared/dashboards/wiki-search.html` Pipeline view), local files at `~/shared/wiki/agent-created/`, and SharePoint `Documents/Artifacts/`. Do not read or write to the old Asana project.
+
+Read `am-wiki-state.json` (produced by AM-Backend phase 3B from `build-wiki-index.py` + `signals.wiki_candidates` + the SharePoint artifacts cache).
+
+Surface three things:
+
+**1. Pipeline shape** — one-line summary of dashboard counts (draft/review/final/active/published). No action needed unless counts look broken.
+
+**2. SharePoint drift** — list any local files flagged `local_newer_than_sharepoint` that are NOT `_meta/` auto-generated. Those need a sync to SharePoint (wiki-maintenance hook handles this weekly; mention only if drift is unexpected).
+
+**3. Stale articles + wiki candidates** —
+- If `stale_count > 0`: list each stale article with suggested refresh action.
+- For each entry in `new_candidates` with `quality_score >= 10.0`:
+  - If `status = "covered"`: note "enrich existing article — [action]" if `action` specifies one; otherwise no-op.
+  - If `status = "weak_candidate"`: monitor only, no action.
+  - If `status = null` or uncovered: flag for new wiki article. Route to wiki-editor agent (do NOT create an Asana task in the deprecated Content project).
 
 ```
-📥 ABPS AI Intake — [N] untriaged task(s):
+📚 WIKI PIPELINE — [N] published · [N] draft · [N] review · [N] final
 
-- TASK: [name] (GID: [gid])
-  - Routine: [bucket]
-  - Priority_RW: [level]
-  - Frequency: [cadence]
-  - Work_Product: [type]
-  - Begin Date: [YYYY-MM-DD]
-  - Due Date: [YYYY-MM-DD]
-  - Scope: [one sentence]
-- ACTION: Approve, adjust, or skip?
+SharePoint drift: [N content files newer locally] (meta-only: [N])
+Stale articles: [N]
+Candidate signals:
+  - [topic] (quality [X]): [covered by X.md — enrich with Y | new article needed | monitor]
 ```
 
-### Execute Approved Triage
-Set fields via UpdateTask. Apply date defaults. Section moves. Research subtask creation. Pipeline advancement (Steps 3B–3K from original am-triage.md Phase 1B).
+### Execute Wiki Actions
+- **Enrich existing article**: delegate to wiki-editor agent (editor → researcher → writer → critic → librarian).
+- **New article needed**: delegate to wiki-editor agent.
+- **SharePoint sync**: defer to `wiki-maintenance` hook unless drift is urgent.
+- **No action**: most runs. The wiki pipeline is self-healing; Step 4 is a readiness check, not a production step.
 
 ---
 
@@ -414,7 +430,7 @@ Extract information Brandon shared with Richard that the team should know:
 
 For each: `text`, `context` (source meeting + why it matters).
 
-#### ⭐ Above the Rest — Things That Put Me Above the Rest
+#### ⭐ Differentiate — Things That Set Me Apart
 Surface high-leverage actions from career conversations and Brandon's coaching:
 - **Annual review growth areas**: What Brandon said Richard needs to do differently (3/24 meeting).
 - **Comp review signals**: What drove the 10.5% increase, what would drive more (4/6 meeting).
@@ -423,6 +439,8 @@ Surface high-leverage actions from career conversations and Brandon's coaching:
 - **Current opportunities**: Tasks that, if done well, would demonstrate above-and-beyond performance.
 
 For each: `action` (specific thing to do), `why` (Brandon's words or career logic).
+
+**JSON key:** `differentiate` (in `command-center-data.json`).
 
 **Execution:** The agent reads Hedy session details, DuckDB signals, and Asana task state to populate these sections. The `generate-command-center.py` script handles the static data (blocks, tasks); the agent enriches with the four intelligence sections after the script runs.
 

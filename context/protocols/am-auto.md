@@ -297,6 +297,44 @@ VALUES ('am-backend', CURRENT_DATE, '[start]', '[end]', [duration],
 
 Run the full dashboard refresh pipeline to update all Command Center views:
 
+### Pre-step: Download required SharePoint sources
+
+Before invoking `refresh-all.py`, download the external sources that the pipeline parses:
+
+1. **Outbound Marketing Goals sheet** — Brandon's canonical 2026 goals:
+   ```
+   sharepoint_read_file(
+     siteUrl="https://amazon-my.sharepoint.com/personal/brandoxy_amazon_com",
+     serverRelativeUrl="/personal/brandoxy_amazon_com/Documents/Outbound Marketing Goals.xlsx",
+     savePath="/tmp/outbound-marketing-goals.xlsx"
+   )
+   ```
+   Feeds `refresh-goals.py` → `data/goals-data.json` → Goals tab + per-market goal cards.
+
+2. **Contribution inputs** — for each market-state-file goal, collect the blended signal set into `/tmp/contrib-inputs/`:
+   - `asana_completed.json` — `asana___SearchTasksInWorkspace(assignee_any=RICHARD_GID, completed=true, completed_on_before=today, sort_by=completed_at)`
+   - `slack_messages.json` — one `slack-mcp_search(query="from:@prichwil {kw} after:2026-01-01")` per top keyword per goal (see `shared/dashboards/refresh-contributions.py` GOALS list for the taxonomy). Skip Kiro-generated daily briefs (the normalizer filters them out by pattern, but reducing volume upstream is cheaper).
+   - `quip_outbound_marketing_internal.json` — `ReadInternalWebsites(https://quip-amazon.com/UZ3VOhztKN4s/Outbound-Marketing-Internal?includeComments=true)` to capture Richard's edits/comments on the team doc.
+   - `quip_docs.json` — Quip creator + commenter scan via the `explore/list_*` routes:
+     - `ReadInternalWebsites(["https://quip-amazon.com/explore/list_created?startDate=2026-01-01&endDate={today}", "https://quip-amazon.com/explore/list_commented?startDate=2026-01-01&endDate={today}"])`
+     - Write as `{richard_quip_author_id: "YAT9EAkZs9f", created: [...], commented: [...]}`. Tag shared team docs (Paid Acq Flash, Outbound Marketing Goals, Guest Testing URLs, PS Offsite, any `*WBR Callouts*`) with `shared_team_doc: true` so the normalizer skips them at doc level.
+   - `sharepoint_artifacts.json` — native-author SharePoint scan via the attribution credit matrix:
+     - Run three KQL searches (widen/narrow as market focus shifts):
+       1. `Author:"Richard Williams" (paid search OR testing OR polaris OR overlay OR weblab OR regs OR OCI OR baloo)`
+       2. `Author:"Richard Williams" (MX OR AU) (test OR keyword OR registration OR landing)`
+       3. `Author:"Richard Williams" (email overlay OR weblab OR polaris OR baloo OR enhanced match OR liveramp)`
+     - Dedupe by path, retain most-recent instance of each title.
+     - Write as `{artifacts: [{title, path, author, author_email, last_modified, last_modified_by, file_type, co_authors?, summary}]}`.
+     - Skip titles matching `SHARED_TEAM_DOC_HINTS` (WBR Callouts, MBR, Brandon 1:1, Deep Dive, AU transition, OCI Handoff, Outbound Marketing Internal) — these need paragraph-level extraction, not doc-level credit.
+     - If author contains `python-docx` / `openpyxl` prefix, mark `note: "script-generated"` — normalizer drops confidence to low and requires source verification.
+   - `email_sent.json` — `email_search(folder='sentitems', query={kw}, startDate='2026-01-01', endDate=today)` per keyword, keyed by goal title.
+   
+   Feeds `refresh-contributions.py` → `data/contributions-data.json` → My Contributions section on each market page.
+
+If any source is missing, the corresponding refresh script skips gracefully rather than failing the pipeline. The dashboard will show an empty-state message for that section.
+
+### Main step: Run the pipeline
+
 ```bash
 python3 ~/shared/dashboards/refresh-all.py
 ```
@@ -309,6 +347,11 @@ This executes in sequence:
    - Also syncs commitments to DuckDB `main.commitment_ledger` (text-hash dedup, 30-day rolling)
    - Also reads `data/ledger-actions.json` for user feedback (done/dismissed/restored) and applies to DuckDB
    - Also writes `~/shared/context/active/ledger-feedback-queue.json` with cascade instructions
+5. `refresh-body-system.py` — body system organ data → `data/body-system-data.json`
+6. `refresh-state-files.py` — 3 market state markdowns → `data/state-files-data.json`
+7. `refresh-goals.py` — Brandon's Outbound Marketing Goals xlsx → `data/goals-data.json`
+8. `refresh-contributions.py` — /tmp/contrib-inputs/* → `data/contributions-data.json`
+9. `build-wiki-index.py` — wiki corpus index
 
 Non-blocking: if any step fails, log warning and continue to Phase 6.2.
 

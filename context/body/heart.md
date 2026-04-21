@@ -337,6 +337,27 @@ Posterior_mean converges to the true keep rate per target×technique. UCB score 
 |------|---------|
 | `autoresearch_selection_weights` | UCB scores for target selection. posterior_mean + posterior_std = exploration/exploitation balance. |
 
+## Active Pipeline Experiments
+
+### PE-1: Prediction Cadence & Lead-Time Structure (2026-W17)
+
+**Status:** PHASE_1_SHIPPED (2026-04-21)  
+**Phase 1 changes:** `lead_weeks INT NULL` + `prediction_run_id VARCHAR NULL` added to ps.forecasts (DDL + ALTER). `_write_projections` computes and populates both on every INSERT. DELETE behavior unchanged — no duplicate risk. Backward compatible (NULL columns, existing queries unaffected).  
+**Hypothesis:** Explicit lead-time tagging (Arm C) produces higher Calibration Information Density than weekly-overwrite (Arm A) or multi-run-append (Arm B).
+
+| Arm | Cadence | Write behavior | Lead-time scoring |
+|-----|---------|----------------|-------------------|
+| A (control) | 1×/wk, W+1..W52, DELETE+INSERT | Overwrites unscored | None — first_pred ≈ latest_pred |
+| B | 3×/wk, W+1..W52, INSERT only | Accumulates predictions | Implicit (from forecast_date spacing) |
+| C | 1×/wk, W+1..W52, INSERT + `lead_weeks` col | Accumulates with explicit tag | Scored per bucket: 1, 2-3, 4-8, 9-16, 17+ |
+
+**Primary metric:** CID = n_scored_predictions_with_distinct_lead_times / (n_target_weeks × n_markets). Target: CID ≥ 3.0 after 4 scored weeks.  
+**Secondary:** first-vs-latest spread, lead-time error decay slope, structural event detection rate.  
+**Priors:** A=Beta(1,1), B=Beta(2,1), C=Beta(3,1).  
+**Keep rule:** CID_winner > CID_control, no pipeline reliability regression, storage < 10× baseline.  
+**Eval window:** W18-W22 (4 scored weeks minimum).  
+**Schema changes needed:** `lead_weeks INT` + `prediction_run_id VARCHAR` on `ps.forecasts`. Stop DELETE of unscored rows (Arm B/C).
+
 ## Common Failures in Using This Organ
 
 1. **Skipping Agent B on "obvious" improvements.** Every experiment needs the control. A change that looks good in isolation may score lower than the original. The delta is the signal, not the absolute score.

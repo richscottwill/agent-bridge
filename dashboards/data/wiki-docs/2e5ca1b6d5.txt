@@ -1,0 +1,30 @@
+# JP — W16 (Apr 13 – Apr 19)
+
+JP: JP drove 544 registrations (-7% WoW), with -12% spend WoW and $65 CPA (-6% WoW). April is projected at $165K spend and 2.5K registrations at $67 CPA. (vs. OP2: +29% regs, +14% spend)
+
+WoW we didn't touch budgets; spend fell -12% because Brand CPC dropped another -10%, its second straight week of double-digit compression and an 11-week low. CPA is now down three weeks running from $87 to $65 on auction efficiency, not pullback. Brand clicks held flat; regs softened on a -6% CVR as the W14 fiscal year-end peak unwinds. NB stays negligible at 2 regs.
+
+YoY we spent +17% for +9% regs, with Brand CPA still +18%. The post-MHLW efficiency gap is narrowing but not closed.
+
+Note: Golden Week falls in W18 (measured -19% LY). I'll pre-plan a ~15% W18 budget pull in next week's callout so the move is visible before the data lands.
+
+---
+
+**Weekly trend (regs):** W9: 403 → W10: 525 → W11: 514 → W12: 423 → W13: 544 → W14: 598 → W15: 583 → W16: 544
+
+**Anomalies:**
+- Brand CPC compression continues (-10% WoW, two weeks running). $1.34 is the lowest print in 11 weeks. Driver looks like post-FY auction lull plus quality score tailwind, not a competitive retreat.
+- Brand CVR softened two weeks running (2.22% → 2.09%). Still inside the post-MHLW band, but watch W17.
+- Last week's projection missed regs by -10% (projected 604, actual 544). Methodology carried the W14 peak too far; W17 projection anchors to LY W16→W17 softening instead.
+
+**W17 recommended spend:** $36K (hold at W16). Brand-dominant market with the auction doing the work; no reason to cut and no headroom to lean in (Brand clicks capped in the 26-27K band three weeks running).
+
+**W17 watch:**
+- Brand CVR: if W17 prints below 2.0%, investigate query mix and landing page.
+- Blended CPA trajectory: a fourth straight week of decline would put us in the low-$60s and worth testing whether we can extend reach without breaking efficiency.
+- Pre-GW demand: LY W17 ran -8% vs W16 as the GW lull began. Expect similar TY.
+
+**W17 optimization:**
+- Stage the W18 budget pull now: ~$6K off the Yahoo Brand Plus and Google Brand Plus portfolios, matched to the measured -19% GW suppression, so W18 doesn't burn spend on absent demand.
+- Continue holding on NB (2 regs at 0.25% CVR). APAC MCC access remains the gating issue; escalate through OCI rather than bidding into a broken funnel.
+- Use the three-week CPC trend to inform the W19 post-GW reset: if the auction stays this cheap on re-entry, there's room to test a modest lean-in on Brand exact match.

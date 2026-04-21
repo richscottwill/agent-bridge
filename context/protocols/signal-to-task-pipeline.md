@@ -42,6 +42,62 @@ Action language in Slack: questions directed at Richard, requests, deadlines, "c
 
 ---
 
+## Step 2.5: Consolidation Check (MANDATORY — before creating any task)
+
+**Principle: A new top-level task only earns its place if the signal is Urgent + Important (or externally-bound with a hard deadline that doesn't fit an existing parent). Everything else becomes a subtask, a bullet in an existing task's notes, or a comment.**
+
+Why: Tasks have an Asana MCP cost per create/update. Standalone granular tasks fragment context, multiply bucket-cap pressure, and lose the parent-program narrative. Rolling weekly/operational items under a program parent keeps the agenda readable and reduces tool calls.
+
+### Step 2.5a — Classify by urgency × importance × containment
+
+| Urgent? | Important? | External hard deadline? | Action |
+|---|---|---|---|
+| Yes | Yes | — | **Standalone** (top-level task) |
+| Yes | No | Yes (today/tomorrow, cross-team) | **Standalone** (one-off) |
+| Yes | No | No | **Subtask** of the right parent |
+| No | Yes | No | **Subtask** of the right parent |
+| No | No | — | **Bullet in parent notes** OR skip entirely |
+
+"Urgent" = due in ≤ 3 days OR blocking someone else.
+"Important" = meaningfully advances L1-L5 OR stakeholder-visible (Brandon/Kate/Todd).
+
+### Step 2.5b — Parent program lookup
+
+For each signal, check if a **program parent task** exists before creating a new top-level task. Use `SearchTasksInWorkspace(text="[program name]", assignee_any="1212732742544167", completed=false)` then make the new item a subtask via `SetParentForTask`.
+
+| Signal topic | Preferred parent (search term or gid) | Notes |
+|---|---|---|
+| MX weekly ops (budget, invoice, LP, campaign change, MCS LP Review follow-ups) | MX project top-level or "MX weekly rollup" | Create a rollup task if none exists; prefer subtask over new task |
+| AU weekly ops (LP switch, refmarker, agenda prep, handoff checks) | "AU meetings - Agenda" (recurring weekly) or AU project top-level | AU agenda is the right bucket for most Tue-sync items |
+| Paid App PAM ops (budget, PO, campaign changes, pacing) | "Paid App" parent (1212988092117041) | Existing in-progress BAU workstream |
+| Adi 1:1 prep items | "Come prepared: Bi-weekly with Adi to brainstorm usable AI" (1214055207544514) | Recurring bi-weekly parent |
+| Brandon 1:1 prep items | Most recent Brandon-1:1 prep task; create one if none within 7 days | One prep task per 1:1 cycle |
+| Dwayne Brand LP replies | Canonical "Reply to Dwayne" task (1214128635826241) | Has full draft + 7 asks + 2 UX tickets |
+| F90 audience/media/legal chain | F90 parent (1212760973200434) | 9 existing subtasks |
+| Wiki article writes | None — handled by wiki pipeline, not Asana (ABPS AI Content deprecated 2026-04-17) | Do not create tasks |
+| ABPS AI Build system work | ABPS AI Build project (1213379551525587) | Per Active Development / Shipped sections |
+
+### Step 2.5c — When "bullet in parent notes" is right
+
+If the signal is smaller than a subtask (a detail, a reference, a reminder), `UpdateTask` the parent to append one bullet under an "### Active signals / notes" subheading. Format:
+
+```
+- [YYYY-MM-DD] [source]: [one-line summary with link]
+```
+
+This keeps the trail without inflating task count.
+
+### Step 2.5d — Confirm bar
+
+Before calling `CreateTask`, the agent must answer in its own reasoning:
+1. Does a parent program already exist for this signal? (If yes, subtask or notes-bullet.)
+2. Is this Urgent + Important, OR externally-bound hard deadline? (If no, don't create top-level.)
+3. Could this be consolidated with a signal-in-hand the same cycle? (If yes, batch into one parent write.)
+
+If the agent cannot give a clear yes to standalone creation, default to subtask/bullet.
+
+---
+
 ## Step 3: Asana Deduplication Check
 
 For each high-priority signal before task creation:

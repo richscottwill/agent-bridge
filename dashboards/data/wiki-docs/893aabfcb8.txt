@@ -1,0 +1,118 @@
+# MX W16 Analysis Brief
+
+## Registration summary
+MX drove 510 registrations in W16, effectively flat WoW (+0.2% vs 509 in W15). Spend rose +7% to $27,217 at a $53 CPA (+7% WoW). ie%CCP came in at 69.8%, up marginally from 68.2% LW and still 30pp below the 100% target. The flat headline hides a Brand/NB split — Brand continued to scale while NB regs dropped -19% on a CVR decline. This is the first clean, holiday-free week since the Semana Santa cycle (W13-W14) and the trend is holding.
+
+## Why registrations changed
+Composition shifted underneath the flat total. Brand regs grew +7.6% WoW (367 → 395) on +16% Brand spend and a +8.6% click lift, while NB regs fell -19% WoW (142 → 115) on steady spend ($20.2K → $21.1K, +4.6%) because NB CVR dropped -14.6% WoW (1.32% → 1.13%). Brand CVR was effectively flat (-0.9% WoW at 7.88%), so the Brand lift was click-driven, not conversion-driven — consistent with continued coverage scaling. NB CPA jumped +29% WoW to $183, the highest reading since W9 ($161). NB CPC also climbed to $2.07 (+10% WoW), a 12-week high. Overall click volume was flat (-1% WoW) and blended CVR held steady (+1% WoW at 3.35%). The mechanical story: Brand added 28 regs on the coverage-scaling path; NB lost 27 regs because clicks converted at a lower rate. Spend grew faster than regs on both sides (Brand +16% spend for +8% regs; NB +4.6% spend for -19% regs), pushing blended CPA up 7% WoW.
+
+## Trend context
+W16 confirms the Semana Santa recovery held rather than reverting. The 8-week trajectory is W9: 262 → W10: 297 → W11: 389 → W12: 323 → W13: 350 → W14: 303 (Semana Santa suppression) → W15: 509 → W16: 510. W15's +69% rebound was not a one-week bounce. Brand regs at 395 are +77% above the 7-week baseline (224 avg) and flagged as a clear positive anomaly — expected given the continued coverage scaling (Brand spend ~$6.1K/wk in W16 vs ~$470/wk one year ago, +13x). NB has been range-bound (96-146 regs/wk for nine weeks) with no clear direction; this week's 115 sits within that band but the NB CPA spike is the first real red flag in NB in several weeks. The 5-week NB CVR trend (1.46% → 1.47% → 1.38% → 1.32% → 1.13%) is now pointing down for three consecutive weeks after the post-negative-keyword baseline of ~1.42% established in W12-W13.
+
+## Relevant actions and events
+- Negative keyword restructuring (W11): Five weeks post-change. NB CVR baseline has slipped from the W12-W13 average of ~1.42% to 1.13% in W16. Either the W12-W13 reading was a short-lived gain, or something new is pulling NB CVR down (query-mix drift, competitor IS, LP issue). Pull the NB SQR this week to diagnose.
+- Brand coverage scaling: Brand spend at $6.1K/wk continues the multi-quarter ramp. Brand CPA $15.52 is well below the $21 steady-state seen in W13 — Brand is getting cheaper as coverage broadens.
+- Adobe bid strategy: NB CPC at $2.07 is the highest in the 12-week trend. The bid strategies are paying more per click without getting matching CVR, which is mechanically what's producing the NB CPA spike.
+- OCI: planned for May 2026; not yet in market. YoY gains this week are compositional (Brand scaling + negative keywords + bid strategy maturity), not OCI-driven.
+- Seasonality: no MX holidays in W16. Clean week. Semana Santa was W13-W14; May 1 Día del Trabajo falls in W18, not W17.
+- Team signals: mx-budget-ieccp thread still active (signal strength 5.5, reinforcement count 2); Stacey flagged ie%CCP cadence shifting monthly → quarterly per Kate/Fernando (ieccp-quarterly signal); Brandon raised MX unspent-budget question with Lorena (mx-budget-transparency). R&O numbers for MX + AU are due this week (Yun-Kang).
+- W15 note ("I will hold NB spend steady and let Brand volume pull the ratio back toward 100% organically") played out directionally: ie%CCP nudged up 1.5pp on higher Brand volume, but the NB CVR softness is a new wrinkle that the W15 plan didn't anticipate.
+
+## YoY assessment
+YoY is this week's headline. Regs +196.5% (510 vs 172 LY), cost -3.5% (saved ~$1K), CPA -67.5% ($53 vs $164 LY). The gains are compositional and compounding:
+- Brand regs +457% (395 vs 71 LY) on +267% Brand spend ($6.1K vs $1.7K LY). Brand CPA -34% ($15.52 vs $23.53 LY). The 13x Brand investment is producing 5.5x Brand regs at a lower unit cost — the coverage-scaling thesis is working.
+- NB regs +14% (115 vs 101 LY) on -21% NB spend ($21K vs $27K LY). NB CPA -30% ($183 vs $263 LY). NB CVR +1% YoY (1.13% vs 1.12% LY) — this year's NB CVR dip back down to ~LY levels is the weak spot in an otherwise strong YoY story.
+- WoW pattern comparison: TY W15→W16 was flat (+0.2%); LY W15→W16 was +12%. The TY flatness reflects the higher starting point after the W15 rebound, not a slowdown.
+
+YoY improvement is stable (not accelerating this week) because NB CPA widened vs trend. The NB CVR deterioration is putting a speed bump on what had been a compounding story.
+
+## Monthly projection
+**April 2026: ~2,000 regs, ~$107K spend, ~$54 CPA.**
+
+MTD end of W16: 1,205 regs, $62,836 spend, $52.15 CPA, 18/30 days elapsed. Remaining 12 days = 8 weekdays + 4 weekend days; no MX holidays (May 1 is W18).
+
+Using W15-W16 blended daily rates:
+- Weekday avg (10 days): 84.4 regs, $4,070 spend
+- Weekend avg (5 days): 41.2 regs, $2,833 spend
+- Pure projection: (8 × 84.4) + (4 × 41.2) = 840 regs; (8 × $4,070) + (4 × $2,833) = $43,892 spend
+- Rollup: 2,045 regs / $106,728 / $52.19 CPA
+
+I'm trimming the regs estimate to ~2,000 (roughly -2%) because (a) Sat Apr 18 came in soft at 31 regs vs a weekend avg of 41, and (b) NB CVR has been trending down three weeks running and could drag the back half of the month. Spend projection holds at ~$107K because NB will continue to buy clicks at roughly the current rate even if CVR softens.
+
+**vs OP2 ($35,085 / 791 regs / $44 CPA): +205% spend, +153% regs, CPA $10 above OP2 target.** The April beat is locked in. OP2 is no longer the relevant planning number for MX — we are running at 2x spend and 2.5x regs against a plan that pre-dates the Brand coverage scaling and negative keyword wins. Worth raising to Brandon as part of the mx-budget-transparency thread.
+
+## Recommended W17 spend
+**$28,000** (+3% from W16's $27,217). Math: hold Brand at $6.0-6.3K (coverage scaling self-regulates — don't force it); lift NB ~$1K to $22K to recover some of the lost NB regs. At expected volumes (~395 Brand × $90 CCP + ~130 NB × $30 CCP = $39.4K CCP), $28K spend implies blended ie%CCP ~71% — still well under the 100% ceiling.
+
+Why not scale harder when ie%CCP has 30pp of headroom: NB CPA at $183 is +29% WoW and needs diagnosis first. Buying more expensive NB regs before I understand whether the CVR slide is a blip, a query-mix drift, or a competitor IS change would be bad capital discipline. The ie%CCP envelope is real but earns a pause, not a green light.
+
+## Flags
+- **NB CPA +29% WoW to $183** — highest since W9. Not ingester-flagged (Brand anomalies dominated) but the real watchpoint. Pull NB SQR this week.
+- **NB CVR -14.6% WoW** (1.32% → 1.13%) — third straight week of decline. 5-week trend: 1.47% → 1.38% → 1.32% → 1.13%. Below the W12-W13 post-restructuring baseline of ~1.42%. Possible causes: query-mix drift, LP issue, competitor IS change.
+- **NB CPC $2.07 — 12-week high.** Bid strategies are paying more per click. If CVR doesn't recover, NB CPA will continue rising.
+- **Brand regs +77% above 7-week baseline** — ingester anomaly. Expected given the coverage ramp; no action, just note the new level.
+- **Sat Apr 18 daily regs at 31** — below typical weekend ~41. Single-day noise so far; watch the next weekend for a pattern.
+- **ie%CCP cadence change** (ieccp-quarterly signal from Stacey): monthly → quarterly per Kate/Fernando. Doesn't change strategy but will change the reporting rhythm — callout should note the shift.
+- **mx-budget-ieccp thread** (signal strength 5.5, two reinforcements) — still active. Brandon's mx-budget-transparency question connects directly: MX is running 2x OP2 spend with 2.5x OP2 regs at 70% ie%CCP. The transparency answer is "MX is deliberately outperforming OP2 within the ie%CCP envelope."
+- **ps.forecasts W16 predictions all scored SURPRISE** — Bayesian model predicted 304 regs / $15K spend; actual 510 / $27K. The seasonal model underestimated the post-Semana Santa rebound. Flag to the forecasting pipeline: priors may need updating after the W15-W16 step change.
+
+## Suggested narrative angle
+**The flat WoW hides a Brand/NB split. Brand coverage scaling is holding the line; NB efficiency hit a speed bump.** Lead with the YoY frame (regs +197%, CPA -67% on -3.5% spend) because that is the story of the MX rebuild. Keep the WoW tight and honest about NB softness — NB CVR has been down three weeks running and NB CPA is at a multi-month high. Note ie%CCP at 70% leaves 30pp of room to scale, but the plan is to hold near W16 levels and diagnose the NB weakness before buying more expensive clicks. April tracks to ~$107K and ~2,000 regs — more than 2x OP2 on spend and 2.5x on regs.
+
+---
+
+## Appendix: key numbers
+
+**W16 vs W15 vs LY W16**
+
+| Metric | W16 | W15 | WoW | LY W16 | YoY |
+|---|---|---|---|---|---|
+| Regs | 510 | 509 | +0.2% | 172 | +196.5% |
+| Spend | $27,217 | $25,444 | +7.0% | $28,213 | -3.5% |
+| CPA | $53.37 | $49.99 | +6.8% | $164.03 | -67.5% |
+| Brand regs | 395 | 367 | +7.6% | 71 | +456.3% |
+| Brand spend | $6,129 | $5,282 | +16.0% | $1,670 | +266.9% |
+| Brand CPA | $15.52 | $14.39 | +7.8% | $23.53 | -34.0% |
+| Brand CVR | 7.88% | 7.95% | -0.9% | 3.33% | +136.8% |
+| NB regs | 115 | 142 | -19.0% | 101 | +13.9% |
+| NB spend | $21,087 | $20,163 | +4.6% | $26,543 | -20.6% |
+| NB CPA | $183.37 | $141.99 | +29.1% | $262.80 | -30.2% |
+| NB CVR | 1.128% | 1.321% | -14.6% | 1.116% | +1.1% |
+| NB CPC | $2.068 | $1.875 | +10.3% | $2.933 | -29.5% |
+| ie%CCP | 69.8% | 68.2% | +1.5pp | n/a | n/a |
+
+*ie%CCP values from shared/tools/dashboard-ingester/data/2026-w16.json (MX.ieccp.tw/lw); v_weekly.ieccp is NULL on MotherDuck.*
+
+**8-week reg trend (total / Brand / NB)**
+W9: 262 / 166 / 96 → W10: 297 / 199 / 98 → W11: 389 / 243 / 146 → W12: 323 / 202 / 121 → W13: 350 / 210 / 140 → W14: 303 / 179 / 124 (Semana Santa) → W15: 509 / 367 / 142 → W16: 510 / 395 / 115
+
+**April 2026 MTD vs OP2**
+- MTD (18d): 1,205 regs (881 Brand / 324 NB), $62,836 spend, $52.15 CPA
+- Projected EOM: ~2,000 regs / ~$107K spend / ~$54 CPA
+- OP2: 791 regs / $35,085 spend / $44 CPA
+- vs OP2: +153% regs, +205% spend, CPA $10 above target
+
+**Daily pattern used for projection**
+- W15-W16 weekday avg: 84.4 regs / $4,070 spend (10 data points)
+- W15-W16 weekend avg: 41.2 regs / $2,833 spend (5 data points)
+- Remaining 12 days = 8 weekdays + 4 weekend days, no MX holidays
+
+**Anomalies flagged by ingester (positive)**
+- Brand regs +77% above 7-week avg
+- Brand CVR +30% above 7-week avg
+- Regs +47% above 7-week avg
+- Cost +26% above 7-week avg
+- Blended CVR +26% above 7-week avg
+
+All positive anomalies are expected given Brand coverage scaling. The non-flagged NB CPA spike to $183 is the real watchpoint.
+
+**Forecast accuracy (ps.forecasts)**
+- 2026-04-15 Bayesian seasonal model predicted W16 regs = 304 (CI 231-395), cost $15,186
+- Actual: 510 regs / $27,217 → all metrics scored SURPRISE (+40% regs, +44% cost)
+- Model underestimated the post-Semana Santa step change. Priors need refresh.
+
+**Signals evidence**
+- mx-budget-ieccp (strength 5.5, 2 reinforcements, last 2026-04-16): Lena/Lorena MX registration confusion on ie%CCP cadence.
+- ieccp-quarterly (Stacey Gu, Hedy): ie%CCP reporting shifting monthly → quarterly per Kate/Fernando.
+- mx-budget-transparency (Brandon Munday): asked Lorena about MX unspent budget — connects directly to +205% OP2 spend position.
+- R&O Numbers Due (MX + AU) (Yun-Kang Chu): due this week.

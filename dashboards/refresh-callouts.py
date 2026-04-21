@@ -21,6 +21,14 @@ WIKI_DIR = HOME / "shared/wiki/callouts"
 ACTIVE_DIR = HOME / "shared/context/active/callouts"
 OUTPUT = HOME / "shared/dashboards/data/callout-data.json"
 MARKETS = ["US", "CA", "UK", "DE", "FR", "IT", "ES", "JP", "AU", "MX"]
+# Derived aggregates (computed in refresh-forecast.py). Now first-class markets:
+# they live in forecast['weekly'][...] and forecast['ly_weekly'][...] so build_entry
+# reads them the same way as raw markets. No separate aggregation path needed here.
+DERIVED_MARKETS = ["WW", "EU5"]
+ALL_BUILD_MARKETS = MARKETS + DERIVED_MARKETS
+# Display order (the order users see tabs). WW and EU5 appear; individual EU5
+# member markets (UK/DE/FR/IT/ES) are rolled up into EU5 and not shown separately.
+DISPLAY_MARKETS = ["WW", "US", "EU5", "JP", "CA", "MX", "AU"]
 
 STAKEHOLDERS = {
     "US": {"owner": "Stacey Gu (L6)", "manager": "Brandon Munday (L7)"},
@@ -143,6 +151,9 @@ def read_callout(market, wk):
     """Read the callout markdown and extract headline + full body paragraphs."""
     mk = market.lower()
     f = find_file(market, f"{mk}-2026-w{wk}.md")
+    # For WW, also accept the legacy 'ww-review-2026-wN.md' filename
+    if not f and market == "WW":
+        f = find_file("WW", f"ww-review-2026-w{wk}.md")
     if not f: return None
     text = f.read_text()
     result = {}
@@ -396,10 +407,28 @@ def extract_prose_metrics(text):
     return pm
 
 # ── Assembly ──────────────────────────────────────────────────────────
+DERIVED_MARKETS_SET = {"WW", "EU5"}
+
 def build_entry(market, wk, forecast, ww_data, proj_data):
     """Build one market+week callout entry."""
     callout = read_callout(market, wk)
-    if not callout: return None
+    if not callout:
+        # For derived markets (WW/EU5), fall back to a quantitative-only skeleton
+        # when no narrative callout file exists. We still render the chart + KPIs
+        # because forecast['weekly'][market] is populated by refresh-forecast.py.
+        if market in DERIVED_MARKETS_SET and get_weekly_metrics(forecast, market, wk):
+            callout = {
+                "period": f"W{wk}",
+                "headline": "",
+                "body_paragraphs": [],
+                "context_paragraphs": [],
+                "anomalies": [],
+                "daily_raw": "",
+                "notes": [],
+                "callout_trend": {},
+            }
+        else:
+            return None
     brief = read_data_brief(market, wk)
     fcast = get_weekly_metrics(forecast, market, wk)
 
@@ -424,10 +453,10 @@ def build_entry(market, wk, forecast, ww_data, proj_data):
         yoy = ww_data[market].get("regs_yoy")
         if yoy is not None: metrics["regs_yoy"] = yoy
 
-    # Prose fallback for narrative-only callouts
+    # Extract prose metrics (used as a LAST-resort fallback later — after LY math).
+    # We compute it here so later brand/nb detail construction can use non-YoY fields
+    # (e.g. prose CVR_wow) when forecast-derived values are absent.
     prose = extract_prose_metrics(callout.get("headline","") + " " + " ".join(callout.get("context_paragraphs",[])))
-    for k,v in prose.items():
-        if metrics.get(k) is None and v is not None: metrics[k] = v
 
     # ── Brand/NB detail ──
     brand_detail = brief.get("brand_detail") if brief else None
@@ -443,20 +472,14 @@ def build_entry(market, wk, forecast, ww_data, proj_data):
         if prose.get("nb_cvr_wow") is not None: nb_detail["cvr_wow"] = prose["nb_cvr_wow"]
         if prose.get("nb_cpa") is not None: nb_detail["cpa"] = prose["nb_cpa"]
 
-    # Merge YoY into brand/nb detail
+    # Merge YoY into brand/nb detail (from data brief first — authoritative)
     yoy = brief.get("yoy",{}) if brief else {}
     if brand_detail and yoy.get("brand_regs_yoy") is not None: brand_detail["regs_yoy"] = yoy["brand_regs_yoy"]
     if nb_detail and yoy.get("nb_regs_yoy") is not None: nb_detail["regs_yoy"] = yoy["nb_regs_yoy"]
     if nb_detail and yoy.get("nb_cpa_yoy") is not None: nb_detail["cpa_yoy"] = yoy["nb_cpa_yoy"]
-    # Prose YoY fallback
-    if brand_detail and brand_detail.get("regs_yoy") is None and prose.get("brand_regs_yoy") is not None:
-        brand_detail["regs_yoy"] = prose["brand_regs_yoy"]
-    if nb_detail and nb_detail.get("regs_yoy") is None and prose.get("nb_regs_yoy") is not None:
-        nb_detail["regs_yoy"] = prose["nb_regs_yoy"]
-    if nb_detail and nb_detail.get("cpa_yoy") is None and prose.get("nb_cpa_yoy") is not None:
-        nb_detail["cpa_yoy"] = prose["nb_cpa_yoy"]
 
-    # Compute full YoY from LY forecast data (fills gaps not covered by data briefs)
+    # Compute full YoY from LY forecast data (ground truth — runs BEFORE prose fallback
+    # so narrative claims in callout prose can't override the actual LY math).
     ly = get_ly_metrics(forecast, market, wk)
     if ly and fcast:
         def yoy_pct(ty, ly_val):
@@ -489,6 +512,17 @@ def build_entry(market, wk, forecast, ww_data, proj_data):
             if nb_detail.get("cvr") and ly.get("nb_regs") and ly.get("nb_clicks") and ly["nb_clicks"] > 0:
                 ly_nb_cvr = ly["nb_regs"] / ly["nb_clicks"] * 100
                 nb_detail["cvr_yoy"] = round((nb_detail["cvr"] - ly_nb_cvr) / ly_nb_cvr * 100, 1)
+
+    # Prose fallback — ONLY fills gaps that LY data and briefs couldn't answer.
+    # (Runs after LY so incorrect narrative claims don't override ground truth.)
+    for k,v in prose.items():
+        if metrics.get(k) is None and v is not None: metrics[k] = v
+    if brand_detail and brand_detail.get("regs_yoy") is None and prose.get("brand_regs_yoy") is not None:
+        brand_detail["regs_yoy"] = prose["brand_regs_yoy"]
+    if nb_detail and nb_detail.get("regs_yoy") is None and prose.get("nb_regs_yoy") is not None:
+        nb_detail["regs_yoy"] = prose["nb_regs_yoy"]
+    if nb_detail and nb_detail.get("cpa_yoy") is None and prose.get("nb_cpa_yoy") is not None:
+        nb_detail["cpa_yoy"] = prose["nb_cpa_yoy"]
 
     # ── vs 4-week average + fill remaining WoW/YoY gaps for Cost/CVR/Clicks ──
     avg4 = get_trailing_avg(forecast, market, wk, 4)
@@ -628,127 +662,7 @@ def build_entry(market, wk, forecast, ww_data, proj_data):
         "blocked": [],
     }
 
-def build_ww_entry(wk, forecast, ww_data):
-    """Build WW aggregate entry."""
-    if not ww_data or "_ww" not in ww_data: return None
-    ww = ww_data["_ww"]
-    decisions = []
-    for m in MARKETS:
-        fcast = get_weekly_metrics(forecast, m, wk)
-        if fcast:
-            decisions.append(f"{m}: {fcast['regs']:,} regs, ${fcast['cost']:,.0f} spend, ${fcast['cpa']:.0f} CPA")
-
-    # Cross-market anomalies: compare each market's metrics against the WW average for this week
-    anomalies = []
-    market_data = {}
-    for m in MARKETS:
-        fcast = get_weekly_metrics(forecast, m, wk)
-        prev = get_weekly_metrics(forecast, m, wk - 1)
-        if fcast and (fcast.get("regs", 0) > 0 or fcast.get("cost", 0) > 0):
-            wow_regs = None
-            if prev and prev.get("regs", 0) > 0 and fcast.get("regs", 0) > 0:
-                wow_regs = round((fcast["regs"] - prev["regs"]) / prev["regs"] * 100, 1)
-            market_data[m] = {
-                "regs": fcast.get("regs", 0),
-                "spend": fcast.get("cost", 0),
-                "cpa": fcast.get("cpa", 0),
-                "wow_regs": wow_regs,
-            }
-
-    if market_data:
-        import statistics
-        # Compare WoW% across markets — flag outliers (>1.5 stdev from mean)
-        wow_vals = {m: d["wow_regs"] for m, d in market_data.items() if d["wow_regs"] is not None}
-        if len(wow_vals) >= 3:
-            vals = list(wow_vals.values())
-            mean_wow = statistics.mean(vals)
-            stdev_wow = statistics.stdev(vals) if len(vals) > 1 else 0
-            for m, wow in wow_vals.items():
-                if stdev_wow > 0 and abs(wow - mean_wow) > 1.5 * stdev_wow:
-                    direction = "above" if wow > mean_wow else "below"
-                    flag = "good" if wow > mean_wow else "bad"
-                    anomalies.append({
-                        "metric": f"{m} WoW Regs",
-                        "value": f"{wow:+.1f}%",
-                        "avg_8wk": f"WW avg {mean_wow:+.1f}%",
-                        "deviation": f"{wow - mean_wow:+.1f}pp",
-                        "flag": flag,
-                        "category": "overall",
-                    })
-
-        # Compare CPA across markets — flag outliers
-        cpa_vals = {m: d["cpa"] for m, d in market_data.items() if d["cpa"] > 0}
-        if len(cpa_vals) >= 3:
-            vals = list(cpa_vals.values())
-            mean_cpa = statistics.mean(vals)
-            stdev_cpa = statistics.stdev(vals) if len(vals) > 1 else 0
-            for m, cpa in cpa_vals.items():
-                if stdev_cpa > 0 and abs(cpa - mean_cpa) > 1.5 * stdev_cpa:
-                    flag = "bad" if cpa > mean_cpa else "good"
-                    anomalies.append({
-                        "metric": f"{m} CPA",
-                        "value": f"${cpa:.0f}",
-                        "avg_8wk": f"WW avg ${mean_cpa:.0f}",
-                        "deviation": f"{(cpa - mean_cpa) / mean_cpa * 100:+.0f}%",
-                        "flag": flag,
-                        "category": "overall",
-                    })
-
-        # Compare regs volume — flag markets significantly above/below WW share
-        regs_vals = {m: d["regs"] for m, d in market_data.items() if d["regs"] > 0}
-        if len(regs_vals) >= 3:
-            total = sum(regs_vals.values())
-            mean_share = 100 / len(regs_vals)
-            for m, regs in regs_vals.items():
-                share = regs / total * 100
-                # Flag if share is >2x or <0.5x the equal-share baseline
-                if share > mean_share * 2:
-                    anomalies.append({
-                        "metric": f"{m} Volume Share",
-                        "value": f"{regs:,} ({share:.0f}%)",
-                        "avg_8wk": f"Equal share {mean_share:.0f}%",
-                        "deviation": f"+{share - mean_share:.0f}pp",
-                        "flag": "good",
-                        "category": "overall",
-                    })
-    # WW trend from forecast
-    ww_trend = {}
-    ww_spend = {}
-    for m in MARKETS:
-        for wk_key, val in get_weekly_trend(forecast, m, wk).items():
-            ww_trend[wk_key] = ww_trend.get(wk_key, 0) + (val or 0)
-        for wk_key, val in get_spend_trend(forecast, m, wk).items():
-            ww_spend[wk_key] = ww_spend.get(wk_key, 0) + (val or 0)
-    # WW full chart data (aggregate all markets)
-    ww_chart = []
-    max_wk_val = forecast.get("max_week", 15)
-    for w in range(1, 53):
-        entry = {"wk": w, "regs": None, "spend": None, "pred_regs": None, "pred_spend": None, "ci_lo": None, "ci_hi": None, "op2_regs": None}
-        for m in MARKETS:
-            frow = get_weekly_metrics(forecast, m, w)
-            if frow:
-                is_actual = frow.get("regs", 0) > 0 or frow.get("cost", 0) > 0
-                if is_actual:
-                    entry["regs"] = (entry["regs"] or 0) + frow.get("regs", 0)
-                    entry["spend"] = (entry["spend"] or 0) + frow.get("cost", 0)
-                if frow.get("pred_regs"):
-                    entry["pred_regs"] = (entry["pred_regs"] or 0) + frow["pred_regs"]
-                if frow.get("op2_regs"):
-                    entry["op2_regs"] = (entry["op2_regs"] or 0) + frow["op2_regs"]
-        ww_chart.append(entry)
-    return {
-        "period": f"W{wk}",
-        "headline": f"WW drove {int(ww['regs']):,} registrations ({'+' if ww['regs_wow']>0 else ''}{ww['regs_wow']:.1f}% WoW) on ${int(ww['spend']):,} spend ({'+' if ww['spend_wow']>0 else ''}{ww['spend_wow']:.1f}% WoW).",
-        "metrics": {"regs":ww["regs"],"regs_wow":ww["regs_wow"],"spend":ww["spend"],"spend_wow":ww["spend_wow"]},
-        "brand_detail": None, "nb_detail": None,
-        "weekly_trend": ww_trend, "spend_trend": ww_spend, "chart_data": ww_chart,
-        "yoy_summary": "", "pacing": {"narrative":"WW aggregate — see individual markets."},
-        "projections": {}, "decisions": decisions,
-        "external_factors": [{"text":c,"important":True} for c in ww_data.get("_callouts",[])],
-        "anomalies": anomalies, "blocked": [],
-    }
-
-# ── Main ──────────────────────────────────────────────────────────────
+# ── Cross-market analysis ────────────────────────────────────────────
 def build_cross_market_anomalies(wk, forecast):
     """Compare markets against each other for the same week."""
     anomalies = []
@@ -784,336 +698,7 @@ def build_cross_market_anomalies(wk, forecast):
                 anomalies.append({"metric": f"{m} CPA", "value": f"${cpa:.0f}", "avg_8wk": f"WW avg ${mean_cpa:.0f}", "deviation": f"{(cpa - mean_cpa) / mean_cpa * 100:+.0f}%", "flag": flag, "category": "overall"})
     return anomalies
 
-EU5_MARKETS = ["UK", "DE", "FR", "IT", "ES"]
-# Display order: WW, US, EU5, JP, CA, MX, AU
-DISPLAY_MARKETS = ["WW", "US", "EU5", "JP", "CA", "MX", "AU"]
-
-def build_aggregate_entry(label, member_markets, wk, forecast, callouts_dict, proj_data):
-    """Build an aggregate entry (EU5 or WW) by summing member market data."""
-    # Aggregate metrics from forecast
-    agg_regs = 0; agg_spend = 0; agg_brand = 0; agg_nb = 0
-    prev_regs = 0; prev_spend = 0
-    has_data = False
-    for m in member_markets:
-        fcast = get_weekly_metrics(forecast, m, wk)
-        prev = get_weekly_metrics(forecast, m, wk - 1)
-        if fcast and (fcast.get("regs", 0) > 0):
-            has_data = True
-            agg_regs += fcast.get("regs", 0)
-            agg_spend += fcast.get("cost", 0)
-            agg_brand += fcast.get("brand_regs", 0) or 0
-            agg_nb += fcast.get("nb_regs", 0) or 0
-        if prev and prev.get("regs", 0) > 0:
-            prev_regs += prev.get("regs", 0)
-            prev_spend += prev.get("cost", 0)
-    if not has_data:
-        return None
-
-    regs_wow = round((agg_regs - prev_regs) / prev_regs * 100, 1) if prev_regs > 0 else None
-    spend_wow = round((agg_spend - prev_spend) / prev_spend * 100, 1) if prev_spend > 0 else None
-    agg_cpa = round(agg_spend / agg_regs, 2) if agg_regs > 0 else None
-    cpa_wow = None
-    if prev_regs > 0 and prev_spend > 0:
-        prev_cpa = prev_spend / prev_regs
-        cpa_wow = round((agg_cpa - prev_cpa) / prev_cpa * 100, 1) if agg_cpa else None
-
-    metrics = {"regs": agg_regs, "spend": agg_spend, "cpa": agg_cpa,
-               "regs_wow": regs_wow, "spend_wow": spend_wow, "cpa_wow": cpa_wow,
-               "brand_regs": agg_brand, "nb_regs": agg_nb}
-
-    # Aggregate brand/nb detail: regs, spend, clicks, CPA, CVR with WoW
-    agg_brand_spend = 0; agg_nb_spend = 0
-    agg_brand_clicks = 0; agg_nb_clicks = 0
-    prev_brand = 0; prev_nb = 0
-    prev_brand_spend = 0; prev_nb_spend = 0
-    prev_brand_clicks = 0; prev_nb_clicks = 0
-    for m in member_markets:
-        fcast = get_weekly_metrics(forecast, m, wk)
-        prev = get_weekly_metrics(forecast, m, wk - 1)
-        # Current week: get brand/nb spend from data brief if available, else estimate from ratio
-        mc = (callouts_dict.get(m, {}).get(f"W{wk}") or {})
-        bd = mc.get("brand_detail") or {}
-        nd = mc.get("nb_detail") or {}
-        if bd.get("cpa") and bd.get("regs"):
-            agg_brand_spend += bd["cpa"] * bd["regs"]
-        elif fcast and fcast.get("brand_regs") and fcast.get("cost") and fcast.get("regs"):
-            agg_brand_spend += fcast["cost"] * fcast["brand_regs"] / fcast["regs"]
-        if nd.get("cpa") and nd.get("regs"):
-            agg_nb_spend += nd["cpa"] * nd["regs"]
-        elif fcast and fcast.get("nb_regs") and fcast.get("cost") and fcast.get("regs"):
-            agg_nb_spend += fcast["cost"] * fcast["nb_regs"] / fcast["regs"]
-        if bd.get("clicks"): agg_brand_clicks += bd["clicks"]
-        if nd.get("clicks"): agg_nb_clicks += nd["clicks"]
-        # Previous week
-        if prev and prev.get("brand_regs"): prev_brand += prev["brand_regs"]
-        if prev and prev.get("nb_regs"): prev_nb += prev["nb_regs"]
-        # Prev brand/nb spend estimate
-        mc_prev = (callouts_dict.get(m, {}).get(f"W{wk-1}") or {})
-        bd_prev = mc_prev.get("brand_detail") or {}
-        nd_prev = mc_prev.get("nb_detail") or {}
-        if bd_prev.get("cpa") and bd_prev.get("regs"):
-            prev_brand_spend += bd_prev["cpa"] * bd_prev["regs"]
-        elif prev and prev.get("brand_regs") and prev.get("cost") and prev.get("regs"):
-            prev_brand_spend += prev["cost"] * prev["brand_regs"] / prev["regs"]
-        if nd_prev.get("cpa") and nd_prev.get("regs"):
-            prev_nb_spend += nd_prev["cpa"] * nd_prev["regs"]
-        elif prev and prev.get("nb_regs") and prev.get("cost") and prev.get("regs"):
-            prev_nb_spend += prev["cost"] * prev["nb_regs"] / prev["regs"]
-        if bd_prev.get("clicks"): prev_brand_clicks += bd_prev["clicks"]
-        if nd_prev.get("clicks"): prev_nb_clicks += nd_prev["clicks"]
-
-    brand_cpa = round(agg_brand_spend / agg_brand, 2) if agg_brand > 0 and agg_brand_spend > 0 else None
-    nb_cpa = round(agg_nb_spend / agg_nb, 2) if agg_nb > 0 and agg_nb_spend > 0 else None
-    brand_cvr = round(agg_brand / agg_brand_clicks * 100, 2) if agg_brand_clicks > 0 else None
-    nb_cvr = round(agg_nb / agg_nb_clicks * 100, 2) if agg_nb_clicks > 0 else None
-    prev_brand_cpa = prev_brand_spend / prev_brand if prev_brand > 0 and prev_brand_spend > 0 else None
-    prev_nb_cpa = prev_nb_spend / prev_nb if prev_nb > 0 and prev_nb_spend > 0 else None
-
-    brand_detail = {"regs": float(agg_brand)}
-    if agg_brand_spend > 0: brand_detail["cost"] = round(agg_brand_spend)
-    if prev_brand > 0: brand_detail["regs_wow"] = round((agg_brand - prev_brand) / prev_brand * 100, 1)
-    if brand_cpa: brand_detail["cpa"] = brand_cpa
-    if prev_brand_cpa and brand_cpa: brand_detail["cpa_wow"] = round((brand_cpa - prev_brand_cpa) / prev_brand_cpa * 100, 1)
-    if agg_brand_spend > 0 and prev_brand_spend > 0: brand_detail["cost_wow"] = round((agg_brand_spend - prev_brand_spend) / prev_brand_spend * 100, 1)
-    if agg_brand_clicks > 0: brand_detail["clicks"] = float(agg_brand_clicks)
-    if prev_brand_clicks > 0 and agg_brand_clicks > 0: brand_detail["clicks_wow"] = round((agg_brand_clicks - prev_brand_clicks) / prev_brand_clicks * 100, 1)
-    if brand_cvr: brand_detail["cvr"] = brand_cvr
-    prev_brand_cvr = round(prev_brand / prev_brand_clicks * 100, 2) if prev_brand_clicks > 0 and prev_brand > 0 else None
-    if brand_cvr and prev_brand_cvr: brand_detail["cvr_wow"] = round((brand_cvr - prev_brand_cvr) / prev_brand_cvr * 100, 1)
-
-    nb_detail = {"regs": float(agg_nb)}
-    if agg_nb_spend > 0: nb_detail["cost"] = round(agg_nb_spend)
-    if prev_nb > 0: nb_detail["regs_wow"] = round((agg_nb - prev_nb) / prev_nb * 100, 1)
-    if nb_cpa: nb_detail["cpa"] = nb_cpa
-    if prev_nb_cpa and nb_cpa: nb_detail["cpa_wow"] = round((nb_cpa - prev_nb_cpa) / prev_nb_cpa * 100, 1)
-    if agg_nb_spend > 0 and prev_nb_spend > 0: nb_detail["cost_wow"] = round((agg_nb_spend - prev_nb_spend) / prev_nb_spend * 100, 1)
-    if agg_nb_clicks > 0: nb_detail["clicks"] = float(agg_nb_clicks)
-    if prev_nb_clicks > 0 and agg_nb_clicks > 0: nb_detail["clicks_wow"] = round((agg_nb_clicks - prev_nb_clicks) / prev_nb_clicks * 100, 1)
-    if nb_cvr: nb_detail["cvr"] = nb_cvr
-    prev_nb_cvr = round(prev_nb / prev_nb_clicks * 100, 2) if prev_nb_clicks > 0 and prev_nb > 0 else None
-    if nb_cvr and prev_nb_cvr: nb_detail["cvr_wow"] = round((nb_cvr - prev_nb_cvr) / prev_nb_cvr * 100, 1)
-    if nb_cpa: metrics["nb_cpa"] = nb_cpa
-
-    # Aggregate YoY: volume-weighted average of per-market YoY%
-    total_with_yoy = 0; weighted_yoy = 0
-    spend_yoy_num = 0; spend_yoy_den = 0
-    cpa_yoy_num = 0; cpa_yoy_den = 0
-    brand_yoy_num = 0; brand_yoy_den = 0
-    nb_yoy_num = 0; nb_yoy_den = 0
-    nb_cpa_yoy_num = 0; nb_cpa_yoy_den = 0
-    for m in member_markets:
-        mc = callouts_dict.get(m, {}).get(f"W{wk}")
-        if not mc: continue
-        mregs = mc.get("metrics", {}).get("regs", 0) or 0
-        mspend = mc.get("metrics", {}).get("spend", 0) or 0
-        myoy = mc.get("metrics", {}).get("regs_yoy")
-        msyoy = mc.get("metrics", {}).get("spend_yoy")
-        mcyoy = mc.get("metrics", {}).get("cpa_yoy")
-        if myoy is not None and mregs > 0:
-            total_with_yoy += mregs; weighted_yoy += mregs * myoy
-        if msyoy is not None and mspend > 0:
-            spend_yoy_num += mspend * msyoy; spend_yoy_den += mspend
-        if mcyoy is not None and mregs > 0:
-            cpa_yoy_num += mregs * mcyoy; cpa_yoy_den += mregs
-        bd_m = mc.get("brand_detail") or {}
-        nd_m = mc.get("nb_detail") or {}
-        if bd_m.get("regs_yoy") is not None and bd_m.get("regs", 0):
-            brand_yoy_num += bd_m["regs"] * bd_m["regs_yoy"]; brand_yoy_den += bd_m["regs"]
-        if nd_m.get("regs_yoy") is not None and nd_m.get("regs", 0):
-            nb_yoy_num += nd_m["regs"] * nd_m["regs_yoy"]; nb_yoy_den += nd_m["regs"]
-        if nd_m.get("cpa_yoy") is not None and nd_m.get("regs", 0):
-            nb_cpa_yoy_num += nd_m["regs"] * nd_m["cpa_yoy"]; nb_cpa_yoy_den += nd_m["regs"]
-    if total_with_yoy > 0: metrics["regs_yoy"] = round(weighted_yoy / total_with_yoy, 1)
-    if spend_yoy_den > 0: metrics["spend_yoy"] = round(spend_yoy_num / spend_yoy_den, 1)
-    if cpa_yoy_den > 0: metrics["cpa_yoy"] = round(cpa_yoy_num / cpa_yoy_den, 1)
-    if brand_yoy_den > 0: brand_detail["regs_yoy"] = round(brand_yoy_num / brand_yoy_den, 1)
-    if nb_yoy_den > 0: nb_detail["regs_yoy"] = round(nb_yoy_num / nb_yoy_den, 1)
-    if nb_cpa_yoy_den > 0: nb_detail["cpa_yoy"] = round(nb_cpa_yoy_num / nb_cpa_yoy_den, 1)
-
-    # Compute aggregate YoY from LY forecast data for fields not covered by member markets
-    ly_brand_regs = 0; ly_nb_regs = 0; ly_brand_cost = 0; ly_nb_cost = 0
-    ly_brand_clicks = 0; ly_nb_clicks = 0
-    for m in member_markets:
-        ly_m = get_ly_metrics(forecast, m, wk)
-        if ly_m:
-            ly_brand_regs += ly_m.get("brand_regs", 0) or 0
-            ly_nb_regs += ly_m.get("nb_regs", 0) or 0
-            ly_brand_cost += ly_m.get("brand_cost", 0) or 0
-            ly_nb_cost += ly_m.get("nb_cost", 0) or 0
-            ly_brand_clicks += ly_m.get("brand_clicks", 0) or 0
-            ly_nb_clicks += ly_m.get("nb_clicks", 0) or 0
-    def yoy_pct(ty, ly_val):
-        if ty and ly_val and ly_val > 0: return round((ty - ly_val) / ly_val * 100, 1)
-        return None
-    if brand_detail.get("cpa_yoy") is None and brand_cpa and ly_brand_regs > 0 and ly_brand_cost > 0:
-        brand_detail["cpa_yoy"] = yoy_pct(brand_cpa, ly_brand_cost / ly_brand_regs)
-    if brand_detail.get("cost_yoy") is None and agg_brand_spend > 0 and ly_brand_cost > 0:
-        brand_detail["cost_yoy"] = yoy_pct(agg_brand_spend, ly_brand_cost)
-    if brand_detail.get("clicks_yoy") is None and agg_brand_clicks > 0 and ly_brand_clicks > 0:
-        brand_detail["clicks_yoy"] = yoy_pct(agg_brand_clicks, ly_brand_clicks)
-    if brand_detail.get("cvr_yoy") is None and brand_cvr and ly_brand_regs > 0 and ly_brand_clicks > 0:
-        ly_b_cvr = ly_brand_regs / ly_brand_clicks * 100
-        brand_detail["cvr_yoy"] = round((brand_cvr - ly_b_cvr) / ly_b_cvr * 100, 1)
-    if nb_detail.get("cost_yoy") is None and agg_nb_spend > 0 and ly_nb_cost > 0:
-        nb_detail["cost_yoy"] = yoy_pct(agg_nb_spend, ly_nb_cost)
-    if nb_detail.get("clicks_yoy") is None and agg_nb_clicks > 0 and ly_nb_clicks > 0:
-        nb_detail["clicks_yoy"] = yoy_pct(agg_nb_clicks, ly_nb_clicks)
-    if nb_detail.get("cvr_yoy") is None and nb_cvr and ly_nb_regs > 0 and ly_nb_clicks > 0:
-        ly_n_cvr = ly_nb_regs / ly_nb_clicks * 100
-        nb_detail["cvr_yoy"] = round((nb_cvr - ly_n_cvr) / ly_n_cvr * 100, 1)
-
-    # ── vs 4-week average for aggregates ──
-    def vsa(ty, avg_val):
-        if ty and avg_val and avg_val > 0: return round((ty - avg_val) / avg_val * 100, 1)
-        return None
-    prev4_regs = []; prev4_spend = []; prev4_brand = []; prev4_nb = []
-    prev4_brand_cost = []; prev4_nb_cost = []
-    prev4_brand_clicks = []; prev4_nb_clicks = []
-    for pw in range(wk - 4, wk):
-        wr = 0; ws = 0; wb = 0; wn = 0; wbc = 0; wnc = 0; wbcl = 0; wncl = 0
-        for m in member_markets:
-            fr = get_weekly_metrics(forecast, m, pw)
-            if fr and fr.get("regs", 0) > 0:
-                wr += fr.get("regs", 0); ws += fr.get("cost", 0)
-                wb += fr.get("brand_regs", 0) or 0; wn += fr.get("nb_regs", 0) or 0
-                wbcl += fr.get("brand_clicks", 0) or 0; wncl += fr.get("nb_clicks", 0) or 0
-                if fr.get("regs") and fr.get("cost"):
-                    wbc += fr["cost"] * (fr.get("brand_regs", 0) or 0) / fr["regs"]
-                    wnc += fr["cost"] * (fr.get("nb_regs", 0) or 0) / fr["regs"]
-        if wr > 0:
-            prev4_regs.append(wr); prev4_spend.append(ws)
-            prev4_brand.append(wb); prev4_nb.append(wn)
-            prev4_brand_cost.append(wbc); prev4_nb_cost.append(wnc)
-            prev4_brand_clicks.append(wbcl); prev4_nb_clicks.append(wncl)
-    if prev4_regs:
-        n4 = len(prev4_regs)
-        ar = sum(prev4_regs) / n4; asp = sum(prev4_spend) / n4
-        metrics["regs_vs4wk"] = vsa(agg_regs, ar)
-        metrics["spend_vs4wk"] = vsa(agg_spend, asp)
-        if agg_cpa and ar > 0 and asp > 0: metrics["cpa_vs4wk"] = vsa(agg_cpa, asp / ar)
-        ab = sum(prev4_brand) / n4; an = sum(prev4_nb) / n4
-        brand_detail["regs_vs4wk"] = vsa(agg_brand, ab)
-        nb_detail["regs_vs4wk"] = vsa(agg_nb, an)
-        abc = sum(prev4_brand_cost) / n4; anc = sum(prev4_nb_cost) / n4
-        if brand_cpa and ab > 0 and abc > 0: brand_detail["cpa_vs4wk"] = vsa(brand_cpa, abc / ab)
-        if nb_cpa and an > 0 and anc > 0: nb_detail["cpa_vs4wk"] = vsa(nb_cpa, anc / an)
-        # Cost vs4wk
-        if agg_brand_spend > 0: brand_detail["cost_vs4wk"] = vsa(agg_brand_spend, abc)
-        if agg_nb_spend > 0: nb_detail["cost_vs4wk"] = vsa(agg_nb_spend, anc)
-        # Clicks vs4wk
-        abcl = sum(prev4_brand_clicks) / n4; ancl = sum(prev4_nb_clicks) / n4
-        if agg_brand_clicks > 0 and abcl > 0: brand_detail["clicks_vs4wk"] = vsa(agg_brand_clicks, abcl)
-        if agg_nb_clicks > 0 and ancl > 0: nb_detail["clicks_vs4wk"] = vsa(agg_nb_clicks, ancl)
-        # CVR vs4wk
-        if brand_cvr and ab > 0 and abcl > 0:
-            avg_b_cvr = ab / abcl * 100
-            brand_detail["cvr_vs4wk"] = round((brand_cvr - avg_b_cvr) / avg_b_cvr * 100, 1)
-        if nb_cvr and an > 0 and ancl > 0:
-            avg_n_cvr = an / ancl * 100
-            nb_detail["cvr_vs4wk"] = round((nb_cvr - avg_n_cvr) / avg_n_cvr * 100, 1)
-
-    chart = []
-    max_wk = forecast.get("max_week", 15)
-    for w in range(1, 53):
-        entry = {"wk": w, "regs": None, "spend": None, "pred_regs": None, "pred_spend": None, "ci_lo": None, "ci_hi": None, "op2_regs": None}
-        for m in member_markets:
-            frow = get_weekly_metrics(forecast, m, w)
-            if frow:
-                is_actual = frow.get("regs", 0) > 0 or frow.get("cost", 0) > 0
-                if is_actual:
-                    entry["regs"] = (entry["regs"] or 0) + frow.get("regs", 0)
-                    entry["spend"] = (entry["spend"] or 0) + frow.get("cost", 0)
-                if frow.get("pred_regs"): entry["pred_regs"] = (entry["pred_regs"] or 0) + frow["pred_regs"]
-                if frow.get("pred_cost"): entry["pred_spend"] = (entry["pred_spend"] or 0) + frow["pred_cost"]
-                if frow.get("ci_lo"): entry["ci_lo"] = (entry["ci_lo"] or 0) + frow["ci_lo"]
-                if frow.get("ci_hi"): entry["ci_hi"] = (entry["ci_hi"] or 0) + frow["ci_hi"]
-                if frow.get("op2_regs"): entry["op2_regs"] = (entry["op2_regs"] or 0) + frow["op2_regs"]
-        chart.append(entry)
-
-    # Aggregate projections
-    projections = {}
-    if proj_data:
-        for horizon, key in [("next_week","next_week"),("month","month_end"),("quarter","quarter_end")]:
-            agg_proj = {"regs":0,"spend":0,"ci_lo":0,"ci_hi":0}
-            has_proj = False
-            for m in member_markets:
-                pd = proj_data.get(horizon,{}).get(m)
-                if pd:
-                    has_proj = True
-                    agg_proj["regs"] += pd.get("regs") or 0
-                    agg_proj["spend"] += pd.get("spend") or 0
-                    if pd.get("ci_lo"): agg_proj["ci_lo"] += pd["ci_lo"]
-                    if pd.get("ci_hi"): agg_proj["ci_hi"] += pd["ci_hi"]
-            if has_proj:
-                cpa = round(agg_proj["spend"] / agg_proj["regs"], 0) if agg_proj["regs"] > 0 else None
-                projections[key] = {
-                    "period": f"W{wk+1}" if horizon=="next_week" else ("Current Month" if horizon=="month" else "Q2 2026"),
-                    "regs_proj": agg_proj["regs"], "spend_proj": agg_proj["spend"], "cpa_proj": cpa,
-                    "ci_lo": agg_proj["ci_lo"] or None, "ci_hi": agg_proj["ci_hi"] or None,
-                }
-
-    # Try to find a callout file for the aggregate (e.g., eu5-2026-w15.md)
-    callout_text = ""
-    headline = f"{label} drove {agg_regs:,} registrations ({'+' if regs_wow and regs_wow>0 else ''}{regs_wow or 0:.1f}% WoW) on ${agg_spend:,.0f} spend."
-    for base in [WIKI_DIR, ACTIVE_DIR]:
-        cf = base / label.lower() / f"{label.lower()}-2026-w{wk}.md"
-        if cf.exists():
-            parsed = read_callout_raw(cf)
-            if parsed:
-                callout_text = parsed.get("full_body", "")
-                headline = parsed.get("headline", headline)
-            break
-
-    # Per-market decisions
-    decisions = []
-    for m in member_markets:
-        fcast = get_weekly_metrics(forecast, m, wk)
-        if fcast and fcast.get("regs", 0) > 0:
-            decisions.append(f"{m}: {fcast['regs']:,} regs, ${fcast['cost']:,.0f} spend, ${fcast['cpa']:.0f} CPA")
-
-    return {
-        "period": f"W{wk}",
-        "headline": headline,
-        "full_callout": callout_text or headline,
-        "metrics": metrics,
-        "brand_detail": brand_detail,
-        "nb_detail": nb_detail,
-        "weekly_trend": {}, "spend_trend": {},
-        "chart_data": chart,
-        "yoy_summary": "",
-        "pacing": {"narrative": f"{label} aggregate."},
-        "projections": projections,
-        "decisions": decisions,
-        "external_factors": [],
-        "anomalies": [],
-        "blocked": [],
-    }
-
-def read_callout_raw(filepath):
-    """Read a callout file and return headline + full body."""
-    text = filepath.read_text()
-    lines = text.strip().split("\n")
-    body = []
-    in_fm = False
-    past_header = False
-    for line in lines:
-        if line.strip() == "---":
-            in_fm = not in_fm; continue
-        if in_fm: continue
-        if line.startswith("#"):
-            past_header = True; continue
-        if line.startswith("<!--"): continue
-        if past_header and line.strip():
-            body.append(line.strip())
-    headline_parts = []
-    for line in body:
-        if not line: break
-        headline_parts.append(line)
-    return {
-        "headline": " ".join(headline_parts),
-        "full_body": "\n\n".join(body),
-    }
-
+# ── Main ──────────────────────────────────────────────────────────────
 def main():
     forecast = load_forecast()
 
@@ -1149,37 +734,55 @@ def main():
         pd = read_projections(w)
         if pd: proj_data[w] = pd
 
-    # Build individual market entries (all 10)
+    # Build all market entries (raw + derived) via the unified build_entry path.
+    # WW and EU5 read their pre-aggregated rows from forecast['weekly'][market]
+    # which are populated by refresh-forecast.py.
     callouts = {}
-    for market in MARKETS:
+    for market in ALL_BUILD_MARKETS:
         callouts[market] = {}
         for w in weeks:
             entry = build_entry(market, w, forecast, ww_summaries.get(w), proj_data.get(w))
-            if entry: callouts[market][f"W{w}"] = entry
+            if entry:
+                callouts[market][f"W{w}"] = entry
 
-    # Build WW aggregate using same aggregation as EU5
-    callouts["WW"] = {}
+    # Post-enrich WW with cross-market anomalies and the WW summary narrative.
+    # (Cross-market comparison still iterates the 10 raw markets, not WW itself.)
     for w in weeks:
-        entry = build_aggregate_entry("WW", MARKETS, w, forecast, callouts, proj_data.get(w))
-        if entry:
-            # Enrich with WW summary callout text if available
-            ww_sum = ww_summaries.get(w)
-            if ww_sum and ww_sum.get("_ww"):
-                ww = ww_sum["_ww"]
-                entry["headline"] = f"WW drove {int(ww['regs']):,} registrations ({'+' if ww['regs_wow']>0 else ''}{ww['regs_wow']:.1f}% WoW) on ${int(ww['spend']):,} spend ({'+' if ww['spend_wow']>0 else ''}{ww['spend_wow']:.1f}% WoW)."
-            if ww_sum and ww_sum.get("_callouts"):
-                entry["external_factors"] = [{"text":c,"important":True} for c in ww_sum["_callouts"]]
-            # Cross-market anomalies
-            entry["anomalies"] = build_cross_market_anomalies(w, forecast)
-            callouts["WW"][f"W{w}"] = entry
+        wkey = f"W{w}"
+        if wkey not in callouts.get("WW", {}):
+            continue
+        entry = callouts["WW"][wkey]
+        ww_sum = ww_summaries.get(w)
+        if ww_sum and ww_sum.get("_callouts"):
+            entry["external_factors"] = [{"text": c, "important": True} for c in ww_sum["_callouts"]]
+        # Cross-market anomalies override the standard per-market anomaly list for WW
+        cm_anoms = build_cross_market_anomalies(w, forecast)
+        if cm_anoms:
+            entry["anomalies"] = cm_anoms
+        # Per-market decision breakdown (unique to WW)
+        decisions = []
+        for m in MARKETS:
+            fcast = get_weekly_metrics(forecast, m, w)
+            if fcast and fcast.get("regs", 0) > 0:
+                decisions.append(f"{m}: {fcast['regs']:,} regs, ${fcast['cost']:,.0f} spend, ${fcast['cpa']:.0f} CPA")
+        if decisions:
+            entry["decisions"] = decisions
 
-    # Build EU5 aggregate
-    callouts["EU5"] = {}
+    # Post-enrich EU5 with per-market decision breakdown.
     for w in weeks:
-        entry = build_aggregate_entry("EU5", EU5_MARKETS, w, forecast, callouts, proj_data.get(w))
-        if entry: callouts["EU5"][f"W{w}"] = entry
+        wkey = f"W{w}"
+        if wkey not in callouts.get("EU5", {}):
+            continue
+        entry = callouts["EU5"][wkey]
+        decisions = []
+        for m in ["UK", "DE", "FR", "IT", "ES"]:
+            fcast = get_weekly_metrics(forecast, m, w)
+            if fcast and fcast.get("regs", 0) > 0:
+                decisions.append(f"{m}: {fcast['regs']:,} regs, ${fcast['cost']:,.0f} spend, ${fcast['cpa']:.0f} CPA")
+        if decisions:
+            entry["decisions"] = decisions
 
-    # Display order: WW, US, CA, EU5, JP, AU, MX (hide individual EU5 markets)
+    # Display order: WW, US, EU5, JP, CA, MX, AU (hide individual EU5 markets)
     display_markets = [m for m in DISPLAY_MARKETS if callouts.get(m)]
 
     output = {

@@ -1,0 +1,2153 @@
+{
+  "generated": "2026-04-21T00:51:00.678310+00:00",
+  "source": "Outbound Marketing Goals.xlsx",
+  "owner_count": 18,
+  "goal_count": 30,
+  "richard_goals": [
+    {
+      "owner": "Richard Williams",
+      "level": "Individual",
+      "title": "Globalized Cross-Market Testing",
+      "description": "Execute 3 tests focused on cross-team partnerships and leveraging non-standard integrations, detailing reporting and results",
+      "end_date": "2026-12-31",
+      "how_measured": "Impact to be measured by number of completed tests and analysis of registration lift or the specific KPI for the test. Weblab will be used when applicable.\nSuccess further measured on timely inputs into reporting mechanisms, and coordination with stakeholders (internal and external)",
+      "why_important": "Standardized testing reduces redundant work across multiple market owners.",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Green",
+          "text": "Email overlay weblab planning progressed with stakeholder alignment. Polaris Brand LP testing and Baloo support as well."
+        },
+        {
+          "month": "February",
+          "color": "Green",
+          "text": "Although we are later than expected to test email overlay WW, stakeholders have investigated issues with Weblab testing and moving forward with planning."
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "Investigation uncovered that BFCM Promo testing was affected by email overlay, and this prompted a new WW test. We will begin compiling landing pages to test the email overlay in February."
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "Email overlay weblab planning progressed with stakeholder alignment. Polaris Brand LP testing and Baloo support as well.",
+      "latest_month": "March",
+      "markets": [
+        "ww"
+      ],
+      "trend": {
+        "Green": 3,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Richard Williams",
+      "level": "Individual",
+      "title": "MX/AU Paid Search Registrations",
+      "description": "Drive 11.1K MX and 12.9K AU Paid Search registrations in 2026, keeping within efficiency guardrails.",
+      "end_date": "2026-12-31",
+      "how_measured": "Measurement is based on registrations acquired which are verified and classified as SSR (excluding fraud). 2026 MX iECCP is set to 100%. AU ieCCP is unavailable given <1yr live",
+      "why_important": "As an initial acq-driver proven through WW scale (25% of Acq), Paid Search is critical in leading success in Expansion regions.",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Green",
+          "text": "MX closed March at 1.5K regs ($64 CPA), +69% spend and +72% regs vs OP2. AU closed at 1.0K regs ($121 CPA), -16% spend, -5% regs vs OP2. MX ie%CCP at 93%; AU emphasis on efficiency (moving away from $140 CPA target)"
+        },
+        {
+          "month": "February",
+          "color": "Green",
+          "text": "AU was flat vs. OP2, and MX 31% over OP2. AU 8% over budget (after agreement with AU team to target $140 CPA), and 28% over MX budget (targeting 100% ie%CCP."
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "AU was at OP2 target, and MX 3% over target. Both within budgets and MX under the 100% ie%CCP threshold at 80% for the month."
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "MX closed March at 1.5K regs ($64 CPA), +69% spend and +72% regs vs OP2. AU closed at 1.0K regs ($121 CPA), -16% spend, -5% regs vs OP2. MX ie%CCP at 93%; AU emphasis on efficiency (moving away from $140 CPA target)",
+      "latest_month": "March",
+      "markets": [
+        "mx",
+        "au"
+      ],
+      "trend": {
+        "Green": 3,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Richard Williams",
+      "level": "Individual",
+      "title": "MX + AU Market Testing",
+      "description": "Execute 4 experiments for the Mexico (MX) and Australia (AU) markets to optimize registration volume and efficiency.",
+      "end_date": "2026-12-31",
+      "how_measured": "Impact to be measured by number of completed tests and analysis of registration lift or the specific KPI for the test. Weblab will be used when applicable.\nSuccess further measured on timely inputs into reporting mechanisms.",
+      "why_important": "Targeted testing accounts for local efficiency threshold needs. These tests ensure we will create distinct tests for these international regions.",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Yellow",
+          "text": "LP development delayed for both markets. MX pages requested for build (Beauty/Auto), and Carlos transitioning away. AU stakeholders opted to skip PS-specific page testing and move directly to Polaris. (Testd, but unsuccessful)"
+        },
+        {
+          "month": "February",
+          "color": "Yellow",
+          "text": "Later than anticipated in testing landing pages for both markets. For MX, pages have been requested for development, and for AU, the AU stakeholders wanting to move straight into Polaris (even without paid search-specific cp page)"
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "AU began bid strategies in preparation for LP testing. MX and AU will test Brand LPs in tandem, as well as the email overlay on NB pages WW."
+        }
+      ],
+      "latest_color": "Yellow",
+      "latest_update": "LP development delayed for both markets. MX pages requested for build (Beauty/Auto), and Carlos transitioning away. AU stakeholders opted to skip PS-specific page testing and move directly to Polaris. (Testd, but unsuccessful)",
+      "latest_month": "March",
+      "markets": [
+        "mx",
+        "au"
+      ],
+      "trend": {
+        "Green": 1,
+        "Yellow": 2,
+        "Red": 0
+      }
+    }
+  ],
+  "goals": [
+    {
+      "owner": "Peter / Subhajit",
+      "level": "QBR",
+      "title": "Improve AB App marketing efficiency through AppsFlyer-based attribution and optimization by 12/20/2026.",
+      "description": "We will integrate Apps Flyer to AB App to measure and improve Paid Marketing performance. Currently, in the absence of this measurement marketing team faces the following challenges which AppsFlyer integration solves: 1) AB App Registrations and First Sign In attribution for Google and Apple campaigns: We currently lack the ability to attribute installs to the 3rd party campaigns that we set ,2) Improve our targeting based on the engagement we receive , 3) Help us measure marketing performance.",
+      "end_date": "2026-12-20",
+      "how_measured": "The share of AB App paid spend informed by AppsFlyer attribution, documented budget reallocations based on these insights, and improvements in efficiency metrics (e.g., CPI) on optimized channels.",
+      "why_important": "The Amazon Business marketing team currently relies on overall registrations (organic and paid) and lack the ability to attribute registrations to specific campaigns. The Appsflyer integration will ensure we are able to correctly attribute in-app events(registrations, FSI, engagement) to a specific campaign. In the long term, AppsFlyer will allow AB Marketing to scale paid and organic campaigns to drive registrations and engagement.",
+      "submission_status": "Submitted",
+      "monthly_status": [],
+      "latest_color": null,
+      "latest_update": "",
+      "latest_month": null,
+      "markets": [],
+      "trend": {
+        "Green": 0,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Brandon / Joel",
+      "level": "QBR",
+      "title": "Amazon Business Offline Conversions Import (OCI) Integration for Paid Search Text Ads",
+      "description": "Launch Consumer-based OCI solution for Amazon Business’s Google Text Ads program in FRITES, JP, CA by 3/30. Drive full impact from Google Bidding by July.",
+      "end_date": "2026-07-31",
+      "how_measured": "Goal is measured by tech-readiness date to reenable Google Bidding across applicable markets, and ability to meet full impact deadline.",
+      "why_important": "Paid Search is the largest paid driver of acquisition (25% of AB registrations), with this project impacting 1/4 of total PS reg volume ($22M 1-yr iOPS, annualized). This brings efficiency in Paid Search team processes, freeing resources to investigate new acquisition opportunities.",
+      "submission_status": "Submitted",
+      "monthly_status": [],
+      "latest_color": null,
+      "latest_update": "",
+      "latest_month": null,
+      "markets": [],
+      "trend": {
+        "Green": 0,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Brandon / Joel",
+      "level": "LT",
+      "title": "Paid Search AI: Intelligent Management",
+      "description": "Automate the day-to-day management of WW keyword bidding for Google Search, reducing team bandwidth commitment by 50%.",
+      "end_date": "2026-09-30",
+      "how_measured": "Goal is measured by tech-readiness date for the PS team to onboard tool usage",
+      "why_important": "The agent will evaluate trends in performance with internal and external search data and make daily recommendations to modify budgets and optimize keywords. This will enable the team to support 2x the program size as we scale to support Shopping Ads",
+      "submission_status": "Submitted",
+      "monthly_status": [],
+      "latest_color": null,
+      "latest_update": "",
+      "latest_month": null,
+      "markets": [],
+      "trend": {
+        "Green": 0,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Vijay/Melisa [Brandon]",
+      "level": "QBR",
+      "title": "Baloo (Unauthenticated Guest) Access",
+      "description": "Launch Unauthenticated AB Guest access in the US by 6/30 to improve AB registration conversion (traffic to active accounts), unlocking access to the AB shopping site from Paid Search text ads.",
+      "end_date": "2026-06-30",
+      "how_measured": "Goal is measured by tech-readiness date to allow testing into direct-to-shopping experience across Paid Search",
+      "why_important": "Paid Search is the largest paid driver of acquisition (25% of AB registrations), with 65% of traffic driven by product keywords. Baloo will unlock a product-centric, shopping experience (in contrast to the current informational experience), and is expected to increase registration rates.",
+      "submission_status": "Submitted",
+      "monthly_status": [],
+      "latest_color": null,
+      "latest_update": "",
+      "latest_month": null,
+      "markets": [],
+      "trend": {
+        "Green": 0,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Brandon Munday / Stacey Gu",
+      "level": "Team",
+      "title": "WW Paid Search Registrations",
+      "description": "Drive 725k Total (701K SSR) WW Paid Search registrations in 2026, keeping within IE%CCP guardrails.",
+      "end_date": "2026-12-31",
+      "how_measured": "Measurement is based on overall verified registrations volume (excl. fraud), with focus on SSR-classified (excl. SMB/CPS segments and ABIX regions). CCP is monitored monthly, with goal baseline recalibrated quarterly to avoid sharp alterations to approach.",
+      "why_important": "Driving >25% of AB acquisitions, it is critical Search continues to accelerate YoY.",
+      "submission_status": "Submitted",
+      "monthly_status": [],
+      "latest_color": null,
+      "latest_update": "",
+      "latest_month": null,
+      "markets": [],
+      "trend": {
+        "Green": 0,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Peter Ocampo",
+      "level": "Team",
+      "title": "WW AB App Installs and Registrations",
+      "description": "Drive 211K AB App installs (+10% YoY) and 70K AB App Registrations (+33% YoY) in 2026.",
+      "end_date": "2026-12-31",
+      "how_measured": "Registrations are measured by ref tags assigned to prospects who download the app, then proceed to registration. Registrants are only counted toward goal after they have been verified and marked as active, while excluding fraud. Goal is inclusive of includes both Paid and Organic-driven registrants. AB App installs are driven through ASO and PAM campaigns and are reported on through the our Apple and Google App store listings.",
+      "why_important": "App is the 2nd largest channel within Free Offsite. App also brings compounding effects to performance; DSI increases with installation, it serves as a platform for ongoing communication to registrants (via Push), and increases customer satisfaction with AB. App installs are the top of the funnel for app users and new registrations. By increasing the number of installs, we would expect to see an increase in prospects resulting in an increase of AB App registrations (which we have taken a goal for in 2026)",
+      "submission_status": "Submitted",
+      "monthly_status": [],
+      "latest_color": null,
+      "latest_update": "",
+      "latest_month": null,
+      "markets": [],
+      "trend": {
+        "Green": 0,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Yun Chu / Kristine Weber",
+      "level": "Team",
+      "title": "US Paid Search ENG Traffic",
+      "description": "Drive 977K clicks (+90% YoY) with $1M investment from existing AB customers in US to designated events and customer landing pages through targeted Paid Search campaigns by 12/31/2026",
+      "end_date": "2026-12-31",
+      "how_measured": "Performance will be evaluated based on ENG-driven targeted traffic volume and cost per click (CPC) efficiency.",
+      "why_important": "Enhance user experience for existing customers through Paid Search by reaching them as they search for relevant products or browse online, reminding them of AB solutions at a low cost while directing them to a.com for a more streamlined journey",
+      "submission_status": "Submitted",
+      "monthly_status": [],
+      "latest_color": null,
+      "latest_update": "",
+      "latest_month": null,
+      "markets": [],
+      "trend": {
+        "Green": 0,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Peter Ocampo / Viraj Gholap",
+      "level": "Team",
+      "title": "Push Notifications Improvements",
+      "description": "Integrate Push Notifications into Marketly.",
+      "end_date": "2026-04-30",
+      "how_measured": "Goal will be measured by the launch of engagement Push Notifications into Marketly by 4/30/2026.",
+      "why_important": "Integrating push notifications into Marketly will unlock personalized, trigger-based, and automated push notification scheduling and improved bar raising tools. This integration will improve PN performance by increasing the TTR of campaigns, speed to launch campaigns, and save time for bar raisers.",
+      "submission_status": "Submitted",
+      "monthly_status": [],
+      "latest_color": null,
+      "latest_update": "",
+      "latest_month": null,
+      "markets": [],
+      "trend": {
+        "Green": 0,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Yoav / Dwayne",
+      "level": "LT",
+      "title": "MCS - SEO and GEO Visibility",
+      "description": "Increase AB's visibility across SEO and GEO engines by +15% YoY.",
+      "end_date": null,
+      "how_measured": "",
+      "why_important": "Net-new goal, Xs are due to us still onboarding GEO measurement tool and gathering baseline data.",
+      "submission_status": "Submitted",
+      "monthly_status": [],
+      "latest_color": null,
+      "latest_update": "",
+      "latest_month": null,
+      "markets": [],
+      "trend": {
+        "Green": 0,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Andrew Wirtz",
+      "level": "Individual",
+      "title": "EU Optimization and Testing",
+      "description": "Identify and execute optimization opportunities within EU5 accounts through 15 distinct tests. Testing will include OCI launch in EU3 and performance analysis with detailed reporting of results.",
+      "end_date": "2026-12-31",
+      "how_measured": "Impact to be measured by number of completed tests and registration lift or the specific KPI for the test. Weblab will be used when applicable.\nSuccess further measured on timely inputs into reporting mechanisms.",
+      "why_important": "Conducting comprehensive tests and delivering detailed performance reporting enables scalable, evidence-based decisions that align regional execution with AB business objectives while mitigating risk. Reporting will further allow cross-team inspiration and visibility for stakeholders",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": null,
+          "text": "Green Status - Launched EU3 TT testing with full implementation on March 30th. Two ad copy tests underway in UK and IT at 100% NB deployment. EU3 expansion planned post-results validation and OCI implementation by August 2026. Five MCS LP optimization tests launched in March, results expected in April. Total of 10 tests completed year-to-date."
+        },
+        {
+          "month": "February",
+          "color": "Green",
+          "text": "Continuing migrating OCI accounts into OCI-ready MCCs. 2 other tests launched including ad copy testing in UK and IT with planning for MCS optimization testing across EU5 to launch in March, with 3 total tests ran in February YTD."
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "Migrating OCI accounts into OCI-ready MCCs. Other testing launched including account consolidation with 1 test total in January."
+        }
+      ],
+      "latest_color": null,
+      "latest_update": "Green Status - Launched EU3 TT testing with full implementation on March 30th. Two ad copy tests underway in UK and IT at 100% NB deployment. EU3 expansion planned post-results validation and OCI implementation by August 2026. Five MCS LP optimization tests launched in March, results expected in April. Total of 10 tests completed year-to-date.",
+      "latest_month": "March",
+      "markets": [],
+      "trend": {
+        "Green": 2,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Andrew Wirtz",
+      "level": "Individual",
+      "title": "Event Strategy Expansion",
+      "description": "Improve upon event strategy by 1) optimizing and testing new content (ie. creative expansion) and 2) establishing scalable mechanism for event integration across WW PS-owned LPs (in partnership with MCS team)",
+      "end_date": "2026-12-31",
+      "how_measured": "Traffic lift for HVE and Tier 1 events, and/or event awareness. Weblab will be used when applicable.",
+      "why_important": "ENG: Acts as an input goal to QBR-level Kingpin goal for increased AB traffic in 2026. Content/Asset testing will amplify audience reach.\n\nACQ: With Paid Search untargeted efforts, event highlights on PS LPs incites activity with both prospects as well as engagement traffic, roughly 15% of all PS traffic.",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Green",
+          "text": "Finalized creative development and templates in collaboration with creative team for event ENG Demang Gen video assets leading up to EOSY launch 4/6 as well as PD. Event LP mechanism planned for Q3 after MCS optimziations testing Phases 1 and 2."
+        },
+        {
+          "month": "February",
+          "color": "Green",
+          "text": "Refined creative development and templates in collaboration with creative team for event ENG Demang Gen video assets leading up to EOSY launch. Event LP mechanism planned for Q3 after MCS optimziations testing Phases 1 and 2."
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "Began process of creative development for video assets in collaboartion with creative and event teams, launching video assets for BSE."
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "Finalized creative development and templates in collaboration with creative team for event ENG Demang Gen video assets leading up to EOSY launch 4/6 as well as PD. Event LP mechanism planned for Q3 after MCS optimziations testing Phases 1 and 2.",
+      "latest_month": "March",
+      "markets": [],
+      "trend": {
+        "Green": 3,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Yun Chu",
+      "level": "Individual",
+      "title": "Paid Acq Traffic Leadership",
+      "description": "Lead Paid Acq traffic insights by differentiating traffic drivers (B2C, AB SSR, AB ENG), driving cross-team discovery of opportunities to improve processes and partnerships, supporting reporting and investigation, and proactively communicating key drivers, risks, and opportunities to leadership.",
+      "end_date": "2026-12-31",
+      "how_measured": "Success will be measured by lead traffic-related communications for stakeholders, bridging communication across teams and creating a repository that facilitates collaboration and communication.",
+      "why_important": "Ensures stakeholders receive timely lead traffic communications, breaks down silos through cross-team collaboration, and creates a centralized repository that preserves institutional knowledge and accelerates decision-making.",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Green",
+          "text": "Provided stakeholder YoY transit growth rate suggestions and led the communication in preWBR and WBR."
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "Delivered stakeholder traffic insights and supported discussions on increased budget allocation (potentially +500K, increased from $1M to $1.5M). Working on editing feature regs folder with Kristine and other ENG teams"
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "Provided stakeholder YoY transit growth rate suggestions and led the communication in preWBR and WBR.",
+      "latest_month": "March",
+      "markets": [],
+      "trend": {
+        "Green": 2,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Yun Chu",
+      "level": "Individual",
+      "title": "Modern Search Adoption",
+      "description": "Support global paid search campaign consolidation in OCI regions by implementing modern search best practices, optimizing account structure, and enabling cross-region alignment and growth.\nETA UK/DE/US: 8/31 | EU3: 12/31",
+      "end_date": "2026-12-31",
+      "how_measured": "Impact will be measured by the on-time implementation of consolidation and steady performance.",
+      "why_important": "Account consolidation reduces complexity and operational overhead while enabling smarter optimization decisions.",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Green",
+          "text": "Completed US 67 AVT compaign consolidation"
+        },
+        {
+          "month": "February",
+          "color": "Green",
+          "text": "In the US account, we consolidated bidding portfolios and reduced campaign count by 23% (345 > 265) through initial consolidation efforts. US consolidation completion is planned by April 2026."
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "Restructured Product and Vertical campaigns into P-V, consolidating 81 campaigns down to 22 to simplify management and streamline the account structure."
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "Completed US 67 AVT compaign consolidation",
+      "latest_month": "March",
+      "markets": [],
+      "trend": {
+        "Green": 3,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Peter Ocampo",
+      "level": "Individual",
+      "title": "Whatsapp launch",
+      "description": "Launch of WhatsApp in EU5 and MX with creation of best practice playbook by June 30",
+      "end_date": "2026-06-30",
+      "how_measured": "Success to be measured by on-time launch of Whatsapp as a new outbound channel. To prepare for launch, channel best practices, guardrails, benchmarks and governance will be created to ensure optimal use of budget.",
+      "why_important": "Whatsapp represents a new paid outbound channel which can be leveraged for both engagement and acquisition. Given the adoption of WA worldwide, the launch represents a new way to drive traffic and enagement in addition to acquiring new customers.",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "February",
+          "color": "Red",
+          "text": "Meta has paused all WhatsApp onboarding as they are re-evaluating their approach to business messaging on their platform. As a result, the launch has been pushed with an unknown date which will depend on Meta's guidance for use of their platform."
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "Reviewed BRD for agent validator for WhatsApp in Marketly. Templates are in the process of being created and reviewed for EU5 launch."
+        }
+      ],
+      "latest_color": "Red",
+      "latest_update": "Meta has paused all WhatsApp onboarding as they are re-evaluating their approach to business messaging on their platform. As a result, the launch has been pushed with an unknown date which will depend on Meta's guidance for use of their platform.",
+      "latest_month": "February",
+      "markets": [],
+      "trend": {
+        "Green": 1,
+        "Yellow": 0,
+        "Red": 1
+      }
+    },
+    {
+      "owner": "Peter Ocampo",
+      "level": "Individual",
+      "title": "AB App Feature launches",
+      "description": "Create and execute the GTM strategy for AB app end user feature launches. GTM strategy to be created 60 days prior to launch and will support Amazon Business Assistant and AB app navigation improvements. Launch dates are TBD.",
+      "end_date": "2026-12-31",
+      "how_measured": "End-user feature launches will be measured by awareness, adoption, and engagement with newly launched enhancements.",
+      "why_important": "The AB App drives increased engagement and spend with AB customers. As we launch new, end-user, features, it's critical that they are promoted for awareness and usage.",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "February",
+          "color": "Green",
+          "text": "End-user feature launch dates are still TBD and being scoped by the dev team. Confirmed launches are Business Assistant, in-app navigation improvements, and splash screens."
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "Feature launch dates are still TBD however have been working with the Dev team to refine launch dates. A cross frunctional team across SSR and Central has been established for 2026 feature launches."
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "End-user feature launch dates are still TBD and being scoped by the dev team. Confirmed launches are Business Assistant, in-app navigation improvements, and splash screens.",
+      "latest_month": "February",
+      "markets": [],
+      "trend": {
+        "Green": 2,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Aditya Thakur",
+      "level": "Individual",
+      "title": "JP/CA Paid Search Registrations",
+      "description": "Drive 27k (+9% YoY) and 34k (+6% YoY) Paid Search registrations across JP and CA respectively in 2026, keeping within IE%CCP guardrails",
+      "end_date": "2026-12-31",
+      "how_measured": "Measurement is based on registrations acquired which are verified and classified as SSR (excluding fraud). CCP is monitored monthly, with goal baseline recalibrated quarterly to avoid sharp alterations to approach. 2026 CA iECCP goal is 65%",
+      "why_important": "Contributing >8% of the total worldwide Paid Search registrations for Amazon Business is critical to ensure we maintain pace with the worldwide registration targets for 2026",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Yellow",
+          "text": "CA exceeded OP2 by +19.2% in March, while JP missed OP2 by -19.1% for SSR+SMB registrations. JP underperformed due to lower-than-expected Brand traffic following the post-MHLW period, with a portion of budget reallocated toward Non-Brand testing."
+        },
+        {
+          "month": "February",
+          "color": "Yellow",
+          "text": "CA achieved +18.5% vs OP2 in Feb but JP struggled to maintain MHLW momentum and was at -47.5% OP2 SSR regs, which was based upon estimation that period lasts through Feb. CA continued to benefit from CVR uplift following the NB page redesigns, while JP had its spend budget reallocated for NB tests in March."
+        },
+        {
+          "month": "January",
+          "color": null,
+          "text": "Green - CA achieved +15.2% vs OP2 in January and JP achieved +40.7% vs OP2 in January.\nBoth markets performed within budget thresholds. Canada benefited from CVR uplift following the NB page redesigns, while Japan continued to see the increased signup demand during the MHLW period."
+        }
+      ],
+      "latest_color": "Yellow",
+      "latest_update": "CA exceeded OP2 by +19.2% in March, while JP missed OP2 by -19.1% for SSR+SMB registrations. JP underperformed due to lower-than-expected Brand traffic following the post-MHLW period, with a portion of budget reallocated toward Non-Brand testing.",
+      "latest_month": "March",
+      "markets": [],
+      "trend": {
+        "Green": 0,
+        "Yellow": 2,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Aditya Thakur",
+      "level": "Individual",
+      "title": "CA + JP Optimization & Testing",
+      "description": "Identify and execute optimization opportunities within CA/JP accounts through 8+ distinct tests. Testing will include OCI launch and performance analysis with detailed reporting of results.",
+      "end_date": "2026-12-31",
+      "how_measured": "Impact to be measured by number of completed tests with analysis of registration lift or the specific KPI for the test. Weblab will be used when applicable.",
+      "why_important": "Drives performance gains and enables data-driven budget optimization through structured testing.",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Green",
+          "text": "Continued work towards OCI rollout from campaign identification through validation and performance monitoring. In JP, rolled out Non-Brand campaign testing, testing different categories, ad copies, and optimization settings. Launched new Polaris Brand page for US"
+        },
+        {
+          "month": "February",
+          "color": "Green",
+          "text": "Tracked account setup and identified initial campaigns for OCI testing, validating current setup and logic.Conducted pre/post analysis of the landing page redesign, confirming a +46% CVR improvement in Non-Brand CA vs. the prior period and scaled implmentations across remaining CA NB pages"
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "Migrating OCI accounts into OCI-ready MCCs. Conducted a pre/post analysis of the landing page redesign, confirming a +42% MoM CVR improvement in Non-Brand in CA"
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "Continued work towards OCI rollout from campaign identification through validation and performance monitoring. In JP, rolled out Non-Brand campaign testing, testing different categories, ad copies, and optimization settings. Launched new Polaris Brand page for US",
+      "latest_month": "March",
+      "markets": [],
+      "trend": {
+        "Green": 3,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Aditya Thakur",
+      "level": "Individual",
+      "title": "Dashboard Management & Automation",
+      "description": "Maintain the Paid Search Performance dashboard with weekly updates, while enhancing it with new views and improved usability (inc. market deep dives and automation pilots)",
+      "end_date": "2026-12-31",
+      "how_measured": "Success to be measured by on-time weekly dashboard delivery and successful enhancement implementation.",
+      "why_important": "This dashboard is critical for informing bidding decisions and insights for LT, while enhancments will enable faster visibility into trends, deeper self-service analysis, and reduced time spent on ongoing maintenance.",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Green",
+          "text": "Added new dashboard views focused on SSR registrations with enhanced segmentation and tracking. Automated key components of dashboard reporting, saving 2 hours/month and reducing the risk of manual errors."
+        },
+        {
+          "month": "February",
+          "color": "Green",
+          "text": "Continued work on prototype automation templates with further feature enhancements"
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "Built Prototype automation templates and incorporated new views on the dashboard"
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "Added new dashboard views focused on SSR registrations with enhanced segmentation and tracking. Automated key components of dashboard reporting, saving 2 hours/month and reducing the risk of manual errors.",
+      "latest_month": "March",
+      "markets": [],
+      "trend": {
+        "Green": 3,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Richard Williams",
+      "level": "Individual",
+      "title": "Globalized Cross-Market Testing",
+      "description": "Execute 3 tests focused on cross-team partnerships and leveraging non-standard integrations, detailing reporting and results",
+      "end_date": "2026-12-31",
+      "how_measured": "Impact to be measured by number of completed tests and analysis of registration lift or the specific KPI for the test. Weblab will be used when applicable.\nSuccess further measured on timely inputs into reporting mechanisms, and coordination with stakeholders (internal and external)",
+      "why_important": "Standardized testing reduces redundant work across multiple market owners.",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Green",
+          "text": "Email overlay weblab planning progressed with stakeholder alignment. Polaris Brand LP testing and Baloo support as well."
+        },
+        {
+          "month": "February",
+          "color": "Green",
+          "text": "Although we are later than expected to test email overlay WW, stakeholders have investigated issues with Weblab testing and moving forward with planning."
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "Investigation uncovered that BFCM Promo testing was affected by email overlay, and this prompted a new WW test. We will begin compiling landing pages to test the email overlay in February."
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "Email overlay weblab planning progressed with stakeholder alignment. Polaris Brand LP testing and Baloo support as well.",
+      "latest_month": "March",
+      "markets": [
+        "ww"
+      ],
+      "trend": {
+        "Green": 3,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Richard Williams",
+      "level": "Individual",
+      "title": "MX/AU Paid Search Registrations",
+      "description": "Drive 11.1K MX and 12.9K AU Paid Search registrations in 2026, keeping within efficiency guardrails.",
+      "end_date": "2026-12-31",
+      "how_measured": "Measurement is based on registrations acquired which are verified and classified as SSR (excluding fraud). 2026 MX iECCP is set to 100%. AU ieCCP is unavailable given <1yr live",
+      "why_important": "As an initial acq-driver proven through WW scale (25% of Acq), Paid Search is critical in leading success in Expansion regions.",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Green",
+          "text": "MX closed March at 1.5K regs ($64 CPA), +69% spend and +72% regs vs OP2. AU closed at 1.0K regs ($121 CPA), -16% spend, -5% regs vs OP2. MX ie%CCP at 93%; AU emphasis on efficiency (moving away from $140 CPA target)"
+        },
+        {
+          "month": "February",
+          "color": "Green",
+          "text": "AU was flat vs. OP2, and MX 31% over OP2. AU 8% over budget (after agreement with AU team to target $140 CPA), and 28% over MX budget (targeting 100% ie%CCP."
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "AU was at OP2 target, and MX 3% over target. Both within budgets and MX under the 100% ie%CCP threshold at 80% for the month."
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "MX closed March at 1.5K regs ($64 CPA), +69% spend and +72% regs vs OP2. AU closed at 1.0K regs ($121 CPA), -16% spend, -5% regs vs OP2. MX ie%CCP at 93%; AU emphasis on efficiency (moving away from $140 CPA target)",
+      "latest_month": "March",
+      "markets": [
+        "mx",
+        "au"
+      ],
+      "trend": {
+        "Green": 3,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Richard Williams",
+      "level": "Individual",
+      "title": "MX + AU Market Testing",
+      "description": "Execute 4 experiments for the Mexico (MX) and Australia (AU) markets to optimize registration volume and efficiency.",
+      "end_date": "2026-12-31",
+      "how_measured": "Impact to be measured by number of completed tests and analysis of registration lift or the specific KPI for the test. Weblab will be used when applicable.\nSuccess further measured on timely inputs into reporting mechanisms.",
+      "why_important": "Targeted testing accounts for local efficiency threshold needs. These tests ensure we will create distinct tests for these international regions.",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Yellow",
+          "text": "LP development delayed for both markets. MX pages requested for build (Beauty/Auto), and Carlos transitioning away. AU stakeholders opted to skip PS-specific page testing and move directly to Polaris. (Testd, but unsuccessful)"
+        },
+        {
+          "month": "February",
+          "color": "Yellow",
+          "text": "Later than anticipated in testing landing pages for both markets. For MX, pages have been requested for development, and for AU, the AU stakeholders wanting to move straight into Polaris (even without paid search-specific cp page)"
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "AU began bid strategies in preparation for LP testing. MX and AU will test Brand LPs in tandem, as well as the email overlay on NB pages WW."
+        }
+      ],
+      "latest_color": "Yellow",
+      "latest_update": "LP development delayed for both markets. MX pages requested for build (Beauty/Auto), and Carlos transitioning away. AU stakeholders opted to skip PS-specific page testing and move directly to Polaris. (Testd, but unsuccessful)",
+      "latest_month": "March",
+      "markets": [
+        "mx",
+        "au"
+      ],
+      "trend": {
+        "Green": 1,
+        "Yellow": 2,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Stacey",
+      "level": "Individual",
+      "title": "SSR Leadership",
+      "description": "Lead SSR communications and reporting for stakeholders across written and verbal mechanisms (WBR, MBR etc). Promote team visibility in WBR/MBR meetings by highlighting key contributions and dependencies. Identify mechanisms for improved Ways of Working and collaboration.",
+      "end_date": "2026-12-31",
+      "how_measured": "Success will be measured by leading SSR acquisition communications for stakeholders and creating SSR business review documents.",
+      "why_important": "Ensures stakeholders receive timely SSR acquisition communications and understand on how Paid Search contributes to AB business",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Green",
+          "text": "Finished Feb WW SSR MBR, provided insights to regional Feb MBR (US, CA, JP)"
+        },
+        {
+          "month": "February",
+          "color": "Green",
+          "text": "On track that finished inputs on US SSR MBR, WW SSR MBR & CA SSR MBR"
+        },
+        {
+          "month": "January",
+          "color": null,
+          "text": "FMLA in Jan"
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "Finished Feb WW SSR MBR, provided insights to regional Feb MBR (US, CA, JP)",
+      "latest_month": "March",
+      "markets": [],
+      "trend": {
+        "Green": 2,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Stacey",
+      "level": "Individual",
+      "title": "AI Adoption",
+      "description": "Drive AI adoption and processes across the Paid Search team by identifying opportunities and leading internal initiatives. This includes leveraging Gen BI for business insights, building Intelligent Management capabilities, and testing AI-based ad opportunities (inc. AI Max).",
+      "end_date": "2026-12-31",
+      "how_measured": "Success will be measured by tracking AI tool adoption rates, monitoring Gen BI insights applied to reporting automation, and evaluating performance improvements from Intelligent Management and AI-based ad tests.",
+      "why_important": "Help the team to work more efficiently through automation, and stay competitive by leveraging cutting-edge capabilities that improve campaign performance and reduce manual workload.",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Green",
+          "text": "Created WBR callout templates in XBR, will validate data in Q2’26."
+        },
+        {
+          "month": "February",
+          "color": "Green",
+          "text": "Explored XBR agent by developing template for YoY trend on SSR WBR callout."
+        },
+        {
+          "month": "January",
+          "color": null,
+          "text": "FMLA in Jan"
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "Created WBR callout templates in XBR, will validate data in Q2’26.",
+      "latest_month": "March",
+      "markets": [],
+      "trend": {
+        "Green": 2,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Alex VanDerStuyf Benjamin Lim",
+      "level": "Individual",
+      "title": "MCS Legacy Content Audit",
+      "description": "Transition WW MCS webpages to Polaris design system and archive/deprecate all legacy webpages.",
+      "end_date": "2026-06-30",
+      "how_measured": "",
+      "why_important": "",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": null,
+          "text": "Green: Frank has created a list that identifies legacy pages: https://amazoneur-my.sharepoint.com/:x:/g/personal/teomormi_amazon_es/IQC_b09tUF9rQqlswKZ1cUBCAR-CWItJZOp3hV3tLp9ZTKE?e=MhCkhz&CID=AEAF61A2-7EF5-4EF6-A9AA-2ECA21098844&wdLOR=cB8C46387-3F0D-4251-8A14-438F9CD5F5CA\n\nNext steps: A) Dwayne to leverage Adobe Analytics traffic to prioritze which pages should be updated first B) Alex to organize a prioritization meeting to discuss actioning page updates"
+        },
+        {
+          "month": "February",
+          "color": null,
+          "text": "Green -\n\nCurrent: Frank is in progress to create the page list that has outdated content. He is working with Vijeth and Matteo to see if Astra is a viable option for this task.\nNext: AEM report will be combined with AA traffic data to determine which pages are actively used.\nLastly: Team will regroup to review reporting + determine/priortize next steps"
+        },
+        {
+          "month": "January",
+          "color": null,
+          "text": "Green - Kick-off held and core working team identified: Ben, Dwayne, Frank, Yoav, Darren, Chetan, Lucy, Alex.\n\nNext Steps:\n- Create an AEM report/audit with legacy page URLs. Asana ticket: https://app.asana.com/1/8442528107068/task/1213248897496340\n- AEM report will be combined with AA traffic data to determine which pages are actively used\n- Team will regroup to review the reporting and determine/prioritize next steps"
+        }
+      ],
+      "latest_color": null,
+      "latest_update": "Green: Frank has created a list that identifies legacy pages: https://amazoneur-my.sharepoint.com/:x:/g/personal/teomormi_amazon_es/IQC_b09tUF9rQqlswKZ1cUBCAR-CWItJZOp3hV3tLp9ZTKE?e=MhCkhz&CID=AEAF61A2-7EF5-4EF6-A9AA-2ECA21098844&wdLOR=cB8C46387-3F0D-4251-8A14-438F9CD5F5CA\n\nNext steps: A) Dwayne to leverage Adobe Analytics traffic to prioritze which pages should be updated first B) Alex to organize a prioritization meeting to discuss actioning page updates",
+      "latest_month": "March",
+      "markets": [],
+      "trend": {
+        "Green": 0,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Benjamin Lim Alex VanDerStuyf",
+      "level": "Individual",
+      "title": "MCS Human Interface Guidelines (HIG)",
+      "description": "Create and publish the MCS/Polaris Human Interface Guidelines (HIG).",
+      "end_date": "2026-10-31",
+      "how_measured": "",
+      "why_important": "The HIG will be an internal microsite that houses the MCS/Polaris design system, including components/templates and best practicies across content/creative/SEO/etc.",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Green",
+          "text": "On hold. Start design and documentation."
+        },
+        {
+          "month": "February",
+          "color": "Green",
+          "text": "On hold until Q3 when we will initiate design and documentation."
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "On hold until Q3 when we will initiate design and documentation."
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "On hold. Start design and documentation.",
+      "latest_month": "March",
+      "markets": [],
+      "trend": {
+        "Green": 3,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Benjamin Lim",
+      "level": "Individual",
+      "title": "MCS Design Token System",
+      "description": "Implement MCS token system and reduce time spent on design system enhancements/updates to 5 days or less.",
+      "end_date": "2026-09-30",
+      "how_measured": "",
+      "why_important": "",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": null,
+          "text": "Green - We have delivered the final p0 design tokens border-radius and color tokens for the MCS Design Token System - which completes the p0 token values. This milestone completes our unified token library, empowering the team to make critical updates to the website—including Color, Border, Border Radius, Font Family, Market Place-specific typography, Font Weight, Letter Spacing, Theme, Font Size, and Line Height—without requiring a code build.\n\nNext steps:\nWe will have all of border-radius and color tokens in production.\n\n\nAre there any known risks or dependencies?\nNo"
+        },
+        {
+          "month": "February",
+          "color": null,
+          "text": "Green - We have delivered the border-radius and color tokens for the MCS Design Token System. This milestone completes our unified token library, empowering the team to make critical updates to the website—including Color, Border, Border Radius, Font Family, Market Place-specific typography, Font Weight, Letter Spacing, Theme, Font Size, and Line Height—without requiring a code build.\nWhat will be completed in the upcoming month?\n\nNext steps:\n\nColor Token: We’re waiting on the dev team; to prioritize when the color tokens will go live in production. Prioritization will be provided next week."
+        },
+        {
+          "month": "January",
+          "color": null,
+          "text": "Green - We completed 7 out of 10 P0 design tokens, which are now successfully integrated into the production environment.\n\nNext steps:\n- Production Deployment: We will move \"Border\" and \"Border-Radius\" into the production environment by next Monday, Feb 16.\n- Final P0 Milestone: We will then begin work on the final P0 token: \"Color.\"\n- P1 Initiation: We have initiated the formal request to begin work on P1 tokens: \"Sizing,\" \"Spacing,\" \"Typography,\" \"Opacity,\" and \"Box Shadow.\""
+        }
+      ],
+      "latest_color": null,
+      "latest_update": "Green - We have delivered the final p0 design tokens border-radius and color tokens for the MCS Design Token System - which completes the p0 token values. This milestone completes our unified token library, empowering the team to make critical updates to the website—including Color, Border, Border Radius, Font Family, Market Place-specific typography, Font Weight, Letter Spacing, Theme, Font Size, and Line Height—without requiring a code build.\n\nNext steps:\nWe will have all of border-radius and color tokens in production.\n\n\nAre there any known risks or dependencies?\nNo",
+      "latest_month": "March",
+      "markets": [],
+      "trend": {
+        "Green": 0,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Benjamin Lim Alex VanDerStuyf",
+      "level": "Individual",
+      "title": "MCS Contact Sales Form Personalization",
+      "description": "Launch three tests using 6Sense personalization that increase US Contact Sales submissions by +15% (per test).",
+      "end_date": "2026-12-31",
+      "how_measured": "",
+      "why_important": "",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Green",
+          "text": "Planning meeting is scheduled for this week to discuss the first test."
+        },
+        {
+          "month": "February",
+          "color": "Green",
+          "text": "On hold so the team can prioritize MENA in Q1 - first test will be launched in Q2. We adjusted the goal down to three tests, as we were initially planning to run one per quarter."
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "On hold so the team can prioritize MENA in Q1 - first test will be launched in Q2. We adjusted the goal down to three tests, as we were initially planning to run one per quarter."
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "Planning meeting is scheduled for this week to discuss the first test.",
+      "latest_month": "March",
+      "markets": [],
+      "trend": {
+        "Green": 3,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Benjamin Lim",
+      "level": "Individual",
+      "title": "UX Experimentation",
+      "description": "Ideate, plan, and execute 4 weblabs that target specific UX/CX gaps on the website.",
+      "end_date": "2026-12-31",
+      "how_measured": "",
+      "why_important": "",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Green",
+          "text": "Planning meeting is scheduled for this week to discuss the first test. First use case we are investigating is the home page where we are able to show more contextual and relevant content depending on the prospects industries"
+        },
+        {
+          "month": "February",
+          "color": "Green",
+          "text": "On hold until Q2, when we have OP2 initiatives that will require this testing."
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "On hold until Q2, when we have OP2 initiatives that will require this testing."
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "Planning meeting is scheduled for this week to discuss the first test. First use case we are investigating is the home page where we are able to show more contextual and relevant content depending on the prospects industries",
+      "latest_month": "March",
+      "markets": [],
+      "trend": {
+        "Green": 3,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Alex VanDerStuyf",
+      "level": "Individual",
+      "title": "Content Governance",
+      "description": "Create working group and process for ongoing audits/reviews of MCS page creation and/or updates.",
+      "end_date": "2026-12-31",
+      "how_measured": "",
+      "why_important": "",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Green",
+          "text": "This process will initate after the AEM legacy audit concludes."
+        },
+        {
+          "month": "February",
+          "color": "Green",
+          "text": "This process will initate after the AEM legacy audit concludes."
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "We will initiate this process as part of the AEM legacy audit, where we've started discussing solutions/mechanisms like restricting AEM access and reintroducting content approval workflows."
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "This process will initate after the AEM legacy audit concludes.",
+      "latest_month": "March",
+      "markets": [],
+      "trend": {
+        "Green": 3,
+        "Yellow": 0,
+        "Red": 0
+      }
+    },
+    {
+      "owner": "Yoav Reder",
+      "level": "Individual",
+      "title": "GEO Enablement",
+      "description": "Establish mechanism for enabling AB marketing teams with GEO tools, reporting, and overall strategy that can be applied to other campaigns/channels.",
+      "end_date": "2025-12-31",
+      "how_measured": "",
+      "why_important": "",
+      "submission_status": "",
+      "monthly_status": [
+        {
+          "month": "March",
+          "color": "Green",
+          "text": "reviewed GEO strategy with Todd and presented a GEO/Profound demo as part of the CM AI Series and r. As a follow-up, partnering with Paid Media (Robert Skenes) to operationalize Profound insights for 3P and community engagement."
+        },
+        {
+          "month": "February",
+          "color": null,
+          "text": "Green - AI driven meta tag optimization of AB’s YouTube channel: first batch of 10 videos for optimization implemented. Next steps: measure performance.\nMarch - GEO demo as part of the CM AI series"
+        },
+        {
+          "month": "January",
+          "color": "Green",
+          "text": "Working with Siri (social) on AI driven meta tag optimization of AB’s YouTube channel. In Jan we identified first batch of 10 videos for optimization. Next steps: meta tag generation via Profound and implementation (ECD: EOM Feb)"
+        }
+      ],
+      "latest_color": "Green",
+      "latest_update": "reviewed GEO strategy with Todd and presented a GEO/Profound demo as part of the CM AI Series and r. As a follow-up, partnering with Paid Media (Robert Skenes) to operationalize Profound insights for 3P and community engagement.",
+      "latest_month": "March",
+      "markets": [],
+      "trend": {
+        "Green": 2,
+        "Yellow": 0,
+        "Red": 0
+      }
+    }
+  ],
+  "owners": [
+    "Aditya Thakur",
+    "Alex VanDerStuyf",
+    "Alex VanDerStuyf Benjamin Lim",
+    "Andrew Wirtz",
+    "Benjamin Lim",
+    "Benjamin Lim Alex VanDerStuyf",
+    "Brandon / Joel",
+    "Brandon Munday / Stacey Gu",
+    "Peter / Subhajit",
+    "Peter Ocampo",
+    "Peter Ocampo / Viraj Gholap",
+    "Richard Williams",
+    "Stacey",
+    "Vijay/Melisa [Brandon]",
+    "Yoav / Dwayne",
+    "Yoav Reder",
+    "Yun Chu",
+    "Yun Chu / Kristine Weber"
+  ],
+  "by_owner": {
+    "Peter / Subhajit": [
+      {
+        "owner": "Peter / Subhajit",
+        "level": "QBR",
+        "title": "Improve AB App marketing efficiency through AppsFlyer-based attribution and optimization by 12/20/2026.",
+        "description": "We will integrate Apps Flyer to AB App to measure and improve Paid Marketing performance. Currently, in the absence of this measurement marketing team faces the following challenges which AppsFlyer integration solves: 1) AB App Registrations and First Sign In attribution for Google and Apple campaigns: We currently lack the ability to attribute installs to the 3rd party campaigns that we set ,2) Improve our targeting based on the engagement we receive , 3) Help us measure marketing performance.",
+        "end_date": "2026-12-20",
+        "how_measured": "The share of AB App paid spend informed by AppsFlyer attribution, documented budget reallocations based on these insights, and improvements in efficiency metrics (e.g., CPI) on optimized channels.",
+        "why_important": "The Amazon Business marketing team currently relies on overall registrations (organic and paid) and lack the ability to attribute registrations to specific campaigns. The Appsflyer integration will ensure we are able to correctly attribute in-app events(registrations, FSI, engagement) to a specific campaign. In the long term, AppsFlyer will allow AB Marketing to scale paid and organic campaigns to drive registrations and engagement.",
+        "submission_status": "Submitted",
+        "monthly_status": [],
+        "latest_color": null,
+        "latest_update": "",
+        "latest_month": null,
+        "markets": [],
+        "trend": {
+          "Green": 0,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ],
+    "Brandon / Joel": [
+      {
+        "owner": "Brandon / Joel",
+        "level": "QBR",
+        "title": "Amazon Business Offline Conversions Import (OCI) Integration for Paid Search Text Ads",
+        "description": "Launch Consumer-based OCI solution for Amazon Business’s Google Text Ads program in FRITES, JP, CA by 3/30. Drive full impact from Google Bidding by July.",
+        "end_date": "2026-07-31",
+        "how_measured": "Goal is measured by tech-readiness date to reenable Google Bidding across applicable markets, and ability to meet full impact deadline.",
+        "why_important": "Paid Search is the largest paid driver of acquisition (25% of AB registrations), with this project impacting 1/4 of total PS reg volume ($22M 1-yr iOPS, annualized). This brings efficiency in Paid Search team processes, freeing resources to investigate new acquisition opportunities.",
+        "submission_status": "Submitted",
+        "monthly_status": [],
+        "latest_color": null,
+        "latest_update": "",
+        "latest_month": null,
+        "markets": [],
+        "trend": {
+          "Green": 0,
+          "Yellow": 0,
+          "Red": 0
+        }
+      },
+      {
+        "owner": "Brandon / Joel",
+        "level": "LT",
+        "title": "Paid Search AI: Intelligent Management",
+        "description": "Automate the day-to-day management of WW keyword bidding for Google Search, reducing team bandwidth commitment by 50%.",
+        "end_date": "2026-09-30",
+        "how_measured": "Goal is measured by tech-readiness date for the PS team to onboard tool usage",
+        "why_important": "The agent will evaluate trends in performance with internal and external search data and make daily recommendations to modify budgets and optimize keywords. This will enable the team to support 2x the program size as we scale to support Shopping Ads",
+        "submission_status": "Submitted",
+        "monthly_status": [],
+        "latest_color": null,
+        "latest_update": "",
+        "latest_month": null,
+        "markets": [],
+        "trend": {
+          "Green": 0,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ],
+    "Vijay/Melisa [Brandon]": [
+      {
+        "owner": "Vijay/Melisa [Brandon]",
+        "level": "QBR",
+        "title": "Baloo (Unauthenticated Guest) Access",
+        "description": "Launch Unauthenticated AB Guest access in the US by 6/30 to improve AB registration conversion (traffic to active accounts), unlocking access to the AB shopping site from Paid Search text ads.",
+        "end_date": "2026-06-30",
+        "how_measured": "Goal is measured by tech-readiness date to allow testing into direct-to-shopping experience across Paid Search",
+        "why_important": "Paid Search is the largest paid driver of acquisition (25% of AB registrations), with 65% of traffic driven by product keywords. Baloo will unlock a product-centric, shopping experience (in contrast to the current informational experience), and is expected to increase registration rates.",
+        "submission_status": "Submitted",
+        "monthly_status": [],
+        "latest_color": null,
+        "latest_update": "",
+        "latest_month": null,
+        "markets": [],
+        "trend": {
+          "Green": 0,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ],
+    "Brandon Munday / Stacey Gu": [
+      {
+        "owner": "Brandon Munday / Stacey Gu",
+        "level": "Team",
+        "title": "WW Paid Search Registrations",
+        "description": "Drive 725k Total (701K SSR) WW Paid Search registrations in 2026, keeping within IE%CCP guardrails.",
+        "end_date": "2026-12-31",
+        "how_measured": "Measurement is based on overall verified registrations volume (excl. fraud), with focus on SSR-classified (excl. SMB/CPS segments and ABIX regions). CCP is monitored monthly, with goal baseline recalibrated quarterly to avoid sharp alterations to approach.",
+        "why_important": "Driving >25% of AB acquisitions, it is critical Search continues to accelerate YoY.",
+        "submission_status": "Submitted",
+        "monthly_status": [],
+        "latest_color": null,
+        "latest_update": "",
+        "latest_month": null,
+        "markets": [],
+        "trend": {
+          "Green": 0,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ],
+    "Peter Ocampo": [
+      {
+        "owner": "Peter Ocampo",
+        "level": "Team",
+        "title": "WW AB App Installs and Registrations",
+        "description": "Drive 211K AB App installs (+10% YoY) and 70K AB App Registrations (+33% YoY) in 2026.",
+        "end_date": "2026-12-31",
+        "how_measured": "Registrations are measured by ref tags assigned to prospects who download the app, then proceed to registration. Registrants are only counted toward goal after they have been verified and marked as active, while excluding fraud. Goal is inclusive of includes both Paid and Organic-driven registrants. AB App installs are driven through ASO and PAM campaigns and are reported on through the our Apple and Google App store listings.",
+        "why_important": "App is the 2nd largest channel within Free Offsite. App also brings compounding effects to performance; DSI increases with installation, it serves as a platform for ongoing communication to registrants (via Push), and increases customer satisfaction with AB. App installs are the top of the funnel for app users and new registrations. By increasing the number of installs, we would expect to see an increase in prospects resulting in an increase of AB App registrations (which we have taken a goal for in 2026)",
+        "submission_status": "Submitted",
+        "monthly_status": [],
+        "latest_color": null,
+        "latest_update": "",
+        "latest_month": null,
+        "markets": [],
+        "trend": {
+          "Green": 0,
+          "Yellow": 0,
+          "Red": 0
+        }
+      },
+      {
+        "owner": "Peter Ocampo",
+        "level": "Individual",
+        "title": "Whatsapp launch",
+        "description": "Launch of WhatsApp in EU5 and MX with creation of best practice playbook by June 30",
+        "end_date": "2026-06-30",
+        "how_measured": "Success to be measured by on-time launch of Whatsapp as a new outbound channel. To prepare for launch, channel best practices, guardrails, benchmarks and governance will be created to ensure optimal use of budget.",
+        "why_important": "Whatsapp represents a new paid outbound channel which can be leveraged for both engagement and acquisition. Given the adoption of WA worldwide, the launch represents a new way to drive traffic and enagement in addition to acquiring new customers.",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "February",
+            "color": "Red",
+            "text": "Meta has paused all WhatsApp onboarding as they are re-evaluating their approach to business messaging on their platform. As a result, the launch has been pushed with an unknown date which will depend on Meta's guidance for use of their platform."
+          },
+          {
+            "month": "January",
+            "color": "Green",
+            "text": "Reviewed BRD for agent validator for WhatsApp in Marketly. Templates are in the process of being created and reviewed for EU5 launch."
+          }
+        ],
+        "latest_color": "Red",
+        "latest_update": "Meta has paused all WhatsApp onboarding as they are re-evaluating their approach to business messaging on their platform. As a result, the launch has been pushed with an unknown date which will depend on Meta's guidance for use of their platform.",
+        "latest_month": "February",
+        "markets": [],
+        "trend": {
+          "Green": 1,
+          "Yellow": 0,
+          "Red": 1
+        }
+      },
+      {
+        "owner": "Peter Ocampo",
+        "level": "Individual",
+        "title": "AB App Feature launches",
+        "description": "Create and execute the GTM strategy for AB app end user feature launches. GTM strategy to be created 60 days prior to launch and will support Amazon Business Assistant and AB app navigation improvements. Launch dates are TBD.",
+        "end_date": "2026-12-31",
+        "how_measured": "End-user feature launches will be measured by awareness, adoption, and engagement with newly launched enhancements.",
+        "why_important": "The AB App drives increased engagement and spend with AB customers. As we launch new, end-user, features, it's critical that they are promoted for awareness and usage.",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "February",
+            "color": "Green",
+            "text": "End-user feature launch dates are still TBD and being scoped by the dev team. Confirmed launches are Business Assistant, in-app navigation improvements, and splash screens."
+          },
+          {
+            "month": "January",
+            "color": "Green",
+            "text": "Feature launch dates are still TBD however have been working with the Dev team to refine launch dates. A cross frunctional team across SSR and Central has been established for 2026 feature launches."
+          }
+        ],
+        "latest_color": "Green",
+        "latest_update": "End-user feature launch dates are still TBD and being scoped by the dev team. Confirmed launches are Business Assistant, in-app navigation improvements, and splash screens.",
+        "latest_month": "February",
+        "markets": [],
+        "trend": {
+          "Green": 2,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ],
+    "Yun Chu / Kristine Weber": [
+      {
+        "owner": "Yun Chu / Kristine Weber",
+        "level": "Team",
+        "title": "US Paid Search ENG Traffic",
+        "description": "Drive 977K clicks (+90% YoY) with $1M investment from existing AB customers in US to designated events and customer landing pages through targeted Paid Search campaigns by 12/31/2026",
+        "end_date": "2026-12-31",
+        "how_measured": "Performance will be evaluated based on ENG-driven targeted traffic volume and cost per click (CPC) efficiency.",
+        "why_important": "Enhance user experience for existing customers through Paid Search by reaching them as they search for relevant products or browse online, reminding them of AB solutions at a low cost while directing them to a.com for a more streamlined journey",
+        "submission_status": "Submitted",
+        "monthly_status": [],
+        "latest_color": null,
+        "latest_update": "",
+        "latest_month": null,
+        "markets": [],
+        "trend": {
+          "Green": 0,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ],
+    "Peter Ocampo / Viraj Gholap": [
+      {
+        "owner": "Peter Ocampo / Viraj Gholap",
+        "level": "Team",
+        "title": "Push Notifications Improvements",
+        "description": "Integrate Push Notifications into Marketly.",
+        "end_date": "2026-04-30",
+        "how_measured": "Goal will be measured by the launch of engagement Push Notifications into Marketly by 4/30/2026.",
+        "why_important": "Integrating push notifications into Marketly will unlock personalized, trigger-based, and automated push notification scheduling and improved bar raising tools. This integration will improve PN performance by increasing the TTR of campaigns, speed to launch campaigns, and save time for bar raisers.",
+        "submission_status": "Submitted",
+        "monthly_status": [],
+        "latest_color": null,
+        "latest_update": "",
+        "latest_month": null,
+        "markets": [],
+        "trend": {
+          "Green": 0,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ],
+    "Yoav / Dwayne": [
+      {
+        "owner": "Yoav / Dwayne",
+        "level": "LT",
+        "title": "MCS - SEO and GEO Visibility",
+        "description": "Increase AB's visibility across SEO and GEO engines by +15% YoY.",
+        "end_date": null,
+        "how_measured": "",
+        "why_important": "Net-new goal, Xs are due to us still onboarding GEO measurement tool and gathering baseline data.",
+        "submission_status": "Submitted",
+        "monthly_status": [],
+        "latest_color": null,
+        "latest_update": "",
+        "latest_month": null,
+        "markets": [],
+        "trend": {
+          "Green": 0,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ],
+    "Andrew Wirtz": [
+      {
+        "owner": "Andrew Wirtz",
+        "level": "Individual",
+        "title": "EU Optimization and Testing",
+        "description": "Identify and execute optimization opportunities within EU5 accounts through 15 distinct tests. Testing will include OCI launch in EU3 and performance analysis with detailed reporting of results.",
+        "end_date": "2026-12-31",
+        "how_measured": "Impact to be measured by number of completed tests and registration lift or the specific KPI for the test. Weblab will be used when applicable.\nSuccess further measured on timely inputs into reporting mechanisms.",
+        "why_important": "Conducting comprehensive tests and delivering detailed performance reporting enables scalable, evidence-based decisions that align regional execution with AB business objectives while mitigating risk. Reporting will further allow cross-team inspiration and visibility for stakeholders",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": null,
+            "text": "Green Status - Launched EU3 TT testing with full implementation on March 30th. Two ad copy tests underway in UK and IT at 100% NB deployment. EU3 expansion planned post-results validation and OCI implementation by August 2026. Five MCS LP optimization tests launched in March, results expected in April. Total of 10 tests completed year-to-date."
+          },
+          {
+            "month": "February",
+            "color": "Green",
+            "text": "Continuing migrating OCI accounts into OCI-ready MCCs. 2 other tests launched including ad copy testing in UK and IT with planning for MCS optimization testing across EU5 to launch in March, with 3 total tests ran in February YTD."
+          },
+          {
+            "month": "January",
+            "color": "Green",
+            "text": "Migrating OCI accounts into OCI-ready MCCs. Other testing launched including account consolidation with 1 test total in January."
+          }
+        ],
+        "latest_color": null,
+        "latest_update": "Green Status - Launched EU3 TT testing with full implementation on March 30th. Two ad copy tests underway in UK and IT at 100% NB deployment. EU3 expansion planned post-results validation and OCI implementation by August 2026. Five MCS LP optimization tests launched in March, results expected in April. Total of 10 tests completed year-to-date.",
+        "latest_month": "March",
+        "markets": [],
+        "trend": {
+          "Green": 2,
+          "Yellow": 0,
+          "Red": 0
+        }
+      },
+      {
+        "owner": "Andrew Wirtz",
+        "level": "Individual",
+        "title": "Event Strategy Expansion",
+        "description": "Improve upon event strategy by 1) optimizing and testing new content (ie. creative expansion) and 2) establishing scalable mechanism for event integration across WW PS-owned LPs (in partnership with MCS team)",
+        "end_date": "2026-12-31",
+        "how_measured": "Traffic lift for HVE and Tier 1 events, and/or event awareness. Weblab will be used when applicable.",
+        "why_important": "ENG: Acts as an input goal to QBR-level Kingpin goal for increased AB traffic in 2026. Content/Asset testing will amplify audience reach.\n\nACQ: With Paid Search untargeted efforts, event highlights on PS LPs incites activity with both prospects as well as engagement traffic, roughly 15% of all PS traffic.",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": "Green",
+            "text": "Finalized creative development and templates in collaboration with creative team for event ENG Demang Gen video assets leading up to EOSY launch 4/6 as well as PD. Event LP mechanism planned for Q3 after MCS optimziations testing Phases 1 and 2."
+          },
+          {
+            "month": "February",
+            "color": "Green",
+            "text": "Refined creative development and templates in collaboration with creative team for event ENG Demang Gen video assets leading up to EOSY launch. Event LP mechanism planned for Q3 after MCS optimziations testing Phases 1 and 2."
+          },
+          {
+            "month": "January",
+            "color": "Green",
+            "text": "Began process of creative development for video assets in collaboartion with creative and event teams, launching video assets for BSE."
+          }
+        ],
+        "latest_color": "Green",
+        "latest_update": "Finalized creative development and templates in collaboration with creative team for event ENG Demang Gen video assets leading up to EOSY launch 4/6 as well as PD. Event LP mechanism planned for Q3 after MCS optimziations testing Phases 1 and 2.",
+        "latest_month": "March",
+        "markets": [],
+        "trend": {
+          "Green": 3,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ],
+    "Yun Chu": [
+      {
+        "owner": "Yun Chu",
+        "level": "Individual",
+        "title": "Paid Acq Traffic Leadership",
+        "description": "Lead Paid Acq traffic insights by differentiating traffic drivers (B2C, AB SSR, AB ENG), driving cross-team discovery of opportunities to improve processes and partnerships, supporting reporting and investigation, and proactively communicating key drivers, risks, and opportunities to leadership.",
+        "end_date": "2026-12-31",
+        "how_measured": "Success will be measured by lead traffic-related communications for stakeholders, bridging communication across teams and creating a repository that facilitates collaboration and communication.",
+        "why_important": "Ensures stakeholders receive timely lead traffic communications, breaks down silos through cross-team collaboration, and creates a centralized repository that preserves institutional knowledge and accelerates decision-making.",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": "Green",
+            "text": "Provided stakeholder YoY transit growth rate suggestions and led the communication in preWBR and WBR."
+          },
+          {
+            "month": "January",
+            "color": "Green",
+            "text": "Delivered stakeholder traffic insights and supported discussions on increased budget allocation (potentially +500K, increased from $1M to $1.5M). Working on editing feature regs folder with Kristine and other ENG teams"
+          }
+        ],
+        "latest_color": "Green",
+        "latest_update": "Provided stakeholder YoY transit growth rate suggestions and led the communication in preWBR and WBR.",
+        "latest_month": "March",
+        "markets": [],
+        "trend": {
+          "Green": 2,
+          "Yellow": 0,
+          "Red": 0
+        }
+      },
+      {
+        "owner": "Yun Chu",
+        "level": "Individual",
+        "title": "Modern Search Adoption",
+        "description": "Support global paid search campaign consolidation in OCI regions by implementing modern search best practices, optimizing account structure, and enabling cross-region alignment and growth.\nETA UK/DE/US: 8/31 | EU3: 12/31",
+        "end_date": "2026-12-31",
+        "how_measured": "Impact will be measured by the on-time implementation of consolidation and steady performance.",
+        "why_important": "Account consolidation reduces complexity and operational overhead while enabling smarter optimization decisions.",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": "Green",
+            "text": "Completed US 67 AVT compaign consolidation"
+          },
+          {
+            "month": "February",
+            "color": "Green",
+            "text": "In the US account, we consolidated bidding portfolios and reduced campaign count by 23% (345 > 265) through initial consolidation efforts. US consolidation completion is planned by April 2026."
+          },
+          {
+            "month": "January",
+            "color": "Green",
+            "text": "Restructured Product and Vertical campaigns into P-V, consolidating 81 campaigns down to 22 to simplify management and streamline the account structure."
+          }
+        ],
+        "latest_color": "Green",
+        "latest_update": "Completed US 67 AVT compaign consolidation",
+        "latest_month": "March",
+        "markets": [],
+        "trend": {
+          "Green": 3,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ],
+    "Aditya Thakur": [
+      {
+        "owner": "Aditya Thakur",
+        "level": "Individual",
+        "title": "JP/CA Paid Search Registrations",
+        "description": "Drive 27k (+9% YoY) and 34k (+6% YoY) Paid Search registrations across JP and CA respectively in 2026, keeping within IE%CCP guardrails",
+        "end_date": "2026-12-31",
+        "how_measured": "Measurement is based on registrations acquired which are verified and classified as SSR (excluding fraud). CCP is monitored monthly, with goal baseline recalibrated quarterly to avoid sharp alterations to approach. 2026 CA iECCP goal is 65%",
+        "why_important": "Contributing >8% of the total worldwide Paid Search registrations for Amazon Business is critical to ensure we maintain pace with the worldwide registration targets for 2026",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": "Yellow",
+            "text": "CA exceeded OP2 by +19.2% in March, while JP missed OP2 by -19.1% for SSR+SMB registrations. JP underperformed due to lower-than-expected Brand traffic following the post-MHLW period, with a portion of budget reallocated toward Non-Brand testing."
+          },
+          {
+            "month": "February",
+            "color": "Yellow",
+            "text": "CA achieved +18.5% vs OP2 in Feb but JP struggled to maintain MHLW momentum and was at -47.5% OP2 SSR regs, which was based upon estimation that period lasts through Feb. CA continued to benefit from CVR uplift following the NB page redesigns, while JP had its spend budget reallocated for NB tests in March."
+          },
+          {
+            "month": "January",
+            "color": null,
+            "text": "Green - CA achieved +15.2% vs OP2 in January and JP achieved +40.7% vs OP2 in January.\nBoth markets performed within budget thresholds. Canada benefited from CVR uplift following the NB page redesigns, while Japan continued to see the increased signup demand during the MHLW period."
+          }
+        ],
+        "latest_color": "Yellow",
+        "latest_update": "CA exceeded OP2 by +19.2% in March, while JP missed OP2 by -19.1% for SSR+SMB registrations. JP underperformed due to lower-than-expected Brand traffic following the post-MHLW period, with a portion of budget reallocated toward Non-Brand testing.",
+        "latest_month": "March",
+        "markets": [],
+        "trend": {
+          "Green": 0,
+          "Yellow": 2,
+          "Red": 0
+        }
+      },
+      {
+        "owner": "Aditya Thakur",
+        "level": "Individual",
+        "title": "CA + JP Optimization & Testing",
+        "description": "Identify and execute optimization opportunities within CA/JP accounts through 8+ distinct tests. Testing will include OCI launch and performance analysis with detailed reporting of results.",
+        "end_date": "2026-12-31",
+        "how_measured": "Impact to be measured by number of completed tests with analysis of registration lift or the specific KPI for the test. Weblab will be used when applicable.",
+        "why_important": "Drives performance gains and enables data-driven budget optimization through structured testing.",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": "Green",
+            "text": "Continued work towards OCI rollout from campaign identification through validation and performance monitoring. In JP, rolled out Non-Brand campaign testing, testing different categories, ad copies, and optimization settings. Launched new Polaris Brand page for US"
+          },
+          {
+            "month": "February",
+            "color": "Green",
+            "text": "Tracked account setup and identified initial campaigns for OCI testing, validating current setup and logic.Conducted pre/post analysis of the landing page redesign, confirming a +46% CVR improvement in Non-Brand CA vs. the prior period and scaled implmentations across remaining CA NB pages"
+          },
+          {
+            "month": "January",
+            "color": "Green",
+            "text": "Migrating OCI accounts into OCI-ready MCCs. Conducted a pre/post analysis of the landing page redesign, confirming a +42% MoM CVR improvement in Non-Brand in CA"
+          }
+        ],
+        "latest_color": "Green",
+        "latest_update": "Continued work towards OCI rollout from campaign identification through validation and performance monitoring. In JP, rolled out Non-Brand campaign testing, testing different categories, ad copies, and optimization settings. Launched new Polaris Brand page for US",
+        "latest_month": "March",
+        "markets": [],
+        "trend": {
+          "Green": 3,
+          "Yellow": 0,
+          "Red": 0
+        }
+      },
+      {
+        "owner": "Aditya Thakur",
+        "level": "Individual",
+        "title": "Dashboard Management & Automation",
+        "description": "Maintain the Paid Search Performance dashboard with weekly updates, while enhancing it with new views and improved usability (inc. market deep dives and automation pilots)",
+        "end_date": "2026-12-31",
+        "how_measured": "Success to be measured by on-time weekly dashboard delivery and successful enhancement implementation.",
+        "why_important": "This dashboard is critical for informing bidding decisions and insights for LT, while enhancments will enable faster visibility into trends, deeper self-service analysis, and reduced time spent on ongoing maintenance.",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": "Green",
+            "text": "Added new dashboard views focused on SSR registrations with enhanced segmentation and tracking. Automated key components of dashboard reporting, saving 2 hours/month and reducing the risk of manual errors."
+          },
+          {
+            "month": "February",
+            "color": "Green",
+            "text": "Continued work on prototype automation templates with further feature enhancements"
+          },
+          {
+            "month": "January",
+            "color": "Green",
+            "text": "Built Prototype automation templates and incorporated new views on the dashboard"
+          }
+        ],
+        "latest_color": "Green",
+        "latest_update": "Added new dashboard views focused on SSR registrations with enhanced segmentation and tracking. Automated key components of dashboard reporting, saving 2 hours/month and reducing the risk of manual errors.",
+        "latest_month": "March",
+        "markets": [],
+        "trend": {
+          "Green": 3,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ],
+    "Richard Williams": [
+      {
+        "owner": "Richard Williams",
+        "level": "Individual",
+        "title": "Globalized Cross-Market Testing",
+        "description": "Execute 3 tests focused on cross-team partnerships and leveraging non-standard integrations, detailing reporting and results",
+        "end_date": "2026-12-31",
+        "how_measured": "Impact to be measured by number of completed tests and analysis of registration lift or the specific KPI for the test. Weblab will be used when applicable.\nSuccess further measured on timely inputs into reporting mechanisms, and coordination with stakeholders (internal and external)",
+        "why_important": "Standardized testing reduces redundant work across multiple market owners.",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": "Green",
+            "text": "Email overlay weblab planning progressed with stakeholder alignment. Polaris Brand LP testing and Baloo support as well."
+          },
+          {
+            "month": "February",
+            "color": "Green",
+            "text": "Although we are later than expected to test email overlay WW, stakeholders have investigated issues with Weblab testing and moving forward with planning."
+          },
+          {
+            "month": "January",
+            "color": "Green",
+            "text": "Investigation uncovered that BFCM Promo testing was affected by email overlay, and this prompted a new WW test. We will begin compiling landing pages to test the email overlay in February."
+          }
+        ],
+        "latest_color": "Green",
+        "latest_update": "Email overlay weblab planning progressed with stakeholder alignment. Polaris Brand LP testing and Baloo support as well.",
+        "latest_month": "March",
+        "markets": [
+          "ww"
+        ],
+        "trend": {
+          "Green": 3,
+          "Yellow": 0,
+          "Red": 0
+        }
+      },
+      {
+        "owner": "Richard Williams",
+        "level": "Individual",
+        "title": "MX/AU Paid Search Registrations",
+        "description": "Drive 11.1K MX and 12.9K AU Paid Search registrations in 2026, keeping within efficiency guardrails.",
+        "end_date": "2026-12-31",
+        "how_measured": "Measurement is based on registrations acquired which are verified and classified as SSR (excluding fraud). 2026 MX iECCP is set to 100%. AU ieCCP is unavailable given <1yr live",
+        "why_important": "As an initial acq-driver proven through WW scale (25% of Acq), Paid Search is critical in leading success in Expansion regions.",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": "Green",
+            "text": "MX closed March at 1.5K regs ($64 CPA), +69% spend and +72% regs vs OP2. AU closed at 1.0K regs ($121 CPA), -16% spend, -5% regs vs OP2. MX ie%CCP at 93%; AU emphasis on efficiency (moving away from $140 CPA target)"
+          },
+          {
+            "month": "February",
+            "color": "Green",
+            "text": "AU was flat vs. OP2, and MX 31% over OP2. AU 8% over budget (after agreement with AU team to target $140 CPA), and 28% over MX budget (targeting 100% ie%CCP."
+          },
+          {
+            "month": "January",
+            "color": "Green",
+            "text": "AU was at OP2 target, and MX 3% over target. Both within budgets and MX under the 100% ie%CCP threshold at 80% for the month."
+          }
+        ],
+        "latest_color": "Green",
+        "latest_update": "MX closed March at 1.5K regs ($64 CPA), +69% spend and +72% regs vs OP2. AU closed at 1.0K regs ($121 CPA), -16% spend, -5% regs vs OP2. MX ie%CCP at 93%; AU emphasis on efficiency (moving away from $140 CPA target)",
+        "latest_month": "March",
+        "markets": [
+          "mx",
+          "au"
+        ],
+        "trend": {
+          "Green": 3,
+          "Yellow": 0,
+          "Red": 0
+        }
+      },
+      {
+        "owner": "Richard Williams",
+        "level": "Individual",
+        "title": "MX + AU Market Testing",
+        "description": "Execute 4 experiments for the Mexico (MX) and Australia (AU) markets to optimize registration volume and efficiency.",
+        "end_date": "2026-12-31",
+        "how_measured": "Impact to be measured by number of completed tests and analysis of registration lift or the specific KPI for the test. Weblab will be used when applicable.\nSuccess further measured on timely inputs into reporting mechanisms.",
+        "why_important": "Targeted testing accounts for local efficiency threshold needs. These tests ensure we will create distinct tests for these international regions.",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": "Yellow",
+            "text": "LP development delayed for both markets. MX pages requested for build (Beauty/Auto), and Carlos transitioning away. AU stakeholders opted to skip PS-specific page testing and move directly to Polaris. (Testd, but unsuccessful)"
+          },
+          {
+            "month": "February",
+            "color": "Yellow",
+            "text": "Later than anticipated in testing landing pages for both markets. For MX, pages have been requested for development, and for AU, the AU stakeholders wanting to move straight into Polaris (even without paid search-specific cp page)"
+          },
+          {
+            "month": "January",
+            "color": "Green",
+            "text": "AU began bid strategies in preparation for LP testing. MX and AU will test Brand LPs in tandem, as well as the email overlay on NB pages WW."
+          }
+        ],
+        "latest_color": "Yellow",
+        "latest_update": "LP development delayed for both markets. MX pages requested for build (Beauty/Auto), and Carlos transitioning away. AU stakeholders opted to skip PS-specific page testing and move directly to Polaris. (Testd, but unsuccessful)",
+        "latest_month": "March",
+        "markets": [
+          "mx",
+          "au"
+        ],
+        "trend": {
+          "Green": 1,
+          "Yellow": 2,
+          "Red": 0
+        }
+      }
+    ],
+    "Stacey": [
+      {
+        "owner": "Stacey",
+        "level": "Individual",
+        "title": "SSR Leadership",
+        "description": "Lead SSR communications and reporting for stakeholders across written and verbal mechanisms (WBR, MBR etc). Promote team visibility in WBR/MBR meetings by highlighting key contributions and dependencies. Identify mechanisms for improved Ways of Working and collaboration.",
+        "end_date": "2026-12-31",
+        "how_measured": "Success will be measured by leading SSR acquisition communications for stakeholders and creating SSR business review documents.",
+        "why_important": "Ensures stakeholders receive timely SSR acquisition communications and understand on how Paid Search contributes to AB business",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": "Green",
+            "text": "Finished Feb WW SSR MBR, provided insights to regional Feb MBR (US, CA, JP)"
+          },
+          {
+            "month": "February",
+            "color": "Green",
+            "text": "On track that finished inputs on US SSR MBR, WW SSR MBR & CA SSR MBR"
+          },
+          {
+            "month": "January",
+            "color": null,
+            "text": "FMLA in Jan"
+          }
+        ],
+        "latest_color": "Green",
+        "latest_update": "Finished Feb WW SSR MBR, provided insights to regional Feb MBR (US, CA, JP)",
+        "latest_month": "March",
+        "markets": [],
+        "trend": {
+          "Green": 2,
+          "Yellow": 0,
+          "Red": 0
+        }
+      },
+      {
+        "owner": "Stacey",
+        "level": "Individual",
+        "title": "AI Adoption",
+        "description": "Drive AI adoption and processes across the Paid Search team by identifying opportunities and leading internal initiatives. This includes leveraging Gen BI for business insights, building Intelligent Management capabilities, and testing AI-based ad opportunities (inc. AI Max).",
+        "end_date": "2026-12-31",
+        "how_measured": "Success will be measured by tracking AI tool adoption rates, monitoring Gen BI insights applied to reporting automation, and evaluating performance improvements from Intelligent Management and AI-based ad tests.",
+        "why_important": "Help the team to work more efficiently through automation, and stay competitive by leveraging cutting-edge capabilities that improve campaign performance and reduce manual workload.",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": "Green",
+            "text": "Created WBR callout templates in XBR, will validate data in Q2’26."
+          },
+          {
+            "month": "February",
+            "color": "Green",
+            "text": "Explored XBR agent by developing template for YoY trend on SSR WBR callout."
+          },
+          {
+            "month": "January",
+            "color": null,
+            "text": "FMLA in Jan"
+          }
+        ],
+        "latest_color": "Green",
+        "latest_update": "Created WBR callout templates in XBR, will validate data in Q2’26.",
+        "latest_month": "March",
+        "markets": [],
+        "trend": {
+          "Green": 2,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ],
+    "Alex VanDerStuyf Benjamin Lim": [
+      {
+        "owner": "Alex VanDerStuyf Benjamin Lim",
+        "level": "Individual",
+        "title": "MCS Legacy Content Audit",
+        "description": "Transition WW MCS webpages to Polaris design system and archive/deprecate all legacy webpages.",
+        "end_date": "2026-06-30",
+        "how_measured": "",
+        "why_important": "",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": null,
+            "text": "Green: Frank has created a list that identifies legacy pages: https://amazoneur-my.sharepoint.com/:x:/g/personal/teomormi_amazon_es/IQC_b09tUF9rQqlswKZ1cUBCAR-CWItJZOp3hV3tLp9ZTKE?e=MhCkhz&CID=AEAF61A2-7EF5-4EF6-A9AA-2ECA21098844&wdLOR=cB8C46387-3F0D-4251-8A14-438F9CD5F5CA\n\nNext steps: A) Dwayne to leverage Adobe Analytics traffic to prioritze which pages should be updated first B) Alex to organize a prioritization meeting to discuss actioning page updates"
+          },
+          {
+            "month": "February",
+            "color": null,
+            "text": "Green -\n\nCurrent: Frank is in progress to create the page list that has outdated content. He is working with Vijeth and Matteo to see if Astra is a viable option for this task.\nNext: AEM report will be combined with AA traffic data to determine which pages are actively used.\nLastly: Team will regroup to review reporting + determine/priortize next steps"
+          },
+          {
+            "month": "January",
+            "color": null,
+            "text": "Green - Kick-off held and core working team identified: Ben, Dwayne, Frank, Yoav, Darren, Chetan, Lucy, Alex.\n\nNext Steps:\n- Create an AEM report/audit with legacy page URLs. Asana ticket: https://app.asana.com/1/8442528107068/task/1213248897496340\n- AEM report will be combined with AA traffic data to determine which pages are actively used\n- Team will regroup to review the reporting and determine/prioritize next steps"
+          }
+        ],
+        "latest_color": null,
+        "latest_update": "Green: Frank has created a list that identifies legacy pages: https://amazoneur-my.sharepoint.com/:x:/g/personal/teomormi_amazon_es/IQC_b09tUF9rQqlswKZ1cUBCAR-CWItJZOp3hV3tLp9ZTKE?e=MhCkhz&CID=AEAF61A2-7EF5-4EF6-A9AA-2ECA21098844&wdLOR=cB8C46387-3F0D-4251-8A14-438F9CD5F5CA\n\nNext steps: A) Dwayne to leverage Adobe Analytics traffic to prioritze which pages should be updated first B) Alex to organize a prioritization meeting to discuss actioning page updates",
+        "latest_month": "March",
+        "markets": [],
+        "trend": {
+          "Green": 0,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ],
+    "Benjamin Lim Alex VanDerStuyf": [
+      {
+        "owner": "Benjamin Lim Alex VanDerStuyf",
+        "level": "Individual",
+        "title": "MCS Human Interface Guidelines (HIG)",
+        "description": "Create and publish the MCS/Polaris Human Interface Guidelines (HIG).",
+        "end_date": "2026-10-31",
+        "how_measured": "",
+        "why_important": "The HIG will be an internal microsite that houses the MCS/Polaris design system, including components/templates and best practicies across content/creative/SEO/etc.",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": "Green",
+            "text": "On hold. Start design and documentation."
+          },
+          {
+            "month": "February",
+            "color": "Green",
+            "text": "On hold until Q3 when we will initiate design and documentation."
+          },
+          {
+            "month": "January",
+            "color": "Green",
+            "text": "On hold until Q3 when we will initiate design and documentation."
+          }
+        ],
+        "latest_color": "Green",
+        "latest_update": "On hold. Start design and documentation.",
+        "latest_month": "March",
+        "markets": [],
+        "trend": {
+          "Green": 3,
+          "Yellow": 0,
+          "Red": 0
+        }
+      },
+      {
+        "owner": "Benjamin Lim Alex VanDerStuyf",
+        "level": "Individual",
+        "title": "MCS Contact Sales Form Personalization",
+        "description": "Launch three tests using 6Sense personalization that increase US Contact Sales submissions by +15% (per test).",
+        "end_date": "2026-12-31",
+        "how_measured": "",
+        "why_important": "",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": "Green",
+            "text": "Planning meeting is scheduled for this week to discuss the first test."
+          },
+          {
+            "month": "February",
+            "color": "Green",
+            "text": "On hold so the team can prioritize MENA in Q1 - first test will be launched in Q2. We adjusted the goal down to three tests, as we were initially planning to run one per quarter."
+          },
+          {
+            "month": "January",
+            "color": "Green",
+            "text": "On hold so the team can prioritize MENA in Q1 - first test will be launched in Q2. We adjusted the goal down to three tests, as we were initially planning to run one per quarter."
+          }
+        ],
+        "latest_color": "Green",
+        "latest_update": "Planning meeting is scheduled for this week to discuss the first test.",
+        "latest_month": "March",
+        "markets": [],
+        "trend": {
+          "Green": 3,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ],
+    "Benjamin Lim": [
+      {
+        "owner": "Benjamin Lim",
+        "level": "Individual",
+        "title": "MCS Design Token System",
+        "description": "Implement MCS token system and reduce time spent on design system enhancements/updates to 5 days or less.",
+        "end_date": "2026-09-30",
+        "how_measured": "",
+        "why_important": "",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": null,
+            "text": "Green - We have delivered the final p0 design tokens border-radius and color tokens for the MCS Design Token System - which completes the p0 token values. This milestone completes our unified token library, empowering the team to make critical updates to the website—including Color, Border, Border Radius, Font Family, Market Place-specific typography, Font Weight, Letter Spacing, Theme, Font Size, and Line Height—without requiring a code build.\n\nNext steps:\nWe will have all of border-radius and color tokens in production.\n\n\nAre there any known risks or dependencies?\nNo"
+          },
+          {
+            "month": "February",
+            "color": null,
+            "text": "Green - We have delivered the border-radius and color tokens for the MCS Design Token System. This milestone completes our unified token library, empowering the team to make critical updates to the website—including Color, Border, Border Radius, Font Family, Market Place-specific typography, Font Weight, Letter Spacing, Theme, Font Size, and Line Height—without requiring a code build.\nWhat will be completed in the upcoming month?\n\nNext steps:\n\nColor Token: We’re waiting on the dev team; to prioritize when the color tokens will go live in production. Prioritization will be provided next week."
+          },
+          {
+            "month": "January",
+            "color": null,
+            "text": "Green - We completed 7 out of 10 P0 design tokens, which are now successfully integrated into the production environment.\n\nNext steps:\n- Production Deployment: We will move \"Border\" and \"Border-Radius\" into the production environment by next Monday, Feb 16.\n- Final P0 Milestone: We will then begin work on the final P0 token: \"Color.\"\n- P1 Initiation: We have initiated the formal request to begin work on P1 tokens: \"Sizing,\" \"Spacing,\" \"Typography,\" \"Opacity,\" and \"Box Shadow.\""
+          }
+        ],
+        "latest_color": null,
+        "latest_update": "Green - We have delivered the final p0 design tokens border-radius and color tokens for the MCS Design Token System - which completes the p0 token values. This milestone completes our unified token library, empowering the team to make critical updates to the website—including Color, Border, Border Radius, Font Family, Market Place-specific typography, Font Weight, Letter Spacing, Theme, Font Size, and Line Height—without requiring a code build.\n\nNext steps:\nWe will have all of border-radius and color tokens in production.\n\n\nAre there any known risks or dependencies?\nNo",
+        "latest_month": "March",
+        "markets": [],
+        "trend": {
+          "Green": 0,
+          "Yellow": 0,
+          "Red": 0
+        }
+      },
+      {
+        "owner": "Benjamin Lim",
+        "level": "Individual",
+        "title": "UX Experimentation",
+        "description": "Ideate, plan, and execute 4 weblabs that target specific UX/CX gaps on the website.",
+        "end_date": "2026-12-31",
+        "how_measured": "",
+        "why_important": "",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": "Green",
+            "text": "Planning meeting is scheduled for this week to discuss the first test. First use case we are investigating is the home page where we are able to show more contextual and relevant content depending on the prospects industries"
+          },
+          {
+            "month": "February",
+            "color": "Green",
+            "text": "On hold until Q2, when we have OP2 initiatives that will require this testing."
+          },
+          {
+            "month": "January",
+            "color": "Green",
+            "text": "On hold until Q2, when we have OP2 initiatives that will require this testing."
+          }
+        ],
+        "latest_color": "Green",
+        "latest_update": "Planning meeting is scheduled for this week to discuss the first test. First use case we are investigating is the home page where we are able to show more contextual and relevant content depending on the prospects industries",
+        "latest_month": "March",
+        "markets": [],
+        "trend": {
+          "Green": 3,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ],
+    "Alex VanDerStuyf": [
+      {
+        "owner": "Alex VanDerStuyf",
+        "level": "Individual",
+        "title": "Content Governance",
+        "description": "Create working group and process for ongoing audits/reviews of MCS page creation and/or updates.",
+        "end_date": "2026-12-31",
+        "how_measured": "",
+        "why_important": "",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": "Green",
+            "text": "This process will initate after the AEM legacy audit concludes."
+          },
+          {
+            "month": "February",
+            "color": "Green",
+            "text": "This process will initate after the AEM legacy audit concludes."
+          },
+          {
+            "month": "January",
+            "color": "Green",
+            "text": "We will initiate this process as part of the AEM legacy audit, where we've started discussing solutions/mechanisms like restricting AEM access and reintroducting content approval workflows."
+          }
+        ],
+        "latest_color": "Green",
+        "latest_update": "This process will initate after the AEM legacy audit concludes.",
+        "latest_month": "March",
+        "markets": [],
+        "trend": {
+          "Green": 3,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ],
+    "Yoav Reder": [
+      {
+        "owner": "Yoav Reder",
+        "level": "Individual",
+        "title": "GEO Enablement",
+        "description": "Establish mechanism for enabling AB marketing teams with GEO tools, reporting, and overall strategy that can be applied to other campaigns/channels.",
+        "end_date": "2025-12-31",
+        "how_measured": "",
+        "why_important": "",
+        "submission_status": "",
+        "monthly_status": [
+          {
+            "month": "March",
+            "color": "Green",
+            "text": "reviewed GEO strategy with Todd and presented a GEO/Profound demo as part of the CM AI Series and r. As a follow-up, partnering with Paid Media (Robert Skenes) to operationalize Profound insights for 3P and community engagement."
+          },
+          {
+            "month": "February",
+            "color": null,
+            "text": "Green - AI driven meta tag optimization of AB’s YouTube channel: first batch of 10 videos for optimization implemented. Next steps: measure performance.\nMarch - GEO demo as part of the CM AI series"
+          },
+          {
+            "month": "January",
+            "color": "Green",
+            "text": "Working with Siri (social) on AI driven meta tag optimization of AB’s YouTube channel. In Jan we identified first batch of 10 videos for optimization. Next steps: meta tag generation via Profound and implementation (ECD: EOM Feb)"
+          }
+        ],
+        "latest_color": "Green",
+        "latest_update": "reviewed GEO strategy with Todd and presented a GEO/Profound demo as part of the CM AI Series and r. As a follow-up, partnering with Paid Media (Robert Skenes) to operationalize Profound insights for 3P and community engagement.",
+        "latest_month": "March",
+        "markets": [],
+        "trend": {
+          "Green": 2,
+          "Yellow": 0,
+          "Red": 0
+        }
+      }
+    ]
+  },
+  "progress": {
+    "MX/AU Paid Search Registrations": {
+      "unit": "registrations",
+      "target": 24000,
+      "ytd": 5526,
+      "projected_eoy": 15643,
+      "ytd_pct": 23.0,
+      "projected_pct": 65.2,
+      "breakdown": [
+        {
+          "market": "MX",
+          "target": 11100,
+          "ytd": 2941,
+          "projected_eoy": 10024,
+          "ytd_pct": 26.5,
+          "projected_pct": 90.3
+        },
+        {
+          "market": "AU",
+          "target": 12900,
+          "ytd": 2585,
+          "projected_eoy": 5619,
+          "ytd_pct": 20.0,
+          "projected_pct": 43.6
+        }
+      ],
+      "source": "forecast-data.json yearly block"
+    },
+    "Globalized Cross-Market Testing": {
+      "unit": "cross-team tests",
+      "target": 3,
+      "ytd": 3,
+      "tests_in_flight": 7,
+      "tests": [
+        {
+          "workstream": "Audiences",
+          "test": "Engagement Channel",
+          "market": "US",
+          "result": "$765K iOPS",
+          "confidence": "High",
+          "status": "Validated",
+          "is_complete": true
+        },
+        {
+          "workstream": "UX",
+          "test": "Gated Guest",
+          "market": "WW",
+          "result": "-61% conversion",
+          "confidence": "High",
+          "status": "Killed",
+          "is_complete": true
+        },
+        {
+          "workstream": "UX",
+          "test": "In-context registration",
+          "market": "WW",
+          "result": "+13.6K annualized",
+          "confidence": "Medium",
+          "status": "Scaling",
+          "is_complete": false
+        },
+        {
+          "workstream": "UX",
+          "test": "Baloo early access",
+          "market": "WW",
+          "result": "Launched 3/30",
+          "confidence": "Early",
+          "status": "Measuring",
+          "is_complete": false
+        },
+        {
+          "workstream": "UX",
+          "test": "Polaris Brand LP — US",
+          "market": "WW",
+          "result": "+6% CVR vs legacy (21-day pre/post 3/24)",
+          "confidence": "High",
+          "status": "Scaled",
+          "is_complete": true
+        },
+        {
+          "workstream": "UX",
+          "test": "Polaris Brand LP — WW weblab",
+          "market": "WW",
+          "result": "Dial-up 4/6–4/7 complete",
+          "confidence": "Early",
+          "status": "Measuring",
+          "is_complete": false
+        },
+        {
+          "workstream": "UX",
+          "test": "Polaris Brand LP — Italy",
+          "market": "IT",
+          "result": "Ref tag regression; legacy restored 4/16",
+          "confidence": "—",
+          "status": "Rework",
+          "is_complete": false
+        }
+      ],
+      "ytd_pct": 100.0,
+      "source": "ww-testing-state.md Appendix D (cross-team tests)"
+    },
+    "MX + AU Market Testing": {
+      "unit": "MX/AU experiments",
+      "target": 4,
+      "ytd": 0,
+      "tests_in_flight": 0,
+      "tests": [],
+      "ytd_pct": 0.0,
+      "source": "ww-testing-state.md Appendix D (MX/AU-scoped tests)"
+    }
+  }
+}

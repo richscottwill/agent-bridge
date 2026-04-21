@@ -42,3 +42,42 @@ OP2: 2,592 regs | $228,258 spend | $88 CPA
 | —    | —         | —      | —       | —      | —         |
 
 WMAPE: — | Calibration: —
+
+---
+
+## Apr 2026
+
+OP2: 2,447 regs | $214,436 spend | $87.64 CPA
+
+### Registrations
+
+| Week | Days  | Projected | MTD   | vs OP2 |     |
+| ---- | ----- | --------- | ----- | ------ | --- |
+| W16  | 18/30 | 3,200     | 1,920 | +31%   | 🔴   |
+| W16r | 18/30 | 3,130     | 1,889 | +28%   | 🔴   |
+
+### Spend
+
+| Week | Days  | Projected | MTD      | vs OP2 |     |
+| ---- | ----- | --------- | -------- | ------ | --- |
+| W16  | 18/30 | $247,000  | $145,739 | +15%   | 🔴   |
+| W16r | 18/30 | $245,000  | $145,534 | +14%   | 🔴   |
+
+### CPA
+
+| Week | Days  | Projected | OP2    |     |
+| ---- | ----- | --------- | ------ | --- |
+| W16  | 18/30 | $77       | $87.64 | 🟢   |
+| W16r | 18/30 | $78       | $87.64 | 🟢   |
+
+### Rationale
+- W16: W15–W16 avg (733 regs/wk, $58.4K/wk) applied to remaining 12 days (W17 full + W18 5/7). No holidays through month-end. W14 treated as one-week anomaly, not baseline. CPA stable at $77; NB CVR recovery confirmed W15 dip was reversion, not structural.
+- W16r (refined): MTD pulled from DuckDB canonical (`ps.v_monthly`): 1,889 regs / $145,534 / $77.04 through Apr 18. Remaining 12 days = 8 weekdays + 4 weekend days. W15–W16 blended weekday ≈ 115 regs / $8,573 spend; weekend ≈ 80 regs / $7,750 spend. Remaining estimate: +1,240 regs / +$99.6K. No CA holidays through month-end. Recommended W17 spend: $58K (hold run rate). Open watch: Brand CPA $62 held elevated three weeks on Brand CPC inflation ($2.15, +57% YoY).
+
+### Accuracy (after month closes)
+
+| Week | Proj Regs | Actual | Error % | Weight | Wtd Error |
+| ---- | --------- | ------ | ------- | ------ | --------- |
+| —    | —         | —      | —       | —      | —         |
+
+WMAPE: — | Calibration: —

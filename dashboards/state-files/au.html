@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Market State File</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f1117;--surface:#14161e;--surface2:#1a1d27;--border:#1e2028;--border2:#2a2d35;
+  --text:#d0d8e0;--text2:#8899aa;--text3:#5a6a7a;--white:#f0f4f8;
+  --accent:#4a9eff;--accent2:#3b82f6;--accent-dim:rgba(74,158,255,0.12);
+  --green:#4ade80;--red:#f87171;--amber:#fbbf24;--purple:#a78bfa}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);padding:0;min-height:100vh;-webkit-font-smoothing:antialiased}
+.page{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);background:rgba(20,22,30,0.92)}
+.nav-brand{color:var(--white);font-weight:700;font-size:1.02em;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:4px;letter-spacing:1.5px;text-transform:uppercase}
+.nav-link{color:var(--text2);text-decoration:none;padding:14px 18px;font-size:0.92em;font-weight:500;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
+.nav-link:hover{color:var(--text);background:rgba(74,158,255,0.06)}
+.nav-link.active{color:var(--accent);border-bottom-color:var(--accent)}
+.nav-back{color:var(--text3);text-decoration:none;padding:14px 14px 14px 0;font-size:0.87em;font-weight:500;letter-spacing:.3px;margin-right:4px;border-right:1px solid var(--border);transition:color .15s}
+.nav-back:hover{color:var(--accent)}
+.toc{display:flex;gap:6px;padding:10px 24px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--border);background:#12141c;position:sticky;top:52px;z-index:99}
+.toc-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-right:2px}
+.toc a{font-size:12px;color:var(--text2);text-decoration:none;padding:2px 8px;border-radius:3px;transition:all .15s}
+.toc a:hover{color:var(--accent);background:rgba(30,58,138,.15)}
+.toc .toc-sep{color:#333;font-size:12px}
+h1{color:var(--white);font-size:1.62em;margin-bottom:4px;font-weight:600;letter-spacing:.2px}
+h2{color:var(--text);font-size:1.12em;margin:32px 0 12px;font-weight:600;letter-spacing:.2px;scroll-margin-top:110px}
+h3{color:var(--text);font-size:0.97em;margin:16px 0 8px;font-weight:600}
+.sub{color:var(--text2);font-size:0.92em;margin-bottom:16px;line-height:1.5}
+.meta-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;font-size:0.87em;color:var(--text3)}
+.meta-row span{background:var(--surface);border:1px solid var(--border);padding:4px 10px;border-radius:4px}
+.meta-row strong{color:var(--text2);font-weight:500;margin-right:4px}
+.card{background:var(--surface);border-radius:8px;padding:18px;border:1px solid var(--border);margin-bottom:12px}
+.card-title{color:var(--text2);font-size:0.84em;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;font-weight:500}
+.prose p{color:var(--text);font-size:0.97em;line-height:1.7;margin-bottom:12px}
+.prose p:last-child{margin-bottom:0}
+.list-numbered{counter-reset:li;list-style:none;padding:0}
+.list-numbered li{counter-increment:li;position:relative;padding:8px 0 8px 32px;color:var(--text);font-size:0.94em;line-height:1.6;border-bottom:1px solid var(--border)}
+.list-numbered li:last-child{border-bottom:none}
+.list-numbered li::before{content:counter(li);position:absolute;left:0;top:8px;width:22px;height:22px;background:var(--accent-dim);color:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.78em;font-weight:600}
+.list-bullets{list-style:none;padding:0}
+.list-bullets li{padding:6px 0 6px 18px;color:var(--text);font-size:0.94em;line-height:1.6;border-bottom:1px solid var(--border);position:relative}
+.list-bullets li::before{content:'\2022';position:absolute;left:4px;top:6px;color:var(--accent)}
+.list-bullets li:last-child{border-bottom:none}
+table{width:100%;border-collapse:collapse;font-size:0.9em}
+th{text-align:left;color:var(--text3);font-weight:500;padding:8px 10px;border-bottom:1px solid var(--border);font-size:0.82em;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text)}
+tr:last-child td{border-bottom:none}
+.badge{font-size:0.74em;padding:2px 8px;border-radius:3px;font-weight:600;text-transform:uppercase;display:inline-block;letter-spacing:.3px;white-space:nowrap}
+.b-active{background:var(--accent-dim);color:var(--accent)}
+.b-amber{background:rgba(251,191,36,0.15);color:var(--amber)}
+.b-red{background:rgba(248,113,113,0.15);color:var(--red)}
+.b-green{background:rgba(52,211,153,0.15);color:var(--green)}
+.empty{color:var(--text3);font-style:italic;font-size:0.87em;padding:8px 0}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:780px){.split{grid-template-columns:1fr}}
+.gen{color:var(--text3);font-size:0.74em;text-align:center;margin-top:48px;padding:16px;letter-spacing:.5px}
+
+/* Goal card (shared styling with overview/goals pages) */
+.goal-card{background:var(--surface);border-radius:8px;padding:16px;border:1px solid var(--border);border-left:3px solid var(--text3);margin-bottom:10px}
+.goal-card.goal-green{border-left-color:var(--green)}
+.goal-card.goal-yellow{border-left-color:var(--amber)}
+.goal-card.goal-red{border-left-color:var(--red)}
+.goal-title{font-weight:600;color:var(--white);font-size:0.97em;margin-bottom:4px;line-height:1.35}
+.goal-desc{color:var(--text2);font-size:0.84em;line-height:1.5;margin-bottom:10px}
+.goal-trend{display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap}
+.goal-trend-pill{font-size:0.72em;padding:2px 6px;border-radius:3px;font-weight:600;white-space:nowrap}
+.goal-trend-pill.Green{background:rgba(52,211,153,0.15);color:var(--green)}
+.goal-trend-pill.Yellow{background:rgba(251,191,36,0.15);color:var(--amber)}
+.goal-trend-pill.Red{background:rgba(248,113,113,0.15);color:var(--red)}
+.goal-trend-pill.none{background:var(--surface2);color:var(--text3)}
+.goal-update{color:var(--text);font-size:0.84em;line-height:1.5;padding:8px 10px;background:var(--surface2);border-radius:4px;margin-top:6px}
+.goal-update-label{color:var(--text3);font-size:0.74em;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+</style></head><body>
+<nav>
+  <a href="../index.html" class="nav-back" target="_top">&larr; Command Center</a>
+  <span class="nav-brand">State Files</span>
+  <a href="index.html" class="nav-link">Overview</a>
+  <a href="au.html" class="nav-link" data-nav="au">AU</a>
+  <a href="mx.html" class="nav-link" data-nav="mx">MX</a>
+  <a href="ww.html" class="nav-link" data-nav="ww">WW Testing</a>
+  <a href="goals.html" class="nav-link">Goals</a>
+</nav>
+<div class="toc" id="toc">
+  <span class="toc-label">Jump to</span>
+  <a href="#goals">Goals</a><span class="toc-sep">&middot;</span>
+  <a href="#contributions">Contributions</a><span class="toc-sep">&middot;</span>
+  <a href="#introduction">Intro</a><span class="toc-sep">&middot;</span>
+  <a href="#goals-tenets">Goals &amp; Tenets</a><span class="toc-sep">&middot;</span>
+  <a href="#state">State</a><span class="toc-sep">&middot;</span>
+  <a href="#flags">Flags</a><span class="toc-sep">&middot;</span>
+  <a href="#lessons">Lessons</a><span class="toc-sep">&middot;</span>
+  <a href="#priorities">Priorities</a><span class="toc-sep">&middot;</span>
+  <a href="#appendices">Appendices</a>
+</div>
+<div class="page">
+  <h1 id="titleRow">Loading&hellip;</h1>
+  <div class="meta-row" id="metaRow"></div>
+
+  <h2 id="goals">Mapped 2026 Goals</h2>
+  <div id="goalsCard"></div>
+
+  <h2 id="contributions">My Contributions</h2>
+  <div class="card" id="contribBlock"><div class="empty">Loading&hellip;</div></div>
+
+  <h2 id="introduction">Introduction</h2>
+  <div class="card prose" id="introBlock"></div>
+
+  <div id="goals-tenets" style="scroll-margin-top:110px"></div>
+  <div class="split">
+    <div>
+      <h2 id="state-file-goals" style="margin-top:16px">State-File Goals</h2>
+      <div class="card"><ol class="list-numbered" id="goalsList"></ol></div>
+    </div>
+    <div>
+      <h2 id="tenets" style="margin-top:16px">Tenets</h2>
+      <div class="card"><ol class="list-numbered" id="tenetsList"></ol></div>
+    </div>
+  </div>
+
+  <h2 id="state">State of the Business</h2>
+  <div class="card prose" id="stateBlock"></div>
+  <div class="split">
+    <div><div class="card"><div class="card-title">Input metrics (controllable levers)</div><div id="inputsTable"></div></div></div>
+    <div><div class="card"><div class="card-title">Output metrics (lagging results)</div><div id="outputsTable"></div></div></div>
+  </div>
+
+  <h2 id="flags">Flags</h2>
+  <div class="card" id="flagsBlock"></div>
+
+  <h2 id="lessons">Lessons Learned</h2>
+  <div class="card prose" id="lessonsBlock"></div>
+
+  <h2 id="priorities">Strategic Priorities</h2>
+  <div class="card"><ol class="list-numbered" id="prioritiesList"></ol></div>
+
+  <h2 id="appendices">Appendices</h2>
+  <div id="appendicesBlock"></div>
+
+  <div class="gen" id="genFooter">LOADING&hellip;</div>
+</div>
+<script>
+(function(){
+  var params=new URLSearchParams(window.location.search);
+  var fromFile=(window.location.pathname.match(/([a-z]+)\.html$/i)||[])[1];
+  var marketKey=(params.get('m')||fromFile||'au').toLowerCase();
+  if(marketKey==='index'||marketKey==='goals')marketKey=params.get('m')||'au';
+
+  Promise.all([
+    fetch('../data/state-files-data.json?'+Date.now()).then(function(r){return r.json()}),
+    fetch('../data/goals-data.json?'+Date.now()).then(function(r){return r.json()}).catch(function(){return null}),
+    fetch('../data/contributions-data.json?'+Date.now()).then(function(r){return r.json()}).catch(function(){return null})
+  ]).then(function(res){
+    var D=res[0], G=res[1], C=res[2];
+    var record=(D.data||{})[marketKey];
+    if(!record){document.getElementById('titleRow').textContent='Unknown market: '+marketKey;return}
+
+    var nl=document.querySelector('.nav-link[data-nav="'+marketKey+'"]');
+    if(nl)nl.classList.add('active');
+
+    var label=(D.labels||{})[marketKey]||record.title;
+    document.title='State File \u2014 '+label;
+    document.getElementById('titleRow').textContent=label+' \u2014 State of the Business';
+    var meta=[
+      ['Status','<span class="badge b-active">'+record.status+'</span>'],
+      ['Owner',record.owner||'?'],
+      ['Updated',record.updated||'?'],
+      ['Data through',record.data_through||'?']
+    ];
+    document.getElementById('metaRow').innerHTML=meta.map(function(m){return '<span><strong>'+m[0]+':</strong>'+m[1]+'</span>'}).join('');
+
+    // Mapped 2026 goals — surface every Richard goal whose `markets` array includes this market.
+    (function(){
+      var el=document.getElementById('goalsCard');
+      if(!G||!G.richard_goals){el.innerHTML='<div class="card empty">Goals data not loaded &mdash; run refresh-goals.py</div>';return}
+      var mapped=G.richard_goals.filter(function(g){return (g.markets||[]).indexOf(marketKey)>-1});
+      if(!mapped.length){el.innerHTML='<div class="card empty">No 2026 goal maps to this market.</div>';return}
+      el.innerHTML=mapped.map(function(g){
+        var color=(g.latest_color||'').toLowerCase()||'none';
+        var cls='goal-card'+(color==='green'?' goal-green':color==='yellow'?' goal-yellow':color==='red'?' goal-red':'');
+        var trendPills=(g.monthly_status||[]).map(function(m){
+          var c=m.color||'none';
+          return '<span class="goal-trend-pill '+c+'">'+m.month.slice(0,3)+': '+(m.color||'?')+'</span>';
+        }).join('');
+        var desc=g.description||'';
+        var latest=g.latest_update||'';
+        return '<div class="'+cls+'">'+
+          '<div class="goal-title">'+g.title+'</div>'+
+          '<div class="goal-desc">'+desc+'</div>'+
+          '<div class="goal-trend">'+trendPills+'</div>'+
+          (latest?'<div class="goal-update"><div class="goal-update-label">'+(g.latest_month||'Latest')+' update \u00B7 source: Outbound Marketing Goals sheet</div>'+latest+'</div>':'')+
+          '</div>';
+      }).join('');
+    })();
+
+    // My Contributions — pull this market's goals from contributions-data.json,
+    // then flatten the contribution list for any goal that maps to this market.
+    (function(){
+      var el=document.getElementById('contribBlock');
+      if(!C||!C.goals){el.innerHTML='<div class="empty">Contributions data not loaded &mdash; run refresh-contributions.py with inputs from /tmp/contrib-inputs/</div>';return}
+      var relevant=C.goals.filter(function(g){return (g.markets||[]).indexOf(marketKey)>-1});
+      if(!relevant.length){el.innerHTML='<div class="empty">No contributions mapped to this market yet.</div>';return}
+      var seen={},records=[];
+      relevant.forEach(function(g){(g.contributions||[]).forEach(function(r){
+        if(seen[r.hash])return;seen[r.hash]=true;
+        records.push({...r,_goal:g.title});
+      })});
+      // Sort: records with dates first (newest first), undated after
+      records.sort(function(a,b){
+        var ad=a.date||'',bd=b.date||'';
+        if(ad&&!bd)return -1;
+        if(!ad&&bd)return 1;
+        return bd.localeCompare(ad);
+      });
+      var counts={asana:0,slack:0,quip:0,sharepoint:0,email:0};
+      var undated=0;
+      records.forEach(function(r){
+        if(counts[r.source]!==undefined)counts[r.source]++;
+        if(!r.date)undated++;
+      });
+      var srcBadges='<span class="mini-tag">'+counts.asana+' asana</span><span class="mini-tag">'+counts.slack+' slack</span><span class="mini-tag">'+counts.quip+' quip</span><span class="mini-tag">'+counts.sharepoint+' sharepoint</span><span class="mini-tag">'+counts.email+' email</span>';
+      var h='<div class="card-title">'+records.length+' contributions YTD &middot; '+srcBadges+'</div>';
+      h+='<p style="color:var(--text2);font-size:0.84em;line-height:1.5;margin-bottom:12px">What Richard specifically pushed, decided, or drove for the goals mapping to this market &mdash; separated from general program activity. Blended from Asana (completed tasks), Slack (substantive messages), Quip (docs Richard created or commented on), SharePoint (native Richard-authored files with tier-based credit matrix), and email (sent items). System-generated briefs and team-doc authorship are filtered out.</p>';
+      if(undated){
+        h+='<p style="color:var(--amber);font-size:0.78em;margin-bottom:8px">'+undated+' records missing completion date &mdash; pending Asana GetTaskDetails enrichment pass. Shown grouped at bottom.</p>';
+      }
+      h+='<div style="max-height:480px;overflow-y:auto">';
+      h+='<table><thead><tr><th style="width:88px">Date</th><th style="width:64px">Source</th><th>Contribution</th><th style="width:110px">Goal</th></tr></thead><tbody>';
+      records.slice(0,80).forEach(function(r){
+        var srcClass={asana:'b-active',slack:'b-green',quip:'b-amber',sharepoint:'b-red',email:'b-amber'}[r.source]||'b-active';
+        var titleText=(r.title||'').replace(/</g,'&lt;');
+        var link=r.url?'<a href="'+r.url+'" target="_blank" style="color:var(--text);text-decoration:none">'+titleText+'</a>':titleText;
+        var goalShort=(r._goal||'').replace('MX/AU Paid Search Registrations','MX/AU Regs').replace('MX + AU Market Testing','MX+AU Test').replace('Globalized Cross-Market Testing','Globalized');
+        var dateCell=r.date?r.date:'<span style="color:#444">&mdash;</span>';
+        h+='<tr><td style="color:var(--text3);font-size:0.82em;white-space:nowrap">'+dateCell+'</td>'+
+          '<td><span class="badge '+srcClass+'">'+r.source+'</span></td>'+
+          '<td style="color:var(--text)">'+link+(r.also_seen_in&&r.also_seen_in.length?' <span class="mini-tag">+'+r.also_seen_in.join(',')+'</span>':'')+'</td>'+
+          '<td style="color:var(--text3);font-size:0.82em">'+goalShort+'</td></tr>';
+      });
+      h+='</tbody></table></div>';
+      if(records.length>80)h+='<div style="color:var(--text3);font-size:0.82em;margin-top:8px">Showing 80 of '+records.length+'. Full list in data/contributions-data.json.</div>';
+      el.innerHTML=h;
+    })();
+
+    function proseHtml(paras){
+      if(!paras||!paras.length)return '<div class="empty">No content.</div>';
+      return paras.map(function(p){return '<p>'+p+'</p>'}).join('');
+    }
+    function olHtml(items){
+      if(!items||!items.length)return '<li class="empty" style="list-style:none;padding-left:0" data-empty>No items.</li>';
+      return items.map(function(s){return '<li>'+s+'</li>'}).join('');
+    }
+    function tableHtml(rows){
+      if(!rows||!rows.length)return '<div class="empty">No data.</div>';
+      var keys=Object.keys(rows[0]);
+      var h='<table><thead><tr>'+keys.map(function(k){return '<th>'+k+'</th>'}).join('')+'</tr></thead><tbody>';
+      rows.forEach(function(r){
+        h+='<tr>'+keys.map(function(k){return '<td>'+(r[k]||'')+'</td>'}).join('')+'</tr>';
+      });
+      return h+'</tbody></table>';
+    }
+
+    var secs=record.sections||{},tabs=record.tables||{},apps=record.appendices||{};
+    document.getElementById('introBlock').innerHTML=proseHtml(secs.introduction);
+    document.getElementById('goalsList').innerHTML=olHtml(secs.goals);
+    document.getElementById('tenetsList').innerHTML=olHtml(secs.tenets);
+    document.getElementById('stateBlock').innerHTML=proseHtml(secs.state);
+    document.getElementById('inputsTable').innerHTML=tableHtml(tabs.inputs);
+    document.getElementById('outputsTable').innerHTML=tableHtml(tabs.outputs);
+
+    var fb=document.getElementById('flagsBlock');
+    if(tabs.flags&&tabs.flags.length){
+      fb.innerHTML='<div class="card-title">Active flags</div>'+tableHtml(tabs.flags);
+    } else if(secs.flags&&secs.flags.length){
+      fb.innerHTML='<div class="card-title">Flags narrative</div><div class="prose">'+proseHtml(secs.flags)+'</div>';
+    } else {
+      fb.innerHTML='<div class="empty">No Flags section in this state file. <span style="color:var(--amber)">Schema gap &mdash; consider adding to parallel the AU/MX files.</span></div>';
+    }
+
+    document.getElementById('lessonsBlock').innerHTML=proseHtml(secs.lessons);
+    document.getElementById('prioritiesList').innerHTML=olHtml(secs.priorities);
+
+    var appEl=document.getElementById('appendicesBlock'),ah='';
+    var order=['weekly_trend','yoy','monthly_projection','plan_summary','change_log','variance_bridge','source_links','placeholder_schema'];
+    order.forEach(function(key){
+      var a=apps[key];if(!a)return;
+      ah+='<div class="card" id="app-'+key+'"><div class="card-title">'+a.heading+' \u00B7 '+key.replace(/_/g,' ')+'</div>';
+      if(a.paragraphs&&a.paragraphs.length){
+        ah+='<div class="prose">'+a.paragraphs.slice(0,3).map(function(p){return '<p>'+p+'</p>'}).join('')+'</div>';
+      }
+      if(a.tables&&a.tables.length){
+        a.tables.forEach(function(t){ah+='<div style="margin-top:8px">'+tableHtml(t)+'</div>'});
+      }
+      if(a.bullets&&a.bullets.length&&(!a.tables||!a.tables.length)){
+        ah+='<ul class="list-bullets">'+a.bullets.slice(0,12).map(function(b){return '<li>'+b+'</li>'}).join('')+'</ul>';
+      }
+      ah+='</div>';
+    });
+    if(!ah)ah='<div class="card empty">No appendices parsed.</div>';
+    appEl.innerHTML=ah;
+
+    document.getElementById('genFooter').textContent='DATA: '+new Date(D.generated).toLocaleString()+' \u00B7 SOURCE: shared/wiki/state-files/'+marketKey+'-*.md \u00B7 REFRESH: python3 shared/dashboards/refresh-state-files.py';
+  }).catch(function(e){console.error(e);document.getElementById('titleRow').textContent='Failed to load data.';});
+})();
+</script>
+</body></html>

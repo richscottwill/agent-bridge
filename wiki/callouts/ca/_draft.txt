@@ -1,0 +1,4 @@
+CA: CA drove 778 registrations (+13% WoW), with +7% spend WoW and $78 CPA (-5% WoW). April is projected at $245K spend and 3.1K registrations at $78 CPA. (vs. OP2: +28% registrations, +14% spend, -11% CPA)
+WoW the recovery was CVR reversion, confirming the W15 call. Clicks were flat, CVR rebounded +14%, and CPA came back in range. NB led with +20% registrations on +17% CVR and -13% CPA to $100. Brand CPA held at $62 for the third straight week as Brand CPC inflated +16%, the one metric not participating.
+YoY we spent +27% with +109% registrations and -39% CPA. NB is the standout at -67% CPA YoY, while Brand CPA is +15% YoY on Brand CPC +57% YoY, the only regression.
+Note: I will monitor Brand CPC and IS for competitive pressure in W17. The NB CVR step-up is consistent with OCI E2E but inside normal variance; I need sustained CVR above 2.10% before claiming it.

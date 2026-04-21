@@ -178,9 +178,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </div>
 <div class="nav" id="nav">
   <a data-view="home" class="active">Command Center</a>
-  <a data-view="forecast-tracker.html">Forecast Tracker</a>
-  <a data-view="callout-dashboard.html">WBR Callouts</a>
+  <a data-view="performance/index.html">Performance</a>
   <a data-view="body-system/index.html">Body System</a>
+  <a data-view="state-files/index.html">State Files</a>
   <a data-view="wiki-search.html">Wiki Search</a>
 </div>
 <div class="toc" id="tocSection"></div>
@@ -214,7 +214,19 @@ function switchView(v){
 }
 nav.addEventListener('click',e=>{const a=e.target.closest('a[data-view]');if(!a)return;e.preventDefault();switchView(a.dataset.view)});
 const savedView=localStorage.getItem('kiro_dash_view');
-if(savedView&&savedView!=='home')switchView(savedView);
+if(savedView&&savedView!=='home'){
+  // Migrate legacy saved views — forecast-tracker + callout-dashboard are now
+  // under performance/, so redirect gracefully. Anything else must match a
+  // current nav entry or we fall back to home.
+  let targetView=savedView;
+  if(savedView==='forecast-tracker.html'||savedView==='callout-dashboard.html'){
+    targetView='performance/index.html';
+    localStorage.setItem('kiro_dash_view',targetView);
+  }
+  if(nav.querySelector('a[data-view="'+targetView+'"]')){
+    switchView(targetView);
+  }
+}
 
 /* ══ Detail panel ══ */
 let CC=null;
@@ -438,7 +450,7 @@ function renderBlocks(cc){
 /* ══ Actionable Intelligence — TABLE (exclusive categories, no commitments) ══ */
 function typeBadge(type){
   const map={
-    'Above the Rest':'background:rgba(30,58,138,.25);color:#93b4f5',
+    'Differentiate':'background:rgba(30,58,138,.25);color:#93b4f5',
     'Delegate':'background:rgba(113,63,18,.2);color:#d4b070',
     'Communicate':'background:rgba(6,78,59,.25);color:#4ade80'
   };
@@ -448,7 +460,7 @@ function typeBadge(type){
 
 function renderIntel(cc){
   const rows=[];
-  // Order: Communicate first (avoidance pattern), Delegate second (leverage), Above the Rest last (reward)
+  // Order: Communicate first (avoidance pattern), Delegate second (leverage), Differentiate last (reward)
   (cc.communicate||[]).forEach((item,i)=>{
     rows.push({section:'communicate',idx:i,text:item.text,type:'Communicate',audience:item.audience||'',context:item.context||''});
   });
@@ -456,7 +468,7 @@ function renderIntel(cc){
     rows.push({section:'delegate',idx:i,text:item.task,type:'Delegate',audience:item.to||'',context:item.reason||item.context||''});
   });
   (cc.differentiate||[]).filter(i=>i.status!=='done').forEach((item,i)=>{
-    rows.push({section:'differentiate',idx:i,text:item.action,type:'Above the Rest',audience:'',context:item.why||item.context||''});
+    rows.push({section:'differentiate',idx:i,text:item.action,type:'Differentiate',audience:'',context:item.why||item.context||''});
   });
 
   const dismissed=getDismissed('intel');

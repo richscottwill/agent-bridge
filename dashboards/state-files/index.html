@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Overview &mdash; State Files</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f1117;--surface:#14161e;--surface2:#1a1d27;--border:#1e2028;--border2:#2a2d35;
+  --text:#d0d8e0;--text2:#8899aa;--text3:#5a6a7a;--white:#f0f4f8;
+  --accent:#4a9eff;--accent2:#3b82f6;--accent-dim:rgba(74,158,255,0.12);
+  --green:#4ade80;--red:#f87171;--amber:#fbbf24;--purple:#a78bfa}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);padding:0;min-height:100vh;-webkit-font-smoothing:antialiased}
+.page{max-width:1200px;margin:0 auto;padding:24px 20px}
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);background:rgba(20,22,30,0.92)}
+.nav-brand{color:var(--white);font-weight:700;font-size:1.02em;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:4px;letter-spacing:1.5px;text-transform:uppercase}
+.nav-link{color:var(--text2);text-decoration:none;padding:14px 18px;font-size:0.92em;font-weight:500;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
+.nav-link:hover{color:var(--text);background:rgba(74,158,255,0.06)}
+.nav-link.active{color:var(--accent);border-bottom-color:var(--accent)}
+.nav-back{color:var(--text3);text-decoration:none;padding:14px 14px 14px 0;font-size:0.87em;font-weight:500;letter-spacing:.3px;margin-right:4px;border-right:1px solid var(--border);transition:color .15s}
+.nav-back:hover{color:var(--accent)}
+h1{color:var(--white);font-size:1.47em;margin-bottom:4px;font-weight:600;letter-spacing:.2px}
+h2{color:var(--text);font-size:1.07em;margin:28px 0 12px;font-weight:600;letter-spacing:.2px}
+.sub{color:var(--text2);font-size:0.9em;margin-bottom:24px;line-height:1.5}
+.toc{display:flex;gap:6px;padding:10px 24px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--border);background:#12141c}
+.toc-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-right:2px}
+.toc a{font-size:12px;color:var(--text2);text-decoration:none;padding:2px 8px;border-radius:3px;transition:all .15s}
+.toc a:hover{color:var(--accent);background:rgba(30,58,138,.15)}
+.toc .toc-sep{color:#333;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-bottom:16px}
+.card{background:var(--surface);border-radius:8px;padding:18px;border:1px solid var(--border)}
+.card-title{color:var(--text2);font-size:0.84em;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;font-weight:500}
+.overview-card{background:var(--surface);border-radius:8px;padding:20px;border:1px solid var(--border);text-decoration:none;display:block;transition:all .2s}
+.overview-card:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(74,158,255,0.08)}
+.oc-title{color:var(--text2);font-weight:600;font-size:0.9em;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px}
+.oc-metric{font-size:1.62em;font-weight:700;margin:8px 0;color:var(--white)}
+.oc-sub{color:var(--text2);font-size:0.9em;line-height:1.5}
+table{width:100%;border-collapse:collapse;font-size:0.94em}
+th{text-align:left;color:var(--text3);font-weight:500;padding:8px;border-bottom:1px solid var(--border);font-size:0.87em;text-transform:uppercase;letter-spacing:.5px}
+td{padding:8px;border-bottom:1px solid var(--border);vertical-align:top}
+.badge{font-size:0.74em;padding:2px 8px;border-radius:3px;font-weight:600;text-transform:uppercase;display:inline-block;letter-spacing:.3px;white-space:nowrap}
+.b-active{background:var(--accent-dim);color:var(--accent)}
+.b-gap{background:rgba(251,191,36,0.15);color:var(--amber)}
+.b-full{background:rgba(52,211,153,0.15);color:var(--green)}
+.no-data{color:var(--text3);font-style:italic;padding:20px;text-align:center}
+.mini-tag{display:inline-block;font-size:0.78em;padding:1px 6px;border-radius:3px;background:var(--surface2);color:var(--text2);margin-right:4px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.goal-card{background:var(--surface);border-radius:8px;padding:16px;border:1px solid var(--border);border-left:3px solid var(--text3);text-decoration:none;display:block;transition:all .2s}
+.goal-card:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(74,158,255,0.08)}
+.goal-card.goal-green{border-left-color:var(--green)}
+.goal-card.goal-yellow{border-left-color:var(--amber)}
+.goal-card.goal-red{border-left-color:var(--red)}
+.goal-title{font-weight:600;color:var(--white);font-size:0.97em;margin-bottom:4px;line-height:1.35}
+.goal-desc{color:var(--text2);font-size:0.84em;line-height:1.5;margin-bottom:10px}
+.goal-trend{display:flex;gap:4px;margin-bottom:8px}
+.goal-trend-pill{font-size:0.72em;padding:2px 6px;border-radius:3px;font-weight:600;white-space:nowrap}
+.goal-trend-pill.Green{background:rgba(52,211,153,0.15);color:var(--green)}
+.goal-trend-pill.Yellow{background:rgba(251,191,36,0.15);color:var(--amber)}
+.goal-trend-pill.Red{background:rgba(248,113,113,0.15);color:var(--red)}
+.goal-trend-pill.none{background:var(--surface2);color:var(--text3)}
+.goal-update{color:var(--text);font-size:0.84em;line-height:1.5;padding:8px 10px;background:var(--surface2);border-radius:4px;margin-top:6px}
+.goal-update-label{color:var(--text3);font-size:0.74em;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.goal-markets{margin-top:8px;font-size:0.78em;color:var(--text3)}
+
+/* Goal progress visual */
+.progress-row{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--border)}
+.progress-row:last-child{border-bottom:none}
+.progress-meta{flex:0 0 260px;min-width:0}
+.progress-title{font-weight:600;color:var(--white);font-size:0.94em;margin-bottom:2px;line-height:1.3}
+.progress-sub{color:var(--text3);font-size:0.78em}
+.progress-bar-wrap{flex:1;min-width:0}
+.progress-bar{position:relative;height:28px;background:var(--surface2);border-radius:4px;overflow:hidden;border:1px solid var(--border)}
+.progress-fill-actual{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#34d399,#4ade80);transition:width .3s}
+.progress-fill-forecast{position:absolute;left:0;top:0;bottom:0;background:repeating-linear-gradient(45deg,rgba(74,158,255,0.15) 0 6px,rgba(74,158,255,0.25) 6px 12px);transition:width .3s;border-right:1px solid rgba(74,158,255,0.4)}
+.progress-target-line{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--white);box-shadow:0 0 0 1px rgba(0,0,0,0.6)}
+.progress-target-label{position:absolute;top:-22px;font-size:0.74em;color:var(--white);transform:translateX(-50%);white-space:nowrap;font-weight:600}
+.progress-overshoot{position:absolute;right:0;top:0;bottom:0;background:repeating-linear-gradient(45deg,rgba(52,211,153,0.2) 0 6px,rgba(52,211,153,0.35) 6px 12px)}
+.progress-stats{flex:0 0 160px;text-align:right;font-size:0.82em;color:var(--text2)}
+.progress-stats strong{color:var(--white);font-size:1.12em;font-weight:700}
+.progress-stats .delta-over{color:var(--green)}
+.progress-stats .delta-at{color:var(--accent)}
+.progress-stats .delta-under{color:var(--amber)}
+.progress-legend{display:flex;gap:14px;font-size:0.74em;color:var(--text3);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);flex-wrap:wrap}
+.progress-legend span{display:inline-flex;align-items:center;gap:5px}
+.legend-swatch{display:inline-block;width:14px;height:10px;border-radius:2px}
+.ls-actual{background:linear-gradient(90deg,#34d399,#4ade80)}
+.ls-forecast{background:repeating-linear-gradient(45deg,rgba(74,158,255,0.15) 0 3px,rgba(74,158,255,0.35) 3px 6px)}
+.ls-target{background:var(--white);width:2px;height:12px}
+.ls-overshoot{background:repeating-linear-gradient(45deg,rgba(52,211,153,0.2) 0 3px,rgba(52,211,153,0.4) 3px 6px)}
+
+/* Test-count slots (for goals 1 and 3) */
+.slot-row{display:flex;gap:4px;align-items:center}
+.slot{flex:1;height:28px;border-radius:3px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:0.78em;color:var(--text3);padding:0 6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.slot.filled{background:rgba(52,211,153,0.18);border-color:rgba(52,211,153,0.4);color:var(--green);font-weight:600}
+.slot.inflight{background:rgba(74,158,255,0.12);border-color:rgba(74,158,255,0.3);color:var(--accent)}
+.slot.empty{color:var(--text3)}
+
+.gen{color:var(--text3);font-size:0.74em;text-align:center;margin-top:48px;padding:16px;letter-spacing:.5px}
+</style></head><body>
+<nav>
+  <a href="../index.html" class="nav-back" target="_top">&larr; Command Center</a>
+  <span class="nav-brand">State Files</span>
+  <a href="index.html" class="nav-link active">Overview</a>
+  <a href="au.html" class="nav-link">AU</a>
+  <a href="mx.html" class="nav-link">MX</a>
+  <a href="ww.html" class="nav-link">WW Testing</a>
+  <a href="goals.html" class="nav-link">Goals</a>
+</nav>
+<div class="toc" id="toc">
+  <span class="toc-label">Jump to</span>
+  <a href="#goals">Goals</a><span class="toc-sep">&middot;</span>
+  <a href="#progress">Progress</a><span class="toc-sep">&middot;</span>
+  <a href="#markets">Markets</a><span class="toc-sep">&middot;</span>
+  <a href="#schema">Schema Coverage</a><span class="toc-sep">&middot;</span>
+  <a href="#freshness">Freshness</a><span class="toc-sep">&middot;</span>
+  <a href="#shared">Shared Structure</a>
+</div>
+<div class="page">
+<h1>State Files</h1>
+<div class="sub">Daily-refresh operating state for the three markets Richard owns end-to-end. Each file is a 1-2 page Amazon narrative covering Goals, Tenets, State of the Business, Flags, Lessons Learned, Strategic Priorities, and six to eight appendices. Source: <code>~/shared/wiki/state-files/</code> &middot; Destination: OneDrive <code>Kiro-Drive/state-files/</code>.</div>
+
+<h2 id="goals">2026 Goals</h2>
+<p style="color:var(--text2);font-size:0.9em;margin-bottom:12px;line-height:1.5">Your three official 2026 goals from the Outbound Marketing Goals sheet, with monthly status trend and the market state file each goal maps to. Refreshed from Brandon's sheet each run. Full team view on the <a href="goals.html" style="color:var(--accent);text-decoration:none">Goals tab</a>.</p>
+<div class="grid" id="goalsGrid"></div>
+
+<h2 id="progress">Goal Progress</h2>
+<p style="color:var(--text2);font-size:0.9em;margin-bottom:12px;line-height:1.5">Year-to-date progress against each target, with forecast year-end landing where available. Registration goal pulls YTD actuals + forecast from <code>forecast-data.json</code>. Test-count goals pull from <code>ww-testing-state.md</code> Appendix D.</p>
+<div class="card" id="progressCard"></div>
+
+<h2 id="markets">Markets</h2>
+<div class="grid" id="marketsGrid"></div>
+
+<h2 id="schema">Schema Coverage</h2>
+<p style="color:var(--text2);font-size:0.9em;margin-bottom:12px;line-height:1.5">Which narrative sections and appendices exist in each file. A gap here signals a consolidation opportunity &mdash; the three files should evolve toward a shared skeleton so cross-market comparison stays cheap.</p>
+<div class="card"><div id="schemaTables"></div></div>
+
+<h2 id="freshness">Freshness &amp; Ownership</h2>
+<div class="card"><div id="freshTable"></div></div>
+
+<h2 id="shared">Shared Structure &amp; Consolidation Notes</h2>
+<div class="card" id="notes"></div>
+
+<div class="gen" id="genFooter">LOADING&hellip;</div>
+</div>
+<script>
+// Helper: render a goal card. Used on overview and on each market page (shared).
+function renderGoalCard(g, opts){
+  opts = opts || {};
+  var color = (g.latest_color || '').toLowerCase() || 'none';
+  var cls = 'goal-card' + (color==='green'?' goal-green':color==='yellow'?' goal-yellow':color==='red'?' goal-red':'');
+  var trendPills = (g.monthly_status||[]).map(function(m){
+    var c = m.color || 'none';
+    return '<span class="goal-trend-pill '+c+'">'+m.month.slice(0,3)+': '+(m.color||'?')+'</span>';
+  }).join('');
+  var markets = (g.markets||[]).map(function(m){return m.toUpperCase()}).join(' \u00B7 ');
+  var desc = g.description || '';
+  if(desc.length>220&&!opts.full)desc = desc.slice(0,217)+'\u2026';
+  var latest = g.latest_update || '';
+  if(latest.length>260&&!opts.full)latest = latest.slice(0,257)+'\u2026';
+  return '<div class="'+cls+'">'+
+    '<div class="goal-title">'+g.title+'</div>'+
+    '<div class="goal-desc">'+desc+'</div>'+
+    '<div class="goal-trend">'+trendPills+'</div>'+
+    (latest?'<div class="goal-update"><div class="goal-update-label">'+(g.latest_month||'Latest')+' update</div>'+latest+'</div>':'')+
+    (markets?'<div class="goal-markets">Maps to: '+markets+'</div>':'')+
+    '</div>';
+}
+
+Promise.all([
+  fetch('../data/state-files-data.json?'+Date.now()).then(function(r){return r.json()}),
+  fetch('../data/goals-data.json?'+Date.now()).then(function(r){return r.json()}).catch(function(){return null})
+]).then(function(res){
+  var D = res[0], G = res[1];
+
+  // Goals grid — show Richard's 3 goals with color-coded borders.
+  (function(){
+    var el = document.getElementById('goalsGrid');
+    if(!G||!G.richard_goals||!G.richard_goals.length){
+      el.innerHTML = '<div class="no-data">Goals data not loaded &mdash; run refresh-goals.py</div>';
+      return;
+    }
+    el.innerHTML = G.richard_goals.map(function(g){return renderGoalCard(g)}).join('');
+  })();
+
+  // Goal Progress — stacked-bar visual for all three goals in one card.
+  (function(){
+    var el = document.getElementById('progressCard');
+    var P = G && G.progress;
+    if(!P){el.innerHTML='<div class="no-data">Progress data not computed &mdash; run refresh-goals.py</div>';return}
+
+    // Fixed ordering so the visual is consistent across runs
+    var order = [
+      'Globalized Cross-Market Testing',
+      'MX/AU Paid Search Registrations',
+      'MX + AU Market Testing'
+    ];
+
+    function fmtNum(n){
+      if(n===null||n===undefined)return '?';
+      if(Math.abs(n)>=1000)return n.toLocaleString(undefined,{maximumFractionDigits:0});
+      return String(n);
+    }
+
+    function deltaClass(pct){
+      if(pct>=100)return 'delta-over';
+      if(pct>=85)return 'delta-at';
+      return 'delta-under';
+    }
+
+    function renderRegsBar(p){
+      // Compute scale so the bar can show overshoot. Max of target, ytd, projected.
+      var maxVal = Math.max(p.target, p.ytd||0, p.projected_eoy||0);
+      var scale = maxVal * 1.02; // 2% padding
+      var targetPct = (p.target / scale) * 100;
+      var ytdPct = ((p.ytd||0) / scale) * 100;
+      var projPct = ((p.projected_eoy||0) / scale) * 100;
+      var overshoot = (p.projected_eoy||0) > p.target ? projPct - targetPct : 0;
+      var forecastWidth = Math.max(projPct - ytdPct, 0);
+      var statusColor = (p.projected_pct||0) >= 100 ? 'var(--green)' : (p.projected_pct||0) >= 85 ? 'var(--accent)' : 'var(--amber)';
+      var h = '';
+      h += '<div class="progress-bar">';
+      // Actual YTD (solid)
+      h += '<div class="progress-fill-actual" style="width:'+ytdPct+'%"></div>';
+      // Forecast extension (hatched), starts at ytdPct
+      if(forecastWidth > 0){
+        h += '<div class="progress-fill-forecast" style="left:'+ytdPct+'%;width:'+forecastWidth+'%"></div>';
+      }
+      // Target line
+      h += '<div class="progress-target-line" style="left:'+targetPct+'%"></div>';
+      h += '<div class="progress-target-label" style="left:'+targetPct+'%">Target '+fmtNum(p.target)+'</div>';
+      h += '</div>';
+      return h;
+    }
+
+    function renderTestSlots(p){
+      var target = p.target || 0;
+      var completed = p.ytd || 0;
+      var inflight = Math.max((p.tests_in_flight||0) - completed, 0);
+      var slots = [];
+      for(var i=0;i<target;i++){
+        if(i < completed){
+          var test = (p.tests||[]).filter(function(t){return t.is_complete})[i];
+          slots.push('<div class="slot filled" title="'+(test?(test.test+' ('+test.market+')').replace(/"/g,'&quot;'):'')+'">'+((test&&test.test)||'Complete')+'</div>');
+        } else if(i < completed + inflight){
+          slots.push('<div class="slot inflight">In flight</div>');
+        } else {
+          slots.push('<div class="slot empty">Slot '+(i+1)+'</div>');
+        }
+      }
+      return '<div class="slot-row">'+slots.join('')+'</div>';
+    }
+
+    var h = '';
+    order.forEach(function(title){
+      var p = P[title];
+      if(!p)return;
+      // Find the matching goal for status color
+      var g = (G.richard_goals||[]).filter(function(x){return x.title===title})[0];
+      var statusColor = g && g.latest_color ? g.latest_color.toLowerCase() : 'none';
+      var statusPill = g && g.latest_color ? '<span class="goal-trend-pill '+g.latest_color+'">'+g.latest_month+' '+g.latest_color+'</span>' : '';
+      h += '<div class="progress-row">';
+      h += '<div class="progress-meta">';
+      h +=   '<div class="progress-title">'+title+'</div>';
+      h +=   '<div class="progress-sub">Target: '+fmtNum(p.target)+' '+p.unit+' '+statusPill+'</div>';
+      h += '</div>';
+      h += '<div class="progress-bar-wrap">';
+      if(p.unit === 'registrations'){
+        h += renderRegsBar(p);
+      } else {
+        h += renderTestSlots(p);
+      }
+      h += '</div>';
+      h += '<div class="progress-stats">';
+      if(p.unit === 'registrations'){
+        h += '<strong>'+fmtNum(p.ytd)+'</strong> YTD<br>';
+        h += '<span>'+p.ytd_pct+'% of target</span><br>';
+        h += '<span class="'+deltaClass(p.projected_pct)+'">EOY pred: '+fmtNum(p.projected_eoy)+' ('+p.projected_pct+'%)</span>';
+      } else {
+        h += '<strong>'+p.ytd+'/'+p.target+'</strong> complete<br>';
+        h += '<span>'+p.ytd_pct+'% of target</span>';
+        if(p.tests_in_flight){
+          h += '<br><span class="delta-at">'+(p.tests_in_flight - p.ytd)+' in flight</span>';
+        }
+      }
+      h += '</div>';
+      h += '</div>';
+    });
+
+    // Registration breakdown (MX / AU split)
+    var regs = P['MX/AU Paid Search Registrations'];
+    if(regs && regs.breakdown){
+      h += '<div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">';
+      h += '<div style="font-size:0.84em;color:var(--text2);margin-bottom:10px">Registration breakdown by market</div>';
+      regs.breakdown.forEach(function(mb){
+        var maxVal = Math.max(mb.target, mb.ytd||0, mb.projected_eoy||0) * 1.02;
+        var targetPct = (mb.target / maxVal) * 100;
+        var ytdPct = ((mb.ytd||0) / maxVal) * 100;
+        var projPct = ((mb.projected_eoy||0) / maxVal) * 100;
+        var forecastWidth = Math.max(projPct - ytdPct, 0);
+        h += '<div class="progress-row" style="padding:8px 0">';
+        h += '<div class="progress-meta" style="flex:0 0 120px"><div class="progress-title">'+mb.market+'</div>';
+        h += '<div class="progress-sub">Target: '+fmtNum(mb.target)+'</div></div>';
+        h += '<div class="progress-bar-wrap"><div class="progress-bar" style="height:20px">';
+        h += '<div class="progress-fill-actual" style="width:'+ytdPct+'%"></div>';
+        if(forecastWidth > 0){
+          h += '<div class="progress-fill-forecast" style="left:'+ytdPct+'%;width:'+forecastWidth+'%"></div>';
+        }
+        h += '<div class="progress-target-line" style="left:'+targetPct+'%"></div>';
+        h += '</div></div>';
+        h += '<div class="progress-stats"><strong>'+fmtNum(mb.ytd)+'</strong> YTD<br>';
+        h += '<span class="'+deltaClass(mb.projected_pct)+'">EOY '+fmtNum(mb.projected_eoy)+' ('+mb.projected_pct+'%)</span></div>';
+        h += '</div>';
+      });
+      h += '</div>';
+    }
+
+    h += '<div class="progress-legend">';
+    h += '<span><span class="legend-swatch ls-actual"></span>YTD actual</span>';
+    h += '<span><span class="legend-swatch ls-forecast"></span>Forecast to EOY</span>';
+    h += '<span><span class="legend-swatch ls-target"></span>Target</span>';
+    h += '<span style="color:var(--text3);margin-left:auto">Data through <code>'+(D.data.au&&D.data.au.data_through||'')+'</code></span>';
+    h += '</div>';
+    el.innerHTML = h;
+  })();
+
+  var labels=D.labels||{},markets=D.markets||[];
+
+  // Market cards
+  (function(){
+    var el=document.getElementById('marketsGrid'),h='';
+    (D.comparison||[]).forEach(function(m){
+      var d=(D.data||{})[m.key]||{};
+      var stateLine=(d.sections&&d.sections.state)?d.sections.state[0]:'';
+      var short=stateLine.length>260?stateLine.slice(0,257)+'&hellip;':stateLine;
+      h+='<a href="'+m.key+'.html" class="overview-card">'+
+        '<div class="oc-title">'+m.market+'</div>'+
+        '<div class="oc-metric" style="color:var(--accent);font-size:1.12em">'+m.data_through+'</div>'+
+        '<div style="margin:6px 0 10px"><span class="badge b-active">'+m.status+'</span> <span class="mini-tag">'+m.appendix_count+' appendices</span> <span class="mini-tag">'+m.goals+' goals</span> <span class="mini-tag">'+m.tenets+' tenets</span>'+(m.has_flags?' <span class="mini-tag">flags</span>':'')+'</div>'+
+        '<div class="oc-sub">'+short+'</div>'+
+        '</a>';
+    });
+    el.innerHTML=h||'<div class="no-data">No markets found</div>';
+  })();
+
+  // Schema tables — sections coverage + appendix coverage side by side
+  (function(){
+    var el=document.getElementById('schemaTables');
+    var sc=D.schema&&D.schema.section_coverage||{};
+    var ac=D.schema&&D.schema.appendix_coverage||{};
+    function mkTable(title,cov){
+      var h='<table><thead><tr><th>'+title+'</th>';
+      markets.forEach(function(k){h+='<th style="text-align:center">'+labels[k]+'</th>'});
+      h+='<th style="text-align:right">Coverage</th></tr></thead><tbody>';
+      Object.keys(cov).sort().forEach(function(key){
+        var present=cov[key];
+        var badge=present.length===markets.length?'<span class="badge b-full">Full</span>':'<span class="badge b-gap">'+present.length+'/'+markets.length+'</span>';
+        h+='<tr><td style="color:var(--text)">'+key.replace(/_/g,' ')+'</td>';
+        markets.forEach(function(k){
+          var has=present.indexOf(k)>-1;
+          h+='<td style="text-align:center;color:'+(has?'var(--green)':'var(--text3)')+'">'+(has?'&#10003;':'&mdash;')+'</td>';
+        });
+        h+='<td style="text-align:right">'+badge+'</td></tr>';
+      });
+      h+='</tbody></table>';
+      return h;
+    }
+    el.innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">'+
+      '<div><div class="card-title">Narrative sections</div>'+mkTable('Section',sc)+'</div>'+
+      '<div><div class="card-title">Appendices</div>'+mkTable('Appendix',ac)+'</div>'+
+      '</div>';
+  })();
+
+  // Freshness / ownership table
+  (function(){
+    var el=document.getElementById('freshTable'),h='';
+    h='<table><thead><tr><th>Market</th><th>Owner</th><th>Updated</th><th>Data Through</th><th>Status</th><th>Priorities</th></tr></thead><tbody>';
+    (D.comparison||[]).forEach(function(m){
+      h+='<tr>'+
+        '<td style="color:var(--white);font-weight:600"><a href="'+m.key+'.html" style="color:var(--accent);text-decoration:none">'+m.market+'</a></td>'+
+        '<td style="color:var(--text2)">'+m.owner+'</td>'+
+        '<td style="color:var(--text2)">'+m.updated+'</td>'+
+        '<td style="color:var(--text)">'+m.data_through+'</td>'+
+        '<td><span class="badge b-active">'+m.status+'</span></td>'+
+        '<td style="color:var(--text2)">'+m.priorities+' strategic priorities</td>'+
+        '</tr>';
+    });
+    h+='</tbody></table>';
+    el.innerHTML=h;
+  })();
+
+  // Consolidation notes — surface the gaps
+  (function(){
+    var el=document.getElementById('notes');
+    var sc=D.schema&&D.schema.section_coverage||{};
+    var ac=D.schema&&D.schema.appendix_coverage||{};
+    var gaps=[];
+    Object.keys(sc).forEach(function(k){
+      var present=sc[k];
+      if(present.length<markets.length){
+        var missing=markets.filter(function(m){return present.indexOf(m)<0});
+        gaps.push({kind:'Section',name:k,missing:missing.map(function(m){return labels[m]}).join(', ')});
+      }
+    });
+    Object.keys(ac).forEach(function(k){
+      var present=ac[k];
+      if(present.length<markets.length){
+        var missing=markets.filter(function(m){return present.indexOf(m)<0});
+        gaps.push({kind:'Appendix',name:k.replace(/_/g,' '),missing:missing.map(function(m){return labels[m]}).join(', ')});
+      }
+    });
+    var h='<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">'+
+      '<div><div class="card-title">Consolidation Notes</div>'+
+        '<ul style="font-size:0.94em;color:var(--text);line-height:1.6;padding-left:18px">'+
+        '<li>All three files share the same skeleton: Introduction, Goals, Tenets, State of the Business, Lessons Learned, Strategic Priorities, Appendices A&ndash;H. Keep them parallel &mdash; when one market adds a section, the others should follow.</li>'+
+        '<li>Appendix A (weekly trend), C (monthly projection), and D (plan summary) carry the numeric tables &mdash; these are the cross-market comparison candidates. Future consolidation could replace three separate weekly-trend tables with one pivoted table here.</li>'+
+        '<li>Appendix H (placeholder schema) is where automated refresh hooks read from &mdash; every market must keep it in sync with the live DuckDB schema.</li>'+
+        '<li>Flags is structured (table in AU/MX). Consider standardizing the Flag schema so it can be queried cross-market like a ledger.</li>'+
+        '</ul></div>'+
+      '<div><div class="card-title">Schema Gaps ('+gaps.length+')</div>';
+    if(!gaps.length){
+      h+='<div style="color:var(--green);font-size:0.94em">All sections and appendices present across all three markets.</div>';
+    } else {
+      h+='<table><thead><tr><th>Kind</th><th>Name</th><th>Missing From</th></tr></thead><tbody>';
+      gaps.forEach(function(g){
+        h+='<tr><td><span class="mini-tag">'+g.kind+'</span></td>'+
+          '<td style="color:var(--text)">'+g.name+'</td>'+
+          '<td style="color:var(--amber)">'+g.missing+'</td></tr>';
+      });
+      h+='</tbody></table>';
+    }
+    h+='</div></div>';
+    el.innerHTML=h;
+  })();
+
+  document.getElementById('genFooter').textContent='DATA: '+new Date(D.generated).toLocaleString()+' \u00B7 SOURCE: shared/wiki/state-files/ \u00B7 REFRESH: python3 shared/dashboards/refresh-state-files.py';
+}).catch(function(e){console.error(e);document.getElementById('marketsGrid').innerHTML='<div style="color:#f87171">Failed to load data &mdash; run refresh-state-files.py</div>'});
+</script>
+</body></html>

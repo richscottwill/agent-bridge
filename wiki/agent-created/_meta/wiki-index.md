@@ -4,7 +4,7 @@ status: FINAL
 audience: amazon-internal
 owner: Richard Williams
 created: 2026-04-12
-updated: 2026-04-18
+updated: 2026-04-21
 doc-type: reference
 auto_generated: true
 ---
@@ -15,7 +15,7 @@ auto_generated: true
 
 > Knowledge base for Amazon Business Paid Search. Auto-generated from a filesystem scan of `~/shared/wiki/agent-created/` by `build-wiki-index.py`. SharePoint publication status pulled from `data/sharepoint-artifacts.json`.
 
-Last generated: 2026-04-18T02:12:29
+Last generated: 2026-04-21T00:51:09
 SharePoint cache as of: 2026-04-17T19:02:13-07:00
 
 ---
@@ -213,7 +213,7 @@ _Market wikis (AU/MX/US), team capacity, cross-market programs._
   - slug: ww-testing-tracker | status: REVIEW | doc-type: reference | audience: amazon-internal | level: 2 | sharepoint: published
 
 
-### Operations & Process (11)
+### Operations & Process (14)
 
 _SOPs, playbooks, tool specs, vocabulary guides, process documentation._
 
@@ -238,6 +238,9 @@ _SOPs, playbooks, tool specs, vocabulary guides, process documentation._
 - [Landing Page Testing Playbook](~/shared/wiki/agent-created/operations/landing-page-testing-playbook.md): Landing Page Testing Playbook 1. Test before you migrate — phased rollout unless stakeholder overrides (AU was an exception) 2. Measure what matters — CVR and CPA, not just...
   - slug: landing-page-testing-playbook | status: REVIEW | doc-type: execution | audience: amazon-internal | level: N/A | sharepoint: published
 
+- [ps.market_constraints — Schema Reference](~/shared/wiki/agent-created/operations/market-constraints-schema.md): ps.marketconstraints — Schema Reference Purpose: Single source of truth for market constraints. Consumed by agents (via auto-inclusion .md projection), hooks, dashboards, and...
+  - slug: market-constraints-schema | status: DRAFT | sharepoint: local-only
+
 - [Market Expansion Playbook — Paid Search](~/shared/wiki/agent-created/operations/market-expansion-playbook.md): Market Expansion Playbook This playbook consolidates the pre-launch, launch, and year-one operations required to stand up paid search in a new market. It is written from the...
   - slug: market-expansion-playbook | status: DRAFT | doc-type: execution | audience: team | level: L2 | sharepoint: local-only
 
@@ -246,6 +249,12 @@ _SOPs, playbooks, tool specs, vocabulary guides, process documentation._
 
 - [OP1 OP2 Vocabulary Guide — Paid Search Decoder Ring](~/shared/wiki/agent-created/operations/op1-op2-vocabulary-guide.md): OP1 OP2 Vocabulary Guide This guide decodes the acronym stack paid search teams use every week. It is written for new hires, expansion market partners who do not share the Amazon...
   - slug: op1-op2-vocabulary-guide | status: DRAFT | doc-type: reference | audience: team | level: L2 | sharepoint: local-only
+
+- [PS Performance Data — Source of Truth](~/shared/wiki/agent-created/operations/ps-performance-schema.md): PS Performance Data — Source of Truth One table. Four grains. Ten markets + WW aggregate. Query via pre-filtered views so you can't accidentally overcount. ⚠️ Grain safety (read...
+  - slug: ps-performance-schema | status: FINAL | audience: amazon-internal | sharepoint: local-only
+
+- [Regime Change Taxonomy](~/shared/wiki/agent-created/operations/regime-change-taxonomy.md): Regime Change Taxonomy Purpose: When something changes in a market, decide how to record it in ps.regimechanges. Three categories Every regime change falls into exactly one of...
+  - slug: regime-change-taxonomy | status: DRAFT | sharepoint: local-only
 
 - [SharePoint Migration — Post-Quip Deprecation](~/shared/wiki/agent-created/operations/sharepoint-quip-deprecation-migration.md): SharePoint Migration Guide Amazon-wide Quip deprecation is moving from roadmap to real for marketing teams. The ABBizOps Intake example from April 17 shows the pattern: Quip doc...
   - slug: sharepoint-quip-deprecation-migration | status: DRAFT | doc-type: execution | audience: team | level: L3 | sharepoint: local-only
@@ -318,14 +327,14 @@ _Agent architecture, body system, agent personas, meta-docs about the system its
 | Historical Tests (snapshot) | 5 |
 | Strategy & Frameworks | 28 |
 | Markets / PS Operations | 8 |
-| Operations & Process | 11 |
+| Operations & Process | 14 |
 | Reporting | 2 |
 | Research Briefs | 7 |
 | Agent / System Documentation | 5 |
-| **Total (indexed)** | **82** |
+| **Total (indexed)** | **85** |
 
-**Status:** 46 REVIEW | 23 DRAFT | 0 FINAL | 13 unset
-**SharePoint:** 46 published | 36 local-only | 1 published-stale (local newer than SP)
+**Status:** 46 REVIEW | 23 DRAFT | 1 FINAL | 15 unset
+**SharePoint:** 46 published | 39 local-only | 1 published-stale (local newer than SP)
 
 ---
 

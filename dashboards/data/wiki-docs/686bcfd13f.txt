@@ -1,0 +1,54 @@
+# EU5 — W16 (Apr 13 – Apr 19)
+
+EU5: EU5 drove 5,980 registrations (+18% WoW), with +31% spend WoW and $88 CPA (+11% WoW). April is projected at $1.8M spend and 22.8K registrations. (vs. OP2: +7% registrations, +7% spend)
+
+Post-Easter recovery arrived, but we paid for it. DE drove the spend surge, jumping to $199K (+76% WoW) as NB CPA ran away to $210 (+61% WoW). UK led on volume (+15% regs) but ran hot, pushing CPA to $75 on rising NB CPCs. The rest of EU5 recovered in line with the post-Easter pattern without fully restoring pre-Easter efficiency.
+
+YoY we spent +52% with +50% registrations and CPA +2%. UK subsidizes the group at -11% CPA YoY on OCI maturity, while the rest remains inflated through OCI E2E learning.
+
+Note: I'm reviewing DE bid strategies and budget settings ahead of W17 to keep NB CPA from running hot a second week.
+
+---
+
+**EU5 weekly trend (total regs):**
+- UK: W15: 1,430 → W16: 1,644 (+15%)
+- DE: W15: 1,200 → W16: 1,550 (+29%)
+- FR: W15: 877 → W16: 1,037 (+18%)
+- IT: W15: 972 → W16: 1,136 (+17%)
+- ES: W15: 595 → W16: 613 (+3%)
+- EU5: W15: 5,074 → W16: 5,980 (+18%)
+
+**Per-market WoW (regs / spend / CPA):**
+
+| Market | W16 regs | Regs WoW | W16 spend | Spend WoW | W16 CPA | CPA WoW |
+|--------|---------:|---------:|----------:|----------:|--------:|--------:|
+| UK | 1,644 | +15% | $124K | +36% | $75 | +19% |
+| DE | 1,550 | +29% | $199K | +76% | $128 | +36% |
+| FR | 1,037 | +18% | $69K | +14% | $67 | -4% |
+| IT | 1,136 | +17% | $98K | -2% | $86 | -16% |
+| ES | 613 | +3% | $38K | -5% | $62 | -8% |
+| **EU5** | **5,980** | **+18%** | **$528K** | **+31%** | **$88** | **+11%** |
+
+**Anomalies:**
+- DE spend +76% WoW with NB CPA $210 (from $130 LW), blended CVR 2.66% (8-week low)
+- UK CPA +19% WoW on +36% spend; NB CPC and impressions climbed together
+- IT and FR: sharp W15 CVR declines reversed; Brand CPA normalized
+- ES: only market where W16 spend came in below W15 (efficiency-led week)
+
+**W17 recommended spend:**
+- UK: $100K-$105K (pull back from $124K; target $66-$70 CPA)
+- DE: $120K-$130K (material pullback from $199K; NB CPA $210 needs investigation)
+- FR: $62K-$68K (hold flat to W16)
+- IT: $95K-$100K (hold at W16 while CPA corrects)
+- ES: $38K-$42K (slight lean-in permitted on efficiency earned)
+- **EU5 total: $415K-$445K** (~$85-115K below W16, clean-week normalization)
+
+**W17 watch:**
+- DE NB CPA trajectory: does $210 persist or revert toward $130 baseline?
+- Group spend-to-regs divergence: CPA has climbed W14 $67 → W15 $80 → W16 $88. Looking for reversion.
+- UK volume sustainability at reduced spend: can we hold 1,600+ regs at ~$105K?
+
+**W17 optimization:**
+- DE: identify the W16 spend driver (bid change, budget release, OCI behavior) before opening W17
+- FR/IT: continue monitoring OCI E2E learning-phase NB CPA; both still inflated YoY
+- ES: validate CVR-led efficiency is sustainable given softening clicks

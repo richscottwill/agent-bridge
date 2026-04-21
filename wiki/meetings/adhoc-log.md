@@ -4,7 +4,7 @@ status: DRAFT
 audience: amazon-internal
 owner: Richard Williams
 created: 2026-04-12
-updated: 2026-04-12
+updated: 2026-04-20
 ---
 <!-- DOC-0195 | duck_id: meeting-adhoc-log -->
 
@@ -13,6 +13,29 @@ updated: 2026-04-12
 *One-off meetings, cross-team syncs, and meetings that don't belong to a recurring series. Logged in reverse chronological order. Compress or archive entries older than 30 days.*
 
 ---
+
+## 2026-04-17 — AI Tool Demo & Workflow Integration (51 min)
+- Attendees: Richard Williams (lead), Adi Thakur, Andrew Wirtz, Stacey Gu, Yun-Kang Chu, Dwayne Palmer, Peter Ocampo
+- Hedy session: IvUNtHCncikQcZvODFj1 | Topic: AI (5yFJffPqC4ZlQo0aKLwE)
+- Richard demoed an AI tool that ingests multi-file uploads (WBR, AMO, Adobe) and produces callouts, trend analysis, and Q2 projections using code-based (Python) reasoning the user can inspect.
+- Strengths shown: drag-and-drop upload, cross-file correlation, URL parsing to surface LPA-keyword-level MoM changes, auto-detection of holiday drivers, Quip doc generation, Markdown output clean for copy-paste.
+- Limits: no direct QuickSight/WBR/ABMA integration (file uploads required); context only persists inside a single chat thread; school-holiday noise needs user filtering for B2B.
+- Gandalf local-install variant shown as the packaged path for broader team adoption (privacy + standardized prompts). Hardware requirements flagged for non-technical users.
+- **Decisions made:**
+  - Adopt the AI tool for WBR callouts and reporting support (file uploads until internal data API lands).
+  - Standardize on Markdown output for Quip compatibility.
+  - Create a shared SharePoint repository for master prompts, templates, and validated workflows.
+  - Explore Gandalf as the framework for packaging standardized AI analysis workflows for broader AB use.
+- **Commitments captured:**
+  - Richard: share master prompt + schedule local-setup walkthrough (by 4/21)
+  - Adi: test AI tool with MX data, return feedback (by 4/25)
+  - Andrew: validate AI-generated UK callouts against manual analysis (by 4/28)
+  - Stacey: assess Polaris reporting integration feasibility (by 5/2)
+  - Yun: evaluate Adobe non-brand deep-dive support
+  - Dwayne: investigate structuring MCS campaign data for AI analysis
+  - Peter: evaluate AI for mobile app projection + anomaly detection
+- Open questions: (1) secure API access to WBR/ABMA to remove manual uploads (FinOps + Data Eng); (2) data-security implications of uploading campaign files to third-party AI (R&O + Compliance); (3) how to package validated workflows (Gandalf) across AB marketing teams.
+- Relevance for Richard: this is a clear L3 (Team Automation) signal — the team wants the AI callout workflow and a shared prompt library. Keep ownership; use it to anchor the tool-adoption Level-3 metric.
 
 ## 2026-04-02 — WhatsApp and Push Campaigns Demo (AI/MarTech)
 - Cross-team demo: Ravi, Chinmay, Anand, Kishore, Shrinivas, Pratiba, Sunil, Shannon, Alexis Eck, Lena Zak, Lorena Alvarez Larrea, Richard (observer)

@@ -118,7 +118,11 @@ The system has richer data than what's in the text files. Before guessing or ask
 | Topics that deserve a wiki article but don't have one | `signals.wiki_candidates` | — |
 | Email triage, who needs a response | `signals.emails_actionable`, `signals.emails_unanswered` | email-triage.md, Outlook MCP |
 | Today's calendar, upcoming meetings | `main.calendar_today`, `main.calendar_week` | Outlook MCP: `calendar_view` |
-| Market performance data (regs, spend, CPA, forecasts) | `ps.latest_forecasts`, `ps.monthly_pacing`, `ps.market_status` | State files: ~/shared/wiki/state-files/*-state.md |
+| Market performance data — weekly regs/spend/CPA, any market including WW | `ps.v_weekly WHERE market IN (...) AND period_key='2026-WNN'` | See `shared/wiki/agent-created/operations/ps-performance-schema.md` |
+| Market performance data — daily rows, MTD math, daily patterns | `ps.v_daily WHERE market='X' AND period_start BETWEEN 'YYYY-MM-DD' AND 'YYYY-MM-DD'` | Same reference doc |
+| Market performance data — monthly / quarterly totals (inc WW) | `ps.v_monthly` / `ps.v_quarterly` with `market` + `period_key` filter | Same reference doc |
+| Forecasts / projections | `ps.forecasts WHERE market='X' AND target_period='YYYY-WNN'` | — |
+| OP2 targets by market | `ps.targets WHERE market='X' AND period_key='YYYY-MMM'` | — |
 | Historical task trends, completion rates | `asana.asana_task_history`, `asana.completion_rate`, `asana.velocity` | — |
 | Where Richard's time goes vs where it should (L1-L5) | `main.five_levels_weekly` | brain.md → Strategic Priorities |
 | Loop page content (Brandon 1:1 notes, MBR doc, etc.) | `docs.loop_pages` | SharePoint MCP: `sharepoint_read_loop` |

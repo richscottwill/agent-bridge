@@ -17,10 +17,10 @@
     },
     "meta_calibration_projections": {
       "cadence": "weekly",
-      "last_run": "2026-04-04",
-      "last_run_period": "2026-W14",
+      "last_run": "2026-04-20",
+      "last_run_period": "2026-W17",
       "description": "Audit last week's projection against actuals",
-      "notes": "4/4: Initialized. No projections exist yet to audit."
+      "notes": "4/20: Nothing to audit — no projections being generated. Noted as gap. Deferred until projection pipeline exists."
     },
     "meta_calibration_output_quality": {
       "cadence": "quarterly",
@@ -38,23 +38,24 @@
     },
     "weekly_scorecard": {
       "cadence": "weekly",
-      "last_run": "2026-04-03",
-      "last_run_period": "2026-W14",
-      "description": "Friday EOD weekly scorecard rollup in rw-tracker.md"
+      "last_run": "2026-04-20",
+      "last_run_period": "2026-W17",
+      "description": "Friday EOD weekly scorecard rollup in rw-tracker.md",
+      "notes": "4/20: Overdue rollup. Pattern continues — L1 streak at 22 workdays zero. Italy P0 was only L2 signal of substance this week. Needs Friday deep-run."
     },
     "context_surface_refresh": {
       "cadence": "weekly",
-      "last_run": "2026-04-04",
-      "last_run_period": "2026-W14",
+      "last_run": "2026-04-20",
+      "last_run_period": "2026-W17",
       "description": "Update AU/MX pinned context tasks in Asana",
-      "notes": "4/4: Initialized. Context tasks exist but no refresh run yet."
+      "notes": "4/20: Deferred. Context tasks current through AM-3 brief. Next refresh: Friday with scorecard."
     },
     "agent_bridge_sync": {
       "cadence": "weekly",
-      "last_run": "2026-04-04",
-      "last_run_period": "2026-W14",
+      "last_run": "2026-04-20",
+      "last_run_period": "2026-W17",
       "description": "Sync portable-body/ to GitHub",
-      "notes": "4/4: Git push completed this EOD-2."
+      "notes": "4/20: Will run in Phase 5 git sync."
     },
     "decision_audit": {
       "cadence": "monthly",
@@ -65,17 +66,17 @@
     },
     "pattern_trajectory": {
       "cadence": "weekly",
-      "last_run": "2026-04-04",
-      "last_run_period": "2026-W14",
+      "last_run": "2026-04-20",
+      "last_run_period": "2026-W17",
       "description": "NS Loop 3: Assess patterns IMPROVING/STUCK/WORSENING/RESOLVED",
-      "notes": "4/4: Initialized. Pattern: L1 streak at 16 workdays zero — STUCK."
+      "notes": "4/20: L1 streak zero for 22 workdays (up from 16 on 4/4) — STUCK → WORSENING. The Brandon/Kate meeting cancellation removed the external forcing function on 4/16; without it, no substitute structural intervention has taken hold. Testing Approach v5 exists and has PUBLISH verdict; send step is the bottleneck. Suggested intervention: treat the send as its own atomic task, not as part of a larger 'work on Testing Approach' block."
     },
     "delegation_verification": {
       "cadence": "weekly",
-      "last_run": "2026-04-04",
-      "last_run_period": "2026-W14",
+      "last_run": "2026-04-20",
+      "last_run_period": "2026-W17",
       "description": "NS Loop 4: Check delegations ON_TRACK/SLIPPING/FAILED",
-      "notes": "4/4: Initialized. Vijeth footer (16d) SLIPPING. Andes data (19d) SLIPPING."
+      "notes": "4/20: Vijeth footer (32d) — was SLIPPING 4/4, now FAILED. Andes data (35d) — FAILED. Both have stopped delivering. Need escalation: either replace the dependency (workaround) or kill the task."
     },
     "principle_evolution": {
       "cadence": "quarterly",
@@ -85,17 +86,17 @@
     },
     "meeting_communication": {
       "cadence": "weekly",
-      "last_run": "2026-04-04",
-      "last_run_period": "2026-W14",
+      "last_run": "2026-04-20",
+      "last_run_period": "2026-W17",
       "description": "NS Loop 9: Hedy speaking share, hedging, filler analysis",
-      "notes": "4/4: Initialized. No Hedy data ingested this week."
+      "notes": "4/20: Only 1 Hedy session this week (AI Tool Demo 4/17). Insufficient data for weekly trend. Wait for full week of data."
     },
     "karpathy_metabolism_report": {
       "cadence": "weekly",
       "last_run": "2026-04-04",
       "last_run_period": "2026-W14",
       "description": "Karpathy weekly metabolism report: body mass, experiments, learnings",
-      "notes": "4/4: Initialized. Deferred to Karpathy CLI agent."
+      "notes": "4/4: Initialized. Deferred to Karpathy CLI agent. EOD-2026-04-20: body mass measured 26,734w. Metabolism report needs karpathy loop to produce experiment deltas."
     },
     "relationship_enrichment": {
       "cadence": "weekly",
@@ -112,11 +113,11 @@
       "notes": "4/4: Initialized. ABPS AI Content has 35 wiki candidates already in pipeline."
     },
     "wiki_lint": {
-      "cadence": "weekly",
+      "cadence": "disabled",
       "last_run": "2026-04-05",
       "last_run_period": "2026-W14",
-      "description": "Weekly wiki health lint: orphan detection, stale content flagging, broken cross-references, missing frontmatter, SITEMAP drift. Runs wiki-audit skill and writes results to wiki/health/ and wiki/audits/.",
-      "notes": "4/5: First run complete. 42 indexed, 67 on disk, 22 orphans (7 archived-on-disk, 9 unindexed, 6 expected). 0 stale. Action items: clean archived files, index historical tests."
+      "description": "DISABLED 2026-04-18. Runs as separate manual hook (shared/.kiro/hooks/wiki-maintenance.kiro.hook) on Fridays.",
+      "notes": "Removed from EOD cadence. Do not execute here."
     },
     "monthly_synthesis": {
       "cadence": "monthly",

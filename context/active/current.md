@@ -1,7 +1,7 @@
 <!-- DOC-0345 | duck_id: protocol-current -->
 # Active Context — Richard Williams
 
-Last updated: 2026-04-17 (Friday PT, EOD cascade)
+Last updated: 2026-04-20 (Monday PT, AM backend enrichment)
 
 ## Role & Scope
 - Amazon Business, Paid Acquisition / Paid Search
@@ -28,7 +28,8 @@ Last updated: 2026-04-17 (Friday PT, EOD cascade)
 - Brandon's priority: AU > MX > DE > UK > JP > FR > IT > ES > CA > US-ES
 - 🆕 **MCS Decision (4/15):** All paid search LPs will migrate to Polaris branding. Legacy PADESARJAD pages deprecated — no further investment. MX is early test market.
 - 🆕 **Brandon 1:1 (4/14):** Richard to lead as single point of contact for global Polaris initiatives. Only US and JP currently live on Polaris via weblab.
-- 🆕 **DDD: Polaris Brand PS Pages (4/16):** Meeting held today. Transcript pending Hedy ingestion.
+- 🆕 **DDD: Polaris Brand PS Pages (4/16):** 60-min session locked in benefit cards over percolate, localized sub-header (country + "From Sole Props to Enterprise"), streamlined FAQs (add "Is AB free?" + pricing benefits, cut intimidating registration language), closing CTA button. US Polaris showing +6% CVR vs legacy MCS (Mar 24 swap, 21d pre/post).
+- 🆕 **Italy P0 surfaced + in resolution (4/16→4/20):** MCS published Polaris for Italy on PS-Brand1 URL structure, overwriting the PS ref tag. IT registrations were being misrouted to Australia. Coordinating with Alex (Andes) to revert to old MCS template. PEN-DONE — revert underway, awaiting confirmation.
 - 🆕 **MX Handoff Doc (4/14 DM):** Brandon: "you don't even need to show the 'before' page for MX. Just reference CA pages."
 - Action: Create one-page Polaris rollout timeline with dates and owners (OVERDUE).
 
@@ -121,7 +122,8 @@ Last updated: 2026-04-17 (Friday PT, EOD cascade)
 - 3/26 11pm: Mike sent 3 follow-up questions: (1) loop him into case 6-7924000040915 thread, (2) confirm if new user access resolved the issue, (3) status of appeal for first user. Brandon needs to respond.
 - Impact: JP OCI launch being pushed back until access resolved.
 - Richard added to ab-paidsearch-oci-apac2@ email list (3/25).
-- 🆕 **OCI WW Launch milestone (Slack 3/31):** FR, IT, ES dialed up to 100%. JP already at 100%. CA on track for 04/07. Kiran Pantham celebrated first QBR goal of 2026. Brandon confirmed Day7 MCM steps. Mukesh Artham created MCM-147368188 for JP tracking template update. Brandon decided to wait on JP ref tag taxonomy update until after tech confirms OCI is working — will discuss with Deepika Thursday.
+- 🆕 **OCI CA launched 4/7 ✅ DONE** — fourth market live after FR/IT/ES dial-ups (JP already at 100%). APAC MCC access issues still open for remaining APAC markets.
+- 🆕 **OCI WW Launch milestone (Slack 3/31):** FR, IT, ES dialed up to 100%. JP already at 100%. CA launched 04/07 ✅. Kiran Pantham celebrated first QBR goal of 2026. Brandon confirmed Day7 MCM steps. Mukesh Artham created MCM-147368188 for JP tracking template update. Brandon decided to wait on JP ref tag taxonomy update until after tech confirms OCI is working — will discuss with Deepika Thursday.
 - 🆕 **JP OCI preflight (Slack 3/31):** Brandon initiating JP OCI enable. Adi confirmed JP Google account: all ref tags unique, no KW/adgroup overrides, search ads only. Stacey raised ref tag taxonomy update question — Brandon deferred to post-launch. Richard asked Stacey about planned changes to JP ref tags (thread active).
 - ✅ **MCM-147368188 COMPLETE (Slack 4/1-4/2):** All approvals received, implementation done, feed enabled by mpgupta. Yashasvi confirmed. JP OCI tracking template fully operational.
 - 🆕 **JP Brand LP Experiment (Slack 4/1-4/2):** Stacey confirmed ref_= carry-over works on a.com. Experiment targeting live 4/2 after CTA experience double-check. Brandon confirmed "sounds good." Stacey also asking (DM 4/1 11:38pm) about CA exclusion from Polaris 50/50 testing on 4/7 — Richard needs to reply with rationale (OCI data clean focus).
@@ -209,19 +211,21 @@ Last updated: 2026-04-17 (Friday PT, EOD cascade)
 |------|-------|-------------|
 | Alexis Eck | alexieck | AU POC, MCS page mapping |
 | Lena Zak | lenazak | AU country leader. Challenged AU CPC (3/19). |
-| Yun-Kang Chu | yunchu | MX, Adobe, Modern Search. Contributed Shopping data for CPC reply. |
-| Brandon Munday | brandoxy | L7 manager. Building AU CPC Loop doc. Annual Review context. |
+| Yun-Kang Chu | yunchu | MX, Adobe, Modern Search. Contributed Shopping data for CPC reply. Last interaction: 4/17 (AI Tool Demo). |
+| Brandon Munday | brandoxy | L7 manager. Building AU CPC Loop doc. Annual Review context. Last interaction: 4/16 (Polaris DDD). |
 | Carlos Palmos | cpalmos | MX — transitioned to CPS acquisition (~3/17). Final PS sync 3/24. No longer PS stakeholder. |
 | Lorena Alvarez Larrea | lorealea | MX Paid Search — NOW PRIMARY PS STAKEHOLDER (replaced Carlos ~3/17). Needs Q2 spend for PO. |
-| Dwayne Palmer | dtpalmer | MCS/website, WBR coverage partner |
-| Andrew Wirtz | — | Testing collaborator. Active in Loop doc (3/18). |
-| Aditya Satish Thakur | — | Weekly sync. OOO 3/19-20. |
+| Dwayne Palmer | dtpalmer | MCS/website, WBR coverage partner. Last interaction: 4/17 (AI Tool Demo), 4/16 (Polaris DDD). |
+| Andrew Wirtz | — | Testing collaborator. Active in Loop doc (3/18). Last interaction: 4/17 (AI Tool Demo). |
+| Aditya Satish Thakur | athakr | Weekly sync. OOO 3/19-20. Last interaction: 4/17 (AI Tool Demo), 4/16 (Polaris DDD). |
+| Stacey Gu | stgu | OCI stakeholder. Last interaction: 4/17 (AI Tool Demo), 4/16 (Polaris DDD). |
+| Peter Ocampo | pocampo | App Store / mobile lead. Last interaction: 4/17 (AI Tool Demo). |
+| Alex VanDerStuyf | afvans | AEM translations, Polaris Brand LP rollout. Last interaction: 4/20 (Italy ref tag P0 coordination in progress). |
 | Harjeet Heer | hkheer | Stepped away from AU day-to-day |
 | Kate Rundell | kataxt | L8 Director. Visible on AU CPC thread. |
 | Sharon Serene | ssserene | Prime Day 2026 Visibility Intake (3/17) |
 | Frank Volinsky | — | MX market, page builds. MCS-3004 weblab scoping (3/27). |
 | Suzane Huynh | — | Adobe, OCI Rollout Discussion (3/19) |
-| Alex VanDerStuyf | afvans | AEM translations, Polaris Brand LP rollout. Submitted AU/MX/JP/CA translations (3/19, due 3/26). |
 | York Chen | yorkchen | Back from paternity leave (ended 3/22). JP market. |
 | Vijay Kumar | vkumarmp | Baloo Tech lead. Early access rollout. 1:1 with Richard 3/26. |
 | Mike Babich | — | Google rep. OCI email creation issues escalation (3/25). APAC MCC access. Latest: 3/26 11pm — 3 follow-up questions for Brandon. |
@@ -236,12 +240,15 @@ Last updated: 2026-04-17 (Friday PT, EOD cascade)
 | Praveen Chandolu | chandop | OCI Tech. Working with Brandon on new APAC account setup. |
 
 ## Pending Actions
-- [ ] 🚨 Testing Approach doc for Kate — THE hard thing. Apr 16 meeting OFFICIALLY CANCELED. Brandon reviewing doc first. v5 has PUBLISH verdict (8.4/10). 5 minor subtractive edits remain. **19 workdays at zero L1.**
+- [ ] 🚨 **Italy Polaris ref tag P0** — coordinate with Alex (Andes) to revert to old MCS template, restore PS ref tag (from DDD 4/16). PEN-DONE — revert underway.
+- [ ] 🚨 **Italy SIM update** — create/update SIM with specs for the corrected Italy template (from DDD 4/16)
+- [ ] 🚨 Testing Approach doc for Kate — THE hard thing. Apr 16 meeting OFFICIALLY CANCELED. Brandon reviewing doc first. v5 has PUBLISH verdict (8.4/10). 5 minor subtractive edits remain. **21 workdays at zero L1.**
+- [ ] 🔴 Share AI Tool master prompt + schedule local-setup walkthrough — committed during AI Tool Demo 4/17 (due 4/21)
+- [ ] 🔴 Propose Enidobi alert solution at campaign/ad-group level for CVR drops outside weblab markets (from DDD 4/16, due 4/18)
+- [ ] 🔴 Update or create SIM for Polaris template changes (benefit cards, sub-header, FAQs, closing CTA) to support implementation (from DDD 4/16)
 - [ ] 🔴 ABIX Handoff Doc — Brandon asked Richard to input (4/13 Slack). Brandon presenting to Kate THIS WEEK. Loop doc link shared. **CRITICAL — Kate visibility.**
-- [ ] 🔴 Loop Callout Clarifications — Brandon needs updates by Fri 4/17 @ 2pm CT (1pm PT). Richard reacted ✍️ but not completed.
-- [ ] 🔴 R&O Input MX/AU — Yun reminded 4/15. Due TODAY. Confirm file location and input numbers.
 - [ ] 🔴 WW Sitelink Audit — Brandon assigned via DM + Asana (4/15). Review task, acknowledge, assess scope.
-- [ ] 🔴 Write back to Dwayne — AU Adobe Alignment session feedback (carried fwd from today)
+- [ ] 🔴 Write back to Dwayne — AU Adobe Alignment session feedback
 - [ ] 🔴 AU: check genbi campaign data, change to max clicks with guardrails (carried fwd from today)
 - [ ] 🔴 Resolve Google dupe invoice — keep Diana/team updated (carried fwd from today)
 - [ ] 🔴 DDD walkthrough with team — Brandon assigned via Asana (4/15)
@@ -272,6 +279,9 @@ Last updated: 2026-04-17 (Friday PT, EOD cascade)
 - [ ] Apple Ads: investigate system issue (campaigns overspent — 3/27 notice)
 - [ ] ABMA-11245: follow up if no response to 3/30 comment
 - [x] Review Q2 CCP/ieCCP files from Stacey — DONE 4/16
+- [x] OCI CA launched 4/7 — DONE
+- [x] Loop Callout Clarifications — resolved 4/17 (Brandon deadline met)
+- [x] R&O Input MX/AU — submitted to Yun 4/17
 - [x] Polaris brand pages: Vijeth completed XF + Template, Alex confirmed navs working — 4/1
 - [x] Baloo: keyword cost data + "don't use Google" blurb — DONE 3/30
 - [x] Flash sections written — 3/27

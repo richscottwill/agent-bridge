@@ -8,7 +8,8 @@
         "ReadInternalWebsites",
         "QuipEditor",
         "InternalSearch",
-        "WorkspaceSearch"
+        "WorkspaceSearch",
+        "SearchAcronymCentral"
       ]
     },
     "ai-community-slack-mcp": {
@@ -269,7 +270,8 @@
         "sharepoint_delete_file",
         "sharepoint_delete_file",
         "sharepoint_delete_file",
-        "sharepoint_delete_file"
+        "sharepoint_delete_file",
+        "sharepoint_resolve_url"
       ]
     },
     "enterprise-asana-mcp": {

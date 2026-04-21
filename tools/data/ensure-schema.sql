@@ -609,6 +609,8 @@ CREATE TABLE IF NOT EXISTS ps.forecasts (
     scored          BOOLEAN DEFAULT FALSE,
     score           VARCHAR,
     notes           VARCHAR,
+    lead_weeks      INT,
+    prediction_run_id VARCHAR,
     created_at      TIMESTAMP DEFAULT current_timestamp
 );
 

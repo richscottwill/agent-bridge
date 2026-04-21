@@ -1,0 +1,33 @@
+# US — W16 (Apr 13 – Apr 19)
+
+US: US drove 9,109 registrations (-3% WoW), with flat spend WoW and $75 CPA (+3% WoW). April is projected at $2.89M spend and 38.8K registrations at $74 CPA. (vs. OP2: +25% regs, +2% spend)
+
+WoW we held spend flat and let composition do the work. Brand hit 12-week highs on every dimension: regs +16%, CVR +13% to 4.64%, CPA dropping to $61. NB gave back the W14-W15 CVR step-up, softening to 5.89% on flat clicks, which lifted NB CPA to $81 and drove the -3% headline.
+
+YoY we spent +28% with regs +92%, and CPA is down -33%. NB is the structural story: regs +135% at $81 CPA vs $143 LY.
+
+Note: The W14-W15 NB CVR peak was not a new baseline. I'll diagnose NB at the campaign level before W17 to see whether the soften stabilizes at 5.9% or drifts further.
+
+---
+
+**Weekly trend (regs):** W9: 7,996 → W10: 7,526 → W11: 8,275 → W12: 8,124 → W13: 8,574 → W14: 9,522 → W15: 9,386 → W16: 9,109
+
+**Anomalies:**
+- NB CVR reversion: 5.89% vs 6.38% W15 and 6.31% W14. W14-W15 step-up was not a stable new baseline.
+- NB CPA $81, first time above $80 since W9 ($81.5). Three-week creep from W13 ($69).
+- Brand CPA $61, a new 12-week low. Brand CVR (4.64%) and Brand regs (3,041) also at 12-week highs.
+- Mon 4/13 soft at 1,009 regs on $56K spend (vs weekday avg ~$107K), likely pacing. Worth a check.
+
+**W17 recommended spend:** $680K (hold flat)
+
+Rationale: efficiency is strong (CPA still below W7-W11) but NB CVR softened off the peak. Pushing spend into a softer NB CVR worsens CPA; pulling back gives up Brand momentum. Hold, let Brand compound, diagnose NB before adjusting.
+
+**W17 watch:**
+- NB CVR stabilization: does 5.89% hold, or drift toward the pre-W14 5.5% floor?
+- NB CPC at $4.80 (+2% WoW), first uptick in weeks. Possible OCI efficiency ceiling.
+- Brand CPA durability: 4 consecutive weeks below $70. Watch for Walmart IS snap-back.
+
+**W17 optimization:**
+- Campaign-level NB CVR breakdown to isolate whether specific campaigns regressed or the soften was broad.
+- Memorial Day (May 25) prep: build creative/bid plan for the long-weekend trough before W21.
+- Review impression share trends: impressions +4% WoW with clicks -1% suggests auction dynamics shifted unfavorably on NB.

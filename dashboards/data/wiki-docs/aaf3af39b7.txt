@@ -18,9 +18,9 @@ Last updated: 2026-04-17 (wiki-maintenance W16 run, evening pass)
 
 | Topic | Slug | Priority | Source | Why |
 |-------|------|----------|--------|-----|
-| Polaris program enrichment | polaris-program | P1 | Signal 4/17 | Trending topic (quality 20.5, 3 channels). Pull last 7d Slack thread + April hedy. |
-| OCI program enrichment + status refresh | oci-program | P1 | Signal 4/17 + Audit 4/4 | Still trending + 7 articles show stale FR/IT/ES/JP status. |
-| agent-architecture enrichment — 2 sections | agent-architecture | P2 | Wiki-candidates 4/17 evening | Add "Agent operating norms" (sensible defaults, caution-as-procrastination) + "Wiki system topology" (cache-and-derive, crawler-authoritative). 4 clustered signals from session-summary hook. Supersedes distributed-contribution-hook-pattern deferral. |
+| Polaris program enrichment | polaris-program | ~~P1~~ SKIPPED 4/17 eve | Signal 4/17 | Reviewed 4/17 eve. Article already comprehensive through 4/17 and the fresh 4/16 "DDD alignment, Richard owes feedback" signal is a task, not article content. Keep proposal for next weekly run if a new substantive signal lands. |
+| OCI program enrichment + status refresh | oci-program | ~~P1~~ DONE 4/17 eve | Signal 4/17 + Audit 4/4 | Reviewed 4/17 eve. FR/IT/ES/JP already correct at 100% — no change needed. CA row updated from "April 7, On track" to "Targeted week of April 20, MCM readiness confirmed, Brandon coordinating with Mukesh" per 4/16 Slack signals. No other changes warranted. |
+| agent-architecture enrichment — 2 sections | agent-architecture | ~~P2~~ DONE 4/17 eve | Wiki-candidates 4/17 evening | Added "Agent Operating Norms" + "Wiki System Topology" sections. 4 clustered signals consumed. Article's `updated:` bumped to 2026-04-17; SharePoint copy now 1-doc stale (expected — will sync on next push). |
 | Kiro steering packages → own subfolder | (13 files) | ~~P1~~ DONE | Audit 4/17 | Moved to `kiro-steering/` on 2026-04-17. |
 | MX budget/ie%CCP cross-link + enrich | mx-market-wiki, ieccp-planning-framework | P2 | Signal 4/17 | MX budget cluster in hedy + abix slack. |
 | AU CPA/CVR section | au-market-wiki | P2 | Signal 4/17 | Recurring AU CPA/CVR discussion. |
@@ -28,7 +28,7 @@ Last updated: 2026-04-17 (wiki-maintenance W16 run, evening pass)
 | Audiences workstream LiveRamp update | workstream-audiences-lifecycle | P2 | Audit 4/4 | 78% audience drop not reflected. Enhanced Match (now liveramp-program) not referenced. |
 | AEO POV + GenAI signals | aeo-ai-overviews-pov | P2 | Audit 4/4 | GenAI search traffic article has concrete signals that upgrade the AEO timeline. |
 | Audience vocabulary normalization | (systematic) | P2 | Audit 4/17 | 7 audience values with overlap (team/amazon-internal/org same thing). Consolidate to 4. |
-| Legacy cross-ref fix (9 refs, 6 files) | (systematic) | P3 | Audit 4/17 evening | 9 refs pointing to `~/shared/artifacts/*` legacy paths that no longer exist. One swap pass: `~/shared/artifacts/<cat>/YYYY-MM-DD-<slug>.md` → `agent-created/<cat>/<slug>.md`. ~15 min. |
+| Legacy cross-ref fix (9 refs, 6 files) | (systematic) | ~~P3~~ DONE 4/17 eve | Audit 4/17 evening | 9 refs pointing to `~/shared/artifacts/*` legacy paths that no longer exist. One swap pass applied: `~/shared/artifacts/<cat>/YYYY-MM-DD-<slug>.md` → `agent-created/<cat>/<slug>.md`. Post-fix broken-ref count: 0. |
 | Move archived docs to archive/ | operations/mx-ps-handoff-guide.md | ~~P3~~ DONE | Audit 4/17 | Moved to `archive/mx-ps-handoff-guide.md` on 2026-04-17. |
 | Fix 2 broken cross-refs | 2022/2023 JP NB test docs | ~~P3~~ DONE | Audit 4/17 | Fixed kebab-case filename refs on 2026-04-17. Broken link count: 0. |
 | Confidence calibration across all docs | (systematic) | P3 | Blind test 4/4 | Zero articles use HIGH/MEDIUM/LOW confidence framework from style guide. |
@@ -39,7 +39,6 @@ Last updated: 2026-04-17 (wiki-maintenance W16 run, evening pass)
 ## Pending decisions
 
 - **Blackboard experiment — wait on build until 2026-04-30.** Current adoption 0/74 articles. Richard has decided to hold the 5/2 kill review until the creation hook is built. Track build start on 4/30. No nagging until then.
-- **agent-architecture enrichment** — 4 clustered signals from session-summary hook propose adding "Agent operating norms" and "Wiki system topology" sections. See review-queue.md evening proposals. Awaiting Richard's thumbs-up to dispatch wiki-editor.
 
 ## Completed (2026-04-17 — wiki-maintenance W16)
 
@@ -53,6 +52,9 @@ Last updated: 2026-04-17 (wiki-maintenance W16 run, evening pass)
 | **Wiki-index auto-generation pipeline** | build-wiki-index.py | Builder now regenerates wiki-index.md from filesystem scan + SharePoint cache. 82 articles indexed, 46 published, 0 stale. | 2026-04-17 |
 | Wiki-candidates queue consumed (second pass) | (4 entries, session-summary cluster) | Archived to W16 archive, promoted as single agent-architecture enrichment proposal | 2026-04-17 (evening) |
 | SharePoint cache refresh | `data/sharepoint-artifacts.json` | Re-scanned all 7 category folders (87 artifacts, no net change) | 2026-04-17 (evening) |
+| **agent-architecture enrichment shipped** | agent-architecture | Added 2 sections (Agent Operating Norms, Wiki System Topology), 3 new tags, source entries, AGENT_CONTEXT refresh. Creates 1 SharePoint-stale signal (local newer than SP). | 2026-04-17 (evening) |
+| **OCI CA row updated** | oci-program | Factual status fix: April 7 "On track" → week of April 20 targeted, Brandon/Mukesh MCM coordination noted. | 2026-04-17 (evening) |
+| **Legacy cross-refs fixed** | 6 files, 9 refs | All `~/shared/artifacts/*` legacy paths rewritten to current `agent-created/<cat>/<slug>.md` form. Broken-ref count: 0. | 2026-04-17 (evening) |
 
 ## Completed (2026-04-04)
 

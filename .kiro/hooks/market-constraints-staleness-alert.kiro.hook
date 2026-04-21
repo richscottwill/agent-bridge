@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Market Constraints Staleness Alert",
+  "description": "On chat start, flag any ps.market_constraints_manual rows that haven't been updated in >60 days. Surfaces stale governing_constraint / handoff_status / OCI status that should be reviewed.",
+  "version": "1",
+  "when": {
+    "type": "promptSubmit"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Run this DuckDB query silently and ONLY mention it in your response if there are results:\n\nSELECT market, updated_at, DATE_DIFF('day', updated_at, CURRENT_TIMESTAMP) AS days_stale FROM ps.market_constraints_manual WHERE updated_at < CURRENT_TIMESTAMP - INTERVAL '60 days' ORDER BY updated_at;\n\nIf rows exist, prepend a compact one-liner to your response: 'Market constraints stale: [market1 Nd], [market2 Nd]... — consider UPDATE on ps.market_constraints_manual'. If no rows, skip silently. Do NOT block or delay the user's actual request — this is a background check only."
+  }
+}

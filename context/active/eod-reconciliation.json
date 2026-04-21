@@ -1,118 +1,74 @@
 {
-  "generated": "2026-04-17",
-  "date": "2026-04-17",
+  "generated": "2026-04-20",
+  "date": "2026-04-20",
   "timezone": "America/Los_Angeles",
   "status": "complete",
-  "completed_today": [],
-  "completed_today_note": "No genuine work completions today. 44 ABPS AI Content tasks marked complete are bulk deprecation moves per 2026-04-17 soul.md rule (Asana ABPS AI Content project deprecated, wiki articles now source of truth in shared/wiki/agent-created/ + SharePoint Artifacts/).",
+  "completed_today": [
+    {"gid": "1214123519100287", "name": "Reply to Dwayne: Brand LP consolidated feedback — open questions", "priority": "Today", "routine": null, "project": "ABPS - WW Testing & Projects", "completed_at": "07:30 PT", "type": "genuine", "level": "L2"},
+    {"gid": "1214131122088126", "name": "Reply to Dwayne: Brand LP consolidated feedback — open questions (duplicate)", "priority": "Today", "routine": null, "project": "ABPS - WW Testing & Projects", "completed_at": "07:31 PT", "type": "genuine_duplicate", "level": "L2"},
+    {"gid": "1214137998433533", "name": "Italy Polaris ref tag P0 — revert + restore tracking", "priority": "Urgent", "routine": "Sweep", "project": "ABPS - WW Testing & Projects", "completed_at": "08:30 PT", "type": "genuine", "level": "L2", "note": "Italy page restored 4/16. MCS-3004 SIM update pending."},
+    {"gid": "1214090268665886", "name": "Write back to Dwayne today about feedback from session", "priority": "Urgent", "routine": "Sweep", "project": null, "completed_at": "08:30 PT", "type": "genuine", "level": "L2"},
+    {"gid": "1213917691089036", "name": "Refmarker mapping audit PoC — AU", "priority": "Urgent", "routine": "Engine Room", "project": "AU", "completed_at": "08:34 PT", "type": "genuine", "level": "L3", "note": "Task Progress=Done"},
+    {"gid": "1214091808391411", "name": "Resolve Google dupe invoice issue - keep Diana/team updated", "priority": "Today", "routine": "Sweep", "project": null, "completed_at": "10:38 PT", "type": "bulk_cleanup"},
+    {"gid": "1213993229524626", "name": "ie%CCP calc - insert MX spend/regs before 9th", "priority": "Not urgent", "routine": "Admin", "project": null, "completed_at": "10:38 PT", "type": "bulk_cleanup"},
+    {"gid": "1213828814349976", "name": "If we want to remove the CTA on Polaris NB pages for MX (link to ticket)", "priority": "Not urgent", "routine": "Engine Room", "project": null, "completed_at": "10:38 PT", "type": "bulk_cleanup"},
+    {"gid": "1213817111703805", "name": "It's time to update your goal(s)", "priority": "Today", "routine": "Sweep", "project": null, "completed_at": "10:38 PT", "type": "bulk_cleanup"},
+    {"gid": "1213798673865639", "name": "Update and close your goal(s)", "priority": "Today", "routine": "Core Two", "project": null, "completed_at": "10:38 PT", "type": "bulk_cleanup"},
+    {"gid": "1213646854838564", "name": "Using AI for paid search", "priority": "Not urgent", "routine": "Core Two", "project": null, "completed_at": "10:38 PT", "type": "bulk_cleanup"},
+    {"gid": "1213230198995937", "name": "WW redirect - Existing customer reporting in Adobe Ad Cloud", "priority": "Today", "routine": "Core Two", "project": null, "completed_at": "10:38 PT", "type": "bulk_cleanup", "note": "26d stale task closed without action — was 'kill-or-revive Monday'"},
+    {"gid": "1212811293275567", "name": "See if we can create a view with relevant links for each account", "priority": "Not urgent", "routine": "Core Two", "project": null, "completed_at": "10:38 PT", "type": "bulk_cleanup"},
+    {"gid": "1212811293275565", "name": "See if budget dashboard WW can be created", "priority": "Not urgent", "routine": "Core Two", "project": null, "completed_at": "10:38 PT", "type": "bulk_cleanup"}
+  ],
+  "completed_today_note": "14 tasks marked complete today. Breakdown: 5 genuine completions (all at 07:30-08:34 PT, L2/L3 work) + 9 bulk-cleanup closes (all at 10:38 PT, largely stale backlog items including 26d-stale WW redirect task). No L1 artifact work shipped — Testing Approach still not sent to Brandon.",
   "carried_forward": [
-    {
-      "gid": "1214074477111007",
-      "name": "DDD walkthrough with team",
-      "from": "Today",
-      "to": "Urgent",
-      "reason": "Not explicitly completed — AI tool demo session today was different scope",
-      "next_action": "Confirm walkthrough completed or schedule follow-up"
-    },
-    {
-      "gid": "1214074477110993",
-      "name": "Sitelink Audit/Update",
-      "from": "Today",
-      "to": "Urgent",
-      "reason": "Not started today",
-      "next_action": "Audit sitelinks across AU/MX/PAM next week"
-    },
-    {
-      "gid": "1214081017092577",
-      "name": "MCS LP Review: Connect with Lorena on paid social/PS synergy",
-      "from": "Today",
-      "to": "Urgent",
-      "reason": "Not completed today",
-      "next_action": "Ping Lorena next week on MX paid social/PS synergy"
-    },
-    {
-      "gid": "1213796951745232",
-      "name": "Look over AU landing page switch",
-      "from": "Today",
-      "to": "Urgent",
-      "reason": "Max-clicks switch made 4/17, check Monday",
-      "next_action": "Monday: check AU account post max-clicks switch, review budgets"
-    },
-    {
-      "gid": "1213965650410967",
-      "name": "Deep Dive: Year-One Optimization one-pager",
-      "from": "Today",
-      "to": "Urgent",
-      "reason": "Due 4/16, not started — L3 strategic artifact drift",
-      "next_action": "Monday: review draft, fill in market-specific KPI targets"
-    }
+    {"gid": "1214074477110993", "name": "Sitelink Audit/Update", "from": "Today", "to": "Urgent", "days_carried": 3, "reason": "Not started today; weekend work gap", "next_action": "Audit sitelinks across AU/MX/PAM"},
+    {"gid": "1214128634505816", "name": "AU handover: check account Monday post max-clicks", "from": "Today", "to": "Urgent", "days_carried": 0, "reason": "Due today not done; carry forward to tomorrow", "next_action": "Check AU account post 4/17 max-clicks switch; adjust budgets"},
+    {"gid": "1214080130329568", "name": "Make changes to AU/MX/PAM for the week", "from": "Today", "to": "Urgent", "days_carried": 0, "reason": "Weekly recurring; W15 dashboard ready but changes not executed", "next_action": "AU bids up (15.7% pacing), MX hold (65.1% pacing), PAM Q2 check"},
+    {"gid": "1214088494080582", "name": "Resolve MX duplicate invoice — Diana ($56K)", "from": "Today", "to": "Urgent", "days_carried": 4, "reason": "Diana reply not sent", "next_action": "Reply to Diana; confirm which invoice to void, request credit"},
+    {"gid": "1213917967984980", "name": "Respond to Lena — AU LP URL analysis + CPA methodology", "from": "Today", "to": "Urgent", "days_carried": 17, "reason": "17 DAYS OVERDUE. Draft exists. Kate-visible thread.", "next_action": "Send draft reply to Lena (AU LP URL + CPA methodology)", "escalation": "This has aged past the critical threshold. Brandon + Kate are watching."},
+    {"gid": "1213796951745232", "name": "Look over AU landing page switch", "from": "Today", "to": "Urgent", "days_carried": 3, "reason": "Max-clicks check deferred again", "next_action": "Check AU account: traffic, regs, campaign settings post max-clicks switch"}
   ],
-  "new_tasks": [
-    {
-      "source": "meeting:IvUNtHCncikQcZvODFj1",
-      "source_name": "AI Tool Demo and Workflow Integration (Hedy)",
-      "todos_from_session": [
-        "Follow up with Lorena Alvarez Larrea (MX) on WhatsApp campaign rollout plans",
-        "Follow up with Alexis Eck (AU) on WhatsApp campaign rollout plans"
-      ],
-      "note": "Both items are carry-overs from prior WhatsApp discussions, not net-new. Adi asked in DM for Kiro setup help in next 1:1 — L3 signal (tool adoption)."
-    }
-  ],
+  "new_tasks": [],
+  "new_tasks_note": "No net-new tasks assigned since morning. No Hedy sessions today (no meetings) — last session 4/17 AI Tool Demo already ingested.",
   "recurring_proposals": [],
   "recurring_created": [],
+  "recurring_note": "No recurring task instances needed creation today. 'Make changes to AU/MX/PAM' and 'Mondays - Write into EU SSR Acq Asana' both already exist as open instances with today's/this-week's dates.",
   "blocker_updates": [
-    {
-      "task": "MX Auto page",
-      "blocker": "Vijeth footer component",
-      "days_blocked": 29,
-      "status": "ongoing"
-    },
-    {
-      "task": "Kingpin Goals MX",
-      "blocker": "Andes data unavailable",
-      "days_blocked": 32,
-      "status": "ongoing"
-    }
+    {"task": "MX Auto page", "gid": "n/a", "blocker": "Vijeth footer component", "days_blocked": 32, "status": "ongoing", "action": "Escalate or work around"},
+    {"task": "Kingpin Goals MX", "gid": "1213983090951838", "blocker": "Andes data unavailable", "days_blocked": 35, "status": "ongoing", "action": "Escalate — 35 days is past acceptable"}
   ],
   "five_levels": {
     "l1": 0,
-    "l2": 0,
+    "l2": 3,
     "l3": 1,
     "l4": 0,
     "l5": 0,
-    "note": "L3 = AI Tool Demo session (Richard led team walkthrough of AI callout workflow — tool adoption signal). L1 Testing Approach still at zero — 20 workdays."
+    "note": "L2 (×3): Italy Polaris P0 coordination (protecting OCI measurement), Reply to Dwayne on Brand LP feedback, Write back to Dwayne re AU Adobe Alignment session. L3 (×1): Refmarker mapping audit PoC — AU (Task Progress=Done, signal for team automation). L1 = ZERO. Testing Approach still not sent. Streak at risk — now 22 workdays with no L1 output. Last L1 completion is weeks past."
   },
   "hard_thing": {
     "name": "Send Testing Approach v5 to Brandon",
     "status": "not_started",
-    "workdays_at_zero": 20
+    "workdays_at_zero": 22,
+    "note": "v5 had PUBLISH verdict (8.4/10) with 5 minor edits remaining. The file exists, the verdict exists, only the SEND step is missing. Brandon/Kate meeting was canceled — the external forcing function is gone. Must be self-driven."
   },
-  "meetings_today": [
-    {
-      "session_id": "IvUNtHCncikQcZvODFj1",
-      "title": "AI Tool Demo and Workflow Integration",
-      "duration_min": 51,
-      "attendees": ["Richard", "Adi Thakur", "Andrew Wirtz", "Stacey Gu", "Yun-Kang Chu", "Dwayne Palmer", "Peter Ocampo"],
-      "key_outcomes": [
-        "Richard demoed AI tool for WBR callouts + master prompt workflow",
-        "Team decisions: adopt AI tool for WBR support, standardize Markdown output, create SharePoint shared-prompt repo",
-        "Commitments: Richard to share master prompt + schedule setup session by 4/21; Adi MX test by 4/25; Andrew UK validation by 4/28"
-      ],
-      "richard_communication": "Adequate presence, strategic value, direct clarity, responsive listening. Missed opportunity: could have invited Adi/Andrew input earlier."
-    }
-  ],
+  "meetings_today": [],
+  "meetings_today_note": "No meetings on 2026-04-20. Calendar shows only Alex @ Adobe Summit (info-only all-day event 4/19-4/22). Richard had no syncs scheduled.",
   "portfolio_changes": {
-    "AU": {"new_today": 0, "completed_today": 0, "note": "Max-clicks switch made on genbi campaign per Brandon ask"},
-    "MX": {"new_today": 0, "completed_today": 0},
-    "WW_Testing": {"new_today": 0, "completed_today": 0},
+    "AU": {"new_today": 0, "completed_today": 1, "note": "Refmarker audit PoC completed — artifact for Lena"},
+    "MX": {"new_today": 0, "completed_today": 0, "note": "MCS LP Review: Connect with Lorena still open"},
+    "WW_Testing": {"new_today": 0, "completed_today": 3, "note": "Italy P0 + 2 Dwayne replies"},
     "Paid_App": {"new_today": 0, "completed_today": 0},
-    "ABPS_AI_Content_DEPRECATED": {"bulk_completed": 44, "note": "Project deprecated per 2026-04-17 soul.md rule. All tasks closed. Wiki articles now source of truth."}
+    "ABPS_AI_Build": {"new_today": 0, "completed_today": 0}
   },
   "wiki_pipeline": {
-    "drafts_created_today": 24,
+    "drafts_created_today": 0,
     "promoted_today": 0,
-    "merges_today": 7,
-    "consolidation_pass": "Batch of 18 DRAFTs generated from 2-week context scan. 7 merges consolidated 37 files to ~10 canonical docs (OCI, Grok swarm, F90, Polaris, Forecast, LiveRamp). All DRAFT status awaiting wiki-critic review.",
-    "source": "shared/wiki/agent-created/_meta/draft-log.md"
+    "source_note": "Wiki team not engaged today. draft-log.md not updated for 4/20."
+  },
+  "email_summary": {
+    "unread_count": 1,
+    "notable": [
+      {"from": "Brandon Munday", "subject": "AU PS Weekly Update (follow-up to Lena)", "received": "2026-04-10T22:01Z", "action": "Brandon's 4/10 follow-up on Lena's questions is still unread — this overlaps with the 17d-overdue Lena reply task. Read it tonight; it may contain the context Richard needs."}
+    ]
   }
 }

@@ -1,0 +1,2561 @@
+{
+  "generated": "2026-04-21T00:51:00.463869+00:00",
+  "markets": [
+    "au",
+    "mx",
+    "ww"
+  ],
+  "labels": {
+    "au": "AU Paid Search",
+    "mx": "MX Paid Search",
+    "ww": "WW Testing"
+  },
+  "data": {
+    "au": {
+      "frontmatter": {
+        "title": "AU Paid Search — Daily State File",
+        "status": "ACTIVE",
+        "audience": "amazon-internal",
+        "owner": "Richard Williams",
+        "format": "Amazon 1-2 Page Narrative (Flash Report)",
+        "cadence": "Daily refresh",
+        "destination": "OneDrive Kiro-Drive/state-files/au-paid-search-state.md",
+        "created": "2026-04-12",
+        "updated": "2026-04-20",
+        "data_through": "2026 W15 (Apr 6–12)"
+      },
+      "title": "AU Paid Search — Daily State File",
+      "status": "ACTIVE",
+      "owner": "Richard Williams",
+      "updated": "2026-04-20",
+      "data_through": "2026 W15 (Apr 6–12)",
+      "sections": {
+        "introduction": [
+          "This document provides the trailing-week operational state of the Amazon Business Australia Paid Search program. AU is Richard Williams's hands-on market, managed through Google Ads under the DSAP parent MCC. The program launched in June 2025 and operates under a CPA efficiency constraint — no ie%CCP target exists yet because CCP data is not expected until July 2026. FY26 OP2 targets $1.8M budget, 12,906 registrations, and $140 CPA. FY25 (June–December only) delivered $1.14M spend, 8,763 registrations, and $158 CPA. Lena Zak (L7) is the primary stakeholder with three stated priorities: keyword CPC/CPA investigation, keyword-to-product mapping, and Polaris migration. Alexis Eck (L6) is the collaborative execution partner. OCI is planned for May 2026 but no MCC has been created. Keyword-level registration data is unavailable until Q3 2026; all Non-Brand keyword analysis is directional."
+        ],
+        "state": [
+          "AU drove 168 registrations in W15 (-1.2% WoW, -29% vs trailing 8-week average of 236) on $25,829 spend (+17.0% WoW) at a blended CPA of $153.74 (+18.4% WoW). W15 extends the registration decline streak to 7 consecutive weeks and is the lowest weekly output in the trailing 8 weeks. Spend rose while registrations fell, driving a 3-week consecutive CPA increase: $114.77 (W12) → $117.22 (W13) → $129.84 (W14) → $153.74 (W15). The Polaris URL migration tracking issue remains unresolved and is the leading candidate root cause for the sustained CVR compression.",
+          "On April 17, Alex VanDerStuyf (MCS) confirmed that Italy's Polaris `/cp/ps-brand` page (launched April 1) routed Italian signup traffic to the AU domain via an incorrect ref tag — a P0 production bug that was detected on April 16 during the Polaris LP sync. Legacy Italy template was restored April 16; the Polaris Italy variant is now parked in AEM as `it/cp/ps-brand-new`. This is an Italy-to-AU routing issue, not an AU page issue, but it is an additional indicator that the Polaris template rollout has introduced ref tag regressions that require systematic verification before AU's tracking can be treated as clean.",
+          "**Input metrics (controllable levers):**",
+          "**Output metrics (lagging results):**",
+          "The W15 pattern differs from W14: Brand and NB moved in opposite directions. Brand registrations dropped -19.8% on -5.7% spend — a CVR problem (6.08% vs 7.15% W14). NB registrations rose +23.0% on +22.5% spend — volume recovery on nearly flat CPA. The NB CPC decline streak held at $4.77, confirming Brandon's surgical-not-broad keyword approach continues to suppress cost per click without eroding CPA because CVR also softened."
+        ],
+        "flags": [
+          "<!-- AM-OWNED:trailing-week-flags START --> 4 anomalies detected (>20% deviation from 8-week average):",
+          "**Recommended action:** Do not treat the W15 regression as proof of structural decline without first validating Polaris tracking. Brand CVR is the highest-signal metric to monitor post-tracking-fix because Brand CVR is the least-dependent on market demand fluctuation. If Brand CVR returns to 7.0%+ within 7 days of tracking validation, the decline is resolvable; if it does not, structural keyword or LP investigation is required.",
+          "**Cost of inaction (null case):** If the Polaris URL migration tracking is not validated within the next 7 days, 3 consecutive weeks of CVR data will remain ambiguous — the team cannot distinguish genuine demand softness from a tracking artifact. At the current W15 run rate of 168 registrations per week, AU would deliver approximately 8,736 FY26 registrations — 32% below the 12,906 OP2 target and $600K below the $1.8M budget plan. Separately, OCI launch is targeted for May 2026 but no MCC has been created. MCC creation requires 2–3 weeks of lead time. If MCC creation does not begin this week, the May launch slips to June or later, forgoing the 18–24% registration uplift observed in comparable OCI markets (US +24%, UK +23%, DE +18%). At AU's current 168 regs/week baseline, a 20% OCI uplift would add approximately 34 registrations per week — 1,768 annualized registrations worth approximately $271K at $153 CPA. <!-- AM-OWNED:trailing-week-flags END -->",
+          "<!-- WBR-OWNED:signal-flags START --> <!-- WBR-OWNED:signal-flags END -->",
+          "---"
+        ],
+        "lessons": [
+          "Three operational insights from the trailing four-week window (W12–W15) inform the immediate tactical posture:",
+          "1. **The Polaris URL migration remains the most likely cause of the CVR collapse, and April 16 Polaris LP optimization sync reinforced this hypothesis with an Italy ref tag regression as corroborating evidence.** W15 Brand CVR at 6.08% is the lowest in the trailing 8 weeks and -18% below the 8-week average of 7.46%. The April 16 meeting revealed that Italy's Polaris LP overwrote the market's ref tag, routing Italian signup traffic to the AU domain — a confirmed production failure. AU's own Polaris LP has not been subjected to the same ref tag audit. Until the audit is complete, Brand CVR degradation cannot be attributed to any specific driver. Validation is not optional — it is the precondition for every other AU optimization.",
+          "2. **NB CPC's 8-week decline streak (from $6.53 in W8 to $4.77 in W15, -27% total) continues to hold, but NB CPA is locked at elevated levels because NB CVR remains 27% below the 8-week average.** NB CPA in W15 is $239.34, nearly identical to W14's $240.26, and still 43% above the $140 OP2 blended target. The CPC decline has delivered the efficiency Brandon requested on March 23, but CVR recovery is the gating factor for translating CPC gains into CPA improvement. If NB CVR recovers to the baseline range of 2.5%–3.5%, NB CPA mechanically drops to $170–$200 at current CPC levels.",
+          "3. **The W15 NB registration rebound from 74 to 91 on similar CPC suggests demand is not the structural issue.** NB clicks volume rose in W15, NB CVR recovered modestly from 1.87% to 1.99%, and NB registrations grew +23.0% WoW. This pattern indicates that the NB funnel can absorb additional traffic productively when CVR cooperates. The Brand-side weakness (CVR -10.6% WoW, registrations -19.8% WoW) is a distinct problem — one that aligns with the Polaris LP migration timing. Treating AU's decline as a unified story is incorrect; the Brand and NB dynamics are now diverging and require separate diagnostics.",
+          "---"
+        ],
+        "goals": [
+          "Achieve a blended CPA at or below $140 for FY26 (OP2 target), delivering 12,906 registrations on $1.8M budget.",
+          "Complete the Polaris Brand landing page migration and validate tracking integrity by April 30, 2026.",
+          "Prepare for OCI launch in May 2026 — MCC creation, Google Ads account configuration, and conversion signal setup.",
+          "Establish a biweekly keyword review cadence with Alexis Eck by April 18, 2026, covering top-20 outlier keywords by CPC/CPA.",
+          "Pilot the two-campaign structure (product-intent vs business-intent) by May 15, 2026, with a 4-week measurement period before scaling."
+        ],
+        "tenets": [
+          "**CPA efficiency is the primary constraint.** Without ie%CCP data (expected July 2026), CPA at or below $140 is the governing metric. Every spend decision must demonstrate CPA discipline.",
+          "**Surgical keyword optimization over broad cuts.** Brandon's guidance (3/23 sync): focus on outlier keyword analysis (top 20 by CPC/CPA), not broad keyword removal. CPC caps are a \"two-way door\" until OCI.",
+          "**Data-first stakeholder management.** Lena requires numbers. Every response to Lena must include specific data points, trend context, and actionable recommendations. Never send a qualitative-only update.",
+          "**Phased testing before scale.** The two-campaign structure pilot must run for 4 weeks with a defined success metric before WW consideration. No big-bang restructuring."
+        ],
+        "priorities": [
+          "OCI MCC: Not created. Cannot begin Google Ads account setup or conversion signal configuration until MCC exists. Blocks May 2026 launch.",
+          "Keyword-level registration data: Unavailable until Q3 2026. All NB keyword analysis remains directional. Blocks precise keyword-to-registration attribution.",
+          "ie%CCP target: CCP data not expected until July 2026. AU operates on CPA constraint only until then.",
+          "Polaris ref tag audit: AU page not yet validated after Italy regression discovered April 16. Blocks attribution confidence for all W14–W15 data.",
+          "Lena: Biweekly keyword review cadence and two-campaign structure pilot scope confirmation still pending from March discussion.",
+          "Alexis: Friday handover (switched to max-clicks 4/17) confirmed; AU account check today.",
+          "Brandon: Approve OCI MCC creation request for AU. Forward Polaris template change-requests email to Dwayne (pending from 4/17 DM request).",
+          "Alex VanDerStuyf (MCS): Extend Italy ref tag audit methodology to AU Polaris page.",
+          "MarTech: Validate Polaris conversion tag implementation post-migration."
+        ]
+      },
+      "tables": {
+        "inputs": [
+          {
+            "Input Metric": "Total spend",
+            "W15 Value": "$25,829",
+            "WoW Δ": "+17.0%",
+            "Trend": "Reversed W14 decline; highest since W11"
+          },
+          {
+            "Input Metric": "Brand CVR",
+            "W15 Value": "6.08%",
+            "WoW Δ": "-10.6%",
+            "Trend": "Below 8-week avg of 7.46%"
+          },
+          {
+            "Input Metric": "NB CVR",
+            "W15 Value": "1.99%",
+            "WoW Δ": "+6.4%",
+            "Trend": "27% below 8-week average of 2.74%"
+          },
+          {
+            "Input Metric": "NB CPC",
+            "W15 Value": "$4.77",
+            "WoW Δ": "-0.8%",
+            "Trend": "15% below 8-week average of $5.61"
+          },
+          {
+            "Input Metric": "Max-clicks bid strategy",
+            "W15 Value": "Live 4/17",
+            "WoW Δ": "—",
+            "Trend": "Carried forward from Friday handover; Monday check pending"
+          }
+        ],
+        "outputs": [
+          {
+            "Output Metric": "Total registrations",
+            "W15 Value": "168",
+            "WoW Δ": "-1.2%",
+            "vs OP2 Run Rate": "32% below 248/wk needed for 12,906 FY26"
+          },
+          {
+            "Output Metric": "Brand registrations",
+            "W15 Value": "77",
+            "WoW Δ": "-19.8%",
+            "vs OP2 Run Rate": "Lowest in trailing 8 weeks"
+          },
+          {
+            "Output Metric": "NB registrations",
+            "W15 Value": "91",
+            "WoW Δ": "+23.0%",
+            "vs OP2 Run Rate": "Recovered from W14 low of 74"
+          },
+          {
+            "Output Metric": "Blended CPA",
+            "W15 Value": "$153.74",
+            "WoW Δ": "+18.4%",
+            "vs OP2 Run Rate": "$13.74 above $140 OP2 target"
+          },
+          {
+            "Output Metric": "Brand CPA",
+            "W15 Value": "$52.59",
+            "WoW Δ": "+17.5%",
+            "vs OP2 Run Rate": "Above $35–$45 stability band"
+          },
+          {
+            "Output Metric": "NB CPA",
+            "W15 Value": "$239.34",
+            "WoW Δ": "-0.4%",
+            "vs OP2 Run Rate": "Roughly flat vs W14"
+          },
+          {
+            "Output Metric": "Brand spend",
+            "W15 Value": "$4,049",
+            "WoW Δ": "-5.7%",
+            "vs OP2 Run Rate": "Continuing spend discipline"
+          },
+          {
+            "Output Metric": "NB spend",
+            "W15 Value": "$21,780",
+            "WoW Δ": "+22.5%",
+            "vs OP2 Run Rate": "NB absorbed the spend increase"
+          }
+        ],
+        "flags": [
+          {
+            "Metric": "Registrations",
+            "W15 Value": "168",
+            "8-Week Avg": "236",
+            "Deviation": "-29%",
+            "Implication": "7-week decline streak confirmed"
+          },
+          {
+            "Metric": "Brand registrations",
+            "W15 Value": "77",
+            "8-Week Avg": "104",
+            "Deviation": "-26%",
+            "Implication": "Brand-side contribution weakening"
+          },
+          {
+            "Metric": "NB CVR",
+            "W15 Value": "1.99%",
+            "8-Week Avg": "2.74%",
+            "Deviation": "-27%",
+            "Implication": "5th consecutive week below baseline 2.5%–3.5%"
+          },
+          {
+            "Metric": "Brand CPA",
+            "W15 Value": "$52.59",
+            "8-Week Avg": "$45.88",
+            "Deviation": "+15%",
+            "Implication": "Above $35–$45 stability band"
+          }
+        ]
+      },
+      "appendices": {
+        "weekly_trend": {
+          "heading": "Appendix A",
+          "tables": [
+            [
+              {
+                "Week": "W8",
+                "Regs": "256",
+                "Brand": "94",
+                "NB": "162",
+                "Spend": "$37,196",
+                "CPA": "$145.30",
+                "NB CPA": "$198.13",
+                "NB CVR": "3.29%",
+                "NB CPC": "$6.53"
+              },
+              {
+                "Week": "W9",
+                "Regs": "256",
+                "Brand": "121",
+                "NB": "135",
+                "Spend": "$36,408",
+                "CPA": "$142.22",
+                "NB CPA": "$223.68",
+                "NB CVR": "2.84%",
+                "NB CPC": "$6.36"
+              },
+              {
+                "Week": "W10",
+                "Regs": "251",
+                "Brand": "111",
+                "NB": "140",
+                "Spend": "$31,589",
+                "CPA": "$125.85",
+                "NB CPA": "$189.14",
+                "NB CVR": "3.08%",
+                "NB CPC": "$5.83"
+              },
+              {
+                "Week": "W11",
+                "Regs": "241",
+                "Brand": "108",
+                "NB": "133",
+                "Spend": "$30,999",
+                "CPA": "$128.63",
+                "NB CPA": "$198.41",
+                "NB CVR": "2.79%",
+                "NB CPC": "$5.53"
+              },
+              {
+                "Week": "W12",
+                "Regs": "244",
+                "Brand": "119",
+                "NB": "125",
+                "Spend": "$28,005",
+                "CPA": "$114.77",
+                "NB CPA": "$188.51",
+                "NB CVR": "2.85%",
+                "NB CPC": "$5.37"
+              },
+              {
+                "Week": "W13",
+                "Regs": "208",
+                "Brand": "98",
+                "NB": "110",
+                "Spend": "$24,381",
+                "CPA": "$117.22",
+                "NB CPA": "$184.99",
+                "NB CVR": "2.60%",
+                "NB CPC": "$4.81"
+              },
+              {
+                "Week": "W14",
+                "Regs": "170",
+                "Brand": "96",
+                "NB": "74",
+                "Spend": "$22,074",
+                "CPA": "$129.84",
+                "NB CPA": "$240.26",
+                "NB CVR": "1.87%",
+                "NB CPC": "$4.50"
+              },
+              {
+                "Week": "W15",
+                "Regs": "168",
+                "Brand": "77",
+                "NB": "91",
+                "Spend": "$25,829",
+                "CPA": "$153.74",
+                "NB CPA": "$239.34",
+                "NB CVR": "1.99%",
+                "NB CPC": "$4.77"
+              }
+            ]
+          ],
+          "paragraphs": [
+            "**7-week decline streak:** W8 (256) → W9 (256) → W10 (251) → W11 (241) → W12 (244) → W13 (208) → W14 (170) → W15 (168). Cumulative decline: -34% from W8. NB CPC 8-week decline: $6.53 → $4.77, -27% cumulative."
+          ]
+        },
+        "yoy": {
+          "heading": "Appendix B",
+          "paragraphs": [
+            "No YoY data available. AU Paid Search launched June 2025. First YoY comparison will be available June 2026."
+          ]
+        },
+        "monthly_projection": {
+          "heading": "Appendix C",
+          "tables": [
+            [
+              {
+                "Metric": "Registrations",
+                "MTD (Apr 1–12)": "168",
+                "OP2 Month Target": "1,071",
+                "MTD Pacing": "15.7% at 19% elapsed",
+                "W16 Forecast": "207 (CI 188–288)"
+              },
+              {
+                "Metric": "Spend",
+                "MTD (Apr 1–12)": "$25,829",
+                "OP2 Month Target": "$147,592",
+                "MTD Pacing": "17.5% at 19% elapsed",
+                "W16 Forecast": "$26,396"
+              },
+              {
+                "Metric": "CPA",
+                "MTD (Apr 1–12)": "$153.74",
+                "OP2 Month Target": "$138",
+                "MTD Pacing": "+11% above target",
+                "W16 Forecast": "$115 (forecast)"
+              }
+            ]
+          ],
+          "paragraphs": [
+            "MTD data reflects only W15 (Apr 6–12). Pacing will be reassessed at W16. The W16 forecast assumes a post-Easter recovery pattern consistent with April 2025."
+          ]
+        },
+        "plan_summary": {
+          "heading": "Appendix D",
+          "tables": [
+            [
+              {
+                "Metric": "Total spend",
+                "FY25 Actual (Jun–Dec)": "$1.14M",
+                "FY26 OP2": "$1.8M",
+                "Run Rate (W15)": "$1.34M annualized"
+              },
+              {
+                "Metric": "Total registrations",
+                "FY25 Actual (Jun–Dec)": "8,763",
+                "FY26 OP2": "12,906",
+                "Run Rate (W15)": "8,736 annualized"
+              },
+              {
+                "Metric": "Blended CPA",
+                "FY25 Actual (Jun–Dec)": "$158",
+                "FY26 OP2": "$140",
+                "Run Rate (W15)": "$154"
+              }
+            ]
+          ],
+          "paragraphs": [
+            "At the W15 run rate, AU would deliver approximately 8,736 registrations on $1.34M spend at $154 CPA — 32% below the OP2 registration target and $13 above the CPA target. The volume gap has widened versus the W14 snapshot (from -31% to -32%). OCI (projected +18–24% uplift) and Polaris tracking validation remain the two highest-leverage interventions to close the volume gap."
+          ]
+        },
+        "change_log": {
+          "heading": "Appendix E",
+          "tables": [
+            [
+              {
+                "Date": "1/12",
+                "Change": "Adjusted bid strategies across Brand and NB campaigns",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "1/20",
+                "Change": "Increased Brand max CPC targets",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "1/27",
+                "Change": "Added negative keywords to NB campaigns",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "2/3",
+                "Change": "Transitioned NB to portfolio bid strategy",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "2/10",
+                "Change": "Adjusted NB budget allocation (-10%)",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "2/17",
+                "Change": "Added negative keywords (Brand Exact routing)",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "2/24",
+                "Change": "Increased Brand Phrase budget +15%",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "3/1",
+                "Change": "Polaris Brand LP migration initiated",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "3/5",
+                "Change": "Completed mid-week Polaris URL migration",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "3/5",
+                "Change": "Applied CPC caps to top-20 NB outlier keywords",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "4/16",
+                "Change": "Italy Polaris ref tag regression detected (routed IT traffic to AU domain); AU page integrity check opened",
+                "Owner": "MCS + Richard"
+              },
+              {
+                "Date": "4/17",
+                "Change": "Switched AU to max-clicks bid strategy; handover from Alexis",
+                "Owner": "Richard + Alexis"
+              }
+            ]
+          ]
+        },
+        "variance_bridge": {
+          "heading": "Appendix F",
+          "paragraphs": [
+            "AU currently operates without OCI (Online Conversion Integration). All conversion data flows through Google Ads native tracking. No variance bridge between advertising platform and internal ERP is required at this time. When OCI launches for AU (target May 2026), this section will document the expected 5–15% discrepancy between Ordered Product Sales and Shipped Product Sales, and the reconciliation methodology.",
+            "**Known data limitations:** - ie%CCP: Not available. CCP data expected July 2026. AU operates on CPA constraint only. - Keyword-level registrations: Unavailable until Q3 2026. All NB keyword analysis is directional. - YoY comparison: Not available until June 2026 (AU launched June 2025). - Polaris tracking integrity: Unvalidated post-migration. W13 daily pattern suggests potential tracking disruption.",
+            "---"
+          ],
+          "bullets": [
+            "ie%CCP: Not available. CCP data expected July 2026. AU operates on CPA constraint only.",
+            "Keyword-level registrations: Unavailable until Q3 2026. All NB keyword analysis is directional.",
+            "YoY comparison: Not available until June 2026 (AU launched June 2025).",
+            "Polaris tracking integrity: Unvalidated post-migration. W13 daily pattern suggests potential tracking disruption."
+          ]
+        },
+        "source_links": {
+          "heading": "Appendix G",
+          "tables": [
+            [
+              {
+                "Document": "ps-forecast-tracker.xlsx",
+                "Purpose": "WW PS forecast model, budget scenarios",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/ps-forecast-tracker.xlsx?web=1)"
+              },
+              {
+                "Document": "ps-testing-dashboard.xlsx",
+                "Purpose": "Active test tracker across all markets",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/ps-testing-dashboard.xlsx?web=1)"
+              },
+              {
+                "Document": "command-center.xlsx",
+                "Purpose": "Operational command center — tasks, status, owners",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/command-center.xlsx?web=1)"
+              }
+            ],
+            [
+              {
+                "Document": "au-2026-w14.docx",
+                "Period": "W14 callout",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-2026-w14.docx?web=1)"
+              },
+              {
+                "Document": "au-2026-w13.docx",
+                "Period": "W13 callout",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-2026-w13.docx?web=1)"
+              },
+              {
+                "Document": "au-2026-w12.docx",
+                "Period": "W12 callout",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-2026-w12.docx?web=1)"
+              },
+              {
+                "Document": "au-2026-w11.docx",
+                "Period": "W11 callout",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-2026-w11.docx?web=1)"
+              },
+              {
+                "Document": "au-analysis-2026-w13.docx",
+                "Period": "W13 deep analysis",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-analysis-2026-w13.docx?web=1)"
+              },
+              {
+                "Document": "au-analysis-2026-w12.docx",
+                "Period": "W12 deep analysis",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-analysis-2026-w12.docx?web=1)"
+              },
+              {
+                "Document": "au-data-brief-2026-w14.docx",
+                "Period": "W14 data brief",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-data-brief-2026-w14.docx?web=1)"
+              },
+              {
+                "Document": "au-data-brief-2026-w13.docx",
+                "Period": "W13 data brief",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-data-brief-2026-w13.docx?web=1)"
+              },
+              {
+                "Document": "au-data-brief-2026-w12.docx",
+                "Period": "W12 data brief",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-data-brief-2026-w12.docx?web=1)"
+              },
+              {
+                "Document": "au-change-log.docx",
+                "Period": "2026 YTD change log",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-change-log.docx?web=1)"
+              },
+              {
+                "Document": "au-context.docx",
+                "Period": "AU market context doc",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-context.docx?web=1)"
+              },
+              {
+                "Document": "au-projections.docx",
+                "Period": "Monthly projections tracker",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/au/au-projections.docx?web=1)"
+              }
+            ],
+            [
+              {
+                "Document": "2026 AU Testing",
+                "Purpose": "AU testing tracker",
+                "Link": "[Open](https://quip-amazon.com/IAJ9AAZJsDL)"
+              },
+              {
+                "Document": "AU PS Launch",
+                "Purpose": "AU PS launch planning",
+                "Link": "[Open](https://quip-amazon.com/JMZ9AAput1I)"
+              },
+              {
+                "Document": "AU PS Weekly Performance",
+                "Purpose": "Weekly performance tracker",
+                "Link": "[Open](https://quip-amazon.com/ZZR9AAs7OfO)"
+              },
+              {
+                "Document": "Pre-WBR Callouts",
+                "Purpose": "WBR callout working doc",
+                "Link": "[Open](https://quip-amazon.com/MMgBAzDrlVou)"
+              }
+            ],
+            [
+              {
+                "Document": "AB AU MBR January 2026",
+                "Purpose": "AU Monthly Business Review (Lena)",
+                "Link": "[Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/AB%20AU%20MBR/AB%20AU%20MBR%20January%202026.pdf)"
+              },
+              {
+                "Document": "AB AU WBR Deck W10",
+                "Purpose": "AU Weekly Business Review W10",
+                "Link": "[Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/AB%20AU%20WBR/AB%20AU%20WBR%20Deck(WK-10-2026).docx)"
+              },
+              {
+                "Document": "AB AU Q4 2025 QBR",
+                "Purpose": "AU Quarterly Business Review Q4 2025",
+                "Link": "[Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/AB%20AU%20QBR/AB_AU_Q42025_QBR.docx)"
+              },
+              {
+                "Document": "AB AU Q3 2025 QBR",
+                "Purpose": "AU Quarterly Business Review Q3 2025",
+                "Link": "[Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/AB%20AU%20QBR/AB_AU_Q32025_QBR.docx)"
+              },
+              {
+                "Document": "AB AU Marketing Strategy",
+                "Purpose": "AU Marketing offsite strategy",
+                "Link": "[Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/GTM/Marketing%20GTM/AB_AU_MarOffsite_Marketing_v6.docx)"
+              },
+              {
+                "Document": "AB EE Marketing Framework",
+                "Purpose": "Emerging Expansion marketing collaboration",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Downloads/AB%20Emerging%20Expansion%20(EE)%20Marketing%20Collaboration%20Framework-1-19.docx)"
+              }
+            ]
+          ],
+          "paragraphs": [
+            "All source documents referenced in or feeding this state file. Links open in browser.",
+            "### Kiro-Drive (OneDrive)",
+            "### Artifacts — AU Callouts & Analysis (OneDrive)",
+            "### Quip Documents",
+            "### SharePoint Team Sites",
+            "---"
+          ]
+        },
+        "placeholder_schema": {
+          "heading": "Appendix H",
+          "tables": [
+            [
+              {
+                "Placeholder Tag": "`{{REPORTING_PERIOD}}`",
+                "Section": "Header",
+                "Data Source": "Calendar + dashboard week",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{INTRO_PARAGRAPH}}`",
+                "Section": "Introduction",
+                "Data Source": "Semi-static; update on stakeholder/structural changes",
+                "Update Cadence": "Monthly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_PARAGRAPH_1}}`",
+                "Section": "State of Business — headline",
+                "Data Source": "Weekly metrics JSON",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_INPUT_TABLE}}`",
+                "Section": "State of Business — input metrics",
+                "Data Source": "Weekly metrics JSON",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_OUTPUT_TABLE}}`",
+                "Section": "State of Business — output metrics",
+                "Data Source": "Weekly metrics JSON",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_ANALYSIS}}`",
+                "Section": "State of Business — narrative bridge",
+                "Data Source": "LLM synthesis of input→output causation",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_ANOMALY_FLAG}}`",
+                "Section": "State of Business — anomaly detection",
+                "Data Source": "Anomaly engine (>20% deviation from 8wk avg)",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_NULL_CASE}}`",
+                "Section": "State of Business — cost of inaction",
+                "Data Source": "CPA model + OCI readiness constraints",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_FLAGS}}`",
+                "Section": "State of Business — conditional flags",
+                "Data Source": "Anomaly engine; only present during anomalous weeks",
+                "Update Cadence": "Conditional"
+              },
+              {
+                "Placeholder Tag": "`{{LESSONS_1}}`",
+                "Section": "Lessons Learned — insight 1",
+                "Data Source": "LLM synthesis of trailing 3-week window",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{LESSONS_2}}`",
+                "Section": "Lessons Learned — insight 2",
+                "Data Source": "LLM synthesis",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{LESSONS_3}}`",
+                "Section": "Lessons Learned — insight 3",
+                "Data Source": "LLM synthesis",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{PRIORITIES_TABLE}}`",
+                "Section": "Strategic Priorities — action table",
+                "Data Source": "Asana tasks + overdue items + calendar",
+                "Update Cadence": "Daily"
+              },
+              {
+                "Placeholder Tag": "`{{BLOCKED_ITEMS}}`",
+                "Section": "Strategic Priorities — blockers",
+                "Data Source": "Asana blocked tasks",
+                "Update Cadence": "Daily"
+              },
+              {
+                "Placeholder Tag": "`{{STAKEHOLDER_ACTIONS}}`",
+                "Section": "Strategic Priorities — external deps",
+                "Data Source": "Memory.md relationship graph + Asana",
+                "Update Cadence": "Daily"
+              },
+              {
+                "Placeholder Tag": "`{{APPENDIX_A_TREND}}`",
+                "Section": "Appendix A — weekly trend table",
+                "Data Source": "DuckDB weekly_metrics",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{APPENDIX_C_PROJECTION}}`",
+                "Section": "Appendix C — monthly projection",
+                "Data Source": "Analyst projection model",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{APPENDIX_E_CHANGELOG}}`",
+                "Section": "Appendix E — change log",
+                "Data Source": "DuckDB change_log table",
+                "Update Cadence": "On change"
+              }
+            ]
+          ],
+          "paragraphs": [
+            "This schema defines the contract between the Kiro agent swarm (LLM output) and the DOCX template (deterministic patching). The agent generates a JSON payload mapping these keys to generated strings. A patching script replaces the placeholders in the Word XML without touching surrounding formatting.",
+            "### JSON Output Contract",
+            "```json { \"REPORTING_PERIOD\": \"Week 15 (Apr 5–11, 2026)\", \"SOTB_PARAGRAPH_1\": \"AU drove 185 registrations...\", \"SOTB_INPUT_TABLE\": \"[markdown table string]\", \"SOTB_OUTPUT_TABLE\": \"[markdown table string]\", \"SOTB_ANALYSIS\": \"The W15 registration change was...\", \"SOTB_ANOMALY_FLAG\": \"NB CVR at 37% below trailing average.\", \"SOTB_NULL_CASE\": \"If Polaris tracking is not validated...\", \"SOTB_FLAGS\": \"[conditional — only present if anomalies detected]\", \"LESSONS_1\": \"First insight...\", \"LESSONS_2\": \"Second insight...\", \"LESSONS_3\": \"Third insight...\", \"PRIORITIES_TABLE\": \"[markdown table string]\", \"BLOCKED_ITEMS\": \"[markdown list]\", \"STAKEHOLDER_ACTIONS\": \"[markdown list]\" } ```",
+            "Static sections (Goals, Tenets, Appendix B/D) are NOT in the JSON — they persist unchanged in the template until manually revised.",
+            "---"
+          ]
+        }
+      },
+      "headline": "AU drove 168 registrations in W15 (-1.2% WoW, -29% vs trailing 8-week average of 236) on $25,829 spend (+17.0% WoW) at a blended CPA of $153.74 (+18.4% WoW). W15 extends the registration decline streak to 7 consecutive weeks and is the lowest weekly output in the trailing 8 weeks. Spend rose while registrations fell, driving a 3-week consecutive CPA increase: $114.77 (W12) → $117.22 (W13) → $129.84 (W14) → $153.74 (W15). The Polaris URL migration tracking issue remains unresolved and is the leading candidate root cause for the sustained CVR compression."
+    },
+    "mx": {
+      "frontmatter": {
+        "title": "MX Paid Search — Daily State File",
+        "status": "ACTIVE",
+        "audience": "amazon-internal",
+        "owner": "Richard Williams",
+        "format": "Amazon 1-2 Page Narrative (Flash Report)",
+        "cadence": "Daily refresh",
+        "destination": "OneDrive Kiro-Drive/state-files/mx-paid-search-state.md",
+        "created": "2026-04-12",
+        "updated": "2026-04-20",
+        "data_through": "2026 W15 (Apr 6–12)"
+      },
+      "title": "MX Paid Search — Daily State File",
+      "status": "ACTIVE",
+      "owner": "Richard Williams",
+      "updated": "2026-04-20",
+      "data_through": "2026 W15 (Apr 6–12)",
+      "sections": {
+        "introduction": [
+          "This document provides the trailing-week operational state of the Amazon Business Mexico Paid Search program. MX is Richard Williams's hands-on market, managed through Google Ads on the NA MCC (683-476-0964) under the DSAP parent MCC (873-788-1095). The program operates under an ie%CCP constraint model where Brand registrations at $21 CPA generate surplus Customer Cost to Pay that funds Non-Brand acquisition at higher CPAs. AB Finance assumed MX funding responsibility in March 2026. Lorena Alvarez Larrea replaced Carlos Palmos as the primary MX PS stakeholder on March 17, 2026. Keyword-level registration data is unavailable until Q3 2026; all Non-Brand performance analysis is directional."
+        ],
+        "state": [
+          "MX drove 515 registrations in W15 (+69.4% WoW) on $25,444 spend (+31.0% WoW) at a blended CPA of $49.41 (-22.6% WoW). W15 is the post-Semana-Santa rebound week following W14's holiday suppression (W14: 304 regs at $63.87 CPA). Registrations are +52% above the 8-week trailing average of 339 and are the highest weekly output in the trailing 15 weeks. Brand delivered the entirety of the upside: Brand registrations rose from 180 to 373 (+107% WoW) while NB moved from 124 to 142 (+14.5% WoW). Brand CVR jumped to 8.08% (+40.5% WoW versus the 8-week average of 6.04%).",
+          "April MTD (through W15) has captured 515 registrations and $25,444 spend against OP2 month targets of 791 regs and $35,085 — 65.1% regs pacing and 72.5% cost pacing at 19% of the month elapsed. MX is on track to deliver a third consecutive month at or above 160% of the OP2 registration target if W16–W17 register even modest output above the 8-week run rate.",
+          "**Input metrics (controllable levers):**",
+          "**Output metrics (lagging results):**",
+          "**Seasonality context (per engine rule #5):** W15 (Apr 6–12) is the first post-Semana Santa recovery week. Semana Santa spanned March 29–April 5 (W14 reporting window), producing a -32.6% WoW suppression in MX W14. W15's +69.4% WoW is the recovery mirror of that suppression. The correct read is W14 + W15 combined: 304 + 515 = 819 registrations across the two-week window, averaging 409 per week — approximately 21% above the 8-week average of 339. This reflects genuine Q2 demand strength, amplified by the post-holiday rebound pattern consistent with April 2025."
+        ],
+        "flags": [
+          "<!-- AM-OWNED:trailing-week-flags START --> 3 anomalies detected (>20% deviation from 8-week average):",
+          "**Recommended action:** The W15 surge is favorable but the Brand CVR level of 8.08% is not sustainable as a baseline. If W16 Brand CVR retreats toward 6.0%–6.5% while W15's spend levels persist, Brand CPA will normalize back to the $19–$23 band and blended CPA will settle into the $55–$65 range. No operational change is warranted — the priority is to avoid over-extrapolating a rebound week into Q2 budget commitments.",
+          "**Cost of inaction (null case):** The W14 NB CVR concern was resolved by the W15 clean read. The outstanding operational risks now concentrate on stakeholder-facing actions. Lorena's Q2 expected-spend request (for PO submission) is now 26 days overdue and the keyword data / strategy request is 32 days overdue. Each additional week of delay erodes the new-stakeholder trust dynamic flagged in Tenet 4. Separately, the duplicate Google MX invoice (first flagged by Diana De la Fuente on Apr 14, acknowledged Apr 17) is still unresolved pending Google's response; if unresolved by end of April, the $56K duplicate could block Q2 PO submission and force manual finance intervention. Finally, MX Auto landing page ref tag overwrite (Vijeth) continues to break paid search attribution on the automotive vertical, so automotive-specific reporting is still directional. <!-- AM-OWNED:trailing-week-flags END -->",
+          "<!-- WBR-OWNED:signal-flags START --> <!-- WBR-OWNED:signal-flags END -->",
+          "---"
+        ],
+        "lessons": [
+          "Three operational insights from the trailing three-week window (W13–W15) inform the immediate tactical posture:",
+          "1. **The W14 NB CVR dip to 1.08% was entirely holiday-driven; W15's 1.32% confirms the W11 negative keyword restructuring remains durable.** NB CVR over the last 5 weeks tracked 1.57% (W11) → 1.38% (W12) → 1.46% (W13) → 1.08% (W14 Semana Santa) → 1.32% (W15). Excluding W14, the NB CVR holds steadily within the post-restructuring baseline of 1.3%–1.5%, validating that the negative keyword work is structurally intact. No bid strategy or keyword changes are needed on the NB side based on W15 alone. If W16 NB CVR maintains the 1.3%+ range, the team can turn attention from NB defense to NB expansion.",
+          "2. **Brand CVR at 8.08% in W15 is a rebound-driven high, not a new baseline.** W15's Brand CVR is 34% above the 8-week trailing average and is the highest in the trailing 8 weeks. This is consistent with a post-holiday pent-up-demand pattern — Mexican B2B buyers who deferred registrations during Semana Santa completed the funnel in the first clean week. The correct planning assumption for W16–W17 is a reversion to the 6.0%–6.5% Brand CVR range, which would return Brand CPA to the $19–$23 stability band and blended CPA to $55–$65. Treating 8.08% as the new run rate would overstate Q2 forecasts by ~30%.",
+          "3. **ie%CCP at approximately 132% in W15 is above the 100% Q2 target but does not require operational action because Brand surplus drove the overshoot.** W14's 126% ie%CCP was an NB-CPA-compression signal (NB CPA $159 on weak CVR). W15's 132% is the inverse: Brand registrations at 373 generated $33,570 in CCP surplus against total spend of $25,445 — the program is now funding NB capacity, not consuming it. The NB CPA question persists (W15 NB CPA $141.99 is still well above the $30 NB CCP), but the April budget pressure from W14 has eased materially. The April NB reduction plan can be paused pending W16 data rather than executed immediately.",
+          "---"
+        ],
+        "goals": [
+          "Achieve a blended CPA at or below $66 for FY26 (OP2 target), while maximizing registration volume within the ie%CCP constraint.",
+          "Maintain ie%CCP at or above 100% from Q2 2026 onward (Q1 operated at 77–99% as Brand surplus built).",
+          "Deliver 11,178 total registrations for FY26 against the OP2 plan ($542K spend), with upside scenarios projecting 13,948–15,051 registrations at $745K–$959K spend.",
+          "Complete the Polaris Brand landing page migration for MX per Brandon's priority order (AU > MX > DE > UK > JP > FR > IT > ES > CA > US-ES).",
+          "Resolve the automotive landing page ref tag overwrite issue that breaks paid search attribution."
+        ],
+        "tenets": [
+          "**ie%CCP governs spend, not budget.** Non-Brand spend expands only when Brand CCP surplus permits. The constraint is mathematical, not discretionary.",
+          "**Efficiency over escalation.** When NB CPC rises, respond with bid strategy refinement and negative keyword routing — not budget increases.",
+          "**Evidence before scale.** No campaign structure change, keyword expansion, or landing page variant ships to full traffic without a measurement period.",
+          "**Stakeholder responsiveness builds trust.** Lorena is a new relationship. Timely, thorough responses to her requests compound into strategic partnership."
+        ],
+        "priorities": [
+          "Kingpin Goals MX: blocked by Andes data availability. No action possible until Andes delivers.",
+          "MX Auto landing page ref tag overwrite: engineering escalation via Vijeth pending. Attribution is broken on the automotive LP.",
+          "Keyword-level registration data: unavailable until Q3 2026. All NB keyword analysis remains directional.",
+          "ABMA MX WBR error: Astha Pant flagged 4/19, awaiting GenBI analysis link from Kanmal. Monitor but do not escalate yet.",
+          "Lorena: Confirm Q2 keyword priorities, Beauty campaign budget allocation, and review Tuesday's finalized Polaris template direction.",
+          "Vijeth: Deliver footer fix for MX Auto page and ref tag overwrite resolution.",
+          "Diana De la Fuente: Awaiting Google resolution on $56K duplicate invoice; no Richard action beyond weekly status check.",
+          "Brandon: No immediate MX action required. April budget reduction plan on hold pending W16 clean read."
+        ]
+      },
+      "tables": {
+        "inputs": [
+          {
+            "Input Metric": "Total spend",
+            "W15 Value": "$25,444",
+            "WoW Δ": "+31.0%",
+            "Trend": "Dataset-high spend week"
+          },
+          {
+            "Input Metric": "Brand spend",
+            "W15 Value": "$5,282",
+            "WoW Δ": "+59.1%",
+            "Trend": "Largest Brand spend week in trailing 8"
+          },
+          {
+            "Input Metric": "NB spend",
+            "W15 Value": "$20,163",
+            "WoW Δ": "+25.3%",
+            "Trend": "Elevated from W14 baseline"
+          },
+          {
+            "Input Metric": "NB CPC",
+            "W15 Value": "$1.88",
+            "WoW Δ": "+9.3%",
+            "Trend": "Above 8-week avg of $1.80; reverses W14 decline"
+          },
+          {
+            "Input Metric": "Negative keyword routing",
+            "W15 Value": "Live (W11+)",
+            "WoW Δ": "—",
+            "Trend": "Post-restructuring baseline holding"
+          }
+        ],
+        "outputs": [
+          {
+            "Output Metric": "Total registrations",
+            "W15 Value": "515",
+            "WoW Δ": "+69.4%",
+            "YoY / Baseline": "Dataset high in trailing 15 weeks"
+          },
+          {
+            "Output Metric": "Brand registrations",
+            "W15 Value": "373",
+            "WoW Δ": "+107.2%",
+            "YoY / Baseline": "Brand CVR at 8.08% drove the surge"
+          },
+          {
+            "Output Metric": "NB registrations",
+            "W15 Value": "142",
+            "WoW Δ": "+14.5%",
+            "YoY / Baseline": "Within post-restructuring baseline"
+          },
+          {
+            "Output Metric": "Blended CPA",
+            "W15 Value": "$49.41",
+            "WoW Δ": "-22.6%",
+            "YoY / Baseline": "19% below 8-week avg of $61.30"
+          },
+          {
+            "Output Metric": "Brand CPA",
+            "W15 Value": "$14.16",
+            "WoW Δ": "-23.1%",
+            "YoY / Baseline": "Well below $19–$23 stability band"
+          },
+          {
+            "Output Metric": "NB CPA",
+            "W15 Value": "$141.99",
+            "WoW Δ": "+9.4%",
+            "YoY / Baseline": "Above 8-week avg of ~$134"
+          },
+          {
+            "Output Metric": "Brand CVR",
+            "W15 Value": "8.08%",
+            "WoW Δ": "+40.5%",
+            "YoY / Baseline": "34% above 8-week avg (6.04%)"
+          },
+          {
+            "Output Metric": "NB CVR",
+            "W15 Value": "1.32%",
+            "WoW Δ": "-0.8%",
+            "YoY / Baseline": "In post-restructuring range (1.3–1.5%)"
+          }
+        ],
+        "flags": [
+          {
+            "Metric": "Registrations",
+            "W15 Value": "515",
+            "8-Week Avg": "339",
+            "Deviation": "+52%",
+            "Implication": "Post-Semana-Santa rebound driving dataset high"
+          },
+          {
+            "Metric": "Brand registrations",
+            "W15 Value": "373",
+            "8-Week Avg": "211",
+            "Deviation": "+77%",
+            "Implication": "Brand CVR surge (8.08% vs 6.04% avg) is primary driver"
+          },
+          {
+            "Metric": "Brand CVR",
+            "W15 Value": "8.08%",
+            "8-Week Avg": "6.04%",
+            "Deviation": "+34%",
+            "Implication": "3-week high; not sustainable at this level"
+          }
+        ]
+      },
+      "appendices": {
+        "weekly_trend": {
+          "heading": "Appendix A",
+          "tables": [
+            [
+              {
+                "Week": "W8",
+                "Regs": "368",
+                "Brand": "270",
+                "NB": "98",
+                "Spend": "$18,669",
+                "CPA": "$50.73",
+                "NB CPA": "$141.13",
+                "NB CVR": "1.19%",
+                "Brand CVR": "7.02%"
+              },
+              {
+                "Week": "W9",
+                "Regs": "262",
+                "Brand": "166",
+                "NB": "96",
+                "Spend": "$19,733",
+                "CPA": "$75.32",
+                "NB CPA": "$161.11",
+                "NB CVR": "1.13%",
+                "Brand CVR": "5.03%"
+              },
+              {
+                "Week": "W10",
+                "Regs": "297",
+                "Brand": "199",
+                "NB": "98",
+                "Spend": "$20,509",
+                "CPA": "$69.05",
+                "NB CPA": "$165.27",
+                "NB CVR": "1.11%",
+                "Brand CVR": "5.36%"
+              },
+              {
+                "Week": "W11",
+                "Regs": "390",
+                "Brand": "244",
+                "NB": "146",
+                "Spend": "$22,462",
+                "CPA": "$57.59",
+                "NB CPA": "$121.61",
+                "NB CVR": "1.56%",
+                "Brand CVR": "6.73%"
+              },
+              {
+                "Week": "W12",
+                "Regs": "324",
+                "Brand": "203",
+                "NB": "121",
+                "Spend": "$20,134",
+                "CPA": "$62.14",
+                "NB CPA": "$132.37",
+                "NB CVR": "1.37%",
+                "Brand CVR": "6.00%"
+              },
+              {
+                "Week": "W13",
+                "Regs": "350",
+                "Brand": "210",
+                "NB": "140",
+                "Spend": "$23,220",
+                "CPA": "$66.34",
+                "NB CPA": "$134.16",
+                "NB CVR": "1.46%",
+                "Brand CVR": "5.68%"
+              },
+              {
+                "Week": "W14",
+                "Regs": "304",
+                "Brand": "180",
+                "NB": "124",
+                "Spend": "$19,418",
+                "CPA": "$63.87",
+                "NB CPA": "$129.82",
+                "NB CVR": "1.33%",
+                "Brand CVR": "5.75%"
+              },
+              {
+                "Week": "W15",
+                "Regs": "515",
+                "Brand": "373",
+                "NB": "142",
+                "Spend": "$25,444",
+                "CPA": "$49.41",
+                "NB CPA": "$141.99",
+                "NB CVR": "1.32%",
+                "Brand CVR": "8.08%"
+              }
+            ]
+          ],
+          "paragraphs": [
+            "**Trend commentary:** NB CVR has held the 1.3%+ range in 4 of the last 5 weeks, confirming the W11 restructuring. W15's Brand CVR at 8.08% is the dataset high and reflects Semana Santa rebound, not a structural baseline shift."
+          ]
+        },
+        "yoy": {
+          "heading": "Appendix B",
+          "paragraphs": [
+            "YoY benchmarks for W15 are not populated in the current forecast system. The W14 YoY comparison was unreliable because 2025 W14 did not fall on Semana Santa. W15 holiday offset is more comparable to 2025 W15, but the calendar alignment introduces noise; YoY will be included in W16 once the calibration set catches up."
+          ]
+        },
+        "monthly_projection": {
+          "heading": "Appendix C",
+          "tables": [
+            [
+              {
+                "Metric": "Registrations",
+                "MTD (Apr 1–12)": "515",
+                "OP2 Month Target": "791",
+                "MTD Pacing": "65.1%",
+                "Time Elapsed": "19%"
+              },
+              {
+                "Metric": "Spend",
+                "MTD (Apr 1–12)": "$25,444",
+                "OP2 Month Target": "$35,085",
+                "MTD Pacing": "72.5%",
+                "Time Elapsed": "19%"
+              },
+              {
+                "Metric": "Blended CPA",
+                "MTD (Apr 1–12)": "$49.41",
+                "OP2 Month Target": "$44.36",
+                "MTD Pacing": "+11% above target",
+                "Time Elapsed": "—"
+              }
+            ]
+          ],
+          "paragraphs": [
+            "MX is running at 3.4× the registration pace and 3.8× the spend pace expected for the point of the month. If W16–W17 hold even the 8-week average of 339 regs/week, April closes above 1,190 registrations at roughly $100K spend — versus OP2 of 791 and $35K. The prior month (March closed at 1,483 regs / $96K spend / $64 CPA, +73% above OP2). A second consecutive month at 150%+ of OP2 regs will require an early-May finance check-in on the full-year reforecast."
+          ]
+        },
+        "plan_summary": {
+          "heading": "Appendix D",
+          "tables": [
+            [
+              {
+                "Metric": "Total spend",
+                "OP2": "$542K",
+                "Scenario 1 (100% ie%CCP)": "$959K (+77%)",
+                "Scenario 2 (75% ie%CCP)": "$745K (+37%)"
+              },
+              {
+                "Metric": "Total regs",
+                "OP2": "11,178",
+                "Scenario 1 (100% ie%CCP)": "15,051 (+35%)",
+                "Scenario 2 (75% ie%CCP)": "13,948 (+25%)"
+              },
+              {
+                "Metric": "Blended CPA",
+                "OP2": "$48",
+                "Scenario 1 (100% ie%CCP)": "$64",
+                "Scenario 2 (75% ie%CCP)": "$53"
+              },
+              {
+                "Metric": "ie%CCP",
+                "OP2": "~75%",
+                "Scenario 1 (100% ie%CCP)": "~96%",
+                "Scenario 2 (75% ie%CCP)": "~79%"
+              }
+            ]
+          ],
+          "paragraphs": [
+            "Finance allocation: $1.8M. OP2 spend is the ie%CCP-constrained plan. Both upside scenarios are within the finance envelope."
+          ]
+        },
+        "change_log": {
+          "heading": "Appendix E",
+          "tables": [
+            [
+              {
+                "Date": "1/12",
+                "Change": "Increased budgets in Brand Phrase and NB to $2K",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "1/20",
+                "Change": "Increased Brand Plus max CPC from 12 to 18",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "1/20",
+                "Change": "Increased NB target budgets +51% ($9.9K→$15K/wk)",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "2/3",
+                "Change": "Decreased NB budget -19% to align with Feb budget and 100% ie%CCP",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "2/10",
+                "Change": "Changed Generic to CPT bidding; increased NB budget +5%",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "2/23",
+                "Change": "Transitioned all NB to CPT portfolio; targeting +30% spend",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "3/5",
+                "Change": "Added negatives to improve query routing (Generic + Brand Phrase)",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "3/5",
+                "Change": "Left budgets/bids unchanged based on weekly performance",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "3/25",
+                "Change": "W12 callout: 330 regs (-16% WoW), $61 CPA, 90% ie%CCP",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "3/29–4/5",
+                "Change": "Semana Santa suppression (-32.6% WoW in W14)",
+                "Owner": "—"
+              },
+              {
+                "Date": "4/14",
+                "Change": "Diana flagged duplicate $56K Google MX invoice; Richard engaging Google",
+                "Owner": "Diana + Richard"
+              },
+              {
+                "Date": "4/17",
+                "Change": "Richard acknowledged duplicate invoice resolution path to Diana",
+                "Owner": "Richard"
+              }
+            ]
+          ]
+        },
+        "variance_bridge": {
+          "heading": "Appendix F",
+          "paragraphs": [
+            "MX currently operates without OCI (Online Conversion Integration). All conversion data flows through Google Ads native tracking. No variance bridge between advertising platform and internal ERP is required at this time. When OCI launches for MX (timeline TBD, no MCC created), this section will document the expected 5–15% discrepancy between Ordered Product Sales and Shipped Product Sales, and the reconciliation methodology.",
+            "**Known data limitation:** ie%CCP ratios are calculated from dashboard CCP values (Brand $90, NB $30). If finance revises CCP downward, ie%CCP tightens and NB capacity shrinks. The dashboard ingester corrected an ie%CCP calculation bug on 3/30 (was reading CPA instead of ie%CCP ratios).",
+            "**Graph API concurrency protocol:** When the agent swarm updates this file on SharePoint, it must: (1) read the current eTag of the .docx before initiating XML patching, (2) if the eTag has changed during generation (another user or agent modified the file), fail the update and retry from fetch, (3) respect the 5MB file size limit — current .docx is ~44KB, well within bounds. Authentication uses the device code flow configured in the SharePoint MCP server.",
+            "---"
+          ]
+        },
+        "source_links": {
+          "heading": "Appendix G",
+          "tables": [
+            [
+              {
+                "Document": "ps-forecast-tracker.xlsx",
+                "Purpose": "WW PS forecast model, budget scenarios",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/ps-forecast-tracker.xlsx?web=1)"
+              },
+              {
+                "Document": "ps-testing-dashboard.xlsx",
+                "Purpose": "Active test tracker across all markets",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/ps-testing-dashboard.xlsx?web=1)"
+              },
+              {
+                "Document": "command-center.xlsx",
+                "Purpose": "Operational command center — tasks, status, owners",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/command-center.xlsx?web=1)"
+              }
+            ],
+            [
+              {
+                "Document": "mx-2026-w14.docx",
+                "Period": "W14 callout",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/mx/mx-2026-w14.docx?web=1)"
+              },
+              {
+                "Document": "mx-2026-w13.docx",
+                "Period": "W13 callout",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/mx/mx-2026-w13.docx?web=1)"
+              },
+              {
+                "Document": "mx-2026-w12.docx",
+                "Period": "W12 callout",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/mx/mx-2026-w12.docx?web=1)"
+              },
+              {
+                "Document": "mx-2026-w11.docx",
+                "Period": "W11 callout",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/mx/mx-2026-w11.docx?web=1)"
+              },
+              {
+                "Document": "mx-analysis-2026-w13.docx",
+                "Period": "W13 deep analysis",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/mx/mx-analysis-2026-w13.docx?web=1)"
+              },
+              {
+                "Document": "mx-analysis-2026-w12.docx",
+                "Period": "W12 deep analysis",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/mx/mx-analysis-2026-w12.docx?web=1)"
+              },
+              {
+                "Document": "mx-data-brief-2026-w14.docx",
+                "Period": "W14 data brief",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/mx/mx-data-brief-2026-w14.docx?web=1)"
+              },
+              {
+                "Document": "mx-data-brief-2026-w13.docx",
+                "Period": "W13 data brief",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/mx/mx-data-brief-2026-w13.docx?web=1)"
+              },
+              {
+                "Document": "mx-data-brief-2026-w12.docx",
+                "Period": "W12 data brief",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/mx/mx-data-brief-2026-w12.docx?web=1)"
+              },
+              {
+                "Document": "mx-change-log.docx",
+                "Period": "2026 YTD change log",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/mx/mx-change-log.docx?web=1)"
+              },
+              {
+                "Document": "mx-context.docx",
+                "Period": "MX market context doc",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/mx/mx-context.docx?web=1)"
+              },
+              {
+                "Document": "mx-projections.docx",
+                "Period": "Monthly projections tracker",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/mx/mx-projections.docx?web=1)"
+              },
+              {
+                "Document": "mx-fy26-projection.docx",
+                "Period": "FY26 annual projection (2 scenarios)",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/abix/mx/mx-fy26-projection.docx?web=1)"
+              }
+            ],
+            [
+              {
+                "Document": "ww-review-2026-w13.docx",
+                "Purpose": "WW weekly review (includes MX)",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/ww/ww-review-2026-w13.docx?web=1)"
+              },
+              {
+                "Document": "ww-summary-2026-w14.docx",
+                "Purpose": "WW summary W14",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/ww/ww-summary-2026-w14.docx?web=1)"
+              },
+              {
+                "Document": "wbr-w14-callouts.docx",
+                "Purpose": "WBR callouts all markets W14",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/ww/wbr-w14-callouts.docx?web=1)"
+              },
+              {
+                "Document": "projections-ww.docx",
+                "Purpose": "WW projections",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/ww/projections-ww.docx?web=1)"
+              },
+              {
+                "Document": "testing-approach-kate-v5.docx",
+                "Purpose": "Testing Approach doc (Kate review)",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-approach-kate-v5.docx?web=1)"
+              },
+              {
+                "Document": "oci-rollout-playbook.docx",
+                "Purpose": "OCI rollout playbook (MX not started)",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/oci-rollout-playbook.docx?web=1)"
+              }
+            ],
+            [
+              {
+                "Document": "AB MX Paid Search Sync",
+                "Purpose": "Weekly performance tracker since WK11 2024",
+                "Link": "[Open](https://quip-amazon.com/K9OYA9mXm7DU)"
+              },
+              {
+                "Document": "MX Keyword Cleanup Framework",
+                "Purpose": "Audit thresholds and cleanup rules",
+                "Link": "[Open](https://quip-amazon.com/EZZ9AAR7EEz)"
+              },
+              {
+                "Document": "MX Transition",
+                "Purpose": "POCs, campaign structure, reporting conventions",
+                "Link": "[Open](https://quip-amazon.com/GCX9AAbP5Rh)"
+              },
+              {
+                "Document": "Pre-WBR Callouts",
+                "Purpose": "WBR callout working doc",
+                "Link": "[Open](https://quip-amazon.com/MMgBAzDrlVou)"
+              }
+            ],
+            [
+              {
+                "Document": "rw-tracker.md",
+                "Purpose": "Weekly scorecard, 30-day challenge",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/system-state/rw-tracker.md?web=1)"
+              },
+              {
+                "Document": "body-snapshot-2026-04-12.md",
+                "Purpose": "Portable body snapshot",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/portable-body/body-snapshot-2026-04-12.md?web=1)"
+              }
+            ]
+          ],
+          "paragraphs": [
+            "All source documents referenced in or feeding this state file. Links open in browser.",
+            "### Kiro-Drive (OneDrive)",
+            "### Artifacts — MX Callouts & Analysis (OneDrive)",
+            "### Artifacts — WW / Cross-Market (OneDrive)",
+            "### Quip Documents",
+            "### Kiro-Drive — System State"
+          ]
+        },
+        "placeholder_schema": {
+          "heading": "Appendix H",
+          "tables": [
+            [
+              {
+                "Placeholder Tag": "`{{REPORTING_PERIOD}}`",
+                "Section": "Header",
+                "Data Source": "Calendar + dashboard week",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{INTRO_PARAGRAPH}}`",
+                "Section": "Introduction",
+                "Data Source": "Semi-static; update on stakeholder/structural changes",
+                "Update Cadence": "Monthly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_PARAGRAPH_1}}`",
+                "Section": "State of Business — headline",
+                "Data Source": "Weekly metrics JSON",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_INPUT_TABLE}}`",
+                "Section": "State of Business — input metrics",
+                "Data Source": "Weekly metrics JSON",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_OUTPUT_TABLE}}`",
+                "Section": "State of Business — output metrics",
+                "Data Source": "Weekly metrics JSON",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_ANALYSIS}}`",
+                "Section": "State of Business — narrative bridge",
+                "Data Source": "LLM synthesis of input→output causation",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_YOY_NARRATIVE}}`",
+                "Section": "State of Business — YoY context",
+                "Data Source": "Weekly metrics + LY comparison",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_ANOMALY_FLAG}}`",
+                "Section": "State of Business — anomaly detection",
+                "Data Source": "Anomaly engine (>20% deviation from 8wk avg)",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_NULL_CASE}}`",
+                "Section": "State of Business — cost of inaction",
+                "Data Source": "ie%CCP model + budget constraints",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{LESSONS_1}}`",
+                "Section": "Lessons Learned — insight 1",
+                "Data Source": "LLM synthesis of trailing 3-week window",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{LESSONS_2}}`",
+                "Section": "Lessons Learned — insight 2",
+                "Data Source": "LLM synthesis",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{LESSONS_3}}`",
+                "Section": "Lessons Learned — insight 3",
+                "Data Source": "LLM synthesis",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{PRIORITIES_TABLE}}`",
+                "Section": "Strategic Priorities — action table",
+                "Data Source": "Asana tasks + overdue items + calendar",
+                "Update Cadence": "Daily"
+              },
+              {
+                "Placeholder Tag": "`{{BLOCKED_ITEMS}}`",
+                "Section": "Strategic Priorities — blockers",
+                "Data Source": "Asana blocked tasks",
+                "Update Cadence": "Daily"
+              },
+              {
+                "Placeholder Tag": "`{{STAKEHOLDER_ACTIONS}}`",
+                "Section": "Strategic Priorities — external deps",
+                "Data Source": "Memory.md relationship graph + Asana",
+                "Update Cadence": "Daily"
+              },
+              {
+                "Placeholder Tag": "`{{APPENDIX_A_TREND}}`",
+                "Section": "Appendix A — weekly trend table",
+                "Data Source": "DuckDB weekly_metrics",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{APPENDIX_B_YOY}}`",
+                "Section": "Appendix B — YoY comparison",
+                "Data Source": "DuckDB weekly_metrics + LY data",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{APPENDIX_C_PROJECTION}}`",
+                "Section": "Appendix C — monthly projection",
+                "Data Source": "Analyst projection model",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{APPENDIX_D_SCENARIOS}}`",
+                "Section": "Appendix D — FY26 scenarios",
+                "Data Source": "FY26 projection model (static until reforecast)",
+                "Update Cadence": "Monthly"
+              },
+              {
+                "Placeholder Tag": "`{{APPENDIX_E_CHANGELOG}}`",
+                "Section": "Appendix E — change log",
+                "Data Source": "DuckDB change_log table",
+                "Update Cadence": "On change"
+              }
+            ]
+          ],
+          "paragraphs": [
+            "This schema defines the contract between the Kiro agent swarm (LLM output) and the DOCX template (deterministic patching). The agent generates a JSON payload mapping these keys to generated strings. A patching script replaces the placeholders in the Word XML without touching surrounding formatting.",
+            "### Placeholder Taxonomy",
+            "### JSON Output Contract",
+            "The LLM generates a flat JSON object:",
+            "```json { \"REPORTING_PERIOD\": \"Week 14 (Mar 29 – Apr 4, 2026)\", \"SOTB_PARAGRAPH_1\": \"MX drove 340 registrations...\", \"SOTB_INPUT_TABLE\": \"[markdown table string]\", \"SOTB_OUTPUT_TABLE\": \"[markdown table string]\", \"SOTB_ANALYSIS\": \"The W14 registration change was...\", \"SOTB_YOY_NARRATIVE\": \"YoY performance...\", \"SOTB_ANOMALY_FLAG\": \"No anomalies detected.\", \"SOTB_NULL_CASE\": \"If no adjustments...\", \"LESSONS_1\": \"First insight...\", \"LESSONS_2\": \"Second insight...\", \"LESSONS_3\": \"Third insight...\", \"PRIORITIES_TABLE\": \"[markdown table string]\", \"BLOCKED_ITEMS\": \"[markdown list]\", \"STAKEHOLDER_ACTIONS\": \"[markdown list]\" } ```",
+            "The patching engine (converter.py → to_docx) converts the markdown strings to DOCX elements and injects them at the tagged locations. Static sections (Goals, Tenets, Appendix D scenarios) are NOT in the JSON — they persist unchanged in the template until manually revised."
+          ]
+        }
+      },
+      "headline": "MX drove 515 registrations in W15 (+69.4% WoW) on $25,444 spend (+31.0% WoW) at a blended CPA of $49.41 (-22.6% WoW). W15 is the post-Semana-Santa rebound week following W14's holiday suppression (W14: 304 regs at $63.87 CPA). Registrations are +52% above the 8-week trailing average of 339 and are the highest weekly output in the trailing 15 weeks. Brand delivered the entirety of the upside: Brand registrations rose from 180 to 373 (+107% WoW) while NB moved from 124 to 142 (+14.5% WoW). Brand CVR jumped to 8.08% (+40.5% WoW versus the 8-week average of 6.04%)."
+    },
+    "ww": {
+      "frontmatter": {
+        "title": "WW Testing — Daily State File",
+        "status": "ACTIVE",
+        "audience": "amazon-internal",
+        "owner": "Richard Williams",
+        "format": "Amazon 1-2 Page Narrative (Flash Report)",
+        "cadence": "Daily refresh",
+        "destination": "OneDrive Kiro-Drive/state-files/ww-testing-state.md",
+        "created": "2026-04-12",
+        "updated": "2026-04-20",
+        "data_through": "2026 W15 (Apr 6–12)"
+      },
+      "title": "WW Testing — Daily State File",
+      "status": "ACTIVE",
+      "owner": "Richard Williams",
+      "updated": "2026-04-20",
+      "data_through": "2026 W15 (Apr 6–12)",
+      "sections": {
+        "introduction": [
+          "This document provides the trailing-week operational state of the Amazon Business Worldwide Paid Search Testing program. The program spans five workstreams — OCI Bidding, Modern Search (Ad Copy), Audiences & Lifecycle, User Experience, and Algorithmic Ads — across 10 markets (US, UK, DE, FR, IT, ES, JP, CA, AU, MX). Richard Williams owns end-to-end test methodology, status tracking, and the Testing Approach document (v5, 8.4/10 PUBLISH verdict) pending Brandon Munday's review. The methodology follows a hypothesis → phased rollout → measurement → scale or stop framework. SyRT validated Non-Brand as 82–92% incremental, confirming the measurement foundation. The Testing Approach doc (v5) was scheduled for discussion at the April 16 meeting, which was canceled; the document remains valuable and needs to ship to Brandon independently."
+        ],
+        "state": [
+          "The WW PS Testing program drove 16,626 total registrations in W15 (-3.0% WoW) on $1.23M spend (+3.9% WoW) across all 10 markets at a blended CPA of $74.03 (+7.1% WoW). Two events dominate the week: the Polaris Brand LP weblab dial-up in WW markets (4/6–4/7), and a P0 Italy ref tag regression detected during the April 16 Polaris LP sync. The Italy Polaris `/cp/ps-brand` page (launched 4/1) overwrote Italy's ref tag and routed Italian signup traffic to the AU domain; Alex VanDerStuyf (MCS) confirmed legacy Italy restored on 4/16 and Polaris Italy parked as `it/cp/ps-brand-new` in AEM. The team also confirmed the US Polaris brand page delivered +6% CVR vs the legacy MCS version (21-day pre/post March 24 launch) — the first statistically validated win from the Polaris rollout.",
+          "A second W15 event — the Google MCC cross-child learning investigation (Sam Tangri, 4/17) — flagged a coordinated NB spend drop on 4/13 in US/UK/DE (US ~25K vs 70K weekly average, with recovery 4/14). Jing Shi's diagnosis: a US data exclusion extended from 4/7 to 4/13 that propagated to same-MCC child accounts. This is an OCI measurement concern — data exclusions affecting Smart Bidding learning across geographies — not a performance regression. Mike Babich (Google) is investigating. Implication: W15 WW weekly numbers may reflect a transient OCI learning artifact that normalizes in W16.",
+          "**Input metrics (controllable levers — by workstream):**",
+          "**Output metrics (lagging results — by workstream):**",
+          "OCI Bidding now has 8 of 10 markets at 100%. CA launched on schedule 4/7 with E2E testing complete. AU remains at May 2026 target with no MCC; MX remains TBD with no MCC. The Ad Copy workstream continues to produce the strongest evidence base in Modern Search: UK AMZ delivered +86% CTR and +31% registrations, Phase 2 launched in UK on 3/6, EU4 translations completed 3/20. IT remains low-confidence due to sample size — no scale decision this cycle."
+        ],
+        "lessons": [
+          "Three operational insights from the trailing four-week window (W12–W15) inform the immediate tactical posture:",
+          "1. **Polaris LP rollout produced its first validated positive result (+6% CVR in US) and its first production regression (Italy ref tag) in the same two-week window.** The US result (21-day pre/post March 24) is the first statistically-valid Polaris win. The Italy regression is operationally isolated (legacy restored within 24 hours of detection) but strategically costly: it demonstrates that the rollout process lacks an automated ref tag audit step. Every market rollout prior to Italy (US 3/24, EU3 preparations) could have contained the same defect undetected. The corrective action is a systematic ref tag audit applied to AU (next in the rollout queue per Brandon's priority order) before any further Polaris market launches. The US +6% CVR result is the evidence base that justifies continuing the rollout; the Italy regression defines the gate that precedes each market.",
+          "2. **OCI reached 8 of 10 markets at 100% with CA's 4/7 launch — the program is in its measurement phase, not its expansion phase, for the next 4–6 weeks.** FR/IT/ES/JP at 100% on 3/31 and CA at 100% on 4/7 close the first 2026 QBR goal. The remaining expansion work is AU (May 2026, MCC not yet created) and MX (TBD, MCC not yet created). The binding constraint for both is MCC creation, not methodology. The 4/17 cross-MCC data exclusion incident (Sam Tangri → Jing Shi → Mike) surfaces a measurement-phase concern: Google's Smart Bidding prioritizes same-MCC learning, so US data exclusions can transiently distort UK/DE/FR performance for a day or two. This does not invalidate OCI uplift figures but does require acknowledgment in weekly readouts when US data exclusion events occur.",
+          "3. **The April 17 AI Tool Demo with 7 team members committing to adoption is the first Level-3 (Team Automation) traction the program has produced.** Adi (MX), Andrew (UK), Stacey (Polaris), Yun-Kang (Adobe NB), Dwayne (MCS), and Peter (Apps) each committed to a tool validation deliverable with a specific date range. Hedy captured the session. The Markdown-standardized output and shared SharePoint prompt repository are the structural decisions that make this adoption durable rather than a one-off novelty. If 4 of the 6 deliverables ship on schedule by early May, the tool graduates from \"Richard's tool\" to \"PS team standard\" — which is the L3 goal criterion.",
+          "---"
+        ],
+        "goals": [
+          "Ensure every active test across all five workstreams has a written status document by April 30, 2026, with zero undocumented tests.",
+          "Ship the Testing Approach document (v5, 8.4/10 PUBLISH verdict) to Brandon Munday for review by April 18, 2026.",
+          "Expand OCI to remaining markets — CA launch on April 7, AU target May 2026, MX timeline TBD — achieving 100% coverage of active markets by Q4 2026.",
+          "Complete the AI Max test design document for US Q2 2026 pilot by April 14, 2026 (currently 4 days overdue)."
+        ],
+        "tenets": [
+          "**Evidence before scale.** No test result ships to full traffic without a statistically valid measurement period. Confidence intervals matter more than directional signals.",
+          "**Phased rollout over big-bang.** Every test follows hypothesis → pilot → measure → expand or kill. This protects budget and preserves learning even when tests fail.",
+          "**Failures are data.** A failed test that produces a clear insight (e.g., Gated Guest at -61%) is more valuable than an untested assumption. Document failures with the same rigor as wins.",
+          "**Cross-functional partnership.** Testing at scale requires MarTech, Legal, Data Science, MCS, and market teams. The PS team designs and owns methodology; execution is collaborative."
+        ],
+        "priorities": [
+          "AI Max test design: 6 days overdue. Design document incomplete. Blocks Q2 2026 US pilot timeline.",
+          "AU OCI: May 2026 target but no MCC created. Cannot begin account setup until MCC exists.",
+          "MX OCI: Timeline TBD. No MCC created. Lowest priority in the OCI expansion queue.",
+          "F90 Lifecycle: Legal SIMs not submitted. Cannot launch lifecycle targeting without Legal clearance.",
+          "Ad Copy IT: Low-confidence results. Insufficient sample size prevents scaling decision.",
+          "Italy Polaris: Legacy restored; new template parked in AEM as `it/cp/ps-brand-new` pending ref tag audit.",
+          "Cross-MCC measurement: US data exclusions (4/7, 4/13) may transiently distort EU5 OCI reads pending Mike Babich's review.",
+          "Brandon: Review and endorse Testing Approach doc (v5). Expected at Tuesday 4/21 1:30pm PT 1:1 along with Outbound Marketing Goals xlsx overlay question. This is the gating action for formalizing PS testing methodology.",
+          "Kate: Async review of Testing Approach doc once Brandon endorses. April 16 sync is not rescheduled; ship-first-discuss-later is the path.",
+          "Dwayne Palmer (MCS): Maintain legacy Italy LP until ref tag audit methodology validated for AU.",
+          "Alex VanDerStuyf (MCS): Extend Italy ref tag detection methodology to AU Polaris page.",
+          "Legal: Process F90 Lifecycle SIMs to unblock Audiences workstream.",
+          "Mike Babich (Google): Confirm data-exclusion impact on cross-MCC Smart Bidding learning."
+        ]
+      },
+      "tables": {
+        "inputs": [
+          {
+            "Workstream": "OCI Bidding",
+            "Active Markets": "US/UK/DE/FR/IT/ES/JP at 100%; CA at 100% post-4/7 launch",
+            "Status": "8 markets at 100%; AU May 2026; MX TBD",
+            "Key Input": "OCI signal feeding Smart Bidding; cross-MCC learning flagged 4/17"
+          },
+          {
+            "Workstream": "Modern Search (Ad Copy)",
+            "Active Markets": "UK Phase 1 complete; UK Phase 2 launched 3/6; IT launched 2/19; EU4 translations complete",
+            "Status": "Evidence-based messaging from Sole Proprietor study",
+            "Key Input": "Ad copy variants by market"
+          },
+          {
+            "Workstream": "Audiences & Lifecycle",
+            "Active Markets": "US Engagement channel validated ($765K iOPS 2025)",
+            "Status": "F90 Lifecycle blocked on Legal SIMs",
+            "Key Input": "Audience segment targeting"
+          },
+          {
+            "Workstream": "User Experience",
+            "Active Markets": "Polaris WW dial-up 4/6–4/7 complete; Baloo early access live 3/30; Italy ref tag regression 4/16",
+            "Status": "US Polaris delivered +6% CVR vs legacy",
+            "Key Input": "Landing page variants"
+          },
+          {
+            "Workstream": "Algorithmic Ads",
+            "Active Markets": "DG CPC testing US",
+            "Status": "AI Max US design 6 days overdue",
+            "Key Input": "DG bids, AI Max campaign structure"
+          }
+        ],
+        "outputs": [
+          {
+            "Workstream": "OCI Bidding — US",
+            "Key Result": "+24% reg uplift, +32,047 regs, $16.7MM OPS",
+            "Confidence": "High",
+            "Impact": "Scaled"
+          },
+          {
+            "Workstream": "OCI Bidding — UK",
+            "Key Result": "+23% reg uplift",
+            "Confidence": "High",
+            "Impact": "Scaled"
+          },
+          {
+            "Workstream": "OCI Bidding — DE",
+            "Key Result": "+18% reg uplift",
+            "Confidence": "High",
+            "Impact": "Scaled"
+          },
+          {
+            "Workstream": "OCI Bidding — FR/IT/ES/JP",
+            "Key Result": "100% dial-up complete 3/31",
+            "Confidence": "Measuring",
+            "Impact": "First QBR goal 2026 achieved"
+          },
+          {
+            "Workstream": "OCI Bidding — CA",
+            "Key Result": "Launched 4/7; E2E testing complete",
+            "Confidence": "In-flight",
+            "Impact": "Dial-up active"
+          },
+          {
+            "Workstream": "Ad Copy — UK Phase 1",
+            "Key Result": "+86% CTR, +31% regs",
+            "Confidence": "High",
+            "Impact": "Complete"
+          },
+          {
+            "Workstream": "Ad Copy — IT",
+            "Key Result": "Inconclusive (insufficient sample)",
+            "Confidence": "Low",
+            "Impact": "Running"
+          },
+          {
+            "Workstream": "Audiences — Engagement",
+            "Key Result": "$765K iOPS 2025",
+            "Confidence": "High",
+            "Impact": "Validated"
+          },
+          {
+            "Workstream": "UX — Polaris US",
+            "Key Result": "+6% CVR vs legacy (21-day pre/post 3/24)",
+            "Confidence": "High",
+            "Impact": "Confirmed"
+          },
+          {
+            "Workstream": "UX — Italy Polaris ref tag",
+            "Key Result": "P0 regression detected 4/16; legacy restored",
+            "Confidence": "—",
+            "Impact": "Rework required"
+          },
+          {
+            "Workstream": "UX — Gated Guest",
+            "Key Result": "-61% conversion",
+            "Confidence": "High (negative)",
+            "Impact": "Killed"
+          },
+          {
+            "Workstream": "UX — In-context registration",
+            "Key Result": "+13.6K annualized regs",
+            "Confidence": "Medium",
+            "Impact": "Scaling"
+          },
+          {
+            "Workstream": "Algorithmic Ads — DG CPC",
+            "Key Result": "$0.39 vs $2.43 keyword (-84% CPC)",
+            "Confidence": "Early",
+            "Impact": "Volume TBD"
+          }
+        ]
+      },
+      "appendices": {
+        "weekly_trend": {
+          "heading": "Appendix A",
+          "tables": [
+            [
+              {
+                "Week": "W12",
+                "WW Regs": "15,800",
+                "WoW Δ": "—",
+                "WW Spend": "$1.08M",
+                "CPA": "$68",
+                "Notes": "Seasonal softness"
+              },
+              {
+                "Week": "W13",
+                "WW Regs": "15,719",
+                "WoW Δ": "+4.3%",
+                "WW Spend": "$1.13M",
+                "CPA": "$71.87",
+                "Notes": "DE bounce-back began"
+              },
+              {
+                "Week": "W14",
+                "WW Regs": "17,137",
+                "WoW Δ": "+4.9%",
+                "WW Spend": "$1.18M",
+                "CPA": "$69.15",
+                "Notes": "Semana Santa offset in MX/AU"
+              },
+              {
+                "Week": "W15",
+                "WW Regs": "16,626",
+                "WoW Δ": "+3.9%",
+                "WW Spend": "$1.23M",
+                "CPA": "$74.03",
+                "Notes": "Polaris dial-up; Italy ref tag; US data exclusion 4/13"
+              }
+            ]
+          ],
+          "paragraphs": [
+            "W15 aggregates 10 markets (US, UK, DE, FR, IT, ES, JP, CA, AU, MX). Spend continued to rise while regs softened modestly, pushing blended CPA to $74.03. The US data exclusion on 4/13 (Sam Tangri, Jing Shi Slack thread) likely accounts for a portion of the reg softness; Mike Babich (Google) is investigating cross-MCC learning propagation."
+          ]
+        },
+        "yoy": {
+          "heading": "Appendix B",
+          "tables": [
+            [
+              {
+                "Market": "US",
+                "OCI Status": "100%",
+                "Launch Date": "Completed",
+                "Reg Uplift": "+24%",
+                "Notes": "+32,047 regs, $16.7MM OPS"
+              },
+              {
+                "Market": "UK",
+                "OCI Status": "100%",
+                "Launch Date": "Completed",
+                "Reg Uplift": "+23%",
+                "Notes": "Validated at scale"
+              },
+              {
+                "Market": "DE",
+                "OCI Status": "100%",
+                "Launch Date": "Completed",
+                "Reg Uplift": "+18%",
+                "Notes": "Validated at scale"
+              },
+              {
+                "Market": "FR",
+                "OCI Status": "100%",
+                "Launch Date": "3/31",
+                "Reg Uplift": "Measuring",
+                "Notes": "Dial-up complete; first QBR goal"
+              },
+              {
+                "Market": "IT",
+                "OCI Status": "100%",
+                "Launch Date": "3/31",
+                "Reg Uplift": "Measuring",
+                "Notes": "Dial-up complete; first QBR goal"
+              },
+              {
+                "Market": "ES",
+                "OCI Status": "100%",
+                "Launch Date": "3/31",
+                "Reg Uplift": "Measuring",
+                "Notes": "Dial-up complete; first QBR goal"
+              },
+              {
+                "Market": "JP",
+                "OCI Status": "100%",
+                "Launch Date": "Completed",
+                "Reg Uplift": "Measuring",
+                "Notes": "MCM complete"
+              },
+              {
+                "Market": "CA",
+                "OCI Status": "100%",
+                "Launch Date": "4/7",
+                "Reg Uplift": "Measuring",
+                "Notes": "E2E testing complete; in-flight"
+              },
+              {
+                "Market": "AU",
+                "OCI Status": "Planned",
+                "Launch Date": "May 2026",
+                "Reg Uplift": "Projected 18–24%",
+                "Notes": "No MCC created"
+              },
+              {
+                "Market": "MX",
+                "OCI Status": "TBD",
+                "Launch Date": "TBD",
+                "Reg Uplift": "Projected 18–24%",
+                "Notes": "No MCC created"
+              }
+            ]
+          ]
+        },
+        "monthly_projection": {
+          "heading": "Appendix C",
+          "tables": [
+            [
+              {
+                "Metric": "WW Regs (all markets)",
+                "March Actual": "~62,000",
+                "April MTD (thru W15)": "16,626 (W15 only)",
+                "April Projection": "~61,000",
+                "Notes": "CA at 100% OCI adds incremental"
+              },
+              {
+                "Metric": "OCI-attributed regs",
+                "March Actual": "~38,000",
+                "April MTD (thru W15)": "—",
+                "April Projection": "~42,000",
+                "Notes": "CA launched 4/7; learning period active"
+              },
+              {
+                "Metric": "Active tests",
+                "March Actual": "12",
+                "April MTD (thru W15)": "14",
+                "April Projection": "14",
+                "Notes": "AI Max + F90 Lifecycle still blocked"
+              },
+              {
+                "Metric": "Tests with written status",
+                "March Actual": "9/12 (75%)",
+                "April MTD (thru W15)": "10/14 (71%)",
+                "April Projection": "14/14 (100%) target",
+                "Notes": "Goal 1; drift from last report"
+              }
+            ]
+          ]
+        },
+        "plan_summary": {
+          "heading": "Appendix D",
+          "tables": [
+            [
+              {
+                "Workstream": "OCI Bidding",
+                "Test": "Smart Bidding w/ OCI signal",
+                "Market": "US",
+                "Result": "+24% regs, $16.7MM OPS",
+                "Confidence": "High",
+                "Status": "Scaled"
+              },
+              {
+                "Workstream": "OCI Bidding",
+                "Test": "Smart Bidding w/ OCI signal",
+                "Market": "UK",
+                "Result": "+23% regs",
+                "Confidence": "High",
+                "Status": "Scaled"
+              },
+              {
+                "Workstream": "OCI Bidding",
+                "Test": "Smart Bidding w/ OCI signal",
+                "Market": "DE",
+                "Result": "+18% regs",
+                "Confidence": "High",
+                "Status": "Scaled"
+              },
+              {
+                "Workstream": "Modern Search",
+                "Test": "Ad Copy Phase 1",
+                "Market": "UK",
+                "Result": "+86% CTR, +31% regs",
+                "Confidence": "High",
+                "Status": "Complete"
+              },
+              {
+                "Workstream": "Modern Search",
+                "Test": "Ad Copy Phase 1",
+                "Market": "IT",
+                "Result": "Inconclusive",
+                "Confidence": "Low",
+                "Status": "Needs larger sample"
+              },
+              {
+                "Workstream": "Audiences",
+                "Test": "Engagement Channel",
+                "Market": "US",
+                "Result": "$765K iOPS",
+                "Confidence": "High",
+                "Status": "Validated"
+              },
+              {
+                "Workstream": "Audiences",
+                "Test": "Prime Day 2025",
+                "Market": "US",
+                "Result": "$329K OPS, 644% ROAS",
+                "Confidence": "High",
+                "Status": "Event complete"
+              },
+              {
+                "Workstream": "UX",
+                "Test": "Gated Guest",
+                "Market": "WW",
+                "Result": "-61% conversion",
+                "Confidence": "High",
+                "Status": "Killed"
+              },
+              {
+                "Workstream": "UX",
+                "Test": "In-context registration",
+                "Market": "WW",
+                "Result": "+13.6K annualized",
+                "Confidence": "Medium",
+                "Status": "Scaling"
+              },
+              {
+                "Workstream": "UX",
+                "Test": "Baloo early access",
+                "Market": "WW",
+                "Result": "Launched 3/30",
+                "Confidence": "Early",
+                "Status": "Measuring"
+              },
+              {
+                "Workstream": "UX",
+                "Test": "Polaris Brand LP — US",
+                "Market": "WW",
+                "Result": "+6% CVR vs legacy (21-day pre/post 3/24)",
+                "Confidence": "High",
+                "Status": "Scaled"
+              },
+              {
+                "Workstream": "UX",
+                "Test": "Polaris Brand LP — WW weblab",
+                "Market": "WW",
+                "Result": "Dial-up 4/6–4/7 complete",
+                "Confidence": "Early",
+                "Status": "Measuring"
+              },
+              {
+                "Workstream": "UX",
+                "Test": "Polaris Brand LP — Italy",
+                "Market": "IT",
+                "Result": "Ref tag regression; legacy restored 4/16",
+                "Confidence": "—",
+                "Status": "Rework"
+              },
+              {
+                "Workstream": "Algorithmic Ads",
+                "Test": "DG CPC",
+                "Market": "US",
+                "Result": "$0.39 vs $2.43 CPC (-84%)",
+                "Confidence": "Early",
+                "Status": "Volume TBD"
+              }
+            ]
+          ]
+        },
+        "change_log": {
+          "heading": "Appendix E",
+          "tables": [
+            [
+              {
+                "Date": "1/15",
+                "Change": "OCI launched in FR, IT, ES",
+                "Workstream": "OCI Bidding",
+                "Owner": "Market teams"
+              },
+              {
+                "Date": "2/1",
+                "Change": "Ad Copy UK Phase 1 started",
+                "Workstream": "Modern Search",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "2/15",
+                "Change": "Engagement channel validated ($765K iOPS)",
+                "Workstream": "Audiences",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "2/19",
+                "Change": "Ad Copy IT launched",
+                "Workstream": "Modern Search",
+                "Owner": "Andrew"
+              },
+              {
+                "Date": "3/1",
+                "Change": "Gated Guest test killed (-61%)",
+                "Workstream": "UX",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "3/5",
+                "Change": "In-context reg test scaled",
+                "Workstream": "UX",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "3/6",
+                "Change": "Ad Copy UK Phase 2 launched",
+                "Workstream": "Modern Search",
+                "Owner": "Andrew"
+              },
+              {
+                "Date": "3/15",
+                "Change": "Ad Copy UK Phase 1 complete (+86% CTR)",
+                "Workstream": "Modern Search",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "3/20",
+                "Change": "EU4 translations completed",
+                "Workstream": "Modern Search",
+                "Owner": "Andrew"
+              },
+              {
+                "Date": "3/24",
+                "Change": "US Polaris brand page switched to new LP",
+                "Workstream": "UX",
+                "Owner": "Stacey/Alex"
+              },
+              {
+                "Date": "3/25",
+                "Change": "DG CPC testing started",
+                "Workstream": "Algorithmic Ads",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "3/30",
+                "Change": "Baloo early access launched",
+                "Workstream": "UX",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "3/31",
+                "Change": "OCI FR/IT/ES at 100%; first 2026 QBR goal achieved",
+                "Workstream": "OCI Bidding",
+                "Owner": "Stacey/Brandon"
+              },
+              {
+                "Date": "4/1",
+                "Change": "Italy Polaris LP launched (pre-ref-tag-audit)",
+                "Workstream": "UX",
+                "Owner": "MCS"
+              },
+              {
+                "Date": "4/6–4/7",
+                "Change": "Polaris Brand LP WW weblab dial-up",
+                "Workstream": "UX",
+                "Owner": "UX workstream"
+              },
+              {
+                "Date": "4/7",
+                "Change": "CA OCI launched, dial-up active",
+                "Workstream": "OCI Bidding",
+                "Owner": "Stacey"
+              },
+              {
+                "Date": "4/13",
+                "Change": "US data exclusion extended (from 4/7); flagged cross-MCC impact on UK/DE",
+                "Workstream": "OCI Bidding",
+                "Owner": "Jing Shi"
+              },
+              {
+                "Date": "4/16",
+                "Change": "Italy Polaris ref tag regression detected; legacy restored same day",
+                "Workstream": "UX",
+                "Owner": "MCS + Richard"
+              },
+              {
+                "Date": "4/16",
+                "Change": "Polaris LP global template decisions finalized (10 changes)",
+                "Workstream": "UX",
+                "Owner": "Cross-functional"
+              },
+              {
+                "Date": "4/17",
+                "Change": "AI Tool Demo with 6 team members committed to testing",
+                "Workstream": "L3 Team Automation",
+                "Owner": "Richard"
+              },
+              {
+                "Date": "4/17",
+                "Change": "Sam Tangri raised MCC cross-child learning concern; Mike investigating",
+                "Workstream": "OCI Bidding",
+                "Owner": "Sam/Jing"
+              },
+              {
+                "Date": "4/17",
+                "Change": "Adi requested Kiro technical setup 1:1",
+                "Workstream": "L3 Team Automation",
+                "Owner": "Adi/Richard"
+              }
+            ]
+          ]
+        },
+        "variance_bridge": {
+          "heading": "Appendix F",
+          "paragraphs": [
+            "The WW Testing program uses SyRT (Synthetic Randomized Testing) as the primary incrementality measurement framework. SyRT validated Non-Brand registrations as 82–92% incremental, establishing the measurement foundation for all NB-focused tests. OCI uplift figures (18–24% across US, UK, DE) are measured against pre-OCI baselines using a 4-week pre/post comparison with holdout groups where available. Ad Copy results use standard A/B testing with statistical significance thresholds (p < 0.05 for high confidence, p < 0.10 for medium). The IT Ad Copy test did not reach significance due to insufficient sample size (< 500 conversions in the test period).",
+            "The Testing Approach document (v5) formalizes these measurement standards and defines the hypothesis → phased rollout → measurement → scale or stop framework that governs all five workstreams. Until Brandon endorses the document, these standards exist as operational practice but not as formalized team policy.",
+            "---"
+          ]
+        },
+        "source_links": {
+          "heading": "Appendix G",
+          "tables": [
+            [
+              {
+                "Document": "ps-forecast-tracker.xlsx",
+                "Purpose": "WW PS forecast model, budget scenarios",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/ps-forecast-tracker.xlsx?web=1)"
+              },
+              {
+                "Document": "ps-testing-dashboard.xlsx",
+                "Purpose": "Active test tracker across all markets",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/ps-testing-dashboard.xlsx?web=1)"
+              },
+              {
+                "Document": "command-center.xlsx",
+                "Purpose": "Operational command center — tasks, status, owners",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Kiro-Drive/command-center.xlsx?web=1)"
+              }
+            ],
+            [
+              {
+                "Document": "testing-approach-kate-v5.docx",
+                "Purpose": "Testing Approach doc (v5, PUBLISH verdict 8.4/10)",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-approach-kate-v5.docx?web=1)"
+              },
+              {
+                "Document": "testing-methodology.docx",
+                "Purpose": "Core testing methodology reference",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-methodology.docx?web=1)"
+              },
+              {
+                "Document": "testing-approach-outline.docx",
+                "Purpose": "Testing Approach structural outline",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-approach-outline.docx?web=1)"
+              },
+              {
+                "Document": "testing-appendix.docx",
+                "Purpose": "Testing Approach appendix materials",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-appendix.docx?web=1)"
+              },
+              {
+                "Document": "oci-rollout-playbook.docx",
+                "Purpose": "OCI rollout playbook (all markets)",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/oci-rollout-playbook.docx?web=1)"
+              },
+              {
+                "Document": "oci-rollout-methodology.docx",
+                "Purpose": "OCI rollout methodology",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/oci-rollout-methodology.docx?web=1)"
+              },
+              {
+                "Document": "workstream-oci-bidding.docx",
+                "Purpose": "OCI Bidding workstream detail",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-oci-bidding.docx?web=1)"
+              },
+              {
+                "Document": "workstream-modern-search.docx",
+                "Purpose": "Modern Search (Ad Copy) workstream detail",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-modern-search.docx?web=1)"
+              },
+              {
+                "Document": "workstream-audiences-lifecycle.docx",
+                "Purpose": "Audiences & Lifecycle workstream detail",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-audiences-lifecycle.docx?web=1)"
+              },
+              {
+                "Document": "workstream-user-experience.docx",
+                "Purpose": "User Experience workstream detail",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-user-experience.docx?web=1)"
+              },
+              {
+                "Document": "workstream-algorithmic-ads.docx",
+                "Purpose": "Algorithmic Ads workstream detail",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-algorithmic-ads.docx?web=1)"
+              },
+              {
+                "Document": "ai-max-test-design.docx",
+                "Purpose": "AI Max test design document",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/ai-max-test-design.docx?web=1)"
+              },
+              {
+                "Document": "project-baloo-overview.docx",
+                "Purpose": "Project Baloo overview",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/project-baloo-overview.docx?web=1)"
+              },
+              {
+                "Document": "enhanced-match-liveramp.docx",
+                "Purpose": "Enhanced Match / LiveRamp integration",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/enhanced-match-liveramp.docx?web=1)"
+              },
+              {
+                "Document": "email-overlay-ww-rollout.docx",
+                "Purpose": "Email overlay WW rollout plan",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/email-overlay-ww-rollout.docx?web=1)"
+              },
+              {
+                "Document": "ad-copy-testing-framework.docx",
+                "Purpose": "Ad copy testing framework",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/ad-copy-testing-framework.docx?web=1)"
+              },
+              {
+                "Document": "ps-team-map.docx",
+                "Purpose": "PS team map and responsibilities",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/ps-team-map.docx?web=1)"
+              },
+              {
+                "Document": "ps-operations.docx",
+                "Purpose": "PS operations reference",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/testing/ps-operations.docx?web=1)"
+              }
+            ],
+            [
+              {
+                "Document": "ww-review-2026-w13.docx",
+                "Purpose": "WW weekly review W13",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/ww/ww-review-2026-w13.docx?web=1)"
+              },
+              {
+                "Document": "ww-summary-2026-w14.docx",
+                "Purpose": "WW summary W14",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/ww/ww-summary-2026-w14.docx?web=1)"
+              },
+              {
+                "Document": "wbr-w14-callouts.docx",
+                "Purpose": "WBR callouts all markets W14",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/ww/wbr-w14-callouts.docx?web=1)"
+              },
+              {
+                "Document": "projections-ww.docx",
+                "Purpose": "WW projections",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/ww/projections-ww.docx?web=1)"
+              },
+              {
+                "Document": "ww-testing-tracker.docx",
+                "Purpose": "WW testing tracker",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Artifacts/markets/ww-testing-tracker.docx?web=1)"
+              }
+            ],
+            [
+              {
+                "Document": "OCI Planning",
+                "Purpose": "OCI rollout planning and status",
+                "Link": "[Open](https://quip-amazon.com/dSZ9AAZBXQy)"
+              },
+              {
+                "Document": "PS Testing Ad Copy",
+                "Purpose": "Ad copy testing tracker",
+                "Link": "[Open](https://quip-amazon.com/KCY9AAYqWd2)"
+              },
+              {
+                "Document": "Project Baloo Keywords",
+                "Purpose": "Baloo keyword research",
+                "Link": "[Open](https://quip-amazon.com/TVY9AAomVYU)"
+              },
+              {
+                "Document": "LP Testing",
+                "Purpose": "Landing page testing tracker",
+                "Link": "[Open](https://quip-amazon.com/BLP9AAhFfua)"
+              },
+              {
+                "Document": "Pre-WBR Callouts",
+                "Purpose": "WBR callout working doc",
+                "Link": "[Open](https://quip-amazon.com/MMgBAzDrlVou)"
+              }
+            ],
+            [
+              {
+                "Document": "AB AU MBR January 2026",
+                "Purpose": "AU Monthly Business Review (Lena)",
+                "Link": "[Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/AB%20AU%20MBR/AB%20AU%20MBR%20January%202026.pdf)"
+              },
+              {
+                "Document": "AB AU WBR Deck W10",
+                "Purpose": "AU Weekly Business Review W10",
+                "Link": "[Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/AB%20AU%20WBR/AB%20AU%20WBR%20Deck(WK-10-2026).docx)"
+              },
+              {
+                "Document": "AB AU Q4 2025 QBR",
+                "Purpose": "AU Quarterly Business Review Q4 2025",
+                "Link": "[Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/AB%20AU%20QBR/AB_AU_Q42025_QBR.docx)"
+              },
+              {
+                "Document": "AB AU Marketing Strategy",
+                "Purpose": "AU Marketing offsite strategy",
+                "Link": "[Open](https://amazon.sharepoint.com/sites/ABIX/Shared%20Documents/ABAU/GTM/Marketing%20GTM/AB_AU_MarOffsite_Marketing_v6.docx)"
+              },
+              {
+                "Document": "Search Marketing Toolkit BRD",
+                "Purpose": "SMT Release One BRD",
+                "Link": "[Open](https://amazon.sharepoint.com/sites/ABMarketingTech/Shared%20Documents/ABMarketingPaidMedia/BRD_ReleaseOne_SMT.docx)"
+              },
+              {
+                "Document": "Project Bazaar PR-FAQ",
+                "Purpose": "Bazaar Paid Search PR-FAQ",
+                "Link": "[Open](https://amazon.sharepoint.com/sites/ABMarketingTech/Shared%20Documents/ABMarketingPaidMedia/PRFAQ%20-%20ProjectBazaar_PaidSearch_20240621.docx)"
+              },
+              {
+                "Document": "PS Background & Vision",
+                "Purpose": "Paid Search background and vision doc",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Documents/Resources/PaidSearch_Background&Vision_07182024.docx)"
+              },
+              {
+                "Document": "Kate doc v3 (end)",
+                "Purpose": "Testing doc Kate v3 — end sections",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Documents/Testing/Kate%20doc%20v3%20-%202026-end.docx)"
+              },
+              {
+                "Document": "Kate doc v3 (sections)",
+                "Purpose": "Testing doc Kate v3 — section breakdown",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Documents/Testing/Kate%20doc%20v3%20-%202026-sections.docx)"
+              },
+              {
+                "Document": "Paid Acq Flash",
+                "Purpose": "Paid Acquisition flash report",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Downloads/Paid%20Acq%20Flash.pdf)"
+              },
+              {
+                "Document": "2024 Paid Acq MBR/QBR",
+                "Purpose": "2024 Paid Acquisition MBR/QBR",
+                "Link": "[Open](https://amazon-my.sharepoint.com/personal/prichwil_amazon_com/Documents/Downloads/2024%20Paid%20Acq%20MBR%20_%20QBR.docx)"
+              }
+            ]
+          ],
+          "paragraphs": [
+            "All source documents referenced in or feeding this state file. Links open in browser.",
+            "### Kiro-Drive (OneDrive)",
+            "### Artifacts — Testing Workstream (OneDrive)",
+            "### Artifacts — WW / Cross-Market (OneDrive)",
+            "### Quip Documents",
+            "### SharePoint Team Sites"
+          ]
+        },
+        "placeholder_schema": {
+          "heading": "Appendix H",
+          "tables": [
+            [
+              {
+                "Placeholder Tag": "`{{REPORTING_PERIOD}}`",
+                "Section": "Header",
+                "Data Source": "Calendar + dashboard week",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{INTRO_PARAGRAPH}}`",
+                "Section": "Introduction",
+                "Data Source": "Semi-static; update on structural changes",
+                "Update Cadence": "Monthly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_PARAGRAPH_1}}`",
+                "Section": "State of Business — headline",
+                "Data Source": "Weekly metrics JSON (all 10 markets)",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_WORKSTREAM_TABLE}}`",
+                "Section": "State of Business — input by workstream",
+                "Data Source": "Test status tracker + OCI status",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_RESULTS_TABLE}}`",
+                "Section": "State of Business — output by workstream",
+                "Data Source": "Test results with confidence levels",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_ANALYSIS}}`",
+                "Section": "State of Business — narrative bridge",
+                "Data Source": "LLM synthesis of workstream progress",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_NULL_CASE}}`",
+                "Section": "State of Business — cost of inaction",
+                "Data Source": "Testing Approach doc delay + OCI expansion timeline",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{SOTB_FLAGS}}`",
+                "Section": "State of Business — conditional flags",
+                "Data Source": "Anomaly engine; only present during anomalous weeks",
+                "Update Cadence": "Conditional"
+              },
+              {
+                "Placeholder Tag": "`{{LESSONS_1}}`",
+                "Section": "Lessons Learned — insight 1",
+                "Data Source": "LLM synthesis of trailing 3-week window",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{LESSONS_2}}`",
+                "Section": "Lessons Learned — insight 2",
+                "Data Source": "LLM synthesis",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{LESSONS_3}}`",
+                "Section": "Lessons Learned — insight 3",
+                "Data Source": "LLM synthesis",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{PRIORITIES_TABLE}}`",
+                "Section": "Strategic Priorities — action table",
+                "Data Source": "Asana tasks + overdue items + calendar",
+                "Update Cadence": "Daily"
+              },
+              {
+                "Placeholder Tag": "`{{BLOCKED_ITEMS}}`",
+                "Section": "Strategic Priorities — blockers",
+                "Data Source": "Asana blocked tasks",
+                "Update Cadence": "Daily"
+              },
+              {
+                "Placeholder Tag": "`{{STAKEHOLDER_ACTIONS}}`",
+                "Section": "Strategic Priorities — external deps",
+                "Data Source": "Memory.md relationship graph + Asana",
+                "Update Cadence": "Daily"
+              },
+              {
+                "Placeholder Tag": "`{{APPENDIX_A_TREND}}`",
+                "Section": "Appendix A — WW weekly trend",
+                "Data Source": "DuckDB weekly_metrics (all markets)",
+                "Update Cadence": "Weekly"
+              },
+              {
+                "Placeholder Tag": "`{{APPENDIX_B_OCI}}`",
+                "Section": "Appendix B — OCI rollout status",
+                "Data Source": "eyes.md OCI section + DuckDB",
+                "Update Cadence": "On change"
+              },
+              {
+                "Placeholder Tag": "`{{APPENDIX_D_TESTS}}`",
+                "Section": "Appendix D — workstream test results",
+                "Data Source": "Testing wiki articles",
+                "Update Cadence": "On change"
+              },
+              {
+                "Placeholder Tag": "`{{APPENDIX_E_CHANGELOG}}`",
+                "Section": "Appendix E — change log",
+                "Data Source": "Testing program change log",
+                "Update Cadence": "On change"
+              }
+            ]
+          ],
+          "paragraphs": [
+            "This schema defines the contract between the Kiro agent swarm (LLM output) and the DOCX template (deterministic patching). The agent generates a JSON payload mapping these keys to generated strings. A patching script replaces the placeholders in the Word XML without touching surrounding formatting.",
+            "### JSON Output Contract",
+            "```json { \"REPORTING_PERIOD\": \"Week 15 (Apr 5–11, 2026)\", \"SOTB_PARAGRAPH_1\": \"The WW PS Testing program drove 14,800 registrations...\", \"SOTB_WORKSTREAM_TABLE\": \"[markdown table string]\", \"SOTB_RESULTS_TABLE\": \"[markdown table string]\", \"SOTB_ANALYSIS\": \"OCI Bidding remains the highest-impact...\", \"SOTB_NULL_CASE\": \"If the Testing Approach document does not ship...\", \"SOTB_FLAGS\": \"[conditional — only present if anomalies detected]\", \"LESSONS_1\": \"First insight...\", \"LESSONS_2\": \"Second insight...\", \"LESSONS_3\": \"Third insight...\", \"PRIORITIES_TABLE\": \"[markdown table string]\", \"BLOCKED_ITEMS\": \"[markdown list]\", \"STAKEHOLDER_ACTIONS\": \"[markdown list]\" } ```",
+            "Static sections (Goals, Tenets, Appendix B OCI status, Appendix D test results) are NOT in the JSON — they persist unchanged in the template until manually revised or a test status changes.",
+            "---"
+          ]
+        }
+      },
+      "headline": "The WW PS Testing program drove 16,626 total registrations in W15 (-3.0% WoW) on $1.23M spend (+3.9% WoW) across all 10 markets at a blended CPA of $74.03 (+7.1% WoW). Two events dominate the week: the Polaris Brand LP weblab dial-up in WW markets (4/6–4/7), and a P0 Italy ref tag regression detected during the April 16 Polaris LP sync. The Italy Polaris `/cp/ps-brand` page (launched 4/1) overwrote Italy's ref tag and routed Italian signup traffic to the AU domain; Alex VanDerStuyf (MCS) confirmed legacy Italy restored on 4/16 and Polaris Italy parked as `it/cp/ps-brand-new` in AEM. The team also confirmed the US Polaris brand page delivered +6% CVR vs the legacy MCS version (21-day pre/post March 24 launch) — the first statistically validated win from the Polaris rollout."
+    }
+  },
+  "comparison": [
+    {
+      "market": "AU Paid Search",
+      "key": "au",
+      "status": "ACTIVE",
+      "data_through": "2026 W15 (Apr 6–12)",
+      "updated": "2026-04-20",
+      "owner": "Richard Williams",
+      "goals": 5,
+      "tenets": 4,
+      "priorities": 9,
+      "appendices": [
+        "change_log",
+        "monthly_projection",
+        "placeholder_schema",
+        "plan_summary",
+        "source_links",
+        "variance_bridge",
+        "weekly_trend",
+        "yoy"
+      ],
+      "appendix_count": 8,
+      "has_flags": true
+    },
+    {
+      "market": "MX Paid Search",
+      "key": "mx",
+      "status": "ACTIVE",
+      "data_through": "2026 W15 (Apr 6–12)",
+      "updated": "2026-04-20",
+      "owner": "Richard Williams",
+      "goals": 5,
+      "tenets": 4,
+      "priorities": 8,
+      "appendices": [
+        "change_log",
+        "monthly_projection",
+        "placeholder_schema",
+        "plan_summary",
+        "source_links",
+        "variance_bridge",
+        "weekly_trend",
+        "yoy"
+      ],
+      "appendix_count": 8,
+      "has_flags": true
+    },
+    {
+      "market": "WW Testing",
+      "key": "ww",
+      "status": "ACTIVE",
+      "data_through": "2026 W15 (Apr 6–12)",
+      "updated": "2026-04-20",
+      "owner": "Richard Williams",
+      "goals": 4,
+      "tenets": 4,
+      "priorities": 13,
+      "appendices": [
+        "change_log",
+        "monthly_projection",
+        "placeholder_schema",
+        "plan_summary",
+        "source_links",
+        "variance_bridge",
+        "weekly_trend",
+        "yoy"
+      ],
+      "appendix_count": 8,
+      "has_flags": false
+    }
+  ],
+  "schema": {
+    "sections": [
+      "flags",
+      "goals",
+      "introduction",
+      "lessons",
+      "priorities",
+      "state",
+      "tenets"
+    ],
+    "appendices": [
+      "change_log",
+      "monthly_projection",
+      "placeholder_schema",
+      "plan_summary",
+      "source_links",
+      "variance_bridge",
+      "weekly_trend",
+      "yoy"
+    ],
+    "section_coverage": {
+      "flags": [
+        "au",
+        "mx"
+      ],
+      "goals": [
+        "au",
+        "mx",
+        "ww"
+      ],
+      "introduction": [
+        "au",
+        "mx",
+        "ww"
+      ],
+      "lessons": [
+        "au",
+        "mx",
+        "ww"
+      ],
+      "priorities": [
+        "au",
+        "mx",
+        "ww"
+      ],
+      "state": [
+        "au",
+        "mx",
+        "ww"
+      ],
+      "tenets": [
+        "au",
+        "mx",
+        "ww"
+      ]
+    },
+    "appendix_coverage": {
+      "change_log": [
+        "au",
+        "mx",
+        "ww"
+      ],
+      "monthly_projection": [
+        "au",
+        "mx",
+        "ww"
+      ],
+      "placeholder_schema": [
+        "au",
+        "mx",
+        "ww"
+      ],
+      "plan_summary": [
+        "au",
+        "mx",
+        "ww"
+      ],
+      "source_links": [
+        "au",
+        "mx",
+        "ww"
+      ],
+      "variance_bridge": [
+        "au",
+        "mx",
+        "ww"
+      ],
+      "weekly_trend": [
+        "au",
+        "mx",
+        "ww"
+      ],
+      "yoy": [
+        "au",
+        "mx",
+        "ww"
+      ]
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "US": {
+    "market": "US",
+    "error": "No data found for US"
+  },
+  "CA": {
+    "market": "CA",
+    "error": "No data found for CA"
+  },
+  "UK": {
+    "market": "UK",
+    "error": "No data found for UK"
+  },
+  "DE": {
+    "market": "DE",
+    "error": "No data found for DE"
+  },
+  "FR": {
+    "market": "FR",
+    "error": "No data found for FR"
+  },
+  "IT": {
+    "market": "IT",
+    "error": "No data found for IT"
+  },
+  "ES": {
+    "market": "ES",
+    "error": "No data found for ES"
+  },
+  "JP": {
+    "market": "JP",
+    "error": "No data found for JP"
+  },
+  "AU": {
+    "market": "AU",
+    "error": "No data found for AU"
+  },
+  "MX": {
+    "market": "MX",
+    "error": "No data found for MX"
+  }
+}

@@ -37,12 +37,50 @@ def run():
     ds = wb['_Data']
     
     for mi, m in enumerate(MARKETS):
-        # Pull forecast_tracker
+        # Pull latest predictions from ps.forecasts directly (authoritative source).
+        # ps.forecast_tracker is a snapshot table that can go stale if not
+        # refreshed by every pipeline run; ps.forecasts is always current.
+        # target_period in ps.forecasts is '2026-W16'/'2026-M04'/'2026-Q2'/'2026-YE';
+        # map to the xlsx-shaped horizon/period_label tuples.
         ft = {}
-        rows = con.execute(f"""SELECT horizon, period_label, metric_name, predicted, ci_low, ci_high, actual
-            FROM ps.forecast_tracker WHERE market='{m}'""").fetchall()
+        MONTH_NUM_TO_NAME = {'01':'Jan','02':'Feb','03':'Mar','04':'Apr','05':'May','06':'Jun',
+                             '07':'Jul','08':'Aug','09':'Sep','10':'Oct','11':'Nov','12':'Dec'}
+        rows = con.execute(f"""
+            WITH ranked AS (
+              SELECT market, target_period, period_type, metric_name,
+                     predicted_value, confidence_low, confidence_high, actual_value,
+                     ROW_NUMBER() OVER (
+                       PARTITION BY market, target_period, period_type, metric_name
+                       ORDER BY created_at DESC
+                     ) AS rn
+              FROM ps.forecasts
+              WHERE market = '{m}' AND target_period LIKE '2026-%'
+            )
+            SELECT target_period, period_type, metric_name,
+                   predicted_value, confidence_low, confidence_high, actual_value
+            FROM ranked WHERE rn = 1
+        """).fetchall()
         for r in rows:
-            ft[(r[0], r[1], r[2])] = {'pred': r[3], 'ci_lo': r[4], 'ci_hi': r[5], 'actual': r[6]}
+            target, ptype, metric, pred, ci_lo, ci_hi, actual = r
+            # Map target_period → xlsx period_label
+            horizon = None; label = None
+            if ptype == 'weekly' and '-W' in target:
+                horizon = 'weekly'
+                label = 'W' + target.split('-W')[-1]
+            elif ptype == 'monthly' and '-M' in target:
+                horizon = 'monthly'
+                label = MONTH_NUM_TO_NAME.get(target.split('-M')[-1])
+            elif ptype == 'quarterly' and '-Q' in target:
+                horizon = 'quarterly'
+                label = 'Q' + target.split('-Q')[-1]
+            elif ptype == 'year_end':
+                horizon = 'year_end'
+                label = '2026'
+            if horizon is None or label is None:
+                continue
+            ft[(horizon, label, metric)] = {
+                'pred': pred, 'ci_lo': ci_lo, 'ci_hi': ci_hi, 'actual': actual
+            }
         
         # Pull performance (actuals with brand/NB split)
         perf = {}
@@ -127,11 +165,61 @@ def run():
         
         print(f"  {m}: {len(perf)} weeks, {sum(1 for k in ft if ft[k]['pred']) } predictions")
     
+    # ── Write _Constraints sheet (single source of truth projection) ──
+    write_constraints_sheet(wb, con)
+    
     con.close()
     
     print(f"Saving {XLSX}...")
     wb.save(XLSX)
     print(f"Done: {os.path.getsize(XLSX):,} bytes")
+
+
+CONSTRAINTS_COLUMNS = [
+    'market', 'governing_constraint', 'handoff_status', 'oci_status',
+    'ccp_availability', 'next_milestone', 'manual_notes',
+    'latest_week', 'last_week_regs', 'last_week_cost', 'last_week_cpa',
+    'next_week_predicted_regs', 'next_week_ci_low_regs', 'next_week_ci_high_regs',
+    'next_week_predicted_cost', 'next_week_ci_low_cost', 'next_week_ci_high_cost',
+    'month_op2_regs', 'month_op2_cost', 'month_op2_cpa',
+    'hit_rate_regs', 'avg_error_regs',
+    'structural_baseline_count', 'structural_baselines',
+    'active_impact_count', 'active_impact_regimes',
+    'recent_past_count', 'recent_past_regimes',
+    'manual_updated_at', 'manual_updated_by',
+]
+
+
+def write_constraints_sheet(wb, con):
+    """Write or refresh _Constraints hidden sheet from ps.market_constraints view.
+    
+    Visible market tabs can reference this sheet via formulas like
+    ='_Constraints'!B2 to show governing_constraint for the first market.
+    Schema is stable (column order preserved across runs).
+    """
+    print("\nWriting _Constraints sheet from ps.market_constraints view...")
+    col_list = ', '.join(CONSTRAINTS_COLUMNS)
+    rows = con.execute(f"""
+        SELECT {col_list} FROM ps.market_constraints 
+        ORDER BY CASE market WHEN 'WW' THEN 1 WHEN 'US' THEN 2 WHEN 'AU' THEN 3 WHEN 'MX' THEN 4 ELSE 5 END, market
+    """).fetchall()
+    
+    if '_Constraints' in wb.sheetnames:
+        del wb['_Constraints']  # rebuild from scratch — schema may evolve
+    ws = wb.create_sheet('_Constraints')
+    ws.sheet_state = 'hidden'
+    
+    # Header row
+    for ci, col in enumerate(CONSTRAINTS_COLUMNS, start=1):
+        ws.cell(row=1, column=ci).value = col
+    
+    # Data rows
+    for ri, row in enumerate(rows, start=2):
+        for ci, val in enumerate(row, start=1):
+            # openpyxl handles None, strings, numbers, datetimes natively
+            ws.cell(row=ri, column=ci).value = val
+    
+    print(f"  ✓ _Constraints sheet: {len(rows)} markets × {len(CONSTRAINTS_COLUMNS)} cols (hidden)")
 
 
 if __name__ == '__main__':

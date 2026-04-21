@@ -1,42 +1,53 @@
 {
-  "generated": "2026-04-17",
+  "generated": "2026-04-20",
+  "date": "2026-04-20",
+  "timezone": "America/Los_Angeles",
   "status": "complete",
   "compression_audit": {
-    "body_total_words": 28792,
+    "total_words": 26734,
     "organ_count": 14,
-    "largest_organs": ["changelog 4681w", "heart 3875w", "amcc 3413w", "amazon-politics 2677w", "device 2094w"],
-    "compression_signals": [],
-    "note": "No compression signals from priors (n_observations < threshold). Body is within observed historical range. changelog + heart are natural growth — no intervention recommended."
+    "largest_organs": [
+      {"organ": "heart", "words": 4085},
+      {"organ": "amcc", "words": 3413},
+      {"organ": "amazon-politics", "words": 2677},
+      {"organ": "roster", "words": 2413},
+      {"organ": "device", "words": 2094}
+    ],
+    "note": "Total 26,734w across 14 organs (excluding changelog 4,681w). Compared to 2026-04-17 baseline of 28,792w — net -2,058w (no organ changes today; difference likely due to prior run counting changelog.md + slight methodology drift). No compression signal triggers fire — all organs within budget.",
+    "logged_to_duckdb": "main.autoresearch_organ_health (run_id=eod-2026-04-20)"
   },
-  "workflow_health": {
-    "total_runs_24h": 1,
-    "successes": 1,
-    "success_rate_pct": 100.0,
-    "avg_duration_s": 600,
+  "workflow_observability": {
+    "executions_24h": 0,
+    "success_rate_24h": null,
     "degraded_workflows": [],
-    "alerts": []
+    "note": "main.workflow_executions table is empty — hooks are not logging executions to DuckDB. This is an observability gap. Likely the hooks/protocols write to JSON files but the insert step was skipped or disconnected. Flag for karpathy/ops review — we have no 24h reliability signal."
   },
   "communication_analytics": {
-    "status": "friday_run_deferred",
-    "reason": "Only one meeting this week (AI Tool Demo 4/17, Polaris LP 4/16). Insufficient data for 4-week trend computation. Resume next Friday with more sessions.",
-    "speaking_share_latest": null,
-    "coaching_signal": false
+    "status": "skipped",
+    "reason": "Monday — communication analytics runs Friday only per protocol"
   },
   "context_enrichment": {
     "status": "skipped",
-    "reason": "KDS/ARCC enrichment protocol not invoked in this direct EOD run. Will resume on next automated AM hook."
-  },
-  "recurring_task_state_check": {
-    "due_today": [
-      {"task": "weekly_scorecard", "status": "executing_now", "note": "Updating rw-tracker.md inline"},
-      {"task": "agent_bridge_sync", "status": "already_completed_today"}
-    ],
-    "removed": [
-      {"task": "wiki_lint", "action": "disabled_per_eod-backend_2026-04-18", "reason": "Wiki maintenance moved to separate manual hook"}
-    ]
+    "reason": "Non-blocking. Low-activity day, no new projects surfaced. Deferred to next full run."
   },
   "organ_cascade": {
-    "status": "deferred_to_inline_updates",
-    "note": "current.md, memory.md, nervous-system.md updates will be cascaded at session-log append time."
-  }
+    "status": "light",
+    "organs_updated": [],
+    "intake_processed": 0,
+    "note": "No net-new intake requiring organ updates today. Existing intake/*.md files are morning brief outputs (asana-activity, asana-digest, email-triage, hedy-digest), not unprocessed raw material. No Hedy sessions, no meetings — no memory.md or nervous-system.md updates triggered. current.md remains current (updated this AM)."
+  },
+  "observability_flags": [
+    {
+      "severity": "medium",
+      "area": "duckdb",
+      "issue": "main.workflow_executions has 0 rows; asana.asana_tasks last synced 2026-04-10 (10d stale); 100 rows only",
+      "recommendation": "Hooks that claim to INSERT into workflow_executions aren't actually writing. Morning delta sync for Asana hasn't been running. Likely a disconnection between protocol documentation and actual executor code."
+    },
+    {
+      "severity": "low",
+      "area": "duckdb",
+      "issue": "ops.data_freshness only tracks calendar_events + emails (last checked 2026-04-10)",
+      "recommendation": "Expand ops.data_freshness to cover asana_tasks, slack_messages, hedy sessions, wiki pipeline."
+    }
+  ]
 }

@@ -6,6 +6,8 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <title>PS Forecast Tracker — All Markets</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3/dist/chartjs-plugin-annotation.min.js"></script>
+<script src="canon-chart.js?v=2026-04-20"></script>
 <link rel="preload" href="data/forecast-data.json" as="fetch" crossorigin>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -79,13 +81,12 @@ tr:hover{background:#1f222b}
 <div class="kpi-row" id="kpiRow"></div>
 <div class="grid">
   <div class="card card-full" id="sec-chart">
-    <h3 id="chartTitle">Weekly Registrations</h3>
-    <div class="legend-row">
-      <div class="legend-item"><div class="legend-dot" style="background:#4a9eff"></div> Actual</div>
-      <div class="legend-item"><div class="legend-line" style="background:#f97316;border-top:2px dashed #f97316"></div> Predicted</div>
-      <div class="legend-item"><div class="legend-dot" style="background:rgba(249,115,22,0.2)"></div> CI Band</div>
-      <div class="legend-item"><div class="legend-line" style="background:#6c7086;border-top:1px dashed #6c7086"></div> OP2 Target</div>
-    </div>
+    <h3 id="chartTitle" style="display:flex;justify-content:space-between;align-items:center">
+      Weekly Trend
+      <span style="font-weight:400;font-size:13px">
+        <button id="chartModeBtn" class="tab" style="font-size:12px;padding:3px 10px">Show calibration detail</button>
+      </span>
+    </h3>
     <div class="chart-box"><canvas id="mainChart"></canvas></div>
   </div>
   <div class="card card-full" id="sec-projections">
@@ -116,10 +117,14 @@ fetch('data/forecast-data.json?' + Date.now())
 
 
 function initFromData() {
-const MARKET_ORDER = ['US','CA','UK','DE','FR','IT','ES','JP','MX','AU'];
+// Display order matches callout dashboard: WW and EU5 first, then key markets.
+// Individual EU5 member markets (UK/DE/FR/IT/ES) stay selectable here because
+// the Forecast Tracker is the "drill down" view; WBR Callouts hides them.
+const MARKET_ORDER = ['WW','US','EU5','CA','UK','DE','FR','IT','ES','JP','MX','AU'];
 const markets = MARKET_ORDER.filter(m => DATA.markets.includes(m));
 let curMarket = markets[0] || 'US';
 let curMetric = 'regs';
+let chartMode = 'default';
 let chart = null;
 document.getElementById('dataTs').textContent = 'Data through: ' + (DATA.last_data_date || 'W' + DATA.max_week);
 
@@ -190,76 +195,25 @@ function renderKPIs(weeks, proj) {
 }
 
 function renderChart(weeks) {
-  const ctx = document.getElementById('mainChart').getContext('2d');
-  if (chart) chart.destroy();
-  const labels = weeks.map(w => 'W' + w.wk);
-  const maxWk = DATA.max_week || 15;
-  const metricLabel = {regs:'Registrations',cost:'Cost ($)',cpa:'CPA ($)'}[curMetric];
-  document.getElementById('chartTitle').textContent = `${metricLabel} — ${curMarket}`;
-
-  // Actuals: only weeks with data
-  const actuals = weeks.map(w => (w.regs > 0 || w.cost > 0) ? w[curMetric] : null);
-  // Predictions (regs only for now)
-  const preds = curMetric === 'regs' ? weeks.map(w => w.pred_regs || null) : [];
-  const ciLo = curMetric === 'regs' ? weeks.map(w => w.ci_lo || null) : [];
-  const ciHi = curMetric === 'regs' ? weeks.map(w => w.ci_hi || null) : [];
-  const op2 = curMetric === 'regs' ? weeks.map(w => w.op2_regs || null) : [];
-
-  const datasets = [{
-    label: 'Actual', data: actuals,
-    borderColor: '#4a9eff', backgroundColor: '#4a9eff',
-    borderWidth: 2.5, pointRadius: 3, tension: 0.3, spanGaps: false
-  }];
-
-  if (curMetric === 'regs' && preds.some(v => v)) {
-    datasets.push({
-      label: 'Predicted', data: preds,
-      borderColor: '#f97316', backgroundColor: 'transparent',
-      borderWidth: 2, borderDash: [6, 3], pointRadius: 0, tension: 0.3
-    });
-    if (ciHi.some(v => v)) {
-      datasets.push({
-        label: 'CI High', data: ciHi,
-        borderColor: 'transparent', backgroundColor: 'rgba(249,115,22,0.08)',
-        borderWidth: 0, pointRadius: 0, fill: '+1', tension: 0.3
-      });
-      datasets.push({
-        label: 'CI Low', data: ciLo,
-        borderColor: 'transparent', backgroundColor: 'rgba(249,115,22,0.08)',
-        borderWidth: 0, pointRadius: 0, fill: '-1', tension: 0.3
-      });
-    }
-    if (op2.some(v => v)) {
-      datasets.push({
-        label: 'OP2 Target', data: op2,
-        borderColor: '#6c7086', backgroundColor: 'transparent',
-        borderWidth: 1.5, borderDash: [3, 3], pointRadius: 0, tension: 0
-      });
-    }
-  }
-
-  chart = new Chart(ctx, {
-    type: 'line',
-    data: { labels, datasets },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: {
-        legend: { display: datasets.length > 1, labels: { color: '#888', font: { size: 11 } } },
-        tooltip: { callbacks: { label: c => c.dataset.label + ': ' + fmt(c.parsed.y, curMetric) } },
-        annotation: maxWk ? {
-          annotations: { nowLine: {
-            type: 'line', xMin: maxWk - 1, xMax: maxWk - 1,
-            borderColor: '#4ade8066', borderWidth: 2, borderDash: [4, 4],
-            label: { display: true, content: 'Now', color: '#4ade80', font: { size: 10 }, position: 'start' }
-          }}
-        } : {}
-      },
-      scales: {
-        x: { grid: { color: '#1f222b' }, ticks: { color: '#666', font: { size: 11 }, maxTicksLimit: 26 } },
-        y: { grid: { color: '#1f222b' }, ticks: { color: '#666', callback: v => fmt(v, curMetric) } }
-      }
-    }
+  // Canon chart — single source of truth across Forecast Tracker and WBR Callouts.
+  // The 'weeks' param is kept for call-site compatibility but no longer used;
+  // CanonChart reads directly from DATA (forecast-data.json).
+  document.getElementById('chartTitle').childNodes[0].textContent =
+    'Registrations & Spend — ' + curMarket + '  ';
+  chart = CanonChart.render('mainChart', {
+    forecastData: DATA,
+    market: curMarket,
+    mode: chartMode,
+    chartInstance: chart,
   });
+  var btn = document.getElementById('chartModeBtn');
+  if (btn) {
+    btn.textContent = chartMode === 'calibration' ? 'Show default view' : 'Show calibration detail';
+    btn.onclick = function () {
+      chartMode = chartMode === 'calibration' ? 'default' : 'calibration';
+      renderChart(weeks);
+    };
+  }
 }
 
 function renderTable(weeks) {

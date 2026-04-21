@@ -63,3 +63,4 @@ run47_exp2	device	Tool Factory	SPLIT	information_retrieval	2078	2094	1.0	1.0	1.0
 run47_exp3	brain	Foundational Decisions table	COMPRESS	information_retrieval	1373	1263	0.638	1.0	0.583	-0.362	false	REVERT	600
 run47_exp4	amcc	Integration+CommonFailures+GrowthModel	MERGE	information_retrieval	3413	3050	0.833	1.0	0.833	-0.167	false	REVERT	600
 run47_exp5	richard-style-email	Full file	RESTRUCTURE	output_quality	828	828	0.88	0.89	0.82	-0.01	false	REVERT	600
+PE-1_design	wbr_pipeline	_stage_project+_write_projections	RESTRUCTURE	output_quality	-	-	-	-	-	-	false	DESIGNED	0

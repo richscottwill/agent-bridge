@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-17T12:36:00Z",
+  "generated": "2026-04-20T16:50:00Z",
   "phase": "am-backend",
   "slack_signals": [
     {"signal": "Brandon Loop callout comments — due Fri 4/17 @ 2pm CT", "priority": "critical", "source": "ab-paid-search-global", "action": "respond_today"},
@@ -15,13 +15,60 @@
     {"signal": "Alex VanDerStuyf — IT brand page rollback complete", "priority": "medium", "source": "email", "action": "close"},
     {"signal": "Adobe alert — keyword clicks -50% 7-day rolling", "priority": "medium", "source": "email", "action": "investigate"}
   ],
-  "hedy_signals": [],
+  "hedy_signals": [
+    {"signal": "Polaris LP Optimization + Italy P0 ref tag (4/16, 60 min, 5 attendees)", "priority": "critical", "source": "hedy", "session_id": "X9gMGQMOFP25yu51oySX", "action": "revert_italy_asap"},
+    {"signal": "AI Tool Demo & Workflow Integration (4/17, 51 min, 7 attendees) — team agreed to adopt AI tool for WBR callouts, create shared prompt repo", "priority": "high", "source": "hedy", "session_id": "IvUNtHCncikQcZvODFj1", "action": "share_master_prompt_by_4/21"}
+  ],
   "loop_signals": [
     {"signal": "Q1 QBR inputs due today (4/17) — from MBR/QBR Loop", "priority": "high", "source": "loop", "action": "submit_today"},
     {"signal": "DDD session today on QuickSuite & Kiro", "priority": "medium", "source": "loop", "action": "prepare"}
   ],
-  "wiki_candidates": [],
+  "wiki_candidates": [
+    {
+      "topic": "polaris-brand-lp",
+      "quality_score": 27.5,
+      "status": "covered",
+      "existing_article": "~/shared/wiki/agent-created/markets/polaris-program.md",
+      "action": "enrich — add 4/16 DDD decisions + US +6% CVR + Italy ref tag incident"
+    },
+    {
+      "topic": "oci-rollout",
+      "quality_score": 14.4,
+      "status": "covered",
+      "existing_article": "~/shared/wiki/agent-created/testing/oci-program.md",
+      "action": "none — CA launched 4/7 already captured in project_timeline"
+    },
+    {
+      "topic": "au-cpa-cvr",
+      "quality_score": 14.0,
+      "status": "covered",
+      "existing_article": "~/shared/wiki/agent-created/markets/au-market-wiki.md",
+      "action": "none"
+    },
+    {
+      "topic": "mx-budget-ieccp",
+      "quality_score": 13.5,
+      "status": "covered",
+      "existing_article": "~/shared/wiki/agent-created/strategy/ieccp-planning-framework.md",
+      "action": "none"
+    },
+    {
+      "topic": "PAM Budget Availability",
+      "quality_score": 6.0,
+      "status": "weak_candidate",
+      "existing_article": null,
+      "action": "monitor — below mentions/spread thresholds despite inclusion in wiki_candidates view"
+    }
+  ],
   "decisions_detected": [
-    {"decision": "No AU call this week — send deliverables async", "source": "slack", "author": "Brandon"}
+    {"decision": "No AU call this week — send deliverables async", "source": "slack", "author": "Brandon"},
+    {"decision": "Benefit cards replace percolate widget on all Polaris pages", "source": "hedy", "session_id": "X9gMGQMOFP25yu51oySX"},
+    {"decision": "Localized sub-header (country + From Sole Props to Enterprise); main headline unchanged worldwide", "source": "hedy", "session_id": "X9gMGQMOFP25yu51oySX"},
+    {"decision": "Simplified FAQs + add Is AB free? + pricing benefits; add closing CTA button", "source": "hedy", "session_id": "X9gMGQMOFP25yu51oySX"},
+    {"decision": "Revert Italy Polaris page to old MCS template to restore ref tag tracking (P0)", "source": "hedy", "session_id": "X9gMGQMOFP25yu51oySX"},
+    {"decision": "Adopt AI tool for WBR callouts and reporting support (file uploads until API exists)", "source": "hedy", "session_id": "IvUNtHCncikQcZvODFj1"},
+    {"decision": "Standardize on Markdown output for Quip compatibility", "source": "hedy", "session_id": "IvUNtHCncikQcZvODFj1"},
+    {"decision": "Create shared SharePoint prompt repository for AI workflow templates", "source": "hedy", "session_id": "IvUNtHCncikQcZvODFj1"},
+    {"decision": "Explore Gandalf as framework for packaging standardized AI analysis workflows", "source": "hedy", "session_id": "IvUNtHCncikQcZvODFj1"}
   ]
 }

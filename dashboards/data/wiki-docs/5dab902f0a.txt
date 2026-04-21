@@ -16,3 +16,38 @@
 
 ## Calibration Note
 When projecting W14/April, discount the linear projection by 2-3% on regs to account for the persistent optimism bias. Spend projections have been more accurate — the bid strategies are predictable.
+
+
+## W16 Projection (made during W16 analysis, 2026-04-20)
+
+| Week | Days Elapsed | Projected Regs | Projected Spend | Projected CPA | MTD Regs | MTD Spend | Rationale |
+|------|--------------|----------------|------------------|---------------|----------|-----------|-----------|
+| W16 | 18/30 | 890 | $115,000 | $129 | 493 | $65,579 | W16 rebound (+45% WoW regs, CVR 2.86%→3.88%) validates Polaris LP revert thesis. Forecast uses W16 daily rates (weekday 38 regs/$4,190, weekend 29.5/$3,943) applied to remaining 7 weekdays + 5 weekend days, minus 3% Anzac Day drag (Sat Apr 25) and minus 3% projection-optimism calibration. Replaces W15's $38,685/359-reg linear extrapolation from a weak W14-W15 base. Tracks to -17% regs, -22% spend, -7% CPA vs OP2 ($147,592/1,071/$138). |
+
+## W16 Projection vs Prior Projections
+- W15 projected April at 359 regs / $38,685 / $108 CPA (from au-2026-w15.md Projections block)
+- W16 projects April at 890 regs / $115K / $129 CPA
+- Delta: +148% regs, +197% spend, +19% CPA
+- Root cause: W15 projection used linear extrapolation from W14-W15, the weakest two weeks of the year, and did not incorporate the LP revert narrative. W16's CVR recovery lifted the baseline daily run rate from ~24 regs/day (W14-W15 avg) to ~35 regs/day.
+- Lesson: linear extrapolation is unreliable when a known structural change (LP revert) is live mid-forecast window. Incorporate the narrative.
+
+## Calibration Update
+- Prior note: projections have been 2-3% optimistic on regs.
+- W16 observation: W15's projection was 60% pessimistic on regs — the inverse of the prior pattern. Linear extrapolation breaks when the underlying CVR shifts structurally. Calibration should be conditional: apply the 2-3% haircut in stable weeks, not in recovery weeks.
+- For W17-W18 projections: if CVR holds at 3.8%+, use W16 rates as baseline. If CVR drops below 3.5%, revert to W14-W15 blended rate.
+
+
+## W16 Projection (refreshed from DuckDB, 2026-04-20)
+
+| Week | Days Elapsed | Projected Regs | Projected Spend | Projected CPA | MTD Regs | MTD Spend | Rationale |
+|------|--------------|----------------|------------------|---------------|----------|-----------|-----------|
+| W16 (refresh) | 18/30 | ~900 | ~$113,000 | ~$126 | 493 | $65,579 | Refreshed from live ps.v_daily for Apr 1-18. W16 daily rates: weekday 36.6 regs/$3,950, weekend 29.5 regs/$3,943. Applied to remaining 9 weekdays + 3 weekend days, minus 1 reg for Anzac Day (Sat Apr 25), minus 3% optimism calibration on regs. Polaris LP revert validated by +35% WoW CVR lift. Replaces W15's 359-reg linear extrapolation. vs OP2 (1,071 / $147,591 / $138): -16% regs, -23% spend, -9% CPA. Modestly below the ingester's 908/$113K/$124 estimate — discount for bounce-back fade. |
+
+Delta vs earlier W16 row (890/$115K/$129): negligible regs (+1%), slightly lower spend (-$2K), slightly lower CPA (-$3). Same thesis, tighter numbers after re-running against the verified daily view.
+
+## W17 Spend Recommendation (set during W16 analysis)
+
+- Recommended: $29K (+5% vs W16's $27.6K)
+- Split: Brand ~$3,600 hold, NB ~$25.5K (+6%)
+- Trigger: if NB CPA >$180 midweek, hold flat; if <$170, step W18 up 5-10%
+- Rationale: -16% regs / -23% spend vs OP2 with $126 projected CPA vs $138 target — room to lean up while unit economics hold.

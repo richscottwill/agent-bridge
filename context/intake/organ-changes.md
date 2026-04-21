@@ -219,3 +219,43 @@
 **Action items:** None. Clean organizational edit — no follow-up needed.
 
 [2026-04-17] hands.md — Sources line updated from "ABPS AI Content" to "ABPS AI Build". Aligns with soul.md deprecation note (2026-04-17: ABPS AI Content project deprecated). No cross-organ conflicts — no other body organ references the deprecated name. Edit not to heart.md/gut.md, no karpathy gating required.
+
+## 2026-04-20 — roster.md (NEW ORGAN)
+
+**Summary:** New organ file created: "Roster — People Who Matter for PS / WW Traffic Marketing." Centralized directory of people Richard works with and around. Serves as the canonical attribution and routing source — complements (does not replace) memory.md's relationship graph. Memory.md holds relationship dynamics (tone, draft style, current topics); roster.md holds the directory (name, alias, level, role, location, markets, scope).
+
+Content: 7 sections — (1) AB Paid Search Team (Brandon's 7 directs + Peter Ocampo on Mobile App); (2) AB Traffic & Marketing Pre-WBR Callout Owners (11 channels + 6 countries + 5 optional attendees, sourced from quip MMgBAzDrlVou); (3) Country/Market Leads (AU, MX, CA, JP, EU stakeholders); (4) AB Marketing Leadership (L7+); (5) Cross-Functional Partners across MCS, ABMA, MarTech, Legal, Data Science, CPS, Creative, Events, Push, Sourcing; (6) External Partners (Google, Adobe); (7) Richard's Specific Stakeholder Contacts (links to memory.md for dynamics).
+
+Includes a "How to Update This File" section (5 trigger events), cross-reference table pointing to memory.md, team-workload-distribution.md, ps-team-map.md, and DuckDB `ps.team_experiments`, plus an explicit "Known Gaps" section for missing aliases/levels/locations.
+
+**Karpathy gate:** N/A — roster.md is not gated (only heart.md and gut.md are gated).
+
+**Cross-organ consistency:**
+
+1. **roster.md ↔ memory.md — Alias data mismatch.** Memory.md already has aliases that roster.md marks as missing. Roster.md should be updated to pick these up:
+   - `Alexis Eck` → `alexieck` (memory.md line 127)
+   - `Lorena Alvarez Larrea` → `lorealea` (memory.md line 112)
+   - `Carlos Palmos` → `cpalmos` (memory.md line 135)
+   - `Harjeet Heer` → `hkheer`, L6, Sr. Program Mgr ABIX, Seattle (memory.md line 170) — roster.md shows only "Previously AU partner — stepped away"
+   - `Yun-Kang Chu` → `yunchu` (memory.md line 162)
+   - `Dwayne Palmer` → `dtpalmer` (memory.md line 143)
+   - `Andrew Wirtz` → `awirtz` (memory.md line 151)
+   
+   Roster.md's "Known Gaps" section acknowledges "most team members' Amazon logins are not captured yet" — but memory.md already has several. These should be backfilled in the next roster update. **Not a conflict (both files factually consistent where they have data), but a completeness gap.**
+
+2. **roster.md ↔ body.md — Body.md navigation not updated.** body.md does not yet reference roster.md. New organs should be registered in body.md's organ table with file path, function, and "when to read" guidance (same pattern as amazon-politics.md was registered in its 2026-04-14 entry). **Action needed:** Add roster.md to body.md's organ registry.
+
+3. **roster.md ↔ memory.md — Scope boundary is clean.** Roster.md explicitly states it supersedes "ad-hoc attribution in motherduck `ps.team_experiments` and scattered name references across body files" while deferring relationship dynamics to memory.md. No role overlap. Clean division of responsibility.
+
+4. **Level attributions are consistent** across roster.md, memory.md, and soul.md where all three have data. No contradictions on Brandon (L7), Kate (L8), Todd (L10), Stacey/Dwayne/Yun-Kang/Peter (L6), Andrew/Adi/Richard (L5), Lena (L7), Alexis (L6), Lorena/Carlos (L5).
+
+5. **Market ownership transitions match** soul.md and memory.md: Carlos → Lorena for MX as of 3/17/26 is consistently reflected across all three files.
+
+6. **Pre-WBR callout ownership is new canonical source.** The section 2 table (quip `MMgBAzDrlVou` owners) is not duplicated elsewhere in the body system. This is a net-new centralization — no conflicts to flag.
+
+**Action items:**
+- (Medium) Register roster.md in body.md organ table (file path, function, when-to-read guidance) — follow amazon-politics.md registration pattern
+- (Medium) Backfill aliases from memory.md into roster.md: alexieck, lorealea, cpalmos, hkheer, yunchu, dtpalmer, awirtz
+- (Low) Verify DuckDB `ps.team_experiments.sole_owner` values match canonical names in roster.md on next DuckDB interaction — roster.md claims to supersede these attributions
+- (Low) Confirm missing locations: Lorena, York, Alexis
+- (Low) Confirm Nick Georgijev's exact title ("AU country director" flagged as approximate in roster.md)

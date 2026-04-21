@@ -15,10 +15,14 @@ from pathlib import Path
 SCRIPT_DIR = Path(__file__).parent
 STEPS = [
     ("Extract daily data", "extract-ly-data.py"),
+    ("Write ps.forecasts → xlsx", "update-forecast-tracker.py"),
     ("Refresh forecast JSON", "refresh-forecast.py"),
     ("Refresh callout JSON", "refresh-callouts.py"),
     ("Generate command center JSON", "generate-command-center.py"),
     ("Refresh body system JSON", "refresh-body-system.py"),
+    ("Refresh state files JSON", "refresh-state-files.py"),
+    ("Refresh goals JSON", "refresh-goals.py"),
+    ("Refresh contributions JSON", "refresh-contributions.py"),
     ("Build wiki search index", "build-wiki-index.py"),
 ]
 

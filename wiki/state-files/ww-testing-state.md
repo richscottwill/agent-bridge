@@ -7,15 +7,15 @@ format: Amazon 1-2 Page Narrative (Flash Report)
 cadence: Daily refresh
 destination: OneDrive Kiro-Drive/state-files/ww-testing-state.md
 created: 2026-04-12
-updated: 2026-04-12
-data_through: 2026 W14 (Mar 29–Apr 4)
+updated: 2026-04-20
+data_through: 2026 W15 (Apr 6–12)
 ---
 <!-- DOC-0402 | duck_id: state-file-ww-testing -->
 
 # WW Paid Search Testing — State of the Business
 
-**Reporting period:** Week 14 (Mar 29–Apr 4, 2026) · **Program owner:** Richard Williams · **Primary stakeholder:** Kate Rundell (L8 Director) · **Manager:** Brandon Munday (L7)
-**Data through:** AU/WW W14 actuals; MX W13 actuals.
+**Reporting period:** Week 15 (Apr 6–12, 2026) · **Program owner:** Richard Williams · **Primary stakeholder:** Kate Rundell (L8 Director) · **Manager:** Brandon Munday (L7)
+**Data through:** AU/MX/WW W15 actuals.
 
 ---
 
@@ -41,54 +41,66 @@ This document provides the trailing-week operational state of the Amazon Busines
 
 ## State of the Business
 
-The WW PS Testing program drove 15,077 total registrations in W14 (-4.9% WoW) on $1.18M spend (+4.9% WoW) across all 10 markets. Spend +4.9% WoW against regs -4.9% WoW signals efficiency compression. DE posted a +111% bounce-back, the strongest single-market recovery in the dataset. MX declined -32.6%, the largest single-market drop. AU fell -18.3%, extending a 6-week decline streak. The five workstreams are at varying stages of maturity, with OCI Bidding nearest to full deployment and Algorithmic Ads earliest in the pipeline.
+The WW PS Testing program drove 16,626 total registrations in W15 (-3.0% WoW) on $1.23M spend (+3.9% WoW) across all 10 markets at a blended CPA of $74.03 (+7.1% WoW). Two events dominate the week: the Polaris Brand LP weblab dial-up in WW markets (4/6–4/7), and a P0 Italy ref tag regression detected during the April 16 Polaris LP sync. The Italy Polaris `/cp/ps-brand` page (launched 4/1) overwrote Italy's ref tag and routed Italian signup traffic to the AU domain; Alex VanDerStuyf (MCS) confirmed legacy Italy restored on 4/16 and Polaris Italy parked as `it/cp/ps-brand-new` in AEM. The team also confirmed the US Polaris brand page delivered +6% CVR vs the legacy MCS version (21-day pre/post March 24 launch) — the first statistically validated win from the Polaris rollout.
+
+A second W15 event — the Google MCC cross-child learning investigation (Sam Tangri, 4/17) — flagged a coordinated NB spend drop on 4/13 in US/UK/DE (US ~25K vs 70K weekly average, with recovery 4/14). Jing Shi's diagnosis: a US data exclusion extended from 4/7 to 4/13 that propagated to same-MCC child accounts. This is an OCI measurement concern — data exclusions affecting Smart Bidding learning across geographies — not a performance regression. Mike Babich (Google) is investigating. Implication: W15 WW weekly numbers may reflect a transient OCI learning artifact that normalizes in W16.
 
 **Input metrics (controllable levers — by workstream):**
 
 | Workstream | Active Markets | Status | Key Input |
 |---|---|---|---|
-| OCI Bidding | US, UK, DE, FR, IT, ES, JP at 100% | CA launch Apr 7. AU May 2026. MX TBD. | OCI conversion signal feeding Smart Bidding |
-| Modern Search (Ad Copy) | UK Phase 1 complete. EU4 translations done. | Phase 2 rollout underway | Ad copy variants by market |
-| Audiences & Lifecycle | US (Engagement channel live) | F90 Lifecycle next. Legal SIMs pending. | Audience segment targeting + lifecycle triggers |
-| User Experience | WW (Polaris Brand LP dial-up Apr 6–7) | Baloo early access launched 3/30 | Landing page variants, registration flows |
-| Algorithmic Ads | US (DG CPC testing) | AI Max US test planned Q2 2026 (4d overdue) | Demand Gen CPC bids, AI Max campaign structure |
+| OCI Bidding | US/UK/DE/FR/IT/ES/JP at 100%; CA at 100% post-4/7 launch | 8 markets at 100%; AU May 2026; MX TBD | OCI signal feeding Smart Bidding; cross-MCC learning flagged 4/17 |
+| Modern Search (Ad Copy) | UK Phase 1 complete; UK Phase 2 launched 3/6; IT launched 2/19; EU4 translations complete | Evidence-based messaging from Sole Proprietor study | Ad copy variants by market |
+| Audiences & Lifecycle | US Engagement channel validated ($765K iOPS 2025) | F90 Lifecycle blocked on Legal SIMs | Audience segment targeting |
+| User Experience | Polaris WW dial-up 4/6–4/7 complete; Baloo early access live 3/30; Italy ref tag regression 4/16 | US Polaris delivered +6% CVR vs legacy | Landing page variants |
+| Algorithmic Ads | DG CPC testing US | AI Max US design 6 days overdue | DG bids, AI Max campaign structure |
 
 **Output metrics (lagging results — by workstream):**
 
 | Workstream | Key Result | Confidence | Impact |
 |---|---|---|---|
-| OCI Bidding — US | +24% reg uplift, ~50% NB CPA improvement, +32,047 regs, $16.7MM OPS | High | Validated at scale |
-| OCI Bidding — UK | +23% reg uplift | High | Validated at scale |
-| OCI Bidding — DE | +18% reg uplift | High | Validated at scale |
-| Ad Copy — UK Phase 1 | +86% CTR, +31% regs | High | Phase 1 complete |
-| Ad Copy — IT | Inconclusive | Low confidence | Insufficient sample |
-| Audiences — Engagement | $765K iOPS 2025 | High | Channel validated |
-| Audiences — Prime Day 2025 | $329K OPS at 644% ROAS | High | Event validated |
-| UX — Gated Guest | -61% conversion | High (negative) | Failed — killed |
-| UX — In-context reg | +13.6K annualized regs | Medium | Scaling |
+| OCI Bidding — US | +24% reg uplift, +32,047 regs, $16.7MM OPS | High | Scaled |
+| OCI Bidding — UK | +23% reg uplift | High | Scaled |
+| OCI Bidding — DE | +18% reg uplift | High | Scaled |
+| OCI Bidding — FR/IT/ES/JP | 100% dial-up complete 3/31 | Measuring | First QBR goal 2026 achieved |
+| OCI Bidding — CA | Launched 4/7; E2E testing complete | In-flight | Dial-up active |
+| Ad Copy — UK Phase 1 | +86% CTR, +31% regs | High | Complete |
+| Ad Copy — IT | Inconclusive (insufficient sample) | Low | Running |
+| Audiences — Engagement | $765K iOPS 2025 | High | Validated |
+| UX — Polaris US | +6% CVR vs legacy (21-day pre/post 3/24) | High | Confirmed |
+| UX — Italy Polaris ref tag | P0 regression detected 4/16; legacy restored | — | Rework required |
+| UX — Gated Guest | -61% conversion | High (negative) | Killed |
+| UX — In-context registration | +13.6K annualized regs | Medium | Scaling |
 | Algorithmic Ads — DG CPC | $0.39 vs $2.43 keyword (-84% CPC) | Early | Volume TBD |
 
-OCI Bidding remains the highest-impact workstream: US alone generated +32,047 incremental registrations and $16.7MM in Ordered Product Sales. The 7 markets at 100% OCI (US, UK, DE, FR, IT, ES, JP) represent the program's proven foundation. CA is on track for April 7 launch. AU targets May 2026 but has no MCC created yet. MX timeline is TBD with no MCC created.
+OCI Bidding now has 8 of 10 markets at 100%. CA launched on schedule 4/7 with E2E testing complete. AU remains at May 2026 target with no MCC; MX remains TBD with no MCC. The Ad Copy workstream continues to produce the strongest evidence base in Modern Search: UK AMZ delivered +86% CTR and +31% registrations, Phase 2 launched in UK on 3/6, EU4 translations completed 3/20. IT remains low-confidence due to sample size — no scale decision this cycle.
 
-The Ad Copy workstream delivered strong UK Phase 1 results (+86% CTR, +31% registrations) but IT produced low-confidence results due to insufficient sample size. EU4 translations are complete and Phase 2 rollout is underway. The Audiences workstream validated the Engagement channel at $765K iOPS for 2025 and Prime Day 2025 at $329K OPS with 644% ROAS. The F90 Lifecycle program is next but blocked on Legal SIMs.
+UX is the workstream with the most W15 activity. Polaris WW dial-up ran 4/6–4/7. The US Polaris page has now delivered +6% CVR vs legacy at scale — the first statistically-valid win from the brand LP rebuild. The Italy ref tag regression is a setback but isolated: Dwayne Palmer (MCS) has restored legacy Italy, and the April 16 sync aligned on 10 Polaris LP template changes (benefit cards replacing percolate widget, subheadline standardization, FAQ updates, closing CTA) to apply globally. Adi Thakur (UX), Stacey Gu (OCI), and Dwayne Palmer attended the April 16 sync alongside Richard and Brandon.
 
-The UX workstream produced the program's clearest failure signal: Gated Guest registration flow reduced conversion by 61%, confirming that friction-adding registration gates destroy funnel performance. This test was killed. In contrast, the in-context registration approach projects +13.6K annualized registrations. Baloo early access launched March 30 and Polaris Brand LP is in WW rollout with weblab dial-up scheduled for April 6–7.
+Hedy also logged a 4/17 AI Tool Demo session (51 min, 7 team members) where Richard demoed a code-based AI platform for WBR callout generation. Team aligned on adoption for WBR support, Markdown as the standard output format, and a shared SharePoint prompt repository. 6 team members committed to testing against their domains (Adi/MX by 4/25, Andrew/UK by 4/28, Stacey/Polaris by 5/2, Yun-Kang/Adobe NB, Dwayne/MCS, Peter/Apps). This is a Level 3 (Team Automation) advance — the program's first tool with committed teammate adoption.
 
-Algorithmic Ads is the earliest-stage workstream. Demand Gen CPC testing shows $0.39 CPC versus $2.43 for keyword campaigns (-84%), but volume and conversion quality are unvalidated. The AI Max US test design is planned for Q2 2026 but the design document is 4 days overdue.
+<!-- WBR-OWNED:prediction-scoring START -->
+<!-- WBR-OWNED:prediction-scoring END -->
 
-**Cost of inaction (null case):** If the Testing Approach document does not ship to Brandon within the next 7 days, the April 16 meeting cancellation becomes a permanent delay rather than a scheduling blip. The document (v5, 8.4/10 PUBLISH verdict) represents 4 months of methodology work; each week of delay is a week where the PS team lacks a formalized, leadership-endorsed testing framework. Without it, test prioritization remains ad hoc, market teams lack a shared methodology reference, and Kate's org has no artifact demonstrating PS testing maturity. Separately, the AI Max test design is 4 days overdue. Each additional day of delay compresses the Q2 2026 US pilot timeline, risking a slip to Q3 that would push learnings past the H2 planning cycle. On OCI, AU's May 2026 target requires MCC creation in the next 2–3 weeks; without it, the launch slips to Q3 and AU continues operating without conversion signal optimization — forgoing the 18–24% reg uplift observed in comparable markets.
+<!-- WBR-OWNED:forecast START -->
+<!-- WBR-OWNED:forecast END -->
+
+<!-- WBR-OWNED:signal-flags START -->
+<!-- WBR-OWNED:signal-flags END -->
+
+**Cost of inaction (null case):** The Testing Approach document (v5, 8.4/10 PUBLISH verdict) has been in draft for 4 months. The April 16 Polaris meeting did not include it; the document remains unsent to Brandon. Per Richard's own Friday brief, the visibility-avoidance pattern is now at 12 days and the L1 streak at 20 workdays at zero. Each week of delay extends the gap between PS testing methodology maturity and its formal leadership endorsement. Separately, the AI Max test design is now 6 days overdue (Apr 14 deadline). Each additional day compresses the Q2 2026 US pilot window, risking a slip to Q3 that would push learnings past the H2 planning cycle. On OCI, AU's May 2026 launch requires MCC creation within the next 2 weeks; without it, launch slips to Q3 and AU continues operating without OCI — forgoing the 18–24% reg uplift validated in US/UK/DE (now also CA).
 
 ---
 
 ## Lessons Learned
 
-Three operational insights from the trailing four-week window (W11–W14) inform the immediate tactical posture:
+Three operational insights from the trailing four-week window (W12–W15) inform the immediate tactical posture:
 
-1. **OCI produces consistent 18–24% reg uplift across geographies, confirming the methodology is market-agnostic.** US delivered +24%, UK +23%, DE +18%. The variance is narrow enough to project similar results for CA (launching April 7), AU (May 2026), and eventually MX. The implication: OCI expansion is not a question of whether it works but how fast the remaining markets can be onboarded. The binding constraint is MCC creation and Google Ads account setup, not methodology validation.
+1. **Polaris LP rollout produced its first validated positive result (+6% CVR in US) and its first production regression (Italy ref tag) in the same two-week window.** The US result (21-day pre/post March 24) is the first statistically-valid Polaris win. The Italy regression is operationally isolated (legacy restored within 24 hours of detection) but strategically costly: it demonstrates that the rollout process lacks an automated ref tag audit step. Every market rollout prior to Italy (US 3/24, EU3 preparations) could have contained the same defect undetected. The corrective action is a systematic ref tag audit applied to AU (next in the rollout queue per Brandon's priority order) before any further Polaris market launches. The US +6% CVR result is the evidence base that justifies continuing the rollout; the Italy regression defines the gate that precedes each market.
 
-2. **Failed tests produce the clearest strategic signals when documented with the same rigor as wins.** Gated Guest's -61% conversion result was the most actionable finding in the UX workstream — it definitively eliminated a registration flow variant that multiple stakeholders had advocated for. The lesson is not that the test failed but that the failure, properly documented, prevented a WW rollout that would have destroyed conversion at scale. The Testing Approach document codifies this principle: every test gets a written status regardless of outcome.
+2. **OCI reached 8 of 10 markets at 100% with CA's 4/7 launch — the program is in its measurement phase, not its expansion phase, for the next 4–6 weeks.** FR/IT/ES/JP at 100% on 3/31 and CA at 100% on 4/7 close the first 2026 QBR goal. The remaining expansion work is AU (May 2026, MCC not yet created) and MX (TBD, MCC not yet created). The binding constraint for both is MCC creation, not methodology. The 4/17 cross-MCC data exclusion incident (Sam Tangri → Jing Shi → Mike) surfaces a measurement-phase concern: Google's Smart Bidding prioritizes same-MCC learning, so US data exclusions can transiently distort UK/DE/FR performance for a day or two. This does not invalidate OCI uplift figures but does require acknowledgment in weekly readouts when US data exclusion events occur.
 
-3. **The Testing Approach document is the single highest-leverage artifact the PS team can ship, and it has been in draft for 4 months.** The v5 document scored 8.4/10 on the PUBLISH verdict. It is ready. The April 16 meeting with Kate was canceled, but the document does not require a meeting to ship — it requires Brandon's review and endorsement. Every week the document sits unshipped is a week where the PS team's testing methodology exists only in Richard's head and scattered Quip docs rather than in a leadership-endorsed, team-wide reference. This is the hard thing.
+3. **The April 17 AI Tool Demo with 7 team members committing to adoption is the first Level-3 (Team Automation) traction the program has produced.** Adi (MX), Andrew (UK), Stacey (Polaris), Yun-Kang (Adobe NB), Dwayne (MCS), and Peter (Apps) each committed to a tool validation deliverable with a specific date range. Hedy captured the session. The Markdown-standardized output and shared SharePoint prompt repository are the structural decisions that make this adoption durable rather than a one-off novelty. If 4 of the 6 deliverables ship on schedule by early May, the tool graduates from "Richard's tool" to "PS team standard" — which is the L3 goal criterion.
 
 ---
 
@@ -98,35 +110,43 @@ Three operational insights from the trailing four-week window (W11–W14) inform
 
 | Priority | Action | Owner | Deadline | Goal Link |
 |---|---|---|---|---|
-| 1 | Ship Testing Approach doc (v5) to Brandon for review — the hard thing | Richard | Apr 18 | Goal 2 |
-| 2 | Complete AI Max test design document (4 days overdue) | Richard | Apr 14 | Goal 4 |
-| 3 | Validate CA OCI launch readiness for Apr 7 go-live | Richard + CA market team | Apr 7 | Goal 3 |
-| 4 | Execute Polaris Brand LP weblab dial-up (WW rollout, Apr 6–7) | UX workstream | Apr 7 | Goal 1 |
-| 5 | Submit Legal SIMs for F90 Lifecycle program to unblock Audiences workstream | Richard | Apr 18 | Goal 1 |
+| 1 | Ship Testing Approach doc (v5) to Brandon for review — the hard thing, 20 days overdue | Richard | Apr 21 | Goal 2, L1 streak |
+| 2 | Complete AI Max test design document (6 days overdue from Apr 14) | Richard | Apr 22 | Goal 4 |
+| 3 | Apply Italy ref tag audit methodology to AU Polaris page before AU rollout proceeds | Richard + Alex VanDerStuyf | Apr 22 | Goal 1 |
+| 4 | Dial up WW weblab for Polaris template per finalized April 16 sync decisions (benefit cards, subheadline, FAQs, closing CTA) | Stacey + Dwayne | Apr 24 | Goal 1 |
+| 5 | Submit Legal SIMs for F90 Lifecycle program to unblock Audiences workstream | Richard | Apr 22 | Goal 1 |
+| 6 | Share master WBR prompt and Markdown standard with team via SharePoint (from 4/17 AI Tool Demo) | Richard | Apr 21 | Goal 1, L3 |
+| 7 | Follow up with Mike Babich (Google) on cross-MCC learning impact of US 4/7 + 4/13 data exclusions | Richard | Apr 22 | Goal 1 |
 
 **Blocked items:**
-- AI Max test design: 4 days overdue. Design document incomplete. Blocks Q2 2026 US pilot timeline.
+- AI Max test design: 6 days overdue. Design document incomplete. Blocks Q2 2026 US pilot timeline.
 - AU OCI: May 2026 target but no MCC created. Cannot begin account setup until MCC exists.
 - MX OCI: Timeline TBD. No MCC created. Lowest priority in the OCI expansion queue.
 - F90 Lifecycle: Legal SIMs not submitted. Cannot launch lifecycle targeting without Legal clearance.
 - Ad Copy IT: Low-confidence results. Insufficient sample size prevents scaling decision.
+- Italy Polaris: Legacy restored; new template parked in AEM as `it/cp/ps-brand-new` pending ref tag audit.
+- Cross-MCC measurement: US data exclusions (4/7, 4/13) may transiently distort EU5 OCI reads pending Mike Babich's review.
 
 **Stakeholder actions required:**
-- Brandon: Review and endorse Testing Approach doc (v5). This is the gating action for formalizing PS testing methodology.
-- Kate: Reschedule or async-approve the Testing Approach discussion (Apr 16 meeting canceled).
-- CA market team: Confirm OCI launch readiness and Google Ads account configuration for Apr 7.
+- Brandon: Review and endorse Testing Approach doc (v5). Expected at Tuesday 4/21 1:30pm PT 1:1 along with Outbound Marketing Goals xlsx overlay question. This is the gating action for formalizing PS testing methodology.
+- Kate: Async review of Testing Approach doc once Brandon endorses. April 16 sync is not rescheduled; ship-first-discuss-later is the path.
+- Dwayne Palmer (MCS): Maintain legacy Italy LP until ref tag audit methodology validated for AU.
+- Alex VanDerStuyf (MCS): Extend Italy ref tag detection methodology to AU Polaris page.
 - Legal: Process F90 Lifecycle SIMs to unblock Audiences workstream.
+- Mike Babich (Google): Confirm data-exclusion impact on cross-MCC Smart Bidding learning.
 
 ---
 
-## Appendix A: Weekly WW Trend (W11–W14)
+## Appendix A: Weekly WW Trend (W12–W15)
 
-| Week | WW Regs | WoW Δ | WW Spend | WoW Δ | Notes |
-|---|---|---|---|---|---|
-| W11 | 16,200 | — | $1.10M | — | Baseline |
-| W12 | 15,800 | -2.5% | $1.08M | -1.8% | Seasonal softness |
-| W13 | 15,855 | +0.3% | $1.12M | +3.7% | DE bounce-back began |
-| W14 | 15,077 | -4.9% | $1.18M | +4.9% | MX -32.6%, AU -18.3%, DE +111% |
+| Week | WW Regs | WoW Δ | WW Spend | WoW Δ | CPA | Notes |
+|---|---|---|---|---|---|---|
+| W12 | 15,800 | — | $1.08M | — | $68 | Seasonal softness |
+| W13 | 15,719 | -0.5% | $1.13M | +4.3% | $71.87 | DE bounce-back began |
+| W14 | 17,137 | +9.0% | $1.18M | +4.9% | $69.15 | Semana Santa offset in MX/AU |
+| W15 | 16,626 | -3.0% | $1.23M | +3.9% | $74.03 | Polaris dial-up; Italy ref tag; US data exclusion 4/13 |
+
+W15 aggregates 10 markets (US, UK, DE, FR, IT, ES, JP, CA, AU, MX). Spend continued to rise while regs softened modestly, pushing blended CPA to $74.03. The US data exclusion on 4/13 (Sam Tangri, Jing Shi Slack thread) likely accounts for a portion of the reg softness; Mike Babich (Google) is investigating cross-MCC learning propagation.
 
 ## Appendix B: OCI Rollout Status by Market
 
@@ -135,22 +155,22 @@ Three operational insights from the trailing four-week window (W11–W14) inform
 | US | 100% | Completed | +24% | +32,047 regs, $16.7MM OPS |
 | UK | 100% | Completed | +23% | Validated at scale |
 | DE | 100% | Completed | +18% | Validated at scale |
-| FR | 100% | Completed | — | Live, measuring |
-| IT | 100% | Completed | — | Live, measuring |
-| ES | 100% | Completed | — | Live, measuring |
-| JP | 100% | Completed | — | Live, measuring |
-| CA | On track | Apr 7, 2026 | Projected 18–24% | MCC ready |
+| FR | 100% | 3/31 | Measuring | Dial-up complete; first QBR goal |
+| IT | 100% | 3/31 | Measuring | Dial-up complete; first QBR goal |
+| ES | 100% | 3/31 | Measuring | Dial-up complete; first QBR goal |
+| JP | 100% | Completed | Measuring | MCM complete |
+| CA | 100% | 4/7 | Measuring | E2E testing complete; in-flight |
 | AU | Planned | May 2026 | Projected 18–24% | No MCC created |
 | MX | TBD | TBD | Projected 18–24% | No MCC created |
 
 ## Appendix C: Monthly Projection — WW Testing Impact
 
-| Metric | March Actual | April Projection | Notes |
-|---|---|---|---|
-| WW Regs (all markets) | ~62,000 | ~60,000 | Seasonal softness expected |
-| OCI-attributed regs | ~38,000 | ~40,000 | CA launch adds incremental |
-| Active tests | 12 | 14 | AI Max + F90 Lifecycle if unblocked |
-| Tests with written status | 9/12 (75%) | 14/14 (100%) target | Goal 1 |
+| Metric | March Actual | April MTD (thru W15) | April Projection | Notes |
+|---|---|---|---|---|
+| WW Regs (all markets) | ~62,000 | 16,626 (W15 only) | ~61,000 | CA at 100% OCI adds incremental |
+| OCI-attributed regs | ~38,000 | — | ~42,000 | CA launched 4/7; learning period active |
+| Active tests | 12 | 14 | 14 | AI Max + F90 Lifecycle still blocked |
+| Tests with written status | 9/12 (75%) | 10/14 (71%) | 14/14 (100%) target | Goal 1; drift from last report |
 
 ## Appendix D: Workstream Summary — Test Results
 
@@ -166,7 +186,9 @@ Three operational insights from the trailing four-week window (W11–W14) inform
 | UX | Gated Guest | WW | -61% conversion | High | Killed |
 | UX | In-context registration | WW | +13.6K annualized | Medium | Scaling |
 | UX | Baloo early access | WW | Launched 3/30 | Early | Measuring |
-| UX | Polaris Brand LP | WW | Dial-up Apr 6–7 | Early | Rollout |
+| UX | Polaris Brand LP — US | WW | +6% CVR vs legacy (21-day pre/post 3/24) | High | Scaled |
+| UX | Polaris Brand LP — WW weblab | WW | Dial-up 4/6–4/7 complete | Early | Measuring |
+| UX | Polaris Brand LP — Italy | IT | Ref tag regression; legacy restored 4/16 | — | Rework |
 | Algorithmic Ads | DG CPC | US | $0.39 vs $2.43 CPC (-84%) | Early | Volume TBD |
 
 ## Appendix E: Change Log (2026 YTD — Testing Program)
@@ -176,13 +198,25 @@ Three operational insights from the trailing four-week window (W11–W14) inform
 | 1/15 | OCI launched in FR, IT, ES | OCI Bidding | Market teams |
 | 2/1 | Ad Copy UK Phase 1 started | Modern Search | Richard |
 | 2/15 | Engagement channel validated ($765K iOPS) | Audiences | Richard |
+| 2/19 | Ad Copy IT launched | Modern Search | Andrew |
 | 3/1 | Gated Guest test killed (-61%) | UX | Richard |
 | 3/5 | In-context reg test scaled | UX | Richard |
+| 3/6 | Ad Copy UK Phase 2 launched | Modern Search | Andrew |
 | 3/15 | Ad Copy UK Phase 1 complete (+86% CTR) | Modern Search | Richard |
-| 3/20 | EU4 translations completed | Modern Search | Richard |
+| 3/20 | EU4 translations completed | Modern Search | Andrew |
+| 3/24 | US Polaris brand page switched to new LP | UX | Stacey/Alex |
 | 3/25 | DG CPC testing started | Algorithmic Ads | Richard |
 | 3/30 | Baloo early access launched | UX | Richard |
-| 4/6 | Polaris Brand LP weblab dial-up (WW) | UX | Richard |
+| 3/31 | OCI FR/IT/ES at 100%; first 2026 QBR goal achieved | OCI Bidding | Stacey/Brandon |
+| 4/1 | Italy Polaris LP launched (pre-ref-tag-audit) | UX | MCS |
+| 4/6–4/7 | Polaris Brand LP WW weblab dial-up | UX | UX workstream |
+| 4/7 | CA OCI launched, dial-up active | OCI Bidding | Stacey |
+| 4/13 | US data exclusion extended (from 4/7); flagged cross-MCC impact on UK/DE | OCI Bidding | Jing Shi |
+| 4/16 | Italy Polaris ref tag regression detected; legacy restored same day | UX | MCS + Richard |
+| 4/16 | Polaris LP global template decisions finalized (10 changes) | UX | Cross-functional |
+| 4/17 | AI Tool Demo with 6 team members committed to testing | L3 Team Automation | Richard |
+| 4/17 | Sam Tangri raised MCC cross-child learning concern; Mike investigating | OCI Bidding | Sam/Jing |
+| 4/17 | Adi requested Kiro technical setup 1:1 | L3 Team Automation | Adi/Richard |
 
 ## Appendix F: Variance Bridge — Methodology Validation
 

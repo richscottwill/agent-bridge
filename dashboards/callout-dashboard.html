@@ -8,7 +8,10 @@
 <meta http-equiv="Expires" content="0">
 <title>WBR Callout Dashboard — All Markets</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3/dist/chartjs-plugin-annotation.min.js"></script>
+<script src="canon-chart.js?v=2026-04-20"></script>
 <link rel="preload" href="data/callout-data.json" as="fetch" crossorigin>
+<link rel="preload" href="data/forecast-data.json" as="fetch" crossorigin>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#e0e0e0}
@@ -114,8 +117,11 @@ tr:hover{background:#1f222b}
 </div>
 <div class="ts" id="genTs"></div>
 <script>
-let DATA=null,curMarket=null,curWeek=null,chart=null;
-fetch('data/callout-data.json?'+Date.now()).then(r=>r.json()).then(d=>{DATA=d;init()})
+let DATA=null,FORECAST=null,curMarket=null,curWeek=null,chart=null,chartMode='default';
+Promise.all([
+  fetch('data/callout-data.json?'+Date.now()).then(r=>r.json()),
+  fetch('data/forecast-data.json?'+Date.now()).then(r=>r.json()),
+]).then(([cd,fc])=>{DATA=cd;FORECAST=fc;init()})
   .catch(()=>{document.getElementById('mainGrid').innerHTML='<div class="card card-full empty-state bad">Failed to load data</div>'});
 
 function init(){
@@ -167,7 +173,7 @@ function render(){
   var calloutHtml=(c.full_callout||c.headline||'').replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
   html+='<div class="card card-full" id="sec-callout" style="border-left:3px solid #4a9eff"><h3>'+curWeek+' \u2014 '+curMarket+'<span style="color:#888;font-weight:400;font-size:14px;float:right">'+(c.period||'')+'</span></h3><div style="font-size:16px;line-height:1.6">'+calloutHtml+'</div></div>';
   // Chart
-  html+='<div class="card card-full" id="sec-trend"><h3>Weekly Trend</h3><div class="chart-box"><canvas id="trendChart"></canvas></div></div>';
+  html+='<div class="card card-full" id="sec-trend"><h3 style="display:flex;justify-content:space-between;align-items:center">Weekly Trend <span style="font-weight:400;font-size:13px"><button id="chartModeBtn" class="tab" style="font-size:12px;padding:3px 10px">Show calibration detail</button></span></h3><div class="chart-box"><canvas id="trendChart"></canvas></div></div>';
   // Brand / NB
   html+=channelCard('Brand',c.brand_detail,'sec-channels');
   html+=channelCard('Nonbrand',c.nb_detail);
@@ -316,57 +322,24 @@ function renderStake(st){
 }
 
 function renderChart(c){
-  const ctx=document.getElementById('trendChart');if(!ctx)return;if(chart)chart.destroy();
-  const cd=c.chart_data||[];
-  const maxWk=DATA.max_wk||15;
-  if(!cd.length){
-    // Fallback to old trend data
-    const trend=c.weekly_trend||{};
-    const sTrend=c.spend_trend||{};
-    const tw=Object.keys(trend).sort((a,b)=>parseInt(a.slice(1))-parseInt(b.slice(1)));
-    if(!tw.length) return;
-    const ds=[{label:'Registrations',data:tw.map(w=>trend[w]),borderColor:'#4a9eff',backgroundColor:'rgba(74,158,255,0.08)',borderWidth:2.5,pointRadius:3,tension:0.3,fill:true}];
-    chart=new Chart(ctx,{type:'line',data:{labels:tw,datasets:ds},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#888',font:{size:11}}}},scales:{x:{grid:{color:'#1f222b'},ticks:{color:'#666'}},y:{grid:{color:'#1f222b'},ticks:{color:'#666'}}}}});
-    return;
-  }
-  const labels=cd.map(w=>'W'+w.wk);
-  const actuals=cd.map(w=>w.regs);
-  const preds=cd.map(w=>w.wk>maxWk?w.pred_regs:null);
-  const ciLo=cd.map(w=>w.wk>maxWk?w.ci_lo:null);
-  const ciHi=cd.map(w=>w.wk>maxWk?w.ci_hi:null);
-  const op2=cd.map(w=>w.op2_regs);
-  const spendActual=cd.map(w=>w.spend?w.spend/1000:null);
-  const spendPred=cd.map(w=>w.wk>maxWk&&w.pred_spend?w.pred_spend/1000:null);
-
-  const ds=[
-    {label:'Registrations',data:actuals,borderColor:'#f97316',backgroundColor:'rgba(249,115,22,0.06)',borderWidth:2.5,pointRadius:2,tension:0.3,yAxisID:'y',fill:true,spanGaps:false},
-    {label:'Registrations (proj)',data:preds,borderColor:'#f97316',backgroundColor:'transparent',borderWidth:2,borderDash:[6,3],pointRadius:0,tension:0.3,yAxisID:'y',spanGaps:false},
-    {label:'CI High',data:ciHi,borderColor:'transparent',backgroundColor:'rgba(249,115,22,0.06)',borderWidth:0,pointRadius:0,fill:'+1',tension:0.3,yAxisID:'y'},
-    {label:'CI Low',data:ciLo,borderColor:'transparent',backgroundColor:'rgba(249,115,22,0.06)',borderWidth:0,pointRadius:0,fill:'-1',tension:0.3,yAxisID:'y'},
-    {label:'Spend ($K)',data:spendActual,borderColor:'#4a9eff',backgroundColor:'transparent',borderWidth:2,pointRadius:2,pointBackgroundColor:'#4a9eff',tension:0.3,yAxisID:'y1',spanGaps:false},
-    {label:'Spend proj ($K)',data:spendPred,borderColor:'#4a9eff',backgroundColor:'transparent',borderWidth:1.5,borderDash:[4,3],pointRadius:0,tension:0.3,yAxisID:'y1',spanGaps:false},
-    {label:'OP2 Target',data:op2,borderColor:'#6c7086',backgroundColor:'transparent',borderWidth:1.5,borderDash:[3,3],pointRadius:0,tension:0,yAxisID:'y'},
-  ];
-
-  chart=new Chart(ctx,{type:'line',data:{labels:labels,datasets:ds},options:{
-    responsive:true,maintainAspectRatio:false,
-    plugins:{
-      legend:{labels:{color:'#888',font:{size:11},filter:item=>!['CI High','CI Low','Registrations (proj)','Spend proj ($K)'].includes(item.text)}},
-      annotation:maxWk?{annotations:{nowLine:{type:'line',xMin:maxWk-1,xMax:maxWk-1,borderColor:'rgba(74,222,128,0.4)',borderWidth:2,borderDash:[4,4],label:{display:true,content:'Now',color:'#4ade80',font:{size:10},position:'start'}}}}:{}
-    },
-    scales:{
-      x:{grid:{color:'#1f222b'},ticks:{color:'#666',font:{size:10},maxTicksLimit:26}},
-      y:{position:'left',grid:{color:'#1f222b'},ticks:{color:'#666'},title:{display:true,text:'Registrations',color:'#f97316'}},
-      y1:{position:'right',grid:{display:false},ticks:{color:'#4a9eff',callback:v=>'$'+v+'K'},title:{display:true,text:'Spend ($K)',color:'#4a9eff'}}
-    }
-  }});
-
-  // Highlight selected week
-  const ci=cd.findIndex(w=>'W'+w.wk===curWeek);
-  if(ci>=0&&chart.data.datasets[0].data[ci]!=null){
-    chart.data.datasets[0].pointBackgroundColor=cd.map((w,i)=>i===ci?'#fff':'#f97316');
-    chart.data.datasets[0].pointRadius=cd.map((w,i)=>i===ci?6:2);
-    chart.update();
+  // Canon chart — data comes from forecast-data.json (predictions_history + weekly).
+  // The callout entry 'c' is only used for highlighting the selected week.
+  if(!FORECAST){return}
+  chart = CanonChart.render('trendChart', {
+    forecastData: FORECAST,
+    market: curMarket,
+    mode: chartMode,
+    highlightWeek: curWeek,
+    chartInstance: chart,
+  });
+  // Wire up the mode toggle (button is re-rendered with the card each render)
+  var btn = document.getElementById('chartModeBtn');
+  if(btn){
+    btn.textContent = chartMode === 'calibration' ? 'Show default view' : 'Show calibration detail';
+    btn.onclick = function(){
+      chartMode = chartMode === 'calibration' ? 'default' : 'calibration';
+      renderChart(c);
+    };
   }
 }
 </script>

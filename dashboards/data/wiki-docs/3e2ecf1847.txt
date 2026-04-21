@@ -42,3 +42,39 @@ OP2: 2,360 regs | $164,435 spend | $70 CPA
 | —    | —         | —      | —       | —      | —         |
 
 WMAPE: — | Calibration: —
+
+
+---
+
+## Apr 2026
+
+OP2: 1,920 regs | $144,561 spend | $75 CPA
+
+### Registrations
+
+| Week | Days  | Projected | MTD   | vs OP2 |     |
+| ---- | ----- | --------- | ----- | ------ | --- |
+| W16  | 18/30 | 2,470     | 1,498 | +29%   | 🟢   |
+
+### Spend
+
+| Week | Days  | Projected | MTD      | vs OP2 |     |
+| ---- | ----- | --------- | -------- | ------ | --- |
+| W16  | 18/30 | $165,000  | $100,796 | +14%   | 🔴   |
+
+### CPA
+
+| Week | Days  | Projected | OP2 |     |
+| ---- | ----- | --------- | --- | --- |
+| W16  | 18/30 | $67       | $75 | 🟢   |
+
+### Rationale
+- W16: Post-FY normalization continuing. MTD anchored to `ps.v_monthly` (1,498 regs / $100,796 through Apr 18). W15-W16 weekday avg ~95 regs/$6.5K, weekend ~46 regs/$2.5K. 12 days remaining: 7 clean weekdays + 1 GW bridge (Apr 30, -5%) + Apr 29 Showa Day (-18%, LY W18 measured -18.6%) + 3 weekends. Brand CPC falling -10% WoW two weeks running, expected to hold through W17. JP pacing +29% vs OP2 regs at -11% vs OP2 CPA. Golden Week W18 falls in May.
+
+### Accuracy (after month closes)
+
+| Week | Proj Regs | Actual | Error % | Weight | Wtd Error |
+| ---- | --------- | ------ | ------- | ------ | --------- |
+| —    | —         | —      | —       | —      | —         |
+
+WMAPE: — | Calibration: —

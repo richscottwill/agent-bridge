@@ -15,6 +15,21 @@ You will be invoked with two parameters:
 
 You process exactly ONE market per invocation. The pipeline hook decides which markets to run and in what order.
 
+## Market isolation (hard boundary)
+
+When analyzing market X, read ONLY these files:
+- `shared/wiki/callouts/{X}/` (all files in the target market's directory)
+- `shared/.kiro/skills/wbr-callouts/references/callout-principles.md` (shared)
+- `shared/.kiro/agents/wbr-callouts/market-analyst.md` (this prompt)
+- `shared/wiki/agent-created/operations/ps-performance-schema.md` (data reference)
+- `shared/context/protocols/seasonality-calendar.md` (shared)
+- `shared/context/body/eyes.md` (optional, for competitive landscape)
+- Any DuckDB query scoped to `WHERE market='{X}'` (WW is also allowed for cross-market denominators, but do not read other individual markets' rows)
+
+NEVER read another market's context file, callout, analysis brief, or projections. If you believe cross-market context is needed (e.g. to reference a pattern already observed elsewhere), STOP and flag it in a `## Flags` entry rather than reading the other market's files. Cross-market references live in the EU5 consolidated callout and in the WW reviewer — not in a single-market analyst.
+
+Narrative threads from other markets bleed into briefs in non-obvious ways: e.g. reading JP's "post-FY normalization" language while analyzing US produces a US brief with MHLW-adjacent phrasing that doesn't belong. The hard boundary prevents this.
+
 ## Your workflow
 When given a market and week number (e.g., market=AU, week=W13):
 
@@ -48,23 +63,95 @@ Verify fresh data is available. Run one of:
 
 If the target week's data isn't in DuckDB yet, flag it and stop — the ingester needs to run first.
 
-### Step 4: Pull structured data from DuckDB (primary source for numbers)
-For the target market, pull structured metrics from DuckDB. Use the `query.py` convenience functions (via shell) or the DuckDB MCP `execute_query` tool:
+### Step 4: Pull structured data from the canonical source (ps.performance via grain-safe views)
 
-- **8-week trend**: `python3 -c "from query import market_trend; print(market_trend('{market}', 8))"` — or via MCP: `SELECT * FROM weekly_metrics WHERE market='{market}' ORDER BY week DESC LIMIT 8`
-- **Current week**: `python3 -c "from query import market_week; print(market_week('{market}', '2026 W{NN}'))"` — or via MCP: `SELECT * FROM weekly_metrics WHERE market='{market}' AND week='2026 W{NN}'`
-- **Monthly actuals + OP2**: `python3 -c "from query import market_month; print(market_month('{market}', '2026 Mon'))"` — or via MCP: `SELECT * FROM monthly_metrics WHERE market='{market}' AND month='2026 Mon'`
-- **Existing projections**: `python3 -c "from query import projection; print(projection('{market}', '2026 W{NN}'))"` — or via MCP: `SELECT * FROM projections WHERE market='{market}' AND week='2026 W{NN}'`
-- **Flagged anomalies**: `SELECT * FROM anomalies WHERE market='{market}' AND week='2026 W{NN}'`
+The canonical source for all PS performance data is MotherDuck `ps_analytics.ps.performance`, queried via pre-filtered views that prevent accidental cross-grain summing. Reference: `shared/wiki/agent-created/operations/ps-performance-schema.md`.
 
-These replace parsing metric tables from the data brief. DuckDB is the canonical source for all structured numbers.
+**Always filter on the right view — never sum across grains.**
+
+Use the DuckDB MCP `execute_query` tool:
+
+- **8-week trend (weekly)**:
+  ```sql
+  SELECT * FROM ps.v_weekly
+  WHERE market='{market}' AND period_key LIKE '2026-%'
+  ORDER BY period_key DESC LIMIT 8
+  ```
+
+- **Current week**:
+  ```sql
+  SELECT * FROM ps.v_weekly
+  WHERE market='{market}' AND period_key='2026-W{NN}'
+  ```
+
+- **YoY same week** (if has_yoy):
+  ```sql
+  SELECT * FROM ps.v_weekly
+  WHERE market='{market}' AND period_key='2025-W{NN}'
+  ```
+
+- **Daily for MTD math and daily-pattern observations**:
+  ```sql
+  SELECT period_start, registrations, cost, brand_registrations, nb_registrations
+  FROM ps.v_daily
+  WHERE market='{market}'
+    AND period_start BETWEEN '2026-04-01' AND '2026-04-18'
+  ORDER BY period_start
+  ```
+
+- **Monthly actuals (in-progress months reflect MTD; complete months reflect full total)**:
+  ```sql
+  SELECT * FROM ps.v_monthly
+  WHERE market='{market}' AND period_key='2026-M{MM}'
+  ```
+
+- **Quarterly**:
+  ```sql
+  SELECT * FROM ps.v_quarterly
+  WHERE market='{market}' AND period_key='2026-Q2'
+  ```
+
+- **WW aggregate at any grain** — always use `market='WW'` rows, never sum the 10 markets yourself:
+  ```sql
+  SELECT * FROM ps.v_weekly WHERE market='WW' AND period_key='2026-W{NN}'
+  ```
+
+- **OP2 targets**:
+  ```sql
+  SELECT * FROM ps.targets
+  WHERE market='{market}' AND period_key='2026-M{MM}'
+  ```
+
+- **Existing projections**:
+  ```sql
+  SELECT * FROM ps.forecasts WHERE market='{market}' AND target_period='2026-W{NN}'
+  ```
+
+- **Flagged anomalies** (if the anomalies table is populated):
+  ```sql
+  SELECT * FROM ps.anomalies WHERE market='{market}' AND period_key='2026-W{NN}'
+  ```
+
+**Grain safety rules:**
+- Never `SELECT SUM(registrations) FROM ps.performance WHERE market='X'` without a `period_type` filter. That sums daily + weekly + monthly + quarterly and overcounts ~4x.
+- Never sum the 10 markets manually to derive WW. Use the `market='WW'` row, which is maintained consistently.
+- Never use ISO week math (`date.isocalendar()`) to map a date to `period_key`. The dashboard uses Sun-Sat weeks; ISO uses Mon-Sun; they disagree. For MTD math, use `period_start BETWEEN` date ranges against `ps.v_daily`.
+
+**Coverage check** — if you're unsure what data is available:
+```sql
+SELECT market, period_type, rows, first_key, last_key
+FROM ps.v_grain_coverage
+WHERE market='{market}'
+```
+
+These queries replace parsing metric tables from the data brief or from JSON. `ps.performance` via the `v_*` views is the canonical source.
 
 ### Step 5: Read narrative context from markdown (still read these)
 1. Read the market context at `shared/wiki/callouts/{market}/{market}-context.md` (already loaded in Step 1, but re-read the narrative sections: Key Narrative Threads, Active Initiatives, Recurring Patterns, etc.)
 2. Read `shared/context/body/eyes.md` for the broader market health picture and competitive landscape
 3. Read the previous week's callout at `shared/wiki/callouts/{market}/{market}-2026-w{prev}.md` for continuity
 4. Read the previous week's analysis brief if it exists at `shared/wiki/callouts/{market}/{market}-analysis-2026-w{prev}.md`
-5. Read `shared/wiki/callouts/callout-principles.md` to understand what the callout writer needs
+5. Read `shared/.kiro/skills/wbr-callouts/references/callout-principles.md` to understand what the callout writer needs
 6. Optionally read the data brief at `shared/wiki/callouts/{market}/{market}-data-brief-2026-w{NN}.md` for any narrative context or notes — but do NOT parse metric tables from it. The numbers come from DuckDB.
 
 ### Step 5b: Query cross-channel signal intelligence
@@ -83,6 +170,42 @@ SELECT ts, channel_name, author_name, text_preview,
 FROM slack_messages WHERE score IS NOT NULL ORDER BY score DESC LIMIT 5;
 ```
 Include top results as "team conversation evidence" in the analysis brief. If a topic has reinforcement_count > 5 in the last 7 days, flag as "trending — team is actively discussing this." Cross-channel corroboration (channel_spread >= 3) strengthens the signal.
+
+### Step 5c: Mandatory qualitative sweep for material movements (causal attribution)
+
+**Quantitative data explains what moved. Qualitative data explains why.** Before finalizing any attribution claim, sweep the qualitative layer for real-world events that might be the cause. This is not optional — it is the difference between "Brand regs grew on coverage scaling" (weak) and "Brand regs grew on the local campaign running since W13" (strong).
+
+**Trigger rule:** run the full qualitative sweep whenever any of these moved more than 15% WoW in the target market:
+- Blended regs, cost, or CPA
+- Brand regs or Brand CPA
+- NB regs or NB CPA
+- Blended CVR or either segment's CVR
+
+Also run it when a multi-week trend reverses (e.g., 4 consecutive declining weeks followed by +45% like AU W16).
+
+**Sources to sweep, in this order:**
+
+1. **Change log** — `shared/wiki/callouts/{market}/{market}-change-log.md`. Any change in the last 14 days overlapping the reporting week (bid strategy adjustments, LP swaps, budget releases, campaign launches, negative keyword updates, promo starts/ends).
+
+2. **Slack signal tracker** — query `signals.signal_tracker` for market-relevant topics in the last 14 days, especially trending (reinforcement_count > 5) or high-signal-strength topics.
+
+3. **Slack channel search** — use the Slack MCP to search market-specific channels (e.g., `#ab-au-paid-search`, `#ab-mx-paid-search`, `#ab-ps-*`) for the target week ±7 days. Look for campaign names, event mentions, bid changes, stakeholder questions.
+
+4. **Meeting notes** — `main.meeting_highlights` and `main.meeting_analytics` for market-relevant syncs in the last 14 days (AU sync, MX sync, Brandon 1:1, Kate 1:1 if relevant). If a highlight mentions the reporting week's timing, pull the full Hedy session via `GetSessionDetails(sessionId)`.
+
+5. **Email triage** — `signals.emails_actionable` or Outlook MCP search for market-specific threads touching the reporting window. Cross-team threads (MCS, Customer Research, MarTech) often carry LP or creative changes that the PS team isn't primary on.
+
+6. **Asana tasks** — `asana.asana_tasks` filtered to market tag, completed or status-changed in the 14-day window.
+
+**Output discipline:**
+
+Every attribution claim in the analysis brief must be one of:
+- **Qualitative-grounded**: names a specific real-world event with a date/timing anchor. "Local campaign running since W13 drove the Brand click surge." The source (change log entry, Slack message, meeting note) goes in the brief's "Relevant actions and events" section.
+- **Pattern-based, explicitly labeled**: "No qualitative signal found — attribution is pattern-based from the prior 8-week trend. Brand CVR recovery is consistent with the Polaris LP revert thesis from W15 but the revert has not been confirmed in the change log this week."
+
+Do not produce attribution claims that sound specific but are actually abstract ("coverage scaling continued," "efficiency compounded," "bid strategies matured"). If the qualitative sweep returns nothing, say so. A pattern-based claim with a "no qualitative signal" caveat is honest; a pattern-based claim that sounds like a mechanism is misleading.
+
+**Writer dependency:** the callout-writer reads the analysis brief's attribution and plain-language rule will fail any claim the writer can't anchor to a specific event. If the brief says "coverage scaling," the writer either downgrades the language or goes back to the analyst. The analyst's job is to give the writer attributable material.
 
 ### Step 6: Analyze (generic workflow, market-specific rules from config)
 
@@ -112,7 +235,7 @@ IF `has_yoy` is false:
 
 #### 5. ie%CCP analysis (conditional on config.has_ieccp)
 IF `has_ieccp` is true:
-- Pull ie%CCP data: `SELECT * FROM ieccp WHERE market='{market}' ORDER BY week DESC LIMIT 8`
+- Pull ie%CCP from `ps.v_weekly` (the column is `ieccp`): `SELECT period_key, ieccp FROM ps.v_weekly WHERE market='{market}' AND ieccp IS NOT NULL ORDER BY period_key DESC LIMIT 8`
 - Analyze blended ie%CCP vs the 100% target
 - Frame NB spend decisions against the ie%CCP constraint
 - Include ie%CCP in the headline extras

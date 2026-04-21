@@ -211,6 +211,7 @@ class WBRPipeline:
         self.xlsx_path = xlsx_path
         self.week_override = week_override
         self.con = None
+        self.prediction_run_id = f"run-{datetime.now().strftime('%Y%m%d%H%M%S')}"
 
         if not os.path.exists(xlsx_path):
             raise FileNotFoundError(f"xlsx not found: {xlsx_path}")
@@ -259,6 +260,14 @@ class WBRPipeline:
                 PRIMARY KEY (market, metric_name)
             )
         """)
+
+        # PE-1 Phase 1: Add lead_weeks and prediction_run_id to ps.forecasts
+        # (idempotent — ALTER TABLE ADD COLUMN IF NOT EXISTS)
+        try:
+            self.con.execute("ALTER TABLE ps.forecasts ADD COLUMN IF NOT EXISTS lead_weeks INT")
+            self.con.execute("ALTER TABLE ps.forecasts ADD COLUMN IF NOT EXISTS prediction_run_id VARCHAR")
+        except Exception:
+            pass  # Column already exists or DB doesn't support IF NOT EXISTS
 
         # latest_forecasts — most recent unscored forecast per market+metric
         self.con.execute("""
@@ -443,6 +452,185 @@ class WBRPipeline:
                 except Exception as e:
                     print(f"  WARN: monthly insert failed {market}/{pk}: {e}")
 
+        # Daily actuals → ps.performance (period_type='daily', period_key='YYYY-MM-DD')
+        # Source: ingester analysis['daily_patterns']['daily'] contains 7 verified
+        # day dicts per market for the target week. This is the authoritative per-day
+        # actuals from the xlsx Daily tab. Also iterate the same write for the prior
+        # week's daily rows when available (14-day backfill window for corrections).
+        daily_count = 0
+        for market, analysis in results.items():
+            if not isinstance(analysis, dict) or 'error' in analysis:
+                continue
+            dp = analysis.get('daily_patterns') or {}
+            days = dp.get('daily') or []
+            for day in days:
+                iso_date = day.get('date')
+                if not iso_date:
+                    continue
+                # Derive ratios from totals so Brand/NB/blended CPA/CVR/CPC are present
+                regs = si(day.get('regs')); cost = s(day.get('cost'))
+                clicks = si(day.get('clicks')); imps = si(day.get('impressions'))
+                b_regs = si(day.get('brand_regs')); b_cost = s(day.get('brand_cost'))
+                b_clicks = si(day.get('brand_clicks'))
+                nb_regs = si(day.get('nb_regs')); nb_cost = s(day.get('nb_cost'))
+                nb_clicks = si(day.get('nb_clicks'))
+
+                def safe_ratio(num, den):
+                    if num is None or den is None or den == 0:
+                        return None
+                    return num / den
+
+                cpa = safe_ratio(cost, regs)
+                cpc = safe_ratio(cost, clicks)
+                cvr = safe_ratio(regs, clicks)
+                ctr = safe_ratio(clicks, imps)
+                b_cpa = safe_ratio(b_cost, b_regs)
+                b_cpc = safe_ratio(b_cost, b_clicks)
+                b_cvr = safe_ratio(b_regs, b_clicks)
+                nb_cpa = safe_ratio(nb_cost, nb_regs)
+                nb_cpc = safe_ratio(nb_cost, nb_clicks)
+                nb_cvr = safe_ratio(nb_regs, nb_clicks)
+
+                try:
+                    self.con.execute(PERF_SQL, [
+                        market, 'daily', iso_date, iso_date,
+                        regs, cost, cpa, clicks, imps, cpc, cvr, ctr,
+                        b_regs, b_cost, b_cpa, b_clicks, b_cpc, b_cvr,
+                        nb_regs, nb_cost, nb_cpa, nb_clicks, nb_cpc, nb_cvr,
+                        None, source_file,
+                    ])
+                    daily_count += 1
+                    total_rows += 1
+                except Exception as e:
+                    print(f"  WARN: daily insert failed {market}/{iso_date}: {e}")
+
+        # Quarterly rollup → ps.performance (period_type='quarterly', period_key='YYYY-Qn')
+        # Computed from monthly rows (3 months per quarter) so the math is internally
+        # consistent and doesn't double-count with weekly boundaries crossing quarters.
+        quarter_count = 0
+        QUARTER_MONTHS = {
+            'Q1': ['01', '02', '03'],
+            'Q2': ['04', '05', '06'],
+            'Q3': ['07', '08', '09'],
+            'Q4': ['10', '11', '12'],
+        }
+        for market in ALL_MARKETS:
+            for quarter, months in QUARTER_MONTHS.items():
+                year = datetime.now().strftime('%Y')
+                month_pks = [f"{year}-M{m}" for m in months]
+                try:
+                    rows = self.con.execute(f"""
+                        SELECT
+                            SUM(registrations), SUM(cost), SUM(clicks), SUM(impressions),
+                            SUM(brand_registrations), SUM(brand_cost), SUM(brand_clicks),
+                            SUM(nb_registrations), SUM(nb_cost), SUM(nb_clicks),
+                            COUNT(*) AS months_present
+                        FROM ps.performance
+                        WHERE market = ? AND period_type = 'monthly'
+                          AND period_key IN ({','.join(['?'] * len(month_pks))})
+                    """, [market] + month_pks).fetchone()
+                except Exception as e:
+                    print(f"  WARN: quarterly read failed {market}/{quarter}: {e}")
+                    continue
+                if not rows or not rows[0] or rows[-1] == 0:
+                    continue  # skip quarters with no monthly data
+                q_regs, q_cost, q_clicks, q_imps, q_b_regs, q_b_cost, q_b_clicks, q_nb_regs, q_nb_cost, q_nb_clicks, months_present = rows
+                q_pk = f"{year}-{quarter}"
+                q_start = f"{year}-{months[0]}-01"
+
+                def qr(num, den):
+                    return (num / den) if (num is not None and den and den != 0) else None
+
+                q_cpa = qr(q_cost, q_regs); q_cpc = qr(q_cost, q_clicks)
+                q_cvr = qr(q_regs, q_clicks); q_ctr = qr(q_clicks, q_imps)
+                q_b_cpa = qr(q_b_cost, q_b_regs); q_b_cpc = qr(q_b_cost, q_b_clicks)
+                q_b_cvr = qr(q_b_regs, q_b_clicks)
+                q_nb_cpa = qr(q_nb_cost, q_nb_regs); q_nb_cpc = qr(q_nb_cost, q_nb_clicks)
+                q_nb_cvr = qr(q_nb_regs, q_nb_clicks)
+
+                try:
+                    self.con.execute(PERF_SQL, [
+                        market, 'quarterly', q_pk, q_start,
+                        si(q_regs), s(q_cost), q_cpa, si(q_clicks), si(q_imps),
+                        q_cpc, q_cvr, q_ctr,
+                        si(q_b_regs), s(q_b_cost), q_b_cpa, si(q_b_clicks), q_b_cpc, q_b_cvr,
+                        si(q_nb_regs), s(q_nb_cost), q_nb_cpa, si(q_nb_clicks), q_nb_cpc, q_nb_cvr,
+                        None, source_file,
+                    ])
+                    quarter_count += 1
+                    total_rows += 1
+                except Exception as e:
+                    print(f"  WARN: quarterly insert failed {market}/{q_pk}: {e}")
+
+        # WW aggregate → ps.performance (market='WW' at every period_type)
+        # Computed as SUM of the 10 markets at the matching grain — this is the
+        # "10-market total" rollup. Grain filter (period_type=) prevents any
+        # accidental cross-grain summing. WW rows use the same period_type/period_key
+        # as their constituent market rows.
+        ww_count = 0
+        try:
+            # Delete existing WW rows to avoid stale aggregates
+            self.con.execute("DELETE FROM ps.performance WHERE market = 'WW'")
+            # Re-aggregate from all 10 markets at every grain
+            self.con.execute(f"""
+                INSERT INTO ps.performance
+                (market, period_type, period_key, period_start,
+                 registrations, cost, cpa, clicks, impressions, cpc, cvr, ctr,
+                 brand_registrations, brand_cost, brand_cpa, brand_clicks, brand_cpc, brand_cvr,
+                 nb_registrations, nb_cost, nb_cpa, nb_clicks, nb_cpc, nb_cvr,
+                 ieccp, source)
+                SELECT
+                    'WW' AS market,
+                    period_type, period_key, MIN(period_start) AS period_start,
+                    SUM(registrations), SUM(cost),
+                    CASE WHEN SUM(registrations) > 0 THEN SUM(cost) / SUM(registrations) END AS cpa,
+                    SUM(clicks), SUM(impressions),
+                    CASE WHEN SUM(clicks) > 0 THEN SUM(cost) / SUM(clicks) END AS cpc,
+                    CASE WHEN SUM(clicks) > 0 THEN CAST(SUM(registrations) AS DOUBLE) / SUM(clicks) END AS cvr,
+                    CASE WHEN SUM(impressions) > 0 THEN CAST(SUM(clicks) AS DOUBLE) / SUM(impressions) END AS ctr,
+                    SUM(brand_registrations), SUM(brand_cost),
+                    CASE WHEN SUM(brand_registrations) > 0 THEN SUM(brand_cost) / SUM(brand_registrations) END,
+                    SUM(brand_clicks),
+                    CASE WHEN SUM(brand_clicks) > 0 THEN SUM(brand_cost) / SUM(brand_clicks) END,
+                    CASE WHEN SUM(brand_clicks) > 0 THEN CAST(SUM(brand_registrations) AS DOUBLE) / SUM(brand_clicks) END,
+                    SUM(nb_registrations), SUM(nb_cost),
+                    CASE WHEN SUM(nb_registrations) > 0 THEN SUM(nb_cost) / SUM(nb_registrations) END,
+                    SUM(nb_clicks),
+                    CASE WHEN SUM(nb_clicks) > 0 THEN SUM(nb_cost) / SUM(nb_clicks) END,
+                    CASE WHEN SUM(nb_clicks) > 0 THEN CAST(SUM(nb_registrations) AS DOUBLE) / SUM(nb_clicks) END,
+                    NULL, '{source_file}'
+                FROM ps.performance
+                WHERE market IN ({','.join([f"'{m}'" for m in ALL_MARKETS])})
+                GROUP BY period_type, period_key
+            """)
+            ww_row = self.con.execute("SELECT COUNT(*) FROM ps.performance WHERE market = 'WW'").fetchone()
+            ww_count = ww_row[0] if ww_row else 0
+            total_rows += ww_count
+        except Exception as e:
+            print(f"  WARN: WW aggregate build failed: {e}")
+
+        # Refresh canonical read views (idempotent) — one per grain so callers
+        # can't accidentally sum across grains. Also rebuild the guardrail view.
+        try:
+            for grain in ('daily', 'weekly', 'monthly', 'quarterly'):
+                self.con.execute(f"""
+                    CREATE OR REPLACE VIEW ps.v_{grain} AS
+                    SELECT * FROM ps.performance WHERE period_type = '{grain}'
+                """)
+            self.con.execute("""
+                CREATE OR REPLACE VIEW ps.v_grain_coverage AS
+                SELECT market, period_type, COUNT(*) AS rows,
+                       MIN(period_key) AS first_key, MAX(period_key) AS last_key
+                FROM ps.performance
+                GROUP BY market, period_type
+                ORDER BY market, period_type
+            """)
+            print(f"  Views refreshed: ps.v_daily, ps.v_weekly, ps.v_monthly, ps.v_quarterly, ps.v_grain_coverage")
+        except Exception as e:
+            print(f"  WARN: view refresh failed: {e}")
+
+        print(f"  Load: {total_rows} performance rows ({daily_count} daily, {quarter_count} quarterly, {ww_count} WW)")
+
         # OP2 targets → ps.targets
         targets_count = 0
         month_to_pk = {
@@ -503,7 +691,7 @@ class WBRPipeline:
                     except Exception as e:
                         print(f"  WARN: cpa target insert failed {market}/{pk}: {e}")
 
-        print(f"  Load: {total_rows} performance rows, {targets_count} target rows")
+        print(f"  Load: {targets_count} target rows")
         return total_rows
 
     def _stage_score(self) -> ScoringResult:
@@ -527,7 +715,15 @@ class WBRPipeline:
         return updated
 
     def _stage_project(self, calibration_factor: float) -> list:
-        """Stage 4: BayesianProjector for all 10 markets."""
+        """Stage 4: BayesianProjector for all 10 markets across W+1..W52.
+
+        Generates forward-looking predictions for every future week of the
+        current year, not just W+1. This is what lets the chart show a
+        prediction trajectory all the way through end-of-year rather than
+        flat-lining at W+1. Each run overwrites prior unscored predictions
+        (see _write_projections' DELETE clause) so predictions stay fresh
+        week over week; scored predictions for past weeks are preserved.
+        """
         # Gap 2: Read persisted calibration from ps.calibration_state if available
         # Fall back to the scoring result or 1.0
         persisted_cal = calibration_factor
@@ -547,32 +743,57 @@ class WBRPipeline:
 
         projector = BayesianProjector(self.con, persisted_cal)
 
-        # Determine target week (next week from current)
-        year, wk = self._current_week_key().split('-W')
-        next_wk_num = int(wk) + 1
-        if next_wk_num > 52:
-            next_wk_num = 1
-            year = str(int(year) + 1)
-        next_wk_key = f"{year}-W{next_wk_num}"
+        # Determine current week, then project every remaining week of the year.
+        year_str, wk_str = self._current_week_key().split('-W')
+        current_wk = int(wk_str)
+        year_int = int(year_str)
 
-        projections = []
-        for market in ALL_MARKETS:
-            try:
-                proj = projector.project_market(market, next_wk_num, next_wk_key)
-                projections.append(proj)
-            except Exception as e:
-                print(f"  WARN: projection failed for {market}: {e}")
-                traceback.print_exc()
+        # Build the forward week schedule: W+1 through W52 of the current year.
+        # We stop at W52 rather than rolling into next year so a single run
+        # writes a bounded, predictable number of rows per market.
+        forward_weeks = []
+        for wk_num in range(current_wk + 1, 53):
+            forward_weeks.append((year_int, wk_num, f"{year_int}-W{wk_num}"))
 
-        # Write weekly projections to ps.forecasts
-        written = self._write_projections(projections, next_wk_key)
+        # The "primary" projection — W+1 — drives the callout signal and
+        # any downstream code that reads the latest projection list. Keep it
+        # at index 0 of the returned projections so consumers don't change.
+        primary_projections = []
+        total_weekly_written = 0
+        total_weekly_skipped = 0
+
+        for i, (yr, wk_num, wk_key) in enumerate(forward_weeks):
+            week_projections = []
+            for market in ALL_MARKETS:
+                try:
+                    proj = projector.project_market(market, wk_num, wk_key)
+                    week_projections.append(proj)
+                except Exception as e:
+                    if i == 0:
+                        # Only log failures loudly for W+1; deeper-out weeks
+                        # legitimately fail more often (missing priors, etc.)
+                        print(f"  WARN: projection failed for {market} {wk_key}: {e}")
+                        traceback.print_exc()
+                    total_weekly_skipped += 1
+
+            written = self._write_projections(week_projections, wk_key)
+            total_weekly_written += written
+
+            if i == 0:
+                primary_projections = week_projections
+
+        print(f"  Weekly: {len(forward_weeks)} future weeks × {len(ALL_MARKETS)} markets → "
+              f"{total_weekly_written} forecast rows written "
+              f"({total_weekly_skipped} projections skipped)")
 
         # ── Gap 3: Monthly + Quarterly projections ──
-        # Derive current month and quarter from the week key
+        # Derive current month and quarter from the first forward week (W+1).
         try:
-            year_int = int(year)
-            # Approximate month from week number
             from datetime import timedelta
+            if forward_weeks:
+                _yr, next_wk_num, _ = forward_weeks[0]
+            else:
+                next_wk_num = current_wk + 1
             jan4 = datetime(year_int, 1, 4)
             start_of_w1 = jan4 - timedelta(days=jan4.weekday())
             target_date = start_of_w1 + timedelta(weeks=next_wk_num - 1)
@@ -601,20 +822,50 @@ class WBRPipeline:
             # Write monthly + quarterly to ps.forecasts
             m_written = self._write_projections(monthly_projections, month_key, period_type='monthly')
             q_written = self._write_projections(quarterly_projections, quarter_key, period_type='quarterly')
-            written += m_written + q_written
+            total_weekly_written += m_written + q_written
             print(f"  Monthly: {len(monthly_projections)} markets, Quarterly: {len(quarterly_projections)} markets")
         except Exception as e:
             print(f"  WARN: monthly/quarterly projections failed: {e}")
             traceback.print_exc()
 
-        print(f"  Project: {len(projections)} markets, {written} forecast rows written")
-        return projections
+        print(f"  Project: {len(primary_projections)} markets (W+1), "
+              f"{total_weekly_written} total forecast rows written")
+        return primary_projections
 
     def _write_projections(self, projections: list, target_period: str,
                            period_type: str = 'weekly') -> int:
         """Write MarketProjection list to ps.forecasts with scored=false."""
         forecast_date = datetime.now().strftime('%Y-%m-%d')
         written = 0
+
+        # Compute lead_weeks: distance from current week to target_period
+        current_wk_key = self._current_week_key()
+        lead_weeks = None
+        if period_type == 'weekly' and '-W' in target_period and '-W' in current_wk_key:
+            try:
+                cur_yr, cur_wk = current_wk_key.split('-W')
+                tgt_yr, tgt_wk = target_period.split('-W')
+                lead_weeks = (int(tgt_yr) - int(cur_yr)) * 52 + int(tgt_wk) - int(cur_wk)
+            except (ValueError, IndexError):
+                lead_weeks = None
+        elif period_type == 'monthly' and '-M' in target_period and '-W' in current_wk_key:
+            try:
+                cur_yr, cur_wk = current_wk_key.split('-W')
+                tgt_yr, tgt_m = target_period.split('-M')
+                # Approximate: month midpoint week ≈ (month-1)*4.33 + 2
+                tgt_approx_wk = int((int(tgt_m) - 1) * 4.33 + 2)
+                lead_weeks = (int(tgt_yr) - int(cur_yr)) * 52 + tgt_approx_wk - int(cur_wk)
+            except (ValueError, IndexError):
+                lead_weeks = None
+        elif period_type == 'quarterly' and '-Q' in target_period and '-W' in current_wk_key:
+            try:
+                cur_yr, cur_wk = current_wk_key.split('-W')
+                tgt_yr, tgt_q = target_period.split('-Q')
+                # Approximate: quarter midpoint week ≈ (quarter-1)*13 + 7
+                tgt_approx_wk = int((int(tgt_q) - 1) * 13 + 7)
+                lead_weeks = (int(tgt_yr) - int(cur_yr)) * 52 + tgt_approx_wk - int(cur_wk)
+            except (ValueError, IndexError):
+                lead_weeks = None
 
         for proj in projections:
             if proj is None or proj.total_regs == 0:
@@ -643,10 +894,11 @@ class WBRPipeline:
                         INSERT INTO ps.forecasts
                         (market, channel, metric_name, forecast_date, target_period,
                          period_type, predicted_value, confidence_low, confidence_high,
-                         method, scored)
-                        VALUES (?, 'ps', ?, ?, ?, ?, ?, ?, ?, ?, false)
+                         method, scored, lead_weeks, prediction_run_id)
+                        VALUES (?, 'ps', ?, ?, ?, ?, ?, ?, ?, ?, false, ?, ?)
                     """, [proj.market, metric, forecast_date, target_period,
-                          period_type, value, ci_l, ci_h, proj.method])
+                          period_type, value, ci_l, ci_h, proj.method,
+                          lead_weeks, self.prediction_run_id])
                     written += 1
                 except Exception as e:
                     print(f"  WARN: forecast write failed {proj.market}/{metric}: {e}")

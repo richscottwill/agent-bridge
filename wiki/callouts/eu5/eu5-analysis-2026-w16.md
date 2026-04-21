@@ -1,0 +1,117 @@
+---
+title: "EU5 W16 Consolidated Analysis Brief"
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-19
+updated: 2026-04-19
+---
+
+# EU5 W16 Analysis Brief
+
+## Group registration summary
+EU5 W16: 5,980 regs (+18% WoW), $528K spend (+31% WoW), $88 CPA (+11% WoW). Post-Easter recovery delivered volume across all five markets, but spend outpaced regs materially — the group bought back the W14/W15 holiday shortfall at a higher cost. YoY: +50% regs, +52% spend, +2% CPA. The two notable movers in opposite directions: DE (+29% regs on +76% spend, CPA $128, NB CPA $210) and ES (+3% regs on -5% spend, CPA $62, cleanest efficiency story in the group). IT and FR both rebounded healthily off sharp W15 declines. UK led on volume (+15%) but at +36% spend.
+
+## Per-market WoW snapshot
+
+| Market | W15 regs | W16 regs | WoW% | W16 CPA | CPA WoW | Notes |
+|--------|---------:|---------:|-----:|--------:|--------:|-------|
+| UK | 1,430 | 1,644 | +15% | $75 | +19% | Volume leader. NB regs +18%, NB CPA $74 vs $61 LW. Spend +36% WoW. |
+| DE | 1,200 | 1,550 | +29% | $128 | +36% | Spend $199K (+76% WoW). NB regs +33%, NB CPA $210 from $130. Efficiency step-down. |
+| FR | 877 | 1,037 | +18% | $67 | -4% | Recovery from W15 -23%. Brand regs +29%, CVR +11% WoW. Spend +14%. |
+| IT | 972 | 1,136 | +17% | $86 | -16% | Rebound from W15 -25%. Brand CPA $56 (down from $62). NB CPA $151 (down from $191). |
+| ES | 595 | 613 | +3% | $62 | -8% | CVR-led (+15% WoW). Spend -5%. Cleanest conversion story. |
+| **EU5** | **5,074** | **5,980** | **+18%** | **$88** | **+11%** | |
+
+## What drove the group
+
+DE is the standout — and not in a good way. Spend jumped from $113K to $199K (+76% WoW) while regs rose just +29%. Brand held steady ($52K Brand CPA, essentially flat WoW) but NB spend exploded from $73K to $157K (+115%) and NB CPA ran away to $210 from $130. Blended CVR fell to 2.66% (-11% WoW, lowest in 8 weeks). The W13 Brand Core bid raise ($15 to $21) is cited in prior EU5 context as unlocking impressions, and W16's NB surge looks like a much bigger intervention playing through — the spend pattern is consistent with either a bid-strategy change, a budget unlock, or algorithm reaction to the post-Easter rebound. The MTD picture confirms it: $366K spent through 4/18 against a $606K April OP2 — DE is running hot enough that full-month pace now projects close to the OP2 spend ceiling despite the reg line tracking only to ~58% of target. Worth a direct look before W17 opens.
+
+UK was the volume leader but also ran spend hot. 1,644 regs (+15% WoW) on $124K spend (+36%) pushed CPA to $75 from $64. NB clicks drove the reg lift (+18% NB regs), but NB CPA rose to $74 from $61 as CPCs and impressions climbed together. Brand CVR softened to 4.02% from 4.32% (-7%, though still strong relative to the 8-week trend). YoY remains the cleanest story in EU5: +190% regs on +159% spend, CPA -11% YoY. OCI maturity (~32 weeks live) continues to hold the efficiency line even through this volume spike.
+
+IT and FR both rebounded in line with the post-Easter pattern. IT: +17% regs at -16% CPA — Brand CPA fell $62 → $56 and NB CPA $191 → $151 as the sharp W15 CVR collapse reversed. FR: +18% regs at -4% CPA — Brand regs +29% on CVR recovery, spend +14%. Both markets are still running materially above LY CPA (IT +15% YoY, FR +34% YoY) reflecting the 4-week-old OCI E2E rollout and the revenue data exclusion flagged in W13. ES continued the W15 rebound into pure efficiency (+3% regs on -5% spend, +15% CVR) and is the only EU5 market where W16 spend was lower than W15. The ES W16 analysis brief covers this in depth.
+
+## YoY assessment
+EU5 group: +50% regs (5,980 vs 4,001) on +52% spend ($528K vs $347K), CPA +2%. The group-level YoY read is that EU5 is buying roughly proportionally more registrations for the incremental spend — but the market mix is very uneven. UK carries the YoY win (+190% regs, -11% CPA YoY) and is effectively subsidizing the group. DE YoY also helpful (+51% regs, -12% CPA YoY) — the high Y25 baseline is being lapped without CPA expansion at the week level, even with W16's spend spike. FR (+16% regs, +34% CPA), IT (+7% regs, +15% CPA), and ES (+35% regs, +12% CPA) are all running more expensive YoY, consistent with the OCI E2E learning-phase story carried forward from W13. The group YoY CPA gap narrowed slightly this week because UK and DE CPA improvements offset FR/IT/ES inflation — a better read than W15, but not structural.
+
+## Monthly projection (EU5 total)
+Combined April projection: ~23,800 regs / ~$1,830K spend / ~$77 CPA. Against EU5 OP2 (summed from per-market targets) of 21,361 regs / $1,690K / ~$79 CPA → +11% regs, +8% spend, -3% CPA. 18/30 days elapsed through W16.
+
+| Market | MTD regs | MTD spend | Proj regs | Proj spend | OP2 regs | vs OP2 regs | vs OP2 spend |
+|--------|---------:|----------:|----------:|-----------:|---------:|------------:|-------------:|
+| UK | 3,872 | $262K | ~6,100 | ~$410K | 4,492 | +36% | +2% |
+| DE | 3,400 | $366K | ~5,400 | ~$580K | 5,747 | -6% | -4% |
+| FR | 2,565 | $165K | ~4,200 | ~$265K | 4,117 | +2% | +18% |
+| IT | 2,936 | $249K | ~4,700 | ~$395K | 5,042 | -7% | +12% |
+| ES | 1,441 | $93K | ~2,400 | ~$155K | 1,964 | +22% | +43% |
+| **EU5** | **14,214** | **$1,136K** | **~22,800** | **~$1,805K** | **21,362** | **+7%** | **+7%** |
+
+Method: run-rate the remaining 12 April days (9 weekdays, 3 weekend days) at W16 weekday/weekend averages, adjusted for DE's abnormal W16 spend spike (used W14-W16 average for DE projection rather than W16 alone). UK and ES remain the strongest OP2 beats on regs. DE is the only market tracking below OP2 regs, and also the only market where spend pace has accelerated materially late-month. IT is -7% on regs and +12% on spend, the worst efficiency-vs-plan combination in the group.
+
+## Recommended W17 spend (per market, EU5 totals)
+Balanced strategy, post-Easter clean week, no holidays until May 1 (W18):
+
+- **UK: $100,000-$105,000** — pull back from W16's $124K. W16 CPA $75 (+19% WoW) signals volume was bought at rising cost. $100-105K lands on $66-70 CPA given W16 CVR, closer to the 8-week trend.
+- **DE: $120,000-$130,000** — material pullback from W16's $199K. The NB CPA at $210 and +76% spend WoW demand investigation before another week at that pace. This range keeps regs near W16 levels at more defensible efficiency.
+- **FR: $62,000-$68,000** — hold roughly flat to W16 ($69K). Recovery is tracking, CVR recovering, no reason to cut or lean in hard.
+- **IT: $95,000-$100,000** — hold at W16 ($98K). CPA is correcting; another week at this level gives the bid strategy time to settle further.
+- **ES: $38,000-$42,000** — slight lean-in permitted. W16 efficiency (-8% CPA WoW on -5% spend) earned the room, but clicks softened so don't push hard.
+- **EU5 total: ~$415K-$445K** — roughly $85-115K below W16's $528K, consistent with a clean-week normalization.
+
+## Flags
+- **DE W16 spend +76% WoW and NB CPA $210 is the single biggest anomaly in the group.** Check whether a bid strategy change, budget release, or OCI algorithm behavior triggered it. If W17 runs anywhere near $199K again without a clear driver, escalate.
+- **Post-Easter volume rebound is real but uneven.** EU5 +18% WoW masks that DE (+29%) and UK (+15%) drove most of the absolute reg lift while IT and FR recovered to baseline rather than exceeded it. The group did not collectively exceed the pre-Easter W14 level ($68 CPA) — CPA ran materially hotter (+11% WoW) than the reg recovery justified.
+- **Spend-to-regs divergence continues.** EU5 spend is outpacing regs three weeks running (W14 $67 CPA → W15 $80 → W16 $88). Some of this is Easter recovery noise; some is DE's W16 surge; some is FR/IT OCI E2E still in learning phase. Worth watching whether CPA starts reverting toward the W14 baseline in W17.
+- **ES is the cleanest market this week and the only one where efficiency improved.** No concerns. ie%CCP dropped 5pp but CPA improvement offsets it.
+- **Cross-market pattern — NB CPA pressure persists in FR, IT, ES, DE.** UK is the only market running favorable NB CPA YoY. This is consistent with the W13 structural observation: OCI maturation is the lever. No change in diagnosis.
+
+## Suggested narrative angle
+EU5 rebounded +18% on regs after the Easter trough, but at a cost: spend ran +31% WoW and CPA climbed to $88. DE drove the group's spend surge ($199K, +76% WoW) on an NB CPA that nearly doubled, while ES quietly delivered the cleanest week in the group (+3% regs on -5% spend). UK led on volume, IT and FR recovered to baseline. The story for the writer: post-Easter recovery arrived as expected, but the spend pattern — especially DE — warrants a direct look before W17.
+
+---
+
+## Data appendix
+
+**Source:** MotherDuck `ps_analytics` via DuckDB MCP. Views: `ps.v_weekly`, `ps.v_daily`, `ps.v_monthly`, `ps.targets`.
+
+**EU5 totals:**
+
+| Week | Regs | Spend | CPA |
+|------|-----:|------:|----:|
+| 2026-W14 | 5,662 | $379,202 | $67 |
+| 2026-W15 | 5,074 | $404,257 | $80 |
+| 2026-W16 | 5,980 | $527,932 | $88 |
+| 2025-W16 | 4,001 | $346,696 | $87 |
+
+**Per-market W14-W16 trend:**
+
+| Market | W14 regs | W15 regs | W16 regs | W14 CPA | W15 CPA | W16 CPA |
+|--------|---------:|---------:|---------:|--------:|--------:|--------:|
+| UK | 1,443 | 1,430 | 1,644 | $59 | $64 | $75 |
+| DE | 1,290 | 1,200 | 1,550 | $79 | $94 | $128 |
+| FR | 1,143 | 877 | 1,037 | $58 | $69 | $67 |
+| IT | 1,313 | 972 | 1,136 | $72 | $103 | $86 |
+| ES | 473 | 595 | 613 | $64 | $68 | $62 |
+
+**Per-market YoY (2026-W16 vs 2025-W16):**
+
+| Market | 2025-W16 regs | 2026-W16 regs | YoY regs | 2025-W16 CPA | 2026-W16 CPA | YoY CPA |
+|--------|--------------:|--------------:|---------:|-------------:|-------------:|--------:|
+| UK | 567 | 1,644 | +190% | $84 | $75 | -11% |
+| DE | 1,027 | 1,550 | +51% | $146 | $128 | -12% |
+| FR | 897 | 1,037 | +16% | $50 | $67 | +34% |
+| IT | 1,057 | 1,136 | +7% | $75 | $86 | +15% |
+| ES | 453 | 613 | +35% | $55 | $62 | +12% |
+
+**April MTD (4/1 - 4/18, 18 of 30 days) and OP2 targets:**
+
+| Market | MTD regs | MTD spend | OP2 regs | OP2 spend | OP2 CPA |
+|--------|---------:|----------:|---------:|----------:|--------:|
+| UK | 3,872 | $261,873 | 4,492 | $400,776 | $89 |
+| DE | 3,400 | $366,366 | 5,747 | $605,744 | $105 |
+| FR | 2,565 | $165,094 | 4,117 | $223,763 | $54 |
+| IT | 2,936 | $249,074 | 5,042 | $351,378 | $70 |
+| ES | 1,441 | $93,099 | 1,964 | $108,400 | $55 |
+| **EU5** | **14,214** | **$1,135,506** | **21,362** | **$1,690,061** | — |
+
+**Seasonality note:** W16 (Apr 13-19) is the first clean post-Easter week in EU5. Easter 2026 fell W14-W15 with measured impacts UK -2.7% avg, DE -12.2% (2025 reference), FR -3.1% avg, IT -4.0% avg, ES -21.4% avg. Next EU5 holiday is May 1 Labour Day (W18).

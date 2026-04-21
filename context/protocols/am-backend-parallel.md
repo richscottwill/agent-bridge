@@ -1,31 +1,34 @@
 <!-- DOC-0329 | duck_id: protocol-am-backend-parallel -->
-# AM-Backend Protocol — Sequential Architecture (v3)
+# AM-Backend Protocol — Parallel Architecture (v2, current)
 
-**v3 (2026-04-16):** Reverted from parallel subagent design to sequential orchestrator-only.
-Subagents cannot reliably access MCP servers (Slack, Asana, Outlook, SharePoint all fail
-from subagent context due to ESD proxy token exchange). The parallel design was theoretically
-better but practically unreliable — it burned context on retries and produced incomplete data.
+**Current: v2 parallel with Asana-in-orchestrator constraint.** Hook: am-auto.kiro.hook v5.0.0.
 
-**Current architecture:** ALL ingestion runs sequentially in the orchestrator. This is slower
-(~15 min vs ~5 min theoretical) but 100% reliable. The orchestrator has direct MCP access.
+**Evolution (Apr 2026):**
+- v1 (pre-4/16): 5 subagents all parallel including Asana → Asana MCP failed from subagent context (ESD proxy token exchange unreliable from `invokeSubAgent`).
+- v3 (morning 4/16): Reverted to sequential orchestrator-only. Reliable but slow (~15 min) and gave up parallelism where it worked (Slack, Email, Loop, Hedy all fine from subagents).
+- **v2 (afternoon 4/16, current):** Reinstated parallel but moved Asana (B1 + B2) into the orchestrator. 4 subagents (Slack, Email, Loop, Hedy) run in parallel; Asana runs concurrently in the orchestrator. B2 runs after B1 (sequential within orchestrator) to avoid Asana API rate-limit contention.
 
-**Rule:** Do NOT use invokeSubAgent for any MCP-dependent work. Subagents are only useful for
-pure computation tasks (file processing, text analysis) that don't need MCP tools.
+**Rules (hard constraints):**
+1. Asana MCP calls NEVER go to subagents. This is the failure that killed v1. Stays in orchestrator.
+2. Slack / Email / Loop / Hedy MCP calls go to subagents. They work reliably from `invokeSubAgent`.
+3. B2 (Activity Monitor) runs AFTER B1 (Sync) completes — both in orchestrator.
+4. Subagents A, C, D, E have no shared-resource conflicts (see isolation table below).
 
 ---
 
-## Why Sequential (v3)
+## Why Parallel (v2)
 
-Phase 1 (Data Collection) has independent data streams:
-- Slack scan → reads Slack MCP, writes slack-digest.md + DuckDB
-- Asana sync → reads Asana MCP, writes DuckDB + asana-digest.md
-- Email scan → reads Outlook MCP, writes email-triage.md
-- Hedy scan → reads Hedy MCP, writes hedy-digest.md + DuckDB signals
+Phase 1 (Data Collection) has independent data streams with no cross-dependencies:
+- Slack scan (Subagent A) → Slack MCP, signals.slack_messages, slack-digest.md
+- Asana sync (Orchestrator B1) → Asana MCP, asana.asana_tasks, asana-digest.md
+- Asana activity (Orchestrator B2, after B1) → Asana MCP, asana-activity.md
+- Email + calendar (Subagent C) → Outlook MCP, signals.emails, main.calendar_events, email-triage.md
+- Loop page sync (Subagent D) → SharePoint MCP, docs.loop_pages
+- Hedy meetings (Subagent E) → Hedy MCP, signals.hedy_meetings, hedy-digest.md
 
-These have zero data dependencies but ALL require MCP access, which only works
-from the orchestrator. Run them sequentially: Asana (heaviest) → Slack → Email → Loop → Hedy.
+Wall-clock: max(Slack ~5min, Orchestrator B1+B2 ~5min, Email ~1min, Loop ~1min, Hedy ~1min) ≈ 5 min.
 
-Phase 2+ (Processing) depends on Phase 1 outputs — runs after all ingestion.
+Phase 2+ (Processing) depends on Phase 1 outputs — runs sequentially after the ingestion barrier.
 
 ---
 

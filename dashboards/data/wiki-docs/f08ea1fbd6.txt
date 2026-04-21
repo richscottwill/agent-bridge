@@ -1,0 +1,28 @@
+# AU — W16 (Apr 13 – Apr 19)
+
+AU: AU drove 242 registrations (+45% WoW), with +7% spend WoW and $114 CPA (-26% WoW). April is projected at $113K spend and 900 registrations at $126 CPA. (vs. OP2: -16% regs, -23% spend)
+
+WoW this was a CVR story, not a traffic story. Blended CVR jumped from 2.9% to 3.9% while clicks rose only +7%, so conversion drove roughly four-fifths of the reg move. Brand CPA fell to $38 (-29%) on a 30% CVR lift; NB CPA fell to $163 (-32%) on CVR +47% at flat CPC. This is the Polaris LP revert landing on a one-week lag, confirming last week's thesis. NB CPC has held at $4.78 for three weeks, so bid-strategy savings are compounding on recovered CVR.
+
+Note: One week is not confirmation. W17 needs to hold 220+ regs and CPA under $140 to close the Polaris recovery story. I'll lean NB spend up ~5% into W17 ($29K) while Brand holds, with a conditional pause if NB CPA breaks above $180 midweek.
+
+---
+
+**Weekly trend (regs):** W9: 256 → W10: 283 → W11: 241 → W12: 244 → W13: 213 → W14: 171 → W15: 167 → W16: 242
+
+**Anomalies:**
+- 5-week decline broken with one week of data (W11 → W15 was the declining streak). Recovery confirmation requires W17 to hold.
+- NB regs +62% WoW bounces off a depressed base (147 is mid-range vs historical W3-W8 avg ~160, not an overshoot yet). Watch W17 for competitive-auction signal.
+- Brand clicks -4% WoW at flat impressions. CTR compressed while Brand CPA improved — could be LP-driven (users self-filtering) or a small IS shift. Low-priority monitor.
+
+**W17 recommended spend:** $29K (+5% vs W16 $27.6K). AU strategy is OP2 registration targets, cut wasted spend — currently -16% regs / -23% spend vs OP2, so there is room to lean up while unit economics are working. Proposed split: Brand holds at ~$3.6K, NB leans up to ~$25.5K (+6%) while NB CPA holds below $170. Daily run rate $3,950 → ~$4,150, still well under the $4,920/day OP2 pace.
+
+**W17 watch:**
+- NB CPA trajectory: if it breaks above $180 by midweek, hold W17 flat and wait. If it holds below $170, W18 can step up another 5-10%.
+- Blended CPA stability: needs to sit at or below $140 for a second consecutive week to confirm the Polaris recovery thesis.
+- Anzac Day (Sat Apr 25) falls on weekend, ~-3% drag on that day only, negligible at the weekly aggregate.
+
+**W17 optimization:**
+- Monitor Brand CVR at the 7-8% range (W7-W12 baseline) for any post-revert fade. W12's 8.54% was the outlier, not the target.
+- Continue NB bid-strategy tuning at the stabilized $4.78 CPC floor; volume is now rising on a stable cost base and further negative keyword cleanup should compound efficiency.
+- Pre-stage MCS page replication from MX (proposed 3/24 with Alexis) ahead of the May OCI kickoff, so the structural tests are queued behind the CVR recovery rather than layered on top of it.
