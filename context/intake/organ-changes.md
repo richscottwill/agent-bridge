@@ -259,3 +259,33 @@ Includes a "How to Update This File" section (5 trigger events), cross-reference
 - (Low) Verify DuckDB `ps.team_experiments.sole_owner` values match canonical names in roster.md on next DuckDB interaction — roster.md claims to supersede these attributions
 - (Low) Confirm missing locations: Lorena, York, Alexis
 - (Low) Confirm Nick Georgijev's exact title ("AU country director" flagged as approximate in roster.md)
+
+## 2026-04-21 — amcc.md: Hard Thing Queue → signal-driven top-3
+
+**File:** `shared/context/body/amcc.md`
+**Editor:** Not karpathy (edit is to amcc.md — outside the heart.md/gut.md/experiment-queue gate, so no authorization issue).
+**Scope:** Replaces the `## The Hard Thing Queue` section with `## The Hard Thing`. Old model = single hardcoded row ("Send Testing Approach v5 to Brandon"). New model = dynamic top-3 surfaced from `ps_analytics.main.hard_thing_candidates`, scored from signal convergence vs. referenceable-artifact production over a 7-day rolling window.
+
+**What changed (summary):**
+- Removed the hand-edited "Current Hard Thing" table and "Hard Thing History" placeholder.
+- Added scoring math (`half_life_days=3.5`, `incumbent_margin=1.15`, `impact_multiplier` L1–L5, `action_recency_penalty`) — full SQL lives in `shared/context/protocols/hard-thing-selection.md`.
+- Added two-mode framing: valuable-and-avoided vs. valuable-and-latent.
+- Added explicit completion threshold (artifact must be referenceable by a non-Richard actor).
+- Added null-state behavior ("No hard thing currently — signals flat") — intentional, not to be substituted with task-queue fill.
+- Added stickiness rule (incumbent holds rank unless challenger beats by 15%); `incumbent_since > 7d` with no artifact → escalate to rw-trainer.
+- Added empty top-3 contract table (rank / topic / score / mode / channels / authors / last_artifact / incumbent_since) — populated by refresh job.
+- Rewrote the implementation intention from "apply 5 critic fixes, send to Brandon" to "query rank=1 candidate, name it, flag if stuck."
+
+**Cross-organ inconsistencies flagged:**
+
+1. **amcc.md itself — internal drift.** The `## The Streak → Current Streak` table (line 28) still names Testing Approach as the hard thing ("set 3/20"). The new section says the hard thing is whatever `main.hard_thing_candidates WHERE rank=1` returns. The streak row needs to either (a) re-express itself against the dynamic model, or (b) get deprecated in favor of a view like `main.l1_streak`. Right now a reader sees two different hard things in the same organ.
+
+2. **hands.md line 69** — "⚠️ No L1 effort — 19 workdays at zero. Testing Approach is the hard thing." Hardcoded under the old model. Needs to either (a) re-reference the dynamic source ("see amcc — top-3 candidate #1") or (b) be removed so hands.md isn't making an authoritative claim about a concept owned by amcc.
+
+3. **Infrastructure gap.** The new amcc.md section treats `ps_analytics.main.hard_thing_candidates` as the source of truth, but the protocol doc (`shared/context/protocols/hard-thing-selection.md`) is marked **"Staged for Richard's review. Do not run against production until approved."** The view doesn't exist in live DuckDB yet, so the refresh contract in amcc.md can't actually be satisfied. Recommend one of: (a) promote the protocol out of staged status and build the view, or (b) add an "Implementation status: pending — view not yet in production" marker to the amcc section so the agent doesn't attempt to query a non-existent table.
+
+4. **device.md line 111** — already references `signals.signal_tracker` (which the new model depends on). Consistent. No action needed.
+
+5. **changelog.md** — no automatic update captured this edit. Per the current-state-only principle, changelog.md is where historical amcc snapshots are supposed to live. If Richard wants a historical record of the structural change, it should land there too. Not blocking.
+
+**Recommendation:** Before the agent treats the new model as live, resolve items 1–3. Easiest path: update the Current Streak row to read "See `main.hard_thing_candidates`" once the view exists, update hands.md to defer to amcc, and either promote or explicitly mark the protocol as staged in amcc.md itself.

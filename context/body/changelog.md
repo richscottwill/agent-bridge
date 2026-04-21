@@ -384,3 +384,23 @@ Batch stats: 5/5 KEEP (100%). Selection bias check: 100% keep rate is high, but 
 **Body mass:** 26,734w / 14 organs. Within budget. No compression signals.
 
 **Items logged:** daily_tracker, l1_streak, workflow_executions, autoresearch_organ_health (14 rows). Audit log appended with 6 daily_reset entries.
+
+## 2026-04-20 (late Monday PT) — Hard-thing selection redesigned
+
+**Richard's trigger:** Rejected Testing Approach (cancelled meeting = not avoidance) and AEO POV (constructed/artificial) as hard things. Pointed out the design flaw: hard-thing selection was top-down from the task queue, which manufactures targets when no real hard thing exists. Reframed to bottom-up signal convergence — the gap between "signals converging on a topic" and "Richard produced a referenceable artifact on it."
+
+**What changed:**
+- `body/amcc.md` — "The Hard Thing Queue" section replaced with "The Hard Thing" signal-driven model. Streak, resistance taxonomy, escalation ladder, political awareness — all unchanged. Only selection logic changed.
+- `body/body-diagram.md` — aMCC node now references `main.hard_thing_now` and `main.l1_streak` instead of hardcoded state.
+- `context/protocols/hard-thing-selection.md` — new protocol file (promoted from staging). Executable SQL, 7-day window, exponential half-life decay (3.5d default), incumbent advantage (1.15× margin), null-state allowed, artifact detection rules.
+- `tools/scripts/hard-thing-refresh.py` — new script. Handles MotherDuck connection, throttle, stickiness, null-state fallback. Exit codes: 0=success, 1=throttled, 2=degraded (token missing or --local).
+- DuckDB: created `main.hard_thing_candidates`, `main.hard_thing_topic_levels` (seeded with 10 canonical topics mapped to L1-L5), `main.hard_thing_artifact_log`, and view `main.hard_thing_now`.
+- Experiment queue: filed `amcc-halflife-v1` (shadow-eval half-life at 2.0 / 3.5 / 7.0 over 14 days) as `pending` in `autoresearch_experiments`.
+
+**Defaults Richard confirmed:** 7-day window, artifact = referenceable by non-Richard actor, top 3, continuous refresh on signal-write, stickiness via incumbent margin, signal decay as exponential half-life (not cliff).
+
+**Current state:** `main.hard_thing_now` returns null-state with reason `null-state-local-mode-no-signals-schema` — this shell has no MotherDuck token, so the first real scoring refresh is deferred to the next token-connected run (next scheduled AM or EOD hook, or manual `python3 ~/shared/tools/scripts/hard-thing-refresh.py` with token).
+
+**What didn't change:** streak mechanics, resistance taxonomy, escalation ladder, political awareness layer, integration with other organs. Net complexity: 3 new tables, 1 new protocol, 1 new script, 1 removed subsection from amcc.md. Trends simpler long-term because no more manual "what's the hard thing?" decisions.
+
+**Staging folder** at `context/staged/hard-thing-redesign/` kept as-is for audit trail — README there has the full promotion checklist and today's rejection test (which polaris-brand-lp passed under validation against live MotherDuck signals during staging).

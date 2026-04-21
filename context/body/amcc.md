@@ -5,7 +5,7 @@
 
 *Operating principle: Protect the habit loop. The aMCC's job is to make the hard thing the default, not the exception. The streak, the escalation ladder, the resistance taxonomy — these are structural nudges that make avoidance harder than action. The intervention should feel like gravity pulling toward the right choice, not a voice yelling to change direction.*
 
-Last updated: 2026-04-05 (reconciled: Testing Approach doc COMPLETED — v5 PUBLISH verdict 8.4/10. Hard thing rotated. File structure cleaned.)
+Last updated: 2026-04-20 (hard-thing selection redesigned — signal-driven bottom-up, replaces top-down task-queue model. Streak/resistance/escalation layers unchanged.)
 
 ---
 
@@ -111,25 +111,95 @@ If Richard overrides without a valid reason:
 
 ---
 
-## The Hard Thing Queue
+## The Hard Thing
 
-At any given time, there is ONE hard thing. Not three. Not a prioritized list. One.
+At any given time, there is ONE hard thing. Not three. Not a prioritized list. One. The top-3 candidate list exists to make the choice legible — it's not a queue to work through.
 
-The hard thing is determined by:
-1. What's the highest-leverage unblocked task in Hands?
-2. Is Richard avoiding it? (If he's actively working on it, the aMCC is quiet.)
-3. If he's avoiding it, why? (Name the resistance — that's the intervention target.)
+### How the hard thing is found
 
-### Current Hard Thing
+The hard thing is not chosen from the task queue. It's discovered from cross-channel signal convergence. Specifically: the gap between "signals converging on a topic" and "Richard has produced a referenceable artifact on that topic."
 
-| The Hard Thing | Why It's Hard | Why It Matters | Avoidance Pattern |
-|---------------|--------------|----------------|-------------------|
-| **Send Testing Approach v5 to Brandon** | Doc is done (PUBLISH verdict). 5 minor subtractive edits remain. The hard part now is hitting send — sharing with the L7 manager for review before Kate sees it. | This is the visibility gate. The doc doesn't count as shipped until Brandon has it. Level 1 metric: consecutive weeks shipped. The artifact exists; the avoidance risk is now "one more pass" perfectionism. | Visibility avoidance — polishing instead of sharing. "Let me just fix those 5 critic items first" becomes infinite delay. |
+**Definitions:**
 
-**Implementation intention (Gollwitzer):** IF Richard opens a new chat session on Monday 4/7, THEN the first action is: apply the 5 critic fixes from kate-doc-v5-eval-a.md (all subtractive, ~30 min), then send to Brandon. No new research. No restructuring. Ship it.
+- **Signal** — any mention of a topic in Slack, email, Hedy meetings, or Asana comments. Already tracked in `signals.signal_tracker`.
+- **Referenceable artifact** — output another person or agent can point to. Sent email, published wiki article, merged code, Asana task consumed by someone else, decision logged in a Loop page. NOT "worked on it." NOT "have a draft in the wiki staging folder." NOT "thought about it in a meeting." Referenceable output only.
+- **Window** — 7 days rolling. Older signals decay exponentially but aren't cut off.
+- **Top 3** — the three highest-scoring topics at any moment. Surfaced continuously, not batched.
 
-### Hard Thing History
-Removed — current-state-only principle. Historical data lives in changelog.md.
+### Two modes a topic can qualify under
+
+Both produce a valid hard thing. The system doesn't prefer one over the other.
+
+| Mode | Signal pattern | Why it's hard |
+|------|---------------|--------------|
+| **Valuable-and-avoided** | High signal density across 2+ channels, low-or-zero Richard artifact production. Brandon or Kate keeps raising it, meetings keep hitting it, and nothing referenceable has left Richard's desk. | The avoidance IS the signal. If it were easy Richard would have shipped already. |
+| **Valuable-and-latent** | Signal density building but no one — including Richard — has named it as a priority yet. Cross-channel spread is widening, authors are multiplying, no Asana task exists. | Seeing it first is the value. Naming an emerging topic before anyone asks is what L4/L5 work looks like. |
+
+### Scoring math
+
+```
+signal_weight(t)  = base_weight × 0.5 ^ (age_days / half_life)
+topic_score       = Σ signal_weight across channels
+                    × impact_multiplier (L1=1.0 … L5=2.0)
+                    ÷ (1 + action_recency_penalty)
+
+incumbent_advantage: a challenger at rank 4 must score > incumbent_at_rank_3 × 1.15
+                     to displace it. Prevents noise-driven churn.
+```
+
+**Defaults (tunable, see experiment queue):**
+- `half_life_days = 3.5` — half of the 7-day window. At day 7, a signal is worth ~25% of its original weight. At day 14, ~6%.
+- `incumbent_margin = 1.15` — challenger needs a 15% margin to displace.
+- `impact_multiplier` — Level 1 = 1.0, Level 2 = 1.25, Level 3 = 1.5, Level 4 = 1.75, Level 5 = 2.0. Mapping based on topic classification against brain.md Strategic Priorities.
+- `action_recency_penalty` — `max(0, 14 - days_since_last_richard_artifact)`. Suppresses a topic Richard just shipped on. Shipped today → penalty 14 → score ÷ 15. Shipped 14+ days ago or never → penalty 0 → full weight. Keeps the system from re-surfacing yesterday's work.
+
+Full SQL and join logic live in `~/shared/context/protocols/hard-thing-selection.md`. The protocol is the executable spec; this section is the why.
+
+### Completion threshold
+
+A candidate is retired from the top-3 when a referenceable artifact is produced. The agent detects this via:
+
+- Asana: a task tagged to the topic completes AND at least one non-Richard actor interacts with it (comment, assignment, story).
+- Wiki: a matching article lands in `wiki.publication_registry` with status `published`.
+- Email: a Richard-authored email containing the topic gets sent to a non-Richard recipient.
+- Code: a commit referencing the topic merges to mainline.
+- Loop/doc: a document is updated with Richard as last_editor and shared with at least one other person.
+
+"Worked on it" does not count. "Have a draft" does not count. "Mentioned it in a meeting" does not count.
+
+### Stickiness (incumbent advantage)
+
+Once a topic holds the #1 slot, it needs momentum, not noise, to be displaced. A challenger at rank 4 must beat the current rank-3 holder by `incumbent_margin × score` (default 1.15×). This prevents the hard thing from flipping daily on churn.
+
+`hard_thing_candidates.incumbent_since` records how long the current #1 has held. If it's been #1 for 7+ days with no artifact produced, escalate to rw-trainer — that's a stuck pattern, not a scoring problem.
+
+### Null state
+
+If no topic clears `score > 2.0` AND `channel_spread >= 2` AND `unique_authors >= 2`, the system returns:
+
+> **No hard thing currently — signals flat.**
+
+Do NOT manufacture one from the task queue. A flat-signal day is a legitimate state. Use it for Level 3 tooling work, delegation cleanup, or rest. Log it in the streak as a neutral day (neither hard-choice nor avoidance).
+
+### Current top 3
+
+Populated by `ps_analytics.main.hard_thing_candidates`. Refresh trigger: AM-Backend + after every signal-write to `signal_tracker`. View contract:
+
+| rank | topic | score | mode | channels | authors | last_richard_artifact | incumbent_since |
+|------|-------|-------|------|----------|---------|----------------------|-----------------|
+| 1 | — | — | — | — | — | — | — |
+| 2 | — | — | — | — | — | — | — |
+| 3 | — | — | — | — | — | — | — |
+
+The #1 row IS the hard thing. Rows 2 and 3 are context — they show what's pressing up against it, and they're what the system watches for incumbent displacement.
+
+### Implementation intention
+
+IF Richard opens a session, THEN the first aMCC read is:
+1. Query `main.hard_thing_candidates WHERE rank = 1`.
+2. Name the topic, the score, the mode, and the last referenceable artifact date.
+3. If `incumbent_since > 7 days`, flag for rw-trainer escalation.
+4. If null state, say so. Don't fabricate.
 
 ---
 
@@ -254,3 +324,5 @@ The aMCC is a muscle — it grows with use and atrophies with avoidance.
 
 ## When to Read This File
 Every session start (check streak + hard thing). When Richard drifts to comfort zone. When trainer flags a STUCK pattern.
+
+**Before naming today's hard thing**, query `main.hard_thing_now` — the top-3 are computed from signal convergence, not picked from the task queue. Rank 1 is the hard thing. If the view returns a null-state row, say so. Don't fabricate.

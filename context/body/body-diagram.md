@@ -38,7 +38,7 @@ graph TB
         %% --- Cognition Layer ---
         subgraph COGNITION["🧠 COGNITION"]
             BRAIN["brain.md<br/>Decisions, Principles,<br/>Five Levels, Leverage"]
-            AMCC["amcc.md<br/>Willpower Engine<br/>Streak: 0 days<br/>Hard Thing: AEO POV"]
+            AMCC["amcc.md<br/>Willpower Engine<br/>Streak: see main.l1_streak<br/>Hard Thing: see main.hard_thing_now"]
         end
 
         %% --- Memory Layer ---

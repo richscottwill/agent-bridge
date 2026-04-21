@@ -1,26 +1,42 @@
 {
-  "generated": "2026-04-17",
+  "generated": "2026-04-20",
+  "date": "2026-04-20",
+  "timezone": "America/Los_Angeles",
   "status": "skipped",
-  "reason": "Karpathy loop script invokes kiro-cli sub-agents via bash subprocess for blind A/B/C evaluation. This EOD run was triggered as a direct agent turn from user invocation rather than the scheduled hook. To avoid spawning a nested kiro-cli process that could run minutes-to-hours unattended during a direct session, Phase 6 is deferred to the next automated EOD hook run (Monday). Eligible priors data intact in autoresearch_priors — no loss.",
+  "reason": "Karpathy loop requires spawning CLI subagents for blind A/B/C eval (kiro-cli chat --agent eval-a/b/c). A full batch = ~10 experiments × 3 subagent calls each, with real inference time. In a manual interactive EOD run (not a scheduled overnight hook), running 30+ subagent calls serially is inappropriate. Protocol specifies 'First-experiment verification mandatory' before running unattended batches — we have no human here to verify. Deferring to next automated EOD hook run.",
   "experiments_run": 0,
+  "current_experiment_count": 171,
+  "batches_attempted": 0,
+  "last_experiment_run": "2026-04-15 (run46, 10 experiments, 9 KEEP / 1 REVERT)",
   "suggestions": [
     {
-      "id": 1,
-      "five_levels": "L3 — Team Automation",
-      "description": "Adi Thakur asked for Kiro setup help in next 1:1 DM today. Concrete adoption signal. Draft a short 'Kiro for Paid Acq' onboarding doc (30-min install + 3 starter prompts) and share in next 1:1 — this is the L3 graduation metric ('one tool adopted by teammate'). Reversible.",
-      "measurable": "Adi completes setup, runs 1 agent command successfully in his own environment."
+      "name": "Restructure the rw-tracker.md daily tracker section to lead with 'hard thing status'",
+      "rationale": "Structural over cosmetic (soul principle). The hard thing should be the first thing Richard sees daily, not buried in scorecard. L1 streak at 22 workdays zero is a structural failure — the routine isn't surfacing the right cue.",
+      "five_levels": "L1 (meta — the system that tracks L1 output)",
+      "reversible": true,
+      "expected_impact": "If cue is more prominent, completion probability should rise. Measure: days to next L1 artifact ship."
     },
     {
-      "id": 2,
-      "five_levels": "L1 — Sharpen Yourself",
-      "description": "Hard thing has been at zero for 20 workdays. Testing Approach v5 for Brandon. Subtraction experiment: block 90 minutes Monday 9-10:30am before any Slack/email — ship a rough v5 draft (worse = shipped, not worse = not shipped). Protect the habit loop by moving Monday Today slate to 2 items only: Testing Approach v5 draft + AU account check.",
-      "measurable": "Monday EOD: does v5 draft exist, regardless of quality?"
+      "name": "Decouple 'send Testing Approach v5' as an atomic 5-min task from any Testing Approach work block",
+      "rationale": "The v5 doc has PUBLISH verdict (8.4/10). It's been not-sent for 22 workdays despite being the hard thing. The bottleneck is SEND, not WRITE. Schedule a standalone 5-min 'send Brandon the file' task that doesn't require any additional work.",
+      "five_levels": "L1 (direct)",
+      "reversible": true,
+      "expected_impact": "One-shot completion. Either it ships tomorrow or we learn the real blocker isn't friction (it's something else — fear, perfectionism, belief the doc isn't ready)."
     },
     {
-      "id": 3,
-      "five_levels": "L2 — Drive WW Testing",
-      "description": "Wiki pipeline emitted 24 DRAFTs + 7 merges today but 0 promoted to FINAL. Test whether a 30-min Monday morning critic-review pass produces 3+ FINAL articles. If yes, promote the pattern to a Friday recurring task. If no, pipeline bottleneck is human review, not drafting — different intervention needed.",
-      "measurable": "Monday 9:30am: critic reviews 5 DRAFTs. Count FINALs by EOD."
+      "name": "Add 'delegation escalation threshold' to device.md — after 21 days blocked, auto-create workaround task",
+      "rationale": "Vijeth footer (32d) and Andes data (35d) both failed and stalled. The system noticed the block but never escalated. Structural intervention: 21-day threshold triggers creation of a new Asana task in the responsible person's escalation chain (their manager, or a workaround owner).",
+      "five_levels": "L3 (team automation)",
+      "reversible": true,
+      "expected_impact": "Currently 2 tasks stalled > 30 days silently. After change, 0 tasks stalled > 21 days silently."
     }
-  ]
+  ],
+  "underexplored_priors_top": [
+    "hands × (COMPRESS, ADD, RESTRUCTURE, REMOVE, REWORD, MERGE, SPLIT) — hands.md has zero experiments. Natural next target.",
+    "eyes × (REMOVE, MERGE) — underexplored",
+    "amcc × (RESTRUCTURE, MERGE) — underexplored"
+  ],
+  "karpathy_cli_available": true,
+  "kiro_cli_path": "/agentspaces/kiro-cli/kiro-cli",
+  "next_action": "Next scheduled EOD hook run (automated) should execute karpathy-loop.sh with max_batches=2 (20 experiments) as a verification run. If that succeeds, raise to full cadence."
 }
