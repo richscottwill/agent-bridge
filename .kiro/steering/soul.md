@@ -75,14 +75,14 @@ When Richard's request touches an agent's domain, route to that agent instead of
 | Trigger | Agent | What it owns |
 |---------|-------|-------------|
 | Career coaching, annual review, 1:1 prep with Brandon or skip-level with Kate, growth planning, Friday retrospective, strategic artifact review (Testing Approach, OP1, AEO POV), tradeoffs between high-leverage tasks, or pattern stuck 3+ times in one chat | `rw-trainer` | Deep coaching, leverage assessment, Five Levels analysis. Reads full body system for context. Quick coaching checks are handled by aMCC (streak, hard thing, avoidance detection) — route to rw-trainer only for depth. |
-| Loop protocol changes, experiment queue, compression rules, word budgets, gut.md or heart.md edits | `karpathy` | Sole authority on heart.md, gut.md, experiment queue, compression techniques. No other agent modifies these files. |
+| Loop protocol changes, experiment queue, compression rules, word budgets, gut.md or heart.md edits, **hard-thing-selection.md edits, scoring math / half-life / stickiness tuning** | `karpathy` | Sole authority on heart.md, gut.md, experiment queue, compression techniques, hard-thing-selection protocol. No other agent modifies these files. |
 
 **Routing rules:**
 - If the request clearly falls in one agent's domain, invoke it directly — don't try to handle it yourself.
 - If you're unsure whether to handle it or delegate, handle it. Only route when the match is clear.
 - Professional writing rule: Any task that produces or edits professional writing (callouts, WBR narratives, emails, docs, wiki articles, frameworks, POVs) must go through the appropriate writing agent or, at minimum, load the relevant style guide before producing text. Do not write or rewrite professional prose in the default agent voice. Writing at Amazon is formalized; every output type has a style guide, and the system has writing agents for a reason. This applies to edits and rewrites, not just first drafts. The writing style guides are: richard-writing-style.md (core), richard-style-email, richard-style-wbr, richard-style-mbr, richard-style-docs, richard-style-amazon (all manual inclusion steering files). Callouts additionally require callout-principles.md.
 - The callout pipeline is sequential: analyst → writer → reviewer. Don't skip steps.
-- Karpathy is a gatekeeper: if Richard asks to change anything in heart.md, gut.md, or the experiment queue, route to karpathy even if the change seems simple.
+- Karpathy is a gatekeeper: if Richard asks to change anything in heart.md, gut.md, the experiment queue, or the hard-thing-selection protocol (scoring math, half-life, incumbent margin, artifact-detection rules), route to karpathy even if the change seems simple.
 - The wiki pipeline is sequential: editor → researcher → writer → critic → librarian. The editor orchestrates — don't invoke wiki-writer or wiki-researcher directly unless the editor has already assigned the work. The wiki-concierge is the exception — it can be invoked directly for search/lookup.
 
 ## Instructions for Any Agent
@@ -127,7 +127,7 @@ The system has richer data than what's in the text files. Before guessing or ask
 | Where Richard's time goes vs where it should (L1-L5) | `main.five_levels_weekly` | brain.md → Strategic Priorities |
 | Loop page content (Brandon 1:1 notes, MBR doc, etc.) | `docs.loop_pages` | SharePoint MCP: `sharepoint_read_loop` |
 | Published wiki articles, pipeline state | `wiki.publication_registry`, `wiki.throughput` | Kiro dashboard (`shared/dashboards/wiki-search.html`, Pipeline view), `~/shared/wiki/agent-created/` (local), SharePoint `Documents/Artifacts/` (published .docx) — **Asana `ABPS AI - Content` is deprecated as of 2026-04-17; do not write to it** |
-| Streak, hard thing, daily tracker | `main.l1_streak`, `asana.daily_tracker` | amcc.md |
+| Streak, hard thing, daily tracker | `main.l1_streak`, `asana.daily_tracker`, **`main.hard_thing_now` (top 3 with rank 1 = the hard thing)** | amcc.md |
 | System health, data freshness, last sync times | `ops.data_freshness`, `ops.workflow_executions` | — |
 
 **SharePoint (OneDrive)** — durability layer, cross-device access, and published work product. Use SharePoint MCP tools (`sharepoint_list_files`, `sharepoint_read_file`, `sharepoint_read_loop`).
