@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Spin the Wheel</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --panel: #1a2028;
+    --panel-2: #242b35;
+    --text: #e8eef5;
+    --muted: #8a95a5;
+    --accent: #ff9900;
+    --accent-2: #146eb4;
+    --danger: #d13438;
+    --success: #2da44e;
+    --border: #2d3743;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; min-height: 100%;
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  .app {
+    max-width: 1100px; margin: 0 auto; padding: 24px;
+    display: grid; grid-template-columns: 1fr 360px; gap: 24px;
+  }
+  @media (max-width: 860px) { .app { grid-template-columns: 1fr; } }
+  h1 { margin: 0 0 4px 0; font-size: 22px; letter-spacing: 0.2px; }
+  .subtitle { color: var(--muted); font-size: 13px; margin-bottom: 18px; }
+  .wheel-wrap {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; display: flex; flex-direction: column; align-items: center;
+  }
+  .wheel-stage { position: relative; width: 100%; max-width: 560px; aspect-ratio: 1 / 1; }
+  canvas { width: 100%; height: 100%; display: block; }
+  .pointer {
+    position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-top: 28px solid var(--accent);
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    z-index: 2;
+  }
+  .hub {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 72px; height: 72px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #3a4552, #1a2028 70%);
+    border: 3px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; user-select: none;
+    font-weight: 700; font-size: 14px; letter-spacing: 1px; color: var(--text);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+    z-index: 2; transition: transform 0.1s;
+  }
+  .hub:hover { transform: translate(-50%, -50%) scale(1.05); }
+  .hub:active { transform: translate(-50%, -50%) scale(0.95); }
+  .hub.spinning { cursor: not-allowed; opacity: 0.7; }
+  .result {
+    margin-top: 18px; min-height: 42px; padding: 10px 16px;
+    border-radius: 8px; font-size: 18px; font-weight: 600; text-align: center;
+    background: var(--panel-2); border: 1px solid var(--border);
+    width: 100%; max-width: 560px;
+  }
+  .result.winner { background: rgba(45,166,78,0.15); border-color: var(--success); color: #6fdd8d; }
+  .sidebar {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px; display: flex; flex-direction: column; gap: 14px;
+    max-height: calc(100vh - 48px); overflow-y: auto;
+  }
+  .section-title {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
+    color: var(--muted); margin: 4px 0 2px 0; font-weight: 600;
+  }
+  .row { display: flex; gap: 8px; }
+  input[type="text"], textarea {
+    background: var(--panel-2); color: var(--text);
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: 8px 10px; font-size: 14px; font-family: inherit;
+    width: 100%;
+  }
+  input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--accent); }
+  button {
+    background: var(--accent-2); color: white; border: none; border-radius: 6px;
+    padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+  button:hover { background: #1a7ec7; }
+  button:active { transform: scale(0.97); }
+  button.ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  button.ghost:hover { background: var(--panel-2); color: var(--text); }
+  button.danger { background: transparent; color: var(--danger); border: 1px solid var(--border); }
+  button.danger:hover { background: rgba(209,52,56,0.1); }
+  button.accent { background: var(--accent); color: #1a2028; }
+  button.accent:hover { background: #ffab1f; }
+  .names-list { display: flex; flex-direction: column; gap: 6px; }
+  .name-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 10px; border-radius: 6px; background: var(--panel-2);
+    border: 1px solid transparent;
+  }
+  .name-row.excluded { opacity: 0.4; }
+  .name-row .swatch { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+  .name-row .name { flex: 1; font-size: 14px; }
+  .name-row .count { font-size: 11px; color: var(--muted); }
+  .name-row input[type="checkbox"] { accent-color: var(--accent); cursor: pointer; }
+  .name-row button.x { background: transparent; color: var(--muted); padding: 2px 6px; font-size: 16px; }
+  .name-row button.x:hover { color: var(--danger); background: transparent; }
+  .history-list { display: flex; flex-direction: column; gap: 4px; max-height: 200px; overflow-y: auto; }
+  .history-row {
+    display: flex; justify-content: space-between; gap: 8px;
+    padding: 6px 10px; border-radius: 4px; background: var(--panel-2);
+    font-size: 12px;
+  }
+  .history-row .who { font-weight: 600; }
+  .history-row .when { color: var(--muted); font-size: 11px; }
+  .footer { color: var(--muted); font-size: 11px; text-align: center; margin-top: 12px; }
+  .toast {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: var(--success); color: white; padding: 10px 18px;
+    border-radius: 6px; font-size: 13px; z-index: 99;
+    opacity: 0; transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(-6px); }
+  .stats { display: flex; gap: 12px; font-size: 12px; color: var(--muted); }
+  .stats .chip { background: var(--panel-2); padding: 4px 10px; border-radius: 12px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div>
+    <h1>🎡 Spin the Wheel</h1>
+    <div class="subtitle">Randomize a choice from your team. Share the URL — the wheel travels with its names.</div>
+    <div class="wheel-wrap">
+      <div class="wheel-stage">
+        <canvas id="wheel" width="560" height="560"></canvas>
+        <div class="pointer" aria-hidden="true"></div>
+        <div class="hub" id="spinBtn" title="Click to spin">SPIN</div>
+      </div>
+      <div class="result" id="result">Add some names, then click SPIN.</div>
+      <div class="stats" style="margin-top: 10px;">
+        <span class="chip" id="activeCount">0 active</span>
+        <span class="chip" id="totalSpins">0 spins</span>
+      </div>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div>
+      <div class="section-title">Add Name</div>
+      <div class="row">
+        <input type="text" id="nameInput" placeholder="Type a name, press Enter" />
+        <button id="addBtn">Add</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title">Bulk Add (one per line)</div>
+      <textarea id="bulkInput" rows="3" placeholder="Alice&#10;Bob&#10;Carol"></textarea>
+      <div class="row" style="margin-top: 6px;">
+        <button id="bulkAddBtn" class="ghost" style="flex:1;">Add All</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title">Names (☑ = on the wheel)</div>
+      <div class="names-list" id="namesList"></div>
+    </div>
+
+    <div>
+      <div class="section-title">Recent Winners</div>
+      <div class="history-list" id="historyList"></div>
+    </div>
+
+    <div class="row">
+      <button id="shareBtn" class="accent" style="flex:1;">📋 Copy Shareable Link</button>
+    </div>
+    <div class="row">
+      <button id="exportBtn" class="ghost" style="flex:1;">Export JSON</button>
+      <button id="importBtn" class="ghost" style="flex:1;">Import JSON</button>
+      <input type="file" id="importFile" accept="application/json" style="display:none;" />
+    </div>
+    <div class="row">
+      <button id="clearHistoryBtn" class="danger" style="flex:1;">Clear History</button>
+      <button id="resetBtn" class="danger" style="flex:1;">Reset All</button>
+    </div>
+    <div class="footer">State saved to this browser. Share link encodes names so others see the same wheel.</div>
+  </aside>
+</div>
+
+<div class="toast" id="toast">Copied</div>
+
+<script>
+/* ============================================================
+ * Spin the Wheel — single-file, no dependencies.
+ * State is persisted in localStorage + shareable via URL hash.
+ * ============================================================ */
+
+const STORAGE_KEY = 'spinWheel_v1';
+const PALETTE = [
+  '#ff9900','#146eb4','#2da44e','#d13438','#8764b8',
+  '#e3008c','#00b7c3','#ca5010','#498205','#c239b3',
+  '#038387','#8e562e','#567c8d','#d83b01','#5c2d91'
+];
+
+const state = {
+  names: [],        // { id, label, enabled, wins }
+  history: [],      // { label, at }
+  spinning: false,
+  currentAngle: 0,
+};
+
+// ------------- persistence -------------
+function save() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      names: state.names,
+      history: state.history,
+    }));
+  } catch (e) { /* quota/private mode — ignore */ }
+}
+function loadFromStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (e) { return null; }
+}
+function loadFromHash() {
+  if (!location.hash || location.hash.length < 2) return null;
+  try {
+    const json = decodeURIComponent(atob(location.hash.slice(1)));
+    return JSON.parse(json);
+  } catch (e) { return null; }
+}
+
+function loadInitial() {
+  // URL hash wins (so shared links work even if the receiver has prior state)
+  const hash = loadFromHash();
+  const stored = loadFromStorage();
+  if (hash && Array.isArray(hash.names) && hash.names.length) {
+    // Merge: take names from hash, preserve local history.
+    state.names = hash.names.map(normalizeName);
+    state.history = (stored && Array.isArray(stored.history)) ? stored.history : [];
+  } else if (stored) {
+    state.names = (stored.names || []).map(normalizeName);
+    state.history = stored.history || [];
+  }
+}
+
+function normalizeName(n) {
+  return {
+    id: n.id || ('n_' + Math.random().toString(36).slice(2, 9)),
+    label: String(n.label || '').trim(),
+    enabled: n.enabled !== false,
+    wins: Number.isFinite(n.wins) ? n.wins : 0,
+  };
+}
+
+// ------------- rendering -------------
+const canvas = document.getElementById('wheel');
+const ctx = canvas.getContext('2d');
+
+function activeNames() { return state.names.filter(n => n.enabled && n.label); }
+
+function drawWheel() {
+  const names = activeNames();
+  const size = canvas.width;
+  const cx = size / 2, cy = size / 2;
+  const r = size / 2 - 8;
+  ctx.clearRect(0, 0, size, size);
+
+  // outer ring
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(state.currentAngle);
+
+  if (names.length === 0) {
+    ctx.beginPath();
+    ctx.arc(0, 0, r, 0, Math.PI * 2);
+    ctx.fillStyle = '#242b35';
+    ctx.fill();
+    ctx.restore();
+    return;
+  }
+
+  const slice = (Math.PI * 2) / names.length;
+  for (let i = 0; i < names.length; i++) {
+    const start = i * slice;
+    const end = start + slice;
+    // wedge
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.arc(0, 0, r, start, end);
+    ctx.closePath();
+    ctx.fillStyle = PALETTE[i % PALETTE.length];
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(0,0,0,0.25)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // label
+    ctx.save();
+    ctx.rotate(start + slice / 2);
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#ffffff';
+    const fontSize = Math.max(11, Math.min(22, 180 / Math.max(6, names.length)));
+    ctx.font = `600 ${fontSize}px -apple-system, "Segoe UI", Arial, sans-serif`;
+    const label = truncate(names[i].label, Math.max(10, Math.floor(r / (fontSize * 0.55))));
+    // subtle shadow for contrast
+    ctx.shadowColor = 'rgba(0,0,0,0.45)';
+    ctx.shadowBlur = 2;
+    ctx.fillText(label, r - 14, 0);
+    ctx.restore();
+  }
+
+  // inner ring
+  ctx.beginPath();
+  ctx.arc(0, 0, r, 0, Math.PI * 2);
+  ctx.strokeStyle = '#0f1419';
+  ctx.lineWidth = 6;
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+function truncate(s, n) { return s.length > n ? s.slice(0, n - 1) + '…' : s; }
+
+function renderNames() {
+  const container = document.getElementById('namesList');
+  container.innerHTML = '';
+  state.names.forEach((n, i) => {
+    const row = document.createElement('div');
+    row.className = 'name-row' + (n.enabled ? '' : ' excluded');
+    const swatch = document.createElement('span');
+    swatch.className = 'swatch';
+    swatch.style.background = n.enabled ? PALETTE[activeIndex(n.id) % PALETTE.length] : '#3a4552';
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.checked = n.enabled;
+    cb.title = n.enabled ? 'On the wheel' : 'Excluded';
+    cb.addEventListener('change', () => { n.enabled = cb.checked; save(); renderAll(); });
+    const label = document.createElement('span');
+    label.className = 'name';
+    label.textContent = n.label;
+    const count = document.createElement('span');
+    count.className = 'count';
+    count.textContent = n.wins ? `×${n.wins}` : '';
+    const del = document.createElement('button');
+    del.className = 'x';
+    del.textContent = '×';
+    del.title = 'Remove';
+    del.addEventListener('click', () => {
+      state.names.splice(i, 1);
+      save(); renderAll();
+    });
+    row.append(cb, swatch, label, count, del);
+    container.appendChild(row);
+  });
+  document.getElementById('activeCount').textContent = `${activeNames().length} active`;
+  document.getElementById('totalSpins').textContent = `${state.history.length} spins`;
+}
+
+function activeIndex(id) {
+  return activeNames().findIndex(n => n.id === id);
+}
+
+function renderHistory() {
+  const container = document.getElementById('historyList');
+  container.innerHTML = '';
+  if (state.history.length === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'history-row';
+    empty.innerHTML = '<span class="who" style="color:var(--muted);font-weight:400;">No spins yet.</span>';
+    container.appendChild(empty);
+    return;
+  }
+  const recent = state.history.slice(-20).reverse();
+  recent.forEach(h => {
+    const row = document.createElement('div');
+    row.className = 'history-row';
+    const who = document.createElement('span');
+    who.className = 'who';
+    who.textContent = h.label;
+    const when = document.createElement('span');
+    when.className = 'when';
+    when.textContent = formatWhen(h.at);
+    row.append(who, when);
+    container.appendChild(row);
+  });
+}
+
+function formatWhen(iso) {
+  const d = new Date(iso);
+  const now = new Date();
+  const diffMs = now - d;
+  const mins = Math.round(diffMs / 60000);
+  if (mins < 1) return 'just now';
+  if (mins < 60) return `${mins}m ago`;
+  const hrs = Math.round(mins / 60);
+  if (hrs < 24) return `${hrs}h ago`;
+  return d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+}
+
+function renderAll() { drawWheel(); renderNames(); renderHistory(); }
+
+// ------------- spinning -------------
+function spin() {
+  if (state.spinning) return;
+  const names = activeNames();
+  if (names.length < 2) {
+    setResult('Need at least 2 active names.', false);
+    return;
+  }
+  state.spinning = true;
+  document.getElementById('spinBtn').classList.add('spinning');
+  setResult('Spinning…', false);
+
+  // Pick winner, then compute target angle that lands winner under the top pointer.
+  const winnerIdx = Math.floor(Math.random() * names.length);
+  const slice = (Math.PI * 2) / names.length;
+  // pointer is at the top (−π/2). We want the middle of winnerIdx slice to align with −π/2.
+  const sliceMid = winnerIdx * slice + slice / 2;
+  const targetAngle = (-Math.PI / 2) - sliceMid;
+  // Add several full spins for drama.
+  const turns = 6 + Math.random() * 2;
+  const finalAngle = targetAngle - turns * Math.PI * 2;
+
+  const start = state.currentAngle;
+  const delta = finalAngle - ((start % (Math.PI * 2)) > 0 ? (start % (Math.PI * 2)) : (start % (Math.PI * 2)));
+  // Simpler: animate from `start` to `start + (finalAngleShifted - start)`.
+  const endAngle = start + (finalAngle - (start - (turns * Math.PI * 2) * Math.sign(0))); // see below
+  // Easier approach: just target `start - (turns*2π + sliceMid + π/2 + start mod 2π)`.
+  // Rewriting cleanly:
+  const normStart = ((start % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+  const needed = ((-Math.PI / 2) - sliceMid - normStart) % (Math.PI * 2);
+  // needed is in (-2π, 2π); force negative (clockwise feel) then add spins
+  const neededNeg = needed > 0 ? needed - Math.PI * 2 : needed;
+  const totalDelta = neededNeg - turns * Math.PI * 2;
+  const target = start + totalDelta;
+
+  const duration = 4800; // ms
+  const t0 = performance.now();
+
+  function easeOutQuint(t) { return 1 - Math.pow(1 - t, 5); }
+
+  function frame(now) {
+    const t = Math.min(1, (now - t0) / duration);
+    const eased = easeOutQuint(t);
+    state.currentAngle = start + (target - start) * eased;
+    drawWheel();
+    if (t < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      state.spinning = false;
+      document.getElementById('spinBtn').classList.remove('spinning');
+      const winner = names[winnerIdx];
+      winner.wins = (winner.wins || 0) + 1;
+      state.history.push({ label: winner.label, at: new Date().toISOString() });
+      save();
+      renderAll();
+      setResult(`🎉 ${winner.label}`, true);
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+function setResult(text, isWinner) {
+  const el = document.getElementById('result');
+  el.textContent = text;
+  el.classList.toggle('winner', !!isWinner);
+}
+
+// ------------- add / remove names -------------
+function addName(label) {
+  const clean = String(label || '').trim();
+  if (!clean) return;
+  if (state.names.some(n => n.label.toLowerCase() === clean.toLowerCase())) return; // dedupe
+  state.names.push(normalizeName({ label: clean, enabled: true }));
+  save();
+  renderAll();
+}
+
+function bulkAdd(text) {
+  const lines = text.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+  lines.forEach(addName);
+}
+
+// ------------- share -------------
+function buildShareURL() {
+  const payload = { names: state.names.map(n => ({ id: n.id, label: n.label, enabled: n.enabled, wins: 0 })) };
+  const hash = btoa(encodeURIComponent(JSON.stringify(payload)));
+  return location.origin + location.pathname + '#' + hash;
+}
+
+async function copyShareLink() {
+  const url = buildShareURL();
+  try {
+    await navigator.clipboard.writeText(url);
+    toast('Link copied to clipboard');
+  } catch (e) {
+    // fallback
+    const ta = document.createElement('textarea');
+    ta.value = url; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy'); ta.remove();
+    toast('Link copied');
+  }
+}
+
+function exportJSON() {
+  const blob = new Blob([JSON.stringify({ names: state.names, history: state.history }, null, 2)],
+    { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `spin-wheel-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importJSON(file) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      if (Array.isArray(data.names)) state.names = data.names.map(normalizeName);
+      if (Array.isArray(data.history)) state.history = data.history;
+      save();
+      renderAll();
+      toast('Imported');
+    } catch (e) { toast('Invalid file'); }
+  };
+  reader.readAsText(file);
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1600);
+}
+
+// ------------- wire up -------------
+document.getElementById('spinBtn').addEventListener('click', spin);
+document.getElementById('addBtn').addEventListener('click', () => {
+  const inp = document.getElementById('nameInput');
+  addName(inp.value); inp.value = ''; inp.focus();
+});
+document.getElementById('nameInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') { addName(e.target.value); e.target.value = ''; }
+});
+document.getElementById('bulkAddBtn').addEventListener('click', () => {
+  const ta = document.getElementById('bulkInput');
+  bulkAdd(ta.value); ta.value = '';
+});
+document.getElementById('shareBtn').addEventListener('click', copyShareLink);
+document.getElementById('exportBtn').addEventListener('click', exportJSON);
+document.getElementById('importBtn').addEventListener('click', () => document.getElementById('importFile').click());
+document.getElementById('importFile').addEventListener('change', e => {
+  if (e.target.files[0]) importJSON(e.target.files[0]);
+  e.target.value = '';
+});
+document.getElementById('clearHistoryBtn').addEventListener('click', () => {
+  if (!confirm('Clear all spin history? (Keeps names.)')) return;
+  state.history = [];
+  state.names.forEach(n => n.wins = 0);
+  save(); renderAll();
+});
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (!confirm('Remove all names and history?')) return;
+  state.names = []; state.history = [];
+  save(); renderAll();
+});
+
+// init
+loadInitial();
+// seed with a gentle hint if empty
+if (state.names.length === 0) {
+  state.names = ['Alice', 'Bob', 'Carol', 'Dev'].map(label => normalizeName({ label, enabled: true }));
+  save();
+}
+renderAll();
+// If a share hash was loaded, strip it so subsequent edits don't get overridden on reload.
+if (location.hash) history.replaceState(null, '', location.pathname);
+</script>
+</body>
+</html>
