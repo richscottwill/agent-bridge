@@ -88,7 +88,7 @@ This report is the demand-side complement to the critic's supply-side audit. Tog
 ### Search strategy (in order)
 
 1. **wiki-index.md first (O(1) lookup)** — Read `~/shared/wiki/wiki-index.md`. Match on summary, tags, key_entities, action_verbs from AGENT_CONTEXT. This is the fastest path — use it before anything else.
-2. **context-catalog.md (broader)** — If the index doesn't narrow enough, check `~/shared/context/active/context-catalog.md` for cross-system references that span wiki + body + artifacts.
+2. **context-catalog.md (broader)** — If the index doesn't narrow enough, check `~/shared/wiki/agent-created/_meta/context-catalog.md` for cross-system references that span wiki + body + artifacts.
 3. **Frontmatter scan** — Scan frontmatter of candidate articles in `~/shared/wiki/` for `type`, `audience`, `depends_on`.
 4. **Grep staging/ and artifacts/ (exhaustive)** — If index + catalog miss, grep `~/shared/wiki/` and `~/shared/wiki/` for keyword matches. This is slow but catches articles with poor metadata.
 5. **Dependency traversal** — If an article's `depends_on` points to prerequisite knowledge the reader might need, mention it: "You may also want to read [Prerequisite](slug) first."

@@ -66,8 +66,7 @@ Sequential. Each funds the next. Don't skip ahead.
 Full detail: ~/shared/context/body/brain.md → Strategic Priorities
 
 ## Key Context Files
-#[[file:~/shared/context/body/body.md]]
-body.md is the navigation layer for the whole system — start there for all context file paths, organ locations, and system navigation.
+System navigation map lives at `~/shared/context/body/body.md` — a table of organ names, file paths, and when-to-read rules. Read it when you need to find an organ or orient a new session. It is no longer auto-injected; load on demand.
 
 ## Agent Routing Directory
 When Richard's request touches an agent's domain, route to that agent instead of handling it yourself. Don't guess — delegate to the specialist.
