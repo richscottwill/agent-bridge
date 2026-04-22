@@ -11,15 +11,15 @@ Started: 18:47 PT
 - [x] ✅ Phase 3: Organ cascade + maintenance — compression skipped (no organ changes today). Workflow observability: still not auto-logged. Communication analytics deferred (Friday only). Enrichment skipped (Tuesday — defer to Friday full run).
 - [x] ✅ Phase 4: Recurring task state — Monday EU SSR next instance auto-created by Asana for 4/27. Weekly procedures current. pattern_trajectory: L1 STREAK STUCK at 23 workdays zero (Testing Doc send still missing). delegation_verification: Vijeth (33d) + Andes (36d) ESCALATE tasks active from yesterday. No monthly/quarterly procedures due today.
 - [x] ✅ Phase 5: Housekeeping — daily_tracker row written (7/3/6 -1 delta, L2=T, L3=T, L1=F, wdz=23). l1_streak row written (wdz=23, artifact_shipped=FALSE). hook_executions row written. Changelog to be appended.
-- [x] ❌ Phase 6: Experiments SKIPPED — same reason as 4/20: manual interactive run inappropriate for spawning 30+ subagent blind eval calls without first-experiment verification. Deferred to next automated EOD hook.
-- [x] ✅ Phase 7: Compile output — all 3 JSONs written with generated=2026-04-21. HARD GATE passes. rw-tracker + hands.md append-only updates deferred (Friday Scorecard). Changelog pending.
-- [ ] Phase 7.5: SharePoint durability sync — PENDING (will push 3 EOD JSONs to Kiro-Drive/system-state/)
+- [x] ❌ Phase 6: Experiments SKIPPED — interactive session, not appropriate to spawn ~30 subagent blind eval calls without first-experiment verification. Queued for next automated overnight hook. 3 suggestions logged for that run to pick up.
+- [x] ✅ Phase 7: Compile output — all 3 JSONs written with generated=2026-04-21. HARD GATE passes. changelog appended. current.md refreshed with today's meetings + tomorrow's priorities.
+- [x] ❌ Phase 7.5: SharePoint durability sync FAILED — mwinit auth expired ("No authorization code in KMSI response"). Richard needs to run `mwinit -f` to restore. Local files are source of truth. Non-blocking per protocol.
 
 ## Frontend
-- [ ] Step 0: HARD GATE — to verify
-- [ ] Step 1: EOD summary
-- [ ] Step 2: Decisions needed
-- [ ] Step 3: Portfolio + ABPS AI summary
-- [ ] Step 4: System health
-- [ ] Step 5: Experiment results (will note SKIPPED)
-- [ ] Step 6: Slack DM summary
+- [x] Step 0: HARD GATE — all 3 JSONs exist with 2026-04-21 generated date. PASS. Phase 6 SKIPPED (Karpathy defer). Phase 7.5 FAILED (SharePoint auth). First line of summary warns.
+- [x] Step 1: EOD summary — presented
+- [x] Step 2: Decisions needed — presented
+- [x] Step 3: Portfolio + ABPS AI summary — presented (ABPS AI Content deprecated per soul.md)
+- [x] Step 4: System health — presented
+- [x] Step 5: Experiment results — presented (SKIPPED with 3 suggestions)
+- [x] Step 6: Slack DM summary — posted to prichwil DM

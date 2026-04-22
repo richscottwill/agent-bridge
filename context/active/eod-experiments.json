@@ -3,7 +3,7 @@
   "date": "2026-04-21",
   "timezone": "America/Los_Angeles",
   "status": "skipped",
-  "reason": "Karpathy loop requires spawning CLI subagents for blind A/B/C eval. In a manual interactive EOD run (not a scheduled overnight hook), running 30+ subagent calls serially is inappropriate. Protocol specifies 'First-experiment verification mandatory' before running unattended batches. Deferring to next automated EOD hook run (same policy as 4/20).",
+  "reason": "Interactive EOD session. Karpathy protocol requires ~30 subagent CLI calls for blind A/B/C eval with first-experiment verification before unattended batches. Not appropriate to kick off from a manually-invoked session. Queued for the next automated overnight hook run to execute with human-sampled verification on the first batch.",
   "experiments_run": 0,
   "last_experiment_run": "2026-04-15 (run46, 10 experiments, 9 KEEP / 1 REVERT)",
   "suggestions": [
