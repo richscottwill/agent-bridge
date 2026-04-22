@@ -13,6 +13,12 @@ Lena is the AU Country Leader. She owns the P&L and is accountable for AU growth
 
 4. She proposed a two-way door decision: switch to new pages, measure for 4 weeks, switch back if it doesn't work. That's a reasonable, low-risk framing. The central team's counter-proposal (50/50 split) would have delayed action further on something she'd already been asking about for weeks.
 
+---
+
+## Market context updates
+
+OCI: No confirmed AU timeline. MCC has not been created.
+
 5. She's now asking follow-up questions (LP URLs, logged-in redirects, CPA overstating) that suggest she's trying to understand the full picture — not just blame. If CPAs are overstated because repeat visitors are being counted, that changes the narrative for everyone.
 
 6. From her perspective, the central PS team has been slow to respond (Brandon flagged unanswered emails), slow to act (weeks between her request and implementation), and is now potentially going to use the performance decline she predicted they'd resist to argue against the change she mandated. That would feel like "I told you so" from a team that dragged its feet.
@@ -36,7 +42,7 @@ She has a legitimate case that the central team was not responsive enough to a m
 | # | Potential Claim Against Richard/Team | Evidence Supporting Claim | Counterclaim | Evidence Supporting Counterclaim |
 |---|--------------------------------------|--------------------------|--------------|--------------------------------|
 | 4 | AU's $6 CPC is unacceptable compared to consumer's $0.18 | Harsha's data shows consumer CPC at $0.18 vs AB at ~$6. 33x gap. | Consumer PS is 82% Shopping Ads ($9M vs $2M text ads QTD) which have structurally lower CPCs. AB doesn't have Shopping Ads. B2B keyword campaigns have inherently higher CPCs due to lower search volume and higher competition. AWS AU (also B2B) shows >$3 CPCs and 2nd highest CPAs WW. | Yun's data on Shopping vs Text Ad spend split. Brandon's reply to Lena (3/19) with AWS benchmarks. AB CPC was trending down: -19% CPC reduction over 3 weeks from Adobe bid strategies. |
-| 5 | The team should have gotten CPCs down faster | Feb CPA was $235 AUD vs $226 goal — still above target. | AU launched June 2025 — less than a year old. CPC optimization is iterative. Adobe bid strategies were just implemented and showing -19% CPC decline over 3 weeks. OCI (May 2026) will be the structural unlock for bidding efficiency. | Weekly data shows consistent CPC improvement W7-W13. Brandon's email to Lena explicitly set this expectation. |
+| 5 | The team should have gotten CPCs down faster | Feb CPA was $235 AUD vs $226 goal — still above target. | AU launched June 2025 — less than a year old. CPC optimization is iterative. Adobe bid strategies were just implemented and showing -19% CPC decline over 3 weeks. OCI (timeline TBD) will be the structural unlock for bidding efficiency when it launches. | Weekly data shows consistent CPC improvement W7-W13. Brandon's email to Lena explicitly set this expectation. |
 
 ### Theme 3: Landing Page Decision
 

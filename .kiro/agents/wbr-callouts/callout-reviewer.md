@@ -24,6 +24,25 @@ This gives you the previous weeks' scores to compare against in the "Week-over-w
 
 ## What you check
 
+### 0. Quality gates (hard rules — check FIRST)
+Before scoring prose quality, check the quality gates. These are hard blocks that prevent publish:
+
+**Gate A — Forecast accuracy**: If forecast miss > 30% for 3+ consecutive weeks for this market, the callout is BLOCKED. The narrative may be built on unreliable projections. Flag for manual review.
+- Check: `SELECT market, avg_error_regs, hit_rate_regs FROM ps.quality_gate_thresholds WHERE forecast_accuracy_status = 'AT_RISK'`
+- Or check the `quality_gates` field in `callout-data.json` for the current week
+
+**Gate B — CPA deviation**: If current CPA exceeds 2× the OP2 target, the callout is BLOCKED. Publishing a callout that normalizes extreme CPA deviation without explicit acknowledgment is dangerous.
+- Check: `SELECT market, last_week_cpa, month_op2_cpa, cpa_to_target_ratio, cpa_gate_status FROM ps.quality_gate_thresholds WHERE cpa_gate_status = 'BLOCKED'`
+
+**Gate C — Data staleness**: If the underlying data (forecast-data.json, command-center-data.json) is > 24h old, ALL callouts are BLOCKED. Stale data means stale narratives.
+- Check: compare `generated` timestamp in the data files against current time
+
+If any gate is BLOCKED for a market:
+1. Add a prominent `⚠️ QUALITY GATE BLOCKED` section at the top of that market's review
+2. State which gate(s) failed and why
+3. State that publish requires Richard's explicit override confirmation
+4. Still score the prose quality — the gate block is separate from the quality score
+
 ### 1. Word count (mechanical)
 Count the words in the prose section above the `---` separator for each market. Flag any callout outside the 100-120 word range. Suggest specific cuts or additions to bring it into range.
 

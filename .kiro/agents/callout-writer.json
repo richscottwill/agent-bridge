@@ -11,5 +11,12 @@
     "file://.kiro/steering/richard-style-wbr.md",
     "file://.kiro/steering/richard-writing-style.md"
   ],
-  "mcpServers": {}
+  "mcpServers": {},
+  "successMetrics": [
+    "100% of callouts within 100-120 word target (110 ideal) — zero word-count violations",
+    "Zero formatting violations per batch: no em-dashes, no arrows, CPAs rounded to whole dollars",
+    "< 2 revision cycles per callout before reviewer approval (tracked via callout review scores)",
+    "All 10 market callouts produced per weekly cycle without manual intervention",
+    "Reviewer score ≥7/10 on all 5 dimensions (headline clarity, narrative justification, conciseness, actionability, voice)"
+  ]
 }

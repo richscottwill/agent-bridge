@@ -9,5 +9,12 @@
     "file://shared/.kiro/agents/wbr-callouts/market-analyst.md",
     "file://shared/wiki/callouts/callout-principles.md"
   ],
-  "mcpServers": {}
+  "mcpServers": {},
+  "successMetrics": [
+    "All 10 active markets analyzed per weekly replay cycle (query: ops.workflow_executions WHERE agent='market-analyst')",
+    "Data freshness check passes before analysis — zero briefs produced on stale data (>24h)",
+    "Analysis brief produced within 3 minutes per market invocation",
+    "Every brief contains ≥1 quantified anomaly or ≥1 'no significant change' with evidence",
+    "Projection accuracy: forecast vs actual deviation <15% measured via ps.forecasts"
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-21T00:50:57.890806+00:00",
+  "generated": "2026-04-21T19:24:12.825405+00:00",
   "max_wk": 16,
   "markets": [
     "WW",
@@ -738,7 +738,36 @@
             "category": "brand"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": [
+          {
+            "gate_id": "A",
+            "gate_name": "Forecast accuracy",
+            "status": "PASSED",
+            "market": "US",
+            "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "B",
+            "gate_name": "CPA deviation",
+            "status": "PASSED",
+            "market": "US",
+            "reason": "CPA $75 within 2\u00d7 OP2 target $71",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "C",
+            "gate_name": "Data freshness",
+            "status": "PASSED",
+            "market": "US",
+            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "details": {},
+            "override_required": false
+          }
+        ]
       },
       "W15": {
         "period": "Apr 5\u201311",
@@ -1417,7 +1446,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W14": {
         "period": "Mar 29\u20134",
@@ -2066,7 +2096,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W13": {
         "period": "Mar 22\u201328",
@@ -2717,7 +2748,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W12": {
         "period": "Mar 15\u201321",
@@ -3363,7 +3395,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       }
     },
     "CA": {
@@ -4027,7 +4060,36 @@
             "category": "nb"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": [
+          {
+            "gate_id": "A",
+            "gate_name": "Forecast accuracy",
+            "status": "PASSED",
+            "market": "CA",
+            "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "B",
+            "gate_name": "CPA deviation",
+            "status": "PASSED",
+            "market": "CA",
+            "reason": "CPA $78 within 2\u00d7 OP2 target $73",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "C",
+            "gate_name": "Data freshness",
+            "status": "PASSED",
+            "market": "CA",
+            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "details": {},
+            "override_required": false
+          }
+        ]
       },
       "W15": {
         "period": "Apr 5\u201311",
@@ -4708,7 +4770,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W14": {
         "period": "Mar 29\u20134",
@@ -5357,7 +5420,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W13": {
         "period": "Mar 22\u201328",
@@ -6021,7 +6085,8 @@
             "category": "brand"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W12": {
         "period": "Mar 15\u201321",
@@ -6665,7 +6730,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       }
     },
     "UK": {
@@ -7343,7 +7409,36 @@
             "category": "nb"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": [
+          {
+            "gate_id": "A",
+            "gate_name": "Forecast accuracy",
+            "status": "PASSED",
+            "market": "UK",
+            "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "B",
+            "gate_name": "CPA deviation",
+            "status": "PASSED",
+            "market": "UK",
+            "reason": "CPA $75 within 2\u00d7 OP2 target $64",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "C",
+            "gate_name": "Data freshness",
+            "status": "PASSED",
+            "market": "UK",
+            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "details": {},
+            "override_required": false
+          }
+        ]
       },
       "W15": {
         "period": "Apr 5\u201311",
@@ -8028,7 +8123,8 @@
             "category": "brand"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W14": {
         "period": "Mar 29\u20134",
@@ -8675,7 +8771,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W13": {
         "period": "Mar 22\u201328",
@@ -9322,7 +9419,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W12": {
         "period": "Mar 15\u201321",
@@ -9965,7 +10063,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       }
     },
     "DE": {
@@ -10653,7 +10752,36 @@
             "category": "brand"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": [
+          {
+            "gate_id": "A",
+            "gate_name": "Forecast accuracy",
+            "status": "PASSED",
+            "market": "DE",
+            "reason": "Forecast accuracy within bounds (1 consecutive misses, threshold: 3)",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "B",
+            "gate_name": "CPA deviation",
+            "status": "PASSED",
+            "market": "DE",
+            "reason": "CPA $128 within 2\u00d7 OP2 target $119",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "C",
+            "gate_name": "Data freshness",
+            "status": "PASSED",
+            "market": "DE",
+            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "details": {},
+            "override_required": false
+          }
+        ]
       },
       "W15": {
         "period": "Apr 5\u201311",
@@ -11347,7 +11475,8 @@
             "category": "overall"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W14": {
         "period": "Mar 29\u20134",
@@ -12041,7 +12170,8 @@
             "category": "nb"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W13": {
         "period": "Mar 22\u201328",
@@ -12765,7 +12895,8 @@
             "category": "overall"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W12": {
         "period": "Mar 15\u201321",
@@ -13412,7 +13543,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       }
     },
     "FR": {
@@ -14065,7 +14197,36 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": [
+          {
+            "gate_id": "A",
+            "gate_name": "Forecast accuracy",
+            "status": "PASSED",
+            "market": "FR",
+            "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "B",
+            "gate_name": "CPA deviation",
+            "status": "PASSED",
+            "market": "FR",
+            "reason": "CPA $67 within 2\u00d7 OP2 target $63",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "C",
+            "gate_name": "Data freshness",
+            "status": "PASSED",
+            "market": "FR",
+            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "details": {},
+            "override_required": false
+          }
+        ]
       },
       "W15": {
         "period": "Apr 5\u201311",
@@ -14767,7 +14928,8 @@
             "category": "nb"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W14": {
         "period": "Mar 29\u20134",
@@ -15416,7 +15578,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W13": {
         "period": "Mar 22\u201328",
@@ -16063,7 +16226,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W12": {
         "period": "Mar 15\u201321",
@@ -16707,7 +16871,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       }
     },
     "IT": {
@@ -17362,7 +17527,36 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": [
+          {
+            "gate_id": "A",
+            "gate_name": "Forecast accuracy",
+            "status": "PASSED",
+            "market": "IT",
+            "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "B",
+            "gate_name": "CPA deviation",
+            "status": "PASSED",
+            "market": "IT",
+            "reason": "CPA $86 within 2\u00d7 OP2 target $84",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "C",
+            "gate_name": "Data freshness",
+            "status": "PASSED",
+            "market": "IT",
+            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "details": {},
+            "override_required": false
+          }
+        ]
       },
       "W15": {
         "period": "Apr 5\u201311",
@@ -18072,7 +18266,8 @@
             "category": "overall"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W14": {
         "period": "Mar 29\u20134",
@@ -18729,7 +18924,8 @@
             "category": "nb"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W13": {
         "period": "Mar 22\u201328",
@@ -19355,7 +19551,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W12": {
         "period": "Mar 15\u201321",
@@ -19999,7 +20196,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       }
     },
     "ES": {
@@ -20654,7 +20852,36 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": [
+          {
+            "gate_id": "A",
+            "gate_name": "Forecast accuracy",
+            "status": "PASSED",
+            "market": "ES",
+            "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "B",
+            "gate_name": "CPA deviation",
+            "status": "PASSED",
+            "market": "ES",
+            "reason": "CPA $62 within 2\u00d7 OP2 target $64",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "C",
+            "gate_name": "Data freshness",
+            "status": "PASSED",
+            "market": "ES",
+            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "details": {},
+            "override_required": false
+          }
+        ]
       },
       "W15": {
         "period": "Apr 5\u201311",
@@ -21339,7 +21566,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W14": {
         "period": "Mar 29\u20134",
@@ -22033,7 +22261,8 @@
             "category": "nb"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W13": {
         "period": "Mar 22\u201328",
@@ -22658,7 +22887,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W12": {
         "period": "Mar 15\u201321",
@@ -23306,7 +23536,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       }
     },
     "JP": {
@@ -23961,7 +24192,36 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": [
+          {
+            "gate_id": "A",
+            "gate_name": "Forecast accuracy",
+            "status": "PASSED",
+            "market": "JP",
+            "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "B",
+            "gate_name": "CPA deviation",
+            "status": "PASSED",
+            "market": "JP",
+            "reason": "CPA $65 within 2\u00d7 OP2 target $75",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "C",
+            "gate_name": "Data freshness",
+            "status": "PASSED",
+            "market": "JP",
+            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "details": {},
+            "override_required": false
+          }
+        ]
       },
       "W15": {
         "period": "Apr 5\u201311",
@@ -24634,7 +24894,8 @@
             "category": "brand"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W14": {
         "period": "Mar 29\u20134",
@@ -25299,7 +25560,8 @@
             "category": "brand"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W13": {
         "period": "Mar 22\u201328",
@@ -25946,7 +26208,8 @@
             "category": "overall"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W12": {
         "period": "Mar 15\u201321",
@@ -26586,7 +26849,8 @@
             "category": "brand"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       }
     },
     "AU": {
@@ -27225,7 +27489,36 @@
             "category": "nb"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": [
+          {
+            "gate_id": "A",
+            "gate_name": "Forecast accuracy",
+            "status": "PASSED",
+            "market": "AU",
+            "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "B",
+            "gate_name": "CPA deviation",
+            "status": "PASSED",
+            "market": "AU",
+            "reason": "CPA $114 within 2\u00d7 OP2 target $129",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "C",
+            "gate_name": "Data freshness",
+            "status": "PASSED",
+            "market": "AU",
+            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "details": {},
+            "override_required": false
+          }
+        ]
       },
       "W15": {
         "period": "Apr 5\u201311",
@@ -27936,7 +28229,8 @@
             "category": "nb"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W14": {
         "period": "Mar 29\u20134",
@@ -28615,7 +28909,8 @@
             "category": "overall"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W13": {
         "period": "3/23\u20133/29",
@@ -29259,7 +29554,8 @@
             "category": "overall"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W12": {
         "period": "Mar 15\u201321",
@@ -29865,7 +30161,8 @@
             "category": "overall"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W11": {
         "period": "Mar 8\u201314",
@@ -30445,7 +30742,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       }
     },
     "MX": {
@@ -31136,7 +31434,96 @@
             "category": "brand"
           }
         ],
-        "blocked": []
+        "blocked": [
+          {
+            "gate_id": "A",
+            "gate_name": "Forecast accuracy",
+            "status": "BLOCKED",
+            "market": "MX",
+            "reason": "Forecast miss >30% for 6 consecutive weeks (threshold: 3). Average error: 95.4%. Manual review required before publish.",
+            "details": {
+              "consecutive_misses": 6,
+              "threshold_weeks": 3,
+              "threshold_pct": 30,
+              "avg_error_pct": 95.4,
+              "miss_weeks": [
+                {
+                  "wk": 14,
+                  "actual": 303,
+                  "predicted": 196,
+                  "error_pct": 54.6
+                },
+                {
+                  "wk": 15,
+                  "actual": 509,
+                  "predicted": 193,
+                  "error_pct": 163.7
+                },
+                {
+                  "wk": 16,
+                  "actual": 510,
+                  "predicted": 304,
+                  "error_pct": 67.8
+                }
+              ]
+            },
+            "override_required": true
+          }
+        ],
+        "quality_gates": [
+          {
+            "gate_id": "A",
+            "gate_name": "Forecast accuracy",
+            "status": "BLOCKED",
+            "market": "MX",
+            "reason": "Forecast miss >30% for 6 consecutive weeks (threshold: 3). Average error: 95.4%. Manual review required before publish.",
+            "details": {
+              "consecutive_misses": 6,
+              "threshold_weeks": 3,
+              "threshold_pct": 30,
+              "avg_error_pct": 95.4,
+              "miss_weeks": [
+                {
+                  "wk": 14,
+                  "actual": 303,
+                  "predicted": 196,
+                  "error_pct": 54.6
+                },
+                {
+                  "wk": 15,
+                  "actual": 509,
+                  "predicted": 193,
+                  "error_pct": 163.7
+                },
+                {
+                  "wk": 16,
+                  "actual": 510,
+                  "predicted": 304,
+                  "error_pct": 67.8
+                }
+              ]
+            },
+            "override_required": true
+          },
+          {
+            "gate_id": "B",
+            "gate_name": "CPA deviation",
+            "status": "PASSED",
+            "market": "MX",
+            "reason": "CPA $53 within 2\u00d7 OP2 target $58",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "C",
+            "gate_name": "Data freshness",
+            "status": "PASSED",
+            "market": "MX",
+            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "details": {},
+            "override_required": false
+          }
+        ]
       },
       "W15": {
         "period": "Apr 5\u201311",
@@ -31866,7 +32253,8 @@
             "category": "brand"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W14": {
         "period": "Mar 29\u20134",
@@ -32564,7 +32952,8 @@
             "category": "brand"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W13": {
         "period": "Mar 22-28",
@@ -33227,7 +33616,8 @@
             "category": "nb"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W12": {
         "period": "Mar 15\u201321",
@@ -33885,7 +34275,8 @@
             "category": "nb"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W11": {
         "period": "Mar 8\u201314",
@@ -34490,7 +34881,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       }
     },
     "WW": {
@@ -35106,7 +35498,36 @@
             "category": "overall"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": [
+          {
+            "gate_id": "A",
+            "gate_name": "Forecast accuracy",
+            "status": "PASSED",
+            "market": "WW",
+            "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "B",
+            "gate_name": "CPA deviation",
+            "status": "PASSED",
+            "market": "WW",
+            "reason": "CPA $79 within 2\u00d7 OP2 target $77",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "C",
+            "gate_name": "Data freshness",
+            "status": "PASSED",
+            "market": "WW",
+            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "details": {},
+            "override_required": false
+          }
+        ]
       },
       "W15": {
         "period": "W15",
@@ -35720,7 +36141,8 @@
             "category": "overall"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W14": {
         "period": "W14",
@@ -36334,7 +36756,8 @@
             "category": "overall"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W13": {
         "period": "Mar 22-28, 2026",
@@ -36940,7 +37363,8 @@
             "category": "overall"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W12": {
         "period": "W12",
@@ -37545,7 +37969,8 @@
             "category": "overall"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W11": {
         "period": "W11",
@@ -38158,7 +38583,8 @@
             "category": "overall"
           }
         ],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       }
     },
     "EU5": {
@@ -38750,7 +39176,36 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": [
+          {
+            "gate_id": "A",
+            "gate_name": "Forecast accuracy",
+            "status": "PASSED",
+            "market": "EU5",
+            "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "B",
+            "gate_name": "CPA deviation",
+            "status": "PASSED",
+            "market": "EU5",
+            "reason": "CPA $88 within 2\u00d7 OP2 target $83",
+            "details": {},
+            "override_required": false
+          },
+          {
+            "gate_id": "C",
+            "gate_name": "Data freshness",
+            "status": "PASSED",
+            "market": "EU5",
+            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "details": {},
+            "override_required": false
+          }
+        ]
       },
       "W15": {
         "period": "Apr 6 \u2013 Apr 12",
@@ -39341,7 +39796,8 @@
           }
         ],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W14": {
         "period": "W14",
@@ -39924,7 +40380,8 @@
         ],
         "external_factors": [],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W13": {
         "period": "W13",
@@ -40507,7 +40964,8 @@
         ],
         "external_factors": [],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W12": {
         "period": "W12",
@@ -41090,7 +41548,8 @@
         ],
         "external_factors": [],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       },
       "W11": {
         "period": "W11",
@@ -41673,8 +42132,394 @@
         ],
         "external_factors": [],
         "anomalies": [],
-        "blocked": []
+        "blocked": [],
+        "quality_gates": []
       }
     }
+  },
+  "quality_gates": {
+    "enabled": true,
+    "thresholds": {
+      "forecast_miss_pct": 30,
+      "forecast_miss_consecutive_weeks": 3,
+      "cpa_deviation_multiplier": 2,
+      "data_staleness_hours": 24
+    },
+    "results": {
+      "US": [
+        {
+          "gate_id": "A",
+          "gate_name": "Forecast accuracy",
+          "status": "PASSED",
+          "market": "US",
+          "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "B",
+          "gate_name": "CPA deviation",
+          "status": "PASSED",
+          "market": "US",
+          "reason": "CPA $75 within 2\u00d7 OP2 target $71",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "C",
+          "gate_name": "Data freshness",
+          "status": "PASSED",
+          "market": "US",
+          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "details": {},
+          "override_required": false
+        }
+      ],
+      "CA": [
+        {
+          "gate_id": "A",
+          "gate_name": "Forecast accuracy",
+          "status": "PASSED",
+          "market": "CA",
+          "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "B",
+          "gate_name": "CPA deviation",
+          "status": "PASSED",
+          "market": "CA",
+          "reason": "CPA $78 within 2\u00d7 OP2 target $73",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "C",
+          "gate_name": "Data freshness",
+          "status": "PASSED",
+          "market": "CA",
+          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "details": {},
+          "override_required": false
+        }
+      ],
+      "UK": [
+        {
+          "gate_id": "A",
+          "gate_name": "Forecast accuracy",
+          "status": "PASSED",
+          "market": "UK",
+          "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "B",
+          "gate_name": "CPA deviation",
+          "status": "PASSED",
+          "market": "UK",
+          "reason": "CPA $75 within 2\u00d7 OP2 target $64",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "C",
+          "gate_name": "Data freshness",
+          "status": "PASSED",
+          "market": "UK",
+          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "details": {},
+          "override_required": false
+        }
+      ],
+      "DE": [
+        {
+          "gate_id": "A",
+          "gate_name": "Forecast accuracy",
+          "status": "PASSED",
+          "market": "DE",
+          "reason": "Forecast accuracy within bounds (1 consecutive misses, threshold: 3)",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "B",
+          "gate_name": "CPA deviation",
+          "status": "PASSED",
+          "market": "DE",
+          "reason": "CPA $128 within 2\u00d7 OP2 target $119",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "C",
+          "gate_name": "Data freshness",
+          "status": "PASSED",
+          "market": "DE",
+          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "details": {},
+          "override_required": false
+        }
+      ],
+      "FR": [
+        {
+          "gate_id": "A",
+          "gate_name": "Forecast accuracy",
+          "status": "PASSED",
+          "market": "FR",
+          "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "B",
+          "gate_name": "CPA deviation",
+          "status": "PASSED",
+          "market": "FR",
+          "reason": "CPA $67 within 2\u00d7 OP2 target $63",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "C",
+          "gate_name": "Data freshness",
+          "status": "PASSED",
+          "market": "FR",
+          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "details": {},
+          "override_required": false
+        }
+      ],
+      "IT": [
+        {
+          "gate_id": "A",
+          "gate_name": "Forecast accuracy",
+          "status": "PASSED",
+          "market": "IT",
+          "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "B",
+          "gate_name": "CPA deviation",
+          "status": "PASSED",
+          "market": "IT",
+          "reason": "CPA $86 within 2\u00d7 OP2 target $84",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "C",
+          "gate_name": "Data freshness",
+          "status": "PASSED",
+          "market": "IT",
+          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "details": {},
+          "override_required": false
+        }
+      ],
+      "ES": [
+        {
+          "gate_id": "A",
+          "gate_name": "Forecast accuracy",
+          "status": "PASSED",
+          "market": "ES",
+          "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "B",
+          "gate_name": "CPA deviation",
+          "status": "PASSED",
+          "market": "ES",
+          "reason": "CPA $62 within 2\u00d7 OP2 target $64",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "C",
+          "gate_name": "Data freshness",
+          "status": "PASSED",
+          "market": "ES",
+          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "details": {},
+          "override_required": false
+        }
+      ],
+      "JP": [
+        {
+          "gate_id": "A",
+          "gate_name": "Forecast accuracy",
+          "status": "PASSED",
+          "market": "JP",
+          "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "B",
+          "gate_name": "CPA deviation",
+          "status": "PASSED",
+          "market": "JP",
+          "reason": "CPA $65 within 2\u00d7 OP2 target $75",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "C",
+          "gate_name": "Data freshness",
+          "status": "PASSED",
+          "market": "JP",
+          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "details": {},
+          "override_required": false
+        }
+      ],
+      "AU": [
+        {
+          "gate_id": "A",
+          "gate_name": "Forecast accuracy",
+          "status": "PASSED",
+          "market": "AU",
+          "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "B",
+          "gate_name": "CPA deviation",
+          "status": "PASSED",
+          "market": "AU",
+          "reason": "CPA $114 within 2\u00d7 OP2 target $129",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "C",
+          "gate_name": "Data freshness",
+          "status": "PASSED",
+          "market": "AU",
+          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "details": {},
+          "override_required": false
+        }
+      ],
+      "MX": [
+        {
+          "gate_id": "A",
+          "gate_name": "Forecast accuracy",
+          "status": "BLOCKED",
+          "market": "MX",
+          "reason": "Forecast miss >30% for 6 consecutive weeks (threshold: 3). Average error: 95.4%. Manual review required before publish.",
+          "details": {
+            "consecutive_misses": 6,
+            "threshold_weeks": 3,
+            "threshold_pct": 30,
+            "avg_error_pct": 95.4,
+            "miss_weeks": [
+              {
+                "wk": 14,
+                "actual": 303,
+                "predicted": 196,
+                "error_pct": 54.6
+              },
+              {
+                "wk": 15,
+                "actual": 509,
+                "predicted": 193,
+                "error_pct": 163.7
+              },
+              {
+                "wk": 16,
+                "actual": 510,
+                "predicted": 304,
+                "error_pct": 67.8
+              }
+            ]
+          },
+          "override_required": true
+        },
+        {
+          "gate_id": "B",
+          "gate_name": "CPA deviation",
+          "status": "PASSED",
+          "market": "MX",
+          "reason": "CPA $53 within 2\u00d7 OP2 target $58",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "C",
+          "gate_name": "Data freshness",
+          "status": "PASSED",
+          "market": "MX",
+          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "details": {},
+          "override_required": false
+        }
+      ],
+      "WW": [
+        {
+          "gate_id": "A",
+          "gate_name": "Forecast accuracy",
+          "status": "PASSED",
+          "market": "WW",
+          "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "B",
+          "gate_name": "CPA deviation",
+          "status": "PASSED",
+          "market": "WW",
+          "reason": "CPA $79 within 2\u00d7 OP2 target $77",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "C",
+          "gate_name": "Data freshness",
+          "status": "PASSED",
+          "market": "WW",
+          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "details": {},
+          "override_required": false
+        }
+      ],
+      "EU5": [
+        {
+          "gate_id": "A",
+          "gate_name": "Forecast accuracy",
+          "status": "PASSED",
+          "market": "EU5",
+          "reason": "Forecast accuracy within bounds (0 consecutive misses, threshold: 3)",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "B",
+          "gate_name": "CPA deviation",
+          "status": "PASSED",
+          "market": "EU5",
+          "reason": "CPA $88 within 2\u00d7 OP2 target $83",
+          "details": {},
+          "override_required": false
+        },
+        {
+          "gate_id": "C",
+          "gate_name": "Data freshness",
+          "status": "PASSED",
+          "market": "EU5",
+          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "details": {},
+          "override_required": false
+        }
+      ]
+    },
+    "any_blocked": true
   }
 }

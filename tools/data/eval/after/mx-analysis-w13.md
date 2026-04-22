@@ -15,7 +15,7 @@ The 8-week trend shows a volatile but upward trajectory: W6: 229, W7: 246, W8: 3
 - Brand coverage scaling ongoing: Brand spend at $4.4K/wk, up from ~$470/wk a year ago
 - algo-mas.mx competitor at 13% IS on Brand with +20% CPC spikes — Brand CPC at $1.20 remains low but worth monitoring
 - No major holidays in W13 (Benito Juárez was W12, Easter is W15)
-- AU/MX OCI planned for May 2026 — not yet impacting performance
+- AU/MX OCI not yet scheduled — no impact on current performance
 
 ## YoY assessment
 +91% regs YoY (354 vs 185) on -32% spend ($23K vs $34K). Brand regs +182% YoY, reflecting the massive Brand coverage scaling from ~$460/wk to $4.4K/wk. NB regs +28% YoY despite NB spend declining significantly — NB CPA dropped 57% YoY ($134 vs $309), driven by bid strategy optimization and negative keyword work compounding. The YoY efficiency story continues to accelerate: this is the best YoY reg growth in the recent trend. LY W13 WoW was +6%; TY W13 WoW is +9%, showing stronger momentum this year.

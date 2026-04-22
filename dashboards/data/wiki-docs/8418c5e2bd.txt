@@ -8,7 +8,7 @@
 - Outlook Series: AB AU Paid Search Sync
 
 ## Context
-Richard owns all AU paid search optimization and stakeholder communication. Lena is the hardest stakeholder to satisfy — she's data-demanding, expects numbers not narratives, and has escalated to leadership (challenged $6 avg CPC vs consumer benchmarks). Alexis is collaborative and a strong execution partner who defers to Lena on strategic direction. AU launched June 2025. No Shopping Ads available for AB. OCI planned May 2026. Weekly CPA target ~$140.
+Richard owns all AU paid search optimization and stakeholder communication. Lena is the hardest stakeholder to satisfy — she's data-demanding, expects numbers not narratives, and has escalated to leadership (challenged $6 avg CPC vs consumer benchmarks). Alexis is collaborative and a strong execution partner who defers to Lena on strategic direction. AU launched June 2025. No Shopping Ads available for AB. OCI has no confirmed AU timeline. Weekly CPA target ~$140.
 
 Key dynamic: Richard must always have AU metrics loaded before any Lena interaction. Lead with data, be clear about timelines. Alexis is the day-to-day partner; Lena sets direction.
 
@@ -38,7 +38,7 @@ Key dynamic: Richard must always have AU metrics loaded before any Lena interact
 - Polaris migration: full switch confirmed, tracking integrity validation in progress
 - Keyword optimization: surgical approach (outlier analysis) over broad cuts
 - Two-campaign structure: product-intent vs business-intent — pilot approved
-- OCI timeline: May 2026 — will help with bidding and attribution
+- OCI timeline: no confirmed AU date — will help with bidding and attribution when launched
 - Lena's 3 priorities: keyword CPC/CPA investigation, keyword-to-product mapping, Polaris migration
 - MCS page replication: MX model as template, needs global urgency justification
 - Alexis as collaborative partner: "don't hesitate to use me"

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Contribute a Signal - Kiro Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#eaeaea;min-height:100vh;padding:40px 30px;display:flex;flex-direction:column;align-items:center}
+.wrap{max-width:640px;width:100%}
+h1{font-size:24px;font-weight:700;margin-bottom:6px}
+.sub{color:#888;font-size:14px;margin-bottom:24px}
+.prov{margin-bottom:20px}
+.form{background:#14161e;border:1px solid #1e2028;border-radius:8px;padding:24px}
+label{display:block;font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+input, textarea, select{width:100%;padding:10px 12px;background:#0f1117;border:1px solid #2a2d35;border-radius:4px;color:#eaeaea;font-size:14px;font-family:inherit;margin-bottom:16px}
+input:focus, textarea:focus, select:focus{outline:none;border-color:#3b82f6}
+textarea{min-height:100px;resize:vertical}
+.btn{background:#3b82f6;color:#fff;border:none;padding:10px 24px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;transition:background .15s}
+.btn:hover{background:#2563eb}
+.btn:disabled{background:#374151;cursor:not-allowed}
+.result{margin-top:20px;padding:14px 16px;background:#14161e;border:1px solid #2a3a5c;border-radius:6px;font-size:13px;line-height:1.6;display:none}
+.result.show{display:block}
+.result .stage{display:flex;align-items:center;gap:10px;padding:4px 0;opacity:0;transition:opacity .4s}
+.result .stage.active{opacity:1}
+.result .stage .icon{width:18px;text-align:center}
+.result .stage .txt{color:#d4d4d4}
+.result .stage .det{color:#888;font-size:12px;margin-left:6px}
+.demo-note{margin-top:14px;padding:10px 14px;background:rgba(113,63,18,.12);border:1px solid rgba(113,63,18,.3);border-radius:4px;font-size:12px;color:#d4b070}
+.back{display:inline-block;margin-bottom:20px;font-size:12px;color:#888;text-decoration:none}
+.back:hover{color:#93b4f5}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Contribute a Signal</h1>
+<div class="sub">Drop a note, a request, or a heads-up. Agents pick it up on the next ingestion cycle and route it to the right organ.</div>
+
+<div class="prov">
+  <div class="section-label" id="sec-contribute">Human input → agent pipeline</div>
+</div>
+
+<div class="form">
+  <label>Who are you?</label>
+  <input type="text" id="who" placeholder="e.g., Alexis / yun-kang / teammate@amazon.com" autocomplete="off">
+
+  <label>What market or scope does this relate to?</label>
+  <select id="scope">
+    <option value="general">General / any</option>
+    <option value="au">AU (Australia)</option>
+    <option value="mx">MX (Mexico)</option>
+    <option value="us">US</option>
+    <option value="eu5">EU5</option>
+    <option value="jp">JP</option>
+    <option value="ca">CA</option>
+    <option value="ww">WW / all markets</option>
+  </select>
+
+  <label>What's the signal?</label>
+  <textarea id="signal" placeholder="A note, a question, a flag, a new data point, a stakeholder update..."></textarea>
+
+  <button class="btn" id="submitBtn" onclick="submitSignal()">Submit to agents</button>
+
+  <div class="result" id="result"></div>
+
+  <div class="demo-note">
+    <strong>Demo mode:</strong> In this environment, the signal is simulated — no actual file is written. In production, it writes to <code>~/shared/context/intake/</code> and the next AM backend cycle routes it.
+  </div>
+</div>
+
+</div>
+
+<script src="./shared/provenance.js"></script>
+<script src="./shared/provenance-registry.js"></script>
+<script>
+// Provenance bar — "human contribution" surface
+if (window.Provenance) {
+  window.Provenance.injectBar('sec-contribute', [
+    { type: 'human', producer: 'Any teammate', detail: 'Drops a signal here' },
+    { type: 'agent', producer: 'AM Backend', detail: 'Picks up from intake/ on next cycle (~12 min)' },
+    { type: 'agent', producer: 'Signal Router', detail: 'Classifies to the right organ (hands/eyes/brain/etc.)' },
+    { type: 'reviewed', producer: 'Richard', detail: 'Approves items surfaced to Command Center' },
+  ]);
+}
+
+async function submitSignal(){
+  const who = document.getElementById('who').value.trim();
+  const scope = document.getElementById('scope').value;
+  const signal = document.getElementById('signal').value.trim();
+  if (!signal) { alert('Describe the signal first.'); return; }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Routing…';
+
+  const result = document.getElementById('result');
+  result.classList.add('show');
+  result.innerHTML = '';
+
+  const stages = [
+    { icon: '📥', txt: `Signal accepted from ${who||'anonymous'}`, det: `scope: ${scope}`, delay: 300 },
+    { icon: '🤖', txt: 'Signal Router classified', det: classifySignal(signal, scope), delay: 900 },
+    { icon: '🔍', txt: 'Routed to relevant organ', det: routeSignal(signal, scope), delay: 1600 },
+    { icon: '✅', txt: 'Surfaced in Command Center', det: 'Next render will include this signal', delay: 2400 },
+  ];
+
+  stages.forEach((s, i) => {
+    const el = document.createElement('div');
+    el.className = 'stage';
+    el.innerHTML = `<span class="icon">${s.icon}</span><span class="txt">${s.txt}</span><span class="det">${s.det}</span>`;
+    result.appendChild(el);
+    setTimeout(() => el.classList.add('active'), s.delay);
+  });
+
+  setTimeout(() => {
+    btn.disabled = false;
+    btn.textContent = 'Submit another';
+    document.getElementById('signal').value = '';
+  }, 2800);
+}
+
+function classifySignal(s, scope){
+  const lower = s.toLowerCase();
+  if (/\b(overdue|deadline|due|urgent|today|block(er|ing))/.test(lower)) return 'priority → hands';
+  if (/\b(spend|cpa|cpc|regs?|conversion|revenue|budget|forecast)/.test(lower)) return 'performance → eyes';
+  if (/\b(meeting|sync|1:1|brandon|kate|lena|alexis|lorena)/.test(lower)) return 'stakeholder → memory';
+  if (/\b(idea|should we|what if|could|possibility|option)/.test(lower)) return 'strategic → brain';
+  return scope === 'general' ? 'general → intake' : `${scope.toUpperCase()} context → eyes`;
+}
+function routeSignal(s, scope){
+  const lower = s.toLowerCase();
+  if (/\b(overdue|deadline|due)/.test(lower)) return 'hands.md + Asana commit';
+  if (/\b(spend|cpa|cpc|regs?)/.test(lower)) return `${scope}-state-file update + eyes.md`;
+  if (/\bbrandon\b/.test(lower)) return 'brandon-sync.md + memory.md';
+  return scope === 'general' ? 'current.md' : `state-files/${scope}.md`;
+}
+</script>
+</body>
+</html>

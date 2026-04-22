@@ -202,4 +202,6 @@ fetch('../data/body-system-data.json?'+Date.now()).then(r=>r.json()).then(functi
 }).catch(function(e){console.error(e);document.querySelector('.stats').innerHTML='<div class="stat" style="color:#f87171">Failed to load data — run refresh-body-system.py</div>'});
 </script>
 <div style="color:var(--text3);font-size:0.74em;text-align:center;margin-top:48px;padding:16px;letter-spacing:.5px" id="genFooter">LOADING DATA&hellip;</div>
-<script>fetch('../data/body-system-data.json?'+Date.now()).then(r=>r.json()).then(function(D){document.getElementById('genFooter').textContent='DATA: '+new Date(D.generated).toLocaleString()+' · STANDALONE HTML · CHART.JS VIA CDN · PORTABLE'}).catch(function(){})</script></div></body></html>
+<script>fetch('../data/body-system-data.json?'+Date.now()).then(r=>r.json()).then(function(D){document.getElementById('genFooter').textContent='DATA: '+new Date(D.generated).toLocaleString()+' · STANDALONE HTML · CHART.JS VIA CDN · PORTABLE'}).catch(function(){})</script></div>
+<script src="../shared/section-freshness.js" defer></script>
+</body></html>

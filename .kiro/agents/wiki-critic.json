@@ -16,5 +16,12 @@
     "file://shared/.kiro/agents/wiki-team/wiki-critic.md",
     "file://shared/wiki/wiki-pipeline-rules.md"
   ],
-  "mcpServers": {}
+  "mcpServers": {},
+  "successMetrics": [
+    "5/5 scoring dimensions evaluated per article (Usefulness, Clarity, Accuracy, Dual-audience, Economy)",
+    "Economy sub-rules enforced: bullet abuse (>30%), table abuse, formatting-as-content flagged with specific line references",
+    "PUBLISH/REVISE/REJECT verdict issued for every reviewed article — zero unscored reviews",
+    "Every REVISE verdict includes ≥3 specific edit instructions (exact text + replacement, not vague guidance)",
+    "Periodic audit: ≥1 published article audited for decay per week (staleness, broken links, outdated data)"
+  ]
 }

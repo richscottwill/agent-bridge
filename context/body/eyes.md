@@ -45,10 +45,10 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 | ES | ✅ 100% live | Dialed up 3/30 | 1,168 click events confirmed 3/24 UTC. |
 | JP | ✅ 100% live | Dialed up 3/31 | MCM-147368188 COMPLETE — tracking template + feed enabled. Ref tag taxonomy deferred. |
 | CA | 🟡 On track | Target 04/07 | E2E launched 3/4. Full impact projected Jul 2026. |
-| AU | 🔴 Not started | Target May 2026 | MCC not created. Discussed with Suzane (Adobe) 3/19. |
+| AU | 🔴 Not started | TBD | No MCC. |
 | MX | 🔴 Not started | TBD | No MCC. |
 
-**Rollout: 7/10 live (70%).** Next: CA (Apr), AU (May), MX (TBD).
+**Rollout: 7/10 live (70%).** Next: CA (Apr). AU/MX: TBD.
 
 ### MCC Structure
 - Master MCC: DSAP - Amazon Business Parent MCC (873-788-1095)

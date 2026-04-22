@@ -28,7 +28,7 @@ The competitive landscape is intensifying. In the US, Walmart Business Brand imp
 
 AI Max US testing is planned for Q2 2026. Google claims 14% more conversions at similar CPA for early adopters, but that figure is an aggregate across retail and lead-gen advertisers. AB's conversion event — completed registration with business verification — is structurally different. The test design has not been written yet. The approach will follow the same phased methodology used for OCI: clear baseline, controlled rollout, go/no-go gates. AI Max is not a replacement for OCI. It is a complementary layer that benefits from consolidated campaign structure and stronger data signals. [source: eyes.md, current.md; confidence: MEDIUM — no AB-specific data]
 
-CA targets April 7 for full OCI deployment, with monthly registration impact expected by July. AU targets May 2026 pending MCC creation. MX has no timeline. These are execution, not experimentation — the methodology is proven, the question is operational readiness. [source: Kate Testing Approach doc; confidence: HIGH for CA/AU, LOW for MX]
+CA targets April 7 for full OCI deployment, with monthly registration impact expected by July. AU and MX have no confirmed timelines and neither MCC has been created. These are execution, not experimentation — the methodology is proven, the question is operational readiness. [source: Kate Testing Approach doc; confidence: HIGH for CA, LOW for AU/MX]
 
 The agentic capability target for 2026 is one tool adopted by a teammate — moving from "Richard uses agents" to "the team uses agents." Candidates include the WBR callout pipeline (already producing 10-market callouts), campaign link generator, or budget forecast helper. The constraint is not technical capability but team adoption of non-traditional workflows. [source: device.md, agentic-ps-vision.md; confidence: HIGH for capability, MEDIUM for adoption]
 
@@ -283,7 +283,7 @@ Each decision has a clear trigger, a clear action, and a clear fallback. No deci
 | ES | — | — | — | 100% deployed | HIGH (deployment), no impact data yet |
 | JP | — | — | — | 100% deployed | HIGH (deployment), no impact data yet |
 | CA | — | — | — | Targeting April 7 | MEDIUM |
-| AU | — | — | — | Targeting May 2026 | MEDIUM |
+| AU | — | — | — | Pending MCC creation | MEDIUM |
 | MX | — | — | — | No timeline | LOW |
 
 Total validated: +35,196 incremental registrations, $16.7MM+ OPS across US/UK/DE. [source: eyes.md, Kate Testing Approach doc]

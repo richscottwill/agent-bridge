@@ -239,9 +239,9 @@ All registrations are attributed based on ref tag naming. **Registrations will o
 
 **What it is:** OCI connects Google Ads conversion tracking to Amazon's internal conversion data, improving bid strategy optimization. Markets with OCI see 18–24% registration uplift (US +24%, UK +23%, DE +18%).
 
-**AU OCI status:** Planned for May 2026, but **no MCC has been created yet.** MCC creation requires 2–3 weeks of lead time for Google Ads account setup and conversion signal configuration.
+**AU OCI status:** No confirmed timeline. **No MCC has been created yet.** MCC creation requires 2–3 weeks of lead time for Google Ads account setup and conversion signal configuration once kicked off.
 
-**Action needed:** MCC creation must begin by mid-April or the May launch slips to June+. At AU's current ~170 regs/week baseline, a 20% OCI uplift would add ~34 regs/week (~1,768 annualized, worth ~$230K at $130 CPA).
+**Action needed:** MCC creation and an AU OCI timeline decision are both open. At AU's current ~170 regs/week baseline, a 20% OCI uplift would add ~34 regs/week (~1,768 annualized, worth ~$230K at $130 CPA).
 
 **AU team action:** Coordinate with PS team on MCC creation timing.
 

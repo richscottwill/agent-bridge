@@ -15,6 +15,12 @@ import json, os, re
 from pathlib import Path
 from datetime import datetime, timezone
 
+# Quality gates — hard-gate rules that block publish when data quality is suspect
+from quality_gates import (
+    run_quality_gates, is_publish_blocked, get_blocked_gates,
+    format_gate_summary, load_op2_targets_from_constraints,
+)
+
 HOME = Path.home()
 FORECAST_JSON = HOME / "shared/dashboards/data/forecast-data.json"
 WIKI_DIR = HOME / "shared/wiki/callouts"
@@ -409,8 +415,12 @@ def extract_prose_metrics(text):
 # ── Assembly ──────────────────────────────────────────────────────────
 DERIVED_MARKETS_SET = {"WW", "EU5"}
 
-def build_entry(market, wk, forecast, ww_data, proj_data):
-    """Build one market+week callout entry."""
+def build_entry(market, wk, forecast, ww_data, proj_data, gate_results=None):
+    """Build one market+week callout entry.
+
+    gate_results: optional list of gate result dicts from quality_gates.py.
+    If any gate is BLOCKED, the entry's 'blocked' field is populated.
+    """
     callout = read_callout(market, wk)
     if not callout:
         # For derived markets (WW/EU5), fall back to a quantitative-only skeleton
@@ -643,6 +653,11 @@ def build_entry(market, wk, forecast, ww_data, proj_data):
     elif metrics.get("regs_yoy") is not None: yoy_summary = f"Regs {'+' if metrics['regs_yoy']>0 else ''}{metrics['regs_yoy']:.1f}% YoY"
     else: yoy_summary = "No YoY data available."
 
+    # ── Quality gates ──
+    blocked = []
+    if gate_results:
+        blocked = [g for g in gate_results if g["status"] == "BLOCKED"]
+
     return {
         "period": callout.get("period",""),
         "headline": callout.get("headline",""),
@@ -659,7 +674,8 @@ def build_entry(market, wk, forecast, ww_data, proj_data):
         "decisions": decisions,
         "external_factors": external,
         "anomalies": anomalies,
-        "blocked": [],
+        "blocked": blocked,
+        "quality_gates": gate_results or [],
     }
 
 # ── Cross-market analysis ────────────────────────────────────────────
@@ -737,13 +753,75 @@ def main():
     # Build all market entries (raw + derived) via the unified build_entry path.
     # WW and EU5 read their pre-aggregated rows from forecast['weekly'][market]
     # which are populated by refresh-forecast.py.
+
+    # ── Load OP2 targets for quality gates ──
+    # Extract CPA targets from market_constraints data in the local DuckDB.
+    op2_targets = {}
+    try:
+        import duckdb
+        db_path = str(HOME / "shared/tools/data/ps-analytics.duckdb")
+        if os.path.exists(db_path):
+            con = duckdb.connect(db_path, read_only=True)
+            try:
+                rows = con.execute(
+                    "SELECT market, month_op2_cpa FROM ps.market_constraints "
+                    "WHERE month_op2_cpa IS NOT NULL"
+                ).fetchall()
+                for market_code, cpa in rows:
+                    if cpa and cpa > 0:
+                        op2_targets[market_code] = {"cpa_target": cpa}
+                print(f"Loaded OP2 targets for {len(op2_targets)} markets from DuckDB")
+            finally:
+                con.close()
+        else:
+            print(f"WARNING: DuckDB file not found at {db_path} — CPA gate will be skipped")
+    except Exception as e:
+        print(f"WARNING: Could not load OP2 targets from DuckDB: {e}")
+        pass
+
+    # Fallback: extract OP2 CPA targets from forecast data if DuckDB didn't work
+    if not op2_targets:
+        # The forecast JSON may contain op2_regs and op2_cost per week
+        # from which we can derive CPA targets
+        for market in ALL_BUILD_MARKETS:
+            weekly_rows = forecast.get("weekly", {}).get(market, [])
+            for row in weekly_rows:
+                op2_regs = row.get("op2_regs")
+                op2_cost = row.get("op2_cost")
+                if op2_regs and op2_regs > 0 and op2_cost and op2_cost > 0:
+                    op2_targets[market] = {"cpa_target": op2_cost / op2_regs}
+                    break
+        if op2_targets:
+            print(f"Loaded OP2 targets for {len(op2_targets)} markets from forecast data (fallback)")
+
+    # Determine current week for quality gates (only run gates on latest week)
+    current_wk = forecast.get("max_week", max(weeks) if weeks else 0)
+
     callouts = {}
+    gate_summary = []
     for market in ALL_BUILD_MARKETS:
         callouts[market] = {}
         for w in weeks:
-            entry = build_entry(market, w, forecast, ww_summaries.get(w), proj_data.get(w))
+            # Run quality gates only for the current (latest) week
+            gate_results = None
+            if w == current_wk:
+                gate_results = run_quality_gates(market, forecast, w, op2_targets)
+                blocked = [g for g in gate_results if g["status"] == "BLOCKED"]
+                if blocked:
+                    gate_summary.append(format_gate_summary(gate_results, market))
+
+            entry = build_entry(market, w, forecast, ww_summaries.get(w), proj_data.get(w), gate_results)
             if entry:
                 callouts[market][f"W{w}"] = entry
+
+    # Print gate summary
+    if gate_summary:
+        print("\n── Quality Gate Results ──")
+        for summary in gate_summary:
+            print(summary)
+        print(f"── {len(gate_summary)} market(s) blocked ──\n")
+    else:
+        print("── All quality gates PASSED ──")
 
     # Post-enrich WW with cross-market anomalies and the WW summary narrative.
     # (Cross-market comparison still iterates the 10 raw markets, not WW itself.)
@@ -785,6 +863,15 @@ def main():
     # Display order: WW, US, EU5, JP, CA, MX, AU (hide individual EU5 markets)
     display_markets = [m for m in DISPLAY_MARKETS if callouts.get(m)]
 
+    # Collect all gate results for the output metadata
+    all_gate_results = {}
+    for market in ALL_BUILD_MARKETS:
+        wkey = f"W{current_wk}"
+        if wkey in callouts.get(market, {}):
+            entry = callouts[market][wkey]
+            if entry.get("quality_gates"):
+                all_gate_results[market] = entry["quality_gates"]
+
     output = {
         "generated": datetime.now(tz=timezone.utc).isoformat(),
         "max_wk": forecast.get("max_week", 15),
@@ -792,6 +879,20 @@ def main():
         "weeks": [f"W{w}" for w in weeks],
         "stakeholders": STAKEHOLDERS,
         "callouts": callouts,
+        "quality_gates": {
+            "enabled": True,
+            "thresholds": {
+                "forecast_miss_pct": 30,
+                "forecast_miss_consecutive_weeks": 3,
+                "cpa_deviation_multiplier": 2,
+                "data_staleness_hours": 24,
+            },
+            "results": all_gate_results,
+            "any_blocked": any(
+                any(g["status"] == "BLOCKED" for g in gates)
+                for gates in all_gate_results.values()
+            ),
+        },
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(output, indent=2, default=str))

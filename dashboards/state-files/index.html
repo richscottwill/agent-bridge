@@ -433,4 +433,6 @@ Promise.all([
   document.getElementById('genFooter').textContent='DATA: '+new Date(D.generated).toLocaleString()+' \u00B7 SOURCE: shared/wiki/state-files/ \u00B7 REFRESH: python3 shared/dashboards/refresh-state-files.py';
 }).catch(function(e){console.error(e);document.getElementById('marketsGrid').innerHTML='<div style="color:#f87171">Failed to load data &mdash; run refresh-state-files.py</div>'});
 </script>
+
+<script src="../shared/section-freshness.js" defer></script>
 </body></html>

@@ -84,7 +84,7 @@ The Purpose section states the thesis but does not state what Kate should DO wit
 
 Replace: `"Seven of ten markets now run at 100% OCI deployment."`
 
-With: `"Seven of ten markets run at 100% OCI deployment as of late March 2026 (US, UK, DE since Q4 2025; FR, IT, ES, JP dialed to 100% on March 30-31). CA targets April 7. AU targets May pending MCC creation. MX has no timeline."`
+With: `"Seven of ten markets run at 100% OCI deployment as of late March 2026 (US, UK, DE since Q4 2025; FR, IT, ES, JP dialed to 100% on March 30-31). CA targets April 7. AU and MX have no confirmed timelines, with neither MCC created."`
 
 The subsequent sentence already covers CA/AU/MX, so this is a matter of precision in the lead claim. The current phrasing is correct per eyes.md but the research brief flags a DuckDB lag — Kate-level docs should not leave room for a "but the data says otherwise" challenge.
 

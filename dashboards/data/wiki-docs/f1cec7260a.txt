@@ -7,13 +7,13 @@
 
 ## Introduction
 
-This document provides the trailing-week operational state of the Amazon Business Australia Paid Search program. AU is Richard Williams's hands-on market, managed through Google Ads under the DSAP parent MCC. The program launched in June 2025 and operates under a CPA efficiency constraint — no ie%CCP target exists yet because CCP data is not expected until July 2026. FY26 OP2 targets $1.8M budget, 12,906 registrations, and $140 CPA. FY25 (June–December only) delivered $1.14M spend, 8,763 registrations, and $158 CPA. Lena Zak (L7) is the primary stakeholder with three stated priorities: keyword CPC/CPA investigation, keyword-to-product mapping, and Polaris migration. Alexis Eck (L6) is the collaborative execution partner. OCI is planned for May 2026 but no MCC has been created. Keyword-level registration data is unavailable until Q3 2026; all Non-Brand keyword analysis is directional.
+This document provides the trailing-week operational state of the Amazon Business Australia Paid Search program. AU is Richard Williams's hands-on market, managed through Google Ads under the DSAP parent MCC. The program launched in June 2025 and operates under a CPA efficiency constraint — no ie%CCP target exists yet because CCP data is not expected until July 2026. FY26 OP2 targets $1.8M budget, 12,906 registrations, and $140 CPA. FY25 (June–December only) delivered $1.14M spend, 8,763 registrations, and $158 CPA. Lena Zak (L7) is the primary stakeholder with three stated priorities: keyword CPC/CPA investigation, keyword-to-product mapping, and Polaris migration. Alexis Eck (L6) is the collaborative execution partner. OCI has no confirmed AU timeline and no MCC has been created. Keyword-level registration data is unavailable until Q3 2026; all Non-Brand keyword analysis is directional.
 
 ## Goals
 
 1. Achieve a blended CPA at or below $140 for FY26 (OP2 target), delivering 12,906 registrations on $1.8M budget.
 2. Complete the Polaris Brand landing page migration and validate tracking integrity by April 30, 2026.
-3. Prepare for OCI launch in May 2026 — MCC creation, Google Ads account configuration, and conversion signal setup.
+3. Prepare for OCI — MCC creation, Google Ads account configuration, and conversion signal setup (timeline TBD).
 4. Establish a biweekly keyword review cadence with Alexis Eck by April 18, 2026, covering top-20 outlier keywords by CPC/CPA.
 5. Pilot the two-campaign structure (product-intent vs business-intent) by May 15, 2026, with a 4-week measurement period before scaling.
 
@@ -82,7 +82,7 @@ No YoY comparison is available — AU launched in June 2025. The earliest YoY da
 
 **Recommended action:** Do not treat the W15 regression as proof of structural decline without first validating Polaris tracking. Brand CVR is the highest-signal metric to monitor post-tracking-fix because Brand CVR is the least-dependent on market demand fluctuation. If Brand CVR returns to 7.0%+ within 7 days of tracking validation, the decline is resolvable; if it does not, structural keyword or LP investigation is required.
 
-**Cost of inaction (null case):** If the Polaris URL migration tracking is not validated within the next 7 days, 3 consecutive weeks of CVR data will remain ambiguous — the team cannot distinguish genuine demand softness from a tracking artifact. At the current W15 run rate of 168 registrations per week, AU would deliver approximately 8,736 FY26 registrations — 32% below the 12,906 OP2 target and $600K below the $1.8M budget plan. Separately, OCI launch is targeted for May 2026 but no MCC has been created. MCC creation requires 2–3 weeks of lead time. If MCC creation does not begin this week, the May launch slips to June or later, forgoing the 18–24% registration uplift observed in comparable OCI markets (US +24%, UK +23%, DE +18%). At AU's current 168 regs/week baseline, a 20% OCI uplift would add approximately 34 registrations per week — 1,768 annualized registrations worth approximately $271K at $153 CPA.
+**Cost of inaction (null case):** If the Polaris URL migration tracking is not validated within the next 7 days, 3 consecutive weeks of CVR data will remain ambiguous — the team cannot distinguish genuine demand softness from a tracking artifact. At the current W15 run rate of 168 registrations per week, AU would deliver approximately 8,736 FY26 registrations — 32% below the 12,906 OP2 target and $600K below the $1.8M budget plan. Separately, OCI has no confirmed AU timeline and no MCC has been created. Every quarter without OCI forgoes the 18–24% registration uplift observed in comparable OCI markets (US +24%, UK +23%, DE +18%). At AU's current 168 regs/week baseline, a 20% OCI uplift would add approximately 34 registrations per week — 1,768 annualized registrations worth approximately $271K at $153 CPA.
 <!-- AM-OWNED:trailing-week-flags END -->
 
 <!-- WBR-OWNED:signal-flags START -->
@@ -112,11 +112,11 @@ Three operational insights from the trailing four-week window (W12–W15) inform
 | 2 | Check AU account post-4/17 max-clicks bid strategy switch — validate W16 CPC/CVR trajectory | Richard | Apr 20 | Goal 1 |
 | 3 | Respond to Lena — AU LP URL analysis + CPA methodology (draft written Apr 3, 17 days overdue) | Richard | Apr 21 | Tenet 3 |
 | 4 | Complete refmarker mapping audit PoC — AU (Brandon assigned, 10 days overdue) | Richard | Apr 22 | Goal 2 |
-| 5 | Initiate OCI MCC creation for AU — required for May 2026 launch | Richard + Brandon | Apr 22 | Goal 3 |
+| 5 | Initiate OCI MCC creation for AU — required for any future launch | Richard + Brandon | Apr 22 | Goal 3 |
 | 6 | AU meetings agenda for Tuesday 4:30pm PT sync with Lena/Alexis | Richard | Apr 21 | Tenet 3 |
 
 **Blocked items:**
-- OCI MCC: Not created. Cannot begin Google Ads account setup or conversion signal configuration until MCC exists. Blocks May 2026 launch.
+- OCI MCC: Not created. Cannot begin Google Ads account setup or conversion signal configuration until MCC exists. Blocks any AU OCI launch.
 - Keyword-level registration data: Unavailable until Q3 2026. All NB keyword analysis remains directional. Blocks precise keyword-to-registration attribution.
 - ie%CCP target: CCP data not expected until July 2026. AU operates on CPA constraint only until then.
 - Polaris ref tag audit: AU page not yet validated after Italy regression discovered April 16. Blocks attribution confidence for all W14–W15 data.
@@ -188,7 +188,7 @@ At the W15 run rate, AU would deliver approximately 8,736 registrations on $1.34
 
 ## Appendix F: Variance Bridge — Data Source Reconciliation
 
-AU currently operates without OCI (Online Conversion Integration). All conversion data flows through Google Ads native tracking. No variance bridge between advertising platform and internal ERP is required at this time. When OCI launches for AU (target May 2026), this section will document the expected 5–15% discrepancy between Ordered Product Sales and Shipped Product Sales, and the reconciliation methodology.
+AU currently operates without OCI (Online Conversion Integration). All conversion data flows through Google Ads native tracking. No variance bridge between advertising platform and internal ERP is required at this time. When OCI launches for AU, this section will document the expected 5–15% discrepancy between Ordered Product Sales and Shipped Product Sales, and the reconciliation methodology.
 
 **Known data limitations:**
 - ie%CCP: Not available. CCP data expected July 2026. AU operates on CPA constraint only.

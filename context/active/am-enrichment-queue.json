@@ -1,111 +1,39 @@
 {
-  "generated": "2026-04-20T17:00:00Z",
-  "generated_at_pt": "2026-04-20 10:00 PT",
-  "phase": "am-backend-3a",
-  "total_gaps": 68,
-  "auto_executed_this_run": 5,
-  "queued_for_frontend": 63,
-  "auto_executed_tasks": [
-    {"gid": "1214054954497349", "name": "Mondays - Write into EU SSR Acq Asana", "action": "near_due_escalation (due today)", "fields_set": ["Priority=Today", "Routine=Sweep", "Kiro_RW", "Next-action"]},
-    {"gid": "1213964668984060", "name": "Brandon 1:1: Draft Enhanced Match FAQ for legal", "action": "near_due_escalation (4/22)", "fields_set": ["Priority=Today", "Routine=Admin", "Kiro_RW", "Next-action"]},
-    {"gid": "1213423234257246", "name": "Get Enhanced Match Legal Approval", "action": "near_due_escalation (4/22) + confirmed subtask of F90", "fields_set": ["Priority=Today", "Routine=Sweep", "Kiro_RW", "Next-action"]},
-    {"gid": "1214053404599901", "name": "Convert EOD frontend to auto-hook + AM frontend to userTriggered", "action": "due today escalation (system work)", "fields_set": ["Priority=Today", "Routine=Core", "Kiro_RW", "Next-action"]},
-    {"gid": "1214081017124426", "name": "MCS LP Review: Follow up on global Polaris template finalization", "action": "near_due_escalation (4/22)", "fields_set": ["Priority=Today", "Routine=Engine Room", "Kiro_RW", "Next-action"]}
-  ],
-  "auto_execute_failed": [
-    {"gid": "1214068215142846", "name": "PAM: Confirm FR pivot campaign structure", "action": "near_due_escalation", "error": "Asana 404 — task not found (may have been archived/deleted between DuckDB snapshot and UpdateTask call)", "recommendation": "verify in Asana UI; if gone, soft-delete DuckDB row next cycle"}
-  ],
-  "consolidation_audit": {
-    "principle": "Per signal-to-task-pipeline.md § Step 2.5: new top-level tasks only earn their place if Urgent+Important OR externally-bound. Others become subtasks, notes-bullets, or are killed.",
-    "recommended_consolidations": [
-      {
-        "cluster": "Audience / Enhanced Match chain",
-        "rationale": "These are all subtasks/components of the F90 Lifecycle parent (1212760973200434). Many should become subtasks if they aren't already.",
-        "candidate_subtask_children": [
-          "1213336296972493 Enable Enhanced Match (My Tasks)",
-          "1213336296972490 Import audience to GAds (My Tasks)",
-          "1213336296972488 Include audience in Media request (My Tasks)",
-          "1213336296972484 Add Audiences to Google (My Tasks)",
-          "1213611457559870 Finish Audience Request after legal approval and Media Team request (My Tasks)",
-          "1213332849519450 Request Media Updates (My Tasks)",
-          "1213875146955582 Get Enhanced Match details (My Tasks)"
-        ],
-        "parent_gid": "1212760973200434",
-        "recommended_action": "Move all 7 as subtasks of F90. Reduces My Tasks surface by 7, keeps F90 narrative intact."
-      },
-      {
-        "cluster": "MX operational follow-ups from Lorena / IECCP / Google invoice",
-        "rationale": "All roll into MX program. Best as MX-project context-task notes (append bullet) or subtasks of the MX context-task 1213917639688517.",
-        "candidate_notes_bullets": [
-          "1214091808391411 Resolve Google dupe invoice issue - keep Diana/team updated",
-          "1214088494080582 Resolve MX duplicate invoice — Diana",
-          "1213494284353345 MX - investigate reftags",
-          "1213983077428492 ie%CCP calc - insert MX spend/regs before 9th",
-          "1213993229524626 ie%CCP calc - insert MX spend/regs before 9th (duplicate)"
-        ],
-        "parent_gid": "1213917639688517",
-        "recommended_action": "1214091808391411 and 1214088494080582 are duplicates of each other — close one. Kill the ie%CCP duplicate (1213993229524626)."
-      },
-      {
-        "cluster": "AU handover operational items",
-        "rationale": "AU program items, best rolled into AU context-task 1213917747438931 or AU meetings agenda.",
-        "candidate_subtasks": [
-          "1214128634505816 AU handover: switched to max clicks 4/17",
-          "1214090268665882 AU: check genbi campaign data, and change to max clicks",
-          "1214075341408685 Check - A/B Beauty/Auto Experiment launched in MX (mis-named, AU team activity)"
-        ],
-        "parent_gid": "1213917747438931",
-        "recommended_action": "Roll into AU program as subtasks or a single 'AU week-of actions' parent."
-      },
-      {
-        "cluster": "Kill candidates (old/abandoned)",
-        "rationale": "More than 30 days overdue OR ambient backlog items with no action in months.",
-        "candidates": [
-          {"gid": "1213230198995937", "name": "WW redirect - Existing customer reporting in Adobe Ad Cloud", "overdue": 42, "action": "kill_or_revive"},
-          {"gid": "1214080130329568", "name": "Make changes to AU/MX/PAM for the week", "overdue": 26, "note": "appears weekly-recurring, older instance not closed"},
-          {"gid": "1213798673865639", "name": "Update and close your goal(s)", "overdue": 17, "note": "Asana system reminder — not actionable on its own"},
-          {"gid": "1213817111703805", "name": "It's time to update your goal(s)", "overdue": 17, "note": "Asana system reminder — not actionable on its own"},
-          {"gid": "1213690904654138", "name": "Monthly: Individual Goals update", "overdue": 10, "note": "merge into Brandon 1:1 agenda bullet"},
-          {"gid": "1213646854838564", "name": "Using AI for paid search", "overdue": null, "note": "vague, no date, no action; roll into AI Tool Demo follow-up or kill"},
-          {"gid": "1213828814349976", "name": "If we want to remove the CTA on Polaris NB pages for MX", "overdue": null, "note": "conditional, not a task; MX notes bullet"},
-          {"gid": "1212811293275567", "name": "See if we can create a view with relevant links for each account", "overdue": null, "note": "exploration item, not an action"},
-          {"gid": "1212811293275565", "name": "See if budget dashboard WW can be created", "overdue": null, "note": "exploration item, not an action"}
-        ],
-        "recommended_action": "Close 9 stale tasks with kill comment. Reduces My Tasks by 9."
-      },
-      {
-        "cluster": "Deep Dive prep items",
-        "rationale": "Three tasks all due 4/9, all overdue 11d. Could be prep agenda for an upcoming Deep Dive session — consolidate under one parent.",
-        "candidates": [
-          "1213968042348601 Deep Dive: Add IECCP FAQ to new account playbook",
-          "1213959854928587 Deep Dive: Finalize market expansion playbook",
-          "1213965650410967 Deep Dive: Year-One Optimization one-pager"
-        ],
-        "recommended_action": "Create or locate Paid Acq Deep Dive & Debate parent task (per calendar Thu 4/23 meeting), make all 3 subtasks."
-      }
-    ],
-    "estimated_net_reduction": "-25 to -30 top-level tasks if all consolidations execute (currently 110 active incomplete → ~82 after consolidation)."
+  "schema_version": "1.1",
+  "generated_at_utc": "2026-04-21T15:05:00Z",
+  "generated_at_pt": "2026-04-21T08:05:00-07:00",
+  "phase": "AM-Frontend partial regen (post-run stale-state fix — refreshed Apr 13 → Apr 21)",
+  "source": "am-frontend.md execution this morning + live DuckDB pull post-Richard pushback",
+  "summary": {
+    "my_tasks_proposals": 3,
+    "portfolio_proposals": 2,
+    "auto_executed_count": 12,
+    "requires_approval_total": 5,
+    "total_enriched_this_session": 12,
+    "total_urgent_or_today_gaps_remaining": 3
   },
-  "my_tasks_enrichment_proposals": [
-    {"gid": "1213959904341162", "priority": "Urgent", "routine": "Admin", "kiro_rw": "4/20: 14d overdue. Brandon PAM budget question unanswered since 4/6. Must reply before raising Paid App Q2 PO.", "next_action": "Reply to Brandon on PAM budget assessment (yes/no on current direction), then unblock PO"},
-    {"gid": "1214044682239823", "priority": "Urgent", "routine": "Engine Room", "kiro_rw": "4/20: MX Beauty/Auto experiment ends 4/30 — check mid-week trend now, not end of month.", "next_action": "Pull MX Beauty/Auto trend through 4/20, flag if velocity indicates directional result"},
-    {"gid": "1214068272596724", "priority": "Urgent", "routine": "Admin", "kiro_rw": "4/20: 3d overdue. PAM underspend risk needs Brandon flag (relates to Paid App Q2 PO).", "next_action": "Pull April MTD PAM spend vs Q2 target, flag risk in Brandon 1:1 Tue"},
-    {"gid": "1213278917849558", "priority": "Not urgent", "routine": "Engine Room", "kiro_rw": "4/20: Vague title 'Initial Testing'. Likely placeholder — kill or rename with specific test.", "next_action": "Rename with specific test scope or close as placeholder"},
-    {"gid": "1214068215114017", "priority": "Today", "routine": "Engine Room", "kiro_rw": "4/20: 2d overdue. PAM US/EU spend pacing check for Brandon 1:1 tomorrow.", "next_action": "Pull PAM US+EU April MTD spend vs Q2 budget; format for Tue 1:1"},
-    {"gid": "1214074477111007", "priority": "Today", "routine": "Admin", "kiro_rw": "4/20: 4d overdue. DDD walkthrough with team — schedule or scope.", "next_action": "Schedule 30-min team walkthrough OR add as agenda item to Thu Deep Dive"},
-    {"gid": "1213965650410967", "priority": "Urgent", "routine": "Core", "kiro_rw": "4/20: 4d overdue. Year-One Optimization one-pager prep for Thu Deep Dive.", "next_action": "Draft one-pager with year-one learnings; use Deep Dive session Thu 4/23 9am PT as delivery target"},
-    {"gid": "1213968042348601", "priority": "Urgent", "routine": "Core", "kiro_rw": "4/20: 11d overdue. IECCP FAQ addition for account playbook.", "next_action": "Append IECCP section to account playbook using Stacey/York's 4/10 inputs"},
-    {"gid": "1213959854928587", "priority": "Urgent", "routine": "Core", "kiro_rw": "4/20: 11d overdue. Market expansion playbook finalization.", "next_action": "Final editing pass; ship to Brandon as Deep Dive input"},
-    {"gid": "1213962513760099", "priority": "Urgent", "routine": "Engine Room", "kiro_rw": "4/20: 11d overdue. ASP confirmation automation — deliverable to Brandon 1:1.", "next_action": "Spec out the automation (trigger, inputs, outputs), propose in Tue 1:1"},
-    {"gid": "1214006311270752", "priority": "Urgent", "routine": "Admin", "kiro_rw": "4/20: 10d overdue. Reply to Dwayne on AU PS/MCS Updates thread.", "next_action": "Respond to Dwayne's AU PS/MCS thread (likely subsumed by canonical Reply-to-Dwayne task)"},
-    {"gid": "1214068319365234", "priority": "Urgent", "routine": "Admin", "kiro_rw": "4/20: 5d overdue. Approve OFA invoice workflow for Mohd Sadeq.", "next_action": "Review OFA invoice workflow, click approve in finance tool"}
+  "already_enriched_this_session": [
+    {"task_gid": "1213341921686564", "name": "Testing Document for Kate", "field": "kiro_rw,next_action_rw"},
+    {"task_gid": "1214057202961389", "name": "Weekly Reporting - Global WBR sheet", "field": "kiro_rw,next_action_rw"},
+    {"task_gid": "1213125740755931", "name": "Email overlay WW rollout/testing", "field": "kiro_rw,next_action_rw"},
+    {"task_gid": "1213917967984980", "name": "Respond to Lena — AU LP URL", "field": "kiro_rw,next_action_rw"},
+    {"task_gid": "1213964186504305", "name": "Send IECCP follow-up to Lorena", "field": "kiro_rw,next_action_rw"},
+    {"task_gid": "1212808474749819", "name": "Paid App PO", "field": "kiro_rw,next_action_rw"},
+    {"task_gid": "1214128634505816", "name": "AU handover max-clicks check", "field": "kiro_rw,next_action_rw,routine_rw=EngineRoom"},
+    {"task_gid": "1213764961716427", "name": "WW weblab dial-up", "field": "kiro_rw,next_action_rw"},
+    {"task_gid": "1213796951745232", "name": "Look over AU LP switch", "field": "kiro_rw,next_action_rw"},
+    {"task_gid": "1214074477110993", "name": "Sitelink Audit/Update", "field": "kiro_rw,next_action_rw"},
+    {"task_gid": "1213917691089036", "name": "Refmarker mapping audit PoC — AU (completed 4/20 — auto-close candidate)", "field": "kiro_rw,next_action_rw"},
+    {"task_gid": "1214081017092577", "name": "MCS LP Review: Lorena paid social", "field": "kiro_rw,next_action_rw"}
   ],
-  "portfolio_enrichment_proposals_summary": {
-    "note": "Portfolio-level (AU/MX/Paid App/WW Testing) enrichment proposals embedded in am-portfolio-findings.json section-by-section. Summary: ~43 portfolio tasks flagged with one or more gaps. Most common: Routine_RW missing on WW Testing stakeholder tasks (Andrew's, Stacey's).",
-    "count": 43
-  },
-  "abps_ai_content_triage": {
-    "note": "ABPS AI - Content project deprecated 2026-04-17 per soul.md. Not scanned this run.",
-    "count": 0
-  }
+  "remaining_gaps": [
+    {"task_gid": "1214081017124426", "name": "MCS LP Review: Polaris template finalization", "missing_fields": ["kiro_rw", "next_action_rw", "routine_rw"], "due_on": "2026-04-22", "note": "Due tomorrow — not enriched this session, pick up before OOO Thu/Fri"},
+    {"task_gid": "1214044682239817", "name": "MX Polaris NB LP Test (Beauty+Auto)", "missing_fields": ["next_action_rw"], "due_on": "2026-04-30", "note": "Due 4/30 — re-triage when closer, fine as-is for now"}
+  ],
+  "auto_executed": [
+    {"action": "daily_snapshot_asana_task_history", "count": 102, "timestamp_utc": "2026-04-21T13:45:00Z", "note": "Idempotent INSERT per (task_gid, snapshot_date) — from morning Phase 1"},
+    {"action": "asana_task_sync_upsert", "count": 185, "timestamp_utc": "2026-04-21T13:45:44Z", "note": "From orchestrator B1 this morning"},
+    {"action": "asana_update_task_enrichment", "count": 12, "timestamp_utc": "2026-04-21T14:42:00Z", "note": "Kiro_RW + Next-action_RW refresh via UpdateTask during AM-Frontend Step 3"}
+  ],
+  "staleness_notes": "AM-Backend Phase 4 + compile did not run yesterday or today per session-log 2026-04-21 entry (Phase 2.5/3B/4/5.5 skipped). This file regenerated manually from live DuckDB + post-session enrichment actions. Root cause: am-auto.kiro.hook is userTriggered (no scheduled trigger) AND hook name had leading-period hiding it from Kiro UI. Hook display name fixed 2026-04-21 morning. Trigger policy change routed to karpathy."
 }

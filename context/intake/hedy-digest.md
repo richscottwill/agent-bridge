@@ -1,123 +1,58 @@
-# Hedy Meeting Digest — 2026-04-18
+# Hedy Meeting Digest
 
-**Scan window:** 2026-04-16 15:26 UTC → now
-**Sessions pulled:** 20 (GetSessions limit=20)
-**Sessions new (not already in ps_analytics.signals.hedy_meetings):** 2
-**Action items extracted:** 15 (10 + 5)
-**Decisions surfaced:** 12 (5 + 7)
-**Topics reinforced:** 14 signals into ps_analytics.signals.signal_tracker (3 existing Hedy rows strengthened, 11 new rows inserted)
+**Generated:** 2026-04-21 (Pacific)
+**Scan window:** 2026-04-17 → 2026-04-21 (since last sync)
+**Last synced meeting:** 2026-04-17 — "AI Tool Demo and Workflow Integration" (`IvUNtHCncikQcZvODFj1`)
 
----
+## Status
 
-## Sessions Ingested
+**No new meetings since last sync.**
 
-### 1. Polaris LP Optimization and Italy Ref Tag Issue
-- **Date:** 2026-04-16 (60 min)
-- **Type:** stakeholder (cross-team: Richard + Brandon + Dwayne + Adi + Stacey)
-- **Attendees:** Richard Williams, Brandon Munday, Dwayne Palmer (MCS), Adi Thakur (UX), Stacey Gu (OCI)
-- **Topic (Hedy):** LP Testing
-- **Session ID:** X9gMGQMOFP25yu51oySX
+Hedy has 55 total sessions; the most recent one (2026-04-17) was captured in the prior sync. No sessions have been recorded between 2026-04-17 and today (2026-04-21). This matches the calendar pattern — 2026-04-18 was a Saturday, 2026-04-19 Sunday, 2026-04-20 Monday appears to have been a light day, 2026-04-21 is today (still ongoing).
 
-**What happened:** Team reviewed 10 Polaris LP optimizations and finalized global template direction. Richard shared data showing the US Polaris brand page delivered **+6% CVR** vs the old MCS version (21-day pre/post March 24 launch). Mid-meeting Richard flagged a **critical production issue**: Italy's Polaris page went live prematurely using the MCS Polaris template, which overwrote Italy's ref tag — traffic now routes to the Australia domain on signup, losing registration tracking and likely failing verification against the Italian database.
+## Meetings Ingested This Run
 
-### 2. AI Tool Demo and Workflow Integration
-- **Date:** 2026-04-17 (51 min)
-- **Type:** team (WW Outbound Marketing team members)
-- **Attendees:** Richard Williams, Adi Thakur, Andrew Wirtz, Stacey Gu, Yun-Kang Chu, Dwayne Palmer, Peter Ocampo
-- **Topic (Hedy):** AI
-- **Session ID:** IvUNtHCncikQcZvODFj1
+0 new meetings.
 
-**What happened:** Richard led a demo of a code-based AI platform for WBR callout generation. Tool uses Python under the hood, explains its logic, handles multi-file correlation (AMO + dashboard + Adobe), and outputs Markdown for clean Quip integration. Team aligned on adoption for WBR support, Markdown as standard output, and a shared SharePoint prompt repository. Gandalf discussed as a packaged/local alternative. 6 team members committed to testing against their domains.
+## Action Items Extracted
 
----
+0 new action items.
 
-## Top Action Items
+## Topics Reinforced
 
-**Richard owns (9 items):**
-1. **[CRITICAL, ASAP]** Coordinate with Alex (Andes) to revert Italy Polaris page to old MCS template — restore ref tag tracking
-2. **[ASAP]** Update or create SIM document with specifications for the corrected Italy template
-3. **[2026-04-17]** Share finalized Polaris headline/subheadline copy and FAQ updates with Dwayne and Adi
-4. **[2026-04-18]** Propose Enidobi alert solution at campaign/ad group level for post-launch CVR monitoring
-5. **[2026-04-21]** Share master prompt used for WBR callout analysis with team for adaptation
-6. **Follow up** with Lorena Alvarez Larrea (MX) on WhatsApp campaign rollout plans
-7. **Follow up** with Alexis Eck (AU) on WhatsApp campaign rollout plans
-8. **Schedule** follow-up session to walk team through local AI tool (Gandalf) setup
-9. **Work with analytics team** to implement Enidobi alerts
+0 topics reinforced this cycle.
 
-**Team owns:**
-- **[2026-04-20]** Prepare Weblab setup for updated Polaris template in US/DE/FR
-- **[2026-04-25]** Adi — Test AI tool with MX data and provide feedback
-- **[2026-04-28]** Andrew — Validate AI-generated UK callouts against manual analysis
-- **[2026-05-02]** Stacey — Assess Polaris integration feasibility with AI tool
-- Yun-Kang — Assess AI tool for Adobe non-brand deep dives
-- Dwayne — Investigate whether MCS campaign data can be structured for AI analysis
-- Peter — Evaluate AI tool for mobile app performance projections
+## Recent Meeting Context (for reference — already ingested)
 
----
+Last six meetings in DuckDB, for downstream workflows that pull digest-level context:
 
-## Decisions Surfaced
+| Date | Session | Series |
+|------|---------|--------|
+| 2026-04-17 | AI Tool Demo and Workflow Integration | team/stakeholder |
+| 2026-04-16 | Polaris LP Optimization and Italy Ref Tag Issue | stakeholder (MCS) |
+| 2026-04-15 | Polaris Brand LP and Canada Optimization Review | stakeholder (MCS) |
+| 2026-04-14 | Polaris, Baloo, and Mexico Testing Sync | manager (Brandon) |
+| 2026-04-14 | OCI Rollout and Market Performance Review | team (weekly) |
+| 2026-04-14 | Baloo Project Phase 1 Demo and Feedback | stakeholder (Baloo) |
 
-**Polaris LP (worldwide template):**
-- Benefit cards replace the percolate widget across all Polaris pages
-- Outbound links (Explore category) removed from global template
-- Subheadline standardized with country name + "From Sole Props to Enterprise" inclusivity
-- FAQ section: remove intimidating "What do I need to register?" → "All you need is a work email"; add "Is AB free?" and pricing benefits FAQs
-- Closing CTA button added at bottom of all pages
-- **Italy rollout reverted immediately** to old MCS template
+These are already in `signals.hedy_meetings`. For narrative/transcript pull:
+- DuckDB: `SELECT * FROM signals.hedy_meetings ORDER BY meeting_date DESC`
+- Hedy MCP: `GetSessionDetails(sessionId)` for full transcript/recap
 
-**AI tooling:**
-- Adopt AI tool for WBR callouts and reporting support
-- Standardize on Markdown output format (clean Quip integration)
-- Create shared SharePoint prompt repository for team-wide consistency
-- All AI analysis validated manually against source dashboards
-- Explore Gandalf as framework for packaging standardized AI analysis workflows
+## Running Themes (carry-forward from prior digest)
+
+No new signal — themes from last digest still apply:
+
+- **Polaris LP testing across markets** — Italy ref tag issue, Canada optimization, Brand LP rollout. Polaris is the dominant operational topic.
+- **Baloo Phase 1** — ungated AB product browsing subdomain (shop.business.amazon.com), Paid Search is primary launch channel.
+- **AI tooling workflows** — Jasper AI demo, AI Tool Demo and Workflow Integration. Team evaluating AI-assisted ad-copy and campaign workflows.
+- **OCI rollout** — market performance review tied to OCI migration.
+- **MX and AU hands-on markets** — Mexico testing sync, AU landing page sync, compensation review.
+
+## Action Items for Richard (carry-forward)
+
+No new items extracted this run. Richard's outstanding items from prior meetings are already routed to Asana via prior sync cycles — check `asana.by_routine` or `asana-digest.md` for current state.
 
 ---
 
-## Topic Reinforcements (signal_tracker)
-
-**Hedy-channel signals (source_channel='hedy'):**
-
-| Topic | Action | Notes |
-|-------|--------|-------|
-| polaris-brand-lp | reinforced | Already in tracker — strength +1.0, count +1 |
-| ai-search-aeo | reinforced | Already in tracker — strength +1.0, count +1 |
-| op1-strategy | reinforced | Already in tracker — strength +1.0, count +1 |
-| ai-tooling | NEW | AI platform adoption for callouts |
-| wbr-callouts | NEW | Master prompt + Markdown standard |
-| gandalf | NEW | Local/packaged AI framework |
-| ai-ad-copy | NEW | Copy quality scoring discussion |
-| italy-ref-tag | NEW | Critical production issue — escalation topic |
-| mcs-template | NEW | Template standards + Italy revert |
-| faq-optimization | NEW | Registration friction reduction |
-| weblab | NEW | US/DE/FR test setup |
-| enidobi-alerts | NEW | Automated CVR monitoring proposal |
-| eu5-rollout | NEW | DE/FR rollout sequencing |
-| conversion-rate-monitoring | NEW | Infrastructure beyond Weblab |
-
-14 Hedy signals total. Cross-channel corroboration will happen in Phase 2.5 when Slack/email signals for the same topics (e.g., italy-ref-tag, polaris-brand-lp) get aggregated into signal_heat_map.
-
----
-
-## Richard-Led Sessions
-
-**Both sessions Richard-led:**
-
-1. **Polaris LP Optimization (2026-04-16)** — Richard drove the 10-point review, presented the +6% CVR data from the US launch, and escalated the Italy ref tag bug in real-time. Hedy's communication assessment: Presence *Adequate*, Value *Strategic*, Clarity *Direct*. Strongest moment: flagging the Italy issue mid-meeting and immediately assigning ownership. Missed opportunity: could have delegated SIM creation to Dwayne instead of owning it himself.
-
-2. **AI Tool Demo (2026-04-17)** — Richard ran the demo, explained code-based reasoning, and proposed the shared prompt repository. Hedy's assessment: Presence *Adequate*, Value *Strategic*, Listening *Responsive*. Missed opportunity: could have pulled in quieter team members (Adi, Peter) earlier rather than waiting for their questions.
-
-Both sessions show Richard leading cross-functional technical discussions — consistent with L2 (Drive WW Testing) and L3 (Team Automation) from the Five Levels.
-
----
-
-## Flags for Processing
-
-- **Italy ref tag issue** is P0 / critical — will surface in Phase 2 signal-to-task pipeline. Should already have an Asana task; if not, create one tagged `italy-ref-tag` + `polaris-brand-lp`.
-- **WhatsApp rollout** is a new thread for Lorena (MX) and Alexis (AU) — not previously in active projects. Could become a new L2 line item.
-- **Enidobi alerts** could become a L3 (Team Automation) artifact if Richard designs it as a reusable monitoring pattern, not a one-off.
-- **Gandalf as packaged workflow framework** connects to L5 (Agentic Orchestration) — worth tracking if it materializes into a shared team tool.
-
----
-
-_Generated by Subagent E (Hedy Meeting Sync) as part of AM-Backend parallel v2. Elapsed: see orchestrator timing._
+**Next sync:** Hedy syncs run daily; will capture any meetings recorded 2026-04-21 on the next run.

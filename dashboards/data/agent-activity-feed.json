@@ -1,0 +1,159 @@
+{
+  "generated": "2026-04-21T23:00:00-07:00",
+  "source": "demo-seed (will be replaced by refresh-agent-activity.py when run on DevSpaces)",
+  "stats": {
+    "total_24h": 47,
+    "agents_active": 12,
+    "hooks_fired": 18,
+    "failures": 0
+  },
+  "activities": [
+    {
+      "id": "inv-2026-04-21-2310",
+      "ts": "2026-04-21T23:10:00-07:00",
+      "producer_type": "agent",
+      "producer": "callout-writer",
+      "action": "Generated W16 AU WBR callout",
+      "input_summary": "3-week trailing metrics, W16 regs -4% WoW, CPA $128",
+      "output_summary": "112-word callout, narrative-first structure, causal attribution to keyword audit",
+      "quality_gate": "pass",
+      "quality_score": 8.6,
+      "duration_ms": 14200,
+      "downstream": "Pre-WBR Callouts Quip"
+    },
+    {
+      "id": "inv-2026-04-21-2305",
+      "ts": "2026-04-21T23:05:00-07:00",
+      "producer_type": "agent",
+      "producer": "callout-reviewer",
+      "action": "Reviewed W16 AU callout",
+      "input_summary": "112-word draft from callout-writer",
+      "output_summary": "Score 8.6/10, 2 subtractive edits, PUBLISH verdict",
+      "quality_gate": "pass",
+      "quality_score": 8.6,
+      "duration_ms": 8900,
+      "downstream": "dashboard WBR Health Score"
+    },
+    {
+      "id": "inv-2026-04-21-2258",
+      "ts": "2026-04-21T22:58:00-07:00",
+      "producer_type": "agent",
+      "producer": "market-analyst (AU)",
+      "action": "Analyzed AU W16 performance",
+      "input_summary": "ps.v_weekly AU W16 + change_log + competitive_signals",
+      "output_summary": "Keyword audit effect quantified at -12% CPC on NB outliers, regs trend stable",
+      "quality_gate": "pass",
+      "duration_ms": 22100,
+      "downstream": "callout-writer input"
+    },
+    {
+      "id": "inv-2026-04-21-2240",
+      "ts": "2026-04-21T22:40:00-07:00",
+      "producer_type": "agent",
+      "producer": "wiki-editor",
+      "action": "Triaged 2 intake candidates",
+      "input_summary": "2 new wiki candidates from session-summary",
+      "output_summary": "Both accepted: kiro-windows-file-capabilities, hook-environment-routing-for-sharepoint",
+      "quality_gate": "pass",
+      "duration_ms": 4800,
+      "downstream": "wiki-researcher queue"
+    },
+    {
+      "id": "inv-2026-04-21-2230",
+      "ts": "2026-04-21T22:30:00-07:00",
+      "producer_type": "agent",
+      "producer": "am-backend",
+      "action": "Parallel ingestion cycle",
+      "input_summary": "Slack 17 channels + Asana 96 tasks + email + calendar + Hedy + Loop pages",
+      "output_summary": "8 signals routed, 16 overdue tasks flagged, 3 new priorities surfaced",
+      "quality_gate": "pass",
+      "duration_ms": 712000,
+      "downstream": "am-enrichment-queue.json, dashboard Command Center"
+    },
+    {
+      "id": "inv-2026-04-21-2215",
+      "ts": "2026-04-21T22:15:00-07:00",
+      "producer_type": "agent",
+      "producer": "karpathy",
+      "action": "Compression audit on gut.md",
+      "input_summary": "gut.md word count trend, 30d Bayesian prior",
+      "output_summary": "Posterior mean 0.42, below compression signal threshold, no action",
+      "quality_gate": "observation-only",
+      "duration_ms": 3400,
+      "downstream": "ops.autoresearch_organ_health"
+    },
+    {
+      "id": "inv-2026-04-21-2200",
+      "ts": "2026-04-21T22:00:00-07:00",
+      "producer_type": "agent",
+      "producer": "wiki-critic",
+      "action": "Reviewed draft article: monthly-keyword-review-ritual",
+      "input_summary": "wiki-writer FINAL draft, 847 words",
+      "output_summary": "Score 7.9/10 — below 8.0 gate, 4 revision requests returned to writer",
+      "quality_gate": "block",
+      "quality_score": 7.9,
+      "duration_ms": 11300,
+      "downstream": "wiki-writer revision queue"
+    },
+    {
+      "id": "inv-2026-04-21-2145",
+      "ts": "2026-04-21T21:45:00-07:00",
+      "producer_type": "agent",
+      "producer": "bayesian-projector",
+      "action": "Weekly forecast regeneration",
+      "input_summary": "ps.v_weekly all markets W16, seasonal priors, regime changes",
+      "output_summary": "20 weekly projections with CI + monthly/quarterly derived sums",
+      "quality_gate": "pass",
+      "duration_ms": 47000,
+      "downstream": "ps-forecast-tracker.xlsx + SharePoint"
+    },
+    {
+      "id": "inv-2026-04-21-2130",
+      "ts": "2026-04-21T21:30:00-07:00",
+      "producer_type": "reviewed",
+      "producer": "Richard + wiki-editor",
+      "action": "Approved 2 wiki candidates for promotion",
+      "input_summary": "wiki-candidates.md queue, 8 pending",
+      "output_summary": "2 promoted to researcher queue, 6 deferred for next review",
+      "quality_gate": "human-gate",
+      "duration_ms": null,
+      "downstream": "wiki pipeline stage 2"
+    },
+    {
+      "id": "inv-2026-04-21-2115",
+      "ts": "2026-04-21T21:15:00-07:00",
+      "producer_type": "agent",
+      "producer": "regime-detector",
+      "action": "Scanned ps.change_log for structural changes",
+      "input_summary": "477 change-log rows across EU5, MX/AU, NA/JP",
+      "output_summary": "0 new regime changes detected; existing 3 active regimes applied to forecast priors",
+      "quality_gate": "pass",
+      "duration_ms": 5600,
+      "downstream": "ps.regime_changes"
+    },
+    {
+      "id": "inv-2026-04-21-2100",
+      "ts": "2026-04-21T21:00:00-07:00",
+      "producer_type": "agent",
+      "producer": "eod-backend",
+      "action": "Asana reconciliation + daily reset",
+      "input_summary": "96 My Tasks + 5 portfolio projects + daily-tracker state",
+      "output_summary": "6 Today→Urgent demoted, 13 completions moved to Complete sections, 4 recurring tasks rolled over",
+      "quality_gate": "pass",
+      "duration_ms": 89000,
+      "downstream": "dashboard Daily Blocks, EOD protocol Phase 5 git push"
+    },
+    {
+      "id": "inv-2026-04-21-2030",
+      "ts": "2026-04-21T20:30:00-07:00",
+      "producer_type": "agent",
+      "producer": "hedy-sync",
+      "action": "Ingested 3 meeting transcripts",
+      "input_summary": "Hedy sessions: Brandon 1:1, Adi weekly, Paid Acq DDD",
+      "output_summary": "2 action items extracted, 1 low-visibility meeting flagged, speaking-share analyzed",
+      "quality_gate": "pass",
+      "duration_ms": 34000,
+      "downstream": "memory.md relationships + nervous-system.md patterns"
+    }
+  ]
+}

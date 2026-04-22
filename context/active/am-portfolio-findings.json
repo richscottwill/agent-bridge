@@ -1,86 +1,86 @@
 {
-  "generated": "2026-04-20T17:10:00Z",
-  "generated_at_pt": "2026-04-20 10:10 PT",
-  "phase": "am-backend-phase-4",
-  "portfolio_shape": {
-    "my_tasks": {"active_incomplete": 51, "today": 1, "urgent": 0, "overdue": 19, "needs_enrichment": 51, "health": "warning", "note": "51/51 need enrichment because UPSERT did not capture custom_fields for My Tasks project (SSE timeout on full opt_fields pull). Background enrichment pass recommended."},
-    "ww_testing": {"active_incomplete": 20, "today": 2, "urgent": 7, "overdue": 5, "needs_enrichment": 9, "health": "caution", "note": "Testing Approach v5 (1213341921686564) is the hard thing — 19d overdue, unsent to Brandon."},
-    "au": {"active_incomplete": 13, "today": 0, "urgent": 4, "overdue": 3, "needs_enrichment": 0, "health": "on_track", "note": "Fully enriched. Lena response and refmarker audit overdue."},
-    "mx": {"active_incomplete": 8, "today": 0, "urgent": 4, "overdue": 2, "needs_enrichment": 3, "health": "on_track", "note": "Clean. Lorena IECCP follow-up overdue 11d; Polaris template follow-up due 4/22."},
-    "paid_app": {"active_incomplete": 7, "today": 1, "urgent": 2, "overdue": 1, "needs_enrichment": 0, "health": "on_track", "note": "Paid App PO (1212808474749819) 7d overdue — blocked on Brandon PAM budget response."},
-    "abps_ai_build": {"active_incomplete": 11, "today": 0, "urgent": 0, "overdue": 0, "needs_enrichment": 11, "health": "low_priority", "note": "System build tasks. Enrichment deferred (no urgency)."},
-    "abps_ai_content": {"active_incomplete": 0, "note": "Deprecated 2026-04-17 per soul.md. No action."}
+  "schema_version": "1.2",
+  "generated_at_utc": "2026-04-21T15:05:00Z",
+  "generated_at_pt": "2026-04-21T08:05:00-07:00",
+  "phase": "AM-Frontend partial regen (post-run stale-state fix)",
+  "source": "Live DuckDB pull asana.asana_tasks + am-frontend session enrichment",
+  "portfolio_discovery": {
+    "projects_with_active_tasks": [
+      {"name": "My Tasks", "live_task_count": 51, "overdue": 22, "near_due": 3},
+      {"name": "WW Testing", "live_task_count": 20, "overdue": 6, "near_due": 0},
+      {"name": "AU", "live_task_count": 13, "overdue": 3, "near_due": 1},
+      {"name": "ABPS AI Build", "live_task_count": 11, "overdue": 0, "near_due": 0},
+      {"name": "MX", "live_task_count": 8, "overdue": 2, "near_due": 1},
+      {"name": "Paid App", "live_task_count": 7, "overdue": 2, "near_due": 0}
+    ],
+    "deprecated_projects": [
+      {"name": "ABPS AI Content", "gid": "1213917352480610", "deprecated_at": "2026-04-17", "source": "soul.md"}
+    ]
   },
-  "near_due_escalations_executed": {
-    "count": 5,
-    "task_gids": ["1214054954497349", "1213964668984060", "1213423234257246", "1214053404599901", "1214081017124426"],
-    "principle": "Auto-execute path per am-backend-parallel.md Phase 4B."
-  },
-  "overdue_flags": [
-    {"cluster": "Hard Thing", "task_gid": "1213341921686564", "name": "Testing Document for Kate", "days_overdue": 19, "urgency": "ROUTE_TO_RW_TRAINER", "notes": "L1 streak 21 workdays at zero. Visibility-avoidance. Brandon unsent. 5 Kiro_RW updates with no external activity."},
-    {"cluster": "Kill candidates (30+ days)", "task_gid": "1213230198995937", "name": "WW redirect - Existing customer reporting in Adobe Ad Cloud", "days_overdue": 42, "urgency": "kill_or_revive"},
-    {"cluster": "Stakeholder-visible overdue", "task_gid": "1213917967984980", "name": "Respond to Lena — AU LP URL analysis + CPA methodology", "days_overdue": 17, "urgency": "HIGH", "notes": "Draft already written 4/6. Just needs send."},
-    {"cluster": "Stakeholder-visible overdue", "task_gid": "1213964186504305", "name": "Send IECCP follow-up summary to Lorena + review keyword data", "days_overdue": 11, "urgency": "HIGH", "notes": "Content drafted. Lorena is new MX stakeholder — early trust signal."},
-    {"cluster": "Brandon-assigned overdue", "task_gid": "1213917691089036", "name": "Refmarker mapping audit PoC — AU", "days_overdue": 10, "urgency": "HIGH", "notes": "Brandon+Lena watching. 5 Kiro_RW iterations, still at 'planning' stage."},
-    {"cluster": "Brandon-assigned overdue", "task_gid": "1213764961716427", "name": "WW weblab dial-up (Richard)", "days_overdue": 13, "urgency": "MEDIUM", "notes": "Austin offsite excuse 4/9 no longer valid. Confirm weblab status with Brandon."},
-    {"cluster": "Brandon-asked pre-11", "task_gid": "1213959904341162", "name": "Reply to Brandon — PAM budget needs assessment", "days_overdue": 14, "urgency": "HIGH", "notes": "Blocks Paid App PO. Must reply."}
+  "overdue_flags_queued": [
+    {"task_gid": "1213341921686564", "name": "Testing Document for Kate", "overdue_days": 20, "severity": "critical", "status": "hard_thing_visibility_avoidance", "enriched_today": true},
+    {"task_gid": "1213917967984980", "name": "Respond to Lena AU LP URL", "overdue_days": 18, "severity": "critical", "status": "SENT overnight per Richard", "enriched_today": true},
+    {"task_gid": "1213764961716427", "name": "WW weblab dial-up", "overdue_days": 14, "severity": "high", "recommendation": "discuss status Brandon 1:1 — close or reframe", "enriched_today": true},
+    {"task_gid": "1213964186504305", "name": "Send IECCP to Lorena", "overdue_days": 12, "severity": "high", "recommendation": "send pre-1PM MX Sync today", "enriched_today": true},
+    {"task_gid": "1213917691089036", "name": "Refmarker mapping audit PoC — AU", "overdue_days": 11, "severity": "high", "status": "COMPLETED 2026-04-20 — auto-close candidate still showing as Urgent", "enriched_today": true},
+    {"task_gid": "1212808474749819", "name": "Paid App PO Q2", "overdue_days": 8, "severity": "high", "blocked_on": "Brandon PAM budget reply 14d", "recommendation": "surface in Brandon 1:1", "enriched_today": true},
+    {"task_gid": "1213796951745232", "name": "Look over AU LP switch", "overdue_days": 6, "severity": "medium", "recommendation": "merge into AU handover Today-priority", "enriched_today": true},
+    {"task_gid": "1214074477110993", "name": "Sitelink Audit/Update", "overdue_days": 4, "severity": "medium", "enriched_today": true},
+    {"task_gid": "1214081017092577", "name": "MCS LP Lorena paid social", "overdue_days": 4, "severity": "medium", "recommendation": "raise in 1PM MX Sync", "enriched_today": true},
+    {"task_gid": "1214057202961389", "name": "Weekly Reporting - Global WBR sheet W15", "overdue_days": 1, "severity": "medium", "recommendation": "pull W15 before 9AM team meeting", "enriched_today": true},
+    {"task_gid": "1212988092117041", "name": "Paid App parent", "overdue_days": 21, "severity": "medium", "note": "BAU workstream — decomposed into subtasks"},
+    {"task_gid": "1214128634505816", "name": "AU handover max-clicks check", "overdue_days": 1, "severity": "medium", "enriched_today": true}
   ],
-  "recurring_task_proposals": {
-    "count": 3,
-    "auto_execute_pending": [
-      {"parent_pattern": "Weekly Reporting - Global WBR sheet", "last_completed_gid": "1213983331865941", "next_instance_gid": "1214057202961389", "status": "ALREADY_EXISTS (due today)", "action": "no_op"},
-      {"parent_pattern": "AU meetings - Agenda", "last_completed_gid": "1213993242326093", "next_instance_gid": "1214081017200478", "status": "ALREADY_EXISTS (due 4/22)", "action": "no_op"},
-      {"parent_pattern": "Mondays - Write into EU SSR Acq Asana", "last_completed_gid": "1213993242268778", "next_instance_gid": "1214054954497349", "status": "ALREADY_EXISTS + escalated today", "action": "no_op (handled by Phase 3A)"}
-    ],
-    "note": "All detected recurring patterns have their next instances already created. No new tasks needed."
-  },
-  "blocker_updates": {
-    "mx_cross_team": [
-      {"blocker": "Google duplicate invoice $56K", "counterparty": "Google Ireland + Diana De la Fuente", "status": "awaiting Google response; Richard acked Diana 4/17", "last_update": "2026-04-17", "action": "Weekly status check"},
-      {"blocker": "Andes data availability for Kingpin MX", "counterparty": "Andes data team", "status": "indefinite block", "last_update": "2026-04-04", "action": "no_op (dependency)"}
-    ],
-    "au_cross_team": [
-      {"blocker": "OCI MCC creation for May 2026 launch", "counterparty": "Google + Brandon", "status": "not initiated", "last_update": null, "action": "CRITICAL — MCC lead time is 2-3 weeks. If not begun this week, May launch slips."}
-    ],
-    "paid_app_cross_team": [
-      {"blocker": "AppsFlyer vendor timeline", "counterparty": "AppsFlyer", "status": "deferred to May", "action": "no_op until May"},
-      {"blocker": "Apple IT accounts paused (22% tax)", "counterparty": "Brandon + finance", "status": "kill candidate per 4/15 Kiro_RW", "action": "Phase 4 AU LP switch task (1212760973200420) already marked kill candidate"}
-    ]
-  },
-  "event_countdown": {
-    "paid_app_events": [
-      {"event": "Paid App - Prime Day", "due": "2026-06-01", "days_out": 42, "status": "on_track", "action": "no_op until May"},
-      {"event": "Paid App - BF/CM", "due": "2026-11-29", "days_out": 223, "status": "queued"}
-    ],
-    "calendar_upcoming_week": [
-      {"event": "Brandon 1:1", "when": "Tue 4/21 1:30pm PT", "prep_tasks": ["1213964668984060", "Brandon Outbound Marketing Goals ask 1214137998394047", "1213959904341162"]},
-      {"event": "Paid Acq Deep Dive & Debate", "when": "Thu 4/23 9:00am PT", "prep_tasks": ["1213965650410967 Year-One one-pager", "1213968042348601 IECCP FAQ", "1213959854928587 market expansion playbook"]},
-      {"event": "AU HandOff Doc Final Review", "when": "Thu 4/23 11:30am PT", "prep_tasks": []},
-      {"event": "PSME Seattle Happy Hour", "when": "Thu 4/23 3:00-5:00pm PT", "response_status": "NoResponse — visibility opportunity with Todd"},
-      {"event": "MX Paid Search Sync", "when": "Tue 4/21 1:00pm PT (Richard organizes)", "prep_tasks": ["1214081017124426 MCS LP Polaris template followup"]},
-      {"event": "AB AU Paid Search Sync", "when": "Tue 4/21 4:30pm PT", "prep_tasks": ["1214081017200478 AU meetings - Agenda"]},
-      {"event": "Bi-Weekly Google + AB Performance Sync", "when": "Wed 4/22 1:00pm PT (Mike Babich)", "prep_notes": "Cross-MCC data exclusion thread (US 4/7+4/13) — raise with Mike"},
-      {"event": "Adi 1:1", "when": "Wed 4/22 12:00pm PT", "prep_tasks": ["1214137918207530 Kiro walkthrough subtask"]},
-      {"event": "AB // Adobe Bi-Weekly Call", "when": "Thu 4/23 1:00pm PT", "prep_notes": "Likely low-prep"}
-    ]
-  },
-  "budget_po_tracking": {
-    "mx": {"po_status": "Duplicate invoice in resolution ($56K). Q1 MS-20200908. Blocked on Google.", "action": "weekly_check"},
-    "paid_app": {"po_status": "Q2 PO pending. Google PO amendment needed. 7d overdue. Blocked on Brandon PAM budget response.", "action": "HIGH_PRIORITY_UNBLOCK"}
-  },
-  "status_staleness": {
-    "au_project": {"last_status_update": null, "days_stale": "never", "action": "consider posting a W14/W15 status update"},
-    "mx_project": {"last_status_update": null, "days_stale": "never", "action": "consider posting a W14/W15 status update"},
-    "paid_app_project": {"last_status_update": null, "days_stale": "never", "action": "consider posting a status update"},
-    "ww_testing_project": {"last_status_update": null, "days_stale": "never", "action": "consider posting a Polaris+OCI status update"}
-  },
-  "market_context_auto_refresh": {
-    "planned_updates": [
-      {"task_gid": "1213917747438931", "project": "AU", "action": "UpdateTask html_notes with W15 signal synthesis"},
-      {"task_gid": "1213917747384849", "project": "AU (Agent-Maintained)", "action": "UpdateTask html_notes with W15 signal synthesis"},
-      {"task_gid": "1213917639688517", "project": "MX", "action": "UpdateTask html_notes with W15 signal synthesis"},
-      {"task_gid": "1213917771155873", "project": "Paid App", "action": "UpdateTask html_notes with W15 signal synthesis"}
-    ],
-    "note": "Executed in Phase 4E auto-refresh below."
-  }
+  "blocker_updates_queued": [
+    {
+      "task_gid": "1213983090951838",
+      "name": "Update Kingpin for MX",
+      "blocker": "Andes data unavailable",
+      "blocked_days": 21,
+      "proposed_action": "Escalate in Brandon 1:1 today OR ping Andes contact"
+    },
+    {
+      "task_gid": "1213072707685834",
+      "name": "MX Automotive page",
+      "blocker": "Vijeth footer / pending 2nd MCS intake",
+      "blocked_days": "~17",
+      "proposed_action": "Follow up in MX Paid Search sync today 1:00pm PT"
+    },
+    {
+      "task_gid": "1212808474749819",
+      "name": "Paid App PO Q2 + Google PO amend",
+      "blocker": "Brandon PAM budget reply",
+      "blocked_days": 14,
+      "proposed_action": "Surface in Brandon 1:1 today 1:30pm PT"
+    }
+  ],
+  "budget_po_critical_flags": [
+    {
+      "task_gid": "1212808474749819",
+      "name": "Paid App PO Q2 + Google PO amend",
+      "severity": "critical",
+      "reason": "8d overdue, blocks Q2 spend on PAM, compounds with -$70K Q1 underspend Brandon flagged"
+    },
+    {
+      "task_gid": "1214088494080582",
+      "name": "Resolve MX duplicate invoice — Diana ($56K)",
+      "severity": "high",
+      "reason": "$56K duplicate — awaiting Google response per email 4/20. Diana ack 4/17."
+    }
+  ],
+  "cross_channel_patterns": [
+    {
+      "pattern": "au_operational_reliability_streak",
+      "signal_sources": ["slack/dm-brandon live 6:32 AM PT + 7:12 AM PT philosophical challenge", "slack/ab-paid-search-abix 21h doc Q", "asana/AU tasks 14-17d overdue"],
+      "observation": "Third AU scheduling/comms lapse in 2 weeks. Brandon de-escalated after 6:35 AM but raised broader biweekly cadence purpose Q at 7:12 AM. Compounds Testing Approach visibility avoidance.",
+      "proposed_discussion": "Brandon 1:1 today 1:30pm PT — answer biweekly cadence Q with cadence rationale (Megan starting 4/28 + handoff doc = shift to monthly + ad-hoc)."
+    },
+    {
+      "pattern": "brandon_patience_decreasing",
+      "signal_sources": ["Brandon relationship trend: escalating (20 slack + 3 emails this week, #1 in relationship_activity)", "live DM cadence shift from offering support to directing"],
+      "observation": "Brandon trend this week is ESCALATING — top signal in system. Highest-stakes week with him in a month.",
+      "proposed_discussion": "Brandon 1:1 — walk in having done what you said (Testing doc sent), acknowledge AU ops pattern directly, not defensively."
+    }
+  ],
+  "staleness_notes": "Regenerated manually from live DuckDB post-Richard pushback. Previous file (Apr 13) carried stale data through 8 days. AM-Backend Phase 4 compile not firing — routed to karpathy."
 }

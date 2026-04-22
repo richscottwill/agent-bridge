@@ -46,7 +46,6 @@ Adjusted budget rebalanced to flat $140 CPA across months.
 - Brand traffic volatile due to holidays, events, and market maturity
 - New acquisition promo live: "20% off first order, up to AU$50" — monitoring W12+ impact
 - Landing page test pending: MCS vs Polaris (50/50 split or full switch, awaiting Lena confirmation)
-- AU/MX OCI planned for May 2026
 
 ## Key People
 - Alexis Eck: AU market POC, owns MCS page mapping

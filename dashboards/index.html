@@ -26,6 +26,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .hero-text{font-size:16px;font-weight:600;color:#fff;flex:1}
 .hero-meta{font-size:14px;color:#6b8acd;white-space:nowrap}
 
+/* WBR Health Score */
+.wbr-health{background:linear-gradient(135deg,#0f1a2e 0%,#162040 100%);border:1px solid #2a3a5c;border-radius:8px;padding:12px 16px;margin-bottom:10px;display:flex;align-items:center;gap:16px}
+.wbr-score-num{font-size:32px;font-weight:800;line-height:1;min-width:60px;text-align:center}
+.wbr-score-num.score-high{color:#4ade80}
+.wbr-score-num.score-mid{color:#fbbf24}
+.wbr-score-num.score-low{color:#f87171}
+.wbr-score-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#4a9eff;margin-bottom:2px}
+.wbr-score-sub{font-size:12px;color:#6b8acd}
+.wbr-trend{font-size:18px;display:flex;align-items:center;gap:4px;white-space:nowrap}
+.wbr-trend .arrow-up{color:#4ade80}
+.wbr-trend .arrow-down{color:#f87171}
+.wbr-trend .arrow-flat{color:#888}
+.wbr-trend-delta{font-size:13px;color:#6b8acd}
+.wbr-dims{display:flex;gap:8px;flex:1;justify-content:flex-end;flex-wrap:wrap}
+.wbr-dim{text-align:center;min-width:48px}
+.wbr-dim-val{font-size:14px;font-weight:600;color:#d4d4d4}
+.wbr-dim-label{font-size:9px;color:#555;text-transform:uppercase;letter-spacing:.3px}
+
 /* Section labels */
 .section-label{font-size:13px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
 
@@ -123,24 +141,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .detail-text{font-size:14px;color:#d4d4d4;line-height:1.5}
 .detail-quote{font-size:14px;color:#777;font-style:italic;line-height:1.5}
 
-/* Scratchpad */
-.scratchpad{background:#14161e;border:1px solid #1e2028;border-radius:6px;padding:12px 16px;margin-top:10px}
-.scratchpad h3{font-size:14px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
-.sp-tabs{display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
-.sp-tab{padding:4px 10px;border-radius:4px;font-size:14px;cursor:pointer;background:#1a1d27;border:1px solid #2a2d35;color:#888;transition:all .15s}
-.sp-tab:hover{border-color:#3b82f6;color:#d4d4d4}
-.sp-tab.active{background:#172040;border-color:#3b82f6;color:#93b4f5}
-.sp-add{padding:4px 8px;border-radius:4px;font-size:13px;cursor:pointer;background:none;border:1px dashed #2a2d35;color:#555}
-.sp-add:hover{border-color:#3b82f6;color:#93b4f5}
-.sp-area{width:100%;min-height:100px;max-height:200px;background:#1a1d27;border:1px solid #2a2d35;color:#d4d4d4;padding:8px 10px;border-radius:4px;font-size:15px;font-family:inherit;resize:vertical;line-height:1.5}
-.sp-area::placeholder{color:#444}
-.sp-area:focus{outline:none;border-color:#3b82f6}
-.sp-footer{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
-.sp-footer .sp-saved{font-size:12px;color:#555}
-.sp-footer button{background:#172040;border:1px solid #2a3a5c;color:#93b4f5;padding:4px 10px;border-radius:4px;font-size:12px;cursor:pointer}
-.sp-footer button:hover{background:#1a2a4a}
-.sp-footer .sp-delete{background:none;border:1px solid rgba(248,113,113,.2);color:#e8a0a0}
-.sp-footer .sp-delete:hover{background:rgba(127,29,29,.15)}
+
 
 /* TOC */
 .toc{display:flex;gap:6px;padding:4px 20px;flex-wrap:wrap;align-items:center;border-bottom:1px solid #1e2028;flex-shrink:0;background:#12141c}
@@ -154,6 +155,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
 .g{color:#4ade80}.w{color:#d4d4d4}.b{color:#f87171}.y{color:#e0e0e0}
 .ts{font-size:13px;color:#444;text-align:right;padding-top:6px}
+
+/* Data staleness indicator — #12 */
+.fresh{color:#4ade80}
+.stale-warn{color:#fbbf24}
+.stale-danger{color:#f87171}
+
+/* Change-since-last-look badges — #11 */
+.change-badge{display:inline-block;padding:1px 7px;border-radius:10px;font-size:11px;font-weight:600;letter-spacing:.2px;margin-left:8px;vertical-align:middle;background:rgba(59,130,246,.15);color:#6b9bd2;line-height:1.5;white-space:nowrap;opacity:0;animation:badgeFadeIn .4s ease-out forwards}
+@keyframes badgeFadeIn{to{opacity:1}}
 
 @media(max-width:900px){
   .blocks-columns{grid-template-columns:repeat(2,1fr)}
@@ -178,10 +188,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </div>
 <div class="nav" id="nav">
   <a data-view="home" class="active">Command Center</a>
+  <a data-view="agent-activity.html">Agent Activity</a>
+  <a data-view="system-flow.html">System Flow</a>
+  <a data-view="contribute.html">Contribute</a>
   <a data-view="performance/index.html">Performance</a>
   <a data-view="body-system/index.html">Body System</a>
   <a data-view="state-files/index.html">State Files</a>
   <a data-view="wiki-search.html">Wiki Search</a>
+  <a data-view="ps-test-calculator.html">Test Calculator</a>
 </div>
 <div class="toc" id="tocSection"></div>
 <div class="content" id="content">
@@ -190,7 +204,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div id="blockSection"></div>
     <div id="ledgerSection"></div>
     <div id="intelSection"></div>
-    <div id="scratchpadSection"></div>
+
     <div class="ts" id="genTs"></div>
   </div>
   <iframe id="dashFrame" style="display:none"></iframe>
@@ -372,54 +386,57 @@ function updateLedgerHistory(commitments){
   saveLedgerHistory(hist);return hist;
 }
 
-/* ══ Scratchpad ══ */
-function getScratchpadData(){
-  const d=JSON.parse(localStorage.getItem('cc_scratchpad')||'{}');
-  if(!d.tabs||!d.tabs.length)d.tabs=[{id:'scratch-1',name:'Notes',content:''}];
-  if(!d.active)d.active=d.tabs[0].id;return d;
-}
-function saveScratchpadData(d){localStorage.setItem('cc_scratchpad',JSON.stringify(d))}
-let spData=null;
-function renderScratchpad(){
-  spData=getScratchpadData();const at=spData.tabs.find(t=>t.id===spData.active)||spData.tabs[0];
-  const th=spData.tabs.map(t=>`<button class="sp-tab${t.id===spData.active?' active':''}" onclick="switchTab('${t.id}')">${t.name}</button>`).join('');
-  const ls=at.saved?'Saved '+new Date(at.saved).toLocaleTimeString():'';
-  document.getElementById('scratchpadSection').innerHTML=`<div class="scratchpad"><h3 id="sec-scratchpad">Scratchpad</h3>
-    <div class="sp-tabs">${th}<button class="sp-add" onclick="addTab()">+</button></div>
-    <textarea class="sp-area" id="spArea" placeholder="Quick notes, meeting capture, ideas..." oninput="autoSaveTab()">${at.content||''}</textarea>
-    <div class="sp-footer"><span class="sp-saved" id="spSaved">${ls}</span><div style="display:flex;gap:6px">
-      ${spData.tabs.length>1?'<button class="sp-delete" onclick="deleteTab()">Delete tab</button>':''}
-      <button onclick="renameTab()">Rename</button></div></div></div>`;
-}
-function switchTab(id){spData.active=id;saveScratchpadData(spData);renderScratchpad()}
-function addTab(){const n=prompt('Tab name:','Meeting notes');if(!n)return;const id='sp-'+Date.now();spData.tabs.push({id,name:n,content:''});spData.active=id;saveScratchpadData(spData);renderScratchpad()}
-function deleteTab(){if(spData.tabs.length<=1||!confirm('Delete this tab?'))return;spData.tabs=spData.tabs.filter(t=>t.id!==spData.active);spData.active=spData.tabs[0].id;saveScratchpadData(spData);renderScratchpad()}
-function renameTab(){const tab=spData.tabs.find(t=>t.id===spData.active);if(!tab)return;const n=prompt('New name:',tab.name);if(!n)return;tab.name=n;saveScratchpadData(spData);renderScratchpad()}
-let spTimer=null;
-function autoSaveTab(){clearTimeout(spTimer);spTimer=setTimeout(()=>{
-  const a=document.getElementById('spArea');if(!a||!spData)return;const tab=spData.tabs.find(t=>t.id===spData.active);if(!tab)return;
-  tab.content=a.value;tab.saved=new Date().toISOString();saveScratchpadData(spData);
-  const el=document.getElementById('spSaved');if(el)el.textContent='Saved '+new Date(tab.saved).toLocaleTimeString();
-},500)}
+
 
 /* ══ Load data ══ */
 fetch('data/command-center-data.json?'+Date.now()).then(r=>r.json()).then(cc=>{
   CC=cc;
   const dv=cc.generated||'',sv=localStorage.getItem('cc_data_version')||'';
   if(sv!==dv){['flags','differentiate','delegate','communicate'].forEach(k=>localStorage.removeItem('cc_d_'+k));localStorage.setItem('cc_data_version',dv)}
-  document.getElementById('dataTs').textContent='\u2022 Updated '+new Date(cc.generated).toLocaleString();
+  const dataTsEl=document.getElementById('dataTs');
+  dataTsEl.textContent='\u2022 Updated '+new Date(cc.generated).toLocaleString();
+  /* Staleness indicator — #12: green <4h, yellow 4-12h, red >12h */
+  const staleHours=(Date.now()-new Date(cc.generated).getTime())/3.6e6;
+  dataTsEl.classList.remove('fresh','stale-warn','stale-danger');
+  dataTsEl.classList.add(staleHours>12?'stale-danger':staleHours>4?'stale-warn':'fresh');
   document.getElementById('genTs').textContent='Generated: '+new Date().toLocaleString();
   updateLedgerHistory(cc.commitments||[]);
-  renderHero(cc);renderToc();renderBlocks(cc);renderLedger(cc);renderIntel(cc);renderScratchpad();
+  renderHero(cc);renderToc();renderBlocks(cc);renderLedger(cc);renderIntel(cc);
+  applyChangeBadges(cc);
 }).catch(e=>{console.error(e);document.getElementById('blockSection').innerHTML='<div style="color:#f87171;padding:20px">Failed to load data</div>'});
 
 /* ══ Hero ══ */
 function renderHero(cc){
-  const d=cc.differentiate;if(!d||!d.length)return;const top=d[0];
-  document.getElementById('heroSection').innerHTML=`<div class="hero">
-    <div class="hero-label">\u26a1 Highest Leverage</div>
-    <div class="hero-text">${top.action}</div>
-    <div class="hero-meta">${statusPill(top.status)}</div></div>`;
+  let html='';
+
+  /* WBR Health Score — one number, one trend arrow */
+  const wbr=cc.wbr_health;
+  if(wbr&&wbr.composite_score!=null){
+    const score=wbr.composite_score;
+    const scoreCls=score>=80?'score-high':score>=60?'score-mid':'score-low';
+    const arrowMap={up:'\u25b2',down:'\u25bc',flat:'\u25b8'};
+    const arrowCls={up:'arrow-up',down:'arrow-down',flat:'arrow-flat'};
+    const arrow=arrowMap[wbr.trend]||'\u25b8';
+    const cls=arrowCls[wbr.trend]||'arrow-flat';
+    const deltaText=wbr.delta!=null&&wbr.delta!==0?(wbr.delta>0?'+':'')+wbr.delta:'\u2014';
+    const dims=wbr.dimensions||{};
+    const dimHtml=Object.entries(dims).map(([k,v])=>`<div class="wbr-dim"><div class="wbr-dim-val">${v}</div><div class="wbr-dim-label">${k.length>4?k.slice(0,4):k}</div></div>`).join('');
+    html+=`<div class="wbr-health">
+      <div><div class="wbr-score-label">WBR Health</div><div class="wbr-score-num ${scoreCls}">${score}</div><div class="wbr-score-sub">${wbr.week} \u00b7 ${wbr.market_count} markets</div></div>
+      <div class="wbr-trend"><span class="${cls}">${arrow}</span><span class="wbr-trend-delta">${deltaText} vs ${wbr.prev_week||'\u2014'}</span></div>
+      <div class="wbr-dims">${dimHtml}</div>
+    </div>`;
+  }
+
+  /* Highest leverage item */
+  const d=cc.differentiate;if(d&&d.length){const top=d[0];
+    html+=`<div class="hero">
+      <div class="hero-label">\u26a1 Highest Leverage</div>
+      <div class="hero-text">${top.action}</div>
+      <div class="hero-meta">${statusPill(top.status)}</div></div>`;
+  }
+
+  document.getElementById('heroSection').innerHTML=html;
 }
 
 /* ══ TOC ══ */
@@ -427,8 +444,7 @@ function renderToc(){
   document.getElementById('tocSection').innerHTML=`<span class="toc-label">Jump to</span>
     <a href="#sec-blocks">Blocks</a><span class="toc-sep">\u00b7</span>
     <a href="#sec-ledger">Ledger</a><span class="toc-sep">\u00b7</span>
-    <a href="#sec-intel">Intelligence</a><span class="toc-sep">\u00b7</span>
-    <a href="#sec-scratchpad">Scratchpad</a>`;
+    <a href="#sec-intel">Intelligence</a>`;
 }
 
 /* ══ Daily Blocks ══ */
@@ -592,6 +608,112 @@ function renderLedger(cc){
 }
 
 function esc(s){return s.replace(/'/g,"\\'").replace(/"/g,'&quot;')}
+
+/* ══ Change-since-last-look badges — #11 ══
+ * Soul: Invisible over visible — badges appear only when something changed.
+ * First visit: no badges (everything is "new" which is meaningless).
+ * Updates cc_last_seen after 5s so badges persist long enough to notice.
+ */
+function getLastSeen(){try{return JSON.parse(localStorage.getItem('cc_last_seen'))}catch(e){return null}}
+function saveLastSeen(snapshot){localStorage.setItem('cc_last_seen',JSON.stringify(snapshot))}
+
+function buildSnapshot(cc){
+  return{
+    ts:cc.generated||'',
+    blocks_count:(cc.blocks||[]).reduce(function(s,b){return s+b.count},0),
+    blocks_tasks:(cc.blocks||[]).reduce(function(s,b){return s+(b.tasks||[]).length},0),
+    commitments_count:(cc.commitments||[]).length,
+    commitments_hashes:(cc.commitments||[]).map(function(c){return c.text_hash||c.text}).sort().join(','),
+    intel_count:(cc.communicate||[]).length+(cc.delegate||[]).length+(cc.differentiate||[]).filter(function(d){return d.status!=='done'}).length,
+    communicate_count:(cc.communicate||[]).length,
+    delegate_count:(cc.delegate||[]).length,
+    differentiate_count:(cc.differentiate||[]).filter(function(d){return d.status!=='done'}).length,
+    overdue_count:cc.total_overdue||0,
+    wbr_score:cc.wbr_health&&cc.wbr_health.composite_score!=null?cc.wbr_health.composite_score:null
+  };
+}
+
+function computeChangeBadges(prev,curr){
+  var badges={};
+  if(!prev)return badges; // first visit — no badges
+
+  // Daily Blocks
+  var blockDiff=curr.blocks_count-prev.blocks_count;
+  if(blockDiff>0)badges.blocks=blockDiff+' new';
+  else if(blockDiff<0)badges.blocks=Math.abs(blockDiff)+' cleared';
+  else if(curr.blocks_tasks!==prev.blocks_tasks)badges.blocks='updated';
+
+  // Integrity Ledger
+  var ledgerDiff=curr.commitments_count-prev.commitments_count;
+  if(ledgerDiff>0)badges.ledger=ledgerDiff+' new';
+  else if(ledgerDiff<0)badges.ledger=Math.abs(ledgerDiff)+' resolved';
+  else if(curr.commitments_hashes!==prev.commitments_hashes)badges.ledger='updated';
+
+  // Actionable Intelligence
+  var intelDiff=curr.intel_count-prev.intel_count;
+  if(intelDiff>0)badges.intel=intelDiff+' new';
+  else if(intelDiff<0)badges.intel=Math.abs(intelDiff)+' cleared';
+  else{
+    // Check sub-category changes
+    var subChanged=curr.communicate_count!==prev.communicate_count||curr.delegate_count!==prev.delegate_count||curr.differentiate_count!==prev.differentiate_count;
+    if(subChanged)badges.intel='updated';
+  }
+
+  // WBR Health (shown in hero area)
+  if(curr.wbr_score!==null&&prev.wbr_score!==null&&curr.wbr_score!==prev.wbr_score){
+    var delta=curr.wbr_score-prev.wbr_score;
+    badges.wbr=(delta>0?'+':'')+delta.toFixed(1);
+  }
+
+  return badges;
+}
+
+function injectBadge(sectionEl,text){
+  if(!sectionEl||!text)return;
+  var badge=document.createElement('span');
+  badge.className='change-badge';
+  badge.textContent=text;
+  sectionEl.appendChild(badge);
+}
+
+function applyChangeBadges(cc){
+  var prev=getLastSeen();
+  var curr=buildSnapshot(cc);
+  var badges=computeChangeBadges(prev,curr);
+
+  // Inject badges into section headers (rendered by this point)
+  if(badges.blocks)injectBadge(document.getElementById('sec-blocks'),badges.blocks);
+  if(badges.ledger)injectBadge(document.getElementById('sec-ledger'),badges.ledger);
+  if(badges.intel)injectBadge(document.getElementById('sec-intel'),badges.intel);
+
+  // Schedule last_seen update after 5 seconds of viewing
+  // Not on immediate load — badges persist long enough to be noticed
+  setTimeout(function(){saveLastSeen(curr)},5000);
+}
+</script>
+
+<script src="./shared/section-freshness.js" defer></script>
+<script src="./shared/provenance.js"></script>
+<script src="./shared/provenance-registry.js"></script>
+<script>
+/* Apply provenance bars to all registered sections after data loads.
+ * Runs after renderBlocks/renderLedger/renderIntel have created the section labels. */
+(function(){
+  const origFetch = window.fetch;
+  // Watch for data loaded — piggyback on the existing fetch
+  function tryApply(){
+    if (window.ProvenanceRegistry && document.getElementById('sec-blocks')) {
+      window.ProvenanceRegistry.applyAll();
+    } else {
+      setTimeout(tryApply, 200);
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => setTimeout(tryApply, 500));
+  } else {
+    setTimeout(tryApply, 500);
+  }
+})();
 </script>
 </body>
 </html>

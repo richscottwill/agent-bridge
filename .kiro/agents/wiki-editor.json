@@ -10,5 +10,12 @@
     "file://shared/wiki/roadmap.md",
     "file://shared/wiki/wiki-structure.md"
   ],
-  "mcpServers": {}
+  "mcpServers": {},
+  "successMetrics": [
+    "100% of pipeline stages executed in order: researcher → writer → critic → librarian (zero skipped steps)",
+    "Content roadmap reviewed and prioritized weekly — P1/P2/P3 assignments current",
+    "Kill decisions made within 14 days of no demand signal (tracked via wiki demand-log.md)",
+    "≥1 article moved through full pipeline per week (query: wiki.throughput)",
+    "Zero orphaned assignments: every topic assigned to researcher has a due date and status"
+  ]
 }

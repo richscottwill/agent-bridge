@@ -60,7 +60,6 @@ Note: Q1 budgets higher than Q2+ because ie%CCP targets are less aggressive earl
 - Event sitelink copy coordination with Carlos
 - Invoice/PO management: Transitioned to AB platform, still under Retail management for currency
 - PO coordination: Carlos Palmos manages, USD invoicing confirmed
-- AU/MX OCI planned for May 2026
 
 ## Key Narrative Threads
 - ie%CCP is the primary budget constraint; every callout should reference it

@@ -13,7 +13,7 @@ Source: Hedy session 4veBOAWYumVzlJciaLVg | Brandon sync topic | 34 min
 - AU CPA currently $134, below $140 target, registrations within 1% of goal
 - Brandon offered to join some AU syncs to listen in and help with Lena alignment
 - Brandon emphasized: testing plans need dates. Lena needs visibility into delivery schedules.
-- OCI not yet live in AU (planned May 2026). Current high-CPC caps are a two-way door until OCI enables better bidding.
+- OCI not yet live in AU (no confirmed timeline). Current high-CPC caps are a two-way door until OCI enables better bidding.
 - Lena's three priorities: (1) keyword CPC/CPA investigation, (2) keyword-to-product mapping (do we sell what we bid on?), (3) Polaris page migration
 
 ## Action Items

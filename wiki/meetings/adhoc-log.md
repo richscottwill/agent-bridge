@@ -63,7 +63,7 @@ updated: 2026-04-20
 
 ## 2026-03-19 — Adobe OCI Rollout Discussion
 - Suzane Huynh, team
-- AU OCI May 2026 timeline discussed
+- AU OCI timeline discussed
 - See also: stakeholder/adobe-biweekly.md, stakeholder/oci-rollout.md
 
 ---

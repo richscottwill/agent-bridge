@@ -75,6 +75,17 @@ These are live. They execute without Richard thinking.
 - **Service Account:** `kiro-sheets-bridge@kiro-491503.iam.gserviceaccount.com` · Creds: `~/shared/credentials/kiro-491503-6b65ab0501c6.json`
 - **Judgment required:** None. Autonomous reads/writes.
 
+### Harmony Forecast Deploy (Hook: `harmony-forecast-deploy`)
+- **What it does:** Rebuilds `forecast-data.json` from the updated xlsx and redeploys the `paid-acq-forecast` Harmony app to beta. Teammates on AB-Marketing-PS bindle see fresh data without any manual step.
+- **Trigger:** fileEdited on `shared/dashboards/ps-forecast-tracker.xlsx` (same as forecast-sharepoint-push, but independent job — single responsibility per hook).
+- **Script:** `~/shared/dashboards/deploy-forecast-harmony.sh` (bash, idempotent, safe to run manually).
+- **Chain:** xlsx edit → `refresh-forecast.py` (xlsx → JSON) → copy to Harmony app src/data/ → `harmony app deploy --stage beta --accept-breaking-changes`.
+- **Harmony app:** https://paid-acq-forecast.beta.harmony.a2z.com · Bindle: `amzn1.bindle.resource.35tbubgteizlyuofaysa` (parent: AB-Marketing-PS).
+- **App source:** `~/.workspace/forecast-harmony/Harmony-paid-acq-forecast/src/Harmony-paid-acq-forecast/` (vanilla plain template; Chart.js vendored locally under `src/vendor/chartjs/` for CSP compliance).
+- **Log:** `~/shared/context/active/harmony-forecast-deploy.log` (append-only, one line per stage).
+- **Typical runtime:** ~30 sec end-to-end. Timeout: 300 sec.
+- **Judgment required:** None. Fully autonomous.
+
 ### Hedy Meeting Sync (via EOD-1)
 - **What it does:** Pulls Hedy sessions, analyzes communication patterns (speaking share, hedging, filler words), flags low-visibility meetings, updates session/topic contexts, cascades to organs.
 - **Trigger:** EOD-1 hook. Fully autonomous.

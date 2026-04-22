@@ -48,7 +48,7 @@ The PS team works with at least 12 distinct stakeholder groups. The table below 
 | Stakeholder | Primary PS Contact | Interaction Cadence | Key Topics | Key Outcome |
 |-------------|-------------------|---------------------|------------|-------------|
 | Google (Mike Babich) | Brandon, Stacey, Richard | Biweekly sync | OCI, AI Max, account structure, ad copy | OCI implementation (first non-retail BU at Amazon), AI Max test planning |
-| Adobe (Suzane Huynh, Jen Vitiello) | Yun, Richard | Biweekly sync | OCI reporting, Ad Cloud analytics, WW redirects | OCI reporting feed integration, AU OCI timeline (May 2026) |
+| Adobe (Suzane Huynh, Jen Vitiello) | Yun, Richard | Biweekly sync | OCI reporting, Ad Cloud analytics, WW redirects | OCI reporting feed integration, AU OCI timeline TBD |
 | MCS (Dwayne's team) | Dwayne, Adi, Richard | Continuous | LP optimization, Polaris, Weblab, in-context reg | In-context registration +13.6K regs, Polaris WW rollout |
 | MarTech (Joel Mallory) | Stacey, Yun | As needed | OCI infrastructure, tracking, LiveRamp | OCI technical implementation across 8 markets |
 | Legal | Brandon | As needed | F90 audiences, LiveRamp data usage, audience SIMs | F90 audience approval in progress (US by end of April) |

@@ -1,7 +1,22 @@
 <!-- DOC-0345 | duck_id: protocol-current -->
 # Active Context — Richard Williams
 
-Last updated: 2026-04-20 (Monday PT, AM backend enrichment)
+Last updated: 2026-04-21 (Tuesday PT EOD)
+
+## 🔴 Live tomorrow (2026-04-22)
+- **Testing Approach v5 to Brandon:** STILL UNSENT. 23 workdays at zero L1. Brandon 1:1 today cut to 4min by laptop - window closed. v5 has PUBLISH verdict (8.4/10) since 4/5. Do this FIRST thing tomorrow AM - it's a 10-min SEND not a work session.
+- **Confirm IECCP target 70% vs 75% with Brandon:** promised Lorena tomorrow in MX sync. Gates MX R&O budget transfer before May round. Needs to happen before Lorena's followup.
+- **Write MX R&O reallocation email to Lorena:** formal email with new monthly forecast based on confirmed IECCP target, releasing conservatively ~$800K back to Mexico team. Brandon assigned in team sync. Ccing ABIx.
+- **Fortune 100 ad copy update:** global copy audit. Brandon assigned in team sync. Start with US, confirm changes with Stacey + Adi before deploying.
+- **MCS-2553 LP audit (Polaris exclusion check):** Richard created 4/21 after Frank/Ruben QA found Polaris cp pages getting modal. Pre-launch safeguard.
+- **AU post-max-clicks account check:** 4d since switch, not checked yet. Overpacing risk.
+
+## 🗓️ Meetings today (2026-04-21)
+- **Weekly Paid Acq Team Sync (9:00-10:20 AM PT, 77min):** Richard presented AU brand LP reversion learning (-34% NB / -20% brand CVR on un-gated Polaris, reverted and CVR recovered in 1 week). Got 5 action items. W16 performance review.
+- **MX Paid Search / IECCP / Campaign Strategy Sync with Lorena + Andes (1:02-1:36 PM PT, 34min):** IECCP target pending Brandon. Sparkle on-site placement with "Special Pricing for Business" messaging drove record-high brand traffic. Lorena proposed 3rd-party WhatsApp+email funnel automation (legal cleared) - new L3/L4 initiative candidate. Apparel identified as next vertical LP test.
+- **Brandon 1:1 (1:36-1:40 PM PT, 4min TRUNCATED):** Laptop slowness cut meeting short. Testing Approach send did not happen. Window for updating Brandon on progress was lost.
+
+
 
 ## Role & Scope
 - Amazon Business, Paid Acquisition / Paid Search
@@ -16,7 +31,7 @@ Last updated: 2026-04-20 (Monday PT, AM backend enrichment)
 ### AU CPC Benchmark Response (3/19, Kate-visible)
 - Lena Zak challenged AB AU $6 avg CPC vs Consumer $0.18-0.50
 - Brandon built Loop doc reply — Richard contributed data 3/19
-- Key points: B2B keywords higher CPC; AB AU launched June 2025; no Shopping Ads for AB; OCI May 2026 will help
+- Key points: B2B keywords higher CPC; AB AU launched June 2025; no Shopping Ads for AB
 - Status: Response sent. Monitor Kate/Nick reaction.
 - 🆕 Brandon sync (3/23): Focus on outlier keyword analysis (top 20 by CPC/CPA), not broad removal. Lena's 3 priorities: (1) keyword CPC/CPA investigation, (2) keyword-to-product mapping, (3) Polaris migration. Brandon offered to join AU syncs. CPC caps are a "two-way door" until OCI.
 
@@ -133,7 +148,7 @@ Last updated: 2026-04-20 (Monday PT, AM backend enrichment)
 - 🆕 **CCP decision (Slack 2/24):** Brandon confirmed: keep using dashboard CCPs for March (beneficial to team). ieCCP output CCPs will continue improving over time — that's why 3-month refresh cadence was chosen. Don't switch to Jan ieCCP actuals.
 
 ### Adobe OCI Rollout
-- Discussion (3/19) with Suzane Huynh. AU OCI May 2026 timeline. Adobe Bi-Weekly TODAY (1pm PT).
+- Discussion (3/19) with Suzane Huynh. AU OCI timeline TBD. Adobe Bi-Weekly TODAY (1pm PT).
 
 ### Baloo Early Access Cost Planning (3/26)
 - Vijay Kumar (Tech) briefed Richard on early access rollout: 50 stakeholders get Tampermonkey script to enable Baloo weblabs.

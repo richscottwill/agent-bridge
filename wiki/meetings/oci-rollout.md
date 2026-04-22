@@ -18,7 +18,7 @@ updated: 2026-04-12
 - Outlook Series: Various (cross-functional)
 
 ## Context
-OCI (Offline Conversion Import) is a key initiative for improving bidding and attribution. US/UK/DE live at 100%. CA/JP/EU3 E2E launched Feb-Mar 2026. Full impact projected Jul 2026. AU OCI planned May 2026. Key metric: +18-24% registration uplift on non-brand. APAC MCC access issues currently blocking JP launch.
+OCI (Offline Conversion Import) is a key initiative for improving bidding and attribution. US/UK/DE live at 100%. CA/JP/EU3 E2E launched Feb-Mar 2026. Full impact projected Jul 2026. AU OCI timeline TBD (MCC not created). Key metric: +18-24% registration uplift on non-brand. APAC MCC access issues currently blocking JP launch.
 
 ## Latest Session
 ### 2026-03-25 — APAC MCC Access Escalation (via Google sync)
@@ -26,12 +26,12 @@ OCI (Offline Conversion Import) is a key initiative for improving bidding and at
 - JP OCI launch pushed back until APAC MCC access resolved
 
 ## Running Themes
-- Market-by-market OCI rollout (US/UK/DE done, CA/JP/EU3 in progress, AU May 2026)
+- Market-by-market OCI rollout (US/UK/DE done, CA/JP/EU3 in progress, AU/MX unscheduled)
 - APAC MCC access issues (active blocker)
 - False positive value adjustments per marketplace
 - Adobe OCI reporting feed integration
 
 ## Open Items
 - [ ] APAC MCC access resolution (blocking JP)
-- [ ] AU OCI May 2026 preparation
+- [ ] AU OCI MCC creation + timeline confirmation
 - [ ] Adobe OCI reporting feed integration

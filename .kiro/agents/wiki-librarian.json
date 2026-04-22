@@ -20,5 +20,12 @@
     "file://shared/wiki/SITEMAP.md",
     "file://shared/wiki/wiki-pipeline-rules.md"
   ],
-  "mcpServers": {}
+  "mcpServers": {},
+  "successMetrics": [
+    "wiki-index.md updated within same session as every publish or archive operation",
+    "SITEMAP.md reflects current wiki structure — zero orphaned or missing entries",
+    "9-step publishing workflow completed fully per article: no skipped validation steps",
+    "Cross-references validated: zero broken wikilinks in published articles (auditable via build-wiki-index.py)",
+    "SharePoint .docx published to correct Artifacts/{category}/ path for every FINAL article"
+  ]
 }

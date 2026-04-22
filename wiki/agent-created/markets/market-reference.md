@@ -153,7 +153,7 @@ For current weekly data, see the latest WW summary at `~/shared/context/active/c
 | Field | Value |
 |-------|-------|
 | Launch | June 2025 (W24) — youngest market |
-| OCI | ❌ Not in scope. Adobe OCI planned May 2026. |
+| OCI | ❌ Not in scope. No timeline. |
 | Key contacts | Alexis Eck (L6, AU POC), Lena Zak (L7, Country Leader) |
 | Key challenge | B2B CPC ($6 avg) vs consumer ($0.18-0.50). No Shopping Ads for AB. Lena expects data, not narratives. |
 

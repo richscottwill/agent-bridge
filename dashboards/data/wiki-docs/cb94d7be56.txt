@@ -26,7 +26,7 @@ The wiki-editor requested a structured research brief covering all 5 years (2026
 ### From Body System
 
 #### eyes.md (updated 2026-04-02)
-- **OCI Status:** US/UK/DE/FR/IT/ES/JP at 100% live. CA targeting 4/7. AU not started (May 2026 target). MX not started (no timeline).
+- **OCI Status:** US/UK/DE/FR/IT/ES/JP at 100% live. CA targeting 4/7. AU not started (no confirmed timeline). MX not started (no timeline).
 - **Market Health Feb 2026:** US 32.9K regs (above OP2), UK +24% vs OP2, DE -4% vs OP2, CA +18.5%, JP underperforming (MHLW ended), AU 207 regs W13 ($118 CPA), MX 354 regs W13 (+9% WoW).
 - **Competitive:** Walmart 37-55% IS on US Brand (peak W6). weareuncapped.com 24% UK Brand since Dec 2023. bruneau.fr 39-47% FR NB. Competition broadening across all markets.
 - **Ad Copy:** UK Phase 1: +86% CTR, +31% regs (HIGH confidence). Messaging shift from bulk/wholesale → price/quality/selection validated by SP Study (Aug 2025).
@@ -58,8 +58,7 @@ The wiki-editor requested a structured research brief covering all 5 years (2026
 | FR | in_progress | Feb 2026 | Jul 2026 | — | — |
 | IT | in_progress | Feb 2026 | Jul 2026 | — | — |
 | ES | in_progress | Feb 2026 | Jul 2026 | — | — |
-| AU | not_planned | — | — | — | — |
-| MX | not_planned | — | — | — | — |
+| AU | not_planned | — | — | — | — || MX | not_planned | — | — | — | — |
 [source: DuckDB oci_status, 2026-03-30, HIGH]
 
 Note: DuckDB oci_status table lags eyes.md. Eyes.md (4/2) shows FR/IT/ES/JP dialed to 100% on 3/30-3/31. DuckDB still shows "in_progress." **Use eyes.md as ground truth for current OCI status.**
@@ -202,7 +201,7 @@ Note: DuckDB oci_status table lags eyes.md. Eyes.md (4/2) shows FR/IT/ES/JP dial
 ### 2026 — Validate and Scale
 
 #### GROUNDED (evidence exists)
-- OCI 7/10 markets at 100%, CA targeting 4/7, AU May 2026 (Adobe path). +35,196 incremental regs, $16.7MM+ OPS validated. [source: organ (eyes.md) + DuckDB oci_status, 2026-04-02, HIGH]
+- OCI 7/10 markets at 100%, CA targeting 4/7. AU and MX have no confirmed timelines and no MCC. +35,196 incremental regs, $16.7MM+ OPS validated. [source: organ (eyes.md) + DuckDB oci_status, 2026-04-02, HIGH]
 - Ad copy UK Phase 1: +86% CTR, +31% regs. EU4 translations complete. Phased rollout to all NB campaigns WW. [source: organ (eyes.md), 2026-04-02, HIGH]
 - AI Max US test planned Q2. Test design overdue (was due 3/28). Follows same phased methodology as OCI. [source: organ (eyes.md), 2026-04-02, HIGH for plan, MEDIUM for outcome]
 - Baloo early access launched 3/30. Unlocks Shopping Ads for AB. US Q2 target for broader rollout. [source: organ (eyes.md), 2026-04-02, HIGH for launch, MEDIUM for impact]
@@ -426,7 +425,7 @@ The writer should organize the outlook as follows:
 
 8. **Team structure 2027+:** Will the team grow? Will the PS function merge with broader marketing automation? → Richard/Brandon strategic question.
 
-9. **AU/MX OCI timeline:** AU has a May 2026 target via Adobe. MX has no timeline. What's the realistic path for these markets? → Richard should confirm with Suzane (AU) and identify MX owner.
+9. **AU/MX OCI timeline:** Both AU and MX have no confirmed timeline and no MCC has been created. What's the realistic path for these markets? → Richard should confirm with Suzane (AU) and identify MX owner.
 
 10. **Baloo registration quality:** Will lower-friction registration degrade post-registration purchasing behavior? The measurement framework needs to track 90-day behavior, not just CPA. → Depends on Baloo launch data.
 

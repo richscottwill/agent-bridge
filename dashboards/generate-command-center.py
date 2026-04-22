@@ -462,6 +462,106 @@ def sync_commitments_to_duckdb(intel_commitments):
     return commitments
 
 
+def get_wbr_health_score():
+    """Compute WBR Health Score from callout reviewer scores in DuckDB.
+
+    The callout reviewer scores each market on 8 dimensions (0-10 each):
+      L1 Craft: attribution, structure, voice, economy
+      L2 Impact: sowhat, ownership, accuracy, strategic
+
+    The composite WBR Health Score is the average of all 8 dimensions × 10,
+    producing a single 0-100 number. Equal weights — all dimensions matter.
+
+    Returns the current week's score, last week's score (for trend arrow),
+    and the per-dimension breakdown.
+    """
+    # Get the two most recent weeks of scores
+    rows = query_duckdb("""
+        SELECT iso_week,
+            ROUND(AVG(l1_attribution), 2) as avg_attribution,
+            ROUND(AVG(l1_structure), 2) as avg_structure,
+            ROUND(AVG(l1_voice), 2) as avg_voice,
+            ROUND(AVG(l1_economy), 2) as avg_economy,
+            ROUND(AVG(l2_sowhat), 2) as avg_sowhat,
+            ROUND(AVG(l2_ownership), 2) as avg_ownership,
+            ROUND(AVG(l2_accuracy), 2) as avg_accuracy,
+            ROUND(AVG(l2_strategic), 2) as avg_strategic,
+            ROUND(AVG(combined_avg), 4) as avg_combined,
+            COUNT(*) as market_count
+        FROM ps.callout_scores
+        GROUP BY iso_week
+        ORDER BY iso_week DESC
+        LIMIT 2
+    """)
+
+    if not rows:
+        return None
+
+    current = rows[0]
+    previous = rows[1] if len(rows) > 1 else None
+
+    # Composite score: average of 8 dimensions × 10 → 0-100 scale
+    composite = round(current["avg_combined"] * 10, 1)
+    l1_avg = round((current["avg_attribution"] + current["avg_structure"] +
+                     current["avg_voice"] + current["avg_economy"]) / 4, 2)
+    l2_avg = round((current["avg_sowhat"] + current["avg_ownership"] +
+                     current["avg_accuracy"] + current["avg_strategic"]) / 4, 2)
+
+    # Trend vs last week
+    prev_composite = round(previous["avg_combined"] * 10, 1) if previous else None
+    if prev_composite is not None:
+        delta = round(composite - prev_composite, 1)
+        if delta > 0.5:
+            trend = "up"
+        elif delta < -0.5:
+            trend = "down"
+        else:
+            trend = "flat"
+    else:
+        delta = None
+        trend = "flat"
+
+    result = {
+        "composite_score": composite,
+        "week": current["iso_week"],
+        "market_count": current["market_count"],
+        "l1_avg": l1_avg,
+        "l2_avg": l2_avg,
+        "trend": trend,
+        "delta": delta,
+        "prev_score": prev_composite,
+        "prev_week": previous["iso_week"] if previous else None,
+        "dimensions": {
+            "attribution": current["avg_attribution"],
+            "structure": current["avg_structure"],
+            "voice": current["avg_voice"],
+            "economy": current["avg_economy"],
+            "sowhat": current["avg_sowhat"],
+            "ownership": current["avg_ownership"],
+            "accuracy": current["avg_accuracy"],
+            "strategic": current["avg_strategic"],
+        },
+    }
+
+    # Persist to ps.wbr_health_score for trend queries
+    dim_json = json.dumps(result["dimensions"])
+    safe_dim = dim_json.replace("'", "''")
+    query_duckdb(f"""
+        INSERT INTO ps.wbr_health_score (iso_week, composite_score, l1_avg, l2_avg, market_count, dimension_scores, computed_at)
+        VALUES ('{current["iso_week"]}', {composite}, {l1_avg}, {l2_avg}, {current["market_count"]}, '{safe_dim}', CURRENT_TIMESTAMP)
+        ON CONFLICT (iso_week) DO UPDATE SET
+            composite_score = EXCLUDED.composite_score,
+            l1_avg = EXCLUDED.l1_avg,
+            l2_avg = EXCLUDED.l2_avg,
+            market_count = EXCLUDED.market_count,
+            dimension_scores = EXCLUDED.dimension_scores,
+            computed_at = EXCLUDED.computed_at
+    """)
+
+    print(f"WBR Health Score: {composite}/100 ({trend}, Δ{delta}) — {current['iso_week']}, {current['market_count']} markets")
+    return result
+
+
 def main():
     print("Querying DuckDB for task state...")
 
@@ -549,6 +649,9 @@ def main():
             "op2_target": p.get("op2_regs_target"),
         })
 
+    # ── WBR Health Score (composite from callout reviewer scores) ──
+    wbr_health = get_wbr_health_score()
+
     # ── AM-auto output files ──
     enrichment = load_json(ACTIVE / "am-enrichment-queue.json")
     signals = load_json(ACTIVE / "am-signals-processed.json")
@@ -571,6 +674,7 @@ def main():
     # ── Assemble output ──
     output = {
         "generated": datetime.now(tz=timezone.utc).isoformat(),
+        "wbr_health": wbr_health,
         "blocks": blocks,
         "today_tasks": today_list,
         "overdue_tasks": overdue_list,

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Calculator — Kiro Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#eaeaea;min-height:100vh;padding:20px 24px 40px}
+
+h1{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px}
+.subtitle{font-size:13px;color:#666;margin-bottom:20px}
+
+/* Section layout */
+.section{margin-bottom:28px}
+.section-title{font-size:15px;font-weight:700;color:#4a9eff;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #1e2028}
+
+/* Calculator cards */
+.calc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.calc-card{background:#14161e;border:1px solid #1e2028;border-radius:8px;padding:16px;transition:border-color .15s}
+.calc-card:hover{border-color:#2a3a5c}
+.calc-name{font-size:15px;font-weight:600;color:#d4d4d4;margin-bottom:4px}
+.calc-desc{font-size:12px;color:#666;margin-bottom:12px;line-height:1.4}
+
+/* Inputs */
+.input-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.input-row label{font-size:13px;color:#888;min-width:140px;flex-shrink:0}
+.input-row input,.input-row select{background:#1a1d27;border:1px solid #2a2d35;color:#eaeaea;padding:6px 10px;border-radius:4px;font-size:14px;font-family:inherit;width:140px}
+.input-row input:focus,.input-row select:focus{outline:none;border-color:#3b82f6}
+.input-row .unit{font-size:12px;color:#555;min-width:20px}
+
+/* Results */
+.result-box{background:#0f1117;border:1px solid #1e2028;border-radius:6px;padding:10px 14px;margin-top:10px}
+.result-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0}
+.result-row:not(:last-child){border-bottom:1px solid #181a22}
+.result-label{font-size:13px;color:#888}
+.result-value{font-size:16px;font-weight:700;color:#4ade80;font-variant-numeric:tabular-nums}
+.result-value.warn{color:#fbbf24}
+.result-value.bad{color:#f87171}
+.result-value.neutral{color:#d4d4d4}
+
+/* Responsive */
+@media(max-width:760px){
+  .calc-grid{grid-template-columns:1fr}
+  body{padding:12px 14px 30px}
+}
+</style>
+</head>
+<body>
+
+<h1>PPC Calculator + A/B Test Designer</h1>
+<div class="subtitle">Pure client-side math — no data leaves your browser. Defaults tuned for Amazon Business PS context.</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PPC CALCULATOR SECTION                                 -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">PPC Calculator</div>
+  <div class="calc-grid">
+
+    <!-- CPA Calculator -->
+    <div class="calc-card">
+      <div class="calc-name">CPA Calculator</div>
+      <div class="calc-desc">Cost Per Acquisition — total ad spend divided by conversions. Use to evaluate campaign efficiency.</div>
+      <div class="input-row"><label>Total Ad Spend</label><input type="number" id="cpa-spend" value="5000" min="0" step="100" oninput="calcCPA()"><span class="unit">$</span></div>
+      <div class="input-row"><label>Conversions (Regs)</label><input type="number" id="cpa-conv" value="50" min="0" step="1" oninput="calcCPA()"></div>
+      <div class="result-box" id="cpa-result"></div>
+    </div>
+
+    <!-- ROAS Calculator -->
+    <div class="calc-card">
+      <div class="calc-name">ROAS Calculator</div>
+      <div class="calc-desc">Return On Ad Spend — revenue generated per dollar spent. ROAS > 1 means profitable; higher is better.</div>
+      <div class="input-row"><label>Revenue</label><input type="number" id="roas-rev" value="25000" min="0" step="500" oninput="calcROAS()"><span class="unit">$</span></div>
+      <div class="input-row"><label>Ad Spend</label><input type="number" id="roas-spend" value="5000" min="0" step="100" oninput="calcROAS()"><span class="unit">$</span></div>
+      <div class="result-box" id="roas-result"></div>
+    </div>
+
+    <!-- Break-Even Analysis -->
+    <div class="calc-card">
+      <div class="calc-name">Break-Even Analysis</div>
+      <div class="calc-desc">At what CPA do you break even given customer lifetime value? If CPA > LTV, you're losing money on every acquisition.</div>
+      <div class="input-row"><label>Customer LTV</label><input type="number" id="be-ltv" value="500" min="0" step="10" oninput="calcBreakEven()"><span class="unit">$</span></div>
+      <div class="input-row"><label>Current CPA</label><input type="number" id="be-cpa" value="100" min="0" step="5" oninput="calcBreakEven()"><span class="unit">$</span></div>
+      <div class="input-row"><label>Margin %</label><input type="number" id="be-margin" value="100" min="0" max="100" step="5" oninput="calcBreakEven()"><span class="unit">%</span></div>
+      <div class="result-box" id="be-result"></div>
+    </div>
+
+    <!-- Budget Forecasting -->
+    <div class="calc-card">
+      <div class="calc-name">Budget Forecasting</div>
+      <div class="calc-desc">Given your current CPA and a registration target, how much budget do you need? Use for OP planning and weekly pacing.</div>
+      <div class="input-row"><label>Current CPA</label><input type="number" id="bf-cpa" value="100" min="0" step="5" oninput="calcBudget()"><span class="unit">$</span></div>
+      <div class="input-row"><label>Target Regs</label><input type="number" id="bf-regs" value="200" min="0" step="10" oninput="calcBudget()"></div>
+      <div class="input-row"><label>Safety Buffer</label><input type="number" id="bf-buffer" value="10" min="0" max="100" step="5" oninput="calcBudget()"><span class="unit">%</span></div>
+      <div class="result-box" id="bf-result"></div>
+    </div>
+
+    <!-- LTV:CAC Ratio -->
+    <div class="calc-card">
+      <div class="calc-name">LTV:CAC Ratio</div>
+      <div class="calc-desc">Lifetime Value to Customer Acquisition Cost ratio. 3:1 is healthy; below 1:1 means you're paying more to acquire than you earn.</div>
+      <div class="input-row"><label>Customer LTV</label><input type="number" id="ltv-ltv" value="500" min="0" step="10" oninput="calcLTV()"><span class="unit">$</span></div>
+      <div class="input-row"><label>CAC (CPA)</label><input type="number" id="ltv-cac" value="100" min="0" step="5" oninput="calcLTV()"><span class="unit">$</span></div>
+      <div class="result-box" id="ltv-result"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- A/B TEST DESIGNER SECTION                              -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">A/B Test Designer</div>
+  <div class="calc-grid">
+
+    <!-- Sample Size Calculator -->
+    <div class="calc-card">
+      <div class="calc-name">Sample Size Calculator</div>
+      <div class="calc-desc">How many observations per variant do you need? Based on baseline conversion rate, minimum detectable effect, significance level, and statistical power.</div>
+      <div class="input-row"><label>Baseline Conv Rate</label><input type="number" id="ss-base" value="3.0" min="0.01" max="100" step="0.1" oninput="calcSampleSize()"><span class="unit">%</span></div>
+      <div class="input-row"><label>Min Detectable Effect</label><input type="number" id="ss-mde" value="20" min="1" max="500" step="1" oninput="calcSampleSize()"><span class="unit">% rel</span></div>
+      <div class="input-row"><label>Significance Level (α)</label>
+        <select id="ss-alpha" onchange="calcSampleSize()">
+          <option value="0.01">1%</option>
+          <option value="0.05" selected>5%</option>
+          <option value="0.10">10%</option>
+        </select>
+      </div>
+      <div class="input-row"><label>Power (1 − β)</label>
+        <select id="ss-power" onchange="calcSampleSize()">
+          <option value="0.80" selected>80%</option>
+          <option value="0.90">90%</option>
+          <option value="0.95">95%</option>
+        </select>
+      </div>
+      <div class="result-box" id="ss-result"></div>
+    </div>
+
+    <!-- Test Duration Estimator -->
+    <div class="calc-card">
+      <div class="calc-name">Test Duration Estimator</div>
+      <div class="calc-desc">Given daily traffic and required sample size, how long will your test need to run? Accounts for number of variants.</div>
+      <div class="input-row"><label>Daily Traffic</label><input type="number" id="td-traffic" value="1000" min="1" step="100" oninput="calcDuration()"></div>
+      <div class="input-row"><label>Sample Size / Variant</label><input type="number" id="td-sample" value="5000" min="1" step="100" oninput="calcDuration()"></div>
+      <div class="input-row"><label>Number of Variants</label><input type="number" id="td-variants" value="2" min="2" max="10" step="1" oninput="calcDuration()"></div>
+      <div class="result-box" id="td-result"></div>
+    </div>
+
+    <!-- Statistical Significance Checker -->
+    <div class="calc-card" style="grid-column:1/-1;max-width:720px">
+      <div class="calc-name">Statistical Significance Checker</div>
+      <div class="calc-desc">Enter control and variant results to check if the difference is statistically significant. Uses a two-proportion z-test.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div>
+          <div style="font-size:12px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Control</div>
+          <div class="input-row"><label>Impressions</label><input type="number" id="sig-c-imp" value="10000" min="1" step="100" oninput="calcSignificance()"></div>
+          <div class="input-row"><label>Conversions</label><input type="number" id="sig-c-conv" value="300" min="0" step="1" oninput="calcSignificance()"></div>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Variant</div>
+          <div class="input-row"><label>Impressions</label><input type="number" id="sig-v-imp" value="10000" min="1" step="100" oninput="calcSignificance()"></div>
+          <div class="input-row"><label>Conversions</label><input type="number" id="sig-v-conv" value="350" min="0" step="1" oninput="calcSignificance()"></div>
+        </div>
+      </div>
+      <div class="input-row" style="margin-top:8px"><label>Significance Level (α)</label>
+        <select id="sig-alpha" onchange="calcSignificance()">
+          <option value="0.01">1%</option>
+          <option value="0.05" selected>5%</option>
+          <option value="0.10">10%</option>
+        </select>
+      </div>
+      <div class="result-box" id="sig-result"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   Pure calculation functions — no side effects, no API calls
+   ═══════════════════════════════════════════════════════════ */
+
+function fmt(n, decimals) {
+  if (n === null || n === undefined || !isFinite(n)) return '—';
+  return n.toLocaleString('en-US', { minimumFractionDigits: decimals || 0, maximumFractionDigits: decimals || 0 });
+}
+function fmtDollar(n) { return n != null && isFinite(n) ? '$' + fmt(n, 2) : '—'; }
+function fmtPct(n) { return n != null && isFinite(n) ? fmt(n, 2) + '%' : '—'; }
+
+function resultRow(label, value, cls) {
+  return '<div class="result-row"><span class="result-label">' + label + '</span><span class="result-value ' + (cls || '') + '">' + value + '</span></div>';
+}
+
+/* ── PPC Calculators ── */
+
+function calcCPA() {
+  var spend = parseFloat(document.getElementById('cpa-spend').value) || 0;
+  var conv = parseFloat(document.getElementById('cpa-conv').value) || 0;
+  var cpa = conv > 0 ? spend / conv : null;
+  var cls = cpa !== null ? (cpa > 200 ? 'bad' : cpa > 100 ? 'warn' : '') : 'neutral';
+  document.getElementById('cpa-result').innerHTML =
+    resultRow('CPA', fmtDollar(cpa), cls) +
+    resultRow('Cost per $1 Revenue', conv > 0 ? fmtDollar(spend / Math.max(conv, 1)) : '—', 'neutral');
+}
+
+function calcROAS() {
+  var rev = parseFloat(document.getElementById('roas-rev').value) || 0;
+  var spend = parseFloat(document.getElementById('roas-spend').value) || 0;
+  var roas = spend > 0 ? rev / spend : null;
+  var cls = roas !== null ? (roas < 1 ? 'bad' : roas < 3 ? 'warn' : '') : 'neutral';
+  var profit = rev - spend;
+  var profitCls = profit < 0 ? 'bad' : profit === 0 ? 'warn' : '';
+  document.getElementById('roas-result').innerHTML =
+    resultRow('ROAS', roas !== null ? fmt(roas, 2) + 'x' : '—', cls) +
+    resultRow('Net Profit', fmtDollar(profit), profitCls);
+}
+
+function calcBreakEven() {
+  var ltv = parseFloat(document.getElementById('be-ltv').value) || 0;
+  var cpa = parseFloat(document.getElementById('be-cpa').value) || 0;
+  var margin = parseFloat(document.getElementById('be-margin').value) || 100;
+  var breakEvenCPA = ltv * (margin / 100);
+  var headroom = breakEvenCPA - cpa;
+  var headroomCls = headroom < 0 ? 'bad' : headroom < breakEvenCPA * 0.2 ? 'warn' : '';
+  var statusText = headroom < 0 ? 'Losing money' : headroom < breakEvenCPA * 0.2 ? 'Tight margin' : 'Healthy';
+  var statusCls = headroom < 0 ? 'bad' : headroom < breakEvenCPA * 0.2 ? 'warn' : '';
+  document.getElementById('be-result').innerHTML =
+    resultRow('Break-Even CPA', fmtDollar(breakEvenCPA), 'neutral') +
+    resultRow('Headroom', fmtDollar(headroom), headroomCls) +
+    resultRow('Status', statusText, statusCls);
+}
+
+function calcBudget() {
+  var cpa = parseFloat(document.getElementById('bf-cpa').value) || 0;
+  var regs = parseFloat(document.getElementById('bf-regs').value) || 0;
+  var buffer = parseFloat(document.getElementById('bf-buffer').value) || 0;
+  var baseBudget = cpa * regs;
+  var totalBudget = baseBudget * (1 + buffer / 100);
+  var weekly = totalBudget / 4;
+  document.getElementById('bf-result').innerHTML =
+    resultRow('Base Budget', fmtDollar(baseBudget), 'neutral') +
+    resultRow('With ' + fmt(buffer, 0) + '% Buffer', fmtDollar(totalBudget)) +
+    resultRow('Weekly Pace (4 wks)', fmtDollar(weekly), 'neutral');
+}
+
+function calcLTV() {
+  var ltv = parseFloat(document.getElementById('ltv-ltv').value) || 0;
+  var cac = parseFloat(document.getElementById('ltv-cac').value) || 0;
+  var ratio = cac > 0 ? ltv / cac : null;
+  var cls = ratio !== null ? (ratio < 1 ? 'bad' : ratio < 3 ? 'warn' : '') : 'neutral';
+  var payback = cac > 0 && ltv > 0 ? cac / (ltv / 12) : null; // months to payback assuming LTV over 12 months
+  var verdict = ratio === null ? '—' : ratio >= 3 ? 'Healthy (≥ 3:1)' : ratio >= 1 ? 'Marginal (1–3:1)' : 'Unsustainable (< 1:1)';
+  var verdictCls = ratio === null ? 'neutral' : ratio >= 3 ? '' : ratio >= 1 ? 'warn' : 'bad';
+  document.getElementById('ltv-result').innerHTML =
+    resultRow('LTV:CAC Ratio', ratio !== null ? fmt(ratio, 1) + ':1' : '—', cls) +
+    resultRow('Payback Period', payback !== null ? fmt(payback, 1) + ' months' : '—', 'neutral') +
+    resultRow('Verdict', verdict, verdictCls);
+}
+
+/* ── A/B Test Calculators ── */
+
+/** Attempt to approximate the inverse normal CDF (probit) using Abramowitz & Stegun. */
+function normInv(p) {
+  // Rational approximation for the inverse of the standard normal CDF
+  // Accurate to ~4.5e-4 for 0 < p < 1
+  if (p <= 0 || p >= 1) return 0;
+  var t;
+  if (p < 0.5) {
+    t = Math.sqrt(-2 * Math.log(p));
+    return -(2.515517 + t * (0.802853 + t * 0.010328)) / (1 + t * (1.432788 + t * (0.189269 + t * 0.001308)));
+  } else {
+    t = Math.sqrt(-2 * Math.log(1 - p));
+    return (2.515517 + t * (0.802853 + t * 0.010328)) / (1 + t * (1.432788 + t * (0.189269 + t * 0.001308)));
+  }
+}
+
+/** Standard normal CDF approximation */
+function normCDF(x) {
+  var a1 = 0.254829592, a2 = -0.284496736, a3 = 1.421413741, a4 = -1.453152027, a5 = 1.061405429;
+  var p = 0.3275911;
+  var sign = x < 0 ? -1 : 1;
+  x = Math.abs(x) / Math.sqrt(2);
+  var t = 1 / (1 + p * x);
+  var y = 1 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+  return 0.5 * (1 + sign * y);
+}
+
+/**
+ * Sample size per variant for a two-proportion z-test.
+ * p1 = baseline rate, p2 = expected rate after effect, alpha = significance, power = 1-beta
+ */
+function sampleSizeCalc(p1, p2, alpha, power) {
+  var zAlpha = normInv(1 - alpha / 2);
+  var zBeta = normInv(power);
+  var pBar = (p1 + p2) / 2;
+  var num = Math.pow(zAlpha * Math.sqrt(2 * pBar * (1 - pBar)) + zBeta * Math.sqrt(p1 * (1 - p1) + p2 * (1 - p2)), 2);
+  var denom = Math.pow(p2 - p1, 2);
+  return denom > 0 ? Math.ceil(num / denom) : Infinity;
+}
+
+function calcSampleSize() {
+  var baseRate = parseFloat(document.getElementById('ss-base').value) / 100 || 0.03;
+  var mde = parseFloat(document.getElementById('ss-mde').value) / 100 || 0.20;
+  var alpha = parseFloat(document.getElementById('ss-alpha').value) || 0.05;
+  var power = parseFloat(document.getElementById('ss-power').value) || 0.80;
+
+  var p1 = baseRate;
+  var p2 = baseRate * (1 + mde); // relative MDE
+  var n = sampleSizeCalc(p1, p2, alpha, power);
+  var totalN = isFinite(n) ? n * 2 : null;
+
+  document.getElementById('ss-result').innerHTML =
+    resultRow('Sample Size / Variant', isFinite(n) ? fmt(n) : '—', 'neutral') +
+    resultRow('Total Sample (2 variants)', totalN ? fmt(totalN) : '—', 'neutral') +
+    resultRow('Detecting', fmtPct(p1 * 100) + ' → ' + fmtPct(p2 * 100) + ' (Δ' + fmtPct(mde * 100) + ' rel)', 'neutral');
+
+  // Auto-populate duration estimator
+  document.getElementById('td-sample').value = isFinite(n) ? n : 5000;
+  calcDuration();
+}
+
+function calcDuration() {
+  var traffic = parseFloat(document.getElementById('td-traffic').value) || 1;
+  var sample = parseFloat(document.getElementById('td-sample').value) || 1;
+  var variants = parseInt(document.getElementById('td-variants').value) || 2;
+  var totalNeeded = sample * variants;
+  var perVariantDaily = traffic / variants;
+  var days = perVariantDaily > 0 ? Math.ceil(sample / perVariantDaily) : Infinity;
+  var weeks = isFinite(days) ? Math.ceil(days / 7) : null;
+  var cls = days > 60 ? 'warn' : days > 90 ? 'bad' : '';
+  document.getElementById('td-result').innerHTML =
+    resultRow('Days Required', isFinite(days) ? fmt(days) + ' days' : '—', cls) +
+    resultRow('Weeks', weeks ? fmt(weeks) + ' weeks' : '—', 'neutral') +
+    resultRow('Total Traffic Needed', fmt(totalNeeded), 'neutral') +
+    resultRow('Per-Variant Daily', fmt(Math.round(perVariantDaily)), 'neutral');
+}
+
+function calcSignificance() {
+  var cImp = parseFloat(document.getElementById('sig-c-imp').value) || 0;
+  var cConv = parseFloat(document.getElementById('sig-c-conv').value) || 0;
+  var vImp = parseFloat(document.getElementById('sig-v-imp').value) || 0;
+  var vConv = parseFloat(document.getElementById('sig-v-conv').value) || 0;
+  var alpha = parseFloat(document.getElementById('sig-alpha').value) || 0.05;
+
+  var pC = cImp > 0 ? cConv / cImp : 0;
+  var pV = vImp > 0 ? vConv / vImp : 0;
+  var pPool = (cImp + vImp) > 0 ? (cConv + vConv) / (cImp + vImp) : 0;
+  var se = Math.sqrt(pPool * (1 - pPool) * (1 / Math.max(cImp, 1) + 1 / Math.max(vImp, 1)));
+  var z = se > 0 ? (pV - pC) / se : 0;
+  var pValue = 2 * (1 - normCDF(Math.abs(z))); // two-tailed
+  var significant = pValue < alpha;
+  var lift = pC > 0 ? ((pV - pC) / pC) * 100 : 0;
+
+  var sigText = significant ? 'Yes — statistically significant' : 'No — not significant';
+  var sigCls = significant ? '' : 'warn';
+  var liftCls = lift > 0 ? '' : lift < 0 ? 'bad' : 'neutral';
+
+  document.getElementById('sig-result').innerHTML =
+    resultRow('Control Conv Rate', fmtPct(pC * 100), 'neutral') +
+    resultRow('Variant Conv Rate', fmtPct(pV * 100), 'neutral') +
+    resultRow('Relative Lift', (lift >= 0 ? '+' : '') + fmtPct(lift), liftCls) +
+    resultRow('Z-Score', fmt(z, 3), 'neutral') +
+    resultRow('P-Value', fmt(pValue, 4), pValue < alpha ? '' : 'warn') +
+    resultRow('Significant at α=' + fmtPct(alpha * 100) + '?', sigText, sigCls);
+}
+
+/* ── Initialize all calculators on load ── */
+calcCPA();
+calcROAS();
+calcBreakEven();
+calcBudget();
+calcLTV();
+calcSampleSize();
+calcDuration();
+calcSignificance();
+</script>
+</body>
+</html>

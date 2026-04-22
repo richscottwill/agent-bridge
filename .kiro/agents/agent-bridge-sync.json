@@ -8,5 +8,12 @@
   "resources": [
     "file://shared/.kiro/agents/body-system/agent-bridge-sync.md"
   ],
-  "mcpServers": {}
+  "mcpServers": {},
+  "successMetrics": [
+    "All files in sync manifest pushed to agent-bridge repo with zero drift from shared/ source",
+    "README.md and CHANGELOG.md updated on every sync — no stale documentation",
+    "Git push completes without merge conflicts or force-push (clean fast-forward only)",
+    "Weekly snapshot email sent with file count, delta summary, and recovery instructions",
+    "Quality check passes: repo can cold-start a new AI agent without missing context files"
+  ]
 }

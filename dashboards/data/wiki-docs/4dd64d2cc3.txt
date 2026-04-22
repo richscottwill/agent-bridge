@@ -18,7 +18,7 @@ Four factors explain the gap, and all four should appear in the response.
 
 **Ad format availability.** Amazon Business does not have access to Shopping Ads. Consumer retail does. Shopping Ads typically carry lower CPC than text ads for the same query intent, which pulls the consumer average down. Until AB gains Shopping Ads access (not on the 2026 roadmap), this gap is structural.
 
-**OCI maturity.** Once OCI rolls out, CPC drops materially. The US has seen non-brand CPC improve 45 percent post-OCI. Pre-OCI markets like Australia run at pre-optimization CPC until OCI launches there. Australia's OCI date is May 2026.
+**OCI maturity.** Once OCI rolls out, CPC drops materially. The US has seen non-brand CPC improve 45 percent post-OCI. Pre-OCI markets like Australia run at pre-optimization CPC until OCI launches there. Australia's OCI timeline is not yet confirmed.
 
 ## Response structure
 

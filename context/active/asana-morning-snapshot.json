@@ -1,33 +1,51 @@
 {
-  "generated_at": "2026-04-16T14:20:00Z",
-  "sync_type": "partial_duckdb_only",
-  "data_staleness": "24h (last Asana pull: 2026-04-15T13:52:36Z)",
-  "total_incomplete": 105,
-  "soft_deleted": 63,
-  "snapshot_rows": 105,
-  "overdue_3plus": 4,
-  "overdue_total": 7,
-  "today_tasks": 2,
-  "by_routine": {
-    "Backlog": 84,
-    "Core": 10,
-    "Engine Room": 5,
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-04-21T13:50:00Z",
+  "generated_at_pt": "2026-04-21T06:50:00-07:00",
+  "scan_window_hours": 15.5,
+  "counts": {
+    "total_incomplete_assigned": 185,
+    "live_rows": 102,
+    "total_snapshot_history_today": 102,
+    "overdue": 35,
+    "due_today": 0,
+    "due_this_week": 7,
+    "no_due_date": 44,
+    "priority_today": 4,
+    "priority_urgent": 14
+  },
+  "buckets": {
+    "Core": 11,
+    "Engine Room": 12,
+    "Sweep": 4,
     "Admin": 3,
-    "Sweep": 3
+    "Wiki": 1,
+    "Unrouted": 68
   },
-  "by_project": {
-    "My Tasks": 87,
-    "ABPS - WW Testing & Projects": 9,
-    "Paid App": 7,
-    "AU": 1,
-    "MX": 1
-  },
-  "over_cap": [
-    "Core (10/4)"
+  "bucket_caps": { "Core": 4 },
+  "cap_violations": [
+    { "bucket": "Core", "current": 11, "cap": 4, "over_by": 7 }
   ],
-  "coherence_alerts": 10,
-  "oldest_overdue": {
-    "name": "Paid App",
-    "days": 16
+  "projects_synced": [
+    { "name": "My Tasks (via assignee search)", "gid": "1212732838073807", "method": "SearchTasksInWorkspace", "note": "user-list GID 404s on GetTasksFromProject — assignee search is authoritative" },
+    { "name": "AU", "gid": "1212762061512767", "method": "GetTasksFromProject" },
+    { "name": "MX", "gid": "1212775592612917", "method": "GetTasksFromProject" },
+    { "name": "WW Testing & Projects", "gid": "1205997667578893", "method": "GetTasksFromProject" },
+    { "name": "WW Acquisition", "gid": "1206011235630048", "method": "GetTasksFromProject" },
+    { "name": "Paid App", "gid": "1205997667578886", "method": "GetTasksFromProject" }
+  ],
+  "projects_skipped": [
+    { "name": "ABPS AI Content", "gid": "1213917352480610", "reason": "deprecated 2026-04-17 per soul.md" }
+  ],
+  "duckdb_writes": {
+    "asana.asana_tasks": { "upserted": 185, "soft_deleted": 0 },
+    "asana.asana_task_history": { "inserted_today": 102 }
+  },
+  "hard_thing": {
+    "task_gid": "1213341921686564",
+    "name": "Testing Document for Kate",
+    "status": "unsent — v5 PUBLISH-eval'd 4/5, 20d overdue since 4/1 due date, hard thing since 3/20",
+    "workdays_at_zero": 22,
+    "streak_days": 1
   }
 }

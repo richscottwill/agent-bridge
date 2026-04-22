@@ -20,8 +20,7 @@ Eight of ten markets are beating or matching OP2 on March projections. JP is the
 
 | Initiative | Owner | Markets | Status | Q2 Target | Risk |
 |-----------|-------|---------|--------|-----------|------|
-| OCI Rollout | Richard/Andrew | 10 | 7/10 at 100%. CA dial-up 4/7. AU/MX excluded. | CA at 100% by Jul. Monitor EU3 lift. | LOW — proven methodology |
-| Polaris Brand LP | Stacey/Richard | 10 | US live (3/24). Weblab 4/6-7. AU migrating. | AU/MX/DE/UK live by end Q2. | MEDIUM — AEM translations are the constraint |
+| OCI Rollout | Richard/Andrew | 10 | 7/10 at 100%. CA dial-up 4/7. AU/MX excluded. | CA at 100% by Jul. Monitor EU3 lift. | LOW — proven methodology || Polaris Brand LP | Stacey/Richard | 10 | US live (3/24). Weblab 4/6-7. AU migrating. | AU/MX/DE/UK live by end Q2. | MEDIUM — AEM translations are the constraint |
 | Ad Copy Testing | Andrew/Richard | 10 | UK Phase 1 complete (+86% CTR). IT inconclusive. | Launch Phase 1 in DE/FR/ES/US. | LOW — translations ready |
 | Testing Approach Doc | Richard | N/A | NOT STARTED (14 workdays). Brandon reviewing before Kate. | Complete and reviewed by Brandon. | HIGH — 0 progress, Level 1 gate |
 
@@ -80,7 +79,7 @@ In order of leverage:
 | Mid-Apr | Email overlay escalation deadline | Richard/Brandon |
 | Apr 16 | Kate meeting (CANCELED — doc review first) | Richard/Brandon |
 | Late Apr | AI Max Google sync target | Richard/Mike Babich |
-| May 2026 | AU OCI target (Adobe, unconfirmed) | Richard/Suzane |
+| TBD | AU OCI (pending MCC creation) | Richard/Suzane |
 | Q2 | F90 US launch (if match rate gate met) | Richard |
 
 ---

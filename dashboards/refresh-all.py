@@ -24,6 +24,7 @@ STEPS = [
     ("Refresh goals JSON", "refresh-goals.py"),
     ("Refresh contributions JSON", "refresh-contributions.py"),
     ("Build wiki search index", "build-wiki-index.py"),
+    ("Generate per-section freshness manifest", "generate-section-freshness.py"),
 ]
 
 def main():

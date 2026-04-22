@@ -61,7 +61,7 @@ OCI total impact: +35K regs, $16.7MM+ OPS across US/UK/DE.
 - Walmart: bid caps on Brand, offset via NB efficiency. Do NOT escalate auction
 - Ad copy: shifted from bulk/B2B messaging to price/quality/selection based on SP study
 - AU LP: Lena confirmed full Polaris switch (3/13) — executing with Alexis mapping file
-- AU CPC: B2B inherently higher than consumer; Shopping Ads unavailable for AB; OCI May 2026 will help
+- AU CPC: B2B inherently higher than consumer; Shopping Ads unavailable for AB; OCI (not yet scheduled for AU) will help when launched
 - AI Max: US test first with guardrails, same discipline as OCI rollout
 
 ## Quip Docs

@@ -8,5 +8,12 @@
   "resources": [
     "file://shared/.kiro/agents/body-system/karpathy.md"
   ],
-  "mcpServers": {}
+  "mcpServers": {},
+  "successMetrics": [
+    "≥1 experiment completed per week with A/B/C blind eval and logged to experiment-log.tsv",
+    "Every experiment has a measurable outcome: keep/revert decision with Bayesian posterior logged",
+    "Zero unauthorized modifications to heart.md or gut.md outside experiment protocol",
+    "Experiment results persisted to experiment-results-latest.json within 1 hour of completion",
+    "Win rate tracked: % of experiments that produce a keep decision (target: >30% to avoid safe-technique bias)"
+  ]
 }

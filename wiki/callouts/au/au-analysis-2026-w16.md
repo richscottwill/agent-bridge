@@ -41,7 +41,7 @@ Brand CVR at 7.80% is in line with the W7-W12 Brand average (~7.5%). W12's 8.54%
 - **NB bid strategy floor.** NB CPC has held at $4.78 for three consecutive weeks after seven weeks of decline. Bid strategies have found their level; volume is now rising on a stable cost base (+10% NB clicks WoW).
 - **Anzac Day (Apr 25) falls on Saturday in W17.** Per calendar, ~-3% impact on that day only. Negligible at the weekly aggregate.
 - **Two-campaign structure and MCS page replication from MX** remain proposed (Alexis sync 3/24), not yet executed. No structural change in W16 attributable to these.
-- **OCI not yet started for AU** (target May 2026). No infrastructure change in W16.
+- **OCI not yet started for AU** (no confirmed timeline). No infrastructure change in W16.
 
 ## Monthly projection
 

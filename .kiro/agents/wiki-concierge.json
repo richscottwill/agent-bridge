@@ -9,5 +9,12 @@
     "file://shared/.kiro/agents/wiki-team/wiki-concierge.md",
     "file://shared/wiki/wiki-index.md"
   ],
-  "mcpServers": {}
+  "mcpServers": {},
+  "successMetrics": [
+    "Every query answered with ≥1 citation to a published wiki article or body system organ",
+    "Answer-first format: lead sentence contains the answer, citations follow (no preamble)",
+    "Demand signal logged to demand-log.md for every interaction — zero unlogged queries",
+    "Gap detection: unanswered questions flagged as wiki candidates within same session",
+    "wiki-index.md used as primary lookup — body system fallback only when wiki has no coverage"
+  ]
 }

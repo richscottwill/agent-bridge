@@ -41,7 +41,7 @@ One hundred thirteen minutes on content workflow automation. Jasper demonstrated
 
 ## Adobe Health Review — April 8
 
-Sixty-five minutes with Jen Vitiello on Adobe health. Health score sixty-four percent. Alert volume and hybrid optimization patterns discussed. Adobe Bi-Weekly cadence confirmed. AU OCI May 2026 timeline reaffirmed. Post-OCI Adobe dependency expected to reduce; MIE (AI tool for paid search) positioned as the longer-term Adobe replacement path.
+Sixty-five minutes with Jen Vitiello on Adobe health. Health score sixty-four percent. Alert volume and hybrid optimization patterns discussed. Adobe Bi-Weekly cadence confirmed. Post-OCI Adobe dependency expected to reduce; MIE (AI tool for paid search) positioned as the longer-term Adobe replacement path.
 
 ## Brandon Compensation Review — April 6
 

@@ -9,5 +9,12 @@
     "file://shared/.kiro/agents/wiki-team/wiki-researcher.md",
     "file://shared/context/body/body.md"
   ],
-  "mcpServers": {}
+  "mcpServers": {},
+  "successMetrics": [
+    "Every research brief cites ≥3 sources with [source: type, date, confidence] format",
+    "Primary sources preferred: ≥50% of citations from body system organs or DuckDB (not web fallback)",
+    "Research brief delivered within single invocation — no back-and-forth required",
+    "Contradictions between sources explicitly flagged with confidence assessment",
+    "ABPS AI research subtask completed and brief posted as pinned comment when applicable"
+  ]
 }

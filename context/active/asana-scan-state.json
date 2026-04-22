@@ -1,42 +1,31 @@
 {
   "schema_version": "1.0",
-  "last_scan_at": "2026-04-20T14:45:00Z",
-  "last_scan_pt": "2026-04-20 07:45 PT",
-  "scan_type": "B2_activity_monitor",
-  "tasks_scanned": 12,
-  "tasks_rate_limited": 0,
-  "tasks_scanned_gids": [
-    "1214057202961389",
-    "1213964186504305",
-    "1212760973200434",
-    "1214128635826241",
-    "1213917691089036",
-    "1214044682239803",
-    "1213764961716427",
-    "1213341921686564",
-    "1212808474749819",
-    "1213085905102041",
-    "1213796951745232",
-    "1214088494080582"
+  "last_full_scan_utc": "2026-04-21T13:50:00Z",
+  "last_full_scan_pt": "2026-04-21T06:50:00-07:00",
+  "scan_window_hours": 15.5,
+  "scan_source": "B1 handoff file (asana-task-list-b1.json) + GetTaskStories",
+  "tasks_scanned": [
+    {"gid": "1213341921686564", "name": "Testing Document for Kate", "last_story_ts": "2026-04-15T14:35:42Z", "new_since_last_scan": false},
+    {"gid": "1213917967984980", "name": "Respond to Lena — AU LP URL", "last_story_ts": "2026-04-21T03:05:47Z", "new_since_last_scan": true, "change_type": "kiro_rw_self_update_plus_priority_today"},
+    {"gid": "1213125740755931", "name": "Email overlay WW rollout/testing", "last_story_ts": "2026-04-18T07:00:09Z", "new_since_last_scan": false},
+    {"gid": "1212808474749819", "name": "Paid App PO — Create Q2 + Amend Google PO to Q2", "last_story_ts": "2026-04-20T15:29:37Z", "new_since_last_scan": true, "change_type": "priority_urgent_to_today_self_update"},
+    {"gid": "1214128635826241", "name": "Reply to Dwayne: Brand LP consolidated feedback", "last_story_ts": "2026-04-21T00:31:52Z", "new_since_last_scan": true, "change_type": "marked_complete"}
   ],
-  "high_signal_findings": {
-    "external_edits_detected": 3,
-    "auto_escalations_detected": 8,
-    "due_today_events_detected": 6,
-    "kiro_rw_stagnation_detected": 6,
-    "brandon_touched_tasks": ["1212760973200434", "1213085905102041"],
-    "kate_touched_tasks": [],
-    "stakeholder_created_tasks": ["1214088494080582"]
+  "tasks_scanned_count": 5,
+  "tasks_skipped_count": 14,
+  "activity_detected": {
+    "completed": 1,
+    "self_priority_promotions": 2,
+    "external_comments": 0,
+    "due_date_changes": 0,
+    "reassignments": 0
   },
-  "next_scan_priorities": [
-    "1213917967984980",
-    "1213125740755931",
-    "1214068215114017",
-    "1214068272596724",
-    "1212992331748509",
-    "1214044682239817",
-    "1213983342210449",
-    "1213235338214791"
+  "next_run_priority": [
+    "1213764961716427", "1213964186504305", "1213796951745232",
+    "1214081017092577", "1214074477110993", "1212988092117041",
+    "1214081017124426", "1214081017200478", "1214044682239803",
+    "1214044682239817", "1213235338214791", "1213085905102041",
+    "1214128634505816"
   ],
-  "notes": "Full history scan (no time window) since B2 scan_state was empty. Future runs should use scan window from this timestamp."
+  "rate_limit_events": 0
 }

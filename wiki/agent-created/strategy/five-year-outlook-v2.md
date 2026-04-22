@@ -54,7 +54,7 @@ Beyond 2026, the outlook becomes progressively speculative. 2027 depends on 2026
 
 Investments are committed, tests are designed, and the team is executing.
 
-OCI is the proven foundation. Seven of ten markets run at 100% deployment as of late March 2026 — US, UK, and DE since Q4 2025, with FR, IT, ES, and JP dialed to 100% on March 30-31. CA targets April 7. AU targets May pending MCC creation. MX has no timeline. The validated pattern — phased 25/50/100% rollout with seasonality-adjusted baselines — is replicable. The remaining markets are execution, not experimentation.
+OCI is the proven foundation. Seven of ten markets run at 100% deployment as of late March 2026 — US, UK, and DE since Q4 2025, with FR, IT, ES, and JP dialed to 100% on March 30-31. CA targets April 7. AU and MX have no confirmed timelines and neither MCC has been created. The validated pattern — phased 25/50/100% rollout with seasonality-adjusted baselines — is replicable. The remaining markets are execution, not experimentation.
 
 The UK ad copy test (January 29 through March 2) delivered 86% higher CTR and 31% more registrations at HIGH confidence, validating the shift from bulk and wholesale messaging to price, quality, and selection. EU4 translations are complete. Campaign consolidation continues as structural preparation for AI Max.
 

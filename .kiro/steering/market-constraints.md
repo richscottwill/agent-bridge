@@ -58,7 +58,7 @@ For structured queries from hooks / dashboards / scripts, query `ps.market_const
 
 **Governing constraint:** $140 CPA (OP2) — shifting toward volume-first
 **Handoff status:** Handoff to Harsha / AU team (week of 2026-04-13)
-**OCI status:** Planned May 2026, MCC not yet created
+**OCI status:** Not launched
 **CCP availability:** N/A until Jul 2026 (CCP data unavailable)
 **Next milestone:** AU team onboarding — Harsha owns execution
 **Notes:** 6-week reg decline W7 328 → W14 170 pre-revert. Polaris LP reverted 4/13. No YoY data until Jun 2026 (launched Jun 2025).

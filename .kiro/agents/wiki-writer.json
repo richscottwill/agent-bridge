@@ -18,5 +18,12 @@
     "file://shared/.kiro/agents/wiki-team/wiki-writer.md",
     "file://shared/wiki/wiki-pipeline-rules.md"
   ],
-  "mcpServers": {}
+  "mcpServers": {},
+  "successMetrics": [
+    "Critic score ≥8/10 on first submission (target: >60% of articles pass without revision)",
+    "100% adherence to Amazon narrative standard: prose-driven, 18-20 word sentence average, no bullet abuse",
+    "Draft word count within target range per article type (guide: 500-1500, reference: 300-800)",
+    "All 3 style guides loaded and applied per invocation (richard-writing-style, richard-style-docs, richard-style-amazon)",
+    "< 2 revision cycles per article from draft to PUBLISH verdict (tracked via draft-log.md timestamps)"
+  ]
 }

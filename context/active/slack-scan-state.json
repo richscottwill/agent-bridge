@@ -1,51 +1,49 @@
 {
   "schema_version": "1.0",
-  "last_full_scan": "2026-04-20T14:01:00Z",
-  "last_full_scan_pt": "2026-04-20 07:01:00 PT",
+  "last_full_scan": "2026-04-21T13:40:00Z",
+  "last_full_scan_pt": "2026-04-21 06:40:00 PT",
   "last_scan_window": {
-    "from_utc": "2026-04-17T12:48:00Z",
-    "to_utc": "2026-04-20T14:01:00Z",
-    "duration_days": 3,
-    "covers_weekend": true
+    "from_utc": "2026-04-20T14:01:00Z",
+    "to_utc": "2026-04-21T13:40:00Z",
+    "duration_hours": 23.65,
+    "covers_weekend": false
   },
   "summary": {
-    "channels_considered": 28,
-    "channels_scanned": 13,
-    "channels_with_new_messages": 6,
-    "messages_ingested": 40,
-    "threads_fetched": 6,
-    "thread_replies_ingested": 7,
-    "signals_reinforced": 12,
+    "channels_considered": 22,
+    "channels_scanned": 16,
+    "channels_with_new_messages": 8,
+    "messages_ingested": 25,
+    "threads_fetched": 2,
+    "thread_replies_ingested": 8,
+    "signals_reinforced": 9,
     "proactive_searches": 3,
-    "proactive_search_hits": 0,
-    "search_note": "Slack workspace search returned 0 matches for from:/to: queries — likely a scope/permission artifact; channel-history scan caught all Richard/Brandon content anyway"
+    "proactive_search_hits_unique": 0,
+    "search_note": "All search hits were duplicates of channel-history captures"
   },
   "channel_state": {
-    "C044UG8MCSZ": {"name": "ab-paid-search-global", "tier": 1, "last_ingested_ts": "1776454143.906069", "last_ingested_iso": "2026-04-17T19:29:03Z", "messages_this_run": 2, "thread_replies_this_run": 7, "unread_mentions": 0},
-    "C06R6R19LG0": {"name": "ab-paid-search-oci", "tier": 1, "last_ingested_ts": "1776097978.726279", "last_ingested_iso": "2026-04-13T16:32:58Z", "messages_this_run": 0, "notes": "No new activity since last scan"},
-    "C065KKT53DJ": {"name": "ab-paid-search-abix", "tier": 1, "last_ingested_ts": "1776352307.572749", "last_ingested_iso": "2026-04-16T20:31:47Z", "messages_this_run": 0, "unread_mentions": 1},
-    "C044UGEJ76Z": {"name": "ab-ps_jp", "tier": 1, "last_ingested_ts": "1776387602.609979", "last_ingested_iso": "2026-04-17T06:20:02Z", "messages_this_run": 0},
-    "C05KTAAG14J": {"name": "ab-paid-search-app", "tier": 1, "last_ingested_ts": "1776193561.518599", "last_ingested_iso": "2026-04-15T00:26:01Z", "messages_this_run": 0, "unread_mentions": 2},
-    "C0993SRL6FQ": {"name": "rsw-channel", "tier": 1, "last_ingested_ts": "1776430534.189049", "last_ingested_iso": "2026-04-17T12:55:34Z", "messages_this_run": 1, "notes": "Richards own daily briefs"},
-    "D044JAKR8RZ": {"name": "dm-brandon", "tier": 1, "last_ingested_ts": "1776461131.851269", "last_ingested_iso": "2026-04-17T21:25:31Z", "messages_this_run": 11, "high_priority": true},
-    "C06M7R2SKQW": {"name": "ask-ab-aryabot", "tier": 2, "last_ingested_ts": "1776692730.680359", "last_ingested_iso": "2026-04-20T13:45:30Z", "messages_this_run": 13, "notes": "Bot Q&A channel, low signal"},
-    "C03H1S5SYP4": {"name": "ask-ab-data", "tier": 2, "last_ingested_ts": "1776294972.612679", "last_ingested_iso": "2026-04-16T04:36:12Z", "messages_this_run": 0, "unread_mentions": 1},
-    "D0A8FS0QLTU": {"name": "dm-asana-bot", "tier": 2, "last_ingested_ts": "1776270337.625659", "messages_this_run": 0, "notes": "System DM, 100 mentions from bot"},
-    "C0AQE73USF5": {"name": "mpim-group-1", "tier": 2, "messages_this_run": 0, "unread_mentions": 6},
-    "C0AQQC767L4": {"name": "mpim-group-2", "tier": 2, "messages_this_run": 0, "unread_mentions": 1},
-    "C0AUAEJH2Q0": {"name": "mpim-mcs-polaris", "tier": 1, "last_ingested_ts": "1776438025.795789", "last_ingested_iso": "2026-04-17T15:00:25Z", "messages_this_run": 1, "unread_mentions": 1, "high_priority": true, "notes": "Polaris IT brand page recovery (MCS-3004)"},
-    "D04B4ABRHE0": {"name": "dm-unknown-1", "tier": 2, "messages_this_run": 0, "unread_mentions": 3},
-    "D09JTJR7LQY": {"name": "dm-adi", "tier": 2, "last_ingested_ts": "1776452019.109759", "last_ingested_iso": "2026-04-17T18:53:39Z", "messages_this_run": 12, "unread_mentions": 2, "notes": "Kiro mentoring conversation"},
-    "D093XCFQTV1": {"name": "dm-unknown-2", "tier": 2, "messages_this_run": 0, "unread_mentions": 1}
+    "D044JAKR8RZ": {"name": "dm-brandon", "tier": 1, "last_ingested_ts": "1776778523.178709", "last_ingested_iso": "2026-04-21T13:35:23Z", "messages_this_run": 10, "high_priority": true, "notes": "Live tense exchange re: Alexis biweekly series"},
+    "C044UG8MCSZ": {"name": "ab-paid-search-global", "tier": 1, "last_ingested_ts": "1776710732.532029", "last_ingested_iso": "2026-04-20T18:45:32Z", "messages_this_run": 2},
+    "C065KKT53DJ": {"name": "ab-paid-search-abix", "tier": 1, "last_ingested_ts": "1776728304.426179", "last_ingested_iso": "2026-04-20T23:38:24Z", "messages_this_run": 6, "thread_replies_this_run": 8, "high_priority": true, "notes": "Brandon GenBI handoff test + AU handoff doc scheduling + max clicks Q"},
+    "C06R6R19LG0": {"name": "ab-paid-search-oci", "tier": 1, "last_ingested_ts": "1776097978.726279", "messages_this_run": 0},
+    "C05KTAAG14J": {"name": "ab-paid-search-app", "tier": 1, "last_ingested_ts": "1776193561.518599", "messages_this_run": 0},
+    "C044UGEJ76Z": {"name": "ab-ps_jp", "tier": 1, "last_ingested_ts": "1776387602.609979", "messages_this_run": 0},
+    "C0993SRL6FQ": {"name": "rsw-channel", "tier": 1, "last_ingested_ts": "1776705779.616989", "last_ingested_iso": "2026-04-20T17:22:59Z", "messages_this_run": 1, "notes": "Richard's own Mon AM brief"},
+    "C0AUAEJH2Q0": {"name": "mpim-mcs-polaris", "tier": 1, "last_ingested_ts": "1776438025.795789", "messages_this_run": 1, "notes": "Polaris IT brand page resolved — no new action"},
+    "C0A9HBB9H2B": {"name": "baloo-channel", "tier": 2, "last_ingested_ts": "1776757706.768899", "last_ingested_iso": "2026-04-21T07:48:26Z", "messages_this_run": 1, "notes": "AU PM asking about Baloo roadmap intake"},
+    "D09JTJR7LQY": {"name": "dm-adi", "tier": 2, "last_ingested_ts": "1776452019.109759", "messages_this_run": 1, "notes": "Adi welcome note — social only"},
+    "C06M7R2SKQW": {"name": "ask-ab-aryabot", "tier": 3, "last_ingested_ts": "1776776635.251369", "messages_this_run": 0, "notes": "13 bot Q&A pings, all answered/acked by bot, low signal, skipped ingestion"},
+    "C03H1S5SYP4": {"name": "ask-ab-data", "tier": 2, "last_ingested_ts": "1776294972.612679", "messages_this_run": 0},
+    "D0A8FS0QLTU": {"name": "dm-asana-bot", "tier": 2, "last_ingested_ts": "1776706177.096279", "messages_this_run": 0, "notes": "Asana bot notifications — informational only, not ingested"},
+    "C0AQE73USF5": {"name": "mpim-group-1", "tier": 2, "messages_this_run": 0},
+    "C0AQQC767L4": {"name": "mpim-group-2", "tier": 2, "messages_this_run": 0},
+    "D04B4ABRHE0": {"name": "dm-unknown-1", "tier": 3, "messages_this_run": 0}
   },
   "channels_skipped": {
-    "reason": "community / social / low-signal per slack-ingestion-README.md tier-3 rules",
+    "reason": "community / social / low-signal per slack-channel-registry.json Tier-3 rules",
     "ids": [
       "C08GJKNC3KM|amazon-builder-genai-power-users",
       "C096H6QNW6M|bedrock-agentcore-interest",
       "C08T2E4KQPJ|amazon-builder-genai-power-users-digest",
-      "C017S5V5QMC|tesla",
-      "C018126JFSN|homeowners",
       "C018S3VS875|slack-announcements",
       "C02MKS0DPHD|ask-an-amazonian",
       "C04PZR4S9M4|remote-advocacy",
@@ -54,24 +52,25 @@
       "C080MFGQLHY|stargate-community",
       "C08QB1BU62E|ab-gen-ai-wins",
       "C096T4SK3EY|andes-workbench-interest",
-      "C09TTRAC1AN|ai-fluency-for-builders",
-      "C0A1J4QG3CY|abma-genbi-analytics-interest",
-      "C0A1JD8FCUV|agentspaces-interest"
+      "C0A1J4QG3CY|abma-genbi-analytics-interest"
     ]
   },
   "threads_fetched_this_run": [
-    {"channel_id": "C044UG8MCSZ", "thread_ts": "1776454143.906069", "replies_ingested": 7, "priority": "high", "topic": "oci-nb-spend-drop"},
-    {"channel_id": "C06M7R2SKQW", "thread_ts": "1776672339.746779", "replies_ingested": 0, "priority": "low", "note": "aryabot Q&A, replies not ingested (low signal)"},
-    {"channel_id": "C06M7R2SKQW", "thread_ts": "1776516092.377289", "replies_ingested": 0, "priority": "low", "note": "aryabot Q&A, replies not ingested"},
-    {"channel_id": "C06M7R2SKQW", "thread_ts": "1776642892.185829", "replies_ingested": 0, "priority": "low", "note": "aryabot Q&A, replies not ingested"},
-    {"channel_id": "C06M7R2SKQW", "thread_ts": "1776677991.962069", "replies_ingested": 0, "priority": "low", "note": "aryabot Q&A, replies not ingested"},
-    {"channel_id": "C06M7R2SKQW", "thread_ts": "1776459877.646949", "replies_ingested": 0, "priority": "low", "note": "aryabot Q&A, replies not ingested"}
+    {"channel_id": "C065KKT53DJ", "thread_ts": "1776722626.261749", "replies_ingested": 7, "priority": "high", "topic": "genbi-handoff-attribution-gaps"},
+    {"channel_id": "C065KKT53DJ", "thread_ts": "1776696004.349039", "replies_ingested": 1, "priority": "high", "topic": "au-max-clicks-kw-analysis"}
   ],
   "proactive_searches": [
-    {"query": "from:@brandoxy to:@prichwil after:2026-04-17", "hits": 0},
-    {"query": "prichwil after:2026-04-17 before:2026-04-21", "hits": 0},
-    {"query": "kataxt after:2026-04-17 before:2026-04-21", "hits": 0}
+    {"query": "prichwil after:2026-04-20 -in:#rsw-channel", "hits": 0, "note": "Slack search scope artifact"},
+    {"query": "from:@brandoxy after:2026-04-20", "hits": 6, "unique_new": 0, "note": "All hits from dm-brandon already captured via channel history"},
+    {"query": "Richard Williams after:2026-04-20 -in:D044JAKR8RZ -in:C0993SRL6FQ -in:C065KKT53DJ", "hits": 100, "unique_new": 0, "note": "Most hits from unrelated workflow channels not in Richard's sidebar"}
   ],
-  "dashboard": {},
-  "registry_note": "slack-channel-registry.json was not present at expected path; tier classification applied from slack-ingestion-README.md conventions (Tier 1: ab-paid-search-*, rsw-channel, dm-brandon; Tier 2: team mpims + DMs; Tier 3: community/social channels skipped)"
+  "priority_signals_flagged": [
+    {"type": "action-rw", "topic": "Alexis biweekly call series", "urgency": "blocks_brandon_1to1_1:30pm_PT"},
+    {"type": "action-rw", "topic": "AU handoff doc updated per Brandon feedback — reply in thread", "urgency": "overnight_stale"},
+    {"type": "action-rw", "topic": "Mukesh DM walkthrough on GenBI brand under-attribution", "urgency": "today"},
+    {"type": "action-rw", "topic": "Adobe call reschedule Tue 10:30am PT — confirm", "urgency": "today"},
+    {"type": "fyi", "topic": "Polaris IT ps-brand recovery resolved (MCS-3004)", "urgency": "low"},
+    {"type": "fyi", "topic": "AU PM asking about Baloo roadmap intake for OP season", "urgency": "medium"}
+  ],
+  "registry_note": "Using slack-channel-registry.json v3.0 at shared/data/state/slack-channel-registry.json"
 }

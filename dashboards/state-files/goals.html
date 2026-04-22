@@ -186,4 +186,6 @@ fetch('../data/goals-data.json?'+Date.now()).then(function(r){return r.json()}).
   document.getElementById('goalsGrid').innerHTML = '<div style="color:var(--red)">Failed to load goals-data.json &mdash; run refresh-goals.py</div>';
 });
 </script>
+
+<script src="../shared/section-freshness.js" defer></script>
 </body></html>

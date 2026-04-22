@@ -162,7 +162,7 @@ The body/heart.md file defines the autonomous context optimization system. Key p
 - 30-day challenge runs through 2026-04-13
 - Testing Approach meeting with Kate: April 16, 1-2pm PT
 - Brandon returned from OOO on 3/16 — first 1:1 was Mon 3/17
-- OCI rollout to AU/MX targeted for May 2026
+- OCI rollout to AU/MX: no confirmed timeline
 - AI Max US test planned for Q2 2026 — no test design written yet
 - Campaign link generator tool was marked complete by Richard (may need to verify what was built)
 - Asana iCal feeds provided but not yet tested for data extraction

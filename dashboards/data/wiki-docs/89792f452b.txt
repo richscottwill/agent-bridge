@@ -9,11 +9,19 @@
 
 This document provides the trailing-week operational state of the Amazon Business Worldwide Paid Search Testing program. The program spans five workstreams — OCI Bidding, Modern Search (Ad Copy), Audiences & Lifecycle, User Experience, and Algorithmic Ads — across 10 markets (US, UK, DE, FR, IT, ES, JP, CA, AU, MX). Richard Williams owns end-to-end test methodology, status tracking, and the Testing Approach document (v5, 8.4/10 PUBLISH verdict) pending Brandon Munday's review. The methodology follows a hypothesis → phased rollout → measurement → scale or stop framework. SyRT validated Non-Brand as 82–92% incremental, confirming the measurement foundation. The Testing Approach doc (v5) was scheduled for discussion at the April 16 meeting, which was canceled; the document remains valuable and needs to ship to Brandon independently.
 
+## Loop Reporting Queue
+
+Tests with `Standing Loop? = Y` in the WW Testing protocol Inventory. Engine-generated. Rebuilt every AM-Backend run. Appears first so Richard can grep for what must be mentioned in the Tuesday WW Testing Loop without scanning the full doc.
+
+<!-- AM-OWNED:loop-reporting-queue START -->
+<!-- Engine populates this block from the Test Inventory in state-file-ww-testing.md. One bullet per test where Standing Loop? = Y. Format: - [Test name] — [status verb] — Next: [next step, owner, by-when] — Sources: [inline permalink(s)]. If no source citation exists in the last 14 days, trailing text reads "per prior state file, not reverified this cycle". -->
+<!-- AM-OWNED:loop-reporting-queue END -->
+
 ## Goals
 
 1. Ensure every active test across all five workstreams has a written status document by April 30, 2026, with zero undocumented tests.
 2. Ship the Testing Approach document (v5, 8.4/10 PUBLISH verdict) to Brandon Munday for review by April 18, 2026.
-3. Expand OCI to remaining markets — CA launch on April 7, AU target May 2026, MX timeline TBD — achieving 100% coverage of active markets by Q4 2026.
+3. Expand OCI to remaining markets — CA launch on April 7, AU and MX timelines TBD — achieving 100% coverage of active markets by Q4 2026.
 4. Complete the AI Max test design document for US Q2 2026 pilot by April 14, 2026 (currently 4 days overdue).
 
 ## Tenets
@@ -31,35 +39,7 @@ The WW PS Testing program drove 16,626 total registrations in W15 (-3.0% WoW) on
 
 A second W15 event — the Google MCC cross-child learning investigation (Sam Tangri, 4/17) — flagged a coordinated NB spend drop on 4/13 in US/UK/DE (US ~25K vs 70K weekly average, with recovery 4/14). Jing Shi's diagnosis: a US data exclusion extended from 4/7 to 4/13 that propagated to same-MCC child accounts. This is an OCI measurement concern — data exclusions affecting Smart Bidding learning across geographies — not a performance regression. Mike Babich (Google) is investigating. Implication: W15 WW weekly numbers may reflect a transient OCI learning artifact that normalizes in W16.
 
-**Input metrics (controllable levers — by workstream):**
-
-| Workstream | Active Markets | Status | Key Input |
-|---|---|---|---|
-| OCI Bidding | US/UK/DE/FR/IT/ES/JP at 100%; CA at 100% post-4/7 launch | 8 markets at 100%; AU May 2026; MX TBD | OCI signal feeding Smart Bidding; cross-MCC learning flagged 4/17 |
-| Modern Search (Ad Copy) | UK Phase 1 complete; UK Phase 2 launched 3/6; IT launched 2/19; EU4 translations complete | Evidence-based messaging from Sole Proprietor study | Ad copy variants by market |
-| Audiences & Lifecycle | US Engagement channel validated ($765K iOPS 2025) | F90 Lifecycle blocked on Legal SIMs | Audience segment targeting |
-| User Experience | Polaris WW dial-up 4/6–4/7 complete; Baloo early access live 3/30; Italy ref tag regression 4/16 | US Polaris delivered +6% CVR vs legacy | Landing page variants |
-| Algorithmic Ads | DG CPC testing US | AI Max US design 6 days overdue | DG bids, AI Max campaign structure |
-
-**Output metrics (lagging results — by workstream):**
-
-| Workstream | Key Result | Confidence | Impact |
-|---|---|---|---|
-| OCI Bidding — US | +24% reg uplift, +32,047 regs, $16.7MM OPS | High | Scaled |
-| OCI Bidding — UK | +23% reg uplift | High | Scaled |
-| OCI Bidding — DE | +18% reg uplift | High | Scaled |
-| OCI Bidding — FR/IT/ES/JP | 100% dial-up complete 3/31 | Measuring | First QBR goal 2026 achieved |
-| OCI Bidding — CA | Launched 4/7; E2E testing complete | In-flight | Dial-up active |
-| Ad Copy — UK Phase 1 | +86% CTR, +31% regs | High | Complete |
-| Ad Copy — IT | Inconclusive (insufficient sample) | Low | Running |
-| Audiences — Engagement | $765K iOPS 2025 | High | Validated |
-| UX — Polaris US | +6% CVR vs legacy (21-day pre/post 3/24) | High | Confirmed |
-| UX — Italy Polaris ref tag | P0 regression detected 4/16; legacy restored | — | Rework required |
-| UX — Gated Guest | -61% conversion | High (negative) | Killed |
-| UX — In-context registration | +13.6K annualized regs | Medium | Scaling |
-| Algorithmic Ads — DG CPC | $0.39 vs $2.43 keyword (-84% CPC) | Early | Volume TBD |
-
-OCI Bidding now has 8 of 10 markets at 100%. CA launched on schedule 4/7 with E2E testing complete. AU remains at May 2026 target with no MCC; MX remains TBD with no MCC. The Ad Copy workstream continues to produce the strongest evidence base in Modern Search: UK AMZ delivered +86% CTR and +31% registrations, Phase 2 launched in UK on 3/6, EU4 translations completed 3/20. IT remains low-confidence due to sample size — no scale decision this cycle.
+OCI Bidding now has 8 of 10 markets at 100%. CA launched on schedule 4/7 with E2E testing complete. AU and MX both remain TBD with no MCC created. The Ad Copy workstream continues to produce the strongest evidence base in Modern Search: UK AMZ delivered +86% CTR and +31% registrations, Phase 2 launched in UK on 3/6, EU4 translations completed 3/20. IT remains low-confidence due to sample size — no scale decision this cycle.
 
 UX is the workstream with the most W15 activity. Polaris WW dial-up ran 4/6–4/7. The US Polaris page has now delivered +6% CVR vs legacy at scale — the first statistically-valid win from the brand LP rebuild. The Italy ref tag regression is a setback but isolated: Dwayne Palmer (MCS) has restored legacy Italy, and the April 16 sync aligned on 10 Polaris LP template changes (benefit cards replacing percolate widget, subheadline standardization, FAQ updates, closing CTA) to apply globally. Adi Thakur (UX), Stacey Gu (OCI), and Dwayne Palmer attended the April 16 sync alongside Richard and Brandon.
 
@@ -74,7 +54,7 @@ Hedy also logged a 4/17 AI Tool Demo session (51 min, 7 team members) where Rich
 <!-- WBR-OWNED:signal-flags START -->
 <!-- WBR-OWNED:signal-flags END -->
 
-**Cost of inaction (null case):** The Testing Approach document (v5, 8.4/10 PUBLISH verdict) has been in draft for 4 months. The April 16 Polaris meeting did not include it; the document remains unsent to Brandon. Per Richard's own Friday brief, the visibility-avoidance pattern is now at 12 days and the L1 streak at 20 workdays at zero. Each week of delay extends the gap between PS testing methodology maturity and its formal leadership endorsement. Separately, the AI Max test design is now 6 days overdue (Apr 14 deadline). Each additional day compresses the Q2 2026 US pilot window, risking a slip to Q3 that would push learnings past the H2 planning cycle. On OCI, AU's May 2026 launch requires MCC creation within the next 2 weeks; without it, launch slips to Q3 and AU continues operating without OCI — forgoing the 18–24% reg uplift validated in US/UK/DE (now also CA).
+**Cost of inaction (null case):** The Testing Approach document (v5, 8.4/10 PUBLISH verdict) has been in draft for 4 months. The April 16 Polaris meeting did not include it; the document remains unsent to Brandon. Per Richard's own Friday brief, the visibility-avoidance pattern is now at 12 days and the L1 streak at 20 workdays at zero. Each week of delay extends the gap between PS testing methodology maturity and its formal leadership endorsement. Separately, the AI Max test design is now 6 days overdue (Apr 14 deadline). Each additional day compresses the Q2 2026 US pilot window, risking a slip to Q3 that would push learnings past the H2 planning cycle. On OCI, AU remains without a confirmed timeline and no MCC; each quarter without AU OCI forgoes the 18–24% reg uplift validated in US/UK/DE (now also CA).
 
 ---
 
@@ -84,7 +64,7 @@ Three operational insights from the trailing four-week window (W12–W15) inform
 
 1. **Polaris LP rollout produced its first validated positive result (+6% CVR in US) and its first production regression (Italy ref tag) in the same two-week window.** The US result (21-day pre/post March 24) is the first statistically-valid Polaris win. The Italy regression is operationally isolated (legacy restored within 24 hours of detection) but strategically costly: it demonstrates that the rollout process lacks an automated ref tag audit step. Every market rollout prior to Italy (US 3/24, EU3 preparations) could have contained the same defect undetected. The corrective action is a systematic ref tag audit applied to AU (next in the rollout queue per Brandon's priority order) before any further Polaris market launches. The US +6% CVR result is the evidence base that justifies continuing the rollout; the Italy regression defines the gate that precedes each market.
 
-2. **OCI reached 8 of 10 markets at 100% with CA's 4/7 launch — the program is in its measurement phase, not its expansion phase, for the next 4–6 weeks.** FR/IT/ES/JP at 100% on 3/31 and CA at 100% on 4/7 close the first 2026 QBR goal. The remaining expansion work is AU (May 2026, MCC not yet created) and MX (TBD, MCC not yet created). The binding constraint for both is MCC creation, not methodology. The 4/17 cross-MCC data exclusion incident (Sam Tangri → Jing Shi → Mike) surfaces a measurement-phase concern: Google's Smart Bidding prioritizes same-MCC learning, so US data exclusions can transiently distort UK/DE/FR performance for a day or two. This does not invalidate OCI uplift figures but does require acknowledgment in weekly readouts when US data exclusion events occur.
+2. **OCI reached 8 of 10 markets at 100% with CA's 4/7 launch — the program is in its measurement phase, not its expansion phase, for the next 4–6 weeks.** FR/IT/ES/JP at 100% on 3/31 and CA at 100% on 4/7 close the first 2026 QBR goal. The remaining expansion work is AU and MX — both with no confirmed timeline and no MCC created. The binding constraint for both is MCC creation, not methodology. The 4/17 cross-MCC data exclusion incident (Sam Tangri → Jing Shi → Mike) surfaces a measurement-phase concern: Google's Smart Bidding prioritizes same-MCC learning, so US data exclusions can transiently distort UK/DE/FR performance for a day or two. This does not invalidate OCI uplift figures but does require acknowledgment in weekly readouts when US data exclusion events occur.
 
 3. **The April 17 AI Tool Demo with 7 team members committing to adoption is the first Level-3 (Team Automation) traction the program has produced.** Adi (MX), Andrew (UK), Stacey (Polaris), Yun-Kang (Adobe NB), Dwayne (MCS), and Peter (Apps) each committed to a tool validation deliverable with a specific date range. Hedy captured the session. The Markdown-standardized output and shared SharePoint prompt repository are the structural decisions that make this adoption durable rather than a one-off novelty. If 4 of the 6 deliverables ship on schedule by early May, the tool graduates from "Richard's tool" to "PS team standard" — which is the L3 goal criterion.
 
@@ -106,8 +86,8 @@ Three operational insights from the trailing four-week window (W12–W15) inform
 
 **Blocked items:**
 - AI Max test design: 6 days overdue. Design document incomplete. Blocks Q2 2026 US pilot timeline.
-- AU OCI: May 2026 target but no MCC created. Cannot begin account setup until MCC exists.
-- MX OCI: Timeline TBD. No MCC created. Lowest priority in the OCI expansion queue.
+- AU OCI: No confirmed timeline. No MCC created. Cannot begin account setup until MCC exists.
+- MX OCI: No confirmed timeline. No MCC created. Lowest priority in the OCI expansion queue.
 - F90 Lifecycle: Legal SIMs not submitted. Cannot launch lifecycle targeting without Legal clearance.
 - Ad Copy IT: Low-confidence results. Insufficient sample size prevents scaling decision.
 - Italy Polaris: Legacy restored; new template parked in AEM as `it/cp/ps-brand-new` pending ref tag audit.
@@ -146,7 +126,7 @@ W15 aggregates 10 markets (US, UK, DE, FR, IT, ES, JP, CA, AU, MX). Spend contin
 | ES | 100% | 3/31 | Measuring | Dial-up complete; first QBR goal |
 | JP | 100% | Completed | Measuring | MCM complete |
 | CA | 100% | 4/7 | Measuring | E2E testing complete; in-flight |
-| AU | Planned | May 2026 | Projected 18–24% | No MCC created |
+| AU | TBD | TBD | Projected 18–24% | No MCC created |
 | MX | TBD | TBD | Projected 18–24% | No MCC created |
 
 ## Appendix C: Monthly Projection — WW Testing Impact
@@ -158,26 +138,7 @@ W15 aggregates 10 markets (US, UK, DE, FR, IT, ES, JP, CA, AU, MX). Spend contin
 | Active tests | 12 | 14 | 14 | AI Max + F90 Lifecycle still blocked |
 | Tests with written status | 9/12 (75%) | 10/14 (71%) | 14/14 (100%) target | Goal 1; drift from last report |
 
-## Appendix D: Workstream Summary — Test Results
-
-| Workstream | Test | Market | Result | Confidence | Status |
-|---|---|---|---|---|---|
-| OCI Bidding | Smart Bidding w/ OCI signal | US | +24% regs, $16.7MM OPS | High | Scaled |
-| OCI Bidding | Smart Bidding w/ OCI signal | UK | +23% regs | High | Scaled |
-| OCI Bidding | Smart Bidding w/ OCI signal | DE | +18% regs | High | Scaled |
-| Modern Search | Ad Copy Phase 1 | UK | +86% CTR, +31% regs | High | Complete |
-| Modern Search | Ad Copy Phase 1 | IT | Inconclusive | Low | Needs larger sample |
-| Audiences | Engagement Channel | US | $765K iOPS | High | Validated |
-| Audiences | Prime Day 2025 | US | $329K OPS, 644% ROAS | High | Event complete |
-| UX | Gated Guest | WW | -61% conversion | High | Killed |
-| UX | In-context registration | WW | +13.6K annualized | Medium | Scaling |
-| UX | Baloo early access | WW | Launched 3/30 | Early | Measuring |
-| UX | Polaris Brand LP — US | WW | +6% CVR vs legacy (21-day pre/post 3/24) | High | Scaled |
-| UX | Polaris Brand LP — WW weblab | WW | Dial-up 4/6–4/7 complete | Early | Measuring |
-| UX | Polaris Brand LP — Italy | IT | Ref tag regression; legacy restored 4/16 | — | Rework |
-| Algorithmic Ads | DG CPC | US | $0.39 vs $2.43 CPC (-84%) | Early | Volume TBD |
-
-## Appendix E: Change Log (2026 YTD — Testing Program)
+## Appendix D: Change Log (2026 YTD — Testing Program)
 
 | Date | Change | Workstream | Owner |
 |---|---|---|---|
@@ -212,6 +173,95 @@ The Testing Approach document (v5) formalizes these measurement standards and de
 
 ---
 
+## Appendix I: Active Test Dossier
+
+One dossier block per test in the WW Testing protocol Inventory (non-archived). Engine-generated, rebuilt every AM-Backend run. Per Rule 4, every status claim must carry a source citation from the last 14 days — if none exists, the claim reads "per prior state file, not reverified this cycle" rather than being silently retained.
+
+<!-- AM-OWNED:active-test-dossier START -->
+<!--
+Engine populates this block from the Test Inventory in state-file-ww-testing.md. One dossier block per test (non-archived). Schema per block:
+
+### [Test name] — [workstream] — [status verb]
+
+**Core:** [one sentence: what + why]
+
+**Timeline:** launched YYYY-MM-DD · last action YYYY-MM-DD · next milestone YYYY-MM-DD
+
+**People:**
+- Owner: [@alias]
+- Stakeholders: [@alias, @alias, ...]
+- External: [@name (company), ...]
+
+**Tickets & Tasks:**
+- Asana [GID] — [name] — [status], due YYYY-MM-DD — [permalink]
+- SIM [id] — [one line status] — [permalink]
+- MCM-[id] — [one line status] — [permalink]
+- Weblab [id] — [dial-up %] — [permalink]
+
+**Technical:**
+- Refmarker(s): [pattern]
+- URLs: [test URL] vs [control URL]
+- MCM / CR: [id(s)]
+- Other: [any API, feed, account, tool that matters for debugging]
+
+**Measurement:**
+- What's measured: [metric(s)]
+- Win threshold: [specific number + confidence level]
+- Kill threshold: [specific number]
+
+**Last 3 events** (newest first):
+- YYYY-MM-DD — [one sentence] — [source: Slack/email/Hedy/Quip permalink]
+- YYYY-MM-DD — [one sentence] — [source: permalink]
+- YYYY-MM-DD — [one sentence] — [source: permalink]
+
+**Sources** (readily accessible — all links):
+- Asana tasks: [permalink, permalink]
+- SIMs/MCMs: [permalink, permalink]
+- Slack threads: [permalink(s) — last 3 most-relevant]
+- Emails: [subject line or permalink — last 3 most-relevant]
+- Hedy sessions: [permalink(s)]
+- Quip docs: [permalink(s)]
+- Wiki article: [path to ~/shared/wiki/agent-created/testing/X.md]
+- Meeting notes: [wiki path or Hedy permalink]
+
+**Next step:** [one sentence] — Owner: [@alias] — By: YYYY-MM-DD
+
+**Blockers:** [one line each, with whom]
+
+**Loop reporting:** [Standing | Ad hoc | None]
+
+Do NOT fabricate permalinks. Use [permalink] as literal placeholder text when no citation is available from the last 14 days. When a field has no valid citation, the engine writes the exact phrase "per prior state file, not reverified this cycle" — do not paraphrase.
+-->
+<!-- AM-OWNED:active-test-dossier END -->
+
+---
+
+## Appendix J: Staleness Report
+
+Engine-generated diagnostic. Rebuilt every AM-Backend run. Surfaces tests that have drifted out of active attention so they get reviewed before the next WW Testing Loop.
+
+<!-- AM-OWNED:staleness-report START -->
+<!--
+Engine populates two tables here.
+
+Table 1 — STALLED (last action > 7 days ago):
+
+| Test name | Workstream | Last action | Days since | Owner |
+|---|---|---|---|---|
+| [Test] | [Workstream] | YYYY-MM-DD | N | [@alias] |
+
+Table 2 — NEEDS-SCOPING (next milestone missing or past due):
+
+| Test name | Workstream | Next milestone | Status | Owner |
+|---|---|---|---|---|
+| [Test] | [Workstream] | [missing \| YYYY-MM-DD past due] | [reason] | [@alias] |
+
+Also include a NEEDS-ID bullet list at the bottom — one line per test whose Canonical Asana GID is a [GID needed] placeholder in the Inventory, so Richard knows what to fill in.
+-->
+<!-- AM-OWNED:staleness-report END -->
+
+---
+
 ## Appendix H: Placeholder Schema for Automated Refresh
 
 This schema defines the contract between the Kiro agent swarm (LLM output) and the DOCX template (deterministic patching). The agent generates a JSON payload mapping these keys to generated strings. A patching script replaces the placeholders in the Word XML without touching surrounding formatting.
@@ -234,8 +284,10 @@ This schema defines the contract between the Kiro agent swarm (LLM output) and t
 | `{{STAKEHOLDER_ACTIONS}}` | Strategic Priorities — external deps | Memory.md relationship graph + Asana | Daily |
 | `{{APPENDIX_A_TREND}}` | Appendix A — WW weekly trend | DuckDB weekly_metrics (all markets) | Weekly |
 | `{{APPENDIX_B_OCI}}` | Appendix B — OCI rollout status | eyes.md OCI section + DuckDB | On change |
-| `{{APPENDIX_D_TESTS}}` | Appendix D — workstream test results | Testing wiki articles | On change |
 | `{{APPENDIX_E_CHANGELOG}}` | Appendix E — change log | Testing program change log | On change |
+| `{{LOOP_REPORTING_QUEUE}}` | Loop Reporting Queue | Test Inventory + per-test hydration (Ingestion Rules 1–4) | Daily |
+| `{{APPENDIX_I_DOSSIER}}` | Appendix I — Active Test Dossier | Test Inventory + per-test hydration (Ingestion Rules 1–4) | Daily |
+| `{{APPENDIX_J_STALENESS}}` | Appendix J — Staleness Report | Per-test hydration + staleness gate (Ingestion Rule 2) | Daily |
 
 ### JSON Output Contract
 
@@ -257,7 +309,7 @@ This schema defines the contract between the Kiro agent swarm (LLM output) and t
 }
 ```
 
-Static sections (Goals, Tenets, Appendix B OCI status, Appendix D test results) are NOT in the JSON — they persist unchanged in the template until manually revised or a test status changes.
+Static sections (Goals, Tenets, Appendix B OCI status) are NOT in the JSON — they persist unchanged in the template until manually revised. Appendix I (Active Test Dossier), Appendix J (Staleness Report), and the Loop Reporting Queue are generated directly from the Test Inventory and per-test source hydration rather than from a JSON payload — see `state-file-ww-testing.md` → Ingestion Rules.
 
 ---
 

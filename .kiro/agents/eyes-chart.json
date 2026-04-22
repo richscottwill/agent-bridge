@@ -8,5 +8,12 @@
   "resources": [
     "file://shared/.kiro/agents/body-system/eyes-chart.md"
   ],
-  "mcpServers": {}
+  "mcpServers": {},
+  "successMetrics": [
+    "Dashboard HTML generated successfully on every invocation — zero broken chart renders",
+    "All data sources read without error; missing sources skipped with explicit gap note in output",
+    "Dashboard file size < 100KB (standalone HTML with inlined Chart.js data)",
+    "Generated dashboard reflects data no older than the latest refresh-body-system.py run",
+    "Zero modifications to body system organs — read-only contract enforced per invocation"
+  ]
 }

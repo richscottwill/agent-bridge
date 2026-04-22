@@ -1,5 +1,5 @@
 {
-  "name": ".AM-Backend: Ingest + Process",
+  "name": "AM-Backend: Ingest + Process",
   "version": "5.0.0",
   "description": "Morning backend v2: Asana runs in ORCHESTRATOR (MCP reliable), 4 subagents (Slack, Email, Loop, Hedy) run in parallel. B2 sequential after B1. ~16 min total.",
   "when": {

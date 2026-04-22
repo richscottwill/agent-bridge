@@ -30,7 +30,7 @@ This is the canonical reference for Australia Paid Search. Use it to prep for AU
 
 AU sits at an inflection point. The foundational work — account build, keyword coverage, landing page migration — is largely complete. NB CPC has declined 29% over seven consecutive weeks ($6.82 to $4.81), a genuine structural improvement driven by bid strategy optimization. But that CPC gain is not translating to proportional CPA improvement: NB CPA has held flat at $187, which means conversion rate is the binding constraint, not traffic cost.
 
-The single highest-leverage initiative for AU is OCI integration, targeted for May 2026. OCI delivered 16-20% registration lifts in DE and transformed US performance. Until OCI is live, AU is bidding without conversion signals — the equivalent of driving without a speedometer. The MCC has not been created, and Adobe (Suzane Huynh) has not committed to a firm timeline, which makes the May target aspirational rather than confirmed.
+The single highest-leverage initiative for AU is OCI integration. OCI delivered 16-20% registration lifts in DE and transformed US performance. Until OCI is live, AU is bidding without conversion signals — the equivalent of driving without a speedometer. The MCC has not been created, and Adobe (Suzane Huynh) has not committed to a timeline, so OCI for AU remains unscheduled.
 
 ## Current Performance
 
@@ -49,7 +49,7 @@ Polaris landing page migration is complete. Lena directed a full switch from leg
 
 The two-campaign restructure proposed on 3/24 would split the current NB campaign into product-intent and business-intent segments. The hypothesis is that keyword-product alignment will improve Quality Score and reduce wasted spend on queries that convert at fundamentally different rates. This remains in proposal stage.
 
-OCI integration targets May 2026 via the Adobe OCI path. As noted above, the MCC has not been created and Adobe has not committed. This is the single highest-leverage initiative for AU and the gap between "target" and "confirmed" needs to close.
+OCI integration for AU would run via the Adobe OCI path. As noted above, the MCC has not been created and Adobe has not committed to a timeline. This is the single highest-leverage initiative for AU and needs a confirmed plan.
 
 The AU NB MRO/Trades test is a budget-neutral experiment targeting MRO and Trades keywords by reallocating from underperforming generic NB. It requires Alexis's LP confirmation and Lena's input on priority verticals.
 
@@ -69,7 +69,7 @@ Brandon Munday is Richard's manager (L7). She offered to join AU syncs, flagged 
 
 ## Open Questions and Next Steps
 
-Five questions need answers, and each has an owner. First, how much of the W13 CVR drop is attributable to Polaris migration versus seasonal softness versus promo transition? Richard needs to run the analysis using two to three more weeks of post-migration data, targeting a read by mid-April. Second, what is the realistic OCI AU timeline? The May 2026 target exists but the MCC is not created and Adobe has not committed. Richard needs to follow up with Suzane Huynh and escalate if no commitment by mid-April. Third, should CPC bid caps be implemented now as a short-term efficiency lever? This is a Brandon decision pending Richard's recommendation with supporting data. Fourth, when CCP data arrives (projected July 2026), how will ie%CCP change the optimization strategy? This is a planning question for Q3. Fifth, can the two-campaign structure be validated with historical query data before a live test? Richard needs to pull the query-level data and segment it to test the hypothesis offline.
+Five questions need answers, and each has an owner. First, how much of the W13 CVR drop is attributable to Polaris migration versus seasonal softness versus promo transition? Richard needs to run the analysis using two to three more weeks of post-migration data, targeting a read by mid-April. Second, what is the realistic OCI AU timeline? No timeline is currently confirmed — the MCC is not created and Adobe has not committed. Richard needs to follow up with Suzane Huynh and escalate. Third, should CPC bid caps be implemented now as a short-term efficiency lever? This is a Brandon decision pending Richard's recommendation with supporting data. Fourth, when CCP data arrives (projected July 2026), how will ie%CCP change the optimization strategy? This is a planning question for Q3. Fifth, can the two-campaign structure be validated with historical query data before a live test? Richard needs to pull the query-level data and segment it to test the hypothesis offline.
 
 ---
 
@@ -83,7 +83,7 @@ Five questions need answers, and each has an owner. First, how much of the W13 C
 - NB CPC 7-week decline — source: ~/shared/context/body/eyes.md → Market Health → AU
 
 <!-- AGENT_CONTEXT
-machine_summary: "Canonical AU market reference. Merges former AU Market Wiki and AU Market Overview into one doc. Launched June 2025, Richard's primary hands-on market. $1.8M budget, 12,906 reg OP2 target, $140 CPA. Key dynamics: Lena Zak (L7) driving CPC scrutiny ($6 avg, benchmarking vs Consumer $0.18-0.50), Polaris full migration (no phased test, Lena's decision), no OCI (target May 2026). NB CPC declining 7 weeks (-29%) but NB CPA flat at $187 — CVR is the binding constraint. Open questions have owners and timelines."
+machine_summary: "Canonical AU market reference. Merges former AU Market Wiki and AU Market Overview into one doc. Launched June 2025, Richard's primary hands-on market. $1.8M budget, 12,906 reg OP2 target, $140 CPA. Key dynamics: Lena Zak (L7) driving CPC scrutiny ($6 avg, benchmarking vs Consumer $0.18-0.50), Polaris full migration (no phased test, Lena's decision), no OCI (no confirmed timeline, MCC not created). NB CPC declining 7 weeks (-29%) but NB CPA flat at $187 — CVR is the binding constraint. Open questions have owners and timelines."
 key_entities: ["AU", "Lena Zak", "Alexis Eck", "Brandon Munday", "Polaris", "OCI", "CPC", "CPA", "NB", "Brand", "MRO/Trades"]
 action_verbs: ["optimize", "migrate", "investigate", "propose", "report", "restructure"]
 update_triggers: ["AU performance shifts >10%", "OCI AU launch or timeline change", "Lena/Alexis direction changes", "CCP data arrival", "quarterly planning"]
@@ -92,7 +92,7 @@ update_triggers: ["AU performance shifts >10%", "OCI AU launch or timeline chang
 
 ## Related
 
-- [OCI Program](../testing/oci-program) — AU OCI target May 2026
+- [OCI Program](../testing/oci-program) — AU OCI not launched
 - [Polaris Program](polaris-program) — AU Polaris full migration complete
 - [CPC Benchmark Defense Playbook](cpc-benchmark-defense-playbook) — framework for the Lena CPC response
 - [AU NB MRO Trades Proposal](../testing/au-nb-mro-trades-proposal) — proposed AU category test

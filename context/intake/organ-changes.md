@@ -289,3 +289,71 @@ Includes a "How to Update This File" section (5 trigger events), cross-reference
 5. **changelog.md** — no automatic update captured this edit. Per the current-state-only principle, changelog.md is where historical amcc snapshots are supposed to live. If Richard wants a historical record of the structural change, it should land there too. Not blocking.
 
 **Recommendation:** Before the agent treats the new model as live, resolve items 1–3. Easiest path: update the Current Streak row to read "See `main.hard_thing_candidates`" once the view exists, update hands.md to defer to amcc, and either promote or explicitly mark the protocol as staged in amcc.md itself.
+## 2026-04-21 04:13 UTC — amcc.md
+
+**Summary:** Single-line addition at EOF. Under "When to Read This File," appended an explicit instruction to query `main.hard_thing_now` before naming today's hard thing, treating rank 1 as the hard thing and allowing null-state as a legitimate response rather than fabricating. Reinforces the signal-driven selection model that replaced the top-down task-queue model on 2026-04-20. No structural change — just makes the read-then-act protocol explicit at the session-start touchpoint.
+
+**Gated file:** No — amcc.md is not gated (heart.md and gut.md only). No karpathy authorization required.
+
+**Cross-organ consistency:** No conflicts detected.
+- `body-diagram.md` already references `main.hard_thing_now` in the aMCC node (consistent).
+- `changelog.md` 2026-04-20 entry documents the redesign this sentence operationalizes (consistent).
+- `amcc.md` "The Hard Thing" section (line ~114) already describes signal convergence and null-state; the new sentence restates the instruction at the session-start touchpoint so it's discoverable without requiring the reader to scroll up.
+- No other organ (hands.md, brain.md, spine.md, current.md) currently prescribes a competing method for choosing the hard thing.
+
+**Portability note:** The new sentence references a DuckDB view name (`main.hard_thing_now`). The surrounding organ file makes this intelligible, but a cold-start agent on a platform without MotherDuck access will hit the null-state fallback documented in `hard-thing-selection.md` — which is the intended behavior.
+
+## 2026-04-22 — device.md: new `harmony-forecast-deploy` hook documented
+
+**Section:** Installed Apps → Hooks (inserted after Forecast SharePoint Push, before Hedy Meeting Sync)
+**Change:** Added a new `### Harmony Forecast Deploy (Hook: harmony-forecast-deploy)` entry. Documents a second, independent hook that fires on the same trigger as `forecast-sharepoint-push` (fileEdited on `shared/dashboards/ps-forecast-tracker.xlsx`). Purpose: rebuild `forecast-data.json` from the updated xlsx and redeploy the `paid-acq-forecast` Harmony beta app so teammates on the AB-Marketing-PS bindle see fresh data without a manual step.
+
+Key facts captured:
+- Script: `~/shared/dashboards/deploy-forecast-harmony.sh` (bash, idempotent, manually runnable)
+- Chain: xlsx edit → `refresh-forecast.py` → copy JSON to Harmony app `src/data/` → `harmony app deploy --stage beta --accept-breaking-changes`
+- Harmony app URL: https://paid-acq-forecast.beta.harmony.a2z.com
+- Bindle: `amzn1.bindle.resource.35tbubgteizlyuofaysa` (parent: AB-Marketing-PS)
+- App source: `~/.workspace/forecast-harmony/Harmony-paid-acq-forecast/src/Harmony-paid-acq-forecast/` — vanilla plain template, Chart.js vendored locally for CSP compliance
+- Log: `~/shared/context/active/harmony-forecast-deploy.log` (append-only)
+- Runtime ~30s, timeout 300s, fully autonomous
+
+**Karpathy gate:** N/A — device.md is not gated (only heart.md and gut.md are). No authorization issue.
+
+**Cross-organ consistency check:**
+
+1. **No other organ references Harmony or the `paid-acq-forecast` app.** grep across `shared/context/body/**/*.md` returns matches only in device.md (this edit). Clean net-new addition — no conflicts.
+
+2. **device.md internal consistency — Device Health table is stale.** The table (line ~185) lists `Forecast SharePoint Push Hook` (✅ 4/13) but does NOT list `Harmony Forecast Deploy Hook`. For table-level self-consistency, a new row should be added: `Harmony Forecast Deploy Hook | 🆕 | 4/22`. **Low priority, but flagged for the next device.md pass.**
+
+3. **Dual-hook trigger note — architecturally clean.** Both `forecast-sharepoint-push` and `harmony-forecast-deploy` fire on the same fileEdited trigger (`shared/dashboards/ps-forecast-tracker.xlsx`). The edit explicitly calls this out as "independent job — single responsibility per hook," which is the correct pattern. No race condition concern documented, but worth confirming both hooks tolerate concurrent execution on the same xlsx (e.g., one shouldn't be holding a write lock the other needs to read).
+
+4. **Bindle lineage (AB-Marketing-PS) aligns with roster.md / memory.md.** Parent bindle AB-Marketing-PS is consistent with Brandon's team ownership — readers of roster.md and memory.md will recognize the scope. No attribution conflict.
+
+5. **Pre-existing (unrelated) stale reference in device.md.** The `Forecast SharePoint Push` section (lines 74–76) contains three bullets that look misplaced: "Trigger: from bridge import Bridge…", the Google Sheets Spreadsheet/Doc/Drive IDs, and the `kiro-sheets-bridge` service account. These belong to the Google Bridge entry above, not the SharePoint push hook. **Not caused by this edit, but surfaced when reading adjacent content — flag for a future device.md cleanup.**
+
+**Portability check (instruction #12):** The Harmony Forecast Deploy entry is self-contained plain text — a new AI on a different platform could read it and understand what the hook does, what it depends on, and how to invoke the script manually. ✅ Portable.
+
+**Action items:**
+- (Low) Add `Harmony Forecast Deploy Hook | 🆕 | 4/22` row to device.md Device Health table
+- (Low, unrelated) Clean up misplaced Google Bridge bullets inside the Forecast SharePoint Push hook section
+- (Low) On first production fire, confirm no xlsx lock contention between `forecast-sharepoint-push` and `harmony-forecast-deploy`
+
+## 2026-04-22 — eyes.md
+
+**Section:** OCI Status by Market (as of 4/2) table + rollout summary line
+
+**Change:** AU row downgraded in specificity. Target date "May 2026" → "TBD". Notes "MCC not created. Discussed with Suzane (Adobe) 3/19." → "No MCC." Rollout summary line "Next: CA (Apr), AU (May), MX (TBD)." → "Next: CA (Apr). AU/MX: TBD."
+
+**Gated file:** No — eyes.md is not gated (heart.md and gut.md only). No karpathy authorization required.
+
+**Cross-organ consistency:** No conflicts detected.
+- `spine.md` "OCI rollout (7/10 markets live)" — still consistent (7/10 unchanged).
+- `brain.md` AU OCI references are about the LP migration decision (D4), not MCC/tracking timing — no conflict.
+- `memory.md` AU references (CPC, LP) don't mention MCC timing — no conflict.
+- No other organ or context file references the May 2026 AU MCC target or the Suzane (Adobe) 3/19 conversation. That detail lived only in eyes.md.
+
+**Information loss flag:** Two pieces of context were removed without a replacement destination:
+1. The "May 2026" AU MCC target — if this was aspirational and has now slipped to genuinely unknown, "TBD" is correct. If the target still exists but is just not being surfaced, it's now lost from the body.
+2. The Suzane (Adobe) 3/19 conversation — if Adobe is still the unblocker for AU MCC creation, that's a stakeholder relationship fact that belongs somewhere. Candidates: `memory.md` (relationship graph) or `meetings/stakeholder/` (Adobe series, if one exists). Currently logged nowhere.
+
+**Recommendation:** If the Adobe/AU MCC thread is still live, capture it in `memory.md` or a stakeholder meeting series file. If it's dead, no action. Don't let it sit only in the intake log.

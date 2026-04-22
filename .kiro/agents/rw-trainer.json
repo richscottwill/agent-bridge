@@ -9,5 +9,12 @@
     "file://shared/.kiro/agents/body-system/rw-trainer.md",
     "file://.kiro/steering/richard-writing-style.md"
   ],
-  "mcpServers": {}
+  "mcpServers": {},
+  "successMetrics": [
+    "Every coaching session connects recommendations to a specific Five Level (L1-L5) with measurable next step",
+    "Pattern detection: stuck patterns identified and flagged within 3 occurrences (tracked via nervous-system.md trajectories)",
+    "Friday calibration completed weekly with ≥3 specific observations grounded in week's artifacts",
+    "Annual review prep produces ≥5 evidence-backed accomplishments tied to org priorities",
+    "Leverage assessment: every task recommendation includes effort/leverage ratio connected to brain.md framework"
+  ]
 }

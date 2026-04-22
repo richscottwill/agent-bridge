@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-21T00:51:00.388896+00:00",
+  "generated": "2026-04-21T19:26:44.560397+00:00",
   "five_levels": [
     {
       "level": 1,
@@ -60,11 +60,11 @@
     {
       "organ": "Heart",
       "organ_key": "heart",
-      "actual": 3869,
+      "actual": 4079,
       "budget": 3500,
-      "utilization": 111,
-      "days_stale": 6,
-      "updated": "2026-04-15"
+      "utilization": 117,
+      "days_stale": 0,
+      "updated": "2026-04-21"
     },
     {
       "organ": "Eyes",
@@ -78,11 +78,11 @@
     {
       "organ": "Amcc",
       "organ_key": "amcc",
-      "actual": 3407,
+      "actual": 4141,
       "budget": 2000,
-      "utilization": 170,
-      "days_stale": 4,
-      "updated": "2026-04-17"
+      "utilization": 207,
+      "days_stale": 0,
+      "updated": "2026-04-21"
     },
     {
       "organ": "Hands",
@@ -139,9 +139,9 @@
       "updated": "2026-04-14"
     }
   ],
-  "body_total": 20575,
+  "body_total": 21519,
   "body_budget": 23000,
-  "body_utilization": 89,
+  "body_utilization": 94,
   "over_budget_count": 4,
   "total_runs": 11,
   "total_experiments": 115,
@@ -542,5 +542,446 @@
       "updated_at": "2026-04-06 03:14:37"
     }
   ],
-  "weekly_output": []
+  "weekly_output": [],
+  "agent_health": [
+    {
+      "name": "agent-bridge-sync",
+      "description": "Sync agent for the agent-bridge system. Syncs shared/ files to the agent-bridge repo, updates documentation, pushes to the agent-bridge GitHub repo, and sends snapshot emails. Operates with doomsday mentality \u2014 if the DevSpace dies tomorrow, the repo must have everything.",
+      "team": "Body System",
+      "metrics_count": 5,
+      "metrics": [
+        "All files in sync manifest pushed to agent-bridge repo with zero drift from shared/ source",
+        "README.md and CHANGELOG.md updated on every sync \u2014 no stale documentation",
+        "Git push completes without merge conflicts or force-push (clean fast-forward only)",
+        "Weekly snapshot email sent with file count, delta summary, and recovery instructions",
+        "Quality check passes: repo can cold-start a new AI agent without missing context files"
+      ],
+      "has_metrics": true,
+      "total_invocations": 0,
+      "invocations_7d": 0,
+      "invocations_30d": 0,
+      "failures": 0,
+      "success_rate": null,
+      "last_invoked": null,
+      "avg_duration_s": null
+    },
+    {
+      "name": "callout-reviewer",
+      "description": "Reviews all weekly WBR callout drafts for coherence, word counts, narrative strength, and adherence to callout principles. Scores each market on 8 dimensions across two lenses (L1 Craft: attribution, structure, voice, economy; L2 Impact: sowhat, ownership, accuracy, strategic). Enforces quality gates that block publish when data quality is suspect. Suggests specific edits. Runs after all writer agents have produced their drafts.",
+      "team": "WBR Callouts",
+      "metrics_count": 6,
+      "metrics": [
+        "8/8 scoring dimensions evaluated per callout (L1: attribution, structure, voice, economy; L2: sowhat, ownership, accuracy, strategic)",
+        "All 10 market callouts reviewed per weekly batch \u2014 zero skipped markets",
+        "Every edit suggestion is specific: exact text to replace + replacement text (no vague 'tighten this')",
+        "Scores persisted to DuckDB after every review cycle (query: ps.callout_scores) and WBR Health Score updated (query: ps.wbr_health_score)",
+        "Cross-market coherence check completed: contradictions between market narratives flagged",
+        "Quality gates checked before publish: Gate A (forecast miss), Gate B (CPA deviation), Gate C (data staleness) \u2014 all BLOCKED markets require explicit override"
+      ],
+      "has_metrics": true,
+      "total_invocations": 0,
+      "invocations_7d": 0,
+      "invocations_30d": 0,
+      "failures": 0,
+      "success_rate": null,
+      "last_invoked": null,
+      "avg_duration_s": null
+    },
+    {
+      "name": "callout-writer",
+      "description": "Writes weekly WBR callout drafts for any single market. Accepts market and week parameters. Reads the analysis brief, market context, and callout principles to produce narrative prose callouts. Replaces abix-callout-writer, najp-callout-writer, and eu5-callout-writer.",
+      "team": "WBR Callouts",
+      "metrics_count": 5,
+      "metrics": [
+        "100% of callouts within 100-120 word target (110 ideal) \u2014 zero word-count violations",
+        "Zero formatting violations per batch: no em-dashes, no arrows, CPAs rounded to whole dollars",
+        "< 2 revision cycles per callout before reviewer approval (tracked via callout review scores)",
+        "All 10 market callouts produced per weekly cycle without manual intervention",
+        "Reviewer score \u22657/10 on all 5 dimensions (headline clarity, narrative justification, conciseness, actionability, voice)"
+      ],
+      "has_metrics": true,
+      "total_invocations": 0,
+      "invocations_7d": 0,
+      "invocations_30d": 0,
+      "failures": 0,
+      "success_rate": null,
+      "last_invoked": null,
+      "avg_duration_s": null
+    },
+    {
+      "name": "eyes-chart",
+      "description": "Visualization agent. Reads body system data (organ budgets, experiment history, scorecard, patterns, streak, competence stages, autonomy spectrum), generates standalone HTML dashboards with interactive charts via Chart.js.",
+      "team": "Body System",
+      "metrics_count": 5,
+      "metrics": [
+        "Dashboard HTML generated successfully on every invocation \u2014 zero broken chart renders",
+        "All data sources read without error; missing sources skipped with explicit gap note in output",
+        "Dashboard file size < 100KB (standalone HTML with inlined Chart.js data)",
+        "Generated dashboard reflects data no older than the latest refresh-body-system.py run",
+        "Zero modifications to body system organs \u2014 read-only contract enforced per invocation"
+      ],
+      "has_metrics": true,
+      "total_invocations": 0,
+      "invocations_7d": 0,
+      "invocations_30d": 0,
+      "failures": 0,
+      "success_rate": null,
+      "last_invoked": null,
+      "avg_duration_s": null
+    },
+    {
+      "name": "karpathy",
+      "description": "Autoresearch engine. Runs autonomous experiments on organs, style guides, context files, and hook prompts \u2014 measuring output quality via A/B/C blind eval. Sole authority on heart.md, gut.md, and experiment execution.",
+      "team": "Body System",
+      "metrics_count": 5,
+      "metrics": [
+        "\u22651 experiment completed per week with A/B/C blind eval and logged to experiment-log.tsv",
+        "Every experiment has a measurable outcome: keep/revert decision with Bayesian posterior logged",
+        "Zero unauthorized modifications to heart.md or gut.md outside experiment protocol",
+        "Experiment results persisted to experiment-results-latest.json within 1 hour of completion",
+        "Win rate tracked: % of experiments that produce a keep decision (target: >30% to avoid safe-technique bias)"
+      ],
+      "has_metrics": true,
+      "total_invocations": 0,
+      "invocations_7d": 0,
+      "invocations_30d": 0,
+      "failures": 0,
+      "success_rate": null,
+      "last_invoked": null,
+      "avg_duration_s": null
+    },
+    {
+      "name": "market-analyst",
+      "description": "Analyzes weekly paid search performance data for any single market. Accepts market and week parameters. Reads market context, pulls structured data from DuckDB, reads narrative context from markdown, produces analysis briefs, writes projections, and logs agent state. Replaces abix-analyst, najp-analyst, and eu5-analyst.",
+      "team": "WBR Callouts",
+      "metrics_count": 5,
+      "metrics": [
+        "All 10 active markets analyzed per weekly replay cycle (query: ops.workflow_executions WHERE agent='market-analyst')",
+        "Data freshness check passes before analysis \u2014 zero briefs produced on stale data (>24h)",
+        "Analysis brief produced within 3 minutes per market invocation",
+        "Every brief contains \u22651 quantified anomaly or \u22651 'no significant change' with evidence",
+        "Projection accuracy: forecast vs actual deviation <15% measured via ps.forecasts"
+      ],
+      "has_metrics": true,
+      "total_invocations": 0,
+      "invocations_7d": 0,
+      "invocations_30d": 0,
+      "failures": 0,
+      "success_rate": null,
+      "last_invoked": null,
+      "avg_duration_s": null
+    },
+    {
+      "name": "rw-trainer",
+      "description": "Richard's deep performance coach. Career conversations, annual review prep, 1:1 prep with Brandon/Kate, Friday calibration, deep pattern analysis, growth plans, artifact review. Reads the full body system. Not for everyday chat \u2014 the steering file handles that.",
+      "team": "Body System",
+      "metrics_count": 5,
+      "metrics": [
+        "Every coaching session connects recommendations to a specific Five Level (L1-L5) with measurable next step",
+        "Pattern detection: stuck patterns identified and flagged within 3 occurrences (tracked via nervous-system.md trajectories)",
+        "Friday calibration completed weekly with \u22653 specific observations grounded in week's artifacts",
+        "Annual review prep produces \u22655 evidence-backed accomplishments tied to org priorities",
+        "Leverage assessment: every task recommendation includes effort/leverage ratio connected to brain.md framework"
+      ],
+      "has_metrics": true,
+      "total_invocations": 0,
+      "invocations_7d": 0,
+      "invocations_30d": 0,
+      "failures": 0,
+      "success_rate": null,
+      "last_invoked": null,
+      "avg_duration_s": null
+    },
+    {
+      "name": "wiki-concierge",
+      "description": "Search and retrieval agent for the wiki. Answers questions by synthesizing across published articles in ~/shared/wiki/. Tracks demand signals and feeds gaps back to the wiki-editor. The consumption layer between readers and the wiki. Can be invoked directly without going through the editor.",
+      "team": "Wiki Team",
+      "metrics_count": 5,
+      "metrics": [
+        "Every query answered with \u22651 citation to a published wiki article or body system organ",
+        "Answer-first format: lead sentence contains the answer, citations follow (no preamble)",
+        "Demand signal logged to demand-log.md for every interaction \u2014 zero unlogged queries",
+        "Gap detection: unanswered questions flagged as wiki candidates within same session",
+        "wiki-index.md used as primary lookup \u2014 body system fallback only when wiki has no coverage"
+      ],
+      "has_metrics": true,
+      "total_invocations": 0,
+      "invocations_7d": 0,
+      "invocations_30d": 0,
+      "failures": 0,
+      "success_rate": null,
+      "last_invoked": null,
+      "avg_duration_s": null
+    },
+    {
+      "name": "wiki-critic",
+      "description": "Quality gate for the wiki team. Reviews articles for clarity, accuracy, actionability, and dual-audience optimization. Scores on 5 dimensions (Usefulness, Clarity, Accuracy, Dual-audience, Economy) with an 8/10 bar. Also runs periodic audits on published docs to detect decay and staleness. Applies Amazon narrative standard with Economy sub-rules for bullet abuse, table abuse, and formatting-as-content.",
+      "team": "Wiki Team",
+      "metrics_count": 5,
+      "metrics": [
+        "5/5 scoring dimensions evaluated per article (Usefulness, Clarity, Accuracy, Dual-audience, Economy)",
+        "Economy sub-rules enforced: bullet abuse (>30%), table abuse, formatting-as-content flagged with specific line references",
+        "PUBLISH/REVISE/REJECT verdict issued for every reviewed article \u2014 zero unscored reviews",
+        "Every REVISE verdict includes \u22653 specific edit instructions (exact text + replacement, not vague guidance)",
+        "Periodic audit: \u22651 published article audited for decay per week (staleness, broken links, outdated data)"
+      ],
+      "has_metrics": true,
+      "total_invocations": 0,
+      "invocations_7d": 0,
+      "invocations_30d": 0,
+      "failures": 0,
+      "success_rate": null,
+      "last_invoked": null,
+      "avg_duration_s": null
+    },
+    {
+      "name": "wiki-editor",
+      "description": "Editorial director for the wiki team. Orchestrates the pipeline: researcher -> writer -> critic -> librarian. Decides what gets written, in what order, and why. Owns the content roadmap, triage, gap analysis, and kill decisions. No wiki work happens without the editor's direction.",
+      "team": "Wiki Team",
+      "metrics_count": 5,
+      "metrics": [
+        "100% of pipeline stages executed in order: researcher \u2192 writer \u2192 critic \u2192 librarian (zero skipped steps)",
+        "Content roadmap reviewed and prioritized weekly \u2014 P1/P2/P3 assignments current",
+        "Kill decisions made within 14 days of no demand signal (tracked via wiki demand-log.md)",
+        "\u22651 article moved through full pipeline per week (query: wiki.throughput)",
+        "Zero orphaned assignments: every topic assigned to researcher has a due date and status"
+      ],
+      "has_metrics": true,
+      "total_invocations": 0,
+      "invocations_7d": 0,
+      "invocations_30d": 0,
+      "failures": 0,
+      "success_rate": null,
+      "last_invoked": null,
+      "avg_duration_s": null
+    },
+    {
+      "name": "wiki-librarian",
+      "description": "Information architect and publisher for the wiki team. Owns wiki structure, taxonomy, cross-references, and the machine-readable index (wiki-index.md). Publishes approved articles from staging to artifacts, maintains navigation, handles archival. Nothing goes live without the librarian.",
+      "team": "Wiki Team",
+      "metrics_count": 5,
+      "metrics": [
+        "wiki-index.md updated within same session as every publish or archive operation",
+        "SITEMAP.md reflects current wiki structure \u2014 zero orphaned or missing entries",
+        "9-step publishing workflow completed fully per article: no skipped validation steps",
+        "Cross-references validated: zero broken wikilinks in published articles (auditable via build-wiki-index.py)",
+        "SharePoint .docx published to correct Artifacts/{category}/ path for every FINAL article"
+      ],
+      "has_metrics": true,
+      "total_invocations": 0,
+      "invocations_7d": 0,
+      "invocations_30d": 0,
+      "failures": 0,
+      "success_rate": null,
+      "last_invoked": null,
+      "avg_duration_s": null
+    },
+    {
+      "name": "wiki-researcher",
+      "description": "Research agent for the wiki team. Gathers source material from body system organs, DuckDB analytics, Slack, Outlook email, internal Amazon resources, ARCC, and web sources. Produces structured research briefs for the wiki-writer. Never writes wiki pages directly.",
+      "team": "Wiki Team",
+      "metrics_count": 5,
+      "metrics": [
+        "Every research brief cites \u22653 sources with [source: type, date, confidence] format",
+        "Primary sources preferred: \u226550% of citations from body system organs or DuckDB (not web fallback)",
+        "Research brief delivered within single invocation \u2014 no back-and-forth required",
+        "Contradictions between sources explicitly flagged with confidence assessment",
+        "ABPS AI research subtask completed and brief posted as pinned comment when applicable"
+      ],
+      "has_metrics": true,
+      "total_invocations": 0,
+      "invocations_7d": 0,
+      "invocations_30d": 0,
+      "failures": 0,
+      "success_rate": null,
+      "last_invoked": null,
+      "avg_duration_s": null
+    },
+    {
+      "name": "wiki-writer",
+      "description": "Narrative agent for the wiki team. Transforms research briefs into polished wiki articles optimized for both human readers and agent consumption. Loads all 3 Richard writing style guides before producing any output. Writes to staging files or Asana html_notes. Never publishes directly.",
+      "team": "Wiki Team",
+      "metrics_count": 5,
+      "metrics": [
+        "Critic score \u22658/10 on first submission (target: >60% of articles pass without revision)",
+        "100% adherence to Amazon narrative standard: prose-driven, 18-20 word sentence average, no bullet abuse",
+        "Draft word count within target range per article type (guide: 500-1500, reference: 300-800)",
+        "All 3 style guides loaded and applied per invocation (richard-writing-style, richard-style-docs, richard-style-amazon)",
+        "< 2 revision cycles per article from draft to PUBLISH verdict (tracked via draft-log.md timestamps)"
+      ],
+      "has_metrics": true,
+      "total_invocations": 0,
+      "invocations_7d": 0,
+      "invocations_30d": 0,
+      "failures": 0,
+      "success_rate": null,
+      "last_invoked": null,
+      "avg_duration_s": null
+    }
+  ],
+  "hook_reliability": [
+    {
+      "hook_name": "am-backend-parallel-v2",
+      "total_runs": 1,
+      "avg_duration_s": 360.0,
+      "max_duration_s": 360.0,
+      "total_failures": 0,
+      "total_asana_writes": 104,
+      "last_run": "2026-04-17",
+      "days_since_last_run": 4
+    },
+    {
+      "hook_name": "eod-backend",
+      "total_runs": 1,
+      "avg_duration_s": 900.0,
+      "max_duration_s": 900.0,
+      "total_failures": 1,
+      "total_asana_writes": 7,
+      "last_run": "2026-04-17",
+      "days_since_last_run": 4
+    },
+    {
+      "hook_name": "manual-hedy-backfill",
+      "total_runs": 1,
+      "avg_duration_s": 5400.0,
+      "max_duration_s": 5400.0,
+      "total_failures": null,
+      "total_asana_writes": 0,
+      "last_run": "2026-04-11",
+      "days_since_last_run": 10
+    },
+    {
+      "hook_name": "am-backend-parallel",
+      "total_runs": 1,
+      "avg_duration_s": 720.0,
+      "max_duration_s": 720.0,
+      "total_failures": 1,
+      "total_asana_writes": 0,
+      "last_run": "2026-04-08",
+      "days_since_last_run": 13
+    },
+    {
+      "hook_name": "eod-refresh",
+      "total_runs": 1,
+      "avg_duration_s": 60.0,
+      "max_duration_s": 60.0,
+      "total_failures": 0,
+      "total_asana_writes": 0,
+      "last_run": "2026-04-07",
+      "days_since_last_run": 14
+    },
+    {
+      "hook_name": "eod-meeting-sync",
+      "total_runs": 1,
+      "avg_duration_s": 103.1,
+      "max_duration_s": 103.14,
+      "total_failures": 1,
+      "total_asana_writes": 5,
+      "last_run": "2026-04-07",
+      "days_since_last_run": 14
+    },
+    {
+      "hook_name": "am-backend",
+      "total_runs": 1,
+      "avg_duration_s": 1140.0,
+      "max_duration_s": 1140.0,
+      "total_failures": null,
+      "total_asana_writes": 0,
+      "last_run": "2026-04-06",
+      "days_since_last_run": 15
+    },
+    {
+      "hook_name": "am-auto-phase1",
+      "total_runs": 1,
+      "avg_duration_s": 300.0,
+      "max_duration_s": 300.0,
+      "total_failures": null,
+      "total_asana_writes": 0,
+      "last_run": "2026-04-06",
+      "days_since_last_run": 15
+    }
+  ],
+  "workflow_reliability": [
+    {
+      "workflow_name": "am-backend-parallel-v2",
+      "total_runs": 2,
+      "successes": 0,
+      "success_rate": 0.0,
+      "avg_duration_s": 20884.8,
+      "last_run": "2026-04-21 13:30:50",
+      "days_since_last_run": 0
+    },
+    {
+      "workflow_name": "state-file-WW-Testing",
+      "total_runs": 1,
+      "successes": 1,
+      "success_rate": 100.0,
+      "avg_duration_s": 420.0,
+      "last_run": "2026-04-20 16:12:34",
+      "days_since_last_run": 1
+    },
+    {
+      "workflow_name": "state-file-MX",
+      "total_runs": 1,
+      "successes": 1,
+      "success_rate": 100.0,
+      "avg_duration_s": 360.0,
+      "last_run": "2026-04-20 16:10:34",
+      "days_since_last_run": 1
+    },
+    {
+      "workflow_name": "state-file-AU",
+      "total_runs": 1,
+      "successes": 1,
+      "success_rate": 100.0,
+      "avg_duration_s": 480.0,
+      "last_run": "2026-04-20 16:08:34",
+      "days_since_last_run": 1
+    },
+    {
+      "workflow_name": "eod_organ_cascade",
+      "total_runs": 1,
+      "successes": 0,
+      "success_rate": 0.0,
+      "avg_duration_s": 600.0,
+      "last_run": "2026-04-17 03:07:04",
+      "days_since_last_run": 4
+    },
+    {
+      "workflow_name": "sharepoint_durability_sync_am",
+      "total_runs": 1,
+      "successes": 0,
+      "success_rate": 0.0,
+      "avg_duration_s": null,
+      "last_run": "2026-04-16 15:02:25",
+      "days_since_last_run": 5
+    },
+    {
+      "workflow_name": "am_backend_parallel",
+      "total_runs": 2,
+      "successes": 0,
+      "success_rate": 0.0,
+      "avg_duration_s": 472.5,
+      "last_run": "2026-04-16 14:40:39",
+      "days_since_last_run": 5
+    },
+    {
+      "workflow_name": "signal_to_task",
+      "total_runs": 1,
+      "successes": 0,
+      "success_rate": 0.0,
+      "avg_duration_s": 5.0,
+      "last_run": "2026-04-16 14:40:39",
+      "days_since_last_run": 5
+    },
+    {
+      "workflow_name": "am-backend-parallel",
+      "total_runs": 1,
+      "successes": 0,
+      "success_rate": 0.0,
+      "avg_duration_s": 900.0,
+      "last_run": "2026-04-15 13:45:00",
+      "days_since_last_run": 6
+    }
+  ]
 }

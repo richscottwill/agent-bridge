@@ -1,53 +1,53 @@
 {
-  "generated": "2026-04-20",
-  "date": "2026-04-20",
+  "generated": "2026-04-21",
+  "date": "2026-04-21",
   "timezone": "America/Los_Angeles",
   "status": "complete",
   "compression_audit": {
-    "total_words": 26734,
-    "organ_count": 14,
-    "largest_organs": [
-      {"organ": "heart", "words": 4085},
-      {"organ": "amcc", "words": 3413},
-      {"organ": "amazon-politics", "words": 2677},
-      {"organ": "roster", "words": 2413},
-      {"organ": "device", "words": 2094}
-    ],
-    "note": "Total 26,734w across 14 organs (excluding changelog 4,681w). Compared to 2026-04-17 baseline of 28,792w — net -2,058w (no organ changes today; difference likely due to prior run counting changelog.md + slight methodology drift). No compression signal triggers fire — all organs within budget.",
-    "logged_to_duckdb": "main.autoresearch_organ_health (run_id=eod-2026-04-20)"
+    "status": "skipped_no_organ_changes",
+    "note": "No organs modified today. Compression audit defers until organ content changes. Last baseline was 2026-04-20 at 26,734w across 14 organs."
   },
   "workflow_observability": {
-    "executions_24h": 0,
-    "success_rate_24h": null,
-    "degraded_workflows": [],
-    "note": "main.workflow_executions table is empty — hooks are not logging executions to DuckDB. This is an observability gap. Likely the hooks/protocols write to JSON files but the insert step was skipped or disconnected. Flag for karpathy/ops review — we have no 24h reliability signal."
+    "executions_24h_prior": 0,
+    "executions_this_run": 1,
+    "note": "ops.hook_executions now has 1 new row for eod-backend 2026-04-21. Still an observability gap for other hooks — AM-1/AM-2/AM-3 logging remains disconnected. Flag for ops review. Today's AM was described as 'AM-Backend full parallel v2 run — all phases' per current.md header but no hook_executions row exists from AM. This confirms hooks still write to JSON but skip DuckDB insert."
   },
   "communication_analytics": {
     "status": "skipped",
-    "reason": "Monday — communication analytics runs Friday only per protocol"
+    "reason": "Tuesday — communication analytics runs Friday only per protocol"
   },
   "context_enrichment": {
     "status": "skipped",
-    "reason": "Non-blocking. Low-activity day, no new projects surfaced. Deferred to next full run."
+    "reason": "Non-blocking. Defer to Friday full run. Today's activity is meeting-heavy and scoped inward — no new external projects surfaced requiring KDS/ARCC query."
   },
   "organ_cascade": {
     "status": "light",
     "organs_updated": [],
     "intake_processed": 0,
-    "note": "No net-new intake requiring organ updates today. Existing intake/*.md files are morning brief outputs (asana-activity, asana-digest, email-triage, hedy-digest), not unprocessed raw material. No Hedy sessions, no meetings — no memory.md or nervous-system.md updates triggered. current.md remains current (updated this AM)."
+    "note": "No net-new intake. meetings/ series files for team-sync / MX-sync / Brandon-1on1 not updated inline (deferred - hedy data is in DuckDB which is the canonical source per data routing table in soul.md). memory.md relationship graph stale but no major stakeholder interaction changes today. current.md will be refreshed at end of run to reflect today's meetings + tomorrow's priorities."
   },
   "observability_flags": [
     {
       "severity": "medium",
       "area": "duckdb",
-      "issue": "main.workflow_executions has 0 rows; asana.asana_tasks last synced 2026-04-10 (10d stale); 100 rows only",
-      "recommendation": "Hooks that claim to INSERT into workflow_executions aren't actually writing. Morning delta sync for Asana hasn't been running. Likely a disconnection between protocol documentation and actual executor code."
+      "issue": "ops.hook_executions only has EOD backend rows. AM-1/AM-2/AM-3 hooks still not logging. Workflow reliability view can't compute.",
+      "recommendation": "Add INSERT INTO ops.hook_executions at end of each AM protocol."
     },
     {
-      "severity": "low",
-      "area": "duckdb",
-      "issue": "ops.data_freshness only tracks calendar_events + emails (last checked 2026-04-10)",
-      "recommendation": "Expand ops.data_freshness to cover asana_tasks, slack_messages, hedy sessions, wiki pipeline."
+      "severity": "medium",
+      "area": "asana_sync",
+      "issue": "DuckDB asana.asana_tasks synced 13:45 PT today — 5 hours before EOD. Today's 7 completions+ today's 4 new tasks not yet reflected in DuckDB. EOD used live Asana MCP for truth.",
+      "recommendation": "EOD should trigger an end-of-day delta sync BEFORE reconciliation to close the loop."
+    },
+    {
+      "severity": "high",
+      "area": "l1_streak",
+      "issue": "23 consecutive workdays at zero L1 output. This is not a data issue — it's a behavioral signal that the Testing Approach send has become structurally stuck.",
+      "recommendation": "Restructure 'send Testing Approach' as an atomic 5-min task decoupled from any Testing Approach work block. See Karpathy experiment queue."
     }
-  ]
+  ],
+  "market_summary": {
+    "note": "Team sync today covered W16 performance. Key points: US brand CVR up 4.2% (outlier?), US NB CPA up 10% driven by low Monday 4/13 spend (±half-day). UK+Germany same dip. Italy trending ~10% below OP2 due to high CPCs + Polaris NB CVR drop. France will hit OP2. MX brand performing exceptionally due to Sparkle onsite placement — IECCP ~200% of OP2 on non-brand.",
+    "mx_decision_pending": "IECCP target for year: 70% vs 75%. Lorena + Richard agreed to wait on Richard confirming with Brandon tomorrow."
+  }
 }

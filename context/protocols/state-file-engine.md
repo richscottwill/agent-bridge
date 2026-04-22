@@ -154,8 +154,13 @@ Each section of a state file has exactly one owning hook. The contract is machin
 | Lessons Learned | AM-Backend Step 2E | — |
 | Strategic Priorities / Blocked Items / Stakeholder Actions | EOD-Refresh Step 9 | — |
 | Appendices | AM-Backend Step 2E | — |
+| Loop Reporting Queue (WW Testing only) | AM-Backend Step 2E | `<!-- AM-OWNED:loop-reporting-queue -->` |
+| Active Test Dossier — Appendix I (WW Testing only) | AM-Backend Step 2E | `<!-- AM-OWNED:active-test-dossier -->` |
+| Staleness Report — Appendix J (WW Testing only) | AM-Backend Step 2E | `<!-- AM-OWNED:staleness-report -->` |
 
 **Rule for all hooks:** Before writing, read the current file and extract content inside every marker block that does not belong to you. Re-insert those blocks verbatim in your output. If a required marker is missing, log the gap and skip that market — do not fabricate markers.
+
+**WW Testing per-test ingestion exception:** The Loop Reporting Queue, Appendix I, and Appendix J rebuild every AM-Backend run regardless of `ps.metrics` freshness. Their inputs (Asana, Slack, email, Hedy, Quip modification timestamps) change daily even when weekly metrics do not. See `state-file-ww-testing.md` → Ingestion Rules → Rule 5. This overrides the general "skip market if ps.metrics stale" rule for these three sections only; the State of Business narrative and metric tables continue to follow the skip rule.
 
 ## Conversion Pipeline
 

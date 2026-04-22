@@ -265,6 +265,127 @@ def parse_amcc_for_challenge():
     return {"streak": streak, "hard_thing": hard_thing}
 
 
+def get_agent_health():
+    """Read agent definition JSON files and extract success metrics for the dashboard.
+    
+    Scans .kiro/agents/ for custom agent definitions (excludes platform defaults
+    like AIPowerUserCapabilities-*, AgentSpacesAIM-*, AmazonBuilderCoreAIAgents-*,
+    AtlasAICapabilities-*, local-arcc-*). Returns a list of agent summaries with
+    name, description, team grouping, and success metrics.
+    
+    Merges runtime telemetry from ops.agent_reliability (invocation counts,
+    last-invoked, success rate) when available. Per the System Health Dashboard
+    follow-on spec — the ops.agent_invocations table exists but the logging shim
+    that populates it is scoped in that spec.
+    """
+    agents_dir = HOME / ".kiro/agents"
+    if not agents_dir.exists():
+        return []
+
+    # Platform-default prefixes to skip
+    skip_prefixes = (
+        "AIPowerUserCapabilities-", "AgentSpacesAIM-",
+        "AmazonBuilderCoreAIAgents-", "AtlasAICapabilities-",
+        "local-arcc-", "eval-", "agentspaces-",
+    )
+    # Utility agents that don't need health tracking
+    skip_names = {"title-generator", "agent_config.json.example"}
+
+    # Team groupings based on agent name
+    team_map = {
+        "market-analyst": "WBR Callouts",
+        "callout-writer": "WBR Callouts",
+        "callout-reviewer": "WBR Callouts",
+        "wiki-editor": "Wiki Team",
+        "wiki-writer": "Wiki Team",
+        "wiki-researcher": "Wiki Team",
+        "wiki-critic": "Wiki Team",
+        "wiki-librarian": "Wiki Team",
+        "wiki-concierge": "Wiki Team",
+        "karpathy": "Body System",
+        "rw-trainer": "Body System",
+        "eyes-chart": "Body System",
+        "agent-bridge-sync": "Body System",
+    }
+
+    # Pull runtime telemetry if the reliability view has data
+    runtime_rows = query_duckdb("""
+        SELECT agent_name, total_invocations, successes, failures,
+               success_rate, avg_duration_s,
+               last_invoked::VARCHAR as last_invoked,
+               invocations_7d, invocations_30d, total_token_cost
+        FROM ops.agent_reliability
+    """) or []
+    runtime_by_agent = {r["agent_name"]: r for r in runtime_rows}
+
+    agents = []
+    for f in sorted(agents_dir.glob("*.json")):
+        name = f.stem
+        if any(name.startswith(p) for p in skip_prefixes):
+            continue
+        if name in skip_names:
+            continue
+        try:
+            data = json.loads(f.read_text())
+        except Exception:
+            continue
+        metrics = data.get("successMetrics", [])
+        agent_name = data.get("name", name)
+        rt = runtime_by_agent.get(agent_name, {})
+        agents.append({
+            "name": agent_name,
+            "description": data.get("description", ""),
+            "team": team_map.get(agent_name, "Other"),
+            "metrics_count": len(metrics),
+            "metrics": metrics,
+            "has_metrics": len(metrics) > 0,
+            # Runtime telemetry (empty/zero when ops.agent_invocations not yet populated)
+            "total_invocations": rt.get("total_invocations", 0) or 0,
+            "invocations_7d": rt.get("invocations_7d", 0) or 0,
+            "invocations_30d": rt.get("invocations_30d", 0) or 0,
+            "failures": rt.get("failures", 0) or 0,
+            "success_rate": rt.get("success_rate"),
+            "last_invoked": rt.get("last_invoked"),
+            "avg_duration_s": rt.get("avg_duration_s"),
+        })
+    return agents
+
+
+def get_hook_reliability():
+    """Fetch recent hook reliability stats for the System Health section.
+    
+    Reads from the existing ops.hook_reliability view (no new logging required).
+    Flags hooks with recent failures or long-stale last-run for visibility.
+    """
+    rows = query_duckdb("""
+        SELECT hook_name, total_runs, avg_duration_s, max_duration_s,
+               total_failures, total_asana_writes,
+               last_run::VARCHAR as last_run,
+               DATE_DIFF('day', last_run::DATE, CURRENT_DATE) as days_since_last_run
+        FROM ops.hook_reliability
+        ORDER BY last_run DESC NULLS LAST
+        LIMIT 20
+    """) or []
+    return rows
+
+
+def get_workflow_reliability():
+    """Fetch recent workflow reliability stats (multi-step agent workflows like am-backend-parallel-v2).
+    
+    Reads from ops.workflow_reliability view. Surfaces success rate + last run.
+    """
+    rows = query_duckdb("""
+        SELECT workflow_name, total_runs, successes, success_rate,
+               avg_duration_s,
+               last_run::VARCHAR as last_run,
+               DATE_DIFF('day', last_run::DATE, CURRENT_DATE) as days_since_last_run
+        FROM ops.workflow_reliability
+        ORDER BY last_run DESC NULLS LAST
+        LIMIT 15
+    """) or []
+    return rows
+
+
 def main():
     print("=" * 50)
     print("Body System Data Refresh")
@@ -437,8 +558,20 @@ def main():
         weekly_output = cache.get("weekly_output", [])
     print(f"  {len(weekly_output)} weeks of completion data")
 
+    # ── Agent health ──
+    print("\n[7/8] Reading agent success metrics + runtime telemetry...")
+    agent_health = get_agent_health()
+    agents_with_metrics = sum(1 for a in agent_health if a["has_metrics"])
+    agents_invoked_7d = sum(1 for a in agent_health if a.get("invocations_7d", 0) > 0)
+    print(f"  {len(agent_health)} custom agents, {agents_with_metrics} with success metrics, {agents_invoked_7d} invoked in last 7d")
+
+    print("\n[7b/8] Reading hook + workflow reliability...")
+    hook_reliability = get_hook_reliability()
+    workflow_reliability = get_workflow_reliability()
+    print(f"  {len(hook_reliability)} hooks tracked, {len(workflow_reliability)} workflows tracked")
+
     # ── Assemble ──
-    print("\n[7/7] Assembling JSON...")
+    print("\n[8/8] Assembling JSON...")
     output = {
         "generated": datetime.now(tz=timezone.utc).isoformat(),
         # Overview page
@@ -498,6 +631,19 @@ def main():
             {k: (v.isoformat() if isinstance(v, (date, datetime)) else v)
              for k, v in row.items()}
             for row in weekly_output
+        ],
+        # Agent health
+        "agent_health": agent_health,
+        # System health (hooks + workflows)
+        "hook_reliability": [
+            {k: (v.isoformat() if isinstance(v, (date, datetime)) else v)
+             for k, v in row.items()}
+            for row in hook_reliability
+        ],
+        "workflow_reliability": [
+            {k: (v.isoformat() if isinstance(v, (date, datetime)) else v)
+             for k, v in row.items()}
+            for row in workflow_reliability
         ],
     }
 

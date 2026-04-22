@@ -1,42 +1,40 @@
 {
-  "generated": "2026-04-20",
-  "date": "2026-04-20",
+  "generated": "2026-04-21",
+  "date": "2026-04-21",
   "timezone": "America/Los_Angeles",
   "status": "skipped",
-  "reason": "Karpathy loop requires spawning CLI subagents for blind A/B/C eval (kiro-cli chat --agent eval-a/b/c). A full batch = ~10 experiments × 3 subagent calls each, with real inference time. In a manual interactive EOD run (not a scheduled overnight hook), running 30+ subagent calls serially is inappropriate. Protocol specifies 'First-experiment verification mandatory' before running unattended batches — we have no human here to verify. Deferring to next automated EOD hook run.",
+  "reason": "Karpathy loop requires spawning CLI subagents for blind A/B/C eval. In a manual interactive EOD run (not a scheduled overnight hook), running 30+ subagent calls serially is inappropriate. Protocol specifies 'First-experiment verification mandatory' before running unattended batches. Deferring to next automated EOD hook run (same policy as 4/20).",
   "experiments_run": 0,
-  "current_experiment_count": 171,
-  "batches_attempted": 0,
   "last_experiment_run": "2026-04-15 (run46, 10 experiments, 9 KEEP / 1 REVERT)",
   "suggestions": [
     {
-      "name": "Restructure the rw-tracker.md daily tracker section to lead with 'hard thing status'",
-      "rationale": "Structural over cosmetic (soul principle). The hard thing should be the first thing Richard sees daily, not buried in scorecard. L1 streak at 22 workdays zero is a structural failure — the routine isn't surfacing the right cue.",
-      "five_levels": "L1 (meta — the system that tracks L1 output)",
+      "name": "Decouple 'send Testing Approach v5' as atomic 5-min Sweep task",
+      "rationale": "23 consecutive workdays at zero L1. v5 has PUBLISH verdict. The bottleneck is SEND, not WRITE. Creating a standalone 5-min task tagged 'just hit send — no edits, no re-reads, no additions' removes the mental overhead of 'working on the doc'. Scheduled for tomorrow AM first-thing before Core block.",
+      "five_levels": "L1 (direct intervention)",
       "reversible": true,
-      "expected_impact": "If cue is more prominent, completion probability should rise. Measure: days to next L1 artifact ship."
+      "expected_impact": "One-shot completion. If it still doesn't ship, the real blocker isn't friction — it's fear, perfectionism, or belief the doc isn't ready for Brandon's eyes. Either way we learn."
     },
     {
-      "name": "Decouple 'send Testing Approach v5' as an atomic 5-min task from any Testing Approach work block",
-      "rationale": "The v5 doc has PUBLISH verdict (8.4/10). It's been not-sent for 22 workdays despite being the hard thing. The bottleneck is SEND, not WRITE. Schedule a standalone 5-min 'send Brandon the file' task that doesn't require any additional work.",
-      "five_levels": "L1 (direct)",
+      "name": "Add 'Brandon 1:1 agenda pre-load' 15-min prep block the day before",
+      "rationale": "2 of last 2 Brandon 1:1s have been truncated or not happened: 4/14 proper (cancelled then happened), 4/21 TRUNCATED to 4min by laptop. Without pre-loaded agenda, when the meeting degrades Richard has no fallback. A Monday-night prep block that writes the 1-line agenda to Loop doc means even a 4-min meeting hits the most important item.",
+      "five_levels": "L1 (directly serves send-the-doc cue) + L2 (manager relationship)",
       "reversible": true,
-      "expected_impact": "One-shot completion. Either it ships tomorrow or we learn the real blocker isn't friction (it's something else — fear, perfectionism, belief the doc isn't ready)."
+      "expected_impact": "Testing Approach send embedded in Brandon 1:1 agenda means the convo opens with it — no time for it to get bumped."
     },
     {
-      "name": "Add 'delegation escalation threshold' to device.md — after 21 days blocked, auto-create workaround task",
-      "rationale": "Vijeth footer (32d) and Andes data (35d) both failed and stalled. The system noticed the block but never escalated. Structural intervention: 21-day threshold triggers creation of a new Asana task in the responsible person's escalation chain (their manager, or a workaround owner).",
-      "five_levels": "L3 (team automation)",
+      "name": "EOD should force Asana delta sync before reconciliation",
+      "rationale": "Today's observability gap: 7 completions happened at 17:16-17:31 PT yesterday (4/20) but weren't captured in 4/20 EOD because the Asana sync ran earlier. EOD runs reconciliation against stale DuckDB + live Asana — the gap means tracker history has drift.",
+      "five_levels": "L3 (team automation — even if it's just for Richard's own system)",
       "reversible": true,
-      "expected_impact": "Currently 2 tasks stalled > 30 days silently. After change, 0 tasks stalled > 21 days silently."
+      "expected_impact": "Reconciliation truth matches Asana truth at the moment of EOD. Daily tracker history becomes trustworthy."
     }
   ],
   "underexplored_priors_top": [
-    "hands × (COMPRESS, ADD, RESTRUCTURE, REMOVE, REWORD, MERGE, SPLIT) — hands.md has zero experiments. Natural next target.",
+    "hands × all compression types — hands.md has zero experiments",
     "eyes × (REMOVE, MERGE) — underexplored",
-    "amcc × (RESTRUCTURE, MERGE) — underexplored"
+    "amcc × RESTRUCTURE — underexplored, especially streak-tracking section"
   ],
   "karpathy_cli_available": true,
   "kiro_cli_path": "/agentspaces/kiro-cli/kiro-cli",
-  "next_action": "Next scheduled EOD hook run (automated) should execute karpathy-loop.sh with max_batches=2 (20 experiments) as a verification run. If that succeeds, raise to full cadence."
+  "next_action": "Next scheduled EOD hook run (automated) should execute karpathy-loop.sh with max_batches=2. If that succeeds, raise to full cadence. If it still fails unattended, investigate why — possibly CLI subagent connectivity issue post container-rebuild."
 }

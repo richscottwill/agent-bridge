@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Flow - Kiro Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#eaeaea;padding:16px 20px;min-height:100vh}
+h1{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px}
+.sub{font-size:13px;color:#888;margin-bottom:16px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:12px;font-size:12px;color:#888}
+.legend-dot{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.chart-wrap{background:#14161e;border:1px solid #1e2028;border-radius:6px;padding:16px;height:calc(100vh - 200px);min-height:500px;position:relative}
+#flow{width:100%;height:100%}
+
+.tooltip{position:absolute;background:#0f1117;border:1px solid #3b82f6;border-radius:4px;padding:6px 10px;font-size:12px;color:#eaeaea;pointer-events:none;opacity:0;transition:opacity .15s;z-index:10;max-width:280px;line-height:1.4}
+.tooltip.show{opacity:1}
+.tooltip-title{font-weight:600;color:#93b4f5;margin-bottom:3px}
+.tooltip-val{color:#9ca3af;font-size:11px}
+
+.caption{margin-top:14px;padding:12px 14px;background:#14161e;border:1px solid #1e2028;border-radius:6px;font-size:13px;line-height:1.6;color:#9aa3b0}
+.caption strong{color:#d4d4d4}
+</style>
+</head>
+<body>
+
+<h1>System Flow</h1>
+<div class="sub" id="sub">Where every piece of dashboard content comes from — sources on the left, processing agents in the middle, consumption surfaces on the right. Width of each flow = daily volume.</div>
+
+<div class="legend">
+  <span><span class="legend-dot" style="background:#6b8acd"></span>Sources</span>
+  <span><span class="legend-dot" style="background:#e0c080"></span>Processing Agents</span>
+  <span><span class="legend-dot" style="background:#4ade80"></span>Output Surfaces</span>
+</div>
+
+<div class="chart-wrap"><canvas id="flow"></canvas><div class="tooltip" id="tip"></div></div>
+
+<div class="caption" id="caption">
+  <strong>The orchestrator pattern.</strong> Seven sources flow into four processing agents, which produce content for five consumption surfaces. Humans (Richard + team) supply direction and review; agents supply throughput. Every flow line = a measurable daily volume.
+</div>
+
+<script src="./shared/provenance.js"></script>
+
+<script>
+/* Lightweight Sankey renderer — native canvas, no D3 dependency.
+ * Good enough for a static diagram; prioritizes legibility over interactivity. */
+
+const DATA = {
+  nodes: [
+    // Sources (column 0)
+    { id: 'slack',    label: 'Slack',          col: 0, tint: '#6b8acd', detail: '17 channels ingested daily' },
+    { id: 'asana',    label: 'Asana',          col: 0, tint: '#6b8acd', detail: '96+ tasks, 5 portfolio projects' },
+    { id: 'email',    label: 'Email',          col: 0, tint: '#6b8acd', detail: 'Outlook inbox triage' },
+    { id: 'hedy',     label: 'Hedy meetings',  col: 0, tint: '#6b8acd', detail: '11 recurring series transcribed' },
+    { id: 'loop',     label: 'Loop docs',      col: 0, tint: '#6b8acd', detail: 'Manager 1:1 + strategy docs' },
+    { id: 'calendar', label: 'Calendar',       col: 0, tint: '#6b8acd', detail: 'Upcoming meetings + blocks' },
+    { id: 'duckdb',   label: 'MotherDuck',     col: 0, tint: '#6b8acd', detail: '55 tables, 8 schemas, PS performance data' },
+
+    // Processing (column 1)
+    { id: 'am',       label: 'AM Backend',     col: 1, tint: '#e0c080', detail: '6 parallel subagents' },
+    { id: 'eod',      label: 'EOD Backend',    col: 1, tint: '#e0c080', detail: 'Asana reconcile + organ cascade' },
+    { id: 'wbr',      label: 'WBR Pipeline',   col: 1, tint: '#e0c080', detail: '3-agent callout: analyst → writer → reviewer' },
+    { id: 'wiki',     label: 'Wiki Team',      col: 1, tint: '#e0c080', detail: '6 agents: editor → researcher → writer → critic → librarian + concierge' },
+
+    // Surfaces (column 2)
+    { id: 'dash',     label: 'Dashboard',      col: 2, tint: '#4ade80', detail: 'This view, updated continuously' },
+    { id: 'slackout', label: 'Slack (posts)',  col: 2, tint: '#4ade80', detail: 'Daily brief + WBR updates' },
+    { id: 'asanaout', label: 'Asana (writes)', col: 2, tint: '#4ade80', detail: 'Task enrichment + Next-action fields' },
+    { id: 'sp',       label: 'SharePoint',     col: 2, tint: '#4ade80', detail: 'Published wiki articles + forecasts' },
+    { id: 'quip',     label: 'Quip',           col: 2, tint: '#4ade80', detail: 'Pre-WBR callouts Quip doc' },
+  ],
+  links: [
+    // Source → Processing
+    { from: 'slack',    to: 'am',   weight: 40 },
+    { from: 'asana',    to: 'am',   weight: 30 },
+    { from: 'email',    to: 'am',   weight: 20 },
+    { from: 'hedy',     to: 'am',   weight: 10 },
+    { from: 'hedy',     to: 'eod',  weight: 15 },
+    { from: 'loop',     to: 'am',   weight: 8 },
+    { from: 'calendar', to: 'am',   weight: 6 },
+    { from: 'asana',    to: 'eod',  weight: 25 },
+    { from: 'slack',    to: 'eod',  weight: 8 },
+    { from: 'duckdb',   to: 'wbr',  weight: 40 },
+    { from: 'duckdb',   to: 'eod',  weight: 15 },
+    { from: 'slack',    to: 'wiki', weight: 10 },
+    { from: 'email',    to: 'wiki', weight: 4 },
+    { from: 'hedy',     to: 'wiki', weight: 6 },
+
+    // Processing → Surface
+    { from: 'am',   to: 'dash',     weight: 30 },
+    { from: 'am',   to: 'slackout', weight: 20 },
+    { from: 'am',   to: 'asanaout', weight: 35 },
+    { from: 'eod',  to: 'dash',     weight: 25 },
+    { from: 'eod',  to: 'asanaout', weight: 30 },
+    { from: 'eod',  to: 'sp',       weight: 8 },
+    { from: 'wbr',  to: 'dash',     weight: 15 },
+    { from: 'wbr',  to: 'quip',     weight: 20 },
+    { from: 'wbr',  to: 'sp',       weight: 15 },
+    { from: 'wiki', to: 'sp',       weight: 15 },
+    { from: 'wiki', to: 'dash',     weight: 5 },
+  ],
+};
+
+function render() {
+  const canvas = document.getElementById('flow');
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.clientWidth, H = canvas.clientHeight;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, W, H);
+
+  const PAD = { top: 20, bot: 20, left: 10, right: 10 };
+  const COL_W = 140;
+  const colX = [PAD.left, (W - COL_W) / 2, W - COL_W - PAD.right];
+
+  // Compute node heights proportional to their total flow
+  const nodesByCol = [[], [], []];
+  DATA.nodes.forEach(n => nodesByCol[n.col].push(n));
+
+  // Total outgoing (or incoming) weight per node
+  DATA.nodes.forEach(n => {
+    const out = DATA.links.filter(l => l.from === n.id).reduce((s, l) => s + l.weight, 0);
+    const inw = DATA.links.filter(l => l.to === n.id).reduce((s, l) => s + l.weight, 0);
+    n.weight = Math.max(out, inw);
+  });
+
+  // Layout each column
+  const usableH = H - PAD.top - PAD.bot;
+  nodesByCol.forEach((col, colIdx) => {
+    const gap = 12;
+    const totalW = col.reduce((s, n) => s + n.weight, 0);
+    const totalGaps = gap * (col.length - 1);
+    const scale = (usableH - totalGaps) / totalW;
+    let y = PAD.top;
+    col.forEach(n => {
+      n.h = Math.max(20, n.weight * scale);
+      n.x = colX[colIdx];
+      n.y = y;
+      n.w = COL_W;
+      y += n.h + gap;
+    });
+  });
+
+  // Allocate flow-source-port positions per node
+  DATA.nodes.forEach(n => {
+    const outs = DATA.links.filter(l => l.from === n.id);
+    const ins = DATA.links.filter(l => l.to === n.id);
+    let yo = n.y;
+    outs.forEach(l => {
+      const ratio = l.weight / (n.weight || 1);
+      l._fromY = yo;
+      l._fromH = Math.max(1.5, n.h * ratio);
+      yo += l._fromH;
+    });
+    let yi = n.y;
+    ins.forEach(l => {
+      const ratio = l.weight / (n.weight || 1);
+      l._toY = yi;
+      l._toH = Math.max(1.5, n.h * ratio);
+      yi += l._toH;
+    });
+  });
+
+  // Draw links first (so nodes render on top)
+  DATA.links.forEach(l => {
+    const from = DATA.nodes.find(n => n.id === l.from);
+    const to = DATA.nodes.find(n => n.id === l.to);
+    drawLink(ctx, from.x + from.w, l._fromY, l._fromH, to.x, l._toY, l._toH);
+  });
+
+  // Nodes
+  DATA.nodes.forEach(n => drawNode(ctx, n));
+
+  // Save nodes for hover
+  canvas._nodes = DATA.nodes;
+}
+
+function drawNode(ctx, n) {
+  ctx.fillStyle = n.tint + 'CC';
+  ctx.fillRect(n.x, n.y, n.w, n.h);
+  ctx.fillStyle = '#0f1117';
+  ctx.fillRect(n.x + 2, n.y + 2, n.w - 4, n.h - 4);
+  ctx.fillStyle = '#d4d4d4';
+  ctx.font = '600 13px -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  // If node is tall enough, also show weight
+  if (n.h > 28) {
+    ctx.fillText(n.label, n.x + n.w / 2, n.y + n.h / 2 - 7);
+    ctx.fillStyle = '#666';
+    ctx.font = '11px -apple-system, sans-serif';
+    ctx.fillText(n.weight + '/day', n.x + n.w / 2, n.y + n.h / 2 + 8);
+  } else {
+    ctx.fillText(n.label, n.x + n.w / 2, n.y + n.h / 2);
+  }
+}
+
+function drawLink(ctx, x1, y1, h1, x2, y2, h2) {
+  const mid = (x1 + x2) / 2;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.bezierCurveTo(mid, y1, mid, y2, x2, y2);
+  ctx.lineTo(x2, y2 + h2);
+  ctx.bezierCurveTo(mid, y2 + h2, mid, y1 + h1, x1, y1 + h1);
+  ctx.closePath();
+  // Gradient from source tint to target tint
+  const grad = ctx.createLinearGradient(x1, 0, x2, 0);
+  grad.addColorStop(0, 'rgba(107,138,205,0.15)');
+  grad.addColorStop(1, 'rgba(74,222,128,0.15)');
+  ctx.fillStyle = grad;
+  ctx.fill();
+}
+
+function initTooltip() {
+  const canvas = document.getElementById('flow');
+  const tip = document.getElementById('tip');
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    const hit = (canvas._nodes || []).find(n => mx >= n.x && mx <= n.x + n.w && my >= n.y && my <= n.y + n.h);
+    if (hit) {
+      tip.innerHTML = `<div class="tooltip-title">${hit.label}</div><div>${hit.detail}</div><div class="tooltip-val">~${hit.weight} items/day</div>`;
+      tip.style.left = (e.clientX - rect.left + 12) + 'px';
+      tip.style.top = (e.clientY - rect.top + 12) + 'px';
+      tip.classList.add('show');
+    } else {
+      tip.classList.remove('show');
+    }
+  });
+  canvas.addEventListener('mouseleave', () => tip.classList.remove('show'));
+}
+
+window.addEventListener('load', () => { render(); initTooltip(); });
+window.addEventListener('resize', () => render());
+</script>
+
+</body>
+</html>

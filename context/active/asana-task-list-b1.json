@@ -1,114 +1,29 @@
 {
-  "schema_version": "1.1",
-  "generated_at": "2026-04-20T14:25:00Z",
-  "generated_at_pt": "2026-04-20 07:25 PT",
-  "generated_by": "am-backend B1 (orchestrator)",
-  "scan_scope": {
-    "assignee_gid": "1212732742544167",
-    "assignee_name": "Richard Williams",
-    "projects_pulled": 6,
-    "projects": [
-      {"gid": "1212775592612917", "name": "MX", "tasks_incomplete_richard": 8},
-      {"gid": "1206011235630048", "name": "WW Acquisition", "tasks_incomplete_richard": 0, "notes": "mostly archive"},
-      {"gid": "1212762061512767", "name": "AU", "tasks_incomplete_richard": 11},
-      {"gid": "1205997667578886", "name": "Paid App", "tasks_incomplete_richard": 7},
-      {"gid": "1205997667578893", "name": "WW Testing", "tasks_incomplete_richard": 13},
-      {"gid": "1212732838073807", "name": "My Tasks", "tasks_incomplete_richard": 97, "notes": "primary task inbox, partial opt_fields pulled"}
-    ],
-    "projects_not_pulled": [
-      {"gid": "1213917352480610", "name": "ABPS AI - Content", "reason": "deprecated 2026-04-17 per soul.md, 0 incomplete tasks expected"}
-    ]
-  },
-  "known_limitations": {
-    "custom_fields_parsing": "My Tasks pull used slimmed opt_fields (no custom_fields) due to SSE timeout on fuller pull. Bucket/Priority/Kiro_RW enrichment state for My Tasks-only tasks is stale from last snapshot. 5 other projects have full custom_fields.",
-    "duckdb_sync": "DEFERRED this cycle — raw data ready but UPSERT not executed. Next run or targeted rerun to sync.",
-    "duckdb_last_sync": "2026-04-17 12:48 UTC (per ops.data_freshness.asana_tasks)"
-  },
-  "priority_buckets_from_pull": {
-    "due_today_2026_04_20": [
-      {"gid": "1214057202961389", "name": "Weekly Reporting - Global WBR sheet", "project": "WW Testing/MX/AU", "priority_rw": "Today", "routine": "Engine Room", "kiro_note": "PRIORITY #1 today. Pull W14 data from dashboards. ALWAYS takes weekly priority."},
-      {"gid": "1214131122088126", "name": "Reply to Dwayne: Brand LP consolidated feedback — open questions", "project": "WW Testing", "section": "WW Doc Inputs", "priority_rw": "Today", "kiro_note": "Dwayne Monday deadline. 7 open questions + 2 UX intakes to answer."},
-      {"gid": "1214128635826241", "name": "Reply to Dwayne: Brand LP consolidated feedback — open questions", "project": "WW Testing", "section": "WW Doc Inputs", "duplicate_of": "1214131122088126"},
-      {"gid": "1214123519100287", "name": "Reply to Dwayne: Brand LP consolidated feedback — open questions", "project": "WW Testing", "section": "WW Doc Inputs", "duplicate_of": "1214131122088126"},
-      {"gid": "1214128634505816", "name": "AU handover: switched to max clicks 4/17; check account Monday and make changes to budgets as needed.", "priority_rw": "Today", "kiro_note": "Carried fwd from 4/17."},
-      {"gid": "1214053404599901", "name": "Convert EOD frontend to auto-hook + AM frontend to userTriggered"},
-      {"gid": "1214054954497349", "name": "Mondays - Write into EU SSR Acq Asana"}
-    ],
-    "overdue": [
-      {"gid": "1213341921686564", "name": "Testing Document for Kate", "due_on": "2026-04-01", "days_overdue": 19, "project": "WW Testing", "priority_rw": "Urgent", "kiro_note": "THE HARD THING. Core block 12:30-2PM. Ship v5 to Brandon. 19d overdue now. Visibility-avoidance streak 20 workdays.", "flag": "hard_thing"},
-      {"gid": "1213764961716427", "name": "WW weblab dial-up (Richard)", "due_on": "2026-04-07", "days_overdue": 13, "project": "WW Testing", "priority_rw": "Urgent", "section": "WW Doc Inputs"},
-      {"gid": "1213125740755931", "name": "Email overlay WW rollout/testing", "due_on": "2026-04-18", "days_overdue": 2, "project": "WW Testing", "priority_rw": "Today", "kiro_note": "Brandon asked about overlay status Fri 4:01pm — on his Outbound Marketing Goals task assignment"},
-      {"gid": "1214088494080582", "name": "Resolve MX duplicate invoice — Diana ($56K, PO Q1 MS-20200908)", "due_on": "2026-04-18", "days_overdue": 2},
-      {"gid": "1213964186504305", "name": "Send IECCP follow-up summary to Lorena + review keyword data", "due_on": "2026-04-09", "days_overdue": 11, "project": "MX", "priority_rw": "Urgent", "routine": "Sweep"},
-      {"gid": "1213917691089036", "name": "Refmarker mapping audit PoC — AU", "due_on": "2026-04-10", "days_overdue": 10, "project": "AU", "priority_rw": "Urgent", "routine": "Engine Room"},
-      {"gid": "1213917967984980", "name": "Respond to Lena — AU LP URL analysis + CPA methodology", "due_on": "2026-04-03", "days_overdue": 17, "project": "AU", "priority_rw": "Urgent", "kiro_note": "Draft reply written. Send today."},
-      {"gid": "1214074477110993", "name": "Sitelink Audit/Update", "due_on": "2026-04-17", "days_overdue": 3, "project": "WW Testing", "priority_rw": "Urgent"},
-      {"gid": "1214074477111007", "name": "DDD walkthrough with team", "due_on": "2026-04-16", "days_overdue": 4},
-      {"gid": "1213965650410967", "name": "Deep Dive: Year-One Optimization one-pager", "due_on": "2026-04-16", "days_overdue": 4},
-      {"gid": "1213796951745232", "name": "Look over AU landing page switch (campaign settings etc, traffic, regs)", "due_on": "2026-04-15", "days_overdue": 5, "project": "AU", "priority_rw": "Urgent"},
-      {"gid": "1212808474749819", "name": "Paid App PO — Create Q2 + Amend Google PO to Q2", "due_on": "2026-04-13", "days_overdue": 7, "project": "Paid App", "priority_rw": "Urgent"},
-      {"gid": "1213423234257246", "name": "Get Enhanced Match Legal Approval", "due_on": "2026-04-22", "days_to_due": 2},
-      {"gid": "1214081017092577", "name": "MCS LP Review: Connect with Lorena on paid social/PS synergy", "due_on": "2026-04-17", "days_overdue": 3, "project": "MX", "priority_rw": "Urgent"},
-      {"gid": "1213968042348601", "name": "Deep Dive: Add IECCP FAQ to new account playbook", "due_on": "2026-04-09", "days_overdue": 11},
-      {"gid": "1213959854928587", "name": "Deep Dive: Finalize market expansion playbook", "due_on": "2026-04-09", "days_overdue": 11},
-      {"gid": "1213962513760099", "name": "Brandon 1:1: Set up automated monthly ASP confirmation reminders", "due_on": "2026-04-09", "days_overdue": 11},
-      {"gid": "1213959904341162", "name": "Reply to Brandon — PAM budget needs assessment", "due_on": "2026-04-06", "days_overdue": 14},
-      {"gid": "1213068272596724", "name": "PAM: Flag underspend risk to Brandon", "due_on": "2026-04-17", "days_overdue": 3, "project": "Paid App"},
-      {"gid": "1214068215114017", "name": "PAM: Check US/EU spend pacing vs Q2 budget", "due_on": "2026-04-18", "days_overdue": 2, "project": "Paid App"},
-      {"gid": "1214050694901572", "name": "Slack thread-level ingestion — fetch thread replies into DuckDB", "due_on": "2026-04-18", "days_overdue": 2, "kiro_note": "COMPLETED today by Subagent A — mark done"},
-      {"gid": "1213875146955582", "name": "Get Enhanced Match details", "due_on": "2026-04-07", "days_overdue": 13},
-      {"gid": "1213798673865639", "name": "Update and close your goal(s)", "due_on": "2026-04-03", "days_overdue": 17},
-      {"gid": "1213817111703805", "name": "It's time to update your goal(s)", "due_on": "2026-04-03", "days_overdue": 17},
-      {"gid": "1213690904654138", "name": "Monthly: Individual Goals update", "due_on": "2026-04-10", "days_overdue": 10},
-      {"gid": "1214006311270752", "name": "Reply to Dwayne — AU PS/MCS Updates thread", "due_on": "2026-04-10", "days_overdue": 10},
-      {"gid": "1213278917849558", "name": "Initial Testing", "due_on": "2026-04-17", "days_overdue": 3},
-      {"gid": "1214068319365234", "name": "Approve OFA invoice workflow (Mohd Sadeq)", "due_on": "2026-04-15", "days_overdue": 5},
-      {"gid": "1214044682239823", "name": "MX Experiments ending 4/30, but check sooner for trend", "due_on": "2026-04-17", "days_overdue": 3},
-      {"gid": "1214080130329568", "name": "Make changes to AU/MX/PAM for the week", "due_on": "2026-03-25", "days_overdue": 26, "flag": "old_overdue"},
-      {"gid": "1212988092117041", "name": "Paid App", "due_on": "2026-03-31", "days_overdue": 20, "project": "WW Testing", "priority_rw": "Urgent", "kiro_note": "In-progress BAU workstream"}
-    ],
-    "due_next_3_days": [
-      {"gid": "1214081017124426", "name": "MCS LP Review: Follow up on global Polaris template finalization", "due_on": "2026-04-22", "project": "MX", "priority_rw": "Urgent"},
-      {"gid": "1214068215142846", "name": "PAM: Confirm FR pivot campaign structure", "due_on": "2026-04-22", "project": "Paid App"},
-      {"gid": "1213964668984060", "name": "Brandon 1:1: Draft Enhanced Match FAQ for legal", "due_on": "2026-04-22"},
-      {"gid": "1214081017200478", "name": "AU meetings - Agenda", "due_on": "2026-04-22", "project": "AU", "priority_rw": "Urgent", "routine": "Engine Room"}
-    ],
-    "new_since_last_scan": [
-      {"gid": "1214128635826241", "created_at": "2026-04-17T22:10:43Z", "name": "Reply to Dwayne: Brand LP consolidated feedback — open questions"},
-      {"gid": "1214123519100287", "created_at": "2026-04-17T22:10:32Z", "name": "Reply to Dwayne: Brand LP consolidated feedback — open questions (duplicate)"},
-      {"gid": "1214131122088126", "created_at": "2026-04-17T22:10:00Z", "name": "Reply to Dwayne: Brand LP consolidated feedback — open questions (duplicate)"}
-    ]
-  },
-  "flags_for_phase_2": {
-    "testing_approach_v5": {
-      "gid": "1213341921686564",
-      "flag": "hard_thing_escalation",
-      "context": "19d overdue. Richard's L1 streak at 20 workdays-at-zero. Brandon unsent. Consider escalating to rw-trainer if still unsent by end of today.",
-      "slack_corroboration": "Confirmed via Richard's own Friday brief (rsw-channel)"
-    },
-    "dwayne_brand_lp_reply_triplicate": {
-      "count": 3,
-      "gids": ["1214131122088126", "1214128635826241", "1214123519100287"],
-      "action": "DEDUP — close 2, keep 1214131122088126 (most canonical). All three have identical content and Begin-Date_RW=4/19, due 4/20."
-    },
-    "au_max_clicks_post_action": {
-      "gid": "1214128634505816",
-      "context": "Richard switched AU to max clicks on 4/17. Today's task is to check the account Monday. Not started yet per Slack Richard-mentioned thread."
-    },
-    "polaris_italy_ref_tag_no_asana_task": {
-      "flag": "create_task_candidate",
-      "source": "Hedy session X9gMGQMOFP25yu51oySX (4/16)",
-      "action": "P0 production issue mentioned by Richard in Polaris LP meeting. No Asana task exists. Phase 2 signal-to-task pipeline should create."
-    },
-    "kw_audit_email_to_brandon": {
-      "flag": "create_task_candidate",
-      "source": "Slack DM-Brandon Fri 4/17 5:00-9:25 PM PT",
-      "action": "Brandon requested Polaris template change-requests email be sent to him + Dwayne. No Asana task."
-    },
-    "adi_kiro_mentoring_1on1": {
-      "flag": "create_task_candidate",
-      "source": "Slack DM-Adi Fri 4/17 5:09-6:53 PM PT",
-      "action": "Block 15-20 min in next Adi 1:1 for Kiro technical setup walkthrough. No Asana task."
-    }
-  }
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-04-21T13:50:00Z",
+  "purpose": "B1→B2 file handoff: compact task list for Activity Monitor (avoids re-pulling from Asana)",
+  "priority_order": "Brandon/Kate-touched first, then due<=3d, then backlog",
+  "tasks_high_priority": [
+    {"gid": "1213341921686564", "name": "Testing Document for Kate", "project": "WW Testing", "due_on": "2026-04-01", "priority": "Urgent", "touch": "brandon_kate"},
+    {"gid": "1213917967984980", "name": "Respond to Lena — AU LP URL analysis + CPA methodology", "project": "AU", "due_on": "2026-04-03", "priority": "Urgent", "touch": "brandon_lena"},
+    {"gid": "1212808474749819", "name": "Paid App PO — Create Q2 + Amend Google PO to Q2", "project": "Paid App", "due_on": "2026-04-13", "priority": "Urgent", "touch": "brandon"},
+    {"gid": "1213125740755931", "name": "Email overlay WW rollout/testing", "project": "WW Testing", "due_on": "2026-04-18", "priority": "Today", "touch": "brandon"},
+    {"gid": "1214128635826241", "name": "Reply to Dwayne: Brand LP consolidated feedback", "project": "WW Testing", "due_on": "2026-04-20", "priority": "Today", "touch": "brandon_dwayne"},
+    {"gid": "1214057202961389", "name": "Weekly Reporting - Global WBR sheet", "project": "Paid App", "due_on": "2026-04-20", "priority": "Today", "touch": "recurring"},
+    {"gid": "1214128634505816", "name": "AU handover: switched to max clicks 4/17; check account Monday", "project": "My Tasks", "due_on": "2026-04-20", "priority": "Today", "touch": "brandon_alexis"},
+    {"gid": "1213764961716427", "name": "WW weblab dial-up (Richard)", "project": "WW Testing", "due_on": "2026-04-07", "priority": "Urgent", "touch": "brandon"},
+    {"gid": "1213964186504305", "name": "Send IECCP follow-up summary to Lorena + review keyword data", "project": "MX", "due_on": "2026-04-09", "priority": "Urgent", "touch": "lorena"},
+    {"gid": "1212988092117041", "name": "Paid App", "project": "WW Testing", "due_on": "2026-03-31", "priority": "Urgent", "touch": "parent"},
+    {"gid": "1213796951745232", "name": "Look over AU landing page switch", "project": "AU", "due_on": "2026-04-15", "priority": "Urgent", "touch": "alexis"},
+    {"gid": "1214081017092577", "name": "MCS LP Review: Connect with Lorena on paid social/PS synergy", "project": "MX", "due_on": "2026-04-17", "priority": "Urgent", "touch": "lorena"},
+    {"gid": "1214074477110993", "name": "Sitelink Audit/Update", "project": "WW Testing", "due_on": "2026-04-17", "priority": "Urgent", "touch": "brandon"},
+    {"gid": "1214081017124426", "name": "MCS LP Review: Follow up on global Polaris template finalization", "project": "MX", "due_on": "2026-04-22", "priority": "Urgent", "touch": "dwayne_stacey"},
+    {"gid": "1214081017200478", "name": "AU meetings - Agenda", "project": "AU", "due_on": "2026-04-22", "priority": "Urgent", "touch": "alexis_lena"},
+    {"gid": "1214044682239803", "name": "Cross-marketing Refmarker audit", "project": "WW Testing", "due_on": "2026-04-30", "priority": "Urgent", "touch": "kristine_yun"},
+    {"gid": "1214044682239817", "name": "MX Polaris NB LP Test (Beauty+Auto)", "project": "MX", "due_on": "2026-04-30", "priority": "Urgent", "touch": "lorena_vijeth"},
+    {"gid": "1213235338214791", "name": "AB Customer Redirect", "project": "WW Testing", "due_on": null, "priority": "Urgent", "touch": "brandon"},
+    {"gid": "1213085905102041", "name": "WW keyword gap fill based on market-level ASINs", "project": "WW Testing", "due_on": null, "priority": "Urgent", "touch": "testing_doc"}
+  ],
+  "count_priority_today_urgent": 19,
+  "count_total_incomplete": 185
 }

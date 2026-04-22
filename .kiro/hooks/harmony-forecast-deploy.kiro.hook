@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Deploy Forecast Tracker to Harmony",
+  "description": "After the forecast tracker xlsx is updated locally, rebuild forecast-data.json and redeploy the paid-acq-forecast Harmony app to beta. Runs alongside forecast-sharepoint-push (same trigger, independent jobs). Single responsibility: keep Harmony app fresh.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "shared/dashboards/ps-forecast-tracker.xlsx"
+    ]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "bash ~/shared/dashboards/deploy-forecast-harmony.sh"
+  },
+  "timeout": 300
+}

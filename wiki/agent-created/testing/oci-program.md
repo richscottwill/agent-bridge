@@ -79,7 +79,7 @@ As of April 2026, OCI is live or in progress across eight of ten markets.
 | ES | 100% NB live | Late March 2026 | Full impact expected by July. |
 | JP | 100% NB live | Late March 2026 | MCM-147368188 completed 4/1. Tracking template fully operational. |
 | CA | Full deployment | Targeted week of April 20, 2026 | MCM readiness confirmed. Brandon coordinating with Mukesh. Team at Austin offsite this week — CA execution falls to the week after. |
-| AU | Targeted May 2026 | — | Adobe OCI path via Suzane Huynh. MCC not yet created. |
+| AU | Not planned | — | Adobe OCI path via Suzane Huynh. MCC not yet created, no timeline. |
 | MX | Not planned | — | No MCC, no timeline. |
 
 The methodology is validated. Remaining markets are execution, not experimentation.
@@ -220,7 +220,7 @@ See [LiveRamp Program](../research/liveramp-program) for the broader DMA impact 
 
 **DMA privacy constraints** that reduced DE performance to 86 percent of expectation will apply to FR, IT, and ES. Longer stabilization windows mitigate this, but expect EU4 markets to track closer to DE's 86 percent than the US's 96 percent.
 
-**AU OCI timeline.** May 2026 target exists but the MCC has not been created and Adobe has not committed. This is the single highest-leverage initiative for AU. See [AU Market Wiki](../markets/au-market-wiki).
+**AU OCI timeline.** No timeline confirmed. The MCC has not been created and Adobe has not committed. This is the single highest-leverage initiative for AU. See [AU Market Wiki](../markets/au-market-wiki).
 
 **MX OCI.** No MCC, no timeline. Currently descoped from 2026 rollout.
 
@@ -256,8 +256,8 @@ See [LiveRamp Program](../research/liveramp-program) for the broader DMA impact 
 - [OCI Instructions (Quip)](https://quip-amazon.com/Zee9AAlSBEB) — Technical setup guide
 
 <!-- AGENT_CONTEXT
-machine_summary: "Canonical OCI program reference. Consolidates 9 earlier files (business case, playbook, methodology, execution guide, knowledge share, per-market). 35,196 incremental regs + $16.7MM OPS across US/UK/DE. US +24%, UK +23%, DE +18%. 8/10 markets live or in progress. Phased rollout E2E → 25% → 50% → 100% with CPA gates 115% and 110%. DE W44-W45 shows -74-75% NB CPA in test vs control. DMA drops EU to 86% of expectation. AU May 2026 target. MX descoped."
+machine_summary: "Canonical OCI program reference. Consolidates 9 earlier files (business case, playbook, methodology, execution guide, knowledge share, per-market). 35,196 incremental regs + $16.7MM OPS across US/UK/DE. US +24%, UK +23%, DE +18%. 8/10 markets live or in progress. Phased rollout E2E → 25% → 50% → 100% with CPA gates 115% and 110%. DE W44-W45 shows -74-75% NB CPA in test vs control. DMA drops EU to 86% of expectation. AU and MX both descoped (no timeline, no MCC)."
 key_entities: ["OCI", "Google Ads", "Mike Babich", "Suzane Huynh", "Joel Mallory", "Yogesh", "Walmart", "DMA", "hvocijid", "MCC", "Decision D1"]
 action_verbs: ["bid", "optimize", "scale", "validate", "measure", "rollout"]
-update_triggers: ["new market launch", "phase transition", "hvocijid resolved", "AU MCC created", "MX OCI planning", "DMA policy change", "quarterly results"]
+update_triggers: ["new market launch", "phase transition", "hvocijid resolved", "AU MCC created", "AU OCI timeline confirmed", "MX OCI planning", "DMA policy change", "quarterly results"]
 -->

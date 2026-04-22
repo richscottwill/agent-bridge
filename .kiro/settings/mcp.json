@@ -9,7 +9,9 @@
         "QuipEditor",
         "InternalSearch",
         "WorkspaceSearch",
-        "SearchAcronymCentral"
+        "SearchAcronymCentral",
+        "TaskeiListTasks",
+        "TaskeiListTasks"
       ]
     },
     "ai-community-slack-mcp": {
