@@ -419,3 +419,4 @@ run68_exp3	nervous-system	Five Levels Position	REWORD	information_retrieval	1724
 run67_exp5	heart	Step5+Step6	MERGE	information_retrieval	2831	2802	1.0	1.0	1.0	0.0	false	KEEP	150
 run67_exp5	richard-style-email	Common Draft Failures	RESTRUCTURE	output_quality	802	800	0.8	1.0	1.0	-0.2	false	REVERT	120
 run68_exp4	memory	Relationship Staleness Index	RESTRUCTURE	information_retrieval	2431	2431	1.0	1.0	1.0	0.0	false	KEEP	120
+run67_exp6	eod-refresh	Phase5.5 Wiki Candidate	MERGE	output_quality	613	601	1.0	1.0	1.0	0.0	false	KEEP	150
