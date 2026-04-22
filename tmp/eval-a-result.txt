@@ -1,19 +1,20 @@
-[38;5;10m> [0m[0m[0m
-[0m[0m
-Let me read the file first.[0m[0m
+[38;5;10m> [0mNow let me read the supporting context files.[0m[0m
+
 
 [38;5;252m🛠️  Using tool: read[38;5;2m (trusted)[39m[0m
  ⋮ 
- ● Reading file: ~/shared/tmp/hands-eval-a.txt, all lines (using tool: read)
-[38;5;10m ✓ [0mSuccessfully read [38;5;244m9292 bytes[0m from /home/prichwil/shared/tmp/hands-eval-a.txt
-[38;5;244m - Completed in 0.2s[0m
+ ● Reading directory: ~/shared/tmp (using tool: read, max depth: 0, max entries: 1000, excluding: defaults)
+[38;5;10m ✓ [0mSuccessfully read directory [38;5;141m/home/prichwil/shared/tmp[0m [38;5;244m(24 entries)[0m
+[38;5;244m - Completed in 0.7s[0m
 
-[38;5;10m> [0mQ1: The key constraint for Asana integration is that only Richard's tasks may be modified (GID 1212732742544167), and all writes must be audited.[0m[0m
+[38;5;10m> [0mThe instructions say to answer only from the document provided. There are no separate `body.md` and `soul.md` files referenced in this eval. The document is self-contained. Here are the answers:[0m[0m
 [0m[0m
-Q2: Slack MCP has read-only access. It is used for signal ingestion and context gathering via the AM-1 hook.[0m[0m
+Q1: https://quip-amazon.com/MMgBAzDrlVou[0m[0m
 [0m[0m
-Q3: Email sending is blocked unless the sole recipient is prichwil.[0m[0m
+Q2: https://quip-amazon.com/UZ3VOhztKN4s/Outbound-Marketing-Internal[0m[0m
 [0m[0m
-Q4: Schema-qualified names are required for DuckDB queries.[0m[0m
+Q3: Testing, with 20 documents.[0m[0m
 [0m[0m
-Q5: SharePoint (via OneDrive) is used for backup and cross-device access. Its limitation is that it is a durability layer, not the source of truth.
+Q4: https://quip-amazon.com/K9OYA9mXm7DU — used with Lorena (Lorena Alvarez Larrea, MX weekly sync notes).[0m[0m
+[0m[0m
+Q5: she/her
