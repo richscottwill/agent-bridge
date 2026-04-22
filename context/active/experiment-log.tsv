@@ -415,3 +415,7 @@ run67_exp4	richard-style-wbr	Data Source Quick Reference	SPLIT	output_quality	11
 run67_exp3	spine	Common Failures	COMPRESS	information_retrieval	1479	1414	1.0	1.0	1.0	0.0	false	KEEP	180
 run68_exp2	amcc	Avoidance Ratio	REMOVE	information_retrieval	4853	4638	0.5	1.0	0.5	-0.5	false	REVERT	120
 run67_exp4	roster	Stakeholder Contacts	COMPRESS	information_retrieval	2144	2096	1.0	1.0	1.0	0.0	false	KEEP	120
+run68_exp3	nervous-system	Five Levels Position	REWORD	information_retrieval	1724	1695	1.0	1.0	1.0	0.0	false	KEEP	120
+run67_exp5	heart	Step5+Step6	MERGE	information_retrieval	2831	2802	1.0	1.0	1.0	0.0	false	KEEP	150
+run67_exp5	richard-style-email	Common Draft Failures	RESTRUCTURE	output_quality	802	800	0.8	1.0	1.0	-0.2	false	REVERT	120
+run68_exp4	memory	Relationship Staleness Index	RESTRUCTURE	information_retrieval	2431	2431	1.0	1.0	1.0	0.0	false	KEEP	120

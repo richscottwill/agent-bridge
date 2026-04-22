@@ -134,15 +134,15 @@ See Blocker Registry above for blocked items. Unblocked priorities (Testing Appr
 
 ---
 
-## Integrations & Access
+## Integrations & Access (by usage frequency)
 
-| Integration | Access | Key Constraint |
-|-------------|--------|----------------|
-| Asana (Enterprise MCP) | Full read/write | Only Richard's tasks (GID 1212732742544167). Audit all writes. |
-| Slack (MCP) | Read-only | No posting. Ingest via AM-1. |
-| Email (Outlook MCP) | Read + send (guarded) | Send blocked unless sole recipient = prichwil. |
-| Calendar (Outlook MCP) | Read + create (guarded) | External attendees blocked. |
-| DuckDB (MotherDuck MCP) | Full read/write | Schema-qualified names required. |
-| SharePoint (OneDrive) | Read/write | Durability layer, not source of truth. |
+| Integration | Access | Key Constraint | Primary Use |
+|-------------|--------|----------------|-------------|
+| Asana (Enterprise MCP) | Full read/write | Only Richard's tasks (GID 1212732742544167). Audit all writes. | AM-2 triage, EOD-2 refresh, task management |
+| DuckDB (MotherDuck MCP) | Full read/write | Schema-qualified names required. | Queries, experiments, forecasting |
+| Slack (MCP) | Read-only | No posting. Ingest via AM-1. | Signal ingestion, context gathering |
+| Email (Outlook MCP) | Read + send (guarded) | Send blocked unless sole recipient = prichwil. | Draft review, communication |
+| Calendar (Outlook MCP) | Read + create (guarded) | External attendees blocked. | Meeting prep, scheduling |
+| SharePoint (OneDrive) | Read/write | Durability layer, not source of truth. | Backup, cross-device access |
 
 Full list: spine.md → Tool Access & Integrations.

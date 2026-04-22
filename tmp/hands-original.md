@@ -1,0 +1,148 @@
+<!-- DOC-0224 | duck_id: organ-hands -->
+# Hands — Execution & Tooling
+
+*What gets done and how. Active tasks, dependencies, integrations, hooks, and the systems that turn decisions into action. The canonical action tracker.*
+
+*Operating principle: Reduce decisions, not options. Every task should have a clear next action, a pre-written draft if it involves communication, and a due date that drives My Day. Richard opens his list and acts — he doesn't plan.*
+
+Last updated: 2026-04-06 (EOD-2 run 22)
+Sources: rw-tracker.md, Asana My Tasks, ABPS AI Build, Slack scan, DM scan
+
+---
+
+## Priority Actions
+
+<!-- Full task list: db("SELECT id, priority, description, due_date, status, blockers, category FROM task_queue WHERE status != 'DONE' ORDER BY priority, due_date") -->
+<!-- Overdue: db("SELECT id, description, due_date, DATEDIFF('day', due_date, CURRENT_DATE) as days_overdue FROM task_queue WHERE due_date < CURRENT_DATE AND status NOT IN ('DONE','BLOCKED') ORDER BY due_date") -->
+
+### Top 5 This Week (snapshot — refreshed EOD 4/16)
+| # | Action | Due | Status |
+|---|--------|-----|--------|
+| P0 | **Testing Approach doc** — Send v5 to Brandon. THE HARD THING. 19 workdays at zero. | OVERDUE | NOT STARTED |
+| P0 | **ABIX Handoff Doc** — Brandon presenting to Kate THIS WEEK. Input to Loop doc. | THIS WEEK | NOT STARTED |
+| P0 | **Loop Callout Clarifications** — Brandon needs updates by Fri 4/17 1pm PT. | Fri 4/17 | ACKNOWLEDGED |
+| P1 | **R&O Input MX/AU** — Yun reminded 4/15. Numbers due. | OVERDUE | NOT STARTED |
+| P1 | **WW Sitelink Audit** — Brandon assigned via DM + Asana 4/15. | This week | NOT STARTED |
+
+22+ items overdue (oldest: PAM US PO, 45d). 2 blocked (MX Auto page on Vijeth 28d, Kingpin on Andes 31d). ~97 total tasks in My Tasks.
+
+### Blocker Registry (EOD 4/16)
+| Task | Blocker | Owner | First Detected | Days Blocked |
+|------|---------|-------|----------------|-------------|
+| MX Automotive page | Footer component | Vijeth | 2026-03-20 | 28 |
+| Kingpin Goals MX | Andes data unavailable | Andes team | 2026-03-17 | 31 |
+
+### Dependencies from 4/14-4/16 Meetings (EOD 4/16)
+- **Brandon Munday**: Review Testing Approach v5 and advise on presentation approach
+- **Brandon Munday**: Present ABIX handoff plan to Kate (this week)
+- **Yun-Kang Chu**: R&O file location confirmation (Richard asked in thread 4/15)
+- **York Chen**: Integrating MX spend data into ieCCP doc (confirmed 4/15)
+- **Dwayne Palmer**: AU PS/MCS redirect plan — Brandon talking to Dwayne in 1:1
+- **Lorena Alvarez Larrea**: Paid social / PS synergy discussion (from MCS 4/15)
+- **MCS Team**: Global Polaris template finalization status (due next week)
+
+## Recurring Execution Work (Google Ads: MX, AU, Paid App)
+
+**Daily:** Spend pacing + anomaly check across MX, AU ($140 CPA target), Paid App.
+**Weekly (post-WBR):** WW Dashboard review (flag >10% WoW), MX search terms + competitor IS, AU CPA vs target + OCI readiness, Paid App benchmarks. Update Pre-WBR Callouts Quip if covering for Dwayne.
+
+---
+
+## Dependencies
+See Blocker Registry above for blocked items. Unblocked priorities (Testing Approach, Polaris) need execution, not unblocking.
+
+## New Signals (EOD 4/16)
+- ✅ Daily reset: 3 Today tasks demoted to Urgent (Dwayne reply, AU genbi, Google invoice).
+- ✅ 1 completion: Review Q2 CCP/ieCCP files from Stacey.
+- 🔴 ABIX Handoff Doc — Brandon presenting to Kate THIS WEEK. Richard hasn't input yet. CRITICAL.
+- 🔴 Loop Callout Clarifications — Brandon needs by Fri 1pm PT. Richard acknowledged but not done.
+- 🔴 R&O Input MX/AU — Yun reminded 4/15. Due today.
+- 🔴 WW Sitelink Audit — new Asana task from Brandon (4/15).
+- 🔴 PAM Budget reply — 13 DAYS unanswered. Brandon waiting.
+- 🆕 Google DSA Sunset → AI MAX auto-upgrade announced. Team awareness needed.
+- 🆕 Enhanced Match $255K stays in PS ENG. Timeline TBD.
+- 🆕 MX ieCCP spend confirmed — York integrating.
+- ⚠️ No L1 effort — 19 workdays at zero. Testing Approach is the hard thing.
+- 📅 FRIDAY 4/17: Loop callouts due 1pm PT. Weekly scorecard. Communication analytics.
+
+---
+
+## Task List Structure
+
+| List | Purpose | Cap |
+|------|---------|-----|
+| 🧹 Sweep | Quick unblocking: send, confirm, triage | 5 |
+| 📋 Admin | Budget, POs, invoices, compliance, goal updates | 3 |
+| 🎯 Core | Strategic: test designs, frameworks, stakeholder docs | 4 |
+| ⚙️ Engine Room | Hands-on: campaign builds, keyword changes, bids | 6 |
+| 📦 Backlog | Deferred/blocked/future with justification | — |
+
+## Key Outlook Folders
+| Folder | ID |
+|--------|-----|
+| Auto-Comms (Asana) | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy/SDRrGkcLnEuZ4GAQDAgFdLn8NBQbObwPn0M6aUAADuhyQpAAA=` |
+| Auto-meeting       | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy/SDRrGkcLnEuZ4GAQCIgJPBFelsQrcja/dZLhI0AAC3dkeCAAA=` |
+| Goal: Paid Acquisition | `AQMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1ADdkM2EwYWMALgAAAyuwPeLL9INGsaRwucS5ngYBAEas7LcSB6lEv39h0ciIq84AAAITTwAAAA==` |
+| AP (Invoices) | `AAMkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAuAAAAAAArsD3iy/SDRrGkcLnEuZ4GAQDAgFdLn8NBQbObwPn0M6aUAADuhyQcAAA=` |
+
+---
+
+## Hook System (daily execution)
+
+| # | Hook | Trigger | Purpose |
+|---|------|---------|---------|
+| AM-1 | Ingest (`am-1-ingest`) | userTriggered | Slack scan + Asana sync + email scan → intake files |
+| AM-2 | Triage + Draft (`am-2-triage`) | userTriggered | Process intake → update tasks + draft replies |
+| AM-3 | Brief + Blocks (`am-3-brief`) | userTriggered | Daily brief + Slack posts + dashboard + calendar blocks |
+| EOD-1 | Meeting Sync (`eod-1-meeting-sync`) | userTriggered | Hedy + Outlook → meetings/ series files |
+| EOD-2 | System Refresh (`eod-2-system-refresh`) | userTriggered | Maintenance cascade + experiments + git sync |
+| 1 | WBR: Weekly Callouts (`wbr-callouts`) | userTriggered | Full 10-market callout pipeline |
+| 2 | Sync to SharePoint (`sharepoint-sync`) | userTriggered | Wiki → SharePoint via OneDrive |
+| 3 | PS Audit (`ps-audit`) | userTriggered | Paid search audit pipeline |
+| 4 | Agent Bridge Sync (`agent-bridge-sync`) | userTriggered | Sync shared/ to GitHub |
+| — | Guard: Email | preToolUse | Blocks email send unless only recipient is prichwil |
+| — | Guard: Calendar | preToolUse | Blocks calendar events with external attendees |
+
+**AM-1→2→3 is the daily driver.** EOD-1→2 runs after meetings. Each hook loads only what it needs — failure is isolated.
+
+### Asana (Enterprise Asana MCP — LIVE)
+- **Full read/write access** via Enterprise Asana MCP. SearchTasksInWorkspace, GetTaskDetails, UpdateTask, CreateTask, CreateTaskStory, GetTaskStories, SetParentForTask, GetGoal, etc.
+- **Command center protocol**: `~/shared/context/active/asana-command-center.md`
+- **Guardrails**: Only modify tasks assigned to Richard (GID 1212732742544167). Audit all writes to `asana-audit-log.jsonl`.
+- **AM-2 writes**: Kiro_RW context, task creation from signals, bucket moves, due date changes, completions, comments.
+- **EOD-2 writes**: Carry-forward Kiro_RW, daily reset (Today → Urgent), blocker registry updates.
+
+---
+
+## Tool & Automation Opportunities
+
+### Proposed (ready to build)
+| Tool | Impact |
+|------|--------|
+| WBR auto-briefing | Agent drafts callouts from data |
+| Budget forecast helper | Pre-fill RO from actuals + trend |
+| Invoice/PO automation | Route without manual intervention |
+| Goal status updater | Auto-generate Kingpin from campaign data |
+
+### Backlog (future)
+| Tool | Impact |
+|------|--------|
+| Campaign link generator | AU/MX sitelink URL construction |
+| Testing tracker | Structured test log (operational, not narrative) |
+| Competitive intel agent | Monitor competitor ad copy shifts |
+| AI search landscape monitor | Track AI Overviews, zero-click changes |
+
+---
+
+## Integrations & Access
+
+| Integration | Access | Key Constraint |
+|-------------|--------|----------------|
+| Asana (Enterprise MCP) | Full read/write | Only Richard's tasks (GID 1212732742544167). Audit all writes. |
+| Slack (MCP) | Read-only | No posting. Ingest via AM-1. |
+| Email (Outlook MCP) | Read + send (guarded) | Send blocked unless sole recipient = prichwil. |
+| Calendar (Outlook MCP) | Read + create (guarded) | External attendees blocked. |
+| DuckDB (MotherDuck MCP) | Full read/write | Schema-qualified names required. |
+| SharePoint (OneDrive) | Read/write | Durability layer, not source of truth. |
+
+Full list: spine.md → Tool Access & Integrations.
