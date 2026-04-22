@@ -43,35 +43,29 @@ Watch for these in every callout draft:
 The source of truth for all callout writing rules is the callout-writer agent definition at `shared/.kiro/agents/wbr-callouts/callout-writer.md`. Callouts are generated via the WBR callout pipeline hook at `shared/.kiro/hooks/wbr-callouts.kiro.hook`. Do not invoke the callout-writer or callout-reviewer agents directly — use the hook.
 
 ### Content Errors
-1. **Vague attribution.** Wrong: "performance improved." Right: "Brand registrations increased +19% due to exact match impressions +40%." Every movement needs a specific cause — bid strategy, CVR shift, seasonal event, budget change.
-2. **Missing YoY context.** Always include YoY comparison when available. WoW alone doesn't show whether the trend is structural or seasonal. Format: "YoY we spent [X]% with [+/-]% registrations."
+1. **Vague attribution.** Wrong: "performance improved." Right: "Brand registrations increased +19% due to exact match impressions +40%." Every movement needs a specific cause: bid strategy, CVR shift, seasonal event, or budget change. If the cause is unknown, say "under investigation" rather than omitting.
+2. **Missing YoY context.** Always include YoY comparison when available. WoW alone doesn't show whether the trend is structural or seasonal. Format: "YoY we spent [X]% with [+/-]% registrations." If YoY data is unavailable, state why (new market, new campaign type).
 3. **ie%CCP without target comparison.** Never report ie%CCP in isolation. Always contextualize vs. target: "97% ie%CCP (vs. 100% target)" or "brought ie%CCP below the 100% target, averaging 97%."
-4. **Em-dashes in callout draft.** Never use em-dashes (—) in drafted callouts. Replace with commas, periods, colons, or parentheticals. Scan every draft before finalizing.
+4. **Em-dashes in callout draft.** Never use em-dashes in drafted callouts. Replace with commas, periods, colons, or parentheticals. Scan every draft before finalizing.
 
 ### Worked Failure Example
 Draft: "MX drove 300 registrations — performance improved — with 97% ie%CCP." Three failures: (1) em-dash used twice, (2) vague attribution ("performance improved"), (3) ie%CCP without target. Fix: "MX drove 300 registrations (+13% WoW), with Brand clicks +13% driving the increase, and 97% ie%CCP (vs. 100% target)."
 
 ## Examples (actual, by market)
 
-### Emerging/Hands-On Markets (lower volume, more narrative)
-These markets need more causal explanation — callouts emphasize what changed and why.
+### Emerging Markets (lower volume, more narrative)
 
-#### MX Example
-MX Week 10: "MX drove 300 registrations (+13% WoW), with +4% spend WoW, and 97% ie%CCP. March is projected to end at $84K spend and 1.2K registrations. (vs. OP2: +68% spend, +45% registrations) WoW we minimized changes to NB spend (+5%), and overall registrations increased +13%. The increase in registrations can be attributed to Brand campaigns (+13% clicks/+19% registrations)"
+**MX W10:** "MX drove 300 registrations (+13% WoW), +4% spend WoW, 97% ie%CCP. March projected: $84K spend, 1.2K regs (vs. OP2: +68% spend, +45% regs). Minimized NB spend changes (+5%); registration increase attributed to Brand campaigns (+13% clicks/+19% regs)."
 
-#### AU Example
-AU Week 7: "WoW we didn't change budgets, but saw an improvement on both Brand and NB. On the Brand side, the 41% increase in registrations was due to our exact match Brand terms increasing in impressions by 40%... On the NB side, the bid strategies seem to be managing the campaigns more efficiently; increasing registrations by 15%, while reducing spend by 10%."
+**AU W7:** "WoW we didn't change budgets, but saw improvement on both Brand and NB. Brand: 41% increase in registrations due to exact match terms increasing impressions by 40%. NB: bid strategies managing campaigns more efficiently — registrations +15%, spend -10%."
 
-#### AU Failure-Correction
-Draft: "AU drove 850 registrations — NB improved — with CPA at $132 and 94% ie%CCP." Failures: (1) em-dash, (2) vague NB attribution, (3) ie%CCP without target, (4) missing YoY. Fix: "AU drove 850 registrations (+8% WoW), with NB bid strategies reducing CPA 12% while holding volume. CPA at $132 (vs. $140 target), 94% ie%CCP (vs. 100% target). YoY we spent -5% with +12% registrations."
+**AU Failure-Correction:** Draft: "AU drove 850 registrations — NB improved — with CPA at $132 and 94% ie%CCP." Failures: (1) em-dash, (2) vague NB attribution, (3) ie%CCP without target, (4) missing YoY. Fix: "AU drove 850 registrations (+8% WoW), NB bid strategies reducing CPA 12% while holding volume. CPA $132 (vs. $140 target), 94% ie%CCP (vs. 100% target). YoY: -5% spend, +12% registrations."
 
 ### Established Markets (high volume, OCI live)
-Mature data — callouts emphasize optimization, competitive response, and YoY trends.
 
-#### JP Example
-JP Week 40: "JP: 1,180 registrations (+40% WoW, +183% YoY) and $20 CPA (-19% WoW, -35% YoY) Registrations continued to increase after the holiday in Week 38. Last week I worked a lot to make the phrase match campaigns more efficient by adding negatives, pausing redundant keywords, refining ad text, and adjusting budgets/bids, but this increase seems to be more because of our core terms being eligible for more traffic."
+**JP W40:** "JP: 1,180 registrations (+40% WoW, +183% YoY) and $20 CPA (-19% WoW, -35% YoY). Registrations continued to increase after W38 holiday. Optimization work (negatives, pausing redundant keywords, refining ad text, adjusting budgets/bids) wasn't the primary driver — increase attributed to core terms being eligible for more traffic."
 
-**Why this works:** Leads with headline metric (regs + CPA), includes both WoW and YoY, attributes the increase to a specific cause (core terms traffic eligibility), and honestly notes that his optimization work wasn't the primary driver.
+**Why JP works:** Leads with headline metric, includes WoW and YoY, attributes cause (core terms traffic), honestly notes optimization wasn't the primary driver.
 
 ## Data Source Quick Reference
 

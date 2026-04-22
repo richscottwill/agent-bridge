@@ -52,18 +52,26 @@ Sources: rw-tracker.md, Asana My Tasks, ABPS AI Build, Slack scan, DM scan
 See Blocker Registry above for blocked items. Unblocked priorities (Testing Approach, Polaris) need execution, not unblocking.
 
 ## New Signals (EOD 4/16)
-- ✅ Daily reset: 3 Today tasks demoted to Urgent (Dwayne reply, AU genbi, Google invoice).
-- ✅ 1 completion: Review Q2 CCP/ieCCP files from Stacey.
+
+**Critical (action required now):**
 - 🔴 ABIX Handoff Doc — Brandon presenting to Kate THIS WEEK. Richard hasn't input yet. CRITICAL.
 - 🔴 Loop Callout Clarifications — Brandon needs by Fri 1pm PT. Richard acknowledged but not done.
 - 🔴 R&O Input MX/AU — Yun reminded 4/15. Due today.
 - 🔴 WW Sitelink Audit — new Asana task from Brandon (4/15).
 - 🔴 PAM Budget reply — 13 DAYS unanswered. Brandon waiting.
+
+**Warnings:**
+- ⚠️ No L1 effort — 19 workdays at zero. Testing Approach is the hard thing.
+- 📅 FRIDAY 4/17: Loop callouts due 1pm PT. Weekly scorecard. Communication analytics.
+
+**New signals:**
 - 🆕 Google DSA Sunset → AI MAX auto-upgrade announced. Team awareness needed.
 - 🆕 Enhanced Match $255K stays in PS ENG. Timeline TBD.
 - 🆕 MX ieCCP spend confirmed — York integrating.
-- ⚠️ No L1 effort — 19 workdays at zero. Testing Approach is the hard thing.
-- 📅 FRIDAY 4/17: Loop callouts due 1pm PT. Weekly scorecard. Communication analytics.
+
+**Completed:**
+- ✅ Daily reset: 3 Today tasks demoted to Urgent (Dwayne reply, AU genbi, Google invoice).
+- ✅ 1 completion: Review Q2 CCP/ieCCP files from Stacey.
 
 ---
 

@@ -12,39 +12,41 @@ Last updated: 2026-04-14
 ## 1. Promotion Mechanics
 
 ### How Promotions Actually Work
-- Promotions happen two ways: **lifetime achievement** (grind the process) or **outsized event** (high-risk bet that pays off). The outsized event is faster.
-- The key promo narrative is: "Without [person], [outcome] wouldn't have happened." That's the line you need in your packet.
-- Taking risks that fail is recoverable. Playing it safe is slower. Evans regrets not taking MORE risks.
-- VP promotion took 2.5 years of deliberate stakeholder alignment. Timing mattered — his VP was reorged 6 months after the promo went through. Six months later and it would have reset.
+- Two paths: **lifetime achievement** (grind the process) or **outsized event** (high-risk bet that pays off). Outsized event is faster.
+- The promo narrative that wins: "Without [person], [outcome] wouldn't have happened." That's the line your packet needs.
+- Failed risks are recoverable; playing it safe is slower. Evans regrets not taking MORE risks.
+- Evans' VP promotion: 2.5 years of deliberate stakeholder alignment. His VP was reorged 6 months after — six months later and the promo would have reset. Timing is load-bearing.
+
+**Worked example — outsized event path:** Richard's Testing Approach doc could be the outsized event. If it becomes the WW testing methodology, the promo narrative writes itself: "Without Richard, the WW testing framework wouldn't exist." The lifetime achievement alternative: grind L5 tasks for 3+ years and hope the queue moves. The outsized event compresses the timeline.
 
 ### The Magic Loop (Manager Partnership)
 - Core deal: "I'll do everything you need done. You do one critical thing — make sure I'm rewarded for it."
-- Managers WANT to promote you. More directors = easier job for them. But they can't do it FOR you. You have to get yourself there.
-- If your manager doesn't support your promo, it won't happen. No skip-level override on promotions — it creates too much mess.
+- Managers WANT to promote you — more directors = easier job. But they can't do it FOR you.
+- No skip-level override on promotions — it creates too much mess. If your manager doesn't support it, it won't happen.
 - Find managers known for getting people promoted. That's a recruiting tool and a career accelerator.
 
 ### The Polite Fiction for Asking
 - Evans' exact words: "My career is very important to me. I need to understand how important it is to Amazon, because if it's not as important to Amazon as it is to me, I need to think about that."
-- Why it works: Can't argue career shouldn't matter to you. "Think about that" implies leaving without being a direct threat. Delivered warmly, not aggressively.
+- Why it works: Can't argue career shouldn't matter. "Think about that" implies leaving without direct threat. Delivered warmly, not aggressively.
 - Prepare key phrases BEFORE the conversation. Don't improvise the critical line.
-- Body language matters as much as words. Same sentence delivered with warmth vs. edge produces opposite reactions.
+- Body language matters as much as words. Same sentence with warmth vs. edge produces opposite reactions.
 
 ### Headcount Thresholds (Director+)
-- Director threshold at Amazon: ~80-90 reports (written down post-Evans era, was informal before).
+- Director threshold: ~80-90 reports (written down post-Evans era, was informal before).
 - LP says "no bonus for additional headcount" but the threshold creates a several-hundred-thousand-dollar incentive to accumulate people.
 - Leaders have temporarily moved reports under someone to hit the threshold, then moved them back. The system enables gaming.
-- Grace period exists if you drop below threshold — 6-9 months to tell a growth story.
+- Grace period if you drop below: 6-9 months to tell a growth story.
 
 ### Champions / Feedback Providers
-- Best approach: Have your manager email peers/skips 6 months early: "Ryan's coming up for promotion. I'll need your feedback. You have 6 months to observe."
+- Best approach: manager emails peers/skips 6 months early: "Ryan's coming up for promotion. I'll need your feedback. You have 6 months to observe."
 - Over-subscribe: Need 4 champions? Ask 6-7. People leave, get reorged, or say no.
 - If manager won't do it, go yourself: "I'm up for promotion. My manager will likely ask you for feedback. What can we do over the next 6 months so you're in a natural position to provide it?"
-- Frame it as: "I'm trying to do this right and talk to you 6 months in advance" — shows maturity vs. last-minute scramble.
+- Frame as: "I'm trying to do this right and talk to you 6 months in advance" — shows maturity vs. last-minute scramble.
 
 ### The Queue
-- Forward-looking promotion slate tracked by halves: who's in 6, 12, 18, 24 months.
-- At senior levels, there may be strict quotas (e.g., Google: 2 people can go L8→L9 per half in an org).
-- The squeaky wheel gets greased. Two equally qualified people — the one agitating for promotion often gets it first. Not because they're better, but because the manager knows they'll leave otherwise.
+- Promotion slate tracked by halves: who's in 6, 12, 18, 24 months.
+- Senior levels may have strict quotas (e.g., Google: 2 people can go L8→L9 per half in an org).
+- The squeaky wheel gets greased. Two equally qualified people — the one agitating gets it first. Not because they're better, but because the manager knows they'll leave otherwise.
 
 ---
 
@@ -93,20 +95,28 @@ Last updated: 2026-04-14
 - Japanese "window seat" concept: moved far from the action = career is over here.
 - Evans' counter-example: he voluntarily took the garbage can (random mix of reverse logistics, B2B, app store) and turned it into 200 people. Saying yes to everything = scope accumulation.
 
-### Protecting Your Org from Scope Theft
+### Defending Scope
+
+#### Tactics
 - Make yourself unattractive: surface all the unsexy maintenance work the attacker would inherit.
 - Be thorny: overreact early to signal "not worth the fight."
 - Counterattack narrative: "It's great you're thinking about merging our orgs. Your org is going to be so great as part of our org."
 - Delay tactic: "Reorgs cause a 6-month productivity hit. We're killing it on [metrics]. Let's revisit in 6 months." (By then they've moved on.)
 - Best defense: strong performance. Hard to argue "take their team" when the team is crushing goals.
 
-**Worked example — defending scope:** Another team proposes consolidating your testing methodology under their org. Step 1: Surface the unsexy work ("you'd inherit 47 market-specific compliance rules and weekly vendor reconciliation"). Step 2: Overreact early in a 1:1 with your skip-level ("I want to make sure we're aligned — I heard X team is exploring this"). Step 3: Counterattack narrative ("We'd love to bring their insights into our methodology"). Step 4: If needed, delay ("We're mid-rollout in 3 markets. A reorg now costs us 6 months of momentum").
+#### Worked Example — Defending Scope
+Another team proposes consolidating your testing methodology under their org. Step 1: Surface the unsexy work ("you'd inherit 47 market-specific compliance rules and weekly vendor reconciliation"). Step 2: Overreact early in a 1:1 with your skip-level ("I want to make sure we're aligned — I heard X team is exploring this"). Step 3: Counterattack narrative ("We'd love to bring their insights into our methodology"). Step 4: If needed, delay ("We're mid-rollout in 3 markets. A reorg now costs us 6 months of momentum").
 
 ### Attacking (Taking Scope)
+
+#### Approaches (ranked by risk)
 - Best attack: real story of how consolidation creates more value (1 release/year → 2, $100M → $200M).
 - Second tier: efficiency/simplification arguments (fewer direct reports, lower cost).
 - Third tier (risky): highlight the other org's flaws. Works if true, but makes you look predatory.
 - Softest approach: "I can't help but notice you're having trouble here. Is there anything I can do to help?" → Get embedded → Later: "Since I'm already here, we could just consolidate."
+
+#### Worked Example — Taking Scope (Soft Approach)
+Another team owns a reporting workflow that's consistently late and error-prone. Step 1: Offer help casually in a cross-team standup ("We built something similar — happy to share our template"). Step 2: Get embedded by volunteering a resource for one cycle ("Let me lend you someone for this week's report"). Step 3: After 2-3 cycles of your team doing the work, the consolidation argument writes itself: "Since we're already running this, should we just own it formally? Saves your team bandwidth." Step 4: Frame the ask to the skip-level as efficiency, not empire-building: "We can eliminate the handoff entirely and cut cycle time by 2 days."
 
 ---
 
@@ -194,18 +204,23 @@ Last updated: 2026-04-14
 ## 6. Application to Richard's Situation
 
 ### Direct Relevance
-- **Brandon 1:1s**: Use the Magic Loop framework. What does Brandon need? Deliver that, then negotiate for what you want (Testing Approach visibility, L6 path clarity).
-- **Kate skip-level**: Back-channel before formal meetings. Pre-sell ideas. Make Kate feel consulted, not surprised.
-- **Testing Approach doc**: This is Richard's "outsized event" opportunity. The promo narrative writes itself: "Without Richard, the WW testing methodology wouldn't exist."
-- **Promotion path**: Start identifying champions NOW. Who are the VPs/Directors who should observe Richard's work over the next 6-12 months?
-- **Org dynamics**: When scope discussions come up (who owns testing methodology, who owns AEO), use the "selfless servant" framing: "If the org needs someone to step up on this, I'm here."
-- **Dealing with cross-team friction**: Apply the "understand why they're valued" framework before escalating. Lorena/MX, Lena/AU — understand their org's incentives.
+
+| Context | Framework to Apply | Action |
+|---------|-------------------|--------|
+| Brandon 1:1s | Magic Loop | Deliver what Brandon needs first, then negotiate for what you want (Testing Approach visibility, L6 path clarity). Value before ask — every time. |
+| Kate skip-level | Back-channeling | Pre-sell ideas 1:1 before group settings. Make Kate feel consulted, not surprised. Never bring a new idea to Kate cold. |
+| Testing Approach doc | Outsized event | Richard's promo narrative: "Without Richard, the WW testing methodology wouldn't exist." This is the single artifact that can anchor a promotion packet. |
+| Promotion path | Champions/Feedback | Start identifying champions NOW — VPs/Directors who should observe Richard's work over 6-12 months. Over-subscribe: need 4, ask 6-7. |
+| Scope discussions (testing methodology, AEO) | Selfless servant framing | "If the org needs someone to step up on this, I'm here." Frame ambition as service — same message, selfless packaging. |
+| Cross-team friction (Lorena/MX, Lena/AU) | Understand why they're valued | Understand their org's incentives before escalating. Lena's intensity serves AU goals; Lorena's engagement signals ownership. Work with their motivations, not against them. |
+
+**Worked example — Brandon 1:1 using Magic Loop:** Before the meeting, identify one thing Brandon needs (e.g., WBR narrative for Kate on AU testing results). Deliver it proactively: "I wrote up the AU test results in WBR format — here's the draft." Then pivot to the ask: "I'd like to talk about making the Testing Approach doc visible to Kate's org. Can we get it on the next skip-level agenda?" The sequence matters: deliver value first, then ask. Brandon is more receptive after you've solved her problem.
 
 ### Anti-Patterns to Watch For
-- Being the "nice guy who waits" while pushier peers get promoted first.
-- Assuming being right (evidence-based testing) will be recognized without relationship investment.
-- Avoiding the uncomfortable conversation with Brandon about career trajectory.
-- Working harder at L5 tasks instead of developing L6 skills (delegation, communication, strategic artifacts).
+- Being the "nice guy who waits" while pushier peers get promoted first. The squeaky wheel gets greased — agitating for promotion beats waiting to be noticed.
+- Assuming being right (evidence-based testing) will be recognized without relationship investment. IQ without EQ is a waste of IQ.
+- Avoiding the uncomfortable conversation with Brandon about career trajectory. Use the polite fiction: "My career is very important to me."
+- Working harder at L5 tasks instead of developing L6 skills (delegation, communication, strategic artifacts). Solve problems for your boss, don't just execute tasks.
 
 ---
 

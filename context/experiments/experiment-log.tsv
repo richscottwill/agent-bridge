@@ -1,0 +1,2 @@
+timestamp	organ	section	technique	words_before	words_after	score_a	score_b	score_c	delta_ab	decision	notes
+2026-04-22T13:45:48Z	richard-style-email	Email (Analytical / Update)	ADD	818	999	-	-	-	-	BLOCKER	invokeSubAgent tool unavailable (registerSubAgentExecution is not a function). File reverted. Phase 6 blind-eval execution path broken in this environment.

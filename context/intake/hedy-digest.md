@@ -1,58 +1,53 @@
-# Hedy Meeting Digest
+# Hedy Meeting Sync — Digest
 
-**Generated:** 2026-04-21 (Pacific)
-**Scan window:** 2026-04-17 → 2026-04-21 (since last sync)
-**Last synced meeting:** 2026-04-17 — "AI Tool Demo and Workflow Integration" (`IvUNtHCncikQcZvODFj1`)
-
-## Status
-
-**No new meetings since last sync.**
-
-Hedy has 55 total sessions; the most recent one (2026-04-17) was captured in the prior sync. No sessions have been recorded between 2026-04-17 and today (2026-04-21). This matches the calendar pattern — 2026-04-18 was a Saturday, 2026-04-19 Sunday, 2026-04-20 Monday appears to have been a light day, 2026-04-21 is today (still ongoing).
-
-## Meetings Ingested This Run
-
-0 new meetings.
-
-## Action Items Extracted
-
-0 new action items.
-
-## Topics Reinforced
-
-0 topics reinforced this cycle.
-
-## Recent Meeting Context (for reference — already ingested)
-
-Last six meetings in DuckDB, for downstream workflows that pull digest-level context:
-
-| Date | Session | Series |
-|------|---------|--------|
-| 2026-04-17 | AI Tool Demo and Workflow Integration | team/stakeholder |
-| 2026-04-16 | Polaris LP Optimization and Italy Ref Tag Issue | stakeholder (MCS) |
-| 2026-04-15 | Polaris Brand LP and Canada Optimization Review | stakeholder (MCS) |
-| 2026-04-14 | Polaris, Baloo, and Mexico Testing Sync | manager (Brandon) |
-| 2026-04-14 | OCI Rollout and Market Performance Review | team (weekly) |
-| 2026-04-14 | Baloo Project Phase 1 Demo and Feedback | stakeholder (Baloo) |
-
-These are already in `signals.hedy_meetings`. For narrative/transcript pull:
-- DuckDB: `SELECT * FROM signals.hedy_meetings ORDER BY meeting_date DESC`
-- Hedy MCP: `GetSessionDetails(sessionId)` for full transcript/recap
-
-## Running Themes (carry-forward from prior digest)
-
-No new signal — themes from last digest still apply:
-
-- **Polaris LP testing across markets** — Italy ref tag issue, Canada optimization, Brand LP rollout. Polaris is the dominant operational topic.
-- **Baloo Phase 1** — ungated AB product browsing subdomain (shop.business.amazon.com), Paid Search is primary launch channel.
-- **AI tooling workflows** — Jasper AI demo, AI Tool Demo and Workflow Integration. Team evaluating AI-assisted ad-copy and campaign workflows.
-- **OCI rollout** — market performance review tied to OCI migration.
-- **MX and AU hands-on markets** — Mexico testing sync, AU landing page sync, compensation review.
-
-## Action Items for Richard (carry-forward)
-
-No new items extracted this run. Richard's outstanding items from prior meetings are already routed to Asana via prior sync cycles — check `asana.by_routine` or `asana-digest.md` for current state.
+**Generated:** 2026-04-22 (Subagent E of AM-Backend parallel protocol)
+**Status:** ⚠️ TOOL-ACCESS FAILURE — work NOT performed
 
 ---
 
-**Next sync:** Hedy syncs run daily; will capture any meetings recorded 2026-04-21 on the next run.
+## Summary
+
+Hedy sync was requested but could not execute. Hedy MCP server is configured in `.kiro/settings/mcp.json` (enabled, `autoApprove: *`) but **no `mcp_hedy_*` tools are exposed in the subagent tool roster**. This is a tool-proxying gap between the parent session and the spec-task-execution subagent, not a Hedy server outage.
+
+## What I verified
+
+- ✅ DuckDB MCP works — `ATTACH 'md:ps_analytics'` successful, MotherDuck reachable
+- ✅ Target tables exist: `signals.hedy_meetings`, `signals.signal_tracker`, `main.meeting_series`, `main.meeting_analytics`, `main.meeting_highlights`
+- ✅ Current freshness row for `hedy_meetings`:
+  - `last_updated`: 2026-04-21 14:07:43 PT
+  - `is_stale`: false (within 24h cadence)
+- ❌ Hedy MCP tools: `list_sessions`, `get_session_details`, `get_session_todos`, `get_session_highlights` — **not available in this subagent**
+
+## What was NOT done
+
+- No new Hedy sessions pulled since 2026-04-21 14:07
+- No inserts into `signals.hedy_meetings`
+- No updates to `signals.signal_tracker` (no +1.0 hedy-source topic weights applied)
+- `ops.data_freshness` row for `hedy_meetings` NOT bumped (remains 2026-04-21 14:07)
+
+## Impact on downstream protocols
+
+- **AM-3 meeting prep brief**: will read yesterday's meeting topics only, not today's
+- **WBR callout analyst**: no new Hedy evidence since 2026-04-21
+- **signal_tracker heat map**: Hedy-channel signals will decay normally (0.9/day) without reinforcement; any meetings that happened 2026-04-21 14:07 → 2026-04-22 will NOT register as hedy-channel signals and will only appear if the topic shows up in Slack/Email/Asana
+
+## Recovery path
+
+Run this step in a session where Hedy MCP tools are exposed (parent chat session, or a subagent with Hedy in its tool roster). The freshness timestamp `2026-04-21 14:07:43` is the correct starting window for the next sync — the `last_updated` row was NOT modified, so the window is preserved.
+
+Alternative: if the Hedy MCP proxy can be fixed for spec-task-execution subagents, re-run Subagent E directly.
+
+## Canonical slugs that would have been reinforced
+
+Meetings since 2026-04-21 likely covered (based on `current.md` + last week's `meeting_series` activity — not verified against actual Hedy data):
+- `polaris-brand-lp` (weblab 4/6-7 retrospective, WW rollout)
+- `au-cpa-cvr` (Lena follow-up pending)
+- `oci-rollout` (ROW 7/10 live, CA 4/7)
+- `mx-budget-ieccp` (MX Auto/Beauty pages blocked)
+- `testing-approach-doc` (canceled-but-still-needed for Kate)
+
+These are hypotheses for the recovery run, not data captured.
+
+---
+
+**Returning early per task instruction. No workarounds attempted.**

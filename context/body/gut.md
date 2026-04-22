@@ -176,17 +176,11 @@ Eyes hits 1400w while accuracy stays at 0.95. ADD prior drops to 0.28 (n=7). Gut
 
 ---
 
-## Integration with AM-3 Brief
-
-Daily brief includes gut check when issues detected (e.g., "🫁 Eyes is 500w over budget," "🫁 3 intake files unprocessed for 5+ days"). On clean days, omit entirely. Silence means health.
-
----
-
----
-
-## Governance
+## Governance & Daily Brief Integration
 
 **Karpathy authority** governs all changes to compression protocols, word budgets, bloat thresholds, and excretion rules in this file. "Karpathy authority" = the Karpathy CLI agent (`karpathy.json`) running experiment batches, or any agent acting under `~/.kiro/agents/body-system/karpathy.md` identity during governance proposals. Heart loop executes; Karpathy owns the rules — testing techniques, adjusting budgets, evolving compression strategy. Scope extends to style guide experiments and output-quality evals (style guides, market context, callout principles, hook prompts).
+
+**Daily brief integration:** Gut check included when issues detected (e.g., "🫁 Eyes is 500w over budget," "🫁 3 intake files unprocessed for 5+ days"). On clean days, omit entirely. Silence means health.
 
 ## When to Read This File
 - Heart loop cascade (Phase 2 bloat check)

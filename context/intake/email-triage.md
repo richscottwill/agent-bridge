@@ -1,59 +1,69 @@
-# Email Triage — 2026-04-21 (Tue)
+# Email Triage — 2026-04-22
 
-**Scan window:** 2026-04-20 → 2026-04-21 (since last sync)
-**Emails processed:** 47 | **High:** 6 · **Med:** 4 · **Low:** 37
-**Unanswered (unread + action):** 9
-**Calendar events synced:** 24 (today + week ahead)
-**Source:** Outlook MCP `email_search` (all folders), `calendar_view` (week)
-**DuckDB:** `signals.emails` + `main.calendar_events` updated · `ops.data_freshness` refreshed
+Scan window: 2026-04-21 → 2026-04-22 (60 emails in window).
 
 ---
 
-## 🔴 HIGH Priority — Respond / Review
+## 🔴 High Priority — Respond (from this window)
 
-- **Paid Search Transition** — Lena Zak (today 2:16 AM PT, unread) — Confirming Megan's start date April 28 (4 yrs AU Category Marketing/PLX). Background on the hire. **Action:** reply welcoming, align on ramp plan.
-- **[EXTERNAL] Canceled event: AB x LiveRamp Monthly Status** — Brandon Munday (yesterday 10:34 AM PT, unread) — Brandon forwarded follow-up questions to Remi on Enhanced Match testing through Paid Search — Legal approval path. **Action:** read Brandon's Qs, align before his 1:1 today 1:30 PM.
-- **New comment — Get Enhanced Match Legal Approval** — Brandon via Asana (yesterday 10:30 AM PT) — "I followed up on the LR email with the questions above." Ties directly to LiveRamp thread. **Action:** track in Asana; due Apr 22.
-- **New comment — Paid Media Legal Approval** — Brandon via Asana (yesterday 10:23 AM PT) — Still stuck on TPS (P374249718). MOPS team is trying to find a path. **Action:** monitor; no reply needed.
-- **PSME Seattle Summer Party** — Todd Heimes (yesterday 8:46 AM PT, unread) — Invite. **Action:** RSVP.
-- **[EXTERNAL] AB // Adobe - Thursday Call Scheduling** — Stacey Gu (yesterday 12:44 PM PT) — Stacey proposed reschedule to today 10:30 AM PT. Note: Adobe Bi-Weekly already on today's cal at 10:30 AM. **Action:** confirm attendance.
+- **Action required: Need PoC from teams to conduct AB Marketing refmarker mapping audit** — Munday, Brandon (Apr 21, 10:05 PM UTC). Brandon forwarded Kristine Weber's ask. Need to designate a PoC for the audit.
+- **AU HandOff Doc - Final Review** — Munday, Brandon (Apr 21, 7:31 PM UTC). Meeting invite for final review; timing to be updated. Ties to the broader AU transition (Paid Search Transition thread, Lena's team).
+- **Brandon assigned you a task: Measure EM impact [F90 - LR Enhanced Match]** — Brandon via Asana (Apr 21, 2:45 PM UTC). New Asana subtask under F90 LR Enhanced Match. No due date set.
 
-## 🟡 MED Priority — Direct Leads / Cross-Team
+## 🟡 Medium Priority — Review / Respond (from this window)
 
-- **MCS OP1 2027 - Tech Intake Now Open** — Dwayne Palmer (yesterday 11:28 AM PT, unread) — Submission invite for MCS tech intake, bcc'd theimes-org and ab-marketing. **Action:** review, submit if PS intake fits.
-- **[EXTERNAL] Google Customer Geist 2026** — Mike Babich/Google (yesterday 2:11 PM PT) — Context on an earlier thread Yun is looped into. **Action:** skim; respond if Yun needs input.
-- **AB SEM WW Dashboard_Y26 W16.xlsx has a new version** — Aditya Thakur (yesterday 8:26 AM PT) — Updated WBR source. **Action:** pull W16 numbers for the callouts sheet.
-- **Invoice Approval Request: #5545531089 GOOGLE IRELAND LTD** — Amazon Payee Central (yesterday 5:45 AM PT) — Pending Richard approval. **Action:** approve/reject in Payee Central.
+- **Brand LP - Consolidated feedback** — Palmer, Dwayne (Apr 21, 4:39 PM UTC). Dwayne consolidated PS team requirements for Brand LP migration/weblab (minimal header, single consistent CTA, etc.). Looped in Alex.
+- **[MCS-3004] A/B Testing & Personalization - WW PS Brand Polaris Redesign** — Dwayne Palmer Taskei mention (Apr 21, 4:37 PM UTC). Same feedback thread, PS requirements applied WW.
+- **Dwayne mentioned you: ps-brand pages updates WW [Sprint 05]** — Dwayne Palmer via Asana (Apr 21, 4:30 PM UTC). Same thread.
+- **AB US Memorial Day Sale 2026 - Event Date Update (5/15-5/26)** — Miller, Caroline (Apr 22, 12:08 AM UTC). Event date shift to align with B2C launch. Review and align PS support if needed.
+- **[EXTERNAL] Adobe // Amazon Business Call Agenda 4.21.2026** — Suzane Huynh (Apr 21, 5:19 PM UTC). Agenda for bi-weekly Adobe call.
 
-## 🟢 LOW / No action — already handled / FYI
+## 🔵 Unanswered ≥3 Days — HIGH Priority Backlog (pre-dates this window)
 
-Google Ads automated account link + advertiser verification notifications (~8 items), Adobe Advertising Cloud alerts (3), Asana daily/portfolio summaries (5), Finergy PO reminder, Amazon Business Reshape 2026 reminder, V-CARE study invite, Apple Advertising report, Kudoboard for EAs (4/22), Blink Vanda beta, AB Reshape 2026 speaker nominations, Baloo-7 ticket resolved, MBET/COUPA Integration Resources (FYI — duplicate announcements), PSME Tech OP1 2027 general stakeholder ping, Sean Downey/Google satisfaction survey, ABMX invoice routing instruction (automated response), Google Ads support case ack.
+These are sitting in the inbox and need clearing. Staleness compounds.
 
----
+- **MX Paid Search Sync** — Alvarez Larrea, Lorena — 28 days old
+- **Action required: Need PoC from teams for AB Marketing refmarker mapping audit** — Munday, Brandon — 20 days old (original; Brandon re-forwarded on 4/21)
+- **AU PS Weekly Update** — Munday, Brandon — 20 days old
+- **REMINDER: Prime Day Creative Inputs Due** — Anderson, Jonathan [C] — 19 days old
+- **Reminder: Update Goals & Monthly Recaps** — Munday, Brandon — 16 days old
+- **ACTION REQUIRED: FY26 April RO Input - Due Apr 15th** — Lisa Moussa — 12 days old (overdue against stated deadline)
+- **Canceled event with note: Amazon Business x LiveRamp — Monthly Status** — Hannah Neustadt — 8 days old
+- **AU HandOff Doc - Final Review** (original) — Munday, Brandon — 8 days old
+- **Munday, Brandon assigned you a task in "Outbound Marketing Goals"** — Munday, Brandon — 5 days old
 
-## 📅 Today — Tue Apr 21 (all times PT)
+## ⚪ Low / No Action (noise)
 
-| Time | Event | Organizer | Location |
-|------|-------|-----------|----------|
-| 9:00 – 10:00 AM | Weekly Paid Acq Team Meeting | Brandon Munday | AUS20 12.104 / Ruby 04.204 / Zoom |
-| 10:30 – 11:00 AM | Amazon Business // Adobe Bi-Weekly Call | Suzane Huynh (Adobe) | Teams |
-| 12:30 – 1:00 PM | AU HandOff Doc - Final Review | Brandon Munday | Zoom |
-| 1:00 – 1:25 PM | MX Paid Search Sync | Richard (organizer) | Zoom |
-| 1:30 – 2:00 PM | **Richard/Brandon 1:1** | Brandon Munday | Zoom |
-| 4:30 – 4:55 PM | AB AU Paid Search Sync | Richard (organizer) | Zoom |
-
-**Walking-in notes:** Brandon 1:1 — Testing Approach v5 status, LiveRamp/Enhanced Match update, AU handoff readiness.
-
----
-
-## 📆 Week Ahead at a Glance
-
-- **Wed 4/22** — 12:00 Richard/Adi sync · 1:00 PM Bi-Weekly Google + AB Performance Sync (Mike Babich, SEA-FRV-3-F-Trix + Meet)
-- **Thu 4/23** — 9:00 AM Paid Acq: Deep Dive & Debate (Brandon) · 3:00 PM PSME Seattle Happy Hour (Todd, Flight Club) · **OOO starts**
-- **Fri 4/24 – Sat 4/25** — OOO (Richard)
-- **Mon 4/27** — ACQ Promo OHs · [HOLD] AB Marketing Reftag Bonanza working session (Kristine Weber) · Weekly Callouts reminder
-- **Ongoing** — Alex @ Adobe Summit through 4/22 · David (Hopp) in PHX 4/27-4/30 · Minami in SEA 4/27-5/1
+- Adobe invoice notifications (7 entries — automated)
+- Google Ads account/user/link notifications (10 entries — automated)
+- Asana digest and notification emails (3 entries)
+- Hedy session recaps (2 — MX PS, Weekly Paid Acq)
+- Amazon A to Z training, Accounts Payable remittance, expense report status, A to Z weekly task summary
+- Quick Report (ABMA Unknown Ref Marker), Launch Announcement (Basket Quoting), CBM OP1 2027 Intake
+- Alex VanDerStuyf re: Asana mention on ps-brand pages (auto-routed)
+- Self-sent (Williams, Richard — AM Brief, Outbound Marketing Goals replies, Paid Search Transition reply, Adobe Bi-Weekly Call invite)
+- Yahoo Japan release notes, ACQ Promo OHs cancellation (Saajan)
+- External cold outreach: Justin Ward (fire door course), Sean King (EMR question), Ads Growth Expert
 
 ---
 
-_Synced: 2026-04-21 Tue PT | 47 emails | 24 calendar events | DuckDB + file written_
+## 📅 Today's Calendar (4/22)
+
+1. **17:00–17:25 UTC (10:00–10:25 PT)** — Send Brandon MX forecast before this time (decay with the new regs level) — solo work block, self-organized
+2. **19:00–19:25 UTC (12:00–12:25 PT)** — Richard/Adi sync — recurring
+3. **20:00–20:30 UTC (13:00–13:30 PT)** — Bi-Weekly Google + AB Performance Sync — Mike Babich (Google), SEA-FRV-3-F-Trix
+4. **All-day** — Alex @ Adobe Summit: Apr 19–22 (free/FYI)
+
+---
+
+## Top 5 Actionable — Clear These Today
+
+1. **MX forecast to Brandon** (self-blocked, 10:00 PT) — the calendar block exists. Don't push it.
+2. **FY26 April RO Input** (Lisa Moussa, 12d old, was due Apr 15) — overdue, clear first thing.
+3. **Measure EM impact** subtask (Brandon, today's assignment, F90 LR Enhanced Match) — Brandon-assigned, needs at least a plan reply.
+4. **AU HandOff Doc Final Review** (Brandon, today + 8d old original) — tied to the AU transition; needs you to confirm the structure Brandon proposed.
+5. **refmarker mapping audit PoC** (Brandon forwarding Kristine, today + 20d old original) — low effort, just designate.
+
+---
+
+Synced: 2026-04-22 via Subagent C (AM-Backend) | 60 emails processed | 3 high / 3 medium / 54 low | 4 calendar events today | DuckDB writes: signals.emails + main.calendar_events + ops.data_freshness updated.

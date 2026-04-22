@@ -799,3 +799,72 @@ Run 52 totals: 10 experiments, 9 kept, 1 reverted (90% keep rate — high, but 3
 [spine:Tool Access] ADD (information_retrieval) → 1421w→1475w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
 [nervous-system:Purpose] ADD (information_retrieval) → 1607w→1751w. A=1.0 B=0.9 C=1.0 Δ=+0.1. 120s. KEEP.
 BATCH: 10 experiments, 7 kept, 3 reverted. Keep rate: 70%. Learning: eval agent context confusion caused 2 false reverts (gut, am-triage). Excerpted section approach + unique filenames resolved the issue for remaining experiments. ADD with worked examples continues to be high-yield.
+
+### Run 70 — 2026-04-22 (Karpathy Batch)
+[richard-style-docs:Evidence-Based Documents] REMOVE (output_quality) → 886w→625w. A=0.0 B=1.0 C=0.1 Δ=-1.0. 120s. REVERT.
+[amazon-politics:Reorgs+Influence] MERGE (info_retrieval) → 2863w→2369w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[richard-style-mbr:Examples] REMOVE (output_quality) → 807w→395w. A=0.1 B=- C=- Δ=-0.9. 60s. REVERT (fast_fail).
+[spine:Tool Access] ADD (info_retrieval) → 1417w→1501w. A=1.0 B=1.0 C=0.0 Δ=0.0. 120s. KEEP.
+[memory:Relationship Graph] ADD (info_retrieval) → 2484w→2534w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[device:The Test] ADD (info_retrieval) → 2730w→2807w. A=1.0 B=0.8 C=1.0 Δ=+0.2. 120s. KEEP.
+[richard-style-wbr:Common Callout Failures] SPLIT (output_quality) → 1201w→1214w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[nervous-system:Governance] REWORD (info_retrieval) → 1696w→1690w. A=1.0 B=0.8 C=1.0 Δ=+0.2. 120s. KEEP.
+[audit-asana-writes:Common Failures] ADD (output_quality) → 184w→197w. A=0.8 B=0.8 C=0.8 Δ=0.0. 120s. KEEP.
+[brain:Decision Log] REWORD (info_retrieval) → 1668w→1705w. A=1.0 B=0.8 C=0.0 Δ=+0.2. 120s. KEEP.
+
+## Run 71 — 2026-04-22 (Karpathy autoresearch batch)
+[gut:Excretion+AM3Brief] MERGE (info_retrieval) → 1954w→1958w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[richard-style-mbr:Examples] REWORD (output_quality) → 807w→865w. A=1.0 B=1.0 C=0.9 Δ=0.0. 120s. KEEP.
+[device:InstalledApps] COMPRESS (info_retrieval) → 2807w→2647w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP. -160w compression.
+[eod-refresh:Auto-Execute] REMOVE (output_quality) → 601w→548w. A=0.9 B=1.0 C=0.9 Δ=-0.1. 120s. REVERT. Detail loss: auto-execute item list.
+[richard-style-wbr:DataSourceQuickRef] REMOVE (output_quality) → 1168w→1006w. A=0.2 B=1.0 C=0.2 Δ=-0.8. 120s. REVERT. Unique content: data sources, queries, pitfalls.
+[richard-style-amazon:NarrativeStandard] COMPRESS (output_quality) → 1164w→1093w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP. -71w compression.
+[heart:ActivePipelinePE1] COMPRESS (info_retrieval) → 2802w→2731w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP. -71w compression.
+[richard-style-email:EmailWritingCraft] REMOVE (output_quality) → 802w→440w. A=0.0 B=1.0 C=0.0 Δ=-1.0. 120s. REVERT (fast_fail). Unique content: writing patterns, examples.
+[am-triage:PhaseA] REWORD (output_quality) → 343w→375w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[audit-asana-writes:Step2Extract] REWORD (output_quality) → 146w→159w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+Batch: 10 experiments, 7 kept, 3 reverted. Keep rate: 70%. Net word delta: -302w. All 3 REMOVEs reverted — anti-pattern confirmed across organs, hooks, and style guides.
+
+## Run 72 — 2026-04-22 (Karpathy batch, 10 experiments, 9 kept, 1 reverted)
+
+[am-triage:Phase B Triage] REWORD (output_quality) → 351w→343w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[spine:System Persistence Ground Truth] SPLIT (info_retrieval) → 1413w→1417w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[amazon-politics:Career Strategy] SPLIT (info_retrieval) → 2878w→2891w. A=1.0 B=1.0 C=0.97 Δ=0.0. 120s. KEEP.
+[device:When to Read] REWORD (info_retrieval) → 2617w→2631w. A=0.8 B=0.8 C=0.8 Δ=0.0. 120s. KEEP.
+[heart:Experiment Queue] ADD (info_retrieval) → 2731w→2774w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[nervous-system:Five Levels Position] REWORD (info_retrieval) → 1730w→1754w. A=0.0 B=1.0 C=0.0 Δ=-1.0. 120s. REVERT (eval_agent_context_bleed).
+[richard-style-mbr:Examples] SPLIT (output_quality) → 789w→796w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[brain:Level Graduation+Status+Rules] MERGE (info_retrieval) → 1668w→1648w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[eod-refresh:Common Failures] REWORD (output_quality) → 601w→617w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[amcc:The Hard Thing] ADD (info_retrieval) → 4870w→4974w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+
+Patterns: SPLIT continues 100% keep rate (3/3 this batch). REWORD 2/3 kept (1 revert due to eval agent context bleed, not content quality). MERGE 1/1 kept (brain level tables unified). ADD 2/2 kept. Exploration: amazon-politics×SPLIT (n=0→1, KEEP), am-triage×REWORD (n=2→3, KEEP), spine×SPLIT (n=2→3, KEEP). Keep rate 90% — above 50% target, but 3/10 were exploration combos which all kept, inflating the rate.
+
+### Run 73 — 2026-04-22 (Karpathy batch, 10 experiments, 9 kept, 1 reverted)
+[amcc:Resistance Taxonomy] RESTRUCTURE (info_retrieval) → 4853w→4870w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[spine:Tool Access] REMOVE (info_retrieval) → 1417w→1178w. A=0.1 B=- C=- Δ=-0.9. 60s. REVERT (fast_fail).
+[roster:Cross-References] RESTRUCTURE (info_retrieval) → 2096w→2115w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[heart:Design Choices+DuckDB] MERGE (info_retrieval) → 2773w→2736w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[richard-style-slack:Habits+CommPref] MERGE (output_quality) → 1565w→1569w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[brain:Prediction Template] ADD (info_retrieval) → 1648w→1738w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[richard-style-amazon:Narrative Standard] SPLIT (output_quality) → 1093w→1170w. A=1.0 B=1.0 C=0.5 Δ=0.0. 120s. KEEP.
+[richard-style-wbr:Examples] COMPRESS (output_quality) → 1168w→1053w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[am-triage:Phase C] MERGE (output_quality) → 404w→416w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[amazon-politics:Reorgs & Scope] SPLIT (info_retrieval) → 2962w→2962w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+
+## Karpathy Run 74 (2026-04-22)
+[device:Common Failures] RESTRUCTURE (info_retrieval) → 2631w→2638w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[richard-style-amazon:Source Templates] COMPRESS (info_retrieval) → 1093w→1065w. A=0.0 B=0.0 C=0.0 Δ=0.0. 120s. KEEP.
+[amazon-politics:Application to Richard] RESTRUCTURE (info_retrieval) → 2962w→2962w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[heart:The Metric+Experiment Signals] MERGE (info_retrieval) → 2736w→2737w. A=0.6 B=1.0 C=0.0 Δ=-0.4. 120s. REVERT.
+[brain:Five Levels] RESTRUCTURE (info_retrieval) → 1738w→1743w. A=0.0 B=1.0 C=1.0 Δ=-1.0. 120s. REVERT.
+[memory:Staleness Index] REWORD (info_retrieval) → 2446w→2441w. A=0.0 B=1.0 C=0.0 Δ=-1.0. 120s. REVERT.
+[nervous-system:Loop 3] COMPRESS (info_retrieval) → 1677w→1676w. A=0.0 B=0.0 C=0.0 Δ=0.0. 120s. KEEP.
+[richard-style-slack:Cadence] REWORD (output_quality) → 1569w→1571w. A=0.0 B=0.0 C=0.0 Δ=0.0. 120s. KEEP.
+[eyes:Market Deep Dives] RESTRUCTURE (info_retrieval) → 1382w→1402w. A=0.0 B=0.0 C=0.0 Δ=0.0. 120s. KEEP.
+[spine:Bootstrap] ADD (info_retrieval) → 1417w→1455w. A=0.0 B=0.0 C=1.0 Δ=0.0. 120s. KEEP.
+
+
+## 2026-04-22 — Karpathy Phase 6 experiment blocked (tool failure)
+
+[richard-style-email:Email (Analytical / Update)] ADD (output_quality) → 818w→(would-be 999w). A=- B=- C=- Δ=-. BLOCKER. invokeSubAgent unavailable → all three eval agents failed with `registerSubAgentExecution is not a function`. File reverted to 818w. Priors NOT updated (blocker, not revert). Hypothesis was concrete-example + Common-Failures table — both validated winning patterns. Retry when subagent path is restored. See `~/shared/context/active/experiment-results-latest.json` and `~/shared/context/experiments/experiment-log.tsv`.

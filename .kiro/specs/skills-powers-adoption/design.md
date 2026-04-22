@@ -4,11 +4,24 @@
 
 This design produces one human-facing reference system and two machine-facing artifacts. The human-facing deliverables are a routing decision tree (for new-workflow intake) and a skills-powers inventory (for "what do I already have"). The machine-facing artifacts are a skill/power metadata schema extension (so files self-declare sensitivity and portability) and an append-only activation log (so staleness is computable). Everything else is working state or documentation.
 
-**Reading order for the agent executing this adoption system**: Interplay with system-subtraction-audit → Architecture → Data Model → Routing Decision Tree → Sensitive-Data Classification Rules → Portability Tier Rules → Inventory File Spec → Candidate Identification → Adoption Habit Integration → Safe-Creation Workflow → Round-Trip File Format → Pruning Review → Anti-Goals → Design Decisions → Correctness Properties → Portability Check.
+**Reading order for the agent executing this adoption system**: Interplay with system-subtraction-audit → Architecture → Data Model → Routing Decision Tree → Sensitive-Data Classification Rules → Portability Tier Rules → Inventory File Spec → Pilot: activation of the 9 already-installed skills → Adoption Habit Integration → Safe-Creation Workflow → Round-Trip File Format → Pruning Review → Anti-Goals → Design Decisions → Correctness Properties → Error Handling → Testing Strategy.
 
 **Design stance**: This is governance, not a product. The adoption system does not deploy. It defines rules, a decision tree, a metadata schema, and a lightweight inventory + log. New skills and powers are built downstream by separate specs that consume these rules. If the rules need to change, a future spec edits this file; the rules themselves do not ship as code.
 
 **Why so thin on "implementation"**: The 10 requirements already specify the *what*. This design specifies the *how* with the same granularity as the sibling `system-subtraction-audit/design.md` — data-model fields, decision-tree branches, and worked examples — so a different-platform agent could re-execute the governance procedures without this spec's supporting context.
+
+### Revision History
+
+2026-04-22 — revision pass applied after stress-test against real on-disk structures (9 installed SKILL.md files + 4 installed POWER.md files + kill-list findings from system-subtraction-audit). Six findings addressed, each *subtracting* design surface:
+
+- **F1 (BROKEN)** — portability validator becomes advisory, not blocking. A blocking regex-scan would fail every one of the 9 existing skills on day 1 (charts references `scripts/generate.sh`; wiki-write references pipeline subagents; etc.). The day-1 mass-flag is the structural-tax failure the audit exists to catch.
+- **F2 (BROKEN)** — schema gains a `status` enum (`legacy` | `current` | `retired`). Zero of 13 installed assets have the new fields. Without status-gating, P5 (bijection) and P11 (schema) would contradict on day 1. Touch-it-classify-it migration, no flag day.
+- **F3 (BROKEN)** — inventory is orphan-by-design. The earlier claim that it counted as an *active* referrer under audit R2.8 was wrong (R2.8 is about referrer liveness, not directory location). Nothing auto-loads the inventory; ORPHAN status is accepted deliberately. Alternatives (auto-loaded steering, promptSubmit hook, evidence-only script) each violate an audit rule or anti-goal.
+- **F4 (BROKEN)** — missed-skill detector DROPPED ENTIRELY. No platform event between response draft and response send; any detector would be a convention ("remember to remember"), the exact failure skills were meant to eliminate. Property 13 is removed, the detector subsection removed, `missed` event type removed. Feedback-driven `missed-by-feedback` replaces it.
+- **F5 (WEAK)** — pilot is activation of the 9 already-installed skills, not construction of 3 new ones. Corpus exists; Richard has never meaningfully invoked it. Addition before subtraction is the anti-pattern.
+- **F6 (WEAK)** — routing tree gains step 0.5 (non-Kiro mechanism gate). The `dashboard-server.kiro.hook` kill-list entry (orphan hook duplicating `.bashrc`) is the canonical case the gate prevents.
+
+Properties post-revision: 15 (Property 13 dropped, not retired-in-place; remaining properties renumbered so there are no gaps).
 
 ### Interplay with system-subtraction-audit
 
@@ -21,21 +34,30 @@ This spec is the positive-construction complement to `system-subtraction-audit`.
    - Format split: one human-facing markdown (`inventory.md`) + one machine-facing JSONL (`activation-log.jsonl`) + transient JSON intermediates during creation (`overlap-check.json`). Same convention as the audit's `kill-list.md` + `execution.log` + intermediate JSONs.
    - Archive pattern: any retired skill/power file moves to `~/shared/wiki/agent-created/archive/skills-powers-pruned-{YYYY-MM-DD}/` before deletion, same shape as the audit's spec-archive path.
 
-3. **Search scope and referrer classification are respected.** The audit treats `.kiro/specs/**` as `documentation` referrers, not load-bearing. For the inventory and routing-framework doc to count as *active* referrers that save skills/powers from ORPHAN status in future audits, they must live **outside** `.kiro/specs/`. Both live at `~/shared/context/skills-powers/` (active scope per audit R2.8). The `.kiro/specs/skills-powers-adoption/` directory is the authoring scratchpad and gets archived when the initial build-out is complete.
+3. **Search scope and referrer classification are respected — skills and powers are ORPHAN-by-design.** The audit treats `.kiro/specs/**` as `documentation` referrers, not load-bearing. **Skills and powers will appear as ORPHAN in future audits because the activation mechanism (`discloseContext`, `kiroPowers activate`) is not a path referrer.** This is structurally correct — extension-loaded modules *should* look orphan in a dependency graph. The adoption system's inventory + activation-log are the governance layer that saves them from DELETE classification in any future audit. Earlier drafts claimed that placing the inventory at `~/shared/context/skills-powers/` its path-references to each skill would count as *active* referrers per audit R2.8. That claim was wrong: R2.8 is about *referrer liveness* (does anything actively load this file), not about directory location. The inventory itself also registers as ORPHAN in the audit graph — nothing auto-loads it — and we accept that deliberately rather than manufacture liveness via auto-loaded steering (which would trigger audit R5.6 UNCLEAR coupling) or a `promptSubmit` hook (the exact recurring-service pattern the audit's anti-goal #1 forbids). See §Inventory File Spec → "Location (orphan-by-design)" and §Anti-Goals #10.
 
 4. **No auto-loaded steering.** The audit's R5.6 warns: any always-loaded steering that path-references a candidate file becomes UNCLEAR with default KEEP — which means a bad-taste steering file can permanently save orphan content. This adoption system deliberately does **not** create a `.kiro/steering/skills-powers.md` auto-loaded layer. The inventory is consulted on-demand by the agent's natural lookup flow (when the agent is about to draft a skill or hit a keyword-match opportunity), never via steering frontmatter.
 
 5. **This spec is the extension-first answer to the audit's open question #7** ("restructure surviving files as extension-loaded modules per the pi / OpenClaw architecture pattern"). Skills via `discloseContext` and Powers via `kiroPowers activate` are already that pattern — extension-loaded, keyword-gated, on-demand. The adoption system's job is to route *new* workflows to this extension-loaded mechanism by default rather than adding more always-loaded steering or more hook surface.
 
-6. **The routing tree has an explicit reject-for-subtraction branch before any mechanism-selection branches.** The first question the tree asks is not "skill or power?" — it is "should this workflow be codified at all?" If the workflow is one-off, low-leverage, or already covered by memory + a simple prompt, the tree terminates at REJECT. This applies soul.md #3 (subtraction before addition) inside the design of the adoption system itself.
+6. **The routing tree has an explicit reject-for-subtraction branch and a non-Kiro-mechanism gate before any Kiro mechanism-selection branches.** The first question the tree asks is not "skill or power?" — it is "should this workflow be codified at all?" If the workflow is one-off, low-leverage, or already covered by memory + a simple prompt, the tree terminates at REJECT. The second question is "does an existing non-Kiro mechanism (shell alias, .bashrc, cron, git hook, IDE feature) already handle this?" — if yes, REJECT rather than build a Kiro duplicate. This applies soul.md #3 (subtraction before addition) inside the design of the adoption system itself. The kill-list's `dashboard-server.kiro.hook` DELETE candidate — a hook that duplicated .bashrc auto-restart logic — is the reference case this gate is designed to prevent.
 
 ---
 
 ## Architecture
 
-The adoption system is an ongoing **governance loop**, not a one-time audit. Five phases run on different cadences: inventory refresh is reactive (triggered by create/prune events), routing intake is reactive (triggered by Richard proposing a new workflow), safe-creation is reactive (triggered by routing deciding CREATE), activation logging is continuous (every skill/power invocation writes one line), and pruning review is human-triggered (Richard invokes it monthly or ad-hoc).
+The adoption system is an ongoing **governance loop**, not a one-time audit. Six phases run on different cadences: a one-shot activation-baseline scan captures starting-line usage of the 13 installed assets (Phase 0); inventory refresh is reactive (triggered by create/prune events); routing intake is reactive (triggered by Richard proposing a new workflow); safe-creation is reactive (triggered by routing deciding CREATE); activation logging is continuous (every skill/power invocation writes one line); and pruning review is human-triggered (Richard invokes it monthly or ad-hoc).
 
 ```
+  Phase 0: ACTIVATION BASELINE (one-shot — runs before Phase A the first time)
+      |
+      | inputs: ~/shared/context/intake/session-log.md (historical sessions)
+      |         filesystem state of ~/.kiro/skills/, ~/.kiro/powers/installed/
+      | procedure: scan session log for invocation patterns per skill/power name
+      | produces: seed rows in activation-log.jsonl with event="baseline"
+      |           per-asset "first observed activation" and "most recent activation"
+      v
+
   Phase A: INVENTORY REFRESH (reactive — on create / prune / install / uninstall)
       |
       | inputs: filesystem state of ~/.kiro/skills/, ~/.kiro/powers/installed/
@@ -51,17 +73,17 @@ The adoption system is an ongoing **governance loop**, not a one-time audit. Fiv
       |           → terminal leaf: REJECT | SKILL | POWER | STEERING | HOOK | SUBAGENT | ORGAN | EXTEND-EXISTING
       v
 
-  Phase C: SAFE-CREATION (reactive — only if Phase B terminates at CREATE-new)
+  Phase C: SAFE-CREATION (reactive — only if Phase B terminates at CREATE-new, OR when a legacy asset is edited)
       |
-      | inputs: routing-decision.json
+      | inputs: routing-decision.json (new asset) OR existing legacy asset being edited
       | procedure:
-      |   C1. overlap-check against existing mechanisms
+      |   C1. overlap-check against existing mechanisms (new assets only)
       |   C2. Richard review of proposed content + declared metadata
-      |   C3. write file
+      |   C3. write file (new asset) OR classify-then-write (legacy asset)
       |   C4. activation-validate (call discloseContext / kiroPowers activate)
-      |   C5. update inventory.md + append creation entry to activation-log.jsonl
-      | produces: new SKILL.md or POWER.md
-      |           overlap-check.json (archived with the new asset as evidence)
+      |   C5. update inventory.md + append creation/classification entry to activation-log.jsonl
+      | produces: new SKILL.md or POWER.md, OR reclassified legacy asset with extended frontmatter
+      |           overlap-check.json (new assets only; archived with the asset as evidence)
       v
 
   Phase D: ACTIVATION LOGGING (continuous — every activation during a session)
@@ -82,9 +104,9 @@ The adoption system is an ongoing **governance loop**, not a one-time audit. Fiv
       |           archive at ~/shared/wiki/agent-created/archive/skills-powers-pruned-{date}/
 ```
 
-**Why these five and not more**: an earlier sketch had a sixth phase for "periodic keyword-match audit" — walk every response and flag missed-skill opportunities. That phase was cut. The missed-skill note is part of Phase D (emitted inline during a response, not in a batch pass) and the keyword-match logic lives in the skill description itself (§Adoption Habit Integration). A separate batch phase would be a dashboard-shaped mechanism that fails both of the audit's workflow tests.
+**Why these six and not more**: an earlier sketch had a seventh phase for "periodic keyword-match audit" — walk every drafted response and flag missed-skill opportunities. That phase is cut. No post-draft / pre-send event exists in the platform, so any implementation would be a convention the agent is asked to remember to execute — exactly the "remember to remember" failure mode that skills were designed to eliminate. Missed-skill detection is not machine-enforced; gap data comes from Richard flagging after the fact, logged as `missed-by-feedback` (see §Adoption Habit Integration, §Design Decisions → "Why missed-skill detection was cut", §Anti-Goals #10).
 
-**Why it's five phases and not one "always-on adoption service"**: the audit's anti-goal #1 ("not an ongoing audit service") applies here. A recurring hook that checks for stale skills every day would itself be new surface area. Richard invokes pruning when the inventory feels bloated; the activation log captures data continuously because logging one line is cheap; everything else is reactive to Richard's intent.
+**Why it's six phases and not one "always-on adoption service"**: the audit's anti-goal #1 ("not an ongoing audit service") applies here. A recurring hook that checks for stale skills every day would itself be new surface area. Richard invokes pruning when the inventory feels bloated; the activation log captures data continuously because logging one line is cheap; everything else is reactive to Richard's intent. Phase 0 is one-shot and never runs again — once the baseline is in the log it's historical.
 
 ---
 
@@ -101,12 +123,13 @@ description: "Sync files to shared/context/... Triggers on sync to git, bridge s
 ---
 ```
 
-Extended frontmatter required by this adoption system:
+Extended frontmatter required by this adoption system **for `status: current` assets** (new skills created after this spec, or legacy skills reclassified at next edit):
 
 ```yaml
 ---
 name: bridge-sync
 description: "Sync files to shared/context/... Triggers on sync to git, bridge sync, portable body, agent bridge."
+status: current                           # one of: legacy | current | retired
 sensitive_data_class: Amazon_Internal     # one of: Public | Amazon_Internal | Amazon_Confidential | Personal_PII
 portability_tier: Platform_Bound          # one of: Cold_Start_Safe | Platform_Bound
 platform_bound_dependencies:              # required iff portability_tier == Platform_Bound, else omitted
@@ -123,12 +146,23 @@ last_validated: "2026-04-22T01:00:00-07:00"  # updated whenever activation-valid
 **Field definitions**:
 - `name` (string, required, existing): unique identifier, matches directory name.
 - `description` (string, required, existing): one-line purpose that ends with `Triggers on {keyword}, {keyword}, ...`. The trigger list is what the agent keyword-matches against; the adoption system's keyword-activation heuristic parses the last sentence for comma-separated triggers.
-- `sensitive_data_class` (enum, required): see §Sensitive-Data Classification Rules. If missing, validator errors; treated as `Amazon_Confidential` when the file is read for routing decisions (R3.5 default).
-- `portability_tier` (enum, required): `Cold_Start_Safe` or `Platform_Bound`. See §Portability Tier Rules.
-- `platform_bound_dependencies` (list, conditionally required): required iff `portability_tier == Platform_Bound`. Each entry has `{kind, id}` where `kind` is one of the enumerated kinds. Informational — not resolved at runtime, but parsed by the portability validator to confirm the file's internal consistency.
-- `owner_agent` (string, nullable): if this skill's logic is owned by a specialist agent (e.g., `wiki-writer`, `rw-trainer`, `karpathy`), name them. Null when no specialist owns the skill.
-- `created_at` (ISO 8601 datetime with TZ, required): immutable. Written by Phase C safe-creation.
-- `last_validated` (ISO 8601 datetime with TZ, required): updated by Phase C.4 (activation-validate) and by any explicit re-validation. Stale `last_validated` (> 90 days) is a signal for the portability validator to re-check but not itself a pruning trigger.
+- `status` (enum, required for current/retired; implicit for legacy): `legacy` | `current` | `retired`. See §Schema status rules below.
+- `sensitive_data_class` (enum, required for `status: current`): see §Sensitive-Data Classification Rules. Not required for `status: legacy`.
+- `portability_tier` (enum, required for `status: current`): `Cold_Start_Safe` or `Platform_Bound`. See §Portability Tier Rules. Not required for `status: legacy`.
+- `platform_bound_dependencies` (list, conditionally required for current): required iff `portability_tier == Platform_Bound`. Each entry has `{kind, id}` where `kind` is one of the enumerated kinds. Informational — not resolved at runtime, but parsed by the portability validator to confirm the file's internal consistency.
+- `owner_agent` (string, nullable, optional for current): if this skill's logic is owned by a specialist agent (e.g., `wiki-writer`, `rw-trainer`, `karpathy`), name them. Null when no specialist owns the skill.
+- `created_at` (ISO 8601 datetime with TZ, required for current): immutable. Written by Phase C safe-creation. Unknown for legacy assets until reclassification — left blank on legacy rows.
+- `last_validated` (ISO 8601 datetime with TZ, required for current): updated by Phase C.4 (activation-validate) and by any explicit re-validation. Stale `last_validated` (> 90 days) is a signal for the portability validator to re-check but not itself a pruning trigger.
+
+### Schema status rules (legacy / current / retired)
+
+Three statuses:
+
+- **`legacy`** — SKILL.md or POWER.md exists on disk with the original, minimal frontmatter only (skills: `{name, description}`; powers: `{name, displayName, description, keywords, author}`). No `sensitive_data_class`, `portability_tier`, `created_at`, or `last_validated` required. **Inventoried, activatable, exempt from schema validation** until the file is next edited. All 9 installed skills and 4 installed powers are `legacy` as of this spec's first run.
+- **`current`** — SKILL.md or POWER.md has the full extended frontmatter above. New assets created via Phase C are born `current`. Legacy assets become `current` when they are next edited for any reason (see migration rule below).
+- **`retired`** — asset has been pruned via Phase E. Archived to `~/shared/wiki/agent-created/archive/skills-powers-pruned-{date}/{name}/`. Not present on disk at `~/.kiro/skills/` or `~/.kiro/powers/installed/`. Retained in the inventory's historical section for one full pruning cycle then dropped.
+
+**Touch-it-classify-it migration rule**: when a legacy skill or power is edited for any reason (bug fix, trigger-list update, description tweak), the edit is not saved to disk until the extended fields have been added and the asset's status flipped to `current`. Richard reviews the classification inline with the edit. There is no forced flag-day migration of all 13 assets at once — the subtraction audit has taught us that forced flag-day migrations produce abandoned fields. Classification happens naturally on the turn Richard touches the file.
 
 ### Power metadata extension — POWER.md frontmatter
 
@@ -144,7 +178,7 @@ author: "Kiro Team"
 ---
 ```
 
-Extended frontmatter required by this adoption system:
+Extended frontmatter required by this adoption system **for `status: current` powers**:
 
 ```yaml
 ---
@@ -153,6 +187,7 @@ displayName: "Power Builder"
 description: "..."
 keywords: ["kiro power", "power builder", ...]
 author: "Kiro Team"
+status: current
 sensitive_data_class: Public              # same enum as skills
 portability_tier: Cold_Start_Safe         # same enum as skills
 platform_bound_dependencies: []           # required iff Platform_Bound
@@ -163,15 +198,16 @@ last_validated: "2026-04-22T01:00:00-07:00"
 ---
 ```
 
-**New fields**: `sensitive_data_class`, `portability_tier`, `platform_bound_dependencies`, `mcp_servers_declared`, `created_at`, `last_validated`. Same semantics as the skill fields.
+**New fields**: `status`, `sensitive_data_class`, `portability_tier`, `platform_bound_dependencies`, `mcp_servers_declared`, `created_at`, `last_validated`. Same semantics as the skill fields. Same legacy/current/retired semantics apply — all 4 installed powers are `legacy` until their next edit.
 
 **Note on `keywords`**: powers already declare `keywords` in frontmatter — the adoption system's keyword-activation heuristic uses this list directly for powers (same way it parses the trigger list from skill descriptions). Powers do not need an additional trigger field.
 
+
 ### Inventory file — `~/shared/context/skills-powers/inventory.md`
 
-**Location**: `~/shared/context/skills-powers/inventory.md`. This is inside the audit's active-scope (R2.8 of the audit) so any path-reference from the inventory to a skill or power counts as an active referrer and saves it from ORPHAN status in a future audit.
+**Location**: `~/shared/context/skills-powers/inventory.md`. This is inside the `~/shared/context/` tree — a stable location that survives sessions and platform moves — but it is **orphan-by-design in the audit's referrer graph**. See §Inventory File Spec → "Location (orphan-by-design)" for the rationale.
 
-**Shape**: single markdown file, one table per kind, sorted by kind then by name.
+**Shape**: single markdown file, one table per kind, sorted by kind then by name. The `Status` column is prominent so Richard can see at a glance which assets are legacy (unclassified), current (classified), and retired.
 
 ```markdown
 # Skills & Powers Inventory
@@ -181,39 +217,47 @@ last_validated: "2026-04-22T01:00:00-07:00"
 
 ## Skills (~/.kiro/skills/)
 
-| Row ID | Name | Triggers | Sensitivity | Portability | Last Activated | Status |
-|--------|------|----------|-------------|-------------|----------------|--------|
-| K-S1 | bridge-sync | sync to git, bridge sync, portable body, agent bridge | Amazon_Internal | Platform_Bound | 2026-04-20 | used |
-| K-S2 | charts | chart, dashboard, visualize, show dashboard | Amazon_Internal | Platform_Bound | 2026-04-18 | used |
-| ... | ... | ... | ... | ... | ... | ... |
+| Row ID | Name | Status | Triggers | Sensitivity | Portability | Last Activated | Usage |
+|--------|------|--------|----------|-------------|-------------|----------------|-------|
+| K-S1 | bridge-sync | legacy | sync to git, bridge sync, portable body, agent bridge | — | — | 2026-04-20 | used |
+| K-S2 | charts | legacy | chart, dashboard, visualize, show dashboard | — | — | 2026-04-18 | used |
+| K-S3 | coach | legacy | coaching, career, 1:1 prep, retrospective, growth, annual review | — | — | never | unused |
+| K-S4 | cr-tagging | legacy | (invoke-on-CR; no keyword triggers) | — | — | never | unused |
+| K-S5 | sharepoint-sync | legacy | sync to SharePoint, SharePoint sync, upload to SharePoint | — | — | never | unused |
+| K-S6 | wbr-callouts | legacy | WBR, callout, weekly callout, market callout | — | — | never | unused |
+| K-S7 | wiki-audit | legacy | audit wiki, stale docs, which docs are stale, wiki quality | — | — | never | unused |
+| K-S8 | wiki-search | legacy | search wiki, find doc, do we have a doc on, wiki lookup | — | — | never | unused |
+| K-S9 | wiki-write | legacy | write wiki, document, wiki article, what should we document | — | — | never | unused |
 
 ## Powers (~/.kiro/powers/installed/)
 
-| Row ID | Name | Type | Sensitivity | Portability | Last Activated | Status |
-|--------|------|------|-------------|-------------|----------------|--------|
-| K-P1 | power-builder | Knowledge Base | Public | Cold_Start_Safe | never | unused |
-| K-P2 | aws-agentcore | Guided MCP | Public | Platform_Bound | 2026-04-10 | used |
-| ... | ... | ... | ... | ... | ... | ... |
+| Row ID | Name | Status | Type | Sensitivity | Portability | Last Activated | Usage |
+|--------|------|--------|------|-------------|-------------|----------------|-------|
+| K-P1 | aws-agentcore | legacy | Guided MCP | — | — | never | unused |
+| K-P2 | flow-gen | legacy | Knowledge Base | — | — | never | unused |
+| K-P3 | hedy | legacy | Guided MCP | — | — | never | unused |
+| K-P4 | power-builder | legacy | Knowledge Base | — | — | never | unused |
 
 ## Staleness
 
-- **Unused (never activated)**: K-P1, K-S5
-- **Stale (no activation in 30+ days)**: K-S7
-- **Candidates for next pruning review**: K-P1 (installed 2025-12, never activated; >14d dormant per R6.5)
+- **Unused (never activated)**: K-S3, K-S4, K-S5, K-S6, K-S7, K-S8, K-S9, K-P1, K-P2, K-P3, K-P4
+- **Stale (activations exist but none in last 30 days)**: (none observed at baseline)
+- **Candidates for next pruning review**: surfaced at 30-day threshold; no action taken at baseline
 ```
 
 **Columns**:
 - `Row ID`: `K-S{N}` for skills, `K-P{N}` for powers, 1-indexed within kind. Stable within a given inventory rendering; may shift on re-render. The inventory header includes the sha256 of the rendering's input state so shifts are detectable.
 - `Name`: from frontmatter.
+- `Status`: one of `legacy`, `current`, `retired`. For legacy rows, Sensitivity and Portability render as em-dash (`—`) rather than `MISSING`, because the missing fields are expected for legacy assets, not a validation failure.
 - `Triggers` (skills) / `Type` (powers): trigger keywords for skills; `Guided MCP` or `Knowledge Base` for powers (derived from presence of `mcp.json`).
-- `Sensitivity`, `Portability`: from frontmatter. Missing → renders as `MISSING` in bold.
+- `Sensitivity`, `Portability`: from frontmatter. For `status: current` rows, required; missing → renders as **`MISSING`** in bold. For `status: legacy` rows, rendered as `—`.
 - `Last Activated`: most recent timestamp in activation-log.jsonl for this name; `never` if no entries.
-- `Status`: one of `used` (≥1 activation in last 30d), `unused` (never activated), `stale` (activations exist but none in last 30d).
+- `Usage`: one of `used` (≥1 activation in last 30d), `unused` (never activated), `stale` (activations exist but none in last 30d).
 
 **Sort order**: skills section sorted by name ASC; powers section sorted by name ASC; Staleness section groups by status.
 
 **How updated**:
-- Phase A refreshes the inventory after every Phase C safe-creation, Phase E pruning action, or manual install/uninstall Richard performs.
+- Phase A refreshes the inventory after every Phase C safe-creation or classification, Phase E pruning action, or manual install/uninstall Richard performs.
 - Richard can trigger an ad-hoc refresh by asking the agent to "refresh skills inventory" — the agent walks ~/.kiro/skills/ and ~/.kiro/powers/installed/ and rewrites the file.
 - The inventory is never silently regenerated on a schedule. Anti-goal.
 
@@ -224,66 +268,64 @@ last_validated: "2026-04-22T01:00:00-07:00"
 Line-delimited JSON, append-only. Same shape as the audit's `execution.log`. Survives sessions. Portable: no dependency on DuckDB or Kiro-specific infrastructure.
 
 ```
+{"event":"baseline","kind":"skill","name":"bridge-sync","first_observed":"2026-03-14T...","last_observed":"2026-04-20T...","session_id":"sess-2026-04-22-baseline","ts":"2026-04-22T00:59:00-07:00"}
 {"event":"activated","kind":"skill","name":"bridge-sync","request_summary":"sync body to agent-bridge","session_id":"sess-2026-04-22-01","ts":"2026-04-22T01:05:00-07:00"}
 {"event":"activated","kind":"power","name":"aws-agentcore","request_summary":"deploy bedrock agent","session_id":"sess-2026-04-22-01","ts":"2026-04-22T01:10:00-07:00"}
-{"event":"created","kind":"skill","name":"wbr-callouts","session_id":"sess-2026-04-22-01","ts":"2026-04-22T01:20:00-07:00","overlap_check_ref":"~/.kiro/skills/wbr-callouts/overlap-check.json"}
-{"event":"missed","kind":"skill","name":"wiki-search","request_summary":"find docs on testing approach","reason":"keyword match not activated before response draft","session_id":"sess-2026-04-22-02","ts":"2026-04-22T02:15:00-07:00"}
+{"event":"created","kind":"skill","name":"some-new-skill","session_id":"sess-2026-04-22-01","ts":"2026-04-22T01:20:00-07:00","overlap_check_ref":"~/.kiro/skills/some-new-skill/overlap-check.json"}
 {"event":"pruned","kind":"skill","name":"obsolete-skill","archive_path":"~/shared/wiki/agent-created/archive/skills-powers-pruned-2026-05-15/obsolete-skill/","session_id":"sess-2026-05-15-01","ts":"2026-05-15T03:00:00-07:00"}
 ```
 
 **Event types**:
-- `activated`: a skill or power was successfully invoked via `discloseContext` or `kiroPowers activate`.
-- `created`: a new skill or power was written to disk and passed Phase C activation-validate.
-- `missed`: the missed-skill detector flagged a gap — a response was drafted where a skill's keywords matched the request but the skill was never activated. Logged so the adoption habit is measurable.
+- `baseline`: one row per installed asset, written by Phase 0. Records `first_observed` and `last_observed` from historical session-log scan. Replaced by subsequent `activated` events; purely informational.
+- `activated`: a skill or power was successfully invoked via `discloseContext` or `kiroPowers activate`. The pre-draft activation path (agent checks inventory on reading a user request, calls `discloseContext` or `kiroPowers activate` before responding when a keyword matches) is the sole source of `activated` events.
+- `created`: a new skill or power was written to disk and passed Phase C activation-validate. Also used when a legacy asset is reclassified to `current` via touch-it-classify-it — event subtype is `classified` in that case.
 - `pruned`: the skill or power was archived and deleted per Phase E.
+- `missed-by-feedback`: Richard told the agent after the fact that it should have activated a skill/power but did not. **This is the only gap-data event.** It is never auto-generated — it is appended only when Richard explicitly flags a miss during or after a session. The row records the skill/power name, Richard's free-text feedback (≤200 chars), and the session id and timestamp. There is no automated pre-send detection — see §Adoption Habit Integration and §Design Decisions → "Why missed-skill detection was cut".
+- `correction`: errata for a prior row. Appended (not mutated) with a reference to the erroneous entry's timestamp.
 
 **Required fields**: `event`, `kind`, `name`, `session_id`, `ts`. Event-specific fields:
-- `activated`, `missed`: `request_summary` (short free-text, ≤120 chars).
+- `baseline`: `first_observed`, `last_observed` (both optional — null if no historical activation).
+- `activated`: `request_summary` (short free-text, ≤120 chars).
 - `created`: `overlap_check_ref` (path to the archived overlap-check evidence).
-- `missed`: `reason` (short free-text explaining why the detector flagged it).
 - `pruned`: `archive_path` (where the file was moved before deletion).
+- `missed-by-feedback`: `feedback_text` (Richard's free-text reason, ≤200 chars). No automatic detection; only present when Richard explicitly flags the miss.
 
 **No updates, no deletes**: this file is append-only. If an entry is wrong, a subsequent correction entry is appended with `event: "correction"` and a reference to the erroneous entry's timestamp. Same idempotence guarantee as the audit's `execution.log`.
 
 ### Overlap-check evidence record — per-creation JSON
 
-Captured once per safe-creation in Phase C.1, archived alongside the new asset as `~/.kiro/skills/{name}/overlap-check.json` (or `~/.kiro/powers/installed/{name}/overlap-check.json`).
+Captured once per safe-creation in Phase C.1, archived alongside the new asset as `~/.kiro/skills/{name}/overlap-check.json` (or `~/.kiro/powers/installed/{name}/overlap-check.json`). Only applies to **new** assets — not to legacy reclassification. Legacy assets already exist; the overlap-check would be retrospective and has no decision to document.
 
 ```json
 {
   "created_at": "2026-04-22T01:20:00-07:00",
   "proposed_asset": {
     "kind": "skill",
-    "name": "wbr-callouts",
-    "description": "Full WBR callout pipeline for weekly business review. Covers all 10 markets..."
+    "name": "some-new-skill",
+    "description": "..."
   },
   "searched_mechanisms": {
-    "skills": ["bridge-sync", "charts", "coach", "cr-tagging", "sharepoint-sync", "wiki-audit", "wiki-search", "wiki-write"],
-    "powers": ["power-builder", "aws-agentcore", "flow-gen"],
-    "subagents": ["rw-trainer", "karpathy", "callout-analyst", "callout-writer", "callout-reviewer", "wiki-writer", "wiki-researcher", "wiki-editor", "wiki-critic", "wiki-librarian", "wiki-concierge"],
-    "hooks": ["wbr-callouts.kiro.hook", "am-auto.kiro.hook", "eod.kiro.hook", "..."],
+    "skills": ["bridge-sync", "charts", "coach", "cr-tagging", "sharepoint-sync", "wbr-callouts", "wiki-audit", "wiki-search", "wiki-write"],
+    "powers": ["aws-agentcore", "flow-gen", "hedy", "power-builder"],
+    "subagents": ["rw-trainer", "karpathy", "wiki-writer", "wiki-researcher", "wiki-editor", "wiki-critic", "wiki-librarian", "wiki-concierge", "callout-analyst", "callout-writer", "callout-reviewer", "..."],
+    "hooks": ["am-auto.kiro.hook", "eod.kiro.hook", "..."],
     "steering": ["soul.md", "richard-writing-style.md", "callout-principles.md", "..."],
-    "organs": ["body.md", "brain.md", "memory.md", "..."]
+    "organs": ["body.md", "brain.md", "memory.md", "..."],
+    "non_kiro_mechanisms_considered": ["bashrc", "cron", "git hooks", "IDE features"]
   },
   "overlap_candidates": [
     {
-      "asset_path": "~/.kiro/hooks/wbr-callouts.kiro.hook",
+      "asset_path": "~/.kiro/hooks/some-existing-hook.kiro.hook",
       "overlap_type": "functional",
-      "overlap_score": 0.75,
-      "rationale": "Existing hook already fires on WBR prompt. Proposed skill would orchestrate the analyst-writer-reviewer pipeline but the hook just triggers it."
-    },
-    {
-      "asset_path": "~/.kiro/agents/callout-writer.json",
-      "overlap_type": "functional",
-      "overlap_score": 0.45,
-      "rationale": "Writer subagent is called by the pipeline; skill is an orchestrator, not a wrapper."
+      "overlap_score": 0.55,
+      "rationale": "Partial overlap on trigger; proposed skill is keyword-activated rather than event-triggered."
     }
   ],
   "decision": "CREATE_NEW",
-  "decision_rationale": "The existing wbr-callouts.kiro.hook is an event trigger; the proposed skill is a keyword-activated orchestrator for a multi-market pipeline that the hook does not cover (hook only fires on one specific prompt pattern). The three callout subagents are orchestrated by this skill — the skill's legitimate value-add per R10.5 is the sequencing.",
+  "decision_rationale": "...",
   "alternatives_considered": [
-    {"option": "extend wbr-callouts.kiro.hook", "rejected_because": "hook event trigger is narrow; skill needs keyword match across more prompt shapes"},
-    {"option": "no skill, keep ad-hoc", "rejected_because": "pipeline is invoked weekly × 10 markets = 40+ activations/quarter; leverage ranking places it top-5"}
+    {"option": "extend existing hook", "rejected_because": "..."},
+    {"option": "no skill, keep ad-hoc", "rejected_because": "..."}
   ],
   "reviewed_by_richard": true,
   "reviewed_at": "2026-04-22T01:18:00-07:00"
@@ -292,7 +334,7 @@ Captured once per safe-creation in Phase C.1, archived alongside the new asset a
 
 **Purpose**: NO-ORPHAN-CREATION property evidence. Every new skill or power carries its own justification forever. If a future audit asks "why does this skill exist alongside that subagent?", the overlap-check answers it without requiring Richard's memory.
 
-**Required fields**: `created_at`, `proposed_asset.{kind,name,description}`, `searched_mechanisms` (all 6 kinds present as lists), `overlap_candidates` (possibly empty), `decision` (one of `CREATE_NEW`, `EXTEND_EXISTING`, `REJECT`), `decision_rationale`, `alternatives_considered`, `reviewed_by_richard` (must be `true` for CREATE_NEW to proceed), `reviewed_at`.
+**Required fields**: `created_at`, `proposed_asset.{kind,name,description}`, `searched_mechanisms` (all 6 Kiro kinds present as lists, plus `non_kiro_mechanisms_considered` per revision 6), `overlap_candidates` (possibly empty), `decision` (one of `CREATE_NEW`, `EXTEND_EXISTING`, `REJECT`), `decision_rationale`, `alternatives_considered`, `reviewed_by_richard` (must be `true` for CREATE_NEW to proceed), `reviewed_at`.
 
 **Lifetime**: archived with the new asset, persists as long as the skill/power exists. On Phase E prune, the overlap-check.json is archived alongside the SKILL.md/POWER.md in the dated archive directory.
 
@@ -300,7 +342,7 @@ Captured once per safe-creation in Phase C.1, archived alongside the new asset a
 
 ## Routing Decision Tree
 
-Every proposed workflow walks this tree in order. First matching branch wins. The tree's first question is deliberately *should this exist at all?* — applying soul.md #3 (subtraction before addition) inside the design of the adoption system itself.
+Every proposed workflow walks this tree in order. First matching branch wins. The tree's first two questions are deliberately *should this exist at all?* and *does something outside Kiro already handle it?* — applying soul.md #3 (subtraction before addition) inside the design of the adoption system itself.
 
 Workflow dependency: Phase B intake. Future workflow: L3-L5 agentic orchestration will consume the same tree when autonomous agents propose encoding their own repeated subtasks.
 
@@ -316,6 +358,15 @@ Workflow dependency: Phase B intake. Future workflow: L3-L5 agentic orchestratio
        YES -> terminate: REJECT, rationale "keep in head, no codification needed".
               Do NOT create anything.
        NO  -> continue.
+       |
+       v
+  0.5. NON-KIRO GATE (external mechanism already handles it)
+       Does an existing non-Kiro mechanism already handle W? (shell alias,
+       .bashrc, cron, git hook, OS-level shortcut, IDE feature, team tool)
+         YES -> terminate: REJECT, rationale names the existing mechanism
+                (e.g., "already handled by .bashrc auto-restart").
+                Do NOT create anything inside Kiro's layers.
+         NO  -> continue to step 1.
        |
        v
   1. EXTEND-EXISTING gate (no duplication)
@@ -338,7 +389,7 @@ Workflow dependency: Phase B intake. Future workflow: L3-L5 agentic orchestratio
      Does W define a rule the agent must follow in EVERY interaction
      (identity, writing style, environment guardrails)?
        YES -> branch to mechanism=STEERING (auto-include). go to S-branch.
-             Scrutiny applies — steering is an every-chat tax.
+              Scrutiny applies — steering is an every-chat tax.
        NO  -> continue.
        |
        v
@@ -375,7 +426,7 @@ Workflow dependency: Phase B intake. Future workflow: L3-L5 agentic orchestratio
 ### Mechanism sub-trees (terminal branches)
 
 **REJECT-branch**:
-- Terminate. Do not create any file. Record rationale in the routing-decision record for future reference ("we considered codifying W but rejected per subtraction-before-addition").
+- Terminate. Do not create any file. Record rationale in the routing-decision record for future reference ("we considered codifying W but rejected per subtraction-before-addition" OR "we considered codifying W but rejected because non-Kiro mechanism X already handles it").
 
 **EXTEND-branch**:
 - Identify the existing asset path.
@@ -414,42 +465,46 @@ Workflow dependency: Phase B intake. Future workflow: L3-L5 agentic orchestratio
 
 ### Worked examples (one per terminal leaf — R2.5)
 
-**Example 1 — REJECT**: Richard asks, "Should we codify the workflow I did last Tuesday where I opened three tabs and compared three documents?"
+**Example 0 — REJECT via non-Kiro mechanism (step 0.5)**: Richard asks, "I want a hook that auto-restarts the dashboard server when the port goes down."
+- Tree: step 0 passes — the workflow is high-frequency (dashboards crash occasionally) and has non-trivial re-explanation cost. Step 0.5 catches it: `.bashrc` already runs the dashboard server on shell init. **Terminate: REJECT**, rationale "covered by non-Kiro mechanism; codifying as Kiro surface would be duplication across tool boundaries".
+- **Reference case**: this is the exact case the audit caught with `dashboard-server.kiro.hook` on the kill-list — an orphan hook, 11 lines, duplicated by `.bashrc`. Without step 0.5, the workflow would have passed into mechanism-selection and landed on HOOK. With step 0.5, it terminates early. This is the instinct-to-reach-for-Kiro-when-the-OS-already-does-it case the gate is designed to catch.
+
+**Example 1 — REJECT (step 0)**: Richard asks, "Should we codify the workflow I did last Tuesday where I opened three tabs and compared three documents?"
 - Tree: step 0 asks "does this happen < 1x/month, or is it a one-off?" → one-off. **Terminate: REJECT.**
 - Rationale: encoding a one-off three-tab comparison workflow adds surface without recurring payoff. Keep in head.
 
 **Example 2 — EXTEND-EXISTING**: Richard asks, "I want a workflow that pushes new body organs to the agent-bridge repo."
-- Tree: step 1 finds `bridge-sync` skill (K-S1) with description covering "Sync files to shared/context/ directory, push to agent-bridge". Overlap > 75%. **Terminate: EXTEND_EXISTING(bridge-sync).**
+- Tree: step 0 passes. Step 0.5 passes (no non-Kiro mechanism handles this). Step 1 finds `bridge-sync` skill (K-S1) with description covering "Sync files to shared/context/ directory, push to agent-bridge". Overlap > 75%. **Terminate: EXTEND_EXISTING(bridge-sync).**
 - Rationale: already exists. Edit bridge-sync to cover any newly-named organs if needed; do not create a parallel skill.
 
 **Example 3 — HOOK**: Richard asks, "I want something that fires when a file in ~/shared/context/intake/ is created and parses it for wiki candidates."
-- Tree: step 2 sees `fileCreated` event trigger. **Terminate: HOOK.**
+- Tree: steps 0 / 0.5 / 1 pass. Step 2 sees `fileCreated` event trigger. **Terminate: HOOK.**
 - Rationale: event-triggered, not keyword-triggered. Lives in `~/.kiro/hooks/intake-parse.kiro.hook`.
 
 **Example 4 — STEERING**: Richard asks, "I want the agent to always use bullet points for multi-item responses."
-- Tree: step 3 identifies identity/always-applicable rule. **Terminate: STEERING (auto-include).**
+- Tree: steps 0 / 0.5 / 1 / 2 pass. Step 3 identifies identity/always-applicable rule. **Terminate: STEERING (auto-include).**
 - Rationale: every-chat rule about response shape. Belongs in soul.md or a style steering file. Note: this already exists; example is illustrative for the decision tree.
 
 **Example 5 — SUBAGENT**: Richard asks, "I want a specialist agent that does deep career coaching using the full body system."
-- Tree: step 4 identifies specialist domain (career coaching) requiring deep context + autonomous execution. **Terminate: SUBAGENT.**
+- Tree: steps 0 / 0.5 / 1 / 2 / 3 pass. Step 4 identifies specialist domain (career coaching) requiring deep context + autonomous execution. **Terminate: SUBAGENT.**
 - Rationale: narrow domain, deep specialist, requires its own tool allowlist. Lives as `rw-trainer` subagent (already exists; example is illustrative).
 
 **Example 6 — ORGAN**: Richard asks, "I want a single place to track OP2 targets per market that the agent can read during callout writing."
-- Tree: step 5 identifies persistent shared state. **Terminate: ORGAN.** (Actually: already covered by `ps.targets` DuckDB table + `ps-performance-schema.md` reference doc, so would likely hit EXTEND-EXISTING at step 1; example is illustrative of the ORGAN leaf.)
+- Tree: steps 0 / 0.5 pass. Step 1 hits: already covered by `ps.targets` DuckDB table + `ps-performance-schema.md` reference doc, so would hit EXTEND-EXISTING. (Had there been no existing coverage, step 5 would identify persistent shared state → ORGAN. Example is illustrative of the ORGAN leaf.)
 
 **Example 7 — POWER**: Richard asks, "I want to onboard Bedrock AgentCore with its own tools and docs."
-- Tree: step 6 identifies MCP-bundle need. **Terminate: POWER (Guided MCP).**
+- Tree: steps 0 / 0.5 / 1 / 2 / 3 / 4 / 5 pass. Step 6 identifies MCP-bundle need. **Terminate: POWER (Guided MCP).**
 - Rationale: includes `mcp.json` with agentcore-mcp-server. Lives as `aws-agentcore` power (already installed; example is illustrative).
 
 **Example 8 — SKILL**: Richard asks, "When I say 'write a WBR callout', I want the full analyst-writer-reviewer pipeline to fire."
-- Tree: steps 0-6 all pass through. Step 7 default: SKILL. **Terminate: SKILL.**
-- Rationale: keyword-activated ("write a WBR callout", "WBR", "callout"), orchestrates multiple subagents in sequence (the callout pipeline), no MCP bundle needed, not every-chat. Lives as `wbr-callouts` skill.
+- Tree: steps 0 through 6 all pass through. **Terminate: SKILL.**
+- Rationale: keyword-activated ("write a WBR callout", "WBR", "callout"), orchestrates multiple subagents in sequence (the callout pipeline), no MCP bundle needed, not every-chat. Lives as `wbr-callouts` skill (already installed).
 
 ---
 
 ## Sensitive-Data Classification Rules
 
-Four tiers. Each tier has a concrete source-of-truth and a concrete path-allowlist. The validator enforces the allowlist at creation time and any time a skill/power is edited.
+Four tiers. Each tier has a concrete source-of-truth and a concrete path-allowlist. The validator enforces the allowlist at creation time and any time a `status: current` skill/power is edited. **Legacy assets are exempt** until they are reclassified via touch-it-classify-it.
 
 Workflow dependency: Phase C safe-creation uses these rules to validate the declared class. Future workflow: L5 autonomous agents that propose new skills on their own must classify before the create step will proceed.
 
@@ -457,12 +512,12 @@ Workflow dependency: Phase C safe-creation uses these rules to validate the decl
 
 **Public** — already published externally or intended for public consumption.
 - Sources: wiki articles under `~/shared/wiki/agent-created/` published to w.amazon.com or external; public AWS/Kiro documentation; open-source references; power-builder content.
-- Examples: power-builder POWER.md, aws-agentcore POWER.md, flow-gen POWER.md (all already installed as Public).
+- Examples (once classified): power-builder POWER.md, aws-agentcore POWER.md, flow-gen POWER.md.
 - Path allowlist for files declared Public: any path, including `~/.kiro/skills/`, `~/.kiro/powers/installed/`, `~/shared/wiki/**`, and anything synced to the agent-bridge repo.
 
 **Amazon_Internal** — non-confidential Amazon information used in routine work.
 - Sources: internal Amazon processes, tool guides, generic workflow patterns that happen to involve Amazon tools (Asana, DuckDB, Outlook MCP).
-- Examples: bridge-sync (syncs files but contains no Amazon-confidential content itself), charts (visualization patterns), wiki-audit (generic audit procedure).
+- Examples (once classified): bridge-sync (syncs files but contains no Amazon-confidential content itself), charts (visualization patterns), wiki-audit (generic audit procedure).
 - Path allowlist: any path on the user's local/SSH machines. **May NOT be synced to agent-bridge if the body content it touches is higher-sensitivity** — classification is about what the skill *handles*, not where the skill itself lives. Re-check at sync time by looking at each file's declared class.
 
 **Amazon_Confidential** — business-sensitive Amazon data.
@@ -479,434 +534,483 @@ Workflow dependency: Phase C safe-creation uses these rules to validate the decl
 
 ### Default handling when missing (R3.5)
 
-If a skill or power has no declared `sensitive_data_class`, the validator treats it as `Amazon_Confidential` for all path-allowlist checks. The validator also flags the skill as `needs_classification: true` in a re-validation queue so Richard can declare explicitly. Missing class is a warning, not an outright error — legacy skills created before this spec won't have the field and must be classified during first contact.
+For `status: current` assets, if `sensitive_data_class` is absent the validator errors. For `status: legacy` assets the field is not required and the validator does not error — the asset is treated as `Amazon_Confidential` for path-allowlist checks at any edit boundary, and the classification will be set explicitly during touch-it-classify-it.
 
 ### Path-allowlist enforcement algorithm
 
-Given a skill S with declared sensitivity C and an output-write path P:
+Given a `status: current` skill S with declared sensitivity C and an output-write path P:
 1. Look up allowlist(C) from the table above.
 2. Check P ⊆ allowlist(C). If not, emit validation error.
 3. For declared-class Amazon_Confidential and Personal_PII, additionally check: does P lie inside any directory currently synced to agent-bridge (per bridge-sync.md's sync list)? If yes, emit sync-violation error.
 4. The sync list is read at validation time, not cached. If bridge-sync.md's sync targets change, the next validator run catches any newly-illegal paths.
 
+For `status: legacy` skills, steps 1-4 are not run — legacy skills are grandfathered. The path-allowlist check runs on the first edit (when the asset becomes `current`).
+
+
+
 ---
 
 ## Portability Tier Rules
 
-Two tiers. The difference is whether a new AI on a different platform can understand and execute the skill/power using only the file text + other Cold_Start_Safe files.
+Two tiers. **The portability validator is advisory — it emits findings, it does not reject or rewrite skills.** This is a deliberate reframe from an earlier draft that treated portability as a blocking gate. On the real on-disk corpus of 9 skills and 4 powers, every existing asset references at least one `mcp_*` tool, a `.kiro.hook`, a `discloseContext` call, a subagent, or a script — which means a blocking validator would force-downgrade every legacy asset on first run or require a `platform_bound_dependencies` list nobody will maintain. That is exactly the "novel structural tax the audit would turn around and delete" failure mode. Portability is a *declaration of intent* and a *source of honesty in the file itself*, not a gate.
 
-Workflow dependency: Phase C safe-creation applies these rules. Future workflow: L5 platform-migration scenarios depend on Cold_Start_Safe skills surviving the move intact; Platform_Bound skills migrate but will need platform-specific rewriting of their declared dependencies.
+Workflow dependency: Phase C safe-creation uses these rules to classify the declared tier for `status: current` assets and to emit advisory findings. Future workflow: cold-start recovery onto a platform without Kiro's MCP servers — the tier declaration tells a recovering agent which files it can trust cold.
 
-### Cold_Start_Safe indicators (what makes a skill portable)
+### Tier definitions
 
-A skill is Cold_Start_Safe when **all** of the following hold:
-- Instructions describe workflow *intent* in plain language ("sync body files to the remote repo and run a verification step"), not tool-specific procedure ("call `mcp_ai_community_slack_mcp_post_message` with channel_id=...").
-- No direct references to Kiro-specific tool names (`discloseContext`, `invokeSubAgent`, `kiroPowers`).
-- No direct references to specific MCP tool function names (`mcp_*`).
-- No direct references to specific subagent names (`rw-trainer`, `karpathy`, `wiki-writer`).
-- No direct references to specific hook IDs (`am-auto.kiro.hook`, `eod.kiro.hook`).
-- No direct references to specific DuckDB tables unless the reference includes enough context for a new agent to understand what the table contains (table schema described, not just table name).
-- No hard-coded file paths that only exist in this environment (unless the path represents a portable convention, like `~/shared/context/body/`).
+**Cold_Start_Safe** — the file's intent is expressible in plain text. A new agent on a different platform can read the file and understand what it's supposed to do using only the file text plus other `Cold_Start_Safe` files in the agent-bridge repo.
+- Positive markers: the SKILL.md / POWER.md body describes the *goal* and the *procedure* in prose. If it names specific mechanisms, it names them with fallbacks ("use Slack MCP if available; otherwise describe what would be posted").
+- Negative markers (would indicate `Platform_Bound`): hard-coded references to `mcp_*` tool names, specific `.kiro.hook` IDs, specific subagent names, script paths, DuckDB table names.
+- Examples (aspirational — no legacy skills currently classify as Cold_Start_Safe): a `wiki-write` skill that describes *how to write a wiki article* in prose, without naming the wiki-writer subagent, could be Cold_Start_Safe. A `charts` skill that describes the *kind of dashboard* and the inputs, without naming the dashboard-server script, could be Cold_Start_Safe.
 
-### Platform_Bound indicators (what makes a skill non-portable)
+**Platform_Bound** — the file depends on platform-specific mechanisms to function. A recovering agent on a different platform would need to either re-implement the dependencies or rewrite the skill.
+- All 9 existing skills fall here on inspection: `bridge-sync` depends on `scripts/sync.sh` and `mcp_ai_community_slack_mcp_post_message`; `charts` depends on a dashboard-server script; `coach` depends on the `rw-trainer` subagent; `wbr-callouts` depends on the analyst → writer → reviewer subagent pipeline; etc.
+- **`platform_bound_dependencies` is RECOMMENDED, not required.** An asset declared Platform_Bound MAY enumerate its platform-specific dependencies. Omission is not a validation error — it's advisory information that helps a future cold-start attempt but its absence does not block anything. When present, the validator parses it and cross-checks consistency with the file body (see validator rules below).
 
-A skill is Platform_Bound when **any** of the following hold:
-- Body contains MCP tool function names (`mcp_ai_community_slack_mcp_search`, `mcp_hedy_GetSessionDetails`, etc.).
-- Body contains subagent names (`invokeSubAgent(name="rw-trainer")`).
-- Body contains hook IDs (`am-auto.kiro.hook`).
-- Body specifies DuckDB table names without schema context (`SELECT * FROM asana.asana_tasks` with no explanation of what `asana_tasks` is).
-- Body hard-codes paths outside the portable convention.
+### Portability validator — advisory only
 
-### Consistency check (R4.5 / PORTABILITY-CONSISTENCY property)
+The portability validator runs at Phase C for `status: current` assets and can be invoked ad-hoc for any asset. It **emits a report**, not a pass/fail verdict.
 
-The portability validator runs these checks:
-1. Parse the skill body.
-2. Scan for Platform_Bound indicator tokens:
-   - Regex `mcp_[a-z_]+` for MCP tool names.
-   - Regex `invokeSubAgent\(.*name=['"]([a-z\-]+)['"]` for subagent references.
-   - Regex `[a-z\-]+\.kiro\.hook` for hook IDs.
-   - Regex `kiroPowers\s*\(` or `discloseContext\s*\(` for Kiro API names.
-3. If declared `Cold_Start_Safe` AND any token found → validator flags `portability_inconsistency: true` and lists the offending tokens. Skill must either:
-   - Be downgraded to `Platform_Bound` and the tokens documented in `platform_bound_dependencies`, OR
-   - Be rewritten to remove the tokens.
-4. If declared `Platform_Bound`, validator verifies `platform_bound_dependencies` is non-empty and each declared dependency appears in the body (soft check; warning, not error, since some dependencies are declared at the semantic level not the syntactic level).
+Validator procedure for an asset F with declared tier T:
 
-### Examples
+1. Scan F's body for platform-bound-indicator tokens:
+   - `mcp_[a-z_]+` (MCP tool names)
+   - `invokeSubAgent` and subagent names from `~/.kiro/agents/`
+   - `[a-z0-9_\-]+\.kiro\.hook` (hook IDs)
+   - `discloseContext`, `kiroPowers`
+   - Script paths under `scripts/`, `~/shared/tools/`, `~/shared/scripts/`
+   - DuckDB table references (`ps\.`, `signals\.`, `asana\.`, `main\.`)
+2. Collect all matches into a findings list.
+3. Emit the findings as **informational output**, grouped by category:
+   - "Declared `Cold_Start_Safe` — findings: {list of tokens detected}. Author review: are these references essential, or can they be paraphrased?" (advisory only — no rejection)
+   - "Declared `Platform_Bound` — findings: {list of tokens detected}. `platform_bound_dependencies` list: {declared list}. Cross-check: {tokens in body NOT listed, tokens listed NOT in body}." (advisory only — cross-check is informational)
+4. **The validator never modifies F. The validator never blocks writes. The validator's only output is a report.**
 
-**Cold_Start_Safe skill** (hypothetical): "Format a WBR callout from weekly metrics. Input: market, registrations, spend, CPA, previous-week deltas, and an OP2 target. Output: three paragraphs in the Amazon 1-2-3 style (what happened, why it happened, what we're doing). Check the numbers sum correctly before finalizing."
-- Portable: any agent on any platform can execute with text input.
+The report is written to Phase C's session state and surfaced to Richard during Phase C.2 review. Richard decides whether to rewrite the file, update the declared tier, or proceed as-is. The output is also logged as an `activated` event subtype `portability_report` in activation-log.jsonl when the validator runs.
 
-**Platform_Bound skill** (bridge-sync, actual): "Run `scripts/sync.sh` to commit and push changes to the agent-bridge GitHub repository."
-- Platform-bound: references a specific script at a specific path. Declared dependencies list `{kind: script, id: "scripts/sync.sh"}`.
+### Consistency report (replaces blocking check from earlier draft)
+
+For an asset declared `Cold_Start_Safe` where the body contains Platform_Bound-indicator tokens, the validator emits a consistency note: "Declared Cold_Start_Safe but body references {token}. Consider rewriting the reference to be platform-agnostic, or downgrading tier to Platform_Bound." **This is advisory. The asset is saved either way.** Contrast with the earlier-draft behavior which would have rejected or auto-downgraded; that earlier behavior was the structural tax F1 was designed to remove.
+
+### Why advisory, not enforcing
+
+Three reasons:
+
+1. **Real-world compatibility**: the 13 installed assets contain Platform_Bound tokens by necessity. A blocking validator would force every legacy asset to either carry a `platform_bound_dependencies` list nobody will maintain or downgrade to Platform_Bound with stub documentation. Either outcome is what the subtraction audit would catch and delete in the next cycle.
+2. **Cold-start recovery is aspirational**: Cold_Start_Safe is aspirational documentation that describes a portability goal. Turning it into a pass/fail check would flip the meaning from "I am trying to make this portable" to "my code didn't compile", which is a category mismatch.
+3. **Trust the author**: Richard or whoever writes a skill is the one who knows whether a reference is essential or accidental. The validator surfaces *what* references exist; the human decides *whether they matter*.
+
 
 ---
 
 ## Inventory File Spec
 
-### Location (audit-referrer-aware)
+The inventory is a single markdown file at `~/shared/context/skills-powers/inventory.md`. It is a **reference document**, not an active load-bearing file.
 
-`~/shared/context/skills-powers/inventory.md`.
+Workflow dependency: Phase A (inventory refresh) writes this file; Phase E (pruning review) reads it; Richard reads it on demand. Future workflow: cold-start recovery onto a new platform reads the inventory as its first step to understand what skills/powers exist.
 
-**Why this path**:
-- `~/shared/context/` is inside the audit's active-referrer scope (R2.8 of audit). Any path-reference from the inventory to a skill/power counts as an active referrer, saving the skill/power from ORPHAN classification in a future audit.
-- Not inside `.kiro/specs/**` (which the audit classifies as `documentation` and does not count as active).
-- Not inside `.kiro/steering/` (which would auto-load the file every chat — the anti-pattern we are explicitly avoiding per Interlock point 4).
+### Location (orphan-by-design)
 
-Workflow dependency: Phase A inventory refresh writes this file. Every Phase B / C / E phase reads it to orient. Future workflow: L5 autonomous skill-proposal agents read this file before proposing new skills to avoid duplicates.
+**Path**: `~/shared/context/skills-powers/inventory.md`.
 
-### Format
+**Why this path, and why it's orphan-by-design in the audit's referrer graph**:
 
-Markdown with three sections: Skills table, Powers table, Staleness summary. See §Data Model → Inventory for the column layout.
+The inventory is a reference document, not a live-execution file. Its path-references to skills count as `documentation` referrers in the audit's classification, NOT `path` (active). This matters because of a second, stronger fact: **skills and powers themselves are ORPHAN-classified by default in any future audit**, unless something else actively references them (a hook fires the skill, an agent reads the power's MCP, a script imports a skill's helper). The inventory does not save them. This is the design: skills/powers are extension-loaded by construction, and extension-loaded files register as orphan in a referrer-graph analysis because nothing loads them in the active path — their activation tool (`discloseContext`, `kiroPowers`) is not a path-reference.
 
-### How updated
+An earlier draft of this section claimed that placing the inventory inside `~/shared/context/skills-powers/` would make its path-references to each skill count as *active referrers* under audit R2.8. That claim was wrong. The audit's "active" definition (R2.8 + R2.2) is about **referrer liveness**, not directory location. Nothing auto-loads `~/shared/context/skills-powers/inventory.md`. In the audit's graph, the inventory is ORPHAN — and so are the skills and powers it lists.
 
-Three update paths:
-1. **Phase C auto-update**: whenever a new skill or power is created and passes activation-validate, the inventory is re-rendered in the same session.
-2. **Phase E auto-update**: whenever a skill or power is pruned, the inventory is re-rendered.
-3. **Richard-triggered refresh**: Richard can ask "refresh skills inventory" and the agent re-walks the filesystem + re-reads the activation log and rewrites the file. Used when Richard manually installed/uninstalled a power or skill outside the adoption-system flow.
+**We accept this orphan status deliberately**. The alternatives are worse:
 
-### Freshness verification
+- **Auto-loaded steering referencing the inventory**: triggers audit R5.6 UNCLEAR coupling (always-auto-included referrer → candidate file), soft-preserving the inventory forever. Also taxes every chat.
+- **A `promptSubmit` hook that loads the inventory every turn**: the exact recurring-service pattern anti-goal #1 forbids.
+- **A script in `~/shared/tools/` that touches the inventory**: a script that exists only to create active-referrer evidence is itself kill-list material.
 
-The inventory header records a sha256 of its input state:
+The correct answer: accept ORPHAN status; keep the inventory (and the skills it lists) alive by value to Richard and future agents reading it on demand; let the adoption system's governance layer (inventory + activation log) serve as the documentary justification the audit's R5 would otherwise apply to an unreferenced file. Kept discoverable (see below) but governed by usefulness, not auto-load.
+
+**What makes the inventory discoverable despite being orphan**:
+
+A single **name-reference line** is added to soul.md's Data & Context Routing table. Per audit R2.2, a bare filename is `name` match-type — informational, not active. Does NOT save the inventory from ORPHAN status, but makes it discoverable to an agent parsing soul.md naturally.
+
+Proposed soul.md addition (name-reference only, no `#[[file:...]]`, no auto-include):
 ```
-**Input state hash**: sha256:abc123...
+| Skills/powers inventory: what's installed and what's activated | — | ~/shared/context/skills-powers/inventory.md |
 ```
 
-The hash is computed over: concatenation of `{filepath}\n{frontmatter-yaml}\n` for every SKILL.md and POWER.md, sorted by filepath. On read, the agent re-computes the hash against the current filesystem. Mismatch → agent runs Phase A before trusting the inventory's content.
+Richard can also find it by asking any agent "where's the skills inventory?".
 
-No freshness hook, no scheduled refresh. Verification is on-demand by the consumer (another agent or a Phase B/C/E flow), matching the audit's principle of no recurring automation.
+### Shape and schema
+
+See §Data Model → "Inventory file" for the full table schema.
+
+
 
 ---
 
-## Candidate Workflow Identification Method
+## Pilot: activation of the 9 already-installed skills
 
-Workflow dependency: one-shot initial identification, then reactive during Phase B as Richard proposes new workflows. Future workflow: L3 team-adoption workflows will use the same leverage-ranking formula to decide which team workflows are worth codifying.
+**The skills corpus already exists.** `bridge-sync`, `charts`, `coach`, `cr-tagging`, `sharepoint-sync`, `wbr-callouts`, `wiki-audit`, `wiki-search`, `wiki-write` are the pilot. The adoption system's pilot measure is not *ship N new skills* — it is **achieve sustained activation of the installed 9 over a 30-day window**. Rationale: the actual adoption gap is *activation of what exists*, not *design of what to build next*. See §Design Decisions → "Why the pilot is the existing 9, not 3 new ones".
 
-### Source scan
+Workflow dependency: Phase 0 activation-baseline + Phase D activation-logging produce the activation metric that determines whether the adoption habit is working. Future workflow: once activation baseline is re-established and shown to trend upward, the leverage formula (below, demoted) becomes relevant for deciding *additional* candidates.
 
-Four input sources per R5.1:
-1. **`~/shared/context/body/body.md`** — system map. Look for workflows named in the navigation layer that are currently handled manually each session.
-2. **`~/shared/context/body/device.md`** — installed apps and tools. Look for tool-use patterns that recur (e.g., "every time I open Outlook I do X").
-3. **Hook inventory** (`~/.kiro/hooks/*.kiro.hook`). Already-codified event-triggered workflows — if a hook covers it, the adoption system does NOT recommend a new skill (R5.4).
-4. **Subagent inventory** (`~/.kiro/agents/*.json`). Already-codified specialist domains — if a subagent covers it, the adoption system does NOT recommend a new skill (R5.4).
+### Pilot metric
 
-Additional sources: `~/shared/context/intake/session-log.md` (recent session activity — what has Richard been repeatedly asking for?), DuckDB `main.project_timeline` (recurring activity signals).
+The pilot runs for 30 days starting at Phase 0 execution.
 
-### Leverage ranking formula
+**Success criterion**: the activation log shows ≥3 activations per skill across the 30-day window, with at least 5 of the 9 skills activated at all. Skills that fail the threshold become **Phase E pruning candidates, not replacements-to-build**.
 
-Per Richard's brain.md leverage framework:
-- **Recurrence**: how often does the workflow happen? `R = activations_per_month` (estimated).
-- **Explanation cost**: how expensive is re-explaining the workflow each time? `C = rough_minutes_to_re-explain`.
-- **Artifact level**: which L1-L5 level does it produce? `L ∈ {1, 2, 3, 4, 5}` (higher = more strategic).
-- **Leverage score**: `score = R × C × L`.
+The metric is asymmetric: a low-activation skill is presumed redundant (either covered by another mechanism, or its workflow doesn't recur often enough to justify codification). The burden of proof is on the skill to show it's used, not on the agent to prove it's unused.
 
-Higher score = higher priority for codification. Scores are ordinal only — they exist to sort, not to be trusted in absolute terms.
+### Pilot procedure
 
-### Pilot cap (R5.6)
+1. **T0 (day 0)**: run Phase 0. Scan `~/shared/context/intake/session-log.md` for historical activations per skill/power name. Emit `baseline` rows in activation-log.jsonl. Snapshot the inventory showing current activation state.
+2. **T0-T30 (days 0-30)**: normal operation. Activation log accrues `activated` events via Phase D as skills/powers are invoked by the pre-draft activation path (agent checks the inventory on reading the request and activates on keyword match before responding). Richard is not asked to remember to invoke skills. If the activation habit is working, the log grows.
+3. **T30 (day 30)**: compare per-asset activation counts against the success criterion. Skills meeting it stay. Skills failing it move into the next Phase E pruning review as archival candidates.
 
-Top 3 candidates by leverage score get the pilot. Not top 10. Not all candidates. Three. Rationale in §Design Decisions.
+### What the pilot produces and does not produce
 
-### Candidate record shape
+Produces: 30 days of activation data in activation-log.jsonl; a re-rendered inventory showing per-asset usage at T30 vs. T0; a per-skill decision at T30 (keep if criterion met, prune if not).
 
-Each candidate is one row in a ranked list:
+Does NOT produce:
+- **Any new skills or powers.** No new skill is created during the pilot window unless Phase B routing explicitly terminates at CREATE_NEW AND the overlap-check surfaces no viable EXTEND_EXISTING on the existing 9.
+- **A new inventory ranking.** Leverage formula is demoted to a future-rounds tool.
+- **Any automated intervention.** Missed-skill detection is out of scope per F4. Missed skills surface via `missed-by-feedback` entries (Richard flagging), not an auto-detector.
 
-```json
-{
-  "rank": 1,
-  "workflow_description": "Write a WBR callout pipeline end-to-end across 10 markets",
-  "proposed_mechanism": "SKILL",
-  "proposed_sensitivity": "Amazon_Confidential",
-  "proposed_portability": "Platform_Bound",
-  "proposed_trigger": "WBR, callout, weekly callout, market callout",
-  "existing_asset_overlap": [{"path": "~/.kiro/hooks/wbr-callouts.kiro.hook", "overlap_type": "functional", "rationale": "hook fires on prompt; skill orchestrates pipeline"}],
-  "duplicates_existing": false,
-  "leverage_score": 4 * 30 * 3,
-  "pilot": true
-}
-```
+### Why 30 days and not shorter
 
-The ranked list goes in the initial build-out spec (downstream of this design). The list is NOT part of this adoption system's durable artifacts — it's a one-shot work product that seeds the pilot skills. After the pilot skills are built, the ranked list is archived.
+Activation is low-frequency. Coach-pipeline triggers are monthly. SharePoint sync is weekly. WBR callouts are weekly. A 7-day window doesn't capture the full activation cycle. A 30-day window matches the pruning cadence (R8.5) and gives each low-frequency skill at least one natural opportunity.
+
+### Phase B step 1 — check existing skills first (elevated)
+
+Phase B of the architecture — the routing decision tree — already includes an EXTEND-EXISTING gate at step 1. During and after the pilot, this gate's standard is strict:
+
+- Before walking the rest of the decision tree for any new-workflow proposal, the agent MUST check whether any of the 9 installed skills' trigger lists or any of the 4 installed powers' keyword lists matches the proposed workflow description. Match threshold: 50% keyword overlap OR one exact trigger phrase match.
+- A match → terminate at EXTEND_EXISTING(asset) with the matched asset surfaced to Richard for edit rather than create.
+- No match → continue to step 2 (event vs. keyword split).
+
+This is not a new step — it's a stricter standard for an existing step. The earlier draft treated EXTEND-EXISTING as one gate among many; this revision treats it as the first-priority gate. Rationale: the on-disk corpus of 13 assets is underutilized; routing should bias toward surfacing existing coverage before creating more.
+
+### The leverage formula (demoted — reserved for future rounds)
+
+The earlier draft included a leverage-ranking formula for new-skill candidates:
+
+> `leverage_score = (frequency_per_month × reexplanation_cost_in_minutes × cross_team_usability) / one_time_creation_cost_in_minutes`
+
+This formula is **preserved as a reference for future rounds** — specifically, rounds after the pilot concludes and Richard has 30+ days of activation data indicating a real activation gap not addressable by extend-existing. Until then, the formula is not in active use. It is here rather than deleted because:
+
+1. It encodes a reasonable mental model (recurring × reexplanation ÷ creation).
+2. Deleting it would lose the reasoning and require re-deriving it later.
+3. Keeping it disarmed (demoted) is cheaper than keeping it armed (where every new proposal runs the formula even though addition is off the table).
+
+**When the formula becomes active**: only after Phase 0's 30-day measurement concludes AND Richard explicitly decides the activation gap justifies new-skill creation AND a specific workflow has passed through the Routing Decision Tree's steps 0, 0.5, and 1 without terminating. At that point, the formula ranks the surviving candidates.
+
+**When the formula is NOT active**: during the pilot period, and during any later period where EXTEND-EXISTING terminates a proposal. The formula does not decide whether to create; it only ranks between already-decided create candidates.
+
+### Candidate list source (reference data — future rounds only)
+
+For the eventual future rounds when the formula becomes active, candidate sources per R5.1 are:
+- body.md system map
+- device.md installed apps / tools inventory
+- existing hook inventory (`~/.kiro/hooks/*.kiro.hook`)
+- existing subagent inventory (`~/.kiro/agents/*.json`)
+
+Candidates drawn from these sources are evaluated against the Routing Decision Tree. The tree's step 1 EXTEND-EXISTING gate catches most of them; the formula ranks whatever survives. The R5.6 cap of "no more than three candidates to pilot adoption" becomes relevant only after the initial pilot on existing assets has established a baseline.
+
+
 
 ---
 
 ## Adoption Habit Integration
 
-R6.1-R6.2 require two behaviors: (1) activate a matching skill before responding, and (2) flag a missed opportunity after responding when a skill was not activated but should have been.
+The goal is that skills surface naturally when Richard's request matches their triggers.
 
-Workflow dependency: Phase D runs continuously during any chat session where skills are installed. Future workflow: L3 team-tooling adoption tracker consumes the `missed` events to compute adoption rate per skill per teammate.
+Workflow dependency: Phase D activation logging; Phase E pruning review. Future workflow: L5 autonomous agents that invoke skills on their own during multi-turn tasks rely on the same trigger-matching logic.
 
-### Keyword-activation heuristic (pre-response, R6.1)
+### In-turn activation via discloseContext / kiroPowers activate
 
-Procedure the agent follows on every user request before drafting a response:
+On reading a user request, the agent checks the inventory's trigger lists (skills) and keyword lists (powers). If the request text matches any installed skill's trigger keywords or any installed power's `keywords` array, the agent activates the matching asset before producing the substantive response:
 
-1. Parse the user request into a set of meaningful tokens (lowercase, strip punctuation, keep multi-word phrases).
-2. For each installed skill S, parse S's frontmatter `description` and extract the trigger list (everything after "Triggers on " as comma-separated phrases).
-3. For each installed power P, read the `keywords` frontmatter field (list of strings).
-4. Compute `match(request, skill) = (|request_tokens ∩ trigger_tokens| ≥ 1)`. Simple substring / phrase match.
-5. If any skill or power matches → call `discloseContext({name: skill.name})` or `kiroPowers({action: "activate", powerName: power.name})` before drafting the response.
-6. Append one `{"event": "activated", ...}` line to activation-log.jsonl for each activation.
+- For skills: call `discloseContext(name=matched_skill_name)`.
+- For powers: call `kiroPowers activate(powerName=matched_power)`.
 
-The match is conservative: one token / phrase match is enough. False positives (activating a skill that didn't end up being needed) cost a few KB of context. False negatives (missing a skill that should have fired) cost Richard re-explaining the workflow — the exact failure mode this adoption system exists to prevent.
+The activation writes one row to `activation-log.jsonl` with `event: "activated"`, the matched name, a short `request_summary`, the session id, and the timestamp. If multiple skills/powers match, the agent activates whichever has the strongest keyword overlap; ties are broken by most-recently-activated.
 
-### Missed-skill detection (post-draft, R6.2)
+This is the *only* machine-enforced activation path. No post-draft loop. No pre-send re-check. Adherence is not enforced — it is observable by activation-log growth. The logged counts are the measurement; Richard and any downstream agent can read `activation-log.jsonl` to see whether the adoption habit is working.
 
-Procedure the agent follows after drafting a response but before sending:
+### Missed-skill detection is not machine-enforced
 
-1. Extract the response draft's content tokens (same normalization as request tokens).
-2. For each installed skill S that was NOT activated in this response, recompute `match(draft, S)`.
-3. If any non-activated skill matches the draft's content → append a "missed skill" note to the response: *"Note: I drafted this without activating the `{skill.name}` skill, which may have been relevant. Tell me if you'd like me to redo with the skill loaded."*
-4. Append one `{"event": "missed", ...}` line to activation-log.jsonl.
+Missed-skill detection is not machine-enforced. Gap data comes from Richard flagging "you should have used skill X" after the fact — at which point the agent appends a `{"event": "missed-by-feedback", ...}` entry to the activation log. Attempting to build a pre-send auto-detector violates anti-goal #1 (no recurring automation layered on top) and reintroduces the exact "remember to remember" failure mode skills were designed to eliminate. See §Design Decisions → "Why missed-skill detection was cut" for the full reasoning.
 
-The missed note is user-visible. It is the feedback loop that makes adoption measurable: if Richard sees the same missed skill flagged repeatedly across sessions, it means the keyword-match heuristic is under-matching that skill's trigger words and the trigger list needs expansion.
+### R6 requirement mapping after the revision
 
-### Why keyword-match and not semantic-match
+| Requirement | Status | Implementation |
+|---|---|---|
+| R6.1 (auto-activate on keyword match) | implemented | `discloseContext` / `kiroPowers activate` in-turn before response, on reading the request |
+| R6.2 (note missed skills) | reinterpreted | Manual flagging by Richard → `missed-by-feedback` event. No automatic post-draft detector — this is a deliberate anti-goal (see §Anti-Goals #10). R6.2 should be rewritten in requirements.md to remove the agent-side auto-note obligation; see the requirements-adjustment summary at the end of this revision. |
+| R6.3 (durable activation log) | implemented | `activation-log.jsonl` appended in Phase D |
+| R6.4 (log fields) | implemented | name, request_summary, session_id, ts (see Data Model) |
+| R6.5 (periodic review of unused skills) | implemented | Phase E pruning review reads activation log at 30-day cadence |
 
-Simplicity and portability. Keyword matching works on any platform with any LLM. Semantic matching would require an embedding model, which introduces a platform dependency. Keyword matching errs toward over-activation (which is cheap) rather than over-missing (which is expensive).
+
 
 ---
 
 ## Safe-Creation Workflow
 
-Workflow dependency: Phase C safe-creation procedure, invoked only when Phase B routing terminates at CREATE_NEW for SKILL / POWER. Future workflow: L5 autonomous agents proposing skills-of-their-own will follow the same steps.
+Phase C of the architecture. Runs on two triggers: (a) a new asset created from a Routing Decision Tree terminating at SKILL, POWER, STEERING, HOOK, SUBAGENT, or ORGAN; (b) a `status: legacy` asset being edited for any reason (touch-it-classify-it migration).
 
-Five sub-steps. Each is gated; a failure at any step stops the creation and leaves the filesystem in its pre-creation state.
+Workflow dependency: writes new and migrated assets; produces overlap-check.json for new assets; updates inventory.md and activation-log.jsonl. Future workflow: any L3-L5 workflow that proposes creating a new skill runs through the same steps.
 
-### Step 1: Overlap check (R10.1-R10.2)
+### Phase C.1 — Overlap check (new assets only)
 
-1. Enumerate existing assets:
-   - Skills: `~/.kiro/skills/*/SKILL.md`
-   - Powers: `~/.kiro/powers/installed/*/POWER.md`
-   - Subagents: `~/.kiro/agents/*.json`
-   - Hooks: `~/.kiro/hooks/*.kiro.hook`
-   - Steering: `~/.kiro/steering/*.md`
-   - Organs: `~/shared/context/body/*.md`
-2. Extract each existing asset's description or first paragraph.
-3. Compute overlap between the proposed asset's description and each existing description:
-   - Keyword overlap (trigger tokens shared)
-   - Semantic overlap (this is where a richer check matters — for the first version, use keyword overlap only; upgrade to semantic check later if false negatives accumulate).
-4. For any existing asset with overlap ≥ 0.5 (keyword ratio), record in `overlap_candidates`.
-5. Write overlap-check.json per the schema in §Data Model.
+Applies to new assets. For legacy reclassification, overlap-check is skipped — the asset already exists; a retrospective overlap check has no decision to document.
 
-If ≥1 candidate has overlap ≥ 0.75 → default decision is `EXTEND_EXISTING`. Richard can override to `CREATE_NEW` with rationale. If all candidates < 0.5 → default decision is `CREATE_NEW` with no candidates listed.
+Procedure:
 
-### Step 2: Richard review gate (R7.2-R7.3)
+1. Parse the proposed asset's description / keywords / trigger list.
+2. Search each of the 6 Kiro kinds + non-Kiro mechanisms:
+   - Skills: all files under `~/.kiro/skills/`
+   - Powers: all files under `~/.kiro/powers/installed/`
+   - Subagents: all files under `~/.kiro/agents/`
+   - Hooks: all files under `~/.kiro/hooks/`
+   - Steering: all files under `~/.kiro/steering/`
+   - Organs: all files under `~/shared/context/body/`
+   - Non-Kiro mechanisms: `.bashrc`, cron jobs, git hooks, known IDE features, known team tools
+3. For each candidate, score overlap by keyword/trigger match and purpose-line semantic match (cosine similarity of the one-line purpose).
+4. If max overlap ≥ 75% → recommend EXTEND_EXISTING (asset_path) to Richard. If Richard confirms, terminate safe-creation and redirect to editing the existing asset.
+5. If max overlap in 50%-75% range → surface as overlap_candidate in the evidence record; Richard reviews alongside the proposed creation.
+6. Write `overlap-check.json` with the full evidence record (see Data Model).
 
-Before any file write, present Richard with:
-- The proposed SKILL.md or POWER.md full content.
-- Declared `sensitive_data_class` + path-allowlist implications.
-- Declared `portability_tier` + any flagged `platform_bound_dependencies`.
-- Trigger keywords (for skills) or keywords field (for powers).
-- The overlap-check.json summary (who was considered, why this asset is still new).
+### Phase C.2 — Richard review
 
-Richard replies: APPROVE, REVISE (with feedback), or REJECT. On APPROVE, set `reviewed_by_richard: true` and `reviewed_at` in the overlap-check.json. On REVISE, loop back to draft. On REJECT, terminate and do not write.
+The agent presents:
 
-Per R7.4: if `sensitive_data_class ∈ {Amazon_Confidential, Personal_PII}`, Richard is additionally asked to confirm the declared write paths are not synced to agent-bridge. The validator has already checked this, but the human confirmation is the second fence.
+- Proposed asset content (SKILL.md / POWER.md / etc. draft)
+- Declared metadata: sensitive_data_class, portability_tier, platform_bound_dependencies (if any)
+- Overlap-check findings (candidates, decision rationale)
+- Portability validator report (advisory, see §Portability Tier Rules)
+- Sensitive-data path-allowlist check result (enforced, see §Sensitive-Data Classification Rules)
 
-### Step 3: File write
+Richard explicitly approves, edits, or cancels. `reviewed_by_richard: true` is written to the overlap-check record only on explicit approval. Absence of veto is not approval.
 
-Write SKILL.md or POWER.md at the canonical path:
-- Skill: `~/.kiro/skills/{name}/SKILL.md`
-- Power: `~/.kiro/powers/installed/{name}/POWER.md` (plus optional `~/.kiro/powers/installed/{name}/mcp.json`)
+### Phase C.3 — Write (new asset) OR classify-then-write (legacy migration)
 
-Write the overlap-check.json alongside: `~/.kiro/skills/{name}/overlap-check.json`.
+**New asset path**: write the file to `~/.kiro/skills/{name}/SKILL.md` or `~/.kiro/powers/installed/{name}/POWER.md` with full extended frontmatter. Status is born `current`.
 
-Set `created_at` and initial `last_validated` to the current ISO 8601 timestamp.
+**Legacy migration path (touch-it-classify-it)**: the triggering edit (bug fix, description tweak, whatever Richard came to the file to do) is staged in memory but NOT yet written. Before the write:
 
-### Step 4: Activation validation (R7.6)
+1. Agent prompts Richard with the classification questions: "This is a legacy skill. Before we save your edit, classify: sensitive_data_class? portability_tier? owner_agent?"
+2. Richard answers. Values are inserted into the frontmatter.
+3. `status` flips from implicit `legacy` to explicit `current`.
+4. `created_at` is set to the original file's `stat -c %y` mtime (preserving historical creation date) or to "UNKNOWN" if stat fails.
+5. `last_validated` is set to the current timestamp.
+6. THE EDIT IS NOW WRITTEN with full extended frontmatter.
 
-Actually call the activation tool against the new file:
-- For a new skill: `discloseContext({name: new_skill_name})`. Success = tool returns without error.
-- For a new power: `kiroPowers({action: "activate", powerName: new_power_name})`. Success = tool returns the power's overview / toolsByServer without error.
+This is the critical migration trigger: no forced batch-day, no abandoned "TODO classify" placeholder fields, no flag day. Classification happens exactly when Richard is already in the file, so the marginal cost is one prompt and three answers.
 
-On failure, log the error and **delete the partially-created file**. The creation is NOT complete until activation succeeds.
+**If Richard refuses to classify** (e.g., "I'm fixing a typo, not classifying this today"), the agent accepts the refusal and writes the edit WITHOUT migrating the asset's status. The asset remains `legacy`. The next edit is another classification opportunity. This is a deliberate escape hatch — demanding classification on every edit would be the flag-day failure mode with extra steps.
 
-On success, update `last_validated` timestamp to the current time.
+### Phase C.4 — Activation validate
 
-### Step 5: Inventory + log update (R7.5)
+For new skills: call `discloseContext(name=new_name)` and verify no error. For new powers: call `kiroPowers activate(powerName=new_name)` and verify documentation returns. For migrated legacy assets: same activation check.
 
-1. Append a `{"event": "created", "kind": ..., "name": ..., "overlap_check_ref": ..., ...}` line to activation-log.jsonl.
-2. Run Phase A inventory refresh, which re-renders inventory.md with the new row.
+On success, `last_validated` is set to the current timestamp and written back to the frontmatter.
 
-The creation is complete when all five steps have succeeded. Partial failure at any step: the filesystem is rolled back (no orphan files, no orphan log entries).
+On failure, the asset is marked with a validation-failure comment in the frontmatter (`# validation-failed: <reason>`), Richard is notified, and the asset is NOT activated in any session until re-validated.
 
----
+### Phase C.5 — Inventory update + activation log
 
-## Round-Trip File Format Property
+The inventory.md is regenerated (Phase A reactive refresh). For new assets, a `created` event is appended to activation-log.jsonl. For legacy reclassification, a `created` event with subtype `classified` is appended.
 
-Per R9 — file format is round-trip safe: parse → serialize → parse yields an equivalent AST.
 
-Workflow dependency: any agent that reads and re-writes a SKILL.md or POWER.md (e.g., a future batch-edit for metadata migration) depends on round-trip correctness. Future workflow: L5 autonomous agents that edit their own skills need round-trip safety to avoid silent corruption.
-
-### Grammar (YAML-subset for frontmatter + markdown body)
-
-A SKILL.md or POWER.md has the structure:
-
-```
-FILE       := FRONTMATTER BODY
-FRONTMATTER := "---\n" YAML_SUBSET "---\n"
-YAML_SUBSET := KEY_VALUE ("\n" KEY_VALUE)*
-KEY_VALUE  := KEY ":" (SCALAR | LIST | OBJECT)
-KEY        := [a-z_][a-z0-9_]*
-SCALAR     := (QUOTED_STRING | UNQUOTED_STRING | NUMBER | BOOLEAN | NULL | ISO8601_DATETIME)
-LIST       := "\n" ("  - " SCALAR)+
-OBJECT     := "\n" ("  " KEY ":" SCALAR)+
-BODY       := <arbitrary markdown content, including code blocks, tables, etc.>
-```
-
-**Restrictions on the YAML subset** (for portability — a parser in any language can implement it):
-- No anchors / aliases / tags.
-- No multi-document streams.
-- Scalar strings use double-quotes for any value containing `:`, `#`, or starting with `{`, `[`, `!`, `&`, `*`, or a digit.
-- Lists use `-` indented by 2 spaces.
-- Nested objects indent by 2 spaces.
-- Date-time values are ISO 8601 with explicit timezone (never naive).
-
-**Required frontmatter keys** (validator enforces presence):
-- Skill: `name`, `description`, `sensitive_data_class`, `portability_tier`, `created_at`, `last_validated`.
-- Power: `name`, `displayName`, `description`, `keywords`, `author`, `sensitive_data_class`, `portability_tier`, `created_at`, `last_validated`.
-- Conditionally required: `platform_bound_dependencies` iff `portability_tier == Platform_Bound`. `mcp_servers_declared` iff the power bundles an `mcp.json`.
-
-### Parse function behavior
-
-`parse(file_contents: string) -> ParseResult`:
-- `ParseResult = Success(frontmatter: object, body: string) | Error(violation: string)`.
-- Reads everything between two `---` markers as YAML frontmatter; everything after the second marker is body.
-- On invalid YAML: return `Error("invalid YAML at line N: <message>")`.
-- On missing required key: return `Error("missing required key: <key>")`.
-- On unknown-value-for-enum (sensitive_data_class not in the four tiers, portability_tier not in two tiers): return `Error("invalid enum value: <key>=<value>, expected one of <allowed>")`.
-- On inconsistency (Cold_Start_Safe body contains Platform_Bound tokens, or Platform_Bound with empty platform_bound_dependencies): return `Error("portability inconsistency: <description>")`.
-
-Error-on-malformed is the requirement. The parser NEVER silently rewrites.
-
-### Serialize function behavior
-
-`serialize(frontmatter: object, body: string) -> string`:
-- Emits `---\n` marker.
-- Emits each key in a canonical order (the order listed in §Data Model — name first, then description, then metadata fields, then timestamps). Canonical order makes the serialize function deterministic (same input → same output byte-for-byte).
-- Quoting rule: strings containing `:` or starting with a reserved YAML character are double-quoted; others are unquoted. This is the only normalization.
-- Emits `---\n` closing marker.
-- Appends body verbatim.
-
-### Round-trip property (tested in §Correctness Properties)
-
-For any file that the parser accepts as valid, the round-trip property is:
-
-```
-parse(serialize(parse(f))) == parse(f)
-```
-
-This is an *AST* equality check, not a byte equality. Two valid files with different cosmetic whitespace parse to the same AST; their second serialization produces canonical form; re-parsing yields the same AST. Byte-equality is not required.
-
-For files the parser rejects (`Error` variant), the property does not apply — error messages are not expected to round-trip.
 
 ---
 
-## Pruning Review Design
+## Round-Trip File Format
 
-Workflow dependency: Phase E runs on Richard's manual invocation. Future workflow: L3 team-adoption pruning will follow the same procedure applied to team-shared skills when team skill sharing is implemented.
+Per R9, the SKILL.md and POWER.md file formats must survive parse → edit → re-serialize without corruption.
 
-### Cadence
+Workflow dependency: Phase C writes files; any future agent-driven edit reads and re-writes them. Future workflow: cold-start recovery parses and re-serializes skills on a different platform — the round-trip guarantee is what makes this portable.
 
-**Human-triggered, not scheduled.** Monthly is the suggested cadence (matching soul.md's existing quarterly/monthly review rhythms) but the scheduler does not exist. Richard invokes the review when he feels the skill inventory is bloated, or when the inventory's Staleness section shows ≥3 stale skills.
+### Canonical SKILL.md format
 
-No hook, no cron, no scheduled agent. This directly matches the audit's anti-goal #1 and the Interplay point 4 / audit R5.6.
+```
+---
+<YAML frontmatter — key ordering preserved alphabetically within required/optional groups>
+---
+
+<markdown body — unchanged by parse/serialize>
+```
+
+YAML rules:
+- UTF-8 encoding, LF line endings.
+- 2-space indentation for nested values.
+- Strings with embedded colons, quotes, or leading/trailing whitespace are double-quoted.
+- Lists use block form (one item per line with `- ` prefix) for lists of 2+ items; inline `[...]` only for empty lists.
+- Key order within a group is alphabetical. Groups are (in serialize order): identity (`name`, `description`), status (`status`), classification (`sensitive_data_class`, `portability_tier`, `platform_bound_dependencies`, `owner_agent`), timestamps (`created_at`, `last_validated`).
+
+### Canonical POWER.md format
+
+Same rules as SKILL.md plus:
+- Keys `displayName`, `keywords`, `author` preserved in the identity group.
+- `mcp_servers_declared` appears in the classification group.
+
+### Round-trip property
+
+For any SKILL.md or POWER.md file F that passes validation:
+- `parse(F) → structured-representation S`
+- `serialize(S) → F'`
+- `parse(F') → S'`
+- Then `S == S'` (structural equality) AND the markdown body of F and F' are byte-identical.
+
+Key ordering within groups is enforced during serialize so that re-serialization is deterministic. Comments in the YAML are preserved as adjacent metadata (attached to the next key) and re-emitted in the same position.
+
+### Error reporting (non-silent rewrites per R9.4)
+
+If a file does not match the canonical format at parse time:
+- **Unknown fields**: flagged but preserved in a `legacy_unknown_fields` map; not dropped.
+- **Wrong types**: parse fails with a descriptive error identifying the field, expected type, and actual type. The file is NOT modified.
+- **Missing required fields for `status: current`**: parse succeeds, validation fails with a list of missing fields. The file is NOT modified.
+- **Malformed YAML**: parse fails with the YAML library's error message and line number. The file is NOT modified.
+
+The adoption system NEVER silently rewrites a file. Any rewrite is explicit, reviewed by Richard (Phase C.2), and leaves a trace in the activation log (`created` event with subtype `format_migration` if the rewrite was for format normalization).
+
+### Validator output
+
+Per R9.5, the validator reports for any skill/power file:
+- Is it format-compliant? (YAML parses, required fields for declared status present, field types correct)
+- Is the declared metadata complete for its status? (for `status: current`: all required fields present with non-null values)
+- Are there advisory portability findings? (see §Portability Tier Rules)
+- Is the output-path-allowlist consistent with the declared sensitive_data_class? (see §Sensitive-Data Classification Rules)
+
+The validator emits a report, not a verdict. Format-compliance failures block writes. Advisory findings do not.
+
+
+
+---
+
+## Pruning Review
+
+Phase E of the architecture. Human-triggered, monthly or ad-hoc. Implements R8.
+
+Workflow dependency: reads inventory.md and activation-log.jsonl; writes archive directory; updates inventory.md. Future workflow: the same pruning procedure applies to any adoption system Richard builds on top of skills/powers in future rounds.
+
+### Trigger
+
+Richard invokes pruning by saying "run skills pruning review" or equivalent. Phase E never runs automatically. This is deliberate — automated pruning would itself be a new recurring surface (audit anti-goal #1).
 
 ### Procedure
 
-1. **Compute stale set**: for each skill/power in the inventory, compute last activation from activation-log.jsonl. If last activation is > 30 days ago OR there is no activation record AND `created_at` is > 14 days ago (R6.5 threshold for never-activated), the skill is *stale*.
-2. **Present to Richard**: the agent lists stale skills with columns: name, last_activated, days_stale, sensitivity, portability, recommendation (default DELETE).
-3. **Richard decides per row**: APPROVE, KEEP (with rationale — skill kept despite stale, rationale recorded in inventory notes), or DEFER (re-check next cycle).
-4. **For each APPROVE row**:
-   - **Archive**: copy the entire skill directory (SKILL.md + overlap-check.json + any auxiliary files) to `~/shared/wiki/agent-created/archive/skills-powers-pruned-{YYYY-MM-DD}/{name}/`.
-   - **Verify archive exists**: stat check. If archive write failed, STOP — do not delete.
-   - **Delete**: remove the original directory from `~/.kiro/skills/{name}/` or `~/.kiro/powers/installed/{name}/`.
-   - **Append to log**: `{"event": "pruned", "kind": ..., "name": ..., "archive_path": ..., ...}`.
-5. **Refresh inventory**: Phase A re-renders inventory.md.
-6. **Commit**: git commit the archive + deletions with message `prune: skills-powers review {date}`.
+1. **Compute stale set**: for each installed skill/power, check last `activated` event timestamp in activation-log.jsonl. If no activation in last 30 days AND the asset is `status: legacy` OR `status: current`, add to stale candidate list. Exclude `status: retired` (already pruned) and skills/powers created in the last 30 days (not enough time to measure).
+2. **Present to Richard**: render the stale list with per-asset {name, status, days since last activation, activation count in last 90 days, creation date if known}. Sorted by "most stale first" (longest gap).
+3. **Richard reviews each row**: APPROVE (prune), DEFER (keep until next cycle, note reason), or PROTECT (keep permanently, note reason). Absence of decision = DEFER.
+4. **On APPROVE**:
+   - Archive: `cp -r ~/.kiro/skills/{name}/ ~/shared/wiki/agent-created/archive/skills-powers-pruned-{YYYY-MM-DD}/{name}/` (or `powers/installed` for powers).
+   - Delete: `rm -rf ~/.kiro/skills/{name}/` (or powers equivalent).
+   - Log: append `pruned` event to activation-log.jsonl with archive_path.
+   - Inventory: mark the row `status: retired` for one full cycle, then drop.
+5. **On DEFER / PROTECT**: record the decision in the pruning-review session transcript. No file operations.
 
-### Archive path
+### Never-prune-under-use guarantee
 
-`~/shared/wiki/agent-created/archive/skills-powers-pruned-{YYYY-MM-DD}/`
+Per R8.4: if an asset has any `activated` event in the last 30 days, it is NOT in the stale set, regardless of status. This is enforced at set construction, not at Richard-review time.
 
-Same parent directory as the audit's spec-archive path (`~/shared/wiki/agent-created/archive/system-subtraction-audit-{date}/`). Consistent archive convention across both specs means a single `ls` in `archive/` shows every governance action in chronological order.
+### Archive-before-delete
 
-### Archive-before-delete ordering (R8.3, ARCHIVE-BEFORE-DELETE property)
+Per R8.3: every pruned asset is archived before deletion. Archive path includes the date of the pruning review for traceability. The overlap-check.json evidence (if present) is archived alongside the asset — so a future audit asking "why was this pruned?" can trace back to both the creation rationale and the pruning rationale.
 
-The order is always: **archive write → verify → delete**. Never the reverse. On any failure in the write or verify step, the delete does not proceed. This is the same guarantee as the audit's MERGE stops-on-conflict behavior — no step proceeds when a prerequisite failed.
+### Cadence
+
+Per R8.5: Richard sets his own cadence. Default: monthly, invoked on Fridays after the retrospective. Pruning is a decision ritual, not a scheduled task.
+
+
 
 ---
 
-## Anti-Goals (explicit)
+## Anti-Goals
 
-1. **Not a recurring hook or dashboard.** Matches audit anti-goals #1, #3, #4. No scheduled refresh, no inventory dashboard UI, no daily stale-skill summary email. Every refresh and review is reactive / human-triggered.
+Explicit list of things this spec is NOT, and things a well-intentioned agent might otherwise build that would violate the spec's governance stance. Each entry names what's forbidden and why.
 
-2. **Not a new always-loaded steering file.** No `.kiro/steering/skills-powers.md` that auto-loads rules on every chat. The inventory is consulted on-demand by the agent's lookup flow. Per audit R5.6, adding auto-loaded steering that path-references candidate skills would make them UNCLEAR in future audits — exactly the coupling we avoid.
+1. **Not an ongoing adoption service**. There is no daemon, no always-on hook, no scheduled job that audits skills on Richard's behalf. Activation logging is continuous because it's a single JSON-line append per invocation; pruning is human-triggered. A "monthly automated pruning mail" would add always-on surface for a task Richard can run when he wants.
 
-3. **Not a duplicate of the subtraction audit.** The audit is a one-shot cleanup of existing surface. This spec is the positive governance loop for new workflows going forward. Different phase-cadence, different outputs. This spec references the audit's patterns and artifact shapes so they interoperate, but it doesn't re-audit.
+2. **Not a replacement for `.kiro/steering/soul.md`**. This spec does not install its own auto-loaded steering. The inventory is discoverable through a name-reference in soul.md's Data & Context Routing table; nothing more. If a future agent suggests adding `inclusionMode: always` to any file in `~/shared/context/skills-powers/`, reject.
 
-4. **Not a wrapper-skill generator** (R10.4). Skills whose only function is to invoke a single existing subagent are rejected at creation. The subagent is the correct mechanism; a skill around it is surface area with no payoff. The NO-WRAPPER-SKILL property catches this.
+3. **Not a build tool for new skills**. This spec governs adoption; it does not produce skills. Building a new skill is a downstream activity gated by the Routing Decision Tree. The spec produces the rules; separate specs produce the assets.
 
-5. **Not an extraction system** for hook-content-into-skills. Hooks that fire on events are better as hooks. The adoption system does not recommend "let's take this hook's logic and put it in a skill" as a default. Event-triggered workflows stay in hooks per the routing tree's step 2.
+4. **Not a duplicate of the subtraction audit**. The audit applies subtraction to existing files; this spec applies the same tests to proposed additions. They share methodology and artifacts but do not overlap scope.
 
-6. **Not autonomous skill creation.** No agent creates skills on its own. Every new skill/power walks through Phase C including Richard's review gate. The REVIEW-GATE-SCHEMA property encodes this: no file write without a review record.
+5. **Not an always-on validator daemon**. Phase C validation runs reactively on create/migrate. No pre-commit hook, no scheduled validator sweep, no continuous integration check. The validator is a function the agent calls when it's doing something; it doesn't loop.
 
-7. **Not a tooling project.** No scripts committed to `~/shared/tools/`. The routing tree, classification rules, and file-format grammar are all described in this design doc and consumed by the agent reading it. If the agent needs to validate a skill file, it reads §Round-Trip File Format and applies the grammar. No compiled validator, no shared library.
+6. **Not a flag-day schema migration**. Legacy assets migrate on touch, one at a time, when Richard is already editing them. No forced day-zero migration of all 13 assets. The earlier draft's "every skill must have these fields" check is replaced by `status: legacy` exemption.
 
-8. **Not a platform-portability solution on its own.** The adoption system defines the portability tier and enforces consistency, but actually making a platform move work is the job of bridge-sync + a future migration spec. The adoption system ensures skills *can* be migrated; it doesn't perform the migration.
+7. **Not a blocking portability gate**. The portability validator emits findings, not verdicts. No skill or power is rejected, downgraded, or rewritten based on portability tokens detected in its body. The validator reports; the human decides.
 
-9. **Not a complexity product.** Same as the audit's anti-goal #9. The adoption system's own artifacts (inventory.md, activation-log.jsonl) are durable but cheap: two files, both append-only-or-rewritable-from-filesystem-state. The overlap-check.json records are archived with the skills they justify. No sprawling scaffolding.
+8. **Not a recurring-service pattern**. No hook creates, audits, or modifies skills automatically. The only continuously-running component is activation logging, which is one JSON-line append and doesn't involve any reasoning.
+
+9. **Not a candidate-generation machine**. The pilot is measurement of existing assets, not enumeration of new ones. The leverage formula is demoted until activation baseline is established.
+
+10. **Not a post-draft behavioral convention**. Activation habit is structurally enforced (keyword match → `discloseContext` call before response) or it isn't enforced. A post-draft pre-send self-check is not enforcement — it's a convention the agent is supposed to remember, which is the same failure mode skills were supposed to eliminate. Missed-skill detection is not machine-enforced in this spec; gap data comes from Richard flagging after the fact (`missed-by-feedback` events). If the platform later provides a true pre-response-send event, a detector can be scoped in a future spec; until then, this anti-goal stands.
+
+
 
 ---
 
 ## Design Decisions and Rationale
 
-### Why inventory lives in `~/shared/context/skills-powers/` not `.kiro/specs/skills-powers-adoption/`
+The reasoning behind structural choices that aren't obvious from the rules themselves. Each entry names the decision, the alternatives considered, and why the chosen path wins.
 
-Per the audit's R2.8 scope + R2.3 / R2.4 documentation-referrer classification. `.kiro/specs/**` is documentation in the audit's graph — references from there are `documentation` type and do NOT save a skill from ORPHAN status. For the inventory's path-reference to each skill to count as an *active* referrer (and save real skills from being flagged as orphans in a future audit), the inventory must live in an active scope path. `~/shared/context/` is active scope. That's why the inventory lives there.
+### Why the routing tree rejects before it routes
 
-### Why no auto-loaded steering for the adoption system
+Steps 0 and 0.5 of the Routing Decision Tree ask "should this exist at all?" and "is this already handled outside Kiro?" before any Kiro-mechanism branching. The earlier draft's tree started at "event vs. keyword?" — a mechanism-selection question. That ordering is wrong: it assumes the workflow belongs inside Kiro before asking whether it needs to be codified at all. The new tree applies subtraction before addition to itself — the first question is always "don't add", then "not in Kiro", then mechanism selection. The `dashboard-server.kiro.hook` kill-list entry (a hook that duplicated `.bashrc`) is the reference case step 0.5 is designed to prevent.
 
-Per audit R5.6. Any always-loaded steering that path-references candidate-deletion files becomes UNCLEAR-default-KEEP in the audit's classification. If I created a `.kiro/steering/skills-adoption.md` auto-loaded file that listed every skill by path, every skill would become UNCLEAR-default-KEEP in future audits. The coupling is wrong. Instead, skills are referenced from inventory.md (in active scope, so they count as referrers) but not via auto-loaded steering.
+### Why the REJECT gate checks non-Kiro mechanisms
 
-### Why pilot capped at 3 (R5.6)
+The audit's DELETE of `dashboard-server.kiro.hook` (orphan, 11 lines, duplicated by `.bashrc`) is the canonical case. Richard's tools live across shell, native apps, Amazon's ecosystem, and Kiro. Kiro-only duplication of a solved workflow is the subtle failure mode — step 0.5 closes it. Without the gate, a workflow that's already solved by `.bashrc`, cron, git hooks, or a team tool could still pass into Kiro-mechanism selection and land on HOOK or SUBAGENT. The gate names the class of failure ("duplication across tool boundaries") and terminates before any Kiro surface is added.
 
-soul.md #3 (subtraction before addition) + soul.md #6 (reduce decisions, not options). Proposing 10 candidate skills at once forces Richard to decide among 10 things. Proposing the top 3 gives him one obvious next step, with the rest queued for later cycles. The cost of waiting is low (the other 7 candidates accumulate in the pipeline); the benefit is Richard actually ships the pilot instead of stalling on choice overload.
+### Why orphan-by-design for the inventory
 
-### Why activation-log is JSONL not DuckDB
+The inventory lives at `~/shared/context/skills-powers/inventory.md` and is intentionally ORPHAN in the audit's referrer graph. An earlier draft claimed that placing the file inside `~/shared/context/` made its path-references to skills count as *active referrers*. That claim was wrong — the audit's liveness definition is about referrer load, not directory location. Making the inventory live-by-steering would trigger audit R5.6 UNCLEAR coupling (always-auto-included referrer to candidate file, soft-preserving the inventory forever). Making it live-by-hook would violate anti-goal #1. Making it live-by-script would create a script whose only purpose is generating active-referrer evidence — itself a kill-list candidate. The correct tradeoff is: accept ORPHAN status, keep the inventory alive by value rather than by load-path, and make it discoverable through a single name-reference line in soul.md's Data & Context Routing table (informational per R2.2, does not save from ORPHAN but does make the file findable).
 
-Portability. The sibling audit's `execution.log` is also JSONL for the same reason. A DuckDB table would require the DuckDB MCP to be live during logging — a cold-start / platform-move scenario would lose the log. JSONL in `~/shared/context/` survives a platform move intact and is parseable with any language's standard library.
+### Why the portability validator is advisory
 
-### Why the routing tree has a REJECT branch first
+The earlier draft's portability validator enforced a blocking check: a skill declared `Cold_Start_Safe` with a Platform_Bound token in its body would be rejected or auto-downgraded. Against the real on-disk corpus of 9 skills + 4 powers, every existing asset contains at least one `mcp_*` tool name, `discloseContext` call, subagent reference, or script path. The enforcing validator would mass-flag the entire corpus on first run, forcing either (a) 9+4 `platform_bound_dependencies` lists nobody will maintain or (b) 9+4 forced-downgrades with no semantic change. Either is the novel structural tax the audit itself would catch and delete in the next cycle. The advisory validator produces honest information (here are the tokens in the body) and leaves the judgement to the human (are those essential or accidental).
 
-Applying soul.md #3 inside the design of the adoption system itself. If the first question is "skill or power?" rather than "should this exist?", the tree defaults to *something*. Defaulting to something creates surface area by default. Defaulting to REJECT forces justification. Subtraction-before-addition as a tree topology, not just as a rationale.
+### Why legacy / current / retired (and the touch-it-classify-it migration)
 
-### Why keyword-match and not semantic-match for activation
+The earlier draft required every SKILL.md / POWER.md to have `sensitive_data_class`, `portability_tier`, `created_at`, `last_validated`. On day-zero of this spec's first run, zero of the 13 installed assets have any of these fields. The earlier draft's inventory-bijection property (every file on disk appears in inventory) conflicted with its schema-validation property (every row has required fields) — on the real corpus one of the two properties had to fail. The `legacy` status resolves the conflict: legacy rows appear in the inventory (bijection preserved) but are exempt from schema validation (schema stays strict for `current`). Migration happens on touch, not on a flag day — because the subtraction audit has shown that flag-day migrations produce abandoned fields that live in the system forever as legacy sludge.
 
-Simplicity + portability. Keyword match runs on any platform with any LLM. Semantic match would require an embedding model, introducing a platform dependency. False positives (over-activating) are cheap; false negatives (missing activations) are the exact failure mode this adoption system exists to prevent. Err toward over-activation.
+### Why missed-skill detection was cut
 
-### Why Amazon_Confidential defaults when sensitivity is missing (R3.5)
+An earlier draft included a post-draft pre-send missed-skill detector that walked the drafted response, keyword-matched against installed skills, and emitted a `missed` event. That mechanism is cut entirely — not retired-in-place, not deferred-with-hook.
 
-Fail-safe default. The alternative (treating missing as Public) would let legacy skills silently get synced to agent-bridge on first edit. Defaulting up means the validator blocks a sync that would have been wrong, and Richard classifies explicitly.
+Why:
 
-### Why the overlap-check.json is archived forever (not just during creation)
+1. **No platform event exists between response draft and response send.** Anything at that moment would be a convention — instructions the agent is supposed to remember to follow.
+2. **A convention-based self-check is the exact failure mode skills were meant to eliminate.** "Remember to check for missed skills after drafting" has the same shape as "remember that the coach skill exists" — the thing skills are supposed to replace.
+3. **Gap data is cheap without a detector.** Richard flags a miss; a `missed-by-feedback` row is appended. Slower than a theoretical auto-detector but 100% accurate and free when no miss is noticed.
+4. **Pre-draft activation is the enforced path and is sufficient.** Agent checks the inventory on reading the request, activates on keyword match before responding. If that check runs, misses are rare by construction; if it doesn't, a post-draft detector would just be a second convention failing at the same thing.
 
-Evidence of the creation decision survives as long as the skill does. If a future audit asks "why does `wbr-callouts` skill exist when `callout-writer` subagent also exists?", the overlap-check.json is the answer. This is the same pattern as the audit's `kill-list.md` being archived — decisions are documents, not just transient state.
+If a real pre-response-send event appears in the platform later, a detector can be re-scoped in a future spec. Until then, anti-goal #10 stands.
 
-### Why activation-validate happens after Richard's review, not before
+### Why the pilot is the existing 9, not 3 new ones
 
-Richard's review gates the *intent* of the skill (is this the right skill, right sensitivity, right scope). Activation-validate checks the *mechanics* (does the file parse, does the tool accept it). Checking mechanics before Richard approves is wasted effort if Richard rejects. Intent-first, mechanics-second.
+The earlier draft's R5.6 ("no more than three candidates to pilot adoption") framed the pilot as building 3 new skills. Reality: 9 skills and 4 powers are already installed, never meaningfully invoked. Building 3 more while the installed 9 are at or near zero activation amplifies the gap — cumulative installed count goes to 12, activation rate doesn't move, next cycle the audit catches another generation of orphans.
 
-### What we almost added and cut
+**9 pilots with 0 activation is a larger signal than 3 pilots with unknown activation.** Pilot = 30-day activation measurement against the 9 installed skills, strict criterion (≥3 activations per skill, ≥5 of 9 activated at all). Skills failing the criterion are Phase E pruning candidates on day 31. The activation mechanism and the subtraction mechanism point at the same corpus, reinforcing each other rather than adding surface.
 
-Three candidate mechanisms were drafted and cut because they failed the audit's workflow tests:
+Addition before subtraction is the anti-pattern; subtraction before addition is the rule (soul.md #3). The leverage-ranking formula is preserved for future rounds but disarmed until Phase 0 baseline data indicates a real gap extend-existing cannot close.
 
-- **Recurring "stale skill" digest hook**: would fire weekly and post stale skills to Slack. Cut — violates audit anti-goal #1 (not an ongoing service); the inventory's Staleness section already surfaces this, and pruning is human-triggered.
-- **Skills-powers dashboard HTML**: would render the inventory as an interactive dashboard. Cut — violates audit anti-goal #3 (flat markdown preferred); nothing the dashboard would show isn't already in inventory.md.
-- **Auto-loaded `.kiro/steering/skill-index.md`**: would list every skill on every chat so the agent always "remembers". Cut — violates Interplay point 4 / audit R5.6; the keyword-match heuristic achieves the same outcome without the every-chat tax.
+### What we almost added and cut (audit-style self-application)
 
-### Why this spec carries the same Mario-and-Peter fingerprints as the audit
+Applied to this spec's own mechanisms, the audit's Current Usage Test and Future Workflow Test:
 
-Same two-philosophy design. Mario-rigor for the rules (sensitivity tiers, portability grammar, round-trip property) because getting these wrong corrupts skill files silently. Peter-scrappiness for the pilot (cap at 3, human-triggered review, on-demand inventory refresh) because skill creation is iterative and the first pilot is never the final set. The long-term structural target matches the audit's open question #7: skills-and-powers *are* the extension-first pattern. The adoption system is the governance that gets us there.
+- **A dedicated `skills-powers.md` auto-loaded steering file**: FAILS both tests. No current workflow needs it that soul.md's routing table can't handle. No future L3-L5 workflow needs the steering mechanism specifically. METAPHOR-ONLY → CUT.
+- **A scheduled "freshness email" summarizing inventory weekly**: FAILS both tests. Current freshness is on-demand; future autonomous agents are more likely to query the inventory directly than consume a summary email. METAPHOR-ONLY → CUT.
+- **A DuckDB schema for activation logs**: FAILS the Future Workflow Test for cold-start scenarios. A new agent on a different platform cannot read DuckDB. JSONL is portable; DuckDB is Platform_Bound. The line-delimited JSON format is preserved. DuckDB materialization is optional downstream and not in scope here.
+- **The post-draft missed-skill detector**: FAILS the Current Usage Test (no platform event exists) and is the exact failure mode skills were meant to eliminate. CUT (see above).
+- **The blocking portability validator**: FAILS the Current Usage Test against the real corpus. CUT in favor of advisory (see above).
+- **The leverage-ranking formula as a gate**: FAILS the Current Usage Test (the gate always passes because Richard only proposes workflows he already thinks are worth codifying). DEMOTED (not cut — the reasoning is preserved for future rounds when activation baseline makes the gate meaningful).
+
+
 
 ---
 
@@ -914,149 +1018,180 @@ Same two-philosophy design. Mario-rigor for the rules (sensitivity tiers, portab
 
 *A property is a characteristic or behavior that should hold true across all valid executions of a system — essentially, a formal statement about what the system should do. Properties serve as the bridge between human-readable specifications and machine-verifiable correctness guarantees.*
 
-PBT is appropriate for this feature because the core governance behaviors are pure functions over structured inputs: parse/serialize for file format, route(workflow) → mechanism for the decision tree, validator(skill) → errors for metadata checks, stale-detector(log, clock) → flagged-set for pruning. Each has a wide input space where random generation reveals edge cases (whitespace, unicode, empty lists, boundary timestamps). The AWS-like integration concerns (does bridge-sync actually push to GitHub) are out of scope — those are covered by bridge-sync.md's own integration tests, not this spec.
+These properties govern the adoption system's machine-facing behaviors (validator, inventory generator, activation logger, overlap checker, routing tree). Governance rules that are documentation-only (tier definitions, path allowlists as written text) are not property-tested — they are specified in §Sensitive-Data Classification Rules and §Portability Tier Rules.
 
-### Property 1: Round-trip file format
+Properties 4, 5, 11 were revised during the 2026-04-22 revision pass per findings F1, F3, F2. Property 13 from the earlier draft (post-draft pre-send missed-skill detector) was dropped entirely per finding F4 — remaining properties have been renumbered so there are no gaps. Property 15 (NON-KIRO-GATE-REJECTION) was added per finding F6. There are 15 properties in the revised design.
 
-*For any* valid SKILL.md or POWER.md file accepted by the parser, parse(serialize(parse(file))) yields a parsed AST equal to parse(file).
+### Property 1: INVENTORY-BIJECTION
 
-**Validates: Requirements 9.3**
+*For any* filesystem state containing skills under `~/.kiro/skills/` and powers under `~/.kiro/powers/installed/`, the inventory.md's rows bijectively correspond with the on-disk assets — every asset appears as exactly one row with its correct name, status, triggers/keywords, and the columns described in §Data Model → Inventory file. No phantom rows, no missing rows. `status: retired` rows are an exception: they appear for one pruning cycle after deletion to document the transition, then drop.
 
-### Property 2: Error-on-malformed file
+**Validates: Requirements 1.1, 1.2, 1.3, 7.5**
 
-*For any* malformed SKILL.md or POWER.md file (invalid YAML, missing required key, invalid enum value, or portability inconsistency), the parser returns a descriptive Error record and does NOT silently rewrite the file or return a partial AST.
+### Property 2: STALENESS-CORRECTNESS
 
-**Validates: Requirements 9.4, 9.5**
-
-### Property 3: Sensitivity path consistency
-
-*For any* skill or power S with declared `sensitive_data_class ∈ {Amazon_Confidential, Personal_PII}`, all of S's output write paths lie inside the allowlist for that sensitivity class, AND none of those paths lie inside any directory currently synced to the agent-bridge repository. *For any* S with missing sensitivity class, validation treats S as Amazon_Confidential and enforces the same restriction.
-
-**Validates: Requirements 3.1, 3.2, 3.3, 3.5, 3.6, 7.4**
-
-### Property 4: Portability consistency
-
-*For any* skill or power S with declared `portability_tier == Cold_Start_Safe`, S's body does not contain Platform_Bound indicator tokens (MCP tool function names matching `mcp_[a-z_]+`, subagent invocation patterns matching `invokeSubAgent\(.*name=...`, hook IDs matching `[a-z\-]+\.kiro\.hook`, or Kiro-API names like `discloseContext` / `kiroPowers`). *For any* S with `portability_tier == Platform_Bound`, the `platform_bound_dependencies` frontmatter list is non-empty.
-
-**Validates: Requirements 4.4, 4.5**
-
-### Property 5: Inventory freshness (bijection)
-
-*For any* filesystem state of `~/.kiro/skills/` and `~/.kiro/powers/installed/` and *for any* sequence of create / prune / manual-install / manual-uninstall operations applied to that state, after each operation there is a bijection between (a) the set of SKILL.md + POWER.md files on disk and (b) the set of rows in inventory.md — every file has exactly one row and every row corresponds to exactly one file.
-
-**Validates: Requirements 1.1, 1.2, 1.3, 7.5, 8.2**
-
-### Property 6: Stale detection
-
-*For any* activation-log.jsonl state and *for any* clock time T and threshold D (in days), the stale-detector returns exactly the set of skills and powers where (no activation event within [T-D, T]) OR (no activation events at all AND created_at < T-14days). The detector is deterministic: same inputs → same output set.
+*For any* activation-log.jsonl L and inventory I, the stale set S(I, L) computed by Phase E equals `{ asset ∈ I : status ∈ {legacy, current} AND no `activated` event for asset.name in L within the last 30 days AND asset not created within the last 30 days }`. An asset with at least one activation in the last 30 days is NEVER in the stale set.
 
 **Validates: Requirements 1.5, 6.5, 8.1, 8.4**
 
-### Property 7: Routing totality
+### Property 3: PATH-ALLOWLIST-CORRECTNESS
 
-*For any* well-formed workflow descriptor D (contains description, trigger-type, frequency-estimate, sensitivity, sharability), the routing function route(D) returns exactly one of the terminal values {REJECT, EXTEND_EXISTING, HOOK, STEERING, SUBAGENT, ORGAN, POWER, SKILL} paired with a non-empty rationale string. The function is deterministic and total: no input yields undefined output.
+*For any* `status: current` skill or power S with declared `sensitive_data_class = C` and proposed output-write path P, the validator emits a path-allowlist violation iff P ∉ allowlist(C), per the four-tier table in §Sensitive-Data Classification Rules. For declared C ∈ {Amazon_Confidential, Personal_PII}, the validator additionally emits a sync-violation iff P lies inside a directory currently synced to agent-bridge. For `status: legacy` skills, the validator does NOT run the path-allowlist check (legacy assets are grandfathered until their next edit).
 
-**Validates: Requirements 2.1, 2.3, 2.4**
+**Validates: Requirements 3.2, 3.3, 3.5, 3.6, 7.4**
 
-### Property 8: Overlap surfacing
+### Property 4 (REVISED per finding F1): ADVISORY-PORTABILITY-REPORT
 
-*For any* proposed workflow W and *for any* existing-mechanism-set M, if any asset m ∈ M has description-keyword-overlap with W ≥ 0.5, the overlap-check record produced by Phase C.1 lists m in `overlap_candidates` with its overlap score, rationale, and overlap_type.
+*For any* skill or power S with declared `portability_tier`, the portability validator MAY emit findings listing Platform_Bound-indicator tokens detected in S's body. The validator does NOT reject, rewrite, or auto-downgrade S based on these findings — the report is purely informational. For any S declared `Platform_Bound`, the `platform_bound_dependencies` list MAY be populated; omission is NOT an error and does NOT prevent the asset from passing validation. When the list is populated, the validator MAY emit a cross-check report comparing declared dependencies to tokens detected in the body; mismatches are informational findings, not errors.
 
-**Validates: Requirements 2.6, 10.1, 10.2**
+**Validates: Requirements 4.3, 4.4, 4.5** (reinterpreted — tier declaration is advisory self-documentation, not an enforced gate; see per-property test note in §Testing Strategy)
 
-### Property 9: No-orphan-creation
+### Property 5: INVENTORY-FRESHNESS (with scope note per finding F3)
 
-*For any* new skill or power file written to disk by the adoption system, there exists an accompanying overlap-check.json in the same directory with `reviewed_by_richard == true` and a `decision` value of either `CREATE_NEW` or `EXTEND_EXISTING`, and the timestamp on the overlap-check.json is strictly earlier than the file's created_at. Put differently: no SKILL.md or POWER.md is ever created without pre-existing evidence of the creation decision.
+*For any* inventory.md rendering R with recorded input-state hash H_R, and for the current filesystem state with computed hash H_FS, if `H_R == H_FS` then R reflects the current filesystem. If `H_R ≠ H_FS`, the agent re-runs Phase A before trusting R.
 
-**Validates: Requirements 7.1, 7.2, 10.3**
+**Scope note**: this property concerns the inventory's *accuracy relative to the filesystem*. It does NOT make claims about the inventory's own active-referrer status in the audit graph. Per finding F3, the inventory is orphan-by-design in the audit — no active load-path makes it "live" in the audit's sense, and that is deliberate. The inventory's accuracy is a property of its contents; the inventory's referrer status is an independent fact about the audit's scoring, and out of scope for this property.
 
-### Property 10: No-wrapper-skill
+**Validates: Requirements 1.3, 1.4**
 
-*For any* proposed skill S whose body consists solely of a single `invokeSubAgent` call with one subagent name and no additional orchestration, the wrapper-detector rejects S with the reason "wrapper skill — use the subagent directly (R10.4)". *For any* proposed skill S whose body orchestrates ≥2 distinct subagent calls or ≥2 distinct MCP tool calls in a documented sequence, the detector accepts S (R10.5).
+### Property 6: ROUND-TRIP
+
+*For any* valid SKILL.md or POWER.md file F, `parse(serialize(parse(F))) == parse(F)` (structural equality), and the markdown body of `serialize(parse(F))` is byte-identical to the body of F.
+
+**Validates: Requirements 9.1, 9.2, 9.3**
+
+### Property 7: NON-SILENT-REWRITE
+
+*For any* SKILL.md or POWER.md file F that does not match the canonical format (unknown required field types, missing required fields for `status: current`, malformed YAML), the validator emits a descriptive error identifying the violation AND the file F is NOT modified on disk.
+
+**Validates: Requirement 9.4**
+
+### Property 8: OVERLAP-CHECK-COMPLETENESS
+
+*For any* new skill or power creation C (Phase C.1 execution), the overlap-check.json artifact produced contains `searched_mechanisms` enumerating all 6 Kiro kinds (skills, powers, subagents, hooks, steering, organs) plus `non_kiro_mechanisms_considered` as a list. Creation of C proceeds to Phase C.3 (write) only if `reviewed_by_richard == true`. Legacy-asset reclassification does NOT require an overlap check.
+
+**Validates: Requirements 2.6, 10.1, 10.3**
+
+### Property 9: ROUTING-PRECEDES-CREATE
+
+*For any* Phase C safe-creation for a new asset, the routing-decision.json evidence from Phase B exists and its terminal leaf is one of {SKILL, POWER, STEERING, HOOK, SUBAGENT, ORGAN} (not REJECT and not EXTEND_EXISTING). If the routing-decision leaf is REJECT or EXTEND_EXISTING, Phase C does NOT run.
+
+**Validates: Requirements 2.3, 7.1, 7.2**
+
+### Property 10: EXTEND-EXISTING-PRECEDENCE
+
+*For any* proposed new workflow W evaluated by the Routing Decision Tree, if any installed skill's trigger list or installed power's keywords list overlaps W's description by ≥75% (or contains an exact trigger-phrase match), the tree terminates at EXTEND_EXISTING(matched_asset) and does NOT produce a new SKILL, POWER, STEERING, HOOK, SUBAGENT, or ORGAN leaf.
+
+**Validates: Requirements 5.4, 10.1, 10.2** (elevated per finding F5 — the existing-first check is now the default gate, not a tie-breaker)
+
+### Property 11 (REVISED per finding F2): STATUS-GATED-SCHEMA
+
+*For any* skill or power S with `status: current`, all required metadata fields (`sensitive_data_class`, `portability_tier`, `platform_bound_dependencies` iff `portability_tier == Platform_Bound`, `created_at`, `last_validated`) are present and typed correctly per §Data Model. *For any* S with `status: legacy`, schema validation is SKIPPED — the minimal original frontmatter (`name`, `description` for skills; `name`, `displayName`, `description`, `keywords`, `author` for powers) is sufficient. When a `status: legacy` S is next written (any edit that reaches disk), the writing path (Phase C.3 legacy-migration) MUST classify S to `status: current` before the edit completes, UNLESS Richard explicitly refuses inline classification — in which case S remains `status: legacy` and the edit is written with the minimal frontmatter preserved. The bijection from Property 1 applies to all statuses equally — legacy rows are inventoried without schema enforcement.
+
+**Validates: Requirement 3.1, 4.2, 9.5** (reinterpreted — schema enforcement is status-gated, not universal)
+
+### Property 12: ACTIVATION-LOGGING
+
+*For any* successful `discloseContext` or `kiroPowers activate` call during an agent session, exactly one row is appended to `activation-log.jsonl` with `event: "activated"`, the correct skill/power name, a `request_summary` (≤120 chars), the session id, and the timestamp. The log is append-only: no existing rows are mutated or deleted. Corrections are appended with `event: "correction"` referencing the erroneous row's timestamp.
+
+**Validates: Requirements 6.1, 6.3, 6.4**
+
+### Property 13: SUBAGENT-WRAPPER-REJECTION
+
+*For any* proposed new skill S whose only action is a single `invokeSubAgent` call to an existing subagent with no additional orchestration (no multi-agent pipeline, no pre-/post-processing, no additional tool calls), the Routing Decision Tree MUST reject S (terminate at REJECT with rationale "wraps single subagent; subagent is the correct mechanism"). Skills that orchestrate multiple subagents or multiple MCP tools in sequence ARE permitted.
 
 **Validates: Requirements 10.4, 10.5**
 
-### Property 11: Review-gate schema
+### Property 14: ASSET-LIFECYCLE
 
-*For any* validated skill or power file (newly created or existing), the required metadata fields for its kind are all present: `name`, `description`, `sensitive_data_class`, `portability_tier`, `created_at`, `last_validated` for skills; plus `displayName`, `keywords`, `author` for powers; plus `platform_bound_dependencies` (non-empty) iff `portability_tier == Platform_Bound`.
+*For any* new asset creation C (Phase C), activation-validate (Phase C.4) must succeed before `last_validated` is set and the asset becomes available in sessions. *For any* pruning action P (Phase E) approved by Richard, the archive operation (copy to `~/shared/wiki/agent-created/archive/skills-powers-pruned-{date}/`) must succeed before the delete operation runs. Archive-before-delete is atomic at the row level: if archive fails, delete does not run.
 
-**Validates: Requirements 7.3, 9.5**
+**Validates: Requirements 7.6, 8.2, 8.3**
 
-### Property 12: Logging invariant
+### Property 15: NON-KIRO-GATE-REJECTION
 
-*For any* single activation call (successful `discloseContext` or `kiroPowers activate`), exactly one line is appended to activation-log.jsonl. That line is valid JSON and contains all required fields: `event`, `kind`, `name`, `session_id`, `ts`. For `activated` and `missed` events, `request_summary` is also present. For `created` events, `overlap_check_ref` is present. For `pruned` events, `archive_path` is present.
+*For any* workflow W evaluated by the Routing Decision Tree, if an existing non-Kiro mechanism (shell alias, `.bashrc`, cron, git hook, OS-level shortcut, IDE feature, team tool) already handles W or could handle W with trivial effort, the tree terminates at REJECT at step 0.5 with a rationale naming the existing mechanism. The tree does NOT continue to Kiro-mechanism-selection branches for W.
 
-**Validates: Requirements 6.3, 6.4**
+**Validates: Spec-internal routing decision step 0.5; prevents the `dashboard-server.kiro.hook`-style duplication that the subtraction audit catches after the fact.**
 
-### Property 13: Keyword activation
 
-*For any* user request R containing tokens that match any installed skill's trigger list OR any installed power's keywords, either (a) the matching skill/power is activated (entry appears in activation-log.jsonl with event=activated and session_id == current session) before the response is drafted, OR (b) a missed-skill note appears in the response AND a corresponding `missed` entry appears in activation-log.jsonl.
 
-**Validates: Requirements 6.1, 6.2**
+---
 
-### Property 14: Archive before delete
+## Error Handling
 
-*For any* skill or power S approved for pruning in Phase E, the archive write at `~/shared/wiki/agent-created/archive/skills-powers-pruned-{date}/{name}/` completes and the archive file exists on disk **before** the original file at `~/.kiro/skills/{name}/` or `~/.kiro/powers/installed/{name}/` is deleted. If the archive write fails, the delete does not proceed.
+Governance errors are handled by surfacing them to Richard, not by automated recovery. Three categories:
 
-**Validates: Requirements 8.3**
+**Validator errors (blocking, non-destructive)**:
+- Malformed YAML in SKILL.md / POWER.md: parse fails with descriptive error; file is not modified; Richard is told what line failed.
+- Missing required fields for `status: current`: validation fails with a list of missing fields; the file stays in its previous state; Richard decides whether to add the fields or revert.
+- Path-allowlist violation (Phase C): creation blocks; Richard is told which class / path pair violates and can either adjust the path, re-declare the class, or cancel.
+
+**Advisory findings (non-blocking)**:
+- Portability report: emitted, logged, surfaced. No action taken.
+- Overlap candidates in the 50%-75% band: surfaced for Richard's review; he decides.
+
+**Race conditions and stale state**:
+- Inventory freshness-hash mismatch: agent re-runs Phase A before trusting the inventory.
+- Activation-log append concurrency: the file is append-only; parallel appends are serialized via filesystem-level line locking or accepted as benign (event order may interleave but no row is lost).
+- Phase C create fails mid-sequence (e.g., write succeeds but activation-validate fails): the file remains on disk with `# validation-failed` comment in the frontmatter; Richard sees the failure and can re-run or delete.
+
+**User-refusal paths (escape hatches)**:
+- Legacy asset edit with classification refused (§Phase C.3): the edit is written without migration; asset remains `legacy`. No error, just a logged refusal.
+- Pruning review DEFER / PROTECT: recorded in the session transcript; no further action.
+
+
 
 ---
 
 ## Testing Strategy
 
-Dual approach matching the sibling audit's pattern:
+The testing approach combines unit tests for specific behaviors, property-based tests for universal correctness, and smoke tests for one-time configuration. Property-based testing is appropriate for this spec because most properties are over pure functions (inventory generator, YAML round-trip, stale-set computation, validator report generation, path-allowlist check, routing tree walk) or over filesystem states that can be simulated with temporary directories.
 
-- **Unit tests**: specific examples, edge cases, error conditions. Focus on:
-  - Individual decision-tree branches with specific workflow inputs (each of the 8 worked examples in §Routing Decision Tree becomes a unit test).
-  - Specific malformed-file examples for parse error messages (empty file, frontmatter without closing `---`, missing required keys one at a time, each invalid enum value).
-  - Integration between safe-creation phases (Step 1 → Step 2 → Step 3 → Step 4 → Step 5 under a happy-path example).
-- **Property tests**: universal properties across all inputs. Configuration:
-  - Library: pick a property-based testing library for the target language (the implementing spec downstream selects; likely `fast-check` for TypeScript or `hypothesis` for Python). Do NOT implement PBT from scratch.
-  - Minimum 100 iterations per property test.
-  - Tag each test with a comment referencing the design property. Tag format: `// Feature: skills-powers-adoption, Property {number}: {property_text}`.
-  - Each Correctness Property above maps to exactly ONE property-based test; property reflection already consolidated the redundant ones.
+### Dual testing approach
 
-### Per-property implementation notes
+- **Unit tests**: specific examples (wbr-callouts skill generates specific triggers; bridge-sync skill declares Platform_Bound), edge cases (empty description, missing frontmatter, legacy-to-current transition), error conditions (malformed YAML, path-allowlist violation).
+- **Property tests**: universal properties (Properties 1-15 above) over randomly generated filesystem states, activation logs, and workflow proposals.
+- **Smoke tests**: one-time configuration checks (inventory path exists; routing tree documentation file present; 4 sensitivity tiers and 2 portability tiers defined in the spec).
 
-- **Property 1 (round-trip)**: generator produces valid frontmatter objects (random from the allowed enums, random ISO 8601 timestamps, random body strings including unicode / whitespace / code fences). Serialize → parse → compare ASTs.
-- **Property 2 (error on malformed)**: generator produces intentionally malformed files — corrupted YAML, missing keys, invalid enum values. Assert parser returns `Error` with a descriptive message; assert no partial AST is returned.
-- **Property 3 (sensitivity)**: generator produces (skill body, declared sensitivity, declared output paths, current agent-bridge sync list). Validate assertion: declared output paths ⊆ allowlist(sensitivity) AND if sensitivity ∈ restricted-set, output paths ∩ sync list == ∅.
-- **Property 4 (portability)**: generator produces skill bodies with planted Platform_Bound tokens at varying densities. Assert the validator flags inconsistency iff `declared == Cold_Start_Safe` and any token present.
-- **Property 5 (inventory bijection)**: generator produces a sequence of create/prune/install/uninstall operations. After each op, run inventory-render and assert bijection with filesystem.
-- **Property 6 (stale)**: generator produces random activation logs + random clock times + random thresholds. Compare detector output to oracle (explicit set-comprehension over the log).
-- **Property 7 (routing)**: generator produces well-formed workflow descriptors across the input space. Assert route() returns a terminal + non-empty rationale; assert determinism (run twice, equal output).
-- **Property 8 (overlap)**: generator produces (proposed description, existing-mechanism-set with planted overlaps at varied ratios). Assert overlap_check surfaces any existing asset with overlap ≥ 0.5.
-- **Property 9 (no orphan)**: simulate create calls; assert for each written file, overlap-check.json exists, is reviewed, and predates created_at.
-- **Property 10 (no wrapper)**: generator produces skill body templates varying the count of distinct tool/subagent invocations. Assert wrapper_detector rejects count==1 (single subagent) and accepts count≥2.
-- **Property 11 (schema)**: generator produces skill/power frontmatter with random subsets of fields present. Assert validator pass iff all required fields present.
-- **Property 12 (logging)**: generator produces sequences of activation calls; assert log length and per-entry schema after each.
-- **Property 13 (keyword)**: generator produces (request-text, skill-set with trigger lists). Assert either activation happens pre-draft OR missed note appears post-draft.
-- **Property 14 (archive-before-delete)**: generator produces prune approvals; assert filesystem ordering — archive file exists before original deletion.
+### Property test configuration
 
-### What is NOT tested by PBT
+- Minimum 100 iterations per property test.
+- Each property test tagged with a comment referencing the design property:
+  - Format: `// Feature: skills-powers-adoption, Property {number}: {property_text}`
+- Properties 1-15 map to 15 property-based tests (or fewer, where properties collapse into a single broader test).
+- Generators:
+  - `genFilesystemState` — produces random directory trees with random skill/power files (frontmatter variations, legacy vs current, valid vs malformed).
+  - `genActivationLog` — produces append-only JSONL sequences with random event distributions over random time windows.
+  - `genWorkflowProposal` — produces random workflow descriptions with random trigger / event / specialist / persistent-state / MCP characteristics.
+  - `genSkillBody` — produces random markdown bodies with varying Platform_Bound-indicator token densities.
 
-- Actual GitHub push behavior of bridge-sync — integration boundary, covered by bridge-sync's own tests.
-- Actual DuckDB query responses — integration boundary.
-- Visual rendering of inventory.md — rendering is mechanical markdown serialization, covered by Property 5.
-- Richard's actual approve/reject decisions in Phase C — human in the loop, not a function.
+### Property-test notes per property
 
----
+- **Property 1 (INVENTORY-BIJECTION)**: generate random filesystem state; run inventory generator; assert bijection. Include edge cases: empty directory, single asset, 100 assets, mixed statuses.
+- **Property 2 (STALENESS-CORRECTNESS)**: generate random activation log; run stale-set computation; assert set matches specification. Include edge case: activation exactly 30 days ago.
+- **Property 3 (PATH-ALLOWLIST-CORRECTNESS)**: generate random {class, path} pairs; assert validator emits violation iff path outside allowlist. Also assert legacy assets are never rejected by this check.
+- **Property 4 (ADVISORY-PORTABILITY-REPORT)**: per F1, the test asserts the validator is a **report-emitting function, not a rejecter**. Generate random skill bodies; assert (a) report is returned containing the detected tokens, (b) the input file is unchanged, (c) no rejection error is raised regardless of declared tier. The test explicitly does NOT assert that Cold_Start_Safe files with Platform_Bound tokens are rejected — that was the earlier-draft behavior removed in revision.
+- **Property 5 (INVENTORY-FRESHNESS)**: generate inventory render + subsequent filesystem changes; assert hash mismatch triggers re-render.
+- **Property 6 (ROUND-TRIP)**: generate random valid SKILL.md / POWER.md content; assert parse/serialize round-trip produces byte-identical body and structurally-equal frontmatter.
+- **Property 7 (NON-SILENT-REWRITE)**: generate random malformed files; assert validator errors AND disk state is unchanged.
+- **Property 8 (OVERLAP-CHECK-COMPLETENESS)**: generate random creation proposals; assert overlap-check.json is produced with all required fields.
+- **Property 9 (ROUTING-PRECEDES-CREATE)**: generate random create-trigger sequences; assert routing-decision.json exists and its leaf is CREATE-variant whenever Phase C runs.
+- **Property 10 (EXTEND-EXISTING-PRECEDENCE)**: generate proposals with varying degrees of overlap to installed assets; assert tree terminates at EXTEND_EXISTING for overlap ≥75%.
+- **Property 11 (STATUS-GATED-SCHEMA)**: generate assets with varying status and frontmatter completeness; assert validation behavior matches specification. Include legacy-to-current migration case.
+- **Property 12 (ACTIVATION-LOGGING)**: generate random activation sequences; assert exactly one log row per activation, with required fields, append-only. Include `missed-by-feedback` row generation when Richard flags a miss.
+- **Property 13 (SUBAGENT-WRAPPER-REJECTION)**: generate proposals; assert single-subagent-wrapper proposals are rejected and multi-agent orchestrations are permitted.
+- **Property 14 (ASSET-LIFECYCLE)**: simulate create + prune sequences; assert archive-before-delete and validate-before-available.
+- **Property 15 (NON-KIRO-GATE-REJECTION)**: generate workflow proposals with random external-mechanism hits; assert step-0.5 REJECT termination. Include the `dashboard-server.kiro.hook` reference case as an explicit example.
 
-## Portability Check
+### Library choice
 
-A new AI on a different platform reads this design. Can it re-execute the governance procedures?
+Use a property-based testing library appropriate to the implementation language. If the adoption system's governance tooling is implemented in Python, use `hypothesis`. If in TypeScript, use `fast-check`. If in Rust, use `proptest`. The choice is downstream of this spec — this spec specifies the properties, not the implementation.
 
-- **Phase A (inventory refresh)** needs: filesystem listing, file reading, YAML parse, markdown write. Standard tools.
-- **Phase B (routing)** needs: read a workflow description, walk the decision tree, emit a routing-decision record. Pure logic, no tool dependencies.
-- **Phase C (safe-creation)** needs:
-  - Overlap check: search across filesystem paths — standard.
-  - Richard review: human-in-the-loop, same on any platform.
-  - File write: standard.
-  - Activation-validate: `discloseContext` and `kiroPowers activate` are Kiro-specific. On a different platform, this step is replaced by the platform's equivalent skill/capability activation mechanism. The adoption system as described is abstract enough — "call the activation mechanism, assert success" — to migrate.
-  - Inventory + log update: standard.
-- **Phase D (activation logging)** needs: append to a JSONL file. Standard.
-- **Phase E (pruning)** needs: human review, archive-then-delete, same on any platform.
+### What is NOT property-tested
 
-The YAML-subset grammar for SKILL.md and POWER.md is explicit. The routing tree is deterministic. The classification rules have concrete path-allowlists. The worked examples are concrete enough for a different-platform agent to verify its understanding against.
+- Documentation content (tier definitions, path allowlists as prose): specified in §Sensitive-Data Classification Rules and §Portability Tier Rules; verified by human review.
+- Richard's manual pruning decisions: not a code path.
+- Richard's manual missed-skill flagging: not automated; the `missed-by-feedback` event insertion IS property-tested as part of Property 12 (given a manual flag, the event row appears with the correct fields), but the decision to flag is not.
+- Cold-start recovery on a different platform: aspirational; cannot be property-tested without a second platform. The advisory portability validator's report content IS property-tested.
 
-Kiro-specific tool names (`discloseContext`, `kiroPowers`) appear in Property 13's text but are called out as "the platform's equivalent activation mechanism" — the property itself is platform-agnostic (keyword-match request → activation happens). Confirmed portable.

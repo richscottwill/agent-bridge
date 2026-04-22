@@ -128,6 +128,7 @@ The system has richer data than what's in the text files. Before guessing or ask
 | Published wiki articles, pipeline state | `wiki.publication_registry`, `wiki.throughput` | Kiro dashboard (`shared/dashboards/wiki-search.html`, Pipeline view), `~/shared/wiki/agent-created/` (local), SharePoint `Documents/Artifacts/` (published .docx) — **Asana `ABPS AI - Content` is deprecated as of 2026-04-17; do not write to it** |
 | Streak, hard thing, daily tracker | `main.l1_streak`, `asana.daily_tracker`, **`main.hard_thing_now` (top 3 with rank 1 = the hard thing)** | amcc.md |
 | System health, data freshness, last sync times | `ops.data_freshness`, `ops.workflow_executions` | — |
+| Skills/powers inventory: what's installed and what's activated | — | ~/shared/context/skills-powers/inventory.md |
 
 **SharePoint (OneDrive)** — durability layer, cross-device access, and published work product. Use SharePoint MCP tools (`sharepoint_list_files`, `sharepoint_read_file`, `sharepoint_read_loop`).
 

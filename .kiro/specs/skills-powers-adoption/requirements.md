@@ -8,6 +8,8 @@ This spec defines an **adoption system** for skills and powers: a set of require
 
 The scope is explicitly **adoption and governance**, not the creation of any specific new skill or power. This spec produces the decision framework, the inventory of candidates, and the safety rules. Concrete skill/power builds are downstream specs.
 
+**Revision history**: Requirements revised 2026-04-22 after stress-test against on-disk corpus (9 SKILL.md + 4 POWER.md, none carrying the adoption-system metadata) and the completed system-subtraction-audit (archived at `~/shared/wiki/agent-created/archive/system-subtraction-audit-2026-04-22/`). Seven acceptance criteria revised across R4 (portability made advisory not enforcing), R5 (candidate identification replaced by pilot-on-existing-9 framing), and R6 (missed-skill detection replaced by Richard-feedback-driven logging). Full rationale in `design.md` revision-history block.
+
 ## Glossary
 
 - **Kiro_Skill**: A markdown file at `~/.kiro/skills/{name}/SKILL.md` with frontmatter (name, description). Activated on demand via the `discloseContext` tool when the agent recognises keyword triggers. Loads specialised instructions into context only when relevant. Currently installed: bridge-sync, charts, coach, cr-tagging, sharepoint-sync, wbr-callouts, wiki-audit, wiki-search, wiki-write.
@@ -70,22 +72,22 @@ The scope is explicitly **adoption and governance**, not the creation of any spe
 
 1. THE Adoption_System SHALL define two portability tiers for skills and powers: Cold_Start_Safe (intent is self-contained in the file text) and Platform_Bound (depends on specific MCP servers, hooks, or subagents that may not exist elsewhere).
 2. WHEN a Kiro_Skill or Kiro_Power is created, THE Adoption_System SHALL require the author to declare its portability tier.
-3. WHERE a Kiro_Skill or Kiro_Power is declared Cold_Start_Safe, THE file content SHALL be understandable to a new agent using only the file text plus other Cold_Start_Safe files, with no reliance on specific tool names, hook IDs, or subagent names unique to this environment.
-4. WHERE a Kiro_Skill or Kiro_Power is declared Platform_Bound, THE file SHALL explicitly list the specific MCP servers, hooks, or subagents it depends on.
-5. IF a Kiro_Skill or Kiro_Power is declared Cold_Start_Safe but references a Platform_Bound asset in its instructions, THEN THE Adoption_System SHALL flag the inconsistency and require the author to either resolve the reference or downgrade the portability tier.
+3. WHERE a Kiro_Skill or Kiro_Power is declared Cold_Start_Safe, THE file content SHOULD be understandable to a new agent using only the file text plus other Cold_Start_Safe files, with no reliance on specific tool names, hook IDs, or subagent names unique to this environment. This is author intent, not a validator gate.
+4. WHERE a Kiro_Skill or Kiro_Power is declared Platform_Bound, THE file MAY explicitly list the specific MCP servers, hooks, or subagents it depends on. Declaration is recommended as cold-start recovery documentation, not required.
+5. IF a Kiro_Skill or Kiro_Power is declared Cold_Start_Safe but the portability validator detects Platform_Bound-indicator tokens (MCP tool names, `.kiro.hook` IDs, subagent names, `discloseContext`/`kiroPowers`) in its body, THEN THE Adoption_System SHALL emit an advisory finding listing the tokens. The finding is informational — the validator SHALL NOT reject the asset, auto-downgrade the tier, or modify the file. Richard decides whether to rewrite the body, update the declared tier, or proceed as-is.
 
-### Requirement 5: Candidate workflow identification
+### Requirement 5: Pilot on already-installed skills and powers
 
-**User Story:** As Richard, I want a list of recurring workflows I actually perform that would benefit from being codified as skills or powers, so that I am not guessing what to build next.
+**User Story:** As Richard, I want to measure activation of the skills and powers I already have installed before building more, so that addition does not outrun subtraction and so the adoption gap is closed on existing assets first.
 
 #### Acceptance Criteria
 
-1. THE Adoption_System SHALL produce a list of candidate workflows derived from (a) body.md system map, (b) device.md installed apps, (c) the existing hook inventory, and (d) the existing subagent inventory.
-2. FOR each candidate workflow, THE Adoption_System SHALL state the proposed Mechanism, the declared Sensitive_Data_Class, the declared portability tier, and the expected trigger (keywords, events, or manual invocation).
-3. THE candidate list SHALL distinguish between workflows that already exist elsewhere (hook, subagent, organ) and workflows that are currently ad-hoc.
-4. WHERE a candidate workflow duplicates an existing hook, subagent, or organ, THE Adoption_System SHALL NOT recommend creating a new skill or power for it.
-5. THE candidate list SHALL rank candidates by expected adoption value using Richard's leverage framework (high-leverage recurring tasks ranked above one-off or low-leverage tasks).
-6. THE candidate list SHALL identify the minimum viable set (no more than three candidates) to pilot adoption, rather than proposing all candidates at once.
+1. THE Adoption_System SHALL treat the 9 already-installed Kiro_Skills (bridge-sync, charts, coach, cr-tagging, sharepoint-sync, wbr-callouts, wiki-audit, wiki-search, wiki-write) and the 4 already-installed Kiro_Powers (aws-agentcore, flow-gen, hedy, power-builder) as the pilot cohort. The body.md / device.md / hook-inventory / subagent-inventory sources are reference data for future rounds only, not active candidate-generation inputs during the pilot window.
+2. FOR each already-installed Kiro_Skill and Kiro_Power, THE Adoption_System SHALL record its current `status` (legacy | current | retired), the activation history from activation-log.jsonl, and — at touch-it-classify-it migration — the declared Sensitive_Data_Class, portability tier, trigger keywords, and owner_agent. Legacy assets are exempt from declaring classification fields until they are next edited.
+3. THE Adoption_System SHALL distinguish pilot outcomes per asset as: KEEP (≥3 activations in the 30-day pilot window), PRUNE-CANDIDATE (fewer than 3 activations; surfaces in next Phase E review), or NEW-PROPOSAL (ad-hoc workflows that cleared the Routing Decision Tree's step 0, step 0.5, and step 1 gates without terminating, and therefore qualify for net-new creation).
+4. WHERE a proposed new workflow overlaps an already-installed asset by ≥75% keyword/trigger match, THE Adoption_System SHALL NOT recommend creating a new skill or power for it. The Routing Decision Tree's step 1 EXTEND_EXISTING gate terminates the proposal and redirects to editing the existing asset.
+5. THE Adoption_System SHALL rank pilot outcomes by activation count from activation-log.jsonl during the 30-day window. A leverage-ranking formula (frequency × reexplanation-cost × artifact-level / creation-cost) is reserved for future rounds where Phase 0 activation baseline has established a real gap that EXTEND_EXISTING cannot close.
+6. THE pilot success criterion SHALL be: ≥3 activations per skill during the 30-day window AND at least 5 of the 9 installed skills activated at all. Skills failing the criterion become Phase E pruning candidates rather than replacements-to-build. New skills SHALL NOT be created during the pilot window unless the Routing Decision Tree terminates at CREATE_NEW AND the overlap-check surfaces no viable EXTEND_EXISTING on the installed 9.
 
 ### Requirement 6: Adoption habit integration
 
@@ -93,8 +95,8 @@ The scope is explicitly **adoption and governance**, not the creation of any spe
 
 #### Acceptance Criteria
 
-1. WHEN the agent detects a keyword or workflow in Richard's request that matches an installed Kiro_Skill, THE agent SHALL activate the skill via discloseContext before producing the response.
-2. WHEN the agent produces a response that would have benefited from an installed Kiro_Skill that was not activated, THE agent SHALL note the missed skill in the response so Richard can see the gap.
+1. WHEN the agent detects a keyword or workflow in Richard's request that matches an installed Kiro_Skill or the `keywords` field of an installed Kiro_Power, THE agent SHALL activate the asset via `discloseContext` (skill) or `kiroPowers activate` (power) before producing the response.
+2. WHEN Richard explicitly identifies an un-activated skill or power that would have helped, THE Adoption_System SHALL log a `{"event": "missed-by-feedback", ...}` entry in the activation log with the named asset, Richard's feedback text (≤200 chars), session id, and timestamp. THE agent SHALL NOT attempt automated pre-send or post-draft detection of missed skills — no platform event exists between response draft and response send, and any convention-based self-check reintroduces the "remember to remember" failure mode skills were designed to eliminate.
 3. THE Adoption_System SHALL log every Kiro_Skill and Kiro_Power activation to a durable location (DuckDB table, SharePoint file, or local JSONL) that persists across sessions.
 4. THE activation log SHALL record the skill/power name, the triggering request summary, the session context, and the timestamp.
 5. WHERE a Kiro_Skill has been installed for more than 14 days and never activated, THE Adoption_System SHALL surface this in a periodic review (e.g., Friday retrospective or EOD summary).

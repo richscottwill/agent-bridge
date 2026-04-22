@@ -11,10 +11,10 @@ Covers: experiment docs, testing plans, investigation docs, instructional docs, 
 - Headers must be questions or imperatives, never bare nouns. 'How to optimize AU NB CPA' not 'AU NB CPA Optimization'. 'When to escalate to Brandon' not 'Escalation Framework'. The header tells the reader what they'll get from the section.
 
 ## Strategic Narrative (OP1 / Leadership Docs)
-- Each section follows: problem → test → validated result → investment ask. Never present a result without the problem it solved.
-- Data lives inside sentences, not beside them: "$16.7MM in OPS" and "+24% registration lift" appear mid-paragraph, not in standalone tables. The narrative carries the data; the data doesn't carry the narrative.
-- Everything connects — no isolated facts. Each initiative links to the next. The word "compound" signals this pattern.
-- Credit cross-functional partners by name or team. Shared wins build political capital.
+- Each section follows: problem → test → validated result → investment ask. Never present a result without the problem it solved. If the problem isn't clear, the result has no anchor.
+- Data lives inside sentences, not beside them: "$16.7MM in OPS" and "+24% registration lift" appear mid-paragraph, not in standalone tables. The narrative carries the data; the data doesn't carry the narrative. Standalone data tables go in appendices.
+- Everything connects — no isolated facts. Each initiative links to the next. The word "compound" signals this pattern. If a section doesn't connect to the one before it, restructure.
+- Credit cross-functional partners by name or team. Shared wins build political capital. Worked example: "In partnership with Joel Mallory (MarTech) and Yogesh (Data Science), we validated OCI's measurement framework across 7 markets."
 - Voice: most polished of all doc types. Longer sentences, more connective tissue between ideas.
 - Signature phrases: "validated results," "measurement framework," "cross-functional collaboration," "connective tissue between platform capabilities and business objectives."
 - Worked example: Bad: "OCI drove results." Good: "OCI's phased rollout across 7 markets validated a measurement framework that reduced CPA by 18% — a result that compounds as we extend to the remaining 3 markets in 2026."

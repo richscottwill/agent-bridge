@@ -1,30 +1,9 @@
 {
-  "schema_version": "1.0",
-  "generated_at_utc": "2026-04-21T15:05:00Z",
-  "generated_at_pt": "2026-04-21T08:05:00-07:00",
-  "phase": "AM-Frontend partial regen (post-run stale-state fix — file was missing)",
-  "pipeline_counts": {
-    "published": 46,
-    "draft": "unknown (wiki.publication_registry dormant per session-log)",
-    "review": "unknown",
-    "final": "unknown",
-    "active": "unknown",
-    "note": "Wiki publication_registry table shows 3 rows with no sharepoint_status per 2026-04-21 session-log entry. Use shared/dashboards/data/wiki-search-index.json as source of truth (just regenerated: 85 articles, 46 published, 1 stale)."
-  },
-  "stale_count": 1,
-  "new_candidates_from_signals": [
-    {"topic": "polaris-brand-lp", "quality_score": 27.5, "channel_spread": 4, "unique_authors": 4, "status": "covered — multiple articles exist", "action": "no-op (monitor)"},
-    {"topic": "oci-rollout", "quality_score": 14.4, "channel_spread": 2, "unique_authors": 4, "status": "covered — OCI Execution Guide exists", "action": "enrich existing article with CA launch milestone + APAC MCC issue post-mortem"},
-    {"topic": "au-cpa-cvr", "quality_score": 14.0, "channel_spread": 3, "unique_authors": 3, "status": "covered — AU Paid Search Market Wiki exists", "action": "enrich with keyword audit methodology + Lena follow-up Q1 LP URL data"},
-    {"topic": "mx-budget-ieccp", "quality_score": 13.5, "channel_spread": 2, "unique_authors": 3, "status": "covered — IECCP FAQ exists", "action": "enrich with Lorena Q2 spend conversation + 100% vs 75% finance-pressure framing"},
-    {"topic": "PAM Budget Availability", "quality_score": 6.0, "channel_spread": 1, "unique_authors": 1, "status": "weak_candidate", "action": "monitor"}
+  "generated_at": "2026-04-22T13:40:00Z",
+  "pipeline_counts": {"draft": null, "review": null, "final": null, "published": null, "note": "wiki pipeline state not queried — not blocking AM"},
+  "stale_final_articles": [],
+  "wiki_candidates_top": [
+    {"topic": "kiro-weekly-au-change-aggregator", "strength": 1.0, "note": "Brandon explicitly asked for this in 4/21 1:1 — L3 tool opportunity. New, not yet strong enough for full article but monitor."}
   ],
-  "sharepoint_drift": {
-    "local_newer_than_sharepoint_count": "unknown — not checked this run",
-    "note": "wiki-maintenance.kiro.hook handles drift weekly"
-  },
-  "deprecated_targets": [
-    {"target": "Asana ABPS AI - Content project", "gid": "1213917352480610", "deprecated_at": "2026-04-17", "source": "soul.md", "note": "Do not write to this project"}
-  ],
-  "usefulness_note": "Per Richard 2026-04-21 session: Step 4 wiki pipeline in am-frontend has low marginal value. wiki-maintenance hook already handles stale/drift weekly. signals.wiki_candidates surfaced in pre-brief queries provides more useful daily signal. Proposal to compress Step 4 to one-line callout routed to karpathy."
+  "note": "Full wiki maintenance runs weekly via wiki-maintenance.kiro.hook — not duplicated here."
 }

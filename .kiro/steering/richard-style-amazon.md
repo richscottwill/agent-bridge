@@ -17,9 +17,6 @@ Apply this on top of Richard's natural voice when writing for leadership (L7+), 
 
 These rules are derived from Amazon's Narrative Template, OP1 Template, MBR Template, Flash Template, Working Backwards Guide, and Doc Ninja-reviewed examples (Dog Safety Awareness, Contra-COGS MBR, Data Migration Narrative, Amazon Search OP1). They are non-negotiable for any document that goes to L7+.
 
-### Source Templates
-Narrative Template, OP1 Template, MBR Template, Flash Template, Working Backwards Guide, Doc Ninja-reviewed examples (Dog Safety Awareness, Contra-COGS MBR, Data Migration Narrative, Amazon Search OP1).
-
 ### Document Structure & Writing Discipline
 Main body = the argument (results, insights, recommendations, decisions). Appendix = supporting material (data tables, test results, program refreshers, rosters, methodology). Cite appendix by name: "see Appendix: OCI Validated Results." Exception: a decision table that IS the argument stays in the body. Appendix does not count against word count.
 
@@ -30,14 +27,11 @@ Sentence discipline: target 18-20 words average. One idea per sentence. Split an
 Purpose statement in paragraph one: what you need to happen and why it matters. If asking for a decision, state it up front. Structure: Purpose → Background → Problem/Opportunity → Recommendation → Next Steps.
 
 **Worked example (before/after):**
-Before: "We have been working on several initiatives across AU and MX markets, including OCI rollout, bid strategy optimization, and landing page testing, and we believe these efforts will drive significant improvements in CPA and registration volume going forward."
+Before: "We have been working on several initiatives across AU and MX markets, including OCI rollout, bid strategy optimization, and landing page testing, and we believe these efforts will drive significant improvements..."
 After: "AU and MX CPA improved 18% QoQ through three coordinated changes: OCI rollout (7/10 markets live), automated bid strategies (NB CPA down 29%), and Polaris LP migration. We recommend scaling the OCI playbook to the remaining three markets by W20."
-Why: The "after" leads with the result, attributes causation to specific actions, and ends with a recommendation. The "before" buries the point in a compound sentence with no data.
+Why: "After" leads with result, attributes causation, ends with recommendation.
 
-**Worked example (bullet-to-prose conversion):**
-Before: "Key changes this quarter: • Migrated 7/10 markets to Polaris • Reduced NB CPA by 29% • Launched OCI in AU and MX • Paused IT due to low volume"
-After: "Three changes drove this quarter's results. We migrated seven of ten markets to Polaris, which reduced NB CPA by 29%. We launched OCI in AU and MX to improve attribution accuracy. We paused IT spend after volume dropped below statistical significance thresholds."
-Why: The "before" is a bullet list with no causal links. The "after" connects each action to its outcome and sequences them logically. Each sentence carries one idea.
+**Bullet-to-prose conversion:** Turn "Key changes: • Migrated 7/10 to Polaris • Reduced NB CPA 29% • Launched OCI • Paused IT" into connected prose: "Three changes drove this quarter's results. We migrated seven of ten markets to Polaris, reducing NB CPA by 29%. We launched OCI in AU and MX for attribution accuracy. We paused IT after volume dropped below significance."
 
 ### Common Failures in Document Structure
 1. **Bullet-list documents.** If >50% of a section is bullets, it's not a narrative. Rewrite as prose with connective tissue. Worked example: "We tested three approaches: (1) bid caps, (2) NB shift, (3) OCI efficiency" is a bullet list disguised as a sentence. Rewrite: "We tested bid caps first, then shifted budget to NB, and finally optimized OCI efficiency — each building on the previous result."

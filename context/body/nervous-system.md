@@ -57,10 +57,7 @@ Eyes | Daily + weekly | Score predicted QA: HIT/MISS/SURPRISE. Target ≥60%. Cu
 - **Scoring protocol:** After each meeting/event, compare predicted questions to actual questions asked. HIT = question asked as predicted. MISS = predicted but not asked. SURPRISE = asked but not predicted. Weekly aggregate: hits/(hits+misses) ≥ 60% target.
 
 ### Loop 3: Pattern Trajectory
-rw-tracker.md | Weekly (Friday) | IMPROVING/STUCK/WORSENING/RESOLVED. STUCK 3+ wk → structural fix. Willpower → trainer. Systems → device.
-
-#### Root Cause
-Visibility avoidance gates L1 → blocks all downstream levels.
+rw-tracker.md | Weekly (Friday) | IMPROVING/STUCK/WORSENING/RESOLVED. STUCK 3+ wk → structural fix. Willpower → trainer. Systems → device. **Root cause:** Visibility avoidance gates L1 → blocks all downstream levels.
 
 #### Active Patterns (3)
 | Pattern | Duration | Status | Gate/Fix |
@@ -142,7 +139,7 @@ Hedy integrated (Run 8). 9+ sessions processed. Measurement: speaking share (% o
 ## Five Levels Position
 
 ### L1 Gate Status
-STRUGGLING. Gate metric: consecutive weeks with shipped artifacts. Current streak: 0. W14 day 5 (Friday). Kate Apr 16 meeting CANCELED — Brandon email 4/3: "cancel for now and reassess as we clean it up," Kate: "I'm fine keeping it but wanted to make sure we had a plan," Megan declined from calendar. Brandon reviewing testing framework doc himself first before deciding how to use it. The artifact (testing doc) still exists, but external deadline pressure is removed.
+STRUGGLING. Gate metric: consecutive weeks with shipped artifacts. Current streak: 0. Kate Apr 16 meeting CANCELED — Brandon (4/3): "cancel for now and reassess as we clean it up." Kate: "fine keeping it but wanted a plan." Megan declined. Brandon reviewing testing framework doc himself before deciding how to use it. Artifact exists but external deadline pressure removed.
 
 ### L1 Gate-Breaker Candidates (from 4/2 Deep Dive)
 
@@ -153,12 +150,10 @@ STRUGGLING. Gate metric: consecutive weeks with shipped artifacts. Current strea
 | Negative keyword list | Immediate | Tactical but shippable today | Unstarted |
 | Market Expansion Playbook | — | Already presented 4/2, formalize | Presented |
 
-Richard's strongest group visibility moment in 9+ tracked sessions: the playbook presentation on 4/2.
+Richard's strongest group visibility moment in 9+ tracked sessions: playbook presentation on 4/2.
 
 ### Parallel Level Activity
-New action items from 4/2 Deep Dive: market expansion playbook (strong L2 visibility), Year-One Optimization one-pager (by Apr 16), IECCP FAQ (by Apr 9), negative keyword list (immediate).
-
-**Gate-breaker priority:** Shortest path to "shipped" wins. Playbook formalization is fastest — already validated by the team on 4/2. Then IECCP FAQ (one-page, clear scope), then Year-One one-pager, then negative keyword list (breaks drought but doesn't show strategic thinking).
+**Gate-breaker priority (shortest path to "shipped" wins):** Playbook formalization (fastest — already validated 4/2) → IECCP FAQ (one-page, clear scope) → Year-One one-pager → Negative keyword list (breaks drought but doesn't show strategic thinking).
 
 ---
 
@@ -169,6 +164,7 @@ New action items from 4/2 Deep Dive: market expansion playbook (strong L2 visibi
 | STUCK = trigger, not label | 3+ weeks at same status | Structural fix: willpower → trainer, systems → device. (e.g., "Admin displacement 3wk" → pre-written templates via device.md.) |
 | Stale predictions | Unscored >7 days | Score within 7 days or archive. Don't let unscored predictions sit. |
 | Conflating 1:1 vs group comms | Comparing across settings | Track separately. 1:1s ~40% share (healthy). Groups <15% (gap). |
+| Cross-organ reference drift | Loop 7 flags mismatch | When a fact cited in one organ doesn't match its canonical source, fix at the source. Don't patch the reference — update the origin. |
 
 ## Governance
 

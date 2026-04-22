@@ -148,10 +148,13 @@ These are live. They execute without Richard thinking.
 - **Portability:** MotherDuck accessible from any DuckDB client with the token. Local .duckdb file as cold backup. Parquet exports at `~/shared/data/exports/`.
 
 ### Common Failures in Installed Apps
-1. **Running AM-Frontend before AM-Backend completes.** Frontend reads backend state — if backend hasn't written yet, the daily brief has gaps. Wait for backend to finish or accept partial data.
-2. **Editing forecast xlsx visible sheets directly.** Only `update-forecast-tracker.py` writes to the xlsx via the hidden `_Data` sheet. Direct edits break formula references.
-3. **Forgetting `--accept-breaking-changes` on Harmony deploy.** Deploy silently fails without it. Always include the flag.
-4. **Asana writes without audit.** Every Asana write must go through the audit hook. If the hook fails, the write still succeeds but the audit trail has a gap — re-run the audit manually.
+
+| Failure | Symptom | Fix |
+|---------|---------|-----|
+| Running AM-Frontend before AM-Backend completes | Daily brief has gaps — frontend reads backend state that hasn't been written yet | Wait for backend to finish or accept partial data |
+| Editing forecast xlsx visible sheets directly | Breaks formula references to `_Data` sheet | Only `update-forecast-tracker.py` writes to xlsx via hidden `_Data` sheet |
+| Forgetting `--accept-breaking-changes` on Harmony deploy | Deploy silently fails | Always include the flag |
+| Asana writes without audit | Write succeeds but audit trail has gap | Every write must go through audit hook; if hook fails, re-run audit manually |
 
 ---
 
@@ -240,7 +243,7 @@ Backlog proposals: WBR auto-briefing, meeting prep auto-generator, invoice routi
 
 ## When to Read This File
 
-- "I'll just do it myself" → check if a device function exists or should be built
-- Evaluating leverage → if it's on the device, Richard shouldn't be doing it
-- Trainer flags recurring time trap → check for existing delegation protocol or tool proposal
-- Planning system-building → Tool Factory is the backlog
+- **"I'll just do it myself"** → check whether a device function already handles this, or propose one
+- **Evaluating leverage** → if the device already does it, Richard shouldn't be spending time on it
+- **Trainer flags recurring time trap** → look for an existing delegation protocol or tool proposal before building from scratch
+- **Planning system-building** → Tool Factory holds the backlog of proposed and in-progress tools

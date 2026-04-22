@@ -15,7 +15,7 @@ auto_generated: true
 
 > Knowledge base for Amazon Business Paid Search. Auto-generated from a filesystem scan of `~/shared/wiki/agent-created/` by `build-wiki-index.py`. SharePoint publication status pulled from `data/sharepoint-artifacts.json`.
 
-Last generated: 2026-04-22T01:39:13
+Last generated: 2026-04-22T14:19:55
 SharePoint cache as of: 2026-04-17T19:02:13-07:00
 
 ---

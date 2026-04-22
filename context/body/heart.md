@@ -135,7 +135,11 @@ Full data logged to DuckDB `autoresearch_experiments` table + `experiment-log.ts
 
 ---
 
-## Hyperparameters
+## Experiment Queue & Hyperparameters
+
+Random at runtime. Each batch: select organ (over-budget → stale → UCB random) → section (random) → technique (COMPRESS/REWORD/REMOVE/RESTRUCTURE/ADD/MERGE/SPLIT) → apply and eval. No hypothesis doc. The eval is the only signal.
+
+Volume over precision — most revert, learning emerges from patterns. Logged in changelog.md + DuckDB.
 
 | Param | Value |
 |-------|-------|
@@ -151,19 +155,13 @@ Full data logged to DuckDB `autoresearch_experiments` table + `experiment-log.ts
 
 **Yield example:** COMPRESS Eyes 150w, Δ=+0.1, ~8K tokens → yield = 0.001875. High yield = bold change + positive delta + low cost.
 
----
-
-## Experiment Queue
-
-Random at runtime. Each batch: select organ (over-budget → stale → UCB random) → section (random) → technique (COMPRESS/REWORD/REMOVE/RESTRUCTURE/ADD/MERGE/SPLIT) → apply and eval. No hypothesis doc. The eval is the only signal.
-
-Volume over precision — most revert, learning emerges from patterns. Logged in changelog.md + DuckDB.
-
 **Worked example — selection sequence:** Query priors → amcc×ADD has UCB 0.997 (high mean, proven winner). But 30% exploration rule fires → shuf picks hands×MERGE (n=0, untested). Section: shuf picks "Tool Opportunities." Technique: MERGE. Apply boldly, eval catches mistakes. If REVERT → hands×MERGE gets β+1, UCB drops, less likely next time. If KEEP → α+1, UCB stays high.
 
+**Self-termination:** Bayesian priors are the stopping mechanism. As combos accumulate reverts, UCB scores drop and they stop being selected. Proven losers (posterior_mean < 0.15, n > 10) are excluded entirely. The loop self-terminates when nothing worth trying remains — no manual cap needed.
+
 ---
 
-## Design Choices
+## Design Choices & Data Layer
 
 ### Validated Patterns (from 58 experiments, Runs 19-27)
 
@@ -202,64 +200,51 @@ These patterns emerged from data. They should inform technique selection but not
 
 **Authority:** All changes to this file, experiment queue, hyperparameters, and run protocol are governed by Karpathy authority (`~/.kiro/agents/body-system/karpathy.md`). No agent outside Karpathy authority modifies heart.md.
 
-## DuckDB Integration
+### DuckDB Integration
 
 All experiment data lives in `~/shared/data/duckdb/ps-analytics.duckdb`. Organs hold protocol (how to experiment). DuckDB holds data (what happened, what works).
 
-### Update Protocol
-
-After every experiment decision:
+**Update protocol** — after every experiment decision:
 1. INSERT into `autoresearch_experiments` (full record)
 2. UPDATE `autoresearch_priors` (increment α or β)
 3. At end of batch: INSERT into `autoresearch_organ_health` (one row per organ with current word counts)
 
-### How Priors Work
-
-Posterior_mean converges to the true keep rate per target×technique. UCB score = posterior_mean + posterior_std — unexplored combos get tried (high uncertainty), proven winners get prioritized (high mean), proven losers naturally fall off.
+**How priors work:** Posterior_mean converges to the true keep rate per target×technique. UCB score = posterior_mean + posterior_std — unexplored combos get tried (high uncertainty), proven winners get prioritized (high mean), proven losers naturally fall off.
 
 **Seeding new targets:** New target category → new rows in `autoresearch_priors` for every target × technique combo, initialized Beta(1,1). `eval_type` column distinguishes `information_retrieval` (organs) from `output_quality` (style guides / context files / hooks). Both flow through the same Bayesian updating.
 
-### Schema Reference
+**Schema reference:**
 
-#### Tables
-
-| Table | Purpose |
-|-------|---------|
-| `autoresearch_experiments` | One row per experiment. Full record: organ, technique, scores, delta, cost, decision. Includes `eval_type` column: `information_retrieval` (organ experiments) or `output_quality` (style guide / context file experiments). |
-| `autoresearch_priors` | Bayesian priors per target×technique. Beta(α,β) updated on every KEEP/REVERT. Includes rows for style guide × technique combos, market context × technique combos, etc. — not just organs. |
+| Table/View | Purpose |
+|------------|---------|
+| `autoresearch_experiments` | One row per experiment. Full record: organ, technique, scores, delta, cost, decision. Includes `eval_type` column. |
+| `autoresearch_priors` | Bayesian priors per target×technique. Beta(α,β) updated on every KEEP/REVERT. |
 | `autoresearch_organ_health` | Snapshot per target per run. Word count, utilization, accuracy estimate over time. |
-
-#### Views
-
-| View | Purpose |
-|------|---------|
-| `autoresearch_selection_weights` | UCB scores for target selection. posterior_mean + posterior_std = exploration/exploitation balance. |
+| `autoresearch_selection_weights` (view) | UCB scores for target selection. posterior_mean + posterior_std = exploration/exploitation balance. |
 
 ## Active Pipeline Experiments
 
 ### PE-1: Prediction Cadence & Lead-Time Structure (2026-W17)
 
-**Status:** PHASE_1_SHIPPED (2026-04-21)  
-**Phase 1 changes:** `lead_weeks INT NULL` + `prediction_run_id VARCHAR NULL` added to ps.forecasts (DDL + ALTER). `_write_projections` computes and populates both on every INSERT. DELETE behavior unchanged — no duplicate risk. Backward compatible (NULL columns, existing queries unaffected).  
-**Hypothesis:** Explicit lead-time tagging (Arm C) produces higher Calibration Information Density than weekly-overwrite (Arm A) or multi-run-append (Arm B).
+**Status:** PHASE_1_SHIPPED (2026-04-21)
+**Phase 1:** `lead_weeks INT NULL` + `prediction_run_id VARCHAR NULL` added to ps.forecasts. `_write_projections` computes both on INSERT. DELETE unchanged. Backward compatible (NULL columns).
+**Hypothesis:** Explicit lead-time tagging (Arm C) produces higher CID than weekly-overwrite (Arm A) or multi-run-append (Arm B).
 
 | Arm | Cadence | Write behavior | Lead-time scoring |
 |-----|---------|----------------|-------------------|
-| A (control) | 1×/wk, W+1..W52, DELETE+INSERT | Overwrites unscored | None — first_pred ≈ latest_pred |
-| B | 3×/wk, W+1..W52, INSERT only | Accumulates predictions | Implicit (from forecast_date spacing) |
-| C | 1×/wk, W+1..W52, INSERT + `lead_weeks` col | Accumulates with explicit tag | Scored per bucket: 1, 2-3, 4-8, 9-16, 17+ |
+| A (control) | 1×/wk, DELETE+INSERT | Overwrites unscored | None |
+| B | 3×/wk, INSERT only | Accumulates | Implicit (forecast_date spacing) |
+| C | 1×/wk, INSERT + `lead_weeks` | Accumulates with tag | Per bucket: 1, 2-3, 4-8, 9-16, 17+ |
 
-**Primary metric:** CID = n_scored_predictions_with_distinct_lead_times / (n_target_weeks × n_markets). Target: CID ≥ 3.0 after 4 scored weeks.  
-**Secondary:** first-vs-latest spread, lead-time error decay slope, structural event detection rate.  
-**Priors:** A=Beta(1,1), B=Beta(2,1), C=Beta(3,1).  
-**Keep rule:** CID_winner > CID_control, no pipeline reliability regression, storage < 10× baseline.  
-**Eval window:** W18-W22 (4 scored weeks minimum).  
-**Schema changes needed:** `lead_weeks INT` + `prediction_run_id VARCHAR` on `ps.forecasts`. Stop DELETE of unscored rows (Arm B/C).
+**Primary:** CID = scored_predictions_with_distinct_lead_times / (target_weeks × markets). Target ≥ 3.0 after 4 scored weeks.
+**Secondary:** first-vs-latest spread, lead-time error decay slope, structural event detection rate.
+**Priors:** A=Beta(1,1), B=Beta(2,1), C=Beta(3,1). **Keep:** CID_winner > CID_control, no reliability regression, storage < 10×.
+**Eval window:** W18-W22.
 
-**Phase 1 Validation Checklist (post-ship):**
-1. Verify `lead_weeks` is populated on new INSERT rows: `SELECT lead_weeks, COUNT(*) FROM ps.forecasts WHERE forecast_date > '2026-04-21' GROUP BY lead_weeks`
-2. Verify `prediction_run_id` is unique per batch: `SELECT prediction_run_id, COUNT(*) FROM ps.forecasts GROUP BY prediction_run_id HAVING COUNT(*) > 52`
-3. Confirm no NULL `lead_weeks` on new rows (backward compat means old rows stay NULL)
-4. Confirm DELETE behavior unchanged: existing scored rows must not be deleted
+**Phase 1 Validation:**
+1. `lead_weeks` populated on new rows: `SELECT lead_weeks, COUNT(*) FROM ps.forecasts WHERE forecast_date > '2026-04-21' GROUP BY lead_weeks`
+2. `prediction_run_id` unique per batch: `SELECT prediction_run_id, COUNT(*) FROM ps.forecasts GROUP BY prediction_run_id HAVING COUNT(*) > 52`
+3. No NULL `lead_weeks` on new rows (old rows stay NULL)
+4. DELETE unchanged: scored rows not deleted
 
 

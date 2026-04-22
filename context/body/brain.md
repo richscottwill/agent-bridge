@@ -38,6 +38,11 @@ When Richard faces a new decision, predict his position by running these checks 
 ### Worked Example
 **AU OCI launch decision:** Lena pushed for immediate full rollout. Template check: #3 (phased > big-bang), #1 (evidence first — CA showed +18.5% vs OP2), #4 (cross-team — MCS page builds needed). Speed pressure from Lena. Result: proposed phased approach with measurement framework. Three principles aligned → HIGH confidence prediction.
 
+### Common Prediction Errors
+1. **Assuming Richard will defer to seniority.** He respects the chain but pushes back with data. Lena (L7) pushing for full rollout didn't override his phased approach — the evidence did.
+2. **Predicting "yes" to speed pressure.** Richard's default is "test first," even under deadline pressure. The exception: when Brandon explicitly asks for speed AND the downside is reversible.
+3. **Ignoring the cross-team check.** Solo execution predictions miss Richard's preference for shared ownership. If a decision involves another team, predict he'll want them at the table.
+
 ---
 
 ## Decision Log
@@ -98,35 +103,19 @@ Key metric: published POV or framework that shapes team strategy.
 End state: agent swarm runs PS operations autonomously. Gap: "agent assists" → "agent operates" is an architecture shift.
 Key metric: a PS workflow that runs end-to-end without human intervention.
 
-### Level Graduation Criteria
+### Level Graduation & Status
 
 Graduation is not a date — it's evidence. The nervous system (Loop 6) tracks these.
 
-#### L1 → L2: Consistent Output
-Gate: 4 consecutive weeks with a strategic artifact shipped (aMCC streak proxy).
-
-#### L2 → L3: Test Ownership
-Gate: 3+ WW tests with written status docs that the team references without asking Richard.
-
-#### L3 → L4: Team Adoption
-Gate: 1+ tool built by Richard and actively used by a teammate for 30+ days.
-
-#### L4 → L5: Strategic Authority
-Gate: Published POV or framework that influenced a team-level decision (Kate or Brandon cited it).
-
-### Current Level Status
-
-| Level | Status | Evidence |
-|-------|--------|----------|
-| L1 | 🔴 Struggling | 0 consecutive weeks, 14 workdays at zero |
-| L2 | 🟡 Active | OCI 7/10 markets, AU weekly updates, ad copy tests, W13 callouts, Flash sections |
-| L3 | 🟢 Accelerating | Prediction engine, data layer, callout pipeline, attention tracker, Slack ingestion |
-| L4 | ⬜ Queued | — |
-| L5 | 🟡 Active | Agent bridge, DuckDB agent state, Asana integration |
+| Level | Gate | Status | Evidence |
+|-------|------|--------|----------|
+| L1 → L2 | 4 consecutive weeks with a strategic artifact shipped (aMCC streak proxy) | 🔴 Struggling | 0 consecutive weeks, 14 workdays at zero |
+| L2 → L3 | 3+ WW tests with written status docs the team references without asking Richard | 🟡 Active | OCI 7/10 markets, AU weekly updates, ad copy tests, W13 callouts, Flash sections |
+| L3 → L4 | 1+ tool built by Richard and actively used by a teammate for 30+ days | 🟢 Accelerating | Prediction engine, data layer, callout pipeline, attention tracker, Slack ingestion |
+| L4 → L5 | Published POV or framework that influenced a team-level decision (Kate or Brandon cited it) | ⬜ Queued | — |
+| L5 | — | 🟡 Active | Agent bridge, DuckDB agent state, Asana integration |
 
 **Convergence point:** Testing Approach doc for Kate is the L2 artifact that proves L1 consistency.
-
-### Level Status Rules
 
 #### Worked Example — Level 1 Gate Check
 Week of 4/5: Testing Approach v5 shipped through full wiki pipeline (PUBLISH, 8.4/10). That's 1 consecutive week with a strategic artifact. Gate requires 4 consecutive weeks. Next 3 weeks must each produce a shipped artifact (e.g., WBR callout doc, AEO POV draft, MX test design) to pass the gate. Missing one week resets the counter to 0.

@@ -65,10 +65,16 @@ Example (actual — reply to Lena): "In terms of the responses you laid out belo
 ## Common Draft Failures
 
 ### Tone & Language Failures
+
+#### Naming & Specificity
 | # | Failure | Fix |
 |---|---------|-----|
 | 1 | Teams instead of people | Name the person: "I'll connect with Yun-Kang on redirect reporting." Unknown? Say so. |
 | 2 | Vague timelines | Specific: "by EOW" or "target Friday 4/11." Uncertain? Best estimate + flag dependency. |
+
+#### Stakeholder & Register
+| # | Failure | Fix |
+|---|---------|-----|
 | 4 | Political subtext missed (Tier 3: Lena, Nick) | Check memory.md. Tone: measured, in-control. Brandon's private reads inform tone but never surface. |
 | 5 | Corporate jargon ("delta," "scoping," "leverage") | Plain language. Simpler word wins. |
 | 6 | "Love" in emails | Never. "I'd appreciate" or ask directly. |

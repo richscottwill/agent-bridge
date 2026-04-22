@@ -1,82 +1,20 @@
 {
-  "schema_version": "1.0",
-  "generated_at_utc": "2026-04-21T13:55:00Z",
-  "generated_at_pt": "2026-04-21T06:55:00-07:00",
-  "phase": "AM-Backend Parallel v2 — Phase 2 signal routing",
-  "ingestion_summary": {
-    "slack": {"status": "ok", "messages_ingested": 27, "thread_replies_fetched": 8, "priority_signals": 4, "duration_seconds": 240},
-    "email_calendar": {"status": "ok", "emails_ingested": 47, "calendar_events_upserted": 24, "high_priority": 6, "unanswered": 9, "duration_seconds": 75},
-    "loop_pages": {"status": "ok", "pages_refreshed": 5, "pages_failed": 0, "duration_seconds": 690},
-    "hedy_meetings": {"status": "ok", "meetings_ingested": 0, "note": "No new meetings since 2026-04-17 last sync", "duration_seconds": 30},
-    "asana_b1": {"status": "ok", "tasks_upserted": 185, "history_snapshots": 102, "duration_seconds": 180},
-    "asana_b2": {"status": "partial", "tasks_scanned": 5, "tasks_deferred": 14, "activity_detected": 3, "duration_seconds": 60}
-  },
-  "priority_signals_to_frontend": [
-    {
-      "id": "slack-live-brandon-alexis-biweekly",
-      "severity": "critical",
-      "source": "slack/dm-brandon",
-      "timestamp_pt": "2026-04-21T06:32:00-07:00",
-      "summary": "Brandon live-escalating Alexis biweekly series confusion. Awaiting Richard's reply. Third AU operational reliability lapse in 2 weeks.",
-      "task_link": null,
-      "action": "Reply to Brandon in DM, fix calendar series, do this BEFORE 9am team meeting."
-    },
-    {
-      "id": "slack-brandon-au-handoff-doc-q",
-      "severity": "high",
-      "source": "slack/ab-paid-search-abix",
-      "timestamp_pt": "2026-04-20T15:30:00-07:00",
-      "summary": "Brandon asked 'Richard do you already have the doc updated based on the feedback I added?' — 21h unanswered.",
-      "task_link": null,
-      "action": "Reply in thread with doc status."
-    },
-    {
-      "id": "email-lena-megan-hire",
-      "severity": "high",
-      "source": "outlook/inbox",
-      "timestamp_pt": "2026-04-21T02:16:00-07:00",
-      "summary": "Lena confirming Megan start date April 28 (4 yrs AU Category/PLX). Background on the hire.",
-      "task_link": null,
-      "action": "Reply welcoming, align on ramp plan."
-    },
-    {
-      "id": "email-brandon-liveramp-enhanced-match",
-      "severity": "high",
-      "source": "outlook/inbox",
-      "timestamp_pt": "2026-04-20T10:34:00-07:00",
-      "summary": "Brandon forwarded follow-up questions to Remi (LiveRamp) on Enhanced Match — Legal approval path.",
-      "task_link": "1213423234257246",
-      "action": "Read Brandon's Qs before 1:30pm 1:1. Due Apr 22."
-    },
-    {
-      "id": "asana-completion-reply-to-dwayne",
-      "severity": "info",
-      "source": "asana",
-      "timestamp_pt": "2026-04-21T00:31:52-07:00",
-      "summary": "Reply to Dwayne Brand LP consolidated feedback SENT overnight. Canonical task closed. Followup: file 2 UX intake tickets (padding + footer).",
-      "task_link": "1214128635826241",
-      "action": "File 2 UX intake tickets today."
-    }
+  "generated_at": "2026-04-22T14:45:00Z",
+  "generated_by": "am-backend-remediation-2026-04-22",
+  "high_priority_signals": [
+    {"source": "slack", "channel": "ab-paid-search-app", "author": "Brandon Munday", "topic": "Extra $ PAM US — reg impact vetting", "days_old": 18.7, "priority": "critical", "action": "Reply w/ reg impact. Draft: drafts/2026-04-22-brandon-pam-budget-reply.md"},
+    {"source": "slack", "channel": "ab-paid-search-global", "author": "Brandon Munday", "topic": "Monthly callout comments in Loop — update by Fri 2pm CT", "days_old": 6.8, "priority": "critical", "action": "mwinit -f → read Loop comments → update → ack. Draft: drafts/2026-04-22-brandon-loop-monthly-callouts.md. Deadline Fri 4/24 12pm PT."},
+    {"source": "quip", "channel": "Global Acq WBR Callouts", "author": "Yun-Kang Chu", "topic": "MX NB regs -19% — why?", "days_old": 0.9, "priority": "high", "action": "Reply before WBR publish. Draft: drafts/2026-04-22-yun-kang-mx-nb-drop.md"},
+    {"source": "email", "sender": "Brandon Munday", "topic": "AU HandOff Doc Final Review", "priority": "high", "action": "Update AU handoff doc TODAY with biweekly cadence + 5/5. Draft: drafts/2026-04-22-brandon-au-ps-weekly.md"},
+    {"source": "email", "sender": "Brandon Munday", "topic": "refmarker mapping audit PoC", "priority": "high", "action": "Designate PoC (Richard). Draft: drafts/2026-04-22-brandon-refmarker-poc.md"},
+    {"source": "email", "sender": "Alvarez Larrea, Lorena", "topic": "Paid Search Strategy (34d unanswered)", "priority": "medium", "action": "Warm reopen — cover in today's 1pm MX PS Sync. Draft: drafts/2026-04-22-lorena-paid-search-strategy.md"},
+    {"source": "email", "sender": "Anderson, Jonathan [C]", "topic": "Prime Day Creative Inputs Due (19d overdue)", "priority": "medium", "action": "Send specs through shared form. Draft: drafts/2026-04-22-anderson-prime-day.md"}
   ],
-  "signal_to_task_pipeline": {
-    "deferred": true,
-    "reason": "streamlined run — manual review via priority signals above",
-    "high_priority_signals_already_task_linked": 1,
-    "high_priority_signals_new_task_candidates": 2
-  },
-  "bucket_cap_check": {
-    "Core": {"current": 11, "cap": 4, "over_by": 7, "action": "demotion proposals deferred — last ran 4/15"}
-  },
-  "slack_decision_detection": {
-    "deferred": true
-  },
-  "hard_thing_state": {
-    "task_gid": "1213341921686564",
-    "name": "Testing Document for Kate (v5)",
-    "workdays_at_zero": 22,
-    "streak_days": 1,
-    "brandon_1on1_today": true,
-    "brandon_1on1_time_pt": "13:30",
-    "visibility_avoidance_pattern_active": true
+  "unanswered_counts": {"slack_24h+": 6, "email_3d+": 10, "slack_critical": 2, "email_high": 3},
+  "hedy_meetings_last_7d": 6,
+  "drafts_written": 7,
+  "hard_thing_signal_alignment": {
+    "note": "signals.wiki_candidates top-4 = hard_thing_now top-4 (polaris-brand-lp, oci-rollout, au-cpa-cvr, mx-budget-ieccp). Independent confirmation the hard-thing-now view is pulling the right candidates.",
+    "polaris_brand_lp_score": 25.9
   }
 }

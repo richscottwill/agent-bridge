@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-21T19:24:12.825405+00:00",
+  "generated": "2026-04-22T14:19:39.901249+00:00",
   "max_wk": 16,
   "markets": [
     "WW",
@@ -763,7 +763,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "US",
-            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -4085,7 +4085,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "CA",
-            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -7434,7 +7434,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "UK",
-            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -10777,7 +10777,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "DE",
-            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -14222,7 +14222,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "FR",
-            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -17552,7 +17552,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "IT",
-            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -20877,7 +20877,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "ES",
-            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -24217,7 +24217,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "JP",
-            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -27514,7 +27514,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "AU",
-            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -31519,7 +31519,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "MX",
-            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -35523,7 +35523,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "WW",
-            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -39201,7 +39201,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "EU5",
-            "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -42170,7 +42170,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "US",
-          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -42199,7 +42199,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "CA",
-          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -42228,7 +42228,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "UK",
-          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -42257,7 +42257,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "DE",
-          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -42286,7 +42286,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "FR",
-          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -42315,7 +42315,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "IT",
-          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -42344,7 +42344,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "ES",
-          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -42373,7 +42373,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "JP",
-          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -42402,7 +42402,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "AU",
-          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -42456,7 +42456,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "MX",
-          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -42485,7 +42485,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "WW",
-          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -42514,7 +42514,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "EU5",
-          "reason": "All data sources fresh (max age: 4.3h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 19.0h, threshold: 24h)",
           "details": {},
           "override_required": false
         }

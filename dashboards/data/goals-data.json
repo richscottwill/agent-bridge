@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-21T15:04:25.166263+00:00",
+  "generated": "2026-04-22T14:19:43.126639+00:00",
   "source": "Outbound Marketing Goals.xlsx",
   "owner_count": 18,
   "goal_count": 30,
@@ -2070,74 +2070,10 @@
     "Globalized Cross-Market Testing": {
       "unit": "cross-team tests",
       "target": 3,
-      "ytd": 3,
-      "tests_in_flight": 7,
-      "tests": [
-        {
-          "workstream": "Audiences",
-          "test": "Engagement Channel",
-          "market": "US",
-          "result": "$765K iOPS",
-          "confidence": "High",
-          "status": "Validated",
-          "is_complete": true
-        },
-        {
-          "workstream": "UX",
-          "test": "Gated Guest",
-          "market": "WW",
-          "result": "-61% conversion",
-          "confidence": "High",
-          "status": "Killed",
-          "is_complete": true
-        },
-        {
-          "workstream": "UX",
-          "test": "In-context registration",
-          "market": "WW",
-          "result": "+13.6K annualized",
-          "confidence": "Medium",
-          "status": "Scaling",
-          "is_complete": false
-        },
-        {
-          "workstream": "UX",
-          "test": "Baloo early access",
-          "market": "WW",
-          "result": "Launched 3/30",
-          "confidence": "Early",
-          "status": "Measuring",
-          "is_complete": false
-        },
-        {
-          "workstream": "UX",
-          "test": "Polaris Brand LP — US",
-          "market": "WW",
-          "result": "+6% CVR vs legacy (21-day pre/post 3/24)",
-          "confidence": "High",
-          "status": "Scaled",
-          "is_complete": true
-        },
-        {
-          "workstream": "UX",
-          "test": "Polaris Brand LP — WW weblab",
-          "market": "WW",
-          "result": "Dial-up 4/6–4/7 complete",
-          "confidence": "Early",
-          "status": "Measuring",
-          "is_complete": false
-        },
-        {
-          "workstream": "UX",
-          "test": "Polaris Brand LP — Italy",
-          "market": "IT",
-          "result": "Ref tag regression; legacy restored 4/16",
-          "confidence": "—",
-          "status": "Rework",
-          "is_complete": false
-        }
-      ],
-      "ytd_pct": 100.0,
+      "ytd": 0,
+      "tests_in_flight": 0,
+      "tests": [],
+      "ytd_pct": 0.0,
       "source": "ww-testing-state.md Appendix D (cross-team tests)"
     },
     "MX + AU Market Testing": {

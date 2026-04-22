@@ -1,39 +1,14 @@
 {
-  "schema_version": "1.1",
-  "generated_at_utc": "2026-04-21T15:05:00Z",
-  "generated_at_pt": "2026-04-21T08:05:00-07:00",
-  "phase": "AM-Frontend partial regen (post-run stale-state fix — refreshed Apr 13 → Apr 21)",
-  "source": "am-frontend.md execution this morning + live DuckDB pull post-Richard pushback",
-  "summary": {
-    "my_tasks_proposals": 3,
-    "portfolio_proposals": 2,
-    "auto_executed_count": 12,
-    "requires_approval_total": 5,
-    "total_enriched_this_session": 12,
-    "total_urgent_or_today_gaps_remaining": 3
-  },
-  "already_enriched_this_session": [
-    {"task_gid": "1213341921686564", "name": "Testing Document for Kate", "field": "kiro_rw,next_action_rw"},
-    {"task_gid": "1214057202961389", "name": "Weekly Reporting - Global WBR sheet", "field": "kiro_rw,next_action_rw"},
-    {"task_gid": "1213125740755931", "name": "Email overlay WW rollout/testing", "field": "kiro_rw,next_action_rw"},
-    {"task_gid": "1213917967984980", "name": "Respond to Lena — AU LP URL", "field": "kiro_rw,next_action_rw"},
-    {"task_gid": "1213964186504305", "name": "Send IECCP follow-up to Lorena", "field": "kiro_rw,next_action_rw"},
-    {"task_gid": "1212808474749819", "name": "Paid App PO", "field": "kiro_rw,next_action_rw"},
-    {"task_gid": "1214128634505816", "name": "AU handover max-clicks check", "field": "kiro_rw,next_action_rw,routine_rw=EngineRoom"},
-    {"task_gid": "1213764961716427", "name": "WW weblab dial-up", "field": "kiro_rw,next_action_rw"},
-    {"task_gid": "1213796951745232", "name": "Look over AU LP switch", "field": "kiro_rw,next_action_rw"},
-    {"task_gid": "1214074477110993", "name": "Sitelink Audit/Update", "field": "kiro_rw,next_action_rw"},
-    {"task_gid": "1213917691089036", "name": "Refmarker mapping audit PoC — AU (completed 4/20 — auto-close candidate)", "field": "kiro_rw,next_action_rw"},
-    {"task_gid": "1214081017092577", "name": "MCS LP Review: Lorena paid social", "field": "kiro_rw,next_action_rw"}
+  "generated_at": "2026-04-22T13:40:00Z",
+  "generated_by": "am-backend-2026-04-22",
+  "my_tasks": [
+    {"task_gid": "1213230198995937", "name": "WW redirect - Existing customer reporting in Adobe Ad Cloud", "proposed": {"priority_rw": "Not urgent", "routine_rw": "Sweep", "kiro_rw": "4/22: 44d overdue, no routine/priority. Kill candidate — check if redirect reporting is still relevant post-Adobe migration.", "next_action_rw": "Decide: kill or reframe with fresh scope. 5-min review."}, "reason": "no_routine_overdue_44d"},
+    {"task_gid": "1214080130329568", "name": "Make changes to AU/MX/PAM for the week", "proposed": {"priority_rw": "Urgent", "routine_rw": "Engine Room", "kiro_rw": "4/22: 28d overdue. Ongoing BAU. Should be recurring weekly task, not one-off.", "next_action_rw": "Convert to recurring weekly or close + create new weekly instance."}, "reason": "no_routine_overdue_28d_bau"},
+    {"task_gid": "1213817111703805", "name": "It's time to update your goal(s)", "proposed": {"priority_rw": "Urgent", "routine_rw": "Admin", "kiro_rw": "4/22: 19d overdue. Brandon email reminder still open from 4/6.", "next_action_rw": "Update monthly goal recap in Loop doc — 15 min."}, "reason": "no_routine_brandon_reminder"},
+    {"task_gid": "1213798673865639", "name": "Update and close your goal(s)", "proposed": {"priority_rw": "Urgent", "routine_rw": "Admin", "kiro_rw": "4/22: 19d overdue. Pairs with 1213817111703805 — likely same Brandon 4/6 reminder.", "next_action_rw": "Close alongside monthly goal update — merge if duplicate."}, "reason": "no_routine_brandon_reminder_pair"},
+    {"task_gid": "1213959904341162", "name": "Reply to Brandon — PAM budget needs assessment", "proposed": {"priority_rw": "Today", "routine_rw": "Sweep", "kiro_rw": "4/22: 16d overdue. Brandon's $Extra PAM $ question (18.6d in Slack) unanswered. BLOCKS Paid App PO work.", "next_action_rw": "Reply to Brandon in Slack with reg impact numbers from Paid App tracker — 20 min."}, "reason": "no_routine_blocks_critical_slack"},
+    {"task_gid": "1213875146955582", "name": "Get Enhanced Match details", "proposed": {"priority_rw": "Urgent", "routine_rw": "Sweep", "kiro_rw": "4/22: 15d overdue. Prereq for Brandon-assigned 'Measure EM impact' (4/21 assignment, F90 LR).", "next_action_rw": "Ping tech PM for EM details doc + rollout timeline — 10 min."}, "reason": "no_routine_blocks_brandon_assignment"},
+    {"task_gid": "1213968042348601", "name": "Deep Dive: Add IECCP FAQ to new account playbook", "proposed": {"priority_rw": "Not urgent", "routine_rw": "Core", "kiro_rw": "4/22: 13d overdue. Deep Dive output — pairs with IECCP follow-up to Lorena.", "next_action_rw": "Fold into IECCP reply to Lorena as a byproduct — draft FAQ from Q2 files."}, "reason": "no_routine_ties_to_ieccp"}
   ],
-  "remaining_gaps": [
-    {"task_gid": "1214081017124426", "name": "MCS LP Review: Polaris template finalization", "missing_fields": ["kiro_rw", "next_action_rw", "routine_rw"], "due_on": "2026-04-22", "note": "Due tomorrow — not enriched this session, pick up before OOO Thu/Fri"},
-    {"task_gid": "1214044682239817", "name": "MX Polaris NB LP Test (Beauty+Auto)", "missing_fields": ["next_action_rw"], "due_on": "2026-04-30", "note": "Due 4/30 — re-triage when closer, fine as-is for now"}
-  ],
-  "auto_executed": [
-    {"action": "daily_snapshot_asana_task_history", "count": 102, "timestamp_utc": "2026-04-21T13:45:00Z", "note": "Idempotent INSERT per (task_gid, snapshot_date) — from morning Phase 1"},
-    {"action": "asana_task_sync_upsert", "count": 185, "timestamp_utc": "2026-04-21T13:45:44Z", "note": "From orchestrator B1 this morning"},
-    {"action": "asana_update_task_enrichment", "count": 12, "timestamp_utc": "2026-04-21T14:42:00Z", "note": "Kiro_RW + Next-action_RW refresh via UpdateTask during AM-Frontend Step 3"}
-  ],
-  "staleness_notes": "AM-Backend Phase 4 + compile did not run yesterday or today per session-log 2026-04-21 entry (Phase 2.5/3B/4/5.5 skipped). This file regenerated manually from live DuckDB + post-session enrichment actions. Root cause: am-auto.kiro.hook is userTriggered (no scheduled trigger) AND hook name had leading-period hiding it from Kiro UI. Hook display name fixed 2026-04-21 morning. Trigger policy change routed to karpathy."
+  "counts": {"proposed": 7, "approval_required": false}
 }

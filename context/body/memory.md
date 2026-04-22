@@ -231,13 +231,13 @@ Each series file contains metadata, context, latest session summary, running the
 Main folder: [Outbound Marketing Internal](https://quip-amazon.com/UZ3VOhztKN4s/Outbound-Marketing-Internal)
 
 **Frequently referenced docs (by usage):**
-| Doc | Link | Use | Frequency |
-|-----|------|-----|-----------|
-| Pre-WBR Callouts | [quip](https://quip-amazon.com/MMgBAzDrlVou) | Draft callouts before WBR | Weekly |
-| MX PS Sync | [quip](https://quip-amazon.com/K9OYA9mXm7DU) | MX weekly sync notes (Lorena) | Weekly |
-| Paid Acq Projects | [quip](https://quip-amazon.com/bXT9AA5YdtN) | Project tracker | As needed |
-| PO Process Options | [quip](https://quip-amazon.com/NXF9AAy02OQ) | Invoice/PO reference | Monthly |
-| Holiday Tracker | [quip](https://quip-amazon.com/dGM9AARtQnG) | Market holiday calendar | Seasonal |
+| Doc | Link | Use | Frequency | Owner |
+|-----|------|-----|-----------|-------|
+| Pre-WBR Callouts | [quip](https://quip-amazon.com/MMgBAzDrlVou) | Draft callouts before WBR | Weekly | Richard (AU/MX sections) |
+| MX PS Sync | [quip](https://quip-amazon.com/K9OYA9mXm7DU) | MX weekly sync notes (Lorena) | Weekly | Richard + Lorena |
+| Paid Acq Projects | [quip](https://quip-amazon.com/bXT9AA5YdtN) | Project tracker | As needed | Team-wide |
+| PO Process Options | [quip](https://quip-amazon.com/NXF9AAy02OQ) | Invoice/PO reference | Monthly | Finance coordination |
+| Holiday Tracker | [quip](https://quip-amazon.com/dGM9AARtQnG) | Market holiday calendar | Seasonal | Team-wide |
 
 **Sub-folders (by doc count):**
 | Folder | Link |

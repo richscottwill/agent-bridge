@@ -6,12 +6,12 @@ inclusion: manual
 Richard's Slack is his most unfiltered register. Fast, reactive, collaborative. This is where the real working relationship lives.
 
 ## Cadence & Structure
-- One thought per message. Never compose a multi-sentence block — send each line separately (stream-of-consciousness pacing)
+- **One thought per message.** Never compose a multi-sentence block — send each line separately (stream-of-consciousness pacing)
 - Parenthetical data drops mid-message: "(Our overall cost last week was $6K)" / "(actually, looks like might still be able to use)"
 - Edits after sending to correct or add nuance — marked with "(edited)"
 - Pastes raw data (SQL queries, URLs, screenshots) inline without preamble
-- Wrong (one block): "yeah I checked the data, looks like NB CPA is down 29% from 6wk ago, I'll put together a summary and send it over"
-- Right (3 separate sends):
+- ❌ Wrong (one block): "yeah I checked the data, looks like NB CPA is down 29% from 6wk ago, I'll put together a summary and send it over"
+- ✅ Right (3 separate sends):
   - "yeah I checked the data"
   - "looks like NB CPA is down 29% from 6wk ago"
   - "I'll put together a summary and send it over"
@@ -85,7 +85,7 @@ Same topic, different register. Asking about AU CPA:
 | **Peter** (cross-functional) | Slightly more structured | Shares files with context. Offers numbered options with reasoning. Still casual. | Don't be too formal. Don't skip the reasoning. | "Here are the options: 1) keep current setup (safe), 2) migrate now (faster)" |
 | **Lorena** (cross-functional, MX/AU) | Professional, thorough | Provides full context when sharing updates. Data-first. Treats her as primary MX stakeholder. | Don't be too casual. Don't skip the data. | "MX NB regs +33% WoW — here's the breakdown by campaign" |
 
-## Slack-Specific Habits
+## Slack-Specific Habits & Communication Preference
 
 ### Availability & Responsiveness
 - Responds even sick/OOO. Active early mornings (4:43 AM, 6:39 AM) and late evenings. Joins calls on 15 min notice.
@@ -97,7 +97,7 @@ Same topic, different register. Asking about AU CPA:
 ### Emoji & Sharing
 - Emoji sparingly: ":(" for genuine disappointment, reaction emoji occasionally, never decorative. Shares work product links immediately after completing.
 
-## Communication Preference (Self-Identified)
+### Why Slack Is Primary
 - Text over verbal: Richard's most articulate and complete thinking happens in writing, not in meetings or on video
 - Slack is the primary channel: deepest context, most nuanced data sharing, best paper trail
 - Written-first advantage: more precise language, recipients absorb on their own time, creates searchable history

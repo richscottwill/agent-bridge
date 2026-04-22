@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-21T15:04:24.977547+00:00",
+  "generated": "2026-04-22T14:19:42.887168+00:00",
   "markets": [
     "au",
     "mx",
@@ -31,7 +31,7 @@
       "data_through": "2026 W15 (Apr 6–12)",
       "sections": {
         "introduction": [
-          "This document provides the trailing-week operational state of the Amazon Business Australia Paid Search program. AU is Richard Williams's hands-on market, managed through Google Ads under the DSAP parent MCC. The program launched in June 2025 and operates under a CPA efficiency constraint — no ie%CCP target exists yet because CCP data is not expected until July 2026. FY26 OP2 targets $1.8M budget, 12,906 registrations, and $140 CPA. FY25 (June–December only) delivered $1.14M spend, 8,763 registrations, and $158 CPA. Lena Zak (L7) is the primary stakeholder with three stated priorities: keyword CPC/CPA investigation, keyword-to-product mapping, and Polaris migration. Alexis Eck (L6) is the collaborative execution partner. OCI is planned for May 2026 but no MCC has been created. Keyword-level registration data is unavailable until Q3 2026; all Non-Brand keyword analysis is directional."
+          "This document provides the trailing-week operational state of the Amazon Business Australia Paid Search program. AU is Richard Williams's hands-on market, managed through Google Ads under the DSAP parent MCC. The program launched in June 2025 and operates under a CPA efficiency constraint — no ie%CCP target exists yet because CCP data is not expected until July 2026. FY26 OP2 targets $1.8M budget, 12,906 registrations, and $140 CPA. FY25 (June–December only) delivered $1.14M spend, 8,763 registrations, and $158 CPA. Lena Zak (L7) is the primary stakeholder with three stated priorities: keyword CPC/CPA investigation, keyword-to-product mapping, and Polaris migration. Alexis Eck (L6) is the collaborative execution partner. OCI has no confirmed AU timeline and no MCC has been created. Keyword-level registration data is unavailable until Q3 2026; all Non-Brand keyword analysis is directional."
         ],
         "state": [
           "AU drove 168 registrations in W15 (-1.2% WoW, -29% vs trailing 8-week average of 236) on $25,829 spend (+17.0% WoW) at a blended CPA of $153.74 (+18.4% WoW). W15 extends the registration decline streak to 7 consecutive weeks and is the lowest weekly output in the trailing 8 weeks. Spend rose while registrations fell, driving a 3-week consecutive CPA increase: $114.77 (W12) → $117.22 (W13) → $129.84 (W14) → $153.74 (W15). The Polaris URL migration tracking issue remains unresolved and is the leading candidate root cause for the sustained CVR compression.",
@@ -43,7 +43,7 @@
         "flags": [
           "<!-- AM-OWNED:trailing-week-flags START --> 4 anomalies detected (>20% deviation from 8-week average):",
           "**Recommended action:** Do not treat the W15 regression as proof of structural decline without first validating Polaris tracking. Brand CVR is the highest-signal metric to monitor post-tracking-fix because Brand CVR is the least-dependent on market demand fluctuation. If Brand CVR returns to 7.0%+ within 7 days of tracking validation, the decline is resolvable; if it does not, structural keyword or LP investigation is required.",
-          "**Cost of inaction (null case):** If the Polaris URL migration tracking is not validated within the next 7 days, 3 consecutive weeks of CVR data will remain ambiguous — the team cannot distinguish genuine demand softness from a tracking artifact. At the current W15 run rate of 168 registrations per week, AU would deliver approximately 8,736 FY26 registrations — 32% below the 12,906 OP2 target and $600K below the $1.8M budget plan. Separately, OCI launch is targeted for May 2026 but no MCC has been created. MCC creation requires 2–3 weeks of lead time. If MCC creation does not begin this week, the May launch slips to June or later, forgoing the 18–24% registration uplift observed in comparable OCI markets (US +24%, UK +23%, DE +18%). At AU's current 168 regs/week baseline, a 20% OCI uplift would add approximately 34 registrations per week — 1,768 annualized registrations worth approximately $271K at $153 CPA. <!-- AM-OWNED:trailing-week-flags END -->",
+          "**Cost of inaction (null case):** If the Polaris URL migration tracking is not validated within the next 7 days, 3 consecutive weeks of CVR data will remain ambiguous — the team cannot distinguish genuine demand softness from a tracking artifact. At the current W15 run rate of 168 registrations per week, AU would deliver approximately 8,736 FY26 registrations — 32% below the 12,906 OP2 target and $600K below the $1.8M budget plan. Separately, OCI has no confirmed AU timeline and no MCC has been created. Every quarter without OCI forgoes the 18–24% registration uplift observed in comparable OCI markets (US +24%, UK +23%, DE +18%). At AU's current 168 regs/week baseline, a 20% OCI uplift would add approximately 34 registrations per week — 1,768 annualized registrations worth approximately $271K at $153 CPA. <!-- AM-OWNED:trailing-week-flags END -->",
           "<!-- WBR-OWNED:signal-flags START --> <!-- WBR-OWNED:signal-flags END -->",
           "---"
         ],
@@ -57,7 +57,7 @@
         "goals": [
           "Achieve a blended CPA at or below $140 for FY26 (OP2 target), delivering 12,906 registrations on $1.8M budget.",
           "Complete the Polaris Brand landing page migration and validate tracking integrity by April 30, 2026.",
-          "Prepare for OCI launch in May 2026 — MCC creation, Google Ads account configuration, and conversion signal setup.",
+          "Prepare for OCI — MCC creation, Google Ads account configuration, and conversion signal setup (timeline TBD).",
           "Establish a biweekly keyword review cadence with Alexis Eck by April 18, 2026, covering top-20 outlier keywords by CPC/CPA.",
           "Pilot the two-campaign structure (product-intent vs business-intent) by May 15, 2026, with a 4-week measurement period before scaling."
         ],
@@ -68,7 +68,7 @@
           "**Phased testing before scale.** The two-campaign structure pilot must run for 4 weeks with a defined success metric before WW consideration. No big-bang restructuring."
         ],
         "priorities": [
-          "OCI MCC: Not created. Cannot begin Google Ads account setup or conversion signal configuration until MCC exists. Blocks May 2026 launch.",
+          "OCI MCC: Not created. Cannot begin Google Ads account setup or conversion signal configuration until MCC exists. Blocks any AU OCI launch.",
           "Keyword-level registration data: Unavailable until Q3 2026. All NB keyword analysis remains directional. Blocks precise keyword-to-registration attribution.",
           "ie%CCP target: CCP data not expected until July 2026. AU operates on CPA constraint only until then.",
           "Polaris ref tag audit: AU page not yet validated after Italy regression discovered April 16. Blocks attribution confidence for all W14–W15 data.",
@@ -427,7 +427,7 @@
         "variance_bridge": {
           "heading": "Appendix F",
           "paragraphs": [
-            "AU currently operates without OCI (Online Conversion Integration). All conversion data flows through Google Ads native tracking. No variance bridge between advertising platform and internal ERP is required at this time. When OCI launches for AU (target May 2026), this section will document the expected 5–15% discrepancy between Ordered Product Sales and Shipped Product Sales, and the reconciliation methodology.",
+            "AU currently operates without OCI (Online Conversion Integration). All conversion data flows through Google Ads native tracking. No variance bridge between advertising platform and internal ERP is required at this time. When OCI launches for AU, this section will document the expected 5–15% discrepancy between Ordered Product Sales and Shipped Product Sales, and the reconciliation methodology.",
             "**Known data limitations:** - ie%CCP: Not available. CCP data expected July 2026. AU operates on CPA constraint only. - Keyword-level registrations: Unavailable until Q3 2026. All NB keyword analysis is directional. - YoY comparison: Not available until June 2026 (AU launched June 2025). - Polaris tracking integrity: Unvalidated post-migration. W13 daily pattern suggests potential tracking disruption.",
             "---"
           ],
@@ -1455,21 +1455,21 @@
         "state": [
           "The WW PS Testing program drove 16,626 total registrations in W15 (-3.0% WoW) on $1.23M spend (+3.9% WoW) across all 10 markets at a blended CPA of $74.03 (+7.1% WoW). Two events dominate the week: the Polaris Brand LP weblab dial-up in WW markets (4/6–4/7), and a P0 Italy ref tag regression detected during the April 16 Polaris LP sync. The Italy Polaris `/cp/ps-brand` page (launched 4/1) overwrote Italy's ref tag and routed Italian signup traffic to the AU domain; Alex VanDerStuyf (MCS) confirmed legacy Italy restored on 4/16 and Polaris Italy parked as `it/cp/ps-brand-new` in AEM. The team also confirmed the US Polaris brand page delivered +6% CVR vs the legacy MCS version (21-day pre/post March 24 launch) — the first statistically validated win from the Polaris rollout.",
           "A second W15 event — the Google MCC cross-child learning investigation (Sam Tangri, 4/17) — flagged a coordinated NB spend drop on 4/13 in US/UK/DE (US ~25K vs 70K weekly average, with recovery 4/14). Jing Shi's diagnosis: a US data exclusion extended from 4/7 to 4/13 that propagated to same-MCC child accounts. This is an OCI measurement concern — data exclusions affecting Smart Bidding learning across geographies — not a performance regression. Mike Babich (Google) is investigating. Implication: W15 WW weekly numbers may reflect a transient OCI learning artifact that normalizes in W16.",
-          "**Input metrics (controllable levers — by workstream):**",
-          "**Output metrics (lagging results — by workstream):**",
-          "OCI Bidding now has 8 of 10 markets at 100%. CA launched on schedule 4/7 with E2E testing complete. AU remains at May 2026 target with no MCC; MX remains TBD with no MCC. The Ad Copy workstream continues to produce the strongest evidence base in Modern Search: UK AMZ delivered +86% CTR and +31% registrations, Phase 2 launched in UK on 3/6, EU4 translations completed 3/20. IT remains low-confidence due to sample size — no scale decision this cycle."
+          "OCI Bidding now has 8 of 10 markets at 100%. CA launched on schedule 4/7 with E2E testing complete. AU and MX both remain TBD with no MCC created. The Ad Copy workstream continues to produce the strongest evidence base in Modern Search: UK AMZ delivered +86% CTR and +31% registrations, Phase 2 launched in UK on 3/6, EU4 translations completed 3/20. IT remains low-confidence due to sample size — no scale decision this cycle.",
+          "UX is the workstream with the most W15 activity. Polaris WW dial-up ran 4/6–4/7. The US Polaris page has now delivered +6% CVR vs legacy at scale — the first statistically-valid win from the brand LP rebuild. The Italy ref tag regression is a setback but isolated: Dwayne Palmer (MCS) has restored legacy Italy, and the April 16 sync aligned on 10 Polaris LP template changes (benefit cards replacing percolate widget, subheadline standardization, FAQ updates, closing CTA) to apply globally. Adi Thakur (UX), Stacey Gu (OCI), and Dwayne Palmer attended the April 16 sync alongside Richard and Brandon.",
+          "Hedy also logged a 4/17 AI Tool Demo session (51 min, 7 team members) where Richard demoed a code-based AI platform for WBR callout generation. Team aligned on adoption for WBR support, Markdown as the standard output format, and a shared SharePoint prompt repository. 6 team members committed to testing against their domains (Adi/MX by 4/25, Andrew/UK by 4/28, Stacey/Polaris by 5/2, Yun-Kang/Adobe NB, Dwayne/MCS, Peter/Apps). This is a Level 3 (Team Automation) advance — the program's first tool with committed teammate adoption."
         ],
         "lessons": [
           "Three operational insights from the trailing four-week window (W12–W15) inform the immediate tactical posture:",
           "1. **Polaris LP rollout produced its first validated positive result (+6% CVR in US) and its first production regression (Italy ref tag) in the same two-week window.** The US result (21-day pre/post March 24) is the first statistically-valid Polaris win. The Italy regression is operationally isolated (legacy restored within 24 hours of detection) but strategically costly: it demonstrates that the rollout process lacks an automated ref tag audit step. Every market rollout prior to Italy (US 3/24, EU3 preparations) could have contained the same defect undetected. The corrective action is a systematic ref tag audit applied to AU (next in the rollout queue per Brandon's priority order) before any further Polaris market launches. The US +6% CVR result is the evidence base that justifies continuing the rollout; the Italy regression defines the gate that precedes each market.",
-          "2. **OCI reached 8 of 10 markets at 100% with CA's 4/7 launch — the program is in its measurement phase, not its expansion phase, for the next 4–6 weeks.** FR/IT/ES/JP at 100% on 3/31 and CA at 100% on 4/7 close the first 2026 QBR goal. The remaining expansion work is AU (May 2026, MCC not yet created) and MX (TBD, MCC not yet created). The binding constraint for both is MCC creation, not methodology. The 4/17 cross-MCC data exclusion incident (Sam Tangri → Jing Shi → Mike) surfaces a measurement-phase concern: Google's Smart Bidding prioritizes same-MCC learning, so US data exclusions can transiently distort UK/DE/FR performance for a day or two. This does not invalidate OCI uplift figures but does require acknowledgment in weekly readouts when US data exclusion events occur.",
+          "2. **OCI reached 8 of 10 markets at 100% with CA's 4/7 launch — the program is in its measurement phase, not its expansion phase, for the next 4–6 weeks.** FR/IT/ES/JP at 100% on 3/31 and CA at 100% on 4/7 close the first 2026 QBR goal. The remaining expansion work is AU and MX — both with no confirmed timeline and no MCC created. The binding constraint for both is MCC creation, not methodology. The 4/17 cross-MCC data exclusion incident (Sam Tangri → Jing Shi → Mike) surfaces a measurement-phase concern: Google's Smart Bidding prioritizes same-MCC learning, so US data exclusions can transiently distort UK/DE/FR performance for a day or two. This does not invalidate OCI uplift figures but does require acknowledgment in weekly readouts when US data exclusion events occur.",
           "3. **The April 17 AI Tool Demo with 7 team members committing to adoption is the first Level-3 (Team Automation) traction the program has produced.** Adi (MX), Andrew (UK), Stacey (Polaris), Yun-Kang (Adobe NB), Dwayne (MCS), and Peter (Apps) each committed to a tool validation deliverable with a specific date range. Hedy captured the session. The Markdown-standardized output and shared SharePoint prompt repository are the structural decisions that make this adoption durable rather than a one-off novelty. If 4 of the 6 deliverables ship on schedule by early May, the tool graduates from \"Richard's tool\" to \"PS team standard\" — which is the L3 goal criterion.",
           "---"
         ],
         "goals": [
           "Ensure every active test across all five workstreams has a written status document by April 30, 2026, with zero undocumented tests.",
           "Ship the Testing Approach document (v5, 8.4/10 PUBLISH verdict) to Brandon Munday for review by April 18, 2026.",
-          "Expand OCI to remaining markets — CA launch on April 7, AU target May 2026, MX timeline TBD — achieving 100% coverage of active markets by Q4 2026.",
+          "Expand OCI to remaining markets — CA launch on April 7, AU and MX timelines TBD — achieving 100% coverage of active markets by Q4 2026.",
           "Complete the AI Max test design document for US Q2 2026 pilot by April 14, 2026 (currently 4 days overdue)."
         ],
         "tenets": [
@@ -1480,8 +1480,8 @@
         ],
         "priorities": [
           "AI Max test design: 6 days overdue. Design document incomplete. Blocks Q2 2026 US pilot timeline.",
-          "AU OCI: May 2026 target but no MCC created. Cannot begin account setup until MCC exists.",
-          "MX OCI: Timeline TBD. No MCC created. Lowest priority in the OCI expansion queue.",
+          "AU OCI: No confirmed timeline. No MCC created. Cannot begin account setup until MCC exists.",
+          "MX OCI: No confirmed timeline. No MCC created. Lowest priority in the OCI expansion queue.",
           "F90 Lifecycle: Legal SIMs not submitted. Cannot launch lifecycle targeting without Legal clearance.",
           "Ad Copy IT: Low-confidence results. Insufficient sample size prevents scaling decision.",
           "Italy Polaris: Legacy restored; new template parked in AEM as `it/cp/ps-brand-new` pending ref tag audit.",
@@ -1494,120 +1494,7 @@
           "Mike Babich (Google): Confirm data-exclusion impact on cross-MCC Smart Bidding learning."
         ]
       },
-      "tables": {
-        "inputs": [
-          {
-            "Workstream": "OCI Bidding",
-            "Active Markets": "US/UK/DE/FR/IT/ES/JP at 100%; CA at 100% post-4/7 launch",
-            "Status": "8 markets at 100%; AU May 2026; MX TBD",
-            "Key Input": "OCI signal feeding Smart Bidding; cross-MCC learning flagged 4/17"
-          },
-          {
-            "Workstream": "Modern Search (Ad Copy)",
-            "Active Markets": "UK Phase 1 complete; UK Phase 2 launched 3/6; IT launched 2/19; EU4 translations complete",
-            "Status": "Evidence-based messaging from Sole Proprietor study",
-            "Key Input": "Ad copy variants by market"
-          },
-          {
-            "Workstream": "Audiences & Lifecycle",
-            "Active Markets": "US Engagement channel validated ($765K iOPS 2025)",
-            "Status": "F90 Lifecycle blocked on Legal SIMs",
-            "Key Input": "Audience segment targeting"
-          },
-          {
-            "Workstream": "User Experience",
-            "Active Markets": "Polaris WW dial-up 4/6–4/7 complete; Baloo early access live 3/30; Italy ref tag regression 4/16",
-            "Status": "US Polaris delivered +6% CVR vs legacy",
-            "Key Input": "Landing page variants"
-          },
-          {
-            "Workstream": "Algorithmic Ads",
-            "Active Markets": "DG CPC testing US",
-            "Status": "AI Max US design 6 days overdue",
-            "Key Input": "DG bids, AI Max campaign structure"
-          }
-        ],
-        "outputs": [
-          {
-            "Workstream": "OCI Bidding — US",
-            "Key Result": "+24% reg uplift, +32,047 regs, $16.7MM OPS",
-            "Confidence": "High",
-            "Impact": "Scaled"
-          },
-          {
-            "Workstream": "OCI Bidding — UK",
-            "Key Result": "+23% reg uplift",
-            "Confidence": "High",
-            "Impact": "Scaled"
-          },
-          {
-            "Workstream": "OCI Bidding — DE",
-            "Key Result": "+18% reg uplift",
-            "Confidence": "High",
-            "Impact": "Scaled"
-          },
-          {
-            "Workstream": "OCI Bidding — FR/IT/ES/JP",
-            "Key Result": "100% dial-up complete 3/31",
-            "Confidence": "Measuring",
-            "Impact": "First QBR goal 2026 achieved"
-          },
-          {
-            "Workstream": "OCI Bidding — CA",
-            "Key Result": "Launched 4/7; E2E testing complete",
-            "Confidence": "In-flight",
-            "Impact": "Dial-up active"
-          },
-          {
-            "Workstream": "Ad Copy — UK Phase 1",
-            "Key Result": "+86% CTR, +31% regs",
-            "Confidence": "High",
-            "Impact": "Complete"
-          },
-          {
-            "Workstream": "Ad Copy — IT",
-            "Key Result": "Inconclusive (insufficient sample)",
-            "Confidence": "Low",
-            "Impact": "Running"
-          },
-          {
-            "Workstream": "Audiences — Engagement",
-            "Key Result": "$765K iOPS 2025",
-            "Confidence": "High",
-            "Impact": "Validated"
-          },
-          {
-            "Workstream": "UX — Polaris US",
-            "Key Result": "+6% CVR vs legacy (21-day pre/post 3/24)",
-            "Confidence": "High",
-            "Impact": "Confirmed"
-          },
-          {
-            "Workstream": "UX — Italy Polaris ref tag",
-            "Key Result": "P0 regression detected 4/16; legacy restored",
-            "Confidence": "—",
-            "Impact": "Rework required"
-          },
-          {
-            "Workstream": "UX — Gated Guest",
-            "Key Result": "-61% conversion",
-            "Confidence": "High (negative)",
-            "Impact": "Killed"
-          },
-          {
-            "Workstream": "UX — In-context registration",
-            "Key Result": "+13.6K annualized regs",
-            "Confidence": "Medium",
-            "Impact": "Scaling"
-          },
-          {
-            "Workstream": "Algorithmic Ads — DG CPC",
-            "Key Result": "$0.39 vs $2.43 keyword (-84% CPC)",
-            "Confidence": "Early",
-            "Impact": "Volume TBD"
-          }
-        ]
-      },
+      "tables": {},
       "appendices": {
         "weekly_trend": {
           "heading": "Appendix A",
@@ -1713,8 +1600,8 @@
               },
               {
                 "Market": "AU",
-                "OCI Status": "Planned",
-                "Launch Date": "May 2026",
+                "OCI Status": "TBD",
+                "Launch Date": "TBD",
                 "Reg Uplift": "Projected 18–24%",
                 "Notes": "No MCC created"
               },
@@ -1765,125 +1652,6 @@
         },
         "plan_summary": {
           "heading": "Appendix D",
-          "tables": [
-            [
-              {
-                "Workstream": "OCI Bidding",
-                "Test": "Smart Bidding w/ OCI signal",
-                "Market": "US",
-                "Result": "+24% regs, $16.7MM OPS",
-                "Confidence": "High",
-                "Status": "Scaled"
-              },
-              {
-                "Workstream": "OCI Bidding",
-                "Test": "Smart Bidding w/ OCI signal",
-                "Market": "UK",
-                "Result": "+23% regs",
-                "Confidence": "High",
-                "Status": "Scaled"
-              },
-              {
-                "Workstream": "OCI Bidding",
-                "Test": "Smart Bidding w/ OCI signal",
-                "Market": "DE",
-                "Result": "+18% regs",
-                "Confidence": "High",
-                "Status": "Scaled"
-              },
-              {
-                "Workstream": "Modern Search",
-                "Test": "Ad Copy Phase 1",
-                "Market": "UK",
-                "Result": "+86% CTR, +31% regs",
-                "Confidence": "High",
-                "Status": "Complete"
-              },
-              {
-                "Workstream": "Modern Search",
-                "Test": "Ad Copy Phase 1",
-                "Market": "IT",
-                "Result": "Inconclusive",
-                "Confidence": "Low",
-                "Status": "Needs larger sample"
-              },
-              {
-                "Workstream": "Audiences",
-                "Test": "Engagement Channel",
-                "Market": "US",
-                "Result": "$765K iOPS",
-                "Confidence": "High",
-                "Status": "Validated"
-              },
-              {
-                "Workstream": "Audiences",
-                "Test": "Prime Day 2025",
-                "Market": "US",
-                "Result": "$329K OPS, 644% ROAS",
-                "Confidence": "High",
-                "Status": "Event complete"
-              },
-              {
-                "Workstream": "UX",
-                "Test": "Gated Guest",
-                "Market": "WW",
-                "Result": "-61% conversion",
-                "Confidence": "High",
-                "Status": "Killed"
-              },
-              {
-                "Workstream": "UX",
-                "Test": "In-context registration",
-                "Market": "WW",
-                "Result": "+13.6K annualized",
-                "Confidence": "Medium",
-                "Status": "Scaling"
-              },
-              {
-                "Workstream": "UX",
-                "Test": "Baloo early access",
-                "Market": "WW",
-                "Result": "Launched 3/30",
-                "Confidence": "Early",
-                "Status": "Measuring"
-              },
-              {
-                "Workstream": "UX",
-                "Test": "Polaris Brand LP — US",
-                "Market": "WW",
-                "Result": "+6% CVR vs legacy (21-day pre/post 3/24)",
-                "Confidence": "High",
-                "Status": "Scaled"
-              },
-              {
-                "Workstream": "UX",
-                "Test": "Polaris Brand LP — WW weblab",
-                "Market": "WW",
-                "Result": "Dial-up 4/6–4/7 complete",
-                "Confidence": "Early",
-                "Status": "Measuring"
-              },
-              {
-                "Workstream": "UX",
-                "Test": "Polaris Brand LP — Italy",
-                "Market": "IT",
-                "Result": "Ref tag regression; legacy restored 4/16",
-                "Confidence": "—",
-                "Status": "Rework"
-              },
-              {
-                "Workstream": "Algorithmic Ads",
-                "Test": "DG CPC",
-                "Market": "US",
-                "Result": "$0.39 vs $2.43 CPC (-84%)",
-                "Confidence": "Early",
-                "Status": "Volume TBD"
-              }
-            ]
-          ]
-        },
-        "change_log": {
-          "heading": "Appendix E",
           "tables": [
             [
               {
@@ -2363,16 +2131,28 @@
                 "Update Cadence": "On change"
               },
               {
-                "Placeholder Tag": "`{{APPENDIX_D_TESTS}}`",
-                "Section": "Appendix D — workstream test results",
-                "Data Source": "Testing wiki articles",
-                "Update Cadence": "On change"
-              },
-              {
                 "Placeholder Tag": "`{{APPENDIX_E_CHANGELOG}}`",
                 "Section": "Appendix E — change log",
                 "Data Source": "Testing program change log",
                 "Update Cadence": "On change"
+              },
+              {
+                "Placeholder Tag": "`{{LOOP_REPORTING_QUEUE}}`",
+                "Section": "Loop Reporting Queue",
+                "Data Source": "Test Inventory + per-test hydration (Ingestion Rules 1–4)",
+                "Update Cadence": "Daily"
+              },
+              {
+                "Placeholder Tag": "`{{APPENDIX_I_DOSSIER}}`",
+                "Section": "Appendix I — Active Test Dossier",
+                "Data Source": "Test Inventory + per-test hydration (Ingestion Rules 1–4)",
+                "Update Cadence": "Daily"
+              },
+              {
+                "Placeholder Tag": "`{{APPENDIX_J_STALENESS}}`",
+                "Section": "Appendix J — Staleness Report",
+                "Data Source": "Per-test hydration + staleness gate (Ingestion Rule 2)",
+                "Update Cadence": "Daily"
               }
             ]
           ],
@@ -2380,7 +2160,7 @@
             "This schema defines the contract between the Kiro agent swarm (LLM output) and the DOCX template (deterministic patching). The agent generates a JSON payload mapping these keys to generated strings. A patching script replaces the placeholders in the Word XML without touching surrounding formatting.",
             "### JSON Output Contract",
             "```json { \"REPORTING_PERIOD\": \"Week 15 (Apr 5–11, 2026)\", \"SOTB_PARAGRAPH_1\": \"The WW PS Testing program drove 14,800 registrations...\", \"SOTB_WORKSTREAM_TABLE\": \"[markdown table string]\", \"SOTB_RESULTS_TABLE\": \"[markdown table string]\", \"SOTB_ANALYSIS\": \"OCI Bidding remains the highest-impact...\", \"SOTB_NULL_CASE\": \"If the Testing Approach document does not ship...\", \"SOTB_FLAGS\": \"[conditional — only present if anomalies detected]\", \"LESSONS_1\": \"First insight...\", \"LESSONS_2\": \"Second insight...\", \"LESSONS_3\": \"Third insight...\", \"PRIORITIES_TABLE\": \"[markdown table string]\", \"BLOCKED_ITEMS\": \"[markdown list]\", \"STAKEHOLDER_ACTIONS\": \"[markdown list]\" } ```",
-            "Static sections (Goals, Tenets, Appendix B OCI status, Appendix D test results) are NOT in the JSON — they persist unchanged in the template until manually revised or a test status changes.",
+            "Static sections (Goals, Tenets, Appendix B OCI status) are NOT in the JSON — they persist unchanged in the template until manually revised. Appendix I (Active Test Dossier), Appendix J (Staleness Report), and the Loop Reporting Queue are generated directly from the Test Inventory and per-test source hydration rather than from a JSON payload — see `state-file-ww-testing.md` → Ingestion Rules.",
             "---"
           ]
         }
@@ -2446,7 +2226,6 @@
       "tenets": 4,
       "priorities": 13,
       "appendices": [
-        "change_log",
         "monthly_projection",
         "placeholder_schema",
         "plan_summary",
@@ -2455,7 +2234,7 @@
         "weekly_trend",
         "yoy"
       ],
-      "appendix_count": 8,
+      "appendix_count": 7,
       "has_flags": false
     }
   ],
@@ -2518,8 +2297,7 @@
     "appendix_coverage": {
       "change_log": [
         "au",
-        "mx",
-        "ww"
+        "mx"
       ],
       "monthly_projection": [
         "au",

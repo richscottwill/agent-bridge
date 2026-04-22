@@ -46,25 +46,29 @@ Brandon's seven direct reports plus Richard. Covers PS acquisition, MCS/website,
 
 ## 2. Market & Channel Contacts (Pre-WBR Callouts + Country Leads)
 
-Source: `quip-amazon.com/MMgBAzDrlVou` → "Guidance" tab, rows 10–12. Biweekly syncs before 10 AM PT Wednesdays.
+Source: Pre-WBR Callouts quip (`quip-amazon.com/MMgBAzDrlVou`, "Guidance" tab, rows 10–12). Biweekly syncs before 10 AM PT Wednesdays.
 
-#### Channel Callout Owners
+#### Channel Callout Owners (11 channels)
+
+Each channel has one designated owner who writes the biweekly callout. Richard covers Paid Search (ACQ) when Brandon is OOO.
 
 | # | Channel | Owner | Notes |
 |---|---------|-------|-------|
-| 1 | TSEM (all) | Daron Manso | Traffic/SEM overall |
+| 1 | TSEM (all) | Daron Manso | Traffic/SEM overall lead |
 | 2 | Traffic | Kristine Weber | Action-item follow-ups |
 | 3 | Email | Kris Knowles | |
 | 4 | A.com / Cross Stores | Baylee McCloskey | |
-| 5 | Push | Peter Ocampo | Mobile App |
+| 5 | Push | Peter Ocampo | Mobile App program lead |
 | 6 | Paid Search (ACQ) | Brandon Munday | Richard covers when OOO |
-| 7 | Paid Search — ENG | Yun-Kang Chu | LiveRamp |
+| 7 | Paid Search — ENG | Yun-Kang Chu | LiveRamp integration |
 | 8 | ADA-DA (Display Ads) | Abdul Bishar | |
-| 9 | MCS | Dwayne Palmer | |
+| 9 | MCS | Dwayne Palmer | Website marketing |
 | 10 | SEO | Yoav Reder | |
 | 11 | CPS Growth | Jenn Thompson | |
 
 #### Country Contacts (Callout Owner + PS Stakeholder Lead)
+
+Six markets with designated callout owners. AU and MX have the most active PS stakeholder relationships for Richard.
 
 | Market | Callout Owner | PS Stakeholder | Stakeholder Level | Notes |
 |--------|--------------|----------------|-------------------|-------|
@@ -72,18 +76,20 @@ Source: `quip-amazon.com/MMgBAzDrlVou` → "Guidance" tab, rows 10–12. Biweekl
 | AU | Grace May Bernard | Lena Zak (lenazak) | L7 | Country Leader, reports to Nick Georgijev (L8). Hardest stakeholder — drives weekly CPA reviews. Also: Alexis Eck (L6, in-market PS partner). |
 | MX | Eduardo Vazquez | Lorena Alvarez Larrea | L5 | Primary PS stakeholder as of 3/17/26. Replaced Carlos Palmos (moved to CPS). |
 | CA | Betty Chipman | — | — | |
-| JP | Masami Mohri | York Chen | — | JP PS operations (CPS-aligned). Returned from pat leave 3/22/25. |
+| JP | Masami Mohri | York Chen | — | JP PS operations (CPS-aligned). Returned from paternity leave 3/22/25. |
 | EU | Clara Sagnier Mur | — | — | |
 
 **Optional attendees (intermittent callouts):** Ahmed Darwish (SSR), Elina Kazantseva (EU SSR), Charlie Nichols (Paid Media), Siri Angeles (Social), Eric Wyatt (CPS Growth).
 
 #### External Partners (biweekly syncs)
 
+Two vendor relationships with regular biweekly cadence:
+
 | Org | Contact | Scope |
 |-----|---------|-------|
 | Google | Mike Babich | OCI, AI Max, account structure, ad copy |
 | Adobe | Suzane Huynh | OCI reporting, Ad Cloud, WW redirects |
-| Adobe | Jen Vitiello | Co-lead |
+| Adobe | Jen Vitiello | Co-lead with Suzane |
 
 ---
 
@@ -106,11 +112,11 @@ Source: `quip-amazon.com/MMgBAzDrlVou` → "Guidance" tab, rows 10–12. Biweekl
 
 ### MCS / Website Marketing
 
-| Name | Role |
-|------|------|
-| Dwayne Palmer | WW Head of MCS (L6) |
-| Frank Volinsky | MCS page builds / Weblab |
-| Alex VanDerStuyf | AEM / MCS engineering |
+| Name | Role | When to contact |
+|------|------|-----------------|
+| Dwayne Palmer | WW Head of MCS (L6) | Page builds, redirect plans, Polaris coordination |
+| Frank Volinsky | MCS page builds / Weblab | Landing page implementation, A/B test setup |
+| Alex VanDerStuyf | AEM / MCS engineering | Technical page issues, AEM platform questions |
 
 ### ABMA (Amazon Business Marketing Analytics)
 
@@ -207,10 +213,12 @@ People Richard drafts communications *to* most often. See `memory.md` for tone, 
 
 ## Cross-References
 
-- **Relationship dynamics (tone, draft style, current topics):** `~/shared/context/body/memory.md` → Relationship Graph
-- **Team workload & market coverage:** `~/shared/wiki/agent-created/markets/team-workload-distribution.md`
-- **Full cross-functional scope + stakeholder interaction map:** `~/shared/wiki/agent-created/testing/ps-team-map.md`
-- **Test attributions (legacy, being superseded):** DuckDB `ps.team_experiments` table (owner + sole_owner columns)
+| What You Need | Where to Find It |
+|---------------|-----------------|
+| Relationship dynamics (tone, draft style, current topics) | `~/shared/context/body/memory.md` → Relationship Graph |
+| Team workload & market coverage | `~/shared/wiki/agent-created/markets/team-workload-distribution.md` |
+| Full cross-functional scope + stakeholder interaction map | `~/shared/wiki/agent-created/testing/ps-team-map.md` |
+| Test attributions (legacy, being superseded) | DuckDB `ps.team_experiments` table (owner + sole_owner columns) |
 
 ---
 

@@ -58,6 +58,9 @@ Removed — current-state-only principle. Historical data lives in changelog.md.
 ### What Does NOT Reset the Streak
 - Legitimate fire drills requested by manager/leadership (AU CPC benchmark was legitimate)
 - Blocked tasks where the blocker is external and unresolvable today
+
+### Streak Recovery Protocol
+After a reset, the first day back is the hardest. Protocol: (1) Pick the smallest possible unit of the hard thing — one paragraph, one section, one commit. (2) Do it in the first 30 minutes of the day, before email or Slack. (3) Log it explicitly: "Day 1 back. Did [X]." The goal is momentum, not magnitude. A 15-minute session on the hard thing counts as Day 1.
 - Days with back-to-back meetings and genuinely no focus time
 - Choosing to rest or stop working at a reasonable hour (sustainability, not avoidance)
 
@@ -219,11 +222,22 @@ IF Richard opens a session, THEN the first aMCC read is:
 3. If `incumbent_since > 7 days`, flag for rw-trainer escalation.
 4. If null state, say so. Don't fabricate.
 
+### Common Misinterpretations
+
+| Misinterpretation | Correction |
+|-------------------|------------|
+| "The top 3 is a to-do list" | It's a signal display. Only #1 is the hard thing. #2 and #3 show what's pressing up. |
+| "A draft counts as completion" | Only referenceable artifacts count — output someone else can point to. |
+| "Null state means I'm failing" | Flat signals = no hard thing. Use the time for L3 tooling or rest. |
+| "The hard thing should always be L1" | Impact multiplier weights higher levels more. An L4 topic with strong signals can outrank an L1 topic. |
+
 ---
 
 ## Resistance Taxonomy
 
 Over time, the aMCC builds a map of Richard's resistance patterns. This is different from the trainer's mediocrity patterns — those are behavioral. These are psychological.
+
+### Task-Level Resistance
 
 | Resistance Type | Signal | Counter |
 |----------------|--------|---------|
@@ -232,9 +246,14 @@ Over time, the aMCC builds a map of Richard's resistance patterns. This is diffe
 | **Competence anxiety** | Delays until "ready" (never ready) | Brandon shares docs with typos. Send at 80%. |
 | **Comfort zone gravity** | Gravitates to bids/keywords over strategy | Close campaign tab. Open strategy doc. Execution is your floor. |
 | **Delegation guilt** | Does work himself after delegation agreed | Name delegate. Send handoff. Delegation multiplies. |
+| **Urgency addiction** | Responds to every ping mid-focus | "Urgent or important?" If urgent-not-important, defer. |
 
 **Worked example — Comfort zone gravity:** Richard has 2 hours before a meeting. Testing Approach doc needs a section written (L1 strategic work). MX keyword bids need adjusting (L3 execution). Richard opens Google Ads first "just to check." 45 minutes later, he's deep in bid adjustments. The aMCC catches this: "You opened campaign tabs instead of the strategy doc. That's comfort zone gravity. Close the tab. Open Testing Approach. The bids can wait until after the meeting."
-| **Urgency addiction** | Responds to every ping mid-focus | "Urgent or important?" If urgent-not-important, defer. |
+
+### Career & Political Resistance
+
+| Resistance Type | Signal | Counter |
+|----------------|--------|---------|
 | **Promotion passivity** | Waits to be recognized instead of asking. Avoids career conversations with Brandon. Doesn't line up champions. Assumes good work speaks for itself. | "Good work doesn't self-promote. Have you told Brandon what you want this half? Have you identified your champion VPs? The squeaky wheel gets greased — and the quiet one waits." (Ref: amazon-politics.md §1) |
 | **Relationship underinvestment** | Skips 1:1 prep, doesn't back-channel before key meetings, doesn't pre-sell ideas to stakeholders, lets cross-team relationships go cold. | "Relationships control your progress, not being right. When did you last back-channel with [stakeholder] before a group decision? Pre-sell the idea 1:1 before the meeting." (Ref: amazon-politics.md §4) |
 | **Political naivety** | Assumes reorgs/scope changes are purely business-driven. Doesn't read the subtext of org moves. Doesn't protect scope or position proactively. | "Every reorg has a public narrative and private motives. What's the subtext here? Who benefits? Are you positioned as essential or replaceable?" (Ref: amazon-politics.md §3) |
@@ -255,6 +274,8 @@ The aMCC doesn't just catch task avoidance — it catches *career* avoidance. So
 4. **Relationships > being right.** Evidence-based testing methodology is correct. But correctness without relationships = being ignored. Build the relationship first, then the evidence lands.
 5. **Solve problems for your boss (the Magic Loop).** The explicit deal: "I'll do everything you need. You make sure I'm rewarded." Make this deal visible, not assumed.
 6. **Scope comes to those who say yes.** The garbage can strategy: take the unsexy work nobody wants. Accumulated scope without fighting for it is how influence grows.
+
+**Worked example — Champion cultivation:** Richard needs VP-level feedback for his promo packet. He identifies 4 potential champions: Kate (L8, direct chain), Todd (L10, skip-skip), Stacey (L7, cross-team), and Andrew (L6, peer advocate). Over-subscribe rule: ask 7, expect 4. He adds Lena (L7, MarTech), Lorena (L6, MCS), and Mike (L6, Data Science). Start now — 6 months before promo cycle. Monthly touchpoints: share artifacts, ask for feedback, make them invested in his success. If 3 of 7 say no or forget, he still has 4.
 
 ### When the Hard Thing Is Political
 

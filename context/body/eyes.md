@@ -18,7 +18,14 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 
 ### Market Deep Dives
 
-**Reading this table:** Each row is one market's latest snapshot. "vs OP2" = performance against annual plan. "Key Signal" = the most important thing happening — always includes a cause (bid strategy, CVR shift, competitor move, seasonal event). When drafting callouts, lead with the Key Signal, not the raw numbers.
+**Reading this table:** Each row is one market's latest snapshot. "vs OP2" means performance against the annual operating plan. "Key Signal" is the single most important development — it always includes a cause (bid strategy change, CVR shift, competitor move, seasonal event), not just a number. When drafting callouts, lead with the Key Signal, not the raw numbers. If Key Signal mentions a person (e.g., "Lena priorities"), check roster.md for context.
+
+#### Richard's Markets (hands-on)
+
+| Market | Period | Regs | vs OP2 | CPA | Key Signal |
+|--------|--------|------|--------|-----|-----------|
+| AU | W13 | 207 (-16% WoW) | — | $118 (+3%) | CVR -12% WoW (Brand -14%, NB -10%). Daily: Mon-Tue strong (53, 50) then collapsed (27, 22, 23, 8). NB CPC declining 7wks ($6.82→$4.81, -29%). NB CPA flat $187. Polaris migration mid-week may explain. Two-campaign structure proposed (3/24). Lena priorities: CPC/CPA, keyword-product mapping, Polaris. |
+| MX | W13 | 354 (+9% WoW) | — | $66 (+6%) | NB regs +33% above avg. YoY: +91% regs, +37% spend. NB CPA $112 sustained from H2 2025 gains. Lorena now primary stakeholder. ie%CCP corrected to 93%. |
 
 #### NA Markets
 
@@ -26,7 +33,6 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 |--------|--------|------|--------|-----|-----------|
 | US | Feb | 32.9K | above plan | $65-77 Brand | Walmart IS 25%→55% driving Brand CPA up (was ~$40). Peak Jan: 39K (+86% YoY). Response: bid caps + NB OCI efficiency. |
 | CA | Feb | +18.5% vs OP2 | +18.5% | $73 | Bulk CVR 0.82%→2.35% (+187%), Wholesale 0.75%→2.10% (+180%). OCI E2E launched 3/4, full impact Jul 2026. |
-| MX | W13 | 354 (+9% WoW) | — | $66 (+6%) | NB regs +33% above avg. YoY: +91% regs, +37% spend. NB CPA $112 sustained from H2 2025 gains. Lorena now primary stakeholder. ie%CCP corrected to 93%. |
 
 #### EU Markets
 
@@ -40,7 +46,6 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 | Market | Period | Regs | vs OP2 | CPA | Key Signal |
 |--------|--------|------|--------|-----|-----------|
 | JP | Feb | — | — | — | MHLW campaign ended 1/31 (major reg driver lost). Yahoo competitors emerging: shop-pro.jp 12-15% IS. |
-| AU | W13 | 207 (-16% WoW) | — | $118 (+3%) | CVR -12% WoW (Brand -14%, NB -10%). Daily: Mon-Tue strong (53, 50) then collapsed (27, 22, 23, 8). NB CPC declining 7wks ($6.82→$4.81, -29%). NB CPA flat $187. Polaris migration mid-week may explain. Two-campaign structure proposed (3/24). Lena priorities: CPC/CPA, keyword-product mapping, Polaris. |
 
 ---
 

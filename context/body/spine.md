@@ -22,7 +22,11 @@ Last updated: 2026-04-01 (Wednesday PT)
 | 5 | `rw-tracker.md` | Weekly scorecard, 30-day challenge |
 | 6 | Task-specific organ | brain, eyes, hands, memory as needed |
 
+**First 60 seconds checklist:** (1) Read body.md to orient. (2) Read this file (spine.md) for IDs and tools. (3) Read soul.md for voice and routing rules. (4) Read current.md for live state. (5) Check amcc.md for streak and hard thing. Then load task-specific organs per body.md Task Routing table.
+
 **Cold-start recovery:** MotherDuck → SharePoint `system-state/` → Git `agent-bridge` → filesystem rebuild. If `body/` empty, pull from `Kiro-Drive/portable-body/` first.
+
+**Cold-start anti-patterns:** Don't skip body.md (you'll miss organ locations). Don't load all organs at once (load task-specific only). Don't assume DuckDB is local (it's on MotherDuck cloud). Don't write to organs before reading current.md (you'll overwrite live state).
 
 ---
 
@@ -40,7 +44,9 @@ Last updated: 2026-04-01 (Wednesday PT)
 
 Full inventory + guardrails: `~/shared/context/active/mcp-tool-reference.md`
 
-### Common Failures in Tool Access
+### Tool Access Troubleshooting
+
+**Common Failures:**
 1. **Slack write to wrong channel.** Only `C0993SRL6FQ` (rsw-channel) and self_dm are writable. Any other channel write will fail silently or be blocked.
 2. **Asana write to wrong user.** Only GID `1212732742544167` (Richard) is writable. Writes to other users' tasks are blocked by the guard hook.
 3. **DuckDB schema-unqualified queries.** Always use schema-qualified names (e.g., `asana.asana_tasks`, not `asana_tasks`). Unqualified names may resolve to wrong schema or fail.
@@ -101,7 +107,9 @@ Full hook details: see device.md → Installed Apps and hands.md → Hook System
 
 ## System Persistence & Ground Truth
 
-### Durability Model (Four Layers)
+### Durability Model
+
+#### Four Layers
 
 The system survives any single point of failure through four independent persistence layers:
 
@@ -111,6 +119,8 @@ The system survives any single point of failure through four independent persist
 | SharePoint | OneDrive `Kiro-Drive/` | Hook outputs, published artifacts, portable body snapshots | Container restart ✅, DevSpaces rebuild ✅, Platform migration ✅ |
 | Git | `agent-bridge` GitHub repo | Portable body, sanitized context, changelog | Container restart ✅, DevSpaces rebuild ✅, Platform migration ✅ |
 | MotherDuck | `md:ps_analytics` cloud DB | All structured data (Asana, signals, experiments, PS metrics) | Container restart ✅, DevSpaces rebuild ✅, Platform migration ✅ |
+
+#### Recovery Priority
 
 **Recovery priority:** MotherDuck (structured data) → SharePoint (artifacts + state) → Git (portable body) → Filesystem (rebuild from other three).
 
@@ -140,6 +150,4 @@ The system survives any single point of failure through four independent persist
 3. **Stale Key IDs** → spine points to hands.md/memory.md for IDs. Follow the pointer; spine may lag.
 4. **Ignoring durability layers during recovery** → MotherDuck first, then SharePoint, then Git. Don't rebuild from scratch.
 
-## System History
-
-See changelog.md for full build history (3/12 onwards: trainer, loop, To-Do, Asana bridge, Hedy, wiki team, meetings, body metaphor migration, Slack ingestion).
+**System history:** See changelog.md for full build history (3/12 onwards: trainer, loop, To-Do, Asana bridge, Hedy, wiki team, meetings, body metaphor migration, Slack ingestion).

@@ -55,3 +55,40 @@
 [richard-style-docs:TestingPlans] REMOVE (output_quality) → 830w→769w. A=0.4 B=- Δ=-. 60s. REVERT (fast_fail).
 
 **Batch: 10 run, 7 kept, 3 reverted (70% keep rate). All 3 reverts were REMOVE on unique content — anti-pattern #1 confirmed again (now 10/10 reverted). Eval agent reliability issue noted: eval-a frequently answers from auto-loaded steering context instead of inline prompt, especially on larger targets.**
+
+### Run 70 — 2026-04-22 (Karpathy batch, 10 experiments, 10 kept, 0 reverted)
+- [richard-style-slack:Tone & Register] COMPRESS (output_quality) → 1558w→1507w. A=0.96 B=0.96 C=0.96 Δ=0.0. KEEP.
+- [richard-style-wbr:Voice Register] REWORD (output_quality) → 1165w→1201w. A=1.0 B=1.0 C=1.0 Δ=0.0. KEEP.
+- [richard-style-mbr:Data Rules] MERGE (output_quality) → 932w→807w. A=1.0 B=1.0 C=1.0 Δ=0.0. KEEP.
+- [device:Device Health] SPLIT (info_retrieval) → 2678w→2730w. A=1.0 B=1.0 C=1.0 Δ=0.0. KEEP.
+- [amcc:Avoidance Ratio] REWORD (info_retrieval) → 4829w→4910w. A=1.0 B=1.0 C=1.0 Δ=0.0. KEEP.
+- [nervous-system:Loop 3] REWORD (info_retrieval) → 1669w→1696w. A=1.0 B=1.0 C=1.0 Δ=0.0. KEEP.
+- [memory:Relationship Graph] SPLIT (info_retrieval) → 2534w→2534w. A=1.0 B=1.0 C=1.0 Δ=0.0. KEEP.
+- [richard-style-mbr:Common Failures] RESTRUCTURE (output_quality) → 807w→850w. A=1.0 B=0.96 C=1.0 Δ=+0.04. KEEP.
+- [nervous-system:Common Failures] ADD (info_retrieval) → 1696w→1730w. A=1.0 B=1.0 C=1.0 Δ=0.0. KEEP.
+- [spine:System History] MERGE (info_retrieval) → 1414w→1413w. A=1.0 B=1.0 C=1.0 Δ=0.0. KEEP.
+- **Note:** 100% keep rate = selection bias signal. 3/10 were exploration picks. Eval agent reliability issue: prompts >3KB cause agents to answer from steering context instead of inline content. Workaround: section-only excerpts.
+
+## Run 73 (2026-04-22, Karpathy)
+- [amazon-politics:ApplicationToRichard] ADD (info_retrieval) → 2765w→2962w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [spine:ToolAccess] SPLIT (info_retrieval) → 1417w→1417w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [hands:NewSignals] RESTRUCTURE (info_retrieval) → 1333w→1341w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [heart:HyperparametersQueue] MERGE (info_retrieval) → 2774w→2773w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [nervous-system:FiveLevelsPosition] COMPRESS (info_retrieval) → 1730w→1677w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [amcc:TheHardThing] RESTRUCTURE (info_retrieval) → 4870w→4870w. A=0.9 B=1.0 C=0.9 Δ=-0.1. 120s. REVERT.
+- [am-triage:FullHook] COMPRESS (output_quality) → 375w→304w. A=0.0 B=1.0 C=1.0 Δ=-1.0. 120s. REVERT (fast_fail).
+- [am-triage:PhaseC] ADD (output_quality) → 375w→395w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [eod-refresh:BackendPhases] COMPRESS (output_quality) → 617w→589w. A=0.0 B=0.0 C=0.0 Δ=0.0. 120s. REVERT (eval_infra_failure).
+- [richard-style-amazon:HowToApply] ADD (output_quality) → 1093w→1170w. A=0.0 B=0.0 C=0.0 Δ=0.0. 120s. REVERT (eval_infra_failure).
+
+### Run 75 (2026-04-22, Karpathy)
+- [amcc:Political Awareness Layer] ADD (info_retrieval) → 4974w→5059w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [hands:Tool & Automation Opportunities] REMOVE (info_retrieval) → 1341w→1241w. A=0.0 B=1.0 C=0.0 Δ=-1.0. 120s. REVERT (fast_fail).
+- [richard-style-email:Common Draft Failures] SPLIT (output_quality) → 802w→818w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [roster:Cross-Functional Partners] REWORD (info_retrieval) → 2172w→2197w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [richard-style-wbr:Common Callout Failures] REWORD (output_quality) → 1053w→1075w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [richard-style-docs:Strategic Narrative] REWORD (output_quality) → 889w→936w. A=1.0 B=0.8 C=1.0 Δ=+0.2. 120s. KEEP.
+- [am-triage:Phase C] SPLIT (output_quality) → 416w→417w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+- [am-auto:prompt] REWORD (output_quality) → 98w→106w. A=1.0 B=0.8 C=1.0 Δ=+0.2. 120s. KEEP.
+- [memory:Reference Index] REWORD (info_retrieval) → 2446w→2463w. A=1.0 B=0.75 C=1.0 Δ=+0.25. 120s. KEEP.
+- [heart:Design Choices Validated Patterns] COMPRESS (info_retrieval) → 2736w→2595w. A=0.917 B=1.0 C=1.0 Δ=-0.083. 120s. REVERT.
