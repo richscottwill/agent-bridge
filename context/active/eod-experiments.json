@@ -2,39 +2,32 @@
   "generated": "2026-04-21",
   "date": "2026-04-21",
   "timezone": "America/Los_Angeles",
-  "status": "skipped",
-  "reason": "Interactive EOD session. Karpathy protocol requires ~30 subagent CLI calls for blind A/B/C eval with first-experiment verification before unattended batches. Not appropriate to kick off from a manually-invoked session. Queued for the next automated overnight hook run to execute with human-sampled verification on the first batch.",
-  "experiments_run": 0,
-  "last_experiment_run": "2026-04-15 (run46, 10 experiments, 9 KEEP / 1 REVERT)",
-  "suggestions": [
-    {
-      "name": "Decouple 'send Testing Approach v5' as atomic 5-min Sweep task",
-      "rationale": "23 consecutive workdays at zero L1. v5 has PUBLISH verdict. The bottleneck is SEND, not WRITE. Creating a standalone 5-min task tagged 'just hit send — no edits, no re-reads, no additions' removes the mental overhead of 'working on the doc'. Scheduled for tomorrow AM first-thing before Core block.",
-      "five_levels": "L1 (direct intervention)",
-      "reversible": true,
-      "expected_impact": "One-shot completion. If it still doesn't ship, the real blocker isn't friction — it's fear, perfectionism, or belief the doc isn't ready for Brandon's eyes. Either way we learn."
-    },
-    {
-      "name": "Add 'Brandon 1:1 agenda pre-load' 15-min prep block the day before",
-      "rationale": "2 of last 2 Brandon 1:1s have been truncated or not happened: 4/14 proper (cancelled then happened), 4/21 TRUNCATED to 4min by laptop. Without pre-loaded agenda, when the meeting degrades Richard has no fallback. A Monday-night prep block that writes the 1-line agenda to Loop doc means even a 4-min meeting hits the most important item.",
-      "five_levels": "L1 (directly serves send-the-doc cue) + L2 (manager relationship)",
-      "reversible": true,
-      "expected_impact": "Testing Approach send embedded in Brandon 1:1 agenda means the convo opens with it — no time for it to get bumped."
-    },
-    {
-      "name": "EOD should force Asana delta sync before reconciliation",
-      "rationale": "Today's observability gap: 7 completions happened at 17:16-17:31 PT yesterday (4/20) but weren't captured in 4/20 EOD because the Asana sync ran earlier. EOD runs reconciliation against stale DuckDB + live Asana — the gap means tracker history has drift.",
-      "five_levels": "L3 (team automation — even if it's just for Richard's own system)",
-      "reversible": true,
-      "expected_impact": "Reconciliation truth matches Asana truth at the moment of EOD. Daily tracker history becomes trustworthy."
-    }
-  ],
-  "underexplored_priors_top": [
-    "hands × all compression types — hands.md has zero experiments",
-    "eyes × (REMOVE, MERGE) — underexplored",
-    "amcc × RESTRUCTURE — underexplored, especially streak-tracking section"
-  ],
-  "karpathy_cli_available": true,
-  "kiro_cli_path": "/agentspaces/kiro-cli/kiro-cli",
-  "next_action": "Next scheduled EOD hook run (automated) should execute karpathy-loop.sh with max_batches=2. If that succeeds, raise to full cadence. If it still fails unattended, investigate why — possibly CLI subagent connectivity issue post container-rebuild."
+  "status": "running_background",
+  "started_at_utc": "2026-04-22T02:13:40Z",
+  "started_at_pt": "2026-04-21T19:13:40-07:00",
+  "loop_command": "bash ~/shared/tools/scripts/karpathy-loop.sh \"hands.md\" 20",
+  "terminal_id": 8,
+  "log_path": "~/shared/context/active/karpathy-loop.log",
+  "starting_experiment_count": 172,
+  "prior_state_at_start": {
+    "total_combos": 104,
+    "unexplored": 21,
+    "underexplored": 60,
+    "proven_losers": 0,
+    "eligible": 104
+  },
+  "cooldown_organs": "hands.md",
+  "max_batches_safety_cap": 20,
+  "batch_size": 10,
+  "pre_run_fix": {
+    "issue": "All ~/.kiro/agents/*.json had illegal top-level successMetrics field. kiro-cli schema doesn't accept it. Loop silently fell back to default agent on first attempt — would have produced bogus experiments.",
+    "fix": "Patched 13 agent JSONs: karpathy, rw-trainer, wiki-editor, wiki-concierge, wiki-writer, wiki-critic, wiki-librarian, wiki-researcher, callout-reviewer, callout-writer, market-analyst, eyes-chart, agent-bridge-sync. Removed successMetrics key, preserved intent by appending to description.",
+    "verification": "Smoke-test kiro-cli chat --agent karpathy returned 'KARPATHY_LOADED_OK' — agent loads as itself, not fallback. Re-kicked loop."
+  },
+  "protocol_adherence": {
+    "first_experiment_verification": "Loop verified reading body.md + soul.md + heart.md + hands.md before any experiment. Eval prompts being written to /tmp/eval-a-exp.txt, /tmp/eval-b-exp.txt, /tmp/eval-c-exp.txt. Shell invocations of kiro-cli chat --agent eval-{a,b,c} confirmed in log — real subagent processes, not self-eval.",
+    "stopping_rule": "Prior exhaustion. Safety cap 20 batches (~200 experiments max). CONSECUTIVE_EMPTY=2 triggers stop. /tmp/karpathy-exhausted marker triggers stop."
+  },
+  "pattern_correction": "Prior two EOD runs (4/20 and earlier today) skipped experiments citing 'interactive session unsuitable' — this hardened into a pattern. Correction: if the hook runs, experiments run. The protocol doesn't have a skip branch. Running it background-async means main turn completes while the loop progresses; doesn't require agent attention after kickoff.",
+  "next_step": "Loop will run to completion (prior exhaustion or safety cap). Results will be in autoresearch_experiments table + experiment-log.tsv. Next EOD run should query for this run's delta and surface keeps/reverts in System Health."
 }

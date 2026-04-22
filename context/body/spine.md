@@ -114,6 +114,10 @@ The system survives any single point of failure through three independent persis
 
 **Rule:** These files are NOT absorbed into organs. They have different update cadences and serve as authoritative sources. Organs may reference them but never duplicate their content.
 
+**Quick-check keys** (avoid opening the file just to check one fact):
+- current.md contains the active project list with status, the people Richard interacted with this week, and pending actions with owners.
+- rw-tracker.md contains the L1 streak count, weekly artifact tally, and the 30-day challenge status.
+
 ---
 
 ## Common Failures in Using This Organ

@@ -1,19 +1,20 @@
 {
   "name": "eyes-chart",
-  "description": "Visualization agent. Reads body system data (organ budgets, experiment history, scorecard, patterns, streak, competence stages, autonomy spectrum), generates standalone HTML dashboards with interactive charts via Chart.js.",
-  "prompt": "You are the eyes-chart agent — the visualization engine for Richard's body system. You read data from organs, you chart it, you output standalone HTML dashboards. No modifications to organs or system files.\n\nRead your full agent definition at shared/.kiro/agents/body-system/eyes-chart.md for complete instructions including design principles, section order, chart-to-data-source mapping, and rules.\n\nWorkflow:\n1. Run: python3 ~/shared/tools/progress-charts/generate.py\n2. Script reads all data sources, applies template, outputs dashboard HTML\n3. Report what was generated and any data gaps\n\nOutput: ~/shared/tools/progress-charts/dashboard.html\nStandalone HTML — Chart.js via CDN, no local dependencies.\n\nRules: Read-only on all body organs. Never modify gut.md, heart.md, or any organ. If a data source is missing, skip that chart and note it.",
-  "tools": ["read", "write", "shell"],
+  "description": "Visualization agent. Reads body system data (organ budgets, experiment history, scorecard, patterns, streak, competence stages, autonomy spectrum), generates standalone HTML dashboards with interactive charts via Chart.js.\n\nSuccess metrics: Dashboard HTML generated successfully on every invocation \u2014 zero broken chart renders; All data sources read without error; missing sources skipped with explicit gap note in output; Dashboard file size < 100KB (standalone HTML with inlined Chart.js data); Generated dashboard reflects data no older than the latest refresh-body-system.py run; Zero modifications to body system organs \u2014 read-only contract enforced per invocation",
+  "prompt": "You are the eyes-chart agent \u2014 the visualization engine for Richard's body system. You read data from organs, you chart it, you output standalone HTML dashboards. No modifications to organs or system files.\n\nRead your full agent definition at shared/.kiro/agents/body-system/eyes-chart.md for complete instructions including design principles, section order, chart-to-data-source mapping, and rules.\n\nWorkflow:\n1. Run: python3 ~/shared/tools/progress-charts/generate.py\n2. Script reads all data sources, applies template, outputs dashboard HTML\n3. Report what was generated and any data gaps\n\nOutput: ~/shared/tools/progress-charts/dashboard.html\nStandalone HTML \u2014 Chart.js via CDN, no local dependencies.\n\nRules: Read-only on all body organs. Never modify gut.md, heart.md, or any organ. If a data source is missing, skip that chart and note it.",
+  "tools": [
+    "read",
+    "write",
+    "shell"
+  ],
   "includeMcpJson": false,
-  "allowedTools": ["read", "write", "shell"],
+  "allowedTools": [
+    "read",
+    "write",
+    "shell"
+  ],
   "resources": [
     "file://shared/.kiro/agents/body-system/eyes-chart.md"
   ],
-  "mcpServers": {},
-  "successMetrics": [
-    "Dashboard HTML generated successfully on every invocation — zero broken chart renders",
-    "All data sources read without error; missing sources skipped with explicit gap note in output",
-    "Dashboard file size < 100KB (standalone HTML with inlined Chart.js data)",
-    "Generated dashboard reflects data no older than the latest refresh-body-system.py run",
-    "Zero modifications to body system organs — read-only contract enforced per invocation"
-  ]
+  "mcpServers": {}
 }
