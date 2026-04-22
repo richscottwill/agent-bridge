@@ -1,0 +1,16 @@
+
+[38;5;252m🛠️  Using tool: read[38;5;2m (trusted)[39m[0m
+ ⋮ 
+ ● Reading file: ~/shared/tmp/roster-eval-c.txt, all lines (using tool: read)
+[38;5;10m ✓ [0mSuccessfully read [38;5;244m12822 bytes[0m from /home/prichwil/shared/tmp/roster-eval-c.txt
+[38;5;244m - Completed in 0.1s[0m
+
+[38;5;10m> [0mQ1: Richard Williams' direct manager is Brandon Munday, and his Amazon alias is **brandoxy**.[0m[0m
+[0m[0m
+Q2: Lorena Alvarez Larrea replaced Carlos Palmos as MX PS primary stakeholder on 3/17/26. Carlos Palmos moved to CPS.[0m[0m
+[0m[0m
+Q3: Lena Zak is the AU Country Leader (alias: lenazak) at Level 7 (L7). She reports to Nick Georgijev (L8) and drives weekly CPA reviews.[0m[0m
+[0m[0m
+Q4: Kate Rundell is the Director of WW Outbound Marketing (L8), Richard's skip-level manager. Her Amazon alias is **kataxt**.[0m[0m
+[0m[0m
+Q5: Harjeet Heer previously partnered with Richard on AU. He stepped away, with his last interaction recorded as 3/11/26.

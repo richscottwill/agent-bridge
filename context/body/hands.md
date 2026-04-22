@@ -49,11 +49,7 @@ Sources: rw-tracker.md, Asana My Tasks, ABPS AI Build, Slack scan, DM scan
 ---
 
 ## Dependencies
-- Testing Approach doc → no blockers, just start
-- Polaris timeline → no blockers
-- MX Auto page → blocked by Vijeth footer
-- Kingpin Goals → blocked by Andes data
-- MX/AU budgets → blocked by R&O tasks
+See Blocker Registry above for blocked items. Unblocked priorities (Testing Approach, Polaris) need execution, not unblocking.
 
 ## New Signals (EOD 4/16)
 - ✅ Daily reset: 3 Today tasks demoted to Urgent (Dwayne reply, AU genbi, Google invoice).
@@ -120,19 +116,33 @@ Sources: rw-tracker.md, Asana My Tasks, ABPS AI Build, Slack scan, DM scan
 
 ## Tool & Automation Opportunities
 
-| Tool | Status | Impact |
-|------|--------|--------|
-| Campaign link generator | Backlog | AU/MX sitelink URL construction |
-| WBR auto-briefing | Proposed | Agent drafts callouts from data |
-| Budget forecast helper | Proposed | Pre-fill RO from actuals + trend |
-| Invoice/PO automation | Proposed | Route without manual intervention |
-| Goal status updater | Proposed | Auto-generate Kingpin from campaign data |
-| Testing tracker | Proposed | Structured test log (operational, not narrative) |
-| Competitive intel agent | Proposed | Monitor competitor ad copy shifts |
-| AI search landscape monitor | Proposed | Track AI Overviews, zero-click changes |
+### Proposed (ready to build)
+| Tool | Impact |
+|------|--------|
+| WBR auto-briefing | Agent drafts callouts from data |
+| Budget forecast helper | Pre-fill RO from actuals + trend |
+| Invoice/PO automation | Route without manual intervention |
+| Goal status updater | Auto-generate Kingpin from campaign data |
+
+### Backlog (future)
+| Tool | Impact |
+|------|--------|
+| Campaign link generator | AU/MX sitelink URL construction |
+| Testing tracker | Structured test log (operational, not narrative) |
+| Competitive intel agent | Monitor competitor ad copy shifts |
+| AI search landscape monitor | Track AI Overviews, zero-click changes |
 
 ---
 
 ## Integrations & Access
 
-See spine.md → Tool Access & Integrations for full list of what the agent can/cannot access.
+| Integration | Access | Key Constraint |
+|-------------|--------|----------------|
+| Asana (Enterprise MCP) | Full read/write | Only Richard's tasks (GID 1212732742544167). Audit all writes. |
+| Slack (MCP) | Read-only | No posting. Ingest via AM-1. |
+| Email (Outlook MCP) | Read + send (guarded) | Send blocked unless sole recipient = prichwil. |
+| Calendar (Outlook MCP) | Read + create (guarded) | External attendees blocked. |
+| DuckDB (MotherDuck MCP) | Full read/write | Schema-qualified names required. |
+| SharePoint (OneDrive) | Read/write | Durability layer, not source of truth. |
+
+Full list: spine.md → Tool Access & Integrations.

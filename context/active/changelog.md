@@ -40,3 +40,18 @@
 - Recurring: wiki_lint disabled (protocol change). weekly_scorecard completed.
 - Phase 6 Karpathy: skipped with explicit JSON (deferred to next scheduled hook).
 - Hard thing: 20 workdays at zero L1.
+
+## Run 60 (2026-04-22) — Karpathy Autoresearch Batch
+
+[richard-style-amazon:Amazon Narrative Standard] SPLIT (output_quality) → 955w→983w. A=1.0 B=1.0 C=1.0 Δ=0.0. 120s. KEEP.
+[richard-style-wbr:Data Source Quick Reference] ADD (output_quality) → 1115w→1161w. A=1.0 B=1.0 C=1.0 Δ=0.0. 150s. KEEP.
+[richard-style-docs:Post-Mortem] COMPRESS (output_quality) → 837w→830w. A=1.0 B=1.0 C=1.0 Δ=0.0. 150s. KEEP.
+[am-auto:FirstOfDayGuard] REWORD (output_quality) → 681w→719w. A=1.0 B=1.0 C=1.0 Δ=0.0. 150s. KEEP.
+[device:TheTest] REMOVE (information_retrieval) → 2482w→2383w. A=0.7 B=1.0 C=0.7 Δ=-0.3. 150s. REVERT.
+[spine:HookSystem+KeyIDs] MERGE (information_retrieval) → 1305w→1288w. A=1.0 B=1.0 C=1.0 Δ=0.0. 150s. KEEP.
+[richard-style-amazon:HowToApply] REMOVE (output_quality) → 983w→844w. A=0.4 B=- Δ=-. 60s. REVERT (fast_fail).
+[roster:ABPaidSearchTeam] REWORD (information_retrieval) → 2331w→2332w. A=1.0 B=1.0 C=1.0 Δ=0.0. 180s. KEEP.
+[richard-style-mbr:CommonFailures] RESTRUCTURE (output_quality) → 698w→698w. A=1.0 B=1.0 C=1.0 Δ=0.0. 180s. KEEP.
+[richard-style-docs:TestingPlans] REMOVE (output_quality) → 830w→769w. A=0.4 B=- Δ=-. 60s. REVERT (fast_fail).
+
+**Batch: 10 run, 7 kept, 3 reverted (70% keep rate). All 3 reverts were REMOVE on unique content — anti-pattern #1 confirmed again (now 10/10 reverted). Eval agent reliability issue noted: eval-a frequently answers from auto-loaded steering context instead of inline prompt, especially on larger targets.**

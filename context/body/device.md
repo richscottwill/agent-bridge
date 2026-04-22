@@ -12,8 +12,10 @@ Last updated: 2026-04-13 (Forecast pipeline rebuild: _Data sheet architecture, r
 ## The Test
 
 Before adding anything here, ask: "Does this require Richard's judgment to produce a correct output?"
-- **Yes** → It's an organ (brain, hands, etc.)
+- **Yes** → It belongs in an organ (brain, hands, etc.), not here
 - **No** → It's a device function. Automate it, delegate it, or template it.
+
+**Worked example:** "Should the WBR callout pipeline be an organ or a device?" The pipeline takes market data, applies formatting rules, and produces a draft callout. Richard reviews the output but doesn't make decisions during generation. Answer: Device. The callout principles (what makes a good callout) live in steering; the pipeline (how to produce one) lives here. If Richard had to choose which metrics to highlight, that would be an organ function — but the pipeline just formats what the data shows.
 
 ---
 
@@ -22,15 +24,27 @@ Before adding anything here, ask: "Does this require Richard's judgment to produ
 These are live. They execute without Richard thinking.
 
 ### AM Hooks (2 sequential: backend → frontend)
-- **AM-Backend** (`am-auto`) — Parallel ingestion (6 subagents: Slack, Asana Sync, Asana Activity, Email+Calendar, Loop Pages, Hedy) → sequential processing (signal routing, enrichment, portfolio scan) → SharePoint sync. ~12 min. Protocol: `am-backend-parallel.md`
-- **AM-Frontend** (`am-triage`) — Interactive: daily brief, email brief, calendar blocks, enrichment execution, ABPS AI triage, portfolio alerts, command center. Reads backend state (local first, SharePoint fallback). ~10 min. Protocol: `am-frontend.md`
+
+**AM-Backend** (`am-auto`):
+- Parallel ingestion: 6 subagents (Slack, Asana Sync, Asana Activity, Email+Calendar, Loop Pages, Hedy)
+- Sequential processing: signal routing, enrichment, portfolio scan
+- SharePoint sync. ~12 min. Protocol: `am-backend-parallel.md`
+
+**AM-Frontend** (`am-triage`):
+- Interactive: daily brief, email brief, calendar blocks, enrichment execution, ABPS AI triage, portfolio alerts, command center
+- Reads backend state (local first, SharePoint fallback). ~10 min. Protocol: `am-frontend.md`
+
+**AM failure recovery:** If AM-Backend fails mid-run (e.g., Slack MCP timeout), AM-Frontend still starts — it reads whatever backend state was written before the failure. Missing data surfaces as gaps in the daily brief, not as a crash. Re-run AM-Backend to fill gaps.
 
 ### EOD Hook (1 unified: backend + frontend)
 - **EOD** (`eod`) — Backend: Hedy meeting ingestion, Asana reconciliation (delta sync, daily reset, recurring, completion moves, blockers), organ cascade, compression audit, workflow health, context enrichment, DuckDB snapshots, git sync, Karpathy experiments, SharePoint sync. Frontend: day summary, decisions, portfolio report, system health, experiment results, Slack DM. ~20 min. Protocol: `eod-backend.md` + `eod-frontend.md`
 
 ### Safety Guards (preToolUse hooks)
-- **Block Email Send:** Prevents email_reply/send/forward unless only recipient is prichwil. Others require explicit approval.
-- **Block Calendar Invite:** Prevents calendar events with external attendees. Personal blocks allowed.
+| Guard | Rule | Audit |
+|-------|------|-------|
+| Email Send | Block unless sole recipient = prichwil; others need explicit approval | — |
+| Calendar Invite | Block external attendees; personal blocks OK | — |
+| Asana Write | Only Richard's tasks (GID 1212732742544167) | `asana-audit-log.jsonl` · Protocol: `asana-command-center.md` |
 
 ### Karpathy Agent (Agent: `karpathy.md`)
 - **What it does:** Loop governor + compression scientist + output quality experimenter. Sole authority on heart.md, gut.md, experiment queue. Experiments on both information content (organs) and output quality (style guides, market context files, callout principles, hook prompts).
@@ -62,10 +76,7 @@ These are live. They execute without Richard thinking.
 - **Architecture:** Hidden `_Data` sheet holds all raw values. Visible market sheets use formulas referencing `_Data`. Script never touches visible sheets.
 - **Hook:** `forecast-sharepoint-push` (fileEdited) auto-pushes xlsx to SharePoint Kiro-Drive/ + Dashboards/ after update.
 - **Legacy:** `build-forecast-tracker.py.legacy` — replaced by template-based updater.
-
-### Open Items Reminder (Hook: `open-items-reminder`)
-- **What it does:** On first message of a new conversation, scans session-log.md for OPEN/deferred items and surfaces them. Skips if already shown in current conversation. 3-hour cooldown.
-- **Trigger:** promptSubmit (with conversation-level dedup)
+- **Common failures:** (1) Running pipeline before WW Dashboard xlsx is fully populated — partial data produces wrong projections. Verify all market tabs have current-week data before triggering. (2) Editing visible sheets directly — breaks formula references to `_Data`. Only `update-forecast-tracker.py` writes to the xlsx. (3) Forgetting `--accept-breaking-changes` on Harmony deploy — deploy silently fails without it.
 
 ### Forecast SharePoint Push (Hook: `forecast-sharepoint-push`)
 - **What it does:** Auto-pushes ps-forecast-tracker.xlsx to both SharePoint locations when the file is updated locally.
@@ -91,12 +102,13 @@ These are live. They execute without Richard thinking.
 - **Trigger:** EOD-1 hook. Fully autonomous.
 - **Feeds into:** Memory (relationships), Nervous System (communication patterns, Loop 7), Eyes (meeting prep)
 
-### Slack Context Ingestion (via AM-1)
-- **What it does:** Ingests all Slack channels Richard is in (via `list_channels`) plus DMs. Section-based depth: WW Testing/AB PS = full, AB/AI = standard, Channels = light. Proactive search beyond channel list (permanent + dynamic queries). Reaction checking on tagged messages.
+### Slack Context Ingestion & Open Items (via AM-1 + promptSubmit)
+- **Slack Ingestion:** Ingests all Slack channels Richard is in (via `list_channels`) plus DMs. Section-based depth: WW Testing/AB PS = full, AB/AI = standard, Channels = light. Proactive search beyond channel list (permanent + dynamic queries). Reaction checking on tagged messages.
 - **Trigger:** AM-1 hook (morning scan). Signal routing happens in EOD-2 cascade.
 - **Config:** `~/shared/context/active/slack-channel-registry.json` + `~/shared/context/active/slack-scan-state.json`
 - **Source of truth:** `list_channels` — adapts automatically to channel joins/leaves.
 - **Guardrails:** Read-only (per slack-guardrails.md). All invocations logged to scan state. No caps — ingest everything, synthesize ruthlessly.
+- **Open Items Reminder:** On first message of a new conversation, scans session-log.md for OPEN/deferred items and surfaces them. Skips if already shown in current conversation. 3-hour cooldown. Trigger: promptSubmit (with conversation-level dedup).
 
 ### SharePoint Sync (Hook: `sharepoint-sync`)
 - **What it does:** Wiki articles → .docx → OneDrive → SharePoint. Filters: amazon-internal, REVIEW+FINAL. Incremental via SHA-256 hashing.
@@ -105,13 +117,15 @@ These are live. They execute without Richard thinking.
 - **Local (Windows):** `c:/Users/prichwil/OneDrive - amazon.com/Artifacts/wiki-sync`
 
 ### SharePoint Durability Layer (Protocol: `sharepoint-durability-sync.md`)
-- **What it does:** Bidirectional sync between `~/shared/` and OneDrive `Kiro-Drive/`. Pushes AM/EOD output artifacts for cross-device access and container-death resilience. Pulls on cold start when local files are missing.
-- **Push triggers:** AM-Backend Phase 5.5, EOD-Backend Phase 7.5, wiki article publish, strategic artifact ship, Friday portable body snapshot.
-- **Pull triggers:** Cold start (missing local files), container restart between backend/frontend, on-demand artifact retrieval.
-- **SharePoint paths:** `Kiro-Drive/system-state/` (hook outputs), `Kiro-Drive/portable-body/` (snapshots), `Kiro-Drive/meeting-briefs/` (prep docs). Published artifacts go to `Artifacts/wiki-sync/` via the separate sharepoint-sync hook.
-- **NOT synced:** Organs, DuckDB, intake files, hooks, steering, audit logs.
-- **Error handling:** Non-blocking. Local files are source of truth. SharePoint is durability layer, not dependency.
-- **Three-layer durability:** filesystem (`~/shared/`) + SharePoint (`Kiro-Drive/`) + git (agent-bridge). Any two can fail and the system recovers.
+- **Purpose:** Bidirectional sync between `~/shared/` and OneDrive `Kiro-Drive/`. Artifacts survive container death and stay accessible cross-device.
+- **Push triggers:** AM-Backend Phase 5.5, EOD-Backend Phase 7.5, wiki publish, strategic artifact ship, Friday portable body snapshot.
+- **Pull triggers:** Cold start (local files missing), container restart between backend/frontend, on-demand artifact retrieval.
+- **SharePoint paths:** `system-state/` (hook outputs), `portable-body/` (snapshots), `meeting-briefs/` (prep docs). Published artifacts → `Artifacts/wiki-sync/` via sharepoint-sync hook.
+- **Excluded:** Organs, DuckDB, intake files, hooks, steering, audit logs.
+- **Error handling:** Non-blocking — SharePoint is durability, not dependency. Local files always source of truth.
+- **Three-layer architecture:** filesystem (`~/shared/`) + SharePoint (`Kiro-Drive/`) + git (agent-bridge). Any two can fail; system recovers from the third.
+- **Recovery (<5 min):** Container dies → pull `system-state/` from SharePoint → git clone agent-bridge → resume from Phase 1. Zero data loss on pre-failure artifacts.
+- **Conflict rule:** On conflict, local always wins. If SharePoint is newer, it means local was lost — pull to recover, never merge.
 
 ### PS Analytics Database (DuckDB → MotherDuck Cloud)
 - **What it does:** Persistent cloud analytical DB for all structured PS data and system telemetry. 8 schemas, 55 tables + 34 views.
@@ -133,16 +147,24 @@ These are live. They execute without Richard thinking.
 - **FTS index:** `signals.slack_messages` — needs rebuild after schema migration (FTS was on old main.slack_messages).
 - **Portability:** MotherDuck accessible from any DuckDB client with the token. Local .duckdb file as cold backup. Parquet exports at `~/shared/data/exports/`.
 
+### Common Failures in Installed Apps
+1. **Running AM-Frontend before AM-Backend completes.** Frontend reads backend state — if backend hasn't written yet, the daily brief has gaps. Wait for backend to finish or accept partial data.
+2. **Editing forecast xlsx visible sheets directly.** Only `update-forecast-tracker.py` writes to the xlsx via the hidden `_Data` sheet. Direct edits break formula references.
+3. **Forgetting `--accept-breaking-changes` on Harmony deploy.** Deploy silently fails without it. Always include the flag.
+4. **Asana writes without audit.** Every Asana write must go through the audit hook. If the hook fails, the write still succeeds but the audit trail has a gap — re-run the audit manually.
+
 ---
 
 ## 👥 Delegation Protocols
 
-| Delegation | Delegate | Status | Notes |
-|-----------|----------|--------|-------|
-| MX Invoicing | TBD | VOID | VOID since Carlos→CPS 3/17. Decision: Lorena takes it or Richard keeps it. Decide by 4/11. |
-| MX Keyword Sourcing | Lorena | IN PROGRESS | Richard keeps strategy/bids/testing. Action: send keyword guide to Lorena. |
-| WBR Coverage | Dwayne | ACTIVE | Normal coverage. Richard keeps PS callouts + backup. Gap: no backup handoff template — build one. |
-| OP1 Contributors | Andrew, Stacey, Yun, Adi | IN PROGRESS | Andrew active. Confirm others. Set deadline for contributor sections. |
+| Delegation | Delegate | Status | Next Action |
+|-----------|----------|--------|-------------|
+| MX Invoicing | TBD | ❌ VOID | Carlos→CPS 3/17, unowned. Lorena or Richard must decide owner. OVERDUE (was 4/11). Escalate if no owner by 7d. |
+| MX Keyword Sourcing | Lorena | 🔄 IN PROGRESS | Send keyword guide to Lorena. Richard retains strategy/bids/testing. Need written handoff artifact. |
+| WBR Coverage | Dwayne | ✅ ACTIVE | Dwayne covers WBR. Richard keeps PS callouts. Build backup handoff template. |
+| OP1 Contributors | Andrew, Stacey, Yun, Adi | 🔄 IN PROGRESS | Andrew active. Confirm remaining 3 contributors + set deadlines. |
+
+**Health rules:** VOID → assign owner within 7d or escalate. IN PROGRESS → produce written handoff artifact. ACTIVE → document backup plan.
 
 ---
 
@@ -160,13 +182,20 @@ Templates (Email, WBR Callout, Meeting Prep) queued — build when prioritized.
 
 ### Backlog & Candidates
 
+#### Ready (next action clear)
+
 | # | Tool | Status |
 |---|------|--------|
 | 0 | **Paid Search Audit** — Gmail Apps Script auto-ingest → Bridge_AB-Ads-Data. Needs: schedule reports, set up script, update config.json with CIDs. | **Richard action** |
-| 2 | **Campaign link generator** — AU/MX sitelink URL construction | Backlog |
 | 3 | **Staleness detector** — auto-check file freshness. Scan all organ files, flag any with `last updated` > 7 days. Output: bloat report for AM-3 brief. | Ready to build |
 | 4 | **gcm (AI git commit)** — Shell function that pipes `git diff --cached` to an LLM for commit message generation. Requires `llm` CLI. Source: wiki/Topics/Git/add_to_zshrc.sh. | Ready to install |
 | 5 | **llm CLI** — Simon Willison's general-purpose LLM CLI tool. Pipe any text to any model. Pairs with gcm. Source: https://llm.datasette.io/. | Ready to install |
+
+#### Backlog (unprioritized)
+
+| # | Tool | Status |
+|---|------|--------|
+| 2 | **Campaign link generator** — AU/MX sitelink URL construction | Backlog |
 | 6 | **Harlequin** — TUI for DuckDB. Browse tables, run queries interactively from terminal. Source: https://harlequin.sh. | Backlog |
 
 Backlog proposals: WBR auto-briefing, meeting prep auto-generator, invoice routing, testing tracker, keyword analysis pipeline. Build priority (brain.md Level 3): tools teammates adopt first.
@@ -183,6 +212,8 @@ Backlog proposals: WBR auto-briefing, meeting prep auto-generator, invoice routi
 ---
 
 ## 📊 Device Health
+
+**Status key:** ✅ = running, 🆕 = deployed but not yet producing data, 🔧 = needs attention.
 
 | Group | Status | Last Run |
 |-------|--------|----------|
@@ -209,7 +240,7 @@ Backlog proposals: WBR auto-briefing, meeting prep auto-generator, invoice routi
 
 ## When to Read This File
 
-- When Richard says "I'll just do it myself" — check if a device function exists or should be built
-- When evaluating whether work is high-leverage — if it's on the device, it shouldn't be on Richard
-- When the trainer flags a recurring time trap — check if a delegation protocol or tool proposal exists
-- When planning system-building sessions — the Tool Factory is the backlog
+- "I'll just do it myself" → check if a device function exists or should be built
+- Evaluating leverage → if it's on the device, Richard shouldn't be doing it
+- Trainer flags recurring time trap → check for existing delegation protocol or tool proposal
+- Planning system-building → Tool Factory is the backlog

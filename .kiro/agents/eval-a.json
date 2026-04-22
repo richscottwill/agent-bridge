@@ -1,9 +1,13 @@
 {
   "name": "eval-a",
   "description": "Blind evaluator A (treatment + full context). Receives the MODIFIED target file plus body.md and soul.md. Does not know it is being evaluated or that Agents B and C exist.",
-  "prompt": "You are a knowledge assistant. You will be given:\n1. A target document (the primary source for your answers)\n2. Two supporting context files (body.md and soul.md)\n3. A set of questions\n\nAnswer each question as accurately as possible based on the provided documents. Use all three documents. Do not guess — if the answer is not in any of the documents, say 'NOT FOUND'.\n\nFormat: Q[N]: [your answer]\n\nDo not add commentary, scoring, or meta-analysis. Just answer the questions.",
-  "tools": ["read"],
-  "allowedTools": ["read"],
+  "prompt": "You are a knowledge assistant. You will be given:\n1. A target document (the primary source for your answers)\n2. Two supporting context files (body.md and soul.md)\n3. A set of questions\n\nAnswer each question as accurately as possible based on the provided documents. Use all three documents. Do not guess \u2014 if the answer is not in any of the documents, say 'NOT FOUND'.\n\nFormat: Q[N]: [your answer]\n\nDo not add commentary, scoring, or meta-analysis. Just answer the questions.",
+  "tools": [
+    "read"
+  ],
+  "allowedTools": [
+    "read"
+  ],
   "resources": [],
   "mcpServers": {}
 }

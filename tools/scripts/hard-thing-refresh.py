@@ -29,6 +29,76 @@ import sys
 import duckdb
 
 LOCAL_DB = "/home/prichwil/shared/data/duckdb/ps-analytics.duckdb"
+
+# DDL for the three tables the refresh procedure reads/writes.
+# Idempotent — safe to run on every invocation. Karpathy verdict 2026-04-21:
+# script previously assumed these tables existed; first run would hard-error.
+ENSURE_SCHEMA_SQL = """
+CREATE TABLE IF NOT EXISTS main.hard_thing_candidates (
+  snapshot_at TIMESTAMP NOT NULL,
+  rank INTEGER,
+  topic VARCHAR,
+  score DOUBLE,
+  mode VARCHAR,
+  level_num INTEGER,
+  impact_multiplier DOUBLE,
+  channel_spread INTEGER,
+  unique_non_richard_authors INTEGER,
+  signal_count INTEGER,
+  days_since_artifact INTEGER,
+  most_recent TIMESTAMP,
+  channels VARCHAR[],
+  authors VARCHAR[],
+  incumbent_since TIMESTAMP,
+  challenger_margin DOUBLE,
+  null_state BOOLEAN DEFAULT FALSE
+);
+
+CREATE INDEX IF NOT EXISTS idx_hard_thing_candidates_latest
+  ON main.hard_thing_candidates (snapshot_at);
+CREATE INDEX IF NOT EXISTS idx_hard_thing_candidates_topic
+  ON main.hard_thing_candidates (topic);
+
+CREATE TABLE IF NOT EXISTS main.hard_thing_topic_levels (
+  topic VARCHAR PRIMARY KEY,
+  level_num INTEGER NOT NULL,
+  impact_multiplier DOUBLE NOT NULL,
+  rationale VARCHAR,
+  last_reviewed DATE DEFAULT CURRENT_DATE
+);
+
+CREATE TABLE IF NOT EXISTS main.hard_thing_artifact_log (
+  topic VARCHAR NOT NULL,
+  artifact_type VARCHAR NOT NULL,
+  artifact_ref VARCHAR NOT NULL,
+  artifact_date DATE NOT NULL,
+  non_richard_interaction_at TIMESTAMP,
+  detected_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (topic, artifact_type, artifact_ref)
+);
+"""
+
+# Seed the topic-to-level mapping per hard-thing-selection.md.
+# ON CONFLICT preserves any manual edits to rationale/last_reviewed made since seed.
+SEED_TOPIC_LEVELS_SQL = """
+INSERT INTO main.hard_thing_topic_levels (topic, level_num, impact_multiplier, rationale, last_reviewed) VALUES
+  ('polaris-brand-lp',         4, 1.75, 'Brand LP consolidation is an L4 narrative — AEO-adjacent, cross-team visibility, Brandon-driven', CURRENT_DATE),
+  ('oci-rollout',              2, 1.25, 'WW testing execution — operational L2 work', CURRENT_DATE),
+  ('au-cpa-cvr',               2, 1.25, 'AU market performance — hands-on L2', CURRENT_DATE),
+  ('mx-budget-ieccp',          2, 1.25, 'MX market execution — hands-on L2', CURRENT_DATE),
+  ('liveramp-enhanced-match',  4, 1.75, 'Audience + identity — L4 strategic territory', CURRENT_DATE),
+  ('f90-lifecycle',            4, 1.75, 'Audience strategy — L4', CURRENT_DATE),
+  ('ai-search-aeo',            4, 1.75, 'Zero-click future POV — core L4 artifact', CURRENT_DATE),
+  ('op1-strategy',             2, 1.25, 'OP1 planning — L2 testing narrative input', CURRENT_DATE),
+  ('deep-linking-ref-tags',    3, 1.5,  'Instrumentation / tooling for team', CURRENT_DATE),
+  ('pam-budget',               2, 1.25, 'Paid App budget management — L2 execution', CURRENT_DATE)
+ON CONFLICT (topic) DO UPDATE SET
+  level_num = EXCLUDED.level_num,
+  impact_multiplier = EXCLUDED.impact_multiplier,
+  rationale = EXCLUDED.rationale,
+  last_reviewed = EXCLUDED.last_reviewed;
+"""
+
 SCORING_SQL = """
 WITH decayed_signals AS (
   SELECT
@@ -135,13 +205,21 @@ DEFAULTS = {
 
 
 def connect(use_local: bool = False) -> duckdb.DuckDBPyConnection:
-    """Connect to MotherDuck if token present, else local shadow DB."""
+    """Connect to MotherDuck if token present, else local shadow DB.
+
+    Ensures the three hard_thing_* tables exist on every connection (idempotent).
+    Seeds hard_thing_topic_levels on first run (ON CONFLICT preserves edits).
+    """
     if use_local:
-        return duckdb.connect(LOCAL_DB)
-    token = os.environ.get("motherduck_token") or os.environ.get("MOTHERDUCK_TOKEN")
-    if not token:
-        raise RuntimeError("MotherDuck token missing")
-    return duckdb.connect("md:ps_analytics")
+        con = duckdb.connect(LOCAL_DB)
+    else:
+        token = os.environ.get("motherduck_token") or os.environ.get("MOTHERDUCK_TOKEN")
+        if not token:
+            raise RuntimeError("MotherDuck token missing")
+        con = duckdb.connect("md:ps_analytics")
+    con.execute(ENSURE_SCHEMA_SQL)
+    con.execute(SEED_TOPIC_LEVELS_SQL)
+    return con
 
 
 def throttled(con, window_minutes: int) -> bool:

@@ -162,6 +162,16 @@ AM-Backend Hook (orchestrator)
 │   │   ├─ Log to signal_task_log in DuckDB
 │   │   └─ Log pipeline execution to workflow_executions
 │   │
+│   ├─ Step 2A.1: Hard-Thing Candidate Refresh
+│   │   ├─ Run: `python3 ~/shared/tools/scripts/hard-thing-refresh.py`
+│   │   ├─ Reads signals.signal_tracker + main.hard_thing_artifact_log
+│   │   ├─ Computes top-3 candidates with exponential decay + incumbent margin
+│   │   ├─ Writes snapshot to main.hard_thing_candidates
+│   │   ├─ Script ensures main.hard_thing_* tables exist (idempotent CREATE TABLE IF NOT EXISTS)
+│   │   ├─ Non-fatal if motherduck_token missing — writes null-state snapshot, continues
+│   │   ├─ Throttled to 15-min minimum between runs (exit 1 if throttled, non-fatal)
+│   │   └─ Protocol: ~/shared/context/protocols/hard-thing-selection.md
+│   │
 │   ├─ Step 2B: Slack Conversation Enrichment
 │   │   ├─ Acronym/project detection in slack-digest signals
 │   │   ├─ KDS enrichment for unfamiliar terms (max 5 queries)

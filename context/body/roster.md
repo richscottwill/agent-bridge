@@ -25,7 +25,7 @@ For each person the goal is to capture: **Name | Alias | Level | Role | Location
 
 ## 1. AB Paid Search Team (Brandon's Outbound Marketing Directs)
 
-These are the seven people Richard works alongside on PS and Marketing Website. Brandon is the shared manager.
+Brandon's seven direct reports plus Richard. Covers PS acquisition, MCS/website, mobile app, and ENG PS across all 10 markets.
 
 | Name | Alias | Level | Role | Location | Markets / Scope |
 |------|-------|-------|------|----------|-----------------|
@@ -44,66 +44,46 @@ These are the seven people Richard works alongside on PS and Marketing Website. 
 
 ---
 
-## 2. AB Traffic & Marketing — Pre-WBR Callout Owners (canonical)
+## 2. Market & Channel Contacts (Pre-WBR Callouts + Country Leads)
 
-Source: `quip-amazon.com/MMgBAzDrlVou` → "Guidance" tab, rows 10–12. This is the authoritative list of **who owns each channel's callout** in the WW AB Traffic — Marketing Pre-WBR Quip. Callout syncs are biweekly before 10 AM PT Wednesdays.
+Source: `quip-amazon.com/MMgBAzDrlVou` → "Guidance" tab, rows 10–12. Biweekly syncs before 10 AM PT Wednesdays.
 
-### By Channel / Segment
+#### Channel Callout Owners
 
-| # | Channel | Primary Owner | Notes |
-|---|---------|--------------|-------|
-| 1 | TSEM (all) | Daron Manso | Traffic/Search Engine Marketing overall |
-| 2 | Traffic | Kristine Weber | Traffic orchestration, owns action-item follow-ups |
-| 3 | Email | Kris Knowles | Email channel |
-| 4 | A.com / Cross Stores | Baylee McCloskey | Cross-store, switch-account |
-| 5 | Push | Peter Ocampo | Mobile App + Push notifications |
-| 6 | Paid Search (ACQ) | Brandon Munday | PS SSR/ACQ — covered by Richard when Brandon OOO |
-| 7 | Paid Search — ENG | Yun-Kang Chu | PS Engagement (post-acquisition, LiveRamp) |
-| 8 | ADA-DA (Display Ads / ADSP) | Abdul Bishar | Display advertising |
-| 9 | MCS | Dwayne Palmer | Marketing Content Site |
-| 10 | Organic Search / SEO | Yoav Reder | SEO |
-| 11 | CPS Growth Marketing | Jenn Thompson | CPS-specific growth |
+| # | Channel | Owner | Notes |
+|---|---------|-------|-------|
+| 1 | TSEM (all) | Daron Manso | Traffic/SEM overall |
+| 2 | Traffic | Kristine Weber | Action-item follow-ups |
+| 3 | Email | Kris Knowles | |
+| 4 | A.com / Cross Stores | Baylee McCloskey | |
+| 5 | Push | Peter Ocampo | Mobile App |
+| 6 | Paid Search (ACQ) | Brandon Munday | Richard covers when OOO |
+| 7 | Paid Search — ENG | Yun-Kang Chu | LiveRamp |
+| 8 | ADA-DA (Display Ads) | Abdul Bishar | |
+| 9 | MCS | Dwayne Palmer | |
+| 10 | SEO | Yoav Reder | |
+| 11 | CPS Growth | Jenn Thompson | |
 
-### By Country
+#### Country Contacts (Callout Owner + PS Stakeholder Lead)
 
-| Country | Owner |
-|---------|-------|
-| US | TSEM (via Daron Manso) |
-| EU | Clara Sagnier Mur |
-| CA | Betty Chipman |
-| JP | Masami Mohri |
-| MX | Eduardo Vazquez |
-| AU | Grace May Bernard |
+| Market | Callout Owner | PS Stakeholder | Stakeholder Level | Notes |
+|--------|--------------|----------------|-------------------|-------|
+| US | Daron Manso (TSEM) | — | — | |
+| AU | Grace May Bernard | Lena Zak (lenazak) | L7 | Country Leader, reports to Nick Georgijev (L8). Hardest stakeholder — drives weekly CPA reviews. Also: Alexis Eck (L6, in-market PS partner). |
+| MX | Eduardo Vazquez | Lorena Alvarez Larrea | L5 | Primary PS stakeholder as of 3/17/26. Replaced Carlos Palmos (moved to CPS). |
+| CA | Betty Chipman | — | — | |
+| JP | Masami Mohri | York Chen | — | JP PS operations (CPS-aligned). Returned from pat leave 3/22/25. |
+| EU | Clara Sagnier Mur | — | — | |
 
-### Optional Pre-WBR Attendees (who also write callouts intermittently)
+**Optional attendees (intermittent callouts):** Ahmed Darwish (SSR), Elina Kazantseva (EU SSR), Charlie Nichols (Paid Media), Siri Angeles (Social), Eric Wyatt (CPS Growth).
 
-| Name | Domain |
-|------|--------|
-| Ahmed Darwish | SSR Activation |
-| Elina Kazantseva | EU SSR Engagement |
-| Charlie Nichols | Paid Media |
-| Siri Angeles | Social Media |
-| Eric Wyatt | CPS Growth Marketing |
+#### External Partners (biweekly syncs)
 
----
-
-## 3. Country / Market Leads (PS stakeholders)
-
-These are the country-leadership counterparts for PS work — the customers/stakeholders the team writes updates *to*, not the people inside the team.
-
-| Market | Primary Stakeholder | Alias | Level | Location | Notes |
-|--------|--------------------|-------|-------|----------|-------|
-| AU | Lena Zak | lenazak | L7 | Sydney | Country Leader, reports to Nick Georgijev. Hardest stakeholder — drives weekly CPA reviews, expects data-forward responses. |
-| AU | Alexis Eck | — | L6 | — | AU in-market PS partner |
-| AU | Nick Georgijev | — | L8 | — | AU country director (Lena's manager) |
-| AU | Grace May Bernard | — | — | — | AU Marketing callout author |
-| MX | Lorena Alvarez Larrea | — | L5 | — | Primary PS stakeholder as of 3/17/26. New to the role, learning the playbook. |
-| MX | Carlos Palmos | — | L5 | — | Previous MX lead. Transitioned to CPS on 3/17/26. |
-| MX | Eduardo Vazquez | — | — | — | MX Marketing callout author |
-| CA | Betty Chipman | — | — | — | CA Marketing callout author |
-| JP | York Chen | — | — | — | JP PS operations (CPS-aligned). Returned from pat leave 3/22/25. |
-| JP | Masami Mohri | — | — | — | JP Marketing callout author |
-| EU | Clara Sagnier Mur | — | — | — | EU Marketing callout author |
+| Org | Contact | Scope |
+|-----|---------|-------|
+| Google | Mike Babich | OCI, AI Max, account structure, ad copy |
+| Adobe | Suzane Huynh | OCI reporting, Ad Cloud, WW redirects |
+| Adobe | Jen Vitiello | Co-lead |
 
 ---
 
@@ -206,28 +186,18 @@ These are the country-leadership counterparts for PS work — the customers/stak
 
 ---
 
-## 6. External Partners
-
-| Org | Contact | Scope |
-|-----|---------|-------|
-| Google | Mike Babich | Biweekly sync. OCI, AI Max, account structure, ad copy |
-| Adobe | Suzane Huynh | Biweekly sync. OCI reporting, Ad Cloud, WW redirects |
-| Adobe | Jen Vitiello | Biweekly sync (co-lead) |
-
----
-
 ## 7. Richard's Specific Stakeholder Contacts
 
-These are the people Richard draft communications *to* most often. For each, see `memory.md` relationship graph for tone, current topic, and draft style notes. Listed here so the directory is complete.
+People Richard drafts communications *to* most often. See `memory.md` for tone, dynamics, draft style.
 
-| Name | Alias | Role | Last major interaction (from memory.md) |
-|------|-------|------|-----------------------------------------|
-| Brandon Munday | brandoxy | Manager — 1:1s, OP2, R&O, strategic framing | 4/2/26 — LiveRamp, Lena pattern |
-| Kate Rundell | kataxt | Skip-level — Testing Approach, AU CPC awareness | 4/3/26 — doc meeting canceled |
-| Lena Zak | lenazak | AU Country Leader — weekly CPA review, Polaris, LP | 4/1/26 — 3 follow-up questions on LP URLs |
-| Lorena Alvarez Larrea | — | MX PS primary stakeholder (new) | Active — onboarding, invoice ownership |
-| Dwayne Palmer | — | MCS peer — Polaris, LP, in-context reg | Continuous |
-| Yun-Kang Chu | — | Peer — PS-ENG, Modern Search, Adobe | Reliable peer, data on demand |
+| Name | Alias | Role | Last Interaction |
+|------|-------|------|-----------------|
+| Brandon Munday | brandoxy | Manager — 1:1s, OP2, R&O | 4/2/26 |
+| Kate Rundell | kataxt | Skip-level — Testing Approach, AU CPC | 4/3/26 |
+| Lena Zak | lenazak | AU Country Leader — CPA review, Polaris | 4/1/26 |
+| Lorena Alvarez Larrea | — | MX PS stakeholder (new, replaced Carlos 3/17) | Active |
+| Dwayne Palmer | — | MCS peer — Polaris, LP | Continuous |
+| Yun-Kang Chu | — | Peer — PS-ENG, Modern Search, Adobe | — |
 | Adi Thakur | — | Peer — CA LP, UX | — |
 | Stacey Gu | — | Peer — US lead, OCI, AI Max | — |
 | Andrew Wirtz | — | Peer — EU5, Flash, ad copy | — |

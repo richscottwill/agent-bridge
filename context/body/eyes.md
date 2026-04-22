@@ -18,15 +18,29 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 
 ### Market Deep Dives
 
+**Reading this table:** Each row is one market's latest snapshot. "vs OP2" = performance against annual plan. "Key Signal" = the most important thing happening — always includes a cause (bid strategy, CVR shift, competitor move, seasonal event). When drafting callouts, lead with the Key Signal, not the raw numbers.
+
+#### NA Markets
+
 | Market | Period | Regs | vs OP2 | CPA | Key Signal |
 |--------|--------|------|--------|-----|-----------|
 | US | Feb | 32.9K | above plan | $65-77 Brand | Walmart IS 25%→55% driving Brand CPA up (was ~$40). Peak Jan: 39K (+86% YoY). Response: bid caps + NB OCI efficiency. |
+| CA | Feb | +18.5% vs OP2 | +18.5% | $73 | Bulk CVR 0.82%→2.35% (+187%), Wholesale 0.75%→2.10% (+180%). OCI E2E launched 3/4, full impact Jul 2026. |
+| MX | W13 | 354 (+9% WoW) | — | $66 (+6%) | NB regs +33% above avg. YoY: +91% regs, +37% spend. NB CPA $112 sustained from H2 2025 gains. Lorena now primary stakeholder. ie%CCP corrected to 93%. |
+
+#### EU Markets
+
+| Market | Period | Regs | vs OP2 | CPA | Key Signal |
+|--------|--------|------|--------|-----|-----------|
 | UK | Feb | +24% vs OP2 | +24% | — | -6% spend, still beat plan. Ad copy: +86% CTR, +31% regs. weareuncapped.com 24% IS since Dec 2023. |
 | DE | Feb | -4% vs OP2 | -4% | — | NB -22% vs OP2. OCI lift W49-W51: +16-20%. |
-| CA | Feb | +18.5% vs OP2 | +18.5% | $73 | Bulk CVR 0.82%→2.35% (+187%), Wholesale 0.75%→2.10% (+180%). OCI E2E launched 3/4, full impact Jul 2026. |
+
+#### APAC Markets
+
+| Market | Period | Regs | vs OP2 | CPA | Key Signal |
+|--------|--------|------|--------|-----|-----------|
 | JP | Feb | — | — | — | MHLW campaign ended 1/31 (major reg driver lost). Yahoo competitors emerging: shop-pro.jp 12-15% IS. |
 | AU | W13 | 207 (-16% WoW) | — | $118 (+3%) | CVR -12% WoW (Brand -14%, NB -10%). Daily: Mon-Tue strong (53, 50) then collapsed (27, 22, 23, 8). NB CPC declining 7wks ($6.82→$4.81, -29%). NB CPA flat $187. Polaris migration mid-week may explain. Two-campaign structure proposed (3/24). Lena priorities: CPC/CPA, keyword-product mapping, Polaris. |
-| MX | W13 | 354 (+9% WoW) | — | $66 (+6%) | NB regs +33% above avg. YoY: +91% regs, +37% spend. NB CPA $112 sustained from H2 2025 gains. Lorena now primary stakeholder. ie%CCP corrected to 93%. |
 
 ---
 
@@ -35,20 +49,23 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 <!-- Data: db("SELECT market, status, launch_date, full_impact_date, reg_lift_pct, cpa_improvement FROM oci_status ORDER BY market") -->
 
 ### OCI Status by Market (as of 4/2)
-| Market | Status | Key Date | Notes |
-|--------|--------|----------|-------|
-| US | ✅ 100% live | Launched 2025 | Baseline. Peak Jan: 39K regs (+86% YoY). |
-| UK | ✅ 100% live | E2E launched | Tracking lift. |
-| DE | ✅ 100% live | E2E launched | W49-W51: +16-20% lift. Data loss 3/18-3/25 (DUB→ZAZ migration). |
-| FR | ✅ 100% live | Dialed up 3/30 | 775 click events confirmed 3/24 UTC. |
-| IT | ✅ 100% live | Dialed up 3/30 | 1,412 click events confirmed 3/24 UTC. |
-| ES | ✅ 100% live | Dialed up 3/30 | 1,168 click events confirmed 3/24 UTC. |
-| JP | ✅ 100% live | Dialed up 3/31 | MCM-147368188 COMPLETE — tracking template + feed enabled. Ref tag taxonomy deferred. |
-| CA | 🟡 On track | Target 04/07 | E2E launched 3/4. Full impact projected Jul 2026. |
-| AU | 🔴 Not started | TBD | No MCC. |
-| MX | 🔴 Not started | TBD | No MCC. |
+| Market | Status | Launch/Target | Detail |
+|--------|--------|---------------|--------|
+| US | ✅ Live | 2025 | Baseline market. Peak Jan: 39K regs (+86% YoY). |
+| UK | ✅ Live | E2E launched | Ad copy Phase 1 running: +86% CTR, +31% regs. |
+| DE | ✅ Live | E2E launched | +16-20% lift (W49-W51). Data loss 3/18-3/25 — verify backfill. |
+| FR | ✅ Live | 3/30 dial-up | 775 clicks confirmed 3/24 UTC. Monitor ramp. |
+| IT | ✅ Live | 3/30 dial-up | 1,412 clicks. Ad copy: +15% CTR but LOW volume — needs longer window. |
+| ES | ✅ Live | 3/30 dial-up | 1,168 clicks confirmed 3/24 UTC. Monitor ramp. |
+| JP | ✅ Live | 3/31 dial-up | MCM-147368188 COMPLETE. Watch Yahoo competitor IS growth. |
+| CA | 🟡 On track | Target 04/07 | E2E launched 3/4. Full impact expected Jul 2026. Next milestone: Apr dial-up. |
+| AU | 🔴 Not started | TBD | No MCC created — blocked until MCC setup. |
+| MX | 🔴 Not started | TBD | No MCC created — blocked until MCC setup. |
 
 **Rollout: 7/10 live (70%).** Next: CA (Apr). AU/MX: TBD.
+
+### Known Issues
+- Duplicate hvocijid parameters in landing page URLs across EU3 + existing markets. Causing "Duplicate query param found" errors. JP not affected. Under investigation.
 
 ### MCC Structure
 - Master MCC: DSAP - Amazon Business Parent MCC (873-788-1095)
@@ -57,8 +74,7 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 - JP MCC: 852-899-4580
 - AU: Not created
 
-### Known Issues
-- Duplicate hvocijid parameters in landing page URLs across EU3 + existing markets. Causing "Duplicate query param found" errors. JP not affected. Under investigation.
+**Worked example — reading OCI status for meeting prep:** CA shows 🟡 On track with E2E launched 3/4 and full impact Jul 2026. In a WBR, lead with "CA OCI on track for Apr dial-up, full impact expected Jul 2026" — the status emoji + target date is the callout, the detail row provides the backup if asked.
 
 ---
 
@@ -66,13 +82,18 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 
 <!-- Data: db("SELECT market, competitor, impression_share, cpc_impact_pct, segment, notes FROM competitors ORDER BY market, competitor") -->
 
-### US: Walmart Business
-Brand Core since Jul 2024. IS: 25%→55% (peak W6 2026). Brand CPA impact: ~$40→$65-77. Seasonal: ramps Jan-Mar, pulls back holidays. Response: bid caps + NB OCI efficiency. Do NOT escalate auction.
-
-### Trends
-- Market-wide: 1-2 competitors/market (2023) → 3-5 (2026). Walmart only sustained US Brand bidder.
+### Defense Posture & Trends
+- **Posture: efficiency over escalation.** Do NOT escalate auctions.
+- Market-wide: 1-2 competitors/market (2023) → 3-5 (2026).
 - EU: fragmentary — different competitors per market. JP: intensifying on Yahoo.
-- Defense posture: efficiency over escalation.
+
+### US: Walmart Business
+Brand Core since Jul 2024. IS: 25%→55% (peak W6 2026). Brand CPA impact: ~$40→$65-77. Seasonal: ramps Jan-Mar, pulls back holidays. Response: bid caps + NB OCI efficiency. Only sustained US Brand bidder.
+
+### JP: Yahoo Competitors
+shop-pro.jp emerging with 12-15% IS. Intensifying since MHLW campaign ended 1/31 (major reg driver lost). Monitor for further IS growth.
+
+**Worked example:** Walmart IS surged to 55% in W6 2026. Instead of increasing Brand bids to reclaim IS, we held bid caps and shifted budget to NB OCI (where Walmart doesn't compete). Result: Brand CPA stabilized at $65-77 without auction escalation, NB efficiency improved via OCI.
 
 ---
 
@@ -109,28 +130,24 @@ Bulk/wholesale/B2B → price, quality, selection:
 
 ---
 
-## Predicted Questions
+## Pipeline, Outlook & Predicted Questions
 
-_Cleared at EOD 4/3. Regenerated each AM-2 from calendar + active threads + Slack signals._
-
----
-
-## Pipeline & Outlook
+_Predicted questions cleared at EOD 4/3. Regenerated each AM-2 from calendar + active threads + Slack signals._
 
 ### Data Pipeline
-- WW Dashboard Y25 Final (full year baseline) — in intake
-- WW Dashboard Y26 W13 (current week) — PROCESSED 3/30 via dashboard ingester + callout pipeline
-- Change Log CSVs (EU5, MX/AU, NA/JP) — INGESTED 3/30 (477 rows to DuckDB)
-- Weekly cadence: Richard drops new week's xlsx → run `python3 shared/tools/dashboard-ingester/ingest.py <path>` → callouts + JSON + WW summary auto-generated
-- Ingester location: `~/shared/tools/dashboard-ingester/ingest.py`
-- Output: per-market callout drafts in `~/shared/wiki/callouts/<market>/`, WW summary, JSON data extract
-- Feeds: WBR callouts, MBR narratives, QBR trends, daily Google Ads checks (MX, AU, Paid App)
+
+| Component | Detail |
+|-----------|--------|
+| **Ingestion** | Richard drops xlsx → `~/shared/tools/dashboard-ingester/ingest.py <path>` |
+| **Outputs** | Per-market callout drafts (`~/shared/wiki/callouts/<market>/`), WW summary, JSON extract |
+| **Feeds** | WBR callouts, MBR narratives, QBR trends, daily Google Ads checks (MX, AU, Paid App) |
+| **Current data** | WW Dashboard Y25 Final (baseline), Y26 W13 (processed 3/30), Change Log CSVs (477 rows to DuckDB) |
 
 ### What's Coming
 
-| Initiative | Status | Level | Key Detail |
-|-----------|--------|-------|------------|
-| AI Max | ⚠️ Test design 6d overdue (due 3/28) | L2 | US test planned Q2 2026. No test design written yet. |
-| Project Baloo | 🟢 Early access launched 3/30 | L2 | Shopping Ads for AB. Keywords delivered. |
-| AEO/Zero-click | 📋 POV queued | L4 | Educational session attended 3/10. |
-| Polaris Brand LP | 🟢 No action needed | — | WW rollout weblab dial-up targeting April 6-7. Frank got requirements from Alex. |
+| Initiative | Status | Detail |
+|-----------|--------|--------|
+| AI Max | ⚠️ Test design 6d overdue (3/28) | US Q2 2026. No design written. L2. |
+| Project Baloo | 🟢 Early access 3/30 | Shopping Ads for AB. Keywords delivered. L2. |
+| AEO/Zero-click | 📋 POV queued | Educational session 3/10. L4. |
+| Polaris Brand LP | 🟢 No action | WW rollout dial-up targeting Apr 6-7. |

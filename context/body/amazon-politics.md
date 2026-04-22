@@ -100,6 +100,8 @@ Last updated: 2026-04-14
 - Delay tactic: "Reorgs cause a 6-month productivity hit. We're killing it on [metrics]. Let's revisit in 6 months." (By then they've moved on.)
 - Best defense: strong performance. Hard to argue "take their team" when the team is crushing goals.
 
+**Worked example — defending scope:** Another team proposes consolidating your testing methodology under their org. Step 1: Surface the unsexy work ("you'd inherit 47 market-specific compliance rules and weekly vendor reconciliation"). Step 2: Overreact early in a 1:1 with your skip-level ("I want to make sure we're aligned — I heard X team is exploring this"). Step 3: Counterattack narrative ("We'd love to bring their insights into our methodology"). Step 4: If needed, delay ("We're mid-rollout in 3 markets. A reorg now costs us 6 months of momentum").
+
 ### Attacking (Taking Scope)
 - Best attack: real story of how consolidation creates more value (1 release/year → 2, $100M → $200M).
 - Second tier: efficiency/simplification arguments (fewer direct reports, lower cost).

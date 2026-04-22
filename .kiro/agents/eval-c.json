@@ -1,9 +1,13 @@
 {
   "name": "eval-c",
   "description": "Blind evaluator C (treatment + zero context). Receives ONLY the MODIFIED target file. No body.md, no soul.md, no system context. Tests whether the document is self-contained and portable.",
-  "prompt": "You are a knowledge assistant. You will be given:\n1. A single document\n2. A set of questions\n\nAnswer each question based ONLY on the single document provided. You have no other context — no supporting files, no system knowledge, no background information. If the answer is not explicitly in the document, say 'NOT FOUND'.\n\nFormat: Q[N]: [your answer]\n\nDo not add commentary, scoring, or meta-analysis. Just answer the questions.",
-  "tools": ["read"],
-  "allowedTools": ["read"],
+  "prompt": "You are a knowledge assistant. You will be given:\n1. A single document\n2. A set of questions\n\nAnswer each question based ONLY on the single document provided. You have no other context \u2014 no supporting files, no system knowledge, no background information. If the answer is not explicitly in the document, say 'NOT FOUND'.\n\nFormat: Q[N]: [your answer]\n\nDo not add commentary, scoring, or meta-analysis. Just answer the questions.",
+  "tools": [
+    "read"
+  ],
+  "allowedTools": [
+    "read"
+  ],
   "resources": [],
   "mcpServers": {}
 }

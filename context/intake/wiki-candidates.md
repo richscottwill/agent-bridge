@@ -226,3 +226,57 @@ One line per candidate. Loose format — hooks don't judge quality or priority. 
 
 [2026-04-21T18:50 eod] signal: Lorena proposed 3rd-party partner WhatsApp+email funnel automation for MX account activation — legal cleared, could be replicated to AU, represents an L3/L4 initiative candidate with clear playbook potential | source: hedy session 3AW74wzSWE4PUXzYwCz1 | proposed: mx-whatsapp-funnel-automation-playbook
 [2026-04-21T19:00 session-summary] signal: Brandon 1:1 truncation pattern (2 of last 2 degraded or cancelled) means Richard needs structural fallback — Monday-night agenda pre-load so even 4-min meetings hit the #1 item | source: this-session | proposed: brandon-1on1-resilience-pattern
+[2026-04-22T02:15 session-summary] signal: Skip-rationalization as a failure mode — when a protocol step skips N times with plausible-sounding reasons, the reasons harden into a silent opt-out; the fix is to run it and catch the real blocker (here: silent fallback-to-default-agent from schema break) rather than softening rationale | source: this-session | proposed: skip-rationalization-antipattern
+[2026-04-22T03:42 session-summary] signal: Karpathy cooldown rotation strategy — sequential loops with different organ cooldowns (hands→eyes+brain→amcc+memory) force coverage diversity and prevent same-target bias when running multiple batches per session | source: this-session | proposed: karpathy-cooldown-rotation-pattern
+[2026-04-21T20:45 session-summary] signal: Karpathy autoresearch framework extends naturally to hooks, protocols, and retrieval via domain-specific eval types (binary-outcome, ranked-retrieval/precision@K, MRR on query logs) — same A/B/C blind design, same Bayesian priors, different fixture stores | source: this-session | proposed: karpathy-framework-extensions
+[2026-04-21T21:10 session-summary] signal: Karpathy gatekeeper pattern — briefs grounded in what files claim the schema is must be verified against what the schema actually is via DuckDB queries; same hallucination failure mode as WW Testing Loop status claims caught today | source: this-session | proposed: karpathy-gatekeeper-pattern
+
+[2026-04-21T21:15 session-summary] signal: Pre-OOO handoff protocol — bucketing open tasks into ship-tonight vs write-status-and-defer, with explicit handoff notes in Kiro_RW so the team isn't blocked while Richard is out | source: this-session | proposed: pre-ooo-handoff-protocol
+
+[2026-04-21T21:45 session-summary] signal: Cross-surface deadline-commitment scan recipe — query signals.hedy_meetings action_items JSON + slack_messages with to_timestamp(CAST(ts AS DOUBLE)) + emails_actionable + asana due_on window, cross-check against current Asana task list to surface genuinely-new items | source: this-session | proposed: pre-ooo-handoff-protocol (enrich with deadline-scan subroutine)
+
+[2026-04-21T22:05 session-summary] signal: Completion-evidence pruning — before adding a task to tonight's list, query Slack is_richard=true + Richard-sent emails + Asana completed timestamps since task-creation-date to find evidence task is already done; removed ~50% of the initial commitment list this way | source: this-session | proposed: enrich: pre-ooo-handoff-protocol
+
+[2026-04-21T22:30 session-summary] signal: Richard's professional-work importance hierarchy — I1 Direct-chain Brandon/Kate strategic > I2 hands-on markets AU/MX > I3 cross-functional coord > I4 team enablement/tooling adoption > I5 admin/vendor/finance; must be the PRIMARY sort before urgency, not a tiebreaker, and agent must re-check explicit in-conversation priority statements before ranking | source: this-session | proposed: richard-importance-hierarchy
+
+[2026-04-21T22:55 session-summary] signal: Documentation-then-close pattern for shipped initiatives — when Brandon says "add impl details, then close" on a task that's already live in prod, the full close-out package is: scope+counts, mechanism+ID, precedent/POC with iOPS link, timeline including any rollback + CoE, SIM/MCM/Quip links, follow-up task status, then close. Reusable shape for any WW rollout retrospective. | source: this-session | proposed: ww-rollout-closeout-template
+
+[2026-04-21T23:20 session-summary] signal: Stale task-body descriptions ("0% progress", "7 subtasks", "No activity in 7+ days") can cause both Richard and the agent to mis-frame an in-flight task as a kill-or-defer candidate — always cross-check Slack + SIM + CR activity before taking task-body text at face value, especially for cross-functional deliverables where progress happens outside Asana | source: this-session | proposed: enrich: pre-ooo-handoff-protocol
+
+[2026-04-21T22:35 session-summary] signal: System self-audit against Mario's pi thesis found clear drift from soul.md's own "subtraction before addition" and "invisible over visible" principles — complexity tax is real and measurable | source: this-session | proposed: agent-system-complexity-audit
+
+[2026-04-21T22:48 session-summary] signal: Subtraction-biased audit pattern — default action is DELETE, KEEP requires justification, flips the normal burden of proof for system pruning | source: this-session | proposed: subtraction-biased-audit-pattern
+
+[2026-04-21T22:42 session-summary] signal: Mechanism routing decision framework — when to encode a workflow as skill vs power vs steering vs hook vs subagent vs organ — emerged as a reusable governance artifact beyond this spec | source: this-session | proposed: mechanism-routing-framework
+
+[2026-04-21T23:02 session-summary] signal: Scaffolding vs inhabitant vs metaphor-only classification — durable way to distinguish future-needed structure from current-hollow frame when pruning agentic systems | source: this-session | proposed: scaffolding-vs-inhabitant-pattern
+
+[2026-04-21T23:35 session-summary] signal: JSON-for-procedures + markdown-for-humans split in spec design — intermediate state is JSON (sortable/filterable), final review artifact is flat markdown (linear scroll + inline edit) | source: this-session | proposed: json-intermediate-markdown-final-pattern
+
+[2026-04-21T23:50 session-summary] signal: Spec stress-testing via real-edge-case walkthroughs surfaces gaps flat review misses — ghost refs, latent referrers, template/instance confusion, hidden coordination costs | source: this-session | proposed: spec-stress-testing-pattern
+
+[2026-04-22T00:10 session-summary] signal: Spec stress-test framework — 4 groups (input validity / classification edges / output+review / meta) surfaces ~20 gaps per spec where flat review surfaces ~8, with severity scoring (HIGH=content-loss-risk, MEDIUM=data-quality, LOW=polish) | source: this-session | proposed: enrich: spec-stress-testing-pattern
+
+[2026-04-22T00:25 session-summary] signal: Requirements-vs-design split rule — "what the system must do" (user-visible behavior, guarantees) stays in requirements; "how it does it" (regex, data schemas, phase mechanics) moves to design — stress-test findings should be categorized by this split before editing | source: this-session | proposed: requirements-design-split-heuristic
+
+[2026-04-22T00:45 session-summary] signal: Requirements interaction-effect testing — walking pairs of requirements together (R5.6 × R10, R9.2 × R5.6, R3.6 cascade) surfaces contradictions invisible when reviewing each requirement in isolation | source: this-session | proposed: enrich: spec-stress-testing-pattern
+
+[2026-04-22T01:05 session-summary] signal: Requirements should never contain concrete syntax — concrete APPROVE block format, row identifier schemes, regex patterns belong in design.md; requirements state principles, design picks mechanics | source: this-session | proposed: enrich: requirements-design-split-heuristic
+
+[2026-04-22T01:30 session-summary] signal: Three artifact kinds in a procedure — JSON intermediates for machines, markdown for human review, JSON line-log for append-only resume — each format chosen by consumer not by author convenience | source: this-session | proposed: enrich: json-intermediate-markdown-final-pattern
+
+[2026-04-22T01:40 session-summary] signal: Mario vs Peter as philosophical counter-balances — Mario: "cut slop, read every line, waterfall when it matters"; Peter: "curved path, extensions over forks, hacker advantage that enterprise can't match" — both passionate, both correct in different contexts, worth mapping as a framework for deciding when each applies | source: this-session | proposed: mario-peter-dual-ethos-framework
+
+[2026-04-22T02:00 session-summary] signal: Mario-Peter axis framework — decision matrix for when to apply which ethos (Mario: rigor/review/specs for production/hard-to-reverse/shared work; Peter: scrappy/iterate/extensions for personal/exploratory/taste-driven work) — both agree on taste, saying no, system design, humans-in-loop; they disagree on spec depth before first run | source: this-session | proposed: mario-peter-dual-ethos-framework
+
+[2026-04-22T02:30 session-summary] signal: Specs can offer multiple execution paths (SCRAPPY vs FULL) baked into the procedure rather than forcing one rigor level — lets the operator pick Peter or Mario ethos per run based on risk profile and information need | source: this-session | proposed: enrich: mario-peter-dual-ethos-framework
+
+[2026-04-22T02:30 session-summary] signal: System sprawl diagnosis — 300 broken references across 99 live files is a stronger signal of accumulation pain than orphan count; broken refs cluster in 1-2 degenerate docs that never got updated when real files moved, so aggregate number misleads without referrer-concentration view | source: this-session | proposed: broken-reference-concentration-as-sprawl-signal
+
+[2026-04-22T00:08 session-summary] signal: Sibling-spec interlock pattern — when two specs touch the same surface, the second spec explicitly enumerates interlock points with the first and reuses its artifact conventions (row ID grammar, archive paths, format splits) rather than inventing parallel ones | source: this-session | proposed: sibling-spec-interlock-pattern
+
+[2026-04-22T02:50 session-summary] signal: Referrer-based orphan detection fails for hook files because hooks fire via IDE events (promptSubmit, fileEdited, agentStop) not via path reference — correct liveness signal for hooks is enabled-state + when-trigger, not referrer count; classifier must layer-specialize its "earn its place" test | source: this-session | proposed: hook-liveness-detection-pattern
+
+[2026-04-22T00:12 session-summary] signal: Stress-test-before-tasks discipline — a design should be validated against the actual structures on disk (frontmatter shapes, existing corpus, live audit findings) before it becomes implementable tasks; 4 of 8 stress-test findings were structural breakages invisible in the spec alone | source: this-session | proposed: design-stress-test-protocol
+
+[2026-04-22T03:10 session-summary] signal: "Active" referrer counts mislead when `context/active/` contains historical logs — need to bucket referrers by source-directory (live-load vs historical-record) before judging load-bearingness; raw counts can be 10x the true live-dependency count | source: this-session | proposed: referrer-source-bucketing-pattern

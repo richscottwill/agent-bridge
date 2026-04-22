@@ -11,9 +11,16 @@ Last updated: 2026-04-20 (hard-thing selection redesigned — signal-driven bott
 
 ## Purpose
 
-Intervenes in the gap between knowing and doing — the moment where Richard knows the right thing but is about to choose the comfortable thing. Not the trainer (which calls out patterns after the fact). The aMCC fires *in the moment*, before avoidance becomes a pattern.
+### Biological Basis
+**The biological truth:** The anterior midcingulate cortex physically grows with sustained effortful behavior and shrinks with avoidance. The streak — consecutive days choosing the hard thing over the comfortable thing — is the single most important metric in this organ.
 
-**The biological truth:** The aMCC physically grows with sustained effortful behavior and shrinks with avoidance. The streak is the single most important metric in this organ. It measures consecutive days where Richard chose the hard thing over the comfortable thing.
+### Function
+**What it does:** Intervenes in the gap between knowing and doing, the moment Richard is about to choose the comfortable thing. Fires *in the moment*, before avoidance becomes a pattern. Not the trainer (which calls out patterns after the fact) — the aMCC is a real-time reflex.
+
+**aMCC vs Trainer distinction:** Trainer says "You've avoided the Testing Approach doc for 3 weeks — that's a pattern." aMCC says "You're opening Slack instead of the doc right now. Stop. Open the doc." One is retrospective analysis; the other is in-the-moment intervention.
+
+### Worked Example
+**Quick example:** Richard opens My Day, sees "Testing Approach doc" (P0, 19 days stalled), and starts triaging Slack instead. The aMCC fires: "Testing Approach is the hard thing. Slack triage is comfort. Open the doc." That's the intervention — before the avoidance completes.
 
 ---
 
@@ -69,6 +76,8 @@ The aMCC fires during live sessions — in chat, during the morning routine, whe
 
 The agent should monitor for these avoidance signals during any interaction:
 
+#### Task-Level Signals
+
 | Signal | What It Looks Like | aMCC Response |
 |--------|-------------------|---------------|
 | **Task substitution** | Richard asks to work on a low-leverage task when a high-leverage task is available and unblocked | Fire: "The [high-leverage task] is unblocked and due [date]. Why are we doing [low-leverage task] first?" |
@@ -79,10 +88,17 @@ The agent should monitor for these avoidance signals during any interaction:
 | **Meeting absorption** | Richard accepts or attends a meeting that has no clear output expected from him | Fire: "What's your deliverable from this meeting? If none, decline or send a delegate." |
 | **Delegation reversal** | Richard starts doing work that was delegated to someone else | Fire: "This was delegated to [person] on [date]. Are you taking it back? If so, the delegation failed — log it in device.md." |
 | **Email as escape** | Richard opens email or Slack mid-task when a focus block is active | Fire: "You have a 🔒 Focus block until [time]. Email can wait. What's the next sentence?" |
+
+#### Relationship & Career Signals
+
+| Signal | What It Looks Like | aMCC Response |
+|--------|-------------------|---------------|
 | **Unread message accumulation** | Slack messages or emails from stakeholders sit unread/unanswered for 3+ days. Detectable via DuckDB: `signals.emails_unanswered` (emails needing response, with `days_old` and `priority`), `signals.slack_unanswered` (Slack @mentions where Richard hasn't replied or reacted, with `days_old`, `priority` [critical/high/medium/normal], `richard_responded_24h`, `richard_responded_ever`). Query: `SELECT * FROM signals.slack_unanswered WHERE richard_responded_ever = FALSE AND richard_reacted = FALSE` + `SELECT * FROM signals.emails_unanswered WHERE action_needed = 'respond'`. The longer they sit, the higher the avoidance signal — especially from Brandon (critical), Kate/Lena/Lorena (high). | Fire: "You have [N] Slack mentions and [N] emails unanswered for [X] days. [Person] is waiting. Reply or acknowledge now." |
 | **Career conversation avoidance** | Richard hasn't raised promotion/career trajectory with Brandon in 30+ days. No champion identification. No "what do you need from me" deal-making. Detectable via: meeting series notes (brandon-sync.md — scan for career/promo/growth topics), DuckDB `main.meeting_highlights` for Brandon meetings. | Fire: "When did you last talk to Brandon about YOUR career — not tasks, not projects, your trajectory? The Magic Loop requires you to make the deal explicit. 'I'll deliver X. You help me get to Y.' Have you said those words?" (Ref: amazon-politics.md §1) |
 | **Stakeholder relationship decay** | Key cross-team relationships (Kate, Lena, Lorena, Stacey, Andrew) have no interaction in 14+ days. Detectable via DuckDB `main.relationship_activity`. | Fire: "You haven't engaged [person] in [X] days. Relationships atrophy like muscles. A 2-minute Slack check-in costs nothing and keeps you in their mental model. Send it now." (Ref: amazon-politics.md §4) |
 | **Pre-meeting passivity** | Richard attends a meeting with a senior stakeholder (Kate, Todd, cross-team directors) without back-channeling or pre-selling his position 1:1 beforehand. | Fire: "You're walking into [meeting] cold. Have you pre-sold your position to anyone in the room? Back-channeling isn't politics — it's giving people a chance to feel consulted. One 5-min DM changes the outcome." (Ref: amazon-politics.md §4) |
+
+**Worked example:** Richard opens AM-2 brief, sees Testing Approach doc at P0 (19 days stalled), then asks "can you check the MX search terms?" (Engine Room task). Trigger: task substitution + comfort zone retreat. aMCC fires: "Testing Approach is P0 and unblocked. MX search terms is Engine Room. Open the doc and write one section before touching search terms."
 
 ### Escalation Ladder
 
@@ -108,6 +124,8 @@ If Richard overrides the intervention with a valid reason:
 If Richard overrides without a valid reason:
 - Log it as an Avoidance. Reset the streak if applicable.
 - Note: "Streak reset. Tomorrow is day 1."
+
+**Worked example — full intervention flow:** Richard opens a session and asks to "check MX search terms" (Engine Room work). The hard thing is sending Testing Approach v5 to Brandon (Core strategic work, unblocked). Level 1 fires: "Hey — sending the Testing Approach to Brandon is the hard thing today." Richard says "I'll do it after the search terms." Level 2 fires: "Second time you've drifted. What's making this hard?" Richard says "Brandon might have feedback I'm not ready for." Level 3: "Open the doc. Hit send. I'll wait." Richard sends it. Log: Hard Choice, streak day 2. "Good. That's day 2."
 
 ---
 
@@ -135,6 +153,10 @@ Both produce a valid hard thing. The system doesn't prefer one over the other.
 | **Valuable-and-avoided** | High signal density across 2+ channels, low-or-zero Richard artifact production. Brandon or Kate keeps raising it, meetings keep hitting it, and nothing referenceable has left Richard's desk. | The avoidance IS the signal. If it were easy Richard would have shipped already. |
 | **Valuable-and-latent** | Signal density building but no one — including Richard — has named it as a priority yet. Cross-channel spread is widening, authors are multiplying, no Asana task exists. | Seeing it first is the value. Naming an emerging topic before anyone asks is what L4/L5 work looks like. |
 
+**Worked example (avoided mode):** "Testing Approach doc for Kate" appears in 3 Brandon 1:1s (she asks for status each time), 2 emails from Kate (meeting scheduling, then cancellation), and Richard's own task list (NOT STARTED for 14 workdays). Signal density = 5+ mentions across 3 channels, 2 senior authors. Richard has produced zero artifacts. The avoidance pattern is clear: high-stakes deliverable, senior visibility, repeated prompts, no output. Score clears threshold easily. This is avoided — everyone knows it matters, Richard keeps not doing it.
+
+**Worked example (latent mode):** "AI Max migration" appears in 2 Slack threads (Stacey mentioning US Q2 timeline, Andrew asking about EU implications), 1 Google sync note (Mike Babich flagging account structure changes), and 1 email from Brandon (forwarding a VP ask about readiness). No Asana task exists. No Richard artifact. Signal density = 4 mentions across 3 channels, 4 authors. Score clears threshold. This is latent — nobody has named it as a priority yet, but the signals are converging. The hard thing: write a 1-page AI Max readiness assessment before anyone asks for it.
+
 ### Scoring math
 
 ```
@@ -155,6 +177,8 @@ incumbent_advantage: a challenger at rank 4 must score > incumbent_at_rank_3 × 
 
 Full SQL and join logic live in `~/shared/context/protocols/hard-thing-selection.md`. The protocol is the executable spec; this section is the why.
 
+**Worked example:** "Testing Approach doc" appears in 3 Slack threads (base_weight=1 each, ages 1d/3d/6d), 1 Hedy meeting (base_weight=2, age 2d), 1 email from Brandon (base_weight=1.5, age 0d). Half-life 3.5d → weights: Slack = 0.82 + 0.55 + 0.30 = 1.67, Hedy = 2×0.67 = 1.34, Email = 1.5×1.0 = 1.5. Raw = 4.51. L1 topic → impact_multiplier = 1.0. Last artifact: never → penalty = 0. Score = 4.51 × 1.0 ÷ 1 = 4.51. Channels = 3, authors = 3. Clears threshold.
+
 ### Completion threshold
 
 A candidate is retired from the top-3 when a referenceable artifact is produced. The agent detects this via:
@@ -169,17 +193,11 @@ A candidate is retired from the top-3 when a referenceable artifact is produced.
 
 ### Stickiness (incumbent advantage)
 
-Once a topic holds the #1 slot, it needs momentum, not noise, to be displaced. A challenger at rank 4 must beat the current rank-3 holder by `incumbent_margin × score` (default 1.15×). This prevents the hard thing from flipping daily on churn.
-
-`hard_thing_candidates.incumbent_since` records how long the current #1 has held. If it's been #1 for 7+ days with no artifact produced, escalate to rw-trainer — that's a stuck pattern, not a scoring problem.
+Challenger must beat current holder by `incumbent_margin × score` (default 1.15×) to displace. Prevents daily churn. `hard_thing_candidates.incumbent_since` tracks tenure. If #1 held 7+ days with no artifact → escalate to rw-trainer (stuck pattern).
 
 ### Null state
 
-If no topic clears `score > 2.0` AND `channel_spread >= 2` AND `unique_authors >= 2`, the system returns:
-
-> **No hard thing currently — signals flat.**
-
-Do NOT manufacture one from the task queue. A flat-signal day is a legitimate state. Use it for Level 3 tooling work, delegation cleanup, or rest. Log it in the streak as a neutral day (neither hard-choice nor avoidance).
+No topic clears `score > 2.0` AND `channel_spread >= 2` AND `unique_authors >= 2` → **No hard thing currently — signals flat.** Don't manufacture one. Use flat days for Level 3 tooling, delegation cleanup, or rest. Log as neutral (neither hard-choice nor avoidance).
 
 ### Current top 3
 
@@ -214,6 +232,8 @@ Over time, the aMCC builds a map of Richard's resistance patterns. This is diffe
 | **Competence anxiety** | Delays until "ready" (never ready) | Brandon shares docs with typos. Send at 80%. |
 | **Comfort zone gravity** | Gravitates to bids/keywords over strategy | Close campaign tab. Open strategy doc. Execution is your floor. |
 | **Delegation guilt** | Does work himself after delegation agreed | Name delegate. Send handoff. Delegation multiplies. |
+
+**Worked example — Comfort zone gravity:** Richard has 2 hours before a meeting. Testing Approach doc needs a section written (L1 strategic work). MX keyword bids need adjusting (L3 execution). Richard opens Google Ads first "just to check." 45 minutes later, he's deep in bid adjustments. The aMCC catches this: "You opened campaign tabs instead of the strategy doc. That's comfort zone gravity. Close the tab. Open Testing Approach. The bids can wait until after the meeting."
 | **Urgency addiction** | Responds to every ping mid-focus | "Urgent or important?" If urgent-not-important, defer. |
 | **Promotion passivity** | Waits to be recognized instead of asking. Avoids career conversations with Brandon. Doesn't line up champions. Assumes good work speaks for itself. | "Good work doesn't self-promote. Have you told Brandon what you want this half? Have you identified your champion VPs? The squeaky wheel gets greased — and the quiet one waits." (Ref: amazon-politics.md §1) |
 | **Relationship underinvestment** | Skips 1:1 prep, doesn't back-channel before key meetings, doesn't pre-sell ideas to stakeholders, lets cross-team relationships go cold. | "Relationships control your progress, not being right. When did you last back-channel with [stakeholder] before a group decision? Pre-sell the idea 1:1 before the meeting." (Ref: amazon-politics.md §4) |
@@ -226,6 +246,15 @@ Over time, the aMCC builds a map of Richard's resistance patterns. This is diffe
 The aMCC doesn't just catch task avoidance — it catches *career* avoidance. Some of Richard's hardest things aren't documents or deliverables. They're conversations, asks, and relationship investments that feel uncomfortable but compound over time.
 
 **Reference:** `~/shared/context/body/amazon-politics.md` — load for full framework. Key principles below.
+
+### Key Political Principles the aMCC Enforces
+
+1. **Ask or wait forever.** Managers don't volunteer promotions. If Richard hasn't told Brandon explicitly what he wants, Brandon is focused on the people who have asked.
+2. **Champions take 6 months to build.** Promo packets need VP/Director feedback. Start cultivating now. Over-subscribe: need 4 champions? Ask 7, because some will say no or forget.
+3. **Back-channel before every important meeting.** Pre-selling gives people a chance to feel consulted. The person who back-channels wins even with a weaker proposal than someone who surprises the room.
+4. **Relationships > being right.** Evidence-based testing methodology is correct. But correctness without relationships = being ignored. Build the relationship first, then the evidence lands.
+5. **Solve problems for your boss (the Magic Loop).** The explicit deal: "I'll do everything you need. You make sure I'm rewarded." Make this deal visible, not assumed.
+6. **Scope comes to those who say yes.** The garbage can strategy: take the unsexy work nobody wants. Accumulated scope without fighting for it is how influence grows.
 
 ### When the Hard Thing Is Political
 
@@ -244,15 +273,6 @@ Sometimes the hard thing isn't "write the doc" — it's "send the doc to Brandon
 - Level 3: "You know the polite fiction: 'My career is very important to me. I need to understand how important it is to Amazon.' You don't need those exact words. But you need SOME version of that ask. When?"
 - Level 4: "The quiet worker who waits gets passed over by the pushy one who asks. That's not cynicism — that's how every promotion committee works. Are you the one who asks or the one who waits?"
 
-### Key Political Principles the aMCC Enforces
-
-1. **Ask or wait forever.** Managers don't guess what you want. If you haven't told Brandon explicitly, he's focused on the people who have.
-2. **Champions take 6 months.** If you need VP/Director feedback for a promo packet, start NOW. Over-subscribe (need 4? ask 7).
-3. **Back-channel before every important meeting.** Pre-selling isn't manipulation — it's giving people a chance to feel consulted. The person who back-channels wins even with a weaker proposal.
-4. **Relationships > being right.** Evidence-based testing methodology is correct. But being correct without relationships = being ignored. Invest in the relationship, then the evidence lands.
-5. **Solve problems for your boss.** The Magic Loop: "I'll do everything you need. You make sure I'm rewarded." Make the deal explicit.
-6. **Scope comes to those who say yes.** The garbage can strategy — take the unsexy work nobody wants. That's how you accumulate scope without fighting for it.
-
 ### Worked Example — Political Avoidance Detection
 
 **Situation:** Testing Approach doc is drafted. Richard has been "polishing" it for 3 days instead of sending to Brandon.
@@ -270,7 +290,20 @@ Sometimes the hard thing isn't "write the doc" — it's "send the doc to Brandon
 
 ## Integration with Other Organs
 
-Brain decides what's right; aMCC makes you do it. Eyes provides deadline urgency. Hands has the task list; aMCC identifies THE hard thing from it. Memory provides stakeholder reframes ("Lena is waiting"). Device catches when Richard does device-level work with brain-level time. NS measures after; aMCC intervenes before. Gut prevents time on low-leverage work. Heart ensures loop outputs are acted on. Trainer sets the standard (retrospective); aMCC enforces it (prospective). Amazon Politics provides the playbook for political hard things — promotion asks, champion building, back-channeling, polite fictions, scope positioning.
+| Organ | Relationship |
+|-------|-------------|
+| Brain | Decides what's right; aMCC makes you do it |
+| Hands | Has the task list; aMCC identifies THE hard thing from it |
+| Device | Catches when Richard does device-level work with brain-level time |
+| Eyes | Provides deadline urgency |
+| Memory | Provides stakeholder reframes ("Lena is waiting") |
+| NS | Measures after; aMCC intervenes before |
+| Gut | Prevents time on low-leverage work |
+| Heart | Ensures loop outputs are acted on |
+| Trainer | Sets the standard (retrospective); aMCC enforces it (prospective) |
+| Amazon Politics | Playbook for political hard things — promotion asks, champion building, back-channeling, polite fictions, scope positioning |
+
+**Cross-organ worked example:** Richard opens AM-2 brief. Hands shows Testing Approach at P0 (19d stalled). Brain says it's L1 strategic work. NS shows visibility avoidance at 11wk WORSENING. Memory shows Brandon asked about it in last 1:1. aMCC synthesizes: "Testing Approach is the hard thing. Four organs agree. Open the doc."
 
 ---
 
@@ -290,9 +323,11 @@ Tracks micro-avoidance moments within sessions. When the aMCC fires an intervent
 | Relationship underinvestment | — | — | — | — |
 | Political naivety | — | — | — | — |
 
+**Worked example:** Session starts, Richard opens Asana and picks "MX sitelink update" (comfort zone gravity) instead of Testing Approach doc (the hard thing). aMCC fires Level 1 nudge: "Testing Approach is the hard thing. Sitelinks can wait." Richard switches → log: comfort zone gravity, PUSHED THROUGH. If Richard stays on sitelinks → log: comfort zone gravity, DRIFTED. Ratio updates automatically.
+
 ---
 
-## Growth Model
+## Growth Model & Common Failures
 
 The aMCC is a muscle — it grows with use and atrophies with avoidance.
 
@@ -308,19 +343,14 @@ The aMCC is a muscle — it grows with use and atrophies with avoidance.
 | Resistance types active | 9 | 6 | 3 |
 | Interventions per session | — | < 2 | < 1 |
 
-**End state:** Richard self-selects the hard thing, starts without prompting, ships without delay. The organ goes quiet — not atrophied, but strong enough that the behavior is automatic. Like a well-trained reflex: the hard thing IS the default path.
+**End state:** Richard self-selects the hard thing, starts without prompting, ships without delay. The organ goes quiet — not atrophied, but strong enough that the behavior is automatic.
 
----
-
-## Common Failures in Using This Organ
-
-### Intervention Timing Failures
-1. **Firing on legitimate fire drills.** Not every non-hard-thing task is avoidance. Manager requests, blocked dependencies, and genuine urgency don't reset the streak. Check the "What Does NOT Reset" list before intervening.
+### Common Failures
+1. **Firing on legitimate fire drills.** Not every non-hard-thing task is avoidance. Manager requests, blocked dependencies, genuine urgency don't reset the streak. Check "What Does NOT Reset" list.
 2. **Escalating too fast.** Jumping to Level 3-4 confrontation on first drift. Start at Level 1 nudge. Most avoidance self-corrects with a casual redirect.
-
-### Measurement Failures
 3. **Treating the streak as the goal.** The streak measures behavior, but the goal is shipped artifacts. A 10-day streak with no deliverable is worse than a 3-day streak with a shipped doc.
-4. **Ignoring the resistance type.** Generic "do the hard thing" interventions miss the mark. Name the specific resistance (visibility avoidance, blank page paralysis, etc.) — the counter is different for each.
+4. **Ignoring the resistance type.** Generic "do the hard thing" misses the mark. Name the specific resistance — the counter is different for each.
+5. **Missing the political hard thing.** When a deliverable is done but not shared, the real avoidance is the career conversation, not the task.
 
 ## When to Read This File
 Every session start (check streak + hard thing). When Richard drifts to comfort zone. When trainer flags a STUCK pattern.

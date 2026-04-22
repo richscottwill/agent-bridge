@@ -302,39 +302,33 @@ Same pattern, grouped by project. Filter to Richard's tasks only.
 
 ---
 
-## Step 4: Wiki Pipeline Triage
+## Step 4: Wiki Callout (one-line readiness check)
 
-**NOTE:** The `ABPS AI - Content` Asana project is deprecated as of 2026-04-17 (see soul.md). Wiki state now lives in DuckDB (`wiki.publication_registry`, `wiki.throughput`), the Kiro dashboard (`shared/dashboards/wiki-search.html` Pipeline view), local files at `~/shared/wiki/agent-created/`, and SharePoint `Documents/Artifacts/`. Do not read or write to the old Asana project.
+Compressed 2026-04-21 per karpathy verdict. The full wiki triage (stale articles, SharePoint drift, new-article routing) is now handled by the weekly `wiki-maintenance.kiro.hook`. AM-Frontend's job is a single surfaced line, not a decision point.
 
-Read `am-wiki-state.json` (produced by AM-Backend phase 3B from `build-wiki-index.py` + `signals.wiki_candidates` + the SharePoint artifacts cache).
+Query both sources and emit one line. If both return empty, emit nothing.
 
-Surface three things:
+```sql
+-- Pipeline state
+SELECT COUNT(*) FILTER (WHERE stage='draft') AS draft,
+       COUNT(*) FILTER (WHERE stage='review') AS review,
+       COUNT(*) FILTER (WHERE stage='final') AS final_stage,
+       COUNT(*) FILTER (WHERE stage='published') AS published
+FROM wiki.publication_registry;
 
-**1. Pipeline shape** — one-line summary of dashboard counts (draft/review/final/active/published). No action needed unless counts look broken.
-
-**2. SharePoint drift** — list any local files flagged `local_newer_than_sharepoint` that are NOT `_meta/` auto-generated. Those need a sync to SharePoint (wiki-maintenance hook handles this weekly; mention only if drift is unexpected).
-
-**3. Stale articles + wiki candidates** —
-- If `stale_count > 0`: list each stale article with suggested refresh action.
-- For each entry in `new_candidates` with `quality_score >= 10.0`:
-  - If `status = "covered"`: note "enrich existing article — [action]" if `action` specifies one; otherwise no-op.
-  - If `status = "weak_candidate"`: monitor only, no action.
-  - If `status = null` or uncovered: flag for new wiki article. Route to wiki-editor agent (do NOT create an Asana task in the deprecated Content project).
-
-```
-📚 WIKI PIPELINE — [N] published · [N] draft · [N] review · [N] final
-
-SharePoint drift: [N content files newer locally] (meta-only: [N])
-Stale articles: [N]
-Candidate signals:
-  - [topic] (quality [X]): [covered by X.md — enrich with Y | new article needed | monitor]
+-- Top uncovered candidate
+SELECT topic, ROUND(quality_score, 1) AS quality
+FROM signals.wiki_candidates
+WHERE coverage_status = 'uncovered' OR coverage_status IS NULL
+ORDER BY quality_score DESC LIMIT 1;
 ```
 
-### Execute Wiki Actions
-- **Enrich existing article**: delegate to wiki-editor agent (editor → researcher → writer → critic → librarian).
-- **New article needed**: delegate to wiki-editor agent.
-- **SharePoint sync**: defer to `wiki-maintenance` hook unless drift is urgent.
-- **No action**: most runs. The wiki pipeline is self-healing; Step 4 is a readiness check, not a production step.
+Output format:
+```
+📚 Wiki: [N] in pipeline (draft/review/final/published). Top uncovered candidate: [topic] (quality [X]).
+```
+
+If the pipeline query returns all-zero counts AND the candidate query returns no rows, emit nothing. No routing, no action, no decision. Weekly wiki-maintenance handles the rest.
 
 ---
 
@@ -452,15 +446,6 @@ After pipeline completes, verify output files exist and are current:
 - `data/command-center-data.json` — check `generated` timestamp is today
 
 If any file is stale or missing, flag in the brief: "⚠️ Dashboard [name] failed to refresh — [reason]."
-
-### 6C. Push Updated Dashboards to SharePoint
-
-Sync the Excel dashboards to SharePoint for cross-device access:
-- `ps-forecast-tracker.xlsx` → `Kiro-Drive/Dashboards/`
-- `ps-pacing-dashboard.xlsx` → `Kiro-Drive/Dashboards/`
-- `command-center.xlsx` → `Kiro-Drive/`
-
-Only push if the local file's modified time is newer than the last push (check via `sharepoint_list_files` modified date).
 
 ### 6D. Interactive Adjustments (Richard-directed, if needed)
 

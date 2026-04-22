@@ -11,62 +11,64 @@ Last updated: 2026-04-04 (Karpathy Run 25 — Five Levels compressed to 2 lines 
 
 ## Decision Principles (ranked by frequency of application)
 
+### Evidence & Measurement
 1. **Evidence over intuition** — Never scale without validated test results. Every initiative goes through structured testing before becoming baseline.
-2. **Efficiency over escalation** — When competitors increase pressure, respond with smarter execution (OCI, ad copy, LP optimization) rather than budget escalation or bid wars.
 3. **Holistic measurement over segmented goals** — Evaluate performance at the total program level, not Brand vs Non-Brand in isolation.
-4. **Phased rollout over full migration** — Prefer 50/50 splits, phased testing, and controlled rollouts over big-bang changes.
-5. **Cross-functional partnership over solo execution** — Position PS team as connective tissue between platform capabilities and business objectives, not just a channel executor.
-6. **Compression over complexity** — Consolidate campaigns, simplify structures, reduce operational overhead to let algorithms work better.
 7. **Customer research over assumptions** — Ground messaging and strategy in actual customer data (e.g., Sole Proprietor study drove ad copy overhaul).
+
+### Execution & Operations
+2. **Efficiency over escalation** — When competitors increase pressure, respond with smarter execution (OCI, ad copy, LP optimization) rather than budget escalation or bid wars.
+4. **Phased rollout over full migration** — Prefer 50/50 splits, phased testing, and controlled rollouts over big-bang changes.
+6. **Compression over complexity** — Consolidate campaigns, simplify structures, reduce operational overhead to let algorithms work better.
+
+### Organization & Positioning
+5. **Cross-functional partnership over solo execution** — Position PS team as connective tissue between platform capabilities and business objectives, not just a channel executor.
 
 ## Prediction Template
 
-When Richard faces a new decision, check:
-1. Does it map to an existing principle? Predict he will favor that direction
-2. Is there data available? He will want to see it before deciding
-3. Can it be phased? He will prefer phased over big-bang
-4. Does it involve cross-team work? He will lean into partnership, not solo execution
-5. Is someone pushing for speed over evidence? He will push back with a test proposal
+### Decision Checks
+When Richard faces a new decision, predict his position by running these checks in order. If 3+ checks align, confidence is HIGH. If 1-2 align, confidence is MEDIUM — flag the tension.
 
-**Worked example — AU OCI launch decision:** Lena pushed for immediate full rollout. Template check: #4 (phased > big-bang), #1 (evidence first — CA showed +18.5% vs OP2), #5 (cross-team — MCS page builds needed). Speed pressure from Lena. Result: proposed phased approach with measurement framework. Three principles aligned → high confidence prediction.
+1. **Existing principle?** → Check the Decision Log first. If a principle directly applies, Richard will follow it — principles override gut feel.
+2. **Data available?** → No data = "let's run a test first." Richard won't commit without evidence. If data exists, he'll want to see it before deciding.
+3. **Can it be phased?** → Phased rollout beats big-bang every time. Phased = lower risk + built-in measurement. If someone pushes all-at-once, Richard pushes back with a split test.
+4. **Cross-team involved?** → Richard leans into partnership over solo execution. Shared ownership builds political capital and distributes risk.
+5. **Speed vs evidence pressure?** → Richard's default counter to "just do it" is "let's test it first." He'll propose a test design rather than capitulate to urgency.
+
+### Worked Example
+**AU OCI launch decision:** Lena pushed for immediate full rollout. Template check: #3 (phased > big-bang), #1 (evidence first — CA showed +18.5% vs OP2), #4 (cross-team — MCS page builds needed). Speed pressure from Lena. Result: proposed phased approach with measurement framework. Three principles aligned → HIGH confidence prediction.
 
 ---
 
 ## Decision Log
 
-Decisions have a relevance half-life. Not every decision stays useful forever.
-
 **Relevance tiers:**
-- **FOUNDATIONAL** — Shaped a principle or changed how the team operates. Stays indefinitely. (D1, D2, D3, D5, D6, D8)
-- **ACTIVE** — Still influencing current work or pending audit. Stays until outcome is resolved. (D4, D9, D10)
-- **RESOLVED** — Outcome confirmed, lesson extracted. Compress to one-liner, archive full entry after 90 days. (D7 is the first candidate)
+- **FOUNDATIONAL** — Shaped a principle or changed team operations. Stays indefinitely. (D1, D2, D3, D5, D6, D8)
+- **ACTIVE** — Influencing current work or pending audit. Stays until resolved. (D4, D9, D10)
+- **RESOLVED** — Outcome confirmed, lesson extracted. Compress to one-liner, archive after 90 days. (D7 first candidate)
 
 ### Decay Protocol
 
-Karpathy governs, loop executes:
-1. When a decision's outcome is VALIDATED or INVALIDATED (via nervous system Loop 1), tag it RESOLVED
-2. Extract the lesson into the relevant principle (strengthen, qualify, or retire)
-3. Compress the full entry to: `D[X]: [Name] — [Outcome]. Reinforced Principle #[N].`
-4. After 90 days in RESOLVED state with no references, archive to `~/shared/wiki/archive/`
+Karpathy governs. When a decision outcome is confirmed (via nervous system Loop 1):
+1. Tag RESOLVED → extract lesson into the relevant principle
+2. Compress to: `D[X]: [Name] — [Outcome]. Reinforced Principle #[N].`
+3. After 90 days RESOLVED with no references → archive to `~/shared/wiki/archive/`
 
-### Active Decisions (influencing current work)
+Example: D7 (Polaris weblab) shows +30% regs after 30d → tag RESOLVED, extract "phased rollout validates before full migration" into Principle #4, compress to `D7: Polaris Weblab — VALIDATED +30% regs. Reinforced Principle #4.` Archive after 90d.
 
-| ID | Decision | Detail | Principles |
-|----|----------|--------|-----------|
-| D4 | AU LP Full Migration | Lena overrode phased rollout — full Polaris switch. Executing. | — |
-| D9 | AI Max Testing | US-first with measurement guardrails. Same OCI discipline. | #4, #1 |
-| D10 | F90 Lifecycle | Legal SIMs for 3+ purchases targeting. Extends PS beyond registration. | #5 |
+### All Decisions
 
-### Foundational Decisions (shaped principles — stays indefinitely)
-
-| ID | Decision | Detail | Principles |
-|----|----------|--------|-----------|
-| D1 | OCI Implementation | Phased rollout with measurement framework. | #1, #4 |
-| D2 | Competitive Response to Walmart | Bid caps + NB efficiency via OCI, do NOT escalate auction. | #2, #3 |
-| D3 | Ad Copy Overhaul (SP Study) | Shift to price/quality/selection messaging from bulk/B2B. | #7, #1 |
-| D5 | Campaign Consolidation | Consolidate campaigns to strengthen OCI data signals. | #6, #1 |
-| D6 | Engagement Channel | Lifecycle channel via ABMA partnership, 13%→30% match rate. | #5, #1 |
-| D8 | OP1 Structure | Problem→test→result→scale across 5 workstreams. | #5, #1 |
+| ID | Tier | Decision | Detail | Principles |
+|----|------|----------|--------|-----------|
+| D1 | FOUND | OCI Implementation | Phased rollout with measurement framework. | #1, #4 |
+| D2 | FOUND | Competitive Response to Walmart | Bid caps + NB efficiency via OCI, do NOT escalate auction. | #2, #3 |
+| D3 | FOUND | Ad Copy Overhaul (SP Study) | Shift to price/quality/selection messaging from bulk/B2B. | #7, #1 |
+| D4 | ACTIVE | AU LP Full Migration | Lena overrode phased rollout — full Polaris switch. Executing. | — |
+| D5 | FOUND | Campaign Consolidation | Consolidate campaigns to strengthen OCI data signals. | #6, #1 |
+| D6 | FOUND | Engagement Channel | Lifecycle channel via ABMA partnership, 13%→30% match rate. | #5, #1 |
+| D8 | FOUND | OP1 Structure | Problem→test→result→scale across 5 workstreams. | #5, #1 |
+| D9 | ACTIVE | AI Max Testing | US-first with measurement guardrails. Same OCI discipline. | #4, #1 |
+| D10 | ACTIVE | F90 Lifecycle | Legal SIMs for 3+ purchases targeting. Extends PS beyond registration. | #5 |
 
 <!-- Full decision details: db("SELECT id, name, tier, description, alternatives, rationale, principles, confidence FROM decisions ORDER BY id") -->
 
@@ -77,8 +79,8 @@ Karpathy governs, loop executes:
 Sequential. Each funds the next. Don't skip ahead.
 
 ### Level 1: Sharpen Yourself
-Build consistent strategic output habits. Systems in place: Trainer, autoresearch loop, context cascade.
-Key metric: consecutive weeks with a strategic artifact shipped.
+Consistent strategic output. Infrastructure: Trainer, autoresearch loop, context cascade.
+Key metric: consecutive weeks shipping a strategic artifact.
 
 ### Level 2: Drive & Communicate Worldwide Testing
 Scalable tests across all PS accounts globally. Drive end-to-end: hypothesis → design → execution → communication → results.
@@ -100,40 +102,62 @@ Key metric: a PS workflow that runs end-to-end without human intervention.
 
 Graduation is not a date — it's evidence. The nervous system (Loop 6) tracks these.
 
-| From → To | Gate | Evidence Required |
-|-----------|------|-------------------|
-| 1 → 2 | Consistent output | 4 consecutive weeks with a strategic artifact shipped (aMCC streak proxy) |
-| 2 → 3 | Test ownership | 3+ WW tests with written status docs that the team references without asking Richard |
-| 3 → 4 | Team adoption | 1+ tool built by Richard and actively used by a teammate for 30+ days |
-| 4 → 5 | Strategic authority | Published POV or framework that influenced a team-level decision (Kate or Brandon cited it) |
+#### L1 → L2: Consistent Output
+Gate: 4 consecutive weeks with a strategic artifact shipped (aMCC streak proxy).
+
+#### L2 → L3: Test Ownership
+Gate: 3+ WW tests with written status docs that the team references without asking Richard.
+
+#### L3 → L4: Team Adoption
+Gate: 1+ tool built by Richard and actively used by a teammate for 30+ days.
+
+#### L4 → L5: Strategic Authority
+Gate: Published POV or framework that influenced a team-level decision (Kate or Brandon cited it).
 
 ### Current Level Status
 
-**Position:** Level 1 (struggling — 0 consecutive weeks, 14 workdays at zero). Level 2 work happening in parallel (OCI 7/10 markets at 100%, AU weekly updates, ad copy tests, W13 callouts, Flash sections). Level 3 accelerating (prediction engine, data layer, callout pipeline, attention tracker, Slack ingestion). Level 5 also active (agent bridge, DuckDB agent state, Asana integration). Level 1 gate not passed — Testing Approach doc for Kate is the convergence point (L2 artifact that proves L1 consistency).
+| Level | Status | Evidence |
+|-------|--------|----------|
+| L1 | 🔴 Struggling | 0 consecutive weeks, 14 workdays at zero |
+| L2 | 🟡 Active | OCI 7/10 markets, AU weekly updates, ad copy tests, W13 callouts, Flash sections |
+| L3 | 🟢 Accelerating | Prediction engine, data layer, callout pipeline, attention tracker, Slack ingestion |
+| L4 | ⬜ Queued | — |
+| L5 | 🟡 Active | Agent bridge, DuckDB agent state, Asana integration |
 
-**Rule:** You can DO work at multiple levels simultaneously, but you don't GRADUATE until the gate is met. The aMCC tracks Level 1 progress via the streak. The nervous system tracks all levels via Loop 6.
+**Convergence point:** Testing Approach doc for Kate is the L2 artifact that proves L1 consistency.
+
+### Level Status Rules
+
+#### Worked Example — Level 1 Gate Check
+Week of 4/5: Testing Approach v5 shipped through full wiki pipeline (PUBLISH, 8.4/10). That's 1 consecutive week with a strategic artifact. Gate requires 4 consecutive weeks. Next 3 weeks must each produce a shipped artifact (e.g., WBR callout doc, AEO POV draft, MX test design) to pass the gate. Missing one week resets the counter to 0.
+
+#### Multi-Level Activity Rule
+You can DO work at multiple levels simultaneously, but you don't GRADUATE until the gate is met. The aMCC tracks Level 1 progress via the streak. The nervous system tracks all levels via Loop 6.
 
 ---
 
-## OP1 Strategic Narrative
+## OP1 Strategic Narrative & Leverage Assessment
 
-**Thesis:** 2026 investments are justified by validated 2025 signals — no speculative bets. PS is shifting from keyword-driven execution to an automated, audience-centric engine. The differentiator is cross-functional collaboration (MarTech, Legal, Data Science, MCS, ABMA).
-
+### OP1 Narrative
 **Structure:** 5 workstreams, each following problem→test→result→scale:
 1. OCI Bidding  2. Modern Search  3. Audiences  4. User Experience  5. Algorithmic Ads
 
+**Thesis:** 2026 investments are justified by validated 2025 signals — no speculative bets. PS is shifting from keyword-driven execution to an automated, audience-centric engine. The differentiator is cross-functional collaboration (MarTech, Legal, Data Science, MCS, ABMA).
+
 Full draft: `~/shared/wiki/research/op1-ps-testing-framework-draft.md`
 
----
+**Worked example — OCI Bidding workstream:** Problem: manual bidding couldn't scale across 10 markets. Test: phased OCI rollout in CA (2025-Q3), measured +18.5% CVR vs OP2. Result: validated signal. Scale: 7/10 markets live by 2026-Q1. This is the template — every workstream follows the same problem→test→result→scale arc, with cross-functional dependencies (MarTech for data, MCS for pages, Legal for targeting).
 
-## Leverage Assessment Framework
+### Leverage Tiebreakers
 
-| # | Tiebreaker | Example |
-|---|-----------|---------|
-| 1 | Strategic artifacts > tactical execution | Test design doc beats sitelink update |
-| 2 | Compounding > one-and-done | Playbook beats single campaign build |
-| 3 | Visibility > invisible | Kingpin update beats internal cleanup |
-| 4 | Automation > manual repetition | Recurring task → flag as tool candidate |
-| 5 | 30-day test: "Will this matter in 30 days?" | If no, don't let it take a Core slot |
+When multiple tasks compete for Core slots, apply these rules in priority order:
 
-**Worked example:** 3 tasks compete for Core: (1) update MX sitelinks, (2) draft Testing Approach doc for Kate, (3) fix broken Asana automation. #2 wins — strategic artifact (#1), compounds (#2), visibility to Kate (#3). #3 is one-and-done. #1 fails 30-day test (#5).
+| # | Rule | Quick Test | Example |
+|---|------|-----------|---------|
+| 1 | Strategic artifacts beat tactical execution | Does it produce a reusable document? | Test design doc > sitelink update |
+| 2 | Compounding work beats one-and-done tasks | Does completing this create future leverage? | Playbook > single campaign build |
+| 3 | Visible work beats invisible work | Will Kate or Brandon see the output? | Kingpin update > internal cleanup |
+| 4 | Automation beats manual repetition | Is this task recurring? If yes, flag as tool candidate | Script > manual weekly pull |
+| 5 | 30-day test | Will this matter in 30 days? If no, it doesn't deserve a Core slot | — |
+
+**Worked example:** 3 tasks compete for Core: (1) update MX sitelinks, (2) draft Testing Approach doc for Kate, (3) fix broken Asana automation. #2 wins — it's a strategic artifact (rule 1), it compounds (rule 2), and Kate will see it (rule 3). #3 is one-and-done, failing rule 2. #1 fails the 30-day test (rule 5).

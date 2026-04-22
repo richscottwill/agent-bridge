@@ -1,0 +1,2002 @@
+{
+  "generated_at": "2026-04-21T23:45:13-07:00",
+  "total_broken": 300,
+  "by_referrer": {
+    "~/.kiro/hooks/wiki-maintenance.kiro.hook": [
+      {
+        "broken_path": "~/shared/context/intake/archive/wiki-candidates-YYYY-WNN.md",
+        "line_number": 8,
+        "context": "\"prompt\": \"Run weekly wiki maintenance. This replaces the wiki_lint recurring task formerly embedded in EOD Phase 4. Manual trigger only \u2014 usually Friday.\\n\\nIMPORTANT: Richard is in Pacific Time (Ame",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/agent-created/_meta/health-YYYY-MM-DD.md",
+        "line_number": 8,
+        "context": "\"prompt\": \"Run weekly wiki maintenance. This replaces the wiki_lint recurring task formerly embedded in EOD Phase 4. Manual trigger only \u2014 usually Friday.\\n\\nIMPORTANT: Richard is in Pacific Time (Ame",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/agent-created/_meta/audit-YYYY-MM-DD.md",
+        "line_number": 8,
+        "context": "\"prompt\": \"Run weekly wiki maintenance. This replaces the wiki_lint recurring task formerly embedded in EOD Phase 4. Manual trigger only \u2014 usually Friday.\\n\\nIMPORTANT: Richard is in Pacific Time (Ame",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/agents/wiki-concierge.json": [
+      {
+        "broken_path": "~/shared/wiki/demand-log.md",
+        "line_number": 4,
+        "context": "\"prompt\": \"You are the wiki-concierge \\u2014 the reader-facing interface to the wiki. When someone has a question, you find the answer across published articles, synthesize it, and deliver it with cit",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/agents/AIPowerUserCapabilities-gpu-pipeline-autofix.json": [
+      {
+        "broken_path": "/home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/context/gpu-pipeline-autofix/pipeline-autofix-guide.md",
+        "line_number": 3,
+        "context": "\"resources\" : [ \"file://.kiro/steering/**/*.md\", \"file://*/.kiro/steering/**/*.md\", \"file://src/*/.kiro/steering/**/*.md\", \"file://~/.kiro/steering/**/*.md\", \"file:///home/prichwil/.aim/packages/AIPow",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/agents/AgentSpacesAIM-wbr-update.json": [
+      {
+        "broken_path": "~/shared/agentspaces-wbr/updates/YYYY-MM-DD-wbr-update.md",
+        "line_number": 39,
+        "context": "\"prompt\": \"You are the AgentSpaces WBR Update agent. You help generate weekly business review updates for AgentSpaces by combining live metrics with qualitative inputs from the user.\\n\\n## Startup\\n\\n",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/agents/wiki-writer.md": [
+      {
+        "broken_path": "~/shared/context/body/organ.md",
+        "line_number": 67,
+        "context": "For body system: `[Organ Name](~/shared/context/body/organ.md)`.}",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/agents/AIPowerUserCapabilities-gpu-coder.json": [
+      {
+        "broken_path": "/home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/context/gpu-coder/AGENTS.md",
+        "line_number": 12,
+        "context": "\"file:///home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/context/gpu-coder/AGENTS.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/context/gpu-coder/cr-review-loop.md",
+        "line_number": 13,
+        "context": "\"file:///home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/context/gpu-coder/cr-review-loop.md\"",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/agents/AIPowerUserCapabilities-gpu-reviewer.json": [
+      {
+        "broken_path": "/home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/context/gpu-reviewer/cr-reviewer-patterns.md",
+        "line_number": 12,
+        "context": "\"file:///home/prichwil/.aim/packages/AIPowerUserCapabilities-1.0/eventId-6431234474/context/gpu-reviewer/cr-reviewer-patterns.md\"",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/agents/body-system/agent-bridge-sync.md": [
+      {
+        "broken_path": "~/shared/context/active/portable-layer.md",
+        "line_number": 27,
+        "context": "Read the portable layer manifest (~/shared/context/active/portable-layer.md) for the complete file list.",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/.kiro/steering/rw-trainer.md",
+        "line_number": 41,
+        "context": "| ~/.kiro/steering/rw-trainer.md | portable-body/steering/ |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/context/active/morning-routine-experiments.md",
+        "line_number": 43,
+        "context": "| ~/shared/context/active/morning-routine-experiments.md | portable-body/steering/ |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/callouts/callout-principles.md",
+        "line_number": 44,
+        "context": "| ~/shared/wiki/callouts/callout-principles.md | portable-body/steering/ |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/context/active/portable-layer.md",
+        "line_number": 46,
+        "context": "| ~/shared/context/active/portable-layer.md | portable-body/ |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/research/ad-copy-results.md",
+        "line_number": 50,
+        "context": "| ~/shared/wiki/research/ad-copy-results.md | portable-body/research/ |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/research/competitor-intel.md",
+        "line_number": 51,
+        "context": "| ~/shared/wiki/research/competitor-intel.md | portable-body/research/ |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/research/oci-performance.md",
+        "line_number": 52,
+        "context": "| ~/shared/wiki/research/oci-performance.md | portable-body/research/ |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/research/op1-ps-testing-framework-draft.md",
+        "line_number": 53,
+        "context": "| ~/shared/wiki/research/op1-ps-testing-framework-draft.md | portable-body/research/testing-framework-template.md |",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/agents/body-system/rw-trainer.md": [
+      {
+        "broken_path": "~/.kiro/steering/rw-trainer.md",
+        "line_number": 15,
+        "context": "You exist for deep coaching that doesn't belong in every chat. The steering file (`~/.kiro/steering/rw-trainer.md`) handles the always-on voice and quick checks. You handle:",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/context/intake/annual-review-2026-analysis.md",
+        "line_number": 40,
+        "context": "The 2026 Annual Review (Meets High Bar / Solid Strength) is the most important coaching input. Full analysis: `~/shared/context/intake/annual-review-2026-analysis.md`",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/agents/body-system/karpathy.md": [
+      {
+        "broken_path": "~/shared/context/active/morning-routine-experiments.md",
+        "line_number": 17,
+        "context": "| `~/shared/context/active/morning-routine-experiments.md` | Experiment engine, research priors |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/.kiro/steering/callout-principles.md",
+        "line_number": 28,
+        "context": "**Output quality (style guides, context files, hook prompts):** Style guides (`~/.kiro/steering/richard-style-*.md`), market context files (`~/shared/wiki/callouts/*-context.md`), callout principles (",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/agents/wiki-team/wiki-researcher.md": [
+      {
+        "broken_path": "~/shared/wiki/roadmap.md",
+        "line_number": 201,
+        "context": "7. Signal the writer by updating the roadmap in ~/shared/wiki/roadmap.md \u2014 move the entry from \"research\" to \"writing\" stage",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/agents/wiki-team/wiki-librarian.md": [
+      {
+        "broken_path": "~/shared/wiki/wiki-structure.md",
+        "line_number": 30,
+        "context": "- Confirm `tags` match `~/shared/wiki/wiki-structure.md` taxonomy. Flag new tags for editor approval.",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/wiki-structure.md",
+        "line_number": 33,
+        "context": "4. **Assign category and position** in `~/shared/wiki/wiki-structure.md`.",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/wiki-index.md",
+        "line_number": 36,
+        "context": "- Append this article to `~/shared/wiki/wiki-index.md` using the index entry format.",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/SITEMAP.md",
+        "line_number": 39,
+        "context": "8. **Update SITEMAP:** Append the new article to `~/shared/wiki/SITEMAP.md`.",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/markdown-to-xwiki.md",
+        "line_number": 41,
+        "context": "a. Read the conversion rules from `~/shared/wiki/markdown-to-xwiki.md`",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/index.md",
+        "line_number": 47,
+        "context": "d. Determine category tags from `~/shared/wiki/index.md` artifact category",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/wiki-structure.md",
+        "line_number": 105,
+        "context": "Maintain the structure at `~/shared/wiki/wiki-structure.md`:",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/wiki-index.md",
+        "line_number": 137,
+        "context": "Maintain `~/shared/wiki/wiki-index.md` \u2014 this is the wiki's equivalent of `llms.txt`. It's the single file an agent swarm reads first to understand what the wiki contains and how to navigate it. It in",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/agents/wiki-team/wiki-critic.md": [
+      {
+        "broken_path": "~/shared/wiki/agent-created/_meta/ready-for-final.md",
+        "line_number": 194,
+        "context": "5. Signal the editor/librarian by appending to `~/shared/wiki/agent-created/_meta/ready-for-final.md`:",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/agent-created/_meta/revision-queue.md",
+        "line_number": 211,
+        "context": "5. Signal the writer to revise \u2014 append a line to `~/shared/wiki/agent-created/_meta/revision-queue.md`:",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/agent-created/_meta/escalations.md",
+        "line_number": 222,
+        "context": "4. Append to `~/shared/wiki/agent-created/_meta/escalations.md`:",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/agents/wiki-team/wiki-writer.md": [
+      {
+        "broken_path": "~/shared/context/body/organ.md",
+        "line_number": 68,
+        "context": "For body system: `[Organ Name](~/shared/context/body/organ.md)`.}",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/agents/wiki-team/wiki-editor.md": [
+      {
+        "broken_path": "~/shared/wiki/roadmap.md",
+        "line_number": 35,
+        "context": "Maintain the roadmap at `~/shared/wiki/roadmap.md`:",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/roadmap.md",
+        "line_number": 140,
+        "context": "Once triaged, record the assignment in `~/shared/wiki/agent-created/_meta/review-queue.md` or append to the roadmap at `~/shared/wiki/roadmap.md` with stage = `research`. Then invoke the wiki-research",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/agents/wiki-team/wiki-concierge.md": [
+      {
+        "broken_path": "~/shared/wiki/wiki-index.md",
+        "line_number": 17,
+        "context": "1. Read `~/shared/wiki/wiki-index.md` \u2014 the machine-readable manifest. Use it to identify candidate articles by summary, tags, type, and dependency graph.",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/demand-log.md",
+        "line_number": 47,
+        "context": "Append to `~/shared/wiki/demand-log.md`:",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/demand-report.md",
+        "line_number": 62,
+        "context": "When the wiki-editor requests it (or weekly), produce a demand summary at `~/shared/wiki/demand-report.md`:",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/wiki-index.md",
+        "line_number": 90,
+        "context": "1. **wiki-index.md first (O(1) lookup)** \u2014 Read `~/shared/wiki/wiki-index.md`. Match on summary, tags, key_entities, action_verbs from AGENT_CONTEXT. This is the fastest path \u2014 use it before anything ",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/context/active/context-catalog.md",
+        "line_number": 91,
+        "context": "2. **context-catalog.md (broader)** \u2014 If the index doesn't narrow enough, check `~/shared/context/active/context-catalog.md` for cross-system references that span wiki + body + artifacts.",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/specs/wiki-sharepoint-sync/design.md": [
+      {
+        "broken_path": "~/shared/context/wiki/wiki-index.md",
+        "line_number": 342,
+        "context": "wiki_index_path: \"~/shared/context/wiki/wiki-index.md\"",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/specs/wiki-sharepoint-sync/requirements.md": [
+      {
+        "broken_path": "~/shared/context/wiki/wiki-index.md",
+        "line_number": 19,
+        "context": "- **Wiki_Index**: The file at `~/shared/context/wiki/wiki-index.md` that catalogs all Articles with slugs, parent/child relationships, and dependency graphs.",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/specs/skills-powers-adoption/design.md": [
+      {
+        "broken_path": "~/shared/context/skills-powers/inventory.md",
+        "line_number": 170,
+        "context": "### Inventory file \u2014 `~/shared/context/skills-powers/inventory.md`",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/context/skills-powers/inventory.md",
+        "line_number": 172,
+        "context": "**Location**: `~/shared/context/skills-powers/inventory.md`. This is inside the audit's active-scope (R2.8 of the audit) so any path-reference from the inventory to a skill or power counts as an activ",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/specs/mcp-integration-optimization/design.md": [
+      {
+        "broken_path": "~/shared/artifacts/index.md",
+        "line_number": 505,
+        "context": "Category tags from ~/shared/artifacts/index.md artifact category",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/specs/mcp-integration-optimization/requirements.md": [
+      {
+        "broken_path": "~/shared/artifacts/index.md",
+        "line_number": 152,
+        "context": "5. WHEN the Body_System publishes to XWiki for the first time, THE Body_System SHALL create the page under a consistent namespace (e.g., `PaidSearch/[ArticleTitle]`) with category tags matching the ar",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/specs/shared-directory-reorg/requirements.md": [
+      {
+        "broken_path": "~/shared/DIRECTORY-MAP.md",
+        "line_number": 59,
+        "context": "1. THE Directory_Map SHALL be created as a standalone file at `~/shared/DIRECTORY-MAP.md` AND the directory map section of `spine.md` SHALL reference the Directory_Map as the authoritative source",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/audit-reports/blind-evaluator-tests.md",
+        "line_number": 162,
+        "context": "6. THE Blind_Evaluator_Test prompts and expected answers SHALL be stored as a reusable test file at `~/shared/audit-reports/blind-evaluator-tests.md`",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/specs/slack-deep-context/design.md": [
+      {
+        "broken_path": "~/shared/portable-body/voice/richard-style-slack.md",
+        "line_number": 632,
+        "context": "| Route to | New file: `~/shared/portable-body/voice/richard-style-slack.md` \u2014 structured by context (DM, channel, thread) and formality level |",
+        "suggested_action": "update path to /home/prichwil/.kiro/steering/richard-style-slack.md (file exists there)"
+      },
+      {
+        "broken_path": "~/shared/context/wiki/demand-log.md",
+        "line_number": 763,
+        "context": "d. Add new entry to ~/shared/context/wiki/demand-log.md with source attribution and one-sentence summary",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/portable-body/voice/richard-style-slack.md",
+        "line_number": 869,
+        "context": "| Voice corpus analysis | `~/shared/portable-body/voice/richard-style-slack.md` | New file, not an organ |",
+        "suggested_action": "update path to /home/prichwil/.kiro/steering/richard-style-slack.md (file exists there)"
+      },
+      {
+        "broken_path": "~/shared/context/wiki/demand-log.md",
+        "line_number": 876,
+        "context": "| Wiki candidates | `~/shared/context/wiki/demand-log.md` | Deduplicated |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/portable-body/voice/richard-style-slack.md",
+        "line_number": 913,
+        "context": "| Voice corpus | `~/shared/portable-body/voice/richard-style-slack.md` \u2014 plain markdown |",
+        "suggested_action": "update path to /home/prichwil/.kiro/steering/richard-style-slack.md (file exists there)"
+      }
+    ],
+    "~/.kiro/specs/slack-deep-context/tasks.md": [
+      {
+        "broken_path": "~/shared/portable-body/voice/richard-style-slack.md",
+        "line_number": 92,
+        "context": "- Output to `~/shared/portable-body/voice/richard-style-slack.md`",
+        "suggested_action": "update path to /home/prichwil/.kiro/steering/richard-style-slack.md (file exists there)"
+      },
+      {
+        "broken_path": "~/shared/context/wiki/demand-log.md",
+        "line_number": 142,
+        "context": "- Append new candidates to `~/shared/context/wiki/demand-log.md`",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/specs/slack-deep-context/requirements.md": [
+      {
+        "broken_path": "~/shared/portable-body/voice/richard-style-slack.md",
+        "line_number": 157,
+        "context": "4. THE Backfill_Scan SHALL produce a voice analysis document at ~/shared/portable-body/voice/richard-style-slack.md containing Slack-specific writing patterns, with examples grouped by context (DM, ch",
+        "suggested_action": "update path to /home/prichwil/.kiro/steering/richard-style-slack.md (file exists there)"
+      },
+      {
+        "broken_path": "~/shared/context/wiki/demand-log.md",
+        "line_number": 261,
+        "context": "3. THE Enrichment_Process SHALL add identified threads to ~/shared/context/wiki/demand-log.md as wiki article candidates with source attribution and a one-sentence summary",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/specs/kiro-setup-optimization/tasks.md": [
+      {
+        "broken_path": "~/.kiro/steering/product.md",
+        "line_number": 121,
+        "context": "- Create `~/.kiro/steering/product.md` describing the body system, its purpose, and the Five Levels framework",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/specs/attention-tracker/design.md": [
+      {
+        "broken_path": "~/shared/context/intake/attention-insight.md",
+        "line_number": 445,
+        "context": "attention-tracker journal >> ~/shared/context/intake/attention-insight.md",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/specs/attention-tracker/tasks.md": [
+      {
+        "broken_path": "~/shared/context/intake/attention-insight.md",
+        "line_number": 204,
+        "context": "- Wire Decision Journal hook (`attention-tracker journal >> ~/shared/context/intake/attention-insight.md`)",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/.kiro/steering/slack-deep-context.md": [
+      {
+        "broken_path": "~/shared/context/voice/richard-style-slack.md",
+        "line_number": 269,
+        "context": "Write analysis to `~/shared/context/voice/richard-style-slack.md`",
+        "suggested_action": "update path to /home/prichwil/.kiro/steering/richard-style-slack.md (file exists there)"
+      },
+      {
+        "broken_path": "~/shared/context/voice/richard-style-slack.md",
+        "line_number": 281,
+        "context": "- Output file: `~/shared/context/voice/richard-style-slack.md`",
+        "suggested_action": "update path to /home/prichwil/.kiro/steering/richard-style-slack.md (file exists there)"
+      },
+      {
+        "broken_path": "~/shared/wiki/demand-log.md",
+        "line_number": 696,
+        "context": "- Full demand list \u2192 append to `~/shared/wiki/demand-log.md`",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/context/experiments/amcc-modified-exp9.md": [
+      {
+        "broken_path": "~/shared/research/op1-ps-testing-framework-draft.md",
+        "line_number": 125,
+        "context": "**Implementation intention (Gollwitzer):** IF Richard opens a new chat session and the Testing Approach doc has not been worked on today, THEN the first action is: open `~/shared/research/op1-ps-testi",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/.kiro/steering/rw-trainer.md",
+        "line_number": 159,
+        "context": "| Trainer | Sets the standard via weekly pattern reviews and coaching (lives in `~/.kiro/steering/rw-trainer.md`). aMCC enforces it in real-time: Trainer says \"ship weekly\" \u2192 aMCC says \"ship now.\" Tra",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/context/experiments/device-modified-exp14.md": [
+      {
+        "broken_path": "~/shared/.kiro/agents/eyes-chart.md",
+        "line_number": 46,
+        "context": "- **Tool:** `python3 ~/shared/tools/progress-charts/generate.py` \u00b7 Agent: `~/shared/.kiro/agents/eyes-chart.md`",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/context/wiki/context-catalog.md",
+        "line_number": 132,
+        "context": "| Context Catalog | \u2705 | 3/25 | `~/shared/context/wiki/context-catalog.md` |",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/context/experiments/brain-modified-exp6.md": [
+      {
+        "broken_path": "~/shared/research/op1-ps-testing-framework-draft.md",
+        "line_number": 140,
+        "context": "Structure: 5 workstreams (OCI Bidding, Modern Search, Audiences, User Experience, Algorithmic Ads), each problem\u2192test\u2192result\u2192scale. Full draft: `~/shared/research/op1-ps-testing-framework-draft.md`. D",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/context/experiments/brain-modified-exp11.md": [
+      {
+        "broken_path": "~/shared/research/op1-ps-testing-framework-draft.md",
+        "line_number": 137,
+        "context": "Structure: 5 workstreams (OCI Bidding, Modern Search, Audiences, User Experience, Algorithmic Ads), each problem\u2192test\u2192result\u2192scale. Full draft: `~/shared/research/op1-ps-testing-framework-draft.md`. D",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/context/experiments/device-modified-exp4.md": [
+      {
+        "broken_path": "~/shared/.kiro/agents/eyes-chart.md",
+        "line_number": 46,
+        "context": "- **Tool:** `python3 ~/shared/tools/progress-charts/generate.py` \u00b7 Agent: `~/shared/.kiro/agents/eyes-chart.md`",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/context/wiki/context-catalog.md",
+        "line_number": 145,
+        "context": "| Context Catalog | \u2705 | 3/25 | `~/shared/context/wiki/context-catalog.md` |",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/context/active/karpathy-loop-run2.log": [
+      {
+        "broken_path": "~/shared/wiki/meetings/manager/brandon-sync.md",
+        "line_number": 1025,
+        "context": "Q2: `meetings/manager/brandon-sync.md` (full path: `~/shared/wiki/meetings/manager/brandon-sync.md`)\u001b[0m\u001b[0m",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/context/body/soul.md",
+        "line_number": 6577,
+        "context": "\u001b[38;5;9mFailed to validate tool parameters: '~/shared/context/body/soul.md' does not exist",
+        "suggested_action": "update path to /home/prichwil/.kiro/steering/soul.md (file exists there)"
+      },
+      {
+        "broken_path": "~/.kiro/agents/eval-a.md",
+        "line_number": 24676,
+        "context": "cat ~/.kiro/agents/eval-a.json 2>/dev/null || cat ~/.kiro/agents/eval-a.md 2>/dev/null || echo \"No eval-a config found\" (using tool: shell)",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/context/intake/session-log.md": [
+      {
+        "broken_path": "~/shared/context/wiki/staging/testing-approach-kate-v5.md",
+        "line_number": 583,
+        "context": "[2026-04-06] Topic: Wiki staging file recovery from Kiro server cache | Actions: Scanned all Kiro server cache snapshots (~/.kiro-server/data/User/globalStorage/) for wiki files not persisted to ~/sha",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/agent-created/kiro-team-readme.md",
+        "line_number": 1555,
+        "context": "[2026-04-17] Topic: Kiro team onboarding kit folder created + README index | Actions: Created Kiro-Drive/Artifacts/kiro-team/ on OneDrive, moved agent-sharepoint-protocol.md there, deleted old copy in",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/context/intake/experiment-scope-expansion-proposal.md": [
+      {
+        "broken_path": "~/.kiro/steering/callout-principles.md",
+        "line_number": 22,
+        "context": "| Callout principles | `~/.kiro/steering/callout-principles.md` | REMOVE a principle \u2192 does callout quality degrade? |",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/context/intake/compression-report-run16.md": [
+      {
+        "broken_path": "~/.kiro/steering/rw-trainer.md",
+        "line_number": 71,
+        "context": "- `~/.kiro/steering/rw-trainer.md` \u2014 entire file (653w)",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/.kiro/steering/rw-trainer.md",
+        "line_number": 83,
+        "context": "- rw-tracker.md: remove \"Steering file: ~/.kiro/steering/rw-trainer.md\" pointer",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/context/intake/karpathy-compression-sinks.md": [
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-25-body-system-architecture.md",
+        "line_number": 254,
+        "context": "**Where it goes:** Wiki article: `~/shared/artifacts/strategy/2026-03-25-body-system-architecture.md` (expand with operational details) OR a new `~/shared/artifacts/tools/system-operations-guide.md`.",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/tools/system-operations-guide.md",
+        "line_number": 254,
+        "context": "**Where it goes:** Wiki article: `~/shared/artifacts/strategy/2026-03-25-body-system-architecture.md` (expand with operational details) OR a new `~/shared/artifacts/tools/system-operations-guide.md`.",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/context/body/heart.md": [
+      {
+        "broken_path": "~/.kiro/steering/callout-principles.md",
+        "line_number": 24,
+        "context": "| Callout principles | `~/.kiro/steering/callout-principles.md` | output_quality | REMOVE principle \u2192 quality degrades? |",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/context/body/brain.md": [
+      {
+        "broken_path": "~/shared/wiki/research/op1-ps-testing-framework-draft.md",
+        "line_number": 152,
+        "context": "Full draft: `~/shared/wiki/research/op1-ps-testing-framework-draft.md`",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/context/body/device.md": [
+      {
+        "broken_path": "~/shared/.kiro/agents/eyes-chart.md",
+        "line_number": 57,
+        "context": "- **Tool:** `python3 ~/shared/tools/progress-charts/generate.py` \u00b7 Agent: `~/shared/.kiro/agents/eyes-chart.md`",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/agent-created/operations/budget-forecast-helper-spec.md": [
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-30-ieccp-planning-framework.md",
+        "line_number": 192,
+        "context": "- ie%CCP framework for budget context - source: ~/shared/artifacts/strategy/2026-03-30-ieccp-planning-framework.md",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/agent-created/archive/blind-evaluator-tests.md": [
+      {
+        "broken_path": "~/shared/DIRECTORY-MAP.md",
+        "line_number": 13,
+        "context": "Give a fresh agent ONLY ~/shared/DIRECTORY-MAP.md and these prompts. No other context.",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/agent-created/archive/asana-sync-protocol.md": [
+      {
+        "broken_path": "~/shared/context/changelog.md",
+        "line_number": 125,
+        "context": "Append to `~/shared/context/changelog.md`:",
+        "suggested_action": "update path to /home/prichwil/shared/context/body/changelog.md (file exists there)"
+      }
+    ],
+    "~/shared/wiki/agent-created/archive/experiment-scope-expansion-proposal-adopted-20260403.md": [
+      {
+        "broken_path": "~/.kiro/steering/callout-principles.md",
+        "line_number": 31,
+        "context": "| Callout principles | `~/.kiro/steering/callout-principles.md` | REMOVE a principle \u2192 does callout quality degrade? |",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/agent-created/archive/session-bootstrap.md": [
+      {
+        "broken_path": "~/.kiro/steering/rw-trainer.md",
+        "line_number": 22,
+        "context": "1. `~/.kiro/steering/rw-trainer.md` \u2014 The trainer's behavior rules, mediocrity patterns, and coaching framework",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/agent-created/archive/session-learnings-2026-03-25.md": [
+      {
+        "broken_path": "~/shared/context/wiki/context-catalog.md",
+        "line_number": 21,
+        "context": "- Context catalog (`~/shared/context/wiki/context-catalog.md`) eliminates the \"scour through everything\" problem. Any agent finds the right source in <10 seconds.",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/agent-created/_meta/context-catalog.md": [
+      {
+        "broken_path": "~/shared/context/active/session-bootstrap.md",
+        "line_number": 62,
+        "context": "| Session Bootstrap | `~/shared/context/active/session-bootstrap.md` | Legacy bootstrap file (pre-body-system). Files to read at session start, tool access, Asana bridge, To-Do structure, key people, ",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/context/active/portable-layer.md",
+        "line_number": 65,
+        "context": "| Portable Layer | `~/shared/context/active/portable-layer.md` | System architecture manifest: what's portable vs environment-specific. Export protocol (weekly Friday email + GitHub). Bootstrap protoc",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/context/active/morning-routine-experiments.md",
+        "line_number": 66,
+        "context": "| Morning Routine Experiments | `~/shared/context/active/morning-routine-experiments.md` | Experiment engine for the morning routine: hypothesis generation, behavioral scoring signals, research priors",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/callouts/callout-principles.md",
+        "line_number": 76,
+        "context": "| `~/shared/wiki/callouts/callout-principles.md` | Master style guide for all WBR callouts: data integrity rules, attribution standards, framing, length (110w \u00b110), structure (headline/WoW/YoY/Note), ",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/research/op1-ps-testing-framework-draft.md",
+        "line_number": 91,
+        "context": "| OP1 Draft | `~/shared/wiki/research/op1-ps-testing-framework-draft.md` | Full OP1 \"Testing Approach & Year Ahead\" draft. 5 workstreams (OCI, Modern Search, Audiences, UX, Algorithmic Ads). Problem \u2192",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/research/ad-copy-results.md",
+        "line_number": 92,
+        "context": "| Ad Copy Results | `~/shared/wiki/research/ad-copy-results.md` | SP study findings (price/quality/selection messaging), UK test results (+86% CTR, +31% regs), IT early results, EU4 translation status",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/research/competitor-intel.md",
+        "line_number": 93,
+        "context": "| Competitor Intel | `~/shared/wiki/research/competitor-intel.md` | Competitive landscape across all markets: Walmart (US), weareuncapped (UK), recht24-7 (DE), bruneau (FR), Shopify (CA/IT), algo-mas ",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/research/oci-performance.md",
+        "line_number": 94,
+        "context": "| OCI Performance | `~/shared/wiki/research/oci-performance.md` | OCI rollout timeline, test vs control data, impact summary (+35K regs, $16.7MM OPS), MCC structure, known issues (hvocijid duplicates)",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/research/daily-brief-latest.md",
+        "line_number": 95,
+        "context": "| Daily Brief | `~/shared/wiki/research/daily-brief-latest.md` | Most recent daily brief email content | When checking what was briefed today | \"What was in today's brief?\" |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/research/automation-impact/ai-automation-impact.md",
+        "line_number": 96,
+        "context": "| AI Automation Impact | `~/shared/wiki/research/automation-impact/ai-automation-impact.md` | Operational time estimates for PS work. HTML dashboard version also available. | When estimating automatio",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/.kiro/steering/rw-trainer.md",
+        "line_number": 109,
+        "context": "| RW Trainer | `~/.kiro/steering/rw-trainer.md` | Coaching framework, mediocrity pattern detection, leverage assessment, interaction rules, morning routine priorities, weekly/monthly cadences | When c",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/SITEMAP.md",
+        "line_number": 215,
+        "context": "| SITEMAP | `~/shared/wiki/SITEMAP.md` | Full directory index with relationships and status | \u2014 | When browsing all artifacts at a glance |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/README.md",
+        "line_number": 216,
+        "context": "| README | `~/shared/wiki/README.md` | Document standard, naming convention, audience guide, staleness rules | \u2014 | When creating new artifacts or understanding the standard |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/wiki-index.md",
+        "line_number": 231,
+        "context": "| Wiki Index | `~/shared/wiki/wiki-index.md` | Machine-readable index OVER `~/shared/wiki/`. Categories, dependency graph, update log. The single file an agent reads to discover all published articles",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/wiki-structure.md",
+        "line_number": 232,
+        "context": "| Wiki Structure | `~/shared/wiki/wiki-structure.md` | Taxonomy, navigation hierarchy, category-to-folder mapping, publishing workflow, controlled vocabulary for tags | When publishing articles. When ",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/roadmap.md",
+        "line_number": 233,
+        "context": "| Wiki Roadmap | `~/shared/wiki/roadmap.md` | Content pipeline: Kate doc sections (10 articles in staging), research brief status, sources used, writing standards | When checking wiki pipeline status.",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/demand-log.md",
+        "line_number": 234,
+        "context": "| Demand Log | `~/shared/wiki/demand-log.md` | Tracked demand signals \u2014 questions asked that the wiki couldn't answer | When deciding what to write next. |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/README.md",
+        "line_number": 352,
+        "context": "| What's the artifact standard? | `~/shared/wiki/README.md` |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/SITEMAP.md",
+        "line_number": 353,
+        "context": "| What's in the artifact sitemap? | `~/shared/wiki/SITEMAP.md` |",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/agent-created/_meta/health-2026-04-04.md": [
+      {
+        "broken_path": "~/shared/wiki/reporting/2026-03-25-competitive-intel-tracker.md",
+        "line_number": 45,
+        "context": "~/shared/wiki/reporting/2026-03-25-competitive-intel-tracker.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/archive/context/2026-03-25-competitive-intel-tracker.md",
+        "line_number": 49,
+        "context": "~/shared/wiki/archive/context/2026-03-25-competitive-intel-tracker.md",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/agent-created/_meta/audit-2026-04-17-run2.md": [
+      {
+        "broken_path": "~/shared/research/competitor-intel.md",
+        "line_number": 37,
+        "context": "strategy/competitive-landscape.md      \u2192 ~/shared/research/competitor-intel.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/program-details/2026-03-25-body-system-architecture.md",
+        "line_number": 39,
+        "context": "strategy/agent-architecture.md         \u2192 ~/shared/artifacts/program-details/2026-03-25-body-system-architecture.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-25-agentic-marketing-landscape.md",
+        "line_number": 41,
+        "context": "strategy/agentic-ps-vision.md          \u2192 ~/shared/artifacts/strategy/2026-03-25-agentic-marketing-landscape.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-30-ieccp-planning-framework.md",
+        "line_number": 43,
+        "context": "markets/mx-market-wiki.md              \u2192 ~/shared/artifacts/strategy/2026-03-30-ieccp-planning-framework.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/best-practices/2026-03-25-invoice-po-process-guide.md",
+        "line_number": 45,
+        "context": "markets/mx-market-wiki.md              \u2192 ~/shared/artifacts/best-practices/2026-03-25-invoice-po-process-guide.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/testing/2026-03-25-au-nb-mro-trades-proposal.md",
+        "line_number": 47,
+        "context": "markets/au-market-wiki.md              \u2192 ~/shared/artifacts/testing/2026-03-25-au-nb-mro-trades-proposal.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/program-details/2026-03-25-au-market-wiki.md",
+        "line_number": 49,
+        "context": "markets/market-reference.md            \u2192 ~/shared/artifacts/program-details/2026-03-25-au-market-wiki.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/program-details/2026-03-25-mx-market-wiki.md",
+        "line_number": 50,
+        "context": "markets/market-reference.md            \u2192 ~/shared/artifacts/program-details/2026-03-25-mx-market-wiki.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-25-cross-market-playbook.md",
+        "line_number": 51,
+        "context": "markets/market-reference.md            \u2192 ~/shared/artifacts/strategy/2026-03-25-cross-market-playbook.md",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/agent-created/reviews/market-reference-revisions.md": [
+      {
+        "broken_path": "~/shared/artifacts/program-details/2026-03-25-au-market-wiki.md",
+        "line_number": 92,
+        "context": "> Full detail: [AU Market Wiki](~/shared/artifacts/program-details/2026-03-25-au-market-wiki.md)",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-25-cross-market-playbook.md",
+        "line_number": 121,
+        "context": "For cross-market scaling methodology, see [Cross-Market Playbook](~/shared/artifacts/strategy/2026-03-25-cross-market-playbook.md). For competitive patterns, see [Competitive Landscape](competitive-la",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/agent-created/research/slack-deep-context-test-prompts.md": [
+      {
+        "broken_path": "~/shared/context/wiki/demand-log.md",
+        "line_number": 115,
+        "context": "- Demand list should exist in `~/shared/context/wiki/demand-log.md` with new entries",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/agent-created/kiro-steering/11-kiro-hooks-cookbook.md": [
+      {
+        "broken_path": "~/shared/wiki/agent-created/callout-principles.md",
+        "line_number": 126,
+        "context": "\"prompt\": \"Check this callout against ~/shared/wiki/agent-created/callout-principles.md (or the equivalent principles doc). Flag: missing so-what, weak data, unclear ask, wrong register. Don't rewrite",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/retrospectives/YYYY-WW.md",
+        "line_number": 148,
+        "context": "\"prompt\": \"Run my weekly retro. Pull: (1) Asana tasks I completed this week grouped by project, (2) meetings I had with one-line notes on each, (3) Slack messages I sent grouped by topic, (4) emails I",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/agent-created/kiro-steering/12-kiro-team-orchestration.md": [
+      {
+        "broken_path": "~/shared/callouts/2026/W16/AU.md",
+        "line_number": 78,
+        "context": "6. Librarian reviews, edits, promotes to ~/shared/callouts/2026/W16/AU.md.",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/agent-created/strategy/genai-search-traffic.md": [
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-25-aeo-ai-overviews-pov.md",
+        "line_number": 108,
+        "context": "- AEO POV existing actions \u2014 source: ~/shared/artifacts/strategy/2026-03-25-aeo-ai-overviews-pov.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/testing/2026-03-25-email-overlay-ww-rollout.md",
+        "line_number": 110,
+        "context": "- Adobe Ad Cloud reporting segment \u2014 source: ~/shared/artifacts/testing/2026-03-25-email-overlay-ww-rollout.md",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/agent-created/strategy/body-system-architecture.md": [
+      {
+        "broken_path": "~/shared/context/active/morning-routine-experiments.md",
+        "line_number": 98,
+        "context": "- Habit loop framework \u2014 source: ~/shared/context/active/morning-routine-experiments.md \u2192 Duhigg section",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/agent-created/markets/ww-testing-tracker.md": [
+      {
+        "broken_path": "~/shared/artifacts/testing/2026-03-25-workstream-user-experience.md",
+        "line_number": 119,
+        "context": "- In-context registration and Gated Guest \u2014 source: ~/shared/artifacts/testing/2026-03-25-workstream-user-experience.md",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/agent-created/markets/au-market-wiki.md": [
+      {
+        "broken_path": "~/shared/context/active/callouts/au/au-context.md",
+        "line_number": 78,
+        "context": "- AU budget and OP2 targets \u2014 source: ~/shared/context/active/callouts/au/au-context.md",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/wiki/state-files/ww-testing-state.md": [
+      {
+        "broken_path": "~/shared/wiki/agent-created/testing/X.md",
+        "line_number": 238,
+        "context": "- Wiki article: [path to ~/shared/wiki/agent-created/testing/X.md]",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/tools/asana/_sync_tasks.json": [
+      {
+        "broken_path": "~/shared/wiki/research/op1-ps-testing-framework-draft.md",
+        "line_number": 682,
+        "context": "\"kiro_rw\": \"4/4: 3d overdue. THE HARD THING. Apr 16 meeting canceled but Brandon reviewing first. 6 subtasks \\ufffd\\ufffd\\ufffd need contributor sections from Andrew, Stacey, Yun, Adi. Draft exists at",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/tools/sharepoint-sync/.sync-manifest.json": [
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/markets/au-market-overview.md",
+        "line_number": 102,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/markets/au-market-overview.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/markets/au-paid-search-market-overview.md",
+        "line_number": 118,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/markets/au-paid-search-market-overview.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/markets/oci-execution-guide.md",
+        "line_number": 142,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/markets/oci-execution-guide.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/markets/oci-implementation-guide.md",
+        "line_number": 150,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/markets/oci-implementation-guide.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/markets/polaris-rollout-status.md",
+        "line_number": 158,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/markets/polaris-rollout-status.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/operations/mx-ps-handoff-guide.md",
+        "line_number": 222,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/operations/mx-ps-handoff-guide.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/operations/oci-methodology-knowledge-share.md",
+        "line_number": 230,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/operations/oci-methodology-knowledge-share.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/operations/oci-playbook-rewrite.md",
+        "line_number": 238,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/operations/oci-playbook-rewrite.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/operations/polaris-rollout-timeline.md",
+        "line_number": 246,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/operations/polaris-rollout-timeline.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/research/oci-performance.md",
+        "line_number": 318,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/research/oci-performance.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/research/op1-ps-testing-framework-draft.md",
+        "line_number": 326,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/research/op1-ps-testing-framework-draft.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/research/testing-approach-outline.md",
+        "line_number": 350,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/research/testing-approach-outline.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/strategy/01-grok-synthesizer.md",
+        "line_number": 358,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/strategy/01-grok-synthesizer.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/strategy/02-the-director.md",
+        "line_number": 366,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/strategy/02-the-director.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/strategy/03-the-questioner.md",
+        "line_number": 374,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/strategy/03-the-questioner.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/strategy/04-the-operator.md",
+        "line_number": 382,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/strategy/04-the-operator.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/strategy/05-the-engineer.md",
+        "line_number": 390,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/strategy/05-the-engineer.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/strategy/f90-lifecycle-strategy.md",
+        "line_number": 454,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/strategy/f90-lifecycle-strategy.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/strategy/oci-business-case.md",
+        "line_number": 478,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/strategy/oci-business-case.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/testing/enhanced-match-liveramp.md",
+        "line_number": 566,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/testing/enhanced-match-liveramp.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/testing/oci-rollout-methodology.md",
+        "line_number": 574,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/testing/oci-rollout-methodology.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/testing/oci-rollout-playbook.md",
+        "line_number": 582,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/testing/oci-rollout-playbook.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/testing/testing-approach-outline.md",
+        "line_number": 630,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/testing/testing-approach-outline.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/testing/workstream-oci-bidding.md",
+        "line_number": 670,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/testing/workstream-oci-bidding.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "/home/prichwil/shared/wiki/agent-created/testing/workstream-user-experience-v5.md",
+        "line_number": 678,
+        "context": "\"file_path\": \"/home/prichwil/shared/wiki/agent-created/testing/workstream-user-experience-v5.md\",",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/tools/sharepoint-sync/config.yaml": [
+      {
+        "broken_path": "~/shared/wiki/wiki-index.md",
+        "line_number": 31,
+        "context": "wiki_index_path: \"~/shared/wiki/wiki-index.md\"",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/tools/sharepoint-sync/cli.py": [
+      {
+        "broken_path": "~/shared/wiki/testing/article.md",
+        "line_number": 6,
+        "context": "python3 cli.py --file ~/shared/wiki/testing/article.md --force",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/tools/wiki-asana-sync/sync-batch.json": [
+      {
+        "broken_path": "~/shared/wiki/reporting/2026-03-25-ai-automation-impact.md",
+        "line_number": 7,
+        "context": "\"filepath\": \"~/shared/wiki/reporting/2026-03-25-ai-automation-impact.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/reporting/2026-03-25-au-keyword-cpa-dashboard.md",
+        "line_number": 37,
+        "context": "\"filepath\": \"~/shared/wiki/reporting/2026-03-25-au-keyword-cpa-dashboard.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/reporting/2026-03-25-wbr-callout-guide.md",
+        "line_number": 65,
+        "context": "\"filepath\": \"~/shared/wiki/reporting/2026-03-25-wbr-callout-guide.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/operations/2026-03-25-stakeholder-comms-guide.md",
+        "line_number": 93,
+        "context": "\"filepath\": \"~/shared/wiki/operations/2026-03-25-stakeholder-comms-guide.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2022-10-yahoo-jp-nb-experiment.md",
+        "line_number": 126,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2022-10-yahoo-jp-nb-experiment.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2023-01-jp-nb-experiment-google.md",
+        "line_number": 156,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2023-01-jp-nb-experiment-google.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2023-06-audience-post-mortem.md",
+        "line_number": 186,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2023-06-audience-post-mortem.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2023-08-jp-app-testing-results.md",
+        "line_number": 216,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2023-08-jp-app-testing-results.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2024-12-it-bid-modifiers-test.md",
+        "line_number": 246,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2024-12-it-bid-modifiers-test.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-03-25-ad-copy-testing-framework.md",
+        "line_number": 276,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-03-25-ad-copy-testing-framework.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-03-25-ai-max-test-design.md",
+        "line_number": 304,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-03-25-ai-max-test-design.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-03-25-au-nb-mro-trades-proposal.md",
+        "line_number": 332,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-03-25-au-nb-mro-trades-proposal.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-03-25-email-overlay-ww-rollout.md",
+        "line_number": 360,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-03-25-email-overlay-ww-rollout.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-03-25-oci-rollout-playbook.md",
+        "line_number": 388,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-03-25-oci-rollout-playbook.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-03-25-ps-operations.md",
+        "line_number": 422,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-03-25-ps-operations.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-03-25-ps-team-map.md",
+        "line_number": 449,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-03-25-ps-team-map.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-03-25-testing-appendix.md",
+        "line_number": 476,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-03-25-testing-appendix.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-03-25-testing-approach-kate.md",
+        "line_number": 503,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-03-25-testing-approach-kate.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-03-25-testing-methodology.md",
+        "line_number": 532,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-03-25-testing-methodology.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-03-25-workstream-algorithmic-ads.md",
+        "line_number": 559,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-03-25-workstream-algorithmic-ads.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-03-25-workstream-audiences-lifecycle.md",
+        "line_number": 587,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-03-25-workstream-audiences-lifecycle.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-03-25-workstream-modern-search.md",
+        "line_number": 615,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-03-25-workstream-modern-search.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-03-25-workstream-oci-bidding.md",
+        "line_number": 643,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-03-25-workstream-oci-bidding.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-03-25-workstream-user-experience.md",
+        "line_number": 671,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-03-25-workstream-user-experience.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-04-03-testing-approach-outline.md",
+        "line_number": 699,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-04-03-testing-approach-outline.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-04-04-enhanced-match-liveramp.md",
+        "line_number": 724,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-04-04-enhanced-match-liveramp.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/testing/2026-04-04-project-baloo-overview.md",
+        "line_number": 753,
+        "context": "\"filepath\": \"~/shared/wiki/testing/2026-04-04-project-baloo-overview.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/operations/2026-03-25-budget-forecast-helper-spec.md",
+        "line_number": 782,
+        "context": "\"filepath\": \"~/shared/wiki/operations/2026-03-25-budget-forecast-helper-spec.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/operations/2026-03-25-campaign-link-generator-spec.md",
+        "line_number": 809,
+        "context": "\"filepath\": \"~/shared/wiki/operations/2026-03-25-campaign-link-generator-spec.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/operations/2026-03-25-google-ads-campaign-structure.md",
+        "line_number": 836,
+        "context": "\"filepath\": \"~/shared/wiki/operations/2026-03-25-google-ads-campaign-structure.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/operations/2026-03-25-invoice-po-process-guide.md",
+        "line_number": 861,
+        "context": "\"filepath\": \"~/shared/wiki/operations/2026-03-25-invoice-po-process-guide.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/operations/2026-03-25-landing-page-testing-playbook.md",
+        "line_number": 887,
+        "context": "\"filepath\": \"~/shared/wiki/operations/2026-03-25-landing-page-testing-playbook.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/strategy/2026-03-25-aeo-ai-overviews-pov.md",
+        "line_number": 913,
+        "context": "\"filepath\": \"~/shared/wiki/strategy/2026-03-25-aeo-ai-overviews-pov.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/strategy/2026-03-25-agent-architecture.md",
+        "line_number": 941,
+        "context": "\"filepath\": \"~/shared/wiki/strategy/2026-03-25-agent-architecture.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/strategy/2026-03-25-agentic-marketing-landscape.md",
+        "line_number": 974,
+        "context": "\"filepath\": \"~/shared/wiki/strategy/2026-03-25-agentic-marketing-landscape.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/strategy/2026-03-25-agentic-ps-vision.md",
+        "line_number": 1002,
+        "context": "\"filepath\": \"~/shared/wiki/strategy/2026-03-25-agentic-ps-vision.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/strategy/2026-03-25-body-system-architecture.md",
+        "line_number": 1030,
+        "context": "\"filepath\": \"~/shared/wiki/strategy/2026-03-25-body-system-architecture.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/strategy/2026-03-25-competitive-landscape.md",
+        "line_number": 1058,
+        "context": "\"filepath\": \"~/shared/wiki/strategy/2026-03-25-competitive-landscape.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/strategy/2026-03-25-cross-market-playbook.md",
+        "line_number": 1092,
+        "context": "\"filepath\": \"~/shared/wiki/strategy/2026-03-25-cross-market-playbook.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/strategy/2026-03-25-f90-lifecycle-strategy.md",
+        "line_number": 1120,
+        "context": "\"filepath\": \"~/shared/wiki/strategy/2026-03-25-f90-lifecycle-strategy.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/strategy/2026-03-30-ieccp-planning-framework.md",
+        "line_number": 1148,
+        "context": "\"filepath\": \"~/shared/wiki/strategy/2026-03-30-ieccp-planning-framework.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/strategy/2026-04-04-genai-search-traffic.md",
+        "line_number": 1177,
+        "context": "\"filepath\": \"~/shared/wiki/strategy/2026-04-04-genai-search-traffic.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/strategy/2026-04-04-oci-business-case.md",
+        "line_number": 1206,
+        "context": "\"filepath\": \"~/shared/wiki/strategy/2026-04-04-oci-business-case.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/strategy/2026-04-04-q2-initiative-status.md",
+        "line_number": 1235,
+        "context": "\"filepath\": \"~/shared/wiki/strategy/2026-04-04-q2-initiative-status.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/markets/2026-03-25-ab-paid-search-wiki.md",
+        "line_number": 1264,
+        "context": "\"filepath\": \"~/shared/wiki/markets/2026-03-25-ab-paid-search-wiki.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/markets/2026-03-25-au-market-wiki.md",
+        "line_number": 1290,
+        "context": "\"filepath\": \"~/shared/wiki/markets/2026-03-25-au-market-wiki.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/markets/2026-03-25-market-reference.md",
+        "line_number": 1315,
+        "context": "\"filepath\": \"~/shared/wiki/markets/2026-03-25-market-reference.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/markets/2026-03-25-mx-market-wiki.md",
+        "line_number": 1349,
+        "context": "\"filepath\": \"~/shared/wiki/markets/2026-03-25-mx-market-wiki.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/markets/2026-03-25-ww-testing-tracker.md",
+        "line_number": 1377,
+        "context": "\"filepath\": \"~/shared/wiki/markets/2026-03-25-ww-testing-tracker.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/markets/2026-04-04-au-market-wiki.md",
+        "line_number": 1405,
+        "context": "\"filepath\": \"~/shared/wiki/markets/2026-04-04-au-market-wiki.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/markets/2026-04-04-oci-execution-guide.md",
+        "line_number": 1433,
+        "context": "\"filepath\": \"~/shared/wiki/markets/2026-04-04-oci-execution-guide.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/markets/2026-04-04-polaris-rollout-status.md",
+        "line_number": 1461,
+        "context": "\"filepath\": \"~/shared/wiki/markets/2026-04-04-polaris-rollout-status.md\",",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/markets/2026-04-04-team-workload-distribution.md",
+        "line_number": 1489,
+        "context": "\"filepath\": \"~/shared/wiki/markets/2026-04-04-team-workload-distribution.md\",",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/tools/comms/send_brief_v4.py": [
+      {
+        "broken_path": "~/shared/wiki/research/daily-brief-latest.md",
+        "line_number": 24,
+        "context": "body += \"<p>Full brief at ~/shared/wiki/research/daily-brief-latest.md</p>\"",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/tools/attention-tracker/install.sh": [
+      {
+        "broken_path": "~/shared/context/intake/attention-insight.md",
+        "line_number": 70,
+        "context": "echo \"  attention-tracker journal >> ~/shared/context/intake/attention-insight.md\"",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/11e389aacb.txt": [
+      {
+        "broken_path": "~/.kiro/steering/callout-principles.md",
+        "line_number": 21,
+        "context": "| Callout principles | `~/.kiro/steering/callout-principles.md` | REMOVE a principle \u2192 does callout quality degrade? |",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/16a13a1fc3.txt": [
+      {
+        "broken_path": "~/shared/callouts/2026/W16/AU.md",
+        "line_number": 78,
+        "context": "6. Librarian reviews, edits, promotes to ~/shared/callouts/2026/W16/AU.md.",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/ff7261cc44.txt": [
+      {
+        "broken_path": "~/shared/artifacts/testing/2026-03-25-oci-rollout-methodology.md",
+        "line_number": 39,
+        "context": "We use a phased rollout: E2E \u2192 25% \u2192 50% \u2192 100% NB. Each phase has a CPA gate (115% at 25%, 110% at 50%). Full details in [OCI Rollout Methodology](~/shared/artifacts/testing/2026-03-25-oci-rollout-me",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/b93cb53d83.txt": [
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-25-f90-lifecycle-strategy.md",
+        "line_number": 71,
+        "context": "- F90 connection \u2014 source: ~/shared/artifacts/strategy/2026-03-25-f90-lifecycle-strategy.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/testing/2026-03-25-workstream-oci-bidding.md",
+        "line_number": 72,
+        "context": "- DMA impact on OCI \u2014 source: ~/shared/artifacts/testing/2026-03-25-workstream-oci-bidding.md \u2192 DE variance",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/e062ce6b3f.txt": [
+      {
+        "broken_path": "~/shared/artifacts/testing/2026-03-25-oci-rollout-methodology.md",
+        "line_number": 20,
+        "context": "> This is the hands-on execution guide. For the strategic methodology and results, see [OCI Rollout Methodology](~/shared/artifacts/testing/2026-03-25-oci-rollout-methodology.md).",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/testing/2026-03-25-oci-rollout-methodology.md",
+        "line_number": 59,
+        "context": "Follow the phased framework in [OCI Rollout Methodology](~/shared/artifacts/testing/2026-03-25-oci-rollout-methodology.md). Gate criteria: 115% at 25%, 110% at 50%.",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/89792f452b.txt": [
+      {
+        "broken_path": "~/shared/wiki/agent-created/testing/X.md",
+        "line_number": 224,
+        "context": "- Wiki article: [path to ~/shared/wiki/agent-created/testing/X.md]",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/a95a36d7f4.txt": [
+      {
+        "broken_path": "~/shared/context/active/callouts/au/au-context.md",
+        "line_number": 65,
+        "context": "- AU budget and OP2 targets \u2014 source: ~/shared/context/active/callouts/au/au-context.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/context/active/callouts/au/au-context.md",
+        "line_number": 69,
+        "context": "- Polaris migration decision \u2014 source: ~/shared/context/active/callouts/au/au-context.md \u2192 Active Email Threads",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/4865b7a247.txt": [
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-30-ieccp-planning-framework.md",
+        "line_number": 141,
+        "context": "- ie%CCP framework and customer value \u2014 source: ~/shared/artifacts/strategy/2026-03-30-ieccp-planning-framework.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/best-practices/2026-03-25-google-ads-campaign-structure.md",
+        "line_number": 142,
+        "context": "- RLSA campaign structure \u2014 source: ~/shared/artifacts/best-practices/2026-03-25-google-ads-campaign-structure.md \u2192 Engagement campaigns",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/500b575ae6.txt": [
+      {
+        "broken_path": "~/shared/artifacts/testing/2026-03-25-oci-rollout-playbook.md",
+        "line_number": 19,
+        "context": "This guide is the step-by-step execution reference for implementing OCI in any AB Paid Search market. Follow it to launch, monitor, scale, and troubleshoot OCI. For the business case, validated result",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-04-04-oci-business-case.md",
+        "line_number": 19,
+        "context": "This guide is the step-by-step execution reference for implementing OCI in any AB Paid Search market. Follow it to launch, monitor, scale, and troubleshoot OCI. For the business case, validated result",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/testing/2026-03-25-oci-rollout-playbook.md",
+        "line_number": 31,
+        "context": "Before launching OCI in any market, confirm six things. First, verify conversion tracking is active and healthy in Google Ads (Tools \u2192 Conversions). Second, confirm the target campaign has at least th",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/testing/2026-03-25-oci-rollout-playbook.md",
+        "line_number": 64,
+        "context": "As of April 2026, seven of ten markets are at full OCI deployment. US, UK, and DE have been live since late 2025 and serve as the reference implementations. FR, IT, ES, and JP were dialed up in late M",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/testing/2026-03-25-oci-rollout-playbook.md",
+        "line_number": 68,
+        "context": "- [OCI Rollout Playbook](~/shared/artifacts/testing/2026-03-25-oci-rollout-playbook.md) \u2014 Strategy doc: business case, validated results, MCC structure, per-market notes, measurement framework",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-04-04-oci-business-case.md",
+        "line_number": 69,
+        "context": "- [OCI Business Case](~/shared/artifacts/strategy/2026-04-04-oci-business-case.md) \u2014 Leadership summary: $16.7MM headline, talking points for Kate/Todd",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/d53233e632.txt": [
+      {
+        "broken_path": "~/shared/artifacts/testing/2026-03-25-workstream-user-experience.md",
+        "line_number": 97,
+        "context": "- In-context registration and Gated Guest \u2014 source: ~/shared/artifacts/testing/2026-03-25-workstream-user-experience.md",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/50f97dc5b3.txt": [
+      {
+        "broken_path": "~/shared/artifacts/program-details/2026-04-04-oci-execution-guide.md",
+        "line_number": 25,
+        "context": "This playbook codifies the OCI rollout methodology that produced 35,196 incremental registrations and $16.7MM in OPS across US, UK, and DE. Use it to replicate the rollout in any new market. A teammat",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-04-04-oci-business-case.md",
+        "line_number": 25,
+        "context": "This playbook codifies the OCI rollout methodology that produced 35,196 incremental registrations and $16.7MM in OPS across US, UK, and DE. Use it to replicate the rollout in any new market. A teammat",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/program-details/2026-04-04-oci-execution-guide.md",
+        "line_number": 150,
+        "context": "- [OCI Execution Guide](~/shared/artifacts/program-details/2026-04-04-oci-execution-guide.md) \u2014 Step-by-step how-to: Google Ads navigation, monitoring, troubleshooting",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-04-04-oci-business-case.md",
+        "line_number": 151,
+        "context": "- [OCI Business Case](~/shared/artifacts/strategy/2026-04-04-oci-business-case.md) \u2014 Leadership summary: $16.7MM headline, talking points for Kate/Todd",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-25-competitive-landscape.md",
+        "line_number": 155,
+        "context": "- [Competitive Landscape](~/shared/artifacts/strategy/2026-03-25-competitive-landscape.md) \u2014 How OCI enables the efficiency-based competitive response",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/07f4732a9e.txt": [
+      {
+        "broken_path": "~/shared/DIRECTORY-MAP.md",
+        "line_number": 3,
+        "context": "Give a fresh agent ONLY ~/shared/DIRECTORY-MAP.md and these prompts. No other context.",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/38c831f2f4.txt": [
+      {
+        "broken_path": "~/shared/artifacts/testing/2026-03-25-oci-rollout-playbook.md",
+        "line_number": 138,
+        "context": "- DE test vs control data (W44-W45) \u2014 source: ~/shared/artifacts/testing/2026-03-25-oci-rollout-playbook.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-25-competitive-landscape.md",
+        "line_number": 140,
+        "context": "- Walmart competitive context \u2014 source: ~/shared/artifacts/strategy/2026-03-25-competitive-landscape.md",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/f996098022.txt": [
+      {
+        "broken_path": "~/shared/context/changelog.md",
+        "line_number": 115,
+        "context": "Append to `~/shared/context/changelog.md`:",
+        "suggested_action": "update path to /home/prichwil/shared/context/body/changelog.md (file exists there)"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/733e12c0f5.txt": [
+      {
+        "broken_path": "~/shared/artifacts/program-details/2026-04-04-oci-execution-guide.md",
+        "line_number": 25,
+        "context": "This playbook codifies the OCI rollout methodology that produced 35,196 incremental registrations and $16.7MM in OPS across US, UK, and DE. Use it to replicate the rollout in any new market. A teammat",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-04-04-oci-business-case.md",
+        "line_number": 25,
+        "context": "This playbook codifies the OCI rollout methodology that produced 35,196 incremental registrations and $16.7MM in OPS across US, UK, and DE. Use it to replicate the rollout in any new market. A teammat",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/program-details/2026-04-04-oci-execution-guide.md",
+        "line_number": 134,
+        "context": "- [OCI Execution Guide](~/shared/artifacts/program-details/2026-04-04-oci-execution-guide.md) \u2014 Step-by-step how-to: Google Ads navigation, monitoring, troubleshooting",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-04-04-oci-business-case.md",
+        "line_number": 135,
+        "context": "- [OCI Business Case](~/shared/artifacts/strategy/2026-04-04-oci-business-case.md) \u2014 Leadership summary: $16.7MM headline, talking points for Kate/Todd",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-25-competitive-landscape.md",
+        "line_number": 139,
+        "context": "- [Competitive Landscape](~/shared/artifacts/strategy/2026-03-25-competitive-landscape.md) \u2014 How OCI enables the efficiency-based competitive response",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/a28c5e05d2.txt": [
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-30-ieccp-planning-framework.md",
+        "line_number": 171,
+        "context": "- ie%CCP framework for budget context - source: ~/shared/artifacts/strategy/2026-03-30-ieccp-planning-framework.md",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/4d1051cf29.txt": [
+      {
+        "broken_path": "~/shared/artifacts/program-details/2026-04-04-oci-execution-guide.md",
+        "line_number": 44,
+        "context": "> This table tracks Polaris Brand LP rollout status specifically \u2014 not OCI status. For OCI status, see [OCI Execution Guide](~/shared/artifacts/program-details/2026-04-04-oci-execution-guide.md).",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/1b1f7dc0ba.txt": [
+      {
+        "broken_path": "~/shared/context/active/session-bootstrap.md",
+        "line_number": 51,
+        "context": "| Session Bootstrap | `~/shared/context/active/session-bootstrap.md` | Legacy bootstrap file (pre-body-system). Files to read at session start, tool access, Asana bridge, To-Do structure, key people, ",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/context/active/portable-layer.md",
+        "line_number": 54,
+        "context": "| Portable Layer | `~/shared/context/active/portable-layer.md` | System architecture manifest: what's portable vs environment-specific. Export protocol (weekly Friday email + GitHub). Bootstrap protoc",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/context/active/morning-routine-experiments.md",
+        "line_number": 55,
+        "context": "| Morning Routine Experiments | `~/shared/context/active/morning-routine-experiments.md` | Experiment engine for the morning routine: hypothesis generation, behavioral scoring signals, research priors",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/callouts/callout-principles.md",
+        "line_number": 65,
+        "context": "| `~/shared/wiki/callouts/callout-principles.md` | Master style guide for all WBR callouts: data integrity rules, attribution standards, framing, length (110w \u00b110), structure (headline/WoW/YoY/Note), ",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/research/op1-ps-testing-framework-draft.md",
+        "line_number": 80,
+        "context": "| OP1 Draft | `~/shared/wiki/research/op1-ps-testing-framework-draft.md` | Full OP1 \"Testing Approach & Year Ahead\" draft. 5 workstreams (OCI, Modern Search, Audiences, UX, Algorithmic Ads). Problem \u2192",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/research/ad-copy-results.md",
+        "line_number": 81,
+        "context": "| Ad Copy Results | `~/shared/wiki/research/ad-copy-results.md` | SP study findings (price/quality/selection messaging), UK test results (+86% CTR, +31% regs), IT early results, EU4 translation status",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/research/competitor-intel.md",
+        "line_number": 82,
+        "context": "| Competitor Intel | `~/shared/wiki/research/competitor-intel.md` | Competitive landscape across all markets: Walmart (US), weareuncapped (UK), recht24-7 (DE), bruneau (FR), Shopify (CA/IT), algo-mas ",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/research/oci-performance.md",
+        "line_number": 83,
+        "context": "| OCI Performance | `~/shared/wiki/research/oci-performance.md` | OCI rollout timeline, test vs control data, impact summary (+35K regs, $16.7MM OPS), MCC structure, known issues (hvocijid duplicates)",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/research/daily-brief-latest.md",
+        "line_number": 84,
+        "context": "| Daily Brief | `~/shared/wiki/research/daily-brief-latest.md` | Most recent daily brief email content | When checking what was briefed today | \"What was in today's brief?\" |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/research/automation-impact/ai-automation-impact.md",
+        "line_number": 85,
+        "context": "| AI Automation Impact | `~/shared/wiki/research/automation-impact/ai-automation-impact.md` | Operational time estimates for PS work. HTML dashboard version also available. | When estimating automatio",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/.kiro/steering/rw-trainer.md",
+        "line_number": 98,
+        "context": "| RW Trainer | `~/.kiro/steering/rw-trainer.md` | Coaching framework, mediocrity pattern detection, leverage assessment, interaction rules, morning routine priorities, weekly/monthly cadences | When c",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/SITEMAP.md",
+        "line_number": 204,
+        "context": "| SITEMAP | `~/shared/wiki/SITEMAP.md` | Full directory index with relationships and status | \u2014 | When browsing all artifacts at a glance |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/README.md",
+        "line_number": 205,
+        "context": "| README | `~/shared/wiki/README.md` | Document standard, naming convention, audience guide, staleness rules | \u2014 | When creating new artifacts or understanding the standard |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/wiki-index.md",
+        "line_number": 220,
+        "context": "| Wiki Index | `~/shared/wiki/wiki-index.md` | Machine-readable index OVER `~/shared/wiki/`. Categories, dependency graph, update log. The single file an agent reads to discover all published articles",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/wiki-structure.md",
+        "line_number": 221,
+        "context": "| Wiki Structure | `~/shared/wiki/wiki-structure.md` | Taxonomy, navigation hierarchy, category-to-folder mapping, publishing workflow, controlled vocabulary for tags | When publishing articles. When ",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/roadmap.md",
+        "line_number": 222,
+        "context": "| Wiki Roadmap | `~/shared/wiki/roadmap.md` | Content pipeline: Kate doc sections (10 articles in staging), research brief status, sources used, writing standards | When checking wiki pipeline status.",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/demand-log.md",
+        "line_number": 223,
+        "context": "| Demand Log | `~/shared/wiki/demand-log.md` | Tracked demand signals \u2014 questions asked that the wiki couldn't answer | When deciding what to write next. |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/README.md",
+        "line_number": 341,
+        "context": "| What's the artifact standard? | `~/shared/wiki/README.md` |",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/SITEMAP.md",
+        "line_number": 342,
+        "context": "| What's in the artifact sitemap? | `~/shared/wiki/SITEMAP.md` |",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/1cb8302b1e.txt": [
+      {
+        "broken_path": "~/shared/context/wiki/demand-log.md",
+        "line_number": 105,
+        "context": "- Demand list should exist in `~/shared/context/wiki/demand-log.md` with new entries",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/ed5451b47b.txt": [
+      {
+        "broken_path": "~/shared/research/competitor-intel.md",
+        "line_number": 26,
+        "context": "strategy/competitive-landscape.md      \u2192 ~/shared/research/competitor-intel.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/program-details/2026-03-25-body-system-architecture.md",
+        "line_number": 28,
+        "context": "strategy/agent-architecture.md         \u2192 ~/shared/artifacts/program-details/2026-03-25-body-system-architecture.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-25-agentic-marketing-landscape.md",
+        "line_number": 30,
+        "context": "strategy/agentic-ps-vision.md          \u2192 ~/shared/artifacts/strategy/2026-03-25-agentic-marketing-landscape.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-30-ieccp-planning-framework.md",
+        "line_number": 32,
+        "context": "markets/mx-market-wiki.md              \u2192 ~/shared/artifacts/strategy/2026-03-30-ieccp-planning-framework.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/best-practices/2026-03-25-invoice-po-process-guide.md",
+        "line_number": 34,
+        "context": "markets/mx-market-wiki.md              \u2192 ~/shared/artifacts/best-practices/2026-03-25-invoice-po-process-guide.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/testing/2026-03-25-au-nb-mro-trades-proposal.md",
+        "line_number": 36,
+        "context": "markets/au-market-wiki.md              \u2192 ~/shared/artifacts/testing/2026-03-25-au-nb-mro-trades-proposal.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/program-details/2026-03-25-au-market-wiki.md",
+        "line_number": 38,
+        "context": "markets/market-reference.md            \u2192 ~/shared/artifacts/program-details/2026-03-25-au-market-wiki.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/program-details/2026-03-25-mx-market-wiki.md",
+        "line_number": 39,
+        "context": "markets/market-reference.md            \u2192 ~/shared/artifacts/program-details/2026-03-25-mx-market-wiki.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-25-cross-market-playbook.md",
+        "line_number": 40,
+        "context": "markets/market-reference.md            \u2192 ~/shared/artifacts/strategy/2026-03-25-cross-market-playbook.md",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/87e8dcc252.txt": [
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-25-aeo-ai-overviews-pov.md",
+        "line_number": 85,
+        "context": "- AEO POV existing actions \u2014 source: ~/shared/artifacts/strategy/2026-03-25-aeo-ai-overviews-pov.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/testing/2026-03-25-email-overlay-ww-rollout.md",
+        "line_number": 87,
+        "context": "- Adobe Ad Cloud reporting segment \u2014 source: ~/shared/artifacts/testing/2026-03-25-email-overlay-ww-rollout.md",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/6023c79944.txt": [
+      {
+        "broken_path": "~/shared/wiki/agent-created/callout-principles.md",
+        "line_number": 126,
+        "context": "\"prompt\": \"Check this callout against ~/shared/wiki/agent-created/callout-principles.md (or the equivalent principles doc). Flag: missing so-what, weak data, unclear ask, wrong register. Don't rewrite",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/retrospectives/YYYY-WW.md",
+        "line_number": 148,
+        "context": "\"prompt\": \"Run my weekly retro. Pull: (1) Asana tasks I completed this week grouped by project, (2) meetings I had with one-line notes on each, (3) Slack messages I sent grouped by topic, (4) emails I",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/96dac04103.txt": [
+      {
+        "broken_path": "~/shared/wiki/agent-created/callout-principles.md",
+        "line_number": 126,
+        "context": "\"prompt\": \"Check this callout against ~/shared/wiki/agent-created/callout-principles.md (or the equivalent principles doc). Flag: missing so-what, weak data, unclear ask, wrong register. Don't rewrite",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/retrospectives/YYYY-WW.md",
+        "line_number": 148,
+        "context": "\"prompt\": \"Run my weekly retro. Pull: (1) Asana tasks I completed this week grouped by project, (2) meetings I had with one-line notes on each, (3) Slack messages I sent grouped by topic, (4) emails I",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/62eca56cb4.txt": [
+      {
+        "broken_path": "~/shared/context/active/callouts/au/au-context.md",
+        "line_number": 54,
+        "context": "- AU budget and OP2 targets \u2014 source: ~/shared/context/active/callouts/au/au-context.md",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/8080a36cfb.txt": [
+      {
+        "broken_path": "~/shared/artifacts/program-details/2026-03-25-au-market-wiki.md",
+        "line_number": 82,
+        "context": "> Full detail: [AU Market Wiki](~/shared/artifacts/program-details/2026-03-25-au-market-wiki.md)",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/strategy/2026-03-25-cross-market-playbook.md",
+        "line_number": 111,
+        "context": "For cross-market scaling methodology, see [Cross-Market Playbook](~/shared/artifacts/strategy/2026-03-25-cross-market-playbook.md). For competitive patterns, see [Competitive Landscape](competitive-la",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/06654dbfbb.txt": [
+      {
+        "broken_path": "~/shared/context/active/morning-routine-experiments.md",
+        "line_number": 76,
+        "context": "- Habit loop framework \u2014 source: ~/shared/context/active/morning-routine-experiments.md \u2192 Duhigg section",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/a4de50b8c5.txt": [
+      {
+        "broken_path": "~/shared/wiki/reporting/2026-03-25-competitive-intel-tracker.md",
+        "line_number": 35,
+        "context": "~/shared/wiki/reporting/2026-03-25-competitive-intel-tracker.md",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/wiki/archive/context/2026-03-25-competitive-intel-tracker.md",
+        "line_number": 39,
+        "context": "~/shared/wiki/archive/context/2026-03-25-competitive-intel-tracker.md",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/ebce0d16a2.txt": [
+      {
+        "broken_path": "~/shared/callouts/2026/W16/AU.md",
+        "line_number": 78,
+        "context": "6. Librarian reviews, edits, promotes to ~/shared/callouts/2026/W16/AU.md.",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/b79075bd2c.txt": [
+      {
+        "broken_path": "~/.kiro/steering/rw-trainer.md",
+        "line_number": 12,
+        "context": "1. `~/.kiro/steering/rw-trainer.md` \u2014 The trainer's behavior rules, mediocrity patterns, and coaching framework",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/53ca2ace19.txt": [
+      {
+        "broken_path": "~/shared/context/wiki/context-catalog.md",
+        "line_number": 11,
+        "context": "- Context catalog (`~/shared/context/wiki/context-catalog.md`) eliminates the \"scour through everything\" problem. Any agent finds the right source in <10 seconds.",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ],
+    "~/shared/dashboards/data/wiki-docs/ff78c23329.txt": [
+      {
+        "broken_path": "~/shared/artifacts/program-details/2026-03-25-oci-implementation-guide.md",
+        "line_number": 20,
+        "context": "> For per-market tactical steps, see [OCI Implementation Guide](~/shared/artifacts/program-details/2026-03-25-oci-implementation-guide.md). For team knowledge-sharing, see [OCI Methodology Knowledge S",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/communication/2026-03-25-oci-methodology-knowledge-share.md",
+        "line_number": 20,
+        "context": "> For per-market tactical steps, see [OCI Implementation Guide](~/shared/artifacts/program-details/2026-03-25-oci-implementation-guide.md). For team knowledge-sharing, see [OCI Methodology Knowledge S",
+        "suggested_action": "remove reference OR create target file"
+      },
+      {
+        "broken_path": "~/shared/artifacts/program-details/2026-03-25-oci-implementation-guide.md",
+        "line_number": 89,
+        "context": "For detailed troubleshooting and per-market implementation notes, see [OCI Implementation Guide](~/shared/artifacts/program-details/2026-03-25-oci-implementation-guide.md).",
+        "suggested_action": "remove reference OR create target file"
+      }
+    ]
+  }
+}

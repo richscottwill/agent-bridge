@@ -1,0 +1,3263 @@
+{
+  "generated_at": "2026-04-21T23:45:13-07:00",
+  "files": [
+    {
+      "rel_path": "/home/prichwil/shared/context/body/amazon-politics.md",
+      "layer": "body",
+      "lines": 213,
+      "first_heading": "Amazon Politics & Career Dynamics \u2014 Reference Knowledge",
+      "evidence": {
+        "active_referrers": 5,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/body/body.md",
+          "~/shared/context/body/amcc.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-14] Topic: Amazon politics reference file created + aMCC political awareness layer | Actions: Fetched 2 full Ethan Evans interview transcripts (~200KB combined); synthesized into amazon-politics.md (dense reference file in ~/shared/context/body/ covering promotion mechan",
+          "[2026-04-14] Topic: Lena SSR scope encroachment analysis + Evans framework application | Actions: Read memory.md (Lena relationship context, team structure), au-paid-search-sync.md (meeting history, open items, scope ownership); applied amazon-politics.md \u00a73 (org scope theft) and"
+        ],
+        "commits_last_30d": 1
+      },
+      "action": "KEEP",
+      "category": "INFORMATION",
+      "confidence": "HIGH",
+      "rationale": "5 active path referrers \u2014 workflows depend on this file.",
+      "current_usage": "Referenced by multiple agents/hooks",
+      "blast_radius": "HIGH",
+      "needs_revisit": false,
+      "row_id": "B-K1"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/body/amcc.md",
+      "layer": "body",
+      "lines": 358,
+      "first_heading": "Anterior MCC \u2014 Willpower Engine",
+      "evidence": {
+        "active_referrers": 124,
+        "latent_referrers": 0,
+        "documentation_referrers": 8,
+        "name_only_referrers": 27,
+        "referrer_list": [
+          "~/.kiro/agents/rw-trainer.json",
+          "~/.kiro/agents/body-system/eyes-chart.md",
+          "~/.kiro/agents/body-system/rw-trainer.md",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/steering/document-registry.md",
+          "~/.kiro/steering/soul.md",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/intake/organ-changes.md",
+          "~/shared/context/intake/session-log.md",
+          "~/shared/context/body/body.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-03] Topic: Grok AI swarm agent personas \u2014 8 custom instructions for xAI Grok | Actions: Read body.md, brain.md, amcc.md for grounding; wrote 4 refined original agents (Synthesizer, Director, Engineer, Questioner) + 4 new agents (Operator, Scout, Translator, Historian) wi",
+          "[2026-04-05] Topic: Swarm architecture gap analysis (Grok-generated plan) | Actions: Read body.md, brain.md, device.md, amcc.md, grok-swarm artifact; delivered honest evaluation against Five Levels and current system state | Decisions: Plan is a valid Level 5 vision doc but prema",
+          "[2026-04-05] Topic: Hard thing reassessment after Kate 4/16 meeting canceled | Actions: Read hands.md + current.md to evaluate full task stack against leverage framework; ran alternatives through Five Levels filter | Decisions: Testing Approach doc remains the hard thing \u2014 it's s"
+        ],
+        "commits_last_30d": 19
+      },
+      "action": "UNCLEAR",
+      "category": "AUTO-INCLUDED-REFERRER",
+      "confidence": "MEDIUM",
+      "question_for_richard": "/home/prichwil/shared/context/body/amcc.md is referenced from always-auto-loaded steering. Approve coordinated removal via separate spec, or keep?",
+      "default_if_unanswered": "KEEP (per R5.6 \u2014 coordinated removal needs separate spec)",
+      "blast_radius": "HIGH",
+      "row_id": "B-U1"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/body/body-diagram.md",
+      "layer": "body",
+      "lines": 181,
+      "first_heading": "Body System \u2014 Visual Architecture",
+      "evidence": {
+        "active_referrers": 1,
+        "latent_referrers": 0,
+        "documentation_referrers": 4,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/system-subtraction-audit/design.md",
+          "~/shared/context/body/changelog.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-20] Topic: Hard-thing redesign PROMOTED to live | Actions: Executed README promotion checklist. Applied amcc-patch (section replacement in body/amcc.md, streak/resistance/escalation untouched). Copied hard-thing-selection.md to context/protocols/ with live status + added"
+        ],
+        "commits_last_30d": 3
+      },
+      "action": "UNCLEAR",
+      "category": "BODY-LIGHTLY-USED",
+      "confidence": "LOW",
+      "question_for_richard": "/home/prichwil/shared/context/body/body-diagram.md has 1 active referrers. INFORMATION (keep) or METAPHOR-ONLY (delete)? Name the current workflow OR an L3-L5 future workflow that needs it.",
+      "default_if_unanswered": "KEEP",
+      "blast_radius": "MEDIUM",
+      "row_id": "B-U2"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/body/body.md",
+      "layer": "body",
+      "lines": 88,
+      "first_heading": "Body \u2014 System Anatomy Map",
+      "evidence": {
+        "active_referrers": 120,
+        "latent_referrers": 0,
+        "documentation_referrers": 20,
+        "name_only_referrers": 37,
+        "referrer_list": [
+          "~/.kiro/agents/wiki-researcher.json",
+          "~/.kiro/agents/rw-trainer.json",
+          "~/.kiro/agents/body-system/rw-trainer.md",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/system-subtraction-audit/design.md",
+          "~/.kiro/specs/shared-directory-reorg/requirements.md",
+          "~/.kiro/specs/kiro-setup-optimization/design.md",
+          "~/.kiro/specs/kiro-setup-optimization/tasks.md",
+          "~/.kiro/specs/kiro-setup-optimization/requirements.md",
+          "~/.kiro/steering/soul.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-03] Topic: Grok AI swarm agent personas \u2014 8 custom instructions for xAI Grok | Actions: Read body.md, brain.md, amcc.md for grounding; wrote 4 refined original agents (Synthesizer, Director, Engineer, Questioner) + 4 new agents (Operator, Scout, Translator, Historian) wi",
+          "[2026-04-05] Topic: Swarm architecture gap analysis (Grok-generated plan) | Actions: Read body.md, brain.md, device.md, amcc.md, grok-swarm artifact; delivered honest evaluation against Five Levels and current system state | Decisions: Plan is a valid Level 5 vision doc but prema",
+          "[2026-04-05] Topic: Differentiate eval agent configs | Actions: Rewrote eval-a.json (treatment + full context: target + body.md + soul.md), eval-b.json (control + full context: ORIGINAL target + body.md + soul.md), eval-c.json (portability: ONLY modified target, no supporting fil"
+        ],
+        "commits_last_30d": 5
+      },
+      "action": "UNCLEAR",
+      "category": "AUTO-INCLUDED-REFERRER",
+      "confidence": "MEDIUM",
+      "question_for_richard": "/home/prichwil/shared/context/body/body.md is referenced from always-auto-loaded steering. Approve coordinated removal via separate spec, or keep?",
+      "default_if_unanswered": "KEEP (per R5.6 \u2014 coordinated removal needs separate spec)",
+      "blast_radius": "HIGH",
+      "row_id": "B-U3"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/body/brain.md",
+      "layer": "body",
+      "lines": 168,
+      "first_heading": "Brain \u2014 Decisions & Thinking",
+      "evidence": {
+        "active_referrers": 60,
+        "latent_referrers": 1,
+        "documentation_referrers": 43,
+        "name_only_referrers": 62,
+        "referrer_list": [
+          "~/.kiro/agents/rw-trainer.json",
+          "~/.kiro/agents/body-system/eyes-chart.md",
+          "~/.kiro/agents/body-system/rw-trainer.md",
+          "~/.kiro/specs/system-subtraction-audit/build_referrers.py",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/system-subtraction-audit/design.md",
+          "~/.kiro/specs/kiro-setup-optimization/design.md",
+          "~/.kiro/specs/kiro-setup-optimization/tasks.md",
+          "~/.kiro/specs/kiro-setup-optimization/requirements.md",
+          "~/.kiro/steering/document-registry.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-03] Topic: Grok AI swarm agent personas \u2014 8 custom instructions for xAI Grok | Actions: Read body.md, brain.md, amcc.md for grounding; wrote 4 refined original agents (Synthesizer, Director, Engineer, Questioner) + 4 new agents (Operator, Scout, Translator, Historian) wi",
+          "[2026-04-05] Topic: Swarm architecture gap analysis (Grok-generated plan) | Actions: Read body.md, brain.md, device.md, amcc.md, grok-swarm artifact; delivered honest evaluation against Five Levels and current system state | Decisions: Plan is a valid Level 5 vision doc but prema",
+          "[2026-04-08] Topic: OP1 discussion prep \u2014 real-time brainstorm (3 rounds) | Actions: Read brain.md + current.md; Round 1: 6 standard talking points (OCI rollout, ENG budget, Modern Search, AU CPA attribution, F90, AI Max); Round 2: 6 out-of-the-box ideas (blended cost-per-qualifi"
+        ],
+        "commits_last_30d": 15
+      },
+      "action": "UNCLEAR",
+      "category": "AUTO-INCLUDED-REFERRER",
+      "confidence": "MEDIUM",
+      "question_for_richard": "/home/prichwil/shared/context/body/brain.md is referenced from always-auto-loaded steering. Approve coordinated removal via separate spec, or keep?",
+      "default_if_unanswered": "KEEP (per R5.6 \u2014 coordinated removal needs separate spec)",
+      "blast_radius": "HIGH",
+      "row_id": "B-U4"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/body/changelog.md",
+      "layer": "body",
+      "lines": 758,
+      "first_heading": "Changelog \u2014 Body System",
+      "evidence": {
+        "active_referrers": 29,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 15,
+        "referrer_list": [
+          "~/.kiro/agents/body-system/eyes-chart.md",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/asana-sync-protocol.md",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/intake/session-log.md",
+          "~/shared/tools/fix-broken-refs.sh",
+          "~/shared/tools/progress-charts/README.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-07] Topic: shared/ directory consolidation \u2014 merges, empties removed, tools organized | Actions: Merged context/tools/ into tools/, context/archive/ into wiki/archive/, moved context/changelog.md into context/body/; deleted empty data/ subdirs (markets/raw/testing), orph",
+          "[2026-04-07] Topic: Broken reference fix \u2014 52 files updated with new paths | Actions: Built and ran fix-broken-refs.sh script with path substitution map (shared/artifacts/\u2192shared/wiki/, shared/context/wiki/\u2192shared/wiki/, shared/context/meetings/\u2192shared/wiki/meetings/, shared/cont"
+        ],
+        "commits_last_30d": 20
+      },
+      "action": "KEEP",
+      "category": "INFORMATION",
+      "confidence": "HIGH",
+      "rationale": "29 active path referrers \u2014 workflows depend on this file.",
+      "current_usage": "Referenced by multiple agents/hooks",
+      "blast_radius": "HIGH",
+      "needs_revisit": false,
+      "row_id": "B-K2"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/body/device.md",
+      "layer": "body",
+      "lines": 240,
+      "first_heading": "Device \u2014 Outsourced Intelligence",
+      "evidence": {
+        "active_referrers": 93,
+        "latent_referrers": 0,
+        "documentation_referrers": 16,
+        "name_only_referrers": 38,
+        "referrer_list": [
+          "~/.kiro/agents/body-system/rw-trainer.md",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/body/body.md",
+          "~/shared/wiki/agent-created/operations/campaign-link-generator-spec.md",
+          "~/shared/wiki/agent-created/operations/budget-forecast-helper-spec.md",
+          "~/shared/wiki/agent-created/operations/invoice-po-process-guide.md",
+          "~/shared/wiki/agent-created/archive/five-year-outlook-v1.md",
+          "~/shared/wiki/agent-created/reporting/wbr-callout-guide.md",
+          "~/shared/wiki/agent-created/reporting/au-keyword-cpa-dashboard.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-05] Topic: Swarm architecture gap analysis (Grok-generated plan) | Actions: Read body.md, brain.md, device.md, amcc.md, grok-swarm artifact; delivered honest evaluation against Five Levels and current system state | Decisions: Plan is a valid Level 5 vision doc but prema",
+          "[2026-04-05] Topic: Wiki Topics folder extraction + actionable ideas | Actions: Read all files in wiki/Topics/ (AMZ templates, Git/Karpathy/DuckDB/LangChain refs); extracted ideas from llm-wiki.md, autoresearch, gcm, awesome-duckdb, smallpond; identified 3 actionable items | Deci",
+          "[2026-04-05] Topic: Wiki Topics folder \u2014 AMZ folder correction | Actions: Richard clarified AMZ folder is a calibration corpus (gold-standard docs used to create wiki-critic rubric), not raw material for processing | Decisions: Dropped \"AMZ templates \u2192 wiki article\" idea. AMZ fol"
+        ],
+        "commits_last_30d": 22
+      },
+      "action": "KEEP",
+      "category": "INFORMATION",
+      "confidence": "HIGH",
+      "rationale": "93 active path referrers \u2014 workflows depend on this file.",
+      "current_usage": "Referenced by multiple agents/hooks",
+      "blast_radius": "HIGH",
+      "needs_revisit": false,
+      "row_id": "B-K3"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/body/eyes.md",
+      "layer": "body",
+      "lines": 137,
+      "first_heading": "Eyes \u2014 Perception & Awareness",
+      "evidence": {
+        "active_referrers": 103,
+        "latent_referrers": 0,
+        "documentation_referrers": 66,
+        "name_only_referrers": 67,
+        "referrer_list": [
+          "~/.kiro/agents/wbr-callouts/market-analyst.md",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/body/body.md",
+          "~/shared/context/protocols/state-file-ww-testing.md",
+          "~/shared/wiki/agent-created/operations/google-ads-campaign-structure.md",
+          "~/shared/wiki/agent-created/operations/campaign-link-generator-spec.md",
+          "~/shared/wiki/agent-created/operations/landing-page-testing-playbook.md",
+          "~/shared/wiki/agent-created/archive/blind-evaluator-tests.md",
+          "~/shared/wiki/agent-created/archive/mx-ps-handoff-guide.md",
+          "~/shared/wiki/agent-created/archive/competitive-intel-tracker.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-05] Topic: Grok 2026-2030 paid search roadmap evaluation | Actions: Read eyes.md, AEO POV artifact, published Kate Testing Approach doc; compared roadmap claims against actual AB PS data, OCI results, team constraints, and decision principles | Decisions: Roadmap is gene",
+          "[2026-04-08] Topic: WBR projection system audit \u2014 existing forecast infrastructure + gap analysis | Actions: Audited ps.forecasts (75 rows, AU/MX only), ps.cumulative_projections (59 rows), ps.forecast_revisions (75 rows with drift tracking), ps.forecast_narratives (10 rows), for",
+          "[2026-04-08] Topic: Goal callout drafting for Kingpin/MBR updates | Actions: Pulled 2026 Goals Quip (all tabs), read eyes.md for market data, read AU/MX W14 callouts for format reference, identified Richard's 4 individual 2026 goals and their Jan-Mar update history | Decisions: D"
+        ],
+        "commits_last_30d": 15
+      },
+      "action": "KEEP",
+      "category": "INFORMATION",
+      "confidence": "HIGH",
+      "rationale": "103 active path referrers \u2014 workflows depend on this file.",
+      "current_usage": "Referenced by multiple agents/hooks",
+      "blast_radius": "HIGH",
+      "needs_revisit": false,
+      "row_id": "B-K4"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/body/gut.md",
+      "layer": "body",
+      "lines": 196,
+      "first_heading": "Gut \u2014 Digestion, Compression & Waste Removal",
+      "evidence": {
+        "active_referrers": 92,
+        "latent_referrers": 0,
+        "documentation_referrers": 7,
+        "name_only_referrers": 49,
+        "referrer_list": [
+          "~/.kiro/agents/body-system/eyes-chart.md",
+          "~/.kiro/agents/body-system/karpathy.md",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/system-subtraction-audit/design.md",
+          "~/shared/context/active/karpathy-cadence-response.md",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/intake/karpathy-verdict.md",
+          "~/shared/context/body/body.md",
+          "~/shared/wiki/agent-created/_meta/context-catalog.md",
+          "~/shared/wiki/agent-created/strategy/agent-architecture.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-03] Topic: Grok synthesis eval + EOD compression enforcement gap | Actions: Evaluated Grok repo analysis (accurate on architecture, fantasy on milestones/specs); inspected EOD-2 hooks + eod-system-refresh.md protocol; read gut.md for budget rules; added 5-step compressio",
+          "[2026-04-03] Topic: Compression audit revision \u2014 remove arbitrary thresholds | Actions: Revised EOD Phase 3 compression audit step to be observation-only: logs word counts to DuckDB, flags only when Bayesian priors show compression signal (posterior_mean > 0.7, n > 5), removed ha",
+          "[2026-04-03] Topic: Remove 30,000w hard body ceiling \u2014 fully adaptive budgets | Actions: Removed all 30,000w hard limit references from gut.md, heart.md, karpathy.md, nervous-system.md, eod-system-refresh.md (main + portable-body copies, ~12 edits across 8 files). Replaced with d"
+        ],
+        "commits_last_30d": 17
+      },
+      "action": "KEEP",
+      "category": "INFORMATION",
+      "confidence": "HIGH",
+      "rationale": "92 active path referrers \u2014 workflows depend on this file.",
+      "current_usage": "Referenced by multiple agents/hooks",
+      "blast_radius": "HIGH",
+      "needs_revisit": false,
+      "row_id": "B-K5"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/body/hands.md",
+      "layer": "body",
+      "lines": 148,
+      "first_heading": "Hands \u2014 Execution & Tooling",
+      "evidence": {
+        "active_referrers": 69,
+        "latent_referrers": 0,
+        "documentation_referrers": 26,
+        "name_only_referrers": 57,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/admin-block-fix/design.md",
+          "~/.kiro/specs/admin-block-fix/tasks.md",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/body/body.md",
+          "~/shared/context/protocols/meeting-to-task-pipeline.md",
+          "~/shared/context/protocols/asana-duckdb-sync.md",
+          "~/shared/context/tests/admin-block-preservation-test.sh",
+          "~/shared/context/tests/admin-block-exploration-test.sh",
+          "~/shared/wiki/agent-created/operations/campaign-link-generator-spec.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-05] Topic: Hard thing reassessment after Kate 4/16 meeting canceled | Actions: Read hands.md + current.md to evaluate full task stack against leverage framework; ran alternatives through Five Levels filter | Decisions: Testing Approach doc remains the hard thing \u2014 it's s",
+          "[2026-04-05] Topic: Agent self-correction \u2014 Kate doc already shipped today | Actions: Searched session-log.md and found 5 entries from today documenting full Kate doc pipeline (v2\u2192v5, dual evals, all 5 workstreams published as FINAL, pipeline rules codified); checked artifact fil",
+          "[2026-04-05] Topic: amcc.md reconciliation | Actions: Read amcc.md, hands.md, current.md; updated streak count (14\u219217 workdays), last avoidance date (4/3\u21924/4), Kate meeting status (nuanced \u2014 not fully canceled), escalation examples, hard thing table avoidance pattern. 6 string re"
+        ],
+        "commits_last_30d": 13
+      },
+      "action": "KEEP",
+      "category": "INFORMATION",
+      "confidence": "HIGH",
+      "rationale": "69 active path referrers \u2014 workflows depend on this file.",
+      "current_usage": "Referenced by multiple agents/hooks",
+      "blast_radius": "HIGH",
+      "needs_revisit": false,
+      "row_id": "B-K6"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/body/heart.md",
+      "layer": "body",
+      "lines": 300,
+      "first_heading": "Heart \u2014 Autoresearch Loop",
+      "evidence": {
+        "active_referrers": 118,
+        "latent_referrers": 0,
+        "documentation_referrers": 15,
+        "name_only_referrers": 46,
+        "referrer_list": [
+          "~/.kiro/agents/karpathy.json",
+          "~/.kiro/agents/body-system/eyes-chart.md",
+          "~/.kiro/agents/body-system/karpathy.md",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/system-subtraction-audit/design.md",
+          "~/shared/context/experiments/device-modified-exp14.md",
+          "~/shared/context/experiments/device-modified-exp4.md",
+          "~/shared/context/active/karpathy-phase1-response.md",
+          "~/shared/context/active/karpathy-cadence-response.md",
+          "~/shared/context/active/karpathy-loop-run2.log"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-03] Topic: Remove 30,000w hard body ceiling \u2014 fully adaptive budgets | Actions: Removed all 30,000w hard limit references from gut.md, heart.md, karpathy.md, nervous-system.md, eod-system-refresh.md (main + portable-body copies, ~12 edits across 8 files). Replaced with d",
+          "[2026-04-04] Topic: Codify experiment learnings into system files | Actions: Updated 3 files from 58-experiment session data. heart.md: added technique annotations with keep/revert rates to Step 3, selection bias check to Step 1 (force 30% exploration when >85% keep rate), 11-row",
+          "[2026-04-05] Topic: Deep autoresearch comparison \u2014 Karpathy original vs Body system | Actions: Read all autoresearch files (prepare.py, train.py, program.md, pyproject.toml) + heart.md; identified 4 gaps: (1) no human-scannable experiment-log.tsv parallel to DuckDB, (2) no output"
+        ],
+        "commits_last_30d": 21
+      },
+      "action": "KEEP",
+      "category": "INFORMATION",
+      "confidence": "HIGH",
+      "rationale": "118 active path referrers \u2014 workflows depend on this file.",
+      "current_usage": "Referenced by multiple agents/hooks",
+      "blast_radius": "HIGH",
+      "needs_revisit": false,
+      "row_id": "B-K7"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/body/memory.md",
+      "layer": "body",
+      "lines": 245,
+      "first_heading": "Memory \u2014 Learned Knowledge",
+      "evidence": {
+        "active_referrers": 159,
+        "latent_referrers": 0,
+        "documentation_referrers": 24,
+        "name_only_referrers": 57,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/system-subtraction-audit/design.md",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/body/roster.md",
+          "~/shared/context/body/body.md",
+          "~/shared/wiki/agent-created/operations/stakeholder-comms-guide.md",
+          "~/shared/wiki/agent-created/operations/landing-page-testing-playbook.md",
+          "~/shared/wiki/agent-created/archive/blind-evaluator-tests.md",
+          "~/shared/wiki/agent-created/_meta/context-catalog.md",
+          "~/shared/wiki/agent-created/testing/project-baloo-overview.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "- Cascaded to: current.md (pending actions + cancellation), memory.md (Kate interaction updated, Megan Lim added), nervous-system.md (Five Levels L1 gate update), brandon-sync.md (open item closed)",
+          "[2026-04-14] Topic: Resume update for OpenAI Growth/Digital Marketing (Paid Search) role | Actions: Downloaded Resume_RSW.docx from OneDrive, fetched OpenAI JD from Ashby, read brain.md/memory.md/eyes.md for current metrics and achievements, wrote tailored resume to shared/contex",
+          "[2026-04-14] Topic: Lena Zak stakeholder strategy \u2014 Ethan Evans corporate politics framework applied to AU situation | Actions: Fetched 2 full Ethan Evans interview transcripts (Developing Dev), pulled Lena context from memory.md, current.md, brandon-sync.md, au-paid-search-sync."
+        ],
+        "commits_last_30d": 16
+      },
+      "action": "KEEP",
+      "category": "INFORMATION",
+      "confidence": "HIGH",
+      "rationale": "159 active path referrers \u2014 workflows depend on this file.",
+      "current_usage": "Referenced by multiple agents/hooks",
+      "blast_radius": "HIGH",
+      "needs_revisit": false,
+      "row_id": "B-K8"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/body/nervous-system.md",
+      "layer": "body",
+      "lines": 175,
+      "first_heading": "Nervous System \u2014 Feedback, Calibration & Learning",
+      "evidence": {
+        "active_referrers": 55,
+        "latent_referrers": 0,
+        "documentation_referrers": 6,
+        "name_only_referrers": 28,
+        "referrer_list": [
+          "~/.kiro/agents/rw-trainer.json",
+          "~/.kiro/agents/body-system/eyes-chart.md",
+          "~/.kiro/agents/body-system/rw-trainer.md",
+          "~/.kiro/agents/body-system/karpathy.md",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/body/body.md",
+          "~/shared/wiki/agent-created/operations/stakeholder-comms-guide.md",
+          "~/shared/wiki/agent-created/_meta/context-catalog.md",
+          "~/shared/wiki/agent-created/strategy/agent-architecture.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "- Cascaded to: current.md (pending actions + cancellation), memory.md (Kate interaction updated, Megan Lim added), nervous-system.md (Five Levels L1 gate update), brandon-sync.md (open item closed)",
+          "[2026-04-03] Topic: Remove 30,000w hard body ceiling \u2014 fully adaptive budgets | Actions: Removed all 30,000w hard limit references from gut.md, heart.md, karpathy.md, nervous-system.md, eod-system-refresh.md (main + portable-body copies, ~12 edits across 8 files). Replaced with d",
+          "[2026-04-06] Topic: Full analytical backbone build on MotherDuck \u2014 all-in on DuckDB | Actions: Created 22 new tables (projections, experiment_outcomes, ns_loop_snapshots, ns_patterns, ns_delegations, ns_decisions, ns_communication, five_levels_weekly, l1_streak, body_size_history"
+        ],
+        "commits_last_30d": 16
+      },
+      "action": "KEEP",
+      "category": "INFORMATION",
+      "confidence": "HIGH",
+      "rationale": "55 active path referrers \u2014 workflows depend on this file.",
+      "current_usage": "Referenced by multiple agents/hooks",
+      "blast_radius": "HIGH",
+      "needs_revisit": false,
+      "row_id": "B-K9"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/body/roster.md",
+      "layer": "body",
+      "lines": 248,
+      "first_heading": "Roster \u2014 People Who Matter for PS / WW Traffic Marketing",
+      "evidence": {
+        "active_referrers": 39,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/intake/session-log.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-20] Topic: Callout quip ownership analysis + centralized roster build | Actions: Pulled full Pre-WBR Callouts quip history (quip-amazon.com/MMgBAzDrlVou) covering Wk17'25-Wk14'26 via ReadInternalWebsites. Extracted canonical channel owners from Guidance tab (Kris Knowles"
+        ],
+        "commits_last_30d": 1
+      },
+      "action": "KEEP",
+      "category": "INFORMATION",
+      "confidence": "HIGH",
+      "rationale": "39 active path referrers \u2014 workflows depend on this file.",
+      "current_usage": "Referenced by multiple agents/hooks",
+      "blast_radius": "HIGH",
+      "needs_revisit": false,
+      "row_id": "B-K10"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/body/spine.md",
+      "layer": "body",
+      "lines": 133,
+      "first_heading": "Spine \u2014 Structure & Continuity",
+      "evidence": {
+        "active_referrers": 64,
+        "latent_referrers": 0,
+        "documentation_referrers": 14,
+        "name_only_referrers": 38,
+        "referrer_list": [
+          "~/.kiro/agents/rw-trainer.json",
+          "~/.kiro/agents/body-system/rw-trainer.md",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/steering/soul.md",
+          "~/shared/context/experiments/spine-modified-exp8.md",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/body/body.md",
+          "~/shared/wiki/agent-created/archive/blind-evaluator-tests.md",
+          "~/shared/wiki/agent-created/archive/mx-ps-handoff-guide.md",
+          "~/shared/wiki/agent-created/reporting/wbr-callout-guide.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-07] Topic: README updated for new repo structure | Actions: Rewrote shared/README.md to reflect current structure (wiki/, context/, tools/, data/, uploads/, dashboards/), DuckDB document registry with duck_id, MotherDuck schemas and Dives, key files table with correct pa",
+          "[2026-04-07] Topic: Cross-Environment Inventory Sync design review | Actions: Read body.md, spine.md, hands.md, device.md, sync.sh, agent-bridge repo structure, ops schema in DuckDB \u2014 full context load to evaluate design against existing infra. Delivered 8-point review with imple",
+          "[2026-04-12] Topic: SharePoint durability layer + hook/protocol audit + system-wide updates | Actions: Created sharepoint-durability-sync.md protocol (bidirectional push/pull logic), created hook-protocol-audit.md (16-hook inventory + 20 protocol files), created 4 SharePoint fold"
+        ],
+        "commits_last_30d": 18
+      },
+      "action": "UNCLEAR",
+      "category": "AUTO-INCLUDED-REFERRER",
+      "confidence": "MEDIUM",
+      "question_for_richard": "/home/prichwil/shared/context/body/spine.md is referenced from always-auto-loaded steering. Approve coordinated removal via separate spec, or keep?",
+      "default_if_unanswered": "KEEP (per R5.6 \u2014 coordinated removal needs separate spec)",
+      "blast_radius": "HIGH",
+      "row_id": "B-U5"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/am-auto.md",
+      "layer": "protocol",
+      "lines": 400,
+      "first_heading": "AM-Backend Protocol \u2014 Autonomous Data Collection + Processing",
+      "evidence": {
+        "active_referrers": 2,
+        "latent_referrers": 0,
+        "documentation_referrers": 5,
+        "name_only_referrers": 5,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/admin-block-fix/design.md",
+          "~/.kiro/specs/admin-block-fix/tasks.md",
+          "~/shared/context/active/hook-protocol-audit.md",
+          "~/shared/context/tests/admin-block-preservation-test.sh"
+        ],
+        "duplication_group": "ovl-2",
+        "duplication_role": "survivor",
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "- Topic: Build the protocol-file hook architecture (Option C) | Actions: Created 4 thin hook triggers (am-auto 773B, am-triage 938B, eod-meeting-sync 516B, eod-refresh 967B) + 4 protocol markdown files (am-auto.md 6KB, am-triage.md 17KB, eod-meeting-sync.md 1KB, eod-system-refres",
+          "[2026-04-05] Topic: Signal Intelligence \u2014 unified cross-channel topic tracking with FTS | Actions: Created signal_tracker table + 4 views (signal_heat_map, signal_trending, signal_person_topics, signal_wiki_candidates) in DuckDB. Wrote signal-intelligence.md protocol (5 use cases",
+          "[2026-04-06] Topic: MotherDuck time travel + hook execution logging wired into all protocols | Actions: Updated 4 protocol files (am-auto.md, am-triage.md, eod-meeting-sync.md, eod-system-refresh.md) + verification protocol. AM-Auto now creates morning named snapshot (am_YYYYMMDD"
+        ],
+        "commits_last_30d": 14
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "2 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/.kiro/specs/admin-block-fix/design.md, ~/.kiro/specs/admin-block-fix/tasks.md",
+      "blast_radius": "LOW",
+      "row_id": "P-K1"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/am-backend.md",
+      "layer": "protocol",
+      "lines": 256,
+      "first_heading": "AM-Backend Protocol \u2014 Autonomous Data Collection + Processing",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/build_referrers.py",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": "ovl-2",
+        "duplication_role": "loser",
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-06] Topic: AM hook architecture restructure \u2014 backend/frontend split | Actions: Created am-backend.md (6 phases: data collection, signal routing, enrichment scan, ABPS AI scan, portfolio scan, compile output) and am-frontend.md (7 steps: daily brief, output channels with",
+          "[2026-04-06] Topic: AM-Backend parallel architecture sketch | Actions: Read current am-backend.md + am-auto.kiro.hook, designed parallel ingestion architecture, wrote am-backend-parallel.md protocol (3 concurrent subagents for Slack/Asana/Email ingestion, sequential processing af",
+          "[2026-04-06] Topic: AM-Backend parallel hook wired to production | Actions: Updated am-auto.kiro.hook from v3.0.0 to v4.0.0 \u2014 now references am-backend-parallel.md with explicit 4-subagent parallel invocation instructions (fire all in same tool call block). Cleaned up 4 test arti"
+        ],
+        "commits_last_30d": 7
+      },
+      "action": "DELETE",
+      "category": "DUPLICATE",
+      "confidence": "MEDIUM",
+      "rationale": "Duplicate of /home/prichwil/shared/context/protocols/am-auto.md (group ovl-2, shape=heading_overlap).",
+      "blast_radius": "LOW",
+      "row_id": "P-D1"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/am-backend-parallel.md",
+      "layer": "protocol",
+      "lines": 608,
+      "first_heading": "AM-Backend Protocol \u2014 Parallel Architecture (v2, current)",
+      "evidence": {
+        "active_referrers": 3,
+        "latent_referrers": 1,
+        "documentation_referrers": 4,
+        "name_only_referrers": 7,
+        "referrer_list": [
+          "~/.kiro/hooks/am-auto.kiro.hook",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md",
+          "~/shared/context/intake/karpathy-verdict.md",
+          "~/shared/wiki/agent-created/_meta/blackboard-schema.md",
+          "~/shared/dashboards/data/wiki-docs/720244470f.txt"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-06] Topic: AM-Backend parallel architecture sketch | Actions: Read current am-backend.md + am-auto.kiro.hook, designed parallel ingestion architecture, wrote am-backend-parallel.md protocol (3 concurrent subagents for Slack/Asana/Email ingestion, sequential processing af",
+          "[2026-04-06] Topic: AM-Backend parallel architecture \u2014 Option C build + live test | Actions: Updated am-backend-parallel.md with 4-subagent design (Slack, Asana Sync, Activity Monitor, Email). Updated subagent specs, isolation matrix, failure handling, timing estimates. Fired all",
+          "[2026-04-06] Topic: AM-Backend parallel hook wired to production | Actions: Updated am-auto.kiro.hook from v3.0.0 to v4.0.0 \u2014 now references am-backend-parallel.md with explicit 4-subagent parallel invocation instructions (fire all in same tool call block). Cleaned up 4 test arti"
+        ],
+        "commits_last_30d": 9
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "3 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/hooks/am-auto.kiro.hook, ~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md",
+      "blast_radius": "HIGH",
+      "row_id": "P-K2"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/am-frontend.md",
+      "layer": "protocol",
+      "lines": 484,
+      "first_heading": "AM-Frontend Protocol \u2014 Brief + Triage + Command Center",
+      "evidence": {
+        "active_referrers": 3,
+        "latent_referrers": 1,
+        "documentation_referrers": 2,
+        "name_only_referrers": 6,
+        "referrer_list": [
+          "~/.kiro/hooks/am-triage.kiro.hook",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md",
+          "~/shared/context/active/karpathy-loop-run2.log"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-06] Topic: AM hook architecture restructure \u2014 backend/frontend split | Actions: Created am-backend.md (6 phases: data collection, signal routing, enrichment scan, ABPS AI scan, portfolio scan, compile output) and am-frontend.md (7 steps: daily brief, output channels with",
+          "[2026-04-06] Topic: AM-Frontend agentic execution upgrade + 15-task enrichment batch | Actions: Updated am-frontend.md protocol with Agentic Execution Rules (L5 pattern), Draft Safety Rule (prichwil-only recipients), rewrote Steps 3+6 from proposal-based to autonomous. Deleted 2 ",
+          "[2026-04-06] Topic: DuckDB-first full wiring \u2014 email, calendar, audit log sync + protocol updates | Actions: Created 3 DuckDB tables (signals.emails, main.calendar_events, asana.audit_log) + 5 views (calendar_today, calendar_week, emails_actionable, emails_unanswered, recent_audi"
+        ],
+        "commits_last_30d": 9
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "3 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/hooks/am-triage.kiro.hook, ~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md",
+      "blast_radius": "HIGH",
+      "row_id": "P-K3"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/am-triage.md",
+      "layer": "protocol",
+      "lines": 340,
+      "first_heading": "AM-Triage Protocol \u2014 Curate + Draft",
+      "evidence": {
+        "active_referrers": 2,
+        "latent_referrers": 0,
+        "documentation_referrers": 8,
+        "name_only_referrers": 2,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/admin-block-fix/design.md",
+          "~/.kiro/specs/admin-block-fix/tasks.md",
+          "~/shared/context/active/hook-protocol-audit.md",
+          "~/shared/context/tests/admin-block-preservation-test.sh"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "- Topic: Build the protocol-file hook architecture (Option C) | Actions: Created 4 thin hook triggers (am-auto 773B, am-triage 938B, eod-meeting-sync 516B, eod-refresh 967B) + 4 protocol markdown files (am-auto.md 6KB, am-triage.md 17KB, eod-meeting-sync.md 1KB, eod-system-refres",
+          "[2026-04-06] Topic: MotherDuck time travel + hook execution logging wired into all protocols | Actions: Updated 4 protocol files (am-auto.md, am-triage.md, eod-meeting-sync.md, eod-system-refresh.md) + verification protocol. AM-Auto now creates morning named snapshot (am_YYYYMMDD",
+          "[2026-04-06] Topic: Full cache recovery \u2014 all markdown files from Kiro server ephemeral cache | Actions: Broad sweep of all .md files (>100 bytes) across all cache snapshots; recovered 33 new files and updated 8 existing files with larger cached versions. Key recoveries: portable"
+        ],
+        "commits_last_30d": 8
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "2 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/.kiro/specs/admin-block-fix/design.md, ~/.kiro/specs/admin-block-fix/tasks.md",
+      "blast_radius": "LOW",
+      "row_id": "P-K4"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/asana-duckdb-sync.md",
+      "layer": "protocol",
+      "lines": 403,
+      "first_heading": "Asana \u2192 DuckDB Sync Protocol",
+      "evidence": {
+        "active_referrers": 5,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 2,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md",
+          "~/shared/context/protocols/eod-backend.md",
+          "~/shared/context/protocols/am-backend.md",
+          "~/shared/context/protocols/eod-system-refresh.md",
+          "~/shared/context/protocols/am-auto.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-06] Topic: Fix AM-Backend Subagent C DuckDB writes + fix Dive rendering | Actions: Created email-calendar-duckdb-sync.md protocol (explicit SQL templates, column mappings, sender classification, execution order with DuckDB-first). Updated am-backend-parallel.md Subagent ",
+          "[2026-04-16] Topic: Routine_RW name standardization across DuckDB + protocols | Actions: Normalized all long Asana enum names to short names in DuckDB (asana_tasks + asana_task_history, 24 rows fixed), updated ROUTINE_MAP in asana-duckdb-sync.md to accept both forms and always ou"
+        ],
+        "commits_last_30d": 5
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "5 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md, ~/shared/context/protocols/eod-backend.md",
+      "blast_radius": "HIGH",
+      "row_id": "P-K5"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/communication-analytics.md",
+      "layer": "protocol",
+      "lines": 82,
+      "first_heading": "Communication Analytics Protocol",
+      "evidence": {
+        "active_referrers": 3,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 0,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md",
+          "~/shared/context/protocols/eod-backend.md",
+          "~/shared/context/protocols/eod-system-refresh.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [],
+        "commits_last_30d": 2
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "3 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md, ~/shared/context/protocols/eod-backend.md",
+      "blast_radius": "HIGH",
+      "row_id": "P-K6"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/context-enrichment.md",
+      "layer": "protocol",
+      "lines": 313,
+      "first_heading": "Context Enrichment Protocol \u2014 Phase 2.5",
+      "evidence": {
+        "active_referrers": 4,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 1,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md",
+          "~/shared/context/protocols/eod-backend.md",
+          "~/shared/context/protocols/am-backend-parallel.md",
+          "~/shared/context/protocols/eod-system-refresh.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-13] Topic: Wiki candidates view fix \u2014 hard channel_spread gate was preventing single-source high-signal topics from surfacing | Actions: Rewrote signals.wiki_candidates view with composite quality_score (strength + channel bonus + author bonus + mention bonus) and three ",
+          "[2026-04-13] Topic: End-to-end audit of thread data flow through AM pipeline | Actions: Updated am-frontend.md HEADS UP section to query slack_unanswered + emails_unanswered with structured SQL. Updated Proactive Drafts section with explicit queries for both views. Audited all do",
+          "[2026-04-14] Topic: Admin block bugfix spec \u2014 full execution (all 18 tasks complete) | Actions: Completed Tasks 3.2\u20133.10 (protocol changes already in place from prior session, verified each), Checkpoint 4 (all 10 items pass), Task 5 (normalized non-standard Routine_RW values, fix"
+        ],
+        "commits_last_30d": 6
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "4 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md, ~/shared/context/protocols/eod-backend.md",
+      "blast_radius": "HIGH",
+      "row_id": "P-K7"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/duckdb-access-policy.md",
+      "layer": "protocol",
+      "lines": 52,
+      "first_heading": "DuckDB Access Policy",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 1,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-16] Topic: EOD phase-skipping structural fixes \u2014 all 3 implemented | Actions: (1) Hard gate added to eod-frontend.md: requires all 3 backend JSONs with today's date before presenting any summary, no \"skip gracefully\" fallback. (2) Skip visibility: eod-phase-tracker.md no"
+        ],
+        "commits_last_30d": 1
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "HIGH",
+      "rationale": "Zero active referrers; 0 latent, 2 documentation, 1 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "P-D2"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/duckdb-schema-verification.md",
+      "layer": "protocol",
+      "lines": 84,
+      "first_heading": "DuckDB Schema Verification Protocol",
+      "evidence": {
+        "active_referrers": 3,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 1,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md",
+          "~/shared/context/protocols/am-backend.md",
+          "~/shared/context/protocols/am-auto.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-06] Topic: DuckDB schema persistence fixes + AgentCore Memory evaluation | Actions: Created duckdb-schema-verification.md protocol (verify database identity, file path, table existence after every schema write); created ensure-schema.sql (idempotent CREATE IF NOT EXISTS "
+        ],
+        "commits_last_30d": 3
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "3 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md, ~/shared/context/protocols/am-backend.md",
+      "blast_radius": "HIGH",
+      "row_id": "P-K8"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/email-calendar-duckdb-sync.md",
+      "layer": "protocol",
+      "lines": 210,
+      "first_heading": "Email + Calendar \u2192 DuckDB Sync Protocol",
+      "evidence": {
+        "active_referrers": 1,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 2,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-06] Topic: Fix AM-Backend Subagent C DuckDB writes + fix Dive rendering | Actions: Created email-calendar-duckdb-sync.md protocol (explicit SQL templates, column mappings, sender classification, execution order with DuckDB-first). Updated am-backend-parallel.md Subagent ",
+          "[2026-04-14] Topic: Email ingestion scope audit \u2014 inbox-only vs all folders | Actions: Traced email ingestion path through am-auto.md \u2192 am-backend-parallel.md \u2192 email-calendar-duckdb-sync.md. Confirmed current protocol calls `email_inbox(limit=25)` only \u2014 no custom folders, subfo",
+          "[2026-04-14] Topic: Email ingestion protocol updated \u2014 all folders, date-bounded scan | Actions: Rewrote email-calendar-duckdb-sync.md Step 1: replaced `email_inbox(limit=25)` with `email_search(query=\"*\", startDate, endDate, limit=250)` covering all folders; added Step 1A (query"
+        ],
+        "commits_last_30d": 3
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "1 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md",
+      "blast_radius": "LOW",
+      "row_id": "P-K9"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/eod-backend.md",
+      "layer": "protocol",
+      "lines": 220,
+      "first_heading": "EOD-Backend Protocol \u2014 Meeting Sync + Reconciliation + Maintenance",
+      "evidence": {
+        "active_referrers": 1,
+        "latent_referrers": 1,
+        "documentation_referrers": 2,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/hooks/eod.kiro.hook",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md"
+        ],
+        "duplication_group": "dup-1",
+        "duplication_role": "loser",
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-06] Topic: EOD hook architecture restructure \u2014 backend/frontend split | Actions: Created eod-backend.md (7 phases: meeting ingestion, Asana reconciliation, organ cascade, recurring tasks, housekeeping, Karpathy experiments, compile output) and eod-frontend.md (6 steps: E",
+          "[2026-04-07] Topic: Karpathy experiment CLI discovery + attempted execution | Actions: Located karpathy-loop.sh at ~/shared/tools/scripts/ (not ~/shared/tools/), verified kiro-cli binary + karpathy agent + eval-a/b/c agents all present, checked DuckDB experiment count (110 total,",
+          "[2026-04-12] Topic: SharePoint durability layer + hook/protocol audit + system-wide updates | Actions: Created sharepoint-durability-sync.md protocol (bidirectional push/pull logic), created hook-protocol-audit.md (16-hook inventory + 20 protocol files), created 4 SharePoint fold"
+        ],
+        "commits_last_30d": 7
+      },
+      "action": "DELETE",
+      "category": "DUPLICATE",
+      "confidence": "MEDIUM",
+      "rationale": "Duplicate of /home/prichwil/shared/context/protocols/eod-frontend.md (group dup-1, shape=stem_variant).",
+      "blast_radius": "MEDIUM",
+      "row_id": "P-D3"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/eod-frontend.md",
+      "layer": "protocol",
+      "lines": 168,
+      "first_heading": "EOD-Frontend Protocol \u2014 Summary + Decisions + Report",
+      "evidence": {
+        "active_referrers": 3,
+        "latent_referrers": 1,
+        "documentation_referrers": 2,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/hooks/eod.kiro.hook",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md",
+          "~/shared/context/active/karpathy-loop-run2.log"
+        ],
+        "duplication_group": "dup-1",
+        "duplication_role": "survivor",
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-06] Topic: EOD hook architecture restructure \u2014 backend/frontend split | Actions: Created eod-backend.md (7 phases: meeting ingestion, Asana reconciliation, organ cascade, recurring tasks, housekeeping, Karpathy experiments, compile output) and eod-frontend.md (6 steps: E",
+          "[2026-04-12] Topic: SharePoint durability layer + hook/protocol audit + system-wide updates | Actions: Created sharepoint-durability-sync.md protocol (bidirectional push/pull logic), created hook-protocol-audit.md (16-hook inventory + 20 protocol files), created 4 SharePoint fold",
+          "[2026-04-12] Topic: SharePoint folder seeding + artifacts dedup + protocol/device/spine updates | Actions: Seeded 3 Kiro-Drive folders (portable-body with initial body-snapshot-2026-04-12.md, meeting-briefs with index covering Austin summit week, system-state already had 3 files)"
+        ],
+        "commits_last_30d": 5
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "3 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/hooks/eod.kiro.hook, ~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md",
+      "blast_radius": "HIGH",
+      "row_id": "P-K10"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/eod-meeting-sync.md",
+      "layer": "protocol",
+      "lines": 66,
+      "first_heading": "EOD Meeting Sync Protocol",
+      "evidence": {
+        "active_referrers": 1,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "- Topic: Build the protocol-file hook architecture (Option C) | Actions: Created 4 thin hook triggers (am-auto 773B, am-triage 938B, eod-meeting-sync 516B, eod-refresh 967B) + 4 protocol markdown files (am-auto.md 6KB, am-triage.md 17KB, eod-meeting-sync.md 1KB, eod-system-refres",
+          "[2026-04-06] Topic: MotherDuck time travel + hook execution logging wired into all protocols | Actions: Updated 4 protocol files (am-auto.md, am-triage.md, eod-meeting-sync.md, eod-system-refresh.md) + verification protocol. AM-Auto now creates morning named snapshot (am_YYYYMMDD",
+          "[2026-04-06] Topic: EOD parallelism evaluation | Actions: Read both EOD protocols (eod-meeting-sync.md, eod-system-refresh.md) and mapped the full dependency chain across all 6 phases. | Decisions: EOD does NOT benefit from parallel subagents \u2014 nearly all phases are serial (each "
+        ],
+        "commits_last_30d": 4
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "1 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md",
+      "blast_radius": "LOW",
+      "row_id": "P-K11"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/eod-system-refresh.md",
+      "layer": "protocol",
+      "lines": 376,
+      "first_heading": "EOD System Refresh Protocol",
+      "evidence": {
+        "active_referrers": 2,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 5,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md",
+          "~/shared/context/tests/admin-block-preservation-test.sh"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "- Topic: Build the protocol-file hook architecture (Option C) | Actions: Created 4 thin hook triggers (am-auto 773B, am-triage 938B, eod-meeting-sync 516B, eod-refresh 967B) + 4 protocol markdown files (am-auto.md 6KB, am-triage.md 17KB, eod-meeting-sync.md 1KB, eod-system-refres",
+          "[2026-04-03] Topic: Grok synthesis eval + EOD compression enforcement gap | Actions: Evaluated Grok repo analysis (accurate on architecture, fantasy on milestones/specs); inspected EOD-2 hooks + eod-system-refresh.md protocol; read gut.md for budget rules; added 5-step compressio",
+          "[2026-04-03] Topic: Remove 30,000w hard body ceiling \u2014 fully adaptive budgets | Actions: Removed all 30,000w hard limit references from gut.md, heart.md, karpathy.md, nervous-system.md, eod-system-refresh.md (main + portable-body copies, ~12 edits across 8 files). Replaced with d"
+        ],
+        "commits_last_30d": 11
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "2 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md, ~/shared/context/tests/admin-block-preservation-test.sh",
+      "blast_radius": "LOW",
+      "row_id": "P-K12"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/hard-thing-selection.md",
+      "layer": "protocol",
+      "lines": 404,
+      "first_heading": "Hard Thing Selection Protocol",
+      "evidence": {
+        "active_referrers": 11,
+        "latent_referrers": 0,
+        "documentation_referrers": 6,
+        "name_only_referrers": 4,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/system-subtraction-audit/design.md",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/intake/organ-changes.md",
+          "~/shared/context/intake/karpathy-verdict.md",
+          "~/shared/context/intake/karpathy-queue.md",
+          "~/shared/context/body/amcc.md",
+          "~/shared/context/body/changelog.md",
+          "~/shared/context/protocols/am-backend-parallel.md",
+          "~/shared/tools/scripts/hard-thing-refresh.py"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-20] Topic: Hard-thing redesign PROMOTED to live | Actions: Executed README promotion checklist. Applied amcc-patch (section replacement in body/amcc.md, streak/resistance/escalation untouched). Copied hard-thing-selection.md to context/protocols/ with live status + added",
+          "[2026-04-21] Topic: Karpathy triage of Issues 1-6 bundle | Actions: Invoked karpathy via general-task-execution subagent with full context read list (karpathy.md, heart.md, gut.md, karpathy-queue.md, hard-thing-selection.md, am-backend-parallel.md, am-auto hook, session-log tail)",
+          "[2026-04-21] Topic: Stress-test system-subtraction-audit design against 8 real edge cases | Actions: Recon on actual system state (confirmed ghost references \u2014 hard-thing-selection.md doesn't exist; confirmed `inclusion: auto` is a real frontmatter value not in design; noted soul"
+        ],
+        "commits_last_30d": 1
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "11 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/.kiro/specs/system-subtraction-audit/design.md, ~/shared/context/active/karpathy-loop-run2.log",
+      "blast_radius": "HIGH",
+      "row_id": "P-K13"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/loop-page-sync.md",
+      "layer": "protocol",
+      "lines": 59,
+      "first_heading": "Loop Page Sync Protocol",
+      "evidence": {
+        "active_referrers": 2,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 1,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md",
+          "~/shared/context/protocols/am-backend-parallel.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-07] Topic: Loop page ingestion into DuckDB + AM-Backend integration | Actions: Created docs.loop_pages table in DuckDB, ingested all 4 Loop pages (Brandon 1:1, DDD, MBR/QBR, Weekly Meeting) via sharepoint_read_loop with full content + previews, wrote loop-page-sync.md pr"
+        ],
+        "commits_last_30d": 1
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "2 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md, ~/shared/context/protocols/am-backend-parallel.md",
+      "blast_radius": "LOW",
+      "row_id": "P-K14"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/meeting-to-task-pipeline.md",
+      "layer": "protocol",
+      "lines": 211,
+      "first_heading": "Meeting-to-Task Pipeline",
+      "evidence": {
+        "active_referrers": 3,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md",
+          "~/shared/context/protocols/eod-backend.md",
+          "~/shared/context/protocols/eod-meeting-sync.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-11] Topic: Hedy + DuckDB role audit across AM/EOD hooks | Actions: Read am-auto.md, eod-meeting-sync.md, eod-system-refresh.md, and meeting-to-task-pipeline.md protocols. Mapped full data flow: Hedy feeds EOD-1 (session pull \u2192 meeting series files \u2192 action item extractio",
+          "[2026-04-20] Topic: Full AM-Backend v2 parallel run + Asana consolidation principle codified | Actions: Executed all phases \u2014 4 subagents parallel (Slack 47 msgs + 7 thread replies, Email 41+17 cal, Loop 5 pages, Hedy 2 new sessions) + orchestrator B1/B2 (113 tasks UPSERTed to as"
+        ],
+        "commits_last_30d": 3
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "3 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md, ~/shared/context/protocols/eod-backend.md",
+      "blast_radius": "HIGH",
+      "row_id": "P-K15"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/seasonality-calendar.md",
+      "layer": "protocol",
+      "lines": 186,
+      "first_heading": "Seasonality Calendar \u2014 PS Markets (2026)",
+      "evidence": {
+        "active_referrers": 4,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 2,
+        "referrer_list": [
+          "~/.kiro/agents/wbr-callouts/market-analyst.md",
+          "~/.kiro/agents/wbr-callouts/callout-writer.md",
+          "~/.kiro/skills/wbr-callouts/references/callout-principles.md",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/protocols/state-file-engine.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-12] Topic: Seasonality calendar + MX Semana Santa correction + W14 update | Actions: Confirmed Semana Santa 2026 (Mar 29\u2013Apr 5) is exactly W14 \u2014 the primary driver of MX's -33% WoW decline, not structural CVR degradation; corrected MX state file narrative (holiday suppre",
+          "[2026-04-12] Topic: Seasonality calendar expanded to all 10 markets | Actions: Restructured seasonality-calendar.md \u2014 merged JP into WW section, added full market-specific calendars for US (11 events), CA (10 events), UK (9 events), DE (9 events), FR (12 events), IT (11 events), ",
+          "[2026-04-12] Topic: WBR hook seasonality wiring + Artifacts folder restructure reflection | Actions: Wired seasonality-calendar.md into WBR callout pipeline \u2014 added as input #6 in callout-writer.md agent definition and as mandatory check in callout-principles.md (both the skill r"
+        ],
+        "commits_last_30d": 1
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "4 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/agents/wbr-callouts/market-analyst.md, ~/.kiro/agents/wbr-callouts/callout-writer.md, ~/.kiro/skills/wbr-callouts/references/callout-principles.md",
+      "blast_radius": "HIGH",
+      "row_id": "P-K16"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/sharepoint-durability-sync.md",
+      "layer": "protocol",
+      "lines": 167,
+      "first_heading": "SharePoint Durability Sync Protocol",
+      "evidence": {
+        "active_referrers": 6,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 5,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md",
+          "~/shared/context/protocols/eod-frontend.md",
+          "~/shared/context/protocols/eod-backend.md",
+          "~/shared/context/protocols/am-backend-parallel.md",
+          "~/shared/context/protocols/am-frontend.md",
+          "~/shared/context/protocols/am-auto.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-12] Topic: SharePoint durability layer + hook/protocol audit + system-wide updates | Actions: Created sharepoint-durability-sync.md protocol (bidirectional push/pull logic), created hook-protocol-audit.md (16-hook inventory + 20 protocol files), created 4 SharePoint fold",
+          "[2026-04-12] Topic: SharePoint folder seeding + artifacts dedup + protocol/device/spine updates | Actions: Seeded 3 Kiro-Drive folders (portable-body with initial body-snapshot-2026-04-12.md, meeting-briefs with index covering Austin summit week, system-state already had 3 files)",
+          "[2026-04-12] Topic: State file hook integration architecture \u2014 where does refresh live? | Actions: Read am-backend-parallel.md, eod-system-refresh.md, sharepoint-durability-sync.md to map the full pipeline; analyzed data dependencies and timing for state file generation vs correc"
+        ],
+        "commits_last_30d": 2
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "6 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md, ~/shared/context/protocols/eod-frontend.md",
+      "blast_radius": "HIGH",
+      "row_id": "P-K17"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/signal-intelligence.md",
+      "layer": "protocol",
+      "lines": 219,
+      "first_heading": "Signal Intelligence Protocol",
+      "evidence": {
+        "active_referrers": 3,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md",
+          "~/shared/context/protocols/am-backend.md",
+          "~/shared/context/protocols/am-auto.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-05] Topic: Signal Intelligence \u2014 unified cross-channel topic tracking with FTS | Actions: Created signal_tracker table + 4 views (signal_heat_map, signal_trending, signal_person_topics, signal_wiki_candidates) in DuckDB. Wrote signal-intelligence.md protocol (5 use cases",
+          "[2026-04-13] Topic: Wiki candidates view fix \u2014 hard channel_spread gate was preventing single-source high-signal topics from surfacing | Actions: Rewrote signals.wiki_candidates view with composite quality_score (strength + channel bonus + author bonus + mention bonus) and three "
+        ],
+        "commits_last_30d": 3
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "3 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md, ~/shared/context/protocols/am-backend.md",
+      "blast_radius": "HIGH",
+      "row_id": "P-K18"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/signal-to-task-pipeline.md",
+      "layer": "protocol",
+      "lines": 204,
+      "first_heading": "Signal-to-Task Pipeline",
+      "evidence": {
+        "active_referrers": 4,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 2,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md",
+          "~/shared/context/protocols/am-backend.md",
+          "~/shared/context/protocols/am-auto.md",
+          "~/shared/context/protocols/meeting-to-task-pipeline.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-20] Topic: Full AM-Backend v2 parallel run + Asana consolidation principle codified | Actions: Executed all phases \u2014 4 subagents parallel (Slack 47 msgs + 7 thread replies, Email 41+17 cal, Loop 5 pages, Hedy 2 new sessions) + orchestrator B1/B2 (113 tasks UPSERTed to as"
+        ],
+        "commits_last_30d": 3
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "4 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md, ~/shared/context/protocols/am-backend.md",
+      "blast_radius": "HIGH",
+      "row_id": "P-K19"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/slack-conversation-intelligence.md",
+      "layer": "protocol",
+      "lines": 129,
+      "first_heading": "Slack Conversation Intelligence Protocol",
+      "evidence": {
+        "active_referrers": 3,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 2,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md",
+          "~/shared/context/protocols/am-backend.md",
+          "~/shared/context/protocols/am-auto.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [],
+        "commits_last_30d": 2
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "3 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md, ~/shared/context/protocols/am-backend.md",
+      "blast_radius": "HIGH",
+      "row_id": "P-K20"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/slack-history-backfill.md",
+      "layer": "protocol",
+      "lines": 210,
+      "first_heading": "Slack History Backfill \u2014 Exhaustive Context Recovery",
+      "evidence": {
+        "active_referrers": 1,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 2,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/intake/session-log.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-13] Topic: Exhaustive Slack history backfill \u2014 protocol + task created | Actions: Created ~/shared/context/protocols/slack-history-backfill.md (full protocol: 4-tier channel list, 80+ DMs, execution plan, progress tracker, enrichment opportunities, resume instructions). "
+        ],
+        "commits_last_30d": 1
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "1 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/intake/session-log.md",
+      "blast_radius": "LOW",
+      "row_id": "P-K21"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/state-file-au-ps.md",
+      "layer": "protocol",
+      "lines": 54,
+      "first_heading": "AU Paid Search State File \u2014 Agent Protocol",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 4,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": "ovl-3",
+        "duplication_role": "survivor",
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-12] Topic: WW Testing + AU state files created; .md cleanup from SharePoint | Actions: Broad search across local filesystem + SharePoint (Kiro-Drive, Artifacts/wiki-sync, ABIX team site) for AU and WW Testing source data \u2014 pulled AU callouts (W11-W14), AU meeting notes, "
+        ],
+        "commits_last_30d": 1
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "HIGH",
+      "rationale": "Zero active referrers; 0 latent, 2 documentation, 4 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "P-D4"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/state-file-engine.md",
+      "layer": "protocol",
+      "lines": 206,
+      "first_heading": "State File Engine \u2014 Generic Protocol",
+      "evidence": {
+        "active_referrers": 3,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 7,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/intake/session-log.md",
+          "~/shared/context/protocols/am-backend-parallel.md",
+          "~/shared/context/protocols/eod-system-refresh.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-12] Topic: State file engine \u2014 full three-layer wiring across AM/EOD/SharePoint protocols | Actions: Created state-file-engine.md (139 lines) as generic market-agnostic engine with registered state files table (MX active, AU/WW Testing planned), three-layer architecture ",
+          "[2026-04-12] Topic: WW Testing + AU state files created; .md cleanup from SharePoint | Actions: Broad search across local filesystem + SharePoint (Kiro-Drive, Artifacts/wiki-sync, ABIX team site) for AU and WW Testing source data \u2014 pulled AU callouts (W11-W14), AU meeting notes, ",
+          "[2026-04-12] Topic: Implement validated feedback \u2014 Appendix H + conditional Flags | Actions: Added Appendix H (placeholder schema + JSON output contract) to AU state file (18 tags, CPA/OCI-specific) and WW Testing state file (17 tags, workstream-specific with SOTB_WORKSTREAM_TABL"
+        ],
+        "commits_last_30d": 4
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "3 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/intake/session-log.md, ~/shared/context/protocols/am-backend-parallel.md",
+      "blast_radius": "HIGH",
+      "row_id": "P-K22"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/state-file-mx-ps.md",
+      "layer": "protocol",
+      "lines": 53,
+      "first_heading": "MX Paid Search State File \u2014 Agent Protocol",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 5,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": "ovl-3",
+        "duplication_role": "loser",
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-12] Topic: MX state file gap audit against original prompt + remediation | Actions: Systematic audit of 20+ requirements from the original architectural prompt; added null case/cost-of-inaction paragraph (quantified $61K overshoot, 477 NB reg ceiling, 2-3 week exhaustion",
+          "[2026-04-12] Topic: State file engine \u2014 full three-layer wiring across AM/EOD/SharePoint protocols | Actions: Created state-file-engine.md (139 lines) as generic market-agnostic engine with registered state files table (MX active, AU/WW Testing planned), three-layer architecture "
+        ],
+        "commits_last_30d": 1
+      },
+      "action": "DELETE",
+      "category": "DUPLICATE",
+      "confidence": "MEDIUM",
+      "rationale": "Duplicate of /home/prichwil/shared/context/protocols/state-file-au-ps.md (group ovl-3, shape=heading_overlap).",
+      "blast_radius": "LOW",
+      "row_id": "P-D5"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/state-file-ww-testing.md",
+      "layer": "protocol",
+      "lines": 166,
+      "first_heading": "WW Testing State File \u2014 Agent Protocol",
+      "evidence": {
+        "active_referrers": 1,
+        "latent_referrers": 1,
+        "documentation_referrers": 3,
+        "name_only_referrers": 5,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/steering/ww-testing-loop-prep.md",
+          "~/shared/context/intake/session-log.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-12] Topic: WW Testing + AU state files created; .md cleanup from SharePoint | Actions: Broad search across local filesystem + SharePoint (Kiro-Drive, Artifacts/wiki-sync, ABIX team site) for AU and WW Testing source data \u2014 pulled AU callouts (W11-W14), AU meeting notes, ",
+          "[2026-04-21] Topic: WW Testing state file schema redesign proposal | Actions: Read state-file-engine.md + state-file-ww-testing.md + ww-testing-state.md. Diagnosed today's errors (Polaris dial-up claim, email overlay stalled claim, missed Sitelink task) as structural gaps \u2014 state",
+          "1. **`~/shared/context/protocols/state-file-ww-testing.md`** \u2014 rewritten. Added two new sections:"
+        ],
+        "commits_last_30d": 2
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "1 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/.kiro/steering/ww-testing-loop-prep.md, ~/shared/context/intake/session-log.md",
+      "blast_radius": "LOW",
+      "row_id": "P-K23"
+    },
+    {
+      "rel_path": "/home/prichwil/shared/context/protocols/workflow-observability.md",
+      "layer": "protocol",
+      "lines": 99,
+      "first_heading": "Workflow Observability Protocol",
+      "evidence": {
+        "active_referrers": 1,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 0,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/hook-protocol-audit.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 2
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-PROTOCOL",
+      "confidence": "HIGH",
+      "rationale": "1 active hook/agent references this protocol.",
+      "current_usage": "~/.kiro/specs/system-subtraction-audit/inventory.json, ~/shared/context/active/hook-protocol-audit.md",
+      "blast_radius": "LOW",
+      "row_id": "P-K24"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/agent-bridge-sync.kiro.hook",
+      "layer": "hook",
+      "lines": 9,
+      "first_heading": "4 \u00b7 Agent Bridge Sync",
+      "evidence": {
+        "active_referrers": 1,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 2,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-HOOK",
+      "confidence": "HIGH",
+      "rationale": "Enabled hook, actively firing.",
+      "blast_radius": "LOW",
+      "row_id": "H-K1"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/am-auto.kiro.hook",
+      "layer": "hook",
+      "lines": 15,
+      "first_heading": "AM-Backend: Ingest + Process",
+      "evidence": {
+        "active_referrers": 12,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 7,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/intake/session-log.md",
+          "~/shared/context/intake/karpathy-verdict.md",
+          "~/shared/context/intake/karpathy-queue.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-06] Topic: AM-Backend parallel architecture sketch | Actions: Read current am-backend.md + am-auto.kiro.hook, designed parallel ingestion architecture, wrote am-backend-parallel.md protocol (3 concurrent subagents for Slack/Asana/Email ingestion, sequential processing af",
+          "[2026-04-06] Topic: AM-Backend parallel hook wired to production | Actions: Updated am-auto.kiro.hook from v3.0.0 to v4.0.0 \u2014 now references am-backend-parallel.md with explicit 4-subagent parallel invocation instructions (fire all in same tool call block). Cleaned up 4 test arti",
+          "[2026-04-06] Topic: DuckDB-first full wiring \u2014 email, calendar, audit log sync + protocol updates | Actions: Created 3 DuckDB tables (signals.emails, main.calendar_events, asana.audit_log) + 5 views (calendar_today, calendar_week, emails_actionable, emails_unanswered, recent_audi"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "INTENTIONALLY-DISABLED",
+      "confidence": "HIGH",
+      "rationale": "Disabled with dated rationale in description.",
+      "blast_radius": "LOW",
+      "row_id": "H-K2"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/am-triage.kiro.hook",
+      "layer": "hook",
+      "lines": 11,
+      "first_heading": ".AM-Frontend: Brief + Triage + Command Center",
+      "evidence": {
+        "active_referrers": 51,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 2,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-HOOK",
+      "confidence": "HIGH",
+      "rationale": "Enabled hook, actively firing.",
+      "blast_radius": "LOW",
+      "row_id": "H-K3"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/audit-asana-writes.kiro.hook",
+      "layer": "hook",
+      "lines": 14,
+      "first_heading": "Audit: Asana Writes",
+      "evidence": {
+        "active_referrers": 56,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/kiro-setup-optimization/tasks.md",
+          "~/shared/context/active/karpathy-loop-run2.log"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-06] Topic: DuckDB-first full wiring \u2014 email, calendar, audit log sync + protocol updates | Actions: Created 3 DuckDB tables (signals.emails, main.calendar_events, asana.audit_log) + 5 views (calendar_today, calendar_week, emails_actionable, emails_unanswered, recent_audi"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-HOOK",
+      "confidence": "HIGH",
+      "rationale": "Enabled hook, actively firing.",
+      "blast_radius": "LOW",
+      "row_id": "H-K4"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/context-preloader.kiro.hook",
+      "layer": "hook",
+      "lines": 11,
+      "first_heading": "Context Pre-Loader",
+      "evidence": {
+        "active_referrers": 1,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 2,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/kiro-setup-optimization/tasks.md",
+          "~/shared/context/active/karpathy-loop-run2.log"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-HOOK",
+      "confidence": "HIGH",
+      "rationale": "Enabled hook, actively firing.",
+      "blast_radius": "LOW",
+      "row_id": "H-K5"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/dashboard-server.kiro.hook",
+      "layer": "hook",
+      "lines": 11,
+      "first_heading": "Dashboard Server Keepalive",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 2,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-15] Topic: Dashboard server auto-restart hook | Actions: Confirmed .bashrc already has auto-start for port 8080 (added previously), but it doesn't help when IDE stays open and container recycles without spawning a new shell. Created dashboard-server.kiro.hook (promptSubm",
+          "[2026-04-15] Topic: Dashboard server auto-restart hook | Actions: Confirmed .bashrc already had auto-start (line 31-33) but it doesn't help when IDE stays open and container recycles underneath. Created dashboard-server.kiro.hook (promptSubmit, runCommand) that checks lsof :8080 ",
+          "[2026-04-21] Topic: Pre-build verification for harmony-forecast-deploy hook | Actions: Checked local evidence for forecast-sharepoint-push.hook firing. xlsx mtime today 15:04 PT (pipeline ran), forecast-data.json mtime today 19:53 PT (manual refresh-forecast.py run 5hr later). Sh"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "HIGH",
+      "rationale": "Zero active referrers; 0 latent, 2 documentation, 2 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "H-D1"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/eod.kiro.hook",
+      "layer": "hook",
+      "lines": 11,
+      "first_heading": "",
+      "evidence": {
+        "active_referrers": 59,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 7,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-11] Topic: Merged EOD hooks | Actions: Combined eod-refresh.kiro.hook (frontend) and eod-meeting-sync.kiro.hook (backend) into single eod.kiro.hook v7.0.0; deleted old files from .kiro/hooks/ and synced to shared/.kiro/hooks/ | Decisions: Single unified hook runs backend",
+          "[2026-04-12] Topic: SharePoint durability layer + hook/protocol audit + system-wide updates | Actions: Created sharepoint-durability-sync.md protocol (bidirectional push/pull logic), created hook-protocol-audit.md (16-hook inventory + 20 protocol files), created 4 SharePoint fold",
+          "[2026-04-18] Topic: Distributed wiki-contribution layer shipped + wiki maintenance extracted from daily EOD | Actions: Created shared/context/intake/wiki-candidates.md (append-only queue with kill condition 2026-06-01). Added one-line contribution block to 4 hooks: am-auto (Phase"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-HOOK",
+      "confidence": "HIGH",
+      "rationale": "Enabled hook, actively firing.",
+      "blast_radius": "LOW",
+      "row_id": "H-K6"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/forecast-sharepoint-push.kiro.hook",
+      "layer": "hook",
+      "lines": 15,
+      "first_heading": "Push Forecast Tracker to SharePoint",
+      "evidence": {
+        "active_referrers": 1,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 1,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/dashboards/validation/r3-duplicate-xlsx-validation.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-20] Topic: How ps-forecast-tracker.xlsx gets updated \u2014 distinction vs sharepoint-sync hook and wiki maintenance | Actions: Traced the update chain: WBR pipeline (wbr-pipeline.sh) Step 5 populate_forecast_tracker.py writes to ps.forecast_tracker on MotherDuck, Step 6 upda"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-HOOK",
+      "confidence": "HIGH",
+      "rationale": "Enabled hook, actively firing.",
+      "blast_radius": "LOW",
+      "row_id": "H-K7"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/guard-asana.kiro.hook",
+      "layer": "hook",
+      "lines": 12,
+      "first_heading": "Guard: Asana",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 4,
+        "name_only_referrers": 1,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/kiro-setup-optimization/design.md",
+          "~/.kiro/specs/kiro-setup-optimization/tasks.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "MEDIUM",
+      "rationale": "Zero active referrers; 0 latent, 4 documentation, 1 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "H-D2"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/guard-calendar.kiro.hook",
+      "layer": "hook",
+      "lines": 12,
+      "first_heading": "Guard: Calendar",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "HIGH",
+      "rationale": "Zero active referrers; 0 latent, 2 documentation, 3 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "H-D3"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/guard-email.kiro.hook",
+      "layer": "hook",
+      "lines": 12,
+      "first_heading": "Guard: Email",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "HIGH",
+      "rationale": "Zero active referrers; 0 latent, 2 documentation, 3 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "H-D4"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/harmony-forecast-deploy.kiro.hook",
+      "layer": "hook",
+      "lines": 17,
+      "first_heading": "Deploy Forecast Tracker to Harmony",
+      "evidence": {
+        "active_referrers": 2,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 0,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/intake/session-log.md",
+          "~/shared/dashboards/deploy-forecast-harmony.sh"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-21] Topic: Durable design for Harmony forecast auto-deploy | Actions: Read wbr_pipeline.py (7-stage orchestrator), update-forecast-tracker.py (DuckDB \u2192 xlsx template), forecast-sharepoint-push.hook, wbr-pipeline-trigger.hook. Identified the pattern being built this week:",
+          "[2026-04-21] Topic: Built harmony-forecast-deploy hook end-to-end | Actions: Created shared/dashboards/deploy-forecast-harmony.sh (bash, idempotent, 3-stage: refresh-forecast.py \u2192 copy JSON \u2192 harmony app deploy --stage beta). Created shared/.kiro/hooks/harmony-forecast-deploy.kir"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-HOOK",
+      "confidence": "HIGH",
+      "rationale": "Enabled hook, actively firing.",
+      "blast_radius": "LOW",
+      "row_id": "H-K8"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/market-constraints-staleness-alert.kiro.hook",
+      "layer": "hook",
+      "lines": 13,
+      "first_heading": "Market Constraints Staleness Alert",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 0,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "HIGH",
+      "rationale": "Zero active referrers; 0 latent, 2 documentation, 0 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "H-D5"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/open-items-reminder.kiro.hook",
+      "layer": "hook",
+      "lines": 13,
+      "first_heading": "Open Items Reminder",
+      "evidence": {
+        "active_referrers": 1,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 1,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/intake/session-log.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-18] Topic: Blackboard 5/2 review \u2014 pre-registered success criteria + pending vocabulary patch staged | Actions: Added Success/Failure criteria section to blackboard-schema.md (3 success conditions, 3 failure conditions, 1 ambiguous-extend condition with specific measurem",
+          "[2026-04-18] Topic: Extended open-items-reminder hook to honor DUE YYYY-MM-DD markers | Actions: Updated shared/.kiro/hooks/open-items-reminder.kiro.hook from v2 to v3. Added Scan 2: scans entire session-log.md (not just 7-day window) for 'DUE YYYY-MM-DD' pattern. Surfaces items ",
+          "[2026-04-21T21:29] Topic: Follow-up reminders scheduled on karpathy triage outcomes | Actions: Filed three DUE-dated reminders in session-log so open-items-reminder.kiro.hook surfaces them within its 14-day window. (1) DUE 2026-04-22 \u2014 manually trigger am-auto.kiro.hook once to s"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-HOOK",
+      "confidence": "HIGH",
+      "rationale": "Enabled hook, actively firing.",
+      "blast_radius": "LOW",
+      "row_id": "H-K9"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/organ-change-detector.kiro.hook",
+      "layer": "hook",
+      "lines": 12,
+      "first_heading": "Organ Change Detector",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 2,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/kiro-setup-optimization/tasks.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "MEDIUM",
+      "rationale": "Zero active referrers; 0 latent, 3 documentation, 2 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "H-D6"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/ps-audit.kiro.hook",
+      "layer": "hook",
+      "lines": 9,
+      "first_heading": "3 \u00b7 PS Audit",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "HIGH",
+      "rationale": "Zero active referrers; 0 latent, 2 documentation, 3 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "H-D7"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/session-summary.kiro.hook",
+      "layer": "hook",
+      "lines": 11,
+      "first_heading": "Session Summary",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 4,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/kiro-setup-optimization/tasks.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "MEDIUM",
+      "rationale": "Zero active referrers; 0 latent, 3 documentation, 4 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "H-D8"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/sharepoint-sync.kiro.hook",
+      "layer": "hook",
+      "lines": 9,
+      "first_heading": "2 \u00b7 Sync to SharePoint",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 6,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-07] Topic: MCP reinstall + hook dependency check | Actions: Audited all MCP-related directories (toolbox, aim, mcp-registry). Installed 3 of 4 missing MCPs via mcp-registry (knowledge-discovery-mcp, ai-community-slack-mcp, amazon-sharepoint-mcp). xwiki-mcp failed \u2014 packa",
+          "[2026-04-12] Topic: SharePoint sync hook update | Actions: Updated sharepoint-sync.kiro.hook from v1\u2192v2.0.0; new hook runs two-phase pipeline (Phase 1: stage .docx locally via cli.py, Phase 2: upload via SharePoint MCP in parallel batches of 10); skips Phase 2 if no changes detec",
+          "[2026-04-18] Topic: Wiki-generation hook design \u2014 push back on mega-hook, then on \"put it in all hooks\" | Actions: Read sharepoint-sync.kiro.hook (30-line single-purpose, works). Declined to rewrite it into a wiki-generation orchestrator citing 5/2 blackboard stacking risk, subtr"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "HIGH",
+      "rationale": "Zero active referrers; 0 latent, 2 documentation, 6 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "H-D9"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/state-file-constraints-sync.kiro.hook",
+      "layer": "hook",
+      "lines": 16,
+      "first_heading": "Sync Market Constraints to State Files",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 1,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-20] Topic: Phase 2 downstream wiring shipped \u2014 callouts, forecast xlsx, state files all consuming ps.market_constraints | Actions: (1) Added \"Market constraints\" input section to callout-writer.md with ready-to-paste DuckDB query + interpretation guidance per field (gove"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "HIGH",
+      "rationale": "Zero active referrers; 0 latent, 2 documentation, 1 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "H-D10"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/steering-integrity-check.kiro.hook",
+      "layer": "hook",
+      "lines": 13,
+      "first_heading": "Guard: Steering Integrity",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 2,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-05] Topic: Steering file cleanup and duplication prevention | Actions: Deleted 4 redundant files (agentspaces-core, devspaces-core, product, file-creation-rules); demoted 4 files to auto inclusion (tech, process-execution, amazon-builder-production-safety, pilot-steering"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "HIGH",
+      "rationale": "Zero active referrers; 0 latent, 2 documentation, 2 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "H-D11"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/wbr-callouts.kiro.hook",
+      "layer": "hook",
+      "lines": 9,
+      "first_heading": "1 \u00b7 WBR: Weekly Callouts",
+      "evidence": {
+        "active_referrers": 4,
+        "latent_referrers": 1,
+        "documentation_referrers": 5,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/skills/wbr-callouts/references/callout-principles.md",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/skills-powers-adoption/design.md",
+          "~/.kiro/steering/richard-style-wbr.md",
+          "~/shared/context/intake/session-log.md",
+          "~/shared/context/protocols/state-file-engine.md",
+          "~/shared/wiki/agent-created/reporting/wbr-callout-guide.md",
+          "~/shared/dashboards/data/wiki-docs/6c6e1b5619.txt"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-13] Topic: Prediction ledger integration into WBR pipeline hooks | Actions: Updated wbr-pipeline-trigger.kiro.hook (v1\u2192v2) with Step 7 to auto-append predictions to ledger after projections run, updated wbr-callouts.kiro.hook (v3\u2192v4) with prediction scoring step at pipel",
+          "[2026-04-20] Topic: WBR callouts hook \u2014 state file coverage check | Actions: Read .kiro/hooks/wbr-callouts.kiro.hook, inspected ~/shared/wiki/state-files/ (AU fresh today, MX + WW-Testing 8 days stale at W14), confirmed no agent in the pipeline touches state files | Decisions: OP",
+          "[2026-04-20] Topic: State file ownership contract across AM-Backend + WBR + EOD hooks | Actions: Confirmed weekly hook order (Mon AM\u2192WBR, Tue-Fri AM only); designed field-level ownership table, proposed HTML comment markers (<!-- WBR-OWNED:* -->, <!-- AM-OWNED:* -->) for machine-"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-HOOK",
+      "confidence": "HIGH",
+      "rationale": "Enabled hook, actively firing.",
+      "blast_radius": "LOW",
+      "row_id": "H-K10"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/wbr-pipeline-trigger.kiro.hook",
+      "layer": "hook",
+      "lines": 15,
+      "first_heading": "WBR Pipeline Auto-Trigger",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 2,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-13] Topic: Prediction ledger integration into WBR pipeline hooks | Actions: Updated wbr-pipeline-trigger.kiro.hook (v1\u2192v2) with Step 7 to auto-append predictions to ledger after projections run, updated wbr-callouts.kiro.hook (v3\u2192v4) with prediction scoring step at pipel"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "HIGH",
+      "rationale": "Zero active referrers; 0 latent, 2 documentation, 2 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "H-D12"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/hooks/wiki-maintenance.kiro.hook",
+      "layer": "hook",
+      "lines": 10,
+      "first_heading": "5 \u00b7 Wiki Maintenance (weekly, manual)",
+      "evidence": {
+        "active_referrers": 4,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 4,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/intake/session-log.md",
+          "~/shared/context/protocols/eod-backend.md",
+          "~/shared/context/protocols/eod-system-refresh.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-18] Topic: Distributed wiki-contribution layer shipped + wiki maintenance extracted from daily EOD | Actions: Created shared/context/intake/wiki-candidates.md (append-only queue with kill condition 2026-06-01). Added one-line contribution block to 4 hooks: am-auto (Phase"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "ACTIVE-HOOK",
+      "confidence": "HIGH",
+      "rationale": "Enabled hook, actively firing.",
+      "blast_radius": "LOW",
+      "row_id": "H-K11"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/agentspaces-core.md",
+      "layer": "steering",
+      "lines": 31,
+      "first_heading": "AgentSpaces Core Rules",
+      "evidence": {
+        "active_referrers": 2,
+        "latent_referrers": 0,
+        "documentation_referrers": 4,
+        "name_only_referrers": 6,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/kiro-setup-optimization/tasks.md",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/wiki/agent-created/_meta/context-catalog.md",
+          "~/shared/dashboards/data/wiki-docs/1b1f7dc0ba.txt"
+        ],
+        "duplication_group": "ovl-4",
+        "duplication_role": "loser",
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-05] Topic: Asana schema drift handling | Actions: Added tasks 0.10 (schema drift handling) and 0.11 (schema_changes DuckDB table) to MCP spec. Covers: custom field changes (flex_fields JSON column for unknowns), project additions/archival (auto-detect via portfolio disco",
+          "[2026-04-05] Topic: Steering duplication root cause analysis via git history | Actions: Traced git commits for agentspaces-core.md, devspaces-core.md, environment-rules.md, product.md, tech.md; read kiro-setup-optimization spec requirements; identified Karpathy Run 23 as accident",
+          "[2026-04-12] Topic: Steering file audit \u2014 duplication and necessity assessment | Actions: Read all 29 steering files (24 root + 5 context/), compared inclusion modes, identified 3 zombie files (agentspaces-core.md, devspaces-core.md, file-creation-rules.md) that steering-integrit"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "DUPLICATE",
+      "confidence": "MEDIUM",
+      "rationale": "Duplicate of /home/prichwil/.kiro/steering/environment-rules.md (group ovl-4, shape=heading_overlap).",
+      "blast_radius": "MEDIUM",
+      "row_id": "S-D1"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/amazon-builder-production-safety.md",
+      "layer": "steering",
+      "lines": 23,
+      "first_heading": "Production Safety",
+      "evidence": {
+        "active_referrers": 2,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 7,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/wiki/agent-created/_meta/context-catalog.md",
+          "~/shared/dashboards/data/wiki-docs/1b1f7dc0ba.txt"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-12] Topic: Steering file audit \u2014 duplication and necessity assessment | Actions: Read all 29 steering files (24 root + 5 context/), compared inclusion modes, identified 3 zombie files (agentspaces-core.md, devspaces-core.md, file-creation-rules.md) that steering-integrit",
+          "[2026-04-12] Topic: Steering file cleanup \u2014 zombie deletion + front-matter demotion | Actions: Deleted 3 zombie files (agentspaces-core.md, devspaces-core.md, file-creation-rules.md) that were supposed to be removed 2026-04-05 per steering-integrity.md; added auto-inclusion front"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "AUTO-STEERING",
+      "confidence": "MEDIUM",
+      "rationale": "Auto-loaded steering; 2 path refs from elsewhere.",
+      "current_usage": "Loaded on every chat",
+      "blast_radius": "HIGH",
+      "row_id": "S-K1"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/architecture-eval-protocol.md",
+      "layer": "steering",
+      "lines": 45,
+      "first_heading": "Architecture Evaluation Protocol",
+      "evidence": {
+        "active_referrers": 2,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 1,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "CONDITIONAL-STEERING-USED",
+      "confidence": "MEDIUM",
+      "rationale": "Conditional steering, 2 active + 0 latent referrers.",
+      "blast_radius": "LOW",
+      "row_id": "S-K2"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/asana-guardrails.md",
+      "layer": "steering",
+      "lines": 149,
+      "first_heading": "Asana Guardrails",
+      "evidence": {
+        "active_referrers": 2,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "CONDITIONAL-STEERING-USED",
+      "confidence": "MEDIUM",
+      "rationale": "Conditional steering, 2 active + 0 latent referrers.",
+      "blast_radius": "LOW",
+      "row_id": "S-K3"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/devspaces-core.md",
+      "layer": "steering",
+      "lines": 33,
+      "first_heading": "DevSpaces Core Rules",
+      "evidence": {
+        "active_referrers": 2,
+        "latent_referrers": 0,
+        "documentation_referrers": 4,
+        "name_only_referrers": 6,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/kiro-setup-optimization/tasks.md",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/wiki/agent-created/_meta/context-catalog.md",
+          "~/shared/dashboards/data/wiki-docs/1b1f7dc0ba.txt"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-05] Topic: Asana schema drift handling | Actions: Added tasks 0.10 (schema drift handling) and 0.11 (schema_changes DuckDB table) to MCP spec. Covers: custom field changes (flex_fields JSON column for unknowns), project additions/archival (auto-detect via portfolio disco",
+          "[2026-04-05] Topic: Steering duplication root cause analysis via git history | Actions: Traced git commits for agentspaces-core.md, devspaces-core.md, environment-rules.md, product.md, tech.md; read kiro-setup-optimization spec requirements; identified Karpathy Run 23 as accident",
+          "[2026-04-12] Topic: Steering file audit \u2014 duplication and necessity assessment | Actions: Read all 29 steering files (24 root + 5 context/), compared inclusion modes, identified 3 zombie files (agentspaces-core.md, devspaces-core.md, file-creation-rules.md) that steering-integrit"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "AUTO-STEERING",
+      "confidence": "MEDIUM",
+      "rationale": "Auto-loaded steering; 2 path refs from elsewhere.",
+      "current_usage": "Loaded on every chat",
+      "blast_radius": "HIGH",
+      "row_id": "S-K4"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/document-registry.md",
+      "layer": "steering",
+      "lines": 95,
+      "first_heading": "Document Registry Protocol",
+      "evidence": {
+        "active_referrers": 4,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 0,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/intake/session-log.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-06] Topic: Document registry built in MotherDuck + agent steering | Actions: Created ps_analytics.docs schema with 3 tables (documents, versions, file_index) and 3 views (canonical, duplicates, unregistered); seeded 19 documents with canonical paths and stages, 30 file_i"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "AUTO-STEERING",
+      "confidence": "MEDIUM",
+      "rationale": "Auto-loaded steering; 4 path refs from elsewhere.",
+      "current_usage": "Loaded on every chat",
+      "blast_radius": "HIGH",
+      "row_id": "S-K5"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/duckdb-schema.md",
+      "layer": "steering",
+      "lines": 66,
+      "first_heading": "DuckDB Schema Reference (ps_analytics on MotherDuck)",
+      "evidence": {
+        "active_referrers": 3,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-06] Topic: DuckDB schema migration \u2014 EXECUTED | Actions: Created 7 new schemas on MotherDuck, dropped all 31 views, migrated 46 tables via CTAS+DROP (ALTER TABLE SET SCHEMA not supported on MotherDuck), created 9 new PS tables (markets, channels, metrics, targets, foreca",
+          "[2026-04-06] Topic: DuckDB-first tables + steering + sync wiring | Actions: Created 3 new DuckDB tables (main.calendar_events, signals.emails, asana.audit_log) and 5 views (calendar_today, calendar_week, emails_actionable, emails_unanswered, recent_audit). Updated duckdb-schema.m",
+          "[2026-04-06] Topic: DuckDB-first full wiring \u2014 email, calendar, audit log sync + protocol updates | Actions: Created 3 DuckDB tables (signals.emails, main.calendar_events, asana.audit_log) + 5 views (calendar_today, calendar_week, emails_actionable, emails_unanswered, recent_audi"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "AUTO-STEERING",
+      "confidence": "MEDIUM",
+      "rationale": "Auto-loaded steering; 3 path refs from elsewhere.",
+      "current_usage": "Loaded on every chat",
+      "blast_radius": "HIGH",
+      "row_id": "S-K6"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/environment-rules.md",
+      "layer": "steering",
+      "lines": 40,
+      "first_heading": "Environment Rules",
+      "evidence": {
+        "active_referrers": 5,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 5,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/kiro-setup-optimization/tasks.md",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/intake/wiki-candidates.md"
+        ],
+        "duplication_group": "ovl-4",
+        "duplication_role": "survivor",
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-03] Topic: Kiro Setup Optimization \u2014 full spec + execution | Actions: Researched kiro.dev docs/changelog/blog, created 3-file spec (design, requirements, tasks), executed all 16 tasks \u2014 converted 6 steering files to auto-inclusion, merged 2 into environment-rules.md, tri",
+          "[2026-04-03] Topic: Kiro Setup Optimization execution + AM-1/AM-2 validation | Actions: Executed all 16 spec tasks \u2014 backed up steering files (learned: backups inside ~/.kiro/steering/ get loaded as duplicate rules, moved to ~/kiro-steering-backup/), converted 6 files to auto-inc",
+          "[2026-04-05] Topic: Steering duplication root cause analysis via git history | Actions: Traced git commits for agentspaces-core.md, devspaces-core.md, environment-rules.md, product.md, tech.md; read kiro-setup-optimization spec requirements; identified Karpathy Run 23 as accident"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "AUTO-STEERING",
+      "confidence": "MEDIUM",
+      "rationale": "Auto-loaded steering; 5 path refs from elsewhere.",
+      "current_usage": "Loaded on every chat",
+      "blast_radius": "HIGH",
+      "row_id": "S-K7"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/file-creation-rules.md",
+      "layer": "steering",
+      "lines": 16,
+      "first_heading": "File Creation Rules",
+      "evidence": {
+        "active_referrers": 2,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 7,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/wiki/agent-created/_meta/context-catalog.md",
+          "~/shared/dashboards/data/wiki-docs/1b1f7dc0ba.txt"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-12] Topic: Steering file audit \u2014 duplication and necessity assessment | Actions: Read all 29 steering files (24 root + 5 context/), compared inclusion modes, identified 3 zombie files (agentspaces-core.md, devspaces-core.md, file-creation-rules.md) that steering-integrit",
+          "[2026-04-12] Topic: Steering file cleanup \u2014 zombie deletion + front-matter demotion | Actions: Deleted 3 zombie files (agentspaces-core.md, devspaces-core.md, file-creation-rules.md) that were supposed to be removed 2026-04-05 per steering-integrity.md; added auto-inclusion front"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "AUTO-STEERING",
+      "confidence": "MEDIUM",
+      "rationale": "Auto-loaded steering; 2 path refs from elsewhere.",
+      "current_usage": "Loaded on every chat",
+      "blast_radius": "HIGH",
+      "row_id": "S-K8"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/influences.md",
+      "layer": "steering",
+      "lines": 11,
+      "first_heading": "Influences (how I think)",
+      "evidence": {
+        "active_referrers": 2,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 2,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/kiro-setup-optimization/tasks.md",
+          "~/shared/context/active/karpathy-loop-run2.log"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "EMPTY-SHELL",
+      "confidence": "HIGH",
+      "rationale": "Empty shell \u2014 6 content lines, no substance to preserve.",
+      "blast_radius": "MEDIUM",
+      "row_id": "S-D2"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/mario-peter-dichotomy.md",
+      "layer": "steering",
+      "lines": 88,
+      "first_heading": "Mario-Peter Dichotomy \u2014 Agentic Development Ethos",
+      "evidence": {
+        "active_referrers": 1,
+        "latent_referrers": 0,
+        "documentation_referrers": 4,
+        "name_only_referrers": 0,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/system-subtraction-audit/design.md",
+          "~/shared/context/intake/session-log.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-22] Topic: Wrap Peter insights into design and complete system-subtraction-audit spec trio (requirements + design + tasks) + create Mario-Peter dichotomy steering file | Actions: Created .kiro/steering/mario-peter-dichotomy.md (88 lines, manual inclusion) with agreement "
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "CONDITIONAL-STEERING-USED",
+      "confidence": "MEDIUM",
+      "rationale": "Conditional steering, 1 active + 0 latent referrers.",
+      "blast_radius": "LOW",
+      "row_id": "S-K9"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/market-constraints.md",
+      "layer": "steering",
+      "lines": 268,
+      "first_heading": "Market Constraints \u2014 Auto-Generated",
+      "evidence": {
+        "active_referrers": 10,
+        "latent_referrers": 0,
+        "documentation_referrers": 4,
+        "name_only_referrers": 0,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/intake/session-log.md",
+          "~/shared/wiki/agent-created/operations/market-constraints-schema.md",
+          "~/shared/tools/wbr-pipeline.sh",
+          "~/shared/tools/prediction/regenerate_market_constraints.py",
+          "~/shared/dashboards/data/wiki-docs/3ee68c60af.txt"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-13] Topic: Created market-constraints.md steering file | Actions: Created ~/.kiro/steering/market-constraints.md (auto-inclusion) with lightweight constraints for all 10 PS markets + PAM. Includes governing targets (MX 100% ie%CCP, AU $140 CPA), current state (AU handoff",
+          "- market-constraints.md auto-refresh via WBR pipeline \u2014 deferred 1 week",
+          "[2026-04-13] Topic: Wired deferred items to surface at the right time | Actions: Added TODO docstring in bayesian_projector.py _fetch_seasonal_priors() for YoY seasonal prior work. Added TODO step in wbr-pipeline.sh output for market-constraints.md refresh (target 4/20). Created "
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "AUTO-STEERING",
+      "confidence": "MEDIUM",
+      "rationale": "Auto-loaded steering; 10 path refs from elsewhere.",
+      "current_usage": "Loaded on every chat",
+      "blast_radius": "HIGH",
+      "row_id": "S-K10"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/process-execution.md",
+      "layer": "steering",
+      "lines": 26,
+      "first_heading": "Process Execution Rule",
+      "evidence": {
+        "active_referrers": 2,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 7,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/wiki/agent-created/_meta/context-catalog.md",
+          "~/shared/dashboards/data/wiki-docs/1b1f7dc0ba.txt"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-12] Topic: Steering file audit \u2014 duplication and necessity assessment | Actions: Read all 29 steering files (24 root + 5 context/), compared inclusion modes, identified 3 zombie files (agentspaces-core.md, devspaces-core.md, file-creation-rules.md) that steering-integrit",
+          "[2026-04-12] Topic: Steering file cleanup \u2014 zombie deletion + front-matter demotion | Actions: Deleted 3 zombie files (agentspaces-core.md, devspaces-core.md, file-creation-rules.md) that were supposed to be removed 2026-04-05 per steering-integrity.md; added auto-inclusion front"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "AUTO-STEERING",
+      "confidence": "MEDIUM",
+      "rationale": "Auto-loaded steering; 2 path refs from elsewhere.",
+      "current_usage": "Loaded on every chat",
+      "blast_radius": "HIGH",
+      "row_id": "S-K11"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/richard-style-amazon.md",
+      "layer": "steering",
+      "lines": 65,
+      "first_heading": "Richard Williams \u2014 Amazon Writing Norms Layer",
+      "evidence": {
+        "active_referrers": 63,
+        "latent_referrers": 0,
+        "documentation_referrers": 6,
+        "name_only_referrers": 18,
+        "referrer_list": [
+          "~/.kiro/agents/wiki-writer.json",
+          "~/.kiro/agents/wiki-critic.json",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/wiki/agent-created/operations/stakeholder-comms-guide.md",
+          "~/shared/wiki/agent-created/_meta/context-catalog.md",
+          "~/shared/wiki/agent-created/reviews/blind-test-2-evaluator-a.md",
+          "~/shared/dashboards/data/wiki-docs/75720ed44d.txt",
+          "~/shared/dashboards/data/wiki-docs/1b1f7dc0ba.txt",
+          "~/shared/dashboards/data/wiki-docs/7baf06c507.txt"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-04] Topic: Asana cleanup + Amazon writing standards upgrade | Actions: Archived 37 completed tasks in Asana (moved to Archive section). Read 30 Amazon writing reference files (Narrative Template, OP1 Template, MBR Template, Flash Template, Working Backwards Guide, Dog Sa",
+          "[2026-04-05] Topic: Kate doc v5 \u2014 appendix-heavy rule applied + style guide updated + final eval | Actions: Added \"Appendix-heavy structure\" rule to richard-style-amazon.md (applies to all docs, not just leadership). Wiki-writer produced v5: moved OCI results table from Workstrea",
+          "[2026-04-12] Topic: External agent feedback validation \u2014 self-documenting templates + Key Misses format | Actions: Downloaded and inspected all 3 .docx files from SharePoint via python-docx (headings, tables, sections, null case, weasel words, source links); searched internal doc"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "CONDITIONAL-STEERING-USED",
+      "confidence": "MEDIUM",
+      "rationale": "Conditional steering, 63 active + 0 latent referrers.",
+      "blast_radius": "LOW",
+      "row_id": "S-K12"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/richard-style-docs.md",
+      "layer": "steering",
+      "lines": 74,
+      "first_heading": "Richard Williams \u2014 Long-Form Document Style Guide",
+      "evidence": {
+        "active_referrers": 24,
+        "latent_referrers": 0,
+        "documentation_referrers": 4,
+        "name_only_referrers": 14,
+        "referrer_list": [
+          "~/.kiro/agents/wiki-writer.json",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/wiki/agent-created/_meta/context-catalog.md",
+          "~/shared/dashboards/data/wiki-docs/1b1f7dc0ba.txt"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-15] Topic: WW Brand LP feedback rewritten in Richard's voice | Actions: Loaded richard-writing-style.md (core) and richard-style-docs.md (long-form). Rewrote all 10 items using docs style guide rules (headers as questions/imperatives, no em-dashes, data with \"so what,\" n",
+          "[2026-04-15] Topic: Loop doc style review against writing guides | Actions: Fetched current Loop doc state, ran it against richard-writing-style.md and richard-style-docs.md, delivered 10 specific edit suggestions (bare-noun headers, hedging in tagline section, comma splice, empt"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "CONDITIONAL-STEERING-USED",
+      "confidence": "MEDIUM",
+      "rationale": "Conditional steering, 24 active + 0 latent referrers.",
+      "blast_radius": "LOW",
+      "row_id": "S-K13"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/richard-style-email.md",
+      "layer": "steering",
+      "lines": 76,
+      "first_heading": "Richard Williams \u2014 Email Style Guide",
+      "evidence": {
+        "active_referrers": 67,
+        "latent_referrers": 0,
+        "documentation_referrers": 4,
+        "name_only_referrers": 8,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/wiki/agent-created/_meta/context-catalog.md",
+          "~/shared/dashboards/data/wiki-docs/1b1f7dc0ba.txt"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-14] Topic: Email style guide updates \u2014 4 new failure patterns from LiveRamp draft feedback | Actions: Added Failures 5-7 to richard-style-email.md: no corporate jargon (\"delta,\" \"scoping\"), no \"love\" in professional emails, sign-off is always \"Thank you,\" + line break + ",
+          "[2026-04-14] Topic: LiveRamp Enhanced Match email \u2014 full session (research \u2192 draft \u2192 3 rounds of style refinement) | Actions: Deep web research on LiveRamp Enhanced Match/identity resolution/Amazon Ads integration; read Asana task + Outlook threads (Hannah Neustadt, Abdul Bishar,"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "CONDITIONAL-STEERING-USED",
+      "confidence": "MEDIUM",
+      "rationale": "Conditional steering, 67 active + 0 latent referrers.",
+      "blast_radius": "LOW",
+      "row_id": "S-K14"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/richard-style-mbr.md",
+      "layer": "steering",
+      "lines": 60,
+      "first_heading": "Richard Williams \u2014 MBR Write-up Style Guide",
+      "evidence": {
+        "active_referrers": 46,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 7,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/wiki/agent-created/_meta/context-catalog.md",
+          "~/shared/dashboards/data/wiki-docs/1b1f7dc0ba.txt"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-12] Topic: External agent feedback validation \u2014 self-documenting templates + Key Misses format | Actions: Downloaded and inspected all 3 .docx files from SharePoint via python-docx (headings, tables, sections, null case, weasel words, source links); searched internal doc"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "CONDITIONAL-STEERING-USED",
+      "confidence": "MEDIUM",
+      "rationale": "Conditional steering, 46 active + 0 latent referrers.",
+      "blast_radius": "LOW",
+      "row_id": "S-K15"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/richard-style-slack.md",
+      "layer": "steering",
+      "lines": 126,
+      "first_heading": "Richard Williams \u2014 Slack Voice",
+      "evidence": {
+        "active_referrers": 44,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 8,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/wiki/agent-created/_meta/context-catalog.md",
+          "~/shared/dashboards/data/wiki-docs/1b1f7dc0ba.txt"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-20 08:05] Topic: Brandon DM reply v3 \u2014 voice correction after RW called out missed style guide load | Actions: Loaded richard-writing-style.md + richard-style-slack.md (should have done in turn 1); rewrote reply as 4 separate Slack sends with lowercase starts, parentheti"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "CONDITIONAL-STEERING-USED",
+      "confidence": "MEDIUM",
+      "rationale": "Conditional steering, 44 active + 0 latent referrers.",
+      "blast_radius": "LOW",
+      "row_id": "S-K16"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/richard-style-wbr.md",
+      "layer": "steering",
+      "lines": 88,
+      "first_heading": "Richard Williams \u2014 WBR Callout Style Guide",
+      "evidence": {
+        "active_referrers": 71,
+        "latent_referrers": 0,
+        "documentation_referrers": 4,
+        "name_only_referrers": 15,
+        "referrer_list": [
+          "~/.kiro/agents/callout-reviewer.json",
+          "~/.kiro/agents/callout-writer.json",
+          "~/.kiro/agents/wbr-callouts/callout-reviewer.md",
+          "~/.kiro/agents/wbr-callouts/callout-writer.md",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/wiki/agent-created/_meta/context-catalog.md",
+          "~/shared/dashboards/data/wiki-docs/1b1f7dc0ba.txt"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-05] Topic: Migrated 7 remaining .md-only agents to kiro-cli JSON configs | Actions: Created JSON configs for karpathy, rw-trainer, eyes-chart, agent-bridge-sync, market-analyst, callout-writer, callout-reviewer at ~/.kiro/agents/; validated all 7; tested identity invocat",
+          "[2026-04-08] Topic: Callout documentation audit | Actions: Audited all callout writing guidance across shared/. Found 5 locations with overlapping/conflicting rules: steering file (richard-style-wbr.md), wiki guide (wbr-callout-guide.md), callout-writer.md agent def, callout-revi",
+          "[2026-04-08] Topic: Callout documentation consolidation | Actions: Established callout-writer.md as single source of truth for all callout writing rules. Updated wiki guide, steering file (richard-style-wbr.md), and callout-principles.md placeholder to reference it instead of dup"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "CONDITIONAL-STEERING-USED",
+      "confidence": "MEDIUM",
+      "rationale": "Conditional steering, 71 active + 0 latent referrers.",
+      "blast_radius": "LOW",
+      "row_id": "S-K17"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/richard-writing-style.md",
+      "layer": "steering",
+      "lines": 65,
+      "first_heading": "Richard Williams \u2014 Core Voice",
+      "evidence": {
+        "active_referrers": 17,
+        "latent_referrers": 1,
+        "documentation_referrers": 7,
+        "name_only_referrers": 21,
+        "referrer_list": [
+          "~/.kiro/agents/callout-reviewer.json",
+          "~/.kiro/agents/wiki-writer.json",
+          "~/.kiro/agents/callout-writer.json",
+          "~/.kiro/agents/rw-trainer.json",
+          "~/.kiro/agents/body-system/agent-bridge-sync.md",
+          "~/.kiro/agents/body-system/rw-trainer.md",
+          "~/.kiro/agents/wbr-callouts/callout-reviewer.md",
+          "~/.kiro/agents/wbr-callouts/callout-writer.md",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/steering/slack-deep-context.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-07] Topic: March MBR drafting for AU and MX | Actions: Loaded Loop doc (2026 Paid Acq MBR/QBR), loaded richard-writing-style.md, queried DuckDB ps.metrics/ps.targets for March actuals \u2014 found weekly data only (W09-W13) with no monthly rollups, no OP2 targets, no YoY data",
+          "[2026-04-15] Topic: WW Brand LP feedback rewritten in Richard's voice | Actions: Loaded richard-writing-style.md (core) and richard-style-docs.md (long-form). Rewrote all 10 items using docs style guide rules (headers as questions/imperatives, no em-dashes, data with \"so what,\" n",
+          "[2026-04-15] Topic: Loop doc style review against writing guides | Actions: Fetched current Loop doc state, ran it against richard-writing-style.md and richard-style-docs.md, delivered 10 specific edit suggestions (bare-noun headers, hedging in tagline section, comma splice, empt"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "AUTO-STEERING",
+      "confidence": "MEDIUM",
+      "rationale": "Auto-loaded steering; 17 path refs from elsewhere.",
+      "current_usage": "Loaded on every chat",
+      "blast_radius": "HIGH",
+      "row_id": "S-K18"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/rw-task-prioritization.md",
+      "layer": "steering",
+      "lines": 269,
+      "first_heading": "Task Prioritization \u2014 Backlog \u2192 Active Lists",
+      "evidence": {
+        "active_referrers": 4,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 7,
+        "referrer_list": [
+          "~/.kiro/agents/body-system/agent-bridge-sync.md",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/wiki/agent-created/_meta/context-catalog.md",
+          "~/shared/dashboards/data/wiki-docs/1b1f7dc0ba.txt"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "CONDITIONAL-STEERING-USED",
+      "confidence": "MEDIUM",
+      "rationale": "Conditional steering, 4 active + 0 latent referrers.",
+      "blast_radius": "LOW",
+      "row_id": "S-K19"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/slack-deep-context.md",
+      "layer": "steering",
+      "lines": 1142,
+      "first_heading": "Slack Deep Context \u2014 Backfill & Enrichment Steering",
+      "evidence": {
+        "active_referrers": 5,
+        "latent_referrers": 0,
+        "documentation_referrers": 9,
+        "name_only_referrers": 5,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/slack-deep-context/design.md",
+          "~/.kiro/specs/slack-deep-context/tasks.md",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/wiki/agent-created/research/slack-deep-context-test-prompts.md",
+          "~/shared/wiki/agent-created/research/slack-deep-context-ideas.md",
+          "~/shared/dashboards/data/wiki-docs/1cb8302b1e.txt",
+          "~/shared/dashboards/data/wiki-docs/55dccf6c0d.txt"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "CONDITIONAL-STEERING-USED",
+      "confidence": "MEDIUM",
+      "rationale": "Conditional steering, 5 active + 0 latent referrers.",
+      "blast_radius": "LOW",
+      "row_id": "S-K20"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/slack-guardrails.md",
+      "layer": "steering",
+      "lines": 61,
+      "first_heading": "Slack Communication Guardrails",
+      "evidence": {
+        "active_referrers": 3,
+        "latent_referrers": 1,
+        "documentation_referrers": 10,
+        "name_only_referrers": 10,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/slack-context-ingestion/design.md",
+          "~/.kiro/specs/slack-context-ingestion/tasks.md",
+          "~/.kiro/specs/slack-deep-context/design.md",
+          "~/.kiro/specs/kiro-setup-optimization/design.md",
+          "~/.kiro/steering/slack-deep-context.md",
+          "~/shared/context/active/slack-ingestion-README.md",
+          "~/shared/context/active/karpathy-loop-run2.log"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-05] Topic: Slack channel guardrail in MCP spec | Actions: Fixed requirements.md Req 2 (\"designated Slack channel\" \u2192 \"Richard's Slack DM or rsw-channel\") and tasks.md Task 5.5 (\"team channel\" \u2192 \"self_dm or rsw-channel\"). | Decisions: All agent Slack outputs go to self_dm("
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "AUTO-STEERING",
+      "confidence": "MEDIUM",
+      "rationale": "Auto-loaded steering; 3 path refs from elsewhere.",
+      "current_usage": "Loaded on every chat",
+      "blast_radius": "HIGH",
+      "row_id": "S-K21"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/slack-knowledge-search.md",
+      "layer": "steering",
+      "lines": 51,
+      "first_heading": "Slack Knowledge Search",
+      "evidence": {
+        "active_referrers": 2,
+        "latent_referrers": 0,
+        "documentation_referrers": 9,
+        "name_only_referrers": 5,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/slack-context-ingestion/design.md",
+          "~/.kiro/specs/slack-context-ingestion/tasks.md",
+          "~/shared/context/active/slack-ingestion-README.md",
+          "~/shared/context/active/karpathy-loop-run2.log"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "CONDITIONAL-STEERING-USED",
+      "confidence": "MEDIUM",
+      "rationale": "Conditional steering, 2 active + 0 latent referrers.",
+      "blast_radius": "LOW",
+      "row_id": "S-K22"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/soul.md",
+      "layer": "steering",
+      "lines": 143,
+      "first_heading": "Soul \u2014 Richard Williams",
+      "evidence": {
+        "active_referrers": 125,
+        "latent_referrers": 0,
+        "documentation_referrers": 15,
+        "name_only_referrers": 63,
+        "referrer_list": [
+          "~/.kiro/agents/body-system/agent-bridge-sync.md",
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/system-subtraction-audit/design.md",
+          "~/.kiro/specs/system-subtraction-audit/tasks.md",
+          "~/.kiro/specs/kiro-setup-optimization/tasks.md",
+          "~/shared/context/experiments/spine-modified-exp8.md",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/intake/session-log.md",
+          "~/shared/context/body/body.md",
+          "~/shared/wiki/agent-created/archive/session-bootstrap.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-03] Topic: Kiro Setup Optimization \u2014 full spec + execution | Actions: Researched kiro.dev docs/changelog/blog, created 3-file spec (design, requirements, tasks), executed all 16 tasks \u2014 converted 6 steering files to auto-inclusion, merged 2 into environment-rules.md, tri",
+          "[2026-04-03] Topic: Kiro Setup Optimization execution + AM-1/AM-2 validation | Actions: Executed all 16 spec tasks \u2014 backed up steering files (learned: backups inside ~/.kiro/steering/ get loaded as duplicate rules, moved to ~/kiro-steering-backup/), converted 6 files to auto-inc",
+          "[2026-04-05] Topic: Differentiate eval agent configs | Actions: Rewrote eval-a.json (treatment + full context: target + body.md + soul.md), eval-b.json (control + full context: ORIGINAL target + body.md + soul.md), eval-c.json (portability: ONLY modified target, no supporting fil"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "AUTO-STEERING",
+      "confidence": "MEDIUM",
+      "rationale": "Auto-loaded steering; 125 path refs from elsewhere.",
+      "current_usage": "Loaded on every chat",
+      "blast_radius": "HIGH",
+      "row_id": "S-K23"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/tech.md",
+      "layer": "steering",
+      "lines": 49,
+      "first_heading": "Tech Context",
+      "evidence": {
+        "active_referrers": 3,
+        "latent_referrers": 0,
+        "documentation_referrers": 3,
+        "name_only_referrers": 5,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/.kiro/specs/kiro-setup-optimization/tasks.md",
+          "~/shared/context/active/karpathy-loop-run2.log"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": true,
+        "prior_session_notes": [
+          "[2026-04-03] Topic: Kiro Setup Optimization \u2014 full spec + execution | Actions: Researched kiro.dev docs/changelog/blog, created 3-file spec (design, requirements, tasks), executed all 16 tasks \u2014 converted 6 steering files to auto-inclusion, merged 2 into environment-rules.md, tri",
+          "[2026-04-03] Topic: Kiro Setup Optimization execution + AM-1/AM-2 validation | Actions: Executed all 16 spec tasks \u2014 backed up steering files (learned: backups inside ~/.kiro/steering/ get loaded as duplicate rules, moved to ~/kiro-steering-backup/), converted 6 files to auto-inc",
+          "[2026-04-05] Topic: Asana schema drift handling | Actions: Added tasks 0.10 (schema drift handling) and 0.11 (schema_changes DuckDB table) to MCP spec. Covers: custom field changes (flex_fields JSON column for unknowns), project additions/archival (auto-detect via portfolio disco"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "AUTO-STEERING",
+      "confidence": "MEDIUM",
+      "rationale": "Auto-loaded steering; 3 path refs from elsewhere.",
+      "current_usage": "Loaded on every chat",
+      "blast_radius": "HIGH",
+      "row_id": "S-K24"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/ww-testing-loop-prep.md",
+      "layer": "steering",
+      "lines": 60,
+      "first_heading": "WW Testing Loop prep \u2014 source-check discipline",
+      "evidence": {
+        "active_referrers": 2,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 0,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json",
+          "~/shared/context/active/karpathy-loop-run2.log",
+          "~/shared/context/intake/session-log.md"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-21] Topic: Durability audit of karpathy's WW Testing state-file changes + minimal structural follow-up | Actions: Assessed whether karpathy's spec changes make the system more or less durable. Conclusion: less durable as-is \u2014 added 3 empty marker blocks, an inventory wit"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "CONDITIONAL-STEERING-USED",
+      "confidence": "MEDIUM",
+      "rationale": "Conditional steering, 2 active + 0 latent referrers.",
+      "blast_radius": "LOW",
+      "row_id": "S-K25"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/context/context-provider-recommendations.md",
+      "layer": "steering",
+      "lines": 25,
+      "first_heading": "Context Provider Recommendations",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 1,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "HIGH",
+      "rationale": "Zero active referrers; 0 latent, 2 documentation, 1 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "S-D3"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/context/kiro-limitations.md",
+      "layer": "steering",
+      "lines": 43,
+      "first_heading": "Kiro Limitations & Workarounds",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 2,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "HIGH",
+      "rationale": "Zero active referrers; 0 latent, 2 documentation, 2 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "S-D4"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/context/pilot-steering.md",
+      "layer": "steering",
+      "lines": 72,
+      "first_heading": "ARCC Governance Search",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 4,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "KEEP",
+      "category": "AUTO-STEERING",
+      "confidence": "MEDIUM",
+      "rationale": "Auto-loaded steering; 0 path refs from elsewhere.",
+      "current_usage": "Loaded on every chat",
+      "blast_radius": "HIGH",
+      "row_id": "S-K26"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/context/powers-evaluation.md",
+      "layer": "steering",
+      "lines": 29,
+      "first_heading": "Powers Evaluation",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 1,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "HIGH",
+      "rationale": "Zero active referrers; 0 latent, 2 documentation, 1 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "S-D5"
+    },
+    {
+      "rel_path": "/home/prichwil/.kiro/steering/context/steering-integrity.md",
+      "layer": "steering",
+      "lines": 43,
+      "first_heading": "Steering File Integrity Rules",
+      "evidence": {
+        "active_referrers": 0,
+        "latent_referrers": 0,
+        "documentation_referrers": 2,
+        "name_only_referrers": 3,
+        "referrer_list": [
+          "~/.kiro/specs/system-subtraction-audit/inventory.json"
+        ],
+        "duplication_group": null,
+        "duplication_role": null,
+        "is_load_bearing": false,
+        "prior_session_notes": [
+          "[2026-04-05] Topic: Steering file cleanup and duplication prevention | Actions: Deleted 4 redundant files (agentspaces-core, devspaces-core, product, file-creation-rules); demoted 4 files to auto inclusion (tech, process-execution, amazon-builder-production-safety, pilot-steering",
+          "[2026-04-12] Topic: Steering file audit \u2014 duplication and necessity assessment | Actions: Read all 29 steering files (24 root + 5 context/), compared inclusion modes, identified 3 zombie files (agentspaces-core.md, devspaces-core.md, file-creation-rules.md) that steering-integrit",
+          "[2026-04-12] Topic: Steering file cleanup \u2014 zombie deletion + front-matter demotion | Actions: Deleted 3 zombie files (agentspaces-core.md, devspaces-core.md, file-creation-rules.md) that were supposed to be removed 2026-04-05 per steering-integrity.md; added auto-inclusion front"
+        ],
+        "commits_last_30d": 0
+      },
+      "action": "DELETE",
+      "category": "ORPHAN",
+      "confidence": "HIGH",
+      "rationale": "Zero active referrers; 0 latent, 2 documentation, 3 name-only.",
+      "blast_radius": "LOW",
+      "row_id": "S-D6"
+    }
+  ],
+  "summary": {
+    "delete_count": 23,
+    "merge_count": 0,
+    "unclear_count": 5,
+    "keep_count": 71,
+    "karpathy_count": 0,
+    "broken_ref_count": 0,
+    "estimated_lines_removed": 962,
+    "per_layer": {
+      "body": {
+        "delete": 0,
+        "merge": 0,
+        "unclear": 5,
+        "keep": 10,
+        "karpathy": 0
+      },
+      "protocol": {
+        "delete": 5,
+        "merge": 0,
+        "unclear": 0,
+        "keep": 24,
+        "karpathy": 0
+      },
+      "hook": {
+        "delete": 12,
+        "merge": 0,
+        "unclear": 0,
+        "keep": 11,
+        "karpathy": 0
+      },
+      "steering": {
+        "delete": 6,
+        "merge": 0,
+        "unclear": 0,
+        "keep": 26,
+        "karpathy": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+GROUND TRUTH — Experiment run67_exp4 (roster × COMPRESS on Stakeholder Contacts)
+
+Q1: Who is Richard's direct manager and what is their alias?
+A1: Brandon Munday, alias brandoxy.
+
+Q2: Who replaced Carlos Palmos as MX PS primary stakeholder and when?
+A2: Lorena Alvarez Larrea, as of 3/17/26. Carlos moved to CPS.
+
+Q3: What is Lena Zak's role and level?
+A3: AU Country Leader, L7. She drives weekly CPA reviews.
+
+Q4: Who is Kate Rundell and what is her alias?
+A4: Kate Rundell (alias kataxt) is Richard's skip-level, L8 Director of WW Outbound Marketing.
+
+Q5: Who previously partnered with Richard on AU and when did they step away?
+A5: Harjeet Heer, stepped away on 3/11/26.

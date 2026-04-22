@@ -1,0 +1,48 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build site
+        run: |
+          mkdir -p _site
+          cp -r tools/* _site/ 2>/dev/null || true
+          cat > _site/index.html <<'EOF'
+          <!DOCTYPE html>
+          <html><head><meta charset="UTF-8"><title>Agent Bridge Tools</title>
+          <style>body{font-family:-apple-system,sans-serif;max-width:700px;margin:40px auto;padding:20px;background:#0f1419;color:#e8eef5}
+          a{color:#ff9900;text-decoration:none;font-weight:600}
+          a:hover{text-decoration:underline}
+          li{margin:8px 0}</style></head>
+          <body><h1>Agent Bridge Tools</h1><ul>
+          <li><a href="spin-the-wheel.html">🎡 Spin the Wheel</a> — randomizer for team choices</li>
+          </ul></body></html>
+          EOF
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

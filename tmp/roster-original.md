@@ -1,0 +1,248 @@
+<!-- DOC-0500 | duck_id: organ-roster -->
+# Roster — People Who Matter for PS / WW Traffic Marketing
+
+*Centralized directory of people Richard works with and around. Reference this before drafting an email, attributing a test, writing a callout, or tagging someone in a doc. Supersedes ad-hoc attribution in motherduck `ps.team_experiments` and scattered name references across body files.*
+
+*Operating principle: **Reduce decisions, not options.** When an agent needs to know "who owns X?" or "which alias for Y?", this file answers without requiring a search. Memory.md still holds the relationship graph (tone, dynamics, draft style); this file holds the directory (name, alias, role, markets, scope).*
+
+Last updated: 2026-04-20 (initial build from Pre-WBR Callouts quip history + memory.md + team workload docs + motherduck attributions)
+
+---
+
+## How This File Is Organized
+
+1. **AB Paid Search Team** — Richard's direct team (Brandon's PS/Outbound directs)
+2. **AB Traffic & Marketing Orgs (Pre-WBR Callout Owners)** — cross-channel owners across Traffic, Email, Push, MCS, ADA-DA, A.com, CPS, SSR, Events
+3. **Country / Market Leads** — per-country PS stakeholders (AU, MX, EU, JP, CA)
+4. **AB Marketing Leadership** — L7+
+5. **Cross-Functional Partners** — ABMA, MarTech, Legal, Data Science, MCS, Creative, SSR, CPS, Events
+6. **External Partners** — Google, Adobe
+7. **Richard's Specific Stakeholder Contacts** — context from memory.md (tone, draft style, meeting dynamics)
+
+For each person the goal is to capture: **Name | Alias | Level | Role | Location | Markets/Scope | Source of truth**.
+
+---
+
+## 1. AB Paid Search Team (Brandon's Outbound Marketing Directs)
+
+Brandon's seven direct reports plus Richard. Covers PS acquisition, MCS/website, mobile app, and ENG PS across all 10 markets.
+
+| Name | Alias | Level | Role | Location | Markets / Scope |
+|------|-------|-------|------|----------|-----------------|
+| Brandon Munday | brandoxy | L7 | WW Head of Outbound Marketing (PS + MCS + Mobile App) | Austin | All markets — Richard's direct manager |
+| Stacey Gu | — | L6 | OCI/Bidding strategy, US performance, Paid Acq Testing | Seattle | US (primary), CA (OCI), WW (OCI lead) |
+| Dwayne Palmer | — | L6 | WW Head of Marketing Website (MCS) — LP optimization, Polaris, Weblab | Arlington | All (MCS) |
+| Yun-Kang Chu | — | L6 | Modern Search structure, Adobe analytics, Paid Search — ENG | Austin | MX, US, EU5, WW (ENG PS) |
+| Andrew Wirtz | — | L5 | Demand Gen / Algorithmic Ads, EU lead, Flash author | Seattle | EU5 (primary), US (support) |
+| Aditya "Adi" Thakur | — | L5 | Landing Pages / UX, CA LP framework, JP testing | Austin | CA, JP |
+| Richard Williams | prichwil | L5 | AU/MX hands-on, WW testing methodology, competitive intel | Seattle | AU, MX, WW (testing) |
+| Peter Ocampo | — | L6 | Global AB Mobile App program lead | Seattle | WW (app marketing, Push) |
+
+**Notes:**
+- Peter is a Brandon direct but runs Mobile App, a separate function. He owns Push callouts in the Pre-WBR quip.
+- York Chen (not a Brandon direct) owns JP PS operations. Returned from paternity leave 3/22/25. CPS-aligned.
+
+---
+
+## 2. Market & Channel Contacts (Pre-WBR Callouts + Country Leads)
+
+Source: `quip-amazon.com/MMgBAzDrlVou` → "Guidance" tab, rows 10–12. Biweekly syncs before 10 AM PT Wednesdays.
+
+#### Channel Callout Owners
+
+| # | Channel | Owner | Notes |
+|---|---------|-------|-------|
+| 1 | TSEM (all) | Daron Manso | Traffic/SEM overall |
+| 2 | Traffic | Kristine Weber | Action-item follow-ups |
+| 3 | Email | Kris Knowles | |
+| 4 | A.com / Cross Stores | Baylee McCloskey | |
+| 5 | Push | Peter Ocampo | Mobile App |
+| 6 | Paid Search (ACQ) | Brandon Munday | Richard covers when OOO |
+| 7 | Paid Search — ENG | Yun-Kang Chu | LiveRamp |
+| 8 | ADA-DA (Display Ads) | Abdul Bishar | |
+| 9 | MCS | Dwayne Palmer | |
+| 10 | SEO | Yoav Reder | |
+| 11 | CPS Growth | Jenn Thompson | |
+
+#### Country Contacts (Callout Owner + PS Stakeholder Lead)
+
+| Market | Callout Owner | PS Stakeholder | Stakeholder Level | Notes |
+|--------|--------------|----------------|-------------------|-------|
+| US | Daron Manso (TSEM) | — | — | |
+| AU | Grace May Bernard | Lena Zak (lenazak) | L7 | Country Leader, reports to Nick Georgijev (L8). Hardest stakeholder — drives weekly CPA reviews. Also: Alexis Eck (L6, in-market PS partner). |
+| MX | Eduardo Vazquez | Lorena Alvarez Larrea | L5 | Primary PS stakeholder as of 3/17/26. Replaced Carlos Palmos (moved to CPS). |
+| CA | Betty Chipman | — | — | |
+| JP | Masami Mohri | York Chen | — | JP PS operations (CPS-aligned). Returned from pat leave 3/22/25. |
+| EU | Clara Sagnier Mur | — | — | |
+
+**Optional attendees (intermittent callouts):** Ahmed Darwish (SSR), Elina Kazantseva (EU SSR), Charlie Nichols (Paid Media), Siri Angeles (Social), Eric Wyatt (CPS Growth).
+
+#### External Partners (biweekly syncs)
+
+| Org | Contact | Scope |
+|-----|---------|-------|
+| Google | Mike Babich | OCI, AI Max, account structure, ad copy |
+| Adobe | Suzane Huynh | OCI reporting, Ad Cloud, WW redirects |
+| Adobe | Jen Vitiello | Co-lead |
+
+---
+
+## 4. AB Marketing Leadership (L7+)
+
+| Name | Alias | Level | Role | Location |
+|------|-------|-------|------|----------|
+| Todd Heimes | — | L10 | VP, WW AB Marketing | — |
+| Shelley | — | — | WW AB Marketing LT (chairs Walk-the-Store reviews) | — |
+| Kate Rundell | kataxt | L8 | Director, WW Outbound Marketing (Richard's skip-level) | Seattle |
+| Megan Lim | megalim | — | EA to Kate Rundell | — |
+| Brandon Munday | brandoxy | L7 | WW Head of Outbound Marketing (Richard's manager) | Austin |
+| Brenda | — | L7+ | US CPS LT (reviewed in US CPS WBR) | — |
+| Christine Vix | — | — | Event/BSS/MBR LT reviewer | — |
+| Ann | — | — | BP Rewards / BSS planning partner | — |
+
+---
+
+## 5. Cross-Functional Partners (by function)
+
+### MCS / Website Marketing
+
+| Name | Role |
+|------|------|
+| Dwayne Palmer | WW Head of MCS (L6) |
+| Frank Volinsky | MCS page builds / Weblab |
+| Alex VanDerStuyf | AEM / MCS engineering |
+
+### ABMA (Amazon Business Marketing Analytics)
+
+| Name | Role |
+|------|------|
+| Naresh | ABMA Associated Accounts / audience |
+| Nishchhal | ABMA Associated Accounts / audience |
+| Vijay | ABMA — Email overlay / engineering |
+
+### MarTech
+
+| Name | Role |
+|------|------|
+| Joel Mallory | OCI infrastructure, tracking, LiveRamp |
+
+### Legal / Finance
+
+| Name | Role |
+|------|------|
+| Vandita | Finance Q3G / Q4G partner |
+| (Legal contact) | F90 audiences, LiveRamp data, audience SIMs — routed via Brandon |
+
+### Data Science / Audiences
+
+| Name | Role |
+|------|------|
+| Yogesh | Data Science — OCI value framework, incrementality |
+| Saajan Chowhan | SSR Activation — F90 lifecycle, promo strategy |
+
+### CPS / Sales Partners
+
+| Name | Role |
+|------|------|
+| Kevin Townsend | CPS — LP coordination, CPS-heavy markets (JP) |
+| Brenda | US CPS LT |
+| Erin Lewber | Sales leader (CPS User Engagement study) |
+| Mary Anne Fessler | Sales leader (CPS User Engagement study) |
+| Shaina Billish | Sales leader (CPS User Engagement study) |
+
+### Creative / Brand & Paid Media
+
+| Name | Role |
+|------|------|
+| Raven Smith | Creative — DG video, BSE, ad copy |
+| Robert Skenes | Brand & Paid Media (LiveRamp 1P, ADSP, measurement) |
+| Daron Manso | TSEM + US callout owner |
+
+### Events Team
+
+| Name | Role |
+|------|------|
+| Caroline Miller | Events (BSE, Prime Day, BFCM) |
+| Sharon Serene | Labor Day / US events lead (also in callout action items) |
+| Joshua Braziel | Events (FFYE follow-ups) |
+| Saqib Al Hasan | Events (BGG follow-ups) |
+| Sophia | Cross-Store / A.com events (referenced in A.com callouts) |
+| Blair Heckel | Event owner (sourcing callouts) |
+
+### Push / Notifications
+
+| Name | Role |
+|------|------|
+| Peter Ocampo | Push WW lead (L6, Mobile App) |
+| Nikko Shida | ADA-DA campaigns / ADSP engineering follow-ups |
+| Viraj Gholap | Email Engagement templates (MarOps) |
+
+### Sourcing / Merchandising (referenced in events sections)
+
+| Name | Role |
+|------|------|
+| Yatri Patel | Sourcing YoY corrections |
+| Yoshimi Horimoto | JP 1P/3P sourcing |
+
+---
+
+## 7. Richard's Specific Stakeholder Contacts
+
+These are the people Richard draft communications *to* most often. For each, see `memory.md` relationship graph for tone, current topic, and draft style notes. Listed here so the directory is complete.
+
+| Name | Alias | Role | Last major interaction (from memory.md) |
+|------|-------|------|-----------------------------------------|
+| Brandon Munday | brandoxy | Manager — 1:1s, OP2, R&O, strategic framing | 4/2/26 — LiveRamp, Lena pattern |
+| Kate Rundell | kataxt | Skip-level — Testing Approach, AU CPC awareness | 4/3/26 — doc meeting canceled |
+| Lena Zak | lenazak | AU Country Leader — weekly CPA review, Polaris, LP | 4/1/26 — 3 follow-up questions on LP URLs |
+| Lorena Alvarez Larrea | — | MX PS primary stakeholder (new) | Active — onboarding, invoice ownership |
+| Dwayne Palmer | — | MCS peer — Polaris, LP, in-context reg | Continuous |
+| Yun-Kang Chu | — | Peer — PS-ENG, Modern Search, Adobe | Reliable peer, data on demand |
+| Adi Thakur | — | Peer — CA LP, UX | — |
+| Stacey Gu | — | Peer — US lead, OCI, AI Max | — |
+| Andrew Wirtz | — | Peer — EU5, Flash, ad copy | — |
+| Harjeet Heer | — | Previously AU partner — stepped away | 3/11/26 |
+
+---
+
+## Cross-References
+
+- **Relationship dynamics (tone, draft style, current topics):** `~/shared/context/body/memory.md` → Relationship Graph
+- **Team workload & market coverage:** `~/shared/wiki/agent-created/markets/team-workload-distribution.md`
+- **Full cross-functional scope + stakeholder interaction map:** `~/shared/wiki/agent-created/testing/ps-team-map.md`
+- **Test attributions (legacy, being superseded):** DuckDB `ps.team_experiments` table (owner + sole_owner columns)
+
+---
+
+## How to Update This File
+
+Trigger events that should prompt an update:
+- New person starts on Brandon's team or in the PS stakeholder circle
+- Market ownership shift (e.g., Carlos → Lorena 3/17/26)
+- Pre-WBR Callouts quip owner rotation (check the "Guidance" tab, rows 10–12)
+- New external partner added (Google account rep change, new Adobe contact)
+- Someone leaves a role (like Harjeet stepping away from AU)
+
+When updating:
+1. Add the person to the correct section above with name, alias, level, role, location, scope
+2. If they become a Richard-draft recipient, also add/update `memory.md` relationship graph entry
+3. If they own a test, update `ps.team_experiments.sole_owner` to the canonical name used here
+4. Update the "Last updated" date at the top
+
+---
+
+## Known Gaps
+
+These fields are incomplete and should be filled as the info surfaces:
+
+- **Aliases** — most team members' Amazon logins are not captured yet. Next time Richard DMs or emails someone, grab the alias from Phone Tool and add it here.
+- **Levels for some cross-functional partners** — not all external-team L-levels known.
+- **Location for Lorena, York, Alexis** — not captured.
+- **Nick Georgijev's full title** — "AU country director" is approximate; confirm.
+
+<!-- AGENT_CONTEXT
+machine_summary: "Centralized roster for PS team and WW Traffic Marketing stakeholders. 7-person PS team under Brandon Munday (L7), covers 10 markets. Pre-WBR Callouts quip (MMgBAzDrlVou) has 11 channel owners and 6 country owners. Richard works hands-on with AU (Lena Zak L7, Alexis Eck L6) and MX (Lorena Alvarez Larrea L5 as of 3/17/26, replacing Carlos Palmos who moved to CPS). Key org chain: Richard (L5) → Brandon Munday (L7) → Kate Rundell (L8) → Todd Heimes (L10 VP). Cross-functional partners span ABMA, MarTech, Legal, Data Science, MCS, Creative, SSR, CPS, Events. External: Google (Mike Babich), Adobe (Suzane Huynh, Jen Vitiello)."
+key_entities: ["Brandon Munday", "Kate Rundell", "Todd Heimes", "Stacey Gu", "Dwayne Palmer", "Yun-Kang Chu", "Andrew Wirtz", "Adi Thakur", "Peter Ocampo", "Lena Zak", "Alexis Eck", "Lorena Alvarez Larrea", "Carlos Palmos", "Kris Knowles", "Kristine Weber", "Baylee McCloskey", "Daron Manso", "Abdul Bishar", "Yoav Reder", "Jenn Thompson", "Clara Sagnier Mur", "Betty Chipman", "Masami Mohri", "Eduardo Vazquez", "Grace May Bernard", "Sharon Serene", "York Chen", "Mike Babich", "Suzane Huynh", "Nick Georgijev"]
+action_verbs: ["reference", "attribute", "route", "contact", "draft"]
+update_triggers: ["new team member", "market ownership shift", "Pre-WBR quip owner rotation", "external partner change", "role change"]
+-->

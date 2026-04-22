@@ -9,18 +9,20 @@ Last updated: 2026-04-01 (Wednesday PT)
 
 ## Session Bootstrap Sequence
 
-**⚠️ AgentSpaces chats deleted every 14 days.** Every new session starts here — no exceptions.
+**⚠️ AgentSpaces chats deleted every 14 days.** Every new session starts here.
 
-**Richard Williams:** L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7, she/her). Markets: AU/MX hands-on, US/EU5/JP/CA team-wide. Active: OCI rollout (7/10 markets live), AI Max (US Q2 2026), AEO, Project Baloo, F90 Lifecycle. Timezone: PT (UTC-7).
+**Richard Williams:** L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7, she/her). Markets: AU/MX hands-on, US/EU5/JP/CA team-wide. Active: OCI (7/10 live), AI Max (US Q2 2026), AEO, Baloo, F90 Lifecycle. TZ: PT (UTC-7).
 
-| Order | File | What |
-|-------|------|------|
-| 1 | `~/shared/context/body/body.md` | System map — organ locations |
-| 2 | `~/shared/context/body/spine.md` | This file — bootstrap, tools, dirs |
-| 3 | `~/.kiro/steering/soul.md` | Identity, voice, routing |
-| 4 | `~/shared/context/active/current.md` | Live state: projects, people, actions |
-| 5 | `~/shared/context/active/rw-tracker.md` | Weekly scorecard, 30-day challenge |
+| # | File | What |
+|---|------|------|
+| 1 | `body.md` | System map — organ locations |
+| 2 | `spine.md` | Bootstrap, tools, dirs |
+| 3 | `soul.md` | Identity, voice, routing |
+| 4 | `current.md` | Live state: projects, people, actions |
+| 5 | `rw-tracker.md` | Weekly scorecard, 30-day challenge |
 | 6 | Task-specific organ | brain, eyes, hands, memory as needed |
+
+**Cold-start recovery:** MotherDuck → SharePoint `system-state/` → Git `agent-bridge` → filesystem rebuild. If `body/` empty, pull from `Kiro-Drive/portable-body/` first.
 
 ---
 
@@ -28,44 +30,53 @@ Last updated: 2026-04-01 (Wednesday PT)
 
 ### MCP Servers (16 connected)
 
-| Server | Scope | Guard/Notes |
-|--------|-------|-------------|
-| Email/Calendar/To-Do (aws-outlook-mcp) | Full CRUD | Sends: prichwil only. No external calendar invites. |
-| Slack (ai-community-slack-mcp) | Full read | Write: rsw-channel (C0993SRL6FQ) + self_dm only (slack-guardrails.md) |
-| Hedy (hedy) | Transcripts, recaps, actions, topics | Direct call: mcp_hedy_ prefix |
-| DuckDB (duckdb) | SQL read/write | PS Analytics — all structured data |
-| ARCC (arcc) | Security/compliance KB | Mandatory first call for credential/infra requests |
-| SharePoint/OneDrive (amazon-sharepoint-mcp) | Files, folders, lists, Loop | Read + write |
-| Loop (loop-mcp) | Loop pages | Read-only |
-| KDS (knowledge-discovery-mcp) | Knowledge base Q&A | Read-only |
-| Weblab (weblab-mcp) | Allocations, metadata, TAA, activation | Read-only |
-| Wiki (xwiki-mcp) | w.amazon.com pages | Read + write |
-| Builder (builder-mcp) | Quip, search, Taskei, phonetool, code, pipelines, Apollo, oncall, ticketing | Broad toolset |
-| Taskei (taskei-p-mcp) | Dedicated Taskei | Overlaps builder-mcp |
-| Asana (enterprise-asana-mcp) | Full read/write | Guard: Richard's tasks only (GID 1212732742544167). Audit: asana-audit-log.jsonl. Protocol: `asana-command-center.md` |
-| Radar (radar-mcp) | — | Untested |
-| Search Marketing (search-marketing-agent-workspace-alpha-mcp) | AgentCore Gateway | Untested |
-| Local filesystem | ~/shared/, /workspace/ | — |
+| Access | Servers |
+|--------|---------|
+| Full | Hedy · DuckDB · SharePoint/OneDrive · Builder (Quip/search/Taskei/phonetool/code/pipelines) · Wiki (w.amazon.com) · Local filesystem |
+| Guarded | Email/Calendar/To-Do (prichwil-only) · Slack (write: C0993SRL6FQ + self_dm only) · Asana (GID 1212732742544167 only) |
+| Read-only | ARCC (security KB) · KDS · Weblab · Loop · Taskei |
+| Untested | Radar · Search Marketing (AgentCore Gateway) |
+| None | Google Ads · Adobe Analytics |
 
-**No access:** Google Ads, Adobe Analytics (no MCP servers exist).
+Full inventory + guardrails: `~/shared/context/active/mcp-tool-reference.md`
 
-Full tool inventory + guardrails: `~/shared/context/active/mcp-tool-reference.md`
+### Common Failures in Tool Access
+1. **Slack write to wrong channel.** Only `C0993SRL6FQ` (rsw-channel) and self_dm are writable. Any other channel write will fail silently or be blocked.
+2. **Asana write to wrong user.** Only GID `1212732742544167` (Richard) is writable. Writes to other users' tasks are blocked by the guard hook.
+3. **DuckDB schema-unqualified queries.** Always use schema-qualified names (e.g., `asana.asana_tasks`, not `asana_tasks`). Unqualified names may resolve to wrong schema or fail.
+4. **Email send to non-Richard recipient without approval.** Email guard blocks unless sole recipient is prichwil. External sends need explicit approval.
+
+**Worked example — tool access troubleshooting:** Query fails with "table not found" → check schema qualification. `SELECT * FROM asana_tasks` fails; `SELECT * FROM asana.asana_tasks` succeeds. Slack post to #ps-team fails silently → check channel ID. Only `C0993SRL6FQ` and self_dm are writable. Asana CreateTask for a teammate fails → guard hook blocks non-Richard GIDs.
 
 ---
 
-## Key IDs
+## Quick Reference (Key IDs + Hook System)
 
-See hands.md → Task List Structure for Microsoft To-Do list IDs.
-See hands.md → Key Outlook Folders for Outlook folder IDs.
-See memory.md → Reference Index for Quip document links.
+**Key IDs:**
+- Richard's Asana GID: `1212732742544167`
+- Slack rsw-channel: `C0993SRL6FQ`
+- DuckDB: `ps-analytics.duckdb` (local) / `md:ps_analytics` (MotherDuck)
+- Full ID sources: hands.md (To-Do list IDs, Outlook folder IDs), memory.md (Quip document links)
 
----
+**Daily hook sequence:** AM-1 (Ingest) → AM-2 (Triage) → AM-3 (Brief), then EOD-1 (Meeting Sync) → EOD-2 (System Refresh + Karpathy experiments on organs + output quality). Guards (Email, Calendar) are always-on preToolUse hooks. On-demand: WBR Callouts, SharePoint Sync, PS Audit, Agent Bridge.
 
-## Hook System
-
-**Daily sequence:** AM-1 (Ingest) → AM-2 (Triage) → AM-3 (Brief), then EOD-1 (Meeting Sync) → EOD-2 (System Refresh + Karpathy experiments on organs + output quality). Guards (Email, Calendar) are always-on preToolUse hooks. On-demand: WBR Callouts, SharePoint Sync, PS Audit, Agent Bridge.
+| Hook | File | Type | Trigger |
+|------|------|------|---------|
+| AM-1 Ingest | `am-auto.kiro.hook` | Daily AM | Session start |
+| AM-2 Triage | `am-triage.kiro.hook` | Daily AM | After AM-1 |
+| AM-3 Brief | (generated by AM-2) | Daily AM | After AM-2 |
+| EOD-1 Meeting Sync | `session-summary.kiro.hook` | Daily EOD | End of day |
+| EOD-2 System Refresh | `eod.kiro.hook` | Daily EOD | After EOD-1 |
+| Guard: Email | `guard-email.kiro.hook` | Always-on | preToolUse |
+| Guard: Calendar | `guard-calendar.kiro.hook` | Always-on | preToolUse |
+| WBR Callouts | `wbr-callouts.kiro.hook` | On-demand | WBR prep |
+| SharePoint Sync | `sharepoint-sync.kiro.hook` | On-demand | Manual |
+| PS Audit | `ps-audit.kiro.hook` | On-demand | Manual |
+| Agent Bridge | `agent-bridge-sync.kiro.hook` | On-demand | Manual |
 
 Full hook details: see device.md → Installed Apps and hands.md → Hook System.
+
+**Cold Start Recovery:** If the filesystem is empty or corrupted: (1) Query MotherDuck `md:ps_analytics` for structured data, (2) Pull `Kiro-Drive/portable-body/` from SharePoint for organ snapshots, (3) Clone `agent-bridge` from GitHub for portable body + changelog, (4) Rebuild filesystem from these three sources. Do NOT start from scratch — at least two backup layers will have current data.
 
 ---
 
@@ -88,9 +99,11 @@ Full hook details: see device.md → Installed Apps and hands.md → Hook System
 
 ---
 
-## Three-Layer Durability Model
+## System Persistence & Ground Truth
 
-The system survives any single point of failure through three independent persistence layers:
+### Durability Model (Four Layers)
+
+The system survives any single point of failure through four independent persistence layers:
 
 | Layer | Location | What It Stores | Survives |
 |-------|----------|---------------|----------|
@@ -101,9 +114,9 @@ The system survives any single point of failure through three independent persis
 
 **Recovery priority:** MotherDuck (structured data) → SharePoint (artifacts + state) → Git (portable body) → Filesystem (rebuild from other three).
 
----
+### Ground Truth Files
 
-## Ground Truth Files (stay separate — different update cadences)
+*Stay separate from organs — different update cadences.*
 
 | File | Location | What it is | Update cadence | Read when |
 |------|----------|-----------|----------------|-----------|
@@ -114,17 +127,18 @@ The system survives any single point of failure through three independent persis
 
 **Rule:** These files are NOT absorbed into organs. They have different update cadences and serve as authoritative sources. Organs may reference them but never duplicate their content.
 
-**Quick-check keys** (avoid opening the file just to check one fact):
+### Quick-Check Keys
+
+*Avoid opening the file just to check one fact:*
 - current.md contains the active project list with status, the people Richard interacted with this week, and pending actions with owners.
 - rw-tracker.md contains the L1 streak count, weekly artifact tally, and the 30-day challenge status.
 
----
+### Common Failures
 
-## Common Failures in Using This Organ
-
-1. **Skipping body.md and going straight to an organ.** Body.md is the map — it tells you which organ to read. Without it, you guess wrong and load irrelevant context.
-2. **Reading all organs instead of task-specific ones.** The Task Routing table in body.md exists for a reason. Loading everything wastes context window and dilutes answers.
-3. **Using stale Key IDs.** Spine points to hands.md and memory.md for IDs. If those organs were updated and spine wasn't, the pointers may be stale. Always follow the pointer to the source.
+1. **Skipping body.md** → wrong organ loaded. Body.md is the map; read it first.
+2. **Loading all organs** → context window waste. Use body.md Task Routing table.
+3. **Stale Key IDs** → spine points to hands.md/memory.md for IDs. Follow the pointer; spine may lag.
+4. **Ignoring durability layers during recovery** → MotherDuck first, then SharePoint, then Git. Don't rebuild from scratch.
 
 ## System History
 

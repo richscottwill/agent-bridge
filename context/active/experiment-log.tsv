@@ -65,3 +65,353 @@ run47_exp4	amcc	Integration+CommonFailures+GrowthModel	MERGE	information_retriev
 run47_exp5	richard-style-email	Full file	RESTRUCTURE	output_quality	828	828	0.88	0.89	0.82	-0.01	false	REVERT	600
 PE-1_design	wbr_pipeline	_stage_project+_write_projections	RESTRUCTURE	output_quality	-	-	-	-	-	-	false	DESIGNED	0
 run48_exp1	spine	Ground Truth Files	ADD	information_retrieval	1176	1223	1.0	1.0	1.0	0.0	false	KEEP	120
+run48_exp1	brain	Leverage Assessment Framework	COMPRESS	information_retrieval	1373	1308	0.9	1.0	0.9	-0.1	false	REVERT	120
+run48_exp2	eyes	OCI Performance	REWORD	information_retrieval	1195	1178	1.0	1.0	1.0	0.0	false	KEEP	150
+run48_exp2	amcc	Purpose	RESTRUCTURE	information_retrieval	4147	4148	1.0	1.0	1.0	0.0	false	KEEP	150
+run48_exp3	heart	Run Protocol eval prompt	ADD	information_retrieval	4085	4134	0.0	1.0	1.0	-1.0	false	REVERT	180
+run48_exp4	richard-style-wbr	Voice+Key Patterns	MERGE	output_quality	923	919	0.0	0.0	0.0	0.0	false	KEEP	180
+run48_exp3	richard-style-docs	Investigation+HowTo	MERGE	output_quality	772	764	1.0	1.0	1.0	0.0	false	KEEP	150
+run48_exp5	richard-style-slack	What NOT to Do	ADD	information_retrieval	1222	1238	1.0	1.0	1.0	0.0	false	KEEP	150
+run48_exp6	richard-style-docs	Common Failures	REWORD	information_retrieval	764	754	1.0	1.0	1.0	0.0	false	KEEP	150
+run48_exp7	gut	Governance+When to Read	MERGE	information_retrieval	2033	1963	0.0	1.0	1.0	-1.0	false	REVERT	180
+run48_exp4	am-triage	Steps+DataQueries	MERGE	output_quality	373	350	1.0	1.0	1.0	0.0	false	KEEP	180
+run48_exp8	am-triage	Step descriptions	REWORD	output_quality	319	290	1.0	1.0	1.0	0.0	false	KEEP	150
+run48_exp5	brain	Five Levels Current Status	ADD	information_retrieval	1373	1437	1.0	1.0	0.93	0.0	false	KEEP	150
+run48_exp9	nervous-system	L1 Gate-Breaker Candidates	RESTRUCTURE	information_retrieval	1313	1315	1.0	1.0	1.0	0.0	false	KEEP	150
+run48_exp10	memory	Reference Index subfolders	RESTRUCTURE	information_retrieval	2003	2049	1.0	1.0	1.0	0.0	false	KEEP	150
+run48_exp6	amcc	After Intervention	ADD	information_retrieval	4148	4250	1.0	0.9	1.0	0.1	false	KEEP	180
+run48_exp7	richard-style-docs	Testing Plans	COMPRESS	output_quality	754	743	1.0	1.0	1.0	0.0	false	KEEP	150
+run48_exp8	memory	Key Decisions/Positions	REWORD	information_retrieval	2049	2068	1.0	0.917	1.0	0.083	false	KEEP	180
+run48_exp9	device	Delegation Protocols	REWORD	information_retrieval	2223	2217	1.0	1.0	1.0	0.0	false	KEEP	150
+run48_exp10	gut	Identity Field Protection	SPLIT	information_retrieval	2033	2025	1.0	1.0	1.0	0.0	false	KEEP	150
+run49_exp1	am-triage	full hook	RESTRUCTURE	output_quality	321	311	1.0	1.0	1.0	0.0	false	KEEP	120
+run49_exp2	richard-style-mbr	Data Rules	REMOVE	output_quality	529	445	0.8	1.0	0.8	-0.2	false	REVERT	120
+run49_exp3	eyes	OCI+AdCopy	MERGE	information_retrieval	1178	1186	1.0	1.0	1.0	0.0	false	KEEP	120
+run49_exp1	nervous-system	Loop 1 Decision Audit	SPLIT	information_retrieval	1315	1322	1.0	1.0	1.0	0.0	false	KEEP	120
+run49_exp2	brain	OP1 Strategic Narrative	RESTRUCTURE	information_retrieval	1437	1437	1.0	1.0	1.0	0.0	false	KEEP	120
+run49_exp4	audit-asana-writes	Steps+CommonFailures	MERGE	output_quality	310	235	0.8	1.0	0.8	-0.2	false	REVERT	120
+run49_exp3	gut	Three Functions	RESTRUCTURE	information_retrieval	2025	2025	1.0	1.0	1.0	0.0	false	KEEP	120
+run49_exp5	nervous-system	Loop 1 Decision Audit	ADD	information_retrieval	1322	1366	1.0	1.0	1.0	0.0	false	KEEP	120
+run49_exp4	heart	Design Choices Core Principles	REWORD	information_retrieval	4085	4054	1.0	1.0	1.0	0.0	false	KEEP	180
+run49_exp6	spine	Session Bootstrap	REMOVE	information_retrieval	1223	1092	0.4	1.0	0.4	-0.6	false	REVERT	120
+run49_exp7	eod-refresh	Auto-Execute	ADD	output_quality	499	555	1.0	1.0	1.0	0.0	false	KEEP	120
+run49_exp5	richard-style-email	Email Operational	RESTRUCTURE	output_quality	828	828	0.96	0.94	0.90	0.02	false	KEEP	180
+run49_exp8	heart	Architecture	COMPRESS	information_retrieval	4054	3860	1.0	1.0	1.0	0.0	false	KEEP	120
+run49_exp6	richard-style-slack	What Shares Unprompted	COMPRESS	output_quality	1238	1207	0.98	0.98	0.98	0.0	false	KEEP	150
+run49_exp7	amcc	Common Failures	ADD	information_retrieval	4250	4291	0.934	0.90	0.934	0.034	false	KEEP	150
+run49_exp9	richard-style-docs	Strategic Narrative	REMOVE	output_quality	743	662	0.8	1.0	0.8	-0.2	false	REVERT	120
+run49_exp8	richard-style-amazon	Confidence Calibration	ADD	output_quality	949	1000	1.0	1.0	1.0	0.0	false	KEEP	150
+run49_exp10	brain	Leverage Assessment	REMOVE	information_retrieval	1437	1302	0.6	1.0	0.6	-0.4	false	REVERT	120
+run49_exp9	eod-refresh	Queue for Frontend	ADD	output_quality	555	578	1.0	0.9	1.0	0.1	false	KEEP	150
+run49_exp10	richard-style-slack	Relationship Dynamics	ADD	output_quality	1207	1238	0.99	0.98	0.99	0.01	false	KEEP	150
+run50_exp1	device	Slack Context Ingestion	REMOVE	information_retrieval	2217	2123	0.0	1.0	0.0	-1.0	false	REVERT	120
+run50_exp2	brain	Prediction Template	SPLIT	information_retrieval	1437	1440	0.778	0.778	0.778	0.0	false	REVERT	120
+run50_exp1	eod-refresh	Backend Phases table	COMPRESS	output_quality	578	518	1.0	1.0	1.0	0.0	false	KEEP	120
+run50_exp3	richard-style-wbr	Attribution+Context Failures	MERGE	output_quality	919	916	1.0	1.0	1.0	0.0	false	KEEP	150
+run50_exp2	nervous-system	Loop 3 Pattern Trajectory	RESTRUCTURE	information_retrieval	1366	1366	1.0	1.0	1.0	0.0	false	KEEP	120
+run50_exp3	device	EOD Hook	COMPRESS	information_retrieval	2217	2204	0.67	1.0	0.58	-0.33	false	REVERT	120
+run50_exp4	richard-style-email	Operational Coordination	ADD	output_quality	828	854	1.0	1.0	1.0	0.0	false	KEEP	150
+run50_exp4	richard-style-docs	Knowledge-Sharing+Common Failures	MERGE	output_quality	743	748	1.0	1.0	1.0	0.0	false	KEEP	120
+run50_exp5	spine	Common Failures	ADD	information_retrieval	1223	1260	1.0	1.0	1.0	0.0	false	KEEP	120
+run50_exp5	brain	OP1 Narrative+Leverage Assessment	MERGE	information_retrieval	1437	1441	1.0	1.0	1.0	0.0	false	KEEP	120
+run50_exp6	richard-style-wbr	Common Failures worked example	ADD	output_quality	916	967	1.0	0.8	1.0	0.2	false	KEEP	150
+run50_exp7	memory	Common Failures	REWORD	information_retrieval	2068	2047	1.0	1.0	1.0	0.0	false	KEEP	150
+run50_exp6	device	Safety Guards	ADD	information_retrieval	2217	2237	1.0	0.7	1.0	0.3	false	KEEP	150
+run50_exp7	richard-style-wbr	Formatting Rules	REMOVE	output_quality	967	796	0.077	1.0	0.15	-0.923	false	REVERT	150
+run50_exp8	am-triage	Common Failures subsections	SPLIT	output_quality	311	313	1.0	1.0	1.0	0.0	false	KEEP	150
+run50_exp9	spine	Ground Truth+Common Failures	MERGE	information_retrieval	1260	1260	1.0	1.0	1.0	0.0	false	KEEP	150
+run50_exp8	richard-style-mbr	Common Failures	SPLIT	output_quality	529	537	1.0	1.0	1.0	0.0	false	KEEP	150
+run50_exp10	eyes	Market Deep Dives reading guide	ADD	information_retrieval	1186	1236	1.0	1.0	1.0	0.0	false	KEEP	150
+run50_exp9	brain	Level 1 Sharpen Yourself	REWORD	information_retrieval	1441	1436	1.0	1.0	1.0	0.0	false	KEEP	150
+run50_exp10	am-triage	Steps	SPLIT	output_quality	313	325	1.0	1.0	1.0	0.0	false	KEEP	150
+run51_exp1	device	SharePoint Durability Layer	ADD	information_retrieval	2237	2284	1.0	0.8	0.9	0.2	false	KEEP	120
+run51_exp2	eod-refresh	Wiki Candidate	RESTRUCTURE	output_quality	518	526	1.0	1.0	1.0	0.0	false	KEEP	150
+run51_exp3	richard-style-email	Common Draft Failures	COMPRESS	output_quality	854	768	1.0	1.0	1.0	0.0	false	KEEP	150
+run51_exp1	nervous-system	Common Failures	COMPRESS	information_retrieval	1366	1315	1.0	1.0	1.0	0.0	false	KEEP	120
+run51_exp4	nervous-system	Loop 7 Coherence Audit	REWORD	information_retrieval	1315	1335	1.0	1.0	1.0	0.0	false	KEEP	150
+run51_exp5	memory	Compressed Context	REWORD	information_retrieval	2047	2059	1.0	1.0	1.0	0.0	false	KEEP	150
+run51_exp6	spine	Key IDs	ADD	information_retrieval	1260	1282	1.0	1.0	1.0	0.0	false	KEEP	150
+run51_exp2	eod-refresh	Backend Phases	SPLIT	output_quality	517	560	1.0	1.0	1.0	0.0	false	KEEP	150
+run51_exp7	richard-style-slack	Slack-Specific Habits	REWORD	output_quality	1238	1211	1.0	1.0	1.0	0.0	false	KEEP	150
+run51_exp3	spine	Session Bootstrap	RESTRUCTURE	information_retrieval	1282	1282	0.929	1.0	1.0	-0.071	false	REVERT	150
+run51_exp8	gut	Three Functions	REWORD	information_retrieval	2025	2031	1.0	1.0	1.0	0.0	false	KEEP	150
+run51_exp4	richard-style-docs	Knowledge-Sharing+CommonFailures	RESTRUCTURE	output_quality	748	744	1.0	1.0	1.0	0.0	false	KEEP	150
+run51_exp9	richard-style-amazon	Prose+Sentence Length	MERGE	output_quality	1000	997	1.0	1.0	1.0	0.0	false	KEEP	150
+run51_exp5	richard-style-email	Email Analytical	SPLIT	output_quality	768	769	1.0	1.0	1.0	0.0	false	KEEP	150
+run51_exp10	brain	Leverage Tiebreakers	REWORD	information_retrieval	1436	1475	1.0	1.0	1.0	0.0	false	KEEP	150
+run51_exp6	amcc	The Hard Thing	ADD	information_retrieval	4291	4374	1.0	1.0	1.0	0.0	false	KEEP	150
+run52_exp1	memory	Common Failures+Meeting Prep	MERGE	information_retrieval	2059	2045	1.0	1.0	1.0	0.0	false	KEEP	120
+run52_exp1	heart	Hyperparameters	ADD	information_retrieval	3860	3920	1.0	1.0	1.0	0.0	false	KEEP	150
+run51_exp7	richard-style-slack	Tone Register	ADD	output_quality	1211	1309	1.0	1.0	1.0	0.0	false	KEEP	180
+run52_exp2	am-triage	full hook	COMPRESS	output_quality	325	176	1.0	1.0	1.0	0.0	false	KEEP	150
+run52_exp3	amcc	Scoring math	REMOVE	information_retrieval	4374	4128	0.1	1.0	0.0	-0.9	true	REVERT	60
+run51_exp8	memory	Usage Guide	RESTRUCTURE	information_retrieval	2045	2045	1.0	1.0	1.0	0.0	false	KEEP	180
+run52_exp2	roster	Pre-WBR Callout Owners	COMPRESS	information_retrieval	2413	2331	1.0	1.0	1.0	0.0	false	KEEP	150
+run52_exp4	device	When to Read	REWORD	information_retrieval	2284	2270	1.0	1.0	1.0	0.0	false	KEEP	150
+run51_exp9	heart	Active Pipeline	RESTRUCTURE	information_retrieval	3920	3942	0.0	1.0	1.0	-1.0	false	REVERT	180
+run52_exp3	amcc	Trigger Detection	SPLIT	information_retrieval	4374	4394	1.0	1.0	1.0	0.0	false	KEEP	150
+run52_exp5	richard-style-amazon	Prose+Purpose	MERGE	output_quality	997	954	1.0	1.0	1.0	0.0	false	KEEP	150
+run51_exp10	heart	Architecture	COMPRESS	information_retrieval	3920	3840	1.0	1.0	1.0	0.0	false	KEEP	150
+run52_exp6	gut	Three Functions	REWORD	information_retrieval	2031	2016	1.0	1.0	1.0	0.0	false	KEEP	120
+run52_exp4	nervous-system	Five Levels Position	ADD	information_retrieval	1335	1402	1.0	1.0	1.0	0.0	false	KEEP	150
+run52_exp7	nervous-system	Loop 4 Delegation	REWORD	information_retrieval	1402	1399	1.0	1.0	1.0	0.0	false	KEEP	120
+run52_exp8	richard-style-slack	What NOT to Do	REWORD	output_quality	1309	1293	1.0	1.0	1.0	0.0	false	KEEP	120
+run52_exp5	richard-style-mbr	Common Failures	SPLIT	output_quality	537	575	0.96	0.96	0.96	0.0	false	KEEP	150
+run52_exp9	amcc	Purpose	ADD	information_retrieval	4394	4437	0.9	0.8	0.9	0.1	false	KEEP	150
+run53_exp1	eyes	Competitive Landscape	RESTRUCTURE	information_retrieval	1236	1237	1.0	1.0	1.0	0.0	false	KEEP	120
+run52_exp10	eyes	Competitors	ADD	information_retrieval	1237	1283	1.0	1.0	1.0	0.0	false	KEEP	120
+run52_exp6	device	AM Hooks	ADD	information_retrieval	2270	2313	1.0	1.0	1.0	0.0	false	KEEP	150
+run53_exp2	eod-refresh	Common Failures	SPLIT	output_quality	552	558	1.0	1.0	1.0	0.0	false	KEEP	120
+run53_exp3	brain	Decision Principles	RESTRUCTURE	information_retrieval	1475	1487	1.0	1.0	1.0	0.0	false	KEEP	150
+run52_exp7	richard-style-amazon	Prose+Writing hygiene	MERGE	output_quality	954	898	1.0	1.0	1.0	0.0	false	KEEP	150
+run53_exp4	audit-asana-writes	DuckDB logging	RESTRUCTURE	output_quality	310	300	1.0	1.0	1.0	0.0	false	KEEP	120
+run53_exp5	richard-style-email	Email Operational	RESTRUCTURE	output_quality	769	769	1.0	1.0	1.0	0.0	false	KEEP	120
+run52_exp8	gut	Purpose	REWORD	information_retrieval	2016	2028	1.0	1.0	1.0	0.0	false	KEEP	150
+run53_exp1	heart	Design Choices	ADD	information_retrieval	3840	3867	0.9	0.9	0.9	0.0	false	KEEP	150
+run52_exp9	richard-style-wbr	Data Source	ADD	output_quality	967	1009	0.96	0.96	0.96	0.0	false	KEEP	150
+run53_exp2	device	Safety Guards	COMPRESS	information_retrieval	2313	2318	1.0	1.0	1.0	0.0	false	KEEP	120
+run53_exp3	memory	Active Projects+Key Metrics	MERGE	information_retrieval	2045	2077	1.0	1.0	1.0	0.0	false	KEEP	120
+run53_exp6	heart	Hyperparameters	REWORD	information_retrieval	3867	3836	1.0	1.0	1.0	0.0	false	KEEP	180
+run53_exp4	spine	Tool Access & Integrations	COMPRESS	information_retrieval	1282	1160	1.0	1.0	1.0	0.0	false	KEEP	120
+run52_exp10	memory	Common Failures	REWORD	information_retrieval	2045	2074	1.0	1.0	1.0	0.0	false	KEEP	150
+run53_exp7	brain	Decision Log Decay Protocol	REWORD	information_retrieval	1487	1476	1.0	1.0	1.0	0.0	false	KEEP	150
+run53_exp5	richard-style-wbr	Voice & Key Patterns	SPLIT	output_quality	1009	1010	1.0	0.98	1.0	0.02	false	KEEP	150
+run53_exp8	eyes	Competitive Landscape	ADD	information_retrieval	1283	1307	1.0	1.0	1.0	0.0	false	KEEP	120
+run53_exp6	gut	Digestion Protocol	REWORD	information_retrieval	2028	2037	1.0	1.0	1.0	0.0	false	KEEP	120
+run53_exp9	eyes	OCI Performance	REWORD	information_retrieval	1307	1298	0.9	0.9	1.0	0.0	false	KEEP	120
+run53_exp7	nervous-system	Loop 5 System Health	ADD	information_retrieval	1399	1447	1.0	1.0	1.0	0.0	false	KEEP	120
+run53_exp10	heart	Step 4 Eval	COMPRESS	information_retrieval	3836	3273	1.0	1.0	1.0	0.0	false	KEEP	150
+run53_exp8	audit-asana-writes	Full Hook	RESTRUCTURE	output_quality	300	226	1.0	1.0	1.0	0.0	false	KEEP	150
+run53_exp9	amcc	Stickiness+Null state	COMPRESS	information_retrieval	4437	4374	1.0	1.0	1.0	0.0	false	KEEP	120
+run54_exp1	memory	Usage Guide	REWORD	information_retrieval	2077	2106	1.0	1.0	0.92	0.0	false	KEEP	180
+run54_exp1	richard-style-slack	What Shares Unprompted	RESTRUCTURE	output_quality	1293	1302	1.0	1.0	0.0	false	KEEP	187
+run53_exp10	richard-style-slack	Response Patterns	ADD	output_quality	1293	1346	0.94	0.96	0.96	-0.02	false	REVERT	150
+run54_exp2	spine	Session Bootstrap	ADD	information_retrieval	1160	1188	1.0	0.833	1.0	0.167	false	KEEP	120
+run54_exp2	eyes	OCI Performance	RESTRUCTURE	information_retrieval	1298	1298	1.0	1.0	0.0	false	KEEP	64
+run54_exp3	nervous-system	Loop 1 Decision Audit	SPLIT	information_retrieval	1447	1484	1.0	1.0	1.0	0.0	false	KEEP	120
+run54_exp3	heart	DuckDB Integration	SPLIT	information_retrieval	3273	3280	1.0	1.0	0.0	false	KEEP	79
+run55_exp1	richard-style-docs	Common Failures	COMPRESS	output_quality	744	755	1.0	1.0	1.0	0.0	false	KEEP	120
+run54_exp4	amcc	Trigger Detection	ADD	information_retrieval	4469	4528	1.0	0.8	0.2	false	KEEP	93
+run54_exp4	amcc	The Hard Thing	ADD	information_retrieval	4374	4469	0.917	0.667	0.917	0.25	false	KEEP	150
+run55_exp2	eod-refresh	Common Failures	COMPRESS	output_quality	558	544	1.0	1.0	1.0	0.0	false	KEEP	120
+run54_exp5	spine	Tool Access	RESTRUCTURE	information_retrieval	1188	1188	0.98	0.98	0.0	false	KEEP	68
+run54_exp5	device	Delegation Protocols	REWORD	information_retrieval	2318	2331	1.0	0.917	1.0	0.083	false	KEEP	120
+run54_exp6	gut	Three Functions	RESTRUCTURE	information_retrieval	1974	1974	1.0	1.0	0.0	false	KEEP	72
+run55_exp3	gut	Integration Heart Loop	REMOVE	information_retrieval	2037	1974	1.0	1.0	1.0	0.0	false	KEEP	120
+run54_exp6	device	WBR Forecast Pipeline	ADD	information_retrieval	2331	2388	1.0	0.917	0.833	0.083	false	KEEP	120
+run55_exp4	richard-style-amazon	Appendix+Prose	MERGE	output_quality	898	843	1.0	1.0	1.0	0.0	false	KEEP	120
+run54_exp7	brain	Prediction Template	SPLIT	information_retrieval	1476	1479	1.0	1.0	0.0	false	KEEP	119
+run54_exp7	amcc	Political Awareness	RESTRUCTURE	information_retrieval	4528	4528	1.0	1.0	1.0	0.0	false	KEEP	120
+run54_exp8	am-triage	Phase Labels	REMOVE	output_quality	176	167	0.0	1.0	-1.0	true	REVERT	121
+run55_exp5	richard-style-mbr	Examples	SPLIT	output_quality	575	593	1.0	0.9	1.0	0.1	false	KEEP	150
+run54_exp8	hands	Dependencies	COMPRESS	information_retrieval	1240	1216	1.0	1.0	1.0	0.0	false	KEEP	120
+run55_exp6	nervous-system	Loop 1 Decision Audit	REWORD	information_retrieval	1484	1503	1.0	1.0	1.0	0.0	false	KEEP	150
+run54_exp9	am-triage	Common Failures	ADD	information_retrieval	176	204	1.0	0.933	1.0	0.067	false	KEEP	120
+run54_exp9	device	The Test	ADD	information_retrieval	2388	2445	1.0	0.9	0.1	false	KEEP	160
+run55_exp7	device	SharePoint Durability	ADD	information_retrieval	2445	2483	1.0	0.8	1.0	0.2	false	KEEP	150
+run54_exp10	roster	Pre-WBR Callout Owners	RESTRUCTURE	information_retrieval	2331	2331	1.0	1.0	0.0	false	KEEP	64
+run54_exp10	eod-refresh	Backend Phases	ADD	information_retrieval	544	555	1.0	0.917	1.0	0.083	false	KEEP	120
+run55_exp8	richard-style-email	Email Operational	SPLIT	output_quality	769	772	1.0	1.0	1.0	0.0	false	KEEP	150
+run55_exp9	nervous-system	Loop 5 System Health	ADD	information_retrieval	1503	1538	1.0	0.9	1.0	0.1	false	KEEP	150
+run56_exp1	nervous-system	Purpose	REWORD	information_retrieval	1538	1548	0.8	0.8	0.8	0.0	false	KEEP	120
+run55_exp1	audit-asana-writes	STEP3_LOG	COMPRESS	output_quality	226	176	1.0	1.0	1.0	0.0	false	KEEP	120
+run55_exp10	brain	Five Levels Graduation	SPLIT	information_retrieval	1479	1460	1.0	0.8	1.0	0.2	false	KEEP	180
+run55_exp2	brain	Prediction_Template	REMOVE	information_retrieval	1460	1325	0.6	1.0	0.6	-0.4	false	REVERT	120
+run56_exp2	eod-refresh	QueueForFrontend+CommonFailures	MERGE	output_quality	555	558	1.0	1.0	1.0	0.0	false	KEEP	150
+run56_exp3	richard-style-wbr	Examples	ADD	output_quality	1010	1079	1.0	1.0	1.0	0.0	false	KEEP	150
+run55_exp3	richard-style-slack	Cadence_Structure	REMOVE	output_quality	1302	1197	0.6	1.0	0.7	-0.4	false	REVERT	180
+run56_exp4	richard-style-mbr	Examples	REWORD	output_quality	593	628	0.9	0.9	0.9	0.0	false	KEEP	150
+run55_exp4	richard-style-email	Common_Failures	SPLIT	output_quality	772	801	1.0	1.0	1.0	0.0	false	KEEP	150
+run57_exp1	gut	Three Functions+Compression Protocol	MERGE	information_retrieval	1974	1879	1.0	1.0	1.0	0.0	false	KEEP	120
+run56_exp5	richard-style-email	CommonDraftFailures	REWORD	output_quality	772	779	0.4	1.0	1.0	-0.6	false	REVERT	150
+run55_exp5	richard-style-wbr	Examples	SPLIT	output_quality	1079	1081	1.0	1.0	1.0	0.0	false	KEEP	150
+run55_exp6	richard-style-mbr	Template+Voice	MERGE	output_quality	628	626	1.0	1.0	1.0	0.0	false	KEEP	150
+run56_exp6	heart	Hyperparameters	SPLIT	information_retrieval	3280	3292	1.0	1.0	1.0	0.0	false	KEEP	150
+run56_exp7	am-triage	PhaseB	SPLIT	output_quality	204	211	1.0	1.0	1.0	0.0	false	KEEP	150
+run57_exp2	amcc	Integration with Other Organs	RESTRUCTURE	information_retrieval	4528	4562	1.0	1.0	1.0	0.0	false	KEEP	150
+run56_exp8	hands	ToolOpportunities	SPLIT	information_retrieval	1216	1212	1.0	1.0	1.0	0.0	false	KEEP	150
+run55_exp7	amcc	Purpose	SPLIT	information_retrieval	4562	4570	1.0	1.0	1.0	0.0	false	KEEP	180
+run57_exp3	am-triage	Phase B Triage	SPLIT	output_quality	211	227	1.0	1.0	1.0	0.0	false	KEEP	120
+run56_exp9	gut	IntegrationAM3Brief	REMOVE	information_retrieval	1974	1843	0.9	1.0	0.9	-0.1	false	REVERT	150
+run55_exp8	eod-refresh	Backend_Phases	ADD	output_quality	558	584	1.0	1.0	1.0	0.0	false	KEEP	150
+run57_exp4	richard-style-amazon	Data+Structure	MERGE	output_quality	843	813	1.0	1.0	1.0	0.0	false	KEEP	150
+run56_exp10	audit-asana-writes	CriticalRules	SPLIT	output_quality	226	180	1.0	1.0	1.0	0.0	false	KEEP	150
+run55_exp9	eod-refresh	Frontend+CommonFailures	MERGE	output_quality	584	565	0.96	1.0	0.96	-0.04	false	REVERT	150
+run55_exp10	eyes	Pipeline_Outlook	COMPRESS	information_retrieval	1298	1231	1.0	1.0	1.0	0.0	false	KEEP	150
+run57_exp5	audit-asana-writes	Worked Example	ADD	output_quality	180	188	1.0	0.8	1.0	0.2	false	KEEP	150
+run57_exp6	heart	Architecture	ADD	information_retrieval	3292	3326	1.0	0.8	1.0	0.2	false	KEEP	120
+run58_exp1	spine	Hook System	ADD	information_retrieval	1188	1324	1.0	1.0	1.0	0.0	false	KEEP	120
+run57_exp7	device	AM Hooks	SPLIT	information_retrieval	2483	2482	1.0	1.0	1.0	0.0	false	KEEP	120
+run58_exp2	memory	Team	ADD	information_retrieval	2106	2153	1.0	1.0	1.0	0.0	false	KEEP	150
+run57_exp8	memory	Reference Index	RESTRUCTURE	information_retrieval	2106	2153	1.0	1.0	1.0	0.0	false	KEEP	120
+run57_exp9	brain	Prediction Template	REWORD	information_retrieval	1460	1456	1.0	1.0	1.0	0.0	false	KEEP	150
+run57_exp10	richard-style-slack	Response Patterns	REWORD	output_quality	1302	1287	1.0	1.0	1.0	0.0	false	KEEP	150
+run58_exp3	richard-style-docs	Strategic Narrative	REWORD	output_quality	755	837	1.0	1.0	1.0	0.0	false	KEEP	180
+run58_exp4	memory	Reference Index	COMPRESS	information_retrieval	2153	2134	1.0	1.0	1.0	0.0	false	KEEP	150
+run58_exp5	spine	Tool Access	COMPRESS	information_retrieval	1324	1305	1.0	1.0	1.0	0.0	false	KEEP	120
+run59_exp1	eyes	OCI Performance	REMOVE	information_retrieval	1231	967	0.167	1.0	-0.833	true	REVERT	120
+run58_exp6	amcc	Two modes worked example	ADD	information_retrieval	4570	4654	1.0	1.0	1.0	0.0	false	KEEP	180
+run59_exp2	am-auto	Phases2-5 Sequential	SPLIT	output_quality	673	681	1.0	1.0	0.0	false	KEEP	120
+run59_exp3	richard-style-amazon	Document Structure Writing Discipline	ADD	output_quality	813	955	1.0	1.0	0.0	false	KEEP	120
+run59_exp4	eyes	OCI Performance	ADD	information_retrieval	1231	1289	1.0	1.0	0.0	false	KEEP	120
+run58_exp7	richard-style-slack	Slack-Specific Habits	ADD	information_retrieval	1287	1338	1.0	1.0	1.0	0.0	false	KEEP	180
+run59_exp5	brain	Five Levels Current Status	SPLIT	information_retrieval	1456	1478	1.0	1.0	0.0	false	KEEP	120
+run59_exp6	audit-asana-writes	Full Hook	RESTRUCTURE	output_quality	188	189	1.0	1.0	0.0	false	KEEP	120
+run58_exp8	eod-refresh	Common Failures	REMOVE	output_quality	550	524	1.0	1.0	1.0	0.0	false	KEEP	150
+run58_exp1	gut	Compression Protocol	RESTRUCTURE	information_retrieval	1879	1882	1.0	1.0	1.0	0.0	false	KEEP	120
+run58_exp2	eod-refresh	Phase 5.5 Wiki Candidate	COMPRESS	output_quality	584	550	0.875	0.875	0.875	0.0	false	KEEP	180
+run58_exp3	heart	DuckDB How Priors Work	SPLIT	information_retrieval	3326	3330	0.8	1.0	0.8	-0.2	false	REVERT	180
+run58_exp4	richard-style-wbr	Failure-Correction Examples	ADD	output_quality	1081	1149	0.92	0.96	0.90	-0.04	false	REVERT	180
+run58_exp5	nervous-system	Five Levels Parallel Activity	SPLIT	information_retrieval	1548	1549	0.9	1.0	1.0	-0.1	false	REVERT	180
+run58_exp6	richard-style-email	Email Analytical	RESTRUCTURE	output_quality	801	795	0.94	0.98	0.91	-0.04	false	REVERT	240
+run58_exp7	memory	Relationship Graph	RESTRUCTURE	information_retrieval	2134	2266	0.9	0.9	0.9	0.0	false	KEEP	180
+run58_exp8	richard-style-docs	Experiment Documents	RESTRUCTURE	output_quality	837	845	0.9	0.95	0.0	-0.05	false	REVERT	300
+run58_exp9	nervous-system	Loop 1 Protocol	REWORD	information_retrieval	1548	1580	1.0	1.0	1.0	0.0	false	KEEP	180
+run58_exp10	richard-style-mbr	Examples	SPLIT	output_quality	626	635	0.98	0.99	0.98	-0.01	false	REVERT	180
+run59_exp7	heart	Run Protocol Step 3	COMPRESS	information_retrieval	3326	3216	1.0	1.0	0.0	false	KEEP	120
+run58_exp9	richard-style-wbr	Established Markets	REWORD	output_quality	1081	1115	1.0	1.0	1.0	0.0	false	KEEP	150
+run59_exp8	richard-style-mbr	Template Voice	SPLIT	output_quality	626	629	1.0	1.0	0.0	false	KEEP	120
+run58_exp10	audit-asana-writes	CriticalRules+Steps	MERGE	output_quality	189	165	1.0	1.0	1.0	0.0	false	KEEP	150
+run59_exp9	eod-refresh	Queue for Frontend	SPLIT	output_quality	524	530	1.0	1.0	0.0	false	KEEP	120
+run59_exp10	gut	Purpose	SPLIT	information_retrieval	1882	1884	1.0	1.0	0.0	false	KEEP	120
+run60_exp1	richard-style-amazon	Amazon Narrative Standard	SPLIT	output_quality	955	983	1.0	1.0	1.0	0.0	false	KEEP	120
+run60_exp2	richard-style-wbr	Data Source Quick Reference	ADD	output_quality	1115	1161	1.0	1.0	1.0	0.0	false	KEEP	150
+run60_exp1	richard-style-wbr	Voice Register + Structural Patterns	RESTRUCTURE	info_retrieval	1115	1124	0.6	0.6	0.0	false	KEEP	120
+run60_exp3	richard-style-docs	Post-Mortem	COMPRESS	output_quality	837	830	1.0	1.0	1.0	0.0	false	KEEP	150
+run60_exp2	memory	Relationship Graph	SPLIT	info_retrieval	2266	2281	1.0	1.0	0.0	false	KEEP	90
+run60_exp4	am-auto	FirstOfDayGuard	REWORD	output_quality	681	719	1.0	1.0	1.0	0.0	false	KEEP	150
+run60_exp3	richard-style-mbr	Data Rules	ADD	info_retrieval	629	698	1.0	1.0	0.0	false	KEEP	90
+run60_exp5	device	TheTest	REMOVE	information_retrieval	2482	2383	0.7	1.0	0.7	-0.3	false	REVERT	150
+run61_exp1	eod-refresh	Auto-Execute	REWORD	output_quality	530	560	1.0	1.0	1.0	0.0	false	KEEP	120
+run60_exp4	am-triage	Common Failures	SPLIT	info_retrieval	227	232	1.0	1.0	0.0	false	KEEP	90
+run60_exp6	spine	HookSystem+KeyIDs	MERGE	information_retrieval	1305	1288	1.0	1.0	1.0	0.0	false	KEEP	150
+run61_exp2	heart	Architecture+TheMetric	MERGE	information_retrieval	3216	3217	1.0	1.0	1.0	0.0	false	KEEP	120
+run60_exp7	richard-style-amazon	HowToApply	REMOVE	output_quality	983	844	0.4	-	-	-	true	REVERT	60
+run60_exp5	amcc	Avoidance Ratio	SPLIT	info_retrieval	4654	4675	0.0	0.9	-0.9	false	REVERT	90
+run60_exp6	device	Device Health	ADD	info_retrieval	2482	2499	1.0	0.0	1.0	false	KEEP	90
+run61_exp3	gut	Bloat Detection	ADD	information_retrieval	1884	1931	1.0	0.8	1.0	0.2	false	KEEP	120
+run60_exp8	roster	ABPaidSearchTeam	REWORD	information_retrieval	2331	2332	1.0	1.0	1.0	0.0	false	KEEP	180
+run60_exp7	amcc	Purpose	ADD	info_retrieval	4654	4697	0.0	0.0	0.0	false	KEEP	90
+run61_exp4	am-triage	Phase B Triage	SPLIT	output_quality	232	272	1.0	1.0	1.0	0.0	false	KEEP	120
+run60_exp9	richard-style-mbr	CommonFailures	RESTRUCTURE	output_quality	698	698	1.0	1.0	1.0	0.0	false	KEEP	180
+run60_exp8	memory	Reference Index	REWORD	info_retrieval	2281	2317	1.0	0.9	0.1	false	KEEP	90
+run61_exp5	memory	Common Failures	REWORD	information_retrieval	2281	2319	1.0	1.0	1.0	0.0	false	KEEP	150
+run60_exp10	richard-style-docs	TestingPlans	REMOVE	output_quality	830	769	0.4	-	-	-	true	REVERT	60
+run60_exp9	am-triage	Description	COMPRESS	info_retrieval	272	259	0.0	0.0	0.0	false	KEEP	90
+run61_exp6	audit-asana-writes	Batch Handling	ADD	output_quality	165	202	1.0	0.9	1.0	0.1	false	KEEP	120
+run61_exp7	device	SharePoint Durability	REWORD	information_retrieval	2499	2465	1.0	1.0	1.0	0.0	false	KEEP	120
+run60_exp10	richard-style-slack	Cadence Structure	REWORD	info_retrieval	1338	1360	1.0	1.0	0.0	false	KEEP	90
+run61_exp8	spine	Session Bootstrap	COMPRESS	information_retrieval	1288	1270	1.0	1.0	1.0	0.0	false	KEEP	120
+run61_exp9	richard-style-slack	Response Patterns	REWORD	output_quality	1360	1423	1.0	1.0	1.0	0.0	false	KEEP	120
+run62_exp1	richard-style-wbr	Examples	RESTRUCTURE	output_quality	1161	1158	1.0	1.0	1.0	0.0	false	KEEP	120
+run61_exp10	richard-style-email	Stakeholder+Sentence	MERGE	output_quality	801	800	1.0	1.0	1.0	0.0	false	KEEP	120
+run62_exp2	richard-style-mbr	Examples	RESTRUCTURE	output_quality	698	710	1.0	1.0	1.0	0.0	false	KEEP	120
+run62_exp3	richard-style-amazon	HowToApply	SPLIT	output_quality	983	994	1.0	1.0	1.0	0.0	false	KEEP	120
+run62_exp1	richard-style-email	Common Draft Failures	COMPRESS	output_quality	800	748	1.0	1.0	1.0	0.0	false	KEEP	180
+run62_exp4	brain	Strategic_Priorities	SPLIT	information_retrieval	1478	1482	1.0	1.0	1.0	0.0	false	KEEP	120
+run62_exp1	device	Tool Factory	SPLIT	information_retrieval	2465	2481	1.0	1.0	1.0	0.0	false	KEEP	180
+run62_exp2	heart	Common Failures+Governance	MERGE	information_retrieval	3217	3180	1.0	1.0	1.0	0.0	false	KEEP	180
+run62_exp5	richard-style-slack	Relationship_Dynamics	REWORD	output_quality	1423	1452	1.0	1.0	1.0	0.0	false	KEEP	120
+run62_exp3	hands	Integrations & Access	ADD	information_retrieval	1212	1299	1.0	0.0	1.0	1.0	false	KEEP	180
+run62_exp6	brain	Decision_Log	COMPRESS	information_retrieval	1482	1459	1.0	1.0	1.0	0.0	false	KEEP	120
+run62_exp4	amcc	Integration with Other Organs	ADD	information_retrieval	4697	4748	1.0	0.96	1.0	0.04	false	KEEP	180
+run62_exp2	richard-style-email	Openers+Transitions	MERGE	output_quality	748	746	1.0	1.0	1.0	0.0	false	KEEP	170
+run62_exp7	brain	Prediction_Template	REMOVE	information_retrieval	1459	1329	0.0	-	0.0	-1.0	true	REVERT	60
+run62_exp5	heart	Experiment Queue	COMPRESS	information_retrieval	3180	3108	1.0	1.0	1.0	0.0	false	KEEP	150
+run62_exp6	nervous-system	Governance	ADD	information_retrieval	1580	1614	1.0	0.7	1.0	0.3	false	KEEP	150
+run62_exp8	richard-style-docs	Experiment+Testing	MERGE	output_quality	830	828	1.0	1.0	1.0	0.0	false	KEEP	120
+run62_exp7	memory	Cross-Cutting Dynamics	REWORD	information_retrieval	2319	2337	1.0	0.94	1.0	0.06	false	KEEP	150
+run62_exp9	device	The_Test	REWORD	information_retrieval	2481	2510	1.0	1.0	1.0	0.0	false	KEEP	120
+run62_exp8	audit-asana-writes	Full Hook	RESTRUCTURE	output_quality	202	162	1.0	1.0	1.0	0.0	false	KEEP	150
+run62_exp3	memory	Relationship Graph	SPLIT	information_retrieval	2319	2323	1.0	1.0	1.0	0.0	false	KEEP	244
+run62_exp10	gut	Integration_AM3	REMOVE	information_retrieval	1931	1894	0.4	-	0.4	-0.6	true	REVERT	60
+run62_exp9	device	Delegation Protocols	ADD	information_retrieval	2465	2540	1.0	0.8	1.0	0.2	false	KEEP	150
+run62_exp10	gut	When to Read	REWORD	information_retrieval	1931	1943	1.0	0.84	1.0	0.16	false	KEEP	150
+run62_exp4	amcc	Resistance Taxonomy	ADD	information_retrieval	4748	4825	1.0	0.929	1.0	0.071	false	KEEP	97
+run62_exp5	heart	Hyperparameters	COMPRESS	information_retrieval	3108	3087	1.0	1.0	1.0	0.0	false	KEEP	99
+run62_exp6	audit-asana-writes	Full Hook	RESTRUCTURE	output_quality	162	162	1.0	1.0	1.0	0.0	false	KEEP	110
+run63_exp1	roster	PS_Team+Callout_Owners	MERGE	info_retrieval	2332	2327	0.0	1.0	-1.0	true	REVERT	24
+run62_exp7	gut	Bloat Detection	SPLIT	information_retrieval	1943	1944	1.0	1.0	1.0	0.0	false	KEEP	93
+run63_exp1	richard-style-docs	Evidence-Based Documents	REWORD	output_quality	828	889	1.0	0.0	1.0	1.0	false	KEEP	353
+run62_exp8	am-triage	Phase C	SPLIT	output_quality	259	267	1.0	1.0	1.0	0.0	false	KEEP	108
+run63_exp2	eyes	Predicted Questions+Pipeline	MERGE	information_retrieval	1289	1289	0.4	0.0	0.0	0.4	false	KEEP	90
+run62_exp9	nervous-system	Loop 4 Delegation	ADD	information_retrieval	1614	1665	1.0	0.857	1.0	0.143	false	KEEP	88
+run63_exp3	spine	Durability+GroundTruth	MERGE	information_retrieval	1270	1270	0.4	0.0	0.0	0.4	false	KEEP	94
+run62_exp10	brain	Decision Log Decay	REWORD	information_retrieval	1459	1496	1.0	1.0	1.0	0.0	false	KEEP	113
+run63_exp2	richard-style-amazon	Document_Structure	REWORD	output_quality	994	1027	0.94	0.92	+0.02	false	KEEP	62
+run63_exp4	memory	Relationship Staleness Index	REWORD	information_retrieval	2337	2392	0.0	0.0	0.0	0.0	false	KEEP	140
+run63_exp3	device	Delegation_Protocols	COMPRESS	info_retrieval	2540	2509	1.0	1.0	0.0	false	KEEP	26
+run63_exp5	richard-style-slack	Relationship Dynamics	REWORD	output_quality	1452	1557	0.0	0.0	0.0	0.0	false	KEEP	85
+run63_exp4	heart	Core_Principles	REWORD	info_retrieval	3087	3149	1.0	1.0	0.0	false	KEEP	42
+run63_exp6	spine	Quick Reference Cold Start	ADD	information_retrieval	1270	1327	0.0	0.0	0.0	0.0	false	KEEP	76
+run64_exp1	heart	DesignChoices+CommonFailures	MERGE	information_retrieval	3087	3108	1.0	1.0	1.0	0.0	false	KEEP	120
+run63_exp7	audit-asana-writes	Full Hook	RESTRUCTURE	output_quality	162	173	1.0	1.0	1.0	0.0	false	KEEP	75
+run63_exp8	richard-style-email	Common Draft Failures	SPLIT	output_quality	746	764	0.0	0.0	0.0	0.0	false	KEEP	62
+run63_exp5	amcc	Growth_Model+Common_Failures	MERGE	info_retrieval	4825	4777	1.0	1.0	0.0	false	KEEP	55
+run63_exp9	heart	Active Pipeline PE-1	ADD	information_retrieval	3108	3180	0.0	0.0	0.0	0.0	false	KEEP	132
+run64_exp2	brain	OP1 Narrative	ADD	information_retrieval	1496	1555	1.0	0.96	0.96	0.04	false	KEEP	180
+run63_exp6	gut	Excretion_Protocol	RESTRUCTURE	info_retrieval	1944	1960	1.0	1.0	0.0	false	KEEP	23
+run63_exp10	brain	Prediction Template	REWORD	information_retrieval	1555	1615	1.0	0.96	1.0	0.04	false	KEEP	90
+run63_exp7	richard-style-wbr	Full_Document	RESTRUCTURE	output_quality	1158	1158	0.95	0.95	0.0	false	KEEP	43
+run63_exp8	eod-refresh	Common_Failures	RESTRUCTURE	output_quality	560	563	1.0	1.0	0.0	false	KEEP	32
+run64_exp3	am-triage	Phase C Action	ADD	output_quality	267	320	1.0	1.0	1.0	0.0	false	KEEP	120
+run64_exp4	gut	Governance	REWORD	information_retrieval	1960	1928	1.0	1.0	1.0	0.0	false	KEEP	120
+run63_exp9	richard-style-slack	Slack_Specific_Habits	COMPRESS	output_quality	1557	1497	1.0	1.0	0.0	false	KEEP	27
+run63_exp10	memory	Compressed_Context_Team	REMOVE	info_retrieval	2392	2327	1.0	1.0	0.0	false	KEEP	24
+run64_exp5	device	Delegation Protocols	REWORD	information_retrieval	2506	2528	1.0	1.0	1.0	0.0	false	KEEP	150
+[device:Delegation Protocols] REWORD (info_retrieval) → 2506w→2528w. A=1.0 B=1.0 C=1.0 Δ=0.0. 150s. KEEP.
+run64_exp6	richard-style-email	Openers Transitions	SPLIT	output_quality	764	767	1.0	1.0	1.0	0.0	false	KEEP	120
+run64_exp7	eod-refresh	Common Failures	REWORD	output_quality	581	613	1.0	0.96	1.0	0.04	false	KEEP	120
+run64_exp8	amcc	Avoidance Ratio	ADD	information_retrieval	4777	4837	1.0	0.8	1.0	0.2	false	KEEP	180
+run65_exp1	richard-style-amazon	Voice & Formatting	REWORD	output_quality	1027	1078	0.56	0.56	0.46	0.0	false	KEEP	120
+run64_exp9	gut	Gut Functions	SPLIT	information_retrieval	1928	1942	1.0	1.0	1.0	0.0	false	KEEP	120
+run64_exp10	am-triage	Phase A	SPLIT	output_quality	320	326	1.0	0.96	1.0	0.04	false	KEEP	120
+run64_exp1	memory	Cross-Cutting Dynamics	REMOVE	information_retrieval	2392	2392	0.0	1.0	0.66	-1.0	false	REVERT	120
+run64_exp2	device	OpenItemsReminder+SlackIngestion	MERGE	information_retrieval	2509	2506	1.0	1.0	1.0	0.0	false	KEEP	120
+run64_exp3	roster	PreWBR+ExternalPartners	MERGE	information_retrieval	2332	2328	1.0	1.0	1.0	0.0	false	KEEP	120
+run64_exp4	eod-refresh	QueueForFrontend	ADD	output_quality	563	581	1.0	0.8	1.0	0.2	false	KEEP	120
+run64_exp5	audit-asana-writes	BatchHandling	ADD	output_quality	173	195	0.0	0.0	1.0	0.0	false	KEEP	120
+run64_exp6	brain	PredictionTemplate	REWORD	information_retrieval	1615	1643	1.0	1.0	1.0	0.0	false	KEEP	120
+run64_exp7	eyes	OCIPerformance	REWORD	information_retrieval	1289	1323	1.0	1.0	1.0	0.0	false	KEEP	120
+run64_exp8	richard-style-amazon	HowToApply	MERGE	output_quality	1078	1058	1.0	1.0	1.0	0.0	false	KEEP	120
+run64_exp9	heart	Hyperparameters	COMPRESS	information_retrieval	3180	3125	1.0	1.0	1.0	0.0	false	KEEP	120
+run64_exp10	device	SharePointDurability	REWORD	information_retrieval	2528	2509	1.0	1.0	1.0	0.0	false	KEEP	120
+run65_exp2	roster	Sections 2+3	MERGE	info_retrieval	2328	2144	0.96	0.84	0.96	0.12	false	KEEP	120
+run65_exp3	gut	Identity Field Protection	COMPRESS	info_retrieval	1942	1857	0.96	1.0	0.96	-0.04	false	REVERT	120
+run66_exp1	nervous-system	Common Failures	RESTRUCTURE	information_retrieval	1665	1692	1.0	1.0	1.0	0.0	false	KEEP	120
+run66_exp1	richard-style-amazon	Document Structure Writing Discipline	ADD	output_quality	1058	1164	0.91	0.91	0.88	0.0	false	KEEP	120
+run65_exp4	heart	Experiment Signals	COMPRESS	info_retrieval	3125	2974	1.0	1.0	1.0	0.0	false	KEEP	120
+run66_exp2	amcc	Political Awareness Layer	REWORD	information_retrieval	4837	4853	1.0	1.0	1.0	0.0	false	KEEP	150
+run65_exp5	audit-asana-writes	Full Hook	RESTRUCTURE	output_quality	195	136	1.0	1.0	1.0	0.0	false	KEEP	120
+run66_exp2	eyes	Competitive+Pipeline	MERGE	information_retrieval	1323	1289	0.6	1.0	1.0	-0.4	false	REVERT	120
+run66_exp3	richard-style-slack	What NOT to Do	RESTRUCTURE	output_quality	1497	1556	1.0	1.0	1.0	0.0	false	KEEP	150
+run65_exp6	richard-style-mbr	Common Failures	SPLIT	output_quality	710	789	1.0	0.9	1.0	0.1	false	KEEP	120
+run66_exp3	am-triage	Phase B failures	REMOVE	output_quality	326	300	0.0	1.0	0.6	-1.0	true	REVERT	120
+run66_exp4	heart	Step4+5 Evaluate+KeepRevert	COMPRESS	information_retrieval	2974	2690	1.0	1.0	1.0	0.0	false	KEEP	150
+run65_exp7	richard-style-slack	Tone Register	SPLIT	output_quality	1556	1553	0.8	1.0	0.8	-0.2	false	REVERT	120
+run66_exp4	gut	Excretion Protocol	REWORD	information_retrieval	1942	1955	0.0	1.0	0.0	-1.0	true	REVERT	120
+run66_exp5	eyes	Pipeline Outlook	RESTRUCTURE	information_retrieval	1323	1341	1.0	1.0	1.0	0.0	false	KEEP	120
+run65_exp8	device	Installed Apps Common Failures	ADD	info_retrieval	2509	2617	1.0	0.6	1.0	0.4	false	KEEP	120
+run66_exp5	audit-asana-writes	GATE	RESTRUCTURE	output_quality	136	146	1.0	1.0	1.0	0.0	false	KEEP	120
+run66_exp6	audit-asana-writes	Full Hook	RESTRUCTURE	output_quality	136	142	1.0	1.0	1.0	0.0	false	KEEP	120
+run65_exp9	spine	Tool Access Common Failures	ADD	info_retrieval	1327	1421	1.0	0.56	1.0	0.44	false	KEEP	120
+run66_exp7	heart	Experiment Queue	ADD	information_retrieval	2690	2748	1.0	1.0	1.0	0.0	false	KEEP	150
+run66_exp6	brain	Leverage Tiebreakers	REWORD	information_retrieval	1643	1669	1.0	1.0	1.0	0.0	false	KEEP	120
+run66_exp8	richard-style-slack	Communication Preference	REWORD	output_quality	1556	1565	1.0	1.0	0.98	0.0	false	KEEP	150
+run65_exp10	richard-style-email	Email Analytical	SPLIT	output_quality	767	802	1.0	0.8	1.0	0.2	false	KEEP	120
+run66_exp9	memory	Relationship Staleness Index	ADD	information_retrieval	2327	2390	1.0	1.0	1.0	0.0	false	KEEP	150
+run66_exp7	heart	Run Protocol Step 1	ADD	information_retrieval	2748	2831	1.0	1.0	1.0	0.0	false	KEEP	120
+run66_exp10	memory	Key Decisions Positions	SPLIT	information_retrieval	2390	2399	1.0	1.0	1.0	0.0	false	KEEP	150
+run66_exp8	memory	Usage Guide Common Failures	REWORD	information_retrieval	2399	2431	1.0	1.0	1.0	0.0	false	KEEP	120
+run66_exp9	spine	Tool Access	ADD	information_retrieval	1421	1475	1.0	1.0	1.0	0.0	false	KEEP	120
+run67_exp1	nervous-system	Common Failures	REMOVE	information_retrieval	1692	1607	0.0	1.0	0.6	-1.0	true	REVERT	120
+run66_exp10	nervous-system	Purpose	ADD	information_retrieval	1607	1751	1.0	0.9	1.0	0.1	false	KEEP	120
+run67_exp1	eyes	Market Deep Dives	SPLIT	information_retrieval	1341	1382	1.0	1.0	1.0	0.0	false	KEEP	120
+run67_exp2	amazon-politics	Reorgs & Scope	ADD	information_retrieval	2677	2765	1.0	1.0	1.0	0.0	false	KEEP	120
+run67_exp2	nervous-system	Calibration Loops table	COMPRESS	information_retrieval	1751	1724	1.0	1.0	1.0	0.0	false	KEEP	120
+run67_exp3	brain	Decision Log	MERGE	information_retrieval	1669	1668	1.0	1.0	1.0	0.0	false	KEEP	120
+run68_exp1	spine	System Persistence & Ground Truth	SPLIT	information_retrieval	1475	1479	1.0	1.0	1.0	0.0	false	KEEP	120
+run67_exp4	richard-style-wbr	Data Source Quick Reference	SPLIT	output_quality	1158	1168	0.98	0.98	0.98	0.0	false	KEEP	150
+run67_exp3	spine	Common Failures	COMPRESS	information_retrieval	1479	1414	1.0	1.0	1.0	0.0	false	KEEP	180
+run68_exp2	amcc	Avoidance Ratio	REMOVE	information_retrieval	4853	4638	0.5	1.0	0.5	-0.5	false	REVERT	120
+run67_exp4	roster	Stakeholder Contacts	COMPRESS	information_retrieval	2144	2096	1.0	1.0	1.0	0.0	false	KEEP	120

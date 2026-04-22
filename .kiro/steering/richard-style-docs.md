@@ -11,63 +11,64 @@ Covers: experiment docs, testing plans, investigation docs, instructional docs, 
 - Headers must be questions or imperatives, never bare nouns. 'How to optimize AU NB CPA' not 'AU NB CPA Optimization'. 'When to escalate to Brandon' not 'Escalation Framework'. The header tells the reader what they'll get from the section.
 
 ## Strategic Narrative (OP1 / Leadership Docs)
-- Data embedded in narrative, not just tabled: "$16.7MM in OPS" / "+24% registration lift"
-- Everything connects — nothing presented as isolated. The word "compound" appears repeatedly.
-- Each section: problem → test → validated result → 2026 investment
-- Credits cross-functional partners by name or team
-- Most polished voice. Longer sentences. More connective tissue.
-- Key phrases: "validated results," "measurement framework," "cross-functional collaboration," "connective tissue between platform capabilities and business objectives"
+- Each section follows: problem → test → validated result → investment ask. Never present a result without the problem it solved.
+- Data lives inside sentences, not beside them: "$16.7MM in OPS" and "+24% registration lift" appear mid-paragraph, not in standalone tables. The narrative carries the data; the data doesn't carry the narrative.
+- Everything connects — no isolated facts. Each initiative links to the next. The word "compound" signals this pattern.
+- Credit cross-functional partners by name or team. Shared wins build political capital.
+- Voice: most polished of all doc types. Longer sentences, more connective tissue between ideas.
+- Signature phrases: "validated results," "measurement framework," "cross-functional collaboration," "connective tissue between platform capabilities and business objectives."
+- Worked example: Bad: "OCI drove results." Good: "OCI's phased rollout across 7 markets validated a measurement framework that reduced CPA by 18% — a result that compounds as we extend to the remaining 3 markets in 2026."
 
-## Experiment Documents
-- Structure: Question → Setup → Results → Recommendation. Example: 'Does NB bid strategy reduce CPA?' → 6-week test, AU NB campaigns → CPA $168→$117 (-29%) → Adopt as baseline.
-- Tables always include: Impressions, Clicks, Cost, Registrations, CTR, CPC, CVR, CPA
-- Comparisons include absolute numbers AND percentages
-- Interpretation: States finding, then explains why it matters: "CPA from platform was $700, which is still high, but half of what the overall test did."
-- Confidence signals: "What we can definitively say is..." / "it would be difficult to conclude that..."
-- Honest about failures: "Bulk page did not perform better than the callback page." No spin.
-- Uses first person sparingly: "I found that," "I could have put more attention towards"
-- Bayesian language when relevant: "83.4% PPR" / "5.8% chance that experiment would perform better"
-
-## Testing Plans / Strategy Documents
-- Structure: Goal → Phased plan (Phase 1, Phase 2...) → Supporting case studies → Other initiatives
-- Phases have target completion dates and status updates
-- Expectations quantified: "I would expect Adobe to allow for a 5%-15% improvement in CPA"
-- Case studies from other markets as evidence: "MX market efficiency (case study)"
-- Honest about uncertainty: "although regs too low to make strong conclusions"
+## Evidence-Based Documents (Experiments & Testing Plans)
+- **Experiment structure:** Question → Setup → Results → Recommendation. Worked example: "Does NB bid strategy reduce CPA?" → 6-week test, AU NB campaigns → CPA $168→$117 (-29%) → Adopt as baseline. Every experiment doc follows this exact arc — the question frames the setup, the setup frames the result, the result frames the ask.
+- **Testing plan structure:** Goal → Phased plan (with target dates + status) → Supporting case studies → Other initiatives.
+- **Data tables always include:** Impressions, Clicks, Cost, Registrations, CTR, CPC, CVR, CPA. Comparisons show absolute numbers AND percentages — never one without the other.
+- **Interpretation pattern:** State the finding, then explain why it matters. Worked example: "CPA from platform was $700, which is still high, but half of what the overall test did" — the "but" clause is the interpretation.
+- **Confidence calibration:** Signal certainty level explicitly. Use "What we can definitively say is..." for strong evidence, "it would be difficult to conclude that..." for weak evidence. Worked example: "83.4% PPR" and "5.8% chance that experiment would perform better" — Bayesian language when the data supports it.
+- **Honesty about failures:** Never spin a negative result. "Bulk page did not perform better than the callback page." / "although regs too low to make strong conclusions." First person sparingly: "I found that," "I could have put more attention towards."
+- **Cross-market evidence:** Quantify expectations and cite precedent. Worked example: "I would expect Adobe to allow for a 5%-15% improvement in CPA" backed by "MX market efficiency (case study)."
 
 ## Post-Mortem / Retrospective Documents
-- Structure: Lessons Learned → Challenges → Accomplishments → Overview → Recommendations
-- Lead with lessons — the reader gets the learning immediately
+- Structure: Lessons Learned → Challenges → Accomplishments → Overview → Recommendations. Lead with lessons — the reader gets the learning immediately.
 - Most self-critical format. First person: "I could have put more attention towards moving forward on the planning."
-- Lessons are actionable, not abstract: "Start simple, then go granular" with specific example
-- Appendices for supporting data, keeping the main narrative clean
+- Lessons are actionable, not abstract: "Start simple, then go granular" with specific example. Appendices for supporting data.
 
-## Investigation Documents
-- Structure: Reference links → Data tables → Observations → Hypotheses → Evidence → Actions
-- Starts with the anomaly: "Brand Paid Search is consistently saturated with ~97% ad visibility"
-- Hypotheses clearly labeled and testable: "Clicks are not being correctly attributed." / "Registration process friction."
+## Analytical & Procedural Documents (Investigation + How-To)
+
+**Investigation structure:** Reference links → Data tables → Observations → Hypotheses → Evidence → Actions
+**How-To structure:** Objective → Numbered Tactics (sequential) → Scenarios → Resources
+
+Shared principles:
+- Start with the anomaly or objective upfront
+- Hypotheses/tactics clearly labeled and testable
 - Evidence layered: high-level → market-level → query-level
 - Cross-references multiple data sources (Adobe, Google Ads, Hubble, Quicksight)
-- Distinguishes "proven" from "not proven or validated" — never overstates
-- Questions embedded for follow-up: "How do we calculate WBR regs?"
-
-## Instructional / How-To Documents
-- Structure: Objective → Numbered Tactics (sequential) → Scenarios → Resources
-- Imperative mood: "Set a realistic initial baseline" / "Observe actual ROAS data"
 - Scenario-based examples with specific numbers
-- Warnings about what NOT to do: "Large, sudden changes can push the campaign back into learning period"
+- Distinguishes "proven" from "not proven or validated"
+- Questions embedded for follow-up
+- Warnings about what NOT to do
+
+Investigation-specific:
+- "Brand Paid Search is consistently saturated with ~97% ad visibility" (starts with anomaly)
+- Distinguishes "proven" from "not proven or validated" — never overstates
+
+How-To-specific:
+- Imperative mood: "Set a realistic initial baseline" / "Observe actual ROAS data"
 - Practical framing: "Managing ROAS bid strategy is not passive."
 
+## Common Failures in Any Document Draft
+
+| Failure | Rule | Fix |
+|---------|------|-----|
+| Bullets as primary content | Amazon docs are prose-driven; bullets only for 3-5 item enumerations | Rewrite as paragraphs |
+| Bare noun headers | Headers must be questions or imperatives, never bare nouns | "How to optimize AU NB CPA" not "AU NB CPA Optimization" |
+| Data without interpretation | Every table/data point needs a "so what" sentence | Numbers alone leave the reader guessing |
+| Em-dashes in draft | Never use em-dashes in drafted documents | Replace with commas, periods, colons, or parentheticals |
+
 ## Knowledge-Sharing Documents
+
 - Organized by scenario/use case rather than by tool
 - Casual, peer-to-peer voice. Bullet points heavily.
 - Practical examples: "Load files into Cedric and ask questions about the content"
 - Honest about limitations: "AI isn't great at math/data analysis yet"
 - Future ideas section at the end
-
-## Common Failures in Document Drafts
-
-1. **Bullets as primary content.** Amazon docs are narrative-driven. If a section is mostly bullets, rewrite as prose. Bullets for short enumerations (3-5 items max) only.
-2. **Headers as bare nouns.** Wrong: "AU NB CPA Optimization." Right: "How to optimize AU NB CPA." Headers must be questions or imperatives.
-3. **Data without interpretation.** Every table or data point needs a "so what" sentence. Don't present numbers and leave the reader to draw conclusions.
-4. **Em-dashes in draft.** Never use em-dashes (—) in drafted documents. Replace with commas, periods, colons, or parentheticals. Scan every draft before finalizing.
