@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "MPE Python/JS Parity Check",
+  "description": "When either the Python engine (mpe_engine.py) or the JS mirror (mpe_engine.js) changes, run the parity test suite to catch drift. Tolerance is 0.1% for deterministic outputs and 2% for Monte Carlo credible interval outputs. Blocks commit on failure with owner-readable explanation.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "shared/tools/prediction/mpe_engine.py",
+      "shared/tools/prediction/mpe_fitting.py",
+      "shared/tools/prediction/mpe_uncertainty.py",
+      "shared/dashboards/mpe_engine.js"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "An MPE engine file was just saved. Run the Python/JS parity tests to catch any drift between the two implementations before the change can be committed.\n\nExecute: `python3 -m pytest shared/tools/prediction/tests/test_mpe_parity.py -q --tb=line`\n\nIf the tests pass, tell the owner 'MPE parity OK — {N} canonical cases matched within tolerance (0.1% deterministic, 2% Monte Carlo).'\n\nIf any tests fail, do NOT pass silently. Report to the owner in this exact format:\n\n- WHICH test case failed (the scope and inputs)\n- WHICH output diverged (the specific metric: brand_regs, ieccp, CI_70_low, etc.)\n- BY HOW MUCH (absolute value + percentage from Python truth)\n- PROBABLE CAUSE (did the Python engine change? the JS? did the math diverge in a specific function?)\n- OWNER ACTION: either 'run `python3 shared/tools/prediction/tests/fix_parity.py` to regenerate expected outputs if the Python change is the intended new baseline' or 'the JS was modified — check shared/dashboards/mpe_engine.js for the function that handles {metric}'\n\nIf the Python change is intentional (new parameter, new warning code, etc.), the owner may need to update the parity test baselines. Do not guess — ask."
+  }
+}

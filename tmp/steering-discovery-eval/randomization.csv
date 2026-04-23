@@ -1,0 +1,6 @@
+task,A,B,C,D
+d1,var2,var3,var1,baseline
+d2,var3,baseline,var2,var1
+d3,var1,var2,var3,baseline
+d4,var1,baseline,var3,var2
+d5,var2,var1,var3,baseline

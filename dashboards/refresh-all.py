@@ -18,6 +18,8 @@ STEPS = [
     ("Write ps.forecasts → xlsx", "update-forecast-tracker.py"),
     ("Refresh forecast JSON", "refresh-forecast.py"),
     ("Refresh callout JSON", "refresh-callouts.py"),
+    ("Export projection data JSON (MPE)", "export-projection-data.py"),
+    ("Build MPE standalone HTML (SharePoint)", "build-projection-standalone.py"),
     ("Generate command center JSON", "generate-command-center.py"),
     ("Refresh body system JSON", "refresh-body-system.py"),
     ("Refresh state files JSON", "refresh-state-files.py"),

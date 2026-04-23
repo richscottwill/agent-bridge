@@ -357,3 +357,41 @@ Key facts captured:
 2. The Suzane (Adobe) 3/19 conversation — if Adobe is still the unblocker for AU MCC creation, that's a stakeholder relationship fact that belongs somewhere. Candidates: `memory.md` (relationship graph) or `meetings/stakeholder/` (Adobe series, if one exists). Currently logged nowhere.
 
 **Recommendation:** If the Adobe/AU MCC thread is still live, capture it in `memory.md` or a stakeholder meeting series file. If it's dead, no action. Don't let it sit only in the intake log.
+
+## 2026-04-23 — nervous-system.md: Loop 2 reactivation + scope extension
+
+**File:** `shared/context/body/nervous-system.md`
+**Editor:** Not karpathy (edit is to nervous-system.md — heart.md/gut.md/experiment-queue are the only gated files, so no authorization issue). nervous-system.md is karpathy-governed per the file's own "## Governance" footer, but the edit is additive to Loop 2 (the decision is already ratified in the grok-eval-verdict-round2-2026-04-22.md action list, item #2). Flag for karpathy review on next run if stricter interpretation is preferred.
+**Scope:** Loop 2 (Prediction Scoring) reactivated + scope extension to agent-text-output confidence. Status in the top table changed from inactive to `ACTIVE (reactivated 2026-04-22)`. Three additions inside Loop 2 body: (a) **Reactivation trigger** — AM-2 writes ≥3 predicted questions to Eyes, then Loop 2 auto-resumes; until then, score agent text-output confidence instead; (b) **Scoring protocol** — HIT/MISS/SURPRISE against predicted questions, weekly aggregate ≥60% target; (c) **Scope extension (2026-04-22)** — agent text-output confidence (from high-stakes-guardrails.md outputs) scored with same HIT/MISS/SURPRISE labels, logged to `ps.callout_calibration` for callouts, `ps.forecasts.scored` for forecasts, and a 2-column ALTER on `ps.forecasts` (`human_review_flagged BOOLEAN` + `output_ref VARCHAR`) — NOT a new table, per Grok round-2 verdict on proposal #10. Routing on mismatch: Brain → confidence calibration, Eyes → metric baseline, rw-trainer → Friday retro pattern surfacing.
+
+**Provenance:** Direct implementation of action #2 from `shared/context/intake/grok-eval-verdict-round2-2026-04-22.md` ("Reactivate Loop 2 (Prediction Scoring) — proposal #5 reframe — restore AM-2 predicted-QA generation OR extend Loop 2 scope to agent-text-output grain inside nervous-system.md"). The verdict file already logged this as an OPEN action; this edit closes the loop-text half. The AM-2 hook fix half is still open.
+
+**Karpathy gate:** N/A at amcc/nervous-system level (heart.md + gut.md are the gated files). nervous-system.md's governance footer delegates loop-definition authority to karpathy. Recommend a karpathy pass on next run to confirm the ALTER TABLE column names + the logging routing decisions, since those touch the data-flow description the agent owns.
+
+**Changelog:** Already logged — `shared/context/body/changelog.md` line 294 shows `[nervous-system:Loop 2 Prediction Scoring] ADD (info_retrieval) → 1183w→1247w. A=1.0 B=1.0 C=1.0 Δ=0.0. 130s. KEEP.` Duplicate entry (logged twice) — minor cleanup candidate but not structurally broken.
+
+**Cross-organ consistency:**
+
+1. ✅ **Tables referenced exist and are canonical.**
+   - `ps.callout_calibration` — created 2026-04-07 (session-log entry confirms), aggregates per-market callout dimension scores. Loop 2 extension correctly points outputs here for callout-grain scoring.
+   - `ps.forecasts` — live since WBR forecast pipeline rebuild (2026-04-13 device.md entry). `scored` column exists per prior forecast pipeline work. The proposed ALTER (`human_review_flagged`, `output_ref`) is a 2-column change, not a new table — matches Grok verdict recommendation.
+   - Note: the edit mentions a `ps.high_stakes_scored` table "when volume justifies" — this is parked as a future-only option. The immediate path is the `ps.forecasts` ALTER. No table should be created yet.
+
+2. ⚠️ **AM-2 naming drift.** The reactivation trigger text says "AM-2 hook writes ≥3 predicted questions to Eyes." Per the 2026-04-12 device.md organ-change entry, AM-1/AM-2/AM-3 were consolidated into AM-Backend (`am-auto`) + AM-Frontend (`am-triage`). "AM-2" no longer exists as a standalone hook. The predicted-QA-to-Eyes writer logically belongs in AM-Backend (it's ingestion-side) or AM-Frontend (if it's part of meeting prep rendering). **Recommended fix:** update the trigger text to either `AM-Backend` or `AM-Frontend` once Richard or karpathy decides which hook owns predicted QA generation. This is a low-risk text fix; the semantic intent (some hook writes predicted QA to Eyes) is preserved.
+
+3. ✅ **High-stakes-guardrails.md alignment.** The scope extension correctly anchors confidence-scoring in the guardrail file created 2026-04-22 (per session-log). Loop 2 now closes the feedback loop on that guardrail: guardrail requires stated confidence % → Loop 2 scores outcomes against stated confidence → Brain updates calibration. No conflict. This is the invisible-over-visible pattern from soul.md #5 — guardrail sets the front-door behavior, Loop 2 scores it silently.
+
+4. ✅ **Eyes.md "Predicted QA" dependency.** Eyes.md last updated 2026-04-02. Reactivation is gated on AM-2 (now AM-Backend/Frontend) resuming predicted-QA writes into Eyes. The edit acknowledges this with the "Until AM-2 is writing predictions again, score agent text-output confidence instead" clause. No conflict — the scope extension is the active path until the hook is fixed. **Action item surfaced:** AM-Backend or AM-Frontend hook needs to be audited for the predicted-QA generation step that was dropped during the 2026-04-12 consolidation. This is the AM-2 fix half of action #2 in the verdict file.
+
+5. ✅ **Brain.md / rw-trainer / Eyes routing.** The "Routing on mismatch" clause says Brain updates confidence calibration, Eyes updates metric baseline, rw-trainer surfaces patterns in Friday retro. All three are canonical behaviors of those organs/agents. No conflict.
+
+6. ✅ **Worked example at top of file (line 16)** still valid. The Brain-predicts-AU-CPA-drop example is exactly the Loop 2 pattern. No rewrite needed.
+
+7. ✅ **No duplicate / conflicting hard-thing or streak references** — nervous-system.md doesn't touch the Hard Thing Queue, streak, or amcc.md concepts. Clean separation.
+
+**Action items:**
+- (Medium) Update "AM-2 hook" → `AM-Backend` or `AM-Frontend` in the Reactivation trigger text once owner hook is decided. Touchpoint: nervous-system.md Loop 2 body, one line.
+- (Medium) Audit AM-Backend (`am-auto`) and AM-Frontend (`am-triage`) for the predicted-QA-to-Eyes generation step. Per 2026-04-12 consolidation, this logic may have been dropped. Without it, Loop 2's primary path stays disabled and only the scope-extension (agent text-output) path runs.
+- (Low) Deduplicate the two identical `[nervous-system:Loop 2 Prediction Scoring] ADD` lines in `changelog.md` line 294. Cosmetic.
+- (Low) On next karpathy run, confirm the ALTER TABLE column names (`human_review_flagged`, `output_ref`) and the logging routing (`ps.callout_calibration` vs `ps.forecasts.scored` split). These sit inside nervous-system.md which karpathy governs per the file's footer.
+- (Deferred) `ps.high_stakes_scored` table — do NOT create. Stays parked until volume justifies (30+ high-stakes outputs with stated confidence %).

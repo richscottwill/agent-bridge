@@ -868,3 +868,22 @@ Patterns: SPLIT continues 100% keep rate (3/3 this batch). REWORD 2/3 kept (1 re
 ## 2026-04-22 — Karpathy Phase 6 experiment blocked (tool failure)
 
 [richard-style-email:Email (Analytical / Update)] ADD (output_quality) → 818w→(would-be 999w). A=- B=- C=- Δ=-. BLOCKER. invokeSubAgent unavailable → all three eval agents failed with `registerSubAgentExecution is not a function`. File reverted to 818w. Priors NOT updated (blocker, not revert). Hypothesis was concrete-example + Common-Failures table — both validated winning patterns. Retry when subagent path is restored. See `~/shared/context/active/experiment-results-latest.json` and `~/shared/context/experiments/experiment-log.tsv`.
+
+## 2026-04-22 (EOD executed 2026-04-23 01:33 PT post-midnight)
+
+- **L3 dominant day.** MPE spec trio complete (requirements + design + tasks) then executed through Phase 0 (6/6), Phase 1 (11/11, hard checkpoint met 10 days early), Phase 2 (10/10), Phase 3.MX (6/6 — primary demo market demo-ready end-to-end).
+- **Subtraction-audit FULL-PASS + follow-on execution.** Kill-list produced, reviewed, executed (9 files deleted, ~650 lines, ~4.7% of audited surface). 3 Peter-mode follow-on moves shipped: soul.md body.md auto-injection removed (~88L/chat savings), shared/tools/wiki-asana-sync/ deleted (88K, 53 broken refs), context-catalog.md path fixed in wiki-concierge. ~41% of 300 broken refs retired in ~1 min.
+- **Skills-powers adoption FULL-PASS.** Design revised against real on-disk corpus (6 stress-test findings addressed). 53 sub-tasks across 10 groups executed.
+- **4 blind eval tests.** Grok round-1 6-file steering upgrade (4 of 6 won, 5 changes adopted). Grok round-2 11 proposals (10 rejected, 1 partial — Pacing Alert tiering). Soul next-action variation (5×5×6). Steering discovery (Var2 228/250 winner adopted as steering-index.md always-on).
+- **Bug fixes (post-midnight).** MPE preset-period mismatch (× 13 hardcode → weeksInPeriod). MPE ie
+
+## 2026-04-22 (EOD executed 2026-04-23 01:33 PT post-midnight)
+
+- **L3 dominant day.** MPE spec trio complete (requirements + design + tasks) then executed through Phase 0 (6/6), Phase 1 (11/11, hard checkpoint met 10 days early), Phase 2 (10/10), Phase 3.MX (6/6 — primary demo market demo-ready end-to-end).
+- **Subtraction-audit FULL-PASS + follow-on execution.** Kill-list produced, reviewed, executed (9 files deleted, ~650 lines, ~4.7% of audited surface). 3 Peter-mode follow-on moves shipped: soul.md body.md auto-injection removed (~88L/chat savings), shared/tools/wiki-asana-sync/ deleted (88K, 53 broken refs), context-catalog.md path fixed in wiki-concierge. ~41% of 300 broken refs retired in ~1 min.
+- **Skills-powers adoption FULL-PASS.** Design revised against real on-disk corpus (6 stress-test findings addressed — portability validator advisory, legacy/current/retired status enum, touch-it-classify-it migration, step 0.5 non-Kiro gate, missed-skill detector dropped, pilot on 9 installed skills). 53 sub-tasks across 10 groups executed.
+- **4 blind eval tests.** Grok round-1 6-file steering upgrade (4 of 6 won, 5 changes adopted). Grok round-2 11 proposals (10 rejected, 1 partial — Pacing Alert tiering). Soul next-action variation (5×5×6 runs). Steering discovery (Var2 228/250 winner adopted as steering-index.md always-on).
+- **Bug fixes (post-midnight).** MPE preset-period mismatch (× 13 hardcode → weeksInPeriod). MPE ie%CCP solver scale bug (< 5.0 → ×100 normalization). eod.kiro.hook JSON parse error (unescaped newline). am-backend hook display-name dot-prefix convention codified.
+- **Hard-thing correction.** Testing Approach v5 retroactively confirmed shipped 4/5 per amcc.md. l1_streak wdz reset 24 → 1 via AM-remediation run. main.hard_thing_candidates table created + backfilled with signal-driven 4/20 redesign (polaris-brand-lp #1 score 25.9, oci-rollout #2, au-cpa-cvr #3).
+- **MX forecasting work.** Multiple $1.3M ie%CCP scenarios modeled for Lorena email. MPE MX Y2026 @ 75% = $431K (broad fit) → $443K (H2-2025 policy-gate regime filter applied). Target-triad UI shipped — spend/regs/ie%CCP now all simultaneously visible with driver radio + auto-sync.
+- **Open items carrying to 4/23.** MX Y2026 projection math ($431K vs $1.2M gap, Richard choosing between 3 framing options). Yun-Kang reply send decision. Skills-powers requirements sync. MPE Phase 3 remaining 9 markets + Phase 4/5.

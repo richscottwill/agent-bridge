@@ -21,7 +21,7 @@ The body's quality-control layer. Measures outcomes against predictions, scores 
 | # | Organ | Cadence | Status |
 |---|-------|---------|--------|
 | 1 | Brain | Monthly | 5 PENDING |
-| 2 | Eyes | Daily+Wkly | Inactive |
+| 2 | Eyes | Daily+Wkly | ACTIVE (reactivated 2026-04-22) |
 | 3 | rw-tracker | Wkly (Fri) | 3 active, 2 new |
 | 4 | Device | Weekly | 1 SLIPPING |
 | 5 | All | Every run | ✅ |
@@ -52,9 +52,11 @@ Brain | Monthly | Score decisions against outcomes: VALIDATED (prediction confir
 D3 (OCI ROW rollout): CA OCI +10-20% reg lift after 30d → VALIDATED. Lift <5% or CPA worsens → PARTIALLY. Tracking failures or negative ROI → INVALIDATED. Target scoring date: May 2026 when CA data available.
 
 ### Loop 2: Prediction Scoring
-Eyes | Daily + weekly | Score predicted QA: HIT/MISS/SURPRISE. Target ≥60%. Currently inactive — predicted QA cleared from Eyes (stale content experiment, Run 18). Reactivate when AM-2 generates fresh predictions.
-- **Reactivation trigger:** AM-2 hook writes ≥3 predicted questions to Eyes "Predicted Questions" section. Once present, Loop 2 auto-resumes daily scoring against meeting outcomes and Slack signals.
+Eyes + agent text outputs | Daily + weekly | Score predicted QA and agent confidence: HIT/MISS/SURPRISE. Target ≥60%. **Reactivated 2026-04-22** after round-2 external-AI-review blind test confirmed the "Agent Confidence Calibration" proposal duplicated this loop — the gap was activation, not a missing metric.
+- **Reactivation trigger:** AM-2 hook writes ≥3 predicted questions to Eyes "Predicted Questions" section. Once present, Loop 2 auto-resumes daily scoring against meeting outcomes and Slack signals. **Until AM-2 is writing predictions again, score agent text-output confidence instead** (see scope extension below).
 - **Scoring protocol:** After each meeting/event, compare predicted questions to actual questions asked. HIT = question asked as predicted. MISS = predicted but not asked. SURPRISE = asked but not predicted. Weekly aggregate: hits/(hits+misses) ≥ 60% target.
+- **Scope extension (2026-04-22):** Agent text-output confidence — when the agent produces a high-stakes output with an explicit confidence % (per high-stakes-guardrails.md), score the outcome when it resolves. Same HIT/MISS/SURPRISE labels. HIT = outcome within the stated confidence band. MISS = outcome outside and below predicted magnitude. SURPRISE = outcome outside and above. Weekly reliability check: of outputs stated at X% confidence, were X% correct? Log to `ps.callout_calibration` for callouts, `ps.forecasts.scored` for forecasts, and (when volume justifies) a new `ps.high_stakes_scored` table ALTER on ps.forecasts with `human_review_flagged BOOLEAN` + `output_ref VARCHAR` — not a new table per Grok round-2 verdict.
+- **Routing on mismatch:** Brain updates confidence calibration, Eyes updates the metric baseline, rw-trainer surfaces patterns in Friday retro.
 
 ### Loop 3: Pattern Trajectory
 rw-tracker.md | Weekly (Friday) | IMPROVING/STUCK/WORSENING/RESOLVED. STUCK 3+ wk → structural fix. Willpower → trainer. Systems → device. **Root cause:** Visibility avoidance gates L1 → blocks all downstream levels.

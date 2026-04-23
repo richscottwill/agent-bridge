@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "MPE Quarterly Refit",
+  "description": "Run the Market Projection Engine quarterly refit. Runs data_audit.py, then refit_market_params.py for all 10 markets, then anomaly detection, then generates an owner-readable markdown report. Blocks activation of anomaly-flagged parameters until the owner approves. Manual trigger.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Richard asked to run the MPE quarterly refit. Execute this sequence in order and surface owner-readable output at each step:\n\n1. Run `python3 -m shared.tools.prediction.data_audit --markets US,CA,UK,DE,FR,IT,ES,JP,MX,AU` to refresh the data quality baseline. Write the report to shared/dashboards/data/data-audit-reports/{today}-all-markets.md. If any market's recommendation changed since the last audit, flag it at the top of your response.\n\n2. Run `python3 -m shared.tools.prediction.refit_market_params --markets US,CA,UK,DE,FR,IT,ES,JP,MX,AU` to refit every quarterly parameter. This writes new parameter_versions with is_active=false for any anomaly-flagged values.\n\n3. The refit job produces shared/dashboards/data/refit-reports/{today}.md. Read it. Summarize for the owner in plain English: what changed, MAPE deltas, any anomalies flagged for review, any regression concerns (MAPE regression >5pp), recommended actions, rollback instructions.\n\n4. Prompt the owner: 'Any new regime changes since last quarter? Current breakpoints: [list existing ps.regime_changes rows where active=TRUE]. Reply with either \"no new regimes\" or describe the new event in plain English.'\n\n5. Push the refit report to SharePoint via `sharepoint_write_file` with siteUrl Kiro-Drive and folderPath system-state/mpe-refits/.\n\n6. If any anomalies were flagged (is_active=false in ps.market_projection_params), tell the owner exactly which markets and parameters need review and offer to open the refit report for each one. Do not activate anomaly-flagged parameters until the owner explicitly approves.\n\nDo NOT skip steps. Do NOT silently fail. If any step errors, surface the exact error message and ask the owner how to proceed."
+  }
+}

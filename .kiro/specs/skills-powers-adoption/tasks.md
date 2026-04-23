@@ -312,20 +312,20 @@ Depends on Group 3 (activation log) and Group 2 (inventory). Runs at T30 for SCR
 
 Python modules called reactively by Phase C (Group 5) and ad-hoc by Richard. Never run as daemons. Per §Anti-Goals #5 and #7, validators are functions not services.
 
-- [ ] **7.1 Implement round-trip YAML parser/serializer** (Python module)
+- [x] **7.1 Implement round-trip YAML parser/serializer** (Python module)
   - Parse: YAML frontmatter → structured record with preserved key ordering (groups: identity → status → classification → timestamps).
   - Serialize: structured record → canonical YAML (UTF-8, LF, 2-space indent, alphabetical within groups, block-form lists, double-quoted strings with special chars).
   - Preserve markdown body byte-identically through parse → serialize.
   - Comments in YAML attached to following key, re-emitted in same position.
   - _Requirements: R9.1, R9.2, R9.3, §Round-Trip File Format, Property 6_
 
-- [ ] **7.2 Implement format-compliance validator (non-silent rewrite)**
+- [x] **7.2 Implement format-compliance validator (non-silent rewrite)**
   - Report-and-don't-modify semantics: on malformed file, emit descriptive error (field name, expected type, actual type, line number) AND leave file unchanged on disk.
   - Unknown fields: preserve in `legacy_unknown_fields` map; do not drop.
   - Wrong types / missing required / malformed YAML: parse fails, file unchanged.
   - _Requirements: R9.4, R9.5, §Round-Trip File Format → "Error reporting", Property 7_
 
-- [ ] **7.3 Implement sensitivity path-allowlist validator**
+- [x] **7.3 Implement sensitivity path-allowlist validator**
   - Status-gated: runs for `status: current`, SKIPS for `status: legacy` (legacy assets grandfathered until next edit per Property 11).
   - For current assets with declared `sensitive_data_class = C` and output path P:
     1. Look up `allowlist(C)` per §Sensitive-Data Classification Rules.
@@ -334,7 +334,7 @@ Python modules called reactively by Phase C (Group 5) and ad-hoc by Richard. Nev
   - Blocks writes (this validator is enforced, unlike portability).
   - _Requirements: R3.2, R3.3, R3.5, R3.6, R7.4, §Sensitive-Data Classification Rules → "Path-allowlist enforcement algorithm", Property 3_
 
-- [ ] **7.4 Implement advisory portability validator (REPORT ONLY)**
+- [x] **7.4 Implement advisory portability validator (REPORT ONLY)**
   - **Does NOT reject. Does NOT modify the file. Does NOT auto-downgrade the declared tier.** Emits a report.
   - Scan body for platform-bound-indicator tokens: `mcp_[a-z_]+`, `invokeSubAgent` + subagent names from `~/.kiro/agents/`, `[a-z0-9_\-]+\.kiro\.hook`, `discloseContext`, `kiroPowers`, script paths (`scripts/`, `~/shared/tools/`, `~/shared/scripts/`), DuckDB table prefixes (`ps\.`, `signals\.`, `asana\.`, `main\.`).
   - Group findings by token kind.
@@ -344,19 +344,19 @@ Python modules called reactively by Phase C (Group 5) and ad-hoc by Richard. Nev
   - Per §Anti-Goals #7 and §Design Decisions → "Why the portability validator is advisory": the earlier blocking behavior was explicitly removed.
   - _Requirements: R4.3, R4.4, R4.5, §Portability Tier Rules → "Portability validator — advisory only", Property 4_
 
-- [ ] **7.5 Implement status-gated schema validator**
+- [x] **7.5 Implement status-gated schema validator**
   - For `status: current`: require `sensitive_data_class`, `portability_tier`, `created_at`, `last_validated`; require `platform_bound_dependencies` iff `portability_tier == Platform_Bound`. Missing → validation error.
   - For `status: legacy`: SKIP all schema checks. Minimal original frontmatter (skills: `name`, `description`; powers: `name`, `displayName`, `description`, `keywords`, `author`) is sufficient. Legacy rows still appear in the inventory (Property 1 bijection).
   - For `status: retired`: accept both minimal and extended frontmatter; retired rows are historical.
   - _Requirements: R3.1, R4.2, R9.5, §Schema status rules, Property 11_
 
-- [ ] **7.6 Implement subagent-wrapper detector**
+- [x] **7.6 Implement subagent-wrapper detector**
   - Analyze a proposed SKILL.md body: does it contain exactly one `invokeSubAgent` call with no other orchestration (no multi-agent pipeline, no pre/post-processing steps, no additional tool calls)?
   - Yes → emit rejection: `"wraps single subagent; subagent is the correct mechanism"`. Block the Phase C write.
   - No (multiple subagents orchestrated, or other tool calls / logic present) → pass per R10.5.
   - _Requirements: R10.4, R10.5, Property 13_
 
-- [ ]* 7.7 Write unit tests for each validator
+- [x]* 7.7 Write unit tests for each validator
   - Specific examples per §Testing Strategy: malformed YAML error messages; `status: legacy` bypass path; Cold_Start_Safe with Platform_Bound tokens (advisory output, file unchanged); Amazon_Confidential in bridge-synced path (error).
   - _Requirements: §Testing Strategy → "Dual testing approach"_
 
@@ -366,99 +366,99 @@ Python modules called reactively by Phase C (Group 5) and ad-hoc by Richard. Nev
 
 Python + hypothesis, minimum 100 iterations per property. Tag format: `# Feature: skills-powers-adoption, Property {N}: {property text}`. Depends on Groups 2, 3, 4, 5, 6, 7 (all mechanisms must exist before properties test them).
 
-- [ ] **8.1 Set up hypothesis harness**
+- [x] **8.1 Set up hypothesis harness**
   - Install `hypothesis`. Configure test settings: `max_examples=100` minimum; `deadline=None` for filesystem-touching tests.
   - One test module per property group (routing/creation/validators/lifecycle) to keep files focused.
   - _Requirements: §Testing Strategy → "Property test configuration"_
 
-- [ ] **8.2 Implement generators (hypothesis strategies)**
+- [x] **8.2 Implement generators (hypothesis strategies)**
   - `genFilesystemState`: random directory trees with random skill/power files. Frontmatter variations (legacy vs current, valid vs malformed, all-required-fields vs missing-some). Edge cases: empty dir, single asset, 100+ assets, mixed statuses.
   - `genActivationLog`: random append-only JSONL. Random event distributions (`baseline`, `activated`, `missed-by-feedback`, `created`, `pruned`, `correction`) over random time windows. Edge cases: empty log, single event, events exactly at 30-day boundary.
   - `genWorkflowProposal`: random workflow descriptions with random trigger / event / specialist / persistent-state / MCP characteristics. Edge cases: proposal matching no existing asset, proposal matching exactly one existing asset, proposal matching multiple existing assets.
   - `genSkillBody`: random markdown bodies with varying Platform_Bound-indicator token densities (0 tokens → many tokens).
   - _Requirements: §Testing Strategy → "Property test configuration"_
 
-- [ ] **8.3 Property 1: INVENTORY-BIJECTION**
+- [x] **8.3 Property 1: INVENTORY-BIJECTION**
   - Tag: `# Feature: skills-powers-adoption, Property 1: For any filesystem state, inventory.md rows bijectively correspond with on-disk assets`.
   - Generator: `genFilesystemState`. Run Group 2 inventory generator. Assert: every on-disk asset appears as exactly one row; no phantom rows; `status: retired` rows tracked separately.
   - Edge cases: empty dir, single asset, 100 assets, mixed statuses.
   - _Validates: Requirements 1.1, 1.2, 1.3, 7.5_
 
-- [ ] **8.4 Property 2: STALENESS-CORRECTNESS**
+- [x] **8.4 Property 2: STALENESS-CORRECTNESS**
   - Tag: `# Feature: skills-powers-adoption, Property 2: Stale set equals {asset : status ∈ {legacy, current} AND no activation in last 30d AND not created in last 30d}`.
   - Generator: `genActivationLog` + `genFilesystemState`. Run Group 6.1 stale-set computation. Assert set matches specification; assets activated in last 30d are NEVER in the stale set (never-prune-under-use guarantee).
   - Edge case: activation exactly 30 days ago.
   - _Validates: Requirements 1.5, 6.5, 8.1, 8.4_
 
-- [ ] **8.5 Property 3: PATH-ALLOWLIST-CORRECTNESS**
+- [x] **8.5 Property 3: PATH-ALLOWLIST-CORRECTNESS**
   - Tag: `# Feature: skills-powers-adoption, Property 3: Validator emits path-allowlist violation iff P ∉ allowlist(C), status-gated`.
   - Generator: random `{sensitive_data_class, output_path, status}` triples. Assert: for `status: current`, violation iff `path ∉ allowlist(class)`; for `Amazon_Confidential`/`Personal_PII`, additional sync-violation when path is under a bridge-sync directory; for `status: legacy`, validator does NOT run the allowlist check.
   - _Validates: Requirements 3.2, 3.3, 3.5, 3.6, 7.4_
 
-- [ ] **8.6 Property 4: ADVISORY-PORTABILITY-REPORT (report-only, NOT rejection)**
+- [x] **8.6 Property 4: ADVISORY-PORTABILITY-REPORT (report-only, NOT rejection)**
   - Tag: `# Feature: skills-powers-adoption, Property 4: Portability validator emits report, never rejects, never modifies file, never auto-downgrades tier`.
   - Generator: `genSkillBody` + random declared tier. Run Group 7.4. Assert (a) report is returned containing detected tokens grouped by kind; (b) input file is byte-identical after validator runs; (c) no rejection error raised regardless of declared tier — including Cold_Start_Safe with Platform_Bound tokens (the advisory consistency case).
   - **Test explicitly asserts NOT rejection**, per F1 revision.
   - _Validates: Requirements 4.3, 4.4, 4.5_
 
-- [ ] **8.7 Property 5: INVENTORY-FRESHNESS**
+- [x] **8.7 Property 5: INVENTORY-FRESHNESS**
   - Tag: `# Feature: skills-powers-adoption, Property 5: If H_R == H_FS then R reflects current filesystem; mismatch triggers Phase A re-run`.
   - Generator: inventory render + subsequent filesystem mutation. Assert hash mismatch → agent re-runs Phase A before trusting R.
   - Scope note per F3: property is about inventory accuracy relative to FS; does NOT claim anything about inventory's own active-referrer status.
   - _Validates: Requirements 1.3, 1.4_
 
-- [ ] **8.8 Property 6: ROUND-TRIP**
+- [x] **8.8 Property 6: ROUND-TRIP**
   - Tag: `# Feature: skills-powers-adoption, Property 6: parse(serialize(parse(F))) == parse(F) and body bytes preserved`.
   - Generator: random valid SKILL.md / POWER.md. Run Group 7.1 parse/serialize round-trip. Assert structural equality of frontmatter + byte equality of body.
   - _Validates: Requirements 9.1, 9.2, 9.3_
 
-- [ ] **8.9 Property 7: NON-SILENT-REWRITE**
+- [x] **8.9 Property 7: NON-SILENT-REWRITE**
   - Tag: `# Feature: skills-powers-adoption, Property 7: Malformed file produces error AND file is unchanged on disk`.
   - Generator: random malformed files (bad YAML, wrong types, missing required for `status: current`). Assert validator errors AND `stat` before/after shows identical mtime and size.
   - _Validates: Requirement 9.4_
 
-- [ ] **8.10 Property 8: OVERLAP-CHECK-COMPLETENESS**
+- [x] **8.10 Property 8: OVERLAP-CHECK-COMPLETENESS**
   - Tag: `# Feature: skills-powers-adoption, Property 8: New asset creation produces overlap-check.json with all 6 Kiro kinds + non_kiro_mechanisms_considered; proceeds only if reviewed_by_richard`.
   - Generator: random creation proposals. Run Group 5.1 + 5.2. Assert overlap-check.json contains all required fields; write at 5.3 proceeds iff `reviewed_by_richard == true`; legacy reclassification path does NOT require overlap-check.
   - _Validates: Requirements 2.6, 10.1, 10.3_
 
-- [ ] **8.11 Property 9: ROUTING-PRECEDES-CREATE**
+- [x] **8.11 Property 9: ROUTING-PRECEDES-CREATE**
   - Tag: `# Feature: skills-powers-adoption, Property 9: Phase C runs only if routing-decision leaf is CREATE-variant (SKILL/POWER/STEERING/HOOK/SUBAGENT/ORGAN); REJECT and EXTEND_EXISTING do not trigger Phase C`.
   - Generator: random create-trigger sequences. Assert routing-decision.json exists and leaf ∈ {SKILL, POWER, STEERING, HOOK, SUBAGENT, ORGAN} whenever Phase C runs; REJECT/EXTEND_EXISTING leaves do not trigger Phase C.
   - _Validates: Requirements 2.3, 7.1, 7.2_
 
-- [ ] **8.12 Property 10: EXTEND-EXISTING-PRECEDENCE**
+- [x] **8.12 Property 10: EXTEND-EXISTING-PRECEDENCE**
   - Tag: `# Feature: skills-powers-adoption, Property 10: Tree terminates at EXTEND_EXISTING for overlap ≥75% or exact trigger-phrase match; does NOT produce new-asset leaves`.
   - Generator: `genWorkflowProposal` with varying overlap to installed assets. Assert tree terminates EXTEND_EXISTING at threshold, CREATE-variant below threshold.
   - _Validates: Requirements 5.4, 10.1, 10.2_
 
-- [ ] **8.13 Property 11: STATUS-GATED-SCHEMA**
+- [x] **8.13 Property 11: STATUS-GATED-SCHEMA**
   - Tag: `# Feature: skills-powers-adoption, Property 11: status: current requires full frontmatter; status: legacy skips schema validation; bijection holds across all statuses`.
   - Generator: `genFilesystemState` with mixed statuses. Assert: current without required fields → validation error; legacy without extended fields → validation passes; all statuses appear in inventory (bijection with Property 1).
   - Include legacy-to-current migration test: touch a legacy asset, assert Phase C.3 legacy-migration path either classifies-and-writes or accepts refusal (legacy stays legacy).
   - _Validates: Requirements 3.1, 4.2, 9.5_
 
-- [ ] **8.14 Property 12: ACTIVATION-LOGGING**
+- [x] **8.14 Property 12: ACTIVATION-LOGGING**
   - Tag: `# Feature: skills-powers-adoption, Property 12: Each successful discloseContext / kiroPowers activate call appends exactly one activated row; log is append-only`.
   - Generator: random activation sequences. Assert one row per activation with required fields; no row mutation; corrections append with `event: correction` referencing target_ts. Include `missed-by-feedback` generation when Richard flags a miss.
   - _Validates: Requirements 6.1, 6.3, 6.4_
 
-- [ ] **8.15 Property 13: SUBAGENT-WRAPPER-REJECTION**
+- [x] **8.15 Property 13: SUBAGENT-WRAPPER-REJECTION**
   - Tag: `# Feature: skills-powers-adoption, Property 13: Skill whose only action is a single invokeSubAgent call with no orchestration → REJECT; multi-subagent orchestration → permitted`.
   - Generator: random skill bodies (single `invokeSubAgent` vs multiple subagents vs subagent + additional tool calls). Assert single-wrapper → REJECT, multi-orchestration → permitted.
   - _Validates: Requirements 10.4, 10.5_
 
-- [ ] **8.16 Property 14: ASSET-LIFECYCLE (archive-before-delete)**
+- [x] **8.16 Property 14: ASSET-LIFECYCLE (archive-before-delete)**
   - Tag: `# Feature: skills-powers-adoption, Property 14: Activation-validate before available; archive-before-delete atomic at row level`.
   - Generator: simulated create + prune sequences. Assert: `last_validated` set only after 5.5 passes; archive operation succeeds before 6.3's delete runs; if archive fails, delete does NOT run.
   - _Validates: Requirements 7.6, 8.2, 8.3_
 
-- [ ] **8.17 Property 15: NON-KIRO-GATE-REJECTION**
+- [x] **8.17 Property 15: NON-KIRO-GATE-REJECTION**
   - Tag: `# Feature: skills-powers-adoption, Property 15: If non-Kiro mechanism handles W, tree terminates at step 0.5 REJECT with rationale naming the mechanism`.
   - Generator: `genWorkflowProposal` with random external-mechanism hits (.bashrc patterns, cron-like, git hook patterns). Include explicit `dashboard-server.kiro.hook` reference case. Assert step-0.5 REJECT termination; rationale field contains the external-mechanism name.
   - _Validates: Spec-internal routing decision step 0.5; prevents the dashboard-server.kiro.hook-style duplication_
 
-- [ ] **8.18 Checkpoint — Ensure all tests pass**
+- [x] **8.18 Checkpoint — Ensure all tests pass**
   - Run full pytest / hypothesis suite. Fix any failing properties. Ask Richard if questions arise.
   - _Requirements: §Testing Strategy_
 
@@ -469,13 +469,13 @@ Python + hypothesis, minimum 100 iterations per property. Tag format: `# Feature
 
 Runs 30 days after Group 1 baseline. Depends on Groups 0-3 minimum. FULL-PASS additionally relies on Group 6 for pruning execution.
 
-- [ ] **9.1 Compute per-asset activation count over the 30-day window**
+- [x] **9.1 Compute per-asset activation count over the 30-day window**
   - Input: `~/shared/context/skills-powers/activation-log.jsonl`.
   - For each of the 13 installed assets, count `activated` events where `ts` is within `[T0, T0+30d]`. Ignore `baseline`, `missed-by-feedback`, `created`, `pruned`, `correction` events for the activation metric (though `missed-by-feedback` entries are surfaced separately as gap signal).
   - Emit `~/shared/context/skills-powers/pilot-review-{YYYY-MM-DD}.md` with per-asset counts.
   - _Requirements: R5.5, R5.6, §Pilot metric, §Pilot procedure step T30_
 
-- [ ] **9.2 Compare against success criterion**
+- [x] **9.2 Compare against success criterion**
   - Success criterion per R5.6: **≥3 activations per skill during 30-day window AND ≥5 of 9 installed skills activated at all**.
   - Per-skill outcome:
     - ≥3 activations → **KEEP**
@@ -484,18 +484,18 @@ Runs 30 days after Group 1 baseline. Depends on Groups 0-3 minimum. FULL-PASS ad
   - Record both per-skill and aggregate outcomes in the pilot-review markdown.
   - _Requirements: R5.3, R5.6, §Pilot metric_
 
-- [ ] **9.3 Surface skills failing the criterion as Phase E pruning candidates**
+- [x] **9.3 Surface skills failing the criterion as Phase E pruning candidates**
   - For each PRUNE-CANDIDATE skill: add to the next Group 6 pruning review cycle's stale-set input.
   - **Anti-task:** do NOT auto-prune. Surfaced as candidates only. Richard approves/defers/protects per Group 6.2.
   - _Requirements: R5.6, R8.1, §Pilot procedure step T30_
 
-- [ ] **9.4 Present result to Richard**
+- [x] **9.4 Present result to Richard**
   - Render: per-asset activation count, KEEP/PRUNE-CANDIDATE per skill, aggregate PASS/FAIL, `missed-by-feedback` tally, commentary on what the data shows about the adoption habit.
   - If aggregate PASS: adoption habit is working. Decide next-round direction (9.5).
   - If aggregate FAIL: adoption habit is NOT sticking. Before building any new skill or considering Phase C creation, revisit this tasks.md with the learning. See §Post-pilot decision point below.
   - _Requirements: R5.6, §Pilot procedure step T30_
 
-- [ ] **9.5 Decide next-round direction**
+- [x] **9.5 Decide next-round direction**
   - If PASS: Richard decides between three branches:
     - **EXTEND_EXISTING on survivors**: routing tree step 1 bias holds; new workflows edit existing skills.
     - **PRUNE failing skills**: run Group 6 against PRUNE-CANDIDATEs.

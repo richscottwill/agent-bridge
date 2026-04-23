@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "MPE Core Acceptance Test",
+  "description": "Run the automated MPE acceptance test suite for all 10 markets + 3 regions. Covers steps a-m from R15.2/R15.3 (freshness, base projections, stress tests, save/load, staleness surfacing, regional rollup math, mix-effect narratives). Full matrix runs in under 15 minutes, single-market in under 2 minutes. Manual trigger.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Richard asked to run the MPE core acceptance test. Execute the full matrix and surface an owner-readable pass/fail report.\n\n1. Run: `python3 -m pytest shared/tools/prediction/tests/test_acceptance.py -q --tb=line`\n\n2. If all tests pass, tell the owner: 'Acceptance GREEN — all 10 markets + 3 regions passed all steps. Report at shared/dashboards/data/acceptance-test-reports/{today}-core.md.'\n\n3. If any tests fail, do NOT pass silently. For each failing test:\n   - State the scope (e.g., 'DE Quarter target Regs_Target:1.5x prior-year')\n   - State which of the (a)-(m) steps failed\n   - Paste the assertion error in a code block\n   - Offer ONE of: 'This is a real regression. Open shared/tools/prediction/mpe_engine.py at the binding_constraint function and check the scope-specific branch.' OR 'This is an expected shift because parameters were refit. Run `kiro hook run mpe-refit` then re-run acceptance.' OR 'This is a known XFAIL per R15.9 — market {X} lacks sufficient data for this step. Verify the XFAIL reason is recorded in tests/test_acceptance.py::_xfail_reasons.'\n\n4. Write the consolidated report to shared/dashboards/data/acceptance-test-reports/{today}-core.md and push it to SharePoint under Kiro-Drive/system-state/mpe-acceptance/.\n\n5. If you're running this as a pre-commit gate and ANY test fails, tell the owner 'pre-commit BLOCKED — fix the above before committing.' Do not commit on their behalf."
+  }
+}

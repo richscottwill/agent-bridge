@@ -1,33 +1,29 @@
 {
-  "generated": "2026-04-21",
-  "date": "2026-04-21",
+  "generated": "2026-04-22",
+  "date": "2026-04-22",
   "timezone": "America/Los_Angeles",
+  "executed_at_pt": "2026-04-23T01:33-07:00",
   "status": "running_background",
-  "started_at_utc": "2026-04-22T02:13:40Z",
-  "started_at_pt": "2026-04-21T19:13:40-07:00",
-  "loop_command": "bash ~/shared/tools/scripts/karpathy-loop.sh \"hands.md\" 20",
-  "terminal_id": 8,
+  "started_at_utc": "2026-04-23T08:50:00Z",
+  "started_at_pt": "2026-04-23T01:50:00-07:00",
+  "loop_command": "bash ~/shared/tools/scripts/karpathy-loop.sh \"hands.md\" 10",
+  "terminal_id": 13,
   "log_path": "~/shared/context/active/karpathy-loop.log",
-  "starting_experiment_count": 172,
-  "prior_state_at_start": {
-    "total_combos": 104,
-    "unexplored": 21,
-    "underexplored": 60,
-    "proven_losers": 0,
-    "eligible": 104
-  },
   "cooldown_organs": "hands.md",
-  "max_batches_safety_cap": 20,
+  "max_batches_safety_cap": 10,
   "batch_size": 10,
-  "pre_run_fix": {
-    "issue": "All ~/.kiro/agents/*.json had illegal top-level successMetrics field. kiro-cli schema doesn't accept it. Loop silently fell back to default agent on first attempt — would have produced bogus experiments.",
-    "fix": "Patched 13 agent JSONs: karpathy, rw-trainer, wiki-editor, wiki-concierge, wiki-writer, wiki-critic, wiki-librarian, wiki-researcher, callout-reviewer, callout-writer, market-analyst, eyes-chart, agent-bridge-sync. Removed successMetrics key, preserved intent by appending to description.",
-    "verification": "Smoke-test kiro-cli chat --agent karpathy returned 'KARPATHY_LOADED_OK' — agent loads as itself, not fallback. Re-kicked loop."
+  "experiments_expected_max": 100,
+  "prior_4_22_activity": {
+    "first_run_started": "2026-04-22T06:16 PT (AM-backend)",
+    "first_run_blocked_at": "Karpathy Phase 6 experiment attempted on richard-style-email × ADD — blocked at blind-eval step with 'z14.registerSubAgentExecution is not a function' (nested invokeSubAgent failure)",
+    "second_run_completed": "2026-04-22T09:23 PT — ran successfully, 1 experiment logged (last-experiment started 2026-04-22 13:45:48). Evals shell-invoked kiro-cli chat --agent eval-{a,b,c} directly, bypassing the broken invokeSubAgent path.",
+    "bug_still_open": "Nested invokeSubAgent (subagent invoking another subagent) remains broken. Today's loop uses shell-out pattern to dodge it. Platform fix still needed."
   },
   "protocol_adherence": {
-    "first_experiment_verification": "Loop verified reading body.md + soul.md + heart.md + hands.md before any experiment. Eval prompts being written to /tmp/eval-a-exp.txt, /tmp/eval-b-exp.txt, /tmp/eval-c-exp.txt. Shell invocations of kiro-cli chat --agent eval-{a,b,c} confirmed in log — real subagent processes, not self-eval.",
-    "stopping_rule": "Prior exhaustion. Safety cap 20 batches (~200 experiments max). CONSECUTIVE_EMPTY=2 triggers stop. /tmp/karpathy-exhausted marker triggers stop."
+    "agent_invocation": "kiro-cli chat --agent karpathy is the invocation path, bypasses invokeSubAgent platform bug",
+    "blind_eval_path": "kiro-cli chat --agent eval-{a,b,c} shell-invoked per batch",
+    "first_experiment_verification": "Initial agent load confirmed — karpathy.md + heart.md read, experiment-log.tsv loaded (52KB), body/steering/callouts directories enumerated. Agent operating as itself, not fallback.",
+    "stopping_rules": "Prior exhaustion (all eligible combos explored), /tmp/karpathy-exhausted marker written, OR safety cap of 10 batches reached (~100 experiments max)."
   },
-  "pattern_correction": "Prior two EOD runs (4/20 and earlier today) skipped experiments citing 'interactive session unsuitable' — this hardened into a pattern. Correction: if the hook runs, experiments run. The protocol doesn't have a skip branch. Running it background-async means main turn completes while the loop progresses; doesn't require agent attention after kickoff.",
-  "next_step": "Loop will run to completion (prior exhaustion or safety cap). Results will be in autoresearch_experiments table + experiment-log.tsv. Next EOD run should query for this run's delta and surface keeps/reverts in System Health."
+  "streak_correction_note": "This run is the first EOD-launched karpathy in multiple days. Richard called out a skip-streak. Running synchronously from hook now rather than deferring. If the background run produces results before EOD summary finishes, results will be surfaced in the frontend Step 5 section. If still running, will be surfaced in next AM brief."
 }

@@ -1,0 +1,13 @@
+pair_id,randomize_to_X,randomize_to_Y
+01A,treatment,control
+01B,control,treatment
+02A,control,treatment
+02B,control,treatment
+03A,treatment,control
+03B,treatment,control
+04A,treatment,control
+04B,control,treatment
+05A,control,treatment
+05B,control,treatment
+06A,control,treatment
+06B,treatment,control

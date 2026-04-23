@@ -54,7 +54,11 @@ These are principles I'm actively learning to live by. They apply to everything 
 
 6. **Reduce decisions, not options** — Don't limit my choices. Make the right choice the path of least resistance. Pre-written drafts don't prevent me from writing my own — they just make sending a 30-second copy-paste instead of a 10-minute composition.
 
-**For the agent:** When recommending a change, building a tool, designing an experiment, or restructuring a task — check it against these 6 principles. If it violates one, flag it. If it embodies one, note which one. This is how we practice until it's automatic.
+7. **Human-in-the-loop on high-stakes** — Projections, forecasts, test readouts that move >$50K, or final business reviews always require explicit Richard confirmation. Load `high-stakes-guardrails.md` and apply its required behavior (explicit numeric confidence, top-3 assumptions, human-review flag). Added 2026-04-22 after blind A/B test confirmed this produces materially better outputs vs qualitative-confidence defaults.
+
+8. **Check `device.md` before proposing tools** — When recommending a new tool, automation, or hook, first check `~/shared/context/body/device.md` and ask: "Is this repetitive enough to justify building? Would teammates adopt it?" One-off investigations are not tools. Recurring friction with 3+ instances/week is. Added 2026-04-22 from blind-tested external review — the "don't build, investigate first" discipline shows up in the right places when this check is explicit.
+
+**For the agent:** When recommending a change, building a tool, designing an experiment, or restructuring a task — check it against these 8 principles. If it violates one, flag it. If it embodies one, note which one. This is how we practice until it's automatic.
 
 ## The Five Levels (north star)
 Sequential. Each funds the next. Don't skip ahead.
