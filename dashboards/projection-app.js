@@ -1238,10 +1238,13 @@
       isoWeek: d.isoWeek, brand_regs: d.brand_regs, nb_regs: d.nb_regs,
       brand_spend: d.brand_spend, nb_spend: d.nb_spend,
     }));
-    // R12 follow-up: Plot supports `className` option that adds a CSS class
-    // to the rendered SVG path. Using explicit class names (mpe-series-*)
-    // replaces the fragile stroke-color-matching in applySeriesVisibility.
-    // This ends the stroke-matching/timing debugging cycle definitively.
+    // R14 correction: Plot 0.6.17 silently drops per-mark `className`
+    // (open feature request: observablehq/plot#1002). The className props
+    // below are no-ops at the DOM level. Series identification happens
+    // post-render in applySeriesVisibility() via stroke + stroke-dasharray
+    // matching against SERIES_ID (after chartEl.appendChild attaches SVG).
+    // Leaving the className props in place so the option lights up for
+    // free if/when Plot ships per-mark className support.
     marks.push(Plot.line(actualsPoints, {
       x: 'week', y: 'total_regs',
       stroke: 'var(--color-actuals)', strokeWidth: 2.5,
@@ -1555,16 +1558,71 @@
     }).join('');
     chartEl.appendChild(legend);
 
-    // Apply initial default-hide state to SVG paths + wire legend click handlers.
-    // R12 follow-up: Plot marks now carry explicit className="mpe-series-<key>",
-    // so we query by class. This is deterministic regardless of stroke-color
-    // detection or DOM-attachment timing.
+    // R14: Plot 0.6.17 does NOT support per-mark className (the option is
+    // silently dropped — see github.com/observablehq/plot/issues/1002).
+    // R13's class-based approach therefore landed zero matches, which is
+    // why the two default-hide spend series stayed visible on cold load
+    // and why Local Kiro's DOM probe found every path with class=null.
+    //
+    // Fix: identify series by matching each Plot-rendered <path>'s inline
+    // `stroke` + `stroke-dasharray`, and tag the element with data-series
+    // so later code (hover-dot positioning, diagnostics) can find them.
+    // chartEl.appendChild(chart) has already run above, so the SVG is
+    // attached and getComputedStyle / attribute reads work reliably.
     const svgNodeForLegend = chart.tagName === 'SVG' ? chart : chart.querySelector('svg');
+    const cssVars = getComputedStyle(document.documentElement);
+    const resolveVar = (name, fallback) => {
+      const v = (cssVars.getPropertyValue(name) || '').trim();
+      return v || fallback;
+    };
+    // Normalize a stroke value to a canonical lower-case hex/rgb string so
+    // inline `stroke="var(--color-brand)"` and computed-style `stroke="rgb(0, 102, 204)"`
+    // compare equal. We read the computed stroke, which browsers resolve
+    // through the CSS cascade (works because SVG is attached to the DOM).
+    const normStroke = (el) => {
+      const s = getComputedStyle(el).stroke || el.getAttribute('stroke') || '';
+      return s.replace(/\s+/g, '').toLowerCase();
+    };
+    const normStr = (s) => (s || '').replace(/\s+/g, '').toLowerCase();
+    // Series identity table — must stay in sync with the Plot.line options above.
+    const SERIES_ID = [
+      { key: 'actuals-regs',     stroke: resolveVar('--color-actuals', '#4A4A4A'), dash: '' },
+      { key: 'actuals-spend',    stroke: resolveVar('--color-actuals', '#4A4A4A'), dash: '2,3' },
+      { key: 'counterfactual',   stroke: resolveVar('--color-counterfactual', '#888'), dash: '5,4' },
+      { key: 'proj-brand',       stroke: resolveVar('--color-brand',   '#0066CC'), dash: '' },
+      { key: 'proj-nb',          stroke: resolveVar('--color-nb',      '#FF9900'), dash: '' },
+      { key: 'proj-total',       stroke: '#1A1A1A',                                dash: '' },
+      { key: 'proj-total-spend', stroke: '#1A1A1A',                                dash: '8,4' },
+    ].map(s => ({ ...s, strokeN: normStr(s.stroke), dashN: normStr(s.dash) }));
+    // Tag each rendered path with data-series so legend toggling, hover-dot
+    // math, and diagnostics all have a stable selector to query against.
+    const tagSeries = () => {
+      if (!svgNodeForLegend) return { tagged: 0, paths: 0 };
+      const paths = svgNodeForLegend.querySelectorAll('path');
+      let tagged = 0;
+      for (const p of paths) {
+        if (p.hasAttribute('data-series')) { tagged++; continue; }
+        // Plot.line renders each line as a single <path> with inline stroke
+        // attributes; skip axis/grid/frame paths (they have fill or no stroke).
+        const rawStroke = p.getAttribute('stroke');
+        if (!rawStroke) continue;
+        // Prefer computed stroke (resolves CSS vars). Fall back to raw attr.
+        const sN = normStroke(p);
+        const dN = normStr(p.getAttribute('stroke-dasharray'));
+        const match = SERIES_ID.find(s => s.strokeN === sN && s.dashN === dN)
+                   || SERIES_ID.find(s => normStr(s.stroke) === normStr(rawStroke) && s.dashN === dN);
+        if (match) {
+          p.setAttribute('data-series', match.key);
+          tagged++;
+        }
+      }
+      return { tagged, paths: paths.length };
+    };
     const applySeriesVisibility = () => {
       if (!svgNodeForLegend) return;
+      tagSeries();
       for (const key of Object.keys(STATE.legendVisibility)) {
-        const cls = `mpe-series-${key}`;
-        const els = svgNodeForLegend.querySelectorAll('.' + cls + ', [class~="' + cls + '"]');
+        const els = svgNodeForLegend.querySelectorAll(`[data-series="${key}"]`);
         const visible = STATE.legendVisibility[key] !== false;
         for (const el of els) {
           el.style.display = visible ? '' : 'none';
@@ -1588,27 +1646,27 @@
     // Overlay D3 SVG for narrated tooltips (task 6.3.6).
     // R12 follow-up: wrap in try/catch so a single tooltip/overlay error
     // doesn't cascade and kill applyArrivalAnimations / annotateActiveRegimes.
-    // Also defer to requestAnimationFrame so the SVG is fully attached +
-    // laid out before we query for hover-dot positioning math.
+    // R14: also eagerly create the tooltip element at chart-mount time
+    // (not lazy on first mousemove) so DOM probes can assert its presence.
+    try { ensureTooltip(); } catch (e) { console.warn('[mpe] ensureTooltip failed:', e); }
     try { attachNarratedTooltips(chart, chartData, marketData, out); }
-    catch (e) { console.warn('attachNarratedTooltips failed:', e); }
+    catch (e) { console.warn('[mpe] attachNarratedTooltips failed:', e); }
 
     // Apply animated arrival (task 6.3.8)
     try { applyArrivalAnimations(chart); }
-    catch (e) { console.warn('applyArrivalAnimations failed:', e); }
+    catch (e) { console.warn('[mpe] applyArrivalAnimations failed:', e); }
 
     // Sparkle-region shading annotation (task 6.3.2 acceptance — Sparkle visible)
     try { annotateActiveRegimes(chart, marketData); }
-    catch (e) { console.warn('annotateActiveRegimes failed:', e); }
+    catch (e) { console.warn('[mpe] annotateActiveRegimes failed:', e); }
 
-    // R12 follow-up: re-apply series visibility on next animation frame to
-    // catch the case where the initial applySeriesVisibility() ran before
-    // Plot had finished painting the SVG children (class selectors return
-    // zero matches in that window). Belt-and-suspenders: also runs again
-    // in the click handler.
+    // R14: re-apply series visibility on next animation frame. Plot may
+    // still be painting the initial SVG children when applySeriesVisibility()
+    // first ran above; the rAF pass catches paths that weren't yet in the DOM.
+    // Belt-and-suspenders — stroke-based tagSeries is idempotent (skips already-tagged).
     requestAnimationFrame(() => {
       try { applySeriesVisibility(); }
-      catch (e) { console.warn('applySeriesVisibility rAF retry failed:', e); }
+      catch (e) { console.warn('[mpe] applySeriesVisibility rAF retry failed:', e); }
     });
   }
 
