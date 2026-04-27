@@ -1699,7 +1699,7 @@
         <li><b>Campaign lifts</b>: ${regimes.length} active lift${regimes.length === 1 ? '' : 's'} applied with their observed decay curves.</li>
       </ul>
       <h3 style="margin-top:12px;font-size:14px">Step 2 — Non-Brand residual</h3>
-      <p>With Brand regs and Brand spend projected, we solve for the Non-Brand spend that ${driver === 'ieccp' ? 'lands the full-year efficiency on target' : driver === 'regs' ? 'delivers the missing registrations via the NB CPA elasticity curve' : 'fills the remaining budget after Brand'}. The solver uses the NB CPA elasticity fit from ${fq.n_weeks ? `${fq.n_weeks} weeks` : 'the available history'} of history.</p>
+      <p>With Brand regs and Brand spend projected, we solve for the Non-Brand spend that ${driver === 'ieccp' ? 'lands the full-year efficiency on target' : driver === 'regs' ? 'delivers the missing registrations via the NB CPA elasticity curve' : 'fills the remaining budget after Brand'}. The solver uses the NB CPA elasticity fit from ${fq.n_weeks ? `${fq.n_weeks} weeks of history` : 'the available history'}.</p>
       <h3 style="margin-top:12px;font-size:14px">Step 3 — Locked YTD</h3>
       <p>Weeks that have already happened are locked to actuals. The solver only adjusts the remaining weeks of the year.</p>
     `;
