@@ -79,13 +79,17 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P1-06 · Solver convergence "Closest achievable" reporting
 - **Source:** Round 3 R3-3
-- **Status:** partial — translateWarning emits plain-English for `TARGET_UNREACHABLE_*` but doesn't always show the *closest achievable* number.
-- **Verification:** When US Q2 target=65% returns 62.7% silently, banner reads "Closest achievable: 62.7% (target 65% exceeds NB spend bounds)".
+- **Status:** done
+- **Verification:** When a TARGET_UNREACHABLE_* warning is active, the YTD wall banner now prepends `Closest achievable: X% efficiency (target Y%).` (or equivalent for spend/regs). Reaches into `out.totals.computed_ieccp / total_spend / total_regs` to pull the actual solver-achieved value and compares against `currentTargetValue()`. Only shows when delta is non-trivial (>0.5pp efficiency or >2% for spend/regs).
 
 ### P1-07 · Regime-onset vertical rules on chart
 - **Source:** Dashboard-gap #3
-- **Status:** open
-- **Verification:** On MX chart, a dashed purple rule at 2026-04-05 (Sparkle onset) with label "Sparkle onset" is visible.
+- **Status:** done
+- **Verification:** On MX chart, dashed purple `Plot.ruleX` rule at 2026-04-05 (Sparkle onset) with "Lift #1 onset" / "Lift #2 onset" labels at the top. Rules inside the plotted x-domain only. Sorted by onset date so #N matches chronological order.
+
+### P1-07 · Regime-onset vertical rules on chart
+- **Source:** Dashboard-gap #3
+- **Status:** done (in P1-06/07/09 cluster)
 
 ### P1-08 · Effect-size summary with CI in KPI tiles
 - **Source:** Dashboard-gap #4
@@ -94,8 +98,8 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P1-09 · Severity chip scope clarified
 - **Source:** Round 3 R3-7
-- **Status:** open
-- **Verification:** Severity chip reads "Across 10 markets: 3 critical · 7 warn · 1 info" OR switches to per-market when user switches to single-market view.
+- **Status:** done
+- **Verification:** Chip now reads "⚠ Across 10 markets: X critical · Y warn · Z info" — scope prefix removes the "is that view-scoped or global?" ambiguity. Tooltip explains "Summary spans all N markets. Click to jump to current-market alerts panel."
 
 ### P1-10 · Numbers-drift between reloads
 - **Source:** Round 3 R3-5
@@ -418,4 +422,4 @@ The earlier "Phase 4 palette consolidation 41→14 tokens" and "type scale 13→
 Execute top-to-bottom within each phase. When a finding is blocked, mark the
 reason in-place and move to the next. Never silently skip.
 
-**Current next-up:** P1-06 → P1-07 → P1-09 → P1-12 → P1-08. (R12 P1-05 done, R11 follow-up cluster shipped.)
+**Current next-up:** P1-12 → P1-08. (R13+ shipped P1-05 + P1-06 + P1-07 + P1-09.)

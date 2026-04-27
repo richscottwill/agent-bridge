@@ -147,13 +147,19 @@
       el.innerHTML = '<span style="font-size:11px;color:var(--color-success)">✓ no anomalies</span>';
       return;
     }
+    // Round 13 P1-09: scope label so the count is unambiguous.
+    // Chip reads "Across 10 markets: X critical · Y warn · Z info"
+    // regardless of which single-market view is active, since the
+    // summary is global. When we have per-view scoping later this
+    // becomes "This market:" / "This region:".
+    const nMarkets = Object.keys(STATE.data?.anomalies?.markets || {}).length || 10;
     const parts = [];
     if (summary.error) parts.push(`<span style="color:var(--color-danger)">${summary.error} critical</span>`);
     if (summary.warn) parts.push(`<span style="color:var(--color-warning)">${summary.warn} warn</span>`);
     if (summary.info) parts.push(`<span style="color:var(--color-text-meta)">${summary.info} info</span>`);
-    el.innerHTML = `<span style="font-size:11px">⚠ ${parts.join(' · ')}</span>`;
+    el.innerHTML = `<span style="font-size:11px">⚠ <span style="color:var(--color-text-subtle)">Across ${nMarkets} markets:</span> ${parts.join(' · ')}</span>`;
     el.style.cursor = 'pointer';
-    el.title = 'Click to scroll to anomalies panel in current market view';
+    el.title = `Summary spans all ${nMarkets} markets. Click to jump to current-market alerts panel.`;
     el.onclick = () => {
       const panel = document.getElementById('anomalies-panel');
       if (panel && panel.style.display !== 'none') {
@@ -1306,14 +1312,35 @@
       }));
     }
 
-    // Campaign lift markers (vertical dashed lines, no text label — keep chart clean)
+    // Campaign lift onset markers (Round 13 P1-07). Dashed purple vertical
+    // rule at each lift onset + small label "Lift #N" at the top of the
+    // rule so users can see when each active lift started. Rules inside
+    // the plotted x-domain only.
     const xMin = ytdFirst || btWeeks[0];
     const xMax = periodEnd || btWeeks[btWeeks.length - 1];
-    for (const r of (marketData.regime_fit_state || [])) {
+    const liftMarkers = [];
+    const sortedLifts = [...(marketData.regime_fit_state || [])]
+      .sort((a, b) => new Date(a.change_date) - new Date(b.change_date));
+    for (let i = 0; i < sortedLifts.length; i++) {
+      const r = sortedLifts[i];
       const d = new Date(r.change_date);
       if (d < xMin || d > xMax) continue;
-      marks.push(Plot.ruleX([d], {
+      liftMarkers.push({ d, i, r });
+    }
+    for (const m of liftMarkers) {
+      marks.push(Plot.ruleX([m.d], {
         stroke: 'var(--color-regime)', strokeWidth: 1.5, strokeDasharray: '3,3', strokeOpacity: 0.7,
+      }));
+      // Label anchored near the top of the chart at the rule's x position.
+      marks.push(Plot.text([{ d: m.d, label: `Lift #${m.i + 1} onset` }], {
+        x: 'd', y: 0,
+        text: 'label',
+        dy: -2,
+        textAnchor: 'start',
+        fontSize: 10,
+        fontWeight: 500,
+        fill: 'var(--color-regime)',
+        frameAnchor: 'top',
       }));
     }
 
@@ -1884,7 +1911,33 @@
       const relevant = ws.filter(w => w.startsWith('TARGET_UNREACHABLE') || w.startsWith('LOCKED_YTD') || w.startsWith('OUTSIDE_TOLERANCE') || w.startsWith('OP2_BUDGET_EXCEEDED'));
       // Translate + prefix with "Closest achievable" framing when applicable.
       const phrases = relevant.map(translateWarning);
-      text.textContent = phrases.join(' · ');
+
+      // Round 13 P1-06: prepend the actual "closest achievable" value so
+      // users see the miss, not just "can't be reached." Reaches into
+      // out.totals to pull the value the solver landed on, based on the
+      // active driver. Only shows when the driver's computed value exists
+      // and differs from the requested target by a noticeable amount.
+      const driver = currentDriver();
+      const targetVal = currentTargetValue();
+      let closestLine = '';
+      if (driver === 'ieccp') {
+        const achieved = out.totals?.computed_ieccp;
+        if (Number.isFinite(achieved) && Math.abs(achieved - targetVal) > 0.5) {
+          closestLine = `Closest achievable: ${achieved.toFixed(1)}% efficiency (target ${targetVal}%). `;
+        }
+      } else if (driver === 'spend') {
+        const achieved = out.totals?.total_spend;
+        if (Number.isFinite(achieved) && Math.abs(achieved - targetVal) / Math.max(targetVal, 1) > 0.02) {
+          closestLine = `Closest achievable: ${fmt$(achieved)} spend (target ${fmt$(targetVal)}). `;
+        }
+      } else if (driver === 'regs') {
+        const achieved = out.totals?.total_regs;
+        if (Number.isFinite(achieved) && Math.abs(achieved - targetVal) / Math.max(targetVal, 1) > 0.02) {
+          closestLine = `Closest achievable: ${fmtNum(achieved)} regs (target ${fmtNum(targetVal)}). `;
+        }
+      }
+
+      text.textContent = closestLine + phrases.join(' · ');
       banner.classList.add('active');
     } else {
       banner.classList.remove('active');
