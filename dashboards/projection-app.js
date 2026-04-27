@@ -642,19 +642,45 @@
       }
     }
 
-    // Monte Carlo CI band from MPE engine (cheap version) — full year scope
+    // Bootstrap CI band from V1_1_Slim output (P1-01 Option C, 2026-04-27).
+    // Replaces the legacy MPE.projectWithUncertainty path which returned
+    // empty CIs after the mpe_schema_v3.sql deprecation of v1 elasticity
+    // rows (2026-04-23). Bootstrap computes per-week bands from YTD residual
+    // sd scaled by sqrt(weeks-into-forecast). Not a Bayesian posterior;
+    // documented as an approximation in the How-modal footnote.
     await setStage(4, opts.animated !== false);
 
     let uncert = null;
     try {
-      const inputs = { scope, timePeriod: period, targetMode: driver, targetValue, rngSeed: 42 };
-      uncert = await MPE.projectWithUncertainty(inputs, STATE.data);
+      if (projection && !projection.error) {
+        const ci = V1_1_Slim.bootstrapCI(projection, md.ytd_weekly || [], 0.10);
+        if (ci && ci.available) {
+          uncert = {
+            credible_intervals: {
+              total_regs: {
+                central: ci.totals.total_regs.central,
+                ci: { '90': [ci.totals.total_regs.lower, ci.totals.total_regs.upper] },
+              },
+              total_spend: {
+                central: ci.totals.total_spend.central,
+                ci: { '90': [ci.totals.total_spend.lower, ci.totals.total_spend.upper] },
+              },
+            },
+            per_week: ci.per_week,
+            method: ci.method,
+            footnote: ci.footnote,
+          };
+        }
+      }
     } catch (e) {
-      // Ignore — CI band optional
+      console.warn('bootstrapCI failed:', e);
     }
 
     STATE.currentOutput = projection;
-    STATE.currentUncertainty = uncert?.credible_intervals || null;
+    // Round 10 P1-01 Option C: store the full bootstrap uncert payload so
+    // per-week bands (uncert.per_week) reach the chart renderer, not just
+    // credible_intervals. Fallback to null when uncert unavailable.
+    STATE.currentUncertainty = uncert || null;
     STATE.currentBrandProj = projection;
     STATE.currentCounterfactual = counterfactual;
 
@@ -1107,28 +1133,31 @@
     // Layered chart via Observable Plot
     const marks = [];
 
-    // CI band (if Uncertainty disclosed + we have uncertainty data)
-    if (STATE.disclosures.uncert && STATE.currentUncertainty) {
-      const ci = STATE.currentUncertainty;
-      const regsCi = ci.total_regs?.ci?.['90'];
-      const spendCi = ci.total_spend?.ci?.['90'];
-      // Approximate a per-week CI as pseudo-band from the projected series (simple +/- % fit)
-      // This is approximate; full MC per-week would require more data in JSON export
-      if (regsCi) {
-        const projected = chartData.filter(d => d.series === 'projected');
-        const centralTotal = projected.reduce((s, d) => s + d.brand_regs + d.nb_regs, 0);
-        if (centralTotal > 0) {
-          const ratioLo = regsCi[0] / centralTotal;
-          const ratioHi = regsCi[1] / centralTotal;
-          for (const d of projected) {
-            d.ci_lo = (d.brand_regs + d.nb_regs) * ratioLo;
-            d.ci_hi = (d.brand_regs + d.nb_regs) * ratioHi;
+    // CI band — Round 10 P1-01 Option C.
+    // Bootstrap CI from YTD residuals provides per-week bands directly.
+    // Shown always when available (no longer gated on a disclosure toggle
+    // since the "Uncertainty" button was removed — users expect to see CIs).
+    if (STATE.currentUncertainty && STATE.currentUncertainty.per_week) {
+      const pw = STATE.currentUncertainty.per_week;
+      const projected = chartData.filter(d => d.series === 'projected');
+      if (pw.regs && pw.regs.lower && pw.regs.upper && projected.length > 0) {
+        // Map per-week bands onto projected rows. The bootstrap produces a
+        // full-year array indexed 0..51; `projected` contains RoY weeks.
+        // Walk both in order and attach. Because chartData is built in
+        // chronological order and the bootstrap array matches that order,
+        // index alignment is one-to-one if we start at ytd_weeks offset.
+        const ytdCount = chartData.filter(d => d.series === 'actuals').length;
+        for (let i = 0; i < projected.length; i++) {
+          const idx = ytdCount + i;
+          if (idx < pw.regs.lower.length) {
+            projected[i].ci_lo = pw.regs.lower[idx];
+            projected[i].ci_hi = pw.regs.upper[idx];
           }
-          marks.push(Plot.areaY(projected, {
-            x: 'week', y1: 'ci_lo', y2: 'ci_hi',
-            fill: 'var(--color-ci-band-brand)', fillOpacity: 0.35,
-          }));
         }
+        marks.push(Plot.areaY(projected, {
+          x: 'week', y1: 'ci_lo', y2: 'ci_hi',
+          fill: 'var(--color-ci-band-brand)', fillOpacity: 0.25,
+        }));
       }
     }
 
@@ -1702,6 +1731,8 @@
       <p>With Brand regs and Brand spend projected, we solve for the Non-Brand spend that ${driver === 'ieccp' ? 'lands the full-year efficiency on target' : driver === 'regs' ? 'delivers the missing registrations via the NB CPA elasticity curve' : 'fills the remaining budget after Brand'}. The solver uses the NB CPA elasticity fit from ${fq.n_weeks ? `${fq.n_weeks} weeks of history` : 'the available history'}.</p>
       <h3 style="margin-top:12px;font-size:14px">Step 3 — Locked YTD</h3>
       <p>Weeks that have already happened are locked to actuals. The solver only adjusts the remaining weeks of the year.</p>
+      <h3 style="margin-top:12px;font-size:14px">Step 4 — Uncertainty band</h3>
+      <p>The shaded band around the projected line is a <b>bootstrap approximation</b>: we compute residual noise from the last ~16 weeks of YTD actuals and scale it by √(weeks ahead) to reflect growing forecast uncertainty. This is <em>not</em> a Bayesian posterior credible interval — full posterior CIs are pending migration to the updated schema. Treat the band as "plausible range given recent noise" rather than "statistically-correct credible interval."</p>
     `;
 
     if (r2 != null) {
@@ -1945,7 +1976,23 @@
         },
       };
       try {
-        el.textContent = MPENarrative.generate(fauxOut, STATE.data);
+        let narrativeText = MPENarrative.generate(fauxOut, STATE.data);
+        // Round 10 P1-01 Option C: append bootstrap CI tail-line when available.
+        // Honest framing per Local Kiro spec — this is an approximation, not
+        // a Bayesian posterior; footnote reinforces that in the How modal.
+        const uncert = STATE.currentUncertainty;
+        if (uncert && uncert.credible_intervals && uncert.credible_intervals.total_regs) {
+          const ciR = uncert.credible_intervals.total_regs.ci?.['90'];
+          const ciS = uncert.credible_intervals.total_spend?.ci?.['90'];
+          if (ciR && ciS) {
+            const fmt$ciLo = fmt$(ciS[0]);
+            const fmt$ciHi = fmt$(ciS[1]);
+            const fmtRLo = fmtNum(ciR[0]);
+            const fmtRHi = fmtNum(ciR[1]);
+            narrativeText += `\n\n90% plausible range: ${fmt$ciLo}–${fmt$ciHi} spend · ${fmtRLo}–${fmtRHi} regs. (Bootstrap approximation from recent-YTD residuals.)`;
+          }
+        }
+        el.textContent = narrativeText;
       } catch (e) {
         el.textContent = `Narrative generation failed: ${e.message}`;
       }

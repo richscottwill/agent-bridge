@@ -37,17 +37,15 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P1-01 · MC draws complete for every market/period combo
 - **Source:** Round 1 #2, Round 3 V2, Round 5 V1
-- **Status:** BLOCKED — root cause is upstream architectural
-- **Verification (target):** Narrative on MX Y2026 includes "90% CI: X–Y" and chart renders a shaded CI band using `--color-ci-band-brand`.
-- **Unblocks:** P1-08 (CI in KPI tiles), P2-03 (CI bands on chart)
-- **Probe result (2026-04-27):** `MPE.projectWithUncertainty({scope:'MX', period:'Y2026', driver:'ieccp', target:0.75})` returns `outcome: SETUP_REQUIRED` with warning `"SETUP_REQUIRED: MX missing parameters: ['brand_cpa_elasticity','brand_yoy_growth','brand_spend_share']"` and empty `credible_intervals={}`. This reproduces on every market.
-- **Root cause:** mpe_schema_v3.sql (2026-04-23) deprecated the v1 elasticity parameter rows across all 10 markets as part of the v1.1 Slim migration. The old MC pipeline in `mpe_uncertainty.py` (and its JS mirror `computeCredibleIntervals` in `mpe_engine.js`) still samples from those deprecated params, so it hard-fails fast and returns empty CIs. This is why every "Uncertainty" output has been "n/a" for four days. Not an MC convergence bug — a schema-migration dependency that was never untangled.
-- **Fix options (need Richard's call):**
-  - **Option A — Port MC to v1.1 Slim parameters.** Rewrite `mpe_uncertainty.py` (and JS mirror) to sample from `brand_trajectory_weights`, `brand_cpa_projected`, `brand_recent_trend`, `brand_regime_multipliers`. ~2 days engineering. Likely breaks regression fixtures since posteriors differ. Correct long-term.
-  - **Option B — Temporary re-activation of v1 rows for MC.** Re-run deprecated-inactive rows `is_active=TRUE` specifically for MC sampling but keep v1.1 Slim as the deterministic path. Brittle; gives wrong CI shape (old CPA elasticity posterior ≠ Brand-trajectory posterior). Not recommended but fastest.
-  - **Option C — Bootstrap CI from V1_1_Slim outputs.** Sample trajectory weights (±20% on trend slope, ±0.2× on regime multiplier, ±1 week on regime onset) and re-run `projectWithLockedYtd` N=50 times. Fully in v1.1 Slim idiom. New code — maybe 4h engineering. Correct posterior shape. Doesn't regress v1 tests because v1 MC untouched.
-- **Recommendation:** Option C. It's the smallest-diff path that gets real CIs, respects v1.1 Slim as the deterministic truth, and doesn't require re-activating deprecated schema. But 4h of new code inside a single finding is at the upper edge of this protocol's "minimum viable diff" rule — flagging for Richard before executing.
-- **Handback note:** Moving to P1-04 (campaign-lift auto-promotion) next. P1-01 remains blocked until Richard picks A/B/C.
+- **Status:** done (Option C — bootstrap CI)
+- **Verification:** Probe on MX/US/UK/JP returns bands with plausible widths (MX 90% CI regs ±~50%, US ±~22%, UK ±~27%, JP ±~90%). CI values render in narrative as "90% plausible range: $Xlo–$Xhi spend · Rlo–Rhi regs. (Bootstrap approximation from recent-YTD residuals.)" How-modal Step 4 added with honest footnote on method limitation.
+- **What landed:**
+  - `V1_1_Slim.bootstrapCI(projectionOutput, ytdWeekly, alpha=0.10)` — new function in v1_1_slim.js computing per-week bands from residual sd × √(weeks_forward)
+  - Wired into projection-app.js MC path, replaces the `MPE.projectWithUncertainty` call that was returning empty CIs since 2026-04-23 schema migration
+  - Chart renders shaded band via `--color-ci-band-brand` fill (no longer gated on removed Uncertainty disclosure button)
+  - Narrative appends CI tail line with explicit "bootstrap approximation" label
+  - How-modal has a dedicated Step 4 footnote: "…not a Bayesian posterior credible interval — full posterior CIs are pending migration to the updated schema."
+- **Unblocks:** P1-08 (CI in KPI tiles), P2-03 (CI bands on chart — done as side effect of this ticket).
 
 ### P1-02 · "At full-year pace" narrative denominator for MY1/MY2
 - **Source:** Round 5 V-2

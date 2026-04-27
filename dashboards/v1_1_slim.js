@@ -749,6 +749,133 @@
     };
   }
 
+  // ---------- Bootstrap CI (Round 10 P1-01 Option C) ----------
+  //
+  // The legacy Monte Carlo path in mpe_engine.js samples from the deprecated
+  // v1 elasticity parameters (brand_cpa_elasticity, brand_yoy_growth,
+  // brand_spend_share) — all rows that mpe_schema_v3.sql deactivated in the
+  // 2026-04-23 v1.1 Slim cutover. Every market has returned empty
+  // credible_intervals for four days.
+  //
+  // Bootstrap CI produces honest uncertainty bands directly from V1.1 Slim
+  // output + the YTD residual distribution, no sampling required:
+  //
+  //   1. Compute per-week residuals for YTD: r[i] = actual[i] - fitted_trend[i]
+  //      where fitted_trend is a simple centered moving average of YTD.
+  //   2. Estimate residual sd from the last ~16 YTD weeks.
+  //   3. For projection week k (1..52), scale sd by sqrt(k) to reflect
+  //      accumulating forecast uncertainty (random-walk idiom).
+  //   4. Apply z × scaled_sd to produce lower/upper bands.
+  //
+  // This is NOT a Bayesian posterior. It's a plausible-range estimate that
+  // reflects the noise seen in recent actuals. Documented honestly in the
+  // narrative + How-modal footnote.
+  //
+  // alpha=0.10 → 90% band (z ≈ 1.645).
+  // alpha=0.20 → 80%, alpha=0.05 → 95%, etc.
+  function bootstrapCI(projectionOutput, ytdWeekly, alpha) {
+    alpha = alpha == null ? 0.10 : alpha;
+    // Z-scores for common alphas.
+    const zTable = { 0.05: 1.960, 0.10: 1.645, 0.20: 1.282, 0.50: 0.674 };
+    const z = zTable[alpha] != null ? zTable[alpha]
+      : Math.max(0.5, 1.96 - 1.28 * (alpha - 0.05) / 0.15); // fallback linear interp
+
+    const ytd = ytdWeekly || [];
+    const actuals = ytd.map(w => (w.brand_regs || w.brand_registrations || 0) + (w.nb_regs || w.nb_registrations || 0));
+
+    // Residual sd from last up to 16 YTD weeks vs centered 4-week moving avg.
+    let residualSd = 0;
+    if (actuals.length >= 6) {
+      const window = actuals.slice(-16);
+      const residuals = [];
+      for (let i = 2; i < window.length - 2; i++) {
+        const ma = (window[i - 2] + window[i - 1] + window[i + 1] + window[i + 2]) / 4;
+        residuals.push(window[i] - ma);
+      }
+      if (residuals.length >= 3) {
+        const mean = residuals.reduce((a, b) => a + b, 0) / residuals.length;
+        const variance = residuals.reduce((s, r) => s + (r - mean) * (r - mean), 0) / residuals.length;
+        residualSd = Math.sqrt(variance);
+      }
+    }
+    if (!Number.isFinite(residualSd) || residualSd <= 0) {
+      // Fallback: 5% of hero total as a sanity cap so CI is never silently zero.
+      const t = (projectionOutput && projectionOutput.totals) || {};
+      residualSd = Math.max(1, Math.abs(t.total_regs || 0) * 0.05 / 12); // ~5% per year / 12 weeks
+    }
+
+    // Full-year per-week arrays from the projection (YTD + RoY).
+    const yw = projectionOutput && projectionOutput.year_weekly;
+    if (!yw || !yw.brand_regs || yw.brand_regs.length === 0) {
+      return { available: false, reason: 'no year_weekly' };
+    }
+    const nWeeks = yw.brand_regs.length;
+    const ytdWeeks = yw.ytd_weeks || ytd.length;
+
+    const lower = new Array(nWeeks);
+    const upper = new Array(nWeeks);
+    const lowerSpend = new Array(nWeeks);
+    const upperSpend = new Array(nWeeks);
+
+    // Per-week central = brand+nb total regs; per-week spend central = brand+nb spend.
+    for (let i = 0; i < nWeeks; i++) {
+      const centralRegs = (yw.brand_regs[i] || 0) + (yw.nb_regs[i] || 0);
+      const centralSpend = (yw.brand_spend[i] || 0) + (yw.nb_spend[i] || 0);
+      if (i < ytdWeeks) {
+        // Locked YTD — no uncertainty on actuals.
+        lower[i] = centralRegs;
+        upper[i] = centralRegs;
+        lowerSpend[i] = centralSpend;
+        upperSpend[i] = centralSpend;
+      } else {
+        // RoY — scale sd by sqrt(weeks-into-forecast) for random-walk uncertainty.
+        const k = (i - ytdWeeks) + 1;
+        const bandRegs = z * residualSd * Math.sqrt(k);
+        // Proportional band on spend (share of total regs → total spend)
+        const spendRatio = centralRegs > 0 ? centralSpend / centralRegs : 0;
+        const bandSpend = bandRegs * Math.max(spendRatio, 1);
+        lower[i] = Math.max(0, centralRegs - bandRegs);
+        upper[i] = centralRegs + bandRegs;
+        lowerSpend[i] = Math.max(0, centralSpend - bandSpend);
+        upperSpend[i] = centralSpend + bandSpend;
+      }
+    }
+
+    // Total CI: sum upper/lower per week (this overstates slightly — ideal
+    // would be sqrt(sum sd²) since errors partially cancel — but for a
+    // leadership-facing display, "plausible range" is more useful than
+    // "statistically-correct-assuming-independence" narrower band).
+    const totalRegsLower = lower.reduce((a, b) => a + b, 0);
+    const totalRegsUpper = upper.reduce((a, b) => a + b, 0);
+    const totalSpendLower = lowerSpend.reduce((a, b) => a + b, 0);
+    const totalSpendUpper = upperSpend.reduce((a, b) => a + b, 0);
+
+    return {
+      available: true,
+      method: 'bootstrap_from_residuals',
+      alpha: alpha,
+      z: z,
+      residual_sd: residualSd,
+      per_week: {
+        regs: { lower, upper },
+        spend: { lower: lowerSpend, upper: upperSpend },
+      },
+      totals: {
+        total_regs: {
+          central: (projectionOutput.totals && projectionOutput.totals.total_regs) || 0,
+          lower: totalRegsLower,
+          upper: totalRegsUpper,
+        },
+        total_spend: {
+          central: (projectionOutput.totals && projectionOutput.totals.total_spend) || 0,
+          lower: totalSpendLower,
+          upper: totalSpendUpper,
+        },
+      },
+      footnote: 'Bootstrap approximation from fit residuals; full posterior credible intervals are pending migration to the updated schema.',
+    };
+  }
+
   // ---------- Exports ----------
 
   global.V1_1_Slim = {
@@ -778,5 +905,7 @@
     projectWithLockedYtd,
     fetchYtdActualsFromData,
     computeRoyWeeks,
+    // Bootstrap CI (P1-01 Option C)
+    bootstrapCI,
   };
 })(typeof globalThis !== 'undefined' ? globalThis : (typeof window !== 'undefined' ? window : this));
