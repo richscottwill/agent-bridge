@@ -122,10 +122,10 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 - **Status:** open
 - **Verification:** Select period=W17 → chart x-domain covers roughly 4 weeks around week 17. Select MY2 → x-domain covers ~104 weeks.
 
-### P2-03 · CI shaded bands on chart (blocked by P1-01)
+### P2-03 · CI shaded bands on chart
 - **Source:** Dashboard-gap #1
-- **Status:** blocked by P1-01
-- **Verification:** Shaded band using `--color-ci-band-brand` wraps the projected Brand line from YTD-latest forward.
+- **Status:** done (shipped as side effect of P1-01 Option C step 4)
+- **Verification:** Live-page DOM confirms `fill="rgba(0, 102, 204, 0.15)"` (= `--color-ci-band-brand`) rendering as `Plot.areaY` mark on the projected Brand line from YTD-wall forward. Uses per-week `ci_lo`/`ci_hi` arrays from `STATE.currentUncertainty.per_week.regs`, not ratio-scaling. No longer gated on the removed Uncertainty disclosure button.
 
 ### P2-04 · 3-panel component decomposition (Prophet-style)
 - **Source:** Dashboard-gap #2
@@ -401,4 +401,4 @@ The earlier "Phase 4 palette consolidation 41→14 tokens" and "type scale 13→
 Execute top-to-bottom within each phase. When a finding is blocked, mark the
 reason in-place and move to the next. Never silently skip.
 
-**Current next-up:** P1-05 (confidence floor). P1-01 done via Option C, P1-10 done, P1-04 done (UI+math).
+**Current next-up:** P1-05 → P2-01 → P2-15 → P2-07 (cluster pulled forward per Richard's R11 ask on chart credibility). Then P1-06/07/09/12/08. P1-01 done via Option C, P1-10 done, P1-04 done (UI+math), P2-03 done (side effect of P1-01).
