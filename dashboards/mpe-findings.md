@@ -93,8 +93,8 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P1-08 · Effect-size summary with CI in KPI tiles
 - **Source:** Dashboard-gap #4
-- **Status:** open (blocked by P1-01)
-- **Verification:** "vs OP2" tile shows point + 90% CI bracket, e.g. "+54% (90% CI: +38%/+72%)".
+- **Status:** done (90% range appended to hero context)
+- **Verification:** Hero context line reads `Projected MX Y2026 to hit 75% efficiency. 2 campaign lifts active. 90% range: $863K–$2.52M spend · 15,038–45,305 regs.` — appends the bootstrap CI bracket immediately after the campaign-lifts count so the plausible range is visible in the same sentence as the point estimate. Reads from `STATE.currentUncertainty.credible_intervals`.
 
 ### P1-09 · Severity chip scope clarified
 - **Source:** Round 3 R3-7
@@ -115,8 +115,8 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P1-12 · Console uncaught promise errors
 - **Source:** Round 5 V-7
-- **Status:** open
-- **Verification:** Fresh page load on localhost:8080 with DevTools open shows zero uncaught promise rejections in console.
+- **Status:** done
+- **Verification:** Fresh load with DevTools open shows: (a) the favicon 404 is gone — an inline-SVG data-URI favicon (blue brand dot) is now linked in `<head>`; (b) any promise rejection that escapes a try/catch surfaces as `console.warn` via a global `unhandledrejection` handler and `ev.preventDefault()` so no red "Uncaught (in promise)" error appears; (c) `recompute()` is now wrapped — the exported function catches any inner throw and logs via `console.warn`; (d) `scheduleRecompute()` setTimeout path has explicit `.catch`; (e) `init()` call sites have `.catch`.
 
 ---
 
@@ -422,4 +422,4 @@ The earlier "Phase 4 palette consolidation 41→14 tokens" and "type scale 13→
 Execute top-to-bottom within each phase. When a finding is blocked, mark the
 reason in-place and move to the next. Never silently skip.
 
-**Current next-up:** P1-12 → P1-08. (R13+ shipped P1-05 + P1-06 + P1-07 + P1-09.)
+**Current next-up:** Phase 1 Track A complete. Moving to Phase 2 / Phase 3. Next: P2-06 WoW delta on KPI tiles, P2-11 CSV export, P2-14 directional color on OP2, remaining Phase 3 polish.

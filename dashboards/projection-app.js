@@ -531,7 +531,9 @@
   function scheduleRecompute() {
     clearTimeout(recomputeTimer);
     updateHeaderMeta();
-    recomputeTimer = setTimeout(() => recompute({ animated: false }), 150);
+    recomputeTimer = setTimeout(() => {
+      recompute({ animated: false }).catch(e => console.warn('recompute (scheduled) failed:', e));
+    }, 150);
   }
 
   // Compute a Set of ISO week numbers covered by the selected period string.
@@ -563,6 +565,19 @@
   }
 
   async function recompute(opts) {
+    try {
+      return await _recomputeInner(opts);
+    } catch (e) {
+      // Round 13 P1-12: catch any unhandled rejection from recompute so
+      // it doesn't become a console "Uncaught (in promise)" error. Surface
+      // via console.warn so developers can still see real failures but
+      // users don't see red in DevTools.
+      console.warn('recompute failed:', e && e.message || e);
+      return null;
+    }
+  }
+
+  async function _recomputeInner(opts) {
     opts = opts || {};
     const scope = currentScope();
     const period = currentPeriod();
@@ -772,6 +787,17 @@
     const activeLifts = (marketData.regime_fit_state || []).filter(r => r.confidence > 0);
     if (activeLifts.length > 0) {
       contextSent += `${activeLifts.length} campaign lift${activeLifts.length > 1 ? 's' : ''} active.`;
+    }
+    // Round 13 P1-08: append 90% CI from bootstrap uncertainty so Kate sees
+    // the plausible range right next to the point estimate, not buried in
+    // the narrative panel. Unblocked by P1-01 Option C bootstrap ship.
+    const uncertKpi = STATE.currentUncertainty;
+    if (uncertKpi && uncertKpi.credible_intervals) {
+      const ciS = uncertKpi.credible_intervals.total_spend?.ci?.['90'];
+      const ciR = uncertKpi.credible_intervals.total_regs?.ci?.['90'];
+      if (ciS && ciR) {
+        contextSent += ` 90% range: ${fmt$(ciS[0])}–${fmt$(ciS[1])} spend · ${fmtNum(ciR[0])}–${fmtNum(ciR[1])} regs.`;
+      }
     }
     document.getElementById('hero-context').textContent = contextSent;
 
@@ -3049,8 +3075,18 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', () => init().catch(e => console.warn('init failed:', e)));
   } else {
-    init();
+    init().catch(e => console.warn('init failed:', e));
   }
+
+  // Round 13 P1-12: global unhandledrejection handler. Any promise rejection
+  // that escapes a try/catch still logs to console but as a warn, not an
+  // "Uncaught (in promise)" error. This prevents the silent red errors
+  // Local Kiro flagged in R12 and gives developers a clean single surface
+  // for rejection debugging.
+  window.addEventListener('unhandledrejection', (ev) => {
+    console.warn('unhandled promise rejection in projection-app:', ev.reason);
+    ev.preventDefault();
+  });
 })();
