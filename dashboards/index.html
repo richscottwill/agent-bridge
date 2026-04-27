@@ -196,7 +196,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <a data-view="state-files/index.html">State Files</a>
   <a data-view="wiki-search.html">Wiki Search</a>
   <a data-view="ps-test-calculator.html">Test Calculator</a>
-  <a data-view="projection.html">Projections</a>
 </div>
 <div class="toc" id="tocSection"></div>
 <div class="content" id="content">
@@ -230,13 +229,19 @@ function switchView(v){
 nav.addEventListener('click',e=>{const a=e.target.closest('a[data-view]');if(!a)return;e.preventDefault();switchView(a.dataset.view)});
 const savedView=localStorage.getItem('kiro_dash_view');
 if(savedView&&savedView!=='home'){
-  // Migrate legacy saved views — forecast-tracker + callout-dashboard are now
-  // under performance/, so redirect gracefully. Anything else must match a
-  // current nav entry or we fall back to home.
+  // Migrate legacy saved views. forecast-tracker + callout-dashboard + standalone
+  // projection now all live under performance/. If a saved view points at any of
+  // these dead entries, rewrite to performance/index.html and — for projection —
+  // also pre-set the Performance subnav so it opens the Projection Engine tab.
   let targetView=savedView;
   if(savedView==='forecast-tracker.html'||savedView==='callout-dashboard.html'){
     targetView='performance/index.html';
     localStorage.setItem('kiro_dash_view',targetView);
+    localStorage.setItem('perf_subtab_view','weekly-review.html');
+  } else if(savedView==='projection.html'){
+    targetView='performance/index.html';
+    localStorage.setItem('kiro_dash_view',targetView);
+    localStorage.setItem('perf_subtab_view','../projection.html');
   }
   if(nav.querySelector('a[data-view="'+targetView+'"]')){
     switchView(targetView);
