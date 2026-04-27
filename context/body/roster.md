@@ -110,6 +110,8 @@ Two vendor relationships with regular biweekly cadence:
 
 ## 5. Cross-Functional Partners (by function)
 
+Ordered by frequency of Richard's interaction: MCS and MarTech are daily/weekly; CPS and Creative are campaign-driven; ABMA, Events, and Sourcing are periodic.
+
 ### MCS / Website Marketing
 
 | Name | Role | When to contact |
@@ -118,31 +120,11 @@ Two vendor relationships with regular biweekly cadence:
 | Frank Volinsky | MCS page builds / Weblab | Landing page implementation, A/B test setup |
 | Alex VanDerStuyf | AEM / MCS engineering | Technical page issues, AEM platform questions |
 
-### ABMA (Amazon Business Marketing Analytics)
-
-| Name | Role |
-|------|------|
-| Naresh | ABMA Associated Accounts / audience |
-| Nishchhal | ABMA Associated Accounts / audience |
-| Vijay | ABMA — Email overlay / engineering |
-
-### MarTech
+### MarTech & Data Science
 
 | Name | Role |
 |------|------|
 | Joel Mallory | OCI infrastructure, tracking, LiveRamp |
-
-### Legal / Finance
-
-| Name | Role |
-|------|------|
-| Vandita | Finance Q3G / Q4G partner |
-| (Legal contact) | F90 audiences, LiveRamp data, audience SIMs — routed via Brandon |
-
-### Data Science / Audiences
-
-| Name | Role |
-|------|------|
 | Yogesh | Data Science — OCI value framework, incrementality |
 | Saajan Chowhan | SSR Activation — F90 lifecycle, promo strategy |
 
@@ -163,6 +145,21 @@ Two vendor relationships with regular biweekly cadence:
 | Raven Smith | Creative — DG video, BSE, ad copy |
 | Robert Skenes | Brand & Paid Media (LiveRamp 1P, ADSP, measurement) |
 | Daron Manso | TSEM + US callout owner |
+
+### ABMA (Amazon Business Marketing Analytics)
+
+| Name | Role |
+|------|------|
+| Naresh | ABMA Associated Accounts / audience |
+| Nishchhal | ABMA Associated Accounts / audience |
+| Vijay | ABMA — Email overlay / engineering |
+
+### Legal / Finance
+
+| Name | Role |
+|------|------|
+| Vandita | Finance Q3G / Q4G partner |
+| (Legal contact) | F90 audiences, LiveRamp data, audience SIMs — routed via Brandon |
 
 ### Events Team
 

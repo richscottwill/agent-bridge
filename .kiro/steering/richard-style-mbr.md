@@ -29,28 +29,11 @@ A new market (e.g., SG) launches mid-month and generates 47 registrations in 10 
 
 ## Common Failures
 
-| # | Failure | Quick Fix |
-|---|---------|-----------|
-| 1 | Unexplained Miss | Add specific cause (spend, efficiency, seasonal) |
-| 2 | Month Without YTD | Always follow monthly with YTD |
-| 3 | MoM Without Levers | Name the lever (NB/Brand, spend, CVR) |
-| 4 | Missing Confidence Signal | Flag LOW when <2wk data or <100 regs |
-| 5 | Em-Dashes in Draft | Replace with commas, periods, colons, parens |
-
-### Failure 1: Unexplained Miss
-Every OP2 miss needs a specific cause: spend reduction, efficiency target change, seasonal demand shift. "We missed OP2" without attribution is incomplete.
-
-### Failure 2: Month Without YTD
-Never report a single month in isolation. YTD immediately follows the monthly line — it shows whether the month is a blip or a trend.
-
-### Failure 3: MoM Without Levers
-Don't just state "registrations decreased 15% MoM." Name the lever: "NB investment decreased 10% MoM while Brand stayed flat, driving the registration decline."
-
-### Failure 4: Missing Confidence Signal
-When a market has <2 weeks of data or <100 registrations in the period, flag as LOW confidence and state why. Don't present thin data with the same authority as established markets.
-
-### Failure 5: Em-Dashes in Draft
-Never use em-dashes (—) in drafted MBR write-ups. Replace with commas, periods, colons, or parentheticals. Scan every draft before finalizing.
+1. **Unexplained Miss** — Every OP2 miss needs a specific cause: spend reduction, efficiency target change, seasonal demand shift. "We missed OP2" without attribution is incomplete. Fix: add the specific cause.
+2. **Month Without YTD** — Never report a single month in isolation. YTD immediately follows the monthly line — it shows whether the month is a blip or a trend. Fix: always follow monthly with YTD.
+3. **MoM Without Levers** — Don't just state "registrations decreased 15% MoM." Name the lever: "NB investment decreased 10% MoM while Brand stayed flat, driving the registration decline." Fix: name the lever (NB/Brand, spend, CVR).
+4. **Missing Confidence Signal** — When a market has <2 weeks of data or <100 registrations in the period, flag as LOW confidence and state why. Don't present thin data with the same authority as established markets. Fix: flag LOW when <2wk data or <100 regs.
+5. **Em-Dashes in Draft** — Never use em-dashes (—) in drafted MBR write-ups. Replace with commas, periods, colons, or parentheticals. Scan every draft before finalizing.
 
 ## Examples (actual)
 

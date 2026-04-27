@@ -3,276 +3,465 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MPE — Market Projection Engine</title>
+<title>MPE — Market Projection Engine (v1.1 Slim)</title>
+<link rel="stylesheet" href="projection-design-system.css">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#eaeaea;min-height:100vh;padding:20px 24px 40px}
-h1{font-size:22px;font-weight:700;color:#fff;margin-bottom:2px}
-.subtitle{font-size:13px;color:#888;margin-bottom:14px}
+/* page-specific layout not in design system */
+.page-frame {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--gap-lg);
+}
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--gap-lg);
+}
+.page-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-body);
+}
+.page-header .meta {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-align: right;
+}
 
-/* Banners */
-.banner{padding:10px 14px;border-radius:6px;font-size:13px;margin-bottom:10px;line-height:1.5}
-.banner-fresh{background:#1a2a1a;border:1px solid #2a4a2a;color:#a8d8a8}
-.banner-fallback{background:#2a2418;border:1px solid #4a4028;color:#e8cc88}
-.banner-warn{background:#2a1818;border:1px solid #4a2828;color:#f0a0a0}
+/* Hero block */
+.hero-block {
+  text-align: center;
+  padding: var(--gap-xl) var(--gap-lg);
+}
 
-/* Layout */
-.main-grid{display:grid;grid-template-columns:340px 1fr;gap:16px;margin-top:10px}
-@media(max-width:900px){.main-grid{grid-template-columns:1fr}}
+/* Chart area — holds SVG + loading overlay */
+.chart-wrap {
+  position: relative;
+  min-height: 420px;
+  margin: var(--gap-lg) 0;
+  background: var(--color-neutral-bg);
+}
+#chart-primary {
+  position: relative;
+  min-height: 420px;
+}
 
-/* Cards */
-.card{background:#14161e;border:1px solid #1e2028;border-radius:8px;padding:16px;margin-bottom:14px}
-.card-title{font-size:12px;font-weight:700;color:#4a9eff;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
-.card-title .pill{font-size:10px;color:#666;text-transform:none;letter-spacing:0;margin-left:8px;font-weight:400}
+/* Top banner strip */
+.banner-strip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  margin-bottom: var(--gap-lg);
+}
+.banner-row {
+  display: none;
+  padding: 10px 14px;
+  font-size: 13px;
+  border-radius: 6px;
+  line-height: 1.5;
+}
+.banner-row.visible { display: block; }
+.banner-row.fresh { background: #E6F7EE; color: #0C7A3D; border: 1px solid #9FDBB6; }
+.banner-row.warn  { background: #FFF4D6; color: #8A6200; border: 1px solid #E8C87A; }
+.banner-row.danger { background: #FEE2E2; color: var(--color-danger); border: 1px solid #F2A4A4; }
 
-/* Inputs */
-.input-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.input-row label{font-size:12px;color:#888;min-width:110px;flex-shrink:0}
-.input-row input,.input-row select{background:#1a1d27;border:1px solid #2a2d35;color:#eaeaea;padding:6px 10px;border-radius:4px;font-size:13px;font-family:inherit;width:160px}
-.input-row input[type=range]{width:160px;padding:0}
-.input-row input:focus,.input-row select:focus{outline:none;border-color:#3b82f6}
+/* Secondary panels (Warnings, Constituents, Saved) collapse under chart */
+.secondary-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--gap-lg);
+  margin-top: var(--gap-lg);
+}
+@media (max-width: 1200px) {
+  .secondary-panels { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .secondary-panels { grid-template-columns: 1fr; }
+}
+.sec-panel {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 8px;
+  padding: var(--gap-md);
+}
+.sec-panel h3 {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--gap-sm);
+  font-weight: 600;
+}
+.sec-panel ul { list-style: none; font-size: 12px; }
+.sec-panel li { padding: 4px 0; color: var(--color-text-body); border-bottom: 1px solid #EEEEEE; }
+.sec-panel li:last-child { border-bottom: none; }
+.sec-panel li.warn { color: var(--color-warning); }
+.sec-panel li.danger { color: var(--color-danger); }
+.sec-panel table { width: 100%; font-size: 12px; border-collapse: collapse; }
+.sec-panel th {
+  text-align: left;
+  padding: 4px 6px;
+  font-size: 11px;
+  color: var(--color-text-subtle);
+  border-bottom: 1px solid var(--color-panel-border);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sec-panel td { padding: 4px 6px; border-bottom: 1px solid #EEEEEE; font-variant-numeric: tabular-nums; }
+.sec-panel tr:last-child td { border-bottom: none; }
 
-/* Tabs */
-.tabs{display:flex;gap:2px;margin-bottom:10px;border-bottom:1px solid #2a2d35}
-.tab{padding:6px 14px;font-size:12px;color:#888;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
-.tab.active{color:#4a9eff;border-bottom-color:#4a9eff}
-.tab-panel{display:none}
-.tab-panel.active{display:block}
+.saved-item { cursor: pointer; display: flex; justify-content: space-between; padding: 4px 0; }
+.saved-item:hover { color: var(--color-brand); }
+.saved-meta { font-size: 10px; color: var(--color-text-subtle); }
 
-/* Buttons */
-.btn{background:#1a1d27;border:1px solid #2a4a7c;color:#4a9eff;padding:7px 14px;border-radius:4px;font-size:12px;cursor:pointer;font-family:inherit;margin-right:6px;margin-bottom:4px}
-.btn:hover{background:#2a3a5c;color:#fff}
-.btn-primary{background:#2a4a7c;color:#fff}
-.btn-primary:hover{background:#3b82f6}
+/* Fit quality inline strip */
+.fit-quality {
+  font-size: 11px;
+  color: var(--color-text-meta);
+  text-align: center;
+  margin-top: var(--gap-sm);
+  font-variant-numeric: tabular-nums;
+}
+.fit-quality .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+.fit-quality .dot.high { background: var(--color-success); }
+.fit-quality .dot.medium { background: var(--color-warning); }
+.fit-quality .dot.low { background: var(--color-danger); }
 
-/* Outputs */
-.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:12px}
-.summary-tile{background:#0f1117;border:1px solid #1e2028;border-radius:6px;padding:10px 12px;cursor:pointer;transition:border-color .15s}
-.summary-tile:hover{border-color:#4a9eff}
-.summary-label{font-size:11px;color:#888;margin-bottom:3px}
-.summary-value{font-size:18px;font-weight:700;color:#eaeaea;font-variant-numeric:tabular-nums}
-.summary-ci{font-size:10px;color:#666;margin-top:3px;font-variant-numeric:tabular-nums}
+/* Scenario chip row (seeded for Phase 6.4 reuse) */
+.scenario-strip { margin: var(--gap-md) auto var(--gap-lg); }
 
-/* Gauge */
-.gauge-wrap{text-align:center;padding:10px 0}
-.gauge-value{font-size:32px;font-weight:700;font-variant-numeric:tabular-nums}
-.gauge-value.good{color:#4ade80}
-.gauge-value.warn{color:#fbbf24}
-.gauge-value.bad{color:#f87171}
-.gauge-label{font-size:11px;color:#888;margin-top:3px}
-
-/* Tables */
-table{width:100%;border-collapse:collapse;font-size:12px}
-th{text-align:left;padding:6px 8px;color:#888;font-weight:600;border-bottom:1px solid #2a2d35;font-size:11px;text-transform:uppercase;letter-spacing:0.5px}
-td{padding:6px 8px;border-bottom:1px solid #181a22;font-variant-numeric:tabular-nums}
-tr:last-child td{border-bottom:none}
-
-/* Warnings */
-.warning-list{list-style:none}
-.warning-list li{padding:5px 8px;font-size:12px;color:#e8cc88;background:#1f1a10;border-left:3px solid #4a4028;margin-bottom:3px;line-height:1.4}
-.warning-list li.very-wide{color:#f0a0a0;background:#1f1010;border-left-color:#4a2828}
-.warning-list li.info{color:#88a8d0;background:#10141f;border-left-color:#2a3a5c}
-
-/* Narrative block */
-.narrative{font-size:13px;line-height:1.6;color:#c8c8c8;white-space:pre-wrap;background:#0f1117;border:1px solid #1e2028;border-radius:6px;padding:12px}
-.narrative em{color:#a8a8a8;font-style:italic}
-
-/* Modal */
-.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:100}
-.modal-overlay.active{display:flex;align-items:center;justify-content:center}
-.modal{background:#14161e;border:1px solid #2a4a7c;border-radius:8px;padding:20px;max-width:620px;width:90%;max-height:80vh;overflow-y:auto}
-.modal h2{font-size:16px;color:#4a9eff;margin-bottom:10px}
-.modal-close{float:right;cursor:pointer;color:#888;font-size:18px;border:none;background:none}
-
-/* Chart container */
-.chart-wrap{position:relative;height:280px;margin-bottom:12px}
-
-/* Saved list */
-.saved-list{font-size:12px}
-.saved-list .saved-item{padding:6px 8px;border-bottom:1px solid #181a22;display:flex;justify-content:space-between;cursor:pointer}
-.saved-list .saved-item:hover{background:#181a22}
-.saved-list .saved-label{color:#c8c8c8}
-.saved-list .saved-meta{color:#666;font-size:10px}
-
-/* Tooltip */
-.tooltip-trigger{cursor:help;color:#4a9eff;border-bottom:1px dotted #2a4a7c}
-
-/* Regime badge */
-.badge{display:inline-block;padding:2px 6px;border-radius:3px;font-size:10px;font-weight:600;margin-left:6px}
-.badge-fallback{background:#2a2418;color:#e8cc88;border:1px solid #4a4028}
-.badge-market{background:#1a2a1a;color:#a8d8a8;border:1px solid #2a4a2a}
+/* Provenance modal reused from design-system drawer pattern */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+  width: 620px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: var(--color-neutral-bg);
+  border-radius: 8px;
+  padding: var(--gap-lg);
+}
+.modal-close {
+  float: right;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--color-text-meta);
+}
+.modal h2 {
+  font-size: var(--size-section);
+  margin-bottom: var(--gap-md);
+  color: var(--color-text-body);
+}
+.modal p { margin-bottom: var(--gap-sm); font-size: 13px; }
+.modal table { width: 100%; margin-top: var(--gap-md); font-size: 12px; }
+.modal th { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--color-panel-border); }
+.modal td { padding: 4px 8px; border-bottom: 1px solid #EEE; }
 </style>
 </head>
 <body>
 
-<h1>Market Projection Engine</h1>
-<div class="subtitle">Planning projections with honest uncertainty. 10 markets + 3 regions, recency-weighted + Monte Carlo.</div>
+<div class="page-frame">
 
-<div id="banner-fresh" class="banner banner-fresh" style="display:none"></div>
-<div id="banner-fallback" class="banner banner-fallback" style="display:none"></div>
-<div id="banner-warn" class="banner banner-warn" style="display:none"></div>
+  <!-- Header strip -->
+  <div class="page-header">
+    <div>
+      <h1>Market Projection Engine</h1>
+      <div style="font-size:12px;color:var(--color-text-subtle);margin-top:2px">v1.1 Slim — Brand-Anchor + NB-Residual · Locked-YTD + RoY</div>
+    </div>
+    <div class="meta">
+      <div id="header-scope-meta">MX · Y2026 · 75% ie%CCP target</div>
+      <div id="header-freshness" style="margin-top:4px"></div>
+      <div id="header-anomalies" style="margin-top:4px"></div>
+    </div>
+  </div>
 
-<div class="main-grid">
+  <!-- Banners (fresh / warn / danger / fallback) -->
+  <div class="banner-strip">
+    <div id="banner-fresh" class="banner-row fresh"></div>
+    <div id="banner-warn" class="banner-row warn"></div>
+    <div id="banner-danger" class="banner-row danger"></div>
+  </div>
 
-  <!-- LEFT: inputs + saved -->
-  <div>
-    <div class="card">
-      <div class="card-title">Scope</div>
-      <div class="input-row">
-        <label>Market / Region</label>
-        <select id="scope-select"></select>
+  <!-- View switcher -->
+  <div class="view-switcher" style="display:flex;gap:var(--gap-sm);justify-content:center;margin:var(--gap-md) 0">
+    <button class="disclosure-btn active" data-view="single">Single market</button>
+    <button class="disclosure-btn" data-view="multiples">All 10 markets</button>
+    <button class="disclosure-btn" data-view="heatgrid">Distance to target</button>
+  </div>
+
+  <!-- View: All 10 markets (2×5 small multiples) -->
+  <div id="view-multiples" style="display:none">
+    <div style="text-align:center;padding:var(--gap-md) var(--gap-lg)">
+      <div style="font-size:13px;color:var(--color-text-meta)">Click any chart to drill in. Shared controls at top of single-market view set the target driver + period for all 10.</div>
+    </div>
+    <div class="small-multiples-grid" id="small-multiples-grid"></div>
+    <div style="text-align:center;font-size:11px;color:var(--color-text-subtle);margin-top:var(--gap-sm)" id="multiples-legend"></div>
+  </div>
+
+  <!-- View: Distance to target heat-grid -->
+  <div id="view-heatgrid" style="display:none">
+    <div style="text-align:center;padding:var(--gap-md) var(--gap-lg)">
+      <div style="font-size:13px;color:var(--color-text-meta)">Each cell colored by distance of projected ie%CCP from the market's target (AU uses spend vs OP2).</div>
+    </div>
+    <div class="heatgrid" id="heatgrid"></div>
+    <div class="heatgrid-regional" id="heatgrid-regional"></div>
+    <div style="text-align:center;font-size:11px;color:var(--color-text-subtle);margin-top:var(--gap-sm)">
+      <span style="display:inline-block;width:12px;height:12px;background:var(--color-success);vertical-align:middle;border-radius:2px"></span> within ±5pp · 
+      <span style="display:inline-block;width:12px;height:12px;background:var(--color-warning);vertical-align:middle;border-radius:2px"></span> ±5–15pp · 
+      <span style="display:inline-block;width:12px;height:12px;background:var(--color-danger);vertical-align:middle;border-radius:2px"></span> &gt;±15pp
+    </div>
+  </div>
+
+  <!-- View: Single market (the original layout) -->
+  <div id="view-single">
+
+  <!-- Controls row — compact, always visible -->
+  <div class="controls-row">
+    <div class="control-group">
+      <span class="control-label">Market / Region</span>
+      <select id="scope-select" class="control-input"></select>
+    </div>
+    <div class="control-group">
+      <span class="control-label">Time Period</span>
+      <select id="period-select" class="control-input">
+        <option value="W17">Week 17</option>
+        <option value="M04">April (M04)</option>
+        <option value="Q2">Q2</option>
+        <option value="Y2026" selected>Year 2026</option>
+        <option value="MY1">Next 1 year (MY1)</option>
+        <option value="MY2">Next 2 years (MY2)</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <span class="control-label">Target Driver</span>
+      <select id="driver-select" class="control-input">
+        <option value="ieccp" selected>Efficiency target</option>
+        <option value="spend">Spend target</option>
+        <option value="regs">Registrations target</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <span class="control-label">Target Value</span>
+      <input type="number" id="target-input" class="control-input" value="75" step="1" min="1" max="200" aria-describedby="target-input-error">
+      <div id="target-input-error" role="alert" style="font-size:11px;color:var(--color-danger,#D13212);margin-top:4px;display:none"></div>
+    </div>
+    <div class="control-group">
+      <span class="control-label">Lift multiplier</span>
+      <input type="range" id="regime-slider" class="control-input" min="0" max="2" value="1" step="0.05" style="padding:2px">
+      <span id="regime-slider-val" class="mono" style="font-size:11px;color:var(--color-text-meta);text-align:center">1.00×</span>
+    </div>
+    <div class="control-group" style="flex:1;min-width:auto;justify-content:flex-end;flex-direction:row;align-items:flex-end;gap:6px">
+      <button id="btn-save" class="disclosure-btn" title="Save this scenario">Save</button>
+      <button id="btn-recompute" class="disclosure-btn active" title="Recompute projection">Recompute</button>
+    </div>
+  </div>
+
+  <!-- Hero block -->
+  <div class="hero-block">
+    <!-- Market + period badge — visually co-equal with the hero number so
+         Kate never confuses which market she's looking at (Round 4 Part 4). -->
+    <div class="hero-market-badge" id="hero-market-badge">
+      <span class="hero-market-name" id="hero-market-name">MX</span>
+      <span class="hero-market-sep">·</span>
+      <span class="hero-market-period" id="hero-market-period">Year 2026</span>
+      <span class="hero-market-sep">·</span>
+      <span class="hero-market-target" id="hero-market-target">75% efficiency target</span>
+    </div>
+    <div class="hero-pair">
+      <div class="hero-unit-group">
+        <span id="hero-number" class="hero-number">—</span>
+        <span id="hero-unit" class="hero-unit">spend</span>
       </div>
-      <div class="input-row">
-        <label>Time Period</label>
-        <select id="period-select">
-          <option value="W15">Week 15</option>
-          <option value="M04">April (M04)</option>
-          <option value="Q2" selected>Q2</option>
-          <option value="Y2026">Year 2026</option>
-          <option value="MY1">Next 1 year (MY1)</option>
-          <option value="MY2">Next 2 years (MY2)</option>
-          <option value="MY3" disabled title="3-year projections not in v1 — lands in v1.1 once 2-year intervals are road-tested">MY3 (disabled)</option>
-        </select>
+      <div class="hero-sep">·</div>
+      <div class="hero-unit-group">
+        <span id="hero-secondary" class="hero-number">—</span>
+        <span id="hero-secondary-unit" class="hero-unit">regs</span>
       </div>
-      <div id="scope-badge-row" style="margin-top:6px;min-height:20px"></div>
+    </div>
+    <div id="hero-context" class="hero-context">Loading MX Y2026…</div>
+
+    <div class="hero-kpi-strip">
+      <div class="hero-kpi">
+        <div class="hero-kpi-label">Brand Regs</div>
+        <div class="hero-kpi-value" id="kpi-brand-regs">—</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="hero-kpi-label">NB Regs</div>
+        <div class="hero-kpi-value" id="kpi-nb-regs">—</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="hero-kpi-label">Cost per Reg</div>
+        <div class="hero-kpi-value" id="kpi-cpa">—</div>
+      </div>
+      <div class="hero-kpi" id="kpi-tile-ieccp">
+        <div class="hero-kpi-label">Efficiency</div>
+        <div class="hero-kpi-value" id="kpi-ieccp">—</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="hero-kpi-label">vs OP2 Spend</div>
+        <div class="hero-kpi-value" id="kpi-op2-spend">—</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="hero-kpi-label">vs OP2 Regs</div>
+        <div class="hero-kpi-value" id="kpi-op2-regs">—</div>
+      </div>
     </div>
 
-    <div class="card">
-      <div class="card-title">Input Mode</div>
-      <div class="tabs">
-        <div class="tab active" data-tab="target">Target</div>
-        <div class="tab" data-tab="preset">Preset</div>
-        <div class="tab" data-tab="sliders">Sliders</div>
-      </div>
-      <div class="tab-panel active" data-panel="target">
-        <div style="font-size:11px;color:#888;padding:4px 0 8px 0">Edit any field — the other two recompute. ie%CCP defaults to market target.</div>
-        <div class="input-row target-triad">
-          <label>
-            <span style="display:flex;align-items:center;gap:4px">
-              <input type="radio" name="target-driver" value="ieccp" id="target-driver-ieccp" checked>
-              ie%CCP (%)
-            </span>
-          </label>
-          <input type="number" id="target-value-ieccp" value="100" step="1" min="10" max="500">
-        </div>
-        <div class="input-row target-triad">
-          <label>
-            <span style="display:flex;align-items:center;gap:4px">
-              <input type="radio" name="target-driver" value="spend" id="target-driver-spend">
-              Spend ($)
-            </span>
-          </label>
-          <input type="number" id="target-value-spend" value="0" step="1000" disabled>
-        </div>
-        <div class="input-row target-triad">
-          <label>
-            <span style="display:flex;align-items:center;gap:4px">
-              <input type="radio" name="target-driver" value="regs" id="target-driver-regs">
-              Registrations
-            </span>
-          </label>
-          <input type="number" id="target-value-regs" value="0" step="100" disabled>
-        </div>
-      </div>
-      <div class="tab-panel" data-panel="preset">
-        <div class="input-row">
-          <label>Scenario</label>
-          <select id="preset-select">
-            <option value="base">Base Case</option>
-            <option value="conservative">Conservative (-10%)</option>
-            <option value="moderate">Moderate (current run-rate)</option>
-            <option value="aggressive">Aggressive (+15% Brand)</option>
-            <option value="placement-persists">Placement Persists (+12% Brand sustained)</option>
-            <option value="placement-decays">Placement Decays (+12% Brand, 12w decay)</option>
-          </select>
-        </div>
-      </div>
-      <div class="tab-panel" data-panel="sliders">
-        <div class="input-row">
-          <label>Brand Uplift %</label>
-          <input type="range" id="brand-uplift" min="-50" max="50" value="0" step="1">
-          <span id="brand-uplift-val" style="font-size:12px;color:#888">0%</span>
-        </div>
-        <div class="input-row">
-          <label>NB Uplift %</label>
-          <input type="range" id="nb-uplift" min="-50" max="50" value="0" step="1">
-          <span id="nb-uplift-val" style="font-size:12px;color:#888">0%</span>
-        </div>
-      </div>
+    <div class="disclosure-row">
+      <button class="disclosure-btn" id="btn-how" data-disclosure="how">How this was calculated</button>
+      <button class="disclosure-btn" id="btn-params" data-disclosure="params">Model details</button>
+      <button class="disclosure-btn" id="btn-counter" data-disclosure="counter">Baseline only (no lifts)</button>
     </div>
+  </div>
 
-    <div class="card">
-      <div class="card-title">Actions</div>
-      <button class="btn btn-primary" id="btn-recompute">Recompute</button>
-      <button class="btn" id="btn-save">Save</button>
-      <button class="btn" id="btn-copy-json">Copy JSON</button>
-      <button class="btn" id="btn-copy-md">Copy Markdown</button>
-      <button class="btn" id="btn-generate-narrative">Narrative</button>
-    </div>
+  <!-- Scenario chips (Phase 6.4 placeholder — seed with MX regime scenarios) -->
+  <div class="scenario-chips scenario-strip" id="scenario-chips"></div>
 
-    <div class="card">
-      <div class="card-title">Saved Projections <span class="pill" id="saved-count"></span></div>
-      <div class="saved-list" id="saved-list">
-        <div style="color:#666;font-size:12px;padding:4px">No saved projections yet.</div>
+  <!-- Primary chart + loading overlay -->
+  <div class="chart-wrap" id="chart-wrap">
+    <div id="chart-primary"></div>
+    <div class="fit-quality" id="fit-quality"></div>
+
+    <!-- Loading overlay — pre-baked data renders instantly; only shown when recompute button hit -->
+    <div class="loading-overlay" id="loading-overlay" style="display:none">
+      <div class="loading-stages">
+        <div class="loading-stage active" data-stage="1">
+          <div class="tick"></div>
+          <div class="text">Recomputing projection…</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- RIGHT: outputs -->
-  <div>
-    <div class="card">
-      <div class="card-title">Summary <span class="pill" id="summary-meta"></span></div>
-      <div class="summary-grid" id="summary-grid"></div>
+  <!-- YTD wall banner (principle #6 — target unreachable state) -->
+  <div class="ytd-wall-banner" id="ytd-wall-banner">
+    <span id="ytd-wall-text"></span>
+    <span class="dismiss" id="ytd-wall-dismiss">×</span>
+  </div>
+
+  <!-- Contribution panel (principle #5 — always visible) -->
+  <div class="contribution-panel visible" id="contribution-panel">
+    <div class="contribution-label">Brand trajectory contribution</div>
+    <div class="contribution-bar" id="contribution-bar"></div>
+    <div class="contribution-sub">
+      <span id="contribution-sub-left">—</span>
+      <span id="contribution-sub-right">—</span>
     </div>
 
-    <div class="card">
-      <div class="card-title">ie%CCP Gauge</div>
-      <div class="gauge-wrap">
-        <div id="gauge-value" class="gauge-value neutral">—</div>
-        <div class="gauge-label" id="gauge-label">ie%CCP (vs target)</div>
-      </div>
+    <div class="contribution-label" style="margin-top:var(--gap-md)">NB spend lever (solved to hit target)</div>
+    <div class="nb-bar" id="nb-bar">
+      <div class="nb-segment" id="nb-segment">—</div>
+    </div>
+  </div>
+
+  <!-- Anomalies panel (Phase 4.1 + 6.5.3) — per-market scanner findings -->
+  <div class="sec-panel" id="anomalies-panel" style="display:none;margin-top:var(--gap-lg);border-color:#F2A4A4">
+    <h3>Model alerts <span id="anomalies-count" style="font-weight:400;color:var(--color-text-subtle)"></span></h3>
+    <ul id="anomalies-list"></ul>
+  </div>
+
+  <!-- Secondary panels (warnings, constituents for regional, saved) -->
+  <div class="secondary-panels">
+    <div class="sec-panel">
+      <h3>Warnings <span id="warnings-count" style="font-weight:400;color:var(--color-text-subtle)"></span></h3>
+      <ul id="warnings-list"><li>No warnings.</li></ul>
     </div>
 
-    <div class="card">
-      <div class="card-title">Weekly Projection <span class="pill">Brand + NB with 90% credible interval</span></div>
-      <div class="chart-wrap"><canvas id="chart-weekly"></canvas></div>
-    </div>
-
-    <div class="card" id="constituents-card" style="display:none">
-      <div class="card-title">Per-Market Breakdown <span class="pill">Regional rollup: sum-then-divide</span></div>
-      <table id="constituents-table">
-        <thead><tr><th>Market</th><th>Regs</th><th>Spend</th><th>ie%CCP</th><th>Fallback</th></tr></thead>
-        <tbody></tbody>
+    <div class="sec-panel" id="constituents-panel" style="display:none">
+      <h3>Constituents (regional rollup)</h3>
+      <table>
+        <thead><tr><th>Market</th><th>Regs</th><th>Spend</th><th>ie%CCP</th></tr></thead>
+        <tbody id="constituents-body"></tbody>
       </table>
     </div>
 
-    <div class="card">
-      <div class="card-title">Warnings <span class="pill" id="warnings-count"></span></div>
-      <ul class="warning-list" id="warnings-list"><li class="info">No warnings.</li></ul>
+    <div class="sec-panel">
+      <h3>Saved Projections <span id="saved-count" style="font-weight:400;color:var(--color-text-subtle)"></span></h3>
+      <div id="saved-list"><div style="color:var(--color-text-subtle);font-size:11px">No saved projections yet.</div></div>
     </div>
+  </div>
 
-    <div class="card">
-      <div class="card-title">Narrative</div>
-      <div id="narrative-block" class="narrative"><em>Click "Narrative" above to generate.</em></div>
+  <!-- Feedback bar (6.5.3) — hidden until 3rd projection in session -->
+  <div class="sec-panel" id="feedback-bar" style="margin-top:var(--gap-lg);display:none;background:#F6FAFF;border-color:#C9DEFB">
+    <h3 style="color:#0066CC">Quick feedback on this projection</h3>
+    <div style="display:flex;gap:var(--gap-md);flex-wrap:wrap;align-items:center;font-size:13px;margin-top:var(--gap-sm)">
+      <label style="cursor:pointer"><input type="radio" name="fb-verdict" value="too_high"> Too high</label>
+      <label style="cursor:pointer"><input type="radio" name="fb-verdict" value="too_low"> Too low</label>
+      <label style="cursor:pointer"><input type="radio" name="fb-verdict" value="missing_context"> Something's missing</label>
+      <label style="cursor:pointer"><input type="radio" name="fb-verdict" value="looks_right"> Looks right</label>
+      <label for="fb-magnitude" class="sr-only">Magnitude (% off)</label>
+      <input type="number" id="fb-magnitude" placeholder="±%" step="1" style="width:80px" class="control-input" aria-label="How far off was it, in percent">
+      <label for="fb-freetext" class="sr-only">What's missing or off</label>
+      <input type="text" id="fb-freetext" placeholder="What's missing or off?" class="control-input" style="flex:1;min-width:200px" aria-label="What's missing or off">
+      <button id="fb-submit" class="disclosure-btn">Submit</button>
     </div>
+    <div id="fb-status" style="margin-top:6px;font-size:11px;color:var(--color-text-subtle)"></div>
+  </div>
 
-    <div class="card">
-      <div class="card-title">Parameters Used <span class="pill">Click a KPI above to see lineage</span></div>
-      <div id="parameters-used" style="font-size:11px;color:#888"></div>
+  <!-- Narrative block — always at bottom, standard part of the page -->
+  <div class="sec-panel" id="narrative-panel" style="margin-top:var(--gap-lg)">
+    <h3>Narrative</h3>
+    <div id="narrative-block" style="font-size:13px;line-height:1.6;color:var(--color-text-body);white-space:pre-wrap">
+      <em>Projection summary will render here.</em>
     </div>
+  </div>
+
+  </div> <!-- /#view-single -->
+
+</div> <!-- /.page-frame -->
+
+<!-- Right drawer — Model View (parameters disclosure target) -->
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <div class="drawer-title">Model View</div>
+    <button class="drawer-close" id="drawer-close">×</button>
+  </div>
+  <!-- 6.4.4 metric tiles with sparklines -->
+  <div class="drawer-section" id="drawer-sparklines"></div>
+  <div class="drawer-section">
+    <div class="drawer-section-title">Fit Quality</div>
+    <div class="drawer-tile"><span class="drawer-tile-label">R²</span><span class="drawer-tile-value" id="dv-rsq">—</span></div>
+    <div class="drawer-tile"><span class="drawer-tile-label">Weeks used</span><span class="drawer-tile-value" id="dv-n-weeks">—</span></div>
+    <div class="drawer-tile"><span class="drawer-tile-label">Fallback level</span><span class="drawer-tile-value" id="dv-fallback">—</span></div>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-title">Active campaign lifts</div>
+    <div id="dv-regime-stack">—</div>
+  </div>
+  <div class="drawer-section">
+    <div class="drawer-section-title">Parameters used</div>
+    <div id="dv-parameters" style="font-size:11px"></div>
   </div>
 </div>
 
 <!-- Provenance modal -->
-<div class="modal-overlay" id="modal-overlay" onclick="if(event.target.id==='modal-overlay')closeModal()">
+<div class="modal-overlay" id="modal-overlay">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal()">×</button>
-    <h2 id="modal-title">Parameter provenance</h2>
-    <div id="modal-body" style="font-size:13px;line-height:1.6"></div>
+    <button class="modal-close" id="modal-close">×</button>
+    <h2 id="modal-title">Provenance</h2>
+    <div id="modal-body"></div>
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<!-- CDN scripts — Observable Plot + D3 + (legacy Chart.js removed) -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.17/dist/plot.umd.min.js"></script>
+
+<!-- MPE library + app -->
+<script src="v1_1_slim.js"></script>
 <script src="mpe_engine.js"></script>
 <script src="mpe_narrative.js"></script>
 <script src="projection-app.js"></script>

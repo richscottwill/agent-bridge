@@ -488,3 +488,6 @@ run76_exp5	spine	Session Bootstrap	ADD	information_retrieval	1455	1504	1.0	1.0	1
 run76_exp1	amazon-politics	Application to Richard	REWORD	information_retrieval	2962	3066	1.0	1.0	1.0	0.0	false	KEEP	120
 run76_exp6	eyes	Market Deep Dives	REWORD	information_retrieval	1402	1423	1.0	1.0	1.0	0.0	false	KEEP	120
 run76_exp2	richard-style-amazon	Document Structure Writing Discipline	REMOVE	output_quality	1065	759	0.4	1.0	0.4	-0.6	true	REVERT	120
+run77_exp1	amazon-politics	Promotion Mechanics	REWORD	information_retrieval	3086	3180	1.0	1.0	1.0	0.0	false	KEEP	120
+run77_exp2	richard-style-mbr	Common Failures	MERGE	output_quality	814	757	1.0	1.0	1.0	0.0	false	KEEP	120
+run77_exp3	roster	Cross-Functional Partners	RESTRUCTURE	information_retrieval	2197	2211	1.0	1.0	1.0	0.0	false	KEEP	120

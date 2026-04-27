@@ -2,7 +2,7 @@
   "allowedTools" : [ "read", "write", "shell", "@builder-mcp/ReadInternalWebsites", "@builder-mcp/InternalSearch", "@builder-mcp/SkillsTool" ],
   "hooks" : {
     "agentSpawn" : [ {
-      "command" : "setsid nohup python3 /shared/user/.aim/packages/AgentSpacesAIM-1.0/eventId-6444395178/context/pendergrass-explorer/results-server.py 5651 /tmp/pendergrass-results > /dev/null 2>&1 < /dev/null &"
+      "command" : "setsid nohup python3 /shared/user/.aim/packages/AgentSpacesAIM-1.0/eventId-6447985401/context/pendergrass-explorer/results-server.py 5651 /tmp/pendergrass-results > /dev/null 2>&1 < /dev/null &"
     }, {
       "command" : "aim agents publish-metrics --agent-name 'pendergrass-explorer' --agent-package 'AgentSpacesAIM-1.0' || true"
     } ]
@@ -22,9 +22,9 @@
   "mcpServers" : {
     "builder-mcp" : {
       "command" : "builder-mcp",
-      "args" : [ "--skill-paths", "/home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6444395178/skills", "--skill-name-filter", "pendergrass-schema-discovery,pendergrass-results-export" ]
+      "args" : [ "--skill-paths", "/home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6447985401/skills", "--skill-name-filter", "pendergrass-schema-discovery,pendergrass-results-export" ]
     }
   },
-  "useLegacyMcpJson" : false,
-  "resources" : [ "file:///home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6444395178/context/pendergrass-explorer/pendergrass-graphql-reference.md" ]
+  "includeMcpJson" : false,
+  "resources" : [ "file:///home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6447985401/context/pendergrass-explorer/pendergrass-graphql-reference.md" ]
 }

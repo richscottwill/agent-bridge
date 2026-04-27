@@ -142,11 +142,14 @@ def _fetch_ytd_weekly(con, market: str, year: int) -> list[dict]:
     """YTD weekly actuals for current year — used for UI 'actuals to date' overlay.
 
     Schema reference: ps.v_weekly uses `registrations` (not `regs`) and includes
-    brand_ / nb_ variants for each metric.
+    brand_ / nb_ variants for each metric. We expose both total and
+    brand/nb-split so chart can plot either granularity.
     """
     rows = con.execute("""
         SELECT period_start, registrations, cost, clicks, cpa, cpc, cvr,
-               brand_registrations, nb_registrations, ieccp
+               brand_registrations, brand_cost,
+               nb_registrations, nb_cost,
+               ieccp
         FROM ps.v_weekly
         WHERE market = ?
           AND period_type = 'weekly'
@@ -164,8 +167,10 @@ def _fetch_ytd_weekly(con, market: str, year: int) -> list[dict]:
             'cpc': float(r[5]) if r[5] is not None else None,
             'cvr': float(r[6]) if r[6] is not None else None,
             'brand_regs': int(r[7]) if r[7] is not None else None,
-            'nb_regs': int(r[8]) if r[8] is not None else None,
-            'ieccp': float(r[9]) if r[9] is not None else None,
+            'brand_cost': float(r[8]) if r[8] is not None else None,
+            'nb_regs': int(r[9]) if r[9] is not None else None,
+            'nb_cost': float(r[10]) if r[10] is not None else None,
+            'ieccp': float(r[11]) if r[11] is not None else None,
         })
     return out
 
@@ -191,6 +196,112 @@ def _fetch_regime_events(con, market: str) -> list[dict]:
             'end_date': r[6].isoformat() if r[6] else None,
         })
     return out
+
+
+def _fetch_regime_fit_state(con, market: str) -> list[dict]:
+    """Fetch the current weekly-fitted regime state per market (Phase 6.1.7
+    pipe into the JS mirror).
+
+    Returns the latest fit per active structural regime, with peak, decay,
+    confidence, status + the authored data needed for UI display.
+    """
+    rows = con.execute("""
+        SELECT
+            fs.regime_id,
+            CAST(rc.change_date AS DATE) AS change_date,
+            rc.description,
+            rc.expected_impact_pct,
+            rc.half_life_weeks                   AS authored_hl,
+            fs.peak_multiplier,
+            fs.fitted_half_life_weeks,
+            fs.current_multiplier,
+            fs.decay_status,
+            fs.confidence,
+            fs.n_post_weeks,
+            fs.fit_as_of,
+            fs.fit_method
+        FROM ps.regime_fit_state_current fs
+        JOIN ps.regime_changes rc ON rc.id = fs.regime_id
+        WHERE fs.market = ?
+          AND rc.is_structural_baseline = TRUE
+          AND rc.active = TRUE
+        ORDER BY rc.change_date
+    """, [market]).fetchall()
+    out = []
+    for (regime_id, change_date, description, expected_impact_pct,
+         authored_hl, peak_mult, fitted_hl, current_mult, decay_status,
+         confidence, n_post_weeks, fit_as_of, fit_method) in rows:
+        out.append({
+            'regime_id': regime_id,
+            'change_date': change_date.isoformat() if change_date else None,
+            'description': description,
+            'expected_impact_pct': float(expected_impact_pct) if expected_impact_pct is not None else None,
+            'authored_half_life_weeks': float(authored_hl) if authored_hl is not None else None,
+            'peak_multiplier': float(peak_mult) if peak_mult is not None else 1.0,
+            'fitted_half_life_weeks': float(fitted_hl) if fitted_hl is not None else None,
+            'current_multiplier': float(current_mult) if current_mult is not None else 1.0,
+            'decay_status': decay_status,
+            'confidence': float(confidence) if confidence is not None else None,
+            'n_post_weeks': int(n_post_weeks) if n_post_weeks is not None else None,
+            'fit_as_of': fit_as_of.isoformat() if fit_as_of else None,
+            'fit_method': fit_method,
+        })
+    return out
+
+
+def _fetch_op2_targets(con, market: str, year: int) -> dict | None:
+    """Fetch OP2 annual targets for the market — sum of monthly rows in
+    ps.targets for the given fiscal year. Used as the default for Target
+    Spend and Target Registrations in the projection UI.
+
+    Returns None if no OP2 data is loaded for this market-year yet.
+    Also returns monthly breakdown so UI can scale by selected period
+    (M/Q/Y).
+    """
+    try:
+        annual = con.execute("""
+            SELECT
+                SUM(CASE WHEN metric_name = 'cost'          THEN target_value END) AS cost_total,
+                SUM(CASE WHEN metric_name = 'registrations' THEN target_value END) AS regs_total,
+                COUNT(DISTINCT period_key)                                         AS n_months
+            FROM ps.targets
+            WHERE market = ?
+              AND fiscal_year = ?
+              AND period_type = 'monthly'
+              AND metric_name IN ('cost', 'registrations')
+        """, [market, year]).fetchone()
+        monthly_rows = con.execute("""
+            SELECT period_key,
+                SUM(CASE WHEN metric_name = 'cost'          THEN target_value END) AS cost,
+                SUM(CASE WHEN metric_name = 'registrations' THEN target_value END) AS regs
+            FROM ps.targets
+            WHERE market = ?
+              AND fiscal_year = ?
+              AND period_type = 'monthly'
+              AND metric_name IN ('cost', 'registrations')
+            GROUP BY period_key
+            ORDER BY period_key
+        """, [market, year]).fetchall()
+    except Exception:
+        return None
+    if annual is None or (annual[0] is None and annual[1] is None):
+        return None
+    cost_total, regs_total, n_months = annual
+    monthly = []
+    for row in monthly_rows:
+        monthly.append({
+            'period_key': row[0],
+            'spend': float(row[1]) if row[1] is not None else None,
+            'regs':  float(row[2]) if row[2] is not None else None,
+        })
+    return {
+        'year': year,
+        'annual_spend_target': float(cost_total) if cost_total is not None else None,
+        'annual_regs_target':  float(regs_total) if regs_total is not None else None,
+        'n_months_present':    int(n_months) if n_months is not None else 0,
+        'monthly':             monthly,
+        'source':              'ps.targets (monthly sum)',
+    }
 
 
 def _fetch_spend_bounds(con, market: str) -> dict | None:
@@ -316,21 +427,54 @@ def main() -> int:
             params = _fetch_parameters(con, market)
             ytd = _fetch_ytd_weekly(con, market, current_year)
             regimes = _fetch_regime_events(con, market)
+            regime_fit_state = _fetch_regime_fit_state(con, market)
             spend_bounds = _fetch_spend_bounds(con, market)
+            op2_targets = _fetch_op2_targets(con, market, current_year)
+
+            # Pre-compute Brand trajectory for common scenarios so JS can display
+            # without re-fitting. Phase 6.1.7 parity: JS reads these arrays.
+            brand_trajectory_y2026 = None
+            try:
+                from prediction.brand_trajectory import project_brand_trajectory
+                from datetime import timedelta as _td
+                jan4 = date(current_year, 1, 4)
+                start = jan4 - _td(days=jan4.weekday())
+                weeks = [start + _td(weeks=i) for i in range(52)]
+                bt = project_brand_trajectory(market, weeks)
+                brand_trajectory_y2026 = {
+                    'weeks': [w.isoformat() for w in bt.weeks],
+                    'regs_per_week': [round(r, 2) for r in bt.regs_per_week],
+                    'spend_per_week': [round(s, 2) for s in bt.spend_per_week],
+                    'brand_cpa_used': round(bt.brand_cpa_used, 2),
+                    'total_regs': round(bt.total_regs, 2),
+                    'total_spend': round(bt.total_spend, 2),
+                    'contribution': bt.contribution,
+                    'warnings': bt.warnings,
+                    'lineage': bt.lineage,
+                }
+            except Exception as e:
+                print(f"[{market}] brand_trajectory skipped: {type(e).__name__}: {e}")
 
             fallback_summary = _market_fallback_summary(params)
             market_entry = {
                 'parameters': _json_safe(params),
                 'ytd_weekly': ytd,
                 'regime_events': regimes,
+                'regime_fit_state': regime_fit_state,
+                'brand_trajectory_y2026': brand_trajectory_y2026,
                 'fallback_summary': fallback_summary,
                 'clean_weeks_count': len(ytd),
+                'op2_targets': op2_targets,
             }
             if spend_bounds is not None:
                 market_entry['_spend_bounds'] = spend_bounds
             out['markets'][market] = market_entry
             bounds_label = ' bounds=on' if spend_bounds else ''
-            print(f"[{market}] {len(params)} params, {len(ytd)} YTD weeks, {len(regimes)} active regimes, fallback={fallback_summary}{bounds_label}")
+            bt_label = ' bt=y2026' if brand_trajectory_y2026 else ''
+            op2_label = ' op2=on' if op2_targets else ''
+            print(f"[{market}] {len(params)} params, {len(ytd)} YTD weeks, "
+                  f"{len(regimes)} regimes ({len(regime_fit_state)} fit-state), "
+                  f"fallback={fallback_summary}{bounds_label}{bt_label}{op2_label}")
         except Exception as e:
             print(f"[{market}] ERROR: {type(e).__name__}: {e}")
             out['markets'][market] = {
@@ -340,6 +484,40 @@ def main() -> int:
 
     # Regional summaries
     out['regions'] = _region_summary(REGIONS, out['markets'])
+
+    # Anomalies (Phase 4.1 + Phase 6.5.3) — inline so UI can surface per-market
+    # without a second fetch. Uses the already-open export connection to avoid
+    # DuckDB's "same database different configuration" conflict with a second conn.
+    try:
+        from prediction.mpe_anomaly import (
+            check_fit_quality, check_regime_confidence,
+            check_op2_pacing, check_ytd_projection_step, Anomaly,
+        )
+        anomalies = []
+        for m in out['markets'].keys():
+            anomalies.extend(check_fit_quality(con, m))
+            anomalies.extend(check_regime_confidence(con, m))
+            anomalies.extend(check_op2_pacing(con, m))
+            anomalies.extend(check_ytd_projection_step(con, m))
+        by_market: dict[str, list[dict]] = {}
+        for a in anomalies:
+            by_market.setdefault(a.market, []).append({
+                'check': a.check, 'severity': a.severity,
+                'detail': a.detail, 'remediation': a.remediation,
+            })
+        out['anomalies'] = {
+            'markets': by_market,
+            'summary': {
+                'total': len(anomalies),
+                'error': sum(1 for a in anomalies if a.severity == 'error'),
+                'warn':  sum(1 for a in anomalies if a.severity == 'warn'),
+                'info':  sum(1 for a in anomalies if a.severity == 'info'),
+            },
+        }
+        print(f"  anomalies: {out['anomalies']['summary']}")
+    except Exception as e:
+        out['anomalies'] = {'markets': {}, 'summary': {}, 'error': f'{type(e).__name__}: {e}'}
+        print(f"  WARNING: anomaly scan failed: {e}")
 
     # Write
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)

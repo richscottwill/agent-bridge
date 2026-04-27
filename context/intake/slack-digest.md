@@ -1,119 +1,87 @@
-# Slack Digest — 2026-04-22 (Wednesday PT)
+# Slack Digest — 2026-04-25 (Sat)
 
-Scan window: 2026-04-21T13:40Z → 2026-04-22T13:30Z (~24h, includes overnight and Monday evening 1:1 with Brandon)
-Subagent: A — Slack Ingestion (am-backend-parallel v2)
-Channels considered: 21 unread | Scanned: 9 | With new messages: 3 | Messages ingested: 40 (38 Brandon DM + 1 ab-marketing-ai + 1 Quip bot notification) | Threads fetched: 0 (no thread parents in window)
+**Scan window:** 2026-04-24T17:10:00Z → 2026-04-25T18:50:00Z (~25.7h, covers Fri PM + Sat). Retry pass after Slack MCP 302 outage this morning.
 
----
-
-## [ACTION-RW] Priority signals
-
-### 1. WBR callout — Yun-Kang tagged Richard on MX NB registrations drop (HIGH — today)
-- **Source:** Quip bot notification, Global Acq WBR Callouts (quip-amazon.com/TVV9DAQMcT2) at 2026-04-21 17:02 UTC / 10:02 AM PT
-- **Author:** Yun-Kang Chu
-- **Quote:** "NB registrations -19% (-15% CVR WoW). YoY spend -4% / regs +197% / CPA -67%. ie%CCP at 70% — asking Lorena about plans for ie%CCP target for the year. @Richard Williams any reason for the NB drop in MX?"
-- **Why it matters:** Direct question from peer on WBR callout deck. MX is Richard's market. Needs a reply before this week's WBR or the callout goes out with the question hanging.
-- **Suggested action:** Reply in Quip thread with NB drop explanation (check MX ABIX feed issue, ad approval flags, or seasonal CVR compression). Ping Lorena re ie%CCP YTD trajectory if not already in flight.
-- **Five Levels:** L1 (execution) + L2 (testing — MX diagnostic).
-
-### 2. AU handoff cadence — Brandon locked in (HIGH — today)
-- **Source:** dm-brandon (D044JAKR8RZ), 2026-04-21 14:12–14:35 UTC
-- **Thread summary** (14 messages between Richard and Brandon during 1:1):
-  - Brandon confirmed via email to Lena ~1+ week ago: biweekly cadence starting now.
-  - This week: no AU call. Next week: regular call. **Handoff date: 5/5.** After handoff: no scheduled AU calls from Richard's side.
-  - Richard to update the AU handoff doc now, framing it as "misunderstanding on my end, reflects what you/Lena already communicated."
-  - If Alexis needs something this week, Richard is free to help (unscheduled).
-- **Why it matters:** Brandon was direct — "it's a bit weird just updating it now when it should've been updated when we landed on biweekly." Two meetings left. Handoff cleanup must be tight.
-- **Suggested action:**
-  - ✅ Update the AU handoff doc TODAY with the clarified cadence (action acknowledged via 👍 from Brandon).
-  - Stop updating the AU weekly quip with the AU team — they take it over. Keep tracking internally in the WW internal quip + callout document for anything egregious we want to flag.
-
-### 3. Weekly AU review + Kiro change aggregation (MEDIUM — ongoing)
-- **Source:** dm-brandon, 2026-04-21 14:24 UTC
-- **Brandon:** "you should prob carve out time each week to take a look at what they're doing so we can have notes on their work, and also flag anything that's egregious."
-- **Richard:** "I'm going to do what someone suggested last week, and aggregate change history weekly through Kiro."
-- **Why it matters:** Brandon is asking for an oversight mechanism post-handoff. Kiro-automated weekly AU change summary is exactly a Level 3 tool-adoption win if executed.
-- **Suggested action:** Add recurring weekly AU-review task. Scope a hook that summarizes AU campaign changes week-over-week and drops to the callout document or internal quip.
-- **Five Levels:** L3 — Team Automation (one autonomous workflow). This is a concrete mechanization opportunity Brandon explicitly asked for.
-
-### 4. Kate offsite — Alexis attending, Lena isn't (MEDIUM — planning window)
-- **Source:** dm-brandon, 2026-04-21 13:45 UTC
-- **Brandon:** "I had thought Lena was coming to this offsite Kate put together, but I only see Alexis signed up. Maybe think if there's anything I should talk to him about while he's here — or if it'd make sense for the 3 of us to spend some time together."
-- **Why it matters:** Alexis is the AU POC. In-person face time before handoff is high-leverage. Brandon is open to a 3-way working session.
-- **Suggested action:** Before offsite — sketch agenda items for Alexis (post-handoff contact protocol, what "ad-hoc help" means, Kiro change summary cadence). Propose 30 min 3-way slot.
+**Headline:** Very quiet weekend. 8 in-scope messages ingested across 14 tier-1/tier-2 channels. Two new action-items from Peter (PAM Primeday plan, PD26 disclosure access). Brandon closed the Polaris Br-pages weblab thread Friday afternoon with a clear path forward — no weekend activity on it. Agentspaces 14-day lifetime enforcement is now live (affects body/system durability).
 
 ---
 
-## FYI / context signals
+## Brandon / Kate / Lena / Peter items (top of queue)
 
-### 5. ab-marketing-ai — babel-system OSS for B2B marketing
-- **Source:** C0ANDU5LH47, 2026-04-21 16:54 UTC, W016ZBHU3LM
-- **Content:** shared [github.com/desireem-seb/babel-system](https://github.com/desireem-seb/babel-system) — "open-source AI-powered marketing tools for modern marketing teams. Wondering if the frameworks are helpful at all, specifically for some of our CPS marketing workstreams?"
-- **Why it matters:** Level 3 signal — possible patterns to borrow for PS automation work (ties to #3 above and to agentic orchestration at L5).
-- **Action:** Skim later. No urgent reply.
+### [ACTION-RW] Peter — PAM Primeday plan request (DM)
+- **Channel:** dm-peteocam (D05L5UUGRED)
+- **Time:** 2026-04-24 20:26Z (Fri 1:26 PM PT)
+- **Message:** "When you return, would you mind providing me with the PAM plan for Primeday? I would need the following: Budget + comparison to last year. Projected impressions, taps, and installs."
+- **Context:** Peter acknowledges Richard is OOO. Request is waiting for Monday.
+- **Action:** Pull PAM 2026 budget + YoY comparison + projected impressions/taps/installs. Likely lives in Paid App command-center or forecast tracker. Reply in DM when back.
+- **Topic:** `pam-primeday` (new signal, strength 1.0)
 
-### 6. Brandon DM banter (low signal, captured per Tier-1 DM full depth)
-- Social opener ~13:40 UTC: early-morning schedule, Amazing Race habit, internal clock comment. 11 banter messages logged but low relevance (score 1–3).
+### [ACTION-RW] Peter — PD26 disclosure access for Paid App (MPDM)
+- **Channel:** C0AV6BWRMDG (NEW MPDM: peteocam + ssserene + brandoxy + prichwil, created 2026-04-24 20:33Z)
+- **Time:** 2026-04-24 20:34Z
+- **Message:** Peter to Sharon Serene: "Hi @ssserene, could you please add Brandon and Richard to the AB PD26 date disclosure? Richard needs visibility to the dates so we can execute our Paid App Marketing strategy for the AB Mobile App."
+- **Sharon replied 4 min later:** "Sharing the doc [workdocs link], could you please request access and I can accept?"
+- **Action:** Open Sharon's workdoc link and request access. Peter thanked her with `:ty-thankyou:`.
+- **Topics:** `ab-pd26-disclosure` (new, 1.0), `paid-app-marketing` (new, 1.0)
 
----
-
-## Channels skipped (Tier-3 / community / low-signal)
-
-Per slack-channel-registry.json v3.0 rules:
-- C08GJKNC3KM (amazon-builder-genai-power-users — 37k members)
-- C08T2E4KQPJ (amazon-builder-genai-power-users-digest)
-- C096H6QNW6M (bedrock-agentcore-interest)
-- C0A1JD8FCUV (agentspaces-interest — 18k)
-- C09LU3K7KS8 (cps-ai-win-share-learn — 5k)
-- C06M7R2SKQW (ask-ab-aryabot — bot Q&A)
-- D0A8FS0QLTU (dm-asana-bot — informational)
-- C018S3VS875, C02MKS0DPHD, C04PZR4S9M4, C04QY8RK3B3, C06N2T7G6S2, C080MFGQLHY, C08QB1BU62E, C096T4SK3EY, C0A1J4QG3CY (community / social / announcements — no Richard mentions)
-
-## Channels with no new messages in window
-- C065KKT53DJ (ab-paid-search-abix) — quiet
-- C05KTAAG14J (ab-paid-search-app) — quiet
-- C0A9HBB9H2B (baloo-interest) — quiet
-- C03H1S5SYP4 (ask-ab-data) — quiet
-- C0AQE73USF5 (mpdm brandoxy/bccho/prichwil) — quiet
-- C0AQQC767L4 (mpdm peteocam/vnichyp/prichwil) — quiet
-
-## Proactive search results
-- `prichwil after:2026-04-21 -in:#rsw-channel` → 0 hits (Slack indexing lag — captures in channel history)
-- `"Richard Williams" after:2026-04-21` → 0 hits
-- `from:@brandoxy after:2026-04-21` → 0 hits (same-day indexing artifact; all captured via channel history)
+### Brandon — Polaris Br-pages test method decision (ab-paid-search-abix)
+- **Channel:** C065KKT53DJ
+- **Time:** 2026-04-24 17:20Z (Fri morning)
+- **Message:** "awesome. Let me confirm to Dwayne and Richard can setup an alternate means of measurement"
+- **Richard mention:** YES (lowercase "richard")
+- **Context:** This closes the thread Brandon opened at 14:02Z asking Yunchu whether AU/MX Polaris pages lead to reg start. Yunchu confirmed yes at 14:32, and suggested Google Experiment instead of Weblab since data volume is too low for Weblab to converge. Brandon accepted that path — Yunchu reacted +1.
+- **What this means for Richard:** Dwayne can't run Weblab (control routing mismatch with MCS). Brandon is committing Richard to set up an alternate measurement method (Google Experiment per Yunchu) and hand off to AU. No deadline stated but implied short timeline given the AEO pressure behind Polaris.
+- **Polaris thread (ts 1777039370.274509) weekend activity: NO.** All movement was Friday 14:02–17:20Z. Thread is quiet through Saturday 18:50Z.
+- **Topic:** `polaris-brand-lp` (reinforced, Brandon/slack strength 2.25 → 2.75; overall topic-strength across channels still led by ab-paid-search-global row at 3.28)
 
 ---
 
-## Signal tracker reinforcements (this run)
+## By Channel (other signals)
 
-| Topic | Source | Strength | Δ | Mentions |
-|-------|--------|----------|---|----------|
-| mx-budget-ieccp | Yun-Kang Quip → WBR | 4.95 | +0.5 | 2 |
-| Alexis biweekly call scheduling confusion | Brandon DM | 3.20 | +0.5 | 4 |
-| AU handoff doc final review | Brandon DM | 3.20 | +0.5 | 4 |
-| wbr-callouts | Yun-Kang Quip | 1.40 | +0.5 | 2 |
-| kate-offsite-alexis-sync | Brandon DM | 1.00 | NEW | 1 |
-| au-weekly-review-ownership | Brandon DM | 1.00 | NEW | 1 |
-| kiro-weekly-change-aggregation | Richard DM | 1.00 | NEW | 1 |
-| wbr-mx-nb-drop | Quip bot | 1.50 | NEW | 1 |
-| babel-system-oss-marketing | ab-marketing-ai | 0.75 | NEW | 1 |
+### team-ab-marketing (C048VEWU7U3)
+- **Ruby Dinh, Fri 18:36Z:** OP1 2027 roundtable brainstorming invite — Onsite CX, PB, Selection & Value. Zoom + SEA meeting room options. [Quip link](https://quip-amazon.com/GCoZAQbWWmxd/OP1-2027-Round-table-Brainstorming-SSR-Central-Marketing-Partners). 2 reactions.
+- **Signal:** `op1-strategy` reinforced +0.5 → 2.29.
 
-Decay applied: 87 active signals decayed by 10%.
+### ask-ab-data (C03H1S5SYP4)
+- **Subbu Subramanian, Fri 20:33Z:** "How can I get the group admin for a group?" — standard Q, 2 replies by Saturday. Not Richard-relevant.
 
----
+### marketing_managers_all (C01NQLC114J)
+- **Ankit Dhingra, Fri 17:49Z:** Bumping WW Flex Marketing L6 PMM role (Bellevue/NY). Closing info chats mid next week. [Job link](https://atoz.amazon.work/jobs/role/10379862). FYI only.
 
-## Top 5 signals surfaced (by signal_strength)
+### agentspaces-interest (C0A1JD8FCUV) — L3-5 awareness
+- **Andy Hazlewood thread-broadcast from 3/31 resurged Fri PM:** AgentSpace 14-day lifetime limit enforcement is deploying — 7-day grace period, spaces older than 14 days cannot be restarted. 17 replies, 10 participants.
+- **Krishna Saini, Fri 15:02Z (broadcast):** Asks about multi-agent spaces and the 14-day window — "will that space be gone after 14 days of inactivity? agentspaces looks like solving most of the usecases".
+- **Implication for Richard's agent-bridge / body system:** Spaces are ephemeral. Portable body strategy (shared/ + agent-bridge + SharePoint) continues to matter. This is direct validation of the "survive a platform move with nothing but text files" mindset already in soul.md.
+- Plus ~20 support questions from strangers (IDE access, MCP setup, space failures, Midway auth). Skipped — noise.
 
-1. **mx-budget-ieccp** (4.95) — reinforced today by Yun-Kang on WBR callouts; needs Richard's NB-drop response before WBR
-2. **PAM Budget Availability** (4.95) — existing high-signal, not touched today
-3. **polaris-brand-lp** (4.05) — existing, not touched today
-4. **au-cpa-cvr** (3.60) — existing
-5. **AU handoff doc final review** (3.20) — active; just reinforced by Brandon DM cadence lock-in
+### ab-paid-search-app / ab-ps_partnership-accounts / ab-paid-search-global / rsw-channel / dm-aditthk / dm-quip-bot
+- No new messages in scan window.
+
+### dm-brandon (D044JAKR8RZ)
+- **Quiet.** No messages since last_ingested 2026-04-24T02:13Z. Brandon's only Slack touches were in shared channels above.
 
 ---
 
-## Today's top-3 action queue for Richard
+## Unanswered pings to Richard
+1. **Peter — PAM Primeday plan** (DM, Fri 20:26Z) — waiting on return
+2. **Peter — PD26 disclosure access** (MPDM, Fri 20:34Z) — Sharon shared workdoc link, needs Richard to request access
+3. **Brandon (implicit) — Polaris alt measurement setup** (ab-paid-search-abix, Fri 17:20Z) — Brandon committed Richard to action, no direct ping yet but Dwayne handoff is implied
 
-1. **Update AU handoff doc** reflecting biweekly cadence + 5/5 handoff + no-scheduled-calls-after. Post to callout document the reasoning. (Brandon acknowledged; Richard said he'd do it.)
-2. **Reply to Yun-Kang in Quip** on MX NB -19% — either a diagnostic note or a "looking into it, will follow up by EOD" so the WBR callout isn't unanswered.
-3. **Scope the Kiro weekly AU change aggregator** — Brandon explicitly asked for this oversight mechanism. Ship a v0 before 5/5 handoff to have it in place when calls end. (L3 tool win.)
+## Decisions captured
+- **Polaris Br-pages testing:** Weblab ruled out. Google Experiment is the path. AU/MX pages lead to reg start (confirmed by Yunchu), so control-routing-to-MCS constraint doesn't apply. Dwayne knows, Brandon is confirming, Richard owns setup.
+- **AgentSpaces lifecycle:** 14-day hard limit with 7-day grace is now active. Spaces older than 14 days cannot be restarted.
+
+## Signal reinforcements (top 5 by new strength)
+| Topic | Source/Author | Old → New strength | Reinforcement count |
+|---|---|---|---|
+| polaris-brand-lp | slack / Brandon Munday (ab-paid-search-abix) | 2.25 → 2.75 | 1 → 2 |
+| op1-strategy | hedy / Team (reinforced from team-ab-marketing invite) | 1.79 → 2.29 | 3 → 4 |
+| pam-primeday | slack / Peter Ocampo | — → 1.0 (NEW) | 0 → 1 |
+| ab-pd26-disclosure | slack / Peter Ocampo | — → 1.0 (NEW) | 0 → 1 |
+| paid-app-marketing | slack / Peter Ocampo | — → 1.0 (NEW) | 0 → 1 |
+| agentspace-lifecycle | slack / Andy Hazlewood | — → 0.75 (NEW, L3-5) | 0 → 1 |
+
+## Failures / notes
+- Proactive searches (`from:@prichwil`, `from:@brandoxy`, `from:@kataxt`, `prichwil`) all returned 0 results in the 24h window — expected given Richard's OOO Fri and quiet Saturday.
+- Decay step skipped (already applied 2026-04-25 16:33:50Z during the morning 302-outage run).
+- 1 initially-queued thread reply fetch failed (`1777039370.000000` — wrong ts). Re-fetched with correct ts `1777039370.274509` and confirmed 0 replies (Brandon's direct-ask to Yunchu is thread-less; Yunchu's answers came as new channel messages).

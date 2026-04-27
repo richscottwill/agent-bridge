@@ -1,0 +1,95 @@
+# Qualitative Priors Catalog — MPE v1.1 Slim Phase 6.5.1
+# Fourth Brand evidence stream (alongside seasonal + trend + regime).
+#
+# When a scenario is explicitly selected, W_qualitative is bumped to 0.20
+# (from default 0.05) and the other streams proportionally rebalance.
+#
+# Each entry has:
+#   name                 (key)
+#   description          (1-line human-readable, shown in UI tooltip)
+#   trajectory_modifier  (per-week multiplier function spec)
+#   applicable_markets   (list of market codes, or ["*"] for all)
+#   w_qualitative_on_select  (weight when explicitly picked; default 0.20)
+#
+# The engine reads this once at init. Adding a scenario requires no code
+# change — just append a new entry here.
+
+scenarios:
+
+  # ----- defaults -----
+  - name: current_regime_continues
+    description: "Default engine fit — rely on regime_fit_state decay + seasonal + trend as-is."
+    trajectory_modifier:
+      type: flat
+      multiplier: 1.0
+    applicable_markets: ["*"]
+    w_qualitative_on_select: 0.00   # no extra weight — this IS the baseline
+
+  # ----- MX Sparkle scenarios -----
+  - name: sparkle_sustained
+    description: "Sparkle campaign lift held flat through the projection period — no decay."
+    trajectory_modifier:
+      type: step_hold
+      anchor_week_id: 14                # 2026-W14 = Sparkle onset
+      held_multiplier_relative: 1.0     # maintain the same lift ratio as at anchor week
+    applicable_markets: ["MX"]
+    w_qualitative_on_select: 0.20
+
+  - name: sparkle_decays_13w
+    description: "Sparkle campaign lift decays with 13-week half-life (fast decay)."
+    trajectory_modifier:
+      type: exponential_decay
+      anchor_week_id: 14
+      half_life_weeks: 13
+    applicable_markets: ["MX"]
+    w_qualitative_on_select: 0.20
+
+  - name: sparkle_decays_26w
+    description: "Sparkle campaign lift decays with 26-week half-life (default decay assumption)."
+    trajectory_modifier:
+      type: exponential_decay
+      anchor_week_id: 14
+      half_life_weeks: 26
+    applicable_markets: ["MX"]
+    w_qualitative_on_select: 0.20
+
+  - name: sparkle_decays_52w
+    description: "Sparkle campaign lift decays with 52-week half-life (slow decay)."
+    trajectory_modifier:
+      type: exponential_decay
+      anchor_week_id: 14
+      half_life_weeks: 52
+    applicable_markets: ["MX"]
+    w_qualitative_on_select: 0.20
+
+  # ----- universal scenarios (any market) -----
+  - name: new_placement_landing
+    description: "User-specified step-up at specified week (new ad placement/unit going live)."
+    trajectory_modifier:
+      type: step_up
+      onset_week_id: null                # user-set via scenario params
+      uplift_pct: null                   # user-set via scenario params
+      sustain: true
+    applicable_markets: ["*"]
+    w_qualitative_on_select: 0.20
+    requires_scenario_params: ["onset_week_id", "uplift_pct"]
+
+  - name: oci_coming
+    description: "Pending OCI launch lifts Brand baseline at specified week."
+    trajectory_modifier:
+      type: step_up
+      onset_week_id: null                # user-set
+      uplift_pct: 0.15                   # default OCI uplift; override via scenario params
+      sustain: true
+    applicable_markets: ["*"]
+    w_qualitative_on_select: 0.20
+    requires_scenario_params: ["onset_week_id"]
+
+  # ----- AU-specific -----
+  - name: polaris_retained
+    description: "Skip scheduled Polaris LP reversion — assume AU Polaris holds."
+    trajectory_modifier:
+      type: skip_regime_event
+      regime_id_hint: "polaris"
+    applicable_markets: ["AU"]
+    w_qualitative_on_select: 0.20

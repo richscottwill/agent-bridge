@@ -1,14 +1,109 @@
 {
-  "generated_at": "2026-04-22T13:40:00Z",
-  "generated_by": "am-backend-2026-04-22",
-  "my_tasks": [
-    {"task_gid": "1213230198995937", "name": "WW redirect - Existing customer reporting in Adobe Ad Cloud", "proposed": {"priority_rw": "Not urgent", "routine_rw": "Sweep", "kiro_rw": "4/22: 44d overdue, no routine/priority. Kill candidate — check if redirect reporting is still relevant post-Adobe migration.", "next_action_rw": "Decide: kill or reframe with fresh scope. 5-min review."}, "reason": "no_routine_overdue_44d"},
-    {"task_gid": "1214080130329568", "name": "Make changes to AU/MX/PAM for the week", "proposed": {"priority_rw": "Urgent", "routine_rw": "Engine Room", "kiro_rw": "4/22: 28d overdue. Ongoing BAU. Should be recurring weekly task, not one-off.", "next_action_rw": "Convert to recurring weekly or close + create new weekly instance."}, "reason": "no_routine_overdue_28d_bau"},
-    {"task_gid": "1213817111703805", "name": "It's time to update your goal(s)", "proposed": {"priority_rw": "Urgent", "routine_rw": "Admin", "kiro_rw": "4/22: 19d overdue. Brandon email reminder still open from 4/6.", "next_action_rw": "Update monthly goal recap in Loop doc — 15 min."}, "reason": "no_routine_brandon_reminder"},
-    {"task_gid": "1213798673865639", "name": "Update and close your goal(s)", "proposed": {"priority_rw": "Urgent", "routine_rw": "Admin", "kiro_rw": "4/22: 19d overdue. Pairs with 1213817111703805 — likely same Brandon 4/6 reminder.", "next_action_rw": "Close alongside monthly goal update — merge if duplicate."}, "reason": "no_routine_brandon_reminder_pair"},
-    {"task_gid": "1213959904341162", "name": "Reply to Brandon — PAM budget needs assessment", "proposed": {"priority_rw": "Today", "routine_rw": "Sweep", "kiro_rw": "4/22: 16d overdue. Brandon's $Extra PAM $ question (18.6d in Slack) unanswered. BLOCKS Paid App PO work.", "next_action_rw": "Reply to Brandon in Slack with reg impact numbers from Paid App tracker — 20 min."}, "reason": "no_routine_blocks_critical_slack"},
-    {"task_gid": "1213875146955582", "name": "Get Enhanced Match details", "proposed": {"priority_rw": "Urgent", "routine_rw": "Sweep", "kiro_rw": "4/22: 15d overdue. Prereq for Brandon-assigned 'Measure EM impact' (4/21 assignment, F90 LR).", "next_action_rw": "Ping tech PM for EM details doc + rollout timeline — 10 min."}, "reason": "no_routine_blocks_brandon_assignment"},
-    {"task_gid": "1213968042348601", "name": "Deep Dive: Add IECCP FAQ to new account playbook", "proposed": {"priority_rw": "Not urgent", "routine_rw": "Core", "kiro_rw": "4/22: 13d overdue. Deep Dive output — pairs with IECCP follow-up to Lorena.", "next_action_rw": "Fold into IECCP reply to Lorena as a byproduct — draft FAQ from Q2 files."}, "reason": "no_routine_ties_to_ieccp"}
-  ],
-  "counts": {"proposed": 7, "approval_required": false}
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-04-25T19:00:00Z",
+  "generated_at_pt": "2026-04-25 12:00:00 PT",
+  "run_type": "am-backend-parallel-v2",
+  "completeness": "full_for_active_streams",
+  "completeness_note": "Slack, Email, Calendar, Asana all ingested this retry pass. Loop/Hedy still deferred. Proposals below reflect real fresh data, not carry-forward placeholders.",
+  "my_tasks": {
+    "proposals": [
+      {
+        "task_gid": "1213341921686564",
+        "task_name": "Testing Document for Kate",
+        "field": "Kiro_RW",
+        "current_value": "4/24 OOO: 23d overdue, workdays at zero=22→23 (OOO counts as workday). v5 still unsent since 4/5. THE HARD THING reinstated after 4/22 polaris-brand-lp anomaly. 10-min send, not a work session. Monday first action.",
+        "proposed_value": "4/25 Sat / RW returning from OOO Monday 4/27. 23d overdue. 3 workdays at zero (OOO + weekend don't count). v5 PUBLISH verdict since 4/5 = 20d unsent. HARD THING. Monday AM BEFORE PO FAQ, BEFORE anything else: apply 5 fixes + 2-sentence cover + hit send. 10 min, then unblock the rest of the week.",
+        "reason": "Refresh re-entry framing with accurate day counts and sequence PO FAQ below the hard thing."
+      },
+      {
+        "task_gid": "1213959904341162",
+        "task_name": "Reply to Brandon — PAM budget needs assessment",
+        "field": "status",
+        "current_value": "open",
+        "proposed_value": "close — superseded by PO #2D-19910168 FAQ request (4/24 email)",
+        "reason": "This 18d-old task was Brandon's original PAM budget question (4/2 ping). Brandon never re-pinged — he converted it into the PO #2D-19910168 change request via Ashley Yi (4/23). The new asana task 1214218448412299 ('US H2 PAM PO - ') IS the follow-on, and the email-triage HIGH item (PO FAQ) is the live ask. Closing this prevents double-tracking.",
+        "safe_close_check": "Confirmed no separate PAM re-ping in slack or email. The PO change request covers it. If Richard wants to keep a retrospective footnote, add to Kiro_RW note before closing."
+      },
+      {
+        "task_gid": "1214218448412299",
+        "task_name": "US H2 PAM PO - ",
+        "field": "Kiro_RW",
+        "current_value": null,
+        "proposed_value": "Brandon 4/24 email: PO going $74,160 → $218,241 (+$144K). Stuck on Brandon + Luda + Jagan pending FAQ. Draft FAQ Monday AM (60 min), attach in Coupa, ping Brandon. Bring confirmation to Tue 4/28 1:30 PM 1:1. This is THE unblock that turns Brandon from 'unanswered ask' to 'progress reported'.",
+        "reason": "Surface context so Monday AM the agent doesn't have to re-read the email thread to understand what's needed."
+      },
+      {
+        "task_gid": "1214216689942612",
+        "task_name": "It's time to update your goal(s)",
+        "field": "Priority_RW",
+        "current_value": "Today",
+        "proposed_value": "Not urgent",
+        "reason": "Asana auto-generated goal-update reminder. 10 goals need status updates. This is Admin/housekeeping, not Today-urgent. Demote to Not urgent, batch it with the other overdue 'update goals' task (1213798673865639) on Friday week-close slot."
+      }
+    ],
+    "new_tasks_to_create": [
+      {
+        "name": "Draft PO #2D-19910168 FAQ + attach in Coupa + ping Brandon",
+        "project": "My Tasks",
+        "routine_rw": "Admin",
+        "priority_rw": "Today",
+        "due_on": "2026-04-27",
+        "notes": "Brandon email 4/24 10:08 AM PT. PO $74K → $218K (+$144K). FY26 US PAM / Google. Approval stuck on Brandon + Luda + Jagan. Link: https://amazon.coupahost.com/order_headers/19910168/order_header_change. Use MBET/Coupa new PO process template from Ashley Yi's 4/24 email as format reference. Deadline: Tue 4/28 1:30 PM PT Brandon 1:1.",
+        "source": "email_brandon_4-24_17-08 (HIGH-priority)"
+      },
+      {
+        "name": "Polaris Brand LP: Set up Google Experiment alt-measurement + draft AU handoff doc",
+        "project": "WW Testing (primary) + MX + AU",
+        "routine_rw": "Core",
+        "priority_rw": "Urgent",
+        "due_on": "2026-04-29",
+        "notes": "Brandon committed Richard on 4/24 Slack thread (C065KKT53DJ/1777039370.274509): 'Richard can setup an alternate means of measurement.' Yunchu confirmed Weblab won't work because AU/MX direct-to-reg-start breaks MCS control requirement. Google Experiment is the recommended path. Handoff doc needed before 5/5 AU transition.",
+        "source": "slack_brandon_4-24"
+      },
+      {
+        "name": "DM Peter Ocampo: PAM Primeday budget + YoY + projected impressions/taps/installs",
+        "project": "My Tasks",
+        "routine_rw": "Sweep",
+        "priority_rw": "Today",
+        "due_on": "2026-04-27",
+        "notes": "New MPDM C0AV6BWRMDG this weekend. Peter needs PAM Primeday plan. Pull Paid App tracker for baseline + pd26 projections.",
+        "source": "slack_peter_mpdm_weekend"
+      },
+      {
+        "name": "Request access to Sharon's PD26 dates workdoc",
+        "project": "My Tasks",
+        "routine_rw": "Sweep",
+        "priority_rw": "Today",
+        "due_on": "2026-04-27",
+        "notes": "From Peter MPDM — needed to build Primeday plan accurately.",
+        "source": "slack_peter_mpdm_weekend"
+      }
+    ],
+    "completions_to_reconcile": [
+      {"task_gid": "1213917967984980", "name": "Respond to Lena — AU LP URL analysis", "completed_utc": "2026-04-22T18:47:07Z", "action": "marked_complete_in_db_this_run"},
+      {"task_gid": "1214128635826241", "name": "Reply to Dwayne: Brand LP feedback", "completed_utc": "2026-04-21T00:31:52Z", "action": "marked_complete_in_db_this_run"}
+    ],
+    "db_cleanup_this_run": {
+      "soft_deleted_stale_gids": 38,
+      "note": "DB had 38 open tasks for Richard that weren't in today's live Asana roster. Most were completed over the past week without making it into prior syncs. Now flagged deleted_at."
+    }
+  },
+  "portfolio": {
+    "proposals": [
+      {
+        "task_gid": "1214218448412294",
+        "task_name": "39K IT PO was put into US PAM campaign. Change to IT.",
+        "project": "Paid App",
+        "field": "Begin-Date_RW",
+        "current_value": "2026-04-26",
+        "proposed_value": "2026-04-27",
+        "reason": "Begin date is today (Saturday) but Richard is OOO. Shift to Monday so it surfaces correctly in My Day."
+      }
+    ],
+    "note": "Shallow portfolio scan only — full GetStatusUpdatesFromObject + per-project task sweep deferred to Monday's weekly refit."
+  },
+  "bucket_cap_snapshot": {
+    "note": "Live Asana shows 73 open tasks for Richard. Full bucket-cap computation requires GetTaskDetails on all 73 to read Routine_RW — deferred to Monday weekly refit.",
+    "projected_cap_state": "Bucket caps were: Engine Room 22/6 (+16), Core 11/4 (+7), Sweep 11/5 (+6), Admin 6/3 (+3). Net delta over the weekend is likely +2-3 new Admin (PO tasks) offset by -2-3 completions. Still severely over-cap across the board — Monday triage slot needed."
+  }
 }

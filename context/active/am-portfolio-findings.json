@@ -1,42 +1,60 @@
 {
-  "generated_at": "2026-04-22T14:45:00Z",
-  "generated_by": "am-backend-remediation-2026-04-22",
-  "portfolios": {
-    "WW_Testing": {"project_gid": "1205997667578893", "overdue_count": 5, "near_due_count": 3, "status": "yellow", "last_update": "never", "notes": "No Asana status updates on file. Active: Polaris Brand LP (HARD THING #1), Email overlay WW, F90 LR Enhanced Match, MX Polaris NB LP, Baloo Testing US, WW weblab dial-up, WW keyword gap, Sitelink audit."},
-    "AU": {"project_gid": "1212762061512767", "overdue_count": 2, "near_due_count": 1, "status": "green", "last_update": "never", "notes": "5/5 final handoff locked 4/21 per Brandon. AU handover + Lena reply pending close. Kiro weekly AU change aggregator scoped not built."},
-    "Paid_App": {"project_gid": "1205997667578886", "overdue_count": 2, "near_due_count": 1, "status": "yellow", "last_update": "never", "notes": "Q2 PO still blocked on Brandon PAM budget reply (18.7d unanswered Slack). Monthly budget confirmation due 5/5."},
-    "MX": {"project_gid": "1212775592612917", "overdue_count": 3, "near_due_count": 2, "status": "red", "last_update": "never", "notes": "Pacing 128.8% regs / 150.1% spend vs OP2 — overspent. Yun-Kang WBR question blocks publish. Andes data blocked 35d (Kingpin goals), Vijeth footer blocked 32d (MX Auto page)."}
-  },
-  "status_update_staleness": {
-    "note": "All 4 projects show zero status updates ever. Brandon should post at least quarterly status updates — flag for next 1:1.",
-    "recommended_action": "Propose to Brandon: quarterly project status cadence matching QBR rhythm."
-  },
-  "portfolio_alerts": {
-    "near_due": [
-      {"task_gid": "1213125740755931", "name": "Email overlay WW rollout/testing", "due_on": "2026-04-24", "days_left": 2, "context": "Brandon's overlay ask from Outbound Marketing Goals"},
-      {"task_gid": "1214152376052925", "name": "F90 - LR Enhanced Match", "due_on": "2026-04-24", "days_left": 2, "context": "Brandon-assigned 4/21, Measure EM impact subtask"}
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-04-25T19:00:00Z",
+  "generated_at_pt": "2026-04-25 12:00:00 PT",
+  "run_type": "am-backend-parallel-v2",
+  "scan_depth": "shallow_post_retry",
+  "scan_depth_note": "Asana B1 delta sync completed (73 live open, 71 in DB after cleanup, 38 stale soft-deleted). Full GetStatusUpdatesFromObject + per-project sweep deferred to Monday weekly refit.",
+  "findings": {
+    "near_due_escalations": [
+      {
+        "task_gid": "1214218448412299",
+        "name": "US H2 PAM PO - ",
+        "project": "My Tasks",
+        "priority": "Today",
+        "routine": "Sweep",
+        "begin_date": "2026-04-23",
+        "why": "This is Richard's side of the PO #2D-19910168 FAQ ask. Created 4/23, Begin date 4/23, still open. Monday is the closure day.",
+        "suggested": "act Monday AM as part of FAQ draft task"
+      },
+      {
+        "task_gid": "1214218448412294",
+        "name": "39K IT PO was put into US PAM campaign. Change to IT.",
+        "project": "Paid App",
+        "priority": "Urgent",
+        "routine": "Sweep (Low-friction)",
+        "due_on": "2026-04-27",
+        "begin_date": "2026-04-26",
+        "why": "Due Monday. Budget reclassification — $39K was put in US PAM when it should be IT.",
+        "suggested": "act Monday"
+      },
+      {
+        "task_gid": "1214216689942612",
+        "name": "It's time to update your goal(s)",
+        "project": "My Tasks",
+        "priority": "Today",
+        "due_on": "2026-04-24",
+        "note": "Asana auto-reminder for 10 goals. Already overdue 1d. Demote priority (see enrichment queue) + batch with existing overdue goal-update task."
+      }
     ],
-    "critical_overdue": [
-      {"task_gid": "1212988092117041", "name": "Paid App", "days_overdue": 22, "priority_rw": "Urgent", "context": "W7 IT paused 22% tax. Pivoting FR. PAM budget blocked on Brandon."},
-      {"task_gid": "1213917967984980", "name": "Respond to Lena — AU LP URL analysis", "days_overdue": 19, "priority_rw": "Today", "context": "Richard sent reply overnight 4/21 per notes. Confirm + close today."},
-      {"task_gid": "1213764961716427", "name": "WW weblab dial-up (Richard)", "days_overdue": 15, "priority_rw": "Urgent", "context": "Polaris WW dial-up milestone. Part of polaris-brand-lp hard thing cluster."}
+    "overdue_7plus_kill_or_revive": [
+      {"task_gid": "1213341921686564", "name": "Testing Document for Kate", "days_overdue": 23, "project": "WW Testing", "suggested": "revive — HARD THING, 10-min send", "note": "Monday top-1 action"},
+      {"task_gid": "1213959904341162", "name": "Reply to Brandon — PAM budget needs assessment", "days_overdue": 19, "project": "My Tasks", "suggested": "CLOSE — superseded by PO #2D-19910168", "note": "See enrichment proposal to close"},
+      {"task_gid": "1213764961716427", "name": "WW weblab dial-up (Richard)", "days_overdue": 18, "project": "WW Testing", "suggested": "revive or close"},
+      {"task_gid": "1213875146955582", "name": "Get Enhanced Match details", "days_overdue": 18, "project": "My Tasks", "suggested": "revive — linked to Brandon EM FAQ ask (1213964668984060)"},
+      {"task_gid": "1212760973200434", "name": "F90", "days_overdue": "multi-week", "project": "My Tasks", "suggested": "clarify or close"},
+      {"task_gid": "1214080130329568", "name": "Make changes to AU/MX/PAM for the week", "days_overdue": 31, "project": "My Tasks", "suggested": "revive (recurring; needs routine tagging)"},
+      {"task_gid": "1214146145384078", "name": "ESCALATE: Kingpin Goals MX — Andes data blocked 35 days", "days_overdue": "35+", "project": "My Tasks", "suggested": "escalate in Brandon 1:1"},
+      {"task_gid": "1214145907193550", "name": "ESCALATE: MX Auto page — Vijeth footer blocked 32 days", "days_overdue": "32+", "project": "My Tasks", "suggested": "escalate — cross-team blocker"}
     ],
-    "budget_criticals": [
-      {"task_gid": "1214088494080582", "name": "Resolve MX duplicate invoice — Diana ($56K, PO Q1 MS-20200908)", "priority_rw": "Urgent"},
-      {"task_gid": "1212808474749819", "name": "Paid App PO — Create Q2 + Amend Google PO to Q2", "days_overdue": 8, "blocker": "Brandon PAM budget reply (18.7d unanswered)"}
-    ],
-    "cross_team_blockers": [
-      {"task_gid": "1214146145384078", "name": "ESCALATE: Kingpin Goals MX — Andes data blocked 35 days", "market": "MX"},
-      {"task_gid": "1214145907193550", "name": "ESCALATE: MX Auto page — Vijeth footer blocked 32 days", "market": "MX"}
-    ]
+    "completions_reconciled_this_run": 2,
+    "stale_db_rows_soft_deleted_this_run": 38,
+    "new_tasks_from_live_vs_yesterday_db": 14
   },
-  "pacing_alert": {
-    "MX": {"regs_pct": 128.8, "cost_pct": 150.1, "status": "OVERSPENT", "action": "Forecast decay needed before 10am PT Brandon send"},
-    "AU": {"regs_pct": 38.2, "cost_pct": 36.2, "status": "normal_early_month"}
+  "project_status_staleness": {
+    "note": "Not checked this run — GetStatusUpdatesFromObject deferred to Monday weekly refit."
   },
-  "hard_thing_cluster": {
-    "primary": "polaris-brand-lp (score 25.9, valuable-and-avoided, 4 channels)",
-    "related_tasks": ["1213764961716427 WW weblab dial-up", "1213493347703132 MCS landing page optimization P1", "1214044682239817 MX Polaris NB LP Test", "1214081017124426 MCS LP Review"],
-    "note": "From DuckDB signals.wiki_candidates + main.hard_thing_now. Polaris is the organic cross-channel signal Richard has produced zero referenceable artifact on."
+  "market_context_refresh": {
+    "note": "Not executed this run — AU/MX Context_Task notes refresh deferred to Monday weekly refit. Flag: Brandon's 4/24 polaris-brand-lp commitment to Richard should be reflected in AU Market Context by Monday EOD."
   }
 }

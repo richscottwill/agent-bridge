@@ -1,0 +1,165 @@
+{
+  "generated": "2026-04-27T02:28:12.559292",
+  "period": "Y2026",
+  "per_market": {
+    "MX": {
+      "outcome": "OK",
+      "target_mode": "ieccp",
+      "target_value": 1.0,
+      "total_regs": 29852.54,
+      "total_spend": 1766957.97,
+      "brand_regs": 23604.06,
+      "nb_regs": 6248.48,
+      "blended_cpa": 59.19,
+      "ieccp": 71.62,
+      "warnings_count": 4,
+      "n_regimes": 2
+    },
+    "US": {
+      "outcome": "OK",
+      "target_mode": "ieccp",
+      "target_value": 0.65,
+      "total_regs": 444169.58,
+      "total_spend": 46082022.08,
+      "brand_regs": 135582.16,
+      "nb_regs": 308587.43,
+      "blended_cpa": 103.75,
+      "ieccp": 65.0,
+      "warnings_count": 3,
+      "n_regimes": 3
+    },
+    "CA": {
+      "outcome": "OK",
+      "target_mode": "ieccp",
+      "target_value": 0.65,
+      "total_regs": 40469.61,
+      "total_spend": 3570081.87,
+      "brand_regs": 23817.22,
+      "nb_regs": 16652.39,
+      "blended_cpa": 88.22,
+      "ieccp": 64.97,
+      "warnings_count": 3,
+      "n_regimes": 2
+    },
+    "UK": {
+      "outcome": "OK",
+      "target_mode": "ieccp",
+      "target_value": 0.65,
+      "total_regs": 68681.39,
+      "total_spend": 5789956.1,
+      "brand_regs": 25189.08,
+      "nb_regs": 43492.3,
+      "blended_cpa": 84.3,
+      "ieccp": 65.01,
+      "warnings_count": 4,
+      "n_regimes": 3
+    },
+    "DE": {
+      "outcome": "OK",
+      "target_mode": "ieccp",
+      "target_value": 0.65,
+      "total_regs": 69279.12,
+      "total_spend": 9860761.5,
+      "brand_regs": 35811.3,
+      "nb_regs": 33467.82,
+      "blended_cpa": 142.33,
+      "ieccp": 64.98,
+      "warnings_count": 1,
+      "n_regimes": 3
+    },
+    "FR": {
+      "outcome": "OK",
+      "target_mode": "ieccp",
+      "target_value": 0.65,
+      "total_regs": 61101.55,
+      "total_spend": 4335382.64,
+      "brand_regs": 20905.66,
+      "nb_regs": 40195.89,
+      "blended_cpa": 70.95,
+      "ieccp": 65.02,
+      "warnings_count": 2,
+      "n_regimes": 3
+    },
+    "IT": {
+      "outcome": "OK",
+      "target_mode": "ieccp",
+      "target_value": 0.65,
+      "total_regs": 63802.39,
+      "total_spend": 5262878.84,
+      "brand_regs": 37402.6,
+      "nb_regs": 26399.79,
+      "blended_cpa": 82.49,
+      "ieccp": 64.95,
+      "warnings_count": 4,
+      "n_regimes": 5
+    },
+    "ES": {
+      "outcome": "OK",
+      "target_mode": "ieccp",
+      "target_value": 0.65,
+      "total_regs": 38959.68,
+      "total_spend": 2843277.87,
+      "brand_regs": 17948.3,
+      "nb_regs": 21011.38,
+      "blended_cpa": 72.98,
+      "ieccp": 65.01,
+      "warnings_count": 4,
+      "n_regimes": 3
+    },
+    "JP": {
+      "outcome": "OK",
+      "target_mode": "spend",
+      "target_value": 5000000,
+      "total_regs": 29539.29,
+      "total_spend": 5000000.0,
+      "brand_regs": 29236.98,
+      "nb_regs": 302.31,
+      "blended_cpa": 169.27,
+      "ieccp": 75.93,
+      "warnings_count": 2,
+      "n_regimes": 2
+    },
+    "AU": {
+      "outcome": "OK",
+      "target_mode": "spend",
+      "target_value": 500000,
+      "total_regs": 9123.33,
+      "total_spend": 661357.61,
+      "brand_regs": 5621.39,
+      "nb_regs": 3501.93,
+      "blended_cpa": 72.49,
+      "ieccp": null,
+      "warnings_count": 5,
+      "n_regimes": 1
+    }
+  },
+  "per_region": {
+    "NA": {
+      "outcome": "OK",
+      "target_mode": "rollup",
+      "target_value": 0,
+      "total_regs": 484639.19,
+      "total_spend": 49652103.95,
+      "ieccp": 64.99,
+      "n_constituent_markets": 2
+    },
+    "EU5": {
+      "outcome": "OK",
+      "target_mode": "rollup",
+      "target_value": 0,
+      "total_regs": 301824.12,
+      "total_spend": 28092256.95,
+      "ieccp": 64.99,
+      "n_constituent_markets": 5
+    },
+    "WW": {
+      "outcome": "OK",
+      "target_mode": "rollup",
+      "target_value": 0,
+      "total_regs": 854798.43,
+      "total_spend": 82047680.88,
+      "ieccp": 63.77,
+      "n_constituent_markets": 10
+    }
+  }
+}

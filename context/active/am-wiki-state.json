@@ -1,9 +1,43 @@
 {
-  "generated_at": "2026-04-22T13:40:00Z",
-  "pipeline_counts": {"draft": null, "review": null, "final": null, "published": null, "note": "wiki pipeline state not queried — not blocking AM"},
-  "stale_final_articles": [],
-  "wiki_candidates_top": [
-    {"topic": "kiro-weekly-au-change-aggregator", "strength": 1.0, "note": "Brandon explicitly asked for this in 4/21 1:1 — L3 tool opportunity. New, not yet strong enough for full article but monitor."}
-  ],
-  "note": "Full wiki maintenance runs weekly via wiki-maintenance.kiro.hook — not duplicated here."
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-04-25T19:00:00Z",
+  "generated_at_pt": "2026-04-25 12:00:00 PT",
+  "run_type": "am-backend-parallel-v2",
+  "completeness": "partial",
+  "partial_reason": "Wiki search index rebuild succeeded (local-only, ran in morning pass). SharePoint drift check + published .docx refresh still skipped — SharePoint MCP blocked on KMSI Step-8 even after mwinit. Needs mwinit -f.",
+  "wiki_index_rebuild": {
+    "status": "complete_from_morning_run",
+    "timestamp_utc": "2026-04-25T16:38:55Z",
+    "output_path": "/shared/user/dashboards/data/wiki-search-index.json",
+    "markdown_files_scanned": 530,
+    "unique_documents": 301,
+    "grouped_documents": 180,
+    "archived_documents": 49,
+    "document_groups": 26,
+    "backlinks": {"docs_with_related": 451, "total_links": 3130, "unique_tags": 224},
+    "wiki_index_md": "/shared/user/wiki/agent-created/_meta/wiki-index.md (97 articles, 46 published, 1 stale)"
+  },
+  "stale_final_articles": {
+    "note": "Cannot compute definitively without SharePoint drift check. Wiki index local metadata flags 1 stale by modification-time heuristic."
+  },
+  "sharepoint_drift": {
+    "status": "skipped",
+    "reason": "SharePoint MCP KMSI Step-8 failure blocks sharepoint_list_files / sharepoint_read_file calls. Would fail identically to Loop MCP.",
+    "fix_required": "mwinit -f (forced/browser flow)"
+  },
+  "new_article_candidates": {
+    "from_signals_this_run": [
+      {
+        "topic": "mcp-auth-failure-playbook",
+        "proposed_slug": "operations/mcp-auth-failure-playbook",
+        "rationale": "This weekend surfaced three distinct MCP auth failure modes: Midway cookie absence (fixed with mwinit), Slack proxy 302 outage (self-recovered), KMSI Step-8 handshake change (needs mwinit -f). Agent needs a systematic diagnosis doc mapping symptoms → root cause → fix.",
+        "urgency": "medium — pattern will recur"
+      }
+    ],
+    "from_signals_tracker": [
+      {"topic": "polaris-brand-lp", "strength": 16.22, "channel_spread": 4, "has_existing": "partial (polaris-lp-testing/polaris-launch-review — needs consolidation)", "status": "watch — likely Monday activity"},
+      {"topic": "mx-budget-ieccp", "strength": 6.76, "has_existing": "covered in MX state file"},
+      {"topic": "pam-primeday", "strength": 1.00, "has_existing": "unknown", "status": "emerging — Peter MPDM"}
+    ]
+  }
 }

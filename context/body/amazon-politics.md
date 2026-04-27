@@ -12,41 +12,41 @@ Last updated: 2026-04-14
 ## 1. Promotion Mechanics
 
 ### How Promotions Actually Work
-- Two paths: **lifetime achievement** (grind the process) or **outsized event** (high-risk bet that pays off). Outsized event is faster.
-- The promo narrative that wins: "Without [person], [outcome] wouldn't have happened." That's the line your packet needs.
-- Failed risks are recoverable; playing it safe is slower. Evans regrets not taking MORE risks.
-- Evans' VP promotion: 2.5 years of deliberate stakeholder alignment. His VP was reorged 6 months after — six months later and the promo would have reset. Timing is load-bearing.
+- Two paths: **lifetime achievement** (grind the process, 3+ years of steady L5 execution) or **outsized event** (high-risk bet that pays off, compresses timeline to 12-18 months). Outsized event is faster but requires a visible, attributable artifact.
+- The promo narrative that wins: "Without [person], [outcome] wouldn't have happened." That single sentence is what your packet needs to prove.
+- Failed risks are recoverable — Evans says he regrets not taking MORE risks. Playing it safe is the slower, less certain path.
+- Evans' VP promotion: 2.5 years of deliberate stakeholder alignment. His VP was reorged 6 months after — six months later and the promo would have reset entirely. Timing is load-bearing: the window can close without warning.
 
 **Worked example — outsized event path:** Richard's Testing Approach doc could be the outsized event. If it becomes the WW testing methodology, the promo narrative writes itself: "Without Richard, the WW testing framework wouldn't exist." The lifetime achievement alternative: grind L5 tasks for 3+ years and hope the queue moves. The outsized event compresses the timeline.
 
 ### The Magic Loop (Manager Partnership)
-- Core deal: "I'll do everything you need done. You do one critical thing — make sure I'm rewarded for it."
-- Managers WANT to promote you — more directors = easier job. But they can't do it FOR you.
-- No skip-level override on promotions — it creates too much mess. If your manager doesn't support it, it won't happen.
-- Find managers known for getting people promoted. That's a recruiting tool and a career accelerator.
+- Core deal stated explicitly: "I'll do everything you need done. You do one critical thing — make sure I'm rewarded for it."
+- Managers WANT to promote you — more directors under them = easier job, more influence. But they can't do it FOR you; you must build the case.
+- No skip-level override on promotions — it creates too much organizational mess. If your direct manager doesn't actively support it, the promotion won't happen regardless of skip-level enthusiasm.
+- Seek out managers known for getting people promoted. That reputation is both a recruiting tool for them and a career accelerator for you.
 
 ### The Polite Fiction for Asking
 - Evans' exact words: "My career is very important to me. I need to understand how important it is to Amazon, because if it's not as important to Amazon as it is to me, I need to think about that."
-- Why it works: Can't argue career shouldn't matter. "Think about that" implies leaving without direct threat. Delivered warmly, not aggressively.
-- Prepare key phrases BEFORE the conversation. Don't improvise the critical line.
-- Body language matters as much as words. Same sentence with warmth vs. edge produces opposite reactions.
+- Why it works: Can't argue career shouldn't matter. "Think about that" implies leaving without making a direct threat. Must be delivered warmly, not aggressively — body language flips the meaning.
+- Prepare key phrases BEFORE the conversation. The critical moment is not the time to improvise.
+- Same sentence delivered with warmth vs. edge produces opposite reactions. Practice the delivery, not just the words.
 
 ### Headcount Thresholds (Director+)
 - Director threshold: ~80-90 reports (written down post-Evans era, was informal before).
 - LP says "no bonus for additional headcount" but the threshold creates a several-hundred-thousand-dollar incentive to accumulate people.
-- Leaders have temporarily moved reports under someone to hit the threshold, then moved them back. The system enables gaming.
-- Grace period if you drop below: 6-9 months to tell a growth story.
+- Leaders have temporarily moved reports under someone to hit the threshold, then moved them back after crossing it. The system enables gaming.
+- Grace period if you drop below: 6-9 months to tell a growth story before the title is at risk.
 
 ### Champions / Feedback Providers
 - Best approach: manager emails peers/skips 6 months early: "Ryan's coming up for promotion. I'll need your feedback. You have 6 months to observe."
-- Over-subscribe: Need 4 champions? Ask 6-7. People leave, get reorged, or say no.
-- If manager won't do it, go yourself: "I'm up for promotion. My manager will likely ask you for feedback. What can we do over the next 6 months so you're in a natural position to provide it?"
-- Frame as: "I'm trying to do this right and talk to you 6 months in advance" — shows maturity vs. last-minute scramble.
+- Over-subscribe: Need 4 champions? Ask 6-7. People leave, get reorged, or decline — buffer against attrition.
+- If manager won't initiate, go yourself: "I'm up for promotion. My manager will likely ask you for feedback. What can we do over the next 6 months so you're in a natural position to provide it?"
+- Frame as: "I'm trying to do this right and talk to you 6 months in advance" — signals maturity vs. last-minute scramble.
 
 ### The Queue
-- Promotion slate tracked by halves: who's in 6, 12, 18, 24 months.
-- Senior levels may have strict quotas (e.g., Google: 2 people can go L8→L9 per half in an org).
-- The squeaky wheel gets greased. Two equally qualified people — the one agitating gets it first. Not because they're better, but because the manager knows they'll leave otherwise.
+- Promotion slate tracked by halves: who's in the pipeline at 6, 12, 18, 24 months out.
+- Senior levels may have strict quotas (e.g., Google: only 2 people can go L8→L9 per half in an org).
+- The squeaky wheel gets greased. Two equally qualified people — the one actively agitating gets promoted first. Not because they're better, but because the manager knows they'll leave otherwise.
 
 ---
 

@@ -1,200 +1,169 @@
 /**
- * mpe_narrative.js — Narrative generation for projection outputs.
+ * mpe_narrative.js — plain-language narrative for a projection.
  *
- * WHY THIS EXISTS
- *   Every projection deserves a 2-4 paragraph plain-English readout that
- *   non-technical stakeholders can read in 30 seconds and know (a) what
- *   the numbers say, (b) why, (c) the confidence level, (d) what to do
- *   about it. Templates are per-market where strategy matters (MX
- *   ieccp_bound vs US balanced) and per-region where mix effects matter.
- *
- * RICHARD-WRITING-STYLE GUARDRAILS
- *   - No em-dashes (use " — " sparingly or parenthesis instead)
- *   - Data-forward, explicit "so what"
- *   - Brief; max ~300 words expanded
- *   - No filler ("great to see that")
- *   - Explicit uncertainty language on Fallback_Markets
- *   - Regional narratives call out mix effects
- *
- * HOW THE TEMPLATES WORK
- *   Each market has a template keyed by strategy type. The template
- *   pulls from the projection output plus the per-market params record.
- *   Regional narratives are assembled from constituent_markets data.
- *
- * MAINTENANCE
- *   Owner updates templates by editing the strings here or in the
- *   narrative_template field of ps.market_projection_params. UI reads
- *   templates from the latter when present, else falls back to these.
+ * Design goals after Round 3 feedback:
+ *   - No statistical jargon in output ("r²", "credible interval", "Monte
+ *     Carlo", "elasticity", "ie%CCP" → "efficiency").
+ *   - Guarded against null/NaN — never emit "n/a" into prose.
+ *   - Plural-aware ("1 campaign lift" vs "2 campaign lifts").
+ *   - Uses the actual V1_1_Slim output shape (period, computed_ieccp,
+ *     annual_*, year_weekly), not the old MPE.project shape.
+ *   - Answers "what should I do this week?" at the top.
  */
 (function (global) {
   'use strict';
 
-  // Strategy-specific framing
-  const STRATEGY_FRAMING = {
-    'ieccp_bound': 'ie%CCP-bound market where the target ie%CCP is fixed and spend is solved backwards',
-    'efficiency': 'efficiency-first market where the priority is controlling CPA growth',
-    'brand_dominant': 'Brand-dominant market where Brand carries most of the reg volume',
-    'balanced': 'balanced market with both Brand and NB contributing meaningfully',
-    'nb_dominant': 'NB-dominant market where NB carries most of the reg volume',
-  };
-
   function fmt$(v) {
-    if (v === null || v === undefined || !Number.isFinite(v)) return 'n/a';
+    if (v === null || v === undefined || !Number.isFinite(v)) return null;
     if (Math.abs(v) >= 1_000_000) return `$${(v / 1_000_000).toFixed(2)}M`;
-    if (Math.abs(v) >= 1000) return `$${(v / 1000).toFixed(0)}K`;
-    return `$${v.toFixed(0)}`;
+    if (Math.abs(v) >= 1000) return `$${Math.round(v / 1000)}K`;
+    return `$${Math.round(v)}`;
   }
-
+  function fmtNum(v) {
+    if (v === null || v === undefined || !Number.isFinite(v)) return null;
+    return Math.round(v).toLocaleString();
+  }
   function fmtPct(v, digits) {
-    if (v === null || v === undefined || !Number.isFinite(v)) return 'n/a';
-    return `${v.toFixed(digits || 1)}%`;
+    if (v === null || v === undefined || !Number.isFinite(v)) return null;
+    return `${v.toFixed(digits == null ? 0 : digits)}%`;
   }
 
-  function fmtNum(v, digits) {
-    if (v === null || v === undefined || !Number.isFinite(v)) return 'n/a';
-    return v.toLocaleString(undefined, { maximumFractionDigits: digits || 0 });
+  function pluralize(n, singular, plural) {
+    return `${fmtNum(n) || n} ${n === 1 ? singular : (plural || singular + 's')}`;
   }
 
-  function ci90Text(ciObj) {
-    if (!ciObj || !ciObj.ci || !ciObj.ci['90']) return '';
-    const [lo, hi] = ciObj.ci['90'];
-    return `${fmtNum(lo)} to ${fmtNum(hi)}`;
+  function humanPeriod(p) {
+    // Examples: W15 → "week 15"; M04 → "month 04"; Q2 → "Q2"; Y2026 → "full year 2026";
+    // MY1 → "next 1 year"; MY2 → "next 2 years". IMPORTANT: check MY before M
+    // because "MY2".startsWith("M") matches both — MY1/MY2 were being read as "month Y2".
+    if (!p) return 'this year';
+    const up = p.toUpperCase();
+    if (up.startsWith('MY')) {
+      const n = parseInt(up.slice(2), 10);
+      if (Number.isFinite(n) && n > 0) return `next ${n} year${n === 1 ? '' : 's'}`;
+      return 'a multi-year window';
+    }
+    if (up.startsWith('W')) return `week ${up.slice(1)}`;
+    if (up.startsWith('M')) return `month ${up.slice(1)}`;
+    if (up.startsWith('Q')) return `Q${up.slice(1)}`;
+    if (up.startsWith('Y')) return `full year ${up.slice(1)}`;
+    if (up.startsWith('MY')) return `next ${up.slice(2)}-year horizon`;
+    return p;
   }
 
-  /**
-   * Generate a narrative block from a projection output.
-   *
-   * @param {object} out - ProjectionOutputs dict from MPE.project()
-   * @param {object} data - full projection-data.json bundle
-   * @returns {string} multi-paragraph narrative
-   */
   function generate(out, data) {
-    if (!out || out.outcome === 'INVALID_INPUT') {
-      return `Projection could not run. ${out.warnings.join('; ')}`;
+    if (!out || out.error) {
+      return `Projection could not run${out?.error ? ': ' + out.error : '.'}`;
     }
-    if (out.outcome === 'SETUP_REQUIRED') {
-      return `${out.scope} has no fitted parameters yet. See the owner runbook for setup steps before running projections.`;
+    const t = out.totals || {};
+    const scope = out.scope || 'this scope';
+    const period = humanPeriod(out.period || out.time_period);
+
+    const spendStr = fmt$(t.total_spend);
+    const regsStr = fmtNum(t.total_regs);
+    const brandStr = fmtNum(t.brand_regs);
+    const nbStr = fmtNum(t.nb_regs);
+    const cpaStr = fmt$(t.blended_cpa);
+    const efficiency = t.computed_ieccp;
+    const effStr = fmtPct(efficiency, 1);
+
+    // Line 1 — headline
+    const line1Parts = [`For ${scope} across ${period}:`];
+    if (spendStr && regsStr) {
+      line1Parts.push(` spending ${spendStr} produces about ${regsStr} registrations.`);
+    } else if (regsStr) {
+      line1Parts.push(` about ${regsStr} registrations expected.`);
     }
-    if (out.outcome === 'INFEASIBLE') {
-      const reason = out.infeasibility_reason || {};
-      return `Target ${out.target_mode}=${out.target_value} is not feasible for ${out.scope}. Binding constraint: ${reason.binding_constraint || 'unknown'}. Closest feasible: ${JSON.stringify(reason.closest_feasible || {})}.`;
+    let headline = line1Parts.join('');
+    if (cpaStr) headline += ` That's roughly ${cpaStr} per registration on average.`;
+    if (effStr) headline += ` Efficiency (how much spend each registration brings in) lands at ${effStr}.`;
+
+    // Line 2 — Brand vs NB split
+    let split = null;
+    const brandR = t.brand_regs || 0;
+    const nbR = t.nb_regs || 0;
+    const totalR = brandR + nbR;
+    if (totalR > 0 && brandStr && nbStr) {
+      const brandPct = Math.round(brandR / totalR * 100);
+      const nbPct = 100 - brandPct;
+      if (brandPct >= 85) {
+        split = `Almost all of that volume (${brandPct}%) comes from Brand — NB only adds ${nbStr} registrations.`;
+      } else if (brandPct <= 15) {
+        split = `NB carries the volume (${nbPct}%) — Brand only adds ${brandStr} registrations.`;
+      } else if (brandPct >= 45 && brandPct <= 55) {
+        split = `Brand and NB split the volume roughly evenly (${brandStr} Brand · ${nbStr} NB).`;
+      } else if (brandPct > 55) {
+        split = `Brand carries more of the volume (${brandStr}) than NB (${nbStr}), about ${brandPct}/${nbPct}.`;
+      } else {
+        split = `NB carries more of the volume (${nbStr}) than Brand (${brandStr}), about ${brandPct}/${nbPct}.`;
+      }
     }
 
-    // Region path
-    if (out.constituent_markets && out.constituent_markets.length > 0) {
-      return generateRegional(out, data);
+    // Line 3 — OP2 comparison
+    let op2Line = null;
+    const marketData = data?.markets?.[scope];
+    const op2Spend = marketData?.op2_targets?.annual_spend_target;
+    const op2Regs = marketData?.op2_targets?.annual_regs_target;
+    const annualTotalSpend = t.annual_total_spend || t.total_spend;
+    const annualTotalRegs = t.annual_total_regs || t.total_regs;
+    if (op2Spend && annualTotalSpend && op2Regs && annualTotalRegs) {
+      const spendPct = Math.round(annualTotalSpend / op2Spend * 100);
+      const regsPct = Math.round(annualTotalRegs / op2Regs * 100);
+      if (Math.abs(spendPct - 100) <= 5 && Math.abs(regsPct - 100) <= 5) {
+        op2Line = `At full-year pace, that's within 5% of OP2 on both spend and registrations — tracking the plan.`;
+      } else if (spendPct > 110 && regsPct < 95) {
+        op2Line = `At full-year pace that's ${spendPct}% of OP2 spend but only ${regsPct}% of OP2 registrations — overspending without reg delivery.`;
+      } else if (spendPct < 95 && regsPct > 110) {
+        op2Line = `At full-year pace that's ${spendPct}% of OP2 spend but ${regsPct}% of OP2 registrations — delivering more with less.`;
+      } else {
+        op2Line = `At full-year pace that's ${spendPct}% of OP2 spend and ${regsPct}% of OP2 registrations.`;
+      }
     }
-    return generateMarket(out, data);
-  }
 
-  function generateMarket(out, data) {
-    const t = out.totals;
-    const ci = out.credible_intervals || {};
-    const marketData = (data && data.markets) ? data.markets[out.scope] : null;
-    const strategyType = marketData && marketData.parameters && marketData.parameters.market_strategy_type
-      ? marketData.parameters.market_strategy_type.value_json : 'balanced';
-    const framing = STRATEGY_FRAMING[strategyType] || STRATEGY_FRAMING.balanced;
-    const fallbackSummary = out.fallback_level_summary || 'all_market_specific';
-
-    const paras = [];
-
-    // Paragraph 1 — what the numbers say
-    const regsCi = ci.total_regs;
-    const spendCi = ci.total_spend;
-    paras.push(
-      `${out.scope} ${out.time_period} projection: ${fmtNum(t.total_regs)} registrations on ${fmt$(t.total_spend)} spend, blended CPA ${fmt$(t.blended_cpa)}, ie%CCP ${fmtPct(t.ieccp)}. ` +
-      `90% credible interval on total regs: ${regsCi ? ci90Text(regsCi) : 'n/a'}. ` +
-      `Brand contributes ${fmtNum(t.brand_regs)} regs on ${fmt$(t.brand_spend)} (${fmtPct(t.brand_spend / Math.max(t.total_spend, 1) * 100)} of spend), NB contributes ${fmtNum(t.nb_regs)} regs on ${fmt$(t.nb_spend)}.`
-    );
-
-    // Paragraph 2 — what's driving it
-    const regimeEvents = (marketData && marketData.regime_events) || [];
-    const structuralRegimes = regimeEvents.filter(r => r.is_structural_baseline);
-    const transientRegimes = regimeEvents.filter(r => !r.is_structural_baseline);
-    let drivers = `This is a ${framing}.`;
-    if (structuralRegimes.length > 0) {
-      const latestStructural = structuralRegimes[structuralRegimes.length - 1];
-      drivers += ` The current baseline reflects ${latestStructural.description.split('.')[0]}.`;
-    }
-    if (transientRegimes.length > 0) {
-      drivers += ` ${transientRegimes.length} transient regime event(s) are being accounted for with decay.`;
-    }
-    paras.push(drivers);
-
-    // Paragraph 3 — confidence + what to tell stakeholder
-    let confidence = '';
-    if (fallbackSummary === 'all_market_specific') {
-      confidence = `Fit quality is strong across all parameters (market-specific fits). Treat this as a calibrated projection.`;
-    } else if (fallbackSummary === 'some_regional_fallback') {
-      const fbParams = Object.entries(out.parameters_used || {})
-        .filter(([, v]) => v && (v.fallback_level === 'regional_fallback' || v.fallback_level === 'southern_hemisphere_hybrid'))
-        .map(([k]) => k);
-      confidence = `Some parameters use regional fallback (${fbParams.join(', ')}) — credible intervals are wider for those segments. The projection is directionally trustworthy but treat specific numbers with appropriate caution.`;
+    // Line 4 — what's driving it (campaign lifts)
+    let drivers = null;
+    const lifts = (marketData?.regime_fit_state) || [];
+    const activeLifts = lifts.filter(l => l.confidence && l.confidence > 0.15);
+    if (activeLifts.length === 0) {
+      drivers = `No active campaign lifts detected — projection is baseline trend plus seasonality.`;
+    } else if (activeLifts.length === 1) {
+      const l = activeLifts[0];
+      const pct = Math.round((l.peak_multiplier - 1) * 100);
+      drivers = `One campaign lift is active, about +${pct}% on Brand at peak.`;
+      if (l.decay_status === 'still-peaking') drivers += ` Still building — lift may grow.`;
+      else if (l.decay_status === 'decaying-faster') drivers += ` Decaying faster than expected.`;
+      else if (l.decay_status === 'no-decay-detected') drivers += ` No decay yet — treated as a stable baseline shift.`;
     } else {
-      confidence = `Most or all parameters use regional fallback — this projection is directional only, not calibrated.`;
-    }
-    paras.push(confidence);
-
-    // Paragraph 4 — warnings, if notable
-    const notableWarnings = (out.warnings || []).filter(w =>
-      w.startsWith('VERY_WIDE_CI') || w.startsWith('HIGH_EXTRAPOLATION') || w.startsWith('LOW_CONFIDENCE_MULTI_YEAR') || w.startsWith('STALE_PARAMETERS')
-    );
-    if (notableWarnings.length > 0) {
-      paras.push(`Notable caveats: ${notableWarnings.join('; ')}`);
+      drivers = `${activeLifts.length} campaign lifts active, combining for a stacked Brand multiplier.`;
     }
 
-    return paras.join('\n\n');
-  }
+    // Line 5 — caveats
+    const warnings = out.warnings || [];
+    const unreachable = warnings.find(w => (typeof w === 'string') && w.includes('TARGET_UNREACHABLE'));
+    const clipped = warnings.find(w => (typeof w === 'string') && w.includes('ANCHOR_CLIPPED'));
+    let caveats = [];
+    if (unreachable) {
+      caveats.push(`Target not reachable within historical spend bounds — shown number is closest achievable.`);
+    }
+    if (clipped) {
+      caveats.push(`Anchor uses only post-onset weeks because the latest campaign started recently — small sample, wider uncertainty.`);
+    }
+    if (fmtPct(efficiency) && Math.abs((efficiency || 0) - 100) > 15 && out.target_mode === 'ieccp') {
+      caveats.push(`Efficiency result is ${effStr}, more than 15 points from target — check whether assumptions still hold.`);
+    }
 
-  function generateRegional(out, data) {
-    const t = out.totals;
+    // Stitch together
     const paras = [];
-    const constituents = out.constituent_markets || [];
+    paras.push(headline);
+    if (split) paras.push(split);
+    if (op2Line) paras.push(op2Line);
+    if (drivers) paras.push(drivers);
+    if (caveats.length) paras.push(`Heads-up: ${caveats.join(' ')}`);
 
-    // Mix effects
-    const topContributors = constituents
-      .slice()
-      .sort((a, b) => (b.brand_regs + b.nb_regs) - (a.brand_regs + a.nb_regs))
-      .slice(0, 3);
-    const topContribText = topContributors
-      .map(m => `${m.market} (${fmtNum(m.brand_regs + m.nb_regs)} regs, ie%CCP ${fmtPct(m.ieccp)})`)
-      .join(', ');
-
-    paras.push(
-      `${out.scope} ${out.time_period} regional rollup: ${fmtNum(t.total_regs)} regs on ${fmt$(t.total_spend)}, blended CPA ${fmt$(t.blended_cpa)}, regional ie%CCP ${fmtPct(t.ieccp)}. ` +
-      `Top contributors: ${topContribText}.`
-    );
-
-    // Any constituent in fallback?
-    const fbMarkets = constituents.filter(m => m.fallback_level_summary !== 'all_market_specific').map(m => m.market);
-    if (fbMarkets.length > 0) {
-      paras.push(
-        `${fbMarkets.join(', ')} use some or all regional fallback for elasticity. Regional credible intervals are wider than they would be with full market-specific fits for every constituent. This is expected per the MPE v1 design (fallback is a safety net, not the plan).`
-      );
-    } else {
-      paras.push(
-        `All constituents have market-specific fits. This is a calibrated regional projection.`
-      );
-    }
-
-    // Regional ie%CCP math note
-    paras.push(
-      `Regional ie%CCP is computed via sum-then-divide (total spend divided by the weighted sum of regs-by-CCP across markets). Never averaged — that would be wrong because CCPs vary 4x+ across markets.`
-    );
-
-    return paras.join('\n\n');
+    return paras.filter(Boolean).join('\n\n');
   }
 
-  // ---------- Public API ----------
-
-  const MPENarrative = {
-    generate,
-    _internals: { generateMarket, generateRegional, STRATEGY_FRAMING },
-  };
-
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports = MPENarrative;
-  } else {
-    global.MPENarrative = MPENarrative;
-  }
+  const MPENarrative = { generate };
+  if (typeof module !== 'undefined' && module.exports) module.exports = MPENarrative;
+  else global.MPENarrative = MPENarrative;
 })(typeof window !== 'undefined' ? window : globalThis);

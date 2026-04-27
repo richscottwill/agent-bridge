@@ -4,7 +4,7 @@ status: FINAL
 audience: amazon-internal
 owner: Richard Williams
 created: 2026-04-12
-updated: 2026-04-22
+updated: 2026-04-25
 doc-type: reference
 auto_generated: true
 ---
@@ -15,7 +15,7 @@ auto_generated: true
 
 > Knowledge base for Amazon Business Paid Search. Auto-generated from a filesystem scan of `~/shared/wiki/agent-created/` by `build-wiki-index.py`. SharePoint publication status pulled from `data/sharepoint-artifacts.json`.
 
-Last generated: 2026-04-22T14:19:55
+Last generated: 2026-04-25T16:38:35
 SharePoint cache as of: 2026-04-17T19:02:13-07:00
 
 ---
@@ -213,7 +213,7 @@ _Market wikis (AU/MX/US), team capacity, cross-market programs._
   - slug: ww-testing-tracker | status: REVIEW | doc-type: reference | audience: amazon-internal | level: 2 | sharepoint: published
 
 
-### Operations & Process (14)
+### Operations & Process (26)
 
 _SOPs, playbooks, tool specs, vocabulary guides, process documentation._
 
@@ -243,6 +243,42 @@ _SOPs, playbooks, tool specs, vocabulary guides, process documentation._
 
 - [Market Expansion Playbook — Paid Search](~/shared/wiki/agent-created/operations/market-expansion-playbook.md): Market Expansion Playbook This playbook consolidates the pre-launch, launch, and year-one operations required to stand up paid search in a new market. It is written from the...
   - slug: market-expansion-playbook | status: DRAFT | doc-type: execution | audience: team | level: L2 | sharepoint: local-only
+
+- [MPE Notes — AU (Australia)](~/shared/wiki/agent-created/operations/mpe-au-specific-notes.md): MPE Notes — AU (Australia) Last fitted: 2026-04-22 Strategy type: efficiency (no ie%CCP target) Primary stakeholder: Alexis Archetype for: data-limited Southern Hemisphere market...
+  - slug: mpe-au-specific-notes | status: DRAFT | sharepoint: local-only
+
+- [MPE Notes — CA (Canada)](~/shared/wiki/agent-created/operations/mpe-ca-specific-notes.md): MPE Notes — CA (Canada) Last fitted: 2026-04-22 (v2 post-regime-audit) Strategy type: balanced (50-65% ie%CCP range) Archetype for: NA balanced, recent OCI + recent tariff impact...
+  - slug: mpe-ca-specific-notes | status: DRAFT | sharepoint: local-only
+
+- [MPE Notes — DE (Germany)](~/shared/wiki/agent-created/operations/mpe-de-specific-notes.md): MPE Notes — DE (Germany) Last fitted: 2026-04-22 Strategy type: balanced (50-65% ie%CCP range) Archetype for: EU5 mature market with recent OCI structural shift At a glance...
+  - slug: mpe-de-specific-notes | status: DRAFT | sharepoint: local-only
+
+- [MPE Notes — ES (Spain)](~/shared/wiki/agent-created/operations/mpe-es-specific-notes.md): MPE Notes — ES (Spain) Last fitted: 2026-04-22 (v2 post-regime-audit) Strategy type: balanced (50-65% ie%CCP range) Archetype for: EU5 balanced, recent OCI At a glance Parameter ...
+  - slug: mpe-es-specific-notes | status: DRAFT | sharepoint: local-only
+
+- [MPE Coexistence Audit — Existing Prediction Code](~/shared/wiki/agent-created/operations/mpe-existing-code-coexistence.md): MPE Coexistence Audit — Existing Prediction Code Task: Phase 0 Task 0.5 — audit existing shared/tools/prediction/ code to confirm safe coexistence with new mpe modules. Date:...
+  - slug: mpe-existing-code-coexistence | status: DRAFT | sharepoint: local-only
+
+- [MPE Notes — FR (France)](~/shared/wiki/agent-created/operations/mpe-fr-specific-notes.md): MPE Notes — FR (France) Last fitted: 2026-04-22 (v3 post-regime-audit) Strategy type: balanced (50-65% ie%CCP range) Archetype for: EU5 balanced, recent OCI launch At a glance...
+  - slug: mpe-fr-specific-notes | status: DRAFT | sharepoint: local-only
+
+- [MPE Notes — IT (Italy)](~/shared/wiki/agent-created/operations/mpe-it-specific-notes.md): MPE Notes — IT (Italy) Last fitted: 2026-04-22 (v2 post-regime-audit) Strategy type: balanced (50-65% ie%CCP range) Archetype for: market with two structural shifts in 2026 (tax...
+  - slug: mpe-it-specific-notes | status: DRAFT | sharepoint: local-only
+
+- [MPE Notes — JP (Japan)](~/shared/wiki/agent-created/operations/mpe-jp-specific-notes.md): MPE Notes — JP (Japan) Last fitted: 2026-04-22 (v2 post-regime-audit) Strategy type: branddominant (30-50% ie%CCP range) Archetype for: Brand-dominant market with high...
+  - slug: mpe-jp-specific-notes | status: DRAFT | sharepoint: local-only
+
+- [MPE Notes — MX (Mexico)](~/shared/wiki/agent-created/operations/mpe-mx-specific-notes.md): MPE Notes — MX (Mexico) Last fitted: 2026-04-22 Strategy type: ieccpbound Primary stakeholder: Lorena Archetype for: ie%CCP-ceiling markets (where the target is fixed and spend is...
+  - slug: mpe-mx-specific-notes | status: DRAFT | sharepoint: local-only
+
+- [MPE Owner Operations Runbook](~/shared/wiki/agent-created/operations/mpe-owner-operations.md): MPE Owner Operations Runbook Version: v1 skeleton  Last updated: 2026-04-22  Owner: Richard Williams Purpose: Everything you need to use and maintain the Market Projection Engine...
+  - slug: mpe-owner-operations | status: DRAFT | sharepoint: local-only
+
+- [MPE Notes — UK (United Kingdom)](~/shared/wiki/agent-created/operations/mpe-uk-specific-notes.md): MPE Notes — UK (United Kingdom) Last fitted: 2026-04-22 Strategy type: balanced (50-65% ie%CCP range) Archetype for: EU5 mature market with completed OCI transition At a glance...
+  - slug: mpe-uk-specific-notes | status: DRAFT | sharepoint: local-only
+
+- [MPE Notes — US (United States)](~/shared/wiki/agent-created/operations/mpe-us-specific-notes.md): MPE Notes — US (United States) Last fitted: 2026-04-22 Strategy type: balanced Primary stakeholder: Andrew Archetype for: balanced markets with 50-65% ie%CCP range At a glance...
+  - slug: mpe-us-specific-notes | status: DRAFT | sharepoint: local-only
 
 - [Negative Keyword Ownership Model](~/shared/wiki/agent-created/operations/negative-keyword-ownership-model.md): Negative Keyword Ownership Model This guide documents how negative keyword lists are owned, maintained, and updated across paid search markets. The gap that prompted this document...
   - slug: negative-keyword-ownership-model | status: DRAFT | doc-type: execution | audience: team | level: L2 | sharepoint: local-only
@@ -327,14 +363,14 @@ _Agent architecture, body system, agent personas, meta-docs about the system its
 | Historical Tests (snapshot) | 5 |
 | Strategy & Frameworks | 28 |
 | Markets / PS Operations | 8 |
-| Operations & Process | 14 |
+| Operations & Process | 26 |
 | Reporting | 2 |
 | Research Briefs | 7 |
 | Agent / System Documentation | 5 |
-| **Total (indexed)** | **85** |
+| **Total (indexed)** | **97** |
 
-**Status:** 46 REVIEW | 23 DRAFT | 1 FINAL | 15 unset
-**SharePoint:** 46 published | 39 local-only | 1 published-stale (local newer than SP)
+**Status:** 46 REVIEW | 23 DRAFT | 1 FINAL | 27 unset
+**SharePoint:** 46 published | 51 local-only | 1 published-stale (local newer than SP)
 
 ---
 

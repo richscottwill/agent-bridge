@@ -141,6 +141,10 @@ class ProjectionOutputs:
     infeasibility_reason: dict | None = None
     methodology_version: str = ENGINE_VERSION
     generated_at: str = ''
+    # v1.1 Slim additions (Phase 6.1.6):
+    contribution_breakdown: dict = field(default_factory=dict)
+    locked_ytd_summary: dict = field(default_factory=dict)
+    regime_stack: list[dict] = field(default_factory=list)
 
 
 @dataclass
@@ -245,19 +249,25 @@ def params_legacy_return_hack(params: dict) -> dict:
 def required_parameter_names(market: str) -> list[str]:
     """Return the list of parameters required for a full projection.
 
+    Phase 6.2.4 (2026-04-23): v1.1 Slim requires only nb_cpa_elasticity +
+    nb_seasonality_shape + CCPs (non-AU) + supported_target_modes. The
+    deprecated brand_cpa_elasticity / brand_yoy_growth / brand_spend_share
+    are no longer required — Brand trajectory is computed from
+    ps.v_weekly + ps.regime_fit_state directly.
+
     AU is special-cased: no ieccp parameters required.
     """
     base = [
         'brand_ccp' if market != 'AU' else None,
         'nb_ccp' if market != 'AU' else None,
-        'brand_cpa_elasticity',
         'nb_cpa_elasticity',
-        'brand_seasonality_shape',
         'nb_seasonality_shape',
-        'brand_yoy_growth',
         'nb_yoy_growth',
-        'brand_spend_share',
         'supported_target_modes',
+        # v1.1 Slim Brand params (Phase 6.2.4) — currently bootstrap placeholders,
+        # real values populated by fit_market.py. Their presence (even bootstrap)
+        # is required as the contract signal that v1.1 Slim is active.
+        'brand_trajectory_weights',
     ]
     return [p for p in base if p is not None]
 
@@ -508,160 +518,22 @@ def _project_market_spend_target(
 
 
 # ---------- Target mode solvers ----------
-
-def _solve_ieccp_target(
-    target_ieccp: float,
-    inputs: ProjectionInputs,
-    params: dict,
-    tp: dict,
-    max_iterations: int = 30,
-    tolerance: float = 0.1,
-) -> tuple[list[WeeklyOutput], dict, float]:
-    """Binary search for total_spend that yields target_ieccp.
-
-    target_ieccp accepts either decimal (0.75 = 75%) or percentage (75) scale.
-    Internal ie%CCP from _project_market_spend_target returns on the percentage
-    scale (e.g. 121.26 = 121.26%). If caller supplies a value < 5, interpret as
-    decimal and convert to percentage scale for the comparison.
-
-    Returns (weeks, totals, solved_spend). If no convergence, returns
-    the best attempt with a warning appended.
-    """
-    # Normalize target to percentage scale (fixes 2026-04-23 MX Y2026 solver bug —
-    # ieccp:0.75 was comparing decimal 0.75 against internal percentage 121.26,
-    # collapsing binary search to low_spend=$1,000).
-    if target_ieccp is not None and target_ieccp < 5.0:
-        target_ieccp = target_ieccp * 100.0
-
-    # Estimate initial spend bracket from historical max
-    low_spend = 1_000.0
-    high_spend = 100_000_000.0
-
-    # Mechanism A bounds (2026-04-23): if market_constraints_manual defines
-    # per-segment weekly spend floors/ceilings, translate them to total_spend
-    # bounds using the market's brand/nb split. This prevents the solver from
-    # exploring spend levels that violate operational reality (e.g. MX NB
-    # floor $15K/wk × 52 weeks ÷ nb_share ≈ $876K total floor for Y2026).
-    bounds = params.get('_spend_bounds') or {}
-    share_param = (params.get('brand_spend_share') or {}).get('value_json') or {}
-    brand_share = float(share_param.get('brand_share', 0.20))
-    nb_share = max(1.0 - brand_share, 0.01)
-    n_weeks_in_period = max(len(tp.get('weeks', [])), 1)
-    bound_warnings = []
-    if bounds.get('min_weekly_nb_spend') is not None:
-        floor_from_nb = (bounds['min_weekly_nb_spend'] * n_weeks_in_period) / nb_share
-        if floor_from_nb > low_spend:
-            low_spend = floor_from_nb
-            bound_warnings.append(f"low_spend raised to ${floor_from_nb:,.0f} by min_weekly_nb_spend=${bounds['min_weekly_nb_spend']:,.0f}")
-    if bounds.get('min_weekly_brand_spend') is not None:
-        floor_from_brand = (bounds['min_weekly_brand_spend'] * n_weeks_in_period) / max(brand_share, 0.01)
-        if floor_from_brand > low_spend:
-            low_spend = floor_from_brand
-            bound_warnings.append(f"low_spend raised to ${floor_from_brand:,.0f} by min_weekly_brand_spend")
-    if bounds.get('max_weekly_nb_spend') is not None:
-        ceiling_from_nb = (bounds['max_weekly_nb_spend'] * n_weeks_in_period) / nb_share
-        if ceiling_from_nb < high_spend:
-            high_spend = ceiling_from_nb
-            bound_warnings.append(f"high_spend lowered to ${ceiling_from_nb:,.0f} by max_weekly_nb_spend=${bounds['max_weekly_nb_spend']:,.0f}")
-    if bounds.get('max_weekly_brand_spend') is not None:
-        ceiling_from_brand = (bounds['max_weekly_brand_spend'] * n_weeks_in_period) / max(brand_share, 0.01)
-        if ceiling_from_brand < high_spend:
-            high_spend = ceiling_from_brand
-            bound_warnings.append(f"high_spend lowered to ${ceiling_from_brand:,.0f} by max_weekly_brand_spend")
-    if low_spend >= high_spend:
-        # Bounds are incompatible — fall back to low_spend as the clamp
-        high_spend = low_spend * 1.01
-
-    weeks, totals = _project_market_spend_target(high_spend, inputs, params, tp)
-    if totals['ieccp'] is None:
-        # ie%CCP not available — cannot solve
-        return weeks, totals, high_spend, bound_warnings
-
-    # Check monotonicity direction
-    low_w, low_t = _project_market_spend_target(low_spend, inputs, params, tp)
-
-    # Binary search
-    best_spend = high_spend
-    best_weeks = weeks
-    best_totals = totals
-
-    for _ in range(max_iterations):
-        mid = (low_spend + high_spend) / 2
-        weeks, totals = _project_market_spend_target(mid, inputs, params, tp)
-        if totals['ieccp'] is None:
-            break
-        delta = totals['ieccp'] - target_ieccp
-        if abs(delta) < tolerance:
-            return weeks, totals, mid, bound_warnings
-        if delta < 0:
-            # ie%CCP too low, need more spend (if ie%CCP monotonically increasing with spend)
-            low_spend = mid
-        else:
-            high_spend = mid
-        best_spend = mid
-        best_weeks = weeks
-        best_totals = totals
-
-    # If we exhausted iterations and delta is still large, this means the bounds
-    # make the target infeasible — record that so the caller can warn appropriately.
-    final_delta = best_totals['ieccp'] - target_ieccp if best_totals.get('ieccp') is not None else None
-    if final_delta is not None and abs(final_delta) > tolerance:
-        direction = 'lower' if final_delta < 0 else 'higher'
-        bound_warnings.append(
-            f"TARGET_UNREACHABLE_UNDER_BOUNDS: solver stuck at ie%CCP={best_totals['ieccp']:.1f}% vs target={target_ieccp:.1f}% ({direction} than target); operational bounds prevent reaching target"
-        )
-
-    return best_weeks, best_totals, best_spend, bound_warnings
-
-
-def _solve_regs_target(
-    target_regs: float,
-    inputs: ProjectionInputs,
-    params: dict,
-    tp: dict,
-    max_iterations: int = 30,
-    tolerance_pct: float = 0.01,
-) -> tuple[list[WeeklyOutput], dict, float, dict | None]:
-    """Binary search for total_spend that yields target_regs.
-
-    Returns (weeks, totals, solved_spend, infeasibility_dict_or_None).
-    """
-    low_spend = 1_000.0
-    high_spend = 500_000_000.0
-
-    # Check feasibility: does high_spend even reach target?
-    weeks, totals = _project_market_spend_target(high_spend, inputs, params, tp)
-    if totals['total_regs'] < target_regs * 0.99:
-        infeasibility = {
-            'outcome': 'INFEASIBLE',
-            'binding_constraint': 'elasticity_diminishing_returns',
-            'explanation': (
-                f"Target regs {target_regs:,.0f} require spend beyond feasible range. "
-                f"At ${high_spend:,.0f}, elasticity curve yields only {totals['total_regs']:,.0f} regs. "
-                f"Consider lower target or review elasticity curves for regime changes."
-            ),
-            'closest_feasible': {
-                'target_mode': 'regs',
-                'target_value': totals['total_regs'],
-                'total_spend': high_spend,
-                'ieccp': totals['ieccp'],
-            },
-        }
-        return weeks, totals, high_spend, infeasibility
-
-    for _ in range(max_iterations):
-        mid = (low_spend + high_spend) / 2
-        weeks, totals = _project_market_spend_target(mid, inputs, params, tp)
-        delta = (totals['total_regs'] - target_regs) / target_regs
-        if abs(delta) < tolerance_pct:
-            return weeks, totals, mid, None
-        if delta < 0:
-            low_spend = mid
-        else:
-            high_spend = mid
-
-    return weeks, totals, mid, None
-
+#
+# REMOVED in v1.1 Slim (Phase 6.1.6, 2026-04-23):
+# - _solve_ieccp_target: replaced by prediction.nb_residual_solver._solve_ieccp_branch
+#   with target-relational bounds (target ± 500bps) instead of hard floors.
+# - _solve_regs_target: replaced by prediction.nb_residual_solver (regs branch
+#   ships in Phase 6.2.1).
+# - _project_market_spend_target: KEPT TEMPORARILY for Monte Carlo uncertainty
+#   (see _mc_project_point below). Phase 6.2.x rewrites MC to sample Brand
+#   trajectory + NB residual uncertainty instead of the top-down elasticity.
+#   Marked deprecated; no new callers.
+#
+# The root-cause bug this fix addressed: v1's top-down solver averaged
+# elasticity across regime-incompatible weeks and could silently project
+# below YTD actuals, producing MX Y2026 @ 75% = $443K (vs domain-expert
+# $800K-$1.2M). v1.1 Slim fixes by separating Brand (anchor) from NB
+# (residual) and respecting Locked-YTD as a pre-solve partition.
 
 # ---------- Main entry point ----------
 
@@ -728,22 +600,129 @@ def project(inputs: ProjectionInputs) -> ProjectionOutputs:
         )
         return out
 
-    # Solve for target
-    if inputs.target_mode == 'spend':
-        weeks, totals = _project_market_spend_target(inputs.target_value, inputs, params, tp)
-        solved_spend = inputs.target_value
+    # v1.1 Slim target solving (Phase 6.1.6): Brand-Anchor + NB-Residual.
+    # For Y-periods, use Locked-YTD to respect actuals; otherwise no-YTD path.
+    # The v1 _solve_ieccp_target/_solve_regs_target/_project_market_spend_target
+    # functions have been removed from the primary project() path. They remain
+    # in _mc_project_point for Monte Carlo uncertainty only (Phase 6.2.x will
+    # rewrite MC to Brand trajectory sampling).
+    from prediction.brand_trajectory import (
+        project_brand_trajectory,
+        list_regimes_with_confidence,
+    )
+    from prediction.nb_residual_solver import solve_nb_residual
+    from prediction.locked_ytd import project_with_locked_ytd
+
+    nb_cpa_elast_row = params.get('nb_cpa_elasticity', {}).get('value_json') or {'a': 0.0, 'b': 0.0}
+    brand_ccp = params.get('brand_ccp', {}).get('value_scalar')
+    nb_ccp = params.get('nb_ccp', {}).get('value_scalar')
+    bounds = params.get('_spend_bounds') or {}
+    max_weekly_nb = bounds.get('max_weekly_nb_spend')
+
+    if tp['type'] == 'year':
+        # Locked-YTD path: use the canonical production flow.
+        year = int(inputs.time_period.upper().lstrip('Y'))
+        lyp = project_with_locked_ytd(
+            market=market,
+            year=year,
+            target_mode=inputs.target_mode,
+            target_value=inputs.target_value,
+            nb_cpa_elast=nb_cpa_elast_row,
+            brand_ccp=brand_ccp,
+            nb_ccp=nb_ccp,
+            min_weekly_nb_spend=0.0,  # deprecated for v1.1 ieccp path; solver uses target-relational bounds
+            max_weekly_nb_spend=max_weekly_nb,
+            regime_multiplier=1.0,
+        )
+        out.warnings.extend(lyp.warnings)
+        weeks = []  # per-week WeeklyOutput list shipped in Phase 6.1.7 JS-parity work
+        totals = {
+            'brand_regs': lyp.total_brand_regs,
+            'nb_regs': lyp.total_nb_regs,
+            'total_regs': lyp.total_regs,
+            'brand_spend': lyp.total_brand_spend,
+            'nb_spend': lyp.total_nb_spend,
+            'total_spend': lyp.total_spend,
+            'brand_clicks': 0.0,
+            'nb_clicks': 0.0,
+            'blended_cpa': lyp.blended_cpa,
+            'ieccp': lyp.computed_ieccp,
+            'yoy_growth_applied': {'brand': 0.0, 'nb': 0.0},
+        }
+        solved_spend = lyp.total_spend
         infeas = None
-    elif inputs.target_mode == 'ieccp':
-        weeks, totals, solved_spend, bound_warnings = _solve_ieccp_target(inputs.target_value, inputs, params, tp)
-        infeas = None
-        for bw in bound_warnings:
-            out.warnings.append(f"SPEND_BOUNDS_APPLIED: {bw}")
-    elif inputs.target_mode == 'regs':
-        weeks, totals, solved_spend, infeas = _solve_regs_target(inputs.target_value, inputs, params, tp)
+        out.contribution_breakdown = lyp.contribution_breakdown
+        out.locked_ytd_summary = {
+            'year': lyp.year,
+            'n_weeks_locked': lyp.ytd.n_weeks_locked,
+            'latest_week_locked': lyp.ytd.latest_week_locked.isoformat() if lyp.ytd.latest_week_locked else None,
+            'ytd_brand_regs': lyp.ytd.brand_regs,
+            'ytd_brand_spend': lyp.ytd.brand_spend,
+            'ytd_nb_regs': lyp.ytd.nb_regs,
+            'ytd_nb_spend': lyp.ytd.nb_spend,
+            'roy_brand_regs': lyp.roy_brand_regs,
+            'roy_brand_spend': lyp.roy_brand_spend,
+            'roy_nb_regs': lyp.roy_nb_regs,
+            'roy_nb_spend': lyp.roy_nb_spend,
+            'constraint_active': lyp.locked_ytd_constraint_active,
+        }
     else:
-        out.outcome = 'INVALID_INPUT'
-        out.warnings.append(f"UNKNOWN_TARGET_MODE: {inputs.target_mode!r}")
-        return out
+        # Sub-year period (W / M / Q / MY*): no Locked-YTD, just Brand + NB
+        # for the target weeks.
+        from datetime import date as _date, timedelta as _td
+        # Build target weeks as Monday dates for current year + week numbers in tp.
+        year = datetime.now().year
+        if tp.get('type') == 'multi_year':
+            # Multi-year: project n_years × 52 weeks forward from now.
+            n_years = int(tp.get('n_years', 1))
+            start = _date(year, 1, 4)
+            target_weeks = [start - _td(days=start.weekday()) + _td(weeks=i) for i in range(52 * n_years)]
+        else:
+            jan4 = _date(year, 1, 4)
+            week1_monday = jan4 - _td(days=jan4.weekday())
+            target_weeks = [week1_monday + _td(weeks=w - 1) for w in tp['weeks']]
+
+        brand_proj = project_brand_trajectory(
+            market, target_weeks, regime_multiplier=1.0,
+        )
+        nb_sol = solve_nb_residual(
+            brand_spend=brand_proj.total_spend,
+            brand_regs=brand_proj.total_regs,
+            target_mode=inputs.target_mode,
+            target_value=inputs.target_value,
+            nb_cpa_elast=nb_cpa_elast_row,
+            brand_ccp=brand_ccp,
+            nb_ccp=nb_ccp,
+            min_nb_spend=0.0,
+            max_nb_spend=(max_weekly_nb * len(target_weeks)) if max_weekly_nb else None,
+            ytd_nb_spend=0.0,
+            n_weeks=len(target_weeks),
+        )
+        out.warnings.extend(brand_proj.warnings)
+        out.warnings.extend(nb_sol.warnings)
+        weeks = []
+        totals = {
+            'brand_regs': brand_proj.total_regs,
+            'nb_regs': nb_sol.nb_regs,
+            'total_regs': brand_proj.total_regs + nb_sol.nb_regs,
+            'brand_spend': brand_proj.total_spend,
+            'nb_spend': nb_sol.nb_spend,
+            'total_spend': brand_proj.total_spend + nb_sol.nb_spend,
+            'brand_clicks': 0.0,
+            'nb_clicks': 0.0,
+            'blended_cpa': (brand_proj.total_spend + nb_sol.nb_spend) / max(brand_proj.total_regs + nb_sol.nb_regs, 1),
+            'ieccp': nb_sol.computed_ieccp,
+            'yoy_growth_applied': {'brand': 0.0, 'nb': 0.0},
+        }
+        solved_spend = totals['total_spend']
+        infeas = None
+        out.contribution_breakdown = brand_proj.contribution
+
+    # Attach regime stack for downstream UI / audit.
+    try:
+        out.regime_stack = list_regimes_with_confidence(market)
+    except Exception as e:
+        out.warnings.append(f"REGIME_STACK_UNAVAILABLE: {type(e).__name__}: {e}")
 
     if infeas:
         out.outcome = 'INFEASIBLE'
@@ -995,20 +974,103 @@ def _project_region(
     tp: dict,
     out: ProjectionOutputs,
 ) -> ProjectionOutputs:
-    """Project a region by summing per-market projections (R6.1-R6.6)."""
+    """Project a region by summing per-market projections (R6.1-R6.6).
+
+    Regional semantics (2026-04-25 clarification per Richard):
+    regions are ROLLUPS of constituent markets, not drivers. Each
+    constituent projects at its OWN committed target
+    (ps.market_projection_params_current.ieccp_target), and the regional
+    ie%CCP is computed post-hoc via sum-then-divide per R6.2.
+
+    Target modes at region level:
+      - ieccp: REJECTED (use per-market targets; regional ie%CCP is
+        a rollup observation, not a driver). Returns INVALID_INPUT.
+      - regs: not yet supported at region level; use per-market targets.
+        Returns INVALID_INPUT for now.
+      - spend: naive per-market equal split as a stopgap — constituents
+        each get total/n spend. This is a "what if we allocated X total
+        spend evenly" exploration mode, not a committed-target rollup.
+      - op2_efficient: same as spend for now, with per-market OP2 budgets.
+      - rollup (new Phase 6.2.x): DEFAULT for regions — each constituent
+        runs at its own committed ieccp_target, results summed. NO
+        target value needed; the regional number is a rollup observation.
+    """
     region = inputs.scope
     constituents = REGION_CONSTITUENTS[region]
+
+    # Reject region+ieccp combination — it's incorrect shape (no such
+    # thing as a regional ie%CCP target). Return INVALID_INPUT with
+    # the recommended alternative.
+    if inputs.target_mode == 'ieccp':
+        out.outcome = 'INVALID_INPUT'
+        out.warnings.append(
+            f"REGIONAL_IECCP_NOT_A_DRIVER: regions aggregate per-market projections; "
+            f"ie%CCP for a region is a ROLLUP observation from constituents' committed "
+            f"targets, not a solver input. Use target_mode='rollup' (constituents run "
+            f"at their own ieccp_target rows) OR project each constituent market "
+            f"separately. Constituents of {region}: {constituents}"
+        )
+        return out
+
+    if inputs.target_mode == 'regs':
+        out.outcome = 'INVALID_INPUT'
+        out.warnings.append(
+            f"REGIONAL_REGS_NOT_SUPPORTED: regional regs-target would require "
+            f"cross-market allocation optimization (Phase 6.5 scope). Use "
+            f"target_mode='rollup' or run each constituent market separately."
+        )
+        return out
 
     per_market_outputs: list[ProjectionOutputs] = []
     any_fallback = False
     all_fallback = True
 
+    # Build constituent inputs based on region target mode.
+    # ROLLUP mode: each constituent runs at its own committed ieccp_target.
+    # SPEND mode: naive equal split (exploration mode).
+    # OP2_EFFICIENT: each constituent at its own OP2 budget (not yet wired).
     for mkt in constituents:
+        if inputs.target_mode == 'rollup':
+            # Pull the constituent's committed ieccp_target from registry.
+            # Fall back to 'spend' at a neutral value if none is set (rare).
+            mkt_params = load_parameters(mkt)
+            mkt_target_row = mkt_params.get('ieccp_target', {})
+            mkt_target_value = mkt_target_row.get('value_scalar')
+            if mkt_target_value is not None:
+                mkt_mode = 'ieccp'
+                mkt_value = float(mkt_target_value)
+            else:
+                # No committed ie%CCP target (e.g. AU null CCPs, JP uses range).
+                # Fall back to a neutral projection: use last-4-week avg spend × 52.
+                # This keeps the rollup meaningful without forcing a target.
+                try:
+                    con = _db()
+                    last4 = con.execute("""
+                        SELECT AVG(cost) FROM ps.v_weekly
+                        WHERE market = ? AND period_type = 'weekly'
+                        ORDER BY period_start DESC LIMIT 4
+                    """, [mkt]).fetchone()
+                    mkt_mode = 'spend'
+                    mkt_value = float(last4[0] or 0) * len(tp.get('weeks', [52]))
+                    if mkt_value <= 0:
+                        mkt_value = 100_000  # defensive floor
+                except Exception:
+                    mkt_mode = 'spend'
+                    mkt_value = 100_000
+                out.warnings.append(
+                    f"ROLLUP_FALLBACK: {mkt} has no committed ieccp_target; "
+                    f"projecting at last-4w spend run-rate ${mkt_value:,.0f}"
+                )
+        else:
+            # Legacy spend-mode naive split — exploration mode.
+            mkt_mode = 'spend'
+            mkt_value = inputs.target_value / len(constituents)
+
         mkt_inputs = ProjectionInputs(
             scope=mkt,
             time_period=inputs.time_period,
-            target_mode='spend',   # regional target resolution done at rollup level for now
-            target_value=inputs.target_value / len(constituents),  # naive split
+            target_mode=mkt_mode,
+            target_value=mkt_value,
             brand_uplift_pct=inputs.brand_uplift_pct,
             nb_uplift_pct=inputs.nb_uplift_pct,
             regional_target_mode=inputs.regional_target_mode,
@@ -1131,6 +1193,10 @@ def main(argv: list[str] | None = None) -> int:
             'credible_intervals': result.credible_intervals,
             'constituent_markets': result.constituent_markets,
             'parameters_used': result.parameters_used,
+            'fit_quality': _build_fit_quality_summary(result),
+            'contribution_breakdown': result.contribution_breakdown,
+            'regime_stack': result.regime_stack,
+            'locked_ytd_summary': result.locked_ytd_summary,
             'warnings': result.warnings,
             'fallback_level_summary': result.fallback_level_summary,
             'yoy_growth_applied': result.yoy_growth_applied,
@@ -1192,7 +1258,136 @@ def main(argv: list[str] | None = None) -> int:
                     f"fallback={m['fallback_level_summary']}"
                 )
 
+        # Fit quality section — surface r², fallback, n_weeks per key parameter
+        # so the reader can see "how much should I trust this number?"
+        fq = _build_fit_quality_summary(result)
+        if fq and fq.get('per_parameter'):
+            print()
+            print(f"## Fit Quality")
+            print(f"Overall trust: **{fq.get('overall_trust', 'unknown')}** ({fq.get('overall_trust_reason', '')})")
+            print()
+            print("| Parameter | r² | n weeks | Fit level | Half-life |")
+            print("|---|---|---|---|---|")
+            for p in fq['per_parameter']:
+                r2_str = f"{p['r_squared']:.2f}" if p.get('r_squared') is not None else "—"
+                nw_str = str(p.get('n_weeks', '—'))
+                fb_str = p.get('fallback_level', 'unknown')
+                hl_str = str(p.get('half_life_weeks', '—'))
+                print(f"| {p['name']} | {r2_str} | {nw_str} | {fb_str} | {hl_str} |")
+            if result.regime_stack:
+                print()
+                print("### Active Regimes")
+                for r in result.regime_stack:
+                    desc = (r.get('description') or '')[:60]
+                    eff = r.get('effective_confidence', 0)
+                    status = r.get('decay_status', '?')
+                    n_post = r.get('n_post_weeks', '?')
+                    print(f"- {r.get('change_date','?')} · {status} · {n_post}w post · confidence {eff:.2f} · {desc}")
+
     return 0 if result.outcome == 'OK' else 1
+
+
+def _build_fit_quality_summary(result: 'ProjectionOutputs') -> dict:
+    """Extract fit-quality metadata from parameters_used for UI surfacing.
+
+    Output shape:
+        {
+            'overall_trust': 'high' | 'medium' | 'low',
+            'overall_trust_reason': '...',
+            'per_parameter': [
+                {'name': 'nb_cpa_elasticity', 'r_squared': 0.41, 'n_weeks': 83,
+                 'fallback_level': 'market_specific', 'half_life_weeks': None},
+                ...
+            ],
+        }
+    """
+    params = result.parameters_used or {}
+    per_param: list[dict] = []
+    fits_r_squared: list[float] = []
+    has_fallback = False
+    # Focus on the parameters that actually drive v1.1 Slim projections.
+    for name in ('nb_cpa_elasticity', 'brand_cpa_elasticity',
+                 'brand_seasonality_shape', 'brand_yoy_growth'):
+        if name not in params:
+            continue
+        p = params[name]
+        # Pull value_json if it's been re-loaded; else parameters_used only holds meta.
+        # This extracts from any nested shape.
+        r2 = None
+        n_weeks = None
+        half_life = None
+        # parameters_used contains {'fallback_level', 'lineage', 'last_refit_at'} — we need
+        # to re-peek into market_projection_params_current if r² is missing.
+        if 'r_squared' in p:
+            r2 = p.get('r_squared')
+            n_weeks = p.get('weeks_used')
+        per_param.append({
+            'name': name,
+            'r_squared': r2,
+            'n_weeks': n_weeks,
+            'fallback_level': p.get('fallback_level', 'unknown'),
+            'half_life_weeks': half_life,
+            'lineage': p.get('lineage'),
+        })
+        if isinstance(r2, (int, float)):
+            fits_r_squared.append(float(r2))
+        if p.get('fallback_level') and p['fallback_level'] != 'market_specific':
+            has_fallback = True
+
+    # If we couldn't extract r² from parameters_used directly, re-fetch from DB.
+    if not any(p.get('r_squared') is not None for p in per_param) and result.scope in ALL_MARKETS:
+        try:
+            import json as _json
+            con = _db()
+            rows = con.execute("""
+                SELECT parameter_name, value_json, fallback_level
+                FROM ps.market_projection_params_current
+                WHERE market = ?
+                  AND parameter_name IN ('nb_cpa_elasticity','brand_cpa_elasticity',
+                                         'brand_seasonality_shape','brand_yoy_growth')
+            """, [result.scope]).fetchall()
+            lookup = {}
+            for name, vj_raw, fb in rows:
+                vj = _json.loads(vj_raw) if isinstance(vj_raw, str) else (vj_raw or {})
+                lookup[name] = {
+                    'r_squared': vj.get('r_squared'),
+                    'n_weeks': vj.get('weeks_used'),
+                    'fallback_level': fb,
+                }
+            for p in per_param:
+                if p['name'] in lookup:
+                    p['r_squared'] = lookup[p['name']].get('r_squared')
+                    p['n_weeks'] = lookup[p['name']].get('n_weeks')
+                    if p.get('fallback_level') == 'unknown':
+                        p['fallback_level'] = lookup[p['name']].get('fallback_level', 'unknown')
+                    if isinstance(p['r_squared'], (int, float)):
+                        fits_r_squared.append(float(p['r_squared']))
+                    if p['fallback_level'] and p['fallback_level'] != 'market_specific':
+                        has_fallback = True
+        except Exception:
+            pass  # best-effort — never block the projection on fit-quality lookup
+
+    # Classify overall trust.
+    if not fits_r_squared:
+        trust = 'unknown'
+        reason = 'no fit quality metadata available'
+    else:
+        mean_r2 = sum(fits_r_squared) / len(fits_r_squared)
+        if mean_r2 >= 0.45 and not has_fallback:
+            trust = 'high'
+            reason = f"mean r²={mean_r2:.2f} · all market-specific fits"
+        elif mean_r2 >= 0.30:
+            trust = 'medium'
+            reason = f"mean r²={mean_r2:.2f} · {'fallback in use' if has_fallback else 'borderline r²'}"
+        else:
+            trust = 'low'
+            reason = f"mean r²={mean_r2:.2f} · {'fallback in use' if has_fallback else 'flat-spend artifact'}"
+
+    return {
+        'overall_trust': trust,
+        'overall_trust_reason': reason,
+        'per_parameter': per_param,
+    }
 
 
 if __name__ == "__main__":

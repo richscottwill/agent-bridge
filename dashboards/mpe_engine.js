@@ -633,8 +633,47 @@
     }
 
     // Solve for target
+    //
+    // v1.1 Slim routing (Phase 6.1.7, 2026-04-23): for Y-periods, delegate
+    // to V1_1_Slim.projectWithLockedYtd which reads regime_fit_state from
+    // marketData and runs the full Brand-Anchor + NB-Residual + Locked-YTD
+    // flow mirroring the Python engine. Sub-year periods fall back to
+    // legacy solvers pending Phase 6.2 port of Brand trajectory for
+    // arbitrary week ranges.
     let solved;
-    if (inputs.targetMode === 'spend') {
+    const isYearPeriod = tp.type === 'year';
+    const v11Available = typeof global !== 'undefined' && global.V1_1_Slim;
+    const useV11 = isYearPeriod && v11Available;
+
+    if (useV11) {
+      const year = tp.year;
+      const v11 = global.V1_1_Slim.projectWithLockedYtd(
+        marketData, year,
+        inputs.targetMode, inputs.targetValue,
+        { regimeMultiplier: inputs.regimeMultiplier || 1.0 },
+      );
+      solved = {
+        weeks: [],  // per-week array populated in Phase 6.2.x
+        totals: {
+          brand_regs: v11.totals.brand_regs,
+          nb_regs: v11.totals.nb_regs,
+          total_regs: v11.totals.total_regs,
+          brand_spend: v11.totals.brand_spend,
+          nb_spend: v11.totals.nb_spend,
+          total_spend: v11.totals.total_spend,
+          brand_clicks: 0,
+          nb_clicks: 0,
+          blended_cpa: v11.totals.blended_cpa,
+          ieccp: v11.totals.computed_ieccp,
+          yoy_growth_applied: { brand: 0, nb: 0 },
+        },
+        solvedSpend: v11.totals.total_spend,
+      };
+      out.warnings.push(...v11.warnings);
+      out.contribution_breakdown = v11.contribution_breakdown;
+      out.locked_ytd_summary = v11.ytd;
+      out.regime_stack = v11.regime_stack;
+    } else if (inputs.targetMode === 'spend') {
       solved = projectMarketSpend(inputs.targetValue, params, tp, opts);
       solved.solvedSpend = inputs.targetValue;
     } else if (inputs.targetMode === 'ieccp') {

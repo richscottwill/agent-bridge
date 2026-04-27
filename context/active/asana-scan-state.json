@@ -1,31 +1,62 @@
 {
   "schema_version": "1.0",
-  "last_full_scan_utc": "2026-04-21T13:50:00Z",
-  "last_full_scan_pt": "2026-04-21T06:50:00-07:00",
-  "scan_window_hours": 15.5,
-  "scan_source": "B1 handoff file (asana-task-list-b1.json) + GetTaskStories",
-  "tasks_scanned": [
-    {"gid": "1213341921686564", "name": "Testing Document for Kate", "last_story_ts": "2026-04-15T14:35:42Z", "new_since_last_scan": false},
-    {"gid": "1213917967984980", "name": "Respond to Lena — AU LP URL", "last_story_ts": "2026-04-21T03:05:47Z", "new_since_last_scan": true, "change_type": "kiro_rw_self_update_plus_priority_today"},
-    {"gid": "1213125740755931", "name": "Email overlay WW rollout/testing", "last_story_ts": "2026-04-18T07:00:09Z", "new_since_last_scan": false},
-    {"gid": "1212808474749819", "name": "Paid App PO — Create Q2 + Amend Google PO to Q2", "last_story_ts": "2026-04-20T15:29:37Z", "new_since_last_scan": true, "change_type": "priority_urgent_to_today_self_update"},
-    {"gid": "1214128635826241", "name": "Reply to Dwayne: Brand LP consolidated feedback", "last_story_ts": "2026-04-21T00:31:52Z", "new_since_last_scan": true, "change_type": "marked_complete"}
+  "last_scan_utc": "2026-04-24T20:13:00Z",
+  "last_scan_pt": "2026-04-24T13:13:00-07:00",
+  "scan_type": "incremental_ooo_b2_monitor",
+  "tasks_scanned_for_stories": 5,
+  "tasks_scanned_gids": [
+    "1213341921686564",
+    "1214128635826241",
+    "1213125740755931",
+    "1213917967984980",
+    "1213959904341162"
   ],
-  "tasks_scanned_count": 5,
-  "tasks_skipped_count": 14,
-  "activity_detected": {
-    "completed": 1,
-    "self_priority_promotions": 2,
-    "external_comments": 0,
-    "due_date_changes": 0,
-    "reassignments": 0
-  },
-  "next_run_priority": [
-    "1213764961716427", "1213964186504305", "1213796951745232",
-    "1214081017092577", "1214074477110993", "1212988092117041",
-    "1214081017124426", "1214081017200478", "1214044682239803",
-    "1214044682239817", "1213235338214791", "1213085905102041",
-    "1214128634505816"
+  "stale_state_flags": [
+    {
+      "task_gid": "1213341921686564",
+      "task_name": "Testing Document for Kate",
+      "status": "frozen_since_2026-04-22",
+      "days_overdue": 23,
+      "workdays_at_zero": 22,
+      "hard_thing": true,
+      "most_recent_event_utc": "2026-04-22T01:53:30Z"
+    },
+    {
+      "task_gid": "1213959904341162",
+      "task_name": "Reply to Brandon — PAM budget needs assessment",
+      "status": "frozen_since_2026-04-22",
+      "days_overdue": 18,
+      "blocks": "Paid App PO (Q2)",
+      "most_recent_event_utc": "2026-04-22T14:21:39Z"
+    },
+    {
+      "task_gid": "1213125740755931",
+      "task_name": "Email overlay WW rollout/testing",
+      "status": "churned_no_ship",
+      "days_overdue": 6,
+      "most_recent_event_utc": "2026-04-24T07:03:15Z",
+      "note": "Automated due-today event 4/24; no Richard action since 4/22 05:18 UTC"
+    }
   ],
-  "rate_limit_events": 0
+  "completions_detected_not_yet_in_db": [
+    {"task_gid": "1213917967984980", "name": "Respond to Lena — AU LP URL analysis", "completed_utc": "2026-04-22T18:47:07Z"},
+    {"task_gid": "1214128635826241", "name": "Reply to Dwayne: Brand LP consolidated feedback", "completed_utc": "2026-04-21T00:31:52Z"}
+  ],
+  "monday_create_signals": [
+    {
+      "source": "slack_ab-paid-search-abix_4-24",
+      "topic": "Polaris Brand LP — switch from Weblab to Google experiment + build AU handoff doc",
+      "brandon_direct_ask": true,
+      "matching_asana_task": null
+    },
+    {
+      "source": "email_brandon_4-24_17-08",
+      "topic": "PO #2D-19910168 FAQ",
+      "brandon_direct_ask": true,
+      "matching_asana_task": null
+    }
+  ],
+  "rate_limited": false,
+  "skipped_priority_tasks": 12,
+  "skipped_reason": "Incremental OOO run — full story sweep deferred to next Monday weekly refit"
 }

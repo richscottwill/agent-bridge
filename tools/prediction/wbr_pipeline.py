@@ -714,6 +714,164 @@ class WBRPipeline:
                 print(f"  WARN: seasonal prior update failed for {market}: {e}")
         return updated
 
+    def _stage_project_v1_1_slim(self, current_week_key: str) -> int:
+        """Stage 4b (Phase 6.5.5 migration): Run v1.1 Slim projection engine
+        across all 10 markets and write Y2026 forecasts tagged method='v1_1_slim'.
+
+        This runs in parallel with the BayesianProjector stage so the two
+        methods coexist in ps.forecasts. Once v1.1 Slim's forecast accuracy
+        matches or beats Bayesian over 4+ scoring cycles, we can retire
+        BayesianProjector.
+
+        The Slim engine's `project_brand_trajectory` produces per-week Brand
+        regs + spend arrays; NB is distributed uniformly across 52 weeks from
+        the solver's annual total. We write per-week rows for the remainder
+        of the year.
+        """
+        from prediction.brand_trajectory import project_brand_trajectory
+        from prediction.locked_ytd import project_with_locked_ytd
+        from datetime import date, timedelta
+
+        try:
+            yr_str, wk_str = current_week_key.split('-W')
+            year_int = int(yr_str)
+            current_wk = int(wk_str)
+        except Exception:
+            print(f"  v1.1 Slim: invalid week key {current_week_key}, skipping")
+            return 0
+
+        # ISO-week start dates for the full year
+        jan4 = date(year_int, 1, 4)
+        start_of_w1 = jan4 - timedelta(days=jan4.weekday())
+        all_weeks = [start_of_w1 + timedelta(weeks=i) for i in range(52)]
+        forward_week_schedule = [(i + 1, f"{year_int}-W{i+1}") for i in range(current_wk, 52)]
+
+        written = 0
+        for market in ALL_MARKETS:
+            try:
+                # 0) Fetch required params from ps.market_projection_params_current
+                def _fetch_param(name):
+                    row = self.con.execute("""
+                        SELECT value_scalar, value_json
+                        FROM ps.market_projection_params_current
+                        WHERE market = ? AND parameter_name = ?
+                    """, [market, name]).fetchone()
+                    return row
+
+                nb_elast_row = _fetch_param('nb_cpa_elasticity')
+                nb_cpa_elast = {'a': 0.0, 'b': 0.0}
+                if nb_elast_row and nb_elast_row[1]:
+                    import json
+                    js = nb_elast_row[1] if isinstance(nb_elast_row[1], dict) else json.loads(nb_elast_row[1])
+                    nb_cpa_elast = {'a': float(js.get('a', 0)), 'b': float(js.get('b', 0))}
+
+                brand_ccp = None
+                brand_ccp_row = _fetch_param('brand_ccp')
+                if brand_ccp_row and brand_ccp_row[0] is not None:
+                    brand_ccp = float(brand_ccp_row[0])
+                nb_ccp = None
+                nb_ccp_row = _fetch_param('nb_ccp')
+                if nb_ccp_row and nb_ccp_row[0] is not None:
+                    nb_ccp = float(nb_ccp_row[0])
+
+                # 1) Get full-year Brand trajectory (per-week arrays)
+                bt = project_brand_trajectory(market=market, target_weeks=all_weeks)
+                if not bt or not bt.regs_per_week:
+                    continue
+
+                # 2) Get Locked-YTD solved projection for NB annual
+                supported = None
+                try:
+                    supp_row = self.con.execute("""
+                        SELECT value_json FROM ps.market_projection_params_current
+                        WHERE market = ? AND parameter_name = 'supported_target_modes'
+                    """, [market]).fetchone()
+                    if supp_row and supp_row[0]:
+                        import json
+                        supported = supp_row[0] if isinstance(supp_row[0], list) else json.loads(supp_row[0])
+                except Exception:
+                    supported = None
+
+                target_mode = 'spend'
+                target_value = 0.0
+                # If ie%CCP supported, use market's target; else fall back to OP2 spend
+                if supported and 'ieccp' in supported:
+                    ie_row = _fetch_param('ieccp_target')
+                    if ie_row and ie_row[0]:
+                        target_mode = 'ieccp'
+                        target_value = float(ie_row[0])
+                if target_mode == 'spend' and target_value == 0:
+                    # Fallback to OP2 annual spend target if available
+                    try:
+                        op2_row = self.con.execute("""
+                            SELECT SUM(target_value) FROM ps.targets
+                            WHERE market = ? AND fiscal_year = ? AND metric_name = 'cost'
+                              AND period_type = 'monthly'
+                        """, [market, year_int]).fetchone()
+                        if op2_row and op2_row[0]:
+                            target_value = float(op2_row[0])
+                    except Exception:
+                        pass
+
+                result = project_with_locked_ytd(
+                    market=market, year=year_int,
+                    target_mode=target_mode, target_value=target_value,
+                    nb_cpa_elast=nb_cpa_elast,
+                    brand_ccp=brand_ccp, nb_ccp=nb_ccp,
+                )
+                if not result:
+                    continue
+
+                nb_spend_annual = result.total_nb_spend or 0
+                nb_regs_annual = result.total_nb_regs or 0
+                nb_per_week_spend = nb_spend_annual / 52.0 if nb_spend_annual else 0
+                nb_per_week_regs = nb_regs_annual / 52.0 if nb_regs_annual else 0
+
+                # 3) Write per-forward-week rows tagged method='v1_1_slim'
+                for wk_num, wk_key in forward_week_schedule:
+                    idx = wk_num - 1
+                    if idx >= len(bt.regs_per_week):
+                        break
+                    brand_r = float(bt.regs_per_week[idx])
+                    brand_s = float(bt.spend_per_week[idx]) if idx < len(bt.spend_per_week) else 0
+                    total_r = brand_r + nb_per_week_regs
+                    total_s = brand_s + nb_per_week_spend
+                    if total_r <= 0:
+                        continue
+                    for metric, value in [
+                        ('registrations', total_r),
+                        ('cost', total_s),
+                        ('brand_registrations', brand_r),
+                        ('nb_registrations', nb_per_week_regs),
+                    ]:
+                        if value is None or value <= 0:
+                            continue
+                        self.con.execute("""
+                            DELETE FROM ps.forecasts
+                            WHERE market = ? AND metric_name = ? AND target_period = ?
+                            AND method = 'v1_1_slim'
+                            AND (scored IS NULL OR scored = false)
+                        """, [market, metric, wk_key])
+                        self.con.execute("""
+                            INSERT INTO ps.forecasts
+                                (market, metric_name, target_period, predicted_value,
+                                 confidence_low, confidence_high, method, forecast_date,
+                                 scored, lead_weeks)
+                            VALUES (?, ?, ?, ?, ?, ?, 'v1_1_slim', ?, false, ?)
+                        """, [
+                            market, metric, wk_key, float(value),
+                            float(value) * 0.85, float(value) * 1.15,   # rough ±15% CI
+                            datetime.now().strftime('%Y-%m-%d'),
+                            wk_num - current_wk,
+                        ])
+                        written += 1
+            except Exception as e:
+                print(f"  v1.1 Slim {market} failed: {type(e).__name__}: {e}")
+                continue
+
+        print(f"  v1.1 Slim: {written} forecast rows written (method='v1_1_slim')")
+        return written
+
     def _stage_project(self, calibration_factor: float) -> list:
         """Stage 4: BayesianProjector for all 10 markets across W+1..W52.
 
@@ -1127,6 +1285,34 @@ class WBRPipeline:
             result.stages_failed.append('project')
             result.errors.append(f"Project: {e}")
             print(f"  ERROR: Project failed — {e}")
+            traceback.print_exc()
+
+        # ── Stage 4b: v1.1 Slim parallel projection (Phase 6.5.5 migration) ──
+        # Writes Brand-Anchor + NB-Residual + Locked-YTD forecasts alongside
+        # the Bayesian ones. Tagged method='v1_1_slim' so downstream consumers
+        # and scorers can filter. Runs as a separate subprocess to avoid the
+        # MotherDuck same-database-different-config connection conflict
+        # (mpe_fitting uses a read-only conn; WBR pipeline holds a writable one).
+        # Non-critical stage — don't block WBR if it fails.
+        try:
+            print("Stage 4b: v1.1 Slim projections (Phase 6.5.5 migration)...")
+            import subprocess
+            r = subprocess.run(
+                ['python3', '-m', 'prediction.write_v1_1_slim_forecasts',
+                 '--week', self._current_week_key()],
+                capture_output=True, text=True, timeout=300,
+            )
+            print(r.stdout[-500:] if r.stdout else '')
+            if r.returncode != 0:
+                print(f"  v1.1 Slim subprocess failed: {r.stderr[-500:]}")
+                result.stages_failed.append('project_v1_1_slim')
+                result.errors.append(f"v1.1 Slim project: returncode={r.returncode}")
+            else:
+                result.stages_completed.append('project_v1_1_slim')
+        except Exception as e:
+            result.stages_failed.append('project_v1_1_slim')
+            result.errors.append(f"v1.1 Slim project: {e}")
+            print(f"  ERROR: v1.1 Slim project failed — {e}")
             traceback.print_exc()
 
         # ── Stage 5: Callout Signal ──

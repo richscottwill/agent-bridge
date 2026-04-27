@@ -1,0 +1,20 @@
+# MPE v1.1 Slim Requirements
+# Use internal Amazon PyPI mirror when installing
+
+numpy>=1.26.0
+pandas>=2.2.0
+duckdb>=1.1.0
+scipy>=1.13.0          # For solvers (Brent's method)
+matplotlib>=3.9.0
+seaborn>=0.13.0
+
+# For future v1.2+ Bayesian work (optional for v1.1)
+# numpyro>=0.15.0
+# pymc>=5.16.0
+# arviz>=0.18.0
+
+# Development
+jupyterlab>=4.2.0
+ruff>=0.4.0
+black>=24.4.0
+pre-commit>=3.7.0
