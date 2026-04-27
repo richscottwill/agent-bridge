@@ -714,6 +714,118 @@ def build_cross_market_anomalies(wk, forecast):
                 anomalies.append({"metric": f"{m} CPA", "value": f"${cpa:.0f}", "avg_8wk": f"WW avg ${mean_cpa:.0f}", "deviation": f"{(cpa - mean_cpa) / mean_cpa * 100:+.0f}%", "flag": flag, "category": "overall"})
     return anomalies
 
+# ── Aggregate narrative synthesis (Option C) ──────────────────────────
+# Auto-compose a WW or EU5 narrative from the per-market entries when no
+# hand-authored ww-summary-2026-wNN.md source file exists. Mirrors the shape
+# the WBR pipeline would produce so the dashboard never renders an empty
+# callout card for aggregate markets.
+
+def _fmt_pct(v, signed=True):
+    if v is None:
+        return None
+    sign = '+' if (signed and v > 0) else ''
+    return f"{sign}{v:.1f}%"
+
+def _fmt_num(v):
+    if v is None or v == 0:
+        return '—'
+    if abs(v) >= 1_000_000:
+        return f"{v/1_000_000:.1f}M"
+    if abs(v) >= 1_000:
+        return f"{v/1_000:.1f}K"
+    return f"{int(v):,}"
+
+def _fmt_dollars(v):
+    if v is None or v == 0:
+        return '—'
+    return f"${v:,.0f}"
+
+def synthesize_aggregate_narrative(aggregate_market, wk, entry, callouts, member_markets, forecast):
+    """Return (headline, body) for a derived market (WW/EU5) when no authored
+    narrative exists. Pulls from per-market entries + forecast totals to produce
+    a self-contained paragraph block the UI can render in place of the empty
+    full_callout. Intentionally quantitative — no opinions, no strategic claims.
+    """
+    metrics = entry.get("metrics") or {}
+    regs = metrics.get("regs")
+    spend = metrics.get("spend")
+    cpa = metrics.get("cpa")
+    regs_wow = metrics.get("regs_wow")
+    spend_wow = metrics.get("spend_wow")
+    cpa_wow = metrics.get("cpa_wow")
+    regs_yoy = metrics.get("regs_yoy")
+
+    # Collect member-market WoW regs so we can highlight gainer/decliner
+    member_wow = []
+    for m in member_markets:
+        mentry = callouts.get(m, {}).get(f"W{wk}") or {}
+        mm = mentry.get("metrics") or {}
+        if mm.get("regs_wow") is not None:
+            member_wow.append((m, mm["regs_wow"], mm.get("regs"), mm.get("cpa")))
+    member_wow.sort(key=lambda r: r[1], reverse=True)
+    gainer = member_wow[0] if member_wow else None
+    decliner = member_wow[-1] if len(member_wow) > 1 else None
+
+    # Headline: regs + WoW + CPA direction
+    headline_bits = [f"{aggregate_market} drove {_fmt_num(regs)} registrations"]
+    if regs_wow is not None:
+        headline_bits[-1] += f" ({_fmt_pct(regs_wow)} WoW)"
+    if spend_wow is not None:
+        headline_bits.append(f"with {_fmt_pct(spend_wow)} spend WoW")
+    if cpa is not None:
+        cpa_dir = ""
+        if cpa_wow is not None:
+            cpa_dir = " (decreased)" if cpa_wow < 0 else (" (increased)" if cpa_wow > 0 else "")
+        headline_bits.append(f"CPA ${cpa:.0f}{cpa_dir}")
+    headline = ". ".join(headline_bits) + "."
+
+    # Body paragraph 1 — top-level totals and YoY context
+    para1_parts = [headline]
+    if regs_yoy is not None:
+        para1_parts.append(f"YoY registrations {_fmt_pct(regs_yoy)}.")
+    if spend is not None:
+        para1_parts.append(f"Total spend {_fmt_dollars(spend)}.")
+    para1 = " ".join(para1_parts)
+
+    # Body paragraph 2 — gainer / decliner across member markets
+    para2_bits = []
+    if gainer:
+        gm, gw, gr, _ = gainer
+        para2_bits.append(f"Biggest gainer: {gm} ({_fmt_pct(gw)} WoW regs, {_fmt_num(gr)} total).")
+    if decliner and gainer and decliner[0] != gainer[0]:
+        dm, dw, dr, _ = decliner
+        para2_bits.append(f"Biggest decliner: {dm} ({_fmt_pct(dw)} WoW regs, {_fmt_num(dr)} total).")
+    para2 = " ".join(para2_bits) if para2_bits else ""
+
+    # Body paragraph 3 — member breakdown (short, one line per market)
+    breakdown_lines = []
+    for m in member_markets:
+        mentry = callouts.get(m, {}).get(f"W{wk}") or {}
+        mm = mentry.get("metrics") or {}
+        if mm.get("regs"):
+            wow_str = f" ({_fmt_pct(mm.get('regs_wow'))})" if mm.get('regs_wow') is not None else ""
+            cpa_str = f", CPA ${mm['cpa']:.0f}" if mm.get('cpa') else ""
+            breakdown_lines.append(f"• {m}: {_fmt_num(mm['regs'])} regs{wow_str}{cpa_str}")
+    para3 = "Market breakdown:\n" + "\n".join(breakdown_lines) if breakdown_lines else ""
+
+    # Body paragraph 4 — anomaly summary (pull the 3 most significant)
+    anomalies = entry.get("anomalies") or []
+    anom_lines = []
+    for a in anomalies[:3]:
+        metric = a.get("metric", "")
+        dev = a.get("deviation", "")
+        if metric and dev:
+            anom_lines.append(f"• {metric}: {dev}")
+    para4 = ("Notable cross-market anomalies:\n" + "\n".join(anom_lines)) if anom_lines else ""
+
+    # Trailer — marks this as auto-generated so readers know it isn't authored
+    trailer = f"_Auto-composed from per-market entries — no {aggregate_market.lower()}-summary-2026-w{wk}.md file found._"
+
+    body_paras = [p for p in [para1, para2, para3, para4, trailer] if p]
+    body = "\n\n".join(body_paras)
+    return headline, body
+
+
 # ── Main ──────────────────────────────────────────────────────────────
 def main():
     forecast = load_forecast()
@@ -845,6 +957,14 @@ def main():
                 decisions.append(f"{m}: {fcast['regs']:,} regs, ${fcast['cost']:,.0f} spend, ${fcast['cpa']:.0f} CPA")
         if decisions:
             entry["decisions"] = decisions
+        # Auto-compose WW narrative when no source markdown exists (Option C).
+        # Runs LAST so it has access to decisions + external_factors + anomalies
+        # that the earlier enrichment populated.
+        if not entry.get("full_callout"):
+            hl, body = synthesize_aggregate_narrative("WW", w, entry, callouts, MARKETS, forecast)
+            if body:
+                entry["headline"] = hl
+                entry["full_callout"] = body
 
     # Post-enrich EU5 with per-market decision breakdown.
     for w in weeks:
@@ -859,6 +979,12 @@ def main():
                 decisions.append(f"{m}: {fcast['regs']:,} regs, ${fcast['cost']:,.0f} spend, ${fcast['cpa']:.0f} CPA")
         if decisions:
             entry["decisions"] = decisions
+        # Auto-compose EU5 narrative (Option C — mirrors the WW path).
+        if not entry.get("full_callout"):
+            hl, body = synthesize_aggregate_narrative("EU5", w, entry, callouts, ["UK","DE","FR","IT","ES"], forecast)
+            if body:
+                entry["headline"] = hl
+                entry["full_callout"] = body
 
     # Display order: WW, US, EU5, JP, CA, MX, AU (hide individual EU5 markets)
     display_markets = [m for m in DISPLAY_MARKETS if callouts.get(m)]

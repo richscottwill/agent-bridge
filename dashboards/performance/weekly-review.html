@@ -84,17 +84,17 @@ tr:hover{background:#1f222b}
 <body>
 <div class="toc">
   <span class="toc-label">Jump to</span>
-  <a href="#sec-callout">Callout</a>
-  <span class="toc-sep">&middot;</span>
   <a href="#sec-kpis">KPIs</a>
   <span class="toc-sep">&middot;</span>
   <a href="#sec-trend">Trend</a>
   <span class="toc-sep">&middot;</span>
+  <a href="#sec-detail">Weekly Detail</a>
+  <span class="toc-sep">&middot;</span>
+  <a href="#sec-callout">Callout</a>
+  <span class="toc-sep">&middot;</span>
   <a href="#sec-channels">Channels</a>
   <span class="toc-sep">&middot;</span>
   <a href="#sec-projections">Projections</a>
-  <span class="toc-sep">&middot;</span>
-  <a href="#sec-detail">Weekly Detail</a>
   <span class="toc-sep">&middot;</span>
   <a href="#sec-context">Context</a>
 </div>
@@ -116,13 +116,7 @@ tr:hover{background:#1f222b}
   </div>
 </div>
 
-<!-- ============ CALLOUT SECTION (top — narrative first) ============ -->
-<div class="grid" id="calloutGrid">
-  <div class="card card-full empty-state">Loading&hellip;</div>
-</div>
-
-<!-- ============ TRACKER SECTION (bottom — full-year context) ============ -->
-<div class="section-divider">Full-year tracker</div>
+<!-- ============ TRACKER SECTION (top — chart + KPIs + weekly detail) ============ -->
 <div id="sec-kpis"></div>
 <div class="kpi-row" id="kpiRow"></div>
 <div class="grid">
@@ -144,6 +138,12 @@ tr:hover{background:#1f222b}
       </tr></thead><tbody id="weeklyBody"></tbody></table>
     </div>
   </div>
+</div>
+
+<!-- ============ CALLOUT SECTION (bottom — narrative context) ============ -->
+<div class="section-divider">Callout context for selected week</div>
+<div class="grid" id="calloutGrid">
+  <div class="card card-full empty-state">Loading&hellip;</div>
 </div>
 <div class="ts" id="genTs"></div>
 
