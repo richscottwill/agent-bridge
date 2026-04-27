@@ -1416,7 +1416,37 @@
       }
     }
 
-    // Legend below chart (solid = regs axis, dashed = spend overlay scaled to regs)
+    // Round 11 P2-07: Clickable legend with default-hide for spend series.
+    // Each legend item becomes a toggle that hides/shows the corresponding
+    // SVG path by matching stroke color + dash pattern. Default state
+    // hides the two "scaled spend" lines so the chart is legible by default;
+    // users who want to see spend shape can click to reveal.
+    //
+    // Series identity keys (stroke, strokeDasharray):
+    //   actuals-regs:  (color-actuals, none)
+    //   actuals-spend: (color-actuals, 2,3)
+    //   proj-brand:    (color-brand,   none)
+    //   proj-nb:       (color-nb,      none)
+    //   proj-total:    (#1A1A1A,       none)
+    //   proj-total-spend: (#1A1A1A,    8,4)
+    if (!STATE.legendVisibility) {
+      STATE.legendVisibility = {
+        'actuals-regs': true,
+        'actuals-spend': false,   // default hide
+        'proj-brand': true,
+        'proj-nb': true,
+        'proj-total': true,
+        'proj-total-spend': false, // default hide
+      };
+    }
+
+    // Helper: compute hex of a CSS var (browsers resolve to rgb() in getComputedStyle).
+    const styles = getComputedStyle(document.documentElement);
+    const colorActuals = (styles.getPropertyValue('--color-actuals') || '#4A4A4A').trim();
+    const colorBrand = (styles.getPropertyValue('--color-brand') || '#0066CC').trim();
+    const colorNb = (styles.getPropertyValue('--color-nb') || '#FF9900').trim();
+
+    // Legend below chart (clickable toggles)
     const legend = document.createElement('div');
     legend.style.textAlign = 'center';
     legend.style.fontSize = '11px';
@@ -1426,15 +1456,63 @@
     legend.style.justifyContent = 'center';
     legend.style.gap = 'var(--gap-lg)';
     legend.style.flexWrap = 'wrap';
-    legend.innerHTML = `
-      <span><span style="display:inline-block;width:16px;height:2px;background:var(--color-actuals);vertical-align:middle"></span> Actuals (regs)</span>
-      <span><span style="display:inline-block;width:16px;border-top:2px dashed var(--color-actuals);vertical-align:middle"></span> Actuals (spend, scaled)</span>
-      <span><span style="display:inline-block;width:16px;height:2px;background:var(--color-brand);vertical-align:middle"></span> Projected Brand</span>
-      <span><span style="display:inline-block;width:16px;height:2px;background:var(--color-nb);vertical-align:middle"></span> Projected Non-Brand</span>
-      <span><span style="display:inline-block;width:16px;height:2.5px;background:#1A1A1A;vertical-align:middle"></span> Projected Total</span>
-      <span><span style="display:inline-block;width:16px;border-top:2px dashed #1A1A1A;vertical-align:middle"></span> Projected Total spend (scaled)</span>
-    `;
+
+    const legendItems = [
+      { key: 'actuals-regs', label: 'Actuals (regs)', swatch: `<span style="display:inline-block;width:16px;height:2px;background:var(--color-actuals);vertical-align:middle"></span>` },
+      { key: 'actuals-spend', label: 'Actuals (spend, scaled)', swatch: `<span style="display:inline-block;width:16px;border-top:2px dashed var(--color-actuals);vertical-align:middle"></span>` },
+      { key: 'proj-brand', label: 'Projected Brand', swatch: `<span style="display:inline-block;width:16px;height:2px;background:var(--color-brand);vertical-align:middle"></span>` },
+      { key: 'proj-nb', label: 'Projected Non-Brand', swatch: `<span style="display:inline-block;width:16px;height:2px;background:var(--color-nb);vertical-align:middle"></span>` },
+      { key: 'proj-total', label: 'Projected Total', swatch: `<span style="display:inline-block;width:16px;height:2.5px;background:#1A1A1A;vertical-align:middle"></span>` },
+      { key: 'proj-total-spend', label: 'Projected Total spend (scaled)', swatch: `<span style="display:inline-block;width:16px;border-top:2px dashed #1A1A1A;vertical-align:middle"></span>` },
+    ];
+    legend.innerHTML = legendItems.map(it => {
+      const hidden = !STATE.legendVisibility[it.key];
+      const textStyle = hidden ? 'text-decoration:line-through;opacity:0.5;' : '';
+      return `<span class="legend-item" data-series="${it.key}" style="cursor:pointer;user-select:none;${textStyle}" title="Click to toggle">${it.swatch} ${it.label}</span>`;
+    }).join('');
     chartEl.appendChild(legend);
+
+    // Apply initial default-hide state to SVG paths + wire legend click handlers.
+    const svgNodeForLegend = chart.tagName === 'SVG' ? chart : chart.querySelector('svg');
+    const applySeriesVisibility = () => {
+      if (!svgNodeForLegend) return;
+      const paths = svgNodeForLegend.querySelectorAll('path');
+      for (const p of paths) {
+        const s = (p.getAttribute('stroke') || '').toLowerCase();
+        const dash = p.getAttribute('stroke-dasharray') || '';
+        // Match series by stroke + dash. Plot may emit colors as rgb(...) or hex.
+        let seriesKey = null;
+        const sNorm = s.replace(/\s/g, '');
+        const matchesActuals = sNorm.includes('74,74,74') || sNorm.includes(colorActuals.replace('#', '').toLowerCase());
+        const matchesBrand = sNorm.includes('0,102,204') || sNorm.includes(colorBrand.replace('#', '').toLowerCase());
+        const matchesNb = sNorm.includes('255,153,0') || sNorm.includes(colorNb.replace('#', '').toLowerCase());
+        const matchesNeutral = sNorm.includes('26,26,26') || sNorm === 'rgb(26,26,26)' || sNorm.includes('1a1a1a');
+        if (matchesActuals && dash) seriesKey = 'actuals-spend';
+        else if (matchesActuals) seriesKey = 'actuals-regs';
+        else if (matchesBrand) seriesKey = 'proj-brand';
+        else if (matchesNb) seriesKey = 'proj-nb';
+        else if (matchesNeutral && dash) seriesKey = 'proj-total-spend';
+        else if (matchesNeutral && !dash && p.getAttribute('stroke-width') === '2.5') seriesKey = 'proj-total';
+        if (seriesKey && STATE.legendVisibility[seriesKey] === false) {
+          p.style.display = 'none';
+        } else if (seriesKey) {
+          p.style.display = '';
+        }
+      }
+    };
+    applySeriesVisibility();
+
+    legend.querySelectorAll('.legend-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const key = el.dataset.series;
+        STATE.legendVisibility[key] = !STATE.legendVisibility[key];
+        applySeriesVisibility();
+        // Update legend item styling
+        const hidden = !STATE.legendVisibility[key];
+        el.style.textDecoration = hidden ? 'line-through' : '';
+        el.style.opacity = hidden ? '0.5' : '1';
+      });
+    });
 
     // Overlay D3 SVG for narrated tooltips (task 6.3.6)
     attachNarratedTooltips(chart, chartData, marketData, out);
@@ -2714,6 +2792,41 @@
     bindDisclosureButtons();
     wireFeedbackBar();
     renderHeaderAnomalies();
+
+    // Round 11 P2-07b: KPI tile → chart series linking.
+    // Click a KPI tile with data-kpi-series → isolate that chart series.
+    // Click again → restore previous legend visibility state.
+    document.querySelectorAll('.hero-kpi[data-kpi-series]').forEach(tile => {
+      tile.addEventListener('click', () => {
+        const series = tile.dataset.kpiSeries;
+        if (!STATE.legendVisibility) return;
+        if (STATE.kpiIsolatedSeries === series) {
+          // Already isolated → restore defaults
+          STATE.legendVisibility = {
+            'actuals-regs': true, 'actuals-spend': false,
+            'proj-brand': true, 'proj-nb': true, 'proj-total': true,
+            'proj-total-spend': false,
+          };
+          STATE.kpiIsolatedSeries = null;
+          tile.classList.remove('kpi-active');
+        } else {
+          // Isolate: only this series + actuals-regs visible for context
+          STATE.legendVisibility = {
+            'actuals-regs': true, 'actuals-spend': false,
+            'proj-brand': series === 'proj-brand',
+            'proj-nb': series === 'proj-nb',
+            'proj-total': series === 'proj-total',
+            'proj-total-spend': false,
+          };
+          STATE.kpiIsolatedSeries = series;
+          document.querySelectorAll('.hero-kpi[data-kpi-series]').forEach(t => t.classList.remove('kpi-active'));
+          tile.classList.add('kpi-active');
+        }
+        // Re-render chart to apply new legend state (cheapest reliable path
+        // since the SVG is already built; just trigger the existing path).
+        recompute({ animated: false });
+      });
+    });
 
     // View switcher (6.4.1 / 6.4.2)
     document.querySelectorAll('[data-view]').forEach(btn => {

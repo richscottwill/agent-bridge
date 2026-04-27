@@ -1094,3 +1094,14 @@ select.control-input:hover {
 .hero-market-refreshed:hover {
   color: var(--color-brand, #0066CC);
 }
+
+
+/* Round 11 P2-07b: KPI tile isolation state. When a KPI is clicked to
+   isolate its chart series, give it a brand-blue left border and subtle
+   bg tint so the user sees which KPI drove the current chart view. */
+.hero-kpi[data-kpi-series] { border-left: 3px solid transparent; padding-left: 8px; }
+.hero-kpi[data-kpi-series]:hover { border-left-color: var(--color-brand, #0066CC); }
+.hero-kpi[data-kpi-series].kpi-active {
+  border-left-color: var(--color-brand, #0066CC);
+  background: #F0F7FF;
+}

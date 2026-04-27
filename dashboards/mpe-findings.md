@@ -142,10 +142,19 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 - **Status:** open
 - **Verification:** Each hero KPI has a small "+3.2% vs last week" subline in green/red.
 
-### P2-07 · Clickable chart legend
-- **Source:** Round 4 C-10
-- **Status:** open
-- **Verification:** Click "Projected Non-Brand" in legend → that line toggles invisible/visible.
+### P2-07 · Clickable chart legend (+ KPI tile linking)
+- **Source:** Round 4 C-10 (legend), R11 (KPI linking = P2-07b)
+- **Status:** done
+- **Verification:**
+  - Click "Projected Non-Brand" in the legend → orange line hides, legend text gets strikethrough + opacity 0.5. Click again → restored.
+  - On cold load, "Actuals (spend, scaled)" and "Projected Total spend (scaled)" are default-hidden. Chart is legible by default; spend lines are one click away.
+  - Click Brand Regs KPI tile → chart isolates to Brand line + Actuals. Tile gets brand-blue left border + `#F0F7FF` bg. Click same KPI again → restore defaults.
+  - NB Regs KPI isolates NB line same way.
+- **What landed:**
+  - `STATE.legendVisibility` object keyed by series id (`actuals-regs`, `actuals-spend`, `proj-brand`, `proj-nb`, `proj-total`, `proj-total-spend`) with defaults hiding the two scaled-spend lines
+  - Legend items get `data-series` attr + click handler that flips the visibility bit and updates `style.display` on matching SVG paths (matched by stroke color + dash pattern)
+  - KPI tiles with `data-kpi-series` get a click handler that either isolates (only that series + actuals visible) or restores (defaults). `.kpi-active` CSS class highlights the driving KPI.
+- **P2-07b tracked inline** in this commit — worth its own sub-entry if the behavior needs a separate verification round but tightly coupled to legend toggling.
 
 ### P2-08 · Line end-labels
 - **Source:** Round 4 C-11
@@ -184,8 +193,9 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P2-15 · Spend on separate axis or chart
 - **Source:** Round 1 C-2
-- **Status:** open
-- **Verification:** Spend no longer scaled onto the regs y-axis. Either dual y-axis with labeled "Spend ($)" right axis, or small spend sparkline below.
+- **Status:** done (option 1 — dual y-axis via post-render overlay)
+- **Verification:** On MX chart, right margin shows spend-equivalent tick labels (`$400K`, `$800K`, `$1.2M`, …) corresponding to the regs-axis tick positions. `↑ Spend ($)` label at top-right. Spend lines still drawn on scaled axis but readable off the right margin.
+- **What landed:** Post-render SVG overlay that queries each left-axis tick (`[aria-label="y-axis tick label"]`), computes the spend-equivalent via `regsVal / spendScale`, mirrors the label on the right side with `fmt$` formatting.
 
 ### P2-16 · Y-axis auto-scale tightening
 - **Source:** Round 1 C-3
@@ -401,4 +411,4 @@ The earlier "Phase 4 palette consolidation 41→14 tokens" and "type scale 13→
 Execute top-to-bottom within each phase. When a finding is blocked, mark the
 reason in-place and move to the next. Never silently skip.
 
-**Current next-up:** P1-05 → P2-01 → P2-15 → P2-07 (cluster pulled forward per Richard's R11 ask on chart credibility). Then P1-06/07/09/12/08. P1-01 done via Option C, P1-10 done, P1-04 done (UI+math), P2-03 done (side effect of P1-01).
+**Current next-up:** P1-05 → P1-06 → P1-07 → P1-09 → P1-12 → P1-08. (R11 cluster P2-01/P2-15/P2-07 done + P2-03 confirmed as P1-01 side effect.)
