@@ -6,7 +6,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Performance — Forecast &amp; Callouts</title>
+<title>Performance — Weekly Review &amp; Projection Engine</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
@@ -23,33 +23,44 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <body>
 <div class="subnav">
   <span class="subnav-brand">Performance</span>
-  <a class="subnav-link active" data-view="../forecast-tracker.html">Forecast Tracker</a>
-  <a class="subnav-link" data-view="../callout-dashboard.html">WBR Callouts</a>
+  <a class="subnav-link active" data-view="weekly-review.html">Weekly Review</a>
+  <a class="subnav-link" data-view="../projection.html">Projection Engine</a>
 </div>
 <div class="frame-wrap">
-  <iframe id="perfFrame" src="../forecast-tracker.html"></iframe>
+  <iframe id="perfFrame" src="weekly-review.html"></iframe>
 </div>
 <script>
 (function(){
   const frame = document.getElementById('perfFrame');
   const links = document.querySelectorAll('.subnav-link');
   const STORAGE_KEY = 'perf_subtab_view';
+  // Legacy values that need to migrate to the new subtab layout. Anything else
+  // in this list is a valid current subtab. Old values get rewritten to the
+  // default ('weekly-review.html') so returning users don't land on a dead page.
+  const CURRENT_VIEWS = ['weekly-review.html', '../projection.html'];
+  const LEGACY_REMAP = {
+    '../forecast-tracker.html': 'weekly-review.html',
+    '../callout-dashboard.html': 'weekly-review.html',
+  };
 
   function setActive(view){
     links.forEach(l => l.classList.toggle('active', l.dataset.view === view));
-    frame.src = view + '?t=' + Date.now();
+    frame.src = view + (view.includes('?') ? '&' : '?') + 't=' + Date.now();
     try { localStorage.setItem(STORAGE_KEY, view); } catch(e){}
   }
 
-  // Restore last sub-tab on load (default: Forecast Tracker)
-  let initial = '../forecast-tracker.html';
+  // Restore last sub-tab on load (default: Weekly Review)
+  let initial = 'weekly-review.html';
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved === '../forecast-tracker.html' || saved === '../callout-dashboard.html') {
+    if (saved && LEGACY_REMAP[saved]) {
+      initial = LEGACY_REMAP[saved];
+      localStorage.setItem(STORAGE_KEY, initial);
+    } else if (CURRENT_VIEWS.includes(saved)) {
       initial = saved;
     }
   } catch(e){}
-  if (initial !== '../forecast-tracker.html') setActive(initial);
+  if (initial !== 'weekly-review.html') setActive(initial);
 
   links.forEach(l => {
     l.addEventListener('click', (e) => {
