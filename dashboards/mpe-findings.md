@@ -401,4 +401,4 @@ The earlier "Phase 4 palette consolidation 41→14 tokens" and "type scale 13→
 Execute top-to-bottom within each phase. When a finding is blocked, mark the
 reason in-place and move to the next. Never silently skip.
 
-**Current next-up:** P1-01 (MC draws). Blocks P1-08 + P2-03.
+**Current next-up:** P1-05 (confidence floor). P1-01 done via Option C, P1-10 done, P1-04 done (UI+math).
