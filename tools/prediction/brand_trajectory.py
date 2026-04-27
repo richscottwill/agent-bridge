@@ -613,6 +613,28 @@ def _single_regime_multiplier_at(regime: dict, target_week: date) -> float:
     return 1.0 + decayed_excess
 
 
+# Round 7 P1-04 math-side: lifts with no-decay-detected AND >=52 weeks of
+# post-onset data are treated as structural baseline — their "lift" has
+# persisted for >=1 year without decay, meaning the system has drifted INTO
+# that level as its new baseline. Continuing to count them as a transient
+# lift on top of the pre-regime anchor is double-counting. UI-side flag
+# absorbed_into_baseline has been live since 2026-04-27; math-side parity
+# landed in this commit after pre/post snapshot + delta review.
+_ABSORBED_INTO_BASELINE_MIN_POST_WEEKS = 52
+
+
+def _is_absorbed_into_baseline(regime: dict) -> bool:
+    """Return True if the regime should be treated as part of the baseline
+    rather than a transient lift on top of it."""
+    n_post = regime.get("n_post_weeks")
+    status = regime.get("decay_status")
+    if status != "no-decay-detected":
+        return False
+    if n_post is None:
+        return False
+    return int(n_post) >= _ABSORBED_INTO_BASELINE_MIN_POST_WEEKS
+
+
 def _per_regime_weighted_contribution(regime: dict, target_week: date, regime_multiplier: float = 1.0) -> float:
     """Apply a regime's effective confidence to its raw multiplier at the
     given week, returning the weighted factor that will compound into the
@@ -630,8 +652,16 @@ def _per_regime_weighted_contribution(regime: dict, target_week: date, regime_mu
 
     For a stable, high-confidence regime, weighted ≈ raw_mult and the full
     step-shift lands in the output.
+
+    Absorbed-into-baseline regimes (no-decay-detected AND n_post >= 52w)
+    return 1.0 — they contribute nothing MULTIPLICATIVELY because they've
+    drifted into the baseline. The Brand trajectory anchor already reflects
+    their level. Counting them again would double-count.
     """
     from prediction.regime_confidence import effective_confidence
+
+    if _is_absorbed_into_baseline(regime):
+        return 1.0
 
     raw = _single_regime_multiplier_at(regime, target_week)
     eff = effective_confidence(

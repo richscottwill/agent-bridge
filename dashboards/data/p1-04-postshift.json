@@ -1,0 +1,105 @@
+{
+  "as_of_version": "post-P1-04-math (2026-04-27T18:45Z)",
+  "markets": {
+    "US": {
+      "target_mode": "ieccp",
+      "target_value": 0.65,
+      "outcome": "OK",
+      "total_spend": 46082022.08,
+      "total_regs": 444169.58,
+      "brand_regs": 135582.16,
+      "nb_regs": 308587.43,
+      "computed_ieccp": 64.995
+    },
+    "CA": {
+      "target_mode": "ieccp",
+      "target_value": 0.65,
+      "outcome": "OK",
+      "total_spend": 3570081.87,
+      "total_regs": 40469.61,
+      "brand_regs": 23817.22,
+      "nb_regs": 16652.39,
+      "computed_ieccp": 64.974
+    },
+    "UK": {
+      "target_mode": "ieccp",
+      "target_value": 0.65,
+      "outcome": "OK",
+      "total_spend": 5789956.1,
+      "total_regs": 68681.39,
+      "brand_regs": 25189.08,
+      "nb_regs": 43492.3,
+      "computed_ieccp": 65.006
+    },
+    "DE": {
+      "target_mode": "ieccp",
+      "target_value": 0.65,
+      "outcome": "OK",
+      "total_spend": 9860761.5,
+      "total_regs": 69279.12,
+      "brand_regs": 35811.3,
+      "nb_regs": 33467.82,
+      "computed_ieccp": 64.976
+    },
+    "FR": {
+      "target_mode": "ieccp",
+      "target_value": 0.65,
+      "outcome": "OK",
+      "total_spend": 4335382.64,
+      "total_regs": 61101.55,
+      "brand_regs": 20905.66,
+      "nb_regs": 40195.89,
+      "computed_ieccp": 65.023
+    },
+    "IT": {
+      "target_mode": "ieccp",
+      "target_value": 0.65,
+      "outcome": "OK",
+      "total_spend": 5262878.84,
+      "total_regs": 63802.39,
+      "brand_regs": 37402.6,
+      "nb_regs": 26399.79,
+      "computed_ieccp": 64.954
+    },
+    "ES": {
+      "target_mode": "ieccp",
+      "target_value": 0.65,
+      "outcome": "OK",
+      "total_spend": 2843277.87,
+      "total_regs": 38959.68,
+      "brand_regs": 17948.3,
+      "nb_regs": 21011.38,
+      "computed_ieccp": 65.008
+    },
+    "JP": {
+      "target_mode": "spend",
+      "target_value": 5000000,
+      "outcome": "OK",
+      "total_spend": 5000000.0,
+      "total_regs": 29539.29,
+      "brand_regs": 29236.98,
+      "nb_regs": 302.31,
+      "computed_ieccp": 75.929
+    },
+    "MX": {
+      "target_mode": "ieccp",
+      "target_value": 0.75,
+      "outcome": "OK",
+      "total_spend": 1766957.97,
+      "total_regs": 29852.54,
+      "brand_regs": 23604.06,
+      "nb_regs": 6248.48,
+      "computed_ieccp": 71.617
+    },
+    "AU": {
+      "target_mode": "spend",
+      "target_value": 500000,
+      "outcome": "OK",
+      "total_spend": 661357.61,
+      "total_regs": 9123.33,
+      "brand_regs": 5621.39,
+      "nb_regs": 3501.93,
+      "computed_ieccp": null
+    }
+  }
+}
