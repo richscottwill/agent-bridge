@@ -1336,19 +1336,14 @@
       }
     }
 
-    // Round 11 P2-01: replace the invisible-dots "placeholder" (r:3 with
-    // transparent fill+stroke) with a real hover-visible marker. The
-    // mousemove→bisector tooltip path is already wired via
-    // attachNarratedTooltips (see below). The dots now make the points
-    // where the tooltip snaps to visibly tangible on hover.
+    // Hitbox dots — transparent, exist only to anchor the y-coordinate
+    // lookup for the follow-cursor overlay added by attachNarratedTooltips.
+    // Reverted from R11's "always-visible r=3 blue dots" after Local Kiro
+    // flagged chart was beaded. The overlay dot (drawn in attachNarratedTooltips)
+    // is the single visible marker that tracks the cursor.
     marks.push(Plot.dot(chartData, {
       x: 'week', y: d => d.brand_regs + d.nb_regs,
-      r: 3,
-      fill: 'var(--color-brand)',
-      fillOpacity: 0,  // hidden at rest, revealed via attachNarratedTooltips hoverDot
-      stroke: 'var(--color-brand)',
-      strokeOpacity: 0,
-      className: 'mpe-hover-dot',
+      r: 3, fill: 'transparent', stroke: 'transparent',
     }));
 
     const chart = Plot.plot({
@@ -1371,48 +1366,80 @@
 
     chartEl.appendChild(chart);
 
-    // Round 11 P2-15: dual y-axis for spend. Plot doesn't natively support
-    // dual y-axes, so we post-render a right-axis overlay that labels the
-    // spend values corresponding to the regs-axis tick positions. The spend
-    // line is still drawn onto the regs axis (scaled by spendScale) but now
-    // users can read the spend value off the right axis.
-    //
-    // Implementation: find the y-axis tick labels that Plot rendered on the
-    // left, mirror them on the right side with spend-equivalent values.
-    // This gives a real dual-axis experience without rebuilding the chart.
+    // Round 11 follow-up P2-15: dual y-axis for spend.
+    // R11's first attempt queried `[aria-label="y-axis tick label"]` which
+    // Plot.plot doesn't emit. Correct selector is to find the y-axis <g>
+    // (aria-label="y-axis"), then walk its <text> children — those are the
+    // tick labels. Each has a `y` attribute and text content equal to the
+    // regs value at that tick. We mirror each on the right side with the
+    // spend-equivalent value.
     if (maxSpend > 0) {
       const svgNode = chart.tagName === 'SVG' ? chart : chart.querySelector('svg');
       if (svgNode) {
-        const yTicks = svgNode.querySelectorAll('[aria-label="y-axis tick label"]');
-        const ns = 'http://www.w3.org/2000/svg';
-        const svgWidth = parseFloat(svgNode.getAttribute('width') || '1200');
-        const rightX = svgWidth - CHART_MARGIN.right + 8;
-        for (const tick of yTicks) {
-          // Extract the regs value from the tick text
-          const regsVal = parseFloat(tick.textContent.replace(/[,\s]/g, ''));
-          if (!Number.isFinite(regsVal)) continue;
-          // Corresponding spend value = regsVal / spendScale = regsVal × (maxSpend / maxRegs)
-          const spendVal = regsVal / spendScale;
-          const mirror = document.createElementNS(ns, 'text');
-          mirror.setAttribute('x', String(rightX));
-          mirror.setAttribute('y', tick.getAttribute('y'));
-          mirror.setAttribute('fill', 'var(--color-text-meta)');
-          mirror.setAttribute('font-size', '10');
-          mirror.setAttribute('text-anchor', 'start');
-          mirror.setAttribute('dy', '0.32em');
-          mirror.textContent = fmt$(spendVal);
-          svgNode.appendChild(mirror);
+        // Find the y-axis group. Plot uses aria-label="y-axis" on the parent g.
+        let yAxisG = svgNode.querySelector('g[aria-label="y-axis"]');
+        // Fallback: some Plot versions wrap it differently; find any <g> that
+        // contains multiple <text> with numeric content and is at the left margin.
+        if (!yAxisG) {
+          const gs = svgNode.querySelectorAll('g');
+          for (const g of gs) {
+            const texts = g.querySelectorAll(':scope > text');
+            if (texts.length >= 3) {
+              // Check if texts are numeric (tick labels)
+              let numericCount = 0;
+              for (const t of texts) {
+                if (/^[\d,\s]+$/.test((t.textContent || '').trim())) numericCount++;
+              }
+              if (numericCount >= 3) { yAxisG = g; break; }
+            }
+          }
         }
-        // Right-axis label
-        const rightLabel = document.createElementNS(ns, 'text');
-        rightLabel.setAttribute('x', String(svgWidth - 8));
-        rightLabel.setAttribute('y', String(CHART_MARGIN.top - 14));
-        rightLabel.setAttribute('fill', 'var(--color-text-meta)');
-        rightLabel.setAttribute('font-size', '11');
-        rightLabel.setAttribute('font-weight', '600');
-        rightLabel.setAttribute('text-anchor', 'end');
-        rightLabel.textContent = '↑ Spend ($)';
-        svgNode.appendChild(rightLabel);
+        if (yAxisG) {
+          const ns = 'http://www.w3.org/2000/svg';
+          const svgWidth = parseFloat(svgNode.getAttribute('width') || svgNode.style.width || '1200');
+          const rightX = svgWidth - CHART_MARGIN.right + 10;
+          const tickTexts = yAxisG.querySelectorAll(':scope > text, :scope > g > text');
+          let mirroredCount = 0;
+          for (const tick of tickTexts) {
+            const raw = (tick.textContent || '').replace(/[,\s]/g, '');
+            const regsVal = parseFloat(raw);
+            if (!Number.isFinite(regsVal) || regsVal < 0) continue;
+            // y coordinate: tick's y attribute, or transform on parent
+            let y = tick.getAttribute('y');
+            if (!y) {
+              // Try the parent's transform="translate(0, N)"
+              const parentXform = tick.parentElement && tick.parentElement.getAttribute('transform');
+              const m = parentXform && parentXform.match(/translate\([^,]*,\s*([\d.-]+)/);
+              if (m) y = m[1];
+            }
+            if (y == null) continue;
+            const spendVal = regsVal / spendScale;
+            const mirror = document.createElementNS(ns, 'text');
+            mirror.setAttribute('x', String(rightX));
+            mirror.setAttribute('y', String(y));
+            mirror.setAttribute('fill', 'var(--color-text-meta)');
+            mirror.setAttribute('font-size', '10');
+            mirror.setAttribute('text-anchor', 'start');
+            mirror.setAttribute('dy', '0.32em');
+            mirror.setAttribute('class', 'mpe-right-axis-tick');
+            mirror.textContent = fmt$(spendVal);
+            svgNode.appendChild(mirror);
+            mirroredCount++;
+          }
+          if (mirroredCount > 0) {
+            // Right-axis title
+            const rightLabel = document.createElementNS(ns, 'text');
+            rightLabel.setAttribute('x', String(svgWidth - 8));
+            rightLabel.setAttribute('y', String(CHART_MARGIN.top - 14));
+            rightLabel.setAttribute('fill', 'var(--color-text-meta)');
+            rightLabel.setAttribute('font-size', '11');
+            rightLabel.setAttribute('font-weight', '600');
+            rightLabel.setAttribute('text-anchor', 'end');
+            rightLabel.setAttribute('class', 'mpe-right-axis-label');
+            rightLabel.textContent = '↑ Spend ($)';
+            svgNode.appendChild(rightLabel);
+          }
+        }
       }
     }
 
@@ -1478,21 +1505,36 @@
       if (!svgNodeForLegend) return;
       const paths = svgNodeForLegend.querySelectorAll('path');
       for (const p of paths) {
-        const s = (p.getAttribute('stroke') || '').toLowerCase();
-        const dash = p.getAttribute('stroke-dasharray') || '';
-        // Match series by stroke + dash. Plot may emit colors as rgb(...) or hex.
+        // R11 follow-up: Plot.plot sets stroke via computed style (CSS vars),
+        // not the `stroke` HTML attribute. getAttribute('stroke') returned
+        // null for every series path in Local Kiro's R11 probe, so the
+        // matching loop silently no-op'd. Using getComputedStyle(p).stroke
+        // yields `rgb(r, g, b)` strings which we can pattern-match.
+        const cs = getComputedStyle(p);
+        const s = (cs.stroke || '').toLowerCase();
+        const dashCs = (cs.strokeDasharray || '').toLowerCase();
+        const strokeWidth = cs.strokeWidth || '';
+        // Also fall back to attributes in case a future Plot version emits them.
+        const dashAttr = (p.getAttribute('stroke-dasharray') || '').toLowerCase();
+        const dash = dashCs !== 'none' && dashCs !== '' ? dashCs : dashAttr;
+        const hasDash = dash && dash !== 'none' && dash !== '0';
+
         let seriesKey = null;
         const sNorm = s.replace(/\s/g, '');
-        const matchesActuals = sNorm.includes('74,74,74') || sNorm.includes(colorActuals.replace('#', '').toLowerCase());
-        const matchesBrand = sNorm.includes('0,102,204') || sNorm.includes(colorBrand.replace('#', '').toLowerCase());
-        const matchesNb = sNorm.includes('255,153,0') || sNorm.includes(colorNb.replace('#', '').toLowerCase());
-        const matchesNeutral = sNorm.includes('26,26,26') || sNorm === 'rgb(26,26,26)' || sNorm.includes('1a1a1a');
-        if (matchesActuals && dash) seriesKey = 'actuals-spend';
+        const matchesActuals = sNorm.includes('74,74,74');
+        const matchesBrand = sNorm.includes('0,102,204');
+        const matchesNb = sNorm.includes('255,153,0');
+        const matchesNeutral = sNorm.includes('26,26,26');
+        // Plot renders stroke-width either as attribute or computed px value.
+        const swPx = parseFloat(strokeWidth) || parseFloat(p.getAttribute('stroke-width')) || 0;
+
+        if (matchesActuals && hasDash) seriesKey = 'actuals-spend';
         else if (matchesActuals) seriesKey = 'actuals-regs';
         else if (matchesBrand) seriesKey = 'proj-brand';
         else if (matchesNb) seriesKey = 'proj-nb';
-        else if (matchesNeutral && dash) seriesKey = 'proj-total-spend';
-        else if (matchesNeutral && !dash && p.getAttribute('stroke-width') === '2.5') seriesKey = 'proj-total';
+        else if (matchesNeutral && hasDash) seriesKey = 'proj-total-spend';
+        else if (matchesNeutral && !hasDash && swPx >= 2.4) seriesKey = 'proj-total';
+
         if (seriesKey && STATE.legendVisibility[seriesKey] === false) {
           p.style.display = 'none';
         } else if (seriesKey) {
@@ -1596,24 +1638,31 @@
     const tooltip = ensureTooltip();
 
     const xExtent = d3.extent(chartData, d => d.week);
-    // Round 11 P2-01: add a visible highlight dot that follows the cursor
-    // along the data. The underlying Plot.dot marks are still transparent
-    // at rest; this overlay draws the current focal point so users get
-    // pixel-level feedback that "this week" is what the tooltip refers to.
-    let hoverDot = svg.querySelector('.mpe-hover-dot-overlay');
-    if (!hoverDot) {
-      const ns = 'http://www.w3.org/2000/svg';
-      hoverDot = document.createElementNS(ns, 'circle');
-      hoverDot.setAttribute('class', 'mpe-hover-dot-overlay');
-      hoverDot.setAttribute('r', '5');
-      hoverDot.setAttribute('fill', 'var(--color-brand)');
-      hoverDot.setAttribute('stroke', '#FFFFFF');
-      hoverDot.setAttribute('stroke-width', '2');
-      hoverDot.setAttribute('pointer-events', 'none');
-      hoverDot.style.opacity = '0';
-      hoverDot.style.transition = 'opacity 100ms ease';
-      svg.appendChild(hoverDot);
-    }
+
+    // R11 follow-up P2-01: the hover-dot overlay circle had a silent-miss
+    // where DOM probes in Local Kiro's verify pass couldn't find it. The
+    // previous implementation relied on svg.querySelector('.mpe-hover-dot-overlay')
+    // on every render, but Plot.plot's internal structure can hide the
+    // class-selector lookup. Use a unique id (per chart render) AND a class,
+    // and re-create on each attachNarratedTooltips call rather than caching.
+    // The overlay is re-appended last so it renders on top of the series.
+    const existingOverlays = svg.querySelectorAll('.mpe-hover-dot-overlay');
+    for (const el of existingOverlays) el.remove();
+
+    const ns = 'http://www.w3.org/2000/svg';
+    const hoverDot = document.createElementNS(ns, 'circle');
+    hoverDot.setAttribute('class', 'mpe-hover-dot-overlay');
+    hoverDot.setAttribute('id', 'mpe-hover-dot');
+    hoverDot.setAttribute('r', '5');
+    hoverDot.setAttribute('fill', 'var(--color-brand)');
+    hoverDot.setAttribute('stroke', '#FFFFFF');
+    hoverDot.setAttribute('stroke-width', '2');
+    hoverDot.setAttribute('pointer-events', 'none');
+    hoverDot.setAttribute('cx', '-10');  // offscreen at rest
+    hoverDot.setAttribute('cy', '-10');
+    hoverDot.style.opacity = '0';
+    hoverDot.style.transition = 'opacity 100ms ease';
+    svg.appendChild(hoverDot);
 
     svg.addEventListener('mousemove', (ev) => {
       const pt = svg.getBoundingClientRect();

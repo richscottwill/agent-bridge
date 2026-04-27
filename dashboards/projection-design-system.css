@@ -1003,7 +1003,7 @@ select.control-input,
 .disclosure-btn,
 .chip,
 .severity-chip,
-.hero-kpi,
+.hero-kpi[data-kpi-series],
 .drawer-tile-sparkline,
 .drawer-close,
 #drawer-close,
@@ -1020,7 +1020,7 @@ label[for],
 .disclosure-btn,
 .chip,
 select.control-input,
-.hero-kpi,
+.hero-kpi[data-kpi-series],
 .drawer-tile-sparkline,
 .scenario-chip,
 .severity-chip {
@@ -1032,7 +1032,7 @@ select.control-input:hover {
   border-color: var(--color-brand, #0066CC);
   background: var(--surface-subtle, #FAFAFA);
 }
-.hero-kpi:hover {
+.hero-kpi[data-kpi-series]:hover {
   background: var(--surface-subtle, #FAFAFA);
   border-radius: 4px;
 }
