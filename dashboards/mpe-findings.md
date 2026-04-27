@@ -303,12 +303,96 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ---
 
-## Phase 4 — Deferred refactors
+## Phase 4 — Deferred refactors + AB.com branding
 
-### P4-01 · Palette consolidation 41 → 14 tokens
-### P4-02 · Type scale 13 → 4 tokens
+Executes LAST, after Phases 1-3 are stable. One commit per finding. Each
+commit gets a visual regression pass from Local Kiro before next commit.
 
-(Deferred until Phase 1–3 complete. Each panel committed separately.)
+**Critical do-NOT rules (common traps flagged by Local Kiro):**
+- **DO NOT migrate chart encoding colors** (`--color-nb` #FF9900, `--color-brand-line` #0066CC, `--color-actuals` #4A4A4A). Chart encoding is a data-ink concern; it is NOT UI chrome. The Non-Brand orange is close to AB.com's Smile orange and moving it creates visual collision. Leave chart colors untouched.
+- **DO NOT pillify generic buttons.** The `.btn-primary` class with Smile-orange pill is for EXACTLY ONE button per view. If applied to `button { ... }` or all `.disclosure-btn`, it turns Save + Model details + Baseline + Recompute all into orange pills — three mistakes at once: (1) visual noise, (2) Smile orange bleeding away from its "primary action" semantic, (3) potential collision with the chart's NB orange when chart + orange-pill are both onscreen.
+- **DO NOT bundle Amazon Ember .woff files into the repo.** That is a licensing violation and will fail internal review. Options in order: corp CDN URL (check AB.com network tab), sanctioned internal source, fallback to OS-installed `'Amazon Ember'` via font-family stack. If font source can't be resolved in 30 min of investigation, mark P4-03 blocked.
+- **DO NOT migrate palette + type scale in one commit.** Failure modes become unattributable. Palette first (P4-01), CTA pill scoped (P4-04), then type scale (P4-02).
+
+### P4-01 · Palette token migration to AB.com colors
+- **Status:** planned (blocked until Phases 1-3 done)
+- **Verification:** After pull + clear localStorage, page background reads warm cream `#F5F3EF`, panel bg stays `#FFFFFF`, primary body text reads `#161D26`, brand blue is `#2162A1`. DevTools computed-style on `.page-frame` shows `background-color: rgb(245, 243, 239)`.
+- **Tokens to change:**
+  - `--color-neutral-bg: #FFFFFF` → `#F5F3EF`
+  - `--color-panel-bg: #FAFAFA` → `#FFFFFF`
+  - `--color-text-body: #1A1A1A` → `#161D26`
+  - `--color-text-hero: #0A0A0A` → `#0F1111`
+  - `--color-brand: #0066CC` → `#2162A1`
+  - `--color-panel-border: #E0E0E0` → `#E5E5E5` or `#6E6E78` (depends on weight — test both)
+- **Tokens NOT to change:** `--color-nb`, `--color-brand-line`, `--color-actuals`, `--color-regime`, `--color-seasonal`, `--color-trend`, `--color-qualitative`, `--color-counterfactual`, `--color-ci-band-*`, `--color-target`, `--color-locked-ytd`, `--color-success`, `--color-warning`, `--color-danger`.
+- **Risk:** White-on-colored chips may fail contrast against warm-cream background. Run WCAG AA spot-check on severity chip, feedback bar, active scenario chip after the swap.
+- **Scope:** single commit on `projection-design-system.css` only. Screenshots before/after on all 10 markets + 3 regions.
+
+### P4-02 · Type scale migration (body → 18px, 4-token scale)
+- **Status:** planned (blocked until P4-03 lands so Ember is loaded)
+- **Verification:** DevTools shows body elements at 18px (up from 12/13/14/16 mix). H1 at 48px, H2 at 24px, captions at 13px. No inline `style="font-size:10px"` or `11px` or similar in the rendered DOM.
+- **Scale:**
+  - `--size-display: 48px` (hero number, keep existing — AB.com's 84px is too big for a dense tool)
+  - `--size-title: 24px` (section titles, market badge name)
+  - `--size-body: 14px` → `18px` (all body, table cells, labels)
+  - `--size-meta: 12px` → `13px` (captions, footnotes only)
+- **Scope:** multiple commits, one per region — header, KPI strip, chart area, sidebar drawer, feedback panel, alerts panel, narrative, controls row. Screenshot after each region.
+- **Risk:** 18px body expands every panel height. Dashboard currently fits on 900px tall viewport. Measure before/after. Don't shrink back to 14/16 — adjust panel padding if overflow.
+
+### P4-03 · Ember font source compliance verification
+- **Status:** planned, parallel to P4-01 but must resolve before P4-02
+- **Verification:** DevTools Network panel on cold-load shows Ember .woff files loading with HTTP 200 from an Amazon-approved source (internal CDN or corp domain). No `.woff` files committed in the repo.
+- **Investigation path:**
+  1. Inspect business.amazon.com Network tab — find the amz-ember-reg.woff request URL. If it's on an Amazon corp domain (a2z.com, amazon.dev, awsapps.com), that's the sanctioned source; reference it directly in our CSS via `@font-face src: url(...)`.
+  2. If step 1 doesn't yield a reusable URL, ask AB design team for sanctioned source.
+  3. Fall back: rely on OS-installed Ember via `font-family: 'Amazon Ember', -apple-system, BlinkMacSystemFont, sans-serif`. Acceptable for corp-machine audience (Kate + Brandon + Todd are all on corp Macs). Loses display quality on non-corp devices.
+- **If blocked:** mark blocked, proceed with fallback font stack. P4-02 can still ship.
+- **Commit includes:** the decision + rationale in commit message.
+
+### P4-04 · Primary CTA styled as AB Smile-orange pill (SCOPED TO ONE BUTTON)
+- **Status:** planned
+- **Verification:** Exactly ONE button per view has the pill styling. Other buttons unchanged. Smile orange `#F55600` does NOT appear anywhere in the chart or on the severity chip or feedback bar. Computed style on the designated button: `background-color: rgb(245, 86, 0); color: white; border-radius: 160px`.
+- **Component:**
+  ```css
+  .btn-primary {
+    background: #F55600;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 160px;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .btn-primary:hover { background: #D94A00; }
+  ```
+- **Application rule:** Single-market view → `#btn-recompute` gets `.btn-primary`. Detail views / Export view → the Export button gets it (after P2-11 lands). No other button gets pilled.
+- **Anti-pattern guards:**
+  - Grep the codebase after the commit: `grep -n "btn-primary" *.html *.js` should return ≤ 3 hits (one HTML class, one JS reference if any, one CSS definition). More than that suggests blanket application.
+  - Visually verify: look at the full page screenshot — if you see more than one orange pill, you over-applied.
+- **Why this matters:** The playbook explicitly flags pillifying as a trap. Smile orange's job is to mark the single next-action. Any other button-orange dilutes that semantic AND risks visual collision with the chart's NB orange when both are onscreen at the same zoom level.
+
+### P4-05 · Full matrix regression test (10 markets × 6 periods × 3 drivers = 180 combos)
+- **Status:** planned, sanity gate after P4-01 through P4-04
+- **Verification:** Automated screenshot pass; grid saved to `context/intake/phase4-regression/<market>-<period>-<driver>.png`. Human review: any combo that breaks contrast, overflows the viewport, or renders with fallback Arial instead of Ember gets flagged and fixed before moving to P4-02.
+- **Tooling:** Reuse or extend existing `shared/tools/prediction/run_market_simulation.py` pattern. May need a Puppeteer/Playwright script in `shared/dashboards/tools/` or a Python+Selenium wrapper.
+
+---
+
+## Phase 4 sequencing (why this order)
+
+1. **P4-01 palette** — biggest visual shift, single variable surface, failure is obvious and localized. Commit + Local Kiro verify.
+2. **P4-04 CTA pill** — scoped component addition, doesn't touch existing styles. Safe after palette lands.
+3. **P4-03 Ember source** — must resolve before P4-02 activates the stack. Runs in parallel with P4-04.
+4. **P4-02 type scale** — largest diff, highest regression risk. Isolate after visual moves stabilized.
+5. **P4-05 regression matrix** — sanity gate.
+
+Rationale: isolating failure modes. If palette and type scale ship together and something breaks, can't tell whether it's from color or type. Separating them keeps failures attributable.
+
+---
+
+## Prior Phase 4 items (palette + type-scale consolidation) — consolidated into P4-01/P4-02
+
+The earlier "Phase 4 palette consolidation 41→14 tokens" and "type scale 13→4" items are subsumed by P4-01 and P4-02 above. The AB.com branding makes the consolidation more specific (actual target values, not just "fewer tokens"), which is a win — the consolidation wasn't scoped to target values before.
 
 ---
 
