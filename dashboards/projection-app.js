@@ -1817,11 +1817,18 @@
       stackEl.innerHTML = '<div style="font-size:12px;color:var(--color-text-subtle)">No regimes active.</div>';
     } else {
       stackEl.innerHTML = regimes.map((r, i) => {
-        const fresh = r.decay_status && r.decay_status !== 'no-fit-state' ? 'fresh' : 'stale';
+        // Round 7 P1-04: flag absorbed-into-baseline lifts distinctly.
+        const absorbed = r.absorbed_into_baseline;
+        const statusLabel = absorbed
+          ? 'absorbed into baseline'
+          : (r.decay_status || 'n/a').replace(/-/g, ' ');
+        const badgeKlass = absorbed
+          ? 'ancient'   // uses the ancient pill styling (subdued) — signals "part of baseline, not transient"
+          : (r.decay_status && r.decay_status !== 'no-fit-state' ? 'fresh' : 'stale');
         const onsetDate = r.change_date ? new Date(r.change_date).toLocaleDateString() : 'n/a';
         return `<div class="drawer-tile">
-          <span class="drawer-tile-label">Lift #${i + 1} (onset ${onsetDate}) <span class="freshness-badge ${fresh}">${(r.decay_status || 'n/a').replace(/-/g, ' ')}</span></span>
-          <span class="drawer-tile-value">${(r.effective_confidence * 100).toFixed(0)}%</span>
+          <span class="drawer-tile-label">Lift #${i + 1} (onset ${onsetDate}) <span class="freshness-badge ${badgeKlass}">${statusLabel}</span></span>
+          <span class="drawer-tile-value">${absorbed ? '—' : (r.effective_confidence * 100).toFixed(0) + '%'}</span>
         </div>
         <div style="font-size:10px;color:var(--color-text-subtle);margin-top:-6px;margin-bottom:4px">${r.explanation}</div>`;
       }).join('');

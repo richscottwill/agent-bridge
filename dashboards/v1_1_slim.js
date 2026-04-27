@@ -87,12 +87,27 @@
     });
   }
 
+  // Auto-promotion rule (Round 7 P1-04, UI layer):
+  // When a lift has decay_status='no-decay-detected' AND n_post_weeks >= 52,
+  // we flag it as `absorbed_into_baseline`. This signals to the UI that the
+  // "lift" has persisted for ~1 year without decaying and should be treated
+  // as structural baseline rather than a transient lift. Effective confidence
+  // in the math still applies (because the pre-computed Brand trajectory
+  // already baked it in); the flag is purely a semantic label for display.
+  // A deeper methodology fix that strips absorbed lifts from the projection
+  // math lives upstream in brand_trajectory.py and requires regenerating
+  // projection-data.json + regression fixtures — deferred pending Richard's
+  // approval per mpe-findings.md P1-04.
+  const ABSORBED_INTO_BASELINE_MIN_POST_WEEKS = 52;
+
   function listRegimesWithConfidence(regimeFitState, regimeMultiplier) {
     regimeMultiplier = regimeMultiplier == null ? 1.0 : regimeMultiplier;
     if (!regimeFitState) return [];
     return regimeFitState.map(r => {
       const eff = effectiveConfidence(r.confidence, r.decay_status, regimeMultiplier);
       const mod = DECAY_STATUS_MODIFIERS[r.decay_status || 'no-fit-state'] || 0.30;
+      const absorbed = r.decay_status === 'no-decay-detected'
+        && (r.n_post_weeks || 0) >= ABSORBED_INTO_BASELINE_MIN_POST_WEEKS;
       return {
         regime_id: r.regime_id,
         change_date: r.change_date,
@@ -105,7 +120,10 @@
         n_post_weeks: r.n_post_weeks,
         peak_multiplier: r.peak_multiplier,
         half_life_weeks: r.fitted_half_life_weeks || r.authored_half_life_weeks,
-        explanation: `base=${(r.confidence || 0.30).toFixed(2)} × status=${mod.toFixed(2)} × mult=${regimeMultiplier.toFixed(2)} = ${eff.toFixed(2)}`,
+        absorbed_into_baseline: absorbed,
+        explanation: absorbed
+          ? `Absorbed into baseline (${r.n_post_weeks}w without decay — treat as structural baseline, not transient lift)`
+          : `base=${(r.confidence || 0.30).toFixed(2)} × status=${mod.toFixed(2)} × mult=${regimeMultiplier.toFixed(2)} = ${eff.toFixed(2)}`,
       };
     });
   }

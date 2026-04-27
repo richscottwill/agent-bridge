@@ -128,20 +128,34 @@
     }
 
     // Line 4 — what's driving it (campaign lifts)
+    // Round 7 P1-04: distinguish transient lifts from "absorbed into baseline"
+    // lifts (>=52 weeks with no detected decay). These aren't transient;
+    // they're structural features of the market. Counting them as "active
+    // campaign lifts" was misleading.
     let drivers = null;
     const lifts = (marketData?.regime_fit_state) || [];
-    const activeLifts = lifts.filter(l => l.confidence && l.confidence > 0.15);
-    if (activeLifts.length === 0) {
+    const liftIsAbsorbed = (l) => l.decay_status === 'no-decay-detected' && (l.n_post_weeks || 0) >= 52;
+    const activeLifts = lifts.filter(l => l.confidence && l.confidence > 0.15 && !liftIsAbsorbed(l));
+    const absorbedLifts = lifts.filter(liftIsAbsorbed);
+    if (activeLifts.length === 0 && absorbedLifts.length === 0) {
       drivers = `No active campaign lifts detected — projection is baseline trend plus seasonality.`;
+    } else if (activeLifts.length === 0 && absorbedLifts.length > 0) {
+      drivers = `No transient lifts active. ${absorbedLifts.length} prior lift${absorbedLifts.length === 1 ? '' : 's'} ${absorbedLifts.length === 1 ? 'has' : 'have'} persisted more than a year without decay and ${absorbedLifts.length === 1 ? 'is' : 'are'} now part of the baseline.`;
     } else if (activeLifts.length === 1) {
       const l = activeLifts[0];
       const pct = Math.round((l.peak_multiplier - 1) * 100);
       drivers = `One campaign lift is active, about +${pct}% on Brand at peak.`;
       if (l.decay_status === 'still-peaking') drivers += ` Still building — lift may grow.`;
       else if (l.decay_status === 'decaying-faster') drivers += ` Decaying faster than expected.`;
-      else if (l.decay_status === 'no-decay-detected') drivers += ` No decay yet — treated as a stable baseline shift.`;
+      else if (l.decay_status === 'no-decay-detected') drivers += ` No decay yet — watch for promotion to baseline if it persists.`;
+      if (absorbedLifts.length > 0) {
+        drivers += ` Separately, ${absorbedLifts.length} prior lift${absorbedLifts.length === 1 ? '' : 's'} ${absorbedLifts.length === 1 ? 'has' : 'have'} absorbed into baseline.`;
+      }
     } else {
       drivers = `${activeLifts.length} campaign lifts active, combining for a stacked Brand multiplier.`;
+      if (absorbedLifts.length > 0) {
+        drivers += ` ${absorbedLifts.length} additional lift${absorbedLifts.length === 1 ? '' : 's'} absorbed into baseline.`;
+      }
     }
 
     // Line 5 — caveats
