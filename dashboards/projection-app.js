@@ -1206,15 +1206,21 @@
       isoWeek: d.isoWeek, brand_regs: d.brand_regs, nb_regs: d.nb_regs,
       brand_spend: d.brand_spend, nb_spend: d.nb_spend,
     }));
+    // R12 follow-up: Plot supports `className` option that adds a CSS class
+    // to the rendered SVG path. Using explicit class names (mpe-series-*)
+    // replaces the fragile stroke-color-matching in applySeriesVisibility.
+    // This ends the stroke-matching/timing debugging cycle definitively.
     marks.push(Plot.line(actualsPoints, {
       x: 'week', y: 'total_regs',
       stroke: 'var(--color-actuals)', strokeWidth: 2.5,
+      className: 'mpe-series-actuals-regs',
     }));
     // Actuals spend line (dashed grey, scaled to fit regs axis)
     if (maxSpend > 0) {
       marks.push(Plot.line(actualsPoints, {
         x: 'week', y: 'total_spend_scaled',
         stroke: 'var(--color-actuals)', strokeWidth: 2, strokeDasharray: '2,3', strokeOpacity: 0.7,
+        className: 'mpe-series-actuals-spend',
       }));
     }
 
@@ -1223,6 +1229,7 @@
       marks.push(Plot.line(counterData, {
         x: 'week', y: 'brand_regs_cf',
         stroke: 'var(--color-counterfactual)', strokeWidth: 1.5, strokeDasharray: '5,4', strokeOpacity: 0.8,
+        className: 'mpe-series-counterfactual',
       }));
     }
 
@@ -1238,6 +1245,7 @@
     marks.push(Plot.line(projPoints, {
       x: 'week', y: 'brand_regs',
       stroke: 'var(--color-brand)', strokeWidth: 2,
+      className: 'mpe-series-proj-brand',
     }));
 
     // Projected Non-Brand — dedicated orange line so users see NB explicitly
@@ -1246,6 +1254,7 @@
     marks.push(Plot.line(projPoints, {
       x: 'week', y: 'nb_regs',
       stroke: 'var(--color-nb)', strokeWidth: 2,
+      className: 'mpe-series-proj-nb',
     }));
 
     // Projected Total (Brand + NB) — thicker neutral-dark line as the
@@ -1253,6 +1262,7 @@
     marks.push(Plot.line(projPoints, {
       x: 'week', y: 'total_regs',
       stroke: '#1A1A1A', strokeWidth: 2.5, strokeOpacity: 0.85,
+      className: 'mpe-series-proj-total',
     }));
 
     // Projected total spend line (neutral-dark dashed) — overlaid, scaled to regs axis.
@@ -1260,6 +1270,7 @@
       marks.push(Plot.line(projPoints, {
         x: 'week', y: 'total_spend_scaled',
         stroke: '#1A1A1A', strokeWidth: 2, strokeDasharray: '8,4', strokeOpacity: 0.5,
+        className: 'mpe-series-proj-total-spend',
       }));
     }
 
@@ -1367,56 +1378,46 @@
     chartEl.appendChild(chart);
 
     // Round 11 follow-up P2-15: dual y-axis for spend.
-    // R11's first attempt queried `[aria-label="y-axis tick label"]` which
-    // Plot.plot doesn't emit. Correct selector is to find the y-axis <g>
-    // (aria-label="y-axis"), then walk its <text> children — those are the
-    // tick labels. Each has a `y` attribute and text content equal to the
-    // regs value at that tick. We mirror each on the right side with the
-    // spend-equivalent value.
+    // R12 correction: Plot actually emits <g aria-label="y-axis tick label">
+    // (confirmed by Local Kiro's live DOM probe), and tick <text> elements
+    // have their y-coordinate in a parent transform="translate(x, y)", not
+    // as a `y` attribute. R11 selector `g[aria-label="y-axis"]` didn't match;
+    // R12 first-attempt selector was also off. This iteration uses the
+    // correct selector and parses transform for the y-coord.
+    // Wrapped in try/catch so a silent failure doesn't cascade through the
+    // post-render block (R11 debugging cycle lesson).
+    try {
     if (maxSpend > 0) {
       const svgNode = chart.tagName === 'SVG' ? chart : chart.querySelector('svg');
       if (svgNode) {
-        // Find the y-axis group. Plot uses aria-label="y-axis" on the parent g.
-        let yAxisG = svgNode.querySelector('g[aria-label="y-axis"]');
-        // Fallback: some Plot versions wrap it differently; find any <g> that
-        // contains multiple <text> with numeric content and is at the left margin.
-        if (!yAxisG) {
-          const gs = svgNode.querySelectorAll('g');
-          for (const g of gs) {
-            const texts = g.querySelectorAll(':scope > text');
-            if (texts.length >= 3) {
-              // Check if texts are numeric (tick labels)
-              let numericCount = 0;
-              for (const t of texts) {
-                if (/^[\d,\s]+$/.test((t.textContent || '').trim())) numericCount++;
-              }
-              if (numericCount >= 3) { yAxisG = g; break; }
-            }
-          }
-        }
+        const yAxisG = svgNode.querySelector('g[aria-label="y-axis tick label"]');
         if (yAxisG) {
           const ns = 'http://www.w3.org/2000/svg';
           const svgWidth = parseFloat(svgNode.getAttribute('width') || svgNode.style.width || '1200');
           const rightX = svgWidth - CHART_MARGIN.right + 10;
-          const tickTexts = yAxisG.querySelectorAll(':scope > text, :scope > g > text');
+          const tickTexts = yAxisG.querySelectorAll('text');
           let mirroredCount = 0;
           for (const tick of tickTexts) {
             const raw = (tick.textContent || '').replace(/[,\s]/g, '');
             const regsVal = parseFloat(raw);
             if (!Number.isFinite(regsVal) || regsVal < 0) continue;
-            // y coordinate: tick's y attribute, or transform on parent
-            let y = tick.getAttribute('y');
-            if (!y) {
-              // Try the parent's transform="translate(0, N)"
-              const parentXform = tick.parentElement && tick.parentElement.getAttribute('transform');
-              const m = parentXform && parentXform.match(/translate\([^,]*,\s*([\d.-]+)/);
-              if (m) y = m[1];
+            // y coordinate: Plot emits <text> with y="0.32em" baseline offset
+            // and puts the real y in the parent <g>'s transform.
+            let yPx = null;
+            const parentXform = tick.parentElement && tick.parentElement.getAttribute('transform');
+            const m = parentXform && parentXform.match(/translate\(\s*([-\d.]+)[\s,]+([-\d.]+)\s*\)/);
+            if (m) yPx = parseFloat(m[2]);
+            // Fallback: text's own transform, or computed bounding box
+            if (yPx == null || !Number.isFinite(yPx)) {
+              const selfXform = tick.getAttribute('transform');
+              const m2 = selfXform && selfXform.match(/translate\(\s*([-\d.]+)[\s,]+([-\d.]+)\s*\)/);
+              if (m2) yPx = parseFloat(m2[2]);
             }
-            if (y == null) continue;
+            if (yPx == null || !Number.isFinite(yPx)) continue;
             const spendVal = regsVal / spendScale;
             const mirror = document.createElementNS(ns, 'text');
             mirror.setAttribute('x', String(rightX));
-            mirror.setAttribute('y', String(y));
+            mirror.setAttribute('y', String(yPx));
             mirror.setAttribute('fill', 'var(--color-text-meta)');
             mirror.setAttribute('font-size', '10');
             mirror.setAttribute('text-anchor', 'start');
@@ -1427,7 +1428,6 @@
             mirroredCount++;
           }
           if (mirroredCount > 0) {
-            // Right-axis title
             const rightLabel = document.createElementNS(ns, 'text');
             rightLabel.setAttribute('x', String(svgWidth - 8));
             rightLabel.setAttribute('y', String(CHART_MARGIN.top - 14));
@@ -1441,6 +1441,9 @@
           }
         }
       }
+    }
+    } catch (e) {
+      console.warn('dual-axis overlay failed:', e);
     }
 
     // Round 11 P2-07: Clickable legend with default-hide for spend series.
@@ -1500,45 +1503,18 @@
     chartEl.appendChild(legend);
 
     // Apply initial default-hide state to SVG paths + wire legend click handlers.
+    // R12 follow-up: Plot marks now carry explicit className="mpe-series-<key>",
+    // so we query by class. This is deterministic regardless of stroke-color
+    // detection or DOM-attachment timing.
     const svgNodeForLegend = chart.tagName === 'SVG' ? chart : chart.querySelector('svg');
     const applySeriesVisibility = () => {
       if (!svgNodeForLegend) return;
-      const paths = svgNodeForLegend.querySelectorAll('path');
-      for (const p of paths) {
-        // R11 follow-up: Plot.plot sets stroke via computed style (CSS vars),
-        // not the `stroke` HTML attribute. getAttribute('stroke') returned
-        // null for every series path in Local Kiro's R11 probe, so the
-        // matching loop silently no-op'd. Using getComputedStyle(p).stroke
-        // yields `rgb(r, g, b)` strings which we can pattern-match.
-        const cs = getComputedStyle(p);
-        const s = (cs.stroke || '').toLowerCase();
-        const dashCs = (cs.strokeDasharray || '').toLowerCase();
-        const strokeWidth = cs.strokeWidth || '';
-        // Also fall back to attributes in case a future Plot version emits them.
-        const dashAttr = (p.getAttribute('stroke-dasharray') || '').toLowerCase();
-        const dash = dashCs !== 'none' && dashCs !== '' ? dashCs : dashAttr;
-        const hasDash = dash && dash !== 'none' && dash !== '0';
-
-        let seriesKey = null;
-        const sNorm = s.replace(/\s/g, '');
-        const matchesActuals = sNorm.includes('74,74,74');
-        const matchesBrand = sNorm.includes('0,102,204');
-        const matchesNb = sNorm.includes('255,153,0');
-        const matchesNeutral = sNorm.includes('26,26,26');
-        // Plot renders stroke-width either as attribute or computed px value.
-        const swPx = parseFloat(strokeWidth) || parseFloat(p.getAttribute('stroke-width')) || 0;
-
-        if (matchesActuals && hasDash) seriesKey = 'actuals-spend';
-        else if (matchesActuals) seriesKey = 'actuals-regs';
-        else if (matchesBrand) seriesKey = 'proj-brand';
-        else if (matchesNb) seriesKey = 'proj-nb';
-        else if (matchesNeutral && hasDash) seriesKey = 'proj-total-spend';
-        else if (matchesNeutral && !hasDash && swPx >= 2.4) seriesKey = 'proj-total';
-
-        if (seriesKey && STATE.legendVisibility[seriesKey] === false) {
-          p.style.display = 'none';
-        } else if (seriesKey) {
-          p.style.display = '';
+      for (const key of Object.keys(STATE.legendVisibility)) {
+        const cls = `mpe-series-${key}`;
+        const els = svgNodeForLegend.querySelectorAll('.' + cls + ', [class~="' + cls + '"]');
+        const visible = STATE.legendVisibility[key] !== false;
+        for (const el of els) {
+          el.style.display = visible ? '' : 'none';
         }
       }
     };
@@ -1556,14 +1532,31 @@
       });
     });
 
-    // Overlay D3 SVG for narrated tooltips (task 6.3.6)
-    attachNarratedTooltips(chart, chartData, marketData, out);
+    // Overlay D3 SVG for narrated tooltips (task 6.3.6).
+    // R12 follow-up: wrap in try/catch so a single tooltip/overlay error
+    // doesn't cascade and kill applyArrivalAnimations / annotateActiveRegimes.
+    // Also defer to requestAnimationFrame so the SVG is fully attached +
+    // laid out before we query for hover-dot positioning math.
+    try { attachNarratedTooltips(chart, chartData, marketData, out); }
+    catch (e) { console.warn('attachNarratedTooltips failed:', e); }
 
     // Apply animated arrival (task 6.3.8)
-    applyArrivalAnimations(chart);
+    try { applyArrivalAnimations(chart); }
+    catch (e) { console.warn('applyArrivalAnimations failed:', e); }
 
     // Sparkle-region shading annotation (task 6.3.2 acceptance — Sparkle visible)
-    annotateActiveRegimes(chart, marketData);
+    try { annotateActiveRegimes(chart, marketData); }
+    catch (e) { console.warn('annotateActiveRegimes failed:', e); }
+
+    // R12 follow-up: re-apply series visibility on next animation frame to
+    // catch the case where the initial applySeriesVisibility() ran before
+    // Plot had finished painting the SVG children (class selectors return
+    // zero matches in that window). Belt-and-suspenders: also runs again
+    // in the click handler.
+    requestAnimationFrame(() => {
+      try { applySeriesVisibility(); }
+      catch (e) { console.warn('applySeriesVisibility rAF retry failed:', e); }
+    });
   }
 
   function annotateActiveRegimes(chart, marketData) {
