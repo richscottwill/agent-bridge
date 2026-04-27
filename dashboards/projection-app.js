@@ -1371,6 +1371,51 @@
 
     chartEl.appendChild(chart);
 
+    // Round 11 P2-15: dual y-axis for spend. Plot doesn't natively support
+    // dual y-axes, so we post-render a right-axis overlay that labels the
+    // spend values corresponding to the regs-axis tick positions. The spend
+    // line is still drawn onto the regs axis (scaled by spendScale) but now
+    // users can read the spend value off the right axis.
+    //
+    // Implementation: find the y-axis tick labels that Plot rendered on the
+    // left, mirror them on the right side with spend-equivalent values.
+    // This gives a real dual-axis experience without rebuilding the chart.
+    if (maxSpend > 0) {
+      const svgNode = chart.tagName === 'SVG' ? chart : chart.querySelector('svg');
+      if (svgNode) {
+        const yTicks = svgNode.querySelectorAll('[aria-label="y-axis tick label"]');
+        const ns = 'http://www.w3.org/2000/svg';
+        const svgWidth = parseFloat(svgNode.getAttribute('width') || '1200');
+        const rightX = svgWidth - CHART_MARGIN.right + 8;
+        for (const tick of yTicks) {
+          // Extract the regs value from the tick text
+          const regsVal = parseFloat(tick.textContent.replace(/[,\s]/g, ''));
+          if (!Number.isFinite(regsVal)) continue;
+          // Corresponding spend value = regsVal / spendScale = regsVal × (maxSpend / maxRegs)
+          const spendVal = regsVal / spendScale;
+          const mirror = document.createElementNS(ns, 'text');
+          mirror.setAttribute('x', String(rightX));
+          mirror.setAttribute('y', tick.getAttribute('y'));
+          mirror.setAttribute('fill', 'var(--color-text-meta)');
+          mirror.setAttribute('font-size', '10');
+          mirror.setAttribute('text-anchor', 'start');
+          mirror.setAttribute('dy', '0.32em');
+          mirror.textContent = fmt$(spendVal);
+          svgNode.appendChild(mirror);
+        }
+        // Right-axis label
+        const rightLabel = document.createElementNS(ns, 'text');
+        rightLabel.setAttribute('x', String(svgWidth - 8));
+        rightLabel.setAttribute('y', String(CHART_MARGIN.top - 14));
+        rightLabel.setAttribute('fill', 'var(--color-text-meta)');
+        rightLabel.setAttribute('font-size', '11');
+        rightLabel.setAttribute('font-weight', '600');
+        rightLabel.setAttribute('text-anchor', 'end');
+        rightLabel.textContent = '↑ Spend ($)';
+        svgNode.appendChild(rightLabel);
+      }
+    }
+
     // Legend below chart (solid = regs axis, dashed = spend overlay scaled to regs)
     const legend = document.createElement('div');
     legend.style.textAlign = 'center';
