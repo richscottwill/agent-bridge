@@ -1070,7 +1070,7 @@
     // Build unified chart data
     const chartData = [];
     for (let i = 0; i < ytdWeeks.length; i++) {
-      chartData.push({ ...ytdWeeks[i], week: ytdWeeks[i].date, series: 'actual', isoWeek: fmtIsoWeek(ytdWeeks[i].date) });
+      chartData.push({ ...ytdWeeks[i], week: ytdWeeks[i].date, series: 'actual', isoWeek: fmtIsoWeek(ytdWeeks[i].date), weekIndex: i });
     }
     for (let i = 0; i < royWeeks.length; i++) {
       chartData.push({
@@ -1083,6 +1083,7 @@
         locked: false,
         isoWeek: fmtIsoWeek(royWeeks[i]),
         series: 'projected',
+        weekIndex: ytdWeeks.length + i,
       });
     }
 
@@ -1335,10 +1336,19 @@
       }
     }
 
-    // Tooltip dots (invisible but show on hover via d3 overlay)
+    // Round 11 P2-01: replace the invisible-dots "placeholder" (r:3 with
+    // transparent fill+stroke) with a real hover-visible marker. The
+    // mousemove→bisector tooltip path is already wired via
+    // attachNarratedTooltips (see below). The dots now make the points
+    // where the tooltip snaps to visibly tangible on hover.
     marks.push(Plot.dot(chartData, {
       x: 'week', y: d => d.brand_regs + d.nb_regs,
-      r: 3, fill: 'transparent', stroke: 'transparent',
+      r: 3,
+      fill: 'var(--color-brand)',
+      fillOpacity: 0,  // hidden at rest, revealed via attachNarratedTooltips hoverDot
+      stroke: 'var(--color-brand)',
+      strokeOpacity: 0,
+      className: 'mpe-hover-dot',
     }));
 
     const chart = Plot.plot({
@@ -1461,10 +1471,26 @@
 
     // Use native SVG mouse tracking via d3.bisector for nearest point
     const tooltip = ensureTooltip();
-    const rect = svg.getBoundingClientRect();
 
     const xExtent = d3.extent(chartData, d => d.week);
-    const plotRect = svg.querySelector('[aria-label="mark"], rect') || svg;
+    // Round 11 P2-01: add a visible highlight dot that follows the cursor
+    // along the data. The underlying Plot.dot marks are still transparent
+    // at rest; this overlay draws the current focal point so users get
+    // pixel-level feedback that "this week" is what the tooltip refers to.
+    let hoverDot = svg.querySelector('.mpe-hover-dot-overlay');
+    if (!hoverDot) {
+      const ns = 'http://www.w3.org/2000/svg';
+      hoverDot = document.createElementNS(ns, 'circle');
+      hoverDot.setAttribute('class', 'mpe-hover-dot-overlay');
+      hoverDot.setAttribute('r', '5');
+      hoverDot.setAttribute('fill', 'var(--color-brand)');
+      hoverDot.setAttribute('stroke', '#FFFFFF');
+      hoverDot.setAttribute('stroke-width', '2');
+      hoverDot.setAttribute('pointer-events', 'none');
+      hoverDot.style.opacity = '0';
+      hoverDot.style.transition = 'opacity 100ms ease';
+      svg.appendChild(hoverDot);
+    }
 
     svg.addEventListener('mousemove', (ev) => {
       const pt = svg.getBoundingClientRect();
@@ -1472,15 +1498,38 @@
       const innerLeft = CHART_MARGIN.left;
       const innerRight = pt.width - CHART_MARGIN.right;
       const xFrac = (mx - innerLeft) / (innerRight - innerLeft);
-      if (xFrac < 0 || xFrac > 1) { hideTooltip(); return; }
+      if (xFrac < 0 || xFrac > 1) { hideTooltip(); hoverDot.style.opacity = '0'; return; }
       const targetTime = xExtent[0].getTime() + xFrac * (xExtent[1].getTime() - xExtent[0].getTime());
       const bis = d3.bisector(d => d.week.getTime()).left;
       const idx = bis(chartData, targetTime);
       const d = chartData[Math.min(idx, chartData.length - 1)];
-      if (!d) { hideTooltip(); return; }
+      if (!d) { hideTooltip(); hoverDot.style.opacity = '0'; return; }
+      // Position the highlight dot in SVG coordinates. The week dates are
+      // already scaled to the plot's x; we can compute their pixel position
+      // by mapping via xFrac of this specific data point's time.
+      const dFrac = (d.week.getTime() - xExtent[0].getTime()) / (xExtent[1].getTime() - xExtent[0].getTime());
+      const dotX = innerLeft + dFrac * (innerRight - innerLeft);
+      // Y: find the mark stroke with the matching y value; use pt.height * inverse ratio
+      // Safer approach: use the first Plot mark's y-scale by querying its rect bbox.
+      const svgH = pt.height;
+      const innerTop = CHART_MARGIN.top;
+      const innerBottom = svgH - CHART_MARGIN.bottom;
+      // Find y-extent from chartData to scale
+      let yMax = 0;
+      for (const c of chartData) {
+        yMax = Math.max(yMax, (c.brand_regs || 0) + (c.nb_regs || 0));
+      }
+      const yFrac = yMax > 0 ? ((d.brand_regs || 0) + (d.nb_regs || 0)) / yMax : 0;
+      const dotY = innerBottom - yFrac * (innerBottom - innerTop);
+      hoverDot.setAttribute('cx', String(dotX));
+      hoverDot.setAttribute('cy', String(dotY));
+      hoverDot.style.opacity = '1';
       showTooltip(ev, renderNarratedTooltip(d, chartData, marketData, out));
     });
-    svg.addEventListener('mouseleave', hideTooltip);
+    svg.addEventListener('mouseleave', () => {
+      hideTooltip();
+      if (hoverDot) hoverDot.style.opacity = '0';
+    });
   }
 
   function renderNarratedTooltip(d, chartData, marketData, out) {
@@ -1503,6 +1552,17 @@
       const nLifts = (marketData.regime_fit_state || []).length;
       const liftLabel = nLifts === 1 ? '1 campaign lift' : (nLifts > 1 ? `${nLifts} campaign lifts` : '');
       lines.push(`<div class="tt-why">Brand <span class="highlight">${fmtNum(d.brand_regs)}</span> regs / <span class="highlight">${fmt$(d.brand_spend)}</span>: ${trendPct}% trend, ${seasPct}% seasonality, ${regPct}% lift${liftLabel ? ` (${liftLabel})` : ''}, ${qualPct}% qualitative. NB <span class="highlight">${fmtNum(Math.round(d.nb_regs))}</span> regs / <span class="highlight">${fmt$(d.nb_spend)}</span> solved to hit target.</div>`);
+      // Round 11 P2-01: if the bootstrap CI is available, surface this
+      // week's plausible range in the tooltip so hovering gives both the
+      // point estimate AND the uncertainty envelope at that exact week.
+      const uncert = STATE.currentUncertainty;
+      if (uncert && uncert.per_week && uncert.per_week.regs && typeof d.weekIndex === 'number') {
+        const lo = uncert.per_week.regs.lower[d.weekIndex];
+        const hi = uncert.per_week.regs.upper[d.weekIndex];
+        if (Number.isFinite(lo) && Number.isFinite(hi) && hi > lo) {
+          lines.push(`<div class="tt-why">90% plausible range: <span class="highlight">${fmtNum(lo)}–${fmtNum(hi)}</span> regs.</div>`);
+        }
+      }
     }
     return lines.join('');
   }

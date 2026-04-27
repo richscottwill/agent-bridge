@@ -113,9 +113,9 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P2-01 · Chart hover tooltips
 - **Source:** Round 1 C-5, Round 2 R4-10
-- **Status:** open
-- **Verification:** Hover over week-14 dot on MX chart, popup shows "Week 14 · Actuals: 287 · Projected: 310 · Δ +23".
-- **Next:** Demo-critical. First after correctness phase.
+- **Status:** done (enhanced in R11)
+- **Verification:** Hover over any week on chart — visible brand-blue dot (5px radius, white stroke) tracks cursor, `.mpe-tooltip` popup shows `Wk N · Projected · Brand Xk regs / $Yk · NB Mk regs / $Lk · 90% plausible range: lo–hi regs.` Locked YTD weeks show `YTD actual (locked)` variant. The tooltip now includes bootstrap CI per-week range when available.
+- **What landed R11:** Pre-existing `attachNarratedTooltips` mousemove+bisector path was already wired but undiscoverable (transparent dots, no cursor feedback). Added a visible `mpe-hover-dot-overlay` SVG circle that tracks the focal point, wired `d.weekIndex` into chartData so the tooltip can look up the correct bootstrap CI bucket, and appended a "90% plausible range" line to projected-week tooltips.
 
 ### P2-02 · Chart x-axis period-scoping
 - **Source:** Round 3 R4-12
