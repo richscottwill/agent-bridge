@@ -2097,18 +2097,29 @@
       stackEl.innerHTML = '<div style="font-size:12px;color:var(--color-text-subtle)">No regimes active.</div>';
     } else {
       stackEl.innerHTML = regimes.map((r, i) => {
-        // Round 7 P1-04: flag absorbed-into-baseline lifts distinctly.
+        // Round 7 P1-04 + Round 12 P1-05: flag absorbed and low-confidence
+        // lifts distinctly. Absorbed = persistent >=52w no-decay (now baseline).
+        // Low-confidence = effective confidence < 0.25 (unmodeled upside).
         const absorbed = r.absorbed_into_baseline;
-        const statusLabel = absorbed
-          ? 'absorbed into baseline'
-          : (r.decay_status || 'n/a').replace(/-/g, ' ');
-        const badgeKlass = absorbed
-          ? 'ancient'   // uses the ancient pill styling (subdued) — signals "part of baseline, not transient"
-          : (r.decay_status && r.decay_status !== 'no-fit-state' ? 'fresh' : 'stale');
+        const lowConf = r.low_confidence;
+        let statusLabel, badgeKlass, valueDisplay;
+        if (absorbed) {
+          statusLabel = 'absorbed into baseline';
+          badgeKlass = 'ancient';   // subdued — signals "part of baseline, not transient"
+          valueDisplay = '—';
+        } else if (lowConf) {
+          statusLabel = 'unmodeled upside';
+          badgeKlass = 'stale';     // yellow — signals "acknowledged but not counted"
+          valueDisplay = `${(r.effective_confidence * 100).toFixed(0)}% · not counted`;
+        } else {
+          statusLabel = (r.decay_status || 'n/a').replace(/-/g, ' ');
+          badgeKlass = (r.decay_status && r.decay_status !== 'no-fit-state' ? 'fresh' : 'stale');
+          valueDisplay = `${(r.effective_confidence * 100).toFixed(0)}%`;
+        }
         const onsetDate = r.change_date ? new Date(r.change_date).toLocaleDateString() : 'n/a';
         return `<div class="drawer-tile">
           <span class="drawer-tile-label">Lift #${i + 1} (onset ${onsetDate}) <span class="freshness-badge ${badgeKlass}">${statusLabel}</span></span>
-          <span class="drawer-tile-value">${absorbed ? '—' : (r.effective_confidence * 100).toFixed(0) + '%'}</span>
+          <span class="drawer-tile-value">${valueDisplay}</span>
         </div>
         <div style="font-size:10px;color:var(--color-text-subtle);margin-top:-6px;margin-bottom:4px">${r.explanation}</div>`;
       }).join('');

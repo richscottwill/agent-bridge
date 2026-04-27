@@ -100,6 +100,16 @@
   // approval per mpe-findings.md P1-04.
   const ABSORBED_INTO_BASELINE_MIN_POST_WEEKS = 52;
 
+  // Low-confidence floor (Round 12 P1-05, UI layer):
+  // When a lift's effective_confidence is below this threshold, flag it as
+  // `low_confidence`. UI treats these as "unmodeled upside" — acknowledged
+  // as possibly-real but too noisy to bake into the point estimate.
+  // 0.25 chosen as starting point: below this, the status modifier (e.g.
+  // still-peaking 0.60) × base confidence (0.30-0.40) yields a contribution
+  // that's dominated by noise. MX Sparkle at confidence 0.3 × 0.60 = 0.18
+  // triggers the flag correctly.
+  const LOW_CONFIDENCE_FLOOR = 0.25;
+
   function listRegimesWithConfidence(regimeFitState, regimeMultiplier) {
     regimeMultiplier = regimeMultiplier == null ? 1.0 : regimeMultiplier;
     if (!regimeFitState) return [];
@@ -108,6 +118,15 @@
       const mod = DECAY_STATUS_MODIFIERS[r.decay_status || 'no-fit-state'] || 0.30;
       const absorbed = r.decay_status === 'no-decay-detected'
         && (r.n_post_weeks || 0) >= ABSORBED_INTO_BASELINE_MIN_POST_WEEKS;
+      const lowConfidence = !absorbed && eff < LOW_CONFIDENCE_FLOOR;
+      let explanation;
+      if (absorbed) {
+        explanation = `Absorbed into baseline (${r.n_post_weeks}w without decay — treat as structural baseline, not transient lift)`;
+      } else if (lowConfidence) {
+        explanation = `Low confidence (${(eff * 100).toFixed(0)}% effective — treated as unmodeled upside, not counted in projection)`;
+      } else {
+        explanation = `base=${(r.confidence || 0.30).toFixed(2)} × status=${mod.toFixed(2)} × mult=${regimeMultiplier.toFixed(2)} = ${eff.toFixed(2)}`;
+      }
       return {
         regime_id: r.regime_id,
         change_date: r.change_date,
@@ -121,9 +140,8 @@
         peak_multiplier: r.peak_multiplier,
         half_life_weeks: r.fitted_half_life_weeks || r.authored_half_life_weeks,
         absorbed_into_baseline: absorbed,
-        explanation: absorbed
-          ? `Absorbed into baseline (${r.n_post_weeks}w without decay — treat as structural baseline, not transient lift)`
-          : `base=${(r.confidence || 0.30).toFixed(2)} × status=${mod.toFixed(2)} × mult=${regimeMultiplier.toFixed(2)} = ${eff.toFixed(2)}`,
+        low_confidence: lowConfidence,
+        explanation: explanation,
       };
     });
   }

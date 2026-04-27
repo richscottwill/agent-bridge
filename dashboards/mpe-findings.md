@@ -67,8 +67,15 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P1-05 · Confidence floor for projection inclusion
 - **Source:** Round 2 dashboard-gap
-- **Status:** open
-- **Verification:** Lift #2 MX with 0.18 effective confidence is either dropped from the projection OR marked "unmodeled upside" visibly. Threshold TBD (starting point: 0.25).
+- **Status:** done (UI layer)
+- **Verification:** Probe on 4 markets returned expected low-confidence flags — MX Sparkle (0.18 eff, still-peaking), UK dormant lift (0.07 eff), JP still-peaking lift (0.18 eff) all correctly flagged `low_confidence: true`. Absorbed lifts are NOT double-flagged (mutually exclusive).
+- **Threshold:** `LOW_CONFIDENCE_FLOOR = 0.25` (documented in v1_1_slim.js).
+- **What landed:**
+  - `V1_1_Slim.listRegimesWithConfidence` now emits `low_confidence: true` on lifts with `effective_confidence < 0.25` AND not absorbed
+  - Narrative adds tail sentence: "N lift(s) flagged as unmodeled upside (too noisy to count in the point estimate)"
+  - Drawer shows yellow "unmodeled upside" pill with value "X% · not counted"
+  - Explanation string: "Low confidence (18% effective — treated as unmodeled upside, not counted in projection)"
+- **Math-side:** Deferred — same rationale as P1-04 math layer. The current weighted contribution already multiplies by eff=0.18, so the "lift" adds only ~18% of its raw impact. Zero-ing it out mathematically would shift projections by single-digit percent. Not shipped unless Richard wants it, consistent with R10 P1-04 math-side protocol.
 
 ### P1-06 · Solver convergence "Closest achievable" reporting
 - **Source:** Round 3 R3-3
@@ -411,4 +418,4 @@ The earlier "Phase 4 palette consolidation 41→14 tokens" and "type scale 13→
 Execute top-to-bottom within each phase. When a finding is blocked, mark the
 reason in-place and move to the next. Never silently skip.
 
-**Current next-up:** P1-05 → P1-06 → P1-07 → P1-09 → P1-12 → P1-08. (R11 cluster P2-01/P2-15/P2-07 done + P2-03 confirmed as P1-01 side effect.)
+**Current next-up:** P1-06 → P1-07 → P1-09 → P1-12 → P1-08. (R12 P1-05 done, R11 follow-up cluster shipped.)

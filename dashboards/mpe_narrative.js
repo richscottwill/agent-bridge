@@ -132,14 +132,27 @@
     // lifts (>=52 weeks with no detected decay). These aren't transient;
     // they're structural features of the market. Counting them as "active
     // campaign lifts" was misleading.
+    // Round 12 P1-05: also distinguish low-confidence lifts (effective
+    // confidence < 0.25) as "unmodeled upside" — real enough to flag,
+    // too noisy to include in the point estimate.
     let drivers = null;
     const lifts = (marketData?.regime_fit_state) || [];
     const liftIsAbsorbed = (l) => l.decay_status === 'no-decay-detected' && (l.n_post_weeks || 0) >= 52;
-    const activeLifts = lifts.filter(l => l.confidence && l.confidence > 0.15 && !liftIsAbsorbed(l));
+    const liftEffConf = (l) => {
+      const base = l.confidence == null ? 0.30 : Number(l.confidence);
+      const MODS = { 'dormant': 0.10, 'insufficient-data': 0.20, 'still-peaking': 0.60,
+        'decaying-faster': 0.70, 'decaying-as-expected': 0.80, 'decaying-slower': 0.90,
+        'no-decay-detected': 1.00, 'no-fit-state': 0.30 };
+      const mod = MODS[l.decay_status || 'no-fit-state'] || 0.30;
+      return base * mod;
+    };
+    const liftIsLowConf = (l) => !liftIsAbsorbed(l) && liftEffConf(l) < 0.25;
+    const activeLifts = lifts.filter(l => l.confidence && l.confidence > 0.15 && !liftIsAbsorbed(l) && !liftIsLowConf(l));
     const absorbedLifts = lifts.filter(liftIsAbsorbed);
-    if (activeLifts.length === 0 && absorbedLifts.length === 0) {
+    const lowConfLifts = lifts.filter(liftIsLowConf);
+    if (activeLifts.length === 0 && absorbedLifts.length === 0 && lowConfLifts.length === 0) {
       drivers = `No active campaign lifts detected — projection is baseline trend plus seasonality.`;
-    } else if (activeLifts.length === 0 && absorbedLifts.length > 0) {
+    } else if (activeLifts.length === 0 && absorbedLifts.length > 0 && lowConfLifts.length === 0) {
       drivers = `No transient lifts active. ${absorbedLifts.length} prior lift${absorbedLifts.length === 1 ? '' : 's'} ${absorbedLifts.length === 1 ? 'has' : 'have'} persisted more than a year without decay and ${absorbedLifts.length === 1 ? 'is' : 'are'} now part of the baseline.`;
     } else if (activeLifts.length === 1) {
       const l = activeLifts[0];
@@ -148,14 +161,16 @@
       if (l.decay_status === 'still-peaking') drivers += ` Still building — lift may grow.`;
       else if (l.decay_status === 'decaying-faster') drivers += ` Decaying faster than expected.`;
       else if (l.decay_status === 'no-decay-detected') drivers += ` No decay yet — watch for promotion to baseline if it persists.`;
-      if (absorbedLifts.length > 0) {
-        drivers += ` Separately, ${absorbedLifts.length} prior lift${absorbedLifts.length === 1 ? '' : 's'} ${absorbedLifts.length === 1 ? 'has' : 'have'} absorbed into baseline.`;
-      }
-    } else {
+    } else if (activeLifts.length > 1) {
       drivers = `${activeLifts.length} campaign lifts active, combining for a stacked Brand multiplier.`;
-      if (absorbedLifts.length > 0) {
-        drivers += ` ${absorbedLifts.length} additional lift${absorbedLifts.length === 1 ? '' : 's'} absorbed into baseline.`;
-      }
+    } else {
+      drivers = `No lifts meet the confidence threshold — projection is baseline trend plus seasonality.`;
+    }
+    if (absorbedLifts.length > 0 && activeLifts.length > 0) {
+      drivers += ` ${absorbedLifts.length} additional lift${absorbedLifts.length === 1 ? '' : 's'} absorbed into baseline.`;
+    }
+    if (lowConfLifts.length > 0) {
+      drivers += ` ${lowConfLifts.length} lift${lowConfLifts.length === 1 ? '' : 's'} flagged as unmodeled upside (too noisy to count in the point estimate).`;
     }
 
     // Line 5 — caveats
