@@ -94,8 +94,10 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P1-10 · Numbers-drift between reloads
 - **Source:** Round 3 R3-5
-- **Status:** open
-- **Verification:** Two reloads of MX Y2026 @ 75% produce identical `$X.XXM` hero. If data is refreshing, page shows "updated 2m ago" badge.
+- **Status:** done
+- **Root-cause probe (2026-04-27):** Grep confirms NO localStorage persistence of scope/period/driver/target in projection-app.js. `rngSeed: 42` is hardcoded. The drift was NOT a non-deterministic seed bug. It was the `projection-data.json` bundle regenerating between loads (every time `export-projection-data.py` or the WBR pipeline runs, Y2026 re-fits with a week's more YTD data). Local Kiro's initial hypothesis matched: data is genuinely refreshing.
+- **Fix (shipped):** Added prominent `Refreshed Xh ago` indicator inside the hero market badge (12px/500 in subtle gray, cursor:help on hover). Tooltip reads: "Last refresh: Apr 27 2:39 AM. Projections update when YTD actuals refresh, typically every Monday. If yesterday's number differs from today's, the underlying data has advanced — the model is not non-deterministic." Existing 12px `header-freshness` top-right line retained for redundancy. No math changes.
+- **Verification:** Cold-load shows the badge with human-readable timestamp. Tooltip surfaces the full refresh datetime and explains the drift. A Kate-grade test: if she compares a screenshot from Monday ($1.32M) to one on Tuesday ($1.88M), she sees two different "Refreshed" values and understands why the numbers differ.
 
 ### P1-11 · abc input blur handler
 - **Source:** Round 5 V-3

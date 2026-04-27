@@ -1079,3 +1079,18 @@ select.control-input:hover {
 /* "Explain this →" links — add underline on hover so they feel tappable */
 .drawer-tile-explain { cursor: pointer; color: var(--color-brand, #0066CC); }
 .drawer-tile-explain:hover { text-decoration: underline; }
+
+
+/* Round 7 P1-10: refreshed indicator in hero market badge. Visual weight
+   between the period (18px/500) and the target (14px/400) so it reads as
+   important context without competing with market identity. */
+.hero-market-refreshed {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-subtle, #9A9A9A);
+  cursor: help;
+  letter-spacing: 0.02em;
+}
+.hero-market-refreshed:hover {
+  color: var(--color-brand, #0066CC);
+}

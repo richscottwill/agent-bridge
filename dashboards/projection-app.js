@@ -102,6 +102,23 @@
       const ageHours = (Date.now() - generated.getTime()) / 3600000;
       const el = document.getElementById('header-freshness');
       if (el) el.textContent = `Data ${ageHours.toFixed(1)}h old · methodology v${STATE.data.methodology_version || '1.0.0'}`;
+      // Round 7 P1-10: prominent refreshed indicator in the hero market badge.
+      // Addresses "numbers-drift between reloads" — users saw $1.32M → $1.88M
+      // on consecutive loads without knowing the data had advanced one week.
+      // Show a human date/time so anyone comparing yesterday's screenshot can
+      // tell whether the drift was data-driven (YTD actuals refreshed) or a
+      // bug. Tooltip explains what's happening plainly.
+      const badgeEl = document.getElementById('hero-market-refreshed');
+      if (badgeEl) {
+        const dateStr = generated.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+        const timeStr = generated.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+        let freshWord;
+        if (ageHours < 1) freshWord = 'just now';
+        else if (ageHours < 24) freshWord = `${Math.round(ageHours)}h ago`;
+        else freshWord = `${Math.round(ageHours / 24)}d ago`;
+        badgeEl.textContent = `Refreshed ${freshWord}`;
+        badgeEl.title = `Last refresh: ${dateStr} ${timeStr}. Projections update when YTD actuals refresh, typically every Monday. If yesterday's number differs from today's, the underlying data has advanced — the model is not non-deterministic.`;
+      }
     }
     return true;
   }
