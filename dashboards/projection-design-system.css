@@ -593,6 +593,13 @@ html, body {
   outline: none;
   border-color: var(--color-brand);
 }
+/* Round 6 V6-1: focus-visible on control inputs needs an explicit outline
+   because the base :focus rule above nukes it. This brings selects + target
+   input + slider into keyboard parity with buttons/chips. */
+.control-input:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 1px;
+}
 
 /* Scenario chip row (for Phase 6.4 — seed here so 6.3 screens have the hook) */
 .scenario-chips {

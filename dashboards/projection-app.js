@@ -158,17 +158,43 @@
     }
     panel.style.display = '';
     cnt.textContent = `(${items.length})`;
+    // Plain-language check names — map the raw check keys to sentence labels.
+    // Round 6 V6-3: the translation table existed but wasn't being consulted
+    // here. Anomaly items use a `check` field (fit_r2_drop, op2_pacing_divergence,
+    // regime_low_confidence, ytd_projection_step) which we now translate inline.
+    const CHECK_LABELS = {
+      fit_r2_drop: 'Fit quality dropped sharply',
+      op2_pacing_divergence: 'Projection diverges from OP2 plan',
+      regime_low_confidence: 'Campaign lift confidence is low',
+      ytd_projection_step: 'Large step between actuals and projection',
+    };
+    // Plain-language detail stripping — remove bare table references and make
+    // the dollar/pct numbers readable inline.
+    function translateDetail(d) {
+      if (!d) return '';
+      return String(d)
+        .replace(/brand_cpa_elasticity/g, 'Brand CPA fit')
+        .replace(/nb_cpa_elasticity/g, 'Non-Brand CPA fit')
+        .replace(/\bps\.v_weekly\b/g, 'weekly data')
+        .replace(/\bps\.regime_changes\b/g, 'campaign lifts registry')
+        .replace(/v1\.1 Slim /g, '')
+        .replace(/\br²\b/g, 'fit quality');
+    }
     list.innerHTML = items.map(a => {
       const sevColor = a.severity === 'error' ? 'var(--color-danger)'
                      : a.severity === 'warn'  ? 'var(--color-warning)'
                      : 'var(--color-text-meta)';
-      const sevUpper = a.severity.toUpperCase();
+      const sevWord = a.severity === 'error' ? 'Error'
+                    : a.severity === 'warn'  ? 'Warning'
+                    : 'Info';
+      const label = CHECK_LABELS[a.check] || (a.check || '').replace(/_/g, ' ');
+      const detail = translateDetail(a.detail);
       const remediation = a.remediation
-        ? `<div style="font-size:11px;color:var(--color-text-meta);margin-top:2px">→ ${a.remediation}</div>`
+        ? `<div style="font-size:11px;color:var(--color-text-meta);margin-top:2px">→ ${translateDetail(a.remediation)}</div>`
         : '';
-      return `<li style="padding:6px 0">
-        <span style="color:${sevColor};font-weight:600;font-size:11px">[${sevUpper}]</span>
-        <b>${a.check}</b> — ${a.detail}
+      return `<li class="anomaly-item" style="padding:6px 4px;border-radius:3px">
+        <span style="display:inline-block;min-width:60px;color:${sevColor};font-weight:600;font-size:11px;text-transform:uppercase">${sevWord}</span>
+        <b>${label}</b> — ${detail}
         ${remediation}
       </li>`;
     }).join('');
@@ -223,10 +249,10 @@
       errMsg = `Target can't be negative.`;
     } else if (driver === 'ieccp' && Number.isFinite(n) && (n < 1 || n > 200)) {
       errMsg = `Efficiency target should be 1–200%.`;
-    } else if (driver === 'spend' && Number.isFinite(n) && n > 1e11) {
-      errMsg = `Spend target exceeds $100B — likely a typo.`;
-    } else if (driver === 'regs' && Number.isFinite(n) && n > 1e9) {
-      errMsg = `Registrations target exceeds 1B — likely a typo.`;
+    } else if (driver === 'spend' && Number.isFinite(n) && n > 1e10) {
+      errMsg = `Spend target exceeds $10B — likely a typo.`;
+    } else if (driver === 'regs' && Number.isFinite(n) && n > 1e8) {
+      errMsg = `Registrations target exceeds 100M — likely a typo.`;
     } else if (driver === 'rollup') {
       // Regions ignore the input; no error needed
     }
@@ -378,11 +404,18 @@
     if (nameEl) nameEl.textContent = scope;
     if (periodEl) periodEl.textContent = humanPeriodLong(period);
     if (targetEl) {
-      targetEl.textContent = driver === 'ieccp' ? `${v}% efficiency target`
-        : driver === 'spend' ? `${fmt$(v)} spend target`
-        : driver === 'regs' ? `${fmtNum(v)} registrations target`
-        : driver === 'rollup' ? `region rollup`
-        : 'target';
+      if (driver === 'ieccp') targetEl.textContent = `${v}% efficiency target`;
+      else if (driver === 'spend') targetEl.textContent = `${fmt$(v)} spend target`;
+      else if (driver === 'regs') targetEl.textContent = `${fmtNum(v)} registrations target`;
+      else if (driver === 'rollup') {
+        // Round 5 V-5: "rollup target" was meaningless. Show the constituents.
+        const regionMarkets = (MPE && MPE.REGION_CONSTITUENTS && MPE.REGION_CONSTITUENTS[scope]) || [];
+        targetEl.textContent = regionMarkets.length
+          ? `rollup of ${regionMarkets.join(' + ')}`
+          : `region rollup`;
+      } else {
+        targetEl.textContent = 'target';
+      }
     }
   }
 
@@ -1535,8 +1568,8 @@
     const liftText = liftCount === 0 ? '' : ` · ${liftCount} active campaign lift${liftCount > 1 ? 's' : ''}`;
 
     const fitHtml = fitPct != null
-      ? `<span class="dot ${klass}"></span>Fit quality: <b>${fitWord}</b> (${fitPct}% explained) · ${nWeeks || '—'} weeks of data · ${fbText}${liftText}`
-      : `<span class="dot low"></span>Fit quality: <b>unknown</b> · ${nWeeks || '—'} weeks of data · ${fbText}${liftText}`;
+      ? `<span class="dot ${klass}"></span>Fit quality: <b>${fitWord}</b> (${fitPct}% explained) · ${nWeeks ? `${nWeeks} weeks of data` : 'weeks of data not recorded'} · ${fbText}${liftText}`
+      : `<span class="dot low"></span>Fit quality: <b>not yet measured</b> · ${nWeeks ? `${nWeeks} weeks of data` : 'weeks of data not recorded'} · ${fbText}${liftText}`;
 
     const el = document.getElementById('fit-quality');
     el.innerHTML = fitHtml;
@@ -1649,7 +1682,7 @@
         <li><b>Campaign lifts</b>: ${regimes.length} active lift${regimes.length === 1 ? '' : 's'} applied with their observed decay curves.</li>
       </ul>
       <h3 style="margin-top:12px;font-size:14px">Step 2 — Non-Brand residual</h3>
-      <p>With Brand regs and Brand spend projected, we solve for the Non-Brand spend that ${driver === 'ieccp' ? 'lands the full-year efficiency on target' : driver === 'regs' ? 'delivers the missing registrations via the NB CPA elasticity curve' : 'fills the remaining budget after Brand'}. The solver uses the NB CPA elasticity fit from ${fq.n_weeks || '—'} weeks of history.</p>
+      <p>With Brand regs and Brand spend projected, we solve for the Non-Brand spend that ${driver === 'ieccp' ? 'lands the full-year efficiency on target' : driver === 'regs' ? 'delivers the missing registrations via the NB CPA elasticity curve' : 'fills the remaining budget after Brand'}. The solver uses the NB CPA elasticity fit from ${fq.n_weeks ? `${fq.n_weeks} weeks` : 'the available history'} of history.</p>
       <h3 style="margin-top:12px;font-size:14px">Step 3 — Locked YTD</h3>
       <p>Weeks that have already happened are locked to actuals. The solver only adjusts the remaining weeks of the year.</p>
     `;
@@ -2513,6 +2546,13 @@
 
     // Controls
     document.getElementById('scope-select').addEventListener('change', () => {
+      // Round 6 V6-4: reset transient chart-overlay state on market change so
+      // the counterfactual overlay / active scenario chip don't bleed across
+      // scopes. Recompute will re-derive the Planned scenario.
+      STATE.disclosures.counter = false;
+      STATE.activeChipId = 'mixed';
+      STATE.scenarioOverride = null;
+      document.querySelectorAll('[data-disclosure="counter"]').forEach(b => b.classList.remove('active'));
       refreshScopeDependentUI();
       scheduleRecompute();
     });
@@ -2534,6 +2574,20 @@
       validateTargetInput();
       clearTimeout(recomputeTimer);
       recomputeTimer = setTimeout(() => recompute({ animated: false }), 300);
+    });
+    // Round 5 V-3: browser <input type="number"> silently strips non-numeric
+    // input before JS sees it. On blur, if the field is empty (user typed
+    // "abc" and the browser zeroed it), show an explicit "Enter a number."
+    // rather than silently accepting zero.
+    document.getElementById('target-input').addEventListener('blur', (e) => {
+      if (e.target.value === '' || e.target.value == null) {
+        const errEl = document.getElementById('target-input-error');
+        if (errEl) {
+          errEl.textContent = 'Enter a number.';
+          errEl.style.display = '';
+        }
+        e.target.setAttribute('aria-invalid', 'true');
+      }
     });
     const slider = document.getElementById('regime-slider');
     slider.addEventListener('input', (e) => {

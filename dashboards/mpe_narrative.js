@@ -106,17 +106,24 @@
     const op2Regs = marketData?.op2_targets?.annual_regs_target;
     const annualTotalSpend = t.annual_total_spend || t.total_spend;
     const annualTotalRegs = t.annual_total_regs || t.total_regs;
+    // Multi-year periods need a denominator adjustment — OP2 is annual, so
+    // on MY2 the projection spans 2 years. Annualize the projection and label
+    // the comparison so users know the math.
+    const periodCode = String(out.period || out.time_period || '').toUpperCase();
+    const myMatch = periodCode.match(/^MY(\d+)$/);
+    const nYears = myMatch ? Math.max(1, parseInt(myMatch[1], 10)) : 1;
+    const paceLabel = nYears > 1 ? `Annualized to OP2` : `At full-year pace`;
     if (op2Spend && annualTotalSpend && op2Regs && annualTotalRegs) {
-      const spendPct = Math.round(annualTotalSpend / op2Spend * 100);
-      const regsPct = Math.round(annualTotalRegs / op2Regs * 100);
+      const spendPct = Math.round((annualTotalSpend / nYears) / op2Spend * 100);
+      const regsPct = Math.round((annualTotalRegs / nYears) / op2Regs * 100);
       if (Math.abs(spendPct - 100) <= 5 && Math.abs(regsPct - 100) <= 5) {
-        op2Line = `At full-year pace, that's within 5% of OP2 on both spend and registrations — tracking the plan.`;
+        op2Line = `${paceLabel}, that's within 5% of OP2 on both spend and registrations — tracking the plan.`;
       } else if (spendPct > 110 && regsPct < 95) {
-        op2Line = `At full-year pace that's ${spendPct}% of OP2 spend but only ${regsPct}% of OP2 registrations — overspending without reg delivery.`;
+        op2Line = `${paceLabel} that's ${spendPct}% of OP2 spend but only ${regsPct}% of OP2 registrations — overspending without reg delivery.`;
       } else if (spendPct < 95 && regsPct > 110) {
-        op2Line = `At full-year pace that's ${spendPct}% of OP2 spend but ${regsPct}% of OP2 registrations — delivering more with less.`;
+        op2Line = `${paceLabel} that's ${spendPct}% of OP2 spend but ${regsPct}% of OP2 registrations — delivering more with less.`;
       } else {
-        op2Line = `At full-year pace that's ${spendPct}% of OP2 spend and ${regsPct}% of OP2 registrations.`;
+        op2Line = `${paceLabel} that's ${spendPct}% of OP2 spend and ${regsPct}% of OP2 registrations.`;
       }
     }
 
