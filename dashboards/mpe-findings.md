@@ -62,10 +62,10 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P1-04 · Campaign-lift-to-baseline auto-promotion
 - **Source:** Round 3 R3-4, Round 3 R3-9
-- **Status:** partial — UI layer done. Math layer blocked pending Richard's approval.
-- **Verification (UI layer, DONE):** `V1_1_Slim.listRegimesWithConfidence` now emits `absorbed_into_baseline: true` on any lift with `decay_status === 'no-decay-detected'` AND `n_post_weeks >= 52`. Probed against projection-data.json: 5/13 lifts across US/MX/UK/JP/DE correctly flagged (all 2024-05-15 + 2024-10-01 onsets with ≥80w no decay). Narrative emits "N prior lift(s) absorbed into baseline" separately from "active" count. Drawer shows "absorbed into baseline" pill (styled with `.ancient` class, subdued) and displays `—` instead of a misleading confidence percent.
-- **Verification (math layer, NOT DONE):** The pre-computed `brand_trajectory_y2026` in projection-data.json still bakes in these lifts' contributions. Changing the math requires Python-side edit to `brand_trajectory.py::_per_regime_weighted_contribution` + regeneration of projection-data.json + rebase of regression fixture.
-- **Handback:** The UI now stops claiming these lifts are "load-bearing" which was the stated R3-4 concern. The math side is a separate commit pending Richard's yes/no on the methodology change (every market's Y2026 number will shift).
+- **Status:** done (UI + math)
+- **Verification (UI layer, DONE):** `V1_1_Slim.listRegimesWithConfidence` emits `absorbed_into_baseline: true` on any lift with `decay_status === 'no-decay-detected'` AND `n_post_weeks >= 52`. 5/13 lifts across US/MX/UK/JP/DE correctly flagged. Narrative separates absorbed from active. Drawer pill "absorbed into baseline" with `—` instead of confidence %.
+- **Verification (math layer, DONE, zero-delta):** `brand_trajectory._per_regime_weighted_contribution` now returns `1.0` for absorbed regimes. All 10 markets returned zero delta in the pre/post snapshot (guardrail ±15%: 0/10 exceeded). Zero delta is the CORRECT outcome given the 2026-04-26 anchor rework — the recent-actuals anchor already reflects absorbed-lift levels, so forward-stream contribution is a near-1.0 no-op anyway. The code change makes it symmetric with JS and self-documenting against future anchor-mechanism changes.
+- **Snapshots:** `shared/dashboards/data/p1-04-preshift.json` (pre), `...postshift.json` (post). 128/128 Python tests still green. Commits: 56229df (UI), ea992c4 (pre-snap), 8cd5840 (math + post-snap).
 
 ### P1-05 · Confidence floor for projection inclusion
 - **Source:** Round 2 dashboard-gap
