@@ -33,6 +33,61 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ---
 
+## Milestone decisions (M-series, 2026-04-27 through 2026-04-28)
+
+Rendering and adapter choices that span multiple findings. Captured here so
+future agents inherit the "why" of the architecture without having to
+reconstruct from diffs.
+
+### M2 — `CanonChart` scenario mode in `canon-chart.js`
+Added a third rendering mode to the canonical chart library alongside `tracker`
+and `calibration`. Scenario mode supports CI band, counterfactual, regime
+onset annotations, Today seam, period highlight, and a narrated tooltip
+via Chart.js `tooltip.callbacks.afterBody`. Single library, three call
+sites, no shared datasets — mode is orthogonal, not a set of overrides.
+
+### M3 — Projection chart migrated off Observable Plot + D3
+Replaced the ~750-line custom render pipeline in `projection-app.js`
+(renderChart + attachNarratedTooltips + ensureTooltip + showTooltip +
+hideTooltip + applyArrivalAnimations + annotateActiveRegimes +
+renderNarratedTooltip) with Chart.js via `CanonChart.render({ mode:
+'scenario' })`. Adapter lives in `projection-chart.js` (~200 lines) and
+converts projection-app's data shape to scenarioData. Chart.js manages
+hover/legend/dual-axis/resize natively; tooltip stays attached to the
+canvas via native `afterBody` instead of a custom SVG overlay. Shipped
+in `dcbdac3`. Closes the "should we convert to Chart.js?" question as
+"yes, done." Marking the Chart.js swap **decided and shipped** — not
+deferred.
+
+### NB-shape-from-Brand (2026-04-28, commit `f6dc61e`)
+Non-Brand RoY weekly shape derives from the Brand trajectory curve
+(`nbRegsPerWeek[i] = brandRoyRegs[i] / sum(brandRoyRegs) * out.roy.nb_regs`)
+instead of even-split, so the stacked area rises and falls with Brand's
+seasonality + lift curve instead of showing a flat rectangular band. Same
+treatment for NB spend. Per-series seam-scale fades on all four series
+(Brand regs, NB regs, Brand spend, NB spend) so the Today line doesn't
+create visible cliffs. Registrations and cost projections now move
+together through time at the market's actual Brand:NB ratio.
+
+### Regional rollup fauxOut fix (2026-04-28, commit `121b4e8`)
+`renderRegionalV1` sums `out.ytd` + `out.roy` across all constituent
+markets (WW sums 10, EU5 sums 5, NA sums 2). Previously the RoY placeholder
+was `{}` and `projection-chart.js` couldn't distribute NB across projected
+weeks, collapsing the projected half to Brand-only. The fix lives in the
+regional-rollup builder so the adapter receives a consistent shape
+regardless of call site (single market vs region).
+
+### P2-12 chart-overlay (2026-04-28, commit `7db6a9c`)
+Saved-projection compare line overlays the chart as a dashed brand-blue
+total-regs curve when `STATE.compareId` is set. Compare data is
+recomputed on the fly from the saved record's (driver, target,
+regime_multiplier) through V1_1_Slim so it always reflects the exact
+scenario saved. YTD half matches actuals (same market + same locked YTD),
+so divergence only appears in the RoY half where the alternative scenario
+differs from the current one.
+
+---
+
 ## Phase 1 — Track A (correctness)
 
 ### P1-01 · MC draws complete for every market/period combo
@@ -190,7 +245,7 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 ### P2-12 · Saved projection load/delete/compare
 - **Source:** Round 4 R4-16
 - **Status:** done
-- **Verification:** Each saved item shows Load / Compare / × buttons. Load restores full state (scope/period/driver/target/regime_multiplier). Delete removes the entry + clears active compare if it matched. Compare highlights the selected item with a brand-blue border + #F0F7FF background, sets `STATE.compareId`, and overlays the saved projection on the chart as a dashed brand-blue line labeled `Saved · <driver>=<value>`. The compare line is recomputed from the saved record's (driver, target, regime_multiplier) through V1_1_Slim's `year_weekly` arrays so it reflects the exact scenario that was saved. YTD half of the compare line matches actuals (same market, same locked YTD); divergence appears in the RoY half. Scope-mismatched saves are silently skipped so overlaying a saved MX projection on a US chart doesn't produce a misaligned line. Row click still loads for backward compat. Commits: b431616 (state plumbing), <chart overlay follow-up>.
+- **Verification:** Each saved item shows Load / Compare / × buttons. Load restores full state (scope/period/driver/target/regime_multiplier). Delete removes the entry + clears active compare if it matched. Compare highlights the selected item with a brand-blue border + #F0F7FF background, sets `STATE.compareId`, and overlays the saved projection on the chart as a dashed brand-blue line labeled `Saved · <driver>=<value>`. The compare line is recomputed from the saved record's (driver, target, regime_multiplier) through V1_1_Slim's `year_weekly` arrays so it reflects the exact scenario that was saved. YTD half of the compare line matches actuals (same market, same locked YTD); divergence appears in the RoY half. Scope-mismatched saves are silently skipped so overlaying a saved MX projection on a US chart doesn't produce a misaligned line. Row click still loads for backward compat. Commits: b431616 (state plumbing), 7db6a9c (chart overlay).
 
 ### P2-13 · Brand/NB stacked bar visual
 - **Source:** Round 1 K-7
