@@ -311,8 +311,26 @@
             : mode === 'rollup' ? 'Rollup (sum of children)' : mode;
       driverSel.appendChild(opt);
     }
-    driverSel.value = supported.includes(prev) ? prev
-      : (supported.includes('ieccp') ? 'ieccp' : supported[0]);
+    // P-DRV-PERSIST fix (2026-04-28): previously this kept the prior driver
+    // when the destination market supported it — which meant once a user
+    // clicked into AU/JP (spend-only), the driver stuck on 'spend' and
+    // carried through every subsequent market switch. Kate reported the
+    // MX spend jumping from ~$1.88M to $541K after touching AU, because MX
+    // got rendered in Spend mode at AU's spend target.
+    //
+    // New rule: on every scope change, force the destination market's
+    // PREFERRED driver (ieccp if supported, else the first supported mode).
+    // Exception: if the user explicitly changed the driver themselves
+    // (STATE.userOverrodeDriver === true), honor that intent — but still
+    // reseed the target so the new market's target-for-that-driver lands,
+    // not the previous market's stale value.
+    const preferredDriver = supported.includes('ieccp') ? 'ieccp' : supported[0];
+    const userOverride = STATE.userOverrodeDriver === true;
+    if (userOverride && supported.includes(prev)) {
+      driverSel.value = prev;
+    } else {
+      driverSel.value = preferredDriver;
+    }
 
     // Hide driver+target inputs for regions (rollup is computed, not a target)
     // — the inputs are purely cosmetic for rollup mode. Hide rather than delete
@@ -1975,7 +1993,13 @@
       }
       if (driver) {
         const el = document.getElementById('driver-select');
-        if (el && [...el.options].some(o => o.value === driver)) el.value = driver;
+        if (el && [...el.options].some(o => o.value === driver)) {
+          el.value = driver;
+          // P-DRV-PERSIST fix (2026-04-28): an explicit ?driver=X in the URL
+          // counts as user intent — mark the override so subsequent market
+          // switches honor it rather than forcing the preferred driver.
+          STATE.userOverrodeDriver = true;
+        }
       }
       if (target && Number.isFinite(parseFloat(target))) {
         const el = document.getElementById('target-input');
@@ -2010,6 +2034,9 @@
     STATE.scenarioOverride = null;
     STATE.kpiIsolatedSeries = null;
     STATE.compareId = null;
+    // P-DRV-PERSIST fix (2026-04-28): clear the user-driver override so the
+    // next market switch again honors the market's preferred driver.
+    STATE.userOverrodeDriver = false;
     document.querySelectorAll('[data-disclosure="counter"]').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.hero-kpi[data-kpi-series]').forEach(t => t.classList.remove('kpi-active'));
     refreshScopeDependentUI();
@@ -2632,7 +2659,8 @@
   }
 
   const EXPLAIN_TEXT = {
-    trend_slope: `Weekly log-linear growth rate on Brand regs, fit on recent weeks with recency weighting (half-life 4w). Positive = growing, negative = declining. Capped at ±10%/wk to prevent wild extrapolation.`,
+    anchor_recent: `Where Brand is RIGHT NOW — mean of the last 8 weeks of Brand regs (clipped to post-regime-onset if a structural campaign started recently, so active lifts aren't diluted). This is the baseline every other stream multiplies on top of.`,
+    yoy_annual: `Annual YoY growth scalar from log-linear regression on regime-normalized annual Brand regs (last 3 years). Regime contributions are stripped from each year before regression so the slope reflects organic growth, not campaign lifts. Permanent slopes live here — weekly slopes don't compound forever.`,
     regime_lift: `Active campaign lifts with their current effective multiplier. Peak × confidence × decay-status modifier. Dormant regimes drop to ~1.0 automatically as data stabilizes.`,
     nb_elasticity: `NB CPA response to spend: CPA ≈ exp(a) × spend^b. b near 1.0 = flat response (healthy), b > 1 = saturation (spending more drives CPA up disproportionately).`,
     locked_ytd: `Weeks of the year already locked (data is in). Remaining weeks are projected. The more YTD weeks, the tighter the forecast constrains to observed actuals.`,
@@ -2702,8 +2730,8 @@
           <span class="drawer-tile-value">${slope >= 0 ? '+' : ''}${slopePct}% wk ${slopeArrow}</span>
         </div>
         ${brandTrendSpark}
-        <div style="font-size:10px;color:var(--color-text-subtle)">Last 8 weeks of Brand regs</div>
-        <span class="drawer-tile-explain" data-explain="trend_slope">Explain this →</span>
+        <div style="font-size:10px;color:var(--color-text-subtle)">Last 8 weeks of Brand regs (anchor)</div>
+        <span class="drawer-tile-explain" data-explain="anchor_recent">Explain this →</span>
       </div>
       <div class="drawer-tile-sparkline">
         <div class="drawer-tile-head">
@@ -2915,6 +2943,10 @@
       else if (STATE.activeView === 'heatgrid') renderHeatGrid();
     });
     document.getElementById('driver-select').addEventListener('change', () => {
+      // P-DRV-PERSIST fix (2026-04-28): user explicitly picked a driver,
+      // so subsequent market switches should honor that choice rather than
+      // force the new market's preferred driver. Cleared by Reset.
+      STATE.userOverrodeDriver = true;
       seedTargetValue();
       scheduleRecompute();
     });
