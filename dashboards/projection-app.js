@@ -1137,14 +1137,48 @@
       fit_quality: null,
     };
 
-    // Build a faux V1_1_Slim.projectWithLockedYtd-shaped output
+    // Build a faux V1_1_Slim.projectWithLockedYtd-shaped output.
+    // Critical: sum per-market out.ytd and out.roy so projection-chart.js
+    // has the NB + Brand RoY totals it needs to distribute across projected
+    // weeks. Previously these were empty objects, which caused the chart's
+    // projected half to show only Brand (NB collapsed to 0) — a ~50% cliff
+    // at the Today seam for region views. Fixed 2026-04-28.
+    const regionalYtd = { n_weeks_locked: 0, latest_week_locked: null,
+      brand_regs: 0, brand_spend: 0, nb_regs: 0, nb_spend: 0,
+      total_regs: 0, total_spend: 0 };
+    const regionalRoy = { n_weeks: 0, brand_regs: 0, brand_spend: 0, nb_regs: 0, nb_spend: 0 };
+    for (const { out } of perMarket) {
+      const y = out?.ytd || {};
+      regionalYtd.brand_regs  += y.brand_regs  || 0;
+      regionalYtd.brand_spend += y.brand_spend || 0;
+      regionalYtd.nb_regs     += y.nb_regs     || 0;
+      regionalYtd.nb_spend    += y.nb_spend    || 0;
+      regionalYtd.total_regs  += y.total_regs  || 0;
+      regionalYtd.total_spend += y.total_spend || 0;
+      if (y.n_weeks_locked > regionalYtd.n_weeks_locked) {
+        regionalYtd.n_weeks_locked = y.n_weeks_locked;
+      }
+      if (y.latest_week_locked) {
+        const d = y.latest_week_locked instanceof Date ? y.latest_week_locked : new Date(y.latest_week_locked);
+        if (!regionalYtd.latest_week_locked || d > regionalYtd.latest_week_locked) {
+          regionalYtd.latest_week_locked = d;
+        }
+      }
+      const r = out?.roy || {};
+      regionalRoy.brand_regs  += r.brand_regs  || 0;
+      regionalRoy.brand_spend += r.brand_spend || 0;
+      regionalRoy.nb_regs     += r.nb_regs     || 0;
+      regionalRoy.nb_spend    += r.nb_spend    || 0;
+      if (r.n_weeks > regionalRoy.n_weeks) regionalRoy.n_weeks = r.n_weeks;
+    }
+
     const fauxOut = {
       year: 2026,
       target_mode: 'rollup',
       target_value: 0,
       period: period,
-      ytd: { brand_regs: 0, brand_spend: 0, nb_regs: 0, nb_spend: 0 },
-      roy: {},
+      ytd: regionalYtd,
+      roy: regionalRoy,
       year_weekly: yearWeekly,
       totals: t,
       contribution_breakdown: { seasonal: 0.40, trend: 0.40, regime: 0.15, qualitative: 0.05 },
