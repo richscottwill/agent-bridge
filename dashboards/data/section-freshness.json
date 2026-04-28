@@ -1,122 +1,130 @@
 {
-  "generated": "2026-04-22T14:19:55.279298+00:00",
+  "generated": "2026-04-28T00:15:43.691129+00:00",
   "pages": {
     "index.html": {
       "hero": {
         "heading": "Hero",
-        "updated_iso": "2026-04-22T14:19:42.544842+00:00",
+        "updated_iso": "2026-04-27T22:13:12.662263+00:00",
         "source": "data/command-center-data.json"
       },
       "daily-blocks": {
         "heading": "Daily Blocks",
-        "updated_iso": "2026-04-22T14:19:42.544842+00:00",
+        "updated_iso": "2026-04-27T22:13:12.662263+00:00",
         "source": "data/command-center-data.json"
       },
       "integrity-ledger": {
         "heading": "Integrity Ledger",
-        "updated_iso": "2026-04-22T14:19:42.544842+00:00",
+        "updated_iso": "2026-04-27T22:13:12.662263+00:00",
         "source": "data/command-center-data.json"
       },
       "actionable-intelligence": {
         "heading": "Actionable Intelligence",
-        "updated_iso": "2026-04-22T14:19:42.544842+00:00",
+        "updated_iso": "2026-04-27T22:13:12.662263+00:00",
         "source": "data/command-center-data.json"
       }
     },
-    "callout-dashboard.html": {
-      "market-callouts": {
-        "heading": "Market Callouts",
-        "updated_iso": "2026-04-22T14:19:39.901249+00:00",
-        "source": "data/callout-data.json"
-      },
-      "callout-chart": {
-        "heading": "Performance Chart",
-        "updated_iso": "2026-04-22T14:19:39.901249+00:00",
-        "source": "data/callout-data.json"
-      }
-    },
-    "forecast-tracker.html": {
-      "forecast-overview": {
-        "heading": "Forecast Overview",
-        "updated_iso": "2026-04-22T14:19:38+00:00",
+    "performance/weekly-review.html": {
+      "sec-kpis": {
+        "heading": "KPIs",
+        "updated_iso": "2026-04-27T22:12:48+00:00",
         "source": "data/forecast-data.json"
       },
-      "weekly-detail": {
+      "sec-trend": {
+        "heading": "Trend",
+        "updated_iso": "2026-04-27T22:12:48+00:00",
+        "source": "data/forecast-data.json"
+      },
+      "sec-detail": {
         "heading": "Weekly Detail",
-        "updated_iso": "2026-04-22T14:19:38+00:00",
+        "updated_iso": "2026-04-27T22:12:48+00:00",
         "source": "data/forecast-data.json"
       },
-      "projections": {
+      "sec-callout": {
+        "heading": "Callout",
+        "updated_iso": "2026-04-27T23:51:08.366140+00:00",
+        "source": "data/callout-data.json"
+      },
+      "sec-channels": {
+        "heading": "Channels",
+        "updated_iso": "2026-04-27T23:51:08.366140+00:00",
+        "source": "data/callout-data.json"
+      },
+      "sec-projections": {
         "heading": "Projections",
-        "updated_iso": "2026-04-22T14:19:38+00:00",
-        "source": "data/forecast-data.json"
+        "updated_iso": "2026-04-27T23:51:08.366140+00:00",
+        "source": "data/callout-data.json"
+      },
+      "sec-context": {
+        "heading": "Context",
+        "updated_iso": "2026-04-27T23:51:08.366140+00:00",
+        "source": "data/callout-data.json"
       }
     },
     "wiki-search.html": {
       "wiki-search": {
         "heading": "Wiki Search",
-        "updated_iso": "2026-04-22T14:19:55.230000+00:00",
+        "updated_iso": "2026-04-27T22:13:24.686000+00:00",
         "source": "shared/wiki/agent-created"
       }
     },
     "body-system/index.html": {
       "where-things-stand": {
         "heading": "Where Things Stand",
-        "updated_iso": "2026-04-22T14:19:42.794445+00:00",
+        "updated_iso": "2026-04-27T22:13:12.877908+00:00",
         "source": "data/body-system-data.json"
       },
       "the-five-levels": {
         "heading": "The Five Levels",
-        "updated_iso": "2026-04-22T14:19:42.794445+00:00",
+        "updated_iso": "2026-04-27T22:13:12.877908+00:00",
         "source": "data/body-system-data.json"
       },
       "30-day-challenge": {
         "heading": "30-Day Challenge",
-        "updated_iso": "2026-04-22T14:19:42.794445+00:00",
+        "updated_iso": "2026-04-27T22:13:12.877908+00:00",
         "source": "data/body-system-data.json"
       },
       "agent-health": {
         "heading": "Agent Health",
-        "updated_iso": "2026-04-22T14:19:42.794445+00:00",
+        "updated_iso": "2026-04-27T22:13:12.877908+00:00",
         "source": "data/body-system-data.json:agent_health"
       },
       "hook-reliability": {
         "heading": "Hook Reliability",
-        "updated_iso": "2026-04-22T14:19:42.794445+00:00",
+        "updated_iso": "2026-04-27T22:13:12.877908+00:00",
         "source": "data/body-system-data.json:hook_reliability"
       },
       "workflow-reliability": {
         "heading": "Workflow Reliability",
-        "updated_iso": "2026-04-22T14:19:42.794445+00:00",
+        "updated_iso": "2026-04-27T22:13:12.877908+00:00",
         "source": "data/body-system-data.json:workflow_reliability"
       }
     },
     "body-system/growth.html": {
       "work-classification": {
         "heading": "Work Classification",
-        "updated_iso": "2026-04-22T14:19:42.794445+00:00",
+        "updated_iso": "2026-04-27T22:13:12.877908+00:00",
         "source": "data/body-system-data.json"
       },
       "full-inventory": {
         "heading": "Full Inventory",
-        "updated_iso": "2026-04-22T14:19:42.794445+00:00",
+        "updated_iso": "2026-04-27T22:13:12.877908+00:00",
         "source": "data/body-system-data.json"
       },
       "competence-stages": {
         "heading": "Competence Stages",
-        "updated_iso": "2026-04-22T14:19:42.794445+00:00",
+        "updated_iso": "2026-04-27T22:13:12.877908+00:00",
         "source": "data/body-system-data.json"
       }
     },
     "body-system/willpower.html": {
       "30-day-challenge": {
         "heading": "30-Day Challenge",
-        "updated_iso": "2026-04-22T14:19:42.794445+00:00",
+        "updated_iso": "2026-04-27T22:13:12.877908+00:00",
         "source": "data/body-system-data.json"
       },
       "growth-model-current-vs-targets": {
         "heading": "Growth Model &mdash; Current vs Targets",
-        "updated_iso": "2026-04-22T14:19:42.794445+00:00",
+        "updated_iso": "2026-04-27T22:13:12.877908+00:00",
         "source": "data/body-system-data.json"
       },
       "pattern-trajectories": {
@@ -128,24 +136,24 @@
     "body-system/output.html": {
       "weekly-scorecard": {
         "heading": "Weekly Scorecard",
-        "updated_iso": "2026-04-22T14:19:42.794445+00:00",
+        "updated_iso": "2026-04-27T22:13:12.877908+00:00",
         "source": "data/body-system-data.json:weekly_output"
       },
       "five-levels": {
         "heading": "Five Levels",
-        "updated_iso": "2026-04-22T14:19:42.794445+00:00",
+        "updated_iso": "2026-04-27T22:13:12.877908+00:00",
         "source": "data/body-system-data.json"
       },
       "low-leverage-patterns": {
         "heading": "Low-Leverage Patterns",
-        "updated_iso": "2026-04-22T14:19:42.794445+00:00",
+        "updated_iso": "2026-04-27T22:13:12.877908+00:00",
         "source": "data/body-system-data.json"
       }
     },
     "body-system/autoresearch.html": {
       "organ-word-budgets": {
         "heading": "Organ Word Budgets",
-        "updated_iso": "2026-04-22T13:48:14.589000+00:00",
+        "updated_iso": "2026-04-27T03:33:45.092000+00:00",
         "source": "shared/context/body"
       },
       "experiment-history": {
@@ -155,215 +163,229 @@
       },
       "organ-freshness": {
         "heading": "Organ Freshness",
-        "updated_iso": "2026-04-22T13:48:14.589000+00:00",
+        "updated_iso": "2026-04-27T03:33:45.092000+00:00",
         "source": "shared/context/body"
       }
     },
     "state-files/index.html": {
       "goals": {
         "heading": "2026 Goals",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "progress": {
         "heading": "Goal Progress",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "markets": {
         "heading": "Markets",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "schema": {
         "heading": "Schema Coverage",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "freshness": {
         "heading": "Freshness &amp; Ownership",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "shared": {
         "heading": "Shared Structure &amp; Consolidation Notes",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       }
     },
     "state-files/au.html": {
       "goals": {
         "heading": "Mapped 2026 Goals",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "contributions": {
         "heading": "My Contributions",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "introduction": {
         "heading": "Introduction",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "state-file-goals": {
         "heading": "State-File Goals",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "tenets": {
         "heading": "Tenets",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "state": {
         "heading": "State of the Business",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "flags": {
         "heading": "Flags",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "lessons": {
         "heading": "Lessons Learned",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "priorities": {
         "heading": "Strategic Priorities",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "appendices": {
         "heading": "Appendices",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       }
     },
     "state-files/mx.html": {
       "goals": {
         "heading": "Mapped 2026 Goals",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "contributions": {
         "heading": "My Contributions",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "introduction": {
         "heading": "Introduction",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "state-file-goals": {
         "heading": "State-File Goals",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "tenets": {
         "heading": "Tenets",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "state": {
         "heading": "State of the Business",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "flags": {
         "heading": "Flags",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "lessons": {
         "heading": "Lessons Learned",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "priorities": {
         "heading": "Strategic Priorities",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "appendices": {
         "heading": "Appendices",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       }
     },
     "state-files/ww.html": {
       "goals": {
         "heading": "Mapped 2026 Goals",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "contributions": {
         "heading": "My Contributions",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "introduction": {
         "heading": "Introduction",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "state-file-goals": {
         "heading": "State-File Goals",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "tenets": {
         "heading": "Tenets",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "state": {
         "heading": "State of the Business",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "flags": {
         "heading": "Flags",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "lessons": {
         "heading": "Lessons Learned",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "priorities": {
         "heading": "Strategic Priorities",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       },
       "appendices": {
         "heading": "Appendices",
-        "updated_iso": "2026-04-22T14:19:42.887168+00:00",
+        "updated_iso": "2026-04-27T22:13:12.969733+00:00",
         "source": "data/state-files-data.json"
       }
     },
     "state-files/goals.html": {
       "my": {
         "heading": "Goals",
-        "updated_iso": "2026-04-22T14:19:43.126639+00:00",
+        "updated_iso": "2026-04-27T22:13:13.163483+00:00",
         "source": "data/goals-data.json"
       }
     },
     "performance/index.html": {
-      "forecast-tracker": {
-        "heading": "Forecast Tracker",
-        "updated_iso": "2026-04-21T19:21:52.594000+00:00",
+      "weekly-review": {
+        "heading": "Weekly Review",
+        "updated_iso": "2026-04-27T21:05:51.376000+00:00",
         "source": "performance/index.html (mtime)"
       },
-      "wbr-callouts": {
-        "heading": "WBR Callouts",
-        "updated_iso": "2026-04-21T19:21:52.594000+00:00",
+      "projection-engine": {
+        "heading": "Projection Engine",
+        "updated_iso": "2026-04-27T21:05:51.376000+00:00",
         "source": "performance/index.html (mtime)"
+      }
+    },
+    "projection.html": {
+      "modal-title": {
+        "heading": "Provenance",
+        "updated_iso": "2026-04-28T00:14:36.716000+00:00",
+        "source": "projection.html (mtime)"
+      }
+    },
+    "projection-standalone.html": {
+      "modal-title": {
+        "heading": "Provenance",
+        "updated_iso": "2026-04-27T22:13:09.980000+00:00",
+        "source": "projection-standalone.html (mtime)"
       }
     }
   }

@@ -461,14 +461,16 @@
   </div>
 </div>
 
-<!-- CDN scripts — Observable Plot + D3 + (legacy Chart.js removed) -->
-<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.17/dist/plot.umd.min.js"></script>
+<!-- CDN scripts — Chart.js + annotation plugin (M3 — replaced Observable Plot) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3/dist/chartjs-plugin-annotation.min.js"></script>
+<script src="canon-chart.js?v=2026-04-27"></script>
 
 <!-- MPE library + app -->
 <script src="v1_1_slim.js"></script>
 <script src="mpe_engine.js"></script>
 <script src="mpe_narrative.js"></script>
+<script src="projection-chart.js"></script>
 <script src="projection-app.js"></script>
 </body>
 </html>

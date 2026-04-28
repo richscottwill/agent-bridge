@@ -46,8 +46,7 @@ OUTPUT = DASHBOARDS / "data/section-freshness.json"
 # ─────────────────────────────────────────────────────────────────────────────
 PAGE_DATA_FILE = {
     "index.html": "data/command-center-data.json",
-    "callout-dashboard.html": "data/callout-data.json",
-    "forecast-tracker.html": "data/forecast-data.json",
+    "performance/weekly-review.html": "data/callout-data.json",  # M1: merged tracker+callouts
     "wiki-search.html": "data/wiki-index.json",
     "body-system/index.html": "data/body-system-data.json",
     "body-system/growth.html": "data/body-system-data.json",
@@ -74,18 +73,18 @@ STATIC_SECTIONS = {
         ("integrity-ledger", "Integrity Ledger"),
         ("actionable-intelligence", "Actionable Intelligence"),
     ],
-    "callout-dashboard.html": [
-        ("market-callouts", "Market Callouts"),
-        ("callout-chart", "Performance Chart"),
-    ],
-    "forecast-tracker.html": [
-        ("forecast-overview", "Forecast Overview"),
-        ("weekly-detail", "Weekly Detail"),
-        ("projections", "Projections"),
+    "performance/weekly-review.html": [
+        ("sec-kpis", "KPIs"),
+        ("sec-trend", "Trend"),
+        ("sec-detail", "Weekly Detail"),
+        ("sec-callout", "Callout"),
+        ("sec-channels", "Channels"),
+        ("sec-projections", "Projections"),
+        ("sec-context", "Context"),
     ],
     "performance/index.html": [
-        ("forecast-tracker", "Forecast Tracker"),
-        ("wbr-callouts", "WBR Callouts"),
+        ("weekly-review", "Weekly Review"),
+        ("projection-engine", "Projection Engine"),
     ],
 }
 
@@ -109,13 +108,14 @@ SECTION_SOURCES = {
     "daily-blocks": {"json": "data/command-center-data.json"},
     "integrity-ledger": {"json": "data/command-center-data.json"},
     "actionable-intelligence": {"json": "data/command-center-data.json"},
-    # Callout dashboard
-    "market-callouts": {"json": "data/callout-data.json"},
-    "callout-chart": {"json": "data/callout-data.json"},
-    # Forecast tracker
-    "forecast-overview": {"json": "data/forecast-data.json"},
-    "weekly-detail": {"json": "data/forecast-data.json"},
-    "projections": {"json": "data/forecast-data.json"},
+    # Weekly Review (merged tracker + callouts)
+    "sec-kpis": {"json": "data/forecast-data.json"},
+    "sec-trend": {"json": "data/forecast-data.json"},
+    "sec-detail": {"json": "data/forecast-data.json"},
+    "sec-callout": {"json": "data/callout-data.json"},
+    "sec-channels": {"json": "data/callout-data.json"},
+    "sec-projections": {"json": "data/callout-data.json"},
+    "sec-context": {"json": "data/callout-data.json"},
 }
 
 

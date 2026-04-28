@@ -5,7 +5,7 @@ Refresh forecast-data.json from ps-forecast-tracker.xlsx on SharePoint.
 Usage:
   1. Drop updated xlsx into shared/dashboards/ (or let this script pull from SharePoint)
   2. Run: python3 refresh-forecast.py
-  3. Dashboard at localhost:8080/forecast-tracker.html auto-loads fresh data.
+  3. Dashboard at localhost:8080/performance/weekly-review.html auto-loads fresh data.
 
 Source: OneDrive > Kiro-Drive/ps-forecast-tracker.xlsx (_Data sheet)
 """
