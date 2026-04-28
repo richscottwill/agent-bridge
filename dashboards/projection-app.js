@@ -331,6 +331,21 @@
     } else {
       driverSel.value = preferredDriver;
     }
+    // DIAG-2026-04-28: temporary instrumentation to pin down a remaining
+    // driver-persistence complaint. Remove in next commit once verified.
+    // Reproduction expected: MX → AU → MX should log three lines and the
+    // final line's chosen driver should be 'ieccp'. If not, the caller
+    // path is bypassing this function or resetting driverSel.value after
+    // we return. Either way, console output localizes the failure.
+    if (window && window.console) {
+      console.log('[MPE driver-persist]',
+        'scope=' + scope,
+        '| prev=' + prev,
+        '| supported=' + JSON.stringify(supported),
+        '| preferred=' + preferredDriver,
+        '| userOverride=' + userOverride,
+        '| chosen=' + driverSel.value);
+    }
 
     // Hide driver+target inputs for regions (rollup is computed, not a target)
     // — the inputs are purely cosmetic for rollup mode. Hide rather than delete
