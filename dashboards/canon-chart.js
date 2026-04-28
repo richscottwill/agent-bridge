@@ -518,51 +518,45 @@
           tooltip: {
             mode: 'index',
             intersect: false,
+            // Native Chart.js tooltip carries both the numeric series and the
+            // narrated contribution as extra afterBody lines. This follows
+            // the weekly-review.html pattern — Chart.js manages show/hide
+            // entirely, no external div lifecycle to track, no mouseleave
+            // edge cases. The prior external-div approach stayed pinned
+            // when the cursor exited empty canvas space because Chart.js
+            // didn't call the external handler in that mouseleave path.
             callbacks: {
               title: (items) => items.length ? items[0].label : '',
-              // Custom narrated tooltip if caller provides one, else numeric default.
               label: (item) => {
                 if (item.dataset.label && item.dataset.label.startsWith('_')) return null;
-                if (typeof sd.tooltipFormatter === 'function') return null;  // suppressed; external plugin handles
                 const v = item.parsed.y;
                 if (v == null) return null;
                 const isSpend = item.dataset.label.includes('$K');
                 const val = Math.round(v).toLocaleString();
                 return item.dataset.label + ': ' + (isSpend ? '$' + val + 'K' : val);
               },
+              // Narrated contribution breakdown appended via afterBody so
+              // Chart.js can wrap it properly and dismiss it with the rest
+              // of the tooltip. Caller supplies tooltipFormatter which
+              // returns HTML; we flatten that to plain-text lines here
+              // because Chart.js tooltips are text-based.
+              afterBody: typeof sd.tooltipFormatter === 'function'
+                ? (items) => {
+                    if (!items || !items.length) return null;
+                    const idx = items[0].dataIndex;
+                    if (idx == null || idx < 0) return null;
+                    // tooltipFormatter returns HTML (<div>...), convert to plain lines
+                    const html = sd.tooltipFormatter({ chart: items[0].chart }, idx) || '';
+                    // Strip tags, split on remaining newlines, trim, drop empties.
+                    const text = html
+                      .replace(/<[^>]+>/g, '\n')
+                      .split('\n')
+                      .map(s => s.trim())
+                      .filter(s => s.length > 0);
+                    return text;
+                  }
+                : undefined,
             },
-            // When tooltipFormatter is provided, render via external plugin
-            // so the narrated contribution HTML ("40% seasonal, 40% trend...")
-            // can appear alongside the numeric datasets.
-            external: typeof sd.tooltipFormatter === 'function'
-              ? (context) => {
-                  // Minimal implementation: append narrated HTML to the tooltip body.
-                  // The caller is responsible for providing context-aware HTML.
-                  const tt = context.tooltip;
-                  let el = document.getElementById('scenario-tooltip-external');
-                  if (!el) {
-                    el = document.createElement('div');
-                    el.id = 'scenario-tooltip-external';
-                    el.style.cssText = 'position:absolute;pointer-events:none;background:#1a1d27;border:1px solid #2a2d35;border-radius:6px;padding:10px 12px;font-size:12px;color:#e0e0e0;max-width:280px;z-index:1000;transition:opacity 100ms;opacity:0;';
-                    document.body.appendChild(el);
-                  }
-                  // Hide when Chart.js signals mouseleave (tt.opacity === 0).
-                  // Prior version only showed; never flipped back, so the
-                  // narrated overlay stayed pinned to the cursor's last seen
-                  // position after the mouse left the chart.
-                  if (!tt || tt.opacity === 0) {
-                    el.style.opacity = '0';
-                    return;
-                  }
-                  const idx = tt.dataPoints && tt.dataPoints[0] ? tt.dataPoints[0].dataIndex : null;
-                  if (idx == null) { el.style.opacity = '0'; return; }
-                  el.innerHTML = sd.tooltipFormatter(context, idx);
-                  const rect = context.chart.canvas.getBoundingClientRect();
-                  el.style.left = (rect.left + window.scrollX + tt.caretX + 14) + 'px';
-                  el.style.top  = (rect.top  + window.scrollY + tt.caretY + 14) + 'px';
-                  el.style.opacity = '1';
-                }
-              : undefined,
           },
           annotation: { annotations: annotations },
           // P2-08: scenario-only line end-labels. The datalabels plugin

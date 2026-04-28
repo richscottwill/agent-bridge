@@ -406,17 +406,11 @@
       chartInstance: _chartInstance,
     });
 
-    // Belt-and-suspenders: ensure the external-tooltip div hides on fast
-    // mouse exits where Chart.js's tooltip.opacity=0 callback doesn't fire
-    // in time. The Chart.js external handler already hides on opacity=0,
-    // but binding here catches the raw pointer-leave too.
-    if (canvas && !canvas._mpeLeaveBound) {
-      canvas.addEventListener('mouseleave', () => {
-        const el = document.getElementById('scenario-tooltip-external');
-        if (el) el.style.opacity = '0';
-      });
-      canvas._mpeLeaveBound = true;
-    }
+    // Remove any lingering external-tooltip div from the prior implementation
+    // (before canon-chart switched to native afterBody). Belt-and-suspenders
+    // for users who hit the page mid-deploy with a stale reference in the DOM.
+    const staleTooltip = document.getElementById('scenario-tooltip-external');
+    if (staleTooltip) staleTooltip.remove();
   }
 
   global.renderProjectionChart = renderProjectionChart;
