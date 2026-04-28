@@ -1236,8 +1236,42 @@
       console.warn('[projection] renderProjectionChart not loaded — check projection.html script order');
       return;
     }
+    // P2-12 chart-overlay — if a saved projection is marked as the active
+    // compare, recompute it using the same V1_1_Slim path so we have a
+    // full year_weekly array for the overlay. Skip when the saved record
+    // is from a different scope (overlaying a different market would be
+    // misleading: YTD + trajectory anchors wouldn't line up). Also skip
+    // on regional rollups — the state plumbing covers single-market views.
+    let compareOutput = null;
+    let compareLabel = null;
     try {
-      renderProjectionChart(out, counterfactual, uncert, marketData);
+      if (STATE.compareId && marketData) {
+        const rec = (STATE.saved || []).find(r => r.id === STATE.compareId);
+        if (rec && rec.scope === currentScope()
+            && typeof V1_1_Slim !== 'undefined'
+            && typeof V1_1_Slim.projectWithLockedYtd === 'function') {
+          const periodWeeks = periodWeeksSet(rec.period);
+          compareOutput = V1_1_Slim.projectWithLockedYtd(
+            marketData, 2026, rec.driver, rec.target_value,
+            {
+              regimeMultiplier: rec.regime_multiplier || 1.0,
+              periodWeeks,
+              periodType: rec.period,
+            }
+          );
+          let tv = rec.target_value;
+          if (rec.driver === 'spend' && Number.isFinite(tv)) tv = fmt$(tv);
+          else if (rec.driver === 'regs' && Number.isFinite(tv)) tv = fmtNum(tv);
+          else if (rec.driver === 'ieccp' && Number.isFinite(tv)) tv = tv + '%';
+          compareLabel = `Saved · ${rec.driver}=${tv}`;
+        }
+      }
+    } catch (e) {
+      console.warn('[projection] compare recompute failed:', e);
+      compareOutput = null;
+    }
+    try {
+      renderProjectionChart(out, counterfactual, uncert, marketData, compareOutput, compareLabel);
     } catch (e) {
       console.warn('[projection] chart render failed:', e);
       const chartEl = document.getElementById('chart-primary');

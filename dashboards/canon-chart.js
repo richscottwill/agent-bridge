@@ -293,6 +293,8 @@
   //     spendProj:       number[]   // projected total spend ($)
   //     ciLow, ciHigh:   number[]   // 90% CI on projected total regs (null for past)
   //     counterfactual:  number[]   // brand-only counterfactual regs (optional)
+  //     compareTotal:    number[]   // saved-projection total regs overlay (optional, P2-12)
+  //     compareLabel:    string     // legend label for compare line (optional)
   //     todayIdx:        number     // index of the YTD/projected seam
   //     targetRegs:      number     // horizontal target line (optional, per-week)
   //     regimes:         [{ label, onsetIdx, endIdx, absorbed }]
@@ -328,6 +330,22 @@
         borderColor: GRAY, backgroundColor: 'transparent',
         borderWidth: 1.5, borderDash: [5, 4], pointRadius: 0, tension: 0.25,
         yAxisID: 'y', spanGaps: true, hidden: true,
+      });
+    }
+
+    // Compare line — dashed brand-blue total-regs overlay of a saved
+    // projection (P2-12 chart-side follow-up, 2026-04-28). Shown ON by
+    // default when a compare is active: the affordance to start the
+    // compare is the "Compare" button in the Saved list, so the user
+    // already opted in. Label includes the saved label so multiple
+    // comparisons could be layered if we ever extend beyond one.
+    if (sd.compareTotal) {
+      datasets.push({
+        label: sd.compareLabel || 'Saved projection (compare)',
+        data: sd.compareTotal,
+        borderColor: BLUE, backgroundColor: 'transparent',
+        borderWidth: 2, borderDash: [5, 4], pointRadius: 0, tension: 0.25,
+        yAxisID: 'y', spanGaps: true,
       });
     }
 

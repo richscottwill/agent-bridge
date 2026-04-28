@@ -126,6 +126,7 @@
       ciLow:           sliceArr(sd.ciLow),
       ciHigh:          sliceArr(sd.ciHigh),
       counterfactual:  sliceArr(sd.counterfactual),
+      compareTotal:    sliceArr(sd.compareTotal),
       todayIdx:        shifted(sd.todayIdx),
     };
     // Remap regime onset/end indices into the sliced window; drop regimes
@@ -170,7 +171,15 @@
   // "W17", "W18") that Chart.js renders along the category axis. This also
   // keeps the x domain stable when the chart switches between markets whose
   // YTD windows are different lengths.
-  function buildScenarioFromProjectionData(out, counterfactual, uncert, marketData) {
+  //
+  // compareOutput (optional, P2-12 overlay): a second V1_1_Slim projection
+  // shape (same contract as `out`) from a saved scenario. When present,
+  // we derive per-week compareTotal regs the same way we derive the main
+  // regsProjTotal — brand trajectory × brand-shape-from-brand NB, seam-faded.
+  // YTD half of compare is always identical to actuals (same market), so
+  // the compare line visibly diverges only in the RoY half. compareLabel
+  // lets the adapter attach a human-readable legend string.
+  function buildScenarioFromProjectionData(out, counterfactual, uncert, marketData, compareOutput, compareLabel) {
     const ytdRaw = marketData.ytd_weekly || [];
     const bt = marketData.brand_trajectory_y2026;
     if (!bt) return null;
@@ -347,6 +356,27 @@
 
     const todayIdx = ytdCount > 0 ? ytdCount - 1 : -1;
 
+    // Compare line (P2-12 overlay) — derive per-week total regs from
+    // compareOutput.year_weekly. That array is full-year and already
+    // carries the saved projection's regime_multiplier + driver choice.
+    // YTD half matches actuals (same market), RoY half reflects the saved
+    // parameter set. Length-mismatch falls through silently (saved record
+    // from an older data version is noise, not a crash).
+    let compareTotal = null;
+    if (compareOutput && compareOutput.year_weekly
+        && Array.isArray(compareOutput.year_weekly.brand_regs)
+        && Array.isArray(compareOutput.year_weekly.nb_regs)) {
+      const yb = compareOutput.year_weekly.brand_regs;
+      const yn = compareOutput.year_weekly.nb_regs;
+      const n  = Math.min(btWeeks.length, yb.length, yn.length);
+      compareTotal = new Array(btWeeks.length).fill(null);
+      for (let i = 0; i < n; i++) {
+        const b = Number.isFinite(yb[i]) ? yb[i] : 0;
+        const nbv = Number.isFinite(yn[i]) ? yn[i] : 0;
+        compareTotal[i] = b + nbv;
+      }
+    }
+
     // Narrated tooltip — returns HTML body content for the external tooltip plugin.
     // Carries the contribution breakdown + 90% CI range that the old
     // renderNarratedTooltip emitted.
@@ -402,6 +432,8 @@
       ciLow,
       ciHigh,
       counterfactual: counterfactualArr,
+      compareTotal,
+      compareLabel: compareLabel || null,
       todayIdx,
       regimes,
       tooltipFormatter,
@@ -410,7 +442,7 @@
 
   let _chartInstance = null;
 
-  function renderProjectionChart(out, counterfactual, uncert, marketData) {
+  function renderProjectionChart(out, counterfactual, uncert, marketData, compareOutput, compareLabel) {
     const chartEl = document.getElementById('chart-primary');
     if (!chartEl) return;
 
@@ -431,7 +463,8 @@
       chartEl.appendChild(canvas);
     }
 
-    const scenarioData = buildScenarioFromProjectionData(out, counterfactual, uncert, marketData);
+    const scenarioData = buildScenarioFromProjectionData(
+      out, counterfactual, uncert, marketData, compareOutput, compareLabel);
     if (!scenarioData) return;
 
     // P2-02: clip the chart x-domain to the currently-selected period.

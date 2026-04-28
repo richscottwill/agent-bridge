@@ -189,8 +189,8 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P2-12 · Saved projection load/delete/compare
 - **Source:** Round 4 R4-16
-- **Status:** done (state plumbing) — chart-side overlay of the compare line is a small follow-up
-- **Verification:** Each saved item shows Load / Compare / × buttons. Load restores full state (scope/period/driver/target/regime_multiplier). Delete removes the entry + clears active compare if it matched. Compare highlights the selected item with a brand-blue border + #F0F7FF background and sets `STATE.compareId`. Row click still loads for backward compat. Commit: b431616.
+- **Status:** done
+- **Verification:** Each saved item shows Load / Compare / × buttons. Load restores full state (scope/period/driver/target/regime_multiplier). Delete removes the entry + clears active compare if it matched. Compare highlights the selected item with a brand-blue border + #F0F7FF background, sets `STATE.compareId`, and overlays the saved projection on the chart as a dashed brand-blue line labeled `Saved · <driver>=<value>`. The compare line is recomputed from the saved record's (driver, target, regime_multiplier) through V1_1_Slim's `year_weekly` arrays so it reflects the exact scenario that was saved. YTD half of the compare line matches actuals (same market, same locked YTD); divergence appears in the RoY half. Scope-mismatched saves are silently skipped so overlaying a saved MX projection on a US chart doesn't produce a misaligned line. Row click still loads for backward compat. Commits: b431616 (state plumbing), <chart overlay follow-up>.
 
 ### P2-13 · Brand/NB stacked bar visual
 - **Source:** Round 1 K-7
