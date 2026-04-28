@@ -549,11 +549,38 @@
             position: 'left', grid: { color: '#1f222b' },
             ticks: { color: '#666' },
             title: { display: true, text: 'Registrations', color: ORANGE },
+            // P2-16: tighten y-axis headroom — default Chart.js gives ~30-60%
+            // of extra space above the peak. Compute the actual max across the
+            // regs datasets and pad by 12% so the peak breathes but doesn't
+            // drown in empty space. Null values are filtered out automatically.
+            suggestedMax: (() => {
+              const regArrays = [sd.regsActual, sd.regsProjTotal, sd.regsProjBrand, sd.regsProjNb, sd.ciHigh];
+              let peak = 0;
+              for (const arr of regArrays) {
+                if (!Array.isArray(arr)) continue;
+                for (const v of arr) if (Number.isFinite(v) && v > peak) peak = v;
+              }
+              return peak > 0 ? Math.ceil(peak * 1.12) : undefined;
+            })(),
           },
           y1: {
             position: 'right', grid: { display: false },
             ticks: { color: BLUE, callback: (v) => '$' + v + 'K' },
             title: { display: true, text: 'Spend ($K)', color: BLUE },
+            // Same tightening logic on the spend axis.
+            suggestedMax: (() => {
+              const spArrays = [sd.spendActual, sd.spendProj];
+              let peak = 0;
+              for (const arr of spArrays) {
+                if (!Array.isArray(arr)) continue;
+                for (const v of arr) {
+                  if (Number.isFinite(v) && v > peak) peak = v;
+                }
+              }
+              // spendActual / spendProj are fed in $ raw; canon-chart divides
+              // by 1000 for display. Mirror that here before padding.
+              return peak > 0 ? Math.ceil((peak / 1000) * 1.12) : undefined;
+            })(),
           },
         },
       },

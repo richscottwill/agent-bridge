@@ -320,7 +320,7 @@
         const qualPct = Math.round(contrib.qualitative * 100);
         const nLifts = (marketData.regime_fit_state || []).length;
         const liftLabel = nLifts === 1 ? '1 campaign lift' : (nLifts > 1 ? `${nLifts} campaign lifts` : '');
-        lines.push(`<div style="color:#aaa">Brand ${fmtNum(regsProjBrand[idx])} regs: ${trendPct}% trend · ${seasPct}% seasonality · ${regPct}% lift${liftLabel ? ` (${liftLabel})` : ''} · ${qualPct}% qualitative.</div>`);
+        lines.push(`<div style="color:#aaa">Brand ${fmtNum(regsProjBrand[idx])} regs: ${trendPct}% trend · ${seasPct}% seasonality · ${regPct}% lift${liftLabel ? ` (${liftLabel})` : ''} · ${qualPct}% judgment.</div>`);
         if (ciLow[idx] != null && ciHigh[idx] != null) {
           lines.push(`<div style="color:#6c7086;margin-top:4px">90% range: ${fmtNum(ciLow[idx])}–${fmtNum(ciHigh[idx])} regs</div>`);
         }

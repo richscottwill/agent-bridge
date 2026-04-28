@@ -490,7 +490,7 @@
         description: 'Recent actuals extrapolated forward. No assumed uplift from active campaigns. "What the last 8 weeks say."' },
       { id: 'bayesian',    label: 'Optimistic',             override: { half_life_weeks: null, force_confidence: 1.0 },
         description: 'Full trust in the campaign lift: authored peak holds permanently at full confidence, no decay.' },
-      { id: 'no-lift',     label: 'Baseline only',              override: { peak_multiplier: 1.0, strip_anchor_lift: true },
+      { id: 'no-lift',     label: 'No-lift baseline',              override: { peak_multiplier: 1.0, strip_anchor_lift: true },
         description: 'Strip the campaign lift from the anchor. Hypothetical: what this market would do without any current campaign effects.' },
     ];
     return chips;
@@ -531,6 +531,9 @@
   function scheduleRecompute() {
     clearTimeout(recomputeTimer);
     updateHeaderMeta();
+    // P2-10: keep URL in sync with the control state on every change so the
+    // current scenario is always shareable via address-bar copy.
+    syncUrlFromState();
     recomputeTimer = setTimeout(() => {
       recompute({ animated: false }).catch(e => console.warn('recompute (scheduled) failed:', e));
     }, 150);
@@ -1181,7 +1184,7 @@
       { key: 'seasonal', label: 'Seasonal', pct: contribution.seasonal || 0, klass: 'seasonal' },
       { key: 'trend', label: 'Trend', pct: contribution.trend || 0, klass: 'trend' },
       { key: 'regime', label: 'Campaign lift', pct: contribution.regime || 0, klass: 'regime' },
-      { key: 'qualitative', label: 'Qualitative', pct: contribution.qualitative || 0, klass: 'qualitative' },
+      { key: 'qualitative', label: 'Judgment', pct: contribution.qualitative || 0, klass: 'qualitative' },
     ].filter(s => s.pct > 0.005);
 
     const brandRegs = out.totals?.brand_regs || 0;
@@ -1593,15 +1596,61 @@
       list.innerHTML = `<div style="color:var(--color-text-subtle);font-size:11px">No saved projections yet.</div>`;
       return;
     }
-    list.innerHTML = STATE.saved.map(r => `
-      <div class="saved-item" data-id="${r.id}">
-        <span>${r.scope} · ${r.period} · ${r.driver}=${r.target_value}</span>
-        <span class="saved-meta">${new Date(r.saved_at).toLocaleDateString()}</span>
-      </div>
-    `).join('');
+    // P2-12: each saved item gets Load / Delete / Compare actions.
+    // Compare sets the active comparison-id so the next render overlays the
+    // saved projection as a dashed reference line on the chart.
+    // P3-11: use toLocaleString so saved timestamps carry both date + time.
+    list.innerHTML = STATE.saved.map(r => {
+      const when = new Date(r.saved_at).toLocaleString(undefined,
+        { month: 'numeric', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+      const cmpActive = STATE.compareId === r.id ? ' compare-active' : '';
+      return `
+        <div class="saved-item${cmpActive}" data-id="${r.id}">
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:500">${r.scope} · ${r.period} · ${r.driver}=${r.target_value}</div>
+            <div class="saved-meta">${when}</div>
+          </div>
+          <div class="saved-actions">
+            <button class="saved-action" data-act="load"    title="Load this projection">Load</button>
+            <button class="saved-action" data-act="compare" title="Overlay as a dashed reference on the chart">${STATE.compareId === r.id ? 'Clear cmp' : 'Compare'}</button>
+            <button class="saved-action saved-action-danger" data-act="delete" title="Delete this saved projection" aria-label="Delete">×</button>
+          </div>
+        </div>`;
+    }).join('');
     list.querySelectorAll('.saved-item').forEach(el => {
-      el.addEventListener('click', () => loadSaved(parseInt(el.dataset.id)));
+      const id = parseInt(el.dataset.id);
+      el.querySelector('[data-act="load"]').addEventListener('click', (e) => {
+        e.stopPropagation();
+        loadSaved(id);
+      });
+      el.querySelector('[data-act="compare"]').addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleCompareSaved(id);
+      });
+      el.querySelector('[data-act="delete"]').addEventListener('click', (e) => {
+        e.stopPropagation();
+        deleteSaved(id);
+      });
+      // Click anywhere else on the row = Load (backwards-compatible shortcut).
+      el.addEventListener('click', (e) => {
+        if (e.target.closest('.saved-action')) return;
+        loadSaved(id);
+      });
     });
+  }
+
+  function deleteSaved(id) {
+    STATE.saved = STATE.saved.filter(r => r.id !== id);
+    localStorage.setItem('mpe-saved', JSON.stringify(STATE.saved));
+    if (STATE.compareId === id) STATE.compareId = null;
+    renderSavedList();
+  }
+
+  function toggleCompareSaved(id) {
+    STATE.compareId = (STATE.compareId === id) ? null : id;
+    renderSavedList();
+    // Re-trigger a render so the chart overlays (or clears) the compare line.
+    scheduleRecompute();
   }
 
   function loadSaved(id) {
@@ -1615,6 +1664,87 @@
     STATE.regimeMultiplier = r.regime_multiplier || 1.0;
     document.getElementById('regime-slider').value = STATE.regimeMultiplier;
     document.getElementById('regime-slider-val').textContent = STATE.regimeMultiplier.toFixed(2) + '×';
+    scheduleRecompute();
+  }
+
+  // ========================================================================
+  // P2-10: URL state sharing — scope/period/driver/target round-trip into
+  // querystring so a link like `?scope=UK&period=Y2026&driver=ieccp&target=65`
+  // loads that exact scenario. Sync on every recompute + restore on cold load.
+  // ========================================================================
+
+  function syncUrlFromState() {
+    try {
+      const p = new URLSearchParams();
+      p.set('scope',  currentScope()  || 'MX');
+      p.set('period', currentPeriod() || 'Y2026');
+      p.set('driver', currentDriver() || 'ieccp');
+      const tv = currentTargetValue();
+      if (tv != null && Number.isFinite(tv)) p.set('target', String(tv));
+      // Keep URL clean — only write when something actually differs from
+      // current querystring, avoids spurious history entries on every keystroke.
+      const next = p.toString();
+      if (next !== window.location.search.slice(1)) {
+        window.history.replaceState({}, '', '?' + next);
+      }
+    } catch (e) { /* URL API unavailable / sandboxed — silent fallback is fine */ }
+  }
+
+  function applyUrlStateOnLoad() {
+    try {
+      const p = new URLSearchParams(window.location.search);
+      const scope  = p.get('scope');
+      const period = p.get('period');
+      const driver = p.get('driver');
+      const target = p.get('target');
+      if (scope) {
+        const el = document.getElementById('scope-select');
+        if (el && [...el.options].some(o => o.value === scope)) el.value = scope;
+      }
+      if (period) {
+        const el = document.getElementById('period-select');
+        if (el && [...el.options].some(o => o.value === period)) el.value = period;
+      }
+      if (driver) {
+        const el = document.getElementById('driver-select');
+        if (el && [...el.options].some(o => o.value === driver)) el.value = driver;
+      }
+      if (target && Number.isFinite(parseFloat(target))) {
+        const el = document.getElementById('target-input');
+        if (el) el.value = target;
+      }
+    } catch (e) { /* URL parse failure — fall through to defaults */ }
+  }
+
+  // ========================================================================
+  // P3-19: Reset-to-defaults — single click restores MX / Y2026 / ieccp / 75
+  // and clears transient scenario state. Useful escape hatch when a user
+  // has built up enough comparisons/isolations that the chart feels noisy.
+  // ========================================================================
+
+  function resetToDefaults() {
+    const scopeEl  = document.getElementById('scope-select');
+    const periodEl = document.getElementById('period-select');
+    const driverEl = document.getElementById('driver-select');
+    const targetEl = document.getElementById('target-input');
+    if (scopeEl)  scopeEl.value  = 'MX';
+    if (periodEl) periodEl.value = 'Y2026';
+    if (driverEl) driverEl.value = 'ieccp';
+    if (targetEl) targetEl.value = '75';
+    STATE.regimeMultiplier = 1.0;
+    const slider = document.getElementById('regime-slider');
+    const sliderVal = document.getElementById('regime-slider-val');
+    if (slider)    slider.value    = 1.0;
+    if (sliderVal) sliderVal.textContent = '1.00×';
+    // Clear transient overlays / isolations / comparisons.
+    STATE.disclosures.counter = false;
+    STATE.activeChipId = 'mixed';
+    STATE.scenarioOverride = null;
+    STATE.kpiIsolatedSeries = null;
+    STATE.compareId = null;
+    document.querySelectorAll('[data-disclosure="counter"]').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.hero-kpi[data-kpi-series]').forEach(t => t.classList.remove('kpi-active'));
+    refreshScopeDependentUI();
     scheduleRecompute();
   }
 
@@ -2385,6 +2515,11 @@
     if (!ok) return;
 
     populateScopeSelector();
+    // P2-10: restore scope/period/driver/target from querystring if present.
+    // Must run after populateScopeSelector (so select has real options) and
+    // before refreshScopeDependentUI (which seeds default target based on
+    // the current scope/driver).
+    applyUrlStateOnLoad();
     refreshScopeDependentUI();
     bindDisclosureButtons();
     wireFeedbackBar();
@@ -2487,6 +2622,8 @@
     document.getElementById('btn-recompute').addEventListener('click', () => recompute({ animated: true }));
     document.getElementById('btn-save').addEventListener('click', saveProjection);
     document.getElementById('btn-export-csv').addEventListener('click', exportProjectionCsv);
+    const resetBtn = document.getElementById('btn-reset');
+    if (resetBtn) resetBtn.addEventListener('click', resetToDefaults);
     // btn-share removed from HTML 2026-04-27 per Round 3 feedback (see session-log).
     // Share card function retained for potential future use; binding deleted to prevent
     // TypeError on init that was hanging the whole page (Round 4 R4-1).
