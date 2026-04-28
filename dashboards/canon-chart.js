@@ -487,6 +487,11 @@
         responsive: true,
         maintainAspectRatio: false,
         interaction: { mode: 'index', intersect: false, axis: 'x' },
+        // P2-08: register datalabels only on scenario mode. Plugin labels
+        // the last non-null point on each visible line with series name +
+        // value so the user reads the chart left-to-right and lands on the
+        // series identity without chasing the legend.
+        layout: { padding: { right: 80 } },  // breathing room for end labels
         plugins: {
           legend: {
             position: 'bottom',
@@ -539,6 +544,47 @@
               : undefined,
           },
           annotation: { annotations: annotations },
+          // P2-08: scenario-only line end-labels. The datalabels plugin
+          // fires for every point by default, so we suppress all except
+          // the last non-null index on each line (= the visual end of the
+          // series). Skip underscore-prefixed series (_ciHi/_ciLo) because
+          // those are the CI fill helpers, not lines users need to read.
+          datalabels: {
+            display: (ctx) => {
+              const ds = ctx.dataset;
+              if (!ds || !ds.label || ds.label.startsWith('_')) return false;
+              // Find the last index of a finite numeric value in this dataset.
+              const arr = ds.data || [];
+              let lastIdx = -1;
+              for (let i = arr.length - 1; i >= 0; i--) {
+                if (Number.isFinite(arr[i])) { lastIdx = i; break; }
+              }
+              return ctx.dataIndex === lastIdx;
+            },
+            anchor: 'end',
+            align: 'right',
+            offset: 6,
+            clamp: true,
+            font: { size: 10, weight: '500' },
+            color: (ctx) => ctx.dataset.borderColor || '#666',
+            formatter: (value, ctx) => {
+              if (!Number.isFinite(value)) return '';
+              const label = ctx.dataset.label || '';
+              const isSpend = label.includes('$K');
+              const v = Math.round(value).toLocaleString();
+              // Short label — series + value, no dataset noise
+              const shortName = label
+                .replace(' ($K)', '')
+                .replace(' actual', '')
+                .replace(' projected', '')
+                .replace('Projected ', '')
+                .replace('Actuals ', '')
+                .replace('Actuals (regs)', 'Actuals')
+                .replace(/\(regs\)/, '')
+                .trim();
+              return (isSpend ? '$' + v + 'K' : v) + '  ' + shortName;
+            },
+          },
         },
         scales: {
           x: {
@@ -649,6 +695,10 @@
               },
             },
           },
+          // Tracker/calibration modes don't use end-labels — suppress the
+          // datalabels plugin so it doesn't paint noise on every point when
+          // the global plugin script is loaded by the Projection Engine HTML.
+          datalabels: { display: false },
         },
         scales: {
           x: {

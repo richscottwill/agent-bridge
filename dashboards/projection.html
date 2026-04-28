@@ -176,70 +176,66 @@
 </head>
 <body>
 
-<div class="page-frame">
+<div class="page-frame" role="document">
 
   <!-- Header strip -->
-  <div class="page-header">
+  <header class="page-header" role="banner">
     <div>
       <h1>Market Projection Engine</h1>
-      <div style="font-size:12px;color:var(--color-text-subtle);margin-top:2px">v1.1 Slim — Brand-Anchor + NB-Residual · Locked-YTD + RoY</div>
+      <p style="font-size:12px;color:var(--color-text-subtle);margin-top:2px">v1.1 Slim — Brand-Anchor + NB-Residual · Locked-YTD + RoY</p>
     </div>
     <div class="meta">
       <div id="header-scope-meta">MX · Y2026 · 75% ie%CCP target</div>
       <div id="header-freshness" style="margin-top:4px"></div>
       <div id="header-anomalies" style="margin-top:4px"></div>
     </div>
-  </div>
+  </header>
 
   <!-- Banners (fresh / warn / danger / fallback) -->
-  <div class="banner-strip">
+  <div class="banner-strip" role="status" aria-live="polite">
     <div id="banner-fresh" class="banner-row fresh"></div>
     <div id="banner-warn" class="banner-row warn"></div>
     <div id="banner-danger" class="banner-row danger"></div>
   </div>
 
   <!-- View switcher -->
-  <div class="view-switcher" style="display:flex;gap:var(--gap-sm);justify-content:center;margin:var(--gap-md) 0">
-    <button class="disclosure-btn active" data-view="single">Single market</button>
-    <button class="disclosure-btn" data-view="multiples">All 10 markets</button>
-    <button class="disclosure-btn" data-view="heatgrid">Distance to target</button>
-  </div>
+  <nav class="view-switcher" role="tablist" aria-label="View switcher" style="display:flex;gap:var(--gap-sm);justify-content:center;margin:var(--gap-md) 0">
+    <button class="disclosure-btn active" data-view="single" role="tab" aria-selected="true" aria-controls="view-single">Single market</button>
+    <button class="disclosure-btn" data-view="multiples" role="tab" aria-selected="false" aria-controls="view-multiples">All 10 markets</button>
+    <button class="disclosure-btn" data-view="heatgrid" role="tab" aria-selected="false" aria-controls="view-heatgrid">Distance to target</button>
+  </nav>
 
   <!-- View: All 10 markets (2×5 small multiples) -->
-  <div id="view-multiples" style="display:none">
-    <div style="text-align:center;padding:var(--gap-md) var(--gap-lg)">
-      <div style="font-size:13px;color:var(--color-text-meta)">Click any chart to drill in. Shared controls at top of single-market view set the target driver + period for all 10.</div>
-    </div>
+  <section id="view-multiples" role="tabpanel" aria-labelledby="view-multiples-tab" style="display:none">
+    <p style="text-align:center;padding:var(--gap-md) var(--gap-lg);font-size:13px;color:var(--color-text-meta)">Click any chart to drill in. Shared controls at top of single-market view set the target driver and period for all 10.</p>
     <div class="small-multiples-grid" id="small-multiples-grid"></div>
     <div style="text-align:center;font-size:11px;color:var(--color-text-subtle);margin-top:var(--gap-sm)" id="multiples-legend"></div>
-  </div>
+  </section>
 
   <!-- View: Distance to target heat-grid -->
-  <div id="view-heatgrid" style="display:none">
-    <div style="text-align:center;padding:var(--gap-md) var(--gap-lg)">
-      <div style="font-size:13px;color:var(--color-text-meta)">Each cell colored by distance of projected ie%CCP from the market's target (AU uses spend vs OP2).</div>
-    </div>
-    <div class="heatgrid" id="heatgrid"></div>
+  <section id="view-heatgrid" role="tabpanel" aria-labelledby="view-heatgrid-tab" style="display:none">
+    <p style="text-align:center;padding:var(--gap-md) var(--gap-lg);font-size:13px;color:var(--color-text-meta)">Each cell colored by distance of projected ie%CCP from the market's target. AU uses spend vs OP2.</p>
+    <div class="heatgrid" id="heatgrid" role="grid" aria-label="Market distance to target heatgrid"></div>
     <div class="heatgrid-regional" id="heatgrid-regional"></div>
-    <div style="text-align:center;font-size:11px;color:var(--color-text-subtle);margin-top:var(--gap-sm)">
-      <span style="display:inline-block;width:12px;height:12px;background:var(--color-success);vertical-align:middle;border-radius:2px"></span> within ±5pp · 
-      <span style="display:inline-block;width:12px;height:12px;background:var(--color-warning);vertical-align:middle;border-radius:2px"></span> ±5–15pp · 
-      <span style="display:inline-block;width:12px;height:12px;background:var(--color-danger);vertical-align:middle;border-radius:2px"></span> &gt;±15pp
+    <div style="text-align:center;font-size:11px;color:var(--color-text-subtle);margin-top:var(--gap-sm)" aria-label="Heatgrid legend">
+      <span style="display:inline-block;width:12px;height:12px;background:var(--color-success);vertical-align:middle;border-radius:2px" aria-hidden="true"></span> within ±5pp · 
+      <span style="display:inline-block;width:12px;height:12px;background:var(--color-warning);vertical-align:middle;border-radius:2px" aria-hidden="true"></span> ±5–15pp · 
+      <span style="display:inline-block;width:12px;height:12px;background:var(--color-danger);vertical-align:middle;border-radius:2px" aria-hidden="true"></span> &gt;±15pp
     </div>
-  </div>
+  </section>
 
   <!-- View: Single market (the original layout) -->
-  <div id="view-single">
+  <main id="view-single" role="tabpanel" aria-labelledby="view-single-tab">
 
   <!-- Controls row — compact, always visible -->
-  <div class="controls-row">
+  <nav class="controls-row" role="toolbar" aria-label="Projection controls">
     <div class="control-group">
-      <span class="control-label">Market / Region</span>
-      <select id="scope-select" class="control-input"></select>
+      <label for="scope-select" class="control-label">Market / Region</label>
+      <select id="scope-select" class="control-input" aria-label="Market or region to project"></select>
     </div>
     <div class="control-group">
-      <span class="control-label">Time Period</span>
-      <select id="period-select" class="control-input">
+      <label for="period-select" class="control-label">Time Period</label>
+      <select id="period-select" class="control-input" aria-label="Time period to project">
         <option value="W17">Week 17</option>
         <option value="M04">April (M04)</option>
         <option value="Q2">Q2</option>
@@ -249,30 +245,30 @@
       </select>
     </div>
     <div class="control-group">
-      <span class="control-label">Target Driver</span>
-      <select id="driver-select" class="control-input">
+      <label for="driver-select" class="control-label">Target Driver</label>
+      <select id="driver-select" class="control-input" aria-label="Which metric drives the target">
         <option value="ieccp" selected>Efficiency target</option>
         <option value="spend">Spend target</option>
         <option value="regs">Registrations target</option>
       </select>
     </div>
     <div class="control-group">
-      <span class="control-label">Target Value</span>
-      <input type="number" id="target-input" class="control-input" value="75" step="1" min="1" max="200" aria-describedby="target-input-error">
+      <label for="target-input" class="control-label">Target Value</label>
+      <input type="number" id="target-input" class="control-input" value="75" step="1" min="1" max="200" aria-describedby="target-input-error" aria-label="Target value for the selected driver">
       <div id="target-input-error" role="alert" style="font-size:11px;color:var(--color-danger,#D13212);margin-top:4px;display:none"></div>
     </div>
     <div class="control-group">
-      <span class="control-label">Lift multiplier</span>
-      <input type="range" id="regime-slider" class="control-input" min="0" max="2" value="1" step="0.05" style="padding:2px">
-      <span id="regime-slider-val" class="mono" style="font-size:11px;color:var(--color-text-meta);text-align:center">1.00×</span>
+      <label for="regime-slider" class="control-label">Lift multiplier</label>
+      <input type="range" id="regime-slider" class="control-input" min="0" max="2" value="1" step="0.05" style="padding:2px" aria-label="Campaign lift multiplier from 0 to 2 times">
+      <span id="regime-slider-val" class="mono" style="font-size:11px;color:var(--color-text-meta);text-align:center" aria-live="polite">1.00×</span>
     </div>
     <div class="control-group" style="flex:1;min-width:auto;justify-content:flex-end;flex-direction:row;align-items:flex-end;gap:6px">
-      <button id="btn-save" class="disclosure-btn" title="Save this scenario">Save</button>
-      <button id="btn-export-csv" class="disclosure-btn" title="Download projection as CSV">Export CSV</button>
+      <button id="btn-save" class="disclosure-btn" title="Save this scenario to your local list">Save</button>
+      <button id="btn-export-csv" class="disclosure-btn" title="Download the current projection as CSV">Export CSV</button>
       <button id="btn-reset" class="disclosure-btn" title="Reset to defaults (MX · Y2026 · Efficiency 75%)">Reset</button>
-      <button id="btn-recompute" class="disclosure-btn active" title="Recompute projection">Recompute</button>
+      <button id="btn-recompute" class="disclosure-btn active" title="Re-fetch projection-data.json and recompute from fresh data">Recompute</button>
     </div>
-  </div>
+  </nav>
 
   <!-- Hero block -->
   <div class="hero-block">
@@ -432,47 +428,48 @@
     </div>
   </div>
 
-  </div> <!-- /#view-single -->
+  </main> <!-- /#view-single -->
 
 </div> <!-- /.page-frame -->
 
 <!-- Right drawer — Model View (parameters disclosure target) -->
-<div class="drawer" id="drawer">
+<aside class="drawer" id="drawer" role="complementary" aria-label="Model View drawer">
   <div class="drawer-header">
-    <div class="drawer-title">Model View</div>
-    <button class="drawer-close" id="drawer-close">×</button>
+    <h2 class="drawer-title" style="margin:0">Model View</h2>
+    <button class="drawer-close" id="drawer-close" aria-label="Close model view">×</button>
   </div>
   <!-- 6.4.4 metric tiles with sparklines -->
   <div class="drawer-section" id="drawer-sparklines"></div>
   <div class="drawer-section">
-    <div class="drawer-section-title">Fit Quality</div>
+    <h3 class="drawer-section-title">Fit Quality</h3>
     <div class="drawer-tile"><span class="drawer-tile-label">R²</span><span class="drawer-tile-value" id="dv-rsq">—</span></div>
     <div class="drawer-tile"><span class="drawer-tile-label">Weeks used</span><span class="drawer-tile-value" id="dv-n-weeks">—</span></div>
     <div class="drawer-tile"><span class="drawer-tile-label">Fallback level</span><span class="drawer-tile-value" id="dv-fallback">—</span></div>
   </div>
   <div class="drawer-section">
-    <div class="drawer-section-title">Active campaign lifts</div>
+    <h3 class="drawer-section-title">Active campaign lifts</h3>
     <div id="dv-regime-stack">—</div>
   </div>
   <div class="drawer-section">
-    <div class="drawer-section-title">Parameters used</div>
+    <h3 class="drawer-section-title">Parameters used</h3>
     <div id="dv-parameters" style="font-size:11px"></div>
   </div>
-</div>
+</aside>
 
 <!-- Provenance modal -->
-<div class="modal-overlay" id="modal-overlay">
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-labelledby="modal-title" aria-modal="true">
   <div class="modal">
-    <button class="modal-close" id="modal-close">×</button>
+    <button class="modal-close" id="modal-close" aria-label="Close dialog">×</button>
     <h2 id="modal-title">Provenance</h2>
     <div id="modal-body"></div>
   </div>
 </div>
 
-<!-- CDN scripts — Chart.js + annotation plugin (M3 — replaced Observable Plot) -->
+<!-- CDN scripts — Chart.js + annotation plugin + datalabels plugin (M3/P2-08) -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3/dist/chartjs-plugin-annotation.min.js"></script>
-<script src="canon-chart.js?v=2026-04-27"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script src="canon-chart.js?v=2026-04-28"></script>
 
 <!-- MPE library + app -->
 <script src="v1_1_slim.js"></script>

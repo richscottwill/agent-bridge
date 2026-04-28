@@ -507,6 +507,12 @@
       el.textContent = chip.label;
       if (chip.id === STATE.activeChipId) el.classList.add('active');
       el.title = chip.description || '';
+      // P3-03: styled tooltip — use data-tip so the CSS ::after can show
+      // a real popover (not just the browser's native title bubble).
+      if (chip.description) el.setAttribute('data-tip', chip.description);
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('role', 'button');
+      el.setAttribute('aria-label', `${chip.label} scenario — ${chip.description || 'no description'}`);
       el.onclick = () => {
         const prevTotals = STATE.currentOutput?.totals;
         STATE.activeChipId = chip.id;
@@ -1604,10 +1610,16 @@
       const when = new Date(r.saved_at).toLocaleString(undefined,
         { month: 'numeric', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
       const cmpActive = STATE.compareId === r.id ? ' compare-active' : '';
+      // P3-09: format target_value via driver-appropriate formatter so saved
+      // items like "MX · Y2026 · spend=12500000" render as "spend=$12.5M".
+      let tv = r.target_value;
+      if (r.driver === 'spend' && Number.isFinite(tv)) tv = fmt$(tv);
+      else if (r.driver === 'regs' && Number.isFinite(tv)) tv = fmtNum(tv);
+      else if (r.driver === 'ieccp' && Number.isFinite(tv)) tv = tv + '%';
       return `
         <div class="saved-item${cmpActive}" data-id="${r.id}">
           <div style="flex:1;min-width:0">
-            <div style="font-weight:500">${r.scope} · ${r.period} · ${r.driver}=${r.target_value}</div>
+            <div style="font-weight:500">${r.scope} · ${r.period} · ${r.driver}=${tv}</div>
             <div class="saved-meta">${when}</div>
           </div>
           <div class="saved-actions">
@@ -2619,7 +2631,23 @@
       recomputeTimer = setTimeout(() => recompute({ animated: false }), 250);
     });
 
-    document.getElementById('btn-recompute').addEventListener('click', () => recompute({ animated: true }));
+    document.getElementById('btn-recompute').addEventListener('click', async () => {
+      // P3-16 decision: Recompute re-fetches projection-data.json (cache: 'reload')
+      // then re-runs the projection, so the button delivers what its label
+      // implies. Visible network hit makes it observable — Kate can watch
+      // the timestamp update in the hero badge after each click.
+      const btn = document.getElementById('btn-recompute');
+      const orig = btn.textContent;
+      btn.textContent = 'Fetching…';
+      try {
+        const resp = await fetch('data/projection-data.json', { cache: 'reload' });
+        if (resp.ok) STATE.data = await resp.json();
+      } catch (e) {
+        console.warn('[projection] recompute re-fetch failed:', e);
+      }
+      btn.textContent = orig;
+      recompute({ animated: true });
+    });
     document.getElementById('btn-save').addEventListener('click', saveProjection);
     document.getElementById('btn-export-csv').addEventListener('click', exportProjectionCsv);
     const resetBtn = document.getElementById('btn-reset');

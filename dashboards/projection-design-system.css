@@ -1171,3 +1171,41 @@ select.control-input:hover {
   border-color: var(--color-danger);
   color: var(--color-danger);
 }
+
+
+/* ==========================================================================
+   Scenario chip styled tooltip — P3-03. Hover/focus reveals the description
+   as a real popover (the browser's native title attribute is not styleable
+   and has a long delay). Native title is kept as a fallback for reduced-
+   motion/no-CSS environments.
+   ========================================================================== */
+.chip[data-tip] {
+  position: relative;
+}
+.chip[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #14161e;
+  color: #e8ecf0;
+  font-size: 11px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0.1px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  white-space: normal;
+  width: max-content;
+  max-width: 260px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 140ms ease 80ms;   /* snappier than native title */
+  z-index: 200;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.chip[data-tip]:hover::after,
+.chip[data-tip]:focus-visible::after {
+  opacity: 1;
+}
