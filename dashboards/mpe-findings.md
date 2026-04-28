@@ -274,8 +274,8 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P3-10 · Spend upper bound cap
 - **Source:** Round 5 V-4 / Round 6
-- **Status:** partial — tightened to $10B in R7. Local Kiro asks for $1B.
-- **Verification:** Entering `$2B` in Target Value spend mode shows "Spend target exceeds $1B — likely a typo."
+- **Status:** done (commit 4b19352)
+- **Verification:** validateTargetInput warn now fires at spend > 1e9 ($1B) with message "Spend target exceeds $1B — likely a typo." Hard max kept at 1e10 so the browser input clamps without being overly restrictive. AB Paid Search spend over $1B/year is flat-out wrong → typo catch.
 
 ### P3-11 · Time format on saved projections
 - **Source:** Round 5 V-?
