@@ -812,6 +812,55 @@
       if (t.computed_ieccp > 120) ieEl.classList.add('danger');
       else if (t.computed_ieccp > 100) ieEl.classList.add('warn');
     }
+
+    // P2-06: WoW delta sublines. Compute from the last two YTD weeks of
+    // actuals — this is the "what's the trend on the ground" indicator.
+    // Hero (period-aggregate) doesn't get WoW because it's not a weekly
+    // number; only the weekly-trackable tiles surface it.
+    const ytdW = marketData.ytd_weekly || [];
+    const setWowDelta = (elId, curVal, prevVal, invert) => {
+      const el = document.getElementById(elId);
+      if (!el) return;
+      el.classList.remove('good', 'bad', 'neutral');
+      if (!curVal || !prevVal || prevVal === 0) { el.textContent = ''; return; }
+      const pct = ((curVal - prevVal) / prevVal) * 100;
+      const arrow = pct > 0.5 ? '↑' : (pct < -0.5 ? '↓' : '·');
+      // When invert=true, up is bad (e.g., CPA rising); when false, up is good
+      let cls = 'neutral';
+      if (Math.abs(pct) >= 0.5) {
+        const isUp = pct > 0;
+        cls = (isUp !== invert) ? 'good' : 'bad';
+      }
+      el.textContent = `${arrow} ${pct > 0 ? '+' : ''}${pct.toFixed(1)}% WoW`;
+      el.classList.add(cls);
+    };
+    if (ytdW.length >= 2) {
+      const last = ytdW[ytdW.length - 1];
+      const prev = ytdW[ytdW.length - 2];
+      const curBrandRegs = last.brand_regs || last.brand_registrations || 0;
+      const prevBrandRegs = prev.brand_regs || prev.brand_registrations || 0;
+      const curNbRegs = last.nb_regs || last.nb_registrations || 0;
+      const prevNbRegs = prev.nb_regs || prev.nb_registrations || 0;
+      const curCost = (last.brand_cost || 0) + (last.nb_cost || 0);
+      const prevCost = (prev.brand_cost || 0) + (prev.nb_cost || 0);
+      const curRegs = curBrandRegs + curNbRegs;
+      const prevRegs = prevBrandRegs + prevNbRegs;
+      const curCpa = curRegs > 0 ? curCost / curRegs : 0;
+      const prevCpa = prevRegs > 0 ? prevCost / prevRegs : 0;
+      setWowDelta('kpi-brand-regs-delta', curBrandRegs, prevBrandRegs, false);
+      setWowDelta('kpi-nb-regs-delta', curNbRegs, prevNbRegs, false);
+      setWowDelta('kpi-cpa-delta', curCpa, prevCpa, true);  // CPA up = bad
+    } else {
+      // Clear any prior content when YTD is too short (e.g., early-year markets)
+      ['kpi-brand-regs-delta', 'kpi-nb-regs-delta', 'kpi-cpa-delta'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.textContent = ''; el.classList.remove('good', 'bad', 'neutral'); }
+      });
+    }
+    // Clear efficiency delta — it's a period-aggregate, not weekly.
+    const ieDeltaEl = document.getElementById('kpi-ieccp-delta');
+    if (ieDeltaEl) { ieDeltaEl.textContent = ''; ieDeltaEl.classList.remove('good','bad','neutral'); }
+
     // Both OP2 KPIs visible — Spend and Regs independent tiles.
     // For period-scoped comparisons, scale OP2 annual by period-share of year
     // (simple proportional; monthly OP2 breakdown is in the data but period
@@ -822,13 +871,30 @@
 
     const spendEl = document.getElementById('kpi-op2-spend');
     const regsEl = document.getElementById('kpi-op2-regs');
+    const spendDeltaEl = document.getElementById('kpi-op2-spend-delta');
+    const regsDeltaEl = document.getElementById('kpi-op2-regs-delta');
     spendEl.classList.remove('warn', 'danger');
     regsEl.classList.remove('warn', 'danger');
+    if (spendDeltaEl) { spendDeltaEl.classList.remove('good','bad','neutral'); spendDeltaEl.textContent = ''; }
+    if (regsDeltaEl)  { regsDeltaEl.classList.remove('good','bad','neutral');  regsDeltaEl.textContent = ''; }
+
+    // P2-14 — directional color + arrow on vs-OP2 comparisons.
+    // Spend overage is bad (red ↑), underspend is good-ish (green ↓).
+    // Regs overachievement is good (green ↑), underdelivery is bad (red ↓).
     if (op2Spend && op2Spend > 0) {
       const scaled = op2Spend * periodShare;
       const pct = scaled > 0 ? (t.total_spend / scaled) * 100 : 0;
       spendEl.textContent = `${pct.toFixed(0)}%`;
       if (pct > 120) spendEl.classList.add('danger'); else if (pct > 105) spendEl.classList.add('warn');
+      if (spendDeltaEl) {
+        const delta = pct - 100;  // deviation from on-plan
+        if (Math.abs(delta) >= 1) {
+          const arrow = delta > 0 ? '↑' : '↓';
+          spendDeltaEl.textContent = `${arrow} ${delta > 0 ? '+' : ''}${delta.toFixed(0)} pts vs plan`;
+          // Over-spending is bad; under-spending is slightly good
+          spendDeltaEl.classList.add(delta > 0 ? 'bad' : 'good');
+        }
+      }
     } else {
       spendEl.textContent = '—';
     }
@@ -837,6 +903,15 @@
       const pct = scaled > 0 ? (t.total_regs / scaled) * 100 : 0;
       regsEl.textContent = `${pct.toFixed(0)}%`;
       if (pct < 85) regsEl.classList.add('danger'); else if (pct < 95) regsEl.classList.add('warn');
+      if (regsDeltaEl) {
+        const delta = pct - 100;
+        if (Math.abs(delta) >= 1) {
+          const arrow = delta > 0 ? '↑' : '↓';
+          regsDeltaEl.textContent = `${arrow} ${delta > 0 ? '+' : ''}${delta.toFixed(0)} pts vs plan`;
+          // Over-delivering is good; under-delivering is bad
+          regsDeltaEl.classList.add(delta > 0 ? 'good' : 'bad');
+        }
+      }
     } else {
       regsEl.textContent = '—';
     }
@@ -1541,6 +1616,117 @@
     document.getElementById('regime-slider').value = STATE.regimeMultiplier;
     document.getElementById('regime-slider-val').textContent = STATE.regimeMultiplier.toFixed(2) + '×';
     scheduleRecompute();
+  }
+
+  // ========================================================================
+  // P2-11: CSV export. Downloads a per-week table of the currently-rendered
+  // projection including actuals (YTD) and projected (RoY) with 90% CI
+  // bands. Columns are stable across markets so teammates can diff two
+  // exports without column-matching. Filename encodes scope/period/driver
+  // so stacking multiple downloads in a folder reveals the scenario.
+  // ========================================================================
+
+  function escapeCsv(v) {
+    if (v == null) return '';
+    const s = String(v);
+    if (/[",\n]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+    return s;
+  }
+
+  function exportProjectionCsv() {
+    const out = STATE.currentOutput;
+    const scope = currentScope();
+    const md = (STATE.data?.markets || {})[scope];
+    const btn = document.getElementById('btn-export-csv');
+    const origText = btn ? btn.textContent : '';
+    const flash = (msg) => {
+      if (!btn) return;
+      btn.textContent = msg;
+      setTimeout(() => { btn.textContent = origText; }, 1800);
+    };
+    if (!out || !out.totals || !md) { flash('No data'); return; }
+
+    const bt = md.brand_trajectory_y2026;
+    if (!bt) { flash('No trajectory'); return; }
+
+    // Assemble the per-week series — same data the chart renders.
+    const ytdRaw = md.ytd_weekly || [];
+    const ytdCount = ytdRaw.length;
+    const btWeeks = bt.weeks.map(ws => new Date(ws));
+    const brandRoyRegs = bt.regs_per_week.slice(ytdCount);
+    const brandRoySpend = bt.spend_per_week.slice(ytdCount);
+    const royWeeks = btWeeks.slice(ytdCount);
+    const royNbSpend = (out.roy?.nb_spend || 0) / (royWeeks.length || 1);
+    const royNbRegs  = (out.roy?.nb_regs  || 0) / (royWeeks.length || 1);
+
+    // CI bands (if bootstrap computed)
+    const pw = STATE.currentUncertainty?.per_week?.regs || null;
+    const ciLo = pw?.lower || [];
+    const ciHi = pw?.upper || [];
+
+    const rows = [[
+      'week_iso', 'week_start',
+      'series', 'brand_regs', 'nb_regs', 'total_regs',
+      'brand_spend', 'nb_spend', 'total_spend',
+      'ci_lo_regs_90', 'ci_hi_regs_90',
+    ]];
+
+    // YTD half — actuals, no CI
+    for (let i = 0; i < ytdCount; i++) {
+      const w = ytdRaw[i];
+      const d = new Date(w.period_start);
+      const brandR = w.brand_regs || w.brand_registrations || 0;
+      const nbR    = w.nb_regs    || w.nb_registrations    || 0;
+      const brandS = w.brand_cost || w.brand_spend || 0;
+      const nbS    = w.nb_cost    || w.nb_spend    || 0;
+      rows.push([
+        fmtIsoWeek(d), d.toISOString().slice(0, 10),
+        'actual',
+        Math.round(brandR), Math.round(nbR), Math.round(brandR + nbR),
+        Math.round(brandS), Math.round(nbS), Math.round(brandS + nbS),
+        '', '',
+      ]);
+    }
+    // RoY half — projected, with CI where available
+    for (let i = 0; i < royWeeks.length; i++) {
+      const d = royWeeks[i];
+      const brandR = brandRoyRegs[i] || 0;
+      const brandS = brandRoySpend[i] || 0;
+      const globalIdx = ytdCount + i;
+      const lo = Number.isFinite(ciLo[globalIdx]) ? Math.round(ciLo[globalIdx]) : '';
+      const hi = Number.isFinite(ciHi[globalIdx]) ? Math.round(ciHi[globalIdx]) : '';
+      rows.push([
+        fmtIsoWeek(d), d.toISOString().slice(0, 10),
+        'projected',
+        Math.round(brandR), Math.round(royNbRegs), Math.round(brandR + royNbRegs),
+        Math.round(brandS), Math.round(royNbSpend), Math.round(brandS + royNbSpend),
+        lo, hi,
+      ]);
+    }
+
+    // Trailer — scenario metadata as commented rows (# prefix keeps it
+    // readable when pasted into Excel/Sheets without breaking the grid)
+    const t = out.totals || {};
+    const meta = [
+      `# Projection Engine export — ${new Date().toISOString()}`,
+      `# scope=${scope} period=${currentPeriod()} driver=${currentDriver()} target=${currentTargetValue()}`,
+      `# total_spend=${Math.round(t.total_spend || 0)} total_regs=${Math.round(t.total_regs || 0)} blended_cpa=${(t.blended_cpa || 0).toFixed(2)} computed_ieccp=${(t.computed_ieccp || 0).toFixed(2)}`,
+      `# bootstrap_ci_available=${pw ? 'true' : 'false'}`,
+    ];
+
+    const csv = meta.join('\n') + '\n'
+      + rows.map(r => r.map(escapeCsv).join(',')).join('\n') + '\n';
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `projection-${scope}-${currentPeriod()}-${currentDriver()}-${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+    flash('CSV downloaded');
   }
 
   // ========================================================================
@@ -2300,6 +2486,7 @@
 
     document.getElementById('btn-recompute').addEventListener('click', () => recompute({ animated: true }));
     document.getElementById('btn-save').addEventListener('click', saveProjection);
+    document.getElementById('btn-export-csv').addEventListener('click', exportProjectionCsv);
     // btn-share removed from HTML 2026-04-27 per Round 3 feedback (see session-log).
     // Share card function retained for potential future use; binding deleted to prevent
     // TypeError on init that was hanging the whole page (Round 4 R4-1).

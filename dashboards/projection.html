@@ -268,6 +268,7 @@
     </div>
     <div class="control-group" style="flex:1;min-width:auto;justify-content:flex-end;flex-direction:row;align-items:flex-end;gap:6px">
       <button id="btn-save" class="disclosure-btn" title="Save this scenario">Save</button>
+      <button id="btn-export-csv" class="disclosure-btn" title="Download projection as CSV">Export CSV</button>
       <button id="btn-recompute" class="disclosure-btn active" title="Recompute projection">Recompute</button>
     </div>
   </div>
@@ -302,26 +303,32 @@
       <div class="hero-kpi" data-kpi-series="proj-brand" title="Click to isolate Brand line on chart">
         <div class="hero-kpi-label">Brand Regs</div>
         <div class="hero-kpi-value" id="kpi-brand-regs">—</div>
+        <div class="hero-kpi-delta" id="kpi-brand-regs-delta"></div>
       </div>
       <div class="hero-kpi" data-kpi-series="proj-nb" title="Click to isolate Non-Brand line on chart">
         <div class="hero-kpi-label">NB Regs</div>
         <div class="hero-kpi-value" id="kpi-nb-regs">—</div>
+        <div class="hero-kpi-delta" id="kpi-nb-regs-delta"></div>
       </div>
       <div class="hero-kpi">
         <div class="hero-kpi-label">Cost per Reg</div>
         <div class="hero-kpi-value" id="kpi-cpa">—</div>
+        <div class="hero-kpi-delta" id="kpi-cpa-delta"></div>
       </div>
       <div class="hero-kpi" id="kpi-tile-ieccp">
         <div class="hero-kpi-label">Efficiency</div>
         <div class="hero-kpi-value" id="kpi-ieccp">—</div>
+        <div class="hero-kpi-delta" id="kpi-ieccp-delta"></div>
       </div>
       <div class="hero-kpi">
         <div class="hero-kpi-label">vs OP2 Spend</div>
         <div class="hero-kpi-value" id="kpi-op2-spend">—</div>
+        <div class="hero-kpi-delta" id="kpi-op2-spend-delta"></div>
       </div>
       <div class="hero-kpi">
         <div class="hero-kpi-label">vs OP2 Regs</div>
         <div class="hero-kpi-value" id="kpi-op2-regs">—</div>
+        <div class="hero-kpi-delta" id="kpi-op2-regs-delta"></div>
       </div>
     </div>
 

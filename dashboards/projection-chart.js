@@ -19,6 +19,129 @@
 (function (global) {
   'use strict';
 
+  // Compute an ISO week number for a date (matches mpe_engine's convention)
+  function computeIsoWeekNum(d) {
+    const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    const day = t.getUTCDay() || 7;
+    t.setUTCDate(t.getUTCDate() + 4 - day);
+    const yearStart = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+    return Math.ceil((((t - yearStart) / 86400000) + 1) / 7);
+  }
+
+  // Read the current period code from the dropdown (e.g. W17, M04, Q2, Y2026,
+  // MY1, MY2). Returns null when the dropdown is absent or the selected value
+  // is blank. P2-02 uses this to clip the chart x-domain to the period.
+  function getCurrentPeriod() {
+    const el = typeof document !== 'undefined' && document.getElementById('period-select');
+    return el ? (el.value || '').toUpperCase() : '';
+  }
+
+  // Map a period code to an {startIdx, endIdx} window over btWeeks so the
+  // chart zooms to the period instead of always rendering the full year.
+  // Returns null (= full-year span) when the period is Y2026 or unrecognized.
+  //
+  // The contract follows what the projection solver already supports:
+  //   W17        → roughly 4-week window centered on week 17
+  //   M04        → all weeks whose start date falls in month 04
+  //   Q2         → weeks in months 04-06
+  //   Y2026      → full year (null = no clip)
+  //   MY1 / MY2  → 52 / 104 week lookback from ytd_latest (Y2026 + prior year)
+  //
+  // Anything else returns null so the chart degrades gracefully.
+  function periodWindowOverBtWeeks(periodCode, btWeeks, ytdCount) {
+    if (!periodCode || periodCode === 'Y2026' || periodCode === 'Y' || !btWeeks || !btWeeks.length) {
+      return null;
+    }
+    const n = btWeeks.length;
+    const today = ytdCount > 0 ? btWeeks[ytdCount - 1] : btWeeks[0];
+    // Weekly period (Wnn) — ±2 week window around the target week
+    const wMatch = periodCode.match(/^W(\d{1,2})$/);
+    if (wMatch) {
+      const target = parseInt(wMatch[1], 10);
+      let centerIdx = -1;
+      for (let i = 0; i < n; i++) {
+        if (computeIsoWeekNum(btWeeks[i]) === target) { centerIdx = i; break; }
+      }
+      if (centerIdx < 0) return null;
+      return { startIdx: Math.max(0, centerIdx - 2), endIdx: Math.min(n - 1, centerIdx + 2) };
+    }
+    // Monthly (M01..M12)
+    const mMatch = periodCode.match(/^M(\d{1,2})$/);
+    if (mMatch) {
+      const month = parseInt(mMatch[1], 10) - 1;
+      let startIdx = -1, endIdx = -1;
+      for (let i = 0; i < n; i++) {
+        if (btWeeks[i].getMonth() === month) {
+          if (startIdx < 0) startIdx = i;
+          endIdx = i;
+        }
+      }
+      return (startIdx >= 0) ? { startIdx, endIdx } : null;
+    }
+    // Quarter (Q1..Q4)
+    const qMatch = periodCode.match(/^Q(\d)$/);
+    if (qMatch) {
+      const q = parseInt(qMatch[1], 10);
+      const monthStart = (q - 1) * 3;
+      const monthEnd = monthStart + 2;
+      let startIdx = -1, endIdx = -1;
+      for (let i = 0; i < n; i++) {
+        const m = btWeeks[i].getMonth();
+        if (m >= monthStart && m <= monthEnd) {
+          if (startIdx < 0) startIdx = i;
+          endIdx = i;
+        }
+      }
+      return (startIdx >= 0) ? { startIdx, endIdx } : null;
+    }
+    // Multi-year lookback — MY1 (52 weeks) / MY2 (104 weeks) ending at today.
+    // Chart.js handles out-of-range-on-the-left gracefully as null.
+    const myMatch = periodCode.match(/^MY([1-9])$/);
+    if (myMatch) {
+      const yearsBack = parseInt(myMatch[1], 10);
+      const approxStart = btWeeks.findIndex(d => (today - d) / (1000 * 60 * 60 * 24 * 7) < yearsBack * 52);
+      const startIdx = approxStart >= 0 ? approxStart : 0;
+      return { startIdx, endIdx: n - 1 };
+    }
+    return null;
+  }
+
+  function sliceScenarioByPeriod(sd, win) {
+    if (!win) return sd;
+    const sliceArr = (a) => (Array.isArray(a) ? a.slice(win.startIdx, win.endIdx + 1) : a);
+    const shifted = (v) => (typeof v === 'number' && v >= 0)
+      ? (v - win.startIdx >= 0 && v - win.startIdx <= win.endIdx - win.startIdx ? v - win.startIdx : -1)
+      : v;
+    const clone = {
+      ...sd,
+      labels:          sliceArr(sd.labels),
+      regsActual:      sliceArr(sd.regsActual),
+      regsProjTotal:   sliceArr(sd.regsProjTotal),
+      regsProjBrand:   sliceArr(sd.regsProjBrand),
+      regsProjNb:      sliceArr(sd.regsProjNb),
+      spendActual:     sliceArr(sd.spendActual),
+      spendProj:       sliceArr(sd.spendProj),
+      ciLow:           sliceArr(sd.ciLow),
+      ciHigh:          sliceArr(sd.ciHigh),
+      counterfactual:  sliceArr(sd.counterfactual),
+      todayIdx:        shifted(sd.todayIdx),
+    };
+    // Remap regime onset/end indices into the sliced window; drop regimes
+    // entirely outside it so annotations don't render at idx=-1.
+    clone.regimes = (sd.regimes || []).map((r, i) => {
+      const onsetIn = typeof r.onsetIdx === 'number'
+        && r.onsetIdx >= win.startIdx && r.onsetIdx <= win.endIdx;
+      if (!onsetIn) return null;
+      const endClamped = Math.min(win.endIdx, Math.max(r.endIdx || r.onsetIdx, r.onsetIdx));
+      return {
+        ...r,
+        onsetIdx: r.onsetIdx - win.startIdx,
+        endIdx: endClamped - win.startIdx,
+      };
+    }).filter(r => r != null);
+    return clone;
+  }
+
   // Helpers — local rather than reusing the ones inside projection-app's IIFE
   function fmtNum(v) {
     if (v == null || !isFinite(v)) return 'n/a';
@@ -248,9 +371,18 @@
     const scenarioData = buildScenarioFromProjectionData(out, counterfactual, uncert, marketData);
     if (!scenarioData) return;
 
+    // P2-02: clip the chart x-domain to the currently-selected period.
+    // Y2026 returns null (full-year span, unchanged). Any sub-period shows
+    // only the relevant weeks so annotations + chart math scope tightly.
+    const periodCode = getCurrentPeriod();
+    const ytdCount = (marketData.ytd_weekly || []).length;
+    const btWeeksAll = (marketData.brand_trajectory_y2026?.weeks || []).map(w => new Date(w));
+    const win = periodWindowOverBtWeeks(periodCode, btWeeksAll, ytdCount);
+    const slicedScenario = win ? sliceScenarioByPeriod(scenarioData, win) : scenarioData;
+
     _chartInstance = global.CanonChart.render(canvas, {
       mode: 'scenario',
-      scenarioData,
+      scenarioData: slicedScenario,
       chartInstance: _chartInstance,
     });
   }

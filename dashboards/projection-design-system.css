@@ -159,6 +159,21 @@ html, body {
 }
 .hero-kpi-value.warn { color: var(--color-warning); }
 .hero-kpi-value.danger { color: var(--color-danger); }
+
+/* WoW / directional delta subline under each KPI (P2-06 + P2-14).
+   Small, muted by default; color + arrow glyph when populated. */
+.hero-kpi-delta {
+  font-size: var(--size-meta);
+  margin-top: 2px;
+  min-height: 14px;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-subtle);
+  letter-spacing: 0.2px;
+}
+.hero-kpi-delta.good { color: var(--color-success); }
+.hero-kpi-delta.bad  { color: var(--color-danger); }
+.hero-kpi-delta.neutral { color: var(--color-text-subtle); }
+.hero-kpi-delta:empty { display: none; }
 /* Hero pair — spend + regs side-by-side as co-primaries */
 .hero-pair {
   display: flex;
