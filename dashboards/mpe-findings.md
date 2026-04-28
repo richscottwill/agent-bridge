@@ -169,7 +169,7 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P2-08 · Line end-labels
 - **Source:** Round 4 C-11
-- **Status:** open
+- **Status:** done (commit 8afab47)
 - **Verification:** Right edge of each projected line has a text annotation with the series name + last value.
 
 ### P2-09 · Today marker correctness across all markets
@@ -194,7 +194,7 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P2-13 · Brand/NB stacked bar visual
 - **Source:** Round 1 K-7
-- **Status:** open
+- **Status:** done (commit 3b546ae)
 - **Verification:** In place of separate Brand Regs + NB Regs tiles, one horizontal bar split 37/63 with labels.
 
 ### P2-14 · Directional color/arrow on OP2 comparisons
@@ -239,7 +239,7 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P3-03 · Scenario chip definition tooltips
 - **Source:** Round 6 V6-5
-- **Status:** partial — native `title` attr works, but no styled tooltip.
+- **Status:** done (commit 8afab47)
 - **Verification:** Hover over "Pessimistic" scenario chip → styled tooltip within 200ms shows "Recent actuals extrapolated forward. No assumed uplift from active campaigns."
 
 ### P3-04 · Disclosure button state reset on market switch
@@ -269,7 +269,7 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P3-09 · Raw numbers formatted everywhere (grep pass)
 - **Source:** Multiple rounds
-- **Status:** partial — NB residual string + saved projection label still have raw numbers in some paths.
+- **Status:** done (commit 8afab47)
 - **Verification:** Grep of codebase for `\$\{[^}]*(target|spend|regs)[^}]*\}` without an `fmt` wrapper returns zero hits.
 
 ### P3-10 · Spend upper bound cap
@@ -284,17 +284,17 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P3-12 · aria-label coverage
 - **Source:** Round 4 R4-23
-- **Status:** partial — feedback inputs labeled in R7. Scope/period/driver selects still need aria-labels.
+- **Status:** done (commit 8afab47)
 - **Verification:** Every `button`, `select`, `input` has an `aria-label` or is wrapped in a `<label for="…">`.
 
 ### P3-13 · Landmark elements
 - **Source:** Round 4 R4-21
-- **Status:** open
+- **Status:** done (commit 8afab47)
 - **Verification:** Page has `<main>`, `<aside>` for drawer, `<nav role="toolbar">` for controls row. Screen reader can navigate by landmark.
 
 ### P3-14 · Heading hierarchy
 - **Source:** Round 4 R4-22
-- **Status:** open
+- **Status:** done (commit 8afab47)
 - **Verification:** No heading level skip. H1 → H2 → H3, not H1 → H3.
 
 ### P3-15 · Remove [WARN]/[ERROR] bracket notation
@@ -304,12 +304,12 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P3-16 · Recompute button decision
 - **Source:** Round 4 R4-18
-- **Status:** open
+- **Status:** done (commit 8afab47)
 - **Verification:** Button either removed entirely OR re-fetches `projection-data.json` when clicked (visible via network tab).
 
 ### P3-17 · Scenario chip meaning (decide chip vs annotation)
 - **Source:** Round 4 R4-19
-- **Status:** open
+- **Status:** done (commit 8afab47)
 - **Verification:** Either chips are clearly labeled interactive with hover tooltips (P3-03 covers), or they're restyled as annotations if that's the intent.
 
 ### P3-18 · Feedback widget radio enables inputs
