@@ -179,8 +179,8 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P2-10 · URL-based state sharing
 - **Source:** Round 4 R4-28
-- **Status:** open
-- **Verification:** Open `localhost:8080/projection.html?scope=UK&period=Y2026&driver=ieccp&target=65` → loads UK Y2026 @ 65%. Change any control → URL updates.
+- **Status:** done
+- **Verification:** Open `projection.html?scope=UK&period=Y2026&driver=ieccp&target=65` → loads UK Y2026 @ 65% efficiency directly. Change any control → URL updates via `history.replaceState` (no history spam). Invalid option values fall through to defaults. Live in `syncUrlFromState()` + `applyUrlStateOnLoad()`. Commit: b431616.
 
 ### P2-11 · CSV export
 - **Source:** Dashboard-gap #9
@@ -189,8 +189,8 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P2-12 · Saved projection load/delete/compare
 - **Source:** Round 4 R4-16
-- **Status:** open
-- **Verification:** Each saved item has Load/Delete buttons; Load restores full state; Compare overlays on current chart.
+- **Status:** done (state plumbing) — chart-side overlay of the compare line is a small follow-up
+- **Verification:** Each saved item shows Load / Compare / × buttons. Load restores full state (scope/period/driver/target/regime_multiplier). Delete removes the entry + clears active compare if it matched. Compare highlights the selected item with a brand-blue border + #F0F7FF background and sets `STATE.compareId`. Row click still loads for backward compat. Commit: b431616.
 
 ### P2-13 · Brand/NB stacked bar visual
 - **Source:** Round 1 K-7
@@ -210,8 +210,8 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P2-16 · Y-axis auto-scale tightening
 - **Source:** Round 1 C-3
-- **Status:** open
-- **Verification:** Every market's y-axis max is within 15% of its visible peak (currently 30–60% headroom).
+- **Status:** done
+- **Verification:** Both y (regs) and y1 (spend $K) axes in the scenario mode now compute `suggestedMax = peak * 1.12`, so the chart peak breathes at ~12% headroom instead of the default Chart.js 30-60%. Applied inside canon-chart.js `renderScenarioChart`; tracker/calibration paths untouched. Commit: b431616.
 
 ### P2-17 · Shared y-scale toggle for all-10 grid
 - **Source:** Round 2
@@ -234,8 +234,8 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P3-02 · "Baseline only" deduplication
 - **Source:** Round 6 V6-2
-- **Status:** partial — disclosure button renamed to "Compare to baseline" in R7. Scenario chip still "Baseline only".
-- **Verification:** No two controls share the name "Baseline only". Each one's label clearly indicates its effect.
+- **Status:** done
+- **Verification:** Scenario chip renamed from "Baseline only" to "No-lift baseline". Disclosure button remains "Compare to baseline" (renamed earlier in R7). No two controls share a name now. Commit: b431616.
 
 ### P3-03 · Scenario chip definition tooltips
 - **Source:** Round 6 V6-5
@@ -259,13 +259,13 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P3-07 · Contribution bar "Qualitative" relabel
 - **Source:** Round 1 L-5
-- **Status:** open
-- **Verification:** Fourth contribution segment reads "Judgment" or "Manual adjustment" not "Qualitative".
+- **Status:** done
+- **Verification:** Contribution bar fourth segment now reads "Judgment" instead of "Qualitative". Narrated tooltip on the chart emits "X% judgment" instead of "X% qualitative". CSS class names (.qualitative) and color token (--color-qualitative) left untouched to avoid cross-file cascades. Commit: b431616.
 
 ### P3-08 · Plural handling in narrative
 - **Source:** Round 6
-- **Status:** open
-- **Verification:** Narrative generator emits "1 transient regime event" not "1 transient regime event(s)" and "2 events" correctly.
+- **Status:** done (audited, already correct)
+- **Verification:** Audit of mpe_narrative.js confirms all plural paths use proper `n === 1 ? 'X' : 'Xs'` forms. No "lift(s)" / "event(s)" parenthesis-plurals remain in live code. Findings doc flip-only — no code diff. Commit: b431616 (docs only).
 
 ### P3-09 · Raw numbers formatted everywhere (grep pass)
 - **Source:** Multiple rounds
@@ -279,8 +279,8 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P3-11 · Time format on saved projections
 - **Source:** Round 5 V-?
-- **Status:** open
-- **Verification:** Saved items show "4/26/2026 14:23" not "4/26/2026".
+- **Status:** done
+- **Verification:** Saved list now renders timestamps via `toLocaleString` with explicit month/day/year + hour/minute formatting (e.g. "4/27/2026, 4:02 PM" instead of "4/27/2026"). Users saving multiple scenarios in a single session can tell them apart. Commit: b431616.
 
 ### P3-12 · aria-label coverage
 - **Source:** Round 4 R4-23
@@ -319,8 +319,8 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P3-19 · Reset-to-defaults button
 - **Source:** Round 4 R4-29
-- **Status:** open
-- **Verification:** A "Reset" button somewhere in the controls row → clicking restores MX Y2026 @ 75% efficiency (default state) and clears scenarioOverride.
+- **Status:** done
+- **Verification:** New Reset button in the controls row between Export CSV and Recompute. Clicking restores MX / Y2026 / ieccp / 75, sets regime slider to 1.00×, clears all transient state (compareId, scenarioOverride, activeChipId, kpiIsolatedSeries, disclosures.counter). One-click escape hatch from a messy comparison stack. Commit: b431616.
 
 ---
 
