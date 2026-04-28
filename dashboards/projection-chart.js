@@ -119,6 +119,8 @@
       regsProjTotal:   sliceArr(sd.regsProjTotal),
       regsProjBrand:   sliceArr(sd.regsProjBrand),
       regsProjNb:      sliceArr(sd.regsProjNb),
+      regsProjBrandStacked: sliceArr(sd.regsProjBrandStacked),
+      regsProjNbStacked:    sliceArr(sd.regsProjNbStacked),
       spendActual:     sliceArr(sd.spendActual),
       spendProj:       sliceArr(sd.spendProj),
       ciLow:           sliceArr(sd.ciLow),
@@ -219,6 +221,12 @@
       const w = ytdWeeks[i];
       regsActual[i] = w.brand_regs + w.nb_regs;
       spendActual[i] = w.brand_spend + w.nb_spend;
+      // Populate component arrays on YTD half too so the stacked area
+      // renders Brand/NB split for past weeks, not just projections.
+      // The projected half is seam-faded; YTD is raw actuals.
+      regsProjBrand[i] = w.brand_regs;
+      regsProjNb[i]    = w.nb_regs;
+      regsProjTotal[i] = w.brand_regs + w.nb_regs;
     }
 
     // Fill RoY half (projected, with seam-scale fade on Brand)
@@ -334,6 +342,18 @@
       regsProjTotal,
       regsProjBrand,
       regsProjNb,
+      // Stacked projected pair for the scenario chart's area fills.
+      // Brand stays at its raw value (fills to origin); NB becomes the
+      // cumulative (Brand + NB) so its area fills the delta between the
+      // two lines. Done outside Chart.js's stacking engine because that
+      // engine forces stack on every dataset on the y-axis, which would
+      // break the Actuals line + CI band rendering.
+      regsProjBrandStacked: regsProjBrand.map(v => Number.isFinite(v) ? v : null),
+      regsProjNbStacked:    regsProjBrand.map((b, i) => {
+        const nb = regsProjNb[i];
+        if (Number.isFinite(b) && Number.isFinite(nb)) return b + nb;
+        return null;
+      }),
       spendActual,
       spendProj,
       ciLow,
@@ -385,6 +405,18 @@
       scenarioData: slicedScenario,
       chartInstance: _chartInstance,
     });
+
+    // Belt-and-suspenders: ensure the external-tooltip div hides on fast
+    // mouse exits where Chart.js's tooltip.opacity=0 callback doesn't fire
+    // in time. The Chart.js external handler already hides on opacity=0,
+    // but binding here catches the raw pointer-leave too.
+    if (canvas && !canvas._mpeLeaveBound) {
+      canvas.addEventListener('mouseleave', () => {
+        const el = document.getElementById('scenario-tooltip-external');
+        if (el) el.style.opacity = '0';
+      });
+      canvas._mpeLeaveBound = true;
+    }
   }
 
   global.renderProjectionChart = renderProjectionChart;

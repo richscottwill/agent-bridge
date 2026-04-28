@@ -331,43 +331,57 @@
       });
     }
 
-    // Actuals — solid orange, past only
+    // Actuals / Total — a single thin summary line across the full year
+    // that sits on top of the Brand/NB stacked area. Past weeks = actuals
+    // total (Brand + NB from ytd_weekly); projected weeks = forecast total.
+    // This is the authoritative "what's happening" line; the stack below
+    // shows the composition. Point markers only on the actuals half so the
+    // eye reads "solid dots = real, empty dashed = forecast".
     datasets.push({
-      label: 'Actuals (regs)', data: sd.regsActual || [],
-      borderColor: ORANGE, backgroundColor: ORANGE,
-      borderWidth: 2.5, pointRadius: 3, pointBackgroundColor: ORANGE,
-      tension: 0.25, yAxisID: 'y', spanGaps: false,
+      label: 'Total registrations', data: sd.regsProjTotal || [],
+      borderColor: '#1A1A1A', backgroundColor: '#1A1A1A',
+      borderWidth: 2, pointRadius: 0,
+      segment: {
+        borderDash: (ctx) => {
+          // Dashed in the projected half, solid in the actuals half.
+          const todayIdx = sd.todayIdx == null ? -1 : sd.todayIdx;
+          return ctx.p0DataIndex >= todayIdx ? [6, 4] : undefined;
+        },
+      },
+      tension: 0.25, yAxisID: 'y', spanGaps: true,
     });
 
-    // Projected Total — solid dark, future weeks
-    if (sd.regsProjTotal) {
+    // Projected — STACKED AREA for Brand + NB so the chart reads as
+    // "here's what we expect, and here's how Brand / NB split it." Brand
+    // on the bottom, NB on top. Fills are solid enough to convey weight
+    // (0.55 alpha) but still let the Today line + CI band show through.
+    //
+    // Implementation: we compute the stacked values (brand = raw, nb = brand + nb)
+    // in projection-chart.js so Chart.js's own stacking engine is not
+    // involved — that engine forces every dataset on the y-axis to stack,
+    // which would break the Actuals line and the CI band (which must
+    // render at literal values). NB area fills DOWN to the Brand line
+    // via `fill: '-1'`; Brand fills DOWN to origin.
+    if (sd.regsProjBrandStacked) {
       datasets.push({
-        label: 'Projected Total', data: sd.regsProjTotal,
-        borderColor: '#1A1A1A', backgroundColor: 'transparent',
-        borderWidth: 2.5, borderDash: [], pointRadius: 0, tension: 0.25,
+        label: 'Brand forecast', data: sd.regsProjBrandStacked,
+        borderColor: BLUE, backgroundColor: 'rgba(0, 102, 204, 0.55)',
+        borderWidth: 0, pointRadius: 0, tension: 0.25,
         yAxisID: 'y', spanGaps: true,
+        fill: { target: 'origin' },
       });
     }
-
-    // Projected Brand — dashed blue
-    if (sd.regsProjBrand) {
+    if (sd.regsProjNbStacked) {
       datasets.push({
-        label: 'Projected Brand', data: sd.regsProjBrand,
-        borderColor: BLUE, backgroundColor: 'transparent',
-        borderWidth: 2, borderDash: [6, 4], pointRadius: 0, tension: 0.25,
+        label: 'Non-Brand forecast', data: sd.regsProjNbStacked,
+        borderColor: '#FF9900', backgroundColor: 'rgba(255, 153, 0, 0.55)',
+        borderWidth: 0, pointRadius: 0, tension: 0.25,
         yAxisID: 'y', spanGaps: true,
+        fill: { target: '-1' },
       });
     }
-
-    // Projected NB — dashed orange (explicit NB line, not inferred)
-    if (sd.regsProjNb) {
-      datasets.push({
-        label: 'Projected Non-Brand', data: sd.regsProjNb,
-        borderColor: '#FF9900', backgroundColor: 'transparent',
-        borderWidth: 2, borderDash: [6, 4], pointRadius: 0, tension: 0.25,
-        yAxisID: 'y', spanGaps: true,
-      });
-    }
+    // (The previous 'Total (Brand + NB)' dataset was replaced by the single
+    // 'Total registrations' line above that spans both halves of the chart.)
 
     // Spend actual (solid blue, on secondary axis) — hidden by default per
     // projection-app's legend default (scaled-spend was noisy on cold load).
@@ -525,16 +539,23 @@
                   // Minimal implementation: append narrated HTML to the tooltip body.
                   // The caller is responsible for providing context-aware HTML.
                   const tt = context.tooltip;
-                  if (!tt || tt.opacity === 0) return;
-                  const idx = tt.dataPoints && tt.dataPoints[0] ? tt.dataPoints[0].dataIndex : null;
-                  if (idx == null) return;
                   let el = document.getElementById('scenario-tooltip-external');
                   if (!el) {
                     el = document.createElement('div');
                     el.id = 'scenario-tooltip-external';
-                    el.style.cssText = 'position:absolute;pointer-events:none;background:#1a1d27;border:1px solid #2a2d35;border-radius:6px;padding:10px 12px;font-size:12px;color:#e0e0e0;max-width:280px;z-index:1000;transition:opacity 100ms;';
+                    el.style.cssText = 'position:absolute;pointer-events:none;background:#1a1d27;border:1px solid #2a2d35;border-radius:6px;padding:10px 12px;font-size:12px;color:#e0e0e0;max-width:280px;z-index:1000;transition:opacity 100ms;opacity:0;';
                     document.body.appendChild(el);
                   }
+                  // Hide when Chart.js signals mouseleave (tt.opacity === 0).
+                  // Prior version only showed; never flipped back, so the
+                  // narrated overlay stayed pinned to the cursor's last seen
+                  // position after the mouse left the chart.
+                  if (!tt || tt.opacity === 0) {
+                    el.style.opacity = '0';
+                    return;
+                  }
+                  const idx = tt.dataPoints && tt.dataPoints[0] ? tt.dataPoints[0].dataIndex : null;
+                  if (idx == null) { el.style.opacity = '0'; return; }
                   el.innerHTML = sd.tooltipFormatter(context, idx);
                   const rect = context.chart.canvas.getBoundingClientRect();
                   el.style.left = (rect.left + window.scrollX + tt.caretX + 14) + 'px';

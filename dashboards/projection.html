@@ -38,16 +38,28 @@
   padding: var(--gap-xl) var(--gap-lg);
 }
 
-/* Chart area — holds SVG + loading overlay */
+/* Chart area — holds canvas + loading overlay.
+   Locked to a fixed height (not min-height) so Chart.js's maintainAspectRatio:
+   false can paint into a stable box. Past bug: recompute-on-scenario-click
+   saw the canvas's intrinsic pixel height compound each render, growing the
+   wrapper unboundedly. Fixed height prevents the feedback loop. */
 .chart-wrap {
   position: relative;
-  min-height: 420px;
-  margin: var(--gap-lg) 0;
+  height: 420px;
+  max-height: 420px;
   background: var(--color-neutral-bg);
 }
 #chart-primary {
   position: relative;
-  min-height: 420px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+#chart-primary canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 100%;
+  display: block;
 }
 
 /* Top banner strip */
