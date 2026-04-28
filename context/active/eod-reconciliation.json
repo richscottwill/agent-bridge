@@ -1,101 +1,110 @@
 {
-  "generated": "2026-04-22",
-  "date": "2026-04-22",
-  "timezone": "America/Los_Angeles",
-  "executed_at_pt": "2026-04-23T01:33-07:00",
-  "status": "complete_degraded",
-  "degradation_notes": "Asana MCP token expired (Invalid grant). Outlook auth expired (mwinit -f needed). DuckDB asana.asana_tasks stale from 2026-04-21 13:45 PT — no live delta sync possible tonight. Hedy: zero 4/22 sessions in signals.hedy_meetings (consistent with session-log — no meetings ingested 4/22). Asana completion data below is inferred from session-log + AM-frontend 4/22 brief; not verified against live Asana. Flag for 4/23 AM backend: first action must be Asana delta sync to catch up 36h of drift.",
-  "completed_today": [
-    {"type": "file_artifact", "name": "Lorena MX budget transfer email — final with FX corrections + cliff-drop Scenario B", "source": "session-log 4/22", "level": "L2", "note": "Multi-iteration draft refined per Brandon + Yun feedback (gross/net, MX OP2 correction, RO-vs-dashboard, $943K FX basis). Shipped as final version after Bayesian engine + daily-scenarios build."},
-    {"type": "spec_artifact", "name": "Market Projection Engine (MPE) full spec — requirements + design + tasks", "source": ".kiro/specs/market-projection-engine/", "level": "L3", "note": "Complete 10-market + regional rollup (NA/EU5/WW) spec for leadership demo mid/late May 2026. CPC elasticity / multi-year / Bayesian CIs / anomaly detection all in v1. CCPs sourced from WW Dashboard column U."},
-    {"type": "spec_execution", "name": "MPE Phase 0 (6/6) complete", "source": "tasks.md", "level": "L3", "note": "data_audit.py for all 10 markets, steering file + 4 Kiro hooks (refit / parity / acceptance-core / demo-prep), owner runbook, existing-code coexistence audit, regime classification (26 rows added from 2025 MBR/QBR audit)."},
-    {"type": "spec_execution", "name": "MPE Phase 1 (11/11) complete — HARD CHECKPOINT MET 10 DAYS EARLY", "source": "tasks.md", "level": "L3", "note": "Parameter registry + CCPs seeded + regime breakpoints + mpe_fitting.py + mpe_uncertainty.py + mpe_engine.py + multi-year + regional rollups + 53-test Python suite (2.3s runtime). Hard checkpoint was 2026-05-02."},
-    {"type": "spec_execution", "name": "MPE Phase 2 (10/10) complete", "source": "tasks.md", "level": "L3", "note": "export-projection-data.py + mpe_engine.js JS mirror + projection.html + projection-app.js + mpe_narrative.js + build-projection-standalone.py + Projections dashboard nav tab + parity tests + refresh-all.py integration. SharePoint push deferred (mwinit -f). Symphony embed deferred."},
-    {"type": "spec_execution", "name": "MPE Phase 3.MX (6/6) complete — primary demo market fully demo-ready", "source": "tasks.md", "level": "L3", "note": "MX validate_market.py MAPE (Brand 64.7% LOW_CONFIDENCE — holdout spans Polaris + Semana Santa + W15 NB drop; NB 13.3% clean), 6 preset bundles, ieccp_bound narrative template, re-exported JSON (366KB, MX 24 params). Updated mpe-mx-specific-notes.md."},
-    {"type": "bug_fix", "name": "MPE preset-period mismatch fixed in projection-app.js + standalone HTML", "source": "session-log 4/23 post-midnight", "level": "L3", "note": "getPresetSpend was hardcoded × 13 (quarter-scale); fixed to weeksInPeriod scaling. Closes MX April 265% ie%CCP artifact. Also rebuilt standalone HTML to 447KB."},
-    {"type": "bug_fix", "name": "MPE ie%CCP solver scale bug fixed in both Python and JS engines", "source": "session-log 4/23 post-midnight", "level": "L3", "note": "Internal ie%CCP returned on percentage scale (121.26) while solver compared against decimal (0.75), collapsing binary search to $1K floor. Patched mpe_engine.py:478 + mpe_engine.js:343 with < 5.0 → ×100 normalization. Both converge now."},
-    {"type": "bug_fix", "name": "MPE MX ie%CCP regime handling — gate-flip modeled as H2 2025 exclusion window", "source": "session-log 4/23 post-midnight", "level": "L3", "note": "Inserted ps.regime_changes MX 2025-06-29 policy_gate exclusion (27 weeks removed from fit, 110 → 83 weeks). Refit produced 9 params v5. $431K → $443K @ 75% (+2.8%). Identified residual gap (33w vs 83w) as pre-Sparkle weights issue, not policy-capping alone."},
-    {"type": "feature_ship", "name": "MPE Target-triad UI — 3 simultaneous inputs (ie%CCP/Spend/Regs) with driver radio + auto-sync", "source": "session-log 4/23 post-midnight", "level": "L3", "note": "Target is now default tab; non-driver fields auto-populate from output. Scope change re-seeds ie%CCP from market.parameters.ieccp_target × 100. Standalone rebuilt (447 KB). Writes derived triad to saved-projection loader."},
-    {"type": "spec_artifact", "name": "Subtraction-audit FULL-PASS execution — 9 files deleted, ~650 lines removed (~4.7% of audited surface)", "source": ".kiro/specs/system-subtraction-audit/ (now archived at shared/wiki/agent-created/archive/system-subtraction-audit-2026-04-22/)", "level": "L3", "note": "Kill-list.md produced + reviewed + executed. Follow-on.md identifies 7 next-audit improvements. body-diagram.md deleted (zero live refs). Broken-refs json preserved for follow-on #1."},
-    {"type": "structural_action", "name": "Audit follow-on #3 retired + 3 structural subtraction moves shipped (Peter-mode)", "source": "session-log 4/22", "level": "L3", "note": "(1) Removed #[[file:body.md]] auto-injection from soul.md (saves ~88L/chat). (2) Deleted shared/tools/wiki-asana-sync/ entirely (88K / 5 files / 53 broken refs dropped). (3) Fixed wrong context-catalog.md path in wiki-concierge both copies. ~123 of 300 broken refs retired (~41%) in ~1 min of real work."},
-    {"type": "spec_execution", "name": "Skills-powers-adoption FULL-PASS — 53 sub-tasks across 10 groups", "source": ".kiro/specs/skills-powers-adoption/tasks.md", "level": "L3", "note": "Design revised after stress-test (6 findings addressed: portability validator advisory, legacy/current/retired status enum, touch-it-classify-it migration, step 0.5 non-Kiro gate, missed-skill detector dropped, pilot = 30-day activation baseline on 9 installed skills). All core groups complete including Phase 0 baseline, Phase A inventory, Phase D activation logging, routing tree, safe-creation, pruning, validators, property tests."},
-    {"type": "eval_artifact", "name": "Grok round-1 6-file steering upgrade — blind A/B/eval test", "source": "shared/tmp/grok-eval-round1/", "level": "L3", "note": "Executed full blind A/B/eval per architecture-eval-protocol. Verdict landed opposite of initial desk review. 4 of 6 files won empirically on first pass (gap-fillers). 5 system changes landed in parallel."},
-    {"type": "eval_artifact", "name": "Grok round-2 11-proposal blind test — 10 of 11 rejected", "source": "shared/context/intake/grok-eval-verdict-round2-2026-04-22.md + shared/tmp/grok-eval-2/", "level": "L3", "note": "11 proposals × (comparative OR A/B) × blind evaluator = 14 sub-agent invocations + 3 blind evals. 10 rejected/deferred (duplicate existing machinery, reinvent tables, or propose ceremonies violating soul.md principles). 1 partial adoption: Pacing Alert threshold tiering (🔴/🟡/🟢). Meta-lesson: round-1 closed genuine gaps; round-2 crossed into duplication. Diminishing returns after first pass."},
-    {"type": "eval_artifact", "name": "Soul next-action variation test — 30 runs + 5 blind evals", "source": "shared/tmp/soul-nba-test/", "level": "L3", "note": "5 variations × 5 tasks × 6 arms. Round 4 blind test of 3 CONDITIONAL soul.md variations (NBA Mandate / Optional 2x2 / High-Stakes Clarity Check). Executed verdict recommendations + rewrote blind-test-methodology as agent-facing steering."},
-    {"type": "eval_artifact", "name": "Steering discovery blind test — 20 runs + 5 blind evals", "source": "shared/tmp/steering-discovery-test/", "level": "L3", "note": "3 variations × 5 tasks. Winner (Var2, 228/250 vs baseline 154/250) adopted as always-on steering-index.md. Verified in today's session — steering-index.md is loaded in current context."},
-    {"type": "correspondence", "name": "Yun-Kang MX NB drop draft — rewritten from CVR-lag frame to Sparkle-Brand-lift + NB-saturation frame", "source": "shared/context/intake/drafts/2026-04-22-yun-kang-mx-nb-drop.md", "level": "L2", "note": "After YoY seasonality check confirmed Sparkle punching through seasonal headwind + NB saturation signature (YoY NB clicks +13% on much higher spend, CPC +10% WoW, CVR -15%). Also updated ps.regime_changes row to change_type=saturation, metric=nb_cpa, confidence 0.5→0.7, half_life 2→4 weeks, description rewritten."},
-    {"type": "data_correction", "name": "Hard-thing-candidates DuckDB table created + backfilled with 4/20 signal-driven redesign", "source": "AM-backend-remediation run 14:18 PT", "level": "L3", "note": "polaris-brand-lp #1 (score 25.9, valuable-and-avoided), oci-rollout #2, au-cpa-cvr #3. Testing Approach retroactively confirmed shipped 4/5 per amcc.md. l1_streak 4/22 corrected workdays_at_zero 24 → 1."},
-    {"type": "hook_fix", "name": "eod.kiro.hook JSON parse error — unescaped newline at char 5091", "source": "session-log 4/23 post-midnight", "level": "L2", "note": "Hook silently broken after prior copy-paste inserted literal \\n instead of escape sequence. Fixed with strReplace. Re-validated. This hook's execution (right now) is the verification."},
-    {"type": "hook_fix", "name": "am-backend hook display-name convention fix — dot-prefix in name field only", "source": "session-log 4/22", "level": "L3", "note": "Updated display name 'AM-Backend: Ingest + Process' → '.AM-Backend: Ingest + Process' matching .AM-Frontend. Bumped v5.2.1. Documented disk-state reconciliation: when fsWrite succeeds but readFile/strReplace report ENOENT, treat the write as not landed — verify with ls."}
-  ],
-  "completed_today_note": "HISTORIC 4/22 OUTPUT. ~21 major deliverables + ~90 session-log topic entries. The day's shape: spec work (MPE + skills-powers + subtraction-audit), structural subtraction (follow-on Peter-mode shipping 3 moves + 3 audit follow-ons retired), 4 blind eval tests (Grok r1, Grok r2, steering discovery, soul NBA variation), major MX forecasting work for Lorena ($1.3M ie%CCP scenarios + email iteration), and a fundamental correction to the hard-thing ledger that unwound 2+ weeks of incorrectly inherited Testing Doc streak. Approximately 0 Asana task completions visible in DuckDB — the day's L2/L3 work lived in files/specs/emails not in Asana task list. The ratio matters: Richard shipped strategic artifacts not tactical task completions.",
+  "generated": "2026-04-27",
+  "status": "completed",
+  "run_context": "First EOD since 4/22. RW OOO Thu 4/23 – Sun 4/26. Returned Monday 4/27. DuckDB last sync 4/25 18:58 PT (stale 48h at run time). Delta sync executed on email-derived signals only since Asana signals since 4/25 are already in DuckDB from AM-backend.",
+  "completed_today": [],
+  "completed_today_count": 0,
+  "completed_today_note": "Zero task completions on 4/27. RW first day back from OOO; day was spent reabsorbing context and triaging backlog, not shipping.",
   "carried_forward": [
-    {"task": "Weekly Reporting - Global WBR sheet (W15)", "task_gid": "1214057202961389", "status": "still Today, due 4/20, +2d overdue", "note": "Carry-forward inherited from 4/21. Was Priority Today. No evidence of 4/22 progress in session-log."},
-    {"task": "AU handover: max-clicks check", "task_gid": "1214128634505816", "status": "still Today, due 4/20, +2d overdue", "note": "Carry-forward inherited from 4/21. 6 days since max-clicks switch 4/17."},
-    {"task": "Email overlay WW rollout/testing", "task_gid": "1213125740755931", "status": "still Today, due 4/18, +4d overdue", "note": "Brandon overlay ask unaddressed 5d. Carry-forward since 4/21."},
-    {"task": "Update Kingpin for MX", "task_gid": "1213531566195255", "status": "Today, due 4/07, +15d overdue", "note": "Blocked by Andes data. ESCALATE task exists (1214146145384078). Should move to Backlog or kill Kingpin — decision outstanding."},
-    {"task": "Refmarker mapping audit PoC — AU", "task_gid": "1213923298187459", "status": "Today, due 4/07, +15d overdue", "note": "Long-standing carry-forward. Proactive draft exists (2026-04-22-brandon-refmarker-poc.md)."},
-    {"task": "MX Automotive page", "task_gid": "1213072707685834", "status": "Today, due 4/15, +7d overdue", "note": "Pages built by Lorena. Blocked by Vijeth footer component (33d). ESCALATE task active (1214145907193550)."},
-    {"task": "Verify IT tax fix — check closed invoices + reissued ones", "task_gid": "1214068429466521", "status": "Today, due 4/16, +6d overdue", "note": "Yun confirmed IT tax fixed. Just needs verification close-out."}
+    {
+      "task_gid": "1214128634505816",
+      "name": "AU handover: switched to max clicks 4/17; check account Monday and make changes to budgets as needed.",
+      "from_priority": "Today",
+      "to_priority": "Urgent",
+      "reason": "Was flagged as Today since before OOO. Not actioned 4/27. 8 days since max-clicks switch — AU account unchecked for ~11 calendar days now.",
+      "next_action": "Check AU genbi account post max-clicks: traffic, CPA, impression volume. Adjust budgets if over-pacing."
+    },
+    {
+      "task_gid": "1213125740755931",
+      "name": "Email overlay WW rollout/testing",
+      "from_priority": "Today",
+      "to_priority": "Urgent",
+      "reason": "Due date 4/18 (was 4/24 after earlier bump). Brandon's Outbound Marketing Goals reply still unaddressed. Not progressed during OOO.",
+      "next_action": "Reply to Brandon on Outbound Marketing Goals re: overlay status. Link MCS-2553 work as the path."
+    }
   ],
-  "carried_forward_note": "Degraded inference — DuckDB asana.asana_tasks is 36h stale so 'still Today' is based on yesterday's state. Some of these may have been worked 4/22 without trace in DuckDB. First 4/23 AM Asana delta sync will reconcile. NO Today→Urgent demote applied tonight because the stale DuckDB state would incorrectly demote tasks that may have had progress today.",
+  "carried_forward_count": 2,
   "new_tasks": [
-    {"type": "proactive_draft", "name": "6 new proactive drafts from AM-backend-remediation (anderson-prime-day, brandon-au-ps-weekly, brandon-loop-monthly-callouts, brandon-pam-budget-reply, brandon-refmarker-poc, lorena-paid-search-strategy)", "source": "shared/context/intake/drafts/ — all created 2026-04-22 14:23 PT", "note": "7 enrichment writebacks to Asana also happened in remediation run after GID lookup fix."}
+    {
+      "task_gid": "1214330286428120",
+      "name": "Kate AB Marketing AI demo (May 29) — prep Kiro PS use cases with Adi",
+      "source": "Brandon 4/22 email (FW: [Monthly] AB Marketing AI sync)",
+      "due_on": "2026-05-29",
+      "start_on": "2026-05-04",
+      "project": "WW Testing",
+      "routine": "Core",
+      "priority": "Urgent",
+      "importance": "Important",
+      "strategic_weight": "Five Levels: L3 + L5 signal. Kate-visible demo. Kiro PS use cases that Adi has already adopted become visible up the chain. Direct line to Todd-level visibility via Kate."
+    },
+    {
+      "task_gid": "1214330104198712",
+      "name": "Brand LP AU/MX test design — alternate measurement (non-weblab) for MCS vs Reg Start",
+      "source": "Brandon/Dwayne 4/24 thread (RE: Brand LP - Consolidated feedback)",
+      "due_on": "2026-05-06",
+      "project": "WW Testing",
+      "routine": "Core",
+      "priority": "Urgent",
+      "importance": "Important",
+      "strategic_weight": "Five Levels: L2. Brandon-assigned, MCS-facing. Opportunity to design rigorous alternate measurement (pre/post, holdout, staggered ramp) and publish. Testing Approach credibility builder."
+    },
+    {
+      "task_gid": "1214330091433878",
+      "name": "Google Ads MCC SSO admin — confirm ownership + adopt Teams workflow (by May 4)",
+      "source": "Rykier 4/24 email",
+      "due_on": "2026-05-04",
+      "project": "My Tasks",
+      "routine": "Admin",
+      "priority": "Urgent",
+      "strategic_weight": "Five Levels: L1 admin (protect). Hard external deadline: after 05/04, unmanaged new users get auto-revoked. Potentially an L3 tool moment if Richard builds a standard new-user-add doc for the team across 10 markets."
+    }
   ],
+  "new_tasks_count": 3,
   "recurring_proposals": [],
-  "recurring_created": [
-    {"name": "Mondays - Write into EU SSR Acq Asana", "next_due": "2026-04-27", "auto_created_by_asana": true, "note": "Inherited from 4/21 recurring pattern."}
-  ],
+  "recurring_proposals_note": "No completions today → no recurring instances to create. Monday's EU SSR and Weekly Reporting tasks may need manual kickoff Tue 4/28 morning (RW returns to normal cadence).",
   "blocker_updates": [
-    {"blocker": "mwinit/KMSI auth expired — blocks SharePoint push + Loop page reads + Outlook MCP", "days": 3, "status": "chronic", "action": "Richard to run `mwinit -f` in desktop terminal", "impact": "SharePoint durability sync (Phase 7.5) still offline. Can't push MPE spec or skills-powers spec artifacts to Kiro-Drive. Can't verify projection-standalone.html at SharePoint endpoint."},
-    {"blocker": "Asana MCP token invalid (Invalid grant)", "days": "new tonight", "status": "NEW", "action": "Token refresh needed at next session start (likely auto-recovers)", "impact": "Blocks EOD Asana delta sync. DuckDB state 36h stale."},
-    {"blocker": "motherduck_token env missing for hard-thing-refresh.py", "days": 3, "status": "chronic-recurring", "action": "Export motherduck_token in shell env or fix am-backend hook env injection", "impact": "hard-thing-refresh.py writes null-state shadow daily. Remediation-run fixed today's table state manually; will drift again tomorrow without env fix."},
-    {"blocker": "git push to agent-bridge rejected — pages.yml workflow scope missing in PAT", "days": 2, "status": "existing", "action": "Refresh PAT with workflow scope, OR strip pages.yml from unpushed commits + force-push, OR wait for mwinit restore", "impact": "shared/ commits local-only since yesterday. 6 files staged/committed as 86c97a3 with backup tag. Push attempts blocked tonight by karpathy-loop dirtying state during filter-branch."},
-    {"blocker": "Vijeth footer component (33d) — MX Auto page", "days": 33, "status": "ESCALATE task active 1214145907193550", "action": "Richard DM Brandon OR approve alternate footer"},
-    {"blocker": "Andes data (36d) — Kingpin Goals MX", "days": 36, "status": "ESCALATE task active 1214146145384078", "action": "Decide: kill Kingpin OR escalate to ABMA leadership"},
-    {"blocker": "Brandon PAM budget reply (16d) — Paid App PO Q2", "days": 16, "status": "unchanged", "action": "Surface again in next Brandon sync", "task_gid": "1212808474749819"}
+    {
+      "task_gid": "1214145907193550",
+      "name": "ESCALATE: MX Auto page — Vijeth footer blocked",
+      "days_blocked": 32,
+      "status": "unchanged — still blocked on Vijeth footer delivery"
+    },
+    {
+      "task_gid": "1214146145384078",
+      "name": "ESCALATE: Kingpin Goals MX — Andes data",
+      "days_blocked": 35,
+      "status": "unchanged — still blocked on Andes"
+    },
+    {
+      "task_gid": "1214081017092577",
+      "name": "MCS LP Review: Connect with Lorena on paid social/PS synergy",
+      "days_overdue": 11,
+      "status": "carry-over — no movement during OOO"
+    }
   ],
   "five_levels": {
-    "l1": 0,
-    "l2": 3,
-    "l3": 16,
-    "l4": 0,
-    "l5": 0,
-    "note": "L1 = 0 (hard-thing polaris-brand-lp not artifacted — still candidate stage, no Richard-authored analysis or doc shipped on polaris-brand-lp specifically). L2 = 3 (Yun-Kang MX NB drop draft rewrite, Lorena MX budget transfer email final, eod-hook + am-backend hook fixes). L3 = 16 (MPE Phase 0+1+2+3.MX, subtraction-audit FULL-PASS + follow-on moves, skills-powers FULL-PASS, 4 blind eval tests, hard-thing-candidates data correction, target-triad UI, preset/solver bug fixes). THIS IS A DOMINANT L3 DAY — team-automation / system-building work. Exactly the Five-Levels target (L3 = current active + NEXT level per soul.md). L2 correspondence still shipping at steady pace. L1 artifact bar is higher now that Testing Doc shipped — polaris-brand-lp needs a Richard POV doc or Brandon-facing analysis to count."
+    "L1": 0,
+    "L2": 0,
+    "L3": 0,
+    "L4": 0,
+    "L5": 0,
+    "note": "Zero-effort day across all levels. Consistent with first-day-back-from-OOO context re-absorption. Will not count as a streak reset because OOO days don't accumulate workdays-at-zero (see rw-tracker 4/24-4/25 entries). Today (4/27) IS a regular workday — counts as workday #4 at zero for the hard thing."
   },
-  "hard_thing": {
-    "name": "polaris-brand-lp — Richard POV artifact",
-    "status": "candidate_refresh_4_22_14_08",
-    "workdays_at_zero": 1,
-    "streak_reset_reason": "Testing Approach v5 shipped 4/5 per amcc.md §Current Streak. Prior 18-23 count was data error from incumbent-inheritance bug fixed in AM-backend-remediation 4/22 14:18 PT.",
-    "source": "main.hard_thing_now rank=1, score=4.05, mode=valuable-and-avoided, 4 channels, 5 unique authors, notes confirm 2026-04-22 still no Richard artifact",
-    "next_action": "Write a polaris-brand-lp POV doc (~2-3 page) synthesizing the 4 channels of signal — MCS-3004 Italy revert, Dwayne Brand LP consolidation, Andrew CTA work, -30% CVR narrative. Ship to Brandon as strategic artifact or table for DDD.",
-    "note": "Signal-driven discovery protocol is now live (tables backfilled 4/22 PM). Next hard-thing-refresh.py run should confirm this selection. motherduck_token env fix is the remaining blocker for automated refresh."
-  },
-  "meetings_today": [],
-  "meetings_today_note": "Zero Hedy sessions ingested for 2026-04-22 in signals.hedy_meetings. Consistent with session-log — no meetings referenced in 4/22 topic entries. Light-meeting day (Wednesday, post-calendar-guard). If Outlook auth were live we could verify via calendar_view but mwinit expired.",
   "portfolio_changes": {
-    "AU": {"new_today": 0, "completed_today": 0, "note": "No AU Asana activity 4/22. AU continues carrying forward max-clicks check (6d since switch)."},
-    "MX": {"new_today": 0, "completed_today": 0, "note": "Massive MX forecasting work (L2 Lorena email + multi-scenario $1.3M ie%CCP modeling) but no Asana task closures. MCS LP Review followup was due 4/22 — unclear if shipped; session-log does not confirm."},
-    "WW_Testing": {"new_today": 0, "completed_today": 0, "note": "Dwayne Brand LP reply shipped 4/20. Polaris-brand-lp surfaced as hard-thing #1 today. 2 MCS-2553 audit/dashboard tasks from 4/21 still active."},
-    "Paid_App": {"new_today": 0, "completed_today": 0, "note": "Budget/PO still blocked on Brandon (16d)."},
-    "ABPS_AI_Build": {"new_today": 0, "completed_today": 0, "note": "Asana 'ABPS AI - Content' project deprecated 2026-04-17 per soul.md — no longer written to."}
+    "tasks_created_on_RW": 3,
+    "tasks_completed_on_RW": 0,
+    "tasks_demoted_today_to_urgent": 2,
+    "duckdb_sync_lag_hours": 48,
+    "note": "Portfolio delta since 4/25 sync is small. Main changes are the 3 new tasks + 2 priority demotions logged in this run."
   },
-  "wiki_pipeline": {
-    "drafts_created_today": 0,
-    "promoted_today": 0,
-    "source_note": "Wiki team not engaged 4/22. Mario-Peter dichotomy steering file created 4/22 (shared/.kiro/steering/mario-peter-dichotomy.md) — published via steering-index.md entry, not wiki pipeline."
+  "abps_ai_changes": {
+    "note": "ABPS AI - Content project deprecated 2026-04-17. No activity expected. Wiki pipeline flows via ~/shared/wiki/agent-created/ and SharePoint Documents/Artifacts/."
   },
-  "email_summary": {
-    "high_priority_unanswered": "unknown_auth_blocked",
-    "note": "Outlook MCP requires mwinit refresh. AM-frontend brief 4/22 06:40 had email summary — point to that or defer until auth restored."
-  },
-  "critical_context_carry_forward": [
-    {"item": "MX Y2026 projection math open — $431K vs $1.2M gap", "action": "Richard choosing between (A) accept MPE's 83w fit as canonical ($443K @ 75% ie%CCP), (B) refit narrow-window to get $1.2M answer, (C) expose both fits in UI with window provenance. Status: OPEN after post-midnight session."},
-    {"item": "Yun-Kang MX NB drop reply — Richard to decide send path", "action": "Draft rewritten to Sparkle + saturation frame. Richard weighted Yun-Kang's framing lower after YoY seasonality check. Open: does agent DM Lorena about 70% ie%CCP YTD in light of saturation finding?"},
-    {"item": "Skills-powers adoption spec — requirements sync + tasks phase", "action": "Design revised; requirements.md has 7 criteria flagged for rewrite to match (R4.3/R4.5, R5.1-R5.6, R6.2). Tasks.md is complete FULL-PASS build through Groups 0-6 of 10."},
-    {"item": "MPE Phase 3 — 9 remaining market blocks (US/AU/CA/UK/DE/FR/IT/ES/JP) + Phase 4 + Phase 5", "action": "12-16 dev-days remaining for 2026-05-16 demo target. Recommended sequence: Phase 3.US + 3.AU next, then EU5/JP/CA batch after AU proves SH hybrid pattern."},
-    {"item": "MX ie%CCP mechanism framework open", "action": "Three mechanisms designed: (A) spend-bound overrides on ps.market_constraints_manual (15-min build), (B) parameter_override regime type (1-2 day), (C) scenario selector UI (Phase 4.6). Richard directed: build A now, append B+C to spec with rationale."},
-    {"item": "Brandon Loop monthly callout comments — DUE 2026-04-24 12PM PT", "action": "Critical unanswered per 4/22 AM-frontend brief."}
-  ]
+  "hard_thing_status": {
+    "rank_1_topic": "polaris-brand-lp",
+    "incumbent_since": "2026-04-20",
+    "incumbent_age_days": 7,
+    "last_richard_artifact_date": null,
+    "note": "polaris-brand-lp has been the hard thing for 7 days — at the rw-trainer escalation threshold. Richard did produce 4/20 Brand LP feedback reply, but the strategic artifact (Testing Approach doc to Brandon/Kate) is still open. Signal: incumbent should escalate this cycle."
+  }
 }

@@ -887,3 +887,28 @@ Patterns: SPLIT continues 100% keep rate (3/3 this batch). REWORD 2/3 kept (1 re
 - **Hard-thing correction.** Testing Approach v5 retroactively confirmed shipped 4/5 per amcc.md. l1_streak wdz reset 24 → 1 via AM-remediation run. main.hard_thing_candidates table created + backfilled with signal-driven 4/20 redesign (polaris-brand-lp #1 score 25.9, oci-rollout #2, au-cpa-cvr #3).
 - **MX forecasting work.** Multiple $1.3M ie%CCP scenarios modeled for Lorena email. MPE MX Y2026 @ 75% = $431K (broad fit) → $443K (H2-2025 policy-gate regime filter applied). Target-triad UI shipped — spend/regs/ie%CCP now all simultaneously visible with driver radio + auto-sync.
 - **Open items carrying to 4/23.** MX Y2026 projection math ($431K vs $1.2M gap, Richard choosing between 3 framing options). Yun-Kang reply send decision. Skills-powers requirements sync. MPE Phase 3 remaining 9 markets + Phase 4/5.
+
+
+## 2026-04-27 EOD — First day back from OOO (4/23-4/26)
+
+**Context:** RW returned Monday 4/27 after 4-day PTO. Evening EOD is the first since 4/22.
+
+**Asana reconciliation:**
+- 0 task completions.
+- 2 Today→Urgent demotions: AU max-clicks check (1214128634505816, 11 calendar days stale), Email overlay (1213125740755931, Brandon's overlay-status reply still unaddressed).
+- 3 new tasks created from Outlook delta during OOO:
+  - `1214330286428120` Kate AB Marketing AI demo (May 29) — Richard + Adi present Kiro PS use cases to Kate and her leaders. L3+L5 signal. Brandon wants run-through.
+  - `1214330104198712` Brand LP AU/MX test design — Richard owns alternate measurement (non-weblab) for MCS vs Reg Start per Brandon 4/24.
+  - `1214330091433878` Google Ads MCC SSO admin — Rykier 4/24, due May 4.
+
+**Hard thing status:** polaris-brand-lp incumbent for 7 days now. Workdays-at-zero = 4 (4/22 anomaly counted =1, 4/27 =4). Testing Doc to Brandon still unsent. Signal convergence: two hard-thing candidates concurrent — polaris-brand-lp (from signal-driven redesign) AND Testing Doc for Kate (longest-standing open artifact). AM-backend 4/28 should reconcile.
+
+**Organ health:**
+- Body total 45,269w (changelog 25%, amcc 11%, current 11%). No runaway growth.
+- current.md is 6 days stale — AM-backend 4/28 refresh mandatory.
+- Hook execution gap 4/23-4/27 expected (OOO).
+
+**System state:**
+- DuckDB last Asana full sync 4/25 — 48h delta still pending. AM-backend 4/28 will full-sync.
+- Experiments: Phase 6 runs next.
+

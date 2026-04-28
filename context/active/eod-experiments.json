@@ -1,29 +1,18 @@
 {
-  "generated": "2026-04-22",
-  "date": "2026-04-22",
-  "timezone": "America/Los_Angeles",
-  "executed_at_pt": "2026-04-23T01:33-07:00",
-  "status": "running_background",
-  "started_at_utc": "2026-04-23T08:50:00Z",
-  "started_at_pt": "2026-04-23T01:50:00-07:00",
-  "loop_command": "bash ~/shared/tools/scripts/karpathy-loop.sh \"hands.md\" 10",
-  "terminal_id": 13,
-  "log_path": "~/shared/context/active/karpathy-loop.log",
-  "cooldown_organs": "hands.md",
-  "max_batches_safety_cap": 10,
-  "batch_size": 10,
-  "experiments_expected_max": 100,
-  "prior_4_22_activity": {
-    "first_run_started": "2026-04-22T06:16 PT (AM-backend)",
-    "first_run_blocked_at": "Karpathy Phase 6 experiment attempted on richard-style-email × ADD — blocked at blind-eval step with 'z14.registerSubAgentExecution is not a function' (nested invokeSubAgent failure)",
-    "second_run_completed": "2026-04-22T09:23 PT — ran successfully, 1 experiment logged (last-experiment started 2026-04-22 13:45:48). Evals shell-invoked kiro-cli chat --agent eval-{a,b,c} directly, bypassing the broken invokeSubAgent path.",
-    "bug_still_open": "Nested invokeSubAgent (subagent invoking another subagent) remains broken. Today's loop uses shell-out pattern to dodge it. Platform fix still needed."
-  },
-  "protocol_adherence": {
-    "agent_invocation": "kiro-cli chat --agent karpathy is the invocation path, bypasses invokeSubAgent platform bug",
-    "blind_eval_path": "kiro-cli chat --agent eval-{a,b,c} shell-invoked per batch",
-    "first_experiment_verification": "Initial agent load confirmed — karpathy.md + heart.md read, experiment-log.tsv loaded (52KB), body/steering/callouts directories enumerated. Agent operating as itself, not fallback.",
-    "stopping_rules": "Prior exhaustion (all eligible combos explored), /tmp/karpathy-exhausted marker written, OR safety cap of 10 batches reached (~100 experiments max)."
-  },
-  "streak_correction_note": "This run is the first EOD-launched karpathy in multiple days. Richard called out a skip-streak. Running synchronously from hook now rather than deferring. If the background run produces results before EOD summary finishes, results will be surfaced in the frontend Step 5 section. If still running, will be surfaced in next AM brief."
+  "generated": "2026-04-27",
+  "status": "running",
+  "loop_kickoff_time": "2026-04-28T04:40:16Z",
+  "starting_experiments": 588,
+  "eligible_combos": 136,
+  "unexplored": 5,
+  "underexplored": 39,
+  "proven_losers": 0,
+  "max_batches": 200,
+  "cooldown": ["hands.md", "eod-phase-tracker.md", "changelog.md", "eod-reconciliation.json", "eod-maintenance.json"],
+  "terminal_id": 8,
+  "note": "Loop running in background. Final results will be appended via karpathy's own DuckDB writes (autoresearch_experiments + experiment-log.tsv). Loop stops when priors exhaust or 200-batch safety ceiling hits. Frontend summary will read whatever exists when this file is consumed.",
+  "suggestions": [
+    "Defer suggestions until loop converges. The batch results themselves are the suggestions — anything KEPT across 2+ experiments is adopted; REVERTed configurations have been tested-and-rejected.",
+    "If loop exhausts priors before reasonable batch count, revisit prior state — may need new experiment techniques in the queue."
+  ]
 }

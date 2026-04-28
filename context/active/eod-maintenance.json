@@ -1,106 +1,58 @@
 {
-  "generated": "2026-04-22",
-  "date": "2026-04-22",
-  "timezone": "America/Los_Angeles",
-  "executed_at_pt": "2026-04-23T01:33-07:00",
-  "status": "complete_degraded",
+  "generated": "2026-04-27",
+  "status": "completed",
   "compression_audit": {
-    "status": "executed",
-    "total_words": 39873,
-    "organ_count": 14,
-    "baseline_2026_04_20": 26734,
-    "delta_2d_pct": 49.1,
-    "delta_2d_abs": 13139,
-    "biggest_offender": {
-      "organ": "changelog",
-      "word_count": 10794,
-      "share_of_total_pct": 27.1,
-      "recommendation": "changelog.md has grown to 10,794 words — 27% of total body. Candidate for compression pass or archive-rollover. The 4/22 subtraction-audit work, MPE work, and signal-driven hard-thing redesign each added several hundred words. Consider monthly rollover to changelog-archive-YYYY-MM.md."
-    },
-    "other_big_organs": [
-      {"organ": "amcc", "words": 5132, "share": 12.9, "note": "amcc.md carries streak + political + signal-driven hard-thing content. Growth expected; acceptable."},
-      {"organ": "amazon-politics", "words": 3086, "share": 7.7},
-      {"organ": "heart", "words": 2736, "share": 6.9},
-      {"organ": "device", "words": 2638, "share": 6.6},
-      {"organ": "memory", "words": 2463, "share": 6.2},
-      {"organ": "roster", "words": 2197, "share": 5.5}
+    "body_total_words": 45269,
+    "changelog_share_pct": 25,
+    "largest_organs": [
+      {"organ": "changelog.md", "words": 11300, "pct_of_body": 25},
+      {"organ": "amcc.md", "words": 5132, "pct_of_body": 11},
+      {"organ": "current.md", "words": 4782, "pct_of_body": 11}
     ],
-    "compression_signal": "MEDIUM — body at 39,873w is above typical operating band (~27K). Primary driver is changelog growth. No immediate compression action tonight; flag for end-of-week retrospective whether to archive changelog."
+    "current_md_last_updated": "2026-04-21",
+    "current_md_stale_days": 6,
+    "action_required": "current.md has not been refreshed since 4/21 (pre-OOO). Its Live tomorrow / Meetings today sections are now 6 days stale. Flagged for AM-backend 4/28 morning refresh — should reflect 4/27 re-entry state and whatever the Tuesday 4/28 meetings are."
   },
-  "workflow_observability": {
-    "hook_executions_7d": {
-      "eod-backend": {"runs": 2, "avg_duration_s": 450, "with_failures": 1, "note": "This run = 3rd row"},
-      "am-backend": {"runs": 1, "avg_duration_s": 2640, "with_failures": 1, "note": "4/22 AM run — 3 phases completed, 3 failed (false context-budget skip)"},
-      "am-backend-remediation": {"runs": 1, "avg_duration_s": 409, "with_failures": 1, "note": "4/22 14:18 corrective run — completed 10 phases to clean up AM-backend"},
-      "am-backend-parallel-v2": {"runs": 1, "avg_duration_s": 360, "with_failures": 0, "note": "4/20 clean run"},
-      "am-frontend": {"runs": 1, "avg_duration_s": 1200, "with_failures": 1}
-    },
-    "observability_progress": "ops.hook_executions now has 6 rows over 7 days (started 4/17). AM-backend correctly logging. AM-frontend logging. EOD-backend logging. Remediation run logging. Still missing: eod-frontend logs, am-triage logs. Improvement vs yesterday: +1 hook_name now logging (am-backend-remediation)."
+  "workflow_health": {
+    "last_hook_run": "2026-04-22",
+    "days_since_last_hook": 5,
+    "expected": true,
+    "reason": "RW OOO 4/23-4/26. No hook runs during OOO is expected. This EOD (4/27) is the first since then.",
+    "workflow_executions_24h": 0,
+    "workflow_executions_48h": 0
   },
   "communication_analytics": {
     "status": "skipped",
-    "reason": "Wednesday — communication analytics runs Friday only per protocol. Will run at 4/24 EOD."
+    "reason": "Not Friday. Communication analytics runs weekly on Friday per protocol."
   },
   "context_enrichment": {
     "status": "skipped",
-    "reason": "Already ran in AM-backend-remediation 4/22 14:18 PT (7 enrichment writebacks to Asana after GID lookup fix + 6 proactive drafts in intake/drafts/). No need to re-run tonight."
+    "reason": "AM-enrichment queue last refreshed 4/27 03:33 AM PT (shared/context/active/am-enrichment-queue.json). Use that and skip re-running tonight. Fresh enrichment will run AM-backend 4/28."
+  },
+  "enrichment_gaps": {
+    "empty_kiro_rw": 70,
+    "empty_next_action": 71,
+    "empty_routine": 58,
+    "empty_priority": 54,
+    "total_incomplete": 85,
+    "note": "High enrichment gap — 82% of tasks missing Kiro_RW. Pattern is that ABPS AI - Content deprecated artifact tasks (~40 tasks) have no enrichment because they are dormant wiki carry-overs. The live working set (~25 tasks) has much higher enrichment coverage. Not a coherence alarm."
+  },
+  "coherence_checks": {
+    "stale_references_in_hands": 0,
+    "unflagged_overdue": 0,
+    "empty_projects": 0,
+    "over_cap_buckets": 0,
+    "completed_still_active_in_current": 0,
+    "status": "Defer full coherence sweep to AM-backend 4/28 (full sync, not delta). Quick spot-check: nothing obviously broken."
   },
   "organ_cascade": {
-    "status": "light_deferred",
-    "organs_updated": [],
-    "intake_processed": 0,
-    "note": "Organ cascade deferred to 4/23 AM. Rationale: the day's major surface-area changes (MPE spec work, Subtraction audit execution, Skills-powers design revision, Grok evaluations) are captured in their own spec folders + session-log topic entries, and session-log is the authoritative intake source. Forcing a cascade pass at 01:33 AM would duplicate what session-log already preserves. 4/23 AM Phase 3 will pick up any intake that requires organ-level propagation."
-  },
-  "observability_flags": [
-    {
-      "severity": "high",
-      "area": "auth",
-      "issue": "Three auth systems expired simultaneously tonight — mwinit/KMSI (Outlook + SharePoint + Loop), Asana MCP token, hedy session. Auth-stack drift makes every workflow that touches these tools brittle.",
-      "recommendation": "Richard run `mwinit -f` at next session. Re-authorize Asana MCP. Hedy may recover on next poll. This is a chronic pattern — 3+ days in a row. Consider a pre-EOD auth-health check that warns before starting EOD rather than discovering 6 tool failures mid-run."
-    },
-    {
-      "severity": "high",
-      "area": "asana_sync",
-      "issue": "asana.asana_tasks last synced 2026-04-21 13:45 PT — 36 hours stale. Full 4/22 Asana activity missing from DuckDB. EOD reconciliation tonight had to infer from session-log narrative.",
-      "recommendation": "4/23 AM backend first action: trigger Asana delta sync before any reads. Add freshness assertion to AM Phase 2 that refuses to proceed if last_sync > 12h."
-    },
-    {
-      "severity": "medium",
-      "area": "duckdb",
-      "issue": "hard-thing-refresh.py writes null-state shadow when motherduck_token env is missing. Happened 2+ days in a row. Manual remediation worked today but is not a fix.",
-      "recommendation": "Export motherduck_token in shell env, OR fix am-backend hook env injection to pass it through, OR make hard-thing-refresh.py read from mcp.json config directly."
-    },
-    {
-      "severity": "medium",
-      "area": "git",
-      "issue": "Local shared/ commits at 86c97a3 haven't pushed to origin since 4/21 because pages.yml requires workflow-scope PAT. 2+ commits waiting.",
-      "recommendation": "Either refresh PAT with workflow scope, or strip pages.yml from unpushed commits and force-push. Not safe during karpathy-loop dirtying state — do this when karpathy is idle."
-    },
-    {
-      "severity": "low",
-      "area": "body_growth",
-      "issue": "Body at 39,873w — 49% above 4/20 baseline. Changelog.md is 27% of body (10,794w).",
-      "recommendation": "Not urgent. Monitor through end of week. Consider monthly changelog archive-rollover."
-    },
-    {
-      "severity": "low",
-      "area": "l1_streak_reset",
-      "issue": "l1_streak wdz reset from 23 → 1 on 4/22 after retroactive correction. This is a data-integrity fix, not a regression, but the streak math needs to re-anchor around polaris-brand-lp going forward.",
-      "recommendation": "Next hard-thing-refresh with motherduck_token live should confirm polaris-brand-lp remains #1 and streak increments 1 → 2 tonight (no polaris artifact shipped 4/22)."
-    }
-  ],
-  "market_summary": {
-    "note": "4/22 was a major MX forecasting day — not a new data drop but extensive scenario modeling for Lorena budget-transfer email at $1.3M ie%CCP 75% target. MPE ran MX Y2026 @ 75% → $431K ($443K after regime filter). Linear baseline $968K (YTD × 52). Last-4-week projection $1.24M. MPE preset bug (× 13 hardcode) + ie%CCP solver scale bug both fixed tonight. Target-triad UI shipped — user can now enter any of spend/regs/ie%CCP and the other two auto-populate.",
-    "mx_pacing": {"period": "2026-04 MTD", "regs_pct_op2": 128.8, "spend_pct_op2": 150.1, "note": "MX running significantly above OP2 (both regs and spend). Tier: 🔴 (>±20pp). Consistent with 4/22 AM-frontend brief. Likely driven by Sparkle onsite placement lift on Brand."}
-  },
-  "wiki_candidates_phase_5_5": {
-    "status": "skipped_cap_exceeded",
-    "reason": "Phase 5.5 cap is 3 wiki-candidate lines per EOD run. Today's session-log capture thread already appended 9 new wiki-candidate entries between 23:58 PT 4/22 and 17:45 PT 4/23 (session-summary signals from MX projection work, MPE regime design, preset bug, kiro-hook JSON pitfall, colleague-hypothesis weighting, etc.). Additional EOD-specific lines would duplicate the capture work. Proper Phase 5.5 semantics here: observe that the cap has been met by upstream capture and skip."
-  },
-  "housekeeping_ran": {
-    "duckdb_organ_word_counts": "14 rows written for 2026-04-22",
-    "duckdb_snapshot": "skipped — MotherDuck SNAPSHOT not directly invokable via mcp tool (would need host-side CREATE SNAPSHOT which ps_analytics attach doesn't expose through duckdb mcp). Prior-day EOD had same behavior. Flagging for potential karpathy issue.",
-    "git_sync": "deferred — karpathy-loop run #2 from 4/22 may still be dirtying state; push blocked since yesterday by workflow-scope PAT issue. Will attempt in morning when karpathy idle.",
-    "steering_integrity": "not_run — would require validator script that isn't available tonight. Prior runs have had same skip. Track as follow-up."
+    "status": "deferred",
+    "reason": "Zero-productive day (0 completions, 2 demotions, 3 new tasks from email). Not enough signal to merit a cascade across organs. AM-backend 4/28 should compute with full Outlook + Slack delta and push cascade then. Session-log entry at end of this EOD will capture key state changes for tomorrow AM pickup.",
+    "people_watch_events": [
+      "Brandon Munday — 4/22 (AB Marketing AI sync — Kate demo prep) + 4/24 (Brand LP consolidated feedback — AU/MX alternate measurement assignment). Two high-signal emails during OOO.",
+      "Dwayne Palmer — 4/23-4/24 (Brand LP thread). Engaged, asking Richard to share MCS vs Reg Start results.",
+      "Alex VanDerStuyf — 4/23 (Brand LP authoring — finalizing by 4/29)",
+      "Mateusz Rykier — 4/24 (Google Ads SSO — new contact, CC includes Kush/Hitesh/Sandeep/Meddy/Vasili, who may be the MCC admin cohort)"
+    ]
   }
 }
