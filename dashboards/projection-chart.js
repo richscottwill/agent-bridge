@@ -189,18 +189,56 @@
     const brandRoyRegs = bt.regs_per_week.slice(ytdCount);
     const brandRoySpend = bt.spend_per_week.slice(ytdCount);
 
-    // Distribute NB over RoY weeks (matches V1_1_Slim aggregation)
-    const royNbSpend = (out.roy?.nb_spend || 0) / (royWeeks.length || 1);
-    const royNbRegs = (out.roy?.nb_regs || 0) / (royWeeks.length || 1);
+    // NB-shape-from-Brand — 2026-04-28 bugfix.
+    // Previously: NB was distributed evenly across RoY weeks (royNbRegs =
+    // out.roy.nb_regs / royWeeks.length, same for nb_spend). That produced
+    // a flat rectangular stack on top of a curved Brand trajectory —
+    // visually jarring AND mathematically unrealistic because NB actually
+    // tracks spend which has seasonality.
+    //
+    // Fix: shape NB by the Brand trajectory (which already carries
+    // seasonality + lift contribution), then scale so the RoY total
+    // matches the solver's out.roy.nb_regs / out.roy.nb_spend. The result:
+    // NB moves in lockstep with Brand, amplitude calibrated to the market's
+    // actual Brand:NB ratio via out.roy totals. Registrations and cost
+    // projections both curve the same way, addressing Richard's "separate
+    // KPIs with separate curves but should move relative to each other"
+    // critique (2026-04-28).
+    const royTotalBrand      = brandRoyRegs.reduce((a, b) => a + (b || 0), 0);
+    const royTotalBrandSpend = brandRoySpend.reduce((a, b) => a + (b || 0), 0);
+    const royTotalNbRegs     = out.roy?.nb_regs  || 0;
+    const royTotalNbSpend    = out.roy?.nb_spend || 0;
 
-    // Smoothing seam — carry the same logic from the Plot implementation:
-    // scale projected Brand down to join the last-YTD Brand value, fading
-    // back to 1.0 over 8 weeks. Prevents a visible cliff.
+    // Distribute NB regs/spend per-week proportional to the Brand curve.
+    // Falls back to even split when brand totals are zero (edge case for
+    // markets with no brand trajectory yet).
+    const nbRegsPerWeek = brandRoyRegs.map(b => {
+      if (royTotalBrand > 0) return (b / royTotalBrand) * royTotalNbRegs;
+      return royTotalNbRegs / (royWeeks.length || 1);
+    });
+    const nbSpendPerWeek = brandRoySpend.map(s => {
+      if (royTotalBrandSpend > 0) return (s / royTotalBrandSpend) * royTotalNbSpend;
+      return royTotalNbSpend / (royWeeks.length || 1);
+    });
+
+    // Smoothing seam — scale projected series down to join the last-YTD
+    // values, fading back to 1.0 over 8 weeks. Prevents visible cliffs at
+    // the Today line for Brand, NB, Brand spend, and NB spend. Each series
+    // gets its own scale because each comes from a different source
+    // (Brand: trajectory curve; NB: reshape from Brand; spend: proportional
+    // to regs trajectories). Without per-series fades the stacked area
+    // showed a jump at Today whenever YTD-ratio ≠ RoY-trajectory-ratio.
     const fadeWeeks = 8;
-    let seamScale = 1;
-    if (ytdWeeks.length > 0 && brandRoyRegs.length > 0 && brandRoyRegs[0] > 0) {
-      const lastYtdBrand = ytdWeeks[ytdWeeks.length - 1].brand_regs;
-      seamScale = lastYtdBrand / brandRoyRegs[0];
+    let seamBrand     = 1;
+    let seamNbRegs    = 1;
+    let seamBrandSpd  = 1;
+    let seamNbSpend   = 1;
+    if (ytdWeeks.length > 0 && brandRoyRegs.length > 0) {
+      const lastY = ytdWeeks[ytdWeeks.length - 1];
+      if (brandRoyRegs[0]   > 0 && lastY.brand_regs)   seamBrand    = lastY.brand_regs / brandRoyRegs[0];
+      if (nbRegsPerWeek[0]  > 0 && lastY.nb_regs)      seamNbRegs   = lastY.nb_regs    / nbRegsPerWeek[0];
+      if (brandRoySpend[0]  > 0 && lastY.brand_spend)  seamBrandSpd = lastY.brand_spend / brandRoySpend[0];
+      if (nbSpendPerWeek[0] > 0 && lastY.nb_spend)     seamNbSpend  = lastY.nb_spend   / nbSpendPerWeek[0];
     }
 
     // x-axis labels = W01..W52 — one row per week of 2026, aligned to btWeeks
@@ -229,17 +267,22 @@
       regsProjTotal[i] = w.brand_regs + w.nb_regs;
     }
 
-    // Fill RoY half (projected, with seam-scale fade on Brand)
+    // Fill RoY half (projected, with per-series seam-scale fade so the
+    // stacked area transitions smoothly across the Today line).
     for (let i = 0; i < royWeeks.length; i++) {
       const idx = ytdCount + i;
-      const offset = i;
-      const fade = offset < fadeWeeks ? seamScale + (1.0 - seamScale) * (offset / fadeWeeks) : 1.0;
-      const projBrand = (brandRoyRegs[i] || 0) * fade;
-      const projBrandSpend = (brandRoySpend[i] || 0) * fade;
+      const fadeFactor = (seam) => {
+        if (i >= fadeWeeks) return 1.0;
+        return seam + (1.0 - seam) * (i / fadeWeeks);
+      };
+      const projBrand      = (brandRoyRegs[i]   || 0) * fadeFactor(seamBrand);
+      const projNbRegs     = (nbRegsPerWeek[i]  || 0) * fadeFactor(seamNbRegs);
+      const projBrandSpend = (brandRoySpend[i]  || 0) * fadeFactor(seamBrandSpd);
+      const projNbSpend    = (nbSpendPerWeek[i] || 0) * fadeFactor(seamNbSpend);
       regsProjBrand[idx] = projBrand;
-      regsProjNb[idx] = royNbRegs;
-      regsProjTotal[idx] = projBrand + royNbRegs;
-      spendProj[idx] = projBrandSpend + royNbSpend;
+      regsProjNb[idx]    = projNbRegs;
+      regsProjTotal[idx] = projBrand + projNbRegs;
+      spendProj[idx]     = projBrandSpend + projNbSpend;
     }
 
     // Seam the projected total at the last YTD actual so the line connects
