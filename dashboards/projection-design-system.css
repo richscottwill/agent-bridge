@@ -1209,3 +1209,33 @@ select.control-input:hover {
 .chip[data-tip]:focus-visible::after {
   opacity: 1;
 }
+
+
+/* ==========================================================================
+   Brand/NB split bar — P2-13. Horizontal stacked bar showing the projected
+   Brand vs NB share. Complements the individual Brand/NB KPI tiles above.
+   ========================================================================== */
+.brand-nb-bar {
+  display: flex;
+  width: 100%;
+  max-width: 720px;
+  margin: var(--gap-md) auto 0;
+  height: 20px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--color-panel-border);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.brand-nb-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: flex 220ms ease;
+  padding: 0 6px;
+}
+.brand-nb-seg.brand-nb-brand { background: var(--color-brand, #0066CC); }
+.brand-nb-seg.brand-nb-nb    { background: var(--color-nb,    #FF9900); }

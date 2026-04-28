@@ -925,6 +925,28 @@
       regsEl.textContent = '—';
     }
 
+    // P2-13: populate the Brand/NB split bar under the KPI strip.
+    const brandBar = document.getElementById('brand-nb-seg-brand');
+    const nbBar    = document.getElementById('brand-nb-seg-nb');
+    if (brandBar && nbBar) {
+      const totalBNB = (t.brand_regs || 0) + (t.nb_regs || 0);
+      if (totalBNB > 0) {
+        const bPct = Math.round((t.brand_regs / totalBNB) * 100);
+        const nPct = 100 - bPct;
+        brandBar.style.flex = String(bPct);
+        nbBar.style.flex    = String(nPct);
+        brandBar.textContent = bPct >= 10 ? `Brand ${bPct}% · ${fmtNum(t.brand_regs)}` : '';
+        nbBar.textContent    = nPct >= 10 ? `NB ${nPct}% · ${fmtNum(t.nb_regs)}`       : '';
+        brandBar.title = `Brand: ${fmtNum(t.brand_regs)} regs (${bPct}%)`;
+        nbBar.title    = `Non-Brand: ${fmtNum(t.nb_regs)} regs (${nPct}%)`;
+      } else {
+        brandBar.style.flex = '1';
+        nbBar.style.flex = '1';
+        brandBar.textContent = '';
+        nbBar.textContent = '';
+      }
+    }
+
     // Apply animated arrival classes
     spendLine.classList.remove('arrival-brand');
     void spendLine.offsetWidth;
