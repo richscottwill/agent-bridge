@@ -140,12 +140,12 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P2-04 · 3-panel component decomposition (Prophet-style)
 - **Source:** Dashboard-gap #2
-- **Status:** open
+- **Status:** done (commit 766387a)
 - **Verification:** Below main chart: 3 stacked plots labeled "Trend", "Seasonality", "Campaign lifts" each showing that stream's per-week contribution.
 
 ### P2-05 · Backtest panel
 - **Source:** Dashboard-gap #5 + #6
-- **Status:** open
+- **Status:** done (commit 766387a)
 - **Verification:** A panel shows last 8 weeks of actuals overlaid with 8-weeks-ago projection + MAPE % + coverage %.
 
 ### P2-06 · Week-over-week delta on KPI tiles
@@ -215,12 +215,12 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P2-17 · Shared y-scale toggle for all-10 grid
 - **Source:** Round 2
-- **Status:** open
+- **Status:** done (commit 766387a)
 - **Verification:** On the "All 10 markets" view, a toggle switches between per-market y-scale and shared y-scale.
 
 ### P2-18 · Distance-to-target view fix
 - **Source:** Round 2
-- **Status:** open
+- **Status:** done (commit 766387a)
 - **Verification:** Heatgrid shows meaningful distances (distance to OP2 or unconstrained projection) rather than 0pp for solver-back-fit markets.
 
 ---
