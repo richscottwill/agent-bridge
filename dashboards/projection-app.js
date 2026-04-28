@@ -272,8 +272,8 @@
       errMsg = `Target can't be negative.`;
     } else if (driver === 'ieccp' && Number.isFinite(n) && (n < 1 || n > 200)) {
       errMsg = `Efficiency target should be 1–200%.`;
-    } else if (driver === 'spend' && Number.isFinite(n) && n > 1e10) {
-      errMsg = `Spend target exceeds $10B — likely a typo.`;
+    } else if (driver === 'spend' && Number.isFinite(n) && n > 1e9) {
+      errMsg = `Spend target exceeds $1B — likely a typo.`;
     } else if (driver === 'regs' && Number.isFinite(n) && n > 1e8) {
       errMsg = `Registrations target exceeds 100M — likely a typo.`;
     } else if (driver === 'rollup') {
@@ -311,40 +311,19 @@
             : mode === 'rollup' ? 'Rollup (sum of children)' : mode;
       driverSel.appendChild(opt);
     }
-    // P-DRV-PERSIST fix (2026-04-28): previously this kept the prior driver
-    // when the destination market supported it — which meant once a user
-    // clicked into AU/JP (spend-only), the driver stuck on 'spend' and
-    // carried through every subsequent market switch. Kate reported the
-    // MX spend jumping from ~$1.88M to $541K after touching AU, because MX
-    // got rendered in Spend mode at AU's spend target.
-    //
-    // New rule: on every scope change, force the destination market's
-    // PREFERRED driver (ieccp if supported, else the first supported mode).
-    // Exception: if the user explicitly changed the driver themselves
-    // (STATE.userOverrodeDriver === true), honor that intent — but still
-    // reseed the target so the new market's target-for-that-driver lands,
-    // not the previous market's stale value.
+    // P-DRV-PERSIST v2 fix (2026-04-28, architectural):
+    // Earlier boolean STATE.userOverrodeDriver was fragile — it persisted
+    // across market switches, so switching MX → (change driver) → AU →
+    // back → MX carried the override. Now scope it: STATE.driverOverrides
+    // is a {scope: driver} map. An override for MX doesn't affect CA.
+    // Reset clears the whole map.
+    if (!STATE.driverOverrides) STATE.driverOverrides = {};
     const preferredDriver = supported.includes('ieccp') ? 'ieccp' : supported[0];
-    const userOverride = STATE.userOverrodeDriver === true;
-    if (userOverride && supported.includes(prev)) {
-      driverSel.value = prev;
+    const overrideForThisScope = STATE.driverOverrides[scope];
+    if (overrideForThisScope && supported.includes(overrideForThisScope)) {
+      driverSel.value = overrideForThisScope;
     } else {
       driverSel.value = preferredDriver;
-    }
-    // DIAG-2026-04-28: temporary instrumentation to pin down a remaining
-    // driver-persistence complaint. Remove in next commit once verified.
-    // Reproduction expected: MX → AU → MX should log three lines and the
-    // final line's chosen driver should be 'ieccp'. If not, the caller
-    // path is bypassing this function or resetting driverSel.value after
-    // we return. Either way, console output localizes the failure.
-    if (window && window.console) {
-      console.log('[MPE driver-persist]',
-        'scope=' + scope,
-        '| prev=' + prev,
-        '| supported=' + JSON.stringify(supported),
-        '| preferred=' + preferredDriver,
-        '| userOverride=' + userOverride,
-        '| chosen=' + driverSel.value);
     }
 
     // Hide driver+target inputs for regions (rollup is computed, not a target)
@@ -413,7 +392,7 @@
       }
       input.step = '1000';
       input.min = '0';
-      input.max = '1e11';
+      input.max = '1e10';   // P3-10: tightened to $1B ceiling for typo-catch (2026-04-28)
     } else if (driver === 'regs') {
       // OP2 annual regs target first; fall back to YTD run-rate × 52
       const op2Regs = md?.op2_targets?.annual_regs_target;
@@ -2010,10 +1989,11 @@
         const el = document.getElementById('driver-select');
         if (el && [...el.options].some(o => o.value === driver)) {
           el.value = driver;
-          // P-DRV-PERSIST fix (2026-04-28): an explicit ?driver=X in the URL
-          // counts as user intent — mark the override so subsequent market
-          // switches honor it rather than forcing the preferred driver.
-          STATE.userOverrodeDriver = true;
+          // P-DRV-PERSIST v2 (2026-04-28): explicit ?driver=X for the URL's
+          // scope counts as user intent for THAT scope. Record in scoped map.
+          if (!STATE.driverOverrides) STATE.driverOverrides = {};
+          const urlScope = p.get('scope');
+          if (urlScope) STATE.driverOverrides[urlScope] = driver;
         }
       }
       if (target && Number.isFinite(parseFloat(target))) {
@@ -2049,9 +2029,10 @@
     STATE.scenarioOverride = null;
     STATE.kpiIsolatedSeries = null;
     STATE.compareId = null;
-    // P-DRV-PERSIST fix (2026-04-28): clear the user-driver override so the
-    // next market switch again honors the market's preferred driver.
-    STATE.userOverrodeDriver = false;
+    // P-DRV-PERSIST v2 fix (2026-04-28): clear all per-scope driver
+    // overrides so every market returns to its preferred driver.
+    STATE.driverOverrides = {};
+    STATE.userOverrodeDriver = false;   // back-compat no-op, kept in case
     document.querySelectorAll('[data-disclosure="counter"]').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.hero-kpi[data-kpi-series]').forEach(t => t.classList.remove('kpi-active'));
     refreshScopeDependentUI();
@@ -2958,10 +2939,12 @@
       else if (STATE.activeView === 'heatgrid') renderHeatGrid();
     });
     document.getElementById('driver-select').addEventListener('change', () => {
-      // P-DRV-PERSIST fix (2026-04-28): user explicitly picked a driver,
-      // so subsequent market switches should honor that choice rather than
-      // force the new market's preferred driver. Cleared by Reset.
-      STATE.userOverrodeDriver = true;
+      // P-DRV-PERSIST v2 (2026-04-28): user picked a driver explicitly,
+      // record it as an override FOR THIS SCOPE ONLY. Subsequent market
+      // switches don't carry it. Cleared by Reset.
+      if (!STATE.driverOverrides) STATE.driverOverrides = {};
+      const scope = currentScope();
+      STATE.driverOverrides[scope] = document.getElementById('driver-select').value;
       seedTargetValue();
       scheduleRecompute();
     });
