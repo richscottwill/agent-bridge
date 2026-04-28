@@ -130,8 +130,8 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P2-02 · Chart x-axis period-scoping
 - **Source:** Round 3 R4-12
-- **Status:** open
-- **Verification:** Select period=W17 → chart x-domain covers roughly 4 weeks around week 17. Select MY2 → x-domain covers ~104 weeks.
+- **Status:** done
+- **Verification:** Select period=W17 → chart x-domain covers the ±2 week window (W15–W19). Select M04 → chart covers the weeks whose start date falls in April. Select Q2 → Apr–Jun. MY2 → roughly 104 weeks of lookback. Y2026 renders the full-year chart unchanged. Regime-onset annotations remap into the sliced frame and drop entirely when outside the window. Lives in `projection-chart.js::periodWindowOverBtWeeks` + `sliceScenarioByPeriod`. Commit: ae49fa9.
 
 ### P2-03 · CI shaded bands on chart
 - **Source:** Dashboard-gap #1
@@ -150,8 +150,8 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P2-06 · Week-over-week delta on KPI tiles
 - **Source:** Round 1 K-8
-- **Status:** open
-- **Verification:** Each hero KPI has a small "+3.2% vs last week" subline in green/red.
+- **Status:** done
+- **Verification:** Brand Regs, NB Regs, and Cost per Reg KPI tiles each carry a `.hero-kpi-delta` subline reading `↑ +3.2% WoW` (green) or `↓ −2.1% WoW` (red). Computed from the last two weeks of `ytd_weekly`. CPA inverts color semantics (up = bad). Hero and Efficiency skip WoW because they're period-aggregates, not weekly numbers. Tiles gracefully clear when YTD < 2 weeks. Commit: ae49fa9.
 
 ### P2-07 · Clickable chart legend (+ KPI tile linking)
 - **Source:** Round 4 C-10 (legend), R11 (KPI linking = P2-07b)
@@ -184,8 +184,8 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P2-11 · CSV export
 - **Source:** Dashboard-gap #9
-- **Status:** open
-- **Verification:** Click Export → browser downloads `MX-Y2026-projection.csv` with columns `date,projected_brand,projected_nb,projected_total,lower_90,upper_90,actual`.
+- **Status:** done
+- **Verification:** New "Export CSV" button in the controls row between Save and Recompute. Clicking downloads `projection-<scope>-<period>-<driver>-<YYYY-MM-DD>.csv` with columns `week_iso,week_start,series,brand_regs,nb_regs,total_regs,brand_spend,nb_spend,total_spend,ci_lo_regs_90,ci_hi_regs_90`. YTD rows (`series=actual`) carry actuals, RoY rows (`series=projected`) carry projected values plus 90% bootstrap CI when available. Four trailing `#`-prefixed metadata rows encode scope/period/driver/target/totals so scenarios are self-describing when pasted into Excel. Commit: ae49fa9.
 
 ### P2-12 · Saved projection load/delete/compare
 - **Source:** Round 4 R4-16
@@ -199,8 +199,8 @@ before we start the new protocol. Every subsequent finding gets its own commit.
 
 ### P2-14 · Directional color/arrow on OP2 comparisons
 - **Source:** Round 1 K-3
-- **Status:** open
-- **Verification:** vs OP2 Spend at 137% shows red down-arrow; vs OP2 Regs at 137% shows green up-arrow.
+- **Status:** done
+- **Verification:** vs OP2 Spend at 137% shows red `↑ +37 pts vs plan` (over-spending = bad). vs OP2 Spend at 85% shows green `↓ −15 pts vs plan` (under-spending = slight good). vs OP2 Regs at 137% shows green `↑ +37 pts vs plan` (over-delivering = good). vs OP2 Regs at 85% shows red `↓ −15 pts vs plan` (under-delivering = bad). Direction semantic flips between spend and regs because the two metrics have opposite "goodness" gradients. Commit: ae49fa9.
 
 ### P2-15 · Spend on separate axis or chart
 - **Source:** Round 1 C-2
