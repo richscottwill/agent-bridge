@@ -962,6 +962,10 @@
     renderNarrativeStandard();   // always-visible narrative at bottom
     renderMarketAnomalies(currentScope());
     updateHeaderMeta();
+    // P2-04 + P2-05 — only render on single-market view; skip for regional
+    // rollups where decomposition + backtest don't have a clean data source.
+    try { renderDecomposition(out, marketData); } catch (e) { console.warn('[mpe] decomposition failed:', e); }
+    try { renderBacktest(marketData); } catch (e) { console.warn('[mpe] backtest failed:', e); }
   }
 
   function renderNarrativeStandard() {
@@ -1193,6 +1197,202 @@
       const chartEl = document.getElementById('chart-primary');
       if (chartEl) chartEl.innerHTML = '<div style="text-align:center;padding:24px;color:var(--color-text-meta)">Chart failed to render. Check console.</div>';
     }
+  }
+
+  // ========================================================================
+  // P2-04: Prophet-style decomposition (Trend / Seasonality / Campaign lifts).
+  // Three small Chart.js line panels under the main chart.
+  //
+  //  Trend      = 52-week rolling mean of actual+projected total regs (the
+  //               slow-moving baseline level, not the seasonal swing)
+  //  Seasonality = observed / trend per week (1.0 = neutral; 1.2 = 20% above
+  //               trend for that calendar week; 0.8 = 20% below)
+  //  Lifts      = summed (peak_multiplier - 1) * confidence over each lift's
+  //               active window — answers "how much extra did campaigns add
+  //               per week?"
+  //
+  // All three panels share the same x-axis (52 weeks of the year) + a thin
+  // today-seam line so the user reads them as one stacked view. Panels that
+  // can't render (missing data) show "Not enough history yet".
+  // ========================================================================
+
+  let _decompCharts = { trend: null, seasonality: null, lifts: null };
+
+  function renderDecomposition(out, marketData) {
+    const bt = marketData?.brand_trajectory_y2026;
+    const ytd = marketData?.ytd_weekly || [];
+    if (!bt || !bt.weeks || !bt.weeks.length) return;
+
+    const n = bt.weeks.length;
+    const labels = bt.weeks.map((w, i) => 'W' + String(i + 1).padStart(2, '0'));
+    // Build full-year per-week totals (actual + projected brand + nb residual)
+    const totals = new Array(n).fill(0);
+    const ytdCount = ytd.length;
+    for (let i = 0; i < ytdCount; i++) {
+      const w = ytd[i];
+      totals[i] = (w.brand_regs || w.brand_registrations || 0) + (w.nb_regs || w.nb_registrations || 0);
+    }
+    const royRegs = bt.regs_per_week.slice(ytdCount);
+    const royWeeks = n - ytdCount;
+    const royNb = (out.roy?.nb_regs || 0) / Math.max(royWeeks, 1);
+    for (let i = 0; i < royRegs.length; i++) {
+      totals[ytdCount + i] = (royRegs[i] || 0) + royNb;
+    }
+
+    // Trend: centered rolling mean. Window = 13 weeks (quarter) so the curve
+    // reveals cycle without overrunning the year; 52-week would flatten to
+    // a single value on a year of data.
+    const window = 13;
+    const trend = new Array(n).fill(null);
+    const half = Math.floor(window / 2);
+    for (let i = 0; i < n; i++) {
+      let sum = 0, cnt = 0;
+      for (let j = Math.max(0, i - half); j <= Math.min(n - 1, i + half); j++) {
+        if (totals[j] > 0) { sum += totals[j]; cnt++; }
+      }
+      trend[i] = cnt > 0 ? sum / cnt : null;
+    }
+
+    // Seasonality = observed / trend (1.0 = on trend)
+    const seasonality = trend.map((t, i) => {
+      if (!t || t <= 0 || !totals[i]) return null;
+      return totals[i] / t;
+    });
+
+    // Campaign lifts per week = sum over active lifts of peak_multiplier * confidence - 1.0
+    // Active window = onset to onset of next lift (or year end).
+    const lifts = new Array(n).fill(0);
+    const regimes = (marketData.regime_fit_state || []).slice()
+      .sort((a, b) => new Date(a.change_date) - new Date(b.change_date));
+    for (let r = 0; r < regimes.length; r++) {
+      const reg = regimes[r];
+      const onsetDate = new Date(reg.change_date);
+      let onsetIdx = -1;
+      for (let j = 0; j < n; j++) {
+        const d = new Date(bt.weeks[j]);
+        if (d >= onsetDate) { onsetIdx = j; break; }
+      }
+      if (onsetIdx < 0) continue;
+      let endIdx = n - 1;
+      if (r + 1 < regimes.length) {
+        const nextDate = new Date(regimes[r + 1].change_date);
+        for (let j = onsetIdx + 1; j < n; j++) {
+          const d = new Date(bt.weeks[j]);
+          if (d >= nextDate) { endIdx = j; break; }
+        }
+      }
+      const peak = reg.peak_multiplier || 1.0;
+      const conf = reg.confidence || 0;
+      const contribution = Math.max(0, (peak - 1) * conf);
+      for (let j = onsetIdx; j <= endIdx; j++) lifts[j] += contribution;
+    }
+
+    const sharedOpts = {
+      responsive: true, maintainAspectRatio: false, animation: false,
+      plugins: { legend: { display: false }, tooltip: { enabled: true, intersect: false, mode: 'index' }, datalabels: { display: false } },
+      scales: { x: { ticks: { display: false }, grid: { display: false } },
+                y: { ticks: { font: { size: 9 } }, grid: { color: 'rgba(0,0,0,0.04)' } } },
+      elements: { point: { radius: 0 } },
+    };
+    const mkChart = (refKey, canvasId, data, color) => {
+      const canvas = document.getElementById(canvasId);
+      if (!canvas) return;
+      if (_decompCharts[refKey]) { try { _decompCharts[refKey].destroy(); } catch (_) {} }
+      try {
+        _decompCharts[refKey] = new Chart(canvas, {
+          type: 'line',
+          data: { labels, datasets: [{ data, borderColor: color, backgroundColor: color + '33', borderWidth: 1.5, tension: 0.25, fill: true, spanGaps: true }] },
+          options: sharedOpts,
+        });
+      } catch (e) { console.warn(`[decomp ${refKey}] failed:`, e); }
+    };
+    mkChart('trend',       'decomp-trend',       trend,       '#0066CC');
+    mkChart('seasonality', 'decomp-seasonality', seasonality, '#DDA760');
+    mkChart('lifts',       'decomp-lifts',       lifts,       'rgba(168, 85, 247, 0.8)');
+  }
+
+  // ========================================================================
+  // P2-05: backtest — last 8 weeks, actual vs 8-weeks-ago prediction.
+  //
+  // Data source: marketData.ytd_weekly rows carry pred_regs (prediction made
+  // at the time the row was locked). We compare pred_regs against regs + nb_regs
+  // on the same row — "what did we expect for this week 8 weeks ago" vs
+  // "what actually happened". MAPE + 90% CI coverage % computed on the fly.
+  //
+  // If pred_regs is missing for recent weeks (feature wasn't captured yet),
+  // render "Not enough backtest history yet" gracefully.
+  // ========================================================================
+
+  let _backtestChart = null;
+
+  function renderBacktest(marketData) {
+    const canvas = document.getElementById('backtest-canvas');
+    const metaEl = document.getElementById('backtest-meta');
+    if (!canvas || !metaEl) return;
+
+    const ytd = marketData?.ytd_weekly || [];
+    // Take last 8 weeks with both a predicted and actual value
+    const recent = ytd.slice(-8);
+    const rows = recent.map(w => ({
+      label: w.iso_week || (`W` + (w.week_num || w.wk || '')),
+      actual: (w.brand_regs || w.brand_registrations || 0) + (w.nb_regs || w.nb_registrations || 0),
+      predicted: (w.pred_regs != null ? w.pred_regs : null),
+      ci_lo: (w.ci_lo != null ? w.ci_lo : null),
+      ci_hi: (w.ci_hi != null ? w.ci_hi : null),
+    }));
+    const usable = rows.filter(r => Number.isFinite(r.predicted) && r.predicted > 0 && r.actual > 0);
+    if (_backtestChart) { try { _backtestChart.destroy(); } catch (_) {} _backtestChart = null; }
+    if (usable.length < 2) {
+      metaEl.textContent = 'Not enough backtest history yet — needs per-week pred_regs in ytd_weekly (most markets backfill from W20 onward).';
+      canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+    // MAPE
+    let sumAbsPct = 0;
+    let inCi = 0;
+    let ciUsable = 0;
+    for (const r of usable) {
+      sumAbsPct += Math.abs((r.actual - r.predicted) / r.predicted);
+      if (Number.isFinite(r.ci_lo) && Number.isFinite(r.ci_hi)) {
+        ciUsable++;
+        if (r.actual >= r.ci_lo && r.actual <= r.ci_hi) inCi++;
+      }
+    }
+    const mape = (sumAbsPct / usable.length) * 100;
+    const coverage = ciUsable > 0 ? (inCi / ciUsable) * 100 : null;
+
+    try {
+      _backtestChart = new Chart(canvas, {
+        type: 'line',
+        data: {
+          labels: usable.map(r => r.label),
+          datasets: [
+            { label: 'Actual',    data: usable.map(r => r.actual),    borderColor: '#4A4A4A', backgroundColor: '#4A4A4A', borderWidth: 2, pointRadius: 3, tension: 0.25 },
+            { label: 'Predicted', data: usable.map(r => r.predicted), borderColor: '#0066CC', borderDash: [6, 4], borderWidth: 2, pointRadius: 2, tension: 0.25 },
+          ],
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, animation: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { position: 'bottom', labels: { font: { size: 11 } } },
+            tooltip: { callbacks: { label: (ctx) => ctx.dataset.label + ': ' + Math.round(ctx.parsed.y).toLocaleString() } },
+            datalabels: { display: false },
+          },
+          scales: { x: { ticks: { font: { size: 10 } } }, y: { ticks: { font: { size: 10 } } } },
+        },
+      });
+    } catch (e) { console.warn('[backtest] chart failed:', e); }
+
+    const parts = [
+      `Backtest on last ${usable.length} weeks`,
+      `MAPE ${mape.toFixed(1)}%`,
+    ];
+    if (coverage != null) parts.push(`90% CI coverage ${coverage.toFixed(0)}% (${inCi}/${ciUsable} weeks inside band)`);
+    const mapeQuality = mape < 10 ? 'good' : mape < 20 ? 'warn' : 'bad';
+    metaEl.innerHTML = parts.join(' · ') + (mapeQuality === 'bad' ? ' <span style="color:var(--color-danger)">— model miscalibrated</span>' :
+                                           mapeQuality === 'warn' ? ' <span style="color:var(--color-warning)">— within tolerance</span>' :
+                                                                    ' <span style="color:var(--color-success)">— tracking well</span>');
   }
 
 
@@ -2084,6 +2284,13 @@
   // 6.4.1 Small multiples — 2×5 grid of mini projection charts
   // ========================================================================
 
+  // ========================================================================
+  // Small-multiples view (6.4.1) — one mini chart per market.
+  // P2-17: sharedYScale toggle (STATE.sharedYScaleMultiples) — when on,
+  // computes max across all 10 markets and applies same suggestedMax to
+  // every mini chart so users can visually compare absolute volumes.
+  // ========================================================================
+
   async function renderSmallMultiples() {
     const grid = document.getElementById('small-multiples-grid');
     grid.innerHTML = '';
@@ -2092,6 +2299,9 @@
     const periodWeeks = periodWeeksSet(period);
     let okCount = 0;
 
+    // First pass: project all markets + collect peaks for shared-scale mode.
+    const outs = [];   // { mkt, md, out }
+    let sharedPeak = 0;
     for (const mkt of MPE.ALL_MARKETS) {
       const md = (STATE.data.markets || {})[mkt];
       if (!md) continue;
@@ -2111,18 +2321,32 @@
           md, 2026, effDriver, effTarget,
           { regimeMultiplier: STATE.regimeMultiplier, scenarioOverride: STATE.scenarioOverride, periodWeeks, periodType: period }
         );
-        const card = renderMiniChartCard(mkt, md, out);
-        grid.appendChild(card);
-        okCount += 1;
+        outs.push({ mkt, md, out });
+        const yw = out.year_weekly;
+        if (yw && yw.brand_regs) {
+          for (let i = 0; i < yw.brand_regs.length; i++) {
+            const v = (yw.brand_regs[i] || 0) + (yw.nb_regs[i] || 0);
+            if (v > sharedPeak) sharedPeak = v;
+          }
+        }
       } catch (e) {
         console.error(`Small-multiples ${mkt} failed:`, e);
       }
     }
+    // Apply padding for headroom (matches P2-16 scenario-mode logic).
+    const sharedMax = sharedPeak > 0 ? Math.ceil(sharedPeak * 1.12) : undefined;
+
+    // Second pass: build cards with either per-market or shared scale.
+    for (const { mkt, md, out } of outs) {
+      const card = renderMiniChartCard(mkt, md, out, STATE.sharedYScaleMultiples ? sharedMax : undefined);
+      grid.appendChild(card);
+      okCount += 1;
+    }
     document.getElementById('multiples-legend').textContent =
-      `${okCount} markets rendered · driver=${driver} · period=${period} · scenario=${STATE.activeChipId || 'mixed'}`;
+      `${okCount} markets rendered · driver=${driver} · period=${period} · scenario=${STATE.activeChipId || 'mixed'} · scale=${STATE.sharedYScaleMultiples ? 'shared' : 'per-market'}`;
   }
 
-  function renderMiniChartCard(market, md, out) {
+  function renderMiniChartCard(market, md, out, sharedMax) {
     const card = document.createElement('div');
     card.className = 'mini-chart-card';
     card.addEventListener('click', () => {
@@ -2142,37 +2366,53 @@
       : anomHasWarn ? '<span style="color:var(--color-warning);margin-left:4px" title="' + mktAnoms.length + ' warnings">●</span>'
       : '';
 
+    const canvasId = `mini-canvas-${market}`;
     card.innerHTML = `
       <div class="mini-chart-header">
         <div class="mini-market-code">${market}${anomBadge}</div>
         <div class="mini-headline">${headlineValue}</div>
       </div>
-      <div class="mini-chart-body" id="mini-${market}"></div>
+      <div class="mini-chart-body"><canvas id="${canvasId}" style="width:100%;height:80px"></canvas></div>
       <div class="mini-chart-meta">Efficiency ${t.computed_ieccp != null ? t.computed_ieccp.toFixed(1) + '%' : 'n/a'} · CPA ${fmt$(t.blended_cpa)}</div>
     `;
 
-    // Plot mini chart (simple total-regs line)
-    if (yw && yw.brand_regs.length > 0) {
-      const data = yw.brand_regs.map((br, i) => ({
-        week: i + 1,
-        total_regs: br + (yw.nb_regs[i] || 0),
-        locked: i < yw.ytd_weeks,
-      }));
-      const chart = Plot.plot({
-        width: 240, height: 80,
-        marginTop: 4, marginRight: 4, marginBottom: 12, marginLeft: 24,
-        x: { axis: null },
-        y: { label: null, ticks: 2 },
-        style: { fontFamily: 'Amazon Ember, sans-serif', fontSize: '9px' },
-        marks: [
-          Plot.line(data.filter(d => d.locked), { x: 'week', y: 'total_regs', stroke: 'var(--color-actuals)', strokeWidth: 1.5 }),
-          Plot.line(data.filter(d => !d.locked), { x: 'week', y: 'total_regs', stroke: 'var(--color-brand)', strokeWidth: 1.5 }),
-          Plot.ruleX([yw.ytd_weeks], { stroke: 'var(--color-actuals)', strokeDasharray: '2,2', strokeOpacity: 0.5 }),
-        ],
-      });
+    // Render mini chart via Chart.js (replaces the old Plot.plot call which
+    // was dead after M3). Defers the Chart instantiation to next tick so the
+    // canvas is attached and sized before Chart.js queries its dimensions.
+    if (yw && yw.brand_regs && yw.brand_regs.length > 0) {
+      const n = yw.brand_regs.length;
+      const totals = new Array(n);
+      for (let i = 0; i < n; i++) totals[i] = (yw.brand_regs[i] || 0) + (yw.nb_regs[i] || 0);
+      const ytdEnd = yw.ytd_weeks || 0;
+      // Split into locked + projected so the two halves can be colored differently
+      const locked = totals.map((v, i) => i < ytdEnd ? v : null);
+      const proj   = totals.map((v, i) => i >= ytdEnd - 1 ? v : null);  // seam at ytdEnd-1
       setTimeout(() => {
-        const body = document.getElementById(`mini-${market}`);
-        if (body) { body.innerHTML = ''; body.appendChild(chart); }
+        const canvas = document.getElementById(canvasId);
+        if (!canvas) return;
+        try {
+          new Chart(canvas, {
+            type: 'line',
+            data: {
+              labels: Array.from({ length: n }, (_, i) => 'W' + (i + 1)),
+              datasets: [
+                { data: locked, borderColor: '#4A4A4A', borderWidth: 1.5, pointRadius: 0, tension: 0.25, spanGaps: false },
+                { data: proj,   borderColor: 'var(--color-brand, #0066CC)', borderWidth: 1.5, pointRadius: 0, tension: 0.25, spanGaps: false },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { display: false }, tooltip: { enabled: false }, datalabels: { display: false } },
+              scales: {
+                x: { display: false },
+                y: { display: false, suggestedMax: sharedMax },
+              },
+              elements: { line: { borderJoinStyle: 'round' } },
+              animation: false,
+            },
+          });
+        } catch (e) { console.warn(`[mini ${market}] chart failed:`, e); }
       }, 0);
     }
     return card;
@@ -2204,17 +2444,40 @@
       let cellValue = '—', cellDelta = '—', cellMetric = '';
       try {
         if (supported.includes('ieccp') && ieTgt) {
-          // ie%CCP-driver market: color by projected vs target
+          // P2-18 fix: solver-back-fit markets always return projected_ieccp ≈ target
+          // because NB spend is back-fit to hit the target. To show a MEANINGFUL
+          // distance, run a second unconstrained projection against OP2 SPEND
+          // (no ieccp back-fit) and compute what ieccp would naturally obtain.
+          //   cellValue = projected ieccp under the target back-fit (reflects the
+          //              scenario the user picked)
+          //   cellDelta = unconstrained ieccp vs target (the honest health signal:
+          //              'at this OP2 spend, would you naturally land on target?')
+          // Cells where ieccp is target-by-construction get an explicit tag so
+          // users aren't misled into reading a fake zero.
           out = V1_1_Slim.projectWithLockedYtd(
             md, 2026, 'ieccp', ieTgt * 100,
             { regimeMultiplier: STATE.regimeMultiplier, scenarioOverride: STATE.scenarioOverride, periodWeeks, periodType: period }
           );
           const projIe = out.totals.computed_ieccp;
           const target = ieTgt * 100;
-          const delta = projIe != null ? projIe - target : 0;
           cellValue = projIe != null ? `${projIe.toFixed(0)}%` : 'n/a';
-          cellDelta = projIe != null ? `${delta >= 0 ? '+' : ''}${delta.toFixed(1)}pp vs ${target.toFixed(0)}%` : '';
           cellMetric = 'Efficiency';
+          // Second probe: what's the unconstrained ieccp at OP2 spend?
+          let unconstrainedIe = null;
+          try {
+            if (op2Spend) {
+              const probeOut = V1_1_Slim.projectWithLockedYtd(
+                md, 2026, 'spend', op2Spend,
+                { regimeMultiplier: STATE.regimeMultiplier, scenarioOverride: STATE.scenarioOverride, periodWeeks, periodType: period }
+              );
+              unconstrainedIe = probeOut.totals?.computed_ieccp;
+            }
+          } catch (_) { /* probe-only; fall back gracefully */ }
+          const delta = (unconstrainedIe != null) ? unconstrainedIe - target
+                       : (projIe != null ? projIe - target : 0);
+          cellDelta = unconstrainedIe != null
+            ? `unconstrained: ${unconstrainedIe.toFixed(0)}% · ${delta >= 0 ? '+' : ''}${delta.toFixed(1)}pp vs ${target.toFixed(0)}%`
+            : (projIe != null ? `at target by design (${target.toFixed(0)}%)` : '');
           const abs = Math.abs(delta);
           cellKlass = abs <= 5 ? 'green' : abs <= 15 ? 'yellow' : 'red';
         } else if (op2Spend) {
@@ -2674,6 +2937,18 @@
     document.getElementById('btn-export-csv').addEventListener('click', exportProjectionCsv);
     const resetBtn = document.getElementById('btn-reset');
     if (resetBtn) resetBtn.addEventListener('click', resetToDefaults);
+
+    // P2-17: shared-y-scale toggle on small-multiples view
+    const sharedBtn = document.getElementById('btn-shared-scale');
+    if (sharedBtn) {
+      sharedBtn.addEventListener('click', () => {
+        STATE.sharedYScaleMultiples = !STATE.sharedYScaleMultiples;
+        sharedBtn.textContent = 'Shared y-scale: ' + (STATE.sharedYScaleMultiples ? 'on' : 'off');
+        sharedBtn.setAttribute('aria-pressed', String(!!STATE.sharedYScaleMultiples));
+        sharedBtn.classList.toggle('active', STATE.sharedYScaleMultiples);
+        renderSmallMultiples();
+      });
+    }
     // btn-share removed from HTML 2026-04-27 per Round 3 feedback (see session-log).
     // Share card function retained for potential future use; binding deleted to prevent
     // TypeError on init that was hanging the whole page (Round 4 R4-1).
