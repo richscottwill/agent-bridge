@@ -275,11 +275,300 @@
     ];
   }
 
+  // ========================================================================
+  // Scenario mode (M2) — for Projection Engine. Accepts a richer input than
+  // the tracker/calibration modes because it supports CI bands, counterfactual
+  // lines, regime-onset rules, period highlights, and a narrated-contribution
+  // tooltip. The mode is orthogonal to the tracker mode: one library, two
+  // call sites, no shared datasets.
+  //
+  // Expected input (opts.scenarioData):
+  //   {
+  //     labels:          string[]   // x-axis labels (week numbers or dates)
+  //     regsActual:      number[]   // actual brand+nb regs per label; null for future
+  //     regsProjTotal:   number[]   // projected total regs per label; null for past
+  //     regsProjBrand:   number[]   // projected brand regs
+  //     regsProjNb:      number[]   // projected non-brand regs
+  //     spendActual:     number[]   // actual total spend ($)
+  //     spendProj:       number[]   // projected total spend ($)
+  //     ciLow, ciHigh:   number[]   // 90% CI on projected total regs (null for past)
+  //     counterfactual:  number[]   // brand-only counterfactual regs (optional)
+  //     todayIdx:        number     // index of the YTD/projected seam
+  //     targetRegs:      number     // horizontal target line (optional, per-week)
+  //     regimes:         [{ label, onsetIdx, endIdx, absorbed }]
+  //     periodHighlight: { startIdx, endIdx }  // optional
+  //     tooltipFormatter:(ctx, idx) => string  // custom HTML for narrated tooltip
+  //   }
+  // ========================================================================
+
+  function buildScenarioDatasets(sd) {
+    const datasets = [];
+
+    // CI band (areaY-equivalent in Chart.js: two transparent lines with `fill: '+1'`)
+    if (sd.ciHigh && sd.ciLow) {
+      datasets.push({
+        label: '_ciHi', data: sd.ciHigh,
+        borderColor: 'transparent', backgroundColor: ORANGE_SOFT,
+        borderWidth: 0, pointRadius: 0, fill: '+1', tension: 0.25,
+        yAxisID: 'y', spanGaps: true, _hidden: true,
+      });
+      datasets.push({
+        label: '_ciLo', data: sd.ciLow,
+        borderColor: 'transparent', backgroundColor: ORANGE_SOFT,
+        borderWidth: 0, pointRadius: 0, fill: false, tension: 0.25,
+        yAxisID: 'y', spanGaps: true, _hidden: true,
+      });
+    }
+
+    // Counterfactual — dashed grey, brand-only; hidden by default so users
+    // opt into seeing it (matches projection-app's Counterfactual disclosure).
+    if (sd.counterfactual) {
+      datasets.push({
+        label: 'Brand counterfactual', data: sd.counterfactual,
+        borderColor: GRAY, backgroundColor: 'transparent',
+        borderWidth: 1.5, borderDash: [5, 4], pointRadius: 0, tension: 0.25,
+        yAxisID: 'y', spanGaps: true, hidden: true,
+      });
+    }
+
+    // Actuals — solid orange, past only
+    datasets.push({
+      label: 'Actuals (regs)', data: sd.regsActual || [],
+      borderColor: ORANGE, backgroundColor: ORANGE,
+      borderWidth: 2.5, pointRadius: 3, pointBackgroundColor: ORANGE,
+      tension: 0.25, yAxisID: 'y', spanGaps: false,
+    });
+
+    // Projected Total — solid dark, future weeks
+    if (sd.regsProjTotal) {
+      datasets.push({
+        label: 'Projected Total', data: sd.regsProjTotal,
+        borderColor: '#1A1A1A', backgroundColor: 'transparent',
+        borderWidth: 2.5, borderDash: [], pointRadius: 0, tension: 0.25,
+        yAxisID: 'y', spanGaps: true,
+      });
+    }
+
+    // Projected Brand — dashed blue
+    if (sd.regsProjBrand) {
+      datasets.push({
+        label: 'Projected Brand', data: sd.regsProjBrand,
+        borderColor: BLUE, backgroundColor: 'transparent',
+        borderWidth: 2, borderDash: [6, 4], pointRadius: 0, tension: 0.25,
+        yAxisID: 'y', spanGaps: true,
+      });
+    }
+
+    // Projected NB — dashed orange (explicit NB line, not inferred)
+    if (sd.regsProjNb) {
+      datasets.push({
+        label: 'Projected Non-Brand', data: sd.regsProjNb,
+        borderColor: '#FF9900', backgroundColor: 'transparent',
+        borderWidth: 2, borderDash: [6, 4], pointRadius: 0, tension: 0.25,
+        yAxisID: 'y', spanGaps: true,
+      });
+    }
+
+    // Spend actual (solid blue, on secondary axis) — hidden by default per
+    // projection-app's legend default (scaled-spend was noisy on cold load).
+    if (sd.spendActual) {
+      datasets.push({
+        label: 'Spend actual ($K)', data: sd.spendActual.map(v => v == null ? null : v / 1000),
+        borderColor: BLUE, backgroundColor: BLUE,
+        borderWidth: 2, pointRadius: 2, pointBackgroundColor: BLUE,
+        tension: 0.25, yAxisID: 'y1', spanGaps: false, hidden: true,
+      });
+    }
+
+    // Spend projected (dashed blue, on secondary axis, hidden by default)
+    if (sd.spendProj) {
+      datasets.push({
+        label: 'Spend projected ($K)', data: sd.spendProj.map(v => v == null ? null : v / 1000),
+        borderColor: BLUE, backgroundColor: 'transparent',
+        borderWidth: 2, borderDash: [6, 4], pointRadius: 0, tension: 0.25,
+        yAxisID: 'y1', spanGaps: true, hidden: true,
+      });
+    }
+
+    return datasets;
+  }
+
+  // Build the annotation plugin config for scenario extras (today line,
+  // regime regions + onset rules, target line, period highlight).
+  function buildScenarioAnnotations(sd) {
+    const annotations = {};
+
+    // Today seam — dashed green vertical at the YTD/projected boundary
+    if (typeof sd.todayIdx === 'number' && sd.todayIdx >= 0) {
+      annotations.todayLine = {
+        type: 'line',
+        xMin: sd.todayIdx, xMax: sd.todayIdx,
+        borderColor: NOW_GREEN, borderWidth: 2, borderDash: [4, 4],
+        label: {
+          display: true, content: '↓ Today',
+          color: '#4ade80', font: { size: 10, weight: '600' },
+          position: 'start',
+          backgroundColor: 'rgba(0,0,0,0)',
+        },
+      };
+    }
+
+    // Regime lift regions + onset rules + labels
+    const regimes = sd.regimes || [];
+    regimes.forEach((r, i) => {
+      if (r.absorbed) return;  // absorbed lifts don't render onset markers
+      if (typeof r.onsetIdx !== 'number') return;
+      if (typeof r.endIdx === 'number' && r.endIdx > r.onsetIdx) {
+        annotations[`regime-region-${i}`] = {
+          type: 'box',
+          xMin: r.onsetIdx, xMax: r.endIdx,
+          backgroundColor: 'rgba(168, 85, 247, 0.08)',
+          borderColor: 'transparent',
+          drawTime: 'beforeDatasetsDraw',
+        };
+      }
+      annotations[`regime-onset-${i}`] = {
+        type: 'line',
+        xMin: r.onsetIdx, xMax: r.onsetIdx,
+        borderColor: 'rgba(168, 85, 247, 0.7)',
+        borderWidth: 1.5, borderDash: [3, 3],
+        label: {
+          display: true,
+          content: r.label || `Lift #${i + 1} onset`,
+          color: 'rgba(168, 85, 247, 0.9)',
+          font: { size: 10, weight: '500' },
+          position: 'start',
+          backgroundColor: 'rgba(0,0,0,0)',
+          yAdjust: 2,
+        },
+      };
+    });
+
+    // Horizontal target line (per-week)
+    if (typeof sd.targetRegs === 'number' && sd.targetRegs > 0) {
+      annotations.targetLine = {
+        type: 'line',
+        yMin: sd.targetRegs, yMax: sd.targetRegs,
+        borderColor: '#4a9eff', borderWidth: 1.5, borderDash: [6, 3],
+        label: {
+          display: true, content: `Target ${Math.round(sd.targetRegs).toLocaleString()}/wk`,
+          color: '#4a9eff', font: { size: 10 },
+          position: 'end',
+          backgroundColor: 'rgba(0,0,0,0)',
+        },
+      };
+    }
+
+    // Period highlight box
+    if (sd.periodHighlight && typeof sd.periodHighlight.startIdx === 'number') {
+      annotations.periodHighlight = {
+        type: 'box',
+        xMin: sd.periodHighlight.startIdx,
+        xMax: sd.periodHighlight.endIdx,
+        backgroundColor: 'rgba(74, 158, 255, 0.04)',
+        borderColor: 'rgba(74, 158, 255, 0.3)',
+        borderWidth: 1, borderDash: [2, 3],
+        drawTime: 'beforeDatasetsDraw',
+      };
+    }
+
+    return annotations;
+  }
+
+  function renderScenarioChart(ctx, opts) {
+    const sd = opts.scenarioData || {};
+    const datasets = buildScenarioDatasets(sd);
+    const annotations = buildScenarioAnnotations(sd);
+
+    return new Chart(ctx, {
+      type: 'line',
+      data: { labels: sd.labels || [], datasets: datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false, axis: 'x' },
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              color: '#888', font: { size: 11 },
+              filter: (item) => !item.text.startsWith('_'),
+              boxWidth: 24, usePointStyle: false,
+            },
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false,
+            callbacks: {
+              title: (items) => items.length ? items[0].label : '',
+              // Custom narrated tooltip if caller provides one, else numeric default.
+              label: (item) => {
+                if (item.dataset.label && item.dataset.label.startsWith('_')) return null;
+                if (typeof sd.tooltipFormatter === 'function') return null;  // suppressed; external plugin handles
+                const v = item.parsed.y;
+                if (v == null) return null;
+                const isSpend = item.dataset.label.includes('$K');
+                const val = Math.round(v).toLocaleString();
+                return item.dataset.label + ': ' + (isSpend ? '$' + val + 'K' : val);
+              },
+            },
+            // When tooltipFormatter is provided, render via external plugin
+            // so the narrated contribution HTML ("40% seasonal, 40% trend...")
+            // can appear alongside the numeric datasets.
+            external: typeof sd.tooltipFormatter === 'function'
+              ? (context) => {
+                  // Minimal implementation: append narrated HTML to the tooltip body.
+                  // The caller is responsible for providing context-aware HTML.
+                  const tt = context.tooltip;
+                  if (!tt || tt.opacity === 0) return;
+                  const idx = tt.dataPoints && tt.dataPoints[0] ? tt.dataPoints[0].dataIndex : null;
+                  if (idx == null) return;
+                  let el = document.getElementById('scenario-tooltip-external');
+                  if (!el) {
+                    el = document.createElement('div');
+                    el.id = 'scenario-tooltip-external';
+                    el.style.cssText = 'position:absolute;pointer-events:none;background:#1a1d27;border:1px solid #2a2d35;border-radius:6px;padding:10px 12px;font-size:12px;color:#e0e0e0;max-width:280px;z-index:1000;transition:opacity 100ms;';
+                    document.body.appendChild(el);
+                  }
+                  el.innerHTML = sd.tooltipFormatter(context, idx);
+                  const rect = context.chart.canvas.getBoundingClientRect();
+                  el.style.left = (rect.left + window.scrollX + tt.caretX + 14) + 'px';
+                  el.style.top  = (rect.top  + window.scrollY + tt.caretY + 14) + 'px';
+                  el.style.opacity = '1';
+                }
+              : undefined,
+          },
+          annotation: { annotations: annotations },
+        },
+        scales: {
+          x: {
+            grid: { color: '#1f222b' },
+            ticks: { color: '#666', font: { size: 10 }, autoSkip: true, maxRotation: 0 },
+          },
+          y: {
+            position: 'left', grid: { color: '#1f222b' },
+            ticks: { color: '#666' },
+            title: { display: true, text: 'Registrations', color: ORANGE },
+          },
+          y1: {
+            position: 'right', grid: { display: false },
+            ticks: { color: BLUE, callback: (v) => '$' + v + 'K' },
+            title: { display: true, text: 'Spend ($K)', color: BLUE },
+          },
+        },
+      },
+    });
+  }
+
   function renderCanonChart(canvasOrId, opts) {
     const ctx = typeof canvasOrId === 'string'
       ? document.getElementById(canvasOrId) : canvasOrId;
     if (!ctx) { console.warn('[canon-chart] canvas not found'); return null; }
     if (opts.chartInstance) opts.chartInstance.destroy();
+
+    // Route scenario mode out to its own builder — keeps the tracker/calibration
+    // path clean and lets the Projection Engine carry its own dataset shape.
+    if (opts.mode === 'scenario') return renderScenarioChart(ctx, opts);
 
     const mode = opts.mode === 'calibration' ? 'calibration' : 'default';
     const s = buildSeries(opts.forecastData, opts.market);
