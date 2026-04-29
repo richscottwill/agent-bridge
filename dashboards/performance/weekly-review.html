@@ -392,6 +392,21 @@ body {
   border-radius: 8px;
   text-align: left;
 }
+/* WR-S2 (2026-04-29): scorecard + KPIs side-by-side grid. Collapses to
+   single column under 1100px. align-items: start prevents the shorter
+   column from stretching. .wr-kpi-row gets margin-bottom reset inside
+   the grid since the grid's gap handles spacing. */
+.wr-kpi-scorecard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--gap-lg);
+  align-items: start;
+  margin-bottom: var(--gap-lg);
+}
+@media (max-width: 1100px) {
+  .wr-kpi-scorecard-grid { grid-template-columns: 1fr; }
+}
+.wr-kpi-scorecard-grid .wr-kpi-row { margin-bottom: 0; }
 
 /* Grid of sec-panel cards — two-column on desktop, one-column mobile */
 .wr-grid {
@@ -791,15 +806,21 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
 </div>
 
 <!-- ============ TRACKER SECTION (chart + KPIs + weekly detail) ============ -->
+<!-- WR-S2 (2026-04-29): scorecard + KPIs side-by-side at wide viewport so
+     "where are we" (KPIs) and "how trustworthy is the forecast" (scorecard)
+     land in one glance. Previously stacked with a 152px gap (WR-P4).
+     Single column under 1100px. -->
 <div id="sec-kpis"></div>
-<!-- WR-D1 Forecast Hit Rate scorecard — renders above KPI row when
-     predictions_history has >=3 recent weeks of graded predictions. -->
-<div class="sec-panel wr-scorecard-panel" id="sec-scorecard" style="display:none;margin-bottom:var(--gap-lg)">
-  <h3 class="wr-scorecard-head"><span id="scorecardTitle">Forecast Hit Rate</span></h3>
-  <div class="wr-scorecard-row" id="scorecardRow"></div>
-  <div class="wr-scorecard-narrative" id="scorecardNarrative"></div>
+<div class="wr-kpi-scorecard-grid" id="sec-kpi-scorecard">
+  <div class="wr-kpi-row" id="kpiRow"></div>
+  <!-- WR-D1 Forecast Hit Rate scorecard — renders when predictions_history
+       has ≥3 recent weeks of graded predictions. -->
+  <div class="sec-panel wr-scorecard-panel" id="sec-scorecard" style="display:none">
+    <h3 class="wr-scorecard-head"><span id="scorecardTitle">Forecast Hit Rate</span></h3>
+    <div class="wr-scorecard-row" id="scorecardRow"></div>
+    <div class="wr-scorecard-narrative" id="scorecardNarrative"></div>
+  </div>
 </div>
-<div class="wr-kpi-row" id="kpiRow"></div>
 <!-- WR-D2 (2026-04-28): calibration promoted to its own first-class panel
      beside the trend panel. Both render on cold load; grid collapses to
      1-column at <900px viewport. The chartModeBtn toggle is gone —
