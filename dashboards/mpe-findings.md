@@ -520,6 +520,13 @@ cleanup first, then typography, then features, then deferred items last.
 - **Verification:** grep `font-size: 13px` in projection-design-system.css + projection.html now returns 0 hits. grep `var(--size-ui)` returns 14 hits across both files. grep `0.65em` returns 0. No visible change to hero number, meta captions, or any existing element — only the sub-pixel noise on `.hero-unit` is gone.
 - **Deferred from spec:** full 15 → 5 consolidation (renaming `--size-hero` → `--size-display` at 64px, `--size-section` → `--size-title` at 24px, `--size-body` → 16px confirmed, `--size-meta` 12 → 11). All visible resizes, blocked by the "like the look" constraint. Token namespace diverges slightly from the mockup's proposed names (`--size-ui` adopted, other proposed renames not applied).
 - **Blast radius:** projection-design-system.css (6 line changes + 1 comment + 1 new token line) and projection.html (8 inline-style line changes). No JS. No data. No chart encoding.
+- **Commit:** `5437006`
+
+### P5-6 · CI quality label + plan-in-range flag in hero context
+- **Source:** R19 #6 (HIGH)
+- **Status:** done
+- **Verification:** hero-context line for markets with bootstrap CI now carries (in order): the point estimate + driver sentence, the campaign-lifts note, the 90% range, a colored confidence-width label (`tight · high confidence` green / `moderate` yellow / `wide · low confidence` red), a plan-in-range phrase comparing OP2 annual_spend_target (period-scaled) to the CI band, and a contingency nudge suggesting a ±reserve band. Thresholds: width <20% of central = tight, 20-40% = moderate, ≥40% = wide. Plan position: <0.2 of range = low edge (overspend risk), >0.8 = high edge (underdelivery risk), else center. Outside the CI = plan-out with magnitude of gap.
+- **Blast radius:** `renderMarket` hero-context block in projection-app.js (textContent → innerHTML, thresholds inline). CSS adds `.conf-label`, `.plan-range`, `.contingency-nudge` children of `.hero-context`. No data / solver / chart changes.
 - **Commit:** <filled after commit>
 ---
 

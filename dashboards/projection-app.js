@@ -849,15 +849,68 @@
     // Round 13 P1-08: append 90% CI from bootstrap uncertainty so Kate sees
     // the plausible range right next to the point estimate, not buried in
     // the narrative panel. Unblocked by P1-01 Option C bootstrap ship.
+    //
+    // P5-6 (2026-04-28): turn the bare range into a signal by labeling its
+    // width (tight / moderate / wide) and flagging whether OP2 plan sits
+    // inside the 90% CI. Tiny per-centile comment on edge positions helps
+    // Kate read "we project above plan with high confidence" vs "we're
+    // probably above plan but the data supports plan too". Contingency
+    // nudge tail added so the reader always knows roughly how much they
+    // should hold in reserve if they commit to the point estimate.
     const uncertKpi = STATE.currentUncertainty;
+    let heroContextHtml = contextSent;
     if (uncertKpi && uncertKpi.credible_intervals) {
       const ciS = uncertKpi.credible_intervals.total_spend?.ci?.['90'];
       const ciR = uncertKpi.credible_intervals.total_regs?.ci?.['90'];
-      if (ciS && ciR) {
-        contextSent += ` 90% range: ${fmt$(ciS[0])}–${fmt$(ciS[1])} spend · ${fmtNum(ciR[0])}–${fmtNum(ciR[1])} regs.`;
+      const ctrS = uncertKpi.credible_intervals.total_spend?.central;
+      if (ciS && ciR && ctrS && ctrS > 0) {
+        heroContextHtml += ` 90% range: ${fmt$(ciS[0])}–${fmt$(ciS[1])} spend · ${fmtNum(ciR[0])}–${fmtNum(ciR[1])} regs.`;
+        // Width as fraction of central (total band / central)
+        const widthPct = (ciS[1] - ciS[0]) / ctrS;
+        let confLabel, confCls;
+        if (widthPct < 0.20)        { confLabel = 'tight · high confidence';    confCls = 'conf-high'; }
+        else if (widthPct < 0.40)   { confLabel = 'moderate';                   confCls = 'conf-medium'; }
+        else                        { confLabel = 'wide · low confidence';      confCls = 'conf-low'; }
+        heroContextHtml += ` <span class="conf-label ${confCls}">${confLabel}</span>`;
+        // Plan-in-range flag
+        const op2Annual = marketData.op2_targets?.annual_spend_target;
+        const periodShareKpi = t.annual_total_spend > 0 ? t.total_spend / t.annual_total_spend : 1.0;
+        const op2Scaled = op2Annual ? op2Annual * periodShareKpi : null;
+        if (op2Scaled && op2Scaled > 0) {
+          const [lo, hi] = ciS;
+          let planMsg, planCls;
+          if (op2Scaled < lo) {
+            const gap = lo - op2Scaled;
+            planMsg = `OP2 plan (${fmt$(op2Scaled)}) below 90% CI — projection meaningfully above plan by ${fmt$(gap)}.`;
+            planCls = 'plan-out';
+          } else if (op2Scaled > hi) {
+            const gap = op2Scaled - hi;
+            planMsg = `OP2 plan (${fmt$(op2Scaled)}) above 90% CI — projection meaningfully below plan by ${fmt$(gap)}.`;
+            planCls = 'plan-out';
+          } else {
+            const pos = (op2Scaled - lo) / (hi - lo);
+            if (pos < 0.2) {
+              planMsg = `OP2 plan (${fmt$(op2Scaled)}) at low edge of range — within 90% CI but projection signals overspend risk.`;
+              planCls = 'plan-edge';
+            } else if (pos > 0.8) {
+              planMsg = `OP2 plan (${fmt$(op2Scaled)}) at high edge of range — within 90% CI but projection signals underdelivery risk.`;
+              planCls = 'plan-edge';
+            } else {
+              planMsg = `OP2 plan (${fmt$(op2Scaled)}) comfortably within 90% CI.`;
+              planCls = 'plan-center';
+            }
+          }
+          heroContextHtml += ` <span class="plan-range ${planCls}">${planMsg}</span>`;
+        }
+        // Contingency nudge — delta from central to upper bound gives a
+        // plain symmetrical band if the reader wants to commit to central.
+        const contingency = ciS[1] - ctrS;
+        if (contingency > 0) {
+          heroContextHtml += ` <span class="contingency-nudge">If committing to the point estimate, hold ±${fmt$(contingency)} in reserve.</span>`;
+        }
       }
     }
-    document.getElementById('hero-context').textContent = contextSent;
+    document.getElementById('hero-context').innerHTML = heroContextHtml;
 
     // Secondary KPI strip — drop total-spend (it's the hero) and show complements
     document.getElementById('kpi-brand-regs').textContent = fmtNum(t.brand_regs);

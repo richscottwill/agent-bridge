@@ -138,6 +138,35 @@ html, body {
   line-height: 1.6;
 }
 
+/* P5-6 (2026-04-28): confidence-label + plan-in-range flag inline in the
+   hero context sentence. Kept muted so the point estimate stays primary;
+   color-coded just enough to signal that the CI width carries meaning. */
+.hero-context .conf-label {
+  font-weight: 600;
+  font-size: var(--size-ui);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin: 0 2px;
+  letter-spacing: 0.02em;
+}
+.hero-context .conf-label.conf-high   { background: #E6F7EE; color: #0C7A3D; }
+.hero-context .conf-label.conf-medium { background: #FFF4D6; color: #8A6200; }
+.hero-context .conf-label.conf-low    { background: #FEE2E2; color: var(--color-danger); }
+.hero-context .plan-range {
+  display: inline;
+  font-size: var(--size-ui);
+  margin-left: 2px;
+}
+.hero-context .plan-range.plan-out    { color: var(--color-danger); }
+.hero-context .plan-range.plan-edge   { color: var(--color-warning); }
+.hero-context .plan-range.plan-center { color: var(--color-success); }
+.hero-context .contingency-nudge {
+  display: block;
+  margin-top: 4px;
+  font-size: var(--size-ui);
+  color: var(--color-text-subtle);
+}
+
 .hero-kpi-strip {
   display: flex;
   justify-content: center;
