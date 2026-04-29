@@ -475,7 +475,7 @@ body {
         <thead><tr>
           <th>Week</th>
           <th class="r">Regs</th>
-          <th class="r">Pred</th>
+          <th class="r" title="Calibration delta — actual vs predicted (past weeks only)">vs Pred</th>
           <th class="r">OP2</th>
           <th class="r">Cost</th>
           <th class="r">CPA</th>
@@ -897,8 +897,18 @@ function renderTable() {
     const rowClsAttr = rowCls.length ? ' class="' + rowCls.join(' ') + '"' : '';
 
     const predLabel = isFuture ? ' <span class="pred-lbl">pred</span>' : '';
+    // WR-C4: Regs column carries actual (past) or pred_regs (future, amber).
+    // Pred column repurposed as "vs Pred" — past rows show calibration delta
+    // (actual − predicted as %); future rows show em-dash since there's
+    // nothing to calibrate against yet.
     const regsVal = isActual ? fmt(w.regs, 'regs') : (w.pred_regs ? `<span class="pred-val">${fmt(w.pred_regs, 'regs')}</span>` : '\u2014');
-    const predVal = w.pred_regs ? `<span class="pred-val">${fmt(w.pred_regs, 'regs')}</span>` : '\u2014';
+    const vsPredRaw = (isActual && w.pred_regs && w.regs)
+      ? (w.regs - w.pred_regs) / w.pred_regs * 100
+      : null;
+    const vsPredCls = vsPredRaw == null ? 'warn' : cls(vsPredRaw, false);
+    const vsPredVal = vsPredRaw != null
+      ? `<span class="wr-delta ${vsPredCls}">${vsPredRaw > 0 ? '+' : ''}${vsPredRaw.toFixed(1)}%</span>`
+      : '\u2014';
     const op2Val = w.op2_regs ? fmt(w.op2_regs, 'regs') : '\u2014';
     const costVal = isActual && w.cost ? fmt(w.cost, 'cost') : (w.pred_cost ? `<span class="pred-val">${fmt(w.pred_cost, 'cost')}</span>` : '\u2014');
     const cpaVal = isActual && w.cpa ? fmt(w.cpa, 'cpa') : (w.pred_cpa ? `<span class="pred-val">${fmt(w.pred_cpa, 'cpa')}</span>` : '\u2014');
@@ -906,7 +916,7 @@ function renderTable() {
     return `<tr${rowClsAttr}>
       <td>${w.week}${predLabel}</td>
       <td class="r">${regsVal}</td>
-      <td class="r">${predVal}</td>
+      <td class="r">${vsPredVal}</td>
       <td class="r" style="color:var(--color-text-subtle)">${op2Val}</td>
       <td class="r">${costVal}</td>
       <td class="r">${cpaVal}</td>

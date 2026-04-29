@@ -69,9 +69,11 @@ Compounding-effect ordering so each commit's ground is stable before the next.
 
 ### WR-C3 · Callout headline de-duplication
 - **Source:** wbr #3 (MED)
-- **Status:** open
+- **Status:** done
 - **Finding:** Callout narrative renders `full_callout` which starts with the same text as `headline`. H3 says "W17 — US" (generic scaffolding) while headline is the real one-liner.
-- **Fix:** H3 carries the headline. Meta line above gives market/week/period. Body strips headline prefix from `full_callout`.
+- **Fix:** Replaced h3's generic "{week} — {market}" content with the headline text. Meta line above h3 shows `MARKET · WEEK · PERIOD` in uppercase labeling style. Body strips the headline prefix from `full_callout` so the narrative starts at the detail paragraph.
+- **Verification:** On US/W17, h3 reads the one-liner ("US drove 9.4K registrations (+6% WoW)…"). Meta line reads "US · W17 · Apr 19–25". Narrative body starts from paragraph 2.
+- **Commit:** <filled after commit>
 
 ### WR-C4 · Regs/Pred column collapse → vs-Pred delta
 - **Source:** wbr #2 (HIGH)
