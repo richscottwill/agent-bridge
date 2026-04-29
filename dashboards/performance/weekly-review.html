@@ -288,6 +288,38 @@ body {
   width: 100% !important;
   height: 100% !important;
 }
+/* WR-D2 (2026-04-28): side-by-side trend + calibration panels. Collapses
+   to single column on narrow viewports so neither chart squishes. */
+.wr-chart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-lg);
+  margin-bottom: var(--gap-lg);
+}
+@media (max-width: 1100px) { .wr-chart-grid { grid-template-columns: 1fr; } }
+.wr-calib-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wr-chart-axis-toggle {
+  display: inline-flex;
+  border: 1px solid var(--color-panel-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.wr-chart-axis-toggle .wr-tab {
+  border-radius: 0;
+  border: none;
+  border-left: 1px solid var(--color-panel-border);
+  padding: 3px 10px;
+  font-size: var(--size-meta);
+}
+.wr-chart-axis-toggle .wr-tab:first-child { border-left: none; }
+.wr-chart-axis-toggle .wr-tab.active {
+  background: var(--color-brand);
+  color: var(--color-text-on-brand);
+}
 
 /* Table styling — inherits sec-panel parent, adds column-specific rules */
 .wr-weekly-table {
@@ -525,14 +557,30 @@ body {
   <div class="wr-scorecard-narrative" id="scorecardNarrative"></div>
 </div>
 <div class="wr-kpi-row" id="kpiRow"></div>
-<div class="wr-grid">
-  <div class="sec-panel wr-grid-full" id="sec-trend">
-    <h3 style="display:flex;justify-content:space-between;align-items:center">
-      <span>Weekly Trend &mdash; highlighting selected week</span>
-      <button id="chartModeBtn" class="wr-tab wr-chart-mode-btn">Show calibration detail</button>
-    </h3>
-    <div class="wr-chart-wrap"><canvas id="mainChart"></canvas></div>
+<!-- WR-D2 (2026-04-28): calibration promoted to its own first-class panel
+     beside the trend panel. Both render on cold load; grid collapses to
+     1-column at <900px viewport. The chartModeBtn toggle is gone —
+     calibration is no longer hidden behind a click. The calibration
+     panel carries its own axis filter (Regs / Spend / Both) defaulting
+     to Regs only, since 7 visible lines exceeded the 3-line budget. -->
+<div class="wr-chart-grid" id="sec-charts">
+  <div class="sec-panel" id="sec-trend">
+    <h3><span>What happened — actuals vs OP2</span></h3>
+    <div class="wr-chart-wrap"><canvas id="trendChart"></canvas></div>
   </div>
+  <div class="sec-panel" id="sec-calibration">
+    <h3 class="wr-calib-head">
+      <span>How did we do — forecast vs actual</span>
+      <div class="wr-chart-axis-toggle" id="calibAxisToggle" role="group" aria-label="Calibration axis filter">
+        <button class="wr-tab wr-chart-mode-btn active" data-axis="regs">Regs</button>
+        <button class="wr-tab wr-chart-mode-btn" data-axis="spend">Spend</button>
+        <button class="wr-tab wr-chart-mode-btn" data-axis="both">Both</button>
+      </div>
+    </h3>
+    <div class="wr-chart-wrap"><canvas id="calibrationChart"></canvas></div>
+  </div>
+</div>
+<div class="wr-grid">
   <div class="sec-panel wr-grid-full" id="sec-detail">
     <h3>Weekly Detail</h3>
     <div class="wr-table-scroll">
@@ -587,6 +635,11 @@ function defaultMetricForMarket(m) {
   return metricByMarket[m] || (['JP', 'AU'].includes(m) ? 'cost' : 'regs');
 }
 let curMetric = 'regs';  // reseeded from the map inside init() after curMarket resolves
+let trendChart = null;      // WR-D2: separate instance for the trend panel
+let calibrationChart = null; // WR-D2: separate instance for the calibration panel
+let calibrationAxis = 'regs';  // WR-D2: axis filter for calibration (regs / spend / both)
+// Legacy single-chart ref retained so any external scripts referencing
+// `chart` don't throw; mirrors trendChart.
 let chart = null;
 let chartMode = 'default';
 
@@ -1124,20 +1177,35 @@ function renderKPIs() {
 
 function renderChart() {
   if (!FORECAST) return;
-  chart = CanonChart.render('mainChart', {
+  // WR-D2: render both charts on cold load — trend (default) + calibration.
+  trendChart = CanonChart.render('trendChart', {
     forecastData: FORECAST,
     market: curMarket,
-    mode: chartMode,
+    mode: 'default',
     highlightWeek: curWeek,
-    chartInstance: chart,
+    chartInstance: trendChart,
   });
-  const btn = document.getElementById('chartModeBtn');
-  if (btn) {
-    btn.textContent = chartMode === 'calibration' ? 'Show default view' : 'Show calibration detail';
-    btn.onclick = () => {
-      chartMode = chartMode === 'calibration' ? 'default' : 'calibration';
-      renderChart();
-    };
+  chart = trendChart;  // keep legacy ref in sync
+  calibrationChart = CanonChart.render('calibrationChart', {
+    forecastData: FORECAST,
+    market: curMarket,
+    mode: 'calibration',
+    highlightWeek: curWeek,
+    chartInstance: calibrationChart,
+    axisFilter: calibrationAxis,   // WR-D2: regs / spend / both
+  });
+  // Axis toggle wiring — only attach once, idempotent per render.
+  const toggle = document.getElementById('calibAxisToggle');
+  if (toggle && !toggle.dataset.wired) {
+    toggle.dataset.wired = '1';
+    toggle.querySelectorAll('.wr-tab').forEach(b => {
+      b.onclick = () => {
+        calibrationAxis = b.dataset.axis;
+        toggle.querySelectorAll('.wr-tab').forEach(x =>
+          x.classList.toggle('active', x.dataset.axis === calibrationAxis));
+        renderChart();
+      };
+    });
   }
 }
 

@@ -204,75 +204,78 @@
     ];
   }
 
-  function buildCalibrationDatasets(s) {
+  function buildCalibrationDatasets(s, axisFilter) {
+    // WR-D2 (2026-04-28): optional axisFilter = 'regs' | 'spend' | 'both'.
+    // Default calibration view on weekly-review used 7+ visible lines which
+    // exceeded the 3-line budget — filter lets the panel default to regs-only
+    // and the user opt into spend-only or both via the panel's axis toggle.
+    const axis = axisFilter === 'spend' || axisFilter === 'both' || axisFilter === 'regs' ? axisFilter : 'both';
     // Calibration view shows predictions at ALL weeks (not just future), so
     // the viewer can see actual vs each-of-two-predictions side by side.
-    return [
-      // CI band across all weeks with a latest CI (wider view of uncertainty)
-      {
-        label: '_ciHi', data: s.ciHiAll,
-        borderColor: 'transparent', backgroundColor: ORANGE_SOFT,
-        borderWidth: 0, pointRadius: 0, fill: '+1', tension: 0.25,
-        yAxisID: 'y', spanGaps: true, _hidden: true,
-      },
-      {
-        label: '_ciLo', data: s.ciLoAll,
-        borderColor: 'transparent', backgroundColor: ORANGE_SOFT,
-        borderWidth: 0, pointRadius: 0, fill: false, tension: 0.25,
-        yAxisID: 'y', spanGaps: true, _hidden: true,
-      },
-      // OP2
-      {
-        label: 'OP2 target', data: s.op2Regs,
-        borderColor: GRAY, backgroundColor: 'transparent',
-        borderWidth: 1.5, borderDash: [3, 3], pointRadius: 0, tension: 0,
-        yAxisID: 'y', spanGaps: true,
-      },
-      // Regs actual
-      {
+    const sets = [];
+    // CI band always present — uncertainty envelope is part of the grade.
+    sets.push({
+      label: '_ciHi', data: s.ciHiAll,
+      borderColor: 'transparent', backgroundColor: ORANGE_SOFT,
+      borderWidth: 0, pointRadius: 0, fill: '+1', tension: 0.25,
+      yAxisID: 'y', spanGaps: true, _hidden: true,
+    });
+    sets.push({
+      label: '_ciLo', data: s.ciLoAll,
+      borderColor: 'transparent', backgroundColor: ORANGE_SOFT,
+      borderWidth: 0, pointRadius: 0, fill: false, tension: 0.25,
+      yAxisID: 'y', spanGaps: true, _hidden: true,
+    });
+    // OP2 always present.
+    sets.push({
+      label: 'OP2 target', data: s.op2Regs,
+      borderColor: GRAY, backgroundColor: 'transparent',
+      borderWidth: 1.5, borderDash: [3, 3], pointRadius: 0, tension: 0,
+      yAxisID: 'y', spanGaps: true,
+    });
+    if (axis === 'regs' || axis === 'both') {
+      sets.push({
         label: 'Regs (actual)', data: s.regsActual,
         borderColor: ORANGE, backgroundColor: ORANGE,
         borderWidth: 2.5, pointRadius: 3, pointBackgroundColor: ORANGE,
         tension: 0.25, yAxisID: 'y', spanGaps: false,
-      },
-      // Regs first prediction (thin solid + square markers)
-      {
+      });
+      sets.push({
         label: 'Regs (first pred)', data: s.regsFirst,
         borderColor: ORANGE, backgroundColor: 'transparent',
         borderWidth: 1, pointRadius: 3, pointStyle: 'rect',
         pointBackgroundColor: 'transparent', pointBorderColor: ORANGE,
         tension: 0.25, yAxisID: 'y', spanGaps: true,
-      },
-      // Regs latest prediction (dashed orange, all weeks)
-      {
+      });
+      sets.push({
         label: 'Regs (latest pred)', data: s.regsLatestAll,
         borderColor: ORANGE, backgroundColor: 'transparent',
         borderWidth: 2, borderDash: [6, 4], pointRadius: 0, tension: 0.25,
         yAxisID: 'y', spanGaps: true,
-      },
-      // Spend actual
-      {
+      });
+    }
+    if (axis === 'spend' || axis === 'both') {
+      sets.push({
         label: 'Spend (actual, $K)', data: s.spendActual,
         borderColor: BLUE, backgroundColor: BLUE,
         borderWidth: 2.5, pointRadius: 3, pointBackgroundColor: BLUE,
         tension: 0.25, yAxisID: 'y1', spanGaps: false,
-      },
-      // Spend first prediction
-      {
+      });
+      sets.push({
         label: 'Spend (first pred, $K)', data: s.spendFirst,
         borderColor: BLUE, backgroundColor: 'transparent',
         borderWidth: 1, pointRadius: 3, pointStyle: 'rect',
         pointBackgroundColor: 'transparent', pointBorderColor: BLUE,
         tension: 0.25, yAxisID: 'y1', spanGaps: true,
-      },
-      // Spend latest prediction
-      {
+      });
+      sets.push(s.spendLatestSet || {
         label: 'Spend (latest pred, $K)', data: s.spendLatestAll,
         borderColor: BLUE, backgroundColor: 'transparent',
         borderWidth: 2, borderDash: [6, 4], pointRadius: 0, tension: 0.25,
         yAxisID: 'y1', spanGaps: true,
-      },
-    ];
+      });
+    }
+    return sets;
   }
 
   // ========================================================================
@@ -679,7 +682,7 @@
     const mode = opts.mode === 'calibration' ? 'calibration' : 'default';
     const s = buildSeries(opts.forecastData, opts.market);
     const datasets = mode === 'calibration'
-      ? buildCalibrationDatasets(s) : buildDefaultDatasets(s);
+      ? buildCalibrationDatasets(s, opts.axisFilter) : buildDefaultDatasets(s);
 
     const chart = new Chart(ctx, {
       type: 'line',
