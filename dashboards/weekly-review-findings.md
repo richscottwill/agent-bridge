@@ -324,3 +324,35 @@ Source files:
 - **Fix:** Remove `max-height: 520px; overflow: auto` on `.wr-table-scroll`. Once WR-S1 wraps in `<details>`, the table flows inline at full height when expanded.
 
 ---
+
+---
+
+## Sprint 1+2 complete (2026-04-29)
+
+All 17 R2-consolidated findings shipped. Mapping:
+
+| Finding | Status | Commit |
+|---|---|---|
+| WR-B1-1 three-Q rollup-aware | done | `de341a2` |
+| WR-B1-2 variance rollup aggregate | done | `988e402` |
+| WR-B1-3 section-freshness path | done | `2ee99bc` |
+| WR-P3 .sec-panel padding shared | done | `d368f4d` |
+| WR-P4 scorecard/KPI 152px gap | done (via WR-S2) | `552bbdb` |
+| WR-P5 TOC order | done | `7dc8b3e` |
+| WR-P6 callout h3 → p | done | `80deb63` |
+| WR-P7 heading hierarchy | done (via P6 + landmarks) | `80deb63` |
+| WR-P8 semantic landmarks | done | `80deb63` |
+| WR-P9 canvas role/aria | done | `80deb63` |
+| WR-P10 week select aria-label | done | `80deb63` |
+| WR-P11 thread strip role/aria | done | `80deb63` |
+| WR-P12 calib H3/toggle split | done | `80deb63` |
+| WR-S1 progressive disclosure | done | `d72c00e` |
+| WR-S2 KPI+scorecard side-by-side | done | `552bbdb` |
+| WR-S3 rollup channel cards | done | `ecef1c8` |
+| WR-S4 table scroll-within-scroll | done (pair of WR-S1) | `d72c00e` |
+
+Sprint 3 (WR-A7 through WR-C3 — 6 R2 research ideas) deferred until Richard
+greenlights. Three items (A8/A9/B6) remain pipeline-gated per prior audit.
+
+Probe-flagged follow-up that slipped through R1 typography sweep:
+commit `2e14a8d` swapped `.wr-score-value` 24px literal to `var(--size-section)`.
