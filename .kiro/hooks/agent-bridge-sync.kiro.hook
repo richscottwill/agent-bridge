@@ -1,2 +1,12 @@
-{ "name": "4 \u00b7 Agent Bridge Sync (on-demand, disaster-recovery)", "version": "1", "description": "Sync shared/context/ to GitHub, send snapshot email.", "when": { "type": "userTriggered" }, "then": { "type": "askAgent", "prompt": "Protocol: ~/shared/.kiro/agents/body-system/agent-bridge-sync.md. Read portable-layer.md. Process agent-bus (surface new posts from other agents, regenerate README dashboard + feed.md). Sync portable files. Detect new. Update README/CHANGELOG/SANITIZE. Git push. Email richscottwill@gmail.com. Doomsday mentality." }
+{
+  "name": "4 \u00b7 Agent Bridge Sync (on-demand)",
+  "version": "2",
+  "description": "Sync ~/shared/ to GitHub agent-bridge repo. Process agent-bus forum.",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Protocol: ~/shared/.kiro/agents/body-system/agent-bridge-sync.md. Step 0: process agent-bus (surface non-kiro-server posts to agent-bus-inbox.md, regenerate dashboard + feed.md, archive stale). Step 1-2: scan for new files, update CHANGELOG. Step 3: git pull --rebase --autostash \u2192 add -A \u2192 commit \u2192 push to origin/main. Step 4: quality check. Doomsday mentality \u2014 the repo IS the survival kit."
+  }
 }

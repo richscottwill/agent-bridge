@@ -81,25 +81,7 @@ Corrected finding (initial scan mis-routed to the deprecated `Kiro-Drive/` path)
 
 ---
 
-## Topic watchlist proposals
-
-**ADD** `op1-forecast-flat-budget` — emerging from `signals.signal_tracker` with strength 2.0 in om-team (4/29: "OP1 forecast: flat YoY budget. Break out Small SMB. Reforecast RoY 2026."). Proposed keywords: `OP1 forecast, flat YoY budget, SMB breakout, RoY reforecast, 2027 OP1`. Priority: P2. Level: operational. Overlaps with `mx-budget-ieccp` but the OP1 framing is the scope OP1/OP2 planning cycles hit — worth its own slot for the planning-cycle window. Review: 2026-07-31.
-
-**ADD or FOLD INTO EXISTING** `pam-budget-availability` — strength 3.6, 10d unanswered in `ab-paid-search-app`, and MX-scoped ("No offsite resolution confirmed"). Could extend `mx-budget-ieccp` keywords with `PAM availability, PAM bandwidth, PAM offsite` rather than creating a new topic. Prefer fold-in.
-
-**DEMOTE** `competitor-intel` (P3 → monitoring). 0 YTD hits across 476 emails + 830 Slack messages + 15 Hedy meetings. Current review date 2026-10-31 — premature to sunset, but demotion to `monitoring` is warranted. If it still shows 0 hits at 10/31 review, sunset.
-
-**DEMOTE** `new-markets` (monitoring, already). Already in monitoring — no action required, but 0 YTD hits confirm the placement is correct. Next review 2026-10-31 holds.
-
-**PROMOTE consideration** — `kiro-agentspaces-tooling` has 115 YTD hits (113 Slack, 2 email). Currently P2. Hit volume justifies P1 on the numbers, but most hits are external community Q&A in `agentspaces-interest` / `amazon-builder-genai-power-users`, not signals requiring Richard's action. Recommend staying P2; the volume is noise-dominated community traffic, not priority-action signal. The Sentry's existing surfacing (3 hits 4/28) is appropriate.
-
-**KEYWORD TUNING** for `mx-registration-funnel` — only 2 YTD hits against a known-active workstream (Cristobal 4/24 launch). Current keywords miss the `Cristobal`, `CTC`, and `MV%` (already in) lift. Consider adding: `Cristobal, Cris launch, AVP shift, verification uplift`.
-
-_Review and apply in `~/shared/context/body/topic-watchlist.md` — proposals do not self-execute._
-
-_Full proposal set written to `~/shared/context/intake/topic-sentry-proposals.md`._
-
----
+## Topic watchlist proposals **ADD** `op1-forecast-flat-budget` — emerging from `signals.signal_tracker` with strength 2.0 in om-team (4/29: "OP1 forecast: flat YoY budget. Break out Small SMB. Reforecast RoY 2026."). Proposed keywords: `OP1 forecast, flat YoY budget, SMB breakout, RoY reforecast, 2027 OP1`. Priority: P2. Level: operational. Overlaps with `mx-budget-ieccp` but the OP1 framing is the scope OP1/OP2 planning cycles hit — worth its own slot for the planning-cycle window. Review: 2026-07-31. **ADD or FOLD INTO EXISTING** `pam-budget-availability` — strength 3.6, 10d unanswered in `ab-paid-search-app`, and MX-scoped ("No offsite resolution confirmed"). Could extend `mx-budget-ieccp` keywords with `PAM availability, PAM bandwidth, PAM offsite` than creating a new topic. Prefer fold-in. **DEMOTE** `competitor-intel` (P3 → monitoring). 0 YTD hits across 476 emails + 830 Slack messages + 15 Hedy meetings. Current review date 2026-10-31 — premature to sunset, but demotion to `monitoring` is warranted. If it still shows 0 hits at 10/31 review, sunset. **DEMOTE** `new-markets` (monitoring, already). Already in monitoring — no action required, but 0 YTD hits confirm the placement is correct. Next review 2026-10-31 holds. **PROMOTE consideration** — `kiro-agentspaces-tooling` has 115 YTD hits (113 Slack, 2 email). Currently P2. Hit volume justifies P1 on the numbers, but most hits are external community Q&A in `agentspaces-interest` / `amazon-builder-genai-power-users`, not signals requiring Richard's action. Recommend staying P2; the volume is noise-dominated community traffic, not priority-action signal. The Sentry's existing surfacing (3 hits 4/28) is appropriate. **KEYWORD TUNING** for `mx-registration-funnel` — only 2 YTD hits against a known-active workstream (Cristobal 4/24 launch). Current keywords miss the `Cristobal`, `CTC`, and `MV%` (already in) lift. Consider adding: `Cristobal, Cris launch, AVP shift, verification uplift`. _Review and apply in `~/shared/context/body/topic-watchlist.md` — proposals do not self-execute._ _Full proposal set written to `~/shared/context/intake/topic-sentry-proposals.md`._ ---
 
 ## Weekly aggregate counters (YTD with WoW note)
 

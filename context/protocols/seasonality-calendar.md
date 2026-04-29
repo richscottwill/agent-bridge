@@ -2,7 +2,6 @@
 
 Used by the state file engine (Step 2E) and callout pipeline to automatically flag holiday impacts in weekly narratives. When a reporting week overlaps with a holiday period, the agent MUST mention it in the State of Business section and discount the WoW/YoY comparison accordingly.
 
-## How to Use
 
 1. Before generating any weekly narrative, check this calendar for the reporting week
 2. If a holiday falls within the week, lead the narrative with the holiday context

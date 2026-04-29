@@ -493,3 +493,33 @@ run77_exp2	richard-style-mbr	Common Failures	MERGE	output_quality	814	757	1.0	1.
 run77_exp3	roster	Cross-Functional Partners	RESTRUCTURE	information_retrieval	2197	2211	1.0	1.0	1.0	0.0	false	KEEP	120
 run_W18_1777478629	hook-agent-bridge-sync	preamble	REWORD	information_retrieval	61	61	0	0.767	0.767	0.767	0.000	19	KEEP	False
 run_W18_1777478629	am-frontend	Slack Brief	REMOVE	information_retrieval	3996	3942	-54	0.000	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	seasonality-calendar	Seasonality Calendar — PS Markets (2026)	MERGE	information_retrieval	2392	2388	-4	0.955	0.455	0.936	0.500	40	KEEP	False
+run_W18_1777478629	hook-sharepoint-sync	preamble	SPLIT	information_retrieval	142	146	4	0.900	0.900	0.900	0.000	37	KEEP	False
+run_W18_1777478629	hook-harmony-forecast-deploy	preamble	COMPRESS	information_retrieval	63	4	-59	0.200	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	duckdb-schema-verification	Step 3: Confirm Tables Exist	ADD	information_retrieval	377	409	32	0.400	0.000	0.000	-1.000	17	REVERT	True
+run_W18_1777478629	asana-sync-protocol	Comment-Only Notifications	MERGE	information_retrieval	1043	1039	-4	0.733	0.933	0.173	-0.200	27	REVERT	False
+run_W18_1777478629	am-auto	Signal-to-Routine Mapping	REMOVE	information_retrieval	2513	2459	-54	0.000	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	device	Slack Context Ingestion & Open Items (via AM-1 + p	MERGE	information_retrieval	2638	2633	-5	0.022	0.000	0.000	-1.000	8	REVERT	True
+run_W18_1777478629	asana-sync-protocol	Duplicate Prevention	REMOVE	information_retrieval	1043	973	-70	0.000	0.000	0.000	-1.000	5	REVERT	True
+run_W18_1777478629	script-slack-ingest	preamble	REMOVE	information_retrieval	1426	0	-1426	0.000	0.000	0.000	-1.000	3	REVERT	True
+run_W18_1777478629	hook-steering-integrity	preamble	REMOVE	information_retrieval	132	0	-132	0.000	0.000	0.000	-1.000	3	REVERT	True
+run_W18_1777478629	topic-watchlist	polaris-brand-lp	REMOVE	information_retrieval	2272	2165	-107	0.333	0.000	0.000	-1.000	20	REVERT	True
+run_W18_1777478629	wiki-google-ads	Quality Checklist (per campaign)	RESTRUCTURE	information_retrieval	630	630	0	0.667	0.667	0.667	0.000	33	KEEP	False
+run_W18_1777478629	hook-wbr-callouts	preamble	COMPRESS	information_retrieval	993	981	-12	0.180	0.000	0.000	-1.000	30	REVERT	True
+run_W18_1777478629	body	Task Routing (load only what you need)	REMOVE	information_retrieval	1057	928	-129	0.975	1.000	0.414	-0.025	28	REVERT	False
+run_W18_1777478629	nervous-system	Loop 4: Delegation Verification	MERGE	information_retrieval	1824	1819	-5	0.400	0.000	0.000	-1.000	7	REVERT	True
+run_W18_1777478629	brain	All Decisions	REMOVE	information_retrieval	1738	1522	-216	0.040	1.000	0.040	-0.960	24	REVERT	False
+run_W18_1777478629	amazon-politics	Headcount Thresholds (Director+)	REMOVE	information_retrieval	3180	3103	-77	0.000	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	eod-meeting-sync	Meeting-to-Task Automation	REMOVE	information_retrieval	289	173	-116	0.100	0.000	0.000	-1.000	5	REVERT	True
+run_W18_1777478629	asana-guardrails	Level 5 — Agentic Orchestration	REMOVE	information_retrieval	645	597	-48	0.000	0.000	0.000	-1.000	9	REVERT	True
+run_W18_1777478629	eyes	Research Foundation (SP Study, Aug 2025)	REMOVE	information_retrieval	1423	1365	-58	0.000	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	hook-am-backend	preamble	COMPRESS	information_retrieval	106	53	-53	0.000	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	am-backend-parallel	Subagent C: Email + Calendar Ingestion	RESTRUCTURE	information_retrieval	4545	4545	0	0.000	0.000	0.000	-1.000	11	REVERT	True
+run_W18_1777478629	am-backend-parallel	ORCHESTRATOR-OWNED: Asana Sync (B1) + Activity Mon	ADD	information_retrieval	4545	4580	35	0.000	0.000	0.000	-1.000	3	REVERT	True
+run_W18_1777478629	broad-sweep-2026-W18	Topic watchlist proposals	REWORD	information_retrieval	1750	1749	-1	0.936	0.864	0.841	0.072	56	KEEP	False
+run_W18_1777478629	nervous-system	Loop 3: Pattern Trajectory	REMOVE	information_retrieval	1824	1698	-126	0.143	0.000	0.000	-1.000	8	REVERT	True
+run_W18_1777478629	hook-organ-change-detector	preamble	ADD	information_retrieval	97	125	28	0.800	0.800	0.752	0.000	32	KEEP	False
+run_W18_1777478629	asana-activity-monitor-protocol	Purpose	REMOVE	information_retrieval	818	781	-37	0.147	0.000	0.000	-1.000	9	REVERT	True
+run_W18_1777478629	seasonality-calendar	CA — Canada	MERGE	information_retrieval	2388	2386	-2	0.944	0.987	1.000	-0.043	55	REVERT	False
+run_W18_1777478629	am-auto	Phase 6.5: SharePoint Durability Sync	ADD	information_retrieval	2513	2545	32	0.000	0.000	0.000	-1.000	5	REVERT	True
+run_W18_1777478629	topic-sentry	<topic-name> (N hits)	REMOVE	information_retrieval	1198	1159	-39	0.000	0.000	0.000	-1.000	3	REVERT	True

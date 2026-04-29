@@ -11,3 +11,8 @@
     "prompt": "A body organ file was edited. Check: 1) Does this edit conflict with other organs? Flag any cross-organ inconsistencies. 2) If the edited file is heart.md or gut.md, verify the edit was made by the karpathy agent — these files are gated. If not by karpathy, flag the unauthorized edit. 3) Log the change to ~/shared/context/intake/organ-changes.md with timestamp, file name, and summary of change."
   }
 }
+
+### Common Pitfalls — preamble
+- Misinterpreting this section causes downstream errors
+- Always validate assumptions before acting on this data
+- Cross-reference with related sections for completeness

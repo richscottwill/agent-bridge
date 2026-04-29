@@ -77,7 +77,6 @@ The key rule: broad match ONLY with OCI. Without algorithmic bidding, broad matc
 - Extensions: callouts, structured snippets, location (where applicable)
 
 ## Quality Checklist (per campaign)
-
 - [ ] Conversion tracking verified
 - [ ] Negative keyword list applied
 - [ ] Ad copy reflects SP study messaging (not bulk/wholesale)
@@ -85,6 +84,7 @@ The key rule: broad match ONLY with OCI. Without algorithmic bidding, broad matc
 - [ ] Reftags properly configured
 - [ ] Budget not limited (check daily)
 - [ ] Bid strategy appropriate for campaign type
+
 
 
 ## Sources
