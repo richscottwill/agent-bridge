@@ -267,7 +267,7 @@ body {
   border-bottom-color: rgba(0, 102, 204, 0.15);
 }
 .wr-weekly-table .pred-val { color: #B05A00; }   /* muted orange for predictions */
-.wr-weekly-table .pred-lbl { color: #B05A00; font-size: 10px; margin-left: 2px; }
+.wr-weekly-table .pred-lbl { color: #B05A00; font-size: var(--size-meta); margin-left: 2px; }
 .wr-weekly-table .future-row td { opacity: 0.55; }
 
 /* Brand/NB detail table — reused in channel cards */
@@ -323,7 +323,7 @@ body {
 }
 .wr-list li:last-child { border-bottom: none; }
 .wr-list li::before { content: "\2013"; color: var(--color-text-subtle); margin-right: 8px; }
-.wr-list li.important::before { content: "\25CF"; color: var(--color-brand); font-size: 9px; }
+.wr-list li.important::before { content: "\25CF"; color: var(--color-brand); font-size: var(--size-meta); }
 
 /* Stakeholder rows */
 .wr-stake-row {
