@@ -147,6 +147,12 @@ If both local and SharePoint have been modified since last sync:
 
 ---
 
+
+### Common Pitfalls — Conflict Resolution
+- Misinterpreting this section causes downstream errors
+- Always validate assumptions before acting on this data
+- Cross-reference with related sections for completeness
+
 ## Error Handling
 
 - SharePoint write fails → log warning to DuckDB `workflow_executions`, continue. Local files are source of truth.

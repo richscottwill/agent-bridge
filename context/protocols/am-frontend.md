@@ -24,16 +24,12 @@ The agent DOES work, not just proposes it. For every task touched during AM-Fron
 7. **Tell Richard what you did** — post a Slack DM summary listing all work done, drafts created, tasks enriched, and the ordered list of smallest next actions.
 
 ## Draft Safety Rule
-
-ALL email drafts MUST follow this rule — no exceptions:
 - **To:** prichwil@amazon.com ONLY
 - **CC/BCC:** empty
 - **Subject prefix:** "DRAFT — " followed by the intended subject
 - **Body top:** Bold line stating intended recipients: "INTENDED RECIPIENTS: To: [email] | CC: [email, email]"
 - **Never put real recipients in To/CC/BCC fields.** Richard reviews and re-addresses manually before sending.
-
 ---
-
 ## Context Load
 body.md, spine.md, org-chart.md, rw-trainer.md, rw-task-prioritization.md, brain.md, eyes.md, device.md, gut.md, rw-tracker.md, hands.md, amcc.md, memory.md, richard-writing-style.md, asana-command-center.md.
 

@@ -523,3 +523,20 @@ run_W18_1777478629	asana-activity-monitor-protocol	Purpose	REMOVE	information_re
 run_W18_1777478629	seasonality-calendar	CA — Canada	MERGE	information_retrieval	2388	2386	-2	0.944	0.987	1.000	-0.043	55	REVERT	False
 run_W18_1777478629	am-auto	Phase 6.5: SharePoint Durability Sync	ADD	information_retrieval	2513	2545	32	0.000	0.000	0.000	-1.000	5	REVERT	True
 run_W18_1777478629	topic-sentry	<topic-name> (N hits)	REMOVE	information_retrieval	1198	1159	-39	0.000	0.000	0.000	-1.000	3	REVERT	True
+run_W18_1777478629	long-term-goals	Level 2: Drive & Communicate Worldwide Testing	COMPRESS	information_retrieval	445	445	0	1.000	1.000	1.000	0.000	31	KEEP	False
+run_W18_1777478629	duckdb-schema-verification	Quick Verification Query (copy-paste via execute_q	REWORD	information_retrieval	377	377	0	0.486	0.000	0.000	-1.000	17	REVERT	True
+run_W18_1777478629	sharepoint-durability-sync	Conflict Resolution	ADD	information_retrieval	1103	1132	29	1.000	1.000	1.000	0.000	18	KEEP	False
+run_W18_1777478629	brain	Execution & Operations	COMPRESS	information_retrieval	1738	1738	0	0.695	0.705	0.674	-0.011	33	REVERT	False
+run_W18_1777478629	hook-steering-integrity	preamble	COMPRESS	information_retrieval	132	101	-31	0.500	0.800	0.200	-0.300	36	REVERT	False
+run_W18_1777478629	memory	Caroline Miller (carolimy) — Product Marketing Man	REMOVE	information_retrieval	2463	2401	-62	0.036	0.036	0.036	0.000	25	REVERT	False
+run_W18_1777478629	am-frontend	Draft Safety Rule	COMPRESS	information_retrieval	3996	3986	-10	0.881	0.881	0.852	0.000	20	KEEP	False
+run_W18_1777478629	eod-meeting-sync	Update Organs	COMPRESS	information_retrieval	289	289	0	1.000	1.000	1.000	0.000	19	KEEP	False
+run_W18_1777478629	hook-state-file-constraints-sync	preamble	COMPRESS	information_retrieval	199	151	-48	0.278	0.000	0.000	-1.000	15	REVERT	True
+run_W18_1777478629	slack-history-backfill	Slack History Backfill — Exhaustive Context Recove	ADD	information_retrieval	1633	1667	34	0.800	0.800	0.800	0.000	32	KEEP	False
+run_W18_1777478629	hook-guard-email	preamble	ADD	information_retrieval	58	86	28	0.800	0.800	0.800	0.000	25	KEEP	False
+run_W18_1777478629	memory	Peers & Directs	MERGE	information_retrieval	2463	2452	-11	0.133	0.133	0.000	0.000	42	REVERT	False
+run_W18_1777478629	hedy-digest	Andrew Wirtz	ADD	information_retrieval	2087	2116	29	0.000	0.000	0.000	-1.000	3	REVERT	True
+run_W18_1777478629	asana-duckdb-sync	Priority Enum Values	ADD	information_retrieval	1930	1960	30	1.000	1.000	1.000	0.000	34	KEEP	False
+run_W18_1777478629	hook-am-backend	preamble	COMPRESS	information_retrieval	106	53	-53	0.200	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	device	SharePoint Durability Layer (Protocol: `sharepoint	REMOVE	information_retrieval	2638	2469	-169	0.143	0.000	0.000	-1.000	6	REVERT	True
+run_W18_1777478629	signal-to-task-pipeline	Signal Classification	REMOVE	information_retrieval	1250	1208	-42	0.268	0.000	0.000	-1.000	18	REVERT	True

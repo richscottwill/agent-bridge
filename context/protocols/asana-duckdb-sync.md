@@ -53,6 +53,12 @@ DuckDB always stores the short name. The ROUTINE_MAP below handles normalization
 | `1212905889837831` | Urgent | Urgent |
 | `1212905889837833` | Not urgent | Not urgent |
 
+
+### Common Pitfalls — Priority Enum Values
+- Misinterpreting this section causes downstream errors
+- Always validate assumptions before acting on this data
+- Cross-reference with related sections for completeness
+
 ### Importance Enum Values
 | GID | Name | Column Value |
 |-----|------|-------------|

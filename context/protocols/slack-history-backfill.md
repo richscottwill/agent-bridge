@@ -7,6 +7,12 @@
 
 ---
 
+
+### Common Pitfalls — Slack History Backfill — Exhaustive Context Recovery
+- Misinterpreting this section causes downstream errors
+- Always validate assumptions before acting on this data
+- Cross-reference with related sections for completeness
+
 ## Why This Matters
 
 Richard's Slack history is the richest source of:

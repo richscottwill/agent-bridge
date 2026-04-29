@@ -21,7 +21,6 @@ These are sequential, each building on the last. They define the arc of Richard'
 - Proactive communication to the team is critical — don't let tests run silently
 - Trainer should push Richard to: share updates before being asked, write test briefs, send results summaries, keep Brandon/Kate informed on progress
 - Key metric: every active WW test has a written status that the team can reference without asking Richard
-
 ### Level 3: Give Your Team Leverage Through Automation
 - Build tools a non-tech team can actually adopt (Q Developer, internal Amazon tooling)
 - Priority candidates: campaign link generator, WBR auto-briefing, budget forecast helper, invoice routing

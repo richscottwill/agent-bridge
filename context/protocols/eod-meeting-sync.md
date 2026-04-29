@@ -32,7 +32,6 @@ For each session:
 - nervous-system.md: Loop 7 (meeting patterns), Loop 3 (pattern trajectory)
 - current.md: people updates, new action items
 - device.md: delegation updates
-
 ## Audit
 Hedy: today's topics only. Flag discrepancies.
 
