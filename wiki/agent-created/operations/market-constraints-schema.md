@@ -74,6 +74,8 @@
 | `recent_past_count` | BIGINT | regime_changes | non-baseline, end_date 0-90 days ago |
 | `recent_past_regimes` | VARCHAR | regime_changes | pipe-delimited |
 
+
+> **Example:** A typical use of this section involves reading the above rules and applying them to the current context.
 ## How to update manual fields (agents)
 
 Agents MAY update `ps.market_constraints_manual` when they learn of a shift. Always set `updated_at` and `updated_by`:

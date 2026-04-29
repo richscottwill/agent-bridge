@@ -1,4 +1,5 @@
 <!-- DOC-0217 | duck_id: organ-body -->
+
 # Body — System Anatomy Map
 
 *The navigation layer. Each organ is a self-contained file with real content — not a pointer to somewhere else. Read the organ you need, get the answer.*
@@ -29,6 +30,7 @@ Last updated: 2026-04-04 (Karpathy Run 25 — Task Routing table: organ names→
 
 ---
 
+
 ## Operating Principles (embedded in every organ)
 
 These aren't rules to remember — they're how the body works. Each organ embodies them in its own way.
@@ -42,7 +44,9 @@ These aren't rules to remember — they're how the body works. Each organ embodi
 
 ---
 
-## Quick Orientation
+
+
+
 
 1. **New session?** → Spine (`spine.md` has the bootstrap sequence)
 2. **Need to act?** → Hands (`hands.md` has the priority stack)
@@ -57,6 +61,7 @@ These aren't rules to remember — they're how the body works. Each organ embodi
 10. **Am I avoiding the hard thing?** → aMCC (`amcc.md` — willpower, streak, resistance)
 11. **Is this bloated?** → Gut (`gut.md` — compression, word budgets, waste removal)
 12. **New raw material?** → Drop in Intake (`~/shared/context/intake/`)
+
 
 ## Task Routing (load only what you need)
 
@@ -73,6 +78,7 @@ These aren't rules to remember — they're how the body works. Each organ embodi
 | Start a new session | `spine.md`, `body.md`, `amcc.md` | Then task-specific |
 
 ---
+
 
 ## Ground Truth (separate files, different update cadences)
 

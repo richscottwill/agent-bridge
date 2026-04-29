@@ -278,9 +278,6 @@ Each event gets a project_name tag (AU, MX, WW Testing, Polaris, OCI, etc.) and 
 - Only update sections where data has changed
 - Max 10 pending action updates per run
 - Skip if current.md was updated within the last 4 hours (avoid thrashing)
-
----
-
 ## Execution Summary
 
 | Step | Time | DuckDB Writes | File Writes | Value |

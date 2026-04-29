@@ -119,6 +119,9 @@ Tools (1, auto-approved): search_arcc.
 
 Also supports: contentIds lookup for full document retrieval, comment_arcc for feedback.
 
+### Details
+
+
 Usage: MANDATORY first call when request involves credentials, user data, network rules, file paths, or infrastructure (per pilot-steering.md). Query ARCC before examining code.
 
 Scoped to 9 namespaces (configured in args).

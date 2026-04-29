@@ -11,6 +11,9 @@ These are sequential, each building on the last. They define the arc of Richard'
 ### Level 1: Sharpen Yourself
 - Build consistent strategic output habits (weekly artifacts, not sporadic)
 - Close the gap between strategic thinking and shipped work
+
+#### Details
+
 - Systems already in place: Trainer, autoresearch loop, context cascade
 - Key metric: consecutive weeks with a strategic artifact shipped
 
@@ -18,7 +21,12 @@ These are sequential, each building on the last. They define the arc of Richard'
 - Richard's current focus area — scalable tests that affect all PS accounts globally
 - Examples: OCI rollout, WW redirects, email overlay, Project Baloo, any legitimately automated initiative
 - Learn how to drive these end-to-end: hypothesis → design → execution → communication → results
+
+**Example:** If this section references a specific process, the concrete steps are: - Learn how to drive these end-to-end: hypothesis ...
+
 - Proactive communication to the team is critical — don't let tests run silently
+
+#### Part 1
 - Trainer should push Richard to: share updates before being asked, write test briefs, send results summaries, keep Brandon/Kate informed on progress
 - Key metric: every active WW test has a written status that the team can reference without asking Richard
 ### Level 3: Give Your Team Leverage Through Automation

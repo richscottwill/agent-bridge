@@ -1,4 +1,5 @@
 <!-- DOC-0359 | duck_id: protocol-signal-to-task-pipeline -->
+
 # Signal-to-Task Pipeline
 
 Extends AM-1 (Ingest) and AM-2 (Triage). Auto-creates Asana tasks from high-priority email and Slack signals.
@@ -7,9 +8,11 @@ Extends AM-1 (Ingest) and AM-2 (Triage). Auto-creates Asana tasks from high-prio
 
 ---
 
+
 ## Step 1: High-Priority Email Signal Detection (AM-1)
 
 During email scan, identify high-priority signals:
+
 
 ### Priority Senders (always high-priority)
 - Brandon Munday (L7 manager)
@@ -17,8 +20,10 @@ During email scan, identify high-priority signals:
 - Todd Heimes (L10 VP)
 - Any skip-level stakeholder
 
+
 ### Action Language Detection
 Subject or body contains: "action", "request", "need", "deadline", "urgent", "please", "follow up", "by [date]", "can you", "will you", "I need you to"
+
 
 ### Signal Classification
 - **High priority**: From priority sender AND contains action language → auto-create task
@@ -26,6 +31,7 @@ Subject or body contains: "action", "request", "need", "deadline", "urgent", "pl
 - **Low priority**: FYI/informational → log but no task creation
 
 ---
+
 
 ## Step 2: High-Priority Slack Signal Detection (AM-1)
 
@@ -42,11 +48,13 @@ Action language in Slack: questions directed at Richard, requests, deadlines, "c
 
 ---
 
+
 ## Step 2.5: Consolidation Check (MANDATORY — before creating any task)
 
 **Principle: A new top-level task only earns its place if the signal is Urgent + Important (or externally-bound with a hard deadline that doesn't fit an existing parent). Everything else becomes a subtask, a bullet in an existing task's notes, or a comment.**
 
 Why: Tasks have an Asana MCP cost per create/update. Standalone granular tasks fragment context, multiply bucket-cap pressure, and lose the parent-program narrative. Rolling weekly/operational items under a program parent keeps the agenda readable and reduces tool calls.
+
 
 ### Step 2.5a — Classify by urgency × importance × containment
 
@@ -60,6 +68,7 @@ Why: Tasks have an Asana MCP cost per create/update. Standalone granular tasks f
 
 "Urgent" = due in ≤ 3 days OR blocking someone else.
 "Important" = meaningfully advances L1-L5 OR stakeholder-visible (Brandon/Kate/Todd).
+
 
 ### Step 2.5b — Parent program lookup
 
@@ -77,6 +86,7 @@ For each signal, check if a **program parent task** exists before creating a new
 | Wiki article writes | None — handled by wiki pipeline, not Asana (ABPS AI Content deprecated 2026-04-17) | Do not create tasks |
 | ABPS AI Build system work | ABPS AI Build project (1213379551525587) | Per Active Development / Shipped sections |
 
+
 ### Step 2.5c — When "bullet in parent notes" is right
 
 If the signal is smaller than a subtask (a detail, a reference, a reminder), `UpdateTask` the parent to append one bullet under an "### Active signals / notes" subheading. Format:
@@ -87,17 +97,14 @@ If the signal is smaller than a subtask (a detail, a reference, a reminder), `Up
 
 This keeps the trail without inflating task count.
 
-### Step 2.5d — Confirm bar
 
+### Step 2.5d — Confirm bar
 Before calling `CreateTask`, the agent must answer in its own reasoning:
 1. Does a parent program already exist for this signal? (If yes, subtask or notes-bullet.)
-2. Is this Urgent + Important, OR externally-bound hard deadline? (If no, don't create top-level.)
+2. Is this Urgent + Important, OR externally-bound hard deadline?
 3. Could this be consolidated with a signal-in-hand the same cycle? (If yes, batch into one parent write.)
-
 If the agent cannot give a clear yes to standalone creation, default to subtask/bullet.
-
 ---
-
 ## Step 3: Asana Deduplication Check
 
 For each high-priority signal before task creation:
@@ -110,7 +117,9 @@ For each high-priority signal before task creation:
 
 ---
 
+
 ## Step 4: Asana Task Creation from Signals
+
 
 ### From Email Signals
 ```
@@ -122,6 +131,7 @@ CreateTask(
     assignee: "1212732742544167"
 )
 ```
+
 
 ### From Slack Signals
 ```
@@ -136,6 +146,7 @@ CreateTask(
 
 ---
 
+
 ## Step 5: Bucket Assignment
 
 | Signal Content | Asana Bucket |
@@ -146,6 +157,7 @@ CreateTask(
 | Administrative (scheduling, access, approvals) | Admin |
 
 ---
+
 
 ## Step 6: Signal-to-Task Logging (DuckDB)
 
@@ -162,6 +174,7 @@ ON CONFLICT (signal_source, signal_id) DO UPDATE SET
 
 ---
 
+
 ## Step 7: AM-2 Triage Summary (Slack DM)
 
 After AM-2 triage completes, send summary:
@@ -169,12 +182,16 @@ After AM-2 triage completes, send summary:
 ```
 self_dm(login="prichwil", text="📬 AM-2 Triage Complete
 • New tasks: [N] (from [sources])
+
+### Details
+
 • Updated tasks: [N] (new signals on existing)
 • Deferred: [N] (low priority, backlog)
 • Dismissed: [N] (FYI only)")
 ```
 
 ---
+
 
 ## Step 8: AM-2 Historical Context Enhancement
 
@@ -193,6 +210,7 @@ LIMIT 5;
 Include conversation history in triage context for better task creation.
 
 ---
+
 
 ## Workflow Observability
 

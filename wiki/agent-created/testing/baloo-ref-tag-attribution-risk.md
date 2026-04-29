@@ -25,15 +25,7 @@ During the Baloo Phase 1 walkthrough with Vijay Kumar and the Baloo tech team, R
 
 Testing revealed that Ref tags within the URL query string are being overwritten as users navigate from the Baloo landing page through the authentication flow. The original tag present on arrival is replaced by downstream internal tags before the registration event is captured.
 
-## Why this matters
-
-Every paid media dollar spent driving traffic to Baloo is currently unattributable once the user reaches registration. This affects three measurement layers simultaneously:
-
-The **WBR attribution model** will show Baloo registrations without the paid search source, making Baloo look more organic than it is. The **campaign-level CPA reporting** that feeds weekly callouts will be wrong on both sides — paid search CPA will be inflated because successful conversions are not credited back, and Baloo's organic CPA will be artificially depressed. The **OP1 2027 planning assumptions** about Baloo's role as a paid search landing page are built on attribution that does not yet work.
-
-If Baloo launches publicly with this issue unresolved, every paid acquisition dollar we route through it looks like waste in the reporting even when it converts.
-
-## Scope of impact
+## Why this matters Every paid media dollar spent driving traffic to Baloo is currently unattributable once the user reaches registration. This affects three measurement layers simultaneously: The **WBR attribution model** will show Baloo registrations without the paid search source, making Baloo look more organic than it is. The **campaign-level CPA reporting** that feeds weekly callouts will be wrong on both sides — paid search CPA will be inflated because successful conversions are not credited back, and Baloo's organic CPA will be artificially depressed. The **OP1 2027 planning assumptions** about Baloo's role as a paid search landing page are built on attribution that does not yet work. If Baloo launches publicly with this issue unresolved, every paid acquisition dollar we route through it looks like waste in the reporting even when it converts. ## Scope of impact
 
 The issue affects any campaign using Ref tags — which is every active paid search campaign. It is most acute for campaigns where users click around away from the initial landing page before registering, because those navigation events are where the overwriting appears to happen. Campaigns that drive direct, single-click registrations on the first Baloo page may be less affected.
 

@@ -69,6 +69,8 @@ VALUES ('category-my-topic', 'My Document', 'shared/path/to/file.md', 'draft', 1
 
 4. Stamp the file on line 1: `<!-- DOC-XXXX | duck_id: category-my-topic -->`
 
+
+> **Example:** A typical use of this section involves reading the above rules and applying them to the current context.
 ## Moving a Document Between Stages
 
 ```sql

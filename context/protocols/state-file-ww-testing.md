@@ -36,11 +36,12 @@ This protocol is loaded by the state file engine when processing market='WW Test
 | MX | TBD | No MCC |
 
 ### Data Sources
-- Primary: DuckDB `weekly_metrics` (all markets) for WW aggregate
 - Test status: `~/shared/wiki/agent-created/testing/` (all workstream docs)
+- Methodology: `~/shared/wiki/agent-created/testing/testing-methodology.md`
+
+- Primary: DuckDB `weekly_metrics` (all markets) for WW aggregate
 - OCI status: `~/shared/context/body/eyes.md` → OCI Performance section
 - Testing Approach: `~/shared/wiki/agent-created/testing/testing-approach-kate-v5.md`
-- Methodology: `~/shared/wiki/agent-created/testing/testing-methodology.md`
 - WW callouts: `~/shared/wiki/callouts/ww/`
 - Quip OCI Planning: https://quip-amazon.com/dSZ9AAZBXQy
 - Quip Ad Copy: https://quip-amazon.com/KCY9AAYqWd2
@@ -96,17 +97,17 @@ Canonical table of all active tests with their linked sources. One row per test.
 
 Explicit rules the daily engine (AM-Backend Step 2E) follows when refreshing per-test state. These rules govern WHAT the engine pulls and HOW it writes.
 
-### Rule 1 — Link resolution per test
+### Rule 1: Link resolution per test
 
 For each test in the Inventory (not the Archive), the engine pulls, per cycle:
 
-1. **Asana task details** — canonical GID: name, kiro_rw, next_action_rw, due_on, modified_at, permalink. If the GID is a `[GID needed]` placeholder, skip this step and emit NEEDS-ID to Appendix J.
-2. **Asana subtasks** — transitive from the canonical GID: same fields as above.
-3. **SIM/ticket mentions** — last 14 days, where `author IN {Richard, Brandon, Stacey, Adi, Andrew, Dwayne, Yun-Kang, Peter, Alex VanDerStuyf, Vijay}` AND any keyword from the test's Keywords column is present in title or body.
-4. **Slack messages** — last 14 days, from `signals.signal_tracker` (preferred — already ingested) or direct Slack MCP search as fallback. Match against test Keywords.
-5. **Email threads** — last 14 days, from Outlook search. Match against test Keywords. Capture subject line and permalink.
-6. **Hedy sessions** — last 14 days. Match by session title against test Keywords, OR by topic membership (`LP Testing`, `OCI`, `Polaris`, `Ad Copy`, `Baloo`). Prefer topic membership when available.
-7. **Quip doc last-modified timestamps** — LP Testing, OCI Planning, Ad Copy, Baloo. Surface modification date only (not full content diff).
+1. **Asana task details**: canonical GID: name, kiro_rw, next_action_rw, due_on, modified_at, permalink. If the GID is a `[GID needed]` placeholder, skip this step and emit NEEDS-ID to Appendix J.
+2. **Asana subtasks**: transitive from the canonical GID: same fields as above.
+3. **SIM/ticket mentions**: last 14 days, where `author IN {Richard, Brandon, Stacey, Adi, Andrew, Dwayne, Yun-Kang, Peter, Alex VanDerStuyf, Vijay}` AND any keyword from the test's Keywords column is present in title or body.
+4. **Slack messages**: last 14 days, from `signals.signal_tracker` (preferred: already ingested) or direct Slack MCP search as fallback. Match against test Keywords.
+5. **Email threads**: last 14 days, from Outlook search. Match against test Keywords. Capture subject line and permalink.
+6. **Hedy sessions**: last 14 days. Match by session title against test Keywords, OR by topic membership (`LP Testing`, `OCI`, `Polaris`, `Ad Copy`, `Baloo`). Prefer topic membership when available.
+7. **Quip doc last-modified timestamps**: LP Testing, OCI Planning, Ad Copy, Baloo. Surface modification date only (not full content diff).
 
 **Source selection for the dossier:** For each test's `Last 3 events` block, pick the 3 most-recent items across all sources above, ordered newest first. For each test's `Sources` block, keep the top 3 most-relevant per source category (Slack, email, Hedy).
 

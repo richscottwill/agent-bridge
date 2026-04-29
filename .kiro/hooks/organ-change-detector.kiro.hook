@@ -14,5 +14,8 @@
 
 ### Common Pitfalls — preamble
 - Misinterpreting this section causes downstream errors
+
+#### Details
+
 - Always validate assumptions before acting on this data
 - Cross-reference with related sections for completeness

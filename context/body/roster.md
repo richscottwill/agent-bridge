@@ -1,4 +1,5 @@
-<!-- DOC-0500 | duck_id: organ-roster -->
+<!-- DOC-0500 | duck_id: organ-roster --> 
+
 # Roster — People Who Matter for PS / WW Traffic Marketing
 
 *Centralized directory of people Richard works with and around. Reference this before drafting an email, attributing a test, writing a callout, or tagging someone in a doc. Supersedes ad-hoc attribution in motherduck `ps.team_experiments` and scattered name references across body files.*
@@ -8,6 +9,11 @@
 Last updated: 2026-04-20 (initial build from Pre-WBR Callouts quip history + memory.md + team workload docs + motherduck attributions)
 
 ---
+
+
+
+
+
 
 ## How This File Is Organized
 
@@ -22,6 +28,11 @@ Last updated: 2026-04-20 (initial build from Pre-WBR Callouts quip history + mem
 For each person the goal is to capture: **Name | Alias | Level | Role | Location | Markets/Scope | Source of truth**.
 
 ---
+
+
+
+
+
 
 ## 1. AB Paid Search Team (Brandon's Outbound Marketing Directs)
 
@@ -44,9 +55,19 @@ Brandon's seven direct reports plus Richard. Covers PS acquisition, MCS/website,
 
 ---
 
+
+
+
+
+
 ## 2. Market & Channel Contacts (Pre-WBR Callouts + Country Leads)
 
 Source: Pre-WBR Callouts quip (`quip-amazon.com/MMgBAzDrlVou`, "Guidance" tab, rows 10–12). Biweekly syncs before 10 AM PT Wednesdays.
+
+
+
+
+
 
 #### Channel Callout Owners (11 channels)
 
@@ -66,6 +87,11 @@ Each channel has one designated owner who writes the biweekly callout. Richard c
 | 10 | SEO | Yoav Reder | |
 | 11 | CPS Growth | Jenn Thompson | |
 
+
+
+
+
+
 #### Country Contacts (Callout Owner + PS Stakeholder Lead)
 
 Six markets with designated callout owners. AU and MX have the most active PS stakeholder relationships for Richard.
@@ -81,6 +107,11 @@ Six markets with designated callout owners. AU and MX have the most active PS st
 
 **Optional attendees (intermittent callouts):** Ahmed Darwish (SSR), Elina Kazantseva (EU SSR), Charlie Nichols (Paid Media), Siri Angeles (Social), Eric Wyatt (CPS Growth).
 
+
+
+
+
+
 #### External Partners (biweekly syncs)
 
 Two vendor relationships with regular biweekly cadence:
@@ -92,6 +123,11 @@ Two vendor relationships with regular biweekly cadence:
 | Adobe | Jen Vitiello | Co-lead with Suzane |
 
 ---
+
+
+
+
+
 
 ## 4. AB Marketing Leadership (L7+)
 
@@ -108,9 +144,19 @@ Two vendor relationships with regular biweekly cadence:
 
 ---
 
+
+
+
+
+
 ## 5. Cross-Functional Partners (by function)
 
 Ordered by frequency of Richard's interaction: MCS and MarTech are daily/weekly; CPS and Creative are campaign-driven; ABMA, Events, and Sourcing are periodic.
+
+
+
+
+
 
 ### MCS / Website Marketing
 
@@ -120,6 +166,11 @@ Ordered by frequency of Richard's interaction: MCS and MarTech are daily/weekly;
 | Frank Volinsky | MCS page builds / Weblab | Landing page implementation, A/B test setup |
 | Alex VanDerStuyf | AEM / MCS engineering | Technical page issues, AEM platform questions |
 
+
+
+
+
+
 ### MarTech & Data Science
 
 | Name | Role |
@@ -127,6 +178,11 @@ Ordered by frequency of Richard's interaction: MCS and MarTech are daily/weekly;
 | Joel Mallory | OCI infrastructure, tracking, LiveRamp |
 | Yogesh | Data Science — OCI value framework, incrementality |
 | Saajan Chowhan | SSR Activation — F90 lifecycle, promo strategy |
+
+
+
+
+
 
 ### CPS / Sales Partners
 
@@ -138,6 +194,11 @@ Ordered by frequency of Richard's interaction: MCS and MarTech are daily/weekly;
 | Mary Anne Fessler | Sales leader (CPS User Engagement study) |
 | Shaina Billish | Sales leader (CPS User Engagement study) |
 
+
+
+
+
+
 ### Creative / Brand & Paid Media
 
 | Name | Role |
@@ -146,14 +207,13 @@ Ordered by frequency of Richard's interaction: MCS and MarTech are daily/weekly;
 | Robert Skenes | Brand & Paid Media (LiveRamp 1P, ADSP, measurement) |
 | Daron Manso | TSEM + US callout owner |
 
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ### ABMA (Amazon Business Marketing Analytics)
-
 | Name | Role |
 |------|------|
 | Naresh | ABMA Associated Accounts / audience |
 | Nishchhal | ABMA Associated Accounts / audience |
 | Vijay | ABMA — Email overlay / engineering |
-
 ### Legal / Finance
 
 | Name | Role |
@@ -161,17 +221,20 @@ Ordered by frequency of Richard's interaction: MCS and MarTech are daily/weekly;
 | Vandita | Finance Q3G / Q4G partner |
 | (Legal contact) | F90 audiences, LiveRamp data, audience SIMs — routed via Brandon |
 
-### Events Team
 
+
+
+
+
+### Events Team
 | Name | Role |
 |------|------|
 | Caroline Miller | Events (BSE, Prime Day, BFCM) |
-| Sharon Serene | Labor Day / US events lead (also in callout action items) |
+| Sharon Serene | Labor Day / US events lead (also in
 | Joshua Braziel | Events (FFYE follow-ups) |
 | Saqib Al Hasan | Events (BGG follow-ups) |
 | Sophia | Cross-Store / A.com events (referenced in A.com callouts) |
 | Blair Heckel | Event owner (sourcing callouts) |
-
 ### Push / Notifications
 
 | Name | Role |
@@ -179,6 +242,11 @@ Ordered by frequency of Richard's interaction: MCS and MarTech are daily/weekly;
 | Peter Ocampo | Push WW lead (L6, Mobile App) |
 | Nikko Shida | ADA-DA campaigns / ADSP engineering follow-ups |
 | Viraj Gholap | Email Engagement templates (MarOps) |
+
+
+
+
+
 
 ### Sourcing / Merchandising (referenced in events sections)
 
@@ -188,6 +256,11 @@ Ordered by frequency of Richard's interaction: MCS and MarTech are daily/weekly;
 | Yoshimi Horimoto | JP 1P/3P sourcing |
 
 ---
+
+
+
+
+
 
 ## 7. Richard's Specific Stakeholder Contacts
 
@@ -208,6 +281,11 @@ People Richard drafts communications *to* most often. See `memory.md` for tone, 
 
 ---
 
+
+
+
+
+
 ## Cross-References
 
 | What You Need | Where to Find It |
@@ -218,6 +296,11 @@ People Richard drafts communications *to* most often. See `memory.md` for tone, 
 | Test attributions (legacy, being superseded) | DuckDB `ps.team_experiments` table (owner + sole_owner columns) |
 
 ---
+
+
+
+
+
 
 ## How to Update This File
 
@@ -235,6 +318,11 @@ When updating:
 4. Update the "Last updated" date at the top
 
 ---
+
+
+
+
+
 
 ## Known Gaps
 

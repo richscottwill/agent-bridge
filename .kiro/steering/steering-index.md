@@ -38,6 +38,7 @@ inclusion: always
 | Enhanced bootstrap / navigation protocol | `enhanced-navigation-protocol.md` |
 | Asana write operations | `asana-guardrails.md` |
 | Slack search / deep research / knowledge lookup | `slack-deep-context.md` or `slack-knowledge-search.md` |
+| Karpathy experiments on structured files (hooks, JSON, Python) | `karpathy-file-type-awareness.md` |
 
 ## Thought-pattern files (optional mental models)
 

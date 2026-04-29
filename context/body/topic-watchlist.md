@@ -1,4 +1,7 @@
 <!-- DOC-0411 | duck_id: organ-topic-watchlist -->
+
+
+
 # Topic Watchlist
 
 *Declarative list of topics Richard wants flagged across email, Slack, Loop, Hedy, and Asana — regardless of sender. Used by the Topic Sentry hook (daily) and the Broad Sweep hook (weekly) to catch structural signals the AM Brief's sender-priority filter misses.*
@@ -6,6 +9,9 @@
 Last updated: 2026-04-28 (revised after state-file keyword mine; removed duplicate single-hard-thing topic)
 
 ---
+
+
+
 
 ## How this file is used
 
@@ -15,11 +21,17 @@ Three consumers:
 2. **Broad Sweep hook (weekly).** Runs the same classifier over a longer window (up to 14 days) and uses hit counts to propose promotions, demotions, and new topics.
 3. **Humans.** Read this file directly to see what the system is paying attention to. If a topic isn't here, the system won't flag it proactively — that's by design.
 
+
+
+
 ## Schema
 
 Each topic is a markdown section (H3) with these fields:
 
 ```
+
+
+
 ### <topic-slug>
 - **Status:** active | monitoring | sunset
 - **Priority:** P1 (must surface) | P2 (worth knowing) | P3 (background)
@@ -44,7 +56,13 @@ Each topic is a markdown section (H3) with these fields:
 
 ---
 
+
+
+
 ## Active topics (P1 — must surface)
+
+
+
 
 ### mx-registration-funnel
 - **Status:** active
@@ -56,6 +74,9 @@ Each topic is a markdown section (H3) with these fields:
 - **Why it matters:** MX reg funnel changes shift CPA math and Sparkle volume assumptions directly. The 2026-04-24 Cristobal launch (AVP 38%→73%, MV% -2,280bps) was the miss that created this file.
 - **Review:** 2026-07-28
 
+
+
+
 ### polaris-brand-lp
 - **Status:** active
 - **Priority:** P1
@@ -65,6 +86,9 @@ Each topic is a markdown section (H3) with these fields:
 - **Channels:** email, slack, hedy, asana
 - **Why it matters:** Active cross-market dependency. Brandon implicitly committed Richard to a Google Experiment alt-measurement path before 5/5 AU handoff. Italy P0 ref tag regression 4/16 demonstrates rollout process lacks automated ref tag audit — any market rollout is load-bearing.
 - **Review:** 2026-05-31
+
+
+
 
 ### oci-rollout
 - **Status:** active
@@ -76,6 +100,9 @@ Each topic is a markdown section (H3) with these fields:
 - **Why it matters:** 8 of 10 markets at 100% OCI. AU and MX remain TBD, blocked on MCC creation — each quarter without AU OCI forgoes 18–24% reg uplift. Data-exclusion incidents distort OCI reads; Sam Tangri + Mike Babich signals are measurement-critical.
 - **Review:** 2026-06-30
 
+
+
+
 ### au-handoff
 - **Status:** active
 - **Priority:** P1
@@ -85,6 +112,9 @@ Each topic is a markdown section (H3) with these fields:
 - **Channels:** email, slack, hedy, asana
 - **Why it matters:** Handoff target 5/5. Every late-breaking AU signal is decision-relevant until the doc ships and the new owner takes over. Brandon's oversight mechanism requires a weekly change aggregator before 5/5.
 - **Review:** 2026-05-15 (sunset after handoff confirmed stable)
+
+
+
 
 ### ww-testing-methodology
 - **Status:** active
@@ -98,7 +128,13 @@ Each topic is a markdown section (H3) with these fields:
 
 ---
 
+
+
+
 ## Active topics (P2 — worth knowing)
+
+
+
 
 ### sparkle-and-baloo
 - **Status:** active
@@ -110,15 +146,8 @@ Each topic is a markdown section (H3) with these fields:
 - **Why it matters:** Sparkle is the regime driving MX Y2026 $824K-$1.1M projection spread. Baloo is the MX follow-on. Both directly affect the brand-trajectory model and regime_fit_state.
 - **Review:** 2026-06-30
 
-### mx-budget-ieccp
-- **Status:** active
-- **Priority:** P2
-- **Level:** operational (MX)
-- **Keywords:** "MX budget", "MX ie%CCP", "MX spend", "MX OP2", "PAM budget", "Sparkle budget", "MX forecast", "MX reforecast", "MX pacing", "NA MCC", "MX LP", "automotive LP", "MX Auto", "Lena confusion"
-- **Senders/distros:** brandoxy@amazon.com, lorealea@amazon.com, lenazak
-- **Channels:** email, slack, hedy, asana
-- **Why it matters:** Y2026 MX at $824K default vs $1.1M Sparkle-confidence — budget decisions + PAM availability questions are load-bearing for forecast accuracy.
-- **Review:** 2026-06-30
+
+
 
 ### ai-search-aeo
 - **Status:** active
@@ -129,6 +158,22 @@ Each topic is a markdown section (H3) with these fields:
 - **Channels:** email, slack, hedy, loop
 - **Why it matters:** L4 priority — Richard owns the PS POV. Any competitor signal, platform announcement, or internal discussion is raw material. AI Max test design is specifically gated here.
 - **Review:** 2026-06-30
+
+
+
+### mx-budget-ieccp
+- **Status:** active
+- **Priority:** P2
+- **Level:** operational (MX)
+- **Keywords:** "MX budget", "MX ie%CCP", "MX spend", "MX OP2", "PAM budget", "Sparkle budget", "MX forecast", "MX reforecast", "MX pacing", "NA MCC", "MX LP", "automotive LP", "MX Auto", "Lena confusion"
+- **Senders/distros:** brandoxy@amazon.com, lorealea@amazon.com, lenazak
+- **Channels:** email, slack, hedy, asana
+- **Why it matters:** Y2026 MX at $824K default vs $1.1M Sparkle-confidence — budget decisions + PAM availability questions are load-bearing for forecast accuracy.
+- **Review:** 2026-06-30
+
+
+
+
 ### liveramp-enhanced-match
 - **Status:** active
 - **Priority:** P2
@@ -138,6 +183,9 @@ Each topic is a markdown section (H3) with these fields:
 - **Channels:** email, slack, hedy
 - **Why it matters:** Cross-team MarTech dependency affecting attribution quality across all markets.
 - **Review:** 2026-07-31
+
+
+
 
 ### reftag-and-attribution
 - **Status:** active
@@ -149,6 +197,9 @@ Each topic is a markdown section (H3) with these fields:
 - **Why it matters:** AU-specific workaround is fragile; Italy P0 regression + MX Auto overwrite prove this is a recurring failure mode, not a one-off. Attribution breakage invalidates test reads.
 - **Review:** 2026-07-31
 
+
+
+
 ### f90-lifecycle-legal
 - **Status:** active
 - **Priority:** P2
@@ -158,6 +209,9 @@ Each topic is a markdown section (H3) with these fields:
 - **Channels:** email, slack, hedy, asana
 - **Why it matters:** Audiences workstream is blocked on Legal SIMs. Any Legal or Audiences signal is unblock-relevant. Feeds directly into the WW Testing Loop.
 - **Review:** 2026-07-31
+
+
+
 
 ### kiro-agentspaces-tooling
 - **Status:** active
@@ -171,7 +225,13 @@ Each topic is a markdown section (H3) with these fields:
 
 ---
 
+
+
+
 ## Active topics (P3 — background radar)
+
+
+
 
 ### genbi-adobe-attribution
 - **Status:** active
@@ -183,6 +243,9 @@ Each topic is a markdown section (H3) with these fields:
 - **Why it matters:** Cross-market measurement ground truth. Low volume, high impact when it moves.
 - **Review:** 2026-07-31
 
+
+
+
 ### competitor-intel
 - **Status:** active
 - **Priority:** P3
@@ -192,6 +255,9 @@ Each topic is a markdown section (H3) with these fields:
 - **Channels:** email, slack, hedy, loop
 - **Why it matters:** Market intel for WBR callouts and MBR narratives. Feeds market-specific state files.
 - **Review:** 2026-10-31
+
+
+
 
 ### ad-copy-and-creative
 - **Status:** active
@@ -205,7 +271,16 @@ Each topic is a markdown section (H3) with these fields:
 
 ---
 
+
+
+
 ## Monitoring (tracking, not daily)
+
+
+
+
+**Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
+
 
 ### new-markets
 - **Status:** monitoring
@@ -215,6 +290,9 @@ Each topic is a markdown section (H3) with these fields:
 - **Channels:** email, slack, hedy, loop
 - **Why it matters:** If WW PSME expands, scope changes. Not imminent — radar only.
 - **Review:** 2026-10-31
+
+
+
 
 ### org-changes
 - **Status:** monitoring
@@ -227,11 +305,17 @@ Each topic is a markdown section (H3) with these fields:
 
 ---
 
+
+
+
 ## Sunset (do not surface — kept for audit trail)
 
 *None yet. When a topic is retired, move its block here with a `sunset: YYYY-MM-DD` note explaining why, so future scans know not to re-add it reflexively.*
 
 ---
+
+
+
 
 ## Common Failures
 
@@ -243,7 +327,7 @@ Each topic is a markdown section (H3) with these fields:
 
 **Worked example — P1 demotion:** Current P1 count is 5. New signal: "liveramp-enhanced-match" escalates from P2 (Kate asked about it in skip-level). To add as P1: review existing P1s by last_signal_date. If `au-handoff` hasn't fired in 14d and its review_date passed → demote to P2. Now at 5 P1 again → add liveramp as P1. Log the demotion reason in the topic's `notes` field.
 
----
+
 
 ## Operating notes
 

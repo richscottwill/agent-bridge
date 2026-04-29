@@ -29,38 +29,7 @@ All three write to the same DuckDB tables (`signals.emails`, `signals.slack_mess
 
 ## What AM Brief keeps vs drops
 
-### Keeps (the daily essentials)
-**Phase 5 (reduced)** — write `daily-brief-latest.md`, push to SharePoint
-**Phase 2.5F** — current.md refresh (quick surgical update only)
-**Phase 0** — Schema verification (10s)
-- **SharePoint drift check** → Broad Sweep weekly
-- Orchestrator B2 Activity Monitor (unchanged — activity on today's tasks)
-- **Full channel list Slack scan** (all 50+ channels) → Broad Sweep weekly
-- Subagent A Slack — filter to channels whose section has `"am_brief"` in its `scan_in` array per `~/shared/data/state/slack-channel-registry.json` v3.1+. By default: `WW Testing`, `AB PS`, and DMs. Excludes `AB`, `AI`, and `Channels` sections — those get picked up by Sentry + Sweep.
-- **Context enrichment Phase 2.5A-2.5E** (meeting series files, relationship activity, project timeline, five levels tagging) → Broad Sweep weekly (these are weekly-relevant, not daily-relevant)
-- Subagent C Email — only `inbox` folder, only senders in HIGH list OR CC/TO direct to Richard; NOT BCC distros
-- **Wiki candidate detection** (`signals.wiki_candidates` scan) → Broad Sweep weekly (not needed daily)
----
-- **Topic classification across all ingested data** → Topic Sentry daily
-- **Portfolio scan Phase 4** (per-project task enrichment, status staleness) → runs in its own dedicated hook or weekly Sweep (tasks.md item)
-- Subagent D Loop pages — only pages flagged `daily_refresh=true` in `docs.loop_pages.refresh_policy` (Brandon 1:1, Kate 1:1 — not MBR, not Artifacts)
-- **Hedy full backlog sync** (anything older than 24h) → Broad Sweep weekly
-- Subagent E Hedy — yesterday's meetings only, for action-item extraction
-- Orchestrator B1 Asana Sync (unchanged — needed for today's tasks)
-- **Loop page exhaustive refresh** (all tracked pages) → Broad Sweep weekly
-**Phase 1 ingestion (narrowed):**
-- **Full-folder email scan** (sent, archive, custom folders, deleted) → Broad Sweep weekly
-
-From `am-backend-parallel.md`, AM Brief retains these steps:
-
-
-
-
-
-AM Brief drops from ~17 step-types to ~8. Wall-clock target: 5 min (from 16 min).
-
-
-## What Topic Sentry adds that AM Brief was missing
+### Keeps (the daily essentials) **Phase 5 (reduced)** — write `daily-brief-latest.md`, push to SharePoint **Phase 2.5F** — current.md refresh (quick surgical update only) **Phase 0** — Schema verification (10s) - **SharePoint drift check** → Broad Sweep weekly - Orchestrator B2 Activity Monitor (unchanged — activity on today's tasks) - **Full channel list Slack scan** (all 50+ channels) → Broad Sweep weekly - Subagent A Slack — filter to channels whose section has `"am_brief"` in its `scan_in` array per `~/shared/data/state/slack-channel-registry.json` v3.1+. By default: `WW Testing`, `AB PS`, and DMs. Excludes `AB`, `AI`, and `Channels` sections — those get picked up by Sentry + Sweep. - **Context enrichment Phase 2.5A-2.5E** (meeting series files, relationship activity, project timeline, five levels tagging) → Broad Sweep weekly (these are weekly-relevant, not daily-relevant) - Subagent C Email — only `inbox` folder, only senders in HIGH list OR CC/TO direct to Richard; NOT BCC distros - **Wiki candidate detection** (`signals.wiki_candidates` scan) → Broad Sweep weekly (not needed daily) --- - **Topic classification across all ingested data** → Topic Sentry daily - **Portfolio scan Phase 4** (per-project task enrichment, status staleness) → runs in its own dedicated hook or weekly Sweep (tasks.md item) - Subagent D Loop pages — only pages flagged `daily_refresh=true` in `docs.loop_pages.refresh_policy` (Brandon 1:1, Kate 1:1 — not MBR, not Artifacts) - **Hedy full backlog sync** (anything older than 24h) → Broad Sweep weekly - Subagent E Hedy — yesterday's meetings only, for action-item extraction - Orchestrator B1 Asana Sync (unchanged — needed for today's tasks) - **Loop page exhaustive refresh** (all tracked pages) → Broad Sweep weekly **Phase 1 ingestion (narrowed):** - **Full-folder email scan** (sent, archive, custom folders, deleted) → Broad Sweep weekly From `am-backend-parallel.md`, AM Brief retains these steps: AM Brief drops from ~17 step-types to ~8. Wall-clock target: 5 min (from 16 min). ## What Topic Sentry adds that AM Brief was missing
 
 1. **Keyword-based classification** — AM Brief filters by sender. Sentry filters by subject matter. An ABMX launch email from a product manager on a BCC distro fails the AM filter and passes the Sentry filter.
 2. **Cross-channel topic rollup** — if `polaris-brand-lp` shows up in an email, a Slack thread, and a Hedy meeting in the same day, Sentry groups them under one topic heading so Richard sees the pattern, not three disconnected items.
@@ -105,11 +74,12 @@ AM Brief drops from ~17 step-types to ~8. Wall-clock target: 5 min (from 16 min)
 
 ### Step 5: Configure schedule
 - AM Brief: same trigger as today (~7am PT, daily).
+  - Example: AM Brief: same trigger as today (~7am PT, daily)....
 - Topic Sentry: fires 2 min after AM Brief completes. Chained via hook postTaskExecution or a sleep-and-go pattern.
 - Broad Sweep: userTriggered for now. If Richard wants it auto-scheduled later, add a cron-like trigger separately.
 
 ### Step 6: Retire/update `am-backend-parallel.md`
-- Keep the file — it's still the AM Brief's protocol, just with a narrower scope.
+- Keep the file: it's still the AM Brief's protocol, just with a narrower scope.
 - Add a header: `_As of 2026-MM-DD this is the AM Brief (narrow/daily) protocol. Weekly sweep responsibilities moved to broad-sweep.md. Topic classification moved to topic-sentry.md._`
 - Update the step table to reflect the drops.
 

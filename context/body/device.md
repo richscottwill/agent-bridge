@@ -1,4 +1,8 @@
 <!-- DOC-0221 | duck_id: organ-device -->
+
+
+
+
 # Device — Outsourced Intelligence
 
 *The body's phone/laptop/agent. Work that runs FOR Richard without requiring his judgment. If it needs Richard's brain, it's an organ. If it can execute autonomously, it belongs here.*
@@ -8,6 +12,10 @@
 Last updated: 2026-04-13 (Forecast pipeline rebuild: _Data sheet architecture, regime changes, weighted predictions, template-based updater)
 
 ---
+
+
+
+
 
 ## The Test
 
@@ -19,9 +27,17 @@ Before adding anything here, ask: "Does this require Richard's judgment to produ
 
 ---
 
+
+
+
+
 ## 🤖 Installed Apps (running today)
 
 These are live. They execute without Richard thinking.
+
+
+
+
 
 ### AM Hooks (2 sequential: backend → frontend)
 
@@ -36,8 +52,16 @@ These are live. They execute without Richard thinking.
 
 **AM failure recovery:** If AM-Backend fails mid-run (e.g., Slack MCP timeout), AM-Frontend still starts — it reads whatever backend state was written before the failure. Missing data surfaces as gaps in the daily brief, not as a crash. Re-run AM-Backend to fill gaps.
 
+
+
+
+
 ### EOD Hook (1 unified: backend + frontend)
 - **EOD** (`eod`) — Backend: Hedy meeting ingestion, Asana reconciliation (delta sync, daily reset, recurring, completion moves, blockers), organ cascade, compression audit, workflow health, context enrichment, DuckDB snapshots, git sync, Karpathy experiments, SharePoint sync. Frontend: day summary, decisions, portfolio report, system health, experiment results, Slack DM. ~20 min. Protocol: `eod-backend.md` + `eod-frontend.md`
+
+
+
+
 
 ### Safety Guards (preToolUse hooks)
 | Guard | Rule | Audit |
@@ -46,37 +70,55 @@ These are live. They execute without Richard thinking.
 | Calendar Invite | Block external attendees; personal blocks OK | — |
 | Asana Write | Only Richard's tasks (GID 1212732742544167) | `asana-audit-log.jsonl` · Protocol: `asana-command-center.md` |
 
-### Karpathy Agent (Agent: `karpathy.md`)
-- **What it does:** Loop governor + compression scientist + output quality experimenter. Sole authority on heart.md, gut.md, experiment queue. Experiments on both information content (organs) and output quality (style guides, market context files, callout principles, hook prompts).
-- **Trigger:** During loop runs, on demand ("run karpathy"), weekly Fridays (metabolism report).
-- **Agent file:** `~/.kiro/agents/body-system/karpathy.md`
+
+
+
+
+### Karpathy Agent (Agent: `karpathy.md`) - **What it does:** Loop governor + compression scientist + output quality experimenter. Sole authority on heart.md, gut.md, experiment queue. Experiments on both information content (organs) and output quality (style guides, market context files, callout principles, hook prompts). - **Trigger:** During loop runs, on demand ("run karpathy"), weekly Fridays (metabolism report). - **Agent file:** `~/.kiro/agents/body-system/karpathy.md` 
+
 
 ### Eyes Chart Agent (Agent: `eyes-chart.md`)
 - **What it does:** Reads body organs + market data → generates standalone HTML dashboard (Chart.js).
 - **Trigger:** On demand (`PS Audit` hook or manual). Read-only on all organs.
 - **Tool:** `python3 ~/shared/tools/progress-charts/generate.py` · Agent: `~/shared/.kiro/agents/eyes-chart.md`
 
+
+
+
+
 ### Wiki Team (Agents: `wiki-team/`)
 - **What it does:** 6-agent doc pipeline: editor → researcher → writer → critic → librarian + concierge. Publishes to `~/shared/wiki/`. 15 artifacts. 8/10 quality bar (critic is required gate).
 - **Trigger:** On demand. Editor orchestrates. Agent files: `~/.kiro/agents/wiki-team/`
 
+
+
+
+
 ### Agent Bridge (Tool: `~/shared/tools/bridge/bridge.py`)
 - **What it does:** Google Sheets/Docs async message bus + context snapshots between Kiro and Richard's personal agent swarm.
+
+
+
+
 
 ### WBR Forecast Pipeline (Tool: `~/shared/tools/wbr-pipeline.sh`)
 - **What it does:** End-to-end weekly pipeline: ingest WW Dashboard xlsx → sync to MotherDuck → detect regime changes → score prior predictions → generate Bayesian weekly projections (regime-change-aware) → populate forecast_tracker (weighted predictions + actuals backfill) → update forecast xlsx (_Data sheet only) → push to SharePoint.
 - **Trigger:** Weekly, after WW Dashboard xlsx is available. Manual: `bash ~/shared/tools/wbr-pipeline.sh <xlsx_path>`
 - **Key scripts:**
-  - `wbr-pipeline.sh` — orchestrator (8 steps)
-  - `prediction/populate_forecast_tracker.py` — Bayesian projections + weighted predictions (λ=0.2 exponential decay) + actuals backfill. Monthly/quarterly/year-end derived from weekly sums.
-  - `prediction/detect_regime_changes.py` — scans ps.change_log for structural changes, auto-inserts into ps.regime_changes
-  - `prediction/bayesian_projector.py` — Bayesian engine with seasonal priors, regime change prior shifts, ie%CCP constraints
-  - `dashboards/update-forecast-tracker.py` — writes ONLY to hidden _Data sheet in xlsx, preserving all visible sheet formatting
-  - `prediction/config.py` — shared MotherDuck token + constants (single source)
+ - `wbr-pipeline.sh` — orchestrator (8 steps)
+ - `prediction/populate_forecast_tracker.py` — Bayesian projections + weighted predictions (λ=0.2 exponential decay) + actuals backfill. Monthly/quarterly/year-end derived from weekly sums.
+ - `prediction/detect_regime_changes.py` — scans ps.change_log for structural changes, auto-inserts into ps.regime_changes
+ - `prediction/bayesian_projector.py` — Bayesian engine with seasonal priors, regime change prior shifts, ie%CCP constraints
+ - `dashboards/update-forecast-tracker.py` — writes ONLY to hidden _Data sheet in xlsx, preserving all visible sheet formatting
+ - `prediction/config.py` — shared MotherDuck token + constants (single source)
 - **Architecture:** Hidden `_Data` sheet holds all raw values. Visible market sheets use formulas referencing `_Data`. Script never touches visible sheets.
 - **Hook:** `forecast-sharepoint-push` (fileEdited) auto-pushes xlsx to SharePoint Kiro-Drive/ + Dashboards/ after update.
 - **Legacy:** `build-forecast-tracker.py.legacy` — replaced by template-based updater.
 - **Common failures:** (1) Running pipeline before WW Dashboard xlsx is fully populated — partial data produces wrong projections. Verify all market tabs have current-week data before triggering. (2) Editing visible sheets directly — breaks formula references to `_Data`. Only `update-forecast-tracker.py` writes to the xlsx. (3) Forgetting `--accept-breaking-changes` on Harmony deploy — deploy silently fails without it.
+
+
+
+
 
 ### Forecast SharePoint Push (Hook: `forecast-sharepoint-push`)
 - **What it does:** Auto-pushes ps-forecast-tracker.xlsx to both SharePoint locations when the file is updated locally.
@@ -85,6 +127,10 @@ These are live. They execute without Richard thinking.
 - **Key IDs:** Spreadsheet `1IlM43kzxw8Vlu6aUWXUV1dr7ZIF7O7H2bD5x3kaKIHg` · Doc `1koJV8a4Ig9BBDbrtQl-w8L4-2bUrz8lGwxUxEfIgQj8` · Drive `1aeRuldkc-OL1gyR7FQ-WrvbpERPsYChZ`
 - **Service Account:** `kiro-sheets-bridge@kiro-491503.iam.gserviceaccount.com` · Creds: `~/shared/credentials/kiro-491503-6b65ab0501c6.json`
 - **Judgment required:** None. Autonomous reads/writes.
+
+
+
+
 
 ### Harmony Forecast Deploy (Hook: `harmony-forecast-deploy`)
 - **What it does:** Rebuilds `forecast-data.json` from the updated xlsx and redeploys the `paid-acq-forecast` Harmony app to beta. Teammates on AB-Marketing-PS bindle see fresh data without any manual step.
@@ -97,10 +143,18 @@ These are live. They execute without Richard thinking.
 - **Typical runtime:** ~30 sec end-to-end. Timeout: 300 sec.
 - **Judgment required:** None. Fully autonomous.
 
+
+
+
+
 ### Hedy Meeting Sync (via EOD-1)
 - **What it does:** Pulls Hedy sessions, analyzes communication patterns (speaking share, hedging, filler words), flags low-visibility meetings, updates session/topic contexts, cascades to organs.
 - **Trigger:** EOD-1 hook. Fully autonomous.
 - **Feeds into:** Memory (relationships), Nervous System (communication patterns, Loop 7), Eyes (meeting prep)
+
+
+
+
 
 ### Slack Context Ingestion & Open Items (via AM-1 + promptSubmit)
 - **Slack Ingestion:** Ingests all Slack channels Richard is in (via `list_channels`) plus DMs. Section-based depth: WW Testing/AB PS = full, AB/AI = standard, Channels = light. Proactive search beyond channel list (permanent + dynamic queries). Reaction checking on tagged messages.
@@ -110,11 +164,19 @@ These are live. They execute without Richard thinking.
 - **Guardrails:** Read-only (per slack-guardrails.md). All invocations logged to scan state. No caps — ingest everything, synthesize ruthlessly.
 - **Open Items Reminder:** On first message of a new conversation, scans session-log.md for OPEN/deferred items and surfaces them. Skips if already shown in current conversation. 3-hour cooldown. Trigger: promptSubmit (with conversation-level dedup).
 
+
+
+
+
 ### SharePoint Sync (Hook: `sharepoint-sync`)
 - **What it does:** Wiki articles → .docx → OneDrive → SharePoint. Filters: amazon-internal, REVIEW+FINAL. Incremental via SHA-256 hashing.
 - **Trigger:** userTriggered. Dry-run first, Richard confirms before live sync.
 - **Tool:** `python3 ~/shared/tools/sharepoint-sync/cli.py --mode directory` · Config: `~/shared/tools/sharepoint-sync/config.yaml`
 - **Local (Windows):** `c:/Users/prichwil/OneDrive - amazon.com/Artifacts/wiki-sync`
+
+
+
+
 
 ### SharePoint Durability Layer (Protocol: `sharepoint-durability-sync.md`)
 - **Purpose:** Bidirectional sync between `~/shared/` and OneDrive `Kiro-Drive/`. Artifacts survive container death and stay accessible cross-device.
@@ -126,6 +188,10 @@ These are live. They execute without Richard thinking.
 - **Three-layer architecture:** filesystem (`~/shared/`) + SharePoint (`Kiro-Drive/`) + git (agent-bridge). Any two can fail; system recovers from the third.
 - **Recovery (<5 min):** Container dies → pull `system-state/` from SharePoint → git clone agent-bridge → resume from Phase 1. Zero data loss on pre-failure artifacts.
 - **Conflict rule:** On conflict, local always wins. If SharePoint is newer, it means local was lost — pull to recover, never merge.
+
+
+
+
 
 ### PS Analytics Database (DuckDB → MotherDuck Cloud)
 - **What it does:** Persistent cloud analytical DB for all structured PS data and system telemetry. 8 schemas, 55 tables + 34 views.
@@ -147,6 +213,10 @@ These are live. They execute without Richard thinking.
 - **FTS index:** `signals.slack_messages` — needs rebuild after schema migration (FTS was on old main.slack_messages).
 - **Portability:** MotherDuck accessible from any DuckDB client with the token. Local .duckdb file as cold backup. Parquet exports at `~/shared/data/exports/`.
 
+
+
+
+
 ### Common Failures in Installed Apps
 
 | Failure | Symptom | Fix |
@@ -157,6 +227,10 @@ These are live. They execute without Richard thinking.
 | Asana writes without audit | Write succeeds but audit trail has gap | Every write must go through audit hook; if hook fails, re-run audit manually |
 
 ---
+
+
+
+
 
 ## 👥 Delegation Protocols
 
@@ -171,9 +245,17 @@ These are live. They execute without Richard thinking.
 
 ---
 
+
+
+
+
 ## 🛠️ Tool Factory
 
 Templates (Email, WBR Callout, Meeting Prep) queued — build when prioritized.
+
+
+
+
 
 ### Built & Shipped
 
@@ -183,7 +265,15 @@ Templates (Email, WBR Callout, Meeting Prep) queued — build when prioritized.
 | 1a | **PS Analytics DB (DuckDB)** | ✅ BUILT |
 | 1b | **Context catalog** | ✅ BUILT |
 
+
+
+
+
 ### Backlog & Candidates
+
+
+
+
 
 #### Ready (next action clear)
 
@@ -194,6 +284,10 @@ Templates (Email, WBR Callout, Meeting Prep) queued — build when prioritized.
 | 4 | **gcm (AI git commit)** — Shell function that pipes `git diff --cached` to an LLM for commit message generation. Requires `llm` CLI. Source: wiki/Topics/Git/add_to_zshrc.sh. | Ready to install |
 | 5 | **llm CLI** — Simon Willison's general-purpose LLM CLI tool. Pipe any text to any model. Pairs with gcm. Source: https://llm.datasette.io/. | Ready to install |
 
+
+
+
+
 #### Backlog (unprioritized)
 
 | # | Tool | Status |
@@ -203,7 +297,12 @@ Templates (Email, WBR Callout, Meeting Prep) queued — build when prioritized.
 
 Backlog proposals: WBR auto-briefing, meeting prep auto-generator, invoice routing, testing tracker, keyword analysis pipeline. Build priority (brain.md Level 3): tools teammates adopt first.
 
-### Candidate Install: gcm + llm CLI
+
+
+
+
+
+
 **Source:** wiki/Topics/Git (Karpathy/Simon Willison ecosystem)
 **Install steps:**
 1. `pip install llm` (or `uv tool install llm`)
@@ -213,6 +312,10 @@ Backlog proposals: WBR auto-briefing, meeting prep auto-generator, invoice routi
 **Status:** Ready to install. Richard action — requires API key setup.
 
 ---
+
+
+
+
 
 ## 📊 Device Health
 
@@ -240,6 +343,10 @@ Backlog proposals: WBR auto-briefing, meeting prep auto-generator, invoice routi
 | Parquet Exports | ✅ | 4/5 |
 
 ---
+
+
+
+
 
 ## When to Read This File
 

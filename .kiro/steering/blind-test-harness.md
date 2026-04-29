@@ -47,6 +47,8 @@ Use when the proposal replicates something that already exists in the system.
 - Arm 2: Existing equivalent evaluated on the same inputs
 - Inputs: 1 per proposal (real data the existing system already handles)
 - Scoring: direct comparison — which wins on quality, correctness, integration with the rest of the system?
+
+#### Part 1
 - Verdict: existing > proposed / proposed > existing / different scope (one is strategic, one operational)
 
 Used in: Round 2 (8 of 11 proposals via this pattern).
@@ -131,6 +133,7 @@ soul.md is auto-injected into every session. Additions to it carry an **always-o
 Across three rounds of testing external AI proposals in April 2026:
 
 - **Round 1:** 4 of 6 adopted. Real gaps existed.
+  - Example: Round 1:** 4 of 6 adopted. Real gaps existed....
 - **Round 2:** 1 of 11 partial adoption. Most duplicated existing machinery.
 - **Round 3:** 0 of 5 adopted. All degraded baseline performance.
 

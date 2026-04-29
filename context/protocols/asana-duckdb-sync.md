@@ -375,19 +375,6 @@ WHERE task_gid NOT IN ({synced_gids}) AND deleted_at IS NULL AND completed = FAL
 ```
 Historical data in asana_task_history is never deleted.
 
-### EOD-2 Schema Change Summary
-
-During EOD-2, query recent changes:
-```sql
-SELECT change_type, entity_name, old_value, new_value, detected_at
-FROM schema_changes
-WHERE detected_at >= CURRENT_DATE
-ORDER BY detected_at;
-```
-Include in EOD-2 summary if any rows returned: "🔄 Schema changes detected today: [list]"
-
----
-
 ## DuckDB Views Reference
 
 These views are pre-created and available for any protocol to query:

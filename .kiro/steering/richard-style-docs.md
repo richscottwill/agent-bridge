@@ -1,14 +1,20 @@
 ---
 inclusion: manual
 ---
+
+
 # Richard Williams — Long-Form Document Style Guide
 
 Covers: experiment docs, testing plans, investigation docs, instructional docs, post-mortems, OP1/strategic narratives.
+
+
 
 ## Universal Rules
 - Max 3 bullet points per list before a paragraph break or new header. Lists longer than 3 items lose scannability.
 - Every list item must start with a verb or a number. Noun-only items are padding.
 - Headers must be questions or imperatives, never bare nouns. 'How to optimize AU NB CPA' not 'AU NB CPA Optimization'. 'When to escalate to Brandon' not 'Escalation Framework'. The header tells the reader what they'll get from the section.
+
+
 
 ## Strategic Narrative (OP1 / Leadership Docs)
 - Each section follows: problem → test → validated result → investment ask. Never present a result without the problem it solved. If the problem isn't clear, the result has no anchor.
@@ -19,6 +25,8 @@ Covers: experiment docs, testing plans, investigation docs, instructional docs, 
 - Signature phrases: "validated results," "measurement framework," "cross-functional collaboration," "connective tissue between platform capabilities and business objectives."
 - Worked example: Bad: "OCI drove results." Good: "OCI's phased rollout across 7 markets validated a measurement framework that reduced CPA by 18% — a result that compounds as we extend to the remaining 3 markets in 2026."
 
+
+
 ## Evidence-Based Documents (Experiments & Testing Plans)
 - **Experiment structure:** Question → Setup → Results → Recommendation. Worked example: "Does NB bid strategy reduce CPA?" → 6-week test, AU NB campaigns → CPA $168→$117 (-29%) → Adopt as baseline. Every experiment doc follows this exact arc — the question frames the setup, the setup frames the result, the result frames the ask.
 - **Testing plan structure:** Goal → Phased plan (with target dates + status) → Supporting case studies → Other initiatives.
@@ -28,10 +36,14 @@ Covers: experiment docs, testing plans, investigation docs, instructional docs, 
 - **Honesty about failures:** Never spin a negative result. "Bulk page did not perform better than the callback page." / "although regs too low to make strong conclusions." First person sparingly: "I found that," "I could have put more attention towards."
 - **Cross-market evidence:** Quantify expectations and cite precedent. Worked example: "I would expect Adobe to allow for a 5%-15% improvement in CPA" backed by "MX market efficiency (case study)."
 
+
+
 ## Post-Mortem / Retrospective Documents
 - Structure: Lessons Learned → Challenges → Accomplishments → Overview → Recommendations. Lead with lessons — the reader gets the learning immediately.
 - Most self-critical format. First person: "I could have put more attention towards moving forward on the planning."
 - Lessons are actionable, not abstract: "Start simple, then go granular" with specific example. Appendices for supporting data.
+
+
 
 ## Analytical & Procedural Documents (Investigation + How-To)
 
@@ -56,6 +68,8 @@ How-To-specific:
 - Imperative mood: "Set a realistic initial baseline" / "Observe actual ROAS data"
 - Practical framing: "Managing ROAS bid strategy is not passive."
 
+
+
 ## Common Failures in Any Document Draft
 
 | Failure | Rule | Fix |
@@ -64,6 +78,8 @@ How-To-specific:
 | Bare noun headers | Headers must be questions or imperatives, never bare nouns | "How to optimize AU NB CPA" not "AU NB CPA Optimization" |
 | Data without interpretation | Every table/data point needs a "so what" sentence | Numbers alone leave the reader guessing |
 | Em-dashes in draft | Never use em-dashes in drafted documents | Replace with commas, periods, colons, or parentheticals |
+
+
 
 ## Knowledge-Sharing Documents
 

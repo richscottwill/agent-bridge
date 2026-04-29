@@ -1,4 +1,12 @@
 <!-- DOC-0228 | duck_id: organ-spine -->
+
+
+
+
+
+
+
+
 # Spine — Structure & Continuity
 
 *The skeleton that holds everything together across sessions. Bootstrap sequence, directory conventions, environment rules, and the ground-truth files that define Richard's current state.*
@@ -6,6 +14,14 @@
 Last updated: 2026-04-01 (Wednesday PT)
 
 ---
+
+
+
+
+
+
+
+
 
 ## Session Bootstrap Sequence
 
@@ -30,7 +46,21 @@ Last updated: 2026-04-01 (Wednesday PT)
 
 ---
 
+
+
+
+
+
+
+
+
 ## Tool Access & Integrations
+
+
+
+
+
+
 
 ### MCP Servers (16 connected)
 
@@ -44,6 +74,14 @@ Last updated: 2026-04-01 (Wednesday PT)
 
 Full inventory + guardrails: `~/shared/context/active/mcp-tool-reference.md`
 
+
+
+
+
+
+
+
+
 ### Tool Access Troubleshooting
 
 **Common Failures:**
@@ -55,6 +93,14 @@ Full inventory + guardrails: `~/shared/context/active/mcp-tool-reference.md`
 **Worked example — tool access troubleshooting:** Query fails with "table not found" → check schema qualification. `SELECT * FROM asana_tasks` fails; `SELECT * FROM asana.asana_tasks` succeeds. Slack post to #ps-team fails silently → check channel ID. Only `C0993SRL6FQ` and self_dm are writable. Asana CreateTask for a teammate fails → guard hook blocks non-Richard GIDs.
 
 ---
+
+
+
+
+
+
+
+
 
 ## Quick Reference (Key IDs + Hook System)
 
@@ -86,6 +132,17 @@ Full hook details: see device.md → Installed Apps and hands.md → Hook System
 
 ---
 
+
+
+
+
+
+
+
+
+**Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
+
+
 ## Directory Map
 
 | Directory | Role | Owner | Contents |
@@ -105,9 +162,34 @@ Full hook details: see device.md → Installed Apps and hands.md → Hook System
 
 ---
 
+
+
+
+
+
+
+
+
 ## System Persistence & Ground Truth
 
+
+
+
+
+
+
 ### Durability Model
+
+
+
+**Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
+
+
+
+
+
+
+
 
 #### Four Layers
 
@@ -120,28 +202,51 @@ The system survives any single point of failure through four independent persist
 | Git | `agent-bridge` GitHub repo | Portable body, sanitized context, changelog | Container restart ✅, DevSpaces rebuild ✅, Platform migration ✅ |
 | MotherDuck | `md:ps_analytics` cloud DB | All structured data (Asana, signals, experiments, PS metrics) | Container restart ✅, DevSpaces rebuild ✅, Platform migration ✅ |
 
+
+
+
+
+
+
+
+
 #### Recovery Priority
 
 **Recovery priority:** MotherDuck (structured data) → SharePoint (artifacts + state) → Git (portable body) → Filesystem (rebuild from other three).
 
-### Ground Truth Files
 
-*Stay separate from organs — different update cadences.*
 
-| File | Location | What it is | Update cadence | Read when |
-|------|----------|-----------|----------------|-----------|
-| current.md | `~/shared/context/active/current.md` | Live state: projects, people, meetings, pending actions | Every loop run | Every session — most volatile file in the system |
-| org-chart.md | `~/shared/context/active/org-chart.md` | Org structure and reporting lines | On org changes | Drafting comms to unfamiliar stakeholders, reorg context |
-| rw-tracker.md | `~/shared/context/active/rw-tracker.md` | Weekly scorecard, 30-day challenge, To-Do sync | Every morning routine | AM-3 brief, coaching check-ins, Friday retro |
-| long-term-goals.md | `~/shared/context/active/long-term-goals.md` | The Five Levels strategic arc (L1-L5 with key metrics) | Monthly or on shift | Prioritization decisions, connecting tasks to strategy |
 
-**Rule:** These files are NOT absorbed into organs. They have different update cadences and serve as authoritative sources. Organs may reference them but never duplicate their content.
+
+
+
+
+
+### Ground Truth Files *Stay separate from organs — different update cadences.* | File | Location | What it is | Update cadence | Read when | |------|----------|-----------|----------------|-----------| | current.md | `~/shared/context/active/current.md` | Live state: projects, people, meetings, pending actions | Every loop run | Every session — most volatile file in the system | | org-chart.md | `~/shared/context/active/org-chart.md` | Org structure and reporting lines | On org changes | Drafting comms to unfamiliar stakeholders, reorg context | | rw-tracker.md | `~/shared/context/active/rw-tracker.md` | Weekly scorecard, 30-day challenge, To-Do sync | Every morning routine | AM-3 brief, coaching check-ins, Friday retro | | long-term-goals.md | `~/shared/context/active/long-term-goals.md` | The Five Levels strategic arc (L1-L5 with key metrics) | Monthly or on shift | Prioritization decisions, connecting tasks to strategy | **Rule:** These files are NOT absorbed into organs. They have different update cadences and serve as authoritative sources. Organs may reference them but never duplicate their content. 
+
+
+
+
+
+
+
 
 ### Quick-Check Keys
 
 *Avoid opening the file just to check one fact:*
 - current.md contains the active project list with status, the people Richard interacted with this week, and pending actions with owners.
 - rw-tracker.md contains the L1 streak count, weekly artifact tally, and the 30-day challenge status.
+
+
+
+
+
+
+
+
+**Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
+
+
 
 ### Common Failures
 

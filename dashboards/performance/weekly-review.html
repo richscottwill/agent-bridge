@@ -15,7 +15,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3/dist/chartjs-plugin-annotation.min.js"></script>
-<script src="../canon-chart.js?v=2026-04-28"></script>
+<script src="../canon-chart.js?v=2026-04-29-1115"></script>
 <link rel="preload" href="../data/callout-data.json" as="fetch" crossorigin>
 <link rel="preload" href="../data/forecast-data.json" as="fetch" crossorigin>
 <style>
@@ -122,45 +122,12 @@
   padding: var(--gap-sm) 0;
 }
 
-/* WR-D7 (2026-04-28): prior-week thread strip — 3-card horizontal strip
-   above the callout narrative. Current + 2 prior weeks at a glance.
-   Active week highlighted with brand-blue border + tint. */
-.wr-thread-strip {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap-sm);
-  margin-bottom: var(--gap-md);
-}
-@media (max-width: 900px) { .wr-thread-strip { grid-template-columns: 1fr; } }
-.wr-thread-card {
-  background: var(--color-panel-bg);
-  border: 1px solid var(--color-panel-border);
-  border-radius: 6px;
-  padding: var(--gap-sm) var(--gap-md);
-  font-size: var(--size-ui);
-  color: var(--color-text-body);
-  cursor: pointer;
-  transition: border-color 120ms ease, background-color 120ms ease;
-  font-variant-numeric: tabular-nums;
-}
-.wr-thread-card:hover {
-  border-color: var(--color-brand);
-}
-.wr-thread-card.active {
-  border-color: var(--color-brand);
-  background: rgba(0, 102, 204, 0.06);
-}
-.wr-thread-card .wr-thread-wk {
-  font-size: var(--size-meta);
-  color: var(--color-text-subtle);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 600;
-  margin-bottom: 2px;
-}
-.wr-thread-card .wr-thread-body {
-  line-height: 1.5;
-}
+/* WR-S3 (2026-04-29): sticky controls bar so Market / Week / Metric
+   stay visible as the reader scrolls through the callout, KPIs, charts,
+   and detail table. Replaces the prior-week thread strip (WR-D7, removed
+   same day) which was a redundant week-picker above the filter row.
+   The sticky behavior is on .wr-controls itself (see its rule below).
+   This wrapper block reserves top:0 offset + backdrop. */
 
 /* WR-D1 (2026-04-28): Forecast Hit Rate scorecard — 3 tiles + one-line
    auto-narrative summarizing the model's grade against last N weeks of
@@ -258,26 +225,10 @@ body {
 .wr-toc a:hover { color: var(--color-brand); background: rgba(0, 102, 204, 0.06); }
 .wr-toc-sep { color: var(--color-panel-border); }
 
-/* Header — matches .page-header semantics from projection-design-system */
-.wr-header {
-  padding: var(--gap-lg) 0 var(--gap-md);
-  border-bottom: 1px solid var(--color-panel-border);
-  margin-bottom: var(--gap-lg);
-}
-.wr-header h1 {
-  font-size: var(--size-section);
-  font-weight: 600;
-  color: var(--color-text-hero);
-  letter-spacing: -0.01em;
-}
-.wr-header-meta {
-  font-size: var(--size-meta);
-  color: var(--color-text-meta);
-  margin-top: 4px;
-}
-.wr-header-meta .wr-ts-accent { color: var(--color-brand); }
-
-/* Controls row — sits above the KPI strip. Three columns. */
+/* Controls row — sits above the KPI strip. Three columns.
+   WR-S3 (2026-04-29): made sticky so Market / Week / Metric stay visible
+   while scrolling through long content. Solid bg + border + z-index so
+   it floats cleanly over the panels below. */
 .wr-controls {
   display: flex;
   gap: var(--gap-lg);
@@ -286,6 +237,12 @@ body {
   align-items: flex-end;
   border-bottom: 1px solid var(--color-panel-border);
   margin-bottom: var(--gap-lg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-neutral-bg, #fff);
+  backdrop-filter: saturate(180%) blur(6px);
+  -webkit-backdrop-filter: saturate(180%) blur(6px);
 }
 .wr-control-group { display: flex; flex-direction: column; gap: 4px; }
 .wr-control-label {
@@ -375,6 +332,18 @@ body {
   color: var(--color-text-on-brand);
   border-color: var(--color-brand);
 }
+
+/* WR-S4 (2026-04-29): data-freshness tag pinned to the right edge of
+   the sticky controls bar. Replaces the old standalone <header>. */
+.wr-controls-meta {
+  margin-left: var(--gap-md);
+  font-size: var(--size-meta);
+  color: var(--color-text-meta);
+  text-align: right;
+  line-height: 1.35;
+  align-self: center;
+}
+.wr-controls-meta .wr-ts-accent { color: var(--color-brand); }
 
 /* KPI row — reuse .hero-kpi from projection-design-system.css but in a row */
 .wr-kpi-row {
@@ -627,6 +596,23 @@ body {
   max-height: none;
 }
 
+/* WR-S5 (2026-04-29): inside the Weekly/Monthly/Quarterly Detail
+   <details>, restore a constrained scroll so the table is a compact
+   fixed-height viewport. renderTable()/renderPeriodTable() auto-scroll
+   the "current" row to the vertical center when the details opens. */
+.wr-detail-scroll {
+  overflow-y: auto;
+  max-height: 360px;
+  scroll-behavior: smooth;
+}
+/* Sticky header so the column labels stay visible as you scroll. */
+.wr-detail-scroll .wr-weekly-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--color-panel-bg);
+}
+
 /* WR-S1 (2026-04-29): progressive-disclosure collapsible panels.
    <details> with a visual summary row that matches sec-panel chrome
    so the card identity stays consistent between collapsed and open
@@ -775,22 +761,25 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
   <span class="wr-toc-sep">&middot;</span>
   <a href="#sec-detail">Weekly Detail</a>
   <span class="wr-toc-sep">&middot;</span>
+  <a href="#sec-detail-monthly">Monthly</a>
+  <span class="wr-toc-sep">&middot;</span>
+  <a href="#sec-detail-quarterly">Quarterly</a>
+  <span class="wr-toc-sep">&middot;</span>
   <a href="#sec-channels">Channels</a>
   <span class="wr-toc-sep">&middot;</span>
   <a href="#sec-context">Context</a>
 </div>
 
-<!-- Header -->
-<header class="wr-header">
-  <h1>Weekly Review</h1>
-  <p class="wr-header-meta">Callout narrative + full-year tracker &middot; <span class="wr-ts-accent" id="dataTs"></span></p>
-</header>
-
 <!-- Controls -->
 <div class="wr-controls">
-  <div class="wr-control-group">
-    <span class="wr-control-label">Market</span>
-    <div class="wr-tab-row" id="marketTabs"></div>
+  <div class="wr-control-group wr-region-group">
+    <span class="wr-control-label">Region</span>
+    <div class="wr-tab-row" id="regionTabs"></div>
+    <!-- WR-R1 (2026-04-29): sub-market row appears only when the selected
+         region has member markets. Today that means EU5 only — clicking
+         EU5 exposes UK, DE, FR, IT, ES below. All other regions (WW, US,
+         CA, JP, MX, AU) are single entities with no sub-row. -->
+    <div class="wr-tab-row wr-submarket-row" id="submarketTabs" style="display:none"></div>
   </div>
   <div class="wr-control-group">
     <span class="wr-control-label">Week</span>
@@ -804,15 +793,17 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
     <span class="wr-control-label">Metric</span>
     <div class="wr-tab-row" id="metricTabs"></div>
   </div>
+  <!-- WR-S4 (2026-04-29): data freshness pinned to the right edge of the
+       sticky bar. Replaces the <header> block that previously sat above
+       the filters and scrolled away. The "Weekly Review" H1 is gone —
+       the page title lives in the browser tab already. -->
+  <div class="wr-controls-meta">
+    Callout narrative + full-year tracker &middot; <span class="wr-ts-accent" id="dataTs"></span>
+  </div>
 </div>
 
 <!-- WR-D3 callout narrative (top) -->
 <div id="calloutNarrative"></div>
-
-<!-- WR-D7 (2026-04-28): prior-week thread strip. Current + 2 prior weeks
-     as a 3-card strip so the reader has running context without
-     clicking back. Active week highlighted with brand-blue border. -->
-<div class="wr-thread-strip" id="threadStrip" role="group" aria-label="Recent weeks" style="display:none"></div>
 
 <!-- WR-D5 (2026-04-28): three-question framing below the narrative.
      Customer experience / Business performance / Pacing to target.
@@ -866,39 +857,100 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
      to Regs only, since 7 visible lines exceeded the 3-line budget. -->
 <div class="wr-chart-grid" id="sec-charts">
   <div class="sec-panel" id="sec-trend">
-    <h3><span>What happened — actuals vs OP2</span></h3>
+    <div class="wr-calib-head">
+      <h3 style="margin:0"><span>What happened — actuals vs OP2</span></h3>
+      <!-- WR-F1 (2026-04-29): axis filter parity with the calibration
+           panel. Defaults to Both because "What happened" is the
+           at-a-glance panel and both axes usually belong together. -->
+      <div class="wr-chart-axis-toggle" id="trendAxisToggle" role="group" aria-label="Trend axis filter">
+        <button class="wr-tab wr-chart-mode-btn" data-axis="regs">Regs</button>
+        <button class="wr-tab wr-chart-mode-btn" data-axis="spend">Spend</button>
+        <button class="wr-tab wr-chart-mode-btn active" data-axis="both">Both</button>
+      </div>
+    </div>
     <div class="wr-chart-wrap"><canvas id="trendChart" role="img" aria-label="Weekly trend: actuals vs OP2 target"></canvas></div>
   </div>
   <div class="sec-panel" id="sec-calibration">
     <div class="wr-calib-head">
-      <h3 style="margin:0"><span>Weekly forecast error</span></h3>
-      <div class="wr-chart-axis-toggle" id="calibAxisToggle" role="group" aria-label="Forecast error axis filter">
+      <h3 style="margin:0"><span>How did we do — forecast vs actual</span></h3>
+      <div class="wr-chart-axis-toggle" id="calibAxisToggle" role="group" aria-label="Calibration axis filter">
         <button class="wr-tab wr-chart-mode-btn active" data-axis="regs">Regs</button>
         <button class="wr-tab wr-chart-mode-btn" data-axis="spend">Spend</button>
         <button class="wr-tab wr-chart-mode-btn" data-axis="both">Both</button>
       </div>
     </div>
-    <div class="wr-chart-wrap"><canvas id="calibrationChart" role="img" aria-label="Weekly forecast error: signed % per week with severity fill and CI reference band"></canvas></div>
+    <div class="wr-chart-wrap"><canvas id="calibrationChart" role="img" aria-label="Forecast calibration: first prediction vs latest prediction vs actual"></canvas></div>
   </div>
 </div>
 <!-- WR-S1 (2026-04-29): Weekly Detail wrapped in <details> collapsed by default.
      The table is ~50+ rows; before collapsing it dominated ~500px of scroll on
      cold load. Summary row shows the table title so it remains scannable.
-     When expanded, the table flows inline (no inner scroll — pairs with WR-S4). -->
+     WR-S5 (2026-04-29): inside <details> the table is now vertically
+     scrollable with the current week auto-centered on expand. -->
 <details class="sec-panel wr-grid-full wr-collapsible" id="sec-detail" style="margin-bottom:var(--gap-lg)">
   <summary class="wr-collapsible-summary">Weekly Detail <span class="wr-collapsible-hint">(click to expand)</span></summary>
-  <div class="wr-table-scroll wr-table-scroll-open">
+  <div class="wr-table-scroll wr-table-scroll-open wr-detail-scroll" id="weeklyScroll">
     <table class="wr-weekly-table">
       <thead><tr>
         <th>Week</th>
-        <th class="r">Regs</th>
-        <th class="r" title="Calibration delta — actual vs predicted (past weeks only)">vs Pred</th>
-        <th class="r">OP2</th>
-        <th class="r">Cost</th>
-        <th class="r">CPA</th>
-        <th class="r">WoW &Delta;</th>
+        <th class="r">Regs OP2</th>
+        <th class="r">Regs Act</th>
+        <th class="r">Regs Pred</th>
+        <th class="r" title="Regs calibration — actual vs predicted (past weeks only)">Regs vs Pred</th>
+        <th class="r">Cost Act</th>
+        <th class="r">Cost Pred</th>
+        <th class="r" title="Cost calibration — actual vs predicted (past weeks only)">Cost vs Pred</th>
+        <th class="r">Regs WoW &Delta;</th>
+        <th class="r">Cost WoW &Delta;</th>
       </tr></thead>
       <tbody id="weeklyBody"></tbody>
+    </table>
+  </div>
+</details>
+
+<!-- WR-S5 (2026-04-29): Monthly Detail — client-side aggregation of the
+     weekly rows by calendar month (using ISO-week Thursday rule, same
+     mapping the chart uses for gridlines). Collapsed by default. -->
+<details class="sec-panel wr-grid-full wr-collapsible" id="sec-detail-monthly" style="margin-bottom:var(--gap-lg)">
+  <summary class="wr-collapsible-summary">Monthly Detail <span class="wr-collapsible-hint">(click to expand)</span></summary>
+  <div class="wr-table-scroll wr-table-scroll-open wr-detail-scroll" id="monthlyScroll">
+    <table class="wr-weekly-table">
+      <thead><tr>
+        <th>Month</th>
+        <th class="r">Regs OP2</th>
+        <th class="r">Regs Act</th>
+        <th class="r">Regs Pred</th>
+        <th class="r" title="Regs calibration — actual vs predicted (closed months only)">Regs vs Pred</th>
+        <th class="r">Cost Act</th>
+        <th class="r">Cost Pred</th>
+        <th class="r" title="Cost calibration — actual vs predicted (closed months only)">Cost vs Pred</th>
+        <th class="r">Regs MoM &Delta;</th>
+        <th class="r">Cost MoM &Delta;</th>
+      </tr></thead>
+      <tbody id="monthlyBody"></tbody>
+    </table>
+  </div>
+</details>
+
+<!-- WR-S5 (2026-04-29): Quarterly Detail — client-side aggregation by
+     ISO-week quarter (Q1=Jan-Mar, etc). Collapsed by default. -->
+<details class="sec-panel wr-grid-full wr-collapsible" id="sec-detail-quarterly" style="margin-bottom:var(--gap-lg)">
+  <summary class="wr-collapsible-summary">Quarterly Detail <span class="wr-collapsible-hint">(click to expand)</span></summary>
+  <div class="wr-table-scroll wr-table-scroll-open wr-detail-scroll" id="quarterlyScroll">
+    <table class="wr-weekly-table">
+      <thead><tr>
+        <th>Quarter</th>
+        <th class="r">Regs OP2</th>
+        <th class="r">Regs Act</th>
+        <th class="r">Regs Pred</th>
+        <th class="r" title="Regs calibration — actual vs predicted (closed quarters only)">Regs vs Pred</th>
+        <th class="r">Cost Act</th>
+        <th class="r">Cost Pred</th>
+        <th class="r" title="Cost calibration — actual vs predicted (closed quarters only)">Cost vs Pred</th>
+        <th class="r">Regs QoQ &Delta;</th>
+        <th class="r">Cost QoQ &Delta;</th>
+      </tr></thead>
+      <tbody id="quarterlyBody"></tbody>
     </table>
   </div>
 </details>
@@ -933,6 +985,33 @@ let CALLOUTS = null;  // callout-data.json
 let FORECAST = null;  // forecast-data.json
 let curMarket = null;
 let curWeek = null;
+let curRegion = null;  // WR-R1: active region tab; derived from curMarket on every render.
+
+// WR-R1 (2026-04-29): sets of markets present in each data source.
+// Populated in init() once the JSON loads. Module-scoped so
+// renderSubmarketRow() can use them without re-reading the files.
+let calloutSet = new Set();
+let forecastSet = new Set();
+
+// WR-R1 (2026-04-29): Region taxonomy. Top-level tabs in the filter bar.
+// Only EU5 has a sub-row today (clicking EU5 exposes UK/DE/FR/IT/ES
+// below the top row). WW has its own aggregate but no drill-down —
+// regional views live elsewhere in the page. All other regions are
+// single markets.
+const REGION_ORDER = ['WW', 'EU5', 'US', 'CA', 'JP', 'MX', 'AU'];
+const REGION_MEMBERS = {
+  EU5: ['EU5', 'UK', 'DE', 'FR', 'IT', 'ES'],
+};
+// Inverse lookup: market -> region. Used by render() to highlight the
+// right region tab when curMarket changes.
+const MARKET_TO_REGION = (() => {
+  const m = {};
+  REGION_ORDER.forEach(r => { m[r] = r; });
+  Object.entries(REGION_MEMBERS).forEach(([region, members]) => {
+    members.forEach(x => { m[x] = region; });
+  });
+  return m;
+})();
 // WR-P2 (2026-04-28): metric preference is per-market in localStorage.
 // JP/AU default to `cost` on first visit because regs is degenerate for
 // spend-only markets. Restored from the map whenever curMarket changes.
@@ -943,10 +1022,57 @@ const metricByMarket = (() => {
 function defaultMetricForMarket(m) {
   return metricByMarket[m] || (['JP', 'AU'].includes(m) ? 'cost' : 'regs');
 }
+
+// WR-R1 (2026-04-29): Paint the sub-market row for the active region.
+// Hidden entirely when the region has no members (WW, US, CA, JP, MX,
+// AU). Module-scoped so both init() and render() can call it.
+function renderSubmarketRow() {
+  const submarketHost = document.getElementById('submarketTabs');
+  if (!submarketHost) return;
+  const members = REGION_MEMBERS[curRegion];
+  if (!members || !members.length) {
+    submarketHost.style.display = 'none';
+    submarketHost.innerHTML = '';
+    return;
+  }
+  submarketHost.style.display = '';
+  submarketHost.innerHTML = '';
+  members.forEach(m => {
+    // Skip members absent from the data — prevents dead tabs.
+    if (!calloutSet.has(m) && !forecastSet.has(m)) return;
+    const b = document.createElement('button');
+    const forecastOnly = !calloutSet.has(m);
+    b.className = 'wr-tab' +
+      (m === curMarket ? ' active' : '') +
+      (forecastOnly ? ' wr-tab-no-callout' : '');
+    b.textContent = forecastOnly ? m + '\u2020' : m;
+    b.dataset.market = m;
+    if (forecastOnly) b.title = 'Forecast only — no callout narrative for this market yet.';
+    b.onclick = () => {
+      curMarket = m;
+      curMetric = defaultMetricForMarket(curMarket);
+      render();
+    };
+    submarketHost.appendChild(b);
+  });
+}
 let curMetric = 'regs';  // reseeded from the map inside init() after curMarket resolves
 let trendChart = null;      // WR-D2: separate instance for the trend panel
 let calibrationChart = null; // WR-D2: separate instance for the calibration panel
-let calibrationAxis = 'regs';  // WR-D2: axis filter for calibration (regs / spend / both)
+// WR-D2: axis filters for the two charts (regs / spend / both).
+// WR-F1 (2026-04-29): persist both to localStorage so the user's
+// preference sticks across reloads. Calibration defaults to 'regs'
+// (original WR-D2 rationale: 7 visible lines exceeded the 3-line
+// budget); trend defaults to 'both' since the "at a glance" chart
+// usually wants both stories on one view.
+let trendAxis = 'both';
+let calibrationAxis = 'regs';
+try {
+  const savedTrend = localStorage.getItem('wr-trend-axis');
+  const savedCalib = localStorage.getItem('wr-calibration-axis');
+  if (['regs','spend','both'].includes(savedTrend)) trendAxis = savedTrend;
+  if (['regs','spend','both'].includes(savedCalib)) calibrationAxis = savedCalib;
+} catch (e) { /* ignore */ }
 // Legacy single-chart ref retained so any external scripts referencing
 // `chart` don't throw; mirrors trendChart.
 let chart = null;
@@ -975,8 +1101,8 @@ function init() {
   // + chart + table normally and surfaces "No callout for {market}" in the
   // callout section. Prior behavior was intersection, which silently
   // swallowed any market present in only one data source.
-  const calloutSet = new Set(CALLOUTS.markets || []);
-  const forecastSet = new Set(FORECAST.markets || []);
+  calloutSet = new Set(CALLOUTS.markets || []);
+  forecastSet = new Set(FORECAST.markets || []);
   const markets = MARKET_ORDER.filter(m => calloutSet.has(m) || forecastSet.has(m));
 
   // WR-P1 (2026-04-28): URL state + explicit latest-week default.
@@ -990,7 +1116,16 @@ function init() {
   const urlParams = new URLSearchParams(location.search);
   const urlMarket = urlParams.get('market');
   const urlWeek   = urlParams.get('week');
-  curMarket = (urlMarket && markets.includes(urlMarket)) ? urlMarket : (markets[0] || 'US');
+  // WR-S6 (2026-04-29): market precedence is URL > localStorage > default.
+  // Explicit URL link overrides remembered state (so shared links still
+  // go to the intended market). Otherwise restore the last market the
+  // user picked so a cold reload lands where they left off.
+  let savedMarket = null;
+  try { savedMarket = localStorage.getItem('wr-last-market'); } catch (e) { /* ignore */ }
+  const pickedMarket = (urlMarket && markets.includes(urlMarket))
+    ? urlMarket
+    : (savedMarket && markets.includes(savedMarket) ? savedMarket : (markets[0] || 'US'));
+  curMarket = pickedMarket;
   const calloutWeeks = CALLOUTS.weeks || [];
   // Prefer a callout week for the current market; fall back to the global
   // first week; then to a synthetic "W{max_week}" if no callouts loaded.
@@ -1004,25 +1139,36 @@ function init() {
   // known. JP/AU default to 'cost' via defaultMetricForMarket.
   curMetric = defaultMetricForMarket(curMarket);
 
-  // Market tabs
-  const tabs = document.getElementById('marketTabs');
-  markets.forEach(m => {
+  // WR-R1 (2026-04-29): Region + sub-market tabs. Taxonomy + inverse
+  // lookup are declared at module scope above. Here we filter the set
+  // to what's actually in the loaded data, build the region row once,
+  // and render the sub-market row for the active region.
+  const availableRegions = REGION_ORDER.filter(r => calloutSet.has(r) || forecastSet.has(r));
+  curRegion = MARKET_TO_REGION[curMarket] || curMarket;
+
+  const regionTabsHost = document.getElementById('regionTabs');
+  availableRegions.forEach(r => {
     const b = document.createElement('button');
-    const forecastOnly = !calloutSet.has(m);
-    b.className = 'wr-tab' +
-      (m === curMarket ? ' active' : '') +
-      (forecastOnly ? ' wr-tab-no-callout' : '');
-    b.textContent = forecastOnly ? m + '\u2020' : m;  // dagger indicates no callout
-    b.dataset.market = m;  // WR-C7: stable ref for active-state toggle
-    if (forecastOnly) b.title = 'Forecast only — no callout narrative for this market yet.';
+    b.className = 'wr-tab' + (r === curRegion ? ' active' : '');
+    b.textContent = r;
+    b.dataset.region = r;
     b.onclick = () => {
-      curMarket = m;
-      // WR-P2: restore this market's preferred metric on switch.
+      curRegion = r;
+      // Default market when entering a region: the region itself if it
+      // has its own aggregate row in the data (all top-level entries
+      // here do today). Otherwise fall back to the first member.
+      const members = REGION_MEMBERS[r];
+      if (calloutSet.has(r) || forecastSet.has(r)) {
+        curMarket = r;
+      } else if (members && members.length) {
+        curMarket = members[0];
+      }
       curMetric = defaultMetricForMarket(curMarket);
       render();
     };
-    tabs.appendChild(b);
+    regionTabsHost.appendChild(b);
   });
+  renderSubmarketRow();
 
   // Week selector + nav
   const sel = document.getElementById('weekSelect');
@@ -1136,10 +1282,22 @@ function render() {
       history.replaceState({}, '', '?' + next);
     }
   } catch (e) { /* URL API sandboxed — silent fallback */ }
+  // WR-S6 (2026-04-29): persist the active market so cold reloads return
+  // to where the user was. Paired with the URL > localStorage > default
+  // precedence in init(). Silent on quota/security errors.
+  try { localStorage.setItem('wr-last-market', curMarket); } catch (e) { /* ignore */ }
 
-  // Update active states (WR-C7: use data-market instead of textContent
-  // since forecast-only markets carry a dagger suffix in their label).
-  document.querySelectorAll('#marketTabs .wr-tab').forEach(b => {
+  // Update active states:
+  // (1) Region tabs — derive curRegion from curMarket each render so URL
+  //     nav (or any other path that touches curMarket directly) re-syncs
+  //     the region highlight. (2) Re-render the sub-market row if the
+  //     region changed. (3) Sub-market active state.
+  curRegion = MARKET_TO_REGION[curMarket] || curMarket;
+  document.querySelectorAll('#regionTabs .wr-tab').forEach(b => {
+    b.classList.toggle('active', b.dataset.region === curRegion);
+  });
+  renderSubmarketRow();
+  document.querySelectorAll('#submarketTabs .wr-tab').forEach(b => {
     const m = b.dataset.market;
     const forecastOnly = b.classList.contains('wr-tab-no-callout');
     b.className = 'wr-tab' +
@@ -1151,13 +1309,14 @@ function render() {
   document.getElementById('nextWeek').disabled = weeks.indexOf(curWeek) <= 0;
 
   renderCallout();
-  renderThread();
   renderThreeQ();
   renderVariance();
   renderScorecard();
   renderKPIs();
   renderChart();
   renderTable();
+  renderMonthlyTable();
+  renderQuarterlyTable();
 }
 
 // ============================================================================
@@ -1375,59 +1534,6 @@ function renderThreeQ() {
 // Current + 2 prior weeks of metrics so the reader enters each week's
 // narrative with context on the two preceding it. Clicking a card
 // switches to that week (re-renders the whole page).
-function renderThread() {
-  const host = document.getElementById('threadStrip');
-  if (!host) return;
-  const weeks = CALLOUTS.weeks || [];
-  const idx = weeks.indexOf(curWeek);
-  if (idx < 0) { host.style.display = 'none'; host.innerHTML = ''; return; }
-  // Weeks array is newest-first, so the current week's preceding weeks
-  // are at higher indices. Show current + up to 2 prior.
-  const window = [];
-  for (let i = idx; i < Math.min(weeks.length, idx + 3); i++) {
-    window.push(weeks[i]);
-  }
-  window.reverse();  // render oldest → newest so the eye reads the trend
-  const cards = window.map(wk => {
-    const c = (CALLOUTS.callouts[curMarket] || {})[wk];
-    if (!c) return '';
-    const m = c.metrics || {};
-    const active = wk === curWeek;
-    const regsStr = Number.isFinite(m.regs)
-      ? (m.regs >= 1000 ? (m.regs / 1000).toFixed(1) + 'K' : String(Math.round(m.regs)))
-      : '\u2014';
-    const wowTag = Number.isFinite(m.regs_wow)
-      ? `<span class="wr-delta ${m.regs_wow > 0.5 ? 'good' : (m.regs_wow < -0.5 ? 'bad' : 'warn')}">${m.regs_wow > 0 ? '+' : ''}${m.regs_wow.toFixed(0)}%</span>`
-      : '';
-    const cpaStr = Number.isFinite(m.cpa) ? '$' + Math.round(m.cpa) : '\u2014';
-    const brandStr = Number.isFinite(m.brand_regs)
-      ? (m.brand_regs >= 1000 ? (m.brand_regs / 1000).toFixed(1) + 'K' : String(Math.round(m.brand_regs)))
-      : '\u2014';
-    const nbStr = Number.isFinite(m.nb_regs)
-      ? (m.nb_regs >= 1000 ? (m.nb_regs / 1000).toFixed(1) + 'K' : String(Math.round(m.nb_regs)))
-      : '\u2014';
-    return `<div class="wr-thread-card${active ? ' active' : ''}" data-wk="${wk}">
-      <div class="wr-thread-wk">${wk}${active ? ' &middot; current' : ''}</div>
-      <div class="wr-thread-body">${regsStr} regs ${wowTag} &middot; CPA ${cpaStr} &middot; Brand ${brandStr} / NB ${nbStr}</div>
-    </div>`;
-  }).filter(Boolean).join('');
-  if (!cards) { host.style.display = 'none'; host.innerHTML = ''; return; }
-  host.style.display = '';
-  host.innerHTML = cards;
-  // Wire clicks — switching week triggers render()
-  host.querySelectorAll('.wr-thread-card').forEach(el => {
-    el.onclick = () => {
-      const wk = el.dataset.wk;
-      if (wk && wk !== curWeek) {
-        curWeek = wk;
-        const sel = document.getElementById('weekSelect');
-        if (sel) sel.value = wk;
-        render();
-      }
-    };
-  });
-}
-
 // WR-D6 Variance decomposition — waterfall table of WoW contribution.
 // Prior-week regs → + NB delta → + Brand delta → + residual → current-week
 // regs. Deltas use brand_detail.regs/lw_regs + nb_detail.regs/lw_regs.
@@ -1855,35 +1961,60 @@ function renderKPIs() {
 function renderChart() {
   if (!FORECAST) return;
   // WR-D2: render both charts on cold load — trend (default) + calibration.
+  // WR-F1 (2026-04-29): both charts now respect an axis filter. The
+  // two state vars are independent so user can e.g. view both on trend
+  // but regs-only on calibration.
   trendChart = CanonChart.render('trendChart', {
     forecastData: FORECAST,
     market: curMarket,
     mode: 'default',
     highlightWeek: curWeek,
     chartInstance: trendChart,
+    axisFilter: trendAxis,
   });
   chart = trendChart;  // keep legacy ref in sync
   calibrationChart = CanonChart.render('calibrationChart', {
     forecastData: FORECAST,
     market: curMarket,
-    mode: 'error',
+    mode: 'calibration',
     highlightWeek: curWeek,
     chartInstance: calibrationChart,
-    axisFilter: calibrationAxis,   // regs / spend / both
+    axisFilter: calibrationAxis,
   });
-  // Axis toggle wiring — only attach once, idempotent per render.
-  const toggle = document.getElementById('calibAxisToggle');
-  if (toggle && !toggle.dataset.wired) {
-    toggle.dataset.wired = '1';
-    toggle.querySelectorAll('.wr-tab').forEach(b => {
-      b.onclick = () => {
-        calibrationAxis = b.dataset.axis;
-        toggle.querySelectorAll('.wr-tab').forEach(x =>
-          x.classList.toggle('active', x.dataset.axis === calibrationAxis));
-        renderChart();
-      };
-    });
-  }
+  // Axis toggle wiring — idempotent per render via data-wired flag.
+  wireAxisToggle('trendAxisToggle', () => trendAxis, (v) => {
+    trendAxis = v;
+    try { localStorage.setItem('wr-trend-axis', v); } catch (e) { /* ignore */ }
+  });
+  wireAxisToggle('calibAxisToggle', () => calibrationAxis, (v) => {
+    calibrationAxis = v;
+    try { localStorage.setItem('wr-calibration-axis', v); } catch (e) { /* ignore */ }
+  });
+  // Sync active state on every render (handles the localStorage restore
+  // path where the default HTML class attribute is wrong).
+  syncAxisActive('trendAxisToggle', trendAxis);
+  syncAxisActive('calibAxisToggle', calibrationAxis);
+}
+
+// WR-F1 (2026-04-29): generic axis-toggle wiring used by both trend
+// and calibration panels. Reads current value via getter, calls setter
+// on click, then re-renders.
+function wireAxisToggle(toggleId, getter, setter) {
+  const toggle = document.getElementById(toggleId);
+  if (!toggle || toggle.dataset.wired) return;
+  toggle.dataset.wired = '1';
+  toggle.querySelectorAll('.wr-tab').forEach(b => {
+    b.onclick = () => {
+      setter(b.dataset.axis);
+      renderChart();
+    };
+  });
+}
+function syncAxisActive(toggleId, value) {
+  const toggle = document.getElementById(toggleId);
+  if (!toggle) return;
+  toggle.querySelectorAll('.wr-tab').forEach(x =>
+    x.classList.toggle('active', x.dataset.axis === value));
 }
 
 function renderTable() {
@@ -1894,13 +2025,23 @@ function renderTable() {
     const isActual = w.regs > 0 || w.cost > 0;
     const isFuture = w.wk > maxWk;
     const prev = i > 0 ? weeks[i - 1] : null;
+    // WR-S5 (2026-04-29): split Regs WoW and Cost WoW. Both use the
+    // "actual if present, else pred" rule for both current and prior
+    // rows so the series is continuous across the past→future seam.
     const prevRegs = prev && prev.regs > 0 ? prev.regs : (prev && prev.pred_regs ? prev.pred_regs : null);
     const curRegs = isActual ? w.regs : w.pred_regs;
-    // WR-C1: use safeWoW helper for symmetric thresholds + 0-prior safety.
-    const wowRaw = safeWoW(curRegs, prevRegs);
-    const wow = wowRaw != null ? wowRaw.toFixed(1) : null;
-    const wowCls = wowRaw == null ? 'warn' : cls(wowRaw, false);
-    const wowTxt = wow != null ? `<span class="wr-delta ${wowCls}">${wow > 0 ? '+' : ''}${wow}%</span>` : '\u2014';
+    const regsWowRaw = safeWoW(curRegs, prevRegs);
+    const regsWowTxt = regsWowRaw != null
+      ? `<span class="wr-delta ${cls(regsWowRaw, false)}">${regsWowRaw > 0 ? '+' : ''}${regsWowRaw.toFixed(1)}%</span>`
+      : '\u2014';
+    const prevCost = prev && prev.cost > 0 ? prev.cost : (prev && prev.pred_cost ? prev.pred_cost : null);
+    const curCost = isActual && w.cost ? w.cost : (w.pred_cost || null);
+    const costWowRaw = safeWoW(curCost, prevCost);
+    // Cost WoW: higher is NOT intrinsically good or bad. Use the
+    // neutral `inv=true` coloring so small moves don't get flagged.
+    const costWowTxt = costWowRaw != null
+      ? `<span class="wr-delta ${cls(costWowRaw, true)}">${costWowRaw > 0 ? '+' : ''}${costWowRaw.toFixed(1)}%</span>`
+      : '\u2014';
 
     const rowCls = [];
     if (isFuture) rowCls.push('future-row');
@@ -1909,33 +2050,266 @@ function renderTable() {
     const rowClsAttr = rowCls.length ? ' class="' + rowCls.join(' ') + '"' : '';
 
     const predLabel = isFuture ? ' <span class="pred-lbl">pred</span>' : '';
-    // WR-C4: Regs column carries actual (past) or pred_regs (future, amber).
-    // Pred column repurposed as "vs Pred" — past rows show calibration delta
-    // (actual − predicted as %); future rows show em-dash since there's
-    // nothing to calibrate against yet.
-    const regsVal = isActual ? fmt(w.regs, 'regs') : (w.pred_regs ? `<span class="pred-val">${fmt(w.pred_regs, 'regs')}</span>` : '\u2014');
-    const vsPredRaw = (isActual && w.pred_regs && w.regs)
+    // Regs split
+    const op2Val = w.op2_regs ? fmt(w.op2_regs, 'regs') : '\u2014';
+    const regsActVal = isActual ? fmt(w.regs, 'regs') : '\u2014';
+    const regsPredVal = w.pred_regs ? `<span class="pred-val">${fmt(w.pred_regs, 'regs')}</span>` : '\u2014';
+    const regsVsPredRaw = (isActual && w.pred_regs && w.regs)
       ? (w.regs - w.pred_regs) / w.pred_regs * 100
       : null;
-    const vsPredCls = vsPredRaw == null ? 'warn' : cls(vsPredRaw, false);
-    const vsPredVal = vsPredRaw != null
-      ? `<span class="wr-delta ${vsPredCls}">${vsPredRaw > 0 ? '+' : ''}${vsPredRaw.toFixed(1)}%</span>`
+    const regsVsPredVal = regsVsPredRaw != null
+      ? `<span class="wr-delta ${cls(regsVsPredRaw, false)}">${regsVsPredRaw > 0 ? '+' : ''}${regsVsPredRaw.toFixed(1)}%</span>`
       : '\u2014';
-    const op2Val = w.op2_regs ? fmt(w.op2_regs, 'regs') : '\u2014';
-    const costVal = isActual && w.cost ? fmt(w.cost, 'cost') : (w.pred_cost ? `<span class="pred-val">${fmt(w.pred_cost, 'cost')}</span>` : '\u2014');
-    const cpaVal = isActual && w.cpa ? fmt(w.cpa, 'cpa') : (w.pred_cpa ? `<span class="pred-val">${fmt(w.pred_cpa, 'cpa')}</span>` : '\u2014');
+    // Cost split
+    const costActVal = isActual && w.cost ? fmt(w.cost, 'cost') : '\u2014';
+    const costPredVal = w.pred_cost ? `<span class="pred-val">${fmt(w.pred_cost, 'cost')}</span>` : '\u2014';
+    const costVsPredRaw = (isActual && w.pred_cost && w.cost)
+      ? (w.cost - w.pred_cost) / w.pred_cost * 100
+      : null;
+    // Cost being OVER pred is neutral-to-negative (we spent more than
+    // expected). Use inv=true so +N% lands warn/bad instead of good.
+    const costVsPredVal = costVsPredRaw != null
+      ? `<span class="wr-delta ${cls(costVsPredRaw, true)}">${costVsPredRaw > 0 ? '+' : ''}${costVsPredRaw.toFixed(1)}%</span>`
+      : '\u2014';
 
     return `<tr${rowClsAttr}>
       <td>${w.week}${predLabel}</td>
-      <td class="r">${regsVal}</td>
-      <td class="r">${vsPredVal}</td>
       <td class="r" style="color:var(--color-text-subtle)">${op2Val}</td>
-      <td class="r">${costVal}</td>
-      <td class="r">${cpaVal}</td>
-      <td class="r">${wowTxt}</td>
+      <td class="r">${regsActVal}</td>
+      <td class="r">${regsPredVal}</td>
+      <td class="r">${regsVsPredVal}</td>
+      <td class="r">${costActVal}</td>
+      <td class="r">${costPredVal}</td>
+      <td class="r">${costVsPredVal}</td>
+      <td class="r">${regsWowTxt}</td>
+      <td class="r">${costWowTxt}</td>
     </tr>`;
   }).join('');
+  // WR-S5 (2026-04-29): center the current-week row in the scroll viewport.
+  centerSelectedRow('weeklyScroll');
 }
+
+// WR-S5 (2026-04-29): center the .selected <tr> inside the given scroll
+// host. Called after each renderTable / renderMonthlyTable / renderQuarterlyTable
+// so the current period is visually centered on the first paint and on
+// every re-render. Uses scrollIntoView with block:'center' which handles
+// the arithmetic correctly even when the row is partially offscreen.
+function centerSelectedRow(hostId) {
+  const host = document.getElementById(hostId);
+  if (!host) return;
+  const row = host.querySelector('tr.selected');
+  if (!row) return;
+  // Compute center-align manually so we don't scroll the OUTER page —
+  // scrollIntoView({block:'center'}) would pull the parent details into
+  // view, which is jarring when the user hasn't expanded it yet.
+  const hostRect = host.getBoundingClientRect();
+  const rowRect = row.getBoundingClientRect();
+  const delta = (rowRect.top - hostRect.top) - (host.clientHeight / 2 - row.offsetHeight / 2);
+  host.scrollTop = Math.max(0, host.scrollTop + delta);
+}
+
+// WR-S5 (2026-04-29): Monthly / Quarterly detail tables.
+//
+// Both are client-side rollups of the weekly FORECAST rows for the
+// current market — no data-pipeline changes. Grouping uses the ISO-week
+// Thursday rule (same as the chart's month gridlines) so a single week
+// can't land in two buckets.
+//
+// The rollup sums additive columns (regs, pred_regs, cost, op2_regs,
+// pred_cost) and derives CPAs from cost/regs at the group level so
+// period CPAs aren't weighted averages of weekly CPAs (which is wrong).
+// "vs Pred" and MoM/QoQ deltas are computed on the aggregates.
+
+function isoWeekMonday(year, wk) {
+  const jan4 = new Date(Date.UTC(year, 0, 4));
+  const jan4Dow = jan4.getUTCDay() || 7;
+  const week1Mon = new Date(jan4);
+  week1Mon.setUTCDate(jan4.getUTCDate() - (jan4Dow - 1));
+  const mon = new Date(week1Mon);
+  mon.setUTCDate(week1Mon.getUTCDate() + (wk - 1) * 7);
+  return mon;
+}
+function isoWeekMonthIdx(year, wk) {
+  // Assign the week to the month of its Thursday (standard ISO convention)
+  const mon = isoWeekMonday(year, wk);
+  const thu = new Date(mon);
+  thu.setUTCDate(mon.getUTCDate() + 3);
+  return thu.getUTCMonth(); // 0-11
+}
+const MONTH_NAMES_FULL = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+function aggregatePeriod(weeks, periodKey, year) {
+  // Group weekly rows by a period key fn: (week, year) -> 'M04' | 'Q2'
+  const groups = new Map();
+  weeks.forEach(w => {
+    const key = periodKey(w.wk, year);
+    if (!groups.has(key)) groups.set(key, {
+      key, regs: 0, pred_regs: 0, cost: 0, pred_cost: 0, op2_regs: 0,
+      weeks: [], isActualAny: false, isFutureAll: true,
+    });
+    const g = groups.get(key);
+    const isActual = (w.regs || 0) > 0 || (w.cost || 0) > 0;
+    if (isActual) { g.isActualAny = true; g.isFutureAll = false; }
+    if (w.regs)      g.regs      += w.regs;
+    if (w.pred_regs) g.pred_regs += w.pred_regs;
+    if (w.cost)      g.cost      += w.cost;
+    if (w.pred_cost) g.pred_cost += w.pred_cost;
+    if (w.op2_regs)  g.op2_regs  += w.op2_regs;
+    g.weeks.push(w);
+  });
+  // Derive period CPA from cost/regs, not mean of weekly cpa.
+  groups.forEach(g => {
+    g.cpa = g.regs > 0 ? g.cost / g.regs : null;
+    g.pred_cpa = g.pred_regs > 0 ? (g.pred_cost || 0) / g.pred_regs : null;
+  });
+  return Array.from(groups.values());
+}
+
+function renderPeriodTable(periods, bodyId, scrollId, labelFn, currentKey, deltaLabel) {
+  const body = document.getElementById(bodyId);
+  if (!body) return;
+  body.innerHTML = periods.map((p, i) => {
+    const prev = i > 0 ? periods[i - 1] : null;
+
+    // WR-S5 (2026-04-29): Regs and Cost MoM/QoQ deltas, both using the
+    // "actual if present, else pred" rule for prev and current.
+    const curRegsAgg = p.isActualAny ? p.regs : p.pred_regs;
+    const prevRegsAgg = prev ? (prev.isActualAny ? prev.regs : prev.pred_regs) : null;
+    const regsDomRaw = safeWoW(curRegsAgg, prevRegsAgg);
+    const regsDomTxt = regsDomRaw != null
+      ? `<span class="wr-delta ${cls(regsDomRaw, false)}">${regsDomRaw > 0 ? '+' : ''}${regsDomRaw.toFixed(1)}%</span>`
+      : '\u2014';
+    const curCostAgg = p.isActualAny && p.cost ? p.cost : (p.pred_cost || null);
+    const prevCostAgg = prev ? (prev.isActualAny && prev.cost ? prev.cost : (prev.pred_cost || null)) : null;
+    const costDomRaw = safeWoW(curCostAgg, prevCostAgg);
+    const costDomTxt = costDomRaw != null
+      ? `<span class="wr-delta ${cls(costDomRaw, true)}">${costDomRaw > 0 ? '+' : ''}${costDomRaw.toFixed(1)}%</span>`
+      : '\u2014';
+
+    const isFuture = p.isFutureAll;
+    const predLabel = isFuture ? ' <span class="pred-lbl">pred</span>' : '';
+    const op2Val = p.op2_regs ? fmt(p.op2_regs, 'regs') : '\u2014';
+    const regsActVal = p.isActualAny ? fmt(p.regs, 'regs') : '\u2014';
+    const regsPredVal = p.pred_regs ? `<span class="pred-val">${fmt(p.pred_regs, 'regs')}</span>` : '\u2014';
+    const regsVsPredRaw = (p.isActualAny && p.pred_regs && p.regs)
+      ? (p.regs - p.pred_regs) / p.pred_regs * 100
+      : null;
+    const regsVsPredVal = regsVsPredRaw != null
+      ? `<span class="wr-delta ${cls(regsVsPredRaw, false)}">${regsVsPredRaw > 0 ? '+' : ''}${regsVsPredRaw.toFixed(1)}%</span>`
+      : '\u2014';
+    const costActVal = p.isActualAny && p.cost ? fmt(p.cost, 'cost') : '\u2014';
+    const costPredVal = p.pred_cost ? `<span class="pred-val">${fmt(p.pred_cost, 'cost')}</span>` : '\u2014';
+    const costVsPredRaw = (p.isActualAny && p.pred_cost && p.cost)
+      ? (p.cost - p.pred_cost) / p.pred_cost * 100
+      : null;
+    const costVsPredVal = costVsPredRaw != null
+      ? `<span class="wr-delta ${cls(costVsPredRaw, true)}">${costVsPredRaw > 0 ? '+' : ''}${costVsPredRaw.toFixed(1)}%</span>`
+      : '\u2014';
+
+    const rowCls = [];
+    if (isFuture) rowCls.push('future-row');
+    if (p.key === currentKey) rowCls.push('selected');
+    const rowClsAttr = rowCls.length ? ' class="' + rowCls.join(' ') + '"' : '';
+
+    return `<tr${rowClsAttr}>
+      <td>${labelFn(p.key)}${predLabel}</td>
+      <td class="r" style="color:var(--color-text-subtle)">${op2Val}</td>
+      <td class="r">${regsActVal}</td>
+      <td class="r">${regsPredVal}</td>
+      <td class="r">${regsVsPredVal}</td>
+      <td class="r">${costActVal}</td>
+      <td class="r">${costPredVal}</td>
+      <td class="r">${costVsPredVal}</td>
+      <td class="r">${regsDomTxt}</td>
+      <td class="r">${costDomTxt}</td>
+    </tr>`;
+  }).join('');
+  centerSelectedRow(scrollId);
+}
+
+function renderMonthlyTable() {
+  const weeks = (FORECAST.weekly && FORECAST.weekly[curMarket]) || [];
+  const year = new Date().getFullYear();
+  const periods = aggregatePeriod(weeks, (wk) => 'M' + String(isoWeekMonthIdx(year, wk) + 1).padStart(2, '0'), year);
+  // Current month = month of the active week (curWeek = 'W17' etc)
+  const curWkNum = parseInt(String(curWeek).replace('W', ''), 10);
+  const curKey = Number.isFinite(curWkNum)
+    ? 'M' + String(isoWeekMonthIdx(year, curWkNum) + 1).padStart(2, '0')
+    : null;
+  renderPeriodTable(
+    periods, 'monthlyBody', 'monthlyScroll',
+    (key) => MONTH_NAMES_FULL[parseInt(key.slice(1), 10) - 1] + ' ' + year,
+    curKey, 'MoM'
+  );
+}
+
+function renderQuarterlyTable() {
+  const weeks = (FORECAST.weekly && FORECAST.weekly[curMarket]) || [];
+  const year = new Date().getFullYear();
+  const periods = aggregatePeriod(weeks, (wk) => 'Q' + (Math.floor(isoWeekMonthIdx(year, wk) / 3) + 1), year);
+  const curWkNum = parseInt(String(curWeek).replace('W', ''), 10);
+  const curKey = Number.isFinite(curWkNum)
+    ? 'Q' + (Math.floor(isoWeekMonthIdx(year, curWkNum) / 3) + 1)
+    : null;
+  renderPeriodTable(
+    periods, 'quarterlyBody', 'quarterlyScroll',
+    (key) => key + ' ' + year,
+    curKey, 'QoQ'
+  );
+}
+
+// WR-S5 + WR-S6 (2026-04-29): two concerns rolled into one wiring pass
+// for every <details> panel:
+//   (1) Re-center the current row when a Detail table opens for the
+//       first time. scrollTop can't be set on a hidden element, so the
+//       centering runs AFTER the browser has computed layout.
+//   (2) Persist open/closed state to localStorage under 'wr-details-state'
+//       and restore it on load so the page returns to how the user left it.
+//
+// The list pairs each <details> id with the scroll-host id used by
+// centerSelectedRow. calloutDetailsWrap has no inner scroll — its
+// scrollId is null and centering is skipped.
+(function wireDetailPersistence() {
+  if (typeof document === 'undefined') return;
+  const pairs = [
+    ['sec-detail', 'weeklyScroll'],
+    ['sec-detail-monthly', 'monthlyScroll'],
+    ['sec-detail-quarterly', 'quarterlyScroll'],
+    ['calloutDetailsWrap', null],
+  ];
+  const STORAGE_KEY = 'wr-details-state';
+  function readState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+    catch (e) { return {}; }
+  }
+  function writeState(state) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    catch (e) { /* quota / private-mode — silent */ }
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    const state = readState();
+    pairs.forEach(([detailsId, scrollId]) => {
+      const d = document.getElementById(detailsId);
+      if (!d) return;
+      // Restore prior open state. Default is closed (no attribute) so
+      // unsaved sections remain collapsed for first-time users.
+      if (state[detailsId] === true) {
+        d.open = true;
+        // Center after the restore lands — same rAF deferral as the
+        // user-toggle path so layout is ready.
+        if (scrollId) requestAnimationFrame(() => centerSelectedRow(scrollId));
+      }
+      d.addEventListener('toggle', () => {
+        const fresh = readState();
+        fresh[detailsId] = d.open;
+        writeState(fresh);
+        if (d.open && scrollId) {
+          requestAnimationFrame(() => centerSelectedRow(scrollId));
+        }
+      });
+    });
+  });
+})();
 </script>
 
 <script src="../shared/section-freshness.js" defer></script>

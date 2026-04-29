@@ -3,17 +3,6 @@
 
 **Effective: 2026-04-16. This policy supersedes all prior MotherDuck token references.**
 
-## The Rule
-
-All DuckDB access goes through DuckDB MCP (`execute_query`). Period.
-
-- Do NOT use Python `duckdb.connect()` with MotherDuck tokens.
-- Do NOT use `MOTHERDUCK_TOKEN` environment variables.
-- Do NOT import `from prediction.config import MOTHERDUCK_TOKEN`.
-- Do NOT pass `motherduck_token` as a connection parameter.
-
-The MCP server is already connected to `ps_analytics` on MotherDuck. It handles authentication. Scripts don't need to.
-
 ## How Python Scripts Should Get DuckDB Data
 
 **Option A (preferred): Read from JSON cache files.**
@@ -50,3 +39,6 @@ These scripts still have direct `duckdb.connect(md:...)` calls. They work but vi
 2. **MCP is always available.** If the agent can chat, MCP is connected. No token management needed.
 3. **Single point of truth.** MCP config manages the connection once. Scripts don't each need their own connection logic.
 4. **Security.** Tokens hardcoded in Python files (prediction/config.py, project_full.py, etc.) are a credential exposure risk.
+
+
+> **Example:** A typical use of this section involves reading the above rules and applying them to the current context.

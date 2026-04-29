@@ -218,7 +218,6 @@ Numbered across all 4 rounds. These are patterns that blind testing specifically
 *Round 1 verdict — desk review was wrong on 4 of 6 files.* Making behavior explicit at inference time changes attention allocation even when content is nominally covered. The treatment arm with a focused task-specific file can beat the control arm even when the control has "the same information somewhere in loaded context." **If the desk review argument is "this is already covered," run the blind test anyway — it's cheap and often wrong.**
 
 ### 7. Task-level wins do not equal adoption
-*Round 4 Var3: won T2 (44/50) and T4 (39/50), catastrophic on T5 (8/50), aggregate 125/250.* A proposal that wins 2 of 5 tasks but fails disastrously on 1 is net-negative for always-on use. **Aggregate scores across the task spread matter more than cherry-picked wins.** A task winner can justify manual-inclusion or a conditional protocol addition, but not always-on adoption.
 
 ### 8. External-AI review has a half-life
 *Rounds 1–4 adoption rate: 67% → 9% → 0% → 0%.* Once the gaps a reviewer identifies have been filled, further proposals from the same source will mostly re-propose existing machinery or add ceremony. **By round 3+, the default prior should be "reject unless proposal demonstrates a novel failure mode in the current system."** Don't run the full protocol on round 5+ of the same external source without a specific reason.

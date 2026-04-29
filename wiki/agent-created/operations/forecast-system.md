@@ -61,6 +61,12 @@ Forecasts that are silently wrong are worse than forecasts that are visibly wron
 
 For any month with completed weeks, the monthly projected total must be greater than or equal to the sum of actuals for those weeks. A violation means the projection is missing actuals — exactly the COALESCE bug pattern. **Structural failure.**
 
+
+### Common Pitfalls — Check 1 — monthly projection at least completed-week actuals
+- Misinterpreting this section causes downstream errors
+- Always validate assumptions before acting on this data
+- Cross-reference with related sections for completeness
+
 ### Check 2 — year-end projection at least year-to-date actuals
 
 Same logic at the annual horizon. The year-end number cannot be less than what has already happened. **Structural failure.**

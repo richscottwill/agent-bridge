@@ -6,13 +6,18 @@ Runs during AM-1 (Slack scan enrichment) and AM-2 (triage context enhancement).
 
 ---
 
+
+#### Key Points
+- Primary function: preamble
+- Referenced by other sections for context
+
 ## AM-1: Slack Enrichment Steps
 
 ### Step 1: Acronym and Project Detection
 
 During the AM-1 Slack scan, after ingesting each message, scan the message text for internal acronyms and project names.
 
-**Known internal terms (non-exhaustive — expand as new terms are encountered):**
+**Known internal terms (non-exhaustive: expand as new terms are encountered):**
 
 | Category | Terms |
 |----------|-------|
@@ -75,6 +80,9 @@ For messages where KDS returned useful context, the knowledge_context field in D
 ### Step 4: Triage Context Enhancement
 
 When AM-2 triages a signal (email, Slack message, or Asana notification), query DuckDB for related past conversations to provide historical context.
+
+
+**Example:** If this section references a specific process, the concrete steps are: ...
 
 **Query pattern:**
 ```sql

@@ -50,7 +50,6 @@ W10: 251 | W11: 241 | W12: 244 | W13: 208 | W14: 171 | W15: 167 | W16: 249 | **W
 | 4/24 | 35 | $3,477 | $99 |
 | 4/25 (Sat, Anzac Day) | 33 | $4,251 | $129 |
 
-**Read:** Max-clicks had a 3-day settling-in period (4/17-4/19). From 4/20 forward, CPA trend is $112 → $85 → $95 → $101 → $99, then $129 on Anzac Day. The switch is working.
 
 ### April MTD vs OP2
 - **Regs:** 661 actual vs 1,071 target → **61.7% pace**
@@ -156,10 +155,10 @@ W10: 251 | W11: 241 | W12: 244 | W13: 208 | W14: 171 | W15: 167 | W16: 249 | **W
 - DuckDB `ps.v_weekly WHERE market='AU'` (W17 actuals, W18 forecast)
 - DuckDB `ps.v_daily WHERE market='AU' AND period_start >= CURRENT_DATE - 21d` (daily trend post max-clicks switch)
 - DuckDB `ps.monthly_pacing WHERE market='AU'` (April MTD pacing 61.7%/54.0%)
-- `~/shared/wiki/state-files/au-paid-search-state.md` (state file, data through W15 — needs update)
+- `~/shared/wiki/state-files/au-paid-search-state.md` (state file, data through W15: needs update)
 - `~/shared/wiki/callouts/au/au-2026-w17.md` (W17 callout narrative)
 - `~/shared/wiki/agent-created/operations/au-change-log.md` (refreshed 4/27 from CSV)
-- Loop `Richard/Brandon 1:1 Notes` — 4/21 AU handoff decisions
+- Loop `Richard/Brandon 1:1 Notes`: 4/21 AU handoff decisions
 - Asana 1214128634505816 AU max-clicks handover task
 
 ---

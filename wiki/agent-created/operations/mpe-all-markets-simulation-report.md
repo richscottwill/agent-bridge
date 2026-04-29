@@ -21,19 +21,18 @@
 
 - Total: **85** (10 steps × 10 markets)
 - Passed: **75** (88%)
+
+**Example:** If this section references a specific process, the concrete steps are: - Passed: **75** (88%)...
+
 - Skipped: **10** (legitimate: market doesn't have the relevant structure)
 - Failed: **0**
 
 ## Step Legend
 
 1. Initial projection at ie%CCP target converges or returns feasible bound
-2. Null-CCP markets (AU) return `ieccp=None` cleanly
-3. Scope boundaries — `supported_target_modes` filter respected
 4. Regime fit state exists with confidence + decay_status metadata
-5. Seasonality shape is 52-entry array
 6. CPA elasticity fit has r² metadata
 7. Spend-mode target produces positive NB regs
-8. Locked-YTD invariant — total_spend ≥ YTD actual spend
 9. 90% credible interval spans > 2% of central (rejects fake precision)
 10. Brand+NB regs > 0 and blended CPA > 0
 

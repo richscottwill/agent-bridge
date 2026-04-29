@@ -1,4 +1,7 @@
 <!-- DOC-0330 | duck_id: protocol-am-frontend -->
+
+
+
 # AM-Frontend Protocol — Brief + Triage + Command Center
 
 Interactive phase. Reads pre-computed state from AM-Backend. Does the work, puts it where Richard will find it, tells him what's ready.
@@ -6,6 +9,9 @@ Interactive phase. Reads pre-computed state from AM-Backend. Does the work, puts
 All Asana writes follow the Guardrail Protocol in asana-command-center.md § Guardrail Protocol.
 
 ---
+
+
+
 
 ## Agentic Execution Rules (L5 Pattern)
 
@@ -23,6 +29,9 @@ The agent DOES work, not just proposes it. For every task touched during AM-Fron
 6. **Kill zombie tasks autonomously** — tasks 30+ days overdue with clear kill signals (paused accounts, completed dependencies, superseded work) get completed with Kiro_RW explanation.
 7. **Tell Richard what you did** — post a Slack DM summary listing all work done, drafts created, tasks enriched, and the ordered list of smallest next actions.
 
+
+
+
 ## Draft Safety Rule
 - **To:** prichwil@amazon.com ONLY
 - **CC/BCC:** empty
@@ -30,6 +39,9 @@ The agent DOES work, not just proposes it. For every task touched during AM-Fron
 - **Body top:** Bold line stating intended recipients: "INTENDED RECIPIENTS: To: [email] | CC: [email, email]"
 - **Never put real recipients in To/CC/BCC fields.** Richard reviews and re-addresses manually before sending.
 ---
+
+
+
 ## Context Load
 body.md, spine.md, org-chart.md, rw-trainer.md, rw-task-prioritization.md, brain.md, eyes.md, device.md, gut.md, rw-tracker.md, hands.md, amcc.md, memory.md, richard-writing-style.md, asana-command-center.md.
 
@@ -42,6 +54,9 @@ Pre-computed state files (from AM-Backend):
 - `~/shared/context/intake/email-triage.md`
 - `~/shared/context/intake/asana-digest.md`
 - `~/shared/context/intake/asana-activity.md`
+
+
+
 
 ### SharePoint Fallback (Cold Start / Missing Files)
 If any pre-computed state file is missing locally (container restart, first run on new environment):
@@ -66,7 +81,13 @@ DuckDB-first queries (use instead of live MCP when AM-Backend has synced):
 
 ---
 
+
+
+
 ## Step 1: Daily Brief
+
+
+
 
 ### Brief Structure
 1. TRAINER CHECK-IN
@@ -77,6 +98,9 @@ DuckDB-first queries (use instead of live MCP when AM-Backend has synced):
 6. T-MINUS
 7. aMCC
 8. SYSTEM HEALTH
+
+
+
 
 ### HEADS UP Section (from DuckDB + digests)
 Cross-reference slack-digest.md `[ACTION-RW]` items with structured DuckDB views:
@@ -96,6 +120,9 @@ ORDER BY priority, days_old DESC;
 Surface any item with days_old >= 3 as 🔴 CRITICAL. Items 1-2 days as 🟡 HIGH.
 Include reply_time_hours context for recently-answered items if pattern is concerning (e.g., avg reply > 48h to a stakeholder).
 
+
+
+
 ### TODAY Section (from DuckDB)
 - Query: `SELECT * FROM asana_by_routine` → bucket counts
 - Query: `SELECT * FROM asana_overdue ORDER BY days_overdue DESC` → overdue list
@@ -114,14 +141,26 @@ Display (block order: Sweep → Admin → Core → Engine Room):
 - 📦 Needs Triage: Tasks with no Routine set.
 - Bucket counts: Sweep X/5, Core X/4, Engine Room X/6, Admin X/3.
 
+
+
+
 ### Coherence Alerts
 Include flags from AM-Backend coherence check. If zero: "✅ DuckDB ↔ Body coherence check passed."
+
+
+
 
 ### Five Levels Annotation
 [L1]-[L5] tag per asana-command-center.md mapping.
 
+
+
+
 ### Activity Signals
 Read intake/asana-activity.md: 💬 comments, 📅 due date changes, 👤 reassignments.
+
+
+
 
 ### Forecast Pacing (from WBR Pipeline)
 Query DuckDB via MCP (`execute_query`) for forecast and OP2 pacing context:
@@ -134,8 +173,14 @@ Display in brief:
 - 🎯 Forecast accuracy: {hit_rate}% hit rate (last 20 predictions)
 - If any market pacing < 80% or > 120%: flag as ⚠️ pacing alert
 
+
+
+
 ### Goal Alerts
 If any goals at-risk or off-track: goal name, status, metric gap, recommended action.
+
+
+
 
 ### Wiki Pipeline Status
 Read `am-wiki-state.json` (from AM-Backend Phase 3B: `build-wiki-index.py` + `signals.wiki_candidates` + SharePoint artifacts cache). Surface:
@@ -151,11 +196,17 @@ Read `am-wiki-state.json` (from AM-Backend Phase 3B: `build-wiki-index.py` + `si
   → No existing article. Route to wiki-editor agent if still strong next week.
 ```
 
+
+
+
 ### Portfolio Status
 Read am-portfolio-findings.json:
 - Per-project: task count, overdue, near-due, health color, staleness.
 - Budget Tasks: ⚡ if due within 3d, 🔴 CRITICAL if overdue.
 - Cross-team blockers.
+
+
+
 
 ### Meeting Prep
 Query DuckDB for today's calendar: `SELECT * FROM main.calendar_today ORDER BY start_time`.
@@ -169,6 +220,9 @@ If main.calendar_today is empty (sync hasn't run), fall back to live: calendar_v
 - Read the meeting series file from `~/shared/wiki/meetings/` for full narrative context
 - This replaces the previous pattern of only loading signal_tracker topics — now the agent has the full meeting history, relationship state, and project chronology for each attendee
 
+
+
+
 ### Friday Additions
 - Calibration.
 - Remind Agent Bridge Sync.
@@ -176,19 +230,34 @@ If main.calendar_today is empty (sync hasn't run), fall back to live: calendar_v
 
 ---
 
+
+
+
 ## Step 2: Output Channels
 
 **Proceed immediately after Step 1 — do not pause for human input.** The brief has been presented; now execute.
 
+
+
+
 ### Email Brief (AUTO-SEND)
 Dark navy HTML email to prichwil@amazon.com. Full brief content formatted as styled HTML.
+
+
+
 
 ### Slack Brief
 Post to rsw-channel (C0993SRL6FQ). Include Asana task context inline.
 - **Admin block completion reward:** After the Admin section, include: `"✅ Admin clear. [N] tasks done. Core block starts now."` where [N] = count of Admin tasks with Priority_RW=Today. This surfaces the habit loop reward (Duhigg) in the channel Richard checks first.
 
+
+
+
 ### Dashboard Update
 Edit pinned message in rsw-channel.
+
+
+
 
 ### Calendar Blocks
 Query DuckDB for today's meetings: `SELECT * FROM main.calendar_today ORDER BY start_time`.
@@ -217,6 +286,9 @@ If calendar_today is empty, fall back to live: calendar_view(start_date=today, v
 
 Create time blocks via Outlook MCP calendar_meeting(operation='create') in gaps between existing meetings.
 
+
+
+
 ### Proactive Drafts
 Query DuckDB for unanswered signals 24h+:
 ```sql
@@ -237,11 +309,17 @@ Use relationship_activity for tone calibration (warm vs formal based on interact
 
 ---
 
+
+
+
 ## Step 3: Enrichment Execution (Agentic)
 
 Read am-enrichment-queue.json. Execute enrichment autonomously — don't ask, do.
 
 **MANDATORY COMPLETION RULE:** Enrich ALL tasks with missing Kiro_RW or Next-action_RW — not just the top 10 from the backend proposals. Query Asana live for every incomplete task missing either field and enrich it. The enrichment queue proposals are a starting point; the agent must go beyond them to achieve zero gaps. Ignore the `approval_required` flag in the JSON — enrichment is always autonomous. If Asana data is stale, run a fresh pull first (SearchTasksInWorkspace), then enrich. Do not defer enrichment for staleness — fix the staleness, then enrich. Report total enriched count in the Slack DM triage summary.
+
+
+
 
 ### Context Enrichment Queries (run ONCE before enriching any tasks)
 
@@ -278,6 +356,9 @@ Use this context when writing enrichment content:
 - **html_notes drafts**: When drafting emails or Slack replies, check relationship_activity for interaction trend and meeting_series for latest session context. A draft to Lorena (trend: "warming", 5 touchpoints) should be warmer than a draft to a cold contact.
 - **Task descriptions**: Cross-reference wiki_candidates — if a task's topic matches a strong wiki candidate, note it: "📚 This topic is a wiki candidate (quality: X). Consider documenting learnings."
 
+
+
+
 ### For each task needing enrichment:
 1. Read task details (GetTaskDetails) for current state and context
 2. Write Kiro_RW in brevity format: `M/D: <status in under 10 words>`
@@ -291,12 +372,21 @@ Use this context when writing enrichment content:
 6. Set Priority_RW default: "Not urgent" if Routine set but Priority_RW null
 7. Log each write to asana-audit-log.jsonl
 
+
+
+
 ### Portfolio Enrichment
 Same pattern, grouped by project. Filter to Richard's tasks only.
+
+
+
 
 ### On API failure → log → retry once → skip and flag in Slack DM.
 
 ---
+
+
+
 
 ## Step 4: Wiki Callout (one-line readiness check)
 
@@ -328,6 +418,9 @@ If the pipeline query returns all-zero counts AND the candidate query returns no
 
 ---
 
+
+
+
 ## Step 5: Portfolio Findings + Alerts
 
 Read am-portfolio-findings.json. Present:
@@ -350,17 +443,29 @@ Read am-portfolio-findings.json. Present:
   - Event countdown: [Paid App escalation proposals]
 ```
 
+
+
+
 ### Overdue Kill-or-Revive Decisions
 Present overdue tasks grouped by severity (30+d, 20-29d, 10-19d, 1-9d). For each: extend, kill, or delegate?
+
+
+
 
 ### Recurring Task Summary (informational)
 List auto-created recurring tasks: '[name] → next due [date] ✅'. No approval needed — auto-created by backend.
 
 ---
 
+
+
+
 ## Step 6: Dashboard Refresh — Command Center, Forecast Tracker, WBR Callouts
 
 **Proceed immediately after Step 5 — do not pause for human input.** The command center is the set of dashboards Richard uses to monitor performance and make decisions. Refresh all of them with the latest data.
+
+
+
 
 ### 6A. Run Full Dashboard Pipeline
 
@@ -372,11 +477,17 @@ Execute `python3 ~/shared/dashboards/refresh-all.py` which runs in sequence:
 
 If any script fails, log the error and continue with remaining scripts. Report failures in the triage summary (Step 7).
 
+
+
+
 ### 6B. Populate Actionable Intelligence Sections
 
 After the dashboard pipeline runs, the agent populates four intelligence sections in `command-center-data.json`. These replace the old overdue/emails/slack/pacing grid with decision-ready intelligence.
 
 **Data sources for each section:**
+
+
+
 
 #### Commitments — Things I Said I Would Do
 
@@ -402,6 +513,9 @@ Within each group, sort by: overdue severity (days_old DESC), then relationship 
 
 For each commitment, record all required fields above. The dashboard renders Richard's commitments first, then a visual "Others asked" divider, then others' asks grouped by weight.
 
+
+
+
 #### 🔄 Delegate — Things I Could Hand Off
 Identify tasks Richard is doing that someone else could own:
 - Tasks in Engine Room that are BAU/recurring and have a natural owner (e.g., AU team post-handoff, Yun for MX).
@@ -411,6 +525,9 @@ Identify tasks Richard is doing that someone else could own:
 
 For each: `task`, `to` (suggested delegate), `reason`.
 
+
+
+
 #### 📢 Communicate — Things to Share with Team
 Extract information Brandon shared with Richard that the team should know:
 - **Brandon 1:1 decisions**: Org changes, strategy shifts, timeline updates, stakeholder feedback.
@@ -419,6 +536,9 @@ Extract information Brandon shared with Richard that the team should know:
 - **Cross-team context**: What other teams are doing that affects PS (MCS, ABMA, Legal).
 
 For each: `text`, `context` (source meeting + why it matters).
+
+
+
 
 #### ⭐ Differentiate — Things That Set Me Apart
 Surface high-leverage actions from career conversations and Brandon's coaching:
@@ -434,6 +554,9 @@ For each: `action` (specific thing to do), `why` (Brandon's words or career logi
 
 **Execution:** The agent reads Hedy session details, DuckDB signals, and Asana task state to populate these sections. The `generate-command-center.py` script handles the static data (blocks, tasks); the agent enriches with the four intelligence sections after the script runs.
 
+
+
+
 ### 6C. Verify Dashboard Data Freshness
 
 After pipeline completes, verify output files exist and are current:
@@ -442,6 +565,9 @@ After pipeline completes, verify output files exist and are current:
 - `data/command-center-data.json` — check `generated` timestamp is today
 
 If any file is stale or missing, flag in the brief: "⚠️ Dashboard [name] failed to refresh — [reason]."
+
+
+
 
 ### 6D. Interactive Adjustments (Richard-directed, if needed)
 
@@ -457,6 +583,9 @@ After dashboards are refreshed, Richard may give live directions:
 
 ---
 
+
+
+
 ## Step 7: Triage Summary
 
 Post summary to Richard's Slack DM:
@@ -470,6 +599,9 @@ self_dm(login="prichwil", text="📬 AM Triage Complete
 ```
 
 ---
+
+
+
 
 ## Log Hook Execution
 ```sql

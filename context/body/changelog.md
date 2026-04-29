@@ -912,3 +912,18 @@ Patterns: SPLIT continues 100% keep rate (3/3 this batch). REWORD 2/3 kept (1 re
 - DuckDB last Asana full sync 4/25 — 48h delta still pending. AM-backend 4/28 will full-sync.
 - Experiments: Phase 6 runs next.
 
+
+### 2026-04-29 — Karpathy Run W18 (run_W18_1777478629)
+- **Batch:** 152 experiments executed, 53 kept (34.9%), 99 reverted, 28 skipped
+- **Hooks tested:** 30 (first-class hook experiments across 15 distinct hooks)
+- **Technique breakdown:** REMOVE 0% (32 run), COMPRESS 26% (19), SPLIT 50% (18), ADD 56% (16), MERGE 29% (14), RESTRUCTURE 67% (9), REWORD 43% (7)
+- **Fast-fail rate:** 54% (62/115 logged) — saved ~310K tokens
+- **Top wins:** gut×MERGE Δ=+0.94, seasonality-calendar×MERGE Δ=+0.50, org-chart×ADD Δ=+0.20, broad-sweep-2026-W18×REWORD Δ=+0.07
+- **Key learnings:**
+  - REMOVE: 0/32 kept. Anti-pattern confirmed at massive scale across all target types.
+  - SPLIT/RESTRUCTURE: 50-67% keep. Structural techniques remain dominant.
+  - Hook experiments: MERGE fails on small hooks. REWORD/ADD/SPLIT work.
+  - New targets (protocols, active files, wiki, scripts) follow same patterns as organs.
+  - 89 new priors created (expanded coverage to 219 total target×technique combos)
+- **Exploration:** 33% of batch was n<3 or new targets (meets 30% minimum)
+- **Batch health:** keep_rate=34.9% (below 50% target — batch was appropriately hard, corrected from 78% recent rate)

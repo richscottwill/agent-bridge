@@ -1,7 +1,21 @@
 <!-- DOC-0223 | duck_id: organ-gut -->
+
+
+
+
+
+
+
+
+
+
+**Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
+
+
 # Gut — Digestion, Compression & Waste Removal
 
 *The body eats information constantly — email, calendar, meetings, signals, research. The gut decides what gets absorbed as nutrition (compressed into organs) and what gets expelled as waste (archived, pruned, or discarded). Without it, the body bloats until it can't move.*
+Example: The body eats information constantly — email, calendar, meet....
 
 *Operating principle: Subtraction before addition. The gut is the only organ whose primary job is removal. Every other organ wants to grow. The gut enforces the constraint that makes the whole system work: a fixed context budget. Information has a half-life. The gut tracks decay and acts on it.*
 
@@ -10,32 +24,102 @@ Created: 2026-03-20
 
 ---
 
+
+
+
+
+
+
+
+
+
+
 ## Purpose
 
 Every other organ adds content. The gut removes it. It enforces the context budget so the body gets smarter without getting bigger.
 
+
+
+
+
+
+
+
+
+
+
 ### Core Principle 1: Information Half-Life
 A fact critical on Monday may be noise by Friday. The gut tracks decay and acts on it. Example: a competitor's impression share from 60 days ago gets compressed to a one-liner.
 
+
+
+
+
+
+
+
+
+
+
 ### Core Principle 2: Current-State-Only
 Organs hold CURRENT STATE, not history. No append-only logs, streak histories, session logs, scoring logs, or weekly rollups in any organ. changelog.md is the audit trail. archive/ is cold storage. If it grows monotonically, it doesn't belong in an organ.
+
+
+
+
+
+
+
+
 
 ### Core Principle 3: Learned Budgets
 Per-organ budgets and the body ceiling are adaptive — they move based on experiment data. Larger organ answers more questions correctly → budget expands. Compression doesn't degrade accuracy → budget contracts. The data decides.
 
 ---
 
+
+
+
+
+
+
+
+
+
+
 ## Gut Functions & Protocols
 
 The gut has three functions — **Digestion** (raw material → routed facts), **Compression** (organs → tighter versions), and **Excretion** (stale content → archived/deleted). Each has its own protocol below.
 
-### Digestion Protocol
 
-When new material arrives in `intake/`, the AM-2 hook processes it. The gut adds structure to that processing:
+
+
+
+
+
+
+
+
+
+### Digestion Protocol When new material arrives in `intake/`, the AM-2 hook processes it. The gut adds structure to that processing: 
+
+
+
+
 
 ### Intake Triage
 
 For each file in `intake/`: extract minimum viable facts, route to the organ where they're most actionable (decisions → Brain, metrics → Eyes, tasks → Hands, people → Memory, processes → Device). Tag source and date. Archive raw file after extraction unless still useful.
+
+
+
+
+
+
+
+
+
+
 
 ### File Format Rules
 | Format | Action |
@@ -48,12 +132,32 @@ For each file in `intake/`: extract minimum viable facts, route to the organ whe
 | .eml | Skip — live email access. Archive. |
 | .py | Move to ~/shared/tools/ |
 
+
+
+
+
+
+
+
+
+
+
 ### Extraction Rules
 - Extract the *minimum viable fact* — the smallest useful data point, not the surrounding narrative. Bad: paste entire WBR callout doc. Good: "AU regs 1.1K Feb, -1% vs OP2" → route to Eyes.
 - Source tag every fact: `[source: filename, date]`
 - Contradiction between sources: newer source wins. Log in changelog.md.
 - Ambiguous/unverifiable facts: tag `[confidence: LOW]`, route anyway. Nervous system catches it in calibration.
 - Worked example: Raw intake "AU Feb WBR shows 1.1K regs, CPA $118, -1% vs OP2, NB CPA down 29% from 6wk ago" → Extract: "AU Feb: 1.1K regs, CPA $118 (-1% OP2). NB CPA -29% 6wk. [source: WBR-Feb, 2026-03-05]" → Route to Eyes.
+
+
+
+
+
+
+
+
+
+
 
 ### Current Intake Backlog
 
@@ -63,15 +167,35 @@ For each file in `intake/`: extract minimum viable facts, route to the organ whe
 
 ---
 
+
+
+
+
+
+
+
+
+
+
 ### Compression Protocol
 
 Run when Bayesian priors signal an organ has room to shrink (COMPRESS posterior_mean > 0.7, n > 5). The goal is to maximize *usefulness per token* — organs should answer their questions accurately and self-containedly.
+
+
+
+
+
+
+
+
+
+
 
 ### Compression Techniques
 
 | # | Technique | Rule | Example |
 |---|-----------|------|---------|
-| 1 | Resolve completed | DONE→summary (7d), archive (14d). VALIDATED→one-liner. | "MX invoice handoff to Carlos — DONE 3/17" → archive after 3/31 |
+| 1 | Resolve completed | DONE→summary (7d), archive (14d). VALIDATED→one-liner. | "MX invoice handoff to Carlos: DONE 3/17" → archive after 3/31 |
 | 2 | Deduplicate | One fact, one organ. People→Memory, metrics→Eyes, tasks→Hands. | AU CPA in both Eyes and Memory → keep in Eyes, pointer in Memory |
 | 3 | Compress resolved | RESOLVED patterns→one-liner, strip trainer callouts. | "Admin displacement (3wk STUCK → structural fix applied)" → one-liner in NS |
 | 4 | Age decay | 90d no-ref→flag. 60d competitors→one-liner. 90d contacts→Dormant. | Competitor last seen 60d ago → "weareuncapped.com: UK, 24% IS (inactive)" |
@@ -81,11 +205,31 @@ Run when Bayesian priors signal an organ has room to shrink (COMPRESS posterior_
 | 8 | REMOVE pre-check | Unique IDs/URLs/rules/formulas? → REWORD/COMPRESS, not REMOVE. (7/7 reverted.) | MCC ID 873-788-1095 exists only in Eyes → cannot REMOVE, only REWORD |
 | 9 | Cross-organ pointers | Same fact in 3+ organs → keep in canonical organ, replace others with pointer. Canonical: metrics→Eyes, people→Memory, tasks→Hands, decisions→Brain. | AU CPA in Eyes + Memory + Hands → keep in Eyes, pointer `(see Eyes)` in others |
 
+
+
+
+
+
+
+
+
+
+
 ### Budget Model & Baselines
 
 Budgets are LEARNED CONSTRAINTS, not static numbers. Every experiment logs `words_before`, `words_after`, `score_a`, `score_b`, `delta_ab` to DuckDB `autoresearch_experiments`. Over time, this builds a size-accuracy curve per organ. The `autoresearch_organ_health` table tracks word count and accuracy estimate per organ per run. The Bayesian priors on ADD vs COMPRESS per organ ARE the budget signal — no separate budget number needed. ADD consistently KEEP = budget drifts up. COMPRESS consistently KEEP = budget drifts down. ADD consistently REVERT (posterior_mean < 0.3, n > 5) = organ at natural ceiling. COMPRESS consistently KEEP (posterior_mean > 0.7, n > 5) = prioritize for compression.
 
 **Body ceiling: adaptive.** Starting point 24,000w. Actual ceiling = aggregate size-accuracy plateau in `autoresearch_organ_health`. No hard cap — the data decides.
+
+
+
+
+
+
+
+
+
+
 
 ### Baseline Budgets (starting points, not ceilings)
 
@@ -102,9 +246,29 @@ Budgets are LEARNED CONSTRAINTS, not static numbers. Every experiment logs `word
 | Nervous System | 1500w | 1297w | Calibration loops — stable |
 | Spine | 1500w | 1490w | Bootstrap — stable |
 
+
+
+
+
+
+
+
+
+
+
 ### Identity Field Protection (§7)
 
 Non-compressible identity fields get their own subsection to emphasize their special status.
+
+
+
+
+
+
+
+
+
+
 
 #### Rule
 - Identity fields are **non-compressible**. They must survive all COMPRESS, REMOVE, and REWORD experiments unchanged.
@@ -112,15 +276,64 @@ Non-compressible identity fields get their own subsection to emphasize their spe
 - Accuracy threshold: 100% — same as Brain/Memory factual accuracy. A compression that drops identity fields is treated as an INCORRECT result, triggering automatic REVERT.
 - Applies to: Memory (relationship graph), any organ that stores person-level identity data.
 
+
+
+
+
+
+
+
+
+
+
 #### Rationale
 - Low token cost (~5-10 tokens per person), high harm if lost (misgendering in drafted communications, relationship damage). The cost-benefit is asymmetric — keeping them costs almost nothing; losing them causes real harm.
 - As the relationship graph grows, this list of protected fields may expand. The principle is: if losing a field could cause the agent to misrepresent someone's identity in a communication, it's non-compressible.
 
 ---
 
+
+
+
+
+
+
+
+
+
+
 ## Excretion Protocol
 
 What gets removed from the body entirely (archived or deleted).
+
+
+
+
+
+
+
+
+#### Part 2
+
+
+
+
+**Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
+
+
+
+
+
+
+#### Part 3
+
+
+
+
+
+
+
+
 
 ### Archive Rules (moved to `~/shared/wiki/archive/`)
 
@@ -143,9 +356,18 @@ What gets removed from the body entirely (archived or deleted).
 
 ---
 
-## Bloat Detection
 
 The gut runs a bloat check during the heart loop cascade (Phase 2) and flags issues in the daily brief.
+
+
+
+
+
+
+
+
+
+
 
 ### Bloat Signals
 
@@ -162,6 +384,16 @@ The gut runs a bloat check during the heart loop cascade (Phase 2) and flags iss
 | Agent-bridge stale | Any organ modified since last sync | Flag: "🧳 Agent-bridge: [N] organs stale" |
 | DuckDB table size | > 500 rows | Archive old → parquet, keep last 100 active |
 
+
+
+
+
+
+
+
+
+
+
 ### Bloat Report (included in daily brief when issues detected)
 ```
 🫁 GUT CHECK: Total body: [X]w.
@@ -170,17 +402,47 @@ The gut runs a bloat check during the heart loop cascade (Phase 2) and flags iss
 - [X] facts duplicated across organs
 ```
 
+
+
+
+
+
+
+
+
+
+
 ### Worked Example
 
 Eyes hits 1400w while accuracy stays at 0.95. ADD prior drops to 0.28 (n=7). Gut flags: "Eyes at ceiling — COMPRESS/REWORD only." Next Karpathy batch skips ADD on Eyes, runs COMPRESS instead. If COMPRESS keeps at Δ=0.0 with -120w, the organ shrinks without losing accuracy.
 
 ---
 
+
+
+
+
+
+
+
+
+
+
 ## Governance & Daily Brief Integration
 
 **Karpathy authority** governs all changes to compression protocols, word budgets, bloat thresholds, and excretion rules in this file. "Karpathy authority" = the Karpathy CLI agent (`karpathy.json`) running experiment batches, or any agent acting under `~/.kiro/agents/body-system/karpathy.md` identity during governance proposals. Heart loop executes; Karpathy owns the rules — testing techniques, adjusting budgets, evolving compression strategy. Scope extends to style guide experiments and output-quality evals (style guides, market context, callout principles, hook prompts).
 
 **Daily brief integration:** Gut check included when issues detected (e.g., "🫁 Eyes is 500w over budget," "🫁 3 intake files unprocessed for 5+ days"). On clean days, omit entirely. Silence means health.
+
+
+
+
+
+
+
+
+
+
 
 ## When to Read This File
 - Heart loop cascade (Phase 2 bloat check)

@@ -1,4 +1,7 @@
 <!-- DOC-0327 | duck_id: protocol-am-auto -->
+
+
+
 # AM-Backend Protocol — Autonomous Data Collection + Processing
 
 Fully autonomous. No interaction needed. Produces structured output files consumed by AM-Frontend.
@@ -7,14 +10,24 @@ All Asana writes follow the Guardrail Protocol in asana-command-center.md § Gua
 
 ---
 
+
+
+
 ## Context Load
 spine.md, current.md, slack-channel-registry.json, slack-scan-state.json, asana-command-center.md.
 
 ---
 
-## Phase 1: Data Collection
+
+
+
+
+
 
 Pure data collection. No drafting, no decisions, no organ writes.
+
+
+
 
 ### DuckDB Schema Verification
 Run `~/shared/context/protocols/duckdb-schema-verification.md` quick check:
@@ -23,6 +36,9 @@ Run `~/shared/context/protocols/duckdb-schema-verification.md` quick check:
 3. Quick table count: 46 tables + 39 views expected
 4. If any missing → run ensure-schema.sql statements for missing tables
 5. All DuckDB access goes through DuckDB MCP (`execute_query`). Do NOT use Python `duckdb.connect()` with MotherDuck tokens.
+
+
+
 
 ### Slack Scan
 1. list_channels (unreadOnly=true). Sort by mention_count then section.
@@ -33,6 +49,9 @@ Run `~/shared/context/protocols/duckdb-schema-verification.md` quick check:
 6. Update slack-scan-state.json.
 7. DuckDB batch writes.
 
+
+
+
 ### Asana Full Sync to DuckDB
 Execute ~/shared/context/protocols/asana-duckdb-sync.md:
 1. Pull all incomplete tasks (Richard) + portfolio project tasks
@@ -41,6 +60,9 @@ Execute ~/shared/context/protocols/asana-duckdb-sync.md:
 4. Soft-delete tasks no longer in Asana
 5. Run coherence check (cross-reference DuckDB vs hands.md, current.md, asana-command-center.md)
 6. Run schema drift detection (custom field changes, project changes, section changes)
+
+
+
 
 ### Morning Snapshot
 ```sql
@@ -53,6 +75,9 @@ FROM asana_tasks WHERE deleted_at IS NULL;
 
 Legacy fallback: also write to `~/shared/context/active/asana-morning-snapshot.json`.
 
+
+
+
 ### Activity Monitor
 Follow ~/shared/context/active/asana-activity-monitor-protocol.md.
 1. Read asana-scan-state.json for last scan timestamps.
@@ -61,8 +86,14 @@ Follow ~/shared/context/active/asana-activity-monitor-protocol.md.
 4. Write signals to intake/asana-activity.md.
 5. Update asana-scan-state.json.
 
+
+
+
 ### Email Scan
 Search all folders since last scan date (from ops.data_freshness). Produce email-triage in intake/. SKIP Auto-Comms folder Asana emails.
+
+
+
 
 ### Signal Intelligence
 Per `~/shared/context/protocols/signal-intelligence.md`:
@@ -71,6 +102,9 @@ Per `~/shared/context/protocols/signal-intelligence.md`:
 3. INSERT or UPDATE signal_tracker.
 4. Run daily decay.
 5. Query signal_trending view.
+
+
+
 
 ### Slack Conversation Enrichment
 Execute Steps 1-3 from ~/shared/context/protocols/slack-conversation-intelligence.md:
@@ -82,9 +116,18 @@ Skip if KDS unreachable — non-blocking.
 
 ---
 
+
+
+
 ## Phase 2: Signal Routing + Task Processing
 
 Process intake files. Create tasks from signals. Detect enrichment gaps. All auto-write operations execute here. Approval-required operations are queued for AM-Frontend.
+
+
+
+**Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
+
+
 
 ### Signal-to-Task Pipeline
 Per ~/shared/context/protocols/signal-to-task-pipeline.md:
@@ -92,10 +135,16 @@ Per ~/shared/context/protocols/signal-to-task-pipeline.md:
 - Slack: for each DM or @mention requiring action → same flow.
 - Log pipeline execution to workflow_executions in DuckDB.
 
+
+
+
 ### Signal Routing
 - Slack [ACTION-RW] signals → create Asana tasks (Routine + Priority_RW per mapping).
 - Email signals → same routing.
 - Asana digest → queue hands.md update for AM-Frontend.
+
+
+
 
 ### Admin Keyword Detection (override — runs BEFORE generic mapping)
 Before applying the Signal-to-Routine mapping table below, check the signal text (task name, description, or source message) against the Admin keyword list. Matching is case-insensitive.
@@ -108,7 +157,11 @@ Signals that do NOT match any Admin keyword continue to the Signal-to-Routine ma
 
 **NOTE:** Escalation logic (3-day overdue Admin → Sweep) is NOT applied here. Escalation lives in AM-2 only (am-triage.md § Admin Escalation Check). Per McKeown's Effortless principle, one simple checkpoint beats triplicated logic.
 
+
+
+
 ### Signal-to-Routine Mapping
+
 | Signal Type | Routine | Priority_RW |
 |-------------|---------|-------------|
 | Quick reply/send/confirm | Sweep | Today |
@@ -117,11 +170,20 @@ Signals that do NOT match any Admin keyword continue to the Signal-to-Routine ma
 | Admin/budget/invoice/compliance | Admin | Today |
 | Unclear/ambiguous | (none — Backlog) | Flag for triage |
 
+
+
+
 ### Slack Decision Detection
 Detect keywords: 'decided', 'agreed', 'confirmed', 'approved', 'going with', 'final call', 'locked in'. Queue for AM-Frontend presentation.
 
+
+
+
 ### Bucket Cap Check
 Sweep: 5, Core: 4, Engine Room: 6, Admin: 3. Over cap → queue demotion proposals for AM-Frontend.
+
+
+
 
 ### Flags
 - Priority_RW=Today but no Routine → queue for AM-Frontend.
@@ -129,11 +191,17 @@ Sweep: 5, Core: 4, Engine Room: 6, Admin: 3. Over cap → queue demotion proposa
 
 ---
 
+
+
+
 ## Phase 3: My Tasks Enrichment Scan
 
 Scan ALL incomplete My Tasks for field completeness. Queue proposals — do NOT write without approval (except auto-writes below).
 
 Call SearchTasksInWorkspace(assignee_any='1212732742544167', completed='false'). For each task, GetTaskDetails with opt_fields: name,assignee.gid,due_on,start_on,completed,custom_fields.name,custom_fields.display_value,custom_fields.gid,memberships.section.name.
+
+
+
 
 ### Four Enrichment Rules
 
@@ -151,6 +219,9 @@ Call SearchTasksInWorkspace(assignee_any='1212732742544167', completed='false').
 **4. Priority_RW Default** (GID: `1212905889837829`)
 - IF Routine set but Priority_RW null → queue proposal: "Not urgent" (GID: `1212905889837833`).
 
+
+
+
 ### Output
 Write enrichment proposals to `~/shared/context/active/am-enrichment-queue.json`:
 ```json
@@ -165,71 +236,119 @@ Write enrichment proposals to `~/shared/context/active/am-enrichment-queue.json`
 
 ---
 
+
+
+
 ## Phase 4: Wiki Article Pipeline Sync
 
 Wiki articles live in `~/shared/wiki/agent-created/` (source of truth). Sync to SharePoint and refresh the dashboard index. **No Asana writes for article work.**
+
+
+
 
 ### Step 1 — Rebuild Wiki Search Index
 Run: `python3 ~/shared/dashboards/build-wiki-index.py`
 
 This crawls `~/shared/wiki/agent-created/` and writes `shared/dashboards/data/wiki-search-index.json`. The Kiro dashboard Pipeline view reads this index. Status (DRAFT/REVIEW/FINAL) is parsed from article frontmatter.
 
+
+
+
 ### Step 2 — Detect Stale Articles
 Query the refreshed index for articles whose `updated:` field is >30 days old and `status: FINAL`. Flag them for review — not for auto-update. Refresh is a human-approved action.
+
+
+
 
 ### Step 3 — SharePoint Drift Check
 For each local FINAL article, compare modification time against its SharePoint .docx counterpart in `Documents/Artifacts/[category]/[slug].docx`. Flag any local-newer articles as "pending re-publish" in `~/shared/context/active/am-wiki-state.json`.
 
 Do not auto-publish — the librarian promotes to SharePoint.
 
+
+
+
 ### Step 4 — New-Article Candidates from Signals
 Query `signals.wiki_candidates` (DuckDB view) — topics with strong multi-channel signals but no matching article. Include top candidates in `am-wiki-state.json` for frontend presentation.
 
 ---
 
+
+
+
 ## Phase 5: Portfolio Project Scan
 
 Scan all child projects under ABIX PS and ABPS portfolios.
 
+
+
+
 ### Step 1 — Portfolio Discovery
 - GetPortfolioItems for ABIX PS (`1212775592612914`) and ABPS (`1212762061512816`).
 - New projects → discover sections + custom fields, queue flag for AM-Frontend.
+
+
+
 
 ### Step 2 — Per-Project Task Scan
 For each project (AU, MX, WW Testing, WW Acq, Paid App):
 - GetTasksFromProject → GetTaskDetails.
 - FILTER: assignee.gid === '1212732742544167'. Skip Cross_Team_Tasks for writes.
 
+
+
+
 ### Step 3 — Field Enrichment Check
 Same 4 rules as My Tasks. Queue proposals grouped by project → am-enrichment-queue.json.
+
+
+
 
 ### Step 4 — Date Window Checks + Near-Due Escalation (AUTO-EXECUTE)
 - Near-due (0-2 days, not terminal): auto-set Priority_RW=Today, update Kiro_RW + Next action.
 - Overdue (due < today, not terminal): queue flag for AM-Frontend.
 - Terminal sections per project: see asana-command-center.md § Portfolio Projects.
 
+
+
+
 ### Step 5 — Status Update Staleness
 - GetStatusUpdatesFromObject for each project.
 - >14 days → stale. Exactly 14 → NOT stale. Never updated → flag.
 - Extract health color.
+
+
+
 
 ### Step 6 — Recurring Task Auto-Creation (AU + MX) (AUTO-EXECUTE)
 Detect completed tasks matching known patterns (asana-command-center.md § Recurring Task Patterns).
 - Compute next dates. Auto-create next instance with same Routine_RW + project + assignee.
 - Log each creation to audit trail. Include in AM-Frontend summary (informational, not approval).
 
+
+
+
 ### Step 7 — Cross-Team Blocker Detection (MX)
 - Read all MX tasks including Cross_Team_Tasks (NEVER write).
 - Flag overdue teammate tasks. Correlate with Richard's tasks.
 - Queue blocker updates for AM-Frontend approval.
 
+
+
+
 ### Step 8 — Event Countdown (Paid App)
 - Read event calendar. Check prep/escalation windows.
 - Queue escalation proposals for AM-Frontend.
 
+
+
+
 ### Step 9 — Budget/PO Tracking (MX + Paid App)
 - Classify Budget_Tasks. 3-day near-due threshold.
 - Queue critical flags for AM-Frontend.
+
+
+
 
 ### Step 10 — Market Context Auto-Refresh (AU + MX)
 - Compile project summary. Compare against Context_Task content.
@@ -239,9 +358,15 @@ Detect completed tasks matching known patterns (asana-command-center.md § Recur
 
 ---
 
+
+
+
 ## Phase 6: Compile Output
 
 Write all computed state to structured files for AM-Frontend consumption.
+
+
+
 
 ### Output Files
 1. `~/shared/context/active/am-enrichment-queue.json` — all enrichment proposals (My Tasks + Portfolio)
@@ -250,6 +375,9 @@ Write all computed state to structured files for AM-Frontend consumption.
 4. `~/shared/context/active/am-signals-processed.json` — signal routing results (tasks created, deferred, dismissed)
 5. `~/shared/context/active/am-command-center-intel.json` — actionable intelligence for Command Center dashboard (commitments, delegate, communicate, differentiate)
 6. Intake files (slack-digest.md, email-triage.md, asana-digest.md, asana-activity.md) — already written in Phase 1
+
+
+
 
 ### Command Center Intel Generation
 Compile `am-command-center-intel.json` from signals collected in Phases 1-5. This file powers the four Actionable Intelligence cards on the Command Center dashboard.
@@ -283,6 +411,9 @@ Compile `am-command-center-intel.json` from signals collected in Phases 1-5. Thi
 - Carry forward non-done items from previous day's file (read before write)
 - Mark items done when corresponding Asana task is completed or Slack reply detected
 
+
+
+
 ### Log Hook Execution
 ```sql
 INSERT INTO hook_executions (hook_name, execution_date, start_time, end_time, duration_seconds,
@@ -293,9 +424,15 @@ VALUES ('am-backend', CURRENT_DATE, '[start]', '[end]', [duration],
 
 ---
 
+
+
+
 ## Phase 6.1: Dashboard Refresh
 
 Run the full dashboard refresh pipeline to update all Command Center views:
+
+
+
 
 ### Pre-step: Download required SharePoint sources
 
@@ -333,6 +470,9 @@ Before invoking `refresh-all.py`, download the external sources that the pipelin
 
 If any source is missing, the corresponding refresh script skips gracefully rather than failing the pipeline. The dashboard will show an empty-state message for that section.
 
+
+
+
 ### Main step: Run the pipeline
 
 ```bash
@@ -362,20 +502,32 @@ The Command Center index page (`~/shared/dashboards/index.html`) auto-loads thes
 
 ---
 
+
+
+
 ## Phase 6.2: Ledger Feedback Cascade
 
 Process user feedback from the Command Center Integrity Ledger. Read `~/shared/context/active/ledger-feedback-queue.json`.
 
 For each pending item where `cascaded` is false:
 
+
+
+
 ### Asana Cascade
 If `cascade_actions` contains `system: "asana"`:
 - **complete_task**: SearchTasksInWorkspace(text=search_text, completed='false'). If found, UpdateTask(completed='true') + CreateTaskStory with the user's note.
 - **add_comment**: SearchTasksInWorkspace(text=search_text). If found, CreateTaskStory with the dismissal reason.
 
+
+
+
 ### Slack Cascade
 If `cascade_actions` contains `system: "slack"`:
 - **suggest_reply**: Queue a draft reply suggestion for AM-Frontend. Do NOT auto-send — present the note as a draft for Richard to review.
+
+
+
 
 ### After Processing
 - Set `cascaded: true` on each processed item.
@@ -385,6 +537,9 @@ If `cascade_actions` contains `system: "slack"`:
 Non-blocking: if any cascade fails, log warning, mark as `cascade_failed`, and continue.
 
 ---
+
+
+
 
 ## Phase 6.5: SharePoint Durability Sync
 

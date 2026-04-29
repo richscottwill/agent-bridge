@@ -82,8 +82,7 @@
 ### Level 3 — Team Automation
 - Read team tasks to pre-populate meeting agendas (AU meetings, bi-weekly with Adi)
 - Surface blocked tasks across team for standup prep
-- Build a "team pulse" read: how many tasks were completed this week across the team vs. created
-
+- Build a "team pulse" read: how many tasks were completed this week
 ### Level 4 — Zero-Click Future
 - The "Using AI for paid search" task is a goldmine — connect its notes to the AEO POV work
 - Track AEO/AI Overviews research tasks in Asana as a dedicated section

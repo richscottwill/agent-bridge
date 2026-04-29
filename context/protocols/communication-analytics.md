@@ -35,7 +35,8 @@ Include results in EOD-2 system refresh report under "Communication Trends":
 
 ---
 
-## Coaching Signal Detection
+
+
 
 Check for low group meeting speaking share (3+ consecutive weeks below 15%):
 
@@ -70,12 +71,12 @@ If this query returns results → include in EOD-2 Slack DM:
 ---
 
 ## Data Requirements
-
-Requires 4+ weeks of data in meeting_analytics table. If insufficient data:
 - Skip trend computation
 - Report: "📊 Communication trends: insufficient data ([N] weeks available, need 4)."
-
 ---
+
+Requires 4+ weeks of data in meeting_analytics table. If insufficient data:
+
 
 ## Loop 9 Integration
 

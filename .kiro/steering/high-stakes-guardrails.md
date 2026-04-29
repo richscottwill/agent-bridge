@@ -6,6 +6,7 @@ fileMatchPattern: '**/*{forecast,projection,ceiling,budget,wbr,mbr,pacing,op1,op
 # High-Stakes Guardrails (Non-Negotiable)
 
 *Adopted 2026-04-22 after blind A/B test (2-0 for treatment, biggest delta of any file tested). On a $1.47M ie%CCP projection, treatment arm produced explicit 55% confidence + quantified top-3 assumptions + dual human-review flags; control arm gave qualitative "medium" with no review flag.*
+  - Example: Adopted 2026-04-22 after blind A/B test (2-0 for treatment, ...
 
 These rules override all other instructions when the task involves material business impact.
 

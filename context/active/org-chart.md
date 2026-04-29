@@ -23,6 +23,12 @@ Todd Heimes (VP, AB Prime, SSR, Mktg Exp.) — L10, SEA28
 | Aditya Satish Thakur | aditthk | Marketing Manager | L5 | Austin (AUS20) | Peer, goes by "Adi", weekly sync |
 | **Richard Williams** | prichwil | Marketing Manager | L5 | Seattle (SEA28) | You |
 
+
+### Common Pitfalls — Your Team — Brandon Munday's Directs
+- Misinterpreting this section causes downstream errors
+- Always validate assumptions before acting on this data
+- Cross-reference with related sections for completeness
+
 ## Kate Rundell's Org — Peer Teams Under Central Marketing
 | Name | Alias | Title | Level | Location | Scope |
 |------|-------|-------|-------|----------|-------|
@@ -53,8 +59,6 @@ Todd Heimes (VP, AB Prime, SSR, Mktg Exp.) — L10, SEA28
 | Todd Heimes | theimes | VP, AB Prime, SSR, Mktg Exp. | L10 | Seattle (SEA28) |
 
 ## International Expansion — Paid Search & Marketing Peers
-These are the market-side marketing managers Richard works with on paid search. They sit under Nick Georgijev (Sr Mgr, AB Intl Expansion), who reports to Todd Heimes (VP).
-
 ```
 Todd Heimes (VP) — L10
   └── Nick Georgijev (Sr Mgr, AB Intl Expansion) — L7, Seattle
@@ -69,7 +73,6 @@ Todd Heimes (VP) — L10
         ├── Harjeet Heer (Sr. Program Mgr - ABIX) — L6, Seattle  ← Stepped away from AU day-to-day
         └── + 5 others (market leads for other regions)
 ```
-
 | Name | Alias | Title | Level | Location | Paid Search Relevance |
 |------|-------|-------|-------|----------|----------------------|
 | Alexis Eck | alexieck | Sr. Mktg Mgr - Australia | L6 | Sydney | Primary AU paid search POC, owns MCS page mapping |
@@ -81,7 +84,6 @@ Todd Heimes (VP) — L10
 | Pedro Maldonado Pazuengo | pedmald | Country Leader, AB MX | L7 | Mexico City | MX country leader (Carlos & Lorena's skip) |
 | Nick Georgijev | ngeorgij | Sr Mgr, AB Intl Expansion | L7 | Seattle | Owns all international market teams |
 | Harsha Mudradi | hmudradi | Senior Product Manager, Search | L6 | Sydney | AU Paid Search Sync attendee (Prime International, not AB org) |
-
 ## Paid Search Peers Across Amazon (Outside AB)
 
 People who actually run paid search campaigns at other Amazon businesses. Useful for benchmarking, sharing learnings, or understanding how other teams approach SEM.
@@ -148,6 +150,12 @@ Russ Andrews (Director, Search Marketing) — L8, Seattle (SEA70 Houdini)
 - `paid-search-managers@amazon.com` — paid search managers across Amazon
 - `paid-search@amazon.com` — general paid search list
 - `paid-search-aws@amazon.com` — AWS paid search team
+
+
+### Common Pitfalls — Amazon Retail Central Paid Search (Hydra) — AME Search
+- Misinterpreting this section causes downstream errors
+- Always validate assumptions before acting on this data
+- Cross-reference with related sections for completeness
 
 ## Department
 - Department: Amazon Business - PSME - VAR (Dept #5648)

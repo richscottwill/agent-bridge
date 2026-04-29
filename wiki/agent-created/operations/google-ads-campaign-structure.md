@@ -24,10 +24,10 @@ update-trigger: campaign structure changes, new campaign types, OCI expansion
 ---
 
 ## Principles
-
 1. Simplify for algorithms — fewer, larger campaigns give OCI better signal
 2. Separate Brand from NB — different bidding strategies, different competitive dynamics
 3. Category campaigns for high-intent verticals — only when a dedicated LP exists
+
 4. Consistent naming convention across markets
 
 ## Naming Convention
@@ -77,13 +77,7 @@ The key rule: broad match ONLY with OCI. Without algorithmic bidding, broad matc
 - Extensions: callouts, structured snippets, location (where applicable)
 
 ## Quality Checklist (per campaign)
-- [ ] Conversion tracking verified
-- [ ] Negative keyword list applied
-- [ ] Ad copy reflects SP study messaging (not bulk/wholesale)
-- [ ] Landing page matches ad intent
-- [ ] Reftags properly configured
-- [ ] Budget not limited (check daily)
-- [ ] Bid strategy appropriate for campaign type
+[ ] Conversion tracking verified. [ ] Negative keyword list applied. [ ] Ad copy reflects SP study messaging (not bulk/wholesale). [ ] Landing page matches ad intent. [ ] Reftags properly configured. [ ] Budget not limited (check daily). [ ] Bid strategy appropriate for campaign type.
 
 
 

@@ -30,6 +30,11 @@ wiki-editor (you)
 4. **Gap analysis** — Identifying what's missing from the wiki based on body system signals
 5. **Kill decisions** — Deciding when a doc should be archived or removed (based on critic audits)
 
+
+#### Key Points
+- Primary function: What you own
+- Referenced by other sections for context
+
 ## Content roadmap
 
 Maintain the roadmap at `~/shared/wiki/roadmap.md`:

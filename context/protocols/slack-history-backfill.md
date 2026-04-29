@@ -8,10 +8,16 @@
 ---
 
 
+
+
+
 ### Common Pitfalls — Slack History Backfill — Exhaustive Context Recovery
 - Misinterpreting this section causes downstream errors
 - Always validate assumptions before acting on this data
 - Cross-reference with related sections for completeness
+
+
+
 
 ## Why This Matters
 
@@ -33,7 +39,13 @@ This data feeds directly into:
 8. **Current.md enrichment** — filling gaps in project status, pending actions, key people interactions
 9. **Memory.md relationship graph** — accurate last-interaction dates, communication frequency, topic associations
 
+
+
+
 ## Scope
+
+
+
 
 ### Exhaustive = Thread-Level Granularity
 
@@ -45,7 +57,14 @@ Every message Richard sent, received, was @mentioned in, or participated in a th
 4. **Left channels** — search for Richard's messages in channels he's no longer a member of (via `search` with `from:@prichwil`)
 5. **Group DMs** — multi-person DMs (mpdm-*) that contain project-specific context
 
-### Channels to Backfill
+
+
+
+
+
+
+
+
 
 #### Tier 1: Core PS Channels (highest value, active daily)
 | Channel | ID | Created | Priority |
@@ -59,6 +78,9 @@ Every message Richard sent, received, was @mentioned in, or participated in a th
 | ab-paid-search-app | C05KTAAG14J | Aug 2023 | 🔴 |
 | ab-paid-search-cps | C06M4NND3AN | Feb 2024 | 🟡 |
 
+
+
+
 #### Tier 2: Team & Cross-Functional Channels
 | Channel | ID | Created | Priority |
 |---------|-----|---------|----------|
@@ -69,6 +91,9 @@ Every message Richard sent, received, was @mentioned in, or participated in a th
 | mcs-ps-redirect-expansion | C0ADCCWRYU9 | Feb 2026 | 🟡 |
 | ext-apptweak-amazon-business | C052PSHPUTT | Apr 2023 | 🟡 |
 | 2025-traffic-strategy | C08954Q24G5 | Jan 2025 | 🟡 |
+
+
+
 
 #### Tier 3: Broader AB Channels (lower volume from Richard, but contextually rich)
 | Channel | ID | Created | Priority |
@@ -82,12 +107,18 @@ Every message Richard sent, received, was @mentioned in, or participated in a th
 | ab-marketing-pam-jp | C09KCDXPUFJ | Oct 2025 | 🟢 |
 | mobile-app-marketing | C08AQFJ4VMH | Jan 2025 | 🟢 |
 
+
+
+
 #### Tier 4: Archived/Left Channels (search-based recovery)
 | Channel | ID | Notes |
 |---------|-----|-------|
 | jp-ca-campaigns-and-reporting | C044XFRHUUS | Created by Richard, archived |
 | bp-ww-marketers | C0688P21PH7 | Archived Nov 2023 |
 | Any other channels Richard posted in but left | — | Discovered via `from:@prichwil` search |
+
+
+
 
 #### DMs: Key Stakeholders
 | Person | Priority | Relationship |
@@ -107,7 +138,13 @@ Every message Richard sent, received, was @mentioned in, or participated in a th
 
 ---
 
+
+
+
 ## Execution Plan
+
+
+
 
 ### Per-Channel Procedure
 1. `batch_get_conversation_history(channelId, oldest="2023-01-01T00:00:00Z", limit=200)`
@@ -119,8 +156,14 @@ Every message Richard sent, received, was @mentioned in, or participated in a th
 7. Update `signals.slack_people` with any new authors
 8. Log progress to this file
 
+
+
+
 ### Per-DM Procedure
 Same as channels, but using DM channel IDs.
+
+
+
 
 ### Search-Based Recovery (Left Channels)
 1. `search(query="from:@prichwil after:2023-01-01 before:2023-07-01")` — 6-month windows
@@ -135,7 +178,13 @@ Same as channels, but using DM channel IDs.
 
 ---
 
+
+
+
 ## Progress Tracker
+
+
+
 
 ### Retention Policy Discovery (2026-04-13)
 **CRITICAL FINDING:** Amazon enterprise Slack has ~1yr message retention. `batch_get_conversation_history` returns zero messages before ~April 2025 across ALL channels AND DMs. File metadata survives longer in search index (248 files found back to Feb 2024). DMs confirmed same retention wall (tested Brandon DM D044JAKR8RZ).
@@ -151,6 +200,9 @@ Same as channels, but using DM channel IDs.
 - D0443S6A39V — heavy data sharing (WW Dashboard, OP1 forecasts, EU5 Hubble) — likely Stacey or Yun
 - D06AN0K84NN — EU5 data, ieccp, bid strats, campaign settings, OP1 — likely Yun (EU5 focus)
 - D044JAKR8RZ — Brandon Munday (confirmed via open_conversation)
+
+
+
 
 ### Channels Completed
 | Channel | Messages | Threads | Richard Msgs | Date |
@@ -176,8 +228,14 @@ Same as channels, but using DM channel IDs.
 - [ ] All DMs (80+)
 - [ ] Search-based recovery for left channels
 
+
+
+
 ### DMs Completed
 (none yet)
+
+
+
 
 ### DMs Pending
 - [ ] Brandon Munday
@@ -193,6 +251,9 @@ Same as channels, but using DM channel IDs.
 
 ---
 
+
+
+
 ## Context Enrichment Opportunities
 
 As data flows in, these enrichment passes should run:
@@ -205,6 +266,9 @@ As data flows in, these enrichment passes should run:
 6. **Response time baseline** — compute historical `reply_time_hours` per stakeholder → establish normal vs concerning patterns
 
 ---
+
+
+
 
 ## Resume Instructions (for next session)
 

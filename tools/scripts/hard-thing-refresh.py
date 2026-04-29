@@ -80,20 +80,15 @@ CREATE TABLE IF NOT EXISTS main.hard_thing_artifact_log (
 
 # Seed the topic-to-level mapping per hard-thing-selection.md.
 # ON CONFLICT preserves any manual edits to rationale/last_reviewed made since seed.
-SEED_TOPIC_LEVELS_SQL = """
 INSERT INTO main.hard_thing_topic_levels (topic, level_num, impact_multiplier, rationale, last_reviewed) VALUES
   ('polaris-brand-lp',         4, 1.75, 'Brand LP consolidation is an L4 narrative — AEO-adjacent, cross-team visibility, Brandon-driven', CURRENT_DATE),
-  ('oci-rollout',              2, 1.25, 'WW testing execution — operational L2 work', CURRENT_DATE),
   ('au-cpa-cvr',               2, 1.25, 'AU market performance — hands-on L2', CURRENT_DATE),
   ('mx-budget-ieccp',          2, 1.25, 'MX market execution — hands-on L2', CURRENT_DATE),
   ('liveramp-enhanced-match',  4, 1.75, 'Audience + identity — L4 strategic territory', CURRENT_DATE),
   ('f90-lifecycle',            4, 1.75, 'Audience strategy — L4', CURRENT_DATE),
   ('ai-search-aeo',            4, 1.75, 'Zero-click future POV — core L4 artifact', CURRENT_DATE),
-  ('op1-strategy',             2, 1.25, 'OP1 planning — L2 testing narrative input', CURRENT_DATE),
-  ('deep-linking-ref-tags',    3, 1.5,  'Instrumentation / tooling for team', CURRENT_DATE),
   ('pam-budget',               2, 1.25, 'Paid App budget management — L2 execution', CURRENT_DATE)
 ON CONFLICT (topic) DO UPDATE SET
-  level_num = EXCLUDED.level_num,
   impact_multiplier = EXCLUDED.impact_multiplier,
   rationale = EXCLUDED.rationale,
   last_reviewed = EXCLUDED.last_reviewed;
@@ -101,7 +96,6 @@ ON CONFLICT (topic) DO UPDATE SET
 
 SCORING_SQL = """
 WITH decayed_signals AS (
-  SELECT
     st.topic,
     st.source_channel,
     st.source_author,
@@ -109,56 +103,36 @@ WITH decayed_signals AS (
       0.5,
       DATE_DIFF('hour', st.last_seen, CURRENT_TIMESTAMP)::DOUBLE / 24.0 / ?
     ) AS decayed_weight,
-    st.last_seen
   FROM signals.signal_tracker st
   WHERE st.is_active = true
-    AND st.last_seen >= CURRENT_TIMESTAMP - CAST(? AS VARCHAR) || ' days' ::INTERVAL
 ),
-topic_agg AS (
-  SELECT
     topic,
     SUM(decayed_weight) AS raw_score,
-    COUNT(DISTINCT source_channel) AS channel_spread,
     COUNT(DISTINCT source_author) FILTER (WHERE source_author != 'Richard Williams') AS unique_non_richard_authors,
     COUNT(*) AS signal_count,
     MAX(last_seen) AS most_recent,
     LIST(DISTINCT source_channel) AS channels,
-    LIST(DISTINCT source_author) AS authors
-  FROM decayed_signals
-  GROUP BY topic
 ),
 richard_artifacts AS (
-  SELECT
     topic,
     MAX(artifact_date) AS last_artifact_date,
     DATE_DIFF('day', MAX(artifact_date), CURRENT_DATE) AS days_since_artifact
-  FROM main.hard_thing_artifact_log
   WHERE non_richard_interaction_at IS NOT NULL
   GROUP BY topic
 ),
-scored AS (
-  SELECT
     t.topic,
     COALESCE(tl.level_num, 2) AS level_num,
     COALESCE(tl.impact_multiplier, 1.25) AS impact_multiplier,
     t.raw_score,
-    t.channel_spread,
-    t.unique_non_richard_authors,
-    t.signal_count,
     t.most_recent,
-    t.channels,
     t.authors,
-    COALESCE(ra.days_since_artifact, 999) AS days_since_artifact,
     GREATEST(0, 14 - LEAST(14, COALESCE(ra.days_since_artifact, 14))) AS recency_penalty,
-    (t.raw_score * COALESCE(tl.impact_multiplier, 1.25))
       / (1 + GREATEST(0, 14 - LEAST(14, COALESCE(ra.days_since_artifact, 14))))
       AS score,
-    CASE
       WHEN COALESCE(ra.days_since_artifact, 999) > 14 AND t.unique_non_richard_authors >= 2
         THEN 'valuable-and-avoided'
       WHEN ra.days_since_artifact IS NULL AND t.signal_count >= 3
         THEN 'valuable-and-latent'
-      ELSE 'other'
     END AS mode
   FROM topic_agg t
   LEFT JOIN main.hard_thing_topic_levels tl ON tl.topic = t.topic
@@ -167,29 +141,19 @@ scored AS (
     AND t.channel_spread >= ?
     AND t.unique_non_richard_authors >= ?
 ),
-ranked AS (
   SELECT *,
          ROW_NUMBER() OVER (ORDER BY score DESC) AS proposed_rank
   FROM scored
 )
-SELECT
   proposed_rank AS rank,
   topic,
-  ROUND(score, 3) AS score,
-  mode,
   level_num,
   impact_multiplier,
-  channel_spread,
   unique_non_richard_authors,
   signal_count,
-  days_since_artifact,
   most_recent,
   channels,
-  authors
 FROM ranked
-WHERE proposed_rank <= 4  -- fetch #4 to evaluate incumbent advantage
-ORDER BY proposed_rank
-"""
 
 
 # Defaults. Tunable via experiment queue.

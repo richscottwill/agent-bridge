@@ -7,9 +7,7 @@
 ## At a glance
 
 | Parameter | Value | Notes |
-|---|---|---|
 | Brand CCP | $250.00 | Column U FINAL ALIGNED (round value from finance) |
-| NB CCP | $60.00 | Column U FINAL ALIGNED (round value) |
 | ie%CCP range | 50% – 65% | |
 | Supported target modes | spend / ieccp / regs | |
 | Brand spend share | 35.9% | Highest Brand share fit so far |

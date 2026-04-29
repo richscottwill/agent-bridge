@@ -94,18 +94,6 @@
 - **Email overlay clarification** (new task 1214351597615320 + existing 1214137998394047 7d OD) — you asked 4/17 to clarify CAT vs MCS overlay status. **Proposal:** CAT live (have the data), MCS still in development (blocker = ?), unified 3-bullet tracker update by EOD. **Need from you:** MCS overlay blocker + timeline. Can drop a 3-bullet update into Outbound Marketing Goals.xlsx after.
 - **PAM reply decision** (1213959904341162, 22d OD) — still live ask, or overtaken by Paid App PO motion? If live, I have W17 US PAM trend.
 
-### 4. Open asks + upcoming (5 min)
-- **PO #2D-19910168** — you said "ready to approve but don't see an FAQ" (4/24). What FAQ? Want me to draft?
-- **Kate AB Marketing AI demo May 29** — prep w/ Adi started (bi-weekly tomorrow). What Kiro PS use cases do you want surfaced? Offline solution with Adi by demo date?
-- **Baloo DDD walkthrough** (from 4/14 1:1 ask + 4/30 Thu) — carrying, 15-min team walkthrough.
-- **F90 LR filter ask** (from 4/27) — binary flag > date-based was my POV. Did that land? Next step for Media Tech SIM?
-- **refmarker mapping audit PoC** (4/21 email) — confirm Kristine Weber is still the lead; I'll take next action on our side.
-
-### Buffer / Brandon's agenda
-- 2 min at end for anything Brandon surfaces.
-
----
-
 ## Related context Brandon may probe
 
 - **AU W17 callout already drafted** (shared/wiki/callouts/au/au-2026-w17.md). 245 regs, CPA $107 (-36% from W5 peak). Brand CPA $31 lowest YTD. Ready for AU sync at 4:30.
@@ -114,6 +102,18 @@
 - **Five Levels** progress — L1 shipped Testing Doc overnight (streak reset 4/28). L2 is the Brand LP test design (hard thing). L3 automation via Adi bi-weekly.
 
 ---
+
+### Buffer / Brandon's agenda
+- 2 min at end for anything Brandon surfaces.
+
+---
+
+### 4. Open asks + upcoming (5 min)
+- **PO #2D-19910168** — you said "ready to approve but don't see an FAQ" (4/24). What FAQ? Want me to draft?
+- **Kate AB Marketing AI demo May 29** — prep w/ Adi started (bi-weekly tomorrow). What Kiro PS use cases do you want surfaced? Offline solution with Adi by demo date?
+- **Baloo DDD walkthrough** (from 4/14 1:1 ask + 4/30 Thu) — carrying, 15-min team walkthrough.
+- **F90 LR filter ask** (from 4/27) — binary flag > date-based was my POV. Did that land? Next step for Media Tech SIM?
+- **refmarker mapping audit PoC** (4/21 email) — confirm Kristine Weber is still the lead; I'll take next action on our side.
 
 ## What NOT to bring up
 

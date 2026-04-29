@@ -65,6 +65,8 @@ Lena operates on a consistent pattern:
 1. She identifies a metric she finds unacceptable (CPC, landing pages, CPA)
 2. She emails with specific asks and CC's leadership (Nick, Kate, Brandon)
 3. She expects rapid response with data, not narrative
+
+### Escalation Pattern Analysis — Details
 4. If she doesn't get a response, she follows up — and Brandon flags the gap (see Mar 16 message about unanswered 3/5 email)
 5. She frames requests as "two-way door decisions" to lower the bar for action
 6. She rejects incremental approaches (rejected 50/50 split, demanded 100% switch)
@@ -109,13 +111,10 @@ Richard shared the 2026 AU Testing strategy doc on January 16 (quip-amazon.com/H
 This is important context: the team had a plan. Lena's asks overlapped with work already in flight.
 
 ## Correction: LP Pushback Sequence
-
 Richard's March 10 email was a two-step response:
-1. PUSHBACK: "there's a risk to performance, and we'll still want to plan to move to paid search specific pages in the future"
-2. COMPROMISE: "but we can definitely test... I'd recommend sending half of the traffic to MCS and half to Polaris-style pages with different reftags"
-
+1. PUSHBACK: "there's a risk to performance, and we'll still want to plan to move to paid
+2. COMPROMISE: "but we can definitely test... I'd recommend sending half of the traffic to MCS and half
 Lena rejected both the pushback and the 50/50 test, mandating 100% switch on March 13.
-
 ## Contradictory Directives Pattern
 
 Lena directed the team to target $140 USD CPA ($226 AUD) monthly. Richard confirmed this in his Feb MBR data to Alexis (3/20): "We agreed to target a $140 USD CPA each month ($226 AUD)." Executing this target required spending into higher-CPC keywords during W5-W9 to maintain volume.

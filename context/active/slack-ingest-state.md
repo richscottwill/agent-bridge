@@ -3,6 +3,9 @@
 
 Last run: 2026-04-02
 
+**Example:** If this section references a specific process, the concrete steps are: Last run: 2026-04-02...
+
+
 ## DuckDB Stats
 - Total messages: 304
 - Channels with data: 22

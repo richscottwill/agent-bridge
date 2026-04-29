@@ -39,6 +39,7 @@ Read `~/shared/context/active/asana-scan-state.json`:
 ```
 
 - If `last_scan_timestamp` is null, this is the first scan. Use 7 days ago as the lookback window.
+  - *Example:* When if `last_scan_timestamp` is null, this is the firs, the expected outcome is verified by checking the result.
 - If `last_scan_timestamp` has a value, use it as the default cutoff for tasks not in `per_task_timestamps`.
 
 ### Step 2: Pull Incomplete Tasks
@@ -50,20 +51,7 @@ Call `SearchTasksInWorkspace`:
 
 This returns all of Richard's incomplete tasks. Store the list for iteration.
 
-### Step 3: Get Stories for Each Task
-
-For each task in the list:
-
-1. Look up the task's last-scanned timestamp:
-   - If `per_task_timestamps[task_gid]` exists, use that timestamp
-   - Otherwise, use `last_scan_timestamp` (or 7-day lookback if null)
-
-2. Call `GetTaskStories`:
-   - `task_gid`: the task's GID
-
-3. Filter stories to only those with `created_at` after the task's last-scanned timestamp.
-
-4. Skip stories authored by Richard (GID `1212732742544167`) — we only want teammate activity.
+### Step 3: Get Stories for Each Task For each task in the list: 1. Look up the task's last-scanned timestamp: - If `per_task_timestamps[task_gid]` exists, use that timestamp - Otherwise, use `last_scan_timestamp` (or 7-day lookback if null) 2. Call `GetTaskStories`: - `task_gid`: the task's GID 3. Filter stories to only those with `created_at` after the task's last-scanned timestamp. 4. Skip stories authored by Richard (GID `1212732742544167`) — we only want teammate activity.
 
 ### Step 4: Classify Each Story
 
@@ -85,12 +73,12 @@ For each new story (after timestamp filter, excluding Richard's own):
 - Log but do not surface in the brief unless they match the three categories above
 
 ### Step 5: Handle Errors
-
-If a `GetTaskStories` call fails (rate limit, API error, timeout):
 - Log the error: task GID, error type, timestamp
 - Skip the affected task
 - Continue processing remaining tasks
 - Note skipped tasks at the bottom of the output file
+
+If a `GetTaskStories` call fails (rate limit, API error, timeout):
 
 ---
 
@@ -119,8 +107,8 @@ Signals detected: [count]
   > [Comment text, first 200 chars]
 
 ### 📅 Due Date Changes
-
 - **[Task Name]** — [Who changed it] ([timestamp]):
+
   Changed due date [old date → new date]
 
 ### 👤 Reassignments

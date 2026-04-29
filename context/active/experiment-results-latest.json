@@ -1,24 +1,87 @@
 {
-  "run_id": "2026-04-22T13:45:48Z",
-  "target": "richard-style-email",
-  "target_path": "/home/prichwil/.kiro/steering/richard-style-email.md",
-  "section": "Email (Analytical / Update)",
-  "technique": "ADD",
-  "eval_type": "output_quality",
-  "words_before": 818,
-  "words_after_if_kept": 999,
-  "word_delta": 181,
-  "current_words_after_revert": 818,
-  "score_a": null,
-  "score_b": null,
-  "score_c": null,
-  "delta_ab": null,
-  "decision": "BLOCKER",
-  "revert_reason": "tool_unavailable",
-  "blocker": "invokeSubAgent tool failed for all three eval agents (A, B, C) with error 'z14.registerSubAgentExecution is not a function'. Cannot execute blind evaluation. Per time-box rule in the Phase 6 instructions, logging failure and returning without forcing past the hard failure.",
-  "file_reverted": true,
-  "started_at": "2026-04-22T13:45:48Z",
-  "completed_at": "2026-04-22T13:47:30Z",
-  "hypothesis": "ADD a concrete worked example (MX CPA) and a 'Analytical Email Failures' table to the Email (Analytical / Update) section — matches two validated winning patterns: concrete examples (+0.04 to +0.08 delta typical) and Common Failures sections (4/4 keeps across email→wbr→mbr→librarian).",
-  "notes": "Priors NOT updated — the experiment did not complete. Incrementing beta on a blocker would bias the prior against a technique×target combo for reasons unrelated to the combo's actual merit."
+  "run_id": "run_W18_batch151",
+  "timestamp": "2026-04-29T20:25:00Z",
+  "total_experiments": 147,
+  "keeps": 99,
+  "reverts": 48,
+  "keep_rate": 67.3,
+  "fast_fails": 42,
+  "hooks_tested": 23,
+  "technique_breakdown": {
+    "REMOVE": {
+      "n": 38,
+      "keeps": 16,
+      "reverts": 22,
+      "keep_pct": 42.1
+    },
+    "MERGE": {
+      "n": 37,
+      "keeps": 28,
+      "reverts": 9,
+      "keep_pct": 75.7
+    },
+    "ADD": {
+      "n": 35,
+      "keeps": 28,
+      "reverts": 7,
+      "keep_pct": 80.0
+    },
+    "SPLIT": {
+      "n": 32,
+      "keeps": 26,
+      "reverts": 6,
+      "keep_pct": 81.3
+    },
+    "COMPRESS": {
+      "n": 32,
+      "keeps": 26,
+      "reverts": 6,
+      "keep_pct": 81.3
+    },
+    "REWORD": {
+      "n": 38,
+      "keeps": 33,
+      "reverts": 5,
+      "keep_pct": 86.8
+    },
+    "RESTRUCTURE": {
+      "n": 36,
+      "keeps": 33,
+      "reverts": 3,
+      "keep_pct": 91.7
+    }
+  },
+  "notable_reverts": [
+    {
+      "target": "memory",
+      "section": "Kate Rundell relationship",
+      "technique": "COMPRESS",
+      "delta": -1.0
+    },
+    {
+      "target": "brain",
+      "section": "OP1 Narrative",
+      "technique": "SPLIT",
+      "delta": -0.2
+    },
+    {
+      "target": "device",
+      "section": "Backlog",
+      "technique": "REWORD",
+      "delta": -0.2
+    },
+    {
+      "target": "am-auto",
+      "section": "Admin Keyword Detection",
+      "technique": "REMOVE",
+      "delta": -0.2
+    }
+  ],
+  "meta": {
+    "low_n_ratio": 0.6,
+    "technique_max_pct": 17.3,
+    "zero_delta_keep_pct": 91.4,
+    "target_keep_rate": 50.0,
+    "gap_to_target": 17.3
+  }
 }

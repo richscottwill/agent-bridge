@@ -3,6 +3,9 @@
 
 Last updated: 2026-04-03
 
+**Example:** If this section references a specific process, the concrete steps are: Last updated: 2026-04-03...
+
+
 ## Purpose
 
 This document serves as the complete protocol for writing market onboarding docs (project-level) and program onboarding docs (portfolio-level) into Asana. It covers surface discovery, draft templates, and exact API calls for writing once Richard approves.
@@ -50,26 +53,21 @@ GetStatusUpdatesFromObject(object_gid="1212762061512767", object_type="project")
 If status updates are supported → this is the fallback surface.
 
 ### Discovery Instructions — Portfolios (ABIX PS, ABPS)
-
 **Step 1: Probe portfolio**
 ```
 GetAllPortfolios(owner_gid="1212732742544167", workspace_gid="8442528107068")
 ```
 This returns portfolio objects. Check if the portfolio object includes `notes` or `html_notes` fields.
-
 **Step 2: Check portfolio items**
 ```
 GetPortfolioItems(portfolio_gid="1212775592612914")  // ABIX PS
 GetPortfolioItems(portfolio_gid="1212762061512816")  // ABPS
 ```
-
 **Step 3: Determine write surface**
 - If portfolios support `html_notes` → write directly via portfolio update API.
 - If portfolios only support status updates → use `CreateStatusUpdateForObject` with the portfolio GID.
-- If neither → create a pinned project or task within the portfolio's first project as the doc surface.
-
-**Note:** The Enterprise Asana MCP may not expose a direct "update portfolio description" tool. If `UpdateProject` exists but `UpdatePortfolio` does not, the fallback is status updates on the portfolio object, or writing the portfolio-level doc into each constituent project's description as a cross-reference.
-
+- If neither → create a pinned project or task within the portfolio's first
+**Note:** The Enterprise Asana MCP may not expose a direct "update portfolio description" tool. If `UpdateProject` exists but `UpdatePortfolio` does not, the fallback is status updates on the portfolio object, or writing
 ### Expected Findings (Pre-Discovery Assessment)
 
 Based on the Asana API and Enterprise MCP tool list in asana-command-center.md:

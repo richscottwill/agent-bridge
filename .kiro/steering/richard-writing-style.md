@@ -55,6 +55,8 @@ Richard's voice is already strong. The goal is to sharpen it over time — not c
 
 Don't flag every draft. Only surface a suggestion when the improvement is clear and meaningful. Frame it as: "Your draft works. Here's a tighter version if you want it." Never rewrite without showing both. The voice stays Richard's — the system just holds up a mirror occasionally.
 
+
+> **Example:** A typical use of this section involves reading the above rules and applying them to the current context.
 ## Specialized Style Guides
 For specific writing types, use these manual-inclusion steering files:
 - `#richard-style-email` — Email drafting (operational, analytical, coordination)

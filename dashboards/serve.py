@@ -6,7 +6,7 @@ Serves static files from the dashboards directory AND handles POST /api/feedback
 to write ledger actions from the browser to disk for DuckDB sync.
 """
 import json, os
-from http.server import HTTPServer, SimpleHTTPRequestHandler
+from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 
 PORT = 8080
@@ -69,6 +69,7 @@ class DashboardHandler(SimpleHTTPRequestHandler):
 if __name__ == "__main__":
     os.chdir(Path(__file__).parent)
     DATA_DIR.mkdir(exist_ok=True)
-    server = HTTPServer(("0.0.0.0", PORT), DashboardHandler)
-    print(f"Dashboard server on port {PORT} (with feedback API)")
+    server = ThreadingHTTPServer(("0.0.0.0", PORT), DashboardHandler)
+    server.daemon_threads = True
+    print(f"Dashboard server on port {PORT} (threaded, with feedback API)")
     server.serve_forever()

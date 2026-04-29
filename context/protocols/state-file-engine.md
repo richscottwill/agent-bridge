@@ -26,9 +26,18 @@ Governs the generation, patching, and delivery of all daily state files. Market-
 
 WBR Callouts runs Monday only. AM-Backend Tue–Fri must preserve the WBR-OWNED content written on Monday — it persists for the full week.
 
-### Layer 1: AM-Backend Step 2E — Content Generation (daily)
+
 
 Runs after Phase 1 ingestion completes and Phase 2A-2D processing finishes. All data sources are fresh.
+7. Run quality gates: schema validation, math verification, weasel word scan
+8. Patch the local .md file with new dynamic content (preserve static sections AND re-insert WBR-OWNED blocks verbatim — the daily engine must never modify content inside WBR-OWNED markers, only the AM-OWNED:trailing-week-flags block and unmarked dynamic sections)
+9. Convert .md → .docx via `python3 -c` using `shared/tools/sharepoint-sync/converter.py`
+**Timing:** ~1-2 min per market. Runs sequentially within Step 2E (no parallelism needed — each market is fast).
+**Failure handling:** If DuckDB has no new data for a market (same week as last generation), skip that market. Log skip reason. Don't regenerate stale content.
+**Marker preservation (critical):** The daily engine MUST preserve the content inside all `<!-- WBR-OWNED:* -->` marker blocks verbatim. These blocks are written by the Monday WBR hook and must persist Tue–Fri without modification. If the engine cannot locate a required WBR-OWNED marker during step 5, log the missing marker and skip that market's patch (do not regenerate without the markers — doing so would erase WBR content on first run after migration gap).
+**Data source note:** `ps.metrics` in DuckDB (queried via MCP `execute_query`) is the canonical weekly data source. It is populated by Step 2D.5 (PS Metrics Sync) which aggregates daily_metrics into the EAV format. The dashboard ingester writes daily_metrics when Richard drops a new xlsx; Step 2D.5 bridges the gap to ps.metrics. If ps.metrics is stale, the state file engine skips — it does NOT fall back to callout markdown files or raw daily data.
+
+
 
 For each registered state file where status = ACTIVE:
 1. Load the market-specific protocol file (e.g., `state-file-mx-ps.md`)
@@ -37,19 +46,12 @@ For each registered state file where status = ACTIVE:
 4. Read slack-digest.md and email-triage.md for market-relevant signals (from Phase 1A/1C)
 5. Read the current state file .md to get static sections (Goals, Tenets, Introduction) AND to extract current contents of all `<!-- WBR-OWNED:* -->` marker blocks
 6. Generate the JSON payload per the placeholder schema in the protocol
-7. Run quality gates: schema validation, math verification, weasel word scan
-8. Patch the local .md file with new dynamic content (preserve static sections AND re-insert WBR-OWNED blocks verbatim — the daily engine must never modify content inside WBR-OWNED markers, only the AM-OWNED:trailing-week-flags block and unmarked dynamic sections)
-9. Convert .md → .docx via `python3 -c` using `shared/tools/sharepoint-sync/converter.py`
 10. Write both files to `~/shared/wiki/state-files/`
 11. Log generation to DuckDB: `INSERT INTO workflow_executions (workflow_name, ...) VALUES ('state-file-[market]', ...)`
 
-**Timing:** ~1-2 min per market. Runs sequentially within Step 2E (no parallelism needed — each market is fast).
 
-**Failure handling:** If DuckDB has no new data for a market (same week as last generation), skip that market. Log skip reason. Don't regenerate stale content.
 
-**Marker preservation (critical):** The daily engine MUST preserve the content inside all `<!-- WBR-OWNED:* -->` marker blocks verbatim. These blocks are written by the Monday WBR hook and must persist Tue–Fri without modification. If the engine cannot locate a required WBR-OWNED marker during step 5, log the missing marker and skip that market's patch (do not regenerate without the markers — doing so would erase WBR content on first run after migration gap).
 
-**Data source note:** `ps.metrics` in DuckDB (queried via MCP `execute_query`) is the canonical weekly data source. It is populated by Step 2D.5 (PS Metrics Sync) which aggregates daily_metrics into the EAV format. The dashboard ingester writes daily_metrics when Richard drops a new xlsx; Step 2D.5 bridges the gap to ps.metrics. If ps.metrics is stale, the state file engine skips — it does NOT fall back to callout markdown files or raw daily data.
 
 ### Layer 1.5: WBR Callouts — Weekly Patch (Monday only)
 

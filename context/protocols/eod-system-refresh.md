@@ -27,33 +27,32 @@ After delta sync, DuckDB views are current. Use them for reconciliation below in
 1. Query DuckDB: `SELECT * FROM asana_tasks WHERE completed = FALSE AND deleted_at IS NULL` → all incomplete tasks.
 2. Query DuckDB: `SELECT * FROM asana_tasks WHERE completed = TRUE AND completed_at::DATE = CURRENT_DATE` → tasks completed today.
 3. **Time travel diff against morning state:** Instead of reading asana-morning-snapshot.json, clone the morning snapshot:
-   ```sql
-   -- Find today's most recent AM snapshot (created during AM-1)
-   SELECT snapshot_name, created_ts FROM md_information_schema.database_snapshots
-   WHERE database_name = 'ps_analytics' AND snapshot_name LIKE 'am_%'
-   ORDER BY created_ts DESC LIMIT 1;
-   -- Clone it for comparison
-   CREATE DATABASE morning_state FROM ps_analytics (SNAPSHOT_NAME 'am_YYYYMMDD');
-   ```
-   Then diff:
-   ```sql
-   -- Tasks completed since morning
-   SELECT c.task_gid, c.name FROM ps_analytics.main.asana_tasks c
-   WHERE c.completed = TRUE AND c.task_gid IN (SELECT task_gid FROM morning_state.main.asana_tasks WHERE completed = FALSE);
-   -- New tasks since morning
-   SELECT c.task_gid, c.name FROM ps_analytics.main.asana_tasks c
-   ANTI JOIN morning_state.main.asana_tasks m ON c.task_gid = m.task_gid;
-   -- Priority changes since morning
-   SELECT c.task_gid, c.name, m.priority_rw AS morning_priority, c.priority_rw AS current_priority
-   FROM ps_analytics.main.asana_tasks c
-   JOIN morning_state.main.asana_tasks m ON c.task_gid = m.task_gid
-   WHERE c.priority_rw != m.priority_rw OR (c.priority_rw IS NULL) != (m.priority_rw IS NULL);
-   ```
-   Clean up after: `DROP DATABASE morning_state;`
-   **Fallback:** If no AM snapshot exists (first run or snapshot missing), fall back to reading `~/shared/context/active/asana-morning-snapshot.json`.
+```sql
+-- Find today's most recent AM snapshot
+SELECT snapshot_name, created_ts FROM md_information_schema.database_snapshots
+WHERE database_name = 'ps_analytics' AND snapshot_name LIKE 'am_%'
+ORDER BY created_ts DESC LIMIT 1;
+-- Clone it for comparison
+CREATE DATABASE morning_state FROM ps_analytics ;
+```
+Then diff:
+```sql
+-- Tasks completed since morning
+SELECT c.task_gid, c.name FROM ps_analytics.main.asana_tasks c
+WHERE c.completed = TRUE AND c.task_gid IN (SELECT task_gid FROM morning_state.main.asana_tasks WHERE completed = FALSE);
+-- New tasks since morning
+SELECT c.task_gid, c.name FROM ps_analytics.main.asana_tasks c
+ANTI JOIN morning_state.main.asana_tasks m ON c.task_gid = m.task_gid;
+-- Priority changes since morning
+SELECT c.task_gid, c.name, m.priority_rw AS morning_priority, c.priority_rw AS current_priority
+FROM ps_analytics.main.asana_tasks c
+JOIN morning_state.main.asana_tasks m ON c.task_gid = m.task_gid
+WHERE c.priority_rw != m.priority_rw OR != ;
+```
+Clean up after: `DROP DATABASE morning_state;`
+**Fallback:** If no AM snapshot exists , fall back to reading `~/shared/context/active/asana-morning-snapshot.json`.
 4. Query DuckDB: `SELECT * FROM asana_overdue` → overdue tasks with days_overdue.
 5. Query DuckDB: `SELECT * FROM asana_by_routine` → bucket distribution for cap checks.
-
 ### Step 2 — Daily Reset
 For tasks that had Priority_RW=Today in the morning snapshot but remain incomplete:
 - Demote to Priority_RW=Urgent: UpdateTask(custom_fields={'1212905889837829': '1212905889837831'})
@@ -305,7 +304,8 @@ Execute ~/shared/context/protocols/communication-analytics.md:
 
 ---
 
-## Phase 5: Housekeeping
+
+
 
 **This phase is NOT expendable. Execute before experiments.**
 

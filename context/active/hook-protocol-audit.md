@@ -8,6 +8,9 @@ This document maps every hook to its protocol file, trigger type, and health sta
 ---
 
 ## Routine Hooks (daily sequence)
+**Sequence:** AM-Backend → AM-Frontend → (workday) → EOD
+**SharePoint sync:** AM-Backend pushes to `Kiro-Drive/system-state/` in Phase 6.5. EOD pushes in Phase 7.5. Both non-blocking. Published artifacts go to `Artifacts/wiki-sync/` via the separate sharepoint-sync hook (different pipeline, same MCP server).
+---
 
 | Hook | File | Trigger | Protocol File | Version | Status |
 |------|------|---------|--------------|---------|--------|
@@ -15,11 +18,8 @@ This document maps every hook to its protocol file, trigger type, and health sta
 | AM-Frontend | `am-triage.kiro.hook` | userTriggered | `am-frontend.md` + `am-triage.md` | 3.0.0 | ✅ Active |
 | EOD | `eod.kiro.hook` | userTriggered | `eod-backend.md` + `eod-frontend.md` | 7.0.0 | ✅ Active |
 
-**Sequence:** AM-Backend → AM-Frontend → (workday) → EOD
 
-**SharePoint sync:** AM-Backend pushes to `Kiro-Drive/system-state/` in Phase 6.5. EOD pushes in Phase 7.5. Both non-blocking. Published artifacts go to `Artifacts/wiki-sync/` via the separate sharepoint-sync hook (different pipeline, same MCP server).
 
----
 
 ## Guard Hooks (always-on, preToolUse)
 
@@ -34,13 +34,10 @@ This document maps every hook to its protocol file, trigger type, and health sta
 ---
 
 ## Audit Hooks (postToolUse)
-
 | Hook | File | Trigger Pattern | What It Logs | Version | Status |
 |------|------|----------------|-------------|---------|--------|
 | Audit: Asana Writes | `audit-asana-writes.kiro.hook` | `@mcp.*asana.*` | Logs every Asana write to JSONL + DuckDB | 1.1.0 | ✅ Active |
-
 ---
-
 ## File Event Hooks
 
 | Hook | File | Trigger | Pattern | What It Does | Version | Status |
@@ -123,6 +120,9 @@ This document maps every hook to its protocol file, trigger type, and health sta
 If migrating to a new platform:
 1. Hook JSON files are Kiro-specific — they'd need to be translated to the new platform's automation format.
 2. Protocol markdown files are platform-agnostic — any AI can read and execute them.
+
+### Details
+
 3. The SharePoint durability layer means key artifacts survive platform migration. Pull from `Kiro-Drive/` to bootstrap.
 4. DuckDB/MotherDuck data persists independently of the workspace.
 5. Git repo (`~/shared/` → agent-bridge) is the third durability layer.

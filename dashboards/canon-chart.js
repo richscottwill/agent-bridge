@@ -42,6 +42,116 @@
   const GRAY = '#6c7086';
   const NOW_GREEN = 'rgba(74,222,128,0.5)';
 
+  // Shared x-axis config: vertical grid lines only at the start of each month
+  // (12 per year on a full-year chart). Labels still drawn every 2 weeks so
+  // the x-axis reads cleanly. Computed live from the current year so the
+  // mapping stays correct as time rolls forward.
+  //
+  // Week → month rule: month of the Thursday of the ISO week (standard ISO
+  // week convention — each ISO week has exactly one Thursday, and that day
+  // determines the week's calendar year). A "month start" week is the first
+  // ISO week whose Thursday lands in a given month.
+
+  // Map week number → 0-indexed month, for the current year. The first ISO
+  // week whose Thursday lands in month M becomes the "start" of month M.
+  // Cached on first call; recomputed once per year on rollover.
+  const _monthStartCache = { year: null, weekToMonth: null };
+  function weekToMonthMap() {
+    const yr = new Date().getFullYear();
+    if (_monthStartCache.year === yr) return _monthStartCache.weekToMonth;
+    const map = new Map();
+    let lastMonth = -1;
+    for (let w = 1; w <= 53; w++) {
+      const jan4 = new Date(Date.UTC(yr, 0, 4));
+      const jan4Dow = jan4.getUTCDay() || 7; // Mon=1..Sun=7
+      const week1Mon = new Date(jan4);
+      week1Mon.setUTCDate(jan4.getUTCDate() - (jan4Dow - 1));
+      const thu = new Date(week1Mon);
+      thu.setUTCDate(week1Mon.getUTCDate() + (w - 1) * 7 + 3);
+      if (thu.getUTCFullYear() !== yr) break;
+      const m = thu.getUTCMonth();
+      if (m !== lastMonth) { map.set(w, m); lastMonth = m; }
+    }
+    _monthStartCache.year = yr;
+    _monthStartCache.weekToMonth = map;
+    return map;
+  }
+  const MONTH_ABBR = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  // Pull the original label for a tick/index even if the ticks.callback blanked
+  // the rendered version.
+  function labelAtIndex(chart, idx) {
+    const labels = chart && chart.data && chart.data.labels;
+    if (Array.isArray(labels) && idx != null && labels[idx] != null) return String(labels[idx]);
+    return '';
+  }
+
+  // Chart.js plugin: paints the month abbreviation just inside the top edge
+  // of the chart area, horizontally centered on each month-start gridline.
+  // Wired into chart options via `plugins: [monthLabelPlugin]` so it only
+  // applies to the charts that want it (default/calibration + scenario).
+  const monthLabelPlugin = {
+    id: 'monthLabels',
+    afterDatasetsDraw(chart) {
+      const xScale = chart.scales && chart.scales.x;
+      if (!xScale) return;
+      const area = chart.chartArea;
+      const ctx = chart.ctx;
+      const map = weekToMonthMap();
+      const labels = (chart.data && chart.data.labels) || [];
+      if (!labels.length) return;
+      ctx.save();
+      ctx.font = '10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+      ctx.fillStyle = '#666';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
+      for (let i = 0; i < labels.length; i++) {
+        const m = String(labels[i]).match(/^W(\d{1,2})$/);
+        if (!m) continue;
+        const wkNum = parseInt(m[1], 10);
+        if (!map.has(wkNum)) continue;
+        const monthIdx = map.get(wkNum);
+        const x = xScale.getPixelForValue(i);
+        // Only paint labels whose gridline is actually inside the chart area
+        if (x < area.left - 1 || x > area.right + 1) continue;
+        // Paint just above the chart area (in the layout.padding.top band)
+        ctx.fillText(MONTH_ABBR[monthIdx], x + 3, area.top - 12);
+      }
+      ctx.restore();
+    },
+  };
+
+  function monthlyGridXAxis() {
+    const GRID_COLOR = '#1f222b';
+    const monthWeeks = () => weekToMonthMap(); // alias
+
+    const isMonthStart = (ctx) => {
+      const chart = ctx && ctx.chart;
+      const idx = ctx && (ctx.index != null ? ctx.index : ctx.tick && ctx.tick.value);
+      const lbl = labelAtIndex(chart, idx);
+      const m = lbl.match(/^W(\d{1,2})$/);
+      if (m) return monthWeeks().has(parseInt(m[1], 10));
+      // Fallback for non-week labels: every other tick
+      return typeof idx === 'number' && idx % 2 === 0;
+    };
+
+    // Labels: keep existing every-2-ticks cadence for readability
+    const labelShown = (idx) => idx === 0 || idx % 2 === 0;
+
+    return {
+      grid: {
+        color: (ctx) => isMonthStart(ctx) ? GRID_COLOR : 'transparent',
+      },
+      ticks: {
+        color: '#666', font: { size: 10 },
+        autoSkip: false, maxRotation: 0,
+        callback: function (val, idx) {
+          return labelShown(idx) ? this.getLabelForValue(val) : '';
+        },
+      },
+    };
+  }
+
   function toNumOrNull(v) {
     if (v === null || v === undefined || v === '') return null;
     const n = typeof v === 'number' ? v : parseFloat(v);
@@ -154,58 +264,71 @@
     };
   }
 
-  function buildDefaultDatasets(s) {
-    // Order matters for Chart.js fill references: CI high fills DOWN to CI low (idx+1)
-    return [
-      // CI band (regs, future only) — renders first so actuals/preds sit on top
-      {
+  function buildDefaultDatasets(s, axisFilter) {
+    // WR-F1 (2026-04-29): axisFilter parity with calibration. Lets
+    // "What happened" collapse to regs-only or spend-only when the
+    // user doesn't want both axes on one chart.
+    const axis = axisFilter === 'spend' || axisFilter === 'regs' || axisFilter === 'both' ? axisFilter : 'both';
+    const sets = [];
+    // CI band (regs, future only) — renders first so actuals/preds sit on top.
+    // Always included when regs axis is on so the uncertainty envelope
+    // is visible even if spend is off.
+    if (axis === 'regs' || axis === 'both') {
+      sets.push({
         label: '_ciHi', data: s.ciHiFuture,
         borderColor: 'transparent', backgroundColor: ORANGE_SOFT,
         borderWidth: 0, pointRadius: 0, fill: '+1', tension: 0.25,
         yAxisID: 'y', spanGaps: true, _hidden: true,
-      },
-      {
+      });
+      sets.push({
         label: '_ciLo', data: s.ciLoFuture,
         borderColor: 'transparent', backgroundColor: ORANGE_SOFT,
         borderWidth: 0, pointRadius: 0, fill: false, tension: 0.25,
         yAxisID: 'y', spanGaps: true, _hidden: true,
-      },
-      // OP2 target
-      {
+      });
+    }
+    // OP2 target — regs-axis only, so hidden when axis === 'spend'.
+    if (axis === 'regs' || axis === 'both') {
+      sets.push({
         label: 'OP2 target', data: s.op2Regs,
         borderColor: GRAY, backgroundColor: 'transparent',
         borderWidth: 1.5, borderDash: [3, 3], pointRadius: 0, tension: 0,
         yAxisID: 'y', spanGaps: true,
-      },
+      });
+    }
+    if (axis === 'regs' || axis === 'both') {
       // Regs actual (solid orange, past only)
-      {
+      sets.push({
         label: 'Regs (actual)', data: s.regsActual,
         borderColor: ORANGE, backgroundColor: ORANGE,
         borderWidth: 2.5, pointRadius: 3, pointBackgroundColor: ORANGE,
         tension: 0.25, yAxisID: 'y', spanGaps: false,
-      },
+      });
       // Regs latest pred (dashed orange, future only; anchored at maxWk actual)
-      {
+      sets.push({
         label: 'Regs (predicted)', data: s.regsLatestFuture,
         borderColor: ORANGE, backgroundColor: 'transparent',
         borderWidth: 2, borderDash: [6, 4], pointRadius: 0, tension: 0.25,
         yAxisID: 'y', spanGaps: true,
-      },
+      });
+    }
+    if (axis === 'spend' || axis === 'both') {
       // Spend actual (solid blue)
-      {
+      sets.push({
         label: 'Spend (actual, $K)', data: s.spendActual,
         borderColor: BLUE, backgroundColor: BLUE,
         borderWidth: 2.5, pointRadius: 3, pointBackgroundColor: BLUE,
         tension: 0.25, yAxisID: 'y1', spanGaps: false,
-      },
+      });
       // Spend latest pred (dashed blue)
-      {
+      sets.push({
         label: 'Spend (predicted, $K)', data: s.spendLatestFuture,
         borderColor: BLUE, backgroundColor: 'transparent',
         borderWidth: 2, borderDash: [6, 4], pointRadius: 0, tension: 0.25,
         yAxisID: 'y1', spanGaps: true,
-      },
-    ];
+      });
+    }
+    return sets;
   }
 
   function buildCalibrationDatasets(s, axisFilter) {
@@ -247,9 +370,11 @@
       sets.push({
         label: 'Regs (first pred)', data: s.regsFirst,
         borderColor: ORANGE, backgroundColor: 'transparent',
-        borderWidth: 1, pointRadius: 3, pointStyle: 'rect',
-        pointBackgroundColor: 'transparent', pointBorderColor: ORANGE,
-        tension: 0.25, yAxisID: 'y', spanGaps: true,
+        // WR-F1 (2026-04-29): first-pred now matches the default chart's
+        // prediction line exactly — dashed orange, no markers.
+        borderWidth: 1.5, borderDash: [2, 3],
+        pointRadius: 0, tension: 0.25,
+        yAxisID: 'y', spanGaps: true,
       });
       sets.push({
         label: 'Regs (latest pred)', data: s.regsLatestAll,
@@ -268,9 +393,9 @@
       sets.push({
         label: 'Spend (first pred, $K)', data: s.spendFirst,
         borderColor: BLUE, backgroundColor: 'transparent',
-        borderWidth: 1, pointRadius: 3, pointStyle: 'rect',
-        pointBackgroundColor: 'transparent', pointBorderColor: BLUE,
-        tension: 0.25, yAxisID: 'y1', spanGaps: true,
+        borderWidth: 1.5, borderDash: [2, 3],
+        pointRadius: 0, tension: 0.25,
+        yAxisID: 'y1', spanGaps: true,
       });
       sets.push(s.spendLatestSet || {
         label: 'Spend (latest pred, $K)', data: s.spendLatestAll,
@@ -642,6 +767,7 @@
     return new Chart(ctx, {
       type: 'line',
       data: { labels: sd.labels || [], datasets: datasets },
+      plugins: [monthLabelPlugin],
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -650,7 +776,7 @@
         // the last non-null point on each visible line with series name +
         // value so the user reads the chart left-to-right and lands on the
         // series identity without chasing the legend.
-        layout: { padding: { right: 80 } },  // breathing room for end labels
+        layout: { padding: { right: 80, top: 14 } },  // breathing room for end labels + month band
         plugins: {
           legend: {
             position: 'bottom',
@@ -747,10 +873,7 @@
           },
         },
         scales: {
-          x: {
-            grid: { color: '#1f222b' },
-            ticks: { color: '#666', font: { size: 10 }, autoSkip: true, maxRotation: 0 },
-          },
+          x: monthlyGridXAxis(),
           y: {
             position: 'left', grid: { color: '#1f222b' },
             ticks: { color: '#666' },
@@ -978,14 +1101,16 @@
     const mode = opts.mode === 'calibration' ? 'calibration' : 'default';
     const s = buildSeries(opts.forecastData, opts.market);
     const datasets = mode === 'calibration'
-      ? buildCalibrationDatasets(s, opts.axisFilter) : buildDefaultDatasets(s);
+      ? buildCalibrationDatasets(s, opts.axisFilter) : buildDefaultDatasets(s, opts.axisFilter);
 
     const chart = new Chart(ctx, {
       type: 'line',
       data: { labels: s.labels, datasets: datasets },
+      plugins: [monthLabelPlugin],
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        layout: { padding: { top: 14 } },  // breathing room for month band
         interaction: { mode: 'index', intersect: false, axis: 'x' },
         plugins: {
           legend: {
@@ -1033,19 +1158,7 @@
           datalabels: { display: false },
         },
         scales: {
-          x: {
-            grid: { color: '#1f222b' },
-            ticks: {
-              color: '#666', font: { size: 10 },
-              // Show every 2nd week — more anchors for matching chart points to table rows
-              autoSkip: false,
-              callback: function (val, idx) {
-                const lbl = this.getLabelForValue(val);
-                const n = parseInt(lbl.replace('W', ''), 10);
-                return (n % 2 === 0 || n === 1 || n === 52) ? lbl : '';
-              },
-            },
-          },
+          x: monthlyGridXAxis(),
           y: {
             position: 'left', grid: { color: '#1f222b' },
             ticks: { color: '#666' },

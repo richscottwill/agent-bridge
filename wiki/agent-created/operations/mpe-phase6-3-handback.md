@@ -72,11 +72,7 @@ migrate just those views, keep Plot for the primary chart.
 
 ## Tested scenarios
 
-- **MX Y2026 @ 100% ie%CCP** — renders hero $1.17M, KPI strip, contribution bar, 2 regime shaded regions (Polaris + Sparkle still-peaking), counterfactual shows regime impact ≈1,237 regs, narrative generates, fit-quality dot green (r²=0.85 from brand_cpa_elasticity)
-- **US Y2026 @ 65%** — renders hero ~$41.5M, 3 regimes shaded, contribution bar full 4 segments
-- **JP Y2026 spend=N** — driver-select correctly excludes ie%CCP option (v6 spend-only), renders regime markers + shaded regions
-- **AU Y2026 spend** — ie%CCP KPI shows n/a (null CCPs preserved), no crash
-- **NA region rollup** — chart area shows rollup message, constituent table populated with US + CA
+MX Y2026 @ 100% ie%CCP** — renders hero $1.17M, KPI strip, contribution bar, 2 regime shaded regions (Polaris + Sparkle still-peaking), counterfactual shows regime impact ≈1,237 regs, narrative generates, fit-quality dot green (r²=0.85 from brand_cpa_elasticity). US Y2026 @ 65%** — renders hero ~$41.5M, 3 regimes shaded, contribution bar full 4 segments. JP Y2026 spend=N** — driver-select correctly excludes ie%CCP option (v6 spend-only), renders regime markers + shaded regions. AU Y2026 spend** — ie%CCP KPI shows n/a (null CCPs preserved), no crash. NA region rollup** — chart area shows rollup message, constituent table populated with US + CA.
 
 ## What's NOT in Phase 6.3 (deferred per spec)
 

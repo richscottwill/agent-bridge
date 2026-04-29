@@ -69,6 +69,9 @@ From 2025 MBR: "While PS CPS performance is primarily driven by SSR PS across al
 
 - Parameters: `ps.market_projection_params` WHERE market = 'JP'
 - Validation: `ps.parameter_validation` WHERE market = 'JP'
+
+**Example:** If this section references a specific process, the concrete steps are: - Validation: `ps.parameter_validation` WHERE mark...
+
 - Regime events: `ps.regime_changes` WHERE market = 'JP'
 
 ## Regime update from 2025 MBR review (added 2026-04-22)

@@ -49,6 +49,3 @@ Before uploading to SharePoint:
 3. Weasel word scan — zero violations
 4. Style replication — static sections unchanged
 5. Content replication — historical data matches DuckDB
-
-## SharePoint Upload Protocol
-Handled by the State File Engine (Layer 3). See `state-file-engine.md` → Layer 3: SharePoint Durability Sync.

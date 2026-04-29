@@ -57,6 +57,7 @@ How confident we are about the impact estimate.
 | `none_novel` | First time seeing this — guessing from theory | Wide CI, short half-life default |
 
 **Why precedent matters:** A recurring event we've seen three times has a much tighter expected range than a novel campaign. The projector should weight these differently. `precedent_source` makes that explicit.
+  - Example: Why precedent matters:** A recurring event we've seen three ...
 
 ### What this means for callouts
 
@@ -68,25 +69,20 @@ When writing a callout, the three categories map to different narrative moves:
 
 ## Adding a new regime change
 
-```sql
 INSERT INTO ps.regime_changes (
     id, market, change_date, change_type, metric_affected,
-    expected_impact_pct, confidence, description, source,
     is_structural_baseline, half_life_weeks, precedent_source,
     end_date, active
 ) VALUES (
     gen_random_uuid()::VARCHAR, 'MX', '2026-04-20', 'promo_launch', 'registrations',
     0.10, 0.5, 'Prime Day MX kickoff promo', 'manual-agent',
     false, 2, 'yoy_analog',
-    '2026-05-05', true
-);
 ```
 
 Then run the regenerator to propagate to the steering file:
 
 ```bash
 python3 ~/shared/tools/prediction/regenerate_market_constraints.py
-```
 
 ## Retiring a baseline
 

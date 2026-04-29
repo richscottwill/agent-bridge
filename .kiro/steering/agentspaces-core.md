@@ -14,12 +14,10 @@
 - Never attempt to modify system files or directories outside your allowed scope
 
 ## Development Environment
-
 - You are running in a DevSpaces container with pre-configured Amazon development tools
 - Brazil build system, CRUX, and other Amazon internal tools are available
 - Leverage the containerized environment for consistent, reproducible development
-- Use the provided tooling rather than attempting to install additional software
-
+- Use the provided tooling than attempting to install additional software
 ## Security and Compliance
 
 - Maintain Amazon's security standards in all operations

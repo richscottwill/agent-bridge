@@ -1,4 +1,6 @@
 <!-- DOC-0347 | duck_id: protocol-email-calendar-duckdb-sync -->
+
+
 # Email + Calendar → DuckDB Sync Protocol
 
 Canonical sync procedure for keeping DuckDB `signals.emails` and `main.calendar_events` populated from Outlook MCP. Runs as part of AM-Backend Subagent C.
@@ -7,7 +9,11 @@ Database: `ps_analytics` (via DuckDB MCP). Always use schema-qualified names.
 
 ---
 
+
+
 ## Step 1 — Pull Emails (All Folders, Date-Bounded)
+
+
 
 ### Step 1A — Determine scan window
 
@@ -20,8 +26,12 @@ WHERE source_name = 'emails';
 ```
 
 - If a row exists: `startDate` = that date (YYYY-MM-DD). This **includes** the last-scanned day to catch late-arriving emails.
-- If no row exists (first run): `startDate` = today minus 3 days as a safe bootstrap window.
+- If no row exists (first run, or the row was deliberately purged to force a backfill): `startDate` = today minus 365 days. YTD is typical enough that we want a full rolling year of coverage on cold start — anything shorter leaves tools like Broad Sweep unable to do YTD audits. (Prior default was `today minus 3 days`; changed 2026-04-29 after Broad Sweep YTD run found ingestion horizon was 6 weeks, not a year.)
 - `endDate` = today (YYYY-MM-DD).
+
+**Forcing a backfill:** If you need to re-pull a longer window than the current watermark allows (e.g., the pipeline missed several days due to a Midway outage, or you want to seed a new installation with history), `DELETE FROM ops.data_freshness WHERE source_name='emails'` before the run. Next AM-Backend will treat it as a first run and pull the full 365-day window.
+
+
 
 ### Step 1B — Search all folders
 
@@ -37,6 +47,8 @@ This searches across **all folders** (inbox, sent, custom folders, subfolders, n
 
 **Pagination:** If 250 results are returned (limit hit), increment `offset` by 250 and repeat until fewer than 250 results come back. In practice, a 1-3 day window rarely exceeds 250.
 
+
+
 ### Sender Priority Classification
 
 | Priority | Condition |
@@ -45,6 +57,8 @@ This searches across **all folders** (inbox, sent, custom folders, subfolders, n
 | medium | Sender contains: Kiran, Vijeth, Alex, Dwayne, Caroline, Frank, Suzane |
 | low | All others (automated, newsletters, system notifications) |
 
+
+
 ### Action Classification
 
 | action_needed | Condition |
@@ -52,6 +66,8 @@ This searches across **all folders** (inbox, sent, custom folders, subfolders, n
 | respond | Email is a direct question to Richard, or a request for input/data/file |
 | review | Email contains information Richard should read (FYI, update, report) |
 | none | Automated notification, newsletter, system alert, or already-handled |
+
+
 
 ### Step 2 — INSERT into signals.emails
 
@@ -85,10 +101,13 @@ ON CONFLICT (email_id) DO UPDATE SET
 ```
 
 **email_id generation:** Use `'em_' || LEFT(MD5(conversationId), 12)` or a deterministic short ID derived from the conversationId. This ensures idempotent re-runs don't create duplicates.
+  - *Example:* When email_id generation:** use `'em_' || left(md5(conv, the expected outcome is verified by checking the result.
 
 **CRITICAL:** Do NOT skip this step. The DuckDB write is the primary deliverable of this subagent — the file output (email-triage.md) is secondary.
 
 ---
+
+
 
 ## Step 3 — Pull Today's Calendar
 
@@ -97,6 +116,8 @@ calendar_view(start_date="{today MM-DD-YYYY}", view="day")
 ```
 
 This returns events with: meetingId, subject, start, end, location, organizer.name, isCanceled, isRecurring, isAllDay, response, status, categories.
+
+
 
 ### Step 4 — UPSERT into main.calendar_events
 
@@ -138,6 +159,8 @@ ON CONFLICT (event_id) DO UPDATE SET
 
 ---
 
+
+
 ## Step 5 — Update Data Freshness
 
 After both writes complete:
@@ -160,6 +183,8 @@ ON CONFLICT DO NOTHING;
 
 ---
 
+
+
 ## Step 6 — Write email-triage.md (file output)
 
 After DuckDB writes succeed, write the human-readable digest:
@@ -170,32 +195,47 @@ After DuckDB writes succeed, write the human-readable digest:
 
 Format:
 ```markdown
+
+
 # Email Triage — {date}
+
+
 
 ## High Priority (respond)
 - **{subject}** from {sender} ({days_old}d ago) — {preview}
 
+### Details
+
+
+
+
 ## Medium Priority (review)
 - **{subject}** from {sender} ({days_old}d ago) — {preview}
 
+
+
 ## Low / No Action
+Synced: {timestamp} | {total} emails processed | {high_count} high / {medium_count} medium / {low_count} low
 - {subject} from {sender} — {disposition}
 
 ---
-Synced: {timestamp} | {total} emails processed | {high_count} high / {medium_count} medium / {low_count} low
 ```
 
 ---
+
+
 
 ## Error Handling
 
 - **Outlook MCP failure:** Log error to `~/shared/context/intake/email-sync-error-{date}.md`. Write empty email-triage.md with error note. Do NOT skip calendar sync if email fails (and vice versa).
 - **DuckDB write failure:** Log the specific SQL error. Retry once. If still failing, write the file output anyway and flag: "⚠️ DuckDB write failed for {table}. Data is in email-triage.md only."
 - **Empty inbox:** Valid state. Write 0 rows to DuckDB. Write email-triage.md with "No emails in scan window."
-- **ops.data_freshness missing:** First run. Use startDate = today minus 3 days. The INSERT ON CONFLICT in Step 5 handles bootstrapping the row.
+- **ops.data_freshness missing:** First run. Use startDate = today minus 365 days (full rolling year bootstrap). The INSERT ON CONFLICT in Step 5 handles bootstrapping the row.
 - **Calendar API failure:** Log error. Email sync should still complete independently.
 
 ---
+
+
 
 ## Execution Order (mandatory)
 

@@ -757,7 +757,8 @@ The `Kiro_RW` text field (GID: `1213915851848087`) is empty on every task. This 
 - **WW keyword gap fill** (6 subtasks): not yet pulled
 - **Get Enhanced Match Legal Approval** (2 subtasks): child of F90
 
-### Tasks with No Routine (Backlog/Untriaged)
+
+
 These tasks have no Routine field set — they won't appear in any block:
 - Get Enhanced Match Legal Approval (child of F90)
 - Get Enhanced Match details (child of above)

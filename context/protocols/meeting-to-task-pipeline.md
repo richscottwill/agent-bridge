@@ -19,6 +19,7 @@ For each action item, determine:
 - **Due date signal**: Look for explicit dates, urgency words, or default to +3 business days
 
 ### Due Date Derivation
+---
 
 | Signal in Discussion | Due Date |
 |---------------------|----------|
@@ -26,17 +27,12 @@ For each action item, determine:
 | Urgency signal ("ASAP", "today", "urgent", "immediately") | Tomorrow |
 | No date signal | +3 business days from meeting date |
 
----
 
 ## Step 2: Classify Action Items
-
 For each extracted action item:
 - **Richard's items** → Asana task creation path (Step 3)
 - **Others' items** → Dependency logging path (Step 5)
-- **No items found** → Log "no actions" in meeting series file, skip to Step 6
-
----
-
+- **No items found** → Log "no actions" in meeting series file,
 ## Step 2.5: Consolidation Check (MANDATORY — before creating any task)
 
 **Principle: A new top-level task only earns its place if the action is Urgent + Important (or externally-bound with a hard deadline). Everything else becomes a subtask, a bullet in an existing task's notes, or a comment on a parent.**

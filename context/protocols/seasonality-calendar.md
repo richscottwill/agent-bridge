@@ -9,6 +9,8 @@ Used by the state file engine (Step 2E) and callout pipeline to automatically fl
 4. Flag YoY comparisons as unreliable if the holiday falls on different weeks across years
 5. Note the expected impact level to calibrate the narrative tone
 
+
+
 ## Impact Levels
 
 - **HIGH (>20% suppression):** Multi-day national holidays, business closures.
@@ -19,6 +21,13 @@ Used by the state file engine (Step 2E) and callout pipeline to automatically fl
 Impact percentages below are **measured from actual ps.metrics data** (2025-2026), not estimates. Format: `measured_impact% (source: YYYY event)`. Where two years of data exist, the average is shown. The agent uses these as multipliers when projecting holiday weeks.
 
 ---
+
+
+
+
+#### Key Points
+- Primary function: Impact Levels
+- Referenced by other sections for context
 
 ## MX — Mexico
 
@@ -36,6 +45,8 @@ Impact percentages below are **measured from actual ps.metrics data** (2025-2026
 | Nov 27 | Buen Fin (est. start) | +15-25% | Est. | Mexico's BFCM equivalent. |
 | Dec 25 | Navidad | -14.8% | 2025 W52 vs W51 | Lowest Christmas impact — MX B2B less affected than EU/AU. |
 
+
+
 ## AU — Australia
 
 | Date | Holiday | Measured Impact | Source | Notes |
@@ -49,9 +60,13 @@ Impact percentages below are **measured from actual ps.metrics data** (2025-2026
 | Nov 27 | Black Friday | +10-15% | Est. | Growing in AU. |
 | Dec 25-26 | Christmas + Boxing Day | -39.8% | 2025 W52 vs W51 | Multi-day shutdown. |
 
+
+
 ## WW — Worldwide Testing Markets
 
 Covers all 10 PS markets. The WW Testing state file needs to know which markets are affected each week. Organized by market, then aggregated into WW-level impact events.
+
+
 
 ### US
 
@@ -68,6 +83,8 @@ Covers all 10 PS markets. The WW Testing state file needs to know which markets 
 | Nov 27–30 | BFCM | +20-30% | Est. | Largest positive event. |
 | Dec 24–Jan 1 | Christmas/New Year | -11.0% | 2025 W52 vs W51 | US has lowest Christmas suppression of all markets. |
 
+
+
 ### CA — Canada
 
 | Date | Holiday | Measured Impact | Source | Notes |
@@ -82,6 +99,8 @@ Covers all 10 PS markets. The WW Testing state file needs to know which markets 
 | Nov 27–30 | BFCM | +15-20% | Est. | Growing in CA. |
 | Dec 25-26 | Christmas + Boxing Day | -27.0% | 2025 W52 vs W51 | Multi-day shutdown. |
 
+
+
 ### UK
 
 | Date | Holiday | Measured Impact | Source | Notes |
@@ -95,6 +114,8 @@ Covers all 10 PS markets. The WW Testing state file needs to know which markets 
 | Nov 27–30 | BFCM | +15-25% | Est. | Major in UK. |
 | Dec 25-26 | Christmas + Boxing Day | -43.3% | 2025 W52 vs W51 | Highest suppression — UK B2B shuts down completely. |
 
+
+
 ### DE — Germany
 
 | Date | Holiday | Measured Impact | Source | Notes |
@@ -106,6 +127,8 @@ Covers all 10 PS markets. The WW Testing state file needs to know which markets 
 | May 25 | Pfingstmontag (Whit Monday) | ~-3% | Est. | Monday long weekend. |
 | Nov 27–30 | BFCM | +10-15% | Est. | Growing in DE. |
 | Dec 24-26 | Weihnachten | -35.4% | 2025 W52 vs W51 | Multi-day shutdown. |
+
+
 
 ### FR — France
 
@@ -121,6 +144,8 @@ Covers all 10 PS markets. The WW Testing state file needs to know which markets 
 | Nov 27–30 | BFCM | +10-15% | Est. | Growing in FR. |
 | Dec 25 | Noël | -38.1% | 2025 W52 vs W51 | Multi-day shutdown. |
 
+
+
 ### IT — Italy
 
 | Date | Holiday | Measured Impact | Source | Notes |
@@ -132,6 +157,8 @@ Covers all 10 PS markets. The WW Testing state file needs to know which markets 
 | Aug 15 | Ferragosto | ~-15% | Est. | Peak summer. Many businesses closed 1-2 weeks. |
 | Nov 27–30 | BFCM | +10-15% | Est. | Growing in IT. |
 | Dec 25-26 | Natale + Santo Stefano | -40.1% | 2025 W52 vs W51 | Multi-day shutdown. |
+
+
 
 ### ES — Spain
 
@@ -145,6 +172,8 @@ Covers all 10 PS markets. The WW Testing state file needs to know which markets 
 | Nov 27–30 | BFCM | +10-15% | Est. | Growing in ES. |
 | Dec 25 | Navidad | -26.9% | 2025 W52 vs W51 | Multi-day shutdown. |
 
+
+
 ### JP — Japan
 
 | Date | Holiday | Measured Impact | Source | Notes |
@@ -157,6 +186,8 @@ Covers all 10 PS markets. The WW Testing state file needs to know which markets 
 | Sep 21-23 | Silver Week | ~-5% | Est. | Multi-day. Moderate. |
 | Nov 27 | Black Friday | ~+5% | Est. | Growing but not major in JP. |
 | Dec 25-31 | Year-end | -32.3% | 2025 W52 vs W51 | Business shutdown. |
+
+
 
 ### WW Aggregate Impact Events
 

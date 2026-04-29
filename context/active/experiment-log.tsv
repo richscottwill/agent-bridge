@@ -543,3 +543,978 @@ run_W18_1777478629	signal-to-task-pipeline	Signal Classification	REMOVE	informat
 run_W18_1777478629	memory	Cross-Cutting Dynamics	COMPRESS	information_retrieval	2463	2463	0	0.000	0.000	0.000	0.000	11	REVERT	False
 run_W18_1777478629	script-parse-au-search	--- SECTION A: All keywords by spend ---	SPLIT	information_retrieval	569	580	11	0.900	0.833	0.900	0.067	55	KEEP	False
 run_W18_1777478629	state-file-engine	Layer 1: AM-Backend Step 2E — Content Generation (	REMOVE	information_retrieval	2049	1665	-384	0.158	0.000	0.000	-1.000	18	REVERT	True
+run_W18_1777478629	hook-state-file-constraints-sync	preamble	REWORD	information_retrieval	199	199	0	0.522	0.533	0.578	-0.011	49	REVERT	False
+run_W18_1777478629	wiki-forecast-system	Check 1 — monthly projection at least completed-we	ADD	information_retrieval	1290	1326	36	0.810	0.810	0.905	0.000	32	KEEP	False
+run_W18_1777478629	slack-ingestion-README	Volume Control	SPLIT	information_retrieval	924	929	5	1.000	1.000	1.000	0.000	26	KEEP	False
+run_W18_1777478629	device	Slack Context Ingestion & Open Items (via AM-1 + p	REMOVE	information_retrieval	2638	2507	-131	0.022	0.000	0.000	-1.000	7	REVERT	True
+run_W18_1777478629	eod-system-refresh	Phase 4: Recurring Task State Checks	COMPRESS	information_retrieval	2701	2674	-27	0.000	0.000	0.000	-1.000	5	REVERT	True
+run_W18_1777478629	workflow-observability	At Workflow End	SPLIT	information_retrieval	351	357	6	0.900	0.900	0.900	0.000	20	KEEP	False
+run_W18_1777478629	hook-am-triage	preamble	ADD	information_retrieval	417	445	28	0.363	0.000	0.000	-1.000	15	REVERT	True
+run_W18_1777478629	sharepoint-durability-sync	Common Pitfalls — Conflict Resolution	MERGE	information_retrieval	1132	1129	-3	0.200	0.000	0.000	-1.000	14	REVERT	True
+run_W18_1777478629	hook-audit-asana-writes	preamble	REMOVE	information_retrieval	159	0	-159	0.000	0.000	0.000	-1.000	3	REVERT	True
+run_W18_1777478629	wiki-meeting-ingestion	Hedy API coverage	MERGE	information_retrieval	709	705	-4	0.152	0.000	0.000	-1.000	12	REVERT	True
+run_W18_1777478629	gut	Archive Rules (moved to `~/shared/wiki/archive/`)	MERGE	information_retrieval	1940	1937	-3	0.938	0.000	0.000	0.938	32	KEEP	False
+run_W18_1777478629	hook-agent-bridge-sync	preamble	REWORD	information_retrieval	85	85	0	0.660	0.860	0.860	-0.200	28	REVERT	False
+run_W18_1777478629	au-stakeholder-research	Escalation Pattern Analysis	SPLIT	information_retrieval	2032	2038	6	0.900	0.900	0.900	0.000	25	KEEP	False
+run_W18_1777478629	eod-backend	Phase 5: Housekeeping	RESTRUCTURE	information_retrieval	1079	1079	0	0.933	0.933	0.867	0.000	37	KEEP	False
+run_W18_1777478629	context-enrichment	Procedure	MERGE	information_retrieval	2022	2019	-3	0.033	0.000	0.000	-1.000	16	REVERT	True
+run_W18_1777478629	am-auto	Step 6 — Recurring Task Auto-Creation (AU + MX) (A	MERGE	information_retrieval	2513	2505	-8	0.000	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	hook-mpe-refit	preamble	SPLIT	information_retrieval	311	315	4	0.658	0.667	0.658	-0.008	52	REVERT	False
+run_W18_1777478629	slack-history-backfill	DMs Pending	REWORD	information_retrieval	1667	1667	0	0.200	0.000	0.000	-1.000	13	REVERT	True
+run_W18_1777478629	context-enrichment	Context Enrichment Protocol — Phase 2.5	MERGE	information_retrieval	2022	2018	-4	0.545	0.545	0.918	0.000	41	KEEP	False
+run_W18_1777478629	sharepoint-durability-sync	Pull Decision Logic	MERGE	information_retrieval	1132	1129	-3	0.867	0.844	0.889	0.022	44	KEEP	False
+run_W18_1777478629	eyes	Known Issues	REMOVE	information_retrieval	1423	1396	-27	0.000	0.000	0.000	-1.000	3	REVERT	True
+run_W18_1777478629	script-hard-thing-refresh	script previously assumed these tables existed; fi	REMOVE	information_retrieval	1665	1525	-140	0.200	0.000	0.000	-1.000	15	REVERT	True
+run_W18_1777478629	am-backend-parallel	Failure Handling	MERGE	information_retrieval	4545	4542	-3	0.050	0.000	0.000	-1.000	13	REVERT	True
+run_W18_1777478629	topic-sentry	Tuning knobs	REMOVE	information_retrieval	1198	1127	-71	0.013	0.000	0.000	-1.000	10	REVERT	True
+run_W18_1777478629	email-calendar-duckdb-sync	Low / No Action	RESTRUCTURE	information_retrieval	1022	1022	0	0.600	0.600	0.400	0.000	34	KEEP	False
+run_W18_1777478629	hook-guard-email	preamble	SPLIT	information_retrieval	86	90	4	0.791	0.800	0.800	-0.009	25	REVERT	False
+run_W18_1777478629	asana-activity-monitor-protocol	Step 5: Handle Errors	RESTRUCTURE	information_retrieval	818	818	0	0.600	0.600	1.000	0.000	41	KEEP	False
+run_W18_1777478629	hook-session-summary	preamble	SPLIT	information_retrieval	140	144	4	0.900	0.900	0.900	0.000	35	KEEP	False
+run_W18_1777478629	asana-kiro-rw-protocol	Kiro_RW Population Protocol	ADD	information_retrieval	2611	2641	30	1.000	1.000	1.000	0.000	17	KEEP	False
+run_W18_1777478629	slack-history-backfill	Per-Channel Procedure	REMOVE	information_retrieval	1667	1596	-71	0.157	0.000	0.000	-1.000	14	REVERT	True
+run_W18_1777478629	hook-am-triage	preamble	REWORD	information_retrieval	417	417	0	0.737	0.726	0.737	0.011	49	KEEP	False
+run_W18_1777478629	hook-eod	preamble	RESTRUCTURE	information_retrieval	646	646	0	0.864	0.809	0.836	0.055	48	KEEP	False
+run_W18_1777478629	hook-broad-sweep	preamble	REMOVE	information_retrieval	247	0	-247	0.000	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	mcp-tool-reference	5. arcc	REMOVE	information_retrieval	2026	1967	-59	0.089	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	hook-audit-asana-writes	preamble	REMOVE	information_retrieval	159	0	-159	0.000	0.000	0.000	-1.000	3	REVERT	True
+run_W18_1777478629	asana-activity-monitor-protocol	Step 3: Get Stories for Each Task	REWORD	information_retrieval	818	818	0	0.678	0.678	0.700	0.000	50	KEEP	False
+run_W18_1777478629	hook-mpe-refit	preamble	SPLIT	information_retrieval	311	315	4	0.800	0.800	0.800	0.000	45	KEEP	False
+run_W18_1777478629	asana-command-center	Legacy Guardrails (My Tasks — unchanged)	RESTRUCTURE	information_retrieval	7507	7507	0	0.000	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	org-chart	International Expansion — Paid Search & Marketing 	COMPRESS	information_retrieval	1724	1696	-28	1.000	1.000	1.000	0.000	40	KEEP	False
+run_W18_1777478629	am-triage	Step 5 — Status Update Staleness	COMPRESS	information_retrieval	3124	3124	0	0.000	0.000	0.000	-1.000	3	REVERT	True
+run_W18_1777478629	topic-watchlist	Sunset (do not surface — kept for audit trail)	SPLIT	information_retrieval	2272	2284	12	0.040	0.000	0.000	-1.000	12	REVERT	True
+run_W18_1777478629	brain	Level 5: Full Agentic Orchestration of PS Work	REMOVE	information_retrieval	1738	1700	-38	0.124	0.914	0.033	-0.790	36	REVERT	False
+run_W18_1777478629	am-frontend	6B. Populate Actionable Intelligence Sections	SPLIT	information_retrieval	3986	3994	8	0.000	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	brain	OP1 Narrative	SPLIT	information_retrieval	1738	1743	5	0.908	0.908	0.908	0.000	35	KEEP	False
+run_W18_1777478629	au-stakeholder-research	February 2026 — QBR, MBR, Relationship Building	COMPRESS	information_retrieval	2038	2038	0	0.479	0.000	0.000	-1.000	15	REVERT	True
+run_W18_1777478629	asana-command-center	File Schemas	REMOVE	information_retrieval	7507	7399	-108	0.000	0.000	0.000	-1.000	5	REVERT	True
+run_W18_1777478629	asana-kiro-rw-protocol	3. AU meetings - Agenda	RESTRUCTURE	information_retrieval	2641	2655	14	0.480	0.000	0.000	-1.000	26	REVERT	True
+run_W18_1777478629	mcp-tool-reference	Slack Channels (guardrailed)	SPLIT	information_retrieval	2026	2032	6	0.333	0.000	0.000	-1.000	14	REVERT	True
+run_W18_1777478629	context-enrichment	Schema (create if not exists)	SPLIT	information_retrieval	2018	2026	8	0.000	0.000	0.000	-1.000	3	REVERT	True
+run_W18_1777478629	memory	Key Quip Docs	REMOVE	information_retrieval	2463	2436	-27	0.000	1.000	0.000	-1.000	15	REVERT	False
+run_W18_1777478629	topic-watchlist	ad-copy-and-creative	ADD	information_retrieval	2272	2300	28	0.100	0.000	0.000	-1.000	9	REVERT	True
+run_W18_1777478629	device	SharePoint Durability Layer (Protocol: `sharepoint	SPLIT	information_retrieval	2638	2646	8	0.000	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	au-stakeholder-research	Escalation Pattern Analysis — Details	COMPRESS	information_retrieval	2038	2005	-33	0.662	0.863	0.688	-0.200	27	REVERT	False
+run_W18_1777478629	nervous-system	Loop 2: Prediction Scoring	COMPRESS	information_retrieval	1824	1824	0	1.000	1.000	1.000	0.000	41	KEEP	False
+run_W18_1777478629	asana-kiro-rw-protocol	7. Update and close your goal(s)	SPLIT	information_retrieval	2641	2650	9	0.272	0.000	0.000	-1.000	42	REVERT	True
+run_W18_1777478629	signal-intelligence	Idea sourcing	SPLIT	information_retrieval	1602	1607	5	0.700	0.700	0.700	0.000	45	KEEP	False
+run_W18_1777478629	am-backend-parallel	Subagent C: Email + Calendar Ingestion	REMOVE	information_retrieval	4545	4355	-190	0.000	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	gut	Governance & Daily Brief Integration	SPLIT	information_retrieval	1937	1945	8	0.000	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	org-chart	Amazon Retail Central Paid Search (Hydra) — AME Se	ADD	information_retrieval	1696	1732	36	0.600	0.400	0.600	0.200	71	KEEP	False
+run_W18_1777478629	brain	Execution & Operations	ADD	information_retrieval	1743	1773	30	0.726	0.716	0.705	0.011	37	REVERT	False
+run_W18_1777478629	asana-command-center	Kiro_RW Field — Agent Opportunity	COMPRESS	information_retrieval	7507	7507	0	0.000	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	org-chart	Your Team — Brandon Munday's Directs	ADD	information_retrieval	1732	1765	33	0.980	0.980	1.000	0.000	35	KEEP	False
+run_W18_1777478629	context-enrichment	Error Handling	COMPRESS	information_retrieval	2018	2018	0	0.000	0.000	0.000	-1.000	4	REVERT	True
+run_W18_1777478629	amcc	Streak Recovery Protocol	RESTRUCTURE	information_retrieval	5132	5132	0	0.782	0.782	0.345	0.000	38	KEEP	False
+run_W18_batch150	asana-duckdb-sync	Check 1 — Stale References in hands.md	ADD	information_retrieval	1960	1974	14	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	brain	Evidence & Measurement	MERGE	information_retrieval	1743	1743	0	0.4	0.4	0.0	0.0	19	KEEP	False
+run_W18_batch150	body	Quick Orientation	REMOVE	information_retrieval	1057	1057	0	0.0	0.0	0.0	-1.0	10	REVERT	True
+run_W18_batch150	richard-style-slack	What NOT to Do When Writing as Richard in Slack	MERGE	output_quality	1571	1571	0	0.7	0.0	0.0	0.7	13	KEEP	False
+run_W18_batch150	spine	Four Layers	MERGE	information_retrieval	1504	1504	0	0.0	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	eyes	IT (Phase 1, Feb 19 - Mar 5, 2026)	COMPRESS	information_retrieval	1423	1423	0	0.5	0.7	0.0	-0.2	27	REVERT	False
+run_W18_batch150	topic-watchlist	liveramp-enhanced-match	SPLIT	information_retrieval	2272	2272	0	0.1	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	duckdb-schema-verification	Preamble	REWORD	information_retrieval	377	377	0	1.0	1.0	1.0	0.0	29	KEEP	False
+run_W18_batch150	eod-backend	Hedy Pull	RESTRUCTURE	information_retrieval	1079	1079	0	0.7	0.7	0.7	0.0	20	KEEP	False
+run_W18_batch150	eod-meeting-sync	Update meetings/	REMOVE	information_retrieval	289	289	0	0.7	0.8	0.8	-0.1	17	REVERT	False
+run_W18_batch150	amazon-politics	Dealing with Difficult People in Other Orgs	REMOVE	information_retrieval	3180	3180	0	0.6	0.3	0.0	0.3	40	KEEP	False
+run_W18_batch150	richard-style-email	Transitions & Audience	REMOVE	output_quality	818	818	0	0.7	0.7	0.7	0.0	21	KEEP	False
+run_W18_batch150	richard-style-slack	Register & Tone Failures	RESTRUCTURE	output_quality	1571	1571	0	0.6	0.2	0.0	0.4	15	KEEP	False
+run_W18_batch150	richard-style-mbr	Worked Example — Confidence Signal	MERGE	output_quality	757	757	0	0.5	0.5	0.5	0.0	26	KEEP	False
+run_W18_batch150	seasonality-calendar	JP — Japan	MERGE	information_retrieval	2388	2388	0	0.5	0.5	0.3	0.0	27	KEEP	False
+run_W18_batch150	nervous-system	Deferred Loops	RESTRUCTURE	information_retrieval	1824	1824	0	0.6	0.6	0.4	0.0	20	KEEP	False
+run_W18_batch150	richard-style-amazon	Amazon Narrative Standard (from internal templates and Doc Ninja reviews)	REMOVE	output_quality	1065	1065	0	0.6	0.6	0.9	0.0	36	KEEP	False
+run_W18_batch150	roster	Sourcing / Merchandising (referenced in events sections)	COMPRESS	information_retrieval	2211	2211	0	0.2	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	device	Safety Guards (preToolUse hooks)	RESTRUCTURE	information_retrieval	2638	2638	0	0.7	0.7	0.5	0.0	33	KEEP	False
+run_W18_batch150	memory	Cross-Cutting Dynamics	COMPRESS	information_retrieval	2463	2463	0	0.6	0.6	0.0	0.0	19	KEEP	False
+run_W18_batch150	richard-style-wbr	Emerging Markets (lower volume, more narrative)	COMPRESS	output_quality	1075	1075	0	0.1	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	am-triage	Preamble	COMPRESS	output_quality	437	437	0	0.7	0.7	0.7	0.0	37	KEEP	False
+run_W18_batch150	richard-style-slack	Why Slack Is Primary	REMOVE	output_quality	1571	1571	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	gut	Purpose	REWORD	information_retrieval	1937	1937	0	0.7	0.7	0.7	0.0	40	KEEP	False
+run_W18_batch150	am-auto	Step 1 — Portfolio Discovery	REWORD	information_retrieval	2513	2513	0	0.5	0.5	0.0	0.0	16	KEEP	False
+run_W18_batch150	richard-style-wbr	Common Callout Failures	REMOVE	output_quality	1075	1075	0	0.7	0.7	1.0	0.0	38	KEEP	False
+run_W18_batch150	gut	Compression Techniques	RESTRUCTURE	information_retrieval	1937	1937	0	0.7	0.7	0.0	0.0	37	KEEP	False
+run_W18_batch150	device	The Test	ADD	information_retrieval	2638	2652	14	0.2	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	topic-sentry	Preamble	REMOVE	output_quality	545	545	0	0.5	0.5	0.5	0.0	21	KEEP	False
+run_W18_batch150	device	WBR Forecast Pipeline (Tool: `~/shared/tools/wbr-pipeline.sh`)	REMOVE	information_retrieval	2638	2638	0	0.4	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	context-enrichment	Procedure	SPLIT	information_retrieval	2018	2018	0	0.0	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	eod-meeting-sync	Analyze	COMPRESS	information_retrieval	289	289	0	1.0	1.0	0.0	0.0	18	KEEP	False
+run_W18_batch150	richard-style-amazon	Amazon Narrative Standard (from internal templates and Doc Ninja reviews)	COMPRESS	output_quality	1065	1065	0	0.6	0.6	0.9	0.0	35	KEEP	False
+run_W18_batch150	am-auto	DuckDB Schema Verification	REMOVE	information_retrieval	2513	2513	0	0.0	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	asana-guardrails	Audit Log Writes	REMOVE	output_quality	1042	1042	0	0.7	0.7	0.7	0.0	31	KEEP	False
+run_W18_batch150	spine	Ground Truth Files	COMPRESS	information_retrieval	1504	1504	0	0.9	0.5	0.2	0.4	28	KEEP	False
+run_W18_batch150	amazon-politics	Tactics	REWORD	information_retrieval	3180	3180	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	richard-style-amazon	Amazon Narrative Standard (from internal templates and Doc Ninja reviews) These rules are derived from Amazon's Narrative Template, OP1 Template, MBR Template, Flash Template, Working Backwards Guide, and Doc Ninja-reviewed examples (Dog Safety Awareness, Contra-COGS MBR, Data Migration Narrative, Amazon Search OP1). They are non-negotiable for any document that goes to L7+.	SPLIT	output_quality	1065	1065	0	0.5	0.3	0.3	0.2	14	KEEP	False
+run_W18_batch150	sharepoint-durability-sync	SharePoint Target	MERGE	information_retrieval	1129	1129	0	0.4	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	nervous-system	Common Failures	MERGE	information_retrieval	1824	1824	0	0.6	0.5	0.1	0.1	20	KEEP	False
+run_W18_batch150	richard-style-email	Example (actual — MX invoice)	MERGE	output_quality	818	818	0	0.7	0.7	0.6	0.0	32	KEEP	False
+run_W18_batch150	amazon-politics	Worked Example — Defending Scope	MERGE	information_retrieval	3180	3180	0	0.6	0.5	0.0	0.1	72	KEEP	False
+run_W18_batch150	heart	Validated Patterns (from 58 experiments, Runs 19-27)	SPLIT	information_retrieval	2736	2736	0	0.4	0.0	0.0	-1.0	12	REVERT	True
+run_W18_batch150	richard-style-email	Confidence & Caveats	SPLIT	output_quality	818	818	0	0.4	0.0	0.0	-1.0	10	REVERT	True
+run_W18_batch150	am-backend-parallel	Preamble	MERGE	information_retrieval	4545	4545	0	1.0	1.0	1.0	0.0	34	KEEP	False
+run_W18_batch150	email-calendar-duckdb-sync	Preamble	RESTRUCTURE	information_retrieval	1143	1143	0	1.0	1.0	1.0	0.0	37	KEEP	False
+run_W18_batch150	am-backend-parallel	Subagent D: Loop Page Sync	REMOVE	information_retrieval	4545	4545	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	richard-style-wbr	Query Examples	ADD	output_quality	1075	1089	14	0.6	0.6	0.0	0.0	15	KEEP	False
+run_W18_batch150	state-file-engine	Layer 1.5: WBR Callouts — Weekly Patch (Monday only)	REMOVE	information_retrieval	2049	2038	-11	0.2	0.0	0.0	-1.0	13	REVERT	True
+run_W18_batch150	context-enrichment	Procedure	MERGE	information_retrieval	2018	2018	0	0.8	0.2	0.0	0.6	15	KEEP	False
+run_W18_batch150	am-auto	Command Center Intel Generation	MERGE	information_retrieval	2513	2513	0	0.3	0.0	0.0	-1.0	7	REVERT	True
+run_W18_batch150	heart	PE-1: Prediction Cadence & Lead-Time Structure (2026-W17)	COMPRESS	information_retrieval	2736	2736	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	richard-style-docs	Richard Williams — Long-Form Document Style Guide	COMPRESS	output_quality	936	936	0	0.8	1.0	0.6	-0.2	29	REVERT	False
+run_W18_batch150	richard-style-mbr	Beats	REMOVE	output_quality	757	757	0	0.6	0.6	0.6	0.0	19	KEEP	False
+run_W18_batch150	am-triage	Preamble	MERGE	output_quality	437	437	0	0.8	0.8	0.8	0.0	34	KEEP	False
+run_W18_batch150	device	Ready (next action clear)	MERGE	information_retrieval	2638	2638	0	0.7	0.6	0.0	0.1	27	KEEP	False
+run_W18_batch150	amcc	Political Awareness Layer	COMPRESS	information_retrieval	5132	5132	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	nervous-system	Latest Sessions (4/2)	COMPRESS	information_retrieval	1824	1824	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	amcc	Real-Time Intervention Protocol	ADD	information_retrieval	5132	5146	14	0.5	0.5	0.0	0.0	28	KEEP	False
+run_W18_batch150	nervous-system	Preamble	REWORD	information_retrieval	1824	1824	0	0.7	0.7	1.0	0.0	32	KEEP	False
+run_W18_batch150	context-enrichment	Step 2.5E: Project Timeline Events (~30s)	COMPRESS	information_retrieval	2018	2018	0	0.4	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	am-triage	Preamble	RESTRUCTURE	output_quality	437	437	0	0.8	0.8	0.8	0.0	34	KEEP	False
+run_W18_batch150	richard-style-amazon	Data & Document Structure	REWORD	output_quality	1065	1065	0	0.4	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	eyes	Research Foundation (SP Study, Aug 2025)	SPLIT	information_retrieval	1423	1423	0	0.0	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	gut	Rule	REMOVE	information_retrieval	1937	1937	0	0.7	0.7	0.0	0.0	32	KEEP	False
+run_W18_batch150	richard-style-wbr	Voice Register & Structural Patterns	SPLIT	output_quality	1089	1089	0	0.6	0.6	0.6	0.0	19	KEEP	False
+run_W18_batch150	spine	Durability Model	ADD	information_retrieval	1504	1518	14	0.7	0.7	0.5	0.0	17	KEEP	False
+run_W18_batch150	brain	OP1 Strategic Narrative & Leverage Assessment	RESTRUCTURE	information_retrieval	1743	1743	0	0.8	0.8	0.8	0.0	20	KEEP	False
+run_W18_batch150	amcc	Real-Time Intervention Protocol	REWORD	information_retrieval	5146	5146	0	0.4	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	audit-asana-writes	Preamble	ADD	output_quality	159	173	14	1.0	0.9	0.9	0.1	14	KEEP	False
+run_W18_batch150	memory	Dwayne Palmer (dtpalmer) — WW Head of Marketing Website, L6, Arlington	MERGE	information_retrieval	2463	2463	0	0.2	0.2	0.0	0.0	11	KEEP	False
+run_W18_batch150	amazon-politics	The Magic Loop (Manager Partnership)	COMPRESS	information_retrieval	3180	3180	0	0.3	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	richard-style-wbr	Voice Register & Structural Patterns	REWORD	output_quality	1089	1089	0	0.6	0.6	0.6	0.0	20	KEEP	False
+run_W18_batch150	am-frontend	Preamble	COMPRESS	information_retrieval	3986	3986	0	1.0	1.0	1.0	0.0	34	KEEP	False
+run_W18_batch150	amazon-politics	Leverage	RESTRUCTURE	information_retrieval	3180	3180	0	0.5	0.5	0.0	0.0	97	KEEP	False
+run_W18_batch150	amcc	Streak History	MERGE	information_retrieval	5146	5146	0	0.7	0.7	0.0	0.0	14	KEEP	False
+run_W18_batch150	richard-style-slack	Sign-off	SPLIT	output_quality	1571	1571	0	0.5	0.5	0.5	0.0	25	KEEP	False
+run_W18_batch150	amazon-politics	The Polite Fiction for Asking	SPLIT	information_retrieval	3180	3183	3	0.6	0.6	0.5	0.0	15	KEEP	False
+run_W18_batch150	signal-to-task-pipeline	Step 4: Asana Task Creation from Signals	REMOVE	information_retrieval	1250	1250	0	0.7	0.5	0.5	0.2	22	KEEP	False
+run_W18_batch150	nervous-system	Scoring Example	SPLIT	information_retrieval	1824	1827	3	0.4	0.0	0.0	-1.0	8	REVERT	True
+run_W18_batch150	am-backend-parallel	Shared Resource Isolation	ADD	information_retrieval	4545	4559	14	0.2	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	signal-intelligence	DuckDB Objects	SPLIT	information_retrieval	1607	1607	0	0.9	0.0	0.0	0.9	20	KEEP	False
+run_W18_batch150	am-triage	Preamble	ADD	output_quality	437	451	14	0.8	0.8	0.8	0.0	36	KEEP	False
+run_W18_batch150	audit-asana-writes	Preamble	MERGE	output_quality	173	173	0	1.0	1.0	0.9	0.0	19	KEEP	False
+run_W18_batch150	richard-style-amazon	Preamble	MERGE	output_quality	1065	1065	0	0.4	0.0	0.0	-1.0	7	REVERT	True
+run_W18_batch150	am-backend-parallel	Step B2: Asana Activity Monitor (orchestrator, ~2 min, AFTER B1)	RESTRUCTURE	information_retrieval	4545	4545	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	workflow-observability	Registered Workflows	SPLIT	information_retrieval	357	357	0	0.6	0.6	0.6	0.0	23	KEEP	False
+run_W18_batch150	slack-history-backfill	Resume Instructions (for next session)	REWORD	information_retrieval	1667	1667	0	0.2	0.0	0.0	-1.0	7	REVERT	True
+run_W18_batch150	device	WBR Forecast Pipeline (Tool: `~/shared/tools/wbr-pipeline.sh`)	SPLIT	information_retrieval	2638	2638	0	0.4	0.0	0.0	-1.0	13	REVERT	True
+run_W18_batch150	device	Ready (next action clear)	COMPRESS	information_retrieval	2638	2638	0	0.5	0.6	0.0	-0.1	15	REVERT	False
+run_W18_batch150	am-triage	Preamble	REMOVE	output_quality	451	451	0	0.5	0.8	0.5	-0.3	18	REVERT	False
+run_W18_batch150	brain	Leverage Tiebreakers	COMPRESS	information_retrieval	1743	1743	0	0.7	0.7	0.0	0.0	32	KEEP	False
+run_W18_batch150	am-frontend	Step 5: Portfolio Findings + Alerts	REMOVE	information_retrieval	3986	3986	0	0.0	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	sharepoint-durability-sync	Error Handling	ADD	information_retrieval	1129	1143	14	0.6	0.6	0.0	0.0	16	KEEP	False
+run_W18_batch150	slack-history-backfill	Tier 1: Core PS Channels (highest value, active daily)	REMOVE	information_retrieval	1667	1667	0	0.5	0.5	0.2	0.0	20	KEEP	False
+run_W18_batch150	heart	Validated Patterns (from 58 experiments, Runs 19-27)	RESTRUCTURE	information_retrieval	2736	2736	0	0.2	0.0	0.0	-1.0	17	REVERT	True
+run_W18_batch150	memory	Quip — Outbound Marketing (Internal)	SPLIT	information_retrieval	2463	2463	0	0.0	0.0	0.0	0.0	12	KEEP	False
+run_W18_batch150	audit-asana-writes	Preamble	REWORD	output_quality	173	173	0	1.0	1.0	0.9	0.0	17	KEEP	False
+run_W18_batch150	heart	DuckDB Integration	REWORD	information_retrieval	2736	2736	0	0.0	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	am-triage	Preamble	REWORD	output_quality	451	451	0	0.5	0.8	0.5	-0.3	21	REVERT	False
+run_W18_batch150	am-auto	Phase 2: Signal Routing + Task Processing	ADD	information_retrieval	2513	2527	14	0.7	0.7	0.7	0.0	24	KEEP	False
+run_W18_batch150	am-frontend	Meeting Prep	SPLIT	information_retrieval	3986	3986	0	0.2	0.0	0.0	-1.0	53	REVERT	True
+run_W18_batch150	audit-asana-writes	Preamble	COMPRESS	output_quality	173	173	0	0.9	1.0	0.9	-0.1	16	REVERT	False
+run_W18_batch150	gut	Excretion Protocol	ADD	information_retrieval	1937	1951	14	0.7	0.7	0.7	0.0	40	KEEP	False
+run_W18_batch150	eod-system-refresh	Enrichments	COMPRESS	information_retrieval	2701	2701	0	0.0	0.0	0.0	-1.0	7	REVERT	True
+run_W18_batch150	spine	Quick-Check Keys	REWORD	information_retrieval	1518	1518	0	0.6	0.4	0.0	0.2	30	KEEP	False
+run_W18_batch150	brain	Execution & Operations	ADD	information_retrieval	1743	1757	14	0.2	0.2	0.0	0.0	19	KEEP	False
+run_W18_batch150	richard-style-mbr	Preamble	SPLIT	output_quality	757	757	0	0.4	0.0	0.0	-1.0	7	REVERT	True
+run_W18_batch150	richard-style-email	Transitions & Audience	COMPRESS	output_quality	818	818	0	0.7	0.7	0.7	0.0	21	KEEP	False
+run_W18_batch150	amcc	Implementation intention	RESTRUCTURE	information_retrieval	5146	5146	0	0.0	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	device	Wiki Team (Agents: `wiki-team/`)	REWORD	information_retrieval	2638	2638	0	0.2	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	richard-style-docs	Evidence-Based Documents (Experiments & Testing Plans)	REMOVE	output_quality	936	936	0	0.6	0.6	0.6	0.0	20	KEEP	False
+run_W18_batch150	topic-watchlist	ad-copy-and-creative	REMOVE	information_retrieval	2272	2272	0	0.1	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	slack-history-backfill	Context Enrichment Opportunities	ADD	information_retrieval	1667	1681	14	0.4	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	am-auto	Pre-step: Download required SharePoint sources	SPLIT	information_retrieval	2527	2533	6	0.0	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	topic-watchlist	ai-search-aeo	ADD	information_retrieval	2272	2286	14	0.1	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	brain	Level 4: Own the Zero-Click Future	REWORD	information_retrieval	1757	1757	0	0.6	0.6	0.0	0.0	33	KEEP	False
+run_W18_batch150	eyes	IT (Phase 1, Feb 19 - Mar 5, 2026)	MERGE	information_retrieval	1423	1423	0	0.2	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	sharepoint-durability-sync	Verification	ADD	information_retrieval	1143	1157	14	0.2	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	eyes	Results	REWORD	information_retrieval	1423	1423	0	0.8	0.8	0.5	0.0	18	KEEP	False
+run_W18_batch150	roster	Push / Notifications	RESTRUCTURE	information_retrieval	2211	2211	0	0.7	0.7	0.5	0.0	27	KEEP	False
+run_W18_batch150	gut	Excretion Protocol	SPLIT	information_retrieval	1951	1957	6	0.8	0.8	0.6	0.0	20	KEEP	False
+run_W18_batch150	amazon-politics	Why Reorgs Happen	ADD	information_retrieval	3183	3197	14	0.2	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	richard-style-mbr	Misses	ADD	output_quality	757	771	14	0.6	0.6	0.6	0.0	20	KEEP	False
+run_W18_batch150	audit-asana-writes	Preamble	RESTRUCTURE	output_quality	173	173	0	1.0	1.0	0.9	0.0	18	KEEP	False
+run_W18_batch150	eyes	Pipeline, Outlook & Predicted Questions	RESTRUCTURE	information_retrieval	1423	1423	0	0.6	0.6	0.0	0.0	37	KEEP	False
+run_W18_batch150	heart	Run Protocol — Pure Autoresearch	MERGE	information_retrieval	2736	2736	0	0.7	0.7	0.0	0.0	17	KEEP	False
+run_W18_batch150	brain	Decision Checks	SPLIT	information_retrieval	1757	1763	6	0.1	0.1	0.1	0.0	18	KEEP	False
+run_W18_batch150	amcc	Key Political Principles the aMCC Enforces	SPLIT	information_retrieval	5146	5149	3	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	eyes	Research Foundation (SP Study, Aug 2025)	ADD	information_retrieval	1423	1437	14	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	am-frontend	Preamble	SPLIT	information_retrieval	3986	3986	0	1.0	1.0	1.0	0.0	32	KEEP	False
+run_W18_batch150	richard-style-slack	Availability & Responsiveness	COMPRESS	output_quality	1571	1571	0	0.6	0.6	0.0	0.0	15	KEEP	False
+run_W18_batch150	heart	Step 5: Keep, Revert & Repeat	REMOVE	information_retrieval	2736	2736	0	0.2	0.0	0.0	-1.0	9	REVERT	True
+run_W18_batch150	brain	OP1 Strategic Narrative & Leverage Assessment	REMOVE	information_retrieval	1763	1763	0	0.8	0.9	0.8	-0.1	20	REVERT	False
+run_W18_batch150	richard-style-mbr	Template & Voice (per market, per month)	RESTRUCTURE	output_quality	771	771	0	0.6	0.6	0.6	0.0	17	KEEP	False
+run_W18_batch150	richard-style-slack	Richard Williams — Slack Voice	ADD	output_quality	1571	1585	14	0.6	0.7	0.6	-0.1	40	REVERT	False
+run_W18_batch150	nervous-system	Loop 6: Principle Evolution	REMOVE	information_retrieval	1824	1824	0	0.5	0.7	0.0	-0.2	31	REVERT	False
+run_W18_batch150	gut	File Format Rules	MERGE	information_retrieval	1957	1957	0	0.8	0.9	0.5	-0.1	20	REVERT	False
+run_W18_batch150	email-calendar-duckdb-sync	Medium Priority (review)	RESTRUCTURE	information_retrieval	1143	1143	0	0.6	0.6	0.0	0.0	16	KEEP	False
+run_W18_batch150	duckdb-schema-verification	Step 3: Confirm Tables Exist	ADD	information_retrieval	377	391	14	0.5	0.5	0.5	0.0	19	KEEP	False
+run_W18_batch150	heart	Design Choices & Data Layer	ADD	information_retrieval	2736	2750	14	0.4	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	spine	Four Layers	RESTRUCTURE	information_retrieval	1518	1518	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	richard-style-slack	Greeting	REWORD	output_quality	1571	1571	0	0.5	0.5	0.5	0.0	26	KEEP	False
+run_W18_batch150	eyes	Phasing	REMOVE	information_retrieval	1423	1423	0	0.6	0.0	0.0	0.6	22	KEEP	False
+run_W18_batch150	gut	Digestion Protocol	COMPRESS	information_retrieval	1957	1957	0	0.8	0.8	0.8	0.0	39	KEEP	False
+run_W18_batch150	richard-style-amazon	Data & Document Structure	COMPRESS	output_quality	1065	1065	0	0.4	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	roster	Events Team	REWORD	information_retrieval	2211	2211	0	0.6	0.6	0.4	0.0	17	KEEP	False
+run_W18_batch150	am-triage	Preamble	SPLIT	output_quality	451	451	0	0.5	0.8	0.5	-0.3	18	REVERT	False
+run_W18_batch150	spine	Four Layers	REWORD	information_retrieval	1518	1518	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	amazon-politics	Defending Scope	RESTRUCTURE	information_retrieval	3183	3183	0	0.4	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	context-enrichment	Procedure	SPLIT	information_retrieval	2018	2021	3	0.2	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	am-triage	Preamble	ADD	output_quality	451	465	14	0.8	0.8	0.5	0.0	21	KEEP	False
+run_W18_batch150	am-backend-parallel	Step B2: Asana Activity Monitor (orchestrator, ~2 min, AFTER B1)	REMOVE	information_retrieval	4545	4545	0	0.0	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	richard-style-wbr	Emerging Markets (lower volume, more narrative)	COMPRESS	output_quality	1089	1089	0	0.1	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	amazon-politics	Worked Example — Taking Scope (Soft Approach)	REMOVE	information_retrieval	3183	3183	0	0.5	0.5	0.0	0.0	52	KEEP	False
+run_W18_batch150	duckdb-schema-verification	Preamble	REWORD	information_retrieval	391	391	0	1.0	1.0	1.0	0.0	38	KEEP	False
+run_W18_batch150	am-frontend	Email Brief (AUTO-SEND)	REMOVE	information_retrieval	3986	3986	0	0.7	0.7	0.0	0.0	15	KEEP	False
+run_W18_batch150	slack-history-backfill	Per-DM Procedure	REWORD	information_retrieval	1667	1667	0	0.7	0.7	0.0	0.0	22	KEEP	False
+run_W18_batch150	am-backend-parallel	ORCHESTRATOR-OWNED: Asana Sync (B1) + Activity Monitor (B2)	MERGE	information_retrieval	4545	4545	0	0.8	0.8	0.8	0.0	32	KEEP	False
+run_W18_batch150	device	Karpathy Agent (Agent: `karpathy.md`)	COMPRESS	information_retrieval	2638	2638	0	0.6	0.6	0.0	0.0	30	KEEP	False
+run_W18_batch150	eod-backend	Step 6 — New Task Detection	RESTRUCTURE	information_retrieval	1079	1079	0	0.7	0.7	0.7	0.0	36	KEEP	False
+run_W18_batch150	richard-style-email	Tone & Language Failures	SPLIT	output_quality	818	821	3	0.3	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	audit-asana-writes	Preamble	MERGE	output_quality	173	173	0	1.0	1.0	0.9	0.0	16	KEEP	False
+run_W18_batch150	body	Preamble	REMOVE	information_retrieval	1057	1057	0	1.0	1.0	1.0	0.0	29	KEEP	False
+run_W18_batch150	am-auto	Morning Snapshot	ADD	information_retrieval	2527	2541	14	0.7	0.8	0.8	-0.1	33	REVERT	False
+run_W18_batch150	signal-to-task-pipeline	Workflow Observability	REMOVE	information_retrieval	1250	1243	-7	0.3	0.0	0.0	-1.0	11	REVERT	True
+run_W18_batch150	roster	Cross-References	REWORD	information_retrieval	2211	2211	0	0.8	0.8	0.0	0.0	108	KEEP	False
+run_W18_batch150	duckdb-schema-verification	Step 1: Confirm Database Identity	ADD	information_retrieval	391	405	14	0.8	0.8	0.9	0.0	32	KEEP	False
+run_W18_batch150	state-file-engine	Quality Gates (enforced across all markets)	REMOVE	information_retrieval	2049	2049	0	0.2	0.0	0.0	-1.0	30	REVERT	True
+run_W18_batch150	slack-history-backfill	Progress Tracker	ADD	information_retrieval	1667	1681	14	0.4	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	eod-system-refresh	Compression Audit	COMPRESS	information_retrieval	2701	2701	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	signal-intelligence	Core Concept	SPLIT	information_retrieval	1607	1607	0	0.7	0.7	1.0	0.0	44	KEEP	False
+run_W18_batch150	am-auto	Step 6 — Recurring Task Auto-Creation (AU + MX) (AUTO-EXECUTE)	MERGE	information_retrieval	2527	2527	0	0.3	0.0	0.0	-1.0	7	REVERT	True
+run_W18_batch150	amcc	Political Awareness Layer	MERGE	information_retrieval	5146	5146	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	slack-history-backfill	Context Enrichment Opportunities	REMOVE	information_retrieval	1667	1667	0	0.4	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	memory	Memory — Learned Knowledge	ADD	information_retrieval	2463	2477	14	0.7	0.5	0.7	0.2	20	KEEP	False
+run_W18_batch150	asana-guardrails	Blacklist (never write — always block)	REMOVE	output_quality	1042	1042	0	0.8	0.2	0.0	0.6	15	KEEP	False
+run_W18_batch150	richard-style-mbr	Richard Williams — MBR Write-up Style Guide	REMOVE	output_quality	771	771	0	0.6	0.6	0.6	0.0	17	KEEP	False
+run_W18_batch150	am-auto	DuckDB Schema Verification	REMOVE	information_retrieval	2527	2527	0	0.0	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	workflow-observability	On Step Failure	SPLIT	information_retrieval	357	357	0	0.1	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	richard-style-wbr	Established Markets (high volume, OCI live)	RESTRUCTURE	output_quality	1089	1089	0	0.0	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	gut	Preamble	REWORD	information_retrieval	1957	1957	0	1.0	1.0	1.0	0.0	36	KEEP	False
+run_W18_batch150	nervous-system	L1 Gate-Breaker Candidates (from 4/2 Deep Dive)	RESTRUCTURE	information_retrieval	1824	1824	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	memory	Vijay Kumar (vkumarmp) — Tech Lead, Baloo	REWORD	information_retrieval	2477	2477	0	0.6	0.5	0.0	0.1	17	KEEP	False
+run_W18_batch150	am-backend-parallel	Subagent E: Hedy Meeting Sync	RESTRUCTURE	information_retrieval	4545	4545	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	am-auto	Step 5 — Status Update Staleness	REWORD	information_retrieval	2527	2527	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	am-backend-parallel	Preamble	ADD	information_retrieval	4545	4559	14	0.7	1.0	1.0	-0.3	34	REVERT	False
+run_W18_batch150	topic-watchlist	Common Failures	REMOVE	information_retrieval	2272	2271	-1	0.5	0.5	0.0	0.0	16	KEEP	False
+run_W18_batch150	gut	Identity Field Protection (§7)	MERGE	information_retrieval	1957	1957	0	0.0	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	audit-asana-writes	Preamble	RESTRUCTURE	output_quality	173	173	0	1.0	1.0	0.9	0.0	16	KEEP	False
+run_W18_batch150	topic-watchlist	Operating notes	SPLIT	information_retrieval	2271	2271	0	0.9	0.3	0.0	0.6	20	KEEP	False
+run_W18_batch150	richard-style-amazon	Data & Document Structure	SPLIT	output_quality	1065	1068	3	0.5	0.5	0.0	0.0	14	KEEP	False
+run_W18_batch150	richard-style-slack	Relationship Dynamics by Person	COMPRESS	output_quality	1571	1571	0	0.4	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	amazon-politics	The Unregretted Attrition System	MERGE	information_retrieval	3183	3183	0	0.4	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	eyes	NA Markets	ADD	information_retrieval	1423	1437	14	0.4	0.0	0.0	-1.0	8	REVERT	True
+run_W18_batch150	audit-asana-writes	Preamble	REWORD	output_quality	173	173	0	1.0	1.0	0.9	0.0	15	KEEP	False
+run_W18_batch150	spine	Tool Access Troubleshooting	REWORD	information_retrieval	1518	1518	0	0.4	0.0	0.0	-1.0	8	REVERT	True
+run_W18_batch150	eod-meeting-sync	Pull	REMOVE	information_retrieval	289	289	0	0.8	0.8	0.8	0.0	12	KEEP	False
+run_W18_batch150	memory	Key Decisions/Positions	COMPRESS	information_retrieval	2477	2477	0	0.8	0.8	0.6	0.0	23	KEEP	False
+run_W18_batch150	audit-asana-writes	Preamble	COMPRESS	output_quality	173	173	0	1.0	1.0	0.9	0.0	17	KEEP	False
+run_W18_batch150	context-enrichment	Dependencies	COMPRESS	information_retrieval	2018	2018	0	0.0	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	richard-style-slack	Greeting	MERGE	output_quality	1571	1571	0	0.5	0.5	0.5	0.0	22	KEEP	False
+run_W18_batch150	richard-style-mbr	Budget Shifts	MERGE	output_quality	771	771	0	0.6	0.6	0.6	0.0	18	KEEP	False
+run_W18_batch150	am-triage	Preamble	COMPRESS	output_quality	465	465	0	0.8	0.8	0.5	0.0	24	KEEP	False
+run_W18_batch150	am-frontend	6A. Run Full Dashboard Pipeline	COMPRESS	information_retrieval	3986	3986	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	spine	Tool Access & Integrations	REMOVE	information_retrieval	1518	1518	0	0.7	0.7	0.5	0.0	17	KEEP	False
+run_W18_batch150	topic-watchlist	Monitoring (tracking, not daily)	ADD	information_retrieval	2271	2285	14	0.9	0.7	0.7	0.2	18	KEEP	False
+run_W18_batch150	seasonality-calendar	IT — Italy	MERGE	information_retrieval	2388	2388	0	0.5	0.5	0.4	0.0	26	KEEP	False
+run_W18_batch150	brain	Level Graduation & Status	ADD	information_retrieval	1763	1777	14	0.0	0.0	0.0	0.0	10	KEEP	False
+run_W18_batch150	nervous-system	L1 Gate Status	SPLIT	information_retrieval	1824	1827	3	0.4	0.0	0.0	-1.0	7	REVERT	True
+run_W18_batch150	am-frontend	Agentic Execution Rules (L5 Pattern)	SPLIT	information_retrieval	3986	3992	6	0.3	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	amcc	Avoidance Ratio	ADD	information_retrieval	5146	5160	14	0.4	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	amazon-politics	Strategically Annoying	ADD	information_retrieval	3183	3197	14	0.2	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	asana-duckdb-sync	Check 5 — Enrichment Gaps	ADD	information_retrieval	1960	1974	14	0.1	0.0	0.0	-1.0	10	REVERT	True
+run_W18_batch150	device	Safety Guards (preToolUse hooks)	REMOVE	information_retrieval	2638	2638	0	0.7	0.9	0.3	-0.2	31	REVERT	False
+run_W18_batch150	spine	System Persistence & Ground Truth	SPLIT	information_retrieval	1518	1521	3	0.7	0.5	0.5	0.2	19	KEEP	False
+run_W18_batch150	richard-style-docs	Knowledge-Sharing Documents	REWORD	output_quality	936	936	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	richard-style-slack	Availability & Responsiveness - Responds even sick/OOO. Active early mornings (4:43 AM, 6:39 AM) and late evenings. Joins calls on 15 min notice. - Thread vs channel: threads for follow-ups on others' messages, new topics direct in channel. Never threads his own message.	REMOVE	output_quality	1571	1571	0	0.4	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	richard-style-mbr	Template & Voice (per market, per month)	ADD	output_quality	771	785	14	0.6	0.6	0.6	0.0	18	KEEP	False
+run_W18_batch150	richard-style-wbr	Query Examples	ADD	output_quality	1089	1103	14	0.0	0.0	0.0	-1.0	13	REVERT	True
+run_W18_batch150	heart	Core Principles	COMPRESS	information_retrieval	2736	2736	0	0.6	0.5	0.0	0.1	22	KEEP	False
+run_W18_batch150	richard-style-email	Confidence & Caveats	MERGE	output_quality	818	818	0	0.8	0.4	0.4	0.4	23	KEEP	False
+run_W18_batch150	roster	CPS / Sales Partners	RESTRUCTURE	information_retrieval	2211	2211	0	0.6	0.2	0.2	0.4	16	KEEP	False
+run_W18_batch150	brain	OP1 Narrative — Details	MERGE	information_retrieval	1777	1777	0	0.7	0.0	0.0	0.7	22	KEEP	False
+run_W18_batch150	device	PS Analytics Database (DuckDB → MotherDuck Cloud)	SPLIT	information_retrieval	2638	2641	3	0.3	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	device	Forecast SharePoint Push (Hook: `forecast-sharepoint-push`)	REWORD	information_retrieval	2638	2638	0	0.6	0.6	0.0	0.0	14	KEEP	False
+run_W18_batch150	gut	Core Principle 2: Current-State-Only	REMOVE	information_retrieval	1957	1957	0	0.7	0.7	1.0	0.0	40	KEEP	False
+run_W18_batch150	eod-meeting-sync	Update meetings/	COMPRESS	information_retrieval	289	289	0	0.7	0.8	0.7	-0.1	16	REVERT	False
+run_W18_batch150	amazon-politics	Approaches (ranked by risk)	COMPRESS	information_retrieval	3183	3183	0	0.6	0.6	0.0	0.0	15	KEEP	False
+run_W18_batch150	heart	Target Categories	SPLIT	information_retrieval	2736	2739	3	0.8	0.8	0.6	0.0	24	KEEP	False
+run_W18_batch150	richard-style-wbr	Data Source Quick Reference	SPLIT	output_quality	1089	1092	3	0.6	0.6	0.6	0.0	19	KEEP	False
+run_W18_batch150	richard-style-amazon	Data & Document Structure	ADD	output_quality	1068	1082	14	0.5	0.4	0.0	0.1	16	KEEP	False
+run_W18_batch150	am-triage	Preamble	REMOVE	output_quality	465	465	0	0.8	0.8	0.8	0.0	37	KEEP	False
+run_W18_batch150	richard-style-slack	Relationship Dynamics by Person	RESTRUCTURE	output_quality	1571	1571	0	0.4	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	heart	Step 5: Keep, Revert & Repeat	ADD	information_retrieval	2739	2753	14	0.3	0.0	0.0	-1.0	10	REVERT	True
+run_W18_batch150	brain	Decision Principles (ranked by frequency of application)	COMPRESS	information_retrieval	1777	1777	0	0.8	0.8	0.7	0.0	18	KEEP	False
+run_W18_batch150	roster	ABMA (Amazon Business Marketing Analytics)	MERGE	information_retrieval	2211	2211	0	0.2	0.0	0.0	-1.0	9	REVERT	True
+run_W18_batch150	brain	Multi-Level Activity Rule	RESTRUCTURE	information_retrieval	1777	1777	0	0.0	0.2	0.0	-0.2	30	REVERT	False
+run_W18_batch150	topic-sentry	Preamble	REMOVE	output_quality	545	545	0	0.5	0.5	0.5	0.0	22	KEEP	False
+run_W18_batch150	memory	Peers & Directs	SPLIT	information_retrieval	2477	2483	6	0.8	0.8	0.6	0.0	23	KEEP	False
+run_W18_batch150	device	Device — Outsourced Intelligence	RESTRUCTURE	information_retrieval	2638	2638	0	0.3	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	spine	Preamble	MERGE	information_retrieval	1521	1521	0	1.0	1.0	1.0	0.0	29	KEEP	False
+run_W18_batch150	spine	Directory Map	COMPRESS	information_retrieval	1521	1521	0	0.8	0.9	0.0	-0.1	51	REVERT	False
+run_W18_batch150	device	PS Analytics Database (DuckDB → MotherDuck Cloud)	ADD	information_retrieval	2638	2652	14	0.0	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	eyes	MCC Structure	COMPRESS	information_retrieval	1423	1423	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	email-calendar-duckdb-sync	Email + Calendar → DuckDB Sync Protocol	RESTRUCTURE	information_retrieval	1143	1143	0	0.7	0.8	0.9	-0.1	28	REVERT	False
+run_W18_batch150	richard-style-email	Reply Patterns	REMOVE	output_quality	818	818	0	0.7	0.7	0.7	0.0	24	KEEP	False
+run_W18_batch150	richard-style-email	Preamble	RESTRUCTURE	output_quality	818	818	0	0.4	0.0	0.0	-1.0	7	REVERT	True
+run_W18_batch150	sharepoint-durability-sync	Automatic Push Triggers (agent decides)	ADD	information_retrieval	1143	1157	14	0.5	0.6	0.5	-0.1	25	REVERT	False
+run_W18_batch150	roster	Preamble	COMPRESS	information_retrieval	2211	2211	0	1.0	1.0	1.0	0.0	37	KEEP	False
+run_W18_batch150	brain	Decay Protocol	REWORD	information_retrieval	1777	1777	0	0.2	0.2	0.0	0.0	17	KEEP	False
+run_W18_batch150	am-triage	Preamble	RESTRUCTURE	output_quality	465	465	0	0.8	0.8	0.8	0.0	35	KEEP	False
+run_W18_batch150	richard-style-slack	Response Patterns	REWORD	output_quality	1571	1571	0	0.4	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	richard-style-mbr	Budget Shifts	RESTRUCTURE	output_quality	785	785	0	0.5	0.5	0.3	0.0	17	KEEP	False
+run_W18_batch150	am-triage	Preamble	SPLIT	output_quality	465	465	0	0.8	0.8	0.8	0.0	38	KEEP	False
+run_W18_batch150	am-auto	Email Scan	SPLIT	information_retrieval	2527	2527	0	1.0	1.0	1.0	0.0	31	KEEP	False
+run_W18_batch150	amazon-politics	What's Really Going On	SPLIT	information_retrieval	3183	3189	6	0.2	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	richard-style-wbr	Data Source Quick Reference	REMOVE	output_quality	1092	1092	0	0.6	0.6	0.6	0.0	19	KEEP	False
+run_W18_batch150	richard-style-amazon	Part 2	COMPRESS	output_quality	1082	1082	0	0.3	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	richard-style-docs	Analytical & Procedural Documents (Investigation + How-To)	REMOVE	output_quality	936	936	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	richard-style-amazon	Common Failures in Document Structure	REMOVE	output_quality	1082	1082	0	0.0	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	am-triage	Preamble	MERGE	output_quality	465	465	0	0.8	0.8	0.8	0.0	34	KEEP	False
+run_W18_batch150	nervous-system	Five Levels Position	REWORD	information_retrieval	1824	1824	0	0.4	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	eyes	OCI Status by Market (as of 4/2)	RESTRUCTURE	information_retrieval	1423	1423	0	0.8	0.4	0.7	0.4	27	KEEP	False
+run_W18_batch150	richard-style-docs	Knowledge-Sharing Documents	RESTRUCTURE	output_quality	936	936	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	gut	Digestion Protocol When new material arrives in `intake/`, the AM-2 hook processes it. The gut adds structure to that processing:	RESTRUCTURE	information_retrieval	1957	1957	0	0.6	0.6	0.4	0.0	20	KEEP	False
+run_W18_batch150	nervous-system	Loop 8: Source Quality Filter	MERGE	information_retrieval	1824	1824	0	0.8	0.8	0.8	0.0	23	KEEP	False
+run_W18_batch150	eyes	Richard's Markets (hands-on)	SPLIT	information_retrieval	1423	1426	3	0.4	0.0	0.0	-1.0	11	REVERT	True
+run_W18_batch150	amazon-politics	Amazon Politics & Career Dynamics — Reference Knowledge	RESTRUCTURE	information_retrieval	3183	3183	0	0.1	0.0	0.0	-1.0	5	REVERT	True
+run_W18_batch150	richard-style-docs	Common Failures in Any Document Draft	MERGE	output_quality	936	936	0	0.5	0.5	0.0	0.0	16	KEEP	False
+run_W18_batch150	heart	Active Pipeline Experiments	MERGE	information_retrieval	2739	2739	0	0.5	0.4	0.4	0.1	17	KEEP	False
+run_W18_batch150	heart	The Metric	REWORD	information_retrieval	2739	2739	0	0.8	0.8	0.7	0.0	28	KEEP	False
+run_W18_batch150	memory	Carlos Palmos (cpalmos) — Mktg Mgr MX, L5, Mexico City	RESTRUCTURE	information_retrieval	2483	2483	0	0.0	0.0	0.0	0.0	12	KEEP	False
+run_W18_batch150	amcc	When to Read This File	REWORD	information_retrieval	5146	5146	0	0.5	0.5	0.0	0.0	17	KEEP	False
+run_W18_batch150	richard-style-email	Stakeholder & Register	COMPRESS	output_quality	818	818	0	0.1	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	context-enrichment	Portability Note	MERGE	information_retrieval	2018	2018	0	0.0	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	brain	Decay Protocol	SPLIT	information_retrieval	1777	1789	12	0.4	0.2	0.0	0.2	19	KEEP	False
+run_W18_batch150	richard-style-mbr	Richard Williams — MBR Write-up Style Guide	SPLIT	output_quality	785	791	6	0.7	0.5	0.3	0.2	19	KEEP	False
+run_W18_batch150	slack-history-backfill	Channels Completed	REMOVE	information_retrieval	1667	1667	0	0.5	0.4	0.0	0.1	22	KEEP	False
+run_W18_batch150	memory	Peers & Directs	MERGE	information_retrieval	2483	2483	0	0.6	0.8	0.6	-0.2	24	REVERT	False
+run_W18_batch150	sharepoint-durability-sync	Automatic Push Triggers (agent decides)	MERGE	information_retrieval	1143	1143	0	0.6	0.6	0.4	0.0	20	KEEP	False
+run_W18_batch150	richard-style-amazon	Part 2	REWORD	output_quality	1082	1082	0	0.5	0.3	0.3	0.2	17	KEEP	False
+run_W18_batch150	am-backend-parallel	Preamble	MERGE	information_retrieval	4545	4545	0	1.0	1.0	1.0	0.0	33	KEEP	False
+run_W18_batch150	nervous-system	Common Failures	COMPRESS	information_retrieval	1824	1824	0	0.6	0.4	0.0	0.2	19	KEEP	False
+run_W18_batch150	eyes	Preamble	REWORD	information_retrieval	1423	1423	0	1.0	1.0	1.0	0.0	37	KEEP	False
+run_W18_batch150	spine	Quick-Check Keys	ADD	information_retrieval	1521	1535	14	0.6	0.6	0.0	0.0	29	KEEP	False
+run_W18_batch150	heart	Design Choices & Data Layer	RESTRUCTURE	information_retrieval	2739	2739	0	0.5	0.4	0.4	0.1	22	KEEP	False
+run_W18_batch150	amazon-politics	Defending Scope	ADD	information_retrieval	3183	3197	14	0.4	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	gut	Preamble	ADD	information_retrieval	1957	1971	14	1.0	1.0	1.0	0.0	35	KEEP	False
+run_W18_batch150	amazon-politics	The Core Framework: Interpersonally Warm, Professionally Firm	RESTRUCTURE	information_retrieval	3183	3183	0	0.2	0.0	0.0	-1.0	14	REVERT	True
+run_W18_batch150	spine	Quick Reference (Key IDs + Hook System)	ADD	information_retrieval	1535	1549	14	0.6	0.6	0.4	0.0	15	KEEP	False
+run_W18_batch150	audit-asana-writes	Preamble	REWORD	output_quality	173	173	0	0.8	0.8	0.6	0.0	35	KEEP	False
+run_W18_batch150	audit-asana-writes	Preamble	ADD	output_quality	173	187	14	0.8	0.8	0.8	0.0	39	KEEP	False
+run_W18_batch150	eyes	APAC Markets	REMOVE	information_retrieval	1423	1423	0	0.3	0.0	0.0	-1.0	8	REVERT	True
+run_W18_batch150	slack-history-backfill	Retention Policy Discovery (2026-04-13)	REWORD	information_retrieval	1667	1667	0	0.1	0.0	0.0	-1.0	3	REVERT	True
+run_W18_batch150	eyes	Results	MERGE	information_retrieval	1423	1423	0	0.7	0.7	0.5	0.0	18	KEEP	False
+run_W18_batch150	signal-intelligence	Idea sourcing	SPLIT	information_retrieval	1607	1610	3	0.0	0.0	0.0	-1.0	4	REVERT	True
+run_W18_batch150	context-enrichment	Execution Summary	SPLIT	information_retrieval	2018	2021	3	0.3	0.0	0.0	-1.0	6	REVERT	True
+run_W18_batch150	amcc	Current top 3	RESTRUCTURE	information_retrieval	5146	5146	0	0.0	0.0	0.0	-1.0	3	REVERT	True
+run_W18_1777488929_exp1	eod-meeting-sync	Update Organs	MERGE	information_retrieval	289	289	0.8	0.8	1.0	0.0	False	KEEP	18
+run_W18_1777488929_exp2	wiki-kiro-cli-pretooluse-hook-bug	preamble	MERGE	output_quality	601	601	0.6	0.6	0.6	0.0	False	KEEP	18
+run_W18_1777488929_exp3	hook-context-preloader	preamble	RESTRUCTURE	output_quality	43	43	0.2	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777488929_exp4	slack-ingest-state	Key Learnings	SPLIT	information_retrieval	243	243	0.4	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777488993_exp1	wiki-forecast-system	Prior weight cap reduction	RESTRUCTURE	output_quality	1326	1326	1.0	1.0	1.0	0.0	False	KEEP	24
+run_W18_1777488993_exp2	hook-state-file-constraints-sync	preamble	RESTRUCTURE	output_quality	199	199	0.8	0.8	0.8	0.0	False	KEEP	35
+run_W18_1777488993_exp3	slack-conversation-intelligence	Step 4: Triage Context Enhancement	REWORD	information_retrieval	734	747	0.8	0.8	0.8	0.0	False	KEEP	22
+run_W18_1777488993_exp4	asana-command-center	ABPS Portfolio (`1212762061512816`)	REWORD	information_retrieval	7507	7520	0.0	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777488993_exp5	hook-session-summary	preamble — Details	SPLIT	output_quality	144	144	0.4	0.0	0.0	-1.0	True	REVERT	9
+run_W18_1777488993_exp6	wiki-sharepoint-quip-deprecation-migration	What to avoid	REMOVE	output_quality	653	595	0.0	0.0	0.0	-1.0	True	REVERT	4
+run_W18_1777488993_exp7	asana-activity-monitor-protocol	Signal Classification Reference	REMOVE	information_retrieval	818	738	0.0	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777488993_exp8	workflow-observability	At Workflow Start	RESTRUCTURE	information_retrieval	357	357	0.4	0.0	0.0	-1.0	True	REVERT	8
+run_W18_1777488993_exp9	agent-agent-bridge-sync	Step 1. Detect New Files Worth Flagging	SPLIT	output_quality	1366	1368	0.0	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777488993_exp10	communication-analytics	Weekly Trend Computation	REWORD	information_retrieval	321	334	0.2	0.0	0.0	-1.0	True	REVERT	9
+run_W18_1777488993_exp11	hook-weekly-regime-fit	preamble	SPLIT	output_quality	81	83	0.8	0.6	0.8	0.2	False	KEEP	21
+run_W18_1777488993_exp12	state-file-au-ps	Key Thresholds	SPLIT	information_retrieval	373	373	0.2	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777488993_exp13	wiki-stakeholder-comms-guide	Sources	SPLIT	output_quality	1889	1893	0.0	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489198_exp1	hook-weekly-regime-fit	preamble	RESTRUCTURE	output_quality	83	83	0.6	0.6	0.0	0.0	False	KEEP	22
+run_W18_1777489198_exp2	wiki-mpe-viz-library-choice	Where Plot fell short and we routed around it	REMOVE	output_quality	370	277	0.0	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489198_exp3	hook-guard-email	Common Pitfalls — preamble	COMPRESS	output_quality	86	86	0.2	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489198_exp4	wiki-forecast-system	Why the rewrite happened	SPLIT	output_quality	1326	1328	0.8	1.0	1.0	-0.2	False	REVERT	39
+run_W18_1777489198_exp5	agent-wiki-researcher	ARCC findings in research brief format	COMPRESS	output_quality	1454	1454	0.0	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489198_exp6	hook-wbr-callouts	preamble	REMOVE	output_quality	993	0	0.0	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489198_exp7	wiki-mpe-jp-specific-notes	File references	REWORD	output_quality	903	920	1.0	1.0	1.0	0.0	False	KEEP	20
+run_W18_1777489198_exp8	wiki-mpe-all-markets-simulation-report	Summary	REWORD	output_quality	451	467	0.8	0.8	0.8	0.0	False	KEEP	20
+run_W18_1777489198_exp9	hook-session-summary	preamble — Details	SPLIT	output_quality	144	144	0.6	0.4	0.6	0.2	False	KEEP	36
+run_W18_1777489198_exp10	seasonality-calendar	ES — Spain	REWORD	information_retrieval	2388	2401	0.0	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489198_exp11	seasonality-calendar	Impact Levels	ADD	information_retrieval	2388	2403	0.8	0.6	0.8	0.2	False	KEEP	18
+run_W18_1777489198_exp12	mcp-tool-reference	Auto-Approve Recommendations	ADD	information_retrieval	2026	2041	0.0	0.0	0.0	-1.0	True	REVERT	8
+run_W18_1777489198_exp13	wiki-mpe-viz-library-choice	When to reconsider	MERGE	output_quality	370	370	1.0	1.0	0.8	0.0	False	KEEP	25
+run_W18_1777489427_exp1	richard-style-email	Data & Reference Patterns	REWORD	output_quality	818	837	0.4	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp2	org-chart	Common Pitfalls — Amazon Retail Central Paid Search (Hydra) — AME Search	ADD	information_retrieval	1765	1790	0.0	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489427_exp3	sharepoint-durability-sync	Pull Decision Logic	SPLIT	information_retrieval	1143	1149	0.2	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489427_exp4	hook-eod	preamble	MERGE	output_quality	646	646	0.6	0.4	0.4	0.2	False	KEEP	28
+run_W18_1777489427_exp5	hook-am-backend	preamble	ADD	output_quality	106	120	0.8	0.8	0.8	0.0	False	KEEP	21
+run_W18_1777489427_exp6	loop-page-sync	Adding New Pages	SPLIT	information_retrieval	255	255	0.2	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489427_exp7	hard-thing-selection	preamble	SPLIT	information_retrieval	2359	2361	0.8	0.8	0.8	0.0	False	KEEP	27
+run_W18_1777489427_exp8	hook-am-triage	preamble	SPLIT	output_quality	465	465	0.0	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp9	hook-audit-asana-writes	preamble	RESTRUCTURE	output_quality	187	187	0.8	1.0	0.2	-0.2	False	REVERT	31
+run_W18_1777489427_exp10	au-escalation-claims-counterclaims	preamble	REMOVE	information_retrieval	2659	2646	1.0	0.6	0.0	0.4	False	KEEP	36
+run_W18_1777489427_exp11	agent-wiki-concierge	Gap noted	RESTRUCTURE	output_quality	1073	1073	0.8	0.8	0.8	0.0	False	KEEP	21
+run_W18_1777489427_exp12	am-frontend	Step 3: Enrichment Execution (Agentic)	ADD	information_retrieval	3986	4004	0.0	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp13	agent-agent-bridge-sync	Added	RESTRUCTURE	output_quality	1366	1366	0.2	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489427_exp14	duckdb-schema-verification	Step 1: Confirm Database Identity	MERGE	information_retrieval	405	405	0.2	0.0	0.0	-1.0	True	REVERT	10
+run_W18_1777489427_exp15	communication-analytics	Loop 9 Integration	RESTRUCTURE	information_retrieval	321	321	0.2	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp16	hook-forecast-sharepoint-push	preamble	REMOVE	output_quality	86	0	0.0	0.0	0.0	-1.0	True	REVERT	3
+run_W18_1777489427_exp17	agent-rw-trainer	Friday Calibration	SPLIT	output_quality	768	768	1.0	1.0	0.8	0.0	False	KEEP	31
+run_W18_1777489427_exp18	agent-wiki-researcher	KDS query limits	SPLIT	output_quality	1454	1454	1.0	1.0	0.8	0.0	False	KEEP	21
+run_W18_1777489427_exp19	context-enrichment	Execution Summary	REWORD	information_retrieval	2018	2031	0.0	0.0	0.0	-1.0	True	REVERT	4
+run_W18_1777489427_exp20	asana-notes-protocol	Purpose	REWORD	information_retrieval	3355	3368	0.4	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489427_exp21	hook-mpe-acceptance-core	preamble	COMPRESS	output_quality	258	258	0.6	0.6	0.6	0.0	False	KEEP	23
+run_W18_1777489427_exp22	asana-duckdb-sync	DuckDB Views Reference	REMOVE	information_retrieval	1960	1878	0.0	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489427_exp23	script-hard-thing-refresh	preamble	COMPRESS	information_retrieval	1665	1665	0.0	0.0	0.0	-1.0	True	REVERT	9
+run_W18_1777489427_exp24	agent-callout-writer	What makes a good callout	REMOVE	output_quality	3473	3407	0.0	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489427_exp25	wiki-campaign-link-generator-spec	Proposed Solution	SPLIT	output_quality	1209	1209	0.4	0.0	0.0	-1.0	True	REVERT	14
+run_W18_1777489427_exp26	hook-session-summary	preamble — Details	MERGE	output_quality	144	144	0.6	0.6	0.4	0.0	False	KEEP	39
+run_W18_1777489427_exp27	wiki-mpe-it-specific-notes	Fit quality summary	COMPRESS	output_quality	770	770	1.0	1.0	0.8	0.0	False	KEEP	20
+run_W18_1777489427_exp28	agent-wiki-researcher	From ARCC (Curated Organizational Context)	COMPRESS	output_quality	1454	1454	0.2	0.0	0.0	-1.0	True	REVERT	9
+run_W18_1777489427_exp29	topic-sentry	au-handoff (8 hits)	SPLIT	information_retrieval	1665	1667	0.8	0.8	1.0	0.0	False	KEEP	23
+run_W18_1777489427_exp30	roster	ABMA (Amazon Business Marketing Analytics)	ADD	information_retrieval	2211	2229	0.0	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489427_exp31	eod-phase-tracker	preamble	MERGE	information_retrieval	721	721	1.0	1.0	0.8	0.0	False	KEEP	32
+run_W18_1777489427_exp32	slack-conversation-intelligence	Step 3: Knowledge Context Attachment	SPLIT	information_retrieval	747	749	0.2	0.0	0.0	-1.0	True	REVERT	8
+run_W18_1777489427_exp33	hedy-digest	Andrew Wirtz	MERGE	information_retrieval	2087	2087	0.0	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp34	hook-open-items-reminder	preamble	SPLIT	output_quality	294	296	0.8	0.6	0.6	0.2	False	KEEP	32
+run_W18_1777489427_exp35	duckdb-schema-verification	Quick Verification Query (copy-paste via execute_query)	RESTRUCTURE	information_retrieval	405	405	0.6	0.6	0.6	0.0	False	KEEP	30
+run_W18_1777489427_exp36	hard-thing-selection	preamble	SPLIT	information_retrieval	2361	2363	0.8	0.8	0.8	0.0	False	KEEP	28
+run_W18_1777489427_exp37	hook-broad-sweep	preamble	COMPRESS	output_quality	247	247	0.8	0.8	1.0	0.0	False	KEEP	29
+run_W18_1777489427_exp38	hook-protocol-audit	Legacy Protocols (may need cleanup)	SPLIT	information_retrieval	1194	1196	0.0	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489427_exp39	hook-mpe-demo-prep	preamble	REWORD	output_quality	296	314	1.0	1.0	1.0	0.0	False	KEEP	33
+run_W18_1777489427_exp40	slack-digest	Failure detail	ADD	information_retrieval	622	637	0.4	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489427_exp41	roster	Legal / Finance	SPLIT	information_retrieval	2211	2213	0.0	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp42	wiki-google-ads-campaign-structure	Principles	RESTRUCTURE	output_quality	630	630	1.0	1.0	1.0	0.0	False	KEEP	29
+run_W18_1777489427_exp43	script-slack-ingest	preamble	ADD	information_retrieval	1426	1440	0.0	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp44	agent-wiki-librarian	Output	SPLIT	output_quality	1960	1960	0.0	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489427_exp45	context-enrichment	Execution Summary	REMOVE	information_retrieval	2018	1864	0.0	0.0	0.0	-1.0	True	REVERT	4
+run_W18_1777489427_exp46	agent-market-analyst	Recommended W{next} spend	SPLIT	output_quality	2630	2630	0.0	0.0	0.0	-1.0	True	REVERT	9
+run_W18_1777489427_exp47	wiki-google-ads-campaign-structure	Principles	SPLIT	output_quality	630	630	1.0	1.0	1.0	0.0	False	KEEP	27
+run_W18_1777489427_exp48	wiki-mpe-owner-operations	When to Ask for Help (Escalation)	COMPRESS	output_quality	1363	1363	0.0	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp49	hook-weekly-regime-fit	preamble	REWORD	output_quality	83	99	0.8	0.8	0.8	0.0	False	KEEP	23
+run_W18_1777489427_exp50	asana-command-center	Recurring Tasks Pattern	REWORD	information_retrieval	7507	7529	0.2	0.0	0.0	-1.0	True	REVERT	8
+run_W18_1777489427_exp51	agent-wiki-editor	What you own	ADD	output_quality	1509	1525	0.6	0.6	0.6	0.0	False	KEEP	15
+run_W18_1777489427_exp52	slack-ingest-state	Approach	COMPRESS	information_retrieval	243	243	0.4	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp53	hook-mpe-refit	preamble — Details	SPLIT	output_quality	315	317	1.0	1.0	1.0	0.0	False	KEEP	43
+run_W18_1777489427_exp54	agent-wiki-editor	Kill criteria	MERGE	output_quality	1525	1525	0.0	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489427_exp55	hook-mpe-acceptance-core	preamble	REWORD	output_quality	258	278	0.8	0.2	0.8	0.6	False	KEEP	19
+run_W18_1777489427_exp56	wiki-mpe-seasonality-research	Known seasonal events (reference)	RESTRUCTURE	output_quality	2171	2171	0.6	0.8	0.8	-0.2	False	REVERT	40
+run_W18_1777489427_exp57	slack-conversation-intelligence	preamble	ADD	information_retrieval	747	761	0.8	0.8	0.8	0.0	False	KEEP	26
+run_W18_1777489427_exp58	asana-sync-protocol	preamble	RESTRUCTURE	information_retrieval	1043	1043	1.0	0.8	1.0	0.2	False	KEEP	28
+run_W18_1777489427_exp59	agent-agent-bridge-sync	Principles (from soul.md — How I Build)	COMPRESS	output_quality	1366	1366	0.2	0.0	0.0	-1.0	True	REVERT	9
+run_W18_1777489427_exp60	slack-ingestion-README	Hot Topic Detection	RESTRUCTURE	information_retrieval	929	929	1.0	1.0	1.0	0.0	False	KEEP	23
+run_W18_1777489427_exp61	slack-digest	Headline	REMOVE	information_retrieval	622	535	0.0	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489427_exp62	agent-wiki-concierge	preamble	SPLIT	output_quality	1073	1075	0.6	0.6	0.6	0.0	False	KEEP	18
+run_W18_1777489427_exp63	hook-weekly-regime-fit	preamble	SPLIT	output_quality	99	103	0.8	0.8	1.0	0.0	False	KEEP	28
+run_W18_1777489427_exp64	agent-wiki-critic	Review workflow (filesystem-based, canonical as of 2026-04-17)	REWORD	output_quality	2345	2358	0.0	0.0	0.0	-1.0	True	REVERT	12
+run_W18_1777489427_exp65	state-file-engine	Layer 2: EOD-Refresh Step 9 — Priority Patching (daily)	SPLIT	information_retrieval	2049	2053	0.0	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489427_exp66	slack-ingest-state	Channel Pagination Cursors (for resuming)	MERGE	information_retrieval	243	243	0.6	0.4	0.6	0.2	False	KEEP	24
+run_W18_1777489427_exp67	agent-wiki-librarian	preamble	REMOVE	output_quality	1960	1872	0.0	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489427_exp68	sharepoint-durability-sync	Push Implementation	RESTRUCTURE	information_retrieval	1143	1143	0.4	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489427_exp69	hook-market-constraints-staleness-alert	preamble	SPLIT	output_quality	127	129	0.6	0.6	0.6	0.0	False	KEEP	24
+run_W18_1777489427_exp70	asana-kiro-rw-protocol	2. ie%CCP calc - insert MX spend/regs before 9th	REWORD	information_retrieval	2641	2654	0.4	0.0	0.0	-1.0	True	REVERT	11
+run_W18_1777489427_exp71	hook-sharepoint-sync	preamble	REMOVE	output_quality	146	116	0.4	0.0	0.0	-1.0	True	REVERT	8
+run_W18_1777489427_exp72	hook-organ-change-detector	preamble	RESTRUCTURE	output_quality	125	125	0.6	0.6	0.0	0.0	False	KEEP	24
+run_W18_1777489427_exp73	wiki-market-constraints-schema	How to add a regime change	SPLIT	output_quality	738	738	0.6	0.6	0.6	0.0	False	KEEP	33
+run_W18_1777489427_exp74	hook-am-triage	preamble	ADD	output_quality	465	479	1.0	0.0	1.0	1.0	False	KEEP	29
+run_W18_1777489427_exp75	wiki-stakeholder-comms-guide	Template 1: Outcome Notification (to Brandon, Slack)	RESTRUCTURE	output_quality	1889	1889	0.0	0.0	0.0	-1.0	True	REVERT	9
+run_W18_1777489427_exp76	email-triage	High Priority (respond) — Brandon / Kate / Todd	SPLIT	information_retrieval	137	137	1.0	1.0	1.0	0.0	False	KEEP	22
+run_W18_1777489427_exp77	hook-wiki-maintenance	preamble	SPLIT	output_quality	689	691	0.6	0.6	0.6	0.0	False	KEEP	21
+run_W18_1777489427_exp78	wiki-mpe-it-specific-notes	Regime update from 2025 MBR review (added 2026-04-22)	COMPRESS	output_quality	770	770	0.8	0.8	0.8	0.0	False	KEEP	24
+run_W18_1777489427_exp79	hook-mpe-demo-prep	preamble	ADD	output_quality	314	328	0.4	0.0	0.0	-1.0	True	REVERT	8
+run_W18_1777489427_exp80	communication-analytics	Data Requirements	RESTRUCTURE	information_retrieval	321	321	0.8	0.6	0.8	0.2	False	KEEP	22
+run_W18_1777489427_exp81	state-file-mx-ps	Quality Gates	SPLIT	information_retrieval	393	395	1.0	1.0	1.0	0.0	False	KEEP	26
+run_W18_1777489427_exp82	hook-am-backend	preamble	MERGE	output_quality	120	120	0.6	0.6	0.2	0.0	False	KEEP	21
+run_W18_1777489427_exp83	hook-broad-sweep	preamble	SPLIT	output_quality	247	249	0.4	0.0	0.0	-1.0	True	REVERT	11
+run_W18_1777489427_exp84	agent-karpathy	Word Budget Governance	RESTRUCTURE	output_quality	1501	1501	0.0	0.0	0.0	-1.0	True	REVERT	4
+run_W18_1777489427_exp85	three-hook-migration-plan	Step 1: Land the three protocol files (this session)	SPLIT	information_retrieval	1535	1535	1.0	1.0	0.4	0.0	False	KEEP	20
+run_W18_1777489427_exp86	slack-ingest-state	preamble	REWORD	information_retrieval	243	258	0.8	0.8	1.0	0.0	False	KEEP	23
+run_W18_1777489427_exp87	slack-ingestion-README	Configuration Files	REWORD	information_retrieval	929	942	0.8	0.8	0.8	0.0	False	KEEP	18
+run_W18_1777489427_exp88	asana-command-center	5. Kiro_RW Brevity Rule	REMOVE	information_retrieval	7507	7334	0.0	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489427_exp89	hook-organ-change-detector	Common Pitfalls — preamble	REWORD	output_quality	125	144	0.2	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp90	meeting-to-task-pipeline	Due Date Derivation	RESTRUCTURE	information_retrieval	1190	1190	0.6	0.6	0.6	0.0	False	KEEP	25
+run_W18_1777489427_exp91	email-triage	Action Items Extracted	ADD	information_retrieval	137	153	0.2	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489427_exp92	richard-style-email	Email (Analytical / Update)	MERGE	output_quality	818	818	0.6	0.6	0.4	0.0	False	KEEP	25
+run_W18_1777489427_exp93	meeting-brief-brandon-1on1-2026-04-28	Post-1:1 action log (fill in after)	RESTRUCTURE	information_retrieval	1537	1537	0.0	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489427_exp94	long-term-goals	Level 2: Drive & Communicate Worldwide Testing	REWORD	information_retrieval	445	466	0.6	0.6	0.8	0.0	False	KEEP	21
+run_W18_1777489427_exp95	wiki-google-ads-campaign-structure	Budget Allocation	SPLIT	output_quality	630	630	1.0	1.0	1.0	0.0	False	KEEP	18
+run_W18_1777489427_exp96	agent-callout-writer	File locations	RESTRUCTURE	output_quality	3473	3473	0.0	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489427_exp97	agent-rw-trainer	Annual Review 2026 — Integrated Context	MERGE	output_quality	768	768	0.4	0.0	0.0	-1.0	True	REVERT	8
+run_W18_1777489427_exp98	script-parse-au-search-terms	preamble	MERGE	information_retrieval	580	580	0.6	0.6	0.6	0.0	False	KEEP	34
+run_W18_1777489427_exp99	duckdb-access-policy	preamble	MERGE	information_retrieval	490	490	0.8	1.0	0.2	-0.2	False	REVERT	19
+run_W18_1777489427_exp100	eod-phase-tracker	Backend	REMOVE	information_retrieval	721	109	0.0	0.0	0.0	-1.0	True	REVERT	4
+run_W18_1777489427_exp101	asana-goal-updater-protocol	Testing Goals (milestone-based — pull from task completion)	ADD	information_retrieval	2113	2134	0.6	0.8	0.6	-0.2	False	REVERT	28
+run_W18_1777489427_exp102	am-frontend	6A. Run Full Dashboard Pipeline	REMOVE	information_retrieval	3986	3899	0.0	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp103	amazon-politics	Solve Problems for Your Boss	REMOVE	information_retrieval	3183	3125	0.0	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp104	amcc	The Hard Thing	RESTRUCTURE	information_retrieval	5146	5146	0.0	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489427_exp105	agent-wiki-writer	Inputs — Read Before Writing	SPLIT	output_quality	2024	2026	0.0	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489427_exp106	wiki-mpe-owner-operations	Kiro Hooks (your maintenance spine)	SPLIT	output_quality	1363	1365	0.0	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp107	richard-style-email	Data & Reference Patterns	SPLIT	output_quality	818	820	0.4	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489427_exp108	hook-guard-calendar	preamble	COMPRESS	output_quality	55	55	0.6	0.6	0.6	0.0	False	KEEP	21
+run_W18_1777489427_exp109	hook-protocol-audit	Routine Hooks (daily sequence)	RESTRUCTURE	information_retrieval	1194	1194	0.6	0.6	0.6	0.0	False	KEEP	24
+run_W18_1777489427_exp110	richard-style-email	Confidence & Caveats	COMPRESS	output_quality	818	818	1.0	1.0	1.0	0.0	False	KEEP	24
+run_W18_1777489427_exp111	au-stakeholder-research-ytd	April 2026 — Lena's Follow-Up Questions (TODAY)	ADD	information_retrieval	2038	2058	0.0	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp112	richard-style-mbr	Template & Voice (per market, per month)	MERGE	output_quality	791	791	0.8	0.6	0.0	0.2	False	KEEP	39
+run_W18_1777489427_exp113	context-enrichment	Scope Control	SPLIT	information_retrieval	2018	2020	0.6	0.6	0.6	0.0	False	KEEP	24
+run_W18_1777489427_exp114	eod-phase-tracker	Frontend	MERGE	information_retrieval	721	721	1.0	1.0	1.0	0.0	False	KEEP	17
+run_W18_1777489427_exp115	sharepoint-durability-sync	Automatic Pull Triggers (agent decides)	REWORD	information_retrieval	1143	1156	0.8	0.8	0.8	0.0	False	KEEP	25
+run_W18_1777489427_exp116	richard-style-wbr	preamble	SPLIT	output_quality	1092	1096	0.8	0.8	0.8	0.0	False	KEEP	19
+run_W18_1777489427_exp117	broad-sweep-2026-W18	Topic-watchlist hits AM didn't surface	REWORD	information_retrieval	1749	1770	0.0	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489427_exp118	richard-style-email	Data & Reference Patterns	SPLIT	output_quality	818	820	0.4	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489427_exp119	amcc	Implementation intention	MERGE	information_retrieval	5146	5146	0.0	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489427_exp120	roster	Push / Notifications	RESTRUCTURE	information_retrieval	2211	2211	0.2	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp121	memory	Detailed Profiles	RESTRUCTURE	information_retrieval	2483	2483	0.8	0.8	0.8	0.0	False	KEEP	23
+run_W18_1777489427_exp122	hook-audit-asana-writes	preamble	REWORD	output_quality	187	200	0.4	0.0	0.0	-1.0	True	REVERT	15
+run_W18_1777489427_exp123	asana-activity-monitor-protocol	📅 Due Date Changes	RESTRUCTURE	information_retrieval	818	818	1.0	1.0	1.0	0.0	False	KEEP	54
+run_W18_1777489427_exp124	hook-ps-audit	preamble	REWORD	output_quality	36	55	0.6	0.6	0.6	0.0	False	KEEP	17
+run_W18_1777489427_exp125	meeting-brief-brandon-1on1-2026-04-28	Buffer / Brandon's agenda	SPLIT	information_retrieval	1537	1537	0.0	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp126	nervous-system	Common Failures | Failure | Trigger / Threshold | Action | |---------|---------------------|--------| | STUCK = trigger, not label | 3+ weeks at same status | Structural fix: willpower → trainer, systems → device. (e.g., "Admin displacement 3wk" → pre-written templates via device.md.) | | Stale predictions | Unscored >7 days | Score within 7 days or archive. Don't let unscored predictions sit. | | Conflating 1:1 vs group comms | Comparing across settings | Track separately. 1:1s ~40% share (healthy). Groups <15% (gap). | | Cross-organ reference drift | Loop 7 flags mismatch | When a fact cited in one organ doesn't match its canonical source, fix at the source. Don't patch the reference — update the origin. |	REWORD	information_retrieval	1824	1837	0.8	1.0	0.0	-0.2	False	REVERT	34
+run_W18_1777489427_exp127	wiki-negative-keyword-ownership-model	Why ownership clarity matters	REMOVE	output_quality	683	574	0.0	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489427_exp128	memory	preamble	RESTRUCTURE	information_retrieval	2483	2483	0.6	0.6	0.6	0.0	False	KEEP	17
+run_W18_1777489427_exp129	wiki-mpe-viz-library-choice	Files	REWORD	output_quality	370	387	0.6	0.6	0.6	0.0	False	KEEP	18
+run_W18_1777489427_exp130	richard-style-amazon	Data & Document Structure	SPLIT	output_quality	1082	1086	0.4	0.0	0.0	-1.0	True	REVERT	7
+run_W18_1777489427_exp131	am-auto	Step 2 — Per-Project Task Scan	REMOVE	information_retrieval	2527	2496	0.0	0.0	0.0	-1.0	True	REVERT	9
+run_W18_1777489427_exp132	agent-wiki-critic	Review workflow (filesystem-based, canonical as of 2026-04-17)	MERGE	output_quality	2345	2345	0.0	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp133	asana-duckdb-sync	Check 3 — Empty Projects	SPLIT	information_retrieval	1960	1962	0.0	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp134	wiki-negative-keyword-ownership-model	Why ownership clarity matters	ADD	output_quality	683	700	0.2	0.0	0.0	-1.0	True	REVERT	15
+run_W18_1777489427_exp135	asana-goal-updater-protocol	Testing Goals (milestone-based — pull from task completion)	ADD	information_retrieval	2113	2134	0.6	0.6	0.6	0.0	False	KEEP	27
+run_W18_1777489427_exp136	am-triage	Four Enrichment Rules	SPLIT	information_retrieval	3124	3128	0.0	0.0	0.0	-1.0	True	REVERT	4
+run_W18_1777489427_exp137	hook-eod	preamble	MERGE	output_quality	646	646	0.6	0.4	0.4	0.2	False	KEEP	31
+run_W18_1777489427_exp138	hook-eod	preamble	MERGE	output_quality	646	646	0.4	0.0	0.0	-1.0	True	REVERT	9
+run_W18_1777489427_exp139	heart	Validated Patterns (from 58 experiments, Runs 19-27)	COMPRESS	information_retrieval	2739	2739	0.0	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp140	amcc	What Counts as "Choosing the Hard Thing"	RESTRUCTURE	information_retrieval	5146	5146	0.2	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489427_exp141	context-enrichment	preamble	REMOVE	information_retrieval	2020	1708	0.0	0.0	0.0	-1.0	True	REVERT	8
+run_W18_1777489427_exp142	amcc	Current top 3	ADD	information_retrieval	5146	5162	0.0	0.0	0.0	-1.0	True	REVERT	5
+run_W18_1777489427_exp143	hook-mpe-acceptance-core	preamble	COMPRESS	output_quality	278	278	0.4	0.0	0.0	-1.0	True	REVERT	11
+run_W18_1777489427_exp144	hook-state-file-constraints-sync	preamble	RESTRUCTURE	output_quality	199	199	0.6	0.6	0.6	0.0	False	KEEP	24
+run_W18_1777489427_exp145	richard-style-wbr	Required Structural Elements	ADD	output_quality	1096	1112	0.4	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp146	wiki-campaign-link-generator-spec	Validation Scenarios	REMOVE	output_quality	1209	1151	0.0	0.0	0.0	-1.0	True	REVERT	4
+run_W18_1777489427_exp147	three-hook-migration-plan	preamble	REMOVE	information_retrieval	1535	1465	0.0	0.0	0.0	-1.0	True	REVERT	8
+run_W18_1777489427_exp148	wiki-stakeholder-comms-guide	Tier 2: Market Stakeholders — Lena Zak (L7), Alexis Eck (L6), Lorena Alvarez Larrea (L5)	COMPRESS	output_quality	1889	1889	0.0	0.0	0.0	-1.0	True	REVERT	6
+run_W18_1777489427_exp149	asana-notes-protocol	preamble	REWORD	information_retrieval	3355	3370	1.0	0.8	1.0	0.2	False	KEEP	30
+run_W18_1777489427_exp150	am-triage	EOD Summary Addendum	ADD	information_retrieval	3124	3140	0.0	0.0	0.0	-1.0	True	REVERT	5
+run_W18_batch151	amcc	### What Resets the Streak	MERGE	info_retrieval	5146	5146	0.8	0.8	0.8	0.0	False	KEEP	19
+run_W18_batch151	nervous-system	#### Experiment Metrics	REMOVE	info_retrieval	1824	1824	0.6	0.8	0.6	-0.2	False	REVERT	22
+run_W18_batch151	asana-guardrails	### My Tasks — Full Access	REWORD	output_quality	1042	1042	0.8	0.8	0.8	0.0	False	KEEP	22
+run_W18_batch151	gut	### Bloat Signals	RESTRUCTURE	info_retrieval	1971	1971	0.0	-	0.0	-1.0	True	REVERT	4
+run_W18_batch151	hook-guard-email	### Common Pitfalls — preamble	REWORD	output_quality	86	86	0.8	0.8	0.8	0.0	False	KEEP	16
+run_W18_batch151	slack-history-backfill	# Slack History Backfill — Exhaustive Context Recovery	RESTRUCTURE	info_retrieval	1667	1667	0.8	0.8	0.8	0.0	False	KEEP	21
+run_W18_batch151	wiki-ps-performance-schema	## Period keys	REMOVE	info_retrieval	888	888	0.6	0.8	0.6	-0.2	False	REVERT	15
+run_W18_batch151	hook-weekly-regime-fit	#### Detail	REWORD	output_quality	103	103	0.8	0.8	0.6	0.0	False	KEEP	26
+run_W18_batch151	duckdb-schema-verification	### Step 2: Confirm MCP Connection	MERGE	info_retrieval	405	405	0.8	0.8	0.8	0.0	False	KEEP	30
+run_W18_batch151	wiki-forecast-system	## Why the rewrite happened	COMPRESS	info_retrieval	1326	1326	0.8	0.8	0.8	0.0	False	KEEP	29
+run_W18_batch151	signal-intelligence	### Freshness validation	COMPRESS	info_retrieval	1607	1607	0.8	0.8	0.8	0.0	False	KEEP	33
+run_W18_batch151	hook-protocol-audit	## Protocol File Inventory	REWORD	info_retrieval	1194	1194	0.8	0.8	0.8	0.0	False	KEEP	18
+run_W18_batch151	hook-forecast-sharepoint-push	#### Detail	COMPRESS	output_quality	86	86	0.0	-	0.0	-1.0	True	REVERT	9
+run_W18_batch151	wiki-forecast-system	# Forecast System	ADD	info_retrieval	1326	1326	0.8	0.8	0.8	0.0	False	KEEP	30
+run_W18_batch151	hard-thing-selection	## Topic-to-level seed mapping	REMOVE	info_retrieval	2363	2363	0.0	-	0.0	-1.0	True	REVERT	4
+run_W18_batch151	rw-task-prioritization	### Layer 3: Email & Slack Signals	SPLIT	output_quality	2394	2394	0.8	0.8	0.8	0.0	False	KEEP	16
+run_W18_batch151	blind-test-methodology	### Type D (reasoning-only) template	COMPRESS	output_quality	3325	3325	0.2	-	0.2	-1.0	True	REVERT	4
+run_W18_batch151	hook-organ-change-detector	### Common Pitfalls — preamble	MERGE	output_quality	125	125	0.8	0.8	0.8	0.0	False	KEEP	15
+run_W18_batch151	mpe-low-maintenance	## Regime Classification Rules (ps.regime_changes)	REWORD	output_quality	781	781	0.8	0.8	0.8	0.0	False	KEEP	15
+run_W18_batch151	richard-style-wbr	### Formatting Rules	RESTRUCTURE	output_quality	1096	1096	0.8	0.8	0.8	0.0	False	KEEP	20
+run_W18_batch151	richard-style-docs	## Post-Mortem / Retrospective Documents	MERGE	output_quality	936	936	0.8	0.8	0.8	0.0	False	KEEP	17
+run_W18_batch151	wiki-mpe-de-specific-notes	## Regime events	REWORD	info_retrieval	650	650	0.8	0.8	0.8	0.0	False	KEEP	24
+run_W18_batch151	amazon-politics	### Leverage	SPLIT	info_retrieval	3183	3183	1.0	0.0	0.0	1.0	False	KEEP	23
+run_W18_batch151	hook-guard-email	### Common Pitfalls — preamble	MERGE	output_quality	86	86	0.8	0.8	0.8	0.0	False	KEEP	15
+run_W18_batch151	asana-kiro-rw-protocol	## Sub-task 5.2: Overdue Tasks — Enhanced Context	MERGE	info_retrieval	2641	2641	0.0	-	0.0	-1.0	True	REVERT	5
+run_W18_batch151	brain	### OP1 Narrative	SPLIT	info_retrieval	1789	1789	0.2	0.4	0.4	-0.2	False	REVERT	20
+run_W18_batch151	three-hook-migration-plan	### Step 5: Configure schedule	COMPRESS	info_retrieval	1535	1535	0.6	0.6	0.6	0.0	False	KEEP	31
+run_W18_batch151	device	#### Backlog (unprioritized)	REWORD	info_retrieval	2638	2638	0.8	1.0	0.0	-0.2	False	REVERT	29
+run_W18_batch151	wiki-invoice-po-process-guide	## Sources	COMPRESS	info_retrieval	684	684	0.8	0.8	0.8	0.0	False	KEEP	15
+run_W18_batch151	gut	### Core Principle 1: Information Half-Life	MERGE	info_retrieval	1971	1971	0.8	0.8	0.8	0.0	False	KEEP	26
+run_W18_batch151	performance-marketing-guide	## Why this file exists (empirical basis)	RESTRUCTURE	output_quality	593	593	0.8	0.8	0.8	0.0	False	KEEP	32
+run_W18_batch151	eyes	### OCI Status by Market (as of 4/2)	REWORD	info_retrieval	1423	1423	0.8	0.8	0.6	0.0	False	KEEP	20
+run_W18_batch151	richard-writing-style	## Things Richard Does NOT Do	SPLIT	output_quality	718	718	0.8	0.8	0.8	0.0	False	KEEP	17
+run_W18_batch151	eyes	### Data Pipeline	MERGE	info_retrieval	1423	1423	0.4	-	0.4	-1.0	True	REVERT	4
+run_W18_batch151	gut	# Gut — Digestion, Compression & Waste Removal	ADD	info_retrieval	1971	1982	0.8	0.8	0.8	0.0	False	KEEP	22
+run_W18_batch151	amcc	### What Resets the Streak	COMPRESS	info_retrieval	5146	5146	0.8	0.8	0.8	0.0	False	KEEP	22
+run_W18_batch151	wiki-mpe-seasonality-research	### Notable weeks (from our data)	RESTRUCTURE	info_retrieval	2171	2171	0.4	-	0.4	-1.0	True	REVERT	9
+run_W18_batch151	richard-style-email	#### Stakeholder & Register	MERGE	output_quality	818	818	0.8	0.8	0.8	0.0	False	KEEP	20
+run_W18_batch151	market-constraints	## DE	REMOVE	output_quality	1286	1263	0.8	0.2	0.2	0.6	False	KEEP	37
+run_W18_batch151	richard-style-wbr	### Emerging Markets (lower volume, more narrative)	COMPRESS	output_quality	1096	1096	0.8	0.8	0.8	0.0	False	KEEP	31
+run_W18_batch151	memory	#### Frank Volinsky — MCS team, page builds/weblab	REMOVE	info_retrieval	2483	2478	0.0	0.0	0.8	0.0	False	KEEP	36
+run_W18_batch151	slack-conversation-intelligence	## Failure Handling	REWORD	info_retrieval	761	761	0.8	0.8	0.8	0.0	False	KEEP	15
+run_W18_batch151	richard-style-email	#### Naming & Specificity	COMPRESS	output_quality	818	818	0.6	0.6	0.8	0.0	False	KEEP	22
+run_W18_batch151	seasonality-calendar	### UK	MERGE	info_retrieval	2403	2403	0.8	0.8	0.8	0.0	False	KEEP	19
+run_W18_batch151	eod-system-refresh	### Due Task Procedure: wiki_lint (DEPRECATED 2026-04-18)	COMPRESS	info_retrieval	2701	2701	0.0	-	0.0	-1.0	True	REVERT	4
+run_W18_batch151	wiki-mpe-uk-specific-notes	## At a glance	REMOVE	info_retrieval	626	612	0.8	0.8	0.8	0.0	False	KEEP	19
+run_W18_batch151	document-registry	# Document Registry Protocol	REWORD	output_quality	491	491	0.2	-	0.2	-1.0	True	REVERT	14
+run_W18_batch151	heart	### DuckDB Integration	ADD	info_retrieval	2739	2739	0.2	-	0.2	-1.0	True	REVERT	6
+run_W18_batch151	wiki-mpe-es-specific-notes	### 2. NB YoY strong signal (r²=0.630)	REMOVE	info_retrieval	505	505	0.0	-	0.0	-1.0	True	REVERT	5
+run_W18_batch151	slack-guardrails	## What is NOT allowed	RESTRUCTURE	output_quality	368	368	0.8	0.8	0.8	0.0	False	KEEP	17
+run_W18_batch151	eod-meeting-sync	### Log Hook Execution	COMPRESS	info_retrieval	289	289	0.8	0.8	0.8	0.0	False	KEEP	30
+run_W18_batch151	wiki-meeting-ingestion-pipeline	## Next Steps	COMPRESS	info_retrieval	709	709	0.8	0.8	0.8	0.0	False	KEEP	16
+run_W18_batch151	richard-style-slack	### Work Product & Data	ADD	output_quality	1571	1581	0.8	0.8	0.8	0.0	False	KEEP	15
+run_W18_batch151	soul	## Agent Routing Directory	COMPRESS	output_quality	2341	2341	0.2	-	0.2	-1.0	True	REVERT	6
+run_W18_batch151	wiki-op1-op2-vocabulary-guide	## Tools and systems	MERGE	info_retrieval	688	688	0.8	0.8	0.8	0.0	False	KEEP	16
+run_W18_batch151	slack-history-backfill	### Exhaustive = Thread-Level Granularity	REWORD	info_retrieval	1667	1667	0.8	0.8	0.8	0.0	False	KEEP	30
+run_W18_batch151	am-backend-parallel	## Shared Resource Isolation	REMOVE	info_retrieval	4545	4545	0.0	-	0.0	-1.0	True	REVERT	5
+run_W18_batch151	duckdb-schema-verification	# DuckDB Schema Verification Protocol	ADD	info_retrieval	405	405	0.8	0.8	0.8	0.0	False	KEEP	17
+run_W18_batch151	slack-deep-context	### {Name} — Escalation Profile	REWORD	output_quality	7813	7813	0.0	-	0.0	-1.0	True	REVERT	3
+run_W18_batch151	gut	### Compression Techniques	SPLIT	info_retrieval	1982	1982	0.8	0.8	0.8	0.0	False	KEEP	23
+run_W18_batch151	wiki-regime-change-taxonomy	## Retiring a baseline	RESTRUCTURE	info_retrieval	722	722	0.8	0.8	0.4	0.0	False	KEEP	38
+run_W18_batch151	richard-style-amazon	### Common Failures in Document Structure	SPLIT	output_quality	1082	1082	0.8	0.8	0.8	0.0	False	KEEP	22
+run_W18_batch151	am-frontend	## Step 3: Enrichment Execution (Agentic)	REMOVE	info_retrieval	3986	3986	0.0	-	0.0	-1.0	True	REVERT	7
+run_W18_batch151	ww-testing-loop-prep	## How to verify each claim	MERGE	output_quality	508	508	0.8	0.6	0.6	0.2	False	KEEP	35
+run_W18_batch151	nervous-system	### L1 Gate-Breaker Candidates (from 4/2 Deep Dive)	RESTRUCTURE	info_retrieval	1824	1824	0.8	0.8	0.0	0.0	False	KEEP	32
+run_W18_batch151	three-hook-migration-plan	### Step 5: Configure schedule	ADD	info_retrieval	1535	1546	0.6	0.6	0.6	0.0	False	KEEP	33
+run_W18_batch151	au-stakeholder-research-ytd	## Contradictory Directives Pattern	COMPRESS	info_retrieval	2038	2038	0.0	-	0.0	-1.0	True	REVERT	8
+run_W18_batch151	mpe-low-maintenance	## Language and Style Rules	RESTRUCTURE	output_quality	781	781	0.8	0.8	0.8	0.0	False	KEEP	15
+run_W18_batch151	wiki-mpe-us-specific-notes	### 1. NB CPA elasticity is effectively non-existent (r² = 0.054)	REMOVE	info_retrieval	1051	1051	0.6	0.8	0.6	-0.2	False	REVERT	19
+run_W18_batch151	wiki-mpe-phase6-4-handback	## Next	REWORD	info_retrieval	801	801	0.8	0.8	0.8	0.0	False	KEEP	24
+run_W18_batch151	wiki-stakeholder-comms-guide	### Tier 2: Market Stakeholders — Lena Zak (L7), Alexis Eck (L6), Lorena Alvarez Larrea (L5)	SPLIT	info_retrieval	1889	1889	0.6	0.6	0.6	0.0	False	KEEP	32
+run_W18_batch151	amcc	### Function	SPLIT	info_retrieval	5146	5146	0.8	0.8	0.8	0.0	False	KEEP	27
+run_W18_batch151	richard-style-slack	### Context & Knowledge	COMPRESS	output_quality	1581	1581	0.8	0.8	0.8	0.0	False	KEEP	16
+run_W18_batch151	heart	### DuckDB Integration	MERGE	info_retrieval	2739	2739	0.2	-	0.2	-1.0	True	REVERT	4
+run_W18_batch151	am-triage	### Agent-Initiated Proposals	COMPRESS	info_retrieval	3124	3124	0.0	-	0.0	-1.0	True	REVERT	6
+run_W18_batch151	amazon-politics	#### Tactics	REWORD	info_retrieval	3183	3183	1.0	1.0	0.0	0.0	False	KEEP	26
+run_W18_batch151	roster	## Cross-References	RESTRUCTURE	info_retrieval	2211	2211	0.0	-	0.0	-1.0	True	REVERT	4
+run_W18_batch151	richard-style-amazon	# Richard Williams — Amazon Writing Norms Layer	REWORD	output_quality	1082	1082	0.8	0.8	0.8	0.0	False	KEEP	34
+run_W18_batch151	richard-style-slack	### Register Shift by Audience	MERGE	output_quality	1581	1581	0.8	0.8	0.8	0.0	False	KEEP	27
+run_W18_batch151	wiki-regime-change-taxonomy	## Adding a new regime change	REMOVE	info_retrieval	722	713	0.8	0.8	0.8	0.0	False	KEEP	44
+run_W18_batch151	device	### WBR Forecast Pipeline (Tool: `~/shared/tools/wbr-pipeline.sh`)	COMPRESS	info_retrieval	2638	2638	0.8	0.8	0.8	0.0	False	KEEP	16
+run_W18_batch151	meeting-to-task-pipeline	## Step 1: Action Item Extraction	MERGE	info_retrieval	1190	1190	0.8	0.8	0.8	0.0	False	KEEP	15
+run_W18_batch151	email-calendar-duckdb-sync	## Error Handling	RESTRUCTURE	info_retrieval	1143	1143	0.6	0.6	0.6	0.0	False	KEEP	16
+run_W18_batch151	wiki-mpe-demo-script	## Closing (15 seconds)	COMPRESS	info_retrieval	986	986	0.8	0.6	0.8	0.2	False	KEEP	31
+run_W18_batch151	asana-guardrails	### Custom Fields on My Tasks	ADD	output_quality	1042	1051	0.8	0.8	0.8	0.0	False	KEEP	18
+run_W18_batch151	blind-test-harness	## Diminishing-returns awareness	ADD	output_quality	1451	1462	0.8	0.8	0.8	0.0	False	KEEP	30
+run_W18_batch151	topic-watchlist	### ad-copy-and-creative	SPLIT	info_retrieval	2285	2285	0.0	-	0.0	-1.0	True	REVERT	4
+run_W18_batch151	asana-notes-protocol	### Why Discovery Is Needed	RESTRUCTURE	info_retrieval	3370	3370	0.8	0.8	0.8	0.0	False	KEEP	32
+run_W18_batch151	steering-index	## Writing style files — load before producing professional prose	RESTRUCTURE	output_quality	524	524	0.8	0.8	0.8	0.0	False	KEEP	14
+run_W18_batch151	karpathy-phase1-response	# Check that _write_projections method exists and has the right signature	REWORD	info_retrieval	2783	2783	0.8	0.8	0.0	0.0	False	KEEP	84
+run_W18_batch151	hook-session-summary	### preamble — Details	REWORD	output_quality	144	144	0.0	-	0.0	-1.0	True	REVERT	9
+run_W18_batch151	performance-marketing-guide	## Why this file exists (empirical basis)	MERGE	output_quality	593	593	0.8	0.8	0.8	0.0	False	KEEP	32
+run_W18_batch151	rw-task-prioritization	# Task Prioritization — Backlog → Active Lists	REMOVE	output_quality	2394	2394	0.0	-	0.0	-1.0	True	REVERT	6
+run_W18_batch151	context-enrichment	### Procedure	MERGE	info_retrieval	2020	2020	0.8	0.8	0.8	0.0	False	KEEP	21
+run_W18_batch151	am-auto	### Admin Keyword Detection (override — runs BEFORE generic mapping)	REMOVE	info_retrieval	2527	2527	0.6	0.8	0.8	-0.2	False	REVERT	25
+run_W18_batch151	richard-style-amazon	## How to Apply (Without Losing Richard's Voice)	REMOVE	output_quality	1082	1082	0.6	0.8	0.6	-0.2	False	REVERT	21
+run_W18_batch151	performance-marketing-guide	## Projection & Forecasting Rules	REWORD	output_quality	593	593	0.8	0.8	0.8	0.0	False	KEEP	18
+run_W18_batch151	heart	### Common Failures	REWORD	info_retrieval	2739	2739	0.0	-	0.0	-1.0	True	REVERT	9
+run_W18_batch151	asana-command-center	### Tools Available	REMOVE	info_retrieval	7507	7507	0.0	-	0.0	-1.0	True	REVERT	6
+run_W18_batch151	au-stakeholder-research-ytd	## Communication Channels	SPLIT	info_retrieval	2038	2038	0.0	-	0.0	-1.0	True	REVERT	3
+run_W18_batch151	signal-intelligence	## Core Concept	RESTRUCTURE	info_retrieval	1607	1607	0.8	0.8	0.8	0.0	False	KEEP	27
+run_W18_batch151	meeting-brief-au-sync-2026-04-28	# AB AU Paid Search Sync — Tue Apr 28, 4:30-4:55 PM PT	REMOVE	info_retrieval	1698	1698	0.6	0.8	0.6	-0.2	False	REVERT	28
+run_W18_batch151	wiki-mpe-de-specific-notes	### 4. DE has the best YoY signal so far	ADD	info_retrieval	650	650	0.8	0.8	0.8	0.0	False	KEEP	19
+run_W18_batch151	hook-guard-email	### Common Pitfalls — preamble	REMOVE	output_quality	86	86	0.6	0.8	0.4	-0.2	False	REVERT	16
+run_W18_batch151	richard-style-email	### Formatting & Structure Failures	SPLIT	output_quality	818	818	0.8	0.8	0.8	0.0	False	KEEP	25
+run_W18_batch151	am-frontend	### 6D. Interactive Adjustments (Richard-directed, if needed)	MERGE	info_retrieval	3986	3986	0.2	-	0.2	-1.0	True	REVERT	7
+run_W18_batch151	heart	# Heart — Autoresearch Loop	COMPRESS	info_retrieval	2739	2739	0.8	0.8	0.8	0.0	False	KEEP	22
+run_W18_batch151	amcc	### Worked Example — Political Avoidance Detection	ADD	info_retrieval	5146	5146	0.2	-	0.2	-1.0	True	REVERT	4
+run_W18_batch151	nervous-system	### Parallel Level Activity	REWORD	info_retrieval	1824	1824	0.0	-	0.0	-1.0	True	REVERT	3
+run_W18_batch151	asana-sync-protocol	### Comment-Only Notifications	COMPRESS	info_retrieval	1043	1043	0.8	0.8	0.8	0.0	False	KEEP	24
+run_W18_batch151	asana-goal-updater-protocol	### Step 6: Present to Richard for Review	SPLIT	info_retrieval	2134	2134	0.4	-	0.4	-1.0	True	REVERT	8
+run_W18_batch151	hook-session-summary	### preamble — Details	COMPRESS	output_quality	144	144	0.0	-	0.0	-1.0	True	REVERT	14
+run_W18_batch151	am-auto	### Asana Full Sync to DuckDB	REWORD	info_retrieval	2527	2527	0.8	0.8	0.8	0.0	False	KEEP	39
+run_W18_batch151	richard-style-mbr	### Worked Example — Confidence Signal	RESTRUCTURE	output_quality	791	791	0.8	0.8	0.8	0.0	False	KEEP	34
+run_W18_batch151	wiki-mpe-demo-script	## Scene 1 — MX hero (30 seconds)	REWORD	info_retrieval	986	986	0.8	0.8	0.8	0.0	False	KEEP	25
+run_W18_batch151	email-triage	# Email Triage — 2026-04-27	RESTRUCTURE	info_retrieval	137	137	0.8	0.8	0.8	0.0	False	KEEP	36
+run_W18_batch151	wiki-mpe-au-specific-notes	## Validation sanity envelope	SPLIT	info_retrieval	1039	1039	0.8	0.8	0.8	0.0	False	KEEP	22
+run_W18_batch151	state-file-engine	## Per-Market Protocol Files	REMOVE	info_retrieval	2049	2049	0.2	-	0.2	-1.0	True	REVERT	5
+run_W18_batch151	wiki-regime-change-taxonomy	### `precedent_source`	ADD	info_retrieval	713	725	0.6	0.6	0.6	0.0	False	KEEP	17
+run_W18_batch151	heart	### Step 1: Select Target	SPLIT	info_retrieval	2739	2739	0.8	0.8	0.8	0.0	False	KEEP	34
+run_W18_batch151	email-calendar-duckdb-sync	## Step 3 — Pull Today's Calendar	MERGE	info_retrieval	1143	1143	0.8	0.8	0.8	0.0	False	KEEP	21
+run_W18_batch151	wiki-market-expansion-playbook	# Market Expansion Playbook	REWORD	info_retrieval	761	761	0.8	0.8	0.8	0.0	False	KEEP	28
+run_W18_batch151	high-stakes-guardrails	# High-Stakes Guardrails (Non-Negotiable)	ADD	output_quality	369	381	0.8	0.8	0.8	0.0	False	KEEP	46
+run_W18_batch151	soul	## How I Build (developing competency — practice deliberately until automatic)	REWORD	output_quality	2341	2341	0.8	0.8	0.8	0.0	False	KEEP	23
+run_W18_batch151	richard-style-mbr	#### ENG — Budget Decrease with ROAS Improvement (Jan)	MERGE	output_quality	791	791	0.8	0.8	0.8	0.0	False	KEEP	38
+run_W18_batch151	script-hard-thing-refresh	# ON CONFLICT preserves any manual edits to rationale/last_reviewed made since seed.	REMOVE	info_retrieval	1665	1548	0.8	0.8	0.8	0.0	False	KEEP	26
+run_W18_batch151	slack-ingestion-README	## Relevance Filter	SPLIT	info_retrieval	942	942	0.6	0.6	0.4	0.0	False	KEEP	18
+run_W18_batch151	amazon-politics	### The Core Framework: Interpersonally Warm, Professionally Firm	MERGE	info_retrieval	3183	3183	1.0	1.0	0.0	0.0	False	KEEP	31
+run_W18_batch151	context-enrichment	## Dependencies	SPLIT	info_retrieval	2020	2020	0.0	-	0.0	-1.0	True	REVERT	3
+run_W18_batch151	slack-ingest-state	## Approach	COMPRESS	info_retrieval	258	258	0.8	0.8	0.8	0.0	False	KEEP	17
+run_W18_batch151	am-triage	### Signal Routing	RESTRUCTURE	info_retrieval	3124	3124	0.8	0.8	0.8	0.0	False	KEEP	15
+run_W18_batch151	devspaces-core	## Workspace Boundaries	MERGE	output_quality	179	179	0.8	0.8	0.8	0.0	False	KEEP	15
+run_W18_batch151	asana-command-center	#### MX (`1212775592612917`)	ADD	info_retrieval	7507	7507	0.6	0.8	0.6	-0.2	False	REVERT	33
+run_W18_batch151	slack-history-backfill	### DMs Pending	ADD	info_retrieval	1667	1667	0.2	-	0.2	-1.0	True	REVERT	10
+run_W18_batch151	topic-sentry	### ai-search-aeo (2 hits)	REMOVE	info_retrieval	1667	1667	0.4	-	0.4	-1.0	True	REVERT	13
+run_W18_batch151	hook-open-items-reminder	#### Detail	REWORD	output_quality	296	296	0.0	-	0.0	-1.0	True	REVERT	14
+run_W18_batch151	hook-mpe-refit	### preamble — Details	SPLIT	output_quality	317	317	0.0	-	0.0	-1.0	True	REVERT	16
+run_W18_batch151	three-hook-migration-plan	### Step 3: Shadow-run Broad Sweep once	SPLIT	info_retrieval	1546	1546	0.8	0.8	0.8	0.0	False	KEEP	23
+run_W18_batch151	asana-activity-monitor-protocol	### Step 7: Update `asana-scan-state.json`	REMOVE	info_retrieval	818	818	0.6	0.8	0.6	-0.2	False	REVERT	27
+run_W18_batch151	email-calendar-duckdb-sync	### Step 2 — INSERT into signals.emails	ADD	info_retrieval	1143	1161	0.8	0.8	0.8	0.0	False	KEEP	28
+run_W18_batch151	richard-style-slack	## Response Patterns	ADD	output_quality	1581	1600	0.8	0.8	0.8	0.0	False	KEEP	17
+run_W18_batch151	wiki-regime-change-taxonomy	## Retiring a baseline	MERGE	info_retrieval	725	725	0.8	0.8	0.8	0.0	False	KEEP	35
+run_W18_batch151	hook-sharepoint-sync	### preamble — Details	MERGE	output_quality	146	146	0.2	-	0.2	-1.0	True	REVERT	14
+run_W18_batch151	document-registry	## Before Creating or Editing a Document	ADD	output_quality	491	511	0.8	0.8	0.8	0.0	False	KEEP	28
+run_W18_batch151	am-frontend	### For each task needing enrichment:	COMPRESS	info_retrieval	3986	3986	0.0	-	0.0	-1.0	True	REVERT	9
+run_W18_batch151	hook-protocol-audit	## Session Hooks	REWORD	info_retrieval	1194	1194	0.8	0.8	0.8	0.0	False	KEEP	25
+run_W18_batch151	wiki-mpe-all-markets-simulation-report	## Step Legend	REMOVE	info_retrieval	467	438	0.8	0.8	0.8	0.0	False	KEEP	19
+run_W18_batch151	amazon-politics	### Solve Problems for Your Boss	RESTRUCTURE	info_retrieval	3183	3183	1.0	1.0	0.2	0.0	False	KEEP	31
+run_W18_batch151	state-file-engine	## Quality Gates (enforced across all markets)	REMOVE	info_retrieval	2049	2049	0.2	-	0.2	-1.0	True	REVERT	7
+run_W18_batch151	hook-guard-email	### Common Pitfalls — preamble	ADD	output_quality	86	104	0.8	0.8	0.8	0.0	False	KEEP	16
+run_W18_batch151	long-term-goals	### Level 2: Drive & Communicate Worldwide Testing	SPLIT	info_retrieval	466	469	0.8	0.8	0.8	0.0	False	KEEP	21
+run_W18_batch151	heart	### Step 1: Select Target	COMPRESS	info_retrieval	2739	2709	0.8	0.8	0.8	0.0	False	KEEP	28
+run_W18_batch151	au-stakeholder-research-ytd	## Escalation Pattern Analysis	COMPRESS	info_retrieval	2038	2038	0.2	-	0.2	-1.0	True	REVERT	10
+run_W18_batch151	eyes	# Eyes — Perception & Awareness	REWORD	info_retrieval	1423	1423	0.8	0.8	0.8	0.0	False	KEEP	25
+run_W18_batch151	am-backend-parallel	### Activity Monitor Rate Limiting Mitigation	REMOVE	info_retrieval	4545	3710	0.6	0.2	0.6	0.4	False	KEEP	19
+run_W18_batch151	spine	### Quick-Check Keys	SPLIT	info_retrieval	1549	1549	0.4	-	0.4	-1.0	True	REVERT	4
+run_W18_batch151	eod-meeting-sync	## Meeting-to-Task Automation	COMPRESS	info_retrieval	289	287	0.8	0.8	0.8	0.0	False	KEEP	16
+run_W18_batch151	wiki-google-ads-campaign-structure	## Quality Checklist (per campaign)	MERGE	info_retrieval	630	623	0.8	0.8	0.8	0.0	False	KEEP	14
+run_W18_batch151	richard-style-wbr	### Pronoun Rules	REMOVE	output_quality	1096	1096	0.4	-	0.4	-1.0	True	REVERT	6
+run_W18_batch151	loop-page-sync	### 2. Refresh Stale Pages (>12h or never ingested)	REWORD	info_retrieval	255	255	0.8	0.8	0.8	0.0	False	KEEP	23
+run_W18_batch151	body	## Quick Orientation	MERGE	info_retrieval	1057	1057	0.8	0.8	0.8	0.0	False	KEEP	14
+run_W18_batch151	agentspaces-core	## Development Environment	COMPRESS	output_quality	175	174	0.8	0.8	0.8	0.0	False	KEEP	15
+run_W18_batch151	market-constraints	## CA	REMOVE	output_quality	1263	1237	0.8	0.8	0.8	0.0	False	KEEP	41
+run_W18_batch151	spine	### Quick-Check Keys	COMPRESS	info_retrieval	1549	1549	0.4	-	0.4	-1.0	True	REVERT	9
+run_W18_batch151	duckdb-access-policy	## Why This Matters	ADD	info_retrieval	490	510	0.8	0.8	0.8	0.0	False	KEEP	21
+run_W18_batch151	heart	### Step 3: Apply Experiment	SPLIT	info_retrieval	2709	2709	0.8	0.8	0.8	0.0	False	KEEP	17
+run_W18_batch151	nervous-system	#### Body Metrics	RESTRUCTURE	info_retrieval	1824	1824	0.8	0.8	0.6	0.0	False	KEEP	28
+run_W18_batch151	slack-digest	## No new data this run	COMPRESS	info_retrieval	622	622	0.6	0.8	0.6	-0.2	False	REVERT	13
+run_W18_batch151	amazon-politics	### PIPs Are Almost Always Terminal	REMOVE	info_retrieval	3183	3183	0.4	-	0.4	-1.0	True	REVERT	5
+run_W18_batch151	hook-mpe-parity	then.prompt	ADD	output_quality	243	243	0.8	0.8	0.8	0.0	False	KEEP	16
+run_W18_batch151	wiki-market-constraints-schema	## Consumer examples	REWORD	info_retrieval	738	738	0.8	0.8	0.8	0.0	False	KEEP	22
+run_W18_batch151	asana-activity-monitor-protocol	### Step 1: Read Scan State	ADD	info_retrieval	818	838	0.8	0.8	0.8	0.0	False	KEEP	29
+run_W18_batch151	meeting-to-task-pipeline	## Step 4: Asana Task Creation	REWORD	info_retrieval	1190	1190	0.8	0.8	0.8	0.0	False	KEEP	25
+run_W18_batch151	roster	### MarTech & Data Science	REWORD	info_retrieval	2211	2211	0.6	0.6	0.8	0.0	False	KEEP	19
+run_W18_batch151	richard-style-amazon	# Richard Williams — Amazon Writing Norms Layer	SPLIT	output_quality	1082	1082	0.8	0.8	0.8	0.0	False	KEEP	29
+run_W18_batch151	broad-sweep-2026-W18	### Topic-watchlist hits AM didn't surface	RESTRUCTURE	info_retrieval	1749	1749	0.8	0.8	0.8	0.0	False	KEEP	27
+run_W18_batch151	slack-knowledge-search	## How to Search	REMOVE	output_quality	416	416	0.4	-	0.4	-1.0	True	REVERT	4
+run_W18_batch151	slack-digest	## Failure detail	RESTRUCTURE	info_retrieval	622	622	0.8	0.8	0.8	0.0	False	KEEP	16
+run_W18_batch151	wiki-stakeholder-comms-guide	# Stakeholder Communication Guide: How to Talk to Each Audience	REWORD	info_retrieval	1889	1889	0.8	0.8	0.8	0.0	False	KEEP	39
+run_W18_batch151	blind-test-harness	### Pattern B: Comparative head-to-head (for proposals that duplicate existing machinery)	SPLIT	output_quality	1462	1465	1.0	0.0	1.0	1.0	False	KEEP	27
+run_W18_batch151	wiki-mpe-v1-1-slim-validation-report	## Per-Market Results	SPLIT	info_retrieval	497	497	0.8	0.8	0.8	0.0	False	KEEP	27
+run_W18_batch151	wiki-budget-forecast-helper-spec	### Output	RESTRUCTURE	info_retrieval	1304	1304	0.8	0.8	0.8	0.0	False	KEEP	24
+run_W18_batch151	am-backend-parallel	## Failure Handling	RESTRUCTURE	info_retrieval	3710	3710	0.0	-	0.0	-1.0	True	REVERT	5
+run_W18_batch151	amazon-politics	#### Worked Example — Taking Scope (Soft Approach)	COMPRESS	info_retrieval	3183	3183	0.2	-	0.2	-1.0	True	REVERT	17
+run_W18_batch151	richard-style-mbr	### Paragraph Structure	ADD	output_quality	791	811	0.8	0.8	0.8	0.0	False	KEEP	20
+run_W18_batch151	richard-style-wbr	### Common Data Pitfalls	ADD	output_quality	1096	1115	0.8	0.8	0.8	0.0	False	KEEP	31
+run_W18_batch151	asana-goal-updater-protocol	## Amazon FY26 Calendar Reference	RESTRUCTURE	info_retrieval	2134	2134	0.8	0.8	0.8	0.0	False	KEEP	16
+run_W18_batch151	topic-sentry	### liveramp-enhanced-match (3 hits)	MERGE	info_retrieval	1667	1667	0.4	-	0.4	-1.0	True	REVERT	16
+run_W18_batch151	wiki-landing-page-testing-playbook	## Sources	REWORD	info_retrieval	656	656	0.8	0.8	0.8	0.0	False	KEEP	13
+run_W18_batch151	topic-watchlist	### mx-registration-funnel	SPLIT	info_retrieval	2285	2285	0.2	-	0.2	-1.0	True	REVERT	5
+run_W18_batch151	amazon-politics	### The Magic Loop (Manager Partnership)	SPLIT	info_retrieval	3183	3183	0.8	0.8	0.8	0.0	False	KEEP	18
+run_W18_batch151	soul	## How to Talk to Me (Agent Voice)	REMOVE	output_quality	2341	2317	0.8	0.8	0.6	0.0	False	KEEP	15
+run_W18_batch151	soul	## How I Work	SPLIT	output_quality	2317	2320	0.8	0.8	0.8	0.0	False	KEEP	12
+run_W18_batch151	hook-protocol-audit	## Audit Hooks (postToolUse)	COMPRESS	info_retrieval	1194	1194	0.8	0.8	0.8	0.0	False	KEEP	25
+run_W18_batch151	eyes	### Phasing	SPLIT	info_retrieval	1423	1423	0.8	0.8	0.8	0.0	False	KEEP	12
+run_W18_batch151	state-file-ww-testing	### Data Sources	RESTRUCTURE	info_retrieval	2027	2027	0.8	0.8	0.8	0.0	False	KEEP	15
+run_W18_batch151	am-auto	### Signal-to-Routine Mapping	RESTRUCTURE	info_retrieval	2527	2527	0.8	0.8	0.8	0.0	False	KEEP	13
+run_W18_batch151	am-auto	### Asana Cascade	REMOVE	info_retrieval	2527	2527	0.0	-	0.0	-1.0	True	REVERT	3
+run_W18_batch151	amcc	### What Counts as "Choosing the Hard Thing"	RESTRUCTURE	info_retrieval	5146	5146	0.8	0.8	0.8	0.0	False	KEEP	15
+run_W18_batch151	nervous-system	### Loop 2: Prediction Scoring	ADD	info_retrieval	1824	1843	0.8	0.8	0.8	0.0	False	KEEP	26
+run_W18_batch151	wiki-budget-forecast-helper-spec	### Architecture	REMOVE	info_retrieval	1304	1266	0.8	0.8	0.8	0.0	False	KEEP	29
+run_W18_batch151	context-enrichment	## Step 2.5C: Wiki Candidate Detection (~15s)	SPLIT	info_retrieval	2020	2023	0.8	0.8	0.8	0.0	False	KEEP	32
+run_W18_batch151	brain	### OP1 Narrative — Details	SPLIT	info_retrieval	1789	1789	0.0	0.0	0.0	0.0	False	KEEP	12
+run_W18_batch151	mcp-tool-reference	## Auto-Approve Recommendations	ADD	info_retrieval	2026	2026	0.4	-	0.4	-1.0	True	REVERT	7
+run_W18_batch151	tech	## Configuration Layers	SPLIT	output_quality	327	327	0.8	0.8	0.8	0.0	False	KEEP	16
+run_W18_batch151	nervous-system	#### Loop 7: Coherence Audit	MERGE	info_retrieval	1843	1843	0.4	-	0.4	-1.0	True	REVERT	10
+run_W18_batch151	high-stakes-guardrails	## Required Behavior	REMOVE	output_quality	381	381	0.6	0.8	0.6	-0.2	False	REVERT	23
+run_W18_batch151	workflow-observability	## EOD-2 Workflow Summary	COMPRESS	info_retrieval	357	350	0.8	0.8	0.8	0.0	False	KEEP	31
+run_W18_batch151	hook-steering-integrity-check	then.prompt	ADD	output_quality	132	132	0.8	0.8	0.8	0.0	False	KEEP	22
+run_W18_batch151	gut	### Extraction Rules	REMOVE	info_retrieval	1982	1982	0.4	-	0.4	-1.0	True	REVERT	4
+run_W18_batch151	hook-forecast-sharepoint-push	#### Detail	MERGE	output_quality	86	86	0.0	-	0.0	-1.0	True	REVERT	7
+run_W18_batch151	am-frontend	### 6C. Verify Dashboard Data Freshness	ADD	info_retrieval	3986	3986	0.2	-	0.2	-1.0	True	REVERT	3
+run_W18_batch151	seasonality-calendar	### WW Aggregate Impact Events	REMOVE	info_retrieval	2403	2403	0.4	-	0.4	-1.0	True	REVERT	10
+run_W18_batch151	workflow-observability	# Workflow Observability Protocol	RESTRUCTURE	info_retrieval	350	350	0.8	0.8	0.8	0.0	False	KEEP	22
+run_W18_batch151	asana-goal-updater-protocol	## Trigger	MERGE	info_retrieval	2134	2134	0.8	0.8	0.8	0.0	False	KEEP	22
+run_W18_batch151	richard-writing-style	## Voice Evolution	ADD	output_quality	718	738	0.8	0.8	0.8	0.0	False	KEEP	29
+run_W18_batch151	meeting-to-task-pipeline	## Step 6: Meeting Analytics Insertion	ADD	info_retrieval	1190	1190	0.4	-	0.4	-1.0	True	REVERT	12
+run_W18_batch151	eod-system-refresh	### Step 1 — Pull Current State (via DuckDB + Time Travel)	COMPRESS	info_retrieval	2701	2688	0.8	0.8	0.8	0.0	False	KEEP	30
+run_W18_batch151	am-auto	### Step 4 — New-Article Candidates from Signals	REWORD	info_retrieval	2527	2527	0.0	-	0.0	-1.0	True	REVERT	7
+run_W18_batch151	roster	### ABMA (Amazon Business Marketing Analytics)	COMPRESS	info_retrieval	2211	2211	0.6	0.6	0.6	0.0	False	KEEP	22
+run_W18_batch151	am-triage	## What NOT to do	MERGE	info_retrieval	3124	3124	0.0	-	0.0	-1.0	True	REVERT	5
+run_W18_batch151	richard-style-docs	## Knowledge-Sharing Documents	REMOVE	output_quality	936	936	0.6	0.8	0.6	-0.2	False	REVERT	15
+run_W18_batch151	slack-digest	## No new data this run	SPLIT	info_retrieval	622	625	0.8	0.8	0.8	0.0	False	KEEP	12
+run_W18_batch151	environment-rules	## Security and Compliance	MERGE	output_quality	210	207	0.8	0.8	0.8	0.0	False	KEEP	13
+run_W18_batch151	richard-style-slack	### Warmth & Humor	REMOVE	output_quality	1600	1600	0.4	-	0.4	-1.0	True	REVERT	4
+run_W18_batch151	context-enrichment	# Context Enrichment Protocol — Phase 2.5	REWORD	info_retrieval	2023	2023	0.8	0.8	0.8	0.0	False	KEEP	29
+run_W18_batch151	wiki-mpe-phase6-3-handback	## Tested scenarios	MERGE	info_retrieval	1512	1507	0.8	0.8	0.8	0.0	False	KEEP	17
+run_W18_batch151	amazon-politics	### What Actually Gets People Fired (Hidden Reasons)	REWORD	info_retrieval	3183	3183	0.8	0.8	0.8	0.0	False	KEEP	23
+run_W18_batch151	slack-knowledge-search	## When to Use Knowledge Search	ADD	output_quality	416	436	0.8	0.8	0.8	0.0	False	KEEP	29
+run_W18_batch151	heart	### Step 3: Apply Experiment	REMOVE	info_retrieval	2709	2694	0.8	0.8	0.6	0.0	False	KEEP	26
+run_W18_batch151	brain	### OP1 Narrative — Details	REWORD	info_retrieval	1789	1789	0.0	0.0	0.0	0.0	False	KEEP	11
+run_W18_batch151	hook-guard-asana	then.prompt	SPLIT	output_quality	68	68	0.6	0.6	0.8	0.0	False	KEEP	27
+run_W18_batch151	device	### SharePoint Sync (Hook: `sharepoint-sync`)	MERGE	info_retrieval	2638	2638	0.0	-	0.0	-1.0	True	REVERT	13
+run_W18_batch151	wiki-ps-performance-schema	### 4. YoY — W16 this year vs last year, for US	RESTRUCTURE	info_retrieval	888	888	0.8	0.8	0.8	0.0	False	KEEP	36
+run_W18_batch151	nervous-system	### Loop 4: Delegation Verification	COMPRESS	info_retrieval	1843	1843	0.8	0.6	0.6	0.2	False	KEEP	21
+run_W18_batch151	device	## When to Read This File	REWORD	info_retrieval	2638	2638	0.0	-	0.0	-1.0	True	REVERT	3
+run_W18_batch151	blind-test-methodology	### 7. Task-level wins do not equal adoption	REMOVE	output_quality	3325	3266	0.8	0.8	0.0	0.0	False	KEEP	57
+run_W18_batch151	eod-phase-tracker	## Backend	RESTRUCTURE	info_retrieval	721	721	0.8	0.8	0.8	0.0	False	KEEP	33
+run_W18_batch151	signal-to-task-pipeline	### Step 2.5d — Confirm bar	COMPRESS	info_retrieval	1250	1245	0.8	0.8	0.8	0.0	False	KEEP	35
+run_W18_batch151	memory	### Dwayne Palmer (dtpalmer) — WW Head of Marketing Website, L6, Arlington	RESTRUCTURE	info_retrieval	2478	2478	0.0	0.0	0.0	0.0	False	KEEP	36
+run_W18_batch151	blind-test-methodology	### 4. No explicit-decline path = procedure always fires	SPLIT	output_quality	3266	3266	0.0	-	0.0	-1.0	True	REVERT	3
+run_W18_batch151	meeting-brief-au-sync-2026-04-28	### Daily pattern last 14 days (post max-clicks switch 4/17)	REMOVE	info_retrieval	1698	1666	0.8	0.8	0.8	0.0	False	KEEP	15
+run_W18_batch151	wiki-market-constraints-schema	## Columns	ADD	info_retrieval	738	758	0.8	0.8	0.8	0.0	False	KEEP	15
+run_W18_batch151	amcc	## Growth Model & Common Failures	ADD	info_retrieval	5146	5164	0.6	0.6	0.4	0.0	False	KEEP	16
+run_W18_batch151	richard-style-slack	### Language Patterns	COMPRESS	output_quality	1600	1600	0.8	0.8	0.8	0.0	False	KEEP	17
+run_W18_batch151	gut	# Gut — Digestion, Compression & Waste Removal	MERGE	info_retrieval	1982	1981	0.6	0.6	0.6	0.0	False	KEEP	20
+run_W18_batch151	topic-watchlist	### ai-search-aeo	ADD	info_retrieval	2285	2285	0.4	-	0.4	-1.0	True	REVERT	5
+run_W18_batch151	state-file-engine	### Layer 1: AM-Backend Step 2E — Content Generation (daily)	RESTRUCTURE	info_retrieval	2049	2049	0.8	0.8	0.8	0.0	False	KEEP	36
+run_W18_batch151	device	### Candidate Install: gcm + llm CLI	ADD	info_retrieval	2638	2638	0.0	-	0.0	-1.0	True	REVERT	3
+run_W18_batch151	wiki-landing-page-testing-playbook	### During Test	COMPRESS	info_retrieval	656	652	0.8	0.8	0.8	0.0	False	KEEP	18
+run_W18_batch151	wiki-op1-op2-vocabulary-guide	## Paid search specifics	MERGE	info_retrieval	688	688	0.8	0.8	0.8	0.0	False	KEEP	17
+run_W18_batch151	au-escalation-claims-counterclaims	### Theme 4: Data & Methodology	MERGE	info_retrieval	2646	2646	0.0	-	0.0	-1.0	True	REVERT	4
+run_W18_batch151	eyes	### Market Deep Dives	ADD	info_retrieval	1423	1444	0.8	0.8	0.8	0.0	False	KEEP	43
+run_W18_batch151	slack-history-backfill	### Per-Channel Procedure	REWORD	info_retrieval	1667	1667	0.8	0.8	0.8	0.0	False	KEEP	17
+run_W18_batch151	mcp-tool-reference	## 6. amazon-sharepoint-mcp	REWORD	info_retrieval	2026	2026	0.6	0.6	0.6	0.0	False	KEEP	30
+run_W18_batch151	tech	### End of Day (userTriggered, sequential)	REMOVE	output_quality	327	327	0.4	-	0.4	-1.0	True	REVERT	5
+run_W18_batch151	hook-weekly-regime-fit	#### Detail	RESTRUCTURE	output_quality	103	103	0.8	0.8	0.8	0.0	False	KEEP	26
+run_W18_batch151	heart	### Common Failures	MERGE	info_retrieval	2694	2694	0.0	-	0.0	-1.0	True	REVERT	8
+run_W18_batch151	am-auto	### After Processing	ADD	info_retrieval	2527	2527	0.0	-	0.0	-1.0	True	REVERT	5
+run_W18_batch151	hard-thing-selection	## Topic-to-level seed mapping	RESTRUCTURE	info_retrieval	2363	2363	0.0	-	0.0	-1.0	True	REVERT	5
+run_W18_batch151	wiki-mpe-it-specific-notes	## Regime events	REMOVE	info_retrieval	770	770	0.8	0.8	0.8	0.0	False	KEEP	15
+run_W18_batch151	hook-wbr-callouts	then.prompt	RESTRUCTURE	output_quality	993	993	0.8	0.8	0.6	0.0	False	KEEP	34
+run_W18_batch151	amazon-builder-production-safety	## Identifying Production Resources and Credentials	REMOVE	output_quality	315	287	0.8	0.8	0.8	0.0	False	KEEP	23
+run_W18_batch151	devspaces-core	## Development Workflow	REWORD	output_quality	179	179	0.8	0.8	0.8	0.0	False	KEEP	14
+run_W18_batch151	memory	#### Kate Rundell (kataxt) — L8 Director, WW Outbound Marketing, Seattle	COMPRESS	info_retrieval	2478	2478	0.0	1.0	1.0	-1.0	False	REVERT	21
+run_W18_batch151	influences	# Influences (how I think)	REWORD	output_quality	124	124	0.8	0.8	0.8	0.0	False	KEEP	16
+run_W18_batch151	hook-topic-sentry	#### full — Details	ADD	output_quality	545	563	0.8	0.8	0.8	0.0	False	KEEP	46
+run_W18_batch151	hook-mpe-parity	then.prompt	RESTRUCTURE	output_quality	243	243	0.8	0.8	0.8	0.0	False	KEEP	20
+run_W18_batch151	enhanced-navigation-protocol	## Self-Discovery Query	MERGE	output_quality	401	401	0.6	0.6	0.8	0.0	False	KEEP	34
+run_W18_batch151	hook-mpe-refit	### preamble — Details	MERGE	output_quality	317	317	0.0	-	0.0	-1.0	True	REVERT	15
+run_W18_batch151	wiki-mpe-de-specific-notes	### 2. NB CPA elasticity sits at the threshold	MERGE	info_retrieval	650	650	0.8	0.8	0.8	0.0	False	KEEP	19
+run_W18_batch151	topic-watchlist	### liveramp-enhanced-match	RESTRUCTURE	info_retrieval	2285	2285	0.2	-	0.2	-1.0	True	REVERT	6
+run_W18_batch151	richard-style-amazon	# Richard Williams — Amazon Writing Norms Layer	REMOVE	output_quality	1082	1082	0.0	-	0.0	-1.0	True	REVERT	5
+run_W18_batch151	heart	## Architecture & Measurement	ADD	info_retrieval	2694	2714	0.8	0.8	0.8	0.0	False	KEEP	27
+run_W18_batch151	hook-mpe-refit	### preamble — Details	REWORD	output_quality	317	317	0.0	-	0.0	-1.0	True	REVERT	15
+run_W18_batch151	wiki-mpe-us-specific-notes	## Regime events that shape US	REMOVE	info_retrieval	1051	1049	0.8	0.8	0.8	0.0	False	KEEP	23
+run_W18_batch151	eod-meeting-sync	## Update Organs	REMOVE	info_retrieval	287	287	0.6	0.8	0.6	-0.2	False	REVERT	22
+run_W18_batch151	richard-style-slack	### Work Product & Data	RESTRUCTURE	output_quality	1600	1600	0.8	0.8	0.8	0.0	False	KEEP	23
+run_W18_batch151	hook-wbr-pipeline-trigger	description	RESTRUCTURE	output_quality	337	338	0.8	0.8	0.8	0.0	False	KEEP	23
+run_W18_batch151	am-frontend	## Step 6: Dashboard Refresh — Command Center, Forecast Tracker, WBR Callouts	SPLIT	info_retrieval	3986	3986	0.0	-	0.0	-1.0	True	REVERT	8
+run_W18_batch151	nervous-system	### Loop 3: Pattern Trajectory	SPLIT	info_retrieval	1843	1843	0.8	0.8	0.6	0.0	False	KEEP	40
+2026-04-29T21:40:52+00:00	run_W18_batch152	am-triage	REMOVE	3124	2444	0.0				REVERT	fast_fail	15
+2026-04-29T21:43:39.293130	run_W18_batch152	broad-sweep-2026-W18	SPLIT	1749	1751	0.5027450980392156	0.47441176470588237	0.5366666666666667	0.028333333333333266	KEEP	None	79
+2026-04-29T21:44:36.991017	run_W18_batch152	asana-kiro-rw-protocol	RESTRUCTURE	2641	2641	0.5339393939393939	0.5254545454545455	0.5254545454545455	0.008484848484848428	KEEP	None	57
+2026-04-29T21:45:27.100855	run_W18_batch152	au-stakeholder-research-ytd	MERGE	2038	2031	0.5834126984126984	0.5934126984126984	0.5837301587301587	-0.010000000000000009	REVERT	delta_negative	49
+2026-04-29T21:45:51.525754	run_W18_batch152	device	RESTRUCTURE	2638	2638	0.403030303030303	None	None	None	REVERT	fast_fail	24
+2026-04-29T21:46:07.430563	run_W18_batch152	slack-digest	SPLIT	625	627	0.4349206349206349	None	None	None	REVERT	fast_fail	15
+2026-04-29T21:46:45.228234	run_W18_batch152	sharepoint-sync	COMPRESS	146	119	0.6875438596491228	0.6770175438596492	0.7008771929824562	0.010526315789473606	KEEP	None	37
+2026-04-29T21:47:04.866474	run_W18_batch152	eyes	REWORD	1444	1442	0.36	None	None	None	REVERT	fast_fail	19
+2026-04-29T21:47:39.872300	run_W18_batch152	state-file-mx-ps	MERGE	395	392	0.7503607503607503	0.7412698412698412	0.7435786435786436	0.00909090909090915	KEEP	None	34
+2026-04-29T21:48:01.938679	run_W18_batch152	karpathy-phase1-response	COMPRESS	2783	2743	0.2638888888888889	None	None	None	REVERT	fast_fail	21
+2026-04-29T21:48:55.740426	run_W18_batch152	email-calendar-duckdb-sync	MERGE	1161	1154	0.7669467787114846	0.7926610644257703	0.5998039215686275	-0.02571428571428569	REVERT	delta_negative	53
+2026-04-29T21:49:14.987975	run_W18_batch152	device	COMPRESS	2638	2638	0.4421717171717171	None	None	None	REVERT	fast_fail	19
+2026-04-29T21:49:56.183698	run_W18_batch152	session-summary	SPLIT	144	146	0.6611111111111111	0.691111111111111	0.5122222222222221	-0.029999999999999916	REVERT	delta_negative	40
+2026-04-29T21:50:10.378031	run_W18_batch152	loop-page-sync	COMPRESS	255	255	0.4309523809523809	None	None	None	REVERT	fast_fail	13
+2026-04-29T21:50:52.214712	run_W18_batch152	topic-sentry	REWORD	563	562	0.6426984126984128	0.7006349206349206	0.6688888888888889	-0.05793650793650784	REVERT	delta_negative	41
+2026-04-29T21:51:06.901871	run_W18_batch152	duckdb-access-policy	REWORD	510	509	0.42752525252525253	None	None	None	REVERT	fast_fail	14
+2026-04-29T21:51:30.560527	run_W18_batch152	nervous-system	ADD	1843	1858	0.4821212121212121	None	None	None	REVERT	fast_fail	23
+2026-04-29T21:52:28.603842	run_W18_batch152	slack-history-backfill	REMOVE	1667	1530	0.7372727272727273	0.7554545454545455	0.6832323232323232	-0.018181818181818188	REVERT	delta_negative	57
+2026-04-29T21:53:27.355974	run_W18_batch152	topic-watchlist	RESTRUCTURE	2285	2285	0.508	0.508	0.508	0.0	KEEP	None	58
+2026-04-29T21:54:32.926457	run_W18_batch152	broad-sweep	COMPRESS	1539	1538	0.8889411764705881	0.8889411764705881	0.84675935828877	0.0	KEEP	None	65
+2026-04-29T21:55:18.553207	run_W18_batch152	topic-sentry	ADD	563	578	0.6109523809523809	0.6466666666666667	0.6157142857142857	-0.03571428571428581	REVERT	delta_negative	45
+2026-04-29T21:55:39.827066	run_W18_batch152	device	SPLIT	2638	2640	0.42419786096256684	None	None	None	REVERT	fast_fail	21
+2026-04-29T21:56:15.557008	run_W18_batch152	market-constraints-staleness-alert	ADD	129	144	0.6156521739130435	0.5956521739130435	0.5882608695652174	0.020000000000000018	KEEP	None	35
+2026-04-29T21:57:47.026440	run_W18_batch152	asana-command-center	MERGE	7507	7501	0.5433333333333333	0.5433333333333333	0.51	0.0	KEEP	None	91
+2026-04-29T21:58:32.250662	run_W18_batch152	eod-backend	SPLIT	1079	1081	0.5444444444444445	0.4222222222222222	0.5444444444444445	0.12222222222222229	KEEP	None	44
+2026-04-29T21:59:16.955131	run_W18_batch152	topic-sentry	MERGE	563	559	0.6252380952380953	0.641904761904762	0.6657142857142857	-0.01666666666666672	REVERT	delta_negative	44
+2026-04-29T21:59:44.939670	run_W18_batch152	karpathy-cadence-response	SPLIT	4434	4436	0.17142857142857143	None	None	None	REVERT	fast_fail	27
+2026-04-29T22:00:00.026957	run_W18_batch152	slack-digest	SPLIT	625	627	0.38686868686868686	None	None	None	REVERT	fast_fail	14
+2026-04-29T22:00:20.986306	run_W18_batch152	nervous-system	SPLIT	1843	1845	0.36952380952380953	None	None	None	REVERT	fast_fail	20
+2026-04-29T22:01:29.463295	run_W18_batch152	seasonality-calendar	RESTRUCTURE	2403	2403	0.6768115942028985	0.7315942028985507	0.7142028985507246	-0.05478260869565221	REVERT	delta_negative	68
+2026-04-29T22:01:52.073458	run_W18_batch152	au-stakeholder-research-ytd	REMOVE	2038	1976	0.48285714285714293	None	None	None	REVERT	fast_fail	22
+2026-04-29T22:02:00.394325	run_W18_batch152	am-backend	REMOVE	120	106	0.3765217391304348	None	None	None	REVERT	fast_fail	8
+2026-04-29T22:02:09.205143	run_W18_batch152	session-summary	REMOVE	144	20	0.23222222222222225	None	None	None	REVERT	fast_fail	8
+2026-04-29T22:03:08.023643	run_W18_batch152	asana-goal-updater-protocol	SPLIT	2134	2136	0.7591125541125541	0.7876839826839828	0.8126839826839827	-0.028571428571428692	REVERT	delta_negative	58
+2026-04-29T22:04:07.802855	run_W18_batch152	meeting-brief-brandon-1on1-2026-04-28	RESTRUCTURE	1537	1537	0.6342670401493931	0.7183940242763771	0.6517273576097106	-0.08412698412698405	REVERT	delta_negative	59
+2026-04-29T22:04:44.342369	run_W18_batch152	open-items-reminder	COMPRESS	296	237	0.6065217391304347	0.5978260869565217	0.65	0.008695652173912993	KEEP	None	36
+2026-04-29T22:05:53.337823	run_W18_batch152	eod-system-refresh	MERGE	2688	2684	0.6633333333333333	0.6633333333333333	0.6833333333333333	0.0	KEEP	None	68
+2026-04-29T22:06:19.069043	run_W18_batch152	device	MERGE	2638	2634	0.4633333333333334	None	None	None	REVERT	fast_fail	25
+2026-04-29T22:06:34.706177	run_W18_batch152	workflow-observability	REMOVE	350	324	0.488095238095238	None	None	None	REVERT	fast_fail	15
+2026-04-29T22:07:11.012126	run_W18_batch152	email-triage	RESTRUCTURE	137	137	0.6780952380952381	0.5864285714285714	0.5364285714285714	0.09166666666666667	KEEP	None	36
+2026-04-29T22:08:16.137466	run_W18_batch152	state-file-ww-testing	REWORD	2027	2018	0.7727329192546584	0.7477329192546585	0.7227329192546584	0.02499999999999991	KEEP	None	64
+2026-04-29T22:09:02.857648	run_W18_batch152	body	MERGE	1057	1054	0.7204545454545455	0.5568181818181819	0.5568181818181819	0.16363636363636358	KEEP	None	46
+2026-04-29T22:09:26.727425	run_W18_batch152	am-backend-parallel	SPLIT	3710	3712	0.30357142857142855	None	None	None	REVERT	fast_fail	23
+2026-04-29T22:09:47.346772	run_W18_batch152	sharepoint-durability-sync	RESTRUCTURE	1156	1156	0.4377777777777778	None	None	None	REVERT	fast_fail	20
+2026-04-29T22:10:00.087317	run_W18_batch152	weekly-regime-fit	SPLIT	103	105	0.44734432234432236	None	None	None	REVERT	fast_fail	12
+2026-04-29T22:10:21.388757	run_W18_batch152	heart	ADD	2714	2729	0.49764705882352944	None	None	None	REVERT	fast_fail	21
+2026-04-29T22:10:44.061408	run_W18_batch152	karpathy-cadence-response	RESTRUCTURE	4434	4434	0.3111111111111111	None	None	None	REVERT	fast_fail	22
+2026-04-29T22:11:52.334367	run_W18_batch152	au-stakeholder-research-ytd	COMPRESS	2038	2026	0.6233333333333333	0.6233333333333333	0.6333333333333333	0.0	KEEP	None	68
+2026-04-29T22:12:15.095834	run_W18_batch152	three-hook-migration-plan	RESTRUCTURE	1546	1546	0.3827639751552795	None	None	None	REVERT	fast_fail	22
+2026-04-29T22:12:56.829865	run_W18_batch152	wiki-maintenance	COMPRESS	691	691	0.6061180124223602	0.6811180124223603	0.6481469979296066	-0.07500000000000007	REVERT	delta_negative	41
+2026-04-29T22:13:21.372784	run_W18_batch152	am-backend-parallel	COMPRESS	3710	3710	0.33333333333333337	None	None	None	REVERT	fast_fail	24
+2026-04-29T22:14:41.966798	run_W18_batch152	mcp-tool-reference	SPLIT	2026	2028	0.6084848484848485	0.5884848484848485	0.6684848484848485	0.020000000000000018	KEEP	None	80
+2026-04-29T22:15:02.067661	run_W18_batch152	hedy-digest	COMPRESS	2087	2087	0.4707936507936508	None	None	None	REVERT	fast_fail	19
+2026-04-29T22:15:21.324757	run_W18_batch152	roster	RESTRUCTURE	2211	2211	0.4667226890756303	None	None	None	REVERT	fast_fail	19
+2026-04-29T22:16:22.738329	run_W18_batch152	three-hook-migration-plan	REWORD	1546	1545	0.6656436487638533	0.6140908537327975	0.6580806235537693	0.05155279503105581	KEEP	None	61
+2026-04-29T22:17:33.683401	run_W18_batch152	am-backend-parallel	RESTRUCTURE	3710	3710	0.5516666666666666	0.43714285714285717	0.5766666666666667	0.11452380952380947	KEEP	None	70
+2026-04-29T22:17:46.798711	run_W18_batch152	loop-page-sync	MERGE	255	251	0.40915750915750915	None	None	None	REVERT	fast_fail	12
+2026-04-29T22:18:29.840985	run_W18_batch152	slack-ingestion-README	REMOVE	942	902	0.7	0.775	0.6916666666666667	-0.07500000000000007	REVERT	delta_negative	42
+2026-04-29T22:18:51.054983	run_W18_batch152	device	REMOVE	2638	2578	0.255	None	None	None	REVERT	fast_fail	20
+2026-04-29T22:19:52.855805	run_W18_batch152	spine	REMOVE	1549	1546	0.6466666666666667	0.6466666666666667	0.5495238095238095	0.0	KEEP	None	61
+2026-04-29T22:20:11.708587	run_W18_batch152	karpathy-phase1-response	COMPRESS	2783	2743	0.2583333333333333	None	None	None	REVERT	fast_fail	18
+2026-04-29T22:21:00.531660	run_W18_batch152	slack-conversation-intelligence	COMPRESS	761	743	0.7577777777777778	0.7977777777777778	0.7577777777777778	-0.040000000000000036	REVERT	delta_negative	48
+2026-04-29T22:21:58.260097	run_W18_batch152	slack-history-backfill	COMPRESS	1667	1667	0.6950000000000001	0.72	0.5700000000000001	-0.02499999999999991	REVERT	delta_negative	57
+2026-04-29T22:22:36.362271	run_W18_batch152	asana-sync-protocol	SPLIT	1043	1045	0.6266666666666667	0.6766666666666666	0.6966666666666667	-0.04999999999999993	REVERT	delta_negative	37
+2026-04-29T22:22:54.157485	run_W18_batch152	karpathy-phase1-response	ADD	2783	2798	0.20657894736842106	None	None	None	REVERT	fast_fail	17
+2026-04-29T22:23:05.135858	run_W18_batch152	am-backend	SPLIT	120	122	0.38115942028985506	None	None	None	REVERT	fast_fail	10
+2026-04-29T22:24:13.402113	run_W18_batch152	device	MERGE	2638	2631	0.508578431372549	0.508578431372549	0.49607843137254903	0.0	KEEP	None	68
+2026-04-29T22:24:51.671949	run_W18_batch152	eod-meeting-sync	REMOVE	287	269	0.5769696969696969	0.5951515151515151	0.5751515151515152	-0.018181818181818188	REVERT	delta_negative	38
+2026-04-29T22:25:46.749335	run_W18_batch152	slack-history-backfill	MERGE	1667	1664	0.5933333333333334	0.6599999999999999	0.5683333333333334	-0.06666666666666654	REVERT	delta_negative	54
+2026-04-29T22:26:11.653128	run_W18_batch152	karpathy-cadence-response	ADD	4434	4449	0.37142857142857144	None	None	None	REVERT	fast_fail	24
+2026-04-29T22:26:38.811428	run_W18_batch152	karpathy-cadence-response	SPLIT	4434	4436	0.31285714285714283	None	None	None	REVERT	fast_fail	26
+2026-04-29T22:27:06.328814	run_W18_batch152	karpathy-cadence-response	RESTRUCTURE	4434	4434	0.18485162180814355	None	None	None	REVERT	fast_fail	27
+2026-04-29T22:27:56.894753	run_W18_batch152	asana-goal-updater-protocol	SPLIT	2134	2136	0.7645454545454545	0.7645454545454545	0.7645454545454545	0.0	KEEP	None	50
+2026-04-29T22:28:40.844017	run_W18_batch152	topic-sentry	ADD	563	578	0.6825396825396826	0.623015873015873	0.6103174603174603	0.059523809523809534	KEEP	None	43
+2026-04-29T22:29:32.570961	run_W18_batch152	state-file-engine	MERGE	2049	2039	0.7262626262626263	0.7151515151515151	0.7762626262626263	0.011111111111111183	KEEP	None	51
+2026-04-29T22:29:49.632479	run_W18_batch152	nervous-system	ADD	1843	1858	0.46410256410256406	None	None	None	REVERT	fast_fail	16
+2026-04-29T22:30:11.342204	run_W18_batch152	karpathy-phase1-response	REWORD	2783	2778	0.4541847041847042	None	None	None	REVERT	fast_fail	21
+2026-04-29T22:30:30.701783	run_W18_batch152	seasonality-calendar	MERGE	2403	2400	0.4894598155467721	None	None	None	REVERT	fast_fail	19
+2026-04-29T22:30:42.744011	run_W18_batch152	wiki-maintenance	REMOVE	691	687	0.38976190476190475	None	None	None	REVERT	fast_fail	11
+2026-04-29T22:31:11.751886	run_W18_batch152	am-triage	REMOVE	3124	3043	0.40132756132756126	None	None	None	REVERT	fast_fail	28
+2026-04-29T22:31:33.551729	run_W18_batch152	eyes	MERGE	1444	1440	0.38677727501256914	None	None	None	REVERT	fast_fail	21
+2026-04-29T22:32:45.656416	run_W18_batch152	topic-sentry	SPLIT	1667	1669	0.5702380952380952	0.5897619047619048	0.6197619047619047	-0.01952380952380961	REVERT	delta_negative	71
+2026-04-29T22:33:24.587229	run_W18_batch152	am-triage	SPLIT	479	481	0.5045454545454546	0.4545454545454546	0.4242424242424242	0.050000000000000044	KEEP	None	38
+2026-04-29T22:34:18.011132	run_W18_batch152	am-auto	MERGE	2527	2522	0.6433333333333333	0.49333333333333335	0.5383333333333333	0.14999999999999997	KEEP	None	53
+2026-04-29T22:35:26.536758	run_W18_batch152	asana-notes-protocol	COMPRESS	3370	3354	0.6738847117794486	0.6538847117794486	0.6749874686716792	0.020000000000000018	KEEP	None	68
+2026-04-29T22:35:58.923971	run_W18_batch152	state-file-au-ps	RESTRUCTURE	373	373	0.6414141414141414	0.6492063492063492	0.6896103896103896	-0.007792207792207795	REVERT	delta_negative	31
+2026-04-29T22:36:41.808054	run_W18_batch152	loop-page-sync	RESTRUCTURE	255	255	0.6416666666666667	0.7083333333333333	0.6464285714285715	-0.06666666666666654	REVERT	delta_negative	42
+2026-04-29T22:37:11.729108	run_W18_batch152	asana-guardrails	COMPRESS	645	640	0.6076190476190476	0.6	0.6	0.007619047619047636	KEEP	None	29
+2026-04-29T22:37:34.274455	run_W18_batch152	hook-protocol-audit	SPLIT	1194	1196	0.48571428571428577	None	None	None	REVERT	fast_fail	22
+2026-04-29T22:38:25.802958	run_W18_batch152	meeting-to-task-pipeline	COMPRESS	1190	1185	0.5	0.5	0.5	0.0	KEEP	None	51
+2026-04-29T22:39:12.486363	run_W18_batch152	signal-to-task-pipeline	REMOVE	1245	1237	0.7807692307692308	0.8115384615384615	0.7038461538461538	-0.03076923076923077	REVERT	delta_negative	46
+2026-04-29T22:40:30.868725	run_W18_batch152	amazon-politics	COMPRESS	3183	3168	0.6744736842105263	0.6599999999999999	0.6119736842105263	0.014473684210526416	KEEP	None	78
+2026-04-29T22:41:33.815191	run_W18_batch152	meeting-brief-au-sync-2026-04-28	SPLIT	1666	1668	0.5048840048840049	0.536874236874237	0.4775335775335775	-0.0319902319902321	REVERT	delta_negative	62
+2026-04-29T22:42:23.332234	run_W18_batch152	nervous-system	COMPRESS	1843	1829	0.5036363636363637	0.5436363636363637	0.48484848484848486	-0.040000000000000036	REVERT	delta_negative	49
+2026-04-29T22:42:56.510658	run_W18_batch152	forecast-sharepoint-push	SPLIT	86	88	0.6902777777777778	0.6777777777777778	0.47777777777777775	0.012499999999999956	KEEP	None	32
+2026-04-29T22:43:35.446162	run_W18_batch152	mpe-refit	REWORD	317	314	0.5463636363636364	0.5827272727272728	0.5554545454545454	-0.036363636363636376	REVERT	delta_negative	38
+2026-04-29T22:44:07.616128	run_W18_batch152	duckdb-schema-verification	RESTRUCTURE	405	405	0.5904761904761905	0.5619047619047619	0.6095238095238095	0.02857142857142858	KEEP	None	31
+2026-04-29T22:45:16.479394	run_W18_batch152	memory	ADD	2478	2493	0.6904545454545454	0.6722727272727272	0.5936363636363636	0.018181818181818188	REVERT	critical_accuracy	68
+2026-04-29T22:46:02.580514	run_W18_batch152	gut	REWORD	1981	1980	0.5514285714285714	0.5514285714285714	0.5380952380952382	0.0	KEEP	None	45
+2026-04-29T22:46:37.542402	run_W18_batch152	slack-conversation-intelligence	REWORD	761	760	0.6766666666666666	0.6766666666666666	0.6900000000000001	0.0	KEEP	None	34
+2026-04-29T22:47:26.544788	run_W18_batch152	brain	ADD	1789	1804	0.4714285714285714	0.4714285714285714	0.4831932773109243	0.0	REVERT	critical_accuracy	48
+2026-04-29T22:47:40.676830	run_W18_batch152	weekly-regime-fit	SPLIT	103	105	0.49826007326007327	None	None	None	REVERT	fast_fail	13
+2026-04-29T22:48:31.597354	run_W18_batch152	signal-to-task-pipeline	SPLIT	1245	1247	0.7907692307692308	0.7753846153846153	0.7446153846153847	0.015384615384615441	KEEP	None	50
+2026-04-29T22:49:27.893510	run_W18_batch152	brain	RESTRUCTURE	1789	1789	0.4203463203463203	0.36277056277056274	0.36277056277056274	0.05757575757575756	REVERT	critical_accuracy	56
+2026-04-29T22:49:36.870725	run_W18_batch152	am-backend	SPLIT	120	122	0.37681159420289856	None	None	None	REVERT	fast_fail	8
+2026-04-29T22:50:47.990687	run_W18_batch152	asana-duckdb-sync	REMOVE	1960	1918	0.6619047619047619	0.638095238095238	0.638095238095238	0.023809523809523836	KEEP	None	70
+2026-04-29T22:51:18.447985	run_W18_batch152	long-term-goals	SPLIT	469	471	0.6071428571428571	0.6071428571428571	0.6071428571428571	0.0	KEEP	None	30
+2026-04-29T22:51:48.037620	run_W18_batch152	state-file-au-ps	REMOVE	373	353	0.5703679653679654	0.5430952380952381	0.5999134199134198	0.027272727272727337	KEEP	None	29
+2026-04-29T22:52:11.099771	run_W18_batch152	au-escalation-claims-counterclaims	REMOVE	2646	2428	0.25256410256410255	None	None	None	REVERT	fast_fail	22
+2026-04-29T22:52:46.696500	run_W18_batch152	hook-protocol-audit	COMPRESS	1194	1167	0.6762626262626263	0.7137626262626263	0.6637626262626263	-0.03749999999999998	REVERT	delta_negative	35
+2026-04-29T22:53:32.270758	run_W18_batch152	slack-ingestion-README	MERGE	942	939	0.8550000000000001	0.805	0.8266666666666668	0.050000000000000044	KEEP	None	45
+2026-04-29T22:54:38.703459	run_W18_batch152	meeting-brief-au-sync-2026-04-28	REWORD	1666	1664	0.5661538461538462	0.5461538461538462	0.5276923076923077	0.020000000000000018	KEEP	None	66
+2026-04-29T22:55:11.473780	run_W18_batch152	eod-meeting-sync	SPLIT	287	289	0.641969696969697	0.6619696969696969	0.6619696969696969	-0.019999999999999907	REVERT	delta_negative	32
+2026-04-29T22:55:24.949735	run_W18_batch152	org-chart	ADD	1765	1780	0.3492063492063492	None	None	None	REVERT	fast_fail	13
+2026-04-29T22:56:16.404650	run_W18_batch152	memory	REMOVE	2478	2475	0.5599999999999999	0.6423529411764706	0.52	-0.08235294117647063	REVERT	delta_negative	51
+2026-04-29T22:57:32.414671	run_W18_batch152	memory	COMPRESS	2478	2478	0.758095238095238	0.8230952380952381	0.7195238095238096	-0.06500000000000006	REVERT	delta_negative	75
+2026-04-29T22:57:54.436430	run_W18_batch152	eod-phase-tracker	REWORD	721	701	0.4667741935483871	None	None	None	REVERT	fast_fail	21
+2026-04-29T22:58:41.437821	run_W18_batch152	eod-phase-tracker	SPLIT	721	723	0.5700000000000001	0.5255555555555556	0.5055555555555555	0.04444444444444451	KEEP	None	46
+2026-04-29T22:59:13.327318	run_W18_batch152	organ-change-detector	SPLIT	125	127	0.5266666666666666	0.49333333333333335	0.5433333333333333	0.03333333333333327	KEEP	None	31
+2026-04-29T22:59:28.604700	run_W18_batch152	slack-digest	REMOVE	625	406	0.31675213675213676	None	None	None	REVERT	fast_fail	15
+2026-04-29T22:59:38.097841	run_W18_batch152	guard-email	SPLIT	86	88	0.45999999999999996	None	None	None	REVERT	fast_fail	9
+2026-04-29T23:00:00.153308	run_W18_batch152	heart	REMOVE	2714	2711	0.45599999999999996	None	None	None	REVERT	fast_fail	21
+2026-04-29T23:00:31.966563	run_W18_batch152	eod-frontend	REMOVE	709	531	0.6516666666666666	0.8766666666666667	0.38	-0.2250000000000001	REVERT	delta_negative	31
+2026-04-29T23:02:51.948149	run_W18_batch152	eod-frontend	MERGE	709	706	0.6318181818181818	0.8136363636363637	0.575	-0.18181818181818188	REVERT	delta_negative	40
+2026-04-29T23:03:15.484382	run_W18_batch152	au-escalation-claims-counterclaims	SPLIT	2646	2648	0.3604615384615385	None	None	None	REVERT	fast_fail	23
+2026-04-29T23:03:58.843229	run_W18_batch152	duckdb-access-policy	REMOVE	510	448	0.5827777777777777	0.5772222222222222	0.6494444444444445	0.005555555555555536	KEEP	None	43
+2026-04-29T23:05:02.395293	run_W18_batch152	heart	REMOVE	2714	2452	0.5323809523809524	0.5514285714285714	0.4223809523809524	-0.01904761904761898	REVERT	delta_negative	63
+2026-04-29T23:06:00.434554	run_W18_batch152	roster	COMPRESS	2211	2207	0.5741854636591479	0.5636591478696742	0.5075187969924813	0.010526315789473717	KEEP	None	57
+2026-04-29T23:06:22.143116	run_W18_batch152	hedy-digest	MERGE	2087	2079	0.46047619047619043	None	None	None	REVERT	fast_fail	21
+2026-04-29T23:06:43.423786	run_W18_batch152	sharepoint-durability-sync	RESTRUCTURE	1156	1156	0.3729411764705882	None	None	None	REVERT	fast_fail	20
+2026-04-29T23:07:34.273015	run_W18_batch152	slack-history-backfill	MERGE	1667	1663	0.6533333333333333	0.6533333333333333	0.65	0.0	KEEP	None	50
+2026-04-29T23:08:20.241777	run_W18_batch152	email-calendar-duckdb-sync	SPLIT	1161	1163	0.6993697478991596	0.47927170868347335	0.7478991596638656	0.22009803921568627	KEEP	None	45
+2026-04-29T23:09:34.155442	run_W18_batch152	seasonality-calendar	REWORD	2403	2402	0.6971810797897755	0.7569636884854276	0.6855470616340182	-0.059782608695652106	REVERT	delta_negative	73
+2026-04-29T23:09:46.611048	run_W18_batch152	eod-meeting-sync	RESTRUCTURE	287	287	0.40888888888888886	None	None	None	REVERT	fast_fail	11
+2026-04-29T23:09:54.641156	run_W18_batch152	guard-email	SPLIT	86	88	0.45999999999999996	None	None	None	REVERT	fast_fail	7
+2026-04-29T23:10:11.757708	run_W18_batch152	hedy-digest	SPLIT	2087	2089	0.48690476190476195	None	None	None	REVERT	fast_fail	16
+2026-04-29T23:10:48.100762	run_W18_batch152	communication-analytics	MERGE	321	317	0.7287878787878788	0.6787878787878788	0.8287878787878787	0.04999999999999993	KEEP	None	36
+2026-04-29T23:11:47.859733	run_W18_batch152	context-enrichment	COMPRESS	2022	2021	0.7996753246753248	0.783008658008658	0.808008658008658	0.01666666666666672	KEEP	None	59
+2026-04-29T23:12:22.083383	run_W18_batch152	eod-meeting-sync	SPLIT	287	289	0.5783333333333334	0.5783333333333334	0.6183333333333334	0.0	KEEP	None	33
+2026-04-29T23:12:49.917705	run_W18_batch152	hedy-digest	RESTRUCTURE	2087	2087	0.4831918081918082	None	None	None	REVERT	fast_fail	27
+2026-04-29T23:14:05.620580	run_W18_batch152	meeting-brief-brandon-1on1-2026-04-28	RESTRUCTURE	1537	1537	0.6517748917748918	0.647012987012987	0.5898701298701299	0.004761904761904745	KEEP	None	75
+2026-04-29T23:14:34.263112	run_W18_batch152	au-escalation-claims-counterclaims	COMPRESS	2646	2565	0.4851851851851852	None	None	None	REVERT	fast_fail	28
+2026-04-29T23:15:33.808192	run_W18_batch152	hard-thing-selection	COMPRESS	2359	2353	0.5580926916221034	0.5771836007130124	0.5953654188948306	-0.019090909090909047	REVERT	delta_negative	59
+2026-04-29T23:16:07.148463	run_W18_batch152	slack-digest	MERGE	625	622	0.5305555555555556	0.5638888888888889	0.575	-0.033333333333333326	REVERT	delta_negative	32
+2026-04-29T23:16:40.263251	run_W18_batch152	loop-page-sync	REMOVE	255	204	0.5516666666666666	0.6326190476190476	0.5683333333333334	-0.080952380952381	REVERT	delta_negative	32
+2026-04-29T23:17:30.892641	run_W18_batch152	hook-protocol-audit	SPLIT	1194	1196	0.6632352941176471	0.6632352941176471	0.6132352941176471	0.0	KEEP	None	50
+2026-04-29T23:18:15.258228	run_W18_batch152	am-triage	SPLIT	3124	3126	0.8603174603174603	0.6444444444444445	0.692929292929293	0.21587301587301577	KEEP	None	44
+2026-04-29T23:18:37.672826	run_W18_batch152	hedy-digest	REMOVE	2087	1999	0.4885714285714286	None	None	None	REVERT	fast_fail	22
+2026-04-29T23:19:02.174358	run_W18_batch152	au-escalation-claims-counterclaims	MERGE	2646	2634	0.4851851851851852	None	None	None	REVERT	fast_fail	24
+2026-04-29T23:23:24.435268	run_W18_batch153	roster	REWORD	2207	2220	1.0	1.0	0.2	0.0	KEEP	None	18
+2026-04-29T23:23:49.213534	run_W18_batch153	three-hook-migration-plan	COMPRESS	1545	1545	1.0	0.9	0.5	0.09999999999999998	KEEP	None	24

@@ -101,19 +101,14 @@ For structured queries from hooks / dashboards / scripts, query `ps.market_const
 
 ## CA
 
-**Governing constraint:** OCI-driven growth
-**Handoff status:** Team-wide
 **OCI status:** Dial-up Apr 8-9, 2026
 **CCP availability:** Available
-**Next milestone:** Post-OCI stabilization, Polaris eligibility review
 **Notes:** +186% bulk CVR from OCI E2E. Excluded from Polaris Apr 7 test.
 
 **Latest week (2026-W16):** 778 regs · $60,293 · CPA $77
 **Next-week projection:** 747 regs (CI 596–754), $56,302 cost
 **Current-month OP2:** 2,447 regs · $214,436 cost · CPA $88
-**Forecast accuracy (regs):** 93.8% hit rate, 6.8% avg error
 
-**Structural baselines** (1):
 - oci_launch (2026-04-08): CA OCI dial-up planned
 
 *Manual fields updated 2026-04-20 by seed-2026-04-20 (0d ago)*
@@ -124,11 +119,8 @@ For structured queries from hooks / dashboards / scripts, query `ps.market_const
 
 **Governing constraint:** OCI-driven growth
 **Handoff status:** Team-wide
-**OCI status:** Live 100% since Oct 2025, +18% uplift
-**CCP availability:** Available
 **Next milestone:** Polaris weblab targeting Apr 6-7
 
-**Latest week (2026-W16):** 1,550 regs · $198,652 · CPA $128
 **Next-week projection:** 1,096 regs (CI 745–1,192), $128,449 cost
 **Current-month OP2:** 5,747 regs · $605,744 cost · CPA $105
 **Forecast accuracy (regs):** 68.8% hit rate, 14.8% avg error
@@ -138,7 +130,6 @@ For structured queries from hooks / dashboards / scripts, query `ps.market_const
 
 *Manual fields updated 2026-04-20 by seed-2026-04-20 (0d ago)*
 
----
 
 ## ES
 

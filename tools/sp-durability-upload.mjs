@@ -19,7 +19,6 @@ const tools = new SharePointTools();
 const SYSTEM_STATE_FILES = [
   'am-enrichment-queue.json',
   'am-portfolio-findings.json',
-  'am-abps-ai-state.json',
   'am-signals-processed.json',
 ];
 

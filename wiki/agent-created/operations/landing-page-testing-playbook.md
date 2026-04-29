@@ -40,11 +40,10 @@ update-trigger: new LP test results, Polaris migration milestones, category page
 4. Set rollback criteria: CPA increase threshold that triggers revert
 
 ### During Test
-1. Traffic split: 50/50 via weblab (preferred) or Google Ads experiment
+1. Traffic split: 50/50 via weblab or Google Ads experiment
 2. Duration: 4 weeks minimum (2 weeks for learning, 2 for steady-state)
 3. Monitor weekly: CVR, CPA, bounce rate, time on page
-4. Don't touch other variables during test (bids, keywords, budget)
-
+4. Don't touch other variables during test
 ### Post-Test
 1. Statistical significance check (minimum 95% confidence)
 2. Document: hypothesis, results, decision, learnings

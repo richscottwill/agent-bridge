@@ -30,6 +30,8 @@ Search community Slack channels when:
 2. You encounter a technical question where community experience would add value
 3. Richard explicitly asks "what are people saying about X" or "search Slack for X"
 
+
+> **Example:** A typical use of this section involves reading the above rules and applying them to the current context.
 ## How to Search
 
 1. Use the `search` tool with the topic as query

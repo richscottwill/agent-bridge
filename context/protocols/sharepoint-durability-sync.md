@@ -1,4 +1,6 @@
 <!-- DOC-0355 | duck_id: protocol-sharepoint-durability-sync -->
+
+
 # SharePoint Durability Sync Protocol
 
 Bidirectional sync between `~/shared/` (live workspace) and OneDrive `Kiro-Drive/` (durable, cross-device).
@@ -9,12 +11,16 @@ Bidirectional sync between `~/shared/` (live workspace) and OneDrive `Kiro-Drive
 
 ---
 
+
+
 ## SharePoint Target
 
 - Library: `Documents` (personal OneDrive)
 - Base folder: `Kiro-Drive/`
 - No siteUrl needed (defaults to personal OneDrive)
 - Subfolders auto-created on first write
+
+
 
 ## Folder Structure
 
@@ -51,7 +57,11 @@ Artifacts/       # Published work products (SEPARATE from Kiro-Drive)
 
 ---
 
+
+
 ## PUSH: When to Write to SharePoint
+
+
 
 ### Automatic Push Triggers (agent decides)
 
@@ -65,6 +75,8 @@ Artifacts/       # Published work products (SEPARATE from Kiro-Drive)
 | Meeting prep doc created | Prep brief | meeting-briefs/ | **Create** |
 | AM-Backend Step 2E / EOD Step 9 | State file .docx per market (MX, AU, WW Testing) | `Kiro-Drive/state-files/` | **Update** (overwrite — always latest version) |
 
+
+
 ### Decision Logic: Create vs Update
 
 - **system-state/** files: Always **update** (overwrite). These are "latest state" — only the current version matters.
@@ -72,16 +84,24 @@ Artifacts/       # Published work products (SEPARATE from Kiro-Drive)
 - **meeting-briefs/**: **Create** only. Meeting briefs are point-in-time — never updated after creation. Index file is the exception (updated when new briefs are added).
 - **Artifacts/**: Managed entirely by the sharepoint-sync hook. Not part of this protocol.
 
+
+
 ### Push Implementation
 
 ```python
+
+
 # Update pattern (system-state):
 sharepoint_write_file(libraryName="Documents", folderPath="Kiro-Drive/system-state",
     fileName="eod-reconciliation.json", content=<read_local_file>)
 
+
+
 # Create pattern (portable-body):
 sharepoint_write_file(libraryName="Documents", folderPath="Kiro-Drive/portable-body",
     fileName="body-snapshot-2026-04-11.md", content=<snapshot_content>)
+
+
 
 # Create/Update pattern (artifacts):
 sharepoint_write_file(libraryName="Documents", folderPath="Kiro-Drive/artifacts",
@@ -90,17 +110,26 @@ sharepoint_write_file(libraryName="Documents", folderPath="Kiro-Drive/artifacts"
 
 ---
 
+
+
 ## PULL: When to Read from SharePoint
+
+
 
 ### Automatic Pull Triggers (agent decides)
 
 | Trigger | What Gets Pulled | When | Why |
 |---------|-----------------|------|-----|
+
+**Example:** If this section references a specific process, the concrete steps are: |---------|-----------------|------|-----|...
+
 | Cold start (new container, no `~/shared/` state) | portable-body/body-snapshot-*.md (latest) | Session start, if local files missing | Bootstrap the system from last known good state |
 | AM Backend can't find local output files | system-state/*.json | Phase 2+ of AM, if Phase 1 output missing | Container may have restarted between phases |
 | EOD Frontend can't find backend output | system-state/eod-*.json | EOD Frontend Step 1, if local files missing | Backend may have run in a prior container session |
 | Richard asks about a published artifact | artifacts/*.md | On demand | Artifact may have been created on a different machine or in a prior container |
 | Richard asks "what did the brief say" from a different context | system-state/daily-brief-latest.md | On demand | Brief was generated in SSH but Richard is asking from local |
+
+
 
 ### Pull Decision Logic
 
@@ -109,12 +138,15 @@ sharepoint_write_file(libraryName="Documents", folderPath="Kiro-Drive/artifacts"
 3. **Never overwrite local with SharePoint** unless local is confirmed missing. SharePoint is the backup, not the master.
 4. **Staleness check:** For system-state files, compare local file mtime vs SharePoint Modified timestamp. If SharePoint is newer (e.g., another agent session wrote to it), pull and merge.
 
-### Pull Implementation
 
 ```python
+
+
 # Read text file inline:
 sharepoint_read_file(serverRelativeUrl="/personal/prichwil_amazon_com/Documents/Kiro-Drive/system-state/daily-brief-latest.md",
     savePath="~/shared/wiki/research/", inline=True)
+
+
 
 # Download binary or large file:
 sharepoint_read_file(serverRelativeUrl="/personal/prichwil_amazon_com/Documents/Kiro-Drive/portable-body/body-snapshot-2026-04-11.md",
@@ -122,6 +154,8 @@ sharepoint_read_file(serverRelativeUrl="/personal/prichwil_amazon_com/Documents/
 ```
 
 ---
+
+
 
 ## What Does NOT Get Synced
 
@@ -136,6 +170,8 @@ sharepoint_read_file(serverRelativeUrl="/personal/prichwil_amazon_com/Documents/
 
 ---
 
+
+
 ## Conflict Resolution
 
 If both local and SharePoint have been modified since last sync:
@@ -148,10 +184,14 @@ If both local and SharePoint have been modified since last sync:
 ---
 
 
+
+
 ### Common Pitfalls — Conflict Resolution
 - Misinterpreting this section causes downstream errors
 - Always validate assumptions before acting on this data
 - Cross-reference with related sections for completeness
+
+
 
 ## Error Handling
 
@@ -161,6 +201,11 @@ If both local and SharePoint have been modified since last sync:
 - Log all sync operations to DuckDB: `INSERT INTO workflow_executions (workflow_name, ...) VALUES ('sharepoint-durability-sync', ...)`
 
 ---
+
+
+**Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
+
+
 
 ## Verification
 

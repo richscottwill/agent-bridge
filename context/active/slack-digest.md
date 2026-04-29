@@ -32,6 +32,8 @@ Signal decay was applied to the 47 active Slack-source signals in `signals.signa
 - **Thread replies fetched:** 0.
 - **Proactive searches:** 0 executed (all 4 permanent queries `prichwil`, `"Richard Williams"`, `from:@brandoxy`, `from:@kataxt` blocked by the same 302).
 - **RSW channel intake:** skipped.
+
+#### Part 1
 - **Tables touched in DuckDB:** `signals.signal_tracker` — decay only. `signals.slack_messages` — not written.
 
 ---
@@ -56,12 +58,13 @@ Trending into Monday from the Friday scan: `polaris-brand-lp` (Brandon implicitl
 ---
 
 ## Failure detail
+- **Prior failure (2026-04-25T16:34Z):** Same pattern, self-cleared within ~2 hours (retry at 18:50Z succeeded). This run did not self-clear within the ~5-min budget.
+*Run timestamp: 2026-04-27T12:37:03Z. Next AM-1 scan should retry from the preserved watermarks above.*
+
 
 - **Error:** `r3 status: 302` on every Slack MCP endpoint. 302 = redirect, typical for session-expired auth flows.
 - **Retries attempted:** 8 probes across `list_channels` (3 variants), `search`, `batch_get_channel_info`, `batch_get_conversation_history`. All 302.
-- **Prior failure (2026-04-25T16:34Z):** Same pattern, self-cleared within ~2 hours (retry at 18:50Z succeeded). This run did not self-clear within the ~5-min budget.
 - **DuckDB health:** Normal. Decay ran. Watermarks readable. No schema surprises.
 
 ---
 
-*Run timestamp: 2026-04-27T12:37:03Z. Next AM-1 scan should retry from the preserved watermarks above.*

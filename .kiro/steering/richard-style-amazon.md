@@ -1,9 +1,21 @@
 ---
 inclusion: manual
 ---
+
+
+
+
+
+
 # Richard Williams — Amazon Writing Norms Layer
 
 Apply this on top of Richard's natural voice when writing for leadership (L7+), OP narratives, MBR/QBR write-ups, cross-org proposals, or any document read outside the immediate team.
+
+
+
+
+
+
 
 ## How to Apply (Without Losing Richard's Voice)
 
@@ -13,9 +25,17 @@ Apply this on top of Richard's natural voice when writing for leadership (L7+), 
 - **Avoid jargon that doesn't serve the reader** — explain terms for broader audiences. Example: "OCI (Offsite Conversion Improvement, a pixel-based attribution tool)" on first use in cross-org docs.
 - **Tables for comparisons, narrative for interpretation.** Always add the "so what" after a table. Example: after a CPA-by-market table, write "MX leads the efficiency gains, suggesting the bid strategy scales best in high-growth markets."
 
-## Amazon Narrative Standard (from internal templates and Doc Ninja reviews)
 
-These rules are derived from Amazon's Narrative Template, OP1 Template, MBR Template, Flash Template, Working Backwards Guide, and Doc Ninja-reviewed examples (Dog Safety Awareness, Contra-COGS MBR, Data Migration Narrative, Amazon Search OP1). They are non-negotiable for any document that goes to L7+.
+
+
+
+
+
+## Amazon Narrative Standard (from internal templates and Doc Ninja reviews) These rules are derived from Amazon's Narrative Template, OP1 Template, MBR Template, Flash Template, Working Backwards Guide, and Doc Ninja-reviewed examples (Dog Safety Awareness, Contra-COGS MBR, Data Migration Narrative, Amazon Search OP1). They are non-negotiable for any document that goes to L7+. 
+
+
+
+
 
 ### Document Structure & Writing Discipline
 Main body = the argument (results, insights, recommendations, decisions). Appendix = supporting material (data tables, test results, program refreshers, rosters, methodology). Cite appendix by name: "see Appendix: OCI Validated Results." Exception: a decision table that IS the argument stays in the body. Appendix does not count against word count.
@@ -33,10 +53,22 @@ Why: "After" leads with result, attributes causation, ends with recommendation.
 
 **Bullet-to-prose conversion:** Turn "Key changes: • Migrated 7/10 to Polaris • Reduced NB CPA 29% • Launched OCI • Paused IT" into connected prose: "Three changes drove this quarter's results. We migrated seven of ten markets to Polaris, reducing NB CPA by 29%. We launched OCI in AU and MX for attribution accuracy. We paused IT after volume dropped below significance."
 
+
+
+
+
+
+
 ### Common Failures in Document Structure
 1. **Bullet-list documents.** If >50% of a section is bullets, it's not a narrative. Rewrite as prose with connective tissue. Worked example: "We tested three approaches: (1) bid caps, (2) NB shift, (3) OCI efficiency" is a bullet list disguised as a sentence. Rewrite: "We tested bid caps first, then shifted budget to NB, and finally optimized OCI efficiency — each building on the previous result."
 2. **Missing purpose statement.** The first paragraph must state what you need to happen and why. If a reader finishes paragraph one without knowing the ask, the doc fails.
 3. **Appendix confusion.** Data tables that ARE the argument belong in the main body. Data tables that SUPPORT the argument go in the appendix. The test: would removing this table break the narrative flow? If yes, keep it in the body.
+
+
+
+
+
+
 
 ### Data & Document Structure
 Weave numbers into prose: "We launched Tk improvements to Search YTD, yielding an incremental $Tk OPS (US: $Tk, ROW: $Tk)." Tables are for multi-dimension comparisons, not sequential data points. Contextualize: [metric] [value] ([comparison]: [vs what], [interpretation]: [so what]). Example: 'AU NB CPA $118 (+3% WoW, -29% from 6wk ago) — bid strategy working, Polaris migration may cause short-term noise.' Compare across dimensions: test vs control, PoP, market vs market, channel vs channel. Separate platform data from business data (Google Ads vs Hubble/internal). Attribute causation carefully: "seems to have allowed" not "caused". Every data point connects to a recommendation. Honest about limitations: "we'd need a longer timeline" / "volume too low to draw conclusions". ie%CCP always contextualized against target. In testing plans, quantify expected improvement ranges: "5%-15%" not "significant".
@@ -55,5 +87,13 @@ Confidence calibration:
 | LOW | <2 weeks, <100 events, single data point, or contradictory sources | "IT ad copy lift directional only — LOW confidence (97% fewer clicks than control)" |
 
 **Worked example:** "AU NB CPA improved from $187 to $168 over the past 3 weeks (MEDIUM confidence, <500 weekly events). We need 2 more weeks of data before recommending this as the new baseline bid strategy." Note: confidence level stated inline, limitation named, and next step tied to the confidence gap.
+
+
+**Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
+
+
+
+#### Part 2
+
 
 

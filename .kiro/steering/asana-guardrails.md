@@ -2,11 +2,17 @@
 inclusion: manual
 ---
 
+
+
 # Asana Guardrails
 
 When interacting with Asana MCP tools, follow these rules. The core principle: auto-write on Richard's own stuff, draft-first for anything that touches others.
 
+
+
 ## Ownership Boundaries
+
+
 
 ### Richard's Portfolios
 - ABIX PS (GID: `1212775592612914`)
@@ -14,11 +20,15 @@ When interacting with Asana MCP tools, follow these rules. The core principle: a
 - Paid App (inferred from project membership)
 - Testing (inferred from project membership)
 
+
+
 ### Richard's Projects
 - AU (GID: `1212762061512767`)
 - MX (GID: `1212775592612917`)
 - Paid App (GID: `1205997667578886`)
 - My Tasks (GID: `1212732838073807`)
+
+
 
 ### Richard's Goals
 - Globalized cross-market testing (GID: `1213245014119131`)
@@ -26,6 +36,8 @@ When interacting with Asana MCP tools, follow these rules. The core principle: a
 - MX/AU paid search registrations (GID: `1213245014119128`)
 - Paid App (GID: `1213204514049810`)
 - All child goals of the above
+
+
 
 ### Ownership Test
 A task is "Richard's" if ALL of these are true:
@@ -35,12 +47,17 @@ A task is "Richard's" if ALL of these are true:
 
 ---
 
+
+
 ## Auto-Write Whitelist (no approval needed)
 
 These operations execute immediately during hooks and on-demand sessions. No draft-first required.
 
+
+
 ### Custom Fields on My Tasks
 - **Kiro_RW** (GID: `1213915851848087`) — agent scratchpad, append-only, 500 char limit
+  - Example: Kiro_RW** (GID: `1213915851848087`) — agent scratchpad, appe...
 - **Routine** (GID: `1213608836755502`) — bucket assignment (Sweep/Core/Engine Room/Admin)
 - **Priority_RW** (GID: `1212905889837829`) — Today/Urgent/Not urgent (includes daily reset demotions)
 - **Begin Date** (GID: `1213440376528542`) — scheduling
@@ -48,19 +65,29 @@ These operations execute immediately during hooks and on-demand sessions. No dra
 - **Subtasks** — creating subtasks on Richard's tasks
 - **Attachments** — adding attachments to Richard's tasks
 
+
+
 ### Routine Field Assignment for Untriaged Tasks
 - When a task has Priority_RW=Today but no Routine, and the signal-to-Routine mapping is unambiguous → auto-assign Routine
 
+
+
 ### Due Date Changes on Recurring Tasks
 - When a recurring task is completed and the next instance is created, set the due date using deterministic cadence math (weekly +7d, monthly +1mo, bi-weekly +14d)
+
+
 
 ### Task/Subtask Creation from Slack Signals
 - When Slack [ACTION-RW] signals map to a new task via the signal-to-Routine mapping → auto-create with Routine + Priority_RW pre-set
 - Dedup check: before creating, search for existing task with matching name. If found, skip creation and update Kiro_RW instead
 - INTAKE FUNNEL: If Slack, email, or meetings surface something Richard should be tracking that doesn't exist anywhere in Asana → create it in My Tasks with Routine + Priority + Kiro_RW context. The agent is the intake funnel — nothing falls through the cracks.
 
+
+
 ### Audit Log Writes
 - Always auto-write. Logging never requires approval.
+
+
 
 ### Task Descriptions
 - Auto-write on tasks assigned to Richard where the description is EMPTY or was previously written by the agent
@@ -69,17 +96,25 @@ These operations execute immediately during hooks and on-demand sessions. No dra
 - This applies across ALL projects including WW Testing — the rule is about authorship, not project ownership
 - If the task is attached to a project NOT in Richard's ownership list → still write descriptions if assigned to Richard and description is empty
 
+
+
 ### Comments on Tasks
 - Auto-write on tasks in Richard's projects (AU, MX, Paid App, My Tasks)
 - If the task is in a project not owned by Richard → BLOCK, draft-first
+
+
 
 ### Project / Portfolio Notes
 - Auto-write on Richard's projects (AU, MX, Paid App) and portfolios (ABIX PS, ABPS)
 - Project description (html_notes), status updates, Notes tabs — all auto-write for Richard's projects
 
+
+
 ### Goal Status Updates
 - Auto-write on Richard's goals listed above (Globalized testing, MX+AU testing, MX/AU regs, Paid App) and their child goals
 - Draft-first for any goal not in the list
+
+
 
 ### My Tasks — Full Access
 - Write to Notes tab in My Tasks
@@ -87,6 +122,8 @@ These operations execute immediately during hooks and on-demand sessions. No dra
 - All custom field writes on tasks in My Tasks (Kiro_RW, Routine, Priority_RW, Begin Date, Importance_RW, Notes-Task, etc.)
 
 ---
+
+
 
 ## Blacklist (never write — always block)
 
@@ -124,12 +161,16 @@ These operations are ALWAYS blocked regardless of context. Log with result "bloc
 
 ---
 
+
+
 ## Read Access — Unrestricted
 
 All read operations are allowed without authorization checks:
 GetTaskDetails, GetTaskStories, SearchTasksInWorkspace, GetGoal, GetPortfolioItems, GetProject, GetProjectSections, GetStatusUpdatesFromObject, GetSubtasksForTask, GetProjectTaskCount, AsanaSearch, GetStoriesForTask, GetSubtasksForTask, GetAllPortfolios
 
 ---
+
+
 
 ## Audit Logging — MANDATORY
 
@@ -142,7 +183,11 @@ Log EVERY Asana write operation to `~/shared/context/active/asana-audit-log.json
 
 ---
 
+
+
 ## Key Reference
+
+
 #[[file:~/shared/context/active/asana-command-center.md]]
 Use asana-command-center.md for all GID lookups — portfolio GIDs, project GIDs, goal GIDs, custom field GIDs, and Richard's user GID.
 

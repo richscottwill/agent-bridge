@@ -13,21 +13,22 @@ _Ingested (from DuckDB): 476 emails across 461 conversations (3/19→4/29), 830 
 ## What you might have missed
 
 ### Topic-watchlist hits AM didn't surface
+- [2026-04-22 slack #ab-ps_partnership-accounts] Brandon Munday — 18-reply thread on Adobe ENG URL redirects: "we have the ENG URLs redirecting through Adobe. Do you know what this is used for? Normally we'd have some extra tracking through Adobe Analytics." Yun-Kang replied multiple times re CTA overrides and ref tag carry-through. Continuation of the ungated LP ref tag problem (same failure class as Italy 4/16 and MX Auto). AM skipped — `ab-ps_partnership-accounts` isn't a priority channel for daily scans.
+- [2026-04-22 slack #dm-aditthk + #dm-quip-bot] Adi added you to AI Max Questions quip doc. Feeds the same workstream.
+**oci-rollout** (88 YTD hits, dominant topic)
+**au-handoff** (12 hits)
+- [2026-04-21 slack #baloo-channel] AU PM asking "I'd like to know if AU is already on the Baloo roadmap. If not, please let me know." Direct crossover between au-handoff and sparkle-and-baloo workstreams. Not surfaced by AM because `baloo-channel` is peripheral to Richard's daily rotation.
+
 
 **reftag-and-attribution** (19 YTD hits; only 2 made topic-sentry)
 - [2026-04-17 email] Weber, Kristine — `[HOLD] AB Marketing Reftag Bonanza & Working Session` — Kristine scheduled a dedicated reftag working session. Not in any AM digest. P2 watchlist match. Worth confirming whether you attended and whether follow-ups exist.
-- [2026-04-22 slack #ab-ps_partnership-accounts] Brandon Munday — 18-reply thread on Adobe ENG URL redirects: "we have the ENG URLs redirecting through Adobe. Do you know what this is used for? Normally we'd have some extra tracking through Adobe Analytics." Yun-Kang replied multiple times re CTA overrides and ref tag carry-through. Continuation of the ungated LP ref tag problem (same failure class as Italy 4/16 and MX Auto). AM skipped — `ab-ps_partnership-accounts` isn't a priority channel for daily scans.
 - [2026-04-21/23 email] Weber, Kristine — shared `TrafficWBR` folder + `Central Marketing - Pre-WBR Callouts` + `AB Traffic Transits WBR 04_18 WK16`. Cross-team WBR prep Richard isn't normally looped into.
 
 **ai-search-aeo** (P2, 5 hits; underweighted in AM)
 - [2026-04-15 slack #paid-search-amzn] 10 reactions: "google is sunsetting DSA, and all campaigns will be automatically AI MAX" (link to Google blog). This is the headline platform signal for your L4 POV. AM never surfaced it — `paid-search-amzn` isn't in daily rotation.
-- [2026-04-22 slack #dm-aditthk + #dm-quip-bot] Adi added you to AI Max Questions quip doc. Feeds the same workstream.
 
-**oci-rollout** (88 YTD hits, dominant topic)
 - [2026-04-24 email] Todd Heimes — `AB April Update` (medium priority in DB). L10 VP monthly update. Sits in inbox unread-surfaced-by-DB, never flagged by AM. If Todd's update summarizes PS positioning, it's worth a read.
 
-**au-handoff** (12 hits)
-- [2026-04-21 slack #baloo-channel] AU PM asking "I'd like to know if AU is already on the Baloo roadmap. If not, please let me know." Direct crossover between au-handoff and sparkle-and-baloo workstreams. Not surfaced by AM because `baloo-channel` is peripheral to Richard's daily rotation.
 
 **mx-registration-funnel** (2 hits YTD — surprisingly quiet given 4/24 Cristobal launch)
 - Sparse pickup. The Sparkle/Cristobal 4/24 launch signal is living in `sparkle-and-baloo` topic signals, not `mx-registration-funnel`. Consider whether the funnel topic's keyword set is too narrow to catch the actual conversations.
@@ -38,6 +39,9 @@ _Ingested (from DuckDB): 476 emails across 461 conversations (3/19→4/29), 830 
 |---|---:|---|---|
 | Todd Heimes | 4 | 4/10→4/24 | L10 VP; "AB April Update" 4/24 + PSME Seattle events. AM only catches Todd if he's direct-to-Richard. |
 | Weber, Kristine | 4 | 4/17→4/23 | Reftag Bonanza working session + TrafficWBR folder/callouts. New recurring cross-team contact; candidate for People Watch. |
+
+#### Details
+
 | Yi, Ashley | 5 | 4/20→4/24 | MBET/COUPA PO process overhaul. Operational — will affect PO submission workflow. |
 | Rogers, Kelly | 3 | 4/14→4/27 | Content Flash Q1 2026 Portfolio Marketing Recap 4/27. Cross-team marketing signal. |
 | Hopp, David | 3 | 4/18 | Triple OOO bomb (AWS Summit / Gartner / Forrester) — useful to know David's travel pattern. |

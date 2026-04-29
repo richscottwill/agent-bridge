@@ -164,17 +164,10 @@ SET last_run_at = CURRENT_TIMESTAMP,
     sources_ingested = '<json of counts>'
 
 #### Phase 7: Update ops.sync_watermarks — Details
-
 WHERE source = 'broad_sweep_last_run';
 ```
-
 If the row doesn't exist, insert it.
-
----
-
-
 **Constraint:** All identifiers, thresholds, and rules in this section are load-bearing. Modifications require re-validation.
-
 ## Contract with AM-Backend and Topic Sentry
 
 - **Broad Sweep reads the same DuckDB tables AM-Backend writes to.** It doesn't re-architect ingestion — it does a *longer window* pull using the same MCP tools and writes to the same tables (dedup on conversation_id / ts / session_id).

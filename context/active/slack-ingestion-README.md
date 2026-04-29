@@ -7,6 +7,9 @@ Read-only Slack context source for the Body system. Extracts decisions, action i
 
 | File | Location | Purpose |
 |------|----------|--------|
+
+**Example:** If this section references a specific process, the concrete steps are: |------|----------|--------|...
+
 | Channel Registry | ~/shared/context/active/slack-channel-registry.json | Channel tiers, People Watch, community channels |
 | Scan State | ~/shared/context/active/slack-scan-state.json | Timestamps, hot topics, volume tracking, audit log |
 | Knowledge Search | ~/.kiro/steering/slack-knowledge-search.md | On-demand community channel search rules |
@@ -22,7 +25,8 @@ Read-only Slack context source for the Body system. Extracts decisions, action i
 
 Community channels (agentspaces-interest, amazon-builder-genai-power-users, etc.) are knowledge-search-only.
 
-## Relevance Filter
+
+
 
 Scoring model (points additive, threshold: 25):
 
@@ -81,15 +85,17 @@ All Slack-sourced facts include [Slack: #channel, author, date] attribution tag.
 
 1. Per-cycle: 500 word digest cap
 2. Per-organ: check gut.md word budget before writing; compress or defer if at capacity
+
+### Volume Control — Details
 3. Per-week: cumulative tracking. If >20% of organ budget from Slack, reduce scan frequency
 
 Ceilings: Memory 700w/week, Brain 500w, Eyes 500w, Hands 400w, current.md flag at 500w.
 
 ## Hot Topic Detection
-
 - Trigger: same topic in signals from 3+ channels within 24 hours
 - Boost: +15 relevance (+25 if related to active project)
 - Cooling: no new signals for 48h, move to cooled, stop boosting
+
 
 ## People Watch
 

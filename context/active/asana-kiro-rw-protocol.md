@@ -9,17 +9,23 @@ Format: `M/D: [STATUS] [BLOCKER if any] [NEXT ACTION] [CROSS-REF if any]`
 
 ---
 
+
+### Common Pitfalls — Kiro_RW Population Protocol
+- Misinterpreting this section causes downstream errors
+- Always validate assumptions before acting on this data
+- Cross-reference with related sections for completeness
+
 ## Sub-task 5.1: Today-Priority Tasks (13 tasks)
 
-### 1. Mondays - Write into EU SSR Acq Asana
-- Routine: Sweep | Due: Mar 30 | Overdue: 4d
+### 9. Weekly Reporting - Global WBR sheet
+- Routine: Engine Room | Due: Mar 30 | Overdue: 4d | Subtasks: 4
 - Kiro_RW text:
 ```
-2026-04-03: 4d overdue. Recurring weekly (Mon). If this week's write-up is done, mark complete and create next instance for Apr 7. If not done, do it today during Sweep block — 15min max. Check EU SSR Acq project for latest data.
+2026-04-03: 4d overdue. Recurring weekly. 4 subtasks (Quip links in notes). If this week's WBR data is already entered, mark complete and create next instance for Apr 7. If not, pull data during Engine Room block — 30min. Has Quip doc links for reference. L2 alignment.
 ```
 - API call:
 ```
-UpdateTask(<task_gid>, custom_fields={"1213915851848087": "2026-04-03: 4d overdue. Recurring weekly (Mon). If this week's write-up is done, mark complete and create next instance for Apr 7. If not done, do it today during Sweep block — 15min max. Check EU SSR Acq project for latest data."})
+UpdateTask(<task_gid>, custom_fields={"1213915851848087": "2026-04-03: 4d overdue. Recurring weekly. 4 subtasks (Quip links in notes). If this week's WBR data is already entered, mark complete and create next instance for Apr 7. If not, pull data during Engine Room block — 30min. Has Quip doc links for reference. L2 alignment."})
 ```
 
 ### 2. ie%CCP calc - insert MX spend/regs before 9th
@@ -99,15 +105,15 @@ UpdateTask(<task_gid>, custom_fields={"1213915851848087": "2026-04-03: Due today
 UpdateTask(<task_gid>, custom_fields={"1213915851848087": "2026-04-03: 7d overdue. 7 subtasks — status unknown. Goal: WW in-context email overlay (0% progress on H1 FY26 goal). No recent activity detected. Decision needed: do, delegate, or kill. If active, identify which subtasks are blocked and which can move. If stale, demote to Backlog. L2 alignment."})
 ```
 
-### 9. Weekly Reporting - Global WBR sheet
-- Routine: Engine Room | Due: Mar 30 | Overdue: 4d | Subtasks: 4
+### 1. Mondays - Write into EU SSR Acq Asana
+- Routine: Sweep | Due: Mar 30 | Overdue: 4d
 - Kiro_RW text:
 ```
-2026-04-03: 4d overdue. Recurring weekly. 4 subtasks (Quip links in notes). If this week's WBR data is already entered, mark complete and create next instance for Apr 7. If not, pull data during Engine Room block — 30min. Has Quip doc links for reference. L2 alignment.
+2026-04-03: 4d overdue. Recurring weekly (Mon). If this week's write-up is done, mark complete and create next instance for Apr 7. If not done, do it today during Sweep block — 15min max. Check EU SSR Acq project for latest data.
 ```
 - API call:
 ```
-UpdateTask(<task_gid>, custom_fields={"1213915851848087": "2026-04-03: 4d overdue. Recurring weekly. 4 subtasks (Quip links in notes). If this week's WBR data is already entered, mark complete and create next instance for Apr 7. If not, pull data during Engine Room block — 30min. Has Quip doc links for reference. L2 alignment."})
+UpdateTask(<task_gid>, custom_fields={"1213915851848087": "2026-04-03: 4d overdue. Recurring weekly (Mon). If this week's write-up is done, mark complete and create next instance for Apr 7. If not done, do it today during Sweep block — 15min max. Check EU SSR Acq project for latest data."})
 ```
 
 ### 10. Look over AU landing page switch

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-29T22:37:35.773257+00:00",
+  "generated": "2026-04-29T22:43:05.415296+00:00",
   "max_wk": 16,
   "markets": [
     "WW",
@@ -1389,27 +1389,7 @@
             "category": "brand"
           }
         ],
-        "blocked": [
-          {
-            "gate_id": "C",
-            "gate_name": "Data freshness",
-            "status": "BLOCKED",
-            "market": "US",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
-          }
-        ],
+        "blocked": [],
         "quality_gates": [
           {
             "gate_id": "A",
@@ -1432,21 +1412,11 @@
           {
             "gate_id": "C",
             "gate_name": "Data freshness",
-            "status": "BLOCKED",
+            "status": "PASSED",
             "market": "US",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
+            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "details": {},
+            "override_required": false
           }
         ]
       },
@@ -5387,27 +5357,7 @@
             "category": "nb"
           }
         ],
-        "blocked": [
-          {
-            "gate_id": "C",
-            "gate_name": "Data freshness",
-            "status": "BLOCKED",
-            "market": "CA",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
-          }
-        ],
+        "blocked": [],
         "quality_gates": [
           {
             "gate_id": "A",
@@ -5430,21 +5380,11 @@
           {
             "gate_id": "C",
             "gate_name": "Data freshness",
-            "status": "BLOCKED",
+            "status": "PASSED",
             "market": "CA",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
+            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "details": {},
+            "override_required": false
           }
         ]
       },
@@ -9422,27 +9362,7 @@
             "category": "nb"
           }
         ],
-        "blocked": [
-          {
-            "gate_id": "C",
-            "gate_name": "Data freshness",
-            "status": "BLOCKED",
-            "market": "UK",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
-          }
-        ],
+        "blocked": [],
         "quality_gates": [
           {
             "gate_id": "A",
@@ -9465,21 +9385,11 @@
           {
             "gate_id": "C",
             "gate_name": "Data freshness",
-            "status": "BLOCKED",
+            "status": "PASSED",
             "market": "UK",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
+            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "details": {},
+            "override_required": false
           }
         ]
       },
@@ -13482,27 +13392,7 @@
             "category": "brand"
           }
         ],
-        "blocked": [
-          {
-            "gate_id": "C",
-            "gate_name": "Data freshness",
-            "status": "BLOCKED",
-            "market": "DE",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
-          }
-        ],
+        "blocked": [],
         "quality_gates": [
           {
             "gate_id": "A",
@@ -13525,21 +13415,11 @@
           {
             "gate_id": "C",
             "gate_name": "Data freshness",
-            "status": "BLOCKED",
+            "status": "PASSED",
             "market": "DE",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
+            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "details": {},
+            "override_required": false
           }
         ]
       },
@@ -17617,27 +17497,7 @@
           }
         ],
         "anomalies": [],
-        "blocked": [
-          {
-            "gate_id": "C",
-            "gate_name": "Data freshness",
-            "status": "BLOCKED",
-            "market": "FR",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
-          }
-        ],
+        "blocked": [],
         "quality_gates": [
           {
             "gate_id": "A",
@@ -17660,21 +17520,11 @@
           {
             "gate_id": "C",
             "gate_name": "Data freshness",
-            "status": "BLOCKED",
+            "status": "PASSED",
             "market": "FR",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
+            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "details": {},
+            "override_required": false
           }
         ]
       },
@@ -21633,27 +21483,7 @@
           }
         ],
         "anomalies": [],
-        "blocked": [
-          {
-            "gate_id": "C",
-            "gate_name": "Data freshness",
-            "status": "BLOCKED",
-            "market": "IT",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
-          }
-        ],
+        "blocked": [],
         "quality_gates": [
           {
             "gate_id": "A",
@@ -21676,21 +21506,11 @@
           {
             "gate_id": "C",
             "gate_name": "Data freshness",
-            "status": "BLOCKED",
+            "status": "PASSED",
             "market": "IT",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
+            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "details": {},
+            "override_required": false
           }
         ]
       },
@@ -25635,27 +25455,7 @@
           }
         ],
         "anomalies": [],
-        "blocked": [
-          {
-            "gate_id": "C",
-            "gate_name": "Data freshness",
-            "status": "BLOCKED",
-            "market": "ES",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
-          }
-        ],
+        "blocked": [],
         "quality_gates": [
           {
             "gate_id": "A",
@@ -25678,21 +25478,11 @@
           {
             "gate_id": "C",
             "gate_name": "Data freshness",
-            "status": "BLOCKED",
+            "status": "PASSED",
             "market": "ES",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
+            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "details": {},
+            "override_required": false
           }
         ]
       },
@@ -29641,27 +29431,7 @@
           }
         ],
         "anomalies": [],
-        "blocked": [
-          {
-            "gate_id": "C",
-            "gate_name": "Data freshness",
-            "status": "BLOCKED",
-            "market": "JP",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
-          }
-        ],
+        "blocked": [],
         "quality_gates": [
           {
             "gate_id": "A",
@@ -29684,21 +29454,11 @@
           {
             "gate_id": "C",
             "gate_name": "Data freshness",
-            "status": "BLOCKED",
+            "status": "PASSED",
             "market": "JP",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
+            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "details": {},
+            "override_required": false
           }
         ]
       },
@@ -33592,27 +33352,7 @@
             "category": "nb"
           }
         ],
-        "blocked": [
-          {
-            "gate_id": "C",
-            "gate_name": "Data freshness",
-            "status": "BLOCKED",
-            "market": "AU",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
-          }
-        ],
+        "blocked": [],
         "quality_gates": [
           {
             "gate_id": "A",
@@ -33635,21 +33375,11 @@
           {
             "gate_id": "C",
             "gate_name": "Data freshness",
-            "status": "BLOCKED",
+            "status": "PASSED",
             "market": "AU",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
+            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "details": {},
+            "override_required": false
           }
         ]
       },
@@ -38297,25 +38027,6 @@
               ]
             },
             "override_required": true
-          },
-          {
-            "gate_id": "C",
-            "gate_name": "Data freshness",
-            "status": "BLOCKED",
-            "market": "MX",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
           }
         ],
         "quality_gates": [
@@ -38365,21 +38076,11 @@
           {
             "gate_id": "C",
             "gate_name": "Data freshness",
-            "status": "BLOCKED",
+            "status": "PASSED",
             "market": "MX",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
+            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "details": {},
+            "override_required": false
           }
         ]
       },
@@ -42931,27 +42632,7 @@
             "category": "overall"
           }
         ],
-        "blocked": [
-          {
-            "gate_id": "C",
-            "gate_name": "Data freshness",
-            "status": "BLOCKED",
-            "market": "WW",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
-          }
-        ],
+        "blocked": [],
         "quality_gates": [
           {
             "gate_id": "A",
@@ -42974,21 +42655,11 @@
           {
             "gate_id": "C",
             "gate_name": "Data freshness",
-            "status": "BLOCKED",
+            "status": "PASSED",
             "market": "WW",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
+            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "details": {},
+            "override_required": false
           }
         ]
       },
@@ -47205,27 +46876,7 @@
           }
         ],
         "anomalies": [],
-        "blocked": [
-          {
-            "gate_id": "C",
-            "gate_name": "Data freshness",
-            "status": "BLOCKED",
-            "market": "EU5",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
-          }
-        ],
+        "blocked": [],
         "quality_gates": [
           {
             "gate_id": "A",
@@ -47248,21 +46899,11 @@
           {
             "gate_id": "C",
             "gate_name": "Data freshness",
-            "status": "BLOCKED",
+            "status": "PASSED",
             "market": "EU5",
-            "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-            "details": {
-              "threshold_hours": 24,
-              "stale_sources": [
-                {
-                  "source": "command-center-data.json",
-                  "reason": "Last updated 176.3h ago (threshold: 24h)",
-                  "age_hours": 176.3
-                }
-              ],
-              "max_age_hours": 176.3
-            },
-            "override_required": true
+            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "details": {},
+            "override_required": false
           }
         ]
       },
@@ -50227,21 +49868,11 @@
         {
           "gate_id": "C",
           "gate_name": "Data freshness",
-          "status": "BLOCKED",
+          "status": "PASSED",
           "market": "US",
-          "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-          "details": {
-            "threshold_hours": 24,
-            "stale_sources": [
-              {
-                "source": "command-center-data.json",
-                "reason": "Last updated 176.3h ago (threshold: 24h)",
-                "age_hours": 176.3
-              }
-            ],
-            "max_age_hours": 176.3
-          },
-          "override_required": true
+          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "details": {},
+          "override_required": false
         }
       ],
       "CA": [
@@ -50266,21 +49897,11 @@
         {
           "gate_id": "C",
           "gate_name": "Data freshness",
-          "status": "BLOCKED",
+          "status": "PASSED",
           "market": "CA",
-          "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-          "details": {
-            "threshold_hours": 24,
-            "stale_sources": [
-              {
-                "source": "command-center-data.json",
-                "reason": "Last updated 176.3h ago (threshold: 24h)",
-                "age_hours": 176.3
-              }
-            ],
-            "max_age_hours": 176.3
-          },
-          "override_required": true
+          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "details": {},
+          "override_required": false
         }
       ],
       "UK": [
@@ -50305,21 +49926,11 @@
         {
           "gate_id": "C",
           "gate_name": "Data freshness",
-          "status": "BLOCKED",
+          "status": "PASSED",
           "market": "UK",
-          "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-          "details": {
-            "threshold_hours": 24,
-            "stale_sources": [
-              {
-                "source": "command-center-data.json",
-                "reason": "Last updated 176.3h ago (threshold: 24h)",
-                "age_hours": 176.3
-              }
-            ],
-            "max_age_hours": 176.3
-          },
-          "override_required": true
+          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "details": {},
+          "override_required": false
         }
       ],
       "DE": [
@@ -50344,21 +49955,11 @@
         {
           "gate_id": "C",
           "gate_name": "Data freshness",
-          "status": "BLOCKED",
+          "status": "PASSED",
           "market": "DE",
-          "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-          "details": {
-            "threshold_hours": 24,
-            "stale_sources": [
-              {
-                "source": "command-center-data.json",
-                "reason": "Last updated 176.3h ago (threshold: 24h)",
-                "age_hours": 176.3
-              }
-            ],
-            "max_age_hours": 176.3
-          },
-          "override_required": true
+          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "details": {},
+          "override_required": false
         }
       ],
       "FR": [
@@ -50383,21 +49984,11 @@
         {
           "gate_id": "C",
           "gate_name": "Data freshness",
-          "status": "BLOCKED",
+          "status": "PASSED",
           "market": "FR",
-          "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-          "details": {
-            "threshold_hours": 24,
-            "stale_sources": [
-              {
-                "source": "command-center-data.json",
-                "reason": "Last updated 176.3h ago (threshold: 24h)",
-                "age_hours": 176.3
-              }
-            ],
-            "max_age_hours": 176.3
-          },
-          "override_required": true
+          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "details": {},
+          "override_required": false
         }
       ],
       "IT": [
@@ -50422,21 +50013,11 @@
         {
           "gate_id": "C",
           "gate_name": "Data freshness",
-          "status": "BLOCKED",
+          "status": "PASSED",
           "market": "IT",
-          "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-          "details": {
-            "threshold_hours": 24,
-            "stale_sources": [
-              {
-                "source": "command-center-data.json",
-                "reason": "Last updated 176.3h ago (threshold: 24h)",
-                "age_hours": 176.3
-              }
-            ],
-            "max_age_hours": 176.3
-          },
-          "override_required": true
+          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "details": {},
+          "override_required": false
         }
       ],
       "ES": [
@@ -50461,21 +50042,11 @@
         {
           "gate_id": "C",
           "gate_name": "Data freshness",
-          "status": "BLOCKED",
+          "status": "PASSED",
           "market": "ES",
-          "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-          "details": {
-            "threshold_hours": 24,
-            "stale_sources": [
-              {
-                "source": "command-center-data.json",
-                "reason": "Last updated 176.3h ago (threshold: 24h)",
-                "age_hours": 176.3
-              }
-            ],
-            "max_age_hours": 176.3
-          },
-          "override_required": true
+          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "details": {},
+          "override_required": false
         }
       ],
       "JP": [
@@ -50500,21 +50071,11 @@
         {
           "gate_id": "C",
           "gate_name": "Data freshness",
-          "status": "BLOCKED",
+          "status": "PASSED",
           "market": "JP",
-          "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-          "details": {
-            "threshold_hours": 24,
-            "stale_sources": [
-              {
-                "source": "command-center-data.json",
-                "reason": "Last updated 176.3h ago (threshold: 24h)",
-                "age_hours": 176.3
-              }
-            ],
-            "max_age_hours": 176.3
-          },
-          "override_required": true
+          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "details": {},
+          "override_required": false
         }
       ],
       "AU": [
@@ -50539,21 +50100,11 @@
         {
           "gate_id": "C",
           "gate_name": "Data freshness",
-          "status": "BLOCKED",
+          "status": "PASSED",
           "market": "AU",
-          "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-          "details": {
-            "threshold_hours": 24,
-            "stale_sources": [
-              {
-                "source": "command-center-data.json",
-                "reason": "Last updated 176.3h ago (threshold: 24h)",
-                "age_hours": 176.3
-              }
-            ],
-            "max_age_hours": 176.3
-          },
-          "override_required": true
+          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "details": {},
+          "override_required": false
         }
       ],
       "MX": [
@@ -50603,21 +50154,11 @@
         {
           "gate_id": "C",
           "gate_name": "Data freshness",
-          "status": "BLOCKED",
+          "status": "PASSED",
           "market": "MX",
-          "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-          "details": {
-            "threshold_hours": 24,
-            "stale_sources": [
-              {
-                "source": "command-center-data.json",
-                "reason": "Last updated 176.3h ago (threshold: 24h)",
-                "age_hours": 176.3
-              }
-            ],
-            "max_age_hours": 176.3
-          },
-          "override_required": true
+          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "details": {},
+          "override_required": false
         }
       ],
       "WW": [
@@ -50642,21 +50183,11 @@
         {
           "gate_id": "C",
           "gate_name": "Data freshness",
-          "status": "BLOCKED",
+          "status": "PASSED",
           "market": "WW",
-          "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-          "details": {
-            "threshold_hours": 24,
-            "stale_sources": [
-              {
-                "source": "command-center-data.json",
-                "reason": "Last updated 176.3h ago (threshold: 24h)",
-                "age_hours": 176.3
-              }
-            ],
-            "max_age_hours": 176.3
-          },
-          "override_required": true
+          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "details": {},
+          "override_required": false
         }
       ],
       "EU5": [
@@ -50681,21 +50212,11 @@
         {
           "gate_id": "C",
           "gate_name": "Data freshness",
-          "status": "BLOCKED",
+          "status": "PASSED",
           "market": "EU5",
-          "reason": "Data staleness exceeds 24h threshold. Stale sources: command-center-data.json: Last updated 176.3h ago (threshold: 24h). Publish blocked \u2014 refresh data before proceeding.",
-          "details": {
-            "threshold_hours": 24,
-            "stale_sources": [
-              {
-                "source": "command-center-data.json",
-                "reason": "Last updated 176.3h ago (threshold: 24h)",
-                "age_hours": 176.3
-              }
-            ],
-            "max_age_hours": 176.3
-          },
-          "override_required": true
+          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "details": {},
+          "override_required": false
         }
       ]
     },

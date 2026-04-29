@@ -10,6 +10,9 @@ All Asana writes follow the Guardrail Protocol in asana-command-center.md § Gua
 ## Context Load
 spine.md, current.md, memory.md, richard-writing-style.md, hands.md, amcc.md, rw-tracker.md, asana-command-center.md, ALL intake/ files.
 
+### Details
+
+
 ---
 
 ## Phase 1 — Process Intake

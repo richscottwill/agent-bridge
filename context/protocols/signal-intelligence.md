@@ -1,13 +1,19 @@
 <!-- DOC-0358 | duck_id: protocol-signal-intelligence -->
+
+
 # Signal Intelligence Protocol
 
 Cross-channel topic tracking with reinforcement and decay. Unifies Slack, Email, Asana, and Hedy signals into a single queryable layer in DuckDB.
 
 ---
 
+
+
 ## Core Concept
 
 Every mention of a topic across any channel creates or reinforces a signal in `signal_tracker`. Signals strengthen when the same topic appears again (reinforcement). Signals weaken over time when the topic goes quiet (decay). The result is a live heat map of what matters right now.
+
+
 
 ### Signal Lifecycle
 1. **First mention** → new row in signal_tracker (strength = 1.0)
@@ -15,6 +21,8 @@ Every mention of a topic across any channel creates or reinforces a signal in `s
 3. **Decay** → daily decay: strength *= 0.9 (10% per day). After 14 days of silence, strength ≈ 0.23. After 30 days, strength ≈ 0.04.
 4. **Deactivation** → when strength < 0.1, mark is_active = false. Signal is archived, not deleted.
 5. **Reactivation** → if a deactivated topic reappears, set is_active = true, strength = 1.0, reinforcement_count += 1.
+
+
 
 ### Channel-Specific Ingestion
 
@@ -24,6 +32,8 @@ Every mention of a topic across any channel creates or reinforces a signal in `s
 | Email | AM-1 email triage | Subject line + body keyword extraction | conversation id |
 | Asana | AM-2 task scan | Task name + description keywords, comment mentions | task gid |
 | Hedy | EOD-1 meeting sync | Meeting transcript topic extraction, agenda items | session id |
+
+
 
 ### Topic Normalization
 Topics are lowercase, hyphenated slugs: `oci-rollout`, `au-cpa-cvr`, `mx-budget-ieccp`, `polaris-brand-lp`, `liveramp-enhanced-match`, `kate-skip-level`. The agent normalizes on ingest — "OCI rollout", "OCI Rollout", "oci rollout status" all map to `oci-rollout`.
@@ -45,6 +55,8 @@ Topics are lowercase, hyphenated slugs: `oci-rollout`, `au-cpa-cvr`, `mx-budget-
 | `ai-search-aeo` | AEO, AI Overviews, AI search, zero-click |
 
 ---
+
+
 
 ## Use Case 1: AM-1 Signal Reinforcement (replaces simple dedup)
 
@@ -74,6 +86,8 @@ UPDATE signal_tracker SET is_active = false WHERE signal_strength < 0.1;
 
 ---
 
+
+
 ## Use Case 2: Instant Person-Topic Recall
 
 Query pattern for "What did Brandon say about X?":
@@ -97,6 +111,8 @@ ORDER BY score DESC LIMIT 10;
 
 ---
 
+
+
 ## Use Case 3: WBR Callout Evidence Sourcing
 
 During the callout pipeline analyst step:
@@ -115,9 +131,13 @@ ORDER BY signal_strength DESC LIMIT 10;
 
 ---
 
+
+
 ## Use Case 4: Wiki Freshness Validation + Idea Sourcing
 
 During the weekly wiki lint (EOD Phase 4):
+
+
 
 ### Freshness validation
 For each published wiki article:
@@ -125,6 +145,8 @@ For each published wiki article:
 2. Query signal_tracker: how many recent mentions (last 14 days)?
 3. If recent_mentions > 3 AND article.updated > 14 days ago → **stale article with active discussion**. Flag for update.
 4. If recent_mentions = 0 AND article.updated > 30 days ago → topic has gone cold. Lower priority for refresh.
+
+
 
 ### Idea sourcing
 Query `signal_wiki_candidates` view:
@@ -134,6 +156,10 @@ SELECT * FROM signal_wiki_candidates;
 This returns topics with strong signals (strength >= 3.0), multi-channel spread (>= 2 channels), and multiple mentions (>= 3) that don't yet have a wiki article. These are organic wiki article candidates — the team is talking about it enough that it deserves documentation.
 
 Output format for wiki-editor:
+
+
+
+### Idea sourcing — Details
 ```
 📚 WIKI SIGNAL CANDIDATES:
 - [topic] — strength: [X], mentions: [N], channels: [list], authors: [list], span: [N] days
@@ -141,6 +167,8 @@ Output format for wiki-editor:
 ```
 
 ---
+
+
 
 ## Use Case 5: Meeting Prep Auto-Context
 
@@ -167,6 +195,8 @@ ORDER BY (a.signal_strength + b.signal_strength) DESC LIMIT 5;
 
 ---
 
+
+
 ## Multi-Channel Integration
 
 Each channel serves a different purpose but they all feed the same signal_tracker:
@@ -178,6 +208,8 @@ Each channel serves a different purpose but they all feed the same signal_tracke
 | Asana | Task creation, status changes, comments, due dates | Commitment — a task being created means someone committed to action. Comments indicate active work. |
 | Hedy | Meeting discussions, decisions, action items, speaking patterns | Depth — meeting discussions are richer than Slack messages. Decisions made in meetings often don't appear in other channels. |
 
+
+
 ### Cross-Channel Signal Weighting
 When computing signal_strength for reinforcement:
 - Slack mention: +0.5 (high volume, lower signal-to-noise)
@@ -187,6 +219,8 @@ When computing signal_strength for reinforcement:
 
 These weights are applied during the reinforcement step in Use Case 1.
 
+
+
 ### Cross-Channel Corroboration
 A topic that appears in 3+ channels is qualitatively different from one in 1 channel:
 - 1 channel: noise until reinforced
@@ -194,6 +228,8 @@ A topic that appears in 3+ channels is qualitatively different from one in 1 cha
 - 3+ channels: confirmed trend — auto-flag for AM-2 triage priority boost
 
 ---
+
+
 
 ## DuckDB Objects
 
@@ -206,6 +242,8 @@ A topic that appears in 3+ channels is qualitatively different from one in 1 cha
 | `signal_wiki_candidates` | view | Strong signals without matching wiki articles |
 
 ---
+
+
 
 ## Integration Points
 

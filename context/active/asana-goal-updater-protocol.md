@@ -1,6 +1,9 @@
 <!-- DOC-0335 | duck_id: protocol-asana-goal-updater-protocol -->
 # Asana Goal Updater Protocol
 
+
+## Details
+
 Last updated: 2026-04-03
 
 ## Purpose
@@ -14,6 +17,7 @@ Monthly protocol for updating all 14 of Richard's Asana goals with honest, evide
 **Fallback:** If missed, AM-2 on the next session flags "Goal updates overdue — last updated [date]."
 
 ## Amazon FY26 Calendar Reference
+
 
 - FY26: Feb 2026 – Jan 2027
 - Q1 FY26: Feb – Apr 2026
@@ -47,6 +51,11 @@ Monthly protocol for updating all 14 of Richard's Asana goals with honest, evide
 | 8 | MX test 1: Brand LP | `1213204514049706` | Q1 FY26 | 100% | 0% | 🟡 Q1 ENDED |
 | 9 | Globalized cross-market testing (parent) | `1213245014119131` | FY26 | 3 tests | 0% | 🟢 green |
 | 14 | Paid App Tests | `1213204514049830` | FY26 | 3 tests | 0 | — |
+
+
+#### Key Points
+- Primary function: Testing Goals (milestone-based — pull from task completion)
+- Referenced by other sections for context
 
 ### Project Goals (percentage-based — pull from task/project progress)
 

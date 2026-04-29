@@ -101,6 +101,7 @@ ORDER BY period_key;
 
 ### 4. YoY — W16 this year vs last year, for US
 
+
 ```sql
 SELECT period_key, registrations, cost, cpa
 FROM ps.v_weekly

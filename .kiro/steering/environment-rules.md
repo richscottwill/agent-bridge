@@ -31,9 +31,7 @@ Do NOT modify system files or directories outside these scopes.
 
 ## Security and Compliance
 
-- Maintain Amazon's security standards in all operations
-- Do not expose sensitive information or credentials
-- Respect package and workspace boundaries
+Maintain Amazon's security standards in all operations. Do not expose sensitive information or credentials. Respect package and workspace boundaries.
 
 ## Formatting
 
