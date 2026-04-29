@@ -547,7 +547,13 @@ body {
   </div>
 </div>
 
-<!-- ============ TRACKER SECTION (top — chart + KPIs + weekly detail) ============ -->
+<!-- WR-D3 (2026-04-28): callout narrative renders first (above scorecard +
+     KPIs) so a leader's first read is the written one-liner + supporting
+     prose. Details (Brand/NB, Context, Drivers, Stakeholders) stay at the
+     bottom. -->
+<div id="calloutNarrative"></div>
+
+<!-- ============ TRACKER SECTION (chart + KPIs + weekly detail) ============ -->
 <div id="sec-kpis"></div>
 <!-- WR-D1 Forecast Hit Rate scorecard — renders above KPI row when
      predictions_history has >=3 recent weeks of graded predictions. -->
@@ -600,8 +606,7 @@ body {
   </div>
 </div>
 
-<!-- ============ CALLOUT SECTION (bottom — narrative context) ============ -->
-<div class="wr-section-divider">Callout context for selected week</div>
+<!-- ============ CALLOUT DETAILS (bottom) — channel + context + drivers ============ -->
 <div class="wr-grid" id="calloutGrid">
   <div class="wr-grid-full wr-empty">Loading&hellip;</div>
 </div>
@@ -853,22 +858,22 @@ function render() {
 // ============================================================================
 
 function renderCallout() {
+  // WR-D3 (2026-04-28): split into narrative (top of page) + details
+  // (bottom of page). Narrative + headline render in #calloutNarrative;
+  // brand/nb + context + drivers + stakeholders render in #calloutGrid.
+  renderCalloutNarrative();
+  renderCalloutDetails();
+}
+
+function renderCalloutNarrative() {
   const c = (CALLOUTS.callouts[curMarket] || {})[curWeek];
-  const g = document.getElementById('calloutGrid');
+  const host = document.getElementById('calloutNarrative');
+  if (!host) return;
   if (!c) {
-    g.innerHTML = '<div class="wr-grid-full wr-empty" id="sec-callout">No callout for ' + curMarket + ' ' + curWeek + '</div>';
+    host.innerHTML = '<div class="sec-panel wr-callout-main wr-empty" id="sec-callout" style="margin-bottom:var(--gap-lg)">No callout for ' + curMarket + ' ' + curWeek + '</div>';
     return;
   }
-
-  let html = '';
-
-  // WR-C3 (2026-04-28): headline de-duplication.
-  // full_callout historically starts with the same text as headline, so
-  // rendering full_callout alone buried the one-line summary inside
-  // paragraph 1 of prose. Lift the headline into the h3 and strip it
-  // from the body so the reader scans {market}·{week}·{period} →
-  // one-line summary → detail instead of {market}·{week} → prose that
-  // starts with the summary.
+  // WR-C3 headline de-dup retained here.
   const headlineText = (c.headline || '').trim();
   const fullText = (c.full_callout || '').trim();
   const bodyText = (fullText && headlineText && fullText.startsWith(headlineText))
@@ -876,30 +881,32 @@ function renderCallout() {
     : fullText;
   const bodyHtml = bodyText.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
   const h3Content = headlineText || (curMarket + ' ' + curWeek);
-
-  html += '<div class="sec-panel wr-grid-full wr-callout-main" id="sec-callout">' +
+  host.innerHTML =
+    '<div class="sec-panel wr-callout-main" id="sec-callout" style="margin-bottom:var(--gap-lg)">' +
     '<div class="wr-callout-meta">' + curMarket + ' &middot; ' + curWeek +
       (c.period ? ' &middot; ' + c.period : '') + '</div>' +
     '<h3 class="wr-callout-headline">' + h3Content + '</h3>' +
     (bodyHtml ? '<div class="wr-callout-narrative">' + bodyHtml + '</div>' : '') +
     '</div>';
+}
 
+function renderCalloutDetails() {
+  const c = (CALLOUTS.callouts[curMarket] || {})[curWeek];
+  const g = document.getElementById('calloutGrid');
+  if (!g) return;
+  if (!c) {
+    g.innerHTML = '';  // narrative host already rendered the empty state
+    return;
+  }
+  let html = '';
   // Brand + Non-Brand channel detail
   html += channelCard('Brand', c.brand_detail, 'sec-channels');
   html += channelCard('Nonbrand', c.nb_detail);
-
-  // WR-C5 (2026-04-28): "Projections" sub-panel removed — projection engine
-  // (projection.html) owns forward-looking scenarios. Weekly review's job is
-  // grading last-week's forecast, not duplicating the forecast itself.
-  // Projection data still feeds the OP2 Pacing KPI (WR-C6) via renderKPIs.
-
   // External factors
   html += '<div class="sec-panel wr-grid-full" id="sec-context"><h3>Context &amp; External Factors</h3><ul class="wr-list" id="extList"></ul></div>';
-
   // Drivers + stakeholders
   html += '<div class="sec-panel"><h3>Performance Drivers</h3><ul class="wr-list" id="driverList"></ul></div>';
   html += '<div class="sec-panel"><h3>Stakeholders</h3><div id="stakeCard"></div></div>';
-
   g.innerHTML = html;
 
   renderList('driverList', c.decisions);
