@@ -72,7 +72,7 @@
 .banner-row {
   display: none;
   padding: 10px 14px;
-  font-size: 13px;
+  font-size: var(--size-ui);
   border-radius: 6px;
   line-height: 1.5;
 }
@@ -198,7 +198,7 @@ details.sec-panel:not([open]) + details.sec-panel {
   margin-bottom: var(--gap-md);
   color: var(--color-text-body);
 }
-.modal p { margin-bottom: var(--gap-sm); font-size: 13px; }
+.modal p { margin-bottom: var(--gap-sm); font-size: var(--size-ui); }
 .modal table { width: 100%; margin-top: var(--gap-md); font-size: 12px; }
 .modal th { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--color-panel-border); }
 .modal td { padding: 4px 8px; border-bottom: 1px solid #EEE; }
@@ -237,7 +237,7 @@ details.sec-panel:not([open]) + details.sec-panel {
 
   <!-- View: All 10 markets (2×5 small multiples) -->
   <section id="view-multiples" role="tabpanel" aria-labelledby="view-multiples-tab" style="display:none">
-    <p style="text-align:center;padding:var(--gap-md) var(--gap-lg);font-size:13px;color:var(--color-text-meta)">Click any chart to drill in. Shared controls at top of single-market view set the target driver and period for all 10.</p>
+    <p style="text-align:center;padding:var(--gap-md) var(--gap-lg);font-size:var(--size-ui);color:var(--color-text-meta)">Click any chart to drill in. Shared controls at top of single-market view set the target driver and period for all 10.</p>
     <div style="text-align:center;margin-bottom:var(--gap-sm)">
       <button id="btn-shared-scale" class="disclosure-btn" title="Toggle shared y-axis scale across all 10 markets" aria-pressed="false">Shared y-scale: off</button>
     </div>
@@ -247,7 +247,7 @@ details.sec-panel:not([open]) + details.sec-panel {
 
   <!-- View: Distance to target heat-grid -->
   <section id="view-heatgrid" role="tabpanel" aria-labelledby="view-heatgrid-tab" style="display:none">
-    <p style="text-align:center;padding:var(--gap-md) var(--gap-lg);font-size:13px;color:var(--color-text-meta)">Each cell colored by distance of projected ie%CCP from the market's target. AU uses spend vs OP2.</p>
+    <p style="text-align:center;padding:var(--gap-md) var(--gap-lg);font-size:var(--size-ui);color:var(--color-text-meta)">Each cell colored by distance of projected ie%CCP from the market's target. AU uses spend vs OP2.</p>
     <div class="heatgrid" id="heatgrid" role="grid" aria-label="Market distance to target heatgrid"></div>
     <div class="heatgrid-regional" id="heatgrid-regional"></div>
     <div style="text-align:center;font-size:11px;color:var(--color-text-subtle);margin-top:var(--gap-sm)" aria-label="Heatgrid legend">
@@ -475,7 +475,7 @@ details.sec-panel:not([open]) + details.sec-panel {
   <!-- Feedback bar (6.5.3) — hidden until 3rd projection in session -->
   <div class="sec-panel" id="feedback-bar" style="margin-top:var(--gap-lg);display:none;background:#F6FAFF;border-color:#C9DEFB">
     <h3 style="color:#0066CC">Quick feedback on this projection</h3>
-    <div style="display:flex;gap:var(--gap-md);flex-wrap:wrap;align-items:center;font-size:13px;margin-top:var(--gap-sm)">
+    <div style="display:flex;gap:var(--gap-md);flex-wrap:wrap;align-items:center;font-size:var(--size-ui);margin-top:var(--gap-sm)">
       <label style="cursor:pointer"><input type="radio" name="fb-verdict" value="too_high"> Too high</label>
       <label style="cursor:pointer"><input type="radio" name="fb-verdict" value="too_low"> Too low</label>
       <label style="cursor:pointer"><input type="radio" name="fb-verdict" value="missing_context"> Something's missing</label>
@@ -492,7 +492,7 @@ details.sec-panel:not([open]) + details.sec-panel {
   <!-- Narrative block — always at bottom, standard part of the page -->
   <div class="sec-panel" id="narrative-panel" style="margin-top:var(--gap-lg)">
     <h3>Narrative</h3>
-    <div id="narrative-block" style="font-size:13px;line-height:1.6;color:var(--color-text-body);white-space:pre-wrap">
+    <div id="narrative-block" style="font-size:var(--size-ui);line-height:1.6;color:var(--color-text-body);white-space:pre-wrap">
       <em>Projection summary will render here.</em>
     </div>
   </div>

@@ -47,6 +47,7 @@
   --size-hero-xs: 48px;        /* hero at mobile */
   --size-section: 24px;        /* section headers */
   --size-body: 16px;           /* general body */
+  --size-ui: 13px;             /* buttons, chips, inputs, dense UI (P5-12) */
   --size-meta: 12px;           /* timestamps, units, provenance */
 
   --weight-hero: 700;
@@ -117,7 +118,11 @@ html, body {
 }
 
 .hero-unit {
-  font-size: 0.65em;
+  /* P5-12 (2026-04-28): was 0.65em which computed to 10.4px from the
+     inherited 16px body — fractional px triggered browser sub-pixel
+     rendering noise. Pinned to 11px (the micro-caption size) so the
+     spend/regs unit label reads cleanly next to the hero number. */
+  font-size: 11px;
   color: var(--color-text-meta);
   font-weight: 400;
   margin-left: 8px;
@@ -257,7 +262,7 @@ html, body {
   padding: 8px 18px;
   border-radius: 18px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: var(--size-ui);
   font-family: inherit;
   transition: background var(--duration-quick) var(--ease-reveal),
               border-color var(--duration-quick) var(--ease-reveal);
@@ -317,7 +322,7 @@ html, body {
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 13px;
+  font-size: var(--size-ui);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   transition: flex var(--duration-reveal) var(--ease-reveal);
@@ -353,7 +358,7 @@ html, body {
   padding: 0 var(--gap-md);
   color: white;
   background: var(--color-nb);
-  font-size: 13px;
+  font-size: var(--size-ui);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
@@ -401,7 +406,7 @@ html, body {
   color: white;
   margin-bottom: 4px;
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: var(--size-ui);
 }
 .mpe-tooltip .tt-value {
   font-family: var(--font-mono);
@@ -579,7 +584,7 @@ html, body {
   border-bottom: 1px solid var(--color-panel-border);
 }
 .drawer-tile:last-child { border-bottom: none; }
-.drawer-tile-label { font-size: 13px; color: var(--color-text-body); }
+.drawer-tile-label { font-size: var(--size-ui); color: var(--color-text-body); }
 .drawer-tile-value {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
@@ -644,7 +649,7 @@ html, body {
   color: var(--color-text-body);
   padding: 6px 10px;
   border-radius: 4px;
-  font-size: 13px;
+  font-size: var(--size-ui);
   font-family: inherit;
   font-variant-numeric: tabular-nums;
 }

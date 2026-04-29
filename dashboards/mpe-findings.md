@@ -511,6 +511,15 @@ cleanup first, then typography, then features, then deferred items last.
 - **Status:** done
 - **Verification:** Single `Alerts (N)` heading (was `Model alerts (N)`) renders anomalies + solver warnings ordered by severity (error → warn → info). Solver warnings surface as info-level rows; TARGET_UNREACHABLE and LOCKED_YTD escalate to error, VERY_WIDE_CI and OUTSIDE_TOLERANCE to warn. The old standalone `Warnings` sec-panel is hidden by `renderWarnings` (now a no-op shim that collapses the wrapper card). Severity label + pill color preserved from P3-01 CHECK_LABELS translation so the voice stays readable.
 - **Blast radius:** `renderMarketAnomalies` signature extended to accept `out`; call site in `renderMarket` passes through. `renderWarnings` downgraded to shim. HTML heading "Model alerts" → "Alerts". No data shape / solver / chart changes. Summary strip at the top still links to `#anomalies-panel` which now covers both streams.
+- **Commit:** `be3fc20`
+
+### P5-12 · Typography consolidation — introduce --size-ui, kill fractional px
+- **Source:** R19 #12 (HIGH)
+- **Status:** done (scoped subset)
+- **Scope decision:** Richard's "like the look right now" directive blocks the full 15 → 5 consolidation because dropping `--size-hero` from 96px or `--size-meta` from 12px would visibly shrink the hero number / captions. Shipped the invisible subset: introduced `--size-ui: 13px` as a named token, consolidated the six CSS `font-size: 13px` hardcodes + the eight inline HTML `font-size:13px` / `font-size: 13px` uses to `var(--size-ui)`, and killed the `0.65em` fractional on `.hero-unit` (which computed to the 10.4px Local Kiro's probe flagged) by pinning it to 11px.
+- **Verification:** grep `font-size: 13px` in projection-design-system.css + projection.html now returns 0 hits. grep `var(--size-ui)` returns 14 hits across both files. grep `0.65em` returns 0. No visible change to hero number, meta captions, or any existing element — only the sub-pixel noise on `.hero-unit` is gone.
+- **Deferred from spec:** full 15 → 5 consolidation (renaming `--size-hero` → `--size-display` at 64px, `--size-section` → `--size-title` at 24px, `--size-body` → 16px confirmed, `--size-meta` 12 → 11). All visible resizes, blocked by the "like the look" constraint. Token namespace diverges slightly from the mockup's proposed names (`--size-ui` adopted, other proposed renames not applied).
+- **Blast radius:** projection-design-system.css (6 line changes + 1 comment + 1 new token line) and projection.html (8 inline-style line changes). No JS. No data. No chart encoding.
 - **Commit:** <filled after commit>
 ---
 
