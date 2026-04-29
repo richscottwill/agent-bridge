@@ -12,6 +12,9 @@ updated: 2026-04-12
 
 Reviewer: wiki-critic | Date: 2026-04-05 | Mode: Review (pre-publish)
 
+#### Batch 4 — Blind Eval A — Details
+
+
 ---
 
 ## 1. ie%CCP Planning & Optimization Framework (v2)

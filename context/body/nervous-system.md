@@ -57,51 +57,7 @@ The body's quality-control layer. Measures outcomes against predictions, scores 
 
 
 
-#### Loop 1: Decision Audit
-
-
-
-
-
-
-##### Protocol
-Brain | Monthly | Score decisions against outcomes: VALIDATED (prediction confirmed), PARTIALLY (mixed), INVALIDATED (prediction wrong), PENDING (data insufficient). On INVALIDATED → review and update the driving principle. Worked example: D3 predicted OCI would lift regs 10-20% in CA. If CA shows +15% after 30d → VALIDATED. If lift <5% → PARTIALLY. If CPA worsens → INVALIDATED, review "phase all rollouts" principle.
-
-
-
-
-
-
-##### Pending Decisions
-5 decisions awaiting audit: D1, D2, D3, D4, D7.
-
-
-
-
-
-
-##### Audit Triggers
-| Decision | Data Needed | Target Date |
-|----------|-------------|-------------|
-| D1, D2 | CA/JP/EU3 performance data | Jul 2026 |
-| D3 | Monthly CPA + OCI conversion data | May 2026 |
-| D4 | UK +31% regs confirmation (IT when volume sufficient) | Ongoing |
-| D7 | Polaris +30d deep dive results | Ongoing |
-
-
-
-
-
-
-##### Scoring Example
-D3 (OCI ROW rollout): CA OCI +10-20% reg lift after 30d → VALIDATED. Lift <5% or CPA worsens → PARTIALLY. Tracking failures or negative ROI → INVALIDATED. Target scoring date: May 2026 when CA data available.
-
-
-
-
-
-
-### Loop 2: Prediction Scoring
+#### Loop 1: Decision Audit ##### Protocol Brain | Monthly | Score decisions against outcomes: VALIDATED (prediction confirmed), PARTIALLY (mixed), INVALIDATED (prediction wrong), PENDING (data insufficient). On INVALIDATED → review and update the driving principle. Worked example: D3 predicted OCI would lift regs 10-20% in CA. If CA shows +15% after 30d → VALIDATED. If lift <5% → PARTIALLY. If CPA worsens → INVALIDATED, review "phase all rollouts" principle. ##### Pending Decisions 5 decisions awaiting audit: D1, D2, D3, D4, D7. ##### Audit Triggers | Decision | Data Needed | Target Date | |----------|-------------|-------------| | D1, D2 | CA/JP/EU3 performance data | Jul 2026 | | D3 | Monthly CPA + OCI conversion data | May 2026 | | D4 | UK +31% regs confirmation (IT when volume sufficient) | Ongoing | | D7 | Polaris +30d deep dive results | Ongoing | ##### Scoring Example D3 (OCI ROW rollout): CA OCI +10-20% reg lift after 30d → VALIDATED. Lift <5% or CPA worsens → PARTIALLY. Tracking failures or negative ROI → INVALIDATED. Target scoring date: May 2026 when CA data available. ### Loop 2: Prediction Scoring
 Eyes + agent text outputs | Daily + weekly | Score predicted QA and agent confidence: HIT/MISS/SURPRISE. Target ≥60%. **Reactivated 2026-04-22** after round-2 external-AI-review blind test confirmed the "Agent Confidence Calibration" proposal duplicated this loop — the gap was activation, not a missing metric.
 - **Reactivation trigger:** AM-2 hook writes ≥3 predicted questions to Eyes "Predicted Questions" section. Once present, Loop 2 auto-resumes daily scoring against meeting outcomes and Slack signals. **Until AM-2 is writing predictions again, score agent text-output confidence instead** (see scope extension below).
   - *Example:* When reactivation trigger:** am-2 hook writes ≥3 predic, the expected outcome is verified by checking the result.

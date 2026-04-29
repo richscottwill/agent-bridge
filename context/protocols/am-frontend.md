@@ -99,9 +99,7 @@ DuckDB-first queries (use instead of live MCP when AM-Backend has synced):
 7. aMCC
 8. SYSTEM HEALTH
 
-
-
-
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ### HEADS UP Section (from DuckDB + digests)
 Cross-reference slack-digest.md `[ACTION-RW]` items with structured DuckDB views:
 ```sql

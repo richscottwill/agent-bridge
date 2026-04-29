@@ -109,7 +109,6 @@ WHERE market = 'US' AND period_key IN ('2025-W16', '2026-W16')
 ORDER BY period_key;
 ```
 
-### 5. Quarter-to-date across every market
 
 ```sql
 SELECT market, registrations, cost, cpa

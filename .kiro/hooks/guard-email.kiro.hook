@@ -5,6 +5,9 @@
   "when": {
     "type": "preToolUse",
     "toolTypes": [".*email_reply.*", ".*email_send.*", ".*email_forward.*"]
+
+#### preamble — Details
+
   },
   "then": {
     "type": "askAgent",

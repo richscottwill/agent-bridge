@@ -22,6 +22,7 @@ tags: [market-wiki, mx]
 replaces: mx-market-wiki, mx-ps-handoff-guide
 ---
 
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 # MX Paid Search — Market Wiki
 
 > Canonical reference for Mexico. Includes Lorena's onboarding context (formerly in the separate handoff guide, now merged here).
@@ -70,15 +71,7 @@ MX is outperforming plan by 32% on registrations. The ie%CCP at 93% is near the 
 
 ---
 
-## Key Stakeholders
-
-| Name | Role | Tone | Key Context |
-|------|------|------|-------------|
-| Lorena Alvarez Larrea | Primary PS stakeholder (L5) | Professional, friendly. "Hi!" openers, signs "Thanks! Lorena Alvarez" | New to PS (since 3/17). Actively engaging — Q2 spend request shows she is thinking ahead on PO. Needs keyword data, negative keyword list, campaign overview. |
-| Carlos Palmos | Former PS stakeholder (L5) | Professional | Transitioned to CPS ~3/17. MX invoice delegation VOID — needs new owner. |
-| Pedro Maldonado | Country Leader (L7) | — | Carlos and Lorena's skip. |
-
-### What Lorena Needs to Know
+## Key Stakeholders | Name | Role | Tone | Key Context | |------|------|------|-------------| | Lorena Alvarez Larrea | Primary PS stakeholder (L5) | Professional, friendly. "Hi!" openers, signs "Thanks! Lorena Alvarez" | New to PS (since 3/17). Actively engaging — Q2 spend request shows she is thinking ahead on PO. Needs keyword data, negative keyword list, campaign overview. | | Carlos Palmos | Former PS stakeholder (L5) | Professional | Transitioned to CPS ~3/17. MX invoice delegation VOID — needs new owner. | | Pedro Maldonado | Country Leader (L7) | — | Carlos and Lorena's skip. | ### What Lorena Needs to Know
 1. Richard manages the Google Ads account directly
 2. Lorena's role: market context, keyword opportunities, budget confirmation, strategic direction
 3. Richard handles: campaign builds, bid management, reporting, optimization

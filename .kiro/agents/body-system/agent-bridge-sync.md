@@ -124,6 +124,7 @@ Before finishing, verify:
 - **Structural over cosmetic** — update the protocol when reality drifts, don't reformat for aesthetics
 - **Invisible over visible** — the repo should just be current; Richard shouldn't have to think about maintenance
 
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ## Karpathy Coordination
 
 Organs (files in `~/shared/context/body/`) are Karpathy-governed. The sync agent NEVER modifies organs — it only commits them. If an organ looks wrong or bloated, that's Karpathy's problem, not yours.

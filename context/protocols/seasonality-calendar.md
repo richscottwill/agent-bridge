@@ -60,8 +60,7 @@ Impact percentages below are **measured from actual ps.metrics data** (2025-2026
 | Nov 27 | Black Friday | +10-15% | Est. | Growing in AU. |
 | Dec 25-26 | Christmas + Boxing Day | -39.8% | 2025 W52 vs W51 | Multi-day shutdown. |
 
-
-
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ## WW — Worldwide Testing Markets
 
 Covers all 10 PS markets. The WW Testing state file needs to know which markets are affected each week. Organized by market, then aggregated into WW-level impact events.

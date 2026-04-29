@@ -292,16 +292,9 @@ Another team owns a reporting workflow that's consistently late and error-prone.
 
 
 
-### Back-Channeling (Positive)
 - Pre-sell ideas 1:1 before the group meeting. Let people ask questions privately where they don't lose face.
 - Emotional buy-in matters as much as information exchange: "You consulted me, you listened, you made me feel important."
 - Even if two proposals are equal, the one from the person who back-channeled wins — because the decision-maker trusts they can work with that person when things go wrong.
-
-
-
-
-
-
 
 ### Dealing with Difficult People in Other Orgs
 - Understand why they're valued by their org first. Their org isn't saying "we know they're evil but they get stuff done." They're saying "sharp elbows, but high output."

@@ -85,6 +85,9 @@ Row counts must match expected inserts.
 - After EOD-1 meeting-to-task pipeline (inserts into meeting_analytics, meeting_highlights, workflow_executions)
 - After any DuckDB schema migration
 
+#### When to Run — Details
+
+
 
 
 

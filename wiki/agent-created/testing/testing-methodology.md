@@ -27,6 +27,7 @@ The PS team follows a consistent methodology across all workstreams: identify a 
 
 ## The Four Stages
 
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ### 1. Hypothesis and Baseline
 
 Every test starts with a measurable claim. "OCI bidding will reduce Non-Brand CPA by 30% or more in the US" is a hypothesis. "We should try OCI" is not.

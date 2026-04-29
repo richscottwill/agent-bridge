@@ -59,10 +59,7 @@ These are live. They execute without Richard thinking.
 ### EOD Hook (1 unified: backend + frontend)
 - **EOD** (`eod`) — Backend: Hedy meeting ingestion, Asana reconciliation (delta sync, daily reset, recurring, completion moves, blockers), organ cascade, compression audit, workflow health, context enrichment, DuckDB snapshots, git sync, Karpathy experiments, SharePoint sync. Frontend: day summary, decisions, portfolio report, system health, experiment results, Slack DM. ~20 min. Protocol: `eod-backend.md` + `eod-frontend.md`
 
-
-
-
-
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ### Safety Guards (preToolUse hooks)
 | Guard | Rule | Audit |
 |-------|------|-------|

@@ -7,21 +7,7 @@ This document maps every hook to its protocol file, trigger type, and health sta
 
 ---
 
-## Routine Hooks (daily sequence)
-**Sequence:** AM-Backend → AM-Frontend → (workday) → EOD
-**SharePoint sync:** AM-Backend pushes to `Kiro-Drive/system-state/` in Phase 6.5. EOD pushes in Phase 7.5. Both non-blocking. Published artifacts go to `Artifacts/wiki-sync/` via the separate sharepoint-sync hook (different pipeline, same MCP server).
----
-
-| Hook | File | Trigger | Protocol File | Version | Status |
-|------|------|---------|--------------|---------|--------|
-| AM-Backend | `am-auto.kiro.hook` | userTriggered | `am-auto.md` + `am-backend-parallel.md` | 4.0.0 | ✅ Active |
-| AM-Frontend | `am-triage.kiro.hook` | userTriggered | `am-frontend.md` + `am-triage.md` | 3.0.0 | ✅ Active |
-| EOD | `eod.kiro.hook` | userTriggered | `eod-backend.md` + `eod-frontend.md` | 7.0.0 | ✅ Active |
-
-
-
-
-## Guard Hooks (always-on, preToolUse)
+## Routine Hooks (daily sequence) **Sequence:** AM-Backend → AM-Frontend → (workday) → EOD **SharePoint sync:** AM-Backend pushes to `Kiro-Drive/system-state/` in Phase 6.5. EOD pushes in Phase 7.5. Both non-blocking. Published artifacts go to `Artifacts/wiki-sync/` via the separate sharepoint-sync hook (different pipeline, same MCP server). --- | Hook | File | Trigger | Protocol File | Version | Status | |------|------|---------|--------------|---------|--------| | AM-Backend | `am-auto.kiro.hook` | userTriggered | `am-auto.md` + `am-backend-parallel.md` | 4.0.0 | ✅ Active | | AM-Frontend | `am-triage.kiro.hook` | userTriggered | `am-frontend.md` + `am-triage.md` | 3.0.0 | ✅ Active | | EOD | `eod.kiro.hook` | userTriggered | `eod-backend.md` + `eod-frontend.md` | 7.0.0 | ✅ Active | ## Guard Hooks (always-on, preToolUse)
 
 | Hook | File | Trigger Pattern | What It Guards | Version | Status |
 |------|------|----------------|---------------|---------|--------|
@@ -115,6 +101,7 @@ This document maps every hook to its protocol file, trigger type, and health sta
 
 ---
 
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ## Portability Notes
 
 If migrating to a new platform:
