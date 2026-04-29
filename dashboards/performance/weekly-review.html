@@ -512,7 +512,17 @@ let CALLOUTS = null;  // callout-data.json
 let FORECAST = null;  // forecast-data.json
 let curMarket = null;
 let curWeek = null;
-let curMetric = 'regs';
+// WR-P2 (2026-04-28): metric preference is per-market in localStorage.
+// JP/AU default to `cost` on first visit because regs is degenerate for
+// spend-only markets. Restored from the map whenever curMarket changes.
+const metricByMarket = (() => {
+  try { return JSON.parse(localStorage.getItem('wr-metric-by-market') || '{}'); }
+  catch (e) { return {}; }
+})();
+function defaultMetricForMarket(m) {
+  return metricByMarket[m] || (['JP', 'AU'].includes(m) ? 'cost' : 'regs');
+}
+let curMetric = 'regs';  // reseeded from the map inside init() after curMarket resolves
 let chart = null;
 let chartMode = 'default';
 
@@ -564,6 +574,10 @@ function init() {
     ? urlWeek
     : (validWeeks[0] || calloutWeeks[0] || 'W' + (FORECAST.max_week || 15));
 
+  // WR-P2: seed curMetric from the per-market map now that curMarket is
+  // known. JP/AU default to 'cost' via defaultMetricForMarket.
+  curMetric = defaultMetricForMarket(curMarket);
+
   // Market tabs
   const tabs = document.getElementById('marketTabs');
   markets.forEach(m => {
@@ -575,7 +589,12 @@ function init() {
     b.textContent = forecastOnly ? m + '\u2020' : m;  // dagger indicates no callout
     b.dataset.market = m;  // WR-C7: stable ref for active-state toggle
     if (forecastOnly) b.title = 'Forecast only — no callout narrative for this market yet.';
-    b.onclick = () => { curMarket = m; render(); };
+    b.onclick = () => {
+      curMarket = m;
+      // WR-P2: restore this market's preferred metric on switch.
+      curMetric = defaultMetricForMarket(curMarket);
+      render();
+    };
     tabs.appendChild(b);
   });
 
@@ -604,7 +623,14 @@ function init() {
     b.className = 'wr-tab' + (key === curMetric ? ' active' : '');
     b.textContent = label;
     b.dataset.metric = key;
-    b.onclick = () => { curMetric = key; renderKPIs(); };
+    b.onclick = () => {
+      curMetric = key;
+      // WR-P2: persist the choice against the current market.
+      metricByMarket[curMarket] = curMetric;
+      try { localStorage.setItem('wr-metric-by-market', JSON.stringify(metricByMarket)); }
+      catch (e) { /* quota exceeded — silent */ }
+      renderKPIs();
+    };
     metricTabs.appendChild(b);
   });
 
