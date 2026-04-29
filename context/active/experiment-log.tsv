@@ -540,3 +540,6 @@ run_W18_1777478629	asana-duckdb-sync	Priority Enum Values	ADD	information_retrie
 run_W18_1777478629	hook-am-backend	preamble	COMPRESS	information_retrieval	106	53	-53	0.200	0.000	0.000	-1.000	4	REVERT	True
 run_W18_1777478629	device	SharePoint Durability Layer (Protocol: `sharepoint	REMOVE	information_retrieval	2638	2469	-169	0.143	0.000	0.000	-1.000	6	REVERT	True
 run_W18_1777478629	signal-to-task-pipeline	Signal Classification	REMOVE	information_retrieval	1250	1208	-42	0.268	0.000	0.000	-1.000	18	REVERT	True
+run_W18_1777478629	memory	Cross-Cutting Dynamics	COMPRESS	information_retrieval	2463	2463	0	0.000	0.000	0.000	0.000	11	REVERT	False
+run_W18_1777478629	script-parse-au-search	--- SECTION A: All keywords by spend ---	SPLIT	information_retrieval	569	580	11	0.900	0.833	0.900	0.067	55	KEEP	False
+run_W18_1777478629	state-file-engine	Layer 1: AM-Backend Step 2E — Content Generation (	REMOVE	information_retrieval	2049	1665	-384	0.158	0.000	0.000	-1.000	18	REVERT	True

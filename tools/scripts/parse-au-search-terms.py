@@ -68,6 +68,8 @@ print(f"{'Keyword':<42} {'Campaign':<28} {'Ad Group':<32} {'Cl':>4} {'Imp':>6} {
 print("-" * 130)
 for key, d in sorted_kw[:80]:
     cpc = d['cost']/d['clicks'] if d['clicks'] else 0
+
+### --- SECTION A: All keywords by spend --- — Details
     reg = '0' if d['campaign'] in zero_reg else '?'
     if d['campaign'] in ('AU_Brand_Exact','AU_Brand_Phrase'):
         reg = 'BRAND'
