@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Weekly Regime Fit",
+  "description": "Refresh ps.regime_fit_state — runs the Bayesian weekly update for every active structural regime in every market. As post-onset weeks accumulate, fitted peak_multiplier / current_multiplier / fitted_half_life_weeks converge on data-revealed values, with confidence growing weekly. Normally runs automatically as Step 0 of refresh-forecast.py; this hook provides a standalone invocation and a reminder pathway.",
+  "version": "2",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "cd /home/prichwil/shared/tools && python3 -m prediction.fit_regime_state --all-markets"
+  }
+}
