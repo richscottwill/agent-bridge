@@ -1121,6 +1121,16 @@ function renderThreeQ() {
   const proj = c.projections || {};
   const pe = proj.month_end;
 
+  // WR-B1-1 (2026-04-29): rollup markets (WW / EU5 / NA) have sparse
+  // brand_detail + nb_detail — only {regs, regs_yoy, regs_vs4wk}, no
+  // cpa_wow / cvr_wow fields. So the per-country renderThreeQ path
+  // returns null for card 1 ("CPA ... on Brand, ... on NB"), leaving
+  // an em-dash. Detect rollup, derive card 1 from metrics.cpa_yoy +
+  // cpa_vs4wk (which DO exist on rollup metrics), and derive card 2
+  // WoW by looking up the prior week's rollup metrics from CALLOUTS.
+  const REGIONS = ['WW', 'EU5', 'NA'];
+  const isRollup = REGIONS.includes(curMarket);
+
   const fmtSigned = (v, invert) => {
     if (v == null || !Number.isFinite(v)) return null;
     const sign = v > 0 ? '+' : '';
@@ -1128,9 +1138,21 @@ function renderThreeQ() {
     return { abs: Math.abs(v).toFixed(0), sign: sign, dir: dir, raw: v };
   };
 
-  // 1. Customer — CPA shift on Brand vs NB; fallback to CVR when CPA missing.
+  // 1. Customer — CPA shift.
+  //    Per-country: Brand vs NB CPA WoW split.
+  //    Rollup:      overall CPA YoY + vs-4wk delta.
   let qCustomer = '\u2014';
-  {
+  if (isRollup) {
+    const cpaYoy = fmtSigned(m.cpa_yoy, true);
+    const cpaV4w = fmtSigned(m.cpa_vs4wk, true);
+    if (cpaYoy && cpaV4w) {
+      qCustomer = `Blended CPA ${cpaYoy.dir} ${cpaYoy.abs}% YoY, ${cpaV4w.dir} ${cpaV4w.abs}% vs 4wk.`;
+    } else if (cpaYoy) {
+      qCustomer = `Blended CPA ${cpaYoy.dir} ${cpaYoy.abs}% YoY.`;
+    } else if (cpaV4w) {
+      qCustomer = `Blended CPA ${cpaV4w.dir} ${cpaV4w.abs}% vs 4wk avg.`;
+    }
+  } else {
     const bCpa = fmtSigned(brand.cpa_wow, true);
     const nCpa = fmtSigned(nb.cpa_wow, true);
     if (bCpa && nCpa) {
@@ -1145,25 +1167,48 @@ function renderThreeQ() {
     }
   }
 
-  // 2. Business — regs WoW + YoY + which channel led.
+  // 2. Business — regs WoW + YoY + dominant channel.
+  //    Per-country: uses m.regs_wow (present).
+  //    Rollup:      m.regs_wow absent; derive from prev-week lookup.
   let qBusiness = '\u2014';
   {
-    const rWow = fmtSigned(m.regs_wow, false);
+    let wowPct = m.regs_wow;
+    if (!Number.isFinite(wowPct)) {
+      // Derive from prev-week callout for this market.
+      const weeks = CALLOUTS.weeks || [];
+      const idx = weeks.indexOf(curWeek);
+      const prev = (idx >= 0 && idx + 1 < weeks.length)
+        ? (CALLOUTS.callouts[curMarket] || {})[weeks[idx + 1]]
+        : null;
+      const prevRegs = prev && prev.metrics && prev.metrics.regs;
+      if (Number.isFinite(prevRegs) && prevRegs > 0 && Number.isFinite(m.regs)) {
+        wowPct = (m.regs - prevRegs) / prevRegs * 100;
+      }
+    }
+    const rWow = fmtSigned(wowPct, false);
     const rYoy = fmtSigned(m.regs_yoy, false);
     if (rWow && Number.isFinite(m.regs)) {
       const regsStr = m.regs >= 1000
         ? (m.regs / 1000).toFixed(1) + 'K'
         : String(Math.round(m.regs));
       const yoyPart = rYoy ? `, ${rYoy.sign}${rYoy.abs}% YoY` : '';
-      const leader = (nb.regs_wow || 0) > (brand.regs_wow || 0) ? 'NB led' : 'Brand led';
+      // Dominant-channel logic. Per-country: compare WoW deltas. Rollup:
+      // compare raw brand_regs vs nb_regs shares.
+      let leader;
+      if (isRollup && Number.isFinite(m.brand_regs) && Number.isFinite(m.nb_regs)) {
+        leader = m.nb_regs > m.brand_regs
+          ? `NB ${Math.round(m.nb_regs / m.regs * 100)}% of total`
+          : `Brand ${Math.round(m.brand_regs / m.regs * 100)}% of total`;
+      } else {
+        leader = (nb.regs_wow || 0) > (brand.regs_wow || 0) ? 'NB led' : 'Brand led';
+      }
       qBusiness = `${regsStr} regs (${rWow.sign}${rWow.abs}% WoW${yoyPart}). ${leader}.`;
     } else if (rWow) {
       qBusiness = `Regs ${rWow.dir} ${rWow.abs}% WoW.`;
     }
   }
 
-  // 3. Pacing — prefers projections.month_end.vs_op2_spend; falls back to
-  // last-week vs OP2 weekly when projections are empty (current weeks).
+  // 3. Pacing — unchanged from R1 (already works on WW via fallback).
   let qPacing = '\u2014';
   if (pe && Number.isFinite(pe.vs_op2_spend)) {
     const v = pe.vs_op2_spend;
@@ -1172,7 +1217,6 @@ function renderThreeQ() {
     const period = pe.period || 'Month';
     qPacing = `${period} projected ${sign}${v.toFixed(1)}% vs OP2. Pacing ${where}.`;
   } else {
-    // Fallback: weekly actual vs weekly OP2 from forecast.
     const weeks = (FORECAST.weekly && FORECAST.weekly[curMarket]) || [];
     const maxWk = FORECAST.max_week || 15;
     const actualWeeks = weeks.filter(w => w.wk <= maxWk && (w.regs > 0 || w.cost > 0));
