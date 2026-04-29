@@ -683,6 +683,8 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
   text-transform: none;
   letter-spacing: 0;
   margin-bottom: var(--gap-sm);
+  /* WR-P6: styled paragraph, not a heading — changed from <h3> to <p class> so
+     screen readers don't announce the one-liner as a section heading. */
 }
 /* Legacy selectors kept for any other code paths — now unused on the
    rendered page after WR-C3 but harmless. */
@@ -721,7 +723,7 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
 <div class="wr-frame">
 
 <!-- TOC strip — compact jump-to nav -->
-<div class="wr-toc">
+<nav class="wr-toc" aria-label="Page sections">
   <span class="wr-toc-label">Jump to</span>
   <!-- WR-P5 (2026-04-29): TOC order now matches rendered order after
        D3 narrative-first + D6 variance + D5 three-questions landed.
@@ -744,10 +746,10 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
 </div>
 
 <!-- Header -->
-<div class="wr-header">
+<header class="wr-header">
   <h1>Weekly Review</h1>
   <p class="wr-header-meta">Callout narrative + full-year tracker &middot; <span class="wr-ts-accent" id="dataTs"></span></p>
-</div>
+</header>
 
 <!-- Controls -->
 <div class="wr-controls">
@@ -759,7 +761,7 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
     <span class="wr-control-label">Week</span>
     <div class="wr-week-nav">
       <button class="wr-nav-btn" id="prevWeek" aria-label="Previous week">&#9664;</button>
-      <select id="weekSelect" class="control-input"></select>
+      <select id="weekSelect" class="control-input" aria-label="Week"></select>
       <button class="wr-nav-btn" id="nextWeek" aria-label="Next week">&#9654;</button>
     </div>
   </div>
@@ -775,7 +777,7 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
 <!-- WR-D7 (2026-04-28): prior-week thread strip. Current + 2 prior weeks
      as a 3-card strip so the reader has running context without
      clicking back. Active week highlighted with brand-blue border. -->
-<div class="wr-thread-strip" id="threadStrip" style="display:none"></div>
+<div class="wr-thread-strip" id="threadStrip" role="group" aria-label="Recent weeks" style="display:none"></div>
 
 <!-- WR-D5 (2026-04-28): three-question framing below the narrative.
      Customer experience / Business performance / Pacing to target.
@@ -810,7 +812,7 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
      "where are we" (KPIs) and "how trustworthy is the forecast" (scorecard)
      land in one glance. Previously stacked with a 152px gap (WR-P4).
      Single column under 1100px. -->
-<div id="sec-kpis"></div>
+<main><div id="sec-kpis"></div>
 <div class="wr-kpi-scorecard-grid" id="sec-kpi-scorecard">
   <div class="wr-kpi-row" id="kpiRow"></div>
   <!-- WR-D1 Forecast Hit Rate scorecard — renders when predictions_history
@@ -830,18 +832,18 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
 <div class="wr-chart-grid" id="sec-charts">
   <div class="sec-panel" id="sec-trend">
     <h3><span>What happened — actuals vs OP2</span></h3>
-    <div class="wr-chart-wrap"><canvas id="trendChart"></canvas></div>
+    <div class="wr-chart-wrap"><canvas id="trendChart" role="img" aria-label="Weekly trend: actuals vs OP2 target"></canvas></div>
   </div>
   <div class="sec-panel" id="sec-calibration">
-    <h3 class="wr-calib-head">
-      <span>How did we do — forecast vs actual</span>
+    <div class="wr-calib-head">
+      <h3 style="margin:0"><span>How did we do — forecast vs actual</span></h3>
       <div class="wr-chart-axis-toggle" id="calibAxisToggle" role="group" aria-label="Calibration axis filter">
         <button class="wr-tab wr-chart-mode-btn active" data-axis="regs">Regs</button>
         <button class="wr-tab wr-chart-mode-btn" data-axis="spend">Spend</button>
         <button class="wr-tab wr-chart-mode-btn" data-axis="both">Both</button>
       </div>
-    </h3>
-    <div class="wr-chart-wrap"><canvas id="calibrationChart"></canvas></div>
+    </div>
+    <div class="wr-chart-wrap"><canvas id="calibrationChart" role="img" aria-label="Forecast calibration: first prediction vs latest prediction vs actual"></canvas></div>
   </div>
 </div>
 <!-- WR-S1 (2026-04-29): Weekly Detail wrapped in <details> collapsed by default.
@@ -880,6 +882,7 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
      time is always "now" and wasn't useful. Single data-freshness
      timestamp lives in the header #dataTs. -->
 
+</main>
 </div> <!-- /.wr-frame -->
 
 <script>
@@ -1160,7 +1163,7 @@ function renderCalloutNarrative() {
     (sinceHtml || '') +
     '<div class="wr-callout-meta">' + curMarket + ' &middot; ' + curWeek +
       (c.period ? ' &middot; ' + c.period : '') + '</div>' +
-    '<h3 class="wr-callout-headline">' + h3Content + '</h3>' +
+    '<p class="wr-callout-headline" role="text">' + h3Content + '</p>' +
     (bodyHtml ? '<div class="wr-callout-narrative">' + bodyHtml + '</div>' : '') +
     '</div>';
 }
