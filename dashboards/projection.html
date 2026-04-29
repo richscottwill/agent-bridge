@@ -350,15 +350,25 @@ details.sec-panel:not([open]) + details.sec-panel {
         <div class="hero-kpi-value" id="kpi-ieccp">—</div>
         <div class="hero-kpi-delta" id="kpi-ieccp-delta"></div>
       </div>
-      <div class="hero-kpi">
-        <div class="hero-kpi-label">vs OP2 Spend</div>
-        <div class="hero-kpi-value" id="kpi-op2-spend">—</div>
-        <div class="hero-kpi-delta" id="kpi-op2-spend-delta"></div>
-      </div>
-      <div class="hero-kpi">
-        <div class="hero-kpi-label">vs OP2 Regs</div>
-        <div class="hero-kpi-value" id="kpi-op2-regs">—</div>
-        <div class="hero-kpi-delta" id="kpi-op2-regs-delta"></div>
+      <!-- P5-7 (2026-04-28): merged VS OP2 Spend + VS OP2 Regs into one tile.
+           Both sub-metrics + their directional-color arrows (P2-14) are
+           preserved; shared "vs OP2 Plan" label removes the redundant
+           double-labeling that the original two tiles carried. -->
+      <div class="hero-kpi kpi-op2-combined" id="kpi-tile-op2">
+        <div class="hero-kpi-label">vs OP2 Plan</div>
+        <div class="kpi-op2-rows">
+          <div class="kpi-op2-row">
+            <span class="kpi-op2-row-label">Spend</span>
+            <span class="hero-kpi-value kpi-op2-row-value" id="kpi-op2-spend">—</span>
+            <span class="hero-kpi-delta kpi-op2-row-delta" id="kpi-op2-spend-delta"></span>
+          </div>
+          <div class="kpi-op2-row">
+            <span class="kpi-op2-row-label">Regs</span>
+            <span class="hero-kpi-value kpi-op2-row-value" id="kpi-op2-regs">—</span>
+            <span class="hero-kpi-delta kpi-op2-row-delta" id="kpi-op2-regs-delta"></span>
+          </div>
+        </div>
+        <div class="kpi-op2-detail" id="kpi-op2-detail"></div>
       </div>
     </div>
 

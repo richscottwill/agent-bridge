@@ -496,6 +496,14 @@ cleanup first, then typography, then features, then deferred items last.
 - **Status:** done
 - **Verification:** Fit-quality strip now leads with `Confidence:` not `Fit quality:`. For markets with no r²: `Confidence: limited history — model using regional priors, local calibration pending ~8 weeks of backtest data. N active campaign lifts. Explain this →`. For markets with r²: `Confidence: strong (82% explained) — model calibrated on 52 weeks of local data. 2 active campaign lifts. Explain this →`. No more "not yet measured" / "weeks of data not recorded" negatives. Explain-this link surfaces for both states.
 - **Blast radius:** `renderFitQuality` in projection-app.js only. No HTML or CSS change. No markets excluded.
+- **Commit:** `18192c7`
+
+### P5-7 · Collapse VS OP2 Spend + VS OP2 Regs tiles into one
+- **Source:** R19 #7 (MEDIUM)
+- **Status:** done
+- **Verification:** One `.hero-kpi.kpi-op2-combined` tile replaces the two prior tiles. Label reads `vs OP2 Plan`. Two sub-rows (`Spend` + `Regs`) each carry a value, directional-colored +/- pts-vs-plan delta, and preserve P2-14's arrow semantics (over-spend bad = red ↑, over-deliver good = green ↑). Third sub-line below the rows: `Efficiency gain: CPA −15% vs plan` or `Efficiency loss: CPA +7% vs plan` computed from `plan_cpa = op2_spend/op2_regs` vs `projected_cpa = blended_cpa`.
+- **KPI row count:** drops by 1 (from 6 tiles to 5). No signal loss — both sub-metrics preserved. Empty-state clean (tile hides deltas when OP2 targets absent).
+- **Blast radius:** projection.html (two tiles merged into one), projection-app.js renderMarket (new kpi-op2-detail writeup added after regs render), projection-design-system.css (new .kpi-op2-combined block with CSS Grid two-row layout). P2-14 directional color arrow logic unchanged — same IDs populated the same way.
 - **Commit:** <filled after commit>
 ---
 

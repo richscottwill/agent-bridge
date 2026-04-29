@@ -957,6 +957,26 @@
       regsEl.textContent = '—';
     }
 
+    // P5-7 (2026-04-28): combined VS OP2 tile — one-line efficiency summary.
+    // Surfaces the CPA delta vs plan so the reader sees whether the
+    // overdelivery / underdelivery is efficient (CPA down = good) or
+    // bought (CPA up = bad). Uses OP2 targets already in marketData.
+    const op2DetailEl = document.getElementById('kpi-op2-detail');
+    if (op2DetailEl) {
+      op2DetailEl.classList.remove('good', 'bad');
+      op2DetailEl.textContent = '';
+      if (op2Spend && op2Regs && op2Spend > 0 && op2Regs > 0) {
+        const planCpa = op2Spend / op2Regs;
+        const projCpa = t.blended_cpa || (t.total_regs > 0 ? t.total_spend / t.total_regs : 0);
+        if (planCpa > 0 && projCpa > 0) {
+          const cpaDeltaPct = ((projCpa / planCpa) - 1) * 100;
+          const direction = cpaDeltaPct < 0 ? 'gain' : 'loss';
+          op2DetailEl.textContent =
+            `Efficiency ${direction}: CPA ${cpaDeltaPct >= 0 ? '+' : ''}${cpaDeltaPct.toFixed(0)}% vs plan`;
+        }
+      }
+    }
+
     // P5-1 (2026-04-28): The P2-13 Brand/NB split bar that lived here was
     // removed — the same 75%/25% share is now folded into each KPI tile's
     // delta line ("↑ +5.6% WoW · 75% share"). Kills the dup between the
