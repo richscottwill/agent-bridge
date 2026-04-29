@@ -193,6 +193,50 @@ html, body {
 .since-last-week .delta-tag.down { background: #FEE2E2; color: var(--color-danger); }
 .since-last-week .delta-tag.flat { background: #F3F3F3; color: var(--color-text-subtle); }
 
+/* P5-10 (2026-04-28): cross-market pulse strip. Compact horizontal row of
+   10 dots, one per market, colored by distance-to-target. Sits at the
+   top of the single-market view so the user keeps peripheral awareness
+   without tab-switching to All 10 markets. Active market outlined. */
+.market-pulse-strip {
+  display: flex;
+  gap: var(--gap-sm);
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--gap-sm);
+  margin-bottom: var(--gap-md);
+  font-size: 11px;
+  color: var(--color-text-meta);
+  flex-wrap: wrap;
+}
+.market-pulse-strip:empty { display: none; }
+.pulse-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background-color 120ms ease;
+  font-variant-numeric: tabular-nums;
+}
+.pulse-dot:hover { background: #F3F3F3; }
+.pulse-dot.active {
+  font-weight: 600;
+  color: var(--color-text-body);
+  outline: 1px solid var(--color-brand);
+  outline-offset: 0;
+}
+.pulse-circle {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.pulse-green  { background: #14A548; }
+.pulse-yellow { background: #E8A800; }
+.pulse-red    { background: #D13212; }
+.pulse-gray   { background: #9A9A9A; }
+
 .hero-kpi-strip {
   display: flex;
   justify-content: center;

@@ -534,6 +534,13 @@ cleanup first, then typography, then features, then deferred items last.
 - **Status:** done
 - **Verification:** New `#since-last-week` block at the top of `#narrative-panel` renders: `Since last week: Brand regs ±X.X%, NB regs ±X.X%, blended CPA ±X.X%. CI widened/tightened from A% to B%. Sparkle lift holding — no decay detected. Primary driver this week: Non-Brand registrations up Y%.` Delta tags are green/red pills. CI line only renders when a prior CI width is stored in localStorage (`mpe-ci-width-<scope>-prior`); current width is stored after each render for next week's comparison. Primary driver = largest-magnitude mover across Brand / NB / CPA. First-week fallback: `First week of projection — no prior data for a week-over-week comparison.` Regional rollups skip the block (no `ytd_weekly`).
 - **Blast radius:** `renderNarrativeStandard` calls `renderSinceLastWeek` before `generateNarrative`. New `#since-last-week` inside the narrative panel. CSS adds `.since-last-week` + `.delta-tag` scoped classes. No data / solver / chart changes.
+- **Commit:** `0e9b2a3`
+
+### P5-10 · Cross-market pulse strip above hero block
+- **Source:** R19 #10 (MEDIUM)
+- **Status:** done
+- **Verification:** New `.market-pulse-strip` above `.hero-block` renders 10 clickable dots (US · CA · UK · DE · FR · IT · ES · JP · MX · AU), each colored by distance-to-target computed on the fly at regime_multiplier=1.0. ie%CCP markets: green <10pp, yellow 10-25pp, red >25pp. Spend-only markets (AU/JP): green <5% OP2 pace gap, yellow 5-15%, red >15%. Active market outlined in brand blue. Clicking any dot sets scope + triggers recompute. Regional views hide the strip.
+- **Blast radius:** one HTML element, one CSS block, one `renderPulseStrip` function called from end of `renderMarket`. The per-market mini-projection is cheap (V1_1_Slim runs in ~ms per market) and the strip is recomputed on every scope/period change — no cache drift. No solver / data / chart encoding changes.
 - **Commit:** <filled after commit>
 ---
 

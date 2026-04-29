@@ -1087,6 +1087,7 @@
     renderDrawer(out, marketData);
     renderNarrativeStandard();   // always-visible narrative at bottom
     renderMarketAnomalies(currentScope(), out);
+    renderPulseStrip();          // P5-10: cross-market status dot row
     updateHeaderMeta();
     // P2-04 + P2-05 — only render on single-market view; skip for regional
     // rollups where decomposition + backtest don't have a clean data source.
@@ -1197,6 +1198,82 @@
       ciLine +
       `${liftLine}` +
       ` Primary driver this week: ${driverPhrase}.`;
+  }
+
+  // ========================================================================
+  // P5-10 Cross-market pulse strip
+  // ========================================================================
+  //
+  // Compact 10-dot row at the top of single-market view. Colors each
+  // market by its at-a-glance distance-to-target:
+  //   green   = within ±10pp of target ie%CCP (or within ±5% OP2 for spend-only)
+  //   yellow  = 10-25pp off (or 5-15% OP2)
+  //   red     = >25pp off (or >15% OP2)
+  //   gray    = spend-only market without a latest projection to compare
+  // Active market gets a blue outline.
+  //
+  // Cheap signal — runs a quick projection for each market using its
+  // preferred driver/target at regime_multiplier=1.0. Skipped cleanly
+  // on regional views.
+
+  function renderPulseStrip() {
+    const host = document.getElementById('market-pulse-strip');
+    if (!host) return;
+    const scope = currentScope();
+    if (MPE.ALL_REGIONS.includes(scope)) {
+      host.style.display = 'none';
+      host.innerHTML = '';
+      return;
+    }
+    host.style.display = '';
+    const markets = STATE.data?.global?.market_list || MPE.ALL_MARKETS;
+    const rows = markets.map(m => {
+      const md = (STATE.data?.markets || {})[m];
+      if (!md) return { m, color: 'gray' };
+      const supported = md.parameters?.supported_target_modes?.value_json || ['spend'];
+      const ieTgt = md.parameters?.ieccp_target?.value_scalar;
+      let color = 'gray';
+      try {
+        if (supported.includes('ieccp') && ieTgt) {
+          const tgtPct = ieTgt * 100;
+          const out = V1_1_Slim.projectWithLockedYtd(md, 2026, 'ieccp', tgtPct, { regimeMultiplier: 1.0, periodType: 'Y2026' });
+          const achieved = out?.totals?.computed_ieccp;
+          if (Number.isFinite(achieved)) {
+            const distPp = Math.abs(achieved - tgtPct);
+            color = distPp < 10 ? 'green' : (distPp < 25 ? 'yellow' : 'red');
+          }
+        } else if (supported.includes('spend') || supported.includes('regs')) {
+          // Spend-only markets — compare projected annual spend to OP2.
+          const op2Spend = md.op2_targets?.annual_spend_target;
+          if (op2Spend && op2Spend > 0) {
+            const out = V1_1_Slim.projectWithLockedYtd(md, 2026, 'spend', op2Spend, { regimeMultiplier: 1.0, periodType: 'Y2026' });
+            const projSpend = out?.totals?.annual_total_spend;
+            if (Number.isFinite(projSpend)) {
+              const pacePct = Math.abs((projSpend - op2Spend) / op2Spend * 100);
+              color = pacePct < 5 ? 'green' : (pacePct < 15 ? 'yellow' : 'red');
+            }
+          }
+        }
+      } catch (e) {
+        // Keep color='gray' on any compute error so the dot still renders.
+      }
+      return { m, color };
+    });
+    host.innerHTML = rows.map(r => {
+      const activeCls = r.m === scope ? ' active' : '';
+      return `<span class="pulse-dot${activeCls}" data-market="${r.m}" title="${r.m}: ${r.color === 'green' ? 'on plan' : r.color === 'yellow' ? 'off by 10-25pp' : r.color === 'red' ? 'off by >25pp' : 'pacing unknown'}"><span class="pulse-circle pulse-${r.color}"></span>${r.m}</span>`;
+    }).join('');
+    host.querySelectorAll('.pulse-dot').forEach(el => {
+      el.addEventListener('click', () => {
+        const tgt = el.dataset.market;
+        const sel = document.getElementById('scope-select');
+        if (sel && tgt && [...sel.options].some(o => o.value === tgt)) {
+          sel.value = tgt;
+          refreshScopeDependentUI();
+          scheduleRecompute();
+        }
+      });
+    });
   }
 
   // ========================================================================

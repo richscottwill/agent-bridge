@@ -303,6 +303,12 @@ details.sec-panel:not([open]) + details.sec-panel {
     </div>
   </nav>
 
+  <!-- P5-10 (2026-04-28) Cross-market pulse strip — compact 10-dot row at
+       the top of the single-market view. Each dot colored by distance to
+       its target (ie%CCP markets) or pacing-vs-OP2 (spend-only AU / JP).
+       Clicking a dot switches scope; the active market's dot is outlined. -->
+  <div class="market-pulse-strip" id="market-pulse-strip" aria-label="Cross-market status at a glance"></div>
+
   <!-- Hero block -->
   <div class="hero-block">
     <!-- Market + period badge — visually co-equal with the hero number so
