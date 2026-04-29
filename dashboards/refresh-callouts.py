@@ -790,7 +790,11 @@ def synthesize_aggregate_narrative(aggregate_market, wk, entry, callouts, member
     if spend is not None:
         yoy_parts.append(f"total spend {_fmt_dollars(spend)}")
     if yoy_parts:
-        para1_parts.append(", ".join(yoy_parts).capitalize() + ".")
+        # First fragment is capitalized organically ("YoY ..." or "Total ...");
+        # don't blanket .capitalize() since it lowercases "YoY" → "Yoy".
+        yoy_sentence = ", ".join(yoy_parts)
+        yoy_sentence = yoy_sentence[0].upper() + yoy_sentence[1:] if yoy_sentence else ""
+        para1_parts.append(yoy_sentence + ".")
     para1 = " ".join(para1_parts)
 
     # Body paragraph 2 — gainer / decliner across member markets

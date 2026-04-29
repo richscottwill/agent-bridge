@@ -37,27 +37,42 @@ def find_xlsx():
 def _refresh_regime_fit_state():
     """Refresh ps.regime_fit_state before forecasts read from it.
 
-    This runs the Bayesian weekly update for every active structural regime
-    in every market. As more post-onset weeks accumulate, fitted values
+    Runs the Bayesian weekly update for every active structural regime in
+    every market. As more post-onset weeks accumulate, fitted values
     (peak_multiplier, current_multiplier, fitted_half_life_weeks) converge
     on what the data says vs what was authored. Confidence grows with
     n_post_weeks (0.1 at n<2, 0.3 at n<4, 0.4+ at n>=4, capped at 0.85).
 
-    Non-fatal: if this fails, forecast refresh continues using authored
-    regime priors. The projector will fall back to expected_impact_pct from
-    ps.regime_changes when ps.regime_fit_state has nothing for a regime.
+    Runs in a subprocess to keep its DuckDB/MotherDuck connection lifecycle
+    separate from the rest of refresh-forecast.py — MotherDuck won't allow
+    simultaneous read_only and read_write connections to the same database
+    in a single process, so co-habiting would crash the later ps.forecasts
+    overlay queries.
+
+    Non-fatal: if the subprocess fails or times out, forecast refresh
+    continues using authored regime priors from ps.regime_changes.
     """
+    import subprocess
+    tools_dir = os.path.join(os.path.dirname(SCRIPT_DIR), "tools")
     try:
-        sys.path.insert(0, os.path.join(os.path.dirname(SCRIPT_DIR), "tools"))
-        from prediction.fit_regime_state import fit_all_for_market, write_fit_state
-        from datetime import date
-        markets = ["MX", "US", "CA", "UK", "DE", "FR", "IT", "ES", "JP", "AU"]
-        fit_as_of = date.today()
-        total = 0
-        for mkt in markets:
-            fits = fit_all_for_market(mkt, fit_as_of=fit_as_of)
-            total += write_fit_state(fits, fit_as_of=fit_as_of)
-        print(f"Regime fit state refreshed: {total} rows across {len(markets)} markets (fit_as_of={fit_as_of})")
+        result = subprocess.run(
+            [sys.executable, "-m", "prediction.fit_regime_state", "--all-markets"],
+            cwd=tools_dir,
+            capture_output=True,
+            text=True,
+            timeout=180,
+        )
+        # Surface a condensed summary line. The subprocess prints per-market
+        # detail + a "Total fit rows written: N" footer we extract here.
+        last = result.stdout.strip().splitlines()[-1] if result.stdout.strip() else ""
+        if result.returncode == 0:
+            print(f"Regime fit state refreshed: {last}")
+        else:
+            print(f"WARNING: regime_fit_state subprocess exited {result.returncode} — continuing with authored priors")
+            if result.stderr:
+                print(f"  stderr tail: {result.stderr.strip().splitlines()[-1][:200]}")
+    except subprocess.TimeoutExpired:
+        print("WARNING: regime_fit_state refresh timed out after 180s — continuing with authored priors")
     except Exception as e:
         print(f"WARNING: regime_fit_state refresh failed ({type(e).__name__}: {e}) — continuing with authored priors")
 
