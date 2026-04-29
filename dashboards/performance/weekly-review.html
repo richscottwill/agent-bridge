@@ -25,6 +25,61 @@
    local pieces (TOC, weekly-detail table cells, projection card grid).
    ======================================================================== */
 
+/* WR-D1 (2026-04-28): Forecast Hit Rate scorecard — 3 tiles + one-line
+   auto-narrative summarizing the model's grade against last N weeks of
+   actuals. The differentiation organ: this is the one thing weekly review
+   does that projection engine can't. Lives above the KPI row so it lands
+   first on the fold. */
+.wr-scorecard-panel { border-left: 3px solid var(--color-success); }
+.wr-scorecard-head { font-size: var(--size-meta); color: var(--color-text-subtle); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: var(--gap-sm); }
+.wr-scorecard-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-md);
+  margin-bottom: var(--gap-md);
+}
+@media (max-width: 700px) { .wr-scorecard-row { grid-template-columns: 1fr; } }
+.wr-score-tile {
+  background: var(--color-neutral-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 6px;
+  padding: var(--gap-sm) var(--gap-md);
+}
+.wr-score-label {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.wr-score-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-hero);
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+}
+.wr-score-value.good { color: var(--color-success); }
+.wr-score-value.bad  { color: var(--color-danger); }
+.wr-score-value.warn { color: var(--color-warning); }
+.wr-score-sub {
+  font-size: var(--size-meta);
+  color: var(--color-text-meta);
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.wr-scorecard-narrative {
+  font-size: var(--size-ui);
+  color: var(--color-text-body);
+  line-height: 1.6;
+}
+.wr-scorecard-empty {
+  font-size: var(--size-ui);
+  color: var(--color-text-subtle);
+  padding: var(--gap-sm) 0;
+}
+
 /* Use the shared page frame paradigm */
 body {
   font-family: var(--font-sans);
@@ -419,6 +474,8 @@ body {
 <!-- TOC strip — compact jump-to nav -->
 <div class="wr-toc">
   <span class="wr-toc-label">Jump to</span>
+  <a href="#sec-scorecard">Scorecard</a>
+  <span class="wr-toc-sep">&middot;</span>
   <a href="#sec-kpis">KPIs</a>
   <span class="wr-toc-sep">&middot;</span>
   <a href="#sec-trend">Trend</a>
@@ -460,6 +517,13 @@ body {
 
 <!-- ============ TRACKER SECTION (top — chart + KPIs + weekly detail) ============ -->
 <div id="sec-kpis"></div>
+<!-- WR-D1 Forecast Hit Rate scorecard — renders above KPI row when
+     predictions_history has >=3 recent weeks of graded predictions. -->
+<div class="sec-panel wr-scorecard-panel" id="sec-scorecard" style="display:none;margin-bottom:var(--gap-lg)">
+  <h3 class="wr-scorecard-head"><span id="scorecardTitle">Forecast Hit Rate</span></h3>
+  <div class="wr-scorecard-row" id="scorecardRow"></div>
+  <div class="wr-scorecard-narrative" id="scorecardNarrative"></div>
+</div>
 <div class="wr-kpi-row" id="kpiRow"></div>
 <div class="wr-grid">
   <div class="sec-panel wr-grid-full" id="sec-trend">
@@ -725,6 +789,7 @@ function render() {
   document.getElementById('nextWeek').disabled = weeks.indexOf(curWeek) <= 0;
 
   renderCallout();
+  renderScorecard();
   renderKPIs();
   renderChart();
   renderTable();
@@ -848,6 +913,125 @@ function renderStake(st) {
 // ============================================================================
 // TRACKER — top section (KPIs, canon-chart, weekly detail table)
 // ============================================================================
+
+// WR-D1 Forecast Hit Rate scorecard — 3 tiles + one-line auto-narrative
+// summarizing how the model has graded against actuals over the last N weeks.
+// Lives above the KPI row. Hides when fewer than 3 weeks of predictions_history
+// are available for curMarket. Pulls directly from forecast-data.json's
+// predictions_history payload — no new data plumbing required.
+function renderScorecard() {
+  const panel = document.getElementById('sec-scorecard');
+  const row = document.getElementById('scorecardRow');
+  const narrEl = document.getElementById('scorecardNarrative');
+  const titleEl = document.getElementById('scorecardTitle');
+  if (!panel || !row) return;
+  const hist = (FORECAST.predictions_history || {})[curMarket] || {};
+  const maxWk = FORECAST.max_week || 15;
+  const WINDOW = 6;
+  const recent = [];
+  for (let w = Math.max(1, maxWk - (WINDOW - 1)); w <= maxWk; w++) {
+    const h = hist[String(w)] || hist[w];
+    if (!h || !h.regs) continue;
+    const r = h.regs;
+    if (r.actual == null) continue;
+    recent.push({
+      wk: w,
+      first_err: (r.first_pred != null && r.actual) ? (r.first_pred - r.actual) / r.actual * 100 : null,
+      latest_err: (r.latest_pred != null && r.actual) ? (r.latest_pred - r.actual) / r.actual * 100 : null,
+      in_ci: (r.latest_ci_lo != null && r.latest_ci_hi != null)
+        ? r.actual >= r.latest_ci_lo && r.actual <= r.latest_ci_hi : null,
+    });
+  }
+  if (recent.length < 3) {
+    panel.style.display = '';
+    titleEl.textContent = `Forecast Hit Rate — ${curMarket}`;
+    row.innerHTML = '';
+    narrEl.innerHTML = '<div class="wr-scorecard-empty">Not enough history — need 3+ weeks of predictions to score the model.</div>';
+    return;
+  }
+  panel.style.display = '';
+  titleEl.textContent = `Forecast Hit Rate — ${curMarket}, last ${recent.length} weeks`;
+  const avg = (arr, k) => {
+    const vals = arr.map(r => r[k]).filter(v => Number.isFinite(v));
+    return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
+  };
+  const firstErr = avg(recent, 'first_err');
+  const latestErr = avg(recent, 'latest_err');
+  const inCiItems = recent.filter(r => r.in_ci != null);
+  const inCi = inCiItems.filter(r => r.in_ci).length;
+  const total = inCiItems.length;
+  const inCiPct = total > 0 ? (inCi / total * 100) : null;
+
+  // Tile color bands — tighter thresholds than the ±5% cls() because
+  // calibration error should be measured by its proximity to zero, not
+  // by normal WoW noise.
+  const errCls = (e) => {
+    if (e == null) return 'warn';
+    const a = Math.abs(e);
+    if (a <= 5) return 'good';
+    if (a <= 10) return 'warn';
+    return 'bad';
+  };
+  const ciCls = (p) => {
+    if (p == null) return 'warn';
+    if (p >= 80) return 'good';
+    if (p >= 60) return 'warn';
+    return 'bad';
+  };
+  const fmtPct = (v) => v == null ? '\u2014' : (v > 0 ? '+' : '') + v.toFixed(1) + '%';
+  const fmtErrSub = (e) => {
+    if (e == null) return '';
+    const a = Math.abs(e);
+    if (a <= 5)  return 'within \u00b15% band';
+    if (a <= 10) return 'moderate error';
+    return 'large error — investigate';
+  };
+
+  row.innerHTML = `
+    <div class="wr-score-tile">
+      <div class="wr-score-label">First-pred error</div>
+      <div class="wr-score-value ${errCls(firstErr)}">${fmtPct(firstErr)}</div>
+      <div class="wr-score-sub">${fmtErrSub(firstErr)}</div>
+    </div>
+    <div class="wr-score-tile">
+      <div class="wr-score-label">Latest-pred error</div>
+      <div class="wr-score-value ${errCls(latestErr)}">${fmtPct(latestErr)}</div>
+      <div class="wr-score-sub">${
+        (firstErr != null && latestErr != null && Math.abs(latestErr) < Math.abs(firstErr))
+          ? 'improved w/ recalibration'
+          : (latestErr != null && firstErr != null && Math.abs(latestErr) > Math.abs(firstErr))
+            ? 'drifted after refit'
+            : fmtErrSub(latestErr)
+      }</div>
+    </div>
+    <div class="wr-score-tile">
+      <div class="wr-score-label">In-CI rate</div>
+      <div class="wr-score-value ${ciCls(inCiPct)}">${total > 0 ? `${inCi} / ${total}` : '\u2014'}</div>
+      <div class="wr-score-sub">${
+        inCiPct == null ? 'no CI data'
+          : inCiPct >= 80 ? `${inCiPct.toFixed(0)}% — on target (80%+)`
+          : `${inCiPct.toFixed(0)}% — target 80%+`
+      }</div>
+    </div>
+  `;
+
+  // Auto-narrative: summarize the three numbers in one sentence.
+  const parts = [];
+  if (firstErr != null && Math.abs(firstErr) <= 5) {
+    parts.push(`Model is calibrated`);
+  } else if (firstErr != null) {
+    parts.push(`Model is ${firstErr > 0 ? 'over' : 'under'}-predicting`);
+  }
+  if (firstErr != null && latestErr != null) {
+    parts.push(`last ${recent.length} weeks: first predictions averaged ${fmtPct(firstErr)}, latest predictions ${fmtPct(latestErr)}`);
+  }
+  if (inCiPct != null) {
+    parts.push(`${inCi} of ${total} actuals landed inside the forecast CI band`);
+  }
+  narrEl.textContent = parts.length
+    ? parts.join(' — ').replace(/ — /, '. ') + '.'
+    : '';
+}
 
 function renderKPIs() {
   const row = document.getElementById('kpiRow');
