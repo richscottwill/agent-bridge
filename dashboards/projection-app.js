@@ -1903,11 +1903,18 @@
   function renderSavedList() {
     const list = document.getElementById('saved-list');
     const cnt = document.getElementById('saved-count');
+    const panel = document.getElementById('saved-panel');
     cnt.textContent = STATE.saved.length ? `${STATE.saved.length}` : '';
+    // P5-4 (2026-04-28): hide the whole saved-projections panel when
+    // there's nothing saved. Empty-state copy teaches the user to tune
+    // out the region; revealing it on first save makes it a legitimate
+    // signal rather than persistent noise.
     if (!STATE.saved.length) {
+      if (panel) panel.style.display = 'none';
       list.innerHTML = `<div style="color:var(--color-text-subtle);font-size:11px">No saved projections yet.</div>`;
       return;
     }
+    if (panel) panel.style.display = '';
     // P2-12: each saved item gets Load / Delete / Compare actions.
     // Compare sets the active comparison-id so the next render overlays the
     // saved projection as a dashed reference line on the chart.

@@ -475,6 +475,13 @@ cleanup first, then typography, then features, then deferred items last.
 - **Verification:** The P2-13 `.brand-nb-bar` element below the KPI strip is removed from `projection.html`. Brand Regs and NB Regs tiles now each show `↑ +X.Y% WoW · N% share` in their delta line. CPA tile delta is unchanged (no share concept). Early-year markets (<2 YTD weeks) surface just the share suffix without WoW.
 - **Why:** the bar and the tiles directly above it displayed the same 75%/25% split two different ways — pure duplication that extended the user's scan-for-relevant-info time. Share% belongs on each tile.
 - **Blast radius:** projection.html element deleted, `renderMarket` in projection-app.js extended `setWowDelta` signature with `shareSuffix` param, populated from `out.totals.brand_regs / nb_regs`. No solver / state / chart changes.
+- **Commit:** `960f581`
+
+### P5-4 · Hide Saved Projections panel when empty
+- **Source:** R19 #4 (LOW)
+- **Status:** done
+- **Verification:** Cold-load with no saved items → `#saved-panel` has `display: none` applied. After clicking Save once → panel reappears. Delete the only saved item → panel disappears again.
+- **Blast radius:** `renderSavedList` toggles `#saved-panel` display; HTML element got an id. No other behavior touched.
 - **Commit:** <filled after commit>
 ---
 
