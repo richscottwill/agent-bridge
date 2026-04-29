@@ -266,45 +266,9 @@ body {
 .wr-delta.bad  { color: var(--color-danger); }
 .wr-delta.warn { color: var(--color-text-meta); }
 
-/* Projection cards — mini KPI-style tiles inside the projections sec-panel */
-.wr-proj-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: var(--gap-sm);
-}
-.wr-proj-card {
-  background: var(--color-neutral-bg);
-  border: 1px solid var(--color-panel-border);
-  border-radius: 6px;
-  padding: var(--gap-sm) var(--gap-md);
-}
-.wr-proj-label {
-  font-size: var(--size-meta);
-  color: var(--color-text-subtle);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 4px;
-  font-weight: 600;
-}
-.wr-proj-value {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--color-text-hero);
-  font-variant-numeric: tabular-nums;
-  font-family: var(--font-mono);
-}
-.wr-proj-sub {
-  font-size: var(--size-meta);
-  color: var(--color-text-meta);
-  margin-top: 2px;
-  font-variant-numeric: tabular-nums;
-}
-.wr-proj-ci {
-  font-size: 11px;
-  color: var(--color-text-subtle);
-  margin-top: 1px;
-  font-variant-numeric: tabular-nums;
-}
+/* WR-C5 (2026-04-28): .wr-proj-* classes removed — projection sub-panel
+   deleted from the page; projection engine (projection.html) owns
+   forward-looking forecast cards. */
 
 /* List inside sec-panels — keeps readability but tightens density */
 .wr-list {
@@ -425,8 +389,6 @@ body {
   <a href="#sec-callout">Callout</a>
   <span class="wr-toc-sep">&middot;</span>
   <a href="#sec-channels">Channels</a>
-  <span class="wr-toc-sep">&middot;</span>
-  <a href="#sec-projections">Projections</a>
   <span class="wr-toc-sep">&middot;</span>
   <a href="#sec-context">Context</a>
 </div>
@@ -694,8 +656,10 @@ function renderCallout() {
   html += channelCard('Brand', c.brand_detail, 'sec-channels');
   html += channelCard('Nonbrand', c.nb_detail);
 
-  // Projections (from callouts)
-  html += '<div class="sec-panel wr-grid-full" id="sec-projections"><h3>Projections</h3><div id="projContent"></div></div>';
+  // WR-C5 (2026-04-28): "Projections" sub-panel removed — projection engine
+  // (projection.html) owns forward-looking scenarios. Weekly review's job is
+  // grading last-week's forecast, not duplicating the forecast itself.
+  // Projection data still feeds the OP2 Pacing KPI (WR-C6) via renderKPIs.
 
   // External factors
   html += '<div class="sec-panel wr-grid-full" id="sec-context"><h3>Context &amp; External Factors</h3><ul class="wr-list" id="extList"></ul></div>';
@@ -706,7 +670,6 @@ function renderCallout() {
 
   g.innerHTML = html;
 
-  renderProj(c.projections || {});
   renderList('driverList', c.decisions);
   renderExternal(c.external_factors);
   renderStake((CALLOUTS.stakeholders || {})[curMarket] || {});
@@ -736,35 +699,9 @@ function mRow(label, value, wow, wInv, yoy, yInv, vs4, v4Inv) {
     '<td>' + delta(vs4, v4Inv) + '</td></tr>';
 }
 
-function renderProj(proj) {
-  const el = document.getElementById('projContent');
-  if (!el) return;
-  if (!proj || (!proj.month_end && !proj.quarter_end && !proj.next_week)) {
-    el.innerHTML = '<div style="color:var(--color-text-subtle);font-size:var(--size-ui)">No projection data</div>';
-    return;
-  }
-  function pc(title, pe) {
-    if (!pe) return '';
-    const ci = pe.ci_lo && pe.ci_hi ? '<div class="wr-proj-ci">CI: ' + fmt(pe.ci_lo) + '\u2013' + fmt(pe.ci_hi) + '</div>' : '';
-    let vs = '';
-    if (pe.vs_op2_spend != null) {
-      const c = pe.vs_op2_spend > 0 ? 'warn' : 'good';
-      vs = '<div class="wr-proj-sub wr-delta ' + c + '">' + (pe.vs_op2_spend > 0 ? '+' : '') + pe.vs_op2_spend.toFixed(1) + '% vs OP2</div>';
-    }
-    return '<div class="wr-proj-card">' +
-      '<div class="wr-proj-label">' + title + (pe.period ? ' (' + pe.period + ')' : '') + '</div>' +
-      '<div class="wr-proj-value">' + fmt(pe.regs_proj) + ' regs</div>' + ci +
-      '<div class="wr-proj-sub">' + fmt(pe.spend_proj, '$') + '</div>' +
-      (pe.cpa_proj ? '<div class="wr-proj-sub">' + fmt(pe.cpa_proj, 'cpa') + ' CPA</div>' : '') +
-      vs + '</div>';
-  }
-  el.innerHTML = '<div class="wr-proj-grid">' +
-    pc('Next Week', proj.next_week) +
-    pc('Month-End', proj.month_end) +
-    pc('Quarter-End', proj.quarter_end) +
-    (proj.year_end ? pc('Year-End', proj.year_end) : '') +
-    '</div>';
-}
+// WR-C5 (2026-04-28): renderProj + pc helpers removed. Projection engine
+// owns forward-looking scenarios. Projection data that drives the OP2
+// Pacing KPI (WR-C6) is pulled inline in renderKPIs via callout.projections.
 
 function renderList(id, items) {
   const el = document.getElementById(id);
