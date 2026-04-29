@@ -569,6 +569,71 @@ body {
   border: 1px solid var(--color-panel-border);
   border-radius: 4px;
 }
+/* WR-S4 (2026-04-29): when inside an open <details> (via WR-S1), let
+   the table flow inline — remove the inner scroll trap. Row count tops
+   out at ~52 so the natural page scroll handles it. */
+.wr-table-scroll-open {
+  overflow-y: visible;
+  max-height: none;
+}
+
+/* WR-S1 (2026-04-29): progressive-disclosure collapsible panels.
+   <details> with a visual summary row that matches sec-panel chrome
+   so the card identity stays consistent between collapsed and open
+   states. */
+.wr-collapsible {
+  display: block;
+}
+.wr-collapsible[open] > .wr-collapsible-summary::after {
+  content: '\25B2';  /* up triangle when open */
+}
+.wr-collapsible-summary {
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  padding: var(--gap-md) var(--gap-lg);
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.wr-collapsible-summary::-webkit-details-marker { display: none; }
+.wr-collapsible-summary::after {
+  content: '\25BC';  /* down triangle when closed */
+  font-size: 10px;
+  color: var(--color-text-subtle);
+}
+.wr-collapsible-summary:hover {
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+}
+.wr-collapsible-hint {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+  font-size: var(--size-ui);
+  color: var(--color-text-subtle);
+  margin-left: var(--gap-sm);
+}
+/* Weekly detail table keeps its panel chrome when the outer <details>
+   is the panel itself. */
+details.sec-panel.wr-collapsible { padding: 0; background: transparent; border: none; }
+details.sec-panel.wr-collapsible > .wr-collapsible-summary { margin: 0; }
+details.sec-panel.wr-collapsible[open] > .wr-collapsible-summary {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+details.sec-panel.wr-collapsible > .wr-table-scroll {
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
 
 /* Empty state — matches projection.html subtle tone */
 .wr-empty {
@@ -758,30 +823,38 @@ body {
     <div class="wr-chart-wrap"><canvas id="calibrationChart"></canvas></div>
   </div>
 </div>
-<div class="wr-grid">
-  <div class="sec-panel wr-grid-full" id="sec-detail">
-    <h3>Weekly Detail</h3>
-    <div class="wr-table-scroll">
-      <table class="wr-weekly-table">
-        <thead><tr>
-          <th>Week</th>
-          <th class="r">Regs</th>
-          <th class="r" title="Calibration delta — actual vs predicted (past weeks only)">vs Pred</th>
-          <th class="r">OP2</th>
-          <th class="r">Cost</th>
-          <th class="r">CPA</th>
-          <th class="r">WoW &Delta;</th>
-        </tr></thead>
-        <tbody id="weeklyBody"></tbody>
-      </table>
-    </div>
+<!-- WR-S1 (2026-04-29): Weekly Detail wrapped in <details> collapsed by default.
+     The table is ~50+ rows; before collapsing it dominated ~500px of scroll on
+     cold load. Summary row shows the table title so it remains scannable.
+     When expanded, the table flows inline (no inner scroll — pairs with WR-S4). -->
+<details class="sec-panel wr-grid-full wr-collapsible" id="sec-detail" style="margin-bottom:var(--gap-lg)">
+  <summary class="wr-collapsible-summary">Weekly Detail <span class="wr-collapsible-hint">(click to expand)</span></summary>
+  <div class="wr-table-scroll wr-table-scroll-open">
+    <table class="wr-weekly-table">
+      <thead><tr>
+        <th>Week</th>
+        <th class="r">Regs</th>
+        <th class="r" title="Calibration delta — actual vs predicted (past weeks only)">vs Pred</th>
+        <th class="r">OP2</th>
+        <th class="r">Cost</th>
+        <th class="r">CPA</th>
+        <th class="r">WoW &Delta;</th>
+      </tr></thead>
+      <tbody id="weeklyBody"></tbody>
+    </table>
   </div>
-</div>
+</details>
 
-<!-- ============ CALLOUT DETAILS (bottom) — channel + context + drivers ============ -->
-<div class="wr-grid" id="calloutGrid">
-  <div class="wr-grid-full wr-empty">Loading&hellip;</div>
-</div>
+<!-- ============ CALLOUT DETAILS (bottom) — channel + context + drivers ============
+     WR-S1: wrapped in <details> so the page lands <1,800px on cold load.
+     Cards render when expanded; content below contains channel cards,
+     context/external factors, drivers, stakeholders. -->
+<details class="wr-collapsible" id="calloutDetailsWrap" style="margin-bottom:var(--gap-lg)">
+  <summary class="wr-collapsible-summary sec-panel" style="margin-bottom:0">Channel detail, context, drivers, stakeholders <span class="wr-collapsible-hint">(click to expand)</span></summary>
+  <div class="wr-grid" id="calloutGrid" style="margin-top:var(--gap-md)">
+    <div class="wr-grid-full wr-empty">Loading&hellip;</div>
+  </div>
+</details>
 <!-- WR-C2 (2026-04-28): removed #genTs footer timestamp — page-render
      time is always "now" and wasn't useful. Single data-freshness
      timestamp lives in the header #dataTs. -->
