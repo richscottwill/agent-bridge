@@ -237,6 +237,36 @@ html, body {
 .pulse-red    { background: #D13212; }
 .pulse-gray   { background: #9A9A9A; }
 
+/* P5-8 (2026-04-28): action-first alert buttons. Bottom of each anomaly
+   row, 2-3 inline buttons that fire existing handlers (Switch to
+   Pessimistic, Compare to baseline, Open Model View, Recompute,
+   Explain this). Primary action in brand blue; secondary actions in
+   outline style so they don't compete. */
+.alert-actions {
+  margin-top: 6px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.alert-action {
+  background: var(--color-neutral-bg);
+  color: var(--color-text-body);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: var(--size-ui);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+.alert-action:hover { background: #F3F3F3; border-color: var(--color-text-subtle); }
+.alert-action.alert-action-primary {
+  background: var(--color-brand);
+  color: var(--color-text-on-brand);
+  border-color: var(--color-brand);
+}
+.alert-action.alert-action-primary:hover { background: #005AB2; border-color: #005AB2; }
+
 .hero-kpi-strip {
   display: flex;
   justify-content: center;

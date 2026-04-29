@@ -541,6 +541,14 @@ cleanup first, then typography, then features, then deferred items last.
 - **Status:** done
 - **Verification:** New `.market-pulse-strip` above `.hero-block` renders 10 clickable dots (US · CA · UK · DE · FR · IT · ES · JP · MX · AU), each colored by distance-to-target computed on the fly at regime_multiplier=1.0. ie%CCP markets: green <10pp, yellow 10-25pp, red >25pp. Spend-only markets (AU/JP): green <5% OP2 pace gap, yellow 5-15%, red >15%. Active market outlined in brand blue. Clicking any dot sets scope + triggers recompute. Regional views hide the strip.
 - **Blast radius:** one HTML element, one CSS block, one `renderPulseStrip` function called from end of `renderMarket`. The per-market mini-projection is cheap (V1_1_Slim runs in ~ms per market) and the strip is recomputed on every scope/period change — no cache drift. No solver / data / chart encoding changes.
+- **Commit:** `f819924`
+
+### P5-8 · Action-first alert rewrite
+- **Source:** R19 #8 (HIGH)
+- **Status:** done
+- **Verification:** Each known anomaly check (fit_r2_drop, op2_pacing_divergence, regime_low_confidence, ytd_projection_step) now has a template with (1) a "what to do" title, (2) a plain-English likely-cause body, (3) a bolded decision threshold, and (4) 2-3 clickable action buttons (Switch to Pessimistic, Compare to baseline, Open Model View, Recompute, Explain this). Buttons wire to existing handlers by dispatching clicks to the relevant scenario chip / disclosure button / explain link. Unknown anomaly checks fall back to the pre-P5-8 report voice so new alert kinds render cleanly until a template is added.
+- **Voice shift:** `Fit quality dropped sharply — r² fell 0.64 → 0.00 → Investigate data-quality drift` becomes `Trust this projection less this week — Brand CPA fit dropped sharply (r² 0.64 → 0.00). Likely cause: a regime change the model has not yet absorbed. If headline numbers diverge >20% from Pessimistic, escalate to Brandon.` with Switch-to-Pessimistic + Explain-this buttons below.
+- **Blast radius:** ALERT_TEMPLATES + renderActions + click dispatch added inside `renderMarketAnomalies`; event delegation wires through existing DOM. CSS adds `.alert-actions` + `.alert-action` + primary variant. No data / solver / chart changes.
 - **Commit:** <filled after commit>
 ---
 

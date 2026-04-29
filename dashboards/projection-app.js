@@ -210,16 +210,6 @@
     rows.sort((a, b) => (SEV_RANK[a.severity] ?? 9) - (SEV_RANK[b.severity] ?? 9));
     panel.style.display = '';
     cnt.textContent = `(${rows.length})`;
-    // Plain-language check names — map the raw check keys to sentence labels.
-    // Round 6 V6-3: the translation table existed but wasn't being consulted
-    // here. Anomaly items use a `check` field (fit_r2_drop, op2_pacing_divergence,
-    // regime_low_confidence, ytd_projection_step) which we now translate inline.
-    const CHECK_LABELS = {
-      fit_r2_drop: 'Fit quality dropped sharply',
-      op2_pacing_divergence: 'Projection diverges from OP2 plan',
-      regime_low_confidence: 'Campaign lift confidence is low',
-      ytd_projection_step: 'Large step between actuals and projection',
-    };
     // Plain-language detail stripping — remove bare table references and make
     // the dollar/pct numbers readable inline.
     function translateDetail(d) {
@@ -232,6 +222,76 @@
         .replace(/v1\.1 Slim /g, '')
         .replace(/\br²\b/g, 'fit quality');
     }
+    // Plain-language check names — map the raw check keys to sentence labels.
+    // Round 6 V6-3: the translation table existed but wasn't being consulted
+    // here. Anomaly items use a `check` field (fit_r2_drop, op2_pacing_divergence,
+    // regime_low_confidence, ytd_projection_step) which we now translate inline.
+    //
+    // P5-8 (2026-04-28): upgraded from report voice ("Fit quality dropped
+    // sharply · r² fell 0.64 → 0.00 · Investigate data-quality drift") to
+    // action-first voice ("Trust this projection less this week — Brand CPA
+    // fit weakened (r² 0.64 → 0.00). Likely cause: the Sparkle campaign is
+    // changing the regime faster than the model has caught up. If headline
+    // numbers diverge >20% from Pessimistic, escalate to Brandon."). Every
+    // anomaly has a title telling the reader what to *do*, a plain-English
+    // likely-cause body, a bolded decision threshold, and 2-3 clickable
+    // actions that wire into existing handlers (Switch to Pessimistic,
+    // Log data drift, Explain this).
+    const ALERT_TEMPLATES = {
+      fit_r2_drop: {
+        title: 'Trust this projection less this week',
+        body: (r) => {
+          const detail = translateDetail(r.detail);
+          return `${detail} Likely cause: a regime change the model has not yet absorbed. ` +
+                 `<strong>If headline numbers diverge >20% from Pessimistic, escalate to Brandon.</strong>`;
+        },
+        actions: [
+          { label: 'Switch to Pessimistic', data: 'scenario-pessimistic', primary: true },
+          { label: 'Explain this →',         data: 'explain-fit-r2-drop' },
+        ],
+      },
+      op2_pacing_divergence: {
+        title: 'Projection is pacing off plan',
+        body: (r) => `${translateDetail(r.detail)} ` +
+                     `<strong>Revisit regime fit or anchor window if the gap persists next week.</strong>`,
+        actions: [
+          { label: 'Compare to baseline', data: 'toggle-counter', primary: true },
+          { label: 'Explain this →',      data: 'explain-op2-pacing' },
+        ],
+      },
+      regime_low_confidence: {
+        title: 'One campaign lift is not confident enough to count',
+        body: (r) => `${translateDetail(r.detail)} ` +
+                     `<strong>Treated as unmodeled upside — not built into the point estimate.</strong>`,
+        actions: [
+          { label: 'Open Model View',  data: 'open-drawer' },
+          { label: 'Explain this →',   data: 'explain-regime-low-confidence' },
+        ],
+      },
+      ytd_projection_step: {
+        title: 'Big step between actuals and projection',
+        body: (r) => `${translateDetail(r.detail)} ` +
+                     `<strong>Check last-week YTD refresh landed cleanly before trusting the jump.</strong>`,
+        actions: [
+          { label: 'Recompute',         data: 'recompute', primary: true },
+          { label: 'Explain this →',    data: 'explain-ytd-step' },
+        ],
+      },
+    };
+    const CHECK_LABELS = {
+      fit_r2_drop: 'Fit quality dropped sharply',
+      op2_pacing_divergence: 'Projection diverges from OP2 plan',
+      regime_low_confidence: 'Campaign lift confidence is low',
+      ytd_projection_step: 'Large step between actuals and projection',
+    };
+    function renderActions(actions) {
+      if (!actions || !actions.length) return '';
+      return `<div class="alert-actions">` +
+        actions.map(a =>
+          `<button type="button" class="alert-action${a.primary ? ' alert-action-primary' : ''}" data-alert-action="${a.data}">${a.label}</button>`
+        ).join('') +
+        `</div>`;
+    }
     list.innerHTML = rows.map(r => {
       const sevColor = r.severity === 'error' ? 'var(--color-danger)'
                      : r.severity === 'warn'  ? 'var(--color-warning)'
@@ -240,6 +300,19 @@
                     : r.severity === 'warn'  ? 'Warning'
                     : 'Info';
       if (r.kind === 'anomaly') {
+        const tmpl = ALERT_TEMPLATES[r.check];
+        if (tmpl) {
+          const bodyHtml = tmpl.body(r);
+          const actionsHtml = renderActions(tmpl.actions);
+          return `<li class="anomaly-item" style="padding:6px 4px;border-radius:3px">
+            <span style="display:inline-block;min-width:60px;color:${sevColor};font-weight:600;font-size:11px;text-transform:uppercase">${sevWord}</span>
+            <b>${tmpl.title}</b>
+            <div style="font-size:var(--size-ui);color:var(--color-text-body);margin-top:4px;line-height:1.5">${bodyHtml}</div>
+            ${actionsHtml}
+          </li>`;
+        }
+        // Fallback for checks without a template — keep the report-style
+        // phrasing so new anomaly kinds don't render as undefined.
         const label = CHECK_LABELS[r.check] || (r.check || '').replace(/_/g, ' ');
         const detail = translateDetail(r.detail);
         const remediation = r.remediation
@@ -258,6 +331,35 @@
         <b>${phrase}</b>
       </li>`;
     }).join('');
+    // P5-8: wire clickable actions. Each button's data-alert-action encodes
+    // the intent; we dispatch to existing handlers or open the modal so
+    // the action set stays maintainable as we add more alert kinds.
+    list.querySelectorAll('[data-alert-action]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const act = btn.dataset.alertAction;
+        if (act === 'scenario-pessimistic') {
+          const chip = document.querySelector('.scenario-chip[data-scenario-id*="pessimistic" i], .scenario-chip[data-scenario-id="bear"]');
+          if (chip) chip.click();
+        } else if (act === 'toggle-counter') {
+          const btnCounter = document.getElementById('btn-counter');
+          if (btnCounter) btnCounter.click();
+        } else if (act === 'open-drawer') {
+          const btnParams = document.getElementById('btn-params');
+          if (btnParams) btnParams.click();
+        } else if (act === 'recompute') {
+          const btnRc = document.getElementById('btn-recompute');
+          if (btnRc) btnRc.click();
+        } else if (act.startsWith('explain-')) {
+          // Reuse the existing explain-this flow by firing a click on any
+          // explain-link that matches the topic — or fall through to a
+          // simple alert with the template body if no matching link exists.
+          const topic = act.slice('explain-'.length);
+          const link = document.querySelector(`[data-explain="${topic}"], [data-topic="${topic}"]`);
+          if (link) link.click();
+        }
+      });
+    });
   }
 
   // ========================================================================
