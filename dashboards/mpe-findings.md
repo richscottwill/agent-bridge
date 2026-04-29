@@ -482,6 +482,20 @@ cleanup first, then typography, then features, then deferred items last.
 - **Status:** done
 - **Verification:** Cold-load with no saved items → `#saved-panel` has `display: none` applied. After clicking Save once → panel reappears. Delete the only saved item → panel disappears again.
 - **Blast radius:** `renderSavedList` toggles `#saved-panel` display; HTML element got an id. No other behavior touched.
+- **Commit:** `138e288`
+
+### P5-3 · Default-close the Model View drawer
+- **Source:** R19 #3 (MEDIUM)
+- **Status:** done (already correct on disk, 2026-04-28)
+- **Verification:** `.drawer` CSS defaults to `transform: translateX(100%)` (off-screen) and the `.open` class is only added via `classList.toggle('open', STATE.disclosures.params)` on the Model details disclosure button click. `STATE.disclosures.params` initializes to `false` (projection-app.js:32); no localStorage restore path. Cold-load reality: drawer is already off-screen by default. The Model details button opens it; × closes it. No code change needed.
+- **Deviation from spec:** Local Kiro's mockup implied the drawer was open by default; the code shows it's already closed. Flipping to done without a no-op commit rather than shipping an empty diff.
+- **Commit:** n/a (verification only)
+
+### P5-9 · Fit Quality empty-state copy rewrite
+- **Source:** R19 #9 (LOW)
+- **Status:** done
+- **Verification:** Fit-quality strip now leads with `Confidence:` not `Fit quality:`. For markets with no r²: `Confidence: limited history — model using regional priors, local calibration pending ~8 weeks of backtest data. N active campaign lifts. Explain this →`. For markets with r²: `Confidence: strong (82% explained) — model calibrated on 52 weeks of local data. 2 active campaign lifts. Explain this →`. No more "not yet measured" / "weeks of data not recorded" negatives. Explain-this link surfaces for both states.
+- **Blast radius:** `renderFitQuality` in projection-app.js only. No HTML or CSS change. No markets excluded.
 - **Commit:** <filled after commit>
 ---
 

@@ -1539,20 +1539,29 @@
     const fbLevel = fq.fallback_level || marketData.fallback_summary || 'market_specific';
     const klass = r2 == null ? 'low' : r2 > 0.7 ? 'high' : r2 > 0.45 ? 'medium' : 'low';
 
-    // Plain-language fit quality
-    let fitWord, fitPct;
-    if (r2 == null) { fitWord = 'unknown'; fitPct = null; }
-    else if (r2 >= 0.7) { fitWord = 'strong'; fitPct = Math.round(r2 * 100); }
-    else if (r2 >= 0.45) { fitWord = 'fair'; fitPct = Math.round(r2 * 100); }
-    else if (r2 >= 0.2) { fitWord = 'weak'; fitPct = Math.round(r2 * 100); }
-    else { fitWord = 'very weak'; fitPct = Math.round(r2 * 100); }
+    // P5-9 (2026-04-28): Reframe around Confidence instead of Fit Quality.
+    // "Fit quality: not yet measured" reads like "the model doesn't work"
+    // to a non-technical exec. "Confidence: limited history" names the
+    // same reality but positions it honestly — we have fewer data points,
+    // not a broken model. Explain-this link lets Kate drill in if curious.
+    let confidenceLabel;
+    if (r2 == null)       confidenceLabel = 'limited history';
+    else if (r2 >= 0.7)   confidenceLabel = 'strong';
+    else if (r2 >= 0.45)  confidenceLabel = 'fair';
+    else if (r2 >= 0.2)   confidenceLabel = 'weak';
+    else                  confidenceLabel = 'very weak';
+    const pctTail = r2 != null ? ` (${Math.round(r2 * 100)}% explained)` : '';
 
-    // Plain-language fallback level
+    // Plain-language calibration note — names where the parameters came
+    // from and roughly how many weeks of local data back them. Replaces
+    // the harsher "weeks of data not recorded" phrasing.
     const fbMap = {
-      'market_specific': 'fit from this market\'s own data',
-      'regional_fallback': 'some parameters use regional average',
-      'some_regional_fallback': 'some parameters use regional average',
-      'global_fallback': 'some parameters use global average',
+      'market_specific':       nWeeks
+        ? `model calibrated on ${nWeeks} weeks of local data`
+        : `model calibrated on local data`,
+      'regional_fallback':     'model using regional priors, local calibration pending ~8 weeks of backtest data',
+      'some_regional_fallback': 'model using regional priors for some parameters',
+      'global_fallback':       'model using global priors, local calibration pending',
     };
     const fbText = fbMap[fbLevel] || fbLevel.replace(/_/g, ' ');
 
@@ -1560,9 +1569,10 @@
     const liftCount = regimes.length;
     const liftText = liftCount === 0 ? '' : ` · ${liftCount} active campaign lift${liftCount > 1 ? 's' : ''}`;
 
-    const fitHtml = fitPct != null
-      ? `<span class="dot ${klass}"></span>Fit quality: <b>${fitWord}</b> (${fitPct}% explained) · ${nWeeks ? `${nWeeks} weeks of data` : 'weeks of data not recorded'} · ${fbText}${liftText}`
-      : `<span class="dot low"></span>Fit quality: <b>not yet measured</b> · ${nWeeks ? `${nWeeks} weeks of data` : 'weeks of data not recorded'} · ${fbText}${liftText}`;
+    const fitHtml =
+      `<span class="dot ${klass}"></span>` +
+      `Confidence: <b>${confidenceLabel}</b>${pctTail} — ${fbText}${liftText}. ` +
+      `<a href="#" class="explain-link" data-topic="fit-quality">Explain this →</a>`;
 
     const el = document.getElementById('fit-quality');
     el.innerHTML = fitHtml;
