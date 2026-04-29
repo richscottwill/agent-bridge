@@ -53,9 +53,11 @@ Compounding-effect ordering so each commit's ground is stable before the next.
 
 ### WR-C1 · WoW threshold asymmetry + divide-by-zero guard (safeWoW)
 - **Source:** wbr #1 + #13 (MED + HIGH merged)
-- **Status:** open
+- **Status:** done
 - **Finding:** `renderKPIs` and `renderTable` use `wow > 0 ? 'good' : wow < -5 ? 'bad' : 'warn'` — asymmetric threshold. The `cls()` helper already uses symmetric ±5%. Also truthy guard fails on legitimate-zero priors.
 - **Fix:** Introduce `safeWoW(cur, prev)` helper handling null / 0-prior / same-zero cases. Use `cls(rawPct, false)` for class assignment so thresholds match existing helper.
+- **Verification:** With today's data, all WoW cells render identically (no current market has 0-prior or is in the ±0.5 to ±5 asymmetry range that would shift color). Helper protects against future metrics that could legitimately be 0-prior.
+- **Commit:** <filled after commit>
 
 ### WR-C2 · Two-timestamp collapse
 - **Source:** wbr #8 (LOW)

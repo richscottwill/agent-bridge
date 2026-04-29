@@ -593,6 +593,21 @@ function delta(v, inv) {
   return '<span class="wr-delta ' + c + '">' + (v > 0 ? '+' : '') + v.toFixed(0) + '%</span>';
 }
 
+// WR-C1 (2026-04-28): single WoW helper used by both renderKPIs() and
+// renderTable(). Fixes two edge cases:
+//   (1) the prior truthy guard (`prev && prev[curMetric]`) treats legit
+//       zero-prior as missing data, swallowing the "went from 0 to N"
+//       signal a future metric (CVR, CPCs, etc.) might need.
+//   (2) the prior threshold was asymmetric (wow > 0 → good at +0.1%,
+//       wow < -5 → bad) which made +0.3% noise look like growth and
+//       -4.7% drops look neutral. Now routes through cls() so thresholds
+//       are symmetric ±5% (matches the helper already used elsewhere).
+function safeWoW(cur, prev) {
+  if (cur == null || prev == null) return null;
+  if (prev === 0) return cur === 0 ? 0 : null;   // 0 → 0 = flat; 0 → N = skip
+  return (cur - prev) / prev * 100;
+}
+
 // ============================================================================
 // RENDER — orchestrates callout + tracker on every market/week change
 // ============================================================================
@@ -758,8 +773,10 @@ function renderKPIs() {
   const ytd = actualWeeks.reduce((s, w) => s + (w[curMetric] || 0), 0);
   const last = actualWeeks[actualWeeks.length - 1] || {};
   const prev = actualWeeks.length > 1 ? actualWeeks[actualWeeks.length - 2] : null;
-  const wow = prev && prev[curMetric] ? ((last[curMetric] - prev[curMetric]) / prev[curMetric] * 100).toFixed(1) : null;
-  const wowClass = wow > 0 ? 'good' : wow < -5 ? 'bad' : 'warn';
+  // WR-C1: safeWoW handles null / 0-prior / 0→0-flat explicitly.
+  const wowRaw = safeWoW(last[curMetric], prev ? prev[curMetric] : null);
+  const wow = wowRaw != null ? wowRaw.toFixed(1) : null;
+  const wowClass = wowRaw == null ? 'warn' : cls(wowRaw, false);
   const w52 = weeks.find(w => w.wk === 52);
   const yearEndPred = w52 && w52.pred_regs ? w52.pred_regs : null;
 
@@ -825,8 +842,10 @@ function renderTable() {
     const prev = i > 0 ? weeks[i - 1] : null;
     const prevRegs = prev && prev.regs > 0 ? prev.regs : (prev && prev.pred_regs ? prev.pred_regs : null);
     const curRegs = isActual ? w.regs : w.pred_regs;
-    const wow = prevRegs && curRegs ? ((curRegs - prevRegs) / prevRegs * 100).toFixed(1) : null;
-    const wowCls = wow == null ? 'warn' : (wow > 5 ? 'good' : (wow < -5 ? 'bad' : 'warn'));
+    // WR-C1: use safeWoW helper for symmetric thresholds + 0-prior safety.
+    const wowRaw = safeWoW(curRegs, prevRegs);
+    const wow = wowRaw != null ? wowRaw.toFixed(1) : null;
+    const wowCls = wowRaw == null ? 'warn' : cls(wowRaw, false);
     const wowTxt = wow != null ? `<span class="wr-delta ${wowCls}">${wow > 0 ? '+' : ''}${wow}%</span>` : '\u2014';
 
     const rowCls = [];
