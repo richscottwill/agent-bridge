@@ -527,6 +527,13 @@ cleanup first, then typography, then features, then deferred items last.
 - **Status:** done
 - **Verification:** hero-context line for markets with bootstrap CI now carries (in order): the point estimate + driver sentence, the campaign-lifts note, the 90% range, a colored confidence-width label (`tight · high confidence` green / `moderate` yellow / `wide · low confidence` red), a plan-in-range phrase comparing OP2 annual_spend_target (period-scaled) to the CI band, and a contingency nudge suggesting a ±reserve band. Thresholds: width <20% of central = tight, 20-40% = moderate, ≥40% = wide. Plan position: <0.2 of range = low edge (overspend risk), >0.8 = high edge (underdelivery risk), else center. Outside the CI = plan-out with magnitude of gap.
 - **Blast radius:** `renderMarket` hero-context block in projection-app.js (textContent → innerHTML, thresholds inline). CSS adds `.conf-label`, `.plan-range`, `.contingency-nudge` children of `.hero-context`. No data / solver / chart changes.
+- **Commit:** `ff49a21`
+
+### P5-5 · Since-last-week auto-summary above narrative
+- **Source:** R19 #5 (HIGH)
+- **Status:** done
+- **Verification:** New `#since-last-week` block at the top of `#narrative-panel` renders: `Since last week: Brand regs ±X.X%, NB regs ±X.X%, blended CPA ±X.X%. CI widened/tightened from A% to B%. Sparkle lift holding — no decay detected. Primary driver this week: Non-Brand registrations up Y%.` Delta tags are green/red pills. CI line only renders when a prior CI width is stored in localStorage (`mpe-ci-width-<scope>-prior`); current width is stored after each render for next week's comparison. Primary driver = largest-magnitude mover across Brand / NB / CPA. First-week fallback: `First week of projection — no prior data for a week-over-week comparison.` Regional rollups skip the block (no `ytd_weekly`).
+- **Blast radius:** `renderNarrativeStandard` calls `renderSinceLastWeek` before `generateNarrative`. New `#since-last-week` inside the narrative panel. CSS adds `.since-last-week` + `.delta-tag` scoped classes. No data / solver / chart changes.
 - **Commit:** <filled after commit>
 ---
 

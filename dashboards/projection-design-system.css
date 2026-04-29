@@ -167,6 +167,32 @@ html, body {
   color: var(--color-text-subtle);
 }
 
+/* P5-5 (2026-04-28): Since-last-week auto-summary sits above the Narrative
+   prose. Answers "what changed?" without making the user scan six KPI
+   tiles and do the subtraction themselves. Pill tags for up/down deltas. */
+.since-last-week {
+  font-size: var(--size-ui);
+  line-height: 1.6;
+  color: var(--color-text-body);
+  margin-bottom: var(--gap-md);
+  padding-bottom: var(--gap-sm);
+  border-bottom: 1px dashed var(--color-panel-border);
+}
+.since-last-week:empty { display: none; }
+.since-last-week strong { color: var(--color-text-hero); }
+.since-last-week .delta-tag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  margin: 0 1px;
+}
+.since-last-week .delta-tag.up   { background: #E6F7EE; color: #0C7A3D; }
+.since-last-week .delta-tag.down { background: #FEE2E2; color: var(--color-danger); }
+.since-last-week .delta-tag.flat { background: #F3F3F3; color: var(--color-text-subtle); }
+
 .hero-kpi-strip {
   display: flex;
   justify-content: center;

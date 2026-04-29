@@ -489,9 +489,12 @@ details.sec-panel:not([open]) + details.sec-panel {
     <div id="fb-status" style="margin-top:6px;font-size:11px;color:var(--color-text-subtle)"></div>
   </div>
 
-  <!-- Narrative block — always at bottom, standard part of the page -->
+  <!-- Narrative block — always at bottom, standard part of the page.
+       P5-5 (2026-04-28): #since-last-week renders above the narrative
+       prose and auto-summarizes what moved since last week. -->
   <div class="sec-panel" id="narrative-panel" style="margin-top:var(--gap-lg)">
     <h3>Narrative</h3>
+    <div id="since-last-week" class="since-last-week"></div>
     <div id="narrative-block" style="font-size:var(--size-ui);line-height:1.6;color:var(--color-text-body);white-space:pre-wrap">
       <em>Projection summary will render here.</em>
     </div>

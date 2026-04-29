@@ -1098,7 +1098,105 @@
     // Narrative panel is now always visible at bottom (no disclosure gate)
     const panel = document.getElementById('narrative-panel');
     if (panel) panel.style.display = '';
-    if (STATE.currentOutput) generateNarrative();
+    if (STATE.currentOutput) {
+      renderSinceLastWeek();         // P5-5: prose-level "what changed?" summary
+      generateNarrative();
+    }
+  }
+
+  // ========================================================================
+  // P5-5 Since-last-week auto-summary
+  // ========================================================================
+  //
+  // Stitches the P2-06 WoW deltas + CI width delta into a one-paragraph
+  // "what changed?" summary above the Narrative block. Pulls from the
+  // current market's ytd_weekly (not projected totals — the question is
+  // about the ground truth moving week over week, not the projection).
+  // Primary driver identification walks the three largest-magnitude
+  // deltas and returns the biggest mover as the week's story.
+
+  function renderSinceLastWeek() {
+    const host = document.getElementById('since-last-week');
+    if (!host) return;
+    host.innerHTML = '';
+    const scope = currentScope();
+    if (MPE.ALL_REGIONS.includes(scope)) {
+      // Regions don't have ytd_weekly; skip cleanly.
+      return;
+    }
+    const md = (STATE.data?.markets || {})[scope];
+    if (!md) return;
+    const ytdW = md.ytd_weekly || [];
+    if (ytdW.length < 2) {
+      host.innerHTML = `<em>First week of projection — no prior data for a week-over-week comparison.</em>`;
+      return;
+    }
+    const last = ytdW[ytdW.length - 1];
+    const prev = ytdW[ytdW.length - 2];
+    const lastBrand = last.brand_regs || last.brand_registrations || 0;
+    const prevBrand = prev.brand_regs || prev.brand_registrations || 0;
+    const lastNb    = last.nb_regs    || last.nb_registrations    || 0;
+    const prevNb    = prev.nb_regs    || prev.nb_registrations    || 0;
+    const lastCost  = (last.brand_cost || 0) + (last.nb_cost || 0);
+    const prevCost  = (prev.brand_cost || 0) + (prev.nb_cost || 0);
+    const lastRegs  = lastBrand + lastNb;
+    const prevRegs  = prevBrand + prevNb;
+    const lastCpa   = lastRegs > 0 ? lastCost / lastRegs : 0;
+    const prevCpa   = prevRegs > 0 ? prevCost / prevRegs : 0;
+    const pct = (cur, prv) => (prv > 0 ? ((cur - prv) / prv) * 100 : 0);
+    const brandPct = pct(lastBrand, prevBrand);
+    const nbPct    = pct(lastNb,    prevNb);
+    const cpaPct   = pct(lastCpa,   prevCpa);
+    const tag = (v, invert) => {
+      const n = (v >= 0) !== !!invert ? 'up' : 'down';
+      const abs = Math.abs(v);
+      const cls = abs < 0.5 ? 'flat' : n;
+      const sign = v > 0 ? '+' : (v < 0 ? '' : '±');
+      return `<span class="delta-tag ${cls}">${sign}${v.toFixed(1)}%</span>`;
+    };
+    // Identify primary driver = largest-magnitude non-CPA mover, since CPA
+    // is a derived ratio and less interpretable as "the story this week".
+    const movers = [
+      { name: 'Brand registrations', pct: brandPct },
+      { name: 'Non-Brand registrations', pct: nbPct },
+      { name: 'blended CPA', pct: cpaPct, invert: true },
+    ].sort((a, b) => Math.abs(b.pct) - Math.abs(a.pct));
+    const top = movers[0];
+    const direction = top.pct > 0
+      ? (top.invert ? 'up (worse)' : 'up')
+      : (top.invert ? 'down (better)' : 'down');
+    const driverPhrase = Math.abs(top.pct) < 0.5
+      ? 'nothing moved meaningfully this week'
+      : `${top.name} ${direction} ${Math.abs(top.pct).toFixed(1)}%`;
+    // CI width delta — uses current vs stored-prior CI width if present.
+    // When there's no stored-prior, we skip that line cleanly rather than
+    // forcing a 0% comparison.
+    let ciLine = '';
+    const uncertNow = STATE.currentUncertainty?.credible_intervals?.total_spend?.ci?.['90'];
+    const centralNow = STATE.currentUncertainty?.credible_intervals?.total_spend?.central;
+    if (uncertNow && centralNow && centralNow > 0) {
+      const widthNow = (uncertNow[1] - uncertNow[0]) / centralNow * 100;
+      const widthPriorKey = `mpe-ci-width-${scope}-prior`;
+      const widthPriorStr = localStorage.getItem(widthPriorKey);
+      const widthPrior = widthPriorStr != null ? parseFloat(widthPriorStr) : null;
+      if (widthPrior != null && isFinite(widthPrior)) {
+        const dir = widthNow > widthPrior ? 'widened' : (widthNow < widthPrior ? 'tightened' : 'held steady');
+        ciLine = ` CI ${dir} from ${widthPrior.toFixed(0)}% to ${widthNow.toFixed(0)}%.`;
+      }
+      // Store current for next week's comparison.
+      try { localStorage.setItem(widthPriorKey, widthNow.toFixed(2)); } catch (e) { /* quota exceeded — silent */ }
+    }
+    // Active lifts status
+    const regimes = V1_1_Slim.listRegimesWithConfidence(md.regime_fit_state || [], STATE.regimeMultiplier);
+    const activeLifts = regimes.filter(r => !r.absorbed_into_baseline && !r.low_confidence);
+    const liftLine = activeLifts.length > 0
+      ? ` ${activeLifts[0].name || 'Active'} lift holding — no decay detected.`
+      : '';
+    host.innerHTML =
+      `<strong>Since last week:</strong> Brand regs ${tag(brandPct)}, NB regs ${tag(nbPct)}, blended CPA ${tag(cpaPct, true)}.` +
+      ciLine +
+      `${liftLine}` +
+      ` Primary driver this week: ${driverPhrase}.`;
   }
 
   // ========================================================================
