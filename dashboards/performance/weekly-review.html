@@ -161,6 +161,28 @@ body {
 .wr-nav-btn:hover { border-color: var(--color-brand); color: var(--color-brand); }
 .wr-nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 .wr-metric-group { margin-left: auto; }
+/* WR-B1 (2026-04-28): metric control rendered as a connected 3-cell
+   segmented control. Tightens the horizontal footprint of the secondary
+   filter so the Market tab row gets the space it needs for 12 markets. */
+.wr-metric-group .wr-tab-row {
+  display: inline-flex;
+  border: 1px solid var(--color-panel-border);
+  border-radius: 4px;
+  overflow: hidden;
+  gap: 0;
+}
+.wr-metric-group .wr-tab {
+  border-radius: 0;
+  border: none;
+  border-left: 1px solid var(--color-panel-border);
+  padding: 5px 12px;
+}
+.wr-metric-group .wr-tab:first-child { border-left: none; }
+.wr-metric-group .wr-tab.active {
+  background: var(--color-brand);
+  color: var(--color-text-on-brand);
+  border-color: var(--color-brand);
+}
 
 /* KPI row — reuse .hero-kpi from projection-design-system.css but in a row */
 .wr-kpi-row {
@@ -550,9 +572,14 @@ function init() {
   document.getElementById('prevWeek').onclick = () => navWeek(1);
   document.getElementById('nextWeek').onclick = () => navWeek(-1);
 
-  // Metric tabs (for KPI display + future use — the chart shows regs+spend both)
+  // Metric tabs (segmented control per WR-B1). Short labels inside the
+  // control; full form ("Registrations") still used for the KPI label.
   const metricTabs = document.getElementById('metricTabs');
-  const metricDefs = [{key:'regs',label:'Registrations'},{key:'cost',label:'Cost'},{key:'cpa',label:'CPA'}];
+  const metricDefs = [
+    {key:'regs', label:'Regs'},
+    {key:'cost', label:'Cost'},
+    {key:'cpa',  label:'CPA'},
+  ];
   metricDefs.forEach(({key, label}) => {
     const b = document.createElement('button');
     b.className = 'wr-tab' + (key === curMetric ? ' active' : '');
