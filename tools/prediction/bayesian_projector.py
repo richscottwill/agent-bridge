@@ -868,27 +868,113 @@ class BayesianProjector:
         total_regs = brand.regs + nb.regs
         total_cost = brand.cost + nb.cost
 
-        # Apply regime change prior shifts from ps.regime_changes
+        # ── Apply regime change priors from ps.regime_changes + ps.regime_fit_state ──
+        #
+        # Bayesian layer. Contract with baseline projection:
+        #   _fetch_history pulls 170 weeks of ps.performance which already reflects
+        #   post-regime actuals. So regime effects with n_post_weeks >= BASELINE_ABSORPTION
+        #   are ALREADY BAKED INTO the baseline projection — applying them again
+        #   here double-counts. We only apply regimes whose onset is recent enough
+        #   that the baseline history does not reflect them (young regimes).
+        #
+        # Policy:
+        #   - Young regime (n_post_weeks < 8 OR no fit row yet):
+        #       apply the lift/drag as a forward adjustment.
+        #       Prefer fit's current_multiplier when evidence bar met
+        #       (n_post_weeks >= 2 AND fit_confidence >= 0.30).
+        #       Otherwise use authored: 1.0 + (expected_impact_pct * authored_confidence)
+        #   - Mature regime (n_post_weeks >= 8):
+        #       SKIP. Baseline history already reflects it.
+        #       Future work (Phase 6.2): apply ONLY the expected decay delta going forward
+        #       (i.e. current_multiplier(target_week) / current_multiplier(today)).
+        #       For now, mature regimes are absorbed into the baseline.
+        #
+        # Metric routing (metric_affected on ps.regime_changes):
+        #   - 'brand_registrations' → scale brand only, recompute totals
+        #   - 'registrations'       → scale total (brand + nb proportionally)
+        #   - others                → skip (not relevant to reg projection)
+        BASELINE_ABSORPTION_WEEKS = 8
         try:
             regime_rows = self.con.execute(f"""
-                SELECT change_type, expected_impact_pct, confidence, change_date, end_date
-                FROM ps.regime_changes
-                WHERE market = '{market}' AND metric_affected = 'registrations' AND active = TRUE
-                ORDER BY change_date
+                WITH latest_fit AS (
+                    SELECT regime_id,
+                           fit_as_of,
+                           peak_multiplier,
+                           fitted_half_life_weeks,
+                           current_multiplier,
+                           n_post_weeks,
+                           decay_status,
+                           confidence AS fit_confidence,
+                           ROW_NUMBER() OVER (PARTITION BY regime_id ORDER BY fit_as_of DESC) AS rn
+                    FROM ps.regime_fit_state
+                )
+                SELECT rc.id,
+                       rc.change_type,
+                       rc.metric_affected,
+                       rc.expected_impact_pct,
+                       rc.confidence,
+                       rc.change_date,
+                       rc.end_date,
+                       lf.current_multiplier,
+                       lf.n_post_weeks,
+                       lf.fit_confidence,
+                       lf.decay_status
+                FROM ps.regime_changes rc
+                LEFT JOIN latest_fit lf
+                       ON lf.regime_id = rc.id AND lf.rn = 1
+                WHERE rc.market = '{market}'
+                  AND rc.metric_affected IN ('registrations', 'brand_registrations')
+                  AND rc.active = TRUE
+                ORDER BY rc.change_date
             """).fetchall()
+
+            from datetime import date, timedelta
+            w1_start = date(2025, 12, 29)
+            target_date = w1_start + timedelta(weeks=target_week_num - 1)
+
             for rr in regime_rows:
-                change_type, impact_pct, conf, change_date, end_date = rr
-                # Only apply if the target week is AFTER the regime change
-                # AND before end_date (if set — regime changes can expire)
-                from datetime import date, timedelta
-                w1_start = date(2025, 12, 29)
-                target_date = w1_start + timedelta(weeks=target_week_num - 1)
-                if target_date >= change_date and (end_date is None or target_date < end_date):
-                    # Scale impact by confidence: full confidence = full impact
-                    adj = 1.0 + (impact_pct * conf)
+                (regime_id, change_type, metric_affected, impact_pct, authored_conf,
+                 change_date, end_date,
+                 fit_current_mult, fit_n_post, fit_conf, fit_decay_status) = rr
+
+                # Only apply regimes that are in-window for the target week
+                if target_date < change_date:
+                    continue
+                if end_date is not None and target_date >= end_date:
+                    continue
+
+                # Skip mature regimes — baseline history already reflects them
+                if fit_n_post is not None and fit_n_post >= BASELINE_ABSORPTION_WEEKS:
+                    continue
+
+                # Choose multiplier: fit when evidence bar met, authored otherwise
+                use_fit = (
+                    fit_current_mult is not None
+                    and fit_n_post is not None and fit_n_post >= 2
+                    and fit_conf is not None and fit_conf >= 0.30
+                )
+                if use_fit:
+                    adj = float(fit_current_mult)
+                else:
+                    # Authored: scale impact by its own confidence
+                    adj = 1.0 + (float(impact_pct or 0.0) * float(authored_conf or 0.0))
+
+                # Nothing to do for a neutral multiplier
+                if abs(adj - 1.0) < 1e-6:
+                    continue
+
+                # Route by what the regime affects
+                if metric_affected == 'brand_registrations':
+                    # Adjust brand only, recompute totals
+                    brand = SegmentForecast(
+                        regs=max(0, round(brand.regs * adj)),
+                        cost=max(0, round(brand.cost * adj, 2)),
+                        cpa=brand.cpa, clicks=brand.clicks)
+                    total_regs = brand.regs + nb.regs
+                    total_cost = brand.cost + nb.cost
+                else:  # 'registrations' — scale total (brand+nb proportionally)
                     total_regs = max(0, round(total_regs * adj))
                     total_cost = max(0, round(total_cost * adj, 2))
-                    # Also adjust brand/nb proportionally
                     brand = SegmentForecast(
                         regs=max(0, round(brand.regs * adj)),
                         cost=max(0, round(brand.cost * adj, 2)),
@@ -898,7 +984,7 @@ class BayesianProjector:
                         cost=max(0, round(nb.cost * adj, 2)),
                         cpa=nb.cpa, clicks=nb.clicks)
         except Exception:
-            pass  # No regime_changes table or query error — proceed without
+            pass  # No regime tables or query error — proceed without adjustment
 
         # CI from posterior (adjusted by seasonality)
         ci_low, ci_high = self.core.credible_interval(posterior, level=0.7)

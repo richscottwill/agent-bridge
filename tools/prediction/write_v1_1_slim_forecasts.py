@@ -155,6 +155,14 @@ def run(week_key: str) -> int:
             continue
 
     # Write via same shared writable conn
+    #
+    # Snapshot semantics (WR-A9): preserve historical predictions so calibration
+    # can compare first-prediction to latest-prediction as new evidence arrives.
+    # We only delete predictions made ON THE SAME DAY (idempotent same-day re-runs)
+    # and always preserve scored rows. A re-run on a later day appends a new row,
+    # creating the history needed to measure whether predictions converge on actuals
+    # as the forecast date approaches. See context/intake/forecast-bias-investigation-2026-04-29.md
+    # for the diagnosis that motivated this.
     forecast_date = datetime.now().strftime("%Y-%m-%d")
     written = 0
     for (market, wk_key, lead, metric, value, ci_lo, ci_hi) in projected_rows:
@@ -162,8 +170,9 @@ def run(week_key: str) -> int:
             DELETE FROM ps.forecasts
             WHERE market = ? AND metric_name = ? AND target_period = ?
               AND method = 'v1_1_slim'
+              AND forecast_date = ?
               AND (scored IS NULL OR scored = false)
-        """, [market, metric, wk_key])
+        """, [market, metric, wk_key, forecast_date])
         shared_con.execute("""
             INSERT INTO ps.forecasts
                 (market, channel, metric_name, target_period, period_type,
