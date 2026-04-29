@@ -467,8 +467,15 @@ cleanup first, then typography, then features, then deferred items last.
 - **Verification:** Closed `<details class="sec-panel">` panels (Decomposition, Backtest) now use `padding-top/bottom: var(--gap-sm)` instead of the default large padding; stacked closed panels pack tight via `:not([open]) + details.sec-panel { margin-top: var(--gap-sm) }`. Feedback-bar reserves zero top margin when hidden; `.visible` class (added by `maybeShowFeedbackBar` when projection count ≥ 3) promotes it back. Total page height drops substantially — closed-default layout no longer reserves ~545px below the chart or ~149px for the hidden feedback bar.
 - **Verification method:** cold-load `/projection.html` → `document.documentElement.scrollHeight` before (~2,808px) vs after (measured post-load).
 - **Blast radius:** CSS inside projection.html + 3 lines of JS in `maybeShowFeedbackBar`. No market-specific behavior. No data changes. No state changes.
-- **Commit:** <filled after commit>
+- **Commit:** `91225c0`
 
+### P5-1 · Remove Brand/NB split chip — fold share into KPI tile deltas
+- **Source:** R19 #1 (MEDIUM)
+- **Status:** done
+- **Verification:** The P2-13 `.brand-nb-bar` element below the KPI strip is removed from `projection.html`. Brand Regs and NB Regs tiles now each show `↑ +X.Y% WoW · N% share` in their delta line. CPA tile delta is unchanged (no share concept). Early-year markets (<2 YTD weeks) surface just the share suffix without WoW.
+- **Why:** the bar and the tiles directly above it displayed the same 75%/25% split two different ways — pure duplication that extended the user's scan-for-relevant-info time. Share% belongs on each tile.
+- **Blast radius:** projection.html element deleted, `renderMarket` in projection-app.js extended `setWowDelta` signature with `shareSuffix` param, populated from `out.totals.brand_regs / nb_regs`. No solver / state / chart changes.
+- **Commit:** <filled after commit>
 ---
 
 

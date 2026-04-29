@@ -838,12 +838,22 @@
     // actuals — this is the "what's the trend on the ground" indicator.
     // Hero (period-aggregate) doesn't get WoW because it's not a weekly
     // number; only the weekly-trackable tiles surface it.
+    //
+    // P5-1 (2026-04-28): Brand/NB tiles also carry a share-of-total suffix
+    // ("· 75% share") so the projection-period share is readable from the
+    // tile itself. Replaces the old P2-13 split bar that sat below the KPI
+    // row showing the same numbers twice.
     const ytdW = marketData.ytd_weekly || [];
-    const setWowDelta = (elId, curVal, prevVal, invert) => {
+    const setWowDelta = (elId, curVal, prevVal, invert, shareSuffix) => {
       const el = document.getElementById(elId);
       if (!el) return;
       el.classList.remove('good', 'bad', 'neutral');
-      if (!curVal || !prevVal || prevVal === 0) { el.textContent = ''; return; }
+      const suffix = shareSuffix ? ` · ${shareSuffix}` : '';
+      if (!curVal || !prevVal || prevVal === 0) {
+        // Even with no WoW data we can still surface share%.
+        el.textContent = shareSuffix ? shareSuffix : '';
+        return;
+      }
       const pct = ((curVal - prevVal) / prevVal) * 100;
       const arrow = pct > 0.5 ? '↑' : (pct < -0.5 ? '↓' : '·');
       // When invert=true, up is bad (e.g., CPA rising); when false, up is good
@@ -852,9 +862,17 @@
         const isUp = pct > 0;
         cls = (isUp !== invert) ? 'good' : 'bad';
       }
-      el.textContent = `${arrow} ${pct > 0 ? '+' : ''}${pct.toFixed(1)}% WoW`;
+      el.textContent = `${arrow} ${pct > 0 ? '+' : ''}${pct.toFixed(1)}% WoW${suffix}`;
       el.classList.add(cls);
     };
+    // Compute Brand / NB share from projection totals (not YTD) — the share
+    // describes the projected period's composition, which is what the user
+    // cares about when reading the tile.
+    const totBNB = (t.brand_regs || 0) + (t.nb_regs || 0);
+    const brandSharePct = totBNB > 0 ? Math.round((t.brand_regs / totBNB) * 100) : null;
+    const nbSharePct    = totBNB > 0 ? 100 - brandSharePct : null;
+    const brandShareSuffix = brandSharePct != null ? `${brandSharePct}% share` : null;
+    const nbShareSuffix    = nbSharePct    != null ? `${nbSharePct}% share`    : null;
     if (ytdW.length >= 2) {
       const last = ytdW[ytdW.length - 1];
       const prev = ytdW[ytdW.length - 2];
@@ -868,15 +886,17 @@
       const prevRegs = prevBrandRegs + prevNbRegs;
       const curCpa = curRegs > 0 ? curCost / curRegs : 0;
       const prevCpa = prevRegs > 0 ? prevCost / prevRegs : 0;
-      setWowDelta('kpi-brand-regs-delta', curBrandRegs, prevBrandRegs, false);
-      setWowDelta('kpi-nb-regs-delta', curNbRegs, prevNbRegs, false);
-      setWowDelta('kpi-cpa-delta', curCpa, prevCpa, true);  // CPA up = bad
+      setWowDelta('kpi-brand-regs-delta', curBrandRegs, prevBrandRegs, false, brandShareSuffix);
+      setWowDelta('kpi-nb-regs-delta',    curNbRegs,    prevNbRegs,    false, nbShareSuffix);
+      setWowDelta('kpi-cpa-delta',        curCpa,       prevCpa,       true);  // CPA up = bad; no share
     } else {
-      // Clear any prior content when YTD is too short (e.g., early-year markets)
-      ['kpi-brand-regs-delta', 'kpi-nb-regs-delta', 'kpi-cpa-delta'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) { el.textContent = ''; el.classList.remove('good', 'bad', 'neutral'); }
-      });
+      // Early-year markets: still surface share% even without WoW data.
+      const brandDeltaEl = document.getElementById('kpi-brand-regs-delta');
+      const nbDeltaEl    = document.getElementById('kpi-nb-regs-delta');
+      if (brandDeltaEl) { brandDeltaEl.textContent = brandShareSuffix || ''; brandDeltaEl.classList.remove('good','bad','neutral'); }
+      if (nbDeltaEl)    { nbDeltaEl.textContent    = nbShareSuffix    || ''; nbDeltaEl.classList.remove('good','bad','neutral'); }
+      const cpaDeltaEl  = document.getElementById('kpi-cpa-delta');
+      if (cpaDeltaEl)   { cpaDeltaEl.textContent   = ''; cpaDeltaEl.classList.remove('good','bad','neutral'); }
     }
     // Clear efficiency delta — it's a period-aggregate, not weekly.
     const ieDeltaEl = document.getElementById('kpi-ieccp-delta');
@@ -937,27 +957,11 @@
       regsEl.textContent = '—';
     }
 
-    // P2-13: populate the Brand/NB split bar under the KPI strip.
-    const brandBar = document.getElementById('brand-nb-seg-brand');
-    const nbBar    = document.getElementById('brand-nb-seg-nb');
-    if (brandBar && nbBar) {
-      const totalBNB = (t.brand_regs || 0) + (t.nb_regs || 0);
-      if (totalBNB > 0) {
-        const bPct = Math.round((t.brand_regs / totalBNB) * 100);
-        const nPct = 100 - bPct;
-        brandBar.style.flex = String(bPct);
-        nbBar.style.flex    = String(nPct);
-        brandBar.textContent = bPct >= 10 ? `Brand ${bPct}% · ${fmtNum(t.brand_regs)}` : '';
-        nbBar.textContent    = nPct >= 10 ? `NB ${nPct}% · ${fmtNum(t.nb_regs)}`       : '';
-        brandBar.title = `Brand: ${fmtNum(t.brand_regs)} regs (${bPct}%)`;
-        nbBar.title    = `Non-Brand: ${fmtNum(t.nb_regs)} regs (${nPct}%)`;
-      } else {
-        brandBar.style.flex = '1';
-        nbBar.style.flex = '1';
-        brandBar.textContent = '';
-        nbBar.textContent = '';
-      }
-    }
+    // P5-1 (2026-04-28): The P2-13 Brand/NB split bar that lived here was
+    // removed — the same 75%/25% share is now folded into each KPI tile's
+    // delta line ("↑ +5.6% WoW · 75% share"). Kills the dup between the
+    // bar and the tiles directly above it. HTML element also removed.
+
 
     // Apply animated arrival classes
     spendLine.classList.remove('arrival-brand');
