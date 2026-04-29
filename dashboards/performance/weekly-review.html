@@ -354,10 +354,31 @@ body {
   border-radius: 8px;
 }
 
-/* Callout narrative — highlighted left border in brand blue like the hero */
+/* Callout narrative — highlighted left border in brand blue like the hero.
+   WR-C3 (2026-04-28): split heading into meta + headline lines so the h3
+   carries the one-line summary instead of generic W17-US scaffolding. */
 .wr-callout-main {
   border-left: 3px solid var(--color-brand);
 }
+.wr-callout-meta {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.wr-callout-headline {
+  font-size: var(--size-body);
+  font-weight: 600;
+  color: var(--color-text-hero);
+  line-height: 1.4;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: var(--gap-sm);
+}
+/* Legacy selectors kept for any other code paths — now unused on the
+   rendered page after WR-C3 but harmless. */
 .wr-callout-main h3 { display: flex; justify-content: space-between; align-items: center; }
 .wr-callout-period {
   font-weight: 400;
@@ -647,12 +668,27 @@ function renderCallout() {
 
   let html = '';
 
-  // Full callout narrative
-  const calloutHtml = (c.full_callout || c.headline || '').replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+  // WR-C3 (2026-04-28): headline de-duplication.
+  // full_callout historically starts with the same text as headline, so
+  // rendering full_callout alone buried the one-line summary inside
+  // paragraph 1 of prose. Lift the headline into the h3 and strip it
+  // from the body so the reader scans {market}·{week}·{period} →
+  // one-line summary → detail instead of {market}·{week} → prose that
+  // starts with the summary.
+  const headlineText = (c.headline || '').trim();
+  const fullText = (c.full_callout || '').trim();
+  const bodyText = (fullText && headlineText && fullText.startsWith(headlineText))
+    ? fullText.slice(headlineText.length).trimStart()
+    : fullText;
+  const bodyHtml = bodyText.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+  const h3Content = headlineText || (curMarket + ' ' + curWeek);
+
   html += '<div class="sec-panel wr-grid-full wr-callout-main" id="sec-callout">' +
-    '<h3>' + curWeek + ' &mdash; ' + curMarket +
-    '<span class="wr-callout-period">' + (c.period || '') + '</span></h3>' +
-    '<div class="wr-callout-narrative">' + calloutHtml + '</div></div>';
+    '<div class="wr-callout-meta">' + curMarket + ' &middot; ' + curWeek +
+      (c.period ? ' &middot; ' + c.period : '') + '</div>' +
+    '<h3 class="wr-callout-headline">' + h3Content + '</h3>' +
+    (bodyHtml ? '<div class="wr-callout-narrative">' + bodyHtml + '</div>' : '') +
+    '</div>';
 
   // Brand + Non-Brand channel detail
   html += channelCard('Brand', c.brand_detail, 'sec-channels');

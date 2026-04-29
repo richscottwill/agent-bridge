@@ -65,7 +65,7 @@ Compounding-effect ordering so each commit's ground is stable before the next.
 - **Finding:** Header `#dataTs` and footer `#genTs` say similar things; footer is page-render time (always now).
 - **Fix:** Removed `#genTs` element + its JS write. Sharpened header to `Data as of Sun Apr 27 · Forecast through W17`.
 - **Verification:** Only one timestamp on the page. Footer region is blank (element removed from HTML). `document.getElementById('genTs')` returns null.
-- **Commit:** <filled after commit>
+- **Commit:** `edfea36`
 
 ### WR-C3 · Callout headline de-duplication
 - **Source:** wbr #3 (MED)
