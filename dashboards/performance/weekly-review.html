@@ -125,6 +125,23 @@ body {
   color: var(--color-text-on-brand);
   border-color: var(--color-brand);
 }
+/* WR-C7 (2026-04-28): forecast-only markets (no callout narrative yet) get
+   a dashed border so the gap is visible without hiding the tab. Selecting
+   one still works; callout section renders its empty state. */
+.wr-tab.wr-tab-no-callout {
+  border-style: dashed;
+  color: var(--color-text-subtle);
+}
+.wr-tab.wr-tab-no-callout:hover {
+  border-style: dashed;
+  color: var(--color-brand);
+}
+.wr-tab.wr-tab-no-callout.active {
+  background: var(--color-brand);
+  color: var(--color-text-on-brand);
+  border-color: var(--color-brand);
+  border-style: solid;
+}
 .wr-week-nav {
   display: flex;
   align-items: center;
@@ -493,10 +510,16 @@ Promise.all([
 function init() {
   // Display order mirrors callout dashboard: WW + EU5 first, then key markets.
   const MARKET_ORDER = ['WW','US','EU5','CA','UK','DE','FR','IT','ES','JP','MX','AU'];
-  // Intersect callout markets with forecast markets so every tab has both.
-  const markets = MARKET_ORDER.filter(m =>
-    (CALLOUTS.markets || []).includes(m) && (FORECAST.markets || []).includes(m)
-  );
+  // WR-C7 (2026-04-28): use UNION of callout + forecast markets so the EU5
+  // member markets (UK/DE/FR/IT/ES) surface as tabs even when the callout
+  // pipeline hasn't authored narrative for them yet. Forecast-only markets
+  // render with a † marker and dashed tab border; selecting one shows KPIs
+  // + chart + table normally and surfaces "No callout for {market}" in the
+  // callout section. Prior behavior was intersection, which silently
+  // swallowed any market present in only one data source.
+  const calloutSet = new Set(CALLOUTS.markets || []);
+  const forecastSet = new Set(FORECAST.markets || []);
+  const markets = MARKET_ORDER.filter(m => calloutSet.has(m) || forecastSet.has(m));
   curMarket = markets[0] || 'US';
   curWeek = (CALLOUTS.weeks && CALLOUTS.weeks[0]) || ('W' + (FORECAST.max_week || 15));
 
@@ -504,8 +527,13 @@ function init() {
   const tabs = document.getElementById('marketTabs');
   markets.forEach(m => {
     const b = document.createElement('button');
-    b.className = 'wr-tab' + (m === curMarket ? ' active' : '');
-    b.textContent = m;
+    const forecastOnly = !calloutSet.has(m);
+    b.className = 'wr-tab' +
+      (m === curMarket ? ' active' : '') +
+      (forecastOnly ? ' wr-tab-no-callout' : '');
+    b.textContent = forecastOnly ? m + '\u2020' : m;  // dagger indicates no callout
+    b.dataset.market = m;  // WR-C7: stable ref for active-state toggle
+    if (forecastOnly) b.title = 'Forecast only — no callout narrative for this market yet.';
     b.onclick = () => { curMarket = m; render(); };
     tabs.appendChild(b);
   });
@@ -602,9 +630,14 @@ function safeWoW(cur, prev) {
 // ============================================================================
 
 function render() {
-  // Update active states
+  // Update active states (WR-C7: use data-market instead of textContent
+  // since forecast-only markets carry a dagger suffix in their label).
   document.querySelectorAll('#marketTabs .wr-tab').forEach(b => {
-    b.className = 'wr-tab' + (b.textContent === curMarket ? ' active' : '');
+    const m = b.dataset.market;
+    const forecastOnly = b.classList.contains('wr-tab-no-callout');
+    b.className = 'wr-tab' +
+      (m === curMarket ? ' active' : '') +
+      (forecastOnly ? ' wr-tab-no-callout' : '');
   });
   const weeks = CALLOUTS.weeks || [];
   document.getElementById('prevWeek').disabled = weeks.indexOf(curWeek) >= weeks.length - 1;
