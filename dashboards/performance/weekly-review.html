@@ -757,7 +757,48 @@ function renderKPIs() {
   const wow = wowRaw != null ? wowRaw.toFixed(1) : null;
   const wowClass = wowRaw == null ? 'warn' : cls(wowRaw, false);
   const w52 = weeks.find(w => w.wk === 52);
-  const yearEndPred = w52 && w52.pred_regs ? w52.pred_regs : null;
+  // WR-C6 (2026-04-28): year-end prediction tile removed — Year-End is a
+  // projection-engine concern; on a weekly review it's 35+ weeks away and
+  // every week's tiny movement invites reaction to noise. Leaving the w52
+  // lookup here commented out as a sign of intent; uncomment if we ever
+  // want to surface YE elsewhere on this page.
+  // const yearEndPred = w52 && w52.pred_regs ? w52.pred_regs : null;
+  void w52;
+
+  // WR-C6: OP2 Pacing tile. Two sources fold together — the weekly passive
+  // target from FORECAST (last.op2_regs) AND the month-end pacing projection
+  // from callouts (callout.projections.month_end.vs_op2_spend). We prefer
+  // the month-end projection when it's populated (richer: includes pacing
+  // sign + magnitude) and fall back to weekly actual vs weekly OP2 when
+  // the refresh-callouts.py pipeline hasn't populated current-week
+  // projections yet (common on W16/W17 pre-refresh).
+  let op2PacingTile = '';
+  if (curMetric === 'regs' && last.regs && last.op2_regs) {
+    const weeklyDiff = last.regs - last.op2_regs;
+    const weeklyPct = (weeklyDiff / last.op2_regs) * 100;
+    const weeklyCls = cls(weeklyPct, false);
+    const sign = weeklyPct > 0 ? '+' : '';
+    const dir = weeklyDiff >= 0 ? 'ahead of' : 'behind';
+    // Prefer month-end projection when present.
+    const monthEnd = ((CALLOUTS.callouts[curMarket] || {})[curWeek] || {}).projections?.month_end;
+    if (monthEnd && Number.isFinite(monthEnd.vs_op2_spend)) {
+      const mPct = monthEnd.vs_op2_spend;
+      const mCls = cls(mPct, false);
+      const mSign = mPct > 0 ? '+' : '';
+      const periodTag = monthEnd.period || 'Month-end';
+      op2PacingTile = `<div class="hero-kpi">
+        <div class="hero-kpi-label">vs OP2 (pacing)</div>
+        <div class="hero-kpi-value wr-delta ${mCls}">${mSign}${mPct.toFixed(1)}%</div>
+        <div class="hero-kpi-delta ${mCls}">${periodTag}: ${fmt(monthEnd.regs_proj || monthEnd.spend_proj)} proj</div>
+      </div>`;
+    } else {
+      op2PacingTile = `<div class="hero-kpi">
+        <div class="hero-kpi-label">vs OP2</div>
+        <div class="hero-kpi-value wr-delta ${weeklyCls}">${sign}${weeklyPct.toFixed(1)}%</div>
+        <div class="hero-kpi-delta ${weeklyCls}">${sign}${Math.round(weeklyDiff).toLocaleString()} ${dir} ${fmt(last.op2_regs, 'regs')} plan</div>
+      </div>`;
+    }
+  }
 
   // Map curMetric to fmt() format tag for consistent rendering
   const fmtTag = curMetric === 'cost' ? '$' : (curMetric === 'cpa' ? 'cpa' : null);
@@ -779,16 +820,7 @@ function renderKPIs() {
       <div class="hero-kpi-value">${wow != null ? (wow > 0 ? '+' : '') + wow + '%' : '\u2014'}</div>
       <div class="hero-kpi-delta ${wowClass}">vs prior</div>
     </div>
-    ${curMetric === 'regs' && yearEndPred ? `<div class="hero-kpi">
-      <div class="hero-kpi-label">Year-End Pred</div>
-      <div class="hero-kpi-value">${fmt(yearEndPred, 'regs')}</div>
-      <div class="hero-kpi-delta">W52 forecast</div>
-    </div>` : ''}
-    ${curMetric === 'regs' && last.op2_regs ? `<div class="hero-kpi">
-      <div class="hero-kpi-label">OP2 Target</div>
-      <div class="hero-kpi-value">${fmt(last.op2_regs, 'regs')}</div>
-      <div class="hero-kpi-delta">weekly</div>
-    </div>` : ''}
+    ${op2PacingTile}
   `;
 }
 
