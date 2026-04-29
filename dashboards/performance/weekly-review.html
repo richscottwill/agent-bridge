@@ -53,6 +53,38 @@
   font-size: var(--size-meta);
 }
 
+/* WR-D5 (2026-04-28): Three-question WBR framing. Three cards, one
+   sentence each, derived from callout metrics. Renders below the
+   narrative so the reader reads (1) the prose → (2) the 3 answers →
+   (3) the KPIs that substantiate them. */
+.wr-three-q {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-md);
+  margin-bottom: var(--gap-lg);
+}
+@media (max-width: 900px) { .wr-three-q { grid-template-columns: 1fr; } }
+.wr-q-card {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 8px;
+  padding: var(--gap-md);
+}
+.wr-q-label {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: var(--gap-xs);
+}
+.wr-q-body {
+  font-size: var(--size-ui);
+  color: var(--color-text-body);
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
 /* WR-D1 (2026-04-28): Forecast Hit Rate scorecard — 3 tiles + one-line
    auto-narrative summarizing the model's grade against last N weeks of
    actuals. The differentiation organ: this is the one thing weekly review
@@ -575,11 +607,27 @@ body {
   </div>
 </div>
 
-<!-- WR-D3 (2026-04-28): callout narrative renders first (above scorecard +
-     KPIs) so a leader's first read is the written one-liner + supporting
-     prose. Details (Brand/NB, Context, Drivers, Stakeholders) stay at the
-     bottom. -->
+<!-- WR-D3 callout narrative (top) -->
 <div id="calloutNarrative"></div>
+
+<!-- WR-D5 (2026-04-28): three-question framing below the narrative.
+     Customer experience / Business performance / Pacing to target.
+     Content derived from callout.metrics + brand_detail + nb_detail +
+     projections.month_end.vs_op2_spend. Hidden when no callout. -->
+<div class="wr-three-q" id="threeQ" style="display:none">
+  <div class="wr-q-card">
+    <div class="wr-q-label">1 &middot; What did customers experience</div>
+    <div class="wr-q-body" id="qCustomer">&mdash;</div>
+  </div>
+  <div class="wr-q-card">
+    <div class="wr-q-label">2 &middot; How did the business do</div>
+    <div class="wr-q-body" id="qBusiness">&mdash;</div>
+  </div>
+  <div class="wr-q-card">
+    <div class="wr-q-label">3 &middot; Are we on track</div>
+    <div class="wr-q-body" id="qPacing">&mdash;</div>
+  </div>
+</div>
 
 <!-- ============ TRACKER SECTION (chart + KPIs + weekly detail) ============ -->
 <div id="sec-kpis"></div>
@@ -875,6 +923,7 @@ function render() {
   document.getElementById('nextWeek').disabled = weeks.indexOf(curWeek) <= 0;
 
   renderCallout();
+  renderThreeQ();
   renderScorecard();
   renderKPIs();
   renderChart();
@@ -924,7 +973,6 @@ function renderCalloutNarrative() {
     '</div>';
 }
 
-// WR-D4 helper — returns inline HTML or '' when no useful deltas available.
 function renderSinceLastWeekHtml(c) {
   if (!c) return '';
   const m = c.metrics || {};
@@ -962,6 +1010,91 @@ function renderSinceLastWeekHtml(c) {
     `<div class="wr-since-label">Since last week</div>` +
     `<div class="wr-since-body">${parts.join('  &middot;  ')}</div>` +
     `</div>`;
+}
+
+// WR-D5 (2026-04-28): three-question WBR framing — customer experience /
+// business performance / pacing. Derived from callout metrics; hidden when
+// no callout. Each sentence is 8-14 words with em-dash fallback for
+// missing fields so "undefined" never renders.
+function renderThreeQ() {
+  const host = document.getElementById('threeQ');
+  if (!host) return;
+  const c = (CALLOUTS.callouts[curMarket] || {})[curWeek];
+  if (!c) { host.style.display = 'none'; return; }
+  host.style.display = '';
+  const m = c.metrics || {};
+  const brand = c.brand_detail || {};
+  const nb = c.nb_detail || {};
+  const proj = c.projections || {};
+  const pe = proj.month_end;
+
+  const fmtSigned = (v, invert) => {
+    if (v == null || !Number.isFinite(v)) return null;
+    const sign = v > 0 ? '+' : '';
+    const dir = invert ? (v > 0 ? 'up' : 'down') : (v > 0 ? 'up' : 'down');
+    return { abs: Math.abs(v).toFixed(0), sign: sign, dir: dir, raw: v };
+  };
+
+  // 1. Customer — CPA shift on Brand vs NB; fallback to CVR when CPA missing.
+  let qCustomer = '\u2014';
+  {
+    const bCpa = fmtSigned(brand.cpa_wow, true);
+    const nCpa = fmtSigned(nb.cpa_wow, true);
+    if (bCpa && nCpa) {
+      qCustomer = `CPA ${bCpa.dir} ${bCpa.abs}% on Brand, ${nCpa.dir} ${nCpa.abs}% on NB.`;
+    } else if (bCpa) {
+      qCustomer = `CPA ${bCpa.dir} ${bCpa.abs}% on Brand.`;
+    } else if (nCpa) {
+      qCustomer = `CPA ${nCpa.dir} ${nCpa.abs}% on NB.`;
+    } else if (brand.cvr_wow != null || nb.cvr_wow != null) {
+      const c2 = fmtSigned(nb.cvr_wow || brand.cvr_wow, false);
+      if (c2) qCustomer = `CVR ${c2.dir} ${c2.abs}% this week.`;
+    }
+  }
+
+  // 2. Business — regs WoW + YoY + which channel led.
+  let qBusiness = '\u2014';
+  {
+    const rWow = fmtSigned(m.regs_wow, false);
+    const rYoy = fmtSigned(m.regs_yoy, false);
+    if (rWow && Number.isFinite(m.regs)) {
+      const regsStr = m.regs >= 1000
+        ? (m.regs / 1000).toFixed(1) + 'K'
+        : String(Math.round(m.regs));
+      const yoyPart = rYoy ? `, ${rYoy.sign}${rYoy.abs}% YoY` : '';
+      const leader = (nb.regs_wow || 0) > (brand.regs_wow || 0) ? 'NB led' : 'Brand led';
+      qBusiness = `${regsStr} regs (${rWow.sign}${rWow.abs}% WoW${yoyPart}). ${leader}.`;
+    } else if (rWow) {
+      qBusiness = `Regs ${rWow.dir} ${rWow.abs}% WoW.`;
+    }
+  }
+
+  // 3. Pacing — prefers projections.month_end.vs_op2_spend; falls back to
+  // last-week vs OP2 weekly when projections are empty (current weeks).
+  let qPacing = '\u2014';
+  if (pe && Number.isFinite(pe.vs_op2_spend)) {
+    const v = pe.vs_op2_spend;
+    const sign = v > 0 ? '+' : '';
+    const where = v > 0 ? 'ahead' : (v < 0 ? 'behind' : 'on');
+    const period = pe.period || 'Month';
+    qPacing = `${period} projected ${sign}${v.toFixed(1)}% vs OP2. Pacing ${where}.`;
+  } else {
+    // Fallback: weekly actual vs weekly OP2 from forecast.
+    const weeks = (FORECAST.weekly && FORECAST.weekly[curMarket]) || [];
+    const maxWk = FORECAST.max_week || 15;
+    const actualWeeks = weeks.filter(w => w.wk <= maxWk && (w.regs > 0 || w.cost > 0));
+    const last = actualWeeks[actualWeeks.length - 1] || {};
+    if (last.regs && last.op2_regs) {
+      const v = (last.regs - last.op2_regs) / last.op2_regs * 100;
+      const sign = v > 0 ? '+' : '';
+      const where = v > 0 ? 'ahead' : (v < 0 ? 'behind' : 'on');
+      qPacing = `Latest week ${sign}${v.toFixed(1)}% vs weekly OP2. Pacing ${where}.`;
+    }
+  }
+
+  document.getElementById('qCustomer').textContent = qCustomer;
+  document.getElementById('qBusiness').textContent = qBusiness;
+  document.getElementById('qPacing').textContent   = qPacing;
 }
 
 function renderCalloutDetails() {
