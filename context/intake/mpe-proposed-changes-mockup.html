@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MPE — Proposed Changes Mockup (Local Kiro, 2026-04-28)</title>
+<link rel="stylesheet" href="../../dashboards/projection-design-system.css">
+<style>
+  body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 32px;
+    font-family: var(--font-sans);
+    color: var(--color-text-body);
+    background: var(--color-neutral-bg);
+    line-height: 1.5;
+  }
+  h1 { font-size: 28px; font-weight: 700; color: var(--color-text-hero); margin: 0 0 4px 0; }
+  h2 { font-size: 20px; font-weight: 600; color: var(--color-text-hero); margin: 40px 0 12px 0; padding-bottom: 6px; border-bottom: 2px solid #E5E5E5; }
+  .doc-meta { font-size: 13px; color: var(--color-text-meta); margin-bottom: 32px; }
+  .toc { background: #FAFAFA; border: 1px solid #E5E5E5; border-radius: 8px; padding: 16px 20px; margin-bottom: 32px; font-size: 13px; line-height: 1.9; }
+  .toc a { color: #0066CC; text-decoration: none; font-weight: 500; }
+  .toc a:hover { text-decoration: underline; }
+
+  .proposal {
+    margin: 32px 0;
+    padding: 20px 24px;
+    border: 1px solid #E5E5E5;
+    border-radius: 10px;
+    background: #FFFFFF;
+    scroll-margin-top: 20px;
+  }
+  .proposal-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .proposal-num {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0066CC;
+    font-variant-numeric: tabular-nums;
+    min-width: 40px;
+  }
+  .proposal-title { font-size: 20px; font-weight: 600; color: var(--color-text-hero); flex: 1; }
+  .priority-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 10px;
+    letter-spacing: 0.06em;
+  }
+  .priority-high { background: #D13212; color: white; }
+  .priority-medium { background: #E8A800; color: white; }
+  .priority-low { background: #9A9A9A; color: white; }
+
+  .proposal-sub { font-size: 13px; color: var(--color-text-meta); margin-bottom: 16px; line-height: 1.5; padding-left: 52px; }
+  .proposal-sub strong { color: var(--color-text-body); }
+
+  .ba-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .ba-cell {
+    border: 1px solid #E5E5E5;
+    border-radius: 8px;
+    padding: 20px 16px 14px 16px;
+    min-height: 120px;
+    position: relative;
+    background: white;
+  }
+  .ba-cell.before { background: #FFF9F5; border-color: #F2D4B5; }
+  .ba-cell.after { background: #F0F9FF; border-color: #A8D4F0; }
+  .ba-label {
+    position: absolute;
+    top: -9px;
+    left: 12px;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 3px;
+  }
+  .ba-cell.before .ba-label { color: white; background: #C45500; }
+  .ba-cell.after .ba-label { color: white; background: #0066CC; }
+
+  .code-block {
+    background: #1A1A1A;
+    color: #D4D4D4;
+    padding: 14px 16px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono','SF Mono',Menlo,Monaco,Consolas,monospace;
+    font-size: 11.5px;
+    line-height: 1.5;
+    overflow-x: auto;
+    margin-top: 14px;
+    white-space: pre;
+  }
+  .code-block.small { font-size: 11px; }
+  .accept {
+    background: #F0F9FF;
+    border-left: 3px solid #0066CC;
+    padding: 10px 14px;
+    font-size: 12px;
+    margin-top: 12px;
+    border-radius: 0 4px 4px 0;
+  }
+  .accept strong { color: #0066CC; }
+
+  /* --- Reusable mockup components matching MPE design --- */
+  .hero-kpi-strip-mock {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 14px 0;
+    flex-wrap: wrap;
+  }
+  .hero-kpi-mock {
+    text-align: center;
+    padding: 6px 12px;
+    min-width: 100px;
+  }
+  .hero-kpi-mock-label { font-size: 11px; color: #9A9A9A; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 500; }
+  .hero-kpi-mock-value { font-size: 22px; font-weight: 700; color: #0A0A0A; font-variant-numeric: tabular-nums; margin-top: 2px; }
+  .hero-kpi-mock-delta { font-size: 11px; margin-top: 3px; font-variant-numeric: tabular-nums; }
+  .delta-up { color: #14A548; }
+  .delta-down { color: #D13212; }
+  .delta-neutral { color: #6B6B6B; }
+
+  .combined-tile {
+    background: #F0F9FF;
+    border: 1px solid #A8D4F0;
+    border-radius: 8px;
+    padding: 14px 18px;
+    text-align: center;
+    max-width: 280px;
+    margin: 8px auto;
+  }
+  .combined-tile-label { font-size: 11px; color: #6B6B6B; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; }
+  .combined-tile-main-row { display: flex; justify-content: center; gap: 16px; margin-top: 6px; }
+  .combined-tile-stat { display: flex; flex-direction: column; }
+  .combined-tile-stat-label { font-size: 10px; color: #6B6B6B; text-transform: uppercase; letter-spacing: 0.04em; }
+  .combined-tile-stat-value { font-size: 20px; font-weight: 700; color: #0A0A0A; font-variant-numeric: tabular-nums; }
+  .combined-tile-detail { font-size: 11px; color: #0F7A3A; margin-top: 6px; font-style: italic; }
+
+  .alert-mock {
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+    margin: 8px 0;
+    border: 1px solid;
+  }
+  .alert-mock.critical { background: #FEE2E2; border-color: #F2A4A4; color: #7A1810; }
+  .alert-mock.warn { background: #FFF4D6; border-color: #E8C87A; color: #7A5500; }
+  .alert-mock.info { background: #F0F9FF; border-color: #A8D4F0; color: #0066CC; }
+  .alert-title { font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; }
+  .alert-body { margin-bottom: 8px; line-height: 1.5; }
+  .alert-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .alert-action {
+    font-size: 11px;
+    padding: 5px 10px;
+    background: white;
+    border: 1px solid #E5E5E5;
+    border-radius: 4px;
+    display: inline-block;
+    cursor: pointer;
+    color: #1A1A1A;
+    font-weight: 500;
+  }
+  .alert-action.primary { background: #0066CC; color: white; border-color: #0066CC; }
+  .alert-severity-pill {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-right: 8px;
+  }
+  .pill-critical { background: #D13212; color: white; }
+  .pill-warn { background: #E8A800; color: white; }
+  .pill-info { background: #0066CC; color: white; }
+
+  .since-last-week {
+    background: #F6FAFF;
+    border-left: 4px solid #0066CC;
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #161D26;
+  }
+  .since-last-week strong { color: #0066CC; }
+  .delta-tag {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    margin: 0 2px;
+  }
+  .delta-tag.up { background: #D1F2DB; color: #0F7A3A; }
+  .delta-tag.down { background: #F9B4B4; color: #7A1810; }
+
+  .confidence-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 6px;
+    vertical-align: baseline;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .conf-high { background: #D1F2DB; color: #0F7A3A; }
+  .conf-medium { background: #FFE4B5; color: #7A5500; }
+  .conf-low { background: #F9B4B4; color: #7A1810; }
+
+  .market-pulse-strip {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    padding: 10px 12px;
+    background: #FAFAFA;
+    border: 1px solid #E5E5E5;
+    border-radius: 8px;
+    flex-wrap: wrap;
+  }
+  .pulse-dot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6B6B6B;
+    cursor: pointer;
+    padding: 4px 6px;
+    border-radius: 6px;
+    transition: background 150ms;
+    min-width: 42px;
+  }
+  .pulse-dot:hover { background: #F0F9FF; }
+  .pulse-dot.active { background: #E3F2FD; }
+  .pulse-circle {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-bottom: 2px;
+  }
+  .pulse-green { background: #14A548; }
+  .pulse-yellow { background: #E8A800; }
+  .pulse-red { background: #D13212; }
+  .pulse-gray { background: #C8C8C8; }
+
+  .ci-context-line {
+    font-size: 13px;
+    color: #6B6B6B;
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+  .ci-context-line strong { color: #161D26; }
+  .plan-in-range-yes { color: #0F7A3A; font-weight: 600; }
+  .plan-in-range-no { color: #D13212; font-weight: 600; }
+
+  .contingency-nudge {
+    font-size: 12px;
+    color: #6B6B6B;
+    font-style: italic;
+    padding: 6px 10px;
+    background: #FAFAFA;
+    border-radius: 4px;
+    margin-top: 4px;
+  }
+
+  .confidence-sparkline {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 32px;
+    padding: 4px 8px;
+    background: #FAFAFA;
+    border-radius: 4px;
+  }
+  .conf-bar {
+    flex: 1;
+    background: #0066CC;
+    min-height: 4px;
+    border-radius: 2px 2px 0 0;
+    opacity: 0.75;
+  }
+
+  /* Typography inventory — items #12/#13 */
+  .font-inventory-table, .gap-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 12px;
+  }
+  .font-inventory-table th, .gap-table th {
+    text-align: left;
+    padding: 8px 10px;
+    background: #FAFAFA;
+    border-bottom: 2px solid #E5E5E5;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #6B6B6B;
+  }
+  .font-inventory-table td, .gap-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #E5E5E5;
+    vertical-align: middle;
+  }
+  .bad-size { background: #FFF0F0; }
+  .good-size { background: #F0F9FF; }
+  .fractional-size { background: #FFF4D6; }
+  .font-sample { font-variant-numeric: tabular-nums; }
+  .gap-bar {
+    display: inline-block;
+    height: 12px;
+    background: #C8C8C8;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  .gap-bar.large { background: #D13212; }
+  .gap-bar.medium { background: #E8A800; }
+
+  .old-context { font-size: 12px; color: #6B6B6B; margin-top: 4px; line-height: 1.5; }
+
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 13px;
+  }
+  .summary-table th, .summary-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #E5E5E5;
+    text-align: left;
+    vertical-align: top;
+  }
+  .summary-table th {
+    background: #FAFAFA;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #6B6B6B;
+  }
+  .summary-table tr:hover { background: #FAFAFA; }
+</style>
+</head>
+<body>
+
+<h1>MPE Proposed Changes — Visual Mockup</h1>
+<div class="doc-meta">
+  Local Kiro review, 2026-04-28. Each section: problem context → visual before/after → exact code snippet → acceptance criteria.
+  <br>Live page: <a href="http://localhost:8080/projection.html">localhost:8080/projection.html</a>. Live screenshots: <code>context/intake/mpe-r19-*.png</code>.
+</div>
+
+<div class="toc">
+  <strong>Contents:</strong><br>
+  <a href="#p1">#1 Remove Brand/NB split chip (duplicate)</a> ·
+  <a href="#p2">#2 Merge Warnings + Model Alerts</a> ·
+  <a href="#p3">#3 Default-close Model View drawer</a> ·
+  <a href="#p4">#4 Hide Saved Projections when empty</a> ·
+  <a href="#p5">#5 "Since last week" auto-summary</a> <span class="priority-badge priority-high">HIGH</span> ·
+  <a href="#p6">#6 CI quality label + plan-in-range</a> <span class="priority-badge priority-high">HIGH</span> ·
+  <a href="#p7">#7 Collapse VS OP2 tiles</a> ·
+  <a href="#p8">#8 Action-first alerts</a> <span class="priority-badge priority-high">HIGH</span> ·
+  <a href="#p9">#9 Fit quality empty-state copy</a> ·
+  <a href="#p10">#10 Cross-market pulse strip</a> ·
+  <a href="#p11">#11 Confidence timeline sparkline</a> ·
+  <a href="#p12">#12 Typography consolidation (15 → 5 sizes)</a> <span class="priority-badge priority-high">HIGH</span> ·
+  <a href="#p13">#13 Whitespace cleanup (545px dead gap)</a> <span class="priority-badge priority-high">HIGH</span>
+</div>
+
+<!-- =============================================== -->
+<h2>Part A — Content hygiene (fixes 1–11)</h2>
+
+<!-- #1 -->
+<div class="proposal" id="p1">
+  <div class="proposal-header">
+    <span class="proposal-num">1</span>
+    <span class="proposal-title">Remove Brand/NB split chip (duplicates KPI tiles)</span>
+    <span class="priority-badge priority-medium">MEDIUM</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Problem:</strong> The chip "Brand 75% · 17,453 / NB 25% · 5,887" sits below the KPI tiles showing the exact same numbers in "BRAND REGS 17,453" and "NB REGS 5,887". Two reads, zero new information. Per Coupler's adoption research, every duplicate element extends the "where do I look?" scan time.
+  </div>
+  <div class="ba-row">
+    <div class="ba-cell before">
+      <div class="ba-label">Before</div>
+      <div class="hero-kpi-strip-mock">
+        <div class="hero-kpi-mock"><div class="hero-kpi-mock-label">Brand Regs</div><div class="hero-kpi-mock-value">17,453</div><div class="hero-kpi-mock-delta delta-up">↑ +5.6% WoW</div></div>
+        <div class="hero-kpi-mock"><div class="hero-kpi-mock-label">NB Regs</div><div class="hero-kpi-mock-value">5,887</div><div class="hero-kpi-mock-delta delta-up">↑ +17.4% WoW</div></div>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#6B6B6B;margin-top:8px;background:#FFF;border:1px solid #E5E5E5;border-radius:4px;padding:6px 12px;display:inline-block">
+        Brand 75% · 17,453 &nbsp;·&nbsp; NB 25% · 5,887
+      </div>
+      <div class="old-context">↑ The chip below tiles is redundant — same numbers twice.</div>
+    </div>
+    <div class="ba-cell after">
+      <div class="ba-label">After</div>
+      <div class="hero-kpi-strip-mock">
+        <div class="hero-kpi-mock"><div class="hero-kpi-mock-label">Brand Regs</div><div class="hero-kpi-mock-value">17,453</div><div class="hero-kpi-mock-delta delta-up">↑ +5.6% WoW · 75% share</div></div>
+        <div class="hero-kpi-mock"><div class="hero-kpi-mock-label">NB Regs</div><div class="hero-kpi-mock-value">5,887</div><div class="hero-kpi-mock-delta delta-up">↑ +17.4% WoW · 25% share</div></div>
+      </div>
+      <div style="font-size:12px;color:#0F7A3A;margin-top:8px;text-align:center">Share % folded into the delta line on each tile. No duplicate chip. Vertical space reclaimed.</div>
+    </div>
+  </div>
+<div class="code-block">// projection-app.js — inside renderKpi() or renderHeroContext()
+// REMOVE the .hero-kpi-split-chip block entirely, then extend the KPI delta line:
+function renderKpiDelta(tile, wowPct, sharePct) {
+  const sign = wowPct >= 0 ? '↑' : '↓';
+  const signCls = wowPct >= 0 ? 'delta-up' : 'delta-down';
+  tile.querySelector('.hero-kpi-delta').innerHTML =
+    `<span class="${signCls}">${sign} ${Math.abs(wowPct).toFixed(1)}% WoW</span>` +
+    `<span style="color:#9A9A9A"> · ${sharePct}% share</span>`;
+}
+// And in projection.html, delete the #kpi-split-chip element.</div>
+  <div class="accept"><strong>Acceptance:</strong> On cold MX load, no "Brand 75%" chip is visible between KPI strip and disclosure buttons. Each Regs tile shows delta AND share in one line.</div>
+</div>
+
+<!-- #2 -->
+<div class="proposal" id="p2">
+  <div class="proposal-header">
+    <span class="proposal-num">2</span>
+    <span class="proposal-title">Merge Warnings panel into Model Alerts</span>
+    <span class="priority-badge priority-medium">MEDIUM</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Problem:</strong> "MODEL ALERTS (1)" and "WARNINGS (2)" are two adjacent sections showing essentially the same thing (issues the user should know about). Cognitive load of "which one do I look at first?". Merge into one stream with a severity pill per row.
+  </div>
+  <div class="ba-row">
+    <div class="ba-cell before">
+      <div class="ba-label">Before — two separate sections</div>
+      <div style="font-size:11px;color:#6B6B6B;text-transform:uppercase;letter-spacing:0.04em;font-weight:600;margin-bottom:6px">Model alerts (1)</div>
+      <div style="font-size:12px;padding:8px;background:white;border:1px solid #F2A4A4;border-radius:4px;margin-bottom:10px">
+        <strong style="color:#D13212">WARNING</strong> Fit quality dropped sharply — Brand CPA fit r² fell 0.64 (from 0.64 to 0.00)
+      </div>
+      <div style="font-size:11px;color:#6B6B6B;text-transform:uppercase;letter-spacing:0.04em;font-weight:600;margin-bottom:6px">Warnings 2</div>
+      <div style="font-size:12px;padding:8px;background:white;border:1px solid #E5E5E5;border-radius:4px;margin-bottom:4px">
+        The recent-actuals anchor was clipped back to pre-campaign levels so we don't double-count the lift.
+      </div>
+      <div style="font-size:12px;padding:8px;background:white;border:1px solid #E5E5E5;border-radius:4px">
+        Yoy insufficient years (1 full years &lt; 2)
+      </div>
+    </div>
+    <div class="ba-cell after">
+      <div class="ba-label">After — single alert stream</div>
+      <div style="font-size:11px;color:#6B6B6B;text-transform:uppercase;letter-spacing:0.04em;font-weight:600;margin-bottom:6px">Alerts (3)</div>
+      <div class="alert-mock warn"><div class="alert-title"><span class="alert-severity-pill pill-warn">warning</span>Fit quality dropped sharply</div><div class="alert-body" style="font-size:12px">Brand CPA fit r² fell 0.64 (from 0.64 to 0.00)</div></div>
+      <div class="alert-mock info"><div class="alert-title"><span class="alert-severity-pill pill-info">info</span>Anchor clipped back</div><div class="alert-body" style="font-size:12px">Recent-actuals anchor trimmed to pre-campaign levels so we don't double-count the lift.</div></div>
+      <div class="alert-mock info"><div class="alert-title"><span class="alert-severity-pill pill-info">info</span>Limited YoY history</div><div class="alert-body" style="font-size:12px">Only 1 full year of data (need 2 for strong seasonality).</div></div>
+    </div>
+  </div>
+<div class="code-block">// projection-app.js — renderMarketAnomalies() AND renderWarnings() merge
+function renderAlertStream(out) {
+  const stream = [];
+  (out.anomalies || []).forEach(a =&gt; stream.push({
+    severity: a.severity,   // 'critical' | 'warning' | 'info'
+    code: a.code,
+    title: translateTitle(a.code),
+    body: translateBody(a)
+  }));
+  (out.warnings || []).forEach(w =&gt; stream.push({
+    severity: 'info',       // warnings become info-level alerts
+    code: w.code,
+    title: translateWarningTitle(w.code),
+    body: translateWarningBody(w)
+  }));
+  // Sort by severity rank
+  stream.sort((a, b) =&gt; ({critical:0, warning:1, info:2}[a.severity]) - ({critical:0, warning:1, info:2}[b.severity]));
+  // Render into #alerts-panel (replaces both #anomalies-panel and the separate Warnings sec-panel)
+  const html = stream.map(a =&gt; `
+    &lt;div class="alert-mock ${a.severity}"&gt;
+      &lt;div class="alert-title"&gt;&lt;span class="alert-severity-pill pill-${a.severity}"&gt;${a.severity}&lt;/span&gt;${a.title}&lt;/div&gt;
+      &lt;div class="alert-body"&gt;${a.body}&lt;/div&gt;
+    &lt;/div&gt;`).join('');
+  document.getElementById('alerts-panel').innerHTML = html;
+}</div>
+  <div class="accept"><strong>Acceptance:</strong> One "Alerts (N)" heading on the page, not two. Severity pill per item. Order: critical → warning → info.</div>
+</div>
+
+<!-- #3 -->
+<div class="proposal" id="p3">
+  <div class="proposal-header">
+    <span class="proposal-num">3</span>
+    <span class="proposal-title">Default-close the Model View drawer</span>
+    <span class="priority-badge priority-medium">MEDIUM</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Problem:</strong> The right-side Model View drawer is open by default on cold load. It contains 4 sparkline tiles + Fit Quality + Campaign Lifts + raw Parameters (with strings like <code>CCP spreadsheet column U FINAL ALIGNED (CCP Q1'26 check yc.xlsx) seeded 2026-04-23</code>). Engineer UI shown to executives before they've looked at the chart.
+  </div>
+<div class="code-block">// projection-design-system.css — .drawer already has the open/closed pattern
+.drawer { /* existing */ transform: translateX(100%); transition: transform 250ms var(--ease-reveal); }
+.drawer.open { transform: translateX(0); }
+
+// projection-app.js — remove the code that adds .open on init.
+// Wire btn-params (Model details) to toggle the drawer:
+document.getElementById('btn-params').addEventListener('click', () =&gt; {
+  document.getElementById('drawer').classList.toggle('open');
+});
+document.getElementById('drawer-close').addEventListener('click', () =&gt; {
+  document.getElementById('drawer').classList.remove('open');
+});</div>
+  <div class="accept"><strong>Acceptance:</strong> Cold load renders the drawer off-screen. Main content area (chart + panels) uses the reclaimed horizontal space. "Model details" button opens it; × closes it.</div>
+</div>
+
+<!-- #4 -->
+<div class="proposal" id="p4">
+  <div class="proposal-header">
+    <span class="proposal-num">4</span>
+    <span class="proposal-title">Hide Saved Projections panel when empty</span>
+    <span class="priority-badge priority-low">LOW</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Problem:</strong> The "Saved Projections" section shows "No saved projections yet." on ~95% of sessions — empty-state noise that the user learns to tune out. Hide the section entirely when empty; reveal only on first save.
+  </div>
+<div class="code-block">// projection-app.js — renderSavedProjections()
+function renderSavedProjections(saved) {
+  const panel = document.getElementById('saved-panel');
+  if (!saved || saved.length === 0) {
+    panel.style.display = 'none';
+    return;
+  }
+  panel.style.display = '';
+  // ...existing render logic
+}</div>
+  <div class="accept"><strong>Acceptance:</strong> On cold load with no saves, no "Saved Projections" section visible. After clicking Save once, section appears.</div>
+</div>
+
+<!-- #5 -->
+<div class="proposal" id="p5">
+  <div class="proposal-header">
+    <span class="proposal-num">5</span>
+    <span class="proposal-title">"Since last week" auto-summary above narrative</span>
+    <span class="priority-badge priority-high">HIGH</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Why high:</strong> Every practitioner forecast dashboard has a "what changed?" summary. MPE currently shows only point-in-time snapshots. WoW deltas exist on KPI tiles; this proposal just stitches them into prose so the user doesn't have to do the math across six tiles.
+  </div>
+  <div class="ba-row">
+    <div class="ba-cell before">
+      <div class="ba-label">Before</div>
+      <div class="old-context">Currently only the narrative block at the bottom. No prose-level change summary.</div>
+    </div>
+    <div class="ba-cell after">
+      <div class="ba-label">After — above narrative</div>
+      <div class="since-last-week">
+        <strong>Since last week:</strong>
+        Brand regs <span class="delta-tag up">+5.6%</span>, NB regs <span class="delta-tag up">+17.4%</span>, blended CPA <span class="delta-tag down">-13%</span>.
+        <br>The Sparkle lift is holding — no decay detected.
+        Primary driver this week is Non-Brand spend pacing ahead of plan.
+      </div>
+    </div>
+  </div>
+<div class="code-block">// mpe_narrative.js — add renderSinceLastWeek() before renderNarrative()
+function renderSinceLastWeek(wow, regimes, out) {
+  const brandTag = tagFor(wow.brand_regs_pct);
+  const nbTag = tagFor(wow.nb_regs_pct);
+  const cpaTag = tagFor(wow.cpa_pct, /*invert*/ true);  // lower CPA = good
+  const activeLifts = regimes.filter(r =&gt; !r.absorbed_into_baseline &amp;&amp; !r.low_confidence);
+  const liftsNote = activeLifts.length &gt; 0
+    ? `The ${activeLifts[0].name || 'active'} lift is holding — no decay detected.`
+    : 'No active campaign lifts this week.';
+  const driver = identifyWeekDriver(wow);  // "Non-Brand spend pacing ahead of plan" etc.
+  return `&lt;strong&gt;Since last week:&lt;/strong&gt; ` +
+    `Brand regs ${brandTag}, NB regs ${nbTag}, blended CPA ${cpaTag}.&lt;br&gt;` +
+    `${liftsNote} Primary driver this week is ${driver}.`;
+}
+function tagFor(pct, invert = false) {
+  const cls = (pct &gt;= 0) === !invert ? 'up' : 'down';
+  const sign = pct &gt;= 0 ? '+' : '';
+  return `&lt;span class="delta-tag ${cls}"&gt;${sign}${pct.toFixed(1)}%&lt;/span&gt;`;
+}</div>
+  <div class="accept"><strong>Acceptance:</strong> Directly above the Narrative heading, one-paragraph summary auto-generated from WoW data. Green/red pill tags. Identifies the primary driver of the week's change.</div>
+</div>
+
+<!-- #6 -->
+<div class="proposal" id="p6">
+  <div class="proposal-header">
+    <span class="proposal-num">6</span>
+    <span class="proposal-title">CI quality label + "Plan within range?" flag</span>
+    <span class="priority-badge priority-high">HIGH</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Problem:</strong> MX's current CI is $515K–$2.17M — that's <strong>56% wide</strong>, a near-useless range if presented without context. User should see (a) whether this CI is tight or loose, and (b) whether the OP2 plan falls within it (meaningful signal of "on or off plan").
+  </div>
+  <div class="ba-row">
+    <div class="ba-cell before">
+      <div class="ba-label">Before</div>
+      <div style="font-size:13px;line-height:1.5">
+        Projected MX Y2026 to hit 75% efficiency. 2 campaign lifts active.<br>
+        <span style="color:#6B6B6B">90% range: $515K–$2.17M spend · 9,225–38,532 regs.</span>
+      </div>
+      <div class="old-context">No indication of whether the range is actionable or whether the plan is even within it.</div>
+    </div>
+    <div class="ba-cell after">
+      <div class="ba-label">After</div>
+      <div style="font-size:13px;line-height:1.6">
+        Projected MX Y2026 to hit 75% efficiency. 2 campaign lifts active.<br>
+        <span style="color:#161D26">90% range: <strong>$515K–$2.17M</strong> spend</span>
+        <span class="confidence-label conf-low">wide · low confidence</span>
+        <div class="ci-context-line"><strong>OP2 plan ($542K) at low edge of range.</strong> <span class="plan-in-range-yes">Within 90% CI</span> but projection signals overspend risk.</div>
+        <div class="contingency-nudge">If you commit to the point estimate, prepare a ±$780K contingency band.</div>
+      </div>
+    </div>
+  </div>
+<div class="code-block">// mpe_narrative.js — renderHeroContext() or an inline helper
+function ciQualityLabel(loPct, hiPct) {
+  // loPct/hiPct are absolute widths relative to central (e.g., 0.37 = 37% below central)
+  const width = loPct + hiPct;
+  if (width &lt; 0.20) return { cls: 'conf-high', label: 'tight · high confidence' };
+  if (width &lt; 0.40) return { cls: 'conf-medium', label: 'moderate' };
+  return { cls: 'conf-low', label: 'wide · low confidence' };
+}
+function planInRange(op2Value, ciLo, ciHi) {
+  if (op2Value &lt; ciLo) return { flag: 'below', cls: 'plan-in-range-no', msg: 'OP2 plan falls below 90% CI — projection meaningfully above plan.' };
+  if (op2Value &gt; ciHi) return { flag: 'above', cls: 'plan-in-range-no', msg: 'OP2 plan falls above 90% CI — projection meaningfully below plan.' };
+  // Within range — flag edge cases
+  const position = (op2Value - ciLo) / (ciHi - ciLo);
+  if (position &lt; 0.2) return { flag: 'low-edge', cls: 'plan-in-range-yes', msg: `OP2 plan ($${fmt(op2Value)}) at low edge of range. Within 90% CI but projection signals overspend risk.` };
+  if (position &gt; 0.8) return { flag: 'high-edge', cls: 'plan-in-range-yes', msg: `OP2 plan ($${fmt(op2Value)}) at high edge of range. Within 90% CI but projection signals underdelivery risk.` };
+  return { flag: 'center', cls: 'plan-in-range-yes', msg: 'Plan comfortably within 90% CI.' };
+}
+function contingencyNudge(central, ciHi) {
+  const contingency = ciHi - central;
+  return `If you commit to the point estimate, prepare a ±$${fmtShort(contingency)} contingency band.`;
+}</div>
+  <div class="accept"><strong>Acceptance:</strong> Hero context line has (1) the range, (2) a confidence-label pill (tight/moderate/wide), (3) a plan-in-range sentence naming the OP2 value and its position, (4) a contingency nudge. All four surface without expanding a disclosure.</div>
+</div>
+
+<!-- #7 -->
+<div class="proposal" id="p7">
+  <div class="proposal-header">
+    <span class="proposal-num">7</span>
+    <span class="proposal-title">Collapse "VS OP2 SPEND" + "VS OP2 REGS" into one tile</span>
+    <span class="priority-badge priority-medium">MEDIUM</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Problem:</strong> Two adjacent KPI tiles telling the same story ("spend overdelivery + regs overdelivery vs plan"). The user always reads them together; separating them doubles the scan cost.
+  </div>
+  <div class="ba-row">
+    <div class="ba-cell before">
+      <div class="ba-label">Before — 2 tiles</div>
+      <div style="display:flex;gap:12px;justify-content:center">
+        <div class="hero-kpi-mock"><div class="hero-kpi-mock-label">VS OP2 Spend</div><div class="hero-kpi-mock-value">257%</div><div class="hero-kpi-mock-delta delta-up">↑ +157 pts vs plan</div></div>
+        <div class="hero-kpi-mock"><div class="hero-kpi-mock-label">VS OP2 Regs</div><div class="hero-kpi-mock-value">209%</div><div class="hero-kpi-mock-delta delta-up">↑ +109 pts vs plan</div></div>
+      </div>
+    </div>
+    <div class="ba-cell after">
+      <div class="ba-label">After — 1 combined tile</div>
+      <div class="combined-tile">
+        <div class="combined-tile-label">vs OP2 Plan</div>
+        <div class="combined-tile-main-row">
+          <div class="combined-tile-stat"><span class="combined-tile-stat-label">Spend</span><span class="combined-tile-stat-value delta-up">+157%</span></div>
+          <div class="combined-tile-stat"><span class="combined-tile-stat-label">Regs</span><span class="combined-tile-stat-value delta-up">+109%</span></div>
+        </div>
+        <div class="combined-tile-detail">Efficiency gain: CPA −15% vs plan</div>
+      </div>
+    </div>
+  </div>
+<div class="code-block">// projection.html — replace the two hero-kpi divs:
+&lt;div class="hero-kpi combined-tile" data-kpi="vs-op2"&gt;
+  &lt;div class="combined-tile-label"&gt;vs OP2 Plan&lt;/div&gt;
+  &lt;div class="combined-tile-main-row"&gt;
+    &lt;div class="combined-tile-stat"&gt;
+      &lt;span class="combined-tile-stat-label"&gt;Spend&lt;/span&gt;
+      &lt;span id="kpi-op2-spend" class="combined-tile-stat-value"&gt;—&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="combined-tile-stat"&gt;
+      &lt;span class="combined-tile-stat-label"&gt;Regs&lt;/span&gt;
+      &lt;span id="kpi-op2-regs" class="combined-tile-stat-value"&gt;—&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div id="kpi-op2-detail" class="combined-tile-detail"&gt;—&lt;/div&gt;
+&lt;/div&gt;
+
+// projection-app.js — renderOp2Tile() computes the delta and the CPA-efficiency detail
+function renderOp2Tile(out) {
+  const spendPct = out.totals.spend_vs_op2 - 100;
+  const regsPct = out.totals.regs_vs_op2 - 100;
+  const cpaEffPct = (out.totals.cpa / out.op2.cpa - 1) * 100;
+  document.getElementById('kpi-op2-spend').innerHTML = fmtDeltaPts(spendPct);
+  document.getElementById('kpi-op2-regs').innerHTML = fmtDeltaPts(regsPct);
+  document.getElementById('kpi-op2-detail').textContent =
+    `Efficiency ${cpaEffPct &lt; 0 ? 'gain' : 'loss'}: CPA ${cpaEffPct.toFixed(0)}% vs plan`;
+}</div>
+  <div class="accept"><strong>Acceptance:</strong> One "vs OP2 Plan" tile shows spend delta + regs delta stacked, plus a one-line CPA efficiency summary. No more duplicate tiles. KPI strip loses one slot → room to breathe.</div>
+</div>
+
+<!-- #8 -->
+<div class="proposal" id="p8">
+  <div class="proposal-header">
+    <span class="proposal-num">8</span>
+    <span class="proposal-title">Rewrite Model alerts in action-first format</span>
+    <span class="priority-badge priority-high">HIGH</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Problem:</strong> Current alert: <em>"Fit quality dropped sharply — Brand CPA fit r² fell 0.64 (from 0.64 to 0.00) → Investigate data-quality drift in weekly data."</em> That's a report, not an action. User reads "r² 0.00" and doesn't know what to do. Tell them what it means, what to check, what decision threshold matters.
+  </div>
+  <div class="ba-row">
+    <div class="ba-cell before">
+      <div class="ba-label">Before</div>
+      <div class="alert-mock warn">
+        <div class="alert-title"><span class="alert-severity-pill pill-warn">warning</span>Fit quality dropped sharply</div>
+        <div class="alert-body" style="font-size:12px">Brand CPA fit r² fell 0.64 (from 0.64 to 0.00) → Investigate data-quality drift in weekly data; check for recent regime onset not yet in campaign lifts registry.</div>
+      </div>
+    </div>
+    <div class="ba-cell after">
+      <div class="ba-label">After — action-first</div>
+      <div class="alert-mock warn">
+        <div class="alert-title"><span class="alert-severity-pill pill-warn">warning</span>Trust this projection less this week</div>
+        <div class="alert-body" style="font-size:12px">
+          Brand CPA fit weakened (r² 0.64 → 0.00). Likely cause: the Sparkle campaign is changing the regime faster than the model has caught up.
+          <br><strong>If headline numbers diverge &gt;20% from Pessimistic, escalate to Brandon.</strong>
+        </div>
+        <div class="alert-actions">
+          <span class="alert-action primary">Switch to Pessimistic</span>
+          <span class="alert-action">Log data drift issue</span>
+          <span class="alert-action">Explain this →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="code-block">// projection-app.js — translateAlert() output structure needs 5 fields
+const ALERT_TEMPLATES = {
+  'fit_r2_drop': {
+    severity: 'warning',
+    title: 'Trust this projection less this week',
+    body: (ctx) =&gt; `Brand CPA fit weakened (r² ${ctx.oldR2.toFixed(2)} → ${ctx.newR2.toFixed(2)}). ` +
+      `Likely cause: ${ctx.likelyCause || 'a regime change the model has not yet absorbed'}. ` +
+      `&lt;br&gt;&lt;strong&gt;If headline numbers diverge &gt;20% from Pessimistic, escalate to Brandon.&lt;/strong&gt;`,
+    actions: [
+      { label: 'Switch to Pessimistic', action: () =&gt; setScenario('pessimistic'), primary: true },
+      { label: 'Log data drift issue', action: () =&gt; logFeedback('data_drift') },
+      { label: 'Explain this →', action: () =&gt; showAlertDetail('fit_r2_drop') }
+    ]
+  },
+  'op2_pacing_divergence': {
+    severity: 'warning',
+    title: (ctx) =&gt; ctx.gapPct &gt; 0 ? 'Projection is meaningfully ahead of plan' : 'Projection is meaningfully below plan',
+    body: (ctx) =&gt; `Projected annual regs ${fmt(ctx.projected)} vs OP2 plan ${fmt(ctx.op2)} (${fmtSignedPct(ctx.gapPct)} gap). ` +
+      `Revisit regime fit or anchor window if the gap persists next week.`,
+    actions: [ /* ... */ ]
+  }
+};</div>
+  <div class="accept"><strong>Acceptance:</strong> Every alert has (1) action-oriented title, (2) plain-English "likely cause", (3) bolded decision threshold ("escalate if X"), (4) 2–3 clickable actions. No raw r² values as the headline.</div>
+</div>
+
+<!-- #9 -->
+<div class="proposal" id="p9">
+  <div class="proposal-header">
+    <span class="proposal-num">9</span>
+    <span class="proposal-title">Rewrite Fit Quality empty-state copy</span>
+    <span class="priority-badge priority-low">LOW</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Problem:</strong> Current strip reads "Fit quality: not yet measured · weeks of data not recorded · some parameters use regional average · 2 active campaign lifts". To Kate that sounds like "this model doesn't work." Reframe positively without lying.
+  </div>
+  <div class="ba-row">
+    <div class="ba-cell before">
+      <div class="ba-label">Before</div>
+      <div style="font-size:12px;color:#6B6B6B;padding:8px 12px;border:1px solid #E5E5E5;border-radius:4px">
+        Fit quality: <span style="color:#D13212">not yet measured</span> · <span style="color:#D13212">weeks of data not recorded</span> · some parameters use regional average · 2 active campaign lifts
+      </div>
+    </div>
+    <div class="ba-cell after">
+      <div class="ba-label">After</div>
+      <div style="font-size:12px;color:#6B6B6B;padding:8px 12px;border:1px solid #E5E5E5;border-radius:4px">
+        Confidence: <span class="confidence-label conf-medium">limited history</span>
+        — model using regional priors, local calibration pending ~8 weeks of backtest data. 2 active campaign lifts. <a href="#" style="color:#0066CC">Explain this →</a>
+      </div>
+    </div>
+  </div>
+<div class="code-block">// projection-app.js — renderFitQuality()
+function renderFitQuality(marketData, out) {
+  const fq = marketData.fit_quality_state || {};
+  const weeks = fq.weeks_used || 0;
+  const r2 = fq.r_squared;
+  const regimes = out.anomalies?.active_regime_count || 0;
+  let confidenceLabel, confidenceCls;
+  if (r2 == null) {
+    confidenceLabel = 'limited history';
+    confidenceCls = 'conf-medium';
+  } else if (r2 &gt;= 0.6) { confidenceLabel = 'strong'; confidenceCls = 'conf-high'; }
+  else if (r2 &gt;= 0.3) { confidenceLabel = 'moderate'; confidenceCls = 'conf-medium'; }
+  else { confidenceLabel = 'weak'; confidenceCls = 'conf-low'; }
+  const priorsNote = fq.using_priors
+    ? 'model using regional priors, local calibration pending ~8 weeks of backtest data.'
+    : `model calibrated on ${weeks} weeks of local data.`;
+  document.getElementById('fit-quality').innerHTML =
+    `Confidence: &lt;span class="confidence-label ${confidenceCls}"&gt;${confidenceLabel}&lt;/span&gt; — ${priorsNote} ` +
+    `${regimes} active campaign lifts. &lt;a href="#" class="explain-link" data-topic="fit-quality"&gt;Explain this →&lt;/a&gt;`;
+}</div>
+  <div class="accept"><strong>Acceptance:</strong> Fit-quality strip starts with "Confidence:" not "Fit quality:". No negative "not yet measured" / "not recorded" phrasing. Includes an Explain-this link.</div>
+</div>
+
+<!-- #10 -->
+<div class="proposal" id="p10">
+  <div class="proposal-header">
+    <span class="proposal-num">10</span>
+    <span class="proposal-title">Cross-market pulse strip (above single-market view)</span>
+    <span class="priority-badge priority-medium">MEDIUM</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Rationale:</strong> Today, to see where all markets stand, the user switches tabs to "All 10 markets." The single-market view gives no peripheral awareness. A compact dot row at the top would answer "where else do I need to look?" without leaving this tab.
+  </div>
+  <div class="ba-row" style="grid-template-columns: 1fr">
+    <div class="ba-cell after">
+      <div class="ba-label">Proposed — above hero block</div>
+      <div class="market-pulse-strip">
+        <div class="pulse-dot"><div class="pulse-circle pulse-green"></div>US</div>
+        <div class="pulse-dot"><div class="pulse-circle pulse-green"></div>CA</div>
+        <div class="pulse-dot"><div class="pulse-circle pulse-yellow"></div>UK</div>
+        <div class="pulse-dot"><div class="pulse-circle pulse-green"></div>DE</div>
+        <div class="pulse-dot"><div class="pulse-circle pulse-green"></div>FR</div>
+        <div class="pulse-dot"><div class="pulse-circle pulse-yellow"></div>IT</div>
+        <div class="pulse-dot"><div class="pulse-circle pulse-green"></div>ES</div>
+        <div class="pulse-dot"><div class="pulse-circle pulse-gray"></div>JP</div>
+        <div class="pulse-dot active"><div class="pulse-circle pulse-red"></div>MX</div>
+        <div class="pulse-dot"><div class="pulse-circle pulse-gray"></div>AU</div>
+      </div>
+      <div style="font-size:11px;color:#6B6B6B;text-align:center;margin-top:6px">Green = within ±10pp of target · Yellow = ±10–25pp · Red = &gt;25pp off · Gray = spend-only market. Click a dot to jump to that market.</div>
+    </div>
+  </div>
+<div class="code-block">// projection.html — add above .hero-block (inside #view-single)
+&lt;div class="market-pulse-strip" id="market-pulse-strip" aria-label="Cross-market status"&gt;&lt;/div&gt;
+
+// projection-app.js — renderPulseStrip()
+function renderPulseStrip(allMarketsData, currentScope) {
+  const markets = ['US','CA','UK','DE','FR','IT','ES','JP','MX','AU'];
+  const html = markets.map(m =&gt; {
+    const md = allMarketsData[m];
+    const color = pulseColor(md);  // computes green/yellow/red based on distance to target
+    const activeCls = m === currentScope ? 'active' : '';
+    return `&lt;div class="pulse-dot ${activeCls}" data-market="${m}"&gt;` +
+           `&lt;div class="pulse-circle pulse-${color}"&gt;&lt;/div&gt;${m}&lt;/div&gt;`;
+  }).join('');
+  document.getElementById('market-pulse-strip').innerHTML = html;
+  // Wire clicks
+  document.querySelectorAll('.pulse-dot').forEach(d =&gt; {
+    d.addEventListener('click', () =&gt; setScope(d.dataset.market));
+  });
+}
+function pulseColor(md) {
+  if (!md.parameters?.ieccp_target) return 'gray'; // spend-only markets
+  const achieved = md.latest_projection?.ieccp_pct || 0;
+  const target = md.parameters.ieccp_target.value_scalar * 100;
+  const distPp = Math.abs(achieved - target);
+  if (distPp &lt; 10) return 'green';
+  if (distPp &lt; 25) return 'yellow';
+  return 'red';
+}</div>
+  <div class="accept"><strong>Acceptance:</strong> Single-market view top edge: 10-dot horizontal strip. Current market is highlighted. Each dot is clickable → jumps to that market. Dot color matches the at-a-glance distance-to-target.</div>
+</div>
+
+<!-- #11 -->
+<div class="proposal" id="p11">
+  <div class="proposal-header">
+    <span class="proposal-num">11</span>
+    <span class="proposal-title">Confidence timeline sparkline in drawer</span>
+    <span class="priority-badge priority-low">LOW</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Rationale:</strong> Is model uncertainty shrinking (good — learning) or growing (bad — something's destabilizing)? A tiny 4–8 week sparkline of CI width tells the story in 1 glance. Put it in the drawer, not on the main page.
+  </div>
+  <div class="ba-row" style="grid-template-columns: 1fr">
+    <div class="ba-cell after">
+      <div class="ba-label">Proposed — inside Model View drawer, next to Fit Quality</div>
+      <div style="background:white;border:1px solid #E5E5E5;border-radius:6px;padding:10px 14px;max-width:360px">
+        <div style="font-size:11px;color:#6B6B6B;text-transform:uppercase;letter-spacing:0.04em;font-weight:600;margin-bottom:4px">90% CI width over time</div>
+        <div class="confidence-sparkline">
+          <div class="conf-bar" style="height:80%"></div>
+          <div class="conf-bar" style="height:72%"></div>
+          <div class="conf-bar" style="height:76%"></div>
+          <div class="conf-bar" style="height:65%"></div>
+          <div class="conf-bar" style="height:55%"></div>
+          <div class="conf-bar" style="height:48%"></div>
+          <div class="conf-bar" style="height:42%"></div>
+          <div class="conf-bar" style="height:40%"></div>
+        </div>
+        <div style="font-size:11px;color:#0F7A3A;margin-top:4px">Width shrinking — model learning ✓</div>
+      </div>
+    </div>
+  </div>
+<div class="code-block">// projection-app.js — renderConfidenceTimeline()
+function renderConfidenceTimeline(marketData) {
+  const history = marketData.confidence_history || [];  // each entry: { week, ci_width_pct }
+  if (history.length &lt; 2) return ''; // need at least 2 weeks to show a trend
+  const max = Math.max(...history.map(h =&gt; h.ci_width_pct));
+  const bars = history.map(h =&gt;
+    `&lt;div class="conf-bar" style="height:${(h.ci_width_pct / max * 100).toFixed(0)}%"&gt;&lt;/div&gt;`
+  ).join('');
+  const trend = history[history.length - 1].ci_width_pct &lt; history[0].ci_width_pct
+    ? '&lt;span style="color:#0F7A3A"&gt;Width shrinking — model learning ✓&lt;/span&gt;'
+    : '&lt;span style="color:#D13212"&gt;Width growing — destabilizing&lt;/span&gt;';
+  return `&lt;div class="drawer-tile"&gt;&lt;div class="drawer-tile-label"&gt;90% CI width over time&lt;/div&gt;` +
+         `&lt;div class="confidence-sparkline"&gt;${bars}&lt;/div&gt;&lt;div style="font-size:11px"&gt;${trend}&lt;/div&gt;&lt;/div&gt;`;
+}
+
+// Data requirement — export-projection-data.py:
+// For each market, emit confidence_history: last 8 weeks of ci_width_pct values.
+// Computed as (ci_hi - ci_lo) / central * 100.</div>
+  <div class="accept"><strong>Acceptance:</strong> Open Model View drawer, see a tiny sparkline of last N weeks of CI width with green/red trend label. Blocked on data pipeline emitting confidence_history per market.</div>
+</div>
+
+<!-- =============================================== -->
+<h2>Part B — Visual consolidation (fixes 12–13)</h2>
+
+<!-- #12 Typography -->
+<div class="proposal" id="p12">
+  <div class="proposal-header">
+    <span class="proposal-num">12</span>
+    <span class="proposal-title">Typography consolidation — 15 rendered sizes → 5</span>
+    <span class="priority-badge priority-high">HIGH</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Measured:</strong> 15 distinct font sizes render on cold MX load. Design system declares 6. The 9 extras are one-off inline overrides. Two are fractional (10.4px, 13.3333px) from <code>em</code>-based overrides — never intentional.
+  </div>
+  <table class="font-inventory-table">
+    <thead><tr><th>Size (rendered)</th><th>Count</th><th>First example</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr class="good-size"><td class="font-sample">64px</td><td>2</td><td>.hero-number "$1.39M"</td><td>✓ Keep as <code>--size-display</code></td></tr>
+      <tr class="bad-size"><td class="font-sample">48px</td><td>1</td><td>.hero-sep "·"</td><td>✗ Separator at display size — redundant; drop to 24px</td></tr>
+      <tr class="bad-size"><td class="font-sample">28px</td><td>1</td><td>.hero-market-name "MX"</td><td>✗ One-off; consolidate to 24px title</td></tr>
+      <tr class="good-size"><td class="font-sample">24px</td><td>1</td><td>drawer-title "Model View"</td><td>✓ Keep as <code>--size-title</code></td></tr>
+      <tr class="bad-size"><td class="font-sample">22px</td><td>1</td><td>drawer-close "×"</td><td>✗ One-off; drop to 20px or use icon</td></tr>
+      <tr class="good-size"><td class="font-sample">20px</td><td>7</td><td>H1 "Market Projection Engine"</td><td>✓ Keep as <code>--size-section</code></td></tr>
+      <tr class="bad-size"><td class="font-sample">18px</td><td>4</td><td>.hero-market-sep "·"</td><td>✗ Separator-specific; consolidate</td></tr>
+      <tr class="good-size"><td class="font-sample">16px</td><td>87</td><td>(body default)</td><td>✓ Keep as <code>--size-body</code></td></tr>
+      <tr class="bad-size"><td class="font-sample">14px</td><td>10</td><td>.hero-market-target</td><td>✗ Bump to 16 or drop to 13</td></tr>
+      <tr class="fractional-size"><td class="font-sample">13.33px</td><td>4</td><td>&lt;input&gt; elements</td><td>⚠️ Browser default from em — override to 13px</td></tr>
+      <tr class="good-size"><td class="font-sample">13px</td><td>35</td><td>.disclosure-btn "Single market"</td><td>✓ Promote to <code>--size-ui</code> (button/chip default)</td></tr>
+      <tr class="good-size"><td class="font-sample">12px</td><td>52</td><td>meta p "v1.1 Slim — Brand-Anchor..."</td><td>✓ Keep as <code>--size-meta</code></td></tr>
+      <tr class="bad-size"><td class="font-sample">11px</td><td>30</td><td>"Across 2 markets: 1 warn · 1 info"</td><td>✗ Bump all to 12 or drop all to 10</td></tr>
+      <tr class="fractional-size"><td class="font-sample">10.4px</td><td>2</td><td>.hero-unit "spend"</td><td>⚠️ 0.65em fractional — set to 10px</td></tr>
+      <tr class="bad-size"><td class="font-sample">10px</td><td>18</td><td>.freshness-badge.ancient "refit age unknown"</td><td>⚠️ Below practical readability; merge with 11 → 10</td></tr>
+    </tbody>
+  </table>
+  <div class="proposal-sub" style="margin-top:20px"><strong>Target scale:</strong> 5 tokens.</div>
+<div class="code-block">/* projection-design-system.css — :root */
+:root {
+  --size-display: 64px;  /* Hero number only */
+  --size-title:   24px;  /* H1, H2, drawer-title, market-name */
+  --size-section: 20px;  /* H3, disclosure button labels at large contexts */
+  --size-body:    16px;  /* Default body text, narrative, long-form */
+  --size-ui:      13px;  /* Buttons, chips, inputs, KPI values (~20px via weight) */
+  --size-meta:    11px;  /* Captions, freshness badges, helper text */
+}
+
+/* Grep-killers — remove every occurrence of these from CSS + inline styles: */
+/* font-size: 64px, 48px, 28px, 22px, 18px, 14px, 10.4px, 13.33px */
+/* Keep only the 6 tokens above. */</div>
+  <div class="accept"><strong>Acceptance:</strong> A post-change probe returns ≤6 distinct font sizes rendered. No fractional values (no 10.4, no 13.33). Grep <code>font-size:</code> in projection.html + projection-design-system.css returns only <code>var(--size-*)</code> references.</div>
+</div>
+
+<!-- #13 Whitespace -->
+<div class="proposal" id="p13">
+  <div class="proposal-header">
+    <span class="proposal-num">13</span>
+    <span class="proposal-title">Whitespace cleanup — the 545px dead gap below chart</span>
+    <span class="priority-badge priority-high">HIGH</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Measured:</strong> Total page height 2,808px vs viewport 865px — user scrolls 3.2 screens. Two specific gaps are wasteful.
+  </div>
+  <table class="gap-table">
+    <thead><tr><th>Section pair</th><th>Gap</th><th>Visual</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td>page-header → view-switcher</td><td class="font-sample">48px</td><td><span class="gap-bar" style="width:48px"></span></td><td>OK — tab separator</td></tr>
+      <tr><td>view-switcher → controls-row</td><td class="font-sample">16px</td><td><span class="gap-bar" style="width:16px"></span></td><td>OK</td></tr>
+      <tr><td>controls-row → hero-block</td><td class="font-sample">24px</td><td><span class="gap-bar" style="width:24px"></span></td><td>OK</td></tr>
+      <tr><td>hero-block → scenario-strip</td><td class="font-sample">16px</td><td><span class="gap-bar" style="width:16px"></span></td><td>OK</td></tr>
+      <tr><td>scenario-strip → chart-wrap</td><td class="font-sample">24px</td><td><span class="gap-bar" style="width:24px"></span></td><td>OK</td></tr>
+      <tr style="background:#FFF0F0"><td><strong>chart-wrap → contribution-panel</strong></td><td class="font-sample" style="color:#D13212;font-weight:700">545px</td><td><span class="gap-bar large" style="width:200px"></span> (→ 545px)</td><td>✗ Massive dead gap — collapsed disclosures (Decomposition + Backtest) reserve this space even when closed</td></tr>
+      <tr><td>contribution-panel → anomalies-panel</td><td class="font-sample">24px</td><td><span class="gap-bar" style="width:24px"></span></td><td>OK</td></tr>
+      <tr><td>anomalies-panel → secondary-panels</td><td class="font-sample">24px</td><td><span class="gap-bar" style="width:24px"></span></td><td>OK</td></tr>
+      <tr style="background:#FFF4D6"><td><strong>secondary-panels → narrative-panel</strong></td><td class="font-sample" style="color:#8A6200;font-weight:700">149px</td><td><span class="gap-bar medium" style="width:149px"></span></td><td>⚠️ Half-screen gap — feedback-bar reserves space but is hidden until 3rd projection</td></tr>
+    </tbody>
+  </table>
+  <div class="proposal-sub" style="margin-top:16px"><strong>Fixes:</strong></div>
+<div class="code-block">/* projection-design-system.css */
+
+/* Fix 1: the 545px dead gap is Decomposition + Backtest &lt;details&gt; wrappers reserving
+   space even when closed. The &lt;details&gt; element has no intrinsic margin but the parent
+   wrappers use margin-top var(--gap-lg). Remove when closed: */
+details.sec-panel:not([open]) {
+  padding-top: 8px;
+  padding-bottom: 8px;   /* shrink summary-only height */
+}
+details.sec-panel:not([open]) + details.sec-panel {
+  margin-top: 8px;        /* pack closed disclosures tighter */
+}
+
+/* Fix 2: feedback-bar (hidden until 3rd projection) is reserving layout space.
+   Move it inside a conditional wrapper so it doesn't count when hidden: */
+#feedback-bar { display: none; }         /* already correct */
+#feedback-bar.visible { display: block; margin-top: var(--gap-lg); }  /* only adds gap when shown */
+
+/* Fix 3: secondary-panels → narrative-panel gap is really one-shot padding.
+   Move narrative-panel up by removing its top margin when secondary-panels is empty
+   or collapsed. Cleanest fix is a grid wrapper: */
+.below-chart-stack {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-lg);     /* uniform 24px between all panels, no accidental doubles */
+}
+/* then wrap contribution-panel, alerts-panel, secondary-panels, narrative-panel in &lt;div class="below-chart-stack"&gt; */</div>
+  <div class="accept"><strong>Acceptance:</strong> Cold-load probe returns no gap &gt;48px between consecutive visible sections. Total page height &lt;2,000px on a 1440px-wide desktop (reduction from ~2,800). "Below chart" content visible at the start of the second viewport instead of halfway down it.</div>
+</div>
+
+<!-- =============================================== -->
+<h2>Summary — ship order (priority × effort)</h2>
+
+<table class="summary-table">
+  <thead><tr><th>#</th><th>Proposal</th><th>Priority</th><th>Effort</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Remove Brand/NB split chip</td><td><span class="priority-badge priority-medium">MED</span></td><td>5 min</td><td>Cleanest duplication kill</td></tr>
+    <tr><td>2</td><td>Merge Warnings + Model Alerts</td><td><span class="priority-badge priority-medium">MED</span></td><td>30 min</td><td>One alert stream = less scan load</td></tr>
+    <tr><td>3</td><td>Default-close Model View drawer</td><td><span class="priority-badge priority-medium">MED</span></td><td>10 min</td><td>Reclaim 25% horizontal space</td></tr>
+    <tr><td>4</td><td>Hide Saved Projections when empty</td><td><span class="priority-badge priority-low">LOW</span></td><td>5 min</td><td>Empty-state noise removal</td></tr>
+    <tr style="background:#FFF4D6"><td>5</td><td>Since last week auto-summary</td><td><span class="priority-badge priority-high">HIGH</span></td><td>45 min</td><td>Answers the #1 user question: "what changed?"</td></tr>
+    <tr style="background:#FFF4D6"><td>6</td><td>CI quality label + plan-in-range</td><td><span class="priority-badge priority-high">HIGH</span></td><td>30 min</td><td>Turns 56%-wide CI from noise to signal</td></tr>
+    <tr><td>7</td><td>Collapse VS OP2 tiles</td><td><span class="priority-badge priority-medium">MED</span></td><td>30 min</td><td>One-tile density gain</td></tr>
+    <tr style="background:#FFF4D6"><td>8</td><td>Action-first alerts</td><td><span class="priority-badge priority-high">HIGH</span></td><td>1h</td><td>Alerts become decisions, not reports</td></tr>
+    <tr><td>9</td><td>Fit Quality empty-state copy</td><td><span class="priority-badge priority-low">LOW</span></td><td>10 min</td><td>Framing, but high-visibility</td></tr>
+    <tr><td>10</td><td>Cross-market pulse strip</td><td><span class="priority-badge priority-medium">MED</span></td><td>45 min</td><td>Peripheral awareness without tab-switch</td></tr>
+    <tr><td>11</td><td>Confidence timeline sparkline</td><td><span class="priority-badge priority-low">LOW</span></td><td>30 min + pipeline</td><td>Nice-to-have for Model View</td></tr>
+    <tr style="background:#FFF4D6"><td>12</td><td>Typography consolidation</td><td><span class="priority-badge priority-high">HIGH</span></td><td>1h</td><td>15 → 5 sizes; kills fractional px leaks</td></tr>
+    <tr style="background:#FFF4D6"><td>13</td><td>Whitespace cleanup</td><td><span class="priority-badge priority-high">HIGH</span></td><td>20 min</td><td>545px dead gap; 3× scroll → 2×</td></tr>
+  </tbody>
+</table>
+
+<div style="margin-top:32px;padding:20px;background:#F6FAFF;border-left:4px solid #0066CC;border-radius:0 8px 8px 0">
+  <strong>If only 3 ship: #5, #6, #13.</strong><br>
+  <span style="font-size:13px;color:#6B6B6B">Since-last-week answers the user's biggest question. CI quality label turns the widest number on the page into actionable context. Whitespace cleanup reduces scroll by a full screen. Combined: the page goes from "reference artifact" to "tool Kate opens every Monday."</span>
+</div>
+
+<div style="margin-top:48px;padding-top:24px;border-top:1px solid #E5E5E5;font-size:12px;color:#6B6B6B">
+  Open this file directly in a browser to see the rendered components side-by-side with the live dashboard.<br>
+  Path: <code>agent-bridge/context/intake/mpe-proposed-changes-mockup.html</code>
+</div>
+
+</body>
+</html>
