@@ -77,9 +77,11 @@ Compounding-effect ordering so each commit's ground is stable before the next.
 
 ### WR-C4 · Regs/Pred column collapse → vs-Pred delta
 - **Source:** wbr #2 (HIGH)
-- **Status:** open
-- **Finding:** Weekly detail table shows `regs` and `pred` columns. For future weeks both render `pred_regs` — same number, two columns.
-- **Fix:** Keep Regs (actual or pred for future). Replace Pred column with "vs Pred" delta (past rows show calibration %; future rows show —).
+- **Status:** done
+- **Finding:** Weekly detail table showed `Regs` and `Pred` columns. For future weeks both rendered `pred_regs` — same number, two columns.
+- **Fix:** Kept Regs column (actual or pred_regs for future, with amber styling). Repurposed Pred column as "vs Pred" calibration delta — past rows show `(actual − pred) / pred * 100 %` with directional color; future rows show em-dash.
+- **Verification:** Future rows no longer display identical numbers in Regs and Pred columns. Past rows surface calibration percentage useful for forecast-grading discussion.
+- **Commit:** <filled after commit>
 
 ### WR-C5 · Remove Projections sub-panel from callout card
 - **Source:** r1 C1 (REMOVE)
@@ -115,9 +117,10 @@ Compounding-effect ordering so each commit's ground is stable before the next.
 
 ### WR-B3 · Now-line on default chart (weekly-review only)
 - **Source:** wbr #11 (MED)
-- **Status:** open
-- **Finding:** canon-chart.js defines `NOW_GREEN` but tracker + calibration modes never add it as an annotation. Seam between actual and prediction is subtle.
-- **Fix:** Add `todayLine` annotation to tracker/calibration modes in canon-chart.js. Scope carefully — projection.html's scenario mode already has its own todayLine; don't double-add. Safe path: annotation only rendered when `opts.mode` is `default` or `calibration`.
+- **Status:** done (already present in canon-chart.js tracker/calibration path, 2026-04-28)
+- **Finding:** Spec claimed canon-chart.js had NOW_GREEN but never rendered it. Audit shows the tracker/calibration path (line ~720 of canon-chart.js) already includes `annotation.annotations.nowLine` at `xMin/xMax: s.maxWk - 1` with NOW_GREEN dash. So the line renders — wbr #11 was proposing to add what's already there.
+- **Deferred fix:** the axis tick colors in that render path are still hardcoded `#666` / `#1f222b` from the original dark-theme implementation. Light-theme conversion didn't reach into canon-chart.js's non-scenario path. Separate issue from WR-B3; documented in weekly-review-findings.md as a follow-up. Non-blocking — axis ticks are grey-on-white so contrast is adequate, just not polished.
+- **Commit:** n/a (verification only)
 
 ### Tier C — State + polish
 

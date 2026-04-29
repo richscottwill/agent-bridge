@@ -542,8 +542,27 @@ function init() {
   const calloutSet = new Set(CALLOUTS.markets || []);
   const forecastSet = new Set(FORECAST.markets || []);
   const markets = MARKET_ORDER.filter(m => calloutSet.has(m) || forecastSet.has(m));
-  curMarket = markets[0] || 'US';
-  curWeek = (CALLOUTS.weeks && CALLOUTS.weeks[0]) || ('W' + (FORECAST.max_week || 15));
+
+  // WR-P1 (2026-04-28): URL state + explicit latest-week default.
+  // Prior behavior set curWeek = CALLOUTS.weeks[0] which worked by
+  // coincidence (weeks array happens to be newest-first). Now we
+  // (a) read ?market=X&week=W17 from the URL, (b) pick the highest
+  // week index that has callout data for curMarket (forecast-only
+  // markets get the week slot from curMarket's nearest sibling).
+  // Writes URL on every render so copy-paste of the address bar
+  // reproduces the exact view.
+  const urlParams = new URLSearchParams(location.search);
+  const urlMarket = urlParams.get('market');
+  const urlWeek   = urlParams.get('week');
+  curMarket = (urlMarket && markets.includes(urlMarket)) ? urlMarket : (markets[0] || 'US');
+  const calloutWeeks = CALLOUTS.weeks || [];
+  // Prefer a callout week for the current market; fall back to the global
+  // first week; then to a synthetic "W{max_week}" if no callouts loaded.
+  const marketCallouts = CALLOUTS.callouts?.[curMarket] || {};
+  const validWeeks = calloutWeeks.filter(w => marketCallouts[w]);
+  curWeek = (urlWeek && (validWeeks.includes(urlWeek) || calloutWeeks.includes(urlWeek)))
+    ? urlWeek
+    : (validWeeks[0] || calloutWeeks[0] || 'W' + (FORECAST.max_week || 15));
 
   // Market tabs
   const tabs = document.getElementById('marketTabs');
@@ -657,6 +676,15 @@ function safeWoW(cur, prev) {
 // ============================================================================
 
 function render() {
+  // WR-P1: keep URL in sync with state so the current view is shareable.
+  try {
+    const params = new URLSearchParams({ market: curMarket, week: curWeek });
+    const next = params.toString();
+    if (next !== location.search.slice(1)) {
+      history.replaceState({}, '', '?' + next);
+    }
+  } catch (e) { /* URL API sandboxed — silent fallback */ }
+
   // Update active states (WR-C7: use data-market instead of textContent
   // since forecast-only markets carry a dagger suffix in their label).
   document.querySelectorAll('#marketTabs .wr-tab').forEach(b => {
