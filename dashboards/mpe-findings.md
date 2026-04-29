@@ -16,20 +16,23 @@ Status values: `open` | `in-progress` | `done` | `verified` | `blocked` | `obsol
 Several items on the incoming backlog were landed in Round 7 but not yet pushed
 or verified by Local Kiro. Calling them out so status is accurate:
 
-- `op2_pacing_divergence` alert translation — **done on disk (uncommitted)**. `CHECK_LABELS` + `translateDetail` wired in `renderMarketAnomalies` (projection-app.js:163-197).
-- "Compare to baseline" disclosure button rename — **done on disk (uncommitted)**. projection.html:326.
-- Scope-change state reset — **done on disk (uncommitted)**. projection-app.js scope-select handler resets `disclosures.counter` + `activeChipId` + `scenarioOverride`.
-- NA rollup "rollup of US + CA" wording — **done on disk (uncommitted)**. projection-app.js:411-416.
-- MY1/MY2 narrative denominator — **done on disk (uncommitted)**. mpe_narrative.js:114-115 uses `Annualized to OP2` with `/nYears`.
-- Control-input focus ring — **done on disk (uncommitted)**. projection-design-system.css has `.control-input:focus-visible` override.
-- abc blur handler — **done on disk (uncommitted)**. projection-app.js target-input blur listener.
-- Spend upper bound — **done on disk (uncommitted)** but at $10B not $1B per Local Kiro's stricter recommendation. Revisiting in Phase 3.
-- Feedback widget aria-labels + enable-on-change — **done on disk (uncommitted)**.
-- Em-dash weeks leak in How modal + fit-quality strip — **done on disk (uncommitted)**.
-- "Today" marker on chart — **done on disk (uncommitted)**.
+- `op2_pacing_divergence` alert translation — **done**. `CHECK_LABELS` + `translateDetail` wired in `renderMarketAnomalies` (projection-app.js ~163-213).
+- "Compare to baseline" disclosure button rename — **done**. Landed in projection.html.
+- Scope-change state reset — **done**. projection-app.js scope-select handler resets `disclosures.counter` + `activeChipId` + `scenarioOverride`.
+- NA rollup "rollup of US + CA" wording — **done**. Rendered as `rollup of ${regionMarkets.join(' + ')}` (projection-app.js ~449).
+- MY1/MY2 narrative denominator — **done**. mpe_narrative.js uses `Annualized to OP2` with `/nYears`.
+- Control-input focus ring — **done**. projection-design-system.css has `.control-input:focus-visible` override.
+- Target-input blur handler — **done**. projection-app.js target-input blur listener at ~2998.
+- Spend upper bound — **done at $1B** (tightened from $10B in commit `4b19352`, see P3-10).
+- Feedback widget aria-labels + enable-on-change — **done**.
+- Em-dash weeks leak in How modal + fit-quality strip — **done**.
+- "Today" marker on chart — **done** (single-market verified; cross-market spot-check outstanding on P2-09).
 
-These will be committed as a baseline commit labeled `mpe: R5-R7 batch (pre-backlog)`
-before we start the new protocol. Every subsequent finding gets its own commit.
+Status 2026-04-28: reconciled. All R7 items are live on disk and the per-finding
+entries below have been flipped from the "R7, uncommitted" marker to "done".
+No baseline batch commit was ever filed — each R7 item's behavioral code shipped
+incidentally inside later commits (P3-10 spend cap, chart refactor, CSS cleanup).
+Keeping this section as a historical ledger of the pre-backlog state.
 
 ---
 
@@ -104,13 +107,13 @@ differs from the current one.
 
 ### P1-02 · "At full-year pace" narrative denominator for MY1/MY2
 - **Source:** Round 5 V-2
-- **Status:** done on disk (R7, uncommitted)
+- **Status:** done
 - **Verification:** JP MY2 narrative says "Annualized to OP2, that's X% of OP2 spend" with X computed as `(annual_total_spend / 2) / op2_spend * 100`.
 - **Note:** Will verify under new protocol before declaring verified.
 
 ### P1-03 · "Weeks used" em-dash placeholder in How modal + chart sub-line
 - **Source:** Round 5 V-1 + V-6
-- **Status:** done on disk (R7, uncommitted)
+- **Status:** done
 - **Verification:** "How this was calculated" modal Step 2 reads "… fit from 169 weeks of history" not "… from — weeks of history".
 
 ### P1-04 · Campaign-lift-to-baseline auto-promotion
@@ -165,7 +168,7 @@ differs from the current one.
 
 ### P1-11 · abc input blur handler
 - **Source:** Round 5 V-3
-- **Status:** done on disk (R7, uncommitted)
+- **Status:** done
 - **Verification:** Type `abc` into target-input, tab out, see "Enter a number." error.
 
 ### P1-12 · Console uncaught promise errors
@@ -229,7 +232,7 @@ differs from the current one.
 
 ### P2-09 · Today marker correctness across all markets
 - **Source:** R5 shipped; needs verification
-- **Status:** done on disk (R7, uncommitted); needs cross-market verification
+- **Status:** done; needs cross-market verification
 - **Verification:** On all 10 markets + 3 regions, the "↓ Today" marker lands exactly at `ytd_latest` and reads "Today".
 
 ### P2-10 · URL-based state sharing
@@ -284,7 +287,7 @@ differs from the current one.
 
 ### P3-01 · Alert translation render wire-up
 - **Source:** Round 6 V6-3
-- **Status:** done on disk (R7, uncommitted)
+- **Status:** done
 - **Verification:** MX alerts panel shows "Warning Projection diverges from OP2 plan — annual regs=17,235 vs OP2=11,178 (gap +54.2%)" not "[WARN] op2_pacing_divergence —".
 
 ### P3-02 · "Baseline only" deduplication
@@ -299,17 +302,17 @@ differs from the current one.
 
 ### P3-04 · Disclosure button state reset on market switch
 - **Source:** Round 6 V6-4
-- **Status:** done on disk (R7, uncommitted)
+- **Status:** done
 - **Verification:** Activate "Compare to baseline" on UK, switch to MX → button is de-activated and MX shows Planned scenario numbers.
 
 ### P3-05 · Control-input focus ring
 - **Source:** Round 6 V6-1
-- **Status:** done on disk (R7, uncommitted)
+- **Status:** done
 - **Verification:** Tab through market dropdown, period, driver, target-input, slider → each shows a 2px brand-blue outline.
 
 ### P3-06 · NA rollup subtitle wording
 - **Source:** Round 5 V-5
-- **Status:** done on disk (R7, uncommitted)
+- **Status:** done
 - **Verification:** Market badge on NA reads "NA · Year 2026 · rollup of US + CA" not "… rollup target".
 
 ### P3-07 · Contribution bar "Qualitative" relabel
@@ -354,7 +357,7 @@ differs from the current one.
 
 ### P3-15 · Remove [WARN]/[ERROR] bracket notation
 - **Source:** Round 4 R4-26
-- **Status:** done on disk (R7, uncommitted)
+- **Status:** done
 - **Verification:** Alerts panel shows "Warning" / "Error" pill badges, no brackets.
 
 ### P3-16 · Recompute button decision
@@ -369,7 +372,7 @@ differs from the current one.
 
 ### P3-18 · Feedback widget radio enables inputs
 - **Source:** Round 2 R4-20
-- **Status:** done on disk (R7, uncommitted — HTML `disabled` removed + JS radio handler)
+- **Status:** done
 - **Verification:** Click "Too high" radio → magnitude + freetext + submit are enabled.
 
 ### P3-19 · Reset-to-defaults button
