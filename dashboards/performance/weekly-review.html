@@ -1301,19 +1301,61 @@ function renderVariance() {
   const body = document.getElementById('varianceBody');
   if (!panel || !body) return;
   const c = (CALLOUTS.callouts[curMarket] || {})[curWeek];
-  if (!c || !c.brand_detail || !c.nb_detail) {
+  if (!c) {
     panel.style.display = 'none';
     body.innerHTML = '';
     return;
   }
-  const brand = c.brand_detail;
-  const nb = c.nb_detail;
-  // Build the decomposition. If lw_regs missing on either channel, emit
-  // empty state — don't silent-skip (BLOCKED-with-root-cause pattern).
-  if (brand.lw_regs == null || nb.lw_regs == null) {
-    panel.style.display = '';
-    body.innerHTML = '<div class="wr-variance-empty">Decomposition needs both Brand and Non-Brand prior-week data. Try a later week or check callout data freshness.</div>';
-    return;
+
+  // WR-B1-2 (2026-04-29): rollup markets (WW / EU5 / NA) don't carry
+  // brand_detail.lw_regs or nb_detail.lw_regs. Aggregate from the
+  // constituent per-country callouts for the same week instead.
+  const REGION_MEMBERS = {
+    WW:  ['US','CA','UK','DE','FR','IT','ES','JP','MX','AU'],
+    EU5: ['UK','DE','FR','IT','ES'],
+    NA:  ['US','CA'],
+  };
+  let brand, nb;
+  if (REGION_MEMBERS[curMarket]) {
+    const members = REGION_MEMBERS[curMarket];
+    const agg = { regs: 0, lw_regs: 0 };
+    const nbAgg = { regs: 0, lw_regs: 0 };
+    let missing = 0;
+    for (const mkt of members) {
+      const mc = (CALLOUTS.callouts[mkt] || {})[curWeek];
+      const bd = mc && mc.brand_detail;
+      const nd = mc && mc.nb_detail;
+      if (!bd || !nd || bd.lw_regs == null || nd.lw_regs == null) {
+        missing++;
+        continue;
+      }
+      agg.regs    += bd.regs || 0;
+      agg.lw_regs += bd.lw_regs || 0;
+      nbAgg.regs    += nd.regs || 0;
+      nbAgg.lw_regs += nd.lw_regs || 0;
+    }
+    // If more than half the constituents are missing lw_regs, surface
+    // the empty state rather than a misleading partial aggregate.
+    if (missing > members.length / 2) {
+      panel.style.display = '';
+      body.innerHTML = `<div class="wr-variance-empty">Decomposition needs per-market prior-week data for ${curMarket} constituents. ${missing} of ${members.length} missing — try a later week.</div>`;
+      return;
+    }
+    brand = agg;
+    nb = nbAgg;
+  } else {
+    if (!c.brand_detail || !c.nb_detail) {
+      panel.style.display = 'none';
+      body.innerHTML = '';
+      return;
+    }
+    brand = c.brand_detail;
+    nb = c.nb_detail;
+    if (brand.lw_regs == null || nb.lw_regs == null) {
+      panel.style.display = '';
+      body.innerHTML = '<div class="wr-variance-empty">Decomposition needs both Brand and Non-Brand prior-week data. Try a later week or check callout data freshness.</div>';
+      return;
+    }
   }
   const brandDelta = (brand.regs || 0) - (brand.lw_regs || 0);
   const nbDelta    = (nb.regs    || 0) - (nb.lw_regs    || 0);
