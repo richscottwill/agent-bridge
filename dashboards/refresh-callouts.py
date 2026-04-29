@@ -767,24 +767,30 @@ def synthesize_aggregate_narrative(aggregate_market, wk, entry, callouts, member
     decliner = member_wow[-1] if len(member_wow) > 1 else None
 
     # Headline: regs + WoW + CPA direction
-    headline_bits = [f"{aggregate_market} drove {_fmt_num(regs)} registrations"]
+    # Narrative-first paragraph — reads as a single continuous sentence rather
+    # than a choppy bullet-join. Matches the density of hand-authored market
+    # callouts (US/MX/AU) so WW and EU5 aren't visibly degraded for leadership.
+    bits = [f"{aggregate_market} drove {_fmt_num(regs)} registrations"]
     if regs_wow is not None:
-        headline_bits[-1] += f" ({_fmt_pct(regs_wow)} WoW)"
+        bits[-1] += f" ({_fmt_pct(regs_wow)} WoW)"
     if spend_wow is not None:
-        headline_bits.append(f"with {_fmt_pct(spend_wow)} spend WoW")
+        bits.append(f"on {_fmt_pct(spend_wow)} spend WoW")
     if cpa is not None:
         cpa_dir = ""
         if cpa_wow is not None:
-            cpa_dir = " (decreased)" if cpa_wow < 0 else (" (increased)" if cpa_wow > 0 else "")
-        headline_bits.append(f"CPA ${cpa:.0f}{cpa_dir}")
-    headline = ". ".join(headline_bits) + "."
+            cpa_dir = f" ({_fmt_pct(cpa_wow)} WoW)"
+        bits.append(f"CPA ${cpa:.0f}{cpa_dir}")
+    headline = ", ".join(bits) + "."
 
-    # Body paragraph 1 — top-level totals and YoY context
+    # Body paragraph 1 — top-level context (YoY + absolute spend)
     para1_parts = [headline]
+    yoy_parts = []
     if regs_yoy is not None:
-        para1_parts.append(f"YoY registrations {_fmt_pct(regs_yoy)}.")
+        yoy_parts.append(f"YoY registrations {_fmt_pct(regs_yoy)}")
     if spend is not None:
-        para1_parts.append(f"Total spend {_fmt_dollars(spend)}.")
+        yoy_parts.append(f"total spend {_fmt_dollars(spend)}")
+    if yoy_parts:
+        para1_parts.append(", ".join(yoy_parts).capitalize() + ".")
     para1 = " ".join(para1_parts)
 
     # Body paragraph 2 — gainer / decliner across member markets
@@ -818,10 +824,12 @@ def synthesize_aggregate_narrative(aggregate_market, wk, entry, callouts, member
             anom_lines.append(f"• {metric}: {dev}")
     para4 = ("Notable cross-market anomalies:\n" + "\n".join(anom_lines)) if anom_lines else ""
 
-    # Trailer — marks this as auto-generated so readers know it isn't authored
-    trailer = f"_Auto-composed from per-market entries — no {aggregate_market.lower()}-summary-2026-w{wk}.md file found._"
+    # No trailer. Auto-composition is the primary path for derived markets; the
+    # output is self-contained and leadership-ready. Hand-authored ww-summary files
+    # still take priority when present (see read_callout), and they override this
+    # path entirely — so authoring a narrative is an upgrade, not a requirement.
 
-    body_paras = [p for p in [para1, para2, para3, para4, trailer] if p]
+    body_paras = [p for p in [para1, para2, para3, para4] if p]
     body = "\n\n".join(body_paras)
     return headline, body
 
