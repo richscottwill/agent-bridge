@@ -1,9 +1,13 @@
 /**
  * canon-chart.js — Single source of truth for the PS performance chart.
  *
- * Two render modes:
+ * Three render modes:
  *   - default:     "one glance" chart (actuals + latest prediction, continuous line)
- *   - calibration: "how did the model do?" chart (adds first prediction overlay)
+ *   - calibration: "how did the model do?" line chart (adds first prediction overlay)
+ *   - error:       "how wrong were we per week?" bar chart
+ *                  Signed percentage error with muted traffic-light fills and
+ *                  a CI reference band. Visually distinct from the trend chart
+ *                  (bars, signed axis, severity coloring). See buildErrorDatasets.
  *
  * Both modes read the same forecast-data.json payload:
  *   weekly[market][].{regs, cost, op2_regs}                  - actuals + OP2
@@ -279,8 +283,128 @@
   }
 
   // ========================================================================
-  // Scenario mode (M2) — for Projection Engine. Accepts a richer input than
-  // the tracker/calibration modes because it supports CI bands, counterfactual
+  // Error-bar mode — "how wrong were we per week?"
+  //
+  // Signed error bars (one per week) with muted traffic-light severity fills.
+  // Signed = below zero is under-prediction, above is over-prediction.
+  // Severity by |err|: <5% soft green, 5-15% soft amber, >=15% soft red.
+  // Future weeks (no actual yet) render as null — Chart.js draws no bar,
+  // but the x-slot remains present so the axis stays stable across 1-52.
+  //
+  // Derives a reference band from the median latest CI half-width across
+  // weeks with actuals. Drawn as a soft green horizontal band (see the
+  // referenceBandPlugin in renderCanonChart). A bar that extends beyond
+  // the band is outside the model's own claimed precision.
+  //
+  // axisFilter: 'regs' | 'spend' | 'both'. For 'both' we render two bar
+  // datasets side-by-side; single-axis views render one dataset on the
+  // left scale (percentages work the same for regs and spend).
+  // ========================================================================
+  function buildErrorDatasets(s, axisFilter) {
+    const axis = axisFilter === 'spend' || axisFilter === 'both' || axisFilter === 'regs'
+      ? axisFilter : 'regs';
+
+    // Muted traffic-light palette — projection-design-system.css tokens with
+    // low alpha on the fill and higher alpha on the border for a restrained
+    // but legible signal. Matches the heatgrid / trust-badge language already
+    // used on the projection engine.
+    const GOOD_FILL = 'rgba(20, 165, 72, 0.35)';
+    const GOOD_EDGE = 'rgba(20, 165, 72, 0.75)';
+    const WARN_FILL = 'rgba(232, 168, 0, 0.35)';
+    const WARN_EDGE = 'rgba(232, 168, 0, 0.85)';
+    const BAD_FILL  = 'rgba(209, 50, 18, 0.35)';
+    const BAD_EDGE  = 'rgba(209, 50, 18, 0.80)';
+
+    function fillFor(v) {
+      if (v === null || v === undefined) return 'transparent';
+      const a = Math.abs(v);
+      if (a < 5) return GOOD_FILL;
+      if (a < 15) return WARN_FILL;
+      return BAD_FILL;
+    }
+    function edgeFor(v) {
+      if (v === null || v === undefined) return 'transparent';
+      const a = Math.abs(v);
+      if (a < 5) return GOOD_EDGE;
+      if (a < 15) return WARN_EDGE;
+      return BAD_EDGE;
+    }
+
+    // Compute signed error % per week. Sign convention matches the scorecard:
+    // negative = under-predicting (pred below actual), positive = over.
+    // Skip weeks with no actual or no latest prediction.
+    function errPctArray(actuals, latestPreds) {
+      const out = new Array(52).fill(null);
+      for (let i = 0; i < 52; i++) {
+        const a = actuals[i]; const p = latestPreds[i];
+        if (a === null || a === 0 || p === null) continue;
+        out[i] = Math.round((p - a) / a * 10000) / 100;
+      }
+      return out;
+    }
+
+    const sets = [];
+
+    if (axis === 'regs' || axis === 'both') {
+      const regsErrs = errPctArray(s.regsActual, s.regsLatestAll);
+      sets.push({
+        label: 'Regs error %',
+        data: regsErrs,
+        backgroundColor: regsErrs.map(fillFor),
+        borderColor: regsErrs.map(edgeFor),
+        borderWidth: 1,
+        borderRadius: 2,
+        yAxisID: 'y',
+        _errMetric: 'regs',
+        barPercentage: 0.9, categoryPercentage: axis === 'both' ? 0.9 : 0.95,
+      });
+    }
+    if (axis === 'spend' || axis === 'both') {
+      const spendErrs = errPctArray(s.spendActual, s.spendLatestAll);
+      sets.push({
+        label: 'Spend error %',
+        data: spendErrs,
+        backgroundColor: spendErrs.map(fillFor),
+        borderColor: spendErrs.map(edgeFor),
+        borderWidth: 1,
+        borderRadius: 2,
+        yAxisID: 'y',
+        _errMetric: 'spend',
+        barPercentage: 0.9, categoryPercentage: axis === 'both' ? 0.9 : 0.95,
+      });
+    }
+
+    // Stash derived metadata for the plugins + tooltip.
+    sets._meta = {
+      ciBandPct: medianCiHalfWidthPct(s),
+      regsActual: s.regsActual,
+      regsLatestAll: s.regsLatestAll,
+      spendActual: s.spendActual,
+      spendLatestAll: s.spendLatestAll,
+      ciLoAll: s.ciLoAll,
+      ciHiAll: s.ciHiAll,
+    };
+    return sets;
+  }
+
+  // Compute the median half-width of the latest CI, expressed as % of the
+  // latest prediction. This is the model's own stated precision; we draw a
+  // reference band at ±this number on the error chart. Only regs CIs are
+  // present in forecast-data.json so we key off those.
+  function medianCiHalfWidthPct(s) {
+    const halves = [];
+    for (let i = 0; i < 52; i++) {
+      const lo = s.ciLoAll[i]; const hi = s.ciHiAll[i]; const pred = s.regsLatestAll[i];
+      if (lo === null || hi === null || pred === null || pred === 0) continue;
+      const half = (hi - lo) / 2;
+      halves.push(half / pred * 100);
+    }
+    if (!halves.length) return 20;  // sensible fallback
+    halves.sort((a, b) => a - b);
+    const mid = Math.floor(halves.length / 2);
+    const med = halves.length % 2 ? halves[mid] : (halves[mid - 1] + halves[mid]) / 2;
+    return Math.round(med * 10) / 10;
+  }
   // lines, regime-onset rules, period highlights, and a narrated-contribution
   // tooltip. The mode is orthogonal to the tracker mode: one library, two
   // call sites, no shared datasets.
@@ -669,6 +793,173 @@
     });
   }
 
+  // ========================================================================
+  // Error bar chart renderer — "how wrong were we per week?"
+  //
+  // Signed %-error axis. Muted traffic-light fills. A soft green reference
+  // band at ±(median latest CI half-width). A visible zero reference line.
+  // All 52 weeks rendered; weeks without actuals are null (no bar drawn),
+  // keeping the x-axis stable across markets and across the year.
+  //
+  // Expected opts: forecastData, market, axisFilter ('regs'|'spend'|'both')
+  // ========================================================================
+  function renderErrorChart(ctx, opts) {
+    const s = buildSeries(opts.forecastData, opts.market);
+    const datasets = buildErrorDatasets(s, opts.axisFilter);
+    const meta = datasets._meta || {};
+    const ciBandPct = meta.ciBandPct || 20;
+
+    // Reference band plugin — draws a soft green ±ciBandPct horizontal band.
+    // The band is the model's OWN claimed precision, derived from its CI
+    // outputs. Bars that extend past the band are outside the model's own
+    // stated confidence — not our complaint, the model's.
+    const referenceBandPlugin = {
+      id: 'errorReferenceBand',
+      beforeDatasetsDraw(chart) {
+        const y = chart.scales.y; const area = chart.chartArea;
+        if (!y || !area) return;
+        const yHi = y.getPixelForValue(ciBandPct);
+        const yLo = y.getPixelForValue(-ciBandPct);
+        chart.ctx.save();
+        chart.ctx.fillStyle = 'rgba(20, 165, 72, 0.06)';
+        chart.ctx.fillRect(area.left, Math.min(yHi, yLo), area.right - area.left, Math.abs(yLo - yHi));
+        chart.ctx.strokeStyle = 'rgba(20, 165, 72, 0.35)';
+        chart.ctx.setLineDash([4, 3]);
+        chart.ctx.lineWidth = 1;
+        chart.ctx.beginPath();
+        chart.ctx.moveTo(area.left, yHi); chart.ctx.lineTo(area.right, yHi);
+        chart.ctx.moveTo(area.left, yLo); chart.ctx.lineTo(area.right, yLo);
+        chart.ctx.stroke();
+        chart.ctx.restore();
+      },
+    };
+
+    // Zero reference line — heavier than grid so sign of error reads instantly.
+    const zeroLinePlugin = {
+      id: 'errorZeroLine',
+      afterDatasetsDraw(chart) {
+        const y = chart.scales.y; const area = chart.chartArea;
+        if (!y || !area) return;
+        const y0 = y.getPixelForValue(0);
+        chart.ctx.save();
+        chart.ctx.strokeStyle = 'rgba(60, 60, 60, 0.6)';
+        chart.ctx.lineWidth = 1;
+        chart.ctx.beginPath();
+        chart.ctx.moveTo(area.left, y0); chart.ctx.lineTo(area.right, y0);
+        chart.ctx.stroke();
+        chart.ctx.restore();
+      },
+    };
+
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: { labels: s.labels, datasets: datasets },
+      plugins: [referenceBandPlugin, zeroLinePlugin],
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false, axis: 'x' },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            mode: 'index',
+            intersect: false,
+            callbacks: {
+              title: (items) => items.length ? items[0].label : '',
+              label: (item) => {
+                const v = item.parsed.y;
+                if (v == null) return 'no actual yet';
+                const ds = item.dataset;
+                const metric = ds._errMetric === 'spend' ? 'spend' : 'regs';
+                const actual = metric === 'spend'
+                  ? meta.spendActual[item.dataIndex] : meta.regsActual[item.dataIndex];
+                const latest = metric === 'spend'
+                  ? meta.spendLatestAll[item.dataIndex] : meta.regsLatestAll[item.dataIndex];
+                const dir = v < 0 ? 'under' : 'over';
+                const sign = v > 0 ? '+' : '';
+                const unit = metric === 'spend' ? '$K' : '';
+                const lines = [
+                  (ds.label || 'error') + ': ' + sign + v + '% (' + dir + ')',
+                ];
+                if (actual != null) {
+                  lines.push('actual: ' + Math.round(actual).toLocaleString() + unit);
+                }
+                if (latest != null) {
+                  lines.push('latest pred: ' + Math.round(latest).toLocaleString() + unit);
+                }
+                // CI in-band signal (regs-only — CIs aren't present for spend)
+                if (metric === 'regs' && meta.ciLoAll && meta.ciHiAll && actual != null) {
+                  const lo = meta.ciLoAll[item.dataIndex];
+                  const hi = meta.ciHiAll[item.dataIndex];
+                  if (lo != null && hi != null) {
+                    lines.push(lo <= actual && actual <= hi ? 'inside CI band' : 'outside CI band');
+                  }
+                }
+                return lines;
+              },
+            },
+          },
+          annotation: {
+            annotations: {
+              nowLine: {
+                type: 'line',
+                xMin: s.maxWk - 1, xMax: s.maxWk - 1,
+                borderColor: NOW_GREEN, borderWidth: 2, borderDash: [4, 4],
+                label: {
+                  display: true, content: 'Now (W' + s.maxWk + ')',
+                  color: '#4ade80', font: { size: 10 }, position: 'start',
+                  backgroundColor: 'rgba(0,0,0,0)',
+                },
+              },
+            },
+          },
+          datalabels: { display: false },
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: {
+              color: '#666', font: { size: 10 },
+              autoSkip: false,
+              callback: function (val) {
+                const lbl = this.getLabelForValue(val);
+                const n = parseInt(lbl.replace('W', ''), 10);
+                return (n % 2 === 0 || n === 1 || n === 52) ? lbl : '';
+              },
+            },
+          },
+          y: {
+            position: 'left',
+            suggestedMin: -50, suggestedMax: 50,
+            grid: {
+              color: (c) => (c.tick && c.tick.value === 0) ? 'transparent' : '#1f222b',
+            },
+            ticks: {
+              color: '#666',
+              callback: (v) => (v > 0 ? '+' : '') + v + '%',
+            },
+            title: { display: true, text: 'Forecast error (% of actual)', color: '#888' },
+          },
+        },
+      },
+    });
+
+    // Highlight selected week — slightly thicker border on the matching bar.
+    if (opts.highlightWeek) {
+      const targetWk = parseInt(String(opts.highlightWeek).replace('W', ''), 10);
+      if (!isNaN(targetWk)) {
+        const idx = targetWk - 1;
+        chart.data.datasets.forEach((ds) => {
+          if (Array.isArray(ds.borderWidth)) return;
+          ds.borderWidth = ds.data.map((_, i) => (i === idx ? 2.5 : 1));
+        });
+        chart.update();
+      }
+    }
+
+    return chart;
+  }
+
   function renderCanonChart(canvasOrId, opts) {
     const ctx = typeof canvasOrId === 'string'
       ? document.getElementById(canvasOrId) : canvasOrId;
@@ -678,6 +969,11 @@
     // Route scenario mode out to its own builder — keeps the tracker/calibration
     // path clean and lets the Projection Engine carry its own dataset shape.
     if (opts.mode === 'scenario') return renderScenarioChart(ctx, opts);
+
+    // Error mode is a bar chart with signed-%-axis and severity-colored bars.
+    // Visually distinct from the line-chart modes so viewers don't confuse
+    // "what happened" with "how wrong were we." See renderErrorChart.
+    if (opts.mode === 'error') return renderErrorChart(ctx, opts);
 
     const mode = opts.mode === 'calibration' ? 'calibration' : 'default';
     const s = buildSeries(opts.forecastData, opts.market);

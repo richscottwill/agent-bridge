@@ -871,14 +871,14 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
   </div>
   <div class="sec-panel" id="sec-calibration">
     <div class="wr-calib-head">
-      <h3 style="margin:0"><span>How did we do — forecast vs actual</span></h3>
-      <div class="wr-chart-axis-toggle" id="calibAxisToggle" role="group" aria-label="Calibration axis filter">
+      <h3 style="margin:0"><span>Weekly forecast error</span></h3>
+      <div class="wr-chart-axis-toggle" id="calibAxisToggle" role="group" aria-label="Forecast error axis filter">
         <button class="wr-tab wr-chart-mode-btn active" data-axis="regs">Regs</button>
         <button class="wr-tab wr-chart-mode-btn" data-axis="spend">Spend</button>
         <button class="wr-tab wr-chart-mode-btn" data-axis="both">Both</button>
       </div>
     </div>
-    <div class="wr-chart-wrap"><canvas id="calibrationChart" role="img" aria-label="Forecast calibration: first prediction vs latest prediction vs actual"></canvas></div>
+    <div class="wr-chart-wrap"><canvas id="calibrationChart" role="img" aria-label="Weekly forecast error: signed % per week with severity fill and CI reference band"></canvas></div>
   </div>
 </div>
 <!-- WR-S1 (2026-04-29): Weekly Detail wrapped in <details> collapsed by default.
@@ -1866,10 +1866,10 @@ function renderChart() {
   calibrationChart = CanonChart.render('calibrationChart', {
     forecastData: FORECAST,
     market: curMarket,
-    mode: 'calibration',
+    mode: 'error',
     highlightWeek: curWeek,
     chartInstance: calibrationChart,
-    axisFilter: calibrationAxis,   // WR-D2: regs / spend / both
+    axisFilter: calibrationAxis,   // regs / spend / both
   });
   // Axis toggle wiring — only attach once, idempotent per render.
   const toggle = document.getElementById('calibAxisToggle');
