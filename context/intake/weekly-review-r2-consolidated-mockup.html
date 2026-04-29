@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Weekly Review R2 — Consolidated Findings + Fixes</title>
+<style>
+  :root {
+    --color-brand: #0066CC;
+    --color-ink: #111111;
+    --color-body: #333333;
+    --color-subtle: #6A6A6A;
+    --color-meta: #8A8A8A;
+    --color-panel-bg: #FFFFFF;
+    --color-panel-border: #E4E4E4;
+    --color-neutral-bg: #F7F7F7;
+    --color-success: #0E8345;
+    --color-danger: #D13212;
+    --color-warn: #E8A800;
+    --color-orange: #f97316;
+    --gap-xs: 6px;
+    --gap-sm: 10px;
+    --gap-md: 16px;
+    --gap-lg: 24px;
+    --gap-xl: 40px;
+    --size-hero: 32px;
+    --size-h1: 24px;
+    --size-h2: 20px;
+    --size-body: 16px;
+    --size-ui: 13px;
+    --size-meta: 11px;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--color-body);
+    background: var(--color-neutral-bg);
+    line-height: 1.5;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--gap-lg);
+  }
+  h1 { font-size: var(--size-hero); margin: 0 0 var(--gap-md); color: var(--color-ink); }
+  h2 { font-size: var(--size-h1); margin: var(--gap-xl) 0 var(--gap-md); color: var(--color-ink); border-bottom: 2px solid var(--color-brand); padding-bottom: var(--gap-sm); }
+  h3 { font-size: var(--size-h2); margin: var(--gap-lg) 0 var(--gap-sm); color: var(--color-ink); }
+  p { margin: var(--gap-sm) 0; }
+  .lead { font-size: var(--size-body); color: var(--color-body); }
+  .meta { font-size: var(--size-meta); color: var(--color-meta); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .proposal {
+    background: var(--color-panel-bg);
+    border: 1px solid var(--color-panel-border);
+    border-radius: 8px;
+    padding: var(--gap-lg);
+    margin-bottom: var(--gap-lg);
+  }
+  .proposal-head { display: flex; gap: var(--gap-md); align-items: flex-start; margin-bottom: var(--gap-sm); }
+  .proposal-num {
+    width: 44px; height: 44px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--color-brand); color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 15px;
+    flex-shrink: 0;
+    font-family: "SF Mono", monospace;
+  }
+  .proposal-title { font-size: var(--size-h2); font-weight: 600; color: var(--color-ink); flex: 1; line-height: 1.3; }
+
+  .priority-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+  .priority-bug      { background: #D13212; color: white; }
+  .priority-high     { background: #E8A800; color: white; }
+  .priority-medium   { background: #5A8BC9; color: white; }
+  .priority-low      { background: #9A9A9A; color: white; }
+  .priority-add      { background: #0E8345; color: white; }
+  .priority-remove   { background: #6A3F8C; color: white; }
+  .priority-research { background: #175D75; color: white; }
+
+  .proposal-sub {
+    font-size: var(--size-ui);
+    color: var(--color-subtle);
+    margin-bottom: var(--gap-md);
+    padding-left: 60px;
+    line-height: 1.55;
+  }
+  .proposal-sub strong { color: var(--color-ink); }
+
+  .ba-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap-md);
+    margin: var(--gap-md) 0;
+  }
+  .ba-panel {
+    border: 1px solid var(--color-panel-border);
+    border-radius: 6px;
+    padding: var(--gap-md);
+    background: var(--color-neutral-bg);
+    font-size: var(--size-ui);
+  }
+  .ba-label {
+    font-size: var(--size-meta);
+    color: var(--color-meta);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    margin-bottom: var(--gap-sm);
+  }
+  .ba-panel.before { background: #FFF4F2; border-color: #F5C9BF; }
+  .ba-panel.after  { background: #F0F8F2; border-color: #BFE0C9; }
+
+  code, pre { font-family: "SF Mono", Consolas, Monaco, monospace; font-size: var(--size-ui); }
+  pre {
+    background: #1E1E1E;
+    color: #DADADA;
+    padding: var(--gap-md);
+    border-radius: 6px;
+    overflow-x: auto;
+    line-height: 1.5;
+    font-size: 12px;
+  }
+  pre .com { color: #6A9955; }
+  pre .key { color: #569CD6; }
+  pre .str { color: #CE9178; }
+  pre .fn  { color: #DCDCAA; }
+
+  .accept {
+    background: #F0F8FF;
+    border-left: 3px solid var(--color-brand);
+    padding: var(--gap-sm) var(--gap-md);
+    margin: var(--gap-md) 0 0;
+    font-size: var(--size-ui);
+    line-height: 1.6;
+  }
+  .accept-label {
+    font-size: var(--size-meta);
+    font-weight: 700;
+    color: var(--color-brand);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .evidence {
+    background: #FFFAE8;
+    border-left: 3px solid var(--color-warn);
+    padding: var(--gap-sm) var(--gap-md);
+    margin: var(--gap-md) 0;
+    font-size: var(--size-ui);
+    line-height: 1.6;
+  }
+  .evidence-label {
+    font-size: var(--size-meta);
+    font-weight: 700;
+    color: #A77200;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .evidence code { background: rgba(0,0,0,0.06); padding: 1px 5px; border-radius: 3px; }
+
+  .toc {
+    background: white;
+    border: 1px solid var(--color-panel-border);
+    border-radius: 6px;
+    padding: var(--gap-md) var(--gap-lg);
+    font-size: var(--size-ui);
+    line-height: 1.9;
+    margin-bottom: var(--gap-lg);
+  }
+  .toc-section { font-weight: 700; color: var(--color-ink); margin-top: var(--gap-sm); font-size: var(--size-ui); }
+  .toc-section:first-child { margin-top: 0; }
+  .toc a { color: var(--color-brand); text-decoration: none; margin-right: 4px; }
+  .toc a:hover { text-decoration: underline; }
+  .toc-sep { color: var(--color-panel-border); margin: 0 4px; }
+
+  .framing {
+    background: white;
+    border: 1px solid var(--color-panel-border);
+    border-left: 4px solid var(--color-brand);
+    border-radius: 6px;
+    padding: var(--gap-md) var(--gap-lg);
+    margin: var(--gap-lg) 0;
+  }
+  .framing h3 { margin-top: 0; }
+  .framing p { font-size: var(--size-ui); line-height: 1.6; }
+
+  table.compare, table.shiporder {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--size-ui);
+    margin: var(--gap-md) 0;
+  }
+  table.compare th, table.compare td,
+  table.shiporder th, table.shiporder td {
+    padding: 8px var(--gap-sm);
+    border-bottom: 1px solid var(--color-panel-border);
+    text-align: left;
+    vertical-align: top;
+  }
+  table.compare th, table.shiporder th {
+    background: var(--color-neutral-bg);
+    font-weight: 600;
+    color: var(--color-ink);
+    font-size: var(--size-meta);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* Fake dashboard visuals */
+  .mock {
+    background: white;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    padding: var(--gap-sm);
+    margin-top: var(--gap-sm);
+    font-size: 11px;
+  }
+  .mock-title { font-size: 9px; color: var(--color-subtle); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .mock-kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 4px; margin-top: 4px; }
+  .mock-kpi { background: white; border: 1px solid #E0E0E0; border-radius: 3px; padding: 5px; }
+  .mock-kpi-lbl { font-size: 8px; color: var(--color-meta); text-transform: uppercase; letter-spacing: 0.06em; }
+  .mock-kpi-val { font-size: 14px; font-weight: 600; color: var(--color-ink); font-family: monospace; }
+  .mock-narr { background: white; border: 1px solid #E0E0E0; border-left: 3px solid var(--color-brand); padding: 6px 10px; border-radius: 3px; margin-top: 4px; font-size: 11px; line-height: 1.5; }
+  .mock-dash { color: #CCCCCC; font-style: italic; }
+  .mock-empty { background: #FFF4F2; border-color: #F5C9BF; }
+  .mock-thread { display: flex; gap: 4px; }
+  .mock-thread > div { flex: 1; padding: 4px; background: var(--color-neutral-bg); border-radius: 3px; font-size: 10px; }
+  .mock-thread > div.active { background: rgba(0, 102, 204, 0.06); border-left: 2px solid var(--color-brand); }
+</style>
+</head>
+<body>
+
+<h1>Weekly Review R2 — Consolidated Findings + Fixes</h1>
+<p class="meta">Mockup · 2026-04-28 · author: Local Kiro · 23 findings</p>
+<p class="lead">
+  Consolidated deliverable merging R1 live verification (12 pass / 2 partial / 0 fail), R2 research pass
+  (forecasting-platform patterns from gjopen, Polymarket, Metaculus, Robinhood), and a deep nitpick probe
+  across WW / US / EU5 / JP on localhost:8080. Each finding carries evidence, before/after visual, code
+  snippet, and acceptance criteria.
+</p>
+
+<div class="framing">
+  <h3>What this document is</h3>
+  <p>
+    Richard asked for everything in one place, with fixes. 23 findings total, split into 4 buckets:
+    <strong>Bugs</strong> (3 — hard failures from live verification), <strong>Polish</strong> (10 — micro-nits
+    from deep probe that hold the page back from MPE-level quality), <strong>Structure</strong> (4 —
+    information-architecture and subtraction moves), and <strong>R2 research</strong> (6 — framing ideas
+    from forecasting platforms).
+  </p>
+  <p style="color:var(--color-subtle); font-size:var(--size-meta); margin-top:var(--gap-md)">
+    Probe evidence captured via chrome-devtools-mcp. Screenshots in
+    <code>agent-bridge/context/intake/weekly-review-r1-post-verify-*.png</code>.
+    Live data from commit-of-record at probe time. Content paraphrased from research sources for licensing
+    compliance.
+  </p>
+</div>
+
+<div class="toc">
+  <div class="toc-section">Bugs (1–3) — hard failures blocking leadership demo</div>
+  <a href="#p1">1 · Three-Q cards 1+2 empty on WW rollup <span class="priority-badge priority-bug">BUG</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p2">2 · Variance waterfall empty on WW rollup <span class="priority-badge priority-bug">BUG</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p3">3 · section-freshness.json 404 <span class="priority-badge priority-bug">BUG</span></a>
+
+  <div class="toc-section">Polish (4–13) — micro-nits from deep probe</div>
+  <a href="#p4">4 · sec-panel padding is 0px <span class="priority-badge priority-high">HIGH</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p5">5 · 152px gap between KPI row and chart panels <span class="priority-badge priority-high">HIGH</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p6">6 · TOC order doesn't match rendered order <span class="priority-badge priority-high">HIGH</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p7">7 · Narrative card body prose marked as H3 <span class="priority-badge priority-medium">MED</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p8">8 · H2 level skipped in heading hierarchy <span class="priority-badge priority-medium">MED</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p9">9 · No semantic landmarks (header/main/nav/aside) <span class="priority-badge priority-medium">MED</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p10">10 · Canvases missing aria-label / role=img <span class="priority-badge priority-medium">MED</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p11">11 · Week selector has no label <span class="priority-badge priority-medium">MED</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p12">12 · Thread strip lacks group role + aria-label <span class="priority-badge priority-low">LOW</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p13">13 · Calibration chart H3 visually swallows axis toggle <span class="priority-badge priority-low">LOW</span></a>
+
+  <div class="toc-section">Structure (14–17) — information-architecture moves</div>
+  <a href="#p14">14 · Page is 3,820px tall — add progressive disclosure <span class="priority-badge priority-high">HIGH</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p15">15 · Scorecard + KPIs should be side-by-side, not stacked <span class="priority-badge priority-medium">MED</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p16">16 · Brand/NB cards empty on rollups — hide or repurpose <span class="priority-badge priority-remove">REMOVE</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p17">17 · Duplicate TOC link "Callout" + scrollable "Trend" <span class="priority-badge priority-medium">MED</span></a>
+
+  <div class="toc-section">R2 research (18–23) — forecasting-platform framing ideas</div>
+  <a href="#p18">18 · Scrub-the-chart interaction <span class="priority-badge priority-research">R2</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p19">19 · Event annotations on trend chart <span class="priority-badge priority-research">R2</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p20">20 · Relative forecast error vs naive baseline <span class="priority-badge priority-research">R2</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p21">21 · Cross-market accuracy leaderboard <span class="priority-badge priority-research">R2</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p22">22 · Specialized market archetype layouts <span class="priority-badge priority-research">R2</span></a>
+  <span class="toc-sep">·</span>
+  <a href="#p23">23 · Period-state background tint <span class="priority-badge priority-research">R2</span></a>
+</div>
+
+<h2>Bugs — hard failures</h2>
+
+
+<div class="proposal" id="p1">
+  <div class="proposal-head">
+    <span class="proposal-num">1</span>
+    <span class="proposal-title">Three-question cards 1 and 2 render empty em-dash on WW rollup</span>
+    <span class="priority-badge priority-bug">BUG</span>
+  </div>
+  <div class="proposal-sub">
+    On <code>?market=WW&amp;week=W17</code>, cards 1 and 2 of the three-question framing render as literal
+    <code>—</code> strings. Card 3 populates correctly. US and JP render all three cards fine. Bug is
+    rollup-specific — <code>renderThreeQ</code> extracts sentence content from
+    <code>callout.brand_detail</code> and <code>callout.nb_detail</code>, and the WW callout payload either
+    lacks those fields or stores them at a different path.
+  </div>
+
+  <div class="evidence">
+    <span class="evidence-label">Probe evidence</span>
+    WW W17: <code>threeQ: ["—", "—", "Latest week +19.2% vs weekly OP2. Pacing ahead."]</code><br>
+    US W17: <code>threeQ: ["CPA up 8% on Brand, down 2% on NB.", "9.4K regs (+6% WoW, +65% YoY). NB led.", "Latest week +21.6% vs weekly OP2. Pacing ahead."]</code>
+  </div>
+
+  <div class="ba-grid">
+    <div class="ba-panel before">
+      <div class="ba-label">Before — WW view on Kate's default tab</div>
+      <div class="mock">
+        <div class="mock-title">1 · WHAT DID CUSTOMERS EXPERIENCE</div>
+        <div class="mock-dash">—</div>
+      </div>
+      <div class="mock" style="margin-top:4px">
+        <div class="mock-title">2 · HOW DID THE BUSINESS DO</div>
+        <div class="mock-dash">—</div>
+      </div>
+      <div class="mock" style="margin-top:4px">
+        <div class="mock-title">3 · ARE WE ON TRACK</div>
+        <div>Latest week +19.2% vs weekly OP2. Pacing ahead.</div>
+      </div>
+    </div>
+    <div class="ba-panel after">
+      <div class="ba-label">After — rollup-aware extractor</div>
+      <div class="mock">
+        <div class="mock-title">1 · WHAT DID CUSTOMERS EXPERIENCE</div>
+        <div>CPA $79 across 7 markets. JP +10% led, CA −7% lagged.</div>
+      </div>
+      <div class="mock" style="margin-top:4px">
+        <div class="mock-title">2 · HOW DID THE BUSINESS DO</div>
+        <div>17.5K regs (+65% YoY). US carried 54% of total.</div>
+      </div>
+      <div class="mock" style="margin-top:4px">
+        <div class="mock-title">3 · ARE WE ON TRACK</div>
+        <div>Latest week +19.2% vs weekly OP2. Pacing ahead.</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">// In renderThreeQ(c), detect rollup markets (WW, EU5, NA)</span>
+<span class="com">// and synthesize card 1 + 2 from market-level aggregates.</span>
+<span class="key">function</span> <span class="fn">renderThreeQ</span>(c) {
+  <span class="key">const</span> isRollup = [<span class="str">'WW'</span>, <span class="str">'EU5'</span>, <span class="str">'NA'</span>].<span class="fn">includes</span>(curMarket);
+  <span class="key">const</span> m = c.metrics || {};
+
+  <span class="key">if</span> (isRollup &amp;&amp; c.market_breakdown) {
+    <span class="com">// Synthesize from callout.market_breakdown which already exists</span>
+    <span class="key">const</span> topGainer = c.market_breakdown.<span class="fn">find</span>(m =&gt; m.is_top_gainer);
+    <span class="key">const</span> topDecliner = c.market_breakdown.<span class="fn">find</span>(m =&gt; m.is_top_decliner);
+    document.<span class="fn">getElementById</span>(<span class="str">'qCustomer'</span>).textContent =
+      <span class="str">`CPA $${fmt(m.cpa, 'cpa').replace('$','')} across ${c.market_breakdown.length} markets. `</span> +
+      <span class="str">`${topGainer.market} +${topGainer.regs_wow}% led, ${topDecliner.market} ${topDecliner.regs_wow}% lagged.`</span>;
+    document.<span class="fn">getElementById</span>(<span class="str">'qBusiness'</span>).textContent =
+      <span class="str">`${fmt(m.regs)} regs (${delta(m.regs_yoy)} YoY). `</span> +
+      <span class="str">`${topMarket} carried ${topMarketShare}% of total.`</span>;
+  } <span class="key">else</span> {
+    <span class="com">// existing per-market path</span>
+    <span class="key">const</span> b = c.brand_detail || {};
+    <span class="key">const</span> n = c.nb_detail || {};
+    <span class="com">// ... current logic ...</span>
+  }
+}</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    Cards 1 and 2 render non-empty content on WW, EU5, and NA rollup markets. No literal <code>—</code>
+    em-dash for any card across WW/US/EU5/CA/UK/DE/FR/IT/ES/JP/MX/AU at the 3 most recent weeks. Verify via
+    <code>[...document.querySelectorAll('.wr-q-body')].map(e =&gt; e.textContent)</code> — no entries equal
+    <code>'—'</code>.
+  </div>
+</div>
+
+<div class="proposal" id="p2">
+  <div class="proposal-head">
+    <span class="proposal-num">2</span>
+    <span class="proposal-title">Variance waterfall empty state on WW rollup</span>
+    <span class="priority-badge priority-bug">BUG</span>
+  </div>
+  <div class="proposal-sub">
+    On WW, <code>#sec-variance</code> renders "Decomposition needs both Brand and Non-Brand prior-week data.
+    Try a later week or check callout data freshness." US decomposes cleanly. The rollup payload either
+    lacks per-channel prior-week values or stores them at a different path. Either way, the
+    channel-decomposition pattern doesn't match rollup shape — a <strong>market-level decomposition</strong>
+    is the better visualization for rollups.
+  </div>
+
+  <div class="evidence">
+    <span class="evidence-label">Probe evidence</span>
+    WW W17: <code>variance: "Decomposition needs both Brand and Non-Brand prior-week data..."</code><br>
+    US W17: <code>variance: "W16 Regs 8,936 | NB regs +595 (+116%) | Brand regs −81 (−16%) | W17 Regs 9,450 (+5.8%)"</code><br>
+    Callout payload carries <code>callout.market_breakdown[i].regs_wow</code> per constituent market on rollups.
+  </div>
+
+  <div class="ba-grid">
+    <div class="ba-panel before">
+      <div class="ba-label">Before — channel-shaped empty state</div>
+      <div class="mock mock-empty">
+        <div class="mock-title">WHAT CHANGED THIS WEEK — WOW DECOMPOSITION</div>
+        <div style="color:#D13212">Decomposition needs both Brand and Non-Brand prior-week data. Try a later week or check callout data freshness.</div>
+      </div>
+    </div>
+    <div class="ba-panel after">
+      <div class="ba-label">After — market-level decomposition on rollups</div>
+      <div class="mock">
+        <div class="mock-title">WHAT CHANGED THIS WEEK — WW W16 → W17</div>
+        <table style="width:100%; font-size:10px; font-family:monospace">
+          <tr><td>W16 total</td><td style="text-align:right">16,245</td><td style="text-align:right;color:#999">—</td></tr>
+          <tr><td style="padding-left:10px">+ US (+6%)</td><td style="text-align:right;color:#0E8345">+549</td><td style="text-align:right;color:#0E8345">+44%</td></tr>
+          <tr><td style="padding-left:10px">+ JP (+10%)</td><td style="text-align:right;color:#0E8345">+51</td><td style="text-align:right;color:#0E8345">+4%</td></tr>
+          <tr><td style="padding-left:10px">− CA (−7%)</td><td style="text-align:right;color:#D13212">−52</td><td style="text-align:right;color:#D13212">−4%</td></tr>
+          <tr><td style="padding-left:10px">+ EU5</td><td style="text-align:right;color:#0E8345">+701</td><td style="text-align:right;color:#0E8345">+56%</td></tr>
+          <tr style="border-top:1px solid #999"><td><strong>W17 total</strong></td><td style="text-align:right"><strong>17,494</strong></td><td style="text-align:right"><strong>+7.7%</strong></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">// In renderVariance(), branch on isRollup</span>
+<span class="key">if</span> (isRollup &amp;&amp; c.market_breakdown) {
+  <span class="com">// Synthesize decomposition from per-market WoW deltas</span>
+  <span class="key">const</span> prev = cur - c.market_breakdown.<span class="fn">reduce</span>((s,m) =&gt; s + m.regs_delta, 0);
+  <span class="key">const</span> rows = [
+    { label: <span class="str">`${prevWeek} total`</span>, val: prev, base: <span class="key">true</span> },
+    ...c.market_breakdown
+      .<span class="fn">sort</span>((a,b) =&gt; Math.<span class="fn">abs</span>(b.regs_delta) - Math.<span class="fn">abs</span>(a.regs_delta))
+      .<span class="fn">map</span>(m =&gt; ({
+        label: <span class="str">`${m.market} (${delta(m.regs_wow)})`</span>,
+        val: m.regs_delta,
+        share: total ? m.regs_delta/total*100 : <span class="key">null</span>,
+      })),
+    { label: <span class="str">`${curWeek} total`</span>, val: cur, total: <span class="key">true</span> },
+  ];
+  <span class="com">// Render rows</span>
+}</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    WW / EU5 / NA rollups render market-level waterfall. Per-market rollups (US/CA/JP/MX/AU/UK/DE/FR/IT/ES)
+    keep channel-level decomposition unchanged. Row sum reconciles to current-week total within 1 reg.
+  </div>
+</div>
+
+<div class="proposal" id="p3">
+  <div class="proposal-head">
+    <span class="proposal-num">3</span>
+    <span class="proposal-title">section-freshness.json 404 on every load</span>
+    <span class="priority-badge priority-bug">BUG</span>
+  </div>
+  <div class="proposal-sub">
+    Every page load shows <code>GET /performance/data/section-freshness.json [404]</code> in devtools
+    console. The shared <code>section-freshness.js</code> fetches with a relative path that resolves to the
+    subdirectory instead of the dashboard root. Cosmetic (nothing breaks visibly) but pollutes console and
+    blocks anyone using devtools network tab to debug real issues.
+  </div>
+
+  <div class="evidence">
+    <span class="evidence-label">Probe evidence</span>
+    <code>reqid=35 GET http://localhost:8080/performance/data/section-freshness.json?t=... [404]</code>
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">// In shared/section-freshness.js, change:</span>
+fetch(<span class="str">'data/section-freshness.json'</span> + <span class="str">'?t='</span> + <span class="fn">Date</span>.<span class="fn">now</span>())
+<span class="com">// To absolute path from dashboard root:</span>
+fetch(<span class="str">'/data/section-freshness.json'</span> + <span class="str">'?t='</span> + <span class="fn">Date</span>.<span class="fn">now</span>())</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    Network panel on <code>/performance/weekly-review.html</code> load shows no 404s. Same fix verified on
+    projection.html and other dashboards using the shared script.
+  </div>
+</div>
+
+<h2>Polish — micro-nits from deep probe</h2>
+
+<div class="proposal" id="p4">
+  <div class="proposal-head">
+    <span class="proposal-num">4</span>
+    <span class="proposal-title">sec-panel has padding: 0px — content sits flush against the card edge</span>
+    <span class="priority-badge priority-high">HIGH</span>
+  </div>
+  <div class="proposal-sub">
+    Every <code>.sec-panel</code> on the page has <code>padding: 0px</code> per computed style. Sections
+    rely on their child elements (H3 headings, divs) to create breathing room, but this is backwards —
+    cards should have internal padding so content can't render flush against the border. When a child
+    element lacks its own padding (several do), content kisses the card edge and looks unfinished. The MPE
+    page has <code>padding: 20px 24px</code> on equivalent sec-panels.
+  </div>
+
+  <div class="evidence">
+    <span class="evidence-label">Probe evidence</span>
+    <code>secPanelComputed: { padding: "0px", margin: "0px 0px 24px", border: "", boxShadow: "none" }</code><br>
+    <code>secInnerComputed: { tag: "H3", cls: "wr-scorecard-head", padding: "0px" }</code> — not even the
+    H3 carries padding, so the scorecard title abuts the top-left corner.
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">/* In projection-design-system.css (shared), confirm .sec-panel has:  */</span>
+.sec-panel {
+  padding: 20px 24px;  <span class="com">/* matches MPE's panel padding */</span>
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 8px;
+}
+
+<span class="com">/* If override is needed for weekly-review's chart panels, scope it narrowly: */</span>
+#sec-trend, #sec-calibration {
+  padding-bottom: 0;  <span class="com">/* let canvas go edge to edge on the bottom */</span>
+}</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    Every <code>.sec-panel</code> on weekly-review.html has computed <code>padding</code> &gt; 0 on at least
+    top/left/right. Chart canvases still render full-width if that's intended. MPE visual parity confirmed
+    via side-by-side screenshot.
+  </div>
+</div>
+
+<div class="proposal" id="p5">
+  <div class="proposal-head">
+    <span class="proposal-num">5</span>
+    <span class="proposal-title">152px dead gap between sec-scorecard and sec-trend</span>
+    <span class="priority-badge priority-high">HIGH</span>
+  </div>
+  <div class="proposal-sub">
+    Deep probe revealed a <strong>152-pixel vertical gap</strong> between the KPI+scorecard row and the
+    first chart panel. Every other inter-section gap is 16-24px. This is likely from a grid layout where
+    scorecard and KPIs share a row but one stretches taller than expected, leaving empty space between the
+    bottom of the shorter element and the start of the next row. Kills the visual continuity between "what
+    are we at" (KPIs) and "how do we know" (charts).
+  </div>
+
+  <div class="evidence">
+    <span class="evidence-label">Probe evidence</span>
+    <code>spacingBetweenSections</code> measured: <code>sec-callout→threadStrip: 24px · threadStrip→threeQ: 16px · threeQ→sec-variance: 24px · sec-variance→sec-scorecard: 24px · <strong>sec-scorecard→sec-trend: 152px</strong> · sec-trend→sec-calibration: 24px</code>
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">// The sec-scorecard and sec-kpis live in the same grid row via .wr-grid-half.</span>
+<span class="com">// If scorecard is taller than KPIs (it usually is — 3 tiles + narrative vs 4 tiles),</span>
+<span class="com">// the grid creates empty space after the shorter cell.</span>
+
+<span class="com">/* In projection-design-system.css */</span>
+.wr-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-lg);
+  align-items: start;  <span class="com">/* NEW — stop cells from stretching to row height */</span>
+}
+
+<span class="com">/* Or restructure so scorecard and KPIs stack on narrow viewports and sit side-by-side at desktop */</span>
+@media (min-width: 900px) {
+  .wr-kpi-scorecard-row { display: grid; grid-template-columns: auto 1fr; gap: var(--gap-lg); }
+}</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    No inter-section gap exceeds 32px on cold load at 1400px viewport width. Verify with the same probe
+    script: <code>spacingBetweenSections</code> max value &le; 32.
+  </div>
+</div>
+
+<div class="proposal" id="p6">
+  <div class="proposal-head">
+    <span class="proposal-num">6</span>
+    <span class="proposal-title">TOC jump-link order doesn't match rendered page order</span>
+    <span class="priority-badge priority-high">HIGH</span>
+  </div>
+  <div class="proposal-sub">
+    The "Jump to" strip at the top of the page lists sections as: Scorecard · KPIs · Trend · Weekly Detail ·
+    Callout · Channels · Context. But the actual rendered order is: Callout (first!) · Variance · KPIs ·
+    Scorecard · Trend · Calibration · Detail · Channels · Context. Clicking "Callout" scrolls the reader
+    back up past items 1–4 which is counterintuitive. TOC also missing Variance and Calibration entirely.
+  </div>
+
+  <div class="evidence">
+    <span class="evidence-label">Probe evidence</span>
+    <code>tocOrder: ["sec-scorecard", "sec-kpis", "sec-trend", "sec-detail", "sec-callout", "sec-channels", "sec-context"]</code><br>
+    <code>renderedOrder: ["sec-callout", "sec-variance", "sec-kpis", "sec-scorecard", "sec-charts", "sec-trend", "sec-calibration", "sec-detail", "sec-channels", "sec-context"]</code>
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">&lt;!-- In weekly-review.html TOC strip --&gt;</span>
+&lt;div class=<span class="str">"wr-toc"</span>&gt;
+  &lt;span class=<span class="str">"wr-toc-label"</span>&gt;Jump to&lt;/span&gt;
+  &lt;a href=<span class="str">"#sec-callout"</span>&gt;Callout&lt;/a&gt;
+  &lt;a href=<span class="str">"#sec-variance"</span>&gt;What changed&lt;/a&gt;
+  &lt;a href=<span class="str">"#sec-kpis"</span>&gt;KPIs&lt;/a&gt;
+  &lt;a href=<span class="str">"#sec-scorecard"</span>&gt;Forecast Hit Rate&lt;/a&gt;
+  &lt;a href=<span class="str">"#sec-trend"</span>&gt;What happened&lt;/a&gt;
+  &lt;a href=<span class="str">"#sec-calibration"</span>&gt;How did we do&lt;/a&gt;
+  &lt;a href=<span class="str">"#sec-detail"</span>&gt;Weekly detail&lt;/a&gt;
+  &lt;a href=<span class="str">"#sec-channels"</span>&gt;Channels&lt;/a&gt;
+  &lt;a href=<span class="str">"#sec-context"</span>&gt;Context&lt;/a&gt;
+&lt;/div&gt;</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    TOC link order matches rendered page order. Every TOC link has a target element that exists in DOM.
+    Verify via <code>[...document.querySelectorAll('.wr-toc a')].every(a =&gt; document.getElementById(a.getAttribute('href').slice(1)))</code> returns true.
+  </div>
+</div>
+
+<div class="proposal" id="p7">
+  <div class="proposal-head">
+    <span class="proposal-num">7</span>
+    <span class="proposal-title">Narrative card uses H3 for body prose, not a section title</span>
+    <span class="priority-badge priority-medium">MED</span>
+  </div>
+  <div class="proposal-sub">
+    The callout narrative card's H3 element contains the first sentence of the narrative ("US drove 9.4K
+    registrations (+6% WoW), with +7% spend WoW. CPA $77.") rather than a semantic section title. Screen
+    readers announce this as an H3 section heading when it's really body copy. Visually it renders at 16px
+    weight 600 — same as regular bold text — so no visual hierarchy signal either.
+  </div>
+
+  <div class="evidence">
+    <span class="evidence-label">Probe evidence</span>
+    <code>narrativeH3: { text: "US drove 9.4K registrations (+6% WoW), with +7% spend WoW. CPA $77.", weight: "600", size: "16px" }</code><br>
+    Headings list: H1 "Weekly Review" · H3 "US drove 9.4K..." ← <strong>body prose as H3</strong> · H3 "What changed this week" (proper) · H3 "Forecast Hit Rate" (proper)
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">&lt;!-- Before: entire narrative is H3 --&gt;</span>
+&lt;div class=<span class="str">"sec-panel"</span> id=<span class="str">"sec-callout"</span>&gt;
+  &lt;h3&gt;US drove 9.4K registrations...&lt;/h3&gt;
+&lt;/div&gt;
+
+<span class="com">&lt;!-- After: semantic title + body --&gt;</span>
+&lt;section class=<span class="str">"sec-panel"</span> id=<span class="str">"sec-callout"</span> aria-labelledby=<span class="str">"callout-title"</span>&gt;
+  &lt;h2 id=<span class="str">"callout-title"</span> class=<span class="str">"sr-only"</span>&gt;Callout narrative for US W17&lt;/h2&gt;
+  &lt;p class=<span class="str">"wr-callout-headline"</span>&gt;US drove 9.4K registrations...&lt;/p&gt;
+&lt;/section&gt;
+
+<span class="com">/* CSS: visually hide the heading but keep it for screen readers */</span>
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    No H3 element on the page contains body prose &gt; 20 words. Screen-reader users hear "Callout narrative
+    for [market] [week]" as the section heading. Visual rendering unchanged.
+  </div>
+</div>
+
+<div class="proposal" id="p8">
+  <div class="proposal-head">
+    <span class="proposal-num">8</span>
+    <span class="proposal-title">H2 level skipped — jumps from H1 directly to H3</span>
+    <span class="priority-badge priority-medium">MED</span>
+  </div>
+  <div class="proposal-sub">
+    Page has 1 H1 ("Weekly Review"), 0 H2s, 11 H3s. Semantic hierarchy should be H1 → H2 (major sections) →
+    H3 (subsections). Skipping H2 breaks assistive-technology navigation (VoiceOver users navigate by
+    heading level) and weakens search-engine structure if the page is ever indexed. MPE uses H2s for major
+    sections and has parity here already.
+  </div>
+
+  <div class="evidence">
+    <span class="evidence-label">Probe evidence</span>
+    <code>landmarks: { h1: 1, h2: 0, h3: 11 }</code>
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">&lt;!-- Promote major sections to H2, keep subsections at H3 --&gt;</span>
+&lt;h2&gt;Callout for US W17&lt;/h2&gt;        &lt;!-- replaces H3-as-body-prose --&gt;
+&lt;h2&gt;Forecast Hit Rate&lt;/h2&gt;          &lt;!-- was H3 --&gt;
+&lt;h2&gt;What happened&lt;/h2&gt;              &lt;!-- was H3 --&gt;
+&lt;h2&gt;How did we do&lt;/h2&gt;              &lt;!-- was H3 --&gt;
+&lt;h2&gt;Weekly detail&lt;/h2&gt;              &lt;!-- was H3 --&gt;
+  &lt;h3&gt;Brand&lt;/h3&gt;                   &lt;!-- stays H3 as subsection --&gt;
+  &lt;h3&gt;Nonbrand&lt;/h3&gt;                &lt;!-- stays H3 --&gt;
+&lt;h2&gt;Context &amp; External Factors&lt;/h2&gt;</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    <code>document.querySelectorAll('h2').length &ge; 5</code>. No skipped levels in the heading tree
+    (verify via <code>document.querySelectorAll('h1, h2, h3').length</code> and walking the levels).
+  </div>
+</div>
+
+
+<div class="proposal" id="p9">
+  <div class="proposal-head">
+    <span class="proposal-num">9</span>
+    <span class="proposal-title">No semantic landmark elements (header, main, nav, aside)</span>
+    <span class="priority-badge priority-medium">MED</span>
+  </div>
+  <div class="proposal-sub">
+    Probe confirms zero <code>header</code>, <code>main</code>, <code>nav</code>, <code>aside</code>, or
+    <code>footer</code> elements on the page. Screen readers use these landmarks for rapid navigation —
+    without them, the only nav strategy is reading every heading. MPE already has these (verified in R19
+    work). Parity fix: wrap the logical regions in semantic tags.
+  </div>
+
+  <div class="evidence">
+    <span class="evidence-label">Probe evidence</span>
+    <code>landmarks: { header: 0, nav: 0, main: 0, aside: 0, footer: 0 }</code>
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">&lt;!-- Wrap the page structure in semantic landmarks --&gt;</span>
+&lt;body&gt;
+  &lt;header class=<span class="str">"wr-header"</span>&gt;
+    &lt;h1&gt;Weekly Review&lt;/h1&gt;
+    &lt;p class=<span class="str">"wr-header-meta"</span>&gt;...&lt;/p&gt;
+  &lt;/header&gt;
+  &lt;nav class=<span class="str">"wr-toc"</span> aria-label=<span class="str">"Page sections"</span>&gt;...&lt;/nav&gt;
+  &lt;div class=<span class="str">"wr-controls"</span> role=<span class="str">"group"</span> aria-label=<span class="str">"Market, week, and metric filters"</span>&gt;...&lt;/div&gt;
+  &lt;main class=<span class="str">"wr-frame"</span>&gt;
+    &lt;section id=<span class="str">"sec-callout"</span>&gt;...&lt;/section&gt;
+    &lt;section id=<span class="str">"sec-variance"</span>&gt;...&lt;/section&gt;
+    <span class="com">&lt;!-- all other sections --&gt;</span>
+  &lt;/main&gt;
+&lt;/body&gt;</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    Probe returns <code>landmarks: { header: 1, nav: 1, main: 1, h1: 1, h2: &ge;5, h3: &ge;2 }</code>. No
+    change in visual rendering.
+  </div>
+</div>
+
+<div class="proposal" id="p10">
+  <div class="proposal-head">
+    <span class="proposal-num">10</span>
+    <span class="proposal-title">Chart canvases missing aria-label and role="img"</span>
+    <span class="priority-badge priority-medium">MED</span>
+  </div>
+  <div class="proposal-sub">
+    Both <code>#trendChart</code> and <code>#calibrationChart</code> are bare
+    <code>&lt;canvas&gt;</code> elements with no accessible description. Screen-reader users hear "graphic"
+    with no context. Chart.js generates a pixel canvas that assistive tech can't parse, so the caller must
+    supply a text alternative via aria-label.
+  </div>
+
+  <div class="evidence">
+    <span class="evidence-label">Probe evidence</span>
+    <code>canvases: [{ id: "trendChart", hasAriaLabel: false, hasRole: null }, { id: "calibrationChart", hasAriaLabel: false, hasRole: null }]</code>
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">// After CanonChart.render() completes, add aria attributes + synthesize a summary</span>
+<span class="key">function</span> <span class="fn">annotateChartA11y</span>(canvasId, summary) {
+  <span class="key">const</span> c = document.<span class="fn">getElementById</span>(canvasId);
+  <span class="key">if</span> (!c) <span class="key">return</span>;
+  c.<span class="fn">setAttribute</span>(<span class="str">'role'</span>, <span class="str">'img'</span>);
+  c.<span class="fn">setAttribute</span>(<span class="str">'aria-label'</span>, summary);
+}
+
+<span class="com">// After renderChart():</span>
+<span class="fn">annotateChartA11y</span>(<span class="str">'trendChart'</span>,
+  <span class="str">`Actuals vs OP2 for ${curMarket} through W${FORECAST.max_week}. `</span> +
+  <span class="str">`Registrations ${lastRegs}, OP2 ${lastOp2}. ${lastRegs &gt; lastOp2 ? 'Above' : 'Below'} target.`</span>);
+<span class="fn">annotateChartA11y</span>(<span class="str">'calibrationChart'</span>,
+  <span class="str">`Forecast calibration for ${curMarket}. First prediction error ${firstErr}%, latest ${latestErr}%. `</span> +
+  <span class="str">`${inCi} of ${total} weeks inside confidence band.`</span>);</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    Both canvases have <code>role="img"</code> and <code>aria-label</code> populated. Labels update when
+    market/week changes. Summary reads the key story visible in the chart.
+  </div>
+</div>
+
+<div class="proposal" id="p11">
+  <div class="proposal-head">
+    <span class="proposal-num">11</span>
+    <span class="proposal-title">Week selector &lt;select&gt; has no accessible label</span>
+    <span class="priority-badge priority-medium">MED</span>
+  </div>
+  <div class="proposal-sub">
+    The <code>#weekSelect</code> dropdown is the only unlabeled form control on the page. A user landing on
+    the page with a screen reader hears "combobox" with no indication it selects the week being reviewed.
+    There's already an adjacent "Week" label text — it just isn't wired.
+  </div>
+
+  <div class="evidence">
+    <span class="evidence-label">Probe evidence</span>
+    <code>orphanInputs: [{ tag: "SELECT", id: "weekSelect", parent: "DIV.wr-week-nav" }]</code>
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">&lt;!-- Option 1: wire the existing label via htmlFor/id --&gt;</span>
+&lt;span class=<span class="str">"wr-control-label"</span> id=<span class="str">"wr-week-label"</span>&gt;Week&lt;/span&gt;
+&lt;select id=<span class="str">"weekSelect"</span> aria-labelledby=<span class="str">"wr-week-label"</span>&gt;...&lt;/select&gt;
+
+<span class="com">&lt;!-- Option 2: direct aria-label on the select --&gt;</span>
+&lt;select id=<span class="str">"weekSelect"</span> aria-label=<span class="str">"Select week to review"</span>&gt;...&lt;/select&gt;</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    Probe returns <code>orphanInputs: []</code>. Screen reader announces "Week, combobox, W17" when
+    focused.
+  </div>
+</div>
+
+<div class="proposal" id="p12">
+  <div class="proposal-head">
+    <span class="proposal-num">12</span>
+    <span class="proposal-title">Thread strip missing group role and aria-label</span>
+    <span class="priority-badge priority-low">LOW</span>
+  </div>
+  <div class="proposal-sub">
+    The 3-card prior-week thread strip is a cluster of div elements with no grouping semantic. Assistive
+    tech reads each card as unrelated content. A <code>role="group"</code> with an aria-label gives the
+    cluster an identity.
+  </div>
+
+  <div class="evidence">
+    <span class="evidence-label">Probe evidence</span>
+    <code>threadStrip: { role: null, ariaLabel: null }</code>
+  </div>
+
+  <p class="meta">Fix</p>
+<pre>&lt;div id=<span class="str">"threadStrip"</span>
+     class=<span class="str">"wr-thread-strip"</span>
+     role=<span class="str">"group"</span>
+     aria-label=<span class="str">"Prior 3-week context for current market"</span>&gt;
+  &lt;div class=<span class="str">"wr-thread-card"</span>&gt;...&lt;/div&gt;
+  &lt;div class=<span class="str">"wr-thread-card"</span>&gt;...&lt;/div&gt;
+  &lt;div class=<span class="str">"wr-thread-card"</span>&gt;...&lt;/div&gt;
+&lt;/div&gt;</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    Probe returns <code>threadStrip.role === "group"</code> and <code>ariaLabel</code> non-null.
+  </div>
+</div>
+
+<div class="proposal" id="p13">
+  <div class="proposal-head">
+    <span class="proposal-num">13</span>
+    <span class="proposal-title">Calibration chart H3 visually swallows the Regs/Spend/Both axis toggle</span>
+    <span class="priority-badge priority-low">LOW</span>
+  </div>
+  <div class="proposal-sub">
+    The H3 "How did we do — forecast vs actual" is followed inline by three buttons: Regs / Spend / Both.
+    Probe reveals the H3 <code>textContent</code> reads as one stream "How did we do — forecast vs actual
+    Regs Spend Both" because the button group is nested inside the heading element. Screen readers announce
+    this as one heading.
+  </div>
+
+  <div class="evidence">
+    <span class="evidence-label">Probe evidence</span>
+    <code>calibHtml: '&lt;h3 class="wr-calib-head"&gt;&lt;span&gt;How did we do...&lt;/span&gt;&lt;div class="wr-chart-axis-toggle"&gt;&lt;button&gt;Regs&lt;/button&gt;&lt;button&gt;Spend&lt;/button&gt;&lt;button&gt;Both&lt;/button&gt;&lt;/div&gt;&lt;/h3&gt;'</code>
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">&lt;!-- Move the toggle outside the H3 --&gt;</span>
+&lt;div class=<span class="str">"wr-panel-header"</span>&gt;
+  &lt;h3 class=<span class="str">"wr-calib-head"</span>&gt;How did we do &mdash; forecast vs actual&lt;/h3&gt;
+  &lt;div class=<span class="str">"wr-chart-axis-toggle"</span>
+       id=<span class="str">"calibAxisToggle"</span>
+       role=<span class="str">"group"</span>
+       aria-label=<span class="str">"Calibration axis filter"</span>&gt;
+    &lt;button data-axis=<span class="str">"regs"</span>&gt;Regs&lt;/button&gt;
+    &lt;button data-axis=<span class="str">"spend"</span>&gt;Spend&lt;/button&gt;
+    &lt;button data-axis=<span class="str">"both"</span>&gt;Both&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+<span class="com">/* Flex the wrapper, not the H3 */</span>
+.wr-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-md);
+  margin-bottom: var(--gap-sm);
+}</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    <code>document.querySelector('#sec-calibration h3').textContent</code> equals exactly <code>"How did we
+    do — forecast vs actual"</code> with no toggle text leakage. Visual layout unchanged.
+  </div>
+</div>
+
+<h2>Structure — information architecture</h2>
+
+<div class="proposal" id="p14">
+  <div class="proposal-head">
+    <span class="proposal-num">14</span>
+    <span class="proposal-title">Page is 3,820px tall — add progressive disclosure</span>
+    <span class="priority-badge priority-high">HIGH</span>
+  </div>
+  <div class="proposal-sub">
+    Total scroll height is <strong>3,820 pixels</strong> against an 865-pixel viewport — 4.4× scroll. Even
+    after R1 landed all the differentiation content, the reader still has to scroll through every section
+    on every load. Research-backed fix: collapse secondary content behind <code>&lt;details&gt;</code>
+    disclosures that expand on click. Default-open the top of the WBR arc (callout, thread, three-Q,
+    variance, KPIs, charts). Default-closed: channels, stakeholders, context.
+  </div>
+
+  <div class="evidence">
+    <span class="evidence-label">Probe evidence</span>
+    <code>scrollHeight: 3820, viewportHeight: 865</code>. MPE R19 mockup targeted ~1,800px after cleanup.
+    Weekly review is 2× that. Note: MPE R19 applied the <strong>same</strong> pattern as finding #13 in the
+    MPE mockup and got the 3.2× scroll down to ~2×.
+  </div>
+
+  <div class="ba-grid">
+    <div class="ba-panel before">
+      <div class="ba-label">Before — everything open, 4.4× scroll</div>
+      <div style="font-size:10px; line-height:1.4">
+        <div style="padding:3px; background:white; border:1px solid #E0E0E0; margin-bottom:2px">TOC strip</div>
+        <div style="padding:3px; background:white; border:1px solid #E0E0E0; margin-bottom:2px">Controls</div>
+        <div style="padding:3px; background:white; border:1px solid #E0E0E0; margin-bottom:2px">Callout narrative</div>
+        <div style="padding:3px; background:white; border:1px solid #E0E0E0; margin-bottom:2px">Thread strip</div>
+        <div style="padding:3px; background:white; border:1px solid #E0E0E0; margin-bottom:2px">Three-Q</div>
+        <div style="padding:3px; background:white; border:1px solid #E0E0E0; margin-bottom:2px">Variance waterfall</div>
+        <div style="padding:3px; background:white; border:1px solid #E0E0E0; margin-bottom:2px">KPI + Scorecard</div>
+        <div style="padding:3px; background:white; border:1px solid #E0E0E0; margin-bottom:2px">Trend chart</div>
+        <div style="padding:3px; background:white; border:1px solid #E0E0E0; margin-bottom:2px">Calibration chart</div>
+        <div style="padding:3px; background:white; border:1px solid #E0E0E0; margin-bottom:2px">Weekly detail table (520px)</div>
+        <div style="padding:3px; background:white; border:1px solid #E0E0E0; margin-bottom:2px">Brand card</div>
+        <div style="padding:3px; background:white; border:1px solid #E0E0E0; margin-bottom:2px">Nonbrand card</div>
+        <div style="padding:3px; background:white; border:1px solid #E0E0E0; margin-bottom:2px">Context card</div>
+        <div style="padding:3px; background:white; border:1px solid #E0E0E0; margin-bottom:2px">Drivers card</div>
+        <div style="padding:3px; background:white; border:1px solid #E0E0E0; margin-bottom:2px">Stakeholders card</div>
+      </div>
+    </div>
+    <div class="ba-panel after">
+      <div class="ba-label">After — progressive disclosure</div>
+      <div style="font-size:10px; line-height:1.4">
+        <div style="padding:3px; background:white; border:1px solid #E0E0E0; margin-bottom:2px">TOC + Controls + Callout + Thread + Three-Q + Variance + KPI+Scorecard + both charts</div>
+        <div style="padding:3px; background:var(--color-neutral-bg); color:var(--color-subtle); border:1px dashed #BBB; margin-bottom:2px">▸ Weekly detail (52 rows) — collapsed</div>
+        <div style="padding:3px; background:var(--color-neutral-bg); color:var(--color-subtle); border:1px dashed #BBB; margin-bottom:2px">▸ Brand + NB channel detail — collapsed</div>
+        <div style="padding:3px; background:var(--color-neutral-bg); color:var(--color-subtle); border:1px dashed #BBB; margin-bottom:2px">▸ Context + Drivers + Stakeholders — collapsed</div>
+      </div>
+      <div style="font-size:var(--size-meta); color:var(--color-meta); margin-top:6px">Fits the full WBR arc in ~1 viewport. Details one click away.</div>
+    </div>
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">&lt;!-- Wrap secondary sections in &lt;details&gt;, keep primary sections open --&gt;</span>
+&lt;details class=<span class="str">"sec-panel wr-grid-full"</span> id=<span class="str">"sec-detail"</span>&gt;
+  &lt;summary&gt;&lt;h2&gt;Weekly detail&lt;/h2&gt;&lt;/summary&gt;
+  &lt;div class=<span class="str">"wr-table-scroll"</span>&gt;...&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;details class=<span class="str">"sec-panel"</span>&gt;
+  &lt;summary&gt;&lt;h2&gt;Channel detail &mdash; Brand + Nonbrand&lt;/h2&gt;&lt;/summary&gt;
+  &lt;div class=<span class="str">"wr-channel-grid"</span>&gt;...&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;details class=<span class="str">"sec-panel"</span>&gt;
+  &lt;summary&gt;&lt;h2&gt;Context + Drivers + Stakeholders&lt;/h2&gt;&lt;/summary&gt;
+  &lt;div class=<span class="str">"wr-context-grid"</span>&gt;...&lt;/div&gt;
+&lt;/details&gt;</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    Page scrollHeight drops from 3,820px to &le; 1,800px on cold load. Clicking any disclosure expands
+    without closing the others. State does <em>not</em> persist across reloads (fresh cold load always
+    opens with the primary arc visible).
+  </div>
+</div>
+
+<div class="proposal" id="p15">
+  <div class="proposal-head">
+    <span class="proposal-num">15</span>
+    <span class="proposal-title">Scorecard + KPIs should be side-by-side, not stacked</span>
+    <span class="priority-badge priority-medium">MED</span>
+  </div>
+  <div class="proposal-sub">
+    Right now scorecard is below KPIs, which creates the 152px dead gap (finding #5) and pushes the charts
+    below the fold on smaller viewports. Put them side-by-side: 4-tile KPI row on the left (60% width),
+    3-tile scorecard on the right (40% width). Both answer "where are we / how good is the forecast?" —
+    they belong together visually.
+  </div>
+
+  <p class="meta">Fix</p>
+<pre>.wr-kpi-scorecard-row {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--gap-lg);
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .wr-kpi-scorecard-row { grid-template-columns: 1fr; }
+}</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    At 1200+ px viewport, KPIs and Scorecard render on the same row. At &lt; 900px, they stack. No extra
+    vertical gap between them and the charts row.
+  </div>
+</div>
+
+<div class="proposal" id="p16">
+  <div class="proposal-head">
+    <span class="proposal-num">16</span>
+    <span class="proposal-title">Brand/NB channel cards show empty rows on rollup markets — hide or repurpose</span>
+    <span class="priority-badge priority-remove">REMOVE</span>
+  </div>
+  <div class="proposal-sub">
+    On WW rollup, the Brand and Nonbrand channel cards render with only the "Regs" row populated; Cost,
+    CPA, CVR, and Clicks all show em-dashes. Four empty rows per card across two cards = 8 empty data cells
+    on the default leadership view. Either (a) hide these cards entirely on rollups since the rollup
+    payload doesn't carry channel-level secondary metrics, or (b) show a <strong>per-market channel
+    table</strong> instead ("US Brand regs 2.8K · NB regs 6.6K · JP Brand regs 555 · ...").
+  </div>
+
+  <div class="evidence">
+    <span class="evidence-label">Probe evidence</span>
+    WW W17: <code>brandData: "Brand | VALUE WOW YOY 4WK | REGS 7,299 — +28% +9% | COST — — — — | CPA — — — — | CVR — — — — | CLICKS — — — —"</code>
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="key">function</span> <span class="fn">renderChannelCards</span>(c) {
+  <span class="key">const</span> isRollup = [<span class="str">'WW'</span>, <span class="str">'EU5'</span>, <span class="str">'NA'</span>].<span class="fn">includes</span>(curMarket);
+  <span class="key">if</span> (isRollup) {
+    <span class="com">// Render a market-breakdown table instead of two channel cards</span>
+    <span class="key">return</span> <span class="fn">renderMarketBreakdownTable</span>(c);
+  }
+  <span class="com">// existing per-market Brand + NB cards</span>
+}</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    On WW/EU5/NA, no <code>.wr-channel-table</code> with em-dash cells renders. Instead a market-breakdown
+    table shows per-constituent regs + spend + CPA + WoW. On per-country markets, existing Brand/NB cards
+    render unchanged.
+  </div>
+</div>
+
+<div class="proposal" id="p17">
+  <div class="proposal-head">
+    <span class="proposal-num">17</span>
+    <span class="proposal-title">Weekly detail table scrolls vertically — either inline or externalize</span>
+    <span class="priority-badge priority-medium">MED</span>
+  </div>
+  <div class="proposal-sub">
+    <code>.wr-table-scroll</code> has <code>max-height: 520px; overflow: auto</code> and contains 52 rows
+    (17 actuals + 35 future predictions). This creates a scroll-within-a-scroll trap: reader scrolls the
+    page, suddenly their wheel is scrolling the table instead. Three options: (a) remove the max-height
+    cap, let the table render inline and make the whole page scroll naturally; (b) reduce max-height to
+    ~300px to hint it's scrollable; (c) make the table a standalone link/modal for the ~2% of users who
+    actually scroll through 52 weeks.
+  </div>
+
+  <div class="evidence">
+    <span class="evidence-label">Probe evidence</span>
+    <code>tableScroll: { maxHeight: "520px", overflow: "auto" }, futureRows: 35, totalRows: 52</code>
+  </div>
+
+  <p class="meta">Fix (option a — inline scroll)</p>
+<pre>.wr-table-scroll {
+  <span class="com">/* Remove max-height — let the page scroll naturally */</span>
+  overflow-x: auto;   <span class="com">/* keep horizontal overflow for narrow viewports */</span>
+}
+
+<span class="com">/* Paired with finding #14, the table sits inside a &lt;details&gt; closed by default,</span>
+<span class="com">   so length doesn't hurt first-load scroll. When opened, it flows inline. */</span></pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    No nested scroll on the weekly detail table. When opened via <code>&lt;details&gt;</code> (finding #14),
+    all 52 rows render inline and the page scroll is the only scroll context.
+  </div>
+</div>
+
+
+<h2>R2 research — forecasting-platform framing ideas</h2>
+
+<p class="lead" style="margin-bottom:var(--gap-lg)">
+  These are add-ons, not cleanup. Each leverages a pattern from gjopen, Polymarket, Metaculus, or Robinhood
+  that translates to the paid-search forecast-grading context. Shippable after bugs + polish close.
+  Content paraphrased from sources for licensing compliance.
+</p>
+
+<div class="proposal" id="p18">
+  <div class="proposal-head">
+    <span class="proposal-num">18</span>
+    <span class="proposal-title">Scrub-the-chart interaction (Robinhood Advanced Charts)</span>
+    <span class="priority-badge priority-research">R2</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Source:</strong> Robinhood Advanced Charts launched a scrubbing feature that lets users
+    compare securities at specific points in time — hover a chart point and the KPI area updates inline.
+    <strong>Translation:</strong> when hovering any week on the trend chart, the entire page updates to
+    show that week's KPIs + three-question cards + variance + narrative. Release hover → everything
+    returns to the selected week. Turns the chart into a time-scrubbing lens on the whole page. Best demo
+    feature; Kate can scrub W10 → W17 and watch the narrative evolve in one view. Content paraphrased
+    from source.
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">// In canon-chart.js, add onHover + onLeave callbacks that dispatch a custom event</span>
+<span class="key">const</span> chart = <span class="key">new</span> <span class="fn">Chart</span>(ctx, {
+  <span class="com">// ... existing config ...</span>
+  options: {
+    <span class="com">// ...</span>
+    onHover: (evt, elements) =&gt; {
+      <span class="key">if</span> (elements.length &gt; 0) {
+        <span class="key">const</span> idx = elements[0].index;
+        <span class="key">const</span> wk = <span class="str">`W${idx + 1}`</span>;
+        document.<span class="fn">dispatchEvent</span>(<span class="key">new</span> <span class="fn">CustomEvent</span>(<span class="str">'chart-scrub'</span>, { detail: { week: wk } }));
+      }
+    },
+  },
+});
+
+<span class="com">// In weekly-review.html, listen and re-render secondary panels (but not selectors)</span>
+document.<span class="fn">addEventListener</span>(<span class="str">'chart-scrub'</span>, e =&gt; {
+  scrubbedWeek = e.detail.week;
+  <span class="fn">renderKPIs</span>(scrubbedWeek);     <span class="com">// pass override week</span>
+  <span class="fn">renderThreeQ</span>(scrubbedWeek);
+  <span class="fn">renderVariance</span>(scrubbedWeek);
+});
+chart.canvas.<span class="fn">addEventListener</span>(<span class="str">'mouseleave'</span>, () =&gt; {
+  scrubbedWeek = <span class="key">null</span>;
+  <span class="fn">render</span>();  <span class="com">// revert to selected week</span>
+});</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    Hovering W12 on the trend chart updates KPIs, three-Q cards, and variance waterfall to W12 values
+    within 50ms. Leaving the chart reverts everything to the selected week. No rerender of the chart or
+    the selector (scrub is read-only).
+  </div>
+</div>
+
+<div class="proposal" id="p19">
+  <div class="proposal-head">
+    <span class="proposal-num">19</span>
+    <span class="proposal-title">Event annotations on trend chart (Polymarket critique)</span>
+    <span class="priority-badge priority-research">R2</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Source:</strong> humaninvariant.substack.com critique of Polymarket UI — "Price changes should
+    be contextualized with specific news events." Content was rephrased for compliance with licensing
+    restrictions. <strong>Translation:</strong> overlay event markers on the "What happened" chart — Q1
+    close, OP2 refit weeks, campaign launches, budget pulls. Source: <code>callout.external_factors</code>
+    which already ships in the payload. A diamond on W12 labeled "OP2 refit — +2.1pt calibration gain"
+    turns the chart from a line into a narrative.
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">// In canon-chart.js tracker mode, accept an events array and draw annotations</span>
+<span class="key">function</span> <span class="fn">buildEventAnnotations</span>(events) {
+  <span class="key">const</span> annotations = {};
+  events.<span class="fn">forEach</span>((e, i) =&gt; {
+    annotations[<span class="str">`event-${i}`</span>] = {
+      type: <span class="str">'point'</span>,
+      xValue: e.wk - 1,
+      yValue: e.y_value || 0,
+      backgroundColor: e.color || <span class="str">'#8B5CF6'</span>,
+      borderColor: <span class="str">'white'</span>,
+      radius: 6,
+      label: {
+        display: <span class="key">true</span>,
+        content: e.label,
+        position: <span class="str">'top'</span>,
+      },
+    };
+  });
+  <span class="key">return</span> annotations;
+}
+
+<span class="com">// In weekly-review.html, extract events from callout.external_factors with wk numbers</span>
+<span class="key">const</span> events = (CALLOUTS.callouts[curMarket] || {})
+  .<span class="fn">flatMap</span>(c =&gt; (c.external_factors || []).<span class="fn">filter</span>(f =&gt; f.wk &amp;&amp; f.important));</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    Trend chart renders diamond markers at weeks with <code>important</code> external factors. Hover
+    reveals factor label. Works on all markets that have <code>external_factors[].wk</code> fields. Falls
+    back to no markers if payload lacks wk-tagged events.
+  </div>
+</div>
+
+<div class="proposal" id="p20">
+  <div class="proposal-head">
+    <span class="proposal-num">20</span>
+    <span class="proposal-title">Relative forecast error vs naive baseline (GJO Relative Brier)</span>
+    <span class="priority-badge priority-research">R2</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Source:</strong> Good Judgment Open reports a Relative Brier Score — your score vs the crowd
+    median. The reference point is what makes the number interpretable. Content paraphrased from source.
+    <strong>Translation:</strong> the scorecard currently shows absolute first-pred and latest-pred error
+    %. Add a reference column showing how much better (or worse) the model did vs a naive baseline
+    (last-week-carried-forward). Instead of "first-pred error -19.9%", the tile reads "first-pred error
+    -19.9% vs naive -21.3% — beats naive by 1.4 pts." Makes a bad-looking number interpretable: if the
+    naive baseline is even worse, the model is still adding value.
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">// In renderScorecard(), compute naive baseline alongside first/latest</span>
+<span class="key">for</span> (<span class="key">let</span> w = maxWk - 5; w &lt;= maxWk; w++) {
+  <span class="key">const</span> h = hist[<span class="fn">String</span>(w)];
+  <span class="key">const</span> prevWeekActual = weeklyRows.<span class="fn">find</span>(r =&gt; r.wk === w - 1)?.regs;
+  <span class="key">const</span> naiveErr = prevWeekActual &amp;&amp; h.regs.actual
+    ? (prevWeekActual - h.regs.actual) / h.regs.actual * 100
+    : <span class="key">null</span>;
+  recent.<span class="fn">push</span>({
+    wk: w,
+    first_err: <span class="com">/* ... */</span>,
+    latest_err: <span class="com">/* ... */</span>,
+    naive_err: naiveErr,
+    <span class="com">/* ... */</span>
+  });
+}
+
+<span class="com">// Render: "first-pred -19.9%, naive -21.3% (beats naive 1.4 pts)"</span></pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    Scorecard auto-narrative includes a comparison sentence: "Beats naive baseline by X pts" or "Trails
+    naive baseline by Y pts." When naive is better, surface that honestly — model needs attention.
+  </div>
+</div>
+
+<div class="proposal" id="p21">
+  <div class="proposal-head">
+    <span class="proposal-num">21</span>
+    <span class="proposal-title">Cross-market accuracy leaderboard (GJO challenge pattern)</span>
+    <span class="priority-badge priority-research">R2</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Source:</strong> GJO "challenges" group questions with a leaderboard ranking forecasters by
+    comparative accuracy. Content paraphrased from source. <strong>Translation:</strong> a horizontal strip
+    above the market tabs showing per-market 6-week in-CI rate. Green badge ≥ 80%, amber 50–79%, red &lt;
+    50%. One-glance answer to "which markets can we trust the projection for?" Uses the same
+    <code>predictions_history</code> math as the A1 scorecard, just aggregated cross-market.
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="com">// Render above .wr-controls, before market tabs</span>
+&lt;div class=<span class="str">"wr-market-accuracy-strip"</span>&gt;
+  &lt;span class=<span class="str">"wr-strip-label"</span>&gt;Forecast accuracy (last 6 wks)&lt;/span&gt;
+  &lt;div class=<span class="str">"wr-strip-cells"</span>&gt;
+    &lt;span class=<span class="str">"wr-strip-cell good"</span>&gt;JP 100%&lt;/span&gt;
+    &lt;span class=<span class="str">"wr-strip-cell good"</span>&gt;EU5 83%&lt;/span&gt;
+    &lt;span class=<span class="str">"wr-strip-cell amber"</span>&gt;CA 67%&lt;/span&gt;
+    &lt;span class=<span class="str">"wr-strip-cell bad"</span>&gt;US 33%&lt;/span&gt;
+    &lt;span class=<span class="str">"wr-strip-cell bad"</span>&gt;MX 17%&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    Strip renders on cold load with per-market accuracy % based on last 6 weeks of predictions_history.
+    Clicking a market cell switches the active tab to that market. Empty state when any market has &lt; 3
+    weeks of history.
+  </div>
+</div>
+
+<div class="proposal" id="p22">
+  <div class="proposal-head">
+    <span class="proposal-num">22</span>
+    <span class="proposal-title">Specialized layouts per market archetype (Polymarket critique)</span>
+    <span class="priority-badge priority-research">R2</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Source:</strong> humaninvariant.substack.com — "Every market uses identical YES/NO interfaces
+    regardless of underlying question structure, forcing unnecessary cognitive translation." Content was
+    rephrased for compliance with licensing restrictions. <strong>Translation:</strong> three market
+    archetypes deserve different primary panels:
+    <ul style="font-size:var(--size-ui); margin:var(--gap-sm) 0 0 60px">
+      <li><strong>Regs+efficiency markets</strong> (US, CA, UK, DE, FR, IT, ES, MX) — current layout</li>
+      <li><strong>Spend-only markets</strong> (JP, AU) — swap regs scorecard for a <strong>spend
+      discipline scorecard</strong>: YTD spend vs OP2, CPC trend, no forecast hit rate for regs</li>
+      <li><strong>Rollups</strong> (WW, EU5, NA) — swap channel Brand/NB cards for market-breakdown table
+      (see #16)</li>
+    </ul>
+  </div>
+
+  <p class="meta">Fix</p>
+<pre><span class="key">const</span> MARKET_ARCHETYPES = {
+  <span class="str">'regs_efficiency'</span>: [<span class="str">'US'</span>, <span class="str">'CA'</span>, <span class="str">'UK'</span>, <span class="str">'DE'</span>, <span class="str">'FR'</span>, <span class="str">'IT'</span>, <span class="str">'ES'</span>, <span class="str">'MX'</span>],
+  <span class="str">'spend_only'</span>: [<span class="str">'JP'</span>, <span class="str">'AU'</span>],
+  <span class="str">'rollup'</span>: [<span class="str">'WW'</span>, <span class="str">'EU5'</span>, <span class="str">'NA'</span>],
+};
+
+<span class="key">function</span> <span class="fn">renderForArchetype</span>(market) {
+  <span class="key">const</span> archetype = <span class="fn">getArchetype</span>(market);
+  <span class="key">switch</span> (archetype) {
+    <span class="key">case</span> <span class="str">'regs_efficiency'</span>: <span class="key">return</span> <span class="fn">renderRegsEfficiencyLayout</span>();
+    <span class="key">case</span> <span class="str">'spend_only'</span>: <span class="key">return</span> <span class="fn">renderSpendOnlyLayout</span>();
+    <span class="key">case</span> <span class="str">'rollup'</span>: <span class="key">return</span> <span class="fn">renderRollupLayout</span>();
+  }
+}</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    Switching to JP shows a spend-only scorecard (no regs forecast tiles). Switching to WW shows the
+    market-breakdown table (no channel cards). Per-country markets unchanged.
+  </div>
+</div>
+
+<div class="proposal" id="p23">
+  <div class="proposal-head">
+    <span class="proposal-num">23</span>
+    <span class="proposal-title">Period-state background tint on callout card (Robinhood color semantics)</span>
+    <span class="priority-badge priority-research">R2</span>
+  </div>
+  <div class="proposal-sub">
+    <strong>Source:</strong> Robinhood uses white background when markets are open, dark when closed;
+    green/red for price direction. The background itself signals state. Content paraphrased from source.
+    <strong>Translation:</strong> subtle tint on the callout card signals the week's period state:
+    <ul style="font-size:var(--size-ui); margin:var(--gap-sm) 0 0 60px">
+      <li>Default white — normal week</li>
+      <li>Soft blue — partial week (Q-close, holiday, month-end)</li>
+      <li>Soft amber — forecast-refit week (model changed mid-period)</li>
+    </ul>
+    Derives from <code>callout.period</code> string + <code>callout.refit_flag</code>. Subtle enough to
+    avoid novelty decay (per the "invisible over visible" principle) but strong enough that a reader
+    notices when W17 has the amber tint instead of the default.
+  </div>
+
+  <p class="meta">Fix</p>
+<pre>.wr-callout-main { background: white; }
+.wr-callout-main[data-period-state=<span class="str">"partial"</span>] {
+  background: linear-gradient(180deg, rgba(0, 102, 204, 0.03) 0%, white 50%);
+}
+.wr-callout-main[data-period-state=<span class="str">"refit"</span>] {
+  background: linear-gradient(180deg, rgba(232, 168, 0, 0.05) 0%, white 50%);
+}</pre>
+
+  <div class="accept">
+    <span class="accept-label">Acceptance</span>
+    Callout card <code>data-period-state</code> attribute set correctly based on callout payload. Visual
+    tint present but subtle (opacity &lt; 0.08). No tint on normal weeks.
+  </div>
+</div>
+
+<h2>Ship-order recommendation</h2>
+
+<table class="shiporder">
+  <thead><tr><th>#</th><th>Proposal</th><th>Bucket</th><th>Priority</th><th>Effort</th><th>Sprint position</th></tr></thead>
+  <tbody>
+    <tr style="background:#FFF4F2"><td>1</td><td>Three-Q cards 1+2 empty on WW</td><td>Bug</td><td>BUG</td><td>30 min</td><td>Sprint 1 — unblock Kate's default view</td></tr>
+    <tr style="background:#FFF4F2"><td>2</td><td>Variance waterfall empty on WW</td><td>Bug</td><td>BUG</td><td>45 min</td><td>Sprint 1</td></tr>
+    <tr style="background:#FFF4F2"><td>3</td><td>section-freshness.json 404</td><td>Bug</td><td>BUG</td><td>5 min</td><td>Sprint 1</td></tr>
+    <tr style="background:#FFF8E1"><td>4</td><td>sec-panel padding 0</td><td>Polish</td><td>HIGH</td><td>10 min</td><td>Sprint 1 — MPE parity</td></tr>
+    <tr style="background:#FFF8E1"><td>5</td><td>152px dead gap</td><td>Polish</td><td>HIGH</td><td>15 min</td><td>Sprint 1</td></tr>
+    <tr style="background:#FFF8E1"><td>6</td><td>TOC order mismatch</td><td>Polish</td><td>HIGH</td><td>10 min</td><td>Sprint 1</td></tr>
+    <tr style="background:#FFF8E1"><td>14</td><td>Progressive disclosure</td><td>Structure</td><td>HIGH</td><td>45 min</td><td>Sprint 1</td></tr>
+    <tr><td>7</td><td>H3-as-body-prose</td><td>Polish</td><td>MED</td><td>15 min</td><td>Sprint 2 — a11y batch</td></tr>
+    <tr><td>8</td><td>H2 skipped</td><td>Polish</td><td>MED</td><td>10 min</td><td>Sprint 2</td></tr>
+    <tr><td>9</td><td>Semantic landmarks</td><td>Polish</td><td>MED</td><td>20 min</td><td>Sprint 2</td></tr>
+    <tr><td>10</td><td>Canvas aria-labels</td><td>Polish</td><td>MED</td><td>20 min</td><td>Sprint 2</td></tr>
+    <tr><td>11</td><td>Week selector label</td><td>Polish</td><td>MED</td><td>5 min</td><td>Sprint 2</td></tr>
+    <tr><td>12</td><td>Thread strip role</td><td>Polish</td><td>LOW</td><td>5 min</td><td>Sprint 2</td></tr>
+    <tr><td>13</td><td>Calibration H3 toggle</td><td>Polish</td><td>LOW</td><td>15 min</td><td>Sprint 2</td></tr>
+    <tr><td>15</td><td>KPI + Scorecard side-by-side</td><td>Structure</td><td>MED</td><td>20 min</td><td>Sprint 2</td></tr>
+    <tr><td>16</td><td>Rollup channel cards hide</td><td>Structure</td><td>REMOVE</td><td>30 min</td><td>Sprint 2</td></tr>
+    <tr><td>17</td><td>Weekly detail scroll</td><td>Structure</td><td>MED</td><td>10 min</td><td>Sprint 2 — after #14 lands</td></tr>
+    <tr style="background:#F0F8F2"><td>18</td><td>Scrub-the-chart</td><td>R2</td><td>RESEARCH</td><td>2h</td><td>Sprint 3 — demo unlock</td></tr>
+    <tr style="background:#F0F8F2"><td>19</td><td>Event annotations</td><td>R2</td><td>RESEARCH</td><td>1h</td><td>Sprint 3</td></tr>
+    <tr style="background:#F0F8F2"><td>20</td><td>Relative error baseline</td><td>R2</td><td>RESEARCH</td><td>45 min</td><td>Sprint 3</td></tr>
+    <tr style="background:#F0F8F2"><td>21</td><td>Cross-market leaderboard</td><td>R2</td><td>RESEARCH</td><td>1h</td><td>Sprint 3</td></tr>
+    <tr style="background:#F0F8F2"><td>22</td><td>Archetype layouts</td><td>R2</td><td>RESEARCH</td><td>1.5h</td><td>Sprint 3</td></tr>
+    <tr style="background:#F0F8F2"><td>23</td><td>Period-state tint</td><td>R2</td><td>RESEARCH</td><td>20 min</td><td>Sprint 3</td></tr>
+  </tbody>
+</table>
+
+<p style="font-size:var(--size-ui); color:var(--color-subtle); margin-top:var(--gap-lg)">
+  <strong>Sprint 1 (bugs + high-priority polish + progressive disclosure):</strong> ~2.5h, 7 commits. Closes
+  every leadership-blocking issue and the 4.4× scroll problem in one pass. <strong>Sprint 2 (remaining
+  polish + structure):</strong> ~2h, 10 commits. Accessibility and visual parity with MPE.
+  <strong>Sprint 3 (R2 research):</strong> ~6.5h, 6 commits. Add-ons, shippable after Sprint 1+2.
+</p>
+
+<p style="font-size:var(--size-meta); color:var(--color-meta); margin-top:var(--gap-lg); text-align:right">
+  Sources: Amazon WBR (Bryar/Carr <em>Working Backwards</em>, thdpth.com, commoncog.com, optiblack.com,
+  conikeec.substack.com) · Good Judgment Open (gjopen.com, goodjudgment.com) · Polymarket critique
+  (humaninvariant.substack.com) · Metaculus (metaculus.com, mintlify.com/Metaculus) · Robinhood
+  (robinhood.com/newsroom) · Paid search weekly reporting (fiveninestrategy.com) · Content paraphrased for
+  licensing compliance.
+</p>
+
+</body>
+</html>
