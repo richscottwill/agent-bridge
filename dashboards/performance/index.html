@@ -10,14 +10,49 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#d0d8e0;display:flex;flex-direction:column}
-.subnav{background:#14161e;border-bottom:1px solid #1e2028;padding:0 24px;display:flex;align-items:center;gap:0;flex-shrink:0;backdrop-filter:blur(12px)}
-.subnav-brand{color:#f0f4f8;font-weight:700;font-size:0.92em;padding:12px 16px 12px 0;border-right:1px solid #1e2028;margin-right:4px;letter-spacing:1.3px;text-transform:uppercase}
-.subnav-link{color:#8899aa;text-decoration:none;padding:12px 18px;font-size:0.94em;font-weight:500;border-bottom:2px solid transparent;transition:all .15s;cursor:pointer;letter-spacing:.3px;user-select:none}
-.subnav-link:hover{color:#d0d8e0;background:rgba(74,158,255,0.06)}
-.subnav-link.active{color:#4a9eff;border-bottom-color:#4a9eff}
+/* Light theme to match projection-engine design language (2026-04-28) */
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background:#FFFFFF;
+  color:#161D26;
+  display:flex;
+  flex-direction:column;
+}
+.subnav{
+  background:#FAFAFA;
+  border-bottom:1px solid #E0E0E0;
+  padding:0 24px;
+  display:flex;
+  align-items:center;
+  gap:0;
+  flex-shrink:0;
+}
+.subnav-brand{
+  color:#0F1111;
+  font-weight:700;
+  font-size:0.92em;
+  padding:12px 16px 12px 0;
+  border-right:1px solid #E0E0E0;
+  margin-right:4px;
+  letter-spacing:1.3px;
+  text-transform:uppercase;
+}
+.subnav-link{
+  color:#6B6B6B;
+  text-decoration:none;
+  padding:12px 18px;
+  font-size:0.94em;
+  font-weight:500;
+  border-bottom:2px solid transparent;
+  transition:all .15s;
+  cursor:pointer;
+  letter-spacing:.3px;
+  user-select:none;
+}
+.subnav-link:hover{ color:#161D26; background:rgba(0,102,204,0.06); }
+.subnav-link.active{ color:#0066CC; border-bottom-color:#0066CC; }
 .frame-wrap{flex:1;position:relative;min-height:0}
-.frame-wrap iframe{width:100%;height:100%;border:none;display:block}
+.frame-wrap iframe{width:100%;height:100%;border:none;display:block;background:#FFFFFF}
 </style>
 </head>
 <body>

@@ -7,149 +7,478 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>Weekly Review — Callout + Forecast Tracker</title>
+
+<!-- Shared projection-engine design language. Weekly Review now uses the
+     same token system (colors, spacing, typography, KPI tiles, sec-panel
+     cards) as projection.html so the two views feel like one tool. -->
+<link rel="stylesheet" href="../projection-design-system.css?v=2026-04-28">
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3/dist/chartjs-plugin-annotation.min.js"></script>
-<script src="../canon-chart.js?v=2026-04-27"></script>
+<script src="../canon-chart.js?v=2026-04-28"></script>
 <link rel="preload" href="../data/callout-data.json" as="fetch" crossorigin>
 <link rel="preload" href="../data/forecast-data.json" as="fetch" crossorigin>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#e0e0e0}
-.header{padding:24px 32px 16px;border-bottom:1px solid #2a2d35}
-.header h1{font-size:22px;font-weight:600;color:#fff}
-.header p{font-size:15px;color:#888;margin-top:4px}
-.controls{display:flex;gap:12px;padding:16px 32px;border-bottom:1px solid #2a2d35;flex-wrap:wrap;align-items:center}
-.controls label{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:.5px}
-.tab-row{display:flex;gap:4px;flex-wrap:wrap}
-.tab{padding:6px 14px;border-radius:6px;font-size:15px;cursor:pointer;background:transparent;border:1px solid #2a2d35;color:#888}
-.tab.active{background:#1a3a5c;border-color:#4a9eff;color:#4a9eff}
-.tab:hover{border-color:#4a9eff}
-select{background:#1a1d27;border:1px solid #2a2d35;color:#e0e0e0;padding:6px 12px;border-radius:6px;font-size:15px;cursor:pointer}
-select:hover{border-color:#4a9eff}
-.nav-btn{background:#1a1d27;border:1px solid #2a2d35;color:#888;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:16px}
-.nav-btn:hover{border-color:#4a9eff;color:#4a9eff}
-.nav-btn:disabled{opacity:.3;cursor:not-allowed}
-.kpi-row{display:flex;gap:16px;padding:0 32px 16px;flex-wrap:wrap}
-.kpi{background:#1a1d27;border:1px solid #2a2d35;border-radius:10px;padding:16px 20px;flex:1;min-width:140px}
-.kpi .label{font-size:13px;color:#888;text-transform:uppercase;letter-spacing:.5px}
-.kpi .value{font-size:24px;font-weight:700;color:#fff;margin-top:4px}
-.kpi .sub{font-size:14px;color:#888;margin-top:2px}
-.good{color:#4ade80}.warn{color:#e0e0e0}.bad{color:#f87171}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 32px 16px}
-.card{background:#1a1d27;border:1px solid #2a2d35;border-radius:10px;padding:20px}
-.card-full{grid-column:1/-1}
-.card h3{font-size:16px;font-weight:600;color:#ccc;margin-bottom:12px}
-.chart-box{position:relative;height:400px}
-.section-divider{padding:20px 32px 8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:2px;border-top:1px solid #1a1d27}
-table{width:100%;border-collapse:collapse;font-size:15px}
-th{text-align:left;padding:8px 12px;border-bottom:1px solid #2a2d35;color:#888;font-weight:500;font-size:13px;text-transform:uppercase}
-td{padding:8px 12px;border-bottom:1px solid #1f222b}
-tr:hover{background:#1f222b}
-.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:13px;font-weight:600}
-.badge-green{background:#064e3b;color:#4ade80}
-.badge-yellow{background:#2a2d35;color:#e0e0e0}
-.badge-red{background:#7f1d1d;color:#f87171}
-.badge-gray{background:#374151;color:#9ca3af}
-.list{list-style:none;padding:0}
-.list li{padding:5px 0;border-bottom:1px solid #1f222b;font-size:15px;line-height:1.4}
-.list li:last-child{border-bottom:none}
-.list li::before{content:"\2013";color:#666;margin-right:8px}
-.list-important{color:#e0e0e0}
-.list-important::before{content:"\25CF";color:#e0e0e0;margin-right:8px;font-size:10px}
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:8px}
-.proj-card{background:#0f1117;border:1px solid #2a2d35;border-radius:8px;padding:10px}
-.proj-label{font-size:13px;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
-.proj-value{font-size:19px;font-weight:700;color:#fff}
-.proj-sub{font-size:13px;color:#888;margin-top:2px}
-.proj-ci{font-size:12px;color:#555;margin-top:1px}
-.dt td:first-child{color:#888;font-size:13px;text-transform:uppercase;letter-spacing:.3px;width:70px}
-.dt td{padding:5px 8px}
-.dt td:nth-child(2){width:80px}
-.dt td:nth-child(3){width:70px}
-.dt td:nth-child(4){width:70px}
-.stakeholder-row{display:flex;justify-content:space-between;font-size:15px;padding:3px 0;border-bottom:1px solid #1f222b}
-.stakeholder-row:last-child{border-bottom:none}
-.stakeholder-row .role{color:#888}
-.stakeholder-row .name{color:#fff;font-weight:500}
-.empty-state{text-align:center;padding:40px;color:#888;font-size:16px}
-.ts{font-size:13px;color:#444;text-align:right;padding:16px 32px}
-.toc{display:flex;gap:6px;padding:6px 32px;flex-wrap:wrap;align-items:center;border-bottom:1px solid #2a2d35;background:#12141c}
-.toc-label{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-right:2px}
-.toc a{font-size:12px;color:#888;text-decoration:none;padding:2px 8px;border-radius:3px;transition:all .15s}
-.toc a:hover{color:#93b4f5;background:rgba(30,58,138,.15)}
-.toc .toc-sep{color:#333;font-size:12px}
-@media(max-width:900px){.grid{grid-template-columns:1fr}}
+/* ========================================================================
+   Weekly Review — overrides + minor extensions to projection-design-system.css
+   Keeps 95% of styling inherited from the shared token system; only adds
+   local pieces (TOC, weekly-detail table cells, projection card grid).
+   ======================================================================== */
+
+/* Use the shared page frame paradigm */
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-body);
+  background: var(--color-neutral-bg);
+  line-height: 1.5;
+}
+
+.wr-frame {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--gap-lg);
+}
+
+/* Table of contents strip — compact nav at the top */
+.wr-toc {
+  display: flex;
+  gap: var(--gap-xs);
+  padding: var(--gap-xs) 0;
+  flex-wrap: wrap;
+  align-items: center;
+  border-bottom: 1px solid var(--color-panel-border);
+  font-size: var(--size-meta);
+}
+.wr-toc-label {
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-right: var(--gap-xs);
+  font-weight: 600;
+}
+.wr-toc a {
+  color: var(--color-text-meta);
+  text-decoration: none;
+  padding: 2px var(--gap-xs);
+  border-radius: 3px;
+  transition: color 120ms ease, background-color 120ms ease;
+}
+.wr-toc a:hover { color: var(--color-brand); background: rgba(0, 102, 204, 0.06); }
+.wr-toc-sep { color: var(--color-panel-border); }
+
+/* Header — matches .page-header semantics from projection-design-system */
+.wr-header {
+  padding: var(--gap-lg) 0 var(--gap-md);
+  border-bottom: 1px solid var(--color-panel-border);
+  margin-bottom: var(--gap-lg);
+}
+.wr-header h1 {
+  font-size: var(--size-section);
+  font-weight: 600;
+  color: var(--color-text-hero);
+  letter-spacing: -0.01em;
+}
+.wr-header-meta {
+  font-size: var(--size-meta);
+  color: var(--color-text-meta);
+  margin-top: 4px;
+}
+.wr-header-meta .wr-ts-accent { color: var(--color-brand); }
+
+/* Controls row — sits above the KPI strip. Three columns. */
+.wr-controls {
+  display: flex;
+  gap: var(--gap-lg);
+  padding: var(--gap-md) 0;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  border-bottom: 1px solid var(--color-panel-border);
+  margin-bottom: var(--gap-lg);
+}
+.wr-control-group { display: flex; flex-direction: column; gap: 4px; }
+.wr-control-label {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+.wr-tab-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.wr-tab {
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: var(--size-ui);
+  cursor: pointer;
+  background: var(--color-neutral-bg);
+  border: 1px solid var(--color-panel-border);
+  color: var(--color-text-body);
+  font-family: inherit;
+  transition: all 120ms ease;
+}
+.wr-tab:hover { border-color: var(--color-brand); color: var(--color-brand); }
+.wr-tab.active {
+  background: var(--color-brand);
+  color: var(--color-text-on-brand);
+  border-color: var(--color-brand);
+}
+.wr-week-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.wr-nav-btn {
+  background: var(--color-neutral-bg);
+  border: 1px solid var(--color-panel-border);
+  color: var(--color-text-body);
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: var(--size-ui);
+  font-family: inherit;
+  transition: border-color 120ms ease, color 120ms ease;
+}
+.wr-nav-btn:hover { border-color: var(--color-brand); color: var(--color-brand); }
+.wr-nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.wr-metric-group { margin-left: auto; }
+
+/* KPI row — reuse .hero-kpi from projection-design-system.css but in a row */
+.wr-kpi-row {
+  display: flex;
+  gap: var(--gap-md);
+  margin-bottom: var(--gap-lg);
+  flex-wrap: wrap;
+}
+.wr-kpi-row .hero-kpi {
+  flex: 1;
+  min-width: 150px;
+  padding: var(--gap-md);
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 8px;
+  text-align: left;
+}
+
+/* Grid of sec-panel cards — two-column on desktop, one-column mobile */
+.wr-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-lg);
+  margin-bottom: var(--gap-lg);
+}
+.wr-grid-full { grid-column: 1 / -1; }
+@media (max-width: 900px) { .wr-grid { grid-template-columns: 1fr; } }
+
+/* Section divider between tracker + callout halves */
+.wr-section-divider {
+  padding: var(--gap-md) 0 var(--gap-sm);
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  margin-top: var(--gap-lg);
+  border-top: 1px solid var(--color-panel-border);
+}
+
+/* Chart wrapper — matches projection.html .chart-wrap height + bounds */
+.wr-chart-wrap {
+  height: 420px;
+  max-height: 420px;
+  position: relative;
+}
+.wr-chart-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Table styling — inherits sec-panel parent, adds column-specific rules */
+.wr-weekly-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--size-ui);
+  font-variant-numeric: tabular-nums;
+}
+.wr-weekly-table thead th {
+  text-align: left;
+  padding: 6px 10px;
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-panel-border);
+  position: sticky;
+  top: 0;
+  background: var(--color-panel-bg);
+}
+.wr-weekly-table th.r { text-align: right; }
+.wr-weekly-table td {
+  padding: 5px 10px;
+  border-bottom: 1px solid #F3F3F3;
+  color: var(--color-text-body);
+}
+.wr-weekly-table td.r { text-align: right; }
+.wr-weekly-table tr:hover td { background: #FAFAFA; }
+.wr-weekly-table tr.selected td {
+  background: rgba(0, 102, 204, 0.06);
+  border-bottom-color: rgba(0, 102, 204, 0.15);
+}
+.wr-weekly-table .pred-val { color: #B05A00; }   /* muted orange for predictions */
+.wr-weekly-table .pred-lbl { color: #B05A00; font-size: 10px; margin-left: 2px; }
+.wr-weekly-table .future-row td { opacity: 0.55; }
+
+/* Brand/NB detail table — reused in channel cards */
+.wr-channel-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--size-ui);
+  font-variant-numeric: tabular-nums;
+}
+.wr-channel-table thead th {
+  text-align: right;
+  padding: 4px 6px;
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-panel-border);
+}
+.wr-channel-table thead th:first-child { text-align: left; }
+.wr-channel-table td { padding: 4px 6px; text-align: right; color: var(--color-text-body); }
+.wr-channel-table td:first-child {
+  text-align: left;
+  color: var(--color-text-subtle);
+  font-size: var(--size-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+.wr-channel-table td.value-cell { font-weight: 600; color: var(--color-text-hero); }
+
+/* Up/down delta tags — shared color language with projection.html */
+.wr-delta { font-variant-numeric: tabular-nums; font-weight: 500; }
+.wr-delta.good { color: var(--color-success); }
+.wr-delta.bad  { color: var(--color-danger); }
+.wr-delta.warn { color: var(--color-text-meta); }
+
+/* Projection cards — mini KPI-style tiles inside the projections sec-panel */
+.wr-proj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--gap-sm);
+}
+.wr-proj-card {
+  background: var(--color-neutral-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 6px;
+  padding: var(--gap-sm) var(--gap-md);
+}
+.wr-proj-label {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.wr-proj-value {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-hero);
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+}
+.wr-proj-sub {
+  font-size: var(--size-meta);
+  color: var(--color-text-meta);
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.wr-proj-ci {
+  font-size: 11px;
+  color: var(--color-text-subtle);
+  margin-top: 1px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* List inside sec-panels — keeps readability but tightens density */
+.wr-list {
+  list-style: none;
+  padding: 0;
+  font-size: var(--size-ui);
+}
+.wr-list li {
+  padding: 5px 0;
+  border-bottom: 1px solid #F3F3F3;
+  color: var(--color-text-body);
+  line-height: 1.5;
+}
+.wr-list li:last-child { border-bottom: none; }
+.wr-list li::before { content: "\2013"; color: var(--color-text-subtle); margin-right: 8px; }
+.wr-list li.important::before { content: "\25CF"; color: var(--color-brand); font-size: 9px; }
+
+/* Stakeholder rows */
+.wr-stake-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--size-ui);
+  padding: 4px 0;
+  border-bottom: 1px solid #F3F3F3;
+}
+.wr-stake-row:last-child { border-bottom: none; }
+.wr-stake-row .role { color: var(--color-text-subtle); }
+.wr-stake-row .name { color: var(--color-text-hero); font-weight: 500; }
+
+/* Table-scroll wrapper for weekly detail */
+.wr-table-scroll {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 520px;
+  border: 1px solid var(--color-panel-border);
+  border-radius: 4px;
+}
+
+/* Empty state — matches projection.html subtle tone */
+.wr-empty {
+  text-align: center;
+  padding: var(--gap-xl) var(--gap-lg);
+  color: var(--color-text-subtle);
+  font-size: var(--size-body);
+  background: var(--color-panel-bg);
+  border: 1px dashed var(--color-panel-border);
+  border-radius: 8px;
+}
+
+/* Callout narrative — highlighted left border in brand blue like the hero */
+.wr-callout-main {
+  border-left: 3px solid var(--color-brand);
+}
+.wr-callout-main h3 { display: flex; justify-content: space-between; align-items: center; }
+.wr-callout-period {
+  font-weight: 400;
+  font-size: var(--size-meta);
+  color: var(--color-text-meta);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.wr-callout-narrative {
+  font-size: var(--size-body);
+  line-height: 1.7;
+  color: var(--color-text-body);
+}
+
+/* Chart mode toggle — secondary disclosure-btn styled for weekly review */
+.wr-chart-mode-btn {
+  font-size: var(--size-meta);
+  padding: 3px 10px;
+  font-weight: 400;
+}
+
+/* Generated footer */
+.wr-ts {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-align: right;
+  padding: var(--gap-md) 0;
+  font-variant-numeric: tabular-nums;
+}
 </style>
 </head>
 <body>
-<div class="toc">
-  <span class="toc-label">Jump to</span>
+<div class="wr-frame">
+
+<!-- TOC strip — compact jump-to nav -->
+<div class="wr-toc">
+  <span class="wr-toc-label">Jump to</span>
   <a href="#sec-kpis">KPIs</a>
-  <span class="toc-sep">&middot;</span>
+  <span class="wr-toc-sep">&middot;</span>
   <a href="#sec-trend">Trend</a>
-  <span class="toc-sep">&middot;</span>
+  <span class="wr-toc-sep">&middot;</span>
   <a href="#sec-detail">Weekly Detail</a>
-  <span class="toc-sep">&middot;</span>
+  <span class="wr-toc-sep">&middot;</span>
   <a href="#sec-callout">Callout</a>
-  <span class="toc-sep">&middot;</span>
+  <span class="wr-toc-sep">&middot;</span>
   <a href="#sec-channels">Channels</a>
-  <span class="toc-sep">&middot;</span>
+  <span class="wr-toc-sep">&middot;</span>
   <a href="#sec-projections">Projections</a>
-  <span class="toc-sep">&middot;</span>
+  <span class="wr-toc-sep">&middot;</span>
   <a href="#sec-context">Context</a>
 </div>
-<div class="header">
-  <h1>📊 Weekly Review</h1>
-  <p>Callout narrative + full-year tracker • <span id="dataTs" style="color:#4a9eff"></span></p>
+
+<!-- Header -->
+<div class="wr-header">
+  <h1>Weekly Review</h1>
+  <p class="wr-header-meta">Callout narrative + full-year tracker &middot; <span class="wr-ts-accent" id="dataTs"></span></p>
 </div>
-<div class="controls">
-  <div><label>Market</label><br><div class="tab-row" id="marketTabs"></div></div>
-  <div><label>Week</label><br>
-    <div style="display:flex;align-items:center;gap:4px">
-      <button class="nav-btn" id="prevWeek">&#9664;</button>
-      <select id="weekSelect"></select>
-      <button class="nav-btn" id="nextWeek">&#9654;</button>
+
+<!-- Controls -->
+<div class="wr-controls">
+  <div class="wr-control-group">
+    <span class="wr-control-label">Market</span>
+    <div class="wr-tab-row" id="marketTabs"></div>
+  </div>
+  <div class="wr-control-group">
+    <span class="wr-control-label">Week</span>
+    <div class="wr-week-nav">
+      <button class="wr-nav-btn" id="prevWeek" aria-label="Previous week">&#9664;</button>
+      <select id="weekSelect" class="control-input"></select>
+      <button class="wr-nav-btn" id="nextWeek" aria-label="Next week">&#9654;</button>
     </div>
   </div>
-  <div style="margin-left:auto"><label>Metric</label><br>
-    <div class="tab-row" id="metricTabs"></div>
+  <div class="wr-control-group wr-metric-group">
+    <span class="wr-control-label">Metric</span>
+    <div class="wr-tab-row" id="metricTabs"></div>
   </div>
 </div>
 
 <!-- ============ TRACKER SECTION (top — chart + KPIs + weekly detail) ============ -->
 <div id="sec-kpis"></div>
-<div class="kpi-row" id="kpiRow"></div>
-<div class="grid">
-  <div class="card card-full" id="sec-trend">
+<div class="wr-kpi-row" id="kpiRow"></div>
+<div class="wr-grid">
+  <div class="sec-panel wr-grid-full" id="sec-trend">
     <h3 style="display:flex;justify-content:space-between;align-items:center">
-      Weekly Trend — highlighting selected week
-      <span style="font-weight:400;font-size:13px">
-        <button id="chartModeBtn" class="tab" style="font-size:12px;padding:3px 10px">Show calibration detail</button>
-      </span>
+      <span>Weekly Trend &mdash; highlighting selected week</span>
+      <button id="chartModeBtn" class="wr-tab wr-chart-mode-btn">Show calibration detail</button>
     </h3>
-    <div class="chart-box"><canvas id="mainChart"></canvas></div>
+    <div class="wr-chart-wrap"><canvas id="mainChart"></canvas></div>
   </div>
-  <div class="card card-full" id="sec-detail">
+  <div class="sec-panel wr-grid-full" id="sec-detail">
     <h3>Weekly Detail</h3>
-    <div style="overflow-x:auto;max-height:500px;overflow-y:auto">
-      <table><thead><tr>
-        <th>Week</th><th style="text-align:right">Regs</th><th style="text-align:right">Pred</th><th style="text-align:right">OP2</th><th style="text-align:right">Cost</th>
-        <th style="text-align:right">CPA</th><th>WoW &Delta;</th>
-      </tr></thead><tbody id="weeklyBody"></tbody></table>
+    <div class="wr-table-scroll">
+      <table class="wr-weekly-table">
+        <thead><tr>
+          <th>Week</th>
+          <th class="r">Regs</th>
+          <th class="r">Pred</th>
+          <th class="r">OP2</th>
+          <th class="r">Cost</th>
+          <th class="r">CPA</th>
+          <th class="r">WoW &Delta;</th>
+        </tr></thead>
+        <tbody id="weeklyBody"></tbody>
+      </table>
     </div>
   </div>
 </div>
 
 <!-- ============ CALLOUT SECTION (bottom — narrative context) ============ -->
-<div class="section-divider">Callout context for selected week</div>
-<div class="grid" id="calloutGrid">
-  <div class="card card-full empty-state">Loading&hellip;</div>
+<div class="wr-section-divider">Callout context for selected week</div>
+<div class="wr-grid" id="calloutGrid">
+  <div class="wr-grid-full wr-empty">Loading&hellip;</div>
 </div>
-<div class="ts" id="genTs"></div>
+<div class="wr-ts" id="genTs"></div>
+
+</div> <!-- /.wr-frame -->
 
 <script>
 // ============================================================================
-// Weekly Review — merged forecast-tracker + callout-dashboard (shape A)
+// Weekly Review — merged forecast-tracker + callout-dashboard (shape A),
+// restyled 2026-04-28 to share design language with projection.html.
 // Callout narrative on top, full-year tracker below. Both share the market
 // tab row and the week selector; picking a week highlights it on the chart
 // and drives the callout narrative.
@@ -173,7 +502,7 @@ Promise.all([
 }).catch((e) => {
   console.error('Weekly Review data load failed:', e);
   document.getElementById('calloutGrid').innerHTML =
-    '<div class="card card-full empty-state bad">Failed to load data. Run refresh-forecast.py and refresh-callouts.py.</div>';
+    '<div class="wr-grid-full wr-empty" style="color:var(--color-danger);border-color:#F2A4A4">Failed to load data. Run refresh-forecast.py and refresh-callouts.py.</div>';
 });
 
 function init() {
@@ -190,7 +519,7 @@ function init() {
   const tabs = document.getElementById('marketTabs');
   markets.forEach(m => {
     const b = document.createElement('button');
-    b.className = 'tab' + (m === curMarket ? ' active' : '');
+    b.className = 'wr-tab' + (m === curMarket ? ' active' : '');
     b.textContent = m;
     b.onclick = () => { curMarket = m; render(); };
     tabs.appendChild(b);
@@ -213,7 +542,7 @@ function init() {
   const metricDefs = [{key:'regs',label:'Registrations'},{key:'cost',label:'Cost'},{key:'cpa',label:'CPA'}];
   metricDefs.forEach(({key, label}) => {
     const b = document.createElement('button');
-    b.className = 'tab' + (key === curMetric ? ' active' : '');
+    b.className = 'wr-tab' + (key === curMetric ? ' active' : '');
     b.textContent = label;
     b.dataset.metric = key;
     b.onclick = () => { curMetric = key; renderKPIs(); };
@@ -222,7 +551,7 @@ function init() {
 
   document.getElementById('dataTs').textContent =
     'Callouts: ' + new Date(CALLOUTS.generated || Date.now()).toLocaleDateString() +
-    ' • Forecast through: ' + (FORECAST.last_data_date || 'W' + FORECAST.max_week);
+    ' \u00b7 Forecast through: ' + (FORECAST.last_data_date || 'W' + FORECAST.max_week);
   document.getElementById('genTs').textContent = 'Generated: ' + new Date().toLocaleString();
 
   render();
@@ -261,7 +590,7 @@ function cls(v, inv) {
 function delta(v, inv) {
   if (v == null) return '';
   const c = cls(v, inv);
-  return '<span class="' + c + '">' + (v > 0 ? '+' : '') + v.toFixed(0) + '%</span>';
+  return '<span class="wr-delta ' + c + '">' + (v > 0 ? '+' : '') + v.toFixed(0) + '%</span>';
 }
 
 // ============================================================================
@@ -270,8 +599,8 @@ function delta(v, inv) {
 
 function render() {
   // Update active states
-  document.querySelectorAll('#marketTabs .tab').forEach(b => {
-    b.className = 'tab' + (b.textContent === curMarket ? ' active' : '');
+  document.querySelectorAll('#marketTabs .wr-tab').forEach(b => {
+    b.className = 'wr-tab' + (b.textContent === curMarket ? ' active' : '');
   });
   const weeks = CALLOUTS.weeks || [];
   document.getElementById('prevWeek').disabled = weeks.indexOf(curWeek) >= weeks.length - 1;
@@ -284,14 +613,14 @@ function render() {
 }
 
 // ============================================================================
-// CALLOUT — top section (narrative, decisions, stakeholders, channels)
+// CALLOUT — bottom section (narrative, decisions, stakeholders, channels)
 // ============================================================================
 
 function renderCallout() {
   const c = (CALLOUTS.callouts[curMarket] || {})[curWeek];
   const g = document.getElementById('calloutGrid');
   if (!c) {
-    g.innerHTML = '<div class="card card-full empty-state" id="sec-callout">No callout for ' + curMarket + ' ' + curWeek + '</div>';
+    g.innerHTML = '<div class="wr-grid-full wr-empty" id="sec-callout">No callout for ' + curMarket + ' ' + curWeek + '</div>';
     return;
   }
 
@@ -299,24 +628,24 @@ function renderCallout() {
 
   // Full callout narrative
   const calloutHtml = (c.full_callout || c.headline || '').replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
-  html += '<div class="card card-full" id="sec-callout" style="border-left:3px solid #4a9eff">' +
+  html += '<div class="sec-panel wr-grid-full wr-callout-main" id="sec-callout">' +
     '<h3>' + curWeek + ' &mdash; ' + curMarket +
-    '<span style="color:#888;font-weight:400;font-size:14px;float:right">' + (c.period || '') + '</span></h3>' +
-    '<div style="font-size:16px;line-height:1.6">' + calloutHtml + '</div></div>';
+    '<span class="wr-callout-period">' + (c.period || '') + '</span></h3>' +
+    '<div class="wr-callout-narrative">' + calloutHtml + '</div></div>';
 
   // Brand + Non-Brand channel detail
   html += channelCard('Brand', c.brand_detail, 'sec-channels');
   html += channelCard('Nonbrand', c.nb_detail);
 
   // Projections (from callouts)
-  html += '<div class="card card-full" id="sec-projections"><h3>Projections</h3><div id="projContent"></div></div>';
+  html += '<div class="sec-panel wr-grid-full" id="sec-projections"><h3>Projections</h3><div id="projContent"></div></div>';
 
   // External factors
-  html += '<div class="card card-full" id="sec-context"><h3>Context &amp; External Factors</h3><ul class="list" id="extList"></ul></div>';
+  html += '<div class="sec-panel wr-grid-full" id="sec-context"><h3>Context &amp; External Factors</h3><ul class="wr-list" id="extList"></ul></div>';
 
   // Drivers + stakeholders
-  html += '<div class="card"><h3>Performance Drivers</h3><ul class="list" id="driverList"></ul></div>';
-  html += '<div class="card"><h3>Stakeholders</h3><div id="stakeCard"></div></div>';
+  html += '<div class="sec-panel"><h3>Performance Drivers</h3><ul class="wr-list" id="driverList"></ul></div>';
+  html += '<div class="sec-panel"><h3>Stakeholders</h3><div id="stakeCard"></div></div>';
 
   g.innerHTML = html;
 
@@ -328,12 +657,12 @@ function renderCallout() {
 
 function channelCard(title, d, anchorId) {
   const idAttr = anchorId ? ' id="' + anchorId + '"' : '';
-  if (!d) return '<div class="card"' + idAttr + '><h3>' + title + '</h3><div style="color:#888;font-size:15px">No data</div></div>';
+  if (!d) return '<div class="sec-panel"' + idAttr + '><h3>' + title + '</h3><div style="color:var(--color-text-subtle);font-size:var(--size-ui)">No data</div></div>';
   const cost = d.cost || ((d.cpa && d.regs) ? Math.round(d.cpa * d.regs) : null);
   const costFmt = cost ? '$' + cost.toLocaleString() : '\u2014';
-  return '<div class="card"' + idAttr + '><h3>' + title + '</h3>' +
-    '<table class="dt" style="table-layout:fixed"><colgroup><col style="width:60px"><col style="width:75px"><col style="width:65px"><col style="width:65px"><col style="width:65px"></colgroup>' +
-    '<thead><tr><th></th><th style="text-align:right">Value</th><th style="text-align:right">WoW</th><th style="text-align:right">YoY</th><th style="text-align:right">4wk avg</th></tr></thead><tbody>' +
+  return '<div class="sec-panel"' + idAttr + '><h3>' + title + '</h3>' +
+    '<table class="wr-channel-table" style="table-layout:fixed"><colgroup><col style="width:60px"><col style="width:75px"><col style="width:65px"><col style="width:65px"><col style="width:65px"></colgroup>' +
+    '<thead><tr><th></th><th>Value</th><th>WoW</th><th>YoY</th><th>4wk avg</th></tr></thead><tbody>' +
     mRow('Regs', fmt(d.regs), d.regs_wow, false, d.regs_yoy, false, d.regs_vs4wk, false) +
     mRow('Cost', costFmt, d.cost_wow, false, d.cost_yoy, false, d.cost_vs4wk, false) +
     mRow('CPA', fmt(d.cpa, 'cpa'), d.cpa_wow, true, d.cpa_yoy, true, d.cpa_vs4wk, true) +
@@ -344,35 +673,35 @@ function channelCard(title, d, anchorId) {
 
 function mRow(label, value, wow, wInv, yoy, yInv, vs4, v4Inv) {
   return '<tr><td>' + label + '</td>' +
-    '<td style="text-align:right;font-weight:600;color:#fff">' + value + '</td>' +
-    '<td style="text-align:right">' + delta(wow, wInv) + '</td>' +
-    '<td style="text-align:right">' + delta(yoy, yInv) + '</td>' +
-    '<td style="text-align:right">' + delta(vs4, v4Inv) + '</td></tr>';
+    '<td class="value-cell">' + value + '</td>' +
+    '<td>' + delta(wow, wInv) + '</td>' +
+    '<td>' + delta(yoy, yInv) + '</td>' +
+    '<td>' + delta(vs4, v4Inv) + '</td></tr>';
 }
 
 function renderProj(proj) {
   const el = document.getElementById('projContent');
   if (!el) return;
   if (!proj || (!proj.month_end && !proj.quarter_end && !proj.next_week)) {
-    el.innerHTML = '<div style="color:#888;font-size:15px">No projection data</div>';
+    el.innerHTML = '<div style="color:var(--color-text-subtle);font-size:var(--size-ui)">No projection data</div>';
     return;
   }
   function pc(title, pe) {
     if (!pe) return '';
-    const ci = pe.ci_lo && pe.ci_hi ? '<div class="proj-ci">CI: ' + fmt(pe.ci_lo) + '\u2013' + fmt(pe.ci_hi) + '</div>' : '';
+    const ci = pe.ci_lo && pe.ci_hi ? '<div class="wr-proj-ci">CI: ' + fmt(pe.ci_lo) + '\u2013' + fmt(pe.ci_hi) + '</div>' : '';
     let vs = '';
     if (pe.vs_op2_spend != null) {
       const c = pe.vs_op2_spend > 0 ? 'warn' : 'good';
-      vs = '<div class="proj-sub ' + c + '">' + (pe.vs_op2_spend > 0 ? '+' : '') + pe.vs_op2_spend.toFixed(1) + '% vs OP2</div>';
+      vs = '<div class="wr-proj-sub wr-delta ' + c + '">' + (pe.vs_op2_spend > 0 ? '+' : '') + pe.vs_op2_spend.toFixed(1) + '% vs OP2</div>';
     }
-    return '<div class="proj-card">' +
-      '<div class="proj-label">' + title + (pe.period ? ' (' + pe.period + ')' : '') + '</div>' +
-      '<div class="proj-value">' + fmt(pe.regs_proj) + ' regs</div>' + ci +
-      '<div class="proj-sub">' + fmt(pe.spend_proj, '$') + '</div>' +
-      (pe.cpa_proj ? '<div class="proj-sub">' + fmt(pe.cpa_proj, 'cpa') + ' CPA</div>' : '') +
+    return '<div class="wr-proj-card">' +
+      '<div class="wr-proj-label">' + title + (pe.period ? ' (' + pe.period + ')' : '') + '</div>' +
+      '<div class="wr-proj-value">' + fmt(pe.regs_proj) + ' regs</div>' + ci +
+      '<div class="wr-proj-sub">' + fmt(pe.spend_proj, '$') + '</div>' +
+      (pe.cpa_proj ? '<div class="wr-proj-sub">' + fmt(pe.cpa_proj, 'cpa') + ' CPA</div>' : '') +
       vs + '</div>';
   }
-  el.innerHTML = '<div class="proj-grid">' +
+  el.innerHTML = '<div class="wr-proj-grid">' +
     pc('Next Week', proj.next_week) +
     pc('Month-End', proj.month_end) +
     pc('Quarter-End', proj.quarter_end) +
@@ -383,17 +712,17 @@ function renderProj(proj) {
 function renderList(id, items) {
   const el = document.getElementById(id);
   if (!el) return;
-  if (!items || !items.length) { el.innerHTML = '<li style="color:#888">None</li>'; return; }
+  if (!items || !items.length) { el.innerHTML = '<li style="color:var(--color-text-subtle)">None</li>'; return; }
   el.innerHTML = items.map(i => '<li>' + i + '</li>').join('');
 }
 
 function renderExternal(items) {
   const el = document.getElementById('extList');
   if (!el) return;
-  if (!items || !items.length) { el.innerHTML = '<li style="color:#888">None</li>'; return; }
+  if (!items || !items.length) { el.innerHTML = '<li style="color:var(--color-text-subtle)">None</li>'; return; }
   el.innerHTML = items.map(i => {
     if (typeof i === 'string') return '<li>' + i + '</li>';
-    if (i.important) return '<li class="list-important">' + i.text + '</li>';
+    if (i.important) return '<li class="important">' + i.text + '</li>';
     return '<li>' + i.text + '</li>';
   }).join('');
 }
@@ -402,25 +731,28 @@ function renderStake(st) {
   const el = document.getElementById('stakeCard');
   if (!el) return;
   el.innerHTML = Object.entries(st).map(([r, n]) =>
-    '<div class="stakeholder-row"><span class="role">' +
+    '<div class="wr-stake-row"><span class="role">' +
     r.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) +
     '</span><span class="name">' + n + '</span></div>'
-  ).join('') || '<div style="color:#888">No data</div>';
+  ).join('') || '<div style="color:var(--color-text-subtle);font-size:var(--size-ui)">No data</div>';
 }
 
 // ============================================================================
-// TRACKER — bottom section (KPIs, canon-chart, weekly detail table)
+// TRACKER — top section (KPIs, canon-chart, weekly detail table)
 // ============================================================================
 
 function renderKPIs() {
   const row = document.getElementById('kpiRow');
   // Highlight active metric tab
-  document.querySelectorAll('#metricTabs .tab').forEach(b => {
-    b.className = 'tab' + (b.dataset.metric === curMetric ? ' active' : '');
+  document.querySelectorAll('#metricTabs .wr-tab').forEach(b => {
+    b.className = 'wr-tab' + (b.dataset.metric === curMetric ? ' active' : '');
   });
 
   const weeks = (FORECAST.weekly && FORECAST.weekly[curMarket]) || [];
-  if (!weeks.length) { row.innerHTML = '<div class="kpi"><div class="label">No Data</div></div>'; return; }
+  if (!weeks.length) {
+    row.innerHTML = '<div class="hero-kpi"><div class="hero-kpi-label">No Data</div></div>';
+    return;
+  }
   const maxWk = FORECAST.max_week || 15;
   const actualWeeks = weeks.filter(w => w.wk <= maxWk && (w.regs > 0 || w.cost > 0));
   const ytd = actualWeeks.reduce((s, w) => s + (w[curMetric] || 0), 0);
@@ -431,12 +763,36 @@ function renderKPIs() {
   const w52 = weeks.find(w => w.wk === 52);
   const yearEndPred = w52 && w52.pred_regs ? w52.pred_regs : null;
 
+  // Map curMetric to fmt() format tag for consistent rendering
+  const fmtTag = curMetric === 'cost' ? '$' : (curMetric === 'cpa' ? 'cpa' : null);
+  const labelForKpi = curMetric === 'regs' ? 'Registrations' : (curMetric === 'cost' ? 'Cost' : 'CPA');
+
   row.innerHTML = `
-    <div class="kpi"><div class="label">YTD ${curMetric}</div><div class="value">${fmt(ytd, curMetric)}</div><div class="sub">W1&ndash;W${maxWk}</div></div>
-    <div class="kpi"><div class="label">Latest Week</div><div class="value">${fmt(last[curMetric], curMetric)}</div><div class="sub">${last.week || ''}</div></div>
-    <div class="kpi"><div class="label">WoW Change</div><div class="value ${wowClass}">${wow != null ? (wow > 0 ? '+' : '') + wow + '%' : '\u2014'}</div></div>
-    ${curMetric === 'regs' && yearEndPred ? `<div class="kpi"><div class="label">Year-End Pred</div><div class="value">${fmt(yearEndPred, 'regs')}</div><div class="sub">W52 forecast</div></div>` : ''}
-    ${curMetric === 'regs' && last.op2_regs ? `<div class="kpi"><div class="label">OP2 Target</div><div class="value">${fmt(last.op2_regs, 'regs')}</div><div class="sub">weekly</div></div>` : ''}
+    <div class="hero-kpi">
+      <div class="hero-kpi-label">YTD ${labelForKpi}</div>
+      <div class="hero-kpi-value">${fmt(ytd, fmtTag)}</div>
+      <div class="hero-kpi-delta">W1&ndash;W${maxWk}</div>
+    </div>
+    <div class="hero-kpi">
+      <div class="hero-kpi-label">Latest Week</div>
+      <div class="hero-kpi-value">${fmt(last[curMetric], fmtTag)}</div>
+      <div class="hero-kpi-delta">${last.week || ''}</div>
+    </div>
+    <div class="hero-kpi">
+      <div class="hero-kpi-label">WoW Change</div>
+      <div class="hero-kpi-value">${wow != null ? (wow > 0 ? '+' : '') + wow + '%' : '\u2014'}</div>
+      <div class="hero-kpi-delta ${wowClass}">vs prior</div>
+    </div>
+    ${curMetric === 'regs' && yearEndPred ? `<div class="hero-kpi">
+      <div class="hero-kpi-label">Year-End Pred</div>
+      <div class="hero-kpi-value">${fmt(yearEndPred, 'regs')}</div>
+      <div class="hero-kpi-delta">W52 forecast</div>
+    </div>` : ''}
+    ${curMetric === 'regs' && last.op2_regs ? `<div class="hero-kpi">
+      <div class="hero-kpi-label">OP2 Target</div>
+      <div class="hero-kpi-value">${fmt(last.op2_regs, 'regs')}</div>
+      <div class="hero-kpi-delta">weekly</div>
+    </div>` : ''}
   `;
 }
 
@@ -470,31 +826,30 @@ function renderTable() {
     const prevRegs = prev && prev.regs > 0 ? prev.regs : (prev && prev.pred_regs ? prev.pred_regs : null);
     const curRegs = isActual ? w.regs : w.pred_regs;
     const wow = prevRegs && curRegs ? ((curRegs - prevRegs) / prevRegs * 100).toFixed(1) : null;
-    const wowBadge = wow != null
-      ? `<span class="badge ${wow > 5 ? 'badge-green' : wow < -5 ? 'badge-red' : 'badge-yellow'}">${wow > 0 ? '+' : ''}${wow}%</span>`
-      : '<span class="badge badge-gray">\u2014</span>';
-    const rowStyle = isFuture ? 'opacity:0.5' : '';
-    const predLabel = isFuture ? ' <span style="color:#f97316;font-size:12px">pred</span>' : '';
-    const orange = 'color:#f97316';
+    const wowCls = wow == null ? 'warn' : (wow > 5 ? 'good' : (wow < -5 ? 'bad' : 'warn'));
+    const wowTxt = wow != null ? `<span class="wr-delta ${wowCls}">${wow > 0 ? '+' : ''}${wow}%</span>` : '\u2014';
 
-    const regsVal = isActual ? fmt(w.regs, 'regs') : (w.pred_regs ? `<span style="${orange}">${fmt(w.pred_regs, 'regs')}</span>` : '\u2014');
-    const predVal = w.pred_regs ? fmt(w.pred_regs, 'regs') : '\u2014';
-    const op2Val = w.op2_regs ? fmt(w.op2_regs, 'regs') : '\u2014';
-    const costVal = isActual && w.cost ? fmt(w.cost, 'cost') : (w.pred_cost ? `<span style="${orange}">${fmt(w.pred_cost, 'cost')}</span>` : '\u2014');
-    const cpaVal = isActual && w.cpa ? fmt(w.cpa, 'cpa') : (w.pred_cpa ? `<span style="${orange}">${fmt(w.pred_cpa, 'cpa')}</span>` : '\u2014');
-
-    // Highlight the selected week's row to tie it to the callout above
+    const rowCls = [];
+    if (isFuture) rowCls.push('future-row');
     const isSelected = w.week === curWeek || ('W' + String(w.wk).padStart(2, '0')) === curWeek;
-    const selBg = isSelected ? 'background:rgba(74,158,255,0.08);' : '';
+    if (isSelected) rowCls.push('selected');
+    const rowClsAttr = rowCls.length ? ' class="' + rowCls.join(' ') + '"' : '';
 
-    return `<tr style="${rowStyle}${selBg}">
+    const predLabel = isFuture ? ' <span class="pred-lbl">pred</span>' : '';
+    const regsVal = isActual ? fmt(w.regs, 'regs') : (w.pred_regs ? `<span class="pred-val">${fmt(w.pred_regs, 'regs')}</span>` : '\u2014');
+    const predVal = w.pred_regs ? `<span class="pred-val">${fmt(w.pred_regs, 'regs')}</span>` : '\u2014';
+    const op2Val = w.op2_regs ? fmt(w.op2_regs, 'regs') : '\u2014';
+    const costVal = isActual && w.cost ? fmt(w.cost, 'cost') : (w.pred_cost ? `<span class="pred-val">${fmt(w.pred_cost, 'cost')}</span>` : '\u2014');
+    const cpaVal = isActual && w.cpa ? fmt(w.cpa, 'cpa') : (w.pred_cpa ? `<span class="pred-val">${fmt(w.pred_cpa, 'cpa')}</span>` : '\u2014');
+
+    return `<tr${rowClsAttr}>
       <td>${w.week}${predLabel}</td>
-      <td style="text-align:right">${regsVal}</td>
-      <td style="text-align:right;color:#f97316">${predVal}</td>
-      <td style="text-align:right;color:#6c7086">${op2Val}</td>
-      <td style="text-align:right">${costVal}</td>
-      <td style="text-align:right">${cpaVal}</td>
-      <td>${wowBadge}</td>
+      <td class="r">${regsVal}</td>
+      <td class="r">${predVal}</td>
+      <td class="r" style="color:var(--color-text-subtle)">${op2Val}</td>
+      <td class="r">${costVal}</td>
+      <td class="r">${cpaVal}</td>
+      <td class="r">${wowTxt}</td>
     </tr>`;
   }).join('');
 }
