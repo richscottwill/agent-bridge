@@ -549,7 +549,15 @@ cleanup first, then typography, then features, then deferred items last.
 - **Verification:** Each known anomaly check (fit_r2_drop, op2_pacing_divergence, regime_low_confidence, ytd_projection_step) now has a template with (1) a "what to do" title, (2) a plain-English likely-cause body, (3) a bolded decision threshold, and (4) 2-3 clickable action buttons (Switch to Pessimistic, Compare to baseline, Open Model View, Recompute, Explain this). Buttons wire to existing handlers by dispatching clicks to the relevant scenario chip / disclosure button / explain link. Unknown anomaly checks fall back to the pre-P5-8 report voice so new alert kinds render cleanly until a template is added.
 - **Voice shift:** `Fit quality dropped sharply — r² fell 0.64 → 0.00 → Investigate data-quality drift` becomes `Trust this projection less this week — Brand CPA fit dropped sharply (r² 0.64 → 0.00). Likely cause: a regime change the model has not yet absorbed. If headline numbers diverge >20% from Pessimistic, escalate to Brandon.` with Switch-to-Pessimistic + Explain-this buttons below.
 - **Blast radius:** ALERT_TEMPLATES + renderActions + click dispatch added inside `renderMarketAnomalies`; event delegation wires through existing DOM. CSS adds `.alert-actions` + `.alert-action` + primary variant. No data / solver / chart changes.
-- **Commit:** <filled after commit>
+- **Commit:** `782a79b`
+
+### P5-11 · Confidence timeline sparkline in Model View drawer
+- **Source:** R19 #11 (LOW)
+- **Status:** BLOCKED — missing data pipeline
+- **Root cause:** the sparkline needs per-market historical CI widths (last N weeks' 90% bootstrap CI spread, computed as `(ci_hi - ci_lo) / central * 100`). That history is not persisted today — the bootstrap CI is computed fresh each render inside `V1_1_Slim.bootstrapCI`, nothing writes it to disk, and `projection-data.json` has no `confidence_history` field. The visualization code itself (drawer-tile with bar-chart, green "shrinking — model learning ✓" / red "growing — destabilizing" trend label) is straightforward once the data surface exists.
+- **Unblocker (separate commit, not today):** extend `export-projection-data.py` to emit `confidence_history: [{week, ci_width_pct}]` per market using the last ~8 weeks of computed CI widths from the WBR pipeline. Requires either (a) joining against a historical bootstrap-CI table that doesn't exist yet, or (b) recomputing `bootstrapCI` for each historical snapshot of `ytd_weekly` during the export step. Option (b) is cheaper to build since it only needs the existing solver; cost is compute time during export.
+- **Immediate next step if Richard wants to unblock:** file an Asana task to extend the WBR pipeline's weekly snapshot with a bootstrap-CI calculation, then backfill N weeks from history. Not on today's critical path.
+- **Commit:** n/a (BLOCKED — no code change shipped)
 ---
 
 
@@ -558,4 +566,4 @@ cleanup first, then typography, then features, then deferred items last.
 Execute top-to-bottom within each phase. When a finding is blocked, mark the
 reason in-place and move to the next. Never silently skip.
 
-**Current next-up:** Phase 5 R19 items — 13 findings queued, executing in Local Kiro's compounding-effect order.
+**Current next-up:** Phase 5 R19 sprint complete. 12 of 13 findings shipped across commits 91225c0 / 960f581 / 138e288 / 18192c7 / 975e6a3 / be3fc20 / 5437006 / ff49a21 / 0e9b2a3 / f819924 / 782a79b. P5-11 BLOCKED pending `confidence_history` data pipeline extension. Full MPE Projection Engine backlog now: Phase 1-3 done (49), Phase 4 minimal shipped (989f62b), Phase 5 12/13 shipped, P5-11 blocked.
