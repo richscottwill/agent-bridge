@@ -25,6 +25,34 @@
    local pieces (TOC, weekly-detail table cells, projection card grid).
    ======================================================================== */
 
+/* WR-D4 (2026-04-28): Since-last-week auto-summary above the callout
+   headline. Answers "what changed?" in one scannable line before the
+   prose. Pills share color language with the rest of the page via
+   .wr-delta {good, bad, warn}. */
+.wr-since-last-week {
+  margin-bottom: var(--gap-sm);
+  padding-bottom: var(--gap-sm);
+  border-bottom: 1px dashed var(--color-panel-border);
+}
+.wr-since-label {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.wr-since-body {
+  font-size: var(--size-ui);
+  color: var(--color-text-body);
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+}
+.wr-since-driver {
+  color: var(--color-text-subtle);
+  font-size: var(--size-meta);
+}
+
 /* WR-D1 (2026-04-28): Forecast Hit Rate scorecard — 3 tiles + one-line
    auto-narrative summarizing the model's grade against last N weeks of
    actuals. The differentiation organ: this is the one thing weekly review
@@ -881,13 +909,59 @@ function renderCalloutNarrative() {
     : fullText;
   const bodyHtml = bodyText.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
   const h3Content = headlineText || (curMarket + ' ' + curWeek);
+  // WR-D4 (2026-04-28): Since-last-week auto-summary above the headline.
+  // Pulls regs/spend/cpa WoW deltas from callout.metrics + brand_detail
+  // + nb_detail and composes a one-liner in 4–5 deltas. Hidden entirely
+  // when no metrics data is available so it doesn't leave a blank strip.
+  const sinceHtml = renderSinceLastWeekHtml(c);
   host.innerHTML =
     '<div class="sec-panel wr-callout-main" id="sec-callout" style="margin-bottom:var(--gap-lg)">' +
+    (sinceHtml || '') +
     '<div class="wr-callout-meta">' + curMarket + ' &middot; ' + curWeek +
       (c.period ? ' &middot; ' + c.period : '') + '</div>' +
     '<h3 class="wr-callout-headline">' + h3Content + '</h3>' +
     (bodyHtml ? '<div class="wr-callout-narrative">' + bodyHtml + '</div>' : '') +
     '</div>';
+}
+
+// WR-D4 helper — returns inline HTML or '' when no useful deltas available.
+function renderSinceLastWeekHtml(c) {
+  if (!c) return '';
+  const m = c.metrics || {};
+  const brand = c.brand_detail || {};
+  const nb = c.nb_detail || {};
+  const parts = [];
+  // Primary deltas — regs, spend, cpa — each styled with directional color.
+  const tag = (label, val, invert) => {
+    if (val == null || !Number.isFinite(val)) return null;
+    const abs = Math.abs(val);
+    const flat = abs < 0.5;
+    const upBad = !!invert;
+    const cls = flat ? 'warn' : ((val > 0) !== upBad ? 'good' : 'bad');
+    const sign = val > 0 ? '+' : '';
+    const body = flat ? 'flat' : `${sign}${val.toFixed(0)}%`;
+    return `${label} <span class="wr-delta ${cls}">${body}</span>`;
+  };
+  if (m.regs_wow != null) {
+    const driver = Math.abs(nb.regs_wow || 0) > Math.abs(brand.regs_wow || 0) ? 'NB driving' : 'Brand driving';
+    const t = tag('Regs', m.regs_wow, false);
+    if (t) parts.push(`${t} <span class="wr-since-driver">(${driver})</span>`);
+  }
+  const spendTag = tag('Spend', m.spend_wow, false);
+  if (spendTag) parts.push(spendTag);
+  const cpaTag = tag('CPA', m.cpa_wow, true);  // up = bad
+  if (cpaTag) parts.push(cpaTag);
+  // Divergence callout — Brand soft while NB strong (or vice versa).
+  if ((brand.regs_wow || 0) < -2 && (nb.regs_wow || 0) > 5) {
+    parts.push(`<strong class="wr-delta bad">Brand softened ${brand.regs_wow}%</strong>`);
+  } else if ((nb.regs_wow || 0) < -2 && (brand.regs_wow || 0) > 5) {
+    parts.push(`<strong class="wr-delta bad">NB softened ${nb.regs_wow}%</strong>`);
+  }
+  if (!parts.length) return '';
+  return `<div class="wr-since-last-week">` +
+    `<div class="wr-since-label">Since last week</div>` +
+    `<div class="wr-since-body">${parts.join('  &middot;  ')}</div>` +
+    `</div>`;
 }
 
 function renderCalloutDetails() {
