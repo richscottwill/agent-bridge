@@ -538,6 +538,41 @@ body {
 }
 .wr-channel-table td.value-cell { font-weight: 600; color: var(--color-text-hero); }
 
+/* WR-S3 (2026-04-29): rollup variant of channel cards — compact summary
+   (regs + YoY) + an honest "switch to per-market for detail" note,
+   replacing the dense table that was rendering as rows of em-dashes on
+   WW/EU5/NA. */
+.wr-channel-rollup-summary {
+  display: flex;
+  gap: var(--gap-lg);
+  margin-bottom: var(--gap-sm);
+}
+.wr-channel-rollup-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.wr-channel-rollup-label {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+.wr-channel-rollup-value {
+  font-size: var(--size-ui);
+  color: var(--color-text-hero);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+}
+.wr-channel-rollup-note {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  font-style: italic;
+  line-height: 1.5;
+}
+
 /* Up/down delta tags — shared color language with projection.html */
 .wr-delta { font-variant-numeric: tabular-nums; font-weight: 500; }
 .wr-delta.good { color: var(--color-success); }
@@ -1532,6 +1567,25 @@ function renderCalloutDetails() {
 
 function channelCard(title, d, anchorId) {
   const idAttr = anchorId ? ' id="' + anchorId + '"' : '';
+  // WR-S3 (2026-04-29): rollup markets (WW/EU5/NA) have sparse brand_detail /
+  // nb_detail — only {regs, regs_yoy, regs_vs4wk}. Most table columns come
+  // back empty, producing a visual row of em-dashes. Replace with a compact
+  // "not available" message + pointer to per-market views.
+  const REGIONS = ['WW', 'EU5', 'NA'];
+  const isRollup = REGIONS.includes(curMarket);
+  if (isRollup) {
+    const regsStr = (d && Number.isFinite(d.regs)) ? fmt(d.regs, 'regs') : '\u2014';
+    const yoyStr = (d && Number.isFinite(d.regs_yoy))
+      ? '<span class="wr-delta ' + cls(d.regs_yoy, false) + '">' + (d.regs_yoy > 0 ? '+' : '') + d.regs_yoy.toFixed(0) + '%</span>'
+      : '\u2014';
+    return '<div class="sec-panel"' + idAttr + '><h3>' + title + '</h3>' +
+      '<div class="wr-channel-rollup-summary">' +
+        '<div class="wr-channel-rollup-stat"><span class="wr-channel-rollup-label">Regs</span><span class="wr-channel-rollup-value">' + regsStr + '</span></div>' +
+        '<div class="wr-channel-rollup-stat"><span class="wr-channel-rollup-label">YoY</span><span class="wr-channel-rollup-value">' + yoyStr + '</span></div>' +
+      '</div>' +
+      '<div class="wr-channel-rollup-note">Channel WoW / CPA / CVR breakdown not available on rollup — switch to a per-market tab for detail.</div>' +
+      '</div>';
+  }
   if (!d) return '<div class="sec-panel"' + idAttr + '><h3>' + title + '</h3><div style="color:var(--color-text-subtle);font-size:var(--size-ui)">No data</div></div>';
   const cost = d.cost || ((d.cpa && d.regs) ? Math.round(d.cpa * d.regs) : null);
   const costFmt = cost ? '$' + cost.toLocaleString() : '\u2014';
