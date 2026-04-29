@@ -100,3 +100,99 @@ the logged discipline "audit bundled specs against live code before executing."
 
 - **canon-chart.js light-theme polish:** the tracker/calibration render path still has hardcoded dark-theme axis tick colors (`#666` / `#1f222b`) and `color: '#4ade80'` on the nowLine label. Contrast is adequate on the light background but not polished. Low priority; pick up in a dedicated chart-polish commit.
 - **Current-week projections populate:** WR-C6 OP2 Pacing and WR-D5 qPacing will remain in their weekly-fallback form on W17/W16 until `refresh-callouts.py` runs and populates `callout.projections.month_end.vs_op2_spend` for the current weeks. Pipeline concern, not code.
+
+---
+
+## R2 proposals (Local Kiro, 2026-04-28) — forecasting-platform research pass
+
+Second-round ideas grounded in research on Good Judgment Open, Polymarket,
+Metaculus, and Robinhood Advanced Charts. Source file:
+`~/shared/context/intake/weekly-review-r2-handoff-prompt.md` (pasted into
+the 2026-04-28 session; not yet in repo).
+
+All R2 items are `open-R2` — research-grounded proposals awaiting Richard's
+go-ahead. Not shipped. Data-dependency audit done against live payloads;
+gating notes flag items that need pipeline work before shipping.
+
+### WR-A7 · Relative forecast error (benchmark against naive baseline)
+- **Source:** R2 (GJO Brier-relative pattern)
+- **Priority:** MED · **Effort:** 45 min · **Depends on:** WR-D1
+- **Data:** forecast-data.json weekly actuals + predictions_history — sufficient.
+- **Status:** open-R2
+
+### WR-A8 · Event annotations on trend chart
+- **Source:** R2 (Polymarket context-overlay critique)
+- **Priority:** HIGH · **Effort:** 1h (+ pipeline work for structured events)
+- **Data audit:** `callout.external_factors` is list of `{text, important}` objects (5 items for US/W17). **Prose only — no structured `{week, label, kind}` triples.** Pinning to specific weeks would require either parsing week references out of prose (fragile) or extending `refresh-callouts.py` to emit structured events. **Gated on callout-pipeline schema extension.**
+- **Status:** open-R2 (partially gated)
+
+### WR-A9 · Forecast aging visualization (prediction trajectory per week)
+- **Source:** R2 (GJO daily-Brier pattern)
+- **Priority:** LOW · **Effort:** 2h + backend
+- **Data audit:** `predictions_history[market][wk].regs.n_preds = 1` for all current rows; `first_date == latest_date`. **The week-by-week forecast evolution Local Kiro proposed isn't supported today.** Needs `predictions_history[market][wk]` to become an array of `{date, pred}` snapshots or a separate `prediction_snapshots` table. **Gated on forecast pipeline extension — correctly flagged by Local Kiro.**
+- **Status:** open-R2 (gated — schema work required)
+
+### WR-A10 · Scrub-the-chart interaction (cross-page lens)
+- **Source:** R2 (Robinhood Advanced Charts)
+- **Priority:** HIGH · **Effort:** 2h · **Depends on:** WR-D2, WR-D3, WR-D5
+- **Approach:** hovering a chart week swaps KPI row / three-question cards / variance table / callout headline to that week's values. Release → return to selected week. Structural unlock — page becomes an interactive lens instead of a static view. Highest demo value per Local Kiro.
+- **Data:** all callout weeks present in CALLOUTS.callouts[market]; no backend work needed.
+- **Status:** open-R2
+
+### WR-A11 · Specialized layouts per market archetype
+- **Source:** R2 (Polymarket specialized-interface critique)
+- **Priority:** MED · **Effort:** 1.5h · **Depends on:** WR-D1, WR-C6
+- **Approach:** JP/AU show spend-discipline scorecard (YTD spend vs OP2 spend, CPC trends) instead of regs forecast hit rate. Three market archetypes: regs-and-efficiency (US/EU5/CA/MX), spend-only (JP/AU), rollups (WW/EU5).
+- **Status:** open-R2
+
+### WR-B5 · Cross-market accuracy leaderboard strip
+- **Source:** R2 (GJO challenge-style leaderboard)
+- **Priority:** MED · **Effort:** 1h · **Depends on:** WR-D1
+- **Data audit:** predictions_history covers all 12 markets — **fully implementable now.**
+- **Approach:** compact horizontal strip above market tabs showing each market's 6-week in-CI rate. Green ≥80%, red ≤50%. Answers "can I trust this market's projection?" in one glance for Kate.
+- **Status:** open-R2 (ready to ship)
+
+### WR-B6 · Period-state background tint on callout card
+- **Source:** R2 (Robinhood color-state semantics)
+- **Priority:** LOW · **Effort:** 20 min + pipeline
+- **Data audit:** `callout.period` is plain text range ('Apr 19–25') — **no structured state flag.** Q-close / holiday / refit / normal distinction would need pipeline to emit something like `period_state: 'q_close' | 'holiday' | 'refit' | 'normal'`. **Gated on pipeline.**
+- **Status:** open-R2 (gated)
+
+### WR-C3 · Progressive disclosure — collapse secondary panels by default
+- **Source:** R2 (Polymarket mobile-first principle)
+- **Priority:** MED · **Effort:** 30 min · **Depends on:** R1 verified clean
+- **Approach:** wrap Brand+NB cards behind "Channel detail" disclosure, wrap Context+Drivers+Stakeholders behind "Context" disclosure. Cold-load shows thread → narrative → 3Q → KPIs → 2 charts → variance only — the full WBR arc on one screen.
+- **Status:** open-R2
+
+### R2 recommended ship order (from Local Kiro)
+1. WR-A10 scrub-the-chart (HIGH, 2h) — structural unlock
+2. WR-A8 event annotations (HIGH, 1h + pipeline for structured events)
+3. WR-C3 progressive disclosure (MED, 30 min)
+4. WR-A7 relative error (MED, 45 min)
+5. WR-A11 specialized layouts (MED, 1.5h)
+6. WR-B5 accuracy leaderboard (MED, 1h — ready-to-ship, ungated)
+7. WR-B6 period-state tint (LOW, 20 min + pipeline)
+8. WR-A9 forecast aging (LOW, 2h + schema work — gated)
+
+**Ready-to-ship without backend work (priority order):**
+A10 → A7 → C3 → A11 → B5 → none-of-the-three-gated
+
+**Gated on pipeline work:** A8 (structured events), A9 (prediction snapshots), B6 (period state flag).
+
+---
+
+## R1 verification probe (2026-04-28)
+
+Static structural analysis written to
+`~/shared/context/intake/weekly-review-r1-live-probe.txt`. 19/19 R1 findings
+pass static checks (1 verification-only for WR-B3 confirmed in canon-chart.js).
+Live browser probe pending — Local Kiro's chrome-devtools-mcp lock on
+Richard's Windows side, not clearable from DevSpaces. Static analysis covers
+15 of 19 checklist items directly; the other 4 (scrollHeight, viewport,
+`getBoundingClientRect` positions, distinct computed font-sizes) need a real
+browser.
+
+**One follow-up commit triggered by probe:** `2e14a8d` WR-B2 follow-through
+swapped the last literal `24px` (`.wr-score-value` from WR-D1 scorecard)
+to `var(--size-section)`. Zero literal-px font-sizes remain in
+weekly-review.html.
