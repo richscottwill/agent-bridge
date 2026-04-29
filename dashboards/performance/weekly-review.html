@@ -471,7 +471,9 @@ body {
 <div class="wr-grid" id="calloutGrid">
   <div class="wr-grid-full wr-empty">Loading&hellip;</div>
 </div>
-<div class="wr-ts" id="genTs"></div>
+<!-- WR-C2 (2026-04-28): removed #genTs footer timestamp — page-render
+     time is always "now" and wasn't useful. Single data-freshness
+     timestamp lives in the header #dataTs. -->
 
 </div> <!-- /.wr-frame -->
 
@@ -549,10 +551,14 @@ function init() {
     metricTabs.appendChild(b);
   });
 
+  // WR-C2: single data-freshness timestamp in the header. Sharpens the
+  // format to "Data as of Sun Apr 27 · Forecast through W17" so the reader
+  // can tell at a glance whether the page is fresh or stale.
+  const calloutDate = new Date(CALLOUTS.generated || Date.now());
+  const weekday = calloutDate.toLocaleDateString('en-US', { weekday: 'short' });
+  const monthDay = calloutDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   document.getElementById('dataTs').textContent =
-    'Callouts: ' + new Date(CALLOUTS.generated || Date.now()).toLocaleDateString() +
-    ' \u00b7 Forecast through: ' + (FORECAST.last_data_date || 'W' + FORECAST.max_week);
-  document.getElementById('genTs').textContent = 'Generated: ' + new Date().toLocaleString();
+    `Data as of ${weekday} ${monthDay} \u00b7 Forecast through ${FORECAST.last_data_date || 'W' + FORECAST.max_week}`;
 
   render();
 }
