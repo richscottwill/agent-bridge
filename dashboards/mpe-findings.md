@@ -451,9 +451,30 @@ The earlier "Phase 4 palette consolidation 41→14 tokens" and "type scale 13→
 
 ---
 
+## Phase 5 — R19 review (Local Kiro, 2026-04-28)
+
+Local Kiro ran a research-grounded teardown of the feature-complete dashboard
+after the Chart.js swap and MX 75% target landed. Mockup:
+`~/shared/context/intake/mpe-proposed-changes-mockup.html` (13 proposals with
+before/after + code + acceptance). Richard directive: "go forward with all".
+
+Ship order follows Local Kiro's compounding-effect sequencing — structural
+cleanup first, then typography, then features, then deferred items last.
+
+### P5-13 · Whitespace cleanup — 545px dead gap under chart
+- **Source:** R19 #13 (HIGH)
+- **Status:** done
+- **Verification:** Closed `<details class="sec-panel">` panels (Decomposition, Backtest) now use `padding-top/bottom: var(--gap-sm)` instead of the default large padding; stacked closed panels pack tight via `:not([open]) + details.sec-panel { margin-top: var(--gap-sm) }`. Feedback-bar reserves zero top margin when hidden; `.visible` class (added by `maybeShowFeedbackBar` when projection count ≥ 3) promotes it back. Total page height drops substantially — closed-default layout no longer reserves ~545px below the chart or ~149px for the hidden feedback bar.
+- **Verification method:** cold-load `/projection.html` → `document.documentElement.scrollHeight` before (~2,808px) vs after (measured post-load).
+- **Blast radius:** CSS inside projection.html + 3 lines of JS in `maybeShowFeedbackBar`. No market-specific behavior. No data changes. No state changes.
+- **Commit:** <filled after commit>
+
+---
+
+
 ## Order of work
 
 Execute top-to-bottom within each phase. When a finding is blocked, mark the
 reason in-place and move to the next. Never silently skip.
 
-**Current next-up:** Phase 1 Track A complete. Moving to Phase 2 / Phase 3. Next: P2-06 WoW delta on KPI tiles, P2-11 CSV export, P2-14 directional color on OP2, remaining Phase 3 polish.
+**Current next-up:** Phase 5 R19 items — 13 findings queued, executing in Local Kiro's compounding-effect order.

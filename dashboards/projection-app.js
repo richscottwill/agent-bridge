@@ -2836,7 +2836,13 @@
     const n = parseInt(sessionStorage.getItem(PROJECTION_COUNT_KEY) || '0', 10);
     const bar = document.getElementById('feedback-bar');
     if (!bar) return;
-    if (n >= 3) bar.style.display = '';
+    if (n >= 3) {
+      // #13 whitespace cleanup — use .visible class so the CSS-side
+      // `display/margin-top: 0` guard for the hidden state doesn't reserve
+      // ~149px of layout space when the bar isn't shown.
+      bar.classList.add('visible');
+      bar.style.display = '';
+    }
   }
 
   function wireFeedbackBar() {

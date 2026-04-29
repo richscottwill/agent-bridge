@@ -113,6 +113,24 @@
 .sec-panel li:last-child { border-bottom: none; }
 .sec-panel li.warn { color: var(--color-warning); }
 .sec-panel li.danger { color: var(--color-danger); }
+
+/* #13 Whitespace cleanup (2026-04-28) — closed <details> panels reserved
+   ~545px of vertical space under the chart because their wrapper padding +
+   gap-lg margin apply regardless of open/closed state. Pack them tighter
+   when closed so the "Decomposition" and "Backtest" summaries stay compact
+   and the contribution panel rises back into the first viewport. */
+details.sec-panel:not([open]) {
+  padding-top: var(--gap-sm);
+  padding-bottom: var(--gap-sm);
+}
+details.sec-panel:not([open]) + details.sec-panel {
+  margin-top: var(--gap-sm) !important;
+}
+/* Feedback bar is hidden until the 3rd projection in session. Its inline
+   margin-top was reserving a ~149px gap even when display:none. Scope the
+   top margin to the .visible variant so a hidden bar doesn't push layout. */
+#feedback-bar { margin-top: 0 !important; }
+#feedback-bar.visible { margin-top: var(--gap-lg) !important; display: block !important; }
 .sec-panel table { width: 100%; font-size: 12px; border-collapse: collapse; }
 .sec-panel th {
   text-align: left;
