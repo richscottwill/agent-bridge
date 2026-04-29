@@ -26,15 +26,18 @@
   // Manifest location relative to current page. Pages at dashboard root use
   // ./data/...; pages in subfolders use ../data/... The script auto-detects.
   function resolveManifestPath() {
+    // WR-B1-3 (2026-04-29): original impl derived depth from a
+    // `/dashboards/` URL substring, but the localhost:8080 server roots
+    // at `~/shared/dashboards/` so URLs never contain that literal
+    // prefix. Regex missed → depth=0 → page-relative `data/` → 404 on
+    // `/performance/data/section-freshness.json`. Use pathname segment
+    // count instead: `/performance/weekly-review.html` → 2 segments →
+    // depth=1 → prefix `../data/` → correctly resolves to `/data/...`.
     var pathname = window.location.pathname;
-    // Count directory depth from /shared/dashboards/
-    var depth = 0;
-    var m = pathname.match(/\/dashboards\/(.+)$/);
-    if (m) {
-      var rest = m[1];
-      // Count slashes in the path after dashboards/ to find nesting
-      depth = (rest.match(/\//g) || []).length;
-    }
+    var parts = pathname.split('/').filter(Boolean);
+    // Last segment is the filename (or empty for directory URLs); prior
+    // segments are directories. Depth = number of parent dirs above root.
+    var depth = Math.max(0, parts.length - 1);
     var prefix = depth === 0 ? 'data/' : '../'.repeat(depth) + 'data/';
     return prefix + 'section-freshness.json';
   }
