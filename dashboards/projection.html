@@ -441,9 +441,13 @@ details.sec-panel:not([open]) + details.sec-panel {
     </div>
   </div>
 
-  <!-- Anomalies panel (Phase 4.1 + 6.5.3) — per-market scanner findings -->
+  <!-- Anomalies panel (Phase 4.1 + 6.5.3) — per-market scanner findings.
+       P5-2 (2026-04-28): renamed from "Model alerts" to "Alerts" and now
+       merges solver warnings in as info-severity rows. The legacy
+       standalone "Warnings" sec-panel below is hidden by renderWarnings
+       on first render. -->
   <div class="sec-panel" id="anomalies-panel" style="display:none;margin-top:var(--gap-lg);border-color:#F2A4A4">
-    <h3>Model alerts <span id="anomalies-count" style="font-weight:400;color:var(--color-text-subtle)"></span></h3>
+    <h3>Alerts <span id="anomalies-count" style="font-weight:400;color:var(--color-text-subtle)"></span></h3>
     <ul id="anomalies-list"></ul>
   </div>
 

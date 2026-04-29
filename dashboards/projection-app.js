@@ -168,19 +168,48 @@
     };
   }
 
-  function renderMarketAnomalies(marketCode) {
+  // P5-2 (2026-04-28): Renamed concept from "Model alerts + Warnings" two
+  // panels → single "Alerts" stream. Anomalies keep their original severity
+  // (error / warn / info); solver warnings are surfaced as info-level rows
+  // beneath anomalies. Ordering is critical → warning → info. One scan,
+  // one mental model.
+  function renderMarketAnomalies(marketCode, out) {
     const panel = document.getElementById('anomalies-panel');
     const list = document.getElementById('anomalies-list');
     const cnt = document.getElementById('anomalies-count');
-    const items = STATE.data?.anomalies?.markets?.[marketCode] || [];
-    if (!items.length) {
+    const anomItems = STATE.data?.anomalies?.markets?.[marketCode] || [];
+    const warnings  = (out && Array.isArray(out.warnings)) ? out.warnings : [];
+    // Build a unified severity-ranked list.
+    const SEV_RANK = { error: 0, critical: 0, warn: 1, warning: 1, info: 2 };
+    const rows = [];
+    for (const a of anomItems) {
+      rows.push({
+        kind: 'anomaly',
+        severity: a.severity === 'error' ? 'error' : a.severity === 'warn' ? 'warn' : 'info',
+        check: a.check,
+        detail: a.detail,
+        remediation: a.remediation,
+      });
+    }
+    for (const w of warnings) {
+      const sev = (w.startsWith('TARGET_UNREACHABLE') || w.startsWith('LOCKED_YTD')) ? 'error'
+                : (w.startsWith('VERY_WIDE_CI') || w.startsWith('OUTSIDE_TOLERANCE')) ? 'warn'
+                : 'info';
+      rows.push({
+        kind: 'warning',
+        severity: sev,
+        raw: w,
+      });
+    }
+    if (!rows.length) {
       panel.style.display = 'none';
       list.innerHTML = '';
       cnt.textContent = '';
       return;
     }
+    rows.sort((a, b) => (SEV_RANK[a.severity] ?? 9) - (SEV_RANK[b.severity] ?? 9));
     panel.style.display = '';
-    cnt.textContent = `(${items.length})`;
+    cnt.textContent = `(${rows.length})`;
     // Plain-language check names — map the raw check keys to sentence labels.
     // Round 6 V6-3: the translation table existed but wasn't being consulted
     // here. Anomaly items use a `check` field (fit_r2_drop, op2_pacing_divergence,
@@ -203,22 +232,30 @@
         .replace(/v1\.1 Slim /g, '')
         .replace(/\br²\b/g, 'fit quality');
     }
-    list.innerHTML = items.map(a => {
-      const sevColor = a.severity === 'error' ? 'var(--color-danger)'
-                     : a.severity === 'warn'  ? 'var(--color-warning)'
+    list.innerHTML = rows.map(r => {
+      const sevColor = r.severity === 'error' ? 'var(--color-danger)'
+                     : r.severity === 'warn'  ? 'var(--color-warning)'
                      : 'var(--color-text-meta)';
-      const sevWord = a.severity === 'error' ? 'Error'
-                    : a.severity === 'warn'  ? 'Warning'
+      const sevWord = r.severity === 'error' ? 'Error'
+                    : r.severity === 'warn'  ? 'Warning'
                     : 'Info';
-      const label = CHECK_LABELS[a.check] || (a.check || '').replace(/_/g, ' ');
-      const detail = translateDetail(a.detail);
-      const remediation = a.remediation
-        ? `<div style="font-size:11px;color:var(--color-text-meta);margin-top:2px">→ ${translateDetail(a.remediation)}</div>`
-        : '';
-      return `<li class="anomaly-item" style="padding:6px 4px;border-radius:3px">
+      if (r.kind === 'anomaly') {
+        const label = CHECK_LABELS[r.check] || (r.check || '').replace(/_/g, ' ');
+        const detail = translateDetail(r.detail);
+        const remediation = r.remediation
+          ? `<div style="font-size:11px;color:var(--color-text-meta);margin-top:2px">→ ${translateDetail(r.remediation)}</div>`
+          : '';
+        return `<li class="anomaly-item" style="padding:6px 4px;border-radius:3px">
+          <span style="display:inline-block;min-width:60px;color:${sevColor};font-weight:600;font-size:11px;text-transform:uppercase">${sevWord}</span>
+          <b>${label}</b> — ${detail}
+          ${remediation}
+        </li>`;
+      }
+      // warning
+      const phrase = translateWarning(r.raw);
+      return `<li class="anomaly-item" style="padding:6px 4px;border-radius:3px" title="${r.raw.replace(/"/g, '&quot;')}">
         <span style="display:inline-block;min-width:60px;color:${sevColor};font-weight:600;font-size:11px;text-transform:uppercase">${sevWord}</span>
-        <b>${label}</b> — ${detail}
-        ${remediation}
+        <b>${phrase}</b>
       </li>`;
     }).join('');
   }
@@ -996,7 +1033,7 @@
     renderYtdWallBanner(out);
     renderDrawer(out, marketData);
     renderNarrativeStandard();   // always-visible narrative at bottom
-    renderMarketAnomalies(currentScope());
+    renderMarketAnomalies(currentScope(), out);
     updateHeaderMeta();
     // P2-04 + P2-05 — only render on single-market view; skip for regional
     // rollups where decomposition + backtest don't have a clean data source.
@@ -1602,25 +1639,22 @@
   // Warnings panel
   // ========================================================================
 
-  function renderWarnings(out) {
+  // P5-2 (2026-04-28): Warnings are now rendered inline in the merged
+  // Alerts stream by renderMarketAnomalies. This function retained as a
+  // no-op shim so existing callers don't break; hides the legacy
+  // standalone Warnings section panel on first call.
+  function renderWarnings(/* out */) {
     const ul = document.getElementById('warnings-list');
+    if (ul) {
+      // Preserve a minimal placeholder so if some code path queries the
+      // list it still gets a DOM node, but the wrapping sec-panel is
+      // hidden so the old Warnings card disappears from the page.
+      ul.innerHTML = '';
+      const sec = ul.closest('.sec-panel');
+      if (sec) sec.style.display = 'none';
+    }
     const cnt = document.getElementById('warnings-count');
-    ul.innerHTML = '';
-    const ws = out.warnings || [];
-    if (ws.length === 0) {
-      ul.innerHTML = '<li style="color:var(--color-text-subtle)">No warnings.</li>';
-      cnt.textContent = '';
-      return;
-    }
-    cnt.textContent = `${ws.length}`;
-    for (const w of ws) {
-      const li = document.createElement('li');
-      if (w.startsWith('TARGET_UNREACHABLE') || w.startsWith('LOCKED_YTD')) li.className = 'danger';
-      else if (w.startsWith('VERY_WIDE_CI') || w.startsWith('OUTSIDE_TOLERANCE')) li.className = 'warn';
-      li.textContent = translateWarning(w);
-      li.title = w; // keep the raw code as a tooltip for debugging
-      ul.appendChild(li);
-    }
+    if (cnt) cnt.textContent = '';
   }
 
   // ========================================================================

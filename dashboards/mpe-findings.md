@@ -504,6 +504,13 @@ cleanup first, then typography, then features, then deferred items last.
 - **Verification:** One `.hero-kpi.kpi-op2-combined` tile replaces the two prior tiles. Label reads `vs OP2 Plan`. Two sub-rows (`Spend` + `Regs`) each carry a value, directional-colored +/- pts-vs-plan delta, and preserve P2-14's arrow semantics (over-spend bad = red ↑, over-deliver good = green ↑). Third sub-line below the rows: `Efficiency gain: CPA −15% vs plan` or `Efficiency loss: CPA +7% vs plan` computed from `plan_cpa = op2_spend/op2_regs` vs `projected_cpa = blended_cpa`.
 - **KPI row count:** drops by 1 (from 6 tiles to 5). No signal loss — both sub-metrics preserved. Empty-state clean (tile hides deltas when OP2 targets absent).
 - **Blast radius:** projection.html (two tiles merged into one), projection-app.js renderMarket (new kpi-op2-detail writeup added after regs render), projection-design-system.css (new .kpi-op2-combined block with CSS Grid two-row layout). P2-14 directional color arrow logic unchanged — same IDs populated the same way.
+- **Commit:** `975e6a3`
+
+### P5-2 · Merge Warnings panel into Model Alerts (one Alerts stream)
+- **Source:** R19 #2 (MEDIUM)
+- **Status:** done
+- **Verification:** Single `Alerts (N)` heading (was `Model alerts (N)`) renders anomalies + solver warnings ordered by severity (error → warn → info). Solver warnings surface as info-level rows; TARGET_UNREACHABLE and LOCKED_YTD escalate to error, VERY_WIDE_CI and OUTSIDE_TOLERANCE to warn. The old standalone `Warnings` sec-panel is hidden by `renderWarnings` (now a no-op shim that collapses the wrapper card). Severity label + pill color preserved from P3-01 CHECK_LABELS translation so the voice stays readable.
+- **Blast radius:** `renderMarketAnomalies` signature extended to accept `out`; call site in `renderMarket` passes through. `renderWarnings` downgraded to shim. HTML heading "Model alerts" → "Alerts". No data shape / solver / chart changes. Summary strip at the top still links to `#anomalies-panel` which now covers both streams.
 - **Commit:** <filled after commit>
 ---
 
