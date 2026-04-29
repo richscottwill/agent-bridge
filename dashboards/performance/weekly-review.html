@@ -122,6 +122,46 @@
   padding: var(--gap-sm) 0;
 }
 
+/* WR-D7 (2026-04-28): prior-week thread strip — 3-card horizontal strip
+   above the callout narrative. Current + 2 prior weeks at a glance.
+   Active week highlighted with brand-blue border + tint. */
+.wr-thread-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-sm);
+  margin-bottom: var(--gap-md);
+}
+@media (max-width: 900px) { .wr-thread-strip { grid-template-columns: 1fr; } }
+.wr-thread-card {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 6px;
+  padding: var(--gap-sm) var(--gap-md);
+  font-size: var(--size-ui);
+  color: var(--color-text-body);
+  cursor: pointer;
+  transition: border-color 120ms ease, background-color 120ms ease;
+  font-variant-numeric: tabular-nums;
+}
+.wr-thread-card:hover {
+  border-color: var(--color-brand);
+}
+.wr-thread-card.active {
+  border-color: var(--color-brand);
+  background: rgba(0, 102, 204, 0.06);
+}
+.wr-thread-card .wr-thread-wk {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.wr-thread-card .wr-thread-body {
+  line-height: 1.5;
+}
+
 /* WR-D1 (2026-04-28): Forecast Hit Rate scorecard — 3 tiles + one-line
    auto-narrative summarizing the model's grade against last N weeks of
    actuals. The differentiation organ: this is the one thing weekly review
@@ -647,6 +687,11 @@ body {
 <!-- WR-D3 callout narrative (top) -->
 <div id="calloutNarrative"></div>
 
+<!-- WR-D7 (2026-04-28): prior-week thread strip. Current + 2 prior weeks
+     as a 3-card strip so the reader has running context without
+     clicking back. Active week highlighted with brand-blue border. -->
+<div class="wr-thread-strip" id="threadStrip" style="display:none"></div>
+
 <!-- WR-D5 (2026-04-28): three-question framing below the narrative.
      Customer experience / Business performance / Pacing to target.
      Content derived from callout.metrics + brand_detail + nb_detail +
@@ -969,6 +1014,7 @@ function render() {
   document.getElementById('nextWeek').disabled = weeks.indexOf(curWeek) <= 0;
 
   renderCallout();
+  renderThread();
   renderThreeQ();
   renderVariance();
   renderScorecard();
@@ -1142,6 +1188,63 @@ function renderThreeQ() {
   document.getElementById('qCustomer').textContent = qCustomer;
   document.getElementById('qBusiness').textContent = qBusiness;
   document.getElementById('qPacing').textContent   = qPacing;
+}
+
+// WR-D7 Prior-week thread — 3-card strip above the callout narrative.
+// Current + 2 prior weeks of metrics so the reader enters each week's
+// narrative with context on the two preceding it. Clicking a card
+// switches to that week (re-renders the whole page).
+function renderThread() {
+  const host = document.getElementById('threadStrip');
+  if (!host) return;
+  const weeks = CALLOUTS.weeks || [];
+  const idx = weeks.indexOf(curWeek);
+  if (idx < 0) { host.style.display = 'none'; host.innerHTML = ''; return; }
+  // Weeks array is newest-first, so the current week's preceding weeks
+  // are at higher indices. Show current + up to 2 prior.
+  const window = [];
+  for (let i = idx; i < Math.min(weeks.length, idx + 3); i++) {
+    window.push(weeks[i]);
+  }
+  window.reverse();  // render oldest → newest so the eye reads the trend
+  const cards = window.map(wk => {
+    const c = (CALLOUTS.callouts[curMarket] || {})[wk];
+    if (!c) return '';
+    const m = c.metrics || {};
+    const active = wk === curWeek;
+    const regsStr = Number.isFinite(m.regs)
+      ? (m.regs >= 1000 ? (m.regs / 1000).toFixed(1) + 'K' : String(Math.round(m.regs)))
+      : '\u2014';
+    const wowTag = Number.isFinite(m.regs_wow)
+      ? `<span class="wr-delta ${m.regs_wow > 0.5 ? 'good' : (m.regs_wow < -0.5 ? 'bad' : 'warn')}">${m.regs_wow > 0 ? '+' : ''}${m.regs_wow.toFixed(0)}%</span>`
+      : '';
+    const cpaStr = Number.isFinite(m.cpa) ? '$' + Math.round(m.cpa) : '\u2014';
+    const brandStr = Number.isFinite(m.brand_regs)
+      ? (m.brand_regs >= 1000 ? (m.brand_regs / 1000).toFixed(1) + 'K' : String(Math.round(m.brand_regs)))
+      : '\u2014';
+    const nbStr = Number.isFinite(m.nb_regs)
+      ? (m.nb_regs >= 1000 ? (m.nb_regs / 1000).toFixed(1) + 'K' : String(Math.round(m.nb_regs)))
+      : '\u2014';
+    return `<div class="wr-thread-card${active ? ' active' : ''}" data-wk="${wk}">
+      <div class="wr-thread-wk">${wk}${active ? ' &middot; current' : ''}</div>
+      <div class="wr-thread-body">${regsStr} regs ${wowTag} &middot; CPA ${cpaStr} &middot; Brand ${brandStr} / NB ${nbStr}</div>
+    </div>`;
+  }).filter(Boolean).join('');
+  if (!cards) { host.style.display = 'none'; host.innerHTML = ''; return; }
+  host.style.display = '';
+  host.innerHTML = cards;
+  // Wire clicks — switching week triggers render()
+  host.querySelectorAll('.wr-thread-card').forEach(el => {
+    el.onclick = () => {
+      const wk = el.dataset.wk;
+      if (wk && wk !== curWeek) {
+        curWeek = wk;
+        const sel = document.getElementById('weekSelect');
+        if (sel) sel.value = wk;
+        render();
+      }
+    };
+  });
 }
 
 // WR-D6 Variance decomposition — waterfall table of WoW contribution.
