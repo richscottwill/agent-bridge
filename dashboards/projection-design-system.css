@@ -29,8 +29,8 @@
   --color-neutral-bg: #FFFFFF;
   --color-panel-bg: #FAFAFA;
   --color-panel-border: #E0E0E0;
-  --color-text-hero: #0A0A0A;
-  --color-text-body: #1A1A1A;
+  --color-text-hero: #0F1111;      /* P4-01 (minimal): #0A0A0A → #0F1111, AB.com aligned */
+  --color-text-body: #161D26;      /* P4-01 (minimal): #1A1A1A → #161D26, AB.com aligned */
   --color-text-meta: #6B6B6B;
   --color-text-subtle: #9A9A9A;
   --color-text-on-brand: #FFFFFF;
