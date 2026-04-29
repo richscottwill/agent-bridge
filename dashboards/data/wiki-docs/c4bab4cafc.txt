@@ -1,0 +1,19 @@
+# DE — W17 (Apr 19–25)
+
+DE drove 1.5K registrations (+3% WoW), with +6% spend WoW. CPA $137. Apr is projected to end at $728K spend and 6.0K registrations, and $122 CPA. (vs. OP2: +20% spend, +4% registrations)
+WoW registrations increased on both Brand (+5%) and NB (+2%), driven by CVR increases on both sides (+3% Brand, -3% NB).
+YoY we spent +34% with +58% registrations. NB regs +80% YoY. Brand regs +42% YoY. NB CPA -17% YoY ($256 vs $213).
+
+Note: W17 WoW last year was -5% regs.
+
+---
+
+Weekly trend (regs): W10: 1383 | W11: 1485 | W12: 1190 | W13: 622 | W14: 1279 | W15: 1187 | W16: 1495 | W17: 1541
+
+Flagged anomalies:
+- regs above recent avg by 25%
+- cost above recent avg by 49%
+- nb regs above recent avg by 38%
+- cpc above recent avg by 20%
+
+Daily: Sun 202, Mon 280, Tue 227, Wed 293, Thu 225, Fri 196, Sat 118

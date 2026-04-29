@@ -1,0 +1,16 @@
+# UK — W17 (Apr 19–25)
+
+UK drove 1.6K registrations (+1% WoW), with -4% spend WoW. CPA decreased to $74 (-5% WoW). Apr is projected to end at $467K spend and 6.6K registrations, and $71 CPA. (vs. OP2: +17% spend, +47% registrations)
+On the NB side, registrations fell -2% (1126 to 1101), CVR +6%, clicks -8%. On the Brand side, registrations increased +9% (478 to 522), CVR +6%.
+YoY we spent +180% with +172% registrations. NB regs +351% YoY. Brand regs +48% YoY. NB CPA -12% YoY ($80 vs $70).
+
+Note: W17 WoW last year was +5% regs.
+
+---
+
+Weekly trend (regs): W10: 1380 | W11: 1342 | W12: 1316 | W13: 1470 | W14: 1440 | W15: 1415 | W16: 1604 | W17: 1623
+
+Flagged anomalies:
+- cost above recent avg by 27%
+
+Daily: Sun 211, Mon 314, Tue 267, Wed 282, Thu 204, Fri 182, Sat 163

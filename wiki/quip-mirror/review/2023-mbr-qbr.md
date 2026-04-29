@@ -1,0 +1,190 @@
+---
+status: FINAL
+audience: amazon-internal
+owner: Richard Williams
+created: 2026-04-28
+updated: 2026-04-28
+title: "2023 Paid Acq MBR / QBR"
+topics: [review, mbr, qbr, reporting]
+---
+
+# 2023 Paid Search MBR / QBR
+
+Projects for Highlight/Lowlight: RSA QS (9/7 launch), Adobe bidding, PMax test (launched 9/20)
+
+Upcoming Docs:
+
+* [Mauro, Aug] SSR MBR: [**here**](https://share.amazon.com/sites/ABSSR/_layouts/15/WopiFrame.aspx?sourcedoc=%7b897D5FB2-735C-4B3B-AFE1-21079F61CD8D%7d&file=2023%20WW%20ACQ%20SSR%20MBR%20Aug.docx&action=default) |  9/22 Highlights, PTG, ieCCP FAQ
+* [Lucy N, Q3] Marketing QBR: [SharePoint](https://share.amazon.com/sites/amazon-business-marketing/Shared%20Documents/Forms/AllItems.aspx?RootFolder=%2Fsites%2Famazon%2Dbusiness%2Dmarketing%2FShared%20Documents%2FQBRs%2F2023%20QBRs%2FQ3%2723&FolderCTID=0x0120001FB22FCF2CF7924CB51C27FCDD2F7420&View=%7B93CCC5AC%2D2888%2D41B3%2D9FC3%2DE7E1E1883A9E%7D) | 9/25 p.0 / Highlights
+
+## 2023 Budget Estimates
+
+**10/12/23: Sent “at risk” (potential underspend) budget to Finance** 
+
+Note that October is a very critical period as we’ve set extremely high goals. Once we have more data for this month, we should have much more accurate forecasts through EOY. We would like to revisit this EO Oct/early Nov as well to refine the totals.
+ 
+In the estimates below, we expect implementation of new ieCCP thresholds starting Nov 1.
+
+1. Budget ‘At Risk’ of  underspend : 
+    1. US: To explain the  underspend below, this is largely due to a soft Q1/Q2 where we were set  back -$7M in spend. 2023 initiated a US iE%CCP goal, and while we hit reg  goals, costs were less than anticipated. Moving into Q2 we implemented  the incrementality test, where ads were reduced to 30% run rate.
+
+        * 50%: $(10,362,664) yr total potential underspend | Q4 Spend: $8,428,840
+        * 65%: $(8,448,664) yr total potential underspend | Q4 Spend: $10,342,840
+        * 75%: $(6,869,464) yr total potential underspend | Q4 Spend: $11,922,040
+
+    1. EU: We received an  additional $857k which cannot be fully invested within 50% given drop in  CCP
+        1. 50%: ($842,814) yr total potential underspend | Q4 Spend: $6,938,595
+        2. 65%:  ($291,682) yr total potential underspend | Q4 Spend: $7,489,726
+1. Risks: Risk is present  if CCP continues to decline below current values, and CPA increases due to  continually heightened competition. We have seen a decline in CCP vs  expectations ($200 vs $150 US), additionally, CPCs have increased WW (+36%  Q3 vs Q1). An increase in CPCs is expected, however, it has been  accelerated due to entry of Temu as a Search advertiser & increase of  WalMart presence. These CPC increases inflate overall CPA by restricting  the number of efficient registrations that can be acquired. 
+
+
+
+## Q3 QBR - SSR Acq
+
+[SSR Acq Doc](https://share.amazon.com/sites/ABSSR/_layouts/15/WopiFrame.aspx?sourcedoc=%7bA3318CB1-3E9D-469D-A311-C1465C5FDD9A%7d&file=2023%20WW%20ACQ%20SSR%20Q3%20QBR.docx&action=default) | Subj: [Inputs Needed ETA 10/12] Acquisition Q3 QBR Kickoff
+
+
+### Spotlight - ieCCP draft:
+
+*Note this wasn’t published and instead an offline conversation with Fernando occurred ~10/24*
+US began optimizing toward iE%CCP Jan 2023, with an initial goal of 50%. Through Q1, registration goals were met, but budget underpaced ~$1.3M/mo. Beginning Jun, the iE%CCP cap was lifted to 75% to saturate total opportunity and understand impact between efficiency thresholds. Throughout testing, 14.5k incremental registrations were captured at an increased cost of 38%. The lift in registrations is solely driven by Nonbrand as limited Branded volume is completely saturated due to enhanced efficiencies which offset NonBrand inefficiencies. As a function of CPA/CCP, the iE%CCP window tightened substantially due to the increased composition of Nonbrand registrations; CCP is reduced (NB CCP -34% vs Brand), and CPA is increased (NB CPA 3x vs Brand). Additionally, during the testing period we experienced a reduction in Branded interest of X/week. Though this was not a repercussion of the test itself, it further served to restrict acquisition as fewer NB registrations were offset by lower Brand reg costs. In normalizing Branded interest, the annualized impact at 75% iE%CCP is +109k (+34% vs reg driven at 50% iE%CCP) annual incremental registrations. This accounts for an additional $281M 3yr OPS, however, the increased CPA reduces Net CCP profitability -$11.8M. The largest benefit of the 75% iE%CCP approach is additional registrations which provides greater opportunity for outreach. Through enhanced outreach via activation and engagement channels, there is opportunity to improve NB CCP via increased activation rates (30% Brand vs 40% NB, Aug) and revenue ($2k Brand vs $700 NB OPS). Alternately, a hybrid approach is recommended to balance profitability and incremental registrations through testing at 65% iE%CCP. This approach is expected to provide incrementality of +65k registrations and -5.8M Net CCP ($21.6 total Net CCP), and will be discussed in further detail during the next R&O (Oct 30, TBC) to determine Q4 and 2024 OP2 approach.
+ 
+Separately, there are additional challenges in attempting to optimize to iE%CCP. iE%CCP is actualized once monthly, ~12 days following EOM. This requires optimization toward a static, estimated CCP value throughout the month which is composed based on historical trends and recent CCP actuals. However, CCP can alter drastically compared to the static values used; seen in Jun with CCP -21% actual vs static. This creates a disconnect between the WBR designated iE%CCP (based on static values) and actualized iE%CCP as reported within the MBR/QBR. Additionally, 
+
+*Explanation of challenges with current process (ie. static CCP, reseller designation reduction, etc)*
+
+*US began optimizing toward iE%CCP Jan 2023, with an initial goal of 50%. Beginning Jun, the iE%CCP cap was lifted to 75% to saturate total opportunity and understand impact between efficiency thresholds. Throughout testing, 14.5k incremental registrations were captured at an increased cost of 46%. The lift in registrations is solely driven by Nonbrand as Branded volume is completely saturated.* 
+*Based on the testing data, annualized impact at 75% iE%CCP is estimated at +109k incremental registrations (+$280.9M OPS) with +$23M budget. However, the higher iE%CCP threshold reduces Net CCP profitability to $15.6M (-$11.8M vs 50% iE%CCP). Primarily, Net CCP reduction is due to an increased volume of low-CCP Non-Brand acquisitions (CCP NB $103 vs Brand $303). The largest benefit of the 75% iE%CCP approach is additional registrations and OPS which provides greater opportunity for outreach. Through enhanced outreach via activation and engagement channels, there is opportunity to improve NB CCP via increased activation rates (30% Brand vs 40% NB) and SPA ($6K Brand vs $2K NB  3yr OPS). Paid Search engagement testing and Guest XP are expected to improve CCP, however, ENG and ACT workstream specific to PS NB use cases are needed to improve activation rates and SPA. As additional cross-channel solutions are identified, reduction in iE%CCP goal is recommended. New thresholds are debated between a hybrid of volume at 65% iE%CCP (+65k registrations and $21.6M Net CCP [-$5.8M vs 50% iE%CCP]) and 50% iE%CCP. This will be discussed in further detail in a special session (Fin, Fernando, Kate R. w/c 10/23) and during the next R&O (Oct 30, TBC) to determine Q4 and 2024 OP2 approach.*
+* * *
+
+* Static CCP
+    * Actualized CCP varies by X%
+* Methodology for calculating may skew data
+    * Utilizes reg date rather than verification date 
+* Is cumulative and cannot separate testing initiatives from evergreen performance
+    * PMax may cause ~2% variance
+
+
+
+### _FAQ - ieCCP issues_: 
+
+P.0 subnote: The team identify methodological errors in the calculation of iE%CCP (i.e. The model didn’t consider all registrations of a period) which resulted in incomplete data.
+
+**FAQ 2: What is the status of the iE%CCP report? **** **The team identified mismatches on the iE%CCP reporting, where WBR data was not matching MBR/QBR data. After a dive deep, the team identified that we were not using the same methodology to identify registrations. The team will adjust the ie%CCP report in order to (1) define level of registrations based on verification date (previously utilizing registration date) and (2) ensuring that we are including all Feature designation (i.e. The feature “Paid Search SSR” was not being included). The team will provide status on the updated report by 10/30
+
+
+### Path 2 Green
+
+**_(2) Increase spend on Paid channels (Status: Yellow, Goal: 57K reg, 36.5% reached):_** Since WK22, the US Paid Search (PS) team started targeting IE%CCP at 75%. This was approached as a test to understand reg volume tradeoff vs efficiency at differing iE%CCP levels. Since utilization, overachievement of OP2 has been obtained at 29k reg with Finance Analysis proving +10% (+14.5k) incremental reg attributed to the 75% target increase. With actualized results, Goals are being reassessed. Additionally, analysis results are being discussed by leadership and may result in adjusted iE%CCP goals, further requiring reassessment of P2G goals. Additional EU budget has been allocated across Paid Search, Telemarketing, and Direct Mail. EU Paid Search was unable to utilize funding in Sep due to -18% CCP in UK which restricted growth within 50% iE%CCP thresholds. Given budget flexibility, we are aligning with stakeholders on equivalent North America iE%CCP goals to allow acquisition of incremental registrations.
+
+
+### **_Free Search Lowlight_**: 
+
+In Sept reg goal was missed by -40% vs OP2. US led the miss due to Small Business Mo running Sept 2022, but not repeated in Sept 2023. 2022 SBM drove the highest number of registrations in the year. Without continuation of the campaign, 2023 unique visitors declined -28% YoY aligned with media presence reduction and falling search demand. Additionally, reg start rate has declined -1.3% YoY, in part impacted by +1 sec site load time YoY. Initial fixes have been rolled out 10/16, with results available 10/30. Upon positive results, updates will be applied that to all components and templates.
+
+Paid Search: In Q3, Paid Search delivered 12.5k registrations (+21% OP2, +11% YoY) at $1.1MM spend. Q3 brought a stronger focus on efficiency as +23% QoQ registrations were acquired at only +5% CPA QoQ ($90 Q3 CPA). Efficiency improvements were made each month of the quarter and culminated in Sept (Jul: $103, Aug: $88, Sept: $78). Although efficiency was highly optimized, a drop in profitability of referred users (CCP $120 expected vs $86 actualized) inflated iE%CCP to X% (IE%CCP goal: 75%). We expect the efficiency enhancements to ensure iE%CCP guardrails are met throughout Q4 as we have optimized permanent changes to algorithmic bidding approach.
+
+However, a decline in CCP ($120 expected vs $86 actualized | WW avg $140) . CCP decline is due to reduction in SPA and lack of resellers registrations in July & August, which usually contributed 4% of the program OPS. Furthermore, over the last three months Paid Search iE%CCP has averaged 96% in CA, above the 75% new threshold (similar situation in US). The latter happened as the team had adjusted its manual bidding to reach the targeted iE%CCP which disrupted the balance of our machine learning algorithms and brought higher program cost per reg. The team reevaluated the management program which led to a decrease in CPA of -12% in September.
+
+Paid Search: In Q3, Paid Search delivered 12.5k registrations (+23% QoQ, +21% vs. OP2;, +11% YoY) with $1.1MM spend (+11% vs. OP2 ). CPA was $90, optimized at +5% QoQ. Further optimizations impact is visible in Sept -12% CPA MoM (Jul: $103, Aug: $88, Sept: $78). However, a decline in CCP ($120 expected vs $86 actualized | WW avg $140) inflated iE%CCP to X%. CCP decline is due to reduction in SPA and lack of resellers registrations in July & August, which usually contributed 4% of the program OPS. Furthermore, over the last three months Paid Search iE%CCP has averaged 96% in CA, above the 75% new threshold (similar situation in US). The latter happened as the team had adjusted its manual bidding to reach the targeted iE%CCP which disrupted the balance of our machine learning algorithms and brought higher program cost per reg. The team reevaluated the management program which led to a decrease in CPA of -12% in September.
+
+## Q3 QBR - Marketing
+
+[Marketing QBR Doc](https://share.amazon.com/sites/amazon-business-marketing/Shared%20Documents/Forms/AllItems.aspx?RootFolder=%2Fsites%2Famazon%2Dbusiness%2Dmarketing%2FShared%20Documents%2FQBRs%2F2023%20QBRs%2FQ3%2723&FolderCTID=0x0120001FB22FCF2CF7924CB51C27FCDD2F7420&View=%7B93CCC5AC%2D2888%2D41B3%2D9FC3%2DE7E1E1883A9E%7D) | Subj: WW Marketing Q3'23 QBR Kick Off + Workback Schedule
+Due 9/22 EOD: Add Q3 summary (can have X’s for final goal inputs)
+
+Marketing QBR PS Recap: Across Q3, Paid Search drove X regs WW (+15.6% YoY, +7.6% vs. OP2) at $X spend (-14% YoY, -17% vs. OP2). Overperformance was largely driven in NA due to the utilization of 75% iE%CCP, allowing OP2 goal to be surpassed by X reg. EU closed at X% to Q3 OP2 largely due to miss in UK (-X% vs OP2). UK CCP has declined ($X in Q2 vs $X in Q3), limiting invest in this locale (spend -X% to OP2) to stay under 50% iE%CCP. YTD EU is pacing above goal (+X vs OP2) due to enhanced investment during strong periods in Q1 and Q2. As of wk34 an additional $857K was received to provide flexibility in ad visibility over anticipated strong Q4 EU periods.
+
+### US
+
+Performance Recap: 
+In Q3, Paid Search delivered Xk registrations (+X% vs. OP2, +X% YoY) with $XMM ad spend (-x% vs. OP2) in US. CPA was $X and we landed our iE%CCP as X%. Two impactful projects we worked to improve the performance in Q3 including 1) Percolate Test: By providing AB pricing savings on site, we were able to drive up a x% increase on CVR, and planned to expand this test to.. 2) Promotion extension from central paid search program: to support the prime big deal promotion event, we collaborated with central PS team to create sitelink extensions from their program to drive additional traffic to our site.
+Regarding program efficiency management, we started increasing the investment on WKx to test on the 75% IE%CCP threshold. During the test, our program CCP declined from X to Y due to Non-Brand registrations penetration increased from X to Y based on $X CCP (vs Brand CCP $X). With the variable CCP, we have implemented frequent manual bid adjustments across US. These changes have inadvertently disrupted the balance of our machine learning algorithms and brought higher program Cost Per Reg in Jul & Aug. We re-evaluated our approach to campaign management and were able to improve IE%CCP from X to Y in Sept driven by X% CPA improvement. 
+
+_Hits/Misses_:
+
+* [H] Percolate Test: Results due 9/29. BM asked Chetan to input into doc (we’d need to edit/clarify)
+* [H] Note: PS will input into FAQ on utilizing Consumer sitelinks for PBDD
+* [M] brand cpc and cvr decline after incrementality test
+* [M] high ieccp in July & Aug; ieccp improvement in Sept in US
+
+
+
+### CA 
+
+Performance Recap: 
+
+_Hits/Misses_:
+
+* [M] IECCP over 90% in Jul & Aug; CCP decline in Aug
+
+### EU
+
+Performance Recap: 
+Paid Search delivered Xk registrations and missed OP2 by -X% (+X% vs. OP2, +X% YoY) due to -XK registrations missing OP2 in UK. CPA was X and iE%CCP was Y in Q3. We continued to see CCP decline in UK ($X in Q2 vs $X in Q3) due to CPS non-reseller CCP decline, limited our invest in this locale (spend -X% to OP2) by maintaining its iE%CCP under the 50% threshold. To capture Sept increased search demand in EU5, we received additional $857K budget and started increasing investment on WK34 to maximize the expected traffic increase.
+
+
+
+_Hits/Misses_:
+
+* [H] Additional budget for EU5 as part of the Path to green initiatives
+* [H] DE Incrementality test has been postponed
+* [M] Brand spend increase (CPCs/ CPA) due to competition
+* [M] UK ccp decline that we miss op2 goal in UK
+
+### JP
+
+Performance Recap: JP projected for 7.1k registrations (+50% YoY, +33% vs. OP2) in Q3, with $216k cost (+53% YoY, -26% vs. OP2.)
+
+_Hits/Misses_:
+
+* [H] 
+* [M] 
+
+
+
+## August MBR
+
+[SSR MBR Link](http://%20https//share.amazon.com/sites/ABSSR/_layouts/15/WopiFrame2.aspx?sourcedoc=%7b897D5FB2-735C-4B3B-AFE1-21079F61CD8D%7d&file=2023%20WW%20ACQ%20SSR%20MBR%20Aug.docx&action=default) | Subj: ACQ SSR August MBR Kick Off
+
+SSR MBR Highlight: As of wk34 the Percolate test has rolled out to US Paid Search across Apparel and Wholesale MCS landing pages (Appendix 2). The Percolate test allows connectivity between the users’ product search and their on-site experience, and highlights the primary AB-value prop of cost-savings. A static list of top-selling AB products have been selected within the corresponding Landing page vertical (ie. MCS Apparel LP shows top AB Apparel products). In Q4, Percolate will be updated to automatically populate products based on the referring keyword (ie. a user searches for “bulk paper towels” and is shown a selection of paper towels on the LP). Test results (08/21 – 09/10) show an increase in registrations of +6.14% for unrecognized customers. For recognized customers (AB customers), the Treatment led +6.49% lift in OPS (treatment allows logged in customers to go to the DPX). To confirm our findings, we plan to now run the same experiment solely for prospects to remove the variable of “unrecognized vs recognized” starting 10/02 for 4 weeks.
+
+### iE%CCP
+
+1. **Paid Search iE%CCP**: US Paid Search closed august with an iE%CCP of 91.7%, above the 75% threshold. The Paid Search team, in collaboration with finance, will present an analysis of the impact of the iE%CCP experiments on 10/18. Furthermore, leadership requested to consider this impacts when utilizing the previously approved budget.
+2. Paid Search in North America: On last 3 months Paid Search iE%CCP has averaged 86.7% in the US and 96% in CA, above the 75% new threshold. The latter happened as the team had adjusted its manual bidding to reach the targeted iE%CCP which disrupted the balance of our machine learning algorithms and brought higher program cost per reg. The team reevaluated the management program which led to a decrease in CPA of -12% in September. Still our CCP is being affected by the decline of SPA across AB and a lack of resellers acquisition (4% of OPS program).
+3. [Not Published] FAQ: Why has US and CA iE%CCP exceeded the 75% threshold over the past 3 months? In chasing 75% iE%CCP with a variable CCP, we have implemented frequent manual bid adjustments across US. These changes have inadvertently disrupted the balance of our machine learning algorithms and brought higher program Cost Per Reg. We re-evaluated our approach to campaign management and were able to improve CPA by -12% in Sept. CCP decline in CA ($120 to $86), unavailable until months close, caused an increase in iE%CCP. The CCP change is due to 1) SPA decline from both Brand & Non- Brand campaigns, and 2) lack of resellers registrations in July & August, which usually contributed 4% of the program OPS.
+
+
+
+### US
+
+US generated 42.6K registrations (up +35% YoY, +57% vs OP2) in Aug, landed IE%CCP as 92%.
+
+_Hits/Misses_:
+
+* [H] Percolate Test: Results due 9/29. BM asked Chetan to input into doc (we’d need to edit/clarify)
+    * Confirmed with Mauro he’s interested to include this
+
+### CA
+
+CA generated 4.1K registrations (up +10% YoY, +12% vs OP2) in Aug with IE%CCP as 107%. 
+
+
+### EU
+
+EU5 generated 20.2K registrations (up +15% YoY, -2% vs.OP2) in Aug. We’ve missed -15.7% vs OP2 in UK (4.8K registrations vs 5.7K OP2 registrations) due to the CCP declined from $120 to $100 since Jun. The CCP decline made the team hard to invest in this locale ($303K spend vs $393K OP2 budget) due to IECCP restriction. Other 4 markets offset this trend by all had 2 digits YoY growth thanks to improved optimization and conversion rate towards our top performing campaigns. At the end of Aug, we’ve received $857K extra budget and will mainly invest in DE & IT to max out the registration volume in EU5. 
+
+_Hits/Misses_:
+
+* [H] Additional budget for EU5 as part of the Path to green initiatives
+* [H] DE Incrementality test has been postponed to 2024
+* [M] delay in ramping up spend due to additional budget confirmation by EOM
+
+### JP
+
+JP generated 2.1K registrations (+34% YoY, +31% vs. OP2) in Aug. We can likely attribute this to a 35% increase in Brand clicks YoY. Although we saw a YoY increase in traffic and registrations, the summer is generally the lowest point of seasonality for the year. We started the month increasing CPCs to encourage competitive bids and maximize impression share for our phrase match campaigns. After the holiday on Week 32/33 weekend though, we began to see seasonality shift positively. Impressions increased from a low of 83k in Week 33 to 137k (+65%) in week 35 at the end of the month, registrations from 368 to 560 (+52%) back to a normal weekly level not affected by seasonality.
+
+### **P2G Update**
+
+Since WK22 the US PS team started targeting IE%CCP at 75%, testing registration elasticity in order to utilize full available US PS OP2 budget. The improvements started on week 23 for the US and July we have driven 13K incremental regs, outpacing our goal of 8.2K regs by July. Full analysis on the 75% iE%CCP test impact will be completed Oct 18. PS EU received additional $857K to gain 4K incremental registrations ($1.8MM GMS) while still maintaining an iE%CCP ~50%. For August we are slightly below plan (-2% vs OP2) as we started uncapping spend the last week of August,  once receiving the increased investment confirmation at  the end of the month.  As of August R&O, Telemarketing received $452K, thereof $100K of unutilized Q3 budget re-allocated from EU CPS to EU Telemarketing SSR and to be used by EO-Q3. The incremental budget is expected to drive 4.7K regs (53%) of our PTG plan to generate 9K regs, with miss vs. plan driven by 1) late grant of additional budget and subsequent misses in July and August and 2) granted budget $135K below needed budget to deliver full Sept-Dec recovery goal. Due to latency of impact from the additional budget due to hiring and ramp-up dependencies, we see limited options to increase incremental registrations further.

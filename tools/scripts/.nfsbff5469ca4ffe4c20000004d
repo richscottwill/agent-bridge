@@ -1,0 +1,289 @@
+#!/bin/bash
+# Karpathy autoresearch loop — runs continuously with no artificial stops.
+# Each batch: Karpathy selects+applies experiments, blind A/B/C eval via CLI agents.
+#
+# Usage: bash ~/shared/tools/karpathy-loop.sh [cooldown_organs]
+#   cooldown_organs: comma-separated files modified this invocation (default: "hands.md")
+#
+# DESIGN PRINCIPLES (Richard directives, 2026-04-28):
+#
+# 1. No artificial caps. Not on batches. Not on experiments per batch. Not on session total.
+#    The loop stops when externally killed, or when it is genuinely stuck (see below).
+#
+# 2. Curiosity is infinite. "Prior exhaustion" is NOT a legitimate stop condition —
+#    it's a signal that we're failing at curiosity. When priors look thin, expand the
+#    question space (new target surfaces, new technique types, meta-experiments on the
+#    protocol itself) before ever declaring done.
+#
+# 3. Target keep rate = 50%. A 100% keep rate means we're picking proven winners (UCB
+#    selection bias). A 0% keep rate means the technique is wrong. 50% means the
+#    experiments are genuinely testing something — we're learning both when to change
+#    and when to leave alone. If recent batches exceed 70% KEEP, escalate difficulty.
+#
+# 4. Batch size ~150. We've proven the subagent sustains this volume and context windows
+#    have headroom. Small batches just multiply loop overhead for no benefit. The 10/20
+#    defaults from earlier in this system were caution holdovers, not deliberate choices.
+#
+# 5. Hooks are first-class targets. Static hook content (then.prompt text,
+#    when.toolTypes regex, filePatterns, timeout, hookAction) is experimentable the same
+#    way organ content is — blind A/B/C on question-answering against the hook definition.
+#
+# The loop stops ONLY when:
+#   1. Externally killed (pkill -f karpathy-loop.sh) — operational override
+#   2. Two consecutive batches produce zero experiments AND Karpathy confirms it cannot
+#      generate new questions even after curiosity-expansion. This is "genuinely stuck,"
+#      not "done for today."
+
+COOLDOWN=${1:-"hands.md"}
+BATCH_SIZE=150
+DB_PATH="/home/prichwil/shared/data/duckdb/ps-analytics.duckdb"
+LOG="$HOME/shared/context/active/karpathy-loop.log"
+KIRO_CLI="/agentspaces/kiro-cli/kiro-cli"
+BATCH_RESULT_FILE="/tmp/karpathy-batch-result.txt"
+EXHAUSTION_MARKER="/tmp/karpathy-exhausted"
+CURIOSITY_MARKER="/tmp/karpathy-curiosity-expansion"
+ESCALATE_MARKER="/tmp/karpathy-escalate-difficulty"
+
+# Clean up from previous runs
+rm -f "$EXHAUSTION_MARKER" "$CURIOSITY_MARKER" "$ESCALATE_MARKER"
+
+# Get starting experiment count
+START_COUNT=$(python3 -c "
+import duckdb
+con = duckdb.connect('$DB_PATH', read_only=True)
+r = con.execute('SELECT COUNT(*) FROM autoresearch_experiments').fetchone()
+print(r[0])
+con.close()
+" 2>/dev/null)
+
+echo "$(date -Iseconds) Karpathy loop started. Mode: continuous, curiosity-driven, no caps. Target keep rate 50%." | tee -a "$LOG"
+echo "$(date -Iseconds) Starting experiments: $START_COUNT. Batch size: $BATCH_SIZE. Cooldown: $COOLDOWN." | tee -a "$LOG"
+
+# Log prior state for context (not a stop condition)
+python3 -c "
+import duckdb
+con = duckdb.connect('$DB_PATH', read_only=True)
+total = con.execute('SELECT COUNT(*) FROM autoresearch_priors').fetchone()[0]
+unexplored = con.execute('SELECT COUNT(*) FROM autoresearch_priors WHERE n_experiments = 0').fetchone()[0]
+underexplored = con.execute('SELECT COUNT(*) FROM autoresearch_priors WHERE n_experiments > 0 AND n_experiments < 3').fetchone()[0]
+heavily_explored = con.execute(\"SELECT COUNT(*) FROM autoresearch_priors WHERE n_experiments >= 15\").fetchone()[0]
+# Last 100 experiments keep rate
+recent_keep_rate = con.execute(\"\"\"SELECT ROUND(100.0 * SUM(CASE WHEN decision='KEEP' THEN 1 ELSE 0 END) / COUNT(*), 1)
+  FROM (SELECT decision FROM autoresearch_experiments ORDER BY created_at DESC LIMIT 100)\"\"\").fetchone()[0]
+print(f'Prior state: {total} known combos, {unexplored} unexplored, {underexplored} underexplored, {heavily_explored} heavily-explored (n>=15). Recent-100 keep rate: {recent_keep_rate}%. Target: 50%.')
+con.close()
+" 2>&1 | tee -a "$LOG"
+
+BATCH_NUM=0
+CONSECUTIVE_EMPTY=0
+CURIOSITY_EXPANSIONS=0
+DIFFICULTY_ESCALATIONS=0
+
+while true; do
+  BATCH_NUM=$((BATCH_NUM + 1))
+
+  # Get current count before batch
+  PRE_BATCH=$(python3 -c "
+import duckdb
+con = duckdb.connect('$DB_PATH', read_only=True)
+r = con.execute('SELECT COUNT(*) FROM autoresearch_experiments').fetchone()
+print(r[0])
+con.close()
+" 2>/dev/null)
+
+  # Compute recent keep rate (last 100 experiments, or fewer if that's all we have)
+  RECENT_KEEP_RATE=$(python3 -c "
+import duckdb
+con = duckdb.connect('$DB_PATH', read_only=True)
+r = con.execute(\"\"\"SELECT ROUND(100.0 * SUM(CASE WHEN decision='KEEP' THEN 1 ELSE 0 END) / NULLIF(COUNT(*),0), 1)
+  FROM (SELECT decision FROM autoresearch_experiments ORDER BY created_at DESC LIMIT 100)\"\"\").fetchone()[0]
+print(r if r is not None else 0)
+con.close()
+" 2>/dev/null)
+
+  # If recent keep rate > 70, set escalation marker
+  if [ -n "$RECENT_KEEP_RATE" ] && [ "$(echo "$RECENT_KEEP_RATE > 70" | bc -l 2>/dev/null)" = "1" ]; then
+    touch "$ESCALATE_MARKER"
+    DIFFICULTY_ESCALATIONS=$((DIFFICULTY_ESCALATIONS + 1))
+    echo "$(date -Iseconds) Recent keep rate $RECENT_KEEP_RATE% > 70% — escalating difficulty this batch (escalation #$DIFFICULTY_ESCALATIONS)." | tee -a "$LOG"
+  fi
+
+  # Decide whether this batch should trigger curiosity-expansion mode
+  CURIOSITY_MODE=""
+  if [ -f "$CURIOSITY_MARKER" ]; then
+    CURIOSITY_MODE="ACTIVE"
+    CURIOSITY_EXPANSIONS=$((CURIOSITY_EXPANSIONS + 1))
+    rm -f "$CURIOSITY_MARKER"
+    echo "$(date -Iseconds) CURIOSITY EXPANSION CYCLE $CURIOSITY_EXPANSIONS: priors looked thin on the last batch. This batch must invent new questions, not run old ones." | tee -a "$LOG"
+  fi
+
+  ESCALATE_MODE=""
+  if [ -f "$ESCALATE_MARKER" ]; then
+    ESCALATE_MODE="ACTIVE"
+    rm -f "$ESCALATE_MARKER"
+  fi
+
+  echo "$(date -Iseconds) Batch $BATCH_NUM. Experiments so far: $PRE_BATCH (started at $START_COUNT). Recent keep rate: $RECENT_KEEP_RATE%. Target: 50%." | tee -a "$LOG"
+  echo "$(date -Iseconds) Launching Karpathy for ~$BATCH_SIZE experiments (curiosity=$CURIOSITY_MODE, escalate=$ESCALATE_MODE)..." | tee -a "$LOG"
+
+  $KIRO_CLI chat --agent karpathy --no-interactive --trust-all-tools \
+    "Run ~$BATCH_SIZE autoresearch experiments. Cooldown: $COOLDOWN. All targets fair game per your protocol.
+
+Curiosity mode: ${CURIOSITY_MODE:-NORMAL}
+Escalate-difficulty mode: ${ESCALATE_MODE:-NORMAL}
+Recent-100 keep rate: ${RECENT_KEEP_RATE:-UNKNOWN}%
+Target keep rate: 50%
+
+=== TARGET KEEP RATE: 50% (Richard directive, 2026-04-28) ===
+A healthy batch ends near 50% KEEP / 50% REVERT. If recent keep rate is substantially above 50% you are picking proven winners (UCB selection bias). Correct this by:
+- Biasing target selection toward n_experiments=0 or n_experiments<3 combos (underexplored)
+- Mixing in techniques with known low keep rates to stress-test load-bearing content
+- Running REMOVE experiments on sections that 'feel' important — those are the ones worth testing
+- Choosing experiments you genuinely don't know the answer to. If you can predict the outcome, the experiment isn't teaching you anything.
+
+The 50% target is NOT 'approve half, reject half regardless of merit.' It's the batch composition signal that you picked hard enough experiments. If you honestly ran hard experiments and they all kept, that's fine — but it should be rare. Three consecutive 90%+ keep batches means you're cherry-picking.
+
+=== EXPANDED SCOPE (Richard directive 2026-04-28) ===
+Experiments are NOT restricted to steering files. Fair-game targets include:
+- ~/shared/context/body/*.md (organs)
+- ~/shared/context/active/*.md (current.md, rw-tracker.md, hands.md excluded via cooldown)
+- ~/shared/context/protocols/*.md (am-auto, am-triage, eod-backend, eod-frontend, meeting-to-task-pipeline, sharepoint-durability-sync, asana-duckdb-sync, callout-pipeline)
+- ~/shared/context/agents/*.md (agent definitions, wiki pipeline, rw-trainer, karpathy, etc.)
+- ~/shared/.kiro/hooks/*.kiro.hook (see HOOK EXPERIMENTS section below)
+- ~/shared/tools/scripts/*.sh and ~/shared/tools/*/*.py (process/automation code — experiment on defaults, error handling, output format, comments)
+- ~/shared/wiki/agent-created/**/*.md (wiki articles — experiment on structure, voice, dual-audience formatting)
+
+=== HOOK EXPERIMENTS (first-class, Richard asked 2026-04-28) ===
+.kiro.hook files are plain JSON with static text fields that are fair game:
+
+1. then.prompt (or then.command) — the text the agent receives when the hook fires.
+   Techniques: REWORD, COMPRESS, ADD examples, REMOVE preamble, SPLIT multi-purpose prompts.
+   Ground-truth questions test: 'what should the agent do when this hook fires?', 'what fields does it extract?', 'what's the output format?'
+
+2. when.toolTypes / filePatterns — the filter surface.
+   Techniques: TIGHTEN (narrower regex), BROADEN (wider regex), ENUMERATE (explicit list vs wildcard), REMOVE (drop false-positive triggers).
+   Ground-truth questions: 'does this fire on tool X?', 'does this fire on file Y?', 'does it miss trigger Z?'
+
+3. Structural fields (timeout, hookAction) — typically not text-experimentable, skip unless testing a specific change.
+
+IMPORTANT: Static hook content only. Runtime behavior testing (does the modified hook actually produce better agent behavior when it fires in a real session?) is OUT OF SCOPE for this harness — that needs a live-firing integration test we don't have yet. If you identify a hook experiment that only makes sense with runtime testing, log the idea to DuckDB and skip it.
+
+=== FORCED RANDOMIZATION (Richard directive 2026-04-28) ===
+At least 60% of this batch must target either:
+- n_experiments=0 combos (never tried), OR
+- n_experiments<3 combos (barely tried), OR
+- Target×technique combinations that have NEVER been tested together (even if the target has been experimented on with other techniques)
+
+Technique diversity quota: no single technique may exceed 25% of the batch. Force yourself to use REMOVE, SPLIT, MERGE, RESTRUCTURE, and MOVE alongside the standard REWORD/COMPRESS/ADD.
+
+If you find yourself about to pick a combo with high n_experiments and high posterior mean, STOP — that's the UCB bias firing. Pick a sibling in the same file with lower n_experiments instead.
+
+=== DIFFICULTY RAMP ===
+Normal batches: mix of techniques, 50/50 outcome target.
+Escalate-mode batches (triggered when recent keep rate > 70%): minimum 40% REMOVE or cross-file MOVE experiments. Force the test on content that feels load-bearing.
+Curiosity-mode batches (triggered after empty batch): expand the question space before running experiments — see protocol below.
+
+=== CURIOSITY EXPANSION PROTOCOL ===
+If CURIOSITY_MODE=ACTIVE or you feel priors are thin, do NOT stop. Do NOT write /tmp/karpathy-exhausted. Instead:
+1. Research new target surfaces we haven't touched: dashboards/, data/, signals views, DuckDB schema, MCP config, logs/asai-server.log patterns, wiki category structure.
+2. Invent new techniques beyond the 8 standard ones (REWORD/COMPRESS/ADD/REMOVE/SPLIT/MERGE/RESTRUCTURE/MOVE):
+   - LATENCY-PROBE: measure wall-clock time for a protocol phase; experiment on shortening it
+   - FRICTION-PROBE: count steps between task-assigned and task-acted-on; experiment on reducing
+   - SIGNAL-LOSS-PROBE: identify where Richard's signals decay unanswered; experiment on retention
+   - ASSUMPTION-INVERT: identify a baked-in assumption; experiment on inverting it
+   - FAIL-MODE-PROBE: deliberately break something (missing field, stale data, broken link); measure recovery
+   - DEFAULT-CHALLENGE: find a default value and question whether it's right (like BATCH_SIZE=10 was)
+3. Meta-experiment on the experiment system itself: is the 3-eval-agent protocol right? Are the 5 dimensions right? Is keep/revert the right binary?
+4. If you STILL cannot generate new questions after a full curiosity-expansion batch, THEN write /tmp/karpathy-exhausted with a detailed explanation. That file is a last-resort signal, not a routine exit.
+
+DO NOT WRITE /tmp/karpathy-exhausted ON FIRST SIGN OF THIN PRIORS. Instead, write /tmp/karpathy-curiosity-expansion and let the loop retry with expanded scope next batch.
+
+DO NOT ASK FOR RICHARD'S PERMISSION OR INPUT. The loop runs until killed externally.
+
+=== EVAL PROTOCOL ===
+For EACH experiment, after applying the change:
+1. Write the eval-a prompt (modified target + body.md + soul.md + questions) to /tmp/eval-a-exp.txt
+2. Write the eval-b prompt (ORIGINAL target + body.md + soul.md + same questions) to /tmp/eval-b-exp.txt
+3. Write the eval-c prompt (modified target ONLY + same questions) to /tmp/eval-c-exp.txt
+4. Write ground truth answers to /tmp/eval-ground-truth.txt
+5. Run the blind eval by executing these EXACT shell commands:
+
+$KIRO_CLI chat --agent eval-a --no-interactive --trust-all-tools \"\$(cat /tmp/eval-a-exp.txt)\" 2>/dev/null | tail -20 > /tmp/eval-a-result.txt
+$KIRO_CLI chat --agent eval-b --no-interactive --trust-all-tools \"\$(cat /tmp/eval-b-exp.txt)\" 2>/dev/null | tail -20 > /tmp/eval-b-result.txt
+$KIRO_CLI chat --agent eval-c --no-interactive --trust-all-tools \"\$(cat /tmp/eval-c-exp.txt)\" 2>/dev/null | tail -20 > /tmp/eval-c-result.txt
+
+6. Read eval-a/b/c result files.
+7. Score against /tmp/eval-ground-truth.txt. Detail-loss = PARTIAL not CORRECT.
+8. Compute delta_ab. Keep or revert per heart.md Step 5 AND the 50% target: if you're seeing a KEEP on a trivial win (delta_ab = 0, no clear benefit), lean REVERT. Only KEEP when the evidence is positive.
+9. Log to DuckDB + experiment-log.tsv.
+
+You MUST run the kiro-cli commands via shell tool. Do NOT answer eval questions yourself.
+
+After the batch, write a summary line to /tmp/karpathy-batch-result.txt:
+BATCH_COMPLETE: [N] experiments run, [K] kept, [R] reverted, [keep_rate]%, [hooks_tested], [curiosity_expansion_flagged: yes/no]" \
+    2>&1 | tee -a "$LOG"
+
+  echo "$(date -Iseconds) Batch $BATCH_NUM complete." | tee -a "$LOG"
+
+  # Check genuine-exhaustion signal (last-resort, only after curiosity expansion failed)
+  if [ -f "$EXHAUSTION_MARKER" ]; then
+    REASON=$(cat "$EXHAUSTION_MARKER" 2>/dev/null)
+    echo "$(date -Iseconds) GENUINE EXHAUSTION: Karpathy reports it cannot invent new questions even after curiosity expansion. Reason: $REASON" | tee -a "$LOG"
+    echo "$(date -Iseconds) This signal should be rare. If frequent, the curiosity-expansion protocol itself needs rework." | tee -a "$LOG"
+    break
+  fi
+
+  # Check batch delta
+  POST_BATCH=$(python3 -c "
+import duckdb
+con = duckdb.connect('$DB_PATH', read_only=True)
+r = con.execute('SELECT COUNT(*) FROM autoresearch_experiments').fetchone()
+print(r[0])
+con.close()
+" 2>/dev/null)
+
+  BATCH_DELTA=$((POST_BATCH - PRE_BATCH))
+  echo "$(date -Iseconds) Batch $BATCH_NUM produced $BATCH_DELTA new experiments ($PRE_BATCH → $POST_BATCH)." | tee -a "$LOG"
+
+  # Report batch keep rate
+  BATCH_KEEP_RATE=$(python3 -c "
+import duckdb
+con = duckdb.connect('$DB_PATH', read_only=True)
+r = con.execute(\"\"\"SELECT ROUND(100.0 * SUM(CASE WHEN decision='KEEP' THEN 1 ELSE 0 END) / NULLIF(COUNT(*),0), 1)
+  FROM (SELECT decision FROM autoresearch_experiments ORDER BY created_at DESC LIMIT $BATCH_DELTA)\"\"\").fetchone()[0]
+print(r if r is not None else 0)
+con.close()
+" 2>/dev/null)
+  echo "$(date -Iseconds) Batch $BATCH_NUM keep rate: $BATCH_KEEP_RATE% (target 50%)." | tee -a "$LOG"
+
+  # Empty batch → trigger curiosity expansion for next batch (don't stop)
+  if [ "$BATCH_DELTA" -eq 0 ]; then
+    CONSECUTIVE_EMPTY=$((CONSECUTIVE_EMPTY + 1))
+    echo "$(date -Iseconds) Empty batch ($CONSECUTIVE_EMPTY consecutive). Triggering curiosity-expansion mode for next batch." | tee -a "$LOG"
+    touch "$CURIOSITY_MARKER"
+    if [ "$CONSECUTIVE_EMPTY" -ge 2 ]; then
+      echo "$(date -Iseconds) Two consecutive empty batches despite curiosity expansion. Karpathy appears genuinely stuck. Stopping." | tee -a "$LOG"
+      echo "$(date -Iseconds) Investigate: is kiro-cli hanging? Is the DuckDB write path broken? Is the Karpathy agent file corrupted?" | tee -a "$LOG"
+      break
+    fi
+  else
+    CONSECUTIVE_EMPTY=0
+  fi
+
+  sleep 2
+done
+
+# Final summary
+FINAL_COUNT=$(python3 -c "
+import duckdb
+con = duckdb.connect('$DB_PATH', read_only=True)
+total = con.execute('SELECT COUNT(*) FROM autoresearch_experiments').fetchone()[0]
+keeps = con.execute(\"SELECT COUNT(*) FROM autoresearch_experiments WHERE decision='KEEP'\").fetchone()[0]
+reverts = con.execute(\"SELECT COUNT(*) FROM autoresearch_experiments WHERE decision='REVERT'\").fetchone()[0]
+new = total - $START_COUNT
+print(f'Session: {new} new experiments. Total: {total}. Keeps: {keeps} ({100*keeps//max(total,1)}%). Reverts: {reverts} ({100*reverts//max(total,1)}%).')
+con.close()
+" 2>&1)
+
+echo "$(date -Iseconds) $FINAL_COUNT" | tee -a "$LOG"
+echo "$(date -Iseconds) Loop complete. Curiosity expansions: $CURIOSITY_EXPANSIONS. Difficulty escalations: $DIFFICULTY_ESCALATIONS." | tee -a "$LOG"

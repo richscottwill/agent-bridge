@@ -491,3 +491,5 @@ run76_exp2	richard-style-amazon	Document Structure Writing Discipline	REMOVE	out
 run77_exp1	amazon-politics	Promotion Mechanics	REWORD	information_retrieval	3086	3180	1.0	1.0	1.0	0.0	false	KEEP	120
 run77_exp2	richard-style-mbr	Common Failures	MERGE	output_quality	814	757	1.0	1.0	1.0	0.0	false	KEEP	120
 run77_exp3	roster	Cross-Functional Partners	RESTRUCTURE	information_retrieval	2197	2211	1.0	1.0	1.0	0.0	false	KEEP	120
+run_W18_1777478629	hook-agent-bridge-sync	preamble	REWORD	information_retrieval	61	61	0	0.767	0.767	0.767	0.000	19	KEEP	False
+run_W18_1777478629	am-frontend	Slack Brief	REMOVE	information_retrieval	3996	3942	-54	0.000	0.000	0.000	-1.000	4	REVERT	True
