@@ -11,9 +11,6 @@ Comprehensive record of all AU paid search stakeholder interactions, decisions, 
 | Lena Zak (L7) | AU Country Leader, Sydney | Primary stakeholder. Data-demanding, expects numbers not narratives. Has escalated to leadership before. Sets strategic direction for AU. |
 | Alexis Eck (L6) | AU Marketing, Sydney | Day-to-day execution partner. Collaborative, defers to Lena on strategy. Offered to help with keyword analysis. |
 | Harjeet Kheer | AU SSR/Marketing | Transitioned out of PS sync in March. Was initial POC before Alexis. |
-| Harsha Mudradi | Senior PM, APAC (Consumer PS) | Lena invited him to a meeting. Shared consumer CPC benchmarks that Lena used to challenge AB PS CPCs. |
-| Nick Georgijev | L7+ (Brandon's peer or above) | CC'd on Lena's CPC escalation email. Potential escalation target for LP performance issue. |
-
 ## Chronological Timeline
 
 ### January 2026 — Onboarding & Promotion Setup

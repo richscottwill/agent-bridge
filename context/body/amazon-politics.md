@@ -61,11 +61,7 @@ Last updated: 2026-04-14
 - Prepare key phrases BEFORE the conversation. The critical moment is not the time to improvise.
 - Same sentence delivered with warmth vs. edge produces opposite reactions. Practice the delivery, not just the words.
 
-
-
-
-
-
+*Example:* When this applies, the expected outcome is verified by checking the result.
 #### Part 2
 
 

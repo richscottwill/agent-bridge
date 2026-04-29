@@ -83,6 +83,7 @@ These are hard-won from data. Respect them during target selection:
 ## Experiment Format
 
 ```
+
 ### CE-[N]: [Name]
 - Hypothesis: [What will change and why]
 - Target organ: [Which organ, which section]

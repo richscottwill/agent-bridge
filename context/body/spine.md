@@ -82,6 +82,7 @@ Full inventory + guardrails: `~/shared/context/active/mcp-tool-reference.md`
 
 
 
+
 ### Tool Access Troubleshooting
 
 **Common Failures:**
@@ -210,17 +211,8 @@ The system survives any single point of failure through four independent persist
 
 
 
-#### Recovery Priority
 
 **Recovery priority:** MotherDuck (structured data) → SharePoint (artifacts + state) → Git (portable body) → Filesystem (rebuild from other three).
-
-
-
-
-
-
-
-
 
 ### Ground Truth Files *Stay separate from organs — different update cadences.* | File | Location | What it is | Update cadence | Read when | |------|----------|-----------|----------------|-----------| | current.md | `~/shared/context/active/current.md` | Live state: projects, people, meetings, pending actions | Every loop run | Every session — most volatile file in the system | | org-chart.md | `~/shared/context/active/org-chart.md` | Org structure and reporting lines | On org changes | Drafting comms to unfamiliar stakeholders, reorg context | | rw-tracker.md | `~/shared/context/active/rw-tracker.md` | Weekly scorecard, 30-day challenge, To-Do sync | Every morning routine | AM-3 brief, coaching check-ins, Friday retro | | long-term-goals.md | `~/shared/context/active/long-term-goals.md` | The Five Levels strategic arc (L1-L5 with key metrics) | Monthly or on shift | Prioritization decisions, connecting tasks to strategy | **Rule:** These files are NOT absorbed into organs. They have different update cadences and serve as authoritative sources. Organs may reference them but never duplicate their content. 
 

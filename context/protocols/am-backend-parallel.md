@@ -249,6 +249,9 @@ AM-Backend Hook (orchestrator)
 (enterprise-asana-mcp) uses an ESD proxy that is unreliable from subagent contexts.
 This is a hard constraint learned from production (2026-04-16).
 
+#### ORCHESTRATOR-OWNED: Asana Sync (B1) + Activity Monitor (B2) — Details
+
+
 
 
 

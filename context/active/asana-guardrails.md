@@ -13,8 +13,6 @@
 - Search tasks across any project
 - Read task details, comments, subtasks for any task
 - Read project membership, sections, status updates
-- Read goals, portfolios, user info
-
 ## Richard's Asana Identity
 
 - User GID: `1212732742544167`

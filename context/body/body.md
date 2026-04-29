@@ -64,6 +64,7 @@ These aren't rules to remember — they're how the body works. Each organ embodi
 
 
 ## Task Routing (load only what you need)
+---
 
 | Task Type | Required Files | Optional |
 |-----------|---------------|----------|
@@ -77,7 +78,7 @@ These aren't rules to remember — they're how the body works. Each organ embodi
 | Check system health | `nervous-system.md`, `gut.md` | All organs (staleness) |
 | Start a new session | `spine.md`, `body.md`, `amcc.md` | Then task-specific |
 
----
+
 
 
 ## Ground Truth (separate files, different update cadences)

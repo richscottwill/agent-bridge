@@ -46,9 +46,7 @@ Last updated: 2026-04-20 (hard-thing selection redesigned — signal-driven bott
 
 The streak is the single most important metric in this organ. It measures consecutive days where Richard chose the hard thing over the comfortable thing.
 
-
-
-
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ### Current Streak
 
 | Metric | Value | Notes |
@@ -77,9 +75,7 @@ Removed — current-state-only principle. Historical data lives in changelog.md.
 - Declining or prepping for a meeting instead of attending passively
 - Publishing work to stakeholders instead of polishing it privately
 
-
-
-
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ### What Resets the Streak
 - A full workday passes with zero progress on the #1 priority in Hands
 - Richard explicitly chooses a low-leverage task over an available high-leverage task (not blocked — available)

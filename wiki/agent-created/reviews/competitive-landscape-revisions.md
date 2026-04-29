@@ -37,12 +37,6 @@ Replace with:
 ```
 depends_on: []
 replaces: "competitive-intel-tracker"
-```
-
-And add a note at the top of the Context section:
-
-Quote to change:
-```
 ## Context
 
 Competitive pressure on AB Paid Search has intensified significantly since mid-2024.

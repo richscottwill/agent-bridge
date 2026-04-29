@@ -55,6 +55,7 @@ _Why: Testing Approach doc is the formalization of PS testing authority. Any Kat
 
 ---
 
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## P2 — worth knowing
 
 ### sparkle-and-baloo (3 hits)

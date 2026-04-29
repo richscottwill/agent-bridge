@@ -34,10 +34,11 @@ For each extracted action item:
 - **Others' items** → Dependency logging path (Step 5)
 - **No items found** → Log "no actions" in meeting series file,
 ## Step 2.5: Consolidation Check (MANDATORY — before creating any task)
-
 **Principle: A new top-level task only earns its place if the action is Urgent + Important (or externally-bound with a hard deadline). Everything else becomes a subtask, a bullet in an existing task's notes, or a comment on a parent.**
 
+
 Why: Tasks have an Asana MCP cost per create/update. Standalone granular tasks fragment the agenda, multiply bucket-cap pressure, and lose the program narrative. Rolling weekly/operational items under a program parent keeps the system readable and reduces tool calls.
+
 
 ### Step 2.5a — Classify by urgency × importance × containment
 

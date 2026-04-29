@@ -25,6 +25,9 @@ Last run: 2026-04-02
 ## Approach
 - Fetch 25 messages at a time via `batch_get_conversation_history`
 - Generate SQL INSERT statements manually from message text
+
+#### Approach — Details
+
 - Execute via `mcp_duckdb_execute_query`
 - Skip: channel_join/leave/topic subtypes, empty text, image-only messages
 

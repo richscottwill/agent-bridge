@@ -1,6 +1,6 @@
 <!-- DOC-0348 | duck_id: protocol-eod-backend -->
 
-
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 # EOD-Backend Protocol — Meeting Sync + Reconciliation + Maintenance
 
 Fully autonomous. No interaction needed. Produces structured output for EOD-Frontend.
@@ -31,6 +31,7 @@ meetings/README.md, current.md, nervous-system.md, memory.md, asana-command-cent
 ### Outlook + Email
 - Auto-meeting folder scan.
 - Email threads related to meetings.
+
 
 
 

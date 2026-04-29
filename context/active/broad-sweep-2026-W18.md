@@ -70,10 +70,11 @@ _Ingested (from DuckDB): 476 emails across 461 conversations (3/19→4/29), 830 
 **marketing_managers_all** — last activity 4/27, 3 msgs. Low volume but peer-level.
 
 ### Loop page changes
+---
 
 Five Loop pages ingested today (2026-04-29): `loop-brandon-1on1`, `loop-mbr-qbr-2026`, `loop-ddd-2026`, `loop-weekly-meeting`, `loop-working-session`. Current snapshot only — no `last_modified` timestamps in DuckDB, so diff vs prior state is not possible. Recommend populating `docs.loop_pages.last_modified` on next ingestion to enable future drift detection.
 
----
+
 
 ## SharePoint drift
 

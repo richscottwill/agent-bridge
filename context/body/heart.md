@@ -5,22 +5,7 @@
 
 
 
-# Heart — Autoresearch Loop
-
-*Pure experimentation engine. Inspired by [autoresearch](https://github.com/karpathy/autoresearch) — 630 lines, 700 experiments, measurable results. Small, fast, autonomous, compounding. No human input needed. Runs overnight, low token usage, high volume.*
-
-Last updated: 2026-04-05 (Karpathy Run 35 — Design Choices compressed 7→7 bullets tighter, Common Failures section added)
-Created: 2026-03-20
-
----
-
-
-
-
-
-
-
-## Architecture & Measurement
+# Heart — Autoresearch Loop *Pure experimentation engine. Inspired by [autoresearch](https://github.com/karpathy/autoresearch) — 630 lines, 700 experiments, measurable results. Small, fast, autonomous, compounding. No human input needed. Runs overnight, low token usage, high volume.* Last updated: 2026-04-05 (Karpathy Run 35 — Design Choices compressed 7→7 bullets tighter, Common Failures section added) Created: 2026-03-20 --- ## Architecture & Measurement
 
 Body metaphor. Each organ = self-contained file. Loop experiments autonomously. See `body.md` (organ map), `spine.md` (directory layout).
 

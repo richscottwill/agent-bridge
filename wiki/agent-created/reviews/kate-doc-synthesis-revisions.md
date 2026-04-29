@@ -52,27 +52,7 @@ Priority: HIGH (this is the doc Kate reads — accuracy must be airtight)
 
 ---
 
-## Required Change 3: Clarify UK CTR metric in Modern Search section
-
-**Location:** Workstream 2: Modern Search — UK Results table
-
-The table currently shows:
-
-```
-| CTR | 14% | 24% | **+70%** |
-```
-
-Add a clarifying note immediately after the table:
-
-```
-Pre/post comparison (Dec 27-Jan 28 vs. Jan 29-Mar 2). The test-vs-control CTR improvement over the same period was +86%.
-```
-
-**Rationale:** The synthesis doc's summary tag and the Modern Search doc both reference "+86% CTR" as the headline metric, but the table in the synthesis shows "+70%." Both are correct — +86% is test-vs-control, +70% is pre/post. Without the clarifying note, Kate may see the discrepancy and question the data. The note resolves the ambiguity in one sentence.
-
----
-
-## Required Change 4: Fix UK/DE NB CPA in Workstream 1 table
+## Required Change 3: Clarify UK CTR metric in Modern Search section **Location:** Workstream 2: Modern Search — UK Results table The table currently shows: ``` | CTR | 14% | 24% | **+70%** | ``` Add a clarifying note immediately after the table: ``` Pre/post comparison (Dec 27-Jan 28 vs. Jan 29-Mar 2). The test-vs-control CTR improvement over the same period was +86%. ``` **Rationale:** The synthesis doc's summary tag and the Modern Search doc both reference "+86% CTR" as the headline metric, but the table in the synthesis shows "+70%." Both are correct — +86% is test-vs-control, +70% is pre/post. Without the clarifying note, Kate may see the discrepancy and question the data. The note resolves the ambiguity in one sentence. --- ## Required Change 4: Fix UK/DE NB CPA in Workstream 1 table
 
 **Location:** Workstream 1: Intelligent Bidding (OCI) — Results table
 
@@ -86,6 +66,9 @@ The table currently does not show UK/DE NB CPA (they show "—" for OPS), but th
 | UK | +23% | -38% | +2,400 | — |
 | DE | +18% | -37% | +749 | — |
 ```
+
+#### Required Change 4: Fix UK/DE NB CPA in Workstream 1 table — Details
+
 
 **Replace with:**
 ```

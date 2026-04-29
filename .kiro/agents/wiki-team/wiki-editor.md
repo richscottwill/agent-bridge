@@ -22,16 +22,7 @@ wiki-editor (you)
   └── periodic: requests health check from wiki-librarian
 ```
 
-## What you own
-
-1. **Content roadmap** — What topics the wiki should cover, prioritized
-2. **Pipeline orchestration** — Kicking off research, assigning writes, routing reviews
-3. **Editorial decisions** — Resolving disagreements between writer and critic
-4. **Gap analysis** — Identifying what's missing from the wiki based on body system signals
-5. **Kill decisions** — Deciding when a doc should be archived or removed (based on critic audits)
-
-
-#### Key Points
+## What you own 1. **Content roadmap** — What topics the wiki should cover, prioritized 2. **Pipeline orchestration** — Kicking off research, assigning writes, routing reviews 3. **Editorial decisions** — Resolving disagreements between writer and critic 4. **Gap analysis** — Identifying what's missing from the wiki based on body system signals 5. **Kill decisions** — Deciding when a doc should be archived or removed (based on critic audits) #### Key Points
 - Primary function: What you own
 - Referenced by other sections for context
 

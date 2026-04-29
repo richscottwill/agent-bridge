@@ -4,6 +4,7 @@
   "description": "Two-phase wiki-to-SharePoint sync: convert md→docx locally, then upload via SharePoint MCP to OneDrive > Artifacts/wiki-sync/",
   "when": { "type": "userTriggered" },
 
+
 ### preamble — Details
   "then": {
     "type": "askAgent",

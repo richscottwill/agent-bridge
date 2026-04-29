@@ -54,6 +54,7 @@ Priority: HIGH (OCI accuracy issue cascades from OCI doc; duplication relationsh
 
 ---
 
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ## Required Change 3: Add appendix-to-main-doc relationship note
 
 **Location:** After the opening paragraph

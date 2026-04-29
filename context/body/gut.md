@@ -81,6 +81,9 @@ Per-organ budgets and the body ceiling are adaptive — they move based on exper
 
 
 
+#### Core Principle 3: Learned Budgets — Details
+
+
 
 
 
@@ -102,6 +105,7 @@ The gut has three functions — **Digestion** (raw material → routed facts), *
 
 
 ### Digestion Protocol When new material arrives in `intake/`, the AM-2 hook processes it. The gut adds structure to that processing: 
+
 
 
 
@@ -167,16 +171,7 @@ For each file in `intake/`: extract minimum viable facts, route to the organ whe
 
 ---
 
-
-
-
-
-
-
-
-
-
-
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ### Compression Protocol
 
 Run when Bayesian priors signal an organ has room to shrink (COMPRESS posterior_mean > 0.7, n > 5). The goal is to maximize *usefulness per token* — organs should answer their questions accurately and self-containedly.

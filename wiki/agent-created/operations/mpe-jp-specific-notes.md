@@ -15,6 +15,7 @@
 | Brand spend share | **92.1%** | Extreme Brand dominance |
 | Clean weeks | 164 | |
 
+
 ## Fit quality summary
 
 | Parameter | r² | MAPE | Fallback |

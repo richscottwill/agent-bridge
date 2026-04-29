@@ -31,7 +31,6 @@ Reviewer: wiki-critic | Date: 2026-04-05 | Mode: Review (pre-publish)
 
 ### Verdict
 PUBLISH
-
 ### Suggestions (non-blocking)
 - The TODO comment re: -10% haircut should be resolved before this goes stale. Either Richard justifies the 10% or the writer picks a defensible number. Not blocking because the TODO is transparent.
 - "How MX FY26 illustrates the framework" is the longest section. The two scenario paragraphs (100% target, 75% target) could be tightened by ~20% without losing the comparison — the numbers do the work, the surrounding prose restates what the numbers already show.
@@ -52,7 +51,6 @@ PUBLISH
 
 ### Verdict
 PUBLISH
-
 ### Suggestions (non-blocking)
 - Pin down the "roughly 50% NB CPA improvement" claim in the opening paragraph. Add a date range or baseline: "US delivered a 24% registration lift with NB CPA improving from $X to $Y (H2 2025 vs H1 2025)." The current phrasing is the only vague number in an otherwise precise doc.
 - The Sources section is a nice touch. Consider whether it belongs in the appendix or stays in the main body — it's borderline. Not blocking either way.
@@ -73,7 +71,6 @@ PUBLISH
 
 ### Verdict
 PUBLISH
-
 ### Suggestions (non-blocking)
 - In "Current Performance," add a line break or transition between the February monthly summary and the W13 weekly data. Something as simple as "The most recent weekly data (W13) showed..." to signal the timeframe shift.
 - The sentence "Richard's role is to own the narrative with data" in the CPC Challenge section is stakeholder coaching, not market reference. Move it to the stakeholder appendix entry for Brandon/Lena or cut it.
@@ -94,7 +91,6 @@ PUBLISH
 
 ### Verdict
 PUBLISH
-
 ### Suggestions (non-blocking)
 - The speculative "30% to 40-50%" match rate claim in "Connection to Existing Initiatives" should either be sourced or reframed: "if Enhanced Match meaningfully improves the match rate, F90's addressable audience grows proportionally" — less precise but more honest.
 - Move the ABMA SIM escalation protocol sentence to the appendix. It's operationally useful but tangential to the Enhanced Match narrative.

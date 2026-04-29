@@ -174,6 +174,7 @@ The callout is a story with a point of view, not a list of metrics. Every market
 
 This is the same failure mode that shows up in EU5 as "walked through all five markets" — it shows up in single-market callouts as "walked through every metric." Same fix: aggregate first, detail only when load-bearing.
 
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ### Consolidated-group callouts (EU5)
 
 When writing the EU5 callout, you are writing ONE callout for the group, not five summarized. The rules above still apply, plus these:

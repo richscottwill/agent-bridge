@@ -15,14 +15,7 @@ Cross-cutting concern — every cross-MCP workflow logs execution data to DuckDB
 Every cross-MCP workflow MUST follow this logging pattern:
 
 
-### At Workflow Start
-```sql
-INSERT INTO workflow_executions (execution_id, workflow_name, trigger_source, mcp_servers_involved, start_time)
-VALUES ('{name}_{timestamp}', '{name}', '{trigger}', ARRAY['{mcp1}', '{mcp2}'], CURRENT_TIMESTAMP);
-```
-
-
-### At Each Step Completion
+### At Workflow Start ```sql INSERT INTO workflow_executions (execution_id, workflow_name, trigger_source, mcp_servers_involved, start_time) VALUES ('{name}_{timestamp}', '{name}', '{trigger}', ARRAY['{mcp1}', '{mcp2}'], CURRENT_TIMESTAMP); ``` ### At Each Step Completion
 ```sql
 UPDATE workflow_executions SET steps_completed = steps_completed + 1
 WHERE execution_id = '{id}';
@@ -42,6 +35,9 @@ WHERE execution_id = '{id}';
 UPDATE workflow_executions SET end_time = CURRENT_TIMESTAMP,
     status = '{completed|partial|failed}',
     duration_seconds = EPOCH(CURRENT_TIMESTAMP - start_time)
+
+#### At Workflow End — Details
+
 WHERE execution_id = '{id}';
 ```
 

@@ -347,11 +347,7 @@ Contacts with last interaction >14 days ago. **Always check before drafting** â€
 
 #### Part 2
 
-
-
-
-
-
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 #### Part 3
 
 

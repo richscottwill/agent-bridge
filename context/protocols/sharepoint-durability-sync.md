@@ -18,6 +18,9 @@ Bidirectional sync between `~/shared/` (live workspace) and OneDrive `Kiro-Drive
 - Library: `Documents` (personal OneDrive)
 - Base folder: `Kiro-Drive/`
 - No siteUrl needed (defaults to personal OneDrive)
+
+#### SharePoint Target — Details
+
 - Subfolders auto-created on first write
 
 
@@ -101,8 +104,7 @@ sharepoint_write_file(libraryName="Documents", folderPath="Kiro-Drive/system-sta
 sharepoint_write_file(libraryName="Documents", folderPath="Kiro-Drive/portable-body",
     fileName="body-snapshot-2026-04-11.md", content=<snapshot_content>)
 
-
-
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 # Create/Update pattern (artifacts):
 sharepoint_write_file(libraryName="Documents", folderPath="Kiro-Drive/artifacts",
     fileName="testing-approach-v5.md", content=<article_content>)

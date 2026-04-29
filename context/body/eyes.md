@@ -213,12 +213,7 @@ SPs said matters least: Bulk purchasing (27%), Store location (24%).
 Why SPs didn't sign up: Believed bulk required (50%), savings wouldn't justify costs (31%).
 **Key insight:** SPs believe AB requires bulk purchasing and isn't free. Existing ads reinforced both.
 
-
-
-
-
-
-
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ### Messaging Shift
 Bulk/wholesale/B2B → price, quality, selection:
 - "Online Bulk Purchasing" → "Smart Business Buying"
