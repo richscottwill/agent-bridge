@@ -196,3 +196,131 @@ browser.
 swapped the last literal `24px` (`.wr-score-value` from WR-D1 scorecard)
 to `var(--size-section)`. Zero literal-px font-sizes remain in
 weekly-review.html.
+
+---
+
+## R2 consolidated (Local Kiro cold-load probe, 2026-04-29)
+
+Second review round — Local Kiro cleared the chrome-devtools-mcp lock and ran
+live probes across WW/US/EU5/JP. Found 3 bugs, 10 nit-polish items, 4
+structural moves (in addition to the 8 R2 research ideas already seeded).
+
+Source files:
+- `~/shared/context/intake/weekly-review-r1-verification-results.md` — 12 pass / 2 partial / 0 fail + Bug 1-3 root causes
+- `~/shared/context/intake/weekly-review-r2-consolidated-mockup.html` — 23 findings with probe evidence + code snippets
+- `~/shared/context/intake/weekly-review-r2-consolidated-preview.png` — rendered preview
+
+**Data-dependency audit (live) before execution:**
+- Bug 1 (three-Q empty on WW): `c.market_breakdown` that Local Kiro's fix uses **doesn't exist** in callout-data.json. WW rollup brand_detail/nb_detail carry only {regs, regs_yoy, regs_vs4wk} — no `cpa_wow / cvr_wow / lw_regs`. Per-country markets carry the full field set. Real fix: use `metrics.cpa_yoy` + `metrics.cpa_vs4wk` for card 1 on WW, derive card-2 WoW from prev-week callout lookup (WW W16 metrics exist).
+- Bug 2 (variance empty on WW): WW brand_detail has no `lw_regs`. Fix: aggregate per-country brand/nb lw_regs + regs across the 10 per-country markets. Totals land within ~1% of WW metrics.regs (verified: Brand 7,143 + NB 10,185 = 17,328 vs WW metrics 17,484, residual 156 regs).
+- Bug 3 (section-freshness 404): root cause is regex in `resolveManifestPath()` — assumes URLs contain `/dashboards/` but localhost:8080 serves `~/shared/dashboards/` at root so URLs don't carry that prefix. Regex match fails → depth 0 → page-relative `data/` → 404 on `/performance/data/`. Fix: depth from `location.pathname.split('/').filter(Boolean).length - 1`.
+
+### Bugs (Tier A — Sprint 1)
+
+### WR-B1-1 · Three-question cards 1+2 empty on WW rollup
+- **Source:** R2 consolidated #1 (BUG)
+- **Priority:** HIGH · **Effort:** 30 min · **Depends on:** none
+- **Status:** open
+- **Fix:** rollup branch in `renderThreeQ` synthesizes card 1 from `metrics.cpa_yoy + cpa_vs4wk`, card 2 from `metrics.regs` + YoY + dominant-channel (Brand vs NB) from metrics.
+
+### WR-B1-2 · Variance waterfall empty on WW rollup
+- **Source:** R2 consolidated #2 (BUG)
+- **Priority:** HIGH · **Effort:** 45 min · **Depends on:** none
+- **Status:** open
+- **Fix:** aggregate per-country brand_detail.lw_regs + nb_detail.lw_regs across the 10 member markets of the rollup for WoW decomposition. Residual catches the mix shift.
+
+### WR-B1-3 · section-freshness.json 404 (cosmetic)
+- **Source:** R2 consolidated #3 (BUG — cosmetic)
+- **Priority:** MED · **Effort:** 10 min · **Depends on:** none
+- **Status:** open
+- **Fix:** `resolveManifestPath()` uses regex that assumes `/dashboards/` in URL. Compute depth from `location.pathname.split('/').filter(Boolean).length - 1` instead.
+
+### Polish (Tier B — Sprint 2)
+
+### WR-P3 · `.sec-panel` computed padding is 0px
+- **Source:** R2 consolidated #4 (polish)
+- **Priority:** HIGH · **Effort:** 10 min · **Depends on:** none
+- **Status:** open
+- **Fix:** Add `.sec-panel { padding: var(--gap-lg) var(--gap-xl) }` so cards match MPE's 20px/24px content breathing room.
+
+### WR-P4 · 152px dead gap between sec-scorecard and sec-trend
+- **Source:** R2 consolidated #5 (polish)
+- **Priority:** HIGH · **Effort:** 15 min · **Depends on:** WR-S2
+- **Status:** open
+- **Fix:** Grid container auto-height with `align-items: start`. Also addressed structurally by WR-S2 (side-by-side scorecard+KPIs).
+
+### WR-P5 · TOC link order doesn't match rendered order
+- **Source:** R2 consolidated #6 (polish)
+- **Priority:** MED · **Effort:** 10 min · **Depends on:** none
+- **Status:** open
+- **Fix:** Reorder `.wr-toc` anchor list to match rendered order post-D3 narrative-first: Callout → Variance → KPIs → Scorecard → Trend → Calibration → Detail → Channels → Context.
+
+### WR-P6 · Narrative card uses H3 for body prose (screen-reader issue)
+- **Source:** R2 consolidated #7 (polish / a11y)
+- **Priority:** MED · **Effort:** 15 min · **Depends on:** none
+- **Status:** open
+- **Fix:** Change `.wr-callout-headline` from H3 to a paragraph with bold weight. H3s should be navigable landmarks, not body prose.
+
+### WR-P7 · Heading hierarchy skips H2
+- **Source:** R2 consolidated #8 (a11y)
+- **Priority:** MED · **Effort:** 15 min · **Depends on:** WR-P6
+- **Status:** open
+- **Fix:** Promote section titles (Scorecard, KPIs, Trend panels, etc.) to H2 so the page hierarchy reads H1 → H2 (section) → H3 (sub-block) properly.
+
+### WR-P8 · Zero semantic landmarks (no `header`, `main`, `nav`, `aside`)
+- **Source:** R2 consolidated #9 (a11y)
+- **Priority:** MED · **Effort:** 20 min · **Depends on:** none
+- **Status:** open
+- **Fix:** Wrap `.wr-header` in `<header>`, content in `<main>`, TOC in `<nav>`. Thread strip gets `role="region" aria-label="Recent weeks"`.
+
+### WR-P9 · Canvas missing aria-label + role="img"
+- **Source:** R2 consolidated #10 (a11y)
+- **Priority:** MED · **Effort:** 10 min · **Depends on:** none
+- **Status:** open
+- **Fix:** `<canvas id="trendChart" role="img" aria-label="Weekly registrations + OP2">` and analogous for calibrationChart.
+
+### WR-P10 · Week selector `<select>` has no accessible label
+- **Source:** R2 consolidated #11 (a11y)
+- **Priority:** MED · **Effort:** 5 min · **Depends on:** none
+- **Status:** open
+- **Fix:** Add `aria-label="Week"` to `#weekSelect`, OR wrap in a `<label>`.
+
+### WR-P11 · Thread strip lacks `role="group"` + aria-label
+- **Source:** R2 consolidated #12 (a11y)
+- **Priority:** LOW · **Effort:** 5 min · **Depends on:** none
+- **Status:** open
+- **Fix:** `<div class="wr-thread-strip" role="group" aria-label="Recent weeks">`.
+
+### WR-P12 · Calibration H3 swallows axis toggle (nested, not adjacent)
+- **Source:** R2 consolidated #13 (a11y + structure)
+- **Priority:** LOW · **Effort:** 10 min · **Depends on:** none
+- **Status:** open
+- **Fix:** Move the `.wr-chart-axis-toggle` outside the H3; use a flex header row so h3 + toggle are siblings.
+
+### Structural (Tier C — Sprint 1 + 2)
+
+### WR-S1 · Progressive disclosure on secondary panels
+- **Source:** R2 consolidated #14 (structure)
+- **Priority:** HIGH · **Effort:** 30 min · **Depends on:** none
+- **Status:** open
+- **Fix:** Wrap `#sec-detail`, `#sec-channels`, `#sec-context` in `<details>` tags collapsed by default. Page lands under ~1,800px cold. Full WBR arc above the fold.
+
+### WR-S2 · Scorecard + KPIs side-by-side
+- **Source:** R2 consolidated #15 (structure)
+- **Priority:** MED · **Effort:** 20 min · **Depends on:** none
+- **Status:** open
+- **Fix:** Grid-layout `#sec-scorecard` and KPI row in a 2-col layout at wide viewport. Eliminates the 152px vertical gap and matches how Kate reads "where are we vs how good is the forecast" in one glance.
+
+### WR-S3 · Brand/NB channel cards show empty rows on WW rollup
+- **Source:** R2 consolidated #16 (structure)
+- **Priority:** LOW · **Effort:** 30 min · **Depends on:** none
+- **Status:** open
+- **Fix:** On rollup markets (WW/EU5/NA), channel cards show "Channel breakdown not available on rollup — see per-market views" OR a synthesized table of which markets contribute most to Brand vs NB totals.
+
+### WR-S4 · Weekly detail scroll-within-scroll trap
+- **Source:** R2 consolidated #17 (structure)
+- **Priority:** LOW · **Effort:** 15 min · **Depends on:** WR-S1
+- **Status:** open
+- **Fix:** Remove `max-height: 520px; overflow: auto` on `.wr-table-scroll`. Once WR-S1 wraps in `<details>`, the table flows inline at full height when expanded.
+
+---
