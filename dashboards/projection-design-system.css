@@ -1447,3 +1447,23 @@ select.control-input:hover {
 @media (max-width: 900px) {
   #decomp-grid { grid-template-columns: 1fr !important; }
 }
+
+/* ========================================================================
+   Shared sec-panel (WR-P3, 2026-04-29)
+   Extracted from projection.html's inline <style> so weekly-review.html
+   and any other page using .sec-panel gets consistent card chrome.
+   ======================================================================== */
+.sec-panel {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 8px;
+  padding: var(--gap-md) var(--gap-lg);
+}
+.sec-panel h3 {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--gap-sm);
+  font-weight: 600;
+}
