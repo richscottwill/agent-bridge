@@ -446,3 +446,12 @@ Sign-convention fix caught during verification: `error_pct > 0` means `actual > 
 | Finding | Status | Notes |
 |---|---|---|
 | M6 · 12-market small multiples with shared Y (indexed) | done | New `renderSmallMultiples()` + `.wr-smallmult-grid` section between scorecard and thread strip. CSS Grid `auto-fill minmax(180px, 1fr)` — reflows 4×3 / 3×4 / 2×6 by viewport. Each panel: market + current-week YoY%, two overlaid sparklines (actual accent, OP2 plan muted). Per report #043 and bus 006 pushback, Y-axis is SHARED across all panels but series are **indexed to W{first}=100** so absolute-scale differences (WW 17K regs, MX 500) don't destroy cross-market pattern recognition. Heading dynamically labels the base week. Spend-archetype markets (JP/AU) use `cost` instead of `regs`. YoY derived from `FORECAST.ly_weekly[mk]` same-week reference. Click-to-select cascades through the same code path as the trust-bar pills. Active market gets an outlined border + brand-color ring. Verified: 12 cells render with correct YoY signs (WW +75%, UK +190%, MX +197%, IT +7%, AU — since AU has no LY reference in the current data), console clean. |
+
+
+## M7 shipped (2026-04-30) — ALL 10 MOCKUPS LANDED
+
+| Finding | Status | Notes |
+|---|---|---|
+| M7 · Amazon 6-12 chart | done | New `renderSixTwelveChart()` emits dual-panel inline SVG between main charts and weekly detail. Left panel: 6 weeks weekly from `FORECAST.weekly[mk].filter(wk in [firstWk, maxWk])` with actual line + OP2 plan dashed overlay + endpoint dot + week-level x-axis labels. Right panel: 12 months monthly from `FORECAST.monthly[mk]` (kiro-server confirmed this structure exists per bus 006) with actual line + pred overlay + now-line dashed vertical + month x-axis labels. Different Y axes per panel (Commoncog: same Y "hides real relationships between short and long-term"). Box-score footer with 5 cells: WoW %, YoY %, vs OP2 %, 4wk avg, 13wk avg — same format every week. Archetype-aware: regs-markets show registrations; spend-only (JP/AU) show spend. Inline SVG pattern matches M10 waterfall — no Chart.js instances, cheap re-render. Verified: US W16 shows -3% WoW / +92% YoY / +17.2% vs OP2 / 4wk 9,148 / 13wk 8,489; JP W16 swaps to $35,538 spend with cost-based box score. Console clean. |
+
+**All 10 mockups shipped.** M1-M10 complete per mockups/README.md.

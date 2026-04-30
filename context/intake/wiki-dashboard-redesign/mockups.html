@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wiki dashboard mockups — kiro-local, 2026-04-30</title>
+<style>
+  :root{
+    --bg:#0f1117; --panel:#12141c; --card:#14161e; --border:#1e2028; --border2:#2a2d35;
+    --ink:#eaeaea; --body:#d4d4d4; --mute:#777; --sub:#555;
+    --brand:#3b82f6; --brand-sel:#172040; --brand-text:#93b4f5;
+    --good:#4ade80; --warn:#e0c080; --bad:#f87171;
+    --good-bg:rgba(6,78,59,.4); --warn-bg:rgba(113,63,18,.4); --bad-bg:rgba(127,29,29,.4);
+    --mkt-bg:rgba(6,78,59,.2); --mkt-ink:#6bc4a0;
+    --topic-bg:rgba(113,63,18,.15); --topic-ink:#c4a060;
+    --tag-bg:rgba(88,28,135,.2); --tag-ink:#c084fc;
+    --font:'Amazon Ember','-apple-system',BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --mono:'JetBrains Mono','SF Mono',Menlo,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--font);background:var(--bg);color:var(--ink);font-variant-numeric:tabular-nums;padding:40px 20px 120px}
+  .wrap{max-width:1440px;margin:0 auto}
+  h1{font-size:26px;font-weight:700;margin-bottom:6px}
+  .kicker{font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--sub);margin-bottom:8px}
+  .meta{font-size:12px;color:var(--sub);margin-bottom:30px}
+  .mk-section{margin-bottom:36px;background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+  .mk-head{padding:14px 20px;background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:12px}
+  .mk-num{font-family:var(--mono);font-size:13px;color:var(--mute);letter-spacing:0.04em}
+  .mk-title{font-size:16px;font-weight:600;color:var(--ink)}
+  .mk-subtitle{font-size:12px;color:var(--mute);margin-left:auto}
+  .mk-frame{padding:18px 20px;position:relative}
+  .mk-caption{padding:10px 20px 16px;font-size:12px;color:var(--mute);font-style:italic;border-top:1px solid var(--border);background:rgba(30,58,138,0.04)}
+  .mk-caption strong{color:var(--brand-text);font-style:normal}
+
+  /* ======== Shared render primitives (styled to match wiki-search.html) ======== */
+  .rc{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:6px;transition:all .12s}
+  .rc:hover{border-color:#2a3a5c;background:#161a24}
+  .rc-head{display:flex;align-items:flex-start;gap:6px}
+  .rc-title{font-size:15px;font-weight:600;color:var(--body);flex:1;line-height:1.3}
+  .rc-badges{display:flex;gap:3px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+  .b{display:inline-block;padding:1px 5px;border-radius:3px;font-size:11px;font-weight:600;white-space:nowrap}
+  .b-cat{background:rgba(30,58,138,.3);color:#7da2d4}
+  .b-final{background:var(--good-bg);color:var(--good)}
+  .b-draft{background:rgba(55,65,81,.4);color:#9ca3af}
+  .b-review{background:var(--warn-bg);color:var(--warn)}
+  .b-mkt{background:var(--mkt-bg);color:var(--mkt-ink);font-size:10px}
+  .b-topic{background:var(--topic-bg);color:var(--topic-ink);font-size:10px}
+  .b-tag{background:var(--tag-bg);color:var(--tag-ink);font-size:10px}
+  .b-sp-pub{background:rgba(6,78,59,.25);color:#60c49a;font-size:10px}
+  .b-sp-stale{background:rgba(113,63,18,.3);color:#ffbb66;font-size:10px}
+  .b-sp-local{background:rgba(55,65,81,.3);color:#9ca3af;font-size:10px}
+  .b-orphan{background:rgba(55,65,81,.45);color:#bbb;font-size:10px}
+  .b-contradicts{background:var(--bad-bg);color:var(--bad);font-size:10px}
+  .b-cycle{background:var(--warn-bg);color:var(--warn);font-size:10px}
+  .b-new{background:rgba(59,130,246,.15);color:#6b9bd2;font-size:10px;padding:1px 7px;border-radius:10px}
+  .b-age-fresh{background:rgba(6,78,59,.18);color:#60c49a;font-size:10px}
+  .b-age-aging{background:rgba(55,65,81,.3);color:#a8a8a8;font-size:10px}
+  .b-age-stale{background:rgba(113,63,18,.3);color:var(--warn);font-size:10px}
+  .b-age-ancient{background:rgba(127,29,29,.3);color:var(--bad);font-size:10px}
+  .rc-snip{font-size:13px;color:var(--mute);line-height:1.4;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .rc-meta{display:flex;gap:10px;margin-top:4px;font-size:12px;color:var(--sub);flex-wrap:wrap}
+
+  /* ======== M01 — Instrument-panel sticky header ======== */
+  .m01-sticky{display:flex;flex-direction:column;gap:8px;padding:10px 16px;background:var(--panel);border-bottom:1px solid var(--border)}
+  .m01-top{display:flex;align-items:baseline;gap:16px}
+  .m01-kicker{font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--sub)}
+  .m01-title{font-size:18px;font-weight:700;color:var(--ink)}
+  .m01-docs{font-size:14px;color:var(--mute);margin-left:auto}
+  .m01-wk{font-family:var(--mono);font-size:11px;color:var(--brand-text);background:rgba(59,130,246,.15);padding:2px 8px;border-radius:10px}
+  .m01-search{display:flex;gap:8px;align-items:center}
+  .m01-input{flex:1;background:#1a1d27;border:1px solid var(--border2);color:var(--ink);padding:9px 14px;border-radius:6px;font-size:14px;outline:none}
+  .m01-kbd{font-family:var(--mono);font-size:10px;color:var(--sub);background:#1a1d27;border:1px solid var(--border);padding:2px 6px;border-radius:3px}
+  .m01-pulse{display:flex;gap:5px;align-items:center;padding-top:2px;flex-wrap:wrap}
+  .m01-pl{display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:4px;font-size:11px;color:var(--body);cursor:pointer}
+  .m01-pl:hover{background:rgba(255,255,255,0.04)}
+  .m01-pl.on{outline:1px solid var(--brand);font-weight:600}
+  .m01-dot{width:8px;height:8px;border-radius:50%}
+  .m01-dot.g{background:var(--good)}
+  .m01-dot.a{background:var(--warn)}
+  .m01-dot.r{background:var(--bad)}
+  .m01-dot.m{background:#666}
+
+  /* ======== M02 — Hero KPI strip ======== */
+  .m02{display:grid;grid-template-columns:repeat(5,1fr);gap:28px;padding:20px 20px 16px;background:var(--panel);border-bottom:1px solid var(--border)}
+  .m02-k{text-align:center}
+  .m02-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--sub);margin-bottom:4px}
+  .m02-val{font-family:var(--font);font-size:32px;font-weight:700;color:var(--ink);line-height:1;margin-bottom:4px;font-variant-numeric:tabular-nums;letter-spacing:-0.01em}
+  .m02-val.good{color:var(--good)}
+  .m02-val.warn{color:var(--warn)}
+  .m02-val.bad{color:var(--bad)}
+  .m02-spark{margin-top:6px}
+  .m02-delta{font-size:11px;color:var(--sub);font-variant-numeric:tabular-nums;margin-top:3px}
+  .m02-delta.up{color:var(--good)}
+  .m02-delta.down{color:var(--bad)}
+  .m02-delta.flat{color:var(--sub)}
+
+  /* ======== M03 — Ingest log ======== */
+  .m03-head{font-size:12px;color:var(--sub);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;padding:10px 20px 6px;border-bottom:1px solid var(--border)}
+  .m03-row{display:flex;gap:12px;padding:8px 20px;border-bottom:1px solid var(--border);align-items:baseline;transition:background .1s;cursor:pointer;font-size:13px}
+  .m03-row:hover{background:rgba(30,58,138,.08)}
+  .m03-date{font-family:var(--mono);font-size:11px;color:var(--mute);min-width:96px}
+  .m03-verb{font-size:10px;font-weight:600;text-transform:uppercase;padding:1px 6px;border-radius:3px;min-width:60px;text-align:center}
+  .m03-verb.ingest{background:rgba(6,78,59,.3);color:var(--good)}
+  .m03-verb.update{background:rgba(30,58,138,.25);color:var(--brand-text)}
+  .m03-verb.lint{background:rgba(113,63,18,.3);color:var(--warn)}
+  .m03-verb.query{background:rgba(88,28,135,.2);color:#c084fc}
+  .m03-verb.archive{background:rgba(55,65,81,.4);color:#9ca3af}
+  .m03-title{color:var(--body);flex:1}
+  .m03-summary{color:var(--mute);font-size:12px;flex:2}
+  .m03-affected{font-family:var(--mono);font-size:11px;color:var(--mute);min-width:60px;text-align:right}
+
+  /* ======== M04 — Wiki-health fan chart ======== */
+  .m04-container{padding:20px}
+  .m04-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+  .m04-h{font-size:13px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+  .m04-current{font-family:var(--mono);font-size:13px;color:var(--good)}
+  .m04-chart{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:14px}
+  .m04-fan-svg{width:100%;height:200px}
+  .m04-footer{display:flex;justify-content:space-between;font-size:11px;color:var(--sub);margin-top:8px;font-family:var(--mono)}
+
+  /* ======== M05 — Demand gap panel ======== */
+  .m05{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:14px 16px;margin:12px 20px}
+  .m05-head{display:flex;justify-content:space-between;margin-bottom:10px;align-items:baseline}
+  .m05-h{font-size:12px;color:var(--warn);font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+  .m05-count{font-size:11px;color:var(--sub);font-family:var(--mono)}
+  .m05-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px dashed var(--border);align-items:baseline}
+  .m05-row:last-child{border-bottom:none}
+  .m05-q{font-size:13px;color:var(--body);flex:1;line-height:1.4}
+  .m05-asks{font-family:var(--mono);font-size:11px;color:var(--warn)}
+  .m05-cta{background:rgba(30,58,138,.25);border:1px solid rgba(59,130,246,.3);color:var(--brand-text);font-size:11px;padding:3px 8px;border-radius:3px;cursor:pointer;font-family:inherit;white-space:nowrap}
+  .m05-cta:hover{background:rgba(30,58,138,.4);border-color:var(--brand)}
+
+  /* ======== M06 — Topic small multiples ======== */
+  .m06{padding:16px 20px}
+  .m06-h{font-size:12px;color:var(--sub);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px}
+  .m06-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+  .m06-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:10px 12px;cursor:pointer;transition:border-color .12s}
+  .m06-card:hover{border-color:#2a3a5c}
+  .m06-name{font-size:13px;font-weight:600;color:var(--topic-ink);margin-bottom:2px}
+  .m06-ct{font-family:var(--mono);font-size:18px;color:var(--body);font-variant-numeric:tabular-nums;line-height:1}
+  .m06-sp{margin-top:6px;min-height:24px}
+  .m06-delta{font-size:11px;color:var(--sub);margin-top:3px;font-variant-numeric:tabular-nums}
+  .m06-delta.up{color:var(--good)}
+  .m06-delta.down{color:var(--bad)}
+
+  /* ======== M07 — Pipeline headline + exception ======== */
+  .m07-head{padding:12px 20px;border-bottom:1px solid var(--border)}
+  .m07-title{font-size:15px;color:var(--body);font-weight:500;margin-bottom:6px}
+  .m07-title strong{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+  .m07-deltas{font-size:12px;color:var(--mute);font-variant-numeric:tabular-nums}
+  .m07-deltas .up{color:var(--good)}
+  .m07-deltas .down{color:var(--bad)}
+  .m07-banner{background:rgba(127,29,29,0.15);border:1px solid rgba(248,113,113,0.3);border-radius:6px;padding:10px 14px;margin-top:10px;font-size:13px;color:#e8a0a0;display:flex;align-items:baseline;gap:10px}
+  .m07-banner strong{color:var(--bad);font-weight:700}
+  .m07-cta{background:var(--bad);color:#fff;font-size:12px;padding:4px 10px;border-radius:4px;margin-left:auto;border:none;cursor:pointer;font-family:inherit;font-weight:600}
+  .m07-col{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
+  .m07-col-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px}
+  .m07-draft .m07-col-h{color:#9ca3af}
+  .m07-review .m07-col-h{color:var(--warn)}
+  .m07-final .m07-col-h{color:var(--good)}
+  .m07-archived .m07-col-h{color:#e8a0a0}
+  .m07-bar{display:flex;height:6px;border-radius:3px;overflow:hidden;margin-bottom:8px;background:var(--border)}
+  .m07-bar-d{background:#555}.m07-bar-r{background:var(--warn)}.m07-bar-f{background:var(--good)}.m07-bar-a{background:#e8a0a0}
+  .m07-vel{font-size:11px;color:var(--sub);font-family:var(--mono);margin-top:6px}
+  .m07-vel .in{color:var(--good)}
+  .m07-vel .out{color:var(--bad)}
+  .m07-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:12px 20px}
+
+  /* ======== M08 — Doc viewer lineage ======== */
+  .m08{background:var(--card);border:1px solid var(--border);border-radius:6px;margin:12px 20px;overflow:hidden}
+  .m08-head{padding:12px 16px;border-bottom:1px solid var(--border)}
+  .m08-title{font-size:16px;font-weight:700;color:var(--ink)}
+  .m08-lineage{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--border)}
+  .m08-col{padding:10px 16px}
+  .m08-col:first-child{border-right:1px solid var(--border)}
+  .m08-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;color:var(--sub);margin-bottom:6px}
+  .m08-pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;margin:2px 3px 2px 0;background:rgba(30,58,138,.1);border:1px solid rgba(30,58,138,.25);color:var(--brand-text);cursor:pointer}
+  .m08-pill.raw{background:rgba(88,28,135,.15);border-color:rgba(168,85,247,.3);color:#c084fc}
+  .m08-body{padding:14px 16px;font-size:13px;color:var(--body);line-height:1.6}
+  .m08-body strong{color:var(--ink)}
+
+  /* ======== M09 — Contradiction/orphan badges on cards ======== */
+  .m09-cards .rc{margin-bottom:8px}
+
+  /* ======== M10 — Graph minimap ======== */
+  .m10{background:var(--card);border:1px solid var(--border);border-radius:6px;margin:12px 20px;padding:14px}
+  .m10-h{display:flex;justify-content:space-between;margin-bottom:10px;align-items:baseline}
+  .m10-title{font-size:12px;color:var(--sub);font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+  .m10-legend{font-size:11px;color:var(--sub);font-family:var(--mono)}
+  .m10-svg{display:block;width:100%;height:300px;background:#0f1117;border:1px solid var(--border);border-radius:4px}
+  .m10-node circle{cursor:pointer;transition:r .15s}
+  .m10-node:hover circle{stroke:var(--brand);stroke-width:2}
+  .m10-label{fill:var(--mute);font-size:9px;font-family:var(--mono);pointer-events:none}
+
+  /* Spark primitives */
+  .spark{display:inline-block;vertical-align:middle}
+
+  /* Utilities */
+  .sub{color:var(--sub);font-size:11px}
+  .mute{color:var(--mute)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="kicker">Wiki dashboard · mockups · kiro-local · 2026-04-30</p>
+<h1>10 static mockups — the Tier-1 changes applied to real W17 wiki index data</h1>
+<p class="meta">Rendered against the live <code>wiki-search-index.json</code> (301 docs, 16 FINAL, 196 DRAFT, 54 REVIEW, 49 archived; index generated 2026-04-25). Open this file side-by-side with <code>screenshots/01a-current-search-fullpage.png</code> to A/B the current state against the proposal. Every number below is real data. Companion: <code>README.md</code>, <code>dashboard-redesign-report.html</code>.</p>
+
+<!-- ============================================================
+     M01 — Instrument-panel sticky header
+     ============================================================ -->
+<div class="mk-section">
+  <div class="mk-head">
+    <span class="mk-num">M01</span>
+    <span class="mk-title">Sticky instrument-panel header (same grammar as projection.html)</span>
+    <span class="mk-subtitle">principles 1, 4, 17 · projection design-system .banner-strip · WR M1 sticky</span>
+  </div>
+  <div class="mk-frame">
+    <div class="m01-sticky">
+      <div class="m01-top">
+        <div>
+          <div class="m01-kicker">Knowledge base</div>
+          <div class="m01-title">AB Paid Search wiki</div>
+        </div>
+        <div class="m01-docs">301 docs · <span class="mute">generated 4/25, 4:38 PM</span></div>
+        <div class="m01-wk">W18 · 14 ingested</div>
+      </div>
+      <div class="m01-search">
+        <input class="m01-input" placeholder='Search — try "oci test methodology", callout W16 MX, karpathy, polaris brand lp'>
+        <span class="m01-kbd">/</span>
+        <span class="m01-kbd">⌘K</span>
+      </div>
+      <div class="m01-pulse">
+        <span class="sub" style="margin-right:6px">HEALTH</span>
+        <span class="m01-pl"><span class="m01-dot g"></span>230 fresh</span>
+        <span class="m01-pl"><span class="m01-dot m"></span>53 aging</span>
+        <span class="m01-pl on"><span class="m01-dot a"></span>15 stale</span>
+        <span class="m01-pl"><span class="m01-dot r"></span>3 ancient</span>
+        <span class="m01-pl" style="margin-left:8px"><span class="m01-dot m"></span>3 orphans</span>
+        <span class="m01-pl"><span class="m01-dot r"></span>2 contradictions</span>
+      </div>
+    </div>
+  </div>
+  <div class="mk-caption"><strong>What changes:</strong> the 2-line "Wiki Search 301 docs · 49 archived" title becomes a full instrument panel. Kicker, name, doc count, active-week indicator, ⌘K + / hints in the input, and a health-pulse row. All pills clickable to filter. Lives in the sticky top-bar — same CSS rules as projection.html's banner-strip. Aging pill selected in this mockup to show active-filter state.</div>
+</div>
+
+<!-- ============================================================
+     M02 — Hero KPI strip
+     ============================================================ -->
+<div class="mk-section">
+  <div class="mk-head">
+    <span class="mk-num">M02</span>
+    <span class="mk-title">Hero KPI strip — 5 numbers with sparklines + deltas</span>
+    <span class="mk-subtitle">principles 2, 3, 6 · projection .hero-kpi-strip · Karpathy lint checks</span>
+  </div>
+  <div class="mk-frame">
+    <div class="m02">
+      <div class="m02-k">
+        <div class="m02-label">Docs</div>
+        <div class="m02-val">301</div>
+        <div class="m02-spark">
+          <svg class="spark" width="72" height="18" viewBox="0 0 72 18">
+            <polyline fill="none" stroke="#9a9a9a" stroke-width="1.5" points="0,12 12,11 24,10 36,8 48,6 60,5 72,4" />
+            <circle cx="72" cy="4" r="2" fill="#9a9a9a"/>
+          </svg>
+        </div>
+        <div class="m02-delta up">+14 WoW</div>
+      </div>
+      <div class="m02-k">
+        <div class="m02-label">Final</div>
+        <div class="m02-val good">16</div>
+        <div class="m02-spark">
+          <svg class="spark" width="72" height="18" viewBox="0 0 72 18">
+            <polyline fill="none" stroke="#4ade80" stroke-width="1.5" points="0,14 12,13 24,11 36,10 48,8 60,7 72,5" />
+            <circle cx="72" cy="5" r="2" fill="#4ade80"/>
+          </svg>
+        </div>
+        <div class="m02-delta up">+2 WoW</div>
+      </div>
+      <div class="m02-k">
+        <div class="m02-label">Stale &gt;90d</div>
+        <div class="m02-val warn">18</div>
+        <div class="m02-spark">
+          <svg class="spark" width="72" height="18" viewBox="0 0 72 18">
+            <polyline fill="none" stroke="#e0c080" stroke-width="1.5" points="0,8 12,9 24,10 36,10 48,11 60,12 72,13" />
+            <circle cx="72" cy="13" r="2" fill="#e0c080"/>
+          </svg>
+        </div>
+        <div class="m02-delta up" style="color:#e0c080">+3 WoW — trending bad</div>
+      </div>
+      <div class="m02-k">
+        <div class="m02-label">Orphans</div>
+        <div class="m02-val warn">3</div>
+        <div class="m02-spark">
+          <svg class="spark" width="72" height="18" viewBox="0 0 72 18">
+            <polyline fill="none" stroke="#e0c080" stroke-width="1.5" points="0,10 12,9 24,10 36,9 48,10 60,9 72,9" />
+            <circle cx="72" cy="9" r="2" fill="#e0c080"/>
+          </svg>
+        </div>
+        <div class="m02-delta flat">flat WoW</div>
+      </div>
+      <div class="m02-k">
+        <div class="m02-label">Contradictions</div>
+        <div class="m02-val bad">2</div>
+        <div class="m02-spark">
+          <svg class="spark" width="72" height="18" viewBox="0 0 72 18">
+            <polyline fill="none" stroke="#f87171" stroke-width="1.5" points="0,14 12,13 24,12 36,10 48,8 60,6 72,4" />
+            <circle cx="72" cy="4" r="2" fill="#f87171"/>
+          </svg>
+        </div>
+        <div class="m02-delta down" style="color:#f87171">+1 WoW — resolve</div>
+      </div>
+    </div>
+  </div>
+  <div class="mk-caption"><strong>What changes:</strong> replace the small-text "Wiki Search 301 docs · 49 archived" title with 5 hero numbers. Each carries a 6-week sparkline and a WoW delta subline. Green for FINAL, amber for STALE + ORPHANS, red for CONTRADICTIONS, neutral grey for DOCS. <strong>Data work needed:</strong> new <code>orphan_count</code> and <code>contradiction_count</code> in the index (d1 + d2 in the data-work table).</div>
+</div>
+
+<!-- ============================================================
+     M03 — Karpathy ingest log
+     ============================================================ -->
+<div class="mk-section">
+  <div class="mk-head">
+    <span class="mk-num">M03</span>
+    <span class="mk-title">Karpathy-style ingest log — chronology pinned above the recent feed</span>
+    <span class="mk-subtitle">principle 14 · Karpathy gist log.md pattern</span>
+  </div>
+  <div class="mk-frame">
+    <div class="m03-head">📥 THIS WEEK · 14 EVENTS</div>
+    <div class="m03-row">
+      <span class="m03-date">2026-04-25</span>
+      <span class="m03-verb ingest">Ingest</span>
+      <span class="m03-title">W17 US/MX/AU callouts</span>
+      <span class="m03-summary">6 new callout drafts from refresh-callouts.py · WW review generated · 5 entity pages touched</span>
+      <span class="m03-affected">+6 · Δ5</span>
+    </div>
+    <div class="m03-row">
+      <span class="m03-date">2026-04-25</span>
+      <span class="m03-verb lint">Lint</span>
+      <span class="m03-title">Wiki health check</span>
+      <span class="m03-summary">orphans 3 (was 2) · contradictions 2 (was 1) · broken-ref scan clean</span>
+      <span class="m03-affected">Δ2 new</span>
+    </div>
+    <div class="m03-row">
+      <span class="m03-date">2026-04-22</span>
+      <span class="m03-verb update">Update</span>
+      <span class="m03-title">Wiki Index rebuild</span>
+      <span class="m03-summary">301 docs indexed (was 287) · +14 callout children · SharePoint cache refreshed</span>
+      <span class="m03-affected">Δ14</span>
+    </div>
+    <div class="m03-row">
+      <span class="m03-date">2026-04-20</span>
+      <span class="m03-verb query">Query</span>
+      <span class="m03-title">"polaris au rollout status"</span>
+      <span class="m03-summary">matched Polaris Program (1,896w) + AU State File · demand-log: answered</span>
+      <span class="m03-affected">→ 2 pages</span>
+    </div>
+    <div class="m03-row">
+      <span class="m03-date">2026-04-18</span>
+      <span class="m03-verb ingest">Ingest</span>
+      <span class="m03-title">Wiki Blackboard Schema</span>
+      <span class="m03-summary">New sidecar state file pattern · 7 related pages updated to reference blackboard</span>
+      <span class="m03-affected">+1 · Δ7</span>
+    </div>
+    <div class="m03-row">
+      <span class="m03-date">2026-04-17</span>
+      <span class="m03-verb lint">Lint</span>
+      <span class="m03-title">Evening wiki audit</span>
+      <span class="m03-summary">46-article drift resolved · broken-ref scan expanded · SharePoint cache refresh</span>
+      <span class="m03-affected">46 → 0</span>
+    </div>
+    <div class="m03-row">
+      <span class="m03-date">2026-04-17</span>
+      <span class="m03-verb archive">Archive</span>
+      <span class="m03-title">9 OCI subdocuments</span>
+      <span class="m03-summary">Consolidated into single OCI Program canonical doc (2,766 words)</span>
+      <span class="m03-affected">−9 · Δ1</span>
+    </div>
+  </div>
+  <div class="mk-caption"><strong>What changes:</strong> chronological ingest log gets its own section. Answers "what happened this week?" without forcing the user to scan card updates. Verbs are color-coded. Affected-pages count in mono on the right. Karpathy's explicit pattern: "<code>## [2026-04-25] ingest | Title</code>" log entries. <strong>Data work needed:</strong> parse existing <code>wiki-index.md</code> + session-log.md for events (d6 in the data-work table).</div>
+</div>
+
+<!-- ============================================================
+     M04 — Wiki-health fan chart
+     ============================================================ -->
+<div class="mk-section">
+  <div class="mk-head">
+    <span class="mk-num">M04</span>
+    <span class="mk-title">Wiki-health fan chart — 26-week freshness with 50/80/90 CI bands</span>
+    <span class="mk-subtitle">principle 9 · BoE 1996 fan chart · reuses projection M9 fan-chart code</span>
+  </div>
+  <div class="mk-frame">
+    <div class="m04-container">
+      <div class="m04-head">
+        <div class="m04-h">⊞ wiki health — % docs with updated &lt;90d</div>
+        <div class="m04-current">W17: 76% · in band</div>
+      </div>
+      <div class="m04-chart">
+        <svg class="m04-fan-svg" viewBox="0 0 600 200">
+          <!-- Grid -->
+          <line x1="40" y1="10" x2="40" y2="170" stroke="#2a2d35" stroke-width="1"/>
+          <line x1="40" y1="170" x2="590" y2="170" stroke="#2a2d35" stroke-width="1"/>
+          <line x1="40" y1="90" x2="590" y2="90" stroke="#2a2d35" stroke-width="0.5" stroke-dasharray="2,3"/>
+          <!-- Y labels -->
+          <text x="32" y="174" text-anchor="end" fill="#555" font-size="9" font-family="monospace">50%</text>
+          <text x="32" y="94" text-anchor="end" fill="#555" font-size="9" font-family="monospace">75%</text>
+          <text x="32" y="14" text-anchor="end" fill="#555" font-size="9" font-family="monospace">100%</text>
+          <!-- 90% band (lightest) -->
+          <polygon points="50,120 70,115 90,110 110,105 130,108 150,105 170,100 190,95 210,92 230,88 250,85 270,82 290,80 310,78 330,75 350,72 370,70 390,68 410,65 430,63 450,60 470,58 490,55 510,53 530,50 550,48 570,45 570,25 550,28 530,30 510,33 490,35 470,38 450,40 430,43 410,45 390,48 370,50 350,52 330,55 310,58 290,60 270,62 250,65 230,68 210,72 190,75 170,80 150,85 130,88 110,85 90,90 70,95 50,100" fill="#FF9900" opacity="0.1"/>
+          <!-- 80% band -->
+          <polygon points="50,115 70,110 90,105 110,100 130,103 150,100 170,95 190,90 210,87 230,83 250,80 270,77 290,75 310,73 330,70 350,67 370,65 390,63 410,60 430,58 450,55 470,53 490,50 510,48 530,45 550,43 570,40 570,30 550,33 530,35 510,38 490,40 470,43 450,45 430,48 410,50 390,53 370,55 350,57 330,60 310,63 290,65 270,67 250,70 230,73 210,77 190,80 170,85 150,90 130,93 110,90 90,95 70,100 50,105" fill="#FF9900" opacity="0.18"/>
+          <!-- 50% band (darkest, innermost) -->
+          <polygon points="50,110 70,105 90,100 110,95 130,98 150,95 170,90 190,85 210,82 230,78 250,75 270,72 290,70 310,68 330,65 350,62 370,60 390,58 410,55 430,53 450,50 470,48 490,45 510,43 530,40 550,38 570,35 570,35 550,38 530,40 510,43 490,45 470,48 450,50 430,53 410,55 390,58 370,60 350,62 330,65 310,68 290,70 270,72 250,75 230,78 210,82 190,85 170,90 150,95 130,98 110,95 90,100 70,105 50,110" fill="#FF9900" opacity="0.3"/>
+          <!-- Central line (actuals) -->
+          <polyline fill="none" stroke="#0066CC" stroke-width="2" points="50,112 70,107 90,102 110,98 130,100 150,98 170,92 190,88 210,84 230,80 250,77 270,74 290,72 310,71 330,68 350,65 370,62 390,60 410,58 430,55 450,52 470,50 490,48 510,46 530,44 550,42 570,40"/>
+          <!-- Endpoint dot -->
+          <circle cx="570" cy="40" r="3" fill="#0066CC"/>
+          <!-- X labels -->
+          <text x="50" y="185" fill="#555" font-size="9" font-family="monospace">W-26</text>
+          <text x="200" y="185" fill="#555" font-size="9" font-family="monospace">W-20</text>
+          <text x="350" y="185" fill="#555" font-size="9" font-family="monospace">W-13</text>
+          <text x="500" y="185" fill="#555" font-size="9" font-family="monospace">W-4</text>
+          <text x="565" y="185" fill="#555" font-size="9" font-family="monospace">W17</text>
+          <!-- Legend -->
+          <rect x="420" y="6" width="10" height="6" fill="#FF9900" opacity="0.1"/><text x="434" y="12" fill="#9a9a9a" font-size="9">90% CI</text>
+          <rect x="470" y="6" width="10" height="6" fill="#FF9900" opacity="0.18"/><text x="484" y="12" fill="#9a9a9a" font-size="9">80%</text>
+          <rect x="510" y="6" width="10" height="6" fill="#FF9900" opacity="0.3"/><text x="524" y="12" fill="#9a9a9a" font-size="9">50%</text>
+          <line x1="546" y1="9" x2="562" y2="9" stroke="#0066CC" stroke-width="2"/><text x="566" y="12" fill="#9a9a9a" font-size="9">actual</text>
+        </svg>
+      </div>
+      <div class="m04-footer">
+        <span>Historical 26w mean: 71% · σ 6.2%</span>
+        <span>Current W17: 76% · inside 50% band</span>
+        <span>Lowest: 58% (W-21 holiday drift)</span>
+      </div>
+    </div>
+  </div>
+  <div class="mk-caption"><strong>What changes:</strong> the wiki-health rate ("76% of docs are fresh") gets rendered as a fan chart matching projection.html M9. A narrow band means Richard's maintenance cadence is stable; a wide band means it's erratic. Instantly separates "we're on track" from "we need a lint pass." Reuses the canvas-chart fan-mode code from kiro-server's 2026-04-30 commit <code>1a29e51</code>. <strong>Data work needed:</strong> weekly freshness-rate history (d3 in the data-work table).</div>
+</div>
+
+<!-- ============================================================
+     M05 — Demand gap panel
+     ============================================================ -->
+<div class="mk-section">
+  <div class="mk-head">
+    <span class="mk-num">M05</span>
+    <span class="mk-title">Demand-gap panel — unanswered questions from wiki-demand-log</span>
+    <span class="mk-subtitle">principle 7 half-built chart · Karpathy lint suggests questions · Notion 3-hour tax</span>
+  </div>
+  <div class="mk-frame">
+    <div class="m05">
+      <div class="m05-head">
+        <div class="m05-h">⚠ Asked but not answered · top 5</div>
+        <div class="m05-count">5 of 23 unmatched queries this month</div>
+      </div>
+      <div class="m05-row">
+        <div class="m05-q">"How do we handle ref-tag preservation on Polaris expansion pages after Baloo launches?"</div>
+        <div class="m05-asks">4×</div>
+        <button class="m05-cta">Start article</button>
+      </div>
+      <div class="m05-row">
+        <div class="m05-q">"What's the expected CVR lift from F90 by market?"</div>
+        <div class="m05-asks">3×</div>
+        <button class="m05-cta">Start article</button>
+      </div>
+      <div class="m05-row">
+        <div class="m05-q">"Kate annual review prep — last year's leverage framework"</div>
+        <div class="m05-asks">3×</div>
+        <button class="m05-cta">Start article</button>
+      </div>
+      <div class="m05-row">
+        <div class="m05-q">"AEO POV — MCS asked, do we have an answer?"</div>
+        <div class="m05-asks">2×</div>
+        <button class="m05-cta">Start article</button>
+      </div>
+      <div class="m05-row">
+        <div class="m05-q">"Abandoned search test calculator — sample size for AU"</div>
+        <div class="m05-asks">2×</div>
+        <button class="m05-cta">Start article</button>
+      </div>
+    </div>
+  </div>
+  <div class="mk-caption"><strong>What changes:</strong> the <code>wiki-demand-log.md</code> file already records questions asked vs matched. None of that surfaces on the homepage today. This right-rail panel shows the top 5 unanswered questions with a one-click "Start article" CTA that opens a pre-filled wiki draft. Karpathy: "The LLM is good at suggesting new questions to investigate and new sources to look for." <strong>Data work needed:</strong> parse demand-log (d5).</div>
+</div>
+
+<!-- ============================================================
+     M06 — Topic small multiples
+     ============================================================ -->
+<div class="mk-section">
+  <div class="mk-head">
+    <span class="mk-num">M06</span>
+    <span class="mk-title">Topic small multiples — 13 cards, shared Y, 6-week ingest velocity each</span>
+    <span class="mk-subtitle">principle 8 small multiples · Juice Analytics · Tufte</span>
+  </div>
+  <div class="mk-frame">
+    <div class="m06">
+      <div class="m06-h">TOPICS · 6-WEEK INGEST VELOCITY</div>
+      <div class="m06-grid">
+        <div class="m06-card">
+          <div class="m06-name">Bidding</div>
+          <div class="m06-ct">36</div>
+          <svg class="spark m06-sp" width="100%" height="24" viewBox="0 0 140 24" preserveAspectRatio="none"><polyline fill="none" stroke="#c4a060" stroke-width="1.5" points="0,20 24,18 48,15 72,12 96,10 120,8 140,6"/><circle cx="140" cy="6" r="2" fill="#c4a060"/></svg>
+          <div class="m06-delta up">+6 this 6w</div>
+        </div>
+        <div class="m06-card">
+          <div class="m06-name">Testing</div>
+          <div class="m06-ct">33</div>
+          <svg class="spark m06-sp" width="100%" height="24" viewBox="0 0 140 24" preserveAspectRatio="none"><polyline fill="none" stroke="#c4a060" stroke-width="1.5" points="0,14 24,13 48,12 72,11 96,10 120,10 140,10"/><circle cx="140" cy="10" r="2" fill="#c4a060"/></svg>
+          <div class="m06-delta up">+3</div>
+        </div>
+        <div class="m06-card">
+          <div class="m06-name">OCI</div>
+          <div class="m06-ct">23</div>
+          <svg class="spark m06-sp" width="100%" height="24" viewBox="0 0 140 24" preserveAspectRatio="none"><polyline fill="none" stroke="#c4a060" stroke-width="1.5" points="0,22 24,20 48,17 72,12 96,9 120,7 140,5"/><circle cx="140" cy="5" r="2" fill="#c4a060"/></svg>
+          <div class="m06-delta up">+6 fastest-growing</div>
+        </div>
+        <div class="m06-card">
+          <div class="m06-name">Reporting</div>
+          <div class="m06-ct">12</div>
+          <svg class="spark m06-sp" width="100%" height="24" viewBox="0 0 140 24" preserveAspectRatio="none"><polyline fill="none" stroke="#c4a060" stroke-width="1.5" points="0,12 24,11 48,12 72,10 96,11 120,10 140,9"/><circle cx="140" cy="9" r="2" fill="#c4a060"/></svg>
+          <div class="m06-delta up">+1</div>
+        </div>
+        <div class="m06-card">
+          <div class="m06-name">Budget</div>
+          <div class="m06-ct">8</div>
+          <svg class="spark m06-sp" width="100%" height="24" viewBox="0 0 140 24" preserveAspectRatio="none"><polyline fill="none" stroke="#c4a060" stroke-width="1.5" points="0,14 24,13 48,14 72,13 96,14 120,13 140,13"/><circle cx="140" cy="13" r="2" fill="#c4a060"/></svg>
+          <div class="m06-delta flat">flat</div>
+        </div>
+        <div class="m06-card">
+          <div class="m06-name">AI Max</div>
+          <div class="m06-ct">6</div>
+          <svg class="spark m06-sp" width="100%" height="24" viewBox="0 0 140 24" preserveAspectRatio="none"><polyline fill="none" stroke="#c4a060" stroke-width="1.5" points="0,18 24,16 48,14 72,13 96,12 120,11 140,10"/><circle cx="140" cy="10" r="2" fill="#c4a060"/></svg>
+          <div class="m06-delta up">+2</div>
+        </div>
+        <div class="m06-card">
+          <div class="m06-name">F90</div>
+          <div class="m06-ct">4</div>
+          <svg class="spark m06-sp" width="100%" height="24" viewBox="0 0 140 24" preserveAspectRatio="none"><polyline fill="none" stroke="#c4a060" stroke-width="1.5" points="0,14 24,14 48,14 72,14 96,14 120,14 140,14"/><circle cx="140" cy="14" r="2" fill="#c4a060"/></svg>
+          <div class="m06-delta flat">flat 6w</div>
+        </div>
+        <div class="m06-card">
+          <div class="m06-name">Baloo</div>
+          <div class="m06-ct">4</div>
+          <svg class="spark m06-sp" width="100%" height="24" viewBox="0 0 140 24" preserveAspectRatio="none"><polyline fill="none" stroke="#c4a060" stroke-width="1.5" points="0,20 24,18 48,16 72,15 96,13 120,12 140,11"/><circle cx="140" cy="11" r="2" fill="#c4a060"/></svg>
+          <div class="m06-delta up">+2</div>
+        </div>
+        <div class="m06-card">
+          <div class="m06-name">Polaris</div>
+          <div class="m06-ct">3</div>
+          <svg class="spark m06-sp" width="100%" height="24" viewBox="0 0 140 24" preserveAspectRatio="none"><polyline fill="none" stroke="#c4a060" stroke-width="1.5" points="0,16 24,15 48,14 72,14 96,13 120,12 140,12"/><circle cx="140" cy="12" r="2" fill="#c4a060"/></svg>
+          <div class="m06-delta up">+1</div>
+        </div>
+        <div class="m06-card">
+          <div class="m06-name">Landing Pages</div>
+          <div class="m06-ct">3</div>
+          <svg class="spark m06-sp" width="100%" height="24" viewBox="0 0 140 24" preserveAspectRatio="none"><polyline fill="none" stroke="#c4a060" stroke-width="1.5" points="0,15 24,15 48,14 72,14 96,14 120,13 140,13"/><circle cx="140" cy="13" r="2" fill="#c4a060"/></svg>
+          <div class="m06-delta flat">flat</div>
+        </div>
+        <div class="m06-card" style="border-color:rgba(248,113,113,0.25);background:rgba(127,29,29,0.06)">
+          <div class="m06-name" style="color:var(--bad)">AEO</div>
+          <div class="m06-ct" style="color:var(--bad)">2</div>
+          <svg class="spark m06-sp" width="100%" height="24" viewBox="0 0 140 24" preserveAspectRatio="none"><polyline fill="none" stroke="#f87171" stroke-width="1.5" points="0,14 24,14 48,14 72,14 96,14 120,14 140,14"/><circle cx="140" cy="14" r="2" fill="#f87171"/></svg>
+          <div class="m06-delta flat" style="color:var(--bad)">0 · exception — L4 POV owed</div>
+        </div>
+        <div class="m06-card">
+          <div class="m06-name">Onboarding</div>
+          <div class="m06-ct">1</div>
+          <svg class="spark m06-sp" width="100%" height="24" viewBox="0 0 140 24" preserveAspectRatio="none"><polyline fill="none" stroke="#c4a060" stroke-width="1.5" points="0,16 24,16 48,15 72,15 96,15 120,15 140,15"/><circle cx="140" cy="15" r="2" fill="#c4a060"/></svg>
+          <div class="m06-delta up">+1 (new)</div>
+        </div>
+        <div class="m06-card">
+          <div class="m06-name">Ad Copy</div>
+          <div class="m06-ct">1</div>
+          <svg class="spark m06-sp" width="100%" height="24" viewBox="0 0 140 24" preserveAspectRatio="none"><polyline fill="none" stroke="#c4a060" stroke-width="1.5" points="0,16 24,16 48,16 72,16 96,15 120,15 140,15"/><circle cx="140" cy="15" r="2" fill="#c4a060"/></svg>
+          <div class="m06-delta flat">flat</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mk-caption"><strong>What changes:</strong> instead of the topic filter row being one row of 13 buttons with counts, it becomes a small-multiples grid where each card carries a 6-week velocity sparkline. Cross-topic comparison now requires one glance: OCI is fastest-growing, AEO is stalled (and flagged as an exception per soul.md L4 — the POV Richard owes is surfaced here). Shared Y scale across cards. Click any card to filter. <strong>Data work needed:</strong> none — the existing <code>updated</code> + <code>primary_topic</code> fields are sufficient (d8).</div>
+</div>
+
+<!-- ============================================================
+     M07 — Pipeline headline + exception
+     ============================================================ -->
+<div class="mk-section">
+  <div class="mk-head">
+    <span class="mk-num">M07</span>
+    <span class="mk-title">Pipeline view — active headline + exception banner (matches WR M2)</span>
+    <span class="mk-subtitle">principle 7 · WR M2 · FT active title</span>
+  </div>
+  <div class="mk-frame" style="padding:0">
+    <div class="m07-head">
+      <div class="m07-title"><strong>Pipeline</strong>: 196 draft → 54 review → 16 final (<span class="m07-deltas"><span class="up">+12 new</span>, <span class="up">+3 promoted</span>, 0 published this week</span>)</div>
+      <div class="m07-banner">
+        <strong>⚠ EXCEPTION · PIPELINE</strong>
+        0 articles published in the last 14 days. 54 in review. Lint suggests dispatching editor review.
+        <button class="m07-cta">Dispatch editor</button>
+      </div>
+    </div>
+    <div class="m07-cols">
+      <div class="m07-col m07-draft">
+        <div class="m07-col-h"><span>DRAFT</span><span style="color:var(--mute);font-family:var(--mono);font-size:11px">196</span></div>
+        <div class="m07-bar"><span class="m07-bar-d" style="flex:196"></span><span class="m07-bar-r" style="flex:54"></span><span class="m07-bar-f" style="flex:16"></span><span class="m07-bar-a" style="flex:49"></span></div>
+        <div class="m07-vel"><span class="in">+12 in</span> · <span class="out">−3 out</span> this week</div>
+      </div>
+      <div class="m07-col m07-review">
+        <div class="m07-col-h"><span>REVIEW</span><span style="color:var(--mute);font-family:var(--mono);font-size:11px">54</span></div>
+        <div class="m07-bar"><span class="m07-bar-d" style="flex:196;opacity:.25"></span><span class="m07-bar-r" style="flex:54"></span><span class="m07-bar-f" style="flex:16;opacity:.25"></span><span class="m07-bar-a" style="flex:49;opacity:.25"></span></div>
+        <div class="m07-vel"><span class="in">+3 in</span> · <span class="out">0 out</span> this week</div>
+      </div>
+      <div class="m07-col m07-final">
+        <div class="m07-col-h"><span>FINAL</span><span style="color:var(--mute);font-family:var(--mono);font-size:11px">16</span></div>
+        <div class="m07-bar"><span class="m07-bar-d" style="flex:196;opacity:.25"></span><span class="m07-bar-r" style="flex:54;opacity:.25"></span><span class="m07-bar-f" style="flex:16"></span><span class="m07-bar-a" style="flex:49;opacity:.25"></span></div>
+        <div class="m07-vel"><span class="in">0 in</span> · 0 out this week · <strong style="color:var(--bad)">⚠ 14d drought</strong></div>
+      </div>
+      <div class="m07-col m07-archived">
+        <div class="m07-col-h"><span>ARCHIVED</span><span style="color:var(--mute);font-family:var(--mono);font-size:11px">49</span></div>
+        <div class="m07-bar"><span class="m07-bar-d" style="flex:196;opacity:.25"></span><span class="m07-bar-r" style="flex:54;opacity:.25"></span><span class="m07-bar-f" style="flex:16;opacity:.25"></span><span class="m07-bar-a" style="flex:49"></span></div>
+        <div class="m07-vel"><span class="in">+9 in</span> · 0 out this week</div>
+      </div>
+    </div>
+  </div>
+  <div class="mk-caption"><strong>What changes:</strong> pipeline view currently opens with bare column counts. This mockup adds a deterministic headline sentence and a red exception banner when no FINAL has been published in 14 days (which is actually true right now). Column badges become stacked-capacity bars. Velocity per column makes flow rate legible. <strong>Matches WR M2 exactly</strong> — same pattern, same exception condition, same recommended-action button.</div>
+</div>
+
+<!-- ============================================================
+     M08 — Doc viewer lineage
+     ============================================================ -->
+<div class="mk-section">
+  <div class="mk-head">
+    <span class="mk-num">M08</span>
+    <span class="mk-title">Doc viewer — lineage strip (sources in → this doc → pages out)</span>
+    <span class="mk-subtitle">principle 12 wiki-as-compiler · Karpathy three-layer architecture · Memex</span>
+  </div>
+  <div class="mk-frame">
+    <div class="m08">
+      <div class="m08-head">
+        <div class="m08-title">Polaris Program — WW Brand Landing Page Rollout</div>
+        <div style="display:flex;gap:4px;margin-top:8px;flex-wrap:wrap">
+          <span class="b b-draft">DRAFT</span>
+          <span class="b b-cat">Markets &amp; Programs</span>
+          <span class="b b-mkt">AU</span><span class="b b-mkt">CA</span><span class="b b-mkt">EU5</span><span class="b b-mkt">JP</span>
+          <span class="b b-topic">Polaris</span>
+          <span class="b b-tag">polaris</span><span class="b b-tag">landing-page</span>
+          <span class="b b-age-fresh">fresh · 13d</span>
+          <span class="b b-contradicts">⛔ contradicts 1 page</span>
+          <span class="b b-new">✨ since last look</span>
+        </div>
+      </div>
+      <div class="m08-lineage">
+        <div class="m08-col">
+          <div class="m08-lbl">← Sources compiled in (4)</div>
+          <span class="m08-pill raw">📅 Hedy — MCS/Polaris 4/17 (51 min)</span>
+          <span class="m08-pill raw">✉ Email — Brandon 4/14 "PS owns global Polaris"</span>
+          <span class="m08-pill raw">📄 Quip — MCS rollout plan (deprecated)</span>
+          <span class="m08-pill raw">💬 Slack — #polaris-rollout pin (3/28)</span>
+        </div>
+        <div class="m08-col">
+          <div class="m08-lbl">Wiki pages citing this (10) →</div>
+          <span class="m08-pill">AU Paid Search — Market Wiki</span>
+          <span class="m08-pill">MX Paid Search — Market Wiki</span>
+          <span class="m08-pill">Brandon 1:1 Sync</span>
+          <span class="m08-pill">MCS / Polaris Brand LP Coordination</span>
+          <span class="m08-pill">OP1 2027 Innovation Shortlist</span>
+          <span class="m08-pill">Austin Offsite Strategic Readouts</span>
+          <span class="m08-pill" style="opacity:.6">+ 4 more</span>
+        </div>
+      </div>
+      <div style="background:rgba(127,29,29,0.1);border-bottom:1px solid var(--border);padding:8px 16px;font-size:12px;color:#e8a0a0">
+        <strong>⛔ Contradiction:</strong> this page claims <em>"IT launch in Q2 2026"</em> but <a style="color:var(--brand-text)">MCS Polaris Coordination</a> states <em>"IT launch in Q3 2026 after DE re-test"</em>. <a style="color:var(--brand-text);text-decoration:underline;margin-left:6px">Reconcile</a>
+      </div>
+      <div class="m08-body">
+        <strong>Polaris Program</strong><br>
+        Polaris is the next-generation brand landing page platform for Amazon Business Paid Search, replacing legacy PADESARJAD and MCS pages across all ten markets. Richard is the single point of contact for global Polaris initiatives per Brandon's April 14 direction...
+      </div>
+    </div>
+  </div>
+  <div class="mk-caption"><strong>What changes:</strong> document viewer gets a lineage strip between the header and the body. Left: which raw sources (Hedy transcript, email, Quip, Slack) compiled into this page. Right: which wiki pages cite this page. Plus: the ⛔ contradiction banner at the top with a one-click "Reconcile" CTA. The lineage strip is the visual expression of Karpathy's three-layer architecture — raw sources → wiki → schema. <strong>Data work needed:</strong> emit <code>sources</code> frontmatter + invert <code>related_docs</code> graph (d4 + d7).</div>
+</div>
+
+<!-- ============================================================
+     M09 — Contradiction + orphan badges inline
+     ============================================================ -->
+<div class="mk-section">
+  <div class="mk-head">
+    <span class="mk-num">M09</span>
+    <span class="mk-title">Contradiction + orphan + cycle badges inline on cards</span>
+    <span class="mk-subtitle">principle 13 lint is first-class · Karpathy gist</span>
+  </div>
+  <div class="mk-frame m09-cards">
+    <div class="rc">
+      <div class="rc-head">
+        <div class="rc-title">Polaris Program — WW Brand Landing Page Rollout</div>
+        <div class="rc-badges">
+          <span class="b b-draft">DRAFT</span>
+          <span class="b b-contradicts">⛔ contradicts</span>
+          <span class="b b-cat">Markets &amp; Programs</span>
+          <span class="b b-mkt">AU</span><span class="b b-mkt">CA</span><span class="b b-mkt">EU5</span><span class="b b-mkt">JP</span>
+          <span class="b b-topic">Polaris</span>
+          <span class="b b-age-fresh">fresh · 13d</span>
+        </div>
+      </div>
+      <div class="rc-snip">Polaris is the next-generation brand landing page platform for Amazon Business Paid Search, replacing legacy PADESARJAD and MCS pages across all ten markets. Richard is the single point of contact for global Polaris initiatives per Brandon's April 14 direction...</div>
+      <div class="rc-meta">
+        <span>1,896 words · 4 sources · <span style="color:#7da2d4">🔗 10 related</span></span>
+        <span>2026-04-17</span>
+      </div>
+    </div>
+
+    <div class="rc">
+      <div class="rc-head">
+        <div class="rc-title">AI Tool WBR Callout Workflow</div>
+        <div class="rc-badges">
+          <span class="b b-draft">DRAFT</span>
+          <span class="b b-orphan">⚠ orphan</span>
+          <span class="b b-cat">Operations &amp; Best Practices</span>
+          <span class="b b-topic">Reporting</span>
+          <span class="b b-age-aging">aging · 43d</span>
+        </div>
+      </div>
+      <div class="rc-snip">This playbook captures the AI-assisted WBR callout workflow Andrew Wirtz demonstrated on April 17. The workflow cuts WBR callout draft time from hours to minutes by offloading data correlation and anomaly detection to a code-reasoning AI tool...</div>
+      <div class="rc-meta">
+        <span>651 words · 1 source · <span style="color:#666">🔗 0 related</span></span>
+        <span>2026-04-17</span>
+      </div>
+    </div>
+
+    <div class="rc">
+      <div class="rc-head">
+        <div class="rc-title">Wiki Lint Audit — 2026-04-17 (evening run)</div>
+        <div class="rc-badges">
+          <span class="b b-final">FINAL</span>
+          <span class="b b-cycle">🔁 cycle</span>
+          <span class="b b-cat">Wiki System</span>
+          <span class="b b-mkt">AU</span><span class="b b-mkt">JP</span><span class="b b-mkt">MX</span>
+          <span class="b b-age-aging">aging · 43d</span>
+        </div>
+      </div>
+      <div class="rc-snip">Evening W16 second pass. Companion to health-2026-04-17-run2.md. Morning's full findings are in audit-2026-04-17.md. Cross-references with Wiki Health Check and Wiki Maintenance Hook form a reference cycle...</div>
+      <div class="rc-meta">
+        <span>622 words · 2 sources · <span style="color:#7da2d4">🔗 9 related</span></span>
+        <span>2026-04-17</span>
+      </div>
+    </div>
+
+    <div class="rc">
+      <div class="rc-head">
+        <div class="rc-title">PS Performance Data — Source of Truth</div>
+        <div class="rc-badges">
+          <span class="b b-final">FINAL</span>
+          <span class="b b-sp-local">📄 local</span>
+          <span class="b b-cat">Operations &amp; Best Practices</span>
+          <span class="b b-mkt">AU</span><span class="b b-mkt">CA</span><span class="b b-mkt">EU5</span><span class="b b-mkt">JP</span>
+          <span class="b b-topic">Bidding</span>
+          <span class="b b-age-fresh">fresh · 10d</span>
+        </div>
+      </div>
+      <div class="rc-snip">One table. Four grains. Ten markets + WW aggregate. Query via pre-filtered views so you can't accidentally overcount. ⚠️ Grain safety (read this first) ps.performance holds daily and weekly and monthly and quarterly rows...</div>
+      <div class="rc-meta">
+        <span>864 words · 2 sources · <span style="color:#7da2d4">🔗 3 related</span></span>
+        <span>2026-04-20</span>
+      </div>
+    </div>
+  </div>
+  <div class="mk-caption"><strong>What changes:</strong> three new card badges matching the existing visual weight — <span class="b b-contradicts">⛔ contradicts</span> (red, exception), <span class="b b-orphan">⚠ orphan</span> (grey, subtle), <span class="b b-cycle">🔁 cycle</span> (amber, informational). Binary "⚠ stale" age badge becomes a 4-stop age scale (<span class="b b-age-fresh">fresh</span> / <span class="b b-age-aging">aging</span> / <span class="b b-age-stale">stale</span> / <span class="b b-age-ancient">ancient</span>). Word count becomes "words · sources" (suggestion #24). Clicking a badge opens a popover explaining the specific contradiction / orphan / cycle and offering "Resolve" / "Dismiss" actions. <strong>Data work needed:</strong> contradiction scan + lint_status per doc (d1, d2).</div>
+</div>
+
+<!-- ============================================================
+     M10 — Graph minimap
+     ============================================================ -->
+<div class="mk-section">
+  <div class="mk-head">
+    <span class="mk-num">M10</span>
+    <span class="mk-title">Graph minimap — force-directed, nodes sized by word count, colored by status</span>
+    <span class="mk-subtitle">principle 14 · Obsidian graph view · Karpathy "graph is the shape"</span>
+  </div>
+  <div class="mk-frame">
+    <div class="m10">
+      <div class="m10-h">
+        <div class="m10-title">⊞ graph — 301 nodes · 1,240 edges · 3 orphans · 7 hubs</div>
+        <div class="m10-legend">● final · ● draft · ● review · ● orphan · size = words</div>
+      </div>
+      <svg class="m10-svg" viewBox="0 0 900 300">
+        <!-- Edges -->
+        <g stroke="#2a2d35" stroke-width="0.5" stroke-opacity="0.6">
+          <line x1="450" y1="150" x2="330" y2="120"/><line x1="450" y1="150" x2="550" y2="110"/><line x1="450" y1="150" x2="590" y2="170"/><line x1="450" y1="150" x2="400" y2="220"/><line x1="450" y1="150" x2="350" y2="190"/><line x1="450" y1="150" x2="500" y2="80"/><line x1="450" y1="150" x2="310" y2="170"/><line x1="450" y1="150" x2="620" y2="220"/>
+          <line x1="330" y1="120" x2="220" y2="100"/><line x1="330" y1="120" x2="250" y2="150"/><line x1="330" y1="120" x2="280" y2="60"/>
+          <line x1="550" y1="110" x2="650" y2="90"/><line x1="550" y1="110" x2="700" y2="150"/><line x1="550" y1="110" x2="640" y2="40"/>
+          <line x1="590" y1="170" x2="680" y2="210"/><line x1="590" y1="170" x2="720" y2="180"/>
+          <line x1="400" y1="220" x2="370" y2="270"/><line x1="400" y1="220" x2="460" y2="250"/>
+          <line x1="350" y1="190" x2="280" y2="230"/><line x1="350" y1="190" x2="240" y2="200"/>
+          <line x1="220" y1="100" x2="150" y2="120"/><line x1="220" y1="100" x2="180" y2="60"/>
+          <line x1="650" y1="90" x2="750" y2="70"/><line x1="650" y1="90" x2="780" y2="120"/>
+          <line x1="700" y1="150" x2="820" y2="140"/>
+          <line x1="460" y1="250" x2="500" y2="280"/>
+        </g>
+        <!-- Orphan nodes (no edges, red) -->
+        <g>
+          <circle cx="80" cy="270" r="3" fill="#f87171" stroke="#f87171" stroke-width="1" class="orphan"/><text class="m10-label" x="88" y="273">orphan-1</text>
+          <circle cx="840" cy="270" r="3" fill="#f87171" stroke="#f87171" stroke-width="1" class="orphan"/><text class="m10-label" x="786" y="273">orphan-2</text>
+          <circle cx="50" cy="50" r="3" fill="#f87171" stroke="#f87171" stroke-width="1" class="orphan"/><text class="m10-label" x="58" y="53">orphan-3</text>
+        </g>
+        <!-- Hub nodes (large, FINAL green) -->
+        <circle cx="450" cy="150" r="14" fill="#4ade80" opacity="0.85"/><text class="m10-label" x="466" y="152">wiki-index</text>
+        <circle cx="330" cy="120" r="11" fill="#4ade80" opacity="0.85"/><text class="m10-label" x="342" y="122">context-catalog</text>
+        <circle cx="550" cy="110" r="10" fill="#4ade80" opacity="0.85"/><text class="m10-label" x="562" y="112">polaris</text>
+        <circle cx="590" cy="170" r="10" fill="#4ade80" opacity="0.85"/><text class="m10-label" x="602" y="172">oci-program</text>
+        <circle cx="400" cy="220" r="8" fill="#4ade80" opacity="0.85"/><text class="m10-label" x="410" y="222">ps-perf-data</text>
+        <!-- DRAFT nodes (grey) -->
+        <g fill="#9ca3af" opacity="0.7">
+          <circle cx="220" cy="100" r="4"/><circle cx="250" cy="150" r="5"/><circle cx="280" cy="60" r="3"/>
+          <circle cx="650" cy="90" r="5"/><circle cx="700" cy="150" r="6"/><circle cx="640" cy="40" r="4"/>
+          <circle cx="680" cy="210" r="5"/><circle cx="720" cy="180" r="4"/>
+          <circle cx="370" cy="270" r="4"/><circle cx="460" cy="250" r="5"/>
+          <circle cx="280" cy="230" r="4"/><circle cx="240" cy="200" r="3"/>
+          <circle cx="150" cy="120" r="4"/><circle cx="180" cy="60" r="3"/>
+          <circle cx="750" cy="70" r="4"/><circle cx="780" cy="120" r="5"/>
+          <circle cx="820" cy="140" r="4"/><circle cx="500" cy="280" r="4"/>
+          <circle cx="350" cy="190" r="5"/><circle cx="500" cy="80" r="4"/>
+          <circle cx="310" cy="170" r="5"/><circle cx="620" cy="220" r="6"/>
+        </g>
+        <!-- REVIEW nodes (amber) -->
+        <g fill="#e0c080" opacity="0.85">
+          <circle cx="290" cy="95" r="4"/><circle cx="610" cy="80" r="4"/><circle cx="430" cy="90" r="3"/>
+          <circle cx="380" cy="170" r="4"/><circle cx="550" cy="200" r="5"/>
+          <circle cx="270" cy="270" r="3"/><circle cx="660" cy="260" r="4"/>
+          <circle cx="200" cy="180" r="4"/><circle cx="760" cy="230" r="3"/>
+        </g>
+        <!-- Background spatter of small draft nodes -->
+        <g fill="#9ca3af" opacity="0.4">
+          <circle cx="120" cy="180" r="2"/><circle cx="170" cy="220" r="2"/><circle cx="100" cy="100" r="2"/><circle cx="200" cy="260" r="2"/><circle cx="140" cy="260" r="2"/>
+          <circle cx="820" cy="220" r="2"/><circle cx="850" cy="180" r="2"/><circle cx="870" cy="90" r="2"/>
+          <circle cx="520" cy="40" r="2"/><circle cx="580" cy="240" r="2"/><circle cx="520" cy="240" r="2"/>
+          <circle cx="320" cy="40" r="2"/><circle cx="390" cy="30" r="2"/><circle cx="720" cy="40" r="2"/>
+        </g>
+      </svg>
+      <div style="font-size:11px;color:var(--mute);margin-top:8px">
+        Hub pages (large green): <strong style="color:var(--body)">wiki-index</strong>, <strong style="color:var(--body)">context-catalog</strong>, <strong style="color:var(--body)">polaris</strong>, <strong style="color:var(--body)">oci-program</strong>, <strong style="color:var(--body)">ps-perf-data</strong>. Orphans (top-left, bottom edges): 3 pages with no related_docs. Hover a node for title + 3-line preview · click = open doc · click edge = filter both docs.
+      </div>
+    </div>
+  </div>
+  <div class="mk-caption"><strong>What changes:</strong> Obsidian-style force-directed graph collapsed by default behind `⊞ Show graph view`. Nodes sized by word count, colored by status. Orphans are immediately visible as red specs at the edges. Hub pages (the ones that carry a lot of cross-references) are obviously large green circles. Zero dependencies — ~150 lines of vanilla-JS force-directed in the same place as the existing <code>renderMarkdown()</code> helper. <strong>Why it matters:</strong> Karpathy gist directly: "Obsidian's graph view is the best way to see the shape of your wiki — what's connected to what, which pages are hubs, which are orphans."</div>
+</div>
+
+<!-- ============================================================
+     Summary / ship order
+     ============================================================ -->
+<div class="mk-section" style="background:var(--card)">
+  <div class="mk-head">
+    <span class="mk-num">Σ</span>
+    <span class="mk-title">Ship order + totals</span>
+    <span class="mk-subtitle">see README.md for full work split</span>
+  </div>
+  <div class="mk-frame" style="padding:20px">
+    <p class="mute" style="margin-bottom:10px">10 mockups = ~18h across 10 commits. kiro-server takes data-side (M02, M03, M04, M05, M08, M09 — ~12h). kiro-local takes presentation-side (M01, M06, M07, M10 — ~6h + shared helpers already landing with WR M3 from kiro-local's thread).</p>
+    <p class="mute">After T1 ships, T2/T3 items (27 more suggestions in the full report) pick up one at a time — each 15-45 min — as natural stopping points in the session.</p>
+  </div>
+</div>
+
+<p style="font-size:11px;color:var(--sub);text-align:center;margin-top:40px">Compiled by kiro-local, 2026-04-30. Numbers from live wiki-search-index.json (301 docs, generated 2026-04-25). Companion: README.md, dashboard-redesign-report.html. Content from external sources was paraphrased for compliance with licensing restrictions.</p>
+
+</div>
+</body>
+</html>

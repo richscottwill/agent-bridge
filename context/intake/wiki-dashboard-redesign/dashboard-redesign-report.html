@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wiki dashboard redesign — research report — kiro-local, 2026-04-30</title>
+<style>
+  :root{
+    --bg:#fafafa; --ink:#161d26; --mute:#6b6b6b; --sub:#9a9a9a; --brand:#0066CC;
+    --good:#14a548; --warn:#e8a800; --bad:#d13212;
+    --panel:#ffffff; --border:#e0e0e0;
+    --serif:'Amazon Ember',-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:'JetBrains Mono','SF Mono',Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--serif);background:var(--bg);color:var(--ink);line-height:1.5;font-variant-numeric:tabular-nums}
+  main{max-width:980px;margin:0 auto;padding:40px 24px 120px}
+  h1{font-size:28px;line-height:1.25;margin-bottom:8px;letter-spacing:-0.01em}
+  h2{font-size:20px;font-weight:600;margin:32px 0 12px;color:var(--ink);border-bottom:1px solid var(--border);padding-bottom:6px}
+  h3{font-size:16px;font-weight:600;margin:20px 0 8px}
+  h4{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--sub);margin:18px 0 8px}
+  h5{font-size:14px;font-weight:600;margin:6px 0 4px}
+  p{margin:8px 0;font-size:14px}
+  .kicker{font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--sub);margin-bottom:4px}
+  .meta{font-size:12px;color:var(--sub);margin-top:4px}
+  .box{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:14px 18px;margin:14px 0;font-size:14px}
+  .box.note{background:#FFF4D6;border-color:#E8C87A;color:#6A4A00}
+  ol,ul{margin:8px 0 8px 22px;font-size:14px}
+  li{margin:4px 0}
+  ol.principles>li{margin:10px 0;padding-left:4px}
+  ol.principles>li strong{color:var(--ink)}
+  .sug{display:flex;gap:12px;padding:10px 0;border-bottom:1px dashed var(--border)}
+  .sug .num{font-family:var(--mono);font-size:11px;color:var(--sub);min-width:28px;padding-top:3px}
+  .sug .num.new{color:var(--brand);font-weight:600}
+  .pill{display:inline-block;font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;margin-right:4px;text-transform:uppercase;letter-spacing:0.04em}
+  .pill.t1{background:#FEE2E2;color:#7A1810}
+  .pill.t2{background:#FFF4D6;color:#6A4A00}
+  .pill.t3{background:#E0E0E0;color:#444}
+  .pill.area{background:#D4E5FA;color:#0F3D7A}
+  .pill.new{background:#E6F7EE;color:#0C7A3D}
+  .rationale{font-size:12px;color:var(--mute);margin-top:4px;font-style:italic}
+  .h-count{font-size:13px;color:var(--sub);font-weight:400;margin-left:8px}
+  ul.sources{list-style:none;margin:4px 0 12px;padding:0}
+  ul.sources li{font-size:13px;padding:2px 0}
+  ul.sources a{color:var(--brand);text-decoration:none}
+  ul.sources a:hover{text-decoration:underline}
+  code{font-family:var(--mono);font-size:12px;background:#f0f0f0;padding:1px 4px;border-radius:3px}
+  .tiny{font-size:11px;color:var(--sub)}
+  .anchor-row{display:flex;gap:16px;margin:12px 0 24px;font-size:13px}
+  .anchor-row a{color:var(--brand);text-decoration:none}
+  .anchor-row a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<main>
+
+<p class="kicker">Wiki dashboard · redesign research · kiro-local · 2026-04-30</p>
+<h1>Making the wiki dashboard feel like the projection engine — plus Karpathy's LLM Wiki and AI-2027 / OpenBrain</h1>
+<p class="meta">50 suggestions, tiered, component-scoped, each with a one-line rationale tied back to a principle or a source.</p>
+<p class="meta">Data sources screenshotted: wiki-search.html (default view · 1440×900), wiki-search.html (pipeline view · 1440×900), wiki-search.html (query "forecast" typed · 1440×900). Live index: 301 docs, 49 archived, 196 drafts, 54 review, 16 FINAL. Report compiled 2026-04-30.</p>
+
+<div class="anchor-row">
+<a href="#principles">Principles</a>
+<a href="#honest-read">Honest read</a>
+<a href="#suggestions">50 suggestions</a>
+<a href="#sources">Sources</a>
+</div>
+
+<h2 id="honest-read">1. Honest read</h2>
+<div class="box note">
+The wiki dashboard is a competent faceted search UI. It does one thing well — helping Richard find a wiki article by typing a keyword or clicking a market/topic/type filter. It does not do anything else a knowledge-base homepage is supposed to do. It doesn't tell him what the wiki <em>is</em> today (301 docs, 2 contradictions, 3 orphans, 18 stale). It doesn't show velocity (what got ingested this week). It doesn't surface demand (what did agents ask for and not find). It doesn't expose lineage (which raw sources compiled into which wiki pages). It doesn't feel like the projection engine — which answers "what is, what's trending, what's at risk, what's the confidence" before the user types anything. The wiki dashboard can get 70% of the way to that grammar through a single hero strip, a pinned ingest log, and three lint badges. The rest is value-add on top.
+</div>
+
+<h2 id="principles">2. Principles from the research</h2>
+<p>These are the lenses the 50 suggestions come from. Each is tied to 3-5 sources. Content paraphrased for compliance; original phrasings are the property of the cited authors. Principles 1-11 are carried verbatim from the prior weekly-review / projection-engine redesign report to keep symmetry. Principles 12-17 are new, introduced by Karpathy's LLM Wiki gist and the AI-2027 / OpenBrain scenario.</p>
+
+<ol class="principles">
+<li><strong>Density is the goal, not the enemy.</strong> Amazon WBR reviews 400-500 metrics in 60 minutes. The wiki homepage currently shows 1 number (doc count) on a page that could show 8. (Commoncog "Amazon WBR", Matt Ström "UI Density", Bloomberg Terminal.)</li>
+
+<li><strong>The active title is the decision.</strong> "Wiki Search 301 docs · 49 archived" is a description. "Knowledge base: 301 docs, 18 stale, 3 orphans, 2 contradictions — lint pass needed" is a decision. (Urban Institute, Practical Reporting, MIT Sloan.)</li>
+
+<li><strong>Sparklines everywhere you have numbers.</strong> Every hero number deserves its 6-week trace. Zero visual cost, +1 dimension. (Tufte sparkline theory, Observable "Big Insights Small Spaces", shadcn tables-sparkline.)</li>
+
+<li><strong>Direct labels beat legends.</strong> The trust strip on projection.html labels pills directly ("WW 6/6", "US 2/6"). The wiki dashboard's filter pills already follow this — keep it, extend it to the new health pills. (Data Revelations, Evergreen.)</li>
+
+<li><strong>Exception-driven reading.</strong> 198 DRAFT docs is background; 2 contradictions is foreground. Color encodes exception-ness, not category. (Commoncog WBR, SPC worldview.)</li>
+
+<li><strong>Progressive disclosure, not pogosticking.</strong> The graph view, the health fan, the demand gap panel — all collapse by default. Essential first, detail on demand. (Interaction Design Foundation, Luzmo "State of Dashboards 2025".)</li>
+
+<li><strong>A chart without a recommended action is a half-built chart.</strong> If the hero strip shows "3 orphans", the orphan chip opens the list with a "Lint: suggest parents" button. (Ethos App "Dashboards to Stories", Luzmo.)</li>
+
+<li><strong>Small multiples for category comparison.</strong> 13 topics are easier to read as 13 panels on a shared Y than as a 13-row table. (Juice Analytics, Tufte via Jason Lockwood, Datawrapper small multiples.)</li>
+
+<li><strong>Uncertainty as a fan, not a number.</strong> Wiki freshness rate isn't "64%", it's "64% ± a historical band of 58-71%". BoE fan chart form works here. (Wikipedia Fan chart, R Journal RJ-2015-002, BoE 1996.)</li>
+
+<li><strong>Tabular numerics, always.</strong> Every count, every word count, every age needs <code>font-variant-numeric: tabular-nums</code>. (Jo Maendle on date alignment, MDN.)</li>
+
+<li><strong>Invisible over visible (soul.md #5).</strong> The best intervention is one Richard doesn't consciously notice but that moves his scan time. Prefer structural over cosmetic. Filters for this.</li>
+
+<li class="pill-new"><strong>The wiki is a compiler artifact, not a search index.</strong> Karpathy's LLM Wiki gist makes this explicit: raw sources compile to wiki pages. The homepage should expose build health (what got recompiled, which pages went stale, which cross-refs broke) the way a CI dashboard exposes pipeline health. This isn't RAG — this is knowledge that compounds. (<a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f">Karpathy gist</a>, <a href="https://www.mindstudio.ai/blog/karpathy-llm-knowledge-base-compiler-analogy">MindStudio compiler analogy</a>, <a href="https://denser.ai/blog/llm-wiki-karpathy-knowledge-base/">Denser.ai</a>.) <span class="pill new">NEW</span></li>
+
+<li class="pill-new"><strong>Lint is a first-class operation.</strong> The three lint checks Karpathy names explicitly — orphan pages, contradictions, stale claims — are the wiki's health metrics. They belong on the hero strip, not buried. "Periodically, ask the LLM to health-check the wiki." The homepage surfaces the result of that health check at-a-glance. (Karpathy gist, <a href="https://ghelburlabs.substack.com/p/i-rebuilt-karpathys-llm-wiki-heres">Ghelbur Labs "what's missing"</a>.) <span class="pill new">NEW</span></li>
+
+<li class="pill-new"><strong>Index is content-oriented; log is time-oriented. Both are first-class.</strong> Karpathy: "<code>index.md</code> is content-oriented... <code>log.md</code> is chronological." The wiki-search homepage currently mashes the two into a single "recently updated" feed. Separating them into (a) content index organized by topic/category and (b) append-only ingest log gives both navigations their proper home. (Karpathy gist, <a href="https://forum.obsidian.md/t/mocs-as-hierarchical-network-tool/7956">Obsidian MOCs forum</a>.) <span class="pill new">NEW</span></li>
+
+<li class="pill-new"><strong>Dual-audience (human reads, LLM parses).</strong> Wiki pages are consumed by two audiences — Richard scanning on a laptop, and kiro-server / rw-trainer / wiki-critic ingesting as context. The homepage should work for both. Human view: visual + chrome. Agent view: plain markdown with structured frontmatter. One toggle switches. (<a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f">Karpathy gist</a> "Obsidian is the IDE, the LLM is the programmer, the wiki is the codebase.") <span class="pill new">NEW</span></li>
+
+<li class="pill-new"><strong>Capability / calibration / drift as dashboard primitives (OpenBrain framing).</strong> AI-2027 treats AI systems as having observable capability (what can it do?), calibration (how confident is it?), and drift (what's changing?). Applied to a wiki: capability = coverage per topic, calibration = in-review-vs-published rate, drift = contradictions per week. These are the three numbers a reader should see before they see a search box. (<a href="https://ai-2027.com/">AI 2027</a>, <a href="https://theneuron.ai/explainer-articles/an-ex-openai-researcher-predicts-agi-by-2027--heres-the-wild-roadmap">TheNeuron AGI roadmap</a>, <a href="https://arxiv.org/html/2406.07882v3">arXiv Designing a Dashboard for Transparency</a>.) <span class="pill new">NEW</span></li>
+
+<li class="pill-new"><strong>The wiki stays maintained because the cost of maintenance is near zero.</strong> Karpathy's thesis is economic, not aesthetic. Humans abandon wikis because bookkeeping is tedious. The homepage should make the maintenance cost (= lint pending + demand gap + stale count) visible so it doesn't silently grow. If orphans trend up for 3 weeks, that's a problem, not a rounding error. (Karpathy gist, <a href="https://ghelburlabs.substack.com/p/i-rebuilt-karpathys-llm-wiki-heres">Ghelbur Labs</a>.) <span class="pill new">NEW</span></li>
+</ol>
+
+<h2 id="suggestions">3. The 50 suggestions <span class="h-count">· 18 T1, 18 T2, 14 T3</span></h2>
+<p>Tier legend: <span class="pill t1">T1</span> structural / changes grammar · <span class="pill t2">T2</span> high-value additive · <span class="pill t3">T3</span> experimental. Area legend: <span class="pill area">global</span> page-wide · <span class="pill area">hero</span> top strip · <span class="pill area">search</span> search view · <span class="pill area">pipeline</span> pipeline view · <span class="pill area">viewer</span> doc viewer · <span class="pill area">data</span> data-connection / build script · <span class="pill area">exp</span> experimental/speculative.</p>
+
+<h4>Global grammar (1-8)</h4>
+
+<div class="sug"><div class="num">001</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">global</span> Adopt projection.html's sticky header grammar site-wide.</h5>
+  <p>Sticky top bar with title + hero strip + filter-active label + week indicator. Same CSS rules (`position:sticky; top:0; backdrop-filter:blur(4px)`) as projection banner-strip + weekly-review M1 sticky header. Same <code>renderHealthStrip()</code> helper. Same colors. Same font hierarchy.</p>
+  <p class="rationale">Principle #17 chart-aesthetic-consistency · projection-design-system.css · Amazon WBR "same format every week"</p>
+</div></div>
+
+<div class="sug"><div class="num">002</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">hero</span> Hero KPI strip of 5 numbers.</h5>
+  <p>Replace "Wiki Search 301 docs · 49 archived" small-text title with 5-number hero strip: DOCS / FINAL / STALE >90D / ORPHANS / CONTRADICTIONS. Same typography as projection .hero-kpi (20px value, 11px uppercase label). Green for FINAL, amber for STALE, red for ORPHANS + CONTRADICTIONS, neutral for DOCS.</p>
+  <p class="rationale">Principle #1 density · principle #12 wiki-as-compiler-artifact · projection .hero-kpi-strip · Karpathy gist lint checks</p>
+</div></div>
+
+<div class="sug"><div class="num">003</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">hero</span> Each hero number gets a 6-week sparkline.</h5>
+  <p>Inline SVG, 72×18, endpoint dot, no axis, no legend. Shows direction at a glance. Reuses `renderSparkline()` helper from WR M3.</p>
+  <p class="rationale">Principle #3 Tufte sparklines · Observable "Big Insights Small Spaces"</p>
+</div></div>
+
+<div class="sug"><div class="num">004</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">global</span> 4-stop age scale on cards (fresh/aging/stale/ancient) replaces binary "⚠ stale".</h5>
+  <p>0-30d fresh (no badge), 30-90d aging (grey dot), 90-180d stale (amber), 180+d ancient (red). Matches projection .freshness-badge fresh/stale/ancient classes.</p>
+  <p class="rationale">Principle #5 exception-driven · projection freshness badges · SPC</p>
+</div></div>
+
+<div class="sug"><div class="num">005</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">global</span> Tabular-nums on every numeric cell site-wide.</h5>
+  <p>One CSS line: `.stats, .b-cat, .rc-meta span, .result-count, .hero-kpi-value, .pipe-col-count { font-variant-numeric: tabular-nums; }`. Fixes misaligned digits across the whole dashboard.</p>
+  <p class="rationale">Principle #10 monospaced numerics · MDN · Jo Maendle on date alignment</p>
+</div></div>
+
+<div class="sug"><div class="num">006</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">global</span> Color palette fixed and published.</h5>
+  <p>Green = good / FINAL / fresh, amber = aging / review / warning, red = contradiction / orphan / stale, blue = brand / category accent, neutral grey = meta. Document in a wiki-search-palette.css comment header. Currently hex colors drift across the file.</p>
+  <p class="rationale">nastengraph · Stephen Few consistency · clicdata "Dashboard Design Mistakes"</p>
+</div></div>
+
+<div class="sug"><div class="num">007</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">global</span> Drop the SharePoint filter row.</h5>
+  <p>Fold "local-only / published / stale" into a single "📤 Published only" toggle in the search row. 51 local-only docs don't need their own filter row eating vertical space. Stale SP count stays in the hero strip.</p>
+  <p class="rationale">soul.md #3 subtraction before addition · Linear "fewer filters, more cards"</p>
+</div></div>
+
+<div class="sug"><div class="num">008</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">global</span> Keyboard-first: ⌘K opens command palette, / focuses search, Esc clears.</h5>
+  <p>Current / and Esc already wired. Add ⌘K (or Ctrl+K) to open a command palette overlaying page-jump ("go to pipeline", "go to health", "filter EU5", "reset filters"). Same pattern as Linear + Notion.</p>
+  <p class="rationale">Linear ⌘K · Notion ⌘K · keyboard-first power-user UX</p>
+</div></div>
+
+<h4>Hero / homepage instrumentation (9-14)</h4>
+
+<div class="sug"><div class="num">009</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">hero</span> Pin Karpathy-style ingest log above the recent feed.</h5>
+  <p>New section titled "📥 This week": one row per ingest event. Date · action verb · title · "+3 updated, +1 new" · ▸ expand. Chronological. Matches the `log.md` convention in Karpathy's gist verbatim.</p>
+  <p class="rationale">Principle #14 index is content, log is chronology · Karpathy gist · Memex associative trails</p>
+</div></div>
+
+<div class="sug"><div class="num">010</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">hero</span> Demand-gap panel — top 5 unanswered questions from wiki-demand-log.</h5>
+  <p>Right rail, 320px. Each row: question text · ask count · last-asked · "Start article" CTA. Pulls from `wiki/agent-created/_meta/wiki-demand-log.md` (already exists, already being populated). CTA opens a pre-filled draft into the wiki pipeline.</p>
+  <p class="rationale">Principle #17 maintenance cost visible · Karpathy "LLM suggests questions to investigate" · Notion enterprise search "3-hour productivity tax"</p>
+</div></div>
+
+<div class="sug"><div class="num">011</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">hero</span> Wiki-health fan chart — 26w freshness rate as CI band.</h5>
+  <p>Collapsed by default. Opens with `[+] Wiki health`. Inside: x=week, y=% docs with updated<90d. Shaded fan for 50/80/90 historical CI. Matches projection M9 fan exactly; reuses canon-chart.js fan mode (kiro-server commit 1a29e51 from yesterday).</p>
+  <p class="rationale">Principle #9 uncertainty as fan · BoE 1996 · projection M9 · symmetry with projection</p>
+</div></div>
+
+<div class="sug"><div class="num">012</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">hero</span> Topic small-multiples grid — 13 cards, 6-week ingest velocity each.</h5>
+  <p>New section below hero. CSS grid `repeat(auto-fill, minmax(180px, 1fr))`. Each card: topic name · doc count · 6-week sparkline of ingests per week. Shared Y scale across cards. Click filters `F.topic`.</p>
+  <p class="rationale">Principle #8 small multiples · Juice Analytics · Datawrapper 2024 small multiple line charts</p>
+</div></div>
+
+<div class="sug"><div class="num">013</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">hero</span> Topic freshness heat-grid alternative view.</h5>
+  <p>Toggle from topic small multiples to a 13-cell heat-grid where color = % of topic's docs that are stale. Red = most-rotten, green = healthiest. Matches projection 6.4.2 heat-grid.</p>
+  <p class="rationale">Projection design system heatgrid · Stephen Few · Few dashboards at-a-glance</p>
+</div></div>
+
+<div class="sug"><div class="num">014</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">hero</span> "Wiki DNA" panel — one-glance shape description.</h5>
+  <p>Collapsed. Expanded: one paragraph auto-generated summary. "AB Paid Search wiki. 301 docs across 13 topics and 7 markets. Average doc: 1,136 words. 94% single-sourced, 6% synthesize 2+ sources. Lint health 97% (2 contradictions, 3 orphans). Last major restructure: 2026-04-17. Fastest-growing topic: OCI (+6 docs in 6 weeks)."</p>
+  <p class="rationale">Principle #16 OpenBrain capability/calibration/drift · AI-2027 model card framing · MindStudio compiler analogy</p>
+</div></div>
+
+<h4>Filter + search view (15-22)</h4>
+
+<div class="sug"><div class="num">015</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">search</span> Collapse 5 filter rows into 2.</h5>
+  <p>Row 1: Status (All / DRAFT / REVIEW / FINAL / ACTIVE / PENDING). Row 2: faceted-search chips showing Market, Topic, Type as compact horizontal chips that toggle. Saves ~110px of vertical space. Filter-active label remains.</p>
+  <p class="rationale">soul.md #6 reduce decisions · Linear "fewer filters, more cards" · projection control-group density</p>
+</div></div>
+
+<div class="sug"><div class="num">016</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">search</span> Market filter becomes pulse strip (10 colored dots).</h5>
+  <p>Replaces `EU5 118 / US 108 / JP 67 ...` row with a horizontal row of 10 dots: one per market, color by doc count (green = many, amber = few, grey = none). Matches projection .market-pulse-strip exactly.</p>
+  <p class="rationale">Projection P5-10 · symmetry across dashboards · Evergreen direct labels</p>
+</div></div>
+
+<div class="sug"><div class="num">017</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">search</span> Active-filter chip row with dismissible chips.</h5>
+  <p>Replaces the `| EU5 · Bidding · FINAL` pipe-separated label with proper dismissible chips (each with an `×` to remove just that filter). Matches Linear / Vercel Geist chip pattern.</p>
+  <p class="rationale">Linear chip filters · Vercel Geist chip component · soul.md #6</p>
+</div></div>
+
+<div class="sug"><div class="num">018</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">search</span> Exact-phrase search via quoted strings.</h5>
+  <p>Current fuzzy search matches "ads" → "aso", "ad", "rsa"... Too loose for Amazon acronyms. Wrap query in `"quotes"` to force exact-phrase matching. Falls back to fuzzy when no quotes present.</p>
+  <p class="rationale">Linear quoted search · Notion quoted search · reduce false-positive frustration</p>
+</div></div>
+
+<div class="sug"><div class="num">019</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">search</span> Saved filters — save a filter state under a name.</h5>
+  <p>`⌘S` saves current filter state. Name it. `⌘1..9` jumps. Persists in localStorage. Matches Notion saved views + Linear views.</p>
+  <p class="rationale">soul.md "routine as liberation" (eliminate re-filter decision) · Notion saved views · Linear views</p>
+</div></div>
+
+<div class="sug"><div class="num">020</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">search</span> Last query persists in localStorage.</h5>
+  <p>Re-opening the page restores the last query + filter state. One hotkey (Esc) clears.</p>
+  <p class="rationale">soul.md "routine as liberation" · Notion recent-search behavior · projection localStorage pattern (already shipped)</p>
+</div></div>
+
+<div class="sug"><div class="num">021</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">search</span> Empty-state teaches search.</h5>
+  <p>"No results" currently says "Try different keywords or broaden filters." Replace with 4 example queries that match real data: "`oci test methodology`", "`polaris brand lp`", "`callout W16 MX`", "`karpathy`". Vercel Geist pattern.</p>
+  <p class="rationale">Vercel Geist empty-state · zero-state-as-demo · Commoncog WBR orientation for new readers</p>
+</div></div>
+
+<div class="sug"><div class="num">022</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">search</span> Query log pane (private, local) — last 20 searches with one-click re-run.</h5>
+  <p>Hidden behind a `[log]` link in the bottom-right. Opens a panel with recent queries and their result counts. Client-side only, localStorage.</p>
+  <p class="rationale">Linear search history · command palette · power-user affordance</p>
+</div></div>
+
+<h4>Card anatomy (23-29)</h4>
+
+<div class="sug"><div class="num">023</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">search</span> "Since last look" badge on cards updated since user's last session.</h5>
+  <p>localStorage tracks last-visit timestamp. Any doc with `updated >= last-visit` gets a subtle "✨ new" badge. Fades after 3 views. Matches command-center.html change-badge pattern.</p>
+  <p class="rationale">Attention budget · command-center #11 pattern · FT annotation "what's new"</p>
+</div></div>
+
+<div class="sug"><div class="num">024</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">search</span> Swap word_count for compression ratio (words / sources).</h5>
+  <p>Current shows "4,582 words". More useful: "4,582 words · 18 sources" or even "255 w/source (compression ratio)". Karpathy's explicit point: the wiki is dense compiled artifact; raw docs would be ~10× longer.</p>
+  <p class="rationale">Principle #12 wiki-as-compiler-artifact · Karpathy compile-denser · Tufte data-ink</p>
+</div></div>
+
+<div class="sug"><div class="num">025</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">search</span> Contradiction + orphan + cycle badges inline on cards.</h5>
+  <p>Three new badges: ⚠ orphan (grey, low weight), ⛔ contradicts (red, high weight), 🔁 cycle (amber). Clicking opens popover with offending pages + "Resolve" / "Dismiss" actions. Data emitted by new scan in build-wiki-index.py.</p>
+  <p class="rationale">Principle #13 lint is first-class · Karpathy gist lint list</p>
+</div></div>
+
+<div class="sug"><div class="num">026</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">search</span> Published lag visible as age-of-publish vs age-of-local.</h5>
+  <p>SharePoint-published docs show 2 dates when stale: "📤 28d on SP · 🟢 3d local". Makes publication drift obvious.</p>
+  <p class="rationale">projection stale banner · SharePoint sync behavior · provenance</p>
+</div></div>
+
+<div class="sug"><div class="num">027</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">search</span> Bullet chart on "vs canonical length" — how long this doc is vs how long it should be.</h5>
+  <p>Markets & Programs should be ~1,500 words. Callouts should be ~400. When actual deviates >2× from category mean, show bullet chart inline. Helps catch under/over-written docs.</p>
+  <p class="rationale">Principle #15 bullet charts (from prior report) · Stephen Few bullet chart · category target</p>
+</div></div>
+
+<div class="sug"><div class="num">028</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">search</span> Agent attribution — which agent wrote / last touched each page.</h5>
+  <p>Small meta row: "by: wiki-writer · last lint: wiki-critic (R2 pass) · last touch: richard". Feeds from `blackboard` sidecar state file (already exists for in-pipeline docs).</p>
+  <p class="rationale">Principle #15 dual-audience · MindStudio compiler analogy · Karpathy "LLM owns layer 2"</p>
+</div></div>
+
+<div class="sug"><div class="num">029</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">search</span> Reading-time estimate per doc.</h5>
+  <p>"3 min read" or "12 min read" based on 250 wpm. Helps Richard decide whether to open now or bookmark.</p>
+  <p class="rationale">Medium "read time" pattern · attention budget</p>
+</div></div>
+
+<h4>Document viewer (30-36)</h4>
+
+<div class="sug"><div class="num">030</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">viewer</span> Lineage strip — "Sources in → this doc → Pages out".</h5>
+  <p>New horizontal strip under the viewer header. Left: pills for raw sources that compiled this page (Hedy transcript, email thread, Quip, Slack). Right: pills for wiki pages that cite this one (inverse of related_docs). Cap at 5+5 with "show all" link.</p>
+  <p class="rationale">Principle #12 wiki-as-compiler · Karpathy three-layer architecture · Memex</p>
+</div></div>
+
+<div class="sug"><div class="num">031</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">viewer</span> Contradiction banner at top of viewer when this page conflicts with another.</h5>
+  <p>Red banner: "⛔ This page contradicts <a>Page X</a> on claim "NB CVR is 4%" (this: 4%, other: 2%). Reviewed?"</p>
+  <p class="rationale">Principle #13 lint is first-class · FT annotate inside the plot · code-diff UI</p>
+</div></div>
+
+<div class="sug"><div class="num">032</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">viewer</span> Stale banner rewritten as exception-banner.</h5>
+  <p>Current banner is a single amber line. Replace with projection banner-strip pattern — red/amber/grey variants based on age. At 90d: amber, "verify". At 180d: red, "repair or archive". Matches projection .banner-row.warn / .danger classes exactly.</p>
+  <p class="rationale">projection banner-strip · consistency across pages · principle #5 exception-driven</p>
+</div></div>
+
+<div class="sug"><div class="num">033</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">viewer</span> TOC collapses to `<details>` when article >20 headings.</h5>
+  <p>Current TOC is always-open. For very long docs (context-catalog 6,256 words, PS wiki 4,582 words) the TOC eats 40% of initial viewport. Auto-collapse over threshold; open state persists per-doc in localStorage.</p>
+  <p class="rationale">Progressive disclosure · WR M1 TOC collapse · Nielsen essential-first</p>
+</div></div>
+
+<div class="sug"><div class="num">034</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">viewer</span> Direct-label related links with endpoint labels.</h5>
+  <p>Current: `Polaris Program (10)` — the 10 is ambiguous (shared terms? related docs?). Change to `Polaris Program → 10 shared refs` with the edge-weight explicit at the endpoint.</p>
+  <p class="rationale">Principle #4 direct labels · Data Revelations · Evergreen</p>
+</div></div>
+
+<div class="sug"><div class="num">035</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">viewer</span> Action-first footer.</h5>
+  <p>Three buttons at the very bottom of the viewer: "Open raw sources", "Lint this page", "Open in Obsidian". Matches projection alert-actions / alert-action-primary pattern.</p>
+  <p class="rationale">Principle #7 action-first · projection alert-actions · Ethos App "Dashboards to Stories"</p>
+</div></div>
+
+<div class="sug"><div class="num">036</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">viewer</span> "What to read next" — last card suggests 3 docs based on graph distance.</h5>
+  <p>At end of doc body: 3 recommendations with cover-card rendering. Ranked by graph distance + topic overlap + freshness. Same card style as the result list.</p>
+  <p class="rationale">Amazon "Customers who read this also read" · graph-based recommendation</p>
+</div></div>
+
+<h4>Pipeline view (37-41)</h4>
+
+<div class="sug"><div class="num">037</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">pipeline</span> Pipeline headline + exception banner.</h5>
+  <p>Above the 4-column kanban: one sentence template "Pipeline: 196 draft → 54 review → 16 final (+12 new this week, +3 promoted, +1 published)". Exception banner below if draft count > 200 OR 0 FINAL in 14d. Matches WR M2 exactly.</p>
+  <p class="rationale">Principle #7 half-built chart · WR M2 · FT active title</p>
+</div></div>
+
+<div class="sug"><div class="num">038</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">pipeline</span> Column count badges become stacked-bar capacity visualizations.</h5>
+  <p>Current "DRAFT 196" count badge replaced with a 1-row stacked bar showing draft/review/final/archived proportions. Each column shows its own slice highlighted.</p>
+  <p class="rationale">Tufte "the same data, only more of it" · nastengraph retention alternatives</p>
+</div></div>
+
+<div class="sug"><div class="num">039</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">pipeline</span> Velocity per stage.</h5>
+  <p>Under each column header: "5 moved in · 2 moved out · +3 net this week". Surfaces flow rate, not just backlog size. Amazon 6-12 framing applied to process metrics.</p>
+  <p class="rationale">Principle #6 Amazon 6-12 · Commoncog WBR · Goldratt theory of constraints</p>
+</div></div>
+
+<div class="sug"><div class="num">040</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">pipeline</span> Pipeline group-by `market` becomes small-multiples grid by default.</h5>
+  <p>Currently a kanban with 7 market columns, each mostly empty. Replace with a 4×2 grid of per-market mini-pipelines. Each cell: 3 sub-columns (draft/review/final) + count + trend arrow.</p>
+  <p class="rationale">Principle #8 small multiples · Juice Analytics · 10-row-table anti-pattern</p>
+</div></div>
+
+<div class="sug"><div class="num">041</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">pipeline</span> Drag-drop between columns.</h5>
+  <p>Arrow-button promote/demote already exists. Add drag-drop for direct manipulation. Matches Linear + Notion kanban.</p>
+  <p class="rationale">Linear kanban · Notion kanban · direct manipulation Nielsen</p>
+</div></div>
+
+<h4>Graph + navigation (42-46)</h4>
+
+<div class="sug"><div class="num">042</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">search</span> Graph minimap — collapsed by default, 420×300 force-directed.</h5>
+  <p>Nodes = docs, edges = related_docs. Node color = status. Node size = word_count. Hover = tooltip with title + 3-line snippet. Click = open doc. Click edge = filter both docs.</p>
+  <p class="rationale">Obsidian graph view · Karpathy "graph is the shape of the wiki" · force-directed layout</p>
+</div></div>
+
+<div class="sug"><div class="num">043</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> Graph supports "hubs / orphans" highlight mode.</h5>
+  <p>Toggle in the graph to isolate hub pages (high degree) and orphan pages (degree 0). Karpathy gist calls both out explicitly as lint targets.</p>
+  <p class="rationale">Obsidian graph filters · Karpathy lint checks</p>
+</div></div>
+
+<div class="sug"><div class="num">044</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> Folder-structure-as-graph toggle.</h5>
+  <p>Add an optional edge type: dashed lines showing folder hierarchy (category → doc). Community-requested Obsidian feature, not in core.</p>
+  <p class="rationale">Obsidian forum thread (32411) · MOCs as hierarchical networks</p>
+</div></div>
+
+<div class="sug"><div class="num">045</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">search</span> Active table-of-contents on homepage.</h5>
+  <p>Left rail, 220px, collapsible. Mirrors the category tree (Testing & Experimentation → OCI → Phase 1 → ...). Click = filter. Current-filter highlighted. Matches Notion sidebar.</p>
+  <p class="rationale">Notion sidebar · Obsidian folder tree · content-oriented index.md</p>
+</div></div>
+
+<div class="sug"><div class="num">046</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> "Agent-eye-view" toggle.</h5>
+  <p>Button in the corner flips the page to pure-markdown rendering (no chrome, no filters, no viewer). Shows what an LLM would parse. Useful for confirming a page is dual-audience-ready.</p>
+  <p class="rationale">Principle #15 dual-audience · Karpathy IDE-for-human-LLM-for-agent · body-system portability mindset</p>
+</div></div>
+
+<h4>Experimental / demo-worthy (47-50)</h4>
+
+<div class="sug"><div class="num">047</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> "Demo mode" — loads a fixed recent-feed shape so a new viewer sees the wiki's pulse.</h5>
+  <p>Query param `?demo=1` loads the last 2 weeks of ingest events as a canned tour. Matches projection's zero-state-as-demo.</p>
+  <p class="rationale">projection zero-state-as-demo · Vercel Geist empty state · onboarding-as-demo</p>
+</div></div>
+
+<div class="sug"><div class="num">048</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> Inline text sparklines in prose.</h5>
+  <p>In long-form doc viewer: when prose says "regs grew steadily W11-W17", render a <span style="display:inline-block;width:40px;height:10px;background:linear-gradient(to right,#14a548 0%,#14a548 40%,transparent 40%);vertical-align:middle;opacity:0.3"></span> word-sized graphic inline. Tufte's original thesis.</p>
+  <p class="rationale">Principle #3 sparklines · Tufte "Sparkline theory and practice" (canonical)</p>
+</div></div>
+
+<div class="sug"><div class="num">049</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">data</span> Dev-mode route for printable build-wiki-index.py output.</h5>
+  <p>`wiki-search.html?dev=1` renders the full index JSON as a QA-friendly report: every field, every counter, every derived metric. Helpful when a stat looks wrong and you need to spot-check.</p>
+  <p class="rationale">Observable canvases · print-first debugging · projection provenance modal</p>
+</div></div>
+
+<div class="sug"><div class="num">050</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> Right-click any stat to "explain this number".</h5>
+  <p>Small LLM call narrating "how is this computed and what moved it this week?" using existing provenance metadata. Complements suggestion #14 wiki DNA.</p>
+  <p class="rationale">arXiv "Functional Roles of Text" · Commoncog "how is this measured?" · projection "why am I seeing this"</p>
+</div></div>
+
+<h2 id="sources">4. Sources <span class="h-count">54 references · 30 new</span></h2>
+<p>All sources are from the past ~3 years unless canonical. Content paraphrased for licensing compliance; inline links preserved so originals can be verified. Grouped by theme.</p>
+
+<h4>Karpathy LLM Wiki (new theme — 12 refs)</h4>
+<ul class="sources">
+<li><a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f">Karpathy — llm-wiki gist (2026-04-04, canonical)</a></li>
+<li><a href="https://academy.dair.ai/blog/llm-knowledge-bases-karpathy">DAIR.AI Academy — LLM Knowledge Bases: The Karpathy Approach</a></li>
+<li><a href="https://www.mindstudio.ai/blog/karpathy-llm-wiki-pattern-knowledge-base-without-rag/">MindStudio — Karpathy LLM Wiki Pattern: Personal KB Without RAG</a></li>
+<li><a href="https://denser.ai/blog/llm-wiki-karpathy-knowledge-base/">Denser.ai — From RAG to LLM Wiki</a></li>
+<li><a href="https://blog.starmorph.com/blog/karpathy-llm-wiki-knowledge-base-guide">Starmorph — Complete Guide to AI-Maintained Knowledge Bases</a></li>
+<li><a href="https://ghelburlabs.substack.com/p/i-rebuilt-karpathys-llm-wiki-heres">Ghelbur Labs — I rebuilt Karpathy's LLM Wiki, here's what's missing</a></li>
+<li><a href="https://www.mindstudio.ai/blog/karpathy-llm-knowledge-base-compiler-analogy">MindStudio — Compiler Analogy for AI Memory</a></li>
+<li><a href="https://codersera.com/blog/karpathy-llm-knowledge-base-second-brain">Codersera — Karpathy Knowledge Base as Second Brain</a></li>
+<li><a href="https://sangampandey.info/blog/llm-wiki-pattern-personal-knowledge-base">Sangam Pandey — LLM Wiki Pattern</a></li>
+<li><a href="https://extendedbrain.substack.com/p/the-wiki-that-writes-itself">Extended Brain — The Wiki That Writes Itself</a></li>
+<li><a href="https://yu-wenhao.com/en/blog/karpathy-zettelkasten-comparison/">Yu Wenhao — Zettelkasten user's honest review</a></li>
+<li><a href="https://www.analyticsvidhya.com/blog/2026/04/llm-wiki-by-andrej-karpathy/">Analytics Vidhya — How Karpathy's Idea Is Changing AI</a></li>
+</ul>
+
+<h4>AI-2027 / OpenBrain (new theme — 8 refs)</h4>
+<ul class="sources">
+<li><a href="https://ai-2027.com/">AI 2027 — main scenario site (Kokotajlo, Alexander, Larsen, Lifland, Dean)</a></li>
+<li><a href="https://ai-2027.com/race">AI 2027 — Race ending</a></li>
+<li><a href="https://strategicleadership.substack.com/p/the-ai-2027-scenario-a-deep-dive">Strategic Leadership — AI 2027 Deep Dive</a></li>
+<li><a href="https://theneuron.ai/explainer-articles/an-ex-openai-researcher-predicts-agi-by-2027--heres-the-wild-roadmap">TheNeuron — OpenBrain compute trajectory</a></li>
+<li><a href="https://fractal.ai/article/ai-2027">Fractal.ai — Rise of Superintelligence</a></li>
+<li><a href="https://futuresearch.ai/ai-2027-6-months-later/">FutureSearch — Revisiting AGI Forecasts in 2026 (Karpathy counterpoint)</a></li>
+<li><a href="https://arxiv.org/html/2406.07882v3">arXiv — Designing a Dashboard for Transparency and Control of Conversational AI</a></li>
+<li><a href="https://devpost.com/software/openbrain-bnr2uk">DevPost OpenBrain — expert firing visualization (x-ray for open LLMs)</a></li>
+</ul>
+
+<h4>Knowledge-base UX at scale (new theme — 10 refs)</h4>
+<ul class="sources">
+<li><a href="https://www.notion.com/feature/enterprise-search/enterprise-search-for-large-teams">Notion — 3-hour daily productivity tax</a></li>
+<li><a href="https://www.notion.com/help/views-filters-and-sorts">Notion — Views, filters, sorts & groups</a></li>
+<li><a href="https://www.notion.com/help/keyboard-shortcuts">Notion — Keyboard shortcuts (⌘K / ⌘P)</a></li>
+<li><a href="https://www.linear.app/docs/search">Linear Docs — Search</a></li>
+<li><a href="https://www.temperstack.com/learn/linear/create-custom-views-filters/">TemperStack — Create custom views and filters on Linear (April 2026)</a></li>
+<li><a href="https://help.obsidian.md/plugins/graph">Obsidian Help — Graph view</a></li>
+<li><a href="https://forum.obsidian.md/t/create-a-graph-based-on-the-folder-structure/32411">Obsidian Forum — Folder-structure-as-graph</a></li>
+<li><a href="https://forum.obsidian.md/t/mocs-as-hierarchical-network-tool/7956">Obsidian Forum — MOCs as hierarchical network tool</a></li>
+<li><a href="https://vercel.com/geist/empty-state">Vercel Geist — Empty state</a></li>
+<li><a href="https://www.mindstudio.ai/blog/build-visual-dashboards-ai-memory-system-vercel">MindStudio — Build Visual Dashboards on AI Memory System with Vercel</a></li>
+</ul>
+
+<h4>Canonical viz + dashboard (carried from prior report — 24 refs)</h4>
+<ul class="sources">
+<li><a href="https://commoncog.com/the-amazon-weekly-business-review/">Commoncog — The Amazon WBR</a></li>
+<li><a href="https://www.thdpth.com/p/why-amazon-charts-beat-yours">thdpth — Why Amazon charts beat yours (2025)</a></li>
+<li><a href="https://nastengraph.medium.com/how-to-measure-your-business-the-amazon-way-3e22850ef666">Nastengraph — Measure your business the Amazon way (2025)</a></li>
+<li><a href="https://www.edwardtufte.com/notebook/sparkline-theory-and-practice-edward-tufte/">Edward Tufte — Sparkline theory and practice</a></li>
+<li><a href="https://www.edwardtufte.com/notebook/executive-dashboards/">Edward Tufte — Executive dashboards</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Small_multiple">Wikipedia — Small multiple</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Sparkline">Wikipedia — Sparkline</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Fan_chart_(time_series)">Wikipedia — Fan chart (time series)</a></li>
+<li><a href="https://fountn.design/resource/financial-times-visual-vocabulary-pdf/">FT Visual Vocabulary (PDF)</a></li>
+<li><a href="https://github.com/Financial-Times/chart-doctor">FT — Chart Doctor repo</a></li>
+<li><a href="https://www.depictdatastudio.com/avoid-color-legends-directly-label-your-data-instead/">Data Revelations — Avoid Color Legends</a></li>
+<li><a href="https://stephanieevergreen.com/direct-labels/">Evergreen — Directly Labeling</a></li>
+<li><a href="https://www.perceptualedge.com/articles/misc/Bullet_Graph_Design_Spec.pdf">Stephen Few — Bullet graph design specification</a></li>
+<li><a href="https://linear.app/now/dashboards-best-practices">Linear — Dashboards best practices (2025)</a></li>
+<li><a href="https://posthog.com/blog/posthog-marketing">PostHog — How our marketing team uses PostHog</a></li>
+<li><a href="https://vercel.com/blog/dashboard-redesign">Vercel — Dashboard redesign</a></li>
+<li><a href="https://observablehq.com/blog/dashboards-in-observable-canvases">Observable — Building a better approach to dashboards</a></li>
+<li><a href="https://www.interaction-design.org/literature/topics/progressive-disclosure">Interaction Design Foundation — Progressive disclosure</a></li>
+<li><a href="https://www.luzmo.com/blog/state-of-dashboards-2025">Luzmo — State of Dashboards 2025</a></li>
+<li><a href="https://artofstyleframe.com/blog/dashboard-design-patterns-web-apps/">Art of Styleframe — Dashboard design patterns for modern web apps (2026)</a></li>
+<li><a href="https://www.ethosapp.com/dashboards-to-stories">Ethos App — Dashboards to Stories</a></li>
+<li><a href="https://www.notion.com/help/guides/how-to-get-better-answers-from-notion-ai">Notion — How to get better answers from Notion AI</a></li>
+<li><a href="https://www.cio.com/article/4157965/the-next-generation-observability-architecture-lessons-from-a-decade-of-event-scale-systems.html">CIO — Next-gen observability architecture (2026)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric">MDN — font-variant-numeric</a></li>
+</ul>
+
+<p class="tiny" style="margin-top:40px">Report compiled by kiro-local, 2026-04-30, from the Windows IDE environment. Companion artifacts: <code>README.md</code> (handoff summary + work split) and <code>mockups.html</code> (rendered static mockups). All paraphrases noted. Verbatim quotes kept under 30 words per source. Content rephrased for compliance with licensing restrictions.</p>
+
+</main>
+</body>
+</html>

@@ -493,6 +493,97 @@ body {
 }
 .wr-controls-meta .wr-ts-accent { color: var(--color-brand); }
 
+/* M7 (2026-04-30): Amazon 6-12 chart. Two panels side-by-side (6wk
+   weekly left, 12mo monthly right) with a narrow gap divider and a
+   fixed 5-cell box-score footer. Per report principle #6 and bus 002
+   (different Y axes per panel, shared title + box-score). */
+.wr-wbr612-wrap {
+  border-top: 1px solid var(--color-panel-border);
+  padding-top: var(--gap-md);
+  padding-bottom: var(--gap-md);
+}
+.wr-wbr612-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--gap-sm);
+  gap: var(--gap-md);
+  flex-wrap: wrap;
+}
+.wr-wbr612-head h3 {
+  font-size: var(--size-panel-title, 16px);
+  font-weight: 600;
+  color: var(--color-text-hero);
+}
+.wr-wbr612-sub {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  margin-left: var(--gap-sm);
+  font-weight: 400;
+}
+.wr-wbr612-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1.8fr;  /* 6wk gets ~1/3, 12mo gets ~2/3 */
+  gap: var(--gap-sm);
+  align-items: stretch;
+}
+.wr-wbr612-gap {
+  background: var(--color-panel-border);
+  align-self: stretch;
+}
+.wr-wbr612-panel {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 3px;
+  padding: var(--gap-sm);
+}
+.wr-wbr612-panel svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.wr-wbr612-boxscore {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  margin-top: var(--gap-sm);
+  background: #fafaf5;
+  border: 1px solid var(--color-panel-border);
+  border-radius: 2px;
+  padding: var(--gap-sm);
+  font-variant-numeric: tabular-nums;
+}
+.wr-wbr612-boxscore-cell {
+  text-align: center;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  color: var(--color-text-subtle);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-right: 1px solid rgba(0,0,0,0.06);
+}
+.wr-wbr612-boxscore-cell:last-child { border-right: none; }
+.wr-wbr612-boxscore-cell b {
+  display: block;
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 18px;
+  color: var(--color-text-hero);
+  margin-top: 3px;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.wr-wbr612-boxscore-cell b.pos { color: var(--color-success); }
+.wr-wbr612-boxscore-cell b.neg { color: var(--color-danger); }
+.wr-wbr612-boxscore-cell b.warn { color: var(--color-warning); }
+@media (max-width: 900px) {
+  /* Stack vertically on narrow viewports; hide the gap divider. */
+  .wr-wbr612-grid { grid-template-columns: 1fr; }
+  .wr-wbr612-gap { display: none; }
+  .wr-wbr612-boxscore { grid-template-columns: repeat(2, 1fr); }
+}
+
 /* M6 (2026-04-30): 12-market small multiples. CSS Grid auto-fill so
    the layout reflows 4×3 / 3×4 / 2×6 / 1×12 by viewport width. Each
    panel is a compact card with title + YoY% label + dual-line SVG. */
@@ -565,6 +656,80 @@ body {
 .wr-smallmult-yoy.good { color: var(--color-success); }
 .wr-smallmult-yoy.bad  { color: var(--color-danger); }
 .wr-smallmult-yoy.warn { color: var(--color-warning); }
+
+/* M7 (2026-04-30): 6-12 chart — dual-panel weekly+monthly layout with
+   box-score footer. Commoncog Amazon WBR convention: 6 weeks weekly
+   on the left, 12 months monthly on the right, different Y axes. */
+.wr-wbr612 {
+  border: 1px solid var(--color-panel-border);
+  border-radius: 6px;
+  padding: var(--gap-md) var(--gap-lg);
+  margin: var(--gap-lg) 0;
+  background: var(--color-panel-bg);
+}
+.wr-wbr612-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--gap-md);
+  margin-bottom: var(--gap-md);
+  flex-wrap: wrap;
+}
+.wr-wbr612-sub {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  color: var(--color-text-subtle);
+  letter-spacing: 0.04em;
+}
+.wr-wbr612-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-lg);
+}
+@media (max-width: 900px) {
+  .wr-wbr612-panels { grid-template-columns: 1fr; }
+}
+.wr-wbr612-panel {
+  background: #FAFAF5;
+  border: 1px solid var(--color-panel-border);
+  border-radius: 3px;
+  padding: 6px 10px;
+  min-height: 200px;
+}
+.wr-wbr612-panel svg { display: block; width: 100%; height: auto; }
+.wr-wbr612-boxscore {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--gap-sm);
+  margin-top: var(--gap-md);
+  padding-top: var(--gap-sm);
+  border-top: 1px solid var(--color-panel-border);
+}
+@media (max-width: 700px) {
+  .wr-wbr612-boxscore { grid-template-columns: repeat(2, 1fr); }
+}
+.wr-wbr612-boxscore-cell {
+  text-align: center;
+  padding: 4px 2px;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+}
+.wr-wbr612-boxscore-cell b {
+  display: block;
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 18px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+  color: var(--color-text-hero);
+  letter-spacing: 0;
+}
+.wr-wbr612-boxscore-cell b.pos { color: var(--color-success); }
+.wr-wbr612-boxscore-cell b.neg { color: var(--color-danger); }
+.wr-wbr612-boxscore-cell b.warn { color: var(--color-warning); }
 
 /* M2 (2026-04-30): Exception banner. Renders only when the forecast
    for the current market has materially missed in the last 1-6 weeks.
@@ -1449,6 +1614,28 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
   </div>
 </div>
 
+<!-- M7 (2026-04-30): Amazon 6-12 chart. Per Bryar+Carr "Working Backwards"
+     and Commoncog: 6 weeks weekly on the left, 12 months monthly on the
+     right, shared title + fixed box-score footer. Different Y axes per
+     panel (same Y hides the relationship between short and long-term —
+     Commoncog explicit). This is the WBR grammar the full research
+     report principle #6 flags as "target." -->
+<section class="wr-wbr612-wrap" id="sec-wbr612"
+         aria-labelledby="wbr612-heading" style="margin:var(--gap-lg) 0">
+  <header class="wr-wbr612-head">
+    <h3 id="wbr612-heading" style="margin:0">
+      <span id="wbr612Title">Registrations</span>
+      <span class="wr-wbr612-sub" id="wbr612Sub"></span>
+    </h3>
+  </header>
+  <div class="wr-wbr612-grid">
+    <div class="wr-wbr612-panel" id="wbr612LeftPanel" aria-label="Six weeks weekly"></div>
+    <div class="wr-wbr612-gap" aria-hidden="true"></div>
+    <div class="wr-wbr612-panel" id="wbr612RightPanel" aria-label="Twelve months monthly"></div>
+  </div>
+  <div class="wr-wbr612-boxscore" id="wbr612BoxScore"></div>
+</section>
+
 <!-- M6 (2026-04-30): 12-market small multiples. Shared-Y indexed to
      first-week = 100 so absolute-scale differences (WW 17K regs vs MX
      500) don't destroy cross-market pattern recognition. Each panel
@@ -1510,6 +1697,28 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
     <div class="wr-chart-wrap"><canvas id="calibrationChart" role="img" aria-label="Weekly forecast error: signed % per week with severity fill and CI reference band"></canvas></div>
   </div>
 </div>
+
+<!-- M7 (2026-04-30): Amazon 6-12 chart. Two panels side by side on a
+     single landscape layout: 6 weeks weekly on the left, 12 months
+     monthly on the right. Different Y axes per panel (Commoncog: same
+     Y "hides real relationships between short and long-term"). Box
+     score footer underneath — WoW, YoY, vs OP2, 4wk avg, 13wk avg.
+     Same format every week so the brain stops processing format and
+     starts processing exceptions. Report #011, bus thread 004+006. -->
+<section class="wr-wbr612" id="sec-wbr612" aria-labelledby="wbr612Heading">
+  <header class="wr-wbr612-head">
+    <h3 id="wbr612Heading" style="margin:0">
+      6-12 view &mdash; <span id="wbr612Title">Registrations</span>
+    </h3>
+    <span class="wr-wbr612-sub" id="wbr612Sub"></span>
+  </header>
+  <div class="wr-wbr612-panels">
+    <div class="wr-wbr612-panel" id="wbr612LeftPanel"></div>
+    <div class="wr-wbr612-panel" id="wbr612RightPanel"></div>
+  </div>
+  <footer class="wr-wbr612-boxscore" id="wbr612BoxScore"></footer>
+</section>
+
 <!-- WR-S1 (2026-04-29): Weekly Detail wrapped in <details> collapsed by default.
      The table is ~50+ rows; before collapsing it dominated ~500px of scroll on
      cold load. Summary row shows the table title so it remains scannable.
@@ -1969,6 +2178,7 @@ function render() {
   renderStickyTrustBar();
   updateStickyLabels();
   renderKPIs();
+  renderSixTwelveChart();
   renderSmallMultiples();
   renderThreadStrip();
   renderChart();
@@ -2277,17 +2487,324 @@ function renderThreadStrip() {
   });
 }
 
-// M6 (2026-04-30): 12-market small multiples. Per report #043 and bus
-// 006, shared Y is the right default for small-multiples — cross-market
-// pattern recognition requires the eye to compare magnitudes. Since
-// absolute regs scales vary 30× across markets (WW ~17K, MX ~500), we
-// index each panel's series to 100 at the first visible week. That
-// way shared Y means "shared percent-change axis" which is what the
-// reader actually wants to compare.
+// M7 (2026-04-30): Amazon 6-12 chart.
 //
-// Panel content: 6-week actuals (accent) + 6-week OP2 plan (muted).
-// Title shows market + current-week YoY % (signed color). Click → select
-// that market (same code path as trust-bar pill click).
+// Per Bryar+Carr "Working Backwards" via Commoncog: display two time
+// horizons on a single visual — 6 weeks weekly on the left, 12 months
+// monthly on the right, different Y axes per panel. A 20% spike in the
+// weekly window looks alarming; the monthly view reveals it's seasonal.
+// Box-score footer below gives the fixed numbers reviewers pattern-match
+// on (WoW / YoY / vs-OP2 / 4wk-avg / 13wk-avg).
+//
+// Implementation: inline SVG per panel, no Chart.js instances. Matches
+// the M10 waterfall pattern — cleaner, cheaper, no axis-label plugin to
+// fight. For regs-markets the primary metric is registrations; for
+// spend-only (JP/AU) it's spend.
+function renderSixTwelveChart() {
+  const wrap = document.getElementById('sec-wbr612');
+  const leftHost = document.getElementById('wbr612LeftPanel');
+  const rightHost = document.getElementById('wbr612RightPanel');
+  const boxHost = document.getElementById('wbr612BoxScore');
+  const titleEl = document.getElementById('wbr612Title');
+  const subEl = document.getElementById('wbr612Sub');
+  if (!wrap || !leftHost || !rightHost || !boxHost) return;
+
+  const archetype = (typeof ARCHETYPE !== 'undefined' && ARCHETYPE[curMarket]) || 'regs';
+  const key = archetype === 'spend' ? 'cost' : 'regs';
+  const planKey = archetype === 'spend' ? null : 'op2_regs';  // monthly rollup has no plan; keep weekly only
+  const unit = archetype === 'spend' ? 'spend' : 'regs';
+  const metricLabel = archetype === 'spend' ? 'Spend' : 'Registrations';
+
+  const weekly = (FORECAST.weekly && FORECAST.weekly[curMarket]) || [];
+  const monthly = (FORECAST.monthly && FORECAST.monthly[curMarket]) || [];
+
+  if (!weekly.length) {
+    wrap.style.display = 'none';
+    return;
+  }
+  wrap.style.display = '';
+
+  const maxWk = FORECAST.max_week || 15;
+  const WEEKS_WINDOW = 6;
+  const firstWk = Math.max(1, maxWk - (WEEKS_WINDOW - 1));
+  const weeklyWindow = weekly.filter(w => w.wk >= firstWk && w.wk <= maxWk);
+  const lastWeek = weeklyWindow[weeklyWindow.length - 1] || {};
+  const prevWeek = weeklyWindow.length > 1 ? weeklyWindow[weeklyWindow.length - 2] : null;
+
+  // ---- TITLE ------------------------------------------------------------
+  if (titleEl) titleEl.textContent = metricLabel;
+  if (subEl) {
+    const lastVal = lastWeek[key];
+    subEl.textContent = `· ${curMarket} · ${lastWeek.week || ('W' + lastWeek.wk)} ` +
+                        `· ${fmt(lastVal || 0, archetype === 'spend' ? '$' : 'regs')}`;
+  }
+
+  // ---- LEFT PANEL: 6 weeks weekly --------------------------------------
+  // Dimensions for the inline SVG. Let the CSS scale it to 100% width;
+  // the viewBox defines our coordinate system.
+  const L_W = 420, L_H = 160;
+  const L_PAD = { top: 20, right: 30, bottom: 30, left: 40 };
+  const L_PLOT_W = L_W - L_PAD.left - L_PAD.right;
+  const L_PLOT_H = L_H - L_PAD.top - L_PAD.bottom;
+
+  // Y extent for the left panel — max of actual + OP2 + pred with 10% pad.
+  const leftValues = [];
+  weeklyWindow.forEach(w => {
+    const actV = w[key] > 0 ? w[key] : (w['pred_' + key] || null);
+    if (actV != null) leftValues.push(actV);
+    if (planKey && w[planKey]) leftValues.push(w[planKey]);
+  });
+  let yMaxL = leftValues.length ? Math.max(...leftValues) * 1.1 : 1;
+  let yMinL = 0;  // start at zero — absolute magnitudes matter for the weekly view.
+
+  const xAtL = (i) => L_PAD.left + (i / Math.max(1, weeklyWindow.length - 1)) * L_PLOT_W;
+  const yAtL = (v) => L_PAD.top + L_PLOT_H - ((v - yMinL) / Math.max(1, yMaxL - yMinL)) * L_PLOT_H;
+
+  // Polylines — actual + OP2 (if regs-market).
+  const actualPts = weeklyWindow.map((w, i) => {
+    const v = w[key] > 0 ? w[key] : (w['pred_' + key] || null);
+    if (v == null) return null;
+    return `${xAtL(i).toFixed(1)},${yAtL(v).toFixed(1)}`;
+  }).filter(Boolean).join(' ');
+
+  let planPts = '';
+  if (planKey) {
+    planPts = weeklyWindow.map((w, i) => {
+      if (w[planKey] == null) return null;
+      return `${xAtL(i).toFixed(1)},${yAtL(w[planKey]).toFixed(1)}`;
+    }).filter(Boolean).join(' ');
+  }
+
+  // Week labels on the x-axis.
+  const leftXLabels = weeklyWindow.map((w, i) =>
+    `<text x="${xAtL(i).toFixed(1)}" y="${L_PAD.top + L_PLOT_H + 14}" ` +
+    `text-anchor="middle" font-family="ui-monospace,monospace" ` +
+    `font-size="9" fill="#8a8a8a">W${w.wk}</text>`
+  ).join('');
+
+  // Y-axis labels — 0 and yMax only, minimal.
+  const yMaxLabelL = archetype === 'spend'
+    ? '$' + (yMaxL / 1000).toFixed(0) + 'K'
+    : (yMaxL >= 1000 ? (yMaxL / 1000).toFixed(1) + 'K' : Math.round(yMaxL).toString());
+
+  // Endpoint dot for actual.
+  const lastActualIdx = weeklyWindow.map((w, i) => ({
+    v: w[key] > 0 ? w[key] : (w['pred_' + key] || null), i
+  })).filter(x => x.v != null).pop();
+  const endpointDotL = lastActualIdx
+    ? `<circle cx="${xAtL(lastActualIdx.i).toFixed(1)}" ` +
+      `cy="${yAtL(lastActualIdx.v).toFixed(1)}" r="3" fill="#0066cc"/>`
+    : '';
+
+  const leftSvg =
+    `<svg viewBox="0 0 ${L_W} ${L_H}" role="img" ` +
+    `aria-label="6 weeks weekly ${metricLabel.toLowerCase()}, ${curMarket}, W${firstWk} through W${maxWk}">` +
+    // plot area background — very subtle
+    `<rect x="${L_PAD.left}" y="${L_PAD.top}" width="${L_PLOT_W}" ` +
+    `height="${L_PLOT_H}" fill="#fafaf5" stroke="#ece9de"/>` +
+    // subtitle strip
+    `<text x="${L_PAD.left}" y="${L_PAD.top - 5}" font-family="ui-monospace,monospace" ` +
+    `font-size="9" fill="#8a8a8a" letter-spacing="0.12em">6 WEEKS · WEEKLY</text>` +
+    // OP2 line (dashed, muted) if regs-market
+    (planPts
+      ? `<polyline fill="none" stroke="#cdc9bb" stroke-width="1.4" ` +
+        `stroke-dasharray="3,3" points="${planPts}"/>`
+      : '') +
+    // Actual line
+    `<polyline fill="none" stroke="#0066cc" stroke-width="2" points="${actualPts}"/>` +
+    endpointDotL +
+    leftXLabels +
+    // Y labels (min, max)
+    `<text x="${L_PAD.left - 4}" y="${(L_PAD.top + 4).toFixed(1)}" ` +
+    `text-anchor="end" font-family="ui-monospace,monospace" font-size="9" ` +
+    `fill="#8a8a8a">${yMaxLabelL}</text>` +
+    `<text x="${L_PAD.left - 4}" y="${(L_PAD.top + L_PLOT_H).toFixed(1)}" ` +
+    `text-anchor="end" font-family="ui-monospace,monospace" font-size="9" fill="#8a8a8a">0</text>` +
+    // Endpoint labels
+    (planPts
+      ? `<text x="${(L_PAD.left + L_PLOT_W + 2).toFixed(1)}" ` +
+        `y="${(yAtL(weeklyWindow[weeklyWindow.length-1][planKey] || 0) + 3).toFixed(1)}" ` +
+        `font-family="ui-monospace,monospace" font-size="9" fill="#6a5d2e">OP2</text>`
+      : '') +
+    (endpointDotL
+      ? `<text x="${(xAtL(lastActualIdx.i) + 5).toFixed(1)}" ` +
+        `y="${(yAtL(lastActualIdx.v) + 3).toFixed(1)}" ` +
+        `font-family="ui-monospace,monospace" font-size="9" fill="#0066cc">actual</text>`
+      : '') +
+    `</svg>`;
+
+  leftHost.innerHTML = leftSvg;
+
+  // ---- RIGHT PANEL: 12 months monthly ----------------------------------
+  const R_W = 640, R_H = 160;
+  const R_PAD = { top: 20, right: 50, bottom: 30, left: 40 };
+  const R_PLOT_W = R_W - R_PAD.left - R_PAD.right;
+  const R_PLOT_H = R_H - R_PAD.top - R_PAD.bottom;
+
+  let rightSvg;
+  if (!monthly.length) {
+    rightSvg =
+      `<svg viewBox="0 0 ${R_W} ${R_H}" role="img" aria-label="12 months monthly (no data)">` +
+      `<rect x="${R_PAD.left}" y="${R_PAD.top}" width="${R_PLOT_W}" ` +
+      `height="${R_PLOT_H}" fill="#fafaf5" stroke="#ece9de"/>` +
+      `<text x="${R_W/2}" y="${R_H/2}" text-anchor="middle" ` +
+      `font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" ` +
+      `fill="#8a8a8a">Monthly rollup not available for ${curMarket}</text>` +
+      `</svg>`;
+  } else {
+    // Y extent — actual + pred, 0-origin, 10% pad.
+    const actKey = archetype === 'spend' ? 'actual_cost' : 'actual_regs';
+    const predKey = archetype === 'spend' ? 'pred_cost' : 'pred_regs';
+    const monthValues = [];
+    monthly.forEach(m => {
+      if (m[actKey] != null && m[actKey] > 0) monthValues.push(m[actKey]);
+      if (m[predKey] != null) monthValues.push(m[predKey]);
+    });
+    const yMaxR = monthValues.length ? Math.max(...monthValues) * 1.1 : 1;
+    const xAtR = (i) => R_PAD.left + (i / Math.max(1, monthly.length - 1)) * R_PLOT_W;
+    const yAtR = (v) => R_PAD.top + R_PLOT_H - (v / yMaxR) * R_PLOT_H;
+
+    // Actual polyline (YTD months only — skip zero/null which indicates future).
+    const actualMonthlyPts = [];
+    const lastActualMonth = { v: null, i: -1 };
+    monthly.forEach((m, i) => {
+      const v = m[actKey];
+      if (v != null && v > 0) {
+        actualMonthlyPts.push(`${xAtR(i).toFixed(1)},${yAtR(v).toFixed(1)}`);
+        lastActualMonth.v = v; lastActualMonth.i = i;
+      }
+    });
+    // Pred polyline (all months — includes future projections).
+    const predMonthlyPts = monthly.map((m, i) => {
+      if (m[predKey] == null) return null;
+      return `${xAtR(i).toFixed(1)},${yAtR(m[predKey]).toFixed(1)}`;
+    }).filter(Boolean).join(' ');
+
+    // X-axis labels — every other month to avoid crowding.
+    const rightXLabels = monthly.map((m, i) =>
+      (i % 2 === 0)
+        ? `<text x="${xAtR(i).toFixed(1)}" y="${R_PAD.top + R_PLOT_H + 14}" ` +
+          `text-anchor="middle" font-family="ui-monospace,monospace" ` +
+          `font-size="9" fill="#8a8a8a">${m.period}</text>`
+        : ''
+    ).join('');
+
+    const yMaxLabelR = archetype === 'spend'
+      ? '$' + (yMaxR / 1000000).toFixed(1) + 'M'
+      : (yMaxR >= 1000 ? (yMaxR / 1000).toFixed(0) + 'K' : Math.round(yMaxR).toString());
+
+    // Endpoint dot for actuals.
+    const endpointDotR = lastActualMonth.v != null
+      ? `<circle cx="${xAtR(lastActualMonth.i).toFixed(1)}" ` +
+        `cy="${yAtR(lastActualMonth.v).toFixed(1)}" r="3" fill="#0066cc"/>`
+      : '';
+
+    // "Now" dashed vertical at the last actual month.
+    const nowLineX = lastActualMonth.i >= 0 ? xAtR(lastActualMonth.i).toFixed(1) : null;
+
+    rightSvg =
+      `<svg viewBox="0 0 ${R_W} ${R_H}" role="img" ` +
+      `aria-label="12 months monthly ${metricLabel.toLowerCase()}, ${curMarket}">` +
+      `<rect x="${R_PAD.left}" y="${R_PAD.top}" width="${R_PLOT_W}" ` +
+      `height="${R_PLOT_H}" fill="#fafaf5" stroke="#ece9de"/>` +
+      `<text x="${R_PAD.left}" y="${R_PAD.top - 5}" font-family="ui-monospace,monospace" ` +
+      `font-size="9" fill="#8a8a8a" letter-spacing="0.12em">12 MONTHS · MONTHLY</text>` +
+      // Pred line behind (muted, dashed)
+      (predMonthlyPts
+        ? `<polyline fill="none" stroke="#cdc9bb" stroke-width="1.4" ` +
+          `stroke-dasharray="3,3" points="${predMonthlyPts}"/>`
+        : '') +
+      // Actual line on top
+      `<polyline fill="none" stroke="#0066cc" stroke-width="2" points="${actualMonthlyPts.join(' ')}"/>` +
+      endpointDotR +
+      // Now line
+      (nowLineX
+        ? `<line x1="${nowLineX}" y1="${R_PAD.top}" x2="${nowLineX}" ` +
+          `y2="${R_PAD.top + R_PLOT_H}" stroke="#8a8a8a" ` +
+          `stroke-dasharray="2,3" stroke-width="1"/>`
+        : '') +
+      rightXLabels +
+      // Y labels
+      `<text x="${R_PAD.left - 4}" y="${(R_PAD.top + 4).toFixed(1)}" ` +
+      `text-anchor="end" font-family="ui-monospace,monospace" font-size="9" ` +
+      `fill="#8a8a8a">${yMaxLabelR}</text>` +
+      `<text x="${R_PAD.left - 4}" y="${(R_PAD.top + R_PLOT_H).toFixed(1)}" ` +
+      `text-anchor="end" font-family="ui-monospace,monospace" font-size="9" fill="#8a8a8a">0</text>` +
+      // Endpoint label for pred line
+      (predMonthlyPts && monthly.length > 0 && monthly[monthly.length - 1][predKey]
+        ? `<text x="${(R_PAD.left + R_PLOT_W + 2).toFixed(1)}" ` +
+          `y="${(yAtR(monthly[monthly.length-1][predKey]) + 3).toFixed(1)}" ` +
+          `font-family="ui-monospace,monospace" font-size="9" fill="#6a5d2e">pred</text>`
+        : '') +
+      // Endpoint label for actual line
+      (endpointDotR
+        ? `<text x="${(xAtR(lastActualMonth.i) + 5).toFixed(1)}" ` +
+          `y="${(yAtR(lastActualMonth.v) - 5).toFixed(1)}" ` +
+          `font-family="ui-monospace,monospace" font-size="9" fill="#0066cc">actual</text>`
+        : '') +
+      `</svg>`;
+  }
+
+  rightHost.innerHTML = rightSvg;
+
+  // ---- BOX SCORE FOOTER ------------------------------------------------
+  // 5 cells: WoW %, YoY %, vs-OP2 %, 4wk avg, 13wk avg.
+  const actualWeeks = weekly.filter(w => w.wk <= maxWk && w[key] > 0);
+  const last = actualWeeks[actualWeeks.length - 1] || {};
+  const prev = actualWeeks.length > 1 ? actualWeeks[actualWeeks.length - 2] : null;
+
+  const wowRaw = safeWoW(last[key], prev ? prev[key] : null);
+  const wowDisplay = wowRaw != null
+    ? `${wowRaw > 0 ? '+' : ''}${wowRaw.toFixed(1)}%`
+    : '\u2014';
+  const wowSignCls = wowRaw == null ? 'warn'
+    : Math.abs(wowRaw) < 1 ? 'warn'
+    : (wowRaw > 0 ? 'pos' : 'neg');
+
+  // YoY via FORECAST.ly_weekly
+  const ly = (FORECAST.ly_weekly && FORECAST.ly_weekly[curMarket]) || [];
+  const lyRow = ly.find(w => w.wk === last.wk);
+  const yoyRaw = (lyRow && lyRow[key] && last[key])
+    ? ((last[key] - lyRow[key]) / lyRow[key]) * 100
+    : null;
+  const yoyDisplay = yoyRaw != null
+    ? `${yoyRaw > 0 ? '+' : ''}${yoyRaw.toFixed(0)}%`
+    : '\u2014';
+  const yoySignCls = yoyRaw == null ? 'warn'
+    : (yoyRaw > 0 ? 'pos' : 'neg');
+
+  // vs OP2 — weekly for regs-markets.
+  let op2Display = '\u2014';
+  let op2SignCls = 'warn';
+  if (planKey && last[planKey] && last[key]) {
+    const op2Pct = ((last[key] - last[planKey]) / last[planKey]) * 100;
+    op2Display = `${op2Pct > 0 ? '+' : ''}${op2Pct.toFixed(1)}%`;
+    op2SignCls = Math.abs(op2Pct) < 1 ? 'warn' : (op2Pct > 0 ? 'pos' : 'neg');
+  }
+
+  // 4wk average
+  const last4 = actualWeeks.slice(-4).map(w => w[key]).filter(v => v != null);
+  const avg4 = last4.length ? last4.reduce((s, v) => s + v, 0) / last4.length : null;
+  const avg4Display = avg4 != null
+    ? fmt(avg4, archetype === 'spend' ? '$' : 'regs')
+    : '\u2014';
+
+  // 13wk average
+  const last13 = actualWeeks.slice(-13).map(w => w[key]).filter(v => v != null);
+  const avg13 = last13.length ? last13.reduce((s, v) => s + v, 0) / last13.length : null;
+  const avg13Display = avg13 != null
+    ? fmt(avg13, archetype === 'spend' ? '$' : 'regs')
+    : '\u2014';
+
+  boxHost.innerHTML =
+    `<div class="wr-wbr612-boxscore-cell">WoW<b class="${wowSignCls}">${wowDisplay}</b></div>` +
+    `<div class="wr-wbr612-boxscore-cell">YoY<b class="${yoySignCls}">${yoyDisplay}</b></div>` +
+    `<div class="wr-wbr612-boxscore-cell">vs OP2<b class="${op2SignCls}">${op2Display}</b></div>` +
+    `<div class="wr-wbr612-boxscore-cell">4wk avg<b>${avg4Display}</b></div>` +
+    `<div class="wr-wbr612-boxscore-cell">13wk avg<b>${avg13Display}</b></div>`;
+}
+
+// M6 (2026-04-30): 12-market small multiples.
 function renderSmallMultiples() {
   const host = document.getElementById('smallMultiplesGrid');
   const heading = document.getElementById('sm-heading');
