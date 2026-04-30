@@ -235,19 +235,67 @@
    first on the fold. */
 .wr-scorecard-panel { border-left: 3px solid var(--color-success); }
 .wr-scorecard-head { font-size: var(--size-meta); color: var(--color-text-subtle); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: var(--gap-sm); }
+/* M5 (2026-04-30): reliability diagram + signed-error panel.
+   Replaces the 4-card scorecard row with two SVG panels side by side;
+   the 4 summary numbers (first-err / latest-err / in-CI / skill) sit
+   below as a compact box-score footer. Per report #011 / suggestion #034
+   — calibration belongs on a reliability diagram, not in four cards. */
 .wr-scorecard-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* WR-A7: 4th tile = skill vs naive */
+  grid-template-columns: 1fr 1fr;
   gap: var(--gap-md);
+  margin-bottom: var(--gap-sm);
+}
+@media (max-width: 900px) { .wr-scorecard-row { grid-template-columns: 1fr; } }
+.wr-score-panel {
+  background: var(--color-neutral-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 6px;
+  padding: var(--gap-sm) var(--gap-md);
+  min-height: 220px;
+}
+.wr-score-panel-title {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.wr-score-panel-sub {
+  font-size: var(--size-meta);
+  color: var(--color-text-meta);
+  margin-bottom: var(--gap-xs);
+}
+.wr-score-panel svg { display: block; width: 100%; height: auto; }
+/* Box-score footer — four summary numbers in a compact horizontal strip
+   below the two panels. Same four numbers that were the 4-card row, but
+   now subordinate to the visual. */
+.wr-scorecard-footer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap-sm);
+  padding: var(--gap-xs) 0 var(--gap-sm) 0;
+  border-top: 1px dashed var(--color-panel-border);
   margin-bottom: var(--gap-md);
 }
-@media (max-width: 900px) { .wr-scorecard-row { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 500px) { .wr-scorecard-row { grid-template-columns: 1fr; } }
+@media (max-width: 500px) { .wr-scorecard-footer { grid-template-columns: repeat(2, 1fr); } }
 .wr-score-tile {
   background: var(--color-neutral-bg);
   border: 1px solid var(--color-panel-border);
   border-radius: 6px;
   padding: var(--gap-sm) var(--gap-md);
+}
+/* M5 footer variant — more compact than the old 4-card primary tile.
+   Used inside .wr-scorecard-footer where the visual is the panel, not
+   the number. */
+.wr-scorecard-footer .wr-score-tile {
+  padding: var(--gap-xs) var(--gap-sm);
+  border: none;
+  background: transparent;
+}
+.wr-scorecard-footer .wr-score-value {
+  font-size: var(--size-large);  /* step down from --size-section */
 }
 .wr-score-label {
   font-size: var(--size-meta);
@@ -1385,7 +1433,13 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
        n_preds>1 and the prediction actually moved). -->
   <div class="sec-panel wr-scorecard-panel" id="sec-scorecard" style="display:none">
     <h3 class="wr-scorecard-head"><span id="scorecardTitle">Forecast Hit Rate</span></h3>
+    <!-- M5 (2026-04-30): reliability diagram + signed-error bars replace
+         the 4-card scorecard. Primary render is two SVG panels; the four
+         numbers (first-err / latest-err / in-CI / skill) live below as a
+         box-score footer. Per report suggestion #034 and principle #11
+         (calibration belongs on a reliability diagram, not 4 cards). -->
     <div class="wr-scorecard-row" id="scorecardRow"></div>
+    <div class="wr-scorecard-footer" id="scorecardFooter"></div>
     <div class="wr-scorecard-narrative" id="scorecardNarrative"></div>
     <div class="wr-forecast-drift" id="forecastDrift" style="display:none">
       <div class="wr-drift-label">Forecast drift (first &rarr; latest)</div>
@@ -2906,6 +2960,168 @@ function renderStake(st) {
 // WR-D1 Forecast Hit Rate scorecard — 3 tiles + one-line auto-narrative
 // summarizing how the model has graded against actuals over the last N weeks.
 // Lives above the KPI row. Hides when fewer than 3 weeks of predictions_history
+// M5 (2026-04-30): Build a reliability diagram — predicted (x) vs actual (y)
+// as an SVG string. Dots = the last up-to-6 graded weeks; dashed diagonal
+// = perfect calibration; the axis extent is the union of both series so
+// the diagonal is always the identity. CI envelope is not drawn here —
+// per-dot CIs are market-week specific and would clutter at this scale;
+// inside-CI status is communicated via in-CI rate in the footer instead.
+//
+// Shape cue for the reader:
+//   - Dots on the diagonal → well-calibrated
+//   - Dots above the diagonal → model UNDER-predicted (actual > pred)
+//   - Dots below the diagonal → model OVER-predicted (pred > actual)
+//   - A cluster above the diagonal at high pred values = chronic under
+//     (US right now)
+function buildReliabilityDiagram(recent) {
+  const W = 420, H = 220;
+  const PAD_L = 48, PAD_R = 16, PAD_T = 12, PAD_B = 32;
+  const plotW = W - PAD_L - PAD_R;
+  const plotH = H - PAD_T - PAD_B;
+
+  // Use latest_pred as the "prediction" axis — that's what actuals were
+  // scored against. Drop weeks without both.
+  const pts = recent
+    .filter(r => Number.isFinite(r.latest_pred) && Number.isFinite(r.actual))
+    .map(r => ({ wk: r.wk, x: r.latest_pred, y: r.actual, inCi: r.in_ci }));
+  if (!pts.length) {
+    return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img"
+      aria-label="Reliability diagram — no graded weeks yet"></svg>`;
+  }
+
+  // Symmetric extent around the union of x and y so the diagonal is the
+  // true identity line. Pad 10% to avoid dots sitting on edges.
+  const vals = pts.flatMap(p => [p.x, p.y]);
+  const vMin = Math.min.apply(null, vals);
+  const vMax = Math.max.apply(null, vals);
+  const span = Math.max(vMax - vMin, 1);
+  const lo = vMin - span * 0.1;
+  const hi = vMax + span * 0.1;
+
+  const sx = (v) => PAD_L + ((v - lo) / (hi - lo)) * plotW;
+  const sy = (v) => PAD_T + (1 - (v - lo) / (hi - lo)) * plotH;
+  const fmt = (v) => Math.abs(v) >= 1000 ? (Math.round(v / 100) / 10).toFixed(1) + 'k' : Math.round(v).toString();
+
+  // Ticks: 4 evenly spaced, inclusive of endpoints.
+  const ticks = [lo, lo + (hi - lo) * 0.33, lo + (hi - lo) * 0.67, hi];
+
+  // Diagonal = identity (perfect calibration).
+  const diag = `<line x1="${sx(lo)}" y1="${sy(lo)}" x2="${sx(hi)}" y2="${sy(hi)}"
+    stroke="#8a8a8a" stroke-width="1" stroke-dasharray="4 3" />`;
+
+  // Axes + grid.
+  const axes = `
+    <line x1="${PAD_L}" y1="${PAD_T}" x2="${PAD_L}" y2="${H - PAD_B}" stroke="#d9d5c8" stroke-width="1" />
+    <line x1="${PAD_L}" y1="${H - PAD_B}" x2="${W - PAD_R}" y2="${H - PAD_B}" stroke="#d9d5c8" stroke-width="1" />
+  `;
+
+  const xLabels = ticks.map(t =>
+    `<text x="${sx(t)}" y="${H - PAD_B + 14}" text-anchor="middle" font-size="10" fill="#8a8a8a" font-family="ui-monospace,monospace">${fmt(t)}</text>`
+  ).join('');
+  const yLabels = ticks.map(t =>
+    `<text x="${PAD_L - 6}" y="${sy(t) + 3}" text-anchor="end" font-size="10" fill="#8a8a8a" font-family="ui-monospace,monospace">${fmt(t)}</text>`
+  ).join('');
+
+  // Axis titles
+  const xTitle = `<text x="${PAD_L + plotW / 2}" y="${H - 4}" text-anchor="middle" font-size="10" fill="#4a4a4a" font-weight="600">Predicted regs</text>`;
+  const yTitle = `<text x="12" y="${PAD_T + plotH / 2}" text-anchor="middle" font-size="10" fill="#4a4a4a" font-weight="600" transform="rotate(-90 12 ${PAD_T + plotH / 2})">Actual regs</text>`;
+
+  // Dots — accent color when inside CI, warm when outside. Size = 5px.
+  const dots = pts.map(p => {
+    const color = p.inCi === true ? '#2f7d3e' : p.inCi === false ? '#a63939' : '#4a4a4a';
+    const label = `W${p.wk}: pred ${fmt(p.x)}, actual ${fmt(p.y)}${p.inCi === false ? ' (outside CI)' : p.inCi === true ? ' (inside CI)' : ''}`;
+    return `<g>
+      <circle cx="${sx(p.x)}" cy="${sy(p.y)}" r="5" fill="${color}" fill-opacity="0.65" stroke="${color}" stroke-width="1.2">
+        <title>${label}</title>
+      </circle>
+      <text x="${sx(p.x) + 7}" y="${sy(p.y) + 3}" font-size="9" fill="#4a4a4a" font-family="ui-monospace,monospace">W${p.wk}</text>
+    </g>`;
+  }).join('');
+
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img"
+    aria-label="Reliability diagram: ${pts.length} graded weeks plotted as predicted (x) vs actual (y). Dashed diagonal = perfect calibration.">
+    ${axes}${diag}${xLabels}${yLabels}${xTitle}${yTitle}${dots}
+  </svg>`;
+}
+
+// M5 (2026-04-30): Build a signed-error bar chart as SVG. One bar per
+// graded week; bars above the zero line = over-predicted, below = under.
+// A translucent reference band at ±10% encodes "typical noise" — bars
+// outside the band are visually saturated so outliers pop. Identifies
+// drift direction (all bars above zero = chronic over-prediction, etc.)
+// without the reader needing to decode colors.
+function buildSignedErrorBars(recent) {
+  const W = 420, H = 220;
+  const PAD_L = 40, PAD_R = 16, PAD_T = 12, PAD_B = 32;
+  const plotW = W - PAD_L - PAD_R;
+  const plotH = H - PAD_T - PAD_B;
+
+  const pts = recent
+    .filter(r => Number.isFinite(r.latest_err))
+    .map(r => ({ wk: r.wk, err: r.latest_err, inCi: r.in_ci }));
+  if (!pts.length) {
+    return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img"
+      aria-label="Signed-error bars — no graded weeks yet"></svg>`;
+  }
+
+  // Symmetric y-axis around zero so zero is always centered.
+  const maxAbs = Math.max(10, ...pts.map(p => Math.abs(p.err))); // at least ±10 so the band is always visible
+  const yLo = -maxAbs, yHi = maxAbs;
+  const sy = (v) => PAD_T + (1 - (v - yLo) / (yHi - yLo)) * plotH;
+  const y0 = sy(0);
+
+  // Bars evenly spaced along x, one per week.
+  const n = pts.length;
+  const barSlot = plotW / n;
+  const barW = Math.min(32, barSlot * 0.7);
+  const sx = (i) => PAD_L + barSlot * (i + 0.5) - barW / 2;
+
+  // Reference band ±10% — typical noise threshold. Bars fully saturated
+  // when outside the band; muted inside.
+  const bandTop = sy(10);
+  const bandBot = sy(-10);
+  const referenceBand = `<rect x="${PAD_L}" y="${bandTop}" width="${plotW}" height="${bandBot - bandTop}"
+    fill="#2f7d3e" fill-opacity="0.06" stroke="none" />`;
+
+  // Zero line (prominent, darker than axis ticks).
+  const zeroLine = `<line x1="${PAD_L}" y1="${y0}" x2="${W - PAD_R}" y2="${y0}" stroke="#4a4a4a" stroke-width="1" />`;
+
+  // Axes.
+  const axes = `
+    <line x1="${PAD_L}" y1="${PAD_T}" x2="${PAD_L}" y2="${H - PAD_B}" stroke="#d9d5c8" stroke-width="1" />
+  `;
+
+  // Y ticks at ±maxAbs/2 and ±maxAbs.
+  const yTicks = [-maxAbs, -maxAbs / 2, 0, maxAbs / 2, maxAbs];
+  const yLabels = yTicks.map(t => {
+    const label = (t > 0 ? '+' : '') + t.toFixed(0) + '%';
+    return `<text x="${PAD_L - 6}" y="${sy(t) + 3}" text-anchor="end" font-size="10" fill="#8a8a8a" font-family="ui-monospace,monospace">${label}</text>`;
+  }).join('');
+
+  // Bars.
+  const bars = pts.map((p, i) => {
+    const x = sx(i);
+    const outside = Math.abs(p.err) > 10;
+    // Color: over = warm, under = cool. Saturated when outside the band.
+    const color = p.err >= 0 ? '#b06a00' : '#4a7dff';
+    const opacity = outside ? 0.85 : 0.45;
+    const yTop = p.err >= 0 ? sy(p.err) : y0;
+    const yBot = p.err >= 0 ? y0 : sy(p.err);
+    const barH = Math.max(1, yBot - yTop);
+    const label = `W${p.wk}: ${p.err > 0 ? '+' : ''}${p.err.toFixed(1)}%${p.inCi === false ? ' (outside CI)' : ''}`;
+    const wkLabel = `<text x="${x + barW / 2}" y="${H - PAD_B + 14}" text-anchor="middle" font-size="10" fill="#8a8a8a" font-family="ui-monospace,monospace">W${p.wk}</text>`;
+    return `<g><rect x="${x}" y="${yTop}" width="${barW}" height="${barH}" fill="${color}" fill-opacity="${opacity}" stroke="${color}" stroke-opacity="${outside ? 0.9 : 0.6}" stroke-width="0.8">
+      <title>${label}</title>
+    </rect>${wkLabel}</g>`;
+  }).join('');
+
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img"
+    aria-label="Signed forecast error per week: ${pts.length} weeks plotted as bars above or below zero. Band shows ±10% typical noise.">
+    ${referenceBand}${zeroLine}${axes}${yLabels}${bars}
+  </svg>`;
+}
+
+// Renders the 4-panel scorecard once predictions_history has loaded and
 // are available for curMarket. Pulls directly from forecast-data.json's
 // predictions_history payload — no new data plumbing required.
 function renderScorecard() {
@@ -2943,6 +3159,8 @@ function renderScorecard() {
     panel.style.display = '';
     titleEl.textContent = `Forecast Hit Rate — ${curMarket}`;
     row.innerHTML = '';
+    const footerEl = document.getElementById('scorecardFooter');
+    if (footerEl) footerEl.innerHTML = '';
     narrEl.innerHTML = '<div class="wr-scorecard-empty">Not enough history — need 3+ weeks of predictions to score the model.</div>';
     return;
   }
@@ -3016,38 +3234,56 @@ function renderScorecard() {
     : 'bad';
   const skillText = skill == null ? '\u2014' : (skill * 100).toFixed(0) + '%';
 
+  // M5 (2026-04-30): two SVG panels — reliability diagram (left) + signed-error
+  // bars (right). Per report suggestion #034 and principle #11. The four
+  // numbers (first-err / latest-err / in-CI / skill) move to the footer strip.
+  const footer = document.getElementById('scorecardFooter');
   row.innerHTML = `
-    <div class="wr-score-tile">
-      <div class="wr-score-label">First-pred error</div>
-      <div class="wr-score-value ${errCls(firstErr)}">${fmtPct(firstErr)}</div>
-      <div class="wr-score-sub">${fmtErrSub(firstErr)}</div>
+    <div class="wr-score-panel">
+      <div class="wr-score-panel-title">Reliability diagram</div>
+      <div class="wr-score-panel-sub">Predicted (x) vs actual (y). Dots on the dashed diagonal = perfect calibration.</div>
+      ${buildReliabilityDiagram(recent)}
     </div>
-    <div class="wr-score-tile">
-      <div class="wr-score-label">Latest-pred error</div>
-      <div class="wr-score-value ${errCls(latestErr)}">${fmtPct(latestErr)}</div>
-      <div class="wr-score-sub">${
-        (firstErr != null && latestErr != null && Math.abs(latestErr) < Math.abs(firstErr))
-          ? 'improved w/ recalibration'
-          : (latestErr != null && firstErr != null && Math.abs(latestErr) > Math.abs(firstErr))
-            ? 'drifted after refit'
-            : fmtErrSub(latestErr)
-      }</div>
-    </div>
-    <div class="wr-score-tile">
-      <div class="wr-score-label">In-CI rate</div>
-      <div class="wr-score-value ${ciCls(inCiPct)}">${total > 0 ? `${inCi} / ${total}` : '\u2014'}</div>
-      <div class="wr-score-sub">${
-        inCiPct == null ? 'no CI data'
-          : inCiPct >= 80 ? `${inCiPct.toFixed(0)}% — on target (80%+)`
-          : `${inCiPct.toFixed(0)}% — target 80%+`
-      }</div>
-    </div>
-    <div class="wr-score-tile" title="Skill vs naive baseline (drift-1): 1 - MAE_model / MAE_naive. Positive = model beats 'next week = this week'.">
-      <div class="wr-score-label">Skill vs naive</div>
-      <div class="wr-score-value ${skillCls}">${skillText}</div>
-      <div class="wr-score-sub">${skillSub}</div>
+    <div class="wr-score-panel">
+      <div class="wr-score-panel-title">Signed error by week</div>
+      <div class="wr-score-panel-sub">Bars above zero = over-predicted; below = under-predicted. Shaded band = typical noise (±10%).</div>
+      ${buildSignedErrorBars(recent)}
     </div>
   `;
+  if (footer) {
+    footer.innerHTML = `
+      <div class="wr-score-tile">
+        <div class="wr-score-label">First-pred error</div>
+        <div class="wr-score-value ${errCls(firstErr)}">${fmtPct(firstErr)}</div>
+        <div class="wr-score-sub">${fmtErrSub(firstErr)}</div>
+      </div>
+      <div class="wr-score-tile">
+        <div class="wr-score-label">Latest-pred error</div>
+        <div class="wr-score-value ${errCls(latestErr)}">${fmtPct(latestErr)}</div>
+        <div class="wr-score-sub">${
+          (firstErr != null && latestErr != null && Math.abs(latestErr) < Math.abs(firstErr))
+            ? 'improved w/ recalibration'
+            : (latestErr != null && firstErr != null && Math.abs(latestErr) > Math.abs(firstErr))
+              ? 'drifted after refit'
+              : fmtErrSub(latestErr)
+        }</div>
+      </div>
+      <div class="wr-score-tile">
+        <div class="wr-score-label">In-CI rate</div>
+        <div class="wr-score-value ${ciCls(inCiPct)}">${total > 0 ? `${inCi} / ${total}` : '\u2014'}</div>
+        <div class="wr-score-sub">${
+          inCiPct == null ? 'no CI data'
+            : inCiPct >= 80 ? `${inCiPct.toFixed(0)}% — on target (80%+)`
+            : `${inCiPct.toFixed(0)}% — target 80%+`
+        }</div>
+      </div>
+      <div class="wr-score-tile" title="Skill vs naive baseline (drift-1): 1 - MAE_model / MAE_naive. Positive = model beats 'next week = this week'.">
+        <div class="wr-score-label">Skill vs naive</div>
+        <div class="wr-score-value ${skillCls}">${skillText}</div>
+        <div class="wr-score-sub">${skillSub}</div>
+      </div>
+    `;
+  }
 
   // Auto-narrative: summarize the three numbers in one sentence.
   const parts = [];
