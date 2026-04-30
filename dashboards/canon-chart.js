@@ -558,8 +558,50 @@
   function buildScenarioDatasets(sd) {
     const datasets = [];
 
-    // CI band (areaY-equivalent in Chart.js: two transparent lines with `fill: '+1'`)
-    if (sd.ciHigh && sd.ciLow) {
+    // M9 fan chart (2026-04-30): three overlapping CI fills for BoE-style
+    // progression — 90% (outermost, lightest), 80%, 50% (innermost, darkest).
+    // Each fill is a pair of transparent lines with fill: '+1' between them.
+    // Falls back to single-band path when sd.ciFanBands is absent or empty.
+    //
+    // Render order: widest first so narrower bands paint on top. All fills
+    // share the same orange hue; alpha steps encode concentration.
+    const fanBands = sd.ciFanBands;
+    const hasFan = fanBands
+      && fanBands['50'] && fanBands['50'].low && fanBands['50'].low.some(v => v != null)
+      && fanBands['80'] && fanBands['80'].low && fanBands['80'].low.some(v => v != null)
+      && fanBands['90'] && fanBands['90'].low && fanBands['90'].low.some(v => v != null);
+
+    if (hasFan) {
+      // Three bands, widest → narrowest so narrower paints on top.
+      // Alpha stops chosen so stacked visual weight roughly matches BoE
+      // convention (50% dense, 90% sparse). Hex: ORANGE_SOFT palette with
+      // varied opacity.
+      const fanFills = {
+        '90': 'rgba(244, 162, 97, 0.10)',
+        '80': 'rgba(244, 162, 97, 0.16)',
+        '50': 'rgba(244, 162, 97, 0.26)',
+      };
+      for (const lvl of ['90', '80', '50']) {
+        const b = fanBands[lvl];
+        if (!b || !b.low || !b.high) continue;
+        datasets.push({
+          label: `_fanHi${lvl}`, data: b.high,
+          borderColor: 'transparent', backgroundColor: fanFills[lvl],
+          borderWidth: 0, pointRadius: 0, fill: '+1', tension: 0.25,
+          yAxisID: 'y', spanGaps: true, _hidden: true,
+          _fanLevel: lvl,
+        });
+        datasets.push({
+          label: `_fanLo${lvl}`, data: b.low,
+          borderColor: 'transparent', backgroundColor: fanFills[lvl],
+          borderWidth: 0, pointRadius: 0, fill: false, tension: 0.25,
+          yAxisID: 'y', spanGaps: true, _hidden: true,
+          _fanLevel: lvl,
+        });
+      }
+    } else if (sd.ciHigh && sd.ciLow) {
+      // Legacy single-band fallback — preserved verbatim for charts that
+      // haven't migrated to the three-band shape yet.
       datasets.push({
         label: '_ciHi', data: sd.ciHigh,
         borderColor: 'transparent', backgroundColor: ORANGE_SOFT,

@@ -125,6 +125,11 @@
       spendProj:       sliceArr(sd.spendProj),
       ciLow:           sliceArr(sd.ciLow),
       ciHigh:          sliceArr(sd.ciHigh),
+      ciFanBands:      sd.ciFanBands ? {
+        '50': { low: sliceArr(sd.ciFanBands['50']?.low), high: sliceArr(sd.ciFanBands['50']?.high) },
+        '80': { low: sliceArr(sd.ciFanBands['80']?.low), high: sliceArr(sd.ciFanBands['80']?.high) },
+        '90': { low: sliceArr(sd.ciFanBands['90']?.low), high: sliceArr(sd.ciFanBands['90']?.high) },
+      } : sd.ciFanBands,
       counterfactual:  sliceArr(sd.counterfactual),
       compareTotal:    sliceArr(sd.compareTotal),
       todayIdx:        shifted(sd.todayIdx),
@@ -302,7 +307,15 @@
       spendProj[ytdCount - 1] = spendActual[ytdCount - 1];
     }
 
-    // CI band — bootstrap per-week bands, RoY only
+    // CI band — bootstrap per-week bands, RoY only.
+    // Primary 90% band kept as ciLow/ciHigh for back-compat; M9 fan bands
+    // populated from uncert.per_week.bands['50'|'80'|'90'] when present.
+    const ciLow50 = new Array(btWeeks.length).fill(null);
+    const ciHigh50 = new Array(btWeeks.length).fill(null);
+    const ciLow80 = new Array(btWeeks.length).fill(null);
+    const ciHigh80 = new Array(btWeeks.length).fill(null);
+    const ciLow90 = new Array(btWeeks.length).fill(null);
+    const ciHigh90 = new Array(btWeeks.length).fill(null);
     if (uncert && uncert.per_week && uncert.per_week.regs &&
         Array.isArray(uncert.per_week.regs.lower) && Array.isArray(uncert.per_week.regs.upper)) {
       const pw = uncert.per_week.regs;
@@ -310,6 +323,21 @@
         if (i < ytdCount) continue;  // CI only on projected half
         if (i < pw.lower.length) ciLow[i] = pw.lower[i];
         if (i < pw.upper.length) ciHigh[i] = pw.upper[i];
+      }
+      // M9 three-band fan — pull 50/80/90 from uncert.per_week.bands if the
+      // bootstrap exposed them. Fan-chart rendering reads these; legacy
+      // consumers continue to use ciLow/ciHigh (the primary alpha band).
+      const fanBands = uncert.per_week.bands;
+      if (fanBands && fanBands['50'] && fanBands['80'] && fanBands['90']) {
+        for (let i = 0; i < btWeeks.length; i++) {
+          if (i < ytdCount) continue;
+          const b50 = fanBands['50'].regs;
+          const b80 = fanBands['80'].regs;
+          const b90 = fanBands['90'].regs;
+          if (b50 && i < b50.lower.length) { ciLow50[i] = b50.lower[i]; ciHigh50[i] = b50.upper[i]; }
+          if (b80 && i < b80.lower.length) { ciLow80[i] = b80.lower[i]; ciHigh80[i] = b80.upper[i]; }
+          if (b90 && i < b90.lower.length) { ciLow90[i] = b90.lower[i]; ciHigh90[i] = b90.upper[i]; }
+        }
       }
     }
 
@@ -402,7 +430,19 @@
         const nLifts = (marketData.regime_fit_state || []).length;
         const liftLabel = nLifts === 1 ? '1 campaign lift' : (nLifts > 1 ? `${nLifts} campaign lifts` : '');
         lines.push(`<div style="color:#aaa">Brand ${fmtNum(regsProjBrand[idx])} regs: ${trendPct}% trend · ${seasPct}% seasonality · ${regPct}% lift${liftLabel ? ` (${liftLabel})` : ''} · ${qualPct}% judgment.</div>`);
-        if (ciLow[idx] != null && ciHigh[idx] != null) {
+
+        // M9 fan chart: show 50/80/90 bands when available; fall back to
+        // legacy single 90% line when the bootstrap didn't emit the fan shape.
+        const hasFan = ciLow50[idx] != null && ciHigh50[idx] != null
+          && ciLow80[idx] != null && ciHigh80[idx] != null
+          && ciLow90[idx] != null && ciHigh90[idx] != null;
+        if (hasFan) {
+          lines.push(`<div style="color:#6c7086;margin-top:4px;line-height:1.5">`
+            + `50% range: ${fmtNum(ciLow50[idx])}–${fmtNum(ciHigh50[idx])}<br>`
+            + `80% range: ${fmtNum(ciLow80[idx])}–${fmtNum(ciHigh80[idx])}<br>`
+            + `90% range: ${fmtNum(ciLow90[idx])}–${fmtNum(ciHigh90[idx])}`
+            + `</div>`);
+        } else if (ciLow[idx] != null && ciHigh[idx] != null) {
           lines.push(`<div style="color:#6c7086;margin-top:4px">90% range: ${fmtNum(ciLow[idx])}–${fmtNum(ciHigh[idx])} regs</div>`);
         }
       }
@@ -431,6 +471,15 @@
       spendProj,
       ciLow,
       ciHigh,
+      // M9 fan bands (2026-04-30): three overlapping CI pairs for BoE-style
+      // fan chart. Rendered as three translucent fills behind the central
+      // projection line (darkest at 50%, lightest at 90%). When undefined
+      // or all-null, scenario chart falls back to the single 90% band.
+      ciFanBands: {
+        '50': { low: ciLow50, high: ciHigh50 },
+        '80': { low: ciLow80, high: ciHigh80 },
+        '90': { low: ciLow90, high: ciHigh90 },
+      },
       counterfactual: counterfactualArr,
       compareTotal,
       compareLabel: compareLabel || null,

@@ -830,6 +830,22 @@
     const nWeeks = yw.brand_regs.length;
     const ytdWeeks = yw.ytd_weeks || ytd.length;
 
+    // M9 (2026-04-30): fan chart needs three bands (50/80/90 BoE convention).
+    // Compute all three from the same residualSd — only the z-score differs,
+    // so this is effectively free. Primary band stays at the caller's alpha
+    // (default 0.10 → 90%) for back-compat with totals/per_week.regs.lower/upper.
+    const zBy = { '50': 0.674, '80': 1.282, '90': 1.645 };
+    const bands = {};
+    for (const lvl of ['50', '80', '90']) {
+      bands[lvl] = {
+        regs:  { lower: new Array(nWeeks), upper: new Array(nWeeks) },
+        spend: { lower: new Array(nWeeks), upper: new Array(nWeeks) },
+      };
+    }
+
+    // Primary (caller-requested) bands — keeps the back-compat shape populated
+    // with whatever alpha was passed in. M9 consumers can read bands['50|80|90']
+    // directly; legacy consumers keep working off the top-level .regs/.spend.
     const lower = new Array(nWeeks);
     const upper = new Array(nWeeks);
     const lowerSpend = new Array(nWeeks);
@@ -839,23 +855,45 @@
     for (let i = 0; i < nWeeks; i++) {
       const centralRegs = (yw.brand_regs[i] || 0) + (yw.nb_regs[i] || 0);
       const centralSpend = (yw.brand_spend[i] || 0) + (yw.nb_spend[i] || 0);
+      const spendRatio = centralRegs > 0 ? centralSpend / centralRegs : 0;
+      const spendMult = Math.max(spendRatio, 1);
+
       if (i < ytdWeeks) {
-        // Locked YTD — no uncertainty on actuals.
+        // Locked YTD — no uncertainty on actuals. All three bands collapse
+        // to the central point, same as the primary lower/upper.
         lower[i] = centralRegs;
         upper[i] = centralRegs;
         lowerSpend[i] = centralSpend;
         upperSpend[i] = centralSpend;
+        for (const lvl of ['50', '80', '90']) {
+          bands[lvl].regs.lower[i] = centralRegs;
+          bands[lvl].regs.upper[i] = centralRegs;
+          bands[lvl].spend.lower[i] = centralSpend;
+          bands[lvl].spend.upper[i] = centralSpend;
+        }
       } else {
         // RoY — scale sd by sqrt(weeks-into-forecast) for random-walk uncertainty.
         const k = (i - ytdWeeks) + 1;
-        const bandRegs = z * residualSd * Math.sqrt(k);
-        // Proportional band on spend (share of total regs → total spend)
-        const spendRatio = centralRegs > 0 ? centralSpend / centralRegs : 0;
-        const bandSpend = bandRegs * Math.max(spendRatio, 1);
+        const sqrtK = Math.sqrt(k);
+
+        // Primary band (alpha-driven, back-compat path).
+        const bandRegs = z * residualSd * sqrtK;
+        const bandSpend = bandRegs * spendMult;
         lower[i] = Math.max(0, centralRegs - bandRegs);
         upper[i] = centralRegs + bandRegs;
         lowerSpend[i] = Math.max(0, centralSpend - bandSpend);
         upperSpend[i] = centralSpend + bandSpend;
+
+        // M9 three-band fan — separate z per level, same residualSd.
+        for (const lvl of ['50', '80', '90']) {
+          const zL = zBy[lvl];
+          const bR = zL * residualSd * sqrtK;
+          const bS = bR * spendMult;
+          bands[lvl].regs.lower[i] = Math.max(0, centralRegs - bR);
+          bands[lvl].regs.upper[i] = centralRegs + bR;
+          bands[lvl].spend.lower[i] = Math.max(0, centralSpend - bS);
+          bands[lvl].spend.upper[i] = centralSpend + bS;
+        }
       }
     }
 
@@ -868,6 +906,21 @@
     const totalSpendLower = lowerSpend.reduce((a, b) => a + b, 0);
     const totalSpendUpper = upperSpend.reduce((a, b) => a + b, 0);
 
+    // Per-level totals for M9 fan labels + narrative widths.
+    const totalsByLvl = {};
+    for (const lvl of ['50', '80', '90']) {
+      totalsByLvl[lvl] = {
+        regs: {
+          lower: bands[lvl].regs.lower.reduce((a, b) => a + b, 0),
+          upper: bands[lvl].regs.upper.reduce((a, b) => a + b, 0),
+        },
+        spend: {
+          lower: bands[lvl].spend.lower.reduce((a, b) => a + b, 0),
+          upper: bands[lvl].spend.upper.reduce((a, b) => a + b, 0),
+        },
+      };
+    }
+
     return {
       available: true,
       method: 'bootstrap_from_residuals',
@@ -877,6 +930,10 @@
       per_week: {
         regs: { lower, upper },
         spend: { lower: lowerSpend, upper: upperSpend },
+        // M9 fan bands (2026-04-30): three band pairs per week for 50/80/90 CIs.
+        // Caller consumes per_week.bands['50'|'80'|'90'].regs.{lower,upper} etc.
+        // Non-breaking — primary .regs / .spend stay at caller's alpha.
+        bands,
       },
       totals: {
         total_regs: {
@@ -889,6 +946,8 @@
           lower: totalSpendLower,
           upper: totalSpendUpper,
         },
+        // Per-level totals for fan-label rendering.
+        by_level: totalsByLvl,
       },
       footnote: 'Bootstrap approximation from fit residuals; full posterior credible intervals are pending migration to the updated schema.',
     };
