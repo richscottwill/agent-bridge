@@ -27,6 +27,16 @@ inclusion: always
 | MX forecasting / AU drill-downs / market-specific analytics | `performance-marketing-guide.md` + `market-constraints.md` *(auto)* |
 | Task prioritization / time-blocking / bucket assignment | `rw-task-prioritization.md` *(auto-loads)* |
 | WW testing loop prep | `ww-testing-loop-prep.md` |
+| OP1 draft or annual planning — tradeoff spine | `op1-kill-list-first.md` |
+
+## Reviewer lens files — load before finalizing a draft that will go to a specific reader
+
+| Task trigger | Load |
+|---|---|
+| Any draft headed to Brandon (1:1 prep, pre-Kate review, direct-manager email) | `lens-brandon.md` |
+| Any draft headed to Kate (Testing Approach, MBR section, skip-level review) | `lens-kate.md` |
+| Material landing at VP altitude (QBR talking points, Kate's upward story) | `lens-todd.md` |
+| Draft going up the chain — pair lenses | Brandon → Kate → Todd in order |
 
 ## System / protocol files
 
