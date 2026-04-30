@@ -513,6 +513,106 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 }
 .wk-topic-card .sparkline { display: block; width: 100%; }
 
+/* WS-M10 (2026-04-30): Graph minimap — collapsed-by-default section
+   with a canvas-based force-directed layout. Wrapper colors match
+   the other wiki sections. Canvas is full-width; height fixed at
+   320px so the simulation has predictable bounds. */
+.wk-graph-wrap {
+  background: #12141c;
+  border-bottom: 1px solid #1e2028;
+  padding: 8px 20px 10px;
+}
+.wk-graph-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.wk-graph-heading {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #aaa;
+  text-transform: uppercase;
+  margin: 0;
+}
+.wk-graph-sub {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  color: #555;
+  flex: 1 1 auto;
+}
+.wk-graph-toggle {
+  background: transparent;
+  border: 1px solid #2a2d35;
+  color: #93b4f5;
+  font-family: inherit;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.wk-graph-toggle:hover { border-color: #3b82f6; background: rgba(30, 58, 138, 0.15); }
+.wk-graph-body {
+  position: relative;
+}
+.wk-graph-canvas {
+  display: block;
+  width: 100%;
+  height: 320px;
+  background: #0f1117;
+  border: 1px solid #1e2028;
+  border-radius: 4px;
+  cursor: grab;
+}
+.wk-graph-canvas:active { cursor: grabbing; }
+.wk-graph-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #1a1d27;
+  border: 1px solid #2a2d35;
+  color: #d4d4d4;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  max-width: 280px;
+  pointer-events: none;
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.wk-graph-tooltip strong {
+  display: block;
+  color: #fff;
+  margin-bottom: 2px;
+}
+.wk-graph-tooltip .wk-graph-tooltip-meta {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  color: #888;
+  margin-top: 4px;
+}
+.wk-graph-legend {
+  display: flex;
+  gap: 14px;
+  padding: 6px 0 0;
+  font-size: 10px;
+  color: #888;
+  flex-wrap: wrap;
+}
+.wk-graph-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.wk-graph-swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
 </style>
 </head>
 <body>
@@ -595,6 +695,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <button class="wk-topic-toggle" id="wkTopicToggle" aria-expanded="true" aria-label="Collapse topic grid">&ndash;</button>
   </header>
   <div class="wk-topic-grid" id="wkTopicGrid"></div>
+</section>
+
+<!-- WS-M10 (2026-04-30): Graph minimap. Force-directed layout of the
+     most-connected wiki docs via related_docs. Collapsed by default
+     (opt-in; heavy on large indexes). When expanded: nodes = docs
+     sized by word_count, colored by status; edges = related_docs
+     intersections; hover → tooltip preview; click → open in viewer.
+     Report principle #10 + M10 mockup + Obsidian graph-view pattern. -->
+<section class="wk-graph-wrap" id="wkGraphWrap" aria-labelledby="wkGraphHeading">
+  <header class="wk-graph-head">
+    <h3 id="wkGraphHeading" class="wk-graph-heading">Graph &mdash; related_docs network</h3>
+    <span class="wk-graph-sub" id="wkGraphSub">Top-connected docs by degree &middot; click a node to open</span>
+    <button class="wk-graph-toggle" id="wkGraphToggle" aria-expanded="false"
+            aria-controls="wkGraphBody" onclick="toggleGraphMinimap()">+ Show graph</button>
+  </header>
+  <div class="wk-graph-body" id="wkGraphBody" style="display:none">
+    <canvas class="wk-graph-canvas" id="wkGraphCanvas" width="800" height="320"
+            aria-label="Force-directed graph of related wiki documents. Hover a node for preview, click to open."></canvas>
+    <div class="wk-graph-tooltip" id="wkGraphTooltip" role="status" aria-live="polite" style="display:none"></div>
+    <div class="wk-graph-legend">
+      <span class="wk-graph-legend-item"><span class="wk-graph-swatch" style="background:#4ade80"></span>FINAL</span>
+      <span class="wk-graph-legend-item"><span class="wk-graph-swatch" style="background:#e0c080"></span>REVIEW</span>
+      <span class="wk-graph-legend-item"><span class="wk-graph-swatch" style="background:#9ca3af"></span>DRAFT/other</span>
+      <span class="wk-graph-legend-item" style="color:#666">&middot; size &asymp; word count &middot; edges = related_docs</span>
+    </div>
+  </div>
 </section>
 <div class="filter-section" id="filterSection"></div>
 <div class="main">
@@ -1066,6 +1192,265 @@ function renderTopicGrid(data) {
       try { localStorage.setItem('wk_topic_grid_collapsed', nowCollapsed ? '1' : '0'); } catch (e) { /* quota */ }
     };
   }
+}
+
+// WS-M10 (2026-04-30): Graph minimap — force-directed layout of the
+// top-connected docs by degree centrality. Lazy-initialized when the
+// user clicks the toggle (keeps cold-load cheap). Canvas-based
+// rendering (no SVG DOM bloat for ~100 nodes). Plain O(n²) per-step
+// simulation — fine for the node budget; skip quadtree.
+//
+// Interactions:
+//   - hover a node → tooltip with title + snippet + meta
+//   - click a node → open doc in viewer (reuses existing openDocInViewer)
+//   - drag empty canvas → pan (TODO; not in first cut — scope-limited)
+//
+// Color maps to status (FINAL green / REVIEW amber / other grey).
+// Node radius maps to sqrt(word_count) so 10k-word docs aren't 100x
+// bigger than 100-word docs visually.
+let _graphState = null;   // {nodes, edges, simId, bounds, ctx, hoverId}
+
+function toggleGraphMinimap() {
+  const body = document.getElementById('wkGraphBody');
+  const toggle = document.getElementById('wkGraphToggle');
+  if (!body || !toggle) return;
+  const expanded = body.style.display !== 'none';
+  if (expanded) {
+    body.style.display = 'none';
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.textContent = '+ Show graph';
+    stopGraphSimulation();
+  } else {
+    body.style.display = '';
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.textContent = '– Hide graph';
+    if (!_graphState) initGraphMinimap();
+    else startGraphSimulation();
+  }
+}
+
+function initGraphMinimap() {
+  if (!IX || !IX.documents) return;
+  const canvas = document.getElementById('wkGraphCanvas');
+  if (!canvas) return;
+  const tooltip = document.getElementById('wkGraphTooltip');
+
+  // Build id → doc lookup for fast resolution of related_docs entries.
+  const byId = {};
+  for (const d of IX.documents) byId[d.id] = d;
+
+  // Degree centrality — a doc's degree = count of related_docs entries.
+  // Keep top-N most connected as visible nodes. 90 is a reasonable
+  // upper bound for readability without blowing the sim.
+  const N_NODES = 90;
+  const scoreByDoc = IX.documents
+    .filter(d => !d.archived && Array.isArray(d.related_docs))
+    .map(d => ({ d, score: d.related_docs.length }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, N_NODES);
+  const visibleIds = new Set(scoreByDoc.map(s => s.d.id));
+
+  // Build the node + edge arrays. Position randomly inside the canvas
+  // bounds at init so the sim has something to relax.
+  const W = canvas.width;
+  const H = canvas.height;
+  const nodes = scoreByDoc.map((s, i) => {
+    const d = s.d;
+    const angle = (i / scoreByDoc.length) * Math.PI * 2;
+    const r0 = Math.min(W, H) * 0.32;
+    return {
+      id: d.id,
+      title: d.title,
+      snippet: d.snippet || '',
+      status: d.status || '',
+      words: d.word_count || 0,
+      topic: d.primary_topic || '',
+      x: W / 2 + Math.cos(angle) * r0 + (Math.random() - 0.5) * 20,
+      y: H / 2 + Math.sin(angle) * r0 + (Math.random() - 0.5) * 20,
+      vx: 0, vy: 0,
+      radius: Math.max(3, Math.min(14, Math.sqrt(d.word_count || 100) * 0.35)),
+    };
+  });
+
+  // Edges — only between two visible nodes.
+  const edges = [];
+  const nodeIds = new Set(nodes.map(n => n.id));
+  const idxById = {};
+  nodes.forEach((n, i) => { idxById[n.id] = i; });
+  for (const n of nodes) {
+    const d = byId[n.id];
+    if (!d || !Array.isArray(d.related_docs)) continue;
+    for (const r of d.related_docs) {
+      const targetId = r.id;
+      if (!nodeIds.has(targetId)) continue;
+      // Dedup — edges are undirected; only push when source < target by id string.
+      if (n.id < targetId) {
+        edges.push({ source: idxById[n.id], target: idxById[targetId], weight: r.shared || 1 });
+      }
+    }
+  }
+
+  const ctx = canvas.getContext('2d');
+  _graphState = { nodes, edges, ctx, canvas, W, H, simId: null, hoverId: null, tooltip, tickCount: 0 };
+
+  // Hover handler — map mouse to node under cursor, render tooltip.
+  canvas.onmousemove = (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const mx = (e.clientX - rect.left) * scaleX;
+    const my = (e.clientY - rect.top) * scaleY;
+    let hit = null;
+    for (let i = nodes.length - 1; i >= 0; i--) {
+      const n = nodes[i];
+      const dx = n.x - mx; const dy = n.y - my;
+      if (dx * dx + dy * dy <= (n.radius + 3) * (n.radius + 3)) { hit = n; break; }
+    }
+    _graphState.hoverId = hit ? hit.id : null;
+    if (hit && tooltip) {
+      tooltip.style.display = '';
+      // Position tooltip near cursor in the body's coord space.
+      const wrapRect = canvas.parentElement.getBoundingClientRect();
+      tooltip.style.left = Math.min(wrapRect.width - 300, (e.clientX - wrapRect.left) + 12) + 'px';
+      tooltip.style.top = Math.max(0, (e.clientY - wrapRect.top) - 20) + 'px';
+      const meta = [hit.status || 'no status', hit.topic || 'no topic', hit.words + ' words'].filter(Boolean).join(' · ');
+      tooltip.innerHTML =
+        '<strong>' + esc(hit.title) + '</strong>' +
+        '<div>' + esc((hit.snippet || '').slice(0, 160)) + (hit.snippet.length > 160 ? '…' : '') + '</div>' +
+        '<div class="wk-graph-tooltip-meta">' + esc(meta) + '</div>';
+    } else if (tooltip) {
+      tooltip.style.display = 'none';
+    }
+  };
+  canvas.onmouseleave = () => {
+    _graphState.hoverId = null;
+    if (tooltip) tooltip.style.display = 'none';
+  };
+  canvas.onclick = (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const mx = (e.clientX - rect.left) * scaleX;
+    const my = (e.clientY - rect.top) * scaleY;
+    for (let i = nodes.length - 1; i >= 0; i--) {
+      const n = nodes[i];
+      const dx = n.x - mx; const dy = n.y - my;
+      if (dx * dx + dy * dy <= (n.radius + 3) * (n.radius + 3)) {
+        // Open the doc in the viewer — reuses existing pathway.
+        const target = IX.documents.find(d => d.id === n.id);
+        if (target && typeof openDoc === 'function') openDoc(target);
+        return;
+      }
+    }
+  };
+
+  startGraphSimulation();
+}
+
+function stopGraphSimulation() {
+  if (_graphState && _graphState.simId) {
+    cancelAnimationFrame(_graphState.simId);
+    _graphState.simId = null;
+  }
+}
+
+function startGraphSimulation() {
+  if (!_graphState) return;
+  stopGraphSimulation();
+  const s = _graphState;
+  const { nodes, edges, ctx, canvas, W, H } = s;
+
+  // Physics constants tuned for ~90 nodes on 800×320 canvas.
+  const K_REPEL = 180;       // pairwise repulsion strength
+  const K_SPRING = 0.02;     // edge spring constant
+  const SPRING_LEN = 60;     // natural edge length
+  const K_CENTER = 0.005;    // gentle pull to center (keeps graph on-screen)
+  const DAMPING = 0.82;      // velocity damping per tick
+  const MAX_TICKS = 400;     // cap sim cost — graph settles well before this
+
+  const STATUS_COLOR = {
+    FINAL:  '#4ade80',
+    REVIEW: '#e0c080',
+    DRAFT:  '#9ca3af',
+    ACTIVE: '#7da2d4',
+  };
+
+  function step() {
+    s.tickCount++;
+    // Reset forces.
+    for (const n of nodes) { n.fx = 0; n.fy = 0; }
+    // Pairwise repulsion — O(n²) fine at n=90.
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i]; const b = nodes[j];
+        const dx = b.x - a.x; const dy = b.y - a.y;
+        const d2 = dx * dx + dy * dy + 0.01;
+        const d = Math.sqrt(d2);
+        const f = K_REPEL / d2;
+        const fx = (dx / d) * f; const fy = (dy / d) * f;
+        a.fx -= fx; a.fy -= fy;
+        b.fx += fx; b.fy += fy;
+      }
+    }
+    // Spring attraction along edges.
+    for (const e of edges) {
+      const a = nodes[e.source]; const b = nodes[e.target];
+      const dx = b.x - a.x; const dy = b.y - a.y;
+      const d = Math.sqrt(dx * dx + dy * dy) + 0.01;
+      const delta = (d - SPRING_LEN) * K_SPRING;
+      const fx = (dx / d) * delta; const fy = (dy / d) * delta;
+      a.fx += fx; a.fy += fy;
+      b.fx -= fx; b.fy -= fy;
+    }
+    // Gentle center gravity.
+    const cx = W / 2; const cy = H / 2;
+    for (const n of nodes) {
+      n.fx += (cx - n.x) * K_CENTER;
+      n.fy += (cy - n.y) * K_CENTER;
+    }
+    // Integrate + damp + clamp to bounds.
+    for (const n of nodes) {
+      n.vx = (n.vx + n.fx) * DAMPING;
+      n.vy = (n.vy + n.fy) * DAMPING;
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < n.radius) n.x = n.radius;
+      if (n.y < n.radius) n.y = n.radius;
+      if (n.x > W - n.radius) n.x = W - n.radius;
+      if (n.y > H - n.radius) n.y = H - n.radius;
+    }
+    // Paint.
+    ctx.clearRect(0, 0, W, H);
+    // Edges first so they sit under nodes.
+    ctx.strokeStyle = 'rgba(110, 120, 140, 0.25)';
+    ctx.lineWidth = 1;
+    for (const e of edges) {
+      const a = nodes[e.source]; const b = nodes[e.target];
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.stroke();
+    }
+    // Nodes.
+    for (const n of nodes) {
+      const color = STATUS_COLOR[n.status] || '#9ca3af';
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.globalAlpha = (s.hoverId === n.id) ? 1.0 : 0.85;
+      ctx.fill();
+      if (s.hoverId === n.id) {
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#fff';
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1.0;
+    }
+    // Throttle once the layout has settled.
+    if (s.tickCount < MAX_TICKS) {
+      s.simId = requestAnimationFrame(step);
+    }
+  }
+  s.simId = requestAnimationFrame(step);
 }
 
 // M07 (2026-04-30): Pipeline headline + exception banner. Renders
