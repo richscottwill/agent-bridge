@@ -138,11 +138,12 @@
 .wr-scorecard-head { font-size: var(--size-meta); color: var(--color-text-subtle); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: var(--gap-sm); }
 .wr-scorecard-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr); /* WR-A7: 4th tile = skill vs naive */
   gap: var(--gap-md);
   margin-bottom: var(--gap-md);
 }
-@media (max-width: 700px) { .wr-scorecard-row { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .wr-scorecard-row { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .wr-scorecard-row { grid-template-columns: 1fr; } }
 .wr-score-tile {
   background: var(--color-neutral-bg);
   border: 1px solid var(--color-panel-border);
@@ -738,9 +739,116 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
   padding: var(--gap-md) 0;
   font-variant-numeric: tabular-nums;
 }
+
+/* WR-B5 (2026-04-30): cross-market accuracy leaderboard strip.
+   Compact horizontal row of market pills each showing 6-week in-CI rate.
+   Green ≥80%, amber 60-79%, red <60%, grey = insufficient data.
+   Answers "can I trust this market's projection?" in one glance. */
+.wr-leaderboard {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gap-xs);
+  margin-bottom: var(--gap-md);
+  padding: var(--gap-sm) var(--gap-md);
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 8px;
+  font-variant-numeric: tabular-nums;
+}
+.wr-leaderboard-label {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-right: var(--gap-xs);
+}
+.wr-leaderboard-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: var(--size-meta);
+  font-weight: 500;
+  background: #FFFFFF;
+  border: 1px solid var(--color-panel-border);
+  color: var(--color-text-body);
+  cursor: pointer;
+  transition: border-color 120ms ease, transform 120ms ease;
+}
+.wr-leaderboard-pill:hover {
+  border-color: var(--color-brand);
+  transform: translateY(-1px);
+}
+.wr-leaderboard-pill.active {
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.15);
+}
+.wr-leaderboard-pill .mk { font-weight: 600; color: var(--color-text-hero); }
+.wr-leaderboard-pill .rate {
+  font-variant-numeric: tabular-nums;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+.wr-leaderboard-pill .rate.good { background: #E6F4EA; color: #1E7E34; }
+.wr-leaderboard-pill .rate.warn { background: #FFF4E0; color: #8A5A00; }
+.wr-leaderboard-pill .rate.bad  { background: #FDECEC; color: #B11D1D; }
+.wr-leaderboard-pill .rate.na   { background: #F0F0F0; color: var(--color-text-subtle); }
+
+/* WR-A10 (2026-04-30): scrub-the-chart interaction. When hovering the
+   trend chart, a small overlay badge above the page signals that KPIs,
+   three-question cards and variance table are showing values for the
+   hovered week, not the selected week. Released on mouseleave. */
+.wr-scrub-indicator {
+  display: none;
+  position: fixed;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 102, 204, 0.95);
+  color: #FFFFFF;
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: var(--size-meta);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  z-index: 1000;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.wr-scrub-indicator.active { display: block; }
+body.wr-scrubbing .wr-since-last-week,
+body.wr-scrubbing .wr-three-q,
+body.wr-scrubbing #sec-variance,
+body.wr-scrubbing #sec-kpi-scorecard,
+body.wr-scrubbing #calloutNarrative h3 {
+  transition: opacity 80ms ease;
+}
+
+/* WR-A11 (2026-04-30): market archetype styling. Regs-and-efficiency
+   markets (US/EU5/CA/MX/UK/DE/FR/IT/ES) use the default full layout.
+   Spend-only (JP/AU) highlight the scorecard as a spend-discipline
+   view. Rollup (WW/EU5/NA) hide the variance panel when it would
+   otherwise render empty channel deltas. */
+body.wr-arch-spend .wr-scorecard-panel {
+  border-color: #D4C28A;
+  background: linear-gradient(to bottom, #FFFCF3 0%, var(--color-panel-bg) 40%);
+}
+body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
+  content: "\1F4B0  ";  /* money bag */
+  font-size: 14px;
+}
+/* Rollup variance hiding is handled JS-side in renderVariance (already
+   short-circuits when channel deltas are empty); no CSS needed. */
 </style>
 </head>
 <body>
+<!-- WR-A10 (2026-04-30): scrub-the-chart overlay indicator — shows
+     current hovered week while user scrubs trend chart. -->
+<div class="wr-scrub-indicator" id="scrubIndicator">&mdash;</div>
 <div class="wr-frame">
 
 <!-- TOC strip — compact jump-to nav -->
@@ -765,9 +873,18 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
   <span class="wr-toc-sep">&middot;</span>
   <a href="#sec-detail-quarterly">Quarterly</a>
   <span class="wr-toc-sep">&middot;</span>
-  <a href="#sec-channels">Channels</a>
+  <a href="#calloutChannelsWrap">Channels</a>
   <span class="wr-toc-sep">&middot;</span>
-  <a href="#sec-context">Context</a>
+  <a href="#calloutContextWrap">Context</a>
+</nav>
+
+<!-- WR-B5 (2026-04-30): cross-market accuracy leaderboard strip. Each
+     pill shows a market's 6-week in-CI rate. Click to jump to that
+     market. Answers "can I trust this market's projection?" at a glance
+     without clicking through every tab. -->
+<div class="wr-leaderboard" id="accuracyLeaderboard" role="group" aria-label="Cross-market forecast accuracy leaderboard">
+  <span class="wr-leaderboard-label">Forecast trust (last 6 wks)</span>
+  <span id="leaderboardPills" style="display:contents"></span>
 </div>
 
 <!-- Controls -->
@@ -955,16 +1072,27 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
   </div>
 </details>
 
-<!-- ============ CALLOUT DETAILS (bottom) — channel + context + drivers ============
-     WR-S1: wrapped in <details> so the page lands <1,800px on cold load.
-     Cards render when expanded; content below contains channel cards,
-     context/external factors, drivers, stakeholders. -->
-<details class="wr-collapsible" id="calloutDetailsWrap" style="margin-bottom:var(--gap-lg)">
-  <summary class="wr-collapsible-summary sec-panel" style="margin-bottom:0">Channel detail, context, drivers, stakeholders <span class="wr-collapsible-hint">(click to expand)</span></summary>
-  <div class="wr-grid" id="calloutGrid" style="margin-top:var(--gap-md)">
+<!-- ============ CALLOUT DETAILS (bottom) — channels disclosure + context disclosure ============
+     WR-C3 (2026-04-30): split into two disclosures per Polymarket mobile-first
+     principle. Channel detail (Brand + NB cards) and Context (external factors,
+     drivers, stakeholders) are semantically distinct — a reader checking channel
+     mix shouldn't have to scan through context to find it. Both collapsed on
+     cold load so the core WBR arc lands <1,800px. -->
+<details class="wr-collapsible" id="calloutChannelsWrap" style="margin-bottom:var(--gap-md)">
+  <summary class="wr-collapsible-summary sec-panel" style="margin-bottom:0">Channel detail &mdash; Brand + Non-Brand <span class="wr-collapsible-hint">(click to expand)</span></summary>
+  <div class="wr-grid" id="calloutChannelsGrid" style="margin-top:var(--gap-md)">
     <div class="wr-grid-full wr-empty">Loading&hellip;</div>
   </div>
 </details>
+<details class="wr-collapsible" id="calloutContextWrap" style="margin-bottom:var(--gap-lg)">
+  <summary class="wr-collapsible-summary sec-panel" style="margin-bottom:0">Context &mdash; external factors, drivers, stakeholders <span class="wr-collapsible-hint">(click to expand)</span></summary>
+  <div class="wr-grid" id="calloutContextGrid" style="margin-top:var(--gap-md)">
+    <div class="wr-grid-full wr-empty">Loading&hellip;</div>
+  </div>
+</details>
+<!-- Legacy #calloutGrid retained as hidden mount point so any orphaned
+     error-state writer (see init() catch) still finds a sink. -->
+<div id="calloutGrid" style="display:none"></div>
 <!-- WR-C2 (2026-04-28): removed #genTs footer timestamp — page-render
      time is always "now" and wasn't useful. Single data-freshness
      timestamp lives in the header #dataTs. -->
@@ -986,6 +1114,14 @@ let FORECAST = null;  // forecast-data.json
 let curMarket = null;
 let curWeek = null;
 let curRegion = null;  // WR-R1: active region tab; derived from curMarket on every render.
+// WR-A10 (2026-04-30): scrub-the-chart state.
+// When user hovers over the trend chart, scrubWeek is set to the hovered
+// week label (e.g. 'W14'). The four scrub-targeted render functions
+// (callout narrative, three-Q, variance, KPI row) consult resolvedWeek()
+// instead of curWeek so they reflect the hovered week. On mouseleave
+// scrubWeek returns to null and the page re-renders with curWeek.
+let scrubWeek = null;
+function resolvedWeek() { return scrubWeek || curWeek; }
 
 // WR-R1 (2026-04-29): sets of markets present in each data source.
 // Populated in init() once the JSON loads. Module-scoped so
@@ -1087,8 +1223,13 @@ Promise.all([
   init();
 }).catch((e) => {
   console.error('Weekly Review data load failed:', e);
-  document.getElementById('calloutGrid').innerHTML =
-    '<div class="wr-grid-full wr-empty" style="color:var(--color-danger);border-color:#F2A4A4">Failed to load data. Run refresh-forecast.py and refresh-callouts.py.</div>';
+  // WR-C3 (2026-04-30): route error state to visible calloutChannelsGrid
+  // since legacy #calloutGrid is now hidden display:none.
+  const errHost = document.getElementById('calloutChannelsGrid') || document.getElementById('calloutGrid');
+  if (errHost) {
+    errHost.innerHTML =
+      '<div class="wr-grid-full wr-empty" style="color:var(--color-danger);border-color:#F2A4A4">Failed to load data. Run refresh-forecast.py and refresh-callouts.py.</div>';
+  }
 });
 
 function init() {
@@ -1312,11 +1453,17 @@ function render() {
   renderThreeQ();
   renderVariance();
   renderScorecard();
+  renderLeaderboard();
   renderKPIs();
   renderChart();
   renderTable();
   renderMonthlyTable();
   renderQuarterlyTable();
+  // WR-A11 (2026-04-30): apply archetype-specific layout AFTER all renders
+  // so they're not fighting default visibility. Idempotent.
+  applyMarketArchetype();
+  // WR-A10 (2026-04-30): wire scrub handlers AFTER charts exist.
+  wireChartScrub();
 }
 
 // ============================================================================
@@ -1332,11 +1479,14 @@ function renderCallout() {
 }
 
 function renderCalloutNarrative() {
-  const c = (CALLOUTS.callouts[curMarket] || {})[curWeek];
+  // WR-A10 (2026-04-30): resolve to scrubWeek when user is scrubbing the
+  // chart, otherwise curWeek.
+  const rw = resolvedWeek();
+  const c = (CALLOUTS.callouts[curMarket] || {})[rw];
   const host = document.getElementById('calloutNarrative');
   if (!host) return;
   if (!c) {
-    host.innerHTML = '<div class="sec-panel wr-callout-main wr-empty" id="sec-callout" style="margin-bottom:var(--gap-lg)">No callout for ' + curMarket + ' ' + curWeek + '</div>';
+    host.innerHTML = '<div class="sec-panel wr-callout-main wr-empty" id="sec-callout" style="margin-bottom:var(--gap-lg)">No callout for ' + curMarket + ' ' + rw + '</div>';
     return;
   }
   // WR-C3 headline de-dup retained here.
@@ -1346,7 +1496,7 @@ function renderCalloutNarrative() {
     ? fullText.slice(headlineText.length).trimStart()
     : fullText;
   const bodyHtml = bodyText.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
-  const h3Content = headlineText || (curMarket + ' ' + curWeek);
+  const h3Content = headlineText || (curMarket + ' ' + rw);
   // WR-D4 (2026-04-28): Since-last-week auto-summary above the headline.
   // Pulls regs/spend/cpa WoW deltas from callout.metrics + brand_detail
   // + nb_detail and composes a one-liner in 4–5 deltas. Hidden entirely
@@ -1355,7 +1505,7 @@ function renderCalloutNarrative() {
   host.innerHTML =
     '<div class="sec-panel wr-callout-main" id="sec-callout" style="margin-bottom:var(--gap-lg)">' +
     (sinceHtml || '') +
-    '<div class="wr-callout-meta">' + curMarket + ' &middot; ' + curWeek +
+    '<div class="wr-callout-meta">' + curMarket + ' &middot; ' + rw +
       (c.period ? ' &middot; ' + c.period : '') + '</div>' +
     '<p class="wr-callout-headline" role="text">' + h3Content + '</p>' +
     (bodyHtml ? '<div class="wr-callout-narrative">' + bodyHtml + '</div>' : '') +
@@ -1408,7 +1558,10 @@ function renderSinceLastWeekHtml(c) {
 function renderThreeQ() {
   const host = document.getElementById('threeQ');
   if (!host) return;
-  const c = (CALLOUTS.callouts[curMarket] || {})[curWeek];
+  // WR-A10 (2026-04-30): resolve to scrubbed week when user scrubs the
+  // chart.
+  const rw = resolvedWeek();
+  const c = (CALLOUTS.callouts[curMarket] || {})[rw];
   if (!c) { host.style.display = 'none'; return; }
   host.style.display = '';
   const m = c.metrics || {};
@@ -1472,7 +1625,7 @@ function renderThreeQ() {
     if (!Number.isFinite(wowPct)) {
       // Derive from prev-week callout for this market.
       const weeks = CALLOUTS.weeks || [];
-      const idx = weeks.indexOf(curWeek);
+      const idx = weeks.indexOf(rw);
       const prev = (idx >= 0 && idx + 1 < weeks.length)
         ? (CALLOUTS.callouts[curMarket] || {})[weeks[idx + 1]]
         : null;
@@ -1543,7 +1696,9 @@ function renderVariance() {
   const panel = document.getElementById('sec-variance');
   const body = document.getElementById('varianceBody');
   if (!panel || !body) return;
-  const c = (CALLOUTS.callouts[curMarket] || {})[curWeek];
+  // WR-A10 (2026-04-30): resolve to scrubbed week when user scrubs chart.
+  const rw = resolvedWeek();
+  const c = (CALLOUTS.callouts[curMarket] || {})[rw];
   if (!c) {
     panel.style.display = 'none';
     body.innerHTML = '';
@@ -1565,7 +1720,7 @@ function renderVariance() {
     const nbAgg = { regs: 0, lw_regs: 0 };
     let missing = 0;
     for (const mkt of members) {
-      const mc = (CALLOUTS.callouts[mkt] || {})[curWeek];
+      const mc = (CALLOUTS.callouts[mkt] || {})[rw];
       const bd = mc && mc.brand_detail;
       const nd = mc && mc.nb_detail;
       if (!bd || !nd || bd.lw_regs == null || nd.lw_regs == null) {
@@ -1611,7 +1766,7 @@ function renderVariance() {
   // Priority: previous-week identifier — derive from the weeks array if
   // possible so the label reads "W16 Regs" not "Prior Regs".
   const weeks = CALLOUTS.weeks || [];
-  const idx = weeks.indexOf(curWeek);
+  const idx = weeks.indexOf(rw);
   const prevWeekLabel = (idx >= 0 && idx + 1 < weeks.length) ? weeks[idx + 1] : 'Prior';
 
   const fmtInt = (v) => (v == null || !Number.isFinite(v)) ? '\u2014' : Math.round(v).toLocaleString();
@@ -1641,7 +1796,7 @@ function renderVariance() {
         <tr class="driver-row"><td>NB regs</td><td class="r">${fmtDelta(nbDelta)}</td><td class="r">${share(nbDelta)}</td></tr>
         <tr class="driver-row"><td>Brand regs</td><td class="r">${fmtDelta(brandDelta)}</td><td class="r">${share(brandDelta)}</td></tr>
         ${Math.abs(residual) >= 1 ? `<tr class="driver-row"><td>Residual / mix</td><td class="r">${fmtDelta(residual)}</td><td class="r">${share(residual)}</td></tr>` : ''}
-        <tr class="total"><td>${curWeek} Regs</td><td class="r">${fmtInt(curRegs)}</td><td class="r">${pct > 0 ? '+' : ''}${pct.toFixed(1)}%</td></tr>
+        <tr class="total"><td>${rw} Regs</td><td class="r">${fmtInt(curRegs)}</td><td class="r">${pct > 0 ? '+' : ''}${pct.toFixed(1)}%</td></tr>
       </tbody>
     </table>
   `;
@@ -1649,22 +1804,29 @@ function renderVariance() {
 
 function renderCalloutDetails() {
   const c = (CALLOUTS.callouts[curMarket] || {})[curWeek];
-  const g = document.getElementById('calloutGrid');
-  if (!g) return;
+  const chEl = document.getElementById('calloutChannelsGrid');
+  const ctxEl = document.getElementById('calloutContextGrid');
+  const legacyEl = document.getElementById('calloutGrid');
+  if (legacyEl) legacyEl.innerHTML = '';  // keep legacy sink empty
+  if (!chEl || !ctxEl) return;
   if (!c) {
-    g.innerHTML = '';  // narrative host already rendered the empty state
+    chEl.innerHTML = '';
+    ctxEl.innerHTML = '';
     return;
   }
-  let html = '';
-  // Brand + Non-Brand channel detail
-  html += channelCard('Brand', c.brand_detail, 'sec-channels');
-  html += channelCard('Nonbrand', c.nb_detail);
-  // External factors
-  html += '<div class="sec-panel wr-grid-full" id="sec-context"><h3>Context &amp; External Factors</h3><ul class="wr-list" id="extList"></ul></div>';
-  // Drivers + stakeholders
-  html += '<div class="sec-panel"><h3>Performance Drivers</h3><ul class="wr-list" id="driverList"></ul></div>';
-  html += '<div class="sec-panel"><h3>Stakeholders</h3><div id="stakeCard"></div></div>';
-  g.innerHTML = html;
+  // WR-C3 (2026-04-30): split into two disclosures.
+  // Channels disclosure — Brand + Non-Brand cards.
+  let channelsHtml = '';
+  channelsHtml += channelCard('Brand', c.brand_detail, 'sec-channels');
+  channelsHtml += channelCard('Nonbrand', c.nb_detail);
+  chEl.innerHTML = channelsHtml;
+
+  // Context disclosure — external factors + drivers + stakeholders.
+  let contextHtml = '';
+  contextHtml += '<div class="sec-panel wr-grid-full" id="sec-context"><h3>Context &amp; External Factors</h3><ul class="wr-list" id="extList"></ul></div>';
+  contextHtml += '<div class="sec-panel"><h3>Performance Drivers</h3><ul class="wr-list" id="driverList"></ul></div>';
+  contextHtml += '<div class="sec-panel"><h3>Stakeholders</h3><div id="stakeCard"></div></div>';
+  ctxEl.innerHTML = contextHtml;
 
   renderList('driverList', c.decisions);
   renderExternal(c.external_factors);
@@ -1770,8 +1932,16 @@ function renderScorecard() {
     if (!h || !h.regs) continue;
     const r = h.regs;
     if (r.actual == null) continue;
+    // WR-A7 (2026-04-30): carry the prior week's actual alongside so we can
+    // compute naive-baseline (drift-1) skill score in the same pass.
+    const prevH = hist[String(w - 1)] || hist[w - 1];
+    const prevActual = (prevH && prevH.regs && prevH.regs.actual != null) ? prevH.regs.actual : null;
     recent.push({
       wk: w,
+      actual: r.actual,
+      first_pred: r.first_pred,
+      latest_pred: r.latest_pred,
+      prev_actual: prevActual,
       first_err: (r.first_pred != null && r.actual) ? (r.first_pred - r.actual) / r.actual * 100 : null,
       latest_err: (r.latest_pred != null && r.actual) ? (r.latest_pred - r.actual) / r.actual * 100 : null,
       in_ci: (r.latest_ci_lo != null && r.latest_ci_hi != null)
@@ -1823,6 +1993,38 @@ function renderScorecard() {
     return 'large error — investigate';
   };
 
+  // WR-A7 (2026-04-30): relative skill score vs naive baseline.
+  // Naive baseline = "next week's regs = this week's actual" (drift-1).
+  // Skill = 1 - MAE_model / MAE_naive. Positive means model beats naive.
+  // Good Judgment Open uses Brier-relative on binary outcomes; for
+  // regression we use MAE-relative which is the standard equivalent.
+  const pairedForSkill = recent.filter(r =>
+    r.latest_pred != null && r.prev_actual != null && r.actual != null);
+  let skill = null, skillSub = '';
+  if (pairedForSkill.length >= 3) {
+    const mae = (arr, fn) => arr.reduce((s, r) => s + Math.abs(fn(r)), 0) / arr.length;
+    const maeModel = mae(pairedForSkill, r => r.latest_pred - r.actual);
+    const maeNaive = mae(pairedForSkill, r => r.prev_actual - r.actual);
+    if (maeNaive > 0) {
+      skill = 1 - (maeModel / maeNaive);
+      // Narrative sub: qualitative.
+      skillSub = skill >= 0.3 ? 'strongly beats naive'
+        : skill >= 0.1 ? 'beats naive'
+        : skill >= -0.1 ? 'matches naive'
+        : skill >= -0.3 ? 'naive is better'
+        : 'naive strongly better';
+    } else {
+      skillSub = 'naive baseline is 0 \u2014 skill undefined';
+    }
+  } else {
+    skillSub = `need 3+ paired weeks (${pairedForSkill.length})`;
+  }
+  const skillCls = skill == null ? 'warn'
+    : skill >= 0.1 ? 'good'
+    : skill >= -0.1 ? 'warn'
+    : 'bad';
+  const skillText = skill == null ? '\u2014' : (skill * 100).toFixed(0) + '%';
+
   row.innerHTML = `
     <div class="wr-score-tile">
       <div class="wr-score-label">First-pred error</div>
@@ -1849,6 +2051,11 @@ function renderScorecard() {
           : `${inCiPct.toFixed(0)}% — target 80%+`
       }</div>
     </div>
+    <div class="wr-score-tile" title="Skill vs naive baseline (drift-1): 1 - MAE_model / MAE_naive. Positive = model beats 'next week = this week'.">
+      <div class="wr-score-label">Skill vs naive</div>
+      <div class="wr-score-value ${skillCls}">${skillText}</div>
+      <div class="wr-score-sub">${skillSub}</div>
+    </div>
   `;
 
   // Auto-narrative: summarize the three numbers in one sentence.
@@ -1864,9 +2071,167 @@ function renderScorecard() {
   if (inCiPct != null) {
     parts.push(`${inCi} of ${total} actuals landed inside the forecast CI band`);
   }
+  // WR-A7 (2026-04-30): add skill-vs-naive to the narrative when defined.
+  if (skill != null) {
+    parts.push(`skill vs naive drift-1 baseline: ${(skill * 100).toFixed(0)}% (${skillSub})`);
+  }
   narrEl.textContent = parts.length
     ? parts.join(' — ').replace(/ — /, '. ') + '.'
     : '';
+}
+
+// WR-B5 (2026-04-30): cross-market accuracy leaderboard.
+// Iterates every market in predictions_history, computes the in-CI rate
+// over the last 6 graded weeks, renders as colored pills above controls.
+// Green ≥80% / amber 60-79% / red <60% / grey = insufficient data.
+function renderLeaderboard() {
+  const host = document.getElementById('leaderboardPills');
+  if (!host || !FORECAST) return;
+  const hist = FORECAST.predictions_history || {};
+  const maxWk = FORECAST.max_week || 15;
+  const WINDOW = 6;
+  // Render in the same market order as the tabs so it scans consistently.
+  const MARKET_ORDER = ['WW','US','EU5','CA','UK','DE','FR','IT','ES','JP','MX','AU'];
+  const pills = [];
+  for (const mk of MARKET_ORDER) {
+    const h = hist[mk] || {};
+    let hits = 0, total = 0;
+    for (let w = Math.max(1, maxWk - (WINDOW - 1)); w <= maxWk; w++) {
+      const r = (h[String(w)] || h[w] || {}).regs;
+      if (!r || r.actual == null || r.latest_ci_lo == null || r.latest_ci_hi == null) continue;
+      total++;
+      if (r.actual >= r.latest_ci_lo && r.actual <= r.latest_ci_hi) hits++;
+    }
+    let rateCls = 'na';
+    let rateText = '\u2014';
+    if (total >= 3) {
+      const pct = (hits / total) * 100;
+      rateCls = pct >= 80 ? 'good' : pct >= 60 ? 'warn' : 'bad';
+      rateText = `${hits}/${total}`;
+    } else if (total > 0) {
+      rateText = `${hits}/${total}`;
+    }
+    const isActive = mk === curMarket;
+    pills.push(
+      `<button class="wr-leaderboard-pill${isActive ? ' active' : ''}" ` +
+      `data-market="${mk}" title="${mk}: ${total} graded weeks, ${hits} inside CI">` +
+      `<span class="mk">${mk}</span>` +
+      `<span class="rate ${rateCls}">${rateText}</span>` +
+      `</button>`
+    );
+  }
+  host.innerHTML = pills.join('');
+  // Wire click — jump to market. Same code path as region tab click.
+  host.querySelectorAll('.wr-leaderboard-pill').forEach(btn => {
+    btn.onclick = () => {
+      const mk = btn.dataset.market;
+      if (!mk || mk === curMarket) return;
+      curMarket = mk;
+      curRegion = MARKET_TO_REGION[mk] || mk;
+      try { localStorage.setItem('wr-market', mk); } catch (e) { /* ignore */ }
+      render();
+    };
+  });
+}
+
+// WR-A10 (2026-04-30): scrub-the-chart interaction. Attach mousemove +
+// mouseleave to the trend chart canvas. On move, compute the hovered
+// week from Chart.js's intersect-mode element detection, set scrubWeek,
+// re-render only the four scrub-targeted panels. On leave, clear
+// scrubWeek and re-render.
+function wireChartScrub() {
+  const canvas = document.getElementById('trendChart');
+  if (!canvas || !trendChart) return;
+  if (canvas.dataset.scrubWired === '1') return;  // idempotent
+  canvas.dataset.scrubWired = '1';
+  const indicator = document.getElementById('scrubIndicator');
+
+  const resolveWeekFromEvent = (evt) => {
+    if (!trendChart) return null;
+    const elements = trendChart.getElementsAtEventForMode(
+      evt, 'index', { intersect: false }, true);
+    if (!elements || !elements.length) return null;
+    const idx = elements[0].index;
+    const labels = trendChart.data && trendChart.data.labels;
+    if (!labels || idx >= labels.length) return null;
+    const raw = labels[idx];
+    // Chart labels look like 'W14' or '2026 W14'. Extract the W## bit
+    // to match callout.weeks entries.
+    const match = String(raw).match(/W\d{1,2}/);
+    return match ? match[0] : null;
+  };
+
+  const onMove = (evt) => {
+    const wk = resolveWeekFromEvent(evt);
+    if (!wk) return;
+    // Skip if user is hovering the selected week (no scrub needed).
+    if (wk === curWeek && !scrubWeek) return;
+    // Only scrub to weeks that have callout data; otherwise the
+    // downstream renderers paint "No callout" and the effect looks broken.
+    const hasCallout = ((CALLOUTS.callouts[curMarket] || {})[wk]);
+    if (!hasCallout) return;
+    if (wk === scrubWeek) return;  // same week, no re-render
+    scrubWeek = wk;
+    document.body.classList.add('wr-scrubbing');
+    if (indicator) {
+      indicator.classList.add('active');
+      indicator.textContent = `Scrub \u2192 ${wk} (release to return to ${curWeek})`;
+    }
+    // Re-render only the four scrub-targeted panels.
+    renderCalloutNarrative();
+    renderThreeQ();
+    renderVariance();
+  };
+
+  const onLeave = () => {
+    if (!scrubWeek) return;
+    scrubWeek = null;
+    document.body.classList.remove('wr-scrubbing');
+    if (indicator) indicator.classList.remove('active');
+    renderCalloutNarrative();
+    renderThreeQ();
+    renderVariance();
+  };
+
+  canvas.addEventListener('mousemove', onMove);
+  canvas.addEventListener('mouseleave', onLeave);
+}
+
+// WR-A11 (2026-04-30): specialized layouts per market archetype.
+// Three archetypes mapped from the R2 proposal:
+//   - regs-and-efficiency (US, EU5, CA, MX, UK, DE, FR, IT, ES): default
+//     regs metric, full scorecard + forecast-hit-rate tiles visible.
+//   - spend-only (JP, AU): historically lower regs signal, spend-discipline
+//     is the operating lens. Default to Cost metric and hide the regs-
+//     centric scorecard narrative (the forecast hit rate still renders
+//     but we mark the panel "Spend-discipline view" to reset expectations).
+//   - rollups (WW, EU5, NA): variance decomposition and channel detail
+//     are thin; the scorecard is still useful but hide the variance
+//     panel (already empty on rollups per WR-S3).
+const ARCHETYPE = {
+  US: 'regs', EU5: 'rollup', CA: 'regs', MX: 'regs',
+  UK: 'regs', DE: 'regs', FR: 'regs', IT: 'regs', ES: 'regs',
+  JP: 'spend', AU: 'spend',
+  WW: 'rollup', NA: 'rollup',
+};
+function applyMarketArchetype() {
+  const kind = ARCHETYPE[curMarket] || 'regs';
+  const scoreTitle = document.getElementById('scorecardTitle');
+  const frame = document.body;
+  frame.classList.remove('wr-arch-regs', 'wr-arch-spend', 'wr-arch-rollup');
+  frame.classList.add('wr-arch-' + kind);
+  // Spend-only: relabel scorecard so reader knows this market is
+  // evaluated on spend pacing, not regs forecast accuracy.
+  if (kind === 'spend' && scoreTitle && !scoreTitle.dataset.archLabeled) {
+    const existing = scoreTitle.textContent || '';
+    if (!existing.includes('Spend-discipline')) {
+      // Keep weeks number from the original; prepend archetype hint.
+      scoreTitle.textContent = 'Spend-discipline view \u00b7 ' + existing;
+      scoreTitle.dataset.archLabeled = '1';
+    }
+  } else if (scoreTitle) {
+    scoreTitle.dataset.archLabeled = '';
+  }
 }
 
 function renderKPIs() {
@@ -2267,15 +2632,18 @@ function renderQuarterlyTable() {
 //       and restore it on load so the page returns to how the user left it.
 //
 // The list pairs each <details> id with the scroll-host id used by
-// centerSelectedRow. calloutDetailsWrap has no inner scroll — its
+// centerSelectedRow. Callout disclosures have no inner scroll — their
 // scrollId is null and centering is skipped.
+// WR-C3 (2026-04-30): the former #calloutDetailsWrap was split into
+// two disclosures. Both get persistence.
 (function wireDetailPersistence() {
   if (typeof document === 'undefined') return;
   const pairs = [
     ['sec-detail', 'weeklyScroll'],
     ['sec-detail-monthly', 'monthlyScroll'],
     ['sec-detail-quarterly', 'quarterlyScroll'],
-    ['calloutDetailsWrap', null],
+    ['calloutChannelsWrap', null],
+    ['calloutContextWrap', null],
   ];
   const STORAGE_KEY = 'wr-details-state';
   function readState() {

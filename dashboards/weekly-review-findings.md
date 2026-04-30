@@ -356,3 +356,24 @@ greenlights. Three items (A8/A9/B6) remain pipeline-gated per prior audit.
 
 Probe-flagged follow-up that slipped through R1 typography sweep:
 commit `2e14a8d` swapped `.wr-score-value` 24px literal to `var(--size-section)`.
+
+---
+
+## Sprint 3 complete (2026-04-30)
+
+All 5 ready-to-ship R2 research ideas landed in one pass.
+
+| Finding | Status | Notes |
+|---|---|---|
+| WR-C3 progressive disclosure split | done | Split prior one-disclosure block into two: `#calloutChannelsWrap` (Brand + NB) and `#calloutContextWrap` (external factors, drivers, stakeholders). TOC anchors updated. Legacy `#calloutGrid` retained hidden as error-sink. |
+| WR-B5 accuracy leaderboard | done | New `.wr-leaderboard` strip above controls. Per-market pills show `hits/graded` in-CI rate over last 6 weeks, color-banded green ≥80%/amber 60-79%/red <60%/grey insufficient. Pills click-through to that market. |
+| WR-A7 relative forecast error | done | 4th scorecard tile "Skill vs naive" = 1 − MAE_model / MAE_naive (drift-1 baseline). Positive = model beats naive. Grid now `repeat(4, 1fr)` collapsing to 2×2 under 900px, 1×4 under 500px. Added to scorecard auto-narrative. |
+| WR-A11 specialized layouts | done | `ARCHETYPE` map classifies markets: regs-and-efficiency (US/EU5/CA/MX/UK/DE/FR/IT/ES), spend-only (JP/AU), rollup (WW/EU5/NA). Spend-only applies `body.wr-arch-spend` class which highlights the scorecard and prefixes its title with "Spend-discipline view ·". Default metric for JP/AU was already `cost` via existing `defaultMetricForMarket`. |
+| WR-A10 scrub-the-chart | done | Hovering the trend chart sets `scrubWeek`, re-renders callout narrative + three-question cards + variance table against the hovered week. Mouseleave returns to `curWeek`. Fixed overlay badge at top of viewport shows active scrub state. Ungated panels (KPIs, scorecard, leaderboard, table) stay on `curWeek` since their semantics are cumulative/market-wide, not weekly. |
+
+**Still open (pipeline-gated):**
+- **WR-A8** event annotations on trend chart — needs `refresh-callouts.py` to emit structured `events: [{week, label, kind}]` per market instead of prose `external_factors`.
+- **WR-A9** forecast aging visualization — needs `predictions_history[market][wk]` to become an array of `{date, pred}` snapshots. Prior session (2026-04-29) wired DELETE-INSERT snapshotting in `write_v1_1_slim_forecasts.py` but the export path still collapses to one `latest_pred` per week.
+- **WR-B6** period-state background tint — needs `refresh-callouts.py` to emit `period_state` enum (`q_close` / `holiday` / `refit` / `normal`).
+
+All three are backend work, not weekly-review HTML edits.
