@@ -1,0 +1,1092 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Performance Dashboards — Redesign Research Report (100 Suggestions)</title>
+<style>
+:root{
+  --bg:#f7f6f2;
+  --ink:#1a1a1a;
+  --ink-2:#4a4a4a;
+  --ink-3:#8a8a8a;
+  --rule:#d9d5c8;
+  --rule-soft:#ece9de;
+  --panel:#ffffff;
+  --accent:#7a5cff;
+  --good:#2f7d3e;
+  --warn:#b06a00;
+  --bad:#a63939;
+  --t1:#2f7d3e;
+  --t2:#b06a00;
+  --t3:#8a8a8a;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --serif:ui-serif,Georgia,"Iowan Old Style",serif;
+  --sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding:32px 48px 96px}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:700;letter-spacing:-0.01em;margin:0}
+h1{font-size:40px;line-height:1.12;margin:0 0 8px}
+h2{font-size:26px;line-height:1.2;margin:48px 0 12px;padding-top:12px;border-top:1px solid var(--rule)}
+h3{font-size:18px;line-height:1.25;margin:28px 0 8px}
+h4{font-size:15px;line-height:1.3;margin:20px 0 6px;font-family:var(--sans);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-2)}
+p{margin:0 0 12px}
+.kicker{font-family:var(--sans);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px}
+.lede{font-size:17px;color:var(--ink-2);max-width:72ch}
+.meta{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-top:8px}
+.box{background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:18px 20px;margin:16px 0}
+.box.thin{padding:10px 14px}
+.box.warn{border-left:3px solid var(--warn)}
+.box.good{border-left:3px solid var(--good)}
+.box.note{background:#fbf9f3;border-style:dashed}
+figure{margin:16px 0 24px;border:1px solid var(--rule);background:var(--panel);padding:12px;border-radius:4px}
+figure img{display:block;width:100%;height:auto;border:1px solid var(--rule-soft)}
+figcaption{font-size:12px;color:var(--ink-3);margin-top:8px;font-family:var(--mono)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+ul.clean{list-style:none;padding:0;margin:0}
+ul.clean li{padding:4px 0;border-bottom:1px dotted var(--rule-soft)}
+ol.principles{padding-left:20px}
+ol.principles li{margin:8px 0}
+.pill{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;padding:2px 7px;border-radius:2px;vertical-align:middle;line-height:1.5}
+.pill.t1{background:#e4f2e8;color:#1e5c2a;border:1px solid #b9e0c4}
+.pill.t2{background:#fbefd9;color:#6b3f00;border:1px solid #ecd7a4}
+.pill.t3{background:#eeeeee;color:#555;border:1px solid #dedede}
+.pill.area{background:#efeaff;color:#3a2a7a;border:1px solid #d7ccff;margin-left:6px}
+.sug{display:grid;grid-template-columns:48px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule-soft)}
+.sug .num{font-family:var(--mono);font-size:13px;color:var(--ink-3);padding-top:2px}
+.sug h5{margin:0 0 2px;font-size:14px;font-family:var(--sans);font-weight:700}
+.sug p{margin:0;color:var(--ink-2);font-size:13.5px}
+.sug .rationale{font-size:12px;color:var(--ink-3);font-family:var(--mono);margin-top:4px}
+.sources{font-size:12.5px;columns:2;column-gap:28px}
+.sources li{break-inside:avoid;margin:0 0 6px}
+.sources a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--ink-3)}
+.sources a:hover{color:var(--accent);border-color:var(--accent)}
+.toc{font-size:13px;background:var(--panel);border:1px solid var(--rule);padding:14px 20px;border-radius:4px}
+.toc a{color:var(--ink);text-decoration:none}
+.toc a:hover{color:var(--accent)}
+.toc ol{padding-left:24px;margin:6px 0}
+.toc li{padding:2px 0}
+.mockup{background:#0f1013;color:#e9e6de;border-radius:6px;padding:22px 28px;font-family:var(--sans);margin:20px 0}
+.mockup .mk-sticky{background:#17191f;border:1px solid #2a2d35;border-radius:4px;padding:12px 16px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.mockup .mk-trust{display:flex;gap:6px;flex-wrap:wrap}
+.mockup .mk-trust span{font-family:var(--mono);font-size:11px;padding:4px 8px;border-radius:2px;background:#20232b;border:1px solid #2e313a}
+.mockup .mk-trust span.on{background:#1f3a2a;border-color:#2e6a45;color:#9be5b4}
+.mockup .mk-trust span.mid{background:#3a3320;border-color:#6a5d2e;color:#e8d58c}
+.mockup .mk-trust span.off{background:#3a2020;border-color:#6a2e2e;color:#f0a0a0}
+.mockup .mk-trust span.sel{outline:2px solid #7a5cff;outline-offset:1px}
+.mockup .mk-hero{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:14px;margin:16px 0 10px}
+.mockup .mk-hero .mk-card{background:#17191f;border:1px solid #2a2d35;padding:14px 16px;border-radius:4px}
+.mockup .mk-kicker{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#9e9e9e;margin-bottom:6px}
+.mockup .mk-big{font-family:var(--serif);font-size:28px;line-height:1;margin-bottom:4px;font-variant-numeric:tabular-nums}
+.mockup .mk-delta{font-family:var(--mono);font-size:12px}
+.mockup .mk-delta.good{color:#9be5b4}
+.mockup .mk-delta.bad{color:#f0a0a0}
+.mockup .mk-headline{font-family:var(--serif);font-size:20px;line-height:1.3;margin:8px 0 6px}
+.mockup .mk-sub{font-size:13px;color:#bcbbb0}
+.mockup .mk-section{margin-top:22px}
+.mockup .mk-section h4{color:#c9c7bc;font-family:var(--sans);margin:0 0 10px}
+.mockup .mk-bullet{height:14px;background:#20232b;border-radius:2px;position:relative;overflow:hidden;margin-top:6px}
+.mockup .mk-bullet .actual{position:absolute;left:0;top:0;bottom:0;background:#7a5cff}
+.mockup .mk-bullet .target{position:absolute;top:-3px;bottom:-3px;width:2px;background:#e9e6de}
+.mockup .mk-bullet .good-band{position:absolute;inset:0;background:linear-gradient(90deg,rgba(155,229,180,0.18) 0%,rgba(155,229,180,0.06) 100%)}
+.mockup .mk-spark{display:inline-block;width:72px;height:18px;vertical-align:middle}
+.mockup table{border-collapse:collapse;width:100%;font-size:12.5px;font-variant-numeric:tabular-nums}
+.mockup th,.mockup td{padding:6px 8px;border-bottom:1px solid #2a2d35;text-align:right}
+.mockup th:first-child,.mockup td:first-child{text-align:left}
+.mockup th{font-family:var(--mono);font-size:10px;color:#9e9e9e;text-transform:uppercase;letter-spacing:0.06em;font-weight:500}
+.mockup td.good{color:#9be5b4}
+.mockup td.bad{color:#f0a0a0}
+.divider{height:1px;background:var(--rule);margin:28px 0}
+.ranking{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.todo-marker{color:var(--warn);font-weight:700}
+.h-count{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-left:8px;font-weight:normal}
+.summary-line{font-family:var(--serif);font-size:22px;line-height:1.35;margin:12px 0 0;color:var(--ink)}
+.mini-table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+.mini-table th,.mini-table td{padding:6px 10px;border-bottom:1px solid var(--rule-soft);text-align:left}
+.mini-table th{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.footnote{font-size:12px;color:var(--ink-3);border-top:1px dashed var(--rule);padding-top:14px;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="kicker">Performance dashboards · redesign research · kiro-local · 2026-04-29</p>
+<h1>Making the weekly review and projection engine pages look — and work — like a single instrument panel</h1>
+<p class="lede">Current state: screenshots, component inventory, and honest notes on what doesn't work. Research: 55 sources from the last ~3 years, biased away from enterprise BI marketing pages and toward Amazon's own WBR practice, Tufte, FT, Observable, The Pudding, Stephen Few, and practitioners on Substack and Hacker News. Output: 100 distinct suggestions, tiered, component-scoped, each with a one-line rationale tied back to a principle or a source.</p>
+<p class="meta">Data sources screenshotted: weekly-review.html (US · W17 · 1440×900), projection.html (MX · Y2026 · 1440×900). Report compiled 2026-04-29.</p>
+
+<div class="toc">
+  <strong>Contents</strong>
+  <ol>
+    <li><a href="#a-current">Current state — screenshots + component inventory</a></li>
+    <li><a href="#a-principles">Principles from the research (the lens behind the 100)</a></li>
+    <li><a href="#a-mockup">Proposed state — static mockup of the new top-of-fold</a></li>
+    <li><a href="#a-100">The 100 suggestions, tiered</a>
+      <ol>
+        <li><a href="#a-global">Global (both pages) — 24</a></li>
+        <li><a href="#a-wr">Weekly review — 44</a></li>
+        <li><a href="#a-pe">Projection engine — 20</a></li>
+        <li><a href="#a-exp">Experimental / novel chart forms — 12</a></li>
+      </ol>
+    </li>
+    <li><a href="#a-sources">Sources (55)</a></li>
+  </ol>
+</div>
+
+
+<h2 id="a-current">1. Current state — screenshots + component inventory</h2>
+<p>Both pages render at 1440 wide (Kiro's default Chrome DevTools viewport). Full-page and top-of-fold captures below. The inventory lists every distinct component top-to-bottom as of the 2026-04-29 build.</p>
+
+<h3>1.1 Weekly review — <span class="h-count">top of fold (first 900px)</span></h3>
+<figure>
+  <img src="screenshots/wr-01-topfold-1440.png" alt="Weekly review top of fold at 1440x900">
+  <figcaption>weekly-review.html · US · W17 · top of fold. Above: page title + sticky forecast-trust bar + region tabs + week picker + metric tabs + narrative + callout pager. This is about 450px of controls/nav before any data lives above the fold.</figcaption>
+</figure>
+
+<h3>1.2 Weekly review — <span class="h-count">full page</span></h3>
+<figure>
+  <img src="screenshots/wr-02-fullpage-1440.png" alt="Weekly review full page at 1440 width">
+  <figcaption>weekly-review.html · US · W17 · full scroll. Order: Jump-to nav → forecast trust bar → Region/Week/Metric filters → Callout narrative → WoW decomposition table → KPI scorecard (4 cards) → Forecast hit rate scorecard (4 cards) → "What happened" chart → "How did we do" forecast-vs-actual chart → 5 collapsed disclosure panels (Weekly · Monthly · Quarterly · Channel · Context).</figcaption>
+</figure>
+
+<h3>1.3 Weekly review — <span class="h-count">charts zoom</span></h3>
+<figure>
+  <img src="screenshots/wr-03-charts.jpg" alt="Weekly review charts detail">
+  <figcaption>Close-up of the two chart panels. Both have an identical toolbar (Regs/Spend/Both) and a generic image-alt ("Weekly trend: actuals vs OP2 target"). No annotations on the chart itself; the insight has to be inferred.</figcaption>
+</figure>
+
+<h3>1.4 Projection engine — <span class="h-count">top of fold</span></h3>
+<figure>
+  <img src="screenshots/pe-01-topfold-1440.png" alt="Projection engine top of fold at 1440x900">
+  <figcaption>projection.html · MX · Y2026 · top of fold. Above: header (title, subtitle, market+period badge, data staleness, alert summary) + tab strip (3 modes) + control row (market, period, driver, target value, lift slider, 4 buttons) + market-selector-as-health-bar + headline sentence + two sub-cards (OP2 position, reserve). This is dense and it works — the layout is the reference target for the weekly review.</figcaption>
+</figure>
+
+<h3>1.5 Projection engine — <span class="h-count">full page</span></h3>
+<figure>
+  <img src="screenshots/pe-02-fullpage-1440.jpg" alt="Projection engine full page">
+  <figcaption>projection.html full scroll. Order: header → controls → market health bar → headline + reserve card → 4 metric cards (Brand regs / NB regs / CPR / Efficiency) → vs-OP2-plan row → 3 context buttons → 4 scenario tiles → confidence line → decomposition + backtest disclosures → contribution/decay chart → NB spend lever → alerts → narrative → model-view side drawer.</figcaption>
+</figure>
+
+<h3>1.6 Projection engine — <span class="h-count">decomposition + alerts</span></h3>
+<figure>
+  <img src="screenshots/pe-03-decomposition.png" alt="Projection engine decomposition panel">
+  <figcaption>Below the fold on projection.html: decomposition bar (seasonal 80% · campaign 15% · judgment 5%) and the ALERTS panel with a calibrated headline ("Trust this projection less this week") + suggested action ("Switch to Pessimistic"). This is the piece the weekly review is missing: <em>what to do about it</em>.</figcaption>
+</figure>
+
+<h3>1.7 Component inventory — what lives on each page</h3>
+<table class="mini-table">
+<thead><tr><th>Component</th><th>Weekly review</th><th>Projection engine</th><th>Observation</th></tr></thead>
+<tbody>
+<tr><td>Page header / title</td><td>Minimal, text-only</td><td>Banner with staleness + alert count</td><td>PE header does more work per pixel</td></tr>
+<tr><td>Sticky status bar (trust / health)</td><td>✓ Forecast trust (12 markets)</td><td>✓ Market health (10 markets)</td><td>Both exist — PE's is more information-dense</td></tr>
+<tr><td>Region / market filter</td><td>Separate row (7 buttons) below trust bar</td><td>Dropdown in controls row; selection also drives trust bar</td><td>WR has the filter twice — once in trust bar, once as buttons. Redundant.</td></tr>
+<tr><td>Time period selector</td><td>Week dropdown + prev/next buttons</td><td>Period dropdown (W17/M04/Q2/Y2026/MY1/MY2)</td><td>PE supports more time horizons from one control</td></tr>
+<tr><td>Metric filter</td><td>3 toggle buttons (Regs/Cost/CPA)</td><td>Target driver dropdown</td><td>WR metric filter may be redundant — see #28</td></tr>
+<tr><td>Scenario / lever</td><td>—</td><td>Lift slider + 4 scenario tiles</td><td>WR is historical, no scenarios needed</td></tr>
+<tr><td>Narrative headline</td><td>Dense paragraph, 4 facts in one sentence</td><td>Short headline + reserve sub-card</td><td>PE headline reads like an executive summary; WR headline reads like a box score</td></tr>
+<tr><td>KPI cards</td><td>4 cards (YTD / Latest / WoW / vs OP2)</td><td>4 cards (Brand / NB / CPR / Efficiency) + 2-card vs-OP2 row</td><td>PE cards are grouped; WR cards aren't</td></tr>
+<tr><td>WoW decomposition</td><td>Table (driver / WoW Δ / share)</td><td>Decomposition bar (seasonal / campaign / judgment percentages)</td><td>Different decompositions for different jobs — WR is "what moved the number", PE is "what's in the projection"</td></tr>
+<tr><td>Forecast calibration</td><td>Scorecard (first-pred err / latest / in-CI / skill) + chart</td><td>Backtest disclosure (collapsed)</td><td>WR makes calibration prominent; PE hides it. Good call on WR, but the UI is 4-up cards rather than a chart</td></tr>
+<tr><td>Primary chart</td><td>2 charts stacked (actuals-vs-OP2, forecast-vs-actual)</td><td>Contribution/decay chart (collapsed in disclosure)</td><td>WR charts are prominent; PE chart is tucked away</td></tr>
+<tr><td>Detail / drilldown</td><td>5 disclosure panels (Weekly / Monthly / Quarterly / Channel / Context)</td><td>Model view as side drawer</td><td>PE's drawer is a better progressive-disclosure pattern</td></tr>
+<tr><td>Alerts / guidance</td><td>— (implicit in forecast-hit narrative)</td><td>Explicit alerts block with suggested action</td><td>WR is missing the "what to do" line. This is the single biggest gap.</td></tr>
+<tr><td>Footer / methodology</td><td>Small "Data as of / Forecast through" line</td><td>Staleness + methodology version in header</td><td>PE makes provenance legible</td></tr>
+</tbody>
+</table>
+
+<div class="box note">
+<strong>Honest read on the asymmetry.</strong> The projection engine page is already doing most of the things the research says to do: a dense but organized header, a single sticky health bar that carries the most important state (per-market trust), a narrative headline followed by structured cards, scenario-specific alerts with suggested actions, and a side drawer for power-user detail. The weekly review stacks controls vertically, separates the trust bar from the filter row even though they're the same choice, and leads with a paragraph of prose instead of a scannable executive summary. The weekly review can get 60% of the way there just by adopting the projection engine's top-of-fold grammar. That's what the Tier 1 suggestions do.
+</div>
+
+
+<h2 id="a-principles">2. Principles from the research</h2>
+<p>These are the lenses the 100 suggestions come from. Each principle is tied to 3–5 sources so you can trace back to originals. Content paraphrased for compliance; original phrasings are the property of the cited authors.</p>
+
+<ol class="principles">
+<li><strong>Density is the goal, not the enemy.</strong> Amazon's own WBR reviews 400–500 metrics in 60 minutes by printing four 6-12 graphs per landscape page; Bloomberg Terminal packs sparklines, tables, and news into every square inch and is actively held up as the pro standard. The problem users describe on HN is the opposite of ours — modern UIs are too sparse, with a -73% information density reduction from old HN to proposed redesigns. (Commoncog "Amazon WBR", Matt Ström "UI Density", HN thread 38824070, Natural 20 "High-Density AI News Aggregators".)</li>
+
+<li><strong>The active title is the decision.</strong> Chart titles should name the insight, not the dataset. "Forecast vs Actual" is a description; "US under-predicts by 23% — baseline gap, not regime double-count" is a decision. Urban Institute and Practical Reporting both push active titles as the cheapest upgrade a chart gets; Storytelling with Data and MIT Sloan quantify the cognitive-load drop when the insight is in the title instead of having to be derived. (Urban Institute "Three Ways to Annotate", MIT Sloan "Visually Consumable", Practical Reporting, Stephanie Evergreen.)</li>
+
+<li><strong>Callouts on the chart, not above it.</strong> The most persuasive data charts (FT's John Burn-Murdoch, NYT Upshot) annotate <em>inside</em> the plotting area at the moment that matters — the regime change, the double-count correction, the OP2 crossover. Separate narrative blocks above a chart produce read-skip-look-derive; inline annotation produces read-in-one-pass. (FT Visual Vocabulary, GIJN interview with Burn-Murdoch, arXiv "Survey on Annotations in InfoViz" 2410.05579.)</li>
+
+<li><strong>Sparklines everywhere you have numbers.</strong> Tufte's sparklines go where words or numbers go — inside sentences, table cells, KPI cards. Observable's "Big Insights, Small Spaces" is the modern practitioner guide; shadcn.io and jumpingrivers have shipped table patterns with inline sparklines in every row. A KPI card with a current value and a 6-week trace is strictly more informative than one with the current value alone, at near-zero visual cost. (Tufte "Sparkline Theory and Practice", Observable blog, jumpingrivers, shadcn tables-sparkline.)</li>
+
+<li><strong>Direct labels beat legends.</strong> Every data viz practitioner who has taught the subject (Evergreen, Rudis, Emery, Data Revelations, Depict Data) says the same thing: a color legend costs two eye-movements per read. Label the series at its endpoint. (Data Revelations "Avoid Color Legends", Stephanie Evergreen, Stephanie Evergreen "Directly Labeling", storytelling with data "axis vs data labels".)</li>
+
+<li><strong>The Amazon 6-12 graph is the target grammar.</strong> 6 weeks weekly on the left, 12 months monthly on the right, targets as green triangles, prior-year as a pink ghost line, numbered, with a fixed box-score footer. This format is the one practitioner outside Amazon who has seriously studied it (Cedric Chin / Commoncog) calls out as the reason Amazon leaders can pattern-match so fast: the format never changes, so the brain stops processing format and starts processing exception. (Commoncog "Amazon WBR", thdpth "Why Amazon Charts Beat Yours", Eugene Wei on end-of-line labels.)</li>
+
+<li><strong>Three questions, in order.</strong> Amazon's WBR answers: what did the customer experience, how did the business do, are we on track? Customer-first ordering is the whole reason the meeting exists. The weekly review section order should mirror this, not start with "what changed WoW" (a business-first framing). (Commoncog, Bryar + Carr "Working Backwards" via Commoncog.)</li>
+
+<li><strong>Exception-driven reading.</strong> Amazon reads 400 metrics in an hour because most are "nothing to see here" — one second of eye contact, move on. Exceptions get explained. The page design should support this: calm neutral for routine, high contrast for exception, and the exception is the one that gets the narrative attached. (Commoncog WBR, Statistical Process Control worldview.)</li>
+
+<li><strong>Progressive disclosure, not pogosticking.</strong> Nielsen-era principle re-validated in 2024–26 enterprise research (Lollypop, Interaction Design Foundation, Justinmind): essential first, detail on demand. The projection engine's side-drawer "Model View" is the right pattern for model internals; the weekly review's five collapsed accordions at the bottom are the right pattern for detail tables. The mistake is when filters or state need to be rediscovered every time — that's pogosticking. (Interaction Design Foundation, IBM Design, Luzmo "State of Dashboards 2025".)</li>
+
+<li><strong>A chart without a recommended action is a half-built chart.</strong> Dashboards fail at a 40–70% rate in enterprise, and the literature traces it to "insight without impact" — a chart that tells you what happened but not what to do. The projection engine's "Trust this projection less this week → Switch to Pessimistic" is the template. Every weekly review exception deserves a "If this miss > 20%, escalate to Brandon" prompt. (Ethos App "Dashboards to Stories", Luzmo, Eleken "Why Users Ignore Dashboards" — 70% of dashboard development is wasted, per their citation.)</li>
+
+<li><strong>Calibration belongs on a reliability diagram, not in 4 cards.</strong> The weekly review's forecast hit rate is currently four metric cards (first-pred err, latest-pred err, in-CI rate, skill vs naive). Forecast practitioners in meteorology and ML have spent 40+ years converging on the reliability diagram: predicted on X, observed on Y, perfect calibration on the diagonal, width indicates variance. The signed-error-per-week bar chart is the tabular alternative. Cards lose the shape. (PNAS "Stable reliability diagrams", arXiv 2501.19047 ECE, FT chart doctor, "Gauging Uncertainty of the Economic Outlook" RDP 2017-01.)</li>
+
+<li><strong>Uncertainty as fan, not as a single number.</strong> Bank of England fan charts (1996) are the standard form for presenting forecast uncertainty. Wikipedia "Fan chart (time series)" catalogues the convention; the R RJ journal paper formalizes it; RBA uses it. The point-estimate-plus-±-range text we use now is a degraded textual form of the same information. A visual fan forces the eye to see that a narrow band means confidence and a wide band means "trust less." (Wikipedia Fan chart, R Journal RJ-2015-002, BMC "DNAism" horizon charts.)</li>
+
+<li><strong>Small multiples for market comparison.</strong> Small multiples (trellis, facet, grid-of-small-charts) beat one-chart-with-many-lines for cross-category comparison. Juice Analytics and Tufte's original framing agree: shared axes, one panel per category, eye reads the pattern. For 12 markets comparing 6-week actuals vs OP2, a 3×4 small-multiple grid outperforms a single line chart with 12 colored lines. (Juice Analytics, Tufte via Jason Lockwood, Observable Plot, Concord "Tableau 201".)</li>
+
+<li><strong>Horizon charts when you have more than 6 series to compare.</strong> For dense time-series comparison (all 12 markets' calibration errors over 26 weeks), horizon charts compress vertical range while keeping horizontal resolution. Panopticon-invented, widely validated for dashboards where many series must fit on one screen. (CHI 2009 paper on horizon graphs, Tableau Exchange, arXiv "Compact Visualization Techniques", MATLAB horizon-chart.)</li>
+
+<li><strong>Bullet charts replace gauges and speedometers.</strong> Stephen Few (2005) designed the bullet chart specifically to replace round gauges with a linear, space-efficient actual-vs-target comparator. The weekly review's "vs OP2" card ("+17.2% · +1,340 ahead of 7,769 plan") would be more scannable as a bullet: actual bar, OP2 target tick, three qualitative bands behind. (Sigma Computing on bullets, Stacey Barr "PuMP Way", Clearly and Simply, Perceptual Edge.)</li>
+
+<li><strong>Deviation-based coloring for retention/variance tables.</strong> Classic retention tables use same-hue-different-opacity, which gives you absolute level. Deviation coloring (diverging scale around the row median) gives you relative performance, which is what WBR readers actually care about. Anastasiya Kuznetsova's nastengraph (2026) makes the case concretely; applies equally to our WoW-decomposition table. (nastengraph "Stop Coloring Retention Tables", Stacey Barr, Stephanie Evergreen.)</li>
+
+<li><strong>Monospaced tabular-numerics — not optional.</strong> Numbers in tables must line up at the decimal. Proportional numerals don't. Use <code>font-variant-numeric: tabular-nums</code> on every numeric cell, or use a monospaced font. All current browsers support it; it's one CSS line with outsized scannability gains. (Jo Maendle on date alignment, Medium "Design of Complex Tables", MDN font-variant-numeric.)</li>
+
+<li><strong>Chart aesthetic consistency across pages.</strong> The projection engine's chart style (soft contribution bars, muted backgrounds, readable annotations) should be the house style. Amazon's WBR is explicit: same colors, same format every week so the brain stops processing the format. Our two pages currently feel like two different apps. (Commoncog, HN discussions on HN UI perfection / perfect-interface arguments.)</li>
+
+<li><strong>Waste no fold on restating what the chrome already says.</strong> "Callout narrative + full-year tracker · Data as of Wed Apr 29 · Forecast through 2026-04-19" is text that tells the user information they already have or that belongs in a footer. The top-of-fold on a performance page should be spent on signal (latest week's number, trust, action) not on page metadata. (Matt Ström UI Density, parallelhq sticky header guide, smart-interface-design-patterns.)</li>
+
+<li><strong>Reserve the first 120 characters for the headline-that-fits-in-a-tweet.</strong> The FT calls this the "chart title as decision"; executive communication coaches (SlideMate, Prezent) call it "headline first." One sentence, deterministic template, market / week / direction / magnitude / primary driver. (Prezent QBR guide, FT visual vocabulary, practical reporting.)</li>
+
+<li><strong>Invisible over visible, per soul.md #5.</strong> The best intervention is one Richard doesn't consciously notice but that moves scan time or comprehension. Prefer structural changes (defaults, what-loads-first) over cosmetic ones (font tweaks, emoji). This is a constraint, not a principle-of-the-research, but it's the one that disqualifies most "creative" dashboard suggestions found in the research. The 100 below are filtered for it.</li>
+</ol>
+
+
+<h2 id="a-mockup">3. Proposed state — static mockup of the new weekly-review top-of-fold</h2>
+<p>What you see below is not wired to data — it's a static reference showing the top 900px of the page after the Tier-1 recommendations land. Numbers are the actual W17 US values. Compare this to <a href="#wr-01-topfold">the current-state screenshot</a>.</p>
+
+<div class="mockup">
+
+<!-- Sticky header: forecast trust replaces region filter entirely -->
+<div class="mk-sticky">
+  <div style="flex:0 0 auto">
+    <div class="mk-kicker">Weekly Review</div>
+    <div style="font-family:var(--serif);font-size:18px">US · W17</div>
+  </div>
+  <div class="mk-trust" style="flex:1 1 auto">
+    <span title="WW: 6/6">WW 6/6</span>
+    <span class="off sel" title="US: 2/6 — selected">US 2/6</span>
+    <span class="on" title="EU5: 6/6">EU5 6/6</span>
+    <span class="on" title="CA: 5/6">CA 5/6</span>
+    <span class="on" title="UK: 6/6">UK 6/6</span>
+    <span class="mid" title="DE: 4/6">DE 4/6</span>
+    <span class="on" title="FR: 6/6">FR 6/6</span>
+    <span class="on" title="IT: 5/6">IT 5/6</span>
+    <span class="on" title="ES: 5/6">ES 5/6</span>
+    <span class="on" title="JP: 6/6">JP 6/6</span>
+    <span class="off" title="MX: 1/6">MX 1/6</span>
+    <span class="mid" title="AU: 3/6">AU 3/6</span>
+  </div>
+  <div style="flex:0 0 auto;font-family:var(--mono);font-size:11px;color:#9e9e9e">
+    ◀ W17 ▶ · through Apr 25
+  </div>
+</div>
+
+<!-- Headline + exception action -->
+<div class="mk-section">
+  <p class="mk-kicker">Headline · US · W17 · Apr 19–25</p>
+  <div class="mk-headline">US drove <strong>9.4K regs</strong> (+6% WoW) on +7% spend. NB drove the lift (+10%); Brand softened (-3%). Pacing +17% above OP2.</div>
+  <div style="background:#2a1d1d;border-left:3px solid #f0a0a0;padding:10px 14px;margin-top:12px;border-radius:3px">
+    <span style="font-family:var(--mono);font-size:10px;color:#f0a0a0;letter-spacing:0.1em">EXCEPTION · FORECAST</span><br>
+    <strong style="font-family:var(--serif);font-size:15px">Model under-predicted last week by 23%. Baseline gap, not regime double-count.</strong>
+    <span style="color:#bcbbb0;font-size:13px">· 4 of last 6 weeks landed outside CI · skill -188% vs naive · <a href="#" style="color:#c7baff">open investigation →</a></span>
+  </div>
+</div>
+
+<!-- Hero grid: 4 KPI cards with inline sparklines + bullet for vs-OP2 -->
+<div class="mk-hero">
+  <div class="mk-card">
+    <div class="mk-kicker">Latest week · regs</div>
+    <div class="mk-big">9,109 <svg class="mk-spark" viewBox="0 0 72 18" preserveAspectRatio="none"><polyline points="0,12 12,10 24,14 36,8 48,6 60,4 72,3" fill="none" stroke="#c7baff" stroke-width="1.5"/><circle cx="72" cy="3" r="2" fill="#c7baff"/></svg></div>
+    <div class="mk-delta good">+6.0% WoW · +65% YoY</div>
+  </div>
+  <div class="mk-card">
+    <div class="mk-kicker">vs OP2 plan</div>
+    <div class="mk-big" style="font-size:22px">+17.2%</div>
+    <div class="mk-bullet">
+      <div class="good-band"></div>
+      <div class="actual" style="width:56%"></div>
+      <div class="target" style="left:48%"></div>
+    </div>
+    <div class="mk-delta good" style="margin-top:6px">+1,340 ahead of 7,769 plan</div>
+  </div>
+  <div class="mk-card">
+    <div class="mk-kicker">CPA</div>
+    <div class="mk-big">$77 <svg class="mk-spark" viewBox="0 0 72 18" preserveAspectRatio="none"><polyline points="0,6 12,8 24,5 36,9 48,7 60,6 72,5" fill="none" stroke="#9be5b4" stroke-width="1.5"/></svg></div>
+    <div class="mk-delta good">-3% WoW · NB $76 · Brand $69</div>
+  </div>
+  <div class="mk-card">
+    <div class="mk-kicker">YTD regs</div>
+    <div class="mk-big" style="font-size:22px">136,636</div>
+    <div class="mk-delta" style="color:#bcbbb0">W1–W16 · on pace for 1.41 pace</div>
+  </div>
+</div>
+
+<!-- Three-Q strip (Amazon WBR order: customer / business / plan) -->
+<div class="mk-section">
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+    <div>
+      <div class="mk-kicker">What customers experienced</div>
+      <div style="font-size:13px;color:#e9e6de">CPA +8% on Brand (softer ad value), -2% on NB (efficient acquisition). Brand clicks -3%.</div>
+    </div>
+    <div>
+      <div class="mk-kicker">How the business did</div>
+      <div style="font-size:13px;color:#e9e6de">Regs +6% WoW (NB led, +10% vs Brand -3%). Spend +7%. Mix shifted to NB.</div>
+    </div>
+    <div>
+      <div class="mk-kicker">Are we on track</div>
+      <div style="font-size:13px;color:#e9e6de">+17.2% vs weekly OP2. Month pacing to end at $3.0M spend / 39.9K regs / $75 CPA — both ahead of plan.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="box">
+<strong>What changed, structurally, vs the current page:</strong>
+<ul>
+<li>Region filter removed entirely. Forecast-trust bar now <em>is</em> the region filter — one click on a market badge selects that market and the color already tells you whether the forecast is trustworthy for that market.</li>
+<li>Metric filter removed. Metrics show as KPI cards side-by-side (regs, CPA, vs-OP2, YTD); the user doesn't choose one metric at a time, they see the set.</li>
+<li>Jump-to nav collapsed into the sticky header (not shown; hidden behind a single "sections" dropdown on hover — rare interaction, doesn't deserve 40px of permanent space).</li>
+<li>Headline is one sentence answering "what happened last week for US". The callout pager at the bottom of the current page (three micro-sentences for customer/business/plan) is moved up and reorganized into the Amazon three-question strip.</li>
+<li>Exception banner appears <em>only</em> when there's an exception. When US is calibrated, it disappears and the saved vertical goes to the chart above the fold. Routine = calm, exception = loud.</li>
+<li>KPI cards each carry a 6-week sparkline inline — the "Latest week / WoW / vs OP2 / YTD" four-card design from current becomes four cards <em>plus</em> trace, same space.</li>
+<li>vs-OP2 card is now a bullet chart instead of a number-plus-qualifier. Bar = actual, tick = OP2 target, soft band = acceptable range. Scannable in &lt;1 second.</li>
+<li>Data-as-of + forecast-through moved out of the top-of-fold and into the footer where provenance belongs.</li>
+</ul>
+</div>
+
+
+<h2 id="a-100">4. The 100 suggestions, tiered</h2>
+<p>Each suggestion carries a tier, a scope pill, a one-line rationale, and a sourced principle where applicable. <span class="pill t1">T1</span> = ship before next WBR; <span class="pill t2">T2</span> = worth testing in the next 4 weeks; <span class="pill t3">T3</span> = nice-to-have or experimental. Scope pill: <span class="pill area">global</span>, <span class="pill area">wr</span> (weekly review), <span class="pill area">pe</span> (projection engine), or <span class="pill area">exp</span> (experimental).</p>
+
+<h3 id="a-global">4.1 Global — both pages <span class="h-count">24 suggestions</span></h3>
+
+<div class="sug"><div class="num">001</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">global</span> Unify the chart aesthetic under the projection engine's house style.</h5>
+  <p>Same font stack, same muted background palette, same annotation typography, same target/marker styles. The weekly review's ApexCharts defaults feel like a different product.</p>
+  <p class="rationale">Principle #17 (aesthetic consistency) · Amazon WBR explicit "same format every week".</p>
+</div></div>
+
+<div class="sug"><div class="num">002</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">global</span> Apply <code>font-variant-numeric: tabular-nums</code> to every numeric value site-wide.</h5>
+  <p>One CSS line. Every KPI card, every table cell, every axis label gets decimal-aligned columns. Zero aesthetic tradeoff, big scannability win.</p>
+  <p class="rationale">Principle #16 · Jo Maendle on date alignment, Medium "Design of Complex Tables".</p>
+</div></div>
+
+<div class="sug"><div class="num">003</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">global</span> Market health / trust bar is the sticky header — not a band inside the page body.</h5>
+  <p>Sticks to the viewport top when the user scrolls. Both pages already have the component; both need it always-visible.</p>
+  <p class="rationale">Principle #9 · parallelhq sticky header guide 2026, smart-interface-design-patterns.</p>
+</div></div>
+
+<div class="sug"><div class="num">004</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">global</span> Trust/health badges colored on a 4-stop scale (green/amber/red/gray), not binary.</h5>
+  <p>Current trust bar uses neutral tone; switching to a 4-stop scale (≥5/6 green, 3-4 amber, ≤2 red, no-data gray) encodes exception-drivenness in pixel color.</p>
+  <p class="rationale">Principle #8 (exception-driven reading), Commoncog WBR, Tufte data-ink.</p>
+</div></div>
+
+<div class="sug"><div class="num">005</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">global</span> Remove every legend; label series at the endpoint.</h5>
+  <p>Any chart with 2–5 series goes from color-chip-in-corner + label-top to color-at-end-of-line. Saves eye-movement, increases retention.</p>
+  <p class="rationale">Principle #5 · Data Revelations, Evergreen, Depict Data Studio.</p>
+</div></div>
+
+<div class="sug"><div class="num">006</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">global</span> Active titles on every chart. Name the insight, not the dataset.</h5>
+  <p>"Forecast vs Actual" → "US model under-predicts by 23% — baseline gap, not regime double-count." The agent already has the language to generate these (WR callout narrative pipeline).</p>
+  <p class="rationale">Principle #2 · Urban Institute, Practical Reporting, MIT Sloan "Visually Consumable".</p>
+</div></div>
+
+<div class="sug"><div class="num">007</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">global</span> Inline sparklines inside KPI cards.</h5>
+  <p>Any card that shows a current value should also show the 6-week trace next to it, no axis, no labels. Zero clutter, +1 dimension of information.</p>
+  <p class="rationale">Principle #4 · Tufte sparkline theory, Observable "Big Insights Small Spaces", shadcn sparkline tables.</p>
+</div></div>
+
+<div class="sug"><div class="num">008</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">global</span> Every exception block carries a recommended action.</h5>
+  <p>The projection engine's "Trust this less → Switch to Pessimistic" is the pattern. Weekly review forecast-hit-rate exception deserves "If miss > 20%, escalate to Brandon" prompt baked into the UI.</p>
+  <p class="rationale">Principle #10 · Ethos App "Dashboards to Stories", Luzmo State of Dashboards 2025.</p>
+</div></div>
+
+<div class="sug"><div class="num">009</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">global</span> Deprecate the text fallback "X · Y · Z" subtitle bar.</h5>
+  <p>The "Callout narrative + full-year tracker · Data as of Wed Apr 29 · Forecast through 2026-04-19" line is three unrelated facts in one run-on. Split: page role goes in title, provenance goes in footer.</p>
+  <p class="rationale">Principle #19 · Matt Ström UI Density, smart-interface-design-patterns.</p>
+</div></div>
+
+<div class="sug"><div class="num">010</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">global</span> Color semantics fixed and published.</h5>
+  <p>Purple = actual, green = good / on-plan / NB, amber = at-risk / Brand, red = bad / off-plan. One palette, one meaning per color, documented. Currently our two pages don't agree.</p>
+  <p class="rationale">nastengraph "Stop Coloring Retention Tables", Stephen Few on consistency, clicdata "Dashboard Design Mistakes".</p>
+</div></div>
+
+<div class="sug"><div class="num">011</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">global</span> 6-12 graph pattern as the default time-series layout.</h5>
+  <p>Two panels side by side: 6 weeks weekly on left, 12 months monthly on right, shared Y, target markers, prior-year ghost line. Both pages adopt this for every trend chart.</p>
+  <p class="rationale">Principle #6 · Commoncog Amazon WBR (primary spec), thdpth analysis, 400+ metric review.</p>
+</div></div>
+
+<div class="sug"><div class="num">012</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">global</span> Box scores under every 6-12 graph.</h5>
+  <p>Fixed set of footer numbers — WoW%, YoY%, vs-OP2%, 4wk avg, 13wk avg — for every metric. Same six fields every week. Lets the reader pattern-match.</p>
+  <p class="rationale">Principle #6 · Commoncog on Amazon's box scores, Eugene Wei on end-of-line labels.</p>
+</div></div>
+
+<div class="sug"><div class="num">013</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">global</span> Prior-year ghost line on every time series.</h5>
+  <p>Faded pink/gray line behind the current-year line. Same-week-last-year context is the single most-asked comparison in the callouts and should be always-visible, not derived from text.</p>
+  <p class="rationale">Principle #6 · Amazon WBR explicit spec.</p>
+</div></div>
+
+<div class="sug"><div class="num">014</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">global</span> Jump-to nav collapsed to a single hover menu in the sticky header.</h5>
+  <p>8-item horizontal strip of links eats 40px of top-of-fold on every page load. Most users don't use it — collapse to a "sections ▾" menu.</p>
+  <p class="rationale">Principle #19 · progressive disclosure (IBM design, IxDF 2026).</p>
+</div></div>
+
+<div class="sug"><div class="num">015</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">global</span> Keyboard: J/K to move between weeks, R to reset, / to focus market picker.</h5>
+  <p>Bloomberg / Linear / Superhuman have trained power users to expect single-key navigation. Richard is a power user of this page; 2 keystrokes to move a week is worth 5 minutes a month.</p>
+  <p class="rationale">Bloomberg Terminal paradigm, PowerToys Command Palette, Linear keyboard-first design.</p>
+</div></div>
+
+<div class="sug"><div class="num">016</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">global</span> "?" opens keyboard shortcuts overlay.</h5>
+  <p>Microsoft + every keyboard-first app ships this. One-line addition; discoverability + muscle memory in one.</p>
+  <p class="rationale">Microsoft Power BI "Shift+?" convention.</p>
+</div></div>
+
+<div class="sug"><div class="num">017</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">global</span> URL state carries market, week, metric, and scroll section.</h5>
+  <p>Weekly review URL already has ?market=US&week=W17. Add &section= and scroll position so a Slack-pasted link lands on the exact panel. Richard already does this manually — formalize.</p>
+  <p class="rationale">Practical productivity; arXiv "Functional and Semantic Roles of Text in Interactive Dashboards" 2407.14451.</p>
+</div></div>
+
+<div class="sug"><div class="num">018</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">global</span> Hover on any market badge shows a tiny panel with 6-week sparkline, not just a tooltip string.</h5>
+  <p>Current tooltips are text ("US: 6 graded weeks, 2 inside CI"). Replace with a 150×40 floating card containing a sparkline of that market's forecast error over 6 weeks.</p>
+  <p class="rationale">Principle #4 + Tableau "Viz in Tooltip", Power BI modern tooltips (GA 2026).</p>
+</div></div>
+
+<div class="sug"><div class="num">019</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">global</span> Dark mode toggle in the header, default light.</h5>
+  <p>Natural20's research (2026) says true-black is bad, dark-grey #121212 is good. Bloomberg-style pro aesthetic for evening review. Low-effort, optional.</p>
+  <p class="rationale">Natural 20 "Designing High-Density AI News Aggregators" — 47-50% of users have astigmatism; halation research.</p>
+</div></div>
+
+<div class="sug"><div class="num">020</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">global</span> Print stylesheet that renders each section as a landscape 4-up 6-12 graph.</h5>
+  <p>If Richard ever prints the page for a 1:1 or to read on a plane, it should look like a WBR deck, not a browser tab. Separate @media print CSS, 2 hours of work.</p>
+  <p class="rationale">Amazon WBR printed spec, Commoncog explicit.</p>
+</div></div>
+
+<div class="sug"><div class="num">021</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">global</span> Downloadable CSV / snapshot PNG for every chart and table, one click.</h5>
+  <p>Richard frequently copy-pastes numbers into Slack or Quip. Give every chart a ⋯ menu with "Copy as table" / "Download PNG".</p>
+  <p class="rationale">Eleken "Why Users Ignore Dashboards" — 72% of users export to Excel anyway; meet them halfway.</p>
+</div></div>
+
+<div class="sug"><div class="num">022</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">global</span> Cross-filter: clicking a market badge in the trust bar filters every panel on the page, including disclosures when expanded.</h5>
+  <p>Looker / Power BI / Observable linked brushing. Right now the market filter only filters some panels; a click should cascade.</p>
+  <p class="rationale">Observable "Linked Brushing" 2025, Dawiso cross-filtering, Databricks community article.</p>
+</div></div>
+
+<div class="sug"><div class="num">023</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">global</span> Auto-dismiss "routine variation" exception banners after 24 hours of being seen.</h5>
+  <p>If Richard has acknowledged an exception (scrolled past it, clicked it), don't re-show it for 24 hours. Ambient UI, not aggressive UI.</p>
+  <p class="rationale">soul.md invisible-over-visible; anti-novelty-effect design.</p>
+</div></div>
+
+<div class="sug"><div class="num">024</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">global</span> A small "why am I seeing this?" chip beside every auto-generated narrative or inference.</h5>
+  <p>Opens a panel that shows the underlying SQL / function / data source. Debug + trust + epistemology all in one.</p>
+  <p class="rationale">Commoncog WBR — "how is this measured?" is one of Amazon's three most-asked WBR questions; arXiv "Functional Roles of Text".</p>
+</div></div>
+
+
+
+<h3 id="a-wr">4.2 Weekly review <span class="h-count">44 suggestions</span></h3>
+
+<div class="sug"><div class="num">025</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">wr</span> Forecast trust bar replaces the region filter entirely.</h5>
+  <p>The sticky trust bar already carries the market axis; adding a second market selector below it is redundant. Click a market badge to select; color already tells you whether to trust the forecast for that market. Collapses 120+ px of vertical space on top-of-fold.</p>
+  <p class="rationale">Principle #3 + #9 · Richard's explicit direction; Amazon WBR one-dimensional market axis.</p>
+</div></div>
+
+<div class="sug"><div class="num">026</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">wr</span> Make the trust bar sticky to viewport top, not page-relative.</h5>
+  <p>Currently sits above the controls and scrolls away. Pin to <code>position: sticky; top: 0</code> with the header. Market selection stays visible even when reading the Q/Q detail tables 2,000 px down.</p>
+  <p class="rationale">Principle #9 · parallelhq 2026 sticky header guide, Bloomberg persistent status strip.</p>
+</div></div>
+
+<div class="sug"><div class="num">027</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">wr</span> EU5 drill-down inlined: clicking EU5 expands UK/DE/FR/IT/ES badges <em>inside</em> the trust bar on the next row.</h5>
+  <p>Today the sub-market row is a separate band. Fold it into the trust bar so the visual grammar stays one-row-of-market-badges whether or not a region is expanded.</p>
+  <p class="rationale">Subtraction before addition (soul.md #3) · preserves the "click a badge to switch" model for submarkets too.</p>
+</div></div>
+
+<div class="sug"><div class="num">028</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">wr</span> Remove the global metric filter (Regs / Cost / CPA).</h5>
+  <p>Only controls the KPI row. Charts have their own Regs/Spend/Both toggles, narrative is metric-agnostic, variance table always shows regs. Dropping it removes a decision Richard doesn't need to make, and forces the KPI row to show all metrics as side-by-side cards (better density).</p>
+  <p class="rationale">soul.md #6 (reduce decisions not options) · Linear dashboards 2025 "fewer filters, more cards".</p>
+</div></div>
+
+<div class="sug"><div class="num">029</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">wr</span> KPI row becomes 4 cards: Latest regs, vs OP2, CPA, YTD regs — each with a 6-week sparkline.</h5>
+  <p>Replaces the current 4-card row (YTD, Latest, WoW, vs OP2) which is almost all first-derivative. Show level + trend in each card instead of isolating WoW into its own tile.</p>
+  <p class="rationale">Principles #4 + #7 · Evidence-dev BigValue component, shadcn stat-hero-metric-with-sparkline, Linear "pair every metric with trailing highs/lows".</p>
+</div></div>
+
+<div class="sug"><div class="num">030</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">wr</span> vs-OP2 card rendered as a bullet chart, not a number.</h5>
+  <p>Bar = actual, tick = OP2 target, three soft qualitative bands behind (behind/on/ahead). Scannable in under a second; the same number the current card shows, but with visual context baked in.</p>
+  <p class="rationale">Principle #15 · Stephen Few bullet chart (2005), Sigma Computing guide, Stacey Barr PuMP Way.</p>
+</div></div>
+
+<div class="sug"><div class="num">031</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">wr</span> Headline sentence at top-of-fold, replacing the 4-fact opening paragraph.</h5>
+  <p>One-line template: <em>"{Market} drove {regs} ({WoW}) on {spend pct} spend. {Channel} led ({pct}); {other} {direction}. Pacing {pct} vs OP2."</em> Deterministic, tweet-length, no prose.</p>
+  <p class="rationale">Principle #20 · Prezent QBR guide, FT "chart title as decision".</p>
+</div></div>
+
+<div class="sug"><div class="num">032</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">wr</span> Exception banner below headline — only renders when there's an exception.</h5>
+  <p>Red-on-dark strip with label <code>EXCEPTION · FORECAST</code>, a bolded diagnosis sentence, and a recommended action with an inline link. Invisible on routine weeks; loud when something moves &gt;20% or calibration drifts.</p>
+  <p class="rationale">Principles #8 + #10 · projection engine's "Trust this less → Switch to Pessimistic" is the template we already ship.</p>
+</div></div>
+
+<div class="sug"><div class="num">033</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">wr</span> Three-question strip moved above the fold, right after the headline.</h5>
+  <p>Currently buried after KPIs. Amazon's customer-first ordering (customer experience → business result → pacing) is the frame; it should lead, not trail.</p>
+  <p class="rationale">Principle #7 · Bryar + Carr "Working Backwards", Commoncog.</p>
+</div></div>
+
+<div class="sug"><div class="num">034</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">wr</span> Calibration scorecard (4 cards) replaced by a reliability diagram + signed-error bar.</h5>
+  <p>Predicted on X, observed on Y, diagonal = perfect. Signed-error-per-week bars to the right. The current four cards (first-pred err, latest, in-CI, skill) can sit <em>below</em> as a box-score footer — but the primary signal should be visual.</p>
+  <p class="rationale">Principle #11 · PNAS "Stable reliability diagrams", arXiv 2501.19047 on ECE, Bank of England fan-chart conventions.</p>
+</div></div>
+
+<div class="sug"><div class="num">035</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">wr</span> WoW decomposition table colored by deviation from row median, not absolute direction.</h5>
+  <p>Current table uses symmetric good/bad hue on signed deltas. Switch to a diverging scale around the row median for the "share of total Δ" column so the outlier driver pops visually.</p>
+  <p class="rationale">Principle #16 · nastengraph "Stop Coloring Retention Tables", Stephanie Evergreen diverging palettes.</p>
+</div></div>
+
+<div class="sug"><div class="num">036</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">wr</span> Footer block — not subtitle block — for provenance.</h5>
+  <p>Move "Data as of Wed Apr 29 · Forecast through 2026-04-19" and methodology version out of the top-of-fold and into a slim footer strip. Top-of-fold is for signal.</p>
+  <p class="rationale">Principle #19 · Matt Ström UI Density analysis.</p>
+</div></div>
+
+<div class="sug"><div class="num">037</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">wr</span> Chart axis toggles (Regs/Spend/Both) move from toolbar-above to a minimal segmented control in the chart corner.</h5>
+  <p>The toolbar eats 36px above every chart. The same control rendered as a 3-cell segmented pill in the chart's top-right corner is 20px tall and feels integrated.</p>
+  <p class="rationale">Datawrapper axis-tick refinement principles, Grafana inline panel controls.</p>
+</div></div>
+
+<div class="sug"><div class="num">038</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">wr</span> The "What happened" chart gets a now-line and a target-line with endpoint labels, not a legend.</h5>
+  <p>Blue line = actual, faded green line = OP2 weekly, labels at the rightmost point. Remove whatever top-of-chart legend exists today.</p>
+  <p class="rationale">Principles #5 + #6 · Amazon WBR target-as-green-triangle; Eugene Wei on endpoint labeling.</p>
+</div></div>
+
+<div class="sug"><div class="num">039</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">wr</span> The "How did we do" forecast-error chart becomes a signed bar with a 0-line and the CI band as a light rectangle behind.</h5>
+  <p>Each bar = that week's signed error. Bars inside the CI band are muted; bars outside are fully saturated. Replaces the overlaid-line chart that's hard to read at small sizes.</p>
+  <p class="rationale">Principle #8 · Datawrapper diverging column guides, Storytelling with Data "signed deltas".</p>
+</div></div>
+
+<div class="sug"><div class="num">040</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">wr</span> Prior-week thread: strip of six 64x24 sparklines above the chart instead of textual week links.</h5>
+  <p>Six micro-charts, each labeled W12–W17, clicking a sparkline scrubs the page to that week. Currently a horizontal text pager. Same footprint, much more context.</p>
+  <p class="rationale">Principle #4 · Observable "Big Insights Small Spaces"; Apple Watch complications as reference.</p>
+</div></div>
+
+<div class="sug"><div class="num">041</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> Every exception has a "notify Brandon" button.</h5>
+  <p>Pre-composed Slack draft with week, metric, miss percentage, and the diagnosis sentence from the exception banner. Reduces a 2-minute action to one click.</p>
+  <p class="rationale">Principle #10 · soul.md #6 reduce-decisions-not-options.</p>
+</div></div>
+
+<div class="sug"><div class="num">042</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> Replace "Channels" disclosure with a two-column Brand/NB side-by-side summary card that's always visible.</h5>
+  <p>Channel split is central to every weekly narrative. Collapsing it behind a disclosure buries one of the most-asked questions. Keep disclosure for the per-term detail table inside, but show the summary metrics by default.</p>
+  <p class="rationale">Progressive disclosure principle #9 applied correctly — essential first, detail on demand.</p>
+</div></div>
+
+<div class="sug"><div class="num">043</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> Small-multiple panel: 6-week actuals-vs-OP2 for all 12 markets on a single row.</h5>
+  <p>A 3×4 grid of 160×80 panels, one per market, all on shared Y. Instant cross-market read of who's on-plan and who isn't. Replaces the mental tab-hopping current users do.</p>
+  <p class="rationale">Principle #13 · Tufte small multiples, Juice Analytics, Datawrapper "small multiple line charts" 2024.</p>
+</div></div>
+
+<div class="sug"><div class="num">044</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> Leaderboard pill row below small-multiples: markets sorted by YoY%, not by hard-coded order.</h5>
+  <p>Sorts the 12 markets into best→worst by current week's YoY regs growth. Makes the "who's hot, who's not" question a 1-second scan.</p>
+  <p class="rationale">Linear "fewer dashboards, denser" pattern; GJO challenge-style leaderboard.</p>
+</div></div>
+
+<div class="sug"><div class="num">045</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> Week-over-week header cell: WoW% as a tiny bar alongside the number, not just text.</h5>
+  <p>In the weekly detail table, every WoW% column cell gets a horizontal mini-bar (red left, green right, zero-line center). Eye reads pattern, not numbers.</p>
+  <p class="rationale">Principle #4 · Tableau in-cell bars, Datawrapper table-with-bars.</p>
+</div></div>
+
+<div class="sug"><div class="num">046</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> YoY column added to weekly detail table.</h5>
+  <p>Currently the table has WoW but not YoY. Amazon WBR says YoY is non-optional — seasonal context a single WoW can't provide.</p>
+  <p class="rationale">Principle #6 · Commoncog YoY framing, thdpth.</p>
+</div></div>
+
+<div class="sug"><div class="num">047</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> Monthly detail table re-sorted to put the current month first, then prior-month for context, then MTD-vs-last-MTD column.</h5>
+  <p>Reading order matches the decision ("how's April going compared to March"). Current ordering is oldest-to-newest, which is wrong for a weekly review.</p>
+  <p class="rationale">Principle #7 · Luzmo state-of-dashboards 2025 on decision-oriented ordering.</p>
+</div></div>
+
+<div class="sug"><div class="num">048</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> Quarterly table gets a Q-end forecast column with ± range.</h5>
+  <p>Currently shows YTD and last-quarter totals but no "where will Q land." Add the projection engine's quarterly projection inline so the answer is on this page too.</p>
+  <p class="rationale">Cross-page integration per principle #17.</p>
+</div></div>
+
+<div class="sug"><div class="num">049</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> Context panel: auto-extract named entities (Brandon, Kate, Megan, Carlos, Lorena) from notes and link to their memory.md profile.</h5>
+  <p>The context block is prose. Convert mentions of stakeholders into clickable chips that open their relationship entry in memory.md. Turns a reading artifact into a navigation surface.</p>
+  <p class="rationale">Functional roles of text (arXiv 2407.14451) · progressive disclosure of profile data.</p>
+</div></div>
+
+<div class="sug"><div class="num">050</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> Narrative has "since last week" as its own paragraph after the headline, sourced from the prior week's callout diff.</h5>
+  <p>Auto-generated "Since W16, the biggest changes are: (1) NB lifted 10% after Polaris rollout; (2) forecast miss widened from -15% to -23%". Reader doesn't need to compare two weekly-review tabs.</p>
+  <p class="rationale">Amazon WBR exception-driven reading (#8); Commoncog.</p>
+</div></div>
+
+<div class="sug"><div class="num">051</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> Event-annotation lanes on the two main charts.</h5>
+  <p>Dashed verticals at weeks where the callout pipeline detected regime changes, holidays, or Q-close events. Label on hover. Currently events live in the external_factors prose; move them onto the chart.</p>
+  <p class="rationale">Principle #3 · FT Burn-Murdoch inline annotation; shipped pattern in projection.html.</p>
+</div></div>
+
+<div class="sug"><div class="num">052</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> Scrub-the-chart updates the narrative + three-question + variance panels to the hovered week, with a fixed "scrubbing W14" overlay.</h5>
+  <p>Already shipped (WR-A10). Polish: make the overlay badge slide in from the top-right instead of the current top-left, and add a keyboard modifier (Shift+hover) to pin the scrub state.</p>
+  <p class="rationale">Robinhood Advanced Charts; Coinbase Design System scrubber; WR-A10 groundwork.</p>
+</div></div>
+
+<div class="sug"><div class="num">053</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> Variance decomposition: swap the table for a horizontal waterfall.</h5>
+  <p>Visual grammar of "prior week → brand contribution → NB contribution → residual → current week" as a compact 400px waterfall. Same data, ~3x faster to read.</p>
+  <p class="rationale">FT Visual Vocabulary waterfall entry; Datawrapper column chart patterns.</p>
+</div></div>
+
+<div class="sug"><div class="num">054</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> Forecast hit rate: show the 6-week in-CI streak as an FTX-style dot row (● ● ○ ● ● ○) not just "4 / 6".</h5>
+  <p>Six dots, filled = inside-CI, hollow = outside. Streak visible without text; pattern of misses (beginning-of-window vs recent) becomes readable.</p>
+  <p class="rationale">Unit charts (Storytellingwithdata 2021); GitHub contribution graphs as reference.</p>
+</div></div>
+
+<div class="sug"><div class="num">055</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> Period-state tint (refit / holiday / q_close / normal) promoted to the sticky header, not just on the callout card.</h5>
+  <p>Right now it's a small badge inside one panel. If the active week is a q_close or refit week, the sticky header gets a left-edge accent so the global context isn't buried.</p>
+  <p class="rationale">soul.md invisible-over-visible; WR-B6 groundwork.</p>
+</div></div>
+
+<div class="sug"><div class="num">056</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> "This week's hardest thing" — a single auto-extracted action pulled from the exception banner + context.</h5>
+  <p>Surface the most-likely cross-week action (e.g. "Reply to Lorena on MX Q2 PO — forecast-exception-correlated"). Appears in a compact card below the headline.</p>
+  <p class="rationale">soul.md aMCC "hard thing" discipline; Commoncog "what should we do about it".</p>
+</div></div>
+
+<div class="sug"><div class="num">057</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> Export this week as a 1-page PDF that matches Brandon's 1:1 deck template.</h5>
+  <p>PDF export with: headline, 6-12 chart, exception banner, three-question strip, forecast hit rate, box-score footer. Print stylesheet + puppeteer render. Fire-and-forget for 1:1 prep.</p>
+  <p class="rationale">Amazon WBR printed spec; Commoncog "format never changes".</p>
+</div></div>
+
+<div class="sug"><div class="num">058</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">wr</span> When market = WW (rollup), KPI cards show member-market breakdown on hover instead of rollup-only numbers.</h5>
+  <p>Tooltip on any WW KPI card shows a 12-row table of that metric per member market (sorted by contribution) so the reader can see "who's driving the rollup without switching tabs."</p>
+  <p class="rationale">Tableau viz-in-tooltip, Power BI modern tooltips, cross-filter principle.</p>
+</div></div>
+
+<div class="sug"><div class="num">059</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">wr</span> Horizon chart of all 12 markets' forecast errors over 26 weeks, as an optional power-user panel.</h5>
+  <p>One row per market, compressed vertically, color-banded by error magnitude. Lets Richard spot which markets have persistent miss patterns vs one-off misses. Behind a disclosure or a "Power view" toggle.</p>
+  <p class="rationale">Principle #14 · CHI 2009 horizon graph paper, Panopticon.</p>
+</div></div>
+
+<div class="sug"><div class="num">060</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">wr</span> Week picker becomes a mini-calendar grid (W1–W17 as 17 squares) with color = forecast trust for that week.</h5>
+  <p>Currently a dropdown + prev/next. Mini-grid makes the "when did we last miss" question a glance.</p>
+  <p class="rationale">Datawrapper calendar heatmap; Apple Health-style year-view.</p>
+</div></div>
+
+<div class="sug"><div class="num">061</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">wr</span> "Compare" mode: hold Shift and click two markets in the trust bar to show them side-by-side as a 2-column small-multiple.</h5>
+  <p>Saves the mental A/B that Richard does today with two browser tabs.</p>
+  <p class="rationale">Observable linked-brushing; arXiv "Functional Roles of Text" 2407.14451.</p>
+</div></div>
+
+<div class="sug"><div class="num">062</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">wr</span> A "what would Kate ask" lens toggle — re-renders the page with the three questions Kate tends to ask first pinned as sticky callouts.</h5>
+  <p>Ties into lens-kate.md steering file. Not a separate page; an overlay of skimmer-grade annotations for when Richard is prepping a skip-level.</p>
+  <p class="rationale">Context-specific framing; lens-kate.md shipped infrastructure.</p>
+</div></div>
+
+<div class="sug"><div class="num">063</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">wr</span> Chart screenshots auto-uploaded to a /weekly-review/assets/ folder per week for easy Slack-paste.</h5>
+  <p>Hook runs on dashboard generation; PNG of each chart saved with a stable URL. Slack drop = one click instead of screenshot-tool dance.</p>
+  <p class="rationale">Eleken "users export anyway" (72%); reduce-friction principle.</p>
+</div></div>
+
+<div class="sug"><div class="num">064</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">wr</span> Long-press on a chart exports a 3-panel 6-12 WBR-style image for printing.</h5>
+  <p>Cross-platform gesture (mouse hold / touch long-press) produces a landscape PNG laid out as the Amazon WBR spec: 6-week weekly, 12-month monthly, target triangles, YoY ghost line, box score.</p>
+  <p class="rationale">Amazon WBR specific layout per Commoncog.</p>
+</div></div>
+
+<div class="sug"><div class="num">065</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">wr</span> The callout text has a "rewrite for Kate / rewrite for Brandon" button inline.</h5>
+  <p>Uses the lens steering files to re-render the callout narrative with the target reader's framing. Saves the manual rewrite Richard does before 1:1s.</p>
+  <p class="rationale">lens-{kate,brandon,todd}.md; Prezent "framing for audience."</p>
+</div></div>
+
+<div class="sug"><div class="num">066</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">wr</span> Weekly review supports a "note" field per week that persists to ~/shared/context/active/wbr-notes.md.</h5>
+  <p>Simple textarea below the narrative; on save, writes to a flat markdown file. Seeds next week's 3-question context panel with "last week you noted: …".</p>
+  <p class="rationale">Portable-body principle · notebook continuity.</p>
+</div></div>
+
+<div class="sug"><div class="num">067</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">wr</span> TOC hidden behind `g then c` (vim-style) keyboard nav; removed from always-visible DOM.</h5>
+  <p>Two-key jumps for power users; invisible otherwise. "?" reveals the map. Frees ~40px of top-of-fold.</p>
+  <p class="rationale">Vim/Linear keyboard grammar; Bloomberg Terminal paradigm.</p>
+</div></div>
+
+<div class="sug"><div class="num">068</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">wr</span> Scrub-the-chart also updates the URL hash so the scrubbed view is shareable.</h5>
+  <p>Today scrub is in-session. Adding hash sync means a Slack link reproduces "I was hovering on W14 when I noticed this".</p>
+  <p class="rationale">URL-state principle #17 · linked brushing extended to shareable state.</p>
+</div></div>
+
+
+
+<h3 id="a-pe">4.3 Projection engine <span class="h-count">20 suggestions</span></h3>
+
+<div class="sug"><div class="num">069</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">pe</span> Persist the selected market + period + scenario across sessions via localStorage + URL.</h5>
+  <p>Today a reload resets to MX · Y2026. The weekly review already persists state per market; port the pattern over.</p>
+  <p class="rationale">URL-state principle #17; soul.md invisible-over-visible.</p>
+</div></div>
+
+<div class="sug"><div class="num">070</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">pe</span> Confidence band shown as a full fan, not as a single "90% range: $515K–$2.17M" text string.</h5>
+  <p>Projection chart gets a shaded fan with 50%, 80%, 90% bands (darker = tighter). Narrow fan = confidence; wide = "trust less." Works seamlessly with the existing contribution/decay chart.</p>
+  <p class="rationale">Principle #12 · Wikipedia Fan Chart, Bank of England 1996, R Journal RJ-2015-002.</p>
+</div></div>
+
+<div class="sug"><div class="num">071</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">pe</span> Alerts panel moves above the decomposition chart, not below.</h5>
+  <p>The page's most actionable signal (trust recommendation + suggested scenario switch) is currently 1,800 px down. Put it right under the headline where it's seen.</p>
+  <p class="rationale">Principle #10 · Ethos App "Dashboards to Stories".</p>
+</div></div>
+
+<div class="sug"><div class="num">072</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">pe</span> Lift-multiplier slider gets tick marks at 0.5× / 1.0× / 1.5× / 2.0× and a visible current-value bubble.</h5>
+  <p>Today the slider has no ticks; users can't distinguish 0.93× from 1.02× visually. Ticks + bubble make the lever scannable.</p>
+  <p class="rationale">Material 3 slider guidelines; Shadcn slider component.</p>
+</div></div>
+
+<div class="sug"><div class="num">073</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">pe</span> The four scenario tiles (Pessimistic / Conservative / Base / Optimistic) become segmented-control buttons in the top controls row.</h5>
+  <p>Currently mid-page cards; promoting them into the sticky header makes scenario-switching a one-keystroke action alongside market/period.</p>
+  <p class="rationale">Principle #9 · progressive disclosure applied correctly — primary controls primary, detail secondary.</p>
+</div></div>
+
+<div class="sug"><div class="num">074</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">pe</span> Decomposition bar gets numeric tick labels on the bar itself, not just a legend.</h5>
+  <p>"Seasonal 80% · Campaign 15% · Judgment 5%" appears <em>inside</em> the bar segments when they're wide enough; hover-tooltip otherwise. No separate legend row.</p>
+  <p class="rationale">Principle #5 · direct labels; Datawrapper stacked-bar conventions.</p>
+</div></div>
+
+<div class="sug"><div class="num">075</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">pe</span> Market health bar on PE and forecast trust bar on WR must render identically.</h5>
+  <p>Same pill shape, same color stops, same hover affordance, same click-to-select behavior. Today they diverge in subtle ways; they're the same concept in two UIs.</p>
+  <p class="rationale">Principle #17 · consistency enables pattern-matching.</p>
+</div></div>
+
+<div class="sug"><div class="num">076</div><div>
+  <h5><span class="pill t1">T1</span><span class="pill area">pe</span> Model view drawer — add a "provenance" tab showing the exact SQL / function / fit call that produced the number.</h5>
+  <p>Currently shows inputs and outputs; add the executable lineage. Addresses the "how is this calculated" WBR question directly.</p>
+  <p class="rationale">Principle #24 cross-linked; Commoncog "how is this measured" is one of Amazon's 3 most-asked WBR questions.</p>
+</div></div>
+
+<div class="sug"><div class="num">077</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">pe</span> NB spend lever gets a second lever: "Brand CPC ceiling" (to simulate bidding posture).</h5>
+  <p>Brand scenarios are currently binary (anchor locked or not). A slider on the Brand side lets Richard test "what if we bid more aggressively on Brand."</p>
+  <p class="rationale">Domain-specific extension; aligns with the projection engine's scenario-exploration goal.</p>
+</div></div>
+
+<div class="sug"><div class="num">078</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">pe</span> Distance-to-target tab becomes a bullet-chart row: one bullet per market.</h5>
+  <p>Currently a table. A dozen bullets with target tick + acceptable bands renders the "who's behind, who's ahead, by how much" question in a single visual.</p>
+  <p class="rationale">Principle #15 · Stephen Few bullet; Sigma bullet-chart guide.</p>
+</div></div>
+
+<div class="sug"><div class="num">079</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">pe</span> Contribution/decay chart is promoted out of the disclosure — always visible, below the headline.</h5>
+  <p>This chart <em>is</em> the projection. Hiding it behind a "decomposition + backtest" disclosure buries the main visualization behind a collapse control.</p>
+  <p class="rationale">Progressive disclosure misapplied; principle #9.</p>
+</div></div>
+
+<div class="sug"><div class="num">080</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">pe</span> All 10 markets view uses small multiples, not a 10-row table.</h5>
+  <p>A 5×2 grid of 200×100 spend+regs dual-line panels beats the existing tabular view for cross-market pattern recognition.</p>
+  <p class="rationale">Principle #13 · Tufte; Datawrapper small-multiples 2024.</p>
+</div></div>
+
+<div class="sug"><div class="num">081</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">pe</span> Period selector gets a visual range preview on hover.</h5>
+  <p>Hovering "Next 2 years (MY2)" shows a ghost bar on the chart indicating the time window the selection will cover. Disambiguates rolling vs calendar periods.</p>
+  <p class="rationale">Anticipatory design (smart-interface-design-patterns.com).</p>
+</div></div>
+
+<div class="sug"><div class="num">082</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">pe</span> Saved scenarios list gets 6-week sparklines so each saved entry shows its projected trajectory inline.</h5>
+  <p>Scenarios today are text ("MX · Y2026 · 75% · 1.2×"). Add a sparkline to each saved row so the list is visual.</p>
+  <p class="rationale">Principle #4 · sparklines in list views; shadcn tables-with-sparklines.</p>
+</div></div>
+
+<div class="sug"><div class="num">083</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">pe</span> CPR (cost per registration) card gets a horizontal box-and-whisker showing the projected range vs actual distribution YTD.</h5>
+  <p>Single-number CPR hides the variance. A box-whisker communicates "we're at $60 but actual weeks have ranged $45–$85".</p>
+  <p class="rationale">FT Visual Vocabulary box plot; Datawrapper range-plot.</p>
+</div></div>
+
+<div class="sug"><div class="num">084</div><div>
+  <h5><span class="pill t2">T2</span><span class="pill area">pe</span> Narrative panel auto-summarizes scenario changes: "Switching to Pessimistic dropped regs by 9.4K and lifted efficiency to 81%."</h5>
+  <p>Deterministic diff between current and previous scenario, rendered as one line under the headline.</p>
+  <p class="rationale">Principle #20 · headline-first framing; WR's since-last-week pattern.</p>
+</div></div>
+
+<div class="sug"><div class="num">085</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">pe</span> Side-by-side scenario comparison: pick two saved scenarios and render both projections overlaid with a diff table below.</h5>
+  <p>"Base vs Pessimistic" view. Two lines, shared axis, diff table: spend delta, regs delta, CPR delta.</p>
+  <p class="rationale">Observable linked-brushing; Stripe Sigma query comparisons.</p>
+</div></div>
+
+<div class="sug"><div class="num">086</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">pe</span> Backtest disclosure becomes a 4-up of reliability diagrams (one per quarter) when expanded.</h5>
+  <p>Currently a single view. 4-up breaks out per-quarter calibration; lets Richard see "model was well-calibrated Q1, drifted Q2."</p>
+  <p class="rationale">Principle #11 · PNAS stable reliability diagrams.</p>
+</div></div>
+
+<div class="sug"><div class="num">087</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">pe</span> Export scenario as a shareable link with the full state (market, period, target, driver, lift, active scenario).</h5>
+  <p>One URL reproduces everything. Slack-paste-friendly; embedding in docs-friendly.</p>
+  <p class="rationale">URL-state (#17); arXiv 2407.14451 on shareable state.</p>
+</div></div>
+
+<div class="sug"><div class="num">088</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">pe</span> Alerts panel sends a Slack DM to Richard when a computed recommendation changes (e.g., yesterday said Base, today says Pessimistic).</h5>
+  <p>Optional opt-in. Reduces the "check the dashboard" tax; when nothing's changed, silence.</p>
+  <p class="rationale">Invisible-over-visible principle; PostHog alerts model.</p>
+</div></div>
+
+
+<h3 id="a-exp">4.4 Experimental / novel chart forms <span class="h-count">12 suggestions</span></h3>
+
+<div class="sug"><div class="num">089</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> Waffle charts for channel mix (Brand vs NB share of regs) — one 10×10 grid per market.</h5>
+  <p>Each filled square = 1% of regs, color-coded by channel. Unusual but instantly readable share-of-whole. Useful for "who contributes to YTD" views.</p>
+  <p class="rationale">Storytellingwithdata 2021 unit charts; chiangs/waffle-chart reference.</p>
+</div></div>
+
+<div class="sug"><div class="num">090</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> Slope chart for "this week's top 5 NB terms by regs lift."</h5>
+  <p>Two vertical axes (last week, this week), a thin line per term connecting the two. Crossings = mix changes. Higher information density than a bar chart of deltas.</p>
+  <p class="rationale">Tufte slope chart; Evergreen slope-chart guide 2024.</p>
+</div></div>
+
+<div class="sug"><div class="num">091</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> Calendar heatmap of daily spend / daily regs, one tile per day, color = YoY delta.</h5>
+  <p>GitHub-style contribution grid. Lets Richard see seasonality and anomalies across a full year at one glance.</p>
+  <p class="rationale">D3 calendar-heatmap idiom; Datawrapper calendar-grid 2024.</p>
+</div></div>
+
+<div class="sug"><div class="num">092</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> Strip plot of per-week forecast errors overlaid with the CI band — one row per market, 26 weeks wide.</h5>
+  <p>Horizon-chart alternative: instead of banding the error, dot-plot each week's error along a fixed 0-line per row. Outliers pop as distance-from-line.</p>
+  <p class="rationale">Observable Plot strip plot; arXiv "Compact Visualization Techniques" 1906.07377.</p>
+</div></div>
+
+<div class="sug"><div class="num">093</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> "Narrative scrollytelling" mode: press N to step through the page one explanation at a time, with auto-scroll + focus highlight.</h5>
+  <p>Pudding / NYT Upshot style. Each press moves to the next key insight and narrates why it matters. Power-user alternative to free scrolling.</p>
+  <p class="rationale">Pudding "Making Internet Things" guide; Scrollytelling pattern from NYT Upshot.</p>
+</div></div>
+
+<div class="sug"><div class="num">094</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> Sankey for Q-over-Q budget flow: where the quarter's spend went across channels / markets / campaigns.</h5>
+  <p>Sankeys are overused but accurate for this use case. One Sankey per quarter: budget nodes → channel nodes → market nodes → result nodes.</p>
+  <p class="rationale">FT Visual Vocabulary flow entry; Datawrapper Sankey cautions.</p>
+</div></div>
+
+<div class="sug"><div class="num">095</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> Curve-fit the actuals line instead of connecting raw weekly points.</h5>
+  <p>Vercel Analytics 2022 technique: fit a polynomial of best order (using train/test split) to smooth noise while preserving the real trend. Chart becomes readable at a glance; raw points available on hover.</p>
+  <p class="rationale">Vercel "Curve fitting for charts" (2022); FT Chart Doctor smoothing guidance.</p>
+</div></div>
+
+<div class="sug"><div class="num">096</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> "Fingertip feel" dense view: one page, 12 markets × 4 metrics × 6-12 chart, no disclosures.</h5>
+  <p>96 small-multiple panels on one page. Experimental because it breaks progressive disclosure — but Amazon's WBR is literally this. Worth prototyping for power-user mode.</p>
+  <p class="rationale">Principle #6 · Commoncog "Amazon WBR", Bloomberg Terminal density reference.</p>
+</div></div>
+
+<div class="sug"><div class="num">097</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> Inline text sparklines in the narrative paragraph ("regs <sparkline> landed W17 at 9.4K").</h5>
+  <p>Word-sized graphics embedded in prose, per Tufte's original thesis. Turns the narrative from a paragraph of numbers into a paragraph of claims visually anchored to their data.</p>
+  <p class="rationale">Tufte "Sparkline theory and practice" (canonical); Observable inline sparkline examples.</p>
+</div></div>
+
+<div class="sug"><div class="num">098</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> Auto-generate a 20-second GIF of the prior-6-weeks scrub, shareable in Slack.</h5>
+  <p>When Richard posts "here's the trend this month," a cinemagraph of the chart with scrub over 6 weeks beats a static PNG. Uses puppeteer + gifski.</p>
+  <p class="rationale">Pudding cinemagraph patterns; Robinhood Advanced Charts inspiration.</p>
+</div></div>
+
+<div class="sug"><div class="num">099</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> "Explain this number" — right-click any number on the page to trigger a small LLM that narrates how it was computed and what moved it this week.</h5>
+  <p>Uses the existing provenance metadata + last-2-weeks data to produce a 2-sentence plain-English explanation. Complements the "why am I seeing this" chip (#024).</p>
+  <p class="rationale">arXiv "Functional Roles of Text" 2407.14451; Commoncog WBR "how is this measured?".</p>
+</div></div>
+
+<div class="sug"><div class="num">100</div><div>
+  <h5><span class="pill t3">T3</span><span class="pill area">exp</span> Per-market archetype layout system: spend-only markets (JP, AU) get a different top-of-fold than regs-and-efficiency markets (US, MX).</h5>
+  <p>WR-A11 already classifies markets into archetypes. Push further: spend-only markets lead with a spend-discipline scorecard (budget pacing, CPC stability, cost-per-click YoY) instead of regs. Archetype determines grid, not just a CSS class.</p>
+  <p class="rationale">Principle #9 (design for the right audience — Linear 2025) applied per-market; WR-A11 groundwork.</p>
+</div></div>
+
+
+<h2 id="a-sources">5. Sources <span class="h-count">55 references</span></h2>
+<p>All sources are from the past ~3 years unless they're canonical (Tufte, Few, Bryar+Carr). Content paraphrased for licensing compliance; inline links preserved so originals can be verified. Grouped by theme.</p>
+
+<h4>Amazon WBR practice + culture</h4>
+<ul class="sources">
+  <li><a href="https://commoncog.com/the-amazon-weekly-business-review/">Commoncog — The Amazon Weekly Business Review (via Bezos's Shadow)</a></li>
+  <li><a href="https://www.thdpth.com/p/why-amazon-charts-beat-yours">thdpth — Why Amazon charts beat yours (2025)</a></li>
+  <li><a href="https://nastengraph.medium.com/how-to-measure-your-business-the-amazon-way-3e22850ef666">Anastasiya Kuznetsova — How to measure your business the Amazon way (2025)</a></li>
+  <li><a href="https://conikeec.substack.com/p/the-secret-sauce-behind-amazons-weekly-98f">conikeec — The Secret Sauce Behind Amazon's Weekly Business Review</a></li>
+  <li><a href="https://www.holistics.io/blog/how-amazon-measures/">Holistics — This is How Amazon Measures Itself</a></li>
+  <li><a href="https://nanoglobals.com/glossary/wbr-weekly-business-review/">Nanoglobals — WBR (Weekly Business Review): Definition and Meaning</a></li>
+  <li><a href="https://www.strategicnerds.com/blog/the-wbr-survival-guide">Strategic Nerds — The WBR Survival Guide</a></li>
+  <li><a href="https://workingbackwards.com/wbr-app/">Working Backwards — WBR App + user manual</a></li>
+  <li><a href="https://medium.com/@david.ashirov/instrumenting-business-metric-visualizations-for-wbr-purposes-d5e8ba3e47a7">David Ashirov — Instrumenting Business Metric Visualizations for WBR</a></li>
+</ul>
+
+<h4>Dashboard design principles (modern)</h4>
+<ul class="sources">
+  <li><a href="https://linear.app/now/dashboards-best-practices">Linear — Best practices for designing Linear Dashboards (2025)</a></li>
+  <li><a href="https://posthog.com/blog/posthog-marketing">PostHog — How (and why) our marketing team uses PostHog</a></li>
+  <li><a href="https://vercel.com/blog/dashboard-redesign">Vercel — Dashboard redesign</a></li>
+  <li><a href="https://vercel.com/blog/curve-fitting-for-charts-better-visualizations-for-vercel-analytics">Vercel — Curve fitting for charts (2022)</a></li>
+  <li><a href="https://blakecrosley.com/guides/design/vercel">Blake Crosley — Developer Experience as Design (Vercel case)</a></li>
+  <li><a href="https://observablehq.com/blog/canvases-summer-release-2025">Observable — Canvases Summer Release (2025)</a></li>
+  <li><a href="https://observablehq.com/blog/dashboards-in-observable-canvases">Observable — Building a better approach to dashboards</a></li>
+  <li><a href="https://artofstyleframe.com/blog/dashboard-design-patterns-web-apps/">Art of Styleframe — Dashboard Design Patterns for Modern Web Apps (2026)</a></li>
+  <li><a href="https://sranalytics.io/blog/business-intelligence-dashboards/">SR Analytics — Business Intelligence Dashboards That Drive Decisions</a></li>
+  <li><a href="https://improvado.io/blog/dashboard-design-guide">Improvado — Build High-Impact Marketing Dashboards (2026)</a></li>
+  <li><a href="https://uxpilot.ai/blogs/dashboard-design-principles">UX Pilot — 12 Dashboard Design Principles For Better UX</a></li>
+</ul>
+
+<h4>Tufte + visualization canon</h4>
+<ul class="sources">
+  <li><a href="https://www.edwardtufte.com/notebook/sparkline-theory-and-practice-edward-tufte/">Edward Tufte — Sparkline theory and practice</a></li>
+  <li><a href="https://www.edwardtufte.com/notebook/executive-dashboards/">Edward Tufte — Executive dashboards</a></li>
+  <li><a href="https://edwardtufte.github.io/tufte-css/">Tufte CSS (Liepmann)</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Small_multiple">Wikipedia — Small multiple</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Sparkline">Wikipedia — Sparkline</a></li>
+</ul>
+
+<h4>FT + data journalism</h4>
+<ul class="sources">
+  <li><a href="https://fountn.design/resource/financial-times-visual-vocabulary-pdf/">FT Visual Vocabulary (PDF)</a></li>
+  <li><a href="https://github.com/Financial-Times/chart-doctor">Financial Times — Chart Doctor repo</a></li>
+  <li><a href="https://pudding.cool/process/how-to-make-dope-shit-part-1">The Pudding — Making Internet Things, Part 1</a></li>
+  <li><a href="https://pudding.cool/process/how-to-make-dope-shit-part-2/">The Pudding — Making Internet Things, Part 2</a></li>
+  <li><a href="https://www.fastcompany.com/3040817/the-upshot-where-the-new-york-times-is-redesigning-news">Fast Company — The Upshot: Where The NYT Is Redesigning News</a></li>
+</ul>
+
+<h4>Datawrapper + Lisa Charlotte Muth</h4>
+<ul class="sources">
+  <li><a href="https://www.datawrapper.de/blog/small-multiple-line-charts">Datawrapper — Small multiple line charts (2024)</a></li>
+  <li><a href="https://www.datawrapper.de/blog/small-multiple-column-charts">Datawrapper — Small multiple column charts</a></li>
+  <li><a href="https://www.datawrapper.de/blog/better-more-responsive-annotations-in-Datawrapper-data-visualizations/">Datawrapper — Better, more responsive text annotations</a></li>
+  <li><a href="https://www.datawrapper.de/blog/chart-types-guide">Datawrapper — A friendly guide to choosing a chart type (2025)</a></li>
+  <li><a href="http://www.datawrapper.de/blog/new-axis-ticks">Datawrapper — Our new axis ticks make your charts easier to read</a></li>
+</ul>
+
+<h4>KPI cards + sparklines + hero metrics</h4>
+<ul class="sources">
+  <li><a href="https://www.mintlify.com/evidence-dev/evidence/api/data/big-value">Evidence-dev — BigValue component</a></li>
+  <li><a href="https://www.shadcn.io/blocks/stats-hero-metric-with-sparkline">shadcn.io — Stats Hero Metric With Sparkline</a></li>
+  <li><a href="https://tabulareditor.com/blog/kpi-card-best-practices-dashboard-design">Tabular Editor — KPI card best practices</a></li>
+  <li><a href="https://thedataschool.com/lisa-hitch/creating-neat-kpi-cards/">The Data School — Creating neat KPI cards</a></li>
+  <li><a href="https://grafana.com/docs/grafana/latest/panels-visualizations/visualizations/stat/">Grafana — Stat visualization docs</a></li>
+</ul>
+
+<h4>Bullet charts + Stephen Few</h4>
+<ul class="sources">
+  <li><a href="https://www.sigmacomputing.com/blog/bullet-charts-track-performance-goals">Sigma Computing — How to use bullet charts</a></li>
+  <li><a href="https://www.clearlyandsimply.com/2017/05/an-alternative-design-of-bullet-graphs/">Clearly and Simply — An Alternative Design of Bullet Graphs</a></li>
+  <li><a href="https://www.staceybarr.com/measure-up/how-to-build-a-bullet-graph-the-pump-way/">Stacey Barr — How to Build a Bullet Graph the PuMP Way</a></li>
+</ul>
+
+<h4>Storytelling with data + declutter</h4>
+<ul class="sources">
+  <li><a href="http://www.storytellingwithdata.com/blog/2022/2/1/swdchallenge-declutter-and-focus">Storytelling with Data — Declutter &amp; Focus</a></li>
+  <li><a href="https://storytellingwithdata.com/blog/2021/8/24/learnings-about-unit-charts">Storytelling with Data — Learning about unit charts</a></li>
+</ul>
+
+<h4>Horizon charts + dense time series</h4>
+<ul class="sources">
+  <li><a href="https://vis.berkeley.edu/papers/horizon/">Berkeley VIS — Sizing the Horizon (CHI 2009)</a></li>
+  <li><a href="http://arxiv.org/abs/1906.07377v1">arXiv — Evaluation of four compact visualization techniques for time series</a></li>
+</ul>
+
+<h4>Progressive disclosure + command-driven UI</h4>
+<ul class="sources">
+  <li><a href="https://www.interaction-design.org/literature/topics/progressive-disclosure">Interaction Design Foundation — Progressive Disclosure (2026)</a></li>
+  <li><a href="https://blog.logrocket.com/ux-design/progressive-disclosure-ux-types-use-cases/">LogRocket — Progressive disclosure in UX design</a></li>
+  <li><a href="https://www.saasframe.io/blog/the-rise-of-cmd-k-why-every-saas-needs-a-search-modal-in-2026">SaasFrame — The Rise of CMD+K (2026)</a></li>
+</ul>
+
+<h4>Robinhood / Coinbase chart interaction</h4>
+<ul class="sources">
+  <li><a href="https://cds.coinbase.com/components/charts/Scrubber/">Coinbase Design System — Scrubber</a></li>
+  <li><a href="https://robinhood.com/us/en/newsroom/introducing-robinhood-advanced-charts/">Robinhood — Introducing Advanced Charts</a></li>
+  <li><a href="https://tradingview.github.io/lightweight-charts/tutorials/customization/crosshair">TradingView — Lightweight Charts crosshair</a></li>
+</ul>
+
+<h4>Bloomberg + density as aesthetic</h4>
+<ul class="sources">
+  <li><a href="https://natural20.com/coverage/architecture-of-cognitive-efficiency-designing-ai-news-aggregators">Natural 20 — Designing High-Density AI News Aggregators (2025)</a></li>
+  <li><a href="https://medium.com/@katschoi/bloomberg-saving-private-ryan-and-the-art-science-of-design-75f3cad054d9">Katschoi — Bloomberg, Saving Private Ryan, and Design</a></li>
+  <li><a href="https://news.ycombinator.com/item?id=19153875">HN — Bloomberg Terminal as information-dense reference</a></li>
+  <li><a href="https://www.core77.com/posts/24893/moneymaking-multi-monitor-mayhem-and-why-some-prefer-interface-design-that-sucks-24893">Core77 — Why some prefer interface design that sucks (Bloomberg case)</a></li>
+</ul>
+
+
+<div class="box good">
+<strong>Summary — the single sentence.</strong> The weekly review can close 60% of the gap with the projection engine by making the forecast trust bar the single sticky header, replacing the region + metric filters with direct-click market badges, and moving the headline + exception + three-question strip above the KPI grid. The remaining 40% is chart craft: active titles, inline sparklines, bullet charts for vs-OP2, a reliability diagram for calibration, and a 6-12 graph as the default time-series grammar.
+</div>
+
+<p class="footnote">Report compiled 2026-04-29 · kiro-local · content paraphrased from cited sources for licensing compliance; original phrasings remain the property of their authors. Not published; lives in <code>agent-bridge/context/intake/dashboard-research/</code> pending Richard's review.</p>
+
+</div>
+</body>
+</html>

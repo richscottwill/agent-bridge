@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WR + MPE redesign — high-fidelity mockups</title>
+<style>
+:root{
+  --bg:#f7f6f2; --ink:#1a1a1a; --ink-2:#4a4a4a; --ink-3:#8a8a8a; --rule:#d9d5c8; --rule-soft:#ece9de;
+  --panel:#fff; --accent:#0066cc; --good:#2f7d3e; --warn:#b06a00; --bad:#a63939;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --serif:ui-serif,Georgia,"Iowan Old Style",serif;
+  --sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5}
+.wrap{max-width:1280px;margin:0 auto;padding:28px 40px 80px}
+h1{font-family:var(--serif);font-size:32px;margin:0 0 6px;letter-spacing:-0.01em}
+h2{font-family:var(--serif);font-size:22px;margin:44px 0 6px;padding-top:12px;border-top:1px solid var(--rule)}
+.kicker{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px}
+.lede{font-size:15px;color:var(--ink-2);max-width:72ch;margin:0 0 12px}
+.meta{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.spec{background:#fbf9f3;border:1px dashed var(--rule);border-radius:4px;padding:12px 16px;margin:10px 0 0;font-size:13px}
+.spec code{font-family:var(--mono);font-size:12px;background:#efece1;padding:1px 5px;border-radius:2px}
+.spec h4{margin:0 0 6px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-3);font-weight:700;font-family:var(--sans)}
+.mock{background:#fff;border:1px solid var(--rule);border-radius:4px;padding:0;margin:14px 0 8px;overflow:hidden}
+.mock-frame{padding:16px 20px}
+
+/* ---------- M1 sticky header ---------- */
+.m1-stick{background:#fff;border-bottom:1px solid var(--rule);padding:10px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.m1-title{font-family:var(--serif);font-size:16px;color:var(--ink);white-space:nowrap}
+.m1-title .m1-kicker{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:2px}
+.m1-trust{display:flex;gap:4px;flex-wrap:wrap;flex:1 1 auto}
+.m1-pill{font-family:var(--mono);font-size:11px;padding:3px 7px;border-radius:3px;border:1px solid transparent;cursor:pointer;font-variant-numeric:tabular-nums}
+.m1-pill.on {background:#e4f2e8;border-color:#b9e0c4;color:#1e5c2a}
+.m1-pill.mid{background:#fbefd9;border-color:#ecd7a4;color:#6b3f00}
+.m1-pill.off{background:#fdecec;border-color:#f2a4a4;color:#8a1f1f}
+.m1-pill.na {background:#f0f0f0;border-color:#dedede;color:#777}
+.m1-pill.sel{outline:2px solid var(--accent);outline-offset:1px}
+.m1-right{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.m1-weeknav{display:inline-flex;align-items:center;gap:4px}
+.m1-weeknav button{border:1px solid var(--rule);background:#fff;padding:3px 8px;font-family:var(--mono);font-size:11px;border-radius:2px;cursor:pointer}
+
+/* ---------- M2 headline + exception ---------- */
+.m2-head{padding:18px 22px 14px}
+.m2-kicker{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
+.m2-headline{font-family:var(--serif);font-size:22px;line-height:1.3;color:var(--ink);margin:0}
+.m2-headline strong{font-weight:700}
+.m2-exception{margin:12px 22px 18px;border:1px solid #f2a4a4;background:linear-gradient(90deg,#fff7f5 0%,#fff 80%);border-left:3px solid var(--bad);padding:10px 14px;border-radius:3px}
+.m2-exception-kicker{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;color:var(--bad);font-weight:700}
+.m2-exception-body{font-family:var(--serif);font-size:15px;color:var(--ink);margin-top:3px}
+.m2-exception-body em{color:var(--ink-2);font-style:normal;font-size:13px;font-family:var(--sans)}
+.m2-exception-body a{color:var(--accent);text-decoration:none;font-family:var(--sans);font-size:13px;border-bottom:1px dotted var(--accent)}
+
+/* ---------- M3 KPI cards with sparklines ---------- */
+.m3-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:16px 22px}
+.m3-card{background:#fff;border:1px solid var(--rule);border-radius:3px;padding:12px 14px}
+.m3-card-k{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3)}
+.m3-card-big{font-family:var(--serif);font-size:26px;line-height:1.1;margin:4px 0 4px;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:6px}
+.m3-card-big svg{flex:0 0 auto}
+.m3-delta{font-family:var(--mono);font-size:11px}
+.m3-delta.good{color:var(--good)}
+.m3-delta.bad{color:var(--bad)}
+.m3-delta.mute{color:var(--ink-3)}
+
+/* ---------- M4 bullet chart ---------- */
+.m4-card{padding:12px 14px}
+.m4-track{position:relative;height:18px;background:#f3efe3;border-radius:2px;margin-top:8px;overflow:hidden}
+.m4-bands{position:absolute;inset:0;display:flex}
+.m4-bands div{height:100%}
+.m4-band1{background:#fdecec;width:80%}
+.m4-band2{background:#fbefd9;width:10%}
+.m4-band3{background:#e4f2e8;width:10%}
+.m4-fill{position:absolute;left:0;top:3px;bottom:3px;background:var(--accent);border-radius:1px}
+.m4-tick{position:absolute;top:-4px;bottom:-4px;width:3px;background:var(--ink)}
+.m4-scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-top:4px}
+
+/* ---------- M5 reliability diagram ---------- */
+.m5-chart{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:14px 18px}
+.m5-svg-wrap{border:1px solid var(--rule-soft);border-radius:3px;padding:6px}
+.m5-caption{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--ink-3);text-transform:uppercase;margin-bottom:4px}
+
+/* ---------- M6 small multiples ---------- */
+.m6-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px 18px}
+.m6-panel{border:1px solid var(--rule-soft);border-radius:3px;padding:6px 8px;background:#fff}
+.m6-panel-label{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:10px;margin-bottom:3px}
+.m6-mk{color:var(--ink);font-weight:700;font-size:11px}
+.m6-val{color:var(--ink-3);font-variant-numeric:tabular-nums}
+
+/* ---------- M7 6-12 chart ---------- */
+.m7{padding:14px 18px}
+.m7-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.m7-title{font-family:var(--serif);font-size:15px;color:var(--ink)}
+.m7-sub{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.m7-box{display:grid;grid-template-columns:repeat(5,1fr);gap:0;background:#fafaf5;border:1px solid var(--rule-soft);border-radius:2px;margin-top:10px;padding:8px 10px;font-family:var(--mono);font-size:11px}
+.m7-box div{text-align:center}
+.m7-box div b{display:block;font-family:var(--serif);font-size:14px;color:var(--ink);margin-top:2px;font-variant-numeric:tabular-nums}
+.m7-box .pos{color:var(--good)}
+.m7-box .neg{color:var(--bad)}
+
+/* ---------- M8 signed error bars ---------- */
+.m8{padding:14px 18px}
+
+/* ---------- M9 prior-week thread ---------- */
+.m9-thread{display:flex;gap:8px;padding:14px 18px;align-items:flex-end}
+.m9-cell{flex:1 1 0;text-align:center;cursor:pointer;padding:4px;border-radius:3px;border:1px solid transparent}
+.m9-cell:hover{background:#fbf9f3;border-color:var(--rule)}
+.m9-cell.current{background:#eef5ff;border-color:var(--accent)}
+.m9-cell-label{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-top:4px}
+.m9-cell-val{font-family:var(--mono);font-size:10px;color:var(--ink);font-variant-numeric:tabular-nums;margin-top:2px}
+.m9-cell.hit .m9-cell-val{color:var(--good)}
+.m9-cell.miss .m9-cell-val{color:var(--bad)}
+
+/* ---------- M10 fan chart ---------- */
+.m10{padding:14px 18px}
+
+footer{margin-top:48px;padding-top:18px;border-top:1px dashed var(--rule);font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="kicker">kiro-local · 2026-04-30 · mockups for kiro-server</p>
+<h1>Dashboard redesign mockups — reference for implementation</h1>
+<p class="lede">Ten high-fidelity static mockups of the Tier-1 changes recommended in <code>dashboard-redesign-report.html</code>. Each block shows the target state + implementation spec (files, selectors, data fields). Screenshots live in <code>mockups/screenshots/</code>. Numbers in all mockups are real W17 data (US market) so the visual density is accurate to production scale.</p>
+</div>
+
+
+<div class="wrap">
+
+<!-- ============================== M1 ============================== -->
+<h2 id="m1">M1 · Sticky header + trust bar + week nav — single row</h2>
+<p class="meta">Scope: weekly-review.html · Replaces: <code>.wr-leaderboard</code> + <code>.wr-controls</code> + <code>#regionTabs</code> + <code>#metricTabs</code> + <code>#weekSelect</code>. Refs: suggestions #025, #026, #028, #036.</p>
+
+<div class="mock">
+<div class="m1-stick" id="snap-m1">
+  <div class="m1-title">
+    <span class="m1-kicker">Weekly Review</span>
+    <strong>US · W17</strong>
+  </div>
+  <div class="m1-trust" aria-label="Forecast trust · last 6 weeks in-CI">
+    <span class="m1-pill on"  title="WW: 6/6 inside CI">WW 6/6</span>
+    <span class="m1-pill off sel" title="US: 2/6 — selected">US 2/6</span>
+    <span class="m1-pill on"  title="EU5: 6/6">EU5 6/6</span>
+    <span class="m1-pill on"  title="CA: 5/6">CA 5/6</span>
+    <span class="m1-pill on"  title="UK: 6/6">UK 6/6</span>
+    <span class="m1-pill mid" title="DE: 4/6">DE 4/6</span>
+    <span class="m1-pill on"  title="FR: 6/6">FR 6/6</span>
+    <span class="m1-pill on"  title="IT: 5/6">IT 5/6</span>
+    <span class="m1-pill on"  title="ES: 5/6">ES 5/6</span>
+    <span class="m1-pill on"  title="JP: 6/6">JP 6/6</span>
+    <span class="m1-pill off" title="MX: 1/6">MX 1/6</span>
+    <span class="m1-pill mid" title="AU: 3/6">AU 3/6</span>
+  </div>
+  <div class="m1-right">
+    <div class="m1-weeknav">
+      <button aria-label="Previous week">◀</button>
+      <span style="font-family:var(--mono);font-size:12px;color:var(--ink);padding:0 2px">W17</span>
+      <button aria-label="Next week" disabled style="opacity:.35">▶</button>
+    </div>
+    <span>· Apr 25</span>
+  </div>
+</div>
+</div>
+
+<div class="spec">
+  <h4>Implementation spec</h4>
+  <div><b>File:</b> <code>agent-bridge/dashboards/performance/weekly-review.html</code></div>
+  <div><b>DOM replace:</b> collapse <code>.wr-leaderboard</code> + <code>.wr-controls</code> (lines ~978-1014) into one <code>&lt;header class="wr-stick"&gt;</code> element with three children: <code>.m1-title</code>, <code>.m1-trust</code>, <code>.m1-right</code>.</div>
+  <div><b>Data:</b> trust pills reuse existing <code>leaderboardPills</code> data derivation in <code>renderAccuracyLeaderboard()</code>; add CSS class <code>on</code> (≥5/6), <code>mid</code> (3-4/6), <code>off</code> (≤2/6), <code>na</code> (insufficient).</div>
+  <div><b>Remove:</b> <code>#regionTabs</code>, <code>#submarketTabs</code>, <code>#metricTabs</code>, and their <code>init()</code> wiring. EU5 member markets (UK/DE/FR/IT/ES) stay as independent pills in the trust bar — they're already there.</div>
+  <div><b>Sticky:</b> <code>position: sticky; top: 0; z-index: 20; backdrop-filter: blur(4px)</code>. Already partially set on <code>.wr-controls</code>; port to new wrapper.</div>
+  <div><b>State:</b> <code>curMetric</code> removed — <code>renderKPIs()</code> locks to default per <code>defaultMetricForMarket()</code>. KPI row renders all metrics as side-by-side cards (see M3).</div>
+</div>
+
+
+<!-- ============================== M2 ============================== -->
+<h2 id="m2">M2 · Headline sentence + exception banner</h2>
+<p class="meta">Scope: weekly-review.html · Replaces: current 4-fact opening paragraph in <code>#calloutNarrative</code>. Refs: suggestions #031, #032, #020 (principle), #008.</p>
+
+<div class="mock">
+<div class="m2-head">
+  <div class="m2-kicker">Headline · US · W17 · Apr 19–25</div>
+  <p class="m2-headline">US drove <strong>9,109 regs</strong> (+6.0% WoW) on +7% spend. <strong>NB led</strong> the lift (+10%); Brand softened (−3%). Pacing <strong>+17.2%</strong> vs OP2.</p>
+</div>
+<div class="m2-exception">
+  <div class="m2-exception-kicker">⚠ EXCEPTION · FORECAST</div>
+  <div class="m2-exception-body">
+    <strong>Model under-predicted W16 by 23%.</strong> Baseline gap, not regime double-count.
+    <em>· 4 of last 6 weeks landed outside CI · skill −188% vs naive ·</em>
+    <a href="#">open investigation →</a>
+  </div>
+</div>
+</div>
+
+<div class="spec">
+  <h4>Implementation spec</h4>
+  <div><b>File:</b> <code>weekly-review.html</code> — <code>renderCalloutNarrative()</code></div>
+  <div><b>Template:</b> <code>"{market} drove {regs} regs ({wow_sign}{wow_pct}% WoW) on {spend_sign}{spend_pct}% spend. {top_channel} led the lift ({top_pct}); {other_channel} {dir} ({other_pct}). Pacing {op2_sign}{op2_pct}% vs OP2."</code></div>
+  <div><b>Data:</b> <code>callout.metrics.regs</code>, <code>.regs_wow</code>, <code>.spend_wow</code>, <code>brand_detail.lw_regs</code> vs <code>nb_detail.lw_regs</code> to pick top channel, <code>callout.projections.month_end.vs_op2_spend</code> or weekly <code>op2_regs</code>.</div>
+  <div><b>Exception condition:</b> <code>predictions_history[market].latest.score === 'MISS'</code> OR <code>abs(error_pct) &gt; 15</code> OR <code>in_ci_rate_6w &lt; 0.5</code>. Show banner only when condition triggers; hide entirely otherwise.</div>
+  <div><b>Exception text template:</b> <code>"Model under-predicted {wk} by {pct}%. {diagnosis}."</code> where <code>diagnosis</code> pulled from <code>callout.forecast_diagnosis</code> (new field — may need pipeline stub).</div>
+  <div><b>Remove:</b> the current narrative prose generation that produces "WW drove — registrations, CPA $0. Total spend —." when data is missing. Replace with explicit empty-state.</div>
+</div>
+
+
+<!-- ============================== M3 ============================== -->
+<h2 id="m3">M3 · KPI cards with inline sparklines — 4-up</h2>
+<p class="meta">Scope: weekly-review.html · Replaces: current <code>.wr-kpi-row</code> 4 cards. Refs: suggestions #029, #007 (sparklines principle), #002 (tabular-nums).</p>
+
+<div class="mock">
+<div class="m3-grid" id="snap-m3">
+  <div class="m3-card">
+    <div class="m3-card-k">Latest week · regs</div>
+    <div class="m3-card-big">9,109
+      <svg width="72" height="18" viewBox="0 0 72 18" preserveAspectRatio="none">
+        <polyline points="0,12 12,10 24,14 36,8 48,6 60,4 72,3" fill="none" stroke="#0066cc" stroke-width="1.5"/>
+        <circle cx="72" cy="3" r="2" fill="#0066cc"/>
+      </svg>
+    </div>
+    <div class="m3-delta good">+6.0% WoW · +65% YoY</div>
+  </div>
+  <div class="m3-card">
+    <div class="m3-card-k">vs OP2 plan</div>
+    <div class="m3-card-big" style="font-size:20px">+17.2%</div>
+    <div class="m4-track" style="margin-top:8px">
+      <div class="m4-bands"><div class="m4-band1"></div><div class="m4-band2"></div><div class="m4-band3"></div></div>
+      <div class="m4-fill" style="width:58%"></div>
+      <div class="m4-tick" style="left:50%"></div>
+    </div>
+    <div class="m3-delta good" style="margin-top:4px">+1,340 ahead of 7,769 plan</div>
+  </div>
+  <div class="m3-card">
+    <div class="m3-card-k">CPA</div>
+    <div class="m3-card-big">$77
+      <svg width="72" height="18" viewBox="0 0 72 18" preserveAspectRatio="none">
+        <polyline points="0,6 12,8 24,5 36,9 48,7 60,6 72,5" fill="none" stroke="#2f7d3e" stroke-width="1.5"/>
+        <circle cx="72" cy="5" r="2" fill="#2f7d3e"/>
+      </svg>
+    </div>
+    <div class="m3-delta good">−3% WoW · NB $76 · Brand $69</div>
+  </div>
+  <div class="m3-card">
+    <div class="m3-card-k">YTD regs</div>
+    <div class="m3-card-big" style="font-size:20px">136,636</div>
+    <div class="m3-delta mute">W1–W16 · on pace 1.41× plan</div>
+  </div>
+</div>
+</div>
+
+<div class="spec">
+  <h4>Implementation spec</h4>
+  <div><b>File:</b> <code>weekly-review.html</code> — <code>renderKPIs()</code> (~line 2420)</div>
+  <div><b>Data:</b> sparkline uses last 6 weeks from <code>FORECAST.weekly[market]</code> filtered to <code>wk ≤ max_week</code>. Normalize to card width (72px) and card height (18px), invert y since SVG y grows down.</div>
+  <div><b>Sparkline helper:</b> add <code>renderSparkline(values, color, width=72, height=18)</code> returning an SVG string. Endpoint dot always filled. Use tabular-nums on the big number.</div>
+  <div><b>Card 2 bullet:</b> reuses bullet styles from M4. Bands: red (0-80%), amber (80-95%), green (95-120%). Fill = actual as % of OP2. Tick = 100% marker.</div>
+  <div><b>CSS:</b> apply <code>font-variant-numeric: tabular-nums</code> to <code>.hero-kpi-value</code> site-wide. One line; existing class.</div>
+</div>
+
+
+<!-- ============================== M4 ============================== -->
+<h2 id="m4">M4 · Bullet chart — Stephen Few 2005 · used on every "vs target" card</h2>
+<p class="meta">Scope: both pages · Replaces: "vs OP2" text tile on WR; "distance to target" table on MPE. Refs: suggestions #030, #078, #015 (principle).</p>
+
+<div class="mock">
+<div class="m4-card" id="snap-m4" style="padding:18px 22px">
+  <div class="m3-card-k">US · Y2026 · spend vs OP2</div>
+  <div style="display:flex;align-items:baseline;gap:8px;margin-top:4px">
+    <span style="font-family:var(--serif);font-size:22px;font-variant-numeric:tabular-nums">$5.21M</span>
+    <span style="font-family:var(--mono);font-size:12px;color:var(--good)">+12% ahead of plan</span>
+  </div>
+  <div class="m4-track" style="margin-top:10px">
+    <div class="m4-bands"><div class="m4-band1"></div><div class="m4-band2"></div><div class="m4-band3"></div></div>
+    <div class="m4-fill" style="width:68%"></div>
+    <div class="m4-tick" style="left:60%"></div>
+  </div>
+  <div class="m4-scale"><span>$0</span><span>$3.12M 60% (behind)</span><span>$5.21M actual</span><span>$8.69M 100%</span></div>
+</div>
+</div>
+
+<div class="spec">
+  <h4>Implementation spec</h4>
+  <div><b>New component:</b> <code>renderBullet({ actual, target, bands, width })</code> — returns HTML string.</div>
+  <div><b>Bands default:</b> <code>[[0, 0.8, 'bad'], [0.8, 0.95, 'warn'], [0.95, 1.2, 'good']]</code> where percentages are fractions of target. Override per context (e.g., CPA uses inverted bands).</div>
+  <div><b>Usage sites:</b> (1) WR KPI vs-OP2 card, (2) MPE distance-to-target tab, (3) MPE efficiency card, (4) any "progress vs plan" tile across both pages.</div>
+  <div><b>Accessibility:</b> <code>role="meter"</code>, <code>aria-valuemin/max/now</code>, <code>aria-label</code> with plain-English state ("US spend at 60% of yearly plan, ahead of pacing").</div>
+</div>
+
+
+<!-- ============================== M5 ============================== -->
+<h2 id="m5">M5 · Reliability diagram + signed-error bars · replaces 4-card calibration scorecard</h2>
+<p class="meta">Scope: weekly-review.html · Replaces: <code>#scorecardRow</code> (4 cards). Refs: suggestions #034, #011 (principle).</p>
+
+<div class="mock">
+<div class="m5-chart" id="snap-m5">
+  <div class="m5-svg-wrap">
+    <div class="m5-caption">Reliability diagram · last 6 weeks</div>
+    <svg viewBox="0 0 200 160" width="100%" preserveAspectRatio="xMidYMid meet">
+      <!-- grid -->
+      <rect x="28" y="8" width="164" height="132" fill="none" stroke="#ece9de"/>
+      <line x1="28" y1="74" x2="192" y2="74" stroke="#ece9de" stroke-dasharray="2,3"/>
+      <line x1="110" y1="8" x2="110" y2="140" stroke="#ece9de" stroke-dasharray="2,3"/>
+      <!-- perfect diagonal -->
+      <line x1="28" y1="140" x2="192" y2="8" stroke="#8a8a8a" stroke-dasharray="3,3"/>
+      <!-- CI band -->
+      <polygon points="28,140 28,120 192,28 192,8 " fill="rgba(0,102,204,.06)"/>
+      <polygon points="28,140 28,148 192,48 192,8 " fill="rgba(0,102,204,.06)"/>
+      <!-- model points (under-predicting = below diagonal) -->
+      <g fill="#0066cc">
+        <circle cx="70"  cy="92" r="3.5"/>
+        <circle cx="90"  cy="76" r="3.5"/>
+        <circle cx="110" cy="70" r="3.5"/>
+        <circle cx="130" cy="54" r="3.5"/>
+        <circle cx="150" cy="36" r="3.5"/>
+        <circle cx="172" cy="18" r="3.5"/>
+      </g>
+      <!-- axes labels -->
+      <text x="110" y="158" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="#8a8a8a">predicted regs</text>
+      <text x="10" y="80" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="#8a8a8a" transform="rotate(-90 10 80)">actual regs</text>
+      <text x="185" y="144" font-family="ui-monospace,monospace" font-size="8" fill="#8a8a8a">perfect</text>
+    </svg>
+  </div>
+  <div class="m5-svg-wrap">
+    <div class="m5-caption">Signed error · per week · last 6 wks</div>
+    <svg viewBox="0 0 200 160" width="100%" preserveAspectRatio="xMidYMid meet">
+      <rect x="28" y="8" width="164" height="132" fill="none" stroke="#ece9de"/>
+      <!-- CI band behind bars -->
+      <rect x="28" y="68" width="164" height="12" fill="rgba(47,125,62,.10)"/>
+      <line x1="28" y1="74" x2="192" y2="74" stroke="#8a8a8a" stroke-dasharray="2,3"/>
+      <!-- bars: W11..W16, signed -->
+      <g>
+        <rect x="36"  y="74" width="18" height="22" fill="#a63939"/>
+        <rect x="62"  y="74" width="18" height="14" fill="#a63939"/>
+        <rect x="88"  y="74" width="18" height="30" fill="#a63939"/>
+        <rect x="114" y="74" width="18" height="26" fill="#a63939"/>
+        <rect x="140" y="74" width="18" height="42" fill="#a63939"/>
+        <rect x="166" y="74" width="18" height="20" fill="#a63939"/>
+      </g>
+      <!-- labels -->
+      <g font-family="ui-monospace,monospace" font-size="8" fill="#8a8a8a" text-anchor="middle">
+        <text x="45" y="132">W11</text><text x="71" y="132">W12</text><text x="97" y="132">W13</text>
+        <text x="123" y="132">W14</text><text x="149" y="132">W15</text><text x="175" y="132">W16</text>
+      </g>
+      <text x="22" y="30" text-anchor="end" font-family="ui-monospace,monospace" font-size="8" fill="#8a8a8a">+20%</text>
+      <text x="22" y="76" text-anchor="end" font-family="ui-monospace,monospace" font-size="8" fill="#8a8a8a">0</text>
+      <text x="22" y="122" text-anchor="end" font-family="ui-monospace,monospace" font-size="8" fill="#8a8a8a">−30%</text>
+    </svg>
+  </div>
+</div>
+<div style="padding:4px 20px 14px;display:flex;gap:14px;font-family:var(--mono);font-size:11px;color:var(--ink-2);border-top:1px dashed var(--rule-soft)">
+  <span>first-err <strong>−13.2%</strong></span>
+  <span>latest-err <strong>−12.9%</strong></span>
+  <span>in-CI <strong>6/6</strong></span>
+  <span>skill vs naive <strong style="color:var(--bad)">−115%</strong></span>
+</div>
+</div>
+
+<div class="spec">
+  <h4>Implementation spec</h4>
+  <div><b>File:</b> <code>weekly-review.html</code> + <code>canon-chart.js</code></div>
+  <div><b>Left SVG:</b> reliability diagram. X = predicted, Y = actual, one dot per graded week. Diagonal = perfect. Shaded polygon = ±1σ CI band widened with sample size.</div>
+  <div><b>Right SVG:</b> signed-error column chart. Zero line, CI band as translucent rect, bars fill from zero-line (positive up, negative down). Color by severity: inside CI = muted, outside CI = saturated.</div>
+  <div><b>Box-score row below:</b> keep the 4 current metrics (first-err, latest-err, in-CI, skill) but compact — one line of comma-separated values, not 4 cards. The visuals above are the primary signal.</div>
+  <div><b>Data:</b> all four numbers already derived in <code>renderScorecard()</code> — just render them differently. Reliability dots = <code>predictions_history[market].slice(-6).map(w =&gt; ({x: w.regs.latest_pred, y: w.regs.actual}))</code>.</div>
+</div>
+
+
+<!-- ============================== M6 ============================== -->
+<h2 id="m6">M6 · Small multiples — 12 markets · 6-week actuals vs OP2</h2>
+<p class="meta">Scope: weekly-review.html · New panel, lives between scorecard and main chart. Refs: suggestion #043, #013 (principle).</p>
+
+<div class="mock">
+<div class="m6-grid" id="snap-m6">
+  <!-- 12 panels. Each mini SVG: actual line (accent) + OP2 line (muted). -->
+  <div class="m6-panel"><div class="m6-panel-label"><span class="m6-mk">WW</span><span class="m6-val">+4%</span></div>
+    <svg viewBox="0 0 100 40" width="100%" preserveAspectRatio="none" height="36">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,22 20,20 40,22 60,20 80,18 100,16"/>
+      <polyline fill="none" stroke="#0066cc" stroke-width="1.6" points="0,24 20,22 40,25 60,18 80,14 100,12"/>
+    </svg></div>
+  <div class="m6-panel"><div class="m6-panel-label"><span class="m6-mk">US</span><span class="m6-val" style="color:var(--good)">+17%</span></div>
+    <svg viewBox="0 0 100 40" width="100%" preserveAspectRatio="none" height="36">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,22 20,22 40,22 60,22 80,22 100,22"/>
+      <polyline fill="none" stroke="#0066cc" stroke-width="1.6" points="0,26 20,22 40,20 60,16 80,12 100,8"/>
+    </svg></div>
+  <div class="m6-panel"><div class="m6-panel-label"><span class="m6-mk">EU5</span><span class="m6-val">+2%</span></div>
+    <svg viewBox="0 0 100 40" width="100%" preserveAspectRatio="none" height="36">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,20 20,20 40,20 60,20 80,20 100,20"/>
+      <polyline fill="none" stroke="#0066cc" stroke-width="1.6" points="0,22 20,20 40,21 60,20 80,19 100,18"/>
+    </svg></div>
+  <div class="m6-panel"><div class="m6-panel-label"><span class="m6-mk">CA</span><span class="m6-val" style="color:var(--bad)">−7%</span></div>
+    <svg viewBox="0 0 100 40" width="100%" preserveAspectRatio="none" height="36">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,18 20,18 40,18 60,18 80,18 100,18"/>
+      <polyline fill="none" stroke="#0066cc" stroke-width="1.6" points="0,16 20,18 40,20 60,22 80,24 100,26"/>
+    </svg></div>
+  <div class="m6-panel"><div class="m6-panel-label"><span class="m6-mk">UK</span><span class="m6-val">+1%</span></div>
+    <svg viewBox="0 0 100 40" width="100%" preserveAspectRatio="none" height="36">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,20 20,20 40,20 60,20 80,20 100,20"/>
+      <polyline fill="none" stroke="#0066cc" stroke-width="1.6" points="0,21 20,20 40,20 60,19 80,19 100,19"/>
+    </svg></div>
+  <div class="m6-panel"><div class="m6-panel-label"><span class="m6-mk">DE</span><span class="m6-val" style="color:var(--warn)">−2%</span></div>
+    <svg viewBox="0 0 100 40" width="100%" preserveAspectRatio="none" height="36">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,18 20,18 40,18 60,18 80,18 100,18"/>
+      <polyline fill="none" stroke="#0066cc" stroke-width="1.6" points="0,18 20,19 40,19 60,20 80,20 100,21"/>
+    </svg></div>
+  <div class="m6-panel"><div class="m6-panel-label"><span class="m6-mk">FR</span><span class="m6-val">+3%</span></div>
+    <svg viewBox="0 0 100 40" width="100%" preserveAspectRatio="none" height="36">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,22 20,22 40,22 60,22 80,22 100,22"/>
+      <polyline fill="none" stroke="#0066cc" stroke-width="1.6" points="0,22 20,21 40,21 60,20 80,19 100,18"/>
+    </svg></div>
+  <div class="m6-panel"><div class="m6-panel-label"><span class="m6-mk">IT</span><span class="m6-val">+4%</span></div>
+    <svg viewBox="0 0 100 40" width="100%" preserveAspectRatio="none" height="36">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,22 20,22 40,22 60,22 80,22 100,22"/>
+      <polyline fill="none" stroke="#0066cc" stroke-width="1.6" points="0,24 20,22 40,22 60,20 80,18 100,16"/>
+    </svg></div>
+  <div class="m6-panel"><div class="m6-panel-label"><span class="m6-mk">ES</span><span class="m6-val">0%</span></div>
+    <svg viewBox="0 0 100 40" width="100%" preserveAspectRatio="none" height="36">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,20 20,20 40,20 60,20 80,20 100,20"/>
+      <polyline fill="none" stroke="#0066cc" stroke-width="1.6" points="0,20 20,20 40,20 60,20 80,20 100,20"/>
+    </svg></div>
+  <div class="m6-panel"><div class="m6-panel-label"><span class="m6-mk">JP</span><span class="m6-val" style="color:var(--good)">+10%</span></div>
+    <svg viewBox="0 0 100 40" width="100%" preserveAspectRatio="none" height="36">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,22 20,22 40,22 60,22 80,22 100,22"/>
+      <polyline fill="none" stroke="#0066cc" stroke-width="1.6" points="0,26 20,24 40,22 60,18 80,14 100,10"/>
+    </svg></div>
+  <div class="m6-panel"><div class="m6-panel-label"><span class="m6-mk">MX</span><span class="m6-val" style="color:var(--bad)">−42%</span></div>
+    <svg viewBox="0 0 100 40" width="100%" preserveAspectRatio="none" height="36">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,12 20,12 40,12 60,12 80,12 100,12"/>
+      <polyline fill="none" stroke="#0066cc" stroke-width="1.6" points="0,14 20,18 40,22 60,26 80,30 100,32"/>
+    </svg></div>
+  <div class="m6-panel"><div class="m6-panel-label"><span class="m6-mk">AU</span><span class="m6-val">+0%</span></div>
+    <svg viewBox="0 0 100 40" width="100%" preserveAspectRatio="none" height="36">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,20 20,20 40,20 60,20 80,20 100,20"/>
+      <polyline fill="none" stroke="#0066cc" stroke-width="1.6" points="0,20 20,20 40,20 60,21 80,20 100,20"/>
+    </svg></div>
+</div>
+<div style="padding:4px 20px 12px;font-family:var(--mono);font-size:10px;color:var(--ink-3);border-top:1px dashed var(--rule-soft)">
+  <span style="display:inline-block;width:12px;height:2px;background:#0066cc;vertical-align:middle;margin-right:4px"></span>actuals
+  <span style="margin-left:10px"><span style="display:inline-block;width:12px;height:2px;background:#cdc9bb;vertical-align:middle;margin-right:4px"></span>OP2 plan</span>
+  <span style="margin-left:10px">· 6-wk window · shared Y within each panel</span>
+</div>
+</div>
+
+<div class="spec">
+  <h4>Implementation spec</h4>
+  <div><b>New section:</b> <code>&lt;section id="sec-small-multiples"&gt;</code> placed after the scorecard in <code>weekly-review.html</code>.</div>
+  <div><b>Grid:</b> CSS Grid, <code>repeat(auto-fill, minmax(180px, 1fr))</code> so it reflows 3×4 / 2×6 / 1×12 by viewport.</div>
+  <div><b>Per-panel data:</b> for each market M, take <code>FORECAST.weekly[M].slice(-6)</code>; compute Y extent from both actual and OP2 series so the two lines scale together within that panel. YoY % label = current-week regs vs same-week-prior-year (from <code>metrics.regs_yoy</code>).</div>
+  <div><b>Click behavior:</b> clicking a panel sets <code>curMarket</code> and updates URL. Identical to trust-bar pill click — factor into a <code>selectMarket(mk)</code> helper.</div>
+  <div><b>Color:</b> actual = <code>var(--color-accent)</code> / OP2 = muted (<code>#cdc9bb</code>). No dots, no axes, no legends per panel — title + YoY % is the only text.</div>
+</div>
+
+</div>
+
+
+<div class="wrap">
+
+<!-- ============================== M7 ============================== -->
+<h2 id="m7">M7 · Amazon 6-12 chart — 6 weeks weekly + 12 months monthly, shared title, box-score footer</h2>
+<p class="meta">Scope: both pages · New default time-series panel. Refs: suggestions #011, #012, #013, #006 (principle, Commoncog + thdpth + Ashirov).</p>
+
+<div class="mock">
+<div class="m7" id="snap-m7">
+  <div class="m7-head">
+    <div class="m7-title">US · Registrations · W17 (+6.0% WoW) · Aug YTD (+65% YoY)</div>
+    <div class="m7-sub">primary metric · through 2026-04-25</div>
+  </div>
+  <svg viewBox="0 0 640 200" width="100%" preserveAspectRatio="xMidYMid meet">
+    <!-- left panel: 6 weeks weekly -->
+    <g>
+      <rect x="30" y="14" width="260" height="140" fill="#fafaf5" stroke="#ece9de"/>
+      <text x="30" y="10" font-family="ui-monospace,monospace" font-size="9" fill="#8a8a8a">6 WEEKS · WEEKLY</text>
+      <!-- OP2 target line (muted) -->
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.4" stroke-dasharray="3,3" points="40,90 80,92 120,88 160,86 200,82 240,80 280,78"/>
+      <!-- Prior-year ghost -->
+      <polyline fill="none" stroke="#e5c2c2" stroke-width="1.4" points="40,112 80,110 120,115 160,108 200,105 240,102 280,100"/>
+      <!-- Actual (accent) -->
+      <polyline fill="none" stroke="#0066cc" stroke-width="2" points="40,100 80,94 120,102 160,80 200,72 240,58 280,48"/>
+      <!-- Target markers (green triangles) -->
+      <g fill="#2f7d3e">
+        <polygon points="40,90 44,82 36,82"/>
+        <polygon points="280,78 284,70 276,70"/>
+      </g>
+      <!-- Dots -->
+      <g fill="#0066cc"><circle cx="280" cy="48" r="3"/></g>
+      <!-- Week labels -->
+      <g font-family="ui-monospace,monospace" font-size="8" fill="#8a8a8a" text-anchor="middle">
+        <text x="40" y="172">W11</text><text x="80" y="172">W12</text><text x="120" y="172">W13</text>
+        <text x="160" y="172">W14</text><text x="200" y="172">W15</text><text x="240" y="172">W16</text>
+        <text x="280" y="172">W17</text>
+      </g>
+      <!-- Endpoint labels -->
+      <text x="286" y="52" font-family="ui-monospace,monospace" font-size="9" fill="#0066cc">actual</text>
+      <text x="286" y="82" font-family="ui-monospace,monospace" font-size="9" fill="#6a5d2e">OP2</text>
+      <text x="286" y="103" font-family="ui-monospace,monospace" font-size="9" fill="#b06868">ly</text>
+    </g>
+    <!-- gap -->
+    <line x1="320" y1="14" x2="320" y2="154" stroke="#d9d5c8" stroke-dasharray="2,3"/>
+    <!-- right panel: 12 months monthly -->
+    <g transform="translate(340,0)">
+      <rect x="0" y="14" width="280" height="140" fill="#fafaf5" stroke="#ece9de"/>
+      <text x="0" y="10" font-family="ui-monospace,monospace" font-size="9" fill="#8a8a8a">12 MONTHS · MONTHLY</text>
+      <!-- Prior year ghost (faded) -->
+      <polyline fill="none" stroke="#e5c2c2" stroke-width="1.4" points="10,108 32,110 54,105 76,104 98,102 120,98 142,95 164,96 186,92 208,94 230,96 252,90 274,82"/>
+      <!-- OP2 (dashed) -->
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.4" stroke-dasharray="3,3" points="10,94 32,92 54,88 76,86 98,82 120,78 142,74 164,70 186,68 208,64 230,60 252,56 274,52"/>
+      <!-- Actual -->
+      <polyline fill="none" stroke="#0066cc" stroke-width="2" points="10,100 32,92 54,82 76,76 98,70 120,66 142,60 164,58 186,52 208,48 230,42 252,36"/>
+      <circle cx="252" cy="36" r="3" fill="#0066cc"/>
+      <!-- Target markers -->
+      <g fill="#2f7d3e">
+        <polygon points="10,94 14,86 6,86"/>
+        <polygon points="274,52 278,44 270,44"/>
+      </g>
+      <g font-family="ui-monospace,monospace" font-size="8" fill="#8a8a8a" text-anchor="middle">
+        <text x="10" y="172">May</text><text x="76" y="172">Aug</text><text x="142" y="172">Nov</text>
+        <text x="208" y="172">Feb</text><text x="252" y="172">Apr</text>
+      </g>
+      <text x="258" y="40" font-family="ui-monospace,monospace" font-size="9" fill="#0066cc">actual</text>
+    </g>
+  </svg>
+  <div class="m7-box">
+    <div>WoW<b class="pos">+6.0%</b></div>
+    <div>YoY<b class="pos">+65%</b></div>
+    <div>vs OP2<b class="pos">+17%</b></div>
+    <div>4wk avg<b>8.6K</b></div>
+    <div>13wk avg<b>7.9K</b></div>
+  </div>
+</div>
+</div>
+
+<div class="spec">
+  <h4>Implementation spec</h4>
+  <div><b>File:</b> <code>canon-chart.js</code> — new render mode <code>mode: 'wbr612'</code>.</div>
+  <div><b>Layout:</b> two SVG panels side by side with a ~20px gap. Left panel X = 6 weeks weekly, right panel X = 12 months monthly. <b>Different Y axes</b> (per Commoncog — same Y "hides real relationships"). Prior-year ghost line on both panels. Target = green triangles at start/end of plan window. Endpoint-labeled, no legend.</div>
+  <div><b>Data:</b> left = <code>FORECAST.weekly[market].slice(-6)</code>. Right = aggregate <code>FORECAST.weekly[market]</code> by month for 12 months (computed in <code>renderTable</code>-style rollup — may need a new helper <code>monthlyRollup(weeklyArr)</code>).</div>
+  <div><b>Box score:</b> fixed 5-cell strip below — WoW %, YoY %, vs OP2 %, 4wk avg, 13wk avg. Same order every week. Commoncog calls this the "fingertip feel" enabler.</div>
+  <div><b>Usage:</b> replace current <code>renderChart(mode:'default')</code> trend panel with this. Also available on MPE for the contribution/decay chart once the shape matches.</div>
+</div>
+
+
+<!-- ============================== M8 ============================== -->
+<h2 id="m8">M8 · Prior-week thread — 6 mini sparkline cards</h2>
+<p class="meta">Scope: weekly-review.html · Replaces: current text-link pager. Refs: suggestion #040.</p>
+
+<div class="mock">
+<div class="m9-thread" id="snap-m8">
+  <div class="m9-cell miss">
+    <svg viewBox="0 0 64 24" width="64" height="24" preserveAspectRatio="none">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,10 16,10 32,10 48,10 64,10"/>
+      <polyline fill="none" stroke="#a63939" stroke-width="1.6" points="0,14 16,16 32,15 48,14 64,16"/>
+    </svg>
+    <div class="m9-cell-label">W11</div>
+    <div class="m9-cell-val">−8.5%</div>
+  </div>
+  <div class="m9-cell miss">
+    <svg viewBox="0 0 64 24" width="64" height="24" preserveAspectRatio="none">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,10 16,10 32,10 48,10 64,10"/>
+      <polyline fill="none" stroke="#a63939" stroke-width="1.6" points="0,18 16,16 32,18 48,17 64,18"/>
+    </svg>
+    <div class="m9-cell-label">W12</div>
+    <div class="m9-cell-val">−5.9%</div>
+  </div>
+  <div class="m9-cell miss">
+    <svg viewBox="0 0 64 24" width="64" height="24" preserveAspectRatio="none">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,10 16,10 32,10 48,10 64,10"/>
+      <polyline fill="none" stroke="#a63939" stroke-width="1.6" points="0,20 16,20 32,18 48,20 64,21"/>
+    </svg>
+    <div class="m9-cell-label">W13</div>
+    <div class="m9-cell-val">−15.9%</div>
+  </div>
+  <div class="m9-cell miss">
+    <svg viewBox="0 0 64 24" width="64" height="24" preserveAspectRatio="none">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,10 16,10 32,10 48,10 64,10"/>
+      <polyline fill="none" stroke="#a63939" stroke-width="1.6" points="0,19 16,21 32,20 48,20 64,20"/>
+    </svg>
+    <div class="m9-cell-label">W14</div>
+    <div class="m9-cell-val">−14.6%</div>
+  </div>
+  <div class="m9-cell miss">
+    <svg viewBox="0 0 64 24" width="64" height="24" preserveAspectRatio="none">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,10 16,10 32,10 48,10 64,10"/>
+      <polyline fill="none" stroke="#a63939" stroke-width="1.6" points="0,20 16,22 32,21 48,22 64,22"/>
+    </svg>
+    <div class="m9-cell-label">W15</div>
+    <div class="m9-cell-val">−23.0%</div>
+  </div>
+  <div class="m9-cell current miss">
+    <svg viewBox="0 0 64 24" width="64" height="24" preserveAspectRatio="none">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,10 16,10 32,10 48,10 64,10"/>
+      <polyline fill="none" stroke="#a63939" stroke-width="1.6" points="0,18 16,20 32,20 48,21 64,22"/>
+    </svg>
+    <div class="m9-cell-label">W16</div>
+    <div class="m9-cell-val">−12.9%</div>
+  </div>
+  <div class="m9-cell">
+    <svg viewBox="0 0 64 24" width="64" height="24" preserveAspectRatio="none">
+      <polyline fill="none" stroke="#cdc9bb" stroke-width="1.2" points="0,10 16,10 32,10 48,10 64,10"/>
+      <polyline fill="none" stroke="#8a8a8a" stroke-width="1.2" stroke-dasharray="2,2" points="0,10 16,10 32,10 48,10 64,10"/>
+    </svg>
+    <div class="m9-cell-label">W17</div>
+    <div class="m9-cell-val" style="color:var(--ink-3)">pending</div>
+  </div>
+</div>
+</div>
+
+<div class="spec">
+  <h4>Implementation spec</h4>
+  <div><b>File:</b> <code>weekly-review.html</code> — <code>renderThreadStrip()</code></div>
+  <div><b>Per cell:</b> 64×24 SVG showing that week's actual line relative to forecast (flat reference). Class <code>.hit</code> / <code>.miss</code> sets the stroke color. Label = <code>Wk</code> id, value = signed error %. Current week gets <code>.current</code> class (outline).</div>
+  <div><b>Data:</b> <code>predictions_history[market].slice(-7)</code> — 6 graded + 1 pending. If <code>score === 'HIT'</code>, class <code>.hit</code> and green; <code>'MISS'</code>, class <code>.miss</code> and red. Line shape uses intra-week forecast drift (first → latest); flat line when no drift.</div>
+  <div><b>Click behavior:</b> scrub narrative + 3Q + variance to that week (identical to WR-A10 chart-scrub). Ungated panels (KPIs, scorecard, small multiples) stay on <code>curWeek</code>.</div>
+</div>
+
+
+<!-- ============================== M9 ============================== -->
+<h2 id="m9">M9 · Fan chart — MPE projection with 50/80/90 CI bands</h2>
+<p class="meta">Scope: projection.html · Replaces: "90% range: $515K–$2.17M" text string. Refs: suggestion #070, principle #12.</p>
+
+<div class="mock">
+<div class="m10" id="snap-m9">
+  <div class="m3-card-k">MX · Y2026 · regs projection</div>
+  <div style="display:flex;gap:14px;align-items:baseline;margin-top:4px">
+    <span style="font-family:var(--serif);font-size:24px;font-variant-numeric:tabular-nums">23,340</span>
+    <span style="font-family:var(--mono);font-size:12px;color:var(--ink-3)">central projection · wide · low confidence</span>
+  </div>
+  <svg viewBox="0 0 640 220" width="100%" preserveAspectRatio="xMidYMid meet" style="margin-top:10px">
+    <rect x="30" y="10" width="600" height="170" fill="#fafaf5" stroke="#ece9de"/>
+    <!-- 90% band -->
+    <polygon fill="rgba(0,102,204,.08)" points="30,145 120,140 210,135 300,128 390,118 480,108 570,98 630,92
+                                                630,68 570,64 480,56 390,48 300,40 210,34 120,28 30,22"/>
+    <!-- 80% band -->
+    <polygon fill="rgba(0,102,204,.16)" points="30,132 120,128 210,122 300,114 390,104 480,96 570,88 630,84
+                                                630,78 570,72 480,66 390,58 300,52 210,46 120,40 30,36"/>
+    <!-- 50% band -->
+    <polygon fill="rgba(0,102,204,.30)" points="30,116 120,112 210,106 300,98 390,92 480,86 570,80 630,76
+                                                630,92 570,88 480,80 390,72 300,66 210,62 120,58 30,54"/>
+    <!-- central projection -->
+    <polyline fill="none" stroke="#0066cc" stroke-width="2" points="30,86 120,82 210,76 300,70 390,62 480,54 570,48 630,44"/>
+    <!-- historical actuals to left of now-line -->
+    <line x1="220" y1="10" x2="220" y2="180" stroke="#8a8a8a" stroke-dasharray="3,3"/>
+    <polyline fill="none" stroke="#1a1a1a" stroke-width="1.6" points="30,128 60,118 90,108 120,104 150,100 180,98 210,94"/>
+    <text x="220" y="198" font-family="ui-monospace,monospace" font-size="10" fill="#8a8a8a" text-anchor="middle">now · W17</text>
+    <!-- axis labels -->
+    <text x="30" y="198" font-family="ui-monospace,monospace" font-size="10" fill="#8a8a8a">Jan</text>
+    <text x="315" y="198" font-family="ui-monospace,monospace" font-size="10" fill="#8a8a8a" text-anchor="middle">Jul</text>
+    <text x="630" y="198" font-family="ui-monospace,monospace" font-size="10" fill="#8a8a8a" text-anchor="end">Dec</text>
+    <!-- endpoint labels -->
+    <text x="634" y="46" font-family="ui-monospace,monospace" font-size="10" fill="#0066cc">central</text>
+    <text x="634" y="94" font-family="ui-monospace,monospace" font-size="10" fill="#0066cc" opacity=".5">90% low</text>
+    <text x="634" y="26" font-family="ui-monospace,monospace" font-size="10" fill="#0066cc" opacity=".5">90% high</text>
+  </svg>
+  <div style="display:flex;gap:14px;font-family:var(--mono);font-size:11px;color:var(--ink-3);padding:4px 0">
+    <span><span style="display:inline-block;width:12px;height:8px;background:rgba(0,102,204,.30);vertical-align:middle;margin-right:4px"></span>50%</span>
+    <span><span style="display:inline-block;width:12px;height:8px;background:rgba(0,102,204,.16);vertical-align:middle;margin-right:4px"></span>80%</span>
+    <span><span style="display:inline-block;width:12px;height:8px;background:rgba(0,102,204,.08);vertical-align:middle;margin-right:4px"></span>90%</span>
+    <span style="margin-left:auto">central <strong style="color:var(--ink)">23,340</strong> · 90% range 9,225–38,532</span>
+  </div>
+</div>
+</div>
+
+<div class="spec">
+  <h4>Implementation spec</h4>
+  <div><b>File:</b> <code>projection.html</code> — main projection chart area (currently line+dots).</div>
+  <div><b>Data:</b> confidence intervals already computed in <code>v1_1_slim.js</code> scenario routines. Extract <code>ci_50</code>, <code>ci_80</code>, <code>ci_90</code> as arrays of <code>{x, lo, hi}</code>.</div>
+  <div><b>Rendering:</b> three polygon fills stacked (90 outermost/lightest → 50 innermost/darkest) behind the central projection line. Historical actuals line stays solid, darker stroke. Now-line = vertical dashed at <code>curWeek</code>.</div>
+  <div><b>Accessibility:</b> SVG <code>role="img"</code>, <code>aria-label</code> summarizing the fan ("MX 2026 projection: central 23,340 regs, 90% range 9,225–38,532, uncertainty wide").</div>
+  <div><b>Canonical sources:</b> Bank of England fan charts (1996 convention); R Journal RJ-2015-002; Wikipedia "Fan chart (time series)".</div>
+</div>
+
+
+<!-- ============================== M10 ============================== -->
+<h2 id="m10">M10 · Waterfall variance decomposition · replaces WoW table</h2>
+<p class="meta">Scope: weekly-review.html · Replaces: current <code>#varianceBody</code> driver/WoW/share 4-row table. Refs: suggestion #053.</p>
+
+<div class="mock">
+<div class="m10" id="snap-m10" style="padding:14px 18px">
+  <div class="m3-card-k">What changed this week · WoW decomposition · US</div>
+  <svg viewBox="0 0 640 180" width="100%" preserveAspectRatio="xMidYMid meet" style="margin-top:8px">
+    <!-- baseline -->
+    <line x1="30" y1="130" x2="610" y2="130" stroke="#d9d5c8"/>
+    <text x="30" y="170" font-family="ui-monospace,monospace" font-size="10" fill="#8a8a8a">W15</text>
+    <rect x="30" y="60" width="80" height="70" fill="#cdc9bb"/>
+    <text x="70" y="56" text-anchor="middle" font-family="ui-serif,serif" font-size="13">8,594</text>
+
+    <!-- +NB -->
+    <rect x="130" y="48" width="80" height="12" fill="#2f7d3e"/>
+    <text x="170" y="44" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#2f7d3e">+730</text>
+    <text x="170" y="170" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#8a8a8a">NB</text>
+    <line x1="110" y1="60" x2="130" y2="60" stroke="#8a8a8a" stroke-dasharray="2,2"/>
+
+    <!-- −Brand -->
+    <rect x="230" y="48" width="80" height="6" fill="#a63939"/>
+    <text x="270" y="44" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a63939">−220</text>
+    <text x="270" y="170" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#8a8a8a">Brand</text>
+    <line x1="210" y1="48" x2="230" y2="48" stroke="#8a8a8a" stroke-dasharray="2,2"/>
+
+    <!-- +Residual -->
+    <rect x="330" y="42" width="80" height="12" fill="#2f7d3e" opacity=".5"/>
+    <text x="370" y="38" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#2f7d3e">+5</text>
+    <text x="370" y="170" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#8a8a8a">Residual</text>
+    <line x1="310" y1="42" x2="330" y2="42" stroke="#8a8a8a" stroke-dasharray="2,2"/>
+
+    <!-- W16 total -->
+    <rect x="430" y="42" width="80" height="88" fill="#0066cc"/>
+    <text x="470" y="38" text-anchor="middle" font-family="ui-serif,serif" font-size="13">9,109</text>
+    <text x="470" y="170" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#8a8a8a">W16</text>
+
+    <!-- WoW summary -->
+    <g transform="translate(540,80)">
+      <text x="0" y="0" font-family="ui-monospace,monospace" font-size="10" fill="#8a8a8a">NET WoW</text>
+      <text x="0" y="16" font-family="ui-serif,serif" font-size="18" fill="#2f7d3e">+515</text>
+      <text x="0" y="32" font-family="ui-monospace,monospace" font-size="11" fill="#2f7d3e">+6.0%</text>
+    </g>
+  </svg>
+</div>
+</div>
+
+<div class="spec">
+  <h4>Implementation spec</h4>
+  <div><b>File:</b> <code>weekly-review.html</code> — <code>renderVariance()</code>.</div>
+  <div><b>Shape:</b> prior-week bar (muted) → +channel contribution floating bar(s) → residual floating bar → current-week bar (accent). Connecting dashed lines between tops/bottoms.</div>
+  <div><b>Data:</b> already derived — prior <code>callouts[market][prev_wk].metrics.regs</code>, <code>brand_detail.lw_regs</code> / <code>nb_detail.lw_regs</code> deltas between prev and current, residual = current − prior − Δbrand − Δnb.</div>
+  <div><b>Color:</b> positive contributions = green, negative = red; bar height = magnitude. Label = signed value. Keep tooltips for "share of total Δ" on hover.</div>
+  <div><b>Fallback:</b> when <code>lw_regs</code> missing (rollups historically), fall back to the WR-B1-2 aggregate across member markets. Already implemented in current <code>renderVariance</code>; preserve that code path.</div>
+</div>
+
+</div>
+
+
+<div class="wrap">
+<h2>Ship order — recommended for kiro-server</h2>
+<p class="lede">These are the T1 items from the full report, ordered so each commit is a standalone improvement that doesn't depend on later work. Every mockup above has a spec block detailing the file + selector + data source.</p>
+<ol style="font-size:14px;line-height:1.7;max-width:80ch">
+  <li><strong>M1 — Sticky header + trust bar.</strong> Absorbs region + metric filters. Biggest top-of-fold win; enables everything else. <em>1 commit · ~2h</em></li>
+  <li><strong>M2 — Headline + exception banner.</strong> Replaces opening paragraph with one-line WBR-style headline and conditional red-lane exception. <em>1 commit · ~1.5h</em></li>
+  <li><strong>M3 — KPI cards with sparklines + bullet for vs-OP2.</strong> Drops global metric filter; row shows all metrics as side-by-side cards. Also ships the shared <code>renderSparkline</code> + <code>renderBullet</code> helpers used by M4, M6, M8. <em>1 commit · ~2h</em></li>
+  <li><strong>M4 — Bullet chart component (shared).</strong> Ships with M3 but usable anywhere. MPE distance-to-target tab is the second consumer. <em>Piggybacks M3</em></li>
+  <li><strong>M5 — Reliability diagram + signed-error bars.</strong> Replaces 4-card calibration scorecard. Keep the 4 numbers as a compact footer strip. <em>1 commit · ~2.5h</em></li>
+  <li><strong>M6 — Small multiples across 12 markets.</strong> New section between scorecard and main chart. Click-to-select reuses M1 market selector. <em>1 commit · ~2h</em></li>
+  <li><strong>M7 — Amazon 6-12 chart.</strong> Swaps the default trend panel for two side-by-side (6wk weekly / 12mo monthly) with box-score footer. Lives in <code>canon-chart.js</code>. <em>1 commit · ~3h</em></li>
+  <li><strong>M8 — Prior-week thread as sparkline strip.</strong> Replaces text pager. Reuses <code>renderSparkline</code>. <em>1 commit · ~1h</em></li>
+  <li><strong>M9 — Fan chart on MPE.</strong> Projection engine side; replaces text range. <em>1 commit · ~2h</em></li>
+  <li><strong>M10 — Waterfall variance decomposition.</strong> Replaces the WoW table. <em>1 commit · ~1.5h</em></li>
+</ol>
+
+<p class="lede">Total ~18h of implementation across 10 commits. All 10 items are independently shippable — kiro-server can pick any order that matches current context.</p>
+
+<h2>How to verify each commit</h2>
+<p class="lede">For every mockup M<em>N</em>, the verification probe is identical:</p>
+<pre style="font-family:var(--mono);font-size:12px;background:#fbf9f3;border:1px dashed var(--rule);padding:10px 14px;border-radius:3px;overflow-x:auto">
+1. Start dashboard server: serve.py from agent-bridge/dashboards/ (must be this root, not workspace root)
+2. Open http://localhost:8080/performance/weekly-review.html?market=US&week=W17
+3. Compare visually against mockups/screenshots/MN-*.png
+4. Run through the 12 trust-bar markets to confirm state transitions
+5. Test sticky behavior by scrolling 2,000px down; header stays pinned
+6. Keyboard: J/K for week nav, / to focus market, ? for shortcuts (when M15-M17 land)
+</pre>
+
+<footer>
+Mockups compiled 2026-04-30 · kiro-local · numbers are real W17 US data · each mockup's screenshots live alongside in <code>mockups/screenshots/</code> · canonical report at <code>dashboard-redesign-report.html</code>
+</footer>
+</div>
+</body>
+</html>
