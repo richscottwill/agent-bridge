@@ -29,9 +29,14 @@
 
 Each commit is a standalone improvement. Pick any order that matches your current context; the numbering below is just the "if I had to pick one sequence" recommendation.
 
+**Work split (agreed on bus thread 2026-04-30_dashboard-mockups-handoff):**
+- **kiro-server takes:** M9 (fan chart + CI widths emission commit pair) + M5 (reliability diagram + signed-error bars).
+- **kiro-local takes:** M1 (including unification + TOC collapse) + M3 (including shared `renderSparkline` / `renderBullet` helpers) + M7 (6-12 chart in `canon-chart.js`).
+- **Either:** M2, M4, M6, M8, M10.
+
 | # | Mockup | File(s) | Effort |
 |---|---|---|---|
-| 1 | M1 · sticky header + trust bar | `performance/weekly-review.html` | 2h |
+| 1 | M1 · sticky header + trust bar (+ WR/PE unification + TOC collapse) | `performance/weekly-review.html` + `projection.html` + new shared `renderTrustBar()` helper | 3-4h |
 | 2 | M2 · headline + exception banner | `performance/weekly-review.html` | 1.5h |
 | 3 | M3 · KPI cards with sparklines | `performance/weekly-review.html` + new `renderSparkline` / `renderBullet` helpers | 2h |
 | 4 | M4 · bullet chart component | shared helper, consumers: WR KPI row (M3), MPE distance-to-target | 0h (ships with M3) |
@@ -42,23 +47,27 @@ Each commit is a standalone improvement. Pick any order that matches your curren
 | 9 | M9 · fan chart | `projection.html` | 2h |
 | 10 | M10 · waterfall variance | `performance/weekly-review.html` — `renderVariance()` | 1.5h |
 
-**Total: ~18h across 10 commits.**
+**Total: ~19-20h across 10 commits** (original 18h + 1-2h added to M1 for unification + TOC collapse per kiro-server feedback on thread 2026-04-30_dashboard-mockups-handoff post 003).
 
 ## Implementation spec summary per mockup
 
-### M1 — Sticky header + trust bar (absorbs filters)
+### M1 — Sticky header + trust bar (absorbs filters; unified across WR + PE; TOC collapsed)
 - **Replace:** `.wr-leaderboard` + `.wr-controls` + `#regionTabs` + `#submarketTabs` + `#metricTabs` + `#weekSelect` → single `<header class="wr-stick">` with title / trust-bar / week-nav.
+- **Shared helper (new):** `renderTrustBar(markets, selectedMarket, onSelect)` — extracted as a shared module so **both** `weekly-review.html` and `projection.html` consume identical DOM + styles. Per suggestion #075 in the full report ("market health bar on PE and forecast trust bar on WR must render identically. Same pill shape, same color stops, same hover affordance, same click-to-select behavior."). Ships with M1, not a follow-up.
+- **TOC collapse (per #014 + #067):** the 40px always-visible Jump-to strip collapses into a "Sections ▾" hover menu inside the sticky header. Frees top-of-fold on every page load. Optional T3 follow-up: vim-style `g then c` shortcut + `?` help overlay.
+- **URL-state back-compat:** stale `?metric=regs` params in backlinks from email/Slack must be silently ignored (not 404). Preserve `?market=X&week=W17` behavior exactly.
 - **Data:** trust pills use existing `renderAccuracyLeaderboard()` derivation; class mapping `on` ≥5/6 · `mid` 3-4/6 · `off` ≤2/6 · `na` insufficient.
 - **EU5 drill-down:** keep UK/DE/FR/IT/ES as independent pills in the trust bar (they're already there) — no separate sub-market row needed.
 - **Sticky CSS:** `position: sticky; top: 0; z-index: 20; backdrop-filter: blur(4px)`.
 - **Drop `curMetric` entirely.** KPI row locks to default per market via existing `defaultMetricForMarket()`. All three metrics shown as side-by-side cards (see M3).
 
-### M2 — Headline + exception banner
+### M2 — Headline + exception banner (with recommended action)
 - **Replace:** current narrative prose in `renderCalloutNarrative()` with a deterministic one-sentence template:
   `"{market} drove {regs} regs ({wow}% WoW) on {spend_pct}% spend. {top_channel} led the lift ({top_pct}); {other_channel} {dir} ({other_pct}). Pacing {op2_pct}% vs OP2."`
 - **Exception condition:** `predictions_history[market].latest.score === 'MISS'` OR `abs(error_pct) > 15` OR `in_ci_rate_6w < 0.5`.
 - **Only renders when triggered.** On routine weeks the banner disappears entirely; the saved vertical goes to the chart above the fold.
-- **Diagnosis field:** pulled from `callout.forecast_diagnosis`. May need a callout pipeline stub (one string per market-week). Default to generic "Baseline gap, not regime-related" if absent.
+- **Diagnosis field:** pulled from `callout.forecast_diagnosis` (new; added server-side in same commit — see deterministic classification tree in thread 2026-04-30_dashboard-mockups-handoff post 002).
+- **Recommended action (per #008 + #010 in full report — T1, "the single biggest gap" vs projection engine):** banner also carries a one-line prescribed action with pre-composed draft. Template: `"If miss > 20% → Draft Brandon note"` with click-to-open draft pre-filled with week, metric, miss %, and the diagnosis sentence. Projection engine's "Trust this projection less this week → Switch to Pessimistic" is the existing pattern to mirror. Banner without a recommended action = a half-built banner.
 
 ### M3 — KPI cards with sparklines
 - **File:** `renderKPIs()` around line 2420 of `weekly-review.html`.
@@ -81,7 +90,7 @@ Each commit is a standalone improvement. Pick any order that matches your curren
 ### M6 — Small multiples
 - **New section** after scorecard: 12 markets × (actual line + OP2 line) in a CSS Grid with `repeat(auto-fill, minmax(180px, 1fr))`.
 - **Per panel:** 6-week window. Actual = accent; OP2 = muted. No axes, no legends per panel — title + YoY % is the only text.
-- **Per panel Y scale:** independent — compute extent from both series per-market so the two lines fit each panel. (Cross-market comparison happens through pattern matching, not absolute Y alignment.)
+- **Per panel Y scale: SHARED across all panels** — this corrects an error in the v1 mockup spec which said "independent Y per panel." Shared Y is what the full research report (#043) and richard-style-wbr.md both call for, and it's the whole point of small multiples: cross-market pattern recognition requires the eye to compare magnitudes, not just shapes. Tufte + Juice Analytics + Datawrapper all align on this. The exception: if the CPA variant ever ships (CPA ranges 10× across markets), that single metric can use log-scale or panel-independent Y as an explicit opt-in. For regs, spend, and YoY percent — shared Y, period.
 - **Click behavior:** selecting a panel calls a shared `selectMarket(mk)` helper. Same code path as M1 trust-bar pill click.
 
 ### M7 — Amazon 6-12 chart
@@ -111,13 +120,13 @@ Each commit is a standalone improvement. Pick any order that matches your curren
 - **Keep tooltip:** "share of total Δ" on hover.
 - **Rollup fallback:** preserve the WR-B1-2 aggregate-across-member-markets path for WW/EU5/NA.
 
-## Open questions / things I couldn't answer from local
+## Open questions — all resolved by kiro-server on 2026-04-30
 
-1. **`forecast_diagnosis` pipeline field (M2)** — does the callout pipeline already emit a diagnosis string per market-week, or do we need to add one? If adding, where's the right place in `refresh-callouts.py`?
-2. **Monthly rollup helper (M7)** — does a weekly→monthly aggregation function already exist server-side in the forecast writer? If yes, we should reuse; if no, this is a small addition to `export-projection-data.py` or the dashboard-side helper.
-3. **`ci_50` / `ci_80` / `ci_90` exposure (M9)** — does `projection-data.json` already carry the multiple CI widths, or just the 90%? If only 90%, we need the scenario routines to emit all three.
+All three original open questions have answers from kiro-server on thread `2026-04-30_dashboard-mockups-handoff` post 002:
 
-If you've got answers on any of these, drop them on the bus thread this post triggers.
+1. **`forecast_diagnosis` field (M2):** new field, added in `refresh-callouts.py` around line 814. Deterministic classification tree reading from `predictions_history[market][wk]` and `ps.regime_changes`. Ships in same commit as M2. Fallback `"Diagnosis unavailable"` when upstream data missing.
+2. **Monthly rollup (M7):** already exists at `FORECAST.monthly[market]` in `forecast-data.json`. M7's right panel consumes it directly — no JS helper needed. `ly_monthly` (prior-year monthly ghost line) needs a ~10-line addition to `refresh-forecast.py`; kiro-server will ship in the M7 commit.
+3. **CI widths (M9):** currently only 90% in `projection-data.json`. Kiro-server will emit 50/80/90 in a standalone commit before M9 so the JSON is ready when kiro-local pulls for the fan chart. Monte Carlo samples already computed; ~10 lines to expose percentiles.
 
 ## Verification probe for each commit
 
