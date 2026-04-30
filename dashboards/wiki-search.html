@@ -417,6 +417,102 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   color: #e8a0a0;
   text-transform: uppercase;
 }
+
+/* M06 (2026-04-30): Topic small-multiples grid. One card per topic,
+   doc count + 6-week ingest velocity sparkline. Click to filter.
+   Collapsible — hidden when user is searching. */
+.wk-topic-grid-wrap {
+  background: #12141c;
+  border-bottom: 1px solid #1e2028;
+  padding: 8px 20px 10px;
+}
+.wk-topic-grid-wrap.collapsed .wk-topic-grid { display: none; }
+.wk-topic-grid-wrap.collapsed .wk-topic-toggle::before { content: '+'; }
+.wk-topic-grid-wrap:not(.collapsed) .wk-topic-toggle::before { content: '–'; }
+.wk-topic-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.wk-topic-heading {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #aaa;
+  text-transform: uppercase;
+  margin: 0;
+}
+.wk-topic-sub {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  color: #555;
+  flex: 1 1 auto;
+}
+.wk-topic-toggle {
+  background: transparent;
+  border: 1px solid #2a2d35;
+  color: #777;
+  font-family: inherit;
+  font-size: 12px;
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+.wk-topic-toggle::before { font-size: 14px; }
+.wk-topic-toggle:hover { border-color: #3b82f6; color: #93b4f5; }
+
+.wk-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 6px;
+}
+.wk-topic-card {
+  background: #14161e;
+  border: 1px solid #1e2028;
+  border-radius: 4px;
+  padding: 6px 8px;
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+}
+.wk-topic-card:hover {
+  border-color: #3b82f6;
+  background: #161a24;
+}
+.wk-topic-card.active {
+  border-color: #3b82f6;
+  background: rgba(30, 58, 138, 0.15);
+}
+.wk-topic-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2px;
+  gap: 4px;
+}
+.wk-topic-card-name {
+  font-size: 12px;
+  color: #d4d4d4;
+  font-weight: 600;
+  flex: 1 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wk-topic-card-count {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  color: #7da2d4;
+  font-variant-numeric: tabular-nums;
+}
+.wk-topic-card .sparkline { display: block; width: 100%; }
+
 </style>
 </head>
 <body>
@@ -485,6 +581,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
   <div class="wk-agentic-list" id="wkAgenticList"></div>
 </div>
+
+<!-- M06 (2026-04-30): Topic small-multiples grid. One card per topic,
+     each with doc count + 6-week ingest-velocity sparkline (how many
+     docs touched per week for that topic). Shared Y across all cards
+     for cross-topic magnitude comparison (same convention as WR M6).
+     Click card to filter to that topic. Collapsible — hidden when user
+     is actively searching or on pipeline view. -->
+<section class="wk-topic-grid-wrap" id="wkTopicGridWrap" aria-labelledby="wkTopicHeading">
+  <header class="wk-topic-head">
+    <h3 id="wkTopicHeading" class="wk-topic-heading">Topics &mdash; docs by area</h3>
+    <span class="wk-topic-sub" id="wkTopicSub">6-week ingest velocity &middot; click a topic to filter</span>
+    <button class="wk-topic-toggle" id="wkTopicToggle" aria-expanded="true" aria-label="Collapse topic grid">&ndash;</button>
+  </header>
+  <div class="wk-topic-grid" id="wkTopicGrid"></div>
+</section>
 <div class="filter-section" id="filterSection"></div>
 <div class="main">
   <div class="results" id="results"></div>
@@ -647,6 +758,8 @@ fetch('data/wiki-search-index.json?'+Date.now()).then(r=>r.json()).then(data=>{
   // M01+M02+M11 (2026-04-30): instrument-panel header additions.
   renderKpiStrip(data);
   renderAgenticRibbon(data);
+  // M06 (2026-04-30): topic small-multiples grid.
+  renderTopicGrid(data);
   doSearch();
 }).catch(e=>{
   console.error(e);
@@ -834,6 +947,125 @@ function commitAgentDraft(idx) {
       }
       console.error('[wiki agentic] commit failed:', err);
     });
+}
+
+// M06 (2026-04-30): Topic small-multiples grid. One card per topic,
+// ordered by doc count (descending). Each card shows topic name, doc
+// count, and a 6-week ingest-velocity sparkline (how many docs touched
+// per week, anchored at today). Shared Y across the velocity series
+// within each card's own column (no shared Y across cards because the
+// cards already communicate magnitude via the count badge).
+//
+// Click a card → applies that topic as an active filter, switches to
+// the search view if needed. Collapse toggle persists in localStorage.
+//
+// Data sources:
+//   data.topics           — {topicName: count} — drives which cards render
+//   data.documents[].primary_topic + updated — drives the sparkline
+function renderTopicGrid(data) {
+  const wrap = document.getElementById('wkTopicGridWrap');
+  const grid = document.getElementById('wkTopicGrid');
+  const toggle = document.getElementById('wkTopicToggle');
+  if (!wrap || !grid) return;
+
+  const topics = data.topics || {};
+  const docs = data.documents || [];
+  if (!Object.keys(topics).length) {
+    wrap.style.display = 'none';
+    return;
+  }
+  wrap.style.display = '';
+
+  // 6 weekly buckets anchored at today, each 7 days wide, oldest first.
+  const NOW = Date.now();
+  const BUCKETS = 6;
+  const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+  const bucketStarts = [];
+  for (let i = BUCKETS - 1; i >= 0; i--) {
+    bucketStarts.push(NOW - (i + 1) * WEEK_MS);
+  }
+
+  // Per-topic bucket counts.
+  const topicBuckets = {};
+  for (const t of Object.keys(topics)) {
+    topicBuckets[t] = new Array(BUCKETS).fill(0);
+  }
+  for (const d of docs) {
+    const t = d.primary_topic;
+    if (!t || !topicBuckets[t]) continue;
+    const u = d.updated && new Date(d.updated).getTime();
+    if (!u) continue;
+    for (let i = 0; i < BUCKETS; i++) {
+      const start = bucketStarts[i];
+      const end = start + WEEK_MS;
+      if (u >= start && u < end) { topicBuckets[t][i]++; break; }
+    }
+  }
+
+  // Sort cards by total doc count descending so dominant topics lead.
+  const sortedTopics = Object.entries(topics).sort((a, b) => b[1] - a[1]);
+
+  const haveSpark = !!(window.Sparkline && window.Sparkline.renderSparkline);
+
+  const cards = sortedTopics.map(([name, count]) => {
+    const buckets = topicBuckets[name] || [];
+    const any = buckets.some(v => v > 0);
+    const spark = (haveSpark && any)
+      ? window.Sparkline.renderSparkline(buckets, { width: 120, height: 20, color: '#7da2d4', strokeWidth: 1.5 })
+      : '<div style="height:20px;color:#333;font-size:10px;text-align:center;padding-top:4px">—</div>';
+    const isActive = (F.topic && F.topic !== 'all' && F.topic === name) ? ' active' : '';
+    return (
+      `<button class="wk-topic-card${isActive}" data-topic="${esc(name)}" ` +
+      `title="${esc(name)}: ${count} docs, ${buckets.reduce((s,v)=>s+v,0)} updates in last 6 weeks">` +
+      `<div class="wk-topic-card-head">` +
+      `<span class="wk-topic-card-name">${esc(name)}</span>` +
+      `<span class="wk-topic-card-count">${count}</span>` +
+      `</div>` +
+      spark +
+      `</button>`
+    );
+  });
+
+  grid.innerHTML = cards.join('');
+
+  // Click → filter by topic + switch to search view.
+  grid.querySelectorAll('.wk-topic-card').forEach(btn => {
+    btn.onclick = () => {
+      const topic = btn.dataset.topic;
+      if (!topic) return;
+      // Toggle off if already active.
+      if (F.topic === topic) {
+        F.topic = 'all';
+      } else {
+        F.topic = topic;
+      }
+      // Sync any topic filter buttons in the filter rail so the two
+      // UI surfaces stay in visual agreement.
+      document.querySelectorAll('[data-fk="topic"]').forEach(b => {
+        const v = b.dataset.fv;
+        b.classList.toggle('on', (F.topic === 'all' && v === 'all') || v === F.topic);
+      });
+      // Re-mark active card.
+      grid.querySelectorAll('.wk-topic-card').forEach(c => {
+        c.classList.toggle('active', c.dataset.topic === F.topic);
+      });
+      if (currentView !== 'search') setView('search');
+      else doSearch();
+    };
+  });
+
+  // Restore + wire the collapse toggle. Persist in localStorage.
+  const collapsed = localStorage.getItem('wk_topic_grid_collapsed') === '1';
+  if (collapsed) wrap.classList.add('collapsed');
+  if (toggle && !toggle.dataset.wired) {
+    toggle.dataset.wired = '1';
+    toggle.onclick = () => {
+      const nowCollapsed = !wrap.classList.contains('collapsed');
+      wrap.classList.toggle('collapsed', nowCollapsed);
+      toggle.setAttribute('aria-expanded', String(!nowCollapsed));
+      try { localStorage.setItem('wk_topic_grid_collapsed', nowCollapsed ? '1' : '0'); } catch (e) { /* quota */ }
+    };
+  }
 }
 
 // M07 (2026-04-30): Pipeline headline + exception banner. Renders
@@ -1668,6 +1900,7 @@ document.addEventListener('keydown',e=>{
 });
 </script>
 
+<script src="./shared/sparkline.js?v=2026-04-30"></script>
 <script src="./shared/section-freshness.js" defer></script>
 </body>
 </html>
