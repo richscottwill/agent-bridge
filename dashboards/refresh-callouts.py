@@ -36,6 +36,94 @@ ALL_BUILD_MARKETS = MARKETS + DERIVED_MARKETS
 # member markets (UK/DE/FR/IT/ES) are rolled up into EU5 and not shown separately.
 DISPLAY_MARKETS = ["WW", "US", "EU5", "JP", "CA", "MX", "AU"]
 
+# WR-A8 / WR-B6 (2026-04-30): structured event + period_state enrichment.
+#
+# Q-close weeks (end of calendar quarter under ISO week mapping).
+Q_CLOSE_WEEKS = {13, 26, 39, 52}
+# Holiday weeks that warrant their own tint (override q_close when they overlap).
+# Keyed loosely by market — same table for US/CA/MX since we share the dashboard
+# color language; a market-specific override dict could be added later.
+HOLIDAY_WEEKS = {
+    "US":  {47: "Thanksgiving", 52: "Christmas / NY", 1: "Christmas / NY"},
+    "CA":  {41: "Canadian Thanksgiving", 52: "Christmas / NY", 1: "Christmas / NY"},
+    "MX":  {46: "Revolution Day", 50: "Día de Guadalupe", 52: "Navidad / Año Nuevo", 1: "Año Nuevo"},
+    "UK":  {52: "Christmas / NY", 1: "Christmas / NY"},
+    "DE":  {52: "Christmas / NY", 1: "Christmas / NY"},
+    "FR":  {52: "Christmas / NY", 1: "Christmas / NY"},
+    "IT":  {52: "Christmas / NY", 1: "Christmas / NY"},
+    "ES":  {52: "Christmas / NY", 1: "Christmas / NY"},
+    "JP":  {1: "New Year Week", 52: "Year End"},
+    "AU":  {52: "Christmas / NY", 1: "Christmas / NY"},
+    "WW":  {52: "Christmas / NY", 1: "Christmas / NY"},
+    "EU5": {52: "Christmas / NY", 1: "Christmas / NY"},
+}
+# Priority order when multiple states apply: refit > holiday > q_close > normal.
+# Refit wins because it materially changes the model, not the demand signal.
+
+def compute_period_state(market, wk, refit_weeks_by_market):
+    """Return {state, label} for a given market+week.
+
+    refit_weeks_by_market is a dict market -> set of week-ints that had a
+    regime_change row land within ±3 days of that ISO week. Populated once
+    at the top of main() from a single ps.regime_changes query.
+    """
+    if wk in refit_weeks_by_market.get(market, set()):
+        return {"state": "refit", "label": "Model refit this week"}
+    hw = HOLIDAY_WEEKS.get(market, {}).get(wk)
+    if hw:
+        return {"state": "holiday", "label": hw}
+    if wk in Q_CLOSE_WEEKS:
+        return {"state": "q_close", "label": f"Q{((wk - 1) // 13) + 1} close"}
+    return {"state": "normal", "label": None}
+
+# WR-A8 (2026-04-30): parse week references out of external_factors text so
+# the dashboard can pin event markers on the trend chart. Returns a list of
+# deduped week-ints extracted from any "W\d+" token in the factor text.
+_WEEK_REF_RE = re.compile(r"\bW(\d{1,2})\b")
+
+def extract_event_weeks(factors):
+    """Walk external_factors list; return dict {event_id: {weeks, text, kind, important}}.
+
+    event_id is a stable slug derived from the first 40 chars of the text so
+    the dashboard can key annotations on it.
+    """
+    events = []
+    for i, f in enumerate(factors or []):
+        text = f.get("text", "") if isinstance(f, dict) else str(f)
+        if not text:
+            continue
+        weeks = []
+        seen = set()
+        for m in _WEEK_REF_RE.finditer(text):
+            try:
+                w = int(m.group(1))
+                if 1 <= w <= 52 and w not in seen:
+                    seen.add(w)
+                    weeks.append(w)
+            except ValueError:
+                continue
+        if not weeks:
+            continue
+        # Classify: 'streak' if text mentions rising/falling/consecutive,
+        # 'shift' if it mentions regime/migrated/launched/Polaris/Sparkle/OCI,
+        # 'note' otherwise.
+        low = text.lower()
+        if any(k in low for k in ("rising", "falling", "consecutive", "streak")):
+            kind = "streak"
+        elif any(k in low for k in ("polaris", "sparkle", "oci", "launched", "migrated", "regime", "refit")):
+            kind = "shift"
+        else:
+            kind = "note"
+        events.append({
+            "id": f"ev-{i}",
+            "weeks": weeks,
+            "text": text[:200],
+            "kind": kind,
+            "important": bool(f.get("important", False)) if isinstance(f, dict) else False,
+        })
+    return events
+
+
 STAKEHOLDERS = {
     "US": {"owner": "Stacey Gu (L6)", "manager": "Brandon Munday (L7)"},
     "CA": {"owner": "Adi (L5)", "manager": "Brandon Munday (L7)"},
@@ -415,7 +503,7 @@ def extract_prose_metrics(text):
 # ── Assembly ──────────────────────────────────────────────────────────
 DERIVED_MARKETS_SET = {"WW", "EU5"}
 
-def build_entry(market, wk, forecast, ww_data, proj_data, gate_results=None):
+def build_entry(market, wk, forecast, ww_data, proj_data, gate_results=None, refit_weeks_by_market=None):
     """Build one market+week callout entry.
 
     gate_results: optional list of gate result dicts from quality_gates.py.
@@ -673,6 +761,16 @@ def build_entry(market, wk, forecast, ww_data, proj_data, gate_results=None):
         "projections": projections,
         "decisions": decisions,
         "external_factors": external,
+        # WR-A8 (2026-04-30): structured events extracted from external_factors.
+        # Each event has weeks:[int] + kind:(streak|shift|note) + text.
+        # Dashboard draws chartjs-plugin-annotation markers at event.weeks
+        # on the trend chart when this week is selected.
+        "events": extract_event_weeks(external),
+        # WR-B6 (2026-04-30): period_state enum for background-tint semantics.
+        # One of: refit | holiday | q_close | normal. Refit takes priority so
+        # the reader knows the model just changed, then holiday for demand
+        # semantics, then q_close, then normal.
+        "period_state": compute_period_state(market, wk, refit_weeks_by_market or {}),
         "anomalies": anomalies,
         "blocked": blocked,
         "quality_gates": gate_results or [],
@@ -921,6 +1019,46 @@ def main():
     # Determine current week for quality gates (only run gates on latest week)
     current_wk = forecast.get("max_week", max(weeks) if weeks else 0)
 
+    # ── WR-B6 (2026-04-30): load refit weeks per market ──
+    # For each market, find any ps.regime_changes row whose event_date falls
+    # in calendar 2026 and map to its ISO-week number. Feeds period_state
+    # classification in build_entry below.
+    refit_weeks_by_market = {m: set() for m in ALL_BUILD_MARKETS}
+    try:
+        import duckdb as _ddb
+        import sys as _sys
+        _sys.path.insert(0, os.path.expanduser('~/shared/tools'))
+        try:
+            from prediction.config import MOTHERDUCK_TOKEN as _TOKEN
+        except ImportError:
+            _TOKEN = None
+        if _TOKEN:
+            _con = _ddb.connect(f'md:ps_analytics?motherduck_token={_TOKEN}', read_only=True)
+            try:
+                refit_rows = _con.execute("""
+                    SELECT market,
+                           CAST(strftime(change_date, '%V') AS INTEGER) AS iso_wk
+                    FROM ps.regime_changes
+                    WHERE change_date >= '2026-01-01'
+                      AND change_date <= '2026-12-31'
+                      AND active = TRUE
+                      AND COALESCE(half_life_weeks, 1) > 0
+                      AND NOT is_structural_baseline
+                """).fetchall()
+                for mkt, wk in refit_rows:
+                    if mkt in refit_weeks_by_market and wk:
+                        refit_weeks_by_market[mkt].add(int(wk))
+                _con.close()
+                total_refits = sum(len(s) for s in refit_weeks_by_market.values())
+                print(f"Loaded {total_refits} refit weeks across {sum(1 for s in refit_weeks_by_market.values() if s)} markets from ps.regime_changes")
+            except Exception as e:
+                print(f"WARNING: refit weeks query failed (period_state falls back to holiday/q_close/normal only): {e}")
+                try: _con.close()
+                except Exception: pass
+    except Exception as e:
+        # Non-fatal: period_state still works with holiday + q_close + normal.
+        print(f"WARNING: could not load refit weeks: {e}")
+
     callouts = {}
     gate_summary = []
     for market in ALL_BUILD_MARKETS:
@@ -934,7 +1072,7 @@ def main():
                 if blocked:
                     gate_summary.append(format_gate_summary(gate_results, market))
 
-            entry = build_entry(market, w, forecast, ww_summaries.get(w), proj_data.get(w), gate_results)
+            entry = build_entry(market, w, forecast, ww_summaries.get(w), proj_data.get(w), gate_results, refit_weeks_by_market)
             if entry:
                 callouts[market][f"W{w}"] = entry
 

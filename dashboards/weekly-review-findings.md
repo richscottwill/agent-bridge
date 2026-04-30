@@ -377,3 +377,16 @@ All 5 ready-to-ship R2 research ideas landed in one pass.
 - **WR-B6** period-state background tint — needs `refresh-callouts.py` to emit `period_state` enum (`q_close` / `holiday` / `refit` / `normal`).
 
 All three are backend work, not weekly-review HTML edits.
+
+---
+
+## Sprint 3 pipeline-gated items shipped (2026-04-30 afternoon)
+
+| Finding | Status | Notes |
+|---|---|---|
+| WR-A9 forecast aging | done | Gate was stale — snapshotting had already landed 2026-04-29. `predictions_history` already had 34-38 weeks/market with `n_preds>1`. Added a 6-week drift strip inside the scorecard showing first/latest/actual bars per week. Commit `aa7d4d9`. |
+| WR-A8 event annotations | done | Added `extract_event_weeks` parser in `refresh-callouts.py` that walks `external_factors` text, extracts `W\d+` tokens, classifies into `streak`/`shift`/`note` kinds, emits structured `events: [{id, weeks, text, kind, important}]` per callout. Dashboard passes these to `CanonChart.render` as `eventAnnotations`, which draws kind-colored dashed verticals on the trend chart with staggered labels. Live: 73 events generated across 76 market-weeks. |
+| WR-B6 period-state tint | done | Added `compute_period_state` in `refresh-callouts.py` that classifies each week as `refit` (has `ps.regime_changes` row, half_life>0, not structural_baseline) > `holiday` (market-specific lookup) > `q_close` (W13/26/39/52) > `normal`. Dashboard applies `.period-refit` / `.period-holiday` / `.period-q_close` class to `.wr-callout-main` with gradient tint + left border, plus a pill badge next to the market/week meta. Live: 12 q_close + 3 refit + 61 normal. |
+| (regression fix) | done | Restored `mode: 'error'` on the "How did we do" chart. Commit `6db6182` (karpathy W18 batch catch-up) silently reverted it to `mode: 'calibration'` along with matching header/aria-label strings. Same class of karpathy regression that broke 13 hooks — content-quality evaluator missed a semantic regression (chart type change). Flagged for karpathy-file-type-awareness steering extension. |
+
+**All 8 R2 findings now shipped. Sprint 3 fully closed.**

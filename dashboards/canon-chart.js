@@ -1139,18 +1139,59 @@
             },
           },
           annotation: {
-            annotations: {
-              nowLine: {
-                type: 'line',
-                xMin: s.maxWk - 1, xMax: s.maxWk - 1,
-                borderColor: NOW_GREEN, borderWidth: 2, borderDash: [4, 4],
-                label: {
-                  display: true, content: 'Now (W' + s.maxWk + ')',
-                  color: '#4ade80', font: { size: 10 }, position: 'start',
-                  backgroundColor: 'rgba(0,0,0,0)',
+            annotations: (function() {
+              const anns = {
+                nowLine: {
+                  type: 'line',
+                  xMin: s.maxWk - 1, xMax: s.maxWk - 1,
+                  borderColor: NOW_GREEN, borderWidth: 2, borderDash: [4, 4],
+                  label: {
+                    display: true, content: 'Now (W' + s.maxWk + ')',
+                    color: '#4ade80', font: { size: 10 }, position: 'start',
+                    backgroundColor: 'rgba(0,0,0,0)',
+                  },
                 },
-              },
-            },
+              };
+              // WR-A8 (2026-04-30): event annotations passed by caller.
+              // Each event has {id, weeks:[int], text, kind, important}.
+              // Draw a dashed vertical at each week for the selected event,
+              // with an abbreviated label. Skip weeks outside the chart
+              // range (1..52). Kind drives color: shift=violet, streak=amber,
+              // note=grey.
+              const evs = Array.isArray(opts.eventAnnotations) ? opts.eventAnnotations : [];
+              const KIND_COLOR = {
+                shift:  'rgba(168, 85, 247, 0.85)',
+                streak: 'rgba(212, 147, 26, 0.85)',
+                note:   'rgba(128, 128, 128, 0.75)',
+              };
+              evs.forEach((ev, i) => {
+                const color = KIND_COLOR[ev.kind] || KIND_COLOR.note;
+                (ev.weeks || []).forEach((wk, j) => {
+                  if (wk < 1 || wk > 52) return;
+                  const xIdx = wk - 1;  // labels are 'W1'...'W52' 0-indexed
+                  const key = `event-${ev.id || i}-${j}`;
+                  anns[key] = {
+                    type: 'line',
+                    xMin: xIdx, xMax: xIdx,
+                    borderColor: color,
+                    borderWidth: ev.important ? 2 : 1,
+                    borderDash: [2, 3],
+                    drawTime: 'beforeDatasetsDraw',
+                    label: (j === 0) ? {
+                      display: true,
+                      content: (ev.text || '').slice(0, 36).replace(/\s+$/, ''),
+                      color: color,
+                      font: { size: 9, weight: ev.important ? '600' : '400' },
+                      position: 'start',
+                      yAdjust: 12 + (i % 3) * 14,  // stagger labels vertically
+                      backgroundColor: 'rgba(255,255,255,0.85)',
+                      padding: { top: 1, bottom: 1, left: 3, right: 3 },
+                    } : { display: false },
+                  };
+                });
+              });
+              return anns;
+            })(),
           },
           // Tracker/calibration modes don't use end-labels — suppress the
           // datalabels plugin so it doesn't paint noise on every point when

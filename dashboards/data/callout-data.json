@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-29T22:43:05.415296+00:00",
+  "generated": "2026-04-30T05:22:34.567082+00:00",
   "max_wk": 16,
   "markets": [
     "WW",
@@ -722,6 +722,31 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              17
+            ],
+            "text": "W17 WoW last year was +21% regs.",
+            "kind": "note",
+            "important": true
+          },
+          {
+            "id": "ev-2",
+            "weeks": [
+              13,
+              17
+            ],
+            "text": "CPA rising 4 consecutive weeks ($68 in W13 to $77 in W17)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -1379,6 +1404,41 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              16
+            ],
+            "text": "W16 WoW last year was -5% regs.",
+            "kind": "note",
+            "important": true
+          },
+          {
+            "id": "ev-2",
+            "weeks": [
+              13,
+              16
+            ],
+            "text": "NB CPC rising 3 consecutive weeks ($4.12 in W13 to $4.80 in W16)",
+            "kind": "streak",
+            "important": true
+          },
+          {
+            "id": "ev-3",
+            "weeks": [
+              13,
+              16
+            ],
+            "text": "CPA rising 3 consecutive weeks ($68 in W13 to $75 in W16)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Brand Regs",
@@ -1414,7 +1474,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "US",
-            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -2096,6 +2156,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              15
+            ],
+            "text": "W15 WoW last year was -1% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -2746,6 +2821,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              14
+            ],
+            "text": "W14 WoW last year was +2% regs. Last 2 days show significantly lower volume (avg 158 vs weekday avg 1459), possible data lag.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -3398,6 +3488,22 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-1",
+            "weeks": [
+              7,
+              13
+            ],
+            "text": "CPA declining 6 consecutive weeks ($93 in W7 to $66 in W13)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "q_close",
+          "label": "Q1 close"
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -4045,6 +4151,31 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              13
+            ],
+            "text": "If Walmart ramps IS toward 55% in W13, Brand CPA could snap back to $75+.",
+            "kind": "note",
+            "important": true
+          },
+          {
+            "id": "ev-1",
+            "weeks": [
+              7,
+              12
+            ],
+            "text": "CPA declining 5 consecutive weeks ($93 in W7 to $72 in W12)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "refit",
+          "label": "Model refit this week"
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -4693,6 +4824,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              17
+            ],
+            "text": "W17 WoW last year was +18% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -5347,6 +5493,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              16
+            ],
+            "text": "W16 WoW last year was -16% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Nb Regs",
@@ -5382,7 +5543,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "CA",
-            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -6066,6 +6227,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              15
+            ],
+            "text": "W15 WoW last year was -6% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -6716,6 +6892,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              14
+            ],
+            "text": "W14 WoW last year was +2% regs. Last 2 days show significantly lower volume (avg 7 vs weekday avg 126), possible data lag.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -7364,6 +7555,22 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              11,
+              12
+            ],
+            "text": "Brand CVR at 4.02% is a genuine outlier; W11's spike reverted in W12. Projection is locked in regardless.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "q_close",
+          "label": "Q1 close"
+        },
         "anomalies": [
           {
             "metric": "Brand Regs",
@@ -8026,6 +8233,11 @@
             "important": false
           }
         ],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -8675,6 +8887,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              17
+            ],
+            "text": "W17 WoW last year was +5% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Cost",
@@ -9344,6 +9571,41 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              16
+            ],
+            "text": "W16 WoW last year was -4% regs.",
+            "kind": "note",
+            "important": true
+          },
+          {
+            "id": "ev-2",
+            "weeks": [
+              13,
+              16
+            ],
+            "text": "NB CPC rising 3 consecutive weeks ($2.74 in W13 to $3.47 in W16)",
+            "kind": "streak",
+            "important": true
+          },
+          {
+            "id": "ev-3",
+            "weeks": [
+              13,
+              16
+            ],
+            "text": "CPA rising 3 consecutive weeks ($58 in W13 to $75 in W16)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Cost",
@@ -9387,7 +9649,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "UK",
-            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -10066,6 +10328,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              15
+            ],
+            "text": "W15 WoW last year was -14% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Brand Cvr",
@@ -10723,6 +11000,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              14
+            ],
+            "text": "W14 WoW last year was -1% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -11371,6 +11663,11 @@
             "important": false
           }
         ],
+        "events": [],
+        "period_state": {
+          "state": "q_close",
+          "label": "Q1 close"
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -12015,6 +12312,11 @@
             "important": false
           }
         ],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -12671,6 +12973,31 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              17
+            ],
+            "text": "W17 WoW last year was -5% regs.",
+            "kind": "note",
+            "important": true
+          },
+          {
+            "id": "ev-2",
+            "weeks": [
+              14,
+              17
+            ],
+            "text": "CPA rising 3 consecutive weeks ($80 in W14 to $137 in W17)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Regs",
@@ -13358,6 +13685,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              16
+            ],
+            "text": "W16 WoW last year was -12% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Regs",
@@ -13417,7 +13759,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "DE",
-            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -14097,6 +14439,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              15
+            ],
+            "text": "W15 WoW last year was -6% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Cost",
@@ -14768,6 +15125,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              14
+            ],
+            "text": "W14 WoW last year was -4% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Cost",
@@ -15461,6 +15833,31 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              12
+            ],
+            "text": "If the pattern corrects as in W12, analyst-adjusted regs are estimated at 1,100 to 1,300, putting March closer to 5.9K. Tightest EU5 market against plan.",
+            "kind": "note",
+            "important": true
+          },
+          {
+            "id": "ev-1",
+            "weeks": [
+              10,
+              13
+            ],
+            "text": "CPA rising 3 consecutive weeks ($112 in W10 to $168 in W13)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "q_close",
+          "label": "Q1 close"
+        },
         "anomalies": [
           {
             "metric": "Regs",
@@ -16182,6 +16579,22 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-1",
+            "weeks": [
+              9,
+              12
+            ],
+            "text": "NB CPC declining 3 consecutive weeks ($4.39 in W9 to $3.74 in W12)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -16835,6 +17248,31 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              17
+            ],
+            "text": "W17 WoW last year was -3% regs.",
+            "kind": "note",
+            "important": true
+          },
+          {
+            "id": "ev-2",
+            "weeks": [
+              14,
+              17
+            ],
+            "text": "NB CPC rising 3 consecutive weeks ($1.96 in W14 to $2.40 in W17)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Brand Cvr",
@@ -17496,6 +17934,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              16
+            ],
+            "text": "W16 WoW last year was -5% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": [
@@ -17522,7 +17975,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "FR",
-            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -18202,6 +18655,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              15
+            ],
+            "text": "W15 WoW last year was -9% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Regs",
@@ -18877,6 +19345,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              14
+            ],
+            "text": "W14 WoW last year was -4% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -19525,6 +20008,11 @@
             "important": false
           }
         ],
+        "events": [],
+        "period_state": {
+          "state": "q_close",
+          "label": "Q1 close"
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -20170,6 +20658,11 @@
             "important": false
           }
         ],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -20819,6 +21312,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              17
+            ],
+            "text": "W17 WoW last year was -24% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Nb Cvr",
@@ -21482,6 +21990,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              16
+            ],
+            "text": "W16 WoW last year was -8% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": [
@@ -21508,7 +22031,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "IT",
-            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -22188,6 +22711,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              15
+            ],
+            "text": "W15 WoW last year was +1% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Regs",
@@ -22870,6 +23408,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              14
+            ],
+            "text": "W14 WoW last year was -9% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Nb Regs",
@@ -23506,6 +24059,11 @@
             "important": false
           }
         ],
+        "events": [],
+        "period_state": {
+          "state": "q_close",
+          "label": "Q1 close"
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -24151,6 +24709,11 @@
             "important": false
           }
         ],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -24800,6 +25363,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              17
+            ],
+            "text": "W17 WoW last year was +8% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -25454,6 +26032,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              16
+            ],
+            "text": "W16 WoW last year was -19% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": [
@@ -25480,7 +26073,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "ES",
-            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -26168,6 +26761,31 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              15
+            ],
+            "text": "W15 WoW last year was -3% regs.",
+            "kind": "note",
+            "important": true
+          },
+          {
+            "id": "ev-2",
+            "weeks": [
+              12,
+              15
+            ],
+            "text": "CPA rising 3 consecutive weeks ($51 in W12 to $67 in W15)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -26822,6 +27440,31 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              14
+            ],
+            "text": "W14 WoW last year was -1% regs.",
+            "kind": "note",
+            "important": true
+          },
+          {
+            "id": "ev-2",
+            "weeks": [
+              11,
+              14
+            ],
+            "text": "Regs declining 3 consecutive weeks (710 in W11 to 477 in W14)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Regs",
@@ -27489,6 +28132,11 @@
             "important": false
           }
         ],
+        "events": [],
+        "period_state": {
+          "state": "q_close",
+          "label": "Q1 close"
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -28138,6 +28786,22 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-1",
+            "weeks": [
+              9,
+              12
+            ],
+            "text": "NB CPC declining 3 consecutive weeks ($2.34 in W9 to $1.93 in W12)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -28767,6 +29431,41 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              17
+            ],
+            "text": "W17 WoW last year was -8% regs.",
+            "kind": "note",
+            "important": true
+          },
+          {
+            "id": "ev-2",
+            "weeks": [
+              14,
+              17
+            ],
+            "text": "NB CPC declining 3 consecutive weeks ($5.02 in W14 to $1.01 in W17)",
+            "kind": "streak",
+            "important": true
+          },
+          {
+            "id": "ev-3",
+            "weeks": [
+              13,
+              17
+            ],
+            "text": "CPA declining 4 consecutive weeks ($87 in W13 to $59 in W17)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Cpa",
@@ -29430,6 +30129,31 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              16
+            ],
+            "text": "W16 WoW last year was -9% regs.",
+            "kind": "note",
+            "important": true
+          },
+          {
+            "id": "ev-2",
+            "weeks": [
+              13,
+              16
+            ],
+            "text": "CPA declining 3 consecutive weeks ($87 in W13 to $65 in W16)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": [
@@ -29456,7 +30180,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "JP",
-            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -30115,6 +30839,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              15
+            ],
+            "text": "W15 WoW last year was +10% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Regs",
@@ -30765,6 +31504,31 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              14
+            ],
+            "text": "W14 WoW last year was +29% regs.",
+            "kind": "note",
+            "important": true
+          },
+          {
+            "id": "ev-2",
+            "weeks": [
+              10,
+              14
+            ],
+            "text": "NB CPC rising 4 consecutive weeks ($1.65 in W10 to $5.02 in W14)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Regs",
@@ -31429,6 +32193,35 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              2,
+              5,
+              6,
+              9,
+              13
+            ],
+            "text": "Fiscal year-end (Mar 31) suppression may concentrate on the final 1-2 business days. Budget specifics: Yahoo Brand Plus 40K\u219250K\u219265K Yen (3/16-3/18), Google Brand Plus +$220 (3/17-3/18), NB BAU tROAS 0",
+            "kind": "note",
+            "important": true
+          },
+          {
+            "id": "ev-1",
+            "weeks": [
+              10,
+              13
+            ],
+            "text": "NB CPC rising 3 consecutive weeks ($1.65 in W10 to $4.74 in W13)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "q_close",
+          "label": "Q1 close"
+        },
         "anomalies": [
           {
             "metric": "Cost",
@@ -32070,6 +32863,11 @@
             "important": false
           }
         ],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Cpa",
@@ -32713,6 +33511,11 @@
             "important": false
           }
         ],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -33342,6 +34145,11 @@
             "important": false
           }
         ],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Nb Regs",
@@ -33377,7 +34185,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "AU",
-            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -34042,6 +34850,32 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-1",
+            "weeks": [
+              12,
+              15
+            ],
+            "text": "CPA rising 3 consecutive weeks ($115 in W12 to $156 in W15)",
+            "kind": "streak",
+            "important": true
+          },
+          {
+            "id": "ev-2",
+            "weeks": [
+              12,
+              15
+            ],
+            "text": "Regs declining 3 consecutive weeks (244 in W12 to 166 in W15)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Regs",
@@ -34722,6 +35556,22 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-1",
+            "weeks": [
+              6,
+              14
+            ],
+            "text": "NB CPC declining 8 consecutive weeks ($6.82 in W6 to $4.50 in W14)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Regs",
@@ -35383,6 +36233,31 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              14
+            ],
+            "text": "Polaris URL migration completed mid-week. Monitoring W14 CVR to confirm whether the dip was migration-related. Lower CPC base should translate to CPA improvement once CVR normalizes.",
+            "kind": "shift",
+            "important": true
+          },
+          {
+            "id": "ev-1",
+            "weeks": [
+              6,
+              13
+            ],
+            "text": "NB CPC declining 7 consecutive weeks ($6.82 in W6 to $4.81 in W13)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "q_close",
+          "label": "Q1 close"
+        },
         "anomalies": [
           {
             "metric": "Regs",
@@ -36014,6 +36889,32 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-1",
+            "weeks": [
+              6,
+              12
+            ],
+            "text": "NB CPC declining 6 consecutive weeks ($6.82 in W6 to $5.37 in W12)",
+            "kind": "streak",
+            "important": true
+          },
+          {
+            "id": "ev-2",
+            "weeks": [
+              7,
+              12
+            ],
+            "text": "Regs declining 5 consecutive weeks (328 in W7 to 240 in W12)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Cost",
@@ -36604,6 +37505,21 @@
             "important": true
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              12
+            ],
+            "text": "I'm monitoring whether the new acquisition promo (20% off first order, up to AU$50) drives recovery in W12+. The sitelink has been updated, and we are also working with Alexis on updating remaining ca",
+            "kind": "shift",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -37261,6 +38177,31 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              17
+            ],
+            "text": "W17 WoW last year was +12% regs.",
+            "kind": "note",
+            "important": true
+          },
+          {
+            "id": "ev-2",
+            "weeks": [
+              14,
+              17
+            ],
+            "text": "Regs rising 3 consecutive weeks (302 in W14 to 551 in W17)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Regs",
@@ -37951,6 +38892,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              16
+            ],
+            "text": "W16 WoW last year was +12% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "refit",
+          "label": "Model refit this week"
+        },
         "anomalies": [
           {
             "metric": "Regs",
@@ -38078,7 +39034,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "MX",
-            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -38762,6 +39718,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              15
+            ],
+            "text": "W15 WoW last year was -20% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Regs",
@@ -39469,6 +40440,31 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              14
+            ],
+            "text": "W14 WoW last year was +4% regs. Last 2 days show significantly lower volume (avg 6 vs weekday avg 45), possible data lag.",
+            "kind": "note",
+            "important": true
+          },
+          {
+            "id": "ev-2",
+            "weeks": [
+              11,
+              14
+            ],
+            "text": "CPA rising 3 consecutive weeks ($58 in W11 to $82 in W14)",
+            "kind": "streak",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "refit",
+          "label": "Model refit this week"
+        },
         "anomalies": [
           {
             "metric": "Regs",
@@ -40157,6 +41153,11 @@
             "important": false
           }
         ],
+        "events": [],
+        "period_state": {
+          "state": "q_close",
+          "label": "Q1 close"
+        },
         "anomalies": [
           {
             "metric": "Cost",
@@ -40824,6 +41825,21 @@
             "important": false
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              12
+            ],
+            "text": "W12 WoW last year was -12% regs.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "Nb Regs",
@@ -41439,6 +42455,22 @@
             "important": true
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              11,
+              10
+            ],
+            "text": "W11 NB CVR of 1.57% is above normal range of 1.1-1.3% for the past 10 weeks. May be partially due to negative keyword additions that improved query routing across campaigns. W11 WoW last year was -5% ",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -42016,6 +43048,11 @@
             "important": true
           }
         ],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -42614,6 +43651,11 @@
             "important": true
           }
         ],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "AU WoW Regs",
@@ -42657,7 +43699,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "WW",
-            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -43257,6 +44299,11 @@
             "important": true
           }
         ],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "MX WoW Regs",
@@ -43872,6 +44919,11 @@
             "important": true
           }
         ],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "DE WoW Regs",
@@ -44479,6 +45531,11 @@
           "MX: 350 regs, $23,220 spend, $66 CPA"
         ],
         "external_factors": [],
+        "events": [],
+        "period_state": {
+          "state": "q_close",
+          "label": "Q1 close"
+        },
         "anomalies": [
           {
             "metric": "DE WoW Regs",
@@ -45085,6 +46142,11 @@
           "MX: 323 regs, $20,134 spend, $62 CPA"
         ],
         "external_factors": [],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "DE CPA",
@@ -45691,6 +46753,11 @@
           "MX: 389 regs, $22,462 spend, $58 CPA"
         ],
         "external_factors": [],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [
           {
             "metric": "MX WoW Regs",
@@ -46284,6 +47351,11 @@
         "projections": {},
         "decisions": [],
         "external_factors": [],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -46875,6 +47947,21 @@
             "important": true
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              17
+            ],
+            "text": "I'm reviewing DE bid strategies and budget settings ahead of W17 to keep NB CPA from running hot a second week.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": [
@@ -46901,7 +47988,7 @@
             "gate_name": "Data freshness",
             "status": "PASSED",
             "market": "EU5",
-            "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+            "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
             "details": {},
             "override_required": false
           }
@@ -47495,6 +48582,21 @@
             "important": true
           }
         ],
+        "events": [
+          {
+            "id": "ev-0",
+            "weeks": [
+              16
+            ],
+            "text": "IT CPA at $102 and FR CVR declines need investigation. I will review bid strategies in both markets for W16.",
+            "kind": "note",
+            "important": true
+          }
+        ],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -48079,6 +49181,11 @@
           "ES: 473 regs, $30,251 spend, $64 CPA"
         ],
         "external_factors": [],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -48663,6 +49770,11 @@
           "ES: 630 regs, $38,165 spend, $61 CPA"
         ],
         "external_factors": [],
+        "events": [],
+        "period_state": {
+          "state": "q_close",
+          "label": "Q1 close"
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -49247,6 +50359,11 @@
           "ES: 641 regs, $32,664 spend, $51 CPA"
         ],
         "external_factors": [],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -49831,6 +50948,11 @@
           "ES: 710 regs, $40,265 spend, $57 CPA"
         ],
         "external_factors": [],
+        "events": [],
+        "period_state": {
+          "state": "normal",
+          "label": null
+        },
         "anomalies": [],
         "blocked": [],
         "quality_gates": []
@@ -49870,7 +50992,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "US",
-          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -49899,7 +51021,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "CA",
-          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -49928,7 +51050,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "UK",
-          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -49957,7 +51079,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "DE",
-          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -49986,7 +51108,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "FR",
-          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -50015,7 +51137,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "IT",
-          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -50044,7 +51166,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "ES",
-          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -50073,7 +51195,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "JP",
-          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -50102,7 +51224,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "AU",
-          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -50156,7 +51278,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "MX",
-          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -50185,7 +51307,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "WW",
-          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
           "details": {},
           "override_required": false
         }
@@ -50214,7 +51336,7 @@
           "gate_name": "Data freshness",
           "status": "PASSED",
           "market": "EU5",
-          "reason": "All data sources fresh (max age: 0.1h, threshold: 24h)",
+          "reason": "All data sources fresh (max age: 6.8h, threshold: 24h)",
           "details": {},
           "override_required": false
         }

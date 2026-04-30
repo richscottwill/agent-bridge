@@ -906,6 +906,36 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
 .wr-drift-caption .first-key   { color: #6788A8; font-weight: 600; }
 .wr-drift-caption .latest-key  { color: #0066CC; font-weight: 600; }
 .wr-drift-caption .actual-key  { color: var(--color-success); font-weight: 600; }
+
+/* WR-B6 (2026-04-30): period-state background tint on the callout card.
+   Applied via JS to .wr-callout-main based on callout.period_state.state.
+   refit (blue) overrides holiday (amber) overrides q_close (violet).
+   Normal weeks get no tint so the default card reads as-is. */
+.wr-callout-main.period-refit {
+  background: linear-gradient(to bottom, #EAF3FF 0%, var(--color-panel-bg) 55%);
+  border-left: 3px solid #0066CC;
+}
+.wr-callout-main.period-holiday {
+  background: linear-gradient(to bottom, #FFF5E0 0%, var(--color-panel-bg) 55%);
+  border-left: 3px solid #D4931A;
+}
+.wr-callout-main.period-q_close {
+  background: linear-gradient(to bottom, #F4EEFD 0%, var(--color-panel-bg) 55%);
+  border-left: 3px solid #6A4FBD;
+}
+.wr-period-badge {
+  display: inline-block;
+  margin-left: var(--gap-xs);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+}
+.wr-period-badge.refit    { background: #0066CC; color: #FFF; }
+.wr-period-badge.holiday  { background: #D4931A; color: #FFF; }
+.wr-period-badge.q_close  { background: #6A4FBD; color: #FFF; }
 </style>
 </head>
 <body>
@@ -1060,14 +1090,14 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
   </div>
   <div class="sec-panel" id="sec-calibration">
     <div class="wr-calib-head">
-      <h3 style="margin:0"><span>How did we do — forecast vs actual</span></h3>
-      <div class="wr-chart-axis-toggle" id="calibAxisToggle" role="group" aria-label="Calibration axis filter">
+      <h3 style="margin:0"><span>Weekly forecast error</span></h3>
+      <div class="wr-chart-axis-toggle" id="calibAxisToggle" role="group" aria-label="Forecast error axis filter">
         <button class="wr-tab wr-chart-mode-btn active" data-axis="regs">Regs</button>
         <button class="wr-tab wr-chart-mode-btn" data-axis="spend">Spend</button>
         <button class="wr-tab wr-chart-mode-btn" data-axis="both">Both</button>
       </div>
     </div>
-    <div class="wr-chart-wrap"><canvas id="calibrationChart" role="img" aria-label="Forecast calibration: first prediction vs latest prediction vs actual"></canvas></div>
+    <div class="wr-chart-wrap"><canvas id="calibrationChart" role="img" aria-label="Weekly forecast error: signed % per week with severity fill and CI reference band"></canvas></div>
   </div>
 </div>
 <!-- WR-S1 (2026-04-29): Weekly Detail wrapped in <details> collapsed by default.
@@ -1573,11 +1603,17 @@ function renderCalloutNarrative() {
   // + nb_detail and composes a one-liner in 4–5 deltas. Hidden entirely
   // when no metrics data is available so it doesn't leave a blank strip.
   const sinceHtml = renderSinceLastWeekHtml(c);
+  // WR-B6 (2026-04-30): period-state tint class + meta badge.
+  const ps = c.period_state || {};
+  const stateClass = (ps.state && ps.state !== 'normal') ? (' period-' + ps.state) : '';
+  const stateBadge = (ps.state && ps.state !== 'normal' && ps.label)
+    ? ` <span class="wr-period-badge ${ps.state}">${ps.label}</span>`
+    : '';
   host.innerHTML =
-    '<div class="sec-panel wr-callout-main" id="sec-callout" style="margin-bottom:var(--gap-lg)">' +
+    '<div class="sec-panel wr-callout-main' + stateClass + '" id="sec-callout" style="margin-bottom:var(--gap-lg)">' +
     (sinceHtml || '') +
     '<div class="wr-callout-meta">' + curMarket + ' &middot; ' + rw +
-      (c.period ? ' &middot; ' + c.period : '') + '</div>' +
+      (c.period ? ' &middot; ' + c.period : '') + stateBadge + '</div>' +
     '<p class="wr-callout-headline" role="text">' + h3Content + '</p>' +
     (bodyHtml ? '<div class="wr-callout-narrative">' + bodyHtml + '</div>' : '') +
     '</div>';
@@ -2468,6 +2504,11 @@ function renderChart() {
   // WR-F1 (2026-04-29): both charts now respect an axis filter. The
   // two state vars are independent so user can e.g. view both on trend
   // but regs-only on calibration.
+  // WR-A8 (2026-04-30): pull events from the selected (or scrubbed)
+  // week's callout so the trend chart can pin annotations at event weeks.
+  const rw = resolvedWeek();
+  const evCallout = (CALLOUTS.callouts[curMarket] || {})[rw] || {};
+  const eventAnnotations = Array.isArray(evCallout.events) ? evCallout.events : [];
   trendChart = CanonChart.render('trendChart', {
     forecastData: FORECAST,
     market: curMarket,
@@ -2475,12 +2516,13 @@ function renderChart() {
     highlightWeek: curWeek,
     chartInstance: trendChart,
     axisFilter: trendAxis,
+    eventAnnotations: eventAnnotations,
   });
   chart = trendChart;  // keep legacy ref in sync
   calibrationChart = CanonChart.render('calibrationChart', {
     forecastData: FORECAST,
     market: curMarket,
-    mode: 'calibration',
+    mode: 'error',
     highlightWeek: curWeek,
     chartInstance: calibrationChart,
     axisFilter: calibrationAxis,
