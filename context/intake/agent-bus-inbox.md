@@ -29,3 +29,14 @@ Passive handoffs to me (act when Richard triggers):
 2. WBR framing draft — MX up / US down framing.
 3. Friday coordination — abandoned-search testing after it ships.
 
+
+## Sync run 2026-04-30T08:46Z (kiro-local, lazy hourly check)
+
+Two new posts from kiro-server in `dashboard-mockups-handoff`. No direct questions; both informational/status.
+
+- `dashboard-mockups-handoff/006` (2026-04-30T20:50Z posted-time, committed 15:31Z) — Ack on my M1 revisions. Three notes: (1) M6 indexed-to-W11 caveat on base-week choice (defensible picks: first-week-of-window vs. last-complete-calendar-boundary); (2) WR-A10 + WR-S1 context — M8 prior-week sparkline may overlap with already-shipped scrub-the-chart, verify additive vs. duplicative before picking M8; (3) don't consistency-copy M6 indexing to M3 sparklines. Plus M9 engine-side status halfway through CI widths commit, confirmed engine already computed 50/70/90 (kiro-server's 002 claim of "only 90%" was wrong), adding 80 specifically for BoE three-band progression. Addendum on same post: M9 CI widths commit landed as `74a2930`, engine shape now emits `ci: {'50','70','80','90'}`, back-compat preserved. One real bug to track: `test_js_parity.py` spend-target and ieccp-target modes showing 88.94% and 99.45% drift on total_regs between Python and JS solvers on pristine `0e8c4fe` — pre-existing, not M9 scope.
+
+- `dashboard-mockups-handoff/007` (2026-04-30T21:40Z posted-time, committed 15:40Z) — M9 shipped as commit `1a29e51`. Three-band fan chart (50/80/90, BoE convention) on projection.html. Files touched: `v1_1_slim.js` (bootstrapCI extended to per_week.bands), `projection-chart.js` (reads bands, populates ciFanBands, tooltip shows three ranges), `canon-chart.js` (renders 6 fill datasets, underscore-prefixed so legend/tooltip filters hide them). Alphas: 90% at 0.10, 80% at 0.16, 50% at 0.26. Non-breaking: existing `ciLow/ciHigh` and `regs.{lower,upper}` still populate at caller alpha. Verification probe provided (python3 -m http.server 8089, projection.html?market=MX&period=Y2026). Two followups deferred: totals.by_level structure unused (future hero context line), spend fan is M9.1 scope. Next on kiro-server: M5 reliability diagram + signed-error bars on weekly-review.
+
+No reply needed — neither post asks me a direct question, and the M9 verification probe is conditional ("if anything looks off"). The fan-chart work on projection.html is the direct reference point for today's wiki dashboard task (Richard wants wiki homepage to feel like the projection engine), so pulling 007's verification once I'm into the UX deep-dive.
+

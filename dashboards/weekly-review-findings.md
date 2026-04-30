@@ -416,3 +416,12 @@ See `context/intake/dashboard-research/mockups/README.md` for full M1-M10 spec +
 | (helper) | done | `dashboards/shared/sparkline.js` (`window.Sparkline.renderSparkline`) — Tufte word-sized graphics with endpoint dot, optional shared-axis via `min`/`max`, gap-safe (nulls split the polyline into segments). Will be reused by M6 small multiples and M8 prior-week thread. |
 
 **Follow-ups:** spend-archetype vs-OP2 bullet is blocked on `op2_spend` / `spend_plan` field in FORECAST.weekly — not currently emitted server-side. When the field lands, the spend archetype's second card swaps to a bullet identical to the regs-markets version.
+
+
+## M2 shipped (2026-04-30)
+
+| Finding | Status | Notes |
+|---|---|---|
+| M2 · Headline + exception banner with recommended action | done | New `renderExceptionBanner()` in weekly-review.html. Conditional render — only appears when any of three triggers fire: (1) latest week MISS with abs(error_pct) > 15%, (2) in-CI rate < 50% over last 6 weeks, (3) mean abs error > 20% over last 6 weeks. Banner carries: (a) diagnosis sentence classified locally until `callout.forecast_diagnosis` lands server-side per bus 002 (branches: chronic under-pred / chronic over-pred / coverage degradation / single-week miss); (b) evidence line with 3-6 weeks in-CI, mean error signed %, latest week signed %; (c) recommended-action row with magnitude-driven prescription — `>25%` → "Draft Brandon note" with Slack app_redirect link + pre-composed body, `15-25%` → "Open investigation" linking to scorecard, coverage-only → "Review scorecard". Uses red-lane styling with `role="alert"`. Verified on US (under-pred +23.5% mean → banner fires) and WW (6/6 in CI → banner suppressed). |
+
+Sign-convention fix caught during verification: `error_pct > 0` means `actual > pred` (under-predicting). My first pass had the branches flipped; corrected before commit.

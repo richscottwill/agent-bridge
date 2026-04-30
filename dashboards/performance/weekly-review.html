@@ -445,6 +445,76 @@ body {
 }
 .wr-controls-meta .wr-ts-accent { color: var(--color-brand); }
 
+/* M2 (2026-04-30): Exception banner. Renders only when the forecast
+   for the current market has materially missed in the last 1-6 weeks.
+   Red lane, diagnosis + recommended-action row. */
+.wr-exception {
+  border: 1px solid #F2A4A4;
+  background: linear-gradient(90deg, #FFF7F5 0%, #FFFFFF 75%);
+  border-left: 3px solid var(--color-danger, #B11D1D);
+  padding: var(--gap-sm) var(--gap-md);
+  border-radius: 3px;
+  margin-bottom: var(--gap-lg);
+  font-size: var(--size-ui);
+  line-height: 1.5;
+}
+.wr-exception-kicker {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-danger, #B11D1D);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.wr-exception-diagnosis { color: var(--color-text-hero); }
+.wr-exception-diagnosis strong { font-weight: 700; }
+.wr-exception-diagnosis em {
+  color: var(--color-text-meta);
+  font-style: normal;
+  font-size: var(--size-meta);
+  margin-left: 6px;
+}
+.wr-exception-action {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #F2D1D1;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+  flex-wrap: wrap;
+}
+.wr-exception-action-kicker {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--color-danger, #B11D1D);
+  font-weight: 700;
+}
+.wr-exception-action-text {
+  color: var(--color-text-hero);
+  flex: 1 1 auto;
+  min-width: 240px;
+}
+.wr-exception-action-text strong { font-weight: 700; }
+.wr-exception-action-btn {
+  margin-left: auto;
+  font-family: inherit;
+  font-size: var(--size-meta);
+  color: var(--color-brand);
+  border: 1px solid var(--color-brand);
+  padding: 3px 12px;
+  border-radius: 2px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 120ms ease;
+  text-decoration: none;
+}
+.wr-exception-action-btn:hover {
+  background: var(--color-brand);
+  color: var(--color-text-on-brand);
+}
+
 /* KPI row — reuse .hero-kpi from projection-design-system.css but in a row */
 .wr-kpi-row {
   display: flex;
@@ -1137,6 +1207,14 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
 <!-- WR-D3 callout narrative (top) -->
 <div id="calloutNarrative"></div>
 
+<!-- M2 (2026-04-30): Exception banner. Renders only when the forecast
+     for this market shows material miss or low in-CI coverage. Carries:
+     diagnosis sentence + recommended action (draft note, open
+     investigation) with pre-composed Slack-ready text. Per report #008
+     + #010 ("the single biggest gap" vs projection engine). Empty div
+     on routine weeks. -->
+<div id="exceptionBanner" style="display:none"></div>
+
 <!-- WR-D5 (2026-04-28): three-question framing below the narrative.
      Customer experience / Business performance / Pacing to target.
      Content derived from callout.metrics + brand_detail + nb_detail +
@@ -1673,6 +1751,7 @@ function render() {
   document.getElementById('nextWeek').disabled = weeks.indexOf(curWeek) <= 0;
 
   renderCallout();
+  renderExceptionBanner();
   renderThreeQ();
   renderVariance();
   renderScorecard();
@@ -1740,6 +1819,139 @@ function renderCalloutNarrative() {
       (c.period ? ' &middot; ' + c.period : '') + stateBadge + '</div>' +
     '<p class="wr-callout-headline" role="text">' + h3Content + '</p>' +
     (bodyHtml ? '<div class="wr-callout-narrative">' + bodyHtml + '</div>' : '') +
+    '</div>';
+}
+
+// M2 (2026-04-30): Exception banner. Renders below the narrative when the
+// current market's forecast is materially off vs actual. Encodes:
+//   (1) diagnosis sentence — classifier output (baseline gap vs regime
+//       change vs calibration drift vs unknown). Today diagnosis is
+//       derived locally; when kiro-server ships callout.forecast_diagnosis
+//       per bus 002, swap to that field.
+//   (2) recommended action — "draft Brandon note" button with a pre-
+//       composed message body so one click turns the signal into a
+//       drafted Slack message. Fallback: opens investigation link.
+// Hidden entirely when the market is inside CI on recent weeks.
+// Per report #008 + #010, bus thread 2026-04-30_dashboard-mockups-handoff.
+function renderExceptionBanner() {
+  const host = document.getElementById('exceptionBanner');
+  if (!host || !FORECAST) return;
+
+  const rw = resolvedWeek();
+  const hist = (FORECAST.predictions_history && FORECAST.predictions_history[curMarket]) || {};
+  const maxWk = FORECAST.max_week || 15;
+
+  // Compute recent calibration state. Three signals converge on whether
+  // this market is "in exception" right now:
+  //   - latest-week score (MISS / HIT) + signed error magnitude
+  //   - in-CI rate over last 6 weeks
+  //   - direction of drift (chronic under / chronic over / alternating)
+  const last = (hist[String(maxWk)] || hist[maxWk] || {}).regs || null;
+  const latestErr = last && Number.isFinite(last.error_pct) ? last.error_pct : null;
+  const latestIsMiss = last && last.score === 'MISS';
+
+  const WINDOW = 6;
+  let hits = 0, total = 0, misses = [], errorSum = 0, errorCount = 0;
+  for (let w = Math.max(1, maxWk - (WINDOW - 1)); w <= maxWk; w++) {
+    const r = (hist[String(w)] || hist[w] || {}).regs;
+    if (!r || r.actual == null || r.latest_ci_lo == null || r.latest_ci_hi == null) continue;
+    total++;
+    if (r.actual >= r.latest_ci_lo && r.actual <= r.latest_ci_hi) hits++;
+    else misses.push(w);
+    if (Number.isFinite(r.error_pct)) { errorSum += r.error_pct; errorCount++; }
+  }
+  const inCiRate = total > 0 ? hits / total : null;
+  const meanError = errorCount > 0 ? errorSum / errorCount : null;
+
+  // Exception trigger — three conditions any of which raises the banner.
+  const triggerMiss   = latestIsMiss && latestErr != null && Math.abs(latestErr) > 15;
+  const triggerCov    = inCiRate != null && inCiRate < 0.5 && total >= 3;
+  const triggerTrend  = meanError != null && Math.abs(meanError) > 20 && total >= 3;
+
+  if (!triggerMiss && !triggerCov && !triggerTrend) {
+    host.style.display = 'none';
+    host.innerHTML = '';
+    return;
+  }
+
+  // Diagnosis sentence. Local classifier — will be replaced when
+  // callout.forecast_diagnosis lands server-side per bus 002.
+  // Sign convention: error_pct = (actual - pred) / pred × 100. So
+  //   positive error_pct → actual HIGHER than prediction → UNDER-predicted.
+  //   negative error_pct → actual LOWER than prediction → OVER-predicted.
+  const c = (CALLOUTS.callouts[curMarket] || {})[rw] || {};
+  let diagnosis;
+  if (c.forecast_diagnosis) {
+    diagnosis = c.forecast_diagnosis;
+  } else if (meanError != null && meanError > 15) {
+    diagnosis = 'Model has been chronically under-predicting. Baseline gap, not regime-related.';
+  } else if (meanError != null && meanError < -15) {
+    diagnosis = 'Model has been chronically over-predicting. Review regime assumptions.';
+  } else if (triggerCov) {
+    diagnosis = 'CI coverage has degraded. Recent weeks landing outside the 90% band more often than expected.';
+  } else if (triggerMiss) {
+    const dir = latestErr > 0 ? 'under' : 'over';
+    diagnosis = `Latest week ${dir}-predicted by ${Math.abs(Math.round(latestErr))}%. Worth investigating.`;
+  } else {
+    diagnosis = 'Forecast in exception state. Investigate.';
+  }
+
+  // Supporting evidence line — turns the three state numbers into a
+  // single factual string.
+  const evidence = [];
+  if (total > 0) evidence.push(`${hits}/${total} weeks inside CI`);
+  if (meanError != null) {
+    const sign = meanError > 0 ? '+' : '';
+    evidence.push(`mean error ${sign}${meanError.toFixed(1)}%`);
+  }
+  if (latestErr != null) {
+    const sign = latestErr > 0 ? '+' : '';
+    evidence.push(`${rw}: ${sign}${latestErr.toFixed(1)}%`);
+  }
+
+  // Recommended action — magnitude-driven.
+  //   >25% miss: "Draft Brandon note" (operational escalation)
+  //   >15% miss: "Open investigation" (track as finding)
+  //   CI coverage only:  "Review calibration"
+  let action, actionLabel, actionUrl;
+  const maxAbs = Math.max(
+    Math.abs(meanError || 0),
+    Math.abs(latestErr || 0)
+  );
+  if (maxAbs > 25) {
+    action = `Miss > 25% — <strong>draft Brandon note</strong> with ${rw}, ${curMarket}, miss %, and diagnosis.`;
+    actionLabel = 'Open draft';
+    const draftBody = encodeURIComponent(
+      `${curMarket} ${rw} forecast flag\n\n` +
+      `${diagnosis}\n\n` +
+      `Evidence: ${evidence.join(' · ')}\n\n` +
+      `Weekly review: http://localhost:8089/performance/weekly-review.html?market=${curMarket}&week=${rw}`
+    );
+    actionUrl = `https://slack.com/app_redirect?channel=D0123BRANDON&text=${draftBody}`;
+  } else if (maxAbs > 15) {
+    action = `Miss 15–25% — <strong>open investigation</strong> and track as a finding.`;
+    actionLabel = 'Open investigation';
+    actionUrl = '#sec-scorecard';
+  } else {
+    action = `Calibration drift — <strong>review scorecard</strong> and decide whether to retrain.`;
+    actionLabel = 'Review scorecard';
+    actionUrl = '#sec-scorecard';
+  }
+
+  host.style.display = '';
+  host.innerHTML =
+    '<div class="wr-exception" role="alert">' +
+    '<div class="wr-exception-kicker">\u26A0 Exception \u00b7 Forecast</div>' +
+    '<div class="wr-exception-diagnosis"><strong>' + diagnosis + '</strong>' +
+      (evidence.length ? '<em>\u00b7 ' + evidence.join(' \u00b7 ') + '</em>' : '') +
+    '</div>' +
+    '<div class="wr-exception-action">' +
+      '<span class="wr-exception-action-kicker">\u2192 Recommended</span>' +
+      '<span class="wr-exception-action-text">' + action + '</span>' +
+      '<a class="wr-exception-action-btn" href="' + actionUrl + '" ' +
+        (actionUrl.startsWith('http') ? 'target="_blank" rel="noopener"' : '') +
+        '>' + actionLabel + '</a>' +
+    '</div>' +
     '</div>';
 }
 
