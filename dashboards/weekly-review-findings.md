@@ -432,3 +432,10 @@ Sign-convention fix caught during verification: `error_pct > 0` means `actual > 
 | Finding | Status | Notes |
 |---|---|---|
 | M8 · Prior-week thread as sparkline strip | done | New `renderThreadStrip()` renders 7 cells (last 6 graded + 1 pending) between the narrative/exception block and the charts. Each cell: week label, sparkline of [first_pred → latest_pred → actual], signed error %. Color-state by outcome: hit (green), miss (actual outside CI + abs(err) > 10%), surprise (outside CI but err ≤ 10%), pending (ungraded). Clicking a cell jumps to that week's narrative. Additive to WR-A10 scrub — scrub is ephemeral (hover-only), this is persistent always-visible thread. Reuses `window.Sparkline.renderSparkline` from M3. Kiro-server confirmed "additive not duplicative" on bus 006. Verified: US W11-W17 shows correct HIT/MISS/HIT ordering matching `predictions_history.US[wk]`. |
+
+
+## M10 shipped (2026-04-30)
+
+| Finding | Status | Notes |
+|---|---|---|
+| M10 · Waterfall variance decomposition | done | `renderVariance()` output swapped from a 5-row table to a horizontal SVG waterfall. Same data (prior-week total → +/− NB → +/− Brand → +/− residual → current-week total); same rollup-aware aggregation path for WW/EU5/NA. Visual encoding: full bars at 0 for prior/current totals, floating bars aligned to running total for each delta with dashed connectors linking tops. Green positive / red negative; residual uses 60%-opacity variants so it reads as a less-authoritative bucket. NET WoW summary right-edge with signed absolute + signed %. `role="img"` + detailed `aria-label`. Verified on MX W16 (509→510, -27 NB + +28 Brand, +0.2% net). WW/EU5/NA rollup aggregation path preserved. |
