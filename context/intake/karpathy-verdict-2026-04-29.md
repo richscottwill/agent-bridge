@@ -306,3 +306,44 @@ Divergence from 2026-04-21 verdict: the prior pass treated "the loop is running 
 8. **Principle-3 temperature check.** soul.md principle 3 (subtraction before addition) has been load-bearing in both 2026-04-21 and 2026-04-29 verdicts — it's the justification for rejecting the retrieval target category, deferring hook/protocol extensions until fixture stores exist, and the mild tension with Issue 7's dual-display. If you think Karpathy is being too conservative with it (i.e., the bar for "earning its place" is too high), say so. The verdicts can be re-evaluated. Right now the combination of dormant loop + zero prerequisite movement over 8 days reinforces conservative default, not the opposite.
 
 Triage complete — verdict file written.
+
+
+---
+
+## ADDENDUM — 2026-04-29 19:20 — Loop-dormancy finding was FALSE
+
+Triage authority: kiro-server, correcting the earlier karpathy sub-agent verdict.
+
+**The verdict above claims the loop has been dormant for 12 days. That is wrong.** The loop is running and has been running. The data-plane was lying.
+
+### What actually happened
+
+The sub-agent that wrote this verdict used `mcp_duckdb_execute_query` to verify state. That tool connects to **MotherDuck `ps_analytics`**, which shows `MAX(created_at) = 2026-04-17 13:07` on `autoresearch_experiments`.
+
+The karpathy loop writes to the **local DuckDB at `/home/prichwil/shared/data/duckdb/ps-analytics.duckdb`** (per `~/shared/.kiro/agents/karpathy.json` prompt). That's a different database. Queried directly via Python:
+
+- 2,238 experiments total across 4 eval_types
+- Most recent: 2026-04-30 04:25 (minutes before this addendum was written)
+- Batches 151-156 ran 2026-04-29 19:56 through 2026-04-30 04:25 — 8.5 hours continuous, 1,056 experiments, 57% keep rate
+- Loop is currently mid-batch 157 (PID 195023, started Apr 29, spawning kiro-cli eval subprocesses)
+
+`experiment-log.tsv` and `karpathy-loop.log` both corroborate this — the TSV has fresh `run_W18_batch156` rows, the log shows 330 EXP entries and active `INSERT INTO autoresearch_experiments` calls.
+
+### What's actually broken
+
+**MotherDuck sync.** Local DuckDB → MotherDuck `ps_analytics.autoresearch_experiments` has not pushed since 2026-04-17. Every agent that queries the autoresearch schema via the MCP DuckDB tool sees a 12-day-stale snapshot. This is broader than karpathy — **any agent decision that used `autoresearch_experiments`, `autoresearch_priors`, or `autoresearch_selection_weights` via MCP since 4/17 is based on stale data.**
+
+### What the corrected verdicts are
+
+- **Issue 4/5/6 DEFER/DEFER/REJECT reasoning based on "loop not running" is invalid.** Actual prerequisite check requires querying local DuckDB, not MotherDuck. Re-triage should pull from `/home/prichwil/shared/data/duckdb/ps-analytics.duckdb` directly.
+- **"Priority 0: revive the loop" inverts to: "Priority 0: fix the MotherDuck sync."** The loop is fine. The visibility into the loop is broken.
+- **W18 batch claim in Issue 8** (876 trials, 13 broken hooks) — directly confirmed in the local DB. The batch happened. Keep rates visible: `run_W18_batch151` = 248 exp / 190 keeps (77%), `batch153` = 208 exp / 138 keeps (66%). Validity gate rationale stands.
+- **Karpathy's own verdict reading MotherDuck-via-MCP is structurally prone to this failure.** Any future karpathy triage should include an explicit "query the local DuckDB, not MCP" line in the context-read list. Adding this to the triage protocol is a follow-up for wiki-candidates (`operations/karpathy-triage-protocol`).
+
+### What Richard needs to act on (next session)
+
+1. **MotherDuck sync audit.** Identify the sync script/hook, figure out why it's been silent since 4/17, wire a post-batch or EOD-Phase-7.5 push. Until fixed, every MCP DuckDB query on the autoresearch schema is a trap. Asana task filed.
+2. **US baseline Option 2.** Richard approved. 4-6 hour build in `write_v1_1_slim_forecasts.py` — add `yoy_growth - lag(yoy_growth, N)` regressor, schema update for `nb_yoy_accel`, backfill, rerun backtests. Asana task filed.
+3. **Issue 7 (rate_7d)** and the remaining verdict items (Issues 1-6) can resume from the corrected diagnosis when the MotherDuck sync is fixed and data is readable again.
+
+Addendum complete — original verdict preserved above for audit trail, supersession of "loop dormant" finding recorded here.
