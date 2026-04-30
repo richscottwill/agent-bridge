@@ -38,6 +38,7 @@ MATH
     Collect output KPIs across samples. Compute quantiles:
       50% CI = [Q25, Q75]
       70% CI = [Q15, Q85]
+      80% CI = [Q10, Q90]
       90% CI = [Q5, Q95]
 
     Performance target: 200 samples in < 80 ms (UI Web Worker).
@@ -65,8 +66,11 @@ import numpy as np
 SAMPLES_UI = 200
 SAMPLES_CLI = 1000
 
-# Credible interval levels: return these quantile pairs
-CREDIBILITY_LEVELS = (0.50, 0.70, 0.90)
+# Credible interval levels: return these quantile pairs.
+# 80% added 2026-04-30 for M9 fan chart (BoE fan convention uses 50/80/90).
+# 70% retained for back-compat with earlier consumers; no UI surface uses it
+# today but removing it is a breaking change to ci.to_json() — defer to Phase 6.
+CREDIBILITY_LEVELS = (0.50, 0.70, 0.80, 0.90)
 
 # Safety limits
 MIN_VALID_SAMPLES = 10
@@ -84,6 +88,7 @@ class CredibleInterval:
     central: float                         # point estimate (median of samples)
     ci_50: tuple[float, float]             # (Q25, Q75)
     ci_70: tuple[float, float]             # (Q15, Q85)
+    ci_80: tuple[float, float]             # (Q10, Q90) — 80% CI, BoE fan-chart convention
     ci_90: tuple[float, float]             # (Q5, Q95)
     mean: float                            # sample mean (for asymmetry measurement)
     std: float                             # sample std
@@ -97,6 +102,7 @@ class CredibleInterval:
             'ci': {
                 '50': list(self.ci_50),
                 '70': list(self.ci_70),
+                '80': list(self.ci_80),
                 '90': list(self.ci_90),
             },
             'mean': self.mean,
@@ -229,6 +235,7 @@ def compute_ci(samples: np.ndarray, metric_name: str) -> CredibleInterval:
             central=central,
             ci_50=(central * 0.75, central * 1.25),
             ci_70=(central * 0.65, central * 1.40),
+            ci_80=(central * 0.58, central * 1.55),
             ci_90=(central * 0.50, central * 1.75),
             mean=central,
             std=abs(central) * 0.30,
@@ -241,7 +248,9 @@ def compute_ci(samples: np.ndarray, metric_name: str) -> CredibleInterval:
     mean = float(np.mean(valid))
     std = float(np.std(valid, ddof=1)) if valid.size > 1 else 0.0
 
-    q5, q15, q25, q75, q85, q95 = np.quantile(valid, [0.05, 0.15, 0.25, 0.75, 0.85, 0.95])
+    q5, q10, q15, q25, q75, q85, q90, q95 = np.quantile(
+        valid, [0.05, 0.10, 0.15, 0.25, 0.75, 0.85, 0.90, 0.95]
+    )
 
     ci_90_width = float(q95 - q5)
     if abs(central) > 1e-10 and ci_90_width > HIGH_UNCERTAINTY_CI_WIDTH_RATIO * abs(central):
@@ -252,6 +261,7 @@ def compute_ci(samples: np.ndarray, metric_name: str) -> CredibleInterval:
         central=central,
         ci_50=(float(q25), float(q75)),
         ci_70=(float(q15), float(q85)),
+        ci_80=(float(q10), float(q90)),
         ci_90=(float(q5), float(q95)),
         mean=mean,
         std=std,
@@ -412,16 +422,21 @@ def _self_test() -> int:
         print(f"  mean:             {ci.mean:,.2f}")
         print(f"  std:              {ci.std:,.2f}")
         print(f"  70% CI:           [{ci.ci_70[0]:,.2f} , {ci.ci_70[1]:,.2f}]")
+        print(f"  80% CI:           [{ci.ci_80[0]:,.2f} , {ci.ci_80[1]:,.2f}]")
         print(f"  90% CI:           [{ci.ci_90[0]:,.2f} , {ci.ci_90[1]:,.2f}]")
         print(f"  valid samples:    {ci.n_samples_valid} of {SAMPLES_CLI}")
         if ci.warnings:
             print(f"  warnings:         {ci.warnings}")
 
     # Verify CIs are ordered correctly — wider intervals have lower lower-bounds and higher upper-bounds
-    # Order: 90% (widest) ⊇ 70% ⊇ 50% (narrowest)
+    # Order: 90% (widest) ⊇ 80% ⊇ 70% ⊇ 50% (narrowest)
     for metric, ci in results.items():
-        assert ci.ci_90[0] <= ci.ci_70[0] <= ci.ci_50[0], f"{metric}: CI lower bounds disordered (90 ≤ 70 ≤ 50 required)"
-        assert ci.ci_50[1] <= ci.ci_70[1] <= ci.ci_90[1], f"{metric}: CI upper bounds disordered (50 ≤ 70 ≤ 90 required)"
+        assert ci.ci_90[0] <= ci.ci_80[0] <= ci.ci_70[0] <= ci.ci_50[0], (
+            f"{metric}: CI lower bounds disordered (90 ≤ 80 ≤ 70 ≤ 50 required)"
+        )
+        assert ci.ci_50[1] <= ci.ci_70[1] <= ci.ci_80[1] <= ci.ci_90[1], (
+            f"{metric}: CI upper bounds disordered (50 ≤ 70 ≤ 80 ≤ 90 required)"
+        )
         assert ci.ci_90[0] <= ci.central <= ci.ci_90[1], f"{metric}: central outside 90% CI"
 
     print("\n[self_test] all CI ordering assertions passed")

@@ -15,7 +15,7 @@
  * HOW TO USE
  *   const data = await fetch('data/projection-data.json').then(r => r.json());
  *   const inputs = {scope: 'MX', timePeriod: 'Q2', targetMode: 'spend',
- *                   targetValue: 325000, credibilityLevels: [0.50, 0.70, 0.90]};
+ *                   targetValue: 325000, credibilityLevels: [0.50, 0.70, 0.80, 0.90]};
  *   const out = MPE.project(inputs, data);
  *   const ciOut = await MPE.projectWithUncertainty(inputs, data);  // Web Worker
  *
@@ -469,7 +469,7 @@
   // ---------- Compute credible intervals (mirrors _compute_credible_intervals) ----------
 
   function computeCredibleIntervals(solvedSpend, params, tp, opts, credibilityLevels, nSamples, rngSeed) {
-    credibilityLevels = credibilityLevels || [0.50, 0.70, 0.90];
+    credibilityLevels = credibilityLevels || [0.50, 0.70, 0.80, 0.90];
     nSamples = nSamples || SAMPLES_UI;
     const rng = mulberry32(rngSeed || 42);
 
@@ -527,7 +527,12 @@
         const central = samples.length > 0 ? quantile(samples, 0.5) : 0;
         result[metric] = {
           metric, central,
-          ci: { 50: [central * 0.75, central * 1.25], 70: [central * 0.65, central * 1.40], 90: [central * 0.50, central * 1.75] },
+          ci: {
+            50: [central * 0.75, central * 1.25],
+            70: [central * 0.65, central * 1.40],
+            80: [central * 0.58, central * 1.55],
+            90: [central * 0.50, central * 1.75],
+          },
           mean: central, std: Math.abs(central) * 0.30, n_samples_valid: samples.length,
           warnings: ['INSUFFICIENT_SAMPLES'],
         };
@@ -536,6 +541,7 @@
       const central = quantile(samples, 0.5);
       const ci50 = [quantile(samples, 0.25), quantile(samples, 0.75)];
       const ci70 = [quantile(samples, 0.15), quantile(samples, 0.85)];
+      const ci80 = [quantile(samples, 0.10), quantile(samples, 0.90)];
       const ci90 = [quantile(samples, 0.05), quantile(samples, 0.95)];
       const mean = samples.reduce((a, b) => a + b, 0) / samples.length;
       const variance = samples.reduce((a, b) => a + (b - mean) * (b - mean), 0) / (samples.length - 1);
@@ -547,7 +553,7 @@
       }
       result[metric] = {
         metric, central,
-        ci: { 50: ci50, 70: ci70, 90: ci90 },
+        ci: { 50: ci50, 70: ci70, 80: ci80, 90: ci90 },
         mean, std, n_samples_valid: samples.length, warnings,
       };
     }

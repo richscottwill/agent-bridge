@@ -1224,20 +1224,31 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"- {k}: {v}")
         if result.credible_intervals:
             print()
-            print(f"## Credible Intervals (90%)")
+            print(f"## Credible Intervals (50% / 80% / 90%)")
             display_metrics = ['total_regs', 'total_spend', 'blended_cpa', 'ieccp']
             for metric in display_metrics:
                 ci = result.credible_intervals.get(metric)
                 if not ci:
                     continue
                 central = ci['central']
-                lo, hi = ci['ci']['90']
+                lo50, hi50 = ci['ci']['50']
+                lo80, hi80 = ci['ci']['80']
+                lo90, hi90 = ci['ci']['90']
                 if metric == 'total_spend' or metric == 'blended_cpa':
-                    print(f"- {metric}: ${central:,.2f}  (90% CI: ${lo:,.2f} — ${hi:,.2f})")
+                    print(f"- {metric}: ${central:,.2f}")
+                    print(f"    50% CI: ${lo50:,.2f} — ${hi50:,.2f}")
+                    print(f"    80% CI: ${lo80:,.2f} — ${hi80:,.2f}")
+                    print(f"    90% CI: ${lo90:,.2f} — ${hi90:,.2f}")
                 elif metric == 'ieccp':
-                    print(f"- {metric}: {central:.1f}%  (90% CI: {lo:.1f}% — {hi:.1f}%)")
+                    print(f"- {metric}: {central:.1f}%")
+                    print(f"    50% CI: {lo50:.1f}% — {hi50:.1f}%")
+                    print(f"    80% CI: {lo80:.1f}% — {hi80:.1f}%")
+                    print(f"    90% CI: {lo90:.1f}% — {hi90:.1f}%")
                 else:
-                    print(f"- {metric}: {central:,.0f}  (90% CI: {lo:,.0f} — {hi:,.0f})")
+                    print(f"- {metric}: {central:,.0f}")
+                    print(f"    50% CI: {lo50:,.0f} — {hi50:,.0f}")
+                    print(f"    80% CI: {lo80:,.0f} — {hi80:,.0f}")
+                    print(f"    90% CI: {lo90:,.0f} — {hi90:,.0f}")
                 if ci.get('warnings'):
                     print(f"    warnings: {', '.join(ci['warnings'])}")
         if result.warnings:
