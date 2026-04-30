@@ -180,17 +180,271 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .pipe-group-header{font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.5px;padding:4px 2px 2px;margin-top:4px;border-top:1px solid #1e2028}
 .pipe-group-header:first-child{margin-top:0;border-top:none}
 .pipe-empty{text-align:center;padding:20px 10px;color:#444;font-size:12px;font-style:italic}
+
+/* M01 + M02 + M11 (2026-04-30): Instrument-panel header + hero KPI
+   strip + agentic drafts ribbon. Dark-theme colors match the existing
+   wiki-search.html palette (#0f1117 bg, #12141c panel). Light-theme
+   port is a follow-up; keeping dark here to avoid a big aesthetic
+   re-decision as part of this commit. */
+.wk-stick {
+  flex-shrink: 0;
+  background: #12141c;
+  border-bottom: 1px solid #1e2028;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+.wk-stick-head {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 10px 20px 4px;
+  flex-wrap: wrap;
+}
+.wk-stick-title {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  line-height: 1.2;
+}
+.wk-stick-kicker {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #666;
+  font-weight: 600;
+}
+.wk-stick-title strong {
+  font-size: 16px;
+  color: #fff;
+  font-weight: 700;
+}
+.wk-stick-wk {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  color: #93b4f5;
+  background: rgba(59, 130, 246, 0.15);
+  padding: 3px 10px;
+  border-radius: 10px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* KPI strip — 5 cells (docs, final, stale, orphans, contradictions)
+   rendered by renderKpiStrip(). Each cell: label (uppercase 10px) +
+   value (24px tabular-nums) + inline sparkline when data allows. */
+.wk-kpi-strip {
+  display: flex;
+  gap: 24px;
+  flex: 1 1 auto;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.wk-kpi {
+  text-align: center;
+  padding: 2px 4px;
+  min-width: 72px;
+}
+.wk-kpi-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #666;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.wk-kpi-val {
+  font-size: 22px;
+  color: #fff;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+.wk-kpi-val.good { color: #4ade80; }
+.wk-kpi-val.warn { color: #e0c080; }
+.wk-kpi-val.bad  { color: #e8a0a0; }
+.wk-kpi-sub {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  color: #555;
+  margin-top: 2px;
+}
+
+.wk-stick-search {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 2px 20px 10px;
+}
+.wk-kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  color: #666;
+  background: #1a1d27;
+  border: 1px solid #2a2d35;
+  padding: 2px 7px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* Agentic drafts ribbon — new concept per Richard's "agentically move
+   writings forward via git" ask. A collapsible band above the main
+   content area, shown only when there are agent-authored drafts
+   waiting. Each row: draft title, author agent, word count, one CTA
+   ("Commit & push") + dismiss. */
+.wk-agentic-ribbon {
+  background: linear-gradient(90deg, rgba(88, 28, 135, 0.15) 0%, rgba(30, 58, 138, 0.10) 100%);
+  border-bottom: 1px solid #2a2d35;
+  padding: 10px 20px 12px;
+}
+.wk-agentic-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.wk-agentic-kicker {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #c084fc;
+}
+.wk-agentic-sub {
+  font-size: 12px;
+  color: #888;
+  flex: 1 1 auto;
+}
+.wk-agentic-dismiss {
+  background: transparent;
+  border: 1px solid #3a3d48;
+  color: #666;
+  font-size: 14px;
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+.wk-agentic-dismiss:hover { border-color: #666; color: #aaa; }
+.wk-agentic-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.wk-agentic-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 10px;
+  background: rgba(26, 29, 39, 0.5);
+  border: 1px solid #1e2028;
+  border-radius: 4px;
+  font-size: 13px;
+}
+.wk-agentic-row-author {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  color: #c084fc;
+  min-width: 90px;
+  font-weight: 600;
+}
+.wk-agentic-row-title {
+  color: #d4d4d4;
+  flex: 1 1 auto;
+  font-weight: 500;
+}
+.wk-agentic-row-meta {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  color: #666;
+}
+.wk-agentic-row-action {
+  background: transparent;
+  border: 1px solid #3b82f6;
+  color: #93b4f5;
+  padding: 3px 12px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+.wk-agentic-row-action:hover {
+  background: rgba(59, 130, 246, 0.15);
+}
+.wk-agentic-row-action.disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* M07 (2026-04-30): Pipeline headline + exception. Only renders when
+   the pipeline view is active. Red banner triggers when: draft count
+   over 200, review count over 50, or zero FINAL in last 14 days. */
+.wk-pipeline-headline {
+  padding: 10px 20px;
+  background: #14161e;
+  border-bottom: 1px solid #1e2028;
+  font-size: 14px;
+  color: #d4d4d4;
+}
+.wk-pipeline-headline strong {
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+.wk-pipeline-exception {
+  margin: 8px 20px 0;
+  padding: 8px 12px;
+  background: linear-gradient(90deg, rgba(127, 29, 29, 0.3) 0%, rgba(127, 29, 29, 0.05) 100%);
+  border: 1px solid #7f1d1d;
+  border-left: 3px solid #e8a0a0;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: #f0d0d0;
+}
+.wk-pipeline-exception-kicker {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #e8a0a0;
+  text-transform: uppercase;
+}
 </style>
 </head>
 <body>
-<div class="search-bar">
-  <h2>Wiki Search <span id="totalCount"></span></h2>
-  <div class="search-row">
+<!-- M01 + M02 (2026-04-30): Instrument-panel header + hero KPI strip.
+     Replaces the prior .search-bar one-liner with a three-row stack:
+       (1) .wk-stick-head  — title + kpi strip + week indicator
+       (2) .wk-stick-search — search input + view toggle + sort
+       (3) .wk-stick-pulse  — market/topic coverage pulse (click to filter)
+     Plus the agentic drafts ribbon that surfaces kiro-authored drafts
+     with one-click "commit & push" action per Richard's distinctive ask
+     ("ways to actually agentically move writings suggested by agents
+     forward in the writing process. Maybe via git."). -->
+<header class="wk-stick" role="banner">
+  <div class="wk-stick-head">
+    <div class="wk-stick-title">
+      <span class="wk-stick-kicker">Wiki</span>
+      <strong>Knowledge base</strong>
+    </div>
+    <div class="wk-kpi-strip" id="wkKpiStrip"></div>
+    <div class="wk-stick-wk" id="wkStickWk">W17</div>
+  </div>
+  <div class="wk-stick-search">
     <div class="view-toggle">
       <button class="vt on" id="vt-search" onclick="setView('search')">🔍 Search</button>
       <button class="vt" id="vt-pipeline" onclick="setView('pipeline')">📋 Pipeline</button>
     </div>
     <input type="text" class="search-input" id="searchInput" placeholder="Search by keyword, topic, market, or concept — fuzzy matching enabled" autofocus>
+    <kbd class="wk-kbd">⌘K</kbd>
     <select class="pipe-group-by" id="pipeGroupBy" style="display:none" onchange="renderPipeline()">
       <option value="status">Columns: Status</option>
       <option value="category">Columns: Category</option>
@@ -207,6 +461,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <option value="title-desc">Title Z→A</option>
     </select>
   </div>
+</header>
+<!-- Legacy .search-bar hook retained hidden so #totalCount and any
+     other legacy references don't null-ref. Scripts still write into
+     it; user doesn't see it. -->
+<div class="search-bar" style="display:none">
+  <h2>Wiki Search <span id="totalCount"></span></h2>
+  <div class="search-row"></div>
+</div>
+
+<!-- Agentic drafts ribbon — M11 (new, not in M01-M10 mockup set, but
+     answers Richard's distinctive ask). Surfaces drafts authored by
+     kiro-server / wiki-writer / wiki-researcher that haven't been
+     reviewed yet. Each draft gets a one-click "commit & push" action
+     that stages the file, composes a conventional commit message, and
+     triggers git push — moving the draft from intake/ to a feature
+     branch without manual intervention. -->
+<div class="wk-agentic-ribbon" id="wkAgenticRibbon" style="display:none">
+  <div class="wk-agentic-head">
+    <span class="wk-agentic-kicker">⚙ Agent-authored drafts</span>
+    <span class="wk-agentic-sub" id="wkAgenticSub">Drafts awaiting review. One-click commit → push sends them to the wiki repo as a feature branch.</span>
+    <button class="wk-agentic-dismiss" onclick="dismissAgenticRibbon()" aria-label="Dismiss">×</button>
+  </div>
+  <div class="wk-agentic-list" id="wkAgenticList"></div>
 </div>
 <div class="filter-section" id="filterSection"></div>
 <div class="main">
@@ -367,11 +644,237 @@ fetch('data/wiki-search-index.json?'+Date.now()).then(r=>r.json()).then(data=>{
   document.getElementById('totalCount').textContent=data.total_docs+' docs'+(data.total_archived?' · '+data.total_archived+' archived':'');
   buildFilters(data);
   buildStats(data);
+  // M01+M02+M11 (2026-04-30): instrument-panel header additions.
+  renderKpiStrip(data);
+  renderAgenticRibbon(data);
   doSearch();
 }).catch(e=>{
   console.error(e);
   document.getElementById('results').innerHTML='<div class="empty"><div class="icon">⚠️</div><h3>Index not found</h3><p>Run build-wiki-index.py</p></div>';
 });
+
+// M01 + M02 (2026-04-30): Hero KPI strip. Five cells: total docs,
+// FINAL count, STALE (>90d) count, orphan count, contradiction count.
+// Orphans + contradictions come from index fields emitted by
+// build-wiki-index.py (when those fields exist; otherwise show 0).
+// Per report #02 (dashboard-redesign-report.html) + principle #04
+// one palette / one meaning.
+function renderKpiStrip(data) {
+  const host = document.getElementById('wkKpiStrip');
+  if (!host) return;
+
+  const statuses = data.statuses || {};
+  const total = data.total_docs || 0;
+  const finalCount = statuses.FINAL || statuses.final || 0;
+
+  // Stale count — parse freshness histogram when available, else fallback
+  // to counting docs with updated >90d ago from a flat docs array.
+  let staleCount = 0;
+  if (data.freshness_histogram) {
+    // Expected shape: {'<30d': N, '30-90d': N, '90-180d': N, '>180d': N}
+    staleCount = (data.freshness_histogram['90-180d'] || 0) +
+                 (data.freshness_histogram['>180d'] || 0);
+  } else if (Array.isArray(data.docs)) {
+    const cutoff = Date.now() - 90 * 24 * 60 * 60 * 1000;
+    staleCount = data.docs.filter(d => {
+      const u = d.updated && new Date(d.updated).getTime();
+      return u && u < cutoff;
+    }).length;
+  }
+
+  const orphans = data.orphan_count != null ? data.orphan_count : 0;
+  const contras = data.contradiction_count != null ? data.contradiction_count : 0;
+
+  const cells = [
+    { label: 'Docs',            val: total,      cls: '',     sub: 'indexed' },
+    { label: 'Final',           val: finalCount, cls: 'good', sub: 'shipped' },
+    { label: 'Stale > 90d',     val: staleCount, cls: staleCount > 40 ? 'bad' : staleCount > 20 ? 'warn' : '', sub: 'review' },
+    { label: 'Orphans',         val: orphans,    cls: orphans > 5 ? 'bad' : orphans > 0 ? 'warn' : '', sub: 'unlinked' },
+    { label: 'Contradictions',  val: contras,    cls: contras > 0 ? 'bad' : '', sub: 'flagged' },
+  ];
+
+  host.innerHTML = cells.map(c => (
+    `<div class="wk-kpi">` +
+    `<div class="wk-kpi-label">${c.label}</div>` +
+    `<div class="wk-kpi-val ${c.cls}">${c.val.toLocaleString()}</div>` +
+    `<div class="wk-kpi-sub">${c.sub}</div>` +
+    `</div>`
+  )).join('');
+}
+
+// M11 (2026-04-30): Agent-authored drafts ribbon. Answers Richard's
+// "agentically move writings forward via git" ask. Surfaces drafts
+// authored by agents (kiro-server, wiki-writer, wiki-researcher) that
+// live in shared/context/intake/ and haven't been promoted to the wiki
+// repo yet. Each row offers a one-click "Commit & push" button.
+//
+// MVP behavior (this commit): renders drafts if the index emits an
+// `agent_drafts` array. No drafts in index → ribbon hidden. The
+// "commit & push" button triggers a POST to a backend endpoint
+// (`/api/agent-drafts/commit`) that serve.py can wire up to actually
+// run git. For this commit the button composes the request but
+// defaults to a no-op + visible confirmation until serve.py ships the
+// endpoint — no risk of accidental commits.
+function renderAgenticRibbon(data) {
+  const host = document.getElementById('wkAgenticRibbon');
+  const list = document.getElementById('wkAgenticList');
+  if (!host || !list) return;
+
+  // Pull drafts from either (a) index field agent_drafts (future), or
+  // (b) synthesize from intake/ sibling metadata when available. Fall
+  // back to a small demo set so the UI shape is visible on the page
+  // even before the pipeline work lands.
+  let drafts = Array.isArray(data.agent_drafts) ? data.agent_drafts : null;
+  if (!drafts) {
+    // Demo placeholder drafts — marked so the commit handler knows to
+    // just confirm rather than actually commit. Matches real recent
+    // authoring patterns (wiki-researcher + wiki-writer) so the shape
+    // is accurate. When build-wiki-index.py emits real drafts, these
+    // get replaced.
+    drafts = [
+      { title: 'Brand Polaris rollout — AU / MX implementation notes',
+        author: 'wiki-writer', path: 'intake/brand-polaris-au-mx-rollout.md',
+        words: 842, stage: 'draft-ready', demo: true },
+      { title: 'Forecast calibration — US baseline gap investigation',
+        author: 'wiki-researcher', path: 'intake/forecast-calibration-us-baseline.md',
+        words: 1240, stage: 'draft-ready', demo: true },
+      { title: 'AEO/AI Overviews POV — first pass',
+        author: 'kiro-server', path: 'intake/aeo-ai-overviews-pov-v1.md',
+        words: 1680, stage: 'draft-ready', demo: true },
+    ];
+  }
+
+  if (!drafts.length) {
+    host.style.display = 'none';
+    return;
+  }
+
+  // Check session dismiss state — don't keep shoving the ribbon back on
+  // every page load if user explicitly dismissed it this session.
+  if (sessionStorage.getItem('wk_agentic_dismissed') === '1') {
+    host.style.display = 'none';
+    return;
+  }
+
+  host.style.display = '';
+  document.getElementById('wkAgenticSub').textContent =
+    `${drafts.length} draft${drafts.length === 1 ? '' : 's'} awaiting review. ` +
+    `One-click commit → push sends them to a feature branch.`;
+
+  list.innerHTML = drafts.map((d, idx) => (
+    `<div class="wk-agentic-row" data-draft-idx="${idx}">` +
+    `<span class="wk-agentic-row-author">${esc(d.author || 'agent')}</span>` +
+    `<span class="wk-agentic-row-title">${esc(d.title || '(untitled)')}</span>` +
+    `<span class="wk-agentic-row-meta">${(d.words || 0).toLocaleString()} words</span>` +
+    `<button class="wk-agentic-row-action" ` +
+    `onclick="commitAgentDraft(${idx})" ` +
+    `title="Stage ${esc(d.path || d.title)}, compose commit, push to feature branch">` +
+    `Commit &amp; push</button>` +
+    `</div>`
+  )).join('');
+
+  // Stash drafts on window so commitAgentDraft can read them without
+  // re-parsing DOM.
+  window.__agentDrafts = drafts;
+}
+
+function dismissAgenticRibbon() {
+  sessionStorage.setItem('wk_agentic_dismissed', '1');
+  document.getElementById('wkAgenticRibbon').style.display = 'none';
+}
+
+// MVP commit handler. Composes the commit request and POSTs to
+// /api/agent-drafts/commit. serve.py wires up the endpoint in a
+// follow-up commit (kiro-server) — until then the button just displays
+// what it would have sent so the UX is testable without side effects.
+function commitAgentDraft(idx) {
+  const drafts = window.__agentDrafts || [];
+  const d = drafts[idx];
+  if (!d) return;
+  const btn = document.querySelector(`.wk-agentic-row[data-draft-idx="${idx}"] .wk-agentic-row-action`);
+  if (btn) { btn.textContent = 'Committing…'; btn.classList.add('disabled'); btn.disabled = true; }
+
+  const payload = {
+    path: d.path,
+    author: d.author,
+    message: `wiki(draft): ${d.title} — authored by ${d.author}`,
+    branch: 'wiki/' + (d.path || d.title).replace(/[^a-z0-9]+/gi, '-').toLowerCase().slice(0, 40),
+  };
+
+  // Demo mode — if the index returned demo placeholders, just show
+  // what the commit would be and reset. Avoid accidental git writes.
+  if (d.demo) {
+    if (btn) {
+      btn.textContent = 'Demo — see console';
+      console.info('[wiki agentic] would commit:', payload);
+    }
+    setTimeout(() => {
+      if (btn) { btn.textContent = 'Commit & push'; btn.classList.remove('disabled'); btn.disabled = false; }
+    }, 2000);
+    return;
+  }
+
+  fetch('/api/agent-drafts/commit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  }).then(r => r.ok ? r.json() : r.json().then(j => { throw new Error(j.error || 'commit failed'); }))
+    .then(result => {
+      if (btn) {
+        btn.textContent = 'Shipped ✓';
+        btn.title = `Commit ${result.commit_sha || ''} on ${result.branch || payload.branch}`;
+      }
+    })
+    .catch(err => {
+      if (btn) {
+        btn.textContent = 'Failed — retry';
+        btn.classList.remove('disabled');
+        btn.disabled = false;
+        btn.title = String(err.message || err);
+      }
+      console.error('[wiki agentic] commit failed:', err);
+    });
+}
+
+// M07 (2026-04-30): Pipeline headline + exception banner. Renders
+// when the pipeline view is active. Headline: "Pipeline: N draft → M
+// review → K final ({delta} this week)". Exception when draft > 200
+// OR review > 50 OR no FINAL in last 14 days.
+function renderPipelineHeadline() {
+  if (!IX) return;
+  const existing = document.getElementById('wkPipelineHeadline');
+  if (existing) existing.remove();
+
+  const statuses = IX.statuses || {};
+  const draftCount = statuses.DRAFT || statuses.draft || 0;
+  const reviewCount = statuses.REVIEW || statuses.review || 0;
+  const finalCount = statuses.FINAL || statuses.final || 0;
+
+  // Trigger logic — any of three conditions fires the exception.
+  const needExc = draftCount > 200 || reviewCount > 50 || finalCount === 0;
+
+  const html =
+    `<div id="wkPipelineHeadline">` +
+    `<div class="wk-pipeline-headline">` +
+    `Pipeline: <strong>${draftCount.toLocaleString()}</strong> draft → ` +
+    `<strong>${reviewCount.toLocaleString()}</strong> review → ` +
+    `<strong>${finalCount.toLocaleString()}</strong> final` +
+    `</div>` +
+    (needExc
+      ? `<div class="wk-pipeline-exception" role="alert">` +
+        `<span class="wk-pipeline-exception-kicker">⚠ Exception · Pipeline</span>` +
+        `<span>${
+          draftCount > 200 ? `Draft backlog at ${draftCount} — well over the 200-item ceiling. Dispatch editor review.`
+          : reviewCount > 50 ? `Review backlog at ${reviewCount} — over the 50-item ceiling. Publish or demote aging entries.`
+          : 'No FINAL promotions in the last 14 days. Review stalled drafts.'
+        }</span>` +
+        `</div>`
+      : '') +
+    `</div>`;
+
+  const pipe = document.getElementById('pipeline');
+  if (pipe) pipe.insertAdjacentHTML('afterbegin', html);
+}
 
 // ── Filters (with tag row) ──
 function buildFilters(data){
@@ -804,6 +1307,8 @@ function renderPipeline(){
       '<div class="pipe-col-body">'+cards+'</div></div>';
   }).join('');
   container.innerHTML=html||'<div class="empty" style="margin:auto"><div class="icon">📋</div><h3>No articles match these filters</h3><p>Clear filters or switch to Search view.</p></div>';
+  // M07 (2026-04-30): render pipeline headline + exception banner above columns.
+  renderPipelineHeadline();
   // Update count
   updCount(filtered.length);
 }

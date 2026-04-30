@@ -657,80 +657,6 @@ body {
 .wr-smallmult-yoy.bad  { color: var(--color-danger); }
 .wr-smallmult-yoy.warn { color: var(--color-warning); }
 
-/* M7 (2026-04-30): 6-12 chart — dual-panel weekly+monthly layout with
-   box-score footer. Commoncog Amazon WBR convention: 6 weeks weekly
-   on the left, 12 months monthly on the right, different Y axes. */
-.wr-wbr612 {
-  border: 1px solid var(--color-panel-border);
-  border-radius: 6px;
-  padding: var(--gap-md) var(--gap-lg);
-  margin: var(--gap-lg) 0;
-  background: var(--color-panel-bg);
-}
-.wr-wbr612-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--gap-md);
-  margin-bottom: var(--gap-md);
-  flex-wrap: wrap;
-}
-.wr-wbr612-sub {
-  font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 11px;
-  color: var(--color-text-subtle);
-  letter-spacing: 0.04em;
-}
-.wr-wbr612-panels {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--gap-lg);
-}
-@media (max-width: 900px) {
-  .wr-wbr612-panels { grid-template-columns: 1fr; }
-}
-.wr-wbr612-panel {
-  background: #FAFAF5;
-  border: 1px solid var(--color-panel-border);
-  border-radius: 3px;
-  padding: 6px 10px;
-  min-height: 200px;
-}
-.wr-wbr612-panel svg { display: block; width: 100%; height: auto; }
-.wr-wbr612-boxscore {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: var(--gap-sm);
-  margin-top: var(--gap-md);
-  padding-top: var(--gap-sm);
-  border-top: 1px solid var(--color-panel-border);
-}
-@media (max-width: 700px) {
-  .wr-wbr612-boxscore { grid-template-columns: repeat(2, 1fr); }
-}
-.wr-wbr612-boxscore-cell {
-  text-align: center;
-  padding: 4px 2px;
-  font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-text-subtle);
-}
-.wr-wbr612-boxscore-cell b {
-  display: block;
-  font-family: var(--font-serif, Georgia, serif);
-  font-size: 18px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  margin-top: 2px;
-  color: var(--color-text-hero);
-  letter-spacing: 0;
-}
-.wr-wbr612-boxscore-cell b.pos { color: var(--color-success); }
-.wr-wbr612-boxscore-cell b.neg { color: var(--color-danger); }
-.wr-wbr612-boxscore-cell b.warn { color: var(--color-warning); }
-
 /* M2 (2026-04-30): Exception banner. Renders only when the forecast
    for the current market has materially missed in the last 1-6 weeks.
    Red lane, diagnosis + recommended-action row. */
@@ -1697,27 +1623,6 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
     <div class="wr-chart-wrap"><canvas id="calibrationChart" role="img" aria-label="Weekly forecast error: signed % per week with severity fill and CI reference band"></canvas></div>
   </div>
 </div>
-
-<!-- M7 (2026-04-30): Amazon 6-12 chart. Two panels side by side on a
-     single landscape layout: 6 weeks weekly on the left, 12 months
-     monthly on the right. Different Y axes per panel (Commoncog: same
-     Y "hides real relationships between short and long-term"). Box
-     score footer underneath — WoW, YoY, vs OP2, 4wk avg, 13wk avg.
-     Same format every week so the brain stops processing format and
-     starts processing exceptions. Report #011, bus thread 004+006. -->
-<section class="wr-wbr612" id="sec-wbr612" aria-labelledby="wbr612Heading">
-  <header class="wr-wbr612-head">
-    <h3 id="wbr612Heading" style="margin:0">
-      6-12 view &mdash; <span id="wbr612Title">Registrations</span>
-    </h3>
-    <span class="wr-wbr612-sub" id="wbr612Sub"></span>
-  </header>
-  <div class="wr-wbr612-panels">
-    <div class="wr-wbr612-panel" id="wbr612LeftPanel"></div>
-    <div class="wr-wbr612-panel" id="wbr612RightPanel"></div>
-  </div>
-  <footer class="wr-wbr612-boxscore" id="wbr612BoxScore"></footer>
-</section>
 
 <!-- WR-S1 (2026-04-29): Weekly Detail wrapped in <details> collapsed by default.
      The table is ~50+ rows; before collapsing it dominated ~500px of scroll on
