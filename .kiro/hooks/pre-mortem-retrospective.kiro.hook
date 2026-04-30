@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Pre-Mortem Weekly Retrospective",
+  "description": "Weekly hook that reads context/active/pre-mortem-log.jsonl and surfaces two signals: (1) Richard's failure-prediction calibration (did what he predicted would go wrong actually go wrong?), and (2) the override rate on the pre-mortem nudge (how often does he skip writing one). High override rate + low calibration = nudge isn't working, consider upgrading to a block.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Run the weekly pre-mortem retrospective.\n\n1. Read context/active/pre-mortem-log.jsonl from the last 7 days.\n2. For each entry where had_pre_mortem=true: fetch the associated Asana task's current state. If the task is completed AND there's a retrospective note or comment, diff the pre-mortem prediction ('why it didn't land') vs what actually happened. Classify: PREDICTED_CORRECTLY, PREDICTED_WRONG, TASK_STILL_OPEN, NO_RETRO.\n3. Compute:\n   - Override rate: (entries with override=true) / (total artifact task starts)\n   - Calibration rate: PREDICTED_CORRECTLY / (PREDICTED_CORRECTLY + PREDICTED_WRONG) — ignoring still-open and no-retro\n   - Sample size this week: total entries\n4. Write findings to context/active/pre-mortem-retrospective-latest.md with this shape:\n\n```\n# Pre-Mortem Retrospective — YYYY-MM-DD\n\n- Sample: N artifact starts this week\n- Override rate: X% (Richard proceeded without a pre-mortem)\n- Calibration: Y% (of pre-mortems that scored, how many predicted correctly)\n\n## What Richard predicted correctly\n- [task name]: predicted [X] would cause trouble; it did.\n\n## What Richard predicted incorrectly\n- [task name]: predicted [X]; actual problem was [Y].\n\n## Action\n- If override rate > 50%: flag for protocol review — nudge may not be landing.\n- If calibration < 30%: flag — Richard's failure-prediction is miscalibrated, check which failure modes he's blind to.\n- Otherwise: no action, continue.\n```\n\n5. Write a one-line summary to the rw-tracker system-state file on SharePoint for cross-device visibility.\n\nKeep the retrospective lightweight — it's an optional signal, not a blocker for Richard's weekly flow."
+  }
+}
