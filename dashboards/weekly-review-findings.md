@@ -425,3 +425,10 @@ See `context/intake/dashboard-research/mockups/README.md` for full M1-M10 spec +
 | M2 · Headline + exception banner with recommended action | done | New `renderExceptionBanner()` in weekly-review.html. Conditional render — only appears when any of three triggers fire: (1) latest week MISS with abs(error_pct) > 15%, (2) in-CI rate < 50% over last 6 weeks, (3) mean abs error > 20% over last 6 weeks. Banner carries: (a) diagnosis sentence classified locally until `callout.forecast_diagnosis` lands server-side per bus 002 (branches: chronic under-pred / chronic over-pred / coverage degradation / single-week miss); (b) evidence line with 3-6 weeks in-CI, mean error signed %, latest week signed %; (c) recommended-action row with magnitude-driven prescription — `>25%` → "Draft Brandon note" with Slack app_redirect link + pre-composed body, `15-25%` → "Open investigation" linking to scorecard, coverage-only → "Review scorecard". Uses red-lane styling with `role="alert"`. Verified on US (under-pred +23.5% mean → banner fires) and WW (6/6 in CI → banner suppressed). |
 
 Sign-convention fix caught during verification: `error_pct > 0` means `actual > pred` (under-predicting). My first pass had the branches flipped; corrected before commit.
+
+
+## M8 shipped (2026-04-30)
+
+| Finding | Status | Notes |
+|---|---|---|
+| M8 · Prior-week thread as sparkline strip | done | New `renderThreadStrip()` renders 7 cells (last 6 graded + 1 pending) between the narrative/exception block and the charts. Each cell: week label, sparkline of [first_pred → latest_pred → actual], signed error %. Color-state by outcome: hit (green), miss (actual outside CI + abs(err) > 10%), surprise (outside CI but err ≤ 10%), pending (ungraded). Clicking a cell jumps to that week's narrative. Additive to WR-A10 scrub — scrub is ephemeral (hover-only), this is persistent always-visible thread. Reuses `window.Sparkline.renderSparkline` from M3. Kiro-server confirmed "additive not duplicative" on bus 006. Verified: US W11-W17 shows correct HIT/MISS/HIT ordering matching `predictions_history.US[wk]`. |

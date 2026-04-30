@@ -515,6 +515,60 @@ body {
   color: var(--color-text-on-brand);
 }
 
+/* M8 (2026-04-30): Prior-week thread — 7 cells of {label, sparkline,
+   signed-error}. Additive to WR-A10 scrub; persistent always-visible
+   way to see calibration pattern without hovering the chart. */
+.wr-thread-strip {
+  display: flex;
+  gap: var(--gap-sm);
+  align-items: flex-end;
+  padding: var(--gap-sm) 0;
+  margin: 0 0 var(--gap-md) 0;
+  border-top: 1px solid var(--color-panel-border);
+  border-bottom: 1px solid var(--color-panel-border);
+  overflow-x: auto;
+}
+.wr-thread-cell {
+  flex: 1 1 0;
+  min-width: 68px;
+  text-align: center;
+  padding: 6px 4px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: inherit;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+.wr-thread-cell:hover {
+  background: #FAF9F3;
+  border-color: var(--color-panel-border);
+}
+.wr-thread-cell.current {
+  background: #EEF5FF;
+  border-color: var(--color-brand);
+}
+.wr-thread-cell-wk {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  color: var(--color-text-meta);
+  margin-bottom: 3px;
+  font-variant-numeric: tabular-nums;
+}
+.wr-thread-cell-val {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  color: var(--color-text-subtle);
+  margin-top: 3px;
+  font-variant-numeric: tabular-nums;
+}
+.wr-thread-cell.hit .wr-thread-cell-val { color: var(--color-success); }
+.wr-thread-cell.miss .wr-thread-cell-val { color: var(--color-danger); }
+.wr-thread-cell.surprise .wr-thread-cell-val { color: var(--color-warning); }
+.wr-thread-cell.pending .wr-thread-cell-val { color: var(--color-text-subtle); font-style: italic; }
+/* Sparkline gets a baseline line underneath for visual reference */
+.wr-thread-cell .sparkline { display: block; margin: 0 auto; }
+
 /* KPI row — reuse .hero-kpi from projection-design-system.css but in a row */
 .wr-kpi-row {
   display: flex;
@@ -1267,6 +1321,16 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
     </div>
   </div>
 </div>
+<!-- M8 (2026-04-30): Prior-week thread as 7-cell sparkline strip.
+     Additive to WR-A10 scrub-the-chart — the chart already supports
+     hover-scrub; this is a persistent always-visible thread above the
+     charts so the reader sees all 7 weeks' calibration pattern at once
+     and can click a cell to jump to that week (vs the ephemeral scrub
+     interaction which only lasts while hovering the chart). -->
+<div class="wr-thread-strip" id="threadStrip"
+     role="group"
+     aria-label="Last 7 weeks forecast pattern — click a cell to jump"></div>
+
 <!-- WR-D2 (2026-04-28): calibration promoted to its own first-class panel
      beside the trend panel. Both render on cold load; grid collapses to
      1-column at <900px viewport. The chartModeBtn toggle is gone —
@@ -1759,6 +1823,7 @@ function render() {
   renderStickyTrustBar();
   updateStickyLabels();
   renderKPIs();
+  renderThreadStrip();
   renderChart();
   renderTable();
   renderMonthlyTable();
@@ -1953,6 +2018,116 @@ function renderExceptionBanner() {
         '>' + actionLabel + '</a>' +
     '</div>' +
     '</div>';
+}
+
+// M8 (2026-04-30): Prior-week thread strip. Additive to WR-A10 scrub —
+// the chart scrub is ephemeral (only while hovering), this is the
+// persistent always-visible thread of the last 7 weeks. Each cell
+// shows:
+//   - Week label (Wnn)
+//   - Sparkline of that week's drift (first-pred → latest-pred — flat
+//     when there's only one snapshot; zig when the forecast moved
+//     between when it was first issued and when actuals landed)
+//   - Signed error % (or "pending" for ungraded weeks)
+// Color class: hit (green), miss (red), surprise (amber — actual
+// outside CI but not far enough to be a full miss), pending (grey).
+// Click jumps to that week. Current week outlined.
+function renderThreadStrip() {
+  const host = document.getElementById('threadStrip');
+  if (!host || !FORECAST) return;
+
+  const hist = (FORECAST.predictions_history && FORECAST.predictions_history[curMarket]) || {};
+  const maxWk = FORECAST.max_week || 15;
+
+  // Show 7 cells: last 6 graded + 1 pending (the current projection week).
+  // Build from oldest on the left → newest on the right per WBR
+  // convention (time flows →).
+  const weeks = [];
+  for (let w = Math.max(1, maxWk - 5); w <= maxWk + 1; w++) {
+    weeks.push(w);
+  }
+
+  if (!window.Sparkline || !window.Sparkline.renderSparkline) {
+    // Defensive: if the helper somehow didn't load, degrade to text.
+    host.innerHTML = weeks.map(w => `<div class="wr-thread-cell"><div class="wr-thread-cell-wk">W${w}</div></div>`).join('');
+    return;
+  }
+
+  const cells = weeks.map(wk => {
+    const r = ((hist[String(wk)] || hist[wk] || {}).regs) || null;
+    const isCurrent = ('W' + wk) === curWeek ||
+      ('W' + String(wk).padStart(2, '0')) === curWeek;
+
+    if (!r || r.actual == null) {
+      // Pending or missing — show a flat dashed line and "pending".
+      const spark = window.Sparkline.renderSparkline([1, 1, 1, 1], {
+        width: 56, height: 18, color: '#9CA3AF', showDot: false, strokeWidth: 1
+      });
+      return (
+        `<button class="wr-thread-cell pending${isCurrent ? ' current' : ''}" data-wk="W${wk}" ` +
+        `title="W${wk} — not yet graded" aria-label="Week ${wk}, not yet graded">` +
+        `<div class="wr-thread-cell-wk">W${wk}</div>` +
+        spark +
+        `<div class="wr-thread-cell-val">pending</div>` +
+        `</button>`
+      );
+    }
+
+    // Graded week. Classify state:
+    //   HIT: actual inside CI.
+    //   MISS: actual outside CI AND abs(err) > 10%.
+    //   SURPRISE: actual outside CI but err <= 10% (near-miss).
+    let state = 'hit';
+    const inCI = r.latest_ci_lo != null && r.latest_ci_hi != null &&
+                 r.actual >= r.latest_ci_lo && r.actual <= r.latest_ci_hi;
+    if (!inCI) {
+      state = Math.abs(r.error_pct || 0) > 10 ? 'miss' : 'surprise';
+    }
+
+    // Sparkline of [first_pred, latest_pred, actual]. If first == latest
+    // the line is flat → no drift. If actual overshoots that's where the
+    // color kicks. Color matches state.
+    const seriesPts = [r.first_pred, r.latest_pred, r.actual].filter(v => Number.isFinite(v));
+    const color = state === 'hit'      ? '#2f7d3e'
+                : state === 'miss'     ? '#a63939'
+                : state === 'surprise' ? '#b06a00'
+                : '#9CA3AF';
+    const spark = window.Sparkline.renderSparkline(seriesPts, {
+      width: 56, height: 18, color, showDot: true
+    });
+
+    const errRaw = Number.isFinite(r.error_pct) ? r.error_pct : null;
+    const errStr = errRaw != null
+      ? (errRaw > 0 ? '+' : '') + errRaw.toFixed(1) + '%'
+      : '\u2014';
+
+    return (
+      `<button class="wr-thread-cell ${state}${isCurrent ? ' current' : ''}" data-wk="W${wk}" ` +
+      `title="W${wk} — ${state}${errRaw != null ? ', ' + errStr : ''}" ` +
+      `aria-label="Week ${wk}, ${state}${errRaw != null ? ', error ' + errStr : ''}">` +
+      `<div class="wr-thread-cell-wk">W${wk}</div>` +
+      spark +
+      `<div class="wr-thread-cell-val">${errStr}</div>` +
+      `</button>`
+    );
+  });
+
+  host.innerHTML = cells.join('');
+
+  // Click → jump to week. Only navigates to weeks that have callout data;
+  // otherwise we'd land on an empty narrative (same guard WR-A10 uses).
+  host.querySelectorAll('.wr-thread-cell').forEach(btn => {
+    btn.onclick = () => {
+      const wk = btn.dataset.wk;
+      if (!wk || wk === curWeek) return;
+      const available = (CALLOUTS.weeks || []).includes(wk);
+      if (!available) return;
+      curWeek = wk;
+      const sel = document.getElementById('weekSelect');
+      if (sel) sel.value = wk;
+      render();
+    };
+  });
 }
 
 function renderSinceLastWeekHtml(c) {
