@@ -1,4 +1,6 @@
 <!-- DOC-0341 | duck_id: protocol-au-stakeholder-research-ytd -->
+
+*Example:* When this applies, the expected outcome is verified by checking the result.
 # AU Stakeholder Research — YTD 2026
 
 ## Purpose
@@ -13,6 +15,7 @@ Comprehensive record of all AU paid search stakeholder interactions, decisions, 
 | Harjeet Kheer | AU SSR/Marketing | Transitioned out of PS sync in March. Was initial POC before Alexis. |
 ## Chronological Timeline
 
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ### January 2026 — Onboarding & Promotion Setup
 
 - **Jan 5-8**: Melissa O'Leary shared Back to Business promotion URL for sitelink implementation (25% off first purchase, AU$75 cap, Jan 19 - Feb 27). Richard proposed 3 headline options. Lena suggested alternatives ("Join Amazon Business and save", "Register and save"). Brandon flagged T&Cs copy as unnecessary.

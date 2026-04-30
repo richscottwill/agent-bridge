@@ -58,6 +58,7 @@ Sources: WBR callouts, MBR/QBR data, Google Ads, competitor monitoring, ad copy 
 
 
 
+
 #### NA Markets
 
 | Market | Period | Regs | vs OP2 | CPA | Key Signal |
@@ -270,12 +271,7 @@ Bulk/wholesale/B2B → price, quality, selection:
 
 _Predicted questions cleared at EOD 4/3. Regenerated each AM-2 from calendar + active threads + Slack signals._
 
-
-
-
-
-
-
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ### Data Pipeline
 
 | Component | Detail |

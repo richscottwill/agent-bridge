@@ -79,12 +79,7 @@ Last updated: 2026-04-04 (Karpathy Run 25 — Five Levels compressed to 2 lines 
 
 
 
-
-
-
-
-
-### Decision Checks
+#### Prediction Template — Details ### Decision Checks
 When Richard faces a new decision, predict his position by running these checks in order. If 3+ checks align, confidence is HIGH. If 1-2 align, confidence is MEDIUM — flag the tension.
 
 1. **Existing principle?** → Check the Decision Log first. If a principle directly applies, Richard will follow it — principles override gut feel.
@@ -170,10 +165,7 @@ Example: D7 (Polaris weblab) shows +30% regs after 30d → tag RESOLVED, extract
 
 #### Part 4
 
-
-
-
-
+*Example:* When this applies, the expected outcome is verified by checking the result.
 #### Part 5
 
 
@@ -271,17 +263,7 @@ Key metric: at least one tool adopted by a teammate.
 AEO POV as foundational artifact. Sequence after Levels 1-3 so credibility and bandwidth exist.
 Key metric: published POV or framework that shapes team strategy.
 
-
-
-
-
-
-
-
-
-
-
-
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ### Level 5: Full Agentic Orchestration of PS Work
 End state: agent swarm runs PS operations autonomously. Gap: "agent assists" → "agent operates" is an architecture shift.
 Key metric: a PS workflow that runs end-to-end without human intervention.
@@ -321,19 +303,7 @@ Graduation is not a date — it's evidence. The nervous system (Loop 6) tracks t
 **Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
 
 **Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
-#### Worked Example — Level 1 Gate Check
 Week of 4/5: Testing Approach v5 shipped through full wiki pipeline (PUBLISH, 8.4/10). That's 1 consecutive week with a strategic artifact. Gate requires 4 consecutive weeks. Next 3 weeks must each produce a shipped artifact (e.g., WBR callout doc, AEO POV draft, MX test design) to pass the gate. Missing one week resets the counter to 0.
-
-
-
-
-
-
-
-
-
-
-
 
 #### Multi-Level Activity Rule
 You can DO work at multiple levels simultaneously, but you don't GRADUATE until the gate is met. The aMCC tracks Level 1 progress via the streak. The nervous system tracks all levels via Loop 6.

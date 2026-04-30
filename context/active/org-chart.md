@@ -29,6 +29,7 @@ Todd Heimes (VP, AB Prime, SSR, Mktg Exp.) — L10, SEA28
 - Always validate assumptions before acting on this data
 - Cross-reference with related sections for completeness
 
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ## Kate Rundell's Org — Peer Teams Under Central Marketing
 | Name | Alias | Title | Level | Location | Scope |
 |------|-------|-------|-------|----------|-------|
@@ -53,12 +54,7 @@ Todd Heimes (VP, AB Prime, SSR, Mktg Exp.) — L10, SEA28
 | Nikko Shida | nikkofs | Robert Skenes | On Pre-WBR attendee list |
 | Siri Angeles | siriang | Robert Skenes | On Pre-WBR CC list |
 
-## VP Level
-| Name | Alias | Title | Level | Location |
-|------|-------|-------|-------|----------|
-| Todd Heimes | theimes | VP, AB Prime, SSR, Mktg Exp. | L10 | Seattle (SEA28) |
-
-## International Expansion — Paid Search & Marketing Peers
+## VP Level | Name | Alias | Title | Level | Location | |------|-------|-------|-------|----------| | Todd Heimes | theimes | VP, AB Prime, SSR, Mktg Exp. | L10 | Seattle (SEA28) | ## International Expansion — Paid Search & Marketing Peers
 ```
 Todd Heimes (VP) — L10
   └── Nick Georgijev (Sr Mgr, AB Intl Expansion) — L7, Seattle

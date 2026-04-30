@@ -34,6 +34,9 @@ WHERE source_name = 'emails';
 
 
 ### Step 1B — Search all folders
+**Why `email_search` instead of `email_inbox`:** `email_inbox` only returns inbox emails. `email_search` with a date range covers every folder — including custom rules-based folders and any folder created after this protocol was written.
+**Why include the last-scanned day:** Emails can arrive late (server-side rules, delayed delivery, calendar invites updating). Re-scanning the overlap day with UPSERT ensures nothing is missed. The ON CONFLICT clause makes this idempotent.
+**Pagination:** If 250 results are returned (limit hit), increment `offset` by 250 and repeat until fewer than 250 results come back. In practice, a 1-3 day window rarely exceeds 250.
 
 ```
 email_search(query="*", startDate="{startDate}", endDate="{endDate}", limit=250)
@@ -41,11 +44,9 @@ email_search(query="*", startDate="{startDate}", endDate="{endDate}", limit=250)
 
 This searches across **all folders** (inbox, sent, custom folders, subfolders, newly created folders) and returns emails within the date window. Each result includes: conversationId, topic (subject), senders, lastDeliveryTime, preview, hasAttachments, folder.
 
-**Why `email_search` instead of `email_inbox`:** `email_inbox` only returns inbox emails. `email_search` with a date range covers every folder — including custom rules-based folders and any folder created after this protocol was written.
 
-**Why include the last-scanned day:** Emails can arrive late (server-side rules, delayed delivery, calendar invites updating). Re-scanning the overlap day with UPSERT ensures nothing is missed. The ON CONFLICT clause makes this idempotent.
 
-**Pagination:** If 250 results are returned (limit hit), increment `offset` by 250 and repeat until fewer than 250 results come back. In practice, a 1-3 day window rarely exceeds 250.
+
 
 
 
@@ -215,13 +216,14 @@ Format:
 
 
 ## Low / No Action
-Synced: {timestamp} | {total} emails processed | {high_count} high / {medium_count} medium / {low_count} low
 - {subject} from {sender} — {disposition}
-
 ---
+---
+Synced: {timestamp} | {total} emails processed | {high_count} high / {medium_count} medium / {low_count} low
+
 ```
 
----
+
 
 
 

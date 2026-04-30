@@ -188,6 +188,7 @@ These tasks are a subset of the Today list above. This section adds overdue-spec
 
 Note: Tasks #1 and #2 are STALE — these are the ones that need a decision, not just execution. The Kiro_RW entries above already contain the overdue-specific language. No additional Kiro_RW writes needed beyond what's in 5.1 — the overdue context is embedded in each entry.
 
+
 ### Overdue Pattern Analysis
 - 4 of 9 overdue tasks are recurring (EU SSR, WBR, AU Agenda, Bi-weekly Adi) — these should be marked complete and recreated, not carried forward
 - 2 are STALE with no activity (AU LP switch, Email overlay) — need Richard's decision

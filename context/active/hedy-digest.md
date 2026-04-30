@@ -166,6 +166,7 @@ Hedy MCP tools (`ListSessions`, `GetSessionRecap`, `GetSessionDetails`, etc.) ar
 
 ---
 
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## Cross-cutting Topics (mentioned in 2+ meetings)
 
 Derived from `signals.signal_tracker WHERE source_channel='hedy' AND reinforcement_count >= 2`:

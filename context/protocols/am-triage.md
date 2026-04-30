@@ -142,13 +142,7 @@ WHERE routine_rw LIKE '%Admin%'
 
 **Preservation:** Admin tasks within their due date window (not overdue, or overdue < 3 days) remain in Admin with cap of 3. No premature escalation.
 
-### Flags
-- Priority_RW=Today but no Routine → flag for Richard.
-- Overdue 7+ days with no activity → flag: do, delegate, or kill.
-
----
-
-## Phase 1 Enhancement — My Tasks Deep Enrichment
+### Flags - Priority_RW=Today but no Routine → flag for Richard. - Overdue 7+ days with no activity → flag: do, delegate, or kill. --- ## Phase 1 Enhancement — My Tasks Deep Enrichment
 
 After intake processing, scan ALL incomplete My Tasks for field completeness.
 
@@ -250,6 +244,7 @@ Same 4 rules as My Tasks enrichment (Kiro_RW, Next action, dates, Priority_RW). 
 - Never updated → flag as "never updated".
 - Extract health color (green/yellow/red).
 
+
 ### Step 6 — Recurring Task Auto-Creation (AU + MX) (AUTO-EXECUTE)
 Detect completed tasks matching known recurring patterns (see asana-command-center.md § Recurring Task Patterns):
 - Weekly: due_on = prev + 7d, start_on = due_on - 2d
@@ -313,6 +308,7 @@ Read event calendar from asana-command-center.md § Paid App Event Calendar.
 
 Present the curated task board. Execute Richard's directions in real-time.
 
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ### Supported Operations
 - Move tasks between Routine buckets
 - Change due dates

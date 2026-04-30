@@ -117,7 +117,6 @@ sharepoint_write_file(libraryName="Documents", folderPath="Kiro-Drive/artifacts"
 ## PULL: When to Read from SharePoint
 
 
-
 ### Automatic Pull Triggers (agent decides)
 
 | Trigger | What Gets Pulled | When | Why |

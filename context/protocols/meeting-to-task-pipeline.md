@@ -27,7 +27,7 @@ For each action item, determine:
 | Urgency signal ("ASAP", "today", "urgent", "immediately") | Tomorrow |
 | No date signal | +3 business days from meeting date |
 
-
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## Step 2: Classify Action Items
 For each extracted action item:
 - **Richard's items** → Asana task creation path (Step 3)

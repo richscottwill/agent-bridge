@@ -338,6 +338,9 @@ Over time, the aMCC builds a map of Richard's resistance patterns. This is diffe
 | **Blank page paralysis** | Researches/re-reads instead of writing | Write one bad sentence. Timer: 10 min, one section. |
 | **Competence anxiety** | Delays until "ready" (never ready) | Brandon shares docs with typos. Send at 80%. |
 | **Comfort zone gravity** | Gravitates to bids/keywords over strategy | Close campaign tab. Open strategy doc. Execution is your floor. |
+
+#### Task-Level Resistance — Details
+
 | **Delegation guilt** | Does work himself after delegation agreed | Name delegate. Send handoff. Delegation multiplies. |
 | **Urgency addiction** | Responds to every ping mid-focus | "Urgent or important?" If urgent-not-important, defer. |
 

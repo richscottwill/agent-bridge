@@ -125,6 +125,9 @@ Process intake files. Create tasks from signals. Detect enrichment gaps. All aut
 
 
 
+#### Phase 2: Signal Routing + Task Processing — Details
+
+
 **Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
 
 

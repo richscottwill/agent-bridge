@@ -1,40 +1,22 @@
 <!-- DOC-0500 | duck_id: organ-roster --> 
 
 # Roster — People Who Matter for PS / WW Traffic Marketing
-
 *Centralized directory of people Richard works with and around. Reference this before drafting an email, attributing a test, writing a callout, or tagging someone in a doc. Supersedes ad-hoc attribution in motherduck `ps.team_experiments` and scattered name references across body files.*
-
 *Operating principle: **Reduce decisions, not options.** When an agent needs to know "who owns X?" or "which alias for Y?", this file answers without requiring a search. Memory.md still holds the relationship graph (tone, dynamics, draft style); this file holds the directory (name, alias, role, markets, scope).*
+---
+
+
 
 Last updated: 2026-04-20 (initial build from Pre-WBR Callouts quip history + memory.md + team workload docs + motherduck attributions)
 
----
 
 
 
 
 
 
-## How This File Is Organized
 
-1. **AB Paid Search Team** — Richard's direct team (Brandon's PS/Outbound directs)
-2. **AB Traffic & Marketing Orgs (Pre-WBR Callout Owners)** — cross-channel owners across Traffic, Email, Push, MCS, ADA-DA, A.com, CPS, SSR, Events
-3. **Country / Market Leads** — per-country PS stakeholders (AU, MX, EU, JP, CA)
-4. **AB Marketing Leadership** — L7+
-5. **Cross-Functional Partners** — ABMA, MarTech, Legal, Data Science, MCS, Creative, SSR, CPS, Events
-6. **External Partners** — Google, Adobe
-7. **Richard's Specific Stakeholder Contacts** — context from memory.md (tone, draft style, meeting dynamics)
-
-For each person the goal is to capture: **Name | Alias | Level | Role | Location | Markets/Scope | Source of truth**.
-
----
-
-
-
-
-
-
-## 1. AB Paid Search Team (Brandon's Outbound Marketing Directs)
+## How This File Is Organized 1. **AB Paid Search Team** — Richard's direct team (Brandon's PS/Outbound directs) 2. **AB Traffic & Marketing Orgs (Pre-WBR Callout Owners)** — cross-channel owners across Traffic, Email, Push, MCS, ADA-DA, A.com, CPS, SSR, Events 3. **Country / Market Leads** — per-country PS stakeholders (AU, MX, EU, JP, CA) 4. **AB Marketing Leadership** — L7+ 5. **Cross-Functional Partners** — ABMA, MarTech, Legal, Data Science, MCS, Creative, SSR, CPS, Events 6. **External Partners** — Google, Adobe 7. **Richard's Specific Stakeholder Contacts** — context from memory.md (tone, draft style, meeting dynamics) For each person the goal is to capture: **Name | Alias | Level | Role | Location | Markets/Scope | Source of truth**. --- ## 1. AB Paid Search Team (Brandon's Outbound Marketing Directs)
 
 Brandon's seven direct reports plus Richard. Covers PS acquisition, MCS/website, mobile app, and ENG PS across all 10 markets.
 

@@ -28,6 +28,9 @@ This protocol is loaded by the state file engine when processing market='AU'. It
 - Change log: DuckDB `change_log` WHERE market='AU'
 - Projections: `~/shared/wiki/callouts/au/au-projections.md`
 - Context: `~/shared/wiki/callouts/au/au-context.md`
+
+#### Data Sources — Details
+
 - Stakeholder context: `~/shared/wiki/meetings/au-paid-search-sync.md`
 - Quip tracker: https://quip-amazon.com/ZZR9AAs7OfO
 - Quip testing: https://quip-amazon.com/IAJ9AAZJsDL

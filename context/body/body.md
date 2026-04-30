@@ -62,7 +62,7 @@ These aren't rules to remember — they're how the body works. Each organ embodi
 11. **Is this bloated?** → Gut (`gut.md` — compression, word budgets, waste removal)
 12. **New raw material?** → Drop in Intake (`~/shared/context/intake/`)
 
-
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## Task Routing (load only what you need)
 ---
 

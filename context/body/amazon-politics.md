@@ -13,6 +13,9 @@
 
 Last updated: 2026-04-14
 
+
+#### Amazon Politics & Career Dynamics — Reference Knowledge — Details
+
 ---
 
 
@@ -36,6 +39,9 @@ Last updated: 2026-04-14
 - Evans' VP promotion: 2.5 years of deliberate stakeholder alignment. His VP was reorged 6 months after — six months later and the promo would have reset entirely. Timing is load-bearing: the window can close without warning.
 
 **Worked example — outsized event path:** Richard's Testing Approach doc could be the outsized event. If it becomes the WW testing methodology, the promo narrative writes itself: "Without Richard, the WW testing framework wouldn't exist." The lifetime achievement alternative: grind L5 tasks for 3+ years and hope the queue moves. The outsized event compresses the timeline.
+
+#### How Promotions Actually Work — Details
+
 
 
 
@@ -118,12 +124,7 @@ Last updated: 2026-04-14
 - When Amazon experimentally removed the URA goal, managers immediately stopped having hard performance conversations. It was reinstated the next year.
 - The goal creates pressure to put SOMEONE on the list, even if the lowest performer is still decent.
 
-
-
-
-
-
-
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ### PIPs Are Almost Always Terminal
 - By the time a manager initiates a PIP, they've mentally decided you're done. Cognitive bias becomes self-fulfilling.
 - Evans has coached ~6 people on PIPs. All were fired. People he didn't coach were also fired.

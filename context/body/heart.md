@@ -104,7 +104,6 @@ Karpathy selects using a three-stage process: exclude → select target → sele
 - **Selection bias check :** Force at least 30% of experiments onto techniques with <3 prior data points on the target. A healthy batch has ≤50% keep rate. Reverts are the learning signal.
 **Section selection:** Randomized. Number the sections in the target file, use shuf to pick one. Do not pick "the section that looks compressible" — that's selection bias. The experiment discovers what's compressible; the agent's intuition doesn't.
 **Worked example — target selection:** Pre-filter: hands.md on cooldown , brain×REMOVE at posterior_mean=0.12, n=12 . Stage 1: no organs show declining accuracy + rising word count. Stage 2: no COMPRESS priors > 0.7 with n > 5. Stage 3: gut.md last updated 9 days ago . Selected: gut. Technique: query priors, REWORD has UCB=0.99 . But 30% exploration rule fires — shuf picks MERGE . Section: `echo -e "1\n2\n3\n4" | shuf | head -1` → section 3.
-### Step 2: Snapshot
 - Record word count of target organ
 - **Generate eval questions BEFORE applying the experiment.** Questions must be written while looking at the original content, not after seeing the result. This prevents unconscious question-easing.
 - Question count: 5 minimum for all experiments. Randomize difficulty by including a mix from all three levels:
@@ -115,12 +114,6 @@ Karpathy selects using a three-stage process: exclude → select target → sele
 - Standing adversarial questions are ALWAYS included when their organ is the target (see Step 4)
   - No fixed count. Karpathy judges what coverage the experiment needs.
 - Save snapshot for rollback
-
-
-
-
-
-
 
 ### Step 3: Apply Experiment
 - Apply boldly. The eval is the safety net. Timid edits teach nothing; bold edits that break teach what's load-bearing.
@@ -193,6 +186,10 @@ Full data logged to DuckDB `autoresearch_experiments` table + `experiment-log.ts
 
 
 ## Experiment Queue & Hyperparameters
+**Yield example:** COMPRESS Eyes 150w, Δ=+0.1, ~8K tokens → yield = 0.001875. High yield = bold change + positive delta + low cost.
+**Worked example — selection sequence:** Query priors → amcc×ADD has UCB 0.997 (high mean, proven winner). But 30% exploration rule fires → shuf picks hands×MERGE (n=0, untested). Section: shuf picks "Tool Opportunities." Technique: MERGE. Apply boldly, eval catches mistakes. If REVERT → hands×MERGE gets β+1, UCB drops, less likely next time. If KEEP → α+1, UCB stays high.
+**Self-termination:** Bayesian priors are the stopping mechanism. As combos accumulate reverts, UCB scores drop and they stop being selected. Proven losers (posterior_mean < 0.15, n > 10) are excluded entirely. The loop self-terminates when nothing worth trying remains — no manual cap needed.
+---
 
 Random at runtime. Each batch: select organ (over-budget → stale → UCB random) → section (random) → technique (COMPRESS/REWORD/REMOVE/RESTRUCTURE/ADD/MERGE/SPLIT) → apply and eval. No hypothesis doc. The eval is the only signal.
 
@@ -210,13 +207,10 @@ Volume over precision — most revert, learning emerges from patterns. Logged in
 | staleness | 7 days |
 | yield | (abs(word_delta) × max(delta_ab, 0)) / estimated_tokens |
 
-**Yield example:** COMPRESS Eyes 150w, Δ=+0.1, ~8K tokens → yield = 0.001875. High yield = bold change + positive delta + low cost.
 
-**Worked example — selection sequence:** Query priors → amcc×ADD has UCB 0.997 (high mean, proven winner). But 30% exploration rule fires → shuf picks hands×MERGE (n=0, untested). Section: shuf picks "Tool Opportunities." Technique: MERGE. Apply boldly, eval catches mistakes. If REVERT → hands×MERGE gets β+1, UCB drops, less likely next time. If KEEP → α+1, UCB stays high.
 
-**Self-termination:** Bayesian priors are the stopping mechanism. As combos accumulate reverts, UCB scores drop and they stop being selected. Proven losers (posterior_mean < 0.15, n > 10) are excluded entirely. The loop self-terminates when nothing worth trying remains — no manual cap needed.
 
----
+
 
 
 

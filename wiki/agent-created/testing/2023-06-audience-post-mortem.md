@@ -1,14 +1,16 @@
 ---
+---
+---
+---
+**Status: SUSPENDED** — This program is not active. Targeted campaigns were suspended in mid-2023 due to an unforeseen US privacy law. MarTech scoping is in OP1. Any reactivation depends on legal clearance.
 title: "Audience Targeting Post-mortem — LiveRamp Integration"
 status: REVIEW
 audience: amazon-internal
 owner: Richard Williams
 created: 2026-04-12
 updated: 2026-04-12
----
 <!-- DOC-0392 | duck_id: testing-2023-06-audience-post-mortem -->
 
----
 title: "Audience Targeting Post-mortem — LiveRamp Integration"
 status: DRAFT
 audience: amazon-internal
@@ -20,9 +22,8 @@ update-trigger: "LiveRamp program reactivated or MarTech scoping completes in OP
 tags: [audience-targeting, liveramp, post-mortem, privacy, CPS, BP]
 type: postmortem
 summary: "Post-mortem on LiveRamp audience targeting program (Q1-Q2 2023), suspended due to US privacy law. Key learnings on match rates, brand term dominance, and landing page alignment."
----
 
-**Status: SUSPENDED** — This program is not active. Targeted campaigns were suspended in mid-2023 due to an unforeseen US privacy law. MarTech scoping is in OP1. Any reactivation depends on legal clearance.
+
 
 # Audience Targeting Post-mortem — LiveRamp Integration
 

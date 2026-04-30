@@ -1,12 +1,6 @@
 <!-- DOC-0228 | duck_id: organ-spine -->
 
-
-
-
-
-
-
-
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 # Spine — Structure & Continuity
 
 *The skeleton that holds everything together across sessions. Bootstrap sequence, directory conventions, environment rules, and the ground-truth files that define Richard's current state.*
@@ -15,14 +9,7 @@ Last updated: 2026-04-01 (Wednesday PT)
 
 ---
 
-
-
-
-
-
-
-
-
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## Session Bootstrap Sequence
 
 **⚠️ AgentSpaces chats deleted every 14 days.** Every new session starts here.
@@ -55,12 +42,6 @@ Last updated: 2026-04-01 (Wednesday PT)
 
 
 ## Tool Access & Integrations
-
-
-
-
-
-
 
 ### MCP Servers (16 connected)
 

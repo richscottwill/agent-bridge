@@ -534,9 +534,6 @@ Option C — Create a dedicated "Program Overview" project within the portfolio:
 |-----|--------|-----|--------|---------------|
 | AU Market Onboarding | Project | `1212762061512767` | ✅ DRAFTED | Richard: review Section 2a above, approve or request changes |
 | MX Market Onboarding | Project | `1212775592612917` | ✅ DRAFTED | Richard: review Section 2b above, approve or request changes |
-| ABIX PS Program Overview | Portfolio | `1212775592612914` | ✅ DRAFTED | Richard: review Section 3a above, approve or request changes |
-| ABPS Program Overview | Portfolio | `1212762061512816` | ✅ DRAFTED | Richard: review Section 3b above, approve or request changes |
-
 ### Known Gaps (to populate after probing or from Richard)
 
 - [ ] AU Google Ads account link

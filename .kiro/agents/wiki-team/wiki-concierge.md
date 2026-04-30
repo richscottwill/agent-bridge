@@ -27,6 +27,7 @@ When given a question:
    - If found in the body system, answer the question AND log a gap (see demand tracking below)
    - If not found anywhere, say so clearly and log the gap
 
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ### 2. Proactive surfacing
 
 When given context about what Richard is working on (a meeting topic, a project, a market):

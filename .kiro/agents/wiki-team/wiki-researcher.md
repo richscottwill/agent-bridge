@@ -41,6 +41,7 @@ Write your output to `~/shared/wiki/research/{topic-slug}-research.md`:
 ### From body system
 [Relevant excerpts from organs, with file paths]
 
+
 ### From internal sources
 [Meeting notes, email threads, wiki pages, ARCC guidance — with links/dates]
 

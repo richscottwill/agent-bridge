@@ -22,13 +22,7 @@ meetings/README.md, current.md, nervous-system.md, memory.md, asana-command-cent
 
 
 
-### Hedy Pull
-- GetSessions (today), GetSessionDetails for each.
-- Extract: highlights, todos, action items, speaking share, hedging count.
-
-
-
-### Outlook + Email
+### Hedy Pull - GetSessions (today), GetSessionDetails for each. - Extract: highlights, todos, action items, speaking share, hedging count. ### Outlook + Email
 - Auto-meeting folder scan.
 - Email threads related to meetings.
 
@@ -184,10 +178,11 @@ Write to `~/shared/context/active/eod-reconciliation.json`:
 
 
 ### Communication Analytics (weekly — Friday only)
-Execute ~/shared/context/protocols/communication-analytics.md:
 - Weekly trends from meeting_analytics (trailing 4 weeks).
 - Coaching signal: group speaking share < 15% for 3+ consecutive weeks.
 - Queue results for EOD-Frontend.
+Execute ~/shared/context/protocols/communication-analytics.md:
+
 
 
 

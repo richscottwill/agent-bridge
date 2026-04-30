@@ -164,9 +164,6 @@ Currently Richard is librarian for callouts, reports, and wiki. As the team scal
 - **Don't let intake folders stagnate.** Weekly review, at minimum. Old unreviewed items kill trust.
 - **Don't merge drafts without attribution.** Preserve `submitted_by` when promoting to canonical.
 - **Don't skip the librarian step for speed.** "I'll just push directly this once" becomes the norm.
-- **Don't let agents write events for events' sake.** If an event doesn't drive any downstream action, it's noise.
-- **Don't build orchestration until the team is ready.** 2 people writing to intake folders isn't a system, it's overhead.
-
 ## Rollout order
 
 Don't try to stand all of this up at once. Suggested phasing:

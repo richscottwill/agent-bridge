@@ -104,7 +104,6 @@ Copy-paste any of these to try Outlook. Rephrase to fit how you naturally ask.
 ### Morning triage chained with Slack
 
 > "Triage my Slack and Outlook unread for the last 24 hours. For each item, flag: needs response today, can wait, FYI only. Group by channel/sender."
-
 ### Meeting prep
 
 > "I've got a meeting with Brandon at 2pm. Pull the invite, any related emails from the last week, any Loop docs referenced, and give me a 5-point brief."

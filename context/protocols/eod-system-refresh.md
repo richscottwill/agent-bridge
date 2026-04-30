@@ -53,6 +53,8 @@ Clean up after: `DROP DATABASE morning_state;`
 **Fallback:** If no AM snapshot exists , fall back to reading `~/shared/context/active/asana-morning-snapshot.json`.
 4. Query DuckDB: `SELECT * FROM asana_overdue` → overdue tasks with days_overdue.
 5. Query DuckDB: `SELECT * FROM asana_by_routine` → bucket distribution for cap checks.
+
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ### Step 2 — Daily Reset
 For tasks that had Priority_RW=Today in the morning snapshot but remain incomplete:
 - Demote to Priority_RW=Urgent: UpdateTask(custom_fields={'1212905889837829': '1212905889837831'})

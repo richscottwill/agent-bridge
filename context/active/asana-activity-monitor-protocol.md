@@ -162,6 +162,7 @@ Rules:
 
 ---
 
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## Signal Classification Reference
 
 | Story Attribute | Signal Type | Emoji | What to Surface |

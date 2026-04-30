@@ -38,3 +38,7 @@ agentspaces-desktop-launcher/
 
 # Audit reports (regenerable)
 audit-reports/
+
+# NFS silly-rename artifacts (produced when a file is deleted while still open)
+.nfs*
+data/duckdb/.nfs*

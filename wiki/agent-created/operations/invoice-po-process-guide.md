@@ -24,6 +24,7 @@ update-trigger: PO changes, new delegate assigned, process changes
 
 ---
 
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ## Purpose
 
 Document the end-to-end invoice/PO process so it can be delegated. Currently takes Richard 1-2 hours/week. Goal: reduce to <30 min/week or hand off entirely.

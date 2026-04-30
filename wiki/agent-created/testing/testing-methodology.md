@@ -21,11 +21,7 @@ tags: ["testing", "methodology", "kate-doc"]
 summary: "PS team testing methodology: hypothesis → phased rollout → measurement → scale or stop."
 ---
 
-# How We Test
-
-The PS team follows a consistent methodology across all workstreams: identify a problem, design a controlled test, validate the result, then scale what works. This discipline applies whether we are rolling out a new bidding strategy to 10 markets or testing a single headline change in one campaign. The methodology is the team's operating system — not a project.
-
-## The Four Stages
+# How We Test The PS team follows a consistent methodology across all workstreams: identify a problem, design a controlled test, validate the result, then scale what works. This discipline applies whether we are rolling out a new bidding strategy to 10 markets or testing a single headline change in one campaign. The methodology is the team's operating system — not a project. ## The Four Stages
 
 *Example:* When this applies, the expected outcome is verified by checking the result.
 ### 1. Hypothesis and Baseline

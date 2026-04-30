@@ -117,16 +117,7 @@ Because Lena directed a full switch without a weblab, AU measurement relies on p
 
 Mexico's CVR decline on the initial Polaris weblab is the active investigation item. Reviewed on Deep Dive and Debate April 2. Root cause under investigation. Brandon's April 14 directive: reference CA pages for MX handoff rather than US, since CA landing page mechanics are closer to MX's.
 
-## Cross-initiative dependencies
-
-| Initiative | Dependency | Impact |
-|-----------|-----------|--------|
-| Ad Copy Testing | New ad copy must align with Polaris LP messaging | Disconnect between ad and LP hurts CVR |
-| OCI | Polaris pages must have correct conversion tracking | OCI depends on accurate conversion signals |
-| Email Overlay | Overlay must work on Polaris page templates | Adobe Target implementation needs Polaris compatibility |
-| Category Pages | MX Auto/Beauty are Polaris-based | Category page template is a Polaris variant |
-
-## Alex's Asana task
+## Cross-initiative dependencies | Initiative | Dependency | Impact | |-----------|-----------|--------| | Ad Copy Testing | New ad copy must align with Polaris LP messaging | Disconnect between ad and LP hurts CVR | | OCI | Polaris pages must have correct conversion tracking | OCI depends on accurate conversion signals | | Email Overlay | Overlay must work on Polaris page templates | Adobe Target implementation needs Polaris compatibility | | Category Pages | MX Auto/Beauty are Polaris-based | Category page template is a Polaris variant | ## Alex's Asana task
 
 Alex VanDerStuyf tracks the WW rollout in Asana: "PS Polaris Brand pages update WW" with a six-step rollout per geo. Steps: (1) AEM translation submission, (2) Translation delivery, (3) Page build, (4) QA review, (5) Weblab setup, (6) Go-live.
 

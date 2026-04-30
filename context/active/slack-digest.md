@@ -6,6 +6,7 @@
 
 ---
 
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## Headline
 
 Slack ingestion did not run. Every Slack MCP endpoint (`list_channels`, `batch_get_conversation_history`, `batch_get_thread_replies`, `search`, `batch_get_channel_info`) returned `r3 status: 302` across ~8 retry probes spanning the run window. Same failure mode as 2026-04-25T16:34:09Z (the earlier outage that self-cleared). This one has not self-cleared yet. **Slack session likely needs reauth from Richard's side.**

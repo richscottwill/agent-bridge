@@ -16,25 +16,7 @@ Priority: HIGH (OCI accuracy issue cascades from OCI doc; duplication relationsh
 
 ---
 
-## Required Change 1: Fix US OCI test period and NB CPA improvement
-
-**Location:** Section A.2 — OCI Impact Summary table
-
-**Current text:**
-```
-| US | Jul-Oct 2025 | +24% | -45% | +32,047 | $16.7MM | 96% |
-```
-
-**Replace with:**
-```
-| US | Jul-Nov 2025 | +24% | ~50% | +32,047 | $16.7MM | 96% |
-```
-
-**Rationale:** Same fix as kate-doc-oci.md. The 32,047 reg count includes November data (19.1K as of 10/31 + 7,853 in Nov). The NB CPA improvement is "~50%" per oci-performance.md. This must be consistent across all three docs that cite this figure (OCI, appendix, synthesis).
-
----
-
-## Required Change 2: Fix UK and DE NB CPA improvement in A.2
+## Required Change 1: Fix US OCI test period and NB CPA improvement **Location:** Section A.2 — OCI Impact Summary table **Current text:** ``` | US | Jul-Oct 2025 | +24% | -45% | +32,047 | $16.7MM | 96% | ``` **Replace with:** ``` | US | Jul-Nov 2025 | +24% | ~50% | +32,047 | $16.7MM | 96% | ``` **Rationale:** Same fix as kate-doc-oci.md. The 32,047 reg count includes November data (19.1K as of 10/31 + 7,853 in Nov). The NB CPA improvement is "~50%" per oci-performance.md. This must be consistent across all three docs that cite this figure (OCI, appendix, synthesis). --- ## Required Change 2: Fix UK and DE NB CPA improvement in A.2
 
 **Location:** Section A.2 — OCI Impact Summary table
 

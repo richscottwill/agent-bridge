@@ -42,6 +42,7 @@ Every row has these key columns:
 | `ieccp` | DOUBLE | Only on weekly rows; null elsewhere |
 | `source` | VARCHAR | `'AB SEM WW Dashboard_Y26 W16.xlsx'` or `'ww_rollup'` |
 
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## Market codes
 
 Ten individual markets plus one aggregate:

@@ -30,6 +30,9 @@ Every mention of a topic across any channel creates or reinforces a signal in `s
 |---------|--------|------------------------|-----------|
 | Slack | AM-1 Slack scan | FTS match_bm25 against known topics + new topic detection from high-relevance messages | message ts |
 | Email | AM-1 email triage | Subject line + body keyword extraction | conversation id |
+
+#### Channel-Specific Ingestion — Details
+
 | Asana | AM-2 task scan | Task name + description keywords, comment mentions | task gid |
 | Hedy | EOD-1 meeting sync | Meeting transcript topic extraction, agenda items | session id |
 

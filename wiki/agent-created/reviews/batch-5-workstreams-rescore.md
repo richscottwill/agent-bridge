@@ -114,9 +114,6 @@ Accuracy moves from 7 → 8. Economy moves from 7 → 8. Both blocking issues re
 - The AI Max section uses "Richard should confirm completion status before this doc ships" twice — once in the main body and once in the risks section. This is minor duplication. Consider keeping it only in the risks section (where open questions naturally live) and replacing the main body instance with a factual statement once Richard confirms.
 - The sentence "A search for 'office supplies for small company' could trigger an AB ad even if that exact phrase is not in our keyword list" is a good concrete example, but it reads slightly like marketing copy. Consider grounding it: "For example, a search for 'office supplies for small company' — a query not in our keyword list — could trigger an AB ad based on semantic intent matching." Minor tone adjustment.
 - The cannibalization and budget inflation risks are well-identified but the guardrail design is described at the category level ("monitoring existing keyword campaign performance for cost inflation") rather than the metric level. What specific metric triggers a pause? CPC increase of X%? Registration volume decline of Y%? If those thresholds exist in the test design, embedding them would strengthen the section. If they don't exist yet, that's worth flagging as a gap.
-
----
-
 ## Cross-cutting assessment
 
 All three articles addressed the specific fixes cleanly. The pattern:

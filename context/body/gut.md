@@ -6,6 +6,9 @@
 
 
 
+#### preamble — Details
+
+
 
 
 
@@ -72,15 +75,13 @@ Organs hold CURRENT STATE, not history. No append-only logs, streak histories, s
 
 
 
+
 ### Core Principle 3: Learned Budgets
 Per-organ budgets and the body ceiling are adaptive — they move based on experiment data. Larger organ answers more questions correctly → budget expands. Compression doesn't degrade accuracy → budget contracts. The data decides.
 
 ---
 
-
-
-
-
+*Example:* When this applies, the expected outcome is verified by checking the result.
 #### Core Principle 3: Learned Budgets — Details
 
 
@@ -104,27 +105,13 @@ The gut has three functions — **Digestion** (raw material → routed facts), *
 
 
 
-### Digestion Protocol When new material arrives in `intake/`, the AM-2 hook processes it. The gut adds structure to that processing: 
-
-
-
-
 
 
 ### Intake Triage
 
 For each file in `intake/`: extract minimum viable facts, route to the organ where they're most actionable (decisions → Brain, metrics → Eyes, tasks → Hands, people → Memory, processes → Device). Tag source and date. Archive raw file after extraction unless still useful.
 
-
-
-
-
-
-
-
-
-
-
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ### File Format Rules
 | Format | Action |
 |--------|--------|
@@ -226,7 +213,6 @@ Budgets are LEARNED CONSTRAINTS, not static numbers. Every experiment logs `word
 
 
 
-### Baseline Budgets (starting points, not ceilings)
 
 | Organ | Baseline | Actual | Notes |
 |-------|----------|--------|-------|
@@ -240,16 +226,6 @@ Budgets are LEARNED CONSTRAINTS, not static numbers. Every experiment logs `word
 | Gut (this file) | 2000w | ~2100w | Identity protection rule — safety content |
 | Nervous System | 1500w | 1297w | Calibration loops — stable |
 | Spine | 1500w | 1490w | Bootstrap — stable |
-
-
-
-
-
-
-
-
-
-
 
 ### Identity Field Protection (§7)
 
@@ -287,16 +263,7 @@ Non-compressible identity fields get their own subsection to emphasize their spe
 
 ---
 
-
-
-
-
-
-
-
-
-
-
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## Excretion Protocol
 
 What gets removed from the body entirely (archived or deleted).

@@ -237,7 +237,6 @@ Same as channels, but using DM channel IDs.
 
 
 
-### DMs Pending
 - [ ] Brandon Munday
 - [ ] Stacey Gu
 - [ ] Yun-Kang Chu
@@ -250,9 +249,6 @@ Same as channels, but using DM channel IDs.
 - [ ] All remaining DMs
 
 ---
-
-
-
 
 ## Context Enrichment Opportunities
 

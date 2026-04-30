@@ -147,6 +147,7 @@ _Why: Direct-line org changes affect priorities, coaching, and career path._
 
 ---
 
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## Review needed
 
 _No topics have passed their review_date yet. Nearest upcoming: `au-handoff` (2026-05-15, sunset after handoff confirmed stable)._

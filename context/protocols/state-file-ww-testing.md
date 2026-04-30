@@ -97,6 +97,7 @@ Canonical table of all active tests with their linked sources. One row per test.
 
 Explicit rules the daily engine (AM-Backend Step 2E) follows when refreshing per-test state. These rules govern WHAT the engine pulls and HOW it writes.
 
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ### Rule 1: Link resolution per test
 
 For each test in the Inventory (not the Archive), the engine pulls, per cycle:

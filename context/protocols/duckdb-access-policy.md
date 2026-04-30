@@ -24,6 +24,9 @@ These scripts still have direct `duckdb.connect(md:...)` calls. They work but vi
 | `generate-command-center.py` | Queries MotherDuck | Already rebuilt to use MCP-populated JSON — remove legacy code |
 | `refresh-body-system.py` | Queries MotherDuck with cache fallback | Already uses cache — remove MotherDuck attempt |
 | `populate_forecast_tracker.py` | Writes to MotherDuck | Agent should run via MCP instead |
+
+#### Scripts With Legacy MotherDuck Connections (to be migrated) — Details
+
 | `full_year_project.py` | Reads/writes MotherDuck | Agent should run via MCP instead |
 | `detect_regime_changes.py` | Reads/writes MotherDuck | Agent should run via MCP instead |
 | `wbr_pipeline.py` | Reads/writes MotherDuck | Agent should run via MCP instead |

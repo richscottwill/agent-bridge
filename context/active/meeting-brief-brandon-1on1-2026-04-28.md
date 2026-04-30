@@ -3,9 +3,6 @@
 **Last 1:1:** 4/21 (per Loop notes) — Hedy session that day was a 4-min laptop-issue truncation, so Loop agenda is the real capture.
 **Time:** 30 min (zoom.us/j/92927174179) — tight, prioritize.
 **Prep time budget:** 30 min (1:00-1:30 PM calendar block).
-
----
-
 ## What Brandon is keeping an eye on (last 14 days — signal strength)
 
 | Signal | Strength | Channels | Context |

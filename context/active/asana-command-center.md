@@ -130,6 +130,9 @@ The agent detects completed tasks matching these patterns during AM-2 Phase 1C a
   - Priority_RW: `1212905889837829`, Importance_RW: `1212905889837865`, Notes - Task: `1209637014993158`, Begin-Date_RW: `1213440376528542`, Routine_RW: `1213608836755502`, Kiro_RW: `1213915851848087`, Next-action_RW: `1213921400039514`
 - Some tasks also carry: AU Priority (`1212762061512785`), AU Task Progress (`1212762061512790`), Important/Urgent (`1200200115836714`), Time Left (`1207564683818996`), Date diff (`1213440376802787`) — multi-homed tasks
 - Cross-team fields (on Vijeth/MCS tasks): MCSOpsSprint # (`1210696086448065`), MCS Status (`1210695351001980`), MCSOpsPlanned (`1211096369985794`), MCS-authoring-task-type (`1210831625635211`), MCS Initiative (`1210688295507229`), ReleaseTech (`1210696085033654`), MCS Sub-Initiative (`1210688295507253`)
+
+#### MX (`1212775592612917`) — Details
+
 - Pinned Context Task: `1213917639688517` (📌 MX — Market Context (Kiro))
 - Active: yes
 

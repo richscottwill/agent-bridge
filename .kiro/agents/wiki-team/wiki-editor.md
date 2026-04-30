@@ -69,6 +69,9 @@ Maintain the roadmap at `~/shared/wiki/roadmap.md`:
 
 | Priority | Criteria |
 |----------|----------|
+
+#### Prioritization framework — Details
+
 | P1 | Blocks current work OR answers a question asked 3+ times |
 | P2 | Compounds (will be referenced by future docs or agents) |
 | P3 | Nice to have, captures knowledge that might be lost |

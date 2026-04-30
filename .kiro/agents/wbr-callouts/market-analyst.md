@@ -45,6 +45,7 @@ Parse the `## Agent Configuration` section for these fields:
 
 If the context file is missing or lacks `## Agent Configuration`, log an error action with `requires_human_review = true` and stop processing this market.
 
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ### Step 2: Query learned experience (prior observations)
 Query what you noticed in prior runs for this market. Run one of:
 - Shell: `python3 -c "from query import query_prior_observations; import json; print(json.dumps(query_prior_observations('{market}', weeks=4), default=str, indent=2))"`

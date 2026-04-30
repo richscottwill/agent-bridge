@@ -17,6 +17,7 @@ Source: Hedy session 4veBOAWYumVzlJciaLVg | Brandon sync topic | 34 min
 2. Richard to formalize a one-page Polaris migration timeline with go-live date and owners.
 3. Challenge the assumption that high CPCs can't be justified. Reframe around customer LTV and OPS per business customer as ROI proxy.
 
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## Context
 - Lena Zak raised concerns about high-CPC keywords, wants removal to protect tight AU budget (~60% of $1.8M goes to PS)
 - Lena made incorrect statement: "if we're spending $10 on a CPC, there's no way we can recoup that cost" — Richard pushed back citing LTV

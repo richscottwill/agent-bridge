@@ -61,17 +61,7 @@ Two minor noise issues. First, the BSE paragraph in the DG section introduces a 
 
 Second, Appendix C largely restates what the body already covers. The body says "clear baselines, phased rollout, incrementality benchmarks" and the appendix says "clear baselines before launch, phased US-first rollout, incrementality benchmarks." That is duplication, not elaboration. Either the appendix should add detail the body does not contain (specific metrics, timelines, campaign IDs) or it should be cut.
 
-## Voice — 8/10
-
-The prose reads like a person explaining a strategy to a colleague, not like a slide deck converted to sentences. Sentence length varies naturally — short declarative statements ("This is not a volume play; it is an efficiency play") alternate with longer explanatory sentences. The question-based headers give the doc a conversational structure without being informal.
-
-The voice is consistent throughout with one exception: the cross-functional partners section drops into a flat roster tone that breaks the narrative flow. Every other section answers a question; this section just lists facts. Reframing it as "Who does this depend on and why?" would maintain the voice.
-
-The doc avoids jargon inflation — it explains what AI Max does ("showing text ads to users whose queries signal business intent without matching our exact keywords") rather than assuming the reader knows. The DG-vs-AI-Max distinction is drawn clearly: DG extends reach through visual placements in mid-funnel surfaces, AI Max extends reach within search itself. That is a clean, memorable contrast.
-
----
-
-## Composite: 7.8/10
+## Voice — 8/10 The prose reads like a person explaining a strategy to a colleague, not like a slide deck converted to sentences. Sentence length varies naturally — short declarative statements ("This is not a volume play; it is an efficiency play") alternate with longer explanatory sentences. The question-based headers give the doc a conversational structure without being informal. The voice is consistent throughout with one exception: the cross-functional partners section drops into a flat roster tone that breaks the narrative flow. Every other section answers a question; this section just lists facts. Reframing it as "Who does this depend on and why?" would maintain the voice. The doc avoids jargon inflation — it explains what AI Max does ("showing text ads to users whose queries signal business intent without matching our exact keywords") than assuming the reader knows. The DG-vs-AI-Max distinction is drawn clearly: DG extends reach through visual placements in mid-funnel surfaces, AI Max extends reach within search itself. That is a clean, memorable contrast. --- ## Composite: 7.8/10
 
 ## Does it ship?
 

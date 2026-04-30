@@ -57,6 +57,7 @@ The body's quality-control layer. Measures outcomes against predictions, scores 
 
 
 
+
 #### Loop 1: Decision Audit ##### Protocol Brain | Monthly | Score decisions against outcomes: VALIDATED (prediction confirmed), PARTIALLY (mixed), INVALIDATED (prediction wrong), PENDING (data insufficient). On INVALIDATED → review and update the driving principle. Worked example: D3 predicted OCI would lift regs 10-20% in CA. If CA shows +15% after 30d → VALIDATED. If lift <5% → PARTIALLY. If CPA worsens → INVALIDATED, review "phase all rollouts" principle. ##### Pending Decisions 5 decisions awaiting audit: D1, D2, D3, D4, D7. ##### Audit Triggers | Decision | Data Needed | Target Date | |----------|-------------|-------------| | D1, D2 | CA/JP/EU3 performance data | Jul 2026 | | D3 | Monthly CPA + OCI conversion data | May 2026 | | D4 | UK +31% regs confirmation (IT when volume sufficient) | Ongoing | | D7 | Polaris +30d deep dive results | Ongoing | ##### Scoring Example D3 (OCI ROW rollout): CA OCI +10-20% reg lift after 30d → VALIDATED. Lift <5% or CPA worsens → PARTIALLY. Tracking failures or negative ROI → INVALIDATED. Target scoring date: May 2026 when CA data available. ### Loop 2: Prediction Scoring
 Eyes + agent text outputs | Daily + weekly | Score predicted QA and agent confidence: HIT/MISS/SURPRISE. Target ≥60%. **Reactivated 2026-04-22** after round-2 external-AI-review blind test confirmed the "Agent Confidence Calibration" proposal duplicated this loop — the gap was activation, not a missing metric.
 - **Reactivation trigger:** AM-2 hook writes ≥3 predicted questions to Eyes "Predicted Questions" section. Once present, Loop 2 auto-resumes daily scoring against meeting outcomes and Slack signals. **Until AM-2 is writing predictions again, score agent text-output confidence instead** (see scope extension below).
@@ -71,6 +72,7 @@ Eyes + agent text outputs | Daily + weekly | Score predicted QA and agent confid
 
 ### Loop 3: Pattern Trajectory
 rw-tracker.md | Weekly (Friday) | IMPROVING/STUCK/WORSENING/RESOLVED. STUCK 3+ wk → structural fix. Willpower → trainer. Systems → device. **Root cause:** Visibility avoidance gates L1 → blocks all downstream levels.
+
 
 
 
@@ -139,6 +141,9 @@ All organs | Every run | Word counts, staleness, reliability.
 | Experiments | 50 (31 keep, 19 revert) | — | 62% keep rate. Run 28: 4 experiments (4 keep, 0 revert), first batch on fresh DuckDB priors. |
 | Experiment targets | 112 (63 organ + 49 style/context) | — | 45 organ combos tested (71%). Style guide combos seeded, untested. |
 
+#### Experiment Metrics — Details
+
+
 
 
 
@@ -146,11 +151,7 @@ All organs | Every run | Word counts, staleness, reliability.
 
 ### Deferred Loops
 
-
-
-
-
-
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 #### Loop 6: Principle Evolution
 Brain + soul.md | Quarterly | Next: Jun 2026
 Do decision principles still match actual behavior? Score each principle against last quarter's decisions.
@@ -173,11 +174,7 @@ Verify cross-organ pointers remain valid: does a fact cited in one organ still m
 Per-source | Ongoing
 T1 (builders+proof) → experiments. T2 (practitioners) → reject unless context matches. T3 (commentary) → discovery only.
 
-
-
-
-
-
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ### Loop 9: Meeting Communication
 Hedy data | Weekly | Speaking share, hedging, filler words, turn length.
 

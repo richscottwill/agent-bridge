@@ -27,10 +27,7 @@ On 4/6/2026, 10 tables from the mcp-capability-expansion spec were found missing
 
 After any batch of CREATE TABLE or CREATE VIEW statements, immediately run via `execute_query`:
 
-
-
-
-
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ### Step 3: Confirm Tables Exist
 ```sql
 SELECT table_type, COUNT(*) FROM information_schema.tables WHERE table_schema = 'main' GROUP BY table_type;
@@ -67,18 +64,7 @@ Expected: `ps_analytics`, `main`. If different → STOP.
 **Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
 
 
-### Step 4: Confirm Data Persisted (if INSERTs were run)
-```sql
-SELECT '[table_name]' AS tbl, COUNT(*) AS rows FROM [table_name]
-UNION ALL ...
-```
-Row counts must match expected inserts.
-
-
-
-
-
-## When to Run
+### Step 4: Confirm Data Persisted (if INSERTs were run) ```sql SELECT '[table_name]' AS tbl, COUNT(*) AS rows FROM [table_name] UNION ALL ... ``` Row counts must match expected inserts. ## When to Run
 
 - After any spec execution that creates DuckDB tables
 - After AM-1 full sync (creates/updates asana_tasks, asana_task_history)
@@ -87,11 +73,7 @@ Row counts must match expected inserts.
 
 #### When to Run — Details
 
-
-
-
-
-
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## Required Tables (mcp-capability-expansion)
 
 These 10 tables + 3 views must exist in `ps-analytics.main`:

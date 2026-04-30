@@ -140,16 +140,17 @@ See `roster.md` for full team directory (Brandon's directs, levels, focus areas,
 
 
 ## Relationship Staleness Index
+**Worked example — staleness check before drafting:** Task: draft Slack to Yun about R&O input. Check index → Yun at 17d stale, risk Low. Action: safe to draft normally but re-read last thread (3/19) for context on what was discussed. If Yun were 30d+ stale with High risk, you'd add a re-introduction line ("following up from our March thread on...") to re-establish context.
 
 Contacts with last interaction >14 days ago. **Always check before drafting** — tone, context, and dynamics may have shifted since last contact. A stale relationship means your assumptions about their current priorities could be wrong.
 
-**Worked example — staleness check before drafting:** Task: draft Slack to Yun about R&O input. Check index → Yun at 17d stale, risk Low. Action: safe to draft normally but re-read last thread (3/19) for context on what was discussed. If Yun were 30d+ stale with High risk, you'd add a re-introduction line ("following up from our March thread on...") to re-establish context.
 
 | Contact | Last Interaction | Days Stale | Risk | Action if drafting |
 |---------|-----------------|------------|------|-------------------|
 | Yun-Kang Chu | 3/19 | 17d | Low — reliable peer, data-on-demand | Safe to draft normally; re-read last thread for context |
 | Carlos Palmos | 3/24 | 12d | N/A — transitioned to CPS | Do not draft to Carlos; route MX invoicing to Lorena |
 | Harjeet Heer | 3/11 | 25d | Low — stepped away from AU | Verify current role before including in AU comms |
+
 
 
 
@@ -435,6 +436,7 @@ Contacts with last interaction >14 days ago. **Always check before drafting** �
 
 ### Alex VanDerStuyf (afvans) — AEM/Translations
 - Last: 3/20 (Asana — Polaris Brand pages WW). Topic: AEM translations, Asana tracking, carousel updates. Tone: Professional, organized. Draft: reference PD submission IDs.
+
 
 
 

@@ -245,6 +245,7 @@ Expansion structure (~2000 words):
 ## {3-5 analysis sections}
 {Each section: 3+ paragraphs with at least one list of supporting data points. Use **bold** for sub-points. Embed data in sentences; tables only for comparisons across dimensions.}
 
+
 ## Recommendations
 1. **{Recommendation 1}:** what to do, why, expected impact.
 2. **{Recommendation 2}:** what to do, why, expected impact.

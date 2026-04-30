@@ -13,6 +13,7 @@ Runs during AM-1 (Slack scan enrichment) and AM-2 (triage context enhancement).
 
 ## AM-1: Slack Enrichment Steps
 
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ### Step 1: Acronym and Project Detection
 
 During the AM-1 Slack scan, after ingesting each message, scan the message text for internal acronyms and project names.

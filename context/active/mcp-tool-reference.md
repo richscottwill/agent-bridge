@@ -1,5 +1,4 @@
-<!-- DOC-0354 | duck_id: protocol-mcp-tool-reference -->
-# MCP Tool Reference
+<!-- DOC-0354 | duck_id: protocol-mcp-tool-reference --> # MCP Tool Reference
 
 Last updated: 2026-04-02 (Thursday PT)
 Config: ~/.kiro/settings/mcp.json
