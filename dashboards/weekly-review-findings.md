@@ -405,3 +405,14 @@ See `context/intake/dashboard-research/mockups/README.md` for full M1-M10 spec +
 **Follow-ups:**
 - **MPE side of #075 unification:** `projection.html` still renders its own `.market-pulse-strip`. The new `TrustBar` helper is designed to be consumed from MPE too (pluggable `computeState` per page — WR supplies `computeForecastTrust`, MPE will supply a distance-to-target equivalent). Not shipped in this commit to keep it reviewable; planned as a follow-up in the same M1 scope.
 - **Legacy DOM removal:** the hidden `#regionTabs`, `#submarketTabs`, `#metricTabs` divs stay until M3 lands. `init()` still writes to them. No user-visible effect.
+
+
+## M3 + M4 shipped (2026-04-30)
+
+| Finding | Status | Notes |
+|---|---|---|
+| M3 · KPI cards with inline sparklines + bullet for vs-OP2 | done | `renderKPIs()` rewritten to drop `curMetric` dependency and show three metrics side-by-side instead of toggling one at a time. Four cards for regs-markets (Latest regs + 6-week sparkline, vs OP2 + bullet, CPA + sparkline, YTD regs); spend-archetype markets (JP/AU) swap Latest regs → Latest spend, YTD regs → YTD spend, hide the vs-OP2 bullet (no op2_spend in feed) and route readers to the scorecard panel. Sparklines scale each card independently; YTD card intentionally has no sparkline because a trailing line misrepresents a cumulative number. YoY delta appended to Latest regs card when `FORECAST.ly_weekly[market]` carries a same-week prior-year reference. |
+| M4 · Bullet chart (shared component) | done | `dashboards/shared/bullet.js` (`window.Bullet.renderBullet`) + `bullet.css`. Configurable bands (default: <80% bad, 80-95% warn, ≥95% good as fraction of target); `inverted` flag for metrics where lower is better (CPA). Accessibility: `role="meter"`, `aria-valuemin/max/now`, plain-English label. Currently consumed by WR vs-OP2 KPI card (M3); MPE distance-to-target tab will consume in a follow-up. |
+| (helper) | done | `dashboards/shared/sparkline.js` (`window.Sparkline.renderSparkline`) — Tufte word-sized graphics with endpoint dot, optional shared-axis via `min`/`max`, gap-safe (nulls split the polyline into segments). Will be reused by M6 small multiples and M8 prior-week thread. |
+
+**Follow-ups:** spend-archetype vs-OP2 bullet is blocked on `op2_spend` / `spend_plan` field in FORECAST.weekly — not currently emitted server-side. When the field lands, the spend archetype's second card swaps to a bullet identical to the regs-markets version.

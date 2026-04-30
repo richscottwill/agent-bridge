@@ -13,11 +13,14 @@
      cards) as projection.html so the two views feel like one tool. -->
 <link rel="stylesheet" href="../projection-design-system.css?v=2026-04-28">
 <link rel="stylesheet" href="../shared/trust-bar.css?v=2026-04-30">
+<link rel="stylesheet" href="../shared/bullet.css?v=2026-04-30">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3/dist/chartjs-plugin-annotation.min.js"></script>
 <script src="../canon-chart.js?v=2026-04-29-1115"></script>
 <script src="../shared/trust-bar.js?v=2026-04-30"></script>
+<script src="../shared/sparkline.js?v=2026-04-30"></script>
+<script src="../shared/bullet.js?v=2026-04-30"></script>
 <link rel="preload" href="../data/callout-data.json" as="fetch" crossorigin>
 <link rel="preload" href="../data/forecast-data.json" as="fetch" crossorigin>
 <style>
@@ -457,6 +460,30 @@ body {
   border: 1px solid var(--color-panel-border);
   border-radius: 8px;
   text-align: left;
+}
+
+/* M3 (2026-04-30): KPI card with inline sparkline / bullet. The big-
+   number value sits alongside the sparkline SVG so the card reads
+   "9.1K regs ↗" at a glance. Uses flex-baseline so the dot endpoint
+   lines up with the digit baseline. */
+.wr-kpi-card .hero-kpi-value.wr-kpi-big {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-variant-numeric: tabular-nums;
+}
+.wr-kpi-card .hero-kpi-value.wr-kpi-big .sparkline {
+  flex: 0 0 auto;
+  align-self: center;
+}
+/* Bullet sits on its own row under the big number, since it's a
+   full-width visualization not an inline companion. */
+.wr-kpi-card .bullet {
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
+.wr-kpi-card .hero-kpi-delta.mute {
+  color: var(--color-text-subtle);
 }
 /* WR-S2 (2026-04-29): scorecard + KPIs side-by-side grid. Collapses to
    single column under 1100px. align-items: start prevents the shorter
@@ -2548,93 +2575,170 @@ function applyMarketArchetype() {
   }
 }
 
+// M3 (2026-04-30): KPI cards with inline sparklines + bullet for vs-OP2.
+//
+// Replaces the prior single-metric row that was controlled by #metricTabs.
+// The page used to show one metric at a time (Regs or Cost or CPA); now
+// it shows three metrics side by side plus a bullet-chart vs-OP2 tile.
+//
+// Each numeric card carries a 6-week trailing sparkline (Tufte word-sized
+// graphics, report #004). The vs-OP2 card uses a bullet chart (Stephen
+// Few 2005, report #015) so actual-vs-target reads in under a second.
+//
+// Archetype-aware: spend-only markets (JP, AU) swap the regs card for a
+// spend card and skip the vs-OP2 bullet (those markets are graded on
+// spend pacing via the scorecard panel, not regs).
+//
+// Legacy: the #metricTabs DOM is hidden but kept in place so wiring
+// elsewhere doesn't null-reference; it's no longer a user control.
 function renderKPIs() {
   const row = document.getElementById('kpiRow');
-  // Highlight active metric tab
-  document.querySelectorAll('#metricTabs .wr-tab').forEach(b => {
-    b.className = 'wr-tab' + (b.dataset.metric === curMetric ? ' active' : '');
-  });
+  if (!row) return;
 
   const weeks = (FORECAST.weekly && FORECAST.weekly[curMarket]) || [];
   if (!weeks.length) {
     row.innerHTML = '<div class="hero-kpi"><div class="hero-kpi-label">No Data</div></div>';
     return;
   }
+
   const maxWk = FORECAST.max_week || 15;
   const actualWeeks = weeks.filter(w => w.wk <= maxWk && (w.regs > 0 || w.cost > 0));
-  const ytd = actualWeeks.reduce((s, w) => s + (w[curMetric] || 0), 0);
   const last = actualWeeks[actualWeeks.length - 1] || {};
   const prev = actualWeeks.length > 1 ? actualWeeks[actualWeeks.length - 2] : null;
-  // WR-C1: safeWoW handles null / 0-prior / 0→0-flat explicitly.
-  const wowRaw = safeWoW(last[curMetric], prev ? prev[curMetric] : null);
-  const wow = wowRaw != null ? wowRaw.toFixed(1) : null;
-  const wowClass = wowRaw == null ? 'warn' : cls(wowRaw, false);
-  const w52 = weeks.find(w => w.wk === 52);
-  // WR-C6 (2026-04-28): year-end prediction tile removed — Year-End is a
-  // projection-engine concern; on a weekly review it's 35+ weeks away and
-  // every week's tiny movement invites reaction to noise. Leaving the w52
-  // lookup here commented out as a sign of intent; uncomment if we ever
-  // want to surface YE elsewhere on this page.
-  // const yearEndPred = w52 && w52.pred_regs ? w52.pred_regs : null;
-  void w52;
 
-  // WR-C6: OP2 Pacing tile. Two sources fold together — the weekly passive
-  // target from FORECAST (last.op2_regs) AND the month-end pacing projection
-  // from callouts (callout.projections.month_end.vs_op2_spend). We prefer
-  // the month-end projection when it's populated (richer: includes pacing
-  // sign + magnitude) and fall back to weekly actual vs weekly OP2 when
-  // the refresh-callouts.py pipeline hasn't populated current-week
-  // projections yet (common on W16/W17 pre-refresh).
-  let op2PacingTile = '';
-  if (curMetric === 'regs' && last.regs && last.op2_regs) {
-    const weeklyDiff = last.regs - last.op2_regs;
-    const weeklyPct = (weeklyDiff / last.op2_regs) * 100;
-    const weeklyCls = cls(weeklyPct, false);
-    const sign = weeklyPct > 0 ? '+' : '';
-    const dir = weeklyDiff >= 0 ? 'ahead of' : 'behind';
-    // Prefer month-end projection when present.
-    const monthEnd = ((CALLOUTS.callouts[curMarket] || {})[curWeek] || {}).projections?.month_end;
-    if (monthEnd && Number.isFinite(monthEnd.vs_op2_spend)) {
-      const mPct = monthEnd.vs_op2_spend;
-      const mCls = cls(mPct, false);
-      const mSign = mPct > 0 ? '+' : '';
-      const periodTag = monthEnd.period || 'Month-end';
-      op2PacingTile = `<div class="hero-kpi">
-        <div class="hero-kpi-label">vs OP2 (pacing)</div>
-        <div class="hero-kpi-value wr-delta ${mCls}">${mSign}${mPct.toFixed(1)}%</div>
-        <div class="hero-kpi-delta ${mCls}">${periodTag}: ${fmt(monthEnd.regs_proj || monthEnd.spend_proj)} proj</div>
-      </div>`;
-    } else {
-      op2PacingTile = `<div class="hero-kpi">
-        <div class="hero-kpi-label">vs OP2</div>
-        <div class="hero-kpi-value wr-delta ${weeklyCls}">${sign}${weeklyPct.toFixed(1)}%</div>
-        <div class="hero-kpi-delta ${weeklyCls}">${sign}${Math.round(weeklyDiff).toLocaleString()} ${dir} ${fmt(last.op2_regs, 'regs')} plan</div>
-      </div>`;
-    }
+  // Six-week trailing window for sparklines. Use the last six actual
+  // weeks; pad with nulls at the left if fewer exist so every card's
+  // line starts at the same horizontal position.
+  const trail6 = actualWeeks.slice(-6);
+  while (trail6.length < 6) trail6.unshift({ regs: null, cost: null });
+  const spark = (key, color) =>
+    (window.Sparkline && window.Sparkline.renderSparkline)
+      ? window.Sparkline.renderSparkline(trail6.map(w => w[key]), { color, width: 72, height: 18 })
+      : '';
+
+  // YoY — prior-year same-week reference sits in FORECAST.ly_weekly[market]
+  // when available. Derive both WoW (last vs prev) and YoY (last vs same
+  // ISO week last year). Both are used in card footers.
+  const lyWeekly = (FORECAST.ly_weekly && FORECAST.ly_weekly[curMarket]) || [];
+  const ly = lyWeekly.find(w => w.wk === last.wk) || null;
+  const yoy = (last.regs && ly && ly.regs) ? ((last.regs - ly.regs) / ly.regs) * 100 : null;
+
+  // Per-metric WoW deltas — safeWoW handles 0-prior / null / 0→0-flat.
+  const regsWow = safeWoW(last.regs, prev && prev.regs);
+  const costWow = safeWoW(last.cost, prev && prev.cost);
+  const cpaWow  = safeWoW(last.cpa,  prev && prev.cpa);
+
+  const archetype = (typeof ARCHETYPE !== 'undefined' && ARCHETYPE[curMarket]) || 'regs';
+
+  const cards = [];
+
+  // Card 1 — Latest week (primary metric). For regs-markets this is
+  // registrations; for spend-only markets (JP, AU) this is spend.
+  if (archetype === 'spend') {
+    const deltaCls = costWow == null ? 'mute' : cls(costWow, true);  // cost neutral-coloring
+    const deltaText = costWow == null ? '\u2014'
+      : `${costWow > 0 ? '+' : ''}${costWow.toFixed(1)}% WoW`;
+    cards.push(`
+      <div class="hero-kpi wr-kpi-card">
+        <div class="hero-kpi-label">Latest week &middot; spend</div>
+        <div class="hero-kpi-value wr-kpi-big">${fmt(last.cost || 0, '$')} ${spark('cost', '#0066CC')}</div>
+        <div class="hero-kpi-delta ${deltaCls}">${deltaText}</div>
+      </div>`);
+  } else {
+    const deltaCls = regsWow == null ? 'mute' : cls(regsWow, false);
+    const wowText = regsWow == null ? '\u2014'
+      : `${regsWow > 0 ? '+' : ''}${regsWow.toFixed(1)}% WoW`;
+    const yoyText = yoy == null ? '' : ` &middot; ${yoy > 0 ? '+' : ''}${yoy.toFixed(0)}% YoY`;
+    cards.push(`
+      <div class="hero-kpi wr-kpi-card">
+        <div class="hero-kpi-label">Latest week &middot; regs</div>
+        <div class="hero-kpi-value wr-kpi-big">${fmt(last.regs || 0, 'regs')} ${spark('regs', '#0066CC')}</div>
+        <div class="hero-kpi-delta ${deltaCls}">${wowText}${yoyText}</div>
+      </div>`);
   }
 
-  // Map curMetric to fmt() format tag for consistent rendering
-  const fmtTag = curMetric === 'cost' ? '$' : (curMetric === 'cpa' ? 'cpa' : null);
-  const labelForKpi = curMetric === 'regs' ? 'Registrations' : (curMetric === 'cost' ? 'Cost' : 'CPA');
+  // Card 2 — vs OP2 bullet. Regs-markets compare last.regs vs
+  // last.op2_regs; spend-only markets compare last.cost vs op2 spend
+  // (when available — falls back to text tile if op2_spend isn't carried).
+  if (archetype === 'spend') {
+    // Most spend-only markets don't carry per-week op2_spend in the
+    // current feed; skip the bullet and surface a scorecard pointer.
+    cards.push(`
+      <div class="hero-kpi wr-kpi-card">
+        <div class="hero-kpi-label">Pacing</div>
+        <div class="hero-kpi-value wr-kpi-big" style="font-size:var(--size-panel-title,22px)">&mdash;</div>
+        <div class="hero-kpi-delta mute">See scorecard &rarr;</div>
+      </div>`);
+  } else if (last.regs && last.op2_regs && window.Bullet && window.Bullet.renderBullet) {
+    const weeklyDiff = last.regs - last.op2_regs;
+    const weeklyPct = (weeklyDiff / last.op2_regs) * 100;
+    const deltaCls = cls(weeklyPct, false);
+    const monthEnd = ((CALLOUTS.callouts[curMarket] || {})[curWeek] || {}).projections?.month_end;
+    let footerText;
+    if (monthEnd && Number.isFinite(monthEnd.vs_op2_spend)) {
+      const mPct = monthEnd.vs_op2_spend;
+      const mSign = mPct > 0 ? '+' : '';
+      footerText = `${monthEnd.period || 'Month-end'}: ${mSign}${mPct.toFixed(1)}% vs OP2`;
+    } else {
+      const dir = weeklyDiff >= 0 ? 'ahead of' : 'behind';
+      footerText = `${Math.abs(Math.round(weeklyDiff)).toLocaleString()} ${dir} ${fmt(last.op2_regs, 'regs')} plan`;
+    }
+    const bullet = window.Bullet.renderBullet({
+      actual: last.regs,
+      target: last.op2_regs,
+      label: `${curMarket} registrations at ${Math.round(last.regs).toLocaleString()} vs OP2 ${Math.round(last.op2_regs).toLocaleString()}`
+    });
+    cards.push(`
+      <div class="hero-kpi wr-kpi-card">
+        <div class="hero-kpi-label">vs OP2 plan</div>
+        <div class="hero-kpi-value wr-kpi-big" style="font-size:var(--size-panel-title,22px)">${weeklyPct > 0 ? '+' : ''}${weeklyPct.toFixed(1)}%</div>
+        ${bullet}
+        <div class="hero-kpi-delta ${deltaCls}">${footerText}</div>
+      </div>`);
+  } else {
+    cards.push(`
+      <div class="hero-kpi wr-kpi-card">
+        <div class="hero-kpi-label">vs OP2 plan</div>
+        <div class="hero-kpi-value wr-kpi-big" style="font-size:var(--size-panel-title,22px)">&mdash;</div>
+        <div class="hero-kpi-delta mute">No plan data</div>
+      </div>`);
+  }
 
-  row.innerHTML = `
-    <div class="hero-kpi">
-      <div class="hero-kpi-label">YTD ${labelForKpi}</div>
-      <div class="hero-kpi-value">${fmt(ytd, fmtTag)}</div>
-      <div class="hero-kpi-delta">W1&ndash;W${maxWk}</div>
-    </div>
-    <div class="hero-kpi">
-      <div class="hero-kpi-label">Latest Week</div>
-      <div class="hero-kpi-value">${fmt(last[curMetric], fmtTag)}</div>
-      <div class="hero-kpi-delta">${last.week || ''}</div>
-    </div>
-    <div class="hero-kpi">
-      <div class="hero-kpi-label">WoW Change</div>
-      <div class="hero-kpi-value">${wow != null ? (wow > 0 ? '+' : '') + wow + '%' : '\u2014'}</div>
-      <div class="hero-kpi-delta ${wowClass}">vs prior</div>
-    </div>
-    ${op2PacingTile}
-  `;
+  // Card 3 — CPA (efficiency). Always shown; inverse coloring on WoW
+  // because CPA going UP is bad (more spend per reg).
+  if (last.cpa != null) {
+    const cpaCls = cpaWow == null ? 'mute' : cls(cpaWow, true);
+    const cpaText = cpaWow == null ? '\u2014'
+      : `${cpaWow > 0 ? '+' : ''}${cpaWow.toFixed(1)}% WoW`;
+    cards.push(`
+      <div class="hero-kpi wr-kpi-card">
+        <div class="hero-kpi-label">CPA</div>
+        <div class="hero-kpi-value wr-kpi-big">${fmt(last.cpa, 'cpa')} ${spark('cpa', '#2f7d3e')}</div>
+        <div class="hero-kpi-delta ${cpaCls}">${cpaText}</div>
+      </div>`);
+  }
+
+  // Card 4 — YTD regs (or spend for spend-only markets). No sparkline —
+  // YTD is a cumulative number; a trailing line would misrepresent it.
+  const ytdRegs = actualWeeks.reduce((s, w) => s + (w.regs || 0), 0);
+  const ytdCost = actualWeeks.reduce((s, w) => s + (w.cost || 0), 0);
+  if (archetype === 'spend') {
+    cards.push(`
+      <div class="hero-kpi wr-kpi-card">
+        <div class="hero-kpi-label">YTD spend</div>
+        <div class="hero-kpi-value wr-kpi-big" style="font-size:var(--size-panel-title,22px)">${fmt(ytdCost, '$')}</div>
+        <div class="hero-kpi-delta mute">W1&ndash;W${maxWk}</div>
+      </div>`);
+  } else {
+    cards.push(`
+      <div class="hero-kpi wr-kpi-card">
+        <div class="hero-kpi-label">YTD regs</div>
+        <div class="hero-kpi-value wr-kpi-big" style="font-size:var(--size-panel-title,22px)">${fmt(ytdRegs, 'regs')}</div>
+        <div class="hero-kpi-delta mute">W1&ndash;W${maxWk}</div>
+      </div>`);
+  }
+
+  row.innerHTML = cards.join('');
 }
 
 function renderChart() {
