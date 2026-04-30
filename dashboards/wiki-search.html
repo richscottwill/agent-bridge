@@ -4,192 +4,193 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wiki Search — Kiro Dashboard</title>
+<link rel="stylesheet" href="projection-design-system.css?v=2026-04-30">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#eaeaea;height:100vh;overflow:hidden;display:flex;flex-direction:column}
-.search-bar{padding:14px 20px 10px;flex-shrink:0;background:#12141c;border-bottom:1px solid #1e2028}
-.search-bar h2{font-size:18px;font-weight:700;color:#fff;margin-bottom:6px;display:flex;align-items:center;gap:8px}
-.search-bar h2 span{font-size:14px;color:#555;font-weight:400}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#FFFFFF;color:#161D26;height:100vh;overflow:hidden;display:flex;flex-direction:column}
+.search-bar{padding:14px 20px 10px;flex-shrink:0;background:#FAFAFA;border-bottom:1px solid #E0E0E0}
+.search-bar h2{font-size:18px;font-weight:700;color:#0F1111;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.search-bar h2 span{font-size:14px;color:#6B7280;font-weight:400}
 .search-row{display:flex;gap:8px;align-items:center}
-.search-input{flex:1;background:#1a1d27;border:1px solid #2a2d35;color:#eaeaea;padding:10px 14px;border-radius:6px;font-size:16px;font-family:inherit;outline:none;transition:border-color .15s}
-.search-input:focus{border-color:#3b82f6}
-.search-input::placeholder{color:#555}
-.sort-select{background:#1a1d27;border:1px solid #2a2d35;color:#aaa;padding:8px 10px;border-radius:6px;font-size:14px;font-family:inherit;outline:none;cursor:pointer;min-width:140px}
-.sort-select:focus{border-color:#3b82f6}
-.filter-section{flex-shrink:0;border-bottom:1px solid #1a1d24;display:flex;flex-direction:column;gap:0}
-.filter-header{display:flex;align-items:center;gap:6px;padding:4px 20px;cursor:pointer;background:rgba(30,58,138,.06);border-bottom:1px solid #1a1d24;user-select:none;transition:background .12s}
-.filter-header:hover{background:rgba(30,58,138,.12)}
-.filter-header .fh-icon{font-size:10px;color:#555;transition:transform .15s}
-.filter-header .fh-label{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:1px;font-weight:600}
-.filter-header .fh-active{font-size:11px;color:#7da2d4}
+.search-input{flex:1;background:#FFFFFF;border:1px solid #D1D5DB;color:#161D26;padding:10px 14px;border-radius:6px;font-size:16px;font-family:inherit;outline:none;transition:border-color .15s}
+.search-input:focus{border-color:#1E40AF}
+.search-input::placeholder{color:#6B7280}
+.sort-select{background:#FFFFFF;border:1px solid #D1D5DB;color:#9CA3AF;padding:8px 10px;border-radius:6px;font-size:14px;font-family:inherit;outline:none;cursor:pointer;min-width:140px}
+.sort-select:focus{border-color:#1E40AF}
+.filter-section{flex-shrink:0;border-bottom:1px solid #E0E0E0;display:flex;flex-direction:column;gap:0}
+.filter-header{display:flex;align-items:center;gap:6px;padding:4px 20px;cursor:pointer;background:rgba(30,58,138,0.04);border-bottom:1px solid #E0E0E0;user-select:none;transition:background .12s}
+.filter-header:hover{background:rgba(30,64,175,0.08)}
+.filter-header .fh-icon{font-size:10px;color:#6B7280;transition:transform .15s}
+.filter-header .fh-label{font-size:11px;color:#9A9A9A;text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.filter-header .fh-active{font-size:11px;color:#1D4ED8}
 .filter-rows{padding:6px 20px;display:flex;flex-direction:column;gap:4px}
 .filter-rows.collapsed{display:none}
 .filter-row{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
-.filter-label{font-size:11px;color:#555;text-transform:uppercase;letter-spacing:1px;min-width:55px;flex-shrink:0}
-.f{padding:3px 8px;border-radius:3px;font-size:12px;cursor:pointer;background:#14161e;border:1px solid #1e2028;color:#777;transition:all .12s;white-space:nowrap}
-.f:hover{border-color:#3b82f6;color:#d4d4d4}
-.f.on{background:#172040;border-color:#3b82f6;color:#93b4f5}
-.f .fc{font-size:11px;color:#555;margin-left:2px}
-.f.on .fc{color:#6b8acd}
-.result-count{font-size:13px;color:#555;margin-left:auto;flex-shrink:0}
+.filter-label{font-size:11px;color:#6B7280;text-transform:uppercase;letter-spacing:1px;min-width:55px;flex-shrink:0}
+.f{padding:3px 8px;border-radius:3px;font-size:12px;cursor:pointer;background:#FAFAFA;border:1px solid #E0E0E0;color:#9A9A9A;transition:all .12s;white-space:nowrap}
+.f:hover{border-color:#1E40AF;color:#1F2937}
+.f.on{background:#E3F2FD;border-color:#1E40AF;color:#1E40AF}
+.f .fc{font-size:11px;color:#6B7280;margin-left:2px}
+.f.on .fc{color:#1E40AF}
+.result-count{font-size:13px;color:#6B7280;margin-left:auto;flex-shrink:0}
 .main{flex:1;display:flex;min-height:0;position:relative}
 .results{flex:1;overflow-y:auto;padding:10px 20px 20px}
-.rc{background:#14161e;border:1px solid #1e2028;border-radius:6px;padding:10px 14px;margin-bottom:6px;cursor:pointer;transition:all .12s}
-.rc:hover{border-color:#2a3a5c;background:#161a24}
+.rc{background:#FAFAFA;border:1px solid #E0E0E0;border-radius:6px;padding:10px 14px;margin-bottom:6px;cursor:pointer;transition:all .12s}
+.rc:hover{border-color:#BFD4F2;background:#F5F5F5}
 .rc-head{display:flex;align-items:flex-start;gap:6px}
-.rc-title{font-size:15px;font-weight:600;color:#d4d4d4;flex:1;line-height:1.3}
-.rc-title mark{background:rgba(59,130,246,.25);color:#93b4f5;border-radius:2px;padding:0 1px}
+.rc-title{font-size:15px;font-weight:600;color:#1F2937;flex:1;line-height:1.3}
+.rc-title mark{background:rgba(30,64,175,0.14);color:#1E40AF;border-radius:2px;padding:0 1px}
 .rc-badges{display:flex;gap:3px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
 .b{display:inline-block;padding:1px 5px;border-radius:3px;font-size:11px;font-weight:600;white-space:nowrap}
-.b-cat{background:rgba(30,58,138,.3);color:#7da2d4}
-.b-final{background:rgba(6,78,59,.4);color:#4ade80}
-.b-draft{background:rgba(55,65,81,.4);color:#9ca3af}
-.b-review{background:rgba(113,63,18,.4);color:#e0c080}
-.b-mkt{background:rgba(6,78,59,.2);color:#6bc4a0;font-size:10px}
-.b-topic{background:rgba(113,63,18,.15);color:#c4a060;font-size:10px}
-.b-tag{background:rgba(88,28,135,.2);color:#c084fc;font-size:10px}
-.b-sp-pub{background:rgba(6,78,59,.25);color:#60c49a;font-size:10px}
-.b-sp-stale{background:rgba(113,63,18,.3);color:#ffbb66;font-size:10px}
-.b-sp-local{background:rgba(55,65,81,.3);color:#9ca3af;font-size:10px}
-.rc-snip{font-size:13px;color:#777;line-height:1.4;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.rc-snip mark{background:rgba(59,130,246,.2);color:#93b4f5;border-radius:2px;padding:0 1px}
-.rc-meta{display:flex;gap:10px;margin-top:4px;font-size:12px;color:#555;flex-wrap:wrap}
-.viewer{display:none;width:50%;max-width:700px;min-width:350px;background:#12141c;border-left:1px solid #2a2d35;flex-direction:column;overflow:hidden}
+.b-cat{background:rgba(30,64,175,0.16);color:#1D4ED8}
+.b-final{background:rgba(4,120,87,0.14);color:#047857}
+.b-draft{background:rgba(107,114,128,0.12);color:#6B7280}
+.b-review{background:rgba(180,83,9,0.12);color:#B45309}
+.b-mkt{background:rgba(4,120,87,0.10);color:#047857;font-size:10px}
+.b-topic{background:rgba(180,83,9,0.07);color:#B45309;font-size:10px}
+.b-tag{background:rgba(109,40,217,0.10);color:#6D28D9;font-size:10px}
+.b-sp-pub{background:rgba(4,120,87,0.10);color:#047857;font-size:10px}
+.b-sp-stale{background:rgba(113,63,18,.3);color:#B45309;font-size:10px}
+.b-sp-local{background:rgba(55,65,81,.3);color:#6B7280;font-size:10px}
+.rc-snip{font-size:13px;color:#9A9A9A;line-height:1.4;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rc-snip mark{background:rgba(30,64,175,0.12);color:#1E40AF;border-radius:2px;padding:0 1px}
+.rc-meta{display:flex;gap:10px;margin-top:4px;font-size:12px;color:#6B7280;flex-wrap:wrap}
+.viewer{display:none;width:50%;max-width:700px;min-width:350px;background:#FAFAFA;border-left:1px solid #D1D5DB;flex-direction:column;overflow:hidden}
 .viewer.open{display:flex}
-.viewer-head{padding:12px 16px;border-bottom:1px solid #1e2028;display:flex;align-items:flex-start;gap:8px;flex-shrink:0}
-.viewer-title{font-size:16px;font-weight:700;color:#fff;flex:1;line-height:1.3}
-.viewer-close{background:none;border:none;color:#888;font-size:20px;cursor:pointer;padding:2px 6px;border-radius:3px;flex-shrink:0}
-.viewer-close:hover{color:#fff;background:rgba(255,255,255,.05)}
-.viewer-meta{padding:8px 16px;border-bottom:1px solid #1e2028;display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0}
-.viewer-body{flex:1;overflow-y:auto;padding:16px;font-size:15px;color:#d4d4d4;line-height:1.7}
-.viewer-body h1{font-size:20px;font-weight:700;color:#fff;margin:16px 0 8px;border-bottom:1px solid #1e2028;padding-bottom:6px}
-.viewer-body h2{font-size:17px;font-weight:700;color:#eee;margin:14px 0 6px}
-.viewer-body h3{font-size:15px;font-weight:700;color:#ccc;margin:10px 0 4px}
+.viewer-head{padding:12px 16px;border-bottom:1px solid #E0E0E0;display:flex;align-items:flex-start;gap:8px;flex-shrink:0}
+.viewer-title{font-size:16px;font-weight:700;color:#0F1111;flex:1;line-height:1.3}
+.viewer-close{background:none;border:none;color:#6B7280;font-size:20px;cursor:pointer;padding:2px 6px;border-radius:3px;flex-shrink:0}
+.viewer-close:hover{color:#0F1111;background:rgba(15,17,17,0.06)}
+.viewer-meta{padding:8px 16px;border-bottom:1px solid #E0E0E0;display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0}
+.viewer-body{flex:1;overflow-y:auto;padding:16px;font-size:15px;color:#1F2937;line-height:1.7}
+.viewer-body h1{font-size:20px;font-weight:700;color:#0F1111;margin:16px 0 8px;border-bottom:1px solid #E0E0E0;padding-bottom:6px}
+.viewer-body h2{font-size:17px;font-weight:700;color:#F5F5F5;margin:14px 0 6px}
+.viewer-body h3{font-size:15px;font-weight:700;color:#161D26;margin:10px 0 4px}
 .viewer-body p{margin:6px 0}
 .viewer-body ul,.viewer-body ol{margin:6px 0 6px 20px}
 .viewer-body li{margin:3px 0}
-.viewer-body code{background:#1a1d27;padding:1px 4px;border-radius:3px;font-size:14px;color:#93b4f5}
-.viewer-body pre{background:#1a1d27;padding:10px;border-radius:4px;overflow-x:auto;margin:8px 0;font-size:14px;line-height:1.5}
+.viewer-body code{background:#FFFFFF;padding:1px 4px;border-radius:3px;font-size:14px;color:#1E40AF}
+.viewer-body pre{background:#FFFFFF;padding:10px;border-radius:4px;overflow-x:auto;margin:8px 0;font-size:14px;line-height:1.5}
 .viewer-body pre code{background:none;padding:0}
-.viewer-body blockquote{border-left:3px solid #3b82f6;padding-left:12px;color:#999;margin:8px 0}
+.viewer-body blockquote{border-left:3px solid #1E40AF;padding-left:12px;color:#6B7280;margin:8px 0}
 .viewer-body table{border-collapse:collapse;width:100%;margin:8px 0;font-size:14px}
-.viewer-body th,.viewer-body td{border:1px solid #2a2d35;padding:6px 8px;text-align:left}
-.viewer-body th{background:#1a1d27;color:#aaa;font-weight:600}
-.viewer-body hr{border:none;border-top:1px solid #1e2028;margin:12px 0}
-.viewer-body a{color:#3b82f6;text-decoration:none}
+.viewer-body th,.viewer-body td{border:1px solid #D1D5DB;padding:6px 8px;text-align:left}
+.viewer-body th{background:#FFFFFF;color:#9CA3AF;font-weight:600}
+.viewer-body hr{border:none;border-top:1px solid #E0E0E0;margin:12px 0}
+.viewer-body a{color:#1E40AF;text-decoration:none}
 .viewer-body a:hover{text-decoration:underline}
-.viewer-body strong{color:#eee}
-.viewer-body em{color:#bbb}
-.viewer-loading{padding:40px;text-align:center;color:#555}
-.wiki-toc{background:#14161e;border:1px solid #1e2028;border-radius:6px;padding:10px 14px;margin-bottom:14px}
-.wiki-toc summary{font-size:14px;font-weight:700;color:#888;cursor:pointer;user-select:none}
-.wiki-toc summary:hover{color:#d4d4d4}
+.viewer-body strong{color:#F5F5F5}
+.viewer-body em{color:#6B7280}
+.viewer-loading{padding:40px;text-align:center;color:#6B7280}
+.wiki-toc{background:#FAFAFA;border:1px solid #E0E0E0;border-radius:6px;padding:10px 14px;margin-bottom:14px}
+.wiki-toc summary{font-size:14px;font-weight:700;color:#6B7280;cursor:pointer;user-select:none}
+.wiki-toc summary:hover{color:#1F2937}
 .wiki-toc ul{list-style:none;margin:6px 0 0;padding:0}
 .wiki-toc li{margin:2px 0}
-.wiki-toc a{font-size:14px;color:#7da2d4;text-decoration:none}
-.wiki-toc a:hover{color:#93b4f5;text-decoration:underline}
+.wiki-toc a{font-size:14px;color:#1D4ED8;text-decoration:none}
+.wiki-toc a:hover{color:#1E40AF;text-decoration:underline}
 .wiki-toc .toc-h3{padding-left:14px}
-.stale-banner{background:rgba(113,63,18,.2);border:1px solid rgba(113,63,18,.4);color:#e0c080;padding:8px 12px;border-radius:6px;margin-bottom:12px;font-size:14px;display:flex;align-items:center;gap:6px}
+.stale-banner{background:rgba(180,83,9,0.08);border:1px solid rgba(180,83,9,0.12);color:#B45309;padding:8px 12px;border-radius:6px;margin-bottom:12px;font-size:14px;display:flex;align-items:center;gap:6px}
 .stale-banner .stale-icon{font-size:18px}
-.backlinks{background:#14161e;border:1px solid #1e2028;border-radius:6px;padding:10px 14px;margin-top:16px}
-.backlinks-title{font-size:13px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.backlinks a{display:inline-block;font-size:13px;color:#7da2d4;text-decoration:none;padding:2px 8px;background:rgba(30,58,138,.15);border-radius:3px;margin:2px 3px 2px 0;cursor:pointer}
-.backlinks a:hover{background:rgba(30,58,138,.3);color:#93b4f5}
-.backlinks .bl-count{font-size:11px;color:#555;margin-left:2px}
+.backlinks{background:#FAFAFA;border:1px solid #E0E0E0;border-radius:6px;padding:10px 14px;margin-top:16px}
+.backlinks-title{font-size:13px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.backlinks a{display:inline-block;font-size:13px;color:#1D4ED8;text-decoration:none;padding:2px 8px;background:rgba(30,64,175,0.10);border-radius:3px;margin:2px 3px 2px 0;cursor:pointer}
+.backlinks a:hover{background:rgba(30,64,175,0.16);color:#1E40AF}
+.backlinks .bl-count{font-size:11px;color:#6B7280;margin-left:2px}
 .upload-zone{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,17,23,.9);z-index:100;align-items:center;justify-content:center;flex-direction:column}
 .upload-zone.active{display:flex}
-.upload-box{border:2px dashed #3b82f6;border-radius:12px;padding:40px 60px;text-align:center;color:#93b4f5;font-size:16px;pointer-events:none}
+.upload-box{border:2px dashed #1E40AF;border-radius:12px;padding:40px 60px;text-align:center;color:#1E40AF;font-size:16px;pointer-events:none}
 .upload-box .icon{font-size:42px;margin-bottom:10px;opacity:.5}
-.recent-header{font-size:14px;color:#555;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid #1a1d24}
-.empty{text-align:center;padding:50px 20px;color:#555}
+.recent-header{font-size:14px;color:#6B7280;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid #E0E0E0}
+.empty{text-align:center;padding:50px 20px;color:#6B7280}
 .empty .icon{font-size:42px;margin-bottom:10px;opacity:.3}
-.empty h3{font-size:17px;color:#777;margin-bottom:4px}
+.empty h3{font-size:17px;color:#9A9A9A;margin-bottom:4px}
 .empty p{font-size:14px;max-width:380px;margin:0 auto;line-height:1.5}
-.stats{display:flex;gap:14px;padding:6px 20px;border-top:1px solid #1a1d24;flex-shrink:0;background:#12141c;font-size:12px;color:#555;flex-wrap:wrap}
+.stats{display:flex;gap:14px;padding:6px 20px;border-top:1px solid #E0E0E0;flex-shrink:0;background:#FAFAFA;font-size:12px;color:#6B7280;flex-wrap:wrap}
 .stats .s{display:flex;align-items:center;gap:3px}
-.stats .sn{color:#888;font-weight:600}
+.stats .sn{color:#6B7280;font-weight:600}
 .results::-webkit-scrollbar,.viewer-body::-webkit-scrollbar{width:5px}
-.results::-webkit-scrollbar-track,.viewer-body::-webkit-scrollbar-track{background:#0f1117}
-.results::-webkit-scrollbar-thumb,.viewer-body::-webkit-scrollbar-thumb{background:#2a2d35;border-radius:3px}
-.results::-webkit-scrollbar-thumb:hover,.viewer-body::-webkit-scrollbar-thumb:hover{background:#3b82f6}
+.results::-webkit-scrollbar-track,.viewer-body::-webkit-scrollbar-track{background:#FFFFFF}
+.results::-webkit-scrollbar-thumb,.viewer-body::-webkit-scrollbar-thumb{background:#D1D5DB;border-radius:3px}
+.results::-webkit-scrollbar-thumb:hover,.viewer-body::-webkit-scrollbar-thumb:hover{background:#1E40AF}
 @media(max-width:800px){.viewer{width:100%!important;max-width:100%!important;position:absolute;top:0;left:0;right:0;bottom:0;z-index:10}}
 /* ── Group toggle ── */
-.group-toggle{background:none;border:1px solid #2a2d35;color:#7da2d4;font-size:11px;padding:1px 7px;border-radius:3px;cursor:pointer;margin-left:auto;white-space:nowrap;transition:all .12s}
-.group-toggle:hover{border-color:#3b82f6;color:#93b4f5;background:rgba(30,58,138,.1)}
+.group-toggle{background:none;border:1px solid #D1D5DB;color:#1D4ED8;font-size:11px;padding:1px 7px;border-radius:3px;cursor:pointer;margin-left:auto;white-space:nowrap;transition:all .12s}
+.group-toggle:hover{border-color:#1E40AF;color:#1E40AF;background:rgba(30,64,175,0.07)}
 .group-children{margin-bottom:4px}
 .rc-child{opacity:.85}
 .rc-child:hover{opacity:1}
 /* ── Group container ── */
 .group-wrap{margin-bottom:8px}
-.group-header{display:flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(30,58,138,.12);border:1px solid rgba(59,130,246,.2);border-bottom:none;border-radius:6px 6px 0 0;font-size:12px;color:#7da2d4;cursor:pointer}
-.group-header:hover{background:rgba(30,58,138,.2)}
+.group-header{display:flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(30,64,175,0.08);border:1px solid rgba(30,64,175,0.12);border-bottom:none;border-radius:6px 6px 0 0;font-size:12px;color:#1D4ED8;cursor:pointer}
+.group-header:hover{background:rgba(30,64,175,0.12)}
 .group-header .gh-icon{font-size:10px;opacity:.7}
-.group-header .gh-count{background:rgba(59,130,246,.2);padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600}
+.group-header .gh-count{background:rgba(30,64,175,0.12);padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600}
 .group-wrap>.rc:first-of-type{border-radius:0 0 6px 6px}
 .group-wrap.expanded .group-header{border-radius:6px 6px 0 0;border-bottom:1px solid rgba(59,130,246,.15)}
 /* ── Archive toggle ── */
 .archive-toggle{transition:all .15s}
-.archive-toggle.on{background:rgba(127,29,29,.2)!important;border-color:rgba(248,113,113,.3)!important;color:#e8a0a0!important}
+.archive-toggle.on{background:rgba(153,27,27,0.10)!important;border-color:rgba(248,113,113,.3)!important;color:#991B1B!important}
 /* ── Viewer related links ── */
-.viewer-related{padding:6px 16px;border-bottom:1px solid #1e2028;flex-shrink:0;max-height:120px;overflow-y:auto}
-.viewer-related-label{font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.viewer-related{padding:6px 16px;border-bottom:1px solid #E0E0E0;flex-shrink:0;max-height:120px;overflow-y:auto}
+.viewer-related-label{font-size:11px;color:#6B7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
 .viewer-related-links{display:flex;flex-wrap:wrap;gap:4px}
-.rel-link{position:relative;display:inline-block;font-size:13px;color:#7da2d4;text-decoration:none;padding:2px 8px;background:rgba(30,58,138,.1);border:1px solid rgba(30,58,138,.2);border-radius:4px;cursor:pointer;transition:all .12s;max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.rel-link:hover{background:rgba(30,58,138,.25);border-color:#3b82f6;color:#93b4f5}
-.rel-link .rel-cat{font-size:10px;color:#555;margin-left:3px}
-.rel-tooltip{display:none;position:absolute;bottom:calc(100% + 6px);left:0;width:280px;background:#1a1d27;border:1px solid #2a3a5c;border-radius:6px;padding:8px 10px;z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.4);pointer-events:none}
+.rel-link{position:relative;display:inline-block;font-size:13px;color:#1D4ED8;text-decoration:none;padding:2px 8px;background:rgba(30,64,175,0.07);border:1px solid rgba(30,64,175,0.12);border-radius:4px;cursor:pointer;transition:all .12s;max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rel-link:hover{background:rgba(30,58,138,.25);border-color:#1E40AF;color:#1E40AF}
+.rel-link .rel-cat{font-size:10px;color:#6B7280;margin-left:3px}
+.rel-tooltip{display:none;position:absolute;bottom:calc(100% + 6px);left:0;width:280px;background:#FFFFFF;border:1px solid #BFD4F2;border-radius:6px;padding:8px 10px;z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.4);pointer-events:none}
 .rel-link:hover .rel-tooltip{display:block}
-.rel-tooltip-title{font-size:13px;font-weight:600;color:#d4d4d4;margin-bottom:3px}
-.rel-tooltip-cat{font-size:11px;color:#7da2d4;margin-bottom:4px}
-.rel-tooltip-snip{font-size:12px;color:#888;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.rel-tooltip-title{font-size:13px;font-weight:600;color:#1F2937;margin-bottom:3px}
+.rel-tooltip-cat{font-size:11px;color:#1D4ED8;margin-bottom:4px}
+.rel-tooltip-snip{font-size:12px;color:#6B7280;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 /* ── Viewer back button ── */
-.viewer-back{background:none;border:1px solid #2a2d35;color:#7da2d4;font-size:12px;padding:2px 8px;border-radius:4px;cursor:pointer;flex-shrink:0;transition:all .12s;display:none}
-.viewer-back:hover{border-color:#3b82f6;color:#93b4f5;background:rgba(30,58,138,.1)}
+.viewer-back{background:none;border:1px solid #D1D5DB;color:#1D4ED8;font-size:12px;padding:2px 8px;border-radius:4px;cursor:pointer;flex-shrink:0;transition:all .12s;display:none}
+.viewer-back:hover{border-color:#1E40AF;color:#1E40AF;background:rgba(30,64,175,0.07)}
 .viewer-back.has-history{display:inline-flex;align-items:center;gap:3px}
 /* ── View toggle ── */
-.view-toggle{display:inline-flex;background:#1a1d27;border:1px solid #2a2d35;border-radius:6px;padding:2px;gap:2px;margin-right:6px}
-.view-toggle .vt{background:none;border:none;color:#777;font-size:13px;padding:5px 11px;border-radius:4px;cursor:pointer;font-family:inherit;transition:all .12s}
-.view-toggle .vt:hover{color:#d4d4d4}
-.view-toggle .vt.on{background:#172040;color:#93b4f5}
+.view-toggle{display:inline-flex;background:#FFFFFF;border:1px solid #D1D5DB;border-radius:6px;padding:2px;gap:2px;margin-right:6px}
+.view-toggle .vt{background:none;border:none;color:#9A9A9A;font-size:13px;padding:5px 11px;border-radius:4px;cursor:pointer;font-family:inherit;transition:all .12s}
+.view-toggle .vt:hover{color:#1F2937}
+.view-toggle .vt.on{background:#E3F2FD;color:#1E40AF}
 /* ── Pipeline view ── */
 .pipeline{flex:1;display:flex;gap:10px;padding:10px 20px 20px;overflow-x:auto;overflow-y:hidden}
-.pipe-col{flex:1;min-width:260px;max-width:380px;display:flex;flex-direction:column;background:#12141c;border:1px solid #1e2028;border-radius:6px;overflow:hidden}
-.pipe-col-head{padding:8px 12px;border-bottom:1px solid #1e2028;display:flex;align-items:center;gap:6px;flex-shrink:0;background:#14161e}
+.pipe-col{flex:1;min-width:260px;max-width:380px;display:flex;flex-direction:column;background:#FAFAFA;border:1px solid #E0E0E0;border-radius:6px;overflow:hidden}
+.pipe-col-head{padding:8px 12px;border-bottom:1px solid #E0E0E0;display:flex;align-items:center;gap:6px;flex-shrink:0;background:#FAFAFA}
 .pipe-col-title{font-size:13px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
-.pipe-col-count{background:rgba(255,255,255,.05);padding:1px 7px;border-radius:10px;font-size:11px;color:#888;font-weight:600}
-.pipe-col-head.draft .pipe-col-title{color:#9ca3af}
-.pipe-col-head.review .pipe-col-title{color:#e0c080}
-.pipe-col-head.final .pipe-col-title{color:#4ade80}
-.pipe-col-head.archived .pipe-col-title{color:#e8a0a0}
+.pipe-col-count{background:rgba(15,17,17,0.03);padding:1px 7px;border-radius:10px;font-size:11px;color:#6B7280;font-weight:600}
+.pipe-col-head.draft .pipe-col-title{color:#6B7280}
+.pipe-col-head.review .pipe-col-title{color:#B45309}
+.pipe-col-head.final .pipe-col-title{color:#047857}
+.pipe-col-head.archived .pipe-col-title{color:#991B1B}
 .pipe-col-body{flex:1;overflow-y:auto;padding:8px;display:flex;flex-direction:column;gap:6px}
-.pipe-card{background:#14161e;border:1px solid #1e2028;border-radius:5px;padding:8px 10px;cursor:pointer;transition:all .12s;position:relative}
-.pipe-card:hover{border-color:#2a3a5c;background:#161a24}
-.pipe-card.viewing{border-color:#3b82f6;background:#161a24}
-.pipe-card-title{font-size:13px;font-weight:600;color:#d4d4d4;line-height:1.3;margin-bottom:4px;padding-right:44px}
+.pipe-card{background:#FAFAFA;border:1px solid #E0E0E0;border-radius:5px;padding:8px 10px;cursor:pointer;transition:all .12s;position:relative}
+.pipe-card:hover{border-color:#BFD4F2;background:#F5F5F5}
+.pipe-card.viewing{border-color:#1E40AF;background:#F5F5F5}
+.pipe-card-title{font-size:13px;font-weight:600;color:#1F2937;line-height:1.3;margin-bottom:4px;padding-right:44px}
 .pipe-card-meta{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
 .pipe-card-meta .b{font-size:10px;padding:1px 4px}
-.pipe-card-foot{font-size:11px;color:#555;margin-top:4px;display:flex;justify-content:space-between;gap:6px}
+.pipe-card-foot{font-size:11px;color:#6B7280;margin-top:4px;display:flex;justify-content:space-between;gap:6px}
 .pipe-actions{position:absolute;top:6px;right:6px;display:flex;gap:2px;opacity:0;transition:opacity .12s}
 .pipe-card:hover .pipe-actions{opacity:1}
-.pipe-act{background:#1a1d27;border:1px solid #2a2d35;color:#888;font-size:10px;padding:1px 5px;border-radius:3px;cursor:pointer;font-family:inherit}
-.pipe-act:hover{border-color:#3b82f6;color:#93b4f5;background:rgba(30,58,138,.15)}
-.pipe-act.promote:hover{border-color:#4ade80;color:#4ade80;background:rgba(6,78,59,.15)}
-.pipe-act.demote:hover{border-color:#e8a0a0;color:#e8a0a0;background:rgba(127,29,29,.15)}
-.pipe-group-by{background:#1a1d27;border:1px solid #2a2d35;color:#aaa;padding:4px 8px;border-radius:4px;font-size:12px;font-family:inherit;outline:none;cursor:pointer}
-.pipe-overlay-badge{display:inline-block;font-size:10px;color:#93b4f5;margin-left:4px;background:rgba(30,58,138,.2);padding:0 4px;border-radius:2px}
-.pipe-group-header{font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.5px;padding:4px 2px 2px;margin-top:4px;border-top:1px solid #1e2028}
+.pipe-act{background:#FFFFFF;border:1px solid #D1D5DB;color:#6B7280;font-size:10px;padding:1px 5px;border-radius:3px;cursor:pointer;font-family:inherit}
+.pipe-act:hover{border-color:#1E40AF;color:#1E40AF;background:rgba(30,64,175,0.10)}
+.pipe-act.promote:hover{border-color:#047857;color:#047857;background:rgba(4,120,87,0.08)}
+.pipe-act.demote:hover{border-color:#991B1B;color:#991B1B;background:rgba(127,29,29,.15)}
+.pipe-group-by{background:#FFFFFF;border:1px solid #D1D5DB;color:#9CA3AF;padding:4px 8px;border-radius:4px;font-size:12px;font-family:inherit;outline:none;cursor:pointer}
+.pipe-overlay-badge{display:inline-block;font-size:10px;color:#1E40AF;margin-left:4px;background:rgba(30,64,175,0.12);padding:0 4px;border-radius:2px}
+.pipe-group-header{font-size:11px;color:#6B7280;text-transform:uppercase;letter-spacing:.5px;padding:4px 2px 2px;margin-top:4px;border-top:1px solid #E0E0E0}
 .pipe-group-header:first-child{margin-top:0;border-top:none}
-.pipe-empty{text-align:center;padding:20px 10px;color:#444;font-size:12px;font-style:italic}
+.pipe-empty{text-align:center;padding:20px 10px;color:#4B5563;font-size:12px;font-style:italic}
 
 /* M01 + M02 + M11 (2026-04-30): Instrument-panel header + hero KPI
    strip + agentic drafts ribbon. Dark-theme colors match the existing
-   wiki-search.html palette (#0f1117 bg, #12141c panel). Light-theme
+   wiki-search.html palette (#FFFFFF bg, #FAFAFA panel). Light-theme
    port is a follow-up; keeping dark here to avoid a big aesthetic
    re-decision as part of this commit. */
 .wk-stick {
   flex-shrink: 0;
-  background: #12141c;
-  border-bottom: 1px solid #1e2028;
+  background: #FAFAFA;
+  border-bottom: 1px solid #E0E0E0;
   position: sticky;
   top: 0;
   z-index: 30;
@@ -212,19 +213,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #666;
+  color: #9A9A9A;
   font-weight: 600;
 }
 .wk-stick-title strong {
   font-size: 16px;
-  color: #fff;
+  color: #0F1111;
   font-weight: 700;
 }
 .wk-stick-wk {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 11px;
-  color: #93b4f5;
-  background: rgba(59, 130, 246, 0.15);
+  color: #1E40AF;
+  background: rgba(30,64,175,0.10);
   padding: 3px 10px;
   border-radius: 10px;
   white-space: nowrap;
@@ -251,25 +252,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #666;
+  color: #9A9A9A;
   font-weight: 600;
   margin-bottom: 2px;
 }
 .wk-kpi-val {
   font-size: 22px;
-  color: #fff;
+  color: #0F1111;
   font-weight: 700;
   line-height: 1;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
 }
-.wk-kpi-val.good { color: #4ade80; }
-.wk-kpi-val.warn { color: #e0c080; }
-.wk-kpi-val.bad  { color: #e8a0a0; }
+.wk-kpi-val.good { color: #047857; }
+.wk-kpi-val.warn { color: #B45309; }
+.wk-kpi-val.bad  { color: #991B1B; }
 .wk-kpi-sub {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 10px;
-  color: #555;
+  color: #6B7280;
   margin-top: 2px;
 }
 
@@ -282,9 +283,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .wk-kbd {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 10px;
-  color: #666;
-  background: #1a1d27;
-  border: 1px solid #2a2d35;
+  color: #9A9A9A;
+  background: #FFFFFF;
+  border: 1px solid #D1D5DB;
   padding: 2px 7px;
   border-radius: 3px;
   flex-shrink: 0;
@@ -296,8 +297,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
    waiting. Each row: draft title, author agent, word count, one CTA
    ("Commit & push") + dismiss. */
 .wk-agentic-ribbon {
-  background: linear-gradient(90deg, rgba(88, 28, 135, 0.15) 0%, rgba(30, 58, 138, 0.10) 100%);
-  border-bottom: 1px solid #2a2d35;
+  background: linear-gradient(90deg, rgba(109,40,217,0.08) 0%, rgba(30, 58, 138, 0.10) 100%);
+  border-bottom: 1px solid #D1D5DB;
   padding: 10px 20px 12px;
 }
 .wk-agentic-head {
@@ -311,17 +312,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #c084fc;
+  color: #6D28D9;
 }
 .wk-agentic-sub {
   font-size: 12px;
-  color: #888;
+  color: #6B7280;
   flex: 1 1 auto;
 }
 .wk-agentic-dismiss {
   background: transparent;
-  border: 1px solid #3a3d48;
-  color: #666;
+  border: 1px solid #E0E0E0;
+  color: #9A9A9A;
   font-size: 14px;
   width: 22px;
   height: 22px;
@@ -330,7 +331,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   line-height: 1;
   padding: 0;
 }
-.wk-agentic-dismiss:hover { border-color: #666; color: #aaa; }
+.wk-agentic-dismiss:hover { border-color: #9A9A9A; color: #9CA3AF; }
 .wk-agentic-list {
   display: flex;
   flex-direction: column;
@@ -342,31 +343,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   gap: 12px;
   padding: 6px 10px;
   background: rgba(26, 29, 39, 0.5);
-  border: 1px solid #1e2028;
+  border: 1px solid #E0E0E0;
   border-radius: 4px;
   font-size: 13px;
 }
 .wk-agentic-row-author {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 11px;
-  color: #c084fc;
+  color: #6D28D9;
   min-width: 90px;
   font-weight: 600;
 }
 .wk-agentic-row-title {
-  color: #d4d4d4;
+  color: #1F2937;
   flex: 1 1 auto;
   font-weight: 500;
 }
 .wk-agentic-row-meta {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 11px;
-  color: #666;
+  color: #9A9A9A;
 }
 .wk-agentic-row-action {
   background: transparent;
-  border: 1px solid #3b82f6;
-  color: #93b4f5;
+  border: 1px solid #1E40AF;
+  color: #1E40AF;
   padding: 3px 12px;
   border-radius: 3px;
   font-size: 12px;
@@ -375,7 +376,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   transition: background 120ms ease;
 }
 .wk-agentic-row-action:hover {
-  background: rgba(59, 130, 246, 0.15);
+  background: rgba(30,64,175,0.10);
 }
 .wk-agentic-row-action.disabled {
   opacity: 0.4;
@@ -387,34 +388,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
    over 200, review count over 50, or zero FINAL in last 14 days. */
 .wk-pipeline-headline {
   padding: 10px 20px;
-  background: #14161e;
-  border-bottom: 1px solid #1e2028;
+  background: #FAFAFA;
+  border-bottom: 1px solid #E0E0E0;
   font-size: 14px;
-  color: #d4d4d4;
+  color: #1F2937;
 }
 .wk-pipeline-headline strong {
-  color: #fff;
+  color: #0F1111;
   font-variant-numeric: tabular-nums;
 }
 .wk-pipeline-exception {
   margin: 8px 20px 0;
   padding: 8px 12px;
   background: linear-gradient(90deg, rgba(127, 29, 29, 0.3) 0%, rgba(127, 29, 29, 0.05) 100%);
-  border: 1px solid #7f1d1d;
-  border-left: 3px solid #e8a0a0;
+  border: 1px solid #D13212;
+  border-left: 3px solid #991B1B;
   border-radius: 3px;
   display: flex;
   align-items: center;
   gap: 12px;
   font-size: 13px;
-  color: #f0d0d0;
+  color: #991B1B;
 }
 .wk-pipeline-exception-kicker {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.12em;
-  color: #e8a0a0;
+  color: #991B1B;
   text-transform: uppercase;
 }
 
@@ -422,8 +423,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
    doc count + 6-week ingest velocity sparkline. Click to filter.
    Collapsible — hidden when user is searching. */
 .wk-topic-grid-wrap {
-  background: #12141c;
-  border-bottom: 1px solid #1e2028;
+  background: #FAFAFA;
+  border-bottom: 1px solid #E0E0E0;
   padding: 8px 20px 10px;
 }
 .wk-topic-grid-wrap.collapsed .wk-topic-grid { display: none; }
@@ -439,20 +440,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #aaa;
+  color: #9CA3AF;
   text-transform: uppercase;
   margin: 0;
 }
 .wk-topic-sub {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 10px;
-  color: #555;
+  color: #6B7280;
   flex: 1 1 auto;
 }
 .wk-topic-toggle {
   background: transparent;
-  border: 1px solid #2a2d35;
-  color: #777;
+  border: 1px solid #D1D5DB;
+  color: #9A9A9A;
   font-family: inherit;
   font-size: 12px;
   width: 22px;
@@ -463,7 +464,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   line-height: 1;
 }
 .wk-topic-toggle::before { font-size: 14px; }
-.wk-topic-toggle:hover { border-color: #3b82f6; color: #93b4f5; }
+.wk-topic-toggle:hover { border-color: #1E40AF; color: #1E40AF; }
 
 .wk-topic-grid {
   display: grid;
@@ -471,8 +472,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   gap: 6px;
 }
 .wk-topic-card {
-  background: #14161e;
-  border: 1px solid #1e2028;
+  background: #FAFAFA;
+  border: 1px solid #E0E0E0;
   border-radius: 4px;
   padding: 6px 8px;
   cursor: pointer;
@@ -482,12 +483,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   color: inherit;
 }
 .wk-topic-card:hover {
-  border-color: #3b82f6;
-  background: #161a24;
+  border-color: #1E40AF;
+  background: #F5F5F5;
 }
 .wk-topic-card.active {
-  border-color: #3b82f6;
-  background: rgba(30, 58, 138, 0.15);
+  border-color: #1E40AF;
+  background: rgba(30,64,175,0.10);
 }
 .wk-topic-card-head {
   display: flex;
@@ -498,7 +499,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 }
 .wk-topic-card-name {
   font-size: 12px;
-  color: #d4d4d4;
+  color: #1F2937;
   font-weight: 600;
   flex: 1 1 auto;
   white-space: nowrap;
@@ -508,7 +509,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .wk-topic-card-count {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 11px;
-  color: #7da2d4;
+  color: #1D4ED8;
   font-variant-numeric: tabular-nums;
 }
 .wk-topic-card .sparkline { display: block; width: 100%; }
@@ -518,8 +519,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
    the other wiki sections. Canvas is full-width; height fixed at
    320px so the simulation has predictable bounds. */
 .wk-graph-wrap {
-  background: #12141c;
-  border-bottom: 1px solid #1e2028;
+  background: #FAFAFA;
+  border-bottom: 1px solid #E0E0E0;
   padding: 8px 20px 10px;
 }
 .wk-graph-head {
@@ -532,27 +533,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #aaa;
+  color: #9CA3AF;
   text-transform: uppercase;
   margin: 0;
 }
 .wk-graph-sub {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 10px;
-  color: #555;
+  color: #6B7280;
   flex: 1 1 auto;
 }
 .wk-graph-toggle {
   background: transparent;
-  border: 1px solid #2a2d35;
-  color: #93b4f5;
+  border: 1px solid #D1D5DB;
+  color: #1E40AF;
   font-family: inherit;
   font-size: 11px;
   padding: 3px 10px;
   border-radius: 3px;
   cursor: pointer;
 }
-.wk-graph-toggle:hover { border-color: #3b82f6; background: rgba(30, 58, 138, 0.15); }
+.wk-graph-toggle:hover { border-color: #1E40AF; background: rgba(30,64,175,0.10); }
 .wk-graph-body {
   position: relative;
 }
@@ -560,8 +561,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   display: block;
   width: 100%;
   height: 320px;
-  background: #0f1117;
-  border: 1px solid #1e2028;
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
   border-radius: 4px;
   cursor: grab;
 }
@@ -570,9 +571,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   position: absolute;
   top: 0;
   left: 0;
-  background: #1a1d27;
-  border: 1px solid #2a2d35;
-  color: #d4d4d4;
+  background: #FFFFFF;
+  border: 1px solid #D1D5DB;
+  color: #1F2937;
   padding: 6px 10px;
   border-radius: 4px;
   font-size: 12px;
@@ -583,13 +584,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 }
 .wk-graph-tooltip strong {
   display: block;
-  color: #fff;
+  color: #0F1111;
   margin-bottom: 2px;
 }
 .wk-graph-tooltip .wk-graph-tooltip-meta {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 10px;
-  color: #888;
+  color: #6B7280;
   margin-top: 4px;
 }
 .wk-graph-legend {
@@ -597,7 +598,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   gap: 14px;
   padding: 6px 0 0;
   font-size: 10px;
-  color: #888;
+  color: #6B7280;
   flex-wrap: wrap;
 }
 .wk-graph-legend-item {
@@ -617,8 +618,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
    padding, same heading cadence, same collapse affordance). Dates
    cluster within the grid so same-day updates group visually. */
 .wk-ingest-wrap {
-  background: #12141c;
-  border-bottom: 1px solid #1e2028;
+  background: #FAFAFA;
+  border-bottom: 1px solid #E0E0E0;
   padding: 8px 20px 10px;
 }
 .wk-ingest-head {
@@ -631,27 +632,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #aaa;
+  color: #9CA3AF;
   text-transform: uppercase;
   margin: 0;
 }
 .wk-ingest-sub {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 10px;
-  color: #555;
+  color: #6B7280;
   flex: 1 1 auto;
 }
 .wk-ingest-toggle {
   background: transparent;
-  border: 1px solid #2a2d35;
-  color: #777;
+  border: 1px solid #D1D5DB;
+  color: #9A9A9A;
   font-family: inherit;
   font-size: 12px;
   padding: 2px 8px;
   border-radius: 3px;
   cursor: pointer;
 }
-.wk-ingest-toggle:hover { border-color: #3b82f6; color: #93b4f5; }
+.wk-ingest-toggle:hover { border-color: #1E40AF; color: #1E40AF; }
 .wk-ingest-body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -661,17 +662,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   display: flex;
   flex-direction: column;
   gap: 2px;
-  background: #14161e;
-  border: 1px solid #1e2028;
+  background: #FAFAFA;
+  border: 1px solid #E0E0E0;
   border-radius: 4px;
   padding: 6px 8px;
   cursor: pointer;
   transition: border-color 120ms ease, background 120ms ease;
   font-size: 12px;
 }
-.wk-ingest-row:hover { border-color: #3b82f6; background: #161a24; }
+.wk-ingest-row:hover { border-color: #1E40AF; background: #F5F5F5; }
 .wk-ingest-row-title {
-  color: #c8c8c8;
+  color: #6B7280;
   font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -680,17 +681,85 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .wk-ingest-row-meta {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 10px;
-  color: #666;
+  color: #9A9A9A;
   display: flex;
   gap: 8px;
+}
+
+/* M04 (2026-04-30): Health-history fan chart. Reads wiki-health-history.json
+   (written daily by build-wiki-health-history.py). Shows total_docs over time
+   with orphans + contradictions as shaded bands. When history has <7 rows,
+   renders a "collecting data" placeholder instead of an empty chart — the fan
+   fills in as the daily builder accumulates snapshots. */
+.wk-fan-wrap {
+  background: #FAFAFA;
+  border-bottom: 1px solid #E0E0E0;
+  padding: 8px 20px 10px;
+}
+.wk-fan-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.wk-fan-heading {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #0F1111;
+  text-transform: uppercase;
+  margin: 0;
+}
+.wk-fan-sub {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  color: #9A9A9A;
+  flex: 1 1 auto;
+}
+.wk-fan-body {
+  position: relative;
+  min-height: 120px;
+}
+.wk-fan-svg {
+  width: 100%;
+  height: 120px;
+  display: block;
+}
+.wk-fan-empty {
+  padding: 22px 0;
+  text-align: center;
+  color: #6B7280;
+  font-size: 12px;
+  font-style: italic;
+}
+.wk-fan-empty strong {
+  color: #161D26;
+  font-style: normal;
+  font-weight: 700;
+}
+.wk-fan-legend {
+  display: flex;
+  gap: 14px;
+  padding: 4px 0 0;
+  font-size: 10px;
+  color: #6B7280;
+  flex-wrap: wrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.wk-fan-legend-item { display: inline-flex; align-items: center; gap: 4px; }
+.wk-fan-legend-swatch {
+  width: 10px;
+  height: 8px;
+  border-radius: 2px;
+  display: inline-block;
 }
 
 /* M05 (2026-04-30): Demand-gap panel. Reads open entries from
    wiki-demand-log.md (via demand_log_entries[]). Subtle amber bias
    because these are "something missing" signals, not neutral info. */
 .wk-demand-wrap {
-  background: #12141c;
-  border-bottom: 1px solid #1e2028;
+  background: #FAFAFA;
+  border-bottom: 1px solid #E0E0E0;
   padding: 8px 20px 10px;
 }
 .wk-demand-head {
@@ -703,14 +772,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #e0c080;
+  color: #B45309;
   text-transform: uppercase;
   margin: 0;
 }
 .wk-demand-sub {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 10px;
-  color: #555;
+  color: #6B7280;
   flex: 1 1 auto;
 }
 .wk-demand-body {
@@ -719,8 +788,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   gap: 4px;
 }
 .wk-demand-row {
-  background: rgba(113, 63, 18, 0.08);
-  border: 1px solid rgba(224, 192, 128, 0.15);
+  background: rgba(180,83,9,0.06);
+  border: 1px solid rgba(180,83,9,0.14);
   border-radius: 4px;
   padding: 6px 10px;
   display: grid;
@@ -730,26 +799,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   font-size: 12px;
 }
 .wk-demand-query {
-  color: #e0c080;
+  color: #B45309;
   font-weight: 600;
 }
 .wk-demand-count {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 10px;
-  color: #999;
-  background: rgba(224, 192, 128, 0.1);
+  color: #6B7280;
+  background: rgba(180,83,9,0.10);
   padding: 1px 6px;
   border-radius: 3px;
 }
 .wk-demand-last {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 10px;
-  color: #666;
+  color: #9A9A9A;
 }
 .wk-demand-note {
   grid-column: 1 / -1;
   font-size: 11px;
-  color: #888;
+  color: #6B7280;
   font-style: italic;
 }
 
@@ -762,8 +831,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   padding: 8px 20px;
-  border-bottom: 1px solid #1e2028;
-  background: #12141c;
+  border-bottom: 1px solid #E0E0E0;
+  background: #FAFAFA;
   font-size: 12px;
 }
 .viewer-lineage-col {
@@ -773,7 +842,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #888;
+  color: #6B7280;
   text-transform: uppercase;
   margin-bottom: 4px;
 }
@@ -785,7 +854,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .viewer-lineage-pill {
   background: rgba(30, 58, 138, 0.12);
   border: 1px solid rgba(59, 130, 246, 0.2);
-  color: #93b4f5;
+  color: #1E40AF;
   padding: 2px 8px;
   border-radius: 3px;
   font-size: 11px;
@@ -797,17 +866,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   white-space: nowrap;
 }
 .viewer-lineage-pill:hover {
-  border-color: #3b82f6;
+  border-color: #1E40AF;
   background: rgba(30, 58, 138, 0.2);
 }
 .viewer-lineage-pill.no-target {
-  color: #888;
+  color: #6B7280;
   cursor: default;
   background: rgba(55, 65, 81, 0.15);
-  border-color: #2a2d35;
+  border-color: #D1D5DB;
 }
 .viewer-lineage-empty {
-  color: #555;
+  color: #6B7280;
   font-style: italic;
   font-size: 11px;
 }
@@ -819,12 +888,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
    rule in contradiction_count. */
 .b-orphan {
   background: rgba(127, 29, 29, 0.15);
-  color: #f0a0a0;
+  color: #991B1B;
   font-size: 10px;
 }
 .b-contradiction {
   background: rgba(113, 63, 18, 0.25);
-  color: #ffbb66;
+  color: #B45309;
   font-size: 10px;
 }
 
@@ -930,10 +999,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
             aria-label="Force-directed graph of related wiki documents. Hover a node for preview, click to open."></canvas>
     <div class="wk-graph-tooltip" id="wkGraphTooltip" role="status" aria-live="polite" style="display:none"></div>
     <div class="wk-graph-legend">
-      <span class="wk-graph-legend-item"><span class="wk-graph-swatch" style="background:#4ade80"></span>FINAL</span>
-      <span class="wk-graph-legend-item"><span class="wk-graph-swatch" style="background:#e0c080"></span>REVIEW</span>
-      <span class="wk-graph-legend-item"><span class="wk-graph-swatch" style="background:#9ca3af"></span>DRAFT/other</span>
-      <span class="wk-graph-legend-item" style="color:#666">&middot; size &asymp; word count &middot; edges = related_docs</span>
+      <span class="wk-graph-legend-item"><span class="wk-graph-swatch" style="background:#047857"></span>FINAL</span>
+      <span class="wk-graph-legend-item"><span class="wk-graph-swatch" style="background:#B45309"></span>REVIEW</span>
+      <span class="wk-graph-legend-item"><span class="wk-graph-swatch" style="background:#6B7280"></span>DRAFT/other</span>
+      <span class="wk-graph-legend-item" style="color:#9A9A9A">&middot; size &asymp; word count &middot; edges = related_docs</span>
     </div>
   </div>
 </section>
@@ -950,6 +1019,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
             aria-controls="wkIngestBody" onclick="toggleIngestStrip()">+ Show ingest</button>
   </header>
   <div class="wk-ingest-body" id="wkIngestBody" style="display:none"></div>
+</section>
+
+<!-- M04 (2026-04-30): Health-history fan chart. Renders total_docs timeline
+     with orphan + contradiction bands from wiki-health-history.json. When
+     history has fewer than 7 rows, shows a "collecting data" placeholder;
+     the chart fills in as build-wiki-health-history.py runs daily. -->
+<section class="wk-fan-wrap" id="wkFanWrap" aria-labelledby="wkFanHeading" style="display:none">
+  <header class="wk-fan-head">
+    <h3 id="wkFanHeading" class="wk-fan-heading">Health over time</h3>
+    <span class="wk-fan-sub" id="wkFanSub">Daily snapshots · total docs + orphan/contradiction bands</span>
+  </header>
+  <div class="wk-fan-body" id="wkFanBody"></div>
 </section>
 
 <!-- M05 (2026-04-30): Demand-gap panel. Surfaces open entries from
@@ -985,7 +1066,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </div>
 <div class="upload-zone" id="uploadZone">
   <div class="upload-box"><div class="icon">📄</div><div>Drop markdown file to preview</div>
-  <div style="font-size:13px;color:#555;margin-top:6px">File will be indexed in-memory for this session</div></div>
+  <div style="font-size:13px;color:#6B7280;margin-top:6px">File will be indexed in-memory for this session</div></div>
 </div>
 <div class="stats" id="statsBar"></div>
 <script>
@@ -1151,6 +1232,10 @@ fetch('data/wiki-search-index.json?'+Date.now()).then(r=>r.json()).then(data=>{
   // auto-hide when the backing array is empty.
   renderIngestStrip(data);
   renderDemandPanel(data);
+  // M04 (2026-04-30): health-history fan chart. Auto-renders a
+  // "collecting data" placeholder when <7 daily snapshots are
+  // available; fills in as the daily builder accumulates rows.
+  renderHealthFan();
   doSearch();
 }).catch(e=>{
   console.error(e);
@@ -1402,8 +1487,8 @@ function renderTopicGrid(data) {
     const buckets = topicBuckets[name] || [];
     const any = buckets.some(v => v > 0);
     const spark = (haveSpark && any)
-      ? window.Sparkline.renderSparkline(buckets, { width: 120, height: 20, color: '#7da2d4', strokeWidth: 1.5 })
-      : '<div style="height:20px;color:#333;font-size:10px;text-align:center;padding-top:4px">—</div>';
+      ? window.Sparkline.renderSparkline(buckets, { width: 120, height: 20, color: '#1D4ED8', strokeWidth: 1.5 })
+      : '<div style="height:20px;color:#9A9A9A;font-size:10px;text-align:center;padding-top:4px">—</div>';
     const isActive = (F.topic && F.topic !== 'all' && F.topic === name) ? ' active' : '';
     return (
       `<button class="wk-topic-card${isActive}" data-topic="${esc(name)}" ` +
@@ -1634,10 +1719,10 @@ function startGraphSimulation() {
   const MAX_TICKS = 400;     // cap sim cost — graph settles well before this
 
   const STATUS_COLOR = {
-    FINAL:  '#4ade80',
-    REVIEW: '#e0c080',
-    DRAFT:  '#9ca3af',
-    ACTIVE: '#7da2d4',
+    FINAL:  '#047857',
+    REVIEW: '#B45309',
+    DRAFT:  '#6B7280',
+    ACTIVE: '#1D4ED8',
   };
 
   function step() {
@@ -1697,7 +1782,7 @@ function startGraphSimulation() {
     }
     // Nodes.
     for (const n of nodes) {
-      const color = STATUS_COLOR[n.status] || '#9ca3af';
+      const color = STATUS_COLOR[n.status] || '#6B7280';
       ctx.beginPath();
       ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
       ctx.fillStyle = color;
@@ -1705,7 +1790,7 @@ function startGraphSimulation() {
       ctx.fill();
       if (s.hoverId === n.id) {
         ctx.lineWidth = 2;
-        ctx.strokeStyle = '#fff';
+        ctx.strokeStyle = '#FFFFFF';
         ctx.stroke();
       }
       ctx.globalAlpha = 1.0;
@@ -1847,9 +1932,9 @@ function buildStats(data){
   if(st.REVIEW)h+='<span class="s"><span class="sn">'+st.REVIEW+'</span> review</span>';
   if(grpCount)h+='<span class="s"><span class="sn">'+grpCount+'</span> groups</span>';
   if(data.total_archived)h+='<span class="s"><span class="sn">'+data.total_archived+'</span> archived</span>';
-  if(data.total_all&&data.total_all>data.total_docs)h+='<span class="s" style="color:#444"><span class="sn">'+(data.total_all-data.total_docs)+'</span> grouped</span>';
+  if(data.total_all&&data.total_all>data.total_docs)h+='<span class="s" style="color:#4B5563"><span class="sn">'+(data.total_all-data.total_docs)+'</span> grouped</span>';
   h+='<span class="s">Updated '+new Date(data.generated).toLocaleString()+'</span>';
-  h+='<span class="s" style="margin-left:auto;color:#444">/ to focus · Esc to clear · drag .md to upload</span>';
+  h+='<span class="s" style="margin-left:auto;color:#4B5563">/ to focus · Esc to clear · drag .md to upload</span>';
   bar.innerHTML=h;
 }
 
@@ -2240,10 +2325,10 @@ function renderDocCard(doc,tokens,childCount,isChild){
   let staleTag='';
   if(doc.updated){
     const age=(Date.now()-new Date(doc.updated).getTime())/(864e5);
-    if(age>90)staleTag='<span class="b" style="background:rgba(113,63,18,.2);color:#e0c080">⚠ stale</span>';
+    if(age>90)staleTag='<span class="b" style="background:rgba(180,83,9,0.08);color:#B45309">⚠ stale</span>';
   }
   // Archive badge
-  const archiveBadge=doc.archived?'<span class="b" style="background:rgba(127,29,29,.2);color:#e8a0a0">archived</span>':'';
+  const archiveBadge=doc.archived?'<span class="b" style="background:rgba(153,27,27,0.10);color:#991B1B">archived</span>':'';
   // M09 (2026-04-30): Orphan + contradiction badges on cards.
   // is_orphan hydrated in load path from index.orphans[].
   // contradiction_issues hydrated from index.contradictions[] (kiro-server
@@ -2265,7 +2350,7 @@ function renderDocCard(doc,tokens,childCount,isChild){
     else spBadge='<span class="b b-sp-local" title="Local only — not on SharePoint">📄 local</span>';
   }
   const childCls=isChild?' rc-child':'';
-  return '<div class="rc'+childCls+'" style="'+(isViewing?'border-color:#3b82f6;background:#161a24':'')+(isChild?';margin-left:18px;border-left:2px solid #2a3a5c':'')+'" onclick="openDoc(\''+doc.id+'\')">'+
+  return '<div class="rc'+childCls+'" style="'+(isViewing?'border-color:#1E40AF;background:#F5F5F5':'')+(isChild?';margin-left:18px;border-left:2px solid #BFD4F2':'')+'" onclick="openDoc(\''+doc.id+'\')">'+
     '<div class="rc-head"><div class="rc-title">'+title+'</div>'+
     '<div class="rc-badges">'+(doc.status?'<span class="b '+sc+'">'+doc.status+'</span>':'')+spBadge+'<span class="b b-cat">'+esc(doc.category)+'</span>'+mkts+tops+tgs+staleTag+archiveBadge+orphanBadge+contradictionBadge+'</div></div>'+
     '<div class="rc-snip">'+snip+'</div>'+
@@ -2274,7 +2359,7 @@ function renderDocCard(doc,tokens,childCount,isChild){
       (doc.updated?'<span>'+doc.updated+'</span>':'')+
       (doc.audience?'<span>'+esc(doc.audience)+'</span>':'')+
       (doc.doc_type?'<span>'+esc(doc.doc_type)+'</span>':'')+
-      ((doc.related_docs||[]).length?'<span style="color:#7da2d4">🔗 '+doc.related_docs.length+' related</span>':'')+
+      ((doc.related_docs||[]).length?'<span style="color:#1D4ED8">🔗 '+doc.related_docs.length+' related</span>':'')+
     '</div></div>';
 }
 
@@ -2302,8 +2387,8 @@ function openDoc(id,fromLink){
     (doc.status?'<span class="b '+sc+'">'+doc.status+'</span>':'')+
     '<span class="b b-cat">'+esc(doc.category)+'</span>'+
     mkts+tops+tags+
-    (doc.word_count?'<span class="b" style="background:rgba(55,65,81,.25);color:#777">'+doc.word_count.toLocaleString()+' words</span>':'')+
-    (doc.updated?'<span class="b" style="background:rgba(55,65,81,.25);color:#777">'+doc.updated+'</span>':'');
+    (doc.word_count?'<span class="b" style="background:rgba(107,114,128,0.10);color:#9A9A9A">'+doc.word_count.toLocaleString()+' words</span>':'')+
+    (doc.updated?'<span class="b" style="background:rgba(107,114,128,0.10);color:#9A9A9A">'+doc.updated+'</span>':'');
 
   const body=document.getElementById('viewerBody');
   body.innerHTML='<div class="viewer-loading">Loading document…</div>';
@@ -2441,6 +2526,86 @@ function renderLineage(doc){
     '</div>';
 }
 
+// M04 (2026-04-30): Health-history fan chart. Fetches
+// data/wiki-health-history.json (written daily by
+// build-wiki-health-history.py). Renders total_docs timeline as a line
+// with orphans + contradictions as shaded bands below. Under 7 rows,
+// shows a "collecting data — fan will emerge in N more days" placeholder
+// so the section is never a blank panel. Pure SVG, no chart library.
+async function renderHealthFan(){
+  const wrap=document.getElementById('wkFanWrap');
+  const body=document.getElementById('wkFanBody');
+  const sub=document.getElementById('wkFanSub');
+  if(!wrap||!body)return;
+  let hist=null;
+  try{
+    const r=await fetch('data/wiki-health-history.json?'+Date.now(),{cache:'no-store'});
+    if(!r.ok){wrap.style.display='none';return;}
+    hist=await r.json();
+  }catch(e){
+    wrap.style.display='none';
+    return;
+  }
+  const rows=Array.isArray(hist&&hist.rows)?hist.rows:[];
+  if(!rows.length){wrap.style.display='none';return;}
+  wrap.style.display='';
+  const MIN_FAN=7;
+  if(rows.length<MIN_FAN){
+    const need=MIN_FAN-rows.length;
+    const ds=rows.map(r=>r.date).join(', ');
+    body.innerHTML=
+      '<div class="wk-fan-empty">'+
+      '<strong>Collecting data.</strong> '+rows.length+' snapshot'+(rows.length===1?'':'s')+
+      ' on file ('+esc(ds)+'). '+
+      'Fan chart activates after '+need+' more daily snapshot'+(need===1?'':'s')+
+      ' &mdash; each day <code>build-wiki-health-history.py</code> appends a row.'+
+      '</div>';
+    if(sub)sub.textContent=rows.length+' of '+MIN_FAN+' snapshots · waiting for daily builder';
+    return;
+  }
+  // Real fan — ≥7 rows available
+  const W=1200, H=120, PAD_L=36, PAD_R=12, PAD_T=8, PAD_B=18;
+  const innerW=W-PAD_L-PAD_R, innerH=H-PAD_T-PAD_B;
+  const maxTotal=Math.max(...rows.map(r=>r.total_docs||0));
+  const maxIssues=Math.max(...rows.map(r=>(r.orphans||0)+(r.contradictions||0)),1);
+  const xAt=(i)=>PAD_L+(rows.length===1?innerW/2:i*innerW/(rows.length-1));
+  const yTotal=(v)=>PAD_T+innerH*(1-v/(maxTotal||1));
+  const yIssue=(v)=>PAD_T+innerH*(1-v/(maxIssues||1));
+  const totalPath=rows.map((r,i)=>(i?'L':'M')+xAt(i)+' '+yTotal(r.total_docs||0)).join(' ');
+  const orphanPath=rows.map((r,i)=>(i?'L':'M')+xAt(i)+' '+yIssue(r.orphans||0)).join(' ');
+  const contraPath=rows.map((r,i)=>(i?'L':'M')+xAt(i)+' '+yIssue(r.contradictions||0)).join(' ');
+  const contraBand=
+    rows.map((r,i)=>(i?'L':'M')+xAt(i)+' '+yIssue(r.contradictions||0)).join(' ')+
+    ' L'+xAt(rows.length-1)+' '+(PAD_T+innerH)+
+    ' L'+xAt(0)+' '+(PAD_T+innerH)+' Z';
+  const ticks=[];
+  const step=Math.max(1,Math.ceil(rows.length/6));
+  for(let i=0;i<rows.length;i+=step){
+    ticks.push('<text x="'+xAt(i)+'" y="'+(H-4)+'" font-size="9" fill="#6B7280" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">'+esc(rows[i].date.slice(5))+'</text>');
+  }
+  const ySteps=[0,Math.round(maxTotal/2),maxTotal];
+  const yLabels=ySteps.map(v=>
+    '<text x="'+(PAD_L-4)+'" y="'+(yTotal(v)+3)+'" font-size="9" fill="#6B7280" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">'+v+'</text>'+
+    '<line x1="'+PAD_L+'" x2="'+(W-PAD_R)+'" y1="'+yTotal(v)+'" y2="'+yTotal(v)+'" stroke="#E0E0E0" stroke-width="0.5" />'
+  ).join('');
+  body.innerHTML=
+    '<svg class="wk-fan-svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Wiki health over time: total docs with orphan and contradiction bands">'+
+      yLabels+
+      '<path d="'+contraBand+'" fill="rgba(209,50,18,0.10)" />'+
+      '<path d="'+contraPath+'" stroke="#D13212" stroke-width="1" fill="none" stroke-dasharray="2 2" />'+
+      '<path d="'+orphanPath+'" stroke="#E8A800" stroke-width="1" fill="none" stroke-dasharray="2 2" />'+
+      '<path d="'+totalPath+'" stroke="#0066CC" stroke-width="1.5" fill="none" />'+
+      ticks.join('')+
+    '</svg>'+
+    '<div class="wk-fan-legend">'+
+      '<span class="wk-fan-legend-item"><span class="wk-fan-legend-swatch" style="background:#0066CC"></span>Total docs (left axis)</span>'+
+      '<span class="wk-fan-legend-item"><span class="wk-fan-legend-swatch" style="background:#E8A800"></span>Orphans</span>'+
+      '<span class="wk-fan-legend-item"><span class="wk-fan-legend-swatch" style="background:#D13212"></span>Contradictions</span>'+
+    '</div>';
+  const last=rows[rows.length-1];
+  if(sub)sub.textContent=rows.length+' snapshots · '+rows[0].date+' → '+last.date+' · latest: '+last.total_docs+' docs, '+(last.orphans||0)+' orphans, '+(last.contradictions||0)+' contradictions';
+}
+
 // M03 (2026-04-30): Ingest strip. Renders 20 most-recently-updated
 // non-archived docs (from build-wiki-index.py's ingest_log_entries[]).
 // Cards group by date implicitly — the underlying array is already
@@ -2540,8 +2705,8 @@ function goBack(){
   document.getElementById('viewerMeta').innerHTML=
     (doc.status?'<span class="b '+sc+'">'+doc.status+'</span>':'')+
     '<span class="b b-cat">'+esc(doc.category)+'</span>'+mkts+tops+tags+
-    (doc.word_count?'<span class="b" style="background:rgba(55,65,81,.25);color:#777">'+doc.word_count.toLocaleString()+' words</span>':'')+
-    (doc.updated?'<span class="b" style="background:rgba(55,65,81,.25);color:#777">'+doc.updated+'</span>':'');
+    (doc.word_count?'<span class="b" style="background:rgba(107,114,128,0.10);color:#9A9A9A">'+doc.word_count.toLocaleString()+' words</span>':'')+
+    (doc.updated?'<span class="b" style="background:rgba(107,114,128,0.10);color:#9A9A9A">'+doc.updated+'</span>':'');
   renderRelatedLinks(doc);
   renderLineage(doc);
   const body=document.getElementById('viewerBody');

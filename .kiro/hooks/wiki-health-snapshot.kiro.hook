@@ -1,0 +1,13 @@
+{
+  "name": "Wiki Health Snapshot (on index rebuild)",
+  "version": "1.0.0",
+  "description": "Piggybacks on wiki-index builds to append a row to wiki-health-history.json. Whenever dashboards/data/wiki-search-index.json is written (by build-wiki-index.py), this hook runs build-wiki-health-history.py, which idempotently upserts today's row. Feeds the WS-M04 fan chart on wiki-search.html. Daily cadence without a cron — driven by whenever the wiki pipeline runs, which is at least weekly (Friday wiki-maintenance) and any ad-hoc rebuilds.",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["dashboards/data/wiki-search-index.json"]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "python3 /shared/user/dashboards/build-wiki-health-history.py"
+  }
+}

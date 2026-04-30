@@ -4,6 +4,26 @@ All notable changes to the `agent-bridge` repo. Format follows [Common Changelog
 
 ---
 
+## [2026-04-30] (third) — wiki-search light-theme port + WS-M04 fan chart + daily snapshot hook
+
+### Added
+
+- **WS-M04 fan chart scaffold in `dashboards/wiki-search.html`** — new `<section id="wkFanWrap">` with CSS + HTML + `renderHealthFan()` JS function (~50 LOC, pure SVG, no chart library). Reads `data/wiki-health-history.json`. When history has <7 rows, renders a graceful "collecting data" placeholder explaining how many more daily snapshots are needed and what runs the builder. When ≥7 rows, renders an SVG fan: total_docs as solid blue line on left axis, orphans + contradictions as dashed amber/red lines, contradiction band as light-red fill, x-axis ticks every Nth date.
+- **`.kiro/hooks/wiki-health-snapshot.kiro.hook`** — new `fileEdited` hook watching `dashboards/data/wiki-search-index.json`. Whenever `build-wiki-index.py` writes the index, the snapshot builder runs immediately after, idempotent per-day. Makes the fan chart daily-cadence without a cron.
+
+### Changed
+
+- **`dashboards/wiki-search.html` ported dark → light theme.** `projection-design-system.css` now linked at top. Body `#0f1117` → `#FFFFFF`, text `#eaeaea` → `#161D26`, panels `#12141c` → `#FAFAFA`, borders `#1e2028` → `#E0E0E0`. Semantic color bands preserved (blue/green/amber/purple/red) but remapped to light-appropriate luminance. `rgba()` tints also mapped. 4 white-text-on-light-bg bugs fixed (search-bar h2, viewer-title, viewer-close:hover, viewer-body h1, graph-tooltip strong) where `color: #FFFFFF` was valid in dark-on-dark but wrong post-port. Deterministic token-map approach via a scripted pass rather than hand-editing 2,699 lines. `node --check` passes. All assets serve 200.
+- **`.kiro/hooks/wiki-maintenance.kiro.hook`** v1.1.0 → v1.2.0 — Phase 2 prompt extended to call `build-wiki-health-history.py` immediately after `build-wiki-index.py`. Belt-and-suspenders: Friday backfills even if the fileEdited hook ever misses.
+
+### Notes
+
+- Light theme port was previously deferred per Richard's 2026-04-30 "keep the look" directive; unblocked this session. kiro-local's WS-M06 topic grid, WS-M10 graph minimap, and WS-M03/M05/M08/M09 consumer wiring from `c0f2523` will inherit the light palette on next reload with no per-surface rework.
+- Fan chart activation timing in practice: wiki-index rebuilds happen on (a) Friday wiki-maintenance, (b) ad-hoc agent sessions running the builder. Conservative estimate 1–3 rows/week → fan activates in ~3 weeks of normal use.
+- Bus post `2026-04-30_wiki-dashboard-redesign/007_kiro-server.md` covers the full scope and closes the thread.
+
+---
+
 ## [2026-04-30] (second) — wiki pipeline deliverables shipped + agentic commit endpoint
 
 ### Added
