@@ -12,10 +12,12 @@
      same token system (colors, spacing, typography, KPI tiles, sec-panel
      cards) as projection.html so the two views feel like one tool. -->
 <link rel="stylesheet" href="../projection-design-system.css?v=2026-04-28">
+<link rel="stylesheet" href="../shared/trust-bar.css?v=2026-04-30">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3/dist/chartjs-plugin-annotation.min.js"></script>
 <script src="../canon-chart.js?v=2026-04-29-1115"></script>
+<script src="../shared/trust-bar.js?v=2026-04-30"></script>
 <link rel="preload" href="../data/callout-data.json" as="fetch" crossorigin>
 <link rel="preload" href="../data/forecast-data.json" as="fetch" crossorigin>
 <style>
@@ -122,12 +124,106 @@
   padding: var(--gap-sm) 0;
 }
 
-/* WR-S3 (2026-04-29): sticky controls bar so Market / Week / Metric
-   stay visible as the reader scrolls through the callout, KPIs, charts,
-   and detail table. Replaces the prior-week thread strip (WR-D7, removed
-   same day) which was a redundant week-picker above the filter row.
-   The sticky behavior is on .wr-controls itself (see its rule below).
-   This wrapper block reserves top:0 offset + backdrop. */
+/* M1 (2026-04-30): Sticky header grammar. Absorbs the prior
+   .wr-leaderboard + .wr-controls + TOC strip. One row, sticky to
+   viewport top. Trust bar carries the market axis; clicking a pill
+   both selects the market and visually encodes whether its forecast
+   is trustworthy (green ≥5/6 in CI, amber 3-4/6, red ≤2/6).
+   Companion stylesheet: ../shared/trust-bar.css. */
+.wr-stick {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+  flex-wrap: wrap;
+  padding: var(--gap-sm) var(--gap-md);
+  border-bottom: 1px solid var(--color-panel-border);
+  background: var(--color-neutral-bg, #fff);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: saturate(180%) blur(6px);
+  -webkit-backdrop-filter: saturate(180%) blur(6px);
+  margin-bottom: var(--gap-md);
+}
+.wr-stick-title {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  line-height: 1.2;
+}
+.wr-stick-kicker {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+  font-weight: 600;
+}
+.wr-stick-mkwk {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: var(--size-panel-title, 16px);
+  color: var(--color-text-hero);
+}
+.wr-stick-mkwk strong { font-weight: 700; }
+.wr-stick-sep { color: var(--color-text-subtle); margin: 0 4px; }
+
+.wr-stick-trust {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.wr-stick-right {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+  flex: 0 0 auto;
+}
+.wr-nav-week {
+  background: var(--color-neutral-bg);
+  border: 1px solid var(--color-panel-border);
+  color: var(--color-text-body);
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  cursor: pointer;
+}
+.wr-stick-ts {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  color: var(--color-text-meta);
+  white-space: nowrap;
+}
+
+/* Collapsed TOC — per #014. Hidden by default; hover/click the summary
+   to reveal. Saves 40px of top-of-fold on every page load. */
+.wr-toc-collapsed {
+  padding: var(--gap-xs) 0;
+  border-bottom: 1px solid var(--color-panel-border);
+  font-size: var(--size-meta);
+}
+.wr-toc-summary {
+  display: inline-block;
+  cursor: pointer;
+  padding: 2px var(--gap-sm);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  user-select: none;
+  list-style: none;
+}
+.wr-toc-summary::-webkit-details-marker { display: none; }
+.wr-toc-collapsed .wr-toc {
+  margin-top: var(--gap-xs);
+  padding: var(--gap-xs) 0;
+  border: none;
+}
+/* Hide the collapsed TOC entirely on narrow viewports — it's a
+   power-user convenience, not a primary nav. Sections remain reachable
+   via ToC-anchored deep-links from other pages. */
+@media (max-width: 720px) {
+  .wr-toc-collapsed { display: none; }
+}
 
 /* WR-D1 (2026-04-28): Forecast Hit Rate scorecard — 3 tiles + one-line
    auto-narrative summarizing the model's grade against last N weeks of
@@ -944,72 +1040,71 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
 <div class="wr-scrub-indicator" id="scrubIndicator">&mdash;</div>
 <div class="wr-frame">
 
-<!-- TOC strip — compact jump-to nav -->
-<nav class="wr-toc" aria-label="Page sections">
-  <span class="wr-toc-label">Jump to</span>
-  <!-- WR-P5 (2026-04-29): TOC order now matches rendered order after
-       D3 narrative-first + D6 variance + D5 three-questions landed.
-       Callout → Variance → KPIs → Scorecard → Charts → Detail → Channels → Context. -->
-  <a href="#sec-callout">Callout</a>
-  <span class="wr-toc-sep">&middot;</span>
-  <a href="#sec-variance">Variance</a>
-  <span class="wr-toc-sep">&middot;</span>
-  <a href="#sec-kpis">KPIs</a>
-  <span class="wr-toc-sep">&middot;</span>
-  <a href="#sec-scorecard">Scorecard</a>
-  <span class="wr-toc-sep">&middot;</span>
-  <a href="#sec-charts">Charts</a>
-  <span class="wr-toc-sep">&middot;</span>
-  <a href="#sec-detail">Weekly Detail</a>
-  <span class="wr-toc-sep">&middot;</span>
-  <a href="#sec-detail-monthly">Monthly</a>
-  <span class="wr-toc-sep">&middot;</span>
-  <a href="#sec-detail-quarterly">Quarterly</a>
-  <span class="wr-toc-sep">&middot;</span>
-  <a href="#calloutChannelsWrap">Channels</a>
-  <span class="wr-toc-sep">&middot;</span>
-  <a href="#calloutContextWrap">Context</a>
-</nav>
+<!-- M1 (2026-04-30): TOC collapsed into "Sections ▾" hover menu in the
+     sticky header below. Per report #014 + #067 — frees 40px of top-of-fold
+     on every page load. The nav element still exists (preserving anchors
+     for accessibility + deep-links), but is visually rendered as a compact
+     dropdown. Full keyboard grammar (vim g-then-c) follow-up, T3. -->
+<details class="wr-toc-collapsed" aria-label="Page sections">
+  <summary class="wr-toc-summary">Sections <span aria-hidden="true">&#9662;</span></summary>
+  <nav class="wr-toc" aria-label="Page sections">
+    <a href="#sec-callout">Callout</a>
+    <a href="#sec-variance">Variance</a>
+    <a href="#sec-kpis">KPIs</a>
+    <a href="#sec-scorecard">Scorecard</a>
+    <a href="#sec-charts">Charts</a>
+    <a href="#sec-detail">Weekly Detail</a>
+    <a href="#sec-detail-monthly">Monthly</a>
+    <a href="#sec-detail-quarterly">Quarterly</a>
+    <a href="#calloutChannelsWrap">Channels</a>
+    <a href="#calloutContextWrap">Context</a>
+  </nav>
+</details>
 
-<!-- WR-B5 (2026-04-30): cross-market accuracy leaderboard strip. Each
-     pill shows a market's 6-week in-CI rate. Click to jump to that
-     market. Answers "can I trust this market's projection?" at a glance
-     without clicking through every tab. -->
-<div class="wr-leaderboard" id="accuracyLeaderboard" role="group" aria-label="Cross-market forecast accuracy leaderboard">
-  <span class="wr-leaderboard-label">Forecast trust (last 6 wks)</span>
-  <span id="leaderboardPills" style="display:contents"></span>
-</div>
-
-<!-- Controls -->
-<div class="wr-controls">
-  <div class="wr-control-group wr-region-group">
-    <span class="wr-control-label">Region</span>
-    <div class="wr-tab-row" id="regionTabs"></div>
-    <!-- WR-R1 (2026-04-29): sub-market row appears only when the selected
-         region has member markets. Today that means EU5 only — clicking
-         EU5 exposes UK, DE, FR, IT, ES below. All other regions (WW, US,
-         CA, JP, MX, AU) are single entities with no sub-row. -->
-    <div class="wr-tab-row wr-submarket-row" id="submarketTabs" style="display:none"></div>
+<!-- M1 (2026-04-30): Sticky header. Single row carrying:
+       (1) page title + market/week label
+       (2) trust bar — replaces region filter entirely. Clicking a pill
+           selects that market; color encodes forecast-trust state.
+       (3) week prev/next nav + label
+       (4) data-freshness timestamp on the right edge
+     Drops: #regionTabs, #submarketTabs, #metricTabs, the standalone
+     .wr-leaderboard strip. Per-market metric preference still works via
+     localStorage — just no global filter UI. Submarket drill-down (EU5
+     member markets) now uses the trust bar itself as selector —
+     UK/DE/FR/IT/ES are already their own pills in the bar. See
+     mockups/README.md M1 + bus thread 004. -->
+<header class="wr-stick" role="banner">
+  <div class="wr-stick-title">
+    <span class="wr-stick-kicker">Weekly Review</span>
+    <span class="wr-stick-mkwk">
+      <strong id="stickMarketLabel">US</strong>
+      <span class="wr-stick-sep">&middot;</span>
+      <span id="stickWeekLabel">W17</span>
+    </span>
   </div>
-  <div class="wr-control-group">
-    <span class="wr-control-label">Week</span>
-    <div class="wr-week-nav">
+  <div class="trust-bar wr-stick-trust" id="trustBar" role="group" aria-label="Forecast trust per market — last 6 weeks">
+    <span class="trust-bar-label">Forecast trust</span>
+  </div>
+  <div class="wr-stick-right">
+    <div class="wr-week-nav" role="group" aria-label="Week navigation">
       <button class="wr-nav-btn" id="prevWeek" aria-label="Previous week">&#9664;</button>
-      <select id="weekSelect" class="control-input" aria-label="Week"></select>
+      <select id="weekSelect" class="wr-nav-week" aria-label="Week"></select>
       <button class="wr-nav-btn" id="nextWeek" aria-label="Next week">&#9654;</button>
     </div>
+    <span class="wr-stick-ts" id="dataTs"></span>
   </div>
-  <div class="wr-control-group wr-metric-group">
-    <span class="wr-control-label">Metric</span>
-    <div class="wr-tab-row" id="metricTabs"></div>
-  </div>
-  <!-- WR-S4 (2026-04-29): data freshness pinned to the right edge of the
-       sticky bar. Replaces the <header> block that previously sat above
-       the filters and scrolled away. The "Weekly Review" H1 is gone —
-       the page title lives in the browser tab already. -->
-  <div class="wr-controls-meta">
-    Callout narrative + full-year tracker &middot; <span class="wr-ts-accent" id="dataTs"></span>
-  </div>
+</header>
+
+<!-- Legacy script hooks kept hidden for compatibility. The init code
+     still constructs these, so they must exist in the DOM but shouldn't
+     render. Follow-up (M3) removes them once metric-filter wiring is
+     retired end-to-end. -->
+<div style="display:none" aria-hidden="true">
+  <div id="regionTabs"></div>
+  <div id="submarketTabs"></div>
+  <div id="metricTabs"></div>
+  <span id="leaderboardPills"></span>
+  <div id="accuracyLeaderboard"></div>
 </div>
 
 <!-- WR-D3 callout narrative (top) -->
@@ -1555,6 +1650,8 @@ function render() {
   renderVariance();
   renderScorecard();
   renderLeaderboard();
+  renderStickyTrustBar();
+  updateStickyLabels();
   renderKPIs();
   renderChart();
   renderTable();
@@ -2309,7 +2406,49 @@ function renderLeaderboard() {
   });
 }
 
-// WR-A10 (2026-04-30): scrub-the-chart interaction. Attach mousemove +
+// M1 (2026-04-30): render the sticky trust bar using the shared helper.
+// Consumes window.TrustBar from ../shared/trust-bar.js — same module the
+// projection engine will consume in the follow-up commit. Submarket
+// drill-down (EU5 → UK/DE/FR/IT/ES) happens naturally because the
+// member markets are already independent pills in the bar.
+function renderStickyTrustBar() {
+  const host = document.getElementById('trustBar');
+  if (!host || !FORECAST || !window.TrustBar) return;
+  // Keep the label span in place; the helper writes into a child container.
+  let pillHost = host.querySelector('.trust-pill-host');
+  if (!pillHost) {
+    pillHost = document.createElement('span');
+    pillHost.className = 'trust-pill-host';
+    pillHost.style.display = 'contents';
+    host.appendChild(pillHost);
+  }
+  const markets = (CALLOUTS && CALLOUTS.markets)
+    ? window.TrustBar.DEFAULT_ORDER.filter(m =>
+        calloutSet.has(m) || forecastSet.has(m))
+    : window.TrustBar.DEFAULT_ORDER;
+  window.TrustBar.renderTrustBar(pillHost, {
+    markets,
+    selected: curMarket,
+    computeState: (mk) => window.TrustBar.computeForecastTrust(FORECAST, mk, 6),
+    markClass: (mk) => (!calloutSet.has(mk) && forecastSet.has(mk)) ? 'forecast-only' : '',
+    onSelect: (mk) => {
+      curMarket = mk;
+      curRegion = MARKET_TO_REGION[mk] || mk;
+      curMetric = defaultMetricForMarket(curMarket);
+      try { localStorage.setItem('wr-last-market', mk); } catch (e) { /* ignore */ }
+      render();
+    }
+  });
+}
+
+// M1 (2026-04-30): sync the sticky header's market + week labels so the
+// reader always knows which view they're looking at while scrolling.
+function updateStickyLabels() {
+  const mkEl = document.getElementById('stickMarketLabel');
+  const wkEl = document.getElementById('stickWeekLabel');
+  if (mkEl) mkEl.textContent = curMarket || '\u2014';
+  if (wkEl) wkEl.textContent = curWeek || '\u2014';
+}
 // mouseleave to the trend chart canvas. On move, compute the hovered
 // week from Chart.js's intersect-mode element detection, set scrubWeek,
 // re-render only the four scrub-targeted panels. On leave, clear

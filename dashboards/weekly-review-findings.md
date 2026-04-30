@@ -390,3 +390,18 @@ All three are backend work, not weekly-review HTML edits.
 | (regression fix) | done | Restored `mode: 'error'` on the "How did we do" chart. Commit `6db6182` (karpathy W18 batch catch-up) silently reverted it to `mode: 'calibration'` along with matching header/aria-label strings. Same class of karpathy regression that broke 13 hooks — content-quality evaluator missed a semantic regression (chart type change). Flagged for karpathy-file-type-awareness steering extension. |
 
 **All 8 R2 findings now shipped. Sprint 3 fully closed.**
+
+---
+
+## M1 shipped (2026-04-30)
+
+First of the 10 mockup-driven redesigns landing from the dashboard-research report.
+See `context/intake/dashboard-research/mockups/README.md` for full M1-M10 spec + ship order.
+
+| Finding | Status | Notes |
+|---|---|---|
+| M1 · Sticky header + trust bar + TOC collapse | done | Single `.wr-stick` row replaces the prior `.wr-leaderboard` + `.wr-controls` + `#regionTabs` + `#submarketTabs` + `#metricTabs` vertical stack. Trust bar (12 pills, one per market) now IS the region filter — green ≥5/6 in-CI / amber 3-4/6 / red ≤2/6 / grey insufficient. Click-to-select wired via new shared `window.TrustBar.renderTrustBar()` helper at `dashboards/shared/trust-bar.js` + companion `trust-bar.css`. EU5 drill-down works natively — UK/DE/FR/IT/ES are independent pills in the bar. TOC collapsed into `<details>` "Sections ▾" dropdown per #014 (frees ~40px top-of-fold). Week prev/next + select kept in the sticky right-edge. Legacy DOM hooks (#regionTabs, #metricTabs, #submarketTabs, #leaderboardPills, #accuracyLeaderboard) kept hidden for script compatibility until M3 retires the metric-filter wiring. Verified: sticky at scrollY=2000, click on MX pill switches market + URL, Sections menu opens with 10 anchor links, console clean. |
+
+**Follow-ups:**
+- **MPE side of #075 unification:** `projection.html` still renders its own `.market-pulse-strip`. The new `TrustBar` helper is designed to be consumed from MPE too (pluggable `computeState` per page — WR supplies `computeForecastTrust`, MPE will supply a distance-to-target equivalent). Not shipped in this commit to keep it reviewable; planned as a follow-up in the same M1 scope.
+- **Legacy DOM removal:** the hidden `#regionTabs`, `#submarketTabs`, `#metricTabs` divs stay until M3 lands. `init()` still writes to them. No user-visible effect.

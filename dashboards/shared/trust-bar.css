@@ -1,0 +1,88 @@
+/**
+ * Shared cross-page trust-bar styles (M1 + report #075).
+ * Consumed by weekly-review.html now; projection.html in follow-up.
+ *
+ * The trust bar is a horizontal strip of pills. Each pill shows a market
+ * name and a rate/state. Colors encode exception-driven reading:
+ *  green (on) = routine, amber (mid) = watch, red (off) = exception,
+ *  grey (na) = not enough data to grade.
+ */
+
+.trust-bar {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.trust-bar-label {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-subtle, #6B6B6B);
+  font-weight: 600;
+  margin-right: 6px;
+  white-space: nowrap;
+}
+
+.trust-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 11px;
+  line-height: 1.25;
+  cursor: pointer;
+  background: transparent;
+  transition: transform 120ms ease, border-color 120ms ease;
+  font-variant-numeric: tabular-nums;
+}
+.trust-pill:hover {
+  transform: translateY(-1px);
+}
+.trust-pill.active {
+  outline: 2px solid var(--color-brand, #0066CC);
+  outline-offset: 1px;
+}
+.trust-pill-mk {
+  font-weight: 700;
+  color: var(--color-text-hero, #0F1111);
+}
+.trust-pill-rate {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  font-size: 11px;
+}
+
+.trust-pill-on {
+  background: #E6F4EA;
+  border-color: #B9E0C4;
+}
+.trust-pill-on .trust-pill-rate { color: #1E7E34; }
+
+.trust-pill-mid {
+  background: #FFF4E0;
+  border-color: #ECD7A4;
+}
+.trust-pill-mid .trust-pill-rate { color: #8A5A00; }
+
+.trust-pill-off {
+  background: #FDECEC;
+  border-color: #F2A4A4;
+}
+.trust-pill-off .trust-pill-rate { color: #B11D1D; }
+
+.trust-pill-na {
+  background: #F0F0F0;
+  border-color: #DEDEDE;
+}
+.trust-pill-na .trust-pill-rate { color: var(--color-text-subtle, #6B6B6B); }
+
+/* Forecast-only markets (no callout yet) — dashed pill to visually
+   distinguish from full markets. Matches the existing †-suffix convention
+   but encoded structurally. */
+.trust-pill.forecast-only {
+  border-style: dashed;
+  opacity: 0.9;
+}
