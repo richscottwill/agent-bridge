@@ -4,7 +4,7 @@ status: FINAL
 audience: amazon-internal
 owner: Richard Williams
 created: 2026-04-12
-updated: 2026-04-25
+updated: 2026-04-30
 doc-type: reference
 auto_generated: true
 ---
@@ -15,7 +15,7 @@ auto_generated: true
 
 > Knowledge base for Amazon Business Paid Search. Auto-generated from a filesystem scan of `~/shared/wiki/agent-created/` by `build-wiki-index.py`. SharePoint publication status pulled from `data/sharepoint-artifacts.json`.
 
-Last generated: 2026-04-25T16:38:35
+Last generated: 2026-04-30T20:50:11
 SharePoint cache as of: 2026-04-17T19:02:13-07:00
 
 ---
@@ -82,16 +82,16 @@ _Dated test artifacts preserved as snapshots — do not decay-audit these._
 - [Yahoo JP Nonbrand Experiment — Audience Layering](~/shared/wiki/agent-created/testing/2022-10-yahoo-jp-nb-experiment.md): Yahoo JP Nonbrand Experiment — Audience Layering Question: Will layering audiences on Nonbrand help to reduce CPA of NB traffic? Account: JP Yahoo! account Timeline: October 16th...
   - slug: 2022-10-yahoo-jp-nb-experiment | status: REVIEW | audience: amazon-internal | level: L5-L7 | sharepoint: published
 
-- [JP Google Nonbrand Experiment — LP Test + Keyword Performance](~/shared/wiki/agent-created/testing/2023-01-jp-nb-experiment-google.md): JP Google Nonbrand Experiment — LP Test + Keyword Performance Predecessor: This is the follow-up to the Yahoo JP NB Experiment, which identified competitor subdomain targeting as...
+- [JP Google Nonbrand Experiment](~/shared/wiki/agent-created/testing/2023-01-jp-nb-experiment-google.md): JP Google Nonbrand Experiment — LP Test + Keyword Performance Predecessor: This is the follow-up to the [Yahoo JP NB Experiment], which identified competitor subdomain targeting...
   - slug: 2023-01-jp-nb-experiment-google | status: REVIEW | audience: amazon-internal | level: L5-L7 | sharepoint: published
 
 - [Audience Targeting Post-mortem — LiveRamp Integration](~/shared/wiki/agent-created/testing/2023-06-audience-post-mortem.md): Status: SUSPENDED — This program is not active. Targeted campaigns were suspended in mid-2023 due to an unforeseen US privacy law. MarTech scoping is in OP1. Any reactivation...
-  - slug: 2023-06-audience-post-mortem | status: REVIEW | audience: amazon-internal | level: L5-L7 | sharepoint: published
+  - slug: 2023-06-audience-post-mortem | status: DRAFT | sharepoint: published
 
 - [JP App Testing Results — Apple Search Ads](~/shared/wiki/agent-created/testing/2023-08-jp-app-testing-results.md): JP App Testing Results — Apple Search Ads Apple Search Ads were launched on August 1st, 2023, to test performance marketing for the mobile app channel in the JP market. The...
   - slug: 2023-08-jp-app-testing-results | status: REVIEW | audience: amazon-internal | level: L5-L7 | sharepoint: published
 
-- [IT City-Level Bid Modifiers Test](~/shared/wiki/agent-created/testing/2024-12-it-bid-modifiers-test.md): IT City-Level Bid Modifiers Test Data: 2024.12.10 - IT Location modifiers Google doc: City-level cost/revenue data, and bid modifiers Question: Will adding city-level bid...
+- [IT City-Level Bid Modifiers Test](~/shared/wiki/agent-created/testing/2024-12-it-bid-modifiers-test.md): ---  ---  --- Impressions  32,451  26,731  +21% Clicks  6,760  6,141  +10% Cost  $37,586  $31,320  +20% Registrations  383  324  +18% CTR  21%  23%  -9% CPC  $5.56  $5.10  +9% CVR...
   - slug: 2024-12-it-bid-modifiers-test | status: REVIEW | audience: amazon-internal | level: L5-L7 | sharepoint: published
 
 
@@ -154,7 +154,7 @@ _POVs, playbooks, mental models, strategic narratives, leadership-facing docs._
   - slug: f90-program | status: DRAFT | doc-type: strategy | audience: team | level: L2 | sharepoint: local-only
 
 - [GenAI Search Traffic — What We Know and What It Means for PS](~/shared/wiki/agent-created/strategy/genai-search-traffic.md): GenAI Search Traffic — What We Know and What It Means for PS On April 2, 2026, Yoav (ab-outbound-marketing) shared a critical data point: Amazon's WW marketplaces are seeing...
-  - slug: genai-search-traffic | status: REVIEW | doc-type: strategy | audience: amazon-internal | level: 4 | sharepoint: published
+  - slug: genai-search-traffic | status: DRAFT | sharepoint: published
 
 - [ie%CCP Planning & Optimization Framework](~/shared/wiki/agent-created/strategy/ieccp-planning-framework.md): ie%CCP Planning & Optimization Framework How to understand, plan around, and optimize ie%CCP for Paid Search budget decisions. What ie%CCP Measures ie%CCP answers one question:...
   - slug: ieccp-planning-framework | status: REVIEW | doc-type: strategy | audience: amazon-internal | level: 2 | sharepoint: published
@@ -200,7 +200,7 @@ _Market wikis (AU/MX/US), team capacity, cross-market programs._
 - [Artifact metadata](~/shared/wiki/agent-created/markets/market-reference.md): Market Reference: AB Paid Search Across 10 Markets This doc answers "tell me everything about AB Paid Search in [market]" in one read. Any agent writing a callout, any stakeholder...
   - slug: market-reference | status: REVIEW | doc-type: reference | audience: amazon-internal | sharepoint: published
 
-- [MX Paid Search — Market Wiki](~/shared/wiki/agent-created/markets/mx-market-wiki.md): MX Paid Search — Market Wiki Canonical reference for Mexico. Includes Lorena's onboarding context (formerly in the separate handoff guide, now merged here). MX is Richard's second...
+- [MX Paid Search — Market Wiki](~/shared/wiki/agent-created/markets/mx-market-wiki.md): Key consideration: This section's content is critical for accurate operation. Cross-reference with related sections for full context. MX Paid Search — Market Wiki Canonical...
   - slug: mx-market-wiki | status: REVIEW | doc-type: reference | audience: amazon-internal | level: N/A | sharepoint: published
 
 - [Polaris Program — WW Brand Landing Page Rollout](~/shared/wiki/agent-created/markets/polaris-program.md): Polaris Program Polaris is the next-generation brand landing page platform for Amazon Business Paid Search, replacing legacy PADESARJAD and MCS pages across all ten markets....
@@ -213,7 +213,7 @@ _Market wikis (AU/MX/US), team capacity, cross-market programs._
   - slug: ww-testing-tracker | status: REVIEW | doc-type: reference | audience: amazon-internal | level: 2 | sharepoint: published
 
 
-### Operations & Process (26)
+### Operations & Process (34)
 
 _SOPs, playbooks, tool specs, vocabulary guides, process documentation._
 
@@ -226,13 +226,13 @@ _SOPs, playbooks, tool specs, vocabulary guides, process documentation._
 - [Campaign Link Generator - Tool Spec](~/shared/wiki/agent-created/operations/campaign-link-generator-spec.md): Campaign Link Generator - Tool Spec Problem Statement Every promotional cycle (Memorial Day, Prime Day, Back to Business, Hot Sale, etc.) requires updating sitelink URLs across...
   - slug: campaign-link-generator-spec | status: REVIEW | audience: amazon-internal | level: 3 | sharepoint: published
 
-- [Forecast System — Multi-Signal Model and Reconciliation](~/shared/wiki/agent-created/operations/forecast-system.md): Forecast System The paid search forecast system was rewritten on April 14 after the original Bayesian-only model produced 36-47 percent errors on recent weeks, and a separate...
+- [Forecast System — Multi-Signal Model and Reconciliation](~/shared/wiki/agent-created/operations/forecast-system.md): 38;5;10m [0m Forecast System[0m[0m The paid search forecast system was rewritten on April 14 after the original Bayesian-only model produced 36-47 percent errors on recent...
   - slug: forecast-system | status: DRAFT | doc-type: execution | audience: team | level: L3 | sharepoint: local-only
 
-- [Google Ads Campaign Structure Standards — AB Paid Search](~/shared/wiki/agent-created/operations/google-ads-campaign-structure.md): Google Ads Campaign Structure Standards — AB Paid Search 1. Simplify for algorithms — fewer, larger campaigns give OCI better signal 2. Separate Brand from NB — different bidding...
+- [Google Ads Campaign Structure Standards — AB Paid Search](~/shared/wiki/agent-created/operations/google-ads-campaign-structure.md): Google Ads Campaign Structure Standards — AB Paid Search Quality Checklist (per campaign) [ ] Conversion tracking verified. [ ] Negative keyword list applied. [ ] Ad copy reflects...
   - slug: google-ads-campaign-structure | status: REVIEW | audience: amazon-internal | level: N/A | sharepoint: published
 
-- [Invoice & PO Process Guide — AB Paid Search](~/shared/wiki/agent-created/operations/invoice-po-process-guide.md): Invoice & PO Process Guide — AB Paid Search Document the end-to-end invoice/PO process so it can be delegated. Currently takes Richard 1-2 hours/week. Goal: reduce to <30 min/week...
+- [Invoice & PO Process Guide — AB Paid Search](~/shared/wiki/agent-created/operations/invoice-po-process-guide.md): Invoice & PO Process Guide — AB Paid Search Example: When this applies, the expected outcome is verified by checking the result. Document the end-to-end invoice/PO process so it...
   - slug: invoice-po-process-guide | status: REVIEW | doc-type: execution | audience: amazon-internal | level: N/A | sharepoint: published
 
 - [Landing Page Testing Playbook](~/shared/wiki/agent-created/operations/landing-page-testing-playbook.md): Landing Page Testing Playbook 1. Test before you migrate — phased rollout unless stakeholder overrides (AU was an exception) 2. Measure what matters — CVR and CPA, not just...
@@ -244,6 +244,9 @@ _SOPs, playbooks, tool specs, vocabulary guides, process documentation._
 - [Market Expansion Playbook — Paid Search](~/shared/wiki/agent-created/operations/market-expansion-playbook.md): Market Expansion Playbook This playbook consolidates the pre-launch, launch, and year-one operations required to stand up paid search in a new market. It is written from the...
   - slug: market-expansion-playbook | status: DRAFT | doc-type: execution | audience: team | level: L2 | sharepoint: local-only
 
+- [MPE v1.1 Slim — 10-Step All-Markets Simulation Report](~/shared/wiki/agent-created/operations/mpe-all-markets-simulation-report.md): MPE v1.1 Slim — 10-Step All-Markets Simulation Report Generated 2026-04-27T02:48:55.692348. Runs Phase 5.2 simulation across all 10 markets, replaces the original MX-only 4/22...
+  - slug: mpe-all-markets-simulation-report | status: DRAFT | sharepoint: local-only
+
 - [MPE Notes — AU (Australia)](~/shared/wiki/agent-created/operations/mpe-au-specific-notes.md): MPE Notes — AU (Australia) Last fitted: 2026-04-22 Strategy type: efficiency (no ie%CCP target) Primary stakeholder: Alexis Archetype for: data-limited Southern Hemisphere market...
   - slug: mpe-au-specific-notes | status: DRAFT | sharepoint: local-only
 
@@ -252,6 +255,9 @@ _SOPs, playbooks, tool specs, vocabulary guides, process documentation._
 
 - [MPE Notes — DE (Germany)](~/shared/wiki/agent-created/operations/mpe-de-specific-notes.md): MPE Notes — DE (Germany) Last fitted: 2026-04-22 Strategy type: balanced (50-65% ie%CCP range) Archetype for: EU5 mature market with recent OCI structural shift At a glance...
   - slug: mpe-de-specific-notes | status: DRAFT | sharepoint: local-only
+
+- [MPE v1.1 Slim — Leadership Demo Script](~/shared/wiki/agent-created/operations/mpe-demo-script.md): MPE v1.1 Slim — Leadership Demo Script Target audience: Kate Rundell (L8 Director), Todd Heimes (L10 VP), Brandon Munday (L7) Duration: 3 minutes. Hard cap: 5 minutes including...
+  - slug: mpe-demo-script | status: DRAFT | sharepoint: local-only
 
 - [MPE Notes — ES (Spain)](~/shared/wiki/agent-created/operations/mpe-es-specific-notes.md): MPE Notes — ES (Spain) Last fitted: 2026-04-22 (v2 post-regime-audit) Strategy type: balanced (50-65% ie%CCP range) Archetype for: EU5 balanced, recent OCI At a glance Parameter ...
   - slug: mpe-es-specific-notes | status: DRAFT | sharepoint: local-only
@@ -274,11 +280,29 @@ _SOPs, playbooks, tool specs, vocabulary guides, process documentation._
 - [MPE Owner Operations Runbook](~/shared/wiki/agent-created/operations/mpe-owner-operations.md): MPE Owner Operations Runbook Version: v1 skeleton  Last updated: 2026-04-22  Owner: Richard Williams Purpose: Everything you need to use and maintain the Market Projection Engine...
   - slug: mpe-owner-operations | status: DRAFT | sharepoint: local-only
 
+- [MPE Phase 6.3 — Viz Foundation Handback](~/shared/wiki/agent-created/operations/mpe-phase6-3-handback.md): MPE Phase 6.3 — Viz Foundation Handback Created 2026-04-26. Phase 6.3 of the Market Projection Engine v1.1 Slim build. Viz foundation covers hero + progressive disclosure +...
+  - slug: mpe-phase6-3-handback | status: DRAFT | sharepoint: local-only
+
+- [MPE Phase 6.4 — Viz Completion Handback](~/shared/wiki/agent-created/operations/mpe-phase6-4-handback.md): MPE Phase 6.4 — Viz Completion Handback 2026-04-26. Phase 6.4 closes "works for all 10 markets made visible" plus the Model View, scenario chip animated transitions, share PNG,...
+  - slug: mpe-phase6-4-handback | status: DRAFT | sharepoint: local-only
+
+- [MPE Seasonality Research — Per-Market Reference](~/shared/wiki/agent-created/operations/mpe-seasonality-research.md): MPE Seasonality Research — Per-Market Reference Auto-generated from ps.vweekly Brand registrations history. Generated: 2026-04-26 This document is the reference for understanding...
+  - slug: mpe-seasonality-research | status: DRAFT | sharepoint: local-only
+
 - [MPE Notes — UK (United Kingdom)](~/shared/wiki/agent-created/operations/mpe-uk-specific-notes.md): MPE Notes — UK (United Kingdom) Last fitted: 2026-04-22 Strategy type: balanced (50-65% ie%CCP range) Archetype for: EU5 mature market with completed OCI transition At a glance...
   - slug: mpe-uk-specific-notes | status: DRAFT | sharepoint: local-only
 
 - [MPE Notes — US (United States)](~/shared/wiki/agent-created/operations/mpe-us-specific-notes.md): MPE Notes — US (United States) Last fitted: 2026-04-22 Strategy type: balanced Primary stakeholder: Andrew Archetype for: balanced markets with 50-65% ie%CCP range At a glance...
   - slug: mpe-us-specific-notes | status: DRAFT | sharepoint: local-only
+
+- [MPE v1.1 Slim — Quick Reference](~/shared/wiki/agent-created/operations/mpe-v1-1-slim-quick-reference.md): MPE v1.1 Slim — Quick Reference 1-page cheat sheet. If you need 60 seconds of orientation, this is it. The core idea in one sentence Brand is projected independently from a...
+  - slug: mpe-v1-1-slim-quick-reference | status: DRAFT | sharepoint: local-only
+
+- [MPE v1.1 Slim — 10-Market Backtest Validation Report](~/shared/wiki/agent-created/operations/mpe-v1-1-slim-validation-report.md): MPE v1.1 Slim — 10-Market Backtest Validation Report Phase 6.5.2 · generated 2026-04-27 · 12-week holdout · MAPE thresholds: Brand <22%, Total <25% [38;5;10m [0m Method[0m[0m...
+  - slug: mpe-v1-1-slim-validation-report | status: DRAFT | sharepoint: local-only
+
+- [MPE Viz — Library Choice](~/shared/wiki/agent-created/operations/mpe-viz-library-choice.md): MPE Viz — Library Choice Authored 2026-04-26 after Phase 6.3 + 6.4.1/6.4.2 ship. Decision: stay on Observable Plot + D3. ECharts not adopted. What we shipped on Observable Plot...
+  - slug: mpe-viz-library-choice | status: DRAFT | sharepoint: local-only
 
 - [Negative Keyword Ownership Model](~/shared/wiki/agent-created/operations/negative-keyword-ownership-model.md): Negative Keyword Ownership Model This guide documents how negative keyword lists are owned, maintained, and updated across paid search markets. The gap that prompted this document...
   - slug: negative-keyword-ownership-model | status: DRAFT | doc-type: execution | audience: team | level: L2 | sharepoint: local-only
@@ -363,14 +387,14 @@ _Agent architecture, body system, agent personas, meta-docs about the system its
 | Historical Tests (snapshot) | 5 |
 | Strategy & Frameworks | 28 |
 | Markets / PS Operations | 8 |
-| Operations & Process | 26 |
+| Operations & Process | 34 |
 | Reporting | 2 |
 | Research Briefs | 7 |
 | Agent / System Documentation | 5 |
-| **Total (indexed)** | **97** |
+| **Total (indexed)** | **105** |
 
-**Status:** 46 REVIEW | 23 DRAFT | 1 FINAL | 27 unset
-**SharePoint:** 46 published | 51 local-only | 1 published-stale (local newer than SP)
+**Status:** 44 REVIEW | 23 DRAFT | 1 FINAL | 37 unset
+**SharePoint:** 46 published | 59 local-only | 1 published-stale (local newer than SP)
 
 ---
 

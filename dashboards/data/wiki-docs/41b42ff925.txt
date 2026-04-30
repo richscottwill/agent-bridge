@@ -4,11 +4,7 @@ Reviewer: wiki-critic · Date: 2026-03-25
 Source: ~/shared/research/ (10 docs, written 2022–2026)
 Target: ~/shared/artifacts/testing/ (publish candidates)
 
-## Context
-
-These are Richard's original experiment docs, post-mortems, and test results — written before the wiki team existed. They lack AGENT_CONTEXT blocks, artifact front-matter, and "so what" summaries after tables. Scoring adjusts for this: Dual-audience scores reflect missing wiki infrastructure, not content failure. Content quality is the primary gate.
-
-## Scoring Rubric
+## Context These are Richard's original experiment docs, post-mortems, and test results — written before the wiki team existed. They lack AGENT_CONTEXT blocks, artifact front-matter, and "so what" summaries after tables. Scoring adjusts for this: Dual-audience scores reflect missing wiki infrastructure, not content failure. Content quality is the primary gate. ## Scoring Rubric
 
 | Dimension | What it measures |
 |-----------|-----------------|

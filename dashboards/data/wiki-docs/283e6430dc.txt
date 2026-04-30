@@ -2,12 +2,19 @@
 
 ---
 
-## Principles
+## Quality Checklist (per campaign)
+[ ] Conversion tracking verified. [ ] Negative keyword list applied. [ ] Ad copy reflects SP study messaging (not bulk/wholesale). [ ] Landing page matches ad intent. [ ] Reftags properly configured. [ ] Budget not limited (check daily). [ ] Bid strategy appropriate for campaign type.
 
-1. Simplify for algorithms — fewer, larger campaigns give OCI better signal
-2. Separate Brand from NB — different bidding strategies, different competitive dynamics
-3. Category campaigns for high-intent verticals — only when a dedicated LP exists
-4. Consistent naming convention across markets
+
+
+## Match Type Strategy
+
+- Broad match: use with OCI only — the algorithm needs flexibility to find converting queries
+- Phrase match: default for manual bidding
+- Exact match: high-value terms, competitive defense
+- Negative keywords: maintain per-campaign and shared lists
+
+The key rule: broad match ONLY with OCI. Without algorithmic bidding, broad match wastes budget on irrelevant queries. This is non-negotiable.
 
 ## Naming Convention
 
@@ -30,41 +37,10 @@ Examples:
 | Category | Vertical-specific keywords | Manual or OCI | Only when dedicated LP exists |
 | Engagement | RLSA / lifecycle targeting | Manual | F90 program |
 
+### Continued
+
+
 Brand and NB are always-on. Category campaigns are opportunistic — only build when a dedicated LP exists. Engagement is the F90 lifecycle play.
-
-## Match Type Strategy
-
-- Broad match: use with OCI only — the algorithm needs flexibility to find converting queries
-- Phrase match: default for manual bidding
-- Exact match: high-value terms, competitive defense
-- Negative keywords: maintain per-campaign and shared lists
-
-The key rule: broad match ONLY with OCI. Without algorithmic bidding, broad match wastes budget on irrelevant queries. This is non-negotiable.
-
-## Budget Allocation
-
-- Brand: enough to maintain target IS (aim for 70-80%)
-- NB: majority of growth budget
-- Category: test budget, scale based on performance
-- Rule: never let Brand budget limit NB — they serve different purposes
-
-## Ad Group Structure
-
-- 1 theme per ad group (10-20 keywords max)
-- 3-4 responsive search ads per ad group
-- Sitelinks: market-specific, updated per promo cycle
-- Extensions: callouts, structured snippets, location (where applicable)
-
-## Quality Checklist (per campaign)
-
-- [ ] Conversion tracking verified
-- [ ] Negative keyword list applied
-- [ ] Ad copy reflects SP study messaging (not bulk/wholesale)
-- [ ] Landing page matches ad intent
-- [ ] Reftags properly configured
-- [ ] Budget not limited (check daily)
-- [ ] Bid strategy appropriate for campaign type
-
 
 ## Sources
 - Consolidation strategy — source: ~/shared/context/body/brain.md → D5: Campaign Consolidation Strategy
@@ -79,3 +55,24 @@ key_entities: ["Google Ads", "OCI", "Brand campaigns", "NB campaigns", "Category
 action_verbs: ["structure", "name", "allocate", "configure", "verify"]
 update_triggers: ["campaign structure changes", "new campaign types added", "OCI expansion to new markets", "match type strategy changes"]
 -->
+
+## Ad Group Structure
+
+- 1 theme per ad group (10-20 keywords max)
+- 3-4 responsive search ads per ad group
+- Sitelinks: market-specific, updated per promo cycle
+- Extensions: callouts, structured snippets, location (where applicable)
+
+## Principles
+1. Simplify for algorithms — fewer, larger campaigns give OCI better signal
+2. Separate Brand from NB — different bidding strategies, different competitive dynamics
+3. Category campaigns for high-intent verticals — only when a dedicated LP exists
+
+4. Consistent naming convention across markets
+
+## Budget Allocation
+
+- Brand: enough to maintain target IS (aim for 70-80%)
+- NB: majority of growth budget
+- Category: test budget, scale based on performance
+- Rule: never let Brand budget limit NB — they serve different purposes

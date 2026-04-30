@@ -57,12 +57,6 @@ The wiki-editor requested a structured research brief covering all 5 years (2026
 | JP | in_progress | Feb 2026 | Jul 2026 | — | — |
 | FR | in_progress | Feb 2026 | Jul 2026 | — | — |
 | IT | in_progress | Feb 2026 | Jul 2026 | — | — |
-| ES | in_progress | Feb 2026 | Jul 2026 | — | — |
-| AU | not_planned | — | — | — | — || MX | not_planned | — | — | — | — |
-[source: DuckDB oci_status, 2026-03-30, HIGH]
-
-Note: DuckDB oci_status table lags eyes.md. Eyes.md (4/2) shows FR/IT/ES/JP dialed to 100% on 3/30-3/31. DuckDB still shows "in_progress." **Use eyes.md as ground truth for current OCI status.**
-
 #### Registration Trends (W5-W9 2026, weekly_metrics)
 | Market | W5 Regs | W9 Regs | Trend | W9 CPA | W9 NB CPA |
 |--------|---------|---------|-------|--------|-----------|

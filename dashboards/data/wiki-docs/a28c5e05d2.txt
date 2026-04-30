@@ -28,6 +28,7 @@ The OP2 plan numbers are the only new input. Everything else is already availabl
 
 ### Output
 
+
 The tool produces three outputs:
 
 **1. Per-Market R&O Summary**
@@ -59,23 +60,18 @@ The trailing 4-week average is a conservative projection method. It will not pre
 ### Architecture
 
 ```
-WW Dashboard Excel (.xlsx)
     |
     v
 Dashboard Ingester (existing)
     |
-    v
 Parsed market data (JSON)
     |
-    v
 Budget Forecast Module (NEW)
     |
-    +---> R&O Summary Table (markdown or CSV)
     +---> Variance Flags (markdown)
     +---> Trend Projection (markdown)
 ```
 
-The budget forecast module reads the same parsed JSON that the callout pipeline uses. No new data parsing required — just a new output format.
 
 ### OP2 Plan Configuration
 

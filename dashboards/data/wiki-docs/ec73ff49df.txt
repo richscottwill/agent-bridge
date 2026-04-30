@@ -33,7 +33,6 @@
 
 ## Regime events that shape US
 
-From `ps.regime_changes`:
 
 | Date | Event | Classification | How the fit handles it |
 |---|---|---|---|

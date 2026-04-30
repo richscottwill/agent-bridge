@@ -185,6 +185,7 @@ UK performance was slightly below US due to EU DMA privacy restrictions limiting
 
 See [LiveRamp Program](../research/liveramp-program) for the broader DMA impact on audience-based campaigns in EU.
 
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ## Cross-functional partners
 
 **MarTech (Joel Mallory).** Built the OCI implementation infrastructure. Currently investigating the hvocijid duplication issue.

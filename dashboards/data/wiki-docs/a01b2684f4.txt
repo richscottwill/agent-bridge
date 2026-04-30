@@ -132,9 +132,9 @@ ACTION: Pull final URL report. Negative "lamp", "turkish lamp" in Beauty if conf
 
 ## SECTION 3: ZERO-REGISTRATION CAMPAIGNS — KEYWORD BLOAT
 
+
 These campaigns had 0 registrations in W9-13. Every keyword = confirmed 0 regs.
 Aggregated from search terms report (keyword text + campaign + ad group).
-
 ### 3a. AU_Generic (non-PV) — 0 regs, HIGHEST SPEND zero-reg campaign
 
 Top keywords by aggregated spend:

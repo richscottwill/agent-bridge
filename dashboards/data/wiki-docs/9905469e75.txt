@@ -1,12 +1,3 @@
-# Eval B — Blind Subjective Reader Evaluation
-
-**Article:** Workstream 5: Algorithmic Ads (v5)
-**Reader persona:** Kate, reviewing the workstream detail behind the Testing Approach doc. 10 minutes.
-**Date:** 2026-04-05
-**Evaluator:** wiki-critic (blind — no prior review seen)
-
----
-
 ## Scores
 
 | Dimension | Score | Assessment |
@@ -28,15 +19,7 @@ The opening paragraph does three things well: it names the two formats (Demand G
 
 What keeps it from a 9: the phrase "provides the evidence base for the 2026 AI Max test" is slightly passive. The doc does more than provide evidence — it lays out the test design itself. The purpose statement undersells the appendix, which is the most actionable part of the document.
 
-### Shareability (8/10)
-
-This reads like a document you could forward to Kate's skip-level or a peer on the Hydra team and they'd follow the logic without needing a verbal walkthrough. The question-based headers create a natural narrative arc: what's the opportunity → what's proven → what's next → how do we manage risk. That structure carries a reader who doesn't live in this workstream daily.
-
-The cross-references to Workstreams 1 and 2 are handled cleanly — parenthetical, not disruptive. A reader who hasn't read those docs still follows the argument; a reader who has gets the connection.
-
-One friction point: the BSE paragraph in the Demand Gen section introduces Raven Smith and CeCe Ramey without context on why the Creative team collaboration matters to the reader. For someone outside the immediate team, those names are noise. For someone inside, they're useful attribution. Net: minor, doesn't break shareability.
-
-### Actionability (8/10)
+### Shareability (8/10) This reads like a document you could forward to Kate's skip-level or a peer on the Hydra team and they'd follow the logic without needing a verbal walkthrough. The question-based headers create a natural narrative arc: what's the opportunity → what's proven → what's next → how do we manage risk. That structure carries a reader who doesn't live in this workstream daily. The cross-references to Workstreams 1 and 2 are handled cleanly — parenthetical, not disruptive. A reader who hasn't read those docs still follows the argument; a reader who has gets the connection. One friction point: the BSE paragraph in the Demand Gen section introduces Raven Smith and CeCe Ramey without context on why the Creative team collaboration matters to the reader. For someone outside the immediate team, those names are noise. For someone inside, they're useful attribution. Net: minor, doesn't break shareability. ### Actionability (8/10)
 
 The AI Max test parameters appendix is where this doc earns its keep. Scope, phased rollout, baselines, two named guardrails with specific thresholds (CPA >10%, CVR <1% on >30% of clicks), phase gate criteria (120% blended CPA for 7+ days), and named coordination contacts. Someone could take Appendix C and build a project plan from it.
 

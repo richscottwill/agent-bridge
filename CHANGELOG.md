@@ -4,6 +4,23 @@ All notable changes to the `agent-bridge` repo. Format follows [Common Changelog
 
 ---
 
+## [2026-04-30] (second) — wiki pipeline deliverables shipped + agentic commit endpoint
+
+### Added
+
+- **`build-wiki-index.py` extensions** — new top-level fields `orphan_count`, `orphans[]`, `contradiction_count`, `contradictions[]`, `ingest_log_entries[]`, `demand_log_entries[]`, `agent_drafts[]`; new per-doc fields `reverse_related_docs[]` (top-10 incoming references) and `lint_status` (5 content checks: thin-final, no-topic, isolated, flat-structure, sp-stale, each with severity + detail). First pass flags 7 orphans, 25 content-warning docs, 20 ingest candidates, 5 demand signals, 20 agent-authored drafts. Unblocks WS-M02/M03/M05/M08/M09 UI surfaces.
+- **`build-wiki-health-history.py`** — new daily snapshot builder that appends a row to `data/wiki-health-history.json` capturing total_docs, published/local-only/stale, orphans, contradictions, demand_open, by_status. Idempotent per-day. Feeds the WS-M04 health fan chart on wiki-search.html. First row written today.
+- **`wiki/agent-created/_meta/wiki-demand-log.md`** — seed file for the demand-gap pipeline. Tolerant bullet format `- <query> [count=N] [last=YYYY-MM-DD] [status=open|satisfied|archived] [note=...]`. Seeded with 5 real signals from the last week (AEO POV, Polaris LP attribution isolation, brand portfolio velocity, install-to-reg ratio, forecast calibration methodology).
+- **`POST /api/agent-drafts/commit`** in `dashboards/serve.py` — WS-M11 commit endpoint. Feature-flagged `WIKI_AGENTIC_COMMIT_ENABLED=1`, off by default. Accepts {path, author, message}; validates path resolves under one of three whitelisted prefixes (`wiki/staging/`, `context/intake/`, `wiki/agent-created/`); checks out `wiki/<slug>` feature branch; git-adds only the specific path (never `-A`); commits with `Author-agent:` + `Triggered-by:` trailers; regular push (no force); returns to main. All 4 validation tiers tested and return correct status codes (400 escape, 400 prefix, 400 missing-fields, 404 not-found, 503 flag-off).
+- **`.kiro/steering/dashboard-redesign-naming.md`** — manual-inclusion steering file documenting the `DR-M##` / `WS-M##` / `MPE-M##` / `WR-M##` prefix convention. Formalizes kiro-local's unilateral `WS-` adoption and records the 2026-04-30 false-alarm walkback (commit `73073f1` mis-read as regression) as the concrete cost of not having the convention.
+- **Bus post `2026-04-30_wiki-dashboard-redesign/004_kiro-server.md`** — closes kiro-server's pipeline lane on the thread; acks the light-theme port and commit-message template as approved.
+
+### Changed
+
+- **`agent-bus/README.md` dashboard regenerated** — 33 posts across 6 threads, kiro-local 16 / kiro-server 17, median TTFR 7.3h.
+
+---
+
 ## [2026-04-30] — weekly-review R2 ten-mockup sprint, MPE fan chart, wiki-search redesign
 
 ### Added

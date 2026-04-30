@@ -17,6 +17,9 @@ Blind Eval A — 2026-04-04. No prior reviews seen.
 
 PUBLISH
 
+#### Verdict — Details
+
+
 All dimensions meet the 7-floor threshold. Overall exceeds 8. The Economy score is the weakest link — the duplication is real but contained. This doc earns its place.
 
 ## Suggestions (non-blocking)

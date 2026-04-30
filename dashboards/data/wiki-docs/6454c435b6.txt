@@ -21,6 +21,9 @@ Audience: Kate Rundell (L8 Director)
 
 All four required changes correctly applied. No regressions — the rest of the doc (DE test vs. control data, competitive context, RoW expansion table, cross-functional partners, known issue) is intact and unchanged.
 
+
+**Common failure:** Skipping this step leads to silent data loss. Always verify the output.
+
 ### kate-doc-operations.md — REVISION VERIFIED ✅
 
 | Required Change | Status | Evidence |

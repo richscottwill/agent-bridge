@@ -819,6 +819,151 @@ def write_wiki_index_md(docs, sp_generated=None):
     return total, published, stale
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# WS-M03 / M05 / M11 helpers (added 2026-04-30 by kiro-server)
+# ─────────────────────────────────────────────────────────────────────────────
+
+def build_ingest_log(docs, limit=20):
+    """Return up to `limit` most-recently-updated active docs for the WS-M03 ingest strip.
+
+    Shape: [{id, title, category, updated, word_count, primary_topic}]
+    """
+    active = [d for d in docs if not d.get("archived") and d.get("updated")]
+    active.sort(key=lambda d: d.get("updated", ""), reverse=True)
+    return [
+        {
+            "id": d["id"],
+            "title": d["title"],
+            "category": d.get("category", ""),
+            "updated": d.get("updated", ""),
+            "word_count": d.get("word_count", 0),
+            "primary_topic": d.get("primary_topic", ""),
+            "path": d.get("path", ""),
+        }
+        for d in active[:limit]
+    ]
+
+
+DEMAND_LOG = WIKI_ROOT / "agent-created" / "_meta" / "wiki-demand-log.md"
+
+
+def load_demand_log(limit=30):
+    """Parse wiki-demand-log.md if present. Tolerant — matches bullets starting with '- '
+    and YAML-ish `query:` / `searched:` lines. Returns newest first.
+
+    Each entry: {query, count, last_seen, status (open|satisfied), note}
+    """
+    if not DEMAND_LOG.exists():
+        return []
+    try:
+        text = DEMAND_LOG.read_text(encoding="utf-8", errors="replace")
+    except Exception:
+        return []
+    entries = []
+    # Match bullet-style entries:  - <query>  [count=N] [last=YYYY-MM-DD] [status=open|satisfied] [note=...]
+    bullet_re = re.compile(
+        r"^\s*[-*]\s+(?P<q>[^\[]+?)\s*"
+        r"(?:\[count=(?P<count>\d+)\])?\s*"
+        r"(?:\[last=(?P<last>[0-9]{4}-[0-9]{2}-[0-9]{2})\])?\s*"
+        r"(?:\[status=(?P<status>open|satisfied|archived)\])?\s*"
+        r"(?:\[note=(?P<note>[^\]]+)\])?\s*$",
+        re.MULTILINE,
+    )
+    for m in bullet_re.finditer(text):
+        q = m.group("q").strip()
+        if not q or q.startswith("#") or q.startswith("**"):
+            # Skip headings, empty bullets, and bold-lead format-doc bullets (which are
+            # explanatory text in the file's own docstring, not real demand signals).
+            continue
+        entries.append({
+            "query": q[:200],
+            "count": int(m.group("count") or 1),
+            "last_seen": m.group("last") or "",
+            "status": m.group("status") or "open",
+            "note": (m.group("note") or "").strip(),
+        })
+    # Sort: open first by count desc, then satisfied
+    entries.sort(key=lambda e: (0 if e["status"] == "open" else 1, -e["count"], e["last_seen"]), reverse=False)
+    return entries[:limit]
+
+
+INTAKE_DIR = WIKI_ROOT.parent / "context" / "intake"
+WIKI_STAGING = WIKI_ROOT / "staging"
+
+
+def scan_agent_drafts(limit=20):
+    """Scan known draft locations for agent-authored markdown awaiting promotion.
+
+    Sources (in priority order):
+      1. wiki/staging/*.md — critic-approved drafts staged for librarian
+      2. context/intake/*.md files matching patterns suggesting a draft (not digests/logs)
+
+    Returns: [{title, author, path, words, stage}]
+    """
+    drafts = []
+    DIGEST_PATTERNS = ("digest", "triage", "tracker", "log", "brief", "queue", "snapshot", "response")
+
+    # wiki/staging/ — everything here is draft-ready
+    if WIKI_STAGING.exists():
+        for f in sorted(WIKI_STAGING.glob("*.md")):
+            try:
+                body = f.read_text(encoding="utf-8", errors="replace")
+            except Exception:
+                continue
+            if not body.strip():
+                continue
+            # Title = first # heading or filename stem
+            title_m = re.search(r"^#\s+(.+)$", body, re.MULTILINE)
+            title = title_m.group(1).strip() if title_m else f.stem.replace("-", " ").title()
+            # Author from front-matter `author:` or `owner:` or default
+            author_m = re.search(r"^(?:author|owner)\s*:\s*(.+)$", body, re.MULTILINE | re.IGNORECASE)
+            author = author_m.group(1).strip() if author_m else "wiki-writer"
+            drafts.append({
+                "title": title[:140],
+                "author": author[:60],
+                "path": str(f.relative_to(WIKI_ROOT.parent)),
+                "words": len(body.split()),
+                "stage": "draft-ready",
+            })
+
+    # context/intake/ — skip clearly non-draft files (digests, logs, triage queues, brief dumps)
+    if INTAKE_DIR.exists():
+        for f in sorted(INTAKE_DIR.glob("*.md")):
+            name_l = f.name.lower()
+            if any(p in name_l for p in DIGEST_PATTERNS):
+                continue
+            try:
+                body = f.read_text(encoding="utf-8", errors="replace")
+            except Exception:
+                continue
+            wc = len(body.split())
+            if wc < 300:
+                continue
+            title_m = re.search(r"^#\s+(.+)$", body, re.MULTILINE)
+            title = title_m.group(1).strip() if title_m else f.stem.replace("-", " ").title()
+            author_m = re.search(r"^(?:author|owner)\s*:\s*(.+)$", body, re.MULTILINE | re.IGNORECASE)
+            author = author_m.group(1).strip() if author_m else "wiki-researcher"
+            drafts.append({
+                "title": title[:140],
+                "author": author[:60],
+                "path": str(f.relative_to(WIKI_ROOT.parent)),
+                "words": wc,
+                "stage": "intake",
+            })
+
+    # Dedup by path, cap
+    seen = set()
+    deduped = []
+    for d in drafts:
+        if d["path"] in seen:
+            continue
+        seen.add(d["path"])
+        deduped.append(d)
+        if len(deduped) >= limit:
+            break
+    return deduped
+
+
 def main():
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     DOCS_DIR.mkdir(parents=True, exist_ok=True)
@@ -878,6 +1023,81 @@ def main():
             if rid in id_to_doc
         ]
 
+    # WS-M08: reverse_related_docs — invert related_docs so a doc knows who points AT it.
+    # Used by the lineage strip in wiki-search.html to show "X docs reference this page".
+    reverse_edges = {}  # target_id -> [(source_id, shared)]
+    for doc in docs:
+        src_id = doc["id"]
+        for rel in doc.get("related_docs", []):
+            tgt = rel["id"]
+            reverse_edges.setdefault(tgt, []).append((src_id, rel.get("shared", 0)))
+    for doc in docs:
+        incoming = reverse_edges.get(doc["id"], [])
+        incoming.sort(key=lambda t: -t[1])
+        doc["reverse_related_docs"] = [
+            {
+                "id": sid,
+                "title": id_to_doc[sid]["title"] if sid in id_to_doc else "?",
+                "category": id_to_doc[sid]["category"] if sid in id_to_doc else "",
+                "shared": cnt,
+            }
+            for sid, cnt in incoming[:10]
+            if sid in id_to_doc
+        ]
+
+    # WS-M09: per-doc lint_status — structural + content checks. Drives contradiction badges
+    # in search results. Each check is cheap; results are a compact list of {code, severity, detail}.
+    # severity: "error" (blocks publish), "warn" (review), "info" (nice-to-have).
+    for doc in docs:
+        lint = []
+        wc = doc.get("word_count", 0)
+        status = (doc.get("status") or "").upper()
+        # Too-thin content for FINAL
+        if status == "FINAL" and wc < 200:
+            lint.append({"code": "thin-final", "severity": "warn",
+                         "detail": f"FINAL doc with only {wc} words — expand or downgrade to DRAFT"})
+        # Missing primary topic
+        if not doc.get("primary_topic") and status in ("FINAL", "ACTIVE", "REVIEW"):
+            lint.append({"code": "no-topic", "severity": "info",
+                         "detail": "No primary topic detected — consider tagging"})
+        # No related docs → orphan signal (keeping it as info; orphan detection below is authoritative)
+        if not doc.get("related_docs") and not doc.get("archived") and wc > 300:
+            lint.append({"code": "isolated", "severity": "info",
+                         "detail": "No related docs found — may be disconnected from the graph"})
+        # Missing headings (thin structure)
+        if wc > 500 and len(doc.get("headings", [])) < 3:
+            lint.append({"code": "flat-structure", "severity": "info",
+                         "detail": f"{wc}-word doc with only {len(doc.get('headings', []))} headings"})
+        # SharePoint-stale (published but local newer)
+        if doc.get("sharepoint_stale"):
+            lint.append({"code": "sp-stale", "severity": "warn",
+                         "detail": "SharePoint copy is behind local — run sharepoint-sync"})
+        doc["lint_status"] = {
+            "ok": len([l for l in lint if l["severity"] == "error"]) == 0,
+            "error_count": len([l for l in lint if l["severity"] == "error"]),
+            "warn_count": len([l for l in lint if l["severity"] == "warn"]),
+            "info_count": len([l for l in lint if l["severity"] == "info"]),
+            "issues": lint,
+        }
+
+    # WS-M02 polish: orphan + contradiction counts at the index top level.
+    # Orphan = active non-archived doc with zero related_docs AND zero reverse_related_docs AND word_count>200
+    # (we keep short stubs out of the count — they're often callouts or placeholders by design).
+    orphan_docs = [
+        d for d in docs
+        if not d.get("archived")
+        and not d.get("related_docs")
+        and not d.get("reverse_related_docs")
+        and d.get("word_count", 0) > 200
+        and d.get("source") not in ("wiki-callouts", "wiki-meetings", "wiki-meta")
+    ]
+    # Contradiction = any doc with a "warn"-level lint issue (excluding sp-stale since that's sync debt, not content).
+    contradiction_docs = [
+        d for d in docs
+        if any(l["severity"] == "warn" and l["code"] != "sp-stale" for l in d.get("lint_status", {}).get("issues", []))
+    ]
+    print(f"  {len(orphan_docs)} orphaned docs | {len(contradiction_docs)} docs with content warnings")
+
     # Build tag index (active docs only)
     tag_counts = build_tag_index(active_docs)
     print(f"  {len(tag_counts)} unique tags across all docs")
@@ -905,6 +1125,19 @@ def main():
             "latest_title": latest["title"],
         }
 
+    # WS-M03: ingest_log — recent additions/updates scraped from git + filesystem mtimes.
+    # Gives the "what landed recently" strip at the top of wiki-search.
+    ingest_log = build_ingest_log(docs, limit=20)
+
+    # WS-M05: demand_log — parse wiki-demand-log.md if present. File tracks topics/questions that
+    # agents or humans searched for but couldn't find an article on. Format: tolerant — bullets
+    # starting with "- " or YAML-ish lines get picked up.
+    demand_log = load_demand_log()
+
+    # WS-M11: agent_drafts — scan context/intake/ for agent-authored draft markdown that could
+    # be promoted to the wiki. Emit shape matching what wiki-search.html expects.
+    agent_drafts = scan_agent_drafts()
+
     index = {
         "generated": datetime.now().isoformat(),
         "total_docs": len(unique_docs),
@@ -925,6 +1158,24 @@ def main():
         },
         "tags": tag_counts,
         "groups": group_summary,
+        # WS-M02/M09 — content-quality surfaces
+        "orphan_count": len(orphan_docs),
+        "orphans": [{"id": d["id"], "title": d["title"], "category": d["category"], "word_count": d.get("word_count", 0)} for d in orphan_docs[:50]],
+        "contradiction_count": len(contradiction_docs),
+        "contradictions": [
+            {
+                "id": d["id"],
+                "title": d["title"],
+                "issues": [l["code"] for l in d["lint_status"]["issues"] if l["severity"] == "warn" and l["code"] != "sp-stale"],
+            }
+            for d in contradiction_docs[:50]
+        ],
+        # WS-M03 — recent ingest strip
+        "ingest_log_entries": ingest_log,
+        # WS-M05 — demand-gap panel
+        "demand_log_entries": demand_log,
+        # WS-M11 — agent-authored drafts awaiting promotion
+        "agent_drafts": agent_drafts,
         "documents": docs,
     }
 

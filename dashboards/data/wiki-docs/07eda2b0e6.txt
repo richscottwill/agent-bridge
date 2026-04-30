@@ -145,17 +145,7 @@ Teammate agents don't run the whole pipeline themselves — they submit the topi
 
 ## Reading patterns
 
-### "What do we know about [topic]?"
-
-```
-1. Search wiki index for topic keyword
-2. Filter by status=FINAL (not reviews/drafts) unless user explicitly wants all
-3. If >3 matches, show list with one-line summaries and ask user to pick
-4. If 1–2 matches, read and synthesize
-5. If 0 matches, say so and suggest submitting a new-article topic brief
-```
-
-### "Summarize market X based on the wiki"
+### "What do we know about [topic]?" ``` 1. Search wiki index for topic keyword 2. Filter by status=FINAL (not reviews/drafts) unless user explicitly wants all 3. If >3 matches, show list with one-line summaries and ask user to pick 4. If 1–2 matches, read and synthesize 5. If 0 matches, say so and suggest submitting a new-article topic brief ``` ### "Summarize market X based on the wiki"
 
 ```
 1. Filter wiki index by market=X

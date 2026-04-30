@@ -36,6 +36,9 @@ MX Y2026 @ 100% ie%CCP — spread across chips: $1.31M (No lift) → $1.56M (Fre
 
 ---
 
+
+**Common failure:** Skipping this step leads to silent data loss. Always verify the output.
+
 ## File locations
 
 | Layer | Path |

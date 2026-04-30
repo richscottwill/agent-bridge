@@ -35,6 +35,7 @@
 ### 1. kate-doc-methodology (8.6) ✅
 Strong. The four-stage framework (hypothesis → phased rollout → measurement → scale/stop) is clear, actionable, and well-evidenced. SyRT data, phased rollout table, and "tests we stopped" section all earn their place. "So what" after SyRT table is excellent. AGENT_CONTEXT present and useful.
 
+
 ### 2. kate-doc-oci (8.6) ✅
 Flagship workstream doc. Numbers cross-check perfectly against oci-performance.md (US +24%/+32K regs/$16.7MM, UK +23%/+2.4K, DE +18%/+749). DE W44-W45 test-vs-control data matches source exactly. Competitive context paragraph connects OCI to Walmart defense — good business impact framing. AGENT_CONTEXT present.
 

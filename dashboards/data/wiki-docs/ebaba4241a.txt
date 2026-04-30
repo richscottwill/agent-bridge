@@ -82,7 +82,15 @@ OP2 is now explicitly named and connected to the investment ask.
 
 UX section now reads:
 
+
+#### > "After the
+
+
 > "After the Gated Guest experiment showed -61% registrations, the team paused, deep-dived the data, and pivoted to in-context registration — which delivered +13.6K annualized incremental registrations with 100% probability (APT)."
+
+
+#### The failure-to-success arc
+
 
 The failure-to-success arc is present. This is the strongest "we learn from failures" narrative in the doc and it's now visible in the workstream section, not just buried in methodology.
 

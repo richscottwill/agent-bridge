@@ -32,6 +32,7 @@ Every row has these key columns:
 | `ieccp` | DOUBLE | Only on weekly rows; null elsewhere |
 | `source` | VARCHAR | `'AB SEM WW Dashboard_Y26 W16.xlsx'` or `'ww_rollup'` |
 
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## Market codes
 
 Ten individual markets plus one aggregate:
@@ -91,6 +92,7 @@ ORDER BY period_key;
 
 ### 4. YoY — W16 this year vs last year, for US
 
+
 ```sql
 SELECT period_key, registrations, cost, cpa
 FROM ps.v_weekly
@@ -98,7 +100,6 @@ WHERE market = 'US' AND period_key IN ('2025-W16', '2026-W16')
 ORDER BY period_key;
 ```
 
-### 5. Quarter-to-date across every market
 
 ```sql
 SELECT market, registrations, cost, cpa

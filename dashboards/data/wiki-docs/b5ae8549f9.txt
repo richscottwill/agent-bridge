@@ -26,17 +26,41 @@ Economy drags the average below 8. The doc has strong bones — the narrative se
 
 ### 1. Table abuse — 7 tables without interpretation
 
+
+#### Six of the
+
+
 Six of the seven tables lack a "so what" sentence explaining what the data means. The Decision Guide table is the exception — it earns its place because each row is a complete if/then/why instruction.
 
 The worst offenders:
 
+
+#### **Active Hooks table
+
+
 **Active Hooks table (lines 73-79):** Five rows of hook data with no interpretation. Add a sentence after the table: something like "The first three hooks are Richard-triggered workflows that run the daily operating rhythm. The last two are always-on safety guards that prevent accidental external communication. The distinction matters: workflow hooks can be skipped on a given day, safety hooks cannot."
+
+
+#### **Body System Agents
+
 
 **Body System Agents table (lines 116-121):** Four agents listed with definitions and ownership. Add a sentence after: "Karpathy is the only agent with write access to heart.md and gut.md — this is a deliberate constraint that prevents other agents from modifying the experimentation protocol or compression rules."
 
+
+#### **WBR Pipeline table
+
+
 **WBR Pipeline table (lines 132-136):** Three agents listed. The paragraph that follows (lines 138-139) about the consolidation is good — it explains the history. But the table itself needs a "so what" for the current state. Add: "Market-analyst and callout-writer are parameterized — they accept a market identifier and load market-specific rules at runtime, which means adding a new market requires only a new context file, not a new agent."
 
+
+#### **Wiki Team table
+
+
 **Wiki Team table (lines 151-158):** Six agents listed. Add: "The pipeline is sequential — each agent's output is the next agent's input. The wiki-editor is the only agent that can assign work or resolve conflicting feedback."
+
+
+#### **Routing Rules table
+
 
 **Routing Rules table (lines 173-181):** Seven routing patterns. Add: "The routing table is a decision tree, not a suggestion list. If a request matches a pattern, it goes to that agent. The fallback — handle directly — only applies when no pattern matches."
 

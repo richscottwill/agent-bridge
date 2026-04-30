@@ -18,10 +18,9 @@ Third, MIE changes the team's time allocation. Less time on data pulls and trend
 
 ## Current scope
 
+
 From the OP1 workshop discussion with Joel, MIE will look at campaign and portfolio-level data, produce recommendations, and show the reasoning. It is paid-search-specific at launch. Expansion to other channels is theoretically possible but unlikely before 2028.
-
 Data inputs include Google Ads performance, Adobe metrics where still in use, and internal AB data through the existing tech pipeline. Output is a recommendation queue the PS team works through on a cadence to be defined.
-
 ## Risks and unknowns
 
 The first risk is access timing. Tech has not committed a ship date. Expect 2027 at earliest. The second is recommendation quality — if MIE produces too many low-value recommendations, the team will stop using it regardless of capability. The third is job-security adjacency. The tool is designed to augment, not replace, but team members worry about the framing. Proactive Brandon-level messaging will matter.

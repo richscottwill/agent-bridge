@@ -1,0 +1,25 @@
+{
+  "generated": "2026-04-30",
+  "row_count": 1,
+  "earliest": "2026-04-30",
+  "latest": "2026-04-30",
+  "rows": [
+    {
+      "date": "2026-04-30",
+      "total_docs": 311,
+      "published": 48,
+      "local_only": 59,
+      "stale": 1,
+      "orphans": 7,
+      "contradictions": 25,
+      "demand_open": 5,
+      "by_status": {
+        "FINAL": 7,
+        "ACTIVE": 5,
+        "REVIEW": 51,
+        "PENDING": 1,
+        "DRAFT": 195
+      }
+    }
+  ]
+}

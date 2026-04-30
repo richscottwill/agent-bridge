@@ -67,6 +67,15 @@ def _run_refresh():
 
 
 class DashboardHandler(SimpleHTTPRequestHandler):
+    def _json(self, status, body):
+        """Small helper — send a JSON response with status + CORS."""
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+        self.wfile.write(json.dumps(body).encode())
+
     def do_GET(self):
         if self.path.startswith("/api/refresh-status"):
             # Current background-refresh state + data file mtime.
@@ -144,6 +153,126 @@ class DashboardHandler(SimpleHTTPRequestHandler):
                 "already_running": already_running,
                 "message": "Refresh already in flight" if already_running else "Refresh started"
             }).encode())
+        elif self.path == "/api/agent-drafts/commit":
+            # WS-M11 (2026-04-30): commit an agent-authored draft to a feature branch.
+            # Safety:
+            #   1. Path must resolve under wiki/staging/, context/intake/, or wiki/agent-created/.
+            #   2. Branch name is derived server-side from the path slug — client-supplied branch
+            #      is advisory only, ignored if it tries to write to main/master.
+            #   3. No force-push. Regular push with tracking.
+            #   4. Subprocess with list args, never shell=True.
+            #   5. Global feature flag WIKI_AGENTIC_COMMIT_ENABLED must be true; otherwise returns
+            #      a 503 with an explanation. Default is DISABLED until Richard flips it.
+            import subprocess, re
+            content_length = int(self.headers.get("Content-Length", 0))
+            body = self.rfile.read(content_length)
+            try:
+                payload = json.loads(body)
+            except Exception as e:
+                self._json(400, {"ok": False, "error": f"bad json: {e}"})
+                return
+
+            if not os.environ.get("WIKI_AGENTIC_COMMIT_ENABLED") == "1":
+                self._json(503, {
+                    "ok": False,
+                    "error": "agentic commits disabled",
+                    "hint": "set env WIKI_AGENTIC_COMMIT_ENABLED=1 to enable; see .kiro/steering/dashboard-redesign-naming.md",
+                })
+                return
+
+            rel_path = (payload.get("path") or "").strip()
+            author = (payload.get("author") or "agent").strip()[:60]
+            message = (payload.get("message") or "").strip()[:240]
+            if not rel_path or not message:
+                self._json(400, {"ok": False, "error": "path and message are required"})
+                return
+
+            # Normalize + resolve under repo root
+            repo_root = Path(__file__).parent.parent  # /shared/user
+            try:
+                full = (repo_root / rel_path).resolve()
+                full.relative_to(repo_root)  # raises if escaped
+            except Exception:
+                self._json(400, {"ok": False, "error": "path escapes repo root"})
+                return
+
+            # Whitelist
+            allowed_prefixes = ("wiki/staging/", "context/intake/", "wiki/agent-created/")
+            if not rel_path.startswith(allowed_prefixes):
+                self._json(400, {
+                    "ok": False,
+                    "error": f"path must start with one of {allowed_prefixes}",
+                })
+                return
+
+            if not full.exists() or not full.is_file():
+                self._json(404, {"ok": False, "error": "file not found"})
+                return
+
+            # Branch name — server-derived; reject client-supplied branches that look like main
+            slug = re.sub(r"[^a-z0-9]+", "-", rel_path.lower()).strip("-")[:60]
+            branch = f"wiki/{slug}"
+            if branch in ("wiki/main", "wiki/master", "wiki/"):
+                self._json(400, {"ok": False, "error": "computed branch invalid"})
+                return
+
+            def git(*args):
+                return subprocess.run(
+                    ["git", "-C", str(repo_root), *args],
+                    capture_output=True, text=True, timeout=30,
+                )
+
+            try:
+                # Create + checkout feature branch (no-op if it exists)
+                r = git("checkout", "-B", branch)
+                if r.returncode != 0:
+                    self._json(500, {"ok": False, "error": f"checkout failed: {r.stderr.strip()[:400]}"})
+                    return
+                # Stage only this specific path — never git add -A from this endpoint
+                r = git("add", rel_path)
+                if r.returncode != 0:
+                    self._json(500, {"ok": False, "error": f"add failed: {r.stderr.strip()[:400]}"})
+                    return
+                # Commit with trailer
+                trailer = f"\n\nAuthor-agent: {author}\nTriggered-by: wiki-search UI"
+                r = git("commit", "-m", message + trailer)
+                if r.returncode != 0:
+                    # Could be "nothing to commit" — return a clean 200 for that case
+                    if "nothing to commit" in (r.stdout + r.stderr).lower():
+                        self._json(200, {
+                            "ok": True,
+                            "branch": branch,
+                            "no_changes": True,
+                            "message": "nothing to commit for this path",
+                        })
+                        return
+                    self._json(500, {"ok": False, "error": f"commit failed: {r.stderr.strip()[:400]}"})
+                    return
+                sha_r = git("rev-parse", "HEAD")
+                sha = sha_r.stdout.strip() if sha_r.returncode == 0 else ""
+                # Push (regular, no force)
+                r = git("push", "-u", "origin", branch)
+                if r.returncode != 0:
+                    self._json(500, {
+                        "ok": False,
+                        "commit_sha": sha,
+                        "branch": branch,
+                        "error": f"push failed: {r.stderr.strip()[:400]}",
+                    })
+                    return
+                # Return to main — don't leave the serve.py on a feature branch
+                git("checkout", "main")
+                self._json(200, {
+                    "ok": True,
+                    "commit_sha": sha[:10],
+                    "branch": branch,
+                    "path": rel_path,
+                    "author": author,
+                })
+            except subprocess.TimeoutExpired:
+                self._json(504, {"ok": False, "error": "git command timed out"})
+            except Exception as e:
+                self._json(500, {"ok": False, "error": f"{type(e).__name__}: {e}"[:400]})
         else:
             self.send_response(404)
             self.end_headers()

@@ -31,10 +31,10 @@ This is the doc's strongest dimension. The phased rollout is genuinely executabl
 
 The decision table at the end is excellent. Five situations, five actions, five reasons. A market owner hitting a CPA regression can look at this table and know what to do without calling Richard. That is leverage — Brandon's favorite word.
 
-The measurement section is also strong. The shift from test-versus-control (Phases 2-3) to seasonality-adjusted baselines (Phase 4) is clearly explained, and the reporting format ("OCI lift tracking: W[X] +[Y]% ([Z]% to expectation)") gives people a template they can use immediately.
-
 What prevents a 10: the Phase 1 section is slightly vague on the "how." It says "set up the OCI conversion action, configure the data feed, and trigger test registrations" but does not say where to find the instructions for doing that. The cross-reference to the Execution Guide in the opening paragraph is supposed to cover this, but by the time the reader is in Phase 1, they have forgotten about that link. A single sentence — "For the step-by-step Google Ads setup, see the Execution Guide" — at the end of the Phase 1 section would close the gap.
 
+
+The measurement section is also strong. The shift from test-versus-control (Phases 2-3) to seasonality-adjusted baselines (Phase 4) is clearly explained, and the reporting format ("OCI lift tracking: W[X] +[Y]% ([Z]% to expectation)") gives people a template they can use immediately.
 ## 4. SIGNAL-TO-NOISE — 6/10
 
 This is the doc's weakest dimension, and it is what would make Kate put it down.

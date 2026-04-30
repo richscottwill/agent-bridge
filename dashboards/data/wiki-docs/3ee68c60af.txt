@@ -39,41 +39,24 @@
   └─────────────────────────────────────────┘
 ```
 
-## Columns
-
-| Column | Type | Source | Refresh |
-|---|---|---|---|
-| `market` | VARCHAR | manual | Never |
-| `governing_constraint` | VARCHAR | manual | Agent-edit |
-| `handoff_status` | VARCHAR | manual | Agent-edit |
-| `oci_status` | VARCHAR | manual | Agent-edit |
-| `ccp_availability` | VARCHAR | manual | Agent-edit |
-| `next_milestone` | VARCHAR | manual | Agent-edit |
-| `manual_notes` | VARCHAR | manual | Agent-edit |
-| `manual_updated_at` | TIMESTAMP | manual | Auto on UPDATE |
-| `manual_updated_by` | VARCHAR | manual | Agent sets on UPDATE |
-| `latest_week` | VARCHAR | market_status | WBR pipeline weekly |
-| `last_week_regs` | INTEGER | market_status | WBR pipeline weekly |
-| `last_week_cost` | DOUBLE | market_status | WBR pipeline weekly |
-| `last_week_cpa` | DOUBLE | market_status | WBR pipeline weekly |
-| `next_week_predicted_regs` | DOUBLE | forecast_tracker | WBR pipeline weekly |
-| `next_week_ci_low_regs` | DOUBLE | forecast_tracker | WBR pipeline weekly |
-| `next_week_ci_high_regs` | DOUBLE | forecast_tracker | WBR pipeline weekly |
-| `next_week_predicted_cost` | DOUBLE | forecast_tracker | WBR pipeline weekly |
-| `next_week_ci_low_cost` | DOUBLE | forecast_tracker | WBR pipeline weekly |
-| `next_week_ci_high_cost` | DOUBLE | forecast_tracker | WBR pipeline weekly |
-| `month_op2_regs` | DOUBLE | targets | Per OP cycle (rarely) |
-| `month_op2_cost` | DOUBLE | targets | Per OP cycle (rarely) |
-| `month_op2_cpa` | DOUBLE | targets | Per OP cycle (rarely) |
-| `hit_rate_regs` | DOUBLE | forecast_accuracy | WBR pipeline weekly |
-| `avg_error_regs` | DOUBLE | forecast_accuracy | WBR pipeline weekly |
-| `structural_baseline_count` | BIGINT | regime_changes | `is_structural_baseline=true` active rows |
-| `structural_baselines` | VARCHAR | regime_changes | pipe-delimited list |
-| `active_impact_count` | BIGINT | regime_changes | non-baseline active, end_date future or null |
-| `active_impact_regimes` | VARCHAR | regime_changes | pipe-delimited with decay info |
-| `recent_past_count` | BIGINT | regime_changes | non-baseline, end_date 0-90 days ago |
-| `recent_past_regimes` | VARCHAR | regime_changes | pipe-delimited |
-
+[38;5;10m> [0m## Columns[0m[0m
+[0m[0m
+| Column(s) | Type | Source | Refresh |[0m[0m
+|---|---|---|---|[0m[0m
+| `market` | VARCHAR | manual | Never |[0m[0m
+| `governing_constraint`, `handoff_status`, `oci_status`, `ccp_availability`, `next_milestone`, `manual_notes` | VARCHAR | manual | Agent-edit |[0m[0m
+| `manual_updated_at` | TIMESTAMP | manual | Auto on UPDATE |[0m[0m
+| `manual_updated_by` | VARCHAR | manual | Agent sets on UPDATE |[0m[0m
+| `latest_week` | VARCHAR | market_status | WBR pipeline weekly |[0m[0m
+| `last_week_regs` | INTEGER | market_status | WBR pipeline weekly |[0m[0m
+| `last_week_cost`, `last_week_cpa` | DOUBLE | market_status | WBR pipeline weekly |[0m[0m
+| `next_week_predicted_regs`, `next_week_ci_low_regs`, `next_week_ci_high_regs` | DOUBLE | forecast_tracker | WBR pipeline weekly |[0m[0m
+| `next_week_predicted_cost`, `next_week_ci_low_cost`, `next_week_ci_high_cost` | DOUBLE | forecast_tracker | WBR pipeline weekly |[0m[0m
+| `month_op2_regs`, `month_op2_cost`, `month_op2_cpa` | DOUBLE | targets | Per OP cycle (rarely) |[0m[0m
+| `hit_rate_regs`, `avg_error_regs` | DOUBLE | forecast_accuracy | WBR pipeline weekly |[0m[0m
+| `structural_baseline_count` (BIGINT), `structural_baselines` (VARCHAR) | — | regime_changes | Active rows where `is_structural_baseline=true`; pipe-delimited list |[0m[0m
+| `active_impact_count` (BIGINT), `active_impact_regimes` (VARCHAR) | — | regime_changes | Non-baseline active with future/null end_date; pipe-delimited with decay info |[0m[0m
+| `recent_past_count` (BIGINT), `recent_past_regimes` (VARCHAR) | — | regime_changes | Non-baseline, end_date 0–90 days ago; pipe-delimited |
 ## How to update manual fields (agents)
 
 Agents MAY update `ps.market_constraints_manual` when they learn of a shift. Always set `updated_at` and `updated_by`:

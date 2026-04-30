@@ -40,6 +40,7 @@ Third, split read operations into a trusted tool namespace if the Kiro version s
 2. If we build Kiro automations that would benefit from exit-zero auto-approval, flag and defer until the bug ships a fix.
 3. Report any new manifestations or version-specific behavior to the Kiro team.
 
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## Related
 
 - [Kiro Hooks Cookbook](11-kiro-hooks-cookbook)

@@ -4,17 +4,16 @@
 **Strategy type**: `balanced` (50-65% ie%CCP range)
 **Archetype for**: market with two structural shifts in 2026 (tax pause + OCI)
 
-## At a glance
-
-| Parameter | Value | Notes |
-|---|---|---|
-| Brand CCP | $151.67 | Column U FINAL ALIGNED |
-| NB CCP | $92.03 | Column U FINAL ALIGNED |
-| ie%CCP range | 50% – 65% | |
-| Supported target modes | spend / ieccp / regs | |
-| Brand spend share | 37.6% | High Brand mix relative to EU5 peers |
-| Clean weeks | 164 | |
-
+[38;5;10m> [0m## At a glance[0m[0m
+[0m[0m
+| Parameter | Value | Notes |[0m[0m
+|---|---|---|[0m[0m
+| Brand CCP | $151.67 | Column U FINAL ALIGNED |[0m[0m
+| NB CCP | $92.03 | Column U FINAL ALIGNED |[0m[0m
+| ie%CCP range | 50% – 65% | e.g., at 60% ie%CCP the blended CCP ≈ $0.60 × $151.67 + $0.40 × $92.03 = $127.81 |[0m[0m
+| Supported target modes | spend / ieccp / regs | "spend" fixes total budget; "ieccp" optimises toward a target blended CCP; "regs" targets a registration volume |[0m[0m
+| Brand spend share | 37.6% | High Brand mix relative to EU5 peers — for comparison, typical EU5 Brand share runs 25%–30% |[0m[0m
+| Clean weeks | 164 | Represents ~3.15 years of usable data after removing promo, out-of-stock, and launch-distortion weeks |
 ## Fit quality summary
 
 | Parameter | r² | MAPE | Fallback |

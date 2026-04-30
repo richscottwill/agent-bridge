@@ -2,10 +2,9 @@
 
 *Phase 6.5.2 · generated 2026-04-27 · 12-week holdout · MAPE thresholds: Brand <22%, Total <25%*
 
-## Method
-
-For each market: use the last 12 weeks of `ps.v_weekly` as holdout. Project using the Frequentist baseline (last-8-week mean of training window, separately per component). Regime-crossings within the holdout window are flagged since they disturb the baseline assumption and carry larger MAPE.
-
+[38;5;10m> [0m## Method[0m[0m
+[0m[0m
+Per market: hold out the last 12 weeks of `ps.v_weekly`. Project via Frequentist baseline (last-8-week training mean, per component). Flag regime-crossings within holdout—these violate baseline assumptions and inflate MAPE.
 ## Per-Market Results
 
 | Market | Brand MAPE | NB MAPE | Total Regs MAPE | Total Spend MAPE | Brand Gate | Regime in window |

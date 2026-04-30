@@ -1,25 +1,4 @@
-# IT City-Level Bid Modifiers Test
-
-## Documents
-- Data: 2024.12.10 - IT Location modifiers
-- Google doc: City-level cost/revenue data, and bid modifiers
-
-## Experiment
-Question: Will adding city-level bid modifiers to our NB campaigns improve performance?
-
-## Setup
-- Account: Italy Google Ads
-- Timeline: 11/14 to 12/12
-- Targeting: 24 largest cities within IT (Google doc above shows individual cities)
-- Method: Google Ads experiment (A/B split)
-
-## Results
-When manually adding the modifiers at the city level, with the help of Google, we saw +18% registrations and +7% CVR.
-
-Adding the bid modifiers allowed for location bid adjustments in areas that otherwise would not have been touched by Adobe Ad Cloud. The change allowed for more spend in cities where users sign up for AB, resulting in higher volume of impressions and clicks. Little effect on CPA because bids were pushed up 9%. The volume increase in clicks/registrations alone is valuable, but the CVR increase adds further evidence.
-
-| Metric | City + Modifiers | Italy-Only Targeting | Difference |
-| --- | --- | --- | --- |
+ | --- | --- | --- |
 | Impressions | 32,451 | 26,731 | +21% |
 | Clicks | 6,760 | 6,141 | +10% |
 | Cost | $37,586 | $31,320 | +20% |

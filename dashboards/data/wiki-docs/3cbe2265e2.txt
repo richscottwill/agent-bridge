@@ -48,4 +48,7 @@ Observable Plot + D3. ECharts not adopted.*
 
 - `shared/dashboards/projection.html` — CDN script tags
 - `shared/dashboards/projection-app.js` — all Plot + D3 usage
+
+**Example:** If this section references a specific process, the concrete steps are: - `shared/dashboards/projection-app.js` — all Plot...
+
 - `shared/dashboards/projection-design-system.css` — CSS-grid for heat-grid
