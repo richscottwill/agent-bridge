@@ -445,6 +445,79 @@ body {
 }
 .wr-controls-meta .wr-ts-accent { color: var(--color-brand); }
 
+/* M6 (2026-04-30): 12-market small multiples. CSS Grid auto-fill so
+   the layout reflows 4×3 / 3×4 / 2×6 / 1×12 by viewport width. Each
+   panel is a compact card with title + YoY% label + dual-line SVG. */
+.wr-smallmult-wrap {
+  border-top: 1px solid var(--color-panel-border);
+  padding-top: var(--gap-md);
+}
+.wr-smallmult-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--gap-sm);
+  gap: var(--gap-md);
+  flex-wrap: wrap;
+}
+.wr-smallmult-legend {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  color: var(--color-text-subtle);
+  letter-spacing: 0.06em;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.wr-smallmult-legend .legend-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 2px;
+  vertical-align: middle;
+  margin-right: 3px;
+}
+.wr-smallmult-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--gap-sm);
+}
+.wr-smallmult-cell {
+  border: 1px solid var(--color-panel-border);
+  border-radius: 3px;
+  padding: 6px 8px;
+  background: var(--color-panel-bg);
+  cursor: pointer;
+  transition: border-color 120ms ease, transform 120ms ease;
+}
+.wr-smallmult-cell:hover {
+  border-color: var(--color-brand);
+  transform: translateY(-1px);
+}
+.wr-smallmult-cell.active {
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.15);
+}
+.wr-smallmult-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  margin-bottom: 2px;
+}
+.wr-smallmult-mk {
+  font-weight: 700;
+  color: var(--color-text-hero);
+  font-size: 11px;
+}
+.wr-smallmult-yoy {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-subtle);
+}
+.wr-smallmult-yoy.good { color: var(--color-success); }
+.wr-smallmult-yoy.bad  { color: var(--color-danger); }
+.wr-smallmult-yoy.warn { color: var(--color-warning); }
+
 /* M2 (2026-04-30): Exception banner. Renders only when the forecast
    for the current market has materially missed in the last 1-6 weeks.
    Red lane, diagnosis + recommended-action row. */
@@ -1321,6 +1394,25 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
     </div>
   </div>
 </div>
+
+<!-- M6 (2026-04-30): 12-market small multiples. Shared-Y indexed to
+     first-week = 100 so absolute-scale differences (WW 17K regs vs MX
+     500) don't destroy cross-market pattern recognition. Each panel
+     shows a market's 6-week actuals (accent) vs OP2 plan (muted).
+     Clicking a panel selects that market — same code path as the trust
+     bar pill. Per report #043 (shared Y) and bus 006 indexing note. -->
+<section class="wr-smallmult-wrap" id="sec-small-multiples"
+         aria-labelledby="sm-heading" style="margin:var(--gap-lg) 0">
+  <header class="wr-smallmult-head">
+    <h3 id="sm-heading" style="margin:0">All markets — last 6 weeks (indexed to W{start}=100)</h3>
+    <span class="wr-smallmult-legend">
+      <span class="legend-swatch" style="background:var(--color-brand)"></span>actual
+      <span class="legend-swatch" style="background:#cdc9bb;margin-left:var(--gap-sm)"></span>OP2 plan
+    </span>
+  </header>
+  <div class="wr-smallmult-grid" id="smallMultiplesGrid"></div>
+</section>
+
 <!-- M8 (2026-04-30): Prior-week thread as 7-cell sparkline strip.
      Additive to WR-A10 scrub-the-chart — the chart already supports
      hover-scrub; this is a persistent always-visible thread above the
@@ -1823,6 +1915,7 @@ function render() {
   renderStickyTrustBar();
   updateStickyLabels();
   renderKPIs();
+  renderSmallMultiples();
   renderThreadStrip();
   renderChart();
   renderTable();
@@ -2125,6 +2218,162 @@ function renderThreadStrip() {
       curWeek = wk;
       const sel = document.getElementById('weekSelect');
       if (sel) sel.value = wk;
+      render();
+    };
+  });
+}
+
+// M6 (2026-04-30): 12-market small multiples. Per report #043 and bus
+// 006, shared Y is the right default for small-multiples — cross-market
+// pattern recognition requires the eye to compare magnitudes. Since
+// absolute regs scales vary 30× across markets (WW ~17K, MX ~500), we
+// index each panel's series to 100 at the first visible week. That
+// way shared Y means "shared percent-change axis" which is what the
+// reader actually wants to compare.
+//
+// Panel content: 6-week actuals (accent) + 6-week OP2 plan (muted).
+// Title shows market + current-week YoY % (signed color). Click → select
+// that market (same code path as trust-bar pill click).
+function renderSmallMultiples() {
+  const host = document.getElementById('smallMultiplesGrid');
+  const heading = document.getElementById('sm-heading');
+  if (!host || !FORECAST) return;
+
+  const MARKETS = ['WW','US','EU5','CA','UK','DE','FR','IT','ES','JP','MX','AU'];
+  const maxWk = FORECAST.max_week || 15;
+  const WINDOW = 6;
+  const firstWk = Math.max(1, maxWk - (WINDOW - 1));
+
+  // Update the section heading with the actual first-week so the
+  // indexing claim is transparent.
+  if (heading) {
+    heading.textContent = `All markets — last 6 weeks (indexed to W${firstWk} = 100)`;
+  }
+
+  // Pull indexed series per market.
+  const seriesByMarket = {};
+  MARKETS.forEach(mk => {
+    const weeks = (FORECAST.weekly && FORECAST.weekly[mk]) || [];
+    const lastN = weeks.filter(w => w.wk >= firstWk && w.wk <= maxWk);
+    if (!lastN.length) { seriesByMarket[mk] = null; return; }
+
+    // Metric choice: regs for regs-markets, cost for spend-only (JP/AU).
+    const archetype = (typeof ARCHETYPE !== 'undefined' && ARCHETYPE[mk]) || 'regs';
+    const key = archetype === 'spend' ? 'cost' : 'regs';
+    const planKey = archetype === 'spend' ? 'op2_cost' : 'op2_regs';  // op2_cost may not exist; fallback below
+
+    // Base value for indexing — first week's actual (or pred if actual is 0).
+    const base = (lastN[0] && lastN[0][key]) || (lastN[0] && lastN[0]['pred_' + key]) || null;
+    if (!base || base === 0) { seriesByMarket[mk] = null; return; }
+
+    const actualIdx = lastN.map(w => {
+      const v = w[key] > 0 ? w[key] : (w['pred_' + key] || null);
+      return v != null ? (v / base) * 100 : null;
+    });
+
+    const planIdx = lastN.map(w => {
+      const v = w[planKey];
+      return v != null && Number.isFinite(v) && v > 0 ? (v / base) * 100 : null;
+    });
+
+    seriesByMarket[mk] = {
+      archetype,
+      actual: actualIdx,
+      plan: planIdx,
+      // YoY pulled from same-week prior year if available.
+      yoyPct: (() => {
+        const ly = (FORECAST.ly_weekly && FORECAST.ly_weekly[mk]) || [];
+        const curLy = ly.find(w => w.wk === maxWk);
+        const curAct = lastN.find(w => w.wk === maxWk);
+        if (!curLy || !curAct) return null;
+        const ref = curLy[key];
+        const v = curAct[key] > 0 ? curAct[key] : curAct['pred_' + key];
+        if (!ref || ref === 0 || v == null) return null;
+        return ((v - ref) / ref) * 100;
+      })(),
+    };
+  });
+
+  // Shared Y-extent across all panels — gives us the "pattern-matchable"
+  // property. Compute from every finite indexed value across all series
+  // and pad by 5%.
+  let yMin = Infinity, yMax = -Infinity;
+  Object.values(seriesByMarket).forEach(s => {
+    if (!s) return;
+    [...s.actual, ...s.plan].forEach(v => {
+      if (Number.isFinite(v)) {
+        if (v < yMin) yMin = v;
+        if (v > yMax) yMax = v;
+      }
+    });
+  });
+  if (!Number.isFinite(yMin) || !Number.isFinite(yMax) || yMin === yMax) {
+    yMin = 85; yMax = 115;
+  } else {
+    const pad = (yMax - yMin) * 0.05;
+    yMin -= pad; yMax += pad;
+  }
+
+  // Render cells.
+  const cells = MARKETS.map(mk => {
+    const s = seriesByMarket[mk];
+    if (!s) {
+      return (
+        `<button class="wr-smallmult-cell${mk === curMarket ? ' active' : ''}" ` +
+        `data-market="${mk}" aria-label="${mk} — no data">` +
+        `<div class="wr-smallmult-head-row"><span class="wr-smallmult-mk">${mk}</span>` +
+        `<span class="wr-smallmult-yoy">—</span></div>` +
+        `<div style="height:36px;display:flex;align-items:center;justify-content:center;` +
+        `color:var(--color-text-subtle);font-size:10px">no data</div>` +
+        `</button>`
+      );
+    }
+
+    const yoy = s.yoyPct;
+    let yoyCls = '';
+    let yoyText = '—';
+    if (Number.isFinite(yoy)) {
+      const abs = Math.abs(yoy);
+      yoyCls = abs < 1 ? 'warn' : (yoy > 0 ? 'good' : 'bad');
+      yoyText = `${yoy > 0 ? '+' : ''}${yoy.toFixed(0)}%`;
+    }
+
+    // Sparklines — both indexed to same Y extent for cross-panel comparability.
+    const planSpark = window.Sparkline && window.Sparkline.renderSparkline
+      ? window.Sparkline.renderSparkline(s.plan, { color: '#cdc9bb', width: 160, height: 36, min: yMin, max: yMax, showDot: false, strokeWidth: 1.2 })
+      : '';
+    const actualSpark = window.Sparkline && window.Sparkline.renderSparkline
+      ? window.Sparkline.renderSparkline(s.actual, { color: '#0066cc', width: 160, height: 36, min: yMin, max: yMax, strokeWidth: 1.6 })
+      : '';
+
+    // Overlay the two sparklines by stacking them in an absolute-positioned
+    // container. Actual on top. Clean without a canvas instance per panel.
+    return (
+      `<button class="wr-smallmult-cell${mk === curMarket ? ' active' : ''}" ` +
+      `data-market="${mk}" aria-label="${mk} — ${yoyText} YoY">` +
+      `<div class="wr-smallmult-head-row">` +
+      `<span class="wr-smallmult-mk">${mk}</span>` +
+      `<span class="wr-smallmult-yoy ${yoyCls}">${yoyText}</span>` +
+      `</div>` +
+      `<div style="position:relative;height:36px">` +
+      `<div style="position:absolute;inset:0">${planSpark}</div>` +
+      `<div style="position:absolute;inset:0">${actualSpark}</div>` +
+      `</div>` +
+      `</button>`
+    );
+  });
+
+  host.innerHTML = cells.join('');
+
+  // Click handler — identical to trust-bar pill behavior.
+  host.querySelectorAll('.wr-smallmult-cell').forEach(btn => {
+    btn.onclick = () => {
+      const mk = btn.dataset.market;
+      if (!mk || mk === curMarket) return;
+      curMarket = mk;
+      curRegion = MARKET_TO_REGION[mk] || mk;
+      curMetric = defaultMetricForMarket(curMarket);
+      try { localStorage.setItem('wr-last-market', mk); } catch (e) { /* ignore */ }
       render();
     };
   });

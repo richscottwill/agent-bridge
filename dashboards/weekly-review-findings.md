@@ -439,3 +439,10 @@ Sign-convention fix caught during verification: `error_pct > 0` means `actual > 
 | Finding | Status | Notes |
 |---|---|---|
 | M10 · Waterfall variance decomposition | done | `renderVariance()` output swapped from a 5-row table to a horizontal SVG waterfall. Same data (prior-week total → +/− NB → +/− Brand → +/− residual → current-week total); same rollup-aware aggregation path for WW/EU5/NA. Visual encoding: full bars at 0 for prior/current totals, floating bars aligned to running total for each delta with dashed connectors linking tops. Green positive / red negative; residual uses 60%-opacity variants so it reads as a less-authoritative bucket. NET WoW summary right-edge with signed absolute + signed %. `role="img"` + detailed `aria-label`. Verified on MX W16 (509→510, -27 NB + +28 Brand, +0.2% net). WW/EU5/NA rollup aggregation path preserved. |
+
+
+## M6 shipped (2026-04-30)
+
+| Finding | Status | Notes |
+|---|---|---|
+| M6 · 12-market small multiples with shared Y (indexed) | done | New `renderSmallMultiples()` + `.wr-smallmult-grid` section between scorecard and thread strip. CSS Grid `auto-fill minmax(180px, 1fr)` — reflows 4×3 / 3×4 / 2×6 by viewport. Each panel: market + current-week YoY%, two overlaid sparklines (actual accent, OP2 plan muted). Per report #043 and bus 006 pushback, Y-axis is SHARED across all panels but series are **indexed to W{first}=100** so absolute-scale differences (WW 17K regs, MX 500) don't destroy cross-market pattern recognition. Heading dynamically labels the base week. Spend-archetype markets (JP/AU) use `cost` instead of `regs`. YoY derived from `FORECAST.ly_weekly[mk]` same-week reference. Click-to-select cascades through the same code path as the trust-bar pills. Active market gets an outlined border + brand-color ring. Verified: 12 cells render with correct YoY signs (WW +75%, UK +190%, MX +197%, IT +7%, AU — since AU has no LY reference in the current data), console clean. |
