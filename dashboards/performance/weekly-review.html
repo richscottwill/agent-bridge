@@ -843,6 +843,69 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
 }
 /* Rollup variance hiding is handled JS-side in renderVariance (already
    short-circuits when channel deltas are empty); no CSS needed. */
+
+/* WR-A9 (2026-04-30): forecast aging / drift strip inside the scorecard
+   panel. Each bar pair shows per-week first-prediction vs latest-prediction.
+   Horizontal layout, 6 most recent graded weeks. */
+.wr-forecast-drift {
+  margin-top: var(--gap-md);
+  padding-top: var(--gap-md);
+  border-top: 1px dashed var(--color-panel-border);
+}
+.wr-drift-label {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: var(--gap-xs);
+}
+.wr-drift-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: var(--gap-xs);
+  align-items: end;
+  min-height: 44px;
+  margin-bottom: var(--gap-xs);
+}
+.wr-drift-week {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  cursor: default;
+}
+.wr-drift-bars {
+  display: flex;
+  align-items: end;
+  gap: 2px;
+  height: 32px;
+  width: 100%;
+  justify-content: center;
+}
+.wr-drift-bar {
+  width: 8px;
+  border-radius: 2px 2px 0 0;
+  min-height: 2px;
+  background: var(--color-panel-border);
+}
+.wr-drift-bar.first   { background: #C8D9EC; }  /* light blue = first pred */
+.wr-drift-bar.latest  { background: #0066CC; }  /* brand blue = latest pred */
+.wr-drift-bar.actual  { background: var(--color-success); }  /* green = actual */
+.wr-drift-bar.dimmed  { opacity: 0.35; }
+.wr-drift-wk {
+  font-size: 10px;
+  color: var(--color-text-subtle);
+  font-variant-numeric: tabular-nums;
+}
+.wr-drift-caption {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+}
+.wr-drift-caption .first-key   { color: #6788A8; font-weight: 600; }
+.wr-drift-caption .latest-key  { color: #0066CC; font-weight: 600; }
+.wr-drift-caption .actual-key  { color: var(--color-success); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -959,11 +1022,19 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
 <div class="wr-kpi-scorecard-grid" id="sec-kpi-scorecard">
   <div class="wr-kpi-row" id="kpiRow"></div>
   <!-- WR-D1 Forecast Hit Rate scorecard — renders when predictions_history
-       has ≥3 recent weeks of graded predictions. -->
+       has ≥3 recent weeks of graded predictions. WR-A9 (2026-04-30):
+       adds a forecast-aging strip below the narrative showing the
+       first→latest prediction trajectory per week (only weeks where
+       n_preds>1 and the prediction actually moved). -->
   <div class="sec-panel wr-scorecard-panel" id="sec-scorecard" style="display:none">
     <h3 class="wr-scorecard-head"><span id="scorecardTitle">Forecast Hit Rate</span></h3>
     <div class="wr-scorecard-row" id="scorecardRow"></div>
     <div class="wr-scorecard-narrative" id="scorecardNarrative"></div>
+    <div class="wr-forecast-drift" id="forecastDrift" style="display:none">
+      <div class="wr-drift-label">Forecast drift (first &rarr; latest)</div>
+      <div class="wr-drift-strip" id="driftStrip"></div>
+      <div class="wr-drift-caption" id="driftCaption"></div>
+    </div>
   </div>
 </div>
 <!-- WR-D2 (2026-04-28): calibration promoted to its own first-class panel
@@ -2078,6 +2149,74 @@ function renderScorecard() {
   narrEl.textContent = parts.length
     ? parts.join(' — ').replace(/ — /, '. ') + '.'
     : '';
+
+  // WR-A9 (2026-04-30): forecast aging / drift strip. Only renders when
+  // at least one of the last-6 weeks has n_preds > 1 (meaning the
+  // prediction actually moved from first to latest).
+  renderForecastDrift(recent, hist);
+}
+
+// Renders 6-week strip of first→latest prediction bars per week inside
+// the scorecard panel. Draws actual as a green overlay for graded weeks.
+// Auto-hides if no week in the window has multiple snapshots.
+function renderForecastDrift(recent, hist) {
+  const host = document.getElementById('forecastDrift');
+  const strip = document.getElementById('driftStrip');
+  const caption = document.getElementById('driftCaption');
+  if (!host || !strip || !caption) return;
+  if (!recent || !recent.length) { host.style.display = 'none'; return; }
+
+  // Pull n_preds + first_pred + latest_pred per week from hist. Keep the
+  // same 6-week window renderScorecard already assembled.
+  const rows = recent.map(r => {
+    const h = hist[String(r.wk)] || hist[r.wk] || {};
+    const rr = h.regs || {};
+    return {
+      wk: r.wk,
+      first: Number.isFinite(rr.first_pred)  ? rr.first_pred  : null,
+      latest: Number.isFinite(rr.latest_pred) ? rr.latest_pred : null,
+      actual: Number.isFinite(r.actual) ? r.actual : null,
+      n: rr.n_preds || 1,
+    };
+  }).filter(r => r.first != null || r.latest != null || r.actual != null);
+
+  // Require at least one week with n_preds > 1 — otherwise there's no
+  // drift to show and the strip would be redundant with the scorecard.
+  const anyDrift = rows.some(r => r.n > 1);
+  if (!anyDrift) { host.style.display = 'none'; return; }
+  host.style.display = '';
+
+  // Scale bars against the max value in the window so the tallest week
+  // uses ~32px (the strip height).
+  const vmax = Math.max(...rows.flatMap(r => [r.first, r.latest, r.actual].filter(v => v != null))) || 1;
+  const h = (v) => v == null ? 0 : Math.max(2, Math.round((v / vmax) * 32));
+
+  // Count how many weeks drifted meaningfully (>5% from first to latest).
+  const driftedWeeks = rows.filter(r =>
+    r.first != null && r.latest != null && Math.abs(r.latest - r.first) / Math.max(Math.abs(r.first), 1) > 0.05
+  ).length;
+
+  strip.innerHTML = rows.map(r => {
+    const dimFirst = (r.n === 1) ? ' dimmed' : '';  // no drift — fade the first bar
+    const actualBar = r.actual != null
+      ? `<div class="wr-drift-bar actual" style="height:${h(r.actual)}px" title="Actual: ${Math.round(r.actual).toLocaleString()}"></div>`
+      : '';
+    return `
+      <div class="wr-drift-week" title="W${r.wk} (${r.n} snapshot${r.n===1?'':'s'})">
+        <div class="wr-drift-bars">
+          <div class="wr-drift-bar first${dimFirst}" style="height:${h(r.first)}px" title="First: ${r.first == null ? '\u2014' : Math.round(r.first).toLocaleString()}"></div>
+          <div class="wr-drift-bar latest" style="height:${h(r.latest)}px" title="Latest: ${r.latest == null ? '\u2014' : Math.round(r.latest).toLocaleString()}"></div>
+          ${actualBar}
+        </div>
+        <div class="wr-drift-wk">W${r.wk}</div>
+      </div>
+    `;
+  }).join('');
+
+  caption.innerHTML =
+    `<span class="first-key">First</span> &rarr; <span class="latest-key">Latest</span> prediction per week` +
+    (rows.some(r => r.actual != null) ? `, with <span class="actual-key">Actual</span> overlay for graded weeks` : '') +
+    `. ${driftedWeeks} of ${rows.length} weeks drifted &gt;5% from first to latest.`;
 }
 
 // WR-B5 (2026-04-30): cross-market accuracy leaderboard.
