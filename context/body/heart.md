@@ -118,8 +118,19 @@ Karpathy selects using a three-stage process: exclude → select target → sele
 ### Step 3: Apply Experiment
 - Apply boldly. The eval is the safety net. Timid edits teach nothing; bold edits that break teach what's load-bearing.
 
+**Structural validity gate (mandatory, runs between Step 3 apply and Step 4 eval).** If the target file has a parseable grammar, the modified content MUST parse before any eval agent runs. Added 2026-04-29 after W18 batch invalidated 13 hook JSONs that scored high on output_quality.
 
+| Target extension | Validity check |
+|---|---|
+| `.kiro.hook`, `.json` | `python3 -c "import json,sys; json.loads(open(sys.argv[1]).read())" <path>` must return 0 |
+| `.py` | `python3 -c "import ast,sys; ast.parse(open(sys.argv[1]).read())" <path>` must return 0 |
+| `.sh` | `bash -n <path>` must return 0 |
+| `.yml`, `.yaml` | `python3 -c "import yaml,sys; yaml.safe_load(open(sys.argv[1]))" <path>` must return 0 |
+| `.md`, `.txt`, unknown | no structural gate |
 
+**If validity fails:** auto-REVERT with `revert_reason='structural_invalidity'`. Do NOT invoke Agent A / B / C. Log to `autoresearch_experiments` with eval scores NULL. Restore original file from snapshot. Update priors (REVERT → β+1) same as any other revert.
+
+**Why this is a pre-eval gate, not a scoring dimension:** the eval agents cannot detect invalid JSON/Python/bash — they read prose. A broken hook JSON reads as fine prose to the evaluator (the surrounding field names and values are still there) even though it will fail to load at runtime. Structural validity is binary and cheap to check; spending eval tokens on a file that cannot be loaded is pure waste.
 
 
 

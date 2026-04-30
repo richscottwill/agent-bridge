@@ -80,6 +80,19 @@ TERMINATION SIGNAL: If you cannot find any eligible target×technique combos (al
 
 IMPORTANT — EVAL PROTOCOL:
 For EACH experiment, after applying the change:
+
+0. **STRUCTURAL VALIDITY GATE (mandatory, pre-eval).** Check modified file parses correctly for its type. If fail → auto-REVERT with revert_reason='structural_invalidity', restore from snapshot, log to autoresearch_experiments with eval scores NULL, update priors, skip to next experiment. Do NOT invoke eval agents on structurally invalid files.
+
+   | Extension | Check |
+   |---|---|
+   | .kiro.hook, .json | python3 -c 'import json; json.loads(open(\"PATH\").read())' |
+   | .py | python3 -c 'import ast; ast.parse(open(\"PATH\").read())' |
+   | .sh | bash -n PATH |
+   | .yml, .yaml | python3 -c 'import yaml; yaml.safe_load(open(\"PATH\"))' |
+   | .md, .txt, unknown | no check — proceed to step 1 |
+
+   Added 2026-04-29 after W18 batch broke 13 hook JSONs that scored high on output_quality while being runtime-invalid. Eval agents cannot detect invalid JSON — they read prose.
+
 1. Write the eval-a prompt (modified target + body.md + soul.md + questions) to /tmp/eval-a-exp.txt
 2. Write the eval-b prompt (ORIGINAL target + body.md + soul.md + same questions) to /tmp/eval-b-exp.txt  
 3. Write the eval-c prompt (modified target ONLY + same questions) to /tmp/eval-c-exp.txt
