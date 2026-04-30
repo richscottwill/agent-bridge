@@ -73,3 +73,12 @@ Do not load for routine operational docs, MBR sections outside OP1 planning wind
 - `.kiro/steering/lens-kate.md` — skip-level filter for the OP1 strategic framing
 - `.kiro/steering/lens-brandon.md` — direct-manager filter for OP1 execution details
 - `amazon-politics.md → Promotion Mechanics` — the "outsized event" path that informs which OP1 commitments are promo-relevant vs routine
+
+## Retrospective cadence
+
+The kill list is not a one-and-done artifact. It gets re-read at OP1 checkpoints:
+
+- **Q2 checkpoint** (~June): Did any kill-list item become more important than something on the build list? If yes, that's a decision point — re-prioritize with intent, not as a mid-year regret. Decision goes in an OP1 amendment with a pointer back to the kill-list entry.
+- **Q4 review** (~November): Retrospectively, were any kill-list items correctly killed (i.e., the year would have been worse if they'd been on the build list)? Were any incorrectly killed (in hindsight)? The signal feeds into next year's kill list: what does Richard routinely pass on that ends up mattering?
+
+Re-reading takes 10 minutes each checkpoint. The payoff is that OP1 commitments stay load-bearing against the alternatives considered, rather than decaying into "the plan we made in February."

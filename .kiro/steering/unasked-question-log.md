@@ -57,4 +57,9 @@ Cost: 2 seconds of judgment per turn (which agents are already doing) + one file
 
 If the 1:1-prep agent is never finding patterns worth surfacing, the log is either (a) being written to too often with low-signal entries, or (b) not being written to enough because the judgment bar is too high. Check quarterly. Adjust the qualifying criteria above based on whether patterns are surfacing usefully.
 
-If Richard reads this and thinks the log should operate differently (for example: surface high-signal declined questions same-session rather than waiting for weekly 1:1 prep), that's a karpathy-routed decision since it changes the intervention timing and touches the coaching flow.
+If Richard reads this and thinks the log should operate differently, the authority split is:
+
+- **Capture mechanics** (what qualifies, where it writes, rotation cadence) — infrastructure. Me or kiro-local can edit, no routing needed.
+- **Surfacing timing and intervention shape** (when/how patterns get raised to Richard, 1:1-prep integration, framing of the reminder) — coaching-flow. Routes to karpathy.
+
+Don't send tuning questions about qualifying criteria to karpathy — that's infrastructure, not his domain.
