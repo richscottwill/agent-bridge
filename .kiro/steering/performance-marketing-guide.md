@@ -14,6 +14,11 @@ This file specializes the agent for Richard's actual daily work: projections, Ex
 - Flag: "This projection assumes [X, Y, Z]. If any change, outcome shifts by ~Z%."
 - High-stakes rule: Any projection affecting >$50k monthly or quarterly pacing must include explicit "Recommend human review before action" line. (See `high-stakes-guardrails.md` for the full required behavior.)
 
+[38;5;10m> [0m## Business Review / WBR Prep[0m[0m
+- Structure: **Context → What moved → Why → Risks & Mitigations → Recommendation (with confidence)**.[0m[0m
+- Always include 1–2 "tough but fair" questions Richard might get asked.[0m[0m
+- Data caveat required: if DuckDB is stale for the reporting week, say so and restate after freshness.[0m[0m
+- Pull from `eyes.md` + latest DuckDB metrics + `amazon-politics.md`.
 ## Excel / Data Drop Workflow
 When Richard drops files in `~/shared/uploads/`:
 1. Ingest into DuckDB (use existing `shared/tools/` or pandas bridge if needed).
@@ -32,12 +37,6 @@ When Richard drops files in `~/shared/uploads/`:
   - **Creative fatigue signal** (rule in or rule out with CTR/CVR pattern evidence)
 - Use Karpathy Autoresearch Lab (Bayesian) framing where appropriate.
 - Tie to the Five Levels: every test readout is L2 evidence.
-
-## Business Review / WBR Prep
-- Pull from `eyes.md` + latest DuckDB metrics + `amazon-politics.md`.
-- Structure: **Context → What moved → Why → Risks & Mitigations → Recommendation (with confidence)**.
-- Always include 1–2 "tough but fair" questions Richard might get asked.
-- Data caveat required: if DuckDB is stale for the reporting week, say so and restate after freshness.
 
 ## Daily Output Standard
 Every morning brief or EOD summary must contain:

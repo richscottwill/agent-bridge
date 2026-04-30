@@ -11,10 +11,8 @@
 
 
 
-### Common Pitfalls — Slack History Backfill — Exhaustive Context Recovery
-- Misinterpreting this section causes downstream errors
-- Always validate assumptions before acting on this data
-- Cross-reference with related sections for completeness
+### Per-DM Procedure
+Same as channels, but using DM channel IDs.
 
 
 
@@ -42,7 +40,48 @@ This data feeds directly into:
 
 
 
+## Execution Plan
+
+
+
+
 ## Scope
+
+
+
+
+### Retention Policy Discovery (2026-04-13)
+**CRITICAL FINDING:** Amazon enterprise Slack has ~1yr message retention. `batch_get_conversation_history` returns zero messages before ~April 2025 across ALL channels AND DMs. File metadata survives longer in search index (248 files found back to Feb 2024). DMs confirmed same retention wall (tested Brandon DM D044JAKR8RZ).
+
+**Recovery Strategy Pivot:** For pre-April 2025 data, switched to file-metadata-only approach:
+- File search returns: file_id, created_at, file_name, file_type, channel/DM destination, topic hints
+- 248 total files found from Richard before April 2025 (13 pages, 5 pages processed so far)
+- Created `signals.slack_file_activity` table for this data
+- 49 file activity signals ingested so far (Feb 2024 → Mar 2025)
+- Covers 3 channels (ab-paid-search-global, ab-paid-search-eng, ab-paid-search-eu) + 2 DM channels (D0443S6A39V, D06AN0K84NN)
+
+**DM Channel Identity Map (from file shares):**
+- D0443S6A39V — heavy data sharing (WW Dashboard, OP1 forecasts, EU5 Hubble) — likely Stacey or Yun
+- D06AN0K84NN — EU5 data, ieccp, bid strats, campaign settings, OP1 — likely Yun (EU5 focus)
+- D044JAKR8RZ — Brandon Munday (confirmed via open_conversation)
+
+
+
+
+### Channels Pending
+- [ ] ab-paid-search-global — FULL backfill to Jan 2023
+- [ ] ab-paid-search-abix — FULL backfill to Nov 2023
+- [ ] ab-paid-search-oci — FULL backfill to Mar 2024
+- [ ] ab-paid-search-eu — FULL backfill to Oct 2022
+- [ ] ab-ps_jp — FULL backfill to Oct 2022
+- [ ] ab-paid-search-eng — FULL backfill to Aug 2023
+- [ ] ab-paid-search-app — FULL backfill to Aug 2023
+- [ ] ab-paid-search-cps — FULL backfill to Feb 2024
+- [ ] ab-outbound-marketing — FULL backfill
+- [ ] ab-ps_partnership-accounts — FULL backfill
+- [ ] All Tier 2-4 channels
+- [ ] All DMs (80+)
+- [ ] Search-based recovery for left channels
 
 
 
@@ -141,96 +180,6 @@ Every message Richard sent, received, was @mentioned in, or participated in a th
 
 
 
-## Execution Plan
-
-
-
-
-### Per-Channel Procedure
-1. `batch_get_conversation_history(channelId, oldest="2023-01-01T00:00:00Z", limit=200)`
-2. Paginate until no more messages (use cursor)
-3. For each batch: extract Richard's messages + all messages with `reply_count > 0`
-4. Insert all messages into `signals.slack_messages` via DuckDB
-5. For messages with `reply_count > 0`: call `batch_get_thread_replies` (batch 10 at a time)
-6. Insert all thread replies into `signals.slack_messages`
-7. Update `signals.slack_people` with any new authors
-8. Log progress to this file
-
-
-
-
-### Per-DM Procedure
-Same as channels, but using DM channel IDs.
-
-
-
-
-### Search-Based Recovery (Left Channels)
-1. `search(query="from:@prichwil after:2023-01-01 before:2023-07-01")` — 6-month windows
-2. Identify channels Richard posted in that aren't in the current list
-3. For each discovered channel: attempt `batch_get_conversation_history`
-4. If access denied (left channel): extract what we can from search results
-5. **NOTE:** Slack search via MCP returns 0 message results for older periods — likely a retention/index limitation. File search works and reveals DM channel IDs. For left channels, direct `batch_get_conversation_history` with `oldest` parameter is the reliable method.
-6. **Discovered DM channels from file search (not in current DM list):**
-   - `D06BQB6CK08` — active Mar 2024 (invoice PDFs shared)
-   - `D0443S6A39V` — active Feb-Jun 2024 (EU5 data, OP1 forecasts, ieccp, dashboards — likely Yun or Andrew)
-   - `D06AN0K84NN` — active Feb-Jun 2024 (EU5 projections, campaign data, bid strats — heavy data sharing)
-
----
-
-
-
-
-## Progress Tracker
-
-
-
-
-### Retention Policy Discovery (2026-04-13)
-**CRITICAL FINDING:** Amazon enterprise Slack has ~1yr message retention. `batch_get_conversation_history` returns zero messages before ~April 2025 across ALL channels AND DMs. File metadata survives longer in search index (248 files found back to Feb 2024). DMs confirmed same retention wall (tested Brandon DM D044JAKR8RZ).
-
-**Recovery Strategy Pivot:** For pre-April 2025 data, switched to file-metadata-only approach:
-- File search returns: file_id, created_at, file_name, file_type, channel/DM destination, topic hints
-- 248 total files found from Richard before April 2025 (13 pages, 5 pages processed so far)
-- Created `signals.slack_file_activity` table for this data
-- 49 file activity signals ingested so far (Feb 2024 → Mar 2025)
-- Covers 3 channels (ab-paid-search-global, ab-paid-search-eng, ab-paid-search-eu) + 2 DM channels (D0443S6A39V, D06AN0K84NN)
-
-**DM Channel Identity Map (from file shares):**
-- D0443S6A39V — heavy data sharing (WW Dashboard, OP1 forecasts, EU5 Hubble) — likely Stacey or Yun
-- D06AN0K84NN — EU5 data, ieccp, bid strats, campaign settings, OP1 — likely Yun (EU5 focus)
-- D044JAKR8RZ — Brandon Munday (confirmed via open_conversation)
-
-
-
-
-### Channels Completed
-| Channel | Messages | Threads | Richard Msgs | Date |
-|---------|----------|---------|-------------|------|
-| ab-paid-search-global | 380 total | 10 threads fetched | 73 richard msgs | 2026-04-13 (Apr 2025→present + file metadata to Feb 2024) |
-| ab-paid-search-eng | file metadata only | — | 3 files (Feb 2024) | 2026-04-13 |
-| ab-paid-search-eu | file metadata only | — | 6 files (Feb 2024→Mar 2025) | 2026-04-13 |
-
-**Note:** Message history only available from ~April 2025. Pre-April 2025 recovered via file metadata only.
-
-### Channels Pending
-- [ ] ab-paid-search-global — FULL backfill to Jan 2023
-- [ ] ab-paid-search-abix — FULL backfill to Nov 2023
-- [ ] ab-paid-search-oci — FULL backfill to Mar 2024
-- [ ] ab-paid-search-eu — FULL backfill to Oct 2022
-- [ ] ab-ps_jp — FULL backfill to Oct 2022
-- [ ] ab-paid-search-eng — FULL backfill to Aug 2023
-- [ ] ab-paid-search-app — FULL backfill to Aug 2023
-- [ ] ab-paid-search-cps — FULL backfill to Feb 2024
-- [ ] ab-outbound-marketing — FULL backfill
-- [ ] ab-ps_partnership-accounts — FULL backfill
-- [ ] All Tier 2-4 channels
-- [ ] All DMs (80+)
-- [ ] Search-based recovery for left channels
-
-
-
-
 ### DMs Completed
 (none yet)
 
@@ -250,6 +199,45 @@ Same as channels, but using DM channel IDs.
 
 ---
 
+### Channels Completed
+| Channel | Messages | Threads | Richard Msgs | Date |
+|---------|----------|---------|-------------|------|
+| ab-paid-search-global | 380 total | 10 threads fetched | 73 richard msgs | 2026-04-13 (Apr 2025→present + file metadata to Feb 2024) |
+| ab-paid-search-eng | file metadata only | — | 3 files (Feb 2024) | 2026-04-13 |
+| ab-paid-search-eu | file metadata only | — | 6 files (Feb 2024→Mar 2025) | 2026-04-13 |
+
+**Note:** Message history only available from ~April 2025. Pre-April 2025 recovered via file metadata only.
+
+### Per-Channel Procedure
+1. `batch_get_conversation_history(channelId, oldest="2023-01-01T00:00:00Z", limit=200)`
+2. Paginate until no more messages (use cursor)
+3. For each batch: extract Richard's messages + all messages with `reply_count > 0`
+4. Insert all messages into `signals.slack_messages` via DuckDB
+5. For messages with `reply_count > 0`: call `batch_get_thread_replies` (batch 10 at a time)
+6. Insert all thread replies into `signals.slack_messages`
+7. Update `signals.slack_people` with any new authors
+8. Log progress to this file
+
+
+
+
+## Resume Instructions (for next session)
+
+1. Read this file first
+2. Check "Progress Tracker" for what's done
+3. Pick the next unchecked channel/DM
+4. Execute the per-channel procedure
+5. Update progress tracker
+6. If time remains, continue to next channel
+
+### Common Pitfalls — Slack History Backfill — Exhaustive Context Recovery
+- Misinterpreting this section causes downstream errors
+- Always validate assumptions before acting on this data
+- Cross-reference with related sections for completeness
+
+
+
+
 ## Context Enrichment Opportunities
 
 As data flows in, these enrichment passes should run:
@@ -266,11 +254,23 @@ As data flows in, these enrichment passes should run:
 
 
 
-## Resume Instructions (for next session)
+## Progress Tracker
 
-1. Read this file first
-2. Check "Progress Tracker" for what's done
-3. Pick the next unchecked channel/DM
-4. Execute the per-channel procedure
-5. Update progress tracker
-6. If time remains, continue to next channel
+
+
+
+### Search-Based Recovery (Left Channels)
+1. `search(query="from:@prichwil after:2023-01-01 before:2023-07-01")` — 6-month windows
+2. Identify channels Richard posted in that aren't in the current list
+3. For each discovered channel: attempt `batch_get_conversation_history`
+4. If access denied (left channel): extract what we can from search results
+5. **NOTE:** Slack search via MCP returns 0 message results for older periods — likely a retention/index limitation. File search works and reveals DM channel IDs. For left channels, direct `batch_get_conversation_history` with `oldest` parameter is the reliable method.
+6. **Discovered DM channels from file search (not in current DM list):**
+   - `D06BQB6CK08` — active Mar 2024 (invoice PDFs shared)
+   - `D0443S6A39V` — active Feb-Jun 2024 (EU5 data, OP1 forecasts, ieccp, dashboards — likely Yun or Andrew)
+   - `D06AN0K84NN` — active Feb-Jun 2024 (EU5 projections, campaign data, bid strats — heavy data sharing)
+
+---
+
+
+

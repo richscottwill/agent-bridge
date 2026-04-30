@@ -30,10 +30,9 @@ Do NOT post directly. Instead:
 
 This mirrors the email rule: compose and draft, never send on Richard's behalf to others.
 
-## Reading is unrestricted
-
-All read operations (search, history, threads, channel info, user info, reactions, file downloads) are always allowed without restriction.
-
+[38;5;10m> [0m## Reading is unrestricted[0m[0m
+[0m[0m
+All read operations (search, history, threads, channel info, user info, reactions, file downloads) are always allowed without restriction. For example, even if a user's write access is fully revoked, they can still search messages across channels, browse conversation threads, view other users' profiles, download shared files, and review the full message history — no special permissions or tokens are needed for any of these actions.
 ## Ingester Read Operations
 
 During scheduled Slack ingestion (morning routine and system refresh hooks), the following read-only tools are permitted:

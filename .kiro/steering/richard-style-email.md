@@ -25,20 +25,15 @@ inclusion: manual
 
 
 
-### Reply Patterns
+
+
 - When replying to a numbered list, uses the same numbering: "1-3: ..." / "4-5: ..." / "6: ..."
 
 
 
 
-### Redirect Patterns
-- When forwarding or redirecting, always name the person and briefly explain why: "Looping in Yun-Kang — she owns the redirect reporting for MX."
-
-
-
-
-
-
+[38;5;10m> [0m### Redirect Patterns[0m[0m
+- When forwarding or redirecting, always name the person and briefly explain why (e.g., "Looping in Yun-Kang — she owns the redirect reporting for MX.").
 ### Example (actual — MX invoice)
 "Hey all, here are the two invoices in question if that's helpful. (most up-to-date from the platform) Like Carlos mentioned, it would be helpful if January's invoice ($65K) could be paid with PO MS-20200908, and December's invoice ($39K) could be split between PO MS-18899171 and remainder to PO MS-19697814. Definitely let us know if you need any work from our side to resolve."
 
@@ -56,10 +51,6 @@ inclusion: manual
 
 ### Structure
 - Summary → data → interpretation → recommendation
-
-
-
-
 
 
 ### Data Presentation

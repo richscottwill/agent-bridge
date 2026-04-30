@@ -49,9 +49,6 @@ LiveRamp is the data management platform our channel marketing group selected. I
 **Development and planning delays:** Frequent pauses while setting up LiveRamp. Credentials errors connecting to LiveRamp's instance of S3 created pockets of time where nothing was moving. Planning could have been more proactive — developing keyword lists, gathering creative, and communicating to stakeholders during downtime.
 
 **Audience match rates far below expectations:** Active users in Google Ads were much lower than planned. Our AB Registrants list (14 million users) matched to only 1.7 million active users on Google Ads (13% match rate) — well below the 30-50% we expected. The BCIvNext list started with 1.25 million users and matched at 11%, down to 140k active users. This limited which lists were viable for targeting.
-
-For reference, the US CPS account used the 140k-user BCIvNext audience and spent just over $600 total in two months. The BP account targeted the 1.7 million users in the All Registrants list and spent about $3k/week — still small compared to SSR accounts (JP, our smallest SSR account, spends $3k/day).
-
 ## Lessons Learned and Recommendations
 
 **Start simple, then go granular:** We planned to launch 12 different audiences, and almost half were iterations of each other. For example, Verified US AB registrant, SMB all registrants, ENT all registrants (SMB and ENT are more granular lists contained within the Verified US AB registrants list). Faster progress could have been achieved by focusing on a few audiences at first. This also applied to planning — a simpler, iterative approach would likely have allowed us to launch earlier and given us more time to learn.

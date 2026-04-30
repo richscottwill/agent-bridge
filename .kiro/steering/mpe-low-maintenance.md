@@ -7,10 +7,9 @@ fileMatchPattern: '{shared/tools/prediction/mpe_*.py,shared/dashboards/mpe_engin
 
 **Purpose**: Enforce non-technical-owner constraint on every MPE-related change. Applies when editing any MPE engine file, spec, hook, refit report, or documentation.
 
-## Identity of the Owner
-
-Richard is the non-technical marketing manager who will own and maintain the Market Projection Engine alone after the 2026-05-16 demo. He does not write code. Every output he sees (banner, tooltip, runbook step, refit report, warning, narrative) must be understandable in under 30 seconds without opening a file.
-
+[38;5;10m> [0m## Identity of the Owner[0m[0m
+[0m[0m
+Richard is the non-technical marketing manager who will solely own and maintain the Market Projection Engine after the 2026-05-16 demo, so every output—banner, tooltip, runbook step, refit report, warning, narrative—must be understandable in under 30 seconds without opening a file.
 ## Core Rules (enforce on every generation)
 
 1. **Owner is non-technical**. Code comments, UI banners, warning messages, tooltips, runbook steps — all plain English. Explain "why" and "what to do next." If you need a term of art, define it the first time.
@@ -54,11 +53,11 @@ Every row must be classified per D17 in design.md. At every refit the owner conf
 - **Excluded from fit** (`active = FALSE`): contaminated, superseded, or observation-only. Keep record, don't use in fit.
 - **Short-term-excluded / reverted** (`is_structural_baseline = FALSE`, `half_life_weeks = 0`, `active = TRUE`): event occurred but was reverted. Exclude those weeks from fit.
 
-## Success Criteria for This Build
-
-- Non-technical owner can run a full professional projection for MX in under 90 seconds and explain it to stakeholders without reading code.
-- Owner can run quarterly refit using one hook command and understand the report.
-- Tool feels calm, trustworthy, low-maintenance on day 1.
-- Adding a 4th market post-v1 is templated work — 4-6 hours first time, settling to 2 hours.
-
+[38;5;10m> [0m## Success Criteria for This Build[0m[0m
+[0m[0m
+- Non-technical owner can run a full professional projection for MX in under 90 seconds and explain it to stakeholders without reading code. *Example: Owner types `make projection MX`, reviews a one-page summary of 5-year net income and cash flow, and walks a bank lender through the key numbers in a 10-minute meeting — no spreadsheet editing required.*[0m[0m
+- Owner can run quarterly refit using one hook command and understand the report. *Example: After Q2 actuals are entered, owner runs `make refit MX` and receives a plain-language report showing which assumptions shifted (e.g., "Revenue growth revised from 8% → 6.5% based on Q1–Q2 trend") and what that means for the forward outlook.*[0m[0m
+- Tool feels calm, trustworthy, low-maintenance on day 1.[0m[0m
+- Adding a 4th market post-v1 is templated work — 4-6 hours first time, settling to 2 hours. *Example: To add Colombia, the owner duplicates the MX market config, updates tax rates and currency settings, plugs in local assumptions, and runs the test suite — no changes to core engine code needed.*[0m[0m
+[0m[0m
 When in doubt, choose the simpler, more maintainable option and document the trade-off.

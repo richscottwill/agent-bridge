@@ -92,7 +92,6 @@ For every research brief, query KDS to enrich findings with internal organizatio
 - Extract 3-5 topic keywords from the article brief or editor assignment
 - Focus keywords on Amazon-specific terms, project names, and domain concepts
 
-### How to query KDS
 ```
 1. Extract keywords from the topic/brief
    Example: "Paid Search testing methodology" → keywords: "paid search testing", "AB test methodology Amazon", "experiment design paid search"

@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Agent Activity — Body System</title>
+
+<!-- Shared projection-engine design language (mirrors Performance + Body System overview). -->
+<link rel="stylesheet" href="../projection-design-system.css?v=2026-04-30">
+
+<style>
+/* ========================================================================
+   Agent Activity — lives inside Body System (2026-04-30 move).
+   Rationale: this IS the body system's pulse. The overview tab shows WHO
+   the agents are (roster, organs, streak). This tab shows WHAT they did.
+   Inherits bs-* tokens from the overview page so the two feel like one.
+   Redesign swaps the prior card-stream for a tabular hour-bucket view
+   that reads left-to-right like a log: time → agent → action → outcome.
+   ======================================================================== */
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-body);
+  background: var(--color-neutral-bg);
+  line-height: 1.5;
+}
+
+.aa-frame {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--gap-lg);
+}
+
+.aa-header {
+  margin-bottom: var(--gap-lg);
+  padding-bottom: var(--gap-md);
+  border-bottom: 1px solid var(--color-panel-border);
+}
+.aa-title {
+  font-size: var(--size-section);
+  font-weight: var(--weight-section);
+  color: var(--color-text-hero);
+  margin-bottom: 2px;
+}
+.aa-sub {
+  font-size: var(--size-ui);
+  color: var(--color-text-meta);
+}
+
+/* KPI tile row — mirrors bs-kpi-row from body-system/index.html */
+.aa-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap-md);
+  margin-bottom: var(--gap-lg);
+}
+@media (max-width: 900px) { .aa-kpi-row { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .aa-kpi-row { grid-template-columns: 1fr; } }
+.aa-kpi {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 6px;
+  padding: var(--gap-sm) var(--gap-md);
+}
+.aa-kpi-label {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.aa-kpi-value {
+  font-size: var(--size-section);
+  font-weight: 700;
+  color: var(--color-text-hero);
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+}
+.aa-kpi-value.good { color: var(--color-success); }
+.aa-kpi-value.warn { color: var(--color-warning); }
+.aa-kpi-value.bad  { color: var(--color-danger); }
+.aa-kpi-sub {
+  font-size: var(--size-meta);
+  color: var(--color-text-meta);
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hour-bucket heat-strip — 24 cells, one per hour, coloured by activity count
+   + score quality. Sits above the table and lets the eye scan "when was the
+   system busy / quiet / low-quality" before drilling into rows. */
+.aa-heatstrip {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 8px;
+  padding: var(--gap-md) var(--gap-lg);
+  margin-bottom: var(--gap-lg);
+}
+.aa-heatstrip-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--gap-sm);
+  flex-wrap: wrap;
+  gap: var(--gap-sm);
+}
+.aa-heatstrip-title {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+.aa-heatstrip-legend {
+  display: flex;
+  gap: var(--gap-md);
+  font-size: 11px;
+  color: var(--color-text-meta);
+}
+.aa-legend-swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+.aa-heatgrid {
+  display: grid;
+  grid-template-columns: repeat(24, 1fr);
+  gap: 3px;
+  font-variant-numeric: tabular-nums;
+}
+.aa-hour {
+  aspect-ratio: 1;
+  border-radius: 3px;
+  background: #F3F3F3;
+  position: relative;
+  cursor: pointer;
+  transition: transform var(--duration-quick) var(--ease-reveal),
+              box-shadow var(--duration-quick) var(--ease-reveal);
+  min-height: 28px;
+}
+.aa-hour:hover {
+  transform: scale(1.15);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  z-index: 2;
+}
+.aa-hour-labels {
+  display: grid;
+  grid-template-columns: repeat(24, 1fr);
+  gap: 3px;
+  margin-top: 4px;
+  font-size: 9px;
+  color: var(--color-text-subtle);
+  text-align: center;
+  font-family: var(--font-mono);
+}
+
+/* Activity table — tabular log. Replaces the prior vertical card stream. */
+.aa-section {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 8px;
+  padding: var(--gap-md) var(--gap-lg);
+  margin-bottom: var(--gap-lg);
+}
+.aa-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--gap-md);
+  margin-bottom: var(--gap-sm);
+  padding-bottom: var(--gap-sm);
+  border-bottom: 1px dashed var(--color-panel-border);
+  flex-wrap: wrap;
+}
+.aa-section-title {
+  font-size: var(--size-body);
+  font-weight: 600;
+  color: var(--color-text-hero);
+}
+.aa-section-caption {
+  font-size: var(--size-meta);
+  color: var(--color-text-meta);
+  line-height: 1.5;
+  max-width: 720px;
+}
+.aa-section-caption .aa-src {
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.aa-filter-row {
+  display: flex;
+  gap: var(--gap-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--gap-md);
+  font-size: var(--size-ui);
+}
+.aa-filter-btn {
+  background: var(--color-neutral-bg);
+  border: 1px solid var(--color-panel-border);
+  color: var(--color-text-body);
+  padding: 4px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: inherit;
+  transition: border-color var(--duration-quick), color var(--duration-quick);
+}
+.aa-filter-btn:hover { border-color: var(--color-brand); color: var(--color-brand); }
+.aa-filter-btn.active {
+  background: var(--color-brand);
+  color: var(--color-text-on-brand);
+  border-color: var(--color-brand);
+}
+
+.aa-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--size-ui);
+  font-variant-numeric: tabular-nums;
+}
+.aa-table th, .aa-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid #F3F3F3;
+  text-align: left;
+  vertical-align: top;
+}
+.aa-table th {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.aa-table th.r, .aa-table td.r { text-align: right; }
+.aa-table tr.aa-row { cursor: pointer; transition: background var(--duration-quick); }
+.aa-table tr.aa-row:hover td { background: #F7F7F7; }
+.aa-table tr.aa-detail td {
+  padding: 10px 14px 14px;
+  background: var(--color-neutral-bg);
+  border-bottom: 1px solid var(--color-panel-border);
+  display: none;
+}
+.aa-table tr.aa-detail.open td { display: table-cell; }
+
+/* Producer pill — actor type classification. Colors reinforce the
+   four-way taxonomy: agent (autonomous LLM), hook (event-triggered),
+   prompt (Richard-initiated), system (scheduled pipeline). */
+.aa-prod {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+}
+.aa-prod.agent     { background: #EEF3FB; color: #0052A3; }
+.aa-prod.hook      { background: #F3EDFA; color: #5B2E8A; }
+.aa-prod.prompt    { background: #FFF4D6; color: #8A6200; }
+.aa-prod.system    { background: #F3F3F3; color: var(--color-text-subtle); }
+/* Reviewed/human retained as a no-op alias so legacy data doesn't break;
+   no longer exposed in filter UI. */
+.aa-prod.reviewed,
+.aa-prod.human     { background: #E6F7EE; color: #0C7A3D; }
+
+/* Quality gate pill */
+.aa-gate {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.aa-gate.pass             { background: #E6F7EE; color: #0C7A3D; }
+.aa-gate.block            { background: #FEE2E2; color: var(--color-danger); }
+.aa-gate.observation-only { background: #F3F3F3; color: var(--color-text-subtle); }
+.aa-gate.human-gate       { background: #EEF3FB; color: #0052A3; }
+
+/* Score column — inline bar + number */
+.aa-score-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 68px;
+  justify-content: flex-end;
+}
+.aa-score-bar {
+  width: 40px;
+  height: 4px;
+  background: #F0F0F0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.aa-score-fill {
+  height: 100%;
+  border-radius: 2px;
+}
+.aa-score-fill.high { background: var(--color-success); }
+.aa-score-fill.mid  { background: var(--color-warning); }
+.aa-score-fill.low  { background: var(--color-danger); }
+.aa-score-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 26px;
+  text-align: right;
+}
+.aa-score-num.high { color: var(--color-success); }
+.aa-score-num.mid  { color: var(--color-warning); }
+.aa-score-num.low  { color: var(--color-danger); }
+
+.aa-action { color: var(--color-text-body); }
+.aa-ts {
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  white-space: nowrap;
+}
+.aa-dur {
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.aa-row-detail {
+  font-size: var(--size-ui);
+  color: var(--color-text-meta);
+  line-height: 1.6;
+}
+.aa-row-detail dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px var(--gap-md);
+  margin: 0;
+}
+.aa-row-detail dt {
+  color: var(--color-text-subtle);
+  font-size: var(--size-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  white-space: nowrap;
+  padding-top: 2px;
+}
+.aa-row-detail dd { margin: 0; color: var(--color-text-body); }
+.aa-row-detail .aa-downstream {
+  margin-top: 6px;
+  color: var(--color-brand);
+  font-size: var(--size-meta);
+}
+
+.aa-empty {
+  font-size: var(--size-ui);
+  color: var(--color-text-subtle);
+  padding: var(--gap-md) 0;
+  font-style: italic;
+  text-align: center;
+}
+
+/* Grouped view — one summary row per group, expands on click to show the
+   individual activities in that group. Mirrors the running-log table row
+   tokens so the visual language stays consistent. */
+.aa-group-row { cursor: pointer; transition: background var(--duration-quick); }
+.aa-group-row:hover td { background: #F7F7F7; }
+.aa-group-row td {
+  border-bottom: 1px solid var(--color-panel-border);
+  font-variant-numeric: tabular-nums;
+}
+.aa-group-caret {
+  display: inline-block;
+  width: 10px;
+  color: var(--color-text-subtle);
+  transition: transform var(--duration-quick);
+  user-select: none;
+}
+.aa-group-row.open .aa-group-caret { transform: rotate(90deg); }
+.aa-group-title {
+  font-weight: 600;
+  color: var(--color-text-hero);
+}
+.aa-group-count {
+  display: inline-block;
+  background: #EEF3FB;
+  color: #0052A3;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 10px;
+  margin-left: 6px;
+  font-family: var(--font-mono);
+}
+.aa-group-meta {
+  color: var(--color-text-meta);
+  font-size: var(--size-meta);
+}
+/* Inline bar for volume or score in the group summary row */
+.aa-group-bar-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 80px;
+}
+.aa-group-bar {
+  width: 60px;
+  height: 4px;
+  background: #F0F0F0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.aa-group-bar-fill {
+  height: 100%;
+  background: var(--color-brand);
+  border-radius: 2px;
+}
+.aa-group-members {
+  display: none;
+  background: var(--color-panel-bg);
+}
+.aa-group-members.open { display: table-row; }
+.aa-group-members > td { padding: 0 0 8px; background: var(--color-panel-bg); }
+.aa-group-members-inner {
+  padding: 8px 12px 4px 32px;
+  border-top: 1px dashed var(--color-panel-border);
+}
+.aa-group-member-row {
+  display: grid;
+  grid-template-columns: 80px 120px 1fr 80px 60px 60px;
+  gap: 8px;
+  padding: 3px 0;
+  font-size: var(--size-ui);
+  align-items: baseline;
+  border-bottom: 1px solid #F3F3F3;
+}
+.aa-group-member-row:last-child { border-bottom: none; }
+.aa-group-member-row .aa-ts,
+.aa-group-member-row .aa-dur { font-size: 11px; }
+.aa-group-member-action {
+  color: var(--color-text-body);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.aa-group-show-more {
+  font-size: 11px;
+  color: var(--color-brand);
+  margin-top: 4px;
+  text-align: center;
+  cursor: pointer;
+  padding: 4px;
+}
+.aa-group-show-more:hover { text-decoration: underline; }
+
+.aa-footer {
+  text-align: right;
+  color: var(--color-text-subtle);
+  font-size: var(--size-meta);
+  padding-top: var(--gap-md);
+}
+</style>
+</head>
+<body>
+
+<div class="aa-frame">
+
+  <div class="aa-header">
+    <div class="aa-title">Agent Activity</div>
+    <div class="aa-sub" id="aaSub">Agent actions in the selected window. Click any row to expand. All times Pacific.</div>
+  </div>
+
+  <!-- Window filter — 1d / 7d / 30d. 7d is default (2026-04-30). Distinct
+       from the producer-type filter row below: this sets the time range that
+       feeds KPIs + heatstrip + table; producer chips filter within that range. -->
+  <div class="aa-filter-row" id="aaWindowFilters" style="margin-top: var(--gap-sm)">
+    <span style="font-size:var(--size-meta);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:.08em;font-weight:600;align-self:center;margin-right:4px">Window</span>
+    <button class="aa-filter-btn" data-w="1">1 day</button>
+    <button class="aa-filter-btn active" data-w="7">7 days</button>
+    <button class="aa-filter-btn" data-w="30">30 days</button>
+  </div>
+
+  <div class="aa-kpi-row" id="aaKpis"></div>
+
+  <!-- Pulse strip: hourly bins for 1-day window, daily bins for 7d/30d. -->
+  <div class="aa-heatstrip" id="aaHeatSection">
+    <div class="aa-heatstrip-head">
+      <span class="aa-heatstrip-title" id="aaHeatTitle">7-day pulse</span>
+      <span class="aa-heatstrip-legend">
+        <span><span class="aa-legend-swatch" style="background:#F3F3F3"></span>idle</span>
+        <span><span class="aa-legend-swatch" style="background:#B7E6C5"></span>low volume</span>
+        <span><span class="aa-legend-swatch" style="background:#14A548"></span>busy · healthy</span>
+        <span><span class="aa-legend-swatch" style="background:#D13212"></span>busy · degraded</span>
+      </span>
+    </div>
+    <div class="aa-heatgrid" id="aaHeatgrid"></div>
+    <div class="aa-hour-labels" id="aaHourLabels"></div>
+  </div>
+
+  <div class="aa-section" id="aaFeedSection">
+    <div class="aa-section-head">
+      <div>
+        <div class="aa-section-title">Activity log</div>
+        <div class="aa-section-caption">
+          Every run by hooks, agents, and pipelines within the selected window. Score is the blind-eval output-quality judgement (0–10) when available. Gate is the authorization result from the Kiro policy layer.
+          <span class="aa-src" id="aaSrc"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="aa-filter-row" id="aaFilters">
+      <span style="font-size:var(--size-meta);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:.08em;font-weight:600;align-self:center;margin-right:4px">Producer</span>
+      <button class="aa-filter-btn active" data-f="all">All</button>
+      <button class="aa-filter-btn" data-f="agent">Agent</button>
+      <button class="aa-filter-btn" data-f="hook">Hook</button>
+      <button class="aa-filter-btn" data-f="prompt">Prompt</button>
+      <button class="aa-filter-btn" data-f="system">System</button>
+      <button class="aa-filter-btn" data-f="failures">Failures</button>
+    </div>
+
+    <!-- View mode: pivot the log by producer / subject / time, or show the
+         raw running feed. Running log is the default. Grouped views render
+         one summary row per group and expand on click — which also avoids
+         rendering 2k+ rows in a single DOM pass. "By action" dropped per
+         Richard 2026-04-30: the action label carries only 5-10 distinct
+         techniques now (the section-suffix was stripped in the generator)
+         so "By subject" is the useful granular pivot instead. -->
+    <div class="aa-filter-row" id="aaViewMode" style="margin-top:var(--gap-xs)">
+      <span style="font-size:var(--size-meta);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:.08em;font-weight:600;align-self:center;margin-right:4px">View</span>
+      <button class="aa-filter-btn active" data-v="log">Running log</button>
+      <button class="aa-filter-btn" data-v="producer">By producer</button>
+      <button class="aa-filter-btn" data-v="subject">By subject</button>
+      <button class="aa-filter-btn" data-v="time">By hour / day</button>
+    </div>
+
+    <div id="aaTableMount"></div>
+  </div>
+
+  <div class="aa-footer" id="aaFooter"></div>
+</div>
+
+<script src="../shared/provenance.js"></script>
+<script src="../shared/provenance-registry.js"></script>
+
+<script>
+/* ══ Time helpers — force Pacific for every display. ══════════════════════ */
+const PT_TIME_OPTS = { hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: 'America/Los_Angeles' };
+const PT_FULL_OPTS = { year: 'numeric', month: 'short', day: 'numeric',
+                       hour: 'numeric', minute: '2-digit',
+                       timeZone: 'America/Los_Angeles' };
+
+function fmtTimePT(ts) {
+  const d = new Date(ts);
+  if (Number.isNaN(d.getTime())) return '—';
+  return d.toLocaleTimeString('en-US', PT_TIME_OPTS);
+}
+function fmtFullPT(ts) {
+  const d = new Date(ts);
+  if (Number.isNaN(d.getTime())) return '—';
+  return d.toLocaleString('en-US', PT_FULL_OPTS);
+}
+function hourOfDayPT(ts) {
+  // Intl-aware hour extraction so midnight rolls correctly on DST edges.
+  const parts = new Intl.DateTimeFormat('en-US', {
+    hour: '2-digit', hourCycle: 'h23', timeZone: 'America/Los_Angeles'
+  }).formatToParts(new Date(ts));
+  const h = parts.find(p => p.type === 'hour');
+  return h ? parseInt(h.value, 10) : 0;
+}
+function fmtDur(ms) {
+  if (ms == null) return '—';
+  if (ms < 1000) return ms + 'ms';
+  if (ms < 60000) return (ms / 1000).toFixed(1) + 's';
+  return (ms / 60000).toFixed(1) + 'm';
+}
+function scoreCls(s) {
+  if (s == null) return '';
+  if (s >= 8.0) return 'high';
+  if (s >= 7.0) return 'mid';
+  return 'low';
+}
+
+/* ══ State ═════════════════════════════════════════════════════════════════ */
+let STATE = { activities: [], stats: {}, source: '', generated: '', filter: 'all', windowDays: 7, viewMode: 'log' };
+
+/* Window filter — activities whose ts falls within the last N days. Uses
+   UTC math so it's insensitive to the browser's local clock vs PT rendering. */
+function inWindow(a, windowDays) {
+  const t = new Date(a.ts).getTime();
+  if (Number.isNaN(t)) return false;
+  const cutoff = Date.now() - windowDays * 24 * 60 * 60 * 1000;
+  return t >= cutoff;
+}
+function windowActivities() {
+  return STATE.activities.filter(a => inWindow(a, STATE.windowDays));
+}
+function windowLabel() {
+  return STATE.windowDays === 1 ? '1 day' : STATE.windowDays + ' days';
+}
+
+fetch('../data/agent-activity-feed.json?' + Date.now())
+  .then(r => r.json())
+  .then(d => {
+    STATE.activities = d.activities || [];
+    STATE.stats = d.stats || {};
+    STATE.source = d.source || '';
+    STATE.generated = d.generated || '';
+    renderAll();
+    wireFilters();
+    wireWindowFilters();
+    wireViewModeFilters();
+    document.getElementById('aaSrc').textContent = 'src: ' + STATE.source;
+    document.getElementById('aaFooter').textContent = 'Generated: ' + (STATE.generated ? fmtFullPT(STATE.generated) : fmtFullPT(new Date().toISOString())) + ' PT';
+    // Apply provenance bar
+    if (window.ProvenanceRegistry) {
+      const cfg = window.ProvenanceRegistry.get('agent-health');
+      if (cfg && window.Provenance) {
+        window.Provenance.injectBar('aaFeedSection', cfg.provs, cfg.trace);
+      }
+    }
+  })
+  .catch(e => {
+    document.getElementById('aaTableMount').innerHTML =
+      '<div class="aa-empty" style="color:var(--color-danger)">Failed to load: ' + (e.message || e) + '</div>';
+  });
+
+/* Re-render every window-dependent view. Producer filter drives only the
+   table — KPIs and heatstrip show the full window so they don't mislead
+   when the user filters to "Failures" and everything drops to 0. */
+function renderAll() {
+  renderKpis();
+  renderHeatstrip();
+  renderTable();
+}
+
+function renderKpis() {
+  const acts = windowActivities();
+  const producers = new Set(acts.map(a => a.producer).filter(Boolean));
+  const hooksFired = acts.filter(a => (a.producer_type === 'system') ||
+                                      (a.producer && /hook/i.test(a.producer))).length;
+  const failures = acts.filter(a => a.quality_gate === 'block' || a.status === 'failure').length;
+  const failuresCls = failures > 0 ? 'bad' : 'good';
+  const label = windowLabel();
+  document.getElementById('aaKpis').innerHTML = `
+    <div class="aa-kpi">
+      <div class="aa-kpi-label">Actions · ${label}</div>
+      <div class="aa-kpi-value">${acts.length}</div>
+      <div class="aa-kpi-sub">rolling window</div>
+    </div>
+    <div class="aa-kpi">
+      <div class="aa-kpi-label">Agents active</div>
+      <div class="aa-kpi-value">${producers.size}</div>
+      <div class="aa-kpi-sub">distinct producers</div>
+    </div>
+    <div class="aa-kpi">
+      <div class="aa-kpi-label">Hooks fired</div>
+      <div class="aa-kpi-value">${hooksFired}</div>
+      <div class="aa-kpi-sub">event-triggered</div>
+    </div>
+    <div class="aa-kpi">
+      <div class="aa-kpi-label">Failures</div>
+      <div class="aa-kpi-value ${failuresCls}">${failures}</div>
+      <div class="aa-kpi-sub">non-zero = check log</div>
+    </div>`;
+}
+
+/* Heatstrip: bins by hour for 1-day window (24 cells), by day for 7d/30d
+   windows (N cells). Cell background blends on count intensity × health
+   (green healthy, amber mid-score, red failure-heavy). */
+function renderHeatstrip() {
+  const acts = windowActivities();
+  if (STATE.windowDays === 1) {
+    renderHourlyStrip(acts);
+  } else {
+    renderDailyStrip(acts, STATE.windowDays);
+  }
+}
+
+function renderHourlyStrip(acts) {
+  document.getElementById('aaHeatTitle').textContent = '24-hour pulse (PT)';
+  const buckets = Array.from({ length: 24 }, () => ({ count: 0, scoreSum: 0, scoreN: 0, failures: 0 }));
+  acts.forEach(a => {
+    const h = hourOfDayPT(a.ts);
+    buckets[h].count += 1;
+    if (a.quality_score != null) { buckets[h].scoreSum += a.quality_score; buckets[h].scoreN += 1; }
+    if (a.quality_gate === 'block' || a.status === 'failure') buckets[h].failures += 1;
+  });
+  const maxCount = Math.max(1, ...buckets.map(b => b.count));
+
+  const grid = document.getElementById('aaHeatgrid');
+  grid.style.gridTemplateColumns = 'repeat(24, 1fr)';
+  grid.innerHTML = buckets.map((b, h) => {
+    const bg = cellColor(b, maxCount);
+    const label = `${h.toString().padStart(2, '0')}:00 PT · ${b.count} action${b.count === 1 ? '' : 's'}` +
+                  (b.scoreN ? ` · mean score ${(b.scoreSum / b.scoreN).toFixed(1)}` : '') +
+                  (b.failures ? ` · ${b.failures} failure${b.failures === 1 ? '' : 's'}` : '');
+    return `<div class="aa-hour" style="background:${bg}" title="${label}" data-hour="${h}"></div>`;
+  }).join('');
+
+  const labels = document.getElementById('aaHourLabels');
+  labels.style.gridTemplateColumns = 'repeat(24, 1fr)';
+  labels.innerHTML = buckets.map((_, h) => (h % 3 === 0 ? `<div>${h.toString().padStart(2, '0')}</div>` : '<div></div>')).join('');
+}
+
+function renderDailyStrip(acts, nDays) {
+  document.getElementById('aaHeatTitle').textContent = `${nDays}-day pulse (PT, one cell per day)`;
+  // Build N daily buckets anchored on "today in PT", oldest cell on the left.
+  const buckets = Array.from({ length: nDays }, () => ({ count: 0, scoreSum: 0, scoreN: 0, failures: 0 }));
+  const todayKey = dateKeyPT(new Date());
+  acts.forEach(a => {
+    const dayDiff = dayDiffPT(a.ts, new Date());
+    const idx = (nDays - 1) - dayDiff; // 0 = oldest
+    if (idx >= 0 && idx < nDays) {
+      buckets[idx].count += 1;
+      if (a.quality_score != null) { buckets[idx].scoreSum += a.quality_score; buckets[idx].scoreN += 1; }
+      if (a.quality_gate === 'block' || a.status === 'failure') buckets[idx].failures += 1;
+    }
+  });
+  const maxCount = Math.max(1, ...buckets.map(b => b.count));
+
+  const grid = document.getElementById('aaHeatgrid');
+  const cols = `repeat(${nDays}, 1fr)`;
+  grid.style.gridTemplateColumns = cols;
+  grid.innerHTML = buckets.map((b, i) => {
+    const bg = cellColor(b, maxCount);
+    const dateLabel = labelForDayOffsetPT((nDays - 1) - i);
+    const label = `${dateLabel} · ${b.count} action${b.count === 1 ? '' : 's'}` +
+                  (b.scoreN ? ` · mean score ${(b.scoreSum / b.scoreN).toFixed(1)}` : '') +
+                  (b.failures ? ` · ${b.failures} failure${b.failures === 1 ? '' : 's'}` : '');
+    return `<div class="aa-hour" style="background:${bg}" title="${label}"></div>`;
+  }).join('');
+
+  // Sparse labels — show every Nth so the strip stays legible. For 7d, every
+  // day; for 30d, every 5th (dates 30d/25d/20d/15d/10d/5d/today).
+  const labels = document.getElementById('aaHourLabels');
+  labels.style.gridTemplateColumns = cols;
+  const stride = nDays <= 7 ? 1 : 5;
+  labels.innerHTML = buckets.map((_, i) => {
+    const offset = (nDays - 1) - i;
+    if (offset % stride === 0 || offset === 0) {
+      return `<div>${shortDateLabel(offset)}</div>`;
+    }
+    return '<div></div>';
+  }).join('');
+}
+
+function cellColor(b, maxCount) {
+  if (b.count === 0) return '#F3F3F3';
+  const intensity = b.count / maxCount;
+  const meanScore = b.scoreN ? b.scoreSum / b.scoreN : null;
+  const failRatio = b.failures / b.count;
+  if (failRatio >= 0.3) return blendToward('#D13212', intensity);
+  if (meanScore != null && meanScore < 7.0) return blendToward('#E8A800', intensity);
+  return blendToward('#14A548', intensity);
+}
+
+/* PT-safe date helpers for the daily strip. */
+function dateKeyPT(dateObj) {
+  // YYYY-MM-DD in PT.
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    timeZone: 'America/Los_Angeles'
+  }).formatToParts(dateObj);
+  const y = parts.find(p => p.type === 'year').value;
+  const m = parts.find(p => p.type === 'month').value;
+  const d = parts.find(p => p.type === 'day').value;
+  return `${y}-${m}-${d}`;
+}
+function dayDiffPT(tsA, tsB) {
+  // Whole-day difference between two timestamps, evaluated in PT. Returns
+  // a non-negative integer where 0 = same PT day, 1 = tsA is one PT day
+  // before tsB, etc. Uses local-midnight in PT as the comparison anchor.
+  const [yA, mA, dA] = dateKeyPT(new Date(tsA)).split('-').map(Number);
+  const [yB, mB, dB] = dateKeyPT(new Date(tsB)).split('-').map(Number);
+  // Compose as UTC-midnight for a clean integer diff — the PT date key is
+  // already locale-correct, so converting back through UTC is safe.
+  const uA = Date.UTC(yA, mA - 1, dA);
+  const uB = Date.UTC(yB, mB - 1, dB);
+  return Math.round((uB - uA) / (24 * 60 * 60 * 1000));
+}
+function labelForDayOffsetPT(offset) {
+  const d = new Date(Date.now() - offset * 24 * 60 * 60 * 1000);
+  return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'America/Los_Angeles' });
+}
+function shortDateLabel(offset) {
+  if (offset === 0) return 'today';
+  const d = new Date(Date.now() - offset * 24 * 60 * 60 * 1000);
+  return d.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric', timeZone: 'America/Los_Angeles' });
+}
+
+function blendToward(hex, t) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  const blend = 0.25 + 0.75 * t;
+  const rr = Math.round(255 - (255 - r) * blend);
+  const gg = Math.round(255 - (255 - g) * blend);
+  const bb = Math.round(255 - (255 - b) * blend);
+  return `rgb(${rr},${gg},${bb})`;
+}
+
+function wireWindowFilters() {
+  document.querySelectorAll('#aaWindowFilters .aa-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#aaWindowFilters .aa-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      STATE.windowDays = parseInt(btn.dataset.w, 10) || 7;
+      renderAll();
+    });
+  });
+}
+
+function wireFilters() {
+  document.querySelectorAll('#aaFilters .aa-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#aaFilters .aa-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      STATE.filter = btn.dataset.f;
+      renderTable();
+    });
+  });
+}
+
+function wireViewModeFilters() {
+  document.querySelectorAll('#aaViewMode .aa-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#aaViewMode .aa-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      STATE.viewMode = btn.dataset.v;
+      renderTable();
+    });
+  });
+}
+
+/* renderTable dispatches by STATE.viewMode. All modes honor the producer
+   filter + window filter; grouped modes roll activities into summary rows
+   that expand on click to show individual members (cap: 50 per group). */
+function renderTable() {
+  const mount = document.getElementById('aaTableMount');
+  const windowed = windowActivities();
+  const filtered = windowed.filter(a => {
+    if (STATE.filter === 'all') return true;
+    if (STATE.filter === 'failures') return a.quality_gate === 'block' || a.status === 'failure';
+    return a.producer_type === STATE.filter;
+  });
+
+  if (!filtered.length) {
+    const msg = windowed.length === 0
+      ? `No activity in the last ${windowLabel()}`
+      : 'No activity matches this producer filter';
+    mount.innerHTML = `<div class="aa-empty">${msg}</div>`;
+    return;
+  }
+
+  // Sort newest first — every view benefits from this.
+  filtered.sort((a, b) => new Date(b.ts) - new Date(a.ts));
+
+  if (STATE.viewMode === 'producer')      renderByGroup(mount, filtered, 'producer');
+  else if (STATE.viewMode === 'subject')  renderByGroup(mount, filtered, 'subject');
+  else if (STATE.viewMode === 'time')     renderByTime(mount, filtered);
+  else                                    renderRunningLog(mount, filtered);
+}
+
+/* Running log — the original flat feed, newest first. */
+function renderRunningLog(mount, activities) {
+  // Soft-cap at 1000 rows to keep the DOM manageable on 30d windows with
+  // full karpathy volume. User can switch to a grouped view for the rest.
+  const SOFT_CAP = 1000;
+  const capped = activities.length > SOFT_CAP ? activities.slice(0, SOFT_CAP) : activities;
+
+  const header = `
+    <table class="aa-table">
+      <thead><tr>
+        <th style="width:80px">Time</th>
+        <th style="width:110px">Producer</th>
+        <th style="width:140px">Subject</th>
+        <th>Action</th>
+        <th style="width:100px">Gate</th>
+        <th class="r" style="width:80px">Score</th>
+        <th class="r" style="width:60px">Duration</th>
+      </tr></thead>
+      <tbody id="aaBody"></tbody>
+    </table>`;
+  mount.innerHTML = header;
+  const tbody = document.getElementById('aaBody');
+
+  tbody.innerHTML = capped.map((a, i) => {
+    const gate = a.quality_gate ? `<span class="aa-gate ${a.quality_gate.replace(/[^a-z-]/gi,'-')}">${a.quality_gate}</span>` : '';
+    const scoreHtml = a.quality_score != null
+      ? `<span class="aa-score-wrap">
+          <span class="aa-score-bar"><span class="aa-score-fill ${scoreCls(a.quality_score)}" style="width:${Math.min(100, a.quality_score * 10)}%"></span></span>
+          <span class="aa-score-num ${scoreCls(a.quality_score)}">${a.quality_score.toFixed(1)}</span>
+         </span>`
+      : `<span class="aa-score-num" style="color:var(--color-text-subtle)">—</span>`;
+    const tsDisplay = STATE.windowDays === 1 ? fmtTimePT(a.ts) : fmtDateTimePT(a.ts);
+    const subjectCell = a.subject
+      ? `<span style="color:var(--color-text-body);font-family:var(--font-mono);font-size:11px">${esc(a.subject)}</span>${a.subject_detail ? `<br><span style="color:var(--color-text-subtle);font-size:10px">${esc(a.subject_detail)}</span>` : ''}`
+      : `<span style="color:var(--color-text-subtle)">—</span>`;
+    const detailRow = `
+      <tr class="aa-detail" id="aa-det-${i}">
+        <td colspan="7">
+          <div class="aa-row-detail">
+            <dl>
+              <dt>Input</dt><dd>${esc(a.input_summary) || '—'}</dd>
+              <dt>Output</dt><dd>${esc(a.output_summary) || '—'}</dd>
+              ${a.downstream ? `<dt>Downstream</dt><dd class="aa-downstream">→ ${esc(a.downstream)}</dd>` : ''}
+              <dt>Full timestamp</dt><dd>${fmtFullPT(a.ts)} PT</dd>
+            </dl>
+          </div>
+        </td>
+      </tr>`;
+    return `
+      <tr class="aa-row" data-idx="${i}" onclick="toggleDetail(${i})">
+        <td><span class="aa-ts">${tsDisplay}</span></td>
+        <td><span class="aa-prod ${a.producer_type}">${esc(a.producer)}</span></td>
+        <td>${subjectCell}</td>
+        <td class="aa-action">${esc(a.action)}</td>
+        <td>${gate}</td>
+        <td class="r">${scoreHtml}</td>
+        <td class="r"><span class="aa-dur">${fmtDur(a.duration_ms)}</span></td>
+      </tr>
+      ${detailRow}`;
+  }).join('');
+
+  if (activities.length > SOFT_CAP) {
+    tbody.insertAdjacentHTML('beforeend',
+      `<tr><td colspan="7" class="aa-empty">Showing ${SOFT_CAP} of ${activities.length} activities — switch to a grouped view to see all.</td></tr>`);
+  }
+}
+
+/* Grouped view by producer or subject. keyFn extracts the group key; the
+   rest of the render is shared. */
+function renderByGroup(mount, activities, mode) {
+  let keyFn, titleCol;
+  if (mode === 'producer') { keyFn = (a => a.producer || '—'); titleCol = 'Producer'; }
+  else if (mode === 'subject') { keyFn = (a => a.subject || '—'); titleCol = 'Subject'; }
+  else /* action — legacy path kept for compat */ { keyFn = (a => a.action || '—'); titleCol = 'Action'; }
+
+  const groups = new Map();
+  for (const a of activities) {
+    const k = keyFn(a);
+    let g = groups.get(k);
+    if (!g) { g = { key: k, members: [], scores: [], latest: 0, gates: {}, producerType: a.producer_type }; groups.set(k, g); }
+    g.members.push(a);
+    if (a.quality_score != null) g.scores.push(a.quality_score);
+    const t = new Date(a.ts).getTime();
+    if (t > g.latest) g.latest = t;
+    const gate = a.quality_gate || 'observation-only';
+    g.gates[gate] = (g.gates[gate] || 0) + 1;
+  }
+  const sorted = Array.from(groups.values()).sort((a, b) => b.members.length - a.members.length);
+  const maxCount = sorted[0]?.members.length || 1;
+
+  const header = `
+    <table class="aa-table">
+      <thead><tr>
+        <th style="width:30px"></th>
+        <th>${titleCol}</th>
+        <th style="width:110px">Count</th>
+        <th style="width:100px">Mean score</th>
+        <th style="width:160px">Gate mix</th>
+        <th style="width:140px">Latest</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>`;
+  mount.innerHTML = header;
+  const tbody = mount.querySelector('tbody');
+
+  tbody.innerHTML = sorted.map((g, gi) => {
+    const mean = g.scores.length ? (g.scores.reduce((s, v) => s + v, 0) / g.scores.length) : null;
+    const meanCls = mean != null ? scoreCls(mean) : '';
+    const meanHtml = mean != null
+      ? `<span class="aa-score-num ${meanCls}">${mean.toFixed(1)}</span> <span style="color:var(--color-text-subtle);font-size:11px">n=${g.scores.length}</span>`
+      : `<span style="color:var(--color-text-subtle)">—</span>`;
+    const volPct = Math.round((g.members.length / maxCount) * 100);
+    const gateMix = renderGateMix(g.gates, g.members.length);
+    const titleHtml = mode === 'producer'
+      ? `<span class="aa-group-title">${esc(g.key)}</span> <span class="aa-prod ${esc(g.producerType || 'system')}" style="font-size:10px">${esc(g.producerType || '')}</span>`
+      : `<span class="aa-group-title">${esc(g.key)}</span>`;
+    const memberRows = renderGroupMembers(g.members, gi);
+    return `
+      <tr class="aa-group-row" data-gi="${gi}" onclick="toggleGroup(${gi})">
+        <td><span class="aa-group-caret">▶</span></td>
+        <td>${titleHtml}</td>
+        <td>
+          <span class="aa-group-bar-wrap">
+            <span class="aa-group-bar"><span class="aa-group-bar-fill" style="width:${volPct}%"></span></span>
+            <span class="aa-group-count">${g.members.length}</span>
+          </span>
+        </td>
+        <td>${meanHtml}</td>
+        <td>${gateMix}</td>
+        <td><span class="aa-ts">${g.latest ? fmtDateTimePT(new Date(g.latest).toISOString()) : '—'}</span></td>
+      </tr>
+      <tr class="aa-group-members" id="aa-grp-${gi}"><td colspan="6">${memberRows}</td></tr>`;
+  }).join('');
+}
+
+/* Grouped view by time — hourly bins for 1d window, daily for 7d/30d.
+   Same shape as producer/action grouping so the renderer reuses most
+   of the structure but re-labels the count column. */
+function renderByTime(mount, activities) {
+  const by1d = STATE.windowDays === 1;
+  const titleCol = by1d ? 'Hour (PT)' : 'Day (PT)';
+  const keyFn = by1d
+    ? (a => String(hourOfDayPT(a.ts)).padStart(2, '0') + ':00')
+    : (a => dateKeyPT(new Date(a.ts)));
+
+  const groups = new Map();
+  for (const a of activities) {
+    const k = keyFn(a);
+    let g = groups.get(k);
+    if (!g) { g = { key: k, members: [], scores: [], latest: 0, gates: {}, producers: new Set() }; groups.set(k, g); }
+    g.members.push(a);
+    if (a.quality_score != null) g.scores.push(a.quality_score);
+    const t = new Date(a.ts).getTime();
+    if (t > g.latest) g.latest = t;
+    const gate = a.quality_gate || 'observation-only';
+    g.gates[gate] = (g.gates[gate] || 0) + 1;
+    if (a.producer) g.producers.add(a.producer);
+  }
+  // For time groups, sort by key descending (newest bin first).
+  const sorted = Array.from(groups.values()).sort((a, b) => b.key.localeCompare(a.key));
+  const maxCount = Math.max(1, ...sorted.map(g => g.members.length));
+
+  const header = `
+    <table class="aa-table">
+      <thead><tr>
+        <th style="width:30px"></th>
+        <th>${titleCol}</th>
+        <th style="width:110px">Count</th>
+        <th style="width:100px">Mean score</th>
+        <th style="width:160px">Gate mix</th>
+        <th style="width:100px">Producers</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>`;
+  mount.innerHTML = header;
+  const tbody = mount.querySelector('tbody');
+
+  tbody.innerHTML = sorted.map((g, gi) => {
+    const mean = g.scores.length ? (g.scores.reduce((s, v) => s + v, 0) / g.scores.length) : null;
+    const meanCls = mean != null ? scoreCls(mean) : '';
+    const meanHtml = mean != null
+      ? `<span class="aa-score-num ${meanCls}">${mean.toFixed(1)}</span> <span style="color:var(--color-text-subtle);font-size:11px">n=${g.scores.length}</span>`
+      : `<span style="color:var(--color-text-subtle)">—</span>`;
+    const volPct = Math.round((g.members.length / maxCount) * 100);
+    const gateMix = renderGateMix(g.gates, g.members.length);
+    const dayLabel = by1d ? g.key + ' PT' : formatDayKey(g.key);
+    const memberRows = renderGroupMembers(g.members, gi + 10000); // offset so ids don't collide
+    return `
+      <tr class="aa-group-row" data-gi="${gi + 10000}" onclick="toggleGroup(${gi + 10000})">
+        <td><span class="aa-group-caret">▶</span></td>
+        <td><span class="aa-group-title">${esc(dayLabel)}</span></td>
+        <td>
+          <span class="aa-group-bar-wrap">
+            <span class="aa-group-bar"><span class="aa-group-bar-fill" style="width:${volPct}%"></span></span>
+            <span class="aa-group-count">${g.members.length}</span>
+          </span>
+        </td>
+        <td>${meanHtml}</td>
+        <td>${gateMix}</td>
+        <td><span class="aa-group-meta">${g.producers.size} distinct</span></td>
+      </tr>
+      <tr class="aa-group-members" id="aa-grp-${gi + 10000}"><td colspan="6">${memberRows}</td></tr>`;
+  }).join('');
+}
+
+function renderGateMix(gates, total) {
+  // Tiny stacked bar showing the composition of gates within a group.
+  const order = ['pass', 'observation-only', 'block', 'human-gate'];
+  const color = { 'pass': '#14A548', 'observation-only': '#C8C8C8', 'block': '#D13212', 'human-gate': '#0066CC' };
+  const segments = [];
+  for (const g of order) {
+    const n = gates[g] || 0;
+    if (!n) continue;
+    const pct = (n / total) * 100;
+    segments.push(`<span style="display:inline-block;height:6px;width:${pct.toFixed(1)}%;background:${color[g]}" title="${g}: ${n}"></span>`);
+  }
+  // Include any other gate keys we didn't enumerate (defensive)
+  for (const g of Object.keys(gates)) {
+    if (order.includes(g)) continue;
+    const n = gates[g]; const pct = (n / total) * 100;
+    segments.push(`<span style="display:inline-block;height:6px;width:${pct.toFixed(1)}%;background:#999" title="${g}: ${n}"></span>`);
+  }
+  const top = order.find(g => gates[g]) || '—';
+  return `<span style="display:inline-flex;flex-direction:column;gap:3px;width:140px;vertical-align:middle">
+    <span style="display:flex;height:6px;border-radius:3px;overflow:hidden;background:#F3F3F3">${segments.join('')}</span>
+    <span style="font-size:11px;color:var(--color-text-subtle);font-variant-numeric:tabular-nums">${formatGateTop(gates, total)}</span>
+  </span>`;
+}
+
+function formatGateTop(gates, total) {
+  const entries = Object.entries(gates).sort((a, b) => b[1] - a[1]);
+  const top = entries[0];
+  if (!top) return '';
+  const pct = Math.round((top[1] / total) * 100);
+  return `${pct}% ${top[0]}` + (entries.length > 1 ? ` · +${entries.length - 1} more` : '');
+}
+
+function renderGroupMembers(members, gid) {
+  // Cap the inline member list so a 500-member karpathy organ doesn't
+  // blow up the DOM. Users who need more can switch to the running log
+  // filtered by that producer/action.
+  const MEMBER_CAP = 50;
+  const slice = members.slice(0, MEMBER_CAP);
+  const rows = slice.map(a => {
+    const gate = a.quality_gate ? `<span class="aa-gate ${a.quality_gate.replace(/[^a-z-]/gi,'-')}">${a.quality_gate}</span>` : '';
+    const score = a.quality_score != null
+      ? `<span class="aa-score-num ${scoreCls(a.quality_score)}">${a.quality_score.toFixed(1)}</span>`
+      : `<span style="color:var(--color-text-subtle)">—</span>`;
+    const ts = STATE.windowDays === 1 ? fmtTimePT(a.ts) : fmtDateTimePT(a.ts);
+    return `
+      <div class="aa-group-member-row">
+        <span class="aa-ts">${ts}</span>
+        <span><span class="aa-prod ${a.producer_type}">${esc(a.producer)}</span></span>
+        <span class="aa-group-member-action" title="${esc(a.action)}">${esc(a.action)}</span>
+        <span>${gate}</span>
+        <span class="r">${score}</span>
+        <span class="r"><span class="aa-dur">${fmtDur(a.duration_ms)}</span></span>
+      </div>`;
+  }).join('');
+  const more = members.length > MEMBER_CAP
+    ? `<div class="aa-group-show-more">Showing ${MEMBER_CAP} of ${members.length}. Switch to Running log and filter producer to see all.</div>`
+    : '';
+  return `<div class="aa-group-members-inner">${rows}${more}</div>`;
+}
+
+function toggleGroup(gi) {
+  const members = document.getElementById('aa-grp-' + gi);
+  const row = document.querySelector('.aa-group-row[data-gi="' + gi + '"]');
+  if (!members || !row) return;
+  members.classList.toggle('open');
+  row.classList.toggle('open');
+}
+
+function formatDayKey(key) {
+  // key is YYYY-MM-DD. Render as "Thu Apr 30".
+  const [y, m, d] = key.split('-').map(Number);
+  const date = new Date(Date.UTC(y, m - 1, d));
+  const wd = date.toLocaleDateString('en-US', { weekday: 'short', timeZone: 'UTC' });
+  const md = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+  return `${wd} ${md}`;
+}
+
+/* Short "M/D HH:MM" formatter for multi-day windows — keeps the column narrow
+   while still carrying the date. Single-day window still uses HH:MM only. */
+function fmtDateTimePT(ts) {
+  const d = new Date(ts);
+  if (Number.isNaN(d.getTime())) return '—';
+  const date = d.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric', timeZone: 'America/Los_Angeles' });
+  const time = d.toLocaleTimeString('en-US', PT_TIME_OPTS);
+  return `${date} ${time}`;
+}
+
+function toggleDetail(i) {
+  const row = document.getElementById('aa-det-' + i);
+  if (row) row.classList.toggle('open');
+}
+
+function esc(s) {
+  if (s === null || s === undefined) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+</script>
+
+<script src="../shared/section-freshness.js" defer></script>
+</body>
+</html>

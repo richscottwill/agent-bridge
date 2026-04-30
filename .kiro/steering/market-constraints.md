@@ -12,24 +12,21 @@ For structured queries from hooks / dashboards / scripts, query `ps.market_const
 
 **Last regenerated:** 2026-04-20 22:48 UTC
 
-## WW
-
-**Governing constraint:** Roll-up of all markets
-**Handoff status:** Team-wide
-**OCI status:** Mixed per market
-**CCP availability:** Mixed per market
-**Next milestone:** See per-market next_milestone
-
-**Latest week (2026-W16):** 17,163 regs · $1,357,626 · CPA $79
-**Next-week projection:** 15,466 regs (CI 10,567–18,013), $1,171,676 cost
-
-**Active impact regimes** (1):
-- -50.0% pause (2026-01-30, hl=1w, src=none_novel): MCS redirect experience paused — was redirecting nearly everyone since 6am ET. Ineligible for registrations 6am-11:22am ET.
-
-*Manual fields updated 2026-04-20 by seed-2026-04-20 (0d ago)*
-
+[38;5;10m> [0m## WW[0m[0m
+[0m[0m
+**Governing constraint:** Roll-up of all markets[0m[0m
+**Handoff status:** Team-wide[0m[0m
+**OCI status:** Mixed per market[0m[0m
+**CCP availability:** Mixed per market[0m[0m
+**Next milestone:** See per-market next_milestone[0m[0m
+[0m[0m
+**Latest week (2026-W16):** 17,163 regs · $1,357,626 · CPA $79[0m[0m
+**Next-week projection:** 15,466 regs (CI 10,567–18,013), $1,171,676 cost[0m[0m
+[0m[0m
+**Active impact regimes** (1):[0m[0m
+- -50.0% pause (2026-01-30, hl=1w, src=none_novel): MCS redirect experience paused — was redirecting nearly everyone since 6am ET. Ineligible for registrations 6am-11:22am ET.[0m[0m
+[0m[0m
 ---
-
 ## US
 
 **Governing constraint:** Efficiency + volume balance — largest market
@@ -77,12 +74,6 @@ For structured queries from hooks / dashboards / scripts, query `ps.market_const
 
 ## MX
 
-**Governing constraint:** 100% ie%CCP — governing constraint
-**Handoff status:** Richard hands-on
-**OCI status:** Not launched
-**CCP availability:** Available
-**Next milestone:** NB budget scaling with Brand ie%CCP headroom
-**Notes:** Brand ~3x YoY (structural growth). Lorena owns local budget; Q2 spend TBD (overdue). Semana Santa = W14 in 2026 (W16 in 2025).
 
 **Latest week (2026-W16):** 510 regs · $27,217 · CPA $53
 **Next-week projection:** 304 regs (CI 231–395), $15,186 cost

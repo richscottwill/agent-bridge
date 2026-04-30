@@ -1,305 +1,96 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Overview &mdash; Body System</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Body System — Kiro Dashboard</title>
 <style>
-:root{--bg:#0f1117;--surface:#14161e;--surface2:#1a1d27;--border:#1e2028;--border2:#2a2d35;
-  --text:#d0d8e0;--text2:#8899aa;--text3:#5a6a7a;--white:#f0f4f8;
-  --accent:#4a9eff;--accent2:#3b82f6;--accent-dim:rgba(74,158,255,0.12);
-  --green:#4ade80;--red:#f87171;--amber:#fbbf24;--purple:#a78bfa}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);padding:0;min-height:100vh;-webkit-font-smoothing:antialiased}
-.page{max-width:1200px;margin:0 auto;padding:24px 20px}
-nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);background:rgba(20,22,30,0.92)}
-.nav-brand{color:var(--white);font-weight:700;font-size:1.02em;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:4px;letter-spacing:1.5px;text-transform:uppercase}
-.nav-link{color:var(--text2);text-decoration:none;padding:14px 18px;font-size:0.92em;font-weight:500;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
-.nav-link:hover{color:var(--text);background:rgba(74,158,255,0.06)}
-.nav-link.active{color:var(--accent);border-bottom-color:var(--accent)}
-.nav-back{color:var(--text3);text-decoration:none;padding:14px 14px 14px 0;font-size:0.87em;font-weight:500;letter-spacing:.3px;margin-right:4px;border-right:1px solid var(--border);transition:color .15s}
-.nav-back:hover{color:var(--accent)}
-h1{color:var(--white);font-size:1.47em;margin-bottom:4px;font-weight:600;letter-spacing:.2px}
-h2{color:var(--text);font-size:1.07em;margin:28px 0 12px;font-weight:600;letter-spacing:.2px}
-.sub{color:var(--text2);font-size:0.9em;margin-bottom:24px;line-height:1.5}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px;margin-bottom:16px}
-.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:16px}
-.card{background:var(--surface);border-radius:8px;padding:18px;border:1px solid var(--border)}
-.card-title{color:var(--text2);font-size:0.84em;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;font-weight:500}
-.chart-box{position:relative;height:280px}
-.chart-box-sm{position:relative;height:200px}
-.stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-.stat{background:var(--surface);border-radius:6px;padding:12px 16px;border:1px solid var(--border);min-width:100px}
-.stat .v{font-size:1.62em;font-weight:700;color:var(--white)}
-.stat .l{font-size:0.74em;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
-table{width:100%;border-collapse:collapse;font-size:0.94em}
-th{text-align:left;color:var(--text3);font-weight:500;padding:8px;border-bottom:1px solid var(--border);font-size:0.97em;text-transform:uppercase;letter-spacing:.5px}
-td{padding:8px;border-bottom:1px solid var(--border)}
-.badge{font-size:0.8em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;display:inline-block;letter-spacing:.3px}
-.b-worsening{background:rgba(248,113,113,0.15);color:var(--red)}.b-stuck{background:rgba(251,191,36,0.15);color:var(--amber)}
-.b-improving{background:rgba(52,211,153,0.15);color:var(--green)}.b-new{background:var(--accent-dim);color:var(--accent)}
-.b-validated{background:rgba(167,139,250,0.15);color:var(--purple)}.b-active{background:var(--accent-dim);color:var(--accent)}
-.b-adopted{background:rgba(52,211,153,0.15);color:var(--green)}.b-reverted{background:rgba(248,113,113,0.15);color:var(--red)}
-.b-queued{background:rgba(90,106,122,0.15);color:var(--text2)}
-.no-data{color:var(--text3);font-style:italic;padding:20px;text-align:center}
-.trainer{font-size:0.9em;color:var(--text3);margin-top:12px;line-height:1.5;padding:10px 0;border-top:1px solid var(--border)}
-.level-track{margin-bottom:10px;padding:14px;background:var(--bg);border-radius:6px;border:1px solid var(--border)}
-.level-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.level-name{font-weight:600;font-size:1.02em;color:var(--white)}
-.level-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;margin:6px 0}
-.level-fill{height:100%;border-radius:2px}
-.lb{font-size:0.74em;padding:3px 10px;border-radius:3px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-.lb-active{background:var(--accent-dim);color:var(--accent)}.lb-next{background:rgba(90,106,122,0.15);color:var(--text2)}
-.lb-queued{background:rgba(90,106,122,0.08);color:var(--text3)}.lb-future{background:rgba(90,106,122,0.05);color:var(--text3)}
-.comp-row{margin-bottom:14px}
-.comp-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-.comp-name{font-weight:600;font-size:0.97em;color:var(--text)}
-.comp-stage{font-size:0.82em;color:var(--text3)}
-.comp-track{display:flex;height:22px;background:var(--surface2);border-radius:4px;overflow:hidden}
-.comp-stop{flex:1;display:flex;align-items:center;justify-content:center;font-size:0.7em;font-weight:600;color:rgba(255,255,255,0.1);border-right:1px solid var(--border)}
-.comp-stop:last-child{border-right:none}
-.comp-stop.filled{color:rgba(255,255,255,0.9)}
-.ch-item{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:0.97em}
-.ch-box{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:0.77em}
-.ch-done{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
-.ch-text{color:var(--text)}.ch-text.done{color:var(--text3);text-decoration:line-through}
-.overview-card{background:var(--surface);border-radius:8px;padding:20px;border:1px solid var(--border);text-decoration:none;display:block;transition:all .2s}
-.overview-card:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(74,158,255,0.08)}
-.oc-title{color:var(--text2);font-weight:600;font-size:0.9em;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px}
-.oc-metric{font-size:1.92em;font-weight:700;margin:8px 0;color:var(--white)}
-.oc-sub{color:var(--text2);font-size:0.9em;line-height:1.5}
-</style></head><body>
-<nav><a href="../index.html" class="nav-back" target="_top">← Command Center</a><span class="nav-brand">Body System</span><a href="index.html" class="nav-link active">Overview</a><a href="growth.html" class="nav-link">Growth</a><a href="willpower.html" class="nav-link">Willpower</a><a href="output.html" class="nav-link">Output</a><a href="autoresearch.html" class="nav-link">Autoresearch</a></nav>
-<div class="page">
-<h1>Body System</h1>
-<div class="sub">A personal operating system for closing the gap between intention and execution. Built on the body metaphor: 11 organs that hold context, make decisions, track patterns, and enforce willpower. Maintained by an autoresearch loop inspired by Karpathy. This is the control panel.</div>
-
-<p style="color:var(--text);font-size:1.02em;line-height:1.7;margin-bottom:24px">
-  The system was created on March 20, 2026 to solve a specific problem: Richard knows what to do but struggles to consistently do it. The Annual Review confirmed it &mdash; "Meets High Bar" overall, but the #1 growth area is visibility. Not skill. Not effort. Visibility: shipping strategic artifacts, sharing work proactively, documenting decisions so the team can reference them without asking. The body system exists to make that behavior automatic rather than effortful.
-</p>
-
-<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:32px">
-  Right now, the system is 0 loop runs old. It has run 2 experiments with a 100% keep rate, saving 4,821 words of context bloat. 35% of Richard's work functions involve an agent in some capacity, though 58% remain fully manual. The willpower streak is at 0 days. The hard thing is the Testing Approach doc for Kate's April 16 meeting. 0 of 10 30-day challenge items are complete.
-</p>
-
-<h2>Where Things Stand</h2>
-<div class="grid">
-  <a href="growth.html" class="overview-card">
-    <div class="oc-title">Autonomy and Competence</div>
-    <div class="oc-metric" style="color:var(--accent)">35% agent-involved</div>
-    <div class="oc-sub">2 functions run without any human input. 13 require a human trigger or approval. 25 are still fully manual &mdash; campaign ops, strategic writing, and admin. The competence model averages 2.7/4 across 6 operating principles, with two still at Stage 2 (conscious incompetence).</div>
-  </a>
-
-  <a href="willpower.html" class="overview-card">
-    <div class="oc-title">Willpower and Patterns</div>
-    <div class="oc-metric" style="color:var(--alert)">0 day streak</div>
-    <div class="oc-sub">The aMCC tracks the gap between knowing and doing. 6 resistance types are active &mdash; visibility avoidance is the root cause. 2 behavioral patterns are worsening, 2 are stuck. The 30-day challenge has 10 items due by 2026-04-13, with 0 complete so far.</div>
-  </a>
-
-  <a href="output.html" class="overview-card">
-    <div class="oc-title">Weekly Output</div>
-    <div class="oc-metric" style="color:var(--alert)">0/10 challenge items</div>
-    <div class="oc-sub">Zero strategic artifacts shipped across all 2 tracked weeks. This is the #1 pattern to break &mdash; the Level 1 gate requires 4 consecutive weeks with a shipped artifact. The Testing Approach doc is the convergence point: a Level 2 artifact that proves Level 1 consistency. Low-leverage work (invoices, manual campaign updates, reactive deep dives) is tracked separately to make the time cost visible.</div>
-  </a>
-
-  <a href="autoresearch.html" class="overview-card">
-    <div class="oc-title">Autoresearch Engine</div>
-    <div class="oc-metric" style="color:var(--accent)">16,094w / 21,000w</div>
-    <div class="oc-sub">The body holds 16,094 words of context across 9 organs, against a 21,000-word budget ceiling. 2 experiments have been adopted, compressing 4,821 words while maintaining accuracy. The loop runs autonomously &mdash; Karpathy governs experiments, the gut enforces budgets, and dual blind evaluation ensures quality.</div>
-  </a>
+html,body{height:100%;overflow:hidden}
+/* Light theme mirrors Performance tab (projection-design-system.css tokens). */
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background:#FFFFFF;
+  color:#161D26;
+  display:flex;
+  flex-direction:column;
+}
+.subnav{
+  background:#FAFAFA;
+  border-bottom:1px solid #E0E0E0;
+  padding:0 24px;
+  display:flex;
+  align-items:center;
+  gap:0;
+  flex-shrink:0;
+}
+.subnav-brand{
+  color:#0F1111;
+  font-weight:700;
+  font-size:0.92em;
+  padding:12px 16px 12px 0;
+  border-right:1px solid #E0E0E0;
+  margin-right:4px;
+  letter-spacing:1.3px;
+  text-transform:uppercase;
+}
+.subnav-link{
+  color:#6B6B6B;
+  text-decoration:none;
+  padding:12px 18px;
+  font-size:0.94em;
+  font-weight:500;
+  border-bottom:2px solid transparent;
+  transition:all .15s;
+  cursor:pointer;
+  letter-spacing:.3px;
+  user-select:none;
+}
+.subnav-link:hover{ color:#161D26; background:rgba(0,102,204,0.06); }
+.subnav-link.active{ color:#0066CC; border-bottom-color:#0066CC; }
+.frame-wrap{flex:1;position:relative;min-height:0}
+.frame-wrap iframe{width:100%;height:100%;border:none;display:block;background:#FFFFFF}
+</style>
+</head>
+<body>
+<div class="subnav">
+  <span class="subnav-brand">Body System</span>
+  <a class="subnav-link active" data-view="overview.html">Overview</a>
+  <a class="subnav-link" data-view="activity.html">Agent Activity</a>
 </div>
-
-<h2>The Five Levels</h2>
-<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:16px">
-  The strategic north star. Each level funds the next &mdash; you do not graduate until the gate is met. Level 1 (consistent artifact output) is the foundation. Level 5 (full agentic orchestration) is the end state. Right now, Levels 1 and 2 are active, with Level 1 struggling. The Testing Approach doc is the artifact that bridges both: it proves Level 1 consistency while advancing Level 2 testing ownership.
-</p>
-<div class="card" id="levelsOverview"></div>
-
-<h2>30-Day Challenge</h2>
-<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:16px">
-  Ten items due by 2026-04-13. A mix of strategic artifacts (Testing Approach doc, AEO POV, AI Max test design), system improvements (campaign link generator, Asana decision), and operational cleanup (invoice reduction, meeting audit, Polaris migration). 0/10 complete. The highest-leverage items are the Testing Approach doc and AI Max test design &mdash; they feed Level 1 and Level 2 simultaneously.
-</p>
-<div class="card" id="challengeOverview"></div>
-
-<h2>Agent Health</h2>
-<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:16px">
-  Runtime telemetry for custom agents: last invoked, invocations over 7d/30d, failure counts. Every agent defines 3-5 quantitative success metrics alongside. Invocation logging (ops.agent_invocations) is being wired in the system-health-dashboard follow-on spec &mdash; counts show zero until the logging shim ships.
-</p>
-<div class="card" id="agentHealthOverview"></div>
-
-<h2>Hook Reliability</h2>
-<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:16px">
-  Recent runs of every backend hook (AM-Backend, EOD, wiki-maintenance, callout pipeline, etc.). Sourced from ops.hook_reliability. Flags hooks with failures in last 7d or last-run &gt; 3 days ago.
-</p>
-<div class="card" id="hookReliabilityOverview"></div>
-
-<h2>Workflow Reliability</h2>
-<p style="color:var(--text2);font-size:0.97em;line-height:1.7;margin-bottom:16px">
-  Multi-step agent workflows (am-backend-parallel-v2, state-file refreshes, etc.). Sourced from ops.workflow_reliability. Shows success rate, average duration, and last run per workflow.
-</p>
-<div class="card" id="workflowReliabilityOverview"></div>
-
+<div class="frame-wrap">
+  <iframe id="bsFrame" src="overview.html"></iframe>
+</div>
 <script>
-fetch('../data/body-system-data.json?'+Date.now()).then(r=>r.json()).then(function(D){
-  var fiveLevels=D.five_levels||[];
-  var streak=D.streak||{};
+(function(){
+  const frame = document.getElementById('bsFrame');
+  const links = document.querySelectorAll('.subnav-link');
+  const STORAGE_KEY = 'body_subtab_view';
+  const CURRENT_VIEWS = ['overview.html', 'activity.html'];
 
-  // Update overview cards with live data
-  var cards=document.querySelectorAll('.overview-card');
-  if(cards[0]){cards[0].querySelector('.oc-metric').textContent=D.body_utilization+'% utilized';cards[0].querySelector('.oc-sub').textContent=D.body_total.toLocaleString()+'w body mass against '+D.body_budget.toLocaleString()+'w budget. '+D.total_experiments+' experiments run, '+D.keep_rate+'% keep rate. '+D.words_saved.toLocaleString()+'w saved through compression.';}
-  if(cards[1]){cards[1].querySelector('.oc-metric').innerHTML='<span style="color:var(--red)">'+streak.current+' days at zero</span>';cards[1].querySelector('.oc-sub').textContent=D.patterns.length+' behavioral patterns tracked. '+D.patterns.filter(function(p){return p.status==='WORSENING'}).length+' worsening. Hard thing: '+streak.hard_thing;}
-  if(cards[2]){var wo=D.weekly_output||[];cards[2].querySelector('.oc-metric').textContent=wo.length?wo[0].tasks_completed+' tasks (latest week)':'No output data';cards[2].querySelector('.oc-sub').textContent=wo.length+' weeks of completion data tracked.';}
-  if(cards[3]){cards[3].querySelector('.oc-metric').textContent=D.body_total.toLocaleString()+'w / '+D.body_budget.toLocaleString()+'w';cards[3].querySelector('.oc-sub').textContent=D.total_runs+' loop runs. '+D.total_experiments+' experiments, '+D.total_kept+' kept ('+D.keep_rate+'%). '+D.over_budget_count+' organ(s) over budget.';}
+  function setActive(view){
+    links.forEach(l => l.classList.toggle('active', l.dataset.view === view));
+    frame.src = view + (view.includes('?') ? '&' : '?') + 't=' + Date.now();
+    try { localStorage.setItem(STORAGE_KEY, view); } catch(e){}
+  }
 
-  // Five Levels
-  (function(){
-    var el=document.getElementById('levelsOverview');
-    var colors={ACTIVE:'#4a9eff',NEXT:'#4b5563',QUEUED:'#374151',FUTURE:'#1f222b'};
-    var fills=[10,15,0,0,0]; // L1 struggling, L2 active
-    var h='';
-    fiveLevels.forEach(function(lv,i){
-      var c=colors[lv.status]||'#1f222b';
-      var bc=lv.status==='ACTIVE'?'lb-active':lv.status==='NEXT'?'lb-next':lv.status==='QUEUED'?'lb-queued':'lb-future';
-      h+='<div class="level-track"><div class="level-header"><span class="level-name">'+lv.level+'. '+lv.name+'</span>'+
-        '<span style="color:var(--text3);font-size:0.92em;margin-right:6px">'+fills[i]+'%</span><span class="lb '+bc+'">'+lv.status+'</span></div>'+
-        '<div class="level-bar"><div class="level-fill" style="width:'+fills[i]+'%;background:'+c+'"></div></div>'+
-        '<div style="font-size:0.85em;color:var(--text3);margin-top:2px">Gate: '+lv.gate+'</div>';
-      if(lv.status==='ACTIVE'||lv.status==='NEXT') h+='<div style="font-size:0.85em;color:var(--accent);margin-top:2px">'+lv.description+'</div>';
-      h+='</div>';
+  let initial = 'overview.html';
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (CURRENT_VIEWS.includes(saved)) initial = saved;
+  } catch(e){}
+  if (initial !== 'overview.html') setActive(initial);
+
+  links.forEach(l => {
+    l.addEventListener('click', (e) => {
+      e.preventDefault();
+      setActive(l.dataset.view);
     });
-    el.innerHTML=h;
-  })();
-
-  // Streak summary instead of 30-day challenge
-  (function(){
-    var el=document.getElementById('challengeOverview');
-    var sh=D.streak_history||[];
-    if(!sh.length){el.innerHTML='<div class="no-data">No streak data</div>';return;}
-    var h='<div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="color:var(--text2);font-size:0.97em">L1 Streak</span><span style="color:var(--red);font-weight:600">'+streak.current+' workdays at zero</span></div>';
-    h+='<div style="font-size:0.97em;color:var(--text2);margin-bottom:12px">Hard thing: <strong style="color:var(--white)">'+streak.hard_thing+'</strong></div>';
-    sh.slice(0,7).forEach(function(s){
-      var color=s.workdays_at_zero>10?'var(--red)':s.workdays_at_zero>5?'var(--amber)':'var(--green)';
-      h+='<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border);font-size:0.94em"><span style="color:var(--text3)">'+s.tracker_date+'</span><span style="color:'+color+';font-weight:600">'+s.workdays_at_zero+'d</span><span style="color:var(--text3);font-size:1.02em;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(s.hard_thing_name||'')+'</span></div>';
-    });
-    el.innerHTML=h;
-  })();
-
-  // Agent Health
-  (function(){
-    var el=document.getElementById('agentHealthOverview');
-    var agents=D.agent_health||[];
-    if(!agents.length){el.innerHTML='<div class="no-data">No agent data — run refresh-body-system.py</div>';return;}
-    // Group by team
-    var teams={};
-    agents.forEach(function(a){
-      if(!teams[a.team])teams[a.team]=[];
-      teams[a.team].push(a);
-    });
-    var totalInvoc7d=agents.reduce(function(s,a){return s+(a.invocations_7d||0)},0);
-    var totalFailures=agents.reduce(function(s,a){return s+(a.failures||0)},0);
-    var h='<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">';
-    h+='<div class="stat"><div class="v">'+agents.length+'</div><div class="l">Agents</div></div>';
-    h+='<div class="stat"><div class="v">'+agents.filter(function(a){return a.has_metrics}).length+'</div><div class="l">With Metrics</div></div>';
-    var totalMetrics=agents.reduce(function(s,a){return s+a.metrics_count},0);
-    h+='<div class="stat"><div class="v">'+totalMetrics+'</div><div class="l">Total Targets</div></div>';
-    h+='<div class="stat"><div class="v">'+totalInvoc7d+'</div><div class="l">Invocations 7d</div></div>';
-    h+='<div class="stat"><div class="v" style="color:'+(totalFailures>0?'var(--red)':'var(--white)')+'">'+totalFailures+'</div><div class="l">Failures All-time</div></div>';
-    h+='</div>';
-    if(totalInvoc7d===0){
-      h+='<div style="background:var(--surface2);border-left:3px solid var(--amber);padding:10px 14px;margin-bottom:14px;font-size:0.87em;color:var(--text2);border-radius:4px">Agent invocation logging is not yet wired — counts will remain zero until the ops.agent_invocations shim ships (see follow-on spec <code style="color:var(--accent)">system-health-dashboard</code>).</div>';
-    }
-    var teamOrder=['WBR Callouts','Wiki Team','Body System','Other'];
-    var teamColors={'WBR Callouts':'var(--accent)','Wiki Team':'var(--purple)','Body System':'var(--green)','Other':'var(--text2)'};
-    teamOrder.forEach(function(team){
-      var ta=teams[team];
-      if(!ta)return;
-      h+='<div style="margin-bottom:16px"><div style="color:'+teamColors[team]+';font-size:0.84em;text-transform:uppercase;letter-spacing:.8px;font-weight:600;margin-bottom:8px">'+team+' ('+ta.length+' agents)</div>';
-      h+='<table><thead><tr><th style="width:130px">Agent</th><th style="width:50px">Metrics</th><th style="width:70px">7d / 30d</th><th style="width:90px">Last Invoked</th><th>Key Targets</th></tr></thead><tbody>';
-      ta.forEach(function(a){
-        var statusBadge=a.has_metrics?'<span class="badge b-active">'+a.metrics_count+'</span>':'<span class="badge b-stuck">0</span>';
-        var invocCell=(a.invocations_7d||0)+' / '+(a.invocations_30d||0);
-        var invocStyle=(a.invocations_7d||0)>0?'color:var(--text)':'color:var(--text3)';
-        if((a.failures||0)>0)invocStyle='color:var(--red)';
-        var lastInvocCell='<span style="color:var(--text3);font-style:italic">never</span>';
-        if(a.last_invoked){
-          var d=new Date(a.last_invoked);
-          var daysAgo=Math.floor((Date.now()-d.getTime())/86400000);
-          var ageColor=daysAgo<7?'var(--green)':daysAgo<30?'var(--amber)':'var(--red)';
-          lastInvocCell='<span style="color:'+ageColor+'">'+(daysAgo===0?'today':daysAgo+'d ago')+'</span>';
-        }
-        var topMetrics=a.metrics.slice(0,2).map(function(m){return '<div style="font-size:0.87em;color:var(--text2);padding:1px 0">• '+m+'</div>'}).join('');
-        if(!topMetrics)topMetrics='<div style="font-size:0.87em;color:var(--text3);font-style:italic">No metrics defined</div>';
-        h+='<tr><td style="color:var(--white);font-weight:500">'+a.name+'</td><td>'+statusBadge+'</td><td style="'+invocStyle+';font-variant-numeric:tabular-nums">'+invocCell+'</td><td>'+lastInvocCell+'</td><td>'+topMetrics+'</td></tr>';
-      });
-      h+='</tbody></table></div>';
-    });
-    el.innerHTML=h;
-  })();
-
-  // Hook Reliability
-  (function(){
-    var el=document.getElementById('hookReliabilityOverview');
-    if(!el)return;
-    var hooks=D.hook_reliability||[];
-    if(!hooks.length){el.innerHTML='<div class="no-data">No hook execution data — run AM/EOD hook at least once</div>';return;}
-    var totalRuns=hooks.reduce(function(s,h){return s+(h.total_runs||0)},0);
-    var totalFails=hooks.reduce(function(s,h){return s+(h.total_failures||0)},0);
-    var staleCount=hooks.filter(function(h){return (h.days_since_last_run||0)>3}).length;
-    var h='<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">';
-    h+='<div class="stat"><div class="v">'+hooks.length+'</div><div class="l">Hooks Tracked</div></div>';
-    h+='<div class="stat"><div class="v">'+totalRuns+'</div><div class="l">Total Runs</div></div>';
-    h+='<div class="stat"><div class="v" style="color:'+(totalFails>0?'var(--red)':'var(--white)')+'">'+totalFails+'</div><div class="l">All-time Failures</div></div>';
-    h+='<div class="stat"><div class="v" style="color:'+(staleCount>0?'var(--amber)':'var(--white)')+'">'+staleCount+'</div><div class="l">Stale &gt;3d</div></div>';
-    h+='</div>';
-    h+='<table><thead><tr><th>Hook</th><th style="width:80px">Runs</th><th style="width:100px">Avg Duration</th><th style="width:80px">Failures</th><th style="width:100px">Last Run</th></tr></thead><tbody>';
-    hooks.forEach(function(hk){
-      var days=hk.days_since_last_run==null?null:parseInt(hk.days_since_last_run,10);
-      var dayLabel='';
-      var dayColor='var(--text3)';
-      if(days===null){dayLabel='—';}
-      else if(days===0){dayLabel='today';dayColor='var(--green)';}
-      else if(days<=3){dayLabel=days+'d ago';dayColor='var(--green)';}
-      else if(days<=7){dayLabel=days+'d ago';dayColor='var(--amber)';}
-      else{dayLabel=days+'d ago';dayColor='var(--red)';}
-      var failColor=(hk.total_failures||0)>0?'var(--red)':'var(--text2)';
-      var dur=hk.avg_duration_s?(hk.avg_duration_s<60?Math.round(hk.avg_duration_s)+'s':Math.round(hk.avg_duration_s/60)+'m '+Math.round(hk.avg_duration_s%60)+'s'):'—';
-      h+='<tr><td style="color:var(--white)">'+hk.hook_name+'</td><td style="font-variant-numeric:tabular-nums">'+(hk.total_runs||0)+'</td><td style="color:var(--text2);font-variant-numeric:tabular-nums">'+dur+'</td><td style="color:'+failColor+';font-variant-numeric:tabular-nums">'+(hk.total_failures||0)+'</td><td style="color:'+dayColor+'">'+dayLabel+'</td></tr>';
-    });
-    h+='</tbody></table>';
-    el.innerHTML=h;
-  })();
-
-  // Workflow Reliability
-  (function(){
-    var el=document.getElementById('workflowReliabilityOverview');
-    if(!el)return;
-    var wfs=D.workflow_reliability||[];
-    if(!wfs.length){el.innerHTML='<div class="no-data">No workflow execution data</div>';return;}
-    var totalRuns=wfs.reduce(function(s,w){return s+(w.total_runs||0)},0);
-    var totalSucc=wfs.reduce(function(s,w){return s+(w.successes||0)},0);
-    var overallRate=totalRuns?Math.round(100*totalSucc/totalRuns):0;
-    var h='<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">';
-    h+='<div class="stat"><div class="v">'+wfs.length+'</div><div class="l">Workflows</div></div>';
-    h+='<div class="stat"><div class="v">'+totalRuns+'</div><div class="l">Total Runs</div></div>';
-    h+='<div class="stat"><div class="v" style="color:'+(overallRate<50?'var(--red)':overallRate<80?'var(--amber)':'var(--green)')+'">'+overallRate+'%</div><div class="l">Success Rate</div></div>';
-    h+='</div>';
-    h+='<table><thead><tr><th>Workflow</th><th style="width:80px">Runs</th><th style="width:110px">Success Rate</th><th style="width:100px">Avg Duration</th><th style="width:100px">Last Run</th></tr></thead><tbody>';
-    wfs.forEach(function(w){
-      var rate=w.success_rate==null?0:w.success_rate;
-      var rateColor=rate>=80?'var(--green)':rate>=50?'var(--amber)':'var(--red)';
-      var dur=w.avg_duration_s?(w.avg_duration_s<60?Math.round(w.avg_duration_s)+'s':Math.round(w.avg_duration_s/60)+'m '+Math.round(w.avg_duration_s%60)+'s'):'—';
-      var days=w.days_since_last_run==null?null:parseInt(w.days_since_last_run,10);
-      var dayLabel=days===null?'—':days===0?'today':days+'d ago';
-      var dayColor=days===null?'var(--text3)':days<=3?'var(--green)':days<=7?'var(--amber)':'var(--red)';
-      h+='<tr><td style="color:var(--white)">'+w.workflow_name+'</td><td style="font-variant-numeric:tabular-nums">'+(w.total_runs||0)+'</td><td style="color:'+rateColor+';font-variant-numeric:tabular-nums">'+rate.toFixed(1)+'%</td><td style="color:var(--text2);font-variant-numeric:tabular-nums">'+dur+'</td><td style="color:'+dayColor+'">'+dayLabel+'</td></tr>';
-    });
-    h+='</tbody></table>';
-    el.innerHTML=h;
-  })();
-
-  document.getElementById('genFooter').textContent='DATA: '+new Date(D.generated).toLocaleString()+' · STANDALONE HTML · CHART.JS VIA CDN · PORTABLE';
-}).catch(function(e){console.error(e);document.getElementById('levelsOverview').innerHTML='<div style="color:#f87171">Failed to load data — run refresh-body-system.py</div>'});
+  });
+})();
 </script>
-<div style="color:var(--text3);font-size:0.74em;text-align:center;margin-top:48px;padding:16px;letter-spacing:.5px" id="genFooter">LOADING DATA&hellip;</div></div>
-<script src="../shared/section-freshness.js" defer></script>
-</body></html>
+</body>
+</html>

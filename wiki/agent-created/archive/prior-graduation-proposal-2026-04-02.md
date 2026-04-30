@@ -20,14 +20,14 @@ Priors accumulate in DuckDB but only influence target selection (UCB scores). Th
 
 Example: eyes×ADD has a 100% keep rate with a positive delta (+0.25). But nothing in the system acts on that knowledge beyond "select eyes×ADD more often." The morning routine doesn't proactively look for facts to inline into Eyes. The budget doesn't adapt.
 
-## The Constraint
-
 Any solution must be:
 - **Portable** — survives a platform move with just text files (no DuckDB dependency for behavior)
 - **Not hardcoded** — no static if-then rules; derived from data
 - **Self-correcting** — new evidence can override old conclusions
 - **Scalable** — works at 14 experiments and at 1,400
 
+
+## The Constraint
 ## Directional Thinking (not a design — Karpathy owns the design)
 
 The priors should periodically "crystallize" into portable text (likely in gut.md) as learned constraints that any agent can read without running a query. The posterior distribution determines confidence. DuckDB is the computation engine; the crystallized text is the portable policy.

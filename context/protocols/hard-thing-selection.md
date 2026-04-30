@@ -47,7 +47,6 @@ All tunable. Defaults are the starting math from Richard's 2026-04-20 decision. 
 ```
 signal_weight(t) = base_weight × 0.5 ^ (age_days / half_life_days)
 topic_score      = Σ signal_weight across channels
-                   × impact_multiplier
                    ÷ (1 + action_recency_penalty)
 ```
 
@@ -81,142 +80,112 @@ Net effect: a freshly-shipped topic is suppressed for about two weeks, then retu
 
 ---
 
-## The scoring join
-
-Runs against `ps_analytics`. Produces the top 3 with incumbent advantage applied.
-
-**Note on CTE shape:** DuckDB rejects lateral joins against a CTE in `FROM x, params` form (raises `Non-inner join on correlated columns not supported`). The protocol reads parameters via scalar subqueries instead — `(SELECT half_life_days FROM p)` etc. This was validated against live `signal_tracker` on 2026-04-20.
-
-```sql
-WITH p AS (
-  SELECT
-    3.5::DOUBLE AS half_life_days,
-    7::INTEGER AS window_days,
-    1.15::DOUBLE AS incumbent_margin,
-    2.0::DOUBLE AS min_score,
-    2::INTEGER AS min_channel_spread,
-    2::INTEGER AS min_unique_authors
-),
-
--- 1. Signals in the rolling window, exponentially decayed to "now"
-decayed_signals AS (
-  SELECT
-    st.topic,
-    st.source_channel,
-    st.source_author,
-    st.signal_strength * POWER(
-      0.5,
-      DATE_DIFF('hour', st.last_seen, CURRENT_TIMESTAMP)::DOUBLE / 24.0 / (SELECT half_life_days FROM p)
-    ) AS decayed_weight,
-    st.last_seen
-  FROM ps_analytics.signals.signal_tracker st
-  WHERE st.is_active = true
-    AND st.last_seen >= CURRENT_TIMESTAMP - ((SELECT window_days FROM p)::VARCHAR || ' days')::INTERVAL
-),
-
--- 2. Aggregate per topic across channels
-topic_agg AS (
-  SELECT
-    topic,
-    SUM(decayed_weight) AS raw_score,
-    COUNT(DISTINCT source_channel) AS channel_spread,
-    COUNT(DISTINCT source_author) FILTER (WHERE source_author != 'Richard Williams') AS unique_non_richard_authors,
-    COUNT(*) AS signal_count,
-    MAX(last_seen) AS most_recent,
-    LIST(DISTINCT source_channel) AS channels,
-    LIST(DISTINCT source_author) AS authors
-  FROM decayed_signals
-  GROUP BY topic
-),
-
--- 3. Impact multiplier from topic-to-level mapping (seeded table)
-topic_levels AS (
-  SELECT topic, level_num, impact_multiplier
-  FROM ps_analytics.main.hard_thing_topic_levels
-),
-
--- 4. Last referenceable artifact per topic
-richard_artifacts AS (
-  SELECT
-    topic,
-    MAX(artifact_date) AS last_artifact_date,
-    DATE_DIFF('day', MAX(artifact_date), CURRENT_DATE) AS days_since_artifact
-  FROM ps_analytics.main.hard_thing_artifact_log
-  GROUP BY topic
-),
-
--- 5. Compose the final score
-scored AS (
-  SELECT
-    t.topic,
-    COALESCE(tl.level_num, 2) AS level_num,
-    COALESCE(tl.impact_multiplier, 1.25) AS impact_multiplier,
-    t.raw_score,
-    t.channel_spread,
-    t.unique_non_richard_authors,
-    t.signal_count,
-    t.most_recent,
-    t.channels,
-    t.authors,
-    COALESCE(ra.days_since_artifact, 999) AS days_since_artifact,
-    -- action_recency_penalty: suppresses topics Richard just shipped on.
-    -- Inverse scale: days_since = 0 → penalty = 14 (max suppression);
-    -- days_since >= 14 → penalty = 0 (no suppression).
-    GREATEST(0, 14 - LEAST(14, COALESCE(ra.days_since_artifact, 14))) AS recency_penalty,
-    -- score = raw × impact ÷ (1 + recency_penalty)
-    (t.raw_score * COALESCE(tl.impact_multiplier, 1.25))
-      / (1 + GREATEST(0, 14 - LEAST(14, COALESCE(ra.days_since_artifact, 14))))
-      AS score,
-    -- Mode classification
-    CASE
-      WHEN COALESCE(ra.days_since_artifact, 999) > 14 AND t.unique_non_richard_authors >= 2
-        THEN 'valuable-and-avoided'
-      WHEN ra.days_since_artifact IS NULL AND t.signal_count >= 3
-        THEN 'valuable-and-latent'
-      ELSE 'other'
-    END AS mode
-  FROM topic_agg t
-  LEFT JOIN topic_levels tl ON tl.topic = t.topic
-  LEFT JOIN richard_artifacts ra ON ra.topic = t.topic
-  WHERE t.raw_score >= (SELECT min_score FROM p)
-    AND t.channel_spread >= (SELECT min_channel_spread FROM p)
-    AND t.unique_non_richard_authors >= (SELECT min_unique_authors FROM p)
-),
-
--- 6. Apply incumbent advantage to the displacement candidate
-ranked AS (
-  SELECT *,
-         ROW_NUMBER() OVER (ORDER BY score DESC) AS proposed_rank
-  FROM scored
-),
-with_stickiness AS (
-  SELECT
-    r.*,
-    LAG(score) OVER (ORDER BY score DESC) AS next_higher_score,
-    LEAD(score) OVER (ORDER BY score DESC) AS next_lower_score
-  FROM ranked r
-)
-
-SELECT
-  proposed_rank AS rank,
-  topic,
-  ROUND(score, 3) AS score,
-  mode,
-  level_num,
-  channel_spread,
-  unique_non_richard_authors,
-  signal_count,
-  days_since_artifact,
-  most_recent,
-  channels,
-  authors
-FROM with_stickiness
-WHERE proposed_rank <= 3
-ORDER BY proposed_rank;
-```
-
----
-
+[38;5;10m> [0m## The scoring join[0m[0m
+[0m[0m
+Runs against `ps_analytics`. Produces top 3 with incumbent advantage. DuckDB rejects lateral joins on CTEs (`Non-inner join on correlated columns not supported`), so parameters use scalar subqueries — validated against live `signal_tracker` on 2026-04-20.[0m[0m
+[0m[0m
+[0m[0m
+WITH p AS ([0m[0m
+ SELECT[0m[0m
+   3.5::DOUBLE AS half_life_days,[0m[0m
+   7::INTEGER AS window_days,[0m[0m
+   1.15::DOUBLE AS incumbent_margin,[0m[0m
+   2.0::DOUBLE AS min_score,[0m[0m
+   2::INTEGER AS min_channel_spread,[0m[0m
+   2::INTEGER AS min_unique_authors[0m[0m
+),[0m[0m
+[0m[0m
+-- 1. Signals in rolling window, exponentially decayed[0m[0m
+decayed_signals AS ([0m[0m
+ SELECT[0m[0m
+   st.topic, st.source_channel, st.source_author,[0m[0m
+   st.signal_strength * POWER([0m[0m
+     0.5,[0m[0m
+     DATE_DIFF('hour', st.last_seen, CURRENT_TIMESTAMP)::DOUBLE / 24.0 / (SELECT half_life_days FROM p)[0m[0m
+   ) AS decayed_weight,[0m[0m
+   st.last_seen[0m[0m
+ FROM ps_analytics.signals.signal_tracker st[0m[0m
+ WHERE st.is_active = true[0m[0m
+   AND st.last_seen >= CURRENT_TIMESTAMP - ((SELECT window_days FROM p)::VARCHAR || ' days')::INTERVAL[0m[0m
+),[0m[0m
+[0m[0m
+-- 2. Aggregate per topic[0m[0m
+topic_agg AS ([0m[0m
+ SELECT[0m[0m
+   topic,[0m[0m
+   SUM(decayed_weight) AS raw_score,[0m[0m
+   COUNT(DISTINCT source_channel) AS channel_spread,[0m[0m
+   COUNT(DISTINCT source_author) FILTER (WHERE source_author != 'Richard Williams') AS unique_non_richard_authors,[0m[0m
+   COUNT(*) AS signal_count,[0m[0m
+   MAX(last_seen) AS most_recent,[0m[0m
+   LIST(DISTINCT source_channel) AS channels,[0m[0m
+   LIST(DISTINCT source_author) AS authors[0m[0m
+ FROM decayed_signals[0m[0m
+ GROUP BY topic[0m[0m
+),[0m[0m
+[0m[0m
+-- 3. Impact multiplier from topic-to-level mapping[0m[0m
+topic_levels AS ([0m[0m
+ SELECT topic, level_num, impact_multiplier[0m[0m
+ FROM ps_analytics.main.hard_thing_topic_levels[0m[0m
+),[0m[0m
+[0m[0m
+-- 4. Last artifact per topic[0m[0m
+richard_artifacts AS ([0m[0m
+ SELECT topic, MAX(artifact_date) AS last_artifact_date,[0m[0m
+   DATE_DIFF('day', MAX(artifact_date), CURRENT_DATE) AS days_since_artifact[0m[0m
+ FROM ps_analytics.main.hard_thing_artifact_log[0m[0m
+ GROUP BY topic[0m[0m
+),[0m[0m
+[0m[0m
+-- 5. Final score: raw × impact ÷ (1 + recency_penalty)[0m[0m
+-- recency_penalty: days_since=0 → 14 (max suppression), ≥14 → 0[0m[0m
+scored AS ([0m[0m
+ SELECT[0m[0m
+   t.topic,[0m[0m
+   COALESCE(tl.level_num, 2) AS level_num,[0m[0m
+   COALESCE(tl.impact_multiplier, 1.25) AS impact_multiplier,[0m[0m
+   t.raw_score, t.channel_spread, t.unique_non_richard_authors,[0m[0m
+   t.signal_count, t.most_recent, t.channels, t.authors,[0m[0m
+   COALESCE(ra.days_since_artifact, 999) AS days_since_artifact,[0m[0m
+   GREATEST(0, 14 - LEAST(14, COALESCE(ra.days_since_artifact, 14))) AS recency_penalty,[0m[0m
+   (t.raw_score * COALESCE(tl.impact_multiplier, 1.25))[0m[0m
+     / (1 + GREATEST(0, 14 - LEAST(14, COALESCE(ra.days_since_artifact, 14))))[0m[0m
+     AS score,[0m[0m
+   CASE[0m[0m
+     WHEN COALESCE(ra.days_since_artifact, 999) > 14 AND t.unique_non_richard_authors >= 2[0m[0m
+       THEN 'valuable-and-avoided'[0m[0m
+     WHEN ra.days_since_artifact IS NULL AND t.signal_count >= 3[0m[0m
+       THEN 'valuable-and-latent'[0m[0m
+     ELSE 'other'[0m[0m
+   END AS mode[0m[0m
+ FROM topic_agg t[0m[0m
+ LEFT JOIN topic_levels tl ON tl.topic = t.topic[0m[0m
+ LEFT JOIN richard_artifacts ra ON ra.topic = t.topic[0m[0m
+ WHERE t.raw_score >= (SELECT min_score FROM p)[0m[0m
+   AND t.channel_spread >= (SELECT min_channel_spread FROM p)[0m[0m
+   AND t.unique_non_richard_authors >= (SELECT min_unique_authors FROM p)[0m[0m
+),[0m[0m
+[0m[0m
+-- 6. Apply incumbent advantage[0m[0m
+ranked AS ([0m[0m
+ SELECT *, ROW_NUMBER() OVER (ORDER BY score DESC) AS proposed_rank[0m[0m
+ FROM scored[0m[0m
+),[0m[0m
+with_stickiness AS ([0m[0m
+ SELECT r.*,[0m[0m
+   LAG(score) OVER (ORDER BY score DESC) AS next_higher_score,[0m[0m
+   LEAD(score) OVER (ORDER BY score DESC) AS next_lower_score[0m[0m
+ FROM ranked r[0m[0m
+)[0m[0m
+[0m[0m
+SELECT[0m[0m
+ proposed_rank AS rank, topic, ROUND(score, 3) AS score, mode,[0m[0m
+ level_num, channel_spread, unique_non_richard_authors, signal_count,[0m[0m
+ days_since_artifact, most_recent, channels, authors[0m[0m
+FROM with_stickiness[0m[0m
+WHERE proposed_rank <= 3[0m[0m
+ORDER BY proposed_rank;[0m[0m
 ## Incumbent advantage (stickiness) step
 
 The scoring join produces a proposed ranking. Incumbent advantage is applied as a second pass against the previous snapshot. Implemented in the refresh job, not in the SQL above:

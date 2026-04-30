@@ -15,12 +15,11 @@ This protocol is loaded by the state file engine when processing market='WW Test
 4. User Experience — Polaris Brand LP, Baloo, in-context registration. Measurement: Weblab APT, pre/post.
 5. Algorithmic Ads — DG CPC, AI Max. Measurement: CPC benchmarks, incrementality.
 
-### Key Thresholds
-- OCI uplift expectation: 18–24% reg uplift (validated in US/UK/DE)
-- Ad Copy confidence: HIGH requires 30+ days and meaningful volume (>500 conversions)
-- Test status coverage target: 100% of active tests with written status
-- Methodology: hypothesis → phased rollout → measurement → scale or stop
-
+[38;5;10m> [0m### Key Thresholds[0m[0m
+- OCI uplift expectation: 18–24% reg uplift (validated in US/UK/DE). For example, a UK campaign that moved from generic to OCI-optimized copy saw a 21% registration uplift over a 45-day test window with 1,200 conversions.[0m[0m
+- Ad Copy confidence: HIGH requires 30+ days and meaningful volume (>500 conversions). For instance, a test running only 18 days with 320 conversions would remain at MEDIUM confidence even if early metrics look strong—extend the window before making scaling decisions.[0m[0m
+- Test status coverage target: 100% of active tests with written status. This means every running experiment must have a current status note (e.g., "Day 22 — trending +14%, awaiting significance") logged in the tracker, with no gaps.[0m[0m
+- Methodology: hypothesis → phased rollout → measurement → scale or stop. Worked example: Hypothesis: "Localised social-proof headlines lift DE regs." Phase 1: run in a single DE ad group at 10% budget for 14 days. Measurement: compare reg rate vs. control. Decision: if uplift ≥18%, scale to full DE budget; if <10%, stop and document learnings.
 ### OCI Status Tracking
 | Market | Status | Notes |
 |---|---|---|
@@ -166,3 +165,6 @@ Before uploading to SharePoint:
 
 ## SharePoint Upload Protocol
 Handled by the State File Engine (Layer 3). See `state-file-engine.md` → Layer 3: SharePoint Durability Sync.
+
+
+**Common failure:** Misinterpreting the scope of this section — it covers only SharePoint Upload Protocol, not adjacent concerns.

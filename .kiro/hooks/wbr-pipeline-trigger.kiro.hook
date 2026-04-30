@@ -1,7 +1,7 @@
 {
   "enabled": true,
   "name": "WBR Pipeline Auto-Trigger",
-  "description": "Detects when a WW Dashboard xlsx is dropped into shared/uploads/sheets/ and runs the full WBR pipeline (ingest → load → score → update priors → project → callout signal → dive update → report).",
+  "description": "Detects when a WW Dashboard xlsx is dropped into shared/uploads/sheets/ and runs the full WBR pipeline (ingest \u2192 load \u2192 score \u2192 update priors \u2192 project \u2192 callout signal \u2192 dive update \u2192 report).",
   "version": "2",
   "when": {
     "type": "fileCreated",
@@ -11,6 +11,6 @@
   },
   "then": {
     "type": "askAgent",
-    "prompt": "A new WW Dashboard xlsx was just dropped into shared/uploads/sheets/. Run the full WBR pipeline on it.\n\nIMPORTANT: Richard is in Pacific Time (America/Los_Angeles). Run `TZ=America/Los_Angeles date` to get the correct local time and derive the current ISO week.\n\nSteps:\n1. Identify the xlsx file that was just created (the one matching *Dashboard*.xlsx in shared/uploads/sheets/)\n2. Detect the week from the filename (e.g. \"W14\" in \"AB SEM WW Dashboard_Y26 W14 vEU5.xlsx\") or auto-detect from the file content\n3. Run the pipeline:\n   ```python\n   import sys; sys.path.insert(0, os.path.expanduser('~/shared/tools'))\n   from prediction.wbr_pipeline import WBRPipeline\n   result = WBRPipeline('<xlsx_path>', week_override='2026-W{NN}').run()\n   ```\n4. After pipeline completes, check the PipelineResult:\n   - If stages_failed is empty: report success with market count, rows loaded, projections written\n   - If stages_failed is not empty: report which stages failed and why\n5. After pipeline, trigger the WBR callout skill by reading the callout-signal.json and running the callout pipeline for all markets listed in the signal\n6. Query ps.market_status and ps.monthly_pacing to include pacing context in the summary\n7. PREDICTION LEDGER: After projections are generated, append the new predictions to ~/shared/wiki/callouts/prediction-ledger.md. Read the projections output at ~/shared/context/active/callouts/projections-w{NN}.md and append a new '## Source: W{NN}' block with three tables: W{NN+1} weekly predictions (Market, Predicted, CI Low, CI High, Brand, NB, Actual, Error%, Score), current month-end predictions, and current quarter predictions. All Actual/Error%/Score columns start as '—'. When the NEXT week's pipeline runs, BEFORE appending new predictions, score the previous week's predictions: read the prior ledger entry, query ps.performance for actuals, fill in Actual/Error%/Score (HIT if within CI, MISS if outside CI but within 20%, SURPRISE if >20% off). This is the feedback loop — the ledger is the agent's reference for prediction accuracy over time.\n\nReport the full pipeline result to Richard."
+    "prompt": "A new WW Dashboard xlsx was just dropped into shared/uploads/sheets/. Run the full WBR pipeline on it.\n\nIMPORTANT: Richard is in Pacific Time (America/Los_Angeles). Run `TZ=America/Los_Angeles date` to get the correct local time and derive the current ISO week.\n\n\nReport the full pipeline result to Richard."
   }
 }

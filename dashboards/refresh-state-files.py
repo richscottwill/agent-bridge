@@ -15,11 +15,67 @@ ROOT = Path.home()
 STATE_DIR = ROOT / "shared" / "wiki" / "state-files"
 OUT = ROOT / "shared" / "dashboards" / "data" / "state-files-data.json"
 
-MARKETS = [
-    {"key": "au", "file": "au-paid-search-state.md", "label": "AU Paid Search"},
-    {"key": "mx", "file": "mx-paid-search-state.md", "label": "MX Paid Search"},
-    {"key": "ww", "file": "ww-testing-state.md", "label": "WW Testing"},
-]
+# Display-ordering hint — keys listed here render in this order; anything else
+# appends alphabetically after. Makes the nav stable even as new markets get
+# added without us having to touch this file — drop a new `*-state.md` into
+# shared/wiki/state-files/ and it shows up automatically.
+MARKET_ORDER_HINT = ["au", "mx", "ww"]
+
+
+def derive_market_key(filename: str) -> str:
+    """Pull the 2-4 char lowercase prefix before the first hyphen.
+
+    au-paid-search-state.md  -> 'au'
+    ww-testing-state.md      -> 'ww'
+    latam-paid-search-state.md -> 'latam'
+    """
+    return filename.split("-", 1)[0].lower()
+
+
+def derive_market_label(frontmatter: dict, key: str) -> str:
+    """Strip the ' — Daily State File' / ' - State File' suffix from the
+    front-matter title if present, otherwise fall back to uppercasing the key.
+    """
+    title = frontmatter.get("title", "")
+    if title:
+        # Common suffixes to strip so the nav reads 'AU Paid Search' not
+        # 'AU Paid Search — Daily State File'
+        for sep in [" — ", " - ", " – "]:
+            if sep in title:
+                title = title.split(sep, 1)[0]
+                break
+        return title.strip()
+    return key.upper()
+
+
+def discover_markets(state_dir: Path) -> list[dict]:
+    """Walk the state-files directory, pick up every `*-state.md`, derive
+    key+label from filename+front-matter. No hand-maintained registry."""
+    found = []
+    for p in sorted(state_dir.glob("*-state.md")):
+        key = derive_market_key(p.name)
+        # Peek at front-matter for label only
+        raw = p.read_text(encoding="utf-8")
+        fm, _ = parse_frontmatter(raw)
+        found.append({
+            "key": key,
+            "file": p.name,
+            "label": derive_market_label(fm, key),
+        })
+
+    # Re-order by hint
+    ordered = []
+    seen = set()
+    for hint_key in MARKET_ORDER_HINT:
+        for m in found:
+            if m["key"] == hint_key:
+                ordered.append(m)
+                seen.add(m["key"])
+                break
+    for m in found:
+        if m["key"] not in seen:
+            ordered.append(m)
+    return ordered
 
 
 def parse_frontmatter(text):
@@ -119,12 +175,24 @@ def parse_market(md_path):
     sections = split_sections(body)
     sections_dict = dict(sections)
 
+    # File mtime = last physical edit to the markdown (most trustworthy
+    # signal of when anything actually changed, vs the frontmatter `updated:`
+    # which depends on a hook remembering to rewrite it).
+    import os
+    mtime_ts = os.path.getmtime(md_path)
+    file_mtime = datetime.fromtimestamp(mtime_ts, tz=timezone.utc).strftime("%Y-%m-%d")
+
     record = {
         "frontmatter": fm,
         "title": fm.get("title", md_path.stem),
         "status": fm.get("status", "UNKNOWN"),
         "owner": fm.get("owner", ""),
-        "updated": fm.get("updated", ""),
+        # `updated` prefers the front-matter (hook-written) but falls back to
+        # file mtime if the hook never stamped one. We also track both values
+        # separately so the dashboard can flag when they diverge.
+        "updated": fm.get("updated", "") or file_mtime,
+        "updated_frontmatter": fm.get("updated", ""),
+        "updated_mtime": file_mtime,
         "data_through": fm.get("data_through", ""),
         "sections": {},
         "tables": {},
@@ -200,21 +268,119 @@ def parse_market(md_path):
     return record
 
 
-def build_comparison(markets_data):
-    """Cross-market consolidation rows for the overview page."""
+def _load_live_data_recency():
+    """Pull the canonical 'how current is our data' signals from the same
+    sources the performance section reads. Returns a dict like:
+
+        {
+          "forecast_generated": "2026-04-29T22:35:42Z",
+          "forecast_last_data_date": "2026-04-19",
+          "forecast_max_week": 16,
+          "projection_generated": "2026-04-30T...",
+        }
+
+    These override the stale frontmatter `updated`/`data_through` values
+    in the comparison + freshness tables so the dashboard never claims
+    the market is frozen at Apr 20 when the underlying data is through
+    Apr 19 / W16.
+    """
+    out = {}
+    forecast_path = Path.home() / "shared" / "dashboards" / "data" / "forecast-data.json"
+    projection_path = Path.home() / "shared" / "dashboards" / "data" / "projection-data.json"
+    if forecast_path.exists():
+        try:
+            fd = json.loads(forecast_path.read_text())
+            out["forecast_generated"] = fd.get("generated")
+            out["forecast_last_data_date"] = fd.get("last_data_date")
+            out["forecast_max_week"] = fd.get("max_week")
+        except Exception as e:
+            print(f"warn: couldn't read forecast-data.json recency: {e}")
+    if projection_path.exists():
+        try:
+            pd = json.loads(projection_path.read_text())
+            out["projection_generated"] = pd.get("generated")
+        except Exception as e:
+            print(f"warn: couldn't read projection-data.json recency: {e}")
+    return out
+
+
+def _fmt_data_through_from_week(year: int, week: int) -> str:
+    """Render a data_through string in the same shape the state files use
+    ('2026 W15 (Apr 6–12)') given a fiscal year + ISO week. Used to overlay
+    the markdown's stale data_through with what forecast-data.json actually
+    carries."""
+    from datetime import date, timedelta
+    # ISO week N → Monday of that week
+    jan4 = date(year, 1, 4)
+    week1_monday = jan4 - timedelta(days=jan4.isoweekday() - 1)
+    monday = week1_monday + timedelta(weeks=week - 1)
+    sunday = monday + timedelta(days=6)
+    month_abbr = monday.strftime("%b")
+    if monday.month == sunday.month:
+        return f"{year} W{week} ({month_abbr} {monday.day}\u2013{sunday.day})"
+    return f"{year} W{week} ({month_abbr} {monday.day}\u2013{sunday.strftime('%b')} {sunday.day})"
+
+
+def build_comparison(markets_data, markets_list, live_recency=None):
+    """Cross-market consolidation rows for the overview page.
+
+    When `live_recency` is provided (forecast-data.json + projection-data.json
+    metadata), `updated` and `data_through` prefer live pipeline values over
+    the markdown frontmatter. This protects the dashboard from looking stale
+    when AM-Backend Step 2E hasn't rewritten the markdowns recently — the
+    numbers the performance section shows are current, so these columns
+    should match.
+    """
+    live_recency = live_recency or {}
+    live_updated = None
+    if live_recency.get("forecast_generated"):
+        try:
+            live_updated = live_recency["forecast_generated"][:10]  # YYYY-MM-DD
+        except Exception:
+            live_updated = None
+    live_data_through = None
+    if live_recency.get("forecast_max_week"):
+        try:
+            live_data_through = _fmt_data_through_from_week(
+                int((live_recency.get("forecast_generated") or "2026-01-01")[:4]),
+                int(live_recency["forecast_max_week"]),
+            )
+        except Exception:
+            live_data_through = None
+
     rows = []
-    for m in MARKETS:
+    for m in markets_list:
         d = markets_data.get(m["key"], {})
         fm = d.get("frontmatter", {})
         # Count sections populated
         secs = d.get("sections", {})
         apps = d.get("appendices", {})
+
+        # Stale-frontmatter detection: if the markdown's `updated:` lags the
+        # live pipeline's last-refresh, surface the gap. >7 days => the
+        # UI should show a stale-ness warning.
+        fm_updated = d.get("updated_frontmatter") or d.get("updated", "")
+        stale_days = None
+        if fm_updated and live_updated:
+            try:
+                d1 = datetime.strptime(fm_updated, "%Y-%m-%d").date()
+                d2 = datetime.strptime(live_updated, "%Y-%m-%d").date()
+                stale_days = (d2 - d1).days
+            except Exception:
+                stale_days = None
+
         rows.append({
             "market": m["label"],
             "key": m["key"],
             "status": d.get("status", "?"),
-            "data_through": d.get("data_through", "?"),
-            "updated": d.get("updated", "?"),
+            # Prefer live pipeline values over markdown frontmatter so the
+            # dashboard tracks performance-section recency even when the
+            # narrative markdowns lag.
+            "data_through": live_data_through or d.get("data_through", "?"),
+            "data_through_frontmatter": d.get("data_through", "?"),
+            "updated": live_updated or d.get("updated", "?"),
+            "updated_frontmatter": fm_updated or "?",
+            "stale_days": stale_days,
             "owner": d.get("owner", "?"),
             "goals": len(secs.get("goals", [])),
             "tenets": len(secs.get("tenets", [])),
@@ -226,14 +392,14 @@ def build_comparison(markets_data):
     return rows
 
 
-def build_schema_intersection(markets_data):
+def build_schema_intersection(markets_data, markets_list):
     """Detect which sections/appendices appear in which markets — surfaces
     consolidation / coverage gaps for the overview page."""
     all_sections = set()
     all_appendices = set()
     per_market_sections = {}
     per_market_appendices = {}
-    for m in MARKETS:
+    for m in markets_list:
         d = markets_data.get(m["key"], {})
         s = set(d.get("sections", {}).keys())
         a = set(d.get("appendices", {}).keys())
@@ -245,11 +411,11 @@ def build_schema_intersection(markets_data):
         "sections": sorted(all_sections),
         "appendices": sorted(all_appendices),
         "section_coverage": {
-            s: [m["key"] for m in MARKETS if s in per_market_sections[m["key"]]]
+            s: [m["key"] for m in markets_list if s in per_market_sections[m["key"]]]
             for s in sorted(all_sections)
         },
         "appendix_coverage": {
-            a: [m["key"] for m in MARKETS if a in per_market_appendices[m["key"]]]
+            a: [m["key"] for m in markets_list if a in per_market_appendices[m["key"]]]
             for a in sorted(all_appendices)
         },
     }
@@ -258,26 +424,37 @@ def build_schema_intersection(markets_data):
 def main():
     OUT.parent.mkdir(parents=True, exist_ok=True)
 
+    markets_list = discover_markets(STATE_DIR)
+    if not markets_list:
+        print(f"warn: no *-state.md files found in {STATE_DIR}")
+
     markets_data = {}
-    for m in MARKETS:
+    for m in markets_list:
         p = STATE_DIR / m["file"]
         if not p.exists():
             print(f"warn: missing {p}")
             continue
         markets_data[m["key"]] = parse_market(p)
 
+    # Pull live recency from the same sources the performance section uses.
+    # These override the frontmatter updated/data_through in the comparison
+    # table so the overview tracks actual pipeline freshness.
+    live_recency = _load_live_data_recency()
+
     output = {
         "generated": datetime.now(timezone.utc).isoformat(),
-        "markets": [m["key"] for m in MARKETS],
-        "labels": {m["key"]: m["label"] for m in MARKETS},
+        "markets": [m["key"] for m in markets_list],
+        "labels": {m["key"]: m["label"] for m in markets_list},
+        "files": {m["key"]: m["file"] for m in markets_list},
+        "live_recency": live_recency,
         "data": markets_data,
-        "comparison": build_comparison(markets_data),
-        "schema": build_schema_intersection(markets_data),
+        "comparison": build_comparison(markets_data, markets_list, live_recency),
+        "schema": build_schema_intersection(markets_data, markets_list),
     }
 
     OUT.write_text(json.dumps(output, indent=2, ensure_ascii=False))
     print(f"wrote {OUT}")
-    print(f"  markets: {len(markets_data)}")
+    print(f"  markets ({len(markets_list)}): {', '.join(m['key'] for m in markets_list)}")
     for k, v in markets_data.items():
         secs = len(v.get("sections", {}))
         apps = len(v.get("appendices", {}))

@@ -2,13 +2,11 @@
 
 # Workflow Observability Protocol
 
+Cross-cutting concern
 
-Cross-cutting concern — every cross-MCP workflow logs execution data to DuckDB.
-
-**MCP Chain:** Any workflow → DuckDB → Slack (on failure/degradation)
+**MCP Chain:** Any workflow → DuckDB → Slack
 
 ---
-
 
 ## Workflow Logging Pattern
 
@@ -25,7 +23,7 @@ WHERE execution_id = '{id}';
 ### On Step Failure
 ```sql
 UPDATE workflow_executions SET steps_failed = steps_failed + 1,
-    error_details = '{\"step_name\": \"{step}\", \"error\": \"{message}\"}'::JSON
+ error_details = '{\"step_name\": \"{step}\", \"error\": \"{message}\"}'::JSON
 WHERE execution_id = '{id}';
 ```
 
@@ -33,8 +31,8 @@ WHERE execution_id = '{id}';
 ### At Workflow End
 ```sql
 UPDATE workflow_executions SET end_time = CURRENT_TIMESTAMP,
-    status = '{completed|partial|failed}',
-    duration_seconds = EPOCH(CURRENT_TIMESTAMP - start_time)
+ status = '{completed|partial|failed}',
+ duration_seconds = EPOCH
 
 #### At Workflow End — Details
 
@@ -45,25 +43,21 @@ WHERE execution_id = '{id}';
 ### At Workflow End — Details
 
 Status rules:
-- `completed` — all steps succeeded
-- `partial` — some steps failed but workflow continued
-- `failed` — critical step failed, workflow aborted
+- `completed`
+- `partial`
+- `failed`
 
 ---
 
 
 ## Registered Workflows
 
-| Workflow Name | MCPs Involved | Trigger |
 |--------------|---------------|---------|
 | `meeting_to_task` | Hedy, Asana, Slack, DuckDB | EOD-1 |
 | `signal_to_task` | Outlook, Slack, Asana, DuckDB | AM-1/AM-2 |
-| `wbr_quip_publish` | SharePoint, DuckDB, Builder, Slack | WBR watcher |
 | `wiki_enriched_publish` | KDS, ARCC, XWiki, SharePoint | Wiki pipeline |
 | `context_enrichment` | KDS, ARCC, DuckDB | EOD-2 |
 | `slack_intelligence` | Slack, KDS, DuckDB | AM-1 |
-
----
 
 
 ## Degradation Detection (EOD-2)
@@ -78,8 +72,8 @@ WHERE success_rate < 80 AND total_runs >= 3;
 
 If results → include in EOD-2 Slack DM:
 ```
-⚠️ Degraded workflows (7-day window):
-• {workflow}: {success_rate}% success ({total_runs} runs). Most common failure: {error}
+⚠️ Degraded workflows:
+• {workflow}: {success_rate}% success. Most common failure: {error}
 ```
 
 ---

@@ -70,7 +70,8 @@ How-To-specific:
 
 
 
-## Common Failures in Any Document Draft
+
+
 
 | Failure | Rule | Fix |
 |---------|------|-----|

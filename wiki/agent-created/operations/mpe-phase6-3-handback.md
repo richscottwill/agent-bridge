@@ -19,7 +19,8 @@ loading transparency + animated arrival.*
 | 6.3.8 Animated arrival sequence | done | `.arrival-*` CSS classes triggered post-render: total fades in, contribution bar lifts in, CI ripples, ~2.4s total; Esc skips |
 | 6.3.9 Handback (this doc) | done | |
 
-## 13 principles — where we stand
+
+
 
 1. **Information hierarchy** ✅ — hero 96pt, context 16pt, KPI strip 20pt mono, chart title absent (implicit from hero)
 2. **Progressive disclosure** ✅ — default view hides Parameters (drawer), Uncertainty (CI band), Counterfactual (dashed line), Narrative (panel); all revealed on click

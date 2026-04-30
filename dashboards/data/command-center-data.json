@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-29T22:42:55.373454+00:00",
+  "generated": "2026-04-30T15:10:51.290708+00:00",
   "wbr_health": {
     "composite_score": 84.5,
     "week": "2026-W17",
@@ -29,13 +29,13 @@
       "desc": "Quick unblocking",
       "count": 4,
       "today_count": 0,
-      "overdue_count": 1,
+      "overdue_count": 2,
       "tasks": [
         {
           "name": "Reply to Lorena \u2014 MX projection $1.3M",
           "due": "2026-04-29",
-          "overdue": false,
-          "days_overdue": 0,
+          "overdue": true,
+          "days_overdue": 1,
           "priority": "Not urgent",
           "project": "ABPS - ABIX",
           "next_action": "Send Lorena Slack/email with $1.3M projection breakdown.",
@@ -65,7 +65,7 @@
           "name": "Paid App PO \u2014 Create Q2 + Amend Google PO to Q2",
           "due": "2026-04-13",
           "overdue": true,
-          "days_overdue": 16,
+          "days_overdue": 17,
           "priority": "Urgent",
           "project": "Paid App",
           "next_action": "Confirm PAM budget with Brandon, then create Q2 PO + amend Google PO to Q2-only.",
@@ -169,7 +169,7 @@
           "name": "WW weblab dial-up (Richard)",
           "due": "2026-04-07",
           "overdue": true,
-          "days_overdue": 22,
+          "days_overdue": 23,
           "priority": "Urgent",
           "project": "WW Testing",
           "next_action": "Coordinate with Alex/Vijeth on weblab dial-up settings for each market before 4/7 go-live",
@@ -179,7 +179,7 @@
           "name": "Email overlay WW rollout/testing",
           "due": "2026-04-18",
           "overdue": true,
-          "days_overdue": 11,
+          "days_overdue": 12,
           "priority": "Urgent",
           "project": "WW Testing",
           "next_action": "Continue email overlay development work",
@@ -341,7 +341,7 @@
           "name": "Paid App",
           "due": "2026-03-31",
           "overdue": true,
-          "days_overdue": 29,
+          "days_overdue": 30,
           "priority": "Urgent",
           "project": "WW Testing",
           "next_action": "Check PAM US/EU spend pacing in tracker, flag underspend to Brandon, confirm FR pivot budget",
@@ -366,7 +366,7 @@
   "overdue_tasks": [
     {
       "name": "Make changes to AU/MX/PAM for the week",
-      "days_overdue": 35,
+      "days_overdue": 36,
       "project": "My Tasks",
       "routine": null,
       "priority": null,
@@ -374,7 +374,7 @@
     },
     {
       "name": "Paid App",
-      "days_overdue": 29,
+      "days_overdue": 30,
       "project": "WW Testing",
       "routine": "Engine Room",
       "priority": "Urgent",
@@ -382,7 +382,7 @@
     },
     {
       "name": "Reply to Brandon \u2014 PAM budget needs assessment",
-      "days_overdue": 23,
+      "days_overdue": 24,
       "project": "My Tasks",
       "routine": null,
       "priority": null,
@@ -390,7 +390,7 @@
     },
     {
       "name": "WW weblab dial-up (Richard)",
-      "days_overdue": 22,
+      "days_overdue": 23,
       "project": "WW Testing",
       "routine": "Core",
       "priority": "Urgent",
@@ -398,23 +398,23 @@
     },
     {
       "name": "Get Enhanced Match details",
-      "days_overdue": 22,
+      "days_overdue": 23,
       "project": "My Tasks",
       "routine": null,
       "priority": null,
       "due": "2026-04-07"
     },
     {
-      "name": "Deep Dive: Finalize market expansion playbook",
-      "days_overdue": 20,
+      "name": "Brandon 1:1: Set up automated monthly ASP confirmation reminders",
+      "days_overdue": 21,
       "project": "My Tasks",
       "routine": null,
       "priority": null,
       "due": "2026-04-09"
     },
     {
-      "name": "Brandon 1:1: Set up automated monthly ASP confirmation reminders",
-      "days_overdue": 20,
+      "name": "Deep Dive: Finalize market expansion playbook",
+      "days_overdue": 21,
       "project": "My Tasks",
       "routine": null,
       "priority": null,
@@ -422,7 +422,7 @@
     },
     {
       "name": "Deep Dive: Add IECCP FAQ to new account playbook",
-      "days_overdue": 20,
+      "days_overdue": 21,
       "project": "My Tasks",
       "routine": null,
       "priority": null,
@@ -430,7 +430,7 @@
     },
     {
       "name": "Monthly: Individual Goals update",
-      "days_overdue": 19,
+      "days_overdue": 20,
       "project": "My Tasks",
       "routine": null,
       "priority": null,
@@ -438,7 +438,7 @@
     },
     {
       "name": "Paid App PO \u2014 Create Q2 + Amend Google PO to Q2",
-      "days_overdue": 16,
+      "days_overdue": 17,
       "project": "Paid App",
       "routine": "Sweep",
       "priority": "Urgent",
@@ -446,7 +446,7 @@
     },
     {
       "name": "DDD walkthrough with team",
-      "days_overdue": 13,
+      "days_overdue": 14,
       "project": "My Tasks",
       "routine": null,
       "priority": null,
@@ -454,23 +454,15 @@
     },
     {
       "name": "Deep Dive: Year-One Optimization one-pager",
-      "days_overdue": 13,
+      "days_overdue": 14,
       "project": "My Tasks",
       "routine": null,
       "priority": null,
       "due": "2026-04-16"
     },
     {
-      "name": "MCS LP Review: Connect with Lorena on paid social/PS synergy",
-      "days_overdue": 12,
-      "project": "MX",
-      "routine": null,
-      "priority": "Urgent",
-      "due": "2026-04-17"
-    },
-    {
       "name": "Sitelink Audit/Update",
-      "days_overdue": 12,
+      "days_overdue": 13,
       "project": "WW Testing",
       "routine": null,
       "priority": "Urgent",
@@ -478,10 +470,18 @@
     },
     {
       "name": "PAM: Flag underspend risk to Brandon",
-      "days_overdue": 12,
+      "days_overdue": 13,
       "project": "My Tasks",
       "routine": null,
       "priority": null,
+      "due": "2026-04-17"
+    },
+    {
+      "name": "MCS LP Review: Connect with Lorena on paid social/PS synergy",
+      "days_overdue": 13,
+      "project": "MX",
+      "routine": null,
+      "priority": "Urgent",
       "due": "2026-04-17"
     }
   ],
@@ -564,12 +564,52 @@
       "op2_target": null
     }
   ],
-  "actionable_emails": [],
+  "actionable_emails": [
+    "**Budget follow-up** from Lorena Alvarez Larrea (lorealea) \u2014 \"Leave our forecast with $1.3M and move $435K to channel tests.\" **Decision confirmed \u2014 thread can close, but acknowledge.** Rcvd Wed 04:57",
+    "**Brandon mentioned you: ps-brand pages updates WW** from Brandon via Asana (brandoxy) \u2014 Brandon set ownership rule: \"this needs to be routed through Richard to avoid confusion and overlapping communi",
+    "**Richard/Adi sync** from Williams, Richard (prichwil) \u2014 sent meeting (your own). No action."
+  ],
   "slack_signals": [],
   "critical_flags": [],
   "tasks_created_today": [],
   "enrichment_proposals": [],
   "commitments": [
+    {
+      "text_hash": "5cfe90a619149c59afec2183b7b2978d",
+      "text": "Confirm AU PS Weekly Update in shared tracker",
+      "source": "Brandon email 26d ago",
+      "person": "Brandon Munday",
+      "said_by": "other",
+      "status": "not_started",
+      "context": "",
+      "quote": "AU PS Weekly Update",
+      "days_old": 26,
+      "overdue": true,
+      "first_seen": "2026-04-04",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "ae05579c1de0c959182c9c9565ff6fa7",
+      "text": "AU LP URL analysis + CPA methodology response",
+      "source": "Lena Zak \u2014 17+ days unreplied per state file",
+      "person": "Lena Zak",
+      "said_by": "other",
+      "status": "not_started",
+      "context": "",
+      "quote": "Response pending since 4/3 draft",
+      "days_old": 17,
+      "overdue": true,
+      "first_seen": "2026-04-13",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
     {
       "text_hash": "b167850d92f7413c4f4d3f21ff47da71",
       "text": "Send Lorena Q2 expected spend for MX PO",
@@ -582,7 +622,169 @@
       "days_old": 11,
       "overdue": true,
       "first_seen": "2026-04-04",
-      "last_seen": "2026-04-29",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "6996330180ea7b0644f53a8b8fb92c52",
+      "text": "Clarify CAT vs MCS email overlay status for Outbound Marketing Goals",
+      "source": "Email 4/17 via Asana + new task 1214351597615320",
+      "person": "Brandon Munday",
+      "said_by": "other",
+      "status": "not_started",
+      "context": "",
+      "quote": "can you clarify the email overlay status? Confused since CAT one is live and MCS one still planned",
+      "days_old": 11,
+      "overdue": true,
+      "first_seen": "2026-04-19",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "c676f6110736a6fd380ef663def7ed5f",
+      "text": "Richard committed to scoping Kiro weekly AU change aggregator before 5/5 handoff",
+      "source": "Loop Richard/Brandon 1:1 Notes 4/21",
+      "person": "Brandon Munday",
+      "said_by": "richard",
+      "status": "not_started",
+      "context": "",
+      "quote": "I'll build the aggregator before 5/5 as the oversight mechanism after handoff",
+      "days_old": 7,
+      "overdue": false,
+      "first_seen": "2026-04-23",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "47c982068bc92b6fc8b7a71d76541674",
+      "text": "Richard to create 1-2 Kiro PS use cases for team + offline solution exploration with Adi",
+      "source": "Loop Richard/Brandon 1:1 Notes 4/21",
+      "person": "Brandon Munday",
+      "said_by": "richard",
+      "status": "not_started",
+      "context": "",
+      "quote": "I'll create use cases beyond callouts and get with Adi on offline wiki/directory",
+      "days_old": 7,
+      "overdue": false,
+      "first_seen": "2026-04-23",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "a2874bd9f69048df155a5c3ef3edaf43",
+      "text": "Richard to Fortune 100 ad copy audit globally + creative site link audit with Lucy's team",
+      "source": "Hedy Weekly Paid Acq 4/21 (session hHqCFkFKep3crudfjW70)",
+      "person": "Team",
+      "said_by": "richard",
+      "status": "not_started",
+      "context": "",
+      "quote": "I'll update Fortune 100 copy and do a broad audit of site links",
+      "days_old": 7,
+      "overdue": false,
+      "first_seen": "2026-04-23",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "8858c0e6d443bedbe4d2465861f86f78",
+      "text": "Richard to send updated MX monthly spend forecast to Addy + initiate R&O reallocation with Lorena",
+      "source": "Hedy Weekly Paid Acq 4/21",
+      "person": "Brandon Munday",
+      "said_by": "richard",
+      "status": "not_started",
+      "context": "",
+      "quote": "I'll send Lorena the reallocation ask and CC Mexico team",
+      "days_old": 7,
+      "overdue": false,
+      "first_seen": "2026-04-23",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "269344293456fe83b96adeccfa40ee4a",
+      "text": "Measure EM impact subtask (F90 LR Enhanced Match)",
+      "source": "Brandon Asana assignment 4/21",
+      "person": "Brandon Munday",
+      "said_by": "other",
+      "status": "not_started",
+      "context": "",
+      "quote": "Measure EM impact subtask",
+      "days_old": 7,
+      "overdue": false,
+      "first_seen": "2026-04-23",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "077081c8f8289a3bb73db7af681a809d",
+      "text": "AB Marketing refmarker mapping audit PoC",
+      "source": "Email 4/21 from Kristine Weber (via Brandon)",
+      "person": "Kristine Weber",
+      "said_by": "other",
+      "status": "not_started",
+      "context": "",
+      "quote": "Need PoC from teams for AB Marketing refmarker mapping audit",
+      "days_old": 7,
+      "overdue": false,
+      "first_seen": "2026-04-23",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "4e6b3f60a1d6205e82f64ad9cfd8de5a",
+      "text": "Prep Kiro PS use cases for Kate AB Marketing AI demo May 29",
+      "source": "Brandon email 4/22 + Asana 1214330286428120",
+      "person": "Brandon Munday",
+      "said_by": "other",
+      "status": "not_started",
+      "context": "",
+      "quote": "FYI, get ready b/c you'll be presenting to Kate and her leaders. Plan to setup run-through.",
+      "days_old": 6,
+      "overdue": false,
+      "first_seen": "2026-04-24",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "4e126c79b8edbb541af5e926e5d1636c",
+      "text": "PO #2D-19910168 approval \u2014 needs FAQ added first",
+      "source": "Brandon email 4/24",
+      "person": "Brandon Munday",
+      "said_by": "other",
+      "status": "not_started",
+      "context": "",
+      "quote": "I'm ready to approve this, but don't see an FAQ. Can you get an FAQ in there and I'll approve?",
+      "days_old": 4,
+      "overdue": false,
+      "first_seen": "2026-04-26",
+      "last_seen": "2026-04-30",
       "completed_date": "",
       "dismissed_date": "",
       "completed_via": null,
@@ -600,7 +802,7 @@
       "days_old": 2,
       "overdue": false,
       "first_seen": "2026-04-13",
-      "last_seen": "2026-04-29",
+      "last_seen": "2026-04-30",
       "completed_date": "",
       "dismissed_date": "",
       "completed_via": null,
@@ -618,7 +820,7 @@
       "days_old": 2,
       "overdue": false,
       "first_seen": "2026-04-13",
-      "last_seen": "2026-04-29",
+      "last_seen": "2026-04-30",
       "completed_date": "",
       "dismissed_date": "",
       "completed_via": null,
@@ -636,7 +838,7 @@
       "days_old": 2,
       "overdue": false,
       "first_seen": "2026-04-13",
-      "last_seen": "2026-04-29",
+      "last_seen": "2026-04-30",
       "completed_date": "",
       "dismissed_date": "",
       "completed_via": null,
@@ -654,7 +856,7 @@
       "days_old": 1,
       "overdue": false,
       "first_seen": "2026-04-14",
-      "last_seen": "2026-04-29",
+      "last_seen": "2026-04-30",
       "completed_date": "",
       "dismissed_date": "",
       "completed_via": null,
@@ -672,13 +874,139 @@
       "days_old": 1,
       "overdue": false,
       "first_seen": "2026-04-14",
-      "last_seen": "2026-04-29",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "42a1216a2b7377fc64d7625db206b779",
+      "text": "Richard committed to adding F90 Legal approval link to Media Tech SIM",
+      "source": "Slack dm-brandon 4/27 23:00 UTC",
+      "person": "Brandon Munday",
+      "said_by": "richard",
+      "status": "not_started",
+      "context": "",
+      "quote": "Yeah I can add the link to the approval now",
+      "days_old": 1,
+      "overdue": false,
+      "first_seen": "2026-04-29",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "0bd553c2e90cf3ecadf24186871b0bcb",
+      "text": "Richard owns alternate measurement design for AU/MX Brand LP test (non-Weblab)",
+      "source": "Slack ab-paid-search-abix 4/27 + Asana 1214330104198712 due 5/6",
+      "person": "Brandon Munday",
+      "said_by": "richard",
+      "status": "not_started",
+      "context": "",
+      "quote": "Test design doc lands by 5/6",
+      "days_old": 1,
+      "overdue": false,
+      "first_seen": "2026-04-29",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "45ecbebdd9fd027229245523d3858476",
+      "text": "Create Intro Guide for VPN Access / BrowserStack",
+      "source": "Slack dm-brandon 4/27 + Asana 1214305906350457",
+      "person": "Brandon Munday",
+      "said_by": "other",
+      "status": "not_started",
+      "context": "",
+      "quote": "hey, do you think you could create a quick Loop doc on what to do with Browserstack access?",
+      "days_old": 1,
+      "overdue": false,
+      "first_seen": "2026-04-29",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "6f35228325eee87706b9f18beaa51f82",
+      "text": "MX duplicate invoice $56K \u2014 status update from Google Ads support",
+      "source": "Email 4/27 18:20 UTC \u2014 Diana escalated to her manager",
+      "person": "Diana De la Fuente",
+      "said_by": "other",
+      "status": "not_started",
+      "context": "",
+      "quote": "Escalating to my manager. Asking for latest status from Google.",
+      "days_old": 1,
+      "overdue": false,
+      "first_seen": "2026-04-29",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "e866a62465140e533ddbffe96196bdb0",
+      "text": "Richard to draft 3-bullet email overlay update into Outbound Marketing Goals.xlsx post-1:1",
+      "source": "New Asana task 1214351597615320 + Brandon email 4/17",
+      "person": "Brandon Munday",
+      "said_by": "richard",
+      "status": "not_started",
+      "context": "",
+      "quote": "I'll drop 3 bullets by EOD 4/28",
+      "days_old": 0,
+      "overdue": false,
+      "first_seen": "2026-04-30",
+      "last_seen": "2026-04-30",
+      "completed_date": "",
+      "dismissed_date": "",
+      "completed_via": null,
+      "completed_message": null
+    },
+    {
+      "text_hash": "295d1ee2361b4b35eb36d1580fa08719",
+      "text": "$535K MX channel-tests reallocation + SPARKLE forecast clarification",
+      "source": "Email 4/28 05:01 UTC (1h old)",
+      "person": "Lorena Alvarez Larrea",
+      "said_by": "other",
+      "status": "not_started",
+      "context": "",
+      "quote": "If we move the $535K into the channel tests item, we could use the budget to launch the discussed ideas, right? Also, is this the forecast without SPARKLE effect?",
+      "days_old": 0,
+      "overdue": false,
+      "first_seen": "2026-04-30",
+      "last_seen": "2026-04-30",
       "completed_date": "",
       "dismissed_date": "",
       "completed_via": null,
       "completed_message": null
     }
   ],
+  "ledger_stats": {
+    "lifetime": {
+      "tracked": 23,
+      "kept": 0,
+      "dismissed": 0,
+      "active": 23,
+      "kept_pct": 0,
+      "first_seen": "2026-04-04"
+    },
+    "rolling_30d": {
+      "tracked": 23,
+      "kept": 0,
+      "dismissed": 0,
+      "active": 23,
+      "kept_pct": 0
+    },
+    "note": "Lifetime counts every commitment ever resolved. Rolling keeps active plus 30 days of closures."
+  },
   "delegate": [
     {
       "task": "MCS landing page optimization P1 \u2014 check if still relevant after Polaris revert",
@@ -691,6 +1019,41 @@
       "to": "Kill or delegate to market lead",
       "reason": "54 days overdue, no activity. Likely obsolete. Either kill or hand to EU market owner.",
       "context": "Engine Room task with no movement. Candidate for removal."
+    },
+    {
+      "task": "AU Google monthly invoice send (Sat 5/2)",
+      "to": "Yun-Kang Chu",
+      "reason": "Post-5/5 AU handoff \u2014 invoice send is operational work Yun already owns for other markets. Transfer ownership effective 5/2."
+    },
+    {
+      "task": "Change log updates for AU (current CSV-driven process)",
+      "to": "Alexis Eck (L6 AU execution partner)",
+      "reason": "After 5/5 handoff, Alexis is the hands-on AU operator. Change log is a regular artifact of the work \u2014 not a separate task. Alexis should own or explicitly flag to Richard."
+    },
+    {
+      "task": "MX ad copy updates (e.g., Fortune 100 audit execution for MX)",
+      "to": "Yun-Kang Chu",
+      "reason": "Yun already supports MX invoicing and has account access. Copy update for MX market is L3 tactical work \u2014 Yun is the natural owner now that Carlos transitioned out."
+    },
+    {
+      "task": "Brand LP US weblab dial-up coordination (with Alex + Vijeth)",
+      "to": "Dwayne Palmer",
+      "reason": "DE/FR weblab authoring finalizing 4/29; US is already live. Dwayne consolidated the feedback. Coordination of Alex items 3/4/5 + Vijeth items 1/2/6 is MCS-owned, not PS-owned."
+    },
+    {
+      "task": "IT Polaris ref tag remediation (Italy P0)",
+      "to": "Alex VanDerStuyf",
+      "reason": "Alex restored legacy Italy template 4/16 and parked Polaris variant. Full remediation + audit methodology for other markets is MCS's continuing work \u2014 Richard only needs the audit result for AU."
+    },
+    {
+      "task": "Sitelink audit (US market)",
+      "to": "Stacey Gu",
+      "reason": "US is Stacey's market. Sitelink audit is tactical execution \u2014 Stacey can audit US sitelinks and share back; Richard applies WW learnings to AU/MX/PAM."
+    },
+    {
+      "task": "OCI Japan benchmarking documentation",
+      "to": "Adi Thakur + Stacey Gu",
+      "reason": "Brandon 4/21 explicitly assigned this pair during Weekly Paid Acq sync. Adi offline \u2192 SharePoint. Richard should not be in the critical path."
     }
   ],
   "communicate": [
@@ -708,6 +1071,38 @@
       "text": "Kate testing doc v5 \u2014 send to Brandon for review before Kate",
       "audience": "Brandon",
       "context": "14d overdue. THE HARD THING. Apply 5 critic fixes, then send to Brandon as gatekeeper before Kate sees it."
+    },
+    {
+      "text": "Biweekly AU cadence locked with Alexis; 5/5 final handoff; no scheduled AU calls after",
+      "context": "Brandon 4/21 Loop 1:1 notes. Needs to be communicated to AU team in today's sync and to Alexis Eck explicitly in 4/29 Brandon review."
+    },
+    {
+      "text": "Andrew Furst is coming in as new Paid App lead; Peter Ocampo will transition off solo ownership once AF is in place",
+      "context": "Brandon 4/21 Loop. Affects PAM reporting continuity and Primeday planning. Team should be aware of transition before Peter asks for Primeday plan."
+    },
+    {
+      "text": "OCI official Flash readout 6/3; WBR first input 5/11. EU benchmarks complete, Japan + Canada in progress",
+      "context": "Hedy Weekly Paid Acq 4/21 (Andrew). All PS team members should align reporting cadence to these dates."
+    },
+    {
+      "text": "Compliance / Polaris rollout: rolled out to US and Japan ONLY currently. Other markets should NOT apply unless Weblab validation confirmed",
+      "context": "Hedy 4/14 Brandon 1:1. Critical for any market teammate considering Polaris rollout \u2014 premature application caused AU -34% non-brand / -20% brand CVR drop."
+    },
+    {
+      "text": "MBAT process change: PO submissions via ticketing (Mercy is POC); no QA required; new submission link live",
+      "context": "Hedy Weekly Paid Acq 4/21. Team members doing POs need to use new process; no more email-based routing."
+    },
+    {
+      "text": "Fortune 100 ad copy audit in flight; Lucy's content team partnering on site link refresh",
+      "context": "Hedy Weekly Paid Acq 4/21. Stacey + Adi need to align on US implementation of updated copy."
+    },
+    {
+      "text": "Kate AB Marketing AI demo May 29 \u2014 Richard + Adi presenting Kiro PS use cases to Kate and her leaders",
+      "context": "Brandon email 4/22. High-visibility Kate-facing. Team should be aware so they can surface use cases / offer to contribute."
+    },
+    {
+      "text": "F90 Enhanced Match / LiveRamp: ~$255K PS ENG budget confirmed. Legal approval pending TPS. Richard owns FAQ drafting for legal",
+      "context": "Hedy + Brandon 4/20 Loop comment. Team should know F90 is still in-flight and to escalate match-rate questions to Richard."
     }
   ],
   "differentiate": [
@@ -728,10 +1123,45 @@
       "why": "Brandon explicitly asked for this. Quick win that demonstrates responsiveness and thoroughness. Clears a visible open item from Brandon's view.",
       "status": "not_started",
       "context": "Brandon commented 2 days ago asking Richard to add details and close it."
+    },
+    {
+      "action": "Ship the Brand LP AU/MX test design doc by 5/6 as a referenceable artifact Brandon can cite in WBRs/MBRs",
+      "why": "Brandon 3/24 coaching: 'proactive sharing of results' + 'earning trust through regimented mechanisms.' Artifact-shipping is what promo criteria calls 'walking on water.' The test design is the next concrete L2 Five Levels artifact.",
+      "status": "not_started"
+    },
+    {
+      "action": "Lead the Kate AB Marketing AI demo with Adi on 5/29 \u2014 present 2-3 Kiro PS use cases, not just the callout pipeline",
+      "why": "Brandon 4/22 email: 'get ready, you'll be presenting to Kate and her leaders.' L8-facing visibility. Brandon's annual review coaching (3/24) said 'one voice should be you' \u2014 this is the opportunity to demonstrate that.",
+      "status": "not_started"
+    },
+    {
+      "action": "Own the $535K MX reallocation conversation end-to-end \u2014 draft the Lorena reply, align Brandon pre-send, initiate R&O release, close by 5/15",
+      "why": "Brandon 4/21 Loop: 'RW's proposal will assume elevation through EOY.' Stakeholder ownership of budget conversations \u2014 not just execution. This is the L5\u2192L7 scope stretch Brandon referenced in 4/6 comp review (10.5% driver).",
+      "status": "not_started"
+    },
+    {
+      "action": "Publish the Kiro weekly AU change aggregator as the handoff oversight mechanism \u2014 teammate-adopted tool = L3 achievement",
+      "why": "Brandon 4/21 Loop commitment. Five Levels L3 metric: one tool adopted. If AU team (Alexis specifically) uses this post-handoff, L3 is satisfied. Device.md recurring-friction test: yes, weekly change review is a repeating pattern.",
+      "status": "not_started"
+    },
+    {
+      "action": "Author the market expansion playbook + Year-One one-pager (both Deep Dive artifacts, both 19/12d overdue)",
+      "why": "Brandon 4/14 coaching: 'leading the team into global initiatives.' Standing artifacts the team can use are the 'walk on water' evidence. Not urgent in a deadline sense, important in a legitimacy sense.",
+      "status": "not_started"
+    },
+    {
+      "action": "Get in front of the ChatGPT Ads industry signal (Beggs 4/27 first-in-wild sighting) \u2014 draft Zero-Click / AEO POV by end of May",
+      "why": "Five Levels L4 (Zero-Click Future). Beggs's sighting is an input signal. If Richard owns the POV narrative before AEO becomes a team priority, he sets the frame. L4 key metric: published POV.",
+      "status": "not_started"
+    },
+    {
+      "action": "Close the 5-week-overdue backlog (Lorena 34d, Brandon 22d PAM, Lena 17d AU LP) \u2014 not one at a time, but a Friday sweep",
+      "why": "Brandon 3/24 coaching feedback: 'regimented mechanisms.' Stale threads are trust leaks. Clearing 3+ high-stakes unreplied threads in one session is the reverse of the avoidance pattern. Habit-loop reward visible in streak.",
+      "status": "not_started"
     }
   ],
   "total_overdue": 15,
   "total_today": 1,
   "total_signals": 0,
-  "total_emails": 0
+  "total_emails": 3
 }

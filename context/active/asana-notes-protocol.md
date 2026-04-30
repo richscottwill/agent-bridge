@@ -52,21 +52,22 @@ GetStatusUpdatesFromObject(object_gid="1212762061512767", object_type="project")
 ```
 If status updates are supported → this is the fallback surface.
 
-### Discovery Instructions — Portfolios (ABIX PS, ABPS)
-**Step 1: Probe portfolio**
-```
-GetAllPortfolios(owner_gid="1212732742544167", workspace_gid="8442528107068")
-```
-This returns portfolio objects. Check if the portfolio object includes `notes` or `html_notes` fields.
-**Step 2: Check portfolio items**
-```
-GetPortfolioItems(portfolio_gid="1212775592612914")  // ABIX PS
-GetPortfolioItems(portfolio_gid="1212762061512816")  // ABPS
-```
-**Step 3: Determine write surface**
-- If portfolios support `html_notes` → write directly via portfolio update API.
-- If portfolios only support status updates → use `CreateStatusUpdateForObject` with the portfolio GID.
-- If neither → create a pinned project or task within the portfolio's first
+[38;5;10m> [0m### Discovery Instructions — Portfolios (ABIX PS, ABPS)[0m[0m
+**Step 1: Probe portfolio**[0m[0m
+[0m[0m
+GetAllPortfolios(owner_gid="1212732742544167", workspace_gid="8442528107068")[0m[0m
+[0m[0m
+This returns portfolio objects. Check if the portfolio object includes `notes` or `html_notes` fields.[0m[0m
+**Step 2: Check portfolio items**[0m[0m
+[0m[0m
+GetPortfolioItems(portfolio_gid="1212775592612914")  // ABIX PS[0m[0m
+GetPortfolioItems(portfolio_gid="1212762061512816")  // ABPS[0m[0m
+[0m[0m
+**Step 3: Determine write surface**[0m[0m
+- If portfolios support `html_notes` → write directly via portfolio update API.[0m[0m
+- If portfolios only support status updates → use `CreateStatusUpdateForObject` with the portfolio GID.[0m[0m
+- If neither → create a pinned project or task within the portfolio's first[0m[0m
+[0m[0m
 **Note:** The Enterprise Asana MCP may not expose a direct "update portfolio description" tool. If `UpdateProject` exists but `UpdatePortfolio` does not, the fallback is status updates on the portfolio object, or writing
 ### Expected Findings (Pre-Discovery Assessment)
 
@@ -146,12 +147,6 @@ These are the draft onboarding documents for AU and MX projects. They follow the
 <tr><td>AU Tests (FY26)</td><td>100%</td><td>0%</td><td>🟡 At risk</td></tr>
 </table>
 
-<h2>Recent Decisions &amp; Changes</h2>
-<ul>
-<li><strong>2026-04-02:</strong> Asana integration activated. AU project now managed via Asana command center. Microsoft To-Do deprecated.</li>
-<li><strong>2026-04-02:</strong> Full task audit completed. 11 Today tasks identified, AU LP switch flagged as 8d overdue.</li>
-<li><strong>2026-Q1:</strong> Brand LP test did not launch in Q1. Decision needed on Q2 rollover vs. alternative test design.</li>
-</ul>
 
 <h2>Key Links</h2>
 <ul>

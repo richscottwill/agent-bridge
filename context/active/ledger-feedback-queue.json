@@ -1,0 +1,25 @@
+{
+  "generated": "2026-04-30T14:54:10.077090+00:00",
+  "pending": [
+    {
+      "text_hash": "9a65f2cdf73e52370b8babb904d26eb4",
+      "text": "Check closed IT tax invoices + get reissued ones",
+      "status": "done",
+      "note": "TEST \u2014 history archive smoke test",
+      "timestamp": "2026-04-30T15:00:00Z",
+      "tags": [
+        "commitment"
+      ],
+      "source": "Asana task",
+      "person": "",
+      "cascade_actions": [
+        {
+          "system": "asana",
+          "action": "complete_task",
+          "search_text": "Check closed IT tax invoices + get reissued ones",
+          "comment": "Marked done from Command Center. TEST \u2014 history archive smoke test"
+        }
+      ]
+    }
+  ]
+}

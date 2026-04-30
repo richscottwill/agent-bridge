@@ -22,12 +22,12 @@
 
 ## Key Projects
 
+
 | Project | GID | Role | Members |
 |---------|-----|------|---------|
 | ABPS - WW Testing & Projects | 1205997667578893 | Owner | Richard, Brandon, Yun, Peter, Stacey, Alex |
 | PS-Owned Global Testing | 1213279426031997 | Member | Brandon (owner), Richard |
 | ABPS - WW Acquisition | 1206011235630048 | Member | TBD |
-
 ## Team Members (for read-only context)
 
 - Brandon (GID: 1208504441751632) — Manager, L7

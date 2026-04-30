@@ -37,10 +37,9 @@ What keeps it from a 9: the phrase "tested and scaled algorithmic ad formats —
 
 ## Shareability — 8/10
 
+
 If Kate forwarded this to a peer on another marketing team or a finance partner asking "what is the Paid Search team doing with algorithmic formats?", the doc would hold up. The question-based headers ("What opportunity do algorithmic ads address?", "How is the team managing AI Max risk?") mean a reader can scan the structure and find the section relevant to their question without reading linearly. The numbers are embedded in narrative rather than dumped in tables — the body tells the story, the appendix provides the receipts.
-
 The cross-functional partners section is the weakest for shareability. It reads as a roster rather than a narrative — five sentences, each following the same "[Name/Team] is doing [thing]" pattern. A reader outside the team does not need to know every name; they need to understand the dependency structure. "Creative is developing video and image assets. Google is advising on AI Max planning. Hydra coordination prevents internal auction overlap." — that is the shareable version. The names belong in a RACI or contact list, not in the narrative.
-
 ## Actionability — 7/10
 
 This is where the doc falls short of the 8 bar. The Demand Gen sections are retrospective — they prove the channel works, and they do it convincingly. The AI Max sections describe a test that is planned but not yet designed in detail. The reader learns that guardrails are needed for cannibalization and budget inflation, and that coordination with Hydra is required. But the doc does not answer the questions a reader would ask next:

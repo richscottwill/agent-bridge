@@ -19,7 +19,8 @@
 
 ---
 
-Outlook MCP gives your agent read access to your email and calendar, and the ability to create drafts (for you to send manually). It pairs well with Slack MCP — together they cover ~90% of PS communication triage.
+- Outlook MCP gives your agent read access to your email and calendar, and the ability to create drafts (for you to send manually).
+- It pairs well with Slack MCP — together they cover ~90% of PS communication triage.
 
 **Hard rule reminder:** Your agent never sends, replies to, or forwards email without manual approval. Drafts only. See `kiro-no-external-write-rule.md`.
 
@@ -68,11 +69,13 @@ First call triggers Midway auth.
 - `email_draft` — safest kept manual, because of the `send: true` parameter footgun
 - `calendar_meeting` — creates meetings that invite other people
 
-If you want email drafts to flow faster, you can add `email_draft` to autoApprove IF you never use `send: true` (always `operation: create` or `update`). Your call, but default is off.
+- If you want email drafts to flow faster, you can add `email_draft` to autoApprove IF you never use `send: true` (always `operation: create` or `update`).
+- Your call, but default is off.
 
 ## Starter prompts
 
-Copy-paste any of these to try Outlook. Rephrase to fit how you naturally ask.
+- Copy-paste any of these to try Outlook.
+- Rephrase to fit how you naturally ask.
 
 **Catch up on your inbox**
 - "Show me unread emails from the last 24 hours. For each: sender, subject, one-line summary, and whether I need to respond today."
@@ -120,10 +123,11 @@ Paid acq folks often collect weekly updates across markets:
 
 ## Search syntax tips
 
-Outlook search is natural language in the `query` field. Useful filters:
+- Outlook search is natural language in the `query` field.
+- Useful filters:.
 
-- `subject:"..."` for exact subject match
-- `from:person@amazon.com` for specific sender
+- `subject: "..."` for exact subject match
+- `from: person@amazon.com` for specific sender
 - `hasattachments:yes`
 - Date filters via `startDate` and `endDate` parameters (YYYY-MM-DD)
 - `folder` parameter: `inbox`, `sentitems`, `drafts`, `archive`, `junkemail`, `deleteditems`
@@ -142,7 +146,8 @@ Outlook search is natural language in the `query` field. Useful filters:
 
 ## Todo / Microsoft To-Do
 
-The `todo_*` tools let your agent manage your personal Microsoft To-Do lists. These ARE safe to auto-approve because they're writes to your own task lists — nobody else sees them.
+- The `todo_*` tools let your agent manage your personal Microsoft To-Do lists.
+- These ARE safe to auto-approve because they're writes to your own task lists — nobody else sees them.
 
 Common pattern:
 

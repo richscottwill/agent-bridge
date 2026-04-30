@@ -42,3 +42,10 @@ audit-reports/
 # NFS silly-rename artifacts (produced when a file is deleted while still open)
 .nfs*
 data/duckdb/.nfs*
+
+# DuckDB write-ahead log (transient runtime state)
+*.duckdb.wal
+
+# Pre-change backup directories (agents create these before large edits)
+*.bak/
+*.pre-*.bak/

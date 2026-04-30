@@ -285,8 +285,36 @@ def apply_ledger_actions():
             # Update DuckDB
             if status == "done":
                 query_duckdb(f"UPDATE main.commitment_ledger SET status='done', completed_date='{today}', dismissed_date=NULL, completed_message='{safe_note}' WHERE text_hash='{safe_hash}'")
+                # Append to history — append-only, survives the 30-day prune.
+                # ON CONFLICT DO NOTHING so repeated refreshes don't double-log.
+                query_duckdb(f"""
+                    INSERT INTO main.commitment_ledger_history (text_hash, text, source, person, said_by, status, note, first_seen, resolved_date, days_to_resolve)
+                    SELECT text_hash, text, source, person, said_by, 'done', '{safe_note}', first_seen, DATE '{today}',
+                           DATE_DIFF('day', first_seen, DATE '{today}')
+                    FROM main.commitment_ledger WHERE text_hash='{safe_hash}'
+                    ON CONFLICT (text_hash, resolved_date, status) DO NOTHING
+                """)
             elif status == "dismissed":
                 query_duckdb(f"UPDATE main.commitment_ledger SET status='dismissed', dismissed_date='{today}', completed_date=NULL, completed_message='{safe_note}' WHERE text_hash='{safe_hash}'")
+                query_duckdb(f"""
+                    INSERT INTO main.commitment_ledger_history (text_hash, text, source, person, said_by, status, note, first_seen, resolved_date, days_to_resolve)
+                    SELECT text_hash, text, source, person, said_by, 'dismissed', '{safe_note}', first_seen, DATE '{today}',
+                           DATE_DIFF('day', first_seen, DATE '{today}')
+                    FROM main.commitment_ledger WHERE text_hash='{safe_hash}'
+                    ON CONFLICT (text_hash, resolved_date, status) DO NOTHING
+                """)
+            elif status == "removed":
+                # "Removed" = "shouldn't have been tracked in the first place"
+                # — excluded from lifetime denominator so it doesn't distort kept %.
+                # Still logged to history with note so the decision is auditable.
+                query_duckdb(f"UPDATE main.commitment_ledger SET status='removed', dismissed_date='{today}', completed_date=NULL, completed_message='{safe_note}' WHERE text_hash='{safe_hash}'")
+                query_duckdb(f"""
+                    INSERT INTO main.commitment_ledger_history (text_hash, text, source, person, said_by, status, note, first_seen, resolved_date, days_to_resolve)
+                    SELECT text_hash, text, source, person, said_by, 'removed', '{safe_note}', first_seen, DATE '{today}',
+                           DATE_DIFF('day', first_seen, DATE '{today}')
+                    FROM main.commitment_ledger WHERE text_hash='{safe_hash}'
+                    ON CONFLICT (text_hash, resolved_date, status) DO NOTHING
+                """)
             elif status == "not_started":
                 query_duckdb(f"UPDATE main.commitment_ledger SET status='not_started', completed_date=NULL, dismissed_date=NULL, completed_message=NULL WHERE text_hash='{safe_hash}'")
             
@@ -419,19 +447,23 @@ def sync_commitments_to_duckdb(intel_commitments):
                 END
         """)
 
-    # 2. Prune entries older than 30 days that are done or dismissed
+    # 2. Prune entries older than 30 days that are done, dismissed, or removed.
+    # History table retains the record (except 'removed' which is pruned from history too,
+    # since the intent is "never tracked this" — no need to clutter reports).
     query_duckdb(f"""
         DELETE FROM main.commitment_ledger
         WHERE last_seen < CURRENT_DATE - INTERVAL 30 DAY
-          AND status IN ('done', 'dismissed')
+          AND status IN ('done', 'dismissed', 'removed')
     """)
 
-    # 3. Read back all commitments (canonical source)
+    # 3. Read back all commitments (canonical source).
+    # Excludes 'removed' — those are noise-removed and shouldn't show anywhere in the UI.
     rows = query_duckdb("""
         SELECT text_hash, text, source, person, said_by, status, context, quote,
                days_old, overdue, first_seen, last_seen, completed_date, dismissed_date,
                completed_via, completed_message
         FROM main.commitment_ledger
+        WHERE status != 'removed'
         ORDER BY
             CASE status WHEN 'not_started' THEN 0 WHEN 'in_progress' THEN 1 WHEN 'done' THEN 2 WHEN 'dismissed' THEN 3 END,
             days_old DESC
@@ -460,6 +492,104 @@ def sync_commitments_to_duckdb(intel_commitments):
 
     print(f"Commitments: {len(commitments)} total ({sum(1 for c in commitments if c['status']=='not_started')} active, {sum(1 for c in commitments if c['status']=='done')} done, {sum(1 for c in commitments if c['status']=='dismissed')} dismissed)")
     return commitments
+
+
+def compute_ledger_stats():
+    """Build lifetime + rolling commitment stats for the Command Center Focus Strip.
+
+    Lifetime numbers come from commitment_ledger_history (append-only, never pruned).
+    Rolling numbers come from commitment_ledger (30-day rolling view).
+    Returning both lets the UI surface 'Promises kept since Apr 4' (lifetime) as
+    the primary metric and '30d rolling' as the sub-line — avoiding the distortion
+    where old wins silently aged off the rolling figure.
+
+    Shape:
+      {
+        "lifetime": {"tracked": N, "kept": N, "dismissed": N, "kept_pct": P, "first_seen": "YYYY-MM-DD"},
+        "rolling_30d": {"tracked": N, "kept": N, "dismissed": N, "active": N, "kept_pct": P},
+        "note": "Lifetime = commitments ever tracked; rolling = active plus 30 days of closures"
+      }
+    """
+    stats = {
+        "lifetime": {"tracked": 0, "kept": 0, "dismissed": 0, "kept_pct": 0, "first_seen": None},
+        "rolling_30d": {"tracked": 0, "kept": 0, "dismissed": 0, "active": 0, "kept_pct": 0},
+        "note": "Lifetime counts every commitment ever resolved. Rolling keeps active plus 30 days of closures.",
+    }
+
+    # Lifetime — history table is the source of truth for ever-resolved commitments.
+    # Active commitments (still in the live table, unresolved) add to the "tracked"
+    # denominator but not to kept/dismissed numerators.
+    # "removed" items are excluded from all denominators — they shouldn't have been
+    # tracked in the first place, so they don't distort the kept % either way.
+    hist_rows = query_duckdb("""
+        SELECT status, COUNT(*) AS n, MIN(resolved_date) AS earliest
+        FROM main.commitment_ledger_history
+        WHERE status != 'removed'
+        GROUP BY status
+    """)
+    lifetime_kept = 0
+    lifetime_dismissed = 0
+    earliest = None
+    for r in hist_rows:
+        if r.get("status") == "done":
+            lifetime_kept = r.get("n", 0) or 0
+            earliest = r.get("earliest") or earliest
+        elif r.get("status") == "dismissed":
+            lifetime_dismissed = r.get("n", 0) or 0
+            earliest = r.get("earliest") or earliest
+
+    # Active unresolved commitments — in the live table, status=not_started or in_progress
+    active_rows = query_duckdb("""
+        SELECT COUNT(*) AS n, MIN(first_seen) AS earliest
+        FROM main.commitment_ledger
+        WHERE status IN ('not_started', 'in_progress')
+    """)
+    active_n = (active_rows[0].get("n", 0) if active_rows else 0) or 0
+    active_earliest = active_rows[0].get("earliest") if active_rows else None
+    # Pick the earliest date across both sources for "first_seen"
+    if active_earliest and (earliest is None or active_earliest < earliest):
+        earliest = active_earliest
+
+    lifetime_tracked = lifetime_kept + lifetime_dismissed + active_n
+    lifetime_resolved = lifetime_kept + lifetime_dismissed
+    stats["lifetime"] = {
+        "tracked": lifetime_tracked,
+        "kept": lifetime_kept,
+        "dismissed": lifetime_dismissed,
+        "active": active_n,
+        "kept_pct": round(lifetime_kept / lifetime_resolved * 100) if lifetime_resolved else 0,
+        "first_seen": str(earliest) if earliest else None,
+    }
+
+    # Rolling 30d — history rows resolved in the last 30 days, plus current active.
+    # Excludes 'removed' — those never counted toward denominators.
+    rolling_rows = query_duckdb("""
+        SELECT status, COUNT(*) AS n
+        FROM main.commitment_ledger_history
+        WHERE resolved_date >= CURRENT_DATE - INTERVAL 30 DAY
+          AND status != 'removed'
+        GROUP BY status
+    """)
+    r_kept = 0
+    r_dismissed = 0
+    for r in rolling_rows:
+        if r.get("status") == "done":
+            r_kept = r.get("n", 0) or 0
+        elif r.get("status") == "dismissed":
+            r_dismissed = r.get("n", 0) or 0
+
+    r_resolved = r_kept + r_dismissed
+    r_tracked = r_kept + r_dismissed + active_n
+    stats["rolling_30d"] = {
+        "tracked": r_tracked,
+        "kept": r_kept,
+        "dismissed": r_dismissed,
+        "active": active_n,
+        "kept_pct": round(r_kept / r_resolved * 100) if r_resolved else 0,
+    }
+
+    print(f"Ledger stats — lifetime: {lifetime_kept}/{lifetime_resolved} kept ({stats['lifetime']['kept_pct']}%), rolling 30d: {r_kept}/{r_resolved} kept ({stats['rolling_30d']['kept_pct']}%)")
+    return stats
 
 
 def get_wbr_health_score():
@@ -670,6 +800,7 @@ def main():
     # First, apply any pending user actions from the dashboard
     apply_ledger_actions()
     commitments = sync_commitments_to_duckdb(am_intel.get("commitments", []))
+    ledger_stats = compute_ledger_stats()
 
     # ── Assemble output ──
     output = {
@@ -685,6 +816,7 @@ def main():
         "tasks_created_today": signal_data.get("tasks_created", []),
         "enrichment_proposals": enrichment_proposals[:10],
         "commitments": commitments,
+        "ledger_stats": ledger_stats,
         "delegate": delegate_items,
         "communicate": communicate_items,
         "differentiate": differentiate_items,

@@ -1,62 +1,65 @@
 {
   "schema_version": "1.0",
-  "last_scan_utc": "2026-04-24T20:13:00Z",
-  "last_scan_pt": "2026-04-24T13:13:00-07:00",
-  "scan_type": "incremental_ooo_b2_monitor",
+  "last_scan_utc": "2026-04-30T12:50:00Z",
+  "last_scan_pt": "2026-04-30T05:50:00-07:00",
+  "scan_type": "am_backend_parallel_v2_b2",
   "tasks_scanned_for_stories": 5,
   "tasks_scanned_gids": [
-    "1213341921686564",
-    "1214128635826241",
-    "1213125740755931",
-    "1213917967984980",
+    "1214330286428120",
+    "1214384590122162",
+    "1214088494080582",
+    "1214044682239817",
     "1213959904341162"
+  ],
+  "tasks_in_backlog": 74,
+  "prioritization_rules_applied": [
+    "Tasks with due_on = today or yesterday",
+    "Tasks with Brandon/Kate as recent commenter — none this window",
+    "Tasks with recent section moves — Kate demo moved WW→NA"
   ],
   "stale_state_flags": [
     {
-      "task_gid": "1213341921686564",
-      "task_name": "Testing Document for Kate",
-      "status": "frozen_since_2026-04-22",
-      "days_overdue": 23,
-      "workdays_at_zero": 22,
-      "hard_thing": true,
-      "most_recent_event_utc": "2026-04-22T01:53:30Z"
-    },
-    {
       "task_gid": "1213959904341162",
       "task_name": "Reply to Brandon — PAM budget needs assessment",
-      "status": "frozen_since_2026-04-22",
-      "days_overdue": 18,
-      "blocks": "Paid App PO (Q2)",
-      "most_recent_event_utc": "2026-04-22T14:21:39Z"
+      "status": "kill_decision_scheduled_5-5",
+      "days_overdue": 23,
+      "most_recent_event_utc": "2026-04-29T16:50:39Z",
+      "note": "Finally scheduled kill-or-revive at Brandon 1:1 Tue 5/5. Progress after 23d drift."
     },
     {
-      "task_gid": "1213125740755931",
-      "task_name": "Email overlay WW rollout/testing",
-      "status": "churned_no_ship",
-      "days_overdue": 6,
-      "most_recent_event_utc": "2026-04-24T07:03:15Z",
-      "note": "Automated due-today event 4/24; no Richard action since 4/22 05:18 UTC"
+      "task_gid": "1214088494080582",
+      "task_name": "Resolve MX duplicate invoice — Diana",
+      "status": "draft_saved_chase_pending",
+      "days_overdue": 2,
+      "most_recent_event_utc": "2026-04-28T13:32:12Z",
+      "note": "Draft saved 4/28 morning. Google ticket 0-1804000040849 open. Needs EOD send today."
     }
   ],
-  "completions_detected_not_yet_in_db": [
-    {"task_gid": "1213917967984980", "name": "Respond to Lena — AU LP URL analysis", "completed_utc": "2026-04-22T18:47:07Z"},
-    {"task_gid": "1214128635826241", "name": "Reply to Dwayne: Brand LP consolidated feedback", "completed_utc": "2026-04-21T00:31:52Z"}
-  ],
+  "completions_detected_not_yet_in_db": [],
   "monday_create_signals": [
     {
-      "source": "slack_ab-paid-search-abix_4-24",
-      "topic": "Polaris Brand LP — switch from Weblab to Google experiment + build AU handoff doc",
+      "source": "slack_dm-brandon_4-29",
+      "topic": "Polaris Br-pages QA consolidation (Richard as sole MCS consolidator)",
       "brandon_direct_ask": true,
-      "matching_asana_task": null
+      "matching_asana_task": null,
+      "action": "Create new Today-priority Sweep task: 'Polaris Br-pages QA consolidation — feedback doc + timeline for team + MCS.' Due 4/30 EOD."
     },
     {
-      "source": "email_brandon_4-24_17-08",
-      "topic": "PO #2D-19910168 FAQ",
-      "brandon_direct_ask": true,
-      "matching_asana_task": null
+      "source": "slack_dm-meganos_4-29",
+      "topic": "AU conversion-data methodology reply to Megan Oshry",
+      "brandon_direct_ask": false,
+      "matching_asana_task": null,
+      "action": "Create Sweep task: 'Reply to Megan Oshry — AU reftag + reg-database query share'. Due 5/1."
+    },
+    {
+      "source": "slack_mpdm-rasanmol_4-29",
+      "topic": "ABMA-11245 SIM intake — PS metrics clarification",
+      "brandon_direct_ask": false,
+      "matching_asana_task": null,
+      "action": "Create Sweep task: 'Reply to Anmol Rastogi — PS metrics list for ABMA-11245'. Due 5/1."
     }
   ],
   "rate_limited": false,
-  "skipped_priority_tasks": 12,
-  "skipped_reason": "Incremental OOO run — full story sweep deferred to next Monday weekly refit"
+  "skipped_priority_tasks": 74,
+  "skipped_reason": "B2 budget — prioritize next run. All high-signal/Brandon-touched/due-this-week tasks captured this cycle."
 }

@@ -1,11 +1,5 @@
-# EOD Phase Tracker
-
-Write ✅ next to each phase AS YOU COMPLETE IT. Write ❌ REASON next to any skipped phase. Read this file before presenting any EOD summary.
-
-Run date: 2026-04-27 (Monday PT) — executed 2026-04-27 21:10 PT
-Started: 21:10 PT 4/27 (first EOD since 4/22 — RW OOO Thu 4/23–Sun 4/26)
-
-## Backend
+# EOD Phase Tracker Write ✅ next to each phase AS YOU COMPLETE IT. Write ❌ REASON next to any skipped phase. Read this file before presenting any EOD summary. Run date: 2026-04-27 (Monday PT) — executed 2026-04-27 21:10 PT
+Started: 21:10 PT 4/27 (first EOD since 4/22 — RW OOO Thu 4/23–Sun 4/26) ## Backend
 - [x] ✅ Phase 1: Meeting ingestion — zero Hedy sessions 4/23-4/27 (RW OOO 4/23-4/26, Mon 4/27 no syncs — calendar only shows OOO/travel events: Minami in SEA, David in PHX, Adi OOO). Outlook email scan captured 3 new Richard-actionable items from threads that landed during OOO: (1) Kate/Kiro May 29 demo — Brandon 4/22 email, Richard+Adi present to Kate and her leaders, Kevin Townsend team coordinates ordering, Brandon wants run-through before; (2) Brand LP AU/MX test setup — Brandon 4/24, Richard owns alternate measurement approach (not weblab) for MCS vs Reg Start comparison, share results with MCS team, Alex/Vijeth finalizing by 4/29; (3) Google Ads MCC SSO migration — Rykier 4/24, due May 4, Richard admin on at least one MCC, need to verify ownership + adopt Permissions tool Teams workflow. Queued for Phase 2 creation.
 - [x] ✅ Phase 2: Asana reconciliation — Asana MCP working. Executed: (1) Daily reset — 2 Today tasks demoted to Urgent (AU max-clicks check, Email overlay) via UpdateTask + DuckDB update. (2) Created 3 new tasks from Phase 1 email signals: Kate May 29 Kiro demo, Brand LP AU/MX test design, Google Ads MCC SSO admin. All tasked with Priority_RW + Routine_RW + Kiro_RW + Next_action_RW. (3) Completions today: 0 (RW first day back). (4) Blocker registry unchanged (MX Auto 32d, Kingpin MX 35d). (5) Daily snapshot written to asana_task_history (87 rows). DuckDB lag: 48h — AM-backend tomorrow will full-sync. Reconciliation JSON written.
 - [x] ✅ Phase 3: Organ cascade + maintenance — compression audit: body 45,269w (same ballpark as 4/22 39,873w baseline — no runaway growth; changelog stays 25% of body). organ_word_counts 15 rows written for 4/27. Workflow observability: zero hook runs 4/23-4/27 (expected — OOO). Communication analytics skipped (not Friday). Context enrichment skipped (fresh copy from AM 4/27 03:33 PT). Enrichment gap note: 82% of tasks missing Kiro_RW, dominated by dormant ABPS AI - Content artifact tasks; live working set has strong coverage. Full organ cascade deferred to AM-backend 4/28 (needs Slack delta + overnight data).

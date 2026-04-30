@@ -32,6 +32,7 @@ This protocol is loaded by the state file engine when processing market='MX'. It
 - Quip tracker: https://quip-amazon.com/K9OYA9mXm7DU
 
 ### Stakeholder Context
+
 - Primary: Lorena Alvarez Larrea (L5) — new relationship since 3/17, be thorough
 - Support: Yun-Kang Chu (L6) — Adobe/Modern Search
 - Manager: Brandon Munday (L7) — approves budget changes

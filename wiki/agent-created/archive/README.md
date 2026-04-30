@@ -21,6 +21,9 @@ Files moved here are no longer actively maintained but kept for reference.
 - 2026-03/ — month-based overflow (legacy, will be sorted)
 - hedy-syncs/ — archived Hedy sync outputs
 
+
+**Common failure:** Skipping this step leads to silent data loss. Always verify the output.
+
 ## When to Archive vs Delete
 
 - Archive: has historical value, might be referenced, contains decisions or results

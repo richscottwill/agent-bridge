@@ -25,13 +25,17 @@ Apply this on top of Richard's natural voice when writing for leadership (L7+), 
 - **Avoid jargon that doesn't serve the reader** — explain terms for broader audiences. Example: "OCI (Offsite Conversion Improvement, a pixel-based attribution tool)" on first use in cross-org docs.
 - **Tables for comparisons, narrative for interpretation.** Always add the "so what" after a table. Example: after a CPA-by-market table, write "MX leads the efficiency gains, suggesting the bid strategy scales best in high-growth markets."
 
+### Continued
 
 
 
 
 
 
-## Amazon Narrative Standard (from internal templates and Doc Ninja reviews) These rules are derived from Amazon's Narrative Template, OP1 Template, MBR Template, Flash Template, Working Backwards Guide, and Doc Ninja-reviewed examples (Dog Safety Awareness, Contra-COGS MBR, Data Migration Narrative, Amazon Search OP1). They are non-negotiable for any document that goes to L7+. 
+
+
+
+
 
 
 
@@ -40,23 +44,42 @@ Apply this on top of Richard's natural voice when writing for leadership (L7+), 
 ### Document Structure & Writing Discipline
 Main body = the argument (results, insights, recommendations, decisions). Appendix = supporting material (data tables, test results, program refreshers, rosters, methodology). Cite appendix by name: "see Appendix: OCI Validated Results." Exception: a decision table that IS the argument stays in the body. Appendix does not count against word count.
 
+
+#### Write in complete
+
+
 Write in complete paragraphs with connective tissue. Bullets only for short enumerations (3-5 items). If a section is mostly bullets, rewrite as prose. Litmus test: remove all bullet formatting. If the content becomes unreadable, the writing relied on formatting, not ideas.
 
-Sentence discipline: target 18-20 words average. One idea per sentence. Split any sentence with more than one verb phrase. Never use em-dashes; replace with commas, periods, colons, or parentheticals.
+
+[38;5;10m> [0m#### Sentence discipline[0m[0m
+[0m[0m
+**Length target**[0m[0m
+Average 18–20 words per sentence. Limit each sentence to one idea.[0m[0m
+[0m[0m
+**Structure rule**[0m[0m
+Split any sentence that contains more than one verb phrase.[0m[0m
+[0m[0m
+**Punctuation rule**[0m[0m
+Never use em-dashes. Replace them with commas, periods, colons, or parentheticals.
+#### Purpose statement in
+
 
 Purpose statement in paragraph one: what you need to happen and why it matters. If asking for a decision, state it up front. Structure: Purpose → Background → Problem/Opportunity → Recommendation → Next Steps.
+
+
+#### **Worked example (before/after):**
+
 
 **Worked example (before/after):**
 Before: "We have been working on several initiatives across AU and MX markets, including OCI rollout, bid strategy optimization, and landing page testing, and we believe these efforts will drive significant improvements..."
 After: "AU and MX CPA improved 18% QoQ through three coordinated changes: OCI rollout (7/10 markets live), automated bid strategies (NB CPA down 29%), and Polaris LP migration. We recommend scaling the OCI playbook to the remaining three markets by W20."
 Why: "After" leads with result, attributes causation, ends with recommendation.
 
+
+#### **Bullet-to-prose conversion:** Turn
+
+
 **Bullet-to-prose conversion:** Turn "Key changes: • Migrated 7/10 to Polaris • Reduced NB CPA 29% • Launched OCI • Paused IT" into connected prose: "Three changes drove this quarter's results. We migrated seven of ten markets to Polaris, reducing NB CPA by 29%. We launched OCI in AU and MX for attribution accuracy. We paused IT after volume dropped below significance."
-
-
-
-
-
 
 
 ### Common Failures in Document Structure

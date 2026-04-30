@@ -31,9 +31,6 @@ Last updated: 2026-04-20 (hard-thing selection redesigned — signal-driven bott
 
 **aMCC vs Trainer distinction:** Trainer says "You've avoided the Testing Approach doc for 3 weeks — that's a pattern." aMCC says "You're opening Slack instead of the doc right now. Stop. Open the doc." One is retrospective analysis; the other is in-the-moment intervention.
 
-
-
-
 ### Worked Example
 **Quick example:** Richard opens My Day, sees "Testing Approach doc" (P0, 19 days stalled), and starts triaging Slack instead. The aMCC fires: "Testing Approach is the hard thing. Slack triage is comfort. Open the doc." That's the intervention — before the avoidance completes.
 
@@ -171,27 +168,15 @@ Within a single session, if the same avoidance pattern repeats:
 
 
 
-### After Intervention
-
-If Richard pushes through and does the hard thing:
-- Log it as a Hard Choice in the streak table
-- Brief acknowledgment: "Good. That's day [X] of the streak." Then move on. No celebration. The work speaks.
-
-If Richard overrides the intervention with a valid reason:
-- Log the reason. Don't reset the streak if the reason is legitimate (blocked, fire drill, manager request).
-- Note: "Override logged. Streak intact. But watch for this becoming a pattern."
-
-If Richard overrides without a valid reason:
-- Log it as an Avoidance. Reset the streak if applicable.
-- Note: "Streak reset. Tomorrow is day 1."
-
-**Worked example — full intervention flow:** Richard opens a session and asks to "check MX search terms" (Engine Room work). The hard thing is sending Testing Approach v5 to Brandon (Core strategic work, unblocked). Level 1 fires: "Hey — sending the Testing Approach to Brandon is the hard thing today." Richard says "I'll do it after the search terms." Level 2 fires: "Second time you've drifted. What's making this hard?" Richard says "Brandon might have feedback I'm not ready for." Level 3: "Open the doc. Hit send. I'll wait." Richard sends it. Log: Hard Choice, streak day 2. "Good. That's day 2."
-
+[38;5;10m> [0m### After Intervention[0m[0m
+[0m[0m
+- **Richard does the hard thing:** Log it as a Hard Choice in the streak table. Brief acknowledgment: "Good. That's day [X] of the streak." Then move on. No celebration. The work speaks.[0m[0m
+- **Richard overrides with a valid reason (blocked, fire drill, manager request):** Log the reason. Don't reset the streak. Note: "Override logged. Streak intact. But watch for this becoming a pattern."[0m[0m
+- **Richard overrides without a valid reason:** Log it as an Avoidance. Reset the streak. Note: "Streak reset. Tomorrow is day 1."[0m[0m
+[0m[0m
+**Worked example — full intervention flow:** Richard opens a session and asks to "check MX search terms" (Engine Room work). The hard thing is sending Testing Approach v5 to Brandon (Core strategic work, unblocked). Level 1 fires: "Hey — sending the Testing Approach to Brandon is the hard thing today." Richard says "I'll do it after the search terms." Level 2 fires: "Second time you've drifted. What's making this hard?" Richard says "Brandon might have feedback I'm not ready for." Level 3: "Open the doc. Hit send. I'll wait." Richard sends it. Log: Hard Choice, streak day 2. "Good. That's day 2."[0m[0m
+[0m[0m
 ---
-
-
-
-
 ## The Hard Thing
 
 At any given time, there is ONE hard thing. Not three. Not a prioritized list. One. The top-3 candidate list exists to make the choice legible — it's not a queue to work through.
@@ -199,20 +184,25 @@ At any given time, there is ONE hard thing. Not three. Not a prioritized list. O
 
 
 
-### How the hard thing is found
-
-The hard thing is not chosen from the task queue. It's discovered from cross-channel signal convergence. Specifically: the gap between "signals converging on a topic" and "Richard has produced a referenceable artifact on that topic."
-
-**Definitions:**
-
-- **Signal** — any mention of a topic in Slack, email, Hedy meetings, or Asana comments. Already tracked in `signals.signal_tracker`.
-- **Referenceable artifact** — output another person or agent can point to. Sent email, published wiki article, merged code, Asana task consumed by someone else, decision logged in a Loop page. NOT "worked on it." NOT "have a draft in the wiki staging folder." NOT "thought about it in a meeting." Referenceable output only.
-- **Window** — 7 days rolling. Older signals decay exponentially but aren't cut off.
-- **Top 3** — the three highest-scoring topics at any moment. Surfaced continuously, not batched.
-
-
-
-
+[38;5;10m> [0m### How the hard thing is found[0m[0m
+[0m[0m
+#### Discovery process[0m[0m
+[0m[0m
+The hard thing is not chosen from the task queue. It's discovered from cross-channel signal convergence. Specifically: the gap between "signals converging on a topic" and "Richard has produced a referenceable artifact on that topic."[0m[0m
+[0m[0m
+#### Definitions[0m[0m
+[0m[0m
+##### Signal[0m[0m
+Any mention of a topic in Slack, email, Hedy meetings, or Asana comments. Already tracked in `signals.signal_tracker`.[0m[0m
+[0m[0m
+##### Referenceable artifact[0m[0m
+Output another person or agent can point to. Sent email, published wiki article, merged code, Asana task consumed by someone else, decision logged in a Loop page. NOT "worked on it." NOT "have a draft in the wiki staging folder." NOT "thought about it in a meeting." Referenceable output only.[0m[0m
+[0m[0m
+##### Window[0m[0m
+7 days rolling. Older signals decay exponentially but aren't cut off.[0m[0m
+[0m[0m
+##### Top 3[0m[0m
+The three highest-scoring topics at any moment. Surfaced continuously, not batched.
 ### Two modes a topic can qualify under
 
 Both produce a valid hard thing. The system doesn't prefer one over the other.
@@ -269,6 +259,8 @@ A candidate is retired from the top-3 when a referenceable artifact is produced.
 
 
 
+
+**Common failure:** Misinterpreting the scope of this section — it covers only Completion threshold, not adjacent concerns.
 ### Stickiness (incumbent advantage)
 
 Challenger must beat current holder by `incumbent_margin × score` (default 1.15×) to displace. Prevents daily churn. `hard_thing_candidates.incumbent_since` tracks tenure. If #1 held 7+ days with no artifact → escalate to rw-trainer (stuck pattern).
@@ -396,11 +388,6 @@ Sometimes the hard thing isn't "write the doc" — it's "send the doc to Brandon
 - A scope/ownership question is unresolved and Richard is "waiting to see what happens" instead of positioning
 - A meeting with senior stakeholders is approaching and Richard hasn't pre-sold his position
 
-**Intervention framing for political hard things:**
-- Level 1: "The doc is done. The hard part now is hitting send and asking Brandon what this means for your path."
-- Level 2: "You're avoiding the career conversation, not the work. Name what makes it uncomfortable."
-- Level 3: "You know the polite fiction: 'My career is very important to me. I need to understand how important it is to Amazon.' You don't need those exact words. But you need SOME version of that ask. When?"
-- Level 4: "The quiet worker who waits gets passed over by the pushy one who asks. That's not cynicism — that's how every promotion committee works. Are you the one who asks or the one who waits?"
 
 
 

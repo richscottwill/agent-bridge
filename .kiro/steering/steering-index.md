@@ -2,10 +2,11 @@
 inclusion: always
 ---
 
-# Steering File Index
-
-*Annotated directory of manual-inclusion steering files. Load the named file when the trigger matches your task. This index is always-on so agents know what's available without loading every file's contents. Adopted 2026-04-22 after blind discovery test (Var2 won 228/250 vs baseline 154/250).*
-
+[38;5;10m> [0m# Steering File Index[0m[0m
+[0m[0m
+*Annotated directory of manual-inclusion steering files. Load the named file when the trigger matches your task. This index is always-on so agents know what's available without loading every file's contents. Adopted 2026-04-22 after blind discovery test (Var2 won 228/250 vs baseline 154/250).*[0m[0m
+[0m[0m
+**Example:** If a user asks "help me write a PR description," the agent scans this index, matches the trigger phrase "pull request" or "PR description," and loads only the `pr-writing.md` steering file—rather than loading all steering files into context. This keeps token usage low while ensuring the right guidance is applied.
 ## Writing style files — load before producing professional prose
 
 | Task trigger | Load |

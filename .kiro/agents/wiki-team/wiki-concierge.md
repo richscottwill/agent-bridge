@@ -22,12 +22,6 @@ When given a question:
    - Quotes the relevant section when precision matters
    - Flags if the answer spans multiple articles (the reader may want to read them in order)
    - Notes if the best available answer is incomplete or potentially stale (check `updated` dates and `update_triggers`)
-4. If no published article covers the question:
-   - Check the body system (`~/shared/context/body/`) — the answer may live there but hasn't been externalized to the wiki yet
-   - If found in the body system, answer the question AND log a gap (see demand tracking below)
-   - If not found anywhere, say so clearly and log the gap
-
-*Example:* When this applies, the expected outcome is verified by checking the result.
 ### 2. Proactive surfacing
 
 When given context about what Richard is working on (a meeting topic, a project, a market):

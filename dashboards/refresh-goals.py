@@ -36,6 +36,59 @@ GOAL_MARKET_MAP = {
 }
 
 
+def _fetch_op2_targets_from_duckdb(markets: list[str], fiscal_year: int = 2026) -> tuple[dict, str]:
+    """Pull annual registration targets per market.
+
+    Strategy:
+      1. Primary — read from projection-data.json `markets[m].op2_targets.annual_regs_target`.
+         That file is already refreshed by export-projection-data.py (which
+         does the MotherDuck query with proper credentials) so we don't
+         duplicate the MotherDuck connection here.
+      2. Fallback — try a local DuckDB read if somehow projection-data.json
+         is missing. Usually won't work (local DB lacks ps schema) but
+         worth trying for operator-run standalone cases.
+
+    Returns ({market: annual_target_int}, source_label).
+    """
+    proj_path = Path.home() / "shared" / "dashboards" / "data" / "projection-data.json"
+    if proj_path.exists():
+        try:
+            pd = json.loads(proj_path.read_text())
+            out = {}
+            for m in markets:
+                t = pd.get("markets", {}).get(m, {}).get("op2_targets", {})
+                if t and t.get("annual_regs_target"):
+                    out[m] = int(round(t["annual_regs_target"]))
+            if out:
+                return out, "ps.targets via projection-data.json"
+        except Exception as e:
+            print(f"warn: failed reading projection-data.json op2_targets: {e}", file=sys.stderr)
+
+    # Fallback — try local DuckDB directly. Usually fails (local has no
+    # ps schema) but sometimes works for standalone operator runs.
+    try:
+        import duckdb
+        db = Path.home() / "shared" / "data" / "duckdb" / "ps-analytics.duckdb"
+        if not db.exists():
+            return {}, "no source available"
+        conn = duckdb.connect(str(db), read_only=True)
+        markets_csv = ",".join(f"'{m}'" for m in markets)
+        sql = f"""
+            SELECT market, SUM(target_value) AS annual
+            FROM ps.targets
+            WHERE fiscal_year = {fiscal_year}
+              AND metric_name = 'registrations'
+              AND period_type = 'monthly'
+              AND channel = 'ps'
+              AND market IN ({markets_csv})
+            GROUP BY market
+        """
+        rows = conn.execute(sql).fetchall()
+        return {r[0]: int(round(r[1])) for r in rows}, "ps.targets (local duckdb)"
+    except Exception:
+        return {}, "no source available"
+
+
 def compute_progress(goals):
     """Compute YTD progress per goal by reading live data sources.
 
@@ -45,53 +98,81 @@ def compute_progress(goals):
       where Richard is driving a cross-team partnership (Polaris, Email
       Overlay, Baloo, Enhanced Match, BFCM promo, AI Max).
 
-    Goal 2 (MX/AU Paid Search Registrations, 11.1K MX + 12.9K AU):
-      Read forecast-data.json yearly block for actual_regs_ytd and
-      pred_regs_annual per market. Target is hardcoded from sheet.
+    Goal 2 (MX/AU Paid Search Registrations):
+      YTD + projected regs come from forecast-data.json (same source the
+      Weekly Review performance page consumes — single source of truth).
+      Targets come from ps.targets in MotherDuck — same table the pacing
+      dashboards read, so when OP2 gets revised the goal target tracks
+      automatically. Falls back to the hardcoded sheet values (11,100 MX /
+      12,900 AU) when ps.targets is unreachable so the page never shows
+      blank numbers.
 
     Goal 3 (MX + AU Market Testing, 4 experiments):
       Count tests where market is MX or AU in WW testing state file +
-      ps-testing-dashboard (tracked tests). Richard's three markets:
-      Adobe bid strategies (AU), Brand LP testing (both), email overlay NB (both).
+      ps-testing-dashboard (tracked tests).
     """
     progress = {}
     forecast_path = Path.home() / "shared" / "dashboards" / "data" / "forecast-data.json"
     ww_state_path = Path.home() / "shared" / "wiki" / "state-files" / "ww-testing-state.md"
 
-    # Goal 2: registrations — read forecast-data.json yearly block
+    # Goal 2: registrations — forecast-data.json (same as Weekly Review) +
+    # ps.targets (canonical OP2 source, same as pacing dashboards).
     if forecast_path.exists():
         try:
             fd = json.loads(forecast_path.read_text())
+            forecast_generated = fd.get("generated", "unknown")
             mx_yr = fd.get("yearly", {}).get("MX", {})
             au_yr = fd.get("yearly", {}).get("AU", {})
             mx_ytd = mx_yr.get("actual_regs_ytd") or 0
             au_ytd = au_yr.get("actual_regs_ytd") or 0
             mx_eoy_pred = mx_yr.get("pred_regs_annual") or 0
             au_eoy_pred = au_yr.get("pred_regs_annual") or 0
-            # Targets from the goal itself
-            mx_target = 11100
-            au_target = 12900
+            mx_ci_lo = mx_yr.get("pred_regs_annual_ci_lo") or None
+            mx_ci_hi = mx_yr.get("pred_regs_annual_ci_hi") or None
+            au_ci_lo = au_yr.get("pred_regs_annual_ci_lo") or None
+            au_ci_hi = au_yr.get("pred_regs_annual_ci_hi") or None
+
+            # Pull targets from ps.targets via projection-data.json (primary)
+            # or local duckdb (fallback). Surface which source won so the UI
+            # can show target provenance at a glance.
+            db_targets, target_source_label = _fetch_op2_targets_from_duckdb(["MX", "AU"], fiscal_year=2026)
+            if db_targets.get("MX") and db_targets.get("AU"):
+                mx_target = db_targets["MX"]
+                au_target = db_targets["AU"]
+                target_source = target_source_label
+            else:
+                mx_target = 11100
+                au_target = 12900
+                target_source = f"hardcoded fallback ({target_source_label})"
+
             combined_target = mx_target + au_target
             combined_ytd = mx_ytd + au_ytd
             combined_pred = mx_eoy_pred + au_eoy_pred
+
             progress["MX/AU Paid Search Registrations"] = {
                 "unit": "registrations",
                 "target": combined_target,
                 "ytd": combined_ytd,
                 "projected_eoy": combined_pred,
+                "projected_eoy_ci_lo": (mx_ci_lo + au_ci_lo) if (mx_ci_lo and au_ci_lo) else None,
+                "projected_eoy_ci_hi": (mx_ci_hi + au_ci_hi) if (mx_ci_hi and au_ci_hi) else None,
                 "ytd_pct": round(combined_ytd / combined_target * 100, 1) if combined_target else 0,
                 "projected_pct": round(combined_pred / combined_target * 100, 1) if combined_target else 0,
                 "breakdown": [
                     {"market": "MX", "target": mx_target, "ytd": mx_ytd,
                      "projected_eoy": mx_eoy_pred,
+                     "projected_eoy_ci_lo": mx_ci_lo, "projected_eoy_ci_hi": mx_ci_hi,
                      "ytd_pct": round(mx_ytd / mx_target * 100, 1) if mx_target else 0,
                      "projected_pct": round(mx_eoy_pred / mx_target * 100, 1) if mx_target else 0},
                     {"market": "AU", "target": au_target, "ytd": au_ytd,
                      "projected_eoy": au_eoy_pred,
+                     "projected_eoy_ci_lo": au_ci_lo, "projected_eoy_ci_hi": au_ci_hi,
                      "ytd_pct": round(au_ytd / au_target * 100, 1) if au_target else 0,
                      "projected_pct": round(au_eoy_pred / au_target * 100, 1) if au_target else 0},
                 ],
-                "source": "forecast-data.json yearly block",
+                "forecast_source": "forecast-data.json (same as Weekly Review)",
+                "forecast_generated": forecast_generated,
+                "target_source": target_source,
             }
         except Exception as e:
             print(f"warn: failed to compute reg progress: {e}", file=sys.stderr)

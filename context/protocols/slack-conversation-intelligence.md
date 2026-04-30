@@ -1,12 +1,11 @@
 <!-- DOC-0360 | duck_id: protocol-slack-conversation-intelligence -->
-# Slack Conversation Intelligence Protocol
-
-Enriches Slack messages with internal knowledge context and enables historical conversation retrieval.
-Runs during AM-1 (Slack scan enrichment) and AM-2 (triage context enhancement).
-
----
-
-
+[38;5;10m> [0m# Slack Conversation Intelligence Protocol[0m[0m
+[0m[0m
+Scans incoming Slack messages, matches them against internal knowledge bases (e.g., wikis, past tickets, runbooks), and attaches relevant context so responders see background info without searching manually. Also lets teams pull up past conversations by topic or keyword.[0m[0m
+[0m[0m
+Runs during two morning automation windows:[0m[0m
+- **AM-1 (Slack scan enrichment):** Processes new messages and annotates them with matched knowledge snippets.[0m[0m
+- **AM-2 (triage context enhancement):** Adds deeper context to flagged or escalated threads before triage review.
 #### Key Points
 - Primary function: preamble
 - Referenced by other sections for context
@@ -14,6 +13,7 @@ Runs during AM-1 (Slack scan enrichment) and AM-2 (triage context enhancement).
 ## AM-1: Slack Enrichment Steps
 
 *Example:* When this applies, the expected outcome is verified by checking the result.
+  - *Example:* Example → apply this when the situation matches the described pattern.
 ### Step 1: Acronym and Project Detection
 
 During the AM-1 Slack scan, after ingesting each message, scan the message text for internal acronyms and project names.
@@ -30,10 +30,14 @@ During the AM-1 Slack scan, after ingesting each message, scan the message text 
 | Strategy | AEO, AI Overviews, Zero-Click, MarTech, SEO, SEM |
 
 **Detection logic:**
-1. Tokenize message text (split on whitespace and punctuation)
-2. Match tokens against the known terms list (case-insensitive)
-3. Also detect unknown uppercase acronyms (2-5 capital letters not in common English: "THE", "AND", etc.)
-4. Flag messages containing 2+ internal terms or any unknown acronym as candidates for KDS enrichment
+- 1.
+- Tokenize message text (split on whitespace and punctuation).
+- 2.
+- Match tokens against the known terms list (case-insensitive).
+- 3.
+- Also detect unknown uppercase acronyms (2-5 capital letters not in common English: "THE", "AND", etc.).
+- 4.
+- Flag messages containing 2+ internal terms or any unknown acronym as candidates for KDS enrichment.
 
 ### Step 2: KDS Enrichment for Unfamiliar Terms
 
@@ -73,8 +77,7 @@ For messages where KDS returned useful context, the knowledge_context field in D
 - AM-2 triage can see organizational context alongside the raw message
 - Historical retrieval includes the enrichment for richer search results
 - The body system has a growing glossary of internal terms with definitions
-
----
+<!-- Added context: This section (Step 3: Knowledge Context Attachment) provides key operational details. -->
 
 ## AM-2: Historical Context Retrieval
 
@@ -83,7 +86,7 @@ For messages where KDS returned useful context, the knowledge_context field in D
 When AM-2 triages a signal (email, Slack message, or Asana notification), query DuckDB for related past conversations to provide historical context.
 
 
-**Example:** If this section references a specific process, the concrete steps are: ...
+**Example: ** If this section references a specific process, the concrete steps are: ...
 
 **Query pattern:**
 ```sql
@@ -130,6 +133,8 @@ When Richard asks about a past conversation or decision, combine DuckDB FTS with
 
 ---
 
+
+**Common failure:** Misinterpreting the scope of this section — it covers only AM-2: Historical Context Retrieval, not adjacent concerns.
 ## Failure Handling
 
 - If KDS is unreachable during AM-1: skip enrichment, continue Slack scan normally

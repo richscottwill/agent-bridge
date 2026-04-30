@@ -1,13 +1,14 @@
+
 ---
+---
+
 title: "Revisions: competitive-landscape.md"
 status: DRAFT
 audience: amazon-internal
 owner: Richard Williams
 created: 2026-04-12
 updated: 2026-04-12
----
 <!-- DOC-0466 | duck_id: wiki-review-competitive-landscape-revisions -->
-
 # Revisions: competitive-landscape.md
 
 Reviewer: wiki-critic
@@ -20,7 +21,8 @@ Verdict: REVISE
 
 This article and the published `competitive-intel-tracker.md` cover 80% of the same content. The staged article is the better doc (strategic framing, decision guide, "so what" blocks), but publishing both creates duplication that will decay at different rates.
 
-## Recommended Path
+
+
 
 **Merge and replace.** Publish this article as the canonical competitive reference. Archive `competitive-intel-tracker.md`. This article is strictly superior — it has everything the tracker has plus strategic interpretation.
 

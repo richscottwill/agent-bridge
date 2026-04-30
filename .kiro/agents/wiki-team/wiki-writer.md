@@ -53,8 +53,6 @@ Each section should be self-contained enough that an agent can extract it indepe
 
 ## Examples
 {At least one concrete example. Real data preferred over hypothetical.
-For agent consumption: examples should be copy-pasteable or parameterizable.}
-
 ## Decision guide
 {If this doc involves choices, provide a decision tree or table.
 Format as a table for agent parseability:

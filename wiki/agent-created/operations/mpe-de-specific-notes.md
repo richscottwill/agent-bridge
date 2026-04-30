@@ -29,12 +29,11 @@
 | nb_yoy_growth | 0.050 | — | market_specific | Weak NB YoY signal |
 | brand_spend_share | — | — | market_specific | 32.8% |
 
-## Regime events
-
-| Date | Event | Classification | Effect on fit |
-|---|---|---|---|
+[38;5;10m> [0m## Regime events[0m[0m
+[0m[0m
+| Date | Event | Classification | Effect on fit |[0m[0m
+|---|---|---|---|[0m[0m
 | 2025-10-01 | DE OCI 100% complete | **Structural** | New baseline |
-
 ## Known quirks and caveats
 
 ### 1. Brand-heavy mix

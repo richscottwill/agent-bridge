@@ -2,142 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Agent Activity Feed - Kiro Dashboard</title>
+<title>Agent Activity — moved</title>
+<meta http-equiv="refresh" content="0; url=body-system/activity.html">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#eaeaea;min-height:100vh;padding:16px 20px}
-h1{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px}
-.sub{font-size:13px;color:#888;margin-bottom:12px}
-
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;padding:10px 0;border-top:1px solid #1e2028;border-bottom:1px solid #1e2028}
-.stat{text-align:center}
-.stat .num{font-size:22px;font-weight:700;color:#fff}
-.stat .label{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
-
-.section-label{font-size:13px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
-.source-note{font-size:11px;color:#555;margin-bottom:10px;font-style:italic}
-
-.feed{display:flex;flex-direction:column;gap:6px}
-.activity{background:#14161e;border:1px solid #1e2028;border-radius:6px;padding:10px 12px;transition:border-color .15s;cursor:pointer}
-.activity:hover{border-color:#3b82f6}
-.act-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.act-ts{font-size:11px;color:#666;white-space:nowrap;min-width:55px}
-.act-prod{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
-.act-prod.agent{background:rgba(30,58,138,.25);color:#93b4f5}
-.act-prod.human{background:rgba(113,63,18,.2);color:#e0c080}
-.act-prod.reviewed{background:rgba(6,78,59,.25);color:#4ade80}
-.act-prod.system{background:rgba(55,65,81,.3);color:#9ca3af}
-.act-action{font-size:14px;color:#d4d4d4;flex:1;font-weight:500}
-.act-gate{font-size:10px;padding:2px 6px;border-radius:3px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap}
-.act-gate.pass{background:rgba(6,78,59,.3);color:#4ade80}
-.act-gate.block{background:rgba(127,29,29,.3);color:#f87171}
-.act-gate.observation-only{background:rgba(55,65,81,.3);color:#9ca3af}
-.act-gate.human-gate{background:rgba(30,58,138,.3);color:#93b4f5}
-.act-score{font-size:13px;font-weight:700;margin-left:4px}
-.act-score.high{color:#4ade80}
-.act-score.mid{color:#fbbf24}
-.act-score.low{color:#f87171}
-.act-dur{font-size:10px;color:#666;white-space:nowrap}
-
-.act-body{margin-top:8px;padding-top:8px;border-top:1px solid #181a22;display:none;font-size:12px;color:#9aa3b0}
-.activity.expanded .act-body{display:block}
-.act-row{margin-bottom:5px;display:flex;gap:8px}
-.act-row-label{color:#555;font-size:10px;text-transform:uppercase;letter-spacing:.5px;min-width:90px;padding-top:2px}
-.act-row-val{color:#d4d4d4;flex:1;line-height:1.5}
-.act-downstream{color:#6b8acd;font-size:11px;margin-top:4px}
-
-.back{display:inline-block;margin-bottom:12px;font-size:12px;color:#888;text-decoration:none}
-.back:hover{color:#93b4f5}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#FFFFFF;color:#161D26;padding:40px;line-height:1.6}
+  a{color:#0066CC;text-decoration:none}
+  a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
-
-<h1>Agent Activity Feed</h1>
-<div class="sub" id="sub">Every agent action in the last 24 hours. Click any row to expand.</div>
-
-<div class="stats" id="stats"></div>
-
-<div class="section-label" id="sec-feed">Last 24 hours</div>
-<div class="source-note" id="src"></div>
-
-<div class="feed" id="feed"></div>
-
-<script src="./shared/provenance.js"></script>
-<script src="./shared/provenance-registry.js"></script>
-
+<!-- 2026-04-30: Agent Activity moved under Body System (mental-model fit —
+     body-system holds the agent roster; activity is what those agents
+     did). This page redirects so stale bookmarks still resolve. Safe to
+     delete after ~60 days once no one lands here. -->
+<h2>Agent Activity moved</h2>
+<p>Agent Activity now lives under <a href="body-system/activity.html">Body System → Agent Activity</a>. Redirecting…</p>
 <script>
-function fmtTime(ts){
-  const d = new Date(ts);
-  const h = d.getHours(), m = d.getMinutes();
-  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
-}
-function fmtDur(ms){
-  if (!ms && ms !== 0) return '—';
-  if (ms < 1000) return ms + 'ms';
-  if (ms < 60000) return (ms/1000).toFixed(1) + 's';
-  return (ms/60000).toFixed(1) + 'm';
-}
-function scoreCls(s){
-  if (s == null) return '';
-  if (s >= 8.0) return 'high';
-  if (s >= 7.0) return 'mid';
-  return 'low';
-}
-
-fetch('data/agent-activity-feed.json?' + Date.now())
-  .then(r => r.json())
-  .then(d => {
-    // Stats
-    const stats = d.stats || {};
-    document.getElementById('stats').innerHTML = `
-      <div class="stat"><div class="num">${stats.total_24h ?? '—'}</div><div class="label">Actions / 24h</div></div>
-      <div class="stat"><div class="num">${stats.agents_active ?? '—'}</div><div class="label">Agents Active</div></div>
-      <div class="stat"><div class="num">${stats.hooks_fired ?? '—'}</div><div class="label">Hooks Fired</div></div>
-      <div class="stat"><div class="num" style="color:${(stats.failures||0)>0?'#f87171':'#4ade80'}">${stats.failures ?? 0}</div><div class="label">Failures</div></div>
-    `;
-
-    // Source note
-    document.getElementById('src').textContent = d.source || '';
-
-    // Feed
-    const feedEl = document.getElementById('feed');
-    const activities = d.activities || [];
-    feedEl.innerHTML = activities.map((a, i) => `
-      <div class="activity" onclick="this.classList.toggle('expanded')" id="act-${i}">
-        <div class="act-head">
-          <span class="act-ts">${fmtTime(a.ts)}</span>
-          <span class="act-prod ${a.producer_type}">${producerEmoji(a.producer_type)} ${a.producer}</span>
-          <span class="act-action">${a.action}</span>
-          ${a.quality_gate ? `<span class="act-gate ${a.quality_gate.replace(/[^a-z-]/gi,'-')}">${a.quality_gate}</span>` : ''}
-          ${a.quality_score != null ? `<span class="act-score ${scoreCls(a.quality_score)}">${a.quality_score}</span>` : ''}
-          <span class="act-dur">${fmtDur(a.duration_ms)}</span>
-        </div>
-        <div class="act-body">
-          <div class="act-row"><span class="act-row-label">Input</span><span class="act-row-val">${a.input_summary || '—'}</span></div>
-          <div class="act-row"><span class="act-row-label">Output</span><span class="act-row-val">${a.output_summary || '—'}</span></div>
-          ${a.downstream ? `<div class="act-downstream">→ ${a.downstream}</div>` : ''}
-        </div>
-      </div>
-    `).join('');
-
-    // Apply provenance to section label (agent-health config)
-    if (window.ProvenanceRegistry) {
-      const cfg = window.ProvenanceRegistry.get('agent-health');
-      if (cfg && window.Provenance) {
-        window.Provenance.injectBar('sec-feed', cfg.provs, cfg.trace);
-      }
-    }
-  })
-  .catch(e => {
-    document.getElementById('feed').innerHTML = `<div style="color:#f87171;padding:20px">Failed to load: ${e.message}</div>`;
-  });
-
-function producerEmoji(type){
-  return { agent:'🤖', human:'👤', reviewed:'🤝', system:'⚙️' }[type] || '⚙️';
-}
+  // Fallback if meta refresh is disabled.
+  setTimeout(() => { window.location.replace('body-system/activity.html'); }, 100);
 </script>
-
 </body>
 </html>

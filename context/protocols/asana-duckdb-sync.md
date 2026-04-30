@@ -106,6 +106,9 @@ FIELD_MAP = {
 
 # For enum fields, map to short names:
 ROUTINE_MAP = {
+
+#### Continued
+
     'Sweep (Low-friction)': 'Sweep',
     'Sweep': 'Sweep',
     'Core Two (Deep Work)': 'Core',
@@ -118,11 +121,9 @@ ROUTINE_MAP = {
 }
 # Always normalize to short name. Asana API returns the full display name;
 # DuckDB stores only the short name. Both forms map to the same value.
-# Priority and Importance: use display name as-is (Today, Urgent, Not urgent, Important)
-```
-
+[38;5;10m> [0m# Priority and Importance: use display name as-is (Today, Urgent, Not urgent, Important)[0m[0m
+[0m[0m
 Any custom field GID NOT in FIELD_MAP → store in `flex_fields` JSON column as `{gid: {name, value}}`.
-
 ### Step 4 — UPSERT into asana_tasks
 
 For each task:

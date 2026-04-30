@@ -10,6 +10,9 @@
 | **polaris-brand-lp** | 12.7 | 3 | Most active topic. Brandon green-lit alt-measurement 4/27: "Richard can setup alternate means of measurement." |
 | **liveramp-enhanced-match** | 2.3 | 1 | LR match-rate update pending from Remy Shrader. Brandon 4/20 Loop comment: "I followed up on the LR email with the questions above." |
 | **GenBI vs Adobe attribution** | 2.0 | 1 | Brandon 4/21 Loop ask — leverage GenBI, pull in as needed. Handoff-doc context. |
+
+### Continued
+
 | **oci-rollout** | 1.8 | 1 | EU benchmarks done (Andrew 4/21). JP needs benchmarking doc from Stacey + Adi. |
 | **au-testing-document** | 1.5 | 1 | Completed overnight 4/28 (Testing Doc for Kate). Stale signal but logged. |
 | **baloo-deep-dive** | 1.5 | 1 | Brandon 4/14 1:1 ask — DDD walkthrough carry to Thu 4/30. |
@@ -70,8 +73,9 @@
 
 ---
 
-## 🎯 Richard's proposed agenda (4 bundled bullets for 30 min)
-
+[38;5;10m> [0m## 🎯 Richard's proposed agenda (4 bundled bullets for 30 min)[0m[0m
+[0m[0m
+For example, a typical 30-minute session might allocate roughly 7–8 minutes per bullet, with each bullet covering one focused topic such as a status update, a decision point, a blocker review, or a next-steps alignment — ensuring every item gets airtime without running over.
 ### 1. Brand LP AU/MX test design status (5 min) — **the hard thing**
 - Task: 1214330104198712, due 5/6 (8 days out)
 - Brandon 4/27 green-lit: "Richard can setup alternate means of measurement"

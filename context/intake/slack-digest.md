@@ -1,87 +1,101 @@
-# Slack Digest — 2026-04-25 (Sat)
+# Slack Digest — 2026-04-30 (Thursday W18)
 
-**Scan window:** 2026-04-24T17:10:00Z → 2026-04-25T18:50:00Z (~25.7h, covers Fri PM + Sat). Retry pass after Slack MCP 302 outage this morning.
-
-**Headline:** Very quiet weekend. 8 in-scope messages ingested across 14 tier-1/tier-2 channels. Two new action-items from Peter (PAM Primeday plan, PD26 disclosure access). Brandon closed the Polaris Br-pages weblab thread Friday afternoon with a clear path forward — no weekend activity on it. Agentspaces 14-day lifetime enforcement is now live (affects body/system durability).
-
----
-
-## Brandon / Kate / Lena / Peter items (top of queue)
-
-### [ACTION-RW] Peter — PAM Primeday plan request (DM)
-- **Channel:** dm-peteocam (D05L5UUGRED)
-- **Time:** 2026-04-24 20:26Z (Fri 1:26 PM PT)
-- **Message:** "When you return, would you mind providing me with the PAM plan for Primeday? I would need the following: Budget + comparison to last year. Projected impressions, taps, and installs."
-- **Context:** Peter acknowledges Richard is OOO. Request is waiting for Monday.
-- **Action:** Pull PAM 2026 budget + YoY comparison + projected impressions/taps/installs. Likely lives in Paid App command-center or forecast tracker. Reply in DM when back.
-- **Topic:** `pam-primeday` (new signal, strength 1.0)
-
-### [ACTION-RW] Peter — PD26 disclosure access for Paid App (MPDM)
-- **Channel:** C0AV6BWRMDG (NEW MPDM: peteocam + ssserene + brandoxy + prichwil, created 2026-04-24 20:33Z)
-- **Time:** 2026-04-24 20:34Z
-- **Message:** Peter to Sharon Serene: "Hi @ssserene, could you please add Brandon and Richard to the AB PD26 date disclosure? Richard needs visibility to the dates so we can execute our Paid App Marketing strategy for the AB Mobile App."
-- **Sharon replied 4 min later:** "Sharing the doc [workdocs link], could you please request access and I can accept?"
-- **Action:** Open Sharon's workdoc link and request access. Peter thanked her with `:ty-thankyou:`.
-- **Topics:** `ab-pd26-disclosure` (new, 1.0), `paid-app-marketing` (new, 1.0)
-
-### Brandon — Polaris Br-pages test method decision (ab-paid-search-abix)
-- **Channel:** C065KKT53DJ
-- **Time:** 2026-04-24 17:20Z (Fri morning)
-- **Message:** "awesome. Let me confirm to Dwayne and Richard can setup an alternate means of measurement"
-- **Richard mention:** YES (lowercase "richard")
-- **Context:** This closes the thread Brandon opened at 14:02Z asking Yunchu whether AU/MX Polaris pages lead to reg start. Yunchu confirmed yes at 14:32, and suggested Google Experiment instead of Weblab since data volume is too low for Weblab to converge. Brandon accepted that path — Yunchu reacted +1.
-- **What this means for Richard:** Dwayne can't run Weblab (control routing mismatch with MCS). Brandon is committing Richard to set up an alternate measurement method (Google Experiment per Yunchu) and hand off to AU. No deadline stated but implied short timeline given the AEO pressure behind Polaris.
-- **Polaris thread (ts 1777039370.274509) weekend activity: NO.** All movement was Friday 14:02–17:20Z. Thread is quiet through Saturday 18:50Z.
-- **Topic:** `polaris-brand-lp` (reinforced, Brandon/slack strength 2.25 → 2.75; overall topic-strength across channels still led by ab-paid-search-global row at 3.28)
+**Scan window:** 2026-04-29 13:21 UTC → 2026-04-30 15:30 UTC (26h)
+**Channels scanned:** 13 of 26 unread (13 Tier-3 skipped per registry)
+**New messages:** 37 (30 channel + 7 thread replies)
+**Top-line:** Yesterday (Wed Apr 29) was a high-intensity Brandon coaching day centered on Polaris Br-pages QA ownership. Richard is now on the hook to consolidate feedback, set timelines, and own MCS coordination. Two new incoming DMs (Megan Oshry, Anmol Rastogi) need responses.
 
 ---
 
-## By Channel (other signals)
+## [ACTION-RW] Immediate — today
 
-### team-ab-marketing (C048VEWU7U3)
-- **Ruby Dinh, Fri 18:36Z:** OP1 2027 roundtable brainstorming invite — Onsite CX, PB, Selection & Value. Zoom + SEA meeting room options. [Quip link](https://quip-amazon.com/GCoZAQbWWmxd/OP1-2027-Round-table-Brainstorming-SSR-Central-Marketing-Partners). 2 reactions.
-- **Signal:** `op1-strategy` reinforced +0.5 → 2.29.
+### 1. Polaris Br-pages QA consolidation (CRITICAL, pulled out of shadows by Brandon)
+**Source:** `dm-brandon` + `ab-paid-search-global` thread (Yun's QA findings, 7 replies)
 
-### ask-ab-data (C03H1S5SYP4)
-- **Subbu Subramanian, Fri 20:33Z:** "How can I get the group admin for a group?" — standard Q, 2 replies by Saturday. Not Richard-relevant.
+- Brandon put Richard explicitly in charge of MCS/Polaris coordination. From the channel thread: *"Richard leading here is to avoid segmented feedback and too many owners. Please route all requests through Richard on this. Richard — please consolidate all feedback and also include any QA items you have."*
+- Brandon's explicit ask in DM:
+  - Create a feedback input doc (or update existing)
+  - Set syncs with Alex where he defers to Richard as owner
+  - Give the PS team clear timelines for feedback windows
+  - Publish a "taking feedback till EOD Wed" type cutoff
+  - Consolidate then follow up with MCS via email + Asana (not Asana as a discussion board)
+- Yun's QA items still open:
+  1. Subheadlines not updated on multiple Brand Polaris pages (all regions except ES per Andrew)
+  2. PS ref tags overridden after CTA clicks (tested on DE)
+  3. Page load time issues (incognito blank white page, long reload)
+- **Brandon created a new Slack chat for this** at 19:37 UTC — check DMs/mpdm for it.
+- Richard ack'd at 18:34 UTC Wed ("I've seen this. I'll work on this in a bit."). No consolidated doc produced yet by end of scan.
 
-### marketing_managers_all (C01NQLC114J)
-- **Ankit Dhingra, Fri 17:49Z:** Bumping WW Flex Marketing L6 PMM role (Bellevue/NY). Closing info chats mid next week. [Job link](https://atoz.amazon.work/jobs/role/10379862). FYI only.
-
-### agentspaces-interest (C0A1JD8FCUV) — L3-5 awareness
-- **Andy Hazlewood thread-broadcast from 3/31 resurged Fri PM:** AgentSpace 14-day lifetime limit enforcement is deploying — 7-day grace period, spaces older than 14 days cannot be restarted. 17 replies, 10 participants.
-- **Krishna Saini, Fri 15:02Z (broadcast):** Asks about multi-agent spaces and the 14-day window — "will that space be gone after 14 days of inactivity? agentspaces looks like solving most of the usecases".
-- **Implication for Richard's agent-bridge / body system:** Spaces are ephemeral. Portable body strategy (shared/ + agent-bridge + SharePoint) continues to matter. This is direct validation of the "survive a platform move with nothing but text files" mindset already in soul.md.
-- Plus ~20 support questions from strangers (IDE access, MCP setup, space failures, Midway auth). Skipped — noise.
-
-### ab-paid-search-app / ab-ps_partnership-accounts / ab-paid-search-global / rsw-channel / dm-aditthk / dm-quip-bot
-- No new messages in scan window.
-
-### dm-brandon (D044JAKR8RZ)
-- **Quiet.** No messages since last_ingested 2026-04-24T02:13Z. Brandon's only Slack touches were in shared channels above.
+### 2. Two outstanding DMs needing responses
+- **Megan Oshry (`dm-meganos`, NEW)** — asking about AU conversion-data methodology:
+  - "Is there a reason why we don't have conversion data in the Google Ads platform?"
+  - Wants the reftag + reg-database query so she can pull data herself
+  - Richard's last message explained the weekly match approach — Megan's follow-up is waiting.
+- **Anmol Rastogi (`mpdm-rasanmol-prichwil-mpgupta`, NEW)** — asking about SIM intake ABMA-11245:
+  - "Can you please advise what specific data metrics within Paid Search are you looking for?"
+  - Needs a specific metric list to action the SIM.
 
 ---
 
-## Unanswered pings to Richard
-1. **Peter — PAM Primeday plan** (DM, Fri 20:26Z) — waiting on return
-2. **Peter — PD26 disclosure access** (MPDM, Fri 20:34Z) — Sharon shared workdoc link, needs Richard to request access
-3. **Brandon (implicit) — Polaris alt measurement setup** (ab-paid-search-abix, Fri 17:20Z) — Brandon committed Richard to action, no direct ping yet but Dwayne handoff is implied
+## Brandon coaching signals (log to unasked-question-log candidate)
 
-## Decisions captured
-- **Polaris Br-pages testing:** Weblab ruled out. Google Experiment is the path. AU/MX pages lead to reg start (confirmed by Yunchu), so control-routing-to-MCS constraint doesn't apply. Dwayne knows, Brandon is confirming, Richard owns setup.
-- **AgentSpaces lifecycle:** 14-day hard limit with 7-day grace is now active. Spaces older than 14 days cannot be restarted.
+Heavy coaching in `dm-brandon` Wednesday — two explicit trust-earning moments:
 
-## Signal reinforcements (top 5 by new strength)
-| Topic | Source/Author | Old → New strength | Reinforcement count |
-|---|---|---|---|
-| polaris-brand-lp | slack / Brandon Munday (ab-paid-search-abix) | 2.25 → 2.75 | 1 → 2 |
-| op1-strategy | hedy / Team (reinforced from team-ab-marketing invite) | 1.79 → 2.29 | 3 → 4 |
-| pam-primeday | slack / Peter Ocampo | — → 1.0 (NEW) | 0 → 1 |
-| ab-pd26-disclosure | slack / Peter Ocampo | — → 1.0 (NEW) | 0 → 1 |
-| paid-app-marketing | slack / Peter Ocampo | — → 1.0 (NEW) | 0 → 1 |
-| agentspace-lifecycle | slack / Andy Hazlewood | — → 0.75 (NEW, L3-5) | 0 → 1 |
+> "please keep an eye on your messages. It's more than half way through the day in Austin, and the team is worried about this — need you to be responsive with the team"
 
-## Failures / notes
-- Proactive searches (`from:@prichwil`, `from:@brandoxy`, `from:@kataxt`, `prichwil`) all returned 0 results in the 24h window — expected given Richard's OOO Fri and quiet Saturday.
-- Decay step skipped (already applied 2026-04-25 16:33:50Z during the morning 302-outage run).
-- 1 initially-queued thread reply fetch failed (`1777039370.000000` — wrong ts). Re-fetched with correct ts `1777039370.274509` and confirmed 0 replies (Brandon's direct-ask to Yunchu is thread-less; Yunchu's answers came as new channel messages).
+> "it's fine if you have a different prioritization, but then everyone needs to know the timing. this is an important function to earn trust across the team if you're leading these WW updates"
+
+Pattern candidate: *responsiveness when leading cross-team work*. This is the third recent Brandon signal on "communicate timelines proactively" vs just "do the work well." Worth surfacing in 1:1 prep.
+
+---
+
+## Decisions made (Brandon, on Polaris QA process)
+
+1. Richard is the single point of contact for MCS on Polaris Br-pages — no segmented feedback.
+2. Asana comments not to be used as a discussion board — use a feedback doc + Slack + dedicated syncs with Alex instead.
+3. Team (Andrew, Yun) can QA but routes everything through Richard for consolidation.
+4. Each feedback cycle needs an explicit input doc + deadline + confirmed follow-up timeline with MCS.
+
+---
+
+## Asks from Richard to others (outstanding)
+
+- **MCS team (Alex):** Richard needs to set a recurring sync where Alex defers to him; push translated subheadlines ask per Yun's #1 finding.
+- **Yun / Andrew:** Feedback will be consolidated through Richard; their individual questions (copy variation for Vijeth, DE ref tag override) still need answers from Richard.
+- **PS team:** Richard needs to publish the consolidated feedback doc + timeline.
+
+---
+
+## Topics reinforced this scan
+
+| Topic | Channels | Strength added | Notes |
+|-------|----------|---------------:|-------|
+| `polaris-brand-lp` | dm-brandon, ab-paid-search-global | +6.0 (4 new rows) | Now the dominant topic across the entire signal_tracker. Cross-channel corroboration confirmed. |
+| `mcs-coordination-ownership` | dm-brandon, ab-paid-search-global | +2.0 (NEW topic) | Richard designated single consolidator. |
+| `richard-responsiveness` | dm-brandon | +2.0 (NEW topic) | Two explicit Brandon coaching messages. |
+| `ps-feedback-process` | dm-brandon | +2.0 (NEW topic) | Brandon advising structural change (input doc, timelines, cutoffs). |
+| `au-reftag-reg-data` | dm-meganos | +2.0 (NEW topic) | Megan wants the AU Google Ads + reg-database query. |
+| `sim-abma-ps-metrics` | mpdm-rasanmol | +1.0 (NEW topic) | ABMA-11245 PS metrics clarification. |
+| `browserstack-access` | ab-paid-search-global | +0.7 (NEW topic) | Team now has Browserstack; Richard authored the how-to Loop doc. |
+| `ai-tooling-ab-spend-match` | cps-ai-win-share-learn | +0.5 (NEW topic) | L3-5 signal — AB Manage Spend Match agent on Agent Registry hit 85% match rate on 1,500-product file. |
+
+---
+
+## FYI
+
+- `ab-paid-search-global`: Browserstack Live access rolled out to the team (Brandon, Andrew, Yun, Stacey added). Richard's Loop how-to was credited. Andrew picked for next Weekly icebreaker.
+- `paid-search-amzn`: Patrick Zinga asked about Google passkey email — not Richard-relevant.
+- `agentspaces-interest`: Weekly summary surfaced the usual reminders (~/shared persistence boundary, Kiro planning agent read-only). No new Richard-relevant items.
+- `amazon-quick-desktop-beta-feedback`: Pure product-feedback noise, skipped deeper scan.
+
+---
+
+## Missing / flagged channels
+
+None. All tier-1 channels successfully scanned. Slack MCP healthy throughout.
+
+## Proactive search hits
+
+- `prichwil after:2026-04-29` — 0 hits (Richard-tagged traffic all in joined channels)
+- `from:@brandoxy after:2026-04-29` — 0 hits (all Brandon traffic already captured)
+- `from:@kataxt after:2026-04-29` — 0 hits (Kate silent in Slack this window)

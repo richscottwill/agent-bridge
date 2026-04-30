@@ -1,6 +1,7 @@
 <!-- DOC-0228 | duck_id: organ-spine -->
 
 **Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
+  - *Example:* Key consideration → apply this when the situation matches the described pattern.
 # Spine — Structure & Continuity
 
 *The skeleton that holds everything together across sessions. Bootstrap sequence, directory conventions, environment rules, and the ground-truth files that define Richard's current state.*
@@ -12,9 +13,15 @@ Last updated: 2026-04-01 (Wednesday PT)
 **Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## Session Bootstrap Sequence
 
-**⚠️ AgentSpaces chats deleted every 14 days.** Every new session starts here.
 
-**Richard Williams:** L5 Marketing Manager, AB Paid Search. Manager: Brandon Munday (L7, she/her). Markets: AU/MX hands-on, US/EU5/JP/CA team-wide. Active: OCI (7/10 live), AI Max (US Q2 2026), AEO, Baloo, F90 Lifecycle. TZ: PT (UTC-7).
+
+#### **Richard Williams:** L5
+
+
+
+
+#### | # |
+
 
 | # | File | What |
 |---|------|------|
@@ -23,21 +30,24 @@ Last updated: 2026-04-01 (Wednesday PT)
 | 3 | `soul.md` | Identity, voice, routing |
 | 4 | `current.md` | Live state: projects, people, actions |
 | 5 | `rw-tracker.md` | Weekly scorecard, 30-day challenge |
-| 6 | Task-specific organ | brain, eyes, hands, memory as needed |
 
-**First 60 seconds checklist:** (1) Read body.md to orient. (2) Read this file (spine.md) for IDs and tools. (3) Read soul.md for voice and routing rules. (4) Read current.md for live state. (5) Check amcc.md for streak and hard thing. Then load task-specific organs per body.md Task Routing table.
+
+### Continued
+
+
+[38;5;10m> [0m#### **First 60 seconds[0m[0m
+[0m[0m
+**Checklist:** (1) Read body.md for orientation. (2) Read spine.md for IDs and tools. (3) Read soul.md for voice and routing. (4) Read current.md for live state. (5) Check amcc.md for streak and hard thing. Then load task-specific organs per body.md Task Routing table.
+#### **Cold-start recovery:** MotherDuck
+
 
 **Cold-start recovery:** MotherDuck → SharePoint `system-state/` → Git `agent-bridge` → filesystem rebuild. If `body/` empty, pull from `Kiro-Drive/portable-body/` first.
 
+
+#### **Cold-start anti-patterns:** Don't
+
+
 **Cold-start anti-patterns:** Don't skip body.md (you'll miss organ locations). Don't load all organs at once (load task-specific only). Don't assume DuckDB is local (it's on MotherDuck cloud). Don't write to organs before reading current.md (you'll overwrite live state).
-
----
-
-
-
-
-
-
 
 
 
@@ -84,13 +94,9 @@ Full inventory + guardrails: `~/shared/context/active/mcp-tool-reference.md`
 
 
 
-## Quick Reference (Key IDs + Hook System)
 
-**Key IDs:**
-- Richard's Asana GID: `1212732742544167`
-- Slack rsw-channel: `C0993SRL6FQ`
-- DuckDB: `ps-analytics.duckdb` (local) / `md:ps_analytics` (MotherDuck)
-- Full ID sources: hands.md (To-Do list IDs, Outlook folder IDs), memory.md (Quip document links)
+
+
 
 **Daily hook sequence:** AM-1 (Ingest) → AM-2 (Triage) → AM-3 (Brief), then EOD-1 (Meeting Sync) → EOD-2 (System Refresh + Karpathy experiments on organs + output quality). Guards (Email, Calendar) are always-on preToolUse hooks. On-demand: WBR Callouts, SharePoint Sync, PS Audit, Agent Bridge.
 
@@ -152,26 +158,12 @@ Full hook details: see device.md → Installed Apps and hands.md → Hook System
 
 
 
-## System Persistence & Ground Truth
-
-
-
-
 
 
 
 ### Durability Model
 
-
-
 **Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
-
-
-
-
-
-
-
 
 #### Four Layers
 
@@ -184,48 +176,17 @@ The system survives any single point of failure through four independent persist
 | Git | `agent-bridge` GitHub repo | Portable body, sanitized context, changelog | Container restart ✅, DevSpaces rebuild ✅, Platform migration ✅ |
 | MotherDuck | `md:ps_analytics` cloud DB | All structured data (Asana, signals, experiments, PS metrics) | Container restart ✅, DevSpaces rebuild ✅, Platform migration ✅ |
 
-
-
-
-
-
-
-
-
-
 **Recovery priority:** MotherDuck (structured data) → SharePoint (artifacts + state) → Git (portable body) → Filesystem (rebuild from other three).
-
-### Ground Truth Files *Stay separate from organs — different update cadences.* | File | Location | What it is | Update cadence | Read when | |------|----------|-----------|----------------|-----------| | current.md | `~/shared/context/active/current.md` | Live state: projects, people, meetings, pending actions | Every loop run | Every session — most volatile file in the system | | org-chart.md | `~/shared/context/active/org-chart.md` | Org structure and reporting lines | On org changes | Drafting comms to unfamiliar stakeholders, reorg context | | rw-tracker.md | `~/shared/context/active/rw-tracker.md` | Weekly scorecard, 30-day challenge, To-Do sync | Every morning routine | AM-3 brief, coaching check-ins, Friday retro | | long-term-goals.md | `~/shared/context/active/long-term-goals.md` | The Five Levels strategic arc (L1-L5 with key metrics) | Monthly or on shift | Prioritization decisions, connecting tasks to strategy | **Rule:** These files are NOT absorbed into organs. They have different update cadences and serve as authoritative sources. Organs may reference them but never duplicate their content. 
-
-
-
-
 
 
 
 
 ### Quick-Check Keys
 
-*Avoid opening the file just to check one fact:*
-- current.md contains the active project list with status, the people Richard interacted with this week, and pending actions with owners.
-- rw-tracker.md contains the L1 streak count, weekly artifact tally, and the 30-day challenge status.
-
-
-
-
-
-
-
 
 **Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
 
-
-
 ### Common Failures
 
-1. **Skipping body.md** → wrong organ loaded. Body.md is the map; read it first.
-2. **Loading all organs** → context window waste. Use body.md Task Routing table.
-3. **Stale Key IDs** → spine points to hands.md/memory.md for IDs. Follow the pointer; spine may lag.
-4. **Ignoring durability layers during recovery** → MotherDuck first, then SharePoint, then Git. Don't rebuild from scratch.
 
 **System history:** See changelog.md for full build history (3/12 onwards: trainer, loop, To-Do, Asana bridge, Hedy, wiki team, meetings, body metaphor migration, Slack ingestion).

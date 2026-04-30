@@ -1,11 +1,4 @@
----
-title: "AU Paid Search W9-13: Keyword-Level Optimization"
-status: archived
-audience: amazon-internal
-owner: Richard Williams
-created: 2026-04-12
-updated: 2026-04-12
----
+--- title: "AU Paid Search W9-13: Keyword-Level Optimization" status: archived audience: amazon-internal owner: Richard Williams created: 2026-04-12 updated: 2026-04-12 ---
 <!-- DOC-0110 | duck_id: context-2026-03-31_au-ps-w9-13-optimization -->
 
 # AU Paid Search W9-13: Keyword-Level Optimization
@@ -142,9 +135,9 @@ ACTION: Pull final URL report. Negative "lamp", "turkish lamp" in Beauty if conf
 
 ## SECTION 3: ZERO-REGISTRATION CAMPAIGNS — KEYWORD BLOAT
 
+
 These campaigns had 0 registrations in W9-13. Every keyword = confirmed 0 regs.
 Aggregated from search terms report (keyword text + campaign + ad group).
-
 ### 3a. AU_Generic (non-PV) — 0 regs, HIGHEST SPEND zero-reg campaign
 
 Top keywords by aggregated spend:

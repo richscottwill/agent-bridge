@@ -7,6 +7,16 @@ This document maps every hook to its protocol file, trigger type, and health sta
 
 ---
 
+## File Event Hooks
+
+| Hook | File | Trigger | Pattern | What It Does | Version | Status |
+|------|------|---------|---------|-------------|---------|--------|
+| Organ Change Detector | `organ-change-detector.kiro.hook` | fileEdited | `**/shared/context/body/*.md` | Checks cross-organ coherence, gates heart.md/gut.md edits to Karpathy | 1.0.0 | ✅ Active |
+| Steering Integrity | `steering-integrity-check.kiro.hook` | fileCreated | `**/.kiro/steering/*.md` | Blocks resurrection of deleted steering files, checks front matter | 1.0.0 | ✅ Active |
+| WBR Pipeline Trigger | `wbr-pipeline-trigger.kiro.hook` | fileCreated | `shared/uploads/sheets/*Dashboard*.xlsx` | Auto-runs WBR pipeline when dashboard xlsx is dropped | 1 | ✅ Active |
+
+---
+
 ## Routine Hooks (daily sequence) **Sequence:** AM-Backend → AM-Frontend → (workday) → EOD **SharePoint sync:** AM-Backend pushes to `Kiro-Drive/system-state/` in Phase 6.5. EOD pushes in Phase 7.5. Both non-blocking. Published artifacts go to `Artifacts/wiki-sync/` via the separate sharepoint-sync hook (different pipeline, same MCP server). --- | Hook | File | Trigger | Protocol File | Version | Status | |------|------|---------|--------------|---------|--------| | AM-Backend | `am-auto.kiro.hook` | userTriggered | `am-auto.md` + `am-backend-parallel.md` | 4.0.0 | ✅ Active | | AM-Frontend | `am-triage.kiro.hook` | userTriggered | `am-frontend.md` + `am-triage.md` | 3.0.0 | ✅ Active | | EOD | `eod.kiro.hook` | userTriggered | `eod-backend.md` + `eod-frontend.md` | 7.0.0 | ✅ Active | ## Guard Hooks (always-on, preToolUse)
 
 | Hook | File | Trigger Pattern | What It Guards | Version | Status |
@@ -19,20 +29,13 @@ This document maps every hook to its protocol file, trigger type, and health sta
 
 ---
 
-## Audit Hooks (postToolUse)
-| Hook | File | Trigger Pattern | What It Logs | Version | Status |
-|------|------|----------------|-------------|---------|--------|
-| Audit: Asana Writes | `audit-asana-writes.kiro.hook` | `@mcp.*asana.*` | Logs every Asana write to JSONL + DuckDB | 1.1.0 | ✅ Active |
----
-## File Event Hooks
+### Details
 
-| Hook | File | Trigger | Pattern | What It Does | Version | Status |
-|------|------|---------|---------|-------------|---------|--------|
-| Organ Change Detector | `organ-change-detector.kiro.hook` | fileEdited | `**/shared/context/body/*.md` | Checks cross-organ coherence, gates heart.md/gut.md edits to Karpathy | 1.0.0 | ✅ Active |
-| Steering Integrity | `steering-integrity-check.kiro.hook` | fileCreated | `**/.kiro/steering/*.md` | Blocks resurrection of deleted steering files, checks front matter | 1.0.0 | ✅ Active |
-| WBR Pipeline Trigger | `wbr-pipeline-trigger.kiro.hook` | fileCreated | `shared/uploads/sheets/*Dashboard*.xlsx` | Auto-runs WBR pipeline when dashboard xlsx is dropped | 1 | ✅ Active |
+3. The SharePoint durability layer means key artifacts survive platform migration. Pull from `Kiro-Drive/` to bootstrap.
+4. DuckDB/MotherDuck data persists independently of the workspace.
+5. Git repo (`~/shared/` → agent-bridge) is the third durability layer.
 
----
+**Three-layer durability:** filesystem (`~/shared/`) + SharePoint (`Kiro-Drive/`) + git (agent-bridge). Any two can fail and the system recovers.
 
 ## Session Hooks
 
@@ -45,17 +48,21 @@ This document maps every hook to its protocol file, trigger type, and health sta
 
 ---
 
-## On-Demand Hooks (userTriggered)
+## Audit Hooks (postToolUse)
+| Hook | File | Trigger Pattern | What It Logs | Version | Status |
+|------|------|----------------|-------------|---------|--------|
+| Audit: Asana Writes | `audit-asana-writes.kiro.hook` | `@mcp.*asana.*` | Logs every Asana write to JSONL + DuckDB | 1.1.0 | ✅ Active |
+---
+## Known Issues
 
-| Hook | File | What It Does | Version | Status |
-|------|------|-------------|---------|--------|
-| WBR Callouts | `wbr-callouts.kiro.hook` | Full 10-market callout pipeline (analyst → writer → reviewer) | 2 | ✅ Active |
-| SharePoint Sync | `sharepoint-sync.kiro.hook` | Wiki-to-SharePoint sync via CLI | 1 | ✅ Active |
-| Agent Bridge Sync | `agent-bridge-sync.kiro.hook` | Git push + email snapshot to personal email | 1 | ✅ Active |
-| PS Audit | `ps-audit.kiro.hook` | Paid search audit pipeline via Python CLI | 1 | ⚠️ Untested (CLI may not exist) |
+1. **context-preloader.kiro.hook** — is a no-op. Either remove it or implement the Python router it was designed for.
+2. **ps-audit.kiro.hook** — references a Python CLI (`paid_search_audit.cli`) that may not exist in the current workspace. Needs verification.
+3. **eod-meeting-sync.md** — and **eod-system-refresh.md** may be orphaned — the unified EOD hook now references eod-backend.md and eod-frontend.md directly.
+4. **SharePoint sync** — in the sharepoint-sync.kiro.hook (on-demand wiki sync) is separate from the durability sync in AM/EOD. They serve different purposes but share the same MCP server.
 
 ---
 
+*Example:* When this applies, the expected outcome is verified by checking the result.
 ## Protocol File Inventory
 
 | Protocol | File | Used By | Purpose |
@@ -92,26 +99,19 @@ This document maps every hook to its protocol file, trigger type, and health sta
 
 ---
 
-## Known Issues
-
-1. **context-preloader.kiro.hook** is a no-op. Either remove it or implement the Python router it was designed for.
-2. **ps-audit.kiro.hook** references a Python CLI (`paid_search_audit.cli`) that may not exist in the current workspace. Needs verification.
-3. **eod-meeting-sync.md** and **eod-system-refresh.md** may be orphaned — the unified EOD hook now references eod-backend.md and eod-frontend.md directly.
-4. **SharePoint sync** in the sharepoint-sync.kiro.hook (on-demand wiki sync) is separate from the durability sync in AM/EOD. They serve different purposes but share the same MCP server.
-
----
-
-*Example:* When this applies, the expected outcome is verified by checking the result.
 ## Portability Notes
 
 If migrating to a new platform:
 1. Hook JSON files are Kiro-specific — they'd need to be translated to the new platform's automation format.
 2. Protocol markdown files are platform-agnostic — any AI can read and execute them.
 
-### Details
+## On-Demand Hooks (userTriggered)
 
-3. The SharePoint durability layer means key artifacts survive platform migration. Pull from `Kiro-Drive/` to bootstrap.
-4. DuckDB/MotherDuck data persists independently of the workspace.
-5. Git repo (`~/shared/` → agent-bridge) is the third durability layer.
+| Hook | File | What It Does | Version | Status |
+|------|------|-------------|---------|--------|
+| WBR Callouts | `wbr-callouts.kiro.hook` | Full 10-market callout pipeline (analyst → writer → reviewer) | 2 | ✅ Active |
+| SharePoint Sync | `sharepoint-sync.kiro.hook` | Wiki-to-SharePoint sync via CLI | 1 | ✅ Active |
+| Agent Bridge Sync | `agent-bridge-sync.kiro.hook` | Git push + email snapshot to personal email | 1 | ✅ Active |
+| PS Audit | `ps-audit.kiro.hook` | Paid search audit pipeline via Python CLI | 1 | ⚠️ Untested (CLI may not exist) |
 
-**Three-layer durability:** filesystem (`~/shared/`) + SharePoint (`Kiro-Drive/`) + git (agent-bridge). Any two can fail and the system recovers.
+---

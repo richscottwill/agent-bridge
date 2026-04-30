@@ -105,16 +105,13 @@ The morning routine agent has FULL authority over To-Do tasks:
 
 Don't ask permission for any of this. Use judgment. If something is stale, duplicated, or misplaced — fix it.
 
-### HARD RULE: Over-Capacity Escalation
-If any list exceeds its cap for more than 1 day, the morning routine MUST:
-1. Flag it as a 🚨 TRAINER ESCALATION in the tracker — not a note, a callout
-2. Make clearing the overflow the #1 priority in the daily brief, above all other work
-3. Assign time estimates to each overdue item so Richard can see the total cost
-4. Block calendar time for clearing them — suggest a specific window
-5. Do NOT allow strategic work to be prioritized over clearing an over-capacity list. You cannot build on a crumbling foundation.
-
+[38;5;10m> [0m### HARD RULE: Over-Capacity Escalation[0m[0m
+If any list exceeds its cap for more than 1 day, the morning routine MUST:[0m[0m
+1. Flag it as a 🚨 TRAINER ESCALATION callout in the tracker and make clearing the overflow the #1 priority in the daily brief, above all other work[0m[0m
+2. Assign time estimates to each overdue item and block specific calendar windows for clearing them so Richard can see the total cost and commit the time[0m[0m
+3. Do NOT allow strategic work to be prioritized over clearing an over-capacity list — you cannot build on a crumbling foundation[0m[0m
+[0m[0m
 The trainer failed Richard by letting Admin sit at 5/3 for 2 weeks. That stops now.
-
 ## Backlog Task Format
 
 Every task in the Backlog must justify WHY it's not being actively worked on. The bar is higher for important (🔴/🟡) tasks.
@@ -182,10 +179,9 @@ The DRAFT MESSAGE section is equally critical:
 - Include the specific ask, relevant data points, and a clear next step
 - Richard should never have to write a message from scratch for a task the trainer created
 
-## Recurring Task Auto-Generation
-
-The morning routine should automatically create these tasks when it detects the corresponding calendar event or date trigger. If the task already exists in an active list, skip creation.
-
+[38;5;10m> [0m## Recurring Task Auto-Generation[0m[0m
+[0m[0m
+Each morning, the system checks today's calendar events and date triggers, then creates matching tasks automatically. For example, if a "Weekly Team Standup" event appears on the calendar, the system generates a "Prepare standup notes" task. If that task is already on an active list — say, carried over from yesterday — the system skips it instead of creating a duplicate.
 ### Weekly (create Monday morning or day before meeting)
 | Task | List | Trigger | Notes |
 |------|------|---------|-------|

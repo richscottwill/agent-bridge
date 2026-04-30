@@ -103,3 +103,6 @@ key_entities: ["Polaris", "category pages", "weblab", "AEM translations", "CVR",
 action_verbs: ["test", "migrate", "measure", "scale", "revert"]
 update_triggers: ["new LP test results", "Polaris migration milestones", "category page launches in new markets", "AEM process changes"]
 -->
+
+
+**Common failure:** Skipping this step leads to silent data loss. Always verify the output.

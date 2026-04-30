@@ -14,8 +14,7 @@ meetings/README.md for protocol.
 
 ## Pull
 - Hedy: GetSessions (today), details, todos.
-- Outlook: Auto-meeting folder.
-- Email threads related to meetings.
+- Outlook: Auto-meeting folder.; Email threads related to meetings.
 - current.md, nervous-system.md, series files.
 
 
@@ -43,11 +42,23 @@ Hedy: today's topics only. Flag discrepancies.
 
 
 
-## Meeting-to-Task Automation After processing each Hedy session, execute the meeting-to-task pipeline: **Read and execute ~/shared/context/protocols/meeting-to-task-pipeline.md** For each session: 1. Extract all action items (todos, highlights marked as action) 2. For each item assigned to Richard: a. Search Asana for duplicates: SearchTasksInWorkspace(text="[key phrases]", assignee_any="1212732742544167", completed=false) b. If duplicate : AddComment on existing task with meeting reference c. If new: CreateTask with meeting context, derived due date, appropriate project 3. For items assigned to others: append to hands.md dependencies 4. Insert session data into DuckDB meeting_analytics table 5. Insert highlights into DuckDB meeting_highlights table 6. After ALL sessions: self_dm summary of tasks created, updated, and dependencies logged 7. Log pipeline execution to workflow_executions in DuckDB ## Report
+[38;5;10m> [0m## Meeting-to-Task Automation[0m[0m
+[0m[0m
+After each Hedy session, execute **~/shared/context/protocols/meeting-to-task-pipeline.md**:[0m[0m
+[0m[0m
+1. Extract all action items (todos, action-marked highlights)[0m[0m
+2. For Richard's items:[0m[0m
+  a. Search Asana for duplicates: SearchTasksInWorkspace(text="[key phrases]", assignee_any="1212732742544167", completed=false)[0m[0m
+  b. Duplicate found: AddComment with meeting reference[0m[0m
+  c. New: CreateTask with meeting context, derived due date, appropriate project[0m[0m
+3. Others' items: append to hands.md dependencies[0m[0m
+4. Insert session data into DuckDB meeting_analytics; highlights into meeting_highlights[0m[0m
+5. After all sessions: self_dm summary of tasks created, updated, and dependencies logged[0m[0m
+6. Log execution to workflow_executions in DuckDB[0m[0m
+[0m[0m
+## Report[0m[0m
+[0m[0m
 Sessions processed, files updated, flags, action items extracted, Asana tasks created/updated.
-
-
-
 ### Log Hook Execution
 ```sql
 INSERT INTO hook_executions (hook_name, execution_date, start_time, end_time, duration_seconds,

@@ -1,13 +1,3 @@
----
-title: "Review: Paid Search Testing Approach & Year Ahead (V3 — Blind Eval A)"
-status: DRAFT
-audience: amazon-internal
-owner: Richard Williams
-created: 2026-04-12
-updated: 2026-04-12
----
-<!-- DOC-0481 | duck_id: wiki-review-kate-doc-v3-eval-a -->
-
 # Review: Paid Search Testing Approach & Year Ahead (V3 — Blind Eval A)
 
 **Reviewer:** wiki-critic
@@ -75,6 +65,9 @@ Two duplications that should be resolved before the April 16 review:
 
 | Sub-Rule | Status | Notes |
 |----------|--------|-------|
+
+> **Example:** A concrete instance of this pattern in practice.
+
 | Bullet list abuse (>30% in bullets) | ✅ PASS | Zero bullet lists in main body. Pure narrative prose. |
 | Table abuse (tables without interpretation) | ✅ PASS | Both tables (OCI results, Investment Summary) have interpretation paragraphs immediately following. |
 | Formatting as content | ✅ PASS | Removing all bold/italic, the doc reads cleanly. Bold `**2026:**` labels are convenient but not load-bearing. |

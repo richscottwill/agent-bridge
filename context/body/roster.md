@@ -181,7 +181,8 @@ Ordered by frequency of Richard's interaction: MCS and MarTech are daily/weekly;
 
 
 
-### Creative / Brand & Paid Media
+
+
 
 | Name | Role |
 |------|------|
@@ -217,19 +218,13 @@ Ordered by frequency of Richard's interaction: MCS and MarTech are daily/weekly;
 | Saqib Al Hasan | Events (BGG follow-ups) |
 | Sophia | Cross-Store / A.com events (referenced in A.com callouts) |
 | Blair Heckel | Event owner (sourcing callouts) |
-### Push / Notifications
-
-| Name | Role |
-|------|------|
-| Peter Ocampo | Push WW lead (L6, Mobile App) |
-| Nikko Shida | ADA-DA campaigns / ADSP engineering follow-ups |
+[38;5;10m> [0m### Push / Notifications[0m[0m
+[0m[0m
+| Name | Role |[0m[0m
+|------|------|[0m[0m
+| Peter Ocampo | Push WW lead (L6, Mobile App) |[0m[0m
+| Nikko Shida | ADA-DA campaigns / ADSP engineering |[0m[0m
 | Viraj Gholap | Email Engagement templates (MarOps) |
-
-
-
-
-
-
 ### Sourcing / Merchandising (referenced in events sections)
 
 | Name | Role |
@@ -244,6 +239,8 @@ Ordered by frequency of Richard's interaction: MCS and MarTech are daily/weekly;
 
 
 
+
+**Common failure:** Misinterpreting the scope of this section — it covers only Sourcing / Merchandising (referenced in events sections), not adjacent concerns.
 ## 7. Richard's Specific Stakeholder Contacts
 
 People Richard drafts communications *to* most often. See `memory.md` for tone, dynamics, draft style.

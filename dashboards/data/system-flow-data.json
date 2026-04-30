@@ -1,0 +1,185 @@
+{
+  "generated": "2026-04-30T15:14:11.196009+00:00",
+  "data_source": "live",
+  "token_source": "mcp.json:duckdb",
+  "sources": {
+    "slack": {
+      "channels": 23,
+      "msgs_7d": 123
+    },
+    "emails_7d": 134,
+    "asana_open": 206,
+    "hedy_30d": 27,
+    "hedy_series": 27,
+    "calendar_7d": 30,
+    "motherduck_tables": 183,
+    "motherduck_schemas": 9,
+    "schema_breakdown": [
+      {
+        "name": "ps",
+        "n": 72
+      },
+      {
+        "name": "main",
+        "n": 29
+      },
+      {
+        "name": "signals",
+        "n": 21
+      },
+      {
+        "name": "asana",
+        "n": 17
+      },
+      {
+        "name": "karpathy",
+        "n": 14
+      },
+      {
+        "name": "ops",
+        "n": 12
+      },
+      {
+        "name": "ns",
+        "n": 8
+      },
+      {
+        "name": "docs",
+        "n": 7
+      },
+      {
+        "name": "wiki",
+        "n": 3
+      }
+    ]
+  },
+  "freshness": [
+    {
+      "source_name": "asana_tasks",
+      "last_updated": "2026-04-30 12:52:31.058054",
+      "hours_stale": 3
+    },
+    {
+      "source_name": "calendar_events",
+      "last_updated": "2026-04-30 12:52:31.058054",
+      "hours_stale": 3
+    },
+    {
+      "source_name": "emails",
+      "last_updated": "2026-04-30 12:52:31.058054",
+      "hours_stale": 3
+    },
+    {
+      "source_name": "hedy_meetings",
+      "last_updated": "2026-04-30 12:52:31.058054",
+      "hours_stale": 3
+    },
+    {
+      "source_name": "loop_pages",
+      "last_updated": "2026-04-30 12:52:31.058054",
+      "hours_stale": 3
+    },
+    {
+      "source_name": "signal_tracker",
+      "last_updated": "2026-04-30 12:52:31.058054",
+      "hours_stale": 3
+    },
+    {
+      "source_name": "slack_messages",
+      "last_updated": "2026-04-30 12:52:31.058054",
+      "hours_stale": 3
+    }
+  ],
+  "hooks": [
+    {
+      "name": "eod-backend",
+      "runs": 4,
+      "failures": 3,
+      "avg_duration_s": 680.0,
+      "days_since_last": 2,
+      "last_run": "2026-04-28"
+    },
+    {
+      "name": "am-frontend",
+      "runs": 2,
+      "failures": 2,
+      "avg_duration_s": 1410.0,
+      "days_since_last": 0,
+      "last_run": "2026-04-30"
+    },
+    {
+      "name": "am-backend",
+      "runs": 2,
+      "failures": 3,
+      "avg_duration_s": 1890.0,
+      "days_since_last": 8,
+      "last_run": "2026-04-22"
+    },
+    {
+      "name": "am-backend-parallel-v2",
+      "runs": 1,
+      "failures": 0,
+      "avg_duration_s": 360.0,
+      "days_since_last": 13,
+      "last_run": "2026-04-17"
+    },
+    {
+      "name": "eod-meeting-sync",
+      "runs": 1,
+      "failures": 1,
+      "avg_duration_s": 103.1,
+      "days_since_last": 23,
+      "last_run": "2026-04-07"
+    },
+    {
+      "name": "am-backend-remediation",
+      "runs": 1,
+      "failures": 2,
+      "avg_duration_s": 409.5,
+      "days_since_last": 8,
+      "last_run": "2026-04-22"
+    },
+    {
+      "name": "am-auto-phase1",
+      "runs": 1,
+      "failures": 0,
+      "avg_duration_s": 300.0,
+      "days_since_last": 24,
+      "last_run": "2026-04-06"
+    },
+    {
+      "name": "manual-hedy-backfill",
+      "runs": 1,
+      "failures": 0,
+      "avg_duration_s": 5400.0,
+      "days_since_last": 19,
+      "last_run": "2026-04-11"
+    },
+    {
+      "name": "eod-frontend",
+      "runs": 1,
+      "failures": 0,
+      "avg_duration_s": null,
+      "days_since_last": 2,
+      "last_run": "2026-04-28"
+    },
+    {
+      "name": "am-backend-parallel",
+      "runs": 1,
+      "failures": 1,
+      "avg_duration_s": 720.0,
+      "days_since_last": 22,
+      "last_run": "2026-04-08"
+    }
+  ],
+  "workflows": [
+    {
+      "name": "am-backend-parallel-v2",
+      "runs": 5,
+      "successes": 0,
+      "success_rate": 0.0,
+      "avg_duration_s": 1387.4,
+      "days_since_last": 1
+    }
+  ]
+}

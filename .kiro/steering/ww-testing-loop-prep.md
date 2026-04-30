@@ -1,10 +1,9 @@
 ---
 inclusion: manual
 ---
-# WW Testing Loop prep — source-check discipline
-
-Load this file manually before drafting any WW Testing section for the Tuesday PS team Loop, or any update that summarizes active testing work for Brandon/Kate/team.
-
+[38;5;10m> [0m# WW Testing Loop prep — source-check discipline[0m[0m
+[0m[0m
+Open this file and review it before you write any WW Testing summary for the Tuesday PS team Loop or any testing status update shared with Brandon, Kate, or the team.
 ## The one rule
 
 Before making a status claim about any active test — launched X, dialed up Y, delivered N% result, stalled, done — verify it against a source from the last 14 days. If no source exists, write the literal phrase `per prior state file, not reverified this cycle` rather than retaining a stale claim.

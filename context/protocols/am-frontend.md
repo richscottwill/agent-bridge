@@ -225,11 +225,7 @@ If main.calendar_today is empty (sync hasn't run), fall back to live: calendar_v
 - Calibration.
 - Remind Agent Bridge Sync.
 
-
 ---
-
-
-
 
 ## Step 2: Output Channels
 
@@ -262,19 +258,19 @@ Query DuckDB for today's meetings: `SELECT * FROM main.calendar_today ORDER BY s
 If calendar_today is empty, fall back to live: calendar_view(start_date=today, view=day).
 
 **Per-Task Block Rules (mandatory):**
-1. Create ONE calendar block per Today-priority task — never group tasks into bucket blocks.
-2. Each block: minimum 15 minutes, maximum 1.5 hours.
-3. Block order follows the routine sequence: 🧹 Sweep first → 📋 Admin (30 min max) → 🎯 Core → ⚙️ Engine Room last.
+1. Create calendar blocks per Today-priority task — never group unrelated tasks into bucket blocks. A single task may legitimately need a prep block + execution block (e.g., "pull data" then "draft reply") — that's fine, but the **total** time spent on that task across all its blocks must respect the per-task cap below.
+2. **Per-task total cap: 30 minutes maximum across all blocks for the same unique task in a single day. 15 minutes minimum.** If a task already has 30 min of blocks booked, do NOT create another block for it — even if a gap exists, even if urgency is high. Richard extends the existing block in Outlook manually when a task genuinely needs more time; the hook never auto-exceeds 30 min/task/day. This forces the smallest-next-action discipline: if the task can't be advanced in 30 min, break it into distinct sub-tasks with their own 30-min caps, or leave it for Richard's judgment.
+3. Block order follows the routine sequence: 🧹 Sweep first → 📋 Admin (30 min max bucket total) → 🎯 Core → ⚙️ Engine Room last.
 4. Within each routine, order by urgency: overdue first, then by due date ascending.
-5. Time estimates must be realistic for a human doing the actual work:
+5. Time estimates for planning reference (per-task total capped at 30 min regardless — longer tasks get 30 min booked and a "may extend manually" flag in the block body):
    - Quick Slack reply / confirm / triage: 15 min
    - Email reply requiring data lookup: 20 min
    - Agenda prep / meeting prep: 15 min
    - Data pull + spreadsheet update: 30 min
-   - Strategic doc editing / writing: 45 min–1.5 hr
-   - Campaign build / keyword work: 30–45 min
+   - Strategic doc editing / writing: 30 min (flag: "may extend")
+   - Campaign build / keyword work: 30 min
    - Budget/PO/invoice review: 20–30 min
-   - Test design / framework drafting: 45 min–1.5 hr
+   - Test design / framework drafting: 30 min (flag: "may extend")
 6. **Admin block hard cap:** The Admin calendar block SHALL NOT exceed 30 minutes. If total Admin task time estimates exceed 30 minutes, include only what fits within 30 minutes (highest urgency first) and note remaining tasks as "carry forward to tomorrow's Admin block." This protects Core's flow window (Csikszentmihalyi).
 7. Block body must contain: task context (what, why, who's waiting), specific next action, cross-references to related signals/meetings, and any prep notes.
 8. **Admin block completion message:** The Admin calendar block description SHALL end with the habit loop reward template: `"✅ Admin clear. [N] tasks done. Core block starts now."` where [N] = number of Admin tasks scheduled in the block. This fires the cue-routine-reward chain (Duhigg) and signals flow entry readiness (Csikszentmihalyi).
@@ -420,31 +416,25 @@ If the pipeline query returns all-zero counts AND the candidate query returns no
 
 
 
-## Step 5: Portfolio Findings + Alerts
-
-Read am-portfolio-findings.json. Present:
-
-```
-📊 PORTFOLIO SCAN — [N] projects scanned:
-
-[Portfolio Name] ([N] projects):
-  - [Project]: [task_count] tasks ([overdue] overdue, [near_due] near-due)
-    Status: [🟢/🟡/🔴] (last update: [date] — [stale/current])
-    Enrichment needed: [N] tasks missing fields
-
-⚠️ PORTFOLIO ALERTS:
-  - Near-due: [tasks with project context]
-  - Overdue: [tasks with project context]
-  - Stale projects: [list with days since last update]
-  - Cross-team blockers: [MX blockers]
-  - Budget: [budget task alerts]
-  - Recurring: [auto-creation proposals]
-  - Event countdown: [Paid App escalation proposals]
-```
-
-
-
-
+[38;5;10m> [0m## Step 5: Portfolio Findings + Alerts[0m[0m
+[0m[0m
+Read am-portfolio-findings.json. Present:[0m[0m
+[0m[0m
+[0m[0m
+📊 PORTFOLIO SCAN — [N] projects scanned:[0m[0m
+[0m[0m
+[Portfolio Name] ([N] projects):[0m[0m
+ - [Project]: [task_count] tasks ([overdue] overdue, [near_due] near-due)[0m[0m
+   [🟢/🟡/🔴] Last update: [date] ([stale/current]) | Enrichment gaps: [N][0m[0m
+[0m[0m
+⚠️ ALERTS:[0m[0m
+ - Near-due: [tasks w/ project context][0m[0m
+ - Overdue: [tasks w/ project context][0m[0m
+ - Stale projects: [list w/ days since update][0m[0m
+ - Cross-team blockers: [MX blockers][0m[0m
+ - Budget: [budget task alerts][0m[0m
+ - Recurring: [auto-creation proposals][0m[0m
+ - Event countdown: [Paid App escalation proposals][0m[0m
 ### Overdue Kill-or-Revive Decisions
 Present overdue tasks grouped by severity (30+d, 20-29d, 10-19d, 1-9d). For each: extend, kill, or delegate?
 

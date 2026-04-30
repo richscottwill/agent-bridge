@@ -3,75 +3,812 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>System Flow - Kiro Dashboard</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>System Flow — Kiro Dashboard</title>
+
+<!-- Shared projection-engine design language (mirrors Performance + Body System). -->
+<link rel="stylesheet" href="projection-design-system.css?v=2026-04-30">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#eaeaea;padding:16px 20px;min-height:100vh}
-h1{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px}
-.sub{font-size:13px;color:#888;margin-bottom:16px}
-.legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:12px;font-size:12px;color:#888}
-.legend-dot{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
-.chart-wrap{background:#14161e;border:1px solid #1e2028;border-radius:6px;padding:16px;height:calc(100vh - 200px);min-height:500px;position:relative}
-#flow{width:100%;height:100%}
+/* ========================================================================
+   System Flow — light-themed rebuild (2026-04-30).
+   Inherits projection-design-system.css tokens so Performance / Body System /
+   System Flow feel like one product. Page-local additions are limited to
+   Sankey canvas chrome and the flow legend.
+   ======================================================================== */
 
-.tooltip{position:absolute;background:#0f1117;border:1px solid #3b82f6;border-radius:4px;padding:6px 10px;font-size:12px;color:#eaeaea;pointer-events:none;opacity:0;transition:opacity .15s;z-index:10;max-width:280px;line-height:1.4}
-.tooltip.show{opacity:1}
-.tooltip-title{font-weight:600;color:#93b4f5;margin-bottom:3px}
-.tooltip-val{color:#9ca3af;font-size:11px}
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-body);
+  background: var(--color-neutral-bg);
+  line-height: 1.5;
+}
 
-.caption{margin-top:14px;padding:12px 14px;background:#14161e;border:1px solid #1e2028;border-radius:6px;font-size:13px;line-height:1.6;color:#9aa3b0}
-.caption strong{color:#d4d4d4}
+.sf-frame {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--gap-lg);
+}
+
+.sf-header {
+  margin-bottom: var(--gap-lg);
+  padding-bottom: var(--gap-md);
+  border-bottom: 1px solid var(--color-panel-border);
+}
+.sf-title {
+  font-size: var(--size-section);
+  font-weight: var(--weight-section);
+  color: var(--color-text-hero);
+  margin-bottom: 2px;
+}
+.sf-sub {
+  font-size: var(--size-ui);
+  color: var(--color-text-meta);
+  max-width: 980px;
+  line-height: 1.5;
+}
+
+/* Semantic flow palette — muted versions of projection semantics. Sources
+   neutral-blue (the brand anchor), agents amber-warning (they do the work
+   and are where failure surfaces), surfaces success-green (output). Dimmed
+   siblings for fills/backgrounds keep the canvas readable in light. */
+:root {
+  --sf-source: #4A6FA5;
+  --sf-source-bg: rgba(74, 111, 165, 0.10);
+  --sf-agent: #C49A3F;
+  --sf-agent-bg: rgba(196, 154, 63, 0.10);
+  --sf-surface: #0C7A3D;
+  --sf-surface-bg: rgba(12, 122, 61, 0.10);
+}
+
+/* Hero 3-up: sources / agents / surfaces */
+.sf-hero-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-md);
+  margin-bottom: var(--gap-lg);
+}
+@media (max-width: 700px) { .sf-hero-row { grid-template-columns: 1fr; } }
+.sf-hero-cell {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 8px;
+  padding: var(--gap-md) var(--gap-lg);
+  position: relative;
+  overflow: hidden;
+}
+.sf-hero-cell::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.sf-hero-cell.source::before  { background: var(--sf-source); }
+.sf-hero-cell.agent::before   { background: var(--sf-agent); }
+.sf-hero-cell.surface::before { background: var(--sf-surface); }
+.sf-hero-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-subtle);
+  margin-bottom: 6px;
+}
+.sf-hero-cell.source .sf-hero-label  { color: var(--sf-source); }
+.sf-hero-cell.agent .sf-hero-label   { color: var(--sf-agent); }
+.sf-hero-cell.surface .sf-hero-label { color: var(--sf-surface); }
+.sf-hero-num {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--color-text-hero);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+.sf-hero-unit {
+  font-size: 14px;
+  color: var(--color-text-meta);
+  margin-left: 6px;
+  font-weight: 400;
+}
+.sf-hero-sub {
+  font-size: var(--size-meta);
+  color: var(--color-text-meta);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+/* Data freshness strip */
+.sf-freshness {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: var(--gap-lg);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--size-meta);
+  flex-wrap: wrap;
+}
+.sf-freshness-label {
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  font-size: 11px;
+}
+.sf-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  border: 1px solid var(--color-panel-border);
+  font-variant-numeric: tabular-nums;
+}
+.sf-pill .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+.sf-pill.fresh { background: #E6F7EE; color: #0C7A3D; border-color: #B5E4C8; }
+.sf-pill.fresh .dot { background: #0C7A3D; }
+.sf-pill.warn  { background: #FFF4D6; color: #8A6200; border-color: #E8C87A; }
+.sf-pill.warn .dot { background: #E8A800; }
+.sf-pill.stale { background: #FEE2E2; color: var(--color-danger); border-color: #F2A4A4; }
+.sf-pill.stale .dot { background: var(--color-danger); }
+.sf-pill b { font-weight: 600; }
+
+/* Sankey */
+.sf-section-title {
+  font-size: var(--size-body);
+  font-weight: 600;
+  color: var(--color-text-hero);
+  margin: 6px 0 4px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.sf-hint {
+  font-size: var(--size-meta);
+  color: var(--color-text-meta);
+  font-weight: 400;
+}
+.sf-legend {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: var(--size-meta);
+  color: var(--color-text-meta);
+  margin-bottom: 10px;
+}
+.sf-legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.sf-chart-wrap {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 8px;
+  padding: 18px;
+  height: 540px;
+  position: relative;
+  margin-bottom: var(--gap-lg);
+}
+#flow { width: 100%; height: 100%; }
+
+.sf-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: #FFFFFF;
+  border: 1px solid var(--color-brand);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: var(--size-meta);
+  color: var(--color-text-body);
+  opacity: 0;
+  transition: opacity .12s;
+  z-index: 10;
+  max-width: 320px;
+  line-height: 1.5;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+.sf-tooltip.show { opacity: 1; }
+.sf-tt-title {
+  font-weight: 700;
+  color: var(--color-brand);
+  font-size: var(--size-ui);
+  margin-bottom: 4px;
+}
+.sf-tt-stat {
+  font-size: 11px;
+  color: var(--color-text-subtle);
+  margin-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.sf-tt-stat b { color: var(--color-text-hero); font-weight: 600; }
+.sf-tt-break {
+  font-size: 11px;
+  color: #8A6200;
+  margin-top: 6px;
+  font-style: italic;
+  padding-top: 6px;
+  border-top: 1px dashed var(--color-panel-border);
+}
+
+/* Small-multiples row */
+.sf-multiples {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-md);
+  margin-bottom: var(--gap-lg);
+}
+@media (max-width: 1100px) { .sf-multiples { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 700px) { .sf-multiples { grid-template-columns: 1fr; } }
+.sf-mini {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.sf-mini h3 {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-subtle);
+  margin-bottom: 10px;
+}
+.sf-mini-hero {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-text-hero);
+  line-height: 1;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.sf-mini-hero .unit {
+  font-size: 14px;
+  color: var(--color-text-meta);
+  font-weight: 400;
+  margin-left: 6px;
+}
+.sf-mini-sub {
+  font-size: var(--size-meta);
+  color: var(--color-text-meta);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.sf-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+.sf-bar {
+  display: grid;
+  grid-template-columns: 120px 1fr 54px;
+  gap: 8px;
+  align-items: center;
+  font-size: var(--size-meta);
+}
+.sf-bar .name {
+  color: var(--color-text-body);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sf-bar .track {
+  height: 6px;
+  background: #F0F0F0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.sf-bar .fill { height: 100%; border-radius: 3px; }
+.sf-bar .val {
+  color: var(--color-text-meta);
+  font-size: 11px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Narrative band */
+.sf-narrative {
+  background: linear-gradient(135deg, #F7FAFD 0%, #EEF3FB 100%);
+  border: 1px solid #D8E4F3;
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin-bottom: var(--gap-lg);
+}
+.sf-narrative h3 {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-brand);
+  margin-bottom: 10px;
+}
+.sf-narrative p {
+  font-size: var(--size-ui);
+  color: var(--color-text-body);
+  line-height: 1.7;
+  margin-bottom: 10px;
+  max-width: 980px;
+}
+.sf-narrative p:last-child { margin-bottom: 0; }
+.sf-narrative strong { color: var(--color-text-hero); font-weight: 600; }
+.sf-narrative a {
+  color: var(--color-brand);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--color-brand);
+}
+.sf-narrative a:hover { color: var(--color-text-hero); border-bottom-color: var(--color-text-hero); }
+.sf-narrative code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: rgba(0, 102, 204, 0.08);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--color-brand);
+}
+
+/* What breaks when — progressive disclosure */
+.sf-breakage {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-bottom: var(--gap-lg);
+}
+.sf-breakage summary {
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--size-ui);
+  font-weight: 600;
+  color: var(--color-text-hero);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+.sf-breakage summary::-webkit-details-marker { display: none; }
+.sf-breakage summary::before {
+  content: '▸';
+  color: var(--color-brand);
+  transition: transform .15s;
+  display: inline-block;
+}
+.sf-breakage[open] summary::before { transform: rotate(90deg); }
+.sf-breakage summary .hint {
+  font-size: var(--size-meta);
+  color: var(--color-text-meta);
+  font-weight: 400;
+  margin-left: auto;
+}
+.sf-break-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+@media (max-width: 1100px) { .sf-break-grid { grid-template-columns: 1fr; } }
+.sf-break-item {
+  padding: 12px 14px;
+  background: #FFFFFF;
+  border: 1px solid var(--color-panel-border);
+  border-left: 3px solid var(--color-warning);
+  border-radius: 4px;
+}
+.sf-break-item.danger { border-left-color: var(--color-danger); }
+.sf-break-item.ok     { border-left-color: var(--color-success); }
+.sf-break-item .bt {
+  font-weight: 600;
+  font-size: var(--size-ui);
+  color: var(--color-text-hero);
+  margin-bottom: 4px;
+}
+.sf-break-item .bd {
+  font-size: var(--size-meta);
+  color: var(--color-text-meta);
+  line-height: 1.5;
+}
+
+.sf-footer {
+  text-align: right;
+  color: var(--color-text-subtle);
+  font-size: 11px;
+  padding-top: var(--gap-md);
+}
+.sf-footer .stale-badge {
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-left: 8px;
+}
+.sf-footer .stale-fresh { color: var(--color-success); }
+.sf-footer .stale-warn  { color: var(--color-warning); }
+.sf-footer .stale-bad   { color: var(--color-danger); }
+.sf-footer code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: var(--color-panel-bg);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--color-text-body);
+}
 </style>
 </head>
 <body>
 
-<h1>System Flow</h1>
-<div class="sub" id="sub">Where every piece of dashboard content comes from — sources on the left, processing agents in the middle, consumption surfaces on the right. Width of each flow = daily volume.</div>
+<div class="sf-frame">
 
-<div class="legend">
-  <span><span class="legend-dot" style="background:#6b8acd"></span>Sources</span>
-  <span><span class="legend-dot" style="background:#e0c080"></span>Processing Agents</span>
-  <span><span class="legend-dot" style="background:#4ade80"></span>Output Surfaces</span>
+  <div class="sf-header">
+    <div class="sf-title">System Flow</div>
+    <div class="sf-sub">
+      Where dashboard content comes from. <strong>Seven sources</strong> feed <strong>four processing agents</strong>, which produce content for <strong>five consumption surfaces</strong>. Humans supply direction and review; agents supply throughput. Width of each flow = daily volume.
+    </div>
+  </div>
+
+  <!-- Hero row -->
+  <div class="sf-hero-row">
+    <div class="sf-hero-cell source">
+      <div class="sf-hero-label">Sources (ingest)</div>
+      <div><span class="sf-hero-num">7</span><span class="sf-hero-unit">streams</span></div>
+      <div class="sf-hero-sub">Slack · Email · Asana · Hedy · Loop · Calendar · MotherDuck</div>
+    </div>
+    <div class="sf-hero-cell agent">
+      <div class="sf-hero-label">Processing agents</div>
+      <div><span class="sf-hero-num">4</span><span class="sf-hero-unit">pipelines</span></div>
+      <div class="sf-hero-sub">AM Backend · EOD Backend · WBR Callouts · Wiki Team</div>
+    </div>
+    <div class="sf-hero-cell surface">
+      <div class="sf-hero-label">Consumption surfaces</div>
+      <div><span class="sf-hero-num">5</span><span class="sf-hero-unit">destinations</span></div>
+      <div class="sf-hero-sub">Dashboard · Slack · Asana · SharePoint · Quip</div>
+    </div>
+  </div>
+
+  <!-- Ingest freshness -->
+  <div class="sf-freshness" id="freshnessStrip">
+    <span class="sf-freshness-label">Ingest freshness</span>
+    <span style="color: var(--color-text-subtle);">loading…</span>
+  </div>
+
+  <!-- Sankey -->
+  <div class="sf-section-title">
+    Flow map
+    <span class="sf-hint">Node height = daily volume · Link width = contribution · Hover any node for detail</span>
+  </div>
+  <div class="sf-legend">
+    <span><span class="sf-legend-dot" style="background: var(--sf-source)"></span>Sources</span>
+    <span><span class="sf-legend-dot" style="background: var(--sf-agent)"></span>Processing agents</span>
+    <span><span class="sf-legend-dot" style="background: var(--sf-surface)"></span>Output surfaces</span>
+  </div>
+  <div class="sf-chart-wrap">
+    <canvas id="flow"></canvas>
+    <div class="sf-tooltip" id="tip"></div>
+  </div>
+
+  <!-- Small multiples -->
+  <div class="sf-multiples">
+    <div class="sf-mini" id="hookCard">
+      <h3>Hook reliability (platform)</h3>
+      <div class="sf-mini-hero" id="hookHero">—</div>
+      <div class="sf-mini-sub" id="hookSub">loading…</div>
+      <div class="sf-bars" id="hookBars"></div>
+    </div>
+
+    <div class="sf-mini" id="volCard">
+      <h3>Weekly ingest volume</h3>
+      <div class="sf-mini-hero" id="volTotal">—</div>
+      <div class="sf-mini-sub">Items flowing in over the last 7 days</div>
+      <div class="sf-bars" id="volBars"></div>
+    </div>
+
+    <div class="sf-mini" id="stockCard">
+      <h3>Persistent stock</h3>
+      <div class="sf-mini-hero" id="stockHero">—</div>
+      <div class="sf-mini-sub" id="stockSub">MotherDuck <code>ps_analytics</code> · the system's memory</div>
+      <div class="sf-bars" id="stockBars"></div>
+    </div>
+  </div>
+
+  <!-- Narrative -->
+  <div class="sf-narrative">
+    <h3>What this system is</h3>
+    <p>
+      The system is a <strong>pipeline orchestrator</strong>, not a chatbot. Richard's inputs (Slack, meetings, email, tasks) get captured continuously. Twice a day — <strong>AM at 6:30</strong> and <strong>EOD at ~18:00</strong> — backend hooks fan out to parallel subagents that read, summarize, and reconcile. The output lands on this dashboard, in Slack as a daily brief, and as writes into Asana (next-action fields, enrichment, completion).
+    </p>
+    <p>
+      Two other pipelines run on their own cadences. The <strong>WBR callout pipeline</strong> (analyst → writer → reviewer) produces market callouts every Tuesday from MotherDuck <code>ps.v_weekly</code>. The <strong>wiki team</strong> (editor → researcher → writer → critic → librarian) publishes long-form articles to SharePoint's <code>Artifacts/</code> library. Both read the same facts but emit different artifacts.
+    </p>
+    <p>
+      The <strong>body system</strong> (Overview · Agent Activity tabs) is meta-telemetry on the orchestrator itself — hook reliability, workflow success rates, autoresearch loop health, experiment keep-rate. If this page shows what the system <em>produced</em> today, Body System shows whether the <em>machinery</em> is healthy. See: <a href="body-system/index.html" target="_top">Body System →</a>
+    </p>
+  </div>
+
+  <!-- What breaks when -->
+  <details class="sf-breakage" open>
+    <summary>What breaks when <span class="hint">Failure modes, ranked by frequency</span></summary>
+    <div class="sf-break-grid">
+      <div class="sf-break-item danger">
+        <div class="bt">Loop docs auth expires</div>
+        <div class="bd">Every 7–10 days the Loop MCP loses KMSI auth. AM Backend logs all 5 pages as 401 and skips. Fix: <code>mwinit -f</code>.</div>
+      </div>
+      <div class="sf-break-item danger">
+        <div class="bt">Nested subagent blocker (karpathy Phase 6)</div>
+        <div class="bd">From 2026-04-22: <code>z14.registerSubAgentExecution is not a function</code>. Blocks all blind-eval experiments. EOD runs, Phase 6 silently skipped. Autoresearch loop stalled 8+ days.</div>
+      </div>
+      <div class="sf-break-item warn">
+        <div class="bt">MOTHERDUCK_TOKEN missing in hook env</div>
+        <div class="bd">When hooks shell out to Python (hard-thing-refresh.py, refresh-body-system.py), the token isn't in env — silent null-state writes. Fix shipped 2026-04-30: scripts now auto-resolve from mcp.json, fail-loud if missing.</div>
+      </div>
+      <div class="sf-break-item warn">
+        <div class="bt">Hedy MCP unavailable in subagents</div>
+        <div class="bd">Meeting transcripts work from orchestrator but not from parallel subagents — roster doesn't include mcp_hedy_*. Workaround: run Hedy ingestion in EOD only, not AM parallel.</div>
+      </div>
+      <div class="sf-break-item warn">
+        <div class="bt">Asana My Tasks 502s</div>
+        <div class="bd">GetUserTasks hits SSE errors intermittently. AM pulls 5/6 projects and flags the miss rather than failing the whole run. No user impact beyond a warning in the brief.</div>
+      </div>
+      <div class="sf-break-item ok">
+        <div class="bt">Slack + MotherDuck — resilient</div>
+        <div class="bd">Slack MCP hasn't missed a run in 30+ days. MotherDuck writes across all 10 schemas are reliable once attached. These are the workhorses — if they break, almost nothing else matters.</div>
+      </div>
+    </div>
+  </details>
+
+  <div class="sf-footer" id="sfFooter">loading…</div>
+
 </div>
-
-<div class="chart-wrap"><canvas id="flow"></canvas><div class="tooltip" id="tip"></div></div>
-
-<div class="caption" id="caption">
-  <strong>The orchestrator pattern.</strong> Seven sources flow into four processing agents, which produce content for five consumption surfaces. Humans (Richard + team) supply direction and review; agents supply throughput. Every flow line = a measurable daily volume.
-</div>
-
-<script src="./shared/provenance.js"></script>
 
 <script>
-/* Lightweight Sankey renderer — native canvas, no D3 dependency.
- * Good enough for a static diagram; prioritizes legibility over interactivity. */
+/* ─────────────────────────────────────────────────────────────────────────
+ * Data load — fetch system-flow-data.json written by refresh-system-flow.py.
+ * Falls back to sensible placeholder if file is missing so the page is
+ * demo-worthy even on first load.
+ * ──────────────────────────────────────────────────────────────────────── */
 
-const DATA = {
+fetch('data/system-flow-data.json?t=' + Date.now())
+  .then(r => r.ok ? r.json() : Promise.reject(r.status))
+  .then(render)
+  .catch(e => {
+    document.getElementById('sfFooter').innerHTML =
+      '<span style="color: var(--color-danger); font-weight: 600;">Failed to load system-flow-data.json</span> · run <code>refresh-system-flow.py</code>';
+    renderWithPlaceholder();
+    console.error('system-flow fetch error:', e);
+  });
+
+function renderWithPlaceholder() {
+  // Minimal demo data so the Sankey and small-multiples still draw.
+  render({
+    generated: new Date().toISOString(),
+    data_source: 'placeholder',
+    token_source: 'none',
+    sources: {
+      slack: { channels: 23, msgs_7d: 127 },
+      emails_7d: 136, asana_open: 206, hedy_30d: 27, hedy_series: 11,
+      calendar_7d: 22, motherduck_tables: 182, motherduck_schemas: 10,
+      schema_breakdown: [
+        {name:'ps',n:72},{name:'main',n:28},{name:'signals',n:21},
+        {name:'asana',n:17},{name:'karpathy',n:14},{name:'ops',n:12},
+      ],
+    },
+    freshness: [],
+    hooks: [], workflows: [],
+  });
+}
+
+function render(d) {
+  renderFreshness(d);
+  renderSankey();
+  renderMultiples(d);
+  renderFooter(d);
+  initTooltip();
+  window.addEventListener('resize', renderSankey);
+}
+
+/* Ingest freshness pills */
+function renderFreshness(d) {
+  const rows = d.freshness || [];
+  const strip = document.getElementById('freshnessStrip');
+  if (!rows.length) {
+    strip.innerHTML = '<span class="sf-freshness-label">Ingest freshness</span><span style="color: var(--color-text-subtle);">no data — ops.data_freshness empty</span>';
+    return;
+  }
+  const label = '<span class="sf-freshness-label">Ingest freshness</span>';
+  const pills = rows.map(r => {
+    const hours = r.hours_stale == null ? null : Number(r.hours_stale);
+    const cls = hours == null ? 'warn'
+              : hours <= 6  ? 'fresh'
+              : hours <= 48 ? 'warn'
+              : 'stale';
+    const label = hours == null ? '?'
+                : hours < 48 ? hours + 'h'
+                : Math.round(hours / 24) + 'd';
+    // Friendly display name
+    const name = (r.source_name || '')
+      .replace(/_/g, ' ')
+      .replace(/\bmessages\b/, 'msgs')
+      .replace(/\bmeetings\b/, 'meets');
+    return `<span class="sf-pill ${cls}"><span class="dot"></span>${name} <b>${label}</b></span>`;
+  }).join('');
+  strip.innerHTML = label + pills;
+}
+
+/* Small multiples — hooks + volume + stock */
+function renderMultiples(d) {
+  // Hooks
+  const hooks = (d.hooks || []).slice(0, 6);
+  const totalRuns = (d.hooks || []).reduce((s, h) => s + (h.runs || 0), 0);
+  const totalFails = (d.hooks || []).reduce((s, h) => s + (h.failures || 0), 0);
+  document.getElementById('hookHero').innerHTML = totalRuns + '<span class="unit">runs</span>';
+  document.getElementById('hookSub').textContent =
+    `${(d.hooks || []).length} hooks tracked · ${totalFails} failures · see Body System for detail`;
+  if (hooks.length) {
+    const max = Math.max(1, ...hooks.map(h => h.runs || 0));
+    document.getElementById('hookBars').innerHTML = hooks.map(h => {
+      const pct = (h.runs || 0) / max * 100;
+      const color = (h.failures || 0) > (h.runs || 0) / 2 ? 'var(--color-danger)'
+                  : (h.failures || 0) > 0 ? 'var(--color-warning)'
+                  : 'var(--color-success)';
+      const d2 = h.days_since_last;
+      const freshColor = d2 == null ? 'var(--color-text-subtle)'
+                       : d2 <= 3 ? 'var(--color-success)'
+                       : d2 <= 7 ? 'var(--color-warning)'
+                       : 'var(--color-danger)';
+      const freshLabel = d2 == null ? '—' : d2 + 'd';
+      return `<div class="sf-bar" title="${h.name}: ${h.runs} runs, ${h.failures} failures, last ${freshLabel}">
+        <span class="name">${h.name}</span>
+        <span class="track"><span class="fill" style="width: ${pct}%; background: ${color};"></span></span>
+        <span class="val" style="color: ${freshColor};">${freshLabel}</span>
+      </div>`;
+    }).join('');
+  } else {
+    document.getElementById('hookBars').innerHTML = '<div style="color: var(--color-text-subtle); font-size: var(--size-meta); padding: 8px 0;">No hook data yet</div>';
+  }
+
+  // Volume
+  const src = d.sources || {};
+  const vol = [
+    { name: 'Slack msgs',      val: src.slack?.msgs_7d || 0 },
+    { name: 'Email',           val: src.emails_7d || 0 },
+    { name: 'Asana open',      val: src.asana_open || 0 },
+    { name: 'Hedy meetings',   val: src.hedy_30d || 0 },
+    { name: 'Cal events',      val: src.calendar_7d || 0 },
+  ];
+  const total = vol.reduce((s, v) => s + v.val, 0);
+  document.getElementById('volTotal').innerHTML = total + '<span class="unit">items</span>';
+  const maxV = Math.max(1, ...vol.map(v => v.val));
+  document.getElementById('volBars').innerHTML = vol.map(v => {
+    const pct = v.val / maxV * 100;
+    return `<div class="sf-bar">
+      <span class="name">${v.name}</span>
+      <span class="track"><span class="fill" style="width: ${pct}%; background: var(--sf-source);"></span></span>
+      <span class="val">${v.val}</span>
+    </div>`;
+  }).join('');
+
+  // Stock
+  document.getElementById('stockHero').innerHTML =
+    (src.motherduck_tables || 0) + '<span class="unit">tables</span>';
+  document.getElementById('stockSub').innerHTML =
+    `MotherDuck <code>ps_analytics</code> · ${src.motherduck_schemas || 0} schemas · the system's memory`;
+  const schemas = (src.schema_breakdown || []).slice(0, 6);
+  if (schemas.length) {
+    const maxS = Math.max(1, ...schemas.map(s => s.n || 0));
+    document.getElementById('stockBars').innerHTML = schemas.map(s => {
+      const pct = (s.n || 0) / maxS * 100;
+      return `<div class="sf-bar">
+        <span class="name">${s.name}</span>
+        <span class="track"><span class="fill" style="width: ${pct}%; background: var(--sf-surface);"></span></span>
+        <span class="val">${s.n}</span>
+      </div>`;
+    }).join('');
+  }
+}
+
+/* Footer — generated timestamp + provenance + staleness badge */
+function renderFooter(d) {
+  const gen = d.generated ? new Date(d.generated) : null;
+  const ageH = gen ? (Date.now() - gen.getTime()) / 3600000 : null;
+  const cls = ageH == null ? ''
+            : ageH < 6  ? 'stale-fresh'
+            : ageH < 48 ? 'stale-warn'
+            : 'stale-bad';
+  const badge = ageH == null ? ''
+              : `<span class="stale-badge ${cls}">${ageH < 2 ? 'fresh' : ageH < 48 ? Math.round(ageH) + 'h old' : Math.round(ageH/24) + 'd old'}</span>`;
+  const tokMsg = d.data_source === 'live' ? `live · ${d.token_source}`
+               : d.data_source === 'cache' ? '<span style="color: var(--color-warning);">cache mode</span>'
+               : d.data_source === 'placeholder' ? '<span style="color: var(--color-danger);">placeholder</span>'
+               : d.data_source;
+  document.getElementById('sfFooter').innerHTML =
+    `Generated: ${gen ? gen.toLocaleString() : '—'} · ${tokMsg}${badge} · refresh via <code>refresh-system-flow.py</code>`;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * Sankey — light-theme native canvas.
+ * Topology is static (describes system architecture). Weights could be
+ * data-driven from live volumes but kept proportional for readability.
+ * ──────────────────────────────────────────────────────────────────────── */
+
+const SYS = {
   nodes: [
-    // Sources (column 0)
-    { id: 'slack',    label: 'Slack',          col: 0, tint: '#6b8acd', detail: '17 channels ingested daily' },
-    { id: 'asana',    label: 'Asana',          col: 0, tint: '#6b8acd', detail: '96+ tasks, 5 portfolio projects' },
-    { id: 'email',    label: 'Email',          col: 0, tint: '#6b8acd', detail: 'Outlook inbox triage' },
-    { id: 'hedy',     label: 'Hedy meetings',  col: 0, tint: '#6b8acd', detail: '11 recurring series transcribed' },
-    { id: 'loop',     label: 'Loop docs',      col: 0, tint: '#6b8acd', detail: 'Manager 1:1 + strategy docs' },
-    { id: 'calendar', label: 'Calendar',       col: 0, tint: '#6b8acd', detail: 'Upcoming meetings + blocks' },
-    { id: 'duckdb',   label: 'MotherDuck',     col: 0, tint: '#6b8acd', detail: '55 tables, 8 schemas, PS performance data' },
+    { id: 'slack',    label: 'Slack',         col: 0, tint: 'source',
+      detail: '23 channels ingested daily via Slack MCP.',
+      stat_label: 'Last 7d', stat_val: '127 msgs · 23 channels',
+      breaks: 'When: session expires (rare). Impact: signal_tracker gaps.' },
+    { id: 'asana',    label: 'Asana',         col: 0, tint: 'source',
+      detail: '206 open tasks across 6 portfolio projects. Polled by AM + EOD.',
+      stat_label: 'Open tasks', stat_val: '206',
+      breaks: 'When: My Tasks SSE 502s. Impact: one project missing, flagged.' },
+    { id: 'email',    label: 'Email',         col: 0, tint: 'source',
+      detail: 'Outlook inbox triage. Emails categorized into actionable/unanswered.',
+      stat_label: 'Last 7d', stat_val: '136 emails',
+      breaks: 'When: Outlook MCP auth expires. Impact: email triage skipped.' },
+    { id: 'hedy',     label: 'Hedy',          col: 0, tint: 'source',
+      detail: 'Meeting transcripts + recaps. Fed into signals.hedy_meetings.',
+      stat_label: 'Last 30d', stat_val: '27 sessions',
+      breaks: 'When: Hedy MCP not in subagent roster. Impact: orchestrator-only, slower.' },
+    { id: 'loop',     label: 'Loop',          col: 0, tint: 'source',
+      detail: 'Manager 1:1 notes + strategy docs. Read-only, read each morning.',
+      stat_label: 'Freshness', stat_val: 'varies',
+      breaks: 'When: KMSI expires (every 7–10d). Impact: AM logs 401, skips all 5 pages.' },
+    { id: 'calendar', label: 'Calendar',      col: 0, tint: 'source',
+      detail: 'Today + this-week events. Block scheduler reads this.',
+      stat_label: 'Today', stat_val: 'Active',
+      breaks: 'When: Outlook MCP auth. Impact: blocks fall back to manual.' },
+    { id: 'duckdb',   label: 'MotherDuck',    col: 0, tint: 'source',
+      detail: 'ps_analytics — 182 tables, 10 schemas. The system\'s memory.',
+      stat_label: 'Tables', stat_val: '182 across 10 schemas',
+      breaks: 'When: ATTACH missing. Impact: queries run on in-memory only, silently empty.' },
 
-    // Processing (column 1)
-    { id: 'am',       label: 'AM Backend',     col: 1, tint: '#e0c080', detail: '6 parallel subagents' },
-    { id: 'eod',      label: 'EOD Backend',    col: 1, tint: '#e0c080', detail: 'Asana reconcile + organ cascade' },
-    { id: 'wbr',      label: 'WBR Pipeline',   col: 1, tint: '#e0c080', detail: '3-agent callout: analyst → writer → reviewer' },
-    { id: 'wiki',     label: 'Wiki Team',      col: 1, tint: '#e0c080', detail: '6 agents: editor → researcher → writer → critic → librarian + concierge' },
+    { id: 'am',   label: 'AM Backend',    col: 1, tint: 'agent',
+      detail: '6 parallel subagents: Slack, Email+Cal, Loop, Hedy, Asana, Five Levels.',
+      stat_label: 'Typical run', stat_val: '~25 min',
+      breaks: 'When: subagent roster missing Hedy. Impact: partial data, brief still ships.' },
+    { id: 'eod',  label: 'EOD Backend',   col: 1, tint: 'agent',
+      detail: 'Asana reconcile + organ cascade + DuckDB snapshot + karpathy experiments.',
+      stat_label: 'Typical run', stat_val: '~11 min',
+      breaks: 'When: partial truncation. Impact: tomorrow\'s AM time-travel falls back.' },
+    { id: 'wbr',  label: 'WBR Callouts',  col: 1, tint: 'agent',
+      detail: '3-agent sequential pipeline: analyst → writer → reviewer.',
+      stat_label: 'Cadence', stat_val: 'Tuesdays × 10 markets',
+      breaks: 'When: ps.v_weekly data stale. Impact: callouts pause, flagged.' },
+    { id: 'wiki', label: 'Wiki Team',     col: 1, tint: 'agent',
+      detail: '6 agents: editor → researcher → writer → critic → librarian + concierge.',
+      stat_label: 'Pipeline', stat_val: '5-stage sequential',
+      breaks: 'When: editor not invoked. Impact: zero throughput (expected when no demand).' },
 
-    // Surfaces (column 2)
-    { id: 'dash',     label: 'Dashboard',      col: 2, tint: '#4ade80', detail: 'This view, updated continuously' },
-    { id: 'slackout', label: 'Slack (posts)',  col: 2, tint: '#4ade80', detail: 'Daily brief + WBR updates' },
-    { id: 'asanaout', label: 'Asana (writes)', col: 2, tint: '#4ade80', detail: 'Task enrichment + Next-action fields' },
-    { id: 'sp',       label: 'SharePoint',     col: 2, tint: '#4ade80', detail: 'Published wiki articles + forecasts' },
-    { id: 'quip',     label: 'Quip',           col: 2, tint: '#4ade80', detail: 'Pre-WBR callouts Quip doc' },
+    { id: 'dash',     label: 'Dashboard',     col: 2, tint: 'surface',
+      detail: 'This HTML. Updated continuously via JSON data files refreshed by EOD/AM.',
+      stat_label: 'You are here', stat_val: '↗',
+      breaks: 'When: JSON refresh fails. Impact: stale numbers, visibly flagged by freshness strip.' },
+    { id: 'slackout', label: 'Slack (post)',  col: 2, tint: 'surface',
+      detail: 'Daily brief to rsw-channel + triage DMs to prichwil. ~1–2 posts/day.',
+      stat_label: 'Throughput', stat_val: '~2 posts/day',
+      breaks: 'When: post permission denied. Impact: brief sent as email fallback.' },
+    { id: 'asanaout', label: 'Asana (write)', col: 2, tint: 'surface',
+      detail: 'Next-action field enrichment, completion syncing, task creation on demand.',
+      stat_label: 'Writes/day', stat_val: '~35–65',
+      breaks: 'When: write permission missing. Impact: flags but doesn\'t retry.' },
+    { id: 'sp',       label: 'SharePoint',    col: 2, tint: 'surface',
+      detail: 'Kiro-Drive/ durability layer. Published wiki .docx, forecasts, state snapshots.',
+      stat_label: 'Destination', stat_val: 'Artifacts · state-files · system-state',
+      breaks: 'When: SharePoint KMSI expires. Impact: writes queue locally, retry on next run.' },
+    { id: 'quip',     label: 'Quip',          col: 2, tint: 'surface',
+      detail: 'Pre-WBR callout drafts for market leads. Read by humans, edited, shipped Tuesday.',
+      stat_label: 'Cadence', stat_val: 'Weekly',
+      breaks: 'When: Quip auth. Impact: draft lives in markdown fallback.' },
   ],
   links: [
-    // Source → Processing
     { from: 'slack',    to: 'am',   weight: 40 },
     { from: 'asana',    to: 'am',   weight: 30 },
     { from: 'email',    to: 'am',   weight: 20 },
@@ -86,8 +823,6 @@ const DATA = {
     { from: 'slack',    to: 'wiki', weight: 10 },
     { from: 'email',    to: 'wiki', weight: 4 },
     { from: 'hedy',     to: 'wiki', weight: 6 },
-
-    // Processing → Surface
     { from: 'am',   to: 'dash',     weight: 30 },
     { from: 'am',   to: 'slackout', weight: 20 },
     { from: 'am',   to: 'asanaout', weight: 35 },
@@ -102,103 +837,104 @@ const DATA = {
   ],
 };
 
-function render() {
+const TINT = {
+  source:  { stroke: '#4A6FA5', fill: 'rgba(74, 111, 165, 0.18)' },
+  agent:   { stroke: '#C49A3F', fill: 'rgba(196, 154, 63, 0.18)' },
+  surface: { stroke: '#0C7A3D', fill: 'rgba(12, 122, 61, 0.18)' },
+};
+
+function renderSankey() {
   const canvas = document.getElementById('flow');
+  const wrap = canvas.parentElement;
   const dpr = window.devicePixelRatio || 1;
-  const W = canvas.clientWidth, H = canvas.clientHeight;
+  const W = wrap.clientWidth - 36, H = wrap.clientHeight - 36;
   canvas.width = W * dpr;
   canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
   const ctx = canvas.getContext('2d');
   ctx.scale(dpr, dpr);
   ctx.clearRect(0, 0, W, H);
 
-  const PAD = { top: 20, bot: 20, left: 10, right: 10 };
-  const COL_W = 140;
+  const PAD = { top: 12, bot: 12, left: 8, right: 8 };
+  const COL_W = Math.max(120, Math.min(160, W * 0.13));
   const colX = [PAD.left, (W - COL_W) / 2, W - COL_W - PAD.right];
 
-  // Compute node heights proportional to their total flow
   const nodesByCol = [[], [], []];
-  DATA.nodes.forEach(n => nodesByCol[n.col].push(n));
+  SYS.nodes.forEach(n => nodesByCol[n.col].push(n));
 
-  // Total outgoing (or incoming) weight per node
-  DATA.nodes.forEach(n => {
-    const out = DATA.links.filter(l => l.from === n.id).reduce((s, l) => s + l.weight, 0);
-    const inw = DATA.links.filter(l => l.to === n.id).reduce((s, l) => s + l.weight, 0);
+  SYS.nodes.forEach(n => {
+    const out = SYS.links.filter(l => l.from === n.id).reduce((s, l) => s + l.weight, 0);
+    const inw = SYS.links.filter(l => l.to === n.id).reduce((s, l) => s + l.weight, 0);
     n.weight = Math.max(out, inw);
   });
 
-  // Layout each column
   const usableH = H - PAD.top - PAD.bot;
   nodesByCol.forEach((col, colIdx) => {
-    const gap = 12;
+    const gap = 10;
     const totalW = col.reduce((s, n) => s + n.weight, 0);
     const totalGaps = gap * (col.length - 1);
     const scale = (usableH - totalGaps) / totalW;
     let y = PAD.top;
     col.forEach(n => {
-      n.h = Math.max(20, n.weight * scale);
-      n.x = colX[colIdx];
-      n.y = y;
-      n.w = COL_W;
+      n.h = Math.max(22, n.weight * scale);
+      n.x = colX[colIdx]; n.y = y; n.w = COL_W;
       y += n.h + gap;
     });
   });
 
-  // Allocate flow-source-port positions per node
-  DATA.nodes.forEach(n => {
-    const outs = DATA.links.filter(l => l.from === n.id);
-    const ins = DATA.links.filter(l => l.to === n.id);
+  SYS.nodes.forEach(n => {
+    const outs = SYS.links.filter(l => l.from === n.id);
+    const ins = SYS.links.filter(l => l.to === n.id);
     let yo = n.y;
     outs.forEach(l => {
       const ratio = l.weight / (n.weight || 1);
-      l._fromY = yo;
-      l._fromH = Math.max(1.5, n.h * ratio);
+      l._fromY = yo; l._fromH = Math.max(1.5, n.h * ratio);
       yo += l._fromH;
     });
     let yi = n.y;
     ins.forEach(l => {
       const ratio = l.weight / (n.weight || 1);
-      l._toY = yi;
-      l._toH = Math.max(1.5, n.h * ratio);
+      l._toY = yi; l._toH = Math.max(1.5, n.h * ratio);
       yi += l._toH;
     });
   });
 
-  // Draw links first (so nodes render on top)
-  DATA.links.forEach(l => {
-    const from = DATA.nodes.find(n => n.id === l.from);
-    const to = DATA.nodes.find(n => n.id === l.to);
-    drawLink(ctx, from.x + from.w, l._fromY, l._fromH, to.x, l._toY, l._toH);
+  SYS.links.forEach(l => {
+    const from = SYS.nodes.find(n => n.id === l.from);
+    const to = SYS.nodes.find(n => n.id === l.to);
+    drawLink(ctx, from.x + from.w, l._fromY, l._fromH, to.x, l._toY, l._toH,
+             TINT[from.tint].fill, TINT[to.tint].fill);
   });
 
-  // Nodes
-  DATA.nodes.forEach(n => drawNode(ctx, n));
-
-  // Save nodes for hover
-  canvas._nodes = DATA.nodes;
+  SYS.nodes.forEach(n => drawNode(ctx, n));
+  canvas._nodes = SYS.nodes;
 }
 
 function drawNode(ctx, n) {
-  ctx.fillStyle = n.tint + 'CC';
+  const t = TINT[n.tint];
+  // Tinted fill background
+  ctx.fillStyle = t.fill;
   ctx.fillRect(n.x, n.y, n.w, n.h);
-  ctx.fillStyle = '#0f1117';
-  ctx.fillRect(n.x + 2, n.y + 2, n.w - 4, n.h - 4);
-  ctx.fillStyle = '#d4d4d4';
-  ctx.font = '600 13px -apple-system, sans-serif';
+  // Crisp left stripe in solid tint color
+  ctx.fillStyle = t.stroke;
+  ctx.fillRect(n.x, n.y, 3, n.h);
+
+  ctx.fillStyle = '#0F1111';
+  ctx.font = '600 13px -apple-system, "Amazon Ember", sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  // If node is tall enough, also show weight
-  if (n.h > 28) {
-    ctx.fillText(n.label, n.x + n.w / 2, n.y + n.h / 2 - 7);
-    ctx.fillStyle = '#666';
-    ctx.font = '11px -apple-system, sans-serif';
-    ctx.fillText(n.weight + '/day', n.x + n.w / 2, n.y + n.h / 2 + 8);
+  if (n.h > 32) {
+    ctx.fillText(n.label, n.x + n.w / 2, n.y + n.h / 2 - 8);
+    ctx.fillStyle = '#6B6B6B';
+    ctx.font = '500 11px -apple-system, sans-serif';
+    ctx.fillText('~' + n.weight + '/day', n.x + n.w / 2, n.y + n.h / 2 + 8);
   } else {
     ctx.fillText(n.label, n.x + n.w / 2, n.y + n.h / 2);
   }
 }
 
-function drawLink(ctx, x1, y1, h1, x2, y2, h2) {
+function drawLink(ctx, x1, y1, h1, x2, y2, h2, fromColor, toColor) {
   const mid = (x1 + x2) / 2;
   ctx.beginPath();
   ctx.moveTo(x1, y1);
@@ -206,10 +942,9 @@ function drawLink(ctx, x1, y1, h1, x2, y2, h2) {
   ctx.lineTo(x2, y2 + h2);
   ctx.bezierCurveTo(mid, y2 + h2, mid, y1 + h1, x1, y1 + h1);
   ctx.closePath();
-  // Gradient from source tint to target tint
   const grad = ctx.createLinearGradient(x1, 0, x2, 0);
-  grad.addColorStop(0, 'rgba(107,138,205,0.15)');
-  grad.addColorStop(1, 'rgba(74,222,128,0.15)');
+  grad.addColorStop(0, fromColor);
+  grad.addColorStop(1, toColor);
   ctx.fillStyle = grad;
   ctx.fill();
 }
@@ -222,9 +957,17 @@ function initTooltip() {
     const mx = e.clientX - rect.left, my = e.clientY - rect.top;
     const hit = (canvas._nodes || []).find(n => mx >= n.x && mx <= n.x + n.w && my >= n.y && my <= n.y + n.h);
     if (hit) {
-      tip.innerHTML = `<div class="tooltip-title">${hit.label}</div><div>${hit.detail}</div><div class="tooltip-val">~${hit.weight} items/day</div>`;
-      tip.style.left = (e.clientX - rect.left + 12) + 'px';
-      tip.style.top = (e.clientY - rect.top + 12) + 'px';
+      tip.innerHTML = `
+        <div class="sf-tt-title">${hit.label}</div>
+        <div>${hit.detail}</div>
+        <div class="sf-tt-stat"><span>${hit.stat_label}</span><b>${hit.stat_val}</b></div>
+        ${hit.breaks ? `<div class="sf-tt-break">⚠ ${hit.breaks}</div>` : ''}
+      `;
+      const tipW = tip.offsetWidth || 280;
+      let lx = mx + 14;
+      if (lx + tipW > rect.width) lx = mx - tipW - 10;
+      tip.style.left = lx + 'px';
+      tip.style.top = Math.max(0, my + 10) + 'px';
       tip.classList.add('show');
     } else {
       tip.classList.remove('show');
@@ -232,9 +975,6 @@ function initTooltip() {
   });
   canvas.addEventListener('mouseleave', () => tip.classList.remove('show'));
 }
-
-window.addEventListener('load', () => { render(); initTooltip(); });
-window.addEventListener('resize', () => render());
 </script>
 
 </body>

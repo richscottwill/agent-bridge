@@ -162,7 +162,6 @@ Key conditional behaviors driven by config:
 - **has_yoy = false** (AU): No YoY paragraph. Focus on OP2 targets and efficiency.
 - **regional_summary = true** (EU5): Reference cross-market patterns from the EU5 regional summary where relevant.
 
-### Narrative, not data dump (applies to every callout)
 
 The callout is a story with a point of view, not a list of metrics. Every market — single or consolidated — follows the same hierarchy:
 

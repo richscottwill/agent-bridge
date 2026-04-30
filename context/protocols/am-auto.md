@@ -121,15 +121,19 @@ Skip if KDS unreachable — non-blocking.
 
 ## Phase 2: Signal Routing + Task Processing
 
+
+#### Process intake files.
+
+
 Process intake files. Create tasks from signals. Detect enrichment gaps. All auto-write operations execute here. Approval-required operations are queued for AM-Frontend.
-
-
 
 #### Phase 2: Signal Routing + Task Processing — Details
 
 
-**Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
+#### **Example:** This section
 
+
+**Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
 
 
 ### Signal-to-Task Pipeline

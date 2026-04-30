@@ -60,11 +60,9 @@ ph = d.get('predictions_history', {})
 mx = ph.get('MX', {})
 print('MX predictions_history weeks:', sorted(mx.keys())[:20])
 # Show one entry with n_preds > 1
-for wk, metrics in sorted(mx.items()):
-    regs = metrics.get('regs', {})
-    if regs.get('n_preds', 0) > 1:
+for wk, metrics in sorted(mx.items()): regs = metrics.get('regs', {}) if regs.get('n_preds', 0) > 1:
         print(f'  MX W{wk}: n_preds={regs[\"n_preds\"]}, first={regs.get(\"first_pred\")}, latest={regs.get(\"latest_pred\")}, actual={regs.get(\"actual\")}')
-        break
+break
 # Show overall n_preds distribution
 from collections import Counter
 n_dist = Counter()
@@ -562,6 +560,7 @@ Option D (event-triggered) is excluded from the experiment — it's an optimizat
 ### Measurable Output-Quality Metric[0m[0m
 [0m[0m
 **Calibration Information Density (CID):** For each scored target week, count the number of distinct (market, target_period, lead_weeks) predictions that were scored. Then measure:[0m[0m
+  - *Example:* Calibration Information Density (CID) → apply this when the situation matches the described pattern.
 [0m[0m
 ```[0m[0m
 CID = (n_scored_predictions_with_distinct_lead_times) / (n_target_weeks × n_markets)[0m[0m

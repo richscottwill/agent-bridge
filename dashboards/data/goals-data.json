@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-22T14:19:43.126639+00:00",
+  "generated": "2026-04-30T14:30:44.936082+00:00",
   "source": "Outbound Marketing Goals.xlsx",
   "owner_count": 18,
   "goal_count": 30,
@@ -452,6 +452,11 @@
       "submission_status": "",
       "monthly_status": [
         {
+          "month": "March",
+          "color": null,
+          "text": "Paused until Meta decides move-fwd plan"
+        },
+        {
           "month": "February",
           "color": "Red",
           "text": "Meta has paused all WhatsApp onboarding as they are re-evaluating their approach to business messaging on their platform. As a result, the launch has been pushed with an unknown date which will depend on Meta's guidance for use of their platform."
@@ -462,9 +467,9 @@
           "text": "Reviewed BRD for agent validator for WhatsApp in Marketly. Templates are in the process of being created and reviewed for EU5 launch."
         }
       ],
-      "latest_color": "Red",
-      "latest_update": "Meta has paused all WhatsApp onboarding as they are re-evaluating their approach to business messaging on their platform. As a result, the launch has been pushed with an unknown date which will depend on Meta's guidance for use of their platform.",
-      "latest_month": "February",
+      "latest_color": null,
+      "latest_update": "Paused until Meta decides move-fwd plan",
+      "latest_month": "March",
       "markets": [],
       "trend": {
         "Green": 1,
@@ -1213,6 +1218,11 @@
         "submission_status": "",
         "monthly_status": [
           {
+            "month": "March",
+            "color": null,
+            "text": "Paused until Meta decides move-fwd plan"
+          },
+          {
             "month": "February",
             "color": "Red",
             "text": "Meta has paused all WhatsApp onboarding as they are re-evaluating their approach to business messaging on their platform. As a result, the launch has been pushed with an unknown date which will depend on Meta's guidance for use of their platform."
@@ -1223,9 +1233,9 @@
             "text": "Reviewed BRD for agent validator for WhatsApp in Marketly. Templates are in the process of being created and reviewed for EU5 launch."
           }
         ],
-        "latest_color": "Red",
-        "latest_update": "Meta has paused all WhatsApp onboarding as they are re-evaluating their approach to business messaging on their platform. As a result, the launch has been pushed with an unknown date which will depend on Meta's guidance for use of their platform.",
-        "latest_month": "February",
+        "latest_color": null,
+        "latest_update": "Paused until Meta decides move-fwd plan",
+        "latest_month": "March",
         "markets": [],
         "trend": {
           "Green": 1,
@@ -2042,30 +2052,38 @@
   "progress": {
     "MX/AU Paid Search Registrations": {
       "unit": "registrations",
-      "target": 24000,
+      "target": 24084,
       "ytd": 5526,
       "projected_eoy": 15643,
-      "ytd_pct": 23.0,
-      "projected_pct": 65.2,
+      "projected_eoy_ci_lo": 12800,
+      "projected_eoy_ci_hi": 18820,
+      "ytd_pct": 22.9,
+      "projected_pct": 65.0,
       "breakdown": [
         {
           "market": "MX",
-          "target": 11100,
+          "target": 11178,
           "ytd": 2941,
           "projected_eoy": 10024,
-          "ytd_pct": 26.5,
-          "projected_pct": 90.3
+          "projected_eoy_ci_lo": 8250,
+          "projected_eoy_ci_hi": 12000,
+          "ytd_pct": 26.3,
+          "projected_pct": 89.7
         },
         {
           "market": "AU",
-          "target": 12900,
+          "target": 12906,
           "ytd": 2585,
           "projected_eoy": 5619,
+          "projected_eoy_ci_lo": 4550,
+          "projected_eoy_ci_hi": 6820,
           "ytd_pct": 20.0,
-          "projected_pct": 43.6
+          "projected_pct": 43.5
         }
       ],
-      "source": "forecast-data.json yearly block"
+      "forecast_source": "forecast-data.json (same as Weekly Review)",
+      "forecast_generated": "2026-04-29T22:35:42Z",
+      "target_source": "ps.targets via projection-data.json"
     },
     "Globalized Cross-Market Testing": {
       "unit": "cross-team tests",

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Body System — Kiro Dashboard</title>
+
+<!-- Shared projection-engine design language (mirrors Performance tab). -->
+<link rel="stylesheet" href="../projection-design-system.css?v=2026-04-30">
+
+<style>
+/* ========================================================================
+   Body System — minor extensions to projection-design-system.css.
+   Inherits all tokens: colors, typography, spacing, panels, tables.
+   Local additions are limited to page frame + per-section caption hints.
+   ======================================================================== */
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-body);
+  background: var(--color-neutral-bg);
+  line-height: 1.5;
+}
+
+.bs-frame {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--gap-lg);
+}
+
+.bs-header {
+  margin-bottom: var(--gap-lg);
+  padding-bottom: var(--gap-md);
+  border-bottom: 1px solid var(--color-panel-border);
+}
+.bs-title {
+  font-size: var(--size-section);
+  font-weight: var(--weight-section);
+  color: var(--color-text-hero);
+  margin-bottom: 2px;
+}
+.bs-sub {
+  font-size: var(--size-ui);
+  color: var(--color-text-meta);
+}
+
+/* Section panel (mirrors .wr-q-card from weekly-review) */
+.bs-section {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 8px;
+  padding: var(--gap-md) var(--gap-lg);
+  margin-bottom: var(--gap-lg);
+}
+.bs-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--gap-md);
+  margin-bottom: var(--gap-sm);
+  padding-bottom: var(--gap-sm);
+  border-bottom: 1px dashed var(--color-panel-border);
+  flex-wrap: wrap;
+}
+.bs-section-title {
+  font-size: var(--size-body);
+  font-weight: 600;
+  color: var(--color-text-hero);
+  margin-bottom: 2px;
+}
+/* Self-documenting caption — the "what goes on this page" guidance. */
+.bs-section-caption {
+  font-size: var(--size-meta);
+  color: var(--color-text-meta);
+  line-height: 1.5;
+  max-width: 720px;
+}
+.bs-section-caption .bs-src {
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.bs-section-refresh {
+  font-size: 11px;
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 2px 8px;
+  background: var(--color-neutral-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 4px;
+  align-self: flex-start;
+}
+
+/* KPI tile row (mirrors .wr-scorecard-row / .wr-score-tile) */
+.bs-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap-md);
+  margin-bottom: var(--gap-md);
+}
+@media (max-width: 900px) { .bs-kpi-row { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .bs-kpi-row { grid-template-columns: 1fr; } }
+.bs-kpi {
+  background: var(--color-neutral-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 6px;
+  padding: var(--gap-sm) var(--gap-md);
+}
+.bs-kpi-label {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.bs-kpi-value {
+  font-size: var(--size-section);
+  font-weight: 700;
+  color: var(--color-text-hero);
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+}
+.bs-kpi-value.good { color: var(--color-success); }
+.bs-kpi-value.warn { color: var(--color-warning); }
+.bs-kpi-value.bad  { color: var(--color-danger); }
+.bs-kpi-sub {
+  font-size: var(--size-meta);
+  color: var(--color-text-meta);
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Table (mirrors .wr-variance-table) */
+.bs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--size-ui);
+  font-variant-numeric: tabular-nums;
+}
+.bs-table th, .bs-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid #F3F3F3;
+  text-align: left;
+  vertical-align: top;
+}
+.bs-table th {
+  font-size: var(--size-meta);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.bs-table th.r, .bs-table td.r { text-align: right; }
+.bs-table tr:last-child td { border-bottom: none; }
+
+/* Bar-in-cell for word-budget utilization */
+.bs-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+}
+.bs-bar {
+  flex: 1;
+  min-width: 80px;
+  height: 6px;
+  background: #F0F0F0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.bs-bar-fill {
+  height: 100%;
+  background: var(--color-brand);
+  border-radius: 3px;
+}
+.bs-bar-fill.good { background: var(--color-success); }
+.bs-bar-fill.warn { background: var(--color-warning); }
+.bs-bar-fill.bad  { background: var(--color-danger); }
+.bs-bar-num { font-family: var(--font-mono); font-size: var(--size-meta); color: var(--color-text-meta); min-width: 48px; text-align: right; }
+
+/* Status pills (match weekly-review token palette) */
+.bs-pill {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.bs-pill.active     { background: #E6F7EE; color: #0C7A3D; }
+.bs-pill.next       { background: #FFF4D6; color: #8A6200; }
+.bs-pill.queued     { background: #EEF3FB; color: #0052A3; }
+.bs-pill.future     { background: #F3F3F3; color: var(--color-text-subtle); }
+.bs-pill.keep       { background: #E6F7EE; color: #0C7A3D; }
+.bs-pill.revert     { background: #FEE2E2; color: var(--color-danger); }
+.bs-pill.worsening  { background: #FEE2E2; color: var(--color-danger); }
+.bs-pill.stuck      { background: #FFF4D6; color: #8A6200; }
+.bs-pill.improving  { background: #E6F7EE; color: #0C7A3D; }
+.bs-pill.resolved   { background: #F3F3F3; color: var(--color-text-subtle); }
+
+.bs-empty {
+  font-size: var(--size-ui);
+  color: var(--color-text-subtle);
+  padding: var(--gap-sm) 0;
+  font-style: italic;
+}
+
+.bs-footer {
+  text-align: right;
+  color: var(--color-text-subtle);
+  font-size: var(--size-meta);
+  padding-top: var(--gap-md);
+}
+</style>
+</head>
+<body>
+
+<div class="bs-frame">
+
+  <div class="bs-header">
+    <div class="bs-title">Body System</div>
+    <div class="bs-sub">Live view of the agent system that runs Richard's workflows — organs, patterns, experiments, agents. Updates on every AM/EOD hook run and file save.</div>
+  </div>
+
+  <!-- FIVE LEVELS -->
+  <div class="bs-section" id="sec-levels">
+    <div class="bs-section-head">
+      <div>
+        <div class="bs-section-title">Five Levels</div>
+        <div class="bs-section-caption">
+          North-star sequence. Each level funds the next — don't skip ahead. Status and gate are the promotion criteria. Changing a level's status is a brain.md edit (monthly at most).
+          <span class="bs-src">src: brain.md · main.five_levels_weekly</span>
+        </div>
+      </div>
+      <span class="bs-section-refresh">monthly</span>
+    </div>
+    <div class="bs-kpi-row" id="levelsSummary" style="grid-template-columns: repeat(3, 1fr)"></div>
+    <table class="bs-table"><thead><tr>
+      <th>Level</th><th>Name</th><th>Status</th><th>Gate</th><th>Description</th>
+    </tr></thead><tbody id="levelsBody"></tbody></table>
+  </div>
+
+  <!-- ORGAN HEALTH -->
+  <div class="bs-section" id="sec-organs">
+    <div class="bs-section-head">
+      <div>
+        <div class="bs-section-title">Organ Health</div>
+        <div class="bs-section-caption">
+          Live word counts vs budgets for each context file. Bars fill green under budget, yellow 90–100%, red over. Days-stale = working-days since the file was last edited. Budgets live in gut.md; actual counts are read from disk each refresh.
+          <span class="bs-src">src: ~/shared/context/body/*.md · gut.md budget table</span>
+        </div>
+      </div>
+      <span class="bs-section-refresh">every refresh</span>
+    </div>
+    <div class="bs-kpi-row" id="organSummary" style="grid-template-columns: repeat(4, 1fr)"></div>
+    <table class="bs-table"><thead><tr>
+      <th>Organ</th><th class="r">Words</th><th class="r">Budget</th><th>Utilization</th><th class="r">Last Edit</th>
+    </tr></thead><tbody id="organsBody"></tbody></table>
+  </div>
+
+  <!-- BEHAVIORAL PATTERNS -->
+  <div class="bs-section" id="sec-patterns">
+    <div class="bs-section-head">
+      <div>
+        <div class="bs-section-title">Behavioral Patterns</div>
+        <div class="bs-section-caption">
+          Patterns the nervous-system tracker has flagged across sessions (resistance, avoidance, loops). Order: worsening → stuck → improving → resolved. Agents can raise/update patterns; Richard doesn't edit these directly.
+          <span class="bs-src">src: ns.ns_patterns</span>
+        </div>
+      </div>
+      <span class="bs-section-refresh">weekly</span>
+    </div>
+    <table class="bs-table"><thead><tr>
+      <th>Pattern</th><th>Status</th><th class="r">Weeks Active</th><th>Gate or Fix</th><th class="r">Detected</th>
+    </tr></thead><tbody id="patternsBody"></tbody></table>
+  </div>
+
+  <!-- AUTORESEARCH LOOP — Option C rebuild -->
+  <div class="bs-section" id="sec-experiments">
+    <div class="bs-section-head">
+      <div>
+        <div class="bs-section-title">Autoresearch Loop</div>
+        <div class="bs-section-caption">
+          Karpathy's blind-eval compression loop — swaps a section of a body file with a variant, judges output quality blind, keeps or reverts. The question this section answers: <strong>is the loop working?</strong> Lifetime numbers lie when the loop stalls, so the hero metric is rolling 7d/30d activity. Runs during EOD Phase 6.
+          <span class="bs-src">src: karpathy.autoresearch_experiments</span>
+        </div>
+      </div>
+      <span class="bs-section-refresh">EOD hook</span>
+    </div>
+
+    <!-- Loop-health hero: gap-since-last + 7d/30d keep rate -->
+    <div class="bs-kpi-row" id="loopHealth"></div>
+
+    <!-- Per-day spark: last 30 days, one bar per day coloured by keep rate -->
+    <div style="margin: var(--gap-md) 0;">
+      <div style="font-size: var(--size-meta); color: var(--color-text-subtle); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 8px;">
+        Daily Activity · 30 days <span id="loopSparkLegend" style="color: var(--color-text-meta); font-weight: 400; text-transform: none; letter-spacing: 0;"></span>
+      </div>
+      <div id="loopSpark" style="display: flex; align-items: flex-end; gap: 2px; height: 48px; padding: 4px 0; border-bottom: 1px solid var(--color-panel-border);"></div>
+    </div>
+
+    <!-- Lifetime summary + Runs + Techniques pivots (3-up) -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-lg); margin-bottom: var(--gap-md);">
+      <div>
+        <div style="font-size: var(--size-meta); color: var(--color-text-subtle); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 8px;">
+          Runs · <span id="loopRunsMeta" style="color: var(--color-text-meta); font-weight: 400; text-transform: none; letter-spacing: 0;"></span>
+        </div>
+        <table class="bs-table"><thead><tr>
+          <th>#</th><th>When</th><th class="r">Exps</th><th class="r">Kept</th><th class="r">Δw</th><th class="r">Organs</th>
+        </tr></thead><tbody id="loopRunsBody"></tbody></table>
+      </div>
+      <div>
+        <div style="font-size: var(--size-meta); color: var(--color-text-subtle); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 8px;">
+          Techniques · which compressions actually win blind A/Bs
+        </div>
+        <table class="bs-table"><thead><tr>
+          <th>Technique</th><th class="r">n</th><th class="r">Keep rate</th><th class="r">Net Δw</th><th class="r">Avg Δab</th>
+        </tr></thead><tbody id="loopTechBody"></tbody></table>
+      </div>
+    </div>
+
+    <!-- Lifetime totals strip (de-emphasized — was the old hero, now a footer) -->
+    <div style="font-size: var(--size-meta); color: var(--color-text-meta); padding: 8px 0; border-top: 1px dashed var(--color-panel-border); display: flex; gap: 20px; flex-wrap: wrap;" id="loopLifetime"></div>
+
+    <!-- Recent log — progressive disclosure -->
+    <details style="margin-top: var(--gap-md);">
+      <summary style="cursor: pointer; font-size: var(--size-meta); color: var(--color-text-subtle); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; list-style: none; user-select: none;">
+        <span style="color: var(--color-brand);">▸</span> Recent experiment log · last 60
+      </summary>
+      <table class="bs-table" style="margin-top: 8px;"><thead><tr>
+        <th>When</th><th>Organ</th><th>Section</th><th>Technique</th><th>Decision</th><th class="r">Δ words</th>
+      </tr></thead><tbody id="experimentsBody"></tbody></table>
+    </details>
+  </div>
+
+  <!-- AGENT ROSTER -->
+  <div class="bs-section" id="sec-agents">
+    <div class="bs-section-head">
+      <div>
+        <div class="bs-section-title">Agent Roster</div>
+        <div class="bs-section-caption">
+          Custom agents defined in <code>.kiro/agents/</code>. Grouped by team. Metrics count = success criteria declared in the agent's JSON; 0 means the agent has no measurable outcome defined (candidate for removal or spec work). Runtime columns populate once the invocation shim lands.
+          <span class="bs-src">src: ~/.kiro/agents/*.json · ops.agent_reliability</span>
+        </div>
+      </div>
+      <span class="bs-section-refresh">every refresh</span>
+    </div>
+    <div id="agentTeams"></div>
+  </div>
+
+  <div class="bs-footer" id="bsFooter"></div>
+
+</div>
+
+<script>
+/* ══ Fetch & render ══ */
+fetch('../data/body-system-data.json?t=' + Date.now())
+  .then(r => r.json())
+  .then(render)
+  .catch(e => {
+    document.getElementById('bsFooter').innerHTML =
+      '<span style="color: var(--color-danger)">Failed to load body-system-data.json — run <code>refresh-body-system.py</code></span>';
+    console.error(e);
+  });
+
+function render(d) {
+  renderLevels(d);
+  renderOrgans(d);
+  renderPatterns(d);
+  renderExperiments(d);
+  renderAgents(d);
+  const genTs = d.generated ? new Date(d.generated) : null;
+  const ageDays = genTs ? Math.floor((Date.now() - genTs.getTime()) / 86400000) : null;
+  const staleness = ageDays === null ? '' :
+    ageDays >= 3 ? ` <span style="color: var(--color-danger); font-weight: 600">· ${ageDays}d stale — run refresh-body-system.py</span>` :
+    ageDays >= 1 ? ` <span style="color: var(--color-warning)">· ${ageDays}d old</span>` : '';
+  document.getElementById('bsFooter').innerHTML =
+    'Generated: ' + (genTs ? genTs.toLocaleString() : '—') + staleness;
+}
+
+/* Five Levels ---------- */
+function renderLevels(d) {
+  const levels = d.five_levels || [];
+  const active = levels.filter(l => l.status === 'ACTIVE').length;
+  const queued = levels.filter(l => l.status === 'QUEUED' || l.status === 'NEXT').length;
+  const future = levels.filter(l => l.status === 'FUTURE').length;
+  document.getElementById('levelsSummary').innerHTML = `
+    <div class="bs-kpi"><div class="bs-kpi-label">Active</div><div class="bs-kpi-value">${active}</div><div class="bs-kpi-sub">in-flight</div></div>
+    <div class="bs-kpi"><div class="bs-kpi-label">Next / Queued</div><div class="bs-kpi-value">${queued}</div><div class="bs-kpi-sub">gated on prior</div></div>
+    <div class="bs-kpi"><div class="bs-kpi-label">Future</div><div class="bs-kpi-value">${future}</div><div class="bs-kpi-sub">not yet unlocked</div></div>`;
+  document.getElementById('levelsBody').innerHTML = levels.map(l => `
+    <tr>
+      <td style="font-family: var(--font-mono); color: var(--color-text-subtle)">L${l.level}</td>
+      <td><strong>${escape(l.name)}</strong></td>
+      <td><span class="bs-pill ${l.status.toLowerCase()}">${l.status}</span></td>
+      <td>${escape(l.gate || '')}</td>
+      <td style="color: var(--color-text-meta)">${escape(l.description || '')}</td>
+    </tr>`).join('');
+}
+
+/* Organs ---------- */
+function renderOrgans(d) {
+  const organs = d.organ_budgets || [];
+  const over = d.over_budget_count || 0;
+  const total = d.body_total || 0;
+  const budget = d.body_budget || 0;
+  const util = d.body_utilization || 0;
+  const stale = organs.filter(o => (o.days_stale || 0) >= 7).length;
+  const utilCls = util > 100 ? 'bad' : util > 85 ? 'warn' : 'good';
+  document.getElementById('organSummary').innerHTML = `
+    <div class="bs-kpi"><div class="bs-kpi-label">Total words</div><div class="bs-kpi-value">${fmt(total)}</div><div class="bs-kpi-sub">across ${organs.length} organs</div></div>
+    <div class="bs-kpi"><div class="bs-kpi-label">Budget</div><div class="bs-kpi-value">${fmt(budget)}</div><div class="bs-kpi-sub">from gut.md</div></div>
+    <div class="bs-kpi"><div class="bs-kpi-label">Utilization</div><div class="bs-kpi-value ${utilCls}">${util}%</div><div class="bs-kpi-sub">${over} over budget</div></div>
+    <div class="bs-kpi"><div class="bs-kpi-label">Stale ≥ 7d</div><div class="bs-kpi-value ${stale ? 'warn' : ''}">${stale}</div><div class="bs-kpi-sub">candidates for review</div></div>`;
+  document.getElementById('organsBody').innerHTML = organs.map(o => {
+    const pct = o.utilization || 0;
+    const barCls = pct > 100 ? 'bad' : pct > 90 ? 'warn' : 'good';
+    const width = Math.min(pct, 100);
+    const staleColor = (o.days_stale || 0) >= 14 ? 'var(--color-danger)' : (o.days_stale || 0) >= 7 ? 'var(--color-warning)' : 'var(--color-text-meta)';
+    return `<tr>
+      <td><strong>${escape(o.organ)}</strong></td>
+      <td class="r">${fmt(o.actual)}</td>
+      <td class="r" style="color: var(--color-text-meta)">${fmt(o.budget)}</td>
+      <td><div class="bs-bar-wrap"><div class="bs-bar"><div class="bs-bar-fill ${barCls}" style="width: ${width}%"></div></div><span class="bs-bar-num">${pct}%</span></div></td>
+      <td class="r" style="color: ${staleColor}">${o.days_stale >= 0 ? o.days_stale + 'd' : '—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+/* Patterns ---------- */
+function renderPatterns(d) {
+  const p = d.patterns || [];
+  const tbody = document.getElementById('patternsBody');
+  if (!p.length) {
+    tbody.innerHTML = `<tr><td colspan="5" class="bs-empty">No patterns tracked — ns.ns_patterns is empty</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = p.map(r => `
+    <tr>
+      <td><strong>${escape(r.pattern_name || '')}</strong></td>
+      <td><span class="bs-pill ${(r.status || '').toLowerCase()}">${r.status || ''}</span></td>
+      <td class="r">${r.weeks_active || 0}</td>
+      <td style="color: var(--color-text-meta); max-width: 480px">${escape(r.gate_or_fix || '')}</td>
+      <td class="r" style="color: var(--color-text-subtle); font-family: var(--font-mono); font-size: 11px">${(r.first_detected || '').slice(0, 10)}</td>
+    </tr>`).join('');
+}
+
+/* Autoresearch Loop — Option C rebuild (2026-04-30)
+ * Answers "is the loop working?" not "how many experiments has it ever run?"
+ * Lifetime totals get demoted to a footer strip; the hero is rolling activity. */
+function renderExperiments(d) {
+  const w = d.experiment_windows || {};
+  const runs = d.experiment_by_run || [];
+  const techs = d.experiment_by_technique || [];
+  const days = d.experiment_by_day || [];
+  const lifetime = {
+    runs: d.total_runs || 0,
+    exp: d.total_experiments || 0,
+    kept: d.total_kept || 0,
+    rate: d.keep_rate || 0,
+    saved: d.words_saved || 0,
+  };
+
+  /* --- Loop-health hero: gap-since-last + 7d + 30d keep rate --- */
+  const hours = w.hours_since_last;
+  const gapCls = hours == null ? '' : hours <= 24 ? 'good' : hours <= 72 ? 'warn' : 'bad';
+  const gapLabel = hours == null ? '—'
+                 : hours < 48 ? `${hours}h`
+                 : `${Math.round(hours / 24)}d`;
+  const gapSub = hours == null ? 'no experiments logged'
+                : hours <= 24 ? 'loop active'
+                : hours <= 72 ? 'loop cooling'
+                : 'LOOP STALLED';
+
+  const n7 = w.n_7d || 0;
+  const kept7 = w.kept_7d || 0;
+  const rate7 = n7 ? Math.round(kept7 / n7 * 100) : null;
+  const n7Cls = n7 === 0 ? 'bad' : n7 < 3 ? 'warn' : 'good';
+
+  const n30 = w.n_30d || 0;
+  const kept30 = w.kept_30d || 0;
+  const rate30 = n30 ? Math.round(kept30 / n30 * 100) : null;
+
+  document.getElementById('loopHealth').innerHTML = `
+    <div class="bs-kpi">
+      <div class="bs-kpi-label">Since last experiment</div>
+      <div class="bs-kpi-value ${gapCls}">${gapLabel}</div>
+      <div class="bs-kpi-sub">${gapSub}</div>
+    </div>
+    <div class="bs-kpi">
+      <div class="bs-kpi-label">Last 7 days</div>
+      <div class="bs-kpi-value ${n7Cls}">${n7}<span style="font-size: var(--size-meta); color: var(--color-text-meta); font-weight: 400; margin-left: 4px;">exps</span></div>
+      <div class="bs-kpi-sub">${rate7 == null ? 'no data' : rate7 + '% kept · ' + kept7 + '/' + n7}</div>
+    </div>
+    <div class="bs-kpi">
+      <div class="bs-kpi-label">Last 30 days</div>
+      <div class="bs-kpi-value">${n30}<span style="font-size: var(--size-meta); color: var(--color-text-meta); font-weight: 400; margin-left: 4px;">exps</span></div>
+      <div class="bs-kpi-sub">${rate30 == null ? 'no data' : rate30 + '% kept · ' + kept30 + '/' + n30}</div>
+    </div>
+    <div class="bs-kpi">
+      <div class="bs-kpi-label">Active techniques</div>
+      <div class="bs-kpi-value">${techs.length}</div>
+      <div class="bs-kpi-sub">${runs.length} runs logged</div>
+    </div>`;
+
+  /* --- Daily spark: 30 cells, height = n, color = keep rate --- */
+  const spark = document.getElementById('loopSpark');
+  const legend = document.getElementById('loopSparkLegend');
+  const byDayMap = {};
+  (days || []).forEach(row => {
+    const day = (row.day || '').slice(0, 10);
+    if (day) byDayMap[day] = row;
+  });
+  const today = new Date();
+  const maxN = Math.max(1, ...Object.values(byDayMap).map(r => r.n || 0));
+  let sparkHtml = '';
+  let activeDays = 0;
+  for (let i = 29; i >= 0; i--) {
+    const date = new Date(today);
+    date.setDate(today.getDate() - i);
+    const key = date.toISOString().slice(0, 10);
+    const row = byDayMap[key];
+    if (row) activeDays++;
+    const n = row ? (row.n || 0) : 0;
+    const kept = row ? (row.kept || 0) : 0;
+    const h = n === 0 ? 2 : Math.max(4, Math.round((n / maxN) * 44));
+    const rate = n === 0 ? 0 : kept / n;
+    const color = n === 0 ? '#F0F0F0'
+                : rate >= 0.7 ? 'var(--color-success)'
+                : rate >= 0.4 ? 'var(--color-warning)'
+                : 'var(--color-danger)';
+    const tip = n === 0 ? `${key}: no experiments`
+                : `${key}: ${n} exps, ${kept} kept (${Math.round(rate*100)}%)`;
+    sparkHtml += `<div style="flex: 1; height: ${h}px; background: ${color}; border-radius: 1px; cursor: pointer;" title="${tip}"></div>`;
+  }
+  spark.innerHTML = sparkHtml;
+  legend.textContent = ` · ${activeDays}/30 days had experiments · green ≥70% kept, yellow ≥40%, red below`;
+
+  /* --- Runs table (11 rows; enough to see the pulse) --- */
+  const runsMeta = document.getElementById('loopRunsMeta');
+  runsMeta.textContent = runs.length ? `${runs.length} runs · newest first` : 'no runs';
+  const runsBody = document.getElementById('loopRunsBody');
+  if (!runs.length) {
+    runsBody.innerHTML = `<tr><td colspan="6" class="bs-empty">No runs logged</td></tr>`;
+  } else {
+    runsBody.innerHTML = runs.map(r => {
+      const when = (r.started_at || '').slice(5, 10);
+      const rate = r.n ? Math.round(r.kept / r.n * 100) : 0;
+      const rateCls = rate >= 70 ? 'var(--color-success)' : rate >= 40 ? 'var(--color-warning)' : 'var(--color-danger)';
+      const delta = r.word_delta || 0;
+      const deltaCls = delta < 0 ? 'var(--color-success)' : delta > 0 ? 'var(--color-danger)' : 'var(--color-text-subtle)';
+      return `<tr>
+        <td style="font-family: var(--font-mono); color: var(--color-text-subtle);">#${r.run_id}</td>
+        <td style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-meta); white-space: nowrap;">${when}</td>
+        <td class="r">${r.n || 0}</td>
+        <td class="r" style="color: ${rateCls};">${r.kept || 0} <span style="color: var(--color-text-subtle); font-size: 11px;">(${rate}%)</span></td>
+        <td class="r" style="color: ${deltaCls}; font-family: var(--font-mono);">${delta > 0 ? '+' : ''}${delta}</td>
+        <td class="r" style="color: var(--color-text-meta);">${r.organs_touched || 0}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  /* --- Techniques leaderboard --- */
+  const techBody = document.getElementById('loopTechBody');
+  if (!techs.length) {
+    techBody.innerHTML = `<tr><td colspan="5" class="bs-empty">No techniques logged</td></tr>`;
+  } else {
+    techBody.innerHTML = techs.map(t => {
+      const rate = t.n ? Math.round(t.kept / t.n * 100) : 0;
+      const rateCls = rate >= 70 ? 'var(--color-success)' : rate >= 40 ? 'var(--color-warning)' : 'var(--color-danger)';
+      const delta = t.net_delta || 0;
+      const deltaCls = delta < 0 ? 'var(--color-success)' : delta > 0 ? 'var(--color-danger)' : 'var(--color-text-subtle)';
+      const avg = t.avg_delta_ab;
+      const avgStr = avg == null ? '—' : (avg >= 0 ? '+' : '') + Number(avg).toFixed(2);
+      return `<tr>
+        <td><strong style="font-family: var(--font-mono);">${escape(t.technique || '')}</strong></td>
+        <td class="r">${t.n || 0}</td>
+        <td class="r" style="color: ${rateCls}; font-weight: 600;">${rate}%</td>
+        <td class="r" style="color: ${deltaCls}; font-family: var(--font-mono);">${delta > 0 ? '+' : ''}${delta}</td>
+        <td class="r" style="font-family: var(--font-mono); color: var(--color-text-meta);">${avgStr}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  /* --- Lifetime totals strip (demoted from hero to footer) --- */
+  document.getElementById('loopLifetime').innerHTML = `
+    <span><strong>Lifetime:</strong></span>
+    <span>${lifetime.runs} runs</span>
+    <span>${lifetime.exp} experiments</span>
+    <span>${lifetime.kept} kept · <strong>${lifetime.rate}%</strong> keep rate</span>
+    <span>${lifetime.saved > 0 ? '−' : ''}${fmt(Math.abs(lifetime.saved))} words net</span>`;
+
+  /* --- Recent log (progressive disclosure, last 60) --- */
+  const exp = d.experiment_history || [];
+  const tbody = document.getElementById('experimentsBody');
+  if (!exp.length) {
+    tbody.innerHTML = `<tr><td colspan="6" class="bs-empty">No experiments logged</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = exp.map(e => {
+    const when = (e.started_at || '').slice(5, 16).replace('T', ' ');
+    const delta = e.word_delta || 0;
+    const deltaCls = delta < 0 ? 'var(--color-success)' : delta > 0 ? 'var(--color-danger)' : 'var(--color-text-subtle)';
+    return `<tr>
+      <td style="color: var(--color-text-meta); font-family: var(--font-mono); font-size: 11px; white-space: nowrap">${when}</td>
+      <td><strong>${escape(e.organ || '')}</strong></td>
+      <td style="color: var(--color-text-meta)">${escape(e.section || '')}</td>
+      <td>${escape(e.technique || '')}</td>
+      <td><span class="bs-pill ${(e.decision || '').toLowerCase()}">${e.decision || '—'}</span></td>
+      <td class="r" style="color: ${deltaCls}; font-family: var(--font-mono)">${delta > 0 ? '+' : ''}${delta}</td>
+    </tr>`;
+  }).join('');
+}
+
+/* Agents ---------- */
+function renderAgents(d) {
+  const agents = d.agent_health || [];
+  if (!agents.length) {
+    document.getElementById('agentTeams').innerHTML = `<div class="bs-empty">No custom agents found in ~/.kiro/agents/</div>`;
+    return;
+  }
+  const teams = {};
+  agents.forEach(a => {
+    const t = a.team || 'Other';
+    (teams[t] = teams[t] || []).push(a);
+  });
+  const order = ['WBR Callouts', 'Wiki Team', 'Body System', 'Other'];
+  const keys = order.filter(k => teams[k]).concat(Object.keys(teams).filter(k => !order.includes(k)));
+  document.getElementById('agentTeams').innerHTML = keys.map(team => {
+    const list = teams[team];
+    const rows = list.map(a => {
+      const hasMetrics = a.has_metrics;
+      const metricsCell = hasMetrics
+        ? `<span style="color: var(--color-success); font-weight: 600">${a.metrics_count}</span>`
+        : `<span style="color: var(--color-danger)">0 · spec</span>`;
+      const inv7 = a.invocations_7d || 0;
+      const inv30 = a.invocations_30d || 0;
+      const invCell = inv7 || inv30
+        ? `<span style="font-family: var(--font-mono)">${inv7}</span> <span style="color: var(--color-text-subtle); font-size: 11px">/ ${inv30} 30d</span>`
+        : `<span style="color: var(--color-text-subtle)">—</span>`;
+      return `<tr>
+        <td><strong>${escape(a.name)}</strong></td>
+        <td style="color: var(--color-text-meta); max-width: 560px">${escape(a.description || '')}</td>
+        <td class="r">${metricsCell}</td>
+        <td class="r">${invCell}</td>
+      </tr>`;
+    }).join('');
+    return `
+      <div style="margin-top: var(--gap-md); margin-bottom: var(--gap-sm); font-size: var(--size-meta); text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-subtle); font-weight: 600">
+        ${escape(team)} <span style="color: var(--color-text-meta); font-weight: 400; text-transform: none; letter-spacing: 0">· ${list.length}</span>
+      </div>
+      <table class="bs-table"><thead><tr>
+        <th>Agent</th><th>Description</th><th class="r">Metrics</th><th class="r">Invocations 7d</th>
+      </tr></thead><tbody>${rows}</tbody></table>`;
+  }).join('');
+}
+
+/* helpers ---------- */
+function escape(s) {
+  if (s === null || s === undefined) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function fmt(n) {
+  if (n === null || n === undefined) return '0';
+  return Number(n).toLocaleString();
+}
+</script>
+
+<script src="../shared/section-freshness.js" defer></script>
+</body>
+</html>

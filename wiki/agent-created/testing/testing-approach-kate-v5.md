@@ -120,7 +120,6 @@ The risk of not investing: OCI-eligible markets remain on deprecated Adobe biddi
 
 ## Appendix
 
-### OCI Validated Results
 
 | Market | Reg Lift | NB CPA Improvement | Estimated Regs | Estimated OPS |
 |--------|----------|---------------------|----------------|---------------|

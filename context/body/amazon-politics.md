@@ -55,11 +55,7 @@ Last updated: 2026-04-14
 - No skip-level override on promotions — it creates too much organizational mess. If your direct manager doesn't actively support it, the promotion won't happen regardless of skip-level enthusiasm.
 - Seek out managers known for getting people promoted. That reputation is both a recruiting tool for them and a career accelerator for you.
 
-
-
-
-
-
+*Example:* When this rule applies, the expected outcome is verified by checking the result.
 
 ### The Polite Fiction for Asking
 - Evans' exact words: "My career is very important to me. I need to understand how important it is to Amazon, because if it's not as important to Amazon as it is to me, I need to think about that."
@@ -91,11 +87,6 @@ Last updated: 2026-04-14
 - Over-subscribe: Need 4 champions? Ask 6-7. People leave, get reorged, or decline — buffer against attrition.
 - If manager won't initiate, go yourself: "I'm up for promotion. My manager will likely ask you for feedback. What can we do over the next 6 months so you're in a natural position to provide it?"
 - Frame as: "I'm trying to do this right and talk to you 6 months in advance" — signals maturity vs. last-minute scramble.
-
-
-
-
-
 
 
 ### The Queue
@@ -198,7 +189,8 @@ Last updated: 2026-04-14
 - Classic move: put someone on an undesirable project ("other" / "the garbage can"). If they're ambitious, they'll quit
 - Japanese "window seat" concept: moved far from the action = career is over here.
 - Evans' counter-example: he voluntarily took the garbage can (random mix of reverse logistics, B2B, app store) and turned it into 200
-### Defending Scope
+
+
 
 
 
@@ -279,7 +271,7 @@ Another team owns a reporting workflow that's consistently late and error-prone.
 
 
 ### Leverage
-- Everything runs on leverage. If your stick is long enough, you barely need force — which is why you can be polite about it.
+- Everything runs on leverage. If your stick is long enough, you barely need force — — why you can be polite about it.
 - Create leverage before you need it. External offers, essential skills, strong relationships, visible results.
 - "If you really are that discardable, then you haven't created much value." Leverage requires having built something worth keeping.
 
@@ -289,9 +281,6 @@ Another team owns a reporting workflow that's consistently late and error-prone.
 
 
 
-- Pre-sell ideas 1:1 before the group meeting. Let people ask questions privately where they don't lose face.
-- Emotional buy-in matters as much as information exchange: "You consulted me, you listened, you made me feel important."
-- Even if two proposals are equal, the one from the person who back-channeled wins — because the decision-maker trusts they can work with that person when things go wrong.
 
 ### Dealing with Difficult People in Other Orgs
 - Understand why they're valued by their org first. Their org isn't saying "we know they're evil but they get stuff done." They're saying "sharp elbows, but high output."

@@ -16,19 +16,22 @@ Monthly protocol for updating all 14 of Richard's Asana goals with honest, evide
 **How:** EOD-2 checks `date +%d` and day-of-week. If today is the 1st (or the first weekday after the 1st), trigger the Goal Updater sequence.
 **Fallback:** If missed, AM-2 on the next session flags "Goal updates overdue — last updated [date]."
 
-## Amazon FY26 Calendar Reference
-
-
-- FY26: Feb 2026 – Jan 2027
-- Q1 FY26: Feb – Apr 2026
-- Q2 FY26: May – Jul 2026
-- H1 FY26: Feb – Jul 2026
-- Q3 FY26: Aug – Oct 2026
-- Q4 FY26: Nov 2026 – Jan 2027
-- H2 FY26: Aug 2026 – Jan 2027
-
+[38;5;10m> [0m## Amazon FY26 Calendar Reference[0m[0m
+[0m[0m
+### Full Year[0m[0m
+- FY26: Feb 2026 – Jan 2027[0m[0m
+[0m[0m
+### First Half (H1)[0m[0m
+- H1 FY26: Feb – Jul 2026[0m[0m
+- Q1 FY26: Feb – Apr 2026[0m[0m
+- Q2 FY26: May – Jul 2026[0m[0m
+[0m[0m
+### Second Half (H2)[0m[0m
+- H2 FY26: Aug 2026 – Jan 2027[0m[0m
+- Q3 FY26: Aug – Oct 2026[0m[0m
+- Q4 FY26: Nov 2026 – Jan 2027[0m[0m
+[0m[0m
 ---
-
 ## The 14 Goals
 
 ### Registration Goals (numeric — pull from DuckDB)
@@ -250,36 +253,20 @@ Present all 14 drafted updates in a single review session:
 
 **CRITICAL: Never auto-post. Always draft-first. Richard reviews every update before it goes to Asana.**
 
-### Step 7: Post Approved Updates to Asana
-
-For each approved update, post using the Asana status update mechanism:
-
-```
+### Step 7: Post Approved Updates to Asana For each approved update, post using the Asana status update mechanism: ```
 // Option A: If CreateStatusUpdateForObject is available
-CreateStatusUpdateForObject(
-  parent=goal_gid,
-  title="[Month] Update",
-  text=approved_draft_text,
-  status_type="on_track" | "at_risk" | "off_track"
-)
-
-// Option B: If only GetGoal read + manual update available
+CreateStatusUpdateForObject( parent=goal_gid, title="[Month] Update", text=approved_draft_text, status_type="on_track" | "at_risk" | "off_track"
+) // Option B: If only GetGoal read + manual update available
 // Present the approved text and instruct Richard to paste into Asana goal
 // Log: "Posted to goal [GID] — [status]" or "Manual post needed — draft saved"
-```
-
-After posting, update the goal's metric value if DuckDB provided a newer number:
+``` After posting, update the goal's metric value if DuckDB provided a newer number:
 ```
 // If the Asana MCP supports updating goal metrics:
 UpdateGoal(goal_gid, current_number_value=new_value)
-```
-
-Log all posts to `~/shared/context/active/asana-audit-log.jsonl`:
+``` Log all posts to `~/shared/context/active/asana-audit-log.jsonl`:
 ```json
 {"timestamp": "ISO8601", "tool": "CreateStatusUpdateForObject", "goal_gid": "GID", "status": "on_track|at_risk|off_track", "result": "success|manual_needed"}
-```
-
-### Step 8: Update Tracking Files
+``` ### Step 8: Update Tracking Files
 
 After all updates are posted:
 1. Update `rw-tracker.md` with: "Goal updates posted [date]: [X] on-track, [Y] at-risk, [Z] off-track"

@@ -37,6 +37,9 @@ Richard writes like someone who respects the reader's time. Direct, concise, no 
 3. Are parenthetical asides used for context/caveats (not as the main point)?
 4. If replying to a list, are responses numbered to match?
 5. Is there a clear next step or ask?
+
+### Continued
+
 6. Are risks stated plainly without dramatizing?
 7. Does the sign-off match the register?
 8. If data is included, is there a "so what" interpretation?

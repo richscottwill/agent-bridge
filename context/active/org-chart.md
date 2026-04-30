@@ -11,6 +11,9 @@ Todd Heimes (VP, AB Prime, SSR, Mktg Exp.) — L10, SEA28
               └── Richard Williams (Marketing Manager) — L5, SEA28  ← YOU
 ```
 
+
+**Common failure:** Skipping this step leads to silent data loss. Always verify the output.
+
 ## Your Team — Brandon Munday's Directs
 | Name | Alias | Title | Level | Location | Notes |
 |------|-------|-------|-------|----------|-------|
@@ -24,12 +27,17 @@ Todd Heimes (VP, AB Prime, SSR, Mktg Exp.) — L10, SEA28
 | **Richard Williams** | prichwil | Marketing Manager | L5 | Seattle (SEA28) | You |
 
 
-### Common Pitfalls — Your Team — Brandon Munday's Directs
-- Misinterpreting this section causes downstream errors
-- Always validate assumptions before acting on this data
-- Cross-reference with related sections for completeness
-
-*Example:* When this applies, the expected outcome is verified by checking the result.
+[38;5;10m> [0m### Common Pitfalls — Your Team — Brandon Munday's Directs[0m[0m
+[0m[0m
+#### Interpretation Risks[0m[0m
+- Misinterpreting this section causes downstream errors[0m[0m
+[0m[0m
+#### Validation Steps[0m[0m
+- Always validate assumptions before acting on this data[0m[0m
+- Cross-reference with related sections for completeness[0m[0m
+[0m[0m
+#### Example[0m[0m
+When this applies, the expected outcome is verified by checking the result.
 ## Kate Rundell's Org — Peer Teams Under Central Marketing
 | Name | Alias | Title | Level | Location | Scope |
 |------|-------|-------|-------|----------|-------|
@@ -153,7 +161,6 @@ Russ Andrews (Director, Search Marketing) — L8, Seattle (SEA70 Houdini)
 - Always validate assumptions before acting on this data
 - Cross-reference with related sections for completeness
 
-## Department
-- Department: Amazon Business - PSME - VAR (Dept #5648)
-- Business Unit: AMZID
+[38;5;10m> [0m## Department[0m[0m
+- Amazon Business - PSME - VAR (Dept #5648), Business Unit: AMZID[0m[0m
 - AB Marketing wiki: https://w.amazon.com/bin/view/Amazon_Business/Marketing/

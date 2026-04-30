@@ -1,13 +1,13 @@
 {
   "name": ".AM-Backend: Ingest + Process",
   "version": "5.2.1",
-  "description": "Manual-trigger backend orchestration. Was previously promptSubmit (v5.1.0) which injected ~2k tokens of context into every chat — Mario/pi thesis: the context must be Richard's. Now userTriggered: fires only when Richard explicitly runs the hook. Display name prefixed with '.' to match .AM-Frontend convention. Underlying protocol (~/shared/context/protocols/am-backend-parallel.md) is unchanged. Re-enabled 2026-04-22.",
+  "description": "Manual-trigger backend orchestration. Was previously promptSubmit (v5.1.0) which injected ~2k tokens of context into every chat \u2014 Mario/pi thesis: the context must be Richard's. Now userTriggered: fires only when Richard explicitly runs the hook. Display name prefixed with '.' to match .AM-Frontend convention. Underlying protocol (~/shared/context/protocols/am-backend-parallel.md) is unchanged. Re-enabled 2026-04-22.",
   "when": {
     "type": "userTriggered"
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Execute the AM-Backend parallel ingest + process protocol defined in ~/shared/context/protocols/am-backend-parallel.md. Read the protocol file first, then run all phases end-to-end. Output state files to ~/shared/context/active/ for AM-Frontend consumption."
+    "prompt": "Execute the AM-Backend parallel ingest + process protocol defined in ~/shared/context/protocols/am-backend-parallel.md. Read the protocol file first, then run all phases end-to-end. Output state files to ~/shared/context/active/ for AM-Frontend consumption.\n\nCommon failure: forgetting to check the output format matches the specification."
   },
   "enabled": true,
   "workspaceFolderName": "prichwil",

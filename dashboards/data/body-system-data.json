@@ -1,5 +1,7 @@
 {
-  "generated": "2026-04-22T14:19:42.794445+00:00",
+  "generated": "2026-04-30T15:04:02.017234+00:00",
+  "data_source": "live",
+  "token_source": "mcp.json:duckdb",
   "five_levels": [
     {
       "level": 1,
@@ -37,52 +39,125 @@
       "description": "PS workflows run without human intervention"
     }
   ],
-  "five_levels_weekly": [],
+  "five_levels_weekly": [
+    {
+      "week_start": "2026-04-20",
+      "level": 1,
+      "level_name": "Sharpen Yourself",
+      "tasks_completed": 0,
+      "artifacts_shipped": 0,
+      "streak_weeks": 1
+    },
+    {
+      "week_start": "2026-04-20",
+      "level": 2,
+      "level_name": "Drive WW Testing",
+      "tasks_completed": 5,
+      "artifacts_shipped": 0,
+      "streak_weeks": 3
+    },
+    {
+      "week_start": "2026-04-20",
+      "level": 3,
+      "level_name": "Team Automation",
+      "tasks_completed": 1,
+      "artifacts_shipped": 1,
+      "streak_weeks": 1
+    },
+    {
+      "week_start": "2026-04-20",
+      "level": 4,
+      "level_name": "Zero-Click Future",
+      "tasks_completed": 0,
+      "artifacts_shipped": 0,
+      "streak_weeks": 0
+    },
+    {
+      "week_start": "2026-04-20",
+      "level": 5,
+      "level_name": "Agentic Orchestration",
+      "tasks_completed": 0,
+      "artifacts_shipped": 0,
+      "streak_weeks": 0
+    },
+    {
+      "week_start": "2026-04-13",
+      "level": 1,
+      "level_name": "Sharpen Yourself",
+      "tasks_completed": 1,
+      "artifacts_shipped": 0,
+      "streak_weeks": 0
+    },
+    {
+      "week_start": "2026-04-13",
+      "level": 2,
+      "level_name": "Drive WW Testing",
+      "tasks_completed": 2,
+      "artifacts_shipped": 0,
+      "streak_weeks": 0
+    },
+    {
+      "week_start": "2026-04-13",
+      "level": 3,
+      "level_name": "Team Automation",
+      "tasks_completed": 0,
+      "artifacts_shipped": 0,
+      "streak_weeks": 0
+    },
+    {
+      "week_start": "2026-04-13",
+      "level": 5,
+      "level_name": "Agentic Orchestration",
+      "tasks_completed": 0,
+      "artifacts_shipped": 0,
+      "streak_weeks": 0
+    }
+  ],
   "organ_budgets": [
     {
       "organ": "Brain",
       "organ_key": "brain",
-      "actual": 1713,
+      "actual": 1454,
       "budget": 2500,
-      "utilization": 69,
+      "utilization": 58,
       "days_stale": 0,
-      "updated": "2026-04-22"
+      "updated": "2026-04-30"
     },
     {
       "organ": "Memory",
       "organ_key": "memory",
-      "actual": 2457,
+      "actual": 2509,
       "budget": 3500,
-      "utilization": 70,
+      "utilization": 72,
       "days_stale": 0,
-      "updated": "2026-04-22"
+      "updated": "2026-04-30"
     },
     {
       "organ": "Heart",
       "organ_key": "heart",
-      "actual": 2730,
+      "actual": 2819,
       "budget": 3500,
-      "utilization": 78,
+      "utilization": 81,
       "days_stale": 0,
-      "updated": "2026-04-22"
+      "updated": "2026-04-30"
     },
     {
       "organ": "Eyes",
       "organ_key": "eyes",
-      "actual": 1344,
+      "actual": 1363,
       "budget": 2500,
-      "utilization": 54,
+      "utilization": 55,
       "days_stale": 0,
-      "updated": "2026-04-22"
+      "updated": "2026-04-30"
     },
     {
       "organ": "Amcc",
       "organ_key": "amcc",
-      "actual": 5126,
+      "actual": 5081,
       "budget": 2000,
-      "utilization": 256,
+      "utilization": 254,
       "days_stale": 0,
-      "updated": "2026-04-22"
+      "updated": "2026-04-30"
     },
     {
       "organ": "Hands",
@@ -90,64 +165,286 @@
       "actual": 1286,
       "budget": 2000,
       "utilization": 64,
-      "days_stale": 0,
+      "days_stale": 8,
       "updated": "2026-04-22"
     },
     {
       "organ": "Device",
       "organ_key": "device",
-      "actual": 2632,
+      "actual": 2642,
       "budget": 2000,
       "utilization": 132,
       "days_stale": 0,
-      "updated": "2026-04-22"
+      "updated": "2026-04-30"
     },
     {
       "organ": "Nervous System",
       "organ_key": "nervous-system",
-      "actual": 1670,
+      "actual": 1743,
       "budget": 1500,
-      "utilization": 111,
+      "utilization": 116,
       "days_stale": 0,
-      "updated": "2026-04-22"
+      "updated": "2026-04-30"
     },
     {
       "organ": "Spine",
       "organ_key": "spine",
-      "actual": 1498,
+      "actual": 1235,
       "budget": 1500,
-      "utilization": 100,
+      "utilization": 82,
       "days_stale": 0,
-      "updated": "2026-04-22"
+      "updated": "2026-04-30"
     },
     {
       "organ": "Gut",
       "organ_key": "gut",
-      "actual": 1934,
+      "actual": 1708,
       "budget": 2000,
-      "utilization": 97,
+      "utilization": 85,
       "days_stale": 0,
-      "updated": "2026-04-22"
+      "updated": "2026-04-30"
     },
     {
       "organ": "Body",
       "organ_key": "body",
-      "actual": 1051,
+      "actual": 703,
       "budget": 0,
       "utilization": 0,
-      "days_stale": 8,
-      "updated": "2026-04-14"
+      "days_stale": 0,
+      "updated": "2026-04-30"
     }
   ],
-  "body_total": 23441,
+  "body_total": 22543,
   "body_budget": 23000,
-  "body_utilization": 102,
+  "body_utilization": 98,
   "over_budget_count": 3,
   "total_runs": 11,
-  "total_experiments": 115,
+  "total_experiments": 116,
   "total_kept": 92,
-  "keep_rate": 80,
+  "keep_rate": 79,
   "words_saved": 5876,
+  "experiment_windows": {
+    "n_7d": 0,
+    "kept_7d": 0,
+    "n_30d": 116,
+    "kept_30d": 92,
+    "last_experiment_at": "2026-04-22 13:45:48",
+    "hours_since_last": 194
+  },
+  "experiment_by_run": [
+    {
+      "run_id": 26,
+      "started_at": "2026-04-04 15:14:10.222373",
+      "ended_at": null,
+      "n": 10,
+      "kept": 5,
+      "reverted": 5,
+      "blocked": 0,
+      "word_delta": -952,
+      "organs_touched": 7
+    },
+    {
+      "run_id": 25,
+      "started_at": "2026-04-04 20:00:00",
+      "ended_at": "2026-04-04 20:09:50",
+      "n": 10,
+      "kept": 10,
+      "reverted": 0,
+      "blocked": 0,
+      "word_delta": 260,
+      "organs_touched": 7
+    },
+    {
+      "run_id": 24,
+      "started_at": "2026-04-04 10:00:00",
+      "ended_at": "2026-04-04 10:09:50",
+      "n": 10,
+      "kept": 10,
+      "reverted": 0,
+      "blocked": 0,
+      "word_delta": 88,
+      "organs_touched": 10
+    },
+    {
+      "run_id": 23,
+      "started_at": "2026-04-04 13:48:23.606119",
+      "ended_at": "2026-04-04 14:21:52.228208",
+      "n": 7,
+      "kept": 6,
+      "reverted": 1,
+      "blocked": 0,
+      "word_delta": 217,
+      "organs_touched": 3
+    },
+    {
+      "run_id": 22,
+      "started_at": "2026-04-04 14:00:00",
+      "ended_at": "2026-04-04 14:05:40",
+      "n": 6,
+      "kept": 6,
+      "reverted": 0,
+      "blocked": 0,
+      "word_delta": 338,
+      "organs_touched": 2
+    },
+    {
+      "run_id": 21,
+      "started_at": "2026-04-04 10:00:00",
+      "ended_at": "2026-04-04 10:09:00",
+      "n": 5,
+      "kept": 4,
+      "reverted": 1,
+      "blocked": 0,
+      "word_delta": -79,
+      "organs_touched": 1
+    },
+    {
+      "run_id": 20,
+      "started_at": "2026-04-04 03:35:35.391851",
+      "ended_at": "2026-04-04 03:37:25.10841",
+      "n": 3,
+      "kept": 3,
+      "reverted": 0,
+      "blocked": 0,
+      "word_delta": -135,
+      "organs_touched": 3
+    },
+    {
+      "run_id": 19,
+      "started_at": "2026-04-04 08:00:00",
+      "ended_at": "2026-04-04 08:03:00",
+      "n": 2,
+      "kept": 2,
+      "reverted": 0,
+      "blocked": 0,
+      "word_delta": -855,
+      "organs_touched": 2
+    },
+    {
+      "run_id": 18,
+      "started_at": "2026-04-02 14:27:07.108285",
+      "ended_at": "2026-04-03 10:00:00",
+      "n": 47,
+      "kept": 32,
+      "reverted": 15,
+      "blocked": 0,
+      "word_delta": -1661,
+      "organs_touched": 11
+    },
+    {
+      "run_id": 17,
+      "started_at": "2026-04-02 14:07:17.036279",
+      "ended_at": null,
+      "n": 1,
+      "kept": 1,
+      "reverted": 0,
+      "blocked": 0,
+      "word_delta": -336,
+      "organs_touched": 1
+    },
+    {
+      "run_id": 16,
+      "started_at": "2026-04-02 13:10:36.052719",
+      "ended_at": "2026-04-02 13:50:44.266222",
+      "n": 14,
+      "kept": 13,
+      "reverted": 1,
+      "blocked": 0,
+      "word_delta": -965,
+      "organs_touched": 8
+    }
+  ],
+  "experiment_by_technique": [
+    {
+      "technique": "REWORD",
+      "n": 35,
+      "kept": 35,
+      "reverted": 0,
+      "blocked": 0,
+      "net_delta": -2356,
+      "avg_delta_ab": 0.019428571428571434
+    },
+    {
+      "technique": "ADD",
+      "n": 25,
+      "kept": 21,
+      "reverted": 3,
+      "blocked": 1,
+      "net_delta": 1394,
+      "avg_delta_ab": 0.08385416666666667
+    },
+    {
+      "technique": "COMPRESS",
+      "n": 20,
+      "kept": 18,
+      "reverted": 2,
+      "blocked": 0,
+      "net_delta": -1900,
+      "avg_delta_ab": 0.035
+    },
+    {
+      "technique": "REMOVE",
+      "n": 16,
+      "kept": 6,
+      "reverted": 10,
+      "blocked": 0,
+      "net_delta": -1278,
+      "avg_delta_ab": -0.26375
+    },
+    {
+      "technique": "RESTRUCTURE",
+      "n": 14,
+      "kept": 9,
+      "reverted": 5,
+      "blocked": 0,
+      "net_delta": 202,
+      "avg_delta_ab": 0.017857142857142856
+    },
+    {
+      "technique": "MERGE",
+      "n": 5,
+      "kept": 2,
+      "reverted": 3,
+      "blocked": 0,
+      "net_delta": -142,
+      "avg_delta_ab": -0.012
+    },
+    {
+      "technique": "SPLIT",
+      "n": 1,
+      "kept": 1,
+      "reverted": 0,
+      "blocked": 0,
+      "net_delta": 0,
+      "avg_delta_ab": 0.0
+    }
+  ],
+  "experiment_by_day": [
+    {
+      "day": "2026-04-02 00:00:00",
+      "n": 17,
+      "kept": 16,
+      "word_delta": -1474
+    },
+    {
+      "day": "2026-04-03 00:00:00",
+      "n": 45,
+      "kept": 30,
+      "word_delta": -1488
+    },
+    {
+      "day": "2026-04-04 00:00:00",
+      "n": 53,
+      "kept": 46,
+      "word_delta": -1118
+    },
+    {
+      "day": "2026-04-22 00:00:00",
+      "n": 1,
+      "kept": 0,
+      "word_delta": 0
+    }
+  ],
   "experiment_history": [
     {
       "id": 115,
@@ -161,7 +458,7 @@
       "word_delta": -47,
       "score_a": 0.375,
       "score_b": 1.0,
-      "started_at": "2026-04-04 15:14:10",
+      "started_at": "2026-04-04 15:14:10.222373",
       "notes": null
     },
     {
@@ -176,7 +473,22 @@
       "word_delta": 0,
       "score_a": 1.0,
       "score_b": 1.0,
-      "started_at": "2026-04-04 15:14:10",
+      "started_at": "2026-04-04 15:14:10.222373",
+      "notes": null
+    },
+    {
+      "id": 113,
+      "run_id": 26,
+      "organ": "device",
+      "section": "Agent Bridge",
+      "technique": "REMOVE",
+      "decision": "REVERT",
+      "words_before": 1242,
+      "words_after": 1150,
+      "word_delta": -92,
+      "score_a": 0.0,
+      "score_b": 1.0,
+      "started_at": "2026-04-04 15:14:10.222373",
       "notes": null
     },
     {
@@ -191,7 +503,7 @@
       "word_delta": -69,
       "score_a": 1.0,
       "score_b": 1.0,
-      "started_at": "2026-04-04 15:14:10",
+      "started_at": "2026-04-04 15:14:10.222373",
       "notes": null
     },
     {
@@ -206,7 +518,7 @@
       "word_delta": 1,
       "score_a": 1.0,
       "score_b": 1.0,
-      "started_at": "2026-04-04 15:14:10",
+      "started_at": "2026-04-04 15:14:10.222373",
       "notes": null
     },
     {
@@ -221,7 +533,22 @@
       "word_delta": -264,
       "score_a": 1.0,
       "score_b": 1.0,
-      "started_at": "2026-04-04 15:14:10",
+      "started_at": "2026-04-04 15:14:10.222373",
+      "notes": null
+    },
+    {
+      "id": 109,
+      "run_id": 26,
+      "organ": "memory",
+      "section": "Reference Index",
+      "technique": "REMOVE",
+      "decision": "REVERT",
+      "words_before": 1738,
+      "words_after": 1580,
+      "word_delta": -158,
+      "score_a": 0.5,
+      "score_b": 1.0,
+      "started_at": "2026-04-04 15:14:10.222373",
       "notes": null
     },
     {
@@ -236,7 +563,37 @@
       "word_delta": 0,
       "score_a": 1.0,
       "score_b": 1.0,
-      "started_at": "2026-04-04 15:14:10",
+      "started_at": "2026-04-04 15:14:10.222373",
+      "notes": null
+    },
+    {
+      "id": 107,
+      "run_id": 26,
+      "organ": "amcc",
+      "section": "Avoidance Ratio",
+      "technique": "REMOVE",
+      "decision": "REVERT",
+      "words_before": 2090,
+      "words_after": 1960,
+      "word_delta": -130,
+      "score_a": 0.5,
+      "score_b": 1.0,
+      "started_at": "2026-04-04 15:14:10.222373",
+      "notes": null
+    },
+    {
+      "id": 106,
+      "run_id": 26,
+      "organ": "gut",
+      "section": "Excretion Protocol",
+      "technique": "REMOVE",
+      "decision": "REVERT",
+      "words_before": 2113,
+      "words_after": 1920,
+      "word_delta": -193,
+      "score_a": 0.125,
+      "score_b": 1.0,
+      "started_at": "2026-04-04 15:14:10.222373",
       "notes": null
     },
     {
@@ -252,7 +609,22 @@
       "score_a": 0.86,
       "score_b": 0.79,
       "started_at": "2026-04-04 20:09:00",
-      "notes": "Inlined 10/7/4/1 scoring anchors"
+      "notes": "Inlined 10/7/4/1 scoring anchors directly in ABPS section. No cross-reference to Mode 1 needed."
+    },
+    {
+      "id": 104,
+      "run_id": 25,
+      "organ": "wiki-writer",
+      "section": "ABPS Expansion template",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 2702,
+      "words_after": 2778,
+      "word_delta": 76,
+      "score_a": 0.87,
+      "score_b": 0.81,
+      "started_at": "2026-04-04 20:08:00",
+      "notes": "Minimum depth guidance per section: Exec Summary 3 sentences, Context 2-3 paragraphs, Analysis 3+ paragraphs with list, Recommendations 3+ items, Next Steps 3+ items"
     },
     {
       "id": 103,
@@ -267,7 +639,7 @@
       "score_a": 1.0,
       "score_b": 1.0,
       "started_at": "2026-04-04 20:07:00",
-      "notes": "Organ names replaced with file paths"
+      "notes": "Organ names replaced with file paths. More actionable for agents."
     },
     {
       "id": 102,
@@ -282,7 +654,7 @@
       "score_a": 1.0,
       "score_b": 1.0,
       "started_at": "2026-04-04 20:06:00",
-      "notes": "Removed Rationale column"
+      "notes": "Removed Rationale column. Param|Value only. Rationale already in protocol sections above."
     },
     {
       "id": 101,
@@ -297,7 +669,682 @@
       "score_a": 1.0,
       "score_b": 1.0,
       "started_at": "2026-04-04 20:05:00",
-      "notes": "Each tiebreaker compressed to rule"
+      "notes": "Each tiebreaker compressed to rule: one-line example format"
+    },
+    {
+      "id": 100,
+      "run_id": 25,
+      "organ": "brain",
+      "section": "Five Levels",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 1431,
+      "words_after": 1243,
+      "word_delta": -188,
+      "score_a": 1.0,
+      "score_b": 1.0,
+      "started_at": "2026-04-04 20:04:00",
+      "notes": "Each level compressed to 2 lines. Guiding Principle paragraph removed. All key metrics preserved."
+    },
+    {
+      "id": 99,
+      "run_id": 25,
+      "organ": "wiki-concierge",
+      "section": "Response Template",
+      "technique": "ADD",
+      "decision": "KEEP",
+      "words_before": 963,
+      "words_after": 1073,
+      "word_delta": 110,
+      "score_a": 0.86,
+      "score_b": 0.79,
+      "started_at": "2026-04-04 20:03:00",
+      "notes": "Structured Found/Top match/Summary/Also relevant/Not found template"
+    },
+    {
+      "id": 98,
+      "run_id": 25,
+      "organ": "wiki-concierge",
+      "section": "Search strategy",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 963,
+      "words_after": 1073,
+      "word_delta": 110,
+      "score_a": 0.86,
+      "score_b": 0.79,
+      "started_at": "2026-04-04 20:02:00",
+      "notes": "O(1) wiki-index lookup first, context-catalog second, grep exhaustive fallback"
+    },
+    {
+      "id": 97,
+      "run_id": 25,
+      "organ": "wiki-librarian",
+      "section": "Common Publishing Failures",
+      "technique": "ADD",
+      "decision": "KEEP",
+      "words_before": 1296,
+      "words_after": 1478,
+      "word_delta": 182,
+      "score_a": 0.86,
+      "score_b": 0.79,
+      "started_at": "2026-04-04 20:01:00",
+      "notes": "3 failure patterns: missing index update, missing frontmatter, broken cross-refs"
+    },
+    {
+      "id": 96,
+      "run_id": 25,
+      "organ": "wiki-librarian",
+      "section": "Publishing workflow",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 1296,
+      "words_after": 1478,
+      "word_delta": 182,
+      "score_a": 0.86,
+      "score_b": 0.78,
+      "started_at": "2026-04-04 20:00:00",
+      "notes": "Imperative verbs, explicit file paths, STOP conditions for validation failures"
+    },
+    {
+      "id": 95,
+      "run_id": 24,
+      "organ": "richard-writing-style",
+      "section": "Voice Evolution",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 603,
+      "words_after": 670,
+      "word_delta": 67,
+      "score_a": 0.86,
+      "score_b": 0.81,
+      "started_at": "2026-04-04 10:09:00",
+      "notes": null
+    },
+    {
+      "id": 94,
+      "run_id": 24,
+      "organ": "richard-style-mbr",
+      "section": "entire file",
+      "technique": "RESTRUCTURE",
+      "decision": "KEEP",
+      "words_before": 380,
+      "words_after": 464,
+      "word_delta": 84,
+      "score_a": 0.86,
+      "score_b": 0.8,
+      "started_at": "2026-04-04 10:08:00",
+      "notes": null
+    },
+    {
+      "id": 93,
+      "run_id": 24,
+      "organ": "richard-style-wbr",
+      "section": "Common Callout Failures",
+      "technique": "ADD",
+      "decision": "KEEP",
+      "words_before": 464,
+      "words_after": 564,
+      "word_delta": 100,
+      "score_a": 0.87,
+      "score_b": 0.82,
+      "started_at": "2026-04-04 10:07:00",
+      "notes": null
+    },
+    {
+      "id": 92,
+      "run_id": 24,
+      "organ": "richard-style-slack",
+      "section": "Relationship Dynamics",
+      "technique": "COMPRESS",
+      "decision": "KEEP",
+      "words_before": 1082,
+      "words_after": 1070,
+      "word_delta": -12,
+      "score_a": 0.85,
+      "score_b": 0.82,
+      "started_at": "2026-04-04 10:06:00",
+      "notes": null
+    },
+    {
+      "id": 91,
+      "run_id": 24,
+      "organ": "richard-style-email",
+      "section": "Common Draft Failures",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 623,
+      "words_after": 552,
+      "word_delta": -71,
+      "score_a": 0.87,
+      "score_b": 0.81,
+      "started_at": "2026-04-04 10:05:00",
+      "notes": null
+    },
+    {
+      "id": 90,
+      "run_id": 24,
+      "organ": "device",
+      "section": "Delegation Protocols",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 1228,
+      "words_after": 1242,
+      "word_delta": 14,
+      "score_a": 1.0,
+      "score_b": 1.0,
+      "started_at": "2026-04-04 10:04:00",
+      "notes": null
+    },
+    {
+      "id": 89,
+      "run_id": 24,
+      "organ": "memory",
+      "section": "Active Projects table",
+      "technique": "COMPRESS",
+      "decision": "KEEP",
+      "words_before": 1752,
+      "words_after": 1738,
+      "word_delta": -14,
+      "score_a": 1.0,
+      "score_b": 1.0,
+      "started_at": "2026-04-04 10:03:00",
+      "notes": null
+    },
+    {
+      "id": 88,
+      "run_id": 24,
+      "organ": "gut",
+      "section": "Compression Techniques table",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 2136,
+      "words_after": 2113,
+      "word_delta": -23,
+      "score_a": 1.0,
+      "score_b": 1.0,
+      "started_at": "2026-04-04 10:02:00",
+      "notes": null
+    },
+    {
+      "id": 87,
+      "run_id": 24,
+      "organ": "nervous-system",
+      "section": "Loop 1 Decision Audit",
+      "technique": "COMPRESS",
+      "decision": "KEEP",
+      "words_before": 975,
+      "words_after": 928,
+      "word_delta": -47,
+      "score_a": 1.0,
+      "score_b": 1.0,
+      "started_at": "2026-04-04 10:01:00",
+      "notes": null
+    },
+    {
+      "id": 86,
+      "run_id": 24,
+      "organ": "amcc",
+      "section": "Resistance Taxonomy",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 2100,
+      "words_after": 2090,
+      "word_delta": -10,
+      "score_a": 1.0,
+      "score_b": 1.0,
+      "started_at": "2026-04-04 10:00:00",
+      "notes": null
+    },
+    {
+      "id": 85,
+      "run_id": 23,
+      "organ": "richard-style-docs",
+      "section": "Universal Rules \u2014 header rule",
+      "technique": "RESTRUCTURE",
+      "decision": "KEEP",
+      "words_before": 619,
+      "words_after": 659,
+      "word_delta": 40,
+      "score_a": 0.87,
+      "score_b": 0.82,
+      "started_at": "2026-04-04 14:17:52.228208",
+      "notes": "Exp 19: Question/imperative header rule. Scannable headers \u2014 reader knows section content from header alone."
+    },
+    {
+      "id": 84,
+      "run_id": 23,
+      "organ": "richard-style-amazon",
+      "section": "Confidence calibration table",
+      "technique": "ADD",
+      "decision": "KEEP",
+      "words_before": 373,
+      "words_after": 462,
+      "word_delta": 89,
+      "score_a": 0.88,
+      "score_b": 0.82,
+      "started_at": "2026-04-04 14:16:17.839313",
+      "notes": "Exp 18: Confidence calibration table with criteria + examples. Grounds confidence claims in data thresholds. Highest yield in this batch."
+    },
+    {
+      "id": 83,
+      "run_id": 23,
+      "organ": "richard-style-amazon",
+      "section": "Analytical Patterns metric rule",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 351,
+      "words_after": 373,
+      "word_delta": 22,
+      "score_a": 0.87,
+      "score_b": 0.82,
+      "started_at": "2026-04-04 14:14:39.566715",
+      "notes": "Exp 17: Metric contextualization template. Consistent [metric][value]([comparison],[interpretation]) pattern across all data points."
+    },
+    {
+      "id": 82,
+      "run_id": 23,
+      "organ": "richard-style-docs",
+      "section": "Universal Rules (new section)",
+      "technique": "ADD",
+      "decision": "KEEP",
+      "words_before": 579,
+      "words_after": 619,
+      "word_delta": 40,
+      "score_a": 0.87,
+      "score_b": 0.84,
+      "started_at": "2026-04-04 14:08:10.913602",
+      "notes": "Exp 16: Universal Rules \u2014 3-bullet max + verb-start rule. Tighter lists, better scannability."
+    },
+    {
+      "id": 81,
+      "run_id": 23,
+      "organ": "richard-style-docs",
+      "section": "Experiment Documents structure",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 565,
+      "words_after": 579,
+      "word_delta": 14,
+      "score_a": 0.87,
+      "score_b": 0.83,
+      "started_at": "2026-04-04 14:01:39.687428",
+      "notes": "Exp 15: Concrete example in structure rule. Agent mirrors the data-contextualization pattern from the example."
+    },
+    {
+      "id": 80,
+      "run_id": 23,
+      "organ": "wiki-editor",
+      "section": "Work_Product type heuristic",
+      "technique": "ADD",
+      "decision": "KEEP",
+      "words_before": 2175,
+      "words_after": 2214,
+      "word_delta": 39,
+      "score_a": 0.87,
+      "score_b": 0.82,
+      "started_at": "2026-04-04 13:54:56.568281",
+      "notes": "Exp 14: Name-pattern heuristic for Work_Product. Correctly disambiguates person-name tasks as reference vs guide."
+    },
+    {
+      "id": 79,
+      "run_id": 23,
+      "organ": "wiki-editor",
+      "section": "Work_Product type table",
+      "technique": "MERGE",
+      "decision": "REVERT",
+      "words_before": 2175,
+      "words_after": 2148,
+      "word_delta": -27,
+      "score_a": 0.78,
+      "score_b": 0.84,
+      "started_at": "2026-04-04 13:48:23.606119",
+      "notes": "Exp 13: guide/playbook MERGE on wiki-editor. Same revert as wiki-writer \u2014 validates guide/playbook split."
+    },
+    {
+      "id": 78,
+      "run_id": 22,
+      "organ": "wiki-critic",
+      "section": "Thresholds",
+      "technique": "RESTRUCTURE",
+      "decision": "KEEP",
+      "words_before": 2355,
+      "words_after": 2397,
+      "word_delta": 42,
+      "score_a": 0.86,
+      "score_b": 0.82,
+      "started_at": "2026-04-04 14:05:00",
+      "notes": "Raised dimension floor from 6 to 7. Catches weak dimensions hiding behind strong averages."
+    },
+    {
+      "id": 77,
+      "run_id": 22,
+      "organ": "wiki-critic",
+      "section": "Economy dimension",
+      "technique": "ADD",
+      "decision": "KEEP",
+      "words_before": 2310,
+      "words_after": 2355,
+      "word_delta": 45,
+      "score_a": 0.85,
+      "score_b": 0.81,
+      "started_at": "2026-04-04 14:04:00",
+      "notes": "Verb rule for list items \u2014 noun-only items are padding."
+    },
+    {
+      "id": 76,
+      "run_id": 22,
+      "organ": "wiki-critic",
+      "section": "Score on 5 dimensions",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 2131,
+      "words_after": 2310,
+      "word_delta": 179,
+      "score_a": 0.87,
+      "score_b": 0.81,
+      "started_at": "2026-04-04 14:03:00",
+      "notes": "Concrete examples at each score level. Anchors scoring consistency."
+    },
+    {
+      "id": 75,
+      "run_id": 22,
+      "organ": "wiki-researcher",
+      "section": "Research principles",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 1535,
+      "words_after": 1548,
+      "word_delta": 13,
+      "score_a": 0.88,
+      "score_b": 0.79,
+      "started_at": "2026-04-04 14:02:00",
+      "notes": "Structured citation format [source: type, date, confidence]. Enables programmatic filtering."
+    },
+    {
+      "id": 74,
+      "run_id": 22,
+      "organ": "wiki-researcher",
+      "section": "Research brief format",
+      "technique": "ADD",
+      "decision": "KEEP",
+      "words_before": 1510,
+      "words_after": 1535,
+      "word_delta": 25,
+      "score_a": 0.89,
+      "score_b": 0.81,
+      "started_at": "2026-04-04 14:01:00",
+      "notes": "Added Confidence assessment section. Writer inherits calibrated confidence levels."
+    },
+    {
+      "id": 73,
+      "run_id": 22,
+      "organ": "wiki-researcher",
+      "section": "Research sources (in priority order)",
+      "technique": "RESTRUCTURE",
+      "decision": "KEEP",
+      "words_before": 1476,
+      "words_after": 1510,
+      "word_delta": 34,
+      "score_a": 0.89,
+      "score_b": 0.8,
+      "started_at": "2026-04-04 14:00:00",
+      "notes": "Moved DuckDB (#3\u2192#2) and Slack (#4\u2192#3) above meeting transcripts for data-heavy topics. Major data integration improvement."
+    },
+    {
+      "id": 72,
+      "run_id": 21,
+      "organ": "wiki-writer",
+      "section": "Design philosophy",
+      "technique": "COMPRESS",
+      "decision": "KEEP",
+      "words_before": 2730,
+      "words_after": 2702,
+      "word_delta": -28,
+      "score_a": 0.86,
+      "score_b": 0.86,
+      "started_at": "2026-04-04 10:08:00",
+      "notes": "Prose to 3-line manifesto. No degradation. Saves 50w."
+    },
+    {
+      "id": 71,
+      "run_id": 21,
+      "organ": "wiki-writer",
+      "section": "Article types",
+      "technique": "COMPRESS",
+      "decision": "REVERT",
+      "words_before": 2730,
+      "words_after": 2710,
+      "word_delta": -20,
+      "score_a": 0.84,
+      "score_b": 0.85,
+      "started_at": "2026-04-04 10:06:00",
+      "notes": "Merged guide+playbook. Agent selected wrong type for process doc."
+    },
+    {
+      "id": 70,
+      "run_id": 21,
+      "organ": "wiki-writer",
+      "section": "Draft structure template",
+      "technique": "RESTRUCTURE",
+      "decision": "KEEP",
+      "words_before": 2718,
+      "words_after": 2730,
+      "word_delta": 12,
+      "score_a": 0.84,
+      "score_b": 0.83,
+      "started_at": "2026-04-04 10:04:00",
+      "notes": "Moved Next Steps after Exec Summary. Marginal improvement for L8 audience."
+    },
+    {
+      "id": 69,
+      "run_id": 21,
+      "organ": "wiki-writer",
+      "section": "Voice rules",
+      "technique": "ADD",
+      "decision": "KEEP",
+      "words_before": 2698,
+      "words_after": 2718,
+      "word_delta": 20,
+      "score_a": 0.88,
+      "score_b": 0.86,
+      "started_at": "2026-04-04 10:02:00",
+      "notes": "Added so-what test rule. Marginal improvement in economy."
+    },
+    {
+      "id": 68,
+      "run_id": 21,
+      "organ": "wiki-writer",
+      "section": "Voice rules",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 2761,
+      "words_after": 2698,
+      "word_delta": -63,
+      "score_a": 0.86,
+      "score_b": 0.71,
+      "started_at": "2026-04-04 10:00:00",
+      "notes": "First output-quality experiment. Compressed verbose voice rules into denser directives. Significant voice match improvement (+0.20)."
+    },
+    {
+      "id": 67,
+      "run_id": 20,
+      "organ": "brain",
+      "section": "Decision Log (D1-D8 one-liners)",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 1446,
+      "words_after": 1410,
+      "word_delta": -36,
+      "score_a": 1.0,
+      "score_b": 1.0,
+      "started_at": "2026-04-04 03:37:25.10841",
+      "notes": null
+    },
+    {
+      "id": 66,
+      "run_id": 20,
+      "organ": "memory",
+      "section": "Relationship Graph (Carlos/Harjeet/Alex)",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 1777,
+      "words_after": 1745,
+      "word_delta": -32,
+      "score_a": 1.0,
+      "score_b": 1.0,
+      "started_at": "2026-04-04 03:36:28.916342",
+      "notes": null
+    },
+    {
+      "id": 65,
+      "run_id": 20,
+      "organ": "device",
+      "section": "Templates + Device Health",
+      "technique": "COMPRESS",
+      "decision": "KEEP",
+      "words_before": 1307,
+      "words_after": 1240,
+      "word_delta": -67,
+      "score_a": 1.0,
+      "score_b": 1.0,
+      "started_at": "2026-04-04 03:35:35.391851",
+      "notes": null
+    },
+    {
+      "id": 64,
+      "run_id": 19,
+      "organ": "eyes",
+      "section": "Competitive Landscape",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 1402,
+      "words_after": 1160,
+      "word_delta": -242,
+      "score_a": 1.0,
+      "score_b": 1.0,
+      "started_at": "2026-04-04 08:02:00",
+      "notes": null
+    },
+    {
+      "id": 63,
+      "run_id": 19,
+      "organ": "spine",
+      "section": "Tool Access & Integrations",
+      "technique": "REWORD",
+      "decision": "KEEP",
+      "words_before": 1490,
+      "words_after": 877,
+      "word_delta": -613,
+      "score_a": 1.0,
+      "score_b": 1.0,
+      "started_at": "2026-04-04 08:00:00",
+      "notes": null
+    },
+    {
+      "id": 62,
+      "run_id": 18,
+      "organ": "au-context",
+      "section": "wiki_stored_vs_fresh",
+      "technique": "ADD",
+      "decision": "KEEP",
+      "words_before": 0,
+      "words_after": 0,
+      "word_delta": 0,
+      "score_a": 0.9,
+      "score_b": 0.88,
+      "started_at": "2026-04-03 09:55:00",
+      "notes": "STORED CONTEXT VS FRESH PULL FOR WIKI. Near-tie (+0.02). Stored context: better voice, structure, accuracy on covered topics. Fresh sources: more complete, more current, but accuracy errors from unstructured data. Finding: neither is clearly better alone. Optimal approach is stored context as structural backbone refreshed weekly with fresh data points. The stored context file needs a weekly refresh cadence, not replacement."
+    },
+    {
+      "id": 61,
+      "run_id": 18,
+      "organ": "au-context",
+      "section": "projection_history",
+      "technique": "ADD",
+      "decision": "KEEP",
+      "words_before": 0,
+      "words_after": 150,
+      "word_delta": 150,
+      "score_a": 0.9,
+      "score_b": 0.78,
+      "started_at": "2026-04-03 09:50:00",
+      "notes": "STORED VS FRESH PROJECTIONS. Agent A (with projection history + error signal) produced more calibrated projection: applied 2-3% haircut, caught own CPA math error, more honest about uncertainty. Agent B (fresh only) produced reasonable but uncalibrated projection with subtle CPA inconsistency ($123 April < $121 March without structural change). +0.12 delta. The error signal is the key differentiator."
+    },
+    {
+      "id": 60,
+      "run_id": 18,
+      "organ": "richard-style-email",
+      "section": "common_draft_failures",
+      "technique": "ADD",
+      "decision": "KEEP",
+      "words_before": 850,
+      "words_after": 1050,
+      "word_delta": 200,
+      "score_a": 0.96,
+      "score_b": 0.83,
+      "started_at": "2026-04-03 09:40:00",
+      "notes": "FIRST STYLE GUIDE MODIFICATION EXPERIMENT. Added Common Draft Failures section with 3 anti-patterns (generic team refs, vague timelines, missing political subtext). Agent A avoided the apology pattern that Agent B fell into. Agent A provided monthly breakdown inline instead of offering it as follow-up. +0.13 delta. The anti-patterns section works because it gives concrete wrong/right examples, not abstract rules."
+    },
+    {
+      "id": 59,
+      "run_id": 18,
+      "organ": "au-context",
+      "section": "full_callout",
+      "technique": "ADD",
+      "decision": "KEEP",
+      "words_before": 0,
+      "words_after": 0,
+      "word_delta": 0,
+      "score_a": 0.96,
+      "score_b": 0.88,
+      "started_at": "2026-04-03 09:30:00",
+      "notes": "LARGEST EXPERIMENT: Full AU W13 WBR callout generation A/B. Agent A (full style stack + context + principles) vs Agent B (analysis brief only). 5-dimension scoring: voice 0.95/0.85, structure 1.0/0.90, data 0.95/0.90, audience 0.95/0.85, actionability 0.95/0.90. Delta +0.08. Style guides added precision on I voice in Note, audience separation, change log awareness. Smaller delta than email/doc experiments because analysis brief already contains suggested narrative."
+    },
+    {
+      "id": 58,
+      "run_id": 18,
+      "organ": "brain",
+      "section": "writing_voice_doc",
+      "technique": "ADD",
+      "decision": "KEEP",
+      "words_before": 0,
+      "words_after": 0,
+      "word_delta": 0,
+      "score_a": 0.95,
+      "score_b": 0.8,
+      "started_at": "2026-04-03 09:15:00",
+      "notes": "WRITING EXPERIMENT: Testing Approach outline (OP1 style for Kate L8). Agent A (full style stack) included How We Test methodology section, confidence levels, risk of NOT investing, and cleaner compound narrative. Agent B missed methodology framing and risk articulation. Style guides add +0.15 delta on leadership docs. LATENCY: 120s \u2014 largest experiment, full doc generation."
+    },
+    {
+      "id": 57,
+      "run_id": 18,
+      "organ": "memory",
+      "section": "writing_voice_email",
+      "technique": "ADD",
+      "decision": "KEEP",
+      "words_before": 0,
+      "words_after": 0,
+      "word_delta": 0,
+      "score_a": 0.95,
+      "score_b": 0.8,
+      "started_at": "2026-04-03 09:10:00",
+      "notes": "WRITING EXPERIMENT: Email draft to Lena (Tier 3). Agent A (full style stack) named specific partners (Yun-Kang, Alexis), used tighter timelines (EOW vs 2 weeks), included political meta-notes. Agent B was competent but generic. Style guides add +0.15 delta on stakeholder emails. LATENCY: 120s \u2014 large experiment, full context loading."
+    },
+    {
+      "id": 56,
+      "run_id": 18,
+      "organ": "hands",
+      "section": "outlook_folders",
+      "technique": "REMOVE",
+      "decision": "REVERT",
+      "words_before": 1836,
+      "words_after": 1770,
+      "word_delta": -66,
+      "score_a": 0.75,
+      "score_b": 1.0,
+      "started_at": "2026-04-03 09:05:00",
+      "notes": "Removed Outlook folder IDs. Agent A fell back to keyword search (noisier). Agent B used direct folderId access (leverages existing Outlook routing rule). Navigation IDs are high-value reference data. LATENCY: 45s."
     }
   ],
   "experiment_by_organ": [
@@ -305,127 +1352,225 @@
       "organ": "brain",
       "exp_count": 12,
       "kept": 7,
-      "total_delta": -660
+      "total_delta": -660,
+      "last_touched": "2026-04-04T20:05:00"
     },
     {
       "organ": "memory",
       "exp_count": 11,
       "kept": 8,
-      "total_delta": -1080
+      "total_delta": -1080,
+      "last_touched": "2026-04-04T15:14:10.222373"
     },
     {
       "organ": "device",
       "exp_count": 10,
       "kept": 8,
-      "total_delta": -649
+      "total_delta": -649,
+      "last_touched": "2026-04-04T15:14:10.222373"
     },
     {
       "organ": "eyes",
       "exp_count": 9,
       "kept": 7,
-      "total_delta": -509
-    },
-    {
-      "organ": "nervous-system",
-      "exp_count": 8,
-      "kept": 8,
-      "total_delta": -590
+      "total_delta": -509,
+      "last_touched": "2026-04-04T08:02:00"
     },
     {
       "organ": "amcc",
       "exp_count": 8,
       "kept": 5,
-      "total_delta": -292
+      "total_delta": -292,
+      "last_touched": "2026-04-04T15:14:10.222373"
+    },
+    {
+      "organ": "nervous-system",
+      "exp_count": 8,
+      "kept": 8,
+      "total_delta": -590,
+      "last_touched": "2026-04-04T15:14:10.222373"
     },
     {
       "organ": "gut",
       "exp_count": 7,
       "kept": 5,
-      "total_delta": -426
+      "total_delta": -426,
+      "last_touched": "2026-04-04T15:14:10.222373"
     },
     {
       "organ": "spine",
       "exp_count": 7,
       "kept": 6,
-      "total_delta": -1026
+      "total_delta": -1026,
+      "last_touched": "2026-04-04T08:00:00"
     },
     {
       "organ": "hands",
       "exp_count": 6,
       "kept": 3,
-      "total_delta": -215
+      "total_delta": -215,
+      "last_touched": "2026-04-03T09:05:00"
     },
     {
       "organ": "heart",
       "exp_count": 3,
       "kept": 3,
-      "total_delta": -406
+      "total_delta": -406,
+      "last_touched": "2026-04-04T20:06:00"
     },
     {
       "organ": "body",
       "exp_count": 1,
       "kept": 1,
-      "total_delta": -23
+      "total_delta": -23,
+      "last_touched": "2026-04-04T20:07:00"
     }
   ],
   "organ_health": [
     {
       "organ": "gut",
       "word_count": 2113,
+      "word_budget": null,
       "utilization": 1.006,
       "accuracy_estimate": 1.0
     },
     {
       "organ": "amcc",
       "word_count": 2090,
+      "word_budget": null,
       "utilization": 1.045,
       "accuracy_estimate": 1.0
     },
     {
       "organ": "memory",
       "word_count": 1738,
+      "word_budget": null,
       "utilization": 0.497,
       "accuracy_estimate": 1.0
     },
     {
       "organ": "heart",
       "word_count": 3198,
+      "word_budget": null,
       "utilization": 0.914,
       "accuracy_estimate": 1.0
     },
     {
       "organ": "nervous-system",
       "word_count": 859,
+      "word_budget": null,
       "utilization": 0.573,
       "accuracy_estimate": 1.0
     },
     {
       "organ": "device",
       "word_count": 1242,
+      "word_budget": null,
       "utilization": 0.621,
       "accuracy_estimate": 1.0
     },
     {
       "organ": "brain",
       "word_count": 1257,
+      "word_budget": null,
       "utilization": 0.503,
       "accuracy_estimate": 1.0
     }
   ],
   "streak": {
-    "current": 18,
+    "current": 1,
     "artifact_shipped": false,
-    "hard_thing": "Testing Document for Kate",
-    "tracker_date": "2026-04-15"
+    "hard_thing": "polaris-brand-lp (AU/MX non-weblab test design, due 5/6)",
+    "tracker_date": "2026-04-29"
   },
   "streak_history": [
+    {
+      "tracker_date": "2026-04-29",
+      "workdays_at_zero": 1,
+      "artifact_shipped": false,
+      "artifact_name": null,
+      "hard_thing_name": "polaris-brand-lp (AU/MX non-weblab test design, due 5/6)",
+      "notes": "AM backend 4/29: Day 1 after 4/28 reset. Hard thing unchanged: Brand LP AU/MX alternate measurement (Brandon-assigned 4/24). 4 new tasks from Brandon 1:1 + AU handoff mtg yesterday indicate chain is moving. OCI CA 100% dialup completed yesterday \u2014 full WW OCI live. Next Brandon 1:1 Tue 5/5. AU formal handoff 5/5. OP1 inputs due 5/8."
+    },
+    {
+      "tracker_date": "2026-04-28",
+      "workdays_at_zero": 0,
+      "artifact_shipped": false,
+      "artifact_name": null,
+      "hard_thing_name": "polaris-brand-lp (AU/MX non-weblab test design, due 5/6)",
+      "notes": "AM backend 4/28: Testing Document for Kate completed overnight (1213341921686564 now completed: true in DB as of 4/28 11:53 UTC). Streak reset. Hard thing is now the Brand LP AU/MX test design (1214330104198712, due 5/6) \u2014 the next concrete artifact in the polaris-brand-lp chain after DE/FR weblab dial-up. Net new tasks created 4/27-4/28 by Richard show the chain is moving: Create Intro Guide (Brandon 4/27), Kate AB Marketing AI demo prep (4/28), Google Ads MCC SSO admin (4/28)."
+    },
+    {
+      "tracker_date": "2026-04-27",
+      "workdays_at_zero": 4,
+      "artifact_shipped": false,
+      "artifact_name": null,
+      "hard_thing_name": "polaris-brand-lp (active: AU/MX non-weblab test design, due 5/6)",
+      "notes": "Retroactive correction: Testing Document for Kate was retired as the hard thing \u2014 Kate 4/16 meeting canceled, Brandon moved on, doc no longer needed per Richard 4/27. polaris-brand-lp is active and progressing (DE/FR weblab authoring finalizing 4/29; AU/MX alternate measurement task created 4/27). 4/27 was re-entry from OOO 4/23-4/26. Richard did ship referenceable artifacts during OOO window (4/20 consolidated Brand LP feedback reply, 4/24 thread participation). workdays_at_zero should be reset \u2014 not 4 at zero, the hard thing has been moving."
+    },
+    {
+      "tracker_date": "2026-04-25",
+      "workdays_at_zero": 3,
+      "artifact_shipped": false,
+      "artifact_name": null,
+      "hard_thing_name": "Testing Document for Kate (v5 \u2192 Brandon) \u2014 frozen since 4/22, RW OOO 4/23-4/25",
+      "notes": "Saturday: no workday increment. Hard thing carries forward unchanged. RW returns from OOO Monday 4/27."
+    },
+    {
+      "tracker_date": "2026-04-24",
+      "workdays_at_zero": 3,
+      "artifact_shipped": false,
+      "artifact_name": null,
+      "hard_thing_name": "Testing Document for Kate (v5 \u2192 Brandon) \u2014 still unsent, RW OOO 4/23-4/25",
+      "notes": "OOO Friday; prev streak=1 on 4/22 + 2 OOO days = 3 workdays at zero. Testing Doc reinstated as the hard thing (polaris-brand-lp 4/22 entry was an anomaly \u2014 no matching Asana task, Monday create)."
+    },
+    {
+      "tracker_date": "2026-04-22",
+      "workdays_at_zero": 1,
+      "artifact_shipped": false,
+      "artifact_name": null,
+      "hard_thing_name": "polaris-brand-lp",
+      "notes": "2026-04-22 AM: Hard thing corrected retrospectively. Testing Approach v5 shipped 4/5 per amcc.md; incumbent ledger had been incorrectly inheriting Testing Doc forward 4/14-4/21. Per 4/20 signal-driven redesign, polaris-brand-lp is the current #1 candidate (valuable-and-avoided, 4 channels). Streak count reset to 1 because Testing Approach completion 4/5 was a Hard Choice (amcc.md longest streak=1 started 4/5) and no subsequent hard thing has been correctly identified until today. Source: amcc.md \u00a7Current Streak + 4/20 redesign promotion in session-log."
+    },
+    {
+      "tracker_date": "2026-04-21",
+      "workdays_at_zero": 23,
+      "artifact_shipped": false,
+      "artifact_name": null,
+      "hard_thing_name": "Testing Document for Kate (v5 \u2192 Brandon)",
+      "notes": "23rd consecutive workday at zero L1. Brandon 1:1 truncated to 4min due to laptop - window for Testing doc send was lost. v5 PUBLISH verdict since 4/5. Bottleneck is SEND not WRITE."
+    },
+    {
+      "tracker_date": "2026-04-20",
+      "workdays_at_zero": 21,
+      "artifact_shipped": false,
+      "artifact_name": null,
+      "hard_thing_name": "Testing Document for Kate (v5 \u2192 Brandon)",
+      "notes": "Hard thing: 19d overdue, 21 workdays-at-zero now (was 20 on 4/17, +1 for Mon 4/20 still unsent). Visibility-avoidance streak continuing. Route to rw-trainer."
+    },
+    {
+      "tracker_date": "2026-04-17",
+      "workdays_at_zero": 20,
+      "artifact_shipped": false,
+      "artifact_name": null,
+      "hard_thing_name": "Testing Document for Kate",
+      "notes": "20 workdays at zero. v5 not started."
+    },
+    {
+      "tracker_date": "2026-04-16",
+      "workdays_at_zero": 19,
+      "artifact_shipped": false,
+      "artifact_name": null,
+      "hard_thing_name": "Send Testing Approach v5 to Brandon",
+      "notes": "EOD: Day 19 at zero L1. No progress on Testing Approach. 1 Sweep completed. 2 meetings (DDD Polaris, AU Adobe Alignment)."
+    },
     {
       "tracker_date": "2026-04-15",
       "workdays_at_zero": 18,
       "artifact_shipped": false,
       "artifact_name": null,
       "hard_thing_name": "Testing Document for Kate",
-      "notes": null
+      "notes": "AM-Backend: Hard thing = Testing Approach doc, 14d overdue. Core block 12:30-2PM today. Workdays at zero carried from yesterday (18)."
     },
     {
       "tracker_date": "2026-04-14",
@@ -433,7 +1578,7 @@
       "artifact_shipped": false,
       "artifact_name": null,
       "hard_thing_name": "Send Testing Approach v5 to Brandon",
-      "notes": "AM-Backend: Doc is v5 PUBLISH (8.4/10). 5 minor fixes remain."
+      "notes": "AM-Backend: Hard thing unchanged from amcc.md. Doc is v5 PUBLISH (8.4/10). 5 minor fixes remain. Ship to Brandon."
     },
     {
       "tracker_date": "2026-04-13",
@@ -449,55 +1594,7 @@
       "artifact_shipped": false,
       "artifact_name": null,
       "hard_thing_name": "Send Testing Approach v5 to Brandon",
-      "notes": "Testing Doc 8d overdue."
-    },
-    {
-      "tracker_date": "2026-04-08",
-      "workdays_at_zero": 0,
-      "artifact_shipped": false,
-      "artifact_name": null,
-      "hard_thing_name": "Send Testing Approach v5 to Brandon",
-      "notes": "Testing doc 7d overdue."
-    },
-    {
-      "tracker_date": "2026-04-07",
-      "workdays_at_zero": 0,
-      "artifact_shipped": false,
-      "artifact_name": null,
-      "hard_thing_name": "Send Testing Approach v5 to Brandon",
-      "notes": "Streak at 1 day from 4/5 completion."
-    },
-    {
-      "tracker_date": "2026-04-06",
-      "workdays_at_zero": 18,
-      "artifact_shipped": false,
-      "artifact_name": null,
-      "hard_thing_name": "Send Testing Approach v5 to Brandon",
-      "notes": "Kate meeting canceled but doc still valuable."
-    },
-    {
-      "tracker_date": "2026-04-05",
-      "workdays_at_zero": 17,
-      "artifact_shipped": false,
-      "artifact_name": null,
-      "hard_thing_name": "Testing Document for Kate",
-      "notes": null
-    },
-    {
-      "tracker_date": "2026-04-04",
-      "workdays_at_zero": 16,
-      "artifact_shipped": false,
-      "artifact_name": null,
-      "hard_thing_name": "Testing Document for Kate",
-      "notes": null
-    },
-    {
-      "tracker_date": "2026-04-03",
-      "workdays_at_zero": 15,
-      "artifact_shipped": false,
-      "artifact_name": null,
-      "hard_thing_name": "Testing Document for Kate",
-      "notes": null
+      "notes": "AM-Backend: Testing Doc 8d overdue. Team at Austin offsite today."
     }
   ],
   "patterns": [
@@ -507,7 +1604,7 @@
       "weeks_active": 11,
       "gate_or_fix": "Testing Approach doc (L1 gate)",
       "first_detected": "2026-01-26",
-      "updated_at": "2026-04-06 03:14:37"
+      "updated_at": "2026-04-06 03:14:37.492909"
     },
     {
       "pattern_name": "Admin displacement",
@@ -515,7 +1612,7 @@
       "weeks_active": 3,
       "gate_or_fix": "Pre-written response templates needed",
       "first_detected": "2026-03-17",
-      "updated_at": "2026-04-06 03:14:37"
+      "updated_at": "2026-04-06 03:14:37.492909"
     },
     {
       "pattern_name": "Reactive fire drills",
@@ -523,7 +1620,7 @@
       "weeks_active": 3,
       "gate_or_fix": "Pre-written response templates needed",
       "first_detected": "2026-03-17",
-      "updated_at": "2026-04-06 03:14:37"
+      "updated_at": "2026-04-06 03:14:37.492909"
     },
     {
       "pattern_name": "Have Backbone avoidance",
@@ -531,7 +1628,7 @@
       "weeks_active": 1,
       "gate_or_fix": "Annual review peer feedback",
       "first_detected": "2026-03-31",
-      "updated_at": "2026-04-06 03:14:37"
+      "updated_at": "2026-04-06 03:14:37.492909"
     },
     {
       "pattern_name": "Project management gaps",
@@ -539,10 +1636,25 @@
       "weeks_active": 1,
       "gate_or_fix": "Forte 2025 \u2014 lightweight tracking",
       "first_detected": "2026-03-31",
-      "updated_at": "2026-04-06 03:14:37"
+      "updated_at": "2026-04-06 03:14:37.492909"
     }
   ],
-  "weekly_output": [],
+  "weekly_output": [
+    {
+      "week_start": "2026-04-27 00:00:00",
+      "tasks_completed": 1,
+      "content_tasks": 0,
+      "core_tasks": 1,
+      "engine_tasks": 0
+    },
+    {
+      "week_start": "2026-04-20 00:00:00",
+      "tasks_completed": 5,
+      "content_tasks": 1,
+      "core_tasks": 0,
+      "engine_tasks": 1
+    }
+  ],
   "agent_health": [
     {
       "name": "agent-bridge-sync",
@@ -561,7 +1673,7 @@
     },
     {
       "name": "callout-reviewer",
-      "description": "Reviews all weekly WBR callout drafts for coherence, word counts, narrative strength, and adherence to callout principles. Scores each market on 8 dimensions across two lenses (L1 Craft: attribution, structure, voice, economy; L2 Impact: sowhat, ownership, accuracy, strategic). Enforces quality gates that block publish when data quality is suspect. Suggests specific edits. Runs after all writer agents have produced their drafts.\n\nSuccess metrics: 8/8 scoring dimensions evaluated per callout (L1: attribution, structure, voice, economy; L2: sowhat, ownership, accuracy, strategic); All 10 market callouts reviewed per weekly batch \u2014 zero skipped markets; Every edit suggestion is specific: exact text to replace + replacement text (no vague 'tighten this'); Scores persisted to DuckDB after every review cycle (query: ps.callout_scores) and WBR Health Score updated (query: ps.wbr_health_score); Cross-market coherence check completed: contradictions between market narratives flagged; Quality gates checked before publish: Gate A (forecast miss), Gate B (CPA deviation), Gate C (data staleness) \u2014 all BLOCKED markets require explicit override",
+      "description": "Reviews all weekly WBR callout drafts for coherence, word counts, narrative strength, and adherence to callout principles. Scores each market on 8 dimensions across two lenses (L1 Craft: attribution, structure, voice, economy; L2 Impact: sowhat, ownership, accuracy, strategic). Enforces quality gates that block publish when data quality is suspect. Suggests specific edits. Runs after all writer agents have produced their drafts.\n\nSuccess metrics: 8/8 scoring dimensions evaluated per callout (L1: attribution, structure, voice, economy; L2: sowhat, ownership, accuracy, strategic); All 10 market callouts reviewed per weekly batch \u2014 zero skipped markets; Every edit suggestion is specific: exact text to replace + replacement text; Scores persisted to DuckDB after every review cycle and WBR Health Score updated; Cross-market coherence check completed: contradictions between market narratives flagged; Quality gates checked before publish: Gate A, Gate B, Gate C \u2014 all BLOCKED markets require explicit override",
       "team": "WBR Callouts",
       "metrics_count": 0,
       "metrics": [],
@@ -621,7 +1733,7 @@
     },
     {
       "name": "market-analyst",
-      "description": "Analyzes weekly paid search performance data for any single market. Accepts market and week parameters. Reads market context, pulls structured data from DuckDB, reads narrative context from markdown, produces analysis briefs, writes projections, and logs agent state. Replaces abix-analyst, najp-analyst, and eu5-analyst.\n\nSuccess metrics: All 10 active markets analyzed per weekly replay cycle (query: ops.workflow_executions WHERE agent='market-analyst'); Data freshness check passes before analysis \u2014 zero briefs produced on stale data (>24h); Analysis brief produced within 3 minutes per market invocation; Every brief contains \u22651 quantified anomaly or \u22651 'no significant change' with evidence; Projection accuracy: forecast vs actual deviation <15% measured via ps.forecasts",
+      "description": "Analyzes weekly paid search performance data for any single market. Accepts market and week parameters. Reads market context, pulls structured data from DuckDB, reads narrative context from markdown, produces analysis briefs, writes projections, and logs agent state. Replaces abix-analyst, najp-analyst, and eu5-analyst.\n\nSuccess metrics: All 10 active markets analyzed per weekly replay cycle; Data freshness check passes before analysis \u2014 zero briefs produced on stale data (>24h); Analysis brief produced within 3 minutes per market invocation; Every brief contains \u22651 quantified anomaly or \u22651 'no significant change' with evidence; Projection accuracy: forecast vs actual deviation <15% measured via ps.forecasts",
       "team": "WBR Callouts",
       "metrics_count": 0,
       "metrics": [],
@@ -681,7 +1793,7 @@
     },
     {
       "name": "wiki-editor",
-      "description": "Editorial director for the wiki team. Orchestrates the pipeline: researcher -> writer -> critic -> librarian. Decides what gets written, in what order, and why. Owns the content roadmap, triage, gap analysis, and kill decisions. No wiki work happens without the editor's direction.\n\nSuccess metrics: 100% of pipeline stages executed in order: researcher \u2192 writer \u2192 critic \u2192 librarian (zero skipped steps); Content roadmap reviewed and prioritized weekly \u2014 P1/P2/P3 assignments current; Kill decisions made within 14 days of no demand signal (tracked via wiki demand-log.md); \u22651 article moved through full pipeline per week (query: wiki.throughput); Zero orphaned assignments: every topic assigned to researcher has a due date and status",
+      "description": "Editorial director for the wiki team. Orchestrates the pipeline: researcher -> writer -> critic -> librarian. Decides what gets written, in what order, and why. Owns the content roadmap, triage, gap analysis, and kill decisions. No wiki work happens without the editor's direction.\n\nSuccess metrics: 100% of pipeline stages executed in order: researcher \u2192 writer \u2192 critic \u2192 librarian; Content roadmap reviewed and prioritized weekly \u2014 P1/P2/P3 assignments current; Kill decisions made within 14 days of no demand signal; \u22651 article moved through full pipeline per week; Zero orphaned assignments: every topic assigned to researcher has a due date and status",
       "team": "Wiki Team",
       "metrics_count": 0,
       "metrics": [],
@@ -711,7 +1823,7 @@
     },
     {
       "name": "wiki-researcher",
-      "description": "Research agent for the wiki team. Gathers source material from body system organs, DuckDB analytics, Slack, Outlook email, internal Amazon resources, ARCC, and web sources. Produces structured research briefs for the wiki-writer. Never writes wiki pages directly.\n\nSuccess metrics: Every research brief cites \u22653 sources with [source: type, date, confidence] format; Primary sources preferred: \u226550% of citations from body system organs or DuckDB (not web fallback); Research brief delivered within single invocation \u2014 no back-and-forth required; Contradictions between sources explicitly flagged with confidence assessment; ABPS AI research subtask completed and brief posted as pinned comment when applicable",
+      "description": "Research agent for the wiki team. Gathers source material from body system organs, DuckDB analytics, Slack, Outlook email, internal Amazon resources, ARCC, and web sources. Produces structured research briefs for the wiki-writer. Never writes wiki pages directly.\n\nSuccess metrics: Every research brief cites \u22653 sources with [source: type, date, confidence] format; Primary sources preferred: \u226550% of citations from body system organs or DuckDB; Research brief delivered within single invocation \u2014 no back-and-forth required; Contradictions between sources explicitly flagged with confidence assessment; ABPS AI research subtask completed and brief posted as pinned comment when applicable",
       "team": "Wiki Team",
       "metrics_count": 0,
       "metrics": [],
@@ -740,6 +1852,127 @@
       "avg_duration_s": null
     }
   ],
-  "hook_reliability": [],
-  "workflow_reliability": []
+  "hook_reliability": [
+    {
+      "hook_name": "am-frontend",
+      "total_runs": 2,
+      "avg_duration_s": 1410.0,
+      "max_duration_s": 1620.0,
+      "total_failures": 2,
+      "total_asana_writes": 9,
+      "last_run": "2026-04-30",
+      "days_since_last_run": 0
+    },
+    {
+      "hook_name": "eod-frontend",
+      "total_runs": 1,
+      "avg_duration_s": null,
+      "max_duration_s": null,
+      "total_failures": null,
+      "total_asana_writes": 0,
+      "last_run": "2026-04-28",
+      "days_since_last_run": 2
+    },
+    {
+      "hook_name": "eod-backend",
+      "total_runs": 4,
+      "avg_duration_s": 680.0,
+      "max_duration_s": 1140.0,
+      "total_failures": 3,
+      "total_asana_writes": 12,
+      "last_run": "2026-04-28",
+      "days_since_last_run": 2
+    },
+    {
+      "hook_name": "am-backend",
+      "total_runs": 2,
+      "avg_duration_s": 1890.0,
+      "max_duration_s": 2640.0,
+      "total_failures": 3,
+      "total_asana_writes": 0,
+      "last_run": "2026-04-22",
+      "days_since_last_run": 8
+    },
+    {
+      "hook_name": "am-backend-remediation",
+      "total_runs": 1,
+      "avg_duration_s": 409.5,
+      "max_duration_s": 409.463162,
+      "total_failures": 2,
+      "total_asana_writes": 7,
+      "last_run": "2026-04-22",
+      "days_since_last_run": 8
+    },
+    {
+      "hook_name": "am-backend-parallel-v2",
+      "total_runs": 1,
+      "avg_duration_s": 360.0,
+      "max_duration_s": 360.0,
+      "total_failures": 0,
+      "total_asana_writes": 104,
+      "last_run": "2026-04-17",
+      "days_since_last_run": 13
+    },
+    {
+      "hook_name": "manual-hedy-backfill",
+      "total_runs": 1,
+      "avg_duration_s": 5400.0,
+      "max_duration_s": 5400.0,
+      "total_failures": null,
+      "total_asana_writes": 0,
+      "last_run": "2026-04-11",
+      "days_since_last_run": 19
+    },
+    {
+      "hook_name": "am-backend-parallel",
+      "total_runs": 1,
+      "avg_duration_s": 720.0,
+      "max_duration_s": 720.0,
+      "total_failures": 1,
+      "total_asana_writes": 0,
+      "last_run": "2026-04-08",
+      "days_since_last_run": 22
+    },
+    {
+      "hook_name": "eod-meeting-sync",
+      "total_runs": 1,
+      "avg_duration_s": 103.1,
+      "max_duration_s": 103.138851,
+      "total_failures": 1,
+      "total_asana_writes": 5,
+      "last_run": "2026-04-07",
+      "days_since_last_run": 23
+    },
+    {
+      "hook_name": "eod-refresh",
+      "total_runs": 1,
+      "avg_duration_s": 60.0,
+      "max_duration_s": 60.0,
+      "total_failures": 0,
+      "total_asana_writes": 0,
+      "last_run": "2026-04-07",
+      "days_since_last_run": 23
+    },
+    {
+      "hook_name": "am-auto-phase1",
+      "total_runs": 1,
+      "avg_duration_s": 300.0,
+      "max_duration_s": 300.0,
+      "total_failures": null,
+      "total_asana_writes": 0,
+      "last_run": "2026-04-06",
+      "days_since_last_run": 24
+    }
+  ],
+  "workflow_reliability": [
+    {
+      "workflow_name": "am-backend-parallel-v2",
+      "total_runs": 5,
+      "successes": 0,
+      "success_rate": 0.0,
+      "avg_duration_s": 1387.4,
+      "last_run": "2026-04-29 13:50:00",
+      "days_since_last_run": 1
+    }
+  ]
 }

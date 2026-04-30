@@ -68,6 +68,9 @@ Sources: rw-tracker.md, To-Do lists, email scan, calendar scan
 | 22 | Kingpin Goals — MX Jan/Feb/Mar | OVERDUE | BLOCKED — needs Andes data pull | Andes access |
 | 23 | Triage MS Advertising paused accounts | W13 | 10x emails, needs investigation | None |
 
+
+**Common failure:** Skipping this step leads to silent data loss. Always verify the output.
+
 ## Dependencies Map
 - Action 1 (AEO POV) → no blockers, just write it
 - Actions 2-4 (admin) → no blockers, just do them

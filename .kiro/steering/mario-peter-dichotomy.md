@@ -70,14 +70,13 @@ Richard's personal body system is mostly Peter-territory with Mario-corners (any
 
 **When an agent is being asked to delete things, change production systems, or make hard-to-reverse calls**: Mario. Explicit approval, dependency-ordered execution, atomic operations, resumable on failure, content preservation. The audit's R9 Execution Safety is the Mario-pattern.
 
-## The Underlying Principle
-
-Rigor is a cost, not a virtue. Pay it where the downside of being wrong is high; skip it where iteration can reveal the right answer faster than reasoning can.
-
-Speed is a cost, not a virtue. Spend it where first-run pain teaches more than planning would; avoid it where mistakes compound silently or irreversibly.
-
-Neither Mario nor Peter is wrong. They're calibrated to different risk profiles, and both failure modes are real: Mario's risk is spec paralysis and over-engineering; Peter's risk is slop and forgotten-about complexity. Match the ethos to the situation, check the agreement list when in doubt, and when both point the same way (which is most of the time), that's probably the right answer.
-
+[38;5;10m> [0m## The Underlying Principle[0m[0m
+[0m[0m
+Rigor is a cost, not a virtue. Pay it where the downside of being wrong is high; skip it where iteration is faster than reasoning.[0m[0m
+[0m[0m
+Speed is a cost, not a virtue. Spend it where first-run pain teaches more than planning; avoid it where mistakes compound silently or irreversibly.[0m[0m
+[0m[0m
+Neither Mario nor Peter is wrong—they're calibrated to different risk profiles. Mario's risk: spec paralysis and over-engineering. Peter's risk: slop and forgotten complexity. Match the ethos to the situation, check the agreement list when in doubt, and when both point the same way, that's probably the right answer.
 ## For Agents Reading This
 
 When Richard asks you to do something agentic — build a tool, spec a workflow, review a system, cut complexity — pause and ask:

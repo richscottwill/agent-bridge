@@ -1,5 +1,5 @@
 ---
-title: "JP Google Nonbrand Experiment — LP Test + Keyword Performance"
+title: "JP Google Nonbrand Experiment
 status: REVIEW
 audience: amazon-internal
 owner: Richard Williams
@@ -9,7 +9,7 @@ updated: 2026-04-12
 <!-- DOC-0391 | duck_id: testing-2023-01-jp-nb-experiment-google -->
 
 ---
-title: "JP Google Nonbrand Experiment — LP Test + Keyword Performance"
+title: "JP Google Nonbrand Experiment
 status: DRAFT
 audience: amazon-internal
 level: L5-L7
@@ -19,12 +19,12 @@ updated: 2026-03-25
 update-trigger: "JP NB strategy revisited or Google NB campaigns relaunched"
 tags: [experiment, japan, google-ads, nonbrand, landing-page, keyword-testing]
 type: reference
-summary: "JP Google NB experiment (Jan-Feb 2023). Callback LP definitively beat Bulk LP (0.9% vs 0.4% CVR, 5.8% Bayesian). 8 registrations at $1,028 CPA. Purchase keywords drove highest volume; custom ad copy outperformed brand/bulk variants."
+summary: "JP Google NB experiment. Callback LP definitively beat Bulk LP. 8 registrations at $1,028 CPA. Purchase keywords drove highest volume; custom ad copy outperformed brand/bulk variants."
 ---
 
 # JP Google Nonbrand Experiment — LP Test + Keyword Performance
 
-**Predecessor:** This is the follow-up to the [Yahoo JP NB Experiment](2022-10-yahoo-jp-nb-experiment.md), which identified competitor subdomain targeting as the most efficient audience. This Google test shifted to compliant keyword sets (no ASIN terms) and added an LP test.
+**Predecessor:** This is the follow-up to the [Yahoo JP NB Experiment], which identified competitor subdomain targeting as the most efficient audience. This Google test shifted to compliant keyword sets and added an LP test.
 
 Question: Will the Bulk LP drive a higher CVR than the Callback LP?
 Setup: Callback (Control) vs. Bulk (Test). Test using Google Ads feature to split traffic.
@@ -33,13 +33,13 @@ Timeline: Jan. 15th to Feb 11th, then assess performance.
 
 ## LP Test Results
 
-**Callback wins definitively.** Bulk page CVR was less than half of Callback. The 5.8% Bayesian probability means this isn't close — there is virtually no chance the Bulk LP would outperform Callback given more data.
+**Callback wins definitively.** Bulk page CVR was less than half of Callback. The 5.8% Bayesian probability means this isn't close
 
 - Control (Callback): 759 clicks, 7 conversions (0.9% CVR)
 - Experiment (Bulk): 1,333 clicks, 5 conversions (0.4% CVR)
 - Bayesian: 5.8% chance that experiment would perform better
 
-**So what:** The Callback LP's 2x CVR advantage over Bulk is decisive. For JP NB traffic, the callback experience (requesting contact) converts at more than double the rate of the bulk purchase experience. This aligns with the broader pattern that JP business users prefer high-touch engagement over self-service for initial registration.
+**So what:** The Callback LP's 2x CVR advantage over Bulk is decisive. For JP NB traffic, the callback experience converts at more than double the rate of the bulk purchase experience. This aligns with the broader pattern that JP business users prefer high-touch engagement over self-service for initial registration.
 
 ## Overall NB Performance
 
@@ -55,7 +55,7 @@ Timeline: Jan. 15th to Feb 11th, then assess performance.
 | Wholesale | 9,725 | 273 | $1,482 | 2.80% | $5.43 | 1 | 0.37% | $1,482 | 1 | 0.37% | $1,482 |
 | **Total** | **40,829** | **2,092** | **$8,224** | **5.10%** | **$3.93** | **12** | **0.57%** | **$685** | **8** | **0.38%** | **$1,028** |
 
-**So what:** "Purchase" (仕入れ) keywords were the clear winner — highest traffic volume (72% of clicks), lowest Hubble CPA ($906), and 75% of all Hubble registrations. "Corporate" had the highest CVR (0.48%) but limited volume. "Bulk" keywords drove almost no traffic and zero conversions. "Wholesale" was costly ($1,482 CPA) with minimal return.
+**So what:** "Purchase" (仕入れ) keywords were the clear winner
 
 ### Ad Performance
 
@@ -66,7 +66,7 @@ Timeline: Jan. 15th to Feb 11th, then assess performance.
 | Custom Ad (Mao + Richard) | 32,377 | 1,732 | $6,684 | 5.30% | $3.86 | 12 | 0.69% | $557 |
 | **Total** | **40,829** | **2,092** | **$8,224** | **5.10%** | **$3.93** | **12** | **0.57%** | **$685** |
 
-**So what:** The custom ad (created by Richard and refined by Mao) captured all 12 Google conversions. The Brand ad had 67% lower CTR than the custom ad and zero conversions. Google's algorithm strongly preferred the custom ad, giving it 79% of impressions. For JP NB, locally-crafted ad copy outperforms generic brand messaging.
+**So what:** The custom ad captured all 12 Google conversions. The Brand ad had 67% lower CTR than the custom ad and zero conversions. Google's algorithm strongly preferred the custom ad, giving it 79% of impressions. For JP NB, locally-crafted ad copy outperforms generic brand messaging.
 
 ### Top 10 Keywords by Performance
 
@@ -85,7 +85,7 @@ Summarized from 50 keywords tested. Full keyword table available in Appendix.
 | [仕入れ サイト] | [Purchase site] | 302 | 24 | $180 | 0 | 0% | — |
 | [物販 仕入れ] | [Product sales purchase] | 182 | 24 | $86 | 0 | 0% | — |
 
-**So what:** "Purchase" (仕入れ) dominated — 6 of 8 Hubble registrations, highest traffic, and $710 CPA. "Corporate" (法人向け) and exact-match [Wholesale] (卸売) showed strong CVR (2.17% and 4.35%) but at very low volume (1 registration each). Most keywords outside the top 3 generated clicks but zero conversions, suggesting the viable JP NB keyword set is narrow.
+**So what:** "Purchase" (仕入れ) dominated
 
 ### Top Search Queries (Converting)
 
@@ -101,26 +101,26 @@ Summarized from 50 keywords tested. Full keyword table available in Appendix.
 | 備品 仕入れ | Supplies | 4 | $6 | 1 | 25% | $6 |
 | 消費 仕 入 | Consumption purchase | 1 | $4 | 1 | 100% | $4 |
 
-*Note: Some search queries showed CVR >100% or very high conversion counts on minimal clicks due to Google attribution windows. #DIV/0! errors from the original data (queries with 0 conversions and 0 cost) have been cleaned.*
+*Note: Some search queries showed CVR >100% or very high conversion counts on minimal clicks due to Google attribution windows. #DIV/0! errors from the original data have been cleaned.*
 
 ## What We Learned
 
-1. **Callback LP wins over Bulk LP** — 2x CVR advantage, 5.8% Bayesian probability for Bulk. Not close.
-2. **"Purchase" keywords are the JP NB workhorse** — 75% of Hubble registrations, highest volume, most efficient CPA ($710 via Hubble).
-3. **Custom ad copy outperforms generic** — The locally-crafted ad captured 100% of conversions. Brand ad had 67% lower CTR.
-4. **Corporate keywords show promise at low volume** — 2.17% CVR (highest of any keyword group) but only 1 registration. Needs longer timeline.
-5. **Overall NB CPA ($1,028) is comparable to historical** — Slightly below the $1,042 average from the same period, but at smaller budget.
+1. **Callback LP wins over Bulk LP**
+2. **"Purchase" keywords are the JP NB workhorse**
+3. **Custom ad copy outperforms generic**
+4. **Corporate keywords show promise at low volume**
+5. **Overall NB CPA ($1,028) is comparable to historical**
 
 ## Next Test Ideas
 
 *These are operational planning notes from the original experiment. Some may be superseded by subsequent work.*
 
-- End NB campaign (based on results)
-- Google AVT — Tested in Yahoo (Business demographic)
-- Discovery Ads (Competitor keywords: Monotaro, ASKUL, etc.)
+- End NB campaign
+- Google AVT
+- Discovery Ads
 - Creative assets for JP: reach out to Mao
 - DSA on Google
-- Reg start page (Industrial/Medical)
+- Reg start page
 - Industry-specific approach: JP team will talk with specific industries and figure out what they want, then try to offer good prices for those products. Paid Search could have a sitelink, or bid on specific brands/product keywords.
 
 ---
@@ -142,7 +142,7 @@ Summarized from 50 keywords tested. Full keyword table available in Appendix.
 | セット販売 | Set sale |
 
 ### Ads
-Ad #1: Bulk purchase ad (used in the past and refined by Mao)
+Ad #1: Bulk purchase ad
 
 | Headlines | Descriptions |
 | --- | --- |
@@ -164,7 +164,7 @@ Ad #2: Brand ad, refined by Mao
 | 経費精算業務を削減 |  |
 | 請求書払いにも対応 |  |
 
-Ad #3: Custom ad (Richard + Mao) — drove all conversions
+Ad #3: Custom ad
 
 | Headlines | Descriptions |
 | --- | --- |
@@ -223,7 +223,7 @@ General Campaign already existed, which was ideal. Ad groups created to match ne
 
 
 <!-- AGENT_CONTEXT
-machine_summary: "JP Google NB experiment (Jan-Feb 2023). LP test: Callback definitively beat Bulk (0.9% vs 0.4% CVR, 5.8% Bayesian). Overall: 8 Hubble registrations at $1,028 CPA across 50 keywords. Purchase keywords drove 75% of registrations. Custom ad copy (Richard + Mao) captured 100% of conversions. Follow-up to Yahoo JP NB experiment — shifted to compliant keywords only."
+machine_summary: "JP Google NB experiment. LP test: Callback definitively beat Bulk. Overall: 8 Hubble registrations at $1,028 CPA across 50 keywords. Purchase keywords drove 75% of registrations. Custom ad copy captured 100% of conversions. Follow-up to Yahoo JP NB experiment
 key_entities: ["JP Google Ads", "NB campaigns", "Callback LP", "Bulk LP", "Hubble", "Mao"]
 action_verbs: ["test", "compare", "measure", "optimize"]
 depends_on: ["2022-10-yahoo-jp-nb-experiment"]

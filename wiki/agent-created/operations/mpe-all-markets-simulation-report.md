@@ -10,6 +10,9 @@
 | CA | ✓ | — | ✓ | ✓ | ✓ | · | ✓ | ✓ | ✓ | ✓ |
 | DE | ✓ | — | ✓ | ✓ | ✓ | · | ✓ | ✓ | ✓ | ✓ |
 | ES | ✓ | — | ✓ | ✓ | ✓ | · | ✓ | ✓ | ✓ | ✓ |
+
+#### Per-Market Results — Continued
+
 | FR | ✓ | — | ✓ | ✓ | ✓ | · | ✓ | ✓ | ✓ | ✓ |
 | IT | ✓ | — | ✓ | ✓ | ✓ | · | ✓ | ✓ | ✓ | ✓ |
 | JP | — | — | ✓ | ✓ | ✓ | · | ✓ | — | — | ✓ |
@@ -27,16 +30,12 @@
 - Skipped: **10** (legitimate: market doesn't have the relevant structure)
 - Failed: **0**
 
-## Step Legend
-
-1. Initial projection at ie%CCP target converges or returns feasible bound
+## Step Legend 1. Initial projection at ie%CCP target converges or returns feasible bound
 4. Regime fit state exists with confidence + decay_status metadata
 6. CPA elasticity fit has r² metadata
 7. Spend-mode target produces positive NB regs
 9. 90% credible interval spans > 2% of central (rejects fake precision)
-10. Brand+NB regs > 0 and blended CPA > 0
-
-## Symbols
+10. Brand+NB regs > 0 and blended CPA > 0 ## Symbols
 
 - ✓ PASSED — check satisfied
 - ✗ FAILED — investigate; anomaly detection may help

@@ -47,13 +47,19 @@ All 13 principles still hold. Where 6.4 extended:
 ## 3-minute demo flow (run order)
 
 1. Page loads → MX Y2026 @ 100% ie%CCP with animated arrival
-2. Click **All 10 markets** view → spot-check every market side-by-side
-3. Click **Distance to target** → see which markets are red/yellow/green vs OP2
+- 2.
+- Click **All 10 markets** view → spot-check every market side-by-side.
+- 3.
+- Click **Distance to target** → see which markets are red/yellow/green vs OP2.
 4. Click any red/yellow cell → drilled into that market
-5. Try period selector: Y2026 → Q2 → M04 → W17; numbers + chart highlight update
-6. Try scenario chips: Mixed → Bayesian (hero flashes red/up) → Frequentist (flashes green/down) → No lift (big flash)
-7. Open **Parameters** drawer → Model View sparklines visible; click "Explain this" on a tile
-8. Switch to a region (NA / EU5 / WW) → rollup chart renders with constituent table
+- 5.
+- Try period selector: Y2026 → Q2 → M04 → W17; numbers + chart highlight update.
+- 6.
+- Try scenario chips: Mixed → Bayesian (hero flashes red/up) → Frequentist (flashes green/down) → No lift (big flash).
+- 7.
+- Open **Parameters** drawer → Model View sparklines visible; click "Explain this" on a tile.
+- 8.
+- Switch to a region (NA / EU5 / WW) → rollup chart renders with constituent table.
 9. Click **Share** → PNG downloads, pasted into Slack thread
 
 ## Files changed this phase

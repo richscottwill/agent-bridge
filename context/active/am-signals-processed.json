@@ -1,177 +1,115 @@
 {
-  "schema_version": "1.0",
-  "generated_at_utc": "2026-04-25T19:00:00Z",
-  "generated_at_pt": "2026-04-25 12:00:00 PT",
-  "run_type": "am-backend-parallel-v2",
-  "completeness": "partial",
-  "partial_reason": "Retry of the 09:45 failed run. 4 of 5 failed ingestion streams recovered (Slack, Email, Calendar, Asana). SharePoint Loop still failing on Microsoft KMSI Step-8 redirect — needs `mwinit -f` (forced/interactive), not the plain `mwinit` Richard ran.",
-  "streams_ingested": ["slack","email","calendar","asana"],
-  "streams_skipped": ["loop (SharePoint KMSI Step-8 failure — needs mwinit -f)", "hedy (tool not exposed to subagents; Saturday + OOO = no new sessions expected anyway)"],
-  "retry_summary": {
-    "first_run_at_utc": "2026-04-25T16:40:00Z",
-    "retry_run_at_utc": "2026-04-25T18:50:00Z",
-    "gap_between_runs_hours": 2.2,
-    "what_unblocked_between_runs": [
-      "Midway cookie refreshed (~/.midway/cookie at 18:39 UTC) → unblocked Outlook (email + calendar)",
-      "Slack MCP 302 outage cleared → unblocked Slack ingestion",
-      "Asana MCP tools became available in this session → unblocked B1"
+  "schema_version": "2.0",
+  "generated_at_utc": "2026-04-30T13:00:00Z",
+  "run_type": "am_backend_parallel_v2",
+  "phase": "2_processing",
+  "top_signals": [
+    {
+      "topic": "polaris-brand-lp",
+      "strength_added_this_scan": 6.0,
+      "cross_channel": ["slack:dm-brandon", "slack:ab-paid-search-global", "email:Brandon-Asana", "email:Alex-Asana", "email:Dwayne-Asana"],
+      "narrative": "Dominant topic. Brandon explicitly named Richard as sole MCS consolidator Wed. Yun's QA thread (subheadlines, ref tag overrides, page-load) + Alex/Dwayne Asana thread all routed through Richard. Needs feedback doc + timelines by EOD today.",
+      "richard_action_required": true,
+      "urgency": "critical"
+    },
+    {
+      "topic": "richard-responsiveness",
+      "strength_added_this_scan": 2.0,
+      "cross_channel": ["slack:dm-brandon"],
+      "narrative": "Two explicit Brandon coaching moments on Wed: 'need you to be responsive with the team' and 'important function to earn trust across the team if you're leading these WW updates.' Pattern: third recent Brandon signal on communicate-timelines-proactively. Unasked-question-log candidate.",
+      "richard_action_required": true,
+      "urgency": "high",
+      "unasked_question_candidate": true
+    },
+    {
+      "topic": "mcs-coordination-ownership",
+      "strength_added_this_scan": 2.0,
+      "cross_channel": ["slack:dm-brandon", "slack:ab-paid-search-global", "email:Brandon-Asana"],
+      "narrative": "Brandon designated Richard single point of contact for MCS on Polaris Br-pages. No segmented feedback. Richard needs to set recurring sync with Alex where Alex defers.",
+      "richard_action_required": true,
+      "urgency": "high"
+    },
+    {
+      "topic": "au-reftag-reg-data",
+      "strength_added_this_scan": 2.0,
+      "cross_channel": ["slack:dm-meganos"],
+      "narrative": "Megan Oshry (new DM) asking about AU Google Ads conversion data methodology. Wants the reftag + reg-database query. Owed response + query share.",
+      "richard_action_required": true,
+      "urgency": "medium"
+    },
+    {
+      "topic": "sim-abma-ps-metrics",
+      "strength_added_this_scan": 1.0,
+      "cross_channel": ["slack:mpdm-rasanmol"],
+      "narrative": "Anmol Rastogi asking Richard to clarify ABMA-11245 SIM intake: which PS data metrics are needed. Owed specific metric list.",
+      "richard_action_required": true,
+      "urgency": "medium"
+    },
+    {
+      "topic": "op1-cpi-app",
+      "strength_added_this_scan": 1.5,
+      "cross_channel": ["hedy:brandon-1on1-4-28", "asana:1214384590122162"],
+      "narrative": "OP1 app acquisition projections due today 2-3pm PT Peter sync. Flat YoY budget per Kate/Todd. CPI adopted as primary optimization metric. DE/ES efficient per Brandon 1:1 4/28.",
+      "richard_action_required": true,
+      "urgency": "critical"
+    },
+    {
+      "topic": "mx-dupe-invoice",
+      "strength_added_this_scan": 1.0,
+      "cross_channel": ["email:Diana", "asana:1214088494080582"],
+      "narrative": "MX duplicate invoice $56K (PO Q1 MS-20200908). Google support ticket 0-1804000040849 open. Draft reply saved 4/28. 12d overdue.",
+      "richard_action_required": true,
+      "urgency": "high"
+    },
+    {
+      "topic": "ai-tooling-ab-spend-match",
+      "strength_added_this_scan": 0.5,
+      "cross_channel": ["slack:cps-ai-win-share-learn"],
+      "narrative": "AB Manage Spend Match agent on Agent Registry hit 85% match rate on 1,500-product file in <10 min. L3-L5 tooling signal.",
+      "richard_action_required": false,
+      "urgency": "info"
+    }
+  ],
+  "signals_reinforced_from_previous": 3,
+  "signals_new_this_run": 8,
+  "bucket_cap_violations": {
+    "sweep": {"count": 18, "cap": 5, "over_by": 13, "status": "critical_overcap"},
+    "core": {"count": 10, "cap": 4, "over_by": 6, "status": "critical_overcap"},
+    "engine_room": {"count": 18, "cap": 6, "over_by": 12, "status": "critical_overcap"},
+    "admin": {"count": 14, "cap": 3, "over_by": 11, "status": "critical_overcap"},
+    "wiki": {"count": 3, "cap": null, "status": "within_norms"}
+  },
+  "overdue_clusters": {
+    "totals_by_age": {
+      "3_to_7_days": 6,
+      "8_to_14_days": 9,
+      "15_to_30_days": 5,
+      "30_plus_days": 2
+    },
+    "kill_candidates": [
+      "1213959904341162 (Reply to Brandon — PAM budget, 23d OD, scheduled kill-decision 5/5)",
+      "1214080130329568 (Make changes to AU/MX/PAM, 34d OD, replace w/ fresh weekly instance)",
+      "1213875146955582 (Get Enhanced Match details, 21d OD, bundle w/ PAM decision)",
+      "1213962513760099 (Automated ASP confirmation reminders, 19d OD)",
+      "1213968042348601 (IECCP FAQ for new-account playbook, 19d OD)",
+      "1214146145384078 (Kingpin MX, 35d Andes-blocked, 'forget about this task' per Richard)"
     ],
-    "what_still_blocked": [
-      "SharePoint MCP KMSI Step-8 handshake — plain mwinit insufficient, needs mwinit -f (browser-based interactive flow)",
-      "Hedy MCP tool exposure to subagents (recurring; karpathy-queue infrastructure item)"
+    "duplicates_to_merge": [
+      {"keep": "1213690904654138", "close": "1214216689942612", "reason": "Both are monthly Individual Goals update reminders"}
     ]
   },
-  "ingestion_results": {
-    "slack": {
-      "status": "success",
-      "scan_window": "2026-04-24T17:10:00Z → 2026-04-25T18:50:53Z (~25.7h)",
-      "channels_scanned": 14,
-      "channels_skipped_tier3": 19,
-      "messages_ingested": 8,
-      "thread_replies_fetched": 0,
-      "signals_reinforced": 2,
-      "signals_new": 4,
-      "note": "Weekend quiet — 8 messages is the real count, not a coverage gap"
-    },
-    "email": {
-      "status": "success",
-      "scan_window": "2026-04-24T20:21:12Z → 2026-04-25T18:45:00Z",
-      "emails_ingested": 31,
-      "breakdown": {"HIGH": 2, "MEDIUM": 9, "LOW": 20},
-      "split": "25 inbox (in-window) + 6 sentitems",
-      "api_cap_note": "email_search reported 70 total but returned 31 across 2 pages; cross-validated sentitems folder directly to confirm coverage of HIGH-priority items"
-    },
-    "calendar": {
-      "status": "success",
-      "events_ingested": 12,
-      "monday_events": 6,
-      "tuesday_events": 5,
-      "critical_event": "Tue 4/28 1:30 PM PT Brandon 1:1 — the deadline for PO #2D-19910168 FAQ closure"
-    },
-    "asana_b1": {
-      "status": "success_partial",
-      "live_open_tasks": 73,
-      "db_open_tasks_after_sync": 71,
-      "db_gap_vs_live": 2,
-      "db_gap_reason": "Asana search API page-size artifact; gap within tolerance",
-      "new_tasks_inserted": 14,
-      "soft_deleted": 38,
-      "completions_marked": 2,
-      "history_snapshot": "inserted for CURRENT_DATE"
-    },
-    "asana_b2": {
-      "status": "skipped",
-      "reason": "Full GetTaskStories per-task scan would consume significant tool budget; deferred to Monday AM-1 when weekly refit is scheduled. B1 + delta analysis (completions, new tasks, soft-deletes) covers the essential state change."
-    },
-    "loop": {
-      "status": "FAILED",
-      "root_cause": "SharePoint MCP fails on Microsoft KMSI Step-8 redirect even with fresh Midway cookie. Error: 'No authorization code in KMSI response (Step 8). The Microsoft login flow may have changed. Run mwinit -f and retry.'",
-      "pages_refreshed": 0,
-      "content_preserved": true,
-      "data_freshness_handling": "Subagent correctly left last_updated at 2026-04-21 and is_stale=true — did NOT falsely claim fresh data"
-    },
-    "hedy": {
-      "status": "skipped",
-      "reason": "mcp_hedy_* tools not exposed to spec-task-execution subagents (recurring). Saturday + RW OOO window → no new sessions expected anyway.",
-      "freshness_bumped": true
-    }
+  "hard_thing_now": {
+    "current": "Polaris Brand LP consolidation (MCS coordination + feedback doc)",
+    "replaces": "Testing Document for Kate (closed 4/27 as obsolete)",
+    "source": "Brandon DM 4/29 + ab-paid-search-global thread 4/29",
+    "first_action_today": "Create consolidated feedback doc + email MCS with timeline, before Brandon 1:1 1:30 PM PT"
   },
-  "high_priority_signals_actionable_monday": [
-    {
-      "rank": 1,
-      "type": "hard_thing",
-      "source": "asana/self",
-      "topic": "testing-document-for-kate-v5",
-      "source_id": "1213341921686564",
-      "summary": "23d overdue. 3 workdays at zero (OOO + weekend don't count). v5 PUBLISH verdict since 4/5 — still unsent. Frozen since Brandon 1:1 4/21 was cut to 4min.",
-      "richard_action_monday": "FIRST ACTION Monday AM: apply 5 critic fixes, send v5 to Brandon with 2-sentence cover. 10 minutes, not a work session."
-    },
-    {
-      "rank": 2,
-      "type": "brandon_gatekeeper_action",
-      "source": "email",
-      "source_id": "AAQkAGQ5NmQwNGZkLWQ0NTAtNGY4Yy1hNjhlLTY0OTU1N2QzYTBhYwAQAP+zlVNnN9JGtN8lv/hcKow=",
-      "topic": "po-2d-19910168-faq",
-      "summary": "Brandon ready to approve PO ($74K → $218K, +$144K, FY26 US PAM / Google) but needs FAQ attached first. Approval chain stuck on Brandon + Luda + Jagan. This is the CLOSED resolution of the 18-day-old PAM budget thread — absorbed into the PO change request, not a separate thread.",
-      "richard_action_monday": "Draft FAQ, attach in Coupa, ping Brandon. 60min max. Bring confirmation to Tue 4/28 1:30 PM Brandon 1:1.",
-      "deadline_pressure": "Brandon 1:1 Tue 4/28 1:30 PM PT"
-    },
-    {
-      "rank": 3,
-      "type": "commitment_made_for_richard",
-      "source": "slack",
-      "source_id": "C065KKT53DJ/1777039370.274509",
-      "topic": "polaris-brand-lp-google-experiment",
-      "summary": "Brandon said to Yunchu (Fri 4/24 17:20 UTC): 'Let me confirm to Dwayne and Richard can setup an alternate means of measurement.' Brandon implicitly committed Richard to setting up the Google Experiment alt-measurement path + handing off to AU before 5/5 transition. ZERO weekend activity on the thread.",
-      "richard_action_monday": "Set up Google Experiment for AU/MX Polaris Br-pages measurement. Draft handoff doc for AU team. 2 hours."
-    },
-    {
-      "rank": 4,
-      "type": "peter_ocampo_pam_primeday",
-      "source": "slack",
-      "source_id": "MPDM C0AV6BWRMDG (new)",
-      "topic": "pam-primeday",
-      "summary": "Peter Ocampo in new MPDM — needs PAM Primeday budget + YoY + projected impressions/taps/installs. Also needs Richard to request access to Sharon's PD26 dates workdoc.",
-      "richard_action_monday": "DM Peter PAM Primeday plan; request Sharon workdoc access."
-    },
-    {
-      "rank": 5,
-      "type": "l4_signal_monitor",
-      "source": "slack",
-      "source_id": "C04UG37S04V/1777048241",
-      "topic": "blink-ps-google-product-feed-aeo",
-      "summary": "Blink PS met with Google — optimized product feed in merchant center for Google's AI responses. Overlaps with AEO/zero-click narrative (L4).",
-      "richard_action_monday": "Monitor thread. Track for AEO POV."
-    }
-  ],
-  "carry_forward_resolutions_confirmed": [
-    {
-      "previously_rank_2": "brandon_pam_budget_reply_18d",
-      "actual_status": "RESOLVED via conversion — absorbed into PO #2D-19910168 change request. Ashley Yi submitted change 4/23; Brandon is now gatekeeper pending FAQ. No separate PAM reply needed; the FAQ IS the reply.",
-      "new_equivalent": "rank 2 above (PO FAQ)"
-    },
-    {
-      "previously_carry_forward": "outbound_goals_email_overlay_7d_stale",
-      "actual_status": "RESOLVED. Richard replied 4/22 06:01 UTC in Excel comments ('M22: Green — Email overlay weblab planning progressed...') + WW redirect confirmation. Thread closed from Richard's side."
-    }
-  ],
-  "top_active_signals_post_this_run": [
-    {"topic": "polaris-brand-lp", "total_strength": 16.22, "channel_spread": 4, "mentions": 11, "quality_score_approx": 28.7, "note": "+0.50 from Brandon Friday post ingest"},
-    {"topic": "mx-budget-ieccp", "total_strength": 6.76, "channel_spread": 2, "mentions": 3, "note": "unchanged"},
-    {"topic": "oci-rollout", "total_strength": 5.40, "channel_spread": 2, "note": "unchanged"},
-    {"topic": "au-cpa-cvr", "total_strength": 4.71, "channel_spread": 3, "note": "unchanged"},
-    {"topic": "op1-strategy", "total_strength": 2.29, "channel_spread": 2, "note": "+0.50 from ABLT April Update ingest"},
-    {"topic": "pam-primeday", "total_strength": 1.00, "channel_spread": 1, "note": "NEW — Peter MPDM"}
-  ],
-  "hard_thing_snapshot": {
-    "signal_based_top_1": "polaris-brand-lp (signal-driven, strongest by data)",
-    "artifact_based_top_1": "Testing Document for Kate v5 (shipping artifact, incumbent margin)",
-    "current_l1_streak_hard_thing": "Testing Document for Kate v5 — stays until it ships (10-min send) or is officially retired via karpathy protocol"
-  },
-  "environment_issues_remaining": [
-    {
-      "severity": "MEDIUM",
-      "issue": "SharePoint MCP KMSI Step-8 failure even after mwinit refresh",
-      "blocks": ["Loop page sync", "SharePoint file ops", "SharePoint durability push"],
-      "fix": "Run `mwinit -f` (forced/browser flow) — plain mwinit is insufficient. The Microsoft login flow changed and the MCP's headless stub can't navigate it.",
-      "detected_by": "Subagent D retry"
-    },
-    {
-      "severity": "MEDIUM",
-      "issue": "Hedy MCP tools not exposed to spec-task-execution subagents",
-      "blocks": ["Hedy direct ingestion from subagent context"],
-      "fix": "Karpathy-queue item: MCP tool proxying for subagents. Workaround: run Hedy ingestion in parent orchestrator.",
-      "detected_by": "Subagent E (two consecutive runs)"
-    }
-  ],
-  "five_levels_tagging": {
-    "L1_sharpen_yourself": ["Testing Document for Kate v5 (HARD THING, frozen 23d)"],
-    "L2_ww_testing": ["Polaris Brand LP Google experiment + AU handoff", "PO #2D-19910168 FAQ (budget-blocking)", "WW weblab dial-up", "Email overlay WW rollout"],
-    "L3_team_automation": [],
-    "L4_zero_click_future": ["blink-ps-google-product-feed-aeo"],
-    "L5_agentic_orchestration": []
-  },
-  "wiki_candidates_appended_this_run": [
-    "mcp-auth-failure-playbook: three distinct auth modes (Midway cookie, Slack proxy, KMSI Step-8) × three distinct fixes (mwinit, wait-for-MCP-recovery, mwinit -f). Worth a proper playbook."
-  ]
+  "five_levels_allocation_this_week": {
+    "L1_sharpen_yourself": "One-third — wiki articles in Review, Brandon coaching signals, MBR callout due 5/2",
+    "L2_drive_ww_testing": "One-third — Polaris LP consolidation, MX NB LP test, Brand LP alt-measurement design, OP1 Peter sync",
+    "L3_team_automation": "Minimal — one bi-weekly Adi sync scheduled 4/29",
+    "L4_zero_click_future": "None",
+    "L5_agentic_orchestration": "Minimal — Kate AI demo prep queued for May 29",
+    "flag": "L3 + L4 + L5 combined < 15% this week. Richard is stuck at L1/L2, which is OK for current Brandon-visible work, but will be a Kate conversation in 30-60 days if it persists."
+  }
 }

@@ -92,14 +92,15 @@ _Why: AU-specific workaround is fragile; Italy P0 regression + MX Auto overwrite
 - [2026-04-28 hedy] OP1 Budgets and Data Sync — RefTag tagged in meeting topics alongside Adobe, GenBI keyword reporting issues for AU
 - [loop] Weekly Meeting Doc — sitelink audit (Fortune 100 copy) referenced; ref tag work implicit in Polaris Brand LP weblab feedback loop
 
-### f90-lifecycle-legal (4 hits)
-_Why: Audiences workstream is blocked on Legal SIMs. Feeds directly into the WW Testing Loop._
-
-- [2026-04-28 hedy] Paid Acquisition Team Sync — F90 tagged in meeting topics alongside Jasper AI legal signoff
-- [2026-04-28 hedy] OP1 Budgets and Data Sync — F90 tagged; LiveRamp Enhanced Match legal review prep covered
-- [loop] Weekly Meeting Doc — F90/LiveRamp audience setup on recent weekly agenda
-- [loop] Richard/Brandon 1:1 Notes — F90 LiveRamp enhanced match on recent weeks' focus
-
+[38;5;10m> [0m### f90-lifecycle-legal (4 hits)[0m[0m
+_Why: Audiences workstream blocked on Legal SIMs; feeds into WW Testing Loop._[0m[0m
+[0m[0m
+- [2026-04-28 hedy] Paid Acquisition Sync — F90 tagged with Jasper AI legal signoff[0m[0m
+- [2026-04-28 hedy] OP1 Budgets/Data Sync — F90 tagged; LiveRamp Enhanced Match legal review prep[0m[0m
+- [loop] Weekly Meeting Doc — F90/LiveRamp audience setup on recent agenda[0m[0m
+- [loop] Richard/Brandon 1:1 — F90 LiveRamp enhanced match in recent focus[0m[0m
+[0m[0m
+**Common failure:** Skipping this step causes silent data loss. Always verify output.
 ### kiro-agentspaces-tooling (3 hits)
 _Why: L3 is the next active level. 4/17 AI Tool Demo produced 6 committed adopters — signals help graduate tools from personal to team-standard._
 
@@ -118,11 +119,9 @@ _Why: Cross-market measurement ground truth. Low volume, high impact when it mov
 - [2026-04-28 hedy] OP1 Budgets and Data Sync — GenBI keyword reporting issues for AU covered
 - [loop] Richard/Brandon 1:1 Notes — MX ie%CCP projections with Carlos/Lorena on recent agenda (adjacent signal)
 
-### competitor-intel (0 hits)
-_Why: Market intel for WBR callouts and MBR narratives._
-
+[38;5;10m> [0m### competitor-intel (0 hits)[0m[0m
+[0m[0m
 _no activity in 24h_
-
 ### ad-copy-and-creative (4 hits)
 _Why: Modern Search workstream. UK Phase 1 delivered +86% CTR, +31% regs — strongest evidence base in the program._
 

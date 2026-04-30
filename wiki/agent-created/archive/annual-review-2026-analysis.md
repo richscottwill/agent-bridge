@@ -13,7 +13,6 @@ updated: 2026-04-12
 Ingested: 2026-03-24
 Source: Annual Review PDF (Richard Williams, Q1 2026)
 
-## Summary Ratings
 - Overall: **Meets High Bar**
 - Leadership Principles: **Solid Strength**
 - Manager: Brandon Munday (brandoxy@)

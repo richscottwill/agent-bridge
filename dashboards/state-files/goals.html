@@ -1,191 +1,254 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Goals &mdash; State Files</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Goals — State Files</title>
+
+<link rel="stylesheet" href="../projection-design-system.css?v=2026-04-30">
+
 <style>
-:root{--bg:#0f1117;--surface:#14161e;--surface2:#1a1d27;--border:#1e2028;--border2:#2a2d35;
-  --text:#d0d8e0;--text2:#8899aa;--text3:#5a6a7a;--white:#f0f4f8;
-  --accent:#4a9eff;--accent2:#3b82f6;--accent-dim:rgba(74,158,255,0.12);
-  --green:#4ade80;--red:#f87171;--amber:#fbbf24;--purple:#a78bfa}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);padding:0;min-height:100vh;-webkit-font-smoothing:antialiased}
-.page{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
-nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);background:rgba(20,22,30,0.92)}
-.nav-brand{color:var(--white);font-weight:700;font-size:1.02em;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:4px;letter-spacing:1.5px;text-transform:uppercase}
-.nav-link{color:var(--text2);text-decoration:none;padding:14px 18px;font-size:0.92em;font-weight:500;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
-.nav-link:hover{color:var(--text);background:rgba(74,158,255,0.06)}
-.nav-link.active{color:var(--accent);border-bottom-color:var(--accent)}
-.nav-back{color:var(--text3);text-decoration:none;padding:14px 14px 14px 0;font-size:0.87em;font-weight:500;letter-spacing:.3px;margin-right:4px;border-right:1px solid var(--border);transition:color .15s}
-.nav-back:hover{color:var(--accent)}
-h1{color:var(--white);font-size:1.47em;margin-bottom:4px;font-weight:600;letter-spacing:.2px}
-h2{color:var(--text);font-size:1.07em;margin:28px 0 12px;font-weight:600;letter-spacing:.2px}
-.sub{color:var(--text2);font-size:0.9em;margin-bottom:20px;line-height:1.5}
-.toc{display:flex;gap:6px;padding:10px 24px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--border);background:#12141c}
-.toc-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-right:2px}
-.toc a{font-size:12px;color:var(--text2);text-decoration:none;padding:2px 8px;border-radius:3px;transition:all .15s}
-.toc a:hover{color:var(--accent);background:rgba(30,58,138,.15)}
-.toc .toc-sep{color:#333;font-size:12px}
+body { font-family: var(--font-sans); color: var(--color-text-body); background: var(--color-neutral-bg); line-height: 1.5; }
 
-.filter-row{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
-.filter-label{font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-right:6px}
-.filter-btn{padding:4px 12px;border-radius:4px;font-size:13px;cursor:pointer;background:var(--surface);border:1px solid var(--border);color:var(--text2);transition:all .15s;font-family:inherit}
-.filter-btn:hover{border-color:var(--accent);color:var(--text)}
-.filter-btn.active{background:rgba(30,58,138,.3);border-color:var(--accent);color:var(--accent)}
-.filter-count{font-size:11px;color:var(--text3);margin-left:3px}
+/* Subnav — same as other state-files pages */
+.sf-subnav { background: var(--color-panel-bg); border-bottom: 1px solid var(--color-panel-border); padding: 0 var(--gap-lg); display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
+.sf-subnav-brand { color: var(--color-text-hero); font-weight: 700; font-size: 0.92em; padding: 12px 16px 12px 0; border-right: 1px solid var(--color-panel-border); margin-right: 4px; letter-spacing: 1.3px; text-transform: uppercase; }
+.sf-subnav-back { color: var(--color-text-meta); text-decoration: none; padding: 12px 14px 12px 0; font-size: 0.87em; font-weight: 500; letter-spacing: 0.3px; margin-right: 4px; border-right: 1px solid var(--color-panel-border); transition: color 120ms ease; }
+.sf-subnav-back:hover { color: var(--color-brand); }
+.sf-subnav-link { color: var(--color-text-meta); text-decoration: none; padding: 12px 18px; font-size: 0.94em; font-weight: 500; border-bottom: 2px solid transparent; transition: all 120ms ease; cursor: pointer; letter-spacing: 0.3px; }
+.sf-subnav-link:hover { color: var(--color-text-hero); background: rgba(0, 102, 204, 0.06); }
+.sf-subnav-link.active { color: var(--color-brand); border-bottom-color: var(--color-brand); }
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px;margin-bottom:16px}
-.card{background:var(--surface);border-radius:8px;padding:18px;border:1px solid var(--border)}
-.goal-card{background:var(--surface);border-radius:8px;padding:16px;border:1px solid var(--border);border-left:3px solid var(--text3);transition:all .2s}
-.goal-card.goal-green{border-left-color:var(--green)}
-.goal-card.goal-yellow{border-left-color:var(--amber)}
-.goal-card.goal-red{border-left-color:var(--red)}
-.goal-owner{font-size:0.74em;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
-.goal-level{font-size:0.72em;padding:1px 6px;border-radius:3px;background:var(--surface2);color:var(--text2);margin-left:6px}
-.goal-title{font-weight:600;color:var(--white);font-size:0.97em;margin-bottom:4px;line-height:1.35}
-.goal-desc{color:var(--text2);font-size:0.84em;line-height:1.5;margin-bottom:10px}
-.goal-trend{display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap}
-.goal-trend-pill{font-size:0.72em;padding:2px 6px;border-radius:3px;font-weight:600;white-space:nowrap}
-.goal-trend-pill.Green{background:rgba(52,211,153,0.15);color:var(--green)}
-.goal-trend-pill.Yellow{background:rgba(251,191,36,0.15);color:var(--amber)}
-.goal-trend-pill.Red{background:rgba(248,113,113,0.15);color:var(--red)}
-.goal-trend-pill.none{background:var(--surface2);color:var(--text3)}
-.goal-update{color:var(--text);font-size:0.84em;line-height:1.5;padding:8px 10px;background:var(--surface2);border-radius:4px;margin-top:6px}
-.goal-update-label{color:var(--text3);font-size:0.74em;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
-.goal-markets{margin-top:8px;font-size:0.78em;color:var(--text3)}
+.sf-frame { max-width: 1400px; margin: 0 auto; padding: var(--gap-lg) var(--gap-lg) var(--gap-xl); }
 
-.summary-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:16px}
-.stat{background:var(--surface);border-radius:6px;padding:12px 14px;border:1px solid var(--border)}
-.stat .v{font-size:1.62em;font-weight:700;color:var(--white)}
-.stat .v.green{color:var(--green)}
-.stat .v.amber{color:var(--amber)}
-.stat .l{font-size:0.74em;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
-.empty{color:var(--text3);font-style:italic;font-size:0.87em;padding:12px 0;text-align:center}
-.gen{color:var(--text3);font-size:0.74em;text-align:center;margin-top:48px;padding:16px;letter-spacing:.5px}
-</style></head><body>
-<nav>
-  <a href="../index.html" class="nav-back" target="_top">&larr; Command Center</a>
-  <span class="nav-brand">State Files</span>
-  <a href="index.html" class="nav-link">Overview</a>
-  <a href="au.html" class="nav-link">AU</a>
-  <a href="mx.html" class="nav-link">MX</a>
-  <a href="ww.html" class="nav-link">WW Testing</a>
-  <a href="goals.html" class="nav-link active">Goals</a>
-</nav>
-<div class="toc">
-  <span class="toc-label">Scope</span>
-  <a href="#my">My Goals</a><span class="toc-sep">&middot;</span>
-  <a href="#team">Team</a>
+h1.sf-h1 { color: var(--color-text-hero); font-size: var(--size-section); margin-bottom: 4px; font-weight: var(--weight-section); letter-spacing: 0.01em; }
+h2.sf-h2 { color: var(--color-text-hero); font-size: 18px; margin: var(--gap-lg) 0 var(--gap-sm); font-weight: 600; }
+.sf-sub { color: var(--color-text-meta); font-size: var(--size-ui); margin-bottom: var(--gap-md); line-height: 1.6; }
+
+.sf-toc { display: flex; gap: var(--gap-xs); padding: var(--gap-xs) 0; flex-wrap: wrap; align-items: center; border-bottom: 1px solid var(--color-panel-border); font-size: var(--size-meta); margin-bottom: var(--gap-md); }
+.sf-toc-label { color: var(--color-text-subtle); text-transform: uppercase; letter-spacing: 0.08em; margin-right: var(--gap-xs); font-weight: 600; }
+.sf-toc a { color: var(--color-text-meta); text-decoration: none; padding: 2px var(--gap-xs); border-radius: 3px; transition: color 120ms ease, background-color 120ms ease; }
+.sf-toc a:hover { color: var(--color-brand); background: rgba(0, 102, 204, 0.06); }
+.sf-toc-sep { color: var(--color-panel-border); }
+
+/* Stat tiles — same visual weight as weekly-review scorecard tiles */
+.sf-summary-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--gap-sm); margin-bottom: var(--gap-md); }
+.sf-stat { background: var(--color-panel-bg); border: 1px solid var(--color-panel-border); border-radius: 8px; padding: var(--gap-sm) var(--gap-md); }
+.sf-stat .v { font-family: var(--font-mono); font-size: var(--size-section); font-weight: 700; color: var(--color-text-hero); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.sf-stat .v.green { color: var(--color-success); }
+.sf-stat .v.amber { color: var(--color-warning); }
+.sf-stat .v.red   { color: var(--color-danger); }
+.sf-stat .l { font-size: var(--size-meta); color: var(--color-text-subtle); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; font-weight: 600; }
+
+/* Filter row */
+.sf-filter-row { display: flex; gap: var(--gap-xs); margin-bottom: var(--gap-md); flex-wrap: wrap; align-items: center; }
+.sf-filter-label { font-size: var(--size-meta); color: var(--color-text-subtle); text-transform: uppercase; letter-spacing: 0.06em; margin-right: var(--gap-xs); font-weight: 600; }
+.sf-filter-btn {
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: var(--size-ui);
+  cursor: pointer;
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  color: var(--color-text-body);
+  transition: all 120ms ease;
+  font-family: inherit;
+}
+.sf-filter-btn:hover { border-color: var(--color-brand); color: var(--color-brand); }
+.sf-filter-btn.active { background: rgba(0, 102, 204, 0.08); border-color: var(--color-brand); color: var(--color-brand); font-weight: 600; }
+.sf-filter-count { font-size: var(--size-meta); color: var(--color-text-subtle); margin-left: 3px; }
+.sf-owner-select {
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  color: var(--color-text-body);
+  font-size: var(--size-ui);
+  font-family: inherit;
+}
+
+/* Goal cards — identical to overview */
+.sf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: var(--gap-md); margin-bottom: var(--gap-md); }
+.sf-goal-card { background: var(--color-panel-bg); border: 1px solid var(--color-panel-border); border-radius: 8px; padding: var(--gap-md); border-left: 3px solid var(--color-text-subtle); transition: all 180ms ease; }
+.sf-goal-card:hover { box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.06); }
+.sf-goal-card.green  { border-left-color: var(--color-success); }
+.sf-goal-card.yellow { border-left-color: var(--color-warning); }
+.sf-goal-card.red    { border-left-color: var(--color-danger); }
+.sf-goal-owner { font-size: var(--size-meta); color: var(--color-text-subtle); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; font-weight: 600; }
+.sf-goal-level { font-size: 11px; padding: 1px 6px; border-radius: 3px; background: #FFFFFF; border: 1px solid var(--color-panel-border); color: var(--color-text-meta); margin-left: 6px; font-weight: 500; letter-spacing: normal; text-transform: none; }
+.sf-goal-title { font-weight: 600; color: var(--color-text-hero); font-size: var(--size-body); margin-bottom: var(--gap-xs); line-height: 1.35; }
+.sf-goal-desc  { color: var(--color-text-body); font-size: var(--size-ui); line-height: 1.55; margin-bottom: var(--gap-sm); }
+.sf-goal-trend { display: flex; gap: var(--gap-xs); margin-bottom: var(--gap-xs); flex-wrap: wrap; }
+.sf-goal-trend-pill { font-size: 11px; padding: 2px 6px; border-radius: 3px; font-weight: 600; white-space: nowrap; }
+.sf-goal-trend-pill.Green  { background: #E6F7EE; color: #0C7A3D; }
+.sf-goal-trend-pill.Yellow { background: #FFF4D6; color: #8A6200; }
+.sf-goal-trend-pill.Red    { background: #FEE2E2; color: var(--color-danger); }
+.sf-goal-trend-pill.none   { background: #F3F3F3; color: var(--color-text-subtle); }
+.sf-goal-update { color: var(--color-text-body); font-size: var(--size-ui); line-height: 1.55; padding: var(--gap-sm); background: #FFFFFF; border: 1px solid var(--color-panel-border); border-radius: 4px; margin-top: var(--gap-xs); }
+.sf-goal-update-label { color: var(--color-text-subtle); font-size: var(--size-meta); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; font-weight: 600; }
+.sf-goal-markets { margin-top: var(--gap-sm); font-size: var(--size-meta); color: var(--color-text-subtle); }
+
+.sf-empty { color: var(--color-text-subtle); font-style: italic; font-size: var(--size-ui); padding: var(--gap-md); text-align: center; }
+
+.sf-footer { color: var(--color-text-subtle); font-size: var(--size-meta); text-align: center; margin-top: var(--gap-xl); padding: var(--gap-md); letter-spacing: 0.05em; font-family: var(--font-mono); }
+</style>
+</head>
+<body>
+<div class="sf-subnav" id="sfSubnav">
+  <!-- Populated from state-files-data.json -->
 </div>
-<div class="page">
-  <h1>2026 Goals</h1>
-  <div class="sub">Source: Brandon's Outbound Marketing Goals sheet. Monthly status (Jan/Feb/Mar) and narrative updates refreshed programmatically each run &mdash; no manual file maintenance. Default view shows your three goals; toggle to Team to see how your work intersects other owners.</div>
 
-  <div class="summary-row" id="summaryRow"></div>
-
-  <div class="filter-row">
-    <span class="filter-label">View</span>
-    <button class="filter-btn active" id="fMine">My Goals <span class="filter-count" id="cMine"></span></button>
-    <button class="filter-btn" id="fTeam">Team <span class="filter-count" id="cTeam"></span></button>
-    <span class="filter-label" style="margin-left:20px">Owner</span>
-    <select id="ownerFilter" style="padding:4px 10px;border-radius:4px;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:13px;font-family:inherit"><option value="">All owners</option></select>
-    <span class="filter-label" style="margin-left:20px">Level</span>
-    <button class="filter-btn active" data-level="">All</button>
-    <button class="filter-btn" data-level="Individual">Individual</button>
-    <button class="filter-btn" data-level="Team">Team</button>
-    <button class="filter-btn" data-level="QBR">QBR</button>
-    <button class="filter-btn" data-level="LT">LT</button>
+<div class="sf-frame">
+  <div class="sf-toc">
+    <span class="sf-toc-label">Scope</span>
+    <a href="#my">My Goals</a><span class="sf-toc-sep">·</span>
+    <a href="#team">Team</a>
   </div>
 
-  <h2 id="my">Goals</h2>
-  <div class="grid" id="goalsGrid"></div>
+  <h1 class="sf-h1">2026 Goals</h1>
+  <div class="sf-sub">
+    Source: Brandon's Outbound Marketing Goals sheet. Monthly status and narrative
+    updates refresh programmatically each run — no manual file maintenance.
+    Default view shows your three goals; toggle to Team to see how your work
+    intersects other owners.
+  </div>
 
-  <div class="gen" id="genFooter">LOADING&hellip;</div>
+  <div class="sf-summary-row" id="summaryRow"></div>
+
+  <div class="sf-filter-row">
+    <span class="sf-filter-label">View</span>
+    <button class="sf-filter-btn active" id="fMine">My Goals <span class="sf-filter-count" id="cMine"></span></button>
+    <button class="sf-filter-btn" id="fTeam">Team <span class="sf-filter-count" id="cTeam"></span></button>
+    <span class="sf-filter-label" style="margin-left:var(--gap-md)">Owner</span>
+    <select id="ownerFilter" class="sf-owner-select"><option value="">All owners</option></select>
+    <span class="sf-filter-label" style="margin-left:var(--gap-md)">Level</span>
+    <button class="sf-filter-btn active" data-level="">All</button>
+    <button class="sf-filter-btn" data-level="Individual">Individual</button>
+    <button class="sf-filter-btn" data-level="Team">Team</button>
+    <button class="sf-filter-btn" data-level="QBR">QBR</button>
+    <button class="sf-filter-btn" data-level="LT">LT</button>
+  </div>
+
+  <h2 class="sf-h2" id="my">Goals</h2>
+  <div class="sf-grid" id="goalsGrid"></div>
+
+  <div class="sf-footer" id="sfFooter">LOADING…</div>
 </div>
+
 <script>
-fetch('../data/goals-data.json?'+Date.now()).then(function(r){return r.json()}).then(function(G){
+function shortLabel(key, label) {
+  if (!label) return key.toUpperCase();
+  var first = label.split(/\s+/)[0];
+  if (first.length <= 4 && first.toLowerCase() === key.toLowerCase()) return first;
+  return label;
+}
+
+function buildSubnav(D) {
+  var nav = document.getElementById('sfSubnav');
+  var html = '';
+  html += '<a href="../index.html" class="sf-subnav-back" target="_top">← Command</a>';
+  html += '<span class="sf-subnav-brand">State Files</span>';
+  html += '<a class="sf-subnav-link" href="index.html">Overview</a>';
+  (D.markets || []).forEach(function (key) {
+    var label = shortLabel(key, (D.labels || {})[key]);
+    html += '<a class="sf-subnav-link" href="market.html?m=' + key + '">' + label + '</a>';
+  });
+  html += '<a class="sf-subnav-link active" href="goals.html">Goals</a>';
+  nav.innerHTML = html;
+}
+
+// Load state-files-data.json for the subnav, goals-data.json for the content
+Promise.all([
+  fetch('../data/state-files-data.json?' + Date.now()).then(function (r) { return r.json(); }).catch(function () { return { markets: [], labels: {} }; }),
+  fetch('../data/goals-data.json?' + Date.now()).then(function (r) { return r.json(); })
+]).then(function (res) {
+  var D = res[0], G = res[1];
+  buildSubnav(D);
+
   var allGoals = G.goals || [];
   var richardGoals = G.richard_goals || [];
-  var view = 'mine';   // 'mine' or 'team'
+  var view = 'mine';
   var levelFilter = '';
   var ownerFilter = '';
 
   // Summary stats
-  (function(){
+  (function () {
     var mine = richardGoals;
-    var trend = {Green:0, Yellow:0, Red:0};
-    mine.forEach(function(g){
-      if(g.latest_color && trend.hasOwnProperty(g.latest_color)) trend[g.latest_color]++;
+    var trend = { Green: 0, Yellow: 0, Red: 0 };
+    mine.forEach(function (g) {
+      if (g.latest_color && trend.hasOwnProperty(g.latest_color)) trend[g.latest_color]++;
     });
     var el = document.getElementById('summaryRow');
     el.innerHTML =
-      '<div class="stat"><div class="v">'+mine.length+'</div><div class="l">My Goals</div></div>'+
-      '<div class="stat"><div class="v green">'+trend.Green+'</div><div class="l">Green</div></div>'+
-      '<div class="stat"><div class="v amber">'+trend.Yellow+'</div><div class="l">Yellow</div></div>'+
-      '<div class="stat"><div class="v">'+G.goal_count+'</div><div class="l">Team Goals</div></div>'+
-      '<div class="stat"><div class="v">'+G.owner_count+'</div><div class="l">Owners</div></div>';
+      '<div class="sf-stat"><div class="v">' + mine.length + '</div><div class="l">My Goals</div></div>' +
+      '<div class="sf-stat"><div class="v green">' + trend.Green + '</div><div class="l">Green</div></div>' +
+      '<div class="sf-stat"><div class="v amber">' + trend.Yellow + '</div><div class="l">Yellow</div></div>' +
+      '<div class="sf-stat"><div class="v">' + G.goal_count + '</div><div class="l">Team Goals</div></div>' +
+      '<div class="sf-stat"><div class="v">' + G.owner_count + '</div><div class="l">Owners</div></div>';
   })();
 
   // Owner dropdown
   var sel = document.getElementById('ownerFilter');
-  (G.owners || []).forEach(function(o){
+  (G.owners || []).forEach(function (o) {
     var opt = document.createElement('option'); opt.value = o; opt.textContent = o; sel.appendChild(opt);
   });
 
   // Counts
-  document.getElementById('cMine').textContent = '('+richardGoals.length+')';
-  document.getElementById('cTeam').textContent = '('+allGoals.length+')';
+  document.getElementById('cMine').textContent = '(' + richardGoals.length + ')';
+  document.getElementById('cTeam').textContent = '(' + allGoals.length + ')';
 
-  function render(){
+  function render() {
     var base = view === 'mine' ? richardGoals : allGoals;
-    if(ownerFilter) base = base.filter(function(g){return g.owner === ownerFilter});
-    if(levelFilter) base = base.filter(function(g){return (g.level||'') === levelFilter});
+    if (ownerFilter) base = base.filter(function (g) { return g.owner === ownerFilter; });
+    if (levelFilter) base = base.filter(function (g) { return (g.level || '') === levelFilter; });
     var el = document.getElementById('goalsGrid');
-    if(!base.length){el.innerHTML = '<div class="empty">No goals match the current filter.</div>'; return}
+    if (!base.length) { el.innerHTML = '<div class="sf-empty">No goals match the current filter.</div>'; return; }
 
-    el.innerHTML = base.map(function(g){
+    el.innerHTML = base.map(function (g) {
       var color = (g.latest_color || '').toLowerCase() || 'none';
-      var cls = 'goal-card' + (color==='green'?' goal-green':color==='yellow'?' goal-yellow':color==='red'?' goal-red':'');
-      var trendPills = (g.monthly_status||[]).map(function(m){
+      var cls = 'sf-goal-card' + (color === 'green' ? ' green' : color === 'yellow' ? ' yellow' : color === 'red' ? ' red' : '');
+      var trendPills = (g.monthly_status || []).map(function (m) {
         var c = m.color || 'none';
-        return '<span class="goal-trend-pill '+c+'">'+m.month.slice(0,3)+'</span>';
+        return '<span class="sf-goal-trend-pill ' + c + '">' + m.month.slice(0, 3) + '</span>';
       }).join('');
-      var markets = (g.markets||[]).map(function(m){return m.toUpperCase()}).join(' \u00B7 ');
+      var markets = (g.markets || []).map(function (m) { return m.toUpperCase(); }).join(' · ');
       var desc = g.description || '';
-      if(desc.length>240)desc = desc.slice(0,237)+'\u2026';
+      if (desc.length > 240) desc = desc.slice(0, 237) + '…';
       var latest = g.latest_update || '';
-      return '<div class="'+cls+'">'+
-        '<div class="goal-owner">'+g.owner+(g.level?'<span class="goal-level">'+g.level+'</span>':'')+'</div>'+
-        '<div class="goal-title">'+g.title+'</div>'+
-        '<div class="goal-desc">'+desc+'</div>'+
-        '<div class="goal-trend">'+trendPills+'</div>'+
-        (latest?'<div class="goal-update"><div class="goal-update-label">'+(g.latest_month||'Latest')+' update</div>'+latest+'</div>':'')+
-        (markets?'<div class="goal-markets">Maps to: '+markets+'</div>':'')+
+      return '<div class="' + cls + '">' +
+        '<div class="sf-goal-owner">' + g.owner + (g.level ? '<span class="sf-goal-level">' + g.level + '</span>' : '') + '</div>' +
+        '<div class="sf-goal-title">' + g.title + '</div>' +
+        '<div class="sf-goal-desc">' + desc + '</div>' +
+        '<div class="sf-goal-trend">' + trendPills + '</div>' +
+        (latest ? '<div class="sf-goal-update"><div class="sf-goal-update-label">' + (g.latest_month || 'Latest') + ' update</div>' + latest + '</div>' : '') +
+        (markets ? '<div class="sf-goal-markets">Maps to: ' + markets + '</div>' : '') +
         '</div>';
     }).join('');
   }
 
-  document.getElementById('fMine').addEventListener('click', function(){
-    view='mine'; this.classList.add('active'); document.getElementById('fTeam').classList.remove('active'); render();
+  document.getElementById('fMine').addEventListener('click', function () {
+    view = 'mine'; this.classList.add('active'); document.getElementById('fTeam').classList.remove('active'); render();
   });
-  document.getElementById('fTeam').addEventListener('click', function(){
-    view='team'; this.classList.add('active'); document.getElementById('fMine').classList.remove('active'); render();
+  document.getElementById('fTeam').addEventListener('click', function () {
+    view = 'team'; this.classList.add('active'); document.getElementById('fMine').classList.remove('active'); render();
   });
-  sel.addEventListener('change', function(){ ownerFilter = this.value; render(); });
-  document.querySelectorAll('.filter-btn[data-level]').forEach(function(b){
-    b.addEventListener('click', function(){
-      document.querySelectorAll('.filter-btn[data-level]').forEach(function(x){x.classList.remove('active')});
+  sel.addEventListener('change', function () { ownerFilter = this.value; render(); });
+  document.querySelectorAll('.sf-filter-btn[data-level]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.sf-filter-btn[data-level]').forEach(function (x) { x.classList.remove('active'); });
       this.classList.add('active'); levelFilter = this.dataset.level; render();
     });
   });
 
   render();
-  document.getElementById('genFooter').textContent='DATA: '+new Date(G.generated).toLocaleString()+' \u00B7 SOURCE: Outbound Marketing Goals.xlsx \u00B7 REFRESH: python3 shared/dashboards/refresh-goals.py';
-}).catch(function(e){
+  document.getElementById('sfFooter').textContent = 'DATA: ' + new Date(G.generated).toLocaleString() + ' · SOURCE: Outbound Marketing Goals.xlsx · REFRESH: python3 shared/dashboards/refresh-goals.py';
+}).catch(function (e) {
   console.error(e);
-  document.getElementById('goalsGrid').innerHTML = '<div style="color:var(--red)">Failed to load goals-data.json &mdash; run refresh-goals.py</div>';
+  document.getElementById('goalsGrid').innerHTML = '<div style="color:var(--color-danger);padding:var(--gap-md)">Failed to load goals-data.json — run refresh-goals.py</div>';
 });
 </script>
 
 <script src="../shared/section-freshness.js" defer></script>
-</body></html>
+</body>
+</html>

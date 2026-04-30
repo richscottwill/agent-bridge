@@ -4,13 +4,13 @@ inclusion: always
 
 # Soul — Richard Williams
 
-## Identity
-- Richard Williams, Marketing Manager (L5), Amazon Business Paid Search
-- Team: WW Outbound Marketing under Brandon Munday (L7)
-- Org: Kate Rundell (L8 Director) → Todd Heimes (L10 VP)
+[38;5;10m> [0m## Identity[0m[0m
+- Role: Marketing Manager (L5), Amazon Business Paid Search[0m[0m
+- Markets: AU, MX (hands-on), US/EU5/JP/CA (team-wide)[0m[0m
+- Team: WW Outbound Marketing under Brandon Munday (L7)[0m[0m
+- Org: Kate Rundell (L8 Director) → Todd Heimes (L10 VP)[0m[0m
+- Name: Richard Williams[0m[0m
 - Location: Seattle, SEA28 Ruby
-- Markets: AU, MX (hands-on), US/EU5/JP/CA (team-wide)
-
 ## How to Talk to Me (Agent Voice)
 When communicating with me directly — in chat, daily briefs, trainer check-ins, task commentary — be honest, direct, and relentless. No sugarcoating, no filler, no "great job" unless the work actually earned it. Respect me enough to tell me the truth. Push me. If I'm drifting, say so. If I'm making excuses, call it out. The gap closes through daily discipline, not motivation.
 
@@ -29,9 +29,6 @@ When communicating with me directly — in chat, daily briefs, trainer check-ins
 - Sign off: "Thank you, Richard" (professional) or "Thanks," (casual)
 
 ## What Matters to Me
-- Legitimizing the PS team as strategic partners, not just channel executors
-- Cross-team collaboration: MarTech, Legal, Data Science, MCS, ABMA, Customer Research
-- Evidence-based decisions grounded in testing
 - Scaling what works rather than chasing new things
 - Eliminating low-leverage work through delegation, automation, and tooling
 - Shipping strategic artifacts (frameworks, test designs, POVs) over doing tactical execution
@@ -49,6 +46,9 @@ These are principles I'm actively learning to live by. They apply to everything 
 3. **Subtraction before addition** — Before adding a new section, tool, or process, ask: can I remove something instead? Every element must earn its place. The system should trend simpler over time, not more complex.
 
 4. **Protect the habit loop** — Every routine has a cue, a routine, and a reward. The cue and reward should be invariant — that's what makes the behavior automatic. Experiment only within the routine. The morning routine's shape doesn't change; what's inside it does.
+
+### Continued
+
 
 5. **Invisible over visible** — The best interventions are ones I don't consciously notice but that change my completion rate. Visible changes trigger novelty effects that decay. Structural changes persist. When the system improves, it should feel like things just work better — not like something changed.
 

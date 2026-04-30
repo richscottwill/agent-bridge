@@ -1,43 +1,55 @@
 {
-  "schema_version": "1.0",
-  "generated_at_utc": "2026-04-25T19:00:00Z",
-  "generated_at_pt": "2026-04-25 12:00:00 PT",
-  "run_type": "am-backend-parallel-v2",
-  "completeness": "partial",
-  "partial_reason": "Wiki search index rebuild succeeded (local-only, ran in morning pass). SharePoint drift check + published .docx refresh still skipped — SharePoint MCP blocked on KMSI Step-8 even after mwinit. Needs mwinit -f.",
-  "wiki_index_rebuild": {
-    "status": "complete_from_morning_run",
-    "timestamp_utc": "2026-04-25T16:38:55Z",
-    "output_path": "/shared/user/dashboards/data/wiki-search-index.json",
-    "markdown_files_scanned": 530,
-    "unique_documents": 301,
-    "grouped_documents": 180,
-    "archived_documents": 49,
-    "document_groups": 26,
-    "backlinks": {"docs_with_related": 451, "total_links": 3130, "unique_tags": 224},
-    "wiki_index_md": "/shared/user/wiki/agent-created/_meta/wiki-index.md (97 articles, 46 published, 1 stale)"
+  "schema_version": "2.0",
+  "generated_at_utc": "2026-04-30T13:00:00Z",
+  "run_type": "am_backend_parallel_v2",
+  "phase": "4_wiki",
+  "pipeline_state_note": "Wiki pipeline tracked in ~/shared/wiki/agent-created/ (source) + SharePoint Documents/Artifacts/ (published .docx) + Kiro dashboard (shared/dashboards/wiki-search.html). Asana ABPS AI - Content deprecated 2026-04-17.",
+  "active_pipeline_count": {
+    "draft": "unknown — not scanned this run",
+    "review": "unknown — not scanned this run",
+    "published_final": "unknown — not scanned this run",
+    "archived": "unknown"
   },
-  "stale_final_articles": {
-    "note": "Cannot compute definitively without SharePoint drift check. Wiki index local metadata flags 1 stale by modification-time heuristic."
-  },
-  "sharepoint_drift": {
-    "status": "skipped",
-    "reason": "SharePoint MCP KMSI Step-8 failure blocks sharepoint_list_files / sharepoint_read_file calls. Would fail identically to Loop MCP.",
-    "fix_required": "mwinit -f (forced/browser flow)"
-  },
-  "new_article_candidates": {
-    "from_signals_this_run": [
-      {
-        "topic": "mcp-auth-failure-playbook",
-        "proposed_slug": "operations/mcp-auth-failure-playbook",
-        "rationale": "This weekend surfaced three distinct MCP auth failure modes: Midway cookie absence (fixed with mwinit), Slack proxy 302 outage (self-recovered), KMSI Step-8 handshake change (needs mwinit -f). Agent needs a systematic diagnosis doc mapping symptoms → root cause → fix.",
-        "urgency": "medium — pattern will recur"
-      }
-    ],
-    "from_signals_tracker": [
-      {"topic": "polaris-brand-lp", "strength": 16.22, "channel_spread": 4, "has_existing": "partial (polaris-lp-testing/polaris-launch-review — needs consolidation)", "status": "watch — likely Monday activity"},
-      {"topic": "mx-budget-ieccp", "strength": 6.76, "has_existing": "covered in MX state file"},
-      {"topic": "pam-primeday", "strength": 1.00, "has_existing": "unknown", "status": "emerging — Peter MPDM"}
-    ]
-  }
+  "published_articles_recent": [
+    {"article": "Testing Approach & Year Ahead", "published_date": "2026-04-17", "eval_a": 8.4, "eval_b": 8.2, "notes": "Obsoletes the 'Testing Document for Kate' Asana task (closed 4/27)"},
+    {"article": "OCI Execution Guide", "published_date": "2026-04-04", "eval_a": 8.6, "eval_b": 8.8, "notes": "Strongest eval in batch"},
+    {"article": "OCI Rollout Playbook", "published_date": "2026-03-25", "eval_a": 8.4, "eval_b": 7.8, "notes": "First article through real kiro-cli agent pipeline"},
+    {"article": "ie%CCP Planning & Optimization Framework", "published_date": "2026-03-30", "eval_a": 8.6, "eval_b": 8.2, "notes": "Decision doc framing. -10% haircut justification TODO."},
+    {"article": "Paid Search Testing Approach & Year Ahead", "published_date": "2026-03-25", "eval_a": 8.4, "eval_b": 8.2, "notes": "Second article published through pipeline"},
+    {"article": "Enhanced Match / LiveRamp — Audience Expansion", "published_date": "2026-04-04", "eval_a": 8.2, "eval_b": 8.2, "notes": "Time-bound — needs refresh when Abdul answers Brandon's 4 questions"},
+    {"article": "AU Paid Search — Market Wiki", "published_date": "2026-04-04", "eval_a": 8.4, "eval_b": 8.0, "notes": "W13 data needs refresh within 2 weeks"},
+    {"article": "OCI Impact Summary — The Business Case", "published_date": "2026-04-04", "score": 8.4, "notes": "OCI business case. Update when OCI CA goes live (done 4/7 — refresh candidate)"}
+  ],
+  "stale_final_candidates": [
+    {"article": "AU Paid Search — Market Wiki", "reason": "W13 data, 4-week-old metrics stale"},
+    {"article": "Enhanced Match / LiveRamp", "reason": "Needs refresh when Abdul answers Brandon's 4 questions"},
+    {"article": "OCI Impact Summary", "reason": "OCI CA launched 4/7 — outcome data now available"}
+  ],
+  "new_article_candidates_from_signals": [
+    {
+      "topic": "Polaris Brand LP MCS Coordination Playbook",
+      "signal_strength": 6.0,
+      "sources": ["slack:dm-brandon 4-29", "slack:ab-paid-search-global 4-29", "email:Brandon-Asana"],
+      "rationale": "Brandon explicitly named Richard sole consolidator. Process pattern — feedback doc + timeline + cutoff — worth documenting for repeatability in future MCS-gated tests. L2 Testing + L3 Team Automation.",
+      "recommended_author": "Richard (primary — he is the process owner)",
+      "priority": "high"
+    },
+    {
+      "topic": "AU Reftag + Reg-Database Methodology",
+      "signal_strength": 2.0,
+      "sources": ["slack:dm-meganos 4-29"],
+      "rationale": "Megan Oshry asking for the methodology to pull AU Google Ads conversion data herself. Pattern — each new stakeholder asks the same thing. A one-pager lets Richard reply with a link instead of re-explaining.",
+      "recommended_author": "Richard",
+      "priority": "medium"
+    },
+    {
+      "topic": "Kiro PS Use Cases (for Kate AI Demo)",
+      "signal_strength": "task-driven (1214330286428120)",
+      "sources": ["email:Brandon 4-22", "asana:1214330286428120"],
+      "rationale": "Kate AB Marketing AI demo May 29 needs 3-4 concrete Kiro PS use cases with results. Natural wiki article — consolidates L3/L5 examples.",
+      "recommended_author": "Richard + Adi",
+      "priority": "medium_deadline_5-29"
+    }
+  ],
+  "asana_content_project_note": "ABPS AI - Content project was deprecated 2026-04-17. Do NOT create Asana tasks for wiki articles. All wiki work lives in ~/shared/wiki/agent-created/{category}/{slug}.md with frontmatter-driven status. Pipeline view at shared/dashboards/wiki-search.html."
 }

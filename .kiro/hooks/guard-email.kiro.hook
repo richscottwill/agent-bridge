@@ -5,17 +5,9 @@
   "when": {
     "type": "preToolUse",
     "toolTypes": [".*email_reply.*", ".*email_send.*", ".*email_forward.*"]
-
-#### preamble — Details
-
   },
   "then": {
     "type": "askAgent",
     "prompt": "Inspect ALL recipient fields. Richard's approved: prichwil@amazon.com, richscottwill@gmail.com. ALL Richard's → ACCESS GRANTED. ANY other → ACCESS DENIED. Ask approval. If denied, save as draft."
   }
 }
-
-### Common Pitfalls — preamble
-- Misinterpreting this section causes downstream errors
-- Always validate assumptions before acting on this data
-- Cross-reference with related sections for completeness

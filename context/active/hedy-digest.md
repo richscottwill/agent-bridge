@@ -26,12 +26,9 @@ Hedy MCP tools (`ListSessions`, `GetSessionRecap`, `GetSessionDetails`, etc.) ar
 |------|---------|-------------------|----------|-----------|
 | 2026-04-21 | Weekly Paid Acquisition Team Sync | **Team** (Brandon + directs) | 77 min | 7 |
 | 2026-04-21 | MX Paid Search / IECCP / Campaign Strategy Sync | **Market** (Lorena + Andes) | 34 min | 3 |
-| 2026-04-21 | Brandon 1:1 (truncated) | **Manager 1:1 — Brandon** | 4 min | 2 |
-| 2026-04-17 | AI Tool Demo and Workflow Integration | **Team** | 51 min | 7 |
 | 2026-04-16 | Polaris LP Optimization & Italy Ref Tag Issue | **Stakeholder** (MCS / Polaris) | 60 min | 5 |
 | 2026-04-15 | Polaris Brand LP & Canada Optimization Review | **Stakeholder** (MCS / Polaris) | 26 min | 5 |
 | 2026-04-14 | Polaris, Baloo, and Mexico Testing Sync | **Manager 1:1 — Brandon** | 38 min | 2 |
-| 2026-04-14 | OCI Rollout and Market Performance Review | **Team** | 58 min | 4 |
 | 2026-04-14 | Baloo Project Phase 1 Demo and Feedback | **Stakeholder** (Baloo / Vijay) | 31 min | 10 |
 
 ### Series Classification Rationale (from memory.md attendee graph)

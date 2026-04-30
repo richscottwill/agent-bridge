@@ -3,29 +3,60 @@
 
 Last updated: 2026-04-03
 
-## Purpose
+### Step 5: Handle Errors
+- Log the error: task GID, error type, timestamp
+- Skip the affected task
+- Continue processing remaining tasks
+- Note skipped tasks at the bottom of the output file
 
-Scan Richard's incomplete Asana tasks for teammate activity (comments, due date changes, reassignments) since the last scan. Write detected signals to `~/shared/context/intake/asana-activity.md` for AM-2/AM-3 consumption. Update scan state so subsequent runs only process new activity.
+If a `GetTaskStories` call fails (rate limit, API error, timeout):
+
+---
+
+## State Update
+
+### 💬 Comments
+
+- **[Task Name]** — [Author Name] ([timestamp]):
+  > [Comment text, first 200 chars]
+
+- **[Task Name]** — [Who changed it] ([timestamp]):
+
+  Changed due date [old date → new date]
+
+## Output Format
 
 ## When to Run
 
 - During AM-1 (Morning Routine Ingest), after pulling incomplete tasks
 - Can also be run manually on demand
 
-## Prerequisites
+## Purpose
 
-- Asana MCP tools available: `SearchTasksInWorkspace`, `GetTaskStories`
-- State file: `~/shared/context/active/asana-scan-state.json`
-- Output file: `~/shared/context/intake/asana-activity.md`
+Scan Richard's incomplete Asana tasks for teammate activity (comments, due date changes, reassignments) since the last scan. Write detected signals to `~/shared/context/intake/asana-activity.md` for AM-2/AM-3 consumption. Update scan state so subsequent runs only process new activity.
 
-## Constants
+## [YYYY-MM-DD]
 
-- Richard's Asana GID: `1212732742544167`
-- Workspace GID: `8442528107068`
+### Step 2: Pull Incomplete Tasks
 
----
+Call `SearchTasksInWorkspace`:
+- `workspace_gid`: `8442528107068`
+- `assignee_any`: `1212732742544167`
+- `completed`: `false`
 
-## Step-by-Step Procedure
+This returns all of Richard's incomplete tasks. Store the list for iteration.
+
+## Integration with AM-3 Brief
+
+The AM-3 hook reads `~/shared/context/intake/asana-activity.md` and includes the signals in the daily brief under the "Activity Signals" section. The brief template uses the emoji classifications directly:
+
+- 💬 Comments awaiting response: [count]
+- 📅 Due date changes: [count]  
+- 👤 Reassignments: [count]
+
+Each signal links back to the task name so Richard can act on it.
+
+### Step 3: Get Stories for Each Task For each task in the list: 1. Look up the task's last-scanned timestamp: - If `per_task_timestamps[task_gid]` exists, use that timestamp - Otherwise, use `last_scan_timestamp` (or 7-day lookback if null) 2. Call `GetTaskStories`: - `task_gid`: the task's GID 3. Filter stories to only those with `created_at` after the task's last-scanned timestamp. 4. Skip stories authored by Richard (GID `1212732742544167`) — we only want teammate activity.
 
 ### Step 1: Read Scan State
 
@@ -42,16 +73,35 @@ Read `~/shared/context/active/asana-scan-state.json`:
   - *Example:* When if `last_scan_timestamp` is null, this is the firs, the expected outcome is verified by checking the result.
 - If `last_scan_timestamp` has a value, use it as the default cutoff for tasks not in `per_task_timestamps`.
 
-### Step 2: Pull Incomplete Tasks
+## Step-by-Step Procedure
 
-Call `SearchTasksInWorkspace`:
-- `workspace_gid`: `8442528107068`
-- `assignee_any`: `1212732742544167`
-- `completed`: `false`
+### 👤 Reassignments
 
-This returns all of Richard's incomplete tasks. Store the list for iteration.
+- **[Task Name]** — [Who reassigned] ([timestamp]):
+  Reassigned to [New Assignee Name]
 
-### Step 3: Get Stories for Each Task For each task in the list: 1. Look up the task's last-scanned timestamp: - If `per_task_timestamps[task_gid]` exists, use that timestamp - Otherwise, use `last_scan_timestamp` (or 7-day lookback if null) 2. Call `GetTaskStories`: - `task_gid`: the task's GID 3. Filter stories to only those with `created_at` after the task's last-scanned timestamp. 4. Skip stories authored by Richard (GID `1212732742544167`) — we only want teammate activity.
+---
+
+## Prerequisites
+
+- Asana MCP tools available: `SearchTasksInWorkspace`, `GetTaskStories`
+- State file: `~/shared/context/active/asana-scan-state.json`
+- Output file: `~/shared/context/intake/asana-activity.md`
+
+### Step 6: Write Signals to `~/shared/context/intake/asana-activity.md`
+
+Overwrite the file each scan (signals are consumed by AM-3 and then archived).
+
+Format:
+
+```markdown
+# Asana Activity Signals
+
+Scan timestamp: YYYY-MM-DDTHH:MM:SSZ
+Tasks scanned: [count]
+Signals detected: [count]
+
+---
 
 ### Step 4: Classify Each Story
 
@@ -71,73 +121,6 @@ For each new story (after timestamp filter, excluding Richard's own):
 
 **Other changes** (section moves, custom field changes, etc.):
 - Log but do not surface in the brief unless they match the three categories above
-
-### Step 5: Handle Errors
-- Log the error: task GID, error type, timestamp
-- Skip the affected task
-- Continue processing remaining tasks
-- Note skipped tasks at the bottom of the output file
-
-If a `GetTaskStories` call fails (rate limit, API error, timeout):
-
----
-
-## Output Format
-
-### Step 6: Write Signals to `~/shared/context/intake/asana-activity.md`
-
-Overwrite the file each scan (signals are consumed by AM-3 and then archived).
-
-Format:
-
-```markdown
-# Asana Activity Signals
-
-Scan timestamp: YYYY-MM-DDTHH:MM:SSZ
-Tasks scanned: [count]
-Signals detected: [count]
-
----
-
-## [YYYY-MM-DD]
-
-### 💬 Comments
-
-- **[Task Name]** — [Author Name] ([timestamp]):
-  > [Comment text, first 200 chars]
-
-### 📅 Due Date Changes
-- **[Task Name]** — [Who changed it] ([timestamp]):
-
-  Changed due date [old date → new date]
-
-### 👤 Reassignments
-
-- **[Task Name]** — [Who reassigned] ([timestamp]):
-  Reassigned to [New Assignee Name]
-
----
-
-## Errors / Skipped Tasks
-
-- [task_gid]: [error description]
-```
-
-If no signals are detected, write:
-
-```markdown
-# Asana Activity Signals
-
-Scan timestamp: YYYY-MM-DDTHH:MM:SSZ
-Tasks scanned: [count]
-Signals detected: 0
-
-No new activity detected since last scan.
-```
-
----
-
-## State Update
 
 ### Step 7: Update `asana-scan-state.json`
 
@@ -172,12 +155,28 @@ Rules:
 | `resource_subtype: assigned` | reassigned | 👤 | New assignee, who reassigned |
 | Section move, tag change, etc. | (not surfaced) | — | Logged but not in brief |
 
-## Integration with AM-3 Brief
+## Errors / Skipped Tasks
 
-The AM-3 hook reads `~/shared/context/intake/asana-activity.md` and includes the signals in the daily brief under the "Activity Signals" section. The brief template uses the emoji classifications directly:
+- [task_gid]: [error description]
+```
 
-- 💬 Comments awaiting response: [count]
-- 📅 Due date changes: [count]  
-- 👤 Reassignments: [count]
+If no signals are detected, write:
 
-Each signal links back to the task name so Richard can act on it.
+```markdown
+# Asana Activity Signals
+
+Scan timestamp: YYYY-MM-DDTHH:MM:SSZ
+Tasks scanned: [count]
+Signals detected: 0
+
+No new activity detected since last scan.
+```
+
+---
+
+## Constants
+
+- Richard's Asana GID: `1212732742544167`
+- Workspace GID: `8442528107068`
+
+---

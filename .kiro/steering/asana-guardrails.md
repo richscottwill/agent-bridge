@@ -84,11 +84,8 @@ These operations execute immediately during hooks and on-demand sessions. No dra
 
 
 
-### Audit Log Writes
-- Always auto-write. Logging never requires approval.
-
-
-
+[38;5;10m> [0m### Audit Log Writes[0m[0m
+- Logging never requires approval — always auto-write.
 ### Task Descriptions
 - Auto-write on tasks assigned to Richard where the description is EMPTY or was previously written by the agent
 - If the description contains content written by others (teammates, stakeholders), do NOT overwrite — use Kiro_RW or CreateTaskStory for additional context instead
@@ -116,6 +113,8 @@ These operations execute immediately during hooks and on-demand sessions. No dra
 
 
 
+<!-- Added context: This section (Goal Status Updates) provides key operational details. -->
+
 ### My Tasks — Full Access
 - Write to Notes tab in My Tasks
 - Update any tab, view, or surface in My Tasks
@@ -125,24 +124,25 @@ These operations execute immediately during hooks and on-demand sessions. No dra
 
 
 
-## Blacklist (never write — always block)
-
-These operations are ALWAYS blocked regardless of context. Log with result "blocked" and present as draft.
-
-- **Task descriptions** on tasks assigned to or associated with others
-- **Comments** on tasks in projects not owned by Richard
-- **Status changes** (completed, custom field changes) on tasks assigned to others
-- **Notes/descriptions** on projects or portfolios not owned by Richard
-- **Subtask creation** on tasks assigned to others
-- **Due date changes** on tasks assigned to others
-- **Any write** to a task where assignee.gid ≠ `1212732742544167`
-- **Any write** to a project/portfolio not in Richard's ownership list above
-- **Reassigning tasks** — never reassign any task, ever
-- **Creating projects or sections** — never without explicit Richard approval
-- **Deleting anything** — never delete tasks, subtasks, comments, or projects
-
+[38;5;10m> [0m## Blacklist (never write — always block)[0m[0m
+[0m[0m
+These operations are ALWAYS blocked regardless of context. Log with result "blocked" and present as draft.[0m[0m
+[0m[0m
+- **Task descriptions** on tasks assigned to or associated with others[0m[0m
+- **Comments** on tasks in projects not owned by Richard[0m[0m
+- **Status changes** (completed, custom field changes) on tasks assigned to others[0m[0m
+- **Notes/descriptions** on projects or portfolios not owned by Richard[0m[0m
+- **Subtask creation** on tasks assigned to others[0m[0m
+- **Due date changes** on tasks assigned to others[0m[0m
+- **Any write** to a task where assignee.gid ≠ `1212732742544167`[0m[0m
+- **Any write** to a project/portfolio not in Richard's ownership list above[0m[0m
+- **Reassigning tasks** — never reassign any task, ever[0m[0m
+- **Creating projects or sections** — never without explicit Richard approval[0m[0m
+- **Deleting anything** — never delete tasks, subtasks, comments, or projects[0m[0m
+[0m[0m
+**Example:** Richard asks you to add a comment to a task in a project owned by Sarah. Even though Richard requested it, the task belongs to a project not owned by Richard — this is blacklisted. You must log the action with result "blocked", draft the comment for Richard's review, and never post it directly. The same applies if Richard says "mark Jake's task as complete" — since the task is assigned to someone else (assignee.gid ≠ Richard's), the status change is blocked regardless of Richard's intent.[0m[0m
+[0m[0m
 ---
-
 ## Guardrail Check Sequence (every write)
 
 ```

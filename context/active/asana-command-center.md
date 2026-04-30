@@ -6,6 +6,8 @@ Last updated: 2026-04-15
 ## Purpose
 Asana My Tasks is now the command center — replacing Microsoft To-Do as the canonical task list. The agent reads and writes Richard's tasks directly via the Enterprise Asana MCP.
 
+<!-- Added context: This section (Purpose) provides key operational details. -->
+
 ## My Tasks Project
 - Project type: User Task List
 - GID: `1212732838073807`
@@ -43,6 +45,8 @@ Asana My Tasks is now the command center — replacing Microsoft To-Do as the ca
 ## ABPS AI Project
 
 The ABPS AI Portfolio contains one active project — Build (system development). The wiki/article pipeline that previously lived in an ABPS AI Content project has been retired in favor of a filesystem + dashboard + SharePoint workflow.
+
+<!-- Added context: This section (ABPS AI Project) provides key operational details. -->
 
 ### ABPS AI - Build (System Development)
 - Project GID: `1213379551525587`

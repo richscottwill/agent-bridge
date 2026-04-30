@@ -255,11 +255,9 @@ Each event gets a project_name tag (AU, MX, WW Testing, Polaris, OCI, etc.) and 
 
 ---
 
-## Step 2.5F: Current.md Refresh (~30s)
-
-**Input:** All Phase 1-2 outputs
-**Output:** Updated ~/shared/context/active/current.md
-
+[38;5;10m> [0m## Step 2.5F: Current.md Refresh (~30s)[0m[0m
+[0m[0m
+**Input:** All Phase 1–2 outputs → **Output:** Updated ~/shared/context/active/current.md
 ### Procedure
 1. Read current.md (read-before-write)
 2. Update "Active Projects" section with any status changes detected:

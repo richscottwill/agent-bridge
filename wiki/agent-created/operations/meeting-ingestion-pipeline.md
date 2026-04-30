@@ -51,10 +51,13 @@ The pipeline enforces three invariants. First, `meeting_analytics` latest date s
 
 The `ops.data_freshness` table records the last successful ingestion timestamp. A value older than forty-eight hours triggers an alert in the morning brief.
 
-## Failure modes
-
-Three failures recur. Hedy API timeouts cause ingestion to stall — retry with exponential backoff, but log the skip. Meeting series file conflicts (two operators editing the same file) cause merge failures — the ingestion should default to append, not overwrite. MotherDuck disconnection causes DuckDB writes to fail silently if the fallback to in-memory DuckDB is not detected — check the connection before every write.
-
+[38;5;10m> [0m## Failure modes[0m[0m
+[0m[0m
+Three recurring failures:[0m[0m
+[0m[0m
+1. **Hedy API timeouts** stall ingestion — retry with exponential backoff; log skips.[0m[0m
+2. **Meeting series file conflicts** (concurrent edits) cause merge failures — default to append, not overwrite.[0m[0m
+3. **MotherDuck disconnection** causes silent DuckDB write failures if in-memory fallback goes undetected — check connection before every write.
 ## Next Steps
 
 1. Consolidate the four protocol files into a single architecture doc referenced here.

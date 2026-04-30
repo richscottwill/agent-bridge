@@ -162,7 +162,8 @@ Output format for wiki-editor:
 
 
 
-### Idea sourcing — Details
+
+
 ```
 📚 WIKI SIGNAL CANDIDATES:
 - [topic] — strength: [X], mentions: [N], channels: [list], authors: [list], span: [N] days

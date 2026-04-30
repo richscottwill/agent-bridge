@@ -1,105 +1,91 @@
 {
   "schema_version": "1.0",
-  "last_full_scan": "2026-04-25T18:50:53Z",
-  "last_full_scan_pt": "2026-04-25 11:50:53 PT",
-  "last_attempted_scan": "2026-04-25T18:50:53Z",
-  "last_attempted_scan_pt": "2026-04-25 11:50:53 PT",
+  "last_full_scan": "2026-04-30T15:30:00Z",
+  "last_full_scan_pt": "2026-04-30 08:30:00 PT",
+  "last_attempted_scan": "2026-04-30T15:30:00Z",
+  "last_attempted_scan_pt": "2026-04-30 08:30:00 PT",
   "last_scan_window": {
-    "from_utc": "2026-04-24T17:10:00Z",
-    "to_utc": "2026-04-25T18:50:53Z",
-    "duration_hours": 25.7,
-    "covers_weekend": true,
-    "covers_rw_ooo_friday": true,
-    "scope_note": "Retry pass after earlier 302 outage cleared. Backfilled ~25.7h including Fri PM + Sat AM."
+    "from_utc": "2026-04-29T13:21:35Z",
+    "to_utc": "2026-04-30T15:30:00Z",
+    "duration_hours": 26.1,
+    "covers_weekend": false,
+    "covers_rw_ooo_friday": false,
+    "scope_note": "Standard daily scan. High-signal coaching conversation from Brandon on Polaris Br-pages QA ownership. New topic reinforcement: polaris-brand-lp (+6.0 total), new topics: mcs-coordination-ownership, richard-responsiveness, ps-feedback-process."
   },
   "last_run_status": {
     "status": "SUCCESS",
-    "run_at_utc": "2026-04-25T18:50:53Z",
-    "run_at_pt": "2026-04-25 11:50:53 PT",
-    "recovery_note": "Retry of the 2026-04-25T16:34:09Z FAILED run. MCP endpoints healthy on retry — all list_channels/batch_get_* probes returned 200. Proactive searches returned 0 hits (quiet Saturday)."
+    "run_at_utc": "2026-04-30T15:30:00Z",
+    "run_at_pt": "2026-04-30 08:30:00 PT",
+    "recovery_note": "No recovery needed. MCP endpoints healthy. All tier-1 channels scanned. Thread fetch returned 7 replies on Polaris QA parent."
   },
   "summary": {
-    "channels_considered": 33,
-    "channels_scanned": 14,
-    "channels_with_new_messages": 6,
-    "tier3_channels_skipped": 19,
-    "messages_ingested": 8,
-    "channel_messages": 8,
-    "threads_fetched": 4,
-    "threads_fetch_failures": 1,
-    "thread_replies_ingested": 0,
-    "signals_reinforced": 2,
-    "signals_new": 4,
-    "proactive_searches": 4,
+    "channels_considered": 26,
+    "channels_scanned": 13,
+    "channels_with_new_messages": 8,
+    "tier3_channels_skipped": 13,
+    "messages_ingested": 37,
+    "channel_messages": 30,
+    "threads_fetched": 1,
+    "threads_fetch_failures": 0,
+    "thread_replies_ingested": 7,
+    "signals_reinforced": 3,
+    "signals_new": 7,
+    "proactive_searches": 3,
     "proactive_search_hits_unique": 0,
-    "search_note": "All proactive searches (prichwil, from:@prichwil, from:@brandoxy, from:@kataxt) returned 0 messages in the 24h window — quiet weekend."
+    "search_note": "All proactive searches (prichwil, from:@brandoxy, from:@kataxt) returned 0 messages — Brandon traffic already captured via channel ingestion, Kate silent."
   },
   "prior_run_summary": {
-    "run_at_utc": "2026-04-25T16:34:09Z",
-    "status": "FAILED",
-    "failure_mode": "slack_mcp_auth_302",
-    "note": "Blanket 302 on all Slack MCP endpoints. Watermark intentionally left stale. This retry pass cleared the backlog."
+    "run_at_utc": "2026-04-29T13:21:35Z",
+    "status": "SUCCESS",
+    "note": "Previous successful scan captured through 2026-04-29 13:21."
   },
   "channel_state": {
-    "D044JAKR8RZ": {"name": "dm-brandon", "tier": 1, "last_ingested_ts": "1776996839.828039", "last_ingested_iso": "2026-04-24T02:13:59Z", "messages_this_run": 0, "high_priority": true, "notes": "Quiet since last scan."},
-    "D041KNR9JF2": {"name": "dm-quip-bot", "tier": 2, "last_ingested_ts": "1776971559.181459", "last_ingested_iso": "2026-04-23T19:12:39Z", "messages_this_run": 0},
-    "C065KKT53DJ": {"name": "ab-paid-search-abix", "tier": 1, "last_ingested_ts": "1777051259.033869", "last_ingested_iso": "2026-04-24T17:20:59Z", "messages_this_run": 1, "high_priority": true, "notes": "Brandon polaris-brand-lp follow-up, no weekend activity."},
-    "C05KTAAG14J": {"name": "ab-paid-search-app", "tier": 1, "last_ingested_ts": "1776193561.518599", "last_ingested_iso": "2026-04-14T19:06:01Z", "messages_this_run": 0, "notes": "Prior message (Yunchu IT-tax fix) already ingested; no new content in this window."},
-    "C0993SRL6FQ": {"name": "rsw-channel", "tier": 1, "last_ingested_ts": "1776866035.359949", "last_ingested_iso": "2026-04-22T13:53:55Z", "messages_this_run": 0},
-    "C044UG8MCSZ": {"name": "ab-paid-search-global", "tier": 1, "last_ingested_ts": "1777046356.748669", "last_ingested_iso": "2026-04-24T15:59:16Z", "messages_this_run": 0, "thread_replies": 0},
-    "D09JTJR7LQY": {"name": "dm-aditthk", "tier": 1, "last_ingested_ts": "1776887754.729309", "last_ingested_iso": "2026-04-22T19:55:54Z", "messages_this_run": 0},
-    "D05L5UUGRED": {"name": "dm-peteocam", "tier": 1, "last_ingested_ts": "1777062385.011639", "last_ingested_iso": "2026-04-24T20:26:25Z", "messages_this_run": 1, "high_priority": true, "notes": "Peter asks for PAM Primeday plan (budget + YoY + impressions/taps/installs)."},
-    "C0AQQC767L4": {"name": "mpdm-peteocam-vnichyp-prichwil", "tier": 2, "last_ingested_ts": "1775243961.614779", "last_ingested_iso": "2026-04-03T19:19:21Z", "messages_this_run": 0},
-    "C0AV6BWRMDG": {"name": "mpdm-peteocam-ssserene-brandoxy-prichwil", "tier": 1, "last_ingested_ts": "1777063136.991999", "last_ingested_iso": "2026-04-24T20:38:56Z", "messages_this_run": 2, "high_priority": true, "notes": "NEW MPDM created 2026-04-24 20:33Z. Peter requested PD26 disclosure access for Richard/Brandon via Sharon."},
-    "C0ANDU5LH47": {"name": "ab-marketing-ai", "tier": 2, "last_ingested_ts": "1777047025.773779", "last_ingested_iso": "2026-04-24T16:10:25Z", "messages_this_run": 0},
-    "C03H1S5SYP4": {"name": "ask-ab-data", "tier": 2, "last_ingested_ts": "1777062831.843299", "last_ingested_iso": "2026-04-24T20:33:51Z", "messages_this_run": 1, "notes": "Standard user Q, not Richard-relevant."},
-    "C04UBQQFXEV": {"name": "ab-ps_partnership-accounts", "tier": 1, "last_ingested_ts": "1776961940.521379", "last_ingested_iso": "2026-04-23T16:32:20Z", "messages_this_run": 0},
-    "C052PSHPUTT": {"name": "ext-apptweak-amazon-business", "tier": 2, "last_ingested_ts": "1776979673.682959", "last_ingested_iso": "2026-04-23T21:27:53Z", "messages_this_run": 0},
-    "C04UG37S04V": {"name": "paid-search-amzn", "tier": 2, "last_ingested_ts": "1777048241.051629", "last_ingested_iso": "2026-04-24T16:30:41Z", "messages_this_run": 0},
-    "C0A1JD8FCUV": {"name": "agentspaces-interest", "tier": 2, "last_ingested_ts": "1777134703.995169", "last_ingested_iso": "2026-04-25T16:31:43Z", "messages_this_run": 1, "notes": "Ingested Andy's 14-day space lifecycle broadcast for L3-5 portable-body awareness. Rest is support-channel noise, skipped."},
-    "C048VEWU7U3": {"name": "team-ab-marketing", "tier": 2, "last_ingested_ts": "1777055764.603569", "last_ingested_iso": "2026-04-24T18:36:04Z", "messages_this_run": 1, "notes": "OP1 2027 roundtable brainstorming invite."},
-    "C01NQLC114J": {"name": "marketing_managers_all", "tier": 2, "last_ingested_ts": "1777052990.394399", "last_ingested_iso": "2026-04-24T17:49:50Z", "messages_this_run": 1, "notes": "L6 PMM role FYI."}
+    "D044JAKR8RZ": {"name": "dm-brandon", "tier": 1, "last_ingested_ts": "1777494194.728619", "last_ingested_iso": "2026-04-29T20:23:14Z", "messages_this_run": 18, "high_priority": true, "notes": "Major coaching thread: Brandon pushing Richard on (1) responsiveness, (2) owning MCS/PS coordination for Polaris QA, (3) building a feedback-input doc + explicit timelines. Two explicit coaching quotes on earning trust across the team when leading WW updates."},
+    "D0B0M83UKA8": {"name": "dm-meganos", "tier": 1, "last_ingested_ts": "1777501730.466409", "last_ingested_iso": "2026-04-29T22:28:50Z", "messages_this_run": 3, "high_priority": true, "notes": "NEW DM with Megan Oshry asking about AU conversion data methodology (reftag + reg-database approach). Megan is asking to pull data herself — wants the query."},
+    "C09KT9YCGVD": {"name": "mpdm-brandoxy-aditthk-prichwil", "tier": 1, "last_ingested_ts": null, "last_ingested_iso": null, "messages_this_run": 0, "notes": "No new messages since last scan."},
+    "C0B0UU8CV36": {"name": "mpdm-rasanmol-prichwil-mpgupta", "tier": 2, "last_ingested_ts": "1777500485.176989", "last_ingested_iso": "2026-04-29T22:08:05Z", "messages_this_run": 1, "high_priority": true, "notes": "NEW MPDM. Anmol Rastogi asks about SIM intake ABMA-11245 — wants to know which PS data metrics Richard is looking for."},
+    "C044UG8MCSZ": {"name": "ab-paid-search-global", "tier": 1, "last_ingested_ts": "1777488365.613449", "last_ingested_iso": "2026-04-29T18:46:05Z", "messages_this_run": 9, "high_priority": true, "notes": "Polaris QA thread from Yun (7 replies fetched): subheadlines not updated, ref tags overridden, page load time. Brandon explicitly named Richard as sole consolidator of feedback. Richard acknowledged at 18:34 UTC (will follow up). Browserstack access rolled out + icebreaker FYI."},
+    "C065KKT53DJ": {"name": "ab-paid-search-abix", "tier": 1, "last_ingested_ts": "1777051259.033869", "last_ingested_iso": "2026-04-24T17:20:59Z", "messages_this_run": 0, "notes": "No new since last scan."},
+    "C06997HRWG0": {"name": "ab-outbound-marketing", "tier": 1, "last_ingested_ts": null, "last_ingested_iso": null, "messages_this_run": 0, "notes": "No new messages."},
+    "C03H1S5SYP4": {"name": "ask-ab-data", "tier": 2, "last_ingested_ts": null, "last_ingested_iso": null, "messages_this_run": 0, "notes": "No new messages since last scan."},
+    "C04UG37S04V": {"name": "paid-search-amzn", "tier": 2, "last_ingested_ts": "1777543108.981719", "last_ingested_iso": "2026-04-30T09:58:28Z", "messages_this_run": 1, "notes": "Standard user Q about Google passkey email. Not Richard-relevant."},
+    "C052PSHPUTT": {"name": "ext-apptweak-amazon-business", "tier": 2, "last_ingested_ts": null, "last_ingested_iso": null, "messages_this_run": 0},
+    "C09LU3K7KS8": {"name": "cps-ai-win-share-learn", "tier": 2, "last_ingested_ts": "1777483562.615169", "last_ingested_iso": "2026-04-29T17:26:02Z", "messages_this_run": 1, "notes": "L3-5 signal: AB Manage Spend Match agent on Agent Registry. 85% match rate on 1,500-product file in <10 min. Worth flagging for Richard's tooling scan."},
+    "C0A1JD8FCUV": {"name": "agentspaces-interest", "tier": 2, "last_ingested_ts": "1777478433.953869", "last_ingested_iso": "2026-04-29T16:00:33Z", "messages_this_run": 1, "notes": "Weekly channel summary only ingested. Channel is mostly support noise. Of note: ~/shared persistence boundary still the #1 operational reminder; Kiro planning agent remains read-only."},
+    "C0ASRR957GU": {"name": "amazon-quick-desktop-beta-feedback", "tier": 2, "last_ingested_ts": null, "last_ingested_iso": null, "messages_this_run": 0, "notes": "Ignored — pure product-feedback noise, not Richard-relevant to PS work."}
   },
   "channels_skipped": {
     "reason": "Tier 3 community/org-wide channels per slack-channel-registry.json v3.0.",
     "ids": [
-      "D0A8FS0QLTU|dm-asana-bot",
       "C06M7R2SKQW|ask-ab-aryabot",
       "C08GJKNC3KM|amazon-builder-genai-power-users",
-      "C08T2E4KQPJ|amazon-builder-genai-power-users-digest",
       "C096H6QNW6M|bedrock-agentcore-interest",
-      "C018S3VS875|slack-announcements",
       "C02MKS0DPHD|ask-an-amazonian",
+      "C08T2E4KQPJ|amazon-builder-genai-power-users-digest",
+      "C018S3VS875|slack-announcements",
       "C04PZR4S9M4|remote-advocacy",
       "C04QY8RK3B3|rto-advocacy",
       "C06N2T7G6S2|amazon-q-apps-interest",
       "C080MFGQLHY|stargate-community",
       "C08QB1BU62E|ab-gen-ai-wins",
       "C096T4SK3EY|andes-workbench-interest",
-      "C0A1J4QG3CY|abma-genbi-analytics-interest",
-      "C018126JFSN|homeowners",
-      "C048SLEC8RK|team-ab-marketing-fun"
+      "C0A1J4QG3CY|abma-genbi-analytics-interest"
     ]
   },
   "threads_fetched_this_run": [
-    {"channelId": "C065KKT53DJ", "threadTs": "1777039370.274509", "replies_returned": 0, "note": "Polaris Br-pages parent — confirmed 0 replies. Weekend activity: NO."},
-    {"channelId": "C065KKT53DJ", "threadTs": "1777051259.033869", "replies_returned": 0, "note": "Brandon standalone follow-up, no thread."},
-    {"channelId": "C0AV6BWRMDG", "threadTs": "1777062878.932519", "replies_returned": 0},
-    {"channelId": "D05L5UUGRED", "threadTs": "1777062385.011639", "replies_returned": 0}
+    {"channelId": "C044UG8MCSZ", "threadTs": "1777481749.019739", "replies_returned": 7, "note": "Polaris Br-pages QA thread. Brandon explicitly designates Richard as sole consolidator. Andrew and Yun-Kang active. Richard acknowledged seeing + committed to following up."}
   ],
-  "thread_fetch_failures": [
-    {"channelId": "C065KKT53DJ", "threadTs": "1777039370.000000", "error": "thread_not_found — wrong ts; correct ts is 1777039370.274509, re-fetched successfully"}
-  ],
+  "thread_fetch_failures": [],
   "proactive_searches": [
-    {"query": "prichwil after:2026-04-24", "total": 0},
-    {"query": "from:@prichwil after:2026-04-24", "total": 0},
-    {"query": "from:@brandoxy after:2026-04-24", "total": 0},
-    {"query": "from:@kataxt after:2026-04-24", "total": 0}
+    {"query": "prichwil after:2026-04-29", "total": 0},
+    {"query": "from:@brandoxy after:2026-04-29", "total": 0},
+    {"query": "from:@kataxt after:2026-04-29", "total": 0}
   ],
   "priority_signals_flagged": [
-    {"topic": "pam-primeday", "channel": "dm-peteocam", "action_type": "richard_action_required", "urgency": "high", "summary": "Peter asks for PAM Primeday plan: budget + YoY + projected impressions/taps/installs."},
-    {"topic": "ab-pd26-disclosure", "channel": "mpdm-peteocam-ssserene-brandoxy-prichwil", "action_type": "richard_action_required", "urgency": "high", "summary": "Request access to Sharon's PD26 dates workdoc to unblock Paid App Marketing strategy."},
-    {"topic": "polaris-brand-lp", "channel": "ab-paid-search-abix", "action_type": "implicit_richard_action", "urgency": "medium", "summary": "Brandon committed Richard to setting up alt measurement (Google Experiment) for AU/MX Polaris Br-pages, handing off to AU. No weekend movement."}
+    {"topic": "polaris-brand-lp", "channel": "dm-brandon + ab-paid-search-global", "action_type": "richard_action_required", "urgency": "critical", "summary": "Brandon explicitly named Richard as sole consolidator for MCS/Polaris Br-pages QA feedback. Richard must: (1) create consolidated feedback doc, (2) set explicit timelines for team + MCS, (3) run a dedicated Slack chat (Brandon created it — check for new mpdm), (4) own follow-up with MCS via email + Asana. Richard ack'd at 18:34Z but had not produced the doc by end of scan."},
+    {"topic": "richard-responsiveness", "channel": "dm-brandon", "action_type": "coaching_escalation", "urgency": "high", "summary": "Brandon explicit coaching moment: 'need you to be responsive with the team' + 'this is an important function to earn trust across the team if you're leading these WW updates.' Classic Brandon-lens trust-earning note. Log in unasked-question-log as pattern candidate."},
+    {"topic": "au-reftag-reg-data", "channel": "dm-meganos", "action_type": "richard_action_required", "urgency": "medium", "summary": "Megan Oshry (new Richard DM) asking why AU doesn't have Google Ads conversion data + wants the reftag + reg-database query. Owed response + query share."},
+    {"topic": "sim-abma-ps-metrics", "channel": "mpdm-rasanmol", "action_type": "richard_action_required", "urgency": "medium", "summary": "Anmol Rastogi asking Richard to clarify ABMA-11245 SIM intake: which PS data metrics are needed. Owed response."}
   ],
-  "registry_note": "Using slack-channel-registry.json v3.0 at shared/data/state/slack-channel-registry.json. Note: paid-search-amzn (C04UG37S04V) categorized tier-2 previously; keeping tier-2 — registry treats AB-prefixed public channels as 'AB' section (standard depth)."
+  "registry_note": "Using slack-channel-registry.json v3.0 at shared/data/state/slack-channel-registry.json."
 }

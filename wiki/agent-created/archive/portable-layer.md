@@ -65,9 +65,7 @@ These files contain the ARCHITECTURE — how the system works, how Richard opera
 | process-execution.md | Amazon process execution template |
 | context/pilot-steering.md | Amazon ARCC governance |
 
-## Environment-Specific (rebuilt per context)
-
-| File | Why It Stays |
+## Environment-Specific (rebuilt per context) | File | Why It Stays |
 |------|-------------|
 | current.md | Live state of current role |
 | org-chart.md | Current employer org |
@@ -77,9 +75,7 @@ These files contain the ARCHITECTURE — how the system works, how Richard opera
 | callouts/ | Current market data |
 | intake/ | Current unprocessed material |
 | tools/ | Current utility scripts |
-| All hook files | Current tool-specific triggers |
-
-## Export Protocol
+| All hook files | Current tool-specific triggers | ## Export Protocol
 
 **Weekly (Friday calibration):**
 1. Bundle all portable files into a single email

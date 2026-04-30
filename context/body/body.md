@@ -1,8 +1,6 @@
-<!-- DOC-0217 | duck_id: organ-body -->
 
 # Body — System Anatomy Map
 
-*The navigation layer. Each organ is a self-contained file with real content — not a pointer to somewhere else. Read the organ you need, get the answer.*
 
 Last updated: 2026-04-04 (Karpathy Run 25 — Task Routing table: organ names→file paths)
 
@@ -31,38 +29,7 @@ Last updated: 2026-04-04 (Karpathy Run 25 — Task Routing table: organ names→
 ---
 
 
-## Operating Principles (embedded in every organ)
 
-These aren't rules to remember — they're how the body works. Each organ embodies them in its own way.
-
-- **Routine as liberation** — Structure eliminates decision fatigue. The body's shape (organs, hooks, loops) exists so Richard's willpower goes to the hard thing, not to figuring out what to do.
-- **Structural over cosmetic** — Change defaults, friction, and pre-loaded content. Don't change formats and layouts. The best improvements are ones Richard never notices.
-- **Subtraction before addition** — Before adding to any organ, ask: can I remove something instead? The body should trend simpler over time.
-- **Protect the habit loop** — Cues and rewards are invariant. Experiment only within routines. The morning routine's shape doesn't change; what's inside it does.
-- **Invisible over visible** — The best interventions change completion rates without being consciously noticed.
-- **Reduce decisions, not options** — Make the right choice the path of least resistance. Pre-written drafts, pre-populated My Day, protected calendar blocks.
-
----
-
-
-
-
-
-1. **New session?** → Spine (`spine.md` has the bootstrap sequence)
-2. **Need to act?** → Hands (`hands.md` has the priority stack)
-3. **Need to decide?** → Brain (`brain.md` has principles and leverage framework)
-4. **Need to write?** → Soul (`soul.md` → writing style guides)
-5. **Need market context?** → Eyes (`eyes.md` has metrics and competitors)
-6. **Need background?** → Memory (`memory.md` has compressed context and relationships)
-7. **Meeting prep?** → Meetings (`~/shared/wiki/meetings/` — read the series file for the meeting)
-7. **Running the loop?** → Heart (`heart.md` has the protocol)
-8. **Offloading work?** → Device (`device.md` — automation, delegation, templates, tools)
-9. **Is this working?** → Nervous System (`nervous-system.md` — calibration, audits, pattern tracking)
-10. **Am I avoiding the hard thing?** → aMCC (`amcc.md` — willpower, streak, resistance)
-11. **Is this bloated?** → Gut (`gut.md` — compression, word budgets, waste removal)
-12. **New raw material?** → Drop in Intake (`~/shared/context/intake/`)
-
-**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## Task Routing (load only what you need)
 ---
 

@@ -1,26 +1,3 @@
----
-title: "GenAI Search Traffic — What We Know and What It Means for PS"
-status: REVIEW
-audience: amazon-internal
-owner: Richard Williams
-created: 2026-04-12
-updated: 2026-04-12
----
-<!-- DOC-0385 | duck_id: strategy-genai-search-traffic -->
-
----
-title: GenAI Search Traffic — What We Know and What It Means for PS
-status: DRAFT
-doc-type: strategy
-audience: amazon-internal
-level: 4
-owner: Richard Williams
-created: 2026-04-04
-updated: 2026-04-04
-update-trigger: ACE team updates, GenAI traffic measurement available, Google AI Overview changes
-tags: [aeo, genai, ai-overviews, zero-click, ace, chatgpt, mcp]
----
-
 # GenAI Search Traffic — What We Know and What It Means for PS
 
 ---
@@ -71,7 +48,7 @@ The measurement gap is the biggest risk. If GenAI traffic is growing and we can'
 
 ### Medium-term (Q4 2026 - 2027): Content Optimization
 
-If AB content is being scraped by GenAI engines, the quality and structure of our landing pages matters in a new way. Pages optimized for traditional SEO (keyword density, meta tags) may not be optimal for GenAI extraction (clear answers, structured data, FAQ sections). The Polaris LP migration is an opportunity — new pages can be designed with both traditional SEO and GenAI extraction in mind.
+If AB content is being scraped by GenAI engines, the quality and structure of our landing pages matters in a new way. Pages optimized for traditional SEO (keyword density, meta tags) may not be optimal for GenAI extraction (clear answers, structured data, FAQ sections). The Polaris LP migration is an opportunity — new pages is designed with both traditional SEO and GenAI extraction in mind.
 
 ### Long-term (2027+): Channel Strategy
 

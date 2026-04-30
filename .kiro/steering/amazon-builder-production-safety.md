@@ -16,6 +16,8 @@
 **Credential types** - Identify by:
 - Checking `~/.aws/config` profile names for patterns like `ReadOnly`, `Admin`, `Prod`, or `Beta` (if using profiles)
 - Running `aws sts get-caller-identity` to check the role name in the ARN (add `--profile <name>` if using profiles)
+- Running `aws iam list-attached-role-policies --role-name <role>` to see attached policies. You MUST exercise caution when policies include `AdministratorAccess` or `FullAccess`.
 
+**Production resources** - Look for these indicators:
 - Resource names or tags containing `prod`, `production`, or `prd`
 - Absence of `dev`, `test`, `beta`, `alpha`, `staging`, or `sandbox` indicators

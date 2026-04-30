@@ -2,10 +2,13 @@
 inclusion: manual
 ---
 
-# Blind Test Harness — Methodology & Setups
-
-*Invoke this file manually when designing a blind test of a proposed system change (steering file, protocol, hook, soul.md addition, etc.). Built 2026-04-22 after three rounds of testing (95+ sub-agent runs) validated this methodology empirically.*
-
+[38;5;10m> [0m# Blind Test Harness[0m[0m
+[0m[0m
+## Purpose[0m[0m
+Invoke this file manually when designing a blind test of a proposed system change (steering file, protocol, hook, soul.md addition, etc.).[0m[0m
+[0m[0m
+## Validation[0m[0m
+Built 2026-04-22 after three rounds of testing (95+ sub-agent runs) validated this methodology empirically.
 ## When to use this harness
 
 Trigger on any proposal that would change agent behavior system-wide:

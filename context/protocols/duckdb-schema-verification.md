@@ -15,65 +15,6 @@ All DuckDB access goes through DuckDB MCP (`execute_query`). Do NOT use Python `
 
 
 
-## Why This Exists
-
-On 4/6/2026, 10 tables from the mcp-capability-expansion spec were found missing despite being "created" in a prior session. Root cause: tables were written to a transient/shadow database rather than the persistent file. The DuckDB MCP server connects to `ps_analytics` on MotherDuck. Verification catches MCP server connection issues.
-
-
-
-
-
-## Verification Steps
-
-After any batch of CREATE TABLE or CREATE VIEW statements, immediately run via `execute_query`:
-
-*Example:* When this applies, the expected outcome is verified by checking the result.
-### Step 3: Confirm Tables Exist
-```sql
-SELECT table_type, COUNT(*) FROM information_schema.tables WHERE table_schema = 'main' GROUP BY table_type;
-```
-Expected: BASE TABLE = 46, VIEW = 39.
-
-
-
-**Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
-
-
-
-
-### Step 2: Confirm MCP Connection
-```sql
-SELECT database_name, path, type FROM duckdb_databases() WHERE database_name = 'ps_analytics';
-```
-If query succeeds, MCP is connected. If it fails, restart MCP server (touch .kiro/settings/mcp.json, then restart from panel).
-
-
-
-
-
-### Step 1: Confirm Database Identity
-```sql
-SELECT current_database(), current_schema();
-```
-Expected: `ps_analytics`, `main`. If different → STOP.
-
-
-
-
-
-**Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
-
-
-### Step 4: Confirm Data Persisted (if INSERTs were run) ```sql SELECT '[table_name]' AS tbl, COUNT(*) AS rows FROM [table_name] UNION ALL ... ``` Row counts must match expected inserts. ## When to Run
-
-- After any spec execution that creates DuckDB tables
-- After AM-1 full sync (creates/updates asana_tasks, asana_task_history)
-- After EOD-1 meeting-to-task pipeline (inserts into meeting_analytics, meeting_highlights, workflow_executions)
-- After any DuckDB schema migration
-
-#### When to Run — Details
-
-**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 ## Required Tables (mcp-capability-expansion)
 
 These 10 tables + 3 views must exist in `ps-analytics.main`:
@@ -113,3 +54,62 @@ SELECT database_name, type FROM duckdb_databases() WHERE database_name = 'ps_ana
 SELECT snapshot_name, created_ts FROM md_information_schema.database_snapshots
 WHERE database_name = 'ps_analytics' ORDER BY created_ts DESC LIMIT 5;
 ```
+
+### Step 3: Confirm Tables Exist
+```sql
+SELECT table_type, COUNT(*) FROM information_schema.tables WHERE table_schema = 'main' GROUP BY table_type;
+```
+Expected: BASE TABLE = 46, VIEW = 39.
+
+
+
+**Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
+
+
+
+
+### Step 4: Confirm Data Persisted (if INSERTs were run) ```sql SELECT '[table_name]' AS tbl, COUNT(*) AS rows FROM [table_name] UNION ALL ... ``` Row counts must match expected inserts. ## When to Run
+
+- After any spec execution that creates DuckDB tables
+- After AM-1 full sync (creates/updates asana_tasks, asana_task_history)
+- After EOD-1 meeting-to-task pipeline (inserts into meeting_analytics, meeting_highlights, workflow_executions)
+- After any DuckDB schema migration
+
+#### When to Run — Details
+
+**Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
+### Step 2: Confirm MCP Connection
+```sql
+SELECT database_name, path, type FROM duckdb_databases() WHERE database_name = 'ps_analytics';
+```
+If query succeeds, MCP is connected. If it fails, restart MCP server (touch .kiro/settings/mcp.json, then restart from panel).
+
+
+
+
+
+## Verification Steps
+
+After any batch of CREATE TABLE or CREATE VIEW statements, immediately run via `execute_query`:
+
+*Example:* When this applies, the expected outcome is verified by checking the result.
+### Step 1: Confirm Database Identity
+```sql
+SELECT current_database(), current_schema();
+```
+Expected: `ps_analytics`, `main`. If different → STOP.
+
+
+
+
+
+**Example:** This section demonstrates the pattern in practice — concrete instances ground abstract rules.
+
+
+## Why This Exists
+
+On 4/6/2026, 10 tables from the mcp-capability-expansion spec were found missing despite being "created" in a prior session. Root cause: tables were written to a transient/shadow database rather than the persistent file. The DuckDB MCP server connects to `ps_analytics` on MotherDuck. Verification catches MCP server connection issues.
+
+
+
+

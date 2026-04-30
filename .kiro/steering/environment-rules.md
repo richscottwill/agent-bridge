@@ -14,15 +14,17 @@ description: "DevSpaces AgentSpaces container rules, workspace boundaries, Brazi
 - DevSpaces provides isolated, secure workspaces with pre-configured Amazon development tools
 - Your workspace is isolated, containerized, and secure for consistency and reproducibility
 
-## File Operations and Boundaries
-
-Allowed file locations:
-- **`/workspace/`** — Active development work, temporary files, project-specific content
-- **`~/shared/`** — Files that persist across sessions or are shared between AgentSpaces
-- **`~/`** — Personal configurations and user-specific files (e.g., ~/.kiro/)
-
+[38;5;10m> [0m## File Operations and Boundaries[0m[0m
+[0m[0m
+### Allowed Locations[0m[0m
+[0m[0m
+- **`/workspace/`** — Active development work, temporary files, project-specific content[0m[0m
+- **`~/shared/`** — Files that persist across sessions or are shared between AgentSpaces[0m[0m
+- **`~/`** — Personal configurations and user-specific files (e.g., ~/.kiro/)[0m[0m
+[0m[0m
+### Restrictions[0m[0m
+[0m[0m
 Do NOT modify system files or directories outside these scopes.
-
 ## Development Environment
 
 - Brazil build system, CRUX, and other Amazon internal development tools are available and pre-configured

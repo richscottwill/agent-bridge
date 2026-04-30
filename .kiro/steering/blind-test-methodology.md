@@ -131,44 +131,41 @@ Save the mapping. **Unseal only after all blind evaluators have written verdicts
 
 Fresh sub-agent, no context from your main thread. The briefing is load-bearing.
 
-### Generic Type B/C template
-
-```
-You are a BLIND evaluator. You have NO knowledge of what produced each output.
-
-The original request was: "[EXACT USER PROMPT]"
-
-**Context you need to score correctly:**
-- [Stakes: low/medium/high, who's the audience]
-- [Correct answer or answer band if known — but frame as "expected" not "ground truth"]
-- [Known failure modes to watch for if relevant]
-- [Anything that makes the task non-obvious]
-
-**Arms to evaluate. Labels shuffled per task — anonymous.**
-- ARM-A: `shared/tmp/[eval-dir]/runs/[task]-[letter-A-arm].md`
-- ARM-B: `shared/tmp/[eval-dir]/runs/[task]-[letter-B-arm].md`
-- ARM-C: ...
-- ARM-D: ...
-
-**Read all files. Score each arm 1-10 on 5 dimensions:**
-1. Clarity of Next Best Action
-2. Decision Quality
-3. Adherence to Richard's principles (subtraction, invisible-over-visible, reduce-decisions)
-4. Overall Usefulness for THIS TASK
-5. META — Always-on cost tradeoff (value vs noise if this procedure ran on every task)
-
-Per-arm total out of 50. Then note:
-- Which arm got the call right?
-- Which added ceremony without value?
-- Which would you recommend always-on vs manual/conditional?
-
-**Write verdict to:** `shared/tmp/[eval-dir]/blind-eval/[task]-verdict.md`
-
-Format: summary table (Arm | Clarity | Decision | Principles | Usefulness | Always-on | Total) + per-arm commentary. Be direct and evidence-based.
-
-**DO NOT read any files outside the N arm files above and your own verdict output.** DO NOT peek at prior verdict files from earlier rounds. Be blind.
-```
-
+[38;5;10m> [0m### Generic Type B/C template[0m[0m
+[0m[0m
+[0m[0m
+You are a BLIND evaluator. You have NO knowledge of what produced each output.[0m[0m
+[0m[0m
+The original request was: "[EXACT USER PROMPT]"[0m[0m
+[0m[0m
+**Context you need to score correctly:**[0m[0m
+- [Stakes: low/medium/high, who's the audience][0m[0m
+- [Correct answer or answer band if known — but frame as "expected" not "ground truth"][0m[0m
+- [Known failure modes to watch for if relevant][0m[0m
+[0m[0m
+**Arms to evaluate. Labels shuffled per task — anonymous.**[0m[0m
+- ARM-A: `shared/tmp/[eval-dir]/runs/[task]-[letter-A-arm].md`[0m[0m
+- ARM-B: `shared/tmp/[eval-dir]/runs/[task]-[letter-B-arm].md`[0m[0m
+- ARM-C: ...[0m[0m
+- ARM-D: ...[0m[0m
+[0m[0m
+**Read all files. Score each arm 1-10 on 5 dimensions:**[0m[0m
+1. Clarity of Next Best Action[0m[0m
+2. Decision Quality[0m[0m
+3. Adherence to Richard's principles (subtraction, invisible-over-visible, reduce-decisions)[0m[0m
+4. Overall Usefulness for THIS TASK[0m[0m
+5. META — Always-on cost tradeoff (value vs noise if this procedure ran on every task)[0m[0m
+[0m[0m
+Per-arm total out of 50. Then note:[0m[0m
+- Which arm got the call right?[0m[0m
+- Which added ceremony without value?[0m[0m
+- Which would you recommend always-on vs manual/conditional?[0m[0m
+[0m[0m
+**Write verdict to:** `shared/tmp/[eval-dir]/blind-eval/[task]-verdict.md`[0m[0m
+[0m[0m
+Format: summary table (Arm | Clarity | Decision | Principles | Usefulness | Always-on | Total) + per-arm commentary. Be direct and evidence-based.[0m[0m
+[0m[0m
+**DO NOT read any files outside the N arm files above and your own verdict output.** DO NOT peek at prior verdict files from earlier rounds. Be blind.[0m[0m
 ### Type D (reasoning-only) template
 
 ```

@@ -64,8 +64,6 @@ These require manual user approval every single time:
 ### SharePoint / OneDrive
 - Writing to any `siteUrl` other than the user's personal OneDrive
 - Writing to shared team-site libraries
-- Editing Loop docs or shared Office files that other people own
-
 ### Any MCP that posts to external systems
 - Weblab changes
 - Public-facing wiki edits

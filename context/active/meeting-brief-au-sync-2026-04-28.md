@@ -75,10 +75,7 @@ W10: 251 | W11: 241 | W12: 244 | W13: 208 | W14: 171 | W15: 167 | W16: 249 | **W
 
 ### [5 min] W17 story + the read going into W18
 - Frame: the Adobe bid-adjustment minimums reduction (3/24) + max-clicks switch (4/17) is the efficiency driver. Brand CPA floor is the cleanest signal.
-- **W18 watchpoints:**
-  - NB CVR durability (2.38% → hold, or drop below 2.2%)
-  - Brand CPA sub-$40 for a third week
-  - Anzac Day carryover into Mon-Tue 4/27-4/28
+- **W18 watchpoints:** - NB CVR durability (2.38% → hold, or drop below 2.2%) - Brand CPA sub-$40 for a third week - Anzac Day carryover into Mon-Tue 4/27-4/28
 - **Decision point for W19:** if W18 NB CVR steadies ≥2.3% AND Brand CPA holds ≤$40, lean up W19 spend 5-10% (test budget envelope).
 
 ### [5 min] Max-clicks handover review

@@ -46,8 +46,7 @@ Appendix exempted from Economy scoring per instruction.
 
 ## WS2: Modern Search — PUBLISH (8.6)
 
-| Dimension | Score | Notes |
-|-----------|-------|-------|
+| Dimension | Score | Notes | |-----------|-------|-------|
 | Usefulness | 9/10 | The SP study insight (50% misconception) is immediately actionable; the ad copy mapping is a repeatable playbook; the reader can brief Kate or replicate the methodology |
 | Clarity | 9/10 | Question-driven headers; the SP study → ad copy → test results → scaling flow is logical and scannable |
 | Accuracy | 8/10 | UK test data is specific and dated; IT test honestly flagged as LOW confidence; SP study sourced to August 2025 |
@@ -55,7 +54,6 @@ Appendix exempted from Economy scoring per instruction.
 | Economy | 8/10 | Prose-driven; data embedded in narrative; the SP study data is in the appendix where it belongs with the main body carrying the insight |
 | **Overall** | **8.6** | |
 
-### Suggestions (non-blocking)
 - "Keyword theme consolidation continues worldwide as part of the OCI rollout to RoW, combining campaign keyword themes to further reduce campaign count and strengthen data signals" — the phrase "combining campaign keyword themes to further reduce campaign count" restates what "keyword theme consolidation" already means. Trim to: "Keyword theme consolidation continues worldwide as part of the OCI rollout to RoW, strengthening data signals for each bid strategy."
 - The GlobalLink submission ID (2028024) is useful for traceability but could go in the appendix to keep the scaling section tighter.
 

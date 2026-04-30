@@ -4,208 +4,632 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Kiro Dashboard Directory - Kiro Dashboard</title>
+<title>Kiro Dashboard</title>
+
+<!-- Performance tab design language — shared across the dashboard. -->
+<link rel="stylesheet" href="./projection-design-system.css?v=2026-04-30">
+
 <style>
+/* ========================================================================
+   Kiro Command Center — now uses the projection-engine design language
+   (tokens, typography, light surface) so Command Center, Performance, and
+   Body System feel like one tool.
+   2026-04-30: light-theme rewrite. Prior dark theme archived in git.
+   Agent Activity link removed from top nav — lives under Body System now.
+   Emoji glyphs stripped; status conveyed via .kc-pill text labels.
+   Times rendered in America/Los_Angeles via fmtPT() — subtle "PT" suffix.
+   ======================================================================== */
+
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#eaeaea;overflow:hidden;height:100vh}
+html,body{height:100vh;overflow:hidden}
+body{
+  font-family:var(--font-sans);
+  background:var(--color-neutral-bg);
+  color:var(--color-text-body);
+  font-variant-numeric:tabular-nums;
+}
 .shell{display:flex;flex-direction:column;height:100vh}
-.topbar{padding:12px 20px 0;flex-shrink:0}
-.topbar h1{font-size:22px;font-weight:700;color:#fff;margin-bottom:2px}
-.topbar .sub{font-size:14px;color:#888;margin-bottom:8px}
-.nav{display:flex;gap:6px;padding:0 20px 8px;border-bottom:1px solid #1e2028;flex-shrink:0;flex-wrap:wrap}
-.nav a{display:block;padding:6px 14px;border-radius:6px;font-size:15px;font-weight:500;text-decoration:none;color:#888;background:#14161e;border:1px solid #1e2028;transition:all .15s;cursor:pointer;white-space:nowrap}
-.nav a:hover{border-color:#3b82f6;color:#d4d4d4}
-.nav a.active{background:#172040;border-color:#3b82f6;color:#93b4f5}
-.content{flex:1;position:relative;min-height:0}
-.content iframe{width:100%;height:100%;border:none;position:absolute;top:0;left:0}
-.home-wrap{height:100%;overflow-y:auto;padding:12px 20px 20px}
 
-/* Hero */
-.hero{background:linear-gradient(135deg,#172040 0%,#1a2a4a 100%);border:1px solid #2a3a5c;border-radius:8px;padding:12px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px}
-.hero-label{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#4a9eff;white-space:nowrap}
-.hero-text{font-size:16px;font-weight:600;color:#fff;flex:1}
-.hero-meta{font-size:14px;color:#6b8acd;white-space:nowrap}
+/* Topbar */
+.topbar{
+  padding:var(--gap-md) var(--gap-lg) var(--gap-sm);
+  flex-shrink:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:var(--gap-md);
+  border-bottom:1px solid transparent;
+}
+.topbar-title{flex:1;min-width:0}
+.topbar h1{
+  font-size:var(--size-section);
+  font-weight:var(--weight-section);
+  color:var(--color-text-hero);
+  margin-bottom:2px;
+  letter-spacing:-.01em;
+}
+.topbar .sub{font-size:var(--size-ui);color:var(--color-text-meta);margin-bottom:var(--gap-sm)}
+.topbar .sub .tz{
+  color:var(--color-text-subtle);
+  font-size:11px;
+  margin-left:4px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+.topbar-action{flex-shrink:0;text-align:right;padding-top:2px}
+.contrib-link{
+  display:inline-flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:1px;
+  padding:6px 12px;
+  border-radius:6px;
+  text-decoration:none;
+  background:var(--color-panel-bg);
+  border:1px solid var(--color-panel-border);
+  transition:border-color var(--duration-quick) var(--ease-reveal),
+             background var(--duration-quick) var(--ease-reveal);
+  cursor:pointer;
+}
+.contrib-link:hover{border-color:var(--color-brand);background:#FFF}
+.contrib-link-title{
+  font-size:var(--size-ui);
+  font-weight:600;
+  color:var(--color-brand);
+  letter-spacing:.2px;
+}
+.contrib-link-sub{font-size:11px;color:var(--color-text-meta);letter-spacing:.1px}
 
-/* WBR Health Score */
-.wbr-health{background:linear-gradient(135deg,#0f1a2e 0%,#162040 100%);border:1px solid #2a3a5c;border-radius:8px;padding:12px 16px;margin-bottom:10px;display:flex;align-items:center;gap:16px}
-.wbr-score-num{font-size:32px;font-weight:800;line-height:1;min-width:60px;text-align:center}
-.wbr-score-num.score-high{color:#4ade80}
-.wbr-score-num.score-mid{color:#fbbf24}
-.wbr-score-num.score-low{color:#f87171}
-.wbr-score-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#4a9eff;margin-bottom:2px}
-.wbr-score-sub{font-size:12px;color:#6b8acd}
-.wbr-trend{font-size:18px;display:flex;align-items:center;gap:4px;white-space:nowrap}
-.wbr-trend .arrow-up{color:#4ade80}
-.wbr-trend .arrow-down{color:#f87171}
-.wbr-trend .arrow-flat{color:#888}
-.wbr-trend-delta{font-size:13px;color:#6b8acd}
-.wbr-dims{display:flex;gap:8px;flex:1;justify-content:flex-end;flex-wrap:wrap}
-.wbr-dim{text-align:center;min-width:48px}
-.wbr-dim-val{font-size:14px;font-weight:600;color:#d4d4d4}
-.wbr-dim-label{font-size:9px;color:#555;text-transform:uppercase;letter-spacing:.3px}
+/* Main nav (Performance-tab subnav style) */
+.nav{
+  display:flex;
+  align-items:center;
+  gap:0;
+  padding:0 var(--gap-lg);
+  background:#FAFAFA;
+  border-bottom:1px solid var(--color-panel-border);
+  flex-shrink:0;
+  flex-wrap:wrap;
+}
+.nav a{
+  display:block;
+  padding:12px 18px;
+  font-size:0.94em;
+  font-weight:500;
+  text-decoration:none;
+  color:#6B6B6B;
+  border-bottom:2px solid transparent;
+  transition:color var(--duration-quick),background var(--duration-quick);
+  cursor:pointer;
+  white-space:nowrap;
+  letter-spacing:.3px;
+  user-select:none;
+}
+.nav a:hover{color:var(--color-text-body);background:rgba(0,102,204,0.06)}
+.nav a.active{color:var(--color-brand);border-bottom-color:var(--color-brand)}
+
+/* Content frame */
+.content{flex:1;position:relative;min-height:0;background:var(--color-neutral-bg)}
+.content iframe{width:100%;height:100%;border:none;position:absolute;top:0;left:0;background:var(--color-neutral-bg)}
+.home-wrap{height:100%;overflow-y:auto;padding:var(--gap-md) var(--gap-lg) var(--gap-lg)}
+
+/* Hero + WBR Health — removed 2026-04-30.
+ * Hero "Highest Leverage" now surfaces via Differentiate rows in the
+ * Intel table; WBR Health lives on the Performance tab where the WBR
+ * data actually belongs. Soul principle #3: subtraction before addition.
+ * If either needs to come back, git history has the styles. */
 
 /* Section labels */
-.section-label{font-size:13px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
+.section-label{
+  font-size:var(--size-meta);
+  font-weight:600;
+  color:var(--color-text-subtle);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  margin-bottom:var(--gap-sm);
+}
 
-/* Unified card */
-.unified-card{background:#14161e;border:1px solid #1e2028;border-radius:6px;padding:12px 14px;margin-bottom:10px}
+/* Unified panel — mirrors bs-section / wr-q-card */
+.unified-card{
+  background:var(--color-panel-bg);
+  border:1px solid var(--color-panel-border);
+  border-radius:8px;
+  padding:var(--gap-md) var(--gap-lg);
+  margin-bottom:var(--gap-md);
+}
 
 /* Daily Blocks */
-.blocks-columns{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-.block-col{padding:0 10px;border-right:1px solid #1e2028}
+.blocks-columns{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+}
+.block-col{padding:0 var(--gap-md);border-right:1px solid var(--color-panel-border)}
 .block-col:first-child{padding-left:0}
 .block-col:last-child{border-right:none;padding-right:0}
 .block-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-.block-name{font-size:15px;font-weight:600;color:#d4d4d4}
-.block-count{font-size:13px;color:#888;background:#1e2028;padding:1px 7px;border-radius:4px}
-.block-count.over{color:#fbbf24;background:rgba(113,63,18,.3)}
-.block-cap{font-size:12px;color:#666;margin-bottom:6px}
+.block-name{font-size:var(--size-ui);font-weight:600;color:var(--color-text-hero)}
+.block-count{
+  font-size:var(--size-meta);
+  color:var(--color-text-meta);
+  background:var(--color-neutral-bg);
+  border:1px solid var(--color-panel-border);
+  padding:1px 7px;
+  border-radius:4px;
+  font-family:var(--font-mono);
+}
+.block-count.over{color:var(--color-warning);background:#FFF4D6;border-color:#F0D88A}
+.block-cap{font-size:11px;color:var(--color-text-subtle);margin-bottom:6px}
 .block-tasks{max-height:180px;overflow-y:auto}
-.task-row{font-size:13px;padding:3px 0;border-bottom:1px solid #181a22;line-height:1.35;display:flex;align-items:baseline;gap:4px;cursor:pointer}
+.task-row{
+  font-size:var(--size-ui);
+  padding:4px 0;
+  border-bottom:1px solid #F3F3F3;
+  line-height:1.35;
+  display:flex;
+  align-items:baseline;
+  gap:4px;
+  cursor:pointer;
+  transition:background var(--duration-quick);
+}
 .task-row:last-child{border-bottom:none}
-.task-row:hover{background:#181a22;border-radius:3px}
-.task-name{color:#d4d4d4;flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.35}
-.task-meta-inline{font-size:11px;color:#666;white-space:nowrap;flex-shrink:0}
-.wip-warning{font-size:12px;color:#fbbf24;margin-top:4px;padding:3px 6px;background:rgba(113,63,18,.15);border-radius:4px}
+.task-row:hover{background:#F7F7F7;border-radius:3px}
+.task-name{
+  color:var(--color-text-body);
+  flex:1;
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  line-height:1.35;
+}
+.task-meta-inline{font-size:11px;color:var(--color-text-subtle);white-space:nowrap;flex-shrink:0}
+.wip-warning{
+  font-size:var(--size-meta);
+  color:#8A6200;
+  margin-top:4px;
+  padding:4px 8px;
+  background:#FFF4D6;
+  border:1px solid #F0D88A;
+  border-radius:4px;
+}
 
 /* Badges */
-.badge{display:inline-block;padding:1px 5px;border-radius:3px;font-size:11px;font-weight:600;margin-left:3px;vertical-align:middle}
-.badge-red{background:rgba(127,29,29,.4);color:#e8a0a0}
-.badge-orange{background:rgba(113,63,18,.4);color:#e0c080}
-.badge-gray{background:rgba(55,65,81,.4);color:#9ca3af}
-.badge-blue{background:rgba(30,58,138,.4);color:#93b4f5}
+.badge{display:inline-block;padding:1px 5px;border-radius:3px;font-size:10px;font-weight:600;margin-left:3px;vertical-align:middle;letter-spacing:.04em;text-transform:uppercase}
+.badge-red{background:#FEE2E2;color:var(--color-danger)}
+.badge-orange{background:#FFF4D6;color:#8A6200}
+.badge-gray{background:#F3F3F3;color:var(--color-text-subtle)}
+.badge-blue{background:#EEF3FB;color:#0052A3}
 
 /* Initiator badge */
-.init-badge{font-size:10px;padding:1px 4px;border-radius:3px;font-weight:600;white-space:nowrap;flex-shrink:0}
-.init-me{background:rgba(30,58,138,.25);color:#7da2d4}
-.init-mgr{background:rgba(113,63,18,.25);color:#d4b070}
-.init-other{background:rgba(55,65,81,.3);color:#9ca3af}
+.init-badge{font-size:10px;padding:1px 5px;border-radius:3px;font-weight:600;white-space:nowrap;flex-shrink:0;text-transform:uppercase;letter-spacing:.04em}
+.init-me{background:#EEF3FB;color:#0052A3}
+.init-mgr{background:#FFF4D6;color:#8A6200}
+.init-other{background:#F3F3F3;color:var(--color-text-subtle)}
 
-/* Status pills */
-.status-pill{font-size:11px;padding:1px 5px;border-radius:3px;font-weight:600;cursor:pointer;border:none;line-height:1.4}
-.status-pill.not-started{background:rgba(55,65,81,.4);color:#9ca3af}
-.status-pill.in-progress{background:rgba(30,58,138,.3);color:#93b4f5}
-.status-pill.done{background:rgba(6,78,59,.4);color:#4ade80}
+/* Status pills (text labels — no emoji) */
+.kc-pill{
+  display:inline-block;
+  font-size:11px;
+  padding:1px 7px;
+  border-radius:3px;
+  font-weight:600;
+  cursor:pointer;
+  border:1px solid transparent;
+  line-height:1.5;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  font-family:var(--font-sans);
+}
+.kc-pill.not-started{background:#F3F3F3;color:var(--color-text-subtle);border-color:#E6E6E6}
+.kc-pill.in-progress{background:#EEF3FB;color:#0052A3;border-color:#D8E4F3}
+.kc-pill.done{background:#E6F7EE;color:#0C7A3D;border-color:#B5E3C8}
 
-/* Tables (shared) */
-.dtable{width:100%;border-collapse:collapse;font-size:13px}
-.dtable th{text-align:left;padding:6px 8px;color:#666;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid #1e2028;position:sticky;top:0;background:#14161e;z-index:1}
-.dtable td{padding:6px 8px;border-bottom:1px solid #181a22;vertical-align:top;line-height:1.4}
+/* Tables */
+.dtable{width:100%;border-collapse:collapse;font-size:var(--size-ui);font-variant-numeric:tabular-nums}
+.dtable th{
+  text-align:left;
+  padding:6px 10px;
+  color:var(--color-text-subtle);
+  font-weight:600;
+  font-size:var(--size-meta);
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  border-bottom:1px solid var(--color-panel-border);
+  position:sticky;
+  top:0;
+  background:var(--color-panel-bg);
+  z-index:1;
+}
+.dtable td{padding:6px 10px;border-bottom:1px solid #F3F3F3;vertical-align:top;line-height:1.4}
 .dtable tr:last-child td{border-bottom:none}
-.dtable tr:hover td{background:#181a22}
-.dtable tr{cursor:pointer;transition:background .1s}
-.td-text{color:#d4d4d4;max-width:300px}
-.td-context{color:#888;font-size:12px;max-width:260px;line-height:1.35}
-.td-meta{color:#666;font-size:12px;white-space:nowrap}
+.dtable tr{cursor:pointer;transition:background var(--duration-quick)}
+.dtable tr:hover td{background:#F7F7F7}
+.td-text{color:var(--color-text-body);max-width:300px}
+.td-context{color:var(--color-text-meta);font-size:var(--size-meta);max-width:260px;line-height:1.35}
+.td-meta{color:var(--color-text-subtle);font-size:var(--size-meta);white-space:nowrap}
 .td-type{white-space:nowrap}
-.type-tag{font-size:11px;padding:2px 6px;border-radius:3px;font-weight:600;white-space:nowrap}
-.type-diff{background:rgba(30,58,138,.25);color:#93b4f5}
-.type-delegate{background:rgba(113,63,18,.2);color:#d4b070}
-.type-comm{background:rgba(6,78,59,.25);color:#4ade80}
+.type-tag{font-size:10px;padding:2px 7px;border-radius:3px;font-weight:600;white-space:nowrap;text-transform:uppercase;letter-spacing:.04em}
+.type-diff{background:#EEF3FB;color:#0052A3}
+.type-delegate{background:#FFF4D6;color:#8A6200}
+.type-comm{background:#E6F7EE;color:#0C7A3D}
 
 /* Table action buttons */
-.tbl-btn{background:none;border:none;cursor:pointer;padding:2px 4px;border-radius:3px;font-size:13px;line-height:1;transition:all .1s}
-.tbl-btn:hover{background:rgba(255,255,255,.06)}
-.tbl-dismiss{color:#555}
-.tbl-dismiss:hover{color:#e8a0a0}
-.tbl-check{color:#555;font-size:15px}
-.tbl-check:hover{color:#4ade80}
-.tbl-restore{color:#555;font-size:12px}
-.tbl-restore:hover{color:#93b4f5}
+.tbl-btn{
+  background:none;
+  border:1px solid transparent;
+  cursor:pointer;
+  padding:2px 6px;
+  border-radius:3px;
+  font-size:var(--size-ui);
+  line-height:1;
+  transition:all var(--duration-quick);
+  color:var(--color-text-subtle);
+  font-family:var(--font-sans);
+}
+.tbl-btn:hover{background:var(--color-neutral-bg);border-color:var(--color-panel-border)}
+.tbl-dismiss:hover{color:var(--color-danger);border-color:#F0C8C8}
+.tbl-check:hover{color:var(--color-success);border-color:#B5E3C8}
+.tbl-restore:hover{color:var(--color-brand);border-color:#D8E4F3}
+/* Remove button: distinct from Dismiss — neutral grey label, amber on hover.
+ * Signals "this shouldn't have been tracked" rather than "I decided not to do it." */
+.tbl-remove{
+  font-size:11px;
+  letter-spacing:.04em;
+  color:var(--color-text-meta);
+  padding:2px 8px;
+}
+.tbl-remove:hover{color:#8A6200;background:#FFF4D6;border-color:#F0D88A}
 
-/* Table scroll wrapper — dynamic height, no cap */
+/* Table scroll wrapper */
 .tbl-wrap{overflow-y:auto;border-radius:4px}
 
-/* Tab bar for ledger */
-.tab-bar{display:flex;gap:4px;margin-bottom:8px}
-.tab-btn{padding:4px 12px;border-radius:4px;font-size:13px;cursor:pointer;background:#1a1d27;border:1px solid #2a2d35;color:#888;transition:all .15s}
-.tab-btn:hover{border-color:#3b82f6;color:#d4d4d4}
-.tab-btn.active{background:#172040;border-color:#3b82f6;color:#93b4f5}
-.tab-count{font-size:11px;color:#555;margin-left:3px}
+/* Tab bar */
+.tab-bar{display:flex;gap:4px;margin-bottom:var(--gap-sm)}
+.tab-btn{
+  padding:4px 12px;
+  border-radius:14px;
+  font-size:12px;
+  cursor:pointer;
+  background:var(--color-neutral-bg);
+  border:1px solid var(--color-panel-border);
+  color:var(--color-text-body);
+  transition:all var(--duration-quick);
+  font-family:inherit;
+}
+.tab-btn:hover{border-color:var(--color-brand);color:var(--color-brand)}
+.tab-btn.active{background:var(--color-brand);border-color:var(--color-brand);color:var(--color-text-on-brand)}
+.tab-count{font-size:11px;color:var(--color-text-subtle);margin-left:4px}
+.tab-btn.active .tab-count{color:#CFE2FF}
 
-/* Ledger stats row */
-.ledger-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #1e2028}
+/* Ledger stats */
+.ledger-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:var(--gap-sm);
+  margin-bottom:var(--gap-sm);
+  padding-bottom:var(--gap-sm);
+  border-bottom:1px solid var(--color-panel-border);
+}
 .lstat{text-align:center}
-.lstat .num{font-size:22px;font-weight:700;color:#fff}
-.lstat .label{font-size:12px;color:#666;margin-top:1px}
-.lstat .sub{font-size:12px;color:#555}
+.lstat .num{font-size:22px;font-weight:700;color:var(--color-text-hero);font-family:var(--font-mono)}
+.lstat .label{font-size:11px;color:var(--color-text-subtle);margin-top:1px;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.lstat .sub{font-size:11px;color:var(--color-text-meta)}
+.lstat .num.g{color:var(--color-success)}
+.lstat .num.y{color:var(--color-warning)}
+.lstat .num.b{color:var(--color-danger)}
 
 /* Detail panel */
-.detail-panel{display:none;position:fixed;top:0;right:0;width:min(420px,90vw);height:100vh;background:#14161e;border-left:1px solid #2a2d35;z-index:100;overflow-y:auto;padding:20px;box-shadow:-4px 0 20px rgba(0,0,0,.4)}
+.detail-panel{
+  display:none;
+  position:fixed;
+  top:0;
+  right:0;
+  width:min(420px,90vw);
+  height:100vh;
+  background:var(--color-neutral-bg);
+  border-left:1px solid var(--color-panel-border);
+  z-index:100;
+  overflow-y:auto;
+  padding:var(--gap-lg);
+  box-shadow:-4px 0 16px rgba(0,0,0,0.05);
+}
 .detail-panel.open{display:block}
-.detail-close{position:absolute;top:12px;right:12px;background:none;border:none;color:#888;font-size:20px;cursor:pointer;padding:4px 8px}
-.detail-close:hover{color:#fff}
-.detail-panel h2{font-size:16px;font-weight:600;color:#fff;margin-bottom:12px;padding-right:30px}
-.detail-section{margin-bottom:12px}
-.detail-label{font-size:12px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
-.detail-text{font-size:14px;color:#d4d4d4;line-height:1.5}
-.detail-quote{font-size:14px;color:#777;font-style:italic;line-height:1.5}
-
-
+.detail-close{
+  position:absolute;
+  top:12px;right:12px;
+  background:none;border:none;
+  color:var(--color-text-meta);
+  font-size:22px;
+  cursor:pointer;
+  padding:4px 8px;
+  font-family:inherit;
+}
+.detail-close:hover{color:var(--color-text-body)}
+.detail-panel h2{font-size:var(--size-body);font-weight:600;color:var(--color-text-hero);margin-bottom:var(--gap-sm);padding-right:30px}
+.detail-section{margin-bottom:var(--gap-sm)}
+.detail-label{font-size:var(--size-meta);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;font-weight:600}
+.detail-text{font-size:var(--size-ui);color:var(--color-text-body);line-height:1.5}
+.detail-quote{font-size:var(--size-ui);color:var(--color-text-meta);font-style:italic;line-height:1.5}
 
 /* TOC */
-.toc{display:flex;gap:6px;padding:4px 20px;flex-wrap:wrap;align-items:center;border-bottom:1px solid #1e2028;flex-shrink:0;background:#12141c}
-.toc-label{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-right:2px}
-.toc a{font-size:12px;color:#888;text-decoration:none;padding:2px 8px;border-radius:3px;transition:all .15s}
-.toc a:hover{color:#93b4f5;background:rgba(30,58,138,.15)}
-.toc .toc-sep{color:#333;font-size:12px}
+.toc{
+  display:flex;
+  gap:6px;
+  padding:4px var(--gap-lg);
+  flex-wrap:wrap;
+  align-items:center;
+  border-bottom:1px solid var(--color-panel-border);
+  flex-shrink:0;
+  background:var(--color-panel-bg);
+}
+.toc-label{font-size:10px;color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:.1em;margin-right:2px;font-weight:600}
+.toc a{
+  font-size:var(--size-meta);
+  color:var(--color-text-meta);
+  text-decoration:none;
+  padding:2px 8px;
+  border-radius:3px;
+  transition:color var(--duration-quick),background var(--duration-quick);
+}
+.toc a:hover{color:var(--color-brand);background:rgba(0,102,204,0.08)}
+.toc .toc-sep{color:var(--color-panel-border);font-size:var(--size-meta)}
 
 /* Empty state */
-.empty-row{color:#555;font-size:12px;padding:12px 8px;text-align:center}
+.empty-row{color:var(--color-text-subtle);font-size:var(--size-meta);padding:var(--gap-sm);text-align:center;font-style:italic}
 
-.g{color:#4ade80}.w{color:#d4d4d4}.b{color:#f87171}.y{color:#e0e0e0}
-.ts{font-size:13px;color:#444;text-align:right;padding-top:6px}
+.g{color:var(--color-success)}
+.w{color:var(--color-text-body)}
+.b{color:var(--color-danger)}
+.y{color:var(--color-warning)}
+.ts{font-size:var(--size-meta);color:var(--color-text-subtle);text-align:right;padding-top:var(--gap-sm);font-family:var(--font-mono)}
 
-/* Data staleness indicator — #12 */
-.fresh{color:#4ade80}
-.stale-warn{color:#fbbf24}
-.stale-danger{color:#f87171}
+/* Data staleness indicator */
+.fresh{color:var(--color-success)}
+.stale-warn{color:var(--color-warning)}
+.stale-danger{color:var(--color-danger)}
 
-/* Change-since-last-look badges — #11 */
-.change-badge{display:inline-block;padding:1px 7px;border-radius:10px;font-size:11px;font-weight:600;letter-spacing:.2px;margin-left:8px;vertical-align:middle;background:rgba(59,130,246,.15);color:#6b9bd2;line-height:1.5;white-space:nowrap;opacity:0;animation:badgeFadeIn .4s ease-out forwards}
+/* Change-since-last-look badges */
+.change-badge{
+  display:inline-block;
+  padding:1px 7px;
+  border-radius:10px;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.04em;
+  margin-left:8px;
+  vertical-align:middle;
+  background:#EEF3FB;
+  color:#0052A3;
+  line-height:1.5;
+  white-space:nowrap;
+  text-transform:uppercase;
+  opacity:0;
+  animation:badgeFadeIn .4s ease-out forwards;
+}
 @keyframes badgeFadeIn{to{opacity:1}}
 
 @media(max-width:900px){
   .blocks-columns{grid-template-columns:repeat(2,1fr)}
-  .block-col{border-bottom:1px solid #1e2028}
+  .block-col{border-bottom:1px solid var(--color-panel-border)}
   .block-col:nth-child(2){border-right:none}
   .ledger-stats{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:700px){
-  .hero{flex-direction:column;align-items:flex-start;gap:4px}
+  .topbar{flex-direction:column;align-items:stretch}
+  .topbar-action{text-align:left}
+  .contrib-link{align-items:flex-start}
   .detail-panel{width:100%!important}
   .blocks-columns{grid-template-columns:1fr}
   .block-col{border-right:none}
   .ledger-stats{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ========================================================================
+   2026-04-30 redesign — soul principles applied:
+   - Structural over cosmetic (refresh button is the fix for staleness)
+   - Subtraction before addition (WBR removed from CC — lives in Performance)
+   - Reduce decisions, not options (overdue-now promoted from buried counter
+     to top-level strip; ledger tabs collapsed to inline chips)
+   - Invisible over visible (staleness banner only appears when >6h stale)
+   ======================================================================== */
+
+/* Status banner — only renders when data is stale or a refresh is in flight.
+   Quiet when fresh (<6h). Loud when stale (>12h) to force the action. */
+.cc-status{
+  display:flex;
+  align-items:center;
+  gap:var(--gap-md);
+  padding:10px 14px;
+  border-radius:8px;
+  margin-bottom:var(--gap-sm);
+  font-size:var(--size-ui);
+  line-height:1.4;
+  border:1px solid transparent;
+  transition:opacity var(--duration-reveal) var(--ease-reveal);
+}
+.cc-status.fresh{display:none}
+.cc-status.stale-warn{background:#FFFBEC;border-color:#F0D88A;color:#8A6200}
+.cc-status.stale-danger{background:#FDECEC;border-color:#F0C8C8;color:var(--color-danger)}
+.cc-status.running{background:#EEF3FB;border-color:#D8E4F3;color:#0052A3}
+.cc-status .cc-status-msg{flex:1;font-weight:500}
+.cc-status .cc-status-detail{color:inherit;opacity:.7;font-size:var(--size-meta)}
+
+.cc-btn{
+  background:var(--color-brand);
+  color:var(--color-text-on-brand);
+  border:1px solid var(--color-brand);
+  padding:5px 14px;
+  border-radius:4px;
+  font-size:var(--size-ui);
+  font-weight:600;
+  cursor:pointer;
+  font-family:inherit;
+  transition:filter var(--duration-quick);
+  letter-spacing:.02em;
+  white-space:nowrap;
+}
+.cc-btn:hover{filter:brightness(1.1)}
+.cc-btn:disabled{opacity:.6;cursor:wait}
+.cc-btn.secondary{background:transparent;color:var(--color-brand)}
+.cc-btn.secondary:hover{background:rgba(0,102,204,0.06);filter:none}
+
+/* Focus strip — 4 KPI tiles at the top, mirrors weekly-review.wr-scorecard-row */
+.cc-focus-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:var(--gap-md);
+  margin-bottom:var(--gap-md);
+}
+.cc-focus-tile{
+  background:var(--color-panel-bg);
+  border:1px solid var(--color-panel-border);
+  border-radius:8px;
+  padding:var(--gap-sm) var(--gap-md);
+}
+.cc-focus-label{
+  font-size:var(--size-meta);
+  color:var(--color-text-subtle);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-bottom:4px;
+  font-weight:600;
+}
+.cc-focus-value{
+  font-size:28px;
+  font-weight:700;
+  color:var(--color-text-hero);
+  font-variant-numeric:tabular-nums;
+  font-family:var(--font-mono);
+  line-height:1.1;
+  letter-spacing:-.01em;
+}
+.cc-focus-value.good{color:var(--color-success)}
+.cc-focus-value.warn{color:var(--color-warning)}
+.cc-focus-value.bad{color:var(--color-danger)}
+.cc-focus-sub{font-size:var(--size-meta);color:var(--color-text-meta);margin-top:2px}
+
+/* Overdue strip — the "what do I do right now" list.
+   Lives directly under the focus KPIs. One row per overdue task,
+   minimal chrome, click to open Asana. */
+.cc-overdue-list{
+  list-style:none;
+  margin:0;padding:0;
+}
+.cc-overdue-item{
+  display:flex;
+  align-items:baseline;
+  gap:var(--gap-sm);
+  padding:7px 4px;
+  border-bottom:1px solid #F3F3F3;
+  cursor:pointer;
+  transition:background var(--duration-quick);
+}
+.cc-overdue-item:hover{background:#F7F7F7}
+.cc-overdue-item:last-child{border-bottom:none}
+.cc-overdue-days{
+  font-variant-numeric:tabular-nums;
+  font-family:var(--font-mono);
+  font-size:var(--size-ui);
+  font-weight:600;
+  color:var(--color-danger);
+  min-width:44px;
+  text-align:right;
+}
+.cc-overdue-days.mild{color:var(--color-warning)}
+.cc-overdue-days.fresh{color:var(--color-text-subtle)}
+.cc-overdue-name{
+  flex:1;
+  color:var(--color-text-body);
+  font-size:var(--size-ui);
+  line-height:1.35;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.cc-overdue-project{
+  font-size:var(--size-meta);
+  color:var(--color-text-subtle);
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.cc-overdue-empty{
+  padding:var(--gap-md);
+  text-align:center;
+  color:var(--color-text-subtle);
+  font-size:var(--size-ui);
+  font-style:italic;
+}
+
+/* Intel type-group headers — adds a small separator between
+   Communicate / Delegate / Differentiate blocks so the table
+   reads as three related lists, not one flat pile. */
+.dtable tr.type-group-head td{
+  padding:10px 10px 4px;
+  border-bottom:none;
+  background:transparent;
+  cursor:default;
+  font-size:var(--size-meta);
+  color:var(--color-text-subtle);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-weight:600;
+}
+.dtable tr.type-group-head:hover td{background:transparent}
+.dtable tr.type-group-head td .group-count{color:var(--color-text-subtle);font-weight:400;margin-left:6px;text-transform:none;letter-spacing:0}
+
+/* Ledger filter chips — collapsed tab bar into a pill row living
+   alongside the stats so Active/Completed/Dismissed feels like a
+   filter, not a navigation. */
+.ledger-filter-row{
+  display:flex;
+  gap:4px;
+  align-items:center;
+  margin-bottom:var(--gap-sm);
+}
+.ledger-filter-row .ledger-filter-label{
+  font-size:var(--size-meta);
+  color:var(--color-text-subtle);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-right:4px;
+  font-weight:600;
 }
 </style>
 </head>
 <body>
 <div class="shell">
 <div class="topbar">
-  <h1>Kiro Dashboard</h1>
-  <div class="sub">Richard Williams — Paid Search <span id="dataTs"></span></div>
+  <div class="topbar-title">
+    <h1>Kiro Dashboard</h1>
+    <div class="sub">Richard Williams — Paid Search <span id="dataTs"></span><span class="tz">PT</span></div>
+  </div>
+  <div class="topbar-action">
+    <a class="contrib-link" data-view="contribute.html" title="Drop a note, request, or heads-up — agents pick it up on the next ingestion cycle">
+      <span class="contrib-link-title">Contribute a signal →</span>
+      <span class="contrib-link-sub">Note, request, or heads-up for agents</span>
+    </a>
+  </div>
 </div>
 <div class="nav" id="nav">
-  <a data-view="home" class="active">Command Center</a>
-  <a data-view="agent-activity.html">Agent Activity</a>
-  <a data-view="system-flow.html">System Flow</a>
-  <a data-view="contribute.html">Contribute</a>
+  <a data-view="wiki-search.html">Wiki</a>
+  <a data-view="home" class="active">Command</a>
   <a data-view="performance/index.html">Performance</a>
-  <a data-view="body-system/index.html">Body System</a>
-  <a data-view="state-files/index.html">State Files</a>
-  <a data-view="wiki-search.html">Wiki Search</a>
+  <a data-view="state-files/index.html">State</a>
   <a data-view="ps-test-calculator.html">Test Calculator</a>
+  <a data-view="body-system/index.html">Body System</a>
+  <a data-view="system-flow.html">System Flow</a>
 </div>
 <div class="toc" id="tocSection"></div>
 <div class="content" id="content">
   <div class="home-wrap" id="homeContent">
-    <div id="heroSection"></div>
+    <div id="statusSection"></div>
+    <div id="focusSection"></div>
+    <div id="overdueSection"></div>
     <div id="blockSection"></div>
     <div id="ledgerSection"></div>
     <div id="intelSection"></div>
-
-    <div class="ts" id="genTs"></div>
   </div>
   <iframe id="dashFrame" style="display:none"></iframe>
 </div>
@@ -216,6 +640,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </div>
 
 <script>
+/* ══ Time helpers — force America/Los_Angeles everywhere ═════════════════ */
+const PT_FULL_OPTS = { year:'numeric', month:'short', day:'numeric',
+                       hour:'numeric', minute:'2-digit',
+                       timeZone:'America/Los_Angeles' };
+function fmtPT(ts){
+  const d = new Date(ts);
+  if(Number.isNaN(d.getTime())) return '—';
+  return d.toLocaleString('en-US', PT_FULL_OPTS);
+}
+
 /* ══ Nav ══ */
 const nav=document.getElementById('nav'),home=document.getElementById('homeContent'),frame=document.getElementById('dashFrame');
 function switchView(v){
@@ -227,12 +661,15 @@ function switchView(v){
   localStorage.setItem('kiro_dash_view',v);
 }
 nav.addEventListener('click',e=>{const a=e.target.closest('a[data-view]');if(!a)return;e.preventDefault();switchView(a.dataset.view)});
+
+/* Top-right Contribute link — opens in iframe via switchView, but sits outside nav */
+document.querySelector('.contrib-link').addEventListener('click',e=>{
+  e.preventDefault();switchView('contribute.html');
+});
 const savedView=localStorage.getItem('kiro_dash_view');
 if(savedView&&savedView!=='home'){
   // Migrate legacy saved views. forecast-tracker + callout-dashboard + standalone
-  // projection now all live under performance/. If a saved view points at any of
-  // these dead entries, rewrite to performance/index.html and — for projection —
-  // also pre-set the Performance subnav so it opens the Projection Engine tab.
+  // projection now all live under performance/. Agent-activity moved under body-system/.
   let targetView=savedView;
   if(savedView==='forecast-tracker.html'||savedView==='callout-dashboard.html'){
     targetView='performance/index.html';
@@ -242,6 +679,10 @@ if(savedView&&savedView!=='home'){
     targetView='performance/index.html';
     localStorage.setItem('kiro_dash_view',targetView);
     localStorage.setItem('perf_subtab_view','../projection.html');
+  } else if(savedView==='agent-activity.html'){
+    targetView='body-system/index.html';
+    localStorage.setItem('kiro_dash_view',targetView);
+    localStorage.setItem('body_subtab_view','activity.html');
   }
   if(nav.querySelector('a[data-view="'+targetView+'"]')){
     switchView(targetView);
@@ -285,8 +726,8 @@ function openBlockDetail(bi,ti){
     <div class="detail-section"><div class="detail-label">Project</div><div class="detail-text">${task.project||'\u2014'}</div></div>
     <div class="detail-section"><div class="detail-label">Due</div><div class="detail-text">${task.due||'No date'}${task.overdue?' <span class="b">('+task.days_overdue+'d overdue)</span>':''}</div></div>
     <div class="detail-section"><div class="detail-label">Priority</div><div class="detail-text">${task.priority||'\u2014'}</div></div>
-    ${task.next_action?`<div class="detail-section"><div class="detail-label">Next Action</div><div class="detail-text" style="color:#6b8acd">${task.next_action}</div></div>`:''}
-    ${task.kiro?`<div class="detail-section"><div class="detail-label">Kiro Notes</div><div class="detail-text" style="color:#888">${task.kiro}</div></div>`:''}`;
+    ${task.next_action?`<div class="detail-section"><div class="detail-label">Next Action</div><div class="detail-text" style="color:#0052A3">${task.next_action}</div></div>`:''}
+    ${task.kiro?`<div class="detail-section"><div class="detail-label">Kiro Notes</div><div class="detail-text" style="color:var(--color-text-meta)">${task.kiro}</div></div>`:''}`;
   document.getElementById('detailPanel').classList.add('open');
 }
 function closeDetail(){document.getElementById('detailPanel').classList.remove('open')}
@@ -294,8 +735,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDetail()});
 
 /* ══ Helpers ══ */
 function priBadge(p){
-  if(p==='Today')return'<span class="badge badge-orange">TODAY</span>';
-  if(p==='Urgent')return'<span class="badge badge-red">URGENT</span>';return'';
+  if(p==='Today')return'<span class="badge badge-orange">Today</span>';
+  if(p==='Urgent')return'<span class="badge badge-red">Urgent</span>';return'';
 }
 function odBadge(d){return d>0?'<span class="badge badge-gray">'+d+'d</span>':''}
 function initBadge(saidBy,person){
@@ -308,11 +749,12 @@ function extractName(p){
   const f=p.split(/[\s,(/]+/)[0];
   if(f.length<2||/^(for|the|all|full|au|mx|us|ww)$/i.test(f))return'';return f;
 }
+/* Status pill — text labels replace the prior emoji set (⬜ / 🔄 / ✅). */
 function statusPill(s){
   const st=s||'not_started';
-  const labels={'not_started':'\u2b1c','in_progress':'\ud83d\udd04','done':'\u2705'};
+  const labels={'not_started':'Open','in_progress':'In progress','done':'Done'};
   const cls={'not_started':'not-started','in_progress':'in-progress','done':'done'};
-  return'<span class="status-pill '+(cls[st]||'not-started')+'">'+(labels[st]||'\u2b1c')+'</span>';
+  return'<span class="kc-pill '+(cls[st]||'not-started')+'">'+(labels[st]||'Open')+'</span>';
 }
 
 /* ══ Dismiss / Ledger state (localStorage) ══ */
@@ -321,24 +763,59 @@ function setDismissed(k,a){localStorage.setItem('cc_d_'+k,JSON.stringify(a))}
 function dismissIntel(section,idx){
   const d=getDismissed(section);if(!d.includes(idx))d.push(idx);setDismissed(section,d);renderIntel(CC);
 }
-function getLedgerState(){return JSON.parse(localStorage.getItem('cc_ledger_state')||'{"done":[],"dismissed":[]}')}
-function saveLedgerState(s){localStorage.setItem('cc_ledger_state',JSON.stringify(s))}
+function getLedgerState(){return JSON.parse(localStorage.getItem('cc_ledger_state')||'{"done":[],"dismissed":[],"removed":[]}')}
+function saveLedgerState(s){
+  // Back-compat: older localStorage payloads don't have a 'removed' key
+  if(!s.removed) s.removed=[];
+  localStorage.setItem('cc_ledger_state',JSON.stringify(s));
+}
 function markCommitmentDone(hash){
   const note=prompt('Quick note (optional) — what did you do?','');
+  if(note===null)return; // user cancelled
   const s=getLedgerState();if(!s.done.includes(hash))s.done.push(hash);
-  s.dismissed=s.dismissed.filter(t=>t!==hash);saveLedgerState(s);
+  s.dismissed=s.dismissed.filter(t=>t!==hash);
+  s.removed=(s.removed||[]).filter(t=>t!==hash);
+  saveLedgerState(s);
   persistLedgerAction(hash,'done',note||'');
   renderLedger(CC);
 }
 function dismissCommitment(hash){
-  const note=prompt('Why dismiss? (optional)','');
+  // DEPRECATED 2026-04-30 — × button now calls removeCommitment() directly.
+  // Kept for localStorage back-compat (users with pre-existing dismissed state
+  // still see those items in the Dismissed tab). If reviving: wire the × back
+  // to this function and add a second button next to Done in renderLedger.
+  const note=prompt('Why dismiss? Dismissed items count against your kept % — use Remove instead if this should never have been tracked. (optional note)','');
+  if(note===null)return;
   const s=getLedgerState();if(!s.dismissed.includes(hash))s.dismissed.push(hash);
-  s.done=s.done.filter(t=>t!==hash);saveLedgerState(s);
+  s.done=s.done.filter(t=>t!==hash);
+  s.removed=(s.removed||[]).filter(t=>t!==hash);
+  saveLedgerState(s);
   persistLedgerAction(hash,'dismissed',note||'');
   renderLedger(CC);
 }
+/* Remove = "this shouldn't count toward the ledger."
+ * Either because you never actually committed to it, or because it's
+ * no longer relevant, or AM-auto misread a signal. Excluded from kept %,
+ * dismissed %, and the active UI. Note is OPTIONAL — × is the primary
+ * reject action and friction here discourages hygiene.
+ * Lives in history with the note for later pattern-spotting. */
+function removeCommitment(hash){
+  const note=prompt('Optional note — why remove this? (e.g. "not a real commitment", "duplicate", "AM-auto noise")','');
+  if(note===null)return; // user cancelled
+  const s=getLedgerState();
+  s.removed=(s.removed||[]);
+  if(!s.removed.includes(hash)) s.removed.push(hash);
+  s.done=s.done.filter(t=>t!==hash);
+  s.dismissed=s.dismissed.filter(t=>t!==hash);
+  saveLedgerState(s);
+  persistLedgerAction(hash,'removed',note||'');
+  renderLedger(CC);
+}
 function restoreCommitment(hash){
-  const s=getLedgerState();s.done=s.done.filter(t=>t!==hash);s.dismissed=s.dismissed.filter(t=>t!==hash);
+  const s=getLedgerState();
+  s.done=s.done.filter(t=>t!==hash);
+  s.dismissed=s.dismissed.filter(t=>t!==hash);
+  s.removed=(s.removed||[]).filter(t=>t!==hash);
   saveLedgerState(s);
   persistLedgerAction(hash,'not_started','Restored to active');
   renderLedger(CC);
@@ -392,63 +869,233 @@ function updateLedgerHistory(commitments){
   saveLedgerHistory(hist);return hist;
 }
 
-
-
 /* ══ Load data ══ */
-fetch('data/command-center-data.json?'+Date.now()).then(r=>r.json()).then(cc=>{
-  CC=cc;
-  const dv=cc.generated||'',sv=localStorage.getItem('cc_data_version')||'';
-  if(sv!==dv){['flags','differentiate','delegate','communicate'].forEach(k=>localStorage.removeItem('cc_d_'+k));localStorage.setItem('cc_data_version',dv)}
-  const dataTsEl=document.getElementById('dataTs');
-  dataTsEl.textContent='\u2022 Updated '+new Date(cc.generated).toLocaleString();
-  /* Staleness indicator — #12: green <4h, yellow 4-12h, red >12h */
+function loadCC(isRefresh){
+  fetch('data/command-center-data.json?'+Date.now()).then(r=>r.json()).then(cc=>{
+    CC=cc;
+    const dv=cc.generated||'',sv=localStorage.getItem('cc_data_version')||'';
+    if(sv!==dv){['flags','differentiate','delegate','communicate'].forEach(k=>localStorage.removeItem('cc_d_'+k));localStorage.setItem('cc_data_version',dv)}
+    const dataTsEl=document.getElementById('dataTs');
+    dataTsEl.textContent=' \u00b7 Updated '+fmtPT(cc.generated);
+    const staleHours=(Date.now()-new Date(cc.generated).getTime())/3.6e6;
+    dataTsEl.classList.remove('fresh','stale-warn','stale-danger');
+    dataTsEl.classList.add(staleHours>12?'stale-danger':staleHours>4?'stale-warn':'fresh');
+    updateLedgerHistory(cc.commitments||[]);
+    renderStatus(cc);
+    renderFocus(cc);
+    renderOverdue(cc);
+    renderToc();
+    renderBlocks(cc);
+    renderLedger(cc);
+    renderIntel(cc);
+    if(!isRefresh) applyChangeBadges(cc);
+  }).catch(e=>{
+    console.error(e);
+    document.getElementById('blockSection').innerHTML='<div style="color:var(--color-danger);padding:20px">Failed to load data</div>';
+  });
+}
+loadCC(false);
+
+/* ══ Status banner — the fix for staleness.
+ * Only renders when data is >4h old or a refresh is running. The
+ * "Refresh now" button POSTs to /api/refresh which kicks off
+ * generate-command-center.py. We poll /api/refresh-status every 2s
+ * until running is false, then reload data. This is the structural
+ * fix for the "prone to stale" complaint — the dashboard can
+ * refresh itself without a hook or cron.
+ *
+ * Graceful degradation (2026-04-30): if the backend isn't serve.py
+ * (e.g. plain python3 -m http.server is running), /api/refresh-status
+ * 404s. We detect that on load and hide the banner + button entirely
+ * so the UI doesn't advertise capability it doesn't have. ══════════ */
+let _refreshPoll=null;
+let _apiAvailable=null; // null=probing, true=OK, false=backend doesn't support refresh
+
+/* Probe once on load. If the endpoint is missing, _apiAvailable=false
+ * and renderStatus becomes a no-op. */
+fetch('/api/refresh-status',{method:'GET'})
+  .then(r=>{_apiAvailable=(r.status===200);if(CC)renderStatus(CC)})
+  .catch(()=>{_apiAvailable=false;if(CC)renderStatus(CC)});
+function renderStatus(cc){
+  const el=document.getElementById('statusSection');
+  if(!el)return;
+  // If the backend doesn't support refresh, render nothing — the topbar
+  // "Updated X hours ago" (color-coded via .stale-warn/.stale-danger)
+  // stays as the staleness signal. No dead button promises.
+  if(_apiAvailable===false){ el.innerHTML=''; return; }
   const staleHours=(Date.now()-new Date(cc.generated).getTime())/3.6e6;
-  dataTsEl.classList.remove('fresh','stale-warn','stale-danger');
-  dataTsEl.classList.add(staleHours>12?'stale-danger':staleHours>4?'stale-warn':'fresh');
-  document.getElementById('genTs').textContent='Generated: '+new Date().toLocaleString();
-  updateLedgerHistory(cc.commitments||[]);
-  renderHero(cc);renderToc();renderBlocks(cc);renderLedger(cc);renderIntel(cc);
-  applyChangeBadges(cc);
-}).catch(e=>{console.error(e);document.getElementById('blockSection').innerHTML='<div style="color:#f87171;padding:20px">Failed to load data</div>'});
+  // Don't show banner when fresh AND no refresh in flight
+  if(staleHours<=4 && !_refreshPoll){ el.innerHTML=''; return; }
+  const cls=staleHours>12?'stale-danger':staleHours>4?'stale-warn':'fresh';
+  const ageText=staleHours<1?'under an hour':staleHours<24?Math.round(staleHours)+' hours':Math.round(staleHours/24)+' days';
+  const msg=_refreshPoll
+    ? 'Refreshing data — this takes about 30 seconds.'
+    : staleHours>12
+      ? 'Data is '+ageText+' old. Blocks, commitments, and intel may be out of date.'
+      : 'Data is '+ageText+' old.';
+  const btnLabel=_refreshPoll?'Refreshing\u2026':'Refresh now';
+  el.innerHTML=`<div class="cc-status ${_refreshPoll?'running':cls}">
+    <div class="cc-status-msg">${msg}</div>
+    <button class="cc-btn${_refreshPoll?' secondary':''}" ${_refreshPoll?'disabled':''} onclick="triggerRefresh()">${btnLabel}</button>
+  </div>`;
+}
 
-/* ══ Hero ══ */
-function renderHero(cc){
-  let html='';
+function triggerRefresh(){
+  if(_refreshPoll)return;
+  fetch('/api/refresh',{method:'POST'}).then(r=>{
+    if(!r.ok && r.status!==202){
+      // Backend doesn't support refresh — flip the flag and hide the banner
+      _apiAvailable=false;renderStatus(CC);
+      alert('Refresh not available: this dashboard is being served by a plain static server. Run serve.py to enable the refresh button.');
+      return;
+    }
+    return r.json();
+  }).then((d)=>{
+    if(!d)return;
+    _refreshPoll=setInterval(pollRefreshStatus,2000);
+    renderStatus(CC);
+  }).catch(e=>{
+    _apiAvailable=false;renderStatus(CC);
+    alert('Refresh failed: backend unreachable. Try running refresh-all.py manually.');
+    console.error(e);
+  });
+}
 
-  /* WBR Health Score — one number, one trend arrow */
-  const wbr=cc.wbr_health;
-  if(wbr&&wbr.composite_score!=null){
-    const score=wbr.composite_score;
-    const scoreCls=score>=80?'score-high':score>=60?'score-mid':'score-low';
-    const arrowMap={up:'\u25b2',down:'\u25bc',flat:'\u25b8'};
-    const arrowCls={up:'arrow-up',down:'arrow-down',flat:'arrow-flat'};
-    const arrow=arrowMap[wbr.trend]||'\u25b8';
-    const cls=arrowCls[wbr.trend]||'arrow-flat';
-    const deltaText=wbr.delta!=null&&wbr.delta!==0?(wbr.delta>0?'+':'')+wbr.delta:'\u2014';
-    const dims=wbr.dimensions||{};
-    const dimHtml=Object.entries(dims).map(([k,v])=>`<div class="wbr-dim"><div class="wbr-dim-val">${v}</div><div class="wbr-dim-label">${k.length>4?k.slice(0,4):k}</div></div>`).join('');
-    html+=`<div class="wbr-health">
-      <div><div class="wbr-score-label">WBR Health</div><div class="wbr-score-num ${scoreCls}">${score}</div><div class="wbr-score-sub">${wbr.week} \u00b7 ${wbr.market_count} markets</div></div>
-      <div class="wbr-trend"><span class="${cls}">${arrow}</span><span class="wbr-trend-delta">${deltaText} vs ${wbr.prev_week||'\u2014'}</span></div>
-      <div class="wbr-dims">${dimHtml}</div>
+function pollRefreshStatus(){
+  fetch('/api/refresh-status').then(r=>r.json()).then(s=>{
+    if(!s.running){
+      clearInterval(_refreshPoll);_refreshPoll=null;
+      if(s.last_ok===false && s.last_error){
+        alert('Refresh failed:\n'+s.last_error);
+      }
+      // Pass isRefresh=false so change badges re-apply against the
+      // snapshot from *before* the refresh — Richard sees what moved.
+      loadCC(false);
+    }
+  }).catch(e=>{
+    clearInterval(_refreshPoll);_refreshPoll=null;
+    console.error('Status poll failed',e);
+  });
+}
+
+/* ══ Focus strip — 4 KPI tiles.
+ * Promises Kept / Overdue Now / Blocks At Cap / Aging Commitments.
+ * Mirrors weekly-review.wr-scorecard-row exactly.
+ *
+ * "Promises kept" uses LIFETIME stats from cc.ledger_stats when present
+ * (sourced from commitment_ledger_history — never pruned). Sub-line shows
+ * rolling-30d for context. Falls back to in-session counts on cold start.
+ * Removed items (noise) don't appear in any denominator. ═══════════════ */
+function renderFocus(cc){
+  const commitments=cc.commitments||[];
+  const ls=getLedgerState();
+  const active=commitments.filter(c=>{
+    const id=c.text_hash||c.text;
+    return !ls.done.includes(id)&&!ls.dismissed.includes(id)&&!(ls.removed||[]).includes(id)
+           &&c.status!=='done'&&c.status!=='dismissed'&&c.status!=='removed';
+  });
+
+  // Prefer backend lifetime stats when present.
+  const stats=cc.ledger_stats||null;
+  const lifetime=stats&&stats.lifetime?stats.lifetime:null;
+  const rolling=stats&&stats.rolling_30d?stats.rolling_30d:null;
+
+  let pct, sub, pctCls;
+  if(lifetime&&(lifetime.kept+lifetime.dismissed)>0){
+    pct=lifetime.kept_pct;
+    const sinceText=lifetime.first_seen?` since ${lifetime.first_seen}`:'';
+    const rolling30=rolling&&(rolling.kept+rolling.dismissed)>0?` \u00b7 ${rolling.kept_pct}% last 30d`:'';
+    sub=`${lifetime.kept}/${lifetime.kept+lifetime.dismissed} resolved${sinceText}${rolling30}`;
+  } else {
+    // Cold start — nothing resolved yet. Show "no data yet" rather than 0%.
+    const completedInSession=commitments.filter(c=>{
+      const id=c.text_hash||c.text;
+      return ls.done.includes(id)||c.status==='done';
+    }).length;
+    pct=0;
+    sub=completedInSession>0?`${completedInSession} marked this session`:`${active.length} tracked \u00b7 none resolved yet`;
+  }
+  pctCls=pct>=70?'good':pct>=40?'warn':(pct===0&&!(lifetime&&(lifetime.kept+lifetime.dismissed)>0)?'':'bad');
+  const pctDisplay=(lifetime&&(lifetime.kept+lifetime.dismissed)>0)?`${pct}%`:'—';
+
+  const overdueCount=(cc.overdue_tasks||[]).length;
+  const overdueCls=overdueCount===0?'good':overdueCount<5?'warn':'bad';
+
+  const blocks=cc.blocks||[];
+  const blocksOver=blocks.filter(b=>b.count>b.cap).length;
+  const blocksOverCls=blocksOver===0?'good':blocksOver===1?'warn':'bad';
+
+  const aging=active.filter(c=>c.overdue||c.days_old>5).length;
+  const agingCls=aging===0?'good':aging<=2?'warn':'bad';
+
+  document.getElementById('focusSection').innerHTML=`
+    <div class="cc-focus-row">
+      <div class="cc-focus-tile">
+        <div class="cc-focus-label">Promises kept</div>
+        <div class="cc-focus-value ${pctCls}">${pctDisplay}</div>
+        <div class="cc-focus-sub">${sub}</div>
+      </div>
+      <div class="cc-focus-tile">
+        <div class="cc-focus-label">Overdue now</div>
+        <div class="cc-focus-value ${overdueCls}">${overdueCount}</div>
+        <div class="cc-focus-sub">${overdueCount===0?'clean slate':overdueCount===1?'task past due':'tasks past due'}</div>
+      </div>
+      <div class="cc-focus-tile">
+        <div class="cc-focus-label">Blocks over cap</div>
+        <div class="cc-focus-value ${blocksOverCls}">${blocksOver}</div>
+        <div class="cc-focus-sub">of ${blocks.length} daily blocks</div>
+      </div>
+      <div class="cc-focus-tile">
+        <div class="cc-focus-label">Aging 5d+</div>
+        <div class="cc-focus-value ${agingCls}">${aging}</div>
+        <div class="cc-focus-sub">commitments going cold</div>
+      </div>
     </div>`;
-  }
+}
 
-  /* Highest leverage item */
-  const d=cc.differentiate;if(d&&d.length){const top=d[0];
-    html+=`<div class="hero">
-      <div class="hero-label">\u26a1 Highest Leverage</div>
-      <div class="hero-text">${top.action}</div>
-      <div class="hero-meta">${statusPill(top.status)}</div></div>`;
+/* ══ Overdue Right Now — the "what do I do first" list.
+ * Used to be buried inside each Block's overdue_count. Promoted to
+ * a top-level list so Richard can see every past-due task in one
+ * place. Capped at 8 with an "N more" overflow note. Click opens
+ * the task in Asana. ═══════════════════════════════════════════════ */
+function renderOverdue(cc){
+  const all=(cc.overdue_tasks||[]).slice().sort((a,b)=>(b.days_overdue||0)-(a.days_overdue||0));
+  if(!all.length){
+    // Only render the "clean slate" message if there were overdue tasks in recent history;
+    // otherwise hide the section entirely to keep the page compact.
+    document.getElementById('overdueSection').innerHTML='';
+    return;
   }
-
-  document.getElementById('heroSection').innerHTML=html;
+  const cap=8;
+  const shown=all.slice(0,cap);
+  const rest=all.length-cap;
+  const items=shown.map(t=>{
+    const d=t.days_overdue||0;
+    const dCls=d>=5?'':d>=2?'mild':'fresh';
+    const label=d===0?'today':d+'d';
+    const url=t.asana_url||t.url||'';
+    const click=url?`window.open('${url}','_blank')`:'void(0)';
+    return `<li class="cc-overdue-item" onclick="${click}">
+      <span class="cc-overdue-days ${dCls}">${label}</span>
+      <span class="cc-overdue-name" title="${t.name||''}">${t.name||'(untitled)'}</span>
+      <span class="cc-overdue-project">${t.project||t.block||''}</span>
+    </li>`;
+  }).join('');
+  const more=rest>0?`<div class="cc-overdue-project" style="padding:6px 4px 0;text-align:right">+${rest} more</div>`:'';
+  document.getElementById('overdueSection').innerHTML=`
+    <div class="section-label" id="sec-overdue">Overdue right now <span style="font-size:11px;color:var(--color-text-subtle);font-weight:400;text-transform:none;letter-spacing:0">(${all.length} ${all.length===1?'item':'items'})</span></div>
+    <div class="unified-card">
+      <ul class="cc-overdue-list">${items}</ul>
+      ${more}
+    </div>`;
 }
 
 /* ══ TOC ══ */
 function renderToc(){
+  const overdueLink=(CC&&(CC.overdue_tasks||[]).length)
+    ? `<a href="#sec-overdue">Overdue</a><span class="toc-sep">\u00b7</span>`:'';
   document.getElementById('tocSection').innerHTML=`<span class="toc-label">Jump to</span>
-    <a href="#sec-blocks">Blocks</a><span class="toc-sep">\u00b7</span>
+    ${overdueLink}<a href="#sec-blocks">Blocks</a><span class="toc-sep">\u00b7</span>
     <a href="#sec-ledger">Ledger</a><span class="toc-sep">\u00b7</span>
     <a href="#sec-intel">Intelligence</a>`;
 }
@@ -461,10 +1108,11 @@ function renderBlocks(cc){
     const tasks=(b.tasks||[]).slice(0,8).map((t,ti)=>
       `<div class="task-row" onclick="openBlockDetail(${bi},${ti})"><span class="task-name">${t.name}${priBadge(t.priority)}${odBadge(t.days_overdue)}</span><span class="task-meta-inline">${t.project||''}</span></div>`
     ).join('');
-    const wip=isOver?`<div class="wip-warning">\u26a0 Over capacity (${b.count}/${b.cap}) \u2014 defer, delegate, or drop</div>`:'';
+    /* Plain-text warning — replaces the prior ⚠ glyph. */
+    const wip=isOver?`<div class="wip-warning">Over capacity (${b.count}/${b.cap}) \u2014 defer, delegate, or drop</div>`:'';
     return`<div class="block-col"><div class="block-header"><span class="block-name">${b.name}</span><span class="${countCls}">${b.count}/${b.cap}</span></div>
       <div class="block-cap">${b.desc}${info.length?' \u2022 '+info.join(' \u2022 '):''}</div>
-      <div class="block-tasks">${tasks||'<div style="color:#555;font-size:12px">Empty</div>'}</div>${wip}</div>`;
+      <div class="block-tasks">${tasks||'<div style="color:var(--color-text-subtle);font-size:12px;font-style:italic">Empty</div>'}</div>${wip}</div>`;
   }).join('');
   document.getElementById('blockSection').innerHTML=`<div class="section-label" id="sec-blocks">Daily Blocks</div><div class="unified-card"><div class="blocks-columns">${cols}</div></div>`;
 }
@@ -472,67 +1120,88 @@ function renderBlocks(cc){
 /* ══ Actionable Intelligence — TABLE (exclusive categories, no commitments) ══ */
 function typeBadge(type){
   const map={
-    'Differentiate':'background:rgba(30,58,138,.25);color:#93b4f5',
-    'Delegate':'background:rgba(113,63,18,.2);color:#d4b070',
-    'Communicate':'background:rgba(6,78,59,.25);color:#4ade80'
+    'Differentiate':'type-diff',
+    'Delegate':'type-delegate',
+    'Communicate':'type-comm'
   };
-  const style=map[type]||'background:rgba(55,65,81,.3);color:#9ca3af';
-  return `<span class="type-tag" style="${style}">${type}</span>`;
+  const cls=map[type]||'';
+  return `<span class="type-tag ${cls}">${type}</span>`;
 }
 
 function renderIntel(cc){
-  const rows=[];
-  // Order: Communicate first (avoidance pattern), Delegate second (leverage), Differentiate last (reward)
-  (cc.communicate||[]).forEach((item,i)=>{
-    rows.push({section:'communicate',idx:i,text:item.text,type:'Communicate',audience:item.audience||'',context:item.context||''});
-  });
-  (cc.delegate||[]).forEach((item,i)=>{
-    rows.push({section:'delegate',idx:i,text:item.task,type:'Delegate',audience:item.to||'',context:item.reason||item.context||''});
-  });
-  (cc.differentiate||[]).filter(i=>i.status!=='done').forEach((item,i)=>{
-    rows.push({section:'differentiate',idx:i,text:item.action,type:'Differentiate',audience:'',context:item.why||item.context||''});
-  });
+  const groups=[
+    {type:'Communicate',items:(cc.communicate||[]).map((item,i)=>({section:'communicate',idx:i,text:item.text,audience:item.audience||'',context:item.context||''}))},
+    {type:'Delegate',items:(cc.delegate||[]).map((item,i)=>({section:'delegate',idx:i,text:item.task,audience:item.to||'',context:item.reason||item.context||''}))},
+    {type:'Differentiate',items:(cc.differentiate||[]).filter(i=>i.status!=='done').map((item,i)=>({section:'differentiate',idx:i,text:item.action,audience:'',context:item.why||item.context||''}))},
+  ];
 
   const dismissed=getDismissed('intel');
-  const visible=rows.filter(r=>!dismissed.includes(r.section+'-'+r.idx));
+  const filteredGroups=groups.map(g=>({type:g.type,items:g.items.filter(r=>!dismissed.includes(r.section+'-'+r.idx))}));
+  const totalVisible=filteredGroups.reduce((n,g)=>n+g.items.length,0);
 
   let tbody='';
-  if(!visible.length){
+  if(!totalVisible){
     tbody=`<tr><td colspan="5" class="empty-row">All clear — nothing actionable right now</td></tr>`;
   } else {
-    visible.forEach(r=>{
-      const dismissId=r.section+'-'+r.idx;
-      tbody+=`<tr onclick="openDetail('${r.section}',${r.idx})">
-        <td class="td-text">${r.text}</td>
-        <td class="td-type">${typeBadge(r.type)}</td>
-        <td class="td-meta">${r.audience}</td>
-        <td class="td-context">${r.context}</td>
-        <td style="width:30px"><button class="tbl-btn tbl-dismiss" onclick="event.stopPropagation();dismissIntelItem('${esc(dismissId)}')" title="Dismiss">\u00d7</button></td>
-      </tr>`;
+    filteredGroups.forEach(g=>{
+      if(!g.items.length) return;
+      const verb=g.type==='Communicate'?'People to reach':g.type==='Delegate'?'Hand off':'Move the needle';
+      tbody+=`<tr class="type-group-head"><td colspan="5">${verb} <span class="group-count">(${g.items.length})</span></td></tr>`;
+      g.items.forEach(r=>{
+        const dismissId=r.section+'-'+r.idx;
+        tbody+=`<tr onclick="openDetail('${r.section}',${r.idx})">
+          <td class="td-text">${r.text}</td>
+          <td class="td-type">${typeBadge(g.type)}</td>
+          <td class="td-meta">${r.audience}</td>
+          <td class="td-context">${r.context}</td>
+          <td style="width:30px"><button class="tbl-btn tbl-dismiss" onclick="event.stopPropagation();dismissIntelItem('${esc(dismissId)}')" title="Dismiss">\u00d7</button></td>
+        </tr>`;
+      });
     });
   }
 
   document.getElementById('intelSection').innerHTML=`
-    <div class="section-label" id="sec-intel">Actionable Intelligence <span style="font-size:11px;color:#555;font-weight:400;text-transform:none;letter-spacing:0">(${visible.length} items)</span></div>
+    <div class="section-label" id="sec-intel">Actionable Intelligence <span style="font-size:11px;color:var(--color-text-subtle);font-weight:400;text-transform:none;letter-spacing:0">(${totalVisible} ${totalVisible===1?'item':'items'})</span></div>
     <div class="unified-card"><div class="tbl-wrap"><table class="dtable">
       <thead><tr><th>Item</th><th>Type</th><th>Audience</th><th>Context</th><th></th></tr></thead>
       <tbody>${tbody}</tbody>
     </table></div></div>`;
 }
 function dismissIntelItem(id){
-  const d=getDismissed('intel');if(!d.includes(id))d.push(id);setDismissed('intel',d);renderIntel(CC);
+  /* Intel items regenerate from am-command-center-intel.json on every refresh,
+   * so a "dismiss" here is effectively session-scoped. We still capture a note
+   * (optional) and POST it so the pattern matches the ledger — making any
+   * recurring "this keeps coming back and I keep dismissing it" visible later. */
+  const note=prompt('Hide this item. Optional: why? (e.g. "not relevant", "already done", "noise from AM-auto")','');
+  if(note===null)return; // cancelled
+  const d=getDismissed('intel');
+  if(!d.includes(id))d.push(id);
+  setDismissed('intel',d);
+  /* Best-effort persistence: write to the feedback queue so the reason survives
+   * a page refresh, and so patterns are auditable if the item keeps returning. */
+  try{
+    const item={type:'intel_dismiss',intel_id:id,note:note||'',timestamp:new Date().toISOString()};
+    const q=JSON.parse(localStorage.getItem('cc_intel_dismissals')||'{"items":[]}');
+    q.items.push(item);localStorage.setItem('cc_intel_dismissals',JSON.stringify(q));
+    fetch('/api/feedback',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({actions:[{text_hash:'intel:'+id,text:'Intel dismissal: '+id,status:'intel_dismissed',note:note||'',timestamp:item.timestamp,tags:['intel'],source:'command-center',person:'',cascaded:false}]})}).catch(()=>{});
+  }catch(e){/* non-fatal */}
+  renderIntel(CC);
 }
 
-/* ══ Integrity Ledger — TABBED TABLE (commitments only, exclusive) ══ */
+/* ══ Integrity Ledger — TABBED TABLE ══ */
 function renderLedger(cc){
   const allCommitments=cc.commitments||[];
   const ls=getLedgerState();
 
-  const active=[],completed=[],dismissed=[];
+  // Classify into 4 buckets. 'removed' items are noise — excluded from all stats,
+  // hidden from active/completed/dismissed, only visible if user picks the Removed tab.
+  const active=[],completed=[],dismissed=[],removed=[];
   allCommitments.forEach((c,i)=>{
     const id=c.text_hash||c.text;
     const obj={...c,_idx:i,_id:id};
-    if(ls.done.includes(id)||c.status==='done') completed.push(obj);
+    if((ls.removed||[]).includes(id)||c.status==='removed') removed.push(obj);
+    else if(ls.done.includes(id)||c.status==='done') completed.push(obj);
     else if(ls.dismissed.includes(id)||c.status==='dismissed') dismissed.push(obj);
     else active.push(obj);
   });
@@ -541,71 +1210,100 @@ function renderLedger(cc){
   CC.completed_commitments=completed;
   CC.dismissed_commitments=dismissed;
 
-  const total=allCommitments.length,doneN=completed.length;
-  const pct=total?Math.round(doneN/total*100):0;
-  const pctColor=pct>=70?'g':pct>=40?'y':'b';
-  const overdueActive=active.filter(c=>c.overdue||c.days_old>5);
-  const avgAge=active.length?Math.round(active.reduce((s,c)=>s+(c.days_old||0),0)/active.length):0;
+  // Prefer backend-computed stats (lifetime + rolling) when present; fall back to
+  // in-session counts so the numbers are never blank during a cold start.
+  const stats=cc.ledger_stats||null;
+  const lifetime=stats&&stats.lifetime?stats.lifetime:null;
+  const localKeptDenom=completed.length+dismissed.length;
+  const localKeptPct=localKeptDenom?Math.round(completed.length/localKeptDenom*100):0;
+  const keptPct=lifetime&&lifetime.kept_pct!=null?lifetime.kept_pct:localKeptPct;
+  const keptNum=lifetime?lifetime.kept:completed.length;
+  const keptDen=lifetime?(lifetime.kept+lifetime.dismissed):localKeptDenom;
+  const sinceDate=lifetime&&lifetime.first_seen?lifetime.first_seen:null;
 
   const tabs=[
     {id:'active',label:'Active',count:active.length},
     {id:'completed',label:'Completed',count:completed.length},
     {id:'dismissed',label:'Dismissed',count:dismissed.length},
-  ];
-  const tabHtml=tabs.map(t=>`<button class="tab-btn${ledgerTab===t.id?' active':''}" onclick="switchLedgerTab('${t.id}')">${t.label}<span class="tab-count">${t.count}</span></button>`).join('');
+    {id:'removed',label:'Removed',count:removed.length},
+  ].filter(t=>{
+    // Hide Dismissed tab if empty — the Dismiss verb is deprecated (2026-04-30);
+    // × button now maps to Remove. Only shown if legacy dismissed items still exist.
+    if(t.id==='dismissed' && t.count===0) return false;
+    return true;
+  });
 
   let tbody='';
-  function commitRow(c,actions){
+  function commitRow(c,leftCell,rightCell){
     const initHtml=initBadge(c.said_by,c.person);
     const srcShort=(c.source||'').replace(/^Slack /,'').replace(/^Asana /,'');
     const ageColor=c.days_old>5?'b':c.days_old>2?'y':'w';
+    // leftCell is only used for status glyphs (DONE/REMOVED labels in non-active tabs).
+    // Active rows have an empty leftCell — all actions live on the right, per 2026-04-30 tweak.
     return`<tr onclick="openDetail('commitments',${c._idx})">
-      <td style="width:30px;text-align:center">${actions}</td>
+      <td style="width:30px;text-align:center">${leftCell||''}</td>
       <td class="td-text">${c.text}</td>
       <td class="td-meta">${initHtml}</td>
       <td class="td-meta">${srcShort}</td>
       <td class="td-meta"><span class="${ageColor}">${c.days_old||0}d</span></td>
       <td class="td-context">${c.context||''}</td>
+      <td style="width:auto;white-space:nowrap;text-align:right">${rightCell||''}</td>
     </tr>`;
   }
 
   if(ledgerTab==='active'){
     if(!active.length) tbody=`<tr><td colspan="7" class="empty-row">No active commitments — clean slate</td></tr>`;
     else active.forEach(c=>{
-      const actions=`<button class="tbl-btn tbl-check" onclick="event.stopPropagation();markCommitmentDone('${esc(c._id)}')" title="Mark done">\u25cb</button>`;
-      const dismissBtn=`<button class="tbl-btn tbl-dismiss" onclick="event.stopPropagation();dismissCommitment('${esc(c._id)}')" title="Dismiss">\u00d7</button>`;
-      tbody+=commitRow(c,actions).replace('</tr>',`<td style="width:30px">${dismissBtn}</td></tr>`);
+      // All actions on the right. Done = counts kept. × = remove (shouldn't have been
+      // tracked, excluded from all stats). No separate Dismiss — Done vs Not-Done is
+      // the only binary that matters to the kept % now.
+      const doneBtn=`<button class="tbl-btn tbl-check" onclick="event.stopPropagation();markCommitmentDone('${esc(c._id)}')" title="Mark done — counts toward Promises Kept">Done</button>`;
+      const removeBtn=`<button class="tbl-btn tbl-dismiss" onclick="event.stopPropagation();removeCommitment('${esc(c._id)}')" title="Remove — not a real commitment / shouldn't have been tracked (excluded from all stats)">\u00d7</button>`;
+      tbody+=commitRow(c,'',`${doneBtn} ${removeBtn}`);
     });
   } else if(ledgerTab==='completed'){
     if(!completed.length) tbody=`<tr><td colspan="7" class="empty-row">No completed commitments yet</td></tr>`;
     else completed.forEach(c=>{
-      const actions=`<span style="color:#4ade80">\u2713</span>`;
+      const leftCell=`<span style="color:var(--color-success);font-weight:600;font-size:11px">DONE</span>`;
       const restoreBtn=`<button class="tbl-btn tbl-restore" onclick="event.stopPropagation();restoreCommitment('${esc(c._id)}')" title="Restore to active">\u21a9</button>`;
-      tbody+=commitRow(c,actions).replace('</tr>',`<td style="width:30px">${restoreBtn}</td></tr>`);
+      tbody+=commitRow(c,leftCell,restoreBtn);
     });
-  } else {
+  } else if(ledgerTab==='dismissed'){
     if(!dismissed.length) tbody=`<tr><td colspan="7" class="empty-row">No dismissed commitments</td></tr>`;
     else dismissed.forEach(c=>{
-      const actions=`<span style="color:#666">\u2014</span>`;
+      const leftCell=`<span style="color:var(--color-text-subtle)">\u2014</span>`;
       const restoreBtn=`<button class="tbl-btn tbl-restore" onclick="event.stopPropagation();restoreCommitment('${esc(c._id)}')" title="Restore to active">\u21a9</button>`;
-      tbody+=commitRow(c,actions).replace('</tr>',`<td style="width:30px">${restoreBtn}</td></tr>`);
+      tbody+=commitRow(c,leftCell,restoreBtn);
+    });
+  } else { // removed
+    if(!removed.length) tbody=`<tr><td colspan="7" class="empty-row">No removed items — ledger is clean</td></tr>`;
+    else removed.forEach(c=>{
+      const leftCell=`<span style="color:var(--color-text-subtle);font-size:11px">REMOVED</span>`;
+      const restoreBtn=`<button class="tbl-btn tbl-restore" onclick="event.stopPropagation();restoreCommitment('${esc(c._id)}')" title="Restore to active">\u21a9</button>`;
+      tbody+=commitRow(c,leftCell,restoreBtn);
     });
   }
 
   const pendingQueue=JSON.parse(localStorage.getItem('cc_feedback_queue')||'{"pending":[]}');
   const pendingCount=pendingQueue.pending.filter(p=>!p.cascaded).length;
-  const pendingBadge=pendingCount?` <span style="font-size:11px;color:#d4b070;background:rgba(113,63,18,.2);padding:1px 6px;border-radius:3px">${pendingCount} pending sync</span>`:'';
+  const pendingBadge=pendingCount?` <span style="font-size:11px;color:#8A6200;background:#FFF4D6;border:1px solid #F0D88A;padding:1px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:.04em;font-weight:600">${pendingCount} pending sync</span>`:'';
+
+  /* Header meta: prefer lifetime stats (keptNum/keptDen since sinceDate) if available,
+   * fall back to in-session count. Removed items never appear in the denominator. */
+  const sinceLabel=sinceDate?` since ${sinceDate}`:'';
+  const headerMeta=keptDen>0
+    ? `(${keptNum}/${keptDen} kept \u00b7 ${keptPct}%${sinceLabel})`
+    : `(${active.length} tracked \u00b7 no resolved yet)`;
+
+  const filterHtml=`<div class="ledger-filter-row">
+      <span class="ledger-filter-label">Show</span>
+      ${tabs.map(t=>`<button class="tab-btn${ledgerTab===t.id?' active':''}" onclick="switchLedgerTab('${t.id}')">${t.label}<span class="tab-count">${t.count}</span></button>`).join('')}
+    </div>`;
 
   document.getElementById('ledgerSection').innerHTML=`
-    <div class="section-label" id="sec-ledger">Integrity Ledger <span style="font-size:11px;color:#555;font-weight:400;text-transform:none;letter-spacing:0">(${total} total)</span>${pendingBadge}</div>
+    <div class="section-label" id="sec-ledger">Integrity Ledger <span style="font-size:11px;color:var(--color-text-subtle);font-weight:400;text-transform:none;letter-spacing:0">${headerMeta}</span>${pendingBadge}</div>
     <div class="unified-card">
-      <div class="ledger-stats">
-        <div class="lstat"><div class="num ${pctColor}">${pct}%</div><div class="label">Promises Kept</div><div class="sub">${doneN}/${total}</div></div>
-        <div class="lstat"><div class="num">${active.length}</div><div class="label">Active</div><div class="sub">open commitments</div></div>
-        <div class="lstat"><div class="num ${overdueActive.length>2?'b':overdueActive.length?'y':'g'}">${overdueActive.length}</div><div class="label">Aging (5d+)</div><div class="sub">avg ${avgAge}d</div></div>
-        <div class="lstat"><div class="num">${dismissed.length}</div><div class="label">Dismissed</div><div class="sub">not applicable</div></div>
-      </div>
-      <div class="tab-bar">${tabHtml}</div>
+      ${filterHtml}
       <div class="tbl-wrap"><table class="dtable">
         <thead><tr><th style="width:30px"></th><th>Commitment</th><th>From</th><th>Source</th><th>Age</th><th>Context</th><th></th></tr></thead>
         <tbody>${tbody}</tbody>
@@ -615,10 +1313,9 @@ function renderLedger(cc){
 
 function esc(s){return s.replace(/'/g,"\\'").replace(/"/g,'&quot;')}
 
-/* ══ Change-since-last-look badges — #11 ══
+/* ══ Change-since-last-look badges ══
  * Soul: Invisible over visible — badges appear only when something changed.
- * First visit: no badges (everything is "new" which is meaningless).
- * Updates cc_last_seen after 5s so badges persist long enough to notice.
+ * First visit: no badges. Updates cc_last_seen after 5s.
  */
 function getLastSeen(){try{return JSON.parse(localStorage.getItem('cc_last_seen'))}catch(e){return null}}
 function saveLastSeen(snapshot){localStorage.setItem('cc_last_seen',JSON.stringify(snapshot))}
@@ -634,14 +1331,18 @@ function buildSnapshot(cc){
     communicate_count:(cc.communicate||[]).length,
     delegate_count:(cc.delegate||[]).length,
     differentiate_count:(cc.differentiate||[]).filter(function(d){return d.status!=='done'}).length,
-    overdue_count:cc.total_overdue||0,
-    wbr_score:cc.wbr_health&&cc.wbr_health.composite_score!=null?cc.wbr_health.composite_score:null
+    overdue_count:(cc.overdue_tasks||[]).length,
   };
 }
 
 function computeChangeBadges(prev,curr){
   var badges={};
   if(!prev)return badges; // first visit — no badges
+
+  // Overdue (top of page) — highest-signal change
+  var overdueDiff=curr.overdue_count-prev.overdue_count;
+  if(overdueDiff>0)badges.overdue=overdueDiff+' new';
+  else if(overdueDiff<0)badges.overdue=Math.abs(overdueDiff)+' cleared';
 
   // Daily Blocks
   var blockDiff=curr.blocks_count-prev.blocks_count;
@@ -660,15 +1361,8 @@ function computeChangeBadges(prev,curr){
   if(intelDiff>0)badges.intel=intelDiff+' new';
   else if(intelDiff<0)badges.intel=Math.abs(intelDiff)+' cleared';
   else{
-    // Check sub-category changes
     var subChanged=curr.communicate_count!==prev.communicate_count||curr.delegate_count!==prev.delegate_count||curr.differentiate_count!==prev.differentiate_count;
     if(subChanged)badges.intel='updated';
-  }
-
-  // WBR Health (shown in hero area)
-  if(curr.wbr_score!==null&&prev.wbr_score!==null&&curr.wbr_score!==prev.wbr_score){
-    var delta=curr.wbr_score-prev.wbr_score;
-    badges.wbr=(delta>0?'+':'')+delta.toFixed(1);
   }
 
   return badges;
@@ -676,6 +1370,9 @@ function computeChangeBadges(prev,curr){
 
 function injectBadge(sectionEl,text){
   if(!sectionEl||!text)return;
+  // Idempotent: strip any prior change-badge before injecting the new one
+  // so repeated renders (e.g., after refresh) don't stack stale badges.
+  sectionEl.querySelectorAll('.change-badge').forEach(function(b){b.remove()});
   var badge=document.createElement('span');
   badge.className='change-badge';
   badge.textContent=text;
@@ -687,13 +1384,11 @@ function applyChangeBadges(cc){
   var curr=buildSnapshot(cc);
   var badges=computeChangeBadges(prev,curr);
 
-  // Inject badges into section headers (rendered by this point)
+  if(badges.overdue)injectBadge(document.getElementById('sec-overdue'),badges.overdue);
   if(badges.blocks)injectBadge(document.getElementById('sec-blocks'),badges.blocks);
   if(badges.ledger)injectBadge(document.getElementById('sec-ledger'),badges.ledger);
   if(badges.intel)injectBadge(document.getElementById('sec-intel'),badges.intel);
 
-  // Schedule last_seen update after 5 seconds of viewing
-  // Not on immediate load — badges persist long enough to be noticed
   setTimeout(function(){saveLastSeen(curr)},5000);
 }
 </script>
@@ -702,11 +1397,8 @@ function applyChangeBadges(cc){
 <script src="./shared/provenance.js"></script>
 <script src="./shared/provenance-registry.js"></script>
 <script>
-/* Apply provenance bars to all registered sections after data loads.
- * Runs after renderBlocks/renderLedger/renderIntel have created the section labels. */
+/* Apply provenance bars to all registered sections after data loads. */
 (function(){
-  const origFetch = window.fetch;
-  // Watch for data loaded — piggyback on the existing fetch
   function tryApply(){
     if (window.ProvenanceRegistry && document.getElementById('sec-blocks')) {
       window.ProvenanceRegistry.applyAll();

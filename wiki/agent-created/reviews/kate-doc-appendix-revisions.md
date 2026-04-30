@@ -43,14 +43,18 @@ Priority: HIGH (OCI accuracy issue cascades from OCI doc; duplication relationsh
 
 **Current text:**
 ```
-This appendix contains every data table, source link, and supporting detail that strengthens the document's narrative but does not belong in the main body. It is organized by workstream for easy reference.
+- This appendix contains every data table, source link, and supporting detail that strengthens the document's narrative but does not belong in the main body.
+- It is organized by workstream for easy reference.
 ```
 
 **Replace with:**
 ```
-This appendix contains every data table, source link, and supporting detail that strengthens the document's narrative but does not belong in the main body. It is organized by workstream for easy reference.
+- This appendix contains every data table, source link, and supporting detail that strengthens the document's narrative but does not belong in the main body.
+- It is organized by workstream for easy reference.
 
-Tables in this appendix provide the complete data behind the summary figures in each workstream section. Where a workstream section shows a summary table, this appendix contains the full dataset with additional detail columns (e.g., weekly breakdowns, confidence levels, date ranges). The workstream docs are designed to be read standalone; this appendix is the audit trail.
+- Tables in this appendix provide the complete data behind the summary figures in each workstream section.
+- Where a workstream section shows a summary table, this appendix contains the full dataset with additional detail columns (e.g., weekly breakdowns, confidence levels, date ranges).
+- The workstream docs are designed to be read standalone; this appendix is the audit trail.
 ```
 
 **Rationale:** Several appendix tables (B.1 SP Study, B.3 UK Results, A.2 OCI Impact) are near-identical to tables in the main workstream docs. Without a clear statement of the relationship, a reader (or Kate) may wonder why the same data appears twice. The note clarifies that the appendix is the exhaustive version and the workstream docs are the curated summary.

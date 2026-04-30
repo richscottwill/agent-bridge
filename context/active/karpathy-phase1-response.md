@@ -404,42 +404,21 @@ Updating: [38;5;141m../context/body/heart.md[0m
  ● I will run the following command: cd ~/shared/tools/prediction && python3 -c "
 import ast
 tree = ast.parse(open('wbr_pipeline.py').read())
-# Check that _write_projections method exists and has the right signature
-for node in ast.walk(tree):
-    if isinstance(node, ast.FunctionDef) and node.name == '_write_projections':
-        args = [a.arg for a in node.args.args]
-        print(f'_write_projections args: {args}')
-        break
-print('ALL OK')
-" (using tool: shell)
-Purpose: Final verification of method signature
-
-_write_projections args: ['self', 'projections', 'target_period', 'period_type']
-ALL OK
-[38;5;244m - Completed in 0.45s[0m
-
-[?25l[0m[38;5;10m> [0mThe method signature is unchanged — `_write_projections(self, projections, target_period, period_type='weekly')` — so all three call sites (`wk_key`, `month_key`, `quarter_key`) continue to work without modification. The new columns are computed internally from `self._current_week_key()` and `self.prediction_run_id`.[0m[0m
+[38;5;10m> [0m**PE-1 Phase 1 — Shipped.** Summary of changes:[0m[0m
 [0m[0m
----[0m[0m
+**1. No-duplicate invariant preserved:** The DELETE still keys on `(market, metric_name, target_period, scored=false)`. The 3×/day execution pattern (00:07, 00:18, 00:27) continues to DELETE-then-INSERT atomically per market/metric/period tuple. `prediction_run_id` is a tag on the surviving row, not a uniqueness dimension. At most 1 unscored row per `(market, metric_name, target_period)` at any time — same as before.[0m[0m
 [0m[0m
-**PE-1 Phase 1 — Shipped.** Summary of changes:[0m[0m
-[0m[0m
-**1. DDL (`ensure-schema.sql`):** Added `lead_weeks INT` and `prediction_run_id VARCHAR` as nullable columns to `ps.forecasts` table definition.[0m[0m
-[0m[0m
-**2. Runtime migration (`_ensure_schema`):** Added idempotent `ALTER TABLE ps.forecasts ADD COLUMN IF NOT EXISTS` for both columns — handles the live MotherDuck table that already exists.[0m[0m
+**2. Backward compatibility:** Both columns are NULL-able. `ps.latest_forecasts` view doesn't reference them. Scoring queries don't reference them. Existing consumers are unaffected.[0m[0m
 [0m[0m
 **3. `_write_projections` logic:**[0m[0m
 - Computes `lead_weeks` = target_week − current_week (exact for weekly; approximated for monthly/quarterly)[0m[0m
 - Populates `prediction_run_id` from `self.prediction_run_id` (format: `run-YYYYMMDDHHMMSS`, generated once per pipeline instantiation)[0m[0m
 - Both columns included in every INSERT[0m[0m
 [0m[0m
-**4. No-duplicate invariant preserved:** The DELETE still keys on `(market, metric_name, target_period, scored=false)`. The 3×/day execution pattern (00:07, 00:18, 00:27) will continue to DELETE-then-INSERT atomically per market/metric/period tuple. `prediction_run_id` is a tag on the surviving row, not a uniqueness dimension. At most 1 unscored row per `(market, metric_name, target_period)` at any time — same as before.[0m[0m
+**4. DDL (`ensure-schema.sql`):** Added `lead_weeks INT` and `prediction_run_id VARCHAR` as nullable columns to `ps.forecasts` table definition.[0m[0m
 [0m[0m
-**5. Backward compatibility:** Both columns are NULL-able. `ps.latest_forecasts` view doesn't reference them. Scoring queries don't reference them. Existing consumers are unaffected.[0m[0m
+**5. Runtime migration (`_ensure_schema`):** Added idempotent `ALTER TABLE ps.forecasts ADD COLUMN IF NOT EXISTS` for both columns — handles the live MotherDuck table that already exists.[0m[0m
 [0m[0m
-**heart.md** updated: PE-1 status → `PHASE_1_SHIPPED (2026-04-21)`.[0m[0m
-
-[38;5;8m
- ▸ Credits: 2.67 • Time: 2m 35s
-
-[0m[1G[0m[0m[?25h
+**Method signature unchanged** — `_write_projections(self, projections, target_period, period_type='weekly')` — so all three call sites (`wk_key`, `month_key`, `quarter_key`) continue to work without modification. The new columns are computed internally from `self._current_week_key()` and `self.prediction_run_id`.[0m[0m
+[0m[0m
+**heart.md** updated: PE-1 status → `PHASE_1_SHIPPED (2026-04-21)`.

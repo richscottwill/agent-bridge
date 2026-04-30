@@ -93,6 +93,7 @@ MX is outperforming plan by 32% on registrations. The ie%CCP at 93% is near the 
 ## Keyword Strategy
 
 - Brand keywords: Amazon Business MX variations (Spanish)
+  - *Example:* Brand keywords → apply this when the situation matches the described pattern.
 - NB keywords: business supplies, office supplies, industrial supplies (Spanish)
 - Negative keywords: in place (will share full list with Lorena)
 - Opportunities from Lorena:

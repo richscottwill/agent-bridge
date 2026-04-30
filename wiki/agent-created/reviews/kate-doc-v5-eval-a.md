@@ -4,10 +4,6 @@ status: DRAFT
 audience: amazon-internal
 owner: Richard Williams
 created: 2026-04-12
-updated: 2026-04-12
----
-<!-- DOC-0484 | duck_id: wiki-review-kate-doc-v5-eval-a -->
-
 # Review: Paid Search Testing Approach & Year Ahead (V5)
 
 Blind Eval A — 2026-04-05. Appendix excluded from Economy scoring per appendix-heavy structure rule.
@@ -21,6 +17,12 @@ Blind Eval A — 2026-04-05. Appendix excluded from Economy scoring per appendix
 | Dual-audience | 8/10 | Rich YAML frontmatter, AGENT_CONTEXT with key_entities, update_triggers, consumed_by. Prose serves humans. Both audiences covered. |
 | Economy | 8/10 | Main body is tight. The appendix-heavy restructure worked — OCI table moved out, Investment Summary table stays as the decision artifact (correct exception per the rule). One minor flag below. |
 | **Overall** | **8.4/10** | |
+
+### Continued
+
+
+#### Scores — Continued
+
 
 ## Verdict
 PUBLISH
@@ -43,10 +45,6 @@ Main body word count is approximately 1,300 words. Tight for a five-workstream s
 
 ## Economy sub-rule checks (main body only)
 
-- **Bullet list abuse:** No bullet lists in the main body. All prose. Clean pass.
-- **Table abuse:** One table (Investment Summary). Followed by two interpretation paragraphs — the compounding argument and the risk-of-not-investing argument. Clean pass.
-- **Formatting as content:** Remove all bold/italic and the doc reads fine. The only bold is "2026:" labels in each workstream, which serve as scannable anchors but the prose doesn't depend on them. Clean pass.
-- **Verb-in-list-items:** No list items in main body. N/A.
 
 ## Minor flags (non-blocking)
 

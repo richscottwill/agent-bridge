@@ -30,7 +30,6 @@ The Sole Proprietor (SP) study (August 2025) revealed that 50% of sole proprieto
 
 UK Phase 1 results validated the approach: +86% CTR and +31% registrations over 30 days. This is Decision D3 — shift messaging from bulk/B2B framing to price, quality, and selection.
 
----
 
 ## Research Foundation: The SP Study
 

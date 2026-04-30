@@ -1,109 +1,75 @@
 {
-  "schema_version": "1.0",
-  "generated_at_utc": "2026-04-25T19:00:00Z",
-  "generated_at_pt": "2026-04-25 12:00:00 PT",
-  "run_type": "am-backend-parallel-v2",
-  "completeness": "full_for_active_streams",
-  "completeness_note": "Slack, Email, Calendar, Asana all ingested this retry pass. Loop/Hedy still deferred. Proposals below reflect real fresh data, not carry-forward placeholders.",
-  "my_tasks": {
-    "proposals": [
-      {
-        "task_gid": "1213341921686564",
-        "task_name": "Testing Document for Kate",
-        "field": "Kiro_RW",
-        "current_value": "4/24 OOO: 23d overdue, workdays at zero=22→23 (OOO counts as workday). v5 still unsent since 4/5. THE HARD THING reinstated after 4/22 polaris-brand-lp anomaly. 10-min send, not a work session. Monday first action.",
-        "proposed_value": "4/25 Sat / RW returning from OOO Monday 4/27. 23d overdue. 3 workdays at zero (OOO + weekend don't count). v5 PUBLISH verdict since 4/5 = 20d unsent. HARD THING. Monday AM BEFORE PO FAQ, BEFORE anything else: apply 5 fixes + 2-sentence cover + hit send. 10 min, then unblock the rest of the week.",
-        "reason": "Refresh re-entry framing with accurate day counts and sequence PO FAQ below the hard thing."
-      },
-      {
-        "task_gid": "1213959904341162",
-        "task_name": "Reply to Brandon — PAM budget needs assessment",
-        "field": "status",
-        "current_value": "open",
-        "proposed_value": "close — superseded by PO #2D-19910168 FAQ request (4/24 email)",
-        "reason": "This 18d-old task was Brandon's original PAM budget question (4/2 ping). Brandon never re-pinged — he converted it into the PO #2D-19910168 change request via Ashley Yi (4/23). The new asana task 1214218448412299 ('US H2 PAM PO - ') IS the follow-on, and the email-triage HIGH item (PO FAQ) is the live ask. Closing this prevents double-tracking.",
-        "safe_close_check": "Confirmed no separate PAM re-ping in slack or email. The PO change request covers it. If Richard wants to keep a retrospective footnote, add to Kiro_RW note before closing."
-      },
-      {
-        "task_gid": "1214218448412299",
-        "task_name": "US H2 PAM PO - ",
-        "field": "Kiro_RW",
-        "current_value": null,
-        "proposed_value": "Brandon 4/24 email: PO going $74,160 → $218,241 (+$144K). Stuck on Brandon + Luda + Jagan pending FAQ. Draft FAQ Monday AM (60 min), attach in Coupa, ping Brandon. Bring confirmation to Tue 4/28 1:30 PM 1:1. This is THE unblock that turns Brandon from 'unanswered ask' to 'progress reported'.",
-        "reason": "Surface context so Monday AM the agent doesn't have to re-read the email thread to understand what's needed."
-      },
-      {
-        "task_gid": "1214216689942612",
-        "task_name": "It's time to update your goal(s)",
-        "field": "Priority_RW",
-        "current_value": "Today",
-        "proposed_value": "Not urgent",
-        "reason": "Asana auto-generated goal-update reminder. 10 goals need status updates. This is Admin/housekeeping, not Today-urgent. Demote to Not urgent, batch it with the other overdue 'update goals' task (1213798673865639) on Friday week-close slot."
-      }
-    ],
-    "new_tasks_to_create": [
-      {
-        "name": "Draft PO #2D-19910168 FAQ + attach in Coupa + ping Brandon",
-        "project": "My Tasks",
-        "routine_rw": "Admin",
-        "priority_rw": "Today",
-        "due_on": "2026-04-27",
-        "notes": "Brandon email 4/24 10:08 AM PT. PO $74K → $218K (+$144K). FY26 US PAM / Google. Approval stuck on Brandon + Luda + Jagan. Link: https://amazon.coupahost.com/order_headers/19910168/order_header_change. Use MBET/Coupa new PO process template from Ashley Yi's 4/24 email as format reference. Deadline: Tue 4/28 1:30 PM PT Brandon 1:1.",
-        "source": "email_brandon_4-24_17-08 (HIGH-priority)"
-      },
-      {
-        "name": "Polaris Brand LP: Set up Google Experiment alt-measurement + draft AU handoff doc",
-        "project": "WW Testing (primary) + MX + AU",
-        "routine_rw": "Core",
-        "priority_rw": "Urgent",
-        "due_on": "2026-04-29",
-        "notes": "Brandon committed Richard on 4/24 Slack thread (C065KKT53DJ/1777039370.274509): 'Richard can setup an alternate means of measurement.' Yunchu confirmed Weblab won't work because AU/MX direct-to-reg-start breaks MCS control requirement. Google Experiment is the recommended path. Handoff doc needed before 5/5 AU transition.",
-        "source": "slack_brandon_4-24"
-      },
-      {
-        "name": "DM Peter Ocampo: PAM Primeday budget + YoY + projected impressions/taps/installs",
-        "project": "My Tasks",
-        "routine_rw": "Sweep",
-        "priority_rw": "Today",
-        "due_on": "2026-04-27",
-        "notes": "New MPDM C0AV6BWRMDG this weekend. Peter needs PAM Primeday plan. Pull Paid App tracker for baseline + pd26 projections.",
-        "source": "slack_peter_mpdm_weekend"
-      },
-      {
-        "name": "Request access to Sharon's PD26 dates workdoc",
-        "project": "My Tasks",
-        "routine_rw": "Sweep",
-        "priority_rw": "Today",
-        "due_on": "2026-04-27",
-        "notes": "From Peter MPDM — needed to build Primeday plan accurately.",
-        "source": "slack_peter_mpdm_weekend"
-      }
-    ],
-    "completions_to_reconcile": [
-      {"task_gid": "1213917967984980", "name": "Respond to Lena — AU LP URL analysis", "completed_utc": "2026-04-22T18:47:07Z", "action": "marked_complete_in_db_this_run"},
-      {"task_gid": "1214128635826241", "name": "Reply to Dwayne: Brand LP feedback", "completed_utc": "2026-04-21T00:31:52Z", "action": "marked_complete_in_db_this_run"}
-    ],
-    "db_cleanup_this_run": {
-      "soft_deleted_stale_gids": 38,
-      "note": "DB had 38 open tasks for Richard that weren't in today's live Asana roster. Most were completed over the past week without making it into prior syncs. Now flagged deleted_at."
+  "schema_version": "2.0",
+  "generated_at_utc": "2026-04-30T13:00:00Z",
+  "run_type": "am_backend_parallel_v2",
+  "phase": "3_enrichment_scan",
+  "queue_summary": {
+    "tasks_needing_kiro_rw": 5,
+    "tasks_needing_next_action": 4,
+    "tasks_over_cap_to_demote": 42,
+    "tasks_missing_due_date": 8,
+    "monday_create_proposals": 3
+  },
+  "kiro_rw_gaps": [
+    {"task_gid": "1214372021755030", "name": "Weekly walkthrough testing view in Asana", "reason": "Kiro_RW null, needs weekly-agenda context"},
+    {"task_gid": "1214218448412299", "name": "US H2 PAM PO -", "reason": "Empty task name suffix + Kiro_RW null"},
+    {"task_gid": "1214218448412294", "name": "39K IT PO was put into US PAM campaign. Change to IT.", "reason": "Due 4/27 past, Kiro_RW null"},
+    {"task_gid": "1214416794397656", "name": "MotherDuck sync audit — autoresearch schema frozen since 2026-04-17", "reason": "Tactical DuckDB sync task, needs connection to ops.data_freshness signal"},
+    {"task_gid": "1214416809258489", "name": "MPE US baseline — Option 2: add YoY-acceleration regressor", "reason": "MPE projection work, L2 Testing"}
+  ],
+  "next_action_rw_gaps": [
+    {"task_gid": "1213530917597503", "name": "Monthly - Confirm actual budgets", "suggested_next_action": "Pull April finance actuals, cross-ref with Andrew's ENG budget and PAM underspend flag"},
+    {"task_gid": "1213828989831378", "name": "Bi-monthly Flash", "suggested_next_action": "No action until May — bi-monthly cycle"},
+    {"task_gid": "1213072707685849", "name": "AU opp: AE: Introduce RW to Amy for Amazon Essentials", "suggested_next_action": "Backlog — wait until AU NB MRO/Trades test is live, then assess"},
+    {"task_gid": "1212760973200416", "name": "Keep Change Log updated", "suggested_next_action": "Log next campaign change to change log — piggyback as Sweep micro-task"}
+  ],
+  "monday_create_proposals": [
+    {
+      "proposed_name": "Polaris Br-pages QA consolidation — feedback doc + MCS timeline",
+      "source": "slack:dm-brandon 4-29 + ab-paid-search-global thread",
+      "brandon_direct_ask": true,
+      "proposed_routine": "Core Two",
+      "proposed_priority": "Today",
+      "proposed_due": "2026-04-30",
+      "proposed_kiro_rw": "4/30: Brandon designated Richard sole MCS consolidator. Need: consolidated feedback doc + timelines to team + explicit cutoff. Asana not as discussion board — use Slack + Loop doc."
+    },
+    {
+      "proposed_name": "Reply to Megan Oshry — AU reftag + reg-database query share",
+      "source": "slack:dm-meganos 4-29",
+      "brandon_direct_ask": false,
+      "proposed_routine": "Sweep",
+      "proposed_priority": "Today",
+      "proposed_due": "2026-05-01",
+      "proposed_kiro_rw": "4/30: New DM from Megan Oshry asking about AU Google Ads conversion data methodology. Share the reftag + reg-database weekly-match query so she can pull herself."
+    },
+    {
+      "proposed_name": "Reply to Anmol Rastogi — PS metrics list for ABMA-11245",
+      "source": "slack:mpdm-rasanmol 4-29",
+      "brandon_direct_ask": false,
+      "proposed_routine": "Sweep",
+      "proposed_priority": "Urgent",
+      "proposed_due": "2026-05-01",
+      "proposed_kiro_rw": "4/30: Anmol Rastogi asking Richard to clarify which PS data metrics are needed for ABMA-11245 SIM intake. 10 min: enumerate the metric list."
     }
-  },
-  "portfolio": {
-    "proposals": [
-      {
-        "task_gid": "1214218448412294",
-        "task_name": "39K IT PO was put into US PAM campaign. Change to IT.",
-        "project": "Paid App",
-        "field": "Begin-Date_RW",
-        "current_value": "2026-04-26",
-        "proposed_value": "2026-04-27",
-        "reason": "Begin date is today (Saturday) but Richard is OOO. Shift to Monday so it surfaces correctly in My Day."
-      }
-    ],
-    "note": "Shallow portfolio scan only — full GetStatusUpdatesFromObject + per-project task sweep deferred to Monday's weekly refit."
-  },
-  "bucket_cap_snapshot": {
-    "note": "Live Asana shows 73 open tasks for Richard. Full bucket-cap computation requires GetTaskDetails on all 73 to read Routine_RW — deferred to Monday weekly refit.",
-    "projected_cap_state": "Bucket caps were: Engine Room 22/6 (+16), Core 11/4 (+7), Sweep 11/5 (+6), Admin 6/3 (+3). Net delta over the weekend is likely +2-3 new Admin (PO tasks) offset by -2-3 completions. Still severely over-cap across the board — Monday triage slot needed."
-  }
+  ],
+  "decisions_detected_slack": [
+    {
+      "source": "dm-brandon 4-29",
+      "decision": "Richard is single point of contact for MCS on Polaris Br-pages. No segmented feedback.",
+      "decided_by": "Brandon",
+      "action_for_richard": "Announce to PS team + MCS via appropriate channels"
+    },
+    {
+      "source": "ab-paid-search-global 4-29 thread",
+      "decision": "Asana comments not to be used as discussion board for Polaris QA — use feedback doc + Slack + dedicated Alex syncs instead.",
+      "decided_by": "Brandon",
+      "action_for_richard": "Set up the alternative structure"
+    }
+  ],
+  "coherence_flags": [
+    {"flag": "schema_drift", "detail": "MX project GID 1212775592612917 and AU project GID 1212762061512767 returned 424 Not a recognized ID. Re-discover via AsanaSearch."},
+    {"flag": "over_cap_all_buckets", "detail": "Every routine bucket is 3-5x over cap. Structural WIP problem, not a single missed demotion pass."},
+    {"flag": "stale_kill_candidates", "detail": "6 tasks 15+ days overdue with no meaningful movement. Richard scheduled kill-or-revive for PAM bundle at 5/5 1:1."},
+    {"flag": "loop_sync_word_count_delta", "detail": "Loop sync returned word-count deltas >100% on 2 pages. Suggests methodology difference in prior vs current sync, not content jump. Spot-check if signal drives downstream."}
+  ]
 }

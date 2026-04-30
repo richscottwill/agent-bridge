@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>State File — Market</title>
+
+<!-- Shared design system + state-files local overrides live in the
+     overview's stylesheet. We pull just the tokens + a slimmer layer
+     from the same projection-design-system.css. Per-market styles are
+     inlined below. -->
+<link rel="stylesheet" href="../projection-design-system.css?v=2026-04-30">
+
+<style>
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-body);
+  background: var(--color-neutral-bg);
+  line-height: 1.5;
+}
+
+/* Subnav — identical pattern to the overview page */
+.sf-subnav { background: var(--color-panel-bg); border-bottom: 1px solid var(--color-panel-border); padding: 0 var(--gap-lg); display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
+.sf-subnav-brand { color: var(--color-text-hero); font-weight: 700; font-size: 0.92em; padding: 12px 16px 12px 0; border-right: 1px solid var(--color-panel-border); margin-right: 4px; letter-spacing: 1.3px; text-transform: uppercase; }
+.sf-subnav-back { color: var(--color-text-meta); text-decoration: none; padding: 12px 14px 12px 0; font-size: 0.87em; font-weight: 500; letter-spacing: 0.3px; margin-right: 4px; border-right: 1px solid var(--color-panel-border); transition: color 120ms ease; }
+.sf-subnav-back:hover { color: var(--color-brand); }
+.sf-subnav-link { color: var(--color-text-meta); text-decoration: none; padding: 12px 18px; font-size: 0.94em; font-weight: 500; border-bottom: 2px solid transparent; transition: all 120ms ease; cursor: pointer; letter-spacing: 0.3px; }
+.sf-subnav-link:hover { color: var(--color-text-hero); background: rgba(0, 102, 204, 0.06); }
+.sf-subnav-link.active { color: var(--color-brand); border-bottom-color: var(--color-brand); }
+
+.sf-frame { max-width: 1400px; margin: 0 auto; padding: var(--gap-lg) var(--gap-lg) var(--gap-xl); }
+
+.sf-toc { display: flex; gap: var(--gap-xs); padding: var(--gap-xs) 0; flex-wrap: wrap; align-items: center; border-bottom: 1px solid var(--color-panel-border); font-size: var(--size-meta); margin-bottom: var(--gap-md); position: sticky; top: 0; z-index: 50; background: var(--color-neutral-bg); }
+.sf-toc-label { color: var(--color-text-subtle); text-transform: uppercase; letter-spacing: 0.08em; margin-right: var(--gap-xs); font-weight: 600; }
+.sf-toc a { color: var(--color-text-meta); text-decoration: none; padding: 2px var(--gap-xs); border-radius: 3px; transition: color 120ms ease, background-color 120ms ease; }
+.sf-toc a:hover { color: var(--color-brand); background: rgba(0, 102, 204, 0.06); }
+.sf-toc-sep { color: var(--color-panel-border); }
+
+h1.sf-h1 { color: var(--color-text-hero); font-size: var(--size-section); margin-bottom: 4px; font-weight: var(--weight-section); letter-spacing: 0.01em; }
+h2.sf-h2 { color: var(--color-text-hero); font-size: 18px; margin: var(--gap-lg) 0 var(--gap-sm); font-weight: 600; letter-spacing: 0.01em; scroll-margin-top: 60px; }
+h3.sf-h3 { color: var(--color-text-hero); font-size: 15px; margin: var(--gap-md) 0 var(--gap-xs); font-weight: 600; }
+.sf-sub { color: var(--color-text-meta); font-size: var(--size-ui); margin-bottom: var(--gap-md); line-height: 1.6; }
+
+.sf-meta-row { display: flex; gap: var(--gap-sm); flex-wrap: wrap; margin-bottom: var(--gap-lg); font-size: var(--size-ui); color: var(--color-text-meta); }
+.sf-meta-row span { background: var(--color-panel-bg); border: 1px solid var(--color-panel-border); padding: 4px 10px; border-radius: 4px; }
+.sf-meta-row strong { color: var(--color-text-subtle); font-weight: 600; margin-right: 4px; font-size: var(--size-meta); text-transform: uppercase; letter-spacing: 0.06em; }
+
+.sf-card { background: var(--color-panel-bg); border: 1px solid var(--color-panel-border); border-radius: 8px; padding: var(--gap-md); margin-bottom: var(--gap-md); }
+.sf-card-title { color: var(--color-text-subtle); font-size: var(--size-meta); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--gap-sm); font-weight: 600; }
+
+.prose p { color: var(--color-text-body); font-size: var(--size-body); line-height: 1.7; margin-bottom: var(--gap-sm); }
+.prose p:last-child { margin-bottom: 0; }
+
+.sf-list-numbered { counter-reset: li; list-style: none; padding: 0; }
+.sf-list-numbered li { counter-increment: li; position: relative; padding: var(--gap-xs) 0 var(--gap-xs) 32px; color: var(--color-text-body); font-size: var(--size-ui); line-height: 1.6; border-bottom: 1px solid #F3F3F3; }
+.sf-list-numbered li:last-child { border-bottom: none; }
+.sf-list-numbered li::before { content: counter(li); position: absolute; left: 0; top: var(--gap-xs); width: 22px; height: 22px; background: rgba(0, 102, 204, 0.10); color: var(--color-brand); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78em; font-weight: 600; }
+
+.sf-list-bullets { list-style: none; padding: 0; }
+.sf-list-bullets li { padding: 6px 0 6px 18px; color: var(--color-text-body); font-size: var(--size-ui); line-height: 1.6; border-bottom: 1px solid #F3F3F3; position: relative; }
+.sf-list-bullets li::before { content: '•'; position: absolute; left: 4px; top: 6px; color: var(--color-brand); }
+.sf-list-bullets li:last-child { border-bottom: none; }
+
+table.sf-table { width: 100%; border-collapse: collapse; font-size: var(--size-ui); font-variant-numeric: tabular-nums; }
+table.sf-table th { text-align: left; color: var(--color-text-subtle); font-weight: 600; padding: var(--gap-xs) var(--gap-sm); border-bottom: 1px solid var(--color-panel-border); font-size: var(--size-meta); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+table.sf-table td { padding: var(--gap-xs) var(--gap-sm); border-bottom: 1px solid #F3F3F3; vertical-align: top; color: var(--color-text-body); }
+table.sf-table tr:last-child td { border-bottom: none; }
+table.sf-table a { color: var(--color-brand); text-decoration: none; font-weight: 500; }
+table.sf-table a:hover { text-decoration: underline; }
+
+.sf-badge { font-size: 11px; padding: 2px 8px; border-radius: 3px; font-weight: 600; text-transform: uppercase; display: inline-block; letter-spacing: 0.04em; white-space: nowrap; }
+.sf-badge.active { background: rgba(0, 102, 204, 0.12); color: var(--color-brand); }
+.sf-badge.amber  { background: #FFF4D6; color: #8A6200; }
+.sf-badge.red    { background: #FEE2E2; color: var(--color-danger); }
+.sf-badge.green  { background: #E6F7EE; color: #0C7A3D; }
+
+.sf-mini-tag { display: inline-block; font-size: 11px; padding: 1px 6px; border-radius: 3px; background: #F3F3F3; color: var(--color-text-meta); margin-right: 4px; font-family: var(--font-mono); }
+
+.sf-empty { color: var(--color-text-subtle); font-style: italic; font-size: var(--size-ui); padding: var(--gap-sm) 0; }
+
+.sf-split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-md); }
+@media (max-width: 780px) { .sf-split { grid-template-columns: 1fr; } }
+
+/* Goal cards — same look as overview */
+.sf-goal-card { background: #FFFFFF; border: 1px solid var(--color-panel-border); border-radius: 8px; padding: var(--gap-md); border-left: 3px solid var(--color-text-subtle); margin-bottom: var(--gap-sm); }
+.sf-goal-card.green  { border-left-color: var(--color-success); }
+.sf-goal-card.yellow { border-left-color: var(--color-warning); }
+.sf-goal-card.red    { border-left-color: var(--color-danger); }
+.sf-goal-title { font-weight: 600; color: var(--color-text-hero); font-size: var(--size-body); margin-bottom: var(--gap-xs); line-height: 1.35; }
+.sf-goal-desc  { color: var(--color-text-body); font-size: var(--size-ui); line-height: 1.55; margin-bottom: var(--gap-sm); }
+.sf-goal-trend { display: flex; gap: var(--gap-xs); margin-bottom: var(--gap-xs); flex-wrap: wrap; }
+.sf-goal-trend-pill { font-size: 11px; padding: 2px 6px; border-radius: 3px; font-weight: 600; white-space: nowrap; }
+.sf-goal-trend-pill.Green  { background: #E6F7EE; color: #0C7A3D; }
+.sf-goal-trend-pill.Yellow { background: #FFF4D6; color: #8A6200; }
+.sf-goal-trend-pill.Red    { background: #FEE2E2; color: var(--color-danger); }
+.sf-goal-trend-pill.none   { background: #F3F3F3; color: var(--color-text-subtle); }
+.sf-goal-update { color: var(--color-text-body); font-size: var(--size-ui); line-height: 1.55; padding: var(--gap-sm); background: var(--color-panel-bg); border-radius: 4px; margin-top: var(--gap-xs); }
+.sf-goal-update-label { color: var(--color-text-subtle); font-size: var(--size-meta); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; font-weight: 600; }
+
+.sf-footer { color: var(--color-text-subtle); font-size: var(--size-meta); text-align: center; margin-top: var(--gap-xl); padding: var(--gap-md); letter-spacing: 0.05em; font-family: var(--font-mono); }
+
+/* Contributions — dense table with source badges */
+.sf-contrib-scroll { max-height: 480px; overflow-y: auto; border: 1px solid var(--color-panel-border); border-radius: 4px; background: #FFFFFF; }
+</style>
+</head>
+<body>
+<div class="sf-subnav" id="sfSubnav">
+  <!-- Populated from state-files-data.json at load time -->
+</div>
+
+<div class="sf-frame">
+  <div class="sf-toc" id="sfToc">
+    <span class="sf-toc-label">Jump to</span>
+    <a href="#goals">Goals</a><span class="sf-toc-sep">·</span>
+    <a href="#contributions">Contributions</a><span class="sf-toc-sep">·</span>
+    <a href="#introduction">Intro</a><span class="sf-toc-sep">·</span>
+    <a href="#goals-tenets">Goals &amp; Tenets</a><span class="sf-toc-sep">·</span>
+    <a href="#state">State</a><span class="sf-toc-sep">·</span>
+    <a href="#flags">Flags</a><span class="sf-toc-sep">·</span>
+    <a href="#lessons">Lessons</a><span class="sf-toc-sep">·</span>
+    <a href="#priorities">Priorities</a><span class="sf-toc-sep">·</span>
+    <a href="#appendices">Appendices</a>
+  </div>
+
+  <h1 class="sf-h1" id="titleRow">Loading…</h1>
+  <div class="sf-meta-row" id="metaRow"></div>
+
+  <h2 class="sf-h2" id="goals">Mapped 2026 Goals</h2>
+  <div id="goalsCard"></div>
+
+  <h2 class="sf-h2" id="contributions">My Contributions</h2>
+  <div class="sf-card" id="contribBlock"><div class="sf-empty">Loading…</div></div>
+
+  <h2 class="sf-h2" id="introduction">Introduction</h2>
+  <div class="sf-card prose" id="introBlock"></div>
+
+  <div id="goals-tenets" style="scroll-margin-top:60px"></div>
+  <div class="sf-split">
+    <div>
+      <h2 class="sf-h2" id="state-file-goals" style="margin-top:var(--gap-md)">State-File Goals</h2>
+      <div class="sf-card"><ol class="sf-list-numbered" id="goalsList"></ol></div>
+    </div>
+    <div>
+      <h2 class="sf-h2" id="tenets" style="margin-top:var(--gap-md)">Tenets</h2>
+      <div class="sf-card"><ol class="sf-list-numbered" id="tenetsList"></ol></div>
+    </div>
+  </div>
+
+  <h2 class="sf-h2" id="state">State of the Business</h2>
+  <div class="sf-card prose" id="stateBlock"></div>
+  <div class="sf-split">
+    <div><div class="sf-card"><div class="sf-card-title">Input metrics (controllable levers)</div><div id="inputsTable"></div></div></div>
+    <div><div class="sf-card"><div class="sf-card-title">Output metrics (lagging results)</div><div id="outputsTable"></div></div></div>
+  </div>
+
+  <h2 class="sf-h2" id="flags">Flags</h2>
+  <div class="sf-card" id="flagsBlock"></div>
+
+  <h2 class="sf-h2" id="lessons">Lessons Learned</h2>
+  <div class="sf-card prose" id="lessonsBlock"></div>
+
+  <h2 class="sf-h2" id="priorities">Strategic Priorities</h2>
+  <div class="sf-card"><ol class="sf-list-numbered" id="prioritiesList"></ol></div>
+
+  <h2 class="sf-h2" id="appendices">Appendices</h2>
+  <div id="appendicesBlock"></div>
+
+  <div class="sf-footer" id="sfFooter">LOADING…</div>
+</div>
+
+<script>
+/* ------------------------------------------------------------------------
+   Per-market state file — one template, any market.
+   URL param `?m=<key>` selects which market to render. The nav tabs, page
+   title, and entire content are built from state-files-data.json. Adding
+   a new market means dropping a new *-state.md file and re-running
+   refresh-state-files.py — no code change here.
+   ------------------------------------------------------------------------ */
+
+function shortLabel(key, label) {
+  if (!label) return key.toUpperCase();
+  var first = label.split(/\s+/)[0];
+  if (first.length <= 4 && first.toLowerCase() === key.toLowerCase()) {
+    return first;
+  }
+  return label;
+}
+
+function buildSubnav(D, activeKey) {
+  var nav = document.getElementById('sfSubnav');
+  var html = '';
+  html += '<a href="../index.html" class="sf-subnav-back" target="_top">← Command</a>';
+  html += '<span class="sf-subnav-brand">State Files</span>';
+  html += '<a class="sf-subnav-link" href="index.html">Overview</a>';
+  (D.markets || []).forEach(function (key) {
+    var label = shortLabel(key, (D.labels || {})[key]);
+    var cls = 'sf-subnav-link' + (activeKey === key ? ' active' : '');
+    html += '<a class="' + cls + '" href="market.html?m=' + key + '">' + label + '</a>';
+  });
+  html += '<a class="sf-subnav-link" href="goals.html">Goals</a>';
+  nav.innerHTML = html;
+}
+
+function proseHtml(paras) {
+  if (!paras || !paras.length) return '<div class="sf-empty">No content.</div>';
+  return paras.map(function (p) { return '<p>' + p + '</p>'; }).join('');
+}
+function olHtml(items) {
+  if (!items || !items.length) return '<li class="sf-empty" style="list-style:none;padding-left:0">No items.</li>';
+  return items.map(function (s) { return '<li>' + s + '</li>'; }).join('');
+}
+function tableHtml(rows) {
+  if (!rows || !rows.length) return '<div class="sf-empty">No data.</div>';
+  var keys = Object.keys(rows[0]);
+  var h = '<table class="sf-table"><thead><tr>' + keys.map(function (k) { return '<th>' + k + '</th>'; }).join('') + '</tr></thead><tbody>';
+  rows.forEach(function (r) {
+    h += '<tr>' + keys.map(function (k) { return '<td>' + (r[k] || '') + '</td>'; }).join('') + '</tr>';
+  });
+  return h + '</tbody></table>';
+}
+
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  // Resolve market key: prefer ?m=<key>; otherwise fall back to the filename
+  // (this path is kept only so the legacy au.html/mx.html/ww.html shims that
+  //  set <base> or copy this page to a market name can still work)
+  var fromFile = (window.location.pathname.match(/([a-z]+)\.html$/i) || [])[1];
+  var marketKey = (params.get('m') || fromFile || '').toLowerCase();
+
+  Promise.all([
+    fetch('../data/state-files-data.json?' + Date.now()).then(function (r) { return r.json(); }),
+    fetch('../data/goals-data.json?' + Date.now()).then(function (r) { return r.json(); }).catch(function () { return null; }),
+    fetch('../data/contributions-data.json?' + Date.now()).then(function (r) { return r.json(); }).catch(function () { return null; })
+  ]).then(function (res) {
+    var D = res[0], G = res[1], C = res[2];
+
+    // If no ?m= specified, redirect to first available market
+    if (!marketKey || marketKey === 'market') {
+      marketKey = (D.markets || [])[0];
+      if (!marketKey) {
+        document.getElementById('titleRow').textContent = 'No state files found — run refresh-state-files.py';
+        return;
+      }
+    }
+
+    var record = (D.data || {})[marketKey];
+    if (!record) {
+      document.getElementById('titleRow').textContent = 'Unknown market: ' + marketKey;
+      return;
+    }
+
+    buildSubnav(D, marketKey);
+
+    var label = (D.labels || {})[marketKey] || record.title;
+    document.title = 'State File — ' + label;
+    document.getElementById('titleRow').textContent = label + ' — State of the Business';
+
+    var meta = [
+      ['Status', '<span class="sf-badge active">' + record.status + '</span>'],
+      ['Owner', record.owner || '?'],
+      ['Updated', record.updated || '?'],
+      ['Data through', record.data_through || '?']
+    ];
+    document.getElementById('metaRow').innerHTML = meta.map(function (m) {
+      return '<span><strong>' + m[0] + ':</strong>' + m[1] + '</span>';
+    }).join('');
+
+    // Mapped 2026 goals — whichever Richard goals include this market
+    (function () {
+      var el = document.getElementById('goalsCard');
+      if (!G || !G.richard_goals) {
+        el.innerHTML = '<div class="sf-card sf-empty">Goals data not loaded — run refresh-goals.py</div>';
+        return;
+      }
+      var mapped = G.richard_goals.filter(function (g) { return (g.markets || []).indexOf(marketKey) > -1; });
+      if (!mapped.length) {
+        el.innerHTML = '<div class="sf-card sf-empty">No 2026 goal maps to this market.</div>';
+        return;
+      }
+      el.innerHTML = mapped.map(function (g) {
+        var color = (g.latest_color || '').toLowerCase() || 'none';
+        var cls = 'sf-goal-card' + (color === 'green' ? ' green' : color === 'yellow' ? ' yellow' : color === 'red' ? ' red' : '');
+        var trendPills = (g.monthly_status || []).map(function (m) {
+          var c = m.color || 'none';
+          return '<span class="sf-goal-trend-pill ' + c + '">' + m.month.slice(0, 3) + ': ' + (m.color || '?') + '</span>';
+        }).join('');
+        var desc = g.description || '';
+        var latest = g.latest_update || '';
+        return '<div class="' + cls + '">' +
+          '<div class="sf-goal-title">' + g.title + '</div>' +
+          '<div class="sf-goal-desc">' + desc + '</div>' +
+          '<div class="sf-goal-trend">' + trendPills + '</div>' +
+          (latest ? '<div class="sf-goal-update"><div class="sf-goal-update-label">' + (g.latest_month || 'Latest') + ' update · source: Outbound Marketing Goals sheet</div>' + latest + '</div>' : '') +
+          '</div>';
+      }).join('');
+    })();
+
+    // My Contributions
+    (function () {
+      var el = document.getElementById('contribBlock');
+      if (!C || !C.goals) {
+        el.innerHTML = '<div class="sf-empty">Contributions data not loaded — run refresh-contributions.py</div>';
+        return;
+      }
+      var relevant = C.goals.filter(function (g) { return (g.markets || []).indexOf(marketKey) > -1; });
+      if (!relevant.length) {
+        el.innerHTML = '<div class="sf-empty">No contributions mapped to this market yet.</div>';
+        return;
+      }
+      var seen = {}, records = [];
+      relevant.forEach(function (g) {
+        (g.contributions || []).forEach(function (r) {
+          if (seen[r.hash]) return; seen[r.hash] = true;
+          records.push(Object.assign({}, r, { _goal: g.title }));
+        });
+      });
+      records.sort(function (a, b) {
+        var ad = a.date || '', bd = b.date || '';
+        if (ad && !bd) return -1;
+        if (!ad && bd) return 1;
+        return bd.localeCompare(ad);
+      });
+      var counts = { asana: 0, slack: 0, quip: 0, sharepoint: 0, email: 0 };
+      var undated = 0;
+      records.forEach(function (r) {
+        if (counts[r.source] !== undefined) counts[r.source]++;
+        if (!r.date) undated++;
+      });
+      var srcBadges = '<span class="sf-mini-tag">' + counts.asana + ' asana</span>' +
+        '<span class="sf-mini-tag">' + counts.slack + ' slack</span>' +
+        '<span class="sf-mini-tag">' + counts.quip + ' quip</span>' +
+        '<span class="sf-mini-tag">' + counts.sharepoint + ' sharepoint</span>' +
+        '<span class="sf-mini-tag">' + counts.email + ' email</span>';
+      var h = '<div class="sf-card-title">' + records.length + ' contributions YTD · ' + srcBadges + '</div>';
+      h += '<p style="color:var(--color-text-meta);font-size:var(--size-ui);line-height:1.55;margin-bottom:var(--gap-md)">What Richard specifically pushed, decided, or drove for the goals mapping to this market — separated from general program activity. Blended from Asana, Slack, Quip, SharePoint, and email. System-generated briefs and team-doc authorship are filtered out.</p>';
+      if (undated) {
+        h += '<p style="color:var(--color-warning);font-size:var(--size-meta);margin-bottom:var(--gap-xs)">' + undated + ' records missing completion date — pending Asana enrichment. Shown grouped at bottom.</p>';
+      }
+      h += '<div class="sf-contrib-scroll">';
+      h += '<table class="sf-table"><thead><tr><th style="width:88px">Date</th><th style="width:72px">Source</th><th>Contribution</th><th style="width:120px">Goal</th></tr></thead><tbody>';
+      records.slice(0, 80).forEach(function (r) {
+        var srcClass = { asana: 'active', slack: 'green', quip: 'amber', sharepoint: 'red', email: 'amber' }[r.source] || 'active';
+        var titleText = (r.title || '').replace(/</g, '&lt;');
+        var link = r.url ? '<a href="' + r.url + '" target="_blank">' + titleText + '</a>' : titleText;
+        var goalShort = (r._goal || '')
+          .replace('MX/AU Paid Search Registrations', 'MX/AU Regs')
+          .replace('MX + AU Market Testing', 'MX+AU Test')
+          .replace('Globalized Cross-Market Testing', 'Globalized');
+        var dateCell = r.date ? r.date : '<span style="color:var(--color-text-subtle)">—</span>';
+        h += '<tr>' +
+          '<td style="color:var(--color-text-meta);font-size:var(--size-meta);white-space:nowrap">' + dateCell + '</td>' +
+          '<td><span class="sf-badge ' + srcClass + '">' + r.source + '</span></td>' +
+          '<td>' + link + (r.also_seen_in && r.also_seen_in.length ? ' <span class="sf-mini-tag">+' + r.also_seen_in.join(',') + '</span>' : '') + '</td>' +
+          '<td style="color:var(--color-text-meta);font-size:var(--size-meta)">' + goalShort + '</td>' +
+        '</tr>';
+      });
+      h += '</tbody></table></div>';
+      if (records.length > 80) h += '<div style="color:var(--color-text-subtle);font-size:var(--size-meta);margin-top:var(--gap-xs)">Showing 80 of ' + records.length + '. Full list in data/contributions-data.json.</div>';
+      el.innerHTML = h;
+    })();
+
+    var secs = record.sections || {}, tabs = record.tables || {}, apps = record.appendices || {};
+    document.getElementById('introBlock').innerHTML = proseHtml(secs.introduction);
+    document.getElementById('goalsList').innerHTML = olHtml(secs.goals);
+    document.getElementById('tenetsList').innerHTML = olHtml(secs.tenets);
+    document.getElementById('stateBlock').innerHTML = proseHtml(secs.state);
+    document.getElementById('inputsTable').innerHTML = tableHtml(tabs.inputs);
+    document.getElementById('outputsTable').innerHTML = tableHtml(tabs.outputs);
+
+    var fb = document.getElementById('flagsBlock');
+    if (tabs.flags && tabs.flags.length) {
+      fb.innerHTML = '<div class="sf-card-title">Active flags</div>' + tableHtml(tabs.flags);
+    } else if (secs.flags && secs.flags.length) {
+      fb.innerHTML = '<div class="sf-card-title">Flags narrative</div><div class="prose">' + proseHtml(secs.flags) + '</div>';
+    } else {
+      fb.innerHTML = '<div class="sf-empty">No Flags section in this state file. <span style="color:var(--color-warning)">Schema gap — consider adding to parallel the other files.</span></div>';
+    }
+
+    document.getElementById('lessonsBlock').innerHTML = proseHtml(secs.lessons);
+    document.getElementById('prioritiesList').innerHTML = olHtml(secs.priorities);
+
+    var appEl = document.getElementById('appendicesBlock'), ah = '';
+    var order = ['weekly_trend', 'yoy', 'monthly_projection', 'plan_summary', 'change_log', 'variance_bridge', 'source_links', 'placeholder_schema'];
+    // Append any appendix keys we didn't know about (future-proofing)
+    Object.keys(apps).forEach(function (k) { if (order.indexOf(k) < 0) order.push(k); });
+    order.forEach(function (key) {
+      var a = apps[key]; if (!a) return;
+      ah += '<div class="sf-card" id="app-' + key + '"><div class="sf-card-title">' + a.heading + ' · ' + key.replace(/_/g, ' ') + '</div>';
+      if (a.paragraphs && a.paragraphs.length) {
+        ah += '<div class="prose">' + a.paragraphs.slice(0, 3).map(function (p) { return '<p>' + p + '</p>'; }).join('') + '</div>';
+      }
+      if (a.tables && a.tables.length) {
+        a.tables.forEach(function (t) { ah += '<div style="margin-top:var(--gap-sm)">' + tableHtml(t) + '</div>'; });
+      }
+      if (a.bullets && a.bullets.length && (!a.tables || !a.tables.length)) {
+        ah += '<ul class="sf-list-bullets">' + a.bullets.slice(0, 12).map(function (b) { return '<li>' + b + '</li>'; }).join('') + '</ul>';
+      }
+      ah += '</div>';
+    });
+    if (!ah) ah = '<div class="sf-card sf-empty">No appendices parsed.</div>';
+    appEl.innerHTML = ah;
+
+    var fileName = (D.files || {})[marketKey] || marketKey + '-state.md';
+    document.getElementById('sfFooter').textContent = 'DATA: ' + new Date(D.generated).toLocaleString() + ' · SOURCE: shared/wiki/state-files/' + fileName + ' · REFRESH: python3 shared/dashboards/refresh-state-files.py';
+  }).catch(function (e) {
+    console.error(e);
+    document.getElementById('titleRow').textContent = 'Failed to load data.';
+  });
+})();
+</script>
+
+<script src="../shared/section-freshness.js" defer></script>
+</body>
+</html>

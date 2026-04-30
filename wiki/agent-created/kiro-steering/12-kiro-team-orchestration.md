@@ -18,13 +18,13 @@ This doc is the most environment-dependent in the kit. Orchestration depends on 
 | Serve as librarian for a shared domain | ✅ Only here | ❌ | ❌ |
 
 **Tell the user in plain language:**
-- **Remote IDE:** *"I can fully contribute to the team's shared work here — drop drafts in the team's review folder, log team events, and help review what others submit."*
+- **Remote IDE:** *"I can fully contribute to the team's shared work here
 - **Local IDE:** *"I can draft callouts and reports on your laptop, and they'll sync up to the team's shared folder through OneDrive. Scheduled background tasks need the Remote IDE to run reliably."*
 - **AgentSpaces:** *"I can help you draft things here, but I can't save them directly to the team's shared folder. For contributing drafts and participating in team-wide coordination, open your Remote IDE and ask me there."*
 
 ---
 
-Individual Kiro agents are powerful on their own. A team of Kiro agents contributing to shared artifacts multiplies that — if the contribution structure is right. This doc covers how the Paid Acq team wires individual agents into team-level outputs.
+Individual Kiro agents are powerful on their own. A team of Kiro agents contributing to shared artifacts multiplies that
 
 **This is the most ambitious doc in the kit.** Don't start here. Get comfortable with the other docs first, then layer orchestration once 3+ teammates are actively using Kiro.
 
@@ -33,12 +33,12 @@ Individual Kiro agents are powerful on their own. A team of Kiro agents contribu
 Every shared artifact follows the same flow:
 
 ```
-Individual agents           Intake folder               Librarian agent             Canonical location
-     (write drafts)  ──▶   (staging area)    ──▶    (review / promote)    ──▶    (team-visible, trusted)
+Individual agents Intake folder Librarian agent Canonical location
+ ──▶ ──▶ ──▶
 ```
 
 - Individual agents drop **drafts** into an **intake** folder.
-- A **librarian** (one per shared domain — human or scheduled agent) reviews, edits, and promotes to canonical.
+- A **librarian** reviews, edits, and promotes to canonical.
 - Nobody's agent writes directly to canonical. Ever.
 
 This prevents the "everyone writes everywhere" chaos while still letting individual contributions flow up.
@@ -61,32 +61,32 @@ This prevents the "everyone writes everywhere" chaos while still letting individ
 ```
 1. User: "Write this week's AU callout."
 2. Agent:
-   - Loads callout-principles.md and richard-style-wbr.md
-   - Pulls W16 data from pacing/forecast sources
-   - Drafts following weekly-market-callout template
-   - Self-reviews
+ - Loads callout-principles.md and richard-style-wbr.md
+ - Pulls W16 data from pacing/forecast sources
+ - Drafts following weekly-market-callout template
+ - Self-reviews
 3. Agent saves draft to: ~/shared/callouts/intake/2026-W16-AU-<alias>.md
 4. Includes front-matter:
-   ---
-   market: AU
-   week: 2026-W16
-   submitted_by: <alias>
-   submitted_at: 2026-04-18
-   status: draft
-   ---
-5. Pings librarian (self-DM to Richard or via Slack MCP).
+ ---
+ market: AU
+ week: 2026-W16
+ submitted_by: <alias>
+ submitted_at: 2026-04-18
+ status: draft
+ ---
+5. Pings librarian.
 6. Librarian reviews, edits, promotes to ~/shared/callouts/2026/W16/AU.md.
 ```
 
 ### Contributing an ad-hoc report
 
 ```
-1. User: "I looked into the JP CPC spike — write up findings for the team."
+1. User: "I looked into the JP CPC spike
 2. Agent drafts the analysis as markdown.
 3. Saves to: ~/shared/reports/intake/2026-04-17-jp-cpc-spike-<alias>/
-   - report.md (the write-up)
-   - data.xlsx (source data if any)
-   - chart.png (derived visual if any)
+ - report.md
+ - data.xlsx
+ - chart.png
 4. Front-matter in report.md identifies author, date, topic.
 5. Librarian promotes to ~/shared/reports/2026-04-17-jp-cpc-spike/ if quality bar met.
 ```
@@ -104,28 +104,28 @@ This prevents the "everyone writes everywhere" chaos while still letting individ
 
 Beyond discrete artifacts, the team uses a shared event stream for ambient signals. Any agent can write, any agent can read.
 
-**Location:** `~/shared/events.jsonl` (one JSON object per line, append-only).
+**Location:** `~/shared/events.jsonl`.
 
 **Event schema:**
 
 ```json
 {
-  "timestamp": "2026-04-17T19:45:00Z",
-  "source_agent": "prichwil",
-  "event_type": "test-status-change | pacing-alert | commitment-made | insight | request",
-  "topic": "short descriptor",
-  "payload": { ... event-specific fields ... },
-  "visibility": "team | personal"
+ "timestamp": "2026-04-17T19:45:00Z",
+ "source_agent": "prichwil",
+ "event_type": "test-status-change | pacing-alert | commitment-made | insight | request",
+ "topic": "short descriptor",
+ "payload": { ... event-specific fields ... },
+ "visibility": "team | personal"
 }
 ```
 
 **Common event types:**
 
-- `test-status-change` — a test moved from Running → Complete, or Proposed → Running
-- `pacing-alert` — a market went off-track on a metric
-- `commitment-made` — "I told Brandon I'd have X by Friday"
-- `insight` — a finding worth the team knowing about
-- `request` — "I need help with X from [teammate]"
+- `test-status-change`
+- `pacing-alert`
+- `commitment-made`
+- `insight`
+- `request`
 
 **How agents subscribe:**
 
@@ -133,7 +133,7 @@ Morning brief hooks read the last 24h of events and summarize what happened acro
 
 ```
 tail -n 1000 ~/shared/events.jsonl | \
-  python3 -c "<parse, filter by timestamp > cutoff, group by event_type, summarize>"
+ python3 -c "<parse, filter by timestamp > cutoff, group by event_type, summarize>"
 ```
 
 Weekly retro hooks do the same on a 7-day window.
@@ -141,23 +141,23 @@ Weekly retro hooks do the same on a 7-day window.
 **Rules for writing events:**
 
 - One event per discrete happening. Don't pack multiple events in one JSON.
-- Use consistent `event_type` values — if you're inventing one, check for existing conventions first.
+- Use consistent `event_type` values
 - Keep `payload` small. Link to docs/reports rather than pasting full content.
-- Never write events with `visibility: team` for personal coaching/retrospective content — use `personal`.
+- Never write events with `visibility: team` for personal coaching/retrospective content
 
 ## The librarian role
 
 Every shared domain has a librarian. Librarians:
 
-- **Review intake items** on a regular cadence (daily for callouts, weekly for reports, ongoing for wiki).
+- **Review intake items** on a regular cadence.
 - **Merge** approved items to canonical, preserving author attribution.
-- **Request revisions** for items that don't meet the quality bar — reply in the intake file or via Slack.
+- **Request revisions** for items that don't meet the quality bar
 - **Decline** with reason if the item is off-scope or duplicative.
 - **Prune** the intake folder so it doesn't rot.
 
 Currently Richard is librarian for callouts, reports, and wiki. As the team scales, domains get delegated.
 
-**Librarian agents (automated)** can handle initial triage — de-dup checking, format validation, front-matter verification — but should never auto-promote without human approval for leadership-visible artifacts (callouts, WBR, MBR).
+**Librarian agents (automated)** can handle initial triage — de-dup checking, format validation, front-matter verification
 
 ## Avoiding common orchestration failures
 
@@ -168,12 +168,12 @@ Currently Richard is librarian for callouts, reports, and wiki. As the team scal
 
 Don't try to stand all of this up at once. Suggested phasing:
 
-1. **Phase 1:** Individual Kiro usage — each teammate has their own setup, their own callouts/reports live in personal OneDrive.
-2. **Phase 2:** Shared read — everyone reads from the canonical wiki, but writes stay personal.
-3. **Phase 3:** Callout intake — first shared artifact. Richard is librarian. Test the flow.
-4. **Phase 4:** Event log — add `~/shared/events.jsonl`. Start with morning brief subscribers only.
-5. **Phase 5:** Reports + meeting recaps + wiki suggestions — layer in as the team sees value.
-6. **Phase 6:** Distribute librarian roles — multiple librarians as team grows.
+1. **Phase 1:** Individual Kiro usage
+2. **Phase 2:** Shared read
+3. **Phase 3:** Callout intake
+4. **Phase 4:** Event log
+5. **Phase 5:** Reports + meeting recaps + wiki suggestions
+6. **Phase 6:** Distribute librarian roles
 
 ## Steering file for orchestration participants
 
@@ -190,12 +190,12 @@ When producing a shared artifact (callout, report, meeting recap, wiki suggestio
 
 1. Never write directly to canonical locations. Always write to the corresponding intake folder.
 2. Include front-matter with author alias, date, and artifact type.
-3. Notify the librarian (Slack self-DM to user, who forwards) when draft is ready for review.
-4. Wait for librarian to promote — don't assume your draft is live.
+3. Notify the librarian when draft is ready for review.
+4. Wait for librarian to promote
 
 When subscribing to team state:
-- Read `~/shared/events.jsonl` for ambient signals (last 24h for daily brief, 7d for weekly retro).
-- Read canonical artifact folders (never intake) for authoritative content.
+- Read `~/shared/events.jsonl` for ambient signals.
+- Read canonical artifact folders for authoritative content.
 
 When writing events:
 - One discrete event per line.

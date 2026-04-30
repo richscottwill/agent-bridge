@@ -19,11 +19,6 @@ Interactive (light-touch). Reads pre-computed state from EOD-Backend. Presents s
 - Instead, go back and complete the missing backend phase that produces the missing file.
 - If the backend phase genuinely cannot run (tool unavailable, MCP down), create the JSON with `{"generated": "YYYY-MM-DD", "status": "skipped", "reason": "[specific reason]"}` so the skip is explicit and visible.
 
-**If all three files pass the gate**, read the eod-phase-tracker.md checklist. If any backend phase shows ❌ or is unchecked, the first line of the EOD summary MUST be:
-```
-⚠️ INCOMPLETE RUN — Phases [list] were skipped: [reasons]
-```
-This warning goes BEFORE the task table, not buried in System Health.
 
 ---
 
@@ -97,21 +92,19 @@ New blockers detected — confirm and add to registry?
 - Recurring: [N] new instances
 - Blockers: [N] new, [N] resolved
 
-🏭 ABPS AI:
-- Completed: [N], Pipeline advances: [N], Refreshes: [N]
-```
 
 ---
 
 ## Step 4: System Health
 
 ### Workflow Health
+
+
 From eod-maintenance.json:
 ```
 🔧 Workflows (24h): [total] runs, [success_rate]% success, avg [duration]s. [failures] failures.
 [⚠️ Degraded: workflow_name at X% success if any]
 ```
-
 ### Compression Audit
 From eod-maintenance.json:
 ```

@@ -37,6 +37,8 @@ All three write to the same DuckDB tables (`signals.emails`, `signals.slack_mess
 
 ---
 
+
+**Common failure:** Misinterpreting the scope of this section — it covers only Keeps (the daily essentials) **Phase 5 (reduced)** — write `daily-brief-latest.md`, push to SharePoint **Phase 2.5F** — current.md refresh (quick surgical update only) **Phase 0** — Schema verification (10s) - **SharePoint drift check** → Broad Sweep weekly - Orchestrator B2 Activity Monitor (unchanged — activity on today's tasks) - **Full channel list Slack scan** (all 50+ channels) → Broad Sweep weekly - Subagent A Slack — filter to channels whose section has `"am_brief"` in its `scan_in` array per `~/shared/data/state/slack-channel-registry.json` v3.1+. By default: `WW Testing`, `AB PS`, and DMs. Excludes `AB`, `AI`, and `Channels` sections — those get picked up by Sentry + Sweep. - **Context enrichment Phase 2.5A-2.5E** (meeting series files, relationship activity, project timeline, five levels tagging) → Broad Sweep weekly (these are weekly-relevant, not daily-relevant) - Subagent C Email — only `inbox` folder, only senders in HIGH list OR CC/TO direct to Richard; NOT BCC distros - **Wiki candidate detection** (`signals.wiki_candidates` scan) → Broad Sweep weekly (not needed daily) --- - **Topic classification across all ingested data** → Topic Sentry daily - **Portfolio scan Phase 4** (per-project task enrichment, status staleness) → runs in its own dedicated hook or weekly Sweep (tasks.md item) - Subagent D Loop pages — only pages flagged `daily_refresh=true` in `docs.loop_pages.refresh_policy` (Brandon 1:1, Kate 1:1 — not MBR, not Artifacts) - **Hedy full backlog sync** (anything older than 24h) → Broad Sweep weekly - Subagent E Hedy — yesterday's meetings only, for action-item extraction - Orchestrator B1 Asana Sync (unchanged — needed for today's tasks) - **Loop page exhaustive refresh** (all tracked pages) → Broad Sweep weekly **Phase 1 ingestion (narrowed):** - **Full-folder email scan** (sent, archive, custom folders, deleted) → Broad Sweep weekly From `am-backend-parallel.md`, AM Brief retains these steps: AM Brief drops from ~17 step-types to ~8. Wall-clock target: 5 min (from 16 min). ## What Topic Sentry adds that AM Brief was missing, not adjacent concerns.
 ## What Broad Sweep adds that neither covers
 
 1. **Coverage assurance** — the "what you might have missed" diff (AM-covered vs Sweep-found). This is the safety net that catches senders, channels, and folders not in daily scan.
@@ -54,12 +56,12 @@ All three write to the same DuckDB tables (`signals.emails`, `signals.slack_mess
 - ✅ `~/shared/context/protocols/broad-sweep.md`
 - ✅ `~/shared/context/protocols/three-hook-migration-plan.md` (this file)
 
-### Step 2: Shadow-run Topic Sentry for 1 week (no AM changes yet)
-- Add Topic Sentry hook to run AFTER current AM-Backend (non-blocking).
-- Sentry reads the DuckDB AM wrote to. AM unchanged.
-- Richard compares Sentry output against AM output daily. Tune `topic-watchlist.md` based on false positives / false negatives.
+[38;5;10m> [0m### Step 2: Shadow-run Topic Sentry for 1 week (no AM changes yet)[0m[0m
+- Add Topic Sentry hook to run AFTER current AM-Backend (non-blocking).[0m[0m
+- Sentry reads the DuckDB AM wrote to. AM unchanged.[0m[0m
+- Richard compares Sentry output against AM output daily. Tune `topic-watchlist.md` based on false positives / false negatives.[0m[0m
+ - *Example:* On Day 3, AM processes 40 articles and flags 12. Sentry independently flags 15—including 3 articles about a new EU AI regulation that AM missed because the keyword "artificial intelligence act" wasn't in its current ruleset. Richard adds that term to `topic-watchlist.md`. Meanwhile, 2 of Sentry's 15 flags turn out to be irrelevant (a product review mentioning "AI" in passing), giving a noise rate of ~13%. That's under the 20% threshold, so tuning is on track.[0m[0m
 - **Exit criterion:** Sentry surfacing 3+ real misses that AM didn't flag, with <20% noise. One week is enough to tell.
-
 ### Step 3: Shadow-run Broad Sweep once
 - Richard triggers the weekly Sweep manually (userTriggered hook).
 - Review the "what AM missed" gap section — is it surfacing useful things?

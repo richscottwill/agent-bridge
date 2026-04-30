@@ -332,14 +332,19 @@ Bedrock AgentCore. Build, test, deploy AI agents. Not daily-use tooling. Relevan
 
 ---
 
-## Pending Installations
-
-| Server | Status | What it does | When to install |
-|--------|--------|-------------|-----------------|
-| enterprise-asana-mcp | ✅ Live | Native Asana read/write — command center for task management | Connected |
-
+[38;5;10m> [0m## Pending Installations[0m[0m
+[0m[0m
+### Live Servers[0m[0m
+[0m[0m
+| Server | What it does |[0m[0m
+|--------|-------------|[0m[0m
+| enterprise-asana-mcp | Native Asana read/write — command center for task management |[0m[0m
+[0m[0m
+### Status Summary[0m[0m
+[0m[0m
+- **enterprise-asana-mcp**: ✅ Connected and live[0m[0m
+[0m[0m
 ---
-
 ## Key IDs
 
 ### Outlook Folders

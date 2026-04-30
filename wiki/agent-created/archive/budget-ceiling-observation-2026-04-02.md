@@ -27,7 +27,15 @@ Either way, the static budget isn't earning its place.
 
 ## Proposed Direction
 
+
+#### Replace static budgets
+
+
 Replace static budgets with a learned constraint. Track whether organ size correlates with eval accuracy across experiments. Let the data tell us where the ceiling actually is — same philosophy as every other threshold removal in the heart.md overhaul.
+
+
+#### The per-organ budgets
+
 
 The per-organ budgets and total body ceiling should be the next candidates for Bayesian management, not static governance.
 

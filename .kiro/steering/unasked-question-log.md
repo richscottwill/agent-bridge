@@ -39,14 +39,15 @@ If no: skip silently. Do not log noise.
 - The weekly 1:1-prep step (before meetings with Brandon or skip-level with Kate) reads the last 7 days of entries, clusters by theme, and surfaces the 1-2 patterns that repeat. Pattern = 3+ entries with the same or closely-related `adjacent_q`.
 - Entries older than 60 days rotate to `context/active/archive/unasked-declined-YYYY-MM.jsonl` to keep the live file small.
 
-## Output format for 1:1 prep
-
-When the 1:1-prep agent surfaces a pattern, the framing is:
-
-> "Heads up: you've been asked about [topic] N times this week and there's a pattern. The adjacent question [X] came up 3+ times and you passed on it each time. Worth considering whether to raise it in [next 1:1 with person]."
-
+[38;5;10m> [0m## Output format for 1:1 prep[0m[0m
+[0m[0m
+When the 1:1-prep agent surfaces a pattern, the framing is:[0m[0m
+[0m[0m
+> "Heads up: you've been asked about [topic] N times this week and there's a pattern. The adjacent question [X] came up 3+ times and you passed on it each time. Worth considering whether to raise it in [next 1:1 with person]."[0m[0m
+[0m[0m
+For example, suppose three different reports ask Richard about deployment timelines during the week, and each time the conversation skirts around the real blocker — a dependency on another team's API migration. The agent might surface: "Heads up: you've been asked about deployment timelines 3 times this week and there's a pattern. The adjacent question 'What's the status of the API migration dependency?' came up 3+ times and you passed on it each time. Worth considering whether to raise it in your next 1:1 with Dana." This gives Richard a concrete thread to pull on without telling him what to do.[0m[0m
+[0m[0m
 Do not frame as "you should have asked X." Frame as "here's a pattern worth examining." Richard owns the decision to surface or not — the log's job is to make the pattern visible, not to create should-claims.
-
 ## Why this is always-on, not manual
 
 Manual-inclusion would mean agents load this rule only when they're explicitly prepping 1:1s. But the LOGGING happens in every turn — which means the rule needs to be in-context whenever an agent is answering Richard. Always-on is correct.

@@ -7,6 +7,9 @@ Lena is the AU Country Leader. She owns the P&L and is accountable for AU growth
 
 2. She asked a simple question in March: why are we still pointing to old pages? She got a response that said "it's managed at the global level" — which, from her seat, sounds like nobody owns it and nobody is prioritizing AU. She had to push multiple times to get action.
 
+### Continued
+
+
 3. The $6 USD CPC is real. Consumer AU PS runs at $0.18 CPC. Even accounting for B2B differences, a 33x gap is hard to defend to anyone outside the PS team. She brought data (Harsha's benchmarks) and escalated to Nick and Kate because she felt the central team wasn't treating this with urgency.
 
 4. She proposed a two-way door decision: switch to new pages, measure for 4 weeks, switch back if it doesn't work. That's a reasonable, low-risk framing. The central team's counter-proposal (50/50 split) would have delayed action further on something she'd already been asking about for weeks.
@@ -35,13 +38,12 @@ She has a legitimate case that the central team was not responsive enough to a m
 | 2 | The team didn't prioritize AU | Lena had to ask multiple times for LP updates. "Managed at the global level" sounded like deflection. | AU was actively managed: weekly syncs established 3/2, keyword optimizations ongoing, bid strategies implemented, negative keywords added. The LP issue was genuinely a global workstream (Dwayne's team) — not something Richard could unilaterally change. | Weekly sync series created 3/2. Keyword data shared 3/10. Alexis confirmed: "thanks for this heads-up... paid search is becoming a burning topic in AU" (3/18) — indicating Richard was proactively surfacing issues. |
 | 3 | Richard cancelled meetings too often | Two syncs cancelled (3/10 sick, 3/31 offsite). | Both cancellations included proactive follow-up: 3/10 sent keyword data + updated Quip same day. 3/31 sent AU PS Weekly Update email with performance notes and keyword report. Neither was a silent cancellation. | Email evidence for both dates shows substantive async delivery. Alexis acknowledged: "Thanks a lot Richard for these insights!" (4/1). |
 
-### Theme 2: CPC Performance
-
-| # | Potential Claim Against Richard/Team | Evidence Supporting Claim | Counterclaim | Evidence Supporting Counterclaim |
-|---|--------------------------------------|--------------------------|--------------|--------------------------------|
-| 4 | AU's $6 CPC is unacceptable compared to consumer's $0.18 | Harsha's data shows consumer CPC at $0.18 vs AB at ~$6. 33x gap. | Consumer PS is 82% Shopping Ads ($9M vs $2M text ads QTD) which have structurally lower CPCs. AB doesn't have Shopping Ads. B2B keyword campaigns have inherently higher CPCs due to lower search volume and higher competition. AWS AU (also B2B) shows >$3 CPCs and 2nd highest CPAs WW. | Yun's data on Shopping vs Text Ad spend split. Brandon's reply to Lena (3/19) with AWS benchmarks. AB CPC was trending down: -19% CPC reduction over 3 weeks from Adobe bid strategies. |
-| 5 | The team should have gotten CPCs down faster | Feb CPA was $235 AUD vs $226 goal — still above target. | AU launched June 2025 — less than a year old. CPC optimization is iterative. Adobe bid strategies were just implemented and showing -19% CPC decline over 3 weeks. OCI (timeline TBD) will be the structural unlock for bidding efficiency when it launches. | Weekly data shows consistent CPC improvement W7-W13. Brandon's email to Lena explicitly set this expectation. |
-
+[38;5;10m> [0m### Theme 2: CPC Performance[0m[0m
+[0m[0m
+| # | Potential Claim Against Richard/Team | Evidence Supporting Claim | Counterclaim | Evidence Supporting Counterclaim |[0m[0m
+|---|--------------------------------------|--------------------------|--------------|--------------------------------|[0m[0m
+| 4 | AU's $6 CPC vs consumer's $0.18 is unacceptable | Harsha's data: consumer CPC $0.18 vs AB ~$6 (33x gap). | Consumer PS is 82% Shopping Ads ($9M vs $2M text ads QTD), which have structurally lower CPCs. AB lacks Shopping Ads. B2B keywords have higher CPCs due to low volume/high competition. AWS AU (also B2B): >$3 CPCs, 2nd highest CPAs WW. | Yun's Shopping vs Text Ad spend split. Brandon's reply to Lena (3/19) with AWS benchmarks. AB CPC trending down: -19% reduction over 3 weeks from Adobe bid strategies. |[0m[0m
+| 5 | Team should have reduced CPCs faster | Feb CPA $235 AUD vs $226 goal — still above target. | AU launched June 2025 — under a year old. CPC optimization is iterative. Adobe bid strategies just implemented, showing -19% CPC decline over 3 weeks. OCI (timeline TBD) will structurally unlock bidding efficiency. | Weekly data shows consistent CPC improvement W7–W13. Brandon's email to Lena set this expectation. |
 ### Theme 3: Landing Page Decision
 
 | # | Potential Claim Against Richard/Team | Evidence Supporting Claim | Counterclaim | Evidence Supporting Counterclaim |

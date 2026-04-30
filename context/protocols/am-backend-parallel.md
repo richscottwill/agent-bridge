@@ -22,26 +22,140 @@
 
 
 
-## Why Parallel (v2)
+## Timing Estimates
 
-Phase 1 (Data Collection) has independent data streams with no cross-dependencies:
-- Slack scan (Subagent A) → Slack MCP, signals.slack_messages, slack-digest.md
-- Asana sync (Orchestrator B1) → Asana MCP, asana.asana_tasks, asana-digest.md
-- Asana activity (Orchestrator B2, after B1) → Asana MCP, asana-activity.md
-- Email + calendar (Subagent C) → Outlook MCP, signals.emails, main.calendar_events, email-triage.md
-- Loop page sync (Subagent D) → SharePoint MCP, docs.loop_pages
-- Hedy meetings (Subagent E) → Hedy MCP, signals.hedy_meetings, hedy-digest.md
+| Phase | Sequential (old) | Parallel v1 (broken) | Parallel v2 (current) |
+|-------|-----------------|---------------------|----------------------|
+| Phase 0: Schema check | 10s | 10s | 10s |
+| Phase 1: Ingestion | ~12 min | ~5 min (but Asana failed) | ~5 min (max of: Slack 5m, Orch B1+B2 5m, Email 1m, Loop 1m, Hedy 1m) |
+| Phase 2: Processing | ~3 min | ~3 min | ~3 min |
+| Phase 2.5: Context Enrichment | — | ~4 min | ~4 min |
+| Phase 3: Enrichment | ~2 min | ~2 min | ~2 min |
+| Phase 4: Portfolio | ~3 min | ~3 min | ~3 min |
+| Phase 5: Compile | 10s | 10s | 10s |
+| **Total** | **~20 min** | **~16 min (with gaps)** | **~16 min (no gaps)** |
 
-Wall-clock: max(Slack ~5min, Orchestrator B1+B2 ~5min, Email ~1min, Loop ~1min, Hedy ~1min) ≈ 5 min.
-
-Phase 2+ (Processing) depends on Phase 1 outputs — runs sequentially after the ingestion barrier.
+Key change: wall-clock time is the same (~16 min) but Asana data is now guaranteed fresh because it runs in the orchestrator where MCP access is reliable. The orchestrator runs B1+B2 concurrently with the 4 subagents, so no time is lost.
 
 ---
 
 
 
 
-## Architecture
+### Subagent D: Loop Page Sync
+
+**Context files to load:**
+- loop-page-sync.md (sync protocol)
+
+**MCP servers used:** SharePoint MCP (sharepoint_read_loop), DuckDB MCP
+
+**Writes:**
+- docs.loop_pages (DuckDB — UPDATE content)
+- ops.data_freshness (DuckDB — UPDATE loop_pages row)
+
+**Does NOT touch:** Slack MCP, Asana MCP, Outlook MCP, Hedy MCP, any file outputs
+
+---
+
+
+
+
+[38;5;10m> [0m### ORCHESTRATOR-OWNED: Asana Sync (B1) + Activity Monitor (B2)[0m[0m
+[0m[0m
+#### Execution Model[0m[0m
+These run in the parent orchestrator agent — **not** as subagents.[0m[0m
+[0m[0m
+#### Why Not Subagents[0m[0m
+Asana MCP (enterprise-asana-mcp) uses an ESD proxy that is unreliable from subagent contexts. This is a hard constraint learned from production (2026-04-16).
+#### ORCHESTRATOR-OWNED: Asana Sync (B1) + Activity Monitor (B2) — Details
+
+
+
+
+
+#### Step B1: Asana Sync + DuckDB (orchestrator, ~3 min)
+
+**Context files to load:**
+- asana-command-center.md (GIDs, sections, custom fields)
+- asana-duckdb-sync.md (sync protocol)
+
+**MCP tools used (orchestrator-direct):** SearchTasksInWorkspace, GetTaskDetails,
+GetTasksFromProject, GetPortfolioItems — all via Asana MCP. execute_query via DuckDB MCP.
+
+**Execution:**
+1. SearchTasksInWorkspace(assignee_any="1212732742544167", completed=false, sort_by=due_date)
+2. GetTaskDetails for each task (batch — opt_fields include custom_fields, projects, memberships)
+3. GetTasksFromProject for 6 projects: My Tasks, AU, MX, WW Testing, WW Acquisition, Paid App
+4. Merge by task_gid, map custom fields, UPSERT into asana.asana_tasks
+5. Soft-delete missing tasks
+6. Daily snapshot to asana.asana_task_history
+7. Coherence check (6 checks)
+8. Schema drift detection
+
+**Wiki articles are NOT tracked in Asana.** Article pipeline state lives in
+~/shared/wiki/agent-created/ (source), SharePoint Documents/Artifacts/ (published),
+and the Kiro dashboard Pipeline view. Do not add article-tracking projects to this sync.
+
+**Writes:**
+- asana.asana_tasks (DuckDB — UPSERT)
+- asana.asana_task_history (DuckDB — INSERT)
+- ~/shared/context/intake/asana-digest.md (file)
+- ~/shared/context/active/asana-morning-snapshot.json (file, legacy)
+- Also writes task list to ~/shared/context/active/asana-task-list-b1.json (handoff to B2)
+
+**Does NOT touch:** Slack MCP, Outlook MCP, any slack-* files
+
+
+
+
+#### Step B2: Asana Activity Monitor (orchestrator, ~2 min, AFTER B1)
+
+**Context files to load:**
+- asana-activity-monitor-protocol.md (activity detection rules)
+- asana-scan-state.json (last scan timestamps — READ then WRITE)
+- asana-task-list-b1.json (task list from B1 — avoids re-pulling from Asana)
+
+**MCP tools used (orchestrator-direct):** GetTaskStories via Asana MCP.
+
+**Rate Limit Mitigation:**
+- Read task list from B1 output file (no SearchTasksInWorkspace call)
+- Sort tasks by priority before scanning:
+  1. Tasks with Brandon/Kate as collaborator or recent commenter (highest signal)
+  2. Tasks due within 3 days
+  3. Tasks with recent section moves
+  4. Everything else (lowest priority)
+- On 429 rate limit: wait 60s, retry once, then skip remaining tasks
+- Log which tasks were scanned vs skipped for next-run prioritization
+
+**Writes:**
+- ~/shared/context/intake/asana-activity.md (file)
+- ~/shared/context/active/asana-scan-state.json (file — update timestamps)
+
+**Does NOT touch:** DuckDB (zero writes), Slack MCP, Outlook MCP, asana-digest.md
+
+---
+
+
+
+
+## Failure Handling
+
+| Failure | Impact | Mitigation |
+|---------|--------|-----------|
+| Subagent A (Slack) fails | No slack-digest.md | Phase 2 signal-to-task skips Slack signals. Frontend shows "Slack scan failed" in brief. |
+| Orchestrator B1 (Asana Sync) fails | No DuckDB sync, no asana-digest | Phase 3-4 cannot run (depend on synced data). Frontend falls back to live Asana queries. |
+| Orchestrator B2 (Activity) fails | No asana-activity.md | Frontend skips activity signals section. Non-critical — no downstream dependencies. |
+| Subagent C (Email+Cal) fails | No email-triage.md, no calendar/email in DuckDB | Phase 2 signal-to-task skips email signals. Frontend falls back to live Outlook MCP for calendar. |
+| Subagent D (Loop) fails | No Loop page refresh | Stale content persists. Non-critical — no downstream dependencies. |
+| Subagent E (Hedy) fails | No hedy-digest.md, no meeting signals | Phase 2 signal-to-task skips Hedy signals. Frontend skips meeting recap section. Non-critical. |
+| DuckDB unreachable | Subagent A + orchestrator B1 partially fail | Slack digest still written to file. Asana digest still written to file. DuckDB-dependent processing skipped. |
+| Slack MCP rate limit | Subagent A slows/partial | Partial digest written. Missing channels flagged. |
+| Asana MCP rate limit | Orchestrator B1+B2 slow | B2 runs AFTER B1 (sequential), reducing contention. B2 prioritizes high-value tasks. Rate-limited tasks logged for next run. |
+
+**Rule:** If orchestrator B1 (Asana Sync) fails, skip Phases 3-4 entirely. The frontend can still run from live Asana API calls.
+**Rule:** Asana MCP calls NEVER go to subagents. This is a hard constraint.
+
+---
 
 
 
@@ -55,6 +169,138 @@ Slack, Outlook, DuckDB, and SharePoint MCP servers work reliably from subagents.
 **Rule:** ALL Asana MCP calls MUST run in the orchestrator (parent agent), never in
 subagents. This is a hard constraint, not a preference. Subagents that need Asana
 data should receive it via file handoff from the orchestrator.
+
+
+
+
+### Subagent A: Slack Ingestion
+
+**Context files to load:**
+- spine.md (tool access)
+- slack-channel-registry.json (channel config)
+- slack-scan-state.json (last scan timestamps)
+- signal-intelligence.md (topic extraction protocol)
+
+**MCP servers used:** Slack MCP, DuckDB MCP
+
+**Thread Reply Fetch Protocol (MANDATORY):**
+After ingesting channel history, fetch thread replies to capture Richard's thread-level responses:
+
+1. Query just-ingested messages for thread parents:
+   ```sql
+   SELECT DISTINCT ts, channel_id, channel_name, reply_count
+   FROM signals.slack_messages
+   WHERE reply_count > 0
+     AND ingested_at >= CURRENT_TIMESTAMP - INTERVAL '1 hour'
+   ORDER BY reply_count DESC
+   ```
+2. For each thread parent (batch up to 10 per call):
+   ```
+   batch_get_thread_replies(threads=[{channelId, threadTs}])
+   ```
+3. For each reply in the response, INSERT into signals.slack_messages:
+   - `ts` = reply timestamp
+   - `thread_ts` = parent message ts (the threadTs from the call)
+   - `is_thread_reply` = TRUE
+   - `is_richard` = TRUE if reply author is U040ECP305S
+   - `richard_mentioned` = TRUE if reply text contains U040ECP305S
+   - All other fields extracted normally (author, text, reactions, etc.)
+4. Priority order: fetch threads from Brandon/Kate/Lena channels first (avoidance detection accuracy).
+5. Cap: max 50 threads per run to stay within time budget (~1 min for thread fetch).
+6. Skip threads already fully ingested (check: if slack_messages has rows with matching thread_ts AND is_thread_reply = TRUE AND count matches reply_count, skip).
+
+This ensures signals.slack_unanswered.richard_replied is accurate — it can detect thread-level responses, not just channel-level.
+
+**Writes:**
+- ~/shared/context/intake/slack-digest.md (file)
+- ~/shared/context/active/slack-scan-state.json (file)
+- signals.slack_messages (DuckDB — includes thread replies)
+- signals.signal_tracker (DuckDB)
+
+**Does NOT touch:** Asana MCP, Outlook MCP, any asana-* files
+
+---
+
+
+
+
+## Architecture
+
+
+
+
+## Migration Path
+
+1. ✅ v1 tested (2026-04-16): 5 subagents parallel. Asana MCP failed from subagent. Identified root cause.
+2. ✅ v2 protocol written (2026-04-16): Asana moved to orchestrator. B2 sequential after B1. Hedy added.
+3. NEXT: Run one morning with v2 architecture. Verify Asana data is fresh (not 24h stale).
+4. If clean: update am-auto.kiro.hook to reference v2 prompt pattern.
+5. Keep v1 failure documented in this file as a constraint (MCP Reliability section above).
+
+### Subagent E: Hedy Meeting Sync
+
+**Context files to load:**
+- spine.md (tool access)
+- memory.md (relationship graph for attendee context)
+- signal-intelligence.md (topic extraction for cross-channel reinforcement)
+
+**MCP servers used:** Hedy MCP, DuckDB MCP
+
+**Execution order:**
+1. Pull recent meeting recaps/transcripts since last AM scan (use Hedy MCP tools: list sessions, get recaps, get action items)
+2. For each meeting: extract action items, decisions, topics, attendees
+3. Classify by meeting series (stakeholder/team/manager/peer) using attendee names
+4. INSERT meeting data into signals.hedy_meetings (DuckDB)
+5. Extract topics → reinforce in signals.signal_tracker (DuckDB) with +1.0 weight (meeting mentions are high-signal)
+6. Write hedy-digest.md (file)
+
+**Writes:**
+- signals.hedy_meetings (DuckDB — INSERT)
+- signals.signal_tracker (DuckDB — UPDATE reinforcement only, shared with Subagent A but different source_channel values prevent conflicts)
+- ops.data_freshness (DuckDB — UPDATE hedy_meetings row)
+- ~/shared/context/intake/hedy-digest.md (file)
+
+**Does NOT touch:** Slack MCP, Asana MCP, Outlook MCP, SharePoint MCP, any slack-*/asana-*/email-* files
+
+---
+
+
+
+
+## Shared Resource Isolation
+
+The key to safe parallelism: no two concurrent writers touch the same file or DuckDB table.
+B1 and B2 are sequential (orchestrator), so they don't conflict with each other.
+Subagents A, C, D, E are parallel and isolated from each other AND from the orchestrator's Asana work.
+
+| Resource | Subagent A (Slack) | Orchestrator B1 (Asana Sync) | Orchestrator B2 (Activity) | Subagent C (Email+Cal) | Subagent D (Loop) | Subagent E (Hedy) |
+|----------|-------------------|-------------------------|----------------------|----------------------|-------------------|-------------------|
+| slack-digest.md | WRITE | — | — | — | — | — |
+| asana-digest.md | — | WRITE | — | — | — | — |
+| email-triage.md | — | — | — | WRITE | — | — |
+| asana-activity.md | — | — | WRITE | — | — | — |
+| hedy-digest.md | — | — | — | — | — | WRITE |
+| slack-scan-state.json | WRITE | — | — | — | — | — |
+| asana-scan-state.json | — | — | WRITE | — | — | — |
+| asana-morning-snapshot.json | — | WRITE | — | — | — | — |
+| asana-task-list-b1.json | — | WRITE | READ | — | — | — |
+| signals.slack_messages | WRITE (incl. thread replies) | — | — | — | — | — |
+| signals.signal_tracker | WRITE | — | — | — | — | WRITE* |
+| signals.emails | — | — | — | WRITE | — | — |
+| signals.hedy_meetings | — | — | — | — | — | WRITE |
+| asana.asana_tasks | — | WRITE | — | — | — | — |
+| asana.asana_task_history | — | WRITE | — | — | — | — |
+| main.calendar_events | — | — | — | WRITE | — | — |
+| docs.loop_pages | — | — | — | — | WRITE | — |
+
+*signal_tracker: Both A and E write to this table but with different source_channel values ('slack' vs 'hedy'). No row-level conflicts — safe for parallel execution.
+
+---
+
+
+
+
+## Subagent Specifications
 
 
 
@@ -238,236 +484,19 @@ AM-Backend Hook (orchestrator)
 
 
 
-## Subagent Specifications
-
-
-
-
-### ORCHESTRATOR-OWNED: Asana Sync (B1) + Activity Monitor (B2)
-
-**⚠️ NOT subagents.** These run in the parent orchestrator agent because Asana MCP
-(enterprise-asana-mcp) uses an ESD proxy that is unreliable from subagent contexts.
-This is a hard constraint learned from production (2026-04-16).
-
-#### ORCHESTRATOR-OWNED: Asana Sync (B1) + Activity Monitor (B2) — Details
-
-
-
-
-
-#### Step B1: Asana Sync + DuckDB (orchestrator, ~3 min)
-
-**Context files to load:**
-- asana-command-center.md (GIDs, sections, custom fields)
-- asana-duckdb-sync.md (sync protocol)
-
-**MCP tools used (orchestrator-direct):** SearchTasksInWorkspace, GetTaskDetails,
-GetTasksFromProject, GetPortfolioItems — all via Asana MCP. execute_query via DuckDB MCP.
-
-**Execution:**
-1. SearchTasksInWorkspace(assignee_any="1212732742544167", completed=false, sort_by=due_date)
-2. GetTaskDetails for each task (batch — opt_fields include custom_fields, projects, memberships)
-3. GetTasksFromProject for 6 projects: My Tasks, AU, MX, WW Testing, WW Acquisition, Paid App
-4. Merge by task_gid, map custom fields, UPSERT into asana.asana_tasks
-5. Soft-delete missing tasks
-6. Daily snapshot to asana.asana_task_history
-7. Coherence check (6 checks)
-8. Schema drift detection
-
-**Wiki articles are NOT tracked in Asana.** Article pipeline state lives in
-~/shared/wiki/agent-created/ (source), SharePoint Documents/Artifacts/ (published),
-and the Kiro dashboard Pipeline view. Do not add article-tracking projects to this sync.
-
-**Writes:**
-- asana.asana_tasks (DuckDB — UPSERT)
-- asana.asana_task_history (DuckDB — INSERT)
-- ~/shared/context/intake/asana-digest.md (file)
-- ~/shared/context/active/asana-morning-snapshot.json (file, legacy)
-- Also writes task list to ~/shared/context/active/asana-task-list-b1.json (handoff to B2)
-
-**Does NOT touch:** Slack MCP, Outlook MCP, any slack-* files
-
-
-
-
-#### Step B2: Asana Activity Monitor (orchestrator, ~2 min, AFTER B1)
-
-**Context files to load:**
-- asana-activity-monitor-protocol.md (activity detection rules)
-- asana-scan-state.json (last scan timestamps — READ then WRITE)
-- asana-task-list-b1.json (task list from B1 — avoids re-pulling from Asana)
-
-**MCP tools used (orchestrator-direct):** GetTaskStories via Asana MCP.
-
-**Rate Limit Mitigation:**
-- Read task list from B1 output file (no SearchTasksInWorkspace call)
-- Sort tasks by priority before scanning:
-  1. Tasks with Brandon/Kate as collaborator or recent commenter (highest signal)
-  2. Tasks due within 3 days
-  3. Tasks with recent section moves
-  4. Everything else (lowest priority)
-- On 429 rate limit: wait 60s, retry once, then skip remaining tasks
-- Log which tasks were scanned vs skipped for next-run prioritization
-
-**Writes:**
-- ~/shared/context/intake/asana-activity.md (file)
-- ~/shared/context/active/asana-scan-state.json (file — update timestamps)
-
-**Does NOT touch:** DuckDB (zero writes), Slack MCP, Outlook MCP, asana-digest.md
-
----
-
-
-
-
-### Subagent A: Slack Ingestion
-
-**Context files to load:**
-- spine.md (tool access)
-- slack-channel-registry.json (channel config)
-- slack-scan-state.json (last scan timestamps)
-- signal-intelligence.md (topic extraction protocol)
-
-**MCP servers used:** Slack MCP, DuckDB MCP
-
-**Thread Reply Fetch Protocol (MANDATORY):**
-After ingesting channel history, fetch thread replies to capture Richard's thread-level responses:
-
-1. Query just-ingested messages for thread parents:
-   ```sql
-   SELECT DISTINCT ts, channel_id, channel_name, reply_count
-   FROM signals.slack_messages
-   WHERE reply_count > 0
-     AND ingested_at >= CURRENT_TIMESTAMP - INTERVAL '1 hour'
-   ORDER BY reply_count DESC
-   ```
-2. For each thread parent (batch up to 10 per call):
-   ```
-   batch_get_thread_replies(threads=[{channelId, threadTs}])
-   ```
-3. For each reply in the response, INSERT into signals.slack_messages:
-   - `ts` = reply timestamp
-   - `thread_ts` = parent message ts (the threadTs from the call)
-   - `is_thread_reply` = TRUE
-   - `is_richard` = TRUE if reply author is U040ECP305S
-   - `richard_mentioned` = TRUE if reply text contains U040ECP305S
-   - All other fields extracted normally (author, text, reactions, etc.)
-4. Priority order: fetch threads from Brandon/Kate/Lena channels first (avoidance detection accuracy).
-5. Cap: max 50 threads per run to stay within time budget (~1 min for thread fetch).
-6. Skip threads already fully ingested (check: if slack_messages has rows with matching thread_ts AND is_thread_reply = TRUE AND count matches reply_count, skip).
-
-This ensures signals.slack_unanswered.richard_replied is accurate — it can detect thread-level responses, not just channel-level.
-
-**Writes:**
-- ~/shared/context/intake/slack-digest.md (file)
-- ~/shared/context/active/slack-scan-state.json (file)
-- signals.slack_messages (DuckDB — includes thread replies)
-- signals.signal_tracker (DuckDB)
-
-**Does NOT touch:** Asana MCP, Outlook MCP, any asana-* files
-
----
-
-
-
-
-## Failure Handling
-
-| Failure | Impact | Mitigation |
-|---------|--------|-----------|
-| Subagent A (Slack) fails | No slack-digest.md | Phase 2 signal-to-task skips Slack signals. Frontend shows "Slack scan failed" in brief. |
-| Orchestrator B1 (Asana Sync) fails | No DuckDB sync, no asana-digest | Phase 3-4 cannot run (depend on synced data). Frontend falls back to live Asana queries. |
-| Orchestrator B2 (Activity) fails | No asana-activity.md | Frontend skips activity signals section. Non-critical — no downstream dependencies. |
-| Subagent C (Email+Cal) fails | No email-triage.md, no calendar/email in DuckDB | Phase 2 signal-to-task skips email signals. Frontend falls back to live Outlook MCP for calendar. |
-| Subagent D (Loop) fails | No Loop page refresh | Stale content persists. Non-critical — no downstream dependencies. |
-| Subagent E (Hedy) fails | No hedy-digest.md, no meeting signals | Phase 2 signal-to-task skips Hedy signals. Frontend skips meeting recap section. Non-critical. |
-| DuckDB unreachable | Subagent A + orchestrator B1 partially fail | Slack digest still written to file. Asana digest still written to file. DuckDB-dependent processing skipped. |
-| Slack MCP rate limit | Subagent A slows/partial | Partial digest written. Missing channels flagged. |
-| Asana MCP rate limit | Orchestrator B1+B2 slow | B2 runs AFTER B1 (sequential), reducing contention. B2 prioritizes high-value tasks. Rate-limited tasks logged for next run. |
-
-**Rule:** If orchestrator B1 (Asana Sync) fails, skip Phases 3-4 entirely. The frontend can still run from live Asana API calls.
-**Rule:** Asana MCP calls NEVER go to subagents. This is a hard constraint.
-
----
-
-
-
-
-### Subagent D: Loop Page Sync
-
-**Context files to load:**
-- loop-page-sync.md (sync protocol)
-
-**MCP servers used:** SharePoint MCP (sharepoint_read_loop), DuckDB MCP
-
-**Writes:**
-- docs.loop_pages (DuckDB — UPDATE content)
-- ops.data_freshness (DuckDB — UPDATE loop_pages row)
-
-**Does NOT touch:** Slack MCP, Asana MCP, Outlook MCP, Hedy MCP, any file outputs
-
----
-
-
-
-
-### Subagent E: Hedy Meeting Sync
-
-**Context files to load:**
-- spine.md (tool access)
-- memory.md (relationship graph for attendee context)
-- signal-intelligence.md (topic extraction for cross-channel reinforcement)
-
-**MCP servers used:** Hedy MCP, DuckDB MCP
-
-**Execution order:**
-1. Pull recent meeting recaps/transcripts since last AM scan (use Hedy MCP tools: list sessions, get recaps, get action items)
-2. For each meeting: extract action items, decisions, topics, attendees
-3. Classify by meeting series (stakeholder/team/manager/peer) using attendee names
-4. INSERT meeting data into signals.hedy_meetings (DuckDB)
-5. Extract topics → reinforce in signals.signal_tracker (DuckDB) with +1.0 weight (meeting mentions are high-signal)
-6. Write hedy-digest.md (file)
-
-**Writes:**
-- signals.hedy_meetings (DuckDB — INSERT)
-- signals.signal_tracker (DuckDB — UPDATE reinforcement only, shared with Subagent A but different source_channel values prevent conflicts)
-- ops.data_freshness (DuckDB — UPDATE hedy_meetings row)
-- ~/shared/context/intake/hedy-digest.md (file)
-
-**Does NOT touch:** Slack MCP, Asana MCP, Outlook MCP, SharePoint MCP, any slack-*/asana-*/email-* files
-
----
-
-
-
-
-## Shared Resource Isolation
-
-The key to safe parallelism: no two concurrent writers touch the same file or DuckDB table.
-B1 and B2 are sequential (orchestrator), so they don't conflict with each other.
-Subagents A, C, D, E are parallel and isolated from each other AND from the orchestrator's Asana work.
-
-| Resource | Subagent A (Slack) | Orchestrator B1 (Asana Sync) | Orchestrator B2 (Activity) | Subagent C (Email+Cal) | Subagent D (Loop) | Subagent E (Hedy) |
-|----------|-------------------|-------------------------|----------------------|----------------------|-------------------|-------------------|
-| slack-digest.md | WRITE | — | — | — | — | — |
-| asana-digest.md | — | WRITE | — | — | — | — |
-| email-triage.md | — | — | — | WRITE | — | — |
-| asana-activity.md | — | — | WRITE | — | — | — |
-| hedy-digest.md | — | — | — | — | — | WRITE |
-| slack-scan-state.json | WRITE | — | — | — | — | — |
-| asana-scan-state.json | — | — | WRITE | — | — | — |
-| asana-morning-snapshot.json | — | WRITE | — | — | — | — |
-| asana-task-list-b1.json | — | WRITE | READ | — | — | — |
-| signals.slack_messages | WRITE (incl. thread replies) | — | — | — | — | — |
-| signals.signal_tracker | WRITE | — | — | — | — | WRITE* |
-| signals.emails | — | — | — | WRITE | — | — |
-| signals.hedy_meetings | — | — | — | — | — | WRITE |
-| asana.asana_tasks | — | WRITE | — | — | — | — |
-| asana.asana_task_history | — | WRITE | — | — | — | — |
-| main.calendar_events | — | — | — | WRITE | — | — |
-| docs.loop_pages | — | — | — | — | WRITE | — |
-
-*signal_tracker: Both A and E write to this table but with different source_channel values ('slack' vs 'hedy'). No row-level conflicts — safe for parallel execution.
+## Hook Trigger Change
+
+The am-auto.kiro.hook prompt must instruct the orchestrator to:
+1. Fire 4 subagents (A, C, D, E) in parallel via invokeSubAgent
+2. Run B1 (Asana Sync) directly in the orchestrator using Asana MCP tools
+3. After B1 completes, run B2 (Activity Monitor) directly in the orchestrator
+4. Wait for all 4 subagents to complete (barrier)
+5. Proceed to Phase 2+
+
+The hook prompt should include:
+```
+"prompt": "Run the autonomous morning backend using the PARALLEL architecture.\n\nRead and execute ~/shared/context/protocols/am-backend-parallel.md.\n\nCRITICAL: Asana MCP calls (B1 + B2) run in the ORCHESTRATOR, not subagents.\nFire 4 subagents (Slack, Email, Loop, Hedy) in parallel.\nRun Asana Sync (B1) directly, then Activity Monitor (B2) directly.\nWait for all to complete before Phase 2.\n\n..."
+```
 
 ---
 
@@ -505,49 +534,24 @@ Subagents A, C, D, E are parallel and isolated from each other AND from the orch
 
 
 
-## Timing Estimates
+## Why Parallel (v2)
 
-| Phase | Sequential (old) | Parallel v1 (broken) | Parallel v2 (current) |
-|-------|-----------------|---------------------|----------------------|
-| Phase 0: Schema check | 10s | 10s | 10s |
-| Phase 1: Ingestion | ~12 min | ~5 min (but Asana failed) | ~5 min (max of: Slack 5m, Orch B1+B2 5m, Email 1m, Loop 1m, Hedy 1m) |
-| Phase 2: Processing | ~3 min | ~3 min | ~3 min |
-| Phase 2.5: Context Enrichment | — | ~4 min | ~4 min |
-| Phase 3: Enrichment | ~2 min | ~2 min | ~2 min |
-| Phase 4: Portfolio | ~3 min | ~3 min | ~3 min |
-| Phase 5: Compile | 10s | 10s | 10s |
-| **Total** | **~20 min** | **~16 min (with gaps)** | **~16 min (no gaps)** |
+Phase 1 (Data Collection) has independent data streams with no cross-dependencies:
+- Slack scan (Subagent A) → Slack MCP, signals.slack_messages, slack-digest.md
+- Asana sync (Orchestrator B1) → Asana MCP, asana.asana_tasks, asana-digest.md
+- Asana activity (Orchestrator B2, after B1) → Asana MCP, asana-activity.md
+- Email + calendar (Subagent C) → Outlook MCP, signals.emails, main.calendar_events, email-triage.md
+- Loop page sync (Subagent D) → SharePoint MCP, docs.loop_pages
+- Hedy meetings (Subagent E) → Hedy MCP, signals.hedy_meetings, hedy-digest.md
 
-Key change: wall-clock time is the same (~16 min) but Asana data is now guaranteed fresh because it runs in the orchestrator where MCP access is reliable. The orchestrator runs B1+B2 concurrently with the 4 subagents, so no time is lost.
+Wall-clock: max(Slack ~5min, Orchestrator B1+B2 ~5min, Email ~1min, Loop ~1min, Hedy ~1min) ≈ 5 min.
 
----
-
-
-
-
-## Hook Trigger Change
-
-The am-auto.kiro.hook prompt must instruct the orchestrator to:
-1. Fire 4 subagents (A, C, D, E) in parallel via invokeSubAgent
-2. Run B1 (Asana Sync) directly in the orchestrator using Asana MCP tools
-3. After B1 completes, run B2 (Activity Monitor) directly in the orchestrator
-4. Wait for all 4 subagents to complete (barrier)
-5. Proceed to Phase 2+
-
-The hook prompt should include:
-```
-"prompt": "Run the autonomous morning backend using the PARALLEL architecture.\n\nRead and execute ~/shared/context/protocols/am-backend-parallel.md.\n\nCRITICAL: Asana MCP calls (B1 + B2) run in the ORCHESTRATOR, not subagents.\nFire 4 subagents (Slack, Email, Loop, Hedy) in parallel.\nRun Asana Sync (B1) directly, then Activity Monitor (B2) directly.\nWait for all to complete before Phase 2.\n\n..."
-```
+Phase 2+ (Processing) depends on Phase 1 outputs — runs sequentially after the ingestion barrier.
 
 ---
 
 
 
 
-## Migration Path
 
-1. ✅ v1 tested (2026-04-16): 5 subagents parallel. Asana MCP failed from subagent. Identified root cause.
-2. ✅ v2 protocol written (2026-04-16): Asana moved to orchestrator. B2 sequential after B1. Hedy added.
-3. NEXT: Run one morning with v2 architecture. Verify Asana data is fresh (not 24h stale).
-4. If clean: update am-auto.kiro.hook to reference v2 prompt pattern.
-5. Keep v1 failure documented in this file as a constraint (MCP Reliability section above).
+**Common failure:** Misinterpreting the scope of this section — it covers only Why Parallel (v2), not adjacent concerns.

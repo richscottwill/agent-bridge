@@ -13,74 +13,6 @@ All Asana writes follow the Guardrail Protocol in asana-command-center.md.
 
 
 
-## Phase 1: Meeting Ingestion
-
-
-
-### Context Load
-meetings/README.md, current.md, nervous-system.md, memory.md, asana-command-center.md.
-
-
-
-### Hedy Pull - GetSessions (today), GetSessionDetails for each. - Extract: highlights, todos, action items, speaking share, hedging count. ### Outlook + Email
-- Auto-meeting folder scan.
-- Email threads related to meetings.
-
-
-
-
-### Meeting Series File Updates
-For each session: ONE Latest Session entry, Open Items, Running Themes in meetings/ series files.
-
-
-
-### Organ Updates (autonomous)
-- memory.md: relationship updates from meeting dynamics.
-- nervous-system.md: Loop 7 (meeting patterns), Loop 3 (pattern trajectory).
-- current.md: people updates, new action items.
-- device.md: delegation updates.
-
-
-
-### Meeting-to-Task Pipeline
-Per ~/shared/context/protocols/meeting-to-task-pipeline.md:
-1. Extract action items from each session.
-2. Richard's items → dedup check → CreateTask or AddComment.
-3. Others' items → append to hands.md dependencies.
-4. INSERT into DuckDB meeting_analytics + meeting_highlights.
-5. Log to workflow_executions.
-
-
-
-### Output
-Queue for EOD-Frontend:
-- Tasks created/updated from meetings.
-- Dependencies logged.
-- Meeting analytics summary.
-
-
----
-
-
-
-## Phase 2: Asana EOD Reconciliation
-
-
-
-### Context Load
-heart.md, changelog.md, current.md, gut.md, asana-command-center.md.
-
-
-
-### Step 0 — Delta Sync to DuckDB
-Execute ~/shared/context/protocols/asana-duckdb-sync.md delta sync:
-1. Pull today's completions → UPDATE asana_tasks.
-2. Detect new tasks since morning → INSERT.
-3. Update daily snapshot in asana_task_history.
-4. Run coherence check.
-
-
-
 ### Step 1 — Time Travel Diff
 ```sql
 SELECT snapshot_name FROM md_information_schema.database_snapshots
@@ -93,17 +25,28 @@ Diff: completions since morning, new tasks, priority changes. Clean up: `DROP DA
 
 
 
-### Step 2 — Daily Reset (AUTO-EXECUTE)
-Tasks with Priority_RW=Today in morning but still incomplete → demote to Urgent.
-Update Kiro_RW: 'M/D: Carried fwd. [reason]. [next action].'
-Queue carry-forward list for EOD-Frontend presentation.
+### Details
+
+- Meeting analytics summary.
+
+---
+
+
+### Organ Updates (autonomous)
+
+### Details
+
+- memory.md: relationship updates from meeting dynamics.
+- nervous-system.md: Loop 7 (meeting patterns), Loop 3 (pattern trajectory).
+- current.md: people updates, new action items.
+- device.md: delegation updates.
 
 
 
-### Step 3 — Recurring Task Auto-Creation (AUTO-EXECUTE)
-For each task completed today, check against known recurring patterns.
-If recurring and next instance missing → auto-create next instance with same Routine_RW + project + assignee.
-Log each creation to audit trail. Include in EOD-Frontend summary (informational, not approval).
+### Organ Cascade
+All organs. Skip <48h + minor changes. Volume control. Hot topics. People Watch. Process intake/ files.
+
+---
 
 
 
@@ -111,6 +54,7 @@ Log each creation to audit trail. Include in EOD-Frontend summary (informational
 Move completed tasks to terminal sections:
 - AU Complete: `1213924252564467`
 - MX Complete: `1213924047255341`
+  - *Example:* MX Complete → apply this when the situation matches the described pattern.
 - WW Testing Complete: `1205997667578902`
 - WW Acquisition Complete: `1206011240457091`
 - Paid App Complete: `1205997667578889`
@@ -118,13 +62,19 @@ Log each move to audit trail.
 
 
 
-### Step 5 — Blocker Registry
-Scan Kiro_RW and comments for blocker mentions. Queue updates for EOD-Frontend.
 
 
+- DuckDB EOD snapshot (via MCP `execute_query`): `CREATE SNAPSHOT eod_YYYYMMDD OF ps_analytics;`
+- Clean up snapshots > 30 days.
+- DuckDB daily_tracker insert (completed, carried, new, delta, buckets, levels, hard thing).
+- DuckDB l1_streak insert.
+- Steering integrity check.
+- Git sync: `git -C ~/shared add -A && git commit -m "EOD [date]" && git push`
+- Self-audit: cascade completeness, structural changes, coherence.
+- Log to changelog.md.
 
-### Step 6 — New Task Detection
-Tasks assigned to Richard since morning needing triage. Queue for EOD-Frontend.
+### Context Load
+meetings/README.md, current.md, nervous-system.md, memory.md, asana-command-center.md.
 
 
 
@@ -133,33 +83,8 @@ Classify completed + carry-forward tasks by L1-L5. Compute daily effort distribu
 
 
 
-### Step 8 — Portfolio + Wiki Reconciliation
-a. Wiki pipeline: read ~/shared/wiki/agent-created/_meta/draft-log.md for today's drafts and critic review queue updates. Count articles promoted DRAFT→REVIEW→FINAL.
-b. Portfolio projects: compare against morning state. Surface changes.
-c. Context surface refresh (weekly or on significant changes): AU (`1213917747438931`), MX (`1213917639688517`).
-
-
-
-### Output
-Write to `~/shared/context/active/eod-reconciliation.json`:
-```json
-{
-  "completed_today": [...],
-  "carried_forward": [...],
-  "new_tasks": [...],
-  "recurring_proposals": [...],
-  "blocker_updates": [...],
-  "five_levels": {"l1": N, "l2": N, "l3": N, "l4": N, "l5": N},
-  "portfolio_changes": {...},
-  "abps_ai_changes": {...}
-}
-```
-
----
-
-
-
-## Phase 3: Organ Cascade + Maintenance
+### Step 6 — New Task Detection
+Tasks assigned to Richard since morning needing triage. Queue for EOD-Frontend.
 
 
 
@@ -170,36 +95,17 @@ Write to `~/shared/context/active/eod-reconciliation.json`:
 
 
 
-### Workflow Observability Check
-1. Query workflow_reliability for degraded workflows (<80% success, >=3 runs).
-2. Query workflow_executions for 24h summary.
-3. Queue alerts for EOD-Frontend.
-
-
-
-### Communication Analytics (weekly — Friday only)
-- Weekly trends from meeting_analytics (trailing 4 weeks).
-- Coaching signal: group speaking share < 15% for 3+ consecutive weeks.
-- Queue results for EOD-Frontend.
-Execute ~/shared/context/protocols/communication-analytics.md:
+### Hedy Pull - GetSessions (today), GetSessionDetails for each. - Extract: highlights, todos, action items, speaking share, hedging count. ### Outlook + Email
+- Auto-meeting folder scan.
+- Email threads related to meetings.
 
 
 
 
-### Context Enrichment (KDS/ARCC)
-Execute ~/shared/context/protocols/context-enrichment.md:
-1. Read current.md → extract active projects.
-2. Generate 3-5 KDS queries.
-3. Score relevance, create intake files for findings >= 7.
-4. Log to enrichment_log in DuckDB.
-Non-blocking — skip if KDS unreachable.
-
-
-
-### Organ Cascade
-All organs. Skip <48h + minor changes. Volume control. Hot topics. People Watch. Process intake/ files.
-
----
+### Step 2 — Daily Reset (AUTO-EXECUTE)
+Tasks with Priority_RW=Today in morning but still incomplete → demote to Urgent.
+Update Kiro_RW: 'M/D: Carried fwd. [reason]. [next action].'
+Queue carry-forward list for EOD-Frontend presentation.
 
 
 
@@ -216,15 +122,10 @@ Update DuckDB + JSON fallback after each.
 
 
 
-## Phase 5: Housekeeping
-- DuckDB EOD snapshot (via MCP `execute_query`): `CREATE SNAPSHOT eod_YYYYMMDD OF ps_analytics;`
-- Clean up snapshots > 30 days.
-- DuckDB daily_tracker insert (completed, carried, new, delta, buckets, levels, hard thing).
-- DuckDB l1_streak insert.
-- Steering integrity check.
-- Git sync: `git -C ~/shared add -A && git commit -m "EOD [date]" && git push`
-- Self-audit: cascade completeness, structural changes, coherence.
-- Log to changelog.md.
+### Step 5 — Blocker Registry
+Scan Kiro_RW and comments for blocker mentions. Queue updates for EOD-Frontend.
+
+
 
 ### Details
 
@@ -249,10 +150,105 @@ If Karpathy CLI fails: skip experiments. Do not fall back to self-execution.
 
 
 
+### Meeting Series File Updates
+For each session: ONE Latest Session entry, Open Items, Running Themes in meetings/ series files.
+
+
+
+### Step 8 — Portfolio + Wiki Reconciliation
+a. Wiki pipeline: read ~/shared/wiki/agent-created/_meta/draft-log.md for today's drafts and critic review queue updates. Count articles promoted DRAFT→REVIEW→FINAL.
+b. Portfolio projects: compare against morning state. Surface changes.
+c. Context surface refresh (weekly or on significant changes): AU (`1213917747438931`), MX (`1213917639688517`).
+
+
+
+### Step 3 — Recurring Task Auto-Creation (AUTO-EXECUTE)
+For each task completed today, check against known recurring patterns.
+If recurring and next instance missing → auto-create next instance with same Routine_RW + project + assignee.
+Log each creation to audit trail. Include in EOD-Frontend summary (informational, not approval).
+
+
+
+## Phase 2: Asana EOD Reconciliation
+
+
+
 ### Suggestions
 Up to 3. Five Levels aligned, measurable, reversible.
 
 ---
+
+
+
+### Context Enrichment (KDS/ARCC)
+Execute ~/shared/context/protocols/context-enrichment.md:
+1. Read current.md → extract active projects.
+2. Generate 3-5 KDS queries.
+3. Score relevance, create intake files for findings >= 7.
+4. Log to enrichment_log in DuckDB.
+Non-blocking — skip if KDS unreachable.
+
+
+
+### Meeting-to-Task Pipeline
+Per ~/shared/context/protocols/meeting-to-task-pipeline.md:
+1. Extract action items from each session.
+2. Richard's items → dedup check → CreateTask or AddComment.
+3. Others' items → append to hands.md dependencies.
+### Workflow Observability Check
+1. Query workflow_reliability for degraded workflows (<80% success, >=3 runs).
+2. Query workflow_executions for 24h summary.
+3. Queue alerts for EOD-Frontend.
+
+
+
+## Phase 3: Organ Cascade + Maintenance
+
+
+
+## Phase 1: Meeting Ingestion
+
+
+
+### Output
+Write to `~/shared/context/active/eod-reconciliation.json`:
+```json
+{
+  "completed_today": [...],
+  "carried_forward": [...],
+  "new_tasks": [...],
+  "recurring_proposals": [...],
+  "blocker_updates": [...],
+  "five_levels": {"l1": N, "l2": N, "l3": N, "l4": N, "l5": N},
+  "portfolio_changes": {...},
+  "abps_ai_changes": {...}
+}
+```
+
+---
+
+
+
+### Communication Analytics (weekly — Friday only)
+- Weekly trends from meeting_analytics (trailing 4 weeks).
+- Coaching signal: group speaking share < 15% for 3+ consecutive weeks.
+- Queue results for EOD-Frontend.
+Execute ~/shared/context/protocols/communication-analytics.md:
+
+
+
+
+### Step 0 — Delta Sync to DuckDB
+Execute ~/shared/context/protocols/asana-duckdb-sync.md delta sync:
+1. Pull today's completions → UPDATE asana_tasks.
+2. Detect new tasks since morning → INSERT.
+3. Update daily snapshot in asana_task_history.
+4. Run coherence check.
+
+
+
+### Context Load
+heart.md, changelog.md, current.md, gut.md, asana-command-center.md.
 
 
 
@@ -278,8 +274,10 @@ Push key output artifacts to OneDrive for cross-device access and container-deat
 - eod-experiments.json → Kiro-Drive/system-state/
 - daily-brief-latest.md → Kiro-Drive/system-state/
 
-On Fridays, also push:
-- Portable body snapshot → Kiro-Drive/portable-body/body-snapshot-YYYY-MM-DD.md
-- rw-tracker.md → Kiro-Drive/system-state/
 
 Non-blocking: if SharePoint fails, log warning and continue. Local files are source of truth.
+
+### Output
+Queue for EOD-Frontend:
+- Tasks created/updated from meetings.
+- Dependencies logged.

@@ -87,34 +87,36 @@ When invoked (overnight, on-demand, or scheduled), the loop runs N experiments a
 
 
 
-### Step 1: Select Target
-Karpathy selects using a three-stage process: exclude → select target → select technique.
-**Pre-filter :**
-- Targets modified by maintenance in the current invocation
-- Target×technique combos with posterior_mean < 0.15 AND n_experiments > 10 (proven losers — stop wasting tokens)
-**Stage 1 — Target selection** :
-1. Targets where aggregate body accuracy is declining while word count is increasing (data-driven compression signal — organs only)
-2. Targets where COMPRESS prior is strong — known room to shrink
-3. Targets with stale sections
-4. UCB-weighted random: query `autoresearch_selection_weights` view, sample proportional to UCB score (balances exploitation of known-good combos with exploration of untested ones)
-**Stage 2 — Technique selection:**
-- Query `autoresearch_priors` for the selected target
-- Sample technique proportional to UCB score
-- High UCB = either proven effective or unexplored — both worth trying
-- **Selection bias check :** Force at least 30% of experiments onto techniques with <3 prior data points on the target. A healthy batch has ≤50% keep rate. Reverts are the learning signal.
-**Section selection:** Randomized. Number the sections in the target file, use shuf to pick one. Do not pick "the section that looks compressible" — that's selection bias. The experiment discovers what's compressible; the agent's intuition doesn't.
-**Worked example — target selection:** Pre-filter: hands.md on cooldown , brain×REMOVE at posterior_mean=0.12, n=12 . Stage 1: no organs show declining accuracy + rising word count. Stage 2: no COMPRESS priors > 0.7 with n > 5. Stage 3: gut.md last updated 9 days ago . Selected: gut. Technique: query priors, REWORD has UCB=0.99 . But 30% exploration rule fires — shuf picks MERGE . Section: `echo -e "1\n2\n3\n4" | shuf | head -1` → section 3.
-- Record word count of target organ
-- **Generate eval questions BEFORE applying the experiment.** Questions must be written while looking at the original content, not after seeing the result. This prevents unconscious question-easing.
-- Question count: 5 minimum for all experiments. Randomize difficulty by including a mix from all three levels:
-  - **Easy (1-2):** General concept questions answerable from section headers or topic sentences
-  - **Medium (1-2):** Specific facts requiring reading the section (names, dates, percentages)
-  - **Hard (1-2):** Precise details that compression is most likely to lose (IDs, formulas, multi-part facts like "CVR from X to Y", cross-references to other sections)
-  Use shuf to pick the difficulty mix. The difficulty distribution is itself a signal — track it in the experiment log.
-- Standing adversarial questions are ALWAYS included when their organ is the target (see Step 4)
-  - No fixed count. Karpathy judges what coverage the experiment needs.
+[38;5;10m> [0m### Step 1: Select Target[0m[0m
+Karpathy uses a three-stage process: exclude → select target → select technique.[0m[0m
+[0m[0m
+**Pre-filter:**[0m[0m
+- Targets modified by maintenance this invocation[0m[0m
+- Target×technique combos with posterior_mean < 0.15 AND n_experiments > 10 (proven losers)[0m[0m
+[0m[0m
+**Stage 1 — Target selection:**[0m[0m
+1. Targets where aggregate body accuracy is declining while word count increases (data-driven compression signal — organs only)[0m[0m
+2. Targets with strong COMPRESS prior — known room to shrink[0m[0m
+3. Targets with stale sections[0m[0m
+4. UCB-weighted random: sample from `autoresearch_selection_weights` proportional to UCB score (balances exploitation with exploration)[0m[0m
+[0m[0m
+**Stage 2 — Technique selection:**[0m[0m
+- Query `autoresearch_priors` for the selected target, sample technique proportional to UCB score (high UCB = proven effective or unexplored)[0m[0m
+- **Selection bias check:** Force ≥30% of experiments onto techniques with <3 prior data points on the target. Healthy batch: ≤50% keep rate. Reverts are the learning signal.[0m[0m
+[0m[0m
+**Section selection:** Randomized via shuf on numbered sections. Do not pick "the section that looks compressible" — that's selection bias. The experiment discovers what's compressible.[0m[0m
+[0m[0m
+**Worked example:** Pre-filter: hands.md on cooldown, brain×REMOVE at posterior_mean=0.12 (n=12). Stage 1: no declining-accuracy+rising-wordcount organs. Stage 2: no COMPRESS priors >0.7 with n>5. Stage 3: gut.md last updated 9 days ago → selected gut. Technique: REWORD has UCB=0.99, but 30% exploration rule fires — shuf picks MERGE. Section: `echo -e "1\n2\n3\n4" | shuf | head -1` → section 3.[0m[0m
+[0m[0m
+- Record target organ word count[0m[0m
+- **Generate eval questions BEFORE applying the experiment** — written from original content to prevent unconscious question-easing[0m[0m
+- Question count: 5 minimum. Randomize difficulty mix using shuf:[0m[0m
+ - **Easy (1-2):** General concepts from headers/topic sentences[0m[0m
+ - **Medium (1-2):** Specific facts requiring section reading (names, dates, percentages)[0m[0m
+ - **Hard (1-2):** Precise details compression most likely loses (IDs, formulas, multi-part facts, cross-references)[0m[0m
+ Track difficulty distribution in the experiment log.[0m[0m
+- Standing adversarial questions always included when their organ is the target (see Step 4) — count at Karpathy's judgment based on coverage needs[0m[0m
 - Save snapshot for rollback
-
 ### Step 3: Apply Experiment
 - Apply boldly. The eval is the safety net. Timid edits teach nothing; bold edits that break teach what's load-bearing.
 

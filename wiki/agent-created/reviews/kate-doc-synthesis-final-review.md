@@ -24,6 +24,10 @@ updated: 2026-04-12
 
 The synthesis compresses each workstream faithfully. Spot-checked every major claim:
 
+
+#### | Synthesis Claim
+
+
 | Synthesis Claim | Section Doc Source | Accurate? |
 |----------------|-------------------|-----------|
 | OCI: +35,196 regs, $16.7MM+ OPS | kate-doc-oci.md table | Yes |

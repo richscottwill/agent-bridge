@@ -171,24 +171,34 @@ These tasks are a subset of the Today list above. This section adds overdue-spec
 - **SLIPPING (3-6 days):** Needs attention this session — complete or reschedule
 - **FRESH (1-2 days):** Normal carry-forward — do today
 
-### Overdue Task Summary (9 tasks overdue as of Apr 3)
-
-| # | Task | Days Overdue | Tier | Recommended Action |
-|---|------|-------------|------|-------------------|
-| 1 | Look over AU landing page switch | 9d | STALE | Decide: do (30min), delegate, or kill |
-| 2 | Email overlay WW rollout/testing | 7d | STALE | Decide: do, delegate, or kill. Check subtask status |
-| 3 | Mondays - Write into EU SSR Acq Asana | 4d | SLIPPING | Complete or mark done + create next instance |
-| 4 | Weekly Reporting - Global WBR sheet | 4d | SLIPPING | Complete or mark done + create next instance |
-| 5 | AU meetings - Agenda | 3d | SLIPPING | Task Progress=Done. Mark complete now |
-| 6 | Come prepared: Bi-weekly with Adi | 2d | FRESH | Check if meeting happened. Complete or prep |
-| 7 | Testing Document for Kate | 2d | FRESH | THE HARD THING. Start outline today. Non-negotiable |
-| 8 | Monthly - Confirm actual budgets | 2d | FRESH | Finance actuals due EOD today. Do in Admin block |
-| 9 | MBR callout | 1d | FRESH | Monthly. Do in Admin block today |
-| 10 | Send AU team invoice for prev month | 1d | FRESH | Monthly. Send today — 10min |
-
-Note: Tasks #1 and #2 are STALE — these are the ones that need a decision, not just execution. The Kiro_RW entries above already contain the overdue-specific language. No additional Kiro_RW writes needed beyond what's in 5.1 — the overdue context is embedded in each entry.
-
-
+[38;5;10m> [0m### Overdue Task Summary (9 tasks overdue as of Apr 3)[0m[0m
+[0m[0m
+**Do Today (FRESH — act now before they slip)**[0m[0m
+[0m[0m
+| # | Task | Days Overdue | Recommended Action |[0m[0m
+|---|------|-------------|-------------------|[0m[0m
+| 8 | Monthly - Confirm actual budgets | 2d | Finance actuals due EOD today. Do in Admin block |[0m[0m
+| 9 | MBR callout | 1d | Monthly. Do in Admin block today |[0m[0m
+| 10 | Send AU team invoice for prev month | 1d | Monthly. Send today — 10min |[0m[0m
+| 7 | Testing Document for Kate | 2d | THE HARD THING. Start outline today. Non-negotiable |[0m[0m
+| 6 | Come prepared: Bi-weekly with Adi | 2d | Check if meeting happened. Complete or prep |[0m[0m
+[0m[0m
+**Complete or Close (SLIPPING — quick wins to clear)**[0m[0m
+[0m[0m
+| # | Task | Days Overdue | Recommended Action |[0m[0m
+|---|------|-------------|-------------------|[0m[0m
+| 5 | AU meetings - Agenda | 3d | Task Progress=Done. Mark complete now |[0m[0m
+| 3 | Mondays - Write into EU SSR Acq Asana | 4d | Complete or mark done + create next instance |[0m[0m
+| 4 | Weekly Reporting - Global WBR sheet | 4d | Complete or mark done + create next instance |[0m[0m
+[0m[0m
+**Decide: Do, Delegate, or Kill (STALE — these need a decision, not just execution)**[0m[0m
+[0m[0m
+| # | Task | Days Overdue | Recommended Action |[0m[0m
+|---|------|-------------|-------------------|[0m[0m
+| 1 | Look over AU landing page switch | 9d | Decide: do (30min), delegate, or kill |[0m[0m
+| 2 | Email overlay WW rollout/testing | 7d | Decide: do, delegate, or kill. Check subtask status |[0m[0m
+[0m[0m
+Note: The Kiro_RW entries above already contain the overdue-specific language. No additional Kiro_RW writes needed beyond what's in 5.1 — the overdue context is embedded in each entry.
 ### Overdue Pattern Analysis
 - 4 of 9 overdue tasks are recurring (EU SSR, WBR, AU Agenda, Bi-weekly Adi) — these should be marked complete and recreated, not carried forward
 - 2 are STALE with no activity (AU LP switch, Email overlay) — need Richard's decision

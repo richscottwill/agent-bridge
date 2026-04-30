@@ -4,6 +4,54 @@ All notable changes to the `agent-bridge` repo. Format follows [Common Changelog
 
 ---
 
+## [2026-04-30] — weekly-review R2 ten-mockup sprint, MPE fan chart, wiki-search redesign
+
+### Added
+
+- **Weekly-Review 10-mockup redesign sprint** — kiro-local authored 10 implementation-ready visual mockups (`context/intake/dashboard-research/mockups/`) from the 100-suggestion research report, then kiro-server + kiro-local shipped all 10 to `dashboards/weekly-review.html` in 10 separate commits (`3b19678` M1 sticky header + trust bar + TOC collapse, `f0269fc` M3 KPI sparklines + M4 bullet helper, `ef32a5d` M2 exception banner with recommended action, `5ecd639` M8 prior-week sparkline thread, `9f77e50` M10 waterfall variance decomposition, `2bccc47` M6 12-market small multiples, `dffc948` M5 reliability diagram + signed-error bars, `1530cf2` M7 Amazon 6-12 chart, plus revisions `0e8c4fe`). Sprint closed 2026-04-30T18:00Z. Handoff thread `agent-bus/threads/2026-04-30_dashboard-mockups-handoff/` has the full 10-post sprint record.
+- **MPE fan chart (M9)** — `mpe(m9) fan chart` (`1a29e51`) on `dashboards/projection.html`. Three CI bands (50/80/90 per BoE convention) rendered via Chart.js scenario mode. `V1_1_Slim.bootstrapCI` extended to emit `per_week.bands.{50,80,90}` + `totals.by_level`. Engine-side 80% added in `74a2930`. Existing `ciLow/ciHigh` and `regs.{lower,upper}` preserved for back-compat.
+- **Wiki-search page redesign** — `73073f1` ports `dashboards/wiki-search.html` to projection-design-system light theme and adds a SharePoint-style front-page feed (6 sections: This week callout grid, Quick picks, Browse by topic, Recently updated, Needs attention, Browse by category). M01+M02+M07+M11 of a separate 10-mockup track for the wiki dashboard. Follow-ups `adbaf9b` (WS-M06 topic small-multiples grid) + `e496956` (WS-M10 graph minimap with force-directed layout, Obsidian-pattern) extend the redesign — kiro-local adopted `WS-M##` prefix unilaterally, which resolves the naming-collision concern kiro-server raised on the parallel dashboard-mockups-handoff thread (post 010). Spec at `context/intake/wiki-dashboard-redesign/` with screenshots in `screenshots/`. Thread `agent-bus/threads/2026-04-30_wiki-dashboard-redesign/` now at 3 posts.
+- **Ideas v3 steering files** (`197f32b`, `7a87873`, `85f8f9b`) — `lens-brandon.md`, `lens-kate.md`, `lens-todd.md` (reviewer-lens triplet), `op1-kill-list-first.md` (tradeoff spine), `unasked-question-log.md` (always-on rule), `pre-mortem-nudge.kiro.hook` (auto-trigger on high-stakes drafts). 4 of 7 kiro-local v2 ideas shipped.
+- **Karpathy queue triage** (`302d0fe`, `83a2e25`) — Issue 8 validity gate shipped to experiment framework, Issue 9 moved out of queue, loop-dormancy finding corrected via addendum. Karpathy-verdict updates preserved as the single source of truth for experiment outcomes.
+- **Dashboards tooling** — `dashboards/backfill-ledger.py` (one-time backfill of 17+7+8+7 commitments into `main.commitment_ledger` + intel JSON, idempotent by text-hash dedup), `dashboards/refresh-system-flow.py` + `dashboards/data/system-flow-data.json` (live-data port of System Flow page — sibling to `refresh-body-system.py`, fail-loud token resolution), `dashboards/refresh-agent-activity.py` (activity coverage scan across 15+ DuckDB tables), `dashboards/state-files/market.html` (generalized market state viewer). All light-themed via `projection-design-system.css` tokens.
+- **Context briefs + feedback queue** — `context/active/briefs/2026-04-30-am-brief.md` + `baloo-feedback.md`, `context/active/daily-brief-latest.md`, `context/active/ledger-feedback-queue.json`.
+- **Wiki staging** — `wiki/staging/polaris-brand-lp-qa-feedback-consolidation.md` (consolidation doc awaiting librarian publication).
+- **Progress charts site** — `tools/progress-charts/site/activity.html`, `tools/progress-charts/site/overview.html`.
+
+### Changed
+
+- **Soul + body organs + steering** — `.kiro/steering/soul.md`, `.kiro/steering/steering-index.md`, `.kiro/steering/unasked-question-log.md`, and all 12 body organs (`amcc.md`, `brain.md`, `eyes.md`, `gut.md`, `heart.md`, `memory.md`, `nervous-system.md`, `roster.md`, `spine.md`, `topic-watchlist.md`, `amazon-politics.md`, `body.md`) absorbed the ideas-v3 + sprint-closed state (markets field added to Identity, Level 1 struggling-active marker, agent-bus routing rules, standing directive for kiro-server posting without asking).
+- **Agents + hooks** — all 11 agents (`wbr-callouts/*`, `wiki-team/*`, `.kiro/agents/*.json`) and 16 hooks (`mpe-*`, `am-*`, `weekly-regime-fit`, `wbr-pipeline-trigger`, `topic-sentry`, etc.) received absorption updates from the sprint (wiki team split refined, weekly-review M-series mockup references in triage prompts, naming-collision avoidance note wired into kiro-server bus-posting voice).
+- **24 steering files** — style guides, protocols, guardrails updated in lockstep with ideas-v3 shipments. Notable: `richard-style-amazon.md`, `richard-style-email.md`, `richard-style-mbr.md`, `richard-style-slack.md`, `richard-style-docs.md`, `richard-writing-style.md`, `performance-marketing-guide.md`, `blind-test-harness.md`, `high-stakes-guardrails.md`, `mpe-low-maintenance.md`.
+- **27 active protocols** — `context/protocols/*.md` sweep from the sprint (pre-mortem nudge, open-items-reminder, wiki pipeline, asana guardrails cascade, am-backend/frontend tuning).
+- **53 wiki/agent-created files** — 14 reviews, 14 operations, 8 archive, 6 testing, 3 _meta, 3 kiro-steering, 2 strategy, 2 markets, 1 research. Enrichment passes from AM-auto + EOD runs.
+- **Weekly-review HTML** — `dashboards/weekly-review.html` absorbed all 10 M-series commits (sticky header, trust bar, TOC, exception banner, KPI sparklines, bullets, small multiples, prior-week threads, reliability diagram, 6-12 chart, waterfall). Design-system token sweep + collision mitigations (`.wr-` prefix) discussed on bus thread post 010.
+- **MPE findings backlog** — `dashboards/mpe-findings.md` reflects Phase-1/2/3 milestones shipped + NB-shape-from-Brand (commit `f6dc61e`) + regional-rollup fauxOut fix (`121b4e8`) + P2-12 saved-projection compare line (`7db6a9c`) + M-series decisions M2/M3.
+- **`.gitignore`** — added `*.duckdb.wal` (transient DB write-ahead log) and `*.bak/` / `*.pre-*.bak/` (pre-change backup directories agents create before large edits). `dashboards/state-files.pre-2026-04-30.bak/` now correctly ignored.
+
+### Removed
+
+- **`tools/scripts/.nfsbff5469ca4ffe4c20000004d`** — stale NFS silly-rename file.
+
+### Agent Bus
+
+- Threads active: 6 (3 from 2026-04-29, 2 from 2026-04-30, 1 stand-alone)
+- New posts since last sync: 31 (kiro-local: 16, kiro-server: 15)
+- Highlights:
+  - `dashboard-mockups-handoff` — 10-post sprint closed cleanly. Both agents shipped across M1-M10.
+  - `ten-novel-ideas-kiro-local` — 8-post rapid iteration on ideas v2→v3; 4 shipped to steering, 2 routed to Karpathy, 1 deferred.
+  - `weekly-review-r2-live-review` — forecast diagnosis + three-regression triage; WBR framing direction confirmed.
+  - `wiki-dashboard-redesign` — new thread; M01+M02+M07+M11 of wiki-side redesign shipped with `73073f1`.
+- Bus surfaced false-alarm on kiro-local's `73073f1` commit (kiro-server initially misread -95 lines as an M7 rollback; walked back in post 010 after git archaeology). Naming-collision risk (parallel DR-M# vs WS-M# redesigns) raised as a latent structural risk; mitigations proposed, awaiting Richard's call.
+
+### Notes
+
+- Untracked `wiki-search.html` WIP was stashed as `stash@{1}` earlier in session to unblock pull — unknown agent's projection-design-system port, not kiro-server's work. Awaiting Richard's drop/keep/merge call (see session-log 2026-04-30T17:53Z entry).
+- Pre-existing JS parity test failures in `test_js_parity.py` (88.94% + 99.45% drift on total_regs for spend-target + ieccp-target solver modes, verified pre-existing on `0e8c4fe` via stash-and-rerun). Not M9 scope; flagged to Richard as debt.
+- Nested-subagent platform blocker (karpathy Phase 6 `z14.registerSubAgentExecution is not a function`) still blocking new experiments on 9+ consecutive days. Session-log entry 2026-04-30 logged finding: autoresearch section of overview.html rebuilt to show loop-health as "LOOP STALLED" so the gap is visible.
+
+---
+
 ## [2026-04-29] — agent-bus forum + sync protocol modernization
 
 ### Added

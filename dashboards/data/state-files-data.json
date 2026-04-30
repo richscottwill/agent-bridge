@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-22T14:19:42.887168+00:00",
+  "generated": "2026-04-30T14:43:43.213866+00:00",
   "markets": [
     "au",
     "mx",
@@ -9,6 +9,17 @@
     "au": "AU Paid Search",
     "mx": "MX Paid Search",
     "ww": "WW Testing"
+  },
+  "files": {
+    "au": "au-paid-search-state.md",
+    "mx": "mx-paid-search-state.md",
+    "ww": "ww-testing-state.md"
+  },
+  "live_recency": {
+    "forecast_generated": "2026-04-29T22:35:42Z",
+    "forecast_last_data_date": "2026-04-19",
+    "forecast_max_week": 16,
+    "projection_generated": "2026-04-28T20:09:10.215922+00:00"
   },
   "data": {
     "au": {
@@ -28,6 +39,8 @@
       "status": "ACTIVE",
       "owner": "Richard Williams",
       "updated": "2026-04-20",
+      "updated_frontmatter": "2026-04-20",
+      "updated_mtime": "2026-04-29",
       "data_through": "2026 W15 (Apr 6–12)",
       "sections": {
         "introduction": [
@@ -726,6 +739,8 @@
       "status": "ACTIVE",
       "owner": "Richard Williams",
       "updated": "2026-04-20",
+      "updated_frontmatter": "2026-04-20",
+      "updated_mtime": "2026-04-29",
       "data_through": "2026 W15 (Apr 6–12)",
       "sections": {
         "introduction": [
@@ -1447,6 +1462,8 @@
       "status": "ACTIVE",
       "owner": "Richard Williams",
       "updated": "2026-04-20",
+      "updated_frontmatter": "2026-04-20",
+      "updated_mtime": "2026-04-29",
       "data_through": "2026 W15 (Apr 6–12)",
       "sections": {
         "introduction": [
@@ -2173,8 +2190,11 @@
       "market": "AU Paid Search",
       "key": "au",
       "status": "ACTIVE",
-      "data_through": "2026 W15 (Apr 6–12)",
-      "updated": "2026-04-20",
+      "data_through": "2026 W16 (Apr 13–19)",
+      "data_through_frontmatter": "2026 W15 (Apr 6–12)",
+      "updated": "2026-04-29",
+      "updated_frontmatter": "2026-04-20",
+      "stale_days": 9,
       "owner": "Richard Williams",
       "goals": 5,
       "tenets": 4,
@@ -2196,8 +2216,11 @@
       "market": "MX Paid Search",
       "key": "mx",
       "status": "ACTIVE",
-      "data_through": "2026 W15 (Apr 6–12)",
-      "updated": "2026-04-20",
+      "data_through": "2026 W16 (Apr 13–19)",
+      "data_through_frontmatter": "2026 W15 (Apr 6–12)",
+      "updated": "2026-04-29",
+      "updated_frontmatter": "2026-04-20",
+      "stale_days": 9,
       "owner": "Richard Williams",
       "goals": 5,
       "tenets": 4,
@@ -2219,8 +2242,11 @@
       "market": "WW Testing",
       "key": "ww",
       "status": "ACTIVE",
-      "data_through": "2026 W15 (Apr 6–12)",
-      "updated": "2026-04-20",
+      "data_through": "2026 W16 (Apr 13–19)",
+      "data_through_frontmatter": "2026 W15 (Apr 6–12)",
+      "updated": "2026-04-29",
+      "updated_frontmatter": "2026-04-20",
+      "stale_days": 9,
       "owner": "Richard Williams",
       "goals": 4,
       "tenets": 4,

@@ -70,10 +70,8 @@ For each task completed today, check if it matches a known recurring pattern (We
 
 ### Step 4 — Update rw-tracker.md
 - Tasks completed today (names + Routine buckets)
-- Tasks carried forward
-- New tasks received since morning
-- Net delta
-- Bucket counts
+- Tasks carried forward; New tasks received since morning
+- Net delta; Bucket counts
 
 ### Step 5 — Five Levels Breakdown
 Classify each completed and carry-forward task by L1-L5 per asana-command-center.md mapping.
@@ -132,8 +130,7 @@ For each task completed today across all managed projects:
 1. Check if the task is in a non-terminal section (i.e., not already in a Complete section).
 2. If yes, move it to the project's terminal section via AddTaskToSection or section membership update.
 3. Terminal section GID map:
-   - AU Complete: `1213924252564467`
-   - MX Complete: `1213924047255341`
+   - AU Complete: `1213924252564467`; MX Complete: `1213924047255341`
    - WW Testing Complete: `1205997667578902`
    - WW Acquisition Complete: `1206011240457091`
    - Paid App Complete: `1205997667578889`
@@ -157,8 +154,7 @@ d. Portfolio EOD output:
 - Completed: [N] tasks across [projects]
 - New overdue: [N] tasks
 - Enrichment: [N] fields filled (coverage: [morning]% → [current]%)
-- Recurring: [N] new instances
-- Blockers: [N] new, [N] resolved
+- Recurring: [N] new instances; Blockers: [N] new, [N] resolved
 ```
 
 e. Update rw-tracker: 'Portfolio: completed=[N], new_overdue=[N], enriched=[N], recurring=[N]'
@@ -305,9 +301,6 @@ Execute ~/shared/context/protocols/communication-analytics.md:
 - Weekly relationship (Friday). Monthly synthesis (1st). Quarterly audit (90d). Wiki maintenance moved to separate hook (shared/.kiro/hooks/wiki-maintenance.kiro.hook) — manual trigger, no longer daily.
 
 ---
-
-
-
 
 **This phase is NOT expendable. Execute before experiments.**
 

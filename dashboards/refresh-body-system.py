@@ -18,6 +18,47 @@ HOME = Path.home()
 BODY_DIR = HOME / "shared/context/body"
 OUTPUT = HOME / "shared/dashboards/data/body-system-data.json"
 
+# Silent-fallback-to-cache is the #1 source of stale-data bugs on this dashboard.
+# Default: FAIL LOUD. If the token is missing or DuckDB is unreachable, stop and
+# tell the operator — don't silently serve 8-day-old cache pretending to be live.
+#
+# Override with --allow-stale or BODY_REFRESH_ALLOW_STALE=1 if you genuinely want
+# to fall back to cache (e.g. in tests, or when MotherDuck is temporarily down
+# and a stale snapshot is better than nothing). The override is intentionally
+# verbose so it shows up in any CI log or agent trace.
+ALLOW_STALE = (
+    "--allow-stale" in sys.argv
+    or os.environ.get("BODY_REFRESH_ALLOW_STALE") == "1"
+)
+MAX_CACHE_AGE_HOURS = float(os.environ.get("BODY_REFRESH_MAX_CACHE_AGE_HOURS", "24"))
+
+
+def resolve_motherduck_token():
+    """Resolve the MotherDuck token from (1) env, (2) mcp.json duckdb server config.
+
+    The MCP config is the durable source of truth — it's what the running DuckDB
+    MCP server uses. Falling back to it means ad-hoc runs (./refresh-body-system.py)
+    succeed without requiring the operator to export the env var manually.
+    Env var still wins so CI/hooks can override.
+    """
+    tok = os.environ.get("MOTHERDUCK_TOKEN") or os.environ.get("motherduck_token")
+    if tok:
+        return tok, "env"
+    mcp_path = HOME / ".kiro/settings/mcp.json"
+    if mcp_path.exists():
+        try:
+            cfg = json.loads(mcp_path.read_text())
+            for name, server in (cfg.get("mcpServers") or {}).items():
+                if "duck" not in name.lower():
+                    continue
+                env = server.get("env") or {}
+                tok = env.get("motherduck_token") or env.get("MOTHERDUCK_TOKEN")
+                if tok:
+                    return tok, f"mcp.json:{name}"
+        except Exception as e:
+            print(f"  Could not read mcp.json for token: {e}", file=sys.stderr)
+    return None, None
+
 # Organs tracked in the body system (core organs only, not wiki agents or style guides)
 CORE_ORGANS = [
     "brain", "memory", "heart", "eyes", "amcc",
@@ -27,37 +68,73 @@ CORE_ORGANS = [
 
 def query_duckdb(sql):
     """Query MotherDuck via duckdb Python package.
-    
-    Falls back to cached data from body-system-duckdb-cache.json if DuckDB
-    is unavailable (e.g., no MotherDuck token in environment).
-    The cache is populated by the MCP DuckDB tool during dashboard refresh.
+
+    Default behavior: if DuckDB is unreachable (no token, no network, auth
+    failure), raise SystemExit — fail loud. This prevents the subtle bug
+    where the refresh script "succeeds" but has silently been serving stale
+    cached data for 8 days.
+
+    Override: set BODY_REFRESH_ALLOW_STALE=1 or pass --allow-stale on the CLI
+    to get the old fallback-to-cache behavior.
     """
     try:
         import duckdb as ddb
-        token = os.environ.get("MOTHERDUCK_TOKEN") or os.environ.get("motherduck_token")
+        token, source = resolve_motherduck_token()
         if not token:
-            raise RuntimeError("No MOTHERDUCK_TOKEN — use cache")
+            raise RuntimeError("No MotherDuck token in env or mcp.json")
         con = ddb.connect(f"md:ps_analytics?motherduck_token={token}")
         result = con.execute(sql)
         columns = [desc[0] for desc in result.description]
         rows = result.fetchall()
         return [dict(zip(columns, row)) for row in rows]
     except Exception as e:
-        print(f"  DuckDB unavailable: {e}")
-    return None  # None = unavailable, [] = empty result
+        msg = f"DuckDB unavailable: {e}"
+        if ALLOW_STALE:
+            print(f"  {msg} (BODY_REFRESH_ALLOW_STALE=1 — falling back to cache)")
+            return None
+        # Fail loud. The dashboard depends on this data being live.
+        print(
+            f"\n❌ {msg}\n"
+            f"   This would have caused refresh-body-system.py to silently serve stale cache.\n"
+            f"   The body-system dashboard depends on live data — run with a valid token:\n"
+            f"     export MOTHERDUCK_TOKEN=<token>\n"
+            f"   OR ensure ~/.kiro/settings/mcp.json has a duckdb server with motherduck_token.\n"
+            f"   To intentionally use cache (CI, tests, outage fallback), rerun with:\n"
+            f"     BODY_REFRESH_ALLOW_STALE=1 python3 {Path(__file__).name}\n",
+            file=sys.stderr,
+        )
+        sys.exit(2)
 
 
 def load_duckdb_cache():
-    """Load pre-populated DuckDB cache (written by MCP tool or prior run)."""
+    """Load pre-populated DuckDB cache (written by MCP tool or prior run).
+
+    Only used when ALLOW_STALE is set (BODY_REFRESH_ALLOW_STALE=1 or
+    --allow-stale). Warns loudly if the cache exceeds MAX_CACHE_AGE_HOURS
+    (default 24h) — this is exactly the bug that triggered this refactor:
+    an 8-day-old cache being served as if it were live.
+    """
     cache_path = HOME / "shared/dashboards/data/body-system-duckdb-cache.json"
-    if cache_path.exists():
-        try:
-            data = json.loads(cache_path.read_text())
-            age = datetime.now(tz=timezone.utc) - datetime.fromisoformat(data.get("cached_at", "2000-01-01T00:00:00+00:00"))
-            print(f"  Using DuckDB cache (age: {age.total_seconds()/3600:.1f}h)")
-            return data
-        except Exception as e:
-            print(f"  Cache read failed: {e}")
+    if not cache_path.exists():
+        return {}
+    try:
+        data = json.loads(cache_path.read_text())
+        cached_at = datetime.fromisoformat(
+            data.get("cached_at", "2000-01-01T00:00:00+00:00")
+        )
+        age_hours = (datetime.now(tz=timezone.utc) - cached_at).total_seconds() / 3600
+        if age_hours > MAX_CACHE_AGE_HOURS:
+            print(
+                f"\n⚠  Cache is {age_hours:.1f}h old (threshold: {MAX_CACHE_AGE_HOURS}h).\n"
+                f"   Data written to body-system-data.json will be STALE.\n"
+                f"   This defeats the purpose of a refresh — fix the token and rerun live.\n",
+                file=sys.stderr,
+            )
+        else:
+            print(f"  Using DuckDB cache (age: {age_hours:.1f}h)")
+        return data
+    except Exception as e:
+        print(f"  Cache read failed: {e}")
     return {}
 
 
@@ -443,7 +520,7 @@ def main():
             SELECT id, run_id, organ, section, technique, decision,
                    words_before, words_after, word_delta,
                    score_a, score_b, started_at::VARCHAR as started_at, notes
-            FROM karpathy.autoresearch_experiments ORDER BY id DESC LIMIT 20
+            FROM karpathy.autoresearch_experiments ORDER BY id DESC LIMIT 60
         """) or []
     else:
         exp_history = cache.get("experiment_history", [])
@@ -452,13 +529,87 @@ def main():
         exp_by_organ = query_duckdb("""
             SELECT organ, COUNT(*) as exp_count,
                    SUM(CASE WHEN decision='KEEP' THEN 1 ELSE 0 END) as kept,
-                   SUM(word_delta) as total_delta
+                   SUM(word_delta) as total_delta,
+                   MAX(started_at) as last_touched
             FROM karpathy.autoresearch_experiments
             WHERE organ IN ('brain','memory','heart','eyes','amcc','hands','device','nervous-system','spine','gut','body')
             GROUP BY organ ORDER BY exp_count DESC
         """) or []
     else:
         exp_by_organ = cache.get("experiment_by_organ", [])
+
+    # Per-run aggregation — makes the loop's pulse visible (11 runs, gap-days, etc.)
+    if not use_cache:
+        exp_by_run = query_duckdb("""
+            SELECT run_id,
+                   MIN(started_at)::VARCHAR as started_at,
+                   MAX(completed_at)::VARCHAR as ended_at,
+                   COUNT(*) as n,
+                   SUM(CASE WHEN decision='KEEP' THEN 1 ELSE 0 END) as kept,
+                   SUM(CASE WHEN decision='REVERT' THEN 1 ELSE 0 END) as reverted,
+                   SUM(CASE WHEN decision='BLOCKER' THEN 1 ELSE 0 END) as blocked,
+                   SUM(word_delta) as word_delta,
+                   COUNT(DISTINCT organ) as organs_touched
+            FROM karpathy.autoresearch_experiments
+            WHERE run_id IS NOT NULL
+            GROUP BY run_id
+            ORDER BY run_id DESC
+        """) or []
+    else:
+        exp_by_run = cache.get("experiment_by_run", [])
+
+    # Per-technique — which compression techniques actually win blind A/Bs.
+    # This is the highest-signal pivot karpathy asked for: if REMOVE wins 37%
+    # and REWORD wins 100%, the selector should up-weight REWORD.
+    if not use_cache:
+        exp_by_technique = query_duckdb("""
+            SELECT technique,
+                   COUNT(*) as n,
+                   SUM(CASE WHEN decision='KEEP' THEN 1 ELSE 0 END) as kept,
+                   SUM(CASE WHEN decision='REVERT' THEN 1 ELSE 0 END) as reverted,
+                   SUM(CASE WHEN decision='BLOCKER' THEN 1 ELSE 0 END) as blocked,
+                   SUM(word_delta) as net_delta,
+                   AVG(delta_ab) as avg_delta_ab
+            FROM karpathy.autoresearch_experiments
+            WHERE technique IS NOT NULL
+            GROUP BY technique
+            ORDER BY n DESC
+        """) or []
+    else:
+        exp_by_technique = cache.get("experiment_by_technique", [])
+
+    # Rolling windows — did the loop improve over the last 7d/30d or stall?
+    # NULL columns mean "no experiments in that window" — the UI should
+    # flag this loudly (stalled loop = the single most important signal).
+    if not use_cache:
+        exp_windows = query_duckdb("""
+            SELECT
+                COUNT(*) FILTER (WHERE started_at >= CURRENT_TIMESTAMP - INTERVAL '7 days') as n_7d,
+                COUNT(*) FILTER (WHERE started_at >= CURRENT_TIMESTAMP - INTERVAL '7 days' AND decision='KEEP') as kept_7d,
+                COUNT(*) FILTER (WHERE started_at >= CURRENT_TIMESTAMP - INTERVAL '30 days') as n_30d,
+                COUNT(*) FILTER (WHERE started_at >= CURRENT_TIMESTAMP - INTERVAL '30 days' AND decision='KEEP') as kept_30d,
+                MAX(started_at)::VARCHAR as last_experiment_at,
+                DATE_DIFF('hour', MAX(started_at), CURRENT_TIMESTAMP) as hours_since_last
+            FROM karpathy.autoresearch_experiments
+        """) or [{}]
+        exp_windows = exp_windows[0] if exp_windows else {}
+    else:
+        exp_windows = cache.get("exp_windows", {})
+
+    # Per-day spark — last 30 days, so the UI can draw a "loop activity" sparkline
+    if not use_cache:
+        exp_by_day = query_duckdb("""
+            SELECT DATE_TRUNC('day', started_at)::VARCHAR as day,
+                   COUNT(*) as n,
+                   SUM(CASE WHEN decision='KEEP' THEN 1 ELSE 0 END) as kept,
+                   SUM(word_delta) as word_delta
+            FROM karpathy.autoresearch_experiments
+            WHERE started_at >= CURRENT_TIMESTAMP - INTERVAL '30 days'
+            GROUP BY 1
+            ORDER BY 1
+        """) or []
+    else:
+        exp_by_day = cache.get("exp_by_day", [])
 
     if not use_cache:
         organ_health = query_duckdb("""
@@ -572,8 +723,11 @@ def main():
 
     # ── Assemble ──
     print("\n[8/8] Assembling JSON...")
+    _tok, _tok_source = resolve_motherduck_token()
     output = {
         "generated": datetime.now(tz=timezone.utc).isoformat(),
+        "data_source": "cache" if use_cache else "live",
+        "token_source": _tok_source or "none",
         # Overview page
         "five_levels": five_levels,
         "five_levels_weekly": [
@@ -594,6 +748,30 @@ def main():
         "total_kept": total_kept,
         "keep_rate": keep_rate,
         "words_saved": words_saved,
+        # Rolling windows — the loop's current pulse. If n_7d=0 the loop is stalled.
+        "experiment_windows": {
+            "n_7d": exp_windows.get("n_7d", 0),
+            "kept_7d": exp_windows.get("kept_7d", 0),
+            "n_30d": exp_windows.get("n_30d", 0),
+            "kept_30d": exp_windows.get("kept_30d", 0),
+            "last_experiment_at": exp_windows.get("last_experiment_at"),
+            "hours_since_last": exp_windows.get("hours_since_last"),
+        },
+        "experiment_by_run": [
+            {k: (v.isoformat() if isinstance(v, (date, datetime)) else v)
+             for k, v in row.items()}
+            for row in exp_by_run
+        ],
+        "experiment_by_technique": [
+            {k: (v.isoformat() if isinstance(v, (date, datetime)) else v)
+             for k, v in row.items()}
+            for row in exp_by_technique
+        ],
+        "experiment_by_day": [
+            {k: (v.isoformat() if isinstance(v, (date, datetime)) else v)
+             for k, v in row.items()}
+            for row in exp_by_day
+        ],
         "experiment_history": [
             {k: (v.isoformat() if isinstance(v, (date, datetime)) else v)
              for k, v in row.items()}

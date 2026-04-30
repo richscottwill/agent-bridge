@@ -38,4 +38,6 @@ Last run: 2026-04-02
 - The original slack-ingest.py pipeline (save JSON → run script → execute SQL) doesn't work because MCP tool responses can't be piped to files
 
 ## To Resume
-Tell the agent: "Continue Slack bulk ingestion. Resume [channel] from cursor [cursor]. Approach: fetch 25 msgs → generate SQL INSERT → execute via DuckDB MCP → paginate."
+- Tell the agent: "Continue Slack bulk ingestion.
+- Resume [channel] from cursor [cursor].
+- Approach: fetch 25 msgs → generate SQL INSERT → execute via DuckDB MCP → paginate.".

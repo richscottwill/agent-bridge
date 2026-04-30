@@ -7,14 +7,6 @@
 ---
 
 **Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
-## Headline
-
-Slack ingestion did not run. Every Slack MCP endpoint (`list_channels`, `batch_get_conversation_history`, `batch_get_thread_replies`, `search`, `batch_get_channel_info`) returned `r3 status: 302` across ~8 retry probes spanning the run window. Same failure mode as 2026-04-25T16:34:09Z (the earlier outage that self-cleared). This one has not self-cleared yet. **Slack session likely needs reauth from Richard's side.**
-
-Signal decay was applied to the 47 active Slack-source signals in `signals.signal_tracker` (last decay was 2026-04-25 16:33Z, ~44h ago). 0 signals crossed the deactivation threshold. The top of the heatmap below reflects post-decay state.
-
----
-
 ## ⚠️ Action required (Richard)
 
 - **Reauth Slack MCP.** Run the Slack auth flow / restart the MCP server. The 302 pattern indicates session expiry, not rate-limit. Once cleared, the next AM-1 or ad-hoc Slack ingestion run will backfill the 41.8h window.
@@ -26,18 +18,12 @@ Signal decay was applied to the 47 active Slack-source signals in `signals.signa
 
 ---
 
-## No new data this run
+## Headline
 
-- **Channels scanned:** 0 of ~33 considered.
-- **Messages ingested:** 0 (none possible — MCP down).
-- **Thread replies fetched:** 0.
-- **Proactive searches:** 0 executed (all 4 permanent queries `prichwil`, `"Richard Williams"`, `from:@brandoxy`, `from:@kataxt` blocked by the same 302).
-- **RSW channel intake:** skipped.
+Slack ingestion did not run. Every Slack MCP endpoint (`list_channels`, `batch_get_conversation_history`, `batch_get_thread_replies`, `search`, `batch_get_channel_info`) returned `r3 status: 302` across ~8 retry probes spanning the run window. Same failure mode as 2026-04-25T16:34:09Z (the earlier outage that self-cleared). This one has not self-cleared yet. **Slack session likely needs reauth from Richard's side.**
 
-#### Part 1
-- **Tables touched in DuckDB:** `signals.signal_tracker` — decay only. `signals.slack_messages` — not written.
+Signal decay was applied to the 47 active Slack-source signals in `signals.signal_tracker` (last decay was 2026-04-25 16:33Z, ~44h ago). 0 signals crossed the deactivation threshold. The top of the heatmap below reflects post-decay state.
 
----
 
 ## Top active Slack signals (post-decay, carried from last successful run)
 
@@ -69,3 +55,18 @@ Trending into Monday from the Friday scan: `polaris-brand-lp` (Brandon implicitl
 
 ---
 
+
+<!-- Added context: This section (Failure detail) provides key operational details. -->
+
+## No new data this run
+
+- **Channels scanned:** 0 of ~33 considered.
+- **Messages ingested:** 0 (none possible — MCP down).
+- **Thread replies fetched:** 0.
+- **Proactive searches:** 0 executed (all 4 permanent queries `prichwil`, `"Richard Williams"`, `from:@brandoxy`, `from:@kataxt` blocked by the same 302).
+- **RSW channel intake:** skipped.
+
+#### Part 1
+- **Tables touched in DuckDB:** `signals.signal_tracker` — decay only. `signals.slack_messages` — not written.
+
+---

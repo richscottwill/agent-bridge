@@ -1,13 +1,14 @@
+
 ---
+---
+
 title: "Review: Workstream 5 — Algorithmic Ads (v5)"
 status: DRAFT
 audience: amazon-internal
 owner: Richard Williams
 created: 2026-04-12
 updated: 2026-04-12
----
 <!-- DOC-0504 | duck_id: wiki-review-ws5-v5-eval-a -->
-
 # Review: Workstream 5 — Algorithmic Ads (v5)
 
 Blind Eval A — 2026-04-05. No prior reviews seen for this version.

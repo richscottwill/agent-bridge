@@ -6,22 +6,21 @@ inclusion: auto
 
 All documents are tracked in MotherDuck at `ps_analytics.docs`. Every file has a `<!-- DOC-XXXX | duck_id: slug -->` stamp on line 1. The `duck_id` is a descriptive, searchable slug — guess it from the topic.
 
-## Document Home: shared/wiki/
-
-All publishable content lives in `shared/wiki/` organized by topic:
-- `shared/wiki/strategy/` — POVs, frameworks, vision docs
-- `shared/wiki/testing/` — test designs, workstreams, methodologies
-- `shared/wiki/markets/` — market wikis, references
-- `shared/wiki/operations/` — playbooks, guides, processes
-- `shared/wiki/reporting/` — WBR guides, dashboards
-- `shared/wiki/callouts/{market}/` — weekly market callouts
-- `shared/wiki/meetings/` — meeting notes
-- `shared/wiki/research/` — research briefs
-- `shared/wiki/reviews/` — critic evaluations (ephemeral)
-- `shared/wiki/archive/` — superseded versions
-
-System files stay in `shared/context/` (organs, protocols, experiments, intake).
-
+[38;5;10m> [0m## Document Home: shared/wiki/[0m[0m
+[0m[0m
+All publishable content lives in `shared/wiki/`, organized by topic:[0m[0m
+- `strategy/` — POVs, frameworks, vision docs[0m[0m
+- `testing/` — test designs, workstreams, methodologies[0m[0m
+- `markets/` — market wikis, references[0m[0m
+- `operations/` — playbooks, guides, processes[0m[0m
+- `reporting/` — WBR guides, dashboards[0m[0m
+- `callouts/{market}/` — weekly market callouts[0m[0m
+- `meetings/` — meeting notes[0m[0m
+- `research/` — research briefs[0m[0m
+- `reviews/` — critic evaluations (ephemeral)[0m[0m
+- `archive/` — superseded versions[0m[0m
+[0m[0m
+System files live in `shared/context/` (organs, protocols, experiments, intake).
 ## Quick Reference — Key Documents
 
 | duck_id | What | Path |
