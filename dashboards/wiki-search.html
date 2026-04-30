@@ -613,6 +613,221 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   vertical-align: middle;
 }
 
+/* M03 (2026-04-30): Ingest strip. Sibling layout to M06/M10 (same
+   padding, same heading cadence, same collapse affordance). Dates
+   cluster within the grid so same-day updates group visually. */
+.wk-ingest-wrap {
+  background: #12141c;
+  border-bottom: 1px solid #1e2028;
+  padding: 8px 20px 10px;
+}
+.wk-ingest-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.wk-ingest-heading {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #aaa;
+  text-transform: uppercase;
+  margin: 0;
+}
+.wk-ingest-sub {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  color: #555;
+  flex: 1 1 auto;
+}
+.wk-ingest-toggle {
+  background: transparent;
+  border: 1px solid #2a2d35;
+  color: #777;
+  font-family: inherit;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.wk-ingest-toggle:hover { border-color: #3b82f6; color: #93b4f5; }
+.wk-ingest-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 6px;
+}
+.wk-ingest-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: #14161e;
+  border: 1px solid #1e2028;
+  border-radius: 4px;
+  padding: 6px 8px;
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease;
+  font-size: 12px;
+}
+.wk-ingest-row:hover { border-color: #3b82f6; background: #161a24; }
+.wk-ingest-row-title {
+  color: #c8c8c8;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.wk-ingest-row-meta {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  color: #666;
+  display: flex;
+  gap: 8px;
+}
+
+/* M05 (2026-04-30): Demand-gap panel. Reads open entries from
+   wiki-demand-log.md (via demand_log_entries[]). Subtle amber bias
+   because these are "something missing" signals, not neutral info. */
+.wk-demand-wrap {
+  background: #12141c;
+  border-bottom: 1px solid #1e2028;
+  padding: 8px 20px 10px;
+}
+.wk-demand-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.wk-demand-heading {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #e0c080;
+  text-transform: uppercase;
+  margin: 0;
+}
+.wk-demand-sub {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  color: #555;
+  flex: 1 1 auto;
+}
+.wk-demand-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.wk-demand-row {
+  background: rgba(113, 63, 18, 0.08);
+  border: 1px solid rgba(224, 192, 128, 0.15);
+  border-radius: 4px;
+  padding: 6px 10px;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 12px;
+}
+.wk-demand-query {
+  color: #e0c080;
+  font-weight: 600;
+}
+.wk-demand-count {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  color: #999;
+  background: rgba(224, 192, 128, 0.1);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+.wk-demand-last {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  color: #666;
+}
+.wk-demand-note {
+  grid-column: 1 / -1;
+  font-size: 11px;
+  color: #888;
+  font-style: italic;
+}
+
+/* M08 (2026-04-30): Lineage strip inside the doc viewer. Two columns:
+   sources-in (reverse_related_docs — who links TO this doc) and
+   links-out (related_docs — who this doc links to). Hidden entirely
+   when both halves empty. Sits above the viewer-body. */
+.viewer-lineage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 8px 20px;
+  border-bottom: 1px solid #1e2028;
+  background: #12141c;
+  font-size: 12px;
+}
+.viewer-lineage-col {
+  min-width: 0;
+}
+.viewer-lineage-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.viewer-lineage-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.viewer-lineage-pill {
+  background: rgba(30, 58, 138, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  color: #93b4f5;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: border-color 120ms ease;
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.viewer-lineage-pill:hover {
+  border-color: #3b82f6;
+  background: rgba(30, 58, 138, 0.2);
+}
+.viewer-lineage-pill.no-target {
+  color: #888;
+  cursor: default;
+  background: rgba(55, 65, 81, 0.15);
+  border-color: #2a2d35;
+}
+.viewer-lineage-empty {
+  color: #555;
+  font-style: italic;
+  font-size: 11px;
+}
+
+/* M09 (2026-04-30): Card-level orphan + contradiction badges. Reads
+   is_orphan (client-side hydrated from index.orphans[]) and
+   lint_status (per-doc from index). Contradiction fires only on
+   warn-severity non-sp-stale issues — matches kiro-server's rollup
+   rule in contradiction_count. */
+.b-orphan {
+  background: rgba(127, 29, 29, 0.15);
+  color: #f0a0a0;
+  font-size: 10px;
+}
+.b-contradiction {
+  background: rgba(113, 63, 18, 0.25);
+  color: #ffbb66;
+  font-size: 10px;
+}
+
 </style>
 </head>
 <body>
@@ -722,6 +937,33 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     </div>
   </div>
 </section>
+
+<!-- M03 (2026-04-30): Ingest strip. 20 most-recently-updated non-archived
+     docs from build-wiki-index.py's ingest_log_entries[]. Chronological
+     rollup grouped by date so reviewers see "what landed recently" at a
+     glance. Collapsible; hidden when empty. Sibling layout to M06/M10. -->
+<section class="wk-ingest-wrap" id="wkIngestWrap" aria-labelledby="wkIngestHeading" style="display:none">
+  <header class="wk-ingest-head">
+    <h3 id="wkIngestHeading" class="wk-ingest-heading">Ingest &mdash; recently updated</h3>
+    <span class="wk-ingest-sub" id="wkIngestSub">Last 20 doc updates &middot; click to open</span>
+    <button class="wk-ingest-toggle" id="wkIngestToggle" aria-expanded="false"
+            aria-controls="wkIngestBody" onclick="toggleIngestStrip()">+ Show ingest</button>
+  </header>
+  <div class="wk-ingest-body" id="wkIngestBody" style="display:none"></div>
+</section>
+
+<!-- M05 (2026-04-30): Demand-gap panel. Surfaces open entries from
+     wiki-demand-log.md via demand_log_entries[] (tolerant bullet parser
+     on kiro-server). Each row = query + hit-count + last-seen +
+     optional note. Auto-hides when empty. -->
+<section class="wk-demand-wrap" id="wkDemandWrap" aria-labelledby="wkDemandHeading" style="display:none">
+  <header class="wk-demand-head">
+    <h3 id="wkDemandHeading" class="wk-demand-heading">Demand gaps &mdash; queries without docs</h3>
+    <span class="wk-demand-sub" id="wkDemandSub">Open signals awaiting wiki coverage</span>
+  </header>
+  <div class="wk-demand-body" id="wkDemandBody"></div>
+</section>
+
 <div class="filter-section" id="filterSection"></div>
 <div class="main">
   <div class="results" id="results"></div>
@@ -734,6 +976,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     </div>
     <div class="viewer-meta" id="viewerMeta"></div>
     <div class="viewer-related" id="viewerRelated" style="display:none"></div>
+    <!-- M08 (2026-04-30): Lineage strip. Left col = reverse_related_docs
+         (docs that reference this page). Right col = related_docs (docs
+         this page references). Hidden entirely when both halves empty. -->
+    <div class="viewer-lineage" id="viewerLineage" style="display:none"></div>
     <div class="viewer-body" id="viewerBody"><div class="viewer-loading">Select a document to view</div></div>
   </div>
 </div>
@@ -878,6 +1124,21 @@ function expandQuery(q){
 // ── Load ──
 fetch('data/wiki-search-index.json?'+Date.now()).then(r=>r.json()).then(data=>{
   IX=data;
+  // M09 (2026-04-30): hydrate is_orphan + contradiction_summary onto each
+  // doc from the top-level orphans[] / contradictions[] arrays. The
+  // pipeline emits these as lookup arrays (not per-doc flags) because
+  // they're bounded (50 each). Hydrating lets renderDocCard use simple
+  // boolean checks without walking the arrays per render.
+  if (Array.isArray(data.orphans) && Array.isArray(data.documents)) {
+    const orphanIds = new Set(data.orphans.map(o => o.id));
+    data.documents.forEach(d => { if (orphanIds.has(d.id)) d.is_orphan = true; });
+  }
+  if (Array.isArray(data.contradictions) && Array.isArray(data.documents)) {
+    const contraMap = new Map(data.contradictions.map(c => [c.id, c.issues || []]));
+    data.documents.forEach(d => {
+      if (contraMap.has(d.id)) d.contradiction_issues = contraMap.get(d.id);
+    });
+  }
   document.getElementById('totalCount').textContent=data.total_docs+' docs'+(data.total_archived?' · '+data.total_archived+' archived':'');
   buildFilters(data);
   buildStats(data);
@@ -886,6 +1147,10 @@ fetch('data/wiki-search-index.json?'+Date.now()).then(r=>r.json()).then(data=>{
   renderAgenticRibbon(data);
   // M06 (2026-04-30): topic small-multiples grid.
   renderTopicGrid(data);
+  // M03 + M05 (2026-04-30): ingest strip + demand-gap panel. Both
+  // auto-hide when the backing array is empty.
+  renderIngestStrip(data);
+  renderDemandPanel(data);
   doSearch();
 }).catch(e=>{
   console.error(e);
@@ -1979,6 +2244,19 @@ function renderDocCard(doc,tokens,childCount,isChild){
   }
   // Archive badge
   const archiveBadge=doc.archived?'<span class="b" style="background:rgba(127,29,29,.2);color:#e8a0a0">archived</span>':'';
+  // M09 (2026-04-30): Orphan + contradiction badges on cards.
+  // is_orphan hydrated in load path from index.orphans[].
+  // contradiction_issues hydrated from index.contradictions[] (kiro-server
+  // already rolled warn-severity non-sp-stale issues into that list).
+  let orphanBadge='';
+  if(doc.is_orphan&&!doc.archived){
+    orphanBadge='<span class="b b-orphan" title="No inbound or outbound related_docs — consider linking from another page">⚠ orphan</span>';
+  }
+  let contradictionBadge='';
+  if(Array.isArray(doc.contradiction_issues)&&doc.contradiction_issues.length){
+    const codes=doc.contradiction_issues.join(', ');
+    contradictionBadge='<span class="b b-contradiction" title="Lint flagged: '+esc(codes)+'">⚠ lint</span>';
+  }
   // SharePoint badge (only for wiki articles that could be published)
   let spBadge='';
   if((doc.source||'').startsWith('wiki-')&&doc.source!=='wiki-reviews'&&doc.source!=='wiki-meta'){
@@ -1989,7 +2267,7 @@ function renderDocCard(doc,tokens,childCount,isChild){
   const childCls=isChild?' rc-child':'';
   return '<div class="rc'+childCls+'" style="'+(isViewing?'border-color:#3b82f6;background:#161a24':'')+(isChild?';margin-left:18px;border-left:2px solid #2a3a5c':'')+'" onclick="openDoc(\''+doc.id+'\')">'+
     '<div class="rc-head"><div class="rc-title">'+title+'</div>'+
-    '<div class="rc-badges">'+(doc.status?'<span class="b '+sc+'">'+doc.status+'</span>':'')+spBadge+'<span class="b b-cat">'+esc(doc.category)+'</span>'+mkts+tops+tgs+staleTag+archiveBadge+'</div></div>'+
+    '<div class="rc-badges">'+(doc.status?'<span class="b '+sc+'">'+doc.status+'</span>':'')+spBadge+'<span class="b b-cat">'+esc(doc.category)+'</span>'+mkts+tops+tgs+staleTag+archiveBadge+orphanBadge+contradictionBadge+'</div></div>'+
     '<div class="rc-snip">'+snip+'</div>'+
     '<div class="rc-meta">'+
       (doc.word_count?'<span>'+doc.word_count.toLocaleString()+' words</span>':'')+
@@ -2032,6 +2310,8 @@ function openDoc(id,fromLink){
 
   // Render related links
   renderRelatedLinks(doc);
+  // M08 (2026-04-30): Render lineage strip (sources-in + links-out).
+  renderLineage(doc);
 
   // Check if uploaded doc (has inline body)
   if(doc._body){
@@ -2117,6 +2397,130 @@ function renderRelatedLinks(doc){
   container.innerHTML=html;
 }
 
+// M08 (2026-04-30): Lineage strip inside the doc viewer. Two columns:
+// sources-in (reverse_related_docs — docs that reference THIS page) and
+// links-out (related_docs — docs this page references). Pills are
+// clickable when target is indexed. Hidden entirely when both halves
+// empty. Sits between viewer-meta and viewer-body.
+function renderLineage(doc){
+  const container=document.getElementById('viewerLineage');
+  if(!container)return;
+  const sourcesIn=Array.isArray(doc.reverse_related_docs)?doc.reverse_related_docs:[];
+  const linksOut=Array.isArray(doc.related_docs)?doc.related_docs:[];
+  if(!sourcesIn.length&&!linksOut.length){
+    container.style.display='none';
+    return;
+  }
+  const allDocs=IX?IX.documents:[];
+  const indexedIds=new Set(allDocs.map(d=>d.id));
+  const renderPill=(r)=>{
+    const targetExists=indexedIds.has(r.id);
+    const cls=targetExists?'viewer-lineage-pill':'viewer-lineage-pill no-target';
+    const title=esc(r.title||r.id);
+    const cat=r.category?' <span style="opacity:.6">· '+esc(r.category)+'</span>':'';
+    if(targetExists){
+      return '<span class="'+cls+'" onclick="openDoc(\''+r.id+'\',true)" title="'+title+'">'+title+cat+'</span>';
+    }
+    return '<span class="'+cls+'" title="Target not in index">'+title+cat+'</span>';
+  };
+  const colIn=sourcesIn.length
+    ?'<div class="viewer-lineage-pills">'+sourcesIn.map(renderPill).join('')+'</div>'
+    :'<div class="viewer-lineage-empty">No inbound references</div>';
+  const colOut=linksOut.length
+    ?'<div class="viewer-lineage-pills">'+linksOut.map(renderPill).join('')+'</div>'
+    :'<div class="viewer-lineage-empty">No outbound references</div>';
+  container.style.display='grid';
+  container.innerHTML=
+    '<div class="viewer-lineage-col">'+
+      '<div class="viewer-lineage-label">↓ '+sourcesIn.length+' reference'+(sourcesIn.length===1?'':'s')+' this page</div>'+
+      colIn+
+    '</div>'+
+    '<div class="viewer-lineage-col">'+
+      '<div class="viewer-lineage-label">↑ '+linksOut.length+' page'+(linksOut.length===1?'':'s')+' referenced</div>'+
+      colOut+
+    '</div>';
+}
+
+// M03 (2026-04-30): Ingest strip. Renders 20 most-recently-updated
+// non-archived docs (from build-wiki-index.py's ingest_log_entries[]).
+// Cards group by date implicitly — the underlying array is already
+// sorted newest-first by kiro-server, so clustering happens naturally.
+// Collapse state persists in localStorage like the topic grid.
+function renderIngestStrip(data){
+  const wrap=document.getElementById('wkIngestWrap');
+  const body=document.getElementById('wkIngestBody');
+  const sub=document.getElementById('wkIngestSub');
+  const toggle=document.getElementById('wkIngestToggle');
+  if(!wrap||!body)return;
+  const entries=Array.isArray(data.ingest_log_entries)?data.ingest_log_entries:[];
+  if(!entries.length){wrap.style.display='none';return;}
+  wrap.style.display='block';
+  // Group by date for the subheader count
+  const dates=new Set(entries.map(e=>e.updated));
+  if(sub)sub.textContent=entries.length+' updates across '+dates.size+' date'+(dates.size===1?'':'s')+' · click to open';
+  body.innerHTML=entries.map(e=>{
+    const cat=e.category?'<span>'+esc(e.category)+'</span>':'';
+    const wc=e.word_count?'<span>'+e.word_count.toLocaleString()+'w</span>':'';
+    return '<div class="wk-ingest-row" onclick="openDoc(\''+e.id+'\')">'+
+      '<div class="wk-ingest-row-title">'+esc(e.title||e.id)+'</div>'+
+      '<div class="wk-ingest-row-meta">'+(e.updated||'')+cat+wc+'</div>'+
+    '</div>';
+  }).join('');
+  // Restore collapsed state
+  const persisted=localStorage.getItem('wk-ingest-collapsed');
+  if(persisted==='1'){
+    body.style.display='none';
+    if(toggle){toggle.setAttribute('aria-expanded','false');toggle.textContent='+ Show ingest';}
+  } else {
+    body.style.display='grid';
+    if(toggle){toggle.setAttribute('aria-expanded','true');toggle.textContent='– Hide ingest';}
+  }
+}
+
+function toggleIngestStrip(){
+  const body=document.getElementById('wkIngestBody');
+  const toggle=document.getElementById('wkIngestToggle');
+  if(!body)return;
+  const hidden=body.style.display==='none';
+  body.style.display=hidden?'grid':'none';
+  if(toggle){
+    toggle.setAttribute('aria-expanded',hidden?'true':'false');
+    toggle.textContent=hidden?'– Hide ingest':'+ Show ingest';
+  }
+  localStorage.setItem('wk-ingest-collapsed',hidden?'0':'1');
+}
+
+// M05 (2026-04-30): Demand-gap panel. Surfaces rows from
+// demand_log_entries[] where status !== 'satisfied' and !== 'archived'.
+// Each row shows the query, hit-count, last-seen date, and (if present)
+// a free-text note. Auto-hides when no open entries. Amber-bias visual
+// treatment — these are "something's missing" signals, not neutral info.
+function renderDemandPanel(data){
+  const wrap=document.getElementById('wkDemandWrap');
+  const body=document.getElementById('wkDemandBody');
+  const sub=document.getElementById('wkDemandSub');
+  if(!wrap||!body)return;
+  const allEntries=Array.isArray(data.demand_log_entries)?data.demand_log_entries:[];
+  const openEntries=allEntries.filter(e=>{
+    const s=(e.status||'open').toLowerCase();
+    return s!=='satisfied'&&s!=='archived';
+  });
+  if(!openEntries.length){wrap.style.display='none';return;}
+  wrap.style.display='block';
+  if(sub)sub.textContent=openEntries.length+' open signal'+(openEntries.length===1?'':'s')+' awaiting wiki coverage';
+  body.innerHTML=openEntries.map(e=>{
+    const count=e.count!=null?'×'+e.count:'';
+    const last=e.last_seen?'last '+esc(e.last_seen):'';
+    const note=e.note?'<div class="wk-demand-note">'+esc(e.note)+'</div>':'';
+    return '<div class="wk-demand-row">'+
+      '<div class="wk-demand-query">'+esc(e.query||'(no query)')+'</div>'+
+      '<div class="wk-demand-count">'+count+'</div>'+
+      '<div class="wk-demand-last">'+last+'</div>'+
+      note+
+    '</div>';
+  }).join('');
+}
+
 function goBack(){
   if(!viewHistory.length)return;
   const prevId=viewHistory.pop();
@@ -2139,6 +2543,7 @@ function goBack(){
     (doc.word_count?'<span class="b" style="background:rgba(55,65,81,.25);color:#777">'+doc.word_count.toLocaleString()+' words</span>':'')+
     (doc.updated?'<span class="b" style="background:rgba(55,65,81,.25);color:#777">'+doc.updated+'</span>':'');
   renderRelatedLinks(doc);
+  renderLineage(doc);
   const body=document.getElementById('viewerBody');
   body.innerHTML='<div class="viewer-loading">Loading…</div>';
   if(doc._body){renderViewerBody(body,doc,doc._body);doSearch();return}
@@ -2168,6 +2573,8 @@ function closeViewer(){
   viewHistory=[];
   document.getElementById('viewer').classList.remove('open');
   document.getElementById('viewerRelated').style.display='none';
+  const lineageEl=document.getElementById('viewerLineage');
+  if(lineageEl)lineageEl.style.display='none';
   updateBackButton();
   doSearch();
 }
