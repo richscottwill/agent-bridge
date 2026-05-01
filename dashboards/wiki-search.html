@@ -2812,6 +2812,40 @@ function renderDocCard(doc,tokens,childCount,isChild){
 }
 
 // â”€â”€ Document viewer â”€â”€
+// #027 (2026-05-01): Canonical-length bullet — how long this doc is vs its
+// category's typical length. Consumes doc.word_count + index.category_word_stats.
+// Hidden when n < 5 (insufficient sample) or doc has no word_count.
+// Target = p50 (median). Bands: [0, p50] warn-short ? [p50, p90] good ? [p90, 2*p90] warn-long.
+// We use three bands rather than a symmetric mean-distance expansion to avoid
+// negative lower bounds on long-tail categories (Wiki System mean=1660 p50=952
+// diverges >70% — a mean-minus delta would go below zero, nonsensical).
+function renderCanonicalBullet(doc, IX) {
+  if (!doc || !doc.word_count || !IX || !IX.category_word_stats) return '';
+  const stats = IX.category_word_stats[doc.category];
+  if (!stats || !stats.n || stats.n < 5 || !stats.p50 || !stats.p90) return '';
+  if (typeof window === 'undefined' || !window.Bullet) return '';
+  const bullet = window.Bullet.renderBullet({
+    actual: doc.word_count,
+    target: stats.p50,
+    bands: [
+      [0.00, 1.00, 'bad'],   // below p50: warn-short (bad-tier visually)
+      [1.00, stats.p90 / stats.p50, 'good'],   // p50 ? p90: good
+      [stats.p90 / stats.p50, (2 * stats.p90) / stats.p50, 'warn']   // p90 ? 2*p90: warn-long
+    ],
+    range: [0, 2 * stats.p90],
+    label: 'Canonical length: ' + doc.word_count.toLocaleString() + ' words; category median ' + stats.p50.toLocaleString(),
+    width: 180
+  });
+  const pctOfMedian = Math.round((doc.word_count / stats.p50) * 100);
+  const tip = doc.word_count < stats.p50
+    ? doc.word_count.toLocaleString() + ' words · ' + (100 - pctOfMedian) + '% below this category\'s typical length (median ' + stats.p50.toLocaleString() + ')'
+    : doc.word_count > stats.p90
+      ? doc.word_count.toLocaleString() + ' words · ' + Math.round(doc.word_count / stats.p90 * 100 - 100) + '% above category p90 (' + stats.p90.toLocaleString() + ')'
+      : doc.word_count.toLocaleString() + ' words · in category typical range (p50 ' + stats.p50.toLocaleString() + ', p90 ' + stats.p90.toLocaleString() + ')';
+  return '<span class="wk-canonical-bullet" title="' + tip.replace(/"/g, '&quot;') + '" style="display:inline-flex;align-items:center;gap:6px;padding:2px 6px;background:rgba(107,114,128,0.08);border-radius:4px">' +
+    '<span style="font-size:10px;color:#5A6373">vs category</span>' + bullet + '</span>';
+}
+
 function openDoc(id,fromLink){
   // Push to history if navigating from a link (not from result list)
   if(fromLink&&viewingDoc&&viewingDoc!==id){
@@ -2836,6 +2870,7 @@ function openDoc(id,fromLink){
     '<span class="b b-cat">'+esc(doc.category)+'</span>'+
     mkts+tops+tags+
     (doc.word_count?'<span class="b" style="background:rgba(107,114,128,0.10);color:#6B6B6B">'+doc.word_count.toLocaleString()+' words</span>':'')+
+      renderCanonicalBullet(doc, IX)+
     (doc.updated?'<span class="b" style="background:rgba(107,114,128,0.10);color:#6B6B6B">'+doc.updated+'</span>':'');
 
   const body=document.getElementById('viewerBody');
@@ -3299,6 +3334,7 @@ function goBack(){
     (doc.status?'<span class="b '+sc+'">'+doc.status+'</span>':'')+
     '<span class="b b-cat">'+esc(doc.category)+'</span>'+mkts+tops+tags+
     (doc.word_count?'<span class="b" style="background:rgba(107,114,128,0.10);color:#6B6B6B">'+doc.word_count.toLocaleString()+' words</span>':'')+
+      renderCanonicalBullet(doc, IX)+
     (doc.updated?'<span class="b" style="background:rgba(107,114,128,0.10);color:#6B6B6B">'+doc.updated+'</span>':'');
   renderRelatedLinks(doc);
   renderLineage(doc);
@@ -3565,6 +3601,8 @@ document.addEventListener('keydown',e=>{
   </div>
 </div>
 
+<link rel="stylesheet" href="./shared/bullet.css?v=2026-05-01">
+<script src="./shared/bullet.js?v=2026-05-01"></script>
 <script src="./shared/sparkline.js?v=2026-04-30"></script>
 <script src="./shared/section-freshness.js" defer></script>
 </body>
