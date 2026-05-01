@@ -2954,6 +2954,28 @@ function renderViewerBody(body,doc,md){
     }
   }
 
+
+  // #031 (2026-05-01): Shallow contradiction banner.
+  // Spec from kiro-server 014_kiro-server.md: filter doc.lint_status.issues[] by
+  // severity==='warn' && code !== 'sp-stale' (sp-stale already surfaced via #026).
+  // Link to the most recent wiki-lint-audit doc � found by title/category scan on IX.
+  if(doc.lint_status && Array.isArray(doc.lint_status.issues)){
+    const warnIssues=doc.lint_status.issues.filter(i=>i && i.severity==='warn' && i.code!=='sp-stale');
+    if(warnIssues.length>0){
+      const codes=warnIssues.map(i=>i.code).join(', ');
+      let auditDoc=null;
+      try{
+        const auditCandidates=Object.values(IX.documents||{}).filter(d=>/wiki.*(lint|audit)/i.test(d.title||''));
+        auditDoc=auditCandidates.sort((a,b)=>(b.updated||'').localeCompare(a.updated||''))[0];
+      }catch(e){}
+      const linkTarget=auditDoc
+        ? '<span class="wk-contradiction-audit-link" data-audit-id="'+auditDoc.id+'" style="color:#991B1B;text-decoration:underline;cursor:pointer;margin-left:6px">audit log &rarr;</span>'
+        : '';
+      html+='<div class="stale-banner wk-contradiction-banner" style="background:rgba(209,50,18,0.08);border-color:rgba(209,50,18,0.18);color:#991B1B">'+
+        '<span class="stale-icon">&#x26A0;</span> <strong>'+warnIssues.length+' contradiction'+(warnIssues.length>1?'s':'')+' flagged</strong> ('+esc(codes)+')'+linkTarget+'</div>';
+    }
+  }
+
   // Render markdown
   const rendered=renderMarkdown(md);
 
@@ -3594,6 +3616,13 @@ function showView(which){
     if(pipeline)pipeline.style.display='none';
   }
 }
+// #031 (2026-05-01): Contradiction-banner audit-log link click delegation.
+// Uses data-audit-id attribute so we avoid quote-escaping a string-embedded onclick.
+document.addEventListener('click',e=>{
+  const link=e.target.closest('.wk-contradiction-audit-link[data-audit-id]');
+  if(link){e.preventDefault();e.stopPropagation();openDoc(link.dataset.auditId,true);}
+});
+
 document.addEventListener('keydown',e=>{
   // #008 ⌘K / Ctrl+K → command palette
   if((e.key==='k'||e.key==='K') && (e.metaKey||e.ctrlKey)){
