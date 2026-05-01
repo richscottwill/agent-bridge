@@ -401,6 +401,103 @@ def _write_stub(reason: str) -> int:
     return 1
 
 
+def _snapshot_and_fetch_confidence_history(con, market: str, current_year: int) -> list[dict]:
+    """Snapshot today's CI width for `market` and return the last 16 snapshots.
+
+    Research report #P5-11 consumer. Storage: local DuckDB file at
+    dashboards/data/confidence-history.duckdb (NOT ps_analytics — that's
+    read-only from the export-side connection). Idempotent per
+    (market, snapshot_date) via UNIQUE constraint. Safe to run repeatedly.
+
+    Computation: run the engine at the default Y{current_year} @ 75% ieccp
+    scenario, extract credible_intervals.total_regs.ci['90'], compute
+    ci_width_pct = (hi - lo) / central * 100. Skip markets where the engine
+    can't produce a CI.
+
+    Return shape: list of {week, ci_width_pct} entries, oldest-first, up to
+    16. Empty list on any failure — UI renders the "collecting data" state.
+    """
+    from datetime import date as _date
+    try:
+        from prediction.mpe_engine import ProjectionInputs, project as _project
+        import duckdb as _duckdb
+    except ImportError:
+        return []
+
+    from pathlib import Path as _Path
+    history_path = _Path(__file__).parent / 'data' / 'confidence-history.duckdb'
+    history_path.parent.mkdir(parents=True, exist_ok=True)
+
+    snapshot_date = _date.today().isoformat()
+    week_key = f'{current_year}-W{_date.today().isocalendar().week:02d}'
+
+    try:
+        hcon = _duckdb.connect(str(history_path))
+        hcon.execute(
+            """CREATE TABLE IF NOT EXISTS forecast_uncertainty_history (
+                 market VARCHAR NOT NULL,
+                 snapshot_date DATE NOT NULL,
+                 week_key VARCHAR NOT NULL,
+                 ci_width_pct DOUBLE,
+                 ci_lo_regs DOUBLE,
+                 ci_hi_regs DOUBLE,
+                 central_regs DOUBLE,
+                 method VARCHAR DEFAULT 'bootstrap_90',
+                 engine_version VARCHAR,
+                 PRIMARY KEY (market, snapshot_date)
+               )"""
+        )
+    except Exception as e:
+        print(f"[{market}] confidence_history table init failed: {type(e).__name__}: {e}")
+        return []
+
+    # Compute current-week CI. Default scenario so week-over-week snapshots
+    # are comparable without scenario noise.
+    try:
+        inp = ProjectionInputs(
+            scope=market,
+            time_period=f'Y{current_year}',
+            target_mode='ieccp',
+            target_value=0.75,
+        )
+        result = _project(inp)
+        ci_blob = result.credible_intervals.get('total_regs') if result.credible_intervals else None
+        ci_90 = (ci_blob.get('ci') or {}).get('90') if isinstance(ci_blob, dict) else None
+        central = (ci_blob or {}).get('central') if isinstance(ci_blob, dict) else None
+        if ci_90 and central and central > 0:
+            ci_lo, ci_hi = ci_90[0], ci_90[1]
+            width_pct = (ci_hi - ci_lo) / central * 100.0
+            hcon.execute(
+                """INSERT OR REPLACE INTO forecast_uncertainty_history
+                   (market, snapshot_date, week_key, ci_width_pct,
+                    ci_lo_regs, ci_hi_regs, central_regs, method, engine_version)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (market, snapshot_date, week_key, round(width_pct, 2),
+                 round(ci_lo, 1), round(ci_hi, 1), round(central, 1),
+                 'bootstrap_90', result.methodology_version or ''),
+            )
+    except Exception as e:
+        print(f"[{market}] confidence_history snapshot skipped: {type(e).__name__}: {e}")
+
+    try:
+        rows = hcon.execute(
+            """SELECT week_key, ci_width_pct
+               FROM forecast_uncertainty_history
+               WHERE market = ?
+               ORDER BY snapshot_date DESC
+               LIMIT 16""",
+            (market,),
+        ).fetchall()
+        hcon.close()
+        return [{'week': r[0], 'ci_width_pct': float(r[1])} for r in reversed(rows)]
+    except Exception:
+        try:
+            hcon.close()
+        except Exception:
+            pass
+        return []
+
+
 def main() -> int:
     con = _get_connection()
     if con is None:
@@ -456,6 +553,14 @@ def main() -> int:
                 print(f"[{market}] brand_trajectory skipped: {type(e).__name__}: {e}")
 
             fallback_summary = _market_fallback_summary(params)
+
+            # Research report #P5-11 (mpe-findings): confidence_history sparkline
+            # in the Model View drawer. Snapshot current-week bootstrap CI width
+            # into ps.forecast_uncertainty_history on each export run (idempotent
+            # per market/date via PRIMARY KEY), then read back the last 16 rows.
+            # First run emits 1 row per market; weekly runs grow the history.
+            confidence_history = _snapshot_and_fetch_confidence_history(con, market, current_year)
+
             market_entry = {
                 'parameters': _json_safe(params),
                 'ytd_weekly': ytd,
@@ -465,6 +570,7 @@ def main() -> int:
                 'fallback_summary': fallback_summary,
                 'clean_weeks_count': len(ytd),
                 'op2_targets': op2_targets,
+                'confidence_history': confidence_history,
             }
             if spend_bounds is not None:
                 market_entry['_spend_bounds'] = spend_bounds

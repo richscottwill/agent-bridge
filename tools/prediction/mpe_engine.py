@@ -145,6 +145,15 @@ class ProjectionOutputs:
     contribution_breakdown: dict = field(default_factory=dict)
     locked_ytd_summary: dict = field(default_factory=dict)
     regime_stack: list[dict] = field(default_factory=list)
+    # Research report #076 (perf dashboard): per-tile provenance block so the
+    # Model View drawer can show "how was this number computed?" without the
+    # reader having to dig through parameters_used. Each key is a logical tile
+    # the UI renders; each value is {sql_or_fn, source_file, fit_call, last_computed}.
+    # sql_or_fn: SQL query or function signature that produced the tile
+    # source_file: "<filename>:<function>" for where to read the logic
+    # fit_call: fit-specific config string (null when tile isn't a fitted value)
+    # last_computed: ISO-8601 UTC timestamp
+    provenance: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -783,6 +792,11 @@ def project(inputs: ProjectionInputs) -> ProjectionOutputs:
         # Never let MC failure block the projection
         out.warnings.append(f"UNCERTAINTY_UNAVAILABLE: {type(e).__name__}: {e}")
 
+    # Research report #076: build the provenance block for the UI drawer.
+    # Runs last so every field it references (parameters_used, generated_at,
+    # credible_intervals outcome) is already populated on `out`.
+    out.provenance = _build_provenance(out, inputs)
+
     return out
 
 
@@ -1139,6 +1153,20 @@ def _project_region(
             unique_warnings.add(w)
     out.warnings = sorted(unique_warnings)
 
+    # Research report #076: regional rollup gets provenance too. Reuses the
+    # same _build_provenance helper — tile keys are the same, but source_files
+    # note the regional aggregation step.
+    out.provenance = _build_provenance(out, inputs)
+    for key in ('totals.total_spend', 'totals.total_regs', 'totals.brand_regs',
+                'totals.nb_regs', 'totals.brand_spend', 'totals.nb_spend',
+                'totals.annual_total_spend', 'weeks'):
+        if key in out.provenance:
+            out.provenance[key]['source_file'] = 'mpe_engine.py:_project_region'
+            out.provenance[key]['sql_or_fn'] = (
+                f"SUM({key}) across constituent markets "
+                f"{[m.scope for m in per_market_outputs]!r}"
+            )
+
     return out
 
 
@@ -1204,6 +1232,8 @@ def main(argv: list[str] | None = None) -> int:
             'methodology_version': result.methodology_version,
             'generated_at': result.generated_at,
             'weeks': [asdict(w) for w in result.weeks],
+            # #076 (2026-05-02): per-tile provenance for the UI drawer
+            'provenance': result.provenance,
         }
         print(json.dumps(d, indent=2, default=str))
     else:
@@ -1399,6 +1429,194 @@ def _build_fit_quality_summary(result: 'ProjectionOutputs') -> dict:
         'overall_trust_reason': reason,
         'per_parameter': per_param,
     }
+
+
+def _build_provenance(result: 'ProjectionOutputs', inputs: 'ProjectionInputs') -> dict:
+    """Build a per-tile provenance block for the UI Model View drawer.
+
+    Research report #076 (perf dashboard). Exposes, for every logical tile the
+    projection-engine UI renders, a {sql_or_fn, source_file, fit_call,
+    last_computed} record so users can trace "how was this number computed?"
+    without reading parameters_used.
+
+    Tile keys match the shape of `ProjectionOutputs` fields the UI consumes:
+      - totals.total_spend, totals.total_regs, totals.computed_ieccp,
+        totals.blended_cpa, totals.brand_regs, totals.nb_regs,
+        totals.brand_spend, totals.nb_spend, totals.annual_total_spend
+      - credible_intervals (bootstrap CI payload)
+      - contribution_breakdown (seasonal/trend/regime/qualitative weights)
+      - regime_stack (list of active regimes with effective confidence)
+      - locked_ytd_summary (YTD actuals carry-through)
+      - weeks (per-week projections)
+      - fit_quality_summary (derived from parameters_used)
+
+    Fields per record:
+      sql_or_fn     — SQL query string OR function signature that produced it.
+                      null for tiles derived from two other tiles with no single
+                      source.
+      source_file   — "<filename>:<function>" locator, always populated.
+      fit_call      — fit-specific config string (e.g. "log-linear fit,
+                      half_life=52w, 2026-04-23"). null when the tile isn't a
+                      fitted value (raw reads, aggregates, solver outputs).
+      last_computed — ISO-8601 UTC. Uses the engine's generated_at stamp
+                      uniformly — per-tile stamping would require instrumenting
+                      each compute step, out of scope for this commit.
+    """
+    ts = result.generated_at or datetime.now().isoformat()
+    params = result.parameters_used or {}
+
+    def param_fit_call(name: str) -> str | None:
+        """Build a fit_call string from parameters_used[name] when r_squared exists."""
+        p = params.get(name)
+        if not isinstance(p, dict):
+            return None
+        r2 = p.get('r_squared')
+        n_weeks = p.get('n_weeks')
+        hl = p.get('half_life_weeks')
+        fb = p.get('fallback_level', 'unknown')
+        parts = []
+        if r2 is not None:
+            parts.append(f"r²={r2:.2f}")
+        if n_weeks is not None:
+            parts.append(f"n={n_weeks}w")
+        if hl is not None:
+            parts.append(f"half_life={hl}w")
+        parts.append(f"fallback={fb}")
+        return " · ".join(parts) if parts else None
+
+    # Target-solver signature — what the UI would see on the hero number.
+    solver_fn = (
+        f"V1_1_Slim.projectWithLockedYtd(market={inputs.scope!r}, "
+        f"period={inputs.time_period!r}, driver={inputs.target_mode!r}, "
+        f"target={inputs.target_value!r}, "
+        f"regime_multiplier={getattr(inputs, 'regime_multiplier', 1.0)!r})"
+    )
+
+    # NB residual solver — the piece that produces total_spend / total_regs when
+    # the target is ie%CCP. Brand comes from the trajectory; NB is the solved residual.
+    nb_elasticity_fit = param_fit_call('nb_cpa_elasticity')
+    brand_elasticity_fit = param_fit_call('brand_cpa_elasticity')
+    brand_share_fit = param_fit_call('brand_spend_share')
+
+    # Build the provenance dict. Keys are UI-tile identifiers.
+    prov: dict[str, dict] = {}
+
+    # Target-driven totals — all flow through the NB residual solver against
+    # the Brand trajectory anchor.
+    for tile in ('total_spend', 'total_regs', 'computed_ieccp', 'blended_cpa',
+                 'annual_total_spend'):
+        prov[f'totals.{tile}'] = {
+            'sql_or_fn': solver_fn,
+            'source_file': 'mpe_engine.py:project',
+            'fit_call': nb_elasticity_fit,
+            'last_computed': ts,
+        }
+
+    # Brand breakdown — anchored by brand_trajectory + per-regime confidence.
+    for tile in ('brand_regs', 'brand_spend'):
+        prov[f'totals.{tile}'] = {
+            'sql_or_fn': (
+                f"brand_trajectory.project_brand_trajectory("
+                f"market={inputs.scope!r}, weights=default_4040_15)"
+            ),
+            'source_file': 'brand_trajectory.py:project_brand_trajectory',
+            'fit_call': brand_elasticity_fit,
+            'last_computed': ts,
+        }
+
+    # NB breakdown — from the NB residual solver.
+    for tile in ('nb_regs', 'nb_spend'):
+        prov[f'totals.{tile}'] = {
+            'sql_or_fn': (
+                f"nb_residual_solver.solve_nb_residual("
+                f"market={inputs.scope!r}, "
+                f"driver={inputs.target_mode!r}, target={inputs.target_value!r})"
+            ),
+            'source_file': 'nb_residual_solver.py:solve_nb_residual',
+            'fit_call': nb_elasticity_fit,
+            'last_computed': ts,
+        }
+
+    # Bootstrap CI — fitted from recent-YTD residuals.
+    prov['credible_intervals'] = {
+        'sql_or_fn': f"V1_1_Slim.bootstrapCI(projection, ytd_weekly[{inputs.scope!r}], alpha=0.10)",
+        'source_file': 'v1_1_slim.py:bootstrapCI',
+        'fit_call': "residual bootstrap, 2000 draws, alpha=0.10",
+        'last_computed': ts,
+    }
+
+    # Contribution breakdown — stream weights for the Brand trajectory compose step.
+    prov['contribution_breakdown'] = {
+        'sql_or_fn': (
+            f"brand_trajectory.project_brand_trajectory("
+            f"market={inputs.scope!r}).contribution"
+        ),
+        'source_file': 'brand_trajectory.py:project_brand_trajectory',
+        'fit_call': "seasonal+trend+regime multiplicative compose",
+        'last_computed': ts,
+    }
+
+    # Regime stack — reads from ps.regime_fit_state + ps.regime_changes.
+    prov['regime_stack'] = {
+        'sql_or_fn': (
+            "SELECT * FROM ps.regime_fit_state_current rfs "
+            "LEFT JOIN ps.regime_changes rc ON rc.id = rfs.regime_id "
+            f"WHERE rc.market = {inputs.scope!r} AND rc.is_structural_baseline = TRUE"
+        ),
+        'source_file': 'regime_confidence.py:list_regimes_with_confidence',
+        'fit_call': "weekly refit via fit_regime_state.py",
+        'last_computed': ts,
+    }
+
+    # Locked-YTD summary — raw actuals from ps.v_weekly up through YTD latest.
+    prov['locked_ytd_summary'] = {
+        'sql_or_fn': (
+            "SELECT period_start AS week_start, regs, spend, clicks, "
+            "brand_regs, nb_regs, brand_spend, nb_spend "
+            "FROM ps.v_weekly "
+            f"WHERE market = {inputs.scope!r} AND period_start <= ytd_latest "
+            "ORDER BY period_start"
+        ),
+        'source_file': 'locked_ytd.py:fetch_ytd_actuals',
+        'fit_call': None,  # raw data read, not a fitted value
+        'last_computed': ts,
+    }
+
+    # Per-week projections — derived from the solver's weekly outputs.
+    prov['weeks'] = {
+        'sql_or_fn': (
+            "Weekly outputs from project_with_locked_ytd — Brand per-week from "
+            "brand_trajectory, NB per-week from solve_nb_residual × seasonal weights"
+        ),
+        'source_file': 'locked_ytd.py:project_with_locked_ytd',
+        'fit_call': None,  # derived aggregation, not a single fitted tile
+        'last_computed': ts,
+    }
+
+    # Fit quality summary — derived from parameters_used r² + fallback levels.
+    prov['fit_quality_summary'] = {
+        'sql_or_fn': "Derived from parameters_used (no single source)",
+        'source_file': 'mpe_engine.py:_build_fit_quality_summary',
+        'fit_call': None,
+        'last_computed': ts,
+    }
+
+    # Parameters used — raw config snapshot from ps.market_projection_params.
+    prov['parameters_used'] = {
+        'sql_or_fn': (
+            "SELECT * FROM ps.market_projection_params_current "
+            f"WHERE market = {inputs.scope!r}"
+        ),
+        'source_file': 'mpe_engine.py:_load_market_params',
+        'fit_call': None,
+        'last_computed': ts,
+    }
+
+    # Share aware about BrandShare if fitted.
+    if brand_share_fit:
+        prov['totals.brand_regs']['fit_call'] = brand_share_fit
+
+    return prov
 
 
 if __name__ == "__main__":
