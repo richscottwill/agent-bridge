@@ -547,6 +547,13 @@ details.sec-panel:not([open]) + details.sec-panel {
     <h3 class="drawer-section-title">Parameters used</h3>
     <div id="dv-parameters" style="font-size:11px"></div>
   </div>
+  <!-- #076 (2026-05-01): Provenance section. Consumes out.provenance from mpe_engine.py
+       (1db618b) — 16 tile keys, each with {sql_or_fn, source_file, fit_call, last_computed}.
+       Sibling to Parameters used; provides click-to-copy SQL for queries. -->
+  <div class="drawer-section" id="drawer-provenance-section">
+    <h3 class="drawer-section-title">Provenance</h3>
+    <div id="dv-provenance" style="font-size:11px"></div>
+  </div>
 </aside>
 
 <!-- Provenance modal -->

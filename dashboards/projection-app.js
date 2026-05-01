@@ -2268,6 +2268,60 @@
       const v = p.value_scalar != null ? p.value_scalar.toFixed(2) : JSON.stringify(p.value_json).slice(0, 40);
       return `<div style="padding:3px 0;border-bottom:1px solid #EEE"><b>${k}</b>: ${v}<br><span style="font-size:10px;color:var(--color-text-subtle)">${p.lineage || ''}</span></div>`;
     }).join('');
+
+    // #076 (2026-05-01): Provenance render. out.provenance is a dict of tileKey ->
+    // {sql_or_fn, source_file, fit_call, last_computed} emitted by mpe_engine.py
+    // (commit 1db618b). Groups tiles by type (SQL / Fitted / Aggregate) and provides
+    // click-to-copy on SQL blocks.
+    const provEl = document.getElementById('dv-provenance');
+    if (provEl) {
+      const prov = out && out.provenance;
+      if (!prov || typeof prov !== 'object' || !Object.keys(prov).length) {
+        provEl.innerHTML = '<div style="opacity:0.6;padding:4px 0">No provenance data emitted by this projection.</div>';
+      } else {
+        const entries = Object.entries(prov);
+        const groups = { sql: [], fitted: [], aggregate: [] };
+        entries.forEach(([tile, p]) => {
+          if (p && p.sql_or_fn && /^SELECT/i.test(p.sql_or_fn)) groups.sql.push([tile, p]);
+          else if (p && p.fit_call) groups.fitted.push([tile, p]);
+          else groups.aggregate.push([tile, p || {}]);
+        });
+        function escHtml(s) {
+          return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' })[c]);
+        }
+        function renderTile(tile, p) {
+          const src = p.source_file || '\u2014';
+          const stamp = p.last_computed ? new Date(p.last_computed).toLocaleString() : '\u2014';
+          const fit = p.fit_call ? '<div style="color:var(--color-text-subtle);font-size:10px;margin-top:2px">' + escHtml(p.fit_call) + '</div>' : '';
+          let call = '';
+          if (p.sql_or_fn) {
+            const isSql = /^SELECT/i.test(p.sql_or_fn);
+            const btn = isSql ? '<button class="provenance-copy" data-sql="' + escHtml(p.sql_or_fn) + '" title="Copy SQL to clipboard" style="margin-left:6px;padding:1px 5px;font-size:10px;border:1px solid #D1D5DB;background:#FFFFFF;border-radius:3px;cursor:pointer">copy</button>' : '';
+            call = '<pre style="margin:2px 0;padding:4px 6px;background:#F5F5F5;border-radius:3px;font-size:10px;overflow-x:auto;white-space:pre-wrap;word-break:break-word">' + escHtml(p.sql_or_fn) + '</pre>' + btn;
+          }
+          return '<div style="padding:4px 0;border-bottom:1px solid #EEE"><b style="font-size:11px">' + escHtml(tile) + '</b><div style="color:var(--color-text-subtle);font-size:10px">' + escHtml(src) + ' \u00b7 ' + stamp + '</div>' + fit + call + '</div>';
+        }
+        let html = '';
+        if (groups.sql.length) html += '<div style="font-weight:600;font-size:11px;color:var(--color-text-subtle);margin:6px 0 2px">SQL (' + groups.sql.length + ')</div>' + groups.sql.map(([t, p]) => renderTile(t, p)).join('');
+        if (groups.fitted.length) html += '<div style="font-weight:600;font-size:11px;color:var(--color-text-subtle);margin:10px 0 2px">Fitted (' + groups.fitted.length + ')</div>' + groups.fitted.map(([t, p]) => renderTile(t, p)).join('');
+        if (groups.aggregate.length) html += '<div style="font-weight:600;font-size:11px;color:var(--color-text-subtle);margin:10px 0 2px">Aggregate (' + groups.aggregate.length + ')</div>' + groups.aggregate.map(([t, p]) => renderTile(t, p)).join('');
+        provEl.innerHTML = html;
+        // Wire copy buttons — idempotent on every render since innerHTML was reset
+        provEl.querySelectorAll('.provenance-copy').forEach(b => {
+          b.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const sql = b.getAttribute('data-sql') || '';
+            if (navigator.clipboard && sql) {
+              navigator.clipboard.writeText(sql).then(() => {
+                const orig = b.textContent;
+                b.textContent = 'copied';
+                setTimeout(() => { b.textContent = orig; }, 1200);
+              });
+            }
+          });
+        });
+      }
+    }
   }
 
   // ========================================================================
