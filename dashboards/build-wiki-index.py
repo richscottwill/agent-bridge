@@ -12,10 +12,93 @@ Sources indexed:
 Output: data/wiki-search-index.json
         data/wiki-docs/<id>.txt  (full body text per doc for viewer)
 """
-import json, re, os, sys, hashlib
+import json, re, os, sys, hashlib, subprocess
 from pathlib import Path
 from datetime import datetime
 from collections import Counter
+
+# Bucket C #028 — agent attribution via git log parsing.
+# Commit subject prefixes reliably identify the authoring agent:
+#   "agent-bus: kiro-server NNN ..." → kiro-server post
+#   "agent-bus: kiro-local NNN ..."  → kiro-local post
+#   "feat(wiki-search): ..."         → kiro-local (owns wiki-search.html)
+#   "feat(projection): ..."          → kiro-server (owns projection engine)
+#   "feat(weekly-review): ..."       → either agent depending on commit; parsed via co-signature if present
+# Everything else falls back to "unknown".
+AGENT_PATTERNS = [
+    (re.compile(r"(?i)kiro-server", re.I), "kiro-server"),
+    (re.compile(r"(?i)kiro-local", re.I), "kiro-local"),
+    (re.compile(r"(?i)karpathy", re.I), "karpathy"),
+    (re.compile(r"(?i)rw-trainer", re.I), "rw-trainer"),
+    (re.compile(r"(?i)wiki-writer", re.I), "wiki-writer"),
+    (re.compile(r"(?i)wiki-researcher", re.I), "wiki-researcher"),
+    (re.compile(r"(?i)wiki-editor", re.I), "wiki-editor"),
+    (re.compile(r"(?i)wiki-critic", re.I), "wiki-critic"),
+]
+
+_git_root_cache = None
+def _git_root():
+    global _git_root_cache
+    if _git_root_cache is not None:
+        return _git_root_cache
+    try:
+        r = subprocess.run(
+            ["git", "-C", str(WIKI_ROOT.parent), "rev-parse", "--show-toplevel"],
+            capture_output=True, text=True, timeout=5,
+        )
+        if r.returncode == 0:
+            _git_root_cache = r.stdout.strip()
+        else:
+            _git_root_cache = ""
+    except Exception:
+        _git_root_cache = ""
+    return _git_root_cache
+
+
+def infer_agent_attribution(rel_path):
+    """Parse git log for a file and derive agent attribution.
+
+    Returns dict with:
+      - last_agent: the agent tied to the most recent commit that touched this file
+      - commit_count: total commits touching this file
+      - authoring_agents: sorted list of agents ever touching the file, most-frequent-first
+    Returns {} if git is unavailable or the file has no history yet.
+    """
+    root = _git_root()
+    if not root:
+        return {}
+    try:
+        r = subprocess.run(
+            ["git", "-C", root, "log", "--format=%s", "--", str(Path("wiki") / rel_path)],
+            capture_output=True, text=True, timeout=5,
+        )
+        if r.returncode != 0 or not r.stdout.strip():
+            return {}
+        subjects = [s for s in r.stdout.splitlines() if s.strip()]
+    except Exception:
+        return {}
+
+    def classify(subj):
+        for pat, name in AGENT_PATTERNS:
+            if pat.search(subj):
+                return name
+        # Path-based fallback — commits touching wiki-search.html are kiro-local by convention,
+        # projection.html / mpe_engine.py are kiro-server. For wiki content files themselves
+        # we have no strong signal from these patterns, so return "unknown" rather than guess.
+        return "unknown"
+
+    agents = [classify(s) for s in subjects]
+    counter = Counter(agents)
+    # last_agent = agent of most recent commit (first in git log output)
+    last_agent = agents[0] if agents else "unknown"
+    ranked = [a for a, _ in counter.most_common() if a != "unknown"]
+    if not ranked and "unknown" in counter:
+        ranked = ["unknown"]
+    return {
+        "last_agent": last_agent,
+        "commit_count": len(agents),
+        "authoring_agents": ranked,
+    }
 
 WIKI_ROOT = Path(__file__).parent.parent / "wiki"
 OUTPUT = Path(__file__).parent / "data" / "wiki-search-index.json"
@@ -354,6 +437,20 @@ def index_file(filepath):
         except Exception:
             pass
 
+    # Bucket C #026 — published_lag_days: how many days the SharePoint copy trails the local update.
+    # Positive = SP is behind local (needs re-push). Negative = SP is ahead (unusual). Null = not published or missing dates.
+    published_lag_days = None
+    if published and sharepoint_modified and fm.get("updated"):
+        try:
+            sp_date = datetime.fromisoformat(sharepoint_modified[:10])
+            local_date = datetime.fromisoformat(fm.get("updated", "")[:10])
+            published_lag_days = (local_date - sp_date).days
+        except Exception:
+            published_lag_days = None
+
+    # Bucket C #028 — agent attribution via git log.
+    attribution = infer_agent_attribution(rel_path)
+
     return {
         "id": doc_id,
         "title": title,
@@ -380,6 +477,10 @@ def index_file(filepath):
         "sharepoint_path": sharepoint_path,
         "sharepoint_modified": sharepoint_modified,
         "sharepoint_stale": sharepoint_stale,
+        "published_lag_days": published_lag_days,
+        "last_agent": attribution.get("last_agent", "unknown"),
+        "commit_count": attribution.get("commit_count", 0),
+        "authoring_agents": attribution.get("authoring_agents", []),
     }
 
 
@@ -1138,6 +1239,35 @@ def main():
     # be promoted to the wiki. Emit shape matching what wiki-search.html expects.
     agent_drafts = scan_agent_drafts()
 
+    # Bucket C #027 — category_mean_word_count: per-category mean + p50/p90 word counts so
+    # consumers can render a bullet chart for "this doc's length vs category norm".
+    # Skip archived + near-empty stub docs (<50 words) so the mean reflects meaningful articles.
+    cat_lengths = {}
+    for d in unique_docs:
+        if d.get("archived"):
+            continue
+        wc = d.get("word_count", 0)
+        if wc < 50:
+            continue
+        cat = d.get("category", "Uncategorized")
+        cat_lengths.setdefault(cat, []).append(wc)
+    category_word_stats = {}
+    for cat, lens in cat_lengths.items():
+        slens = sorted(lens)
+        n = len(slens)
+        mean = sum(slens) / n if n else 0
+        p50 = slens[n // 2] if n else 0
+        p90 = slens[min(n - 1, int(n * 0.9))] if n else 0
+        category_word_stats[cat] = {
+            "n": n,
+            "mean": round(mean),
+            "p50": p50,
+            "p90": p90,
+        }
+
+    # Bucket C #028 — last_agent_counts: dashboard-wide rollup of per-agent authored doc counts.
+    last_agent_counts = Counter(d.get("last_agent", "unknown") for d in unique_docs if not d.get("archived"))
+
     index = {
         "generated": datetime.now().isoformat(),
         "total_docs": len(unique_docs),
@@ -1176,6 +1306,10 @@ def main():
         "demand_log_entries": demand_log,
         # WS-M11 — agent-authored drafts awaiting promotion
         "agent_drafts": agent_drafts,
+        # Bucket C #027 — per-category word-count stats for canonical-length bullet chart
+        "category_word_stats": category_word_stats,
+        # Bucket C #028 — per-agent authored doc count rollup
+        "last_agent_counts": dict(last_agent_counts),
         "documents": docs,
     }
 
