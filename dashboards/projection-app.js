@@ -3586,6 +3586,35 @@
     });
     document.getElementById('btn-save').addEventListener('click', saveProjection);
     document.getElementById('btn-export-csv').addEventListener('click', exportProjectionCsv);
+    // #087 (2026-05-01): Copy shareable URL. The state is already synced into
+    // location.search by syncUrlFromState() on every recompute, so we just read
+    // the current URL and hand it to the clipboard. Flashes "Link copied" on
+    // success. Falls back to a prompt() on older browsers. The URL encodes
+    // scope/period/driver/target + regime/scenario (per #069); pasting into
+    // Slack or a doc reproduces the full scenario on open.
+    const copyLinkBtn = document.getElementById('btn-copy-link');
+    if (copyLinkBtn) {
+      copyLinkBtn.addEventListener('click', async () => {
+        // Force-sync so the URL reflects the absolute latest state before copy.
+        try { syncUrlFromState(); } catch (e) { /* best-effort */ }
+        const href = window.location.href;
+        const orig = copyLinkBtn.textContent;
+        const flash = (msg) => {
+          copyLinkBtn.textContent = msg;
+          setTimeout(() => { copyLinkBtn.textContent = orig; }, 1400);
+        };
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(href);
+            flash('Link copied');
+          } else {
+            window.prompt('Copy this URL:', href);
+          }
+        } catch (e) {
+          window.prompt('Copy this URL:', href);
+        }
+      });
+    }
     const resetBtn = document.getElementById('btn-reset');
     if (resetBtn) resetBtn.addEventListener('click', resetToDefaults);
 
