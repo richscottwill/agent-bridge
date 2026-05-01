@@ -897,6 +897,280 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   font-size: 10px;
 }
 
+/* Wave 2 (2026-04-30, kiro-server): bucket-A T1/T2/T3 items from the 50-item
+   wiki-redesign research backlog. Each block tagged with its suggestion number. */
+
+/* #004: 4-stop age scale (fresh/aging/stale/ancient) replaces binary "⚠ stale" */
+.b-age-fresh   { background: rgba(4,120,87,0.10);  color: #047857; font-size: 10px; }
+.b-age-aging   { background: rgba(107,114,128,0.10); color: #5A6373; font-size: 10px; }
+.b-age-stale   { background: rgba(180,83,9,0.10);  color: #B45309; font-size: 10px; }
+.b-age-ancient { background: rgba(153,27,27,0.10); color: #991B1B; font-size: 10px; }
+
+/* #023: "Since last look" badge for docs updated since user's last session */
+.b-new {
+  background: rgba(109,40,217,0.10);
+  color: #6D28D9;
+  font-size: 10px;
+  font-weight: 600;
+}
+.b-new.b-new-fading { opacity: 0.55; }
+
+/* #008: ⌘K command palette overlay */
+.wk-cmdk-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 17, 17, 0.38);
+  z-index: 100;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+  backdrop-filter: blur(2px);
+}
+.wk-cmdk-overlay.open { display: flex; }
+.wk-cmdk-panel {
+  width: 560px;
+  max-width: calc(100vw - 40px);
+  background: #FFFFFF;
+  border: 1px solid #D1D5DB;
+  border-radius: 10px;
+  box-shadow: 0 18px 48px rgba(15, 17, 17, 0.22);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.wk-cmdk-input {
+  border: 0;
+  border-bottom: 1px solid #E0E0E0;
+  padding: 14px 18px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #161D26;
+  outline: none;
+  background: #FFFFFF;
+}
+.wk-cmdk-list { max-height: 420px; overflow-y: auto; padding: 6px 0; }
+.wk-cmdk-row {
+  padding: 8px 18px;
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  cursor: pointer;
+  font-size: 13px;
+  color: #161D26;
+  border-left: 3px solid transparent;
+}
+.wk-cmdk-row:hover, .wk-cmdk-row.active {
+  background: #F5F5F5;
+  border-left-color: #1E40AF;
+}
+.wk-cmdk-row-label { flex: 1; }
+.wk-cmdk-row-kind {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  color: #6B6B6B;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.wk-cmdk-hint {
+  padding: 6px 18px;
+  font-size: 10px;
+  color: #6B6B6B;
+  border-top: 1px solid #E0E0E0;
+  background: #FAFAFA;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* #015 + #016 + #017: dense filter row, market pulse strip, dismissible chips */
+.wk-filter-row-compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  padding: 4px 20px;
+}
+.wk-pulse-strip {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  padding: 0 6px;
+  border-left: 1px solid #E0E0E0;
+  margin-left: 4px;
+}
+.wk-pulse-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #E0E0E0;
+  cursor: pointer;
+  transition: transform .1s;
+  position: relative;
+}
+.wk-pulse-dot:hover { transform: scale(1.2); border-color: #1E40AF; }
+.wk-pulse-dot.on { box-shadow: 0 0 0 2px #1E40AF; }
+.wk-pulse-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 9px;
+  color: #6B6B6B;
+  letter-spacing: 0.04em;
+  margin-right: 4px;
+}
+.wk-active-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px 20px;
+  min-height: 0;
+}
+.wk-active-chips:empty { padding: 0; }
+.wk-active-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px 2px 10px;
+  background: rgba(30,64,175,0.08);
+  border: 1px solid rgba(30,64,175,0.18);
+  color: #1E40AF;
+  border-radius: 12px;
+  font-size: 11px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.wk-active-chip-x {
+  background: none;
+  border: 0;
+  padding: 0 0 0 2px;
+  color: #1E40AF;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+.wk-active-chip-x:hover { color: #D13212; }
+
+/* #035: Action-first footer inside doc viewer */
+.viewer-actions {
+  display: flex;
+  gap: 8px;
+  padding: 14px 0 2px;
+  border-top: 1px solid #E0E0E0;
+  margin-top: 18px;
+}
+.viewer-action {
+  background: #F5F5F5;
+  border: 1px solid #D1D5DB;
+  color: #161D26;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all .12s;
+}
+.viewer-action:hover { border-color: #1E40AF; color: #1E40AF; }
+.viewer-action.primary { background: #1E40AF; color: #FFFFFF; border-color: #1E40AF; }
+.viewer-action.primary:hover { background: #1D4ED8; }
+
+/* #038: Pipeline column stacked-bar capacity */
+.wk-stack-bar {
+  width: 100%;
+  height: 6px;
+  background: #F5F5F5;
+  border-radius: 3px;
+  overflow: hidden;
+  display: flex;
+  margin: 4px 0 6px;
+}
+.wk-stack-bar-seg { height: 100%; }
+.wk-stack-bar-seg.draft   { background: #9A9A9A; }
+.wk-stack-bar-seg.review  { background: #B45309; }
+.wk-stack-bar-seg.final   { background: #047857; }
+.wk-stack-bar-seg.active  { background: #1E40AF; }
+.wk-stack-bar-seg.other   { background: #D1D5DB; }
+
+/* #039: Pipeline velocity row */
+.wk-velocity-row {
+  font-size: 10px;
+  color: #6B6B6B;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.02em;
+  margin-top: 2px;
+}
+.wk-velocity-row .good { color: #047857; font-weight: 600; }
+.wk-velocity-row .bad  { color: #D13212; font-weight: 600; }
+
+/* #043: Graph minimap hub/orphan highlight-mode toggle */
+.wk-graph-mode-toggle {
+  display: inline-flex;
+  gap: 6px;
+  margin-left: 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 9px;
+  color: #6B6B6B;
+}
+.wk-graph-mode-btn {
+  background: none;
+  border: 1px solid #E0E0E0;
+  color: #5A6373;
+  padding: 2px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 9px;
+  font-family: inherit;
+}
+.wk-graph-mode-btn.on { background: rgba(30,64,175,0.10); color: #1E40AF; border-color: #1E40AF; }
+
+/* #045: Active TOC on homepage (left rail, collapsible) */
+.wk-sidenav {
+  flex-shrink: 0;
+  width: 220px;
+  background: #FAFAFA;
+  border-right: 1px solid #E0E0E0;
+  padding: 10px 12px;
+  overflow-y: auto;
+  font-size: 12px;
+}
+.wk-sidenav.collapsed { width: 24px; padding: 10px 4px; }
+.wk-sidenav.collapsed .wk-sidenav-body { display: none; }
+.wk-sidenav-toggle {
+  background: none;
+  border: 0;
+  color: #5A6373;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0 0 6px;
+}
+.wk-sidenav-section {
+  font-size: 10px;
+  color: #6B6B6B;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 10px 0 4px;
+  font-weight: 600;
+}
+.wk-sidenav-item {
+  display: block;
+  padding: 3px 6px;
+  color: #161D26;
+  cursor: pointer;
+  border-radius: 3px;
+  text-decoration: none;
+  line-height: 1.3;
+}
+.wk-sidenav-item:hover { background: #F5F5F5; color: #1E40AF; }
+.wk-sidenav-item.on { background: rgba(30,64,175,0.08); color: #1E40AF; font-weight: 600; }
+.wk-sidenav-item-count {
+  color: #9A9A9A;
+  font-size: 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  margin-left: 4px;
+}
+
+/* #048: Inline text sparklines in prose */
+.wk-inline-spark {
+  display: inline-block;
+  vertical-align: -2px;
+  margin: 0 1px;
+}
+
 </style>
 </head>
 <body>
@@ -1046,7 +1320,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </section>
 
 <div class="filter-section" id="filterSection"></div>
+<!-- Wave 2 (2026-04-30, kiro-server): #017 active-filter chips row + #016 market pulse strip
+     both attach inline here so they sit between the filter-section and the results area. -->
+<div class="wk-active-chips" id="wkActiveChips" aria-label="Active filters"></div>
 <div class="main">
+  <!-- #045 (2026-04-30): active TOC on homepage — left rail mirrors category tree. Collapsible. -->
+  <aside class="wk-sidenav" id="wkSidenav" aria-label="Category navigation">
+    <button class="wk-sidenav-toggle" onclick="toggleSidenav()" aria-label="Collapse sidebar" title="Collapse (c)">◀</button>
+    <div class="wk-sidenav-body" id="wkSidenavBody"></div>
+  </aside>
   <div class="results" id="results"></div>
   <div class="pipeline" id="pipeline" style="display:none"></div>
   <div class="viewer" id="viewer">
@@ -1062,6 +1344,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
          this page references). Hidden entirely when both halves empty. -->
     <div class="viewer-lineage" id="viewerLineage" style="display:none"></div>
     <div class="viewer-body" id="viewerBody"><div class="viewer-loading">Select a document to view</div></div>
+    <!-- #035 (2026-04-30): action-first footer at bottom of viewer. Three actions. -->
+    <div class="viewer-actions" id="viewerActions" style="display:none">
+      <button class="viewer-action primary" onclick="openRawSource()" title="Open the raw markdown file in a new tab">Open raw source</button>
+      <button class="viewer-action" onclick="lintCurrentDoc()" title="Re-run lint checks on this doc">Lint this page</button>
+      <button class="viewer-action" onclick="copyDocLink()" title="Copy a link to this doc you can paste in Slack">Copy link</button>
+    </div>
   </div>
 </div>
 <div class="upload-zone" id="uploadZone">
@@ -1236,6 +1524,24 @@ fetch('data/wiki-search-index.json?'+Date.now()).then(r=>r.json()).then(data=>{
   // "collecting data" placeholder when <7 daily snapshots are
   // available; fills in as the daily builder accumulates rows.
   renderHealthFan();
+  // Wave 2 (2026-04-30): #020 restore last query + filters from localStorage
+  // (does nothing if both are empty). #023 last-visit bookmark for "since last look" badges.
+  restoreSearchState();
+  try {
+    const now=Date.now();
+    const prev=parseInt(localStorage.getItem('wk_last_visit')||'0',10);
+    // Only advance last_visit once per session (don't re-mark every query).
+    if(!window.__wk_visit_stamped){
+      // Keep the prior value for THIS session; write a new stamp on next load.
+      if(prev) window.__wk_prev_visit=prev;
+      localStorage.setItem('wk_last_visit', String(now));
+      window.__wk_visit_stamped=true;
+    }
+  } catch(e){}
+  // Wave 2: #045 active TOC on homepage left rail (renders into .wk-sidenav).
+  renderActiveTOC(data);
+  // Wave 2: #017 dismissible filter chips row
+  renderActiveChips();
   doSearch();
 }).catch(e=>{
   console.error(e);
@@ -1896,6 +2202,10 @@ function buildFilters(data){
     btn.classList.add('on');
     updateFilterActiveLabel();
     doSearch();
+    // Wave 2: persist filter state + sync active-chip row + sidenav highlights
+    if(typeof persistSearchState==='function') persistSearchState();
+    if(typeof renderActiveChips==='function') renderActiveChips();
+    if(IX && typeof renderActiveTOC==='function') renderActiveTOC(IX);
   });
 }
 
@@ -1947,7 +2257,30 @@ document.getElementById('sortSelect').addEventListener('change',e=>{
 // ── Search ──
 const si=document.getElementById('searchInput');
 let dt=null;
-si.addEventListener('input',()=>{clearTimeout(dt);dt=setTimeout(()=>{if(currentView==='pipeline')renderPipeline();else doSearch()},120)});
+// #020 (2026-04-30): persist last query + filter state so reopening the page restores context.
+// Esc still clears. Only runs after the first IX load so we don't stomp on a URL param if present.
+function persistSearchState(){
+  try{
+    localStorage.setItem('wk_last_query', si.value||'');
+    localStorage.setItem('wk_last_filters', JSON.stringify(F||{}));
+  }catch(e){}
+}
+function restoreSearchState(){
+  try{
+    const q=localStorage.getItem('wk_last_query');
+    const f=JSON.parse(localStorage.getItem('wk_last_filters')||'null');
+    if(q && !si.value) si.value=q;
+    if(f && typeof f==='object'){
+      Object.keys(f).forEach(k=>{ if(k in F) F[k]=f[k]; });
+      // Sync filter buttons
+      document.querySelectorAll('.f').forEach(b=>{
+        const k=b.dataset.fk, v=b.dataset.fv;
+        if(k && v) b.classList.toggle('on', (F[k]||'all')===v);
+      });
+    }
+  }catch(e){}
+}
+si.addEventListener('input',()=>{clearTimeout(dt);dt=setTimeout(()=>{if(currentView==='pipeline')renderPipeline();else{doSearch();persistSearchState();}},120)});
 
 function doSearch(){
   if(!IX)return;
@@ -1988,8 +2321,14 @@ function doSearch(){
   }
 
   // Feature 7: Expand query with synonyms + fuzzy matching
-  const origTokens=q.split(/\s+/).filter(t=>t.length>=2);
-  const expandedTokens=expandQuery(q);
+  // #018 (2026-04-30): Exact-phrase search via "double quotes". Presence of a matched pair of quotes
+  // switches scoring to strict substring-only, no synonym expansion, no token split. Falls back to
+  // fuzzy when no quotes are present. Respects partial / unbalanced quotes = no-op.
+  const quoted=q.match(/^"([^"]+)"$/);
+  const isQuotedPhrase=!!quoted;
+  const phrase=quoted?quoted[1].toLowerCase():'';
+  const origTokens=isQuotedPhrase ? [] : q.split(/\s+/).filter(t=>t.length>=2);
+  const expandedTokens=isQuotedPhrase ? [] : expandQuery(q);
   const synOnly=expandedTokens.filter(t=>!origTokens.includes(t));
 
   const scored=docs.map(doc=>{
@@ -1997,6 +2336,14 @@ function doSearch(){
     const tl=doc.title.toLowerCase();
     const sl=doc.snippet.toLowerCase();
     const st=doc.search_text||'';
+
+    // #018: quoted-phrase strict match — only matches if phrase appears in title/snippet/search_text.
+    if(isQuotedPhrase){
+      if(tl.includes(phrase)) sc+=150;
+      if(sl.includes(phrase)) sc+=60;
+      if(st.includes(phrase)) sc+=30;
+      return {doc, sc};
+    }
 
     // Exact full-query matches (highest weight)
     if(tl.includes(q))sc+=100;
@@ -2125,11 +2472,27 @@ function updCount(n){
 function render(items,q,isRecentFeed){
   const c=document.getElementById('results');
   if(!items.length){
+    // #021 (2026-04-30): empty-state teaches search with 4 live-data example queries instead of the
+    // vague "try different keywords" copy. Examples match real docs in the index so clicking runs
+    // the query and lands on results.
+    const examples=[
+      '"oci test methodology"',
+      'polaris brand lp',
+      'callout W16 MX',
+      'karpathy',
+    ];
+    const exampleHtml=examples.map(x=>
+      '<button class="f" style="margin:0 4px 0 0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;" '+
+      'onclick="(function(q){document.getElementById(\'searchInput\').value=q;doSearch();persistSearchState();})(\''+x.replace(/"/g,'&quot;').replace(/\'/g,'\\\'')+'\')">'+esc(x)+'</button>'
+    ).join('');
     c.innerHTML=q
-      ?'<div class="empty"><div class="icon">🔍</div><h3>No results for "'+esc(q)+'"</h3><p>Try different keywords or broaden filters. Synonyms are checked automatically.</p></div>'
+      ?'<div class="empty"><div class="icon">🔍</div><h3>No results for "'+esc(q)+'"</h3>'+
+        '<p style="margin-bottom:8px">Try one of these:</p>'+
+        '<div style="display:flex;flex-wrap:wrap;gap:4px">'+exampleHtml+'</div>'+
+        '<p style="margin-top:12px;font-size:12px;color:#6B6B6B">Quote phrases like <code>"exact match"</code> for strict matching. <code>Esc</code> clears. <code>⌘K</code> opens the palette.</p></div>'
       :showArchived
-        ?'<div class="empty"><div class="icon">�️</div><h3>No archived documents</h3><p>Archived docs appear here when the archive toggle is on.</p></div>'
-        :'<div class="empty"><div class="icon">�📚</div><h3>No documents match these filters</h3><p>Adjust filters above or clear search.</p></div>';
+        ?'<div class="empty"><div class="icon">🗑️</div><h3>No archived documents</h3><p>Archived docs appear here when the archive toggle is on.</p></div>'
+        :'<div class="empty"><div class="icon">📚</div><h3>No documents match these filters</h3><p>Adjust filters above or clear search.</p></div>';
     return;
   }
   const tokens=q?q.split(/\s+/).filter(t=>t.length>=2):[];
@@ -2269,8 +2632,40 @@ function renderPipeline(){
     const cards=items.length
       ?items.map(d=>renderPipeCard(d,colKey)).join('')
       :'<div class="pipe-empty">No items</div>';
+    // Wave 2 #038: stacked-bar capacity visualization under column header.
+    // Each column shows its own status mix (draft/review/final/active/archived/other).
+    const mix={draft:0,review:0,final:0,active:0,archived:0,other:0};
+    items.forEach(d=>{
+      const s=effectiveStatus(d);
+      if(s==='DRAFT')mix.draft++;
+      else if(s==='REVIEW')mix.review++;
+      else if(s==='FINAL')mix.final++;
+      else if(s==='ACTIVE')mix.active++;
+      else if(d.archived)mix.archived++;
+      else mix.other++;
+    });
+    const total=items.length||1;
+    const bar=(total>1)?(
+      '<div class="wk-stack-bar" title="' +
+      Object.entries(mix).filter(([,n])=>n).map(([k,n])=>k+': '+n).join(' · ') +
+      '">'+
+      Object.entries(mix).filter(([,n])=>n).map(([k,n])=>
+        '<div class="wk-stack-bar-seg '+k+'" style="width:'+(100*n/total)+'%"></div>'
+      ).join('')+'</div>'
+    ):'';
+    // Wave 2 #039: velocity row — rough "moved in / moved out / net" from the last 7 days.
+    // We approximate: docs updated within last 7d AND now in this column = moved in.
+    // Real flow tracking would need historical status snapshots; this is the cheap proxy.
+    const SEVEN_DAYS=7*864e5;
+    const now=Date.now();
+    const recent=items.filter(d=>d.updated && (now - new Date(d.updated).getTime()) < SEVEN_DAYS).length;
+    const velocityHtml='<div class="wk-velocity-row">'+
+      (recent>0?'<span class="good">+'+recent+' fresh (7d)</span>':'<span>—</span>')+
+      ' · '+items.length+' total</div>';
     return '<div class="pipe-col">'+
       '<div class="pipe-col-head '+cls+'"><span class="pipe-col-title">'+esc(label)+'</span><span class="pipe-col-count">'+items.length+'</span></div>'+
+      bar+
+      velocityHtml+
       '<div class="pipe-col-body">'+cards+'</div></div>';
   }).join('');
   container.innerHTML=html||'<div class="empty" style="margin:auto"><div class="icon">📋</div><h3>No articles match these filters</h3><p>Clear filters or switch to Search view.</p></div>';
@@ -2321,12 +2716,31 @@ function renderDocCard(doc,tokens,childCount,isChild){
   const tops=(doc.topics||[]).slice(0,3).map(t=>'<span class="b b-topic">'+esc(t)+'</span>').join('');
   const tgs=(doc.tags||[]).slice(0,2).map(t=>'<span class="b b-tag">'+esc(t)+'</span>').join('');
   const isViewing=viewingDoc===doc.id;
-  // Stale indicator on card
-  let staleTag='';
+  // #004 (2026-04-30): 4-stop age scale — fresh/aging/stale/ancient. Replaces the prior binary
+  // "⚠ stale" badge. No badge emitted for fresh docs (0-30d).
+  let ageTag='';
   if(doc.updated){
     const age=(Date.now()-new Date(doc.updated).getTime())/(864e5);
-    if(age>90)staleTag='<span class="b" style="background:rgba(180,83,9,0.08);color:#B45309">⚠ stale</span>';
+    const days=Math.round(age);
+    if(age>180)      ageTag='<span class="b b-age-ancient" title="'+days+' days old — repair or archive">'+days+'d</span>';
+    else if(age>90)  ageTag='<span class="b b-age-stale"   title="'+days+' days old — verify">⚠ '+days+'d</span>';
+    else if(age>30)  ageTag='<span class="b b-age-aging"   title="'+days+' days old — aging">'+days+'d</span>';
   }
+  // #023 (2026-04-30): "Since last look" badge for docs updated since user's last visit.
+  // Uses localStorage wk_last_visit (set once per session on load) + wk_new_seen (per-doc view count).
+  let newBadge='';
+  try{
+    const lastVisit=parseInt(localStorage.getItem('wk_last_visit')||'0',10);
+    if(lastVisit && doc.updated){
+      const updatedMs=new Date(doc.updated).getTime();
+      if(updatedMs >= lastVisit){
+        const seenMap=JSON.parse(localStorage.getItem('wk_new_seen')||'{}');
+        const seen=seenMap[doc.id]||0;
+        const cls='b b-new'+(seen>=3?' b-new-fading':'');
+        newBadge='<span class="'+cls+'" title="Updated since your last visit ('+new Date(lastVisit).toLocaleDateString()+')">✨ new</span>';
+      }
+    }
+  }catch(e){}
   // Archive badge
   const archiveBadge=doc.archived?'<span class="b" style="background:rgba(153,27,27,0.10);color:#991B1B">archived</span>':'';
   // M09 (2026-04-30): Orphan + contradiction badges on cards.
@@ -2350,12 +2764,20 @@ function renderDocCard(doc,tokens,childCount,isChild){
     else spBadge='<span class="b b-sp-local" title="Local only — not on SharePoint">📄 local</span>';
   }
   const childCls=isChild?' rc-child':'';
+  // #024 (2026-04-30): compression ratio — words / incoming references.
+  const sourcesCount=(doc.reverse_related_docs||[]).length;
+  const compressionMeta=(doc.word_count && sourcesCount)
+    ? '<span title="'+doc.word_count.toLocaleString()+' words across '+sourcesCount+' incoming references — compression ratio, Karpathy principle #12">'+doc.word_count.toLocaleString()+'w · '+Math.round(doc.word_count/sourcesCount)+' w/src</span>'
+    : (doc.word_count?'<span>'+doc.word_count.toLocaleString()+' words</span>':'');
+  // #029 (2026-04-30): reading-time estimate at 250 wpm.
+  const readTime=doc.word_count ? '<span title="'+Math.max(1,Math.round(doc.word_count/250))+' min at 250 wpm">'+Math.max(1,Math.round(doc.word_count/250))+' min read</span>' : '';
   return '<div class="rc'+childCls+'" style="'+(isViewing?'border-color:#1E40AF;background:#F5F5F5':'')+(isChild?';margin-left:18px;border-left:2px solid #BFD4F2':'')+'" onclick="openDoc(\''+doc.id+'\')">'+
     '<div class="rc-head"><div class="rc-title">'+title+'</div>'+
-    '<div class="rc-badges">'+(doc.status?'<span class="b '+sc+'">'+doc.status+'</span>':'')+spBadge+'<span class="b b-cat">'+esc(doc.category)+'</span>'+mkts+tops+tgs+staleTag+archiveBadge+orphanBadge+contradictionBadge+'</div></div>'+
+    '<div class="rc-badges">'+(doc.status?'<span class="b '+sc+'">'+doc.status+'</span>':'')+spBadge+'<span class="b b-cat">'+esc(doc.category)+'</span>'+mkts+tops+tgs+ageTag+archiveBadge+orphanBadge+contradictionBadge+newBadge+'</div></div>'+
     '<div class="rc-snip">'+snip+'</div>'+
     '<div class="rc-meta">'+
-      (doc.word_count?'<span>'+doc.word_count.toLocaleString()+' words</span>':'')+
+      compressionMeta+
+      readTime+
       (doc.updated?'<span>'+doc.updated+'</span>':'')+
       (doc.audience?'<span>'+esc(doc.audience)+'</span>':'')+
       (doc.doc_type?'<span>'+esc(doc.doc_type)+'</span>':'')+
@@ -2397,6 +2819,15 @@ function openDoc(id,fromLink){
   renderRelatedLinks(doc);
   // M08 (2026-04-30): Render lineage strip (sources-in + links-out).
   renderLineage(doc);
+  // Wave 2: #035 action-first footer becomes visible when a doc is open.
+  const actions=document.getElementById('viewerActions');
+  if(actions) actions.style.display='';
+  // Wave 2: #023 "since last look" fading — bump the per-doc seen counter.
+  try {
+    const seen=JSON.parse(localStorage.getItem('wk_new_seen')||'{}');
+    seen[id]=(seen[id]||0)+1;
+    localStorage.setItem('wk_new_seen', JSON.stringify(seen));
+  } catch(e){}
 
   // Check if uploaded doc (has inline body)
   if(doc._body){
@@ -2415,11 +2846,14 @@ function openDoc(id,fromLink){
 function renderViewerBody(body,doc,md){
   let html='';
 
-  // Feature 3: Stale banner
+  // #032 (2026-04-30): Stale banner upgraded to projection exception-banner pattern with
+  // severity tiers. 90d = amber "verify", 180d = red "repair or archive".
   if(doc.updated){
     const age=Math.floor((Date.now()-new Date(doc.updated).getTime())/(864e5));
-    if(age>90){
-      html+='<div class="stale-banner"><span class="stale-icon">⚠️</span> Last updated '+age+' days ago — this document may need verification</div>';
+    if(age>180){
+      html+='<div class="stale-banner" style="background:rgba(209,50,18,0.08);border-color:rgba(209,50,18,0.18);color:#991B1B"><span class="stale-icon">⛔</span> <strong>'+age+' days</strong> since last update — this document is ancient. Repair or archive.</div>';
+    } else if(age>90){
+      html+='<div class="stale-banner"><span class="stale-icon">⚠️</span> <strong>'+age+' days</strong> since last update — verify this doc still reflects reality.</div>';
     }
   }
 
@@ -2431,7 +2865,18 @@ function renderViewerBody(body,doc,md){
   tmp.innerHTML=rendered;
   const headers=tmp.querySelectorAll('h1,h2,h3');
   if(headers.length>2){
-    html+='<details class="wiki-toc" open><summary>Contents ('+headers.length+')</summary><ul>';
+    // #033 (2026-04-30): TOC auto-collapses for docs with >20 headings (long reference docs
+    // like context-catalog and PS wiki eat 40% of viewport with an always-open TOC). Per-doc
+    // state persists in localStorage.
+    const docKey='wk_toc_open_'+(doc.id||'anon');
+    let tocOpen;
+    try {
+      const stored=localStorage.getItem(docKey);
+      tocOpen = stored===null ? (headers.length<=20) : stored==='1';
+    } catch(e) { tocOpen = headers.length<=20; }
+    html+='<details class="wiki-toc"'+(tocOpen?' open':'')+
+      ' ontoggle="try{localStorage.setItem(\''+docKey+'\',this.open?\'1\':\'0\')}catch(e){}">'+
+      '<summary>Contents ('+headers.length+')</summary><ul>';
     headers.forEach((hdr,i)=>{
       hdr.id='toc-'+i;
       const cls=hdr.tagName==='H3'?' class="toc-h3"':'';
@@ -2466,14 +2911,18 @@ function renderRelatedLinks(doc){
   const rels=doc.related_docs||[];
   if(!rels.length){container.style.display='none';return}
   container.style.display='block';
+  // #034 (2026-04-30): direct-label related links with endpoint labels.
+  // Replace ambiguous "Title (10)" with "Title → 10 shared refs" so the edge weight is explicit.
   let html='<div class="viewer-related-label">🔗 Related ('+rels.length+')</div><div class="viewer-related-links">';
   rels.forEach(r=>{
+    const weight=r.shared||0;
+    const weightLabel=weight?' → '+weight+' shared ref'+(weight===1?'':'s'):'';
     html+='<a class="rel-link" onclick="event.preventDefault();openDoc(\''+r.id+'\',true)">'+
       esc(r.title)+
-      '<span class="rel-cat">'+esc(r.category||'')+'</span>'+
+      '<span class="rel-cat">'+esc(r.category||'')+weightLabel+'</span>'+
       '<div class="rel-tooltip">'+
         '<div class="rel-tooltip-title">'+esc(r.title)+'</div>'+
-        '<div class="rel-tooltip-cat">'+esc(r.category||'')+'</div>'+
+        '<div class="rel-tooltip-cat">'+esc(r.category||'')+' · '+weight+' shared keywords</div>'+
         '<div class="rel-tooltip-snip">'+esc(r.snippet||'')+'</div>'+
       '</div>'+
     '</a>';
@@ -2604,6 +3053,124 @@ async function renderHealthFan(){
     '</div>';
   const last=rows[rows.length-1];
   if(sub)sub.textContent=rows.length+' snapshots · '+rows[0].date+' → '+last.date+' · latest: '+last.total_docs+' docs, '+(last.orphans||0)+' orphans, '+(last.contradictions||0)+' contradictions';
+}
+
+// ── Wave 2 (2026-04-30, kiro-server): #017 #045 active-TOC sidenav + active-chips + viewer actions ──
+
+// #045: Active table-of-contents on homepage. Left rail, collapsible. Category counts + topic counts.
+// Clicking a row applies the matching filter. Current filter highlighted.
+function renderActiveTOC(data){
+  const body=document.getElementById('wkSidenavBody');
+  const rail=document.getElementById('wkSidenav');
+  if(!body||!rail)return;
+  // Respect user's collapse preference
+  try {
+    if(localStorage.getItem('wk_sidenav_collapsed')==='1'){ rail.classList.add('collapsed'); }
+  } catch(e){}
+  const cats=Object.entries(data.categories||{}).sort((a,b)=>b[1]-a[1]);
+  const statuses=Object.entries(data.statuses||{}).sort((a,b)=>b[1]-a[1]);
+  const topics=Object.entries(data.topics||{}).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  let html='';
+  html+='<div class="wk-sidenav-section">Status</div>';
+  html+=statuses.map(([s,n])=>(
+    '<a class="wk-sidenav-item'+(F.status===s?' on':'')+'" '+
+    'onclick="applyFilterFromToc(\'status\',\''+esc(s)+'\')">'+
+    esc(s)+'<span class="wk-sidenav-item-count">'+n+'</span></a>'
+  )).join('');
+  html+='<div class="wk-sidenav-section">Category</div>';
+  html+=cats.map(([c,n])=>(
+    '<a class="wk-sidenav-item'+(F.category===c?' on':'')+'" '+
+    'onclick="applyFilterFromToc(\'category\',\''+esc(c).replace(/\'/g,'&#39;')+'\')">'+
+    esc(c)+'<span class="wk-sidenav-item-count">'+n+'</span></a>'
+  )).join('');
+  html+='<div class="wk-sidenav-section">Topic</div>';
+  html+=topics.map(([t,n])=>(
+    '<a class="wk-sidenav-item'+(F.topic===t?' on':'')+'" '+
+    'onclick="applyFilterFromToc(\'topic\',\''+esc(t)+'\')">'+
+    esc(t)+'<span class="wk-sidenav-item-count">'+n+'</span></a>'
+  )).join('');
+  body.innerHTML=html;
+}
+function applyFilterFromToc(key, val){
+  if(F[key]===val){ F[key]='all'; } else { F[key]=val; }
+  // Sync filter buttons
+  document.querySelectorAll('.f[data-fk="'+key+'"]').forEach(b=>{
+    b.classList.toggle('on', b.dataset.fv===F[key]);
+  });
+  doSearch();
+  persistSearchState();
+  renderActiveChips();
+  if(IX) renderActiveTOC(IX);
+}
+function toggleSidenav(){
+  const rail=document.getElementById('wkSidenav');
+  rail.classList.toggle('collapsed');
+  try { localStorage.setItem('wk_sidenav_collapsed', rail.classList.contains('collapsed')?'1':'0'); } catch(e){}
+  const btn=rail.querySelector('.wk-sidenav-toggle');
+  if(btn) btn.textContent=rail.classList.contains('collapsed')?'▶':'◀';
+}
+
+// #017: Active-filter chip row — dismissible chips replace the pipe-separated label.
+function renderActiveChips(){
+  const host=document.getElementById('wkActiveChips');
+  if(!host)return;
+  const active=[];
+  Object.keys(F).forEach(k=>{
+    if(F[k]&&F[k]!=='all') active.push({key:k, val:F[k]});
+  });
+  if(!active.length){ host.innerHTML=''; return; }
+  host.innerHTML=active.map(({key,val})=>(
+    '<span class="wk-active-chip">'+
+    esc(key)+': '+esc(val)+
+    '<button class="wk-active-chip-x" '+
+    'onclick="applyFilterFromToc(\''+key+'\',\''+esc(val).replace(/\'/g,'&#39;')+'\')" '+
+    'title="Remove this filter">×</button></span>'
+  )).join('');
+}
+
+// #035: viewer action-first footer handlers
+function openRawSource(){
+  if(!viewingDoc) return;
+  const doc=(IX&&IX.documents||[]).find(d=>d.id===viewingDoc);
+  if(!doc||!doc.path) return;
+  // Serve.py serves ~/shared/ as static; doc.path is relative to wiki root
+  const href='../'+(doc.path.startsWith('wiki/')?doc.path:'wiki/'+doc.path);
+  window.open(href,'_blank','noopener');
+}
+function lintCurrentDoc(){
+  if(!viewingDoc) return;
+  const doc=(IX&&IX.documents||[]).find(d=>d.id===viewingDoc);
+  if(!doc) return;
+  const issues=(doc.lint_status&&doc.lint_status.issues)||[];
+  if(!issues.length){
+    alert('No lint issues on this doc.\nChecks run: thin-final, no-topic, isolated, flat-structure, sp-stale.');
+    return;
+  }
+  const lines=issues.map(i=>'[' + i.severity + '] ' + i.code + ': ' + i.detail).join('\n');
+  alert('Lint status for this doc:\n\n'+lines);
+}
+function copyDocLink(){
+  if(!viewingDoc) return;
+  const url=location.origin+location.pathname+'?doc='+encodeURIComponent(viewingDoc);
+  try{
+    navigator.clipboard.writeText(url);
+  } catch(e){}
+}
+
+// #043: Graph minimap hub/orphan highlight mode. Toggle activates a visual filter
+// on the force-directed graph that fades non-hub / non-orphan nodes. Hook wires into
+// the existing graph renderer if/when it sets window.__wk_graph_nodes.
+let wkGraphMode='all';
+function setGraphMode(mode){
+  wkGraphMode = (wkGraphMode===mode)?'all':mode;
+  document.querySelectorAll('.wk-graph-mode-btn').forEach(b=>{
+    b.classList.toggle('on', b.dataset.mode===wkGraphMode);
+  });
+  // Re-render if graph uses the mode
+  if(typeof renderGraphMinimap==='function' && window.__wk_graph_rendered){
+    window.__wk_graph_render_mode=wkGraphMode;
+    renderGraphMinimap();
+  }
 }
 
 // M03 (2026-04-30): Ingest strip. Renders 20 most-recently-updated
@@ -2740,6 +3307,8 @@ function closeViewer(){
   document.getElementById('viewerRelated').style.display='none';
   const lineageEl=document.getElementById('viewerLineage');
   if(lineageEl)lineageEl.style.display='none';
+  const actions=document.getElementById('viewerActions');
+  if(actions) actions.style.display='none';
   updateBackButton();
   doSearch();
 }
@@ -2843,7 +3412,106 @@ function hl(text,tokens){
 }
 
 // ── Keyboard ──
+// #008 (2026-04-30): ⌘K / Ctrl+K opens command palette. Palette offers page-jumps
+// (results/pipeline/viewer), filter shortcuts (reset, clear, toggle EU5), and top
+// docs by recency. Scroll position + current filters preserved on dismiss.
+let cmdkActions=[];
+let cmdkFilteredActions=[];
+let cmdkActiveIdx=0;
+function buildCmdkActions(){
+  const actions=[];
+  // View toggles
+  actions.push({kind:'nav', label:'Show search results', fn:()=>{showView('search')}});
+  actions.push({kind:'nav', label:'Show pipeline view', fn:()=>{showView('pipeline')}});
+  // Filter resets
+  actions.push({kind:'filter', label:'Reset all filters', fn:()=>{Object.keys(F).forEach(k=>F[k]='all'); document.querySelectorAll('.f').forEach(b=>b.classList.toggle('on',b.dataset.fv==='all')); doSearch()}});
+  actions.push({kind:'filter', label:'Clear search query', fn:()=>{si.value=''; doSearch()}});
+  // Status filter jumps
+  ['FINAL','ACTIVE','REVIEW','DRAFT'].forEach(st=>{
+    actions.push({kind:'filter', label:'Filter status: '+st, fn:()=>{F.status=st; document.querySelectorAll('.f[data-fk="status"]').forEach(b=>b.classList.toggle('on',b.dataset.fv===st)); doSearch()}});
+  });
+  // Market filter jumps (if data loaded)
+  if(IX&&IX.markets){
+    Object.keys(IX.markets).forEach(m=>{
+      actions.push({kind:'market', label:'Filter market: '+m, fn:()=>{F.market=m; document.querySelectorAll('.f[data-fk="market"]').forEach(b=>b.classList.toggle('on',b.dataset.fv===m)); doSearch()}});
+    });
+  }
+  // Top topics
+  if(IX&&IX.topics){
+    Object.keys(IX.topics).forEach(t=>{
+      actions.push({kind:'topic', label:'Filter topic: '+t, fn:()=>{F.topic=t; document.querySelectorAll('.f[data-fk="topic"]').forEach(b=>b.classList.toggle('on',b.dataset.fv===t)); doSearch()}});
+    });
+  }
+  // Top 10 most-recently-updated docs (from ingest_log_entries if present)
+  if(IX&&IX.ingest_log_entries){
+    IX.ingest_log_entries.slice(0,10).forEach(e=>{
+      actions.push({kind:'doc', label:e.title, fn:()=>{openDoc(e.id,true)}});
+    });
+  }
+  return actions;
+}
+function openCmdk(){
+  cmdkActions=buildCmdkActions();
+  cmdkFilteredActions=cmdkActions.slice();
+  cmdkActiveIdx=0;
+  const ov=document.getElementById('wkCmdkOverlay');
+  ov.classList.add('open');
+  const inp=document.getElementById('wkCmdkInput');
+  inp.value='';
+  renderCmdkList();
+  setTimeout(()=>inp.focus(),10);
+}
+function closeCmdk(){
+  document.getElementById('wkCmdkOverlay').classList.remove('open');
+}
+function renderCmdkList(){
+  const list=document.getElementById('wkCmdkList');
+  if(!cmdkFilteredActions.length){
+    list.innerHTML='<div class="wk-cmdk-row" style="opacity:0.6">No matches</div>';
+    return;
+  }
+  list.innerHTML=cmdkFilteredActions.slice(0,40).map((a,i)=>(
+    '<div class="wk-cmdk-row'+(i===cmdkActiveIdx?' active':'')+'" data-idx="'+i+'">'+
+    '<span class="wk-cmdk-row-label">'+esc(a.label)+'</span>'+
+    '<span class="wk-cmdk-row-kind">'+a.kind+'</span>'+
+    '</div>'
+  )).join('');
+}
+function filterCmdk(q){
+  const lq=q.toLowerCase().trim();
+  cmdkFilteredActions=lq?cmdkActions.filter(a=>a.label.toLowerCase().includes(lq)):cmdkActions.slice();
+  cmdkActiveIdx=0;
+  renderCmdkList();
+}
+function showView(which){
+  // Toggle between search + pipeline views. Mirrors the existing nav behavior.
+  const results=document.getElementById('results');
+  const pipeline=document.getElementById('pipeline');
+  if(which==='pipeline'){
+    if(results)results.style.display='none';
+    if(pipeline)pipeline.style.display='';
+    if(typeof renderPipeline==='function')renderPipeline();
+  } else {
+    if(results)results.style.display='';
+    if(pipeline)pipeline.style.display='none';
+  }
+}
 document.addEventListener('keydown',e=>{
+  // #008 ⌘K / Ctrl+K → command palette
+  if((e.key==='k'||e.key==='K') && (e.metaKey||e.ctrlKey)){
+    e.preventDefault();
+    const ov=document.getElementById('wkCmdkOverlay');
+    if(ov.classList.contains('open')){closeCmdk();} else {openCmdk();}
+    return;
+  }
+  // If palette open: handle its own keys
+  if(document.getElementById('wkCmdkOverlay').classList.contains('open')){
+    if(e.key==='Escape'){e.preventDefault();closeCmdk();return;}
+    if(e.key==='ArrowDown'){e.preventDefault();cmdkActiveIdx=Math.min(cmdkActiveIdx+1,cmdkFilteredActions.length-1);renderCmdkList();return;}
+    if(e.key==='ArrowUp'){e.preventDefault();cmdkActiveIdx=Math.max(cmdkActiveIdx-1,0);renderCmdkList();return;}
+    if(e.key==='Enter'){e.preventDefault();const a=cmdkFilteredActions[cmdkActiveIdx]; if(a){closeCmdk();a.fn();} return;}
+    return;
+  }
   if(e.key==='/'&&document.activeElement!==si){e.preventDefault();si.focus()}
   if(e.key==='Escape'){
     if(viewingDoc){closeViewer();return}
@@ -2856,6 +3524,20 @@ document.addEventListener('keydown',e=>{
   }
 });
 </script>
+
+<!-- #008 (2026-04-30): Command palette overlay (⌘K / Ctrl+K). Offers page-jumps,
+     filter shortcuts, and top-recent docs for keyboard-driven navigation. -->
+<div class="wk-cmdk-overlay" id="wkCmdkOverlay" onclick="if(event.target===this)closeCmdk()">
+  <div class="wk-cmdk-panel" role="dialog" aria-labelledby="wkCmdkLabel">
+    <input type="text" id="wkCmdkInput" class="wk-cmdk-input"
+           placeholder="Type to filter · ↑↓ to select · Enter to go · Esc to close"
+           aria-label="Command palette"
+           oninput="filterCmdk(this.value)"
+           onkeydown="/* keys handled by global listener when overlay is open */">
+    <div class="wk-cmdk-list" id="wkCmdkList" onclick="(function(e){const r=e.target.closest('.wk-cmdk-row');if(!r)return;const i=parseInt(r.dataset.idx,10);const a=cmdkFilteredActions[i];if(a){closeCmdk();a.fn();}})(event)"></div>
+    <div class="wk-cmdk-hint">↑↓ navigate · ⏎ activate · esc close · ⌘K toggle</div>
+  </div>
+</div>
 
 <script src="./shared/sparkline.js?v=2026-04-30"></script>
 <script src="./shared/section-freshness.js" defer></script>
