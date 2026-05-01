@@ -863,6 +863,43 @@ def main():
 
     markets = sorted(set(markets))
 
+    # Research report #046 — annotate each weekly[market][i] entry with YoY deltas
+    # so the WR detail table can render a YoY column without client-side joining.
+    # Keys added per entry: yoy_regs_pct, yoy_cost_pct, yoy_cpa_pct, ly_regs, ly_cost, ly_cpa.
+    # Null when last-year row is missing or zero (e.g., early 2025 weeks outside the LY window).
+    def _pct_delta(cur, prev):
+        if prev is None or not prev:
+            return None
+        if cur is None:
+            return None
+        try:
+            return round((cur - prev) / prev * 100, 1)
+        except ZeroDivisionError:
+            return None
+
+    yoy_annotated = 0
+    for mk, rows in weekly.items():
+        ly_by_wk = {r["wk"]: r for r in ly_weekly.get(mk, [])}
+        for row in rows:
+            ly = ly_by_wk.get(row["wk"])
+            if not ly:
+                row["yoy_regs_pct"] = None
+                row["yoy_cost_pct"] = None
+                row["yoy_cpa_pct"] = None
+                row["ly_regs"] = None
+                row["ly_cost"] = None
+                row["ly_cpa"] = None
+                continue
+            row["ly_regs"] = ly.get("regs")
+            row["ly_cost"] = ly.get("cost")
+            row["ly_cpa"] = ly.get("cpa")
+            row["yoy_regs_pct"] = _pct_delta(row.get("regs"), ly.get("regs"))
+            row["yoy_cost_pct"] = _pct_delta(row.get("cost"), ly.get("cost"))
+            row["yoy_cpa_pct"] = _pct_delta(row.get("cpa"), ly.get("cpa"))
+            if row["yoy_regs_pct"] is not None:
+                yoy_annotated += 1
+    print(f"YoY annotation: {yoy_annotated} weekly rows carry populated yoy_regs_pct")
+
     output = {
         "generated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "last_data_date": last_data_date,

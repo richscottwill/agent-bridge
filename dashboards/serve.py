@@ -12,6 +12,7 @@ visible "Refresh now" button wired to /api/refresh. No cron or hook
 dependency required for Richard to get fresh data.
 """
 import json, os, subprocess, sys, threading, time
+from datetime import datetime, timezone
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 
@@ -103,7 +104,108 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         return super().do_GET()
 
     def do_POST(self):
-        if self.path == "/api/feedback":
+        if self.path == "/api/wbr-note":
+            # Research report #066 — per-week WBR note persistence.
+            # Writes to ~/shared/context/active/wbr-notes.md. Append-or-update semantics:
+            # one block per (market, week) keyed by an HTML-style marker so re-saves replace
+            # rather than duplicate. Same-file, same-format every call so the file stays diffable.
+            #
+            # Expected JSON: {"market": "US", "week": "2026-W17", "note": "..."}
+            #   market: uppercase market code (US/UK/MX/WW/etc.)
+            #   week:   ISO week key like "2026-W17"
+            #   note:   free text; strips CRLF, preserves LF; empty string deletes the block
+            content_length = int(self.headers.get("Content-Length", 0))
+            body = self.rfile.read(content_length)
+            try:
+                payload = json.loads(body)
+            except Exception as e:
+                self._json(400, {"ok": False, "error": f"bad json: {e}"})
+                return
+
+            market = (payload.get("market") or "").strip().upper()
+            week = (payload.get("week") or "").strip()
+            note = (payload.get("note") or "").replace("\r\n", "\n").replace("\r", "\n")
+
+            # Minimal validation — market must be alnum, week must match YYYY-WNN
+            import re as _re
+            if not _re.match(r"^[A-Z0-9]{2,5}$", market):
+                self._json(400, {"ok": False, "error": "market must match /^[A-Z0-9]{2,5}$/"})
+                return
+            if not _re.match(r"^\d{4}-W\d{1,2}$", week):
+                self._json(400, {"ok": False, "error": "week must match /^\\d{4}-W\\d{1,2}$/"})
+                return
+            if len(note) > 10000:
+                self._json(400, {"ok": False, "error": "note exceeds 10000 chars"})
+                return
+
+            notes_path = Path.home() / "shared" / "context" / "active" / "wbr-notes.md"
+            notes_path.parent.mkdir(parents=True, exist_ok=True)
+            existing = notes_path.read_text() if notes_path.exists() else (
+                "# WBR notes\n\n"
+                "One block per (market, week). Written by weekly-review.html via /api/wbr-note.\n"
+                "Re-saving the same (market, week) replaces the existing block; empty note deletes it.\n\n"
+            )
+
+            # Block delimiter uses HTML comments so the file stays valid markdown in a viewer
+            # and the blocks are unambiguously parseable. Marker format matches what the WR
+            # dashboard reads back on load.
+            marker_start = f"<!-- wbr-note:{market}:{week} -->"
+            marker_end = f"<!-- /wbr-note:{market}:{week} -->"
+            block_re = _re.compile(
+                _re.escape(marker_start) + r"[\s\S]*?" + _re.escape(marker_end) + r"\n?",
+                _re.MULTILINE,
+            )
+            stripped = block_re.sub("", existing)
+
+            if note.strip():
+                ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+                block = (
+                    f"{marker_start}\n"
+                    f"## {market} · {week}\n\n"
+                    f"_updated {ts}_\n\n"
+                    f"{note.strip()}\n"
+                    f"{marker_end}\n\n"
+                )
+                new_content = stripped.rstrip() + "\n\n" + block
+            else:
+                # Empty note = delete this block
+                new_content = stripped.rstrip() + "\n"
+
+            notes_path.write_text(new_content)
+            self._json(200, {"ok": True, "market": market, "week": week, "deleted": not note.strip()})
+            return
+        elif self.path == "/api/wbr-note/get":
+            # Companion GET-via-POST so the dashboard can fetch a specific note by key
+            # without exposing the whole file over a GET (the file may contain other markets'
+            # notes the current view doesn't care about). Payload: {"market", "week"}.
+            content_length = int(self.headers.get("Content-Length", 0))
+            body = self.rfile.read(content_length)
+            try:
+                payload = json.loads(body)
+            except Exception as e:
+                self._json(400, {"ok": False, "error": f"bad json: {e}"})
+                return
+            market = (payload.get("market") or "").strip().upper()
+            week = (payload.get("week") or "").strip()
+            notes_path = Path.home() / "shared" / "context" / "active" / "wbr-notes.md"
+            if not notes_path.exists():
+                self._json(200, {"ok": True, "note": "", "exists": False})
+                return
+            import re as _re
+            marker_start = f"<!-- wbr-note:{market}:{week} -->"
+            marker_end = f"<!-- /wbr-note:{market}:{week} -->"
+            block_re = _re.compile(
+                _re.escape(marker_start) + r"\s*\n(?:## [^\n]*\n\n_updated [^_]+_\n\n)?([\s\S]*?)\n?"
+                + _re.escape(marker_end)
+            )
+            m = block_re.search(notes_path.read_text())
+            self._json(200, {
+                "ok": True,
+                "note": (m.group(1).strip() if m else ""),
+                "exists": bool(m),
+            })
+            return
+        elif self.path == "/api/feedback":
             content_length = int(self.headers.get("Content-Length", 0))
             body = self.rfile.read(content_length)
             try:
