@@ -4188,6 +4188,7 @@ function renderChart() {
   const rw = resolvedWeek();
   const evCallout = (CALLOUTS.callouts[curMarket] || {})[rw] || {};
   const eventAnnotations = Array.isArray(evCallout.events) ? evCallout.events : [];
+  const calibEventAnnotations = eventAnnotations.filter(e => e && (e.kind === 'streak' || e.kind === 'shift'));
   trendChart = CanonChart.render('trendChart', {
     forecastData: FORECAST,
     market: curMarket,
@@ -4205,6 +4206,7 @@ function renderChart() {
     highlightWeek: curWeek,
     chartInstance: calibrationChart,
     axisFilter: calibrationAxis,
+    eventAnnotations: calibEventAnnotations,
   });
   // Axis toggle wiring — idempotent per render via data-wired flag.
   wireAxisToggle('trendAxisToggle', () => trendAxis, (v) => {
