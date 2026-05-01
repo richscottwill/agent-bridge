@@ -1644,6 +1644,8 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
         <th class="r" title="Cost calibration â€” actual vs predicted (past weeks only)">Cost vs Pred</th>
         <th class="r">Regs WoW &Delta;</th>
         <th class="r">Cost WoW &Delta;</th>
+        <th class="r" title="Regs year-over-year — (actual - LY) / LY. Null when LY data missing (early-year LY gap).">Regs YoY &Delta;</th>
+        <th class="r" title="Cost year-over-year — higher cost YoY is not intrinsically bad, but flagged with inverted coloring">Cost YoY &Delta;</th>
       </tr></thead>
       <tbody id="weeklyBody"></tbody>
     </table>
@@ -4279,6 +4281,18 @@ function renderTable() {
       ? `<span class="wr-delta ${cls(costVsPredRaw, true)}">${costVsPredRaw > 0 ? '+' : ''}${costVsPredRaw.toFixed(1)}%</span>`
       : '\u2014';
 
+    // #046 (2026-05-01): YoY cells. Pipeline emits yoy_regs_pct / yoy_cost_pct per week.
+    // Null where LY data missing (early-year gap). We also null-out when isActual is false
+    // since YoY on a future-pred week isn't meaningful.
+    const regsYoyRaw = (isActual && w.yoy_regs_pct != null) ? w.yoy_regs_pct : null;
+    const regsYoyTxt = regsYoyRaw != null
+      ? `<span class="wr-delta ${cls(regsYoyRaw, false)}" title="LY W${w.wk}: ${w.ly_regs != null ? fmt(w.ly_regs, 'regs') : '\u2014'} regs">${regsYoyRaw > 0 ? '+' : ''}${regsYoyRaw.toFixed(1)}%</span>`
+      : '\u2014';
+    const costYoyRaw = (isActual && w.yoy_cost_pct != null) ? w.yoy_cost_pct : null;
+    const costYoyTxt = costYoyRaw != null
+      ? `<span class="wr-delta ${cls(costYoyRaw, true)}" title="LY W${w.wk}: ${w.ly_cost != null ? fmt(w.ly_cost, 'cost') : '\u2014'} cost">${costYoyRaw > 0 ? '+' : ''}${costYoyRaw.toFixed(1)}%</span>`
+      : '\u2014';
+
     return `<tr${rowClsAttr}>
       <td>${w.week}${predLabel}</td>
       <td class="r" style="color:var(--color-text-subtle)">${op2Val}</td>
@@ -4290,6 +4304,8 @@ function renderTable() {
       <td class="r">${costVsPredVal}</td>
       <td class="r">${regsWowTxt}</td>
       <td class="r">${costWowTxt}</td>
+      <td class="r">${regsYoyTxt}</td>
+      <td class="r">${costYoyTxt}</td>
     </tr>`;
   }).join('');
   // WR-S5 (2026-04-29): center the current-week row in the scroll viewport.
