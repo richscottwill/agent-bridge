@@ -911,7 +911,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 /* Wave 2 (2026-04-30, kiro-server): bucket-A T1/T2/T3 items from the 50-item
    wiki-redesign research backlog. Each block tagged with its suggestion number. */
 
-/* #004: 4-stop age scale (fresh/aging/stale/ancient) replaces binary "⚠ stale" */
+/* #004: 4-stop age scale (fresh/aging/stale/ancient) replaces binary "stale" badge */
 .b-age-fresh   { background: rgba(4,120,87,0.10);  color: #047857; font-size: 10px; }
 .b-age-aging   { background: rgba(107,114,128,0.10); color: #5A6373; font-size: 10px; }
 .b-age-stale   { background: rgba(180,83,9,0.10);  color: #B45309; font-size: 10px; }
@@ -1205,8 +1205,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
   <div class="wk-stick-search">
     <div class="view-toggle">
-      <button class="vt on" id="vt-search" onclick="setView('search')">🔍 Search</button>
-      <button class="vt" id="vt-pipeline" onclick="setView('pipeline')">📋 Pipeline</button>
+      <button class="vt on" id="vt-search" onclick="setView('search')">Search</button>
+      <button class="vt" id="vt-pipeline" onclick="setView('pipeline')">Pipeline</button>
     </div>
     <input type="text" class="search-input" id="searchInput" placeholder="Search by keyword, topic, market, or concept — fuzzy matching enabled" autofocus>
     <kbd class="wk-kbd">⌘K</kbd>
@@ -1216,7 +1216,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <option value="market">Columns: Market</option>
     </select>
     <button class="f published-toggle" id="publishedToggle" onclick="togglePublished()" title="Filter to SharePoint-published docs only">?? Published only</button>
-    <button class="f archive-toggle" id="archiveToggle" onclick="toggleArchive()" style="display:none">🗑 Archived <span class="fc" id="archiveCount"></span></button>
+    <button class="f archive-toggle" id="archiveToggle" onclick="toggleArchive()" style="display:none">Archived <span class="fc" id="archiveCount"></span></button>
     <select class="sort-select" id="sortSelect">
       <option value="relevance">Sort: Relevance</option>
       <option value="updated-desc">Updated (newest)</option>
@@ -1245,7 +1245,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
      branch without manual intervention. -->
 <div class="wk-agentic-ribbon" id="wkAgenticRibbon" style="display:none">
   <div class="wk-agentic-head">
-    <span class="wk-agentic-kicker">⚙ Agent-authored drafts</span>
+    <span class="wk-agentic-kicker">Agent-authored drafts</span>
     <span class="wk-agentic-sub" id="wkAgenticSub">Drafts awaiting review. One-click commit → push sends them to the wiki repo as a feature branch.</span>
     <button class="wk-agentic-dismiss" onclick="dismissAgenticRibbon()" aria-label="Dismiss">×</button>
   </div>
@@ -1365,7 +1365,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 <div class="upload-zone" id="uploadZone">
-  <div class="upload-box"><div class="icon">📄</div><div>Drop markdown file to preview</div>
+  <div class="upload-box"><div class="icon">file</div><div>Drop markdown file to preview</div>
   <div style="font-size:13px;color:#5A6373;margin-top:6px">File will be indexed in-memory for this session</div></div>
 </div>
 <div class="stats" id="statsBar"></div>
@@ -1557,7 +1557,7 @@ fetch('data/wiki-search-index.json?'+Date.now()).then(r=>r.json()).then(data=>{
   doSearch();
 }).catch(e=>{
   console.error(e);
-  document.getElementById('results').innerHTML='<div class="empty"><div class="icon">⚠️</div><h3>Index not found</h3><p>Run build-wiki-index.py</p></div>';
+  document.getElementById('results').innerHTML='<div class="empty"><div class="icon">[!]</div><h3>Index not found</h3><p>Run build-wiki-index.py</p></div>';
 });
 
 // M01 + M02 (2026-04-30): Hero KPI strip. Five cells: total docs,
@@ -1728,7 +1728,7 @@ function commitAgentDraft(idx) {
   }).then(r => r.ok ? r.json() : r.json().then(j => { throw new Error(j.error || 'commit failed'); }))
     .then(result => {
       if (btn) {
-        btn.textContent = 'Shipped ✓';
+        btn.textContent = 'Shipped';
         btn.title = `Commit ${result.commit_sha || ''} on ${result.branch || payload.branch}`;
       }
     })
@@ -2153,7 +2153,7 @@ function renderPipelineHeadline() {
     `</div>` +
     (needExc
       ? `<div class="wk-pipeline-exception" role="alert">` +
-        `<span class="wk-pipeline-exception-kicker">⚠ Exception · Pipeline</span>` +
+        `<span class="wk-pipeline-exception-kicker">Exception · Pipeline</span>` +
         `<span>${
           draftCount > 200 ? `Draft backlog at ${draftCount} — well over the 200-item ceiling. Dispatch editor review.`
           : reviewCount > 50 ? `Review backlog at ${reviewCount} — over the 50-item ceiling. Publish or demote aging entries.`
@@ -2177,7 +2177,7 @@ function buildFilters(data){
   if(sp.stale)spRows['stale']=sp.stale;
   if(sp.local_only!==undefined)spRows['local-only']=sp.local_only;
   // #007 + #015 (2026-05-01): Filter panel rework.
-  // #007: SharePoint row dropped � replaced by published-only toggle in the search bar.
+  // #007: SharePoint row dropped � replaced by published-only toggle in the search bar.
   // #015: 5 rows collapsed to 2. Row 1 (Scope) = Status + Market. Row 2 (Content) = Topic + Type.
   // Filter state + consumption logic unchanged; presentation grouped.
   const rowGroups=[
@@ -2518,20 +2518,20 @@ function render(items,q,isRecentFeed){
       'onclick="(function(q){document.getElementById(\'searchInput\').value=q;doSearch();persistSearchState();})(\''+x.replace(/"/g,'&quot;').replace(/\'/g,'\\\'')+'\')">'+esc(x)+'</button>'
     ).join('');
     c.innerHTML=q
-      ?'<div class="empty"><div class="icon">🔍</div><h3>No results for "'+esc(q)+'"</h3>'+
+      ?'<div class="empty"><h3>No results for "'+esc(q)+'"</h3>'+
         '<p style="margin-bottom:8px">Try one of these:</p>'+
         '<div style="display:flex;flex-wrap:wrap;gap:4px">'+exampleHtml+'</div>'+
-        '<p style="margin-top:12px;font-size:12px;color:#6B6B6B">Quote phrases like <code>"exact match"</code> for strict matching. <code>Esc</code> clears. <code>⌘K</code> opens the palette.</p></div>'
+        '<p style="margin-top:12px;font-size:12px;color:#6B6B6B">Quote phrases like <code>"exact match"</code> for strict matching. <code>Esc</code> clears. <code>Cmd+K</code> opens the palette.</p></div>'
       :showArchived
-        ?'<div class="empty"><div class="icon">🗑️</div><h3>No archived documents</h3><p>Archived docs appear here when the archive toggle is on.</p></div>'
-        :'<div class="empty"><div class="icon">📚</div><h3>No documents match these filters</h3><p>Adjust filters above or clear search.</p></div>';
+        ?'<div class="empty"><h3>No archived documents</h3><p>Archived docs appear here when the archive toggle is on.</p></div>'
+        :'<div class="empty"><h3>No documents match these filters</h3><p>Adjust filters above or clear search.</p></div>';
     return;
   }
   const tokens=q?q.split(/\s+/).filter(t=>t.length>=2):[];
   let html='';
   // Feature 1: Recent changes header
-  if(isRecentFeed)html+='<div class="recent-header">📝 Recently Updated</div>';
-  if(showArchived)html+='<div class="recent-header">🗑️ Archived Documents</div>';
+  if(isRecentFeed)html+='<div class="recent-header">Recently Updated</div>';
+  if(showArchived)html+='<div class="recent-header">Archived Documents</div>';
   html+=items.map(item=>{
     const doc=item.doc||item;
     const children=item.children||[];
@@ -2697,7 +2697,7 @@ function renderPipeline(){
       velocityHtml+
       '<div class="pipe-col-body">'+cards+'</div></div>';
   }).join('');
-  container.innerHTML=html||'<div class="empty" style="margin:auto"><div class="icon">📋</div><h3>No articles match these filters</h3><p>Clear filters or switch to Search view.</p></div>';
+  container.innerHTML=html||'<div class="empty" style="margin:auto"><h3>No articles match these filters</h3><p>Clear filters or switch to Search view.</p></div>';
   // M07 (2026-04-30): render pipeline headline + exception banner above columns.
   renderPipelineHeadline();
   // Update count
@@ -2717,7 +2717,7 @@ function renderPipeCard(doc,colKey){
   let actions='';
   if(idx>0)actions+='<button class="pipe-act demote" onclick="bumpStatus(\''+doc.id+'\',\'down\',event)" title="Demote to '+order[idx-1]+'">←</button>';
   if(idx>=0&&idx<order.length-1)actions+='<button class="pipe-act promote" onclick="bumpStatus(\''+doc.id+'\',\'up\',event)" title="Promote to '+order[idx+1]+'">→</button>';
-  if(isOverride)actions+='<button class="pipe-act" onclick="clearStatusOverride(\''+doc.id+'\',event)" title="Reset to frontmatter status ('+(doc.status||'DRAFT')+')">✕</button>';
+  if(isOverride)actions+='<button class="pipe-act" onclick="clearStatusOverride(\''+doc.id+'\',event)" title="Reset to frontmatter status ('+(doc.status||'DRAFT')+')">x</button>';
   // Age
   let age='';
   if(doc.updated){
@@ -2746,13 +2746,13 @@ function renderDocCard(doc,tokens,childCount,isChild){
   const tgs=(doc.tags||[]).slice(0,2).map(t=>'<span class="b b-tag">'+esc(t)+'</span>').join('');
   const isViewing=viewingDoc===doc.id;
   // #004 (2026-04-30): 4-stop age scale — fresh/aging/stale/ancient. Replaces the prior binary
-  // "⚠ stale" badge. No badge emitted for fresh docs (0-30d).
+  // "stale" badge. No badge emitted for fresh docs (0-30d).
   let ageTag='';
   if(doc.updated){
     const age=(Date.now()-new Date(doc.updated).getTime())/(864e5);
     const days=Math.round(age);
     if(age>180)      ageTag='<span class="b b-age-ancient" title="'+days+' days old — repair or archive">'+days+'d</span>';
-    else if(age>90)  ageTag='<span class="b b-age-stale"   title="'+days+' days old — verify">⚠ '+days+'d</span>';
+    else if(age>90)  ageTag='<span class="b b-age-stale"   title="'+days+' days old — verify">'+days+'d</span>';
     else if(age>30)  ageTag='<span class="b b-age-aging"   title="'+days+' days old — aging">'+days+'d</span>';
   }
   // #023 (2026-04-30): "Since last look" badge for docs updated since user's last visit.
@@ -2773,13 +2773,13 @@ function renderDocCard(doc,tokens,childCount,isChild){
         const seenMap=JSON.parse(localStorage.getItem('wk_new_seen')||'{}');
         const seen=seenMap[doc.id]||0;
         const cls='b b-new'+(seen>=3?' b-new-fading':'');
-        newBadge='<span class="'+cls+'" title="Updated since your last visit ('+new Date(lastVisit).toLocaleDateString()+')">✨ new</span>';
+        newBadge='<span class="'+cls+'" title="Updated since your last visit ('+new Date(lastVisit).toLocaleDateString()+')">new</span>';
       }
     }
   }catch(e){}
   // #028 (2026-05-01): Agent attribution pill.
   // Consumes doc.last_agent emitted by build-wiki-index.py (f2f4f28).
-  // Hidden when 'unknown' (honest � most files predate the convention).
+  // Hidden when 'unknown' (honest � most files predate the convention).
   // Color per known agent: kiro-server blue, kiro-local green, karpathy purple, others slate.
   let agentBadge='';
   if(doc.last_agent && doc.last_agent !== 'unknown'){
@@ -2788,7 +2788,7 @@ function renderDocCard(doc,tokens,childCount,isChild){
       : 'b-agent-other';
     const coAuthors = (doc.authoring_agents||[]).filter(a => a !== doc.last_agent);
     const tip = coAuthors.length
-      ? 'by '+doc.last_agent+' � co: '+coAuthors.join(', ')
+      ? 'by '+doc.last_agent+' � co: '+coAuthors.join(', ')
       : 'by '+doc.last_agent;
     agentBadge='<span class="b b-agent '+agentCls+'" title="'+tip.replace(/"/g,'&quot;')+'">by '+doc.last_agent+'</span>';
   }
@@ -2800,19 +2800,19 @@ function renderDocCard(doc,tokens,childCount,isChild){
   // already rolled warn-severity non-sp-stale issues into that list).
   let orphanBadge='';
   if(doc.is_orphan&&!doc.archived){
-    orphanBadge='<span class="b b-orphan" title="No inbound or outbound related_docs — consider linking from another page">⚠ orphan</span>';
+    orphanBadge='<span class="b b-orphan" title="No inbound or outbound related_docs — consider linking from another page">orphan</span>';
   }
   let contradictionBadge='';
   if(Array.isArray(doc.contradiction_issues)&&doc.contradiction_issues.length){
     const codes=doc.contradiction_issues.join(', ');
-    contradictionBadge='<span class="b b-contradiction" title="Lint flagged: '+esc(codes)+'">⚠ lint</span>';
+    contradictionBadge='<span class="b b-contradiction" title="Lint flagged: '+esc(codes)+'">lint</span>';
   }
   // SharePoint badge (only for wiki articles that could be published)
   let spBadge='';
   if((doc.source||'').startsWith('wiki-')&&doc.source!=='wiki-reviews'&&doc.source!=='wiki-meta'){
-    if(doc.sharepoint_stale)spBadge='<span class="b b-sp-stale" title="SharePoint copy is older than local">📤 stale</span>';
-    else if(doc.published)spBadge='<span class="b b-sp-pub" title="Published to SharePoint">📤 SP</span>';
-    else spBadge='<span class="b b-sp-local" title="Local only — not on SharePoint">📄 local</span>';
+    if(doc.sharepoint_stale)spBadge='<span class="b b-sp-stale" title="SharePoint copy is older than local">SP stale</span>';
+    else if(doc.published)spBadge='<span class="b b-sp-pub" title="Published to SharePoint">SP</span>';
+    else spBadge='<span class="b b-sp-local" title="Local only — not on SharePoint">local</span>';
   }
   // #026 (2026-05-01): SharePoint publication-lag badge.
   // doc.published_lag_days emitted by build-wiki-index.py (f2f4f28).
@@ -2823,7 +2823,7 @@ function renderDocCard(doc,tokens,childCount,isChild){
     const cls=doc.published_lag_days>7?'b-sp-lag-danger':'b-sp-lag-warn';
     const locUpd=doc.updated||'unknown';
     const spUpd=doc.sharepoint_updated||'unknown';
-    spLagBadge='<span class="b '+cls+'" title="Local updated '+locUpd+'; SharePoint copy last modified '+spUpd+' � push pending">SP +'+doc.published_lag_days+'d behind</span>';
+    spLagBadge='<span class="b '+cls+'" title="Local updated '+locUpd+'; SharePoint copy last modified '+spUpd+' � push pending">SP +'+doc.published_lag_days+'d behind</span>';
   }
   const childCls=isChild?' rc-child':'';
   // #024 (2026-04-30): compression ratio — words / incoming references.
@@ -2843,18 +2843,18 @@ function renderDocCard(doc,tokens,childCount,isChild){
       (doc.updated?'<span>'+doc.updated+'</span>':'')+
       (doc.audience?'<span>'+esc(doc.audience)+'</span>':'')+
       (doc.doc_type?'<span>'+esc(doc.doc_type)+'</span>':'')+
-      ((doc.related_docs||[]).length?'<span style="color:#1D4ED8">🔗 '+doc.related_docs.length+' related</span>':'')+
+      ((doc.related_docs||[]).length?'<span style="color:#1D4ED8">'+doc.related_docs.length+' related</span>':'')+
     '</div></div>';
 }
 
 // ── Document viewer ──
-// #027 (2026-05-01): Canonical-length bullet � how long this doc is vs its
+// #027 (2026-05-01): Canonical-length bullet � how long this doc is vs its
 // category's typical length. Consumes doc.word_count + index.category_word_stats.
 // Hidden when n < 5 (insufficient sample) or doc has no word_count.
 // Target = p50 (median). Bands: [0, p50] warn-short ? [p50, p90] good ? [p90, 2*p90] warn-long.
 // We use three bands rather than a symmetric mean-distance expansion to avoid
 // negative lower bounds on long-tail categories (Wiki System mean=1660 p50=952
-// diverges >70% � a mean-minus delta would go below zero, nonsensical).
+// diverges >70% � a mean-minus delta would go below zero, nonsensical).
 function renderCanonicalBullet(doc, IX) {
   if (!doc || !doc.word_count || !IX || !IX.category_word_stats) return '';
   const stats = IX.category_word_stats[doc.category];
@@ -2874,10 +2874,10 @@ function renderCanonicalBullet(doc, IX) {
   });
   const pctOfMedian = Math.round((doc.word_count / stats.p50) * 100);
   const tip = doc.word_count < stats.p50
-    ? doc.word_count.toLocaleString() + ' words � ' + (100 - pctOfMedian) + '% below this category\'s typical length (median ' + stats.p50.toLocaleString() + ')'
+    ? doc.word_count.toLocaleString() + ' words � ' + (100 - pctOfMedian) + '% below this category\'s typical length (median ' + stats.p50.toLocaleString() + ')'
     : doc.word_count > stats.p90
-      ? doc.word_count.toLocaleString() + ' words � ' + Math.round(doc.word_count / stats.p90 * 100 - 100) + '% above category p90 (' + stats.p90.toLocaleString() + ')'
-      : doc.word_count.toLocaleString() + ' words � in category typical range (p50 ' + stats.p50.toLocaleString() + ', p90 ' + stats.p90.toLocaleString() + ')';
+      ? doc.word_count.toLocaleString() + ' words � ' + Math.round(doc.word_count / stats.p90 * 100 - 100) + '% above category p90 (' + stats.p90.toLocaleString() + ')'
+      : doc.word_count.toLocaleString() + ' words � in category typical range (p50 ' + stats.p50.toLocaleString() + ', p90 ' + stats.p90.toLocaleString() + ')';
   return '<span class="wk-canonical-bullet" title="' + tip.replace(/"/g, '&quot;') + '" style="display:inline-flex;align-items:center;gap:6px;padding:2px 6px;background:rgba(107,114,128,0.08);border-radius:4px">' +
     '<span style="font-size:10px;color:#5A6373">vs category</span>' + bullet + '</span>';
 }
@@ -2948,9 +2948,9 @@ function renderViewerBody(body,doc,md){
   if(doc.updated){
     const age=Math.floor((Date.now()-new Date(doc.updated).getTime())/(864e5));
     if(age>180){
-      html+='<div class="stale-banner" style="background:rgba(209,50,18,0.08);border-color:rgba(209,50,18,0.18);color:#991B1B"><span class="stale-icon">⛔</span> <strong>'+age+' days</strong> since last update — this document is ancient. Repair or archive.</div>';
+      html+='<div class="stale-banner" style="background:rgba(209,50,18,0.08);border-color:rgba(209,50,18,0.18);color:#991B1B"><strong>'+age+' days</strong> since last update — this document is ancient. Repair or archive.</div>';
     } else if(age>90){
-      html+='<div class="stale-banner"><span class="stale-icon">⚠️</span> <strong>'+age+' days</strong> since last update — verify this doc still reflects reality.</div>';
+      html+='<div class="stale-banner"><strong>'+age+' days</strong> since last update — verify this doc still reflects reality.</div>';
     }
   }
 
@@ -2958,7 +2958,7 @@ function renderViewerBody(body,doc,md){
   // #031 (2026-05-01): Shallow contradiction banner.
   // Spec from kiro-server 014_kiro-server.md: filter doc.lint_status.issues[] by
   // severity==='warn' && code !== 'sp-stale' (sp-stale already surfaced via #026).
-  // Link to the most recent wiki-lint-audit doc � found by title/category scan on IX.
+  // Link to the most recent wiki-lint-audit doc � found by title/category scan on IX.
   if(doc.lint_status && Array.isArray(doc.lint_status.issues)){
     const warnIssues=doc.lint_status.issues.filter(i=>i && i.severity==='warn' && i.code!=='sp-stale');
     if(warnIssues.length>0){
@@ -3009,7 +3009,7 @@ function renderViewerBody(body,doc,md){
   // Feature 4: Backlinks / related docs (bottom of viewer — links to related)
   const rels=doc.related_docs||[];
   if(rels.length>0){
-    html+='<div class="backlinks"><div class="backlinks-title">🔗 Related Pages</div>';
+    html+='<div class="backlinks"><div class="backlinks-title">Related Pages</div>';
     rels.forEach(r=>{
       html+='<a onclick="event.preventDefault();openDoc(\''+r.id+'\',true)">'+esc(r.title)+'<span class="bl-count">'+r.shared+'</span></a>';
     });
@@ -3032,7 +3032,7 @@ function renderRelatedLinks(doc){
   container.style.display='block';
   // #034 (2026-04-30): direct-label related links with endpoint labels.
   // Replace ambiguous "Title (10)" with "Title → 10 shared refs" so the edge weight is explicit.
-  let html='<div class="viewer-related-label">🔗 Related ('+rels.length+')</div><div class="viewer-related-links">';
+  let html='<div class="viewer-related-label">Related ('+rels.length+')</div><div class="viewer-related-links">';
   rels.forEach(r=>{
     const weight=r.shared||0;
     const weightLabel=weight?' → '+weight+' shared ref'+(weight===1?'':'s'):'';

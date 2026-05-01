@@ -182,7 +182,7 @@
     const summary = STATE.data?.anomalies?.summary || {};
     const total = summary.total || 0;
     if (total === 0) {
-      el.innerHTML = '<span style="font-size:11px;color:var(--color-success)">✓ no anomalies</span>';
+      el.innerHTML = '<span style="font-size:11px;color:var(--color-success)">OK no anomalies</span>';
       return;
     }
     // Round 13 P1-09: scope label so the count is unambiguous.
@@ -195,7 +195,7 @@
     if (summary.error) parts.push(`<span style="color:var(--color-danger)">${summary.error} critical</span>`);
     if (summary.warn) parts.push(`<span style="color:var(--color-warning)">${summary.warn} warn</span>`);
     if (summary.info) parts.push(`<span style="color:var(--color-text-meta)">${summary.info} info</span>`);
-    el.innerHTML = `<span style="font-size:11px">⚠ <span style="color:var(--color-text-subtle)">Across ${nMarkets} markets:</span> ${parts.join(' · ')}</span>`;
+    el.innerHTML = `<span style="font-size:11px">[!] <span style="color:var(--color-text-subtle)">Across ${nMarkets} markets:</span> ${parts.join(' · ')}</span>`;
     el.style.cursor = 'pointer';
     el.title = `Summary spans all ${nMarkets} markets. Click to jump to current-market alerts panel.`;
     el.onclick = () => {
