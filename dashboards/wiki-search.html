@@ -52,6 +52,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .b-sp-pub{background:rgba(4,120,87,0.10);color:#047857;font-size:10px}
 .b-sp-stale{background:rgba(113,63,18,.3);color:#B45309;font-size:10px}
 .b-sp-local{background:rgba(55,65,81,.3);color:#5A6373;font-size:10px}
+.b-sp-lag-warn{background:rgba(180,83,9,0.10);color:#B45309;font-size:10px}
+.b-sp-lag-danger{background:rgba(153,27,27,0.10);color:#991B1B;font-size:10px}
 .rc-snip{font-size:13px;color:#6B6B6B;line-height:1.4;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .rc-snip mark{background:rgba(30,64,175,0.12);color:#1E40AF;border-radius:2px;padding:0 1px}
 .rc-meta{display:flex;gap:10px;margin-top:4px;font-size:12px;color:#5A6373;flex-wrap:wrap}
@@ -2776,6 +2778,17 @@ function renderDocCard(doc,tokens,childCount,isChild){
     else if(doc.published)spBadge='<span class="b b-sp-pub" title="Published to SharePoint">📤 SP</span>';
     else spBadge='<span class="b b-sp-local" title="Local only — not on SharePoint">📄 local</span>';
   }
+  // #026 (2026-05-01): SharePoint publication-lag badge.
+  // doc.published_lag_days emitted by build-wiki-index.py (f2f4f28).
+  // Positive = SharePoint copy behind local (push pending).
+  // <=0 or null hidden; 1-7d amber; >7d red.
+  let spLagBadge='';
+  if(typeof doc.published_lag_days==='number'&&doc.published_lag_days>0){
+    const cls=doc.published_lag_days>7?'b-sp-lag-danger':'b-sp-lag-warn';
+    const locUpd=doc.updated||'unknown';
+    const spUpd=doc.sharepoint_updated||'unknown';
+    spLagBadge='<span class="b '+cls+'" title="Local updated '+locUpd+'; SharePoint copy last modified '+spUpd+' � push pending">SP +'+doc.published_lag_days+'d behind</span>';
+  }
   const childCls=isChild?' rc-child':'';
   // #024 (2026-04-30): compression ratio — words / incoming references.
   const sourcesCount=(doc.reverse_related_docs||[]).length;
@@ -2786,7 +2799,7 @@ function renderDocCard(doc,tokens,childCount,isChild){
   const readTime=doc.word_count ? '<span title="'+Math.max(1,Math.round(doc.word_count/250))+' min at 250 wpm">'+Math.max(1,Math.round(doc.word_count/250))+' min read</span>' : '';
   return '<div class="rc'+childCls+'" style="'+(isViewing?'border-color:#1E40AF;background:#F5F5F5':'')+(isChild?';margin-left:18px;border-left:2px solid #BFD4F2':'')+'" onclick="openDoc(\''+doc.id+'\')">'+
     '<div class="rc-head"><div class="rc-title">'+title+'</div>'+
-    '<div class="rc-badges">'+(doc.status?'<span class="b '+sc+'">'+doc.status+'</span>':'')+spBadge+'<span class="b b-cat">'+esc(doc.category)+'</span>'+mkts+tops+tgs+ageTag+archiveBadge+orphanBadge+contradictionBadge+newBadge+'</div></div>'+
+    '<div class="rc-badges">'+(doc.status?'<span class="b '+sc+'">'+doc.status+'</span>':'')+spBadge+spLagBadge+'<span class="b b-cat">'+esc(doc.category)+'</span>'+mkts+tops+tgs+ageTag+archiveBadge+orphanBadge+contradictionBadge+newBadge+'</div></div>'+
     '<div class="rc-snip">'+snip+'</div>'+
     '<div class="rc-meta">'+
       compressionMeta+
