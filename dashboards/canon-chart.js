@@ -1152,18 +1152,14 @@
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        layout: { padding: { top: 14 } },  // breathing room for month band
+        // #5 (2026-05-01): room on the right for endpoint labels.
+        layout: { padding: { top: 14, right: 96 } },
         interaction: { mode: 'index', intersect: false, axis: 'x' },
         plugins: {
-          legend: {
-            position: 'bottom',
-            labels: {
-              color: '#888', font: { size: 11 },
-              filter: (item) => !item.text.startsWith('_'),
-              boxWidth: 24,
-              usePointStyle: false,
-            },
-          },
+          // #5 (2026-05-01): no legend — label series at their endpoint via
+          // the datalabels plugin instead. Matches scenario-chart conventions
+          // and the PE tracker grammar. Saves eye movement + 60px of footer.
+          legend: { display: false },
           tooltip: {
             mode: 'index',
             intersect: false,
@@ -1188,12 +1184,33 @@
                   xMin: s.maxWk - 1, xMax: s.maxWk - 1,
                   borderColor: NOW_GREEN, borderWidth: 2, borderDash: [4, 4],
                   label: {
-                    display: true, content: 'Now (W' + s.maxWk + ')',
-                    color: '#4ade80', font: { size: 10 }, position: 'start',
+                    display: true, content: '\u2193 Now (W' + s.maxWk + ')',
+                    color: '#4ade80', font: { size: 10, weight: '600' }, position: 'start',
                     backgroundColor: 'rgba(0,0,0,0)',
                   },
                 },
               };
+              // #38 (2026-05-01): horizontal OP2-target line with endpoint
+              // label on the right edge. Uses the median OP2 value across
+              // the visible series as a single "on-plan" reference (the
+              // op2 series already varies week by week; this marker lets
+              // the reader read the trend against the baseline at a glance).
+              const op2s = (s.op2Regs || []).filter(v => v != null && v > 0);
+              if (op2s.length >= 4) {
+                const sorted = op2s.slice().sort((a, b) => a - b);
+                const median = sorted[Math.floor(sorted.length / 2)];
+                anns.op2TargetLine = {
+                  type: 'line',
+                  yMin: median, yMax: median,
+                  borderColor: '#6b7280', borderWidth: 1, borderDash: [2, 3],
+                  label: {
+                    display: true,
+                    content: 'OP2 plan ' + Math.round(median).toLocaleString() + '/wk',
+                    color: '#6b7280', font: { size: 10 }, position: 'end',
+                    backgroundColor: 'rgba(0,0,0,0)',
+                  },
+                };
+              }
               // WR-A8 (2026-04-30): event annotations passed by caller.
               // Each event has {id, weeks:[int], text, kind, important}.
               // Draw a dashed vertical at each week for the selected event,
@@ -1235,10 +1252,40 @@
               return anns;
             })(),
           },
-          // Tracker/calibration modes don't use end-labels — suppress the
-          // datalabels plugin so it doesn't paint noise on every point when
-          // the global plugin script is loaded by the Projection Engine HTML.
-          datalabels: { display: false },
+          // #5 (2026-05-01): endpoint labels on each visible line. Labels
+          // the LAST non-null point of each dataset with the series name,
+          // colored to match the line. Replaces the bottom legend. Skips
+          // the CI band (_-prefixed) and the OP2 target (has its own annotation).
+          datalabels: {
+            display: function(ctx) {
+              const ds = ctx.dataset;
+              if (!ds || !ds.label) return false;
+              if (ds.label.startsWith('_')) return false;  // CI bands
+              if (ds.label === 'OP2 target') return false;  // has annotation label
+              // last non-null point only
+              const data = ds.data;
+              for (let i = data.length - 1; i >= 0; i--) {
+                if (data[i] != null) return i === ctx.dataIndex;
+              }
+              return false;
+            },
+            anchor: 'end',
+            align: 'right',
+            offset: 8,
+            color: function(ctx) {
+              return ctx.dataset.borderColor || '#888';
+            },
+            font: { size: 10, weight: '600' },
+            formatter: function(value, ctx) {
+              // Strip trailing "($K)" / "(actual)" / "(predicted)" chrome
+              // so the label reads as the concept, not the data shape.
+              const raw = ctx.dataset.label || '';
+              return raw
+                .replace(/\s*\(actual(?:,\s*\$K)?\)\s*$/i, '')
+                .replace(/\s*\(predicted(?:,\s*\$K)?\)\s*$/i, ' (pred)')
+                .replace(/\s+forecast$/i, ' (fcst)');
+            },
+          },
         },
         scales: {
           x: monthlyGridXAxis(),
