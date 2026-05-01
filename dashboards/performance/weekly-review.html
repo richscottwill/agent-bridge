@@ -21,6 +21,7 @@
 <script src="../shared/trust-bar.js?v=2026-04-30"></script>
 <script src="../shared/sparkline.js?v=2026-04-30"></script>
 <script src="../shared/bullet.js?v=2026-04-30"></script>
+<script src="../shared/shortcuts-overlay.js?v=2026-05-01"></script>
 <link rel="preload" href="../data/callout-data.json" as="fetch" crossorigin>
 <link rel="preload" href="../data/forecast-data.json" as="fetch" crossorigin>
 <style>
@@ -2040,6 +2041,91 @@ function init() {
   document.getElementById('dataTs').textContent =
     `Data as of ${weekday} ${monthDay} \u00b7 Forecast through ${FORECAST.last_data_date || 'W' + FORECAST.max_week}`;
 
+  // #15 + #16 (2026-05-01): keyboard power-user affordances.
+  //   J/K    next/prev week (matches vim/Gmail conventions; Bloomberg uses
+  //          N/P which collides with browser "next tab" shortcuts)
+  //   R      reset to defaults (URL params cleared, latest market/week)
+  //   /      focus the week picker (the primary filter surface; market
+  //          picker is a pill row on the trust bar, not a text input,
+  //          so "/" falls through to the next best navigation target)
+  //   ?      toggle keyboard-shortcut overlay (handled by the shared
+  //          ShortcutsOverlay module on load)
+  wireWrKeyboard();
+
+  render();
+}
+
+// #15 (2026-05-01): power-user keyboard navigation. Ignores events when
+// the user is typing in an input/textarea/contenteditable so the default
+// browser behavior still works (e.g., typing "/" in the search field
+// stays as a literal slash). Wired once per page load; idempotent via
+// a global flag so hot-reloads don't duplicate listeners.
+function wireWrKeyboard() {
+  if (wireWrKeyboard._bound) return;
+  wireWrKeyboard._bound = true;
+  document.addEventListener('keydown', (e) => {
+    const t = e.target;
+    const tag = (t && t.tagName || '').toLowerCase();
+    const editable = t && (t.isContentEditable || tag === 'input' || tag === 'textarea' || tag === 'select');
+    if (editable) return;
+    // Don't swallow keys when the shortcut overlay is already open; the
+    // overlay has its own Escape handler.
+    switch (e.key) {
+      case 'j': case 'J':
+        e.preventDefault(); navWeek(-1); break;  // newer weeks (lower index in weeks array — newest-first)
+      case 'k': case 'K':
+        e.preventDefault(); navWeek(1); break;
+      case 'r': case 'R':
+        e.preventDefault(); resetWrState(); break;
+      case '/':
+        e.preventDefault();
+        {
+          const sel = document.getElementById('weekSelect');
+          if (sel) { sel.focus(); }
+        }
+        break;
+    }
+  });
+  // #16 (2026-05-01): register the shortcut list with the shared overlay.
+  // The overlay binds its own "?" toggle inside install().
+  if (window.ShortcutsOverlay) {
+    window.ShortcutsOverlay.install([
+      { keys: 'J',   description: 'Next week (newer)' },
+      { keys: 'K',   description: 'Previous week (older)' },
+      { keys: 'R',   description: 'Reset filters to defaults' },
+      { keys: '/',   description: 'Focus week picker' },
+      { keys: '?',   description: 'Toggle this shortcut overlay' },
+      { keys: 'Esc', description: 'Close overlay / unpin scrub' },
+      { keys: 'Shift+hover', description: 'Pin scrub state to hovered week' },
+    ]);
+  }
+}
+
+// #15 (2026-05-01): reset-to-defaults handler wired to the R shortcut.
+// Clears URL params, resets market to last-used (localStorage) or the
+// first in the order, and jumps to the latest week.
+function resetWrState() {
+  try {
+    // Clear URL state.
+    const cleanUrl = window.location.pathname;
+    window.history.replaceState({}, '', cleanUrl);
+  } catch (e) { /* sandboxed — silent */ }
+  // Reset market: prefer last-used, fall back to first available.
+  let targetMarket = null;
+  try { targetMarket = localStorage.getItem('wr-last-market') || null; } catch (e) { /* quota */ }
+  const mkSet = new Set((CALLOUTS && CALLOUTS.markets) || []);
+  if (!targetMarket || !mkSet.has(targetMarket)) {
+    targetMarket = (CALLOUTS && CALLOUTS.markets && CALLOUTS.markets[0]) || curMarket;
+  }
+  curMarket = targetMarket;
+  curRegion = (typeof MARKET_TO_REGION !== 'undefined' && MARKET_TO_REGION[curMarket]) || curMarket;
+  // Reset week: first valid callout week for the market.
+  const marketCallouts = (CALLOUTS && CALLOUTS.callouts && CALLOUTS.callouts[curMarket]) || {};
+  const validWeeks = ((CALLOUTS && CALLOUTS.weeks) || []).filter(w => marketCallouts[w]);
+  curWeek = validWeeks[0] || (CALLOUTS && CALLOUTS.weeks && CALLOUTS.weeks[0]) || curWeek;
+  // Re-render everything.
+  const sel = document.getElementById('weekSelect');
+  if (sel) sel.value = curWeek;
   render();
 }
 
