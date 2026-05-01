@@ -4,7 +4,7 @@ status: FINAL
 audience: amazon-internal
 owner: Richard Williams
 created: 2026-04-12
-updated: 2026-04-30
+updated: 2026-05-01
 doc-type: reference
 auto_generated: true
 ---
@@ -15,8 +15,8 @@ auto_generated: true
 
 > Knowledge base for Amazon Business Paid Search. Auto-generated from a filesystem scan of `~/shared/wiki/agent-created/` by `build-wiki-index.py`. SharePoint publication status pulled from `data/sharepoint-artifacts.json`.
 
-Last generated: 2026-04-30T23:18:19
-SharePoint cache as of: 2026-04-17T19:02:13-07:00
+Last generated: 2026-05-01T21:41:40
+SharePoint cache as of: 2026-05-01T19:42:41+0000
 
 ---
 
@@ -33,7 +33,7 @@ _Active test designs, methodologies, experiment frameworks, and workstream deep-
   - slug: ai-max-test-design | status: REVIEW | doc-type: strategy | audience: amazon-internal | level: 2 | sharepoint: published
 
 - [AU NB Testing Proposal — MRO/Trades Vertical](~/shared/wiki/agent-created/testing/au-nb-mro-trades-proposal.md): AU NB Testing Proposal — MRO/Trades Vertical Targeting MRO (Maintenance, Repair, Operations) and Trades keywords in AU will improve NB registration quality and CPA because these...
-  - slug: au-nb-mro-trades-proposal | status: REVIEW | doc-type: strategy | audience: amazon-internal | level: 2 | sharepoint: published
+  - slug: au-nb-mro-trades-proposal | status: REVIEW | doc-type: strategy | audience: amazon-internal | level: 2 | sharepoint: local-only
 
 - [Baloo Ref Tag Attribution Risk](~/shared/wiki/agent-created/testing/baloo-ref-tag-attribution-risk.md): Baloo Ref Tag Attribution Risk This document captures a production-blocking attribution issue identified during the April 14 Baloo Phase 1 demo. Any paid search campaign that...
   - slug: baloo-ref-tag-attribution-risk | status: DRAFT | doc-type: execution | audience: team | level: L2 | sharepoint: local-only
@@ -80,19 +80,19 @@ _Active test designs, methodologies, experiment frameworks, and workstream deep-
 _Dated test artifacts preserved as snapshots — do not decay-audit these._
 
 - [Yahoo JP Nonbrand Experiment — Audience Layering](~/shared/wiki/agent-created/testing/2022-10-yahoo-jp-nb-experiment.md): Yahoo JP Nonbrand Experiment — Audience Layering Question: Will layering audiences on Nonbrand help to reduce CPA of NB traffic? Account: JP Yahoo! account Timeline: October 16th...
-  - slug: 2022-10-yahoo-jp-nb-experiment | status: REVIEW | audience: amazon-internal | level: L5-L7 | sharepoint: published
+  - slug: 2022-10-yahoo-jp-nb-experiment | status: REVIEW | audience: amazon-internal | level: L5-L7 | sharepoint: local-only
 
 - [JP Google Nonbrand Experiment](~/shared/wiki/agent-created/testing/2023-01-jp-nb-experiment-google.md): JP Google Nonbrand Experiment — LP Test + Keyword Performance Predecessor: This is the follow-up to the [Yahoo JP NB Experiment], which identified competitor subdomain targeting...
-  - slug: 2023-01-jp-nb-experiment-google | status: REVIEW | audience: amazon-internal | level: L5-L7 | sharepoint: published
+  - slug: 2023-01-jp-nb-experiment-google | status: REVIEW | audience: amazon-internal | level: L5-L7 | sharepoint: local-only
 
 - [Audience Targeting Post-mortem — LiveRamp Integration](~/shared/wiki/agent-created/testing/2023-06-audience-post-mortem.md): Status: SUSPENDED — This program is not active. Targeted campaigns were suspended in mid-2023 due to an unforeseen US privacy law. MarTech scoping is in OP1. Any reactivation...
   - slug: 2023-06-audience-post-mortem | status: DRAFT | sharepoint: published
 
 - [JP App Testing Results — Apple Search Ads](~/shared/wiki/agent-created/testing/2023-08-jp-app-testing-results.md): JP App Testing Results — Apple Search Ads Apple Search Ads were launched on August 1st, 2023, to test performance marketing for the mobile app channel in the JP market. The...
-  - slug: 2023-08-jp-app-testing-results | status: REVIEW | audience: amazon-internal | level: L5-L7 | sharepoint: published
+  - slug: 2023-08-jp-app-testing-results | status: REVIEW | audience: amazon-internal | level: L5-L7 | sharepoint: local-only
 
 - [IT City-Level Bid Modifiers Test](~/shared/wiki/agent-created/testing/2024-12-it-bid-modifiers-test.md): ---  ---  --- Impressions  32,451  26,731  +21% Clicks  6,760  6,141  +10% Cost  $37,586  $31,320  +20% Registrations  383  324  +18% CTR  21%  23%  -9% CPC  $5.56  $5.10  +9% CVR...
-  - slug: 2024-12-it-bid-modifiers-test | status: REVIEW | audience: amazon-internal | level: L5-L7 | sharepoint: published
+  - slug: 2024-12-it-bid-modifiers-test | status: REVIEW | audience: amazon-internal | level: L5-L7 | sharepoint: local-only
 
 
 ### Strategy & Frameworks (28)
@@ -100,40 +100,40 @@ _Dated test artifacts preserved as snapshots — do not decay-audit these._
 _POVs, playbooks, mental models, strategic narratives, leadership-facing docs._
 
 - [Kiro Environment Matrix — Where to Do What](~/shared/wiki/agent-created/kiro-steering/01-kiro-environment-matrix.md): Kiro Environment Matrix — Where to Do What Audience: Paid Acquisition teammates + their Kiro agents Status: FINAL Last updated: 2026-04-17 Environment Awareness (for your agent)...
-  - slug: 01-kiro-environment-matrix | status: DRAFT | sharepoint: local-only
+  - slug: 01-kiro-environment-matrix | status: DRAFT | sharepoint: published
 
 - [No-External-Write Rule + MCP Safety Config](~/shared/wiki/agent-created/kiro-steering/02-kiro-no-external-write-rule.md): No-External-Write Rule + MCP Safety Config Audience: Paid Acquisition teammates + their Kiro agents Status: FINAL Last updated: 2026-04-17 Environment Awareness (for your agent)...
-  - slug: 02-kiro-no-external-write-rule | status: DRAFT | sharepoint: local-only
+  - slug: 02-kiro-no-external-write-rule | status: DRAFT | sharepoint: published
 
 - [Steering Packages — Pick Your Kit](~/shared/wiki/agent-created/kiro-steering/03-kiro-steering-packages.md): Steering Packages — Pick Your Kit Audience: Paid Acquisition teammates + their Kiro agents Status: FINAL Last updated: 2026-04-17 Environment Awareness (for your agent) Before...
-  - slug: 03-kiro-steering-packages | status: DRAFT | sharepoint: local-only
+  - slug: 03-kiro-steering-packages | status: DRAFT | sharepoint: published
 
 - [Kiro SharePoint & OneDrive Access Protocol (for Agents)](~/shared/wiki/agent-created/kiro-steering/04-kiro-sharepoint-protocol.md): Kiro SharePoint & OneDrive Access Protocol (for Agents) Audience: Kiro agents acting on behalf of teammates. This is an operational protocol, not a human setup guide. Status:...
-  - slug: 04-kiro-sharepoint-protocol | status: DRAFT | sharepoint: local-only
+  - slug: 04-kiro-sharepoint-protocol | status: DRAFT | sharepoint: published
 
 - [Slack MCP for Kiro](~/shared/wiki/agent-created/kiro-steering/05-kiro-slack-mcp.md): Slack MCP for Kiro Audience: Paid Acquisition teammates + their Kiro agents Status: FINAL Last updated: 2026-04-17 Environment Awareness (for your agent) Capability  Remote IDE...
-  - slug: 05-kiro-slack-mcp | status: DRAFT | sharepoint: local-only
+  - slug: 05-kiro-slack-mcp | status: DRAFT | sharepoint: published
 
 - [Outlook MCP for Kiro](~/shared/wiki/agent-created/kiro-steering/06-kiro-outlook-mcp.md): Outlook MCP for Kiro Audience: Paid Acquisition teammates + their Kiro agents Status: FINAL Last updated: 2026-04-17 Environment Awareness (for your agent) Capability  Remote IDE...
-  - slug: 06-kiro-outlook-mcp | status: DRAFT | sharepoint: local-only
+  - slug: 06-kiro-outlook-mcp | status: DRAFT | sharepoint: published
 
 - [Writing with Kiro](~/shared/wiki/agent-created/kiro-steering/07-kiro-writing-with-kiro.md): Writing with Kiro Audience: Paid Acquisition teammates + their Kiro agents Status: FINAL Last updated: 2026-04-17 Environment Awareness (for your agent) Capability  Remote IDE...
-  - slug: 07-kiro-writing-with-kiro | status: DRAFT | sharepoint: local-only
+  - slug: 07-kiro-writing-with-kiro | status: DRAFT | sharepoint: published
 
 - [Asana MCP for Kiro](~/shared/wiki/agent-created/kiro-steering/08-kiro-asana-mcp.md): Asana MCP for Kiro Audience: Paid Acquisition teammates who use Asana + their Kiro agents Status: FINAL Last updated: 2026-04-17 Environment Awareness (for your agent) Capability ...
-  - slug: 08-kiro-asana-mcp | status: DRAFT | sharepoint: local-only
+  - slug: 08-kiro-asana-mcp | status: DRAFT | sharepoint: published
 
 - [Excel-in-SharePoint as Team Source of Truth](~/shared/wiki/agent-created/kiro-steering/09-kiro-excel-source-of-truth.md): Excel-in-SharePoint as Team Source of Truth Audience: Paid Acquisition teammates + their Kiro agents Status: FINAL Last updated: 2026-04-17 Environment Awareness (for your agent)...
-  - slug: 09-kiro-excel-source-of-truth | status: DRAFT | sharepoint: local-only
+  - slug: 09-kiro-excel-source-of-truth | status: DRAFT | sharepoint: published
 
 - [Team Wiki — Search, Use, Suggest Edits](~/shared/wiki/agent-created/kiro-steering/10-kiro-team-wiki.md): Team Wiki — Search, Use, Suggest Edits Audience: Paid Acquisition teammates + their Kiro agents Status: FINAL Last updated: 2026-04-17 Environment Awareness (for your agent)...
-  - slug: 10-kiro-team-wiki | status: DRAFT | sharepoint: local-only
+  - slug: 10-kiro-team-wiki | status: DRAFT | sharepoint: published
 
 - [Hooks Cookbook](~/shared/wiki/agent-created/kiro-steering/11-kiro-hooks-cookbook.md): Hooks Cookbook Audience: Paid Acquisition teammates + their Kiro agents Status: FINAL Last updated: 2026-04-17 Environment Awareness (for your agent) Hooks are the most...
-  - slug: 11-kiro-hooks-cookbook | status: DRAFT | sharepoint: local-only
+  - slug: 11-kiro-hooks-cookbook | status: DRAFT | sharepoint: published
 
 - [Team Orchestration — How Individual Agents Feed the Whole](~/shared/wiki/agent-created/kiro-steering/12-kiro-team-orchestration.md): Team Orchestration — How Individual Agents Feed the Whole Audience: Paid Acquisition teammates + their Kiro agents Status: FINAL Last updated: 2026-04-17 Environment Awareness...
-  - slug: 12-kiro-team-orchestration | status: DRAFT | sharepoint: local-only
+  - slug: 12-kiro-team-orchestration | status: DRAFT | sharepoint: published
 
 - [AEO / AI Overviews POV — Amazon Business Paid Search](~/shared/wiki/agent-created/strategy/aeo-ai-overviews-pov.md): AEO / AI Overviews POV — Amazon Business Paid Search Google AI Overviews and zero-click search are changing how business buyers find solutions. Instead of clicking through to a...
   - slug: aeo-ai-overviews-pov | status: REVIEW | doc-type: strategy | audience: amazon-internal | level: 4 | sharepoint: published
@@ -189,28 +189,28 @@ _POVs, playbooks, mental models, strategic narratives, leadership-facing docs._
 _Market wikis (AU/MX/US), team capacity, cross-market programs._
 
 - [Amazon Business Paid Search — Program Wiki](~/shared/wiki/agent-created/markets/ab-paid-search-wiki.md): Amazon Business Paid Search — Program Wiki Program Overview Amazon Business Paid Search (AB PS) drives customer acquisition through Google Ads across 10 markets worldwide. The...
-  - slug: ab-paid-search-wiki | status: REVIEW | doc-type: reference | audience: amazon-internal | level: N/A | sharepoint: published
+  - slug: ab-paid-search-wiki | status: REVIEW | doc-type: reference | audience: amazon-internal | level: N/A | sharepoint: local-only
 
 - [AU Paid Search — Market Wiki](~/shared/wiki/agent-created/markets/au-market-wiki.md): AU Paid Search — Market Wiki This is the canonical reference for Australia Paid Search. Use it to prep for AU syncs, understand market dynamics, and track active initiatives. It...
-  - slug: au-market-wiki | status: REVIEW | doc-type: reference | audience: amazon-internal | level: N/A | sharepoint: published
+  - slug: au-market-wiki | status: REVIEW | doc-type: reference | audience: amazon-internal | level: N/A | sharepoint: local-only
 
 - [CPC Benchmark Defense Playbook](~/shared/wiki/agent-created/markets/cpc-benchmark-defense-playbook.md): CPC Benchmark Defense Playbook Country leaders and cross-functional partners periodically challenge B2B paid search CPC by comparing it to consumer retail CPC. The comparison is...
   - slug: cpc-benchmark-defense-playbook | status: DRAFT | doc-type: strategy | audience: team | level: L2 | sharepoint: local-only
 
 - [Artifact metadata](~/shared/wiki/agent-created/markets/market-reference.md): Market Reference: AB Paid Search Across 10 Markets This doc answers "tell me everything about AB Paid Search in [market]" in one read. Any agent writing a callout, any stakeholder...
-  - slug: market-reference | status: REVIEW | doc-type: reference | audience: amazon-internal | sharepoint: published
+  - slug: market-reference | status: REVIEW | doc-type: reference | audience: amazon-internal | sharepoint: local-only
 
 - [MX Paid Search — Market Wiki](~/shared/wiki/agent-created/markets/mx-market-wiki.md): Key consideration: This section's content is critical for accurate operation. Cross-reference with related sections for full context. MX Paid Search — Market Wiki Canonical...
-  - slug: mx-market-wiki | status: REVIEW | doc-type: reference | audience: amazon-internal | level: N/A | sharepoint: published
+  - slug: mx-market-wiki | status: REVIEW | doc-type: reference | audience: amazon-internal | level: N/A | sharepoint: local-only
 
 - [Polaris Program — WW Brand Landing Page Rollout](~/shared/wiki/agent-created/markets/polaris-program.md): Polaris Program Polaris is the next-generation brand landing page platform for Amazon Business Paid Search, replacing legacy PADESARJAD and MCS pages across all ten markets....
   - slug: polaris-program | status: DRAFT | doc-type: execution | audience: team | level: L2 | sharepoint: local-only
 
 - [Team Capacity & Workload Distribution](~/shared/wiki/agent-created/markets/team-workload-distribution.md): Team Capacity & Workload Distribution Who is doing what across 10 markets. Designed for Brandon's team management — identifying coverage gaps, overload risks, and delegation...
-  - slug: team-workload-distribution | status: REVIEW | audience: amazon-internal | level: N/A | sharepoint: published
+  - slug: team-workload-distribution | status: REVIEW | audience: amazon-internal | level: N/A | sharepoint: local-only
 
 - [WW Testing Tracker](~/shared/wiki/agent-created/markets/ww-testing-tracker.md): WW Testing Tracker Master tracker for every active, planned, and completed test across all 10 AB Paid Search markets. Updated when test status changes. Portfolio Health The...
-  - slug: ww-testing-tracker | status: REVIEW | doc-type: reference | audience: amazon-internal | level: 2 | sharepoint: published
+  - slug: ww-testing-tracker | status: REVIEW | doc-type: reference | audience: amazon-internal | level: 2 | sharepoint: local-only
 
 
 ### Operations & Process (34)
@@ -325,7 +325,7 @@ _SOPs, playbooks, tool specs, vocabulary guides, process documentation._
 _Dashboards, WBR/MBR templates, analysis docs._
 
 - [AU Keyword CPA Dashboard — Design](~/shared/wiki/agent-created/reporting/au-keyword-cpa-dashboard.md): AU Keyword CPA Dashboard — Design STATUS: Design phase. Dashboard not yet built. First data pull pending. Due: Next week Lena wants weekly CPA review at the keyword level. This...
-  - slug: au-keyword-cpa-dashboard | status: REVIEW | doc-type: execution | audience: amazon-internal | level: 1 | sharepoint: published
+  - slug: au-keyword-cpa-dashboard | status: REVIEW | doc-type: execution | audience: amazon-internal | level: 1 | sharepoint: local-only
 
 - [WBR Callout Template & Guide](~/shared/wiki/agent-created/reporting/wbr-callout-guide.md): WBR Callout Template & Guide Standardize WBR callout writing so anyone on the team can cover any market. Eliminates the "only Richard/Dwayne can write callouts" bottleneck....
   - slug: wbr-callout-guide | status: REVIEW | doc-type: execution | audience: amazon-internal | level: 1 | sharepoint: published

@@ -42,5 +42,4 @@ One line per candidate. Loose format — hooks don't judge quality or priority. 
 <!-- Hooks append below this line -->
 <!-- Last archive: 2026-W16 second pass (2026-04-17 19:00 PT). Prior entries moved to archive/wiki-candidates-2026-W16.md. -->
 <!-- Last archive: 2026-W18 (2026-05-01). 362 entries moved to archive/wiki-candidates-2026-W18.md. -->
-[2026-05-02T03:40 session-summary] signal: Agent-level consent checking — when one agent hands off scope that conflicts with a prior directive from the principal (Richard), implicit "approved by me" layering is insufficient for high-regression-risk actions; the receiving agent should decline and ask for explicit override rather than aggregate authority upward. | source: this-session | proposed: enrich: inter-agent-directive-pattern
-[2026-05-02T03:50 session-summary] signal: Intake files written with cat >> are only visible to other agents AFTER git add + commit + push — session-log appends sitting uncommitted on local disk defeat the cross-agent handoff purpose; add "session-log / wiki-candidates must be committed before handback" as an always-on check. | source: this-session | proposed: enrich: inter-agent-directive-pattern
+<!-- Last archive: 2026-W18 second pass (2026-05-01 19:00 PT). 5 pipeline-meta entries archived; no topic promotions. -->

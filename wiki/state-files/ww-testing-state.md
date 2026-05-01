@@ -7,7 +7,7 @@ format: Amazon 1-2 Page Narrative (Flash Report)
 cadence: Daily refresh
 destination: OneDrive Kiro-Drive/state-files/ww-testing-state.md
 created: 2026-04-12
-updated: 2026-04-20
+updated: 2026-05-01
 data_through: 2026 W15 (Apr 6–12)
 ---
 <!-- DOC-0402 | duck_id: state-file-ww-testing -->
@@ -403,3 +403,14 @@ All source documents referenced in or feeding this state file. Links open in bro
 *This document is designed for daily automated refresh via the Kiro agent swarm. Sections marked with placeholder tags in the DOCX template version are populated by the LLM output JSON and patched into the Word file via deterministic XML injection. The narrative sections above represent the current human-authored baseline that the agent will maintain and update as new weekly data arrives.*
 
 *Template location: OneDrive Kiro-Drive/state-files/ww-testing-state.md*
+
+---
+
+## Recent signal
+
+### 2026-05-01 — weekly enrichment
+
+- **OP1 budget confirmed flat YoY.** Brandon relayed Kate and Todd's confirmation (5/1, 4/29). The directive is to break out Small SMB as a separate line and reforecast rest-of-year 2026 using the OP2 budget envelope. This constrains testing expansion (AU/MX OCI, AI Max pilot) to existing spend levels.
+- **Polaris Brand LP QA consolidation underway.** Yun-Kang flagged three QA issues on the Polaris brand pages (subheadlines not updated, PS ref tags overridden, slower page load) on 4/29. Brandon directed all feedback to route through Richard as a single consolidated channel, and Dwayne Palmer is collecting brand LP feedback for the weblab/migration path. This is the gating work before the next Polaris market dial-up.
+- **OCI CA launch confirmed for Monday (4/29 signal).** CA is ready and PS team was at offsite during the week. No blockers reported. This closes the CA OCI gap flagged in the state file.
+- **NB spend drop investigation continues.** Sam Tangri raised the UK/DE/US NB spend drops from 4/13 again on 4/29, specifically asking whether the MCC algorithm linkage caused a global impact from the US exclusion. J Slater is maintaining a Quip doc for AI Max questions for the Google team, which may absorb this thread.

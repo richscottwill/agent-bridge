@@ -1,8 +1,8 @@
 {
-  "generated": "2026-04-30",
-  "row_count": 1,
+  "generated": "2026-05-01",
+  "row_count": 2,
   "earliest": "2026-04-30",
-  "latest": "2026-04-30",
+  "latest": "2026-05-01",
   "rows": [
     {
       "date": "2026-04-30",
@@ -15,6 +15,23 @@
       "demand_open": 5,
       "by_status": {
         "FINAL": 7,
+        "ACTIVE": 5,
+        "REVIEW": 51,
+        "PENDING": 1,
+        "DRAFT": 195
+      }
+    },
+    {
+      "date": "2026-05-01",
+      "total_docs": 312,
+      "published": 48,
+      "local_only": 59,
+      "stale": 1,
+      "orphans": 7,
+      "contradictions": 25,
+      "demand_open": 5,
+      "by_status": {
+        "FINAL": 8,
         "ACTIVE": 5,
         "REVIEW": 51,
         "PENDING": 1,
