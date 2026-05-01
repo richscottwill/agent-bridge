@@ -305,7 +305,7 @@
       "args": [
         "mcp-server-motherduck",
         "--db-path",
-        ":memory:",
+        "md:ps_analytics",
         "--read-write"
       ],
       "env": {
