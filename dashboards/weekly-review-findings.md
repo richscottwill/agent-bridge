@@ -455,3 +455,35 @@ Sign-convention fix caught during verification: `error_pct > 0` means `actual > 
 | M7 · Amazon 6-12 chart | done | New `renderSixTwelveChart()` emits dual-panel inline SVG between main charts and weekly detail. Left panel: 6 weeks weekly from `FORECAST.weekly[mk].filter(wk in [firstWk, maxWk])` with actual line + OP2 plan dashed overlay + endpoint dot + week-level x-axis labels. Right panel: 12 months monthly from `FORECAST.monthly[mk]` (kiro-server confirmed this structure exists per bus 006) with actual line + pred overlay + now-line dashed vertical + month x-axis labels. Different Y axes per panel (Commoncog: same Y "hides real relationships between short and long-term"). Box-score footer with 5 cells: WoW %, YoY %, vs OP2 %, 4wk avg, 13wk avg — same format every week. Archetype-aware: regs-markets show registrations; spend-only (JP/AU) show spend. Inline SVG pattern matches M10 waterfall — no Chart.js instances, cheap re-render. Verified: US W16 shows -3% WoW / +92% YoY / +17.2% vs OP2 / 4wk 9,148 / 13wk 8,489; JP W16 swaps to $35,538 spend with cost-based box score. Console clean. |
 
 **All 10 mockups shipped.** M1-M10 complete per mockups/README.md.
+
+
+---
+
+## Research-report cross-reference (2026-05-02, Path B commit 5 hygiene)
+
+Items from the 100-suggestion perf dashboard research report that don't have
+their own `WR-XX` or `M1-M10` entry in this tracker. Listed here to close the
+loop so future sessions don't re-raise items that have been resolved.
+
+| # | Title | Decision | Source |
+|---|-------|----------|--------|
+| #009 | Deprecate the subtitle bar | **closed-obsolete** — composite subtitle doesn't exist; M1 sticky header already absorbed all provenance fragments | kiro-local 015 (dashboard-mockups-handoff) |
+| #016 | Market pulse strip on wiki | **deferred-indefinitely** — wrong metaphor for wiki (markets are tags, not coverage); would manufacture a fake status signal | kiro-local 013 (wiki-dashboard-redesign) |
+| #028 | Remove global metric filter | **held** — Richard uses it as muscle-memory; revisit when per-chart metric toggles make it redundant | kiro-local 015 |
+| #046 | YoY column in weekly table | **pipeline shipped** (commit `efd0779`: refresh-forecast.py emits `yoy_regs_pct/cost_pct/cpa_pct + ly_regs/cost/cpa` per weekly row). UI consumer in kiro-local's queue. | kiro-server 012 / `efd0779` |
+| #048 | Q-end forecast column | **UI-only work** — data already in `forecast-data.json.quarterly[market]`. In kiro-local's queue. | kiro-server 014 |
+| #051 | Event annotations on second chart | **pipeline shipped** (via WR-A8: `events` array in callout-data.json). UI consumer in kiro-local's queue. | kiro-server 011 |
+| #066 | WBR per-week notes | **pipeline shipped** (commit `efd0779`: POST `/api/wbr-note` + `/api/wbr-note/get` in serve.py). UI consumer in kiro-local's queue. | kiro-server 011 / `efd0779` |
+| #069 | URL state for regime + scenario | **bug fixed** in `7aeffed` — first landed in `b701ed8` with `[object Object]` serialization bug; fixed to use `STATE.activeChipId` as canonical URL key. | kiro-local 012 → kiro-server 013 |
+| #071 | Alerts panel above decomposition | **shipped** (`b701ed8`, verified by kiro-local 012) | kiro-server 011 |
+| #072 | Lift-multiplier slider ticks + bubble | **shipped** (`b701ed8`, verified by kiro-local 012) | kiro-server 011 |
+| #076 | Model drawer provenance tab | **pipeline shipped** (commit `1db618b`: `_build_provenance()` in `mpe_engine.py` emits 16 tile keys with `{sql_or_fn, source_file, fit_call, last_computed}`). UI consumer in kiro-local's queue. | kiro-server 017 |
+| Path B commit 3 | WR pipeline expansions (`ly_weekly_by_market`, `wow_delta_by_market`, `rolling_13w`) | **shipped** (commit `87dbd36`). | this commit |
+| Path B commit 4 | Query-log backend (`POST /api/query-log/append`, `POST /api/query-log/get`) | **shipped** (commit `653775c`). Deep-contradiction pairwise deferred — shallow #031 path closes the user-facing need. | this commit |
+
+### Open kiro-server queue
+
+Nothing. Pipeline lane is clean. Next kiro-server work waits for:
+- Consumer commits from kiro-local that reveal pipeline gaps
+- Richard cueing Path C / T3 / T4 items
+- Engine-side work that isn't in the 100-item list (e.g., engine refactors, new scenarios)
