@@ -250,6 +250,29 @@ def read_callout(market, wk):
         f = find_file("WW", f"ww-review-2026-w{wk}.md")
     if not f: return None
     text = f.read_text()
+    # AT-SOURCE FIX (2026-05-01, Bug 1 root cause): detect callout-reviewer
+    # audit files and skip them. Audit files (rubric, per-unit scores, verdicts)
+    # live under wiki/callouts/ww/ using the `ww-review-*.md` filename but are
+    # NOT narrative callouts — their first paragraph is reviewer prose, not a
+    # headline. Prior behavior dumped 2400+ chars of "Reviewer: callout-reviewer
+    # agent. Rubric: ..." into callouts.WW.W16.headline. When we see reviewer
+    # boilerplate as the first post-header paragraph, return None so the entry
+    # stays empty and the aggregate synthesizer composes from metrics instead.
+    # kiro-local's client-side shield in weekly-review.html (commit 1553fbc) is
+    # kept in place for resilience against future rollup-headline breakage.
+    reviewer_markers = ("Reviewer: callout-reviewer", "Reviewer: ", "Rubric: ")
+    first_para_peek = ""
+    _in_fm = False
+    for _line in text.split("\n"):
+        _s = _line.strip()
+        if _s == "---":
+            _in_fm = not _in_fm; continue
+        if _in_fm or not _s or _s.startswith("#") or _s.startswith("<!--"):
+            continue
+        first_para_peek = _s
+        break
+    if any(first_para_peek.startswith(m) for m in reviewer_markers):
+        return None
     result = {}
 
     # Period from header
@@ -852,6 +875,17 @@ def synthesize_aggregate_narrative(aggregate_market, wk, entry, callouts, member
     spend_wow = metrics.get("spend_wow")
     cpa_wow = metrics.get("cpa_wow")
     regs_yoy = metrics.get("regs_yoy")
+
+    # AT-SOURCE FIX (2026-05-01, Bug 1 root cause): zero-metric guard.
+    # When actuals haven't landed yet for the current week (regs=0, spend=0,
+    # cpa=0 — the common path for the most recent week when refresh-forecast
+    # runs before upstream data is populated), the prior code composed a
+    # literal "WW drove — registrations, CPA $0." headline with em-dash
+    # placeholders and zero-dollar CPA. Return empty strings so the caller's
+    # `if body:` gate holds the entry empty; kiro-local's client-side shield
+    # in weekly-review.html then synthesizes from forecast.weekly directly.
+    if not regs or regs == 0:
+        return "", ""
 
     # Collect member-market WoW regs so we can highlight gainer/decliner
     member_wow = []
