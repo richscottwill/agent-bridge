@@ -321,19 +321,11 @@ def compute_seasonal_multipliers_per_regime(
         warnings.append("SEASONAL_REGIME_NONE (no structural regimes — use global fit)")
         return {}, warnings
 
-    # Defensive dedupe: _fetch_structural_regimes joins against
-    # ps.regime_fit_state_current which can emit N fit_state rows per regime.
-    # Collapse to first-occurrence per regime_id, preserving the ascending
-    # change_date order.
-    seen: set[str] = set()
-    regimes_dedup: list[dict] = []
-    for r in regimes:
-        rid = str(r.get("regime_id", ""))
-        if rid in seen:
-            continue
-        seen.add(rid)
-        regimes_dedup.append(r)
-    regimes = regimes_dedup
+    # Source fix in mpe_schema_v2.sql (2026-05-02) guarantees
+    # ps.regime_fit_state_current returns one row per regime_id. The dedupe
+    # that lived here has been removed — if you see duplicates again, the
+    # source view has regressed. Check ps.regime_fit_state_current's
+    # definition before patching consumers.
 
     # Pull the full history once — we'll segment in Python by date rather
     # than running N separate queries.

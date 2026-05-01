@@ -68,14 +68,18 @@ CREATE INDEX IF NOT EXISTS idx_regime_fit_as_of
     ON ps.regime_fit_state(fit_as_of DESC);
 
 
--- Convenience view: latest fit per regime
+-- Convenience view: latest fit per regime.
+-- 2026-05-02: Fixed LEFT-JOIN-explosion source. Previous definition matched
+-- all rows with `fit_as_of = max(fit_as_of)` but `fit_as_of` is a DATE, so
+-- multiple refits within the same day (common when refresh-forecast.py runs
+-- >1× per day) all shared the same date and the view returned N rows per
+-- regime. Consumers had to defensively dedupe by regime_id. QUALIFY +
+-- ROW_NUMBER() fixes this at the source — guarantees exactly one row per
+-- (regime_id) ordered by (fit_as_of DESC, fitted_at DESC).
 CREATE OR REPLACE VIEW ps.regime_fit_state_current AS
-SELECT s.*
-FROM ps.regime_fit_state s
+SELECT s.* FROM ps.regime_fit_state s
 WHERE s.is_active = TRUE
-  AND s.fit_as_of = (
-      SELECT MAX(fit_as_of)
-      FROM ps.regime_fit_state s2
-      WHERE s2.regime_id = s.regime_id
-        AND s2.is_active = TRUE
-  );
+QUALIFY ROW_NUMBER() OVER (
+  PARTITION BY regime_id
+  ORDER BY fit_as_of DESC, fitted_at DESC
+) = 1;
