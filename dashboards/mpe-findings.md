@@ -589,3 +589,58 @@ Nothing queued from the Path B directive. Next MPE work:
 - Engine-side hooks for any UI regression kiro-local flags on pull of `1db618b`.
 - Regime-segmented seasonality (flagged in the 2026-04-23 "Honest accounting" probe
   as the real open architectural gap) — not triggered by any ship prompt yet.
+
+
+---
+
+## Architectural refits (2026-05-02)
+
+Larger-than-finding changes to engine architecture. Unlike the P-series findings
+above (which are bug fixes, UI improvements, or additive fields), items here
+change how the engine composes a projection. Documented separately so future
+sessions understand these are not "one more UI tweak" but structural decisions.
+
+### Regime-segmented seasonality (commit shipped 2026-05-02)
+
+**Flagged in perf bus post 018 as "the real open architectural gap."** The
+global per-market seasonality fit in `compute_seasonal_multipliers()`
+per-year-normalizes (Phase 6.2.x fix, 2026-04-23) so regime-year volume shifts
+don't contaminate the aggregated curve — but it still ultimately produces ONE
+curve per market. That conflates "MX W15 is seasonally low because Semana
+Santa" with "MX W15 is seasonally low because Polaris launched late and the
+pre-Polaris W15 value dragged the mean." The shape signal and the level signal
+get blended.
+
+**Refit (`compute_seasonal_multipliers_per_regime`, brand_trajectory.py
+~line 281):** segments history at each structural regime boundary and fits
+an independent per-year-normalized curve within each segment. Returns
+`{regime_id: {iso_week: multiplier}}`. Segments with < 26 weeks in any
+calendar year fall back to the global fit and emit
+`SEASONAL_REGIME_INSUFFICIENT` so consumers can decide whether to blend
+or hide.
+
+**Emitted as** `forecast-data.json.markets[mk].seasonality_by_regime` — a
+dict of `regime_id → [52 weekly coefficients]` plus a `_warnings` array.
+Additive to the existing `brand_trajectory_y2026.seasonal` path (which
+continues using the global curve for consumers that don't need per-regime).
+
+**Verified on MX / JP / US 2026-05-02:**
+- JP emits 2 regime curves (pre_regime + post-structural-regime). W1 shift
+  pre→post 0.63 → 0.81; W40 shift 1.50 → 1.39 — real within-year shape
+  differences the global fit averages away.
+- US emits 2 regime curves. W1 shift pre→post 1.25 → 0.98 — the
+  January-return-to-work pattern is genuinely different in different
+  regimes, not an artifact of level shifts.
+- MX emits 1 curve (pre_regime 42w). Polaris (13w) and Sparkle (3w) flagged
+  `SEASONAL_REGIME_INSUFFICIENT` — honest empty while post-onset history
+  accumulates.
+
+**Consumer integration**: `compute_seasonal_multipliers()` retained as the
+primary path that `project_brand_trajectory()` uses. Per-regime curves are
+available in the export JSON for Model View drawer usage and for future
+consumers that want to blend per regime-confidence. Engine-side composition
+is unchanged pending a follow-up that decides whether to swap the primary
+path to per-regime with regime-confidence-weighted blend — that's a
+separate architectural decision with its own tradeoffs (notably: does the
+Sparkle-era seasonality really dominate forward projections when Sparkle
+has 3 weeks of history and the global curve has 2+ years?).

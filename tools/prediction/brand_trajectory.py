@@ -265,6 +265,168 @@ def iso_week_of(d: date) -> int:
     return d.isocalendar()[1]
 
 
+# ---------- Regime-segmented seasonality (2026-05-02 refit) ----------
+
+
+def compute_seasonal_multipliers_per_regime(
+    market: str,
+    target_weeks: list[date],
+) -> tuple[dict[str, dict[int, float]], list[str]]:
+    """Return {regime_id: {iso_week: multiplier}} for target weeks + warnings.
+
+    Architectural refit (2026-05-02): flagged in perf bus 018 as "the real
+    open architectural gap" — the global-per-market seasonality fit conflates
+    regime-onset volume shifts with within-year seasonal shape. This function
+    segments history by structural regime and fits an independent seasonality
+    curve per segment, so consumers can see how seasonality itself shifts
+    across regimes (e.g., MX pre-Polaris vs MX Polaris-era vs MX Sparkle-era).
+
+    Methodology:
+
+    1. Fetch active structural regimes via _fetch_structural_regimes(market),
+       ordered by change_date ascending.
+    2. Define segment boundaries: regime N's segment runs from regime N's
+       change_date (inclusive) to regime N+1's change_date (exclusive), or
+       to the last available week for the latest regime. A synthetic
+       "pre_regime" segment covers all history before the earliest regime —
+       captured as regime_id="pre_regime" when >= 52 weeks exist before
+       the first change_date.
+    3. For each segment with >= MIN_WEEKS_PER_YEAR weeks (26), apply the
+       same per-year mean-normalization logic from compute_seasonal_multipliers:
+       group by (iso_year, iso_week), compute per-year mean, express each
+       week as multiplier vs its year's mean, then average across years.
+    4. Segments with < MIN_WEEKS_PER_YEAR emit SEASONAL_REGIME_INSUFFICIENT
+       warning and fall back to the global multiplier (from the existing
+       compute_seasonal_multipliers path) for that regime.
+    5. Clamps multipliers to [0.3, 3.0] same as the global fit.
+
+    Consumers can then weight per-regime curves by regime confidence when
+    projecting forward: "W15 seasonal in Sparkle era is 1.4× the Sparkle-era
+    annual mean" instead of "W15 seasonal is 1.7× the all-history mean,
+    partially inflated by Sparkle's 4× baseline." Backward compatibility:
+    this function is ADDITIVE — consumers that don't need per-regime curves
+    keep using compute_seasonal_multipliers() which still returns the
+    per-year-normalized global curve.
+
+    Return:
+        (curves_by_regime, warnings) where curves_by_regime is
+        {regime_id (str): {iso_week (int): multiplier (float)}}. Empty dict
+        when the market has no structural regimes (edge case — fall back to
+        global fit in consumers). "pre_regime" key present when pre-earliest
+        history has enough weeks.
+    """
+    warnings: list[str] = []
+    regimes = _fetch_structural_regimes(market)
+    if not regimes:
+        warnings.append("SEASONAL_REGIME_NONE (no structural regimes — use global fit)")
+        return {}, warnings
+
+    # Defensive dedupe: _fetch_structural_regimes joins against
+    # ps.regime_fit_state_current which can emit N fit_state rows per regime.
+    # Collapse to first-occurrence per regime_id, preserving the ascending
+    # change_date order.
+    seen: set[str] = set()
+    regimes_dedup: list[dict] = []
+    for r in regimes:
+        rid = str(r.get("regime_id", ""))
+        if rid in seen:
+            continue
+        seen.add(rid)
+        regimes_dedup.append(r)
+    regimes = regimes_dedup
+
+    # Pull the full history once — we'll segment in Python by date rather
+    # than running N separate queries.
+    all_rows = _fetch_weekly(
+        market, "brand", regime_filter=True, include_pre_structural=True
+    )
+    if not all_rows:
+        warnings.append("SEASONAL_REGIME_NO_HISTORY")
+        return {}, warnings
+
+    # Build segment boundaries. regimes is ordered by change_date ascending.
+    change_dates = [r["change_date"] for r in regimes]
+    segments: list[tuple[str, date | None, date | None]] = []
+    earliest = change_dates[0]
+
+    # Pre-regime synthetic segment. Useful for markets where pre-regime
+    # history still shows interpretable seasonality (e.g., 2 years of
+    # pre-Polaris US data). Skip when the market has no meaningful
+    # pre-regime history.
+    pre_regime_rows = [r for r in all_rows if r["period_start"] < earliest]
+    if len(pre_regime_rows) >= 52:
+        segments.append(("pre_regime", None, earliest))
+
+    # Regime segments.
+    for i, r in enumerate(regimes):
+        start = r["change_date"]
+        end = change_dates[i + 1] if i + 1 < len(regimes) else None
+        segments.append((str(r["regime_id"]), start, end))
+
+    curves_by_regime: dict[str, dict[int, float]] = {}
+    MIN_WEEKS_PER_YEAR = 26  # Same threshold as the global fit
+
+    for regime_id, start, end in segments:
+        # Filter rows to segment window.
+        if start is None and end is not None:
+            seg_rows = [r for r in all_rows if r["period_start"] < end]
+        elif start is not None and end is None:
+            seg_rows = [r for r in all_rows if r["period_start"] >= start]
+        else:
+            seg_rows = [r for r in all_rows if start <= r["period_start"] < end]
+
+        # Group by (iso_year, iso_week).
+        from collections import defaultdict
+        by_year_week: dict[int, dict[int, float]] = defaultdict(dict)
+        for r in seg_rows:
+            iso_year, iso_w, _ = r["period_start"].isocalendar()
+            if iso_w == 53:
+                iso_w = 52
+            if iso_w in by_year_week[iso_year]:
+                by_year_week[iso_year][iso_w] = (
+                    by_year_week[iso_year][iso_w] + r["regs"]
+                ) / 2
+            else:
+                by_year_week[iso_year][iso_w] = r["regs"]
+
+        # Per-year normalization within segment.
+        per_year_mults: dict[int, dict[int, float]] = {}
+        for year, week_map in by_year_week.items():
+            if len(week_map) < MIN_WEEKS_PER_YEAR:
+                continue
+            year_mean = float(np.mean(list(week_map.values())))
+            if year_mean <= 0:
+                continue
+            per_year_mults[year] = {
+                w: max(0.3, min(3.0, v / year_mean)) for w, v in week_map.items()
+            }
+
+        if not per_year_mults:
+            # Not enough data in this segment for a meaningful fit. Warn +
+            # skip — consumers fall back to global curve.
+            seg_weeks = len(seg_rows)
+            warnings.append(
+                f"SEASONAL_REGIME_INSUFFICIENT: regime_id={regime_id} "
+                f"({seg_weeks} weeks, need >= {MIN_WEEKS_PER_YEAR} in at "
+                f"least one calendar year)"
+            )
+            continue
+
+        # Average per-year multipliers across years within segment.
+        week_mults: dict[int, float] = {}
+        for iso_w in range(1, 53):
+            values = [m[iso_w] for m in per_year_mults.values() if iso_w in m]
+            if values:
+                week_mults[iso_w] = float(np.mean(values))
+
+        curves_by_regime[regime_id] = week_mults
+
+    if not curves_by_regime:
+        warnings.append("SEASONAL_REGIME_ALL_INSUFFICIENT")
+
+    return curves_by_regime, warnings
+
+
 # ---------- Recent trend stream ----------
 
 

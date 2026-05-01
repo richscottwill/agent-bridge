@@ -552,6 +552,40 @@ def main() -> int:
             except Exception as e:
                 print(f"[{market}] brand_trajectory skipped: {type(e).__name__}: {e}")
 
+            # Architectural refit (2026-05-02, perf bus 019): per-regime
+            # seasonality curves. Existing brand_trajectory_y2026.seasonal
+            # keeps using the global per-year-normalized fit for backward
+            # compat. This new field emits a curve PER regime so consumers
+            # can see how seasonality itself shifts across regime boundaries.
+            seasonality_by_regime = None
+            try:
+                from prediction.brand_trajectory import compute_seasonal_multipliers_per_regime
+                from datetime import timedelta as _td
+                jan4 = date(current_year, 1, 4)
+                start = jan4 - _td(days=jan4.weekday())
+                weeks = [start + _td(weeks=i) for i in range(52)]
+                curves, s_warn = compute_seasonal_multipliers_per_regime(market, weeks)
+                if curves:
+                    # Emit as {regime_id: [weekly_coefficient, ...]} with a
+                    # 52-element array per regime, indexed 0..51 = ISO W1..W52.
+                    # Missing weeks default to 1.0 (neutral) so consumers can
+                    # multiply directly without key-exists checks.
+                    seasonality_by_regime = {
+                        regime_id: [
+                            round(week_map.get(iso_w, 1.0), 4)
+                            for iso_w in range(1, 53)
+                        ]
+                        for regime_id, week_map in curves.items()
+                    }
+                    seasonality_by_regime['_warnings'] = s_warn
+                elif s_warn:
+                    # No curves populated, but warnings explain why — emit a
+                    # structured empty so consumers can show "fell back to
+                    # global" without treating missing field as an error.
+                    seasonality_by_regime = {'_warnings': s_warn}
+            except Exception as e:
+                print(f"[{market}] seasonality_by_regime skipped: {type(e).__name__}: {e}")
+
             fallback_summary = _market_fallback_summary(params)
 
             # Research report #P5-11 (mpe-findings): confidence_history sparkline
@@ -567,6 +601,7 @@ def main() -> int:
                 'regime_events': regimes,
                 'regime_fit_state': regime_fit_state,
                 'brand_trajectory_y2026': brand_trajectory_y2026,
+                'seasonality_by_regime': seasonality_by_regime,
                 'fallback_summary': fallback_summary,
                 'clean_weeks_count': len(ytd),
                 'op2_targets': op2_targets,
