@@ -1686,6 +1686,7 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
         <th>Quarter</th>
         <th class="r">Regs OP2</th>
         <th class="r">Regs Act</th>
+        <th class="r" title="Quarter-end forecast for the current quarter (pred_regs +/- CI half-width). Closed quarters show em-dash.">Q-end forecast</th>
         <th class="r">Regs Pred</th>
         <th class="r" title="Regs calibration â€” actual vs predicted (closed quarters only)">Regs vs Pred</th>
         <th class="r">Cost Act</th>
@@ -4434,10 +4435,32 @@ function renderPeriodTable(periods, bodyId, scrollId, labelFn, currentKey, delta
     if (p.key === currentKey) rowCls.push('selected');
     const rowClsAttr = rowCls.length ? ' class="' + rowCls.join(' ') + '"' : '';
 
+    // #048 (2026-05-01): Q-end forecast column for quarterly table only.
+    // Consumes window.FORECAST.quarterly[market] list. Shows the pred_regs with CI
+    // half-width for current-quarter rows (actual_regs still null). Other rows: em-dash.
+    let qEndCell = '';
+    if (bodyId === 'quarterlyBody') {
+      const qList = (typeof FORECAST !== 'undefined' && FORECAST && FORECAST.quarterly && FORECAST.quarterly[curMarket]) || [];
+      const match = qList.find(x => x && x.period === p.key);
+      if (match && match.pred_regs != null && match.actual_regs == null) {
+        const halfWidth = (typeof match.ci_hi === 'number')
+          ? (match.ci_hi - match.ci_lo) / 2
+          : Math.max(0, match.pred_regs - (match.ci_lo || 0));
+        const rangeStr = match.pred_regs > 10000
+          ? Math.round(halfWidth / 1000) + 'K'
+          : Math.round(halfWidth).toLocaleString();
+        const tip = '90% CI: ' + (match.ci_lo || 0).toLocaleString() + ' - ' + Math.round(match.pred_regs + halfWidth).toLocaleString() + ' regs'
+          + (match.pred_cost ? ' . projected spend $' + Math.round(match.pred_cost).toLocaleString() : '');
+        qEndCell = '<td class="r" title="' + tip.replace(/"/g, '&quot;') + '"><span class="pred-val">' + fmt(match.pred_regs, 'regs') + ' ± ' + rangeStr + '</span></td>';
+      } else {
+        qEndCell = '<td class="r" style="color:var(--color-text-subtle)">—</td>';
+      }
+    }
     return `<tr${rowClsAttr}>
       <td>${labelFn(p.key)}${predLabel}</td>
       <td class="r" style="color:var(--color-text-subtle)">${op2Val}</td>
       <td class="r">${regsActVal}</td>
+      ${qEndCell}
       <td class="r">${regsPredVal}</td>
       <td class="r">${regsVsPredVal}</td>
       <td class="r">${costActVal}</td>
