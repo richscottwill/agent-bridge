@@ -1,5 +1,5 @@
 {
-  "generated": "2026-05-01T18:15:03.403799+00:00",
+  "generated": "2026-05-01T19:42:45.449231+00:00",
   "methodology_version": "1.0.0",
   "fallback": false,
   "markets": {
@@ -1654,12 +1654,105 @@
         ],
         "source": "ps.targets (monthly sum)"
       },
-      "confidence_history": [
-        {
-          "week": "2026-W18",
-          "ci_width_pct": 20.78
+      "confidence_history": [],
+      "provenance_template": {
+        "totals.total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='US', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.06 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:47.564396+00:00"
+        },
+        "totals.total_regs": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='US', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.06 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:47.564396+00:00"
+        },
+        "totals.computed_ieccp": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='US', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.06 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:47.564396+00:00"
+        },
+        "totals.blended_cpa": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='US', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.06 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:47.564396+00:00"
+        },
+        "totals.annual_total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='US', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.06 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:47.564396+00:00"
+        },
+        "totals.brand_regs": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='US', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": "fallback=market_specific",
+          "last_computed": "2026-05-01T19:42:47.564396+00:00"
+        },
+        "totals.brand_spend": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='US', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": "r\u00b2=0.85 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:42:47.564396+00:00"
+        },
+        "totals.nb_regs": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='US', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.06 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:47.564396+00:00"
+        },
+        "totals.nb_spend": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='US', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.06 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:47.564396+00:00"
+        },
+        "credible_intervals": {
+          "sql_or_fn": "V1_1_Slim.bootstrapCI(projection, ytd_weekly['US'], alpha=0.10)",
+          "source_file": "v1_1_slim.py:bootstrapCI",
+          "fit_call": "residual bootstrap, 2000 draws, alpha=0.10",
+          "last_computed": "2026-05-01T19:42:47.564396+00:00"
+        },
+        "contribution_breakdown": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='US').contribution",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": "seasonal+trend+regime multiplicative compose",
+          "last_computed": "2026-05-01T19:42:47.564396+00:00"
+        },
+        "regime_stack": {
+          "sql_or_fn": "SELECT * FROM ps.regime_fit_state_current rfs LEFT JOIN ps.regime_changes rc ON rc.id = rfs.regime_id WHERE rc.market = 'US' AND rc.is_structural_baseline = TRUE",
+          "source_file": "regime_confidence.py:list_regimes_with_confidence",
+          "fit_call": "weekly refit via fit_regime_state.py",
+          "last_computed": "2026-05-01T19:42:47.564396+00:00"
+        },
+        "locked_ytd_summary": {
+          "sql_or_fn": "SELECT period_start AS week_start, regs, spend, clicks, brand_regs, nb_regs, brand_spend, nb_spend FROM ps.v_weekly WHERE market = 'US' AND period_start <= ytd_latest ORDER BY period_start",
+          "source_file": "locked_ytd.py:fetch_ytd_actuals",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:47.564396+00:00"
+        },
+        "weeks": {
+          "sql_or_fn": "Weekly outputs from project_with_locked_ytd \u2014 Brand per-week from brand_trajectory, NB per-week from solve_nb_residual \u00d7 seasonal weights",
+          "source_file": "locked_ytd.py:project_with_locked_ytd",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:47.564396+00:00"
+        },
+        "fit_quality_summary": {
+          "sql_or_fn": "Derived from parameters_used (no single source)",
+          "source_file": "mpe_engine.py:_build_fit_quality_summary",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:47.564396+00:00"
+        },
+        "parameters_used": {
+          "sql_or_fn": "SELECT * FROM ps.market_projection_params_current WHERE market = 'US'",
+          "source_file": "mpe_engine.py:_load_market_params",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:47.564396+00:00"
         }
-      ]
+      }
     },
     "CA": {
       "parameters": {
@@ -3194,9 +3287,107 @@
       "confidence_history": [
         {
           "week": "2026-W18",
-          "ci_width_pct": 472.0
+          "ci_width_pct": 433.38
         }
-      ]
+      ],
+      "provenance_template": {
+        "totals.total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='CA', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.06 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:50.581712+00:00"
+        },
+        "totals.total_regs": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='CA', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.06 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:50.581712+00:00"
+        },
+        "totals.computed_ieccp": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='CA', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.06 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:50.581712+00:00"
+        },
+        "totals.blended_cpa": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='CA', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.06 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:50.581712+00:00"
+        },
+        "totals.annual_total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='CA', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.06 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:50.581712+00:00"
+        },
+        "totals.brand_regs": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='CA', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:50.581712+00:00"
+        },
+        "totals.brand_spend": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='CA', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:50.581712+00:00"
+        },
+        "totals.nb_regs": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='CA', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.06 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:50.581712+00:00"
+        },
+        "totals.nb_spend": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='CA', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.06 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:50.581712+00:00"
+        },
+        "credible_intervals": {
+          "sql_or_fn": "V1_1_Slim.bootstrapCI(projection, ytd_weekly['CA'], alpha=0.10)",
+          "source_file": "v1_1_slim.py:bootstrapCI",
+          "fit_call": "residual bootstrap, 2000 draws, alpha=0.10",
+          "last_computed": "2026-05-01T19:42:50.581712+00:00"
+        },
+        "contribution_breakdown": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='CA').contribution",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": "seasonal+trend+regime multiplicative compose",
+          "last_computed": "2026-05-01T19:42:50.581712+00:00"
+        },
+        "regime_stack": {
+          "sql_or_fn": "SELECT * FROM ps.regime_fit_state_current rfs LEFT JOIN ps.regime_changes rc ON rc.id = rfs.regime_id WHERE rc.market = 'CA' AND rc.is_structural_baseline = TRUE",
+          "source_file": "regime_confidence.py:list_regimes_with_confidence",
+          "fit_call": "weekly refit via fit_regime_state.py",
+          "last_computed": "2026-05-01T19:42:50.581712+00:00"
+        },
+        "locked_ytd_summary": {
+          "sql_or_fn": "SELECT period_start AS week_start, regs, spend, clicks, brand_regs, nb_regs, brand_spend, nb_spend FROM ps.v_weekly WHERE market = 'CA' AND period_start <= ytd_latest ORDER BY period_start",
+          "source_file": "locked_ytd.py:fetch_ytd_actuals",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:50.581712+00:00"
+        },
+        "weeks": {
+          "sql_or_fn": "Weekly outputs from project_with_locked_ytd \u2014 Brand per-week from brand_trajectory, NB per-week from solve_nb_residual \u00d7 seasonal weights",
+          "source_file": "locked_ytd.py:project_with_locked_ytd",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:50.581712+00:00"
+        },
+        "fit_quality_summary": {
+          "sql_or_fn": "Derived from parameters_used (no single source)",
+          "source_file": "mpe_engine.py:_build_fit_quality_summary",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:50.581712+00:00"
+        },
+        "parameters_used": {
+          "sql_or_fn": "SELECT * FROM ps.market_projection_params_current WHERE market = 'CA'",
+          "source_file": "mpe_engine.py:_load_market_params",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:50.581712+00:00"
+        }
+      }
     },
     "UK": {
       "parameters": {
@@ -4745,9 +4936,107 @@
       "confidence_history": [
         {
           "week": "2026-W18",
-          "ci_width_pct": 490.43
+          "ci_width_pct": 540.23
         }
-      ]
+      ],
+      "provenance_template": {
+        "totals.total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='UK', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.17 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:53.869069+00:00"
+        },
+        "totals.total_regs": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='UK', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.17 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:53.869069+00:00"
+        },
+        "totals.computed_ieccp": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='UK', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.17 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:53.869069+00:00"
+        },
+        "totals.blended_cpa": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='UK', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.17 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:53.869069+00:00"
+        },
+        "totals.annual_total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='UK', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.17 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:53.869069+00:00"
+        },
+        "totals.brand_regs": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='UK', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:53.869069+00:00"
+        },
+        "totals.brand_spend": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='UK', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:53.869069+00:00"
+        },
+        "totals.nb_regs": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='UK', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.17 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:53.869069+00:00"
+        },
+        "totals.nb_spend": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='UK', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.17 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:42:53.869069+00:00"
+        },
+        "credible_intervals": {
+          "sql_or_fn": "V1_1_Slim.bootstrapCI(projection, ytd_weekly['UK'], alpha=0.10)",
+          "source_file": "v1_1_slim.py:bootstrapCI",
+          "fit_call": "residual bootstrap, 2000 draws, alpha=0.10",
+          "last_computed": "2026-05-01T19:42:53.869069+00:00"
+        },
+        "contribution_breakdown": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='UK').contribution",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": "seasonal+trend+regime multiplicative compose",
+          "last_computed": "2026-05-01T19:42:53.869069+00:00"
+        },
+        "regime_stack": {
+          "sql_or_fn": "SELECT * FROM ps.regime_fit_state_current rfs LEFT JOIN ps.regime_changes rc ON rc.id = rfs.regime_id WHERE rc.market = 'UK' AND rc.is_structural_baseline = TRUE",
+          "source_file": "regime_confidence.py:list_regimes_with_confidence",
+          "fit_call": "weekly refit via fit_regime_state.py",
+          "last_computed": "2026-05-01T19:42:53.869069+00:00"
+        },
+        "locked_ytd_summary": {
+          "sql_or_fn": "SELECT period_start AS week_start, regs, spend, clicks, brand_regs, nb_regs, brand_spend, nb_spend FROM ps.v_weekly WHERE market = 'UK' AND period_start <= ytd_latest ORDER BY period_start",
+          "source_file": "locked_ytd.py:fetch_ytd_actuals",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:53.869069+00:00"
+        },
+        "weeks": {
+          "sql_or_fn": "Weekly outputs from project_with_locked_ytd \u2014 Brand per-week from brand_trajectory, NB per-week from solve_nb_residual \u00d7 seasonal weights",
+          "source_file": "locked_ytd.py:project_with_locked_ytd",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:53.869069+00:00"
+        },
+        "fit_quality_summary": {
+          "sql_or_fn": "Derived from parameters_used (no single source)",
+          "source_file": "mpe_engine.py:_build_fit_quality_summary",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:53.869069+00:00"
+        },
+        "parameters_used": {
+          "sql_or_fn": "SELECT * FROM ps.market_projection_params_current WHERE market = 'UK'",
+          "source_file": "mpe_engine.py:_load_market_params",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:53.869069+00:00"
+        }
+      }
     },
     "DE": {
       "parameters": {
@@ -6294,9 +6583,107 @@
       "confidence_history": [
         {
           "week": "2026-W18",
-          "ci_width_pct": 547.61
+          "ci_width_pct": 519.96
         }
-      ]
+      ],
+      "provenance_template": {
+        "totals.total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='DE', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.35 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:42:56.889844+00:00"
+        },
+        "totals.total_regs": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='DE', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.35 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:42:56.889844+00:00"
+        },
+        "totals.computed_ieccp": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='DE', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.35 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:42:56.889844+00:00"
+        },
+        "totals.blended_cpa": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='DE', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.35 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:42:56.889844+00:00"
+        },
+        "totals.annual_total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='DE', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.35 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:42:56.889844+00:00"
+        },
+        "totals.brand_regs": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='DE', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:56.889844+00:00"
+        },
+        "totals.brand_spend": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='DE', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:56.889844+00:00"
+        },
+        "totals.nb_regs": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='DE', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.35 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:42:56.889844+00:00"
+        },
+        "totals.nb_spend": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='DE', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.35 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:42:56.889844+00:00"
+        },
+        "credible_intervals": {
+          "sql_or_fn": "V1_1_Slim.bootstrapCI(projection, ytd_weekly['DE'], alpha=0.10)",
+          "source_file": "v1_1_slim.py:bootstrapCI",
+          "fit_call": "residual bootstrap, 2000 draws, alpha=0.10",
+          "last_computed": "2026-05-01T19:42:56.889844+00:00"
+        },
+        "contribution_breakdown": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='DE').contribution",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": "seasonal+trend+regime multiplicative compose",
+          "last_computed": "2026-05-01T19:42:56.889844+00:00"
+        },
+        "regime_stack": {
+          "sql_or_fn": "SELECT * FROM ps.regime_fit_state_current rfs LEFT JOIN ps.regime_changes rc ON rc.id = rfs.regime_id WHERE rc.market = 'DE' AND rc.is_structural_baseline = TRUE",
+          "source_file": "regime_confidence.py:list_regimes_with_confidence",
+          "fit_call": "weekly refit via fit_regime_state.py",
+          "last_computed": "2026-05-01T19:42:56.889844+00:00"
+        },
+        "locked_ytd_summary": {
+          "sql_or_fn": "SELECT period_start AS week_start, regs, spend, clicks, brand_regs, nb_regs, brand_spend, nb_spend FROM ps.v_weekly WHERE market = 'DE' AND period_start <= ytd_latest ORDER BY period_start",
+          "source_file": "locked_ytd.py:fetch_ytd_actuals",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:56.889844+00:00"
+        },
+        "weeks": {
+          "sql_or_fn": "Weekly outputs from project_with_locked_ytd \u2014 Brand per-week from brand_trajectory, NB per-week from solve_nb_residual \u00d7 seasonal weights",
+          "source_file": "locked_ytd.py:project_with_locked_ytd",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:56.889844+00:00"
+        },
+        "fit_quality_summary": {
+          "sql_or_fn": "Derived from parameters_used (no single source)",
+          "source_file": "mpe_engine.py:_build_fit_quality_summary",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:56.889844+00:00"
+        },
+        "parameters_used": {
+          "sql_or_fn": "SELECT * FROM ps.market_projection_params_current WHERE market = 'DE'",
+          "source_file": "mpe_engine.py:_load_market_params",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:56.889844+00:00"
+        }
+      }
     },
     "FR": {
       "parameters": {
@@ -7845,9 +8232,107 @@
       "confidence_history": [
         {
           "week": "2026-W18",
-          "ci_width_pct": 493.98
+          "ci_width_pct": 454.91
         }
-      ]
+      ],
+      "provenance_template": {
+        "totals.total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='FR', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.50 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:42:59.827926+00:00"
+        },
+        "totals.total_regs": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='FR', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.50 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:42:59.827926+00:00"
+        },
+        "totals.computed_ieccp": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='FR', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.50 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:42:59.827926+00:00"
+        },
+        "totals.blended_cpa": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='FR', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.50 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:42:59.827926+00:00"
+        },
+        "totals.annual_total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='FR', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.50 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:42:59.827926+00:00"
+        },
+        "totals.brand_regs": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='FR', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:59.827926+00:00"
+        },
+        "totals.brand_spend": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='FR', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:59.827926+00:00"
+        },
+        "totals.nb_regs": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='FR', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.50 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:42:59.827926+00:00"
+        },
+        "totals.nb_spend": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='FR', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.50 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:42:59.827926+00:00"
+        },
+        "credible_intervals": {
+          "sql_or_fn": "V1_1_Slim.bootstrapCI(projection, ytd_weekly['FR'], alpha=0.10)",
+          "source_file": "v1_1_slim.py:bootstrapCI",
+          "fit_call": "residual bootstrap, 2000 draws, alpha=0.10",
+          "last_computed": "2026-05-01T19:42:59.827926+00:00"
+        },
+        "contribution_breakdown": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='FR').contribution",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": "seasonal+trend+regime multiplicative compose",
+          "last_computed": "2026-05-01T19:42:59.827926+00:00"
+        },
+        "regime_stack": {
+          "sql_or_fn": "SELECT * FROM ps.regime_fit_state_current rfs LEFT JOIN ps.regime_changes rc ON rc.id = rfs.regime_id WHERE rc.market = 'FR' AND rc.is_structural_baseline = TRUE",
+          "source_file": "regime_confidence.py:list_regimes_with_confidence",
+          "fit_call": "weekly refit via fit_regime_state.py",
+          "last_computed": "2026-05-01T19:42:59.827926+00:00"
+        },
+        "locked_ytd_summary": {
+          "sql_or_fn": "SELECT period_start AS week_start, regs, spend, clicks, brand_regs, nb_regs, brand_spend, nb_spend FROM ps.v_weekly WHERE market = 'FR' AND period_start <= ytd_latest ORDER BY period_start",
+          "source_file": "locked_ytd.py:fetch_ytd_actuals",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:59.827926+00:00"
+        },
+        "weeks": {
+          "sql_or_fn": "Weekly outputs from project_with_locked_ytd \u2014 Brand per-week from brand_trajectory, NB per-week from solve_nb_residual \u00d7 seasonal weights",
+          "source_file": "locked_ytd.py:project_with_locked_ytd",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:59.827926+00:00"
+        },
+        "fit_quality_summary": {
+          "sql_or_fn": "Derived from parameters_used (no single source)",
+          "source_file": "mpe_engine.py:_build_fit_quality_summary",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:59.827926+00:00"
+        },
+        "parameters_used": {
+          "sql_or_fn": "SELECT * FROM ps.market_projection_params_current WHERE market = 'FR'",
+          "source_file": "mpe_engine.py:_load_market_params",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:42:59.827926+00:00"
+        }
+      }
     },
     "IT": {
       "parameters": {
@@ -9448,9 +9933,107 @@
       "confidence_history": [
         {
           "week": "2026-W18",
-          "ci_width_pct": 530.83
+          "ci_width_pct": 531.4
         }
-      ]
+      ],
+      "provenance_template": {
+        "totals.total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='IT', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.31 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:02.797214+00:00"
+        },
+        "totals.total_regs": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='IT', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.31 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:02.797214+00:00"
+        },
+        "totals.computed_ieccp": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='IT', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.31 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:02.797214+00:00"
+        },
+        "totals.blended_cpa": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='IT', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.31 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:02.797214+00:00"
+        },
+        "totals.annual_total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='IT', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.31 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:02.797214+00:00"
+        },
+        "totals.brand_regs": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='IT', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:02.797214+00:00"
+        },
+        "totals.brand_spend": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='IT', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:02.797214+00:00"
+        },
+        "totals.nb_regs": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='IT', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.31 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:02.797214+00:00"
+        },
+        "totals.nb_spend": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='IT', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.31 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:02.797214+00:00"
+        },
+        "credible_intervals": {
+          "sql_or_fn": "V1_1_Slim.bootstrapCI(projection, ytd_weekly['IT'], alpha=0.10)",
+          "source_file": "v1_1_slim.py:bootstrapCI",
+          "fit_call": "residual bootstrap, 2000 draws, alpha=0.10",
+          "last_computed": "2026-05-01T19:43:02.797214+00:00"
+        },
+        "contribution_breakdown": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='IT').contribution",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": "seasonal+trend+regime multiplicative compose",
+          "last_computed": "2026-05-01T19:43:02.797214+00:00"
+        },
+        "regime_stack": {
+          "sql_or_fn": "SELECT * FROM ps.regime_fit_state_current rfs LEFT JOIN ps.regime_changes rc ON rc.id = rfs.regime_id WHERE rc.market = 'IT' AND rc.is_structural_baseline = TRUE",
+          "source_file": "regime_confidence.py:list_regimes_with_confidence",
+          "fit_call": "weekly refit via fit_regime_state.py",
+          "last_computed": "2026-05-01T19:43:02.797214+00:00"
+        },
+        "locked_ytd_summary": {
+          "sql_or_fn": "SELECT period_start AS week_start, regs, spend, clicks, brand_regs, nb_regs, brand_spend, nb_spend FROM ps.v_weekly WHERE market = 'IT' AND period_start <= ytd_latest ORDER BY period_start",
+          "source_file": "locked_ytd.py:fetch_ytd_actuals",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:02.797214+00:00"
+        },
+        "weeks": {
+          "sql_or_fn": "Weekly outputs from project_with_locked_ytd \u2014 Brand per-week from brand_trajectory, NB per-week from solve_nb_residual \u00d7 seasonal weights",
+          "source_file": "locked_ytd.py:project_with_locked_ytd",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:02.797214+00:00"
+        },
+        "fit_quality_summary": {
+          "sql_or_fn": "Derived from parameters_used (no single source)",
+          "source_file": "mpe_engine.py:_build_fit_quality_summary",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:02.797214+00:00"
+        },
+        "parameters_used": {
+          "sql_or_fn": "SELECT * FROM ps.market_projection_params_current WHERE market = 'IT'",
+          "source_file": "mpe_engine.py:_load_market_params",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:02.797214+00:00"
+        }
+      }
     },
     "ES": {
       "parameters": {
@@ -11002,9 +11585,107 @@
       "confidence_history": [
         {
           "week": "2026-W18",
-          "ci_width_pct": 433.3
+          "ci_width_pct": 516.4
         }
-      ]
+      ],
+      "provenance_template": {
+        "totals.total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='ES', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.15 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:05.771985+00:00"
+        },
+        "totals.total_regs": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='ES', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.15 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:05.771985+00:00"
+        },
+        "totals.computed_ieccp": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='ES', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.15 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:05.771985+00:00"
+        },
+        "totals.blended_cpa": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='ES', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.15 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:05.771985+00:00"
+        },
+        "totals.annual_total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='ES', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.15 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:05.771985+00:00"
+        },
+        "totals.brand_regs": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='ES', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:05.771985+00:00"
+        },
+        "totals.brand_spend": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='ES', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:05.771985+00:00"
+        },
+        "totals.nb_regs": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='ES', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.15 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:05.771985+00:00"
+        },
+        "totals.nb_spend": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='ES', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.15 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:05.771985+00:00"
+        },
+        "credible_intervals": {
+          "sql_or_fn": "V1_1_Slim.bootstrapCI(projection, ytd_weekly['ES'], alpha=0.10)",
+          "source_file": "v1_1_slim.py:bootstrapCI",
+          "fit_call": "residual bootstrap, 2000 draws, alpha=0.10",
+          "last_computed": "2026-05-01T19:43:05.771985+00:00"
+        },
+        "contribution_breakdown": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='ES').contribution",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": "seasonal+trend+regime multiplicative compose",
+          "last_computed": "2026-05-01T19:43:05.771985+00:00"
+        },
+        "regime_stack": {
+          "sql_or_fn": "SELECT * FROM ps.regime_fit_state_current rfs LEFT JOIN ps.regime_changes rc ON rc.id = rfs.regime_id WHERE rc.market = 'ES' AND rc.is_structural_baseline = TRUE",
+          "source_file": "regime_confidence.py:list_regimes_with_confidence",
+          "fit_call": "weekly refit via fit_regime_state.py",
+          "last_computed": "2026-05-01T19:43:05.771985+00:00"
+        },
+        "locked_ytd_summary": {
+          "sql_or_fn": "SELECT period_start AS week_start, regs, spend, clicks, brand_regs, nb_regs, brand_spend, nb_spend FROM ps.v_weekly WHERE market = 'ES' AND period_start <= ytd_latest ORDER BY period_start",
+          "source_file": "locked_ytd.py:fetch_ytd_actuals",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:05.771985+00:00"
+        },
+        "weeks": {
+          "sql_or_fn": "Weekly outputs from project_with_locked_ytd \u2014 Brand per-week from brand_trajectory, NB per-week from solve_nb_residual \u00d7 seasonal weights",
+          "source_file": "locked_ytd.py:project_with_locked_ytd",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:05.771985+00:00"
+        },
+        "fit_quality_summary": {
+          "sql_or_fn": "Derived from parameters_used (no single source)",
+          "source_file": "mpe_engine.py:_build_fit_quality_summary",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:05.771985+00:00"
+        },
+        "parameters_used": {
+          "sql_or_fn": "SELECT * FROM ps.market_projection_params_current WHERE market = 'ES'",
+          "source_file": "mpe_engine.py:_load_market_params",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:05.771985+00:00"
+        }
+      }
     },
     "JP": {
       "parameters": {
@@ -12532,7 +13213,105 @@
         ],
         "source": "ps.targets (monthly sum)"
       },
-      "confidence_history": []
+      "confidence_history": [],
+      "provenance_template": {
+        "totals.total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='JP', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.74 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:43:07.584908+00:00"
+        },
+        "totals.total_regs": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='JP', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.74 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:43:07.584908+00:00"
+        },
+        "totals.computed_ieccp": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='JP', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.74 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:43:07.584908+00:00"
+        },
+        "totals.blended_cpa": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='JP', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.74 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:43:07.584908+00:00"
+        },
+        "totals.annual_total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='JP', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.74 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:43:07.584908+00:00"
+        },
+        "totals.brand_regs": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='JP', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:07.584908+00:00"
+        },
+        "totals.brand_spend": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='JP', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:07.584908+00:00"
+        },
+        "totals.nb_regs": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='JP', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.74 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:43:07.584908+00:00"
+        },
+        "totals.nb_spend": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='JP', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.74 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:43:07.584908+00:00"
+        },
+        "credible_intervals": {
+          "sql_or_fn": "V1_1_Slim.bootstrapCI(projection, ytd_weekly['JP'], alpha=0.10)",
+          "source_file": "v1_1_slim.py:bootstrapCI",
+          "fit_call": "residual bootstrap, 2000 draws, alpha=0.10",
+          "last_computed": "2026-05-01T19:43:07.584908+00:00"
+        },
+        "contribution_breakdown": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='JP').contribution",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": "seasonal+trend+regime multiplicative compose",
+          "last_computed": "2026-05-01T19:43:07.584908+00:00"
+        },
+        "regime_stack": {
+          "sql_or_fn": "SELECT * FROM ps.regime_fit_state_current rfs LEFT JOIN ps.regime_changes rc ON rc.id = rfs.regime_id WHERE rc.market = 'JP' AND rc.is_structural_baseline = TRUE",
+          "source_file": "regime_confidence.py:list_regimes_with_confidence",
+          "fit_call": "weekly refit via fit_regime_state.py",
+          "last_computed": "2026-05-01T19:43:07.584908+00:00"
+        },
+        "locked_ytd_summary": {
+          "sql_or_fn": "SELECT period_start AS week_start, regs, spend, clicks, brand_regs, nb_regs, brand_spend, nb_spend FROM ps.v_weekly WHERE market = 'JP' AND period_start <= ytd_latest ORDER BY period_start",
+          "source_file": "locked_ytd.py:fetch_ytd_actuals",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:07.584908+00:00"
+        },
+        "weeks": {
+          "sql_or_fn": "Weekly outputs from project_with_locked_ytd \u2014 Brand per-week from brand_trajectory, NB per-week from solve_nb_residual \u00d7 seasonal weights",
+          "source_file": "locked_ytd.py:project_with_locked_ytd",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:07.584908+00:00"
+        },
+        "fit_quality_summary": {
+          "sql_or_fn": "Derived from parameters_used (no single source)",
+          "source_file": "mpe_engine.py:_build_fit_quality_summary",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:07.584908+00:00"
+        },
+        "parameters_used": {
+          "sql_or_fn": "SELECT * FROM ps.market_projection_params_current WHERE market = 'JP'",
+          "source_file": "mpe_engine.py:_load_market_params",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:07.584908+00:00"
+        }
+      }
     },
     "MX": {
       "parameters": {
@@ -14139,9 +14918,107 @@
       "confidence_history": [
         {
           "week": "2026-W18",
-          "ci_width_pct": 387.9
+          "ci_width_pct": 372.54
         }
       ],
+      "provenance_template": {
+        "totals.total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='MX', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.41 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:43:10.531446+00:00"
+        },
+        "totals.total_regs": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='MX', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.41 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:43:10.531446+00:00"
+        },
+        "totals.computed_ieccp": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='MX', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.41 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:43:10.531446+00:00"
+        },
+        "totals.blended_cpa": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='MX', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.41 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:43:10.531446+00:00"
+        },
+        "totals.annual_total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='MX', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.41 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:43:10.531446+00:00"
+        },
+        "totals.brand_regs": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='MX', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:10.531446+00:00"
+        },
+        "totals.brand_spend": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='MX', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:10.531446+00:00"
+        },
+        "totals.nb_regs": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='MX', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.41 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:43:10.531446+00:00"
+        },
+        "totals.nb_spend": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='MX', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.41 \u00b7 fallback=market_specific",
+          "last_computed": "2026-05-01T19:43:10.531446+00:00"
+        },
+        "credible_intervals": {
+          "sql_or_fn": "V1_1_Slim.bootstrapCI(projection, ytd_weekly['MX'], alpha=0.10)",
+          "source_file": "v1_1_slim.py:bootstrapCI",
+          "fit_call": "residual bootstrap, 2000 draws, alpha=0.10",
+          "last_computed": "2026-05-01T19:43:10.531446+00:00"
+        },
+        "contribution_breakdown": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='MX').contribution",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": "seasonal+trend+regime multiplicative compose",
+          "last_computed": "2026-05-01T19:43:10.531446+00:00"
+        },
+        "regime_stack": {
+          "sql_or_fn": "SELECT * FROM ps.regime_fit_state_current rfs LEFT JOIN ps.regime_changes rc ON rc.id = rfs.regime_id WHERE rc.market = 'MX' AND rc.is_structural_baseline = TRUE",
+          "source_file": "regime_confidence.py:list_regimes_with_confidence",
+          "fit_call": "weekly refit via fit_regime_state.py",
+          "last_computed": "2026-05-01T19:43:10.531446+00:00"
+        },
+        "locked_ytd_summary": {
+          "sql_or_fn": "SELECT period_start AS week_start, regs, spend, clicks, brand_regs, nb_regs, brand_spend, nb_spend FROM ps.v_weekly WHERE market = 'MX' AND period_start <= ytd_latest ORDER BY period_start",
+          "source_file": "locked_ytd.py:fetch_ytd_actuals",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:10.531446+00:00"
+        },
+        "weeks": {
+          "sql_or_fn": "Weekly outputs from project_with_locked_ytd \u2014 Brand per-week from brand_trajectory, NB per-week from solve_nb_residual \u00d7 seasonal weights",
+          "source_file": "locked_ytd.py:project_with_locked_ytd",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:10.531446+00:00"
+        },
+        "fit_quality_summary": {
+          "sql_or_fn": "Derived from parameters_used (no single source)",
+          "source_file": "mpe_engine.py:_build_fit_quality_summary",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:10.531446+00:00"
+        },
+        "parameters_used": {
+          "sql_or_fn": "SELECT * FROM ps.market_projection_params_current WHERE market = 'MX'",
+          "source_file": "mpe_engine.py:_load_market_params",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:10.531446+00:00"
+        }
+      },
       "_spend_bounds": {
         "min_weekly_nb_spend": 15000.0,
         "max_weekly_nb_spend": 30000.0,
@@ -15498,7 +16375,105 @@
         ],
         "source": "ps.targets (monthly sum)"
       },
-      "confidence_history": []
+      "confidence_history": [],
+      "provenance_template": {
+        "totals.total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='AU', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.50 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:12.365496+00:00"
+        },
+        "totals.total_regs": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='AU', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.50 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:12.365496+00:00"
+        },
+        "totals.computed_ieccp": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='AU', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.50 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:12.365496+00:00"
+        },
+        "totals.blended_cpa": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='AU', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.50 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:12.365496+00:00"
+        },
+        "totals.annual_total_spend": {
+          "sql_or_fn": "V1_1_Slim.projectWithLockedYtd(market='AU', period=<period>, driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)",
+          "source_file": "mpe_engine.py:project",
+          "fit_call": "r\u00b2=0.50 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:12.365496+00:00"
+        },
+        "totals.brand_regs": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='AU', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:12.365496+00:00"
+        },
+        "totals.brand_spend": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='AU', weights=default_4040_15)",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:12.365496+00:00"
+        },
+        "totals.nb_regs": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='AU', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.50 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:12.365496+00:00"
+        },
+        "totals.nb_spend": {
+          "sql_or_fn": "nb_residual_solver.solve_nb_residual(market='AU', driver=<driver>, target=<target>)",
+          "source_file": "nb_residual_solver.py:solve_nb_residual",
+          "fit_call": "r\u00b2=0.50 \u00b7 fallback=regional_fallback",
+          "last_computed": "2026-05-01T19:43:12.365496+00:00"
+        },
+        "credible_intervals": {
+          "sql_or_fn": "V1_1_Slim.bootstrapCI(projection, ytd_weekly['AU'], alpha=0.10)",
+          "source_file": "v1_1_slim.py:bootstrapCI",
+          "fit_call": "residual bootstrap, 2000 draws, alpha=0.10",
+          "last_computed": "2026-05-01T19:43:12.365496+00:00"
+        },
+        "contribution_breakdown": {
+          "sql_or_fn": "brand_trajectory.project_brand_trajectory(market='AU').contribution",
+          "source_file": "brand_trajectory.py:project_brand_trajectory",
+          "fit_call": "seasonal+trend+regime multiplicative compose",
+          "last_computed": "2026-05-01T19:43:12.365496+00:00"
+        },
+        "regime_stack": {
+          "sql_or_fn": "SELECT * FROM ps.regime_fit_state_current rfs LEFT JOIN ps.regime_changes rc ON rc.id = rfs.regime_id WHERE rc.market = 'AU' AND rc.is_structural_baseline = TRUE",
+          "source_file": "regime_confidence.py:list_regimes_with_confidence",
+          "fit_call": "weekly refit via fit_regime_state.py",
+          "last_computed": "2026-05-01T19:43:12.365496+00:00"
+        },
+        "locked_ytd_summary": {
+          "sql_or_fn": "SELECT period_start AS week_start, regs, spend, clicks, brand_regs, nb_regs, brand_spend, nb_spend FROM ps.v_weekly WHERE market = 'AU' AND period_start <= ytd_latest ORDER BY period_start",
+          "source_file": "locked_ytd.py:fetch_ytd_actuals",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:12.365496+00:00"
+        },
+        "weeks": {
+          "sql_or_fn": "Weekly outputs from project_with_locked_ytd \u2014 Brand per-week from brand_trajectory, NB per-week from solve_nb_residual \u00d7 seasonal weights",
+          "source_file": "locked_ytd.py:project_with_locked_ytd",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:12.365496+00:00"
+        },
+        "fit_quality_summary": {
+          "sql_or_fn": "Derived from parameters_used (no single source)",
+          "source_file": "mpe_engine.py:_build_fit_quality_summary",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:12.365496+00:00"
+        },
+        "parameters_used": {
+          "sql_or_fn": "SELECT * FROM ps.market_projection_params_current WHERE market = 'AU'",
+          "source_file": "mpe_engine.py:_load_market_params",
+          "fit_call": null,
+          "last_computed": "2026-05-01T19:43:12.365496+00:00"
+        }
+      }
     }
   },
   "regions": {

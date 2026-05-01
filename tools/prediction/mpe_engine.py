@@ -1619,5 +1619,168 @@ def _build_provenance(result: 'ProjectionOutputs', inputs: 'ProjectionInputs') -
     return prov
 
 
+def build_provenance_template(market: str, params: dict | None = None) -> dict:
+    """Build a per-market provenance template without running a full projection.
+
+    Research report #076 Bug 3 fix (kiro-local bus 020) — the browser-side
+    engine (mpe_engine.js / v1_1_slim.js) doesn't emit provenance because the
+    full _build_provenance() requires a ProjectionOutputs object. This helper
+    emits the 16 tile keys with market-specific SQL strings + static metadata,
+    callable from export-projection-data.py once per market. The client-side
+    project() call then merges this template into out.provenance at the end
+    of each compute — no per-scenario recompute needed, the provenance is
+    the same shape for every target/driver combination.
+
+    Fields that would vary per-scenario (last_computed, target_value in the
+    solver signature) use market-wide static values — last_computed = export
+    time, solver_fn omits the target signature. Good enough for the drawer's
+    "how is this computed" read; a future version can parameterize if needed.
+
+    `params` is the result of a `ps.market_projection_params_current` lookup;
+    when provided, fit_call strings carry r²/n_weeks/fallback info. When None,
+    fit_call is null for tiles that would otherwise carry fit metadata.
+    """
+    from datetime import datetime as _dt, timezone as _tz
+    ts = _dt.now(_tz.utc).isoformat()
+    params = params or {}
+
+    def param_fit_call(name: str) -> str | None:
+        p = params.get(name)
+        if not isinstance(p, dict):
+            return None
+        r2 = p.get('r_squared')
+        n_weeks = p.get('n_weeks')
+        hl = p.get('half_life_weeks')
+        fb = p.get('fallback_level', 'unknown')
+        parts = []
+        if r2 is not None:
+            parts.append(f"r²={r2:.2f}")
+        if n_weeks is not None:
+            parts.append(f"n={n_weeks}w")
+        if hl is not None:
+            parts.append(f"half_life={hl}w")
+        parts.append(f"fallback={fb}")
+        return " · ".join(parts) if parts else None
+
+    # Solver signature without target value — client merges target at runtime
+    # if it wants a scenario-specific label. Template-only says "this comes
+    # from the solver" not "this comes from the solver at target=X."
+    solver_fn = (
+        f"V1_1_Slim.projectWithLockedYtd(market={market!r}, period=<period>, "
+        f"driver=<driver>, target=<target>, regime_multiplier=<regime_multiplier>)"
+    )
+
+    nb_elasticity_fit = param_fit_call('nb_cpa_elasticity')
+    brand_elasticity_fit = param_fit_call('brand_cpa_elasticity')
+    brand_share_fit = param_fit_call('brand_spend_share')
+
+    prov: dict[str, dict] = {}
+
+    for tile in ('total_spend', 'total_regs', 'computed_ieccp', 'blended_cpa',
+                 'annual_total_spend'):
+        prov[f'totals.{tile}'] = {
+            'sql_or_fn': solver_fn,
+            'source_file': 'mpe_engine.py:project',
+            'fit_call': nb_elasticity_fit,
+            'last_computed': ts,
+        }
+
+    for tile in ('brand_regs', 'brand_spend'):
+        prov[f'totals.{tile}'] = {
+            'sql_or_fn': (
+                f"brand_trajectory.project_brand_trajectory("
+                f"market={market!r}, weights=default_4040_15)"
+            ),
+            'source_file': 'brand_trajectory.py:project_brand_trajectory',
+            'fit_call': brand_elasticity_fit,
+            'last_computed': ts,
+        }
+
+    for tile in ('nb_regs', 'nb_spend'):
+        prov[f'totals.{tile}'] = {
+            'sql_or_fn': (
+                f"nb_residual_solver.solve_nb_residual("
+                f"market={market!r}, driver=<driver>, target=<target>)"
+            ),
+            'source_file': 'nb_residual_solver.py:solve_nb_residual',
+            'fit_call': nb_elasticity_fit,
+            'last_computed': ts,
+        }
+
+    prov['credible_intervals'] = {
+        'sql_or_fn': f"V1_1_Slim.bootstrapCI(projection, ytd_weekly[{market!r}], alpha=0.10)",
+        'source_file': 'v1_1_slim.py:bootstrapCI',
+        'fit_call': "residual bootstrap, 2000 draws, alpha=0.10",
+        'last_computed': ts,
+    }
+
+    prov['contribution_breakdown'] = {
+        'sql_or_fn': (
+            f"brand_trajectory.project_brand_trajectory("
+            f"market={market!r}).contribution"
+        ),
+        'source_file': 'brand_trajectory.py:project_brand_trajectory',
+        'fit_call': "seasonal+trend+regime multiplicative compose",
+        'last_computed': ts,
+    }
+
+    prov['regime_stack'] = {
+        'sql_or_fn': (
+            "SELECT * FROM ps.regime_fit_state_current rfs "
+            "LEFT JOIN ps.regime_changes rc ON rc.id = rfs.regime_id "
+            f"WHERE rc.market = {market!r} AND rc.is_structural_baseline = TRUE"
+        ),
+        'source_file': 'regime_confidence.py:list_regimes_with_confidence',
+        'fit_call': "weekly refit via fit_regime_state.py",
+        'last_computed': ts,
+    }
+
+    prov['locked_ytd_summary'] = {
+        'sql_or_fn': (
+            "SELECT period_start AS week_start, regs, spend, clicks, "
+            "brand_regs, nb_regs, brand_spend, nb_spend "
+            "FROM ps.v_weekly "
+            f"WHERE market = {market!r} AND period_start <= ytd_latest "
+            "ORDER BY period_start"
+        ),
+        'source_file': 'locked_ytd.py:fetch_ytd_actuals',
+        'fit_call': None,
+        'last_computed': ts,
+    }
+
+    prov['weeks'] = {
+        'sql_or_fn': (
+            "Weekly outputs from project_with_locked_ytd — Brand per-week "
+            "from brand_trajectory, NB per-week from solve_nb_residual × "
+            "seasonal weights"
+        ),
+        'source_file': 'locked_ytd.py:project_with_locked_ytd',
+        'fit_call': None,
+        'last_computed': ts,
+    }
+
+    prov['fit_quality_summary'] = {
+        'sql_or_fn': "Derived from parameters_used (no single source)",
+        'source_file': 'mpe_engine.py:_build_fit_quality_summary',
+        'fit_call': None,
+        'last_computed': ts,
+    }
+
+    prov['parameters_used'] = {
+        'sql_or_fn': (
+            "SELECT * FROM ps.market_projection_params_current "
+            f"WHERE market = {market!r}"
+        ),
+        'source_file': 'mpe_engine.py:_load_market_params',
+        'fit_call': None,
+        'last_computed': ts,
+    }
+
+    if brand_share_fit:
+        prov['totals.brand_regs']['fit_call'] = brand_share_fit
+
+    return prov
+
+
 if __name__ == "__main__":
     sys.exit(main())

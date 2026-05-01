@@ -595,6 +595,20 @@ def main() -> int:
             # First run emits 1 row per market; weekly runs grow the history.
             confidence_history = _snapshot_and_fetch_confidence_history(con, market, current_year)
 
+            # Research report #076 Bug 3 fix (kiro-local bus 020): browser-side
+            # engine doesn't run _build_provenance(), so the drawer rendered
+            # "No provenance data emitted by this projection." on every click.
+            # Emit a provenance_template per market — the 16 tile keys with
+            # market-specific SQL + static source_file/fit_call metadata.
+            # Client-side mpe_engine.js merges this into out.provenance at the
+            # end of each compute, no per-scenario recompute needed.
+            provenance_template = None
+            try:
+                from prediction.mpe_engine import build_provenance_template
+                provenance_template = build_provenance_template(market, params)
+            except Exception as e:
+                print(f"[{market}] provenance_template skipped: {type(e).__name__}: {e}")
+
             market_entry = {
                 'parameters': _json_safe(params),
                 'ytd_weekly': ytd,
@@ -606,6 +620,7 @@ def main() -> int:
                 'clean_weeks_count': len(ytd),
                 'op2_targets': op2_targets,
                 'confidence_history': confidence_history,
+                'provenance_template': provenance_template,
             }
             if spend_bounds is not None:
                 market_entry['_spend_bounds'] = spend_bounds
