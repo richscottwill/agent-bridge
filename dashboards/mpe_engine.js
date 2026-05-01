@@ -573,6 +573,40 @@
     return { credibleIntervals: result, engineWarnings };
   }
 
+  // ---------- Provenance merger (Bug 3 consumer, 2026-05-01) ----------
+  // Reads `markets[scope].provenance_template` from projection-data.json
+  // (emitted by export-projection-data.py via mpe_engine.py::build_provenance_template)
+  // and substitutes the <period>/<driver>/<target>/<regime_multiplier> placeholders
+  // with the scenario-specific values from the current inputs. Attaches to out.provenance.
+  // Spec: agent-bus thread dashboard-mockups-handoff post 021_kiro-server.
+  function attachProvenance(out, inputs, data) {
+    const scope = inputs && inputs.scope;
+    const template = data && data.markets && data.markets[scope] && data.markets[scope].provenance_template;
+    if (!template || typeof template !== 'object') return out;
+    const sub = {
+      period: String(inputs.timePeriod != null ? inputs.timePeriod : ''),
+      driver: String(inputs.targetMode != null ? inputs.targetMode : ''),
+      target: String(inputs.targetValue != null ? inputs.targetValue : ''),
+      regime_multiplier: String(inputs.regimeMultiplier != null ? inputs.regimeMultiplier : 1.0),
+    };
+    out.provenance = {};
+    for (const key of Object.keys(template)) {
+      const tile = template[key] || {};
+      const sqlOrFn = typeof tile.sql_or_fn === 'string'
+        ? tile.sql_or_fn
+            .replace('<period>', sub.period)
+            .replace('<driver>', sub.driver)
+            .replace('<target>', sub.target)
+            .replace('<regime_multiplier>', sub.regime_multiplier)
+        : tile.sql_or_fn;
+      out.provenance[key] = {
+        ...tile,
+        sql_or_fn: sqlOrFn,
+      };
+    }
+    return out;
+  }
+
   // ---------- Main project() entry point (mirrors project()) ----------
 
   function project(inputs, data) {
@@ -753,6 +787,7 @@
       };
     }
 
+    attachProvenance(out, inputs, data);
     return out;
   }
 
@@ -822,6 +857,7 @@
     const allWarnings = new Set();
     for (const m of perMarket) m.warnings.forEach(w => allWarnings.add(w));
     out.warnings = Array.from(allWarnings).sort();
+    attachProvenance(out, inputs, data);
     return out;
   }
 

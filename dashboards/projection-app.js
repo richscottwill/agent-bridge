@@ -48,6 +48,44 @@
   const CHART_MARGIN = { top: 30, right: 70, bottom: 40, left: 60 };
 
   // ========================================================================
+  // Provenance merger (2026-05-01 · Bug 3 consumer on app side)
+  // ========================================================================
+  // The UI path calls V1_1_Slim.projectWithLockedYtd directly, bypassing
+  // MPE.project(). So we attach provenance here instead of in the engine.
+  // Spec: agent-bus thread dashboard-mockups-handoff post 021_kiro-server.
+  // Reads markets[scope].provenance_template from projection-data.json and
+  // substitutes <period>/<driver>/<target>/<regime_multiplier> placeholders
+  // with the current scenario inputs. Attaches to projection.provenance so
+  // the Model View drawer Provenance section picks it up.
+  function attachProvenanceOnApp(projection, inputs) {
+    if (!projection || typeof projection !== 'object') return projection;
+    const data = STATE && STATE.data;
+    const scope = inputs && inputs.scope;
+    const template = data && data.markets && data.markets[scope]
+      && data.markets[scope].provenance_template;
+    if (!template || typeof template !== 'object') return projection;
+    const sub = {
+      period: String(inputs.period != null ? inputs.period : ''),
+      driver: String(inputs.driver != null ? inputs.driver : ''),
+      target: String(inputs.target != null ? inputs.target : ''),
+      regime_multiplier: String(inputs.regimeMultiplier != null ? inputs.regimeMultiplier : 1.0),
+    };
+    projection.provenance = {};
+    for (const key of Object.keys(template)) {
+      const tile = template[key] || {};
+      const sqlOrFn = typeof tile.sql_or_fn === 'string'
+        ? tile.sql_or_fn
+            .replace('<period>', sub.period)
+            .replace('<driver>', sub.driver)
+            .replace('<target>', sub.target)
+            .replace('<regime_multiplier>', sub.regime_multiplier)
+        : tile.sql_or_fn;
+      projection.provenance[key] = Object.assign({}, tile, { sql_or_fn: sqlOrFn });
+    }
+    return projection;
+  }
+
+  // ========================================================================
   // Utilities — formatting
   // ========================================================================
 
@@ -857,6 +895,7 @@
       console.warn('bootstrapCI failed:', e);
     }
 
+    attachProvenanceOnApp(projection, { scope, period, driver, target: targetValue, regimeMultiplier });
     STATE.currentOutput = projection;
     // Round 10 P1-01 Option C: store the full bootstrap uncert payload so
     // per-week bands (uncert.per_week) reach the chart renderer, not just
@@ -1590,6 +1629,7 @@
     };
 
     // Populate hero/KPIs/chart via the standard path
+    attachProvenanceOnApp(fauxOut, { scope, period, driver, target: 0, regimeMultiplier: 1 });
     STATE.currentOutput = fauxOut;
     STATE.currentBrandProj = fauxOut;
     STATE.currentCounterfactual = null;
