@@ -28,6 +28,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .filter-row{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
 .filter-label{font-size:11px;color:#5A6373;text-transform:uppercase;letter-spacing:1px;min-width:55px;flex-shrink:0}
 .f{padding:3px 8px;border-radius:3px;font-size:12px;cursor:pointer;background:#FAFAFA;border:1px solid #E0E0E0;color:#6B6B6B;transition:all .12s;white-space:nowrap}
+.filter-sublabel{font-size:11px;color:#5A6373;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-left:4px;margin-right:2px;align-self:center}
+.filter-group-sep{display:inline-block;width:1px;height:16px;background:#E0E0E0;margin:0 8px;align-self:center}
 .f:hover{border-color:#1E40AF;color:#1F2937}
 .f.on{background:#E3F2FD;border-color:#1E40AF;color:#1E40AF}
 .f .fc{font-size:11px;color:#5A6373;margin-left:2px}
@@ -138,6 +140,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 /* ── Archive toggle ── */
 .archive-toggle{transition:all .15s}
 .archive-toggle.on{background:rgba(153,27,27,0.10)!important;border-color:rgba(248,113,113,.3)!important;color:#991B1B!important}
+.published-toggle{transition:all .15s}
+.published-toggle.on{background:rgba(4,120,87,0.10)!important;border-color:rgba(16,185,129,.3)!important;color:#047857!important}
 /* ── Viewer related links ── */
 .viewer-related{padding:6px 16px;border-bottom:1px solid #E0E0E0;flex-shrink:0;max-height:120px;overflow-y:auto}
 .viewer-related-label{font-size:11px;color:#5A6373;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
@@ -1211,6 +1215,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <option value="category">Columns: Category</option>
       <option value="market">Columns: Market</option>
     </select>
+    <button class="f published-toggle" id="publishedToggle" onclick="togglePublished()" title="Filter to SharePoint-published docs only">?? Published only</button>
     <button class="f archive-toggle" id="archiveToggle" onclick="toggleArchive()" style="display:none">🗑 Archived <span class="fc" id="archiveCount"></span></button>
     <select class="sort-select" id="sortSelect">
       <option value="relevance">Sort: Relevance</option>
@@ -1371,7 +1376,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 // ═══════════════════════════════════════════════════════════════
 
 let IX=null;
-const F={category:'all',status:'all',market:'all',topic:'all',sharepoint:'all'};
+const F={category:'all',status:'all',market:'all',topic:'all',sharepoint:'all',published:false};
 let currentSort='relevance';
 let viewingDoc=null;
 let viewHistory=[];  // navigation history stack
@@ -2171,20 +2176,30 @@ function buildFilters(data){
   if(sp.published!==undefined)spRows['published']=sp.published;
   if(sp.stale)spRows['stale']=sp.stale;
   if(sp.local_only!==undefined)spRows['local-only']=sp.local_only;
-  const rows=[
-    {key:'status',label:'Status',items:data.statuses||{},all:true},
-    {key:'market',label:'Market',items:data.markets||{},all:true},
-    {key:'topic',label:'Topic',items:data.topics||{},all:true},
-    {key:'category',label:'Type',items:data.categories||{},all:true},
-    {key:'sharepoint',label:'SharePoint',items:spRows,all:true},
+  // #007 + #015 (2026-05-01): Filter panel rework.
+  // #007: SharePoint row dropped � replaced by published-only toggle in the search bar.
+  // #015: 5 rows collapsed to 2. Row 1 (Scope) = Status + Market. Row 2 (Content) = Topic + Type.
+  // Filter state + consumption logic unchanged; presentation grouped.
+  const rowGroups=[
+    {label:'Scope',facets:[
+      {key:'status',sublabel:'Status',items:data.statuses||{}},
+      {key:'market',sublabel:'Market',items:data.markets||{}}
+    ]},
+    {label:'Content',facets:[
+      {key:'topic',sublabel:'Topic',items:data.topics||{}},
+      {key:'category',sublabel:'Type',items:data.categories||{}}
+    ]}
   ];
   let html='<div class="filter-header" onclick="toggleFilters()"><span class="fh-icon" id="filterIcon">▾</span><span class="fh-label">Filters</span><span class="fh-active" id="filterActiveLabel"></span></div>';
   html+='<div class="filter-rows" id="filterRows">';
-  html+=rows.map(r=>{
-    const sorted=Object.entries(r.items).sort((a,b)=>b[1]-a[1]);
-    const allBtn='<button class="f on" data-fk="'+r.key+'" data-fv="all">All</button>';
-    const btns=sorted.map(([k,v])=>'<button class="f" data-fk="'+r.key+'" data-fv="'+esc(k)+'">'+esc(k)+' <span class="fc">'+v+'</span></button>').join('');
-    return '<div class="filter-row"><span class="filter-label">'+r.label+'</span>'+allBtn+btns+'</div>';
+  html+=rowGroups.map(g=>{
+    const facetBlocks=g.facets.map(f=>{
+      const sorted=Object.entries(f.items).sort((a,b)=>b[1]-a[1]);
+      const allBtn='<button class="f on" data-fk="'+f.key+'" data-fv="all">All</button>';
+      const btns=sorted.map(([k,v])=>'<button class="f" data-fk="'+f.key+'" data-fv="'+esc(k)+'">'+esc(k)+' <span class="fc">'+v+'</span></button>').join('');
+      return '<span class="filter-sublabel">'+f.sublabel+'</span>'+allBtn+btns;
+    }).join('<span class="filter-group-sep" aria-hidden="true"></span>');
+    return '<div class="filter-row"><span class="filter-label">'+g.label+'</span>'+facetBlocks+'</div>';
   }).join('');
   html+='</div>';
   sec.innerHTML=html;
@@ -2220,6 +2235,13 @@ function buildFilters(data){
     if(typeof renderActiveChips==='function') renderActiveChips();
     if(IX && typeof renderActiveTOC==='function') renderActiveTOC(IX);
   });
+}
+
+function togglePublished(){
+  F.published=!F.published;
+  const btn=document.getElementById('publishedToggle');
+  btn.classList.toggle('on',F.published);
+  doSearch();
 }
 
 function toggleArchive(){
@@ -2313,11 +2335,8 @@ function doSearch(){
   if(F.status!=='all')docs=docs.filter(d=>d.status===F.status);
   if(F.market!=='all')docs=docs.filter(d=>d.markets&&d.markets.includes(F.market));
   if(F.topic!=='all')docs=docs.filter(d=>d.primary_topic===F.topic);
-  if(F.sharepoint!=='all'){
-    if(F.sharepoint==='published')docs=docs.filter(d=>d.published);
-    else if(F.sharepoint==='stale')docs=docs.filter(d=>d.sharepoint_stale);
-    else if(F.sharepoint==='local-only')docs=docs.filter(d=>!d.published&&(d.source||'').startsWith('wiki-'));
-  }
+  // #007 (2026-05-01): F.published boolean replaces F.sharepoint multi-state.
+  if(F.published){docs=docs.filter(d=>d.published||d.sharepoint_stale);}
 
   // Feature 1: Recent changes feed when no query
   if(!q){
@@ -2565,11 +2584,8 @@ function renderPipeline(){
   if(F.status!=='all')docs=docs.filter(d=>effectiveStatus(d)===F.status);
   if(F.market!=='all')docs=docs.filter(d=>d.markets&&d.markets.includes(F.market));
   if(F.topic!=='all')docs=docs.filter(d=>d.primary_topic===F.topic);
-  if(F.sharepoint!=='all'){
-    if(F.sharepoint==='published')docs=docs.filter(d=>d.published);
-    else if(F.sharepoint==='stale')docs=docs.filter(d=>d.sharepoint_stale);
-    else if(F.sharepoint==='local-only')docs=docs.filter(d=>!d.published&&(d.source||'').startsWith('wiki-'));
-  }
+  // #007 (2026-05-01): F.published boolean replaces F.sharepoint multi-state.
+  if(F.published){docs=docs.filter(d=>d.published||d.sharepoint_stale);}
   // Keyword filter
   if(q){
     docs=docs.filter(d=>
