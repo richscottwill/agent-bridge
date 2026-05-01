@@ -1473,6 +1473,20 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
 <!-- WR-D3 callout narrative (top) -->
 <div id="calloutNarrative"></div>
 
+<!-- #066 (2026-05-01): Per-week WBR note textarea. Persisted to ~/shared/context/active/wbr-notes.md via POST /api/wbr-note. -->
+<div class="wr-wbr-note-wrap" id="wbrNoteWrap" style="margin:var(--gap-md) 0">
+  <label class="wr-wbr-note-label" for="wbrNoteInput" style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--color-text-subtle);margin-bottom:4px">
+    <span>Notes on this week</span>
+    <span class="wr-wbr-note-state" id="wbrNoteState" aria-live="polite" style="font-size:11px;opacity:0.8"></span>
+  </label>
+  <textarea id="wbrNoteInput" class="wr-wbr-note-input"
+    placeholder="Notes on this week &mdash; saved when you click away or after 2s idle"
+    rows="3" maxlength="10000"
+    style="width:100%;background:#FFFFFF;border:1px solid #E0E0E0;border-radius:4px;padding:8px;font-family:inherit;font-size:13px;color:#161D26;resize:vertical;min-height:48px;outline:none"
+    oninput="wbrNoteOnInput()" onblur="wbrNoteSave(true)"></textarea>
+</div>
+
+
 <!-- M2 (2026-04-30): Exception banner. Renders only when the forecast
      for this market shows material miss or low in-CI coverage. Carries:
      diagnosis sentence + recommended action (draft note, open
@@ -2093,6 +2107,7 @@ function render() {
   renderTable();
   renderMonthlyTable();
   renderQuarterlyTable();
+renderWbrNote();
   // WR-A11 (2026-04-30): apply archetype-specific layout AFTER all renders
   // so they're not fighting default visibility. Idempotent.
   applyMarketArchetype();
@@ -4487,6 +4502,80 @@ function renderMonthlyTable() {
     (key) => MONTH_NAMES_FULL[parseInt(key.slice(1), 10) - 1] + ' ' + year,
     curKey, 'MoM'
   );
+}
+
+// #066 (2026-05-01): WBR-note textarea wiring.
+// Endpoints: POST /api/wbr-note {market, week, note}; POST /api/wbr-note/get {market, week}.
+// Week format sent: 2026-W{nn} matching the server's regex ^\d{4}-W\d{1,2}$.
+let wbrNoteTimer = null;
+let wbrNoteLastSaved = null;
+let wbrNoteLastKey = null;
+function wbrWeekKey() {
+  const y = (typeof maxYear !== 'undefined' ? maxYear : new Date().getFullYear());
+  const wk = parseInt(String(curWeek).replace('W', ''), 10);
+  return y + '-W' + wk;
+}
+function wbrNoteSetState(text, opts) {
+  const el = document.getElementById('wbrNoteState');
+  if (!el) return;
+  el.textContent = text || '';
+  el.style.color = (opts && opts.error) ? '#991B1B' : 'var(--color-text-subtle)';
+}
+function wbrNoteOnInput() {
+  wbrNoteSetState('Editing…');
+  if (wbrNoteTimer) clearTimeout(wbrNoteTimer);
+  wbrNoteTimer = setTimeout(() => wbrNoteSave(false), 2000);
+}
+function wbrNoteSave(fromBlur) {
+  if (wbrNoteTimer) { clearTimeout(wbrNoteTimer); wbrNoteTimer = null; }
+  const ta = document.getElementById('wbrNoteInput');
+  if (!ta) return;
+  const note = ta.value;
+  const market = curMarket;
+  const week = wbrWeekKey();
+  wbrNoteSetState('Saving…');
+  fetch('/api/wbr-note', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ market, week, note })
+  }).then(r => r.json()).then(resp => {
+    if (resp && resp.ok) {
+      const hh = String(new Date().getUTCHours()).padStart(2, '0');
+      const mm = String(new Date().getUTCMinutes()).padStart(2, '0');
+      wbrNoteLastSaved = hh + ':' + mm;
+      wbrNoteSetState(resp.deleted ? 'Cleared' : ('Saved ' + wbrNoteLastSaved + ' UTC'));
+    } else {
+      wbrNoteSetState('Could not save: ' + (resp && resp.error || 'unknown error'), { error: true });
+    }
+  }).catch(err => {
+    wbrNoteSetState('Offline — note not saved', { error: true });
+  });
+}
+function renderWbrNote() {
+  const ta = document.getElementById('wbrNoteInput');
+  if (!ta) return;
+  const market = curMarket;
+  const week = wbrWeekKey();
+  const key = market + '/' + week;
+  if (wbrNoteLastKey === key) return;  // already loaded this one
+  wbrNoteLastKey = key;
+  wbrNoteSetState('Loading…');
+  fetch('/api/wbr-note/get', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ market, week })
+  }).then(r => r.json()).then(resp => {
+    if (resp && resp.ok) {
+      ta.value = resp.note || '';
+      wbrNoteSetState(resp.exists ? 'Saved' : '');
+    } else {
+      ta.value = '';
+      wbrNoteSetState('Could not load', { error: true });
+    }
+  }).catch(err => {
+    ta.value = '';
+    wbrNoteSetState('Offline — will save on next connect', { error: true });
+  });
 }
 
 function renderQuarterlyTable() {
