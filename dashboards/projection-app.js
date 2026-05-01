@@ -2405,7 +2405,14 @@
       // driver/target only; adding these two covers the remaining knobs exposed in controls.
       const rm = STATE && typeof STATE.regimeMultiplier === 'number' ? STATE.regimeMultiplier : 1.0;
       if (Math.abs(rm - 1.0) > 1e-6) p.set('regime', rm.toFixed(2));
-      if (STATE && STATE.scenarioOverride) p.set('scenario', String(STATE.scenarioOverride));
+      // Use activeChipId as the canonical URL key — scenarioOverride is an object
+      // whose shape is chip-specific. Skip when it's the default 'mixed' chip so
+      // default-state URLs stay clean. (Fix for kiro-local's verification finding
+      // on commit b701ed8 — prior code stringified the override object as
+      // "[object Object]" and the read side couldn't deserialize it either.)
+      if (STATE && STATE.activeChipId && STATE.activeChipId !== 'mixed') {
+        p.set('scenario', STATE.activeChipId);
+      }
       // Keep URL clean — only write when something actually differs from
       // current querystring, avoids spurious history entries on every keystroke.
       const next = p.toString();
@@ -2457,7 +2464,26 @@
         if (val) val.textContent = rm.toFixed(2) + '×';
       }
       if (scenario) {
-        STATE.scenarioOverride = scenario;
+        // Look up the chip by id in the canonical registry so we restore BOTH
+        // STATE.activeChipId AND STATE.scenarioOverride (the override object
+        // the recompute pipeline expects). Prior code assigned the URL string
+        // directly to scenarioOverride, which later destructures to failure.
+        // buildScenarioChips is market-agnostic today — pass null for safety;
+        // if a future version becomes market-aware, this needs the marketData
+        // resolved before applyUrlStateOnLoad runs.
+        try {
+          const chips = (typeof buildScenarioChips === 'function') ? buildScenarioChips(null) : [];
+          const chip = chips.find(c => c.id === scenario);
+          if (chip) {
+            STATE.activeChipId = chip.id;
+            STATE.scenarioOverride = chip.override;
+            // Defer DOM sync — chips render later in the load sequence.
+            // renderScenarioChips reads STATE.activeChipId when it builds the
+            // chip DOM, so the .active class lands correctly on first render.
+          }
+          // If no matching chip, silently ignore — unknown scenario keys
+          // fall through to default 'mixed' rather than crash the page.
+        } catch (e) { /* chip lookup failed — fall through to default scenario */ }
       }
     } catch (e) { /* URL parse failure — fall through to defaults */ }
   }

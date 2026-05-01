@@ -2001,6 +2001,12 @@ function initGraphMinimap() {
   };
 
   startGraphSimulation();
+  // #043 (2026-05-01, kiro-local verification): activate the hub/orphan highlight-mode
+  // toggle by flipping the global that setGraphMode() reads. Prior scaffold never set
+  // this flag, so the toggle UI stayed inert. Expose the node list on the same global
+  // for completeness so future mode handlers don't need to reach into _graphState.
+  window.__wk_graph_rendered = true;
+  window.__wk_graph_nodes = _graphState ? _graphState.nodes : null;
 }
 
 function stopGraphSimulation() {
@@ -2728,9 +2734,16 @@ function renderDocCard(doc,tokens,childCount,isChild){
   }
   // #023 (2026-04-30): "Since last look" badge for docs updated since user's last visit.
   // Uses localStorage wk_last_visit (set once per session on load) + wk_new_seen (per-doc view count).
+  // Fix (2026-05-01, kiro-local verification on f8b8b20): the load-time block stashes the
+  // PRIOR value to window.__wk_prev_visit before overwriting wk_last_visit with `now`. If we
+  // re-read localStorage here we get `now` — then every doc.updated is < lastVisit and no
+  // badge ever renders. Read the stashed prev value instead. Fall back to localStorage only
+  // when __wk_prev_visit is unset (first-ever session — no badges should fire anyway).
   let newBadge='';
   try{
-    const lastVisit=parseInt(localStorage.getItem('wk_last_visit')||'0',10);
+    const lastVisit=(typeof window.__wk_prev_visit==='number' && window.__wk_prev_visit>0)
+      ? window.__wk_prev_visit
+      : parseInt(localStorage.getItem('wk_last_visit')||'0',10);
     if(lastVisit && doc.updated){
       const updatedMs=new Date(doc.updated).getTime();
       if(updatedMs >= lastVisit){
