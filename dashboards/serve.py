@@ -239,6 +239,73 @@ class DashboardHandler(SimpleHTTPRequestHandler):
                 self.send_header("Content-Type", "application/json")
                 self.end_headers()
                 self.wfile.write(json.dumps({"ok": False, "error": str(e)}).encode())
+        elif self.path == "/api/query-log/append":
+            # Path B commit 4: append-then-trim ring buffer of the last 20 wiki
+            # query+filter states. Unblocks Bucket A #022 "query log pane"
+            # consumer on wiki-search.html. Storage is local-only at
+            # dashboards/data/query-log.json — no auth, no cross-user sharding.
+            content_length = int(self.headers.get("Content-Length", 0))
+            body = self.rfile.read(content_length)
+            try:
+                payload = json.loads(body)
+            except Exception as e:
+                self._json(400, {"ok": False, "error": f"bad json: {e}"})
+                return
+
+            query = (payload.get("query") or "").strip()
+            filters = payload.get("filters") or {}
+            if not query:
+                self._json(400, {"ok": False, "error": "query must be non-empty"})
+                return
+            if not isinstance(filters, dict):
+                self._json(400, {"ok": False, "error": "filters must be an object"})
+                return
+
+            ql_path = DATA_DIR / "query-log.json"
+            existing: list = []
+            if ql_path.exists():
+                try:
+                    payload_existing = json.loads(ql_path.read_text())
+                    if isinstance(payload_existing, dict):
+                        existing = payload_existing.get("entries", [])
+                    elif isinstance(payload_existing, list):
+                        # Back-compat for older plain-array format
+                        existing = payload_existing
+                except Exception:
+                    existing = []
+
+            entry = {
+                "query": query[:500],
+                "filters": {k: v for k, v in filters.items() if isinstance(k, str)},
+                "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            }
+            # Dedupe: if the immediately-previous entry has the same query+filters
+            # don't add a new row (user hit reload or re-ran the same search).
+            if existing and existing[-1].get("query") == entry["query"] and existing[-1].get("filters") == entry["filters"]:
+                existing[-1] = entry  # refresh timestamp
+            else:
+                existing.append(entry)
+                if len(existing) > 20:
+                    existing = existing[-20:]  # ring-buffer trim
+
+            ql_path.write_text(json.dumps({"entries": existing}, indent=2))
+            self._json(200, {"ok": True, "count": len(existing)})
+            return
+        elif self.path == "/api/query-log/get":
+            # Path B commit 4: return the ring buffer, newest-last (oldest-first
+            # for chronological display). Empty array when no log exists.
+            ql_path = DATA_DIR / "query-log.json"
+            if not ql_path.exists():
+                self._json(200, {"ok": True, "entries": []})
+                return
+            try:
+                payload = json.loads(ql_path.read_text())
+                entries = payload.get("entries", []) if isinstance(payload, dict) else payload
+            except Exception as e:
+                self._json(200, {"ok": True, "entries": [], "warning": f"parse error: {e}"})
+                return
+            self._json(200, {"ok": True, "entries": entries or []})
+            return
         elif self.path == "/api/refresh":
             # Kick off generate-command-center.py in a background thread.
             # If a refresh is already in flight, return 202 without starting a new one.
