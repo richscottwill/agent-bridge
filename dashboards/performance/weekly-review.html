@@ -1658,8 +1658,8 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
         <th class="r" title="Cost calibration â€” actual vs predicted (past weeks only)">Cost vs Pred</th>
         <th class="r">Regs WoW &Delta;</th>
         <th class="r">Cost WoW &Delta;</th>
-        <th class="r" title="Regs year-over-year — (actual - LY) / LY. Null when LY data missing (early-year LY gap).">Regs YoY &Delta;</th>
-        <th class="r" title="Cost year-over-year — higher cost YoY is not intrinsically bad, but flagged with inverted coloring">Cost YoY &Delta;</th>
+        <th class="r" title="Regs year-over-year ï¿½ (actual - LY) / LY. Null when LY data missing (early-year LY gap).">Regs YoY &Delta;</th>
+        <th class="r" title="Cost year-over-year ï¿½ higher cost YoY is not intrinsically bad, but flagged with inverted coloring">Cost YoY &Delta;</th>
       </tr></thead>
       <tbody id="weeklyBody"></tbody>
     </table>
@@ -2127,6 +2127,90 @@ function renderCallout() {
   renderCalloutDetails();
 }
 
+  // Bug 1 (2026-05-01): rollup headlines for WW/EU5/NA are emitted broken by
+  // refresh-callouts.py (metrics.regs=0, headline contains literal em-dashes
+  // like "WW drove Ã¢â‚¬â€ registrations, CPA $0"). At-source fix is kiro-server's
+  // lane (callout composition pipeline). Client-side we detect the broken
+  // pattern and synthesize a correct rollup headline from forecast-data.json
+  // (which already carries accurate rollup aggregates) + member-market WoW
+  // ranking to pick biggest gainer/decliner.
+  // Spec: agent-bus thread dashboard-mockups-handoff post 020_kiro-local Bug 1.
+  function synthesizeRollupHeadline(market, weekLabel) {
+    if (!FORECAST || !FORECAST.weekly) return null;
+    const REGION_MEMBERS = {
+      WW: ['US','CA','UK','DE','FR','IT','ES','JP','MX','AU'],
+      NA: ['US','CA'],
+      EU5: ['UK','DE','FR','IT','ES'],
+    };
+    const members = REGION_MEMBERS[market];
+    if (!members) return null;
+    // Resolve the selected week to a wk number. weekLabel is 'W17' etc.
+    const wkNum = parseInt(String(weekLabel).replace(/^W/i, ''), 10);
+    if (!Number.isFinite(wkNum)) return null;
+    // NA (and any rollup missing pre-aggregated weekly series) falls back to
+    // summing member markets at the latest-actual shared week.
+    function sumMemberRollup(ms, wk) {
+      let regs = 0, cost = 0, anyData = false;
+      for (const mk of ms) {
+        const row = (FORECAST.weekly[mk] || []).find(r => r.wk === wk);
+        if (row && row.regs > 0) { regs += row.regs; cost += (row.cost || 0); anyData = true; }
+      }
+      return anyData ? { wk, regs, cost, cpa: regs > 0 ? cost / regs : 0 } : null;
+    }
+    let rollupRow = (FORECAST.weekly[market] || []).find(r => r.wk === wkNum);
+    let effectiveWkNum = wkNum;
+    if (!rollupRow || !(rollupRow.regs > 0)) {
+      const actualRows = (FORECAST.weekly[market] || []).filter(r => r.regs > 0);
+      if (actualRows.length > 0) {
+        rollupRow = actualRows[actualRows.length - 1];
+        effectiveWkNum = rollupRow.wk;
+      } else {
+        for (let tryWk = wkNum; tryWk >= 1; tryWk--) {
+          const synth = sumMemberRollup(members, tryWk);
+          if (synth) { rollupRow = synth; effectiveWkNum = tryWk; break; }
+        }
+        if (!rollupRow) return null;
+      }
+    }
+    // Member-market WoW ranking at the same week
+    const ranking = members.map(mk => {
+      const rows = FORECAST.weekly[mk] || [];
+      const cur = rows.find(r => r.wk === effectiveWkNum);
+      const prev = rows.find(r => r.wk === effectiveWkNum - 1);
+      if (!cur || !(cur.regs > 0) || !prev || !(prev.regs > 0)) return null;
+      const wow = ((cur.regs - prev.regs) / prev.regs) * 100;
+      return { mk, regs: cur.regs, wow };
+    }).filter(Boolean).sort((a, b) => b.wow - a.wow);
+    // Prior week rollup for WoW
+    const prevRollup = (FORECAST.weekly[market] || []).find(r => r.wk === effectiveWkNum - 1);
+    const wowRegsPct = (prevRollup && prevRollup.regs > 0)
+      ? ((rollupRow.regs - prevRollup.regs) / prevRollup.regs) * 100
+      : null;
+    const regsStr = rollupRow.regs.toLocaleString();
+    const cpaStr = rollupRow.cpa ? '$' + Math.round(rollupRow.cpa) : null;
+    const spendStr = rollupRow.cost ? (rollupRow.cost >= 1_000_000
+      ? '$' + (rollupRow.cost / 1_000_000).toFixed(2) + 'M'
+      : '$' + Math.round(rollupRow.cost / 1000) + 'K') : null;
+    const wowStr = wowRegsPct != null
+      ? (wowRegsPct >= 0 ? '+' : '') + wowRegsPct.toFixed(1) + '%'
+      : null;
+    const cpaClause = cpaStr ? 'CPA ' + cpaStr : 'CPA Ã¢â‚¬â€';
+    const wowClause = wowStr ? ' (' + wowStr + ' WoW)' : '';
+    const spendClause = spendStr ? ' Total spend ' + spendStr + '.' : '';
+    const gainer = ranking[0];
+    const decliner = ranking[ranking.length - 1];
+    const gainerClause = gainer
+      ? ' Biggest gainer: ' + gainer.mk + ' (' + (gainer.wow >= 0 ? '+' : '') + gainer.wow.toFixed(1) + '% WoW regs).'
+      : '';
+    const declinerClause = (decliner && decliner.mk !== gainer?.mk)
+      ? (decliner.wow < 0
+          ? ' Biggest decliner: ' + decliner.mk + ' (' + decliner.wow.toFixed(1) + '% WoW regs).'
+          : ' Slowest grower: ' + decliner.mk + ' (+' + decliner.wow.toFixed(1) + '% WoW regs).')
+      : '';
+    return market + ' drove ' + regsStr + ' registrations' + wowClause + ', ' + cpaClause + '.'
+      + spendClause + gainerClause + declinerClause;
+  }
+
 function renderCalloutNarrative() {
   // WR-A10 (2026-04-30): resolve to scrubWeek when user is scrubbing the
   // chart, otherwise curWeek.
@@ -2139,8 +2223,22 @@ function renderCalloutNarrative() {
     return;
   }
   // WR-C3 headline de-dup retained here.
-  const headlineText = (c.headline || '').trim();
-  const fullText = (c.full_callout || '').trim();
+  // Bug 1 (2026-05-01): on rollup markets (WW/EU5/NA), detect broken
+  // source headlines (zero-regs metrics or em-dash literal) and prefer
+  // synthesized headline from forecast-data aggregates. Non-rollup markets
+  // fall through to c.headline as before.
+  const isRollupMkt = ['WW','EU5','NA'].includes(curMarket);
+  const rawHeadline = (c.headline || '').trim();
+  const metricsRegsZero = !c.metrics || !(c.metrics.regs > 0);
+  const headlineLooksBroken = rawHeadline.length === 0
+    || /drove\s*â€”\s*registrations/.test(rawHeadline)
+    || rawHeadline.length > 400
+    || (isRollupMkt && metricsRegsZero);
+  const synthesized = isRollupMkt && headlineLooksBroken
+    ? synthesizeRollupHeadline(curMarket, rw)
+    : null;
+  const headlineText = synthesized || rawHeadline;
+  const fullText = (synthesized ? synthesized : (c.full_callout || '').trim());
   const bodyText = (fullText && headlineText && fullText.startsWith(headlineText))
     ? fullText.slice(headlineText.length).trimStart()
     : fullText;
@@ -4468,9 +4566,9 @@ function renderPeriodTable(periods, bodyId, scrollId, labelFn, currentKey, delta
           : Math.round(halfWidth).toLocaleString();
         const tip = '90% CI: ' + (match.ci_lo || 0).toLocaleString() + ' - ' + Math.round(match.pred_regs + halfWidth).toLocaleString() + ' regs'
           + (match.pred_cost ? ' . projected spend $' + Math.round(match.pred_cost).toLocaleString() : '');
-        qEndCell = '<td class="r" title="' + tip.replace(/"/g, '&quot;') + '"><span class="pred-val">' + fmt(match.pred_regs, 'regs') + ' ± ' + rangeStr + '</span></td>';
+        qEndCell = '<td class="r" title="' + tip.replace(/"/g, '&quot;') + '"><span class="pred-val">' + fmt(match.pred_regs, 'regs') + ' ï¿½ ' + rangeStr + '</span></td>';
       } else {
-        qEndCell = '<td class="r" style="color:var(--color-text-subtle)">—</td>';
+        qEndCell = '<td class="r" style="color:var(--color-text-subtle)">ï¿½</td>';
       }
     }
     return `<tr${rowClsAttr}>
@@ -4524,7 +4622,7 @@ function wbrNoteSetState(text, opts) {
   el.style.color = (opts && opts.error) ? '#991B1B' : 'var(--color-text-subtle)';
 }
 function wbrNoteOnInput() {
-  wbrNoteSetState('Editing…');
+  wbrNoteSetState('Editingï¿½');
   if (wbrNoteTimer) clearTimeout(wbrNoteTimer);
   wbrNoteTimer = setTimeout(() => wbrNoteSave(false), 2000);
 }
@@ -4535,7 +4633,7 @@ function wbrNoteSave(fromBlur) {
   const note = ta.value;
   const market = curMarket;
   const week = wbrWeekKey();
-  wbrNoteSetState('Saving…');
+  wbrNoteSetState('Savingï¿½');
   fetch('/api/wbr-note', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -4550,7 +4648,7 @@ function wbrNoteSave(fromBlur) {
       wbrNoteSetState('Could not save: ' + (resp && resp.error || 'unknown error'), { error: true });
     }
   }).catch(err => {
-    wbrNoteSetState('Offline — note not saved', { error: true });
+    wbrNoteSetState('Offline ï¿½ note not saved', { error: true });
   });
 }
 function renderWbrNote() {
@@ -4561,7 +4659,7 @@ function renderWbrNote() {
   const key = market + '/' + week;
   if (wbrNoteLastKey === key) return;  // already loaded this one
   wbrNoteLastKey = key;
-  wbrNoteSetState('Loading…');
+  wbrNoteSetState('Loadingï¿½');
   fetch('/api/wbr-note/get', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -4576,7 +4674,7 @@ function renderWbrNote() {
     }
   }).catch(err => {
     ta.value = '';
-    wbrNoteSetState('Offline — will save on next connect', { error: true });
+    wbrNoteSetState('Offline ï¿½ will save on next connect', { error: true });
   });
 }
 
