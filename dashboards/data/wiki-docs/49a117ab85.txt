@@ -1,0 +1,120 @@
+# Eval B Review: Meeting Ingestion Pipeline — Hedy to Asana
+
+Reviewed: 2026-05-01 21:00
+Slug: meeting-ingestion-pipeline
+Draft version: 2026-04-17
+
+## Reader simulation
+
+**Simulated reader:** A future agent tasked with operating the meeting ingestion pipeline.
+
+**Why:** The frontmatter declares `audience: agent`. The correct simulation is an agent that needs to read this document, understand the pipeline's components, execute or monitor the pipeline, and recover from failures — all without asking a human for clarification.
+
+## Constraint check
+
+The article's frontmatter contains no `constraints:` field. No constraints to validate. Continuing with dimensional scoring.
+
+## TODO marker scan
+
+No `<!-- TODO: cite -->` or `<!-- TODO: constraint conflict -->` markers found. Clean.
+
+## Dimensional scoring (agent-reader perspective)
+
+### 1. Usefulness — 5/10
+
+An agent reading this to operate the pipeline would hit a wall almost immediately. The document describes the three-stage flow in narrative terms but never provides the concrete information an agent needs to act:
+
+- **No file paths for the protocol files.** The doc says "read `am-auto.md`, `eod-meeting-sync.md`, `meeting-to-task-pipeline.md`, `eod-system-refresh.md`" but never gives their directory. An agent cannot resolve these without guessing or searching.
+- **No DuckDB schema.** The tables `meeting_analytics` and `meeting_highlights` are named but their columns are not listed. An agent asked to query meeting data cannot construct a valid SQL statement from this document alone.
+- **No Hedy API call signatures.** Nine tools are mentioned; two are identified as primary. But there are no parameters, return types, or example payloads. An agent cannot call `GetSessions` from this description.
+- **No runbook for failure recovery.** The failure modes section says "retry with exponential backoff" but does not specify the retry count, backoff base, or what "log skips" means (log where? what format?).
+- **No trigger mechanism.** The doc says the pipeline "runs in three stages across two daily routines" but never names the routines, their cron schedules, or how an agent would invoke them.
+
+The document is a map that shows the territory exists but does not provide coordinates. A human with institutional context could fill the gaps. An agent cannot.
+
+### 2. Clarity — 5/10
+
+The prose is generally well-structured and the three-stage framing is easy to follow. However, two problems undermine clarity for an agent reader:
+
+**ANSI escape codes corrupt the "Failure modes" section.** Lines 54–61 contain raw terminal color codes (`[38;5;10m`, `[0m`) embedded in the markdown. An agent parsing this file will encounter unparseable characters. A human reading the rendered markdown may see garbled text or invisible artifacts. This is a data-integrity defect that should have been caught before drafting.
+
+**Ambiguous cross-references.** The "Protocol files" section lists four filenames without paths. The "Related" section links to "AB Acquisition Channel Map" with slug `sid-acquisition-funnel-map` — a document about acquisition channels has no obvious relationship to meeting ingestion. An agent following this link would waste tokens on irrelevant content.
+
+### 3. Accuracy — 5/10
+
+Without a research brief to verify against, accuracy assessment is limited to internal consistency and verifiable claims:
+
+- **"Nine tools" claim is unverifiable from this document.** Four are named (`GetSessions`, `GetSessionDetails`, `GetSessionHighlights`, `GetSessionToDos`), then "four additional tools handle highlights, topics, and session contexts." That accounts for eight, not nine. The ninth is unidentified.
+- **`depends_on: []` contradicts the body.** The article explicitly depends on four protocol files, yet the frontmatter declares no dependencies. An agent using the dependency graph to determine read order would miss these prerequisites entirely.
+- **Freshness invariant inconsistency.** The "Data freshness invariants" section states the latest date "should be within one day of today," but the `ops.data_freshness` alert threshold is forty-eight hours. These are different invariants (one day vs. two days) presented in the same section without distinguishing which is the target and which is the alert.
+- **ANSI escape codes** indicate the content was pasted from a terminal session without sanitization. This raises the question of whether other content was similarly copy-pasted without verification.
+
+### 4. Dual-audience — 4/10
+
+The frontmatter declares `audience: agent`, so the primary audience is agents. Assessed against that standard:
+
+- **AGENT_CONTEXT is an HTML comment, not structured YAML.** An agent using a YAML frontmatter parser will not see `machine_summary`, `key_entities`, `action_verbs`, or `update_triggers`. These fields are invisible to standard frontmatter extraction. They should be in the YAML frontmatter block or in a separate structured block that agents are instructed to parse.
+- **`depends_on: []` is empty.** This is the primary field an agent would use to determine prerequisite reading. It is wrong.
+- **No `consumed_by` field.** An agent cannot determine what downstream processes or documents rely on this one.
+- **`key_entities` in AGENT_CONTEXT is useful** but buried in an HTML comment. The `action_verbs` list (`capture`, `ingest`, `extract`, `persist`) is too generic to be useful for task routing.
+- **The prose serves humans adequately** but does not serve agents. An agent needs structured data (schemas, paths, API signatures, decision trees). This document provides narrative descriptions of those things instead.
+
+### 5. Economy — 6/10
+
+The document is reasonably tight at roughly 1,200 words for a pipeline reference. No major padding. However:
+
+- **The "Hedy API coverage" section is filler.** It names tools without providing enough detail to use them. Either provide the full API reference or cut the section and link to the Hedy MCP documentation. As written, it occupies space without enabling action.
+- **The "Next Steps" section is aspirational, not operational.** Three items describe future work. An agent reading this to operate the pipeline today gains nothing from knowing what might be consolidated later. This section belongs in a project tracker, not a reference doc.
+- **The "Related" link is noise.** A single link to an unrelated acquisition channel map adds no value and could mislead an agent into reading irrelevant material.
+- **Bold-lead pattern in the numbered list** (Failure modes section): each item uses bold text as a de facto sub-header. If the bold were removed, the items would still read clearly — this is borderline but acceptable. The list items do contain verbs ("stall", "cause", "causes"), so they pass the verb requirement.
+
+## Scores
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 5/10 | Describes the pipeline but lacks the concrete details (paths, schemas, API signatures) an agent needs to operate it. |
+| Clarity | 5/10 | Good narrative structure undermined by ANSI escape code corruption and ambiguous cross-references. |
+| Accuracy | 5/10 | Tool count discrepancy, empty `depends_on` contradicts body, freshness invariant inconsistency. |
+| Dual-audience | 4/10 | AGENT_CONTEXT buried in HTML comment; frontmatter metadata incomplete; prose-only format fails the declared agent audience. |
+| Economy | 6/10 | Reasonably concise but carries dead-weight sections (API filler, aspirational next steps, unrelated link). |
+| **Average** | **5.0/10** | |
+
+## Verdict
+
+**REVISE**
+
+This document does not ship. The average score is 5.0 with three dimensions below 7 and one at 4. The core problem is a mismatch between the declared audience (`agent`) and the content format (narrative prose without structured operational data). An agent cannot operate this pipeline from this document.
+
+The ANSI escape code corruption is a blocking defect independent of content quality.
+
+## Required changes
+
+1. **Remove ANSI escape codes.** Lines 54–61 contain raw terminal color codes. Strip all `\e[38;5;10m`, `\e[0m`, and similar sequences. The "Failure modes" header and its content must render as clean markdown.
+
+2. **Add protocol file paths.** Replace:
+   > `am-auto.md` describes the morning context load…
+   
+   With full paths, e.g.:
+   > `~/shared/protocols/am-auto.md` describes the morning context load…
+   
+   (Verify actual paths before publishing.)
+
+3. **Add DuckDB table schemas.** After "Two tables hold meeting data," add the column definitions for `meeting_analytics` and `meeting_highlights`. At minimum: column name, type, and one-line description. An agent must be able to construct queries from this document.
+
+4. **Fix `depends_on` in frontmatter.** Replace `depends_on: []` with the four protocol file slugs the article explicitly references.
+
+5. **Fix tool count.** Either name all nine Hedy tools or change "nine" to the correct count. The current text accounts for eight.
+
+6. **Reconcile freshness invariants.** Clarify the relationship between the "within one day" target and the "forty-eight hours" alert threshold. State which is the SLA and which is the degraded-but-acceptable window.
+
+7. **Move AGENT_CONTEXT fields to YAML frontmatter** or to a clearly delimited structured block (e.g., a fenced code block with `yaml` language tag) that agents are instructed to parse. An HTML comment is invisible to standard frontmatter parsers.
+
+8. **Cut or replace the "Next Steps" section.** Either move these items to the relevant project tracker and remove the section, or convert them to a "Known gaps" section that warns the reader about limitations of the current document.
+
+9. **Cut or fix the "Related" link.** The link to "AB Acquisition Channel Map" has no stated relationship to meeting ingestion. Either explain the connection or remove the link.
+
+## Suggestions (non-blocking)
+
+- Add a `consumed_by` field to frontmatter listing downstream docs or processes that depend on this pipeline reference.
+- Consider adding a simple sequence diagram (mermaid or ASCII) showing the three-stage flow with the specific tools and tables at each stage. This would serve both human and agent readers.
+- The `action_verbs` list in AGENT_CONTEXT (`capture`, `ingest`, `extract`, `persist`) is generic. Consider adding pipeline-specific verbs like `sync-meetings`, `create-task`, `check-freshness` that map to actual operations an agent might be asked to perform.

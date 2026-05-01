@@ -54,12 +54,43 @@ Brandon's priority order from March 23, holding: **AU > MX > DE > UK > JP > FR >
 | 2026-04-01 | CA excluded from Polaris 50/50 testing | — | Keep OCI data clean through CA OCI dial-up | CA rollout delayed until post-OCI |
 | 2026-04-14 | Richard is the single POC for global Polaris | Brandon | Fragmented market-specific coordination caused gaps | Richard owns WW rollout end-to-end |
 | 2026-04-16 | All PS LPs migrate to Polaris; PADESARJAD deprecated | MCS team | Consistent template, mobile-first, weblab-ready | Legacy pages receive no further investment |
+| 2026-04-27 | Google Experiments (not Weblab) for AU/MX NB page testing | Dwayne Palmer / Yun-Kang Chu | AU and MX NB pages route direct-to-registration without MCS, making Weblab infeasible. Data volume too limited for Weblab conclusion. | NB LP tests in AU/MX use Google Experiments as the measurement method. |
 
 ### Key decision: AU full switch
 
 Lena's decision to skip the 50/50 phased test is a departure from the team's standard methodology (Decision Principle 4: phased rollout over full migration). Brandon is aware and has flagged Lena's pattern of reversing previously agreed decisions. The risk is that if Polaris underperforms in AU, there is no control group to compare against — the team relies on pre/post analysis with all its confounding factors.
 
 The W13 data showed AU CVR dropped 12% WoW, with the mid-week Polaris migration as a possible contributor. Isolating the Polaris signal from seasonal factors and the Back-to-Biz to Evergreen promo transition is difficult without a control group. Brandon's framing: push back on over-simplified Polaris UX, ensure market-relevant content density remains.
+
+## MX Non-Brand Landing Page Test
+
+The MX Non-Brand landing page test is a distinct Polaris execution thread, separate from the WW brand page rollout documented above. Where the brand rollout follows a weblab-driven measurement path through MCS, the NB test operates outside that infrastructure entirely. This section documents the test framing, method, current status, and dependencies as of May 1, 2026. The reader should understand why MX is the lead market for NB pages, why the measurement method differs from brand pages, and what must be resolved before launch.
+
+### Why MX leads the NB test
+
+Mexico was selected as the early test market for Polaris Non-Brand pages based on two factors: template readiness and strategic sequencing. Vijeth Shetty (MX agency) completed the NB page template and cross-functional coordination by April 1 (Richard, hedy 4/16). Brandon and Richard confirmed MX as the lead market for structural Polaris changes on April 16, consistent with the broader priority order where MX sits second after AU. The initial test targets beauty and auto category NB pages, two verticals with sufficient traffic volume to generate a readable signal within the planned test window (Richard, hedy 4/16).
+
+The AU Polaris LP test provides critical context for MX test design. AU showed a 30% conversion rate drop on Polaris pages, severe enough to trigger a revert (Richard, hedy 4/29). That result reframes the MX NB test: the team now has evidence that Polaris can materially underperform legacy pages, not just produce marginal noise. The MX test is designed with that counterfactual in mind, with conversion rate parity as the minimum success bar rather than an assumed outcome.
+
+### How the test is measured: Google Experiments, not Weblab
+
+The standard Polaris measurement path uses Amazon's weblab infrastructure for A/B testing. NB pages in MX and AU cannot use that path. Dwayne Palmer confirmed that weblab can only be set when the control page routes through MCS (Brandon to Yun-Kang, C065KKT53DJ, 4/24). AU and MX NB pages route users direct-to-registration without an MCS intermediary, making weblab technically infeasible for these flows.
+
+Yun-Kang Chu concurred with the Google Experiments alternative, noting that MX NB data volume is "likely too limited for Weblab conclusion" even if the technical constraint were resolved (Yun-Kang, mpdm-brandoxy-dtpalmer-prichwil, 4/27). Google Experiments provides the A/B split at the ad platform level, routing traffic between the Polaris NB template and the legacy NB page. This is a two-arm test: Polaris NB template versus legacy NB pages. The signals do not indicate additional variant arms beyond these two.
+
+### Success criteria and test window
+
+The primary success metric is conversion rate: Polaris NB pages must achieve parity with or lift over legacy NB pages. The measurement window is two weeks from launch, per the April 16 framing between Richard and Brandon (Richard, hedy 4/16). Given the AU 30% conversion rate drop on brand pages, the team is treating any material CVR degradation as a rollback trigger rather than waiting for extended observation. Confidence level on the two-week window producing a conclusive result is LOW, given MX NB traffic volume constraints that Yun-Kang flagged. If the two-week window is inconclusive, the team will need to extend or supplement with directional analysis.
+
+### Current status (as of May 1, 2026)
+
+The MX NB test is not yet in market. Vijeth Shetty is still working on the MX PS Non-Brand page changes, with a preview URL pending (Vijeth, 5/1). The brand page thread has its own active issues: IT cp/ps-brand Polaris went live April 1, was reverted to legacy on April 16 due to performance issues, and is now parked as it/cp/ps-brand-new under MCS-3004 (Alex VanDerStuyf). That brand page experience reinforces the need for the NB test to launch clean, with known QA issues resolved first.
+
+### What must be resolved before MX NB launch
+
+Three QA issues identified by Yun-Kang Chu on Polaris brand pages also apply to the NB template and must be confirmed resolved before the MX NB test goes live (Yun-Kang, ab-paid-search-global, 4/29). First, subheadlines are not updated on Polaris pages. Second, Paid Search ref tags appear to be overridden on Polaris, which would corrupt attribution data. Third, page load time is longer than usual on Polaris, a factor that directly affects conversion rate and would confound test results.
+
+Beyond QA, the test depends on coordination across three owners. Alex VanDerStuyf owns MX AEM coordination and has confirmed navigation elements. Dwayne Palmer is collecting consolidated brand LP feedback before the weblab/migration path proceeds, per Brandon's directive that all Polaris feedback route through Richard as a single channel (Brandon, ab-paid-search-global, 4/29). Yun-Kang Chu owns the QA resolution for the three issues above. Until the ref-tag override issue is confirmed fixed, launching the NB test would produce unreliable attribution data, making the test results uninterpretable.
 
 ## Blockers
 
@@ -126,6 +157,14 @@ Alex VanDerStuyf tracks the WW rollout in Asana: "PS Polaris Brand pages update 
 - MCS decision 4/16 (Polaris migration for all paid search LPs) — `~/shared/context/active/current.md` → Polaris Brand LP Rollout
 - Richard single POC (Brandon 4/14) — `~/shared/context/active/current.md` → Polaris Brand LP Rollout
 - Dwayne in-context email limitation (4/17) — `~/shared/context/active/current.md` → Polaris Brand LP Rollout
+- MX NB test framing, beauty + auto categories (Richard, hedy 4/16) — hedy session 4/16
+- AU Polaris LP 30% conv rate drop and revert (Richard, hedy 4/29) — hedy session 4/29 LP Testing
+- Weblab infeasibility for AU/MX NB pages (Dwayne Palmer, 4/24) — slack:C065KKT53DJ (Brandon to Yun-Kang)
+- Google Experiments recommendation (Yun-Kang Chu, 4/27) — slack:mpdm-brandoxy-dtpalmer-prichwil
+- Polaris QA issues: subheadlines, ref tags, page load (Yun-Kang, 4/29) — slack:ab-paid-search-global
+- Consolidated feedback routing through Richard (Brandon, 4/29) — slack:ab-paid-search-global
+- Vijeth MX NB page changes in progress (5/1) — slack:ab-paid-search-global
+- IT brand page revert and MCS-3004 parking (Alex VanDerStuyf) — slack:ab-paid-search-global
 
 ## Related
 
@@ -135,8 +174,8 @@ Alex VanDerStuyf tracks the WW rollout in Asana: "PS Polaris Brand pages update 
 - [MCS Polaris Rollout Meeting](mcs-polaris-rollout)
 
 <!-- AGENT_CONTEXT
-machine_summary: "Canonical Polaris program reference. US/AU/JP live. MX early test market with CVR investigation. Brandon priority: AU > MX > DE > UK > JP > FR > IT > ES > CA > US-ES. EU5 blocked by AEM ops ticket. AU uses pre/post analysis (no control). Measurement: 45% CP success, 35% rollback. April 16 MCS decision: all PS LPs migrate to Polaris, PADESARJAD deprecated. Richard is single WW POC as of April 14."
-key_entities: ["Polaris", "MCS", "AEM", "PADESARJAD", "weblab", "Stacey", "Alex VanDerStuyf", "Andrew Wirtz", "Lena Zak", "Brandon Munday", "Vijeth", "Frank Volinsky"]
-action_verbs: ["migrate", "translate", "build", "test", "measure", "rollback", "coordinate"]
-update_triggers: ["market go-live dates", "weblab results", "AEM translations delivered", "EU5 ops ticket resolved", "MX CVR root cause found", "in-context email ships"]
+machine_summary: "Canonical Polaris program reference. US/AU/JP live. MX early test market with CVR investigation. MX NB LP test is a distinct thread: Google Experiments (not Weblab) measuring Polaris NB vs legacy on beauty/auto pages, not yet in market as of 5/1. AU Polaris LP showed 30% conv drop and was reverted, informing MX test design. Brandon priority: AU > MX > DE > UK > JP > FR > IT > ES > CA > US-ES. EU5 blocked by AEM ops ticket. AU uses pre/post analysis (no control). Measurement: 45% CP success, 35% rollback. April 16 MCS decision: all PS LPs migrate to Polaris, PADESARJAD deprecated. Richard is single WW POC as of April 14."
+key_entities: ["Polaris", "MCS", "AEM", "PADESARJAD", "weblab", "Google Experiments", "Stacey", "Alex VanDerStuyf", "Andrew Wirtz", "Lena Zak", "Brandon Munday", "Vijeth Shetty", "Frank Volinsky", "Dwayne Palmer", "Yun-Kang Chu"]
+action_verbs: ["migrate", "translate", "build", "test", "measure", "rollback", "coordinate", "revert", "consolidate"]
+update_triggers: ["market go-live dates", "weblab results", "AEM translations delivered", "EU5 ops ticket resolved", "MX CVR root cause found", "in-context email ships", "MX NB preview URL delivered", "Polaris QA issues resolved", "MX NB test launch date confirmed", "MX NB test results available"]
 -->

@@ -88,3 +88,147 @@ Top 5 candidates surfaced by the W16 maintenance run. All come from DuckDB `sign
 - Separately: the morning maintenance run surfaced 46-article index drift and 0% blackboard adoption. See health-2026-04-17.md + audit-2026-04-17.md (morning) and -run2.md files (evening). Index drift is now fixed (82 indexed, 0 orphans). Blackboard still at 0% — track to 4/30 build-start check.
 - ~~Low priority: 9 legacy `~/shared/artifacts/*` cross-refs need a systematic swap-pass~~ — **DONE.** 9 refs fixed across 6 files. Post-edit broken-ref count: 0.
 - New: 1 SharePoint-stale doc after agent-architecture enrichment (local newer than SP copy). Will be picked up by the next sharepoint-sync run; no immediate action needed.
+
+
+---
+
+## Proposals added 2026-05-01 — wiki-maintenance W18 run
+
+First run against the new `AB-Paid-Acq-*` SharePoint layout (replaced
+`Artifacts/<cat>/` on 4/28). Also the first run after the 4-bucket doc-type
+vocabulary landed and blackboard was killed. 362 candidate lines consumed
+from `wiki-candidates.md` (2 weeks of backlog since W16 archive). Clustered
+by theme — top 5 below.
+
+### P1 — wbr-callouts-pipeline + wbr-callout-guide (16 signals, dominant cluster)
+
+- [ ] **enrich: operations/wbr-callout-guide + operations/wbr-callouts-pipeline** —
+  16 session-summary entries from 4/20–4/27, spanning multiple WBR cycles.
+  Strong convergent signal on: narrative-first drafting (aggregate-then-detail,
+  not per-metric walkthroughs), qualitative sweep as mandatory step before any
+  attribution claim, Note-field discipline (<30 words, pending actions with
+  owners, drop entirely when empty), sentence-level voice rules (10 specific
+  grammar patterns extracted from edits), change-log as auto-regenerated input,
+  sensitivity-driven reframe pattern, default-voice-drift as recurring failure
+  mode even with proper routing. Richard is the sole wiki-writer for callouts
+  in practice so this matters for the skill package itself.
+  Action: load wbr-callouts skill owner + decide whether this merges into the
+  guide, the pipeline doc, the skill definition, or the richard-style-wbr.md
+  steering file. My read: grammar patterns → style guide; process (sweep,
+  reframe, note discipline) → guide; sub-agent pattern + default-voice failure
+  mode → pipeline doc.
+
+### P2 — mx-market-wiki + ieccp-planning-framework (Sparkle-specific enrichment, 9 signals)
+
+- [ ] **enrich: markets/mx-market-wiki + strategy/ieccp-planning-framework** —
+  9 entries from the 4/22 MX projection work. Canonical CCP values
+  (Brand $90 / NB $30 per 2026 rate card, sourced from WW Dashboard IECCP tab
+  rows 92-93) need to live in `ps.market_constraints_manual` not in Richard's
+  head. `ie%CCP = total_spend / (brand_regs × Brand_CCP + nb_regs × NB_CCP)` —
+  NOT blended_CPA / blended_CCP. Brand-anchor / NB-residual architecture.
+  H1-H2 2025 regime shift (ceiling applied W27+) needs to be a structural
+  annotation. Sparkle decay methodology. Per-week projection vs annual-average
+  produces 4-6pt ie%CCP deltas that matter for budget asks.
+  Action: ieccp-planning-framework absorbs the methodology; mx-market-wiki
+  absorbs the canonical CCP values + Sparkle-specific annotations. Single
+  editor pass, both articles updated together.
+
+### P3 — kiro-sharepoint-protocol / sharepoint-mcp-onboarding (10 signals, team enablement)
+
+- [ ] **enrich: kiro-steering/04-kiro-sharepoint-protocol + kiro-steering/sharepoint-mcp-onboarding** —
+  10 entries across 4/21, 4/24, 4/25, 4/27 on SharePoint MCP auth failures.
+  Three distinct auth failure modes, three distinct fixes. MCP hot-reload
+  behavior. DevSpaces-vs-Windows cookie isolation. Orcha+GRASP as possible
+  replacement. Kiro-on-Windows fsWrite-to-OneDrive bypassing the MCP entirely.
+  Proper diagnostic order (check host → MCP → CLI fallback). One-command
+  recovery script pattern.
+  Audience: the 12-doc kiro-for-team package Richard is building for teammate
+  rollout. This is exactly the on-call reference teammates will hit first when
+  their SharePoint MCP breaks.
+  Action: split into the two existing docs in the kiro-for-team/ package —
+  troubleshooting playbook goes to `04-kiro-sharepoint-protocol.md`, initial
+  setup gotchas go to the onboarding doc.
+
+### P4 — dashboard-design-language-playbook (5 signals, new article)
+
+- [ ] **new: strategy/dashboard-design-language-playbook** —
+  5 entries across 4/30 dashboard work. Pattern lives across wiki-search.html,
+  projection.html, weekly-review.html, Kiro dashboard tabs. Token-map scripts
+  for theme ports, design-system semantic reuse, mirror-tokens-not-flip-pixels
+  principle, subtract-duplicated-before-adding, single-source-of-truth across
+  related panels, append-only archive pattern for split operator-vs-reviewer
+  views, refresh-cadence badges, data-recency from pipeline not narrative.
+  This is substantial enough to deserve its own article rather than enriching
+  one of the implementation-specific docs.
+  Audience: team-internal (once AgentSpaces proliferates). Half-life: reference
+  bucket (12-18mo).
+  Action: assign to wiki-researcher for brief → wiki-writer for first draft.
+
+### P5 — kiro-to-harmony-dashboard-deploy (4 signals, already drafted — enrich)
+
+- [ ] **enrich: methodology/kiro-to-harmony-dashboard-deploy** —
+  4 entries from 4/21 across 6-hour working session. Hook architecture
+  principle (single-responsibility hooks compose cleanly). PS analytics stack
+  dual-path problem (DuckDB vs xlsx) needs consolidation. Harmony feature
+  decision framework (ship minimum → observe 2-3 weeks → selectively adopt
+  dashboard/banner/Brazilify). 3-phase Redshift migration plan.
+  This article exists in DRAFT — enrich rather than re-draft.
+  Action: next pipeline run picks this up for critic review after
+  enrichment.
+
+## Deferred — single-signal entries (~200 lines)
+
+The remaining candidate lines are single-signal observations (mostly
+session-summary hook's own notes on system-level patterns, MCP gotchas,
+spec-authoring patterns, and technical debugging notes). These are captured
+in the W18 archive (`intake/archive/wiki-candidates-2026-W18.md`) as a
+searchable record but don't cross the 3+-mention threshold to enter the
+review queue this run. Next week will re-aggregate with fresh signals.
+
+Notable single-signal items with decent odds of promotion on repeat:
+- `mcp-auth-failure-playbook` (1 strong signal, would consolidate multiple
+  sharepoint/slack/outlook MCP auth gotchas into one reference)
+- `blind-test-methodology` refinements (already shipped as steering file;
+  wiki article optional)
+- `signal-tracker cross-system patterns` (2026-04-29 entries, likely to
+  repeat as the wiki_candidates view gets exercised)
+
+## Actions for Richard — W18
+
+- **Confirm P1 decomposition** (grammar → style / process → guide /
+  sub-agent → pipeline) before the wiki-writer picks up wbr-callouts
+  enrichments. I'm not going to decompose this unilaterally because the
+  callouts skill is yours.
+- **Confirm P2 sourcing** — the CCP values ($90/$30) came from your 4/22
+  notes. Before these land in a canonical article, worth re-verifying the
+  WW Dashboard IECCP tab rows 92-93 haven't been overwritten.
+- **P3, P4, P5 are agent-executable** — I can spec these and route to the
+  wiki-researcher / wiki-writer pipeline once the other blockers (pipeline
+  throughput, agent routing) clear.
+
+## Process note
+
+This run exposed that the SharePoint layout changed on 4/28 (`Artifacts/` →
+`AB-Paid-Acq-{Team,Dashboards,Ops}` + `.Richard-Private`) but the hook
+protocol hadn't been updated. Added
+`~/shared/dashboards/refresh-sharepoint-cache.py` to crawl the new layout and
+updated the wiki-maintenance hook to reference it. Future runs will use the
+new path without needing manual intervention.
+
+---
+
+### Stage 5 auto-generated candidates — 2026-05-01
+
+Editor triage pass over remaining signal-driven topics and thin-article
+upgrade candidates not already covered by the W18 P1–P5 proposals above.
+Deduplicated against all existing queue items (W16 + W18).
+
+- [ ] **polaris-brand-lp-test (enrich polaris-program)** — markets — audience: team — doc-type: execution — evidence: 14 mentions across 6 channels (quality 40.6, last signal 4/29); W16 skipped enrichment because article was fresh, but the MX NB LP test is a distinct execution thread not yet documented in the article. Acceptance: polaris-program gains a "MX NB Landing Page Test" subsection with test design, variants, success criteria, and current status — at least 300 words of net-new content.
+
+- [ ] **op1-forecast-flat-budget (new)** — strategy — audience: leadership — doc-type: strategy — evidence: NEW signal surfaced 5/1 (quality 6.9, 2 mentions); OP1 flat-budget scenario planning has no existing article and is not covered by forecast-system or ieccp-planning-framework. Acceptance: standalone article explaining the flat-budget assumption, its implications for 2027 planning, and the decision framework for when to escalate vs. absorb — minimum viable draft with clear "what this means for the team" section.
+
+- [ ] **au-transition (new)** — markets — audience: team — doc-type: execution — evidence: NEW signal surfaced 5/1 (quality 6.9, 2 mentions); AU market transition is not covered by au-market-wiki's current scope (which focuses on steady-state performance, not the transition mechanics). Acceptance: article documents the AU transition trigger, timeline, ownership handoffs, and known risks — distinct from au-market-wiki's performance/CPA content.
+
+- [ ] **au-keyword-cpa-dashboard (upgrade)** — reporting — audience: team — doc-type: reference — evidence: existing article is 478 words with duplicate frontmatter blocks and no methodology section; currently REVIEW status but too thin to pass critic. Acceptance: fix duplicate frontmatter, add dashboard methodology (data source, refresh cadence, metric definitions), add interpretation guide — target 800+ words with clean single frontmatter block.
+
+- [ ] **mpe-batch-frontmatter-retag (maintenance)** — operations — audience: agent — doc-type: reference — evidence: 24 articles in operations/ with mpe-* prefix created during the projection-engine build lack standardized frontmatter (missing doc-type, level, category, tags); this blocks accurate indexing and critic audits. Acceptance: all 24 mpe-* articles gain complete frontmatter (doc-type, audience, level, category, tags, owner, created, updated) conforming to wiki-structure.md spec — batch librarian task, no content changes.

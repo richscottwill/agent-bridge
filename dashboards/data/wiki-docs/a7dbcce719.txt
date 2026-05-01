@@ -321,3 +321,12 @@ All source documents referenced in or feeding this state file. Links open in bro
 
 *Template location: OneDrive Kiro-Drive/state-files/mx-paid-search-state.md*
 *DOCX template (future): OneDrive Kiro-Drive/state-files/templates/mx-paid-search-template.docx*
+
+## Recent signal
+
+### 2026-05-01 — weekly enrichment
+
+- MX Sparkle campaigns are outperforming seasonality, driving a $1.2M projection against a $550K baseline (Andrew Wirtz, 4/29). Sparkle is included in the padded $1.3M MX projection.
+- IECCP budget is pacing at approximately 50% of the OP2 target (Brandon Munday, 4/29). This signals potential underspend risk if pacing does not accelerate in May.
+- Duplicate invoice issue remains active with Diana leading resolution; the current MX projection of $1.3M includes padding to account for the outstanding $56K duplicate (Richard Williams, 4/29).
+- Vijeth is still working on MX PS Non-Brand landing page changes; preview URL pending (5/1). No timeline change from prior status.

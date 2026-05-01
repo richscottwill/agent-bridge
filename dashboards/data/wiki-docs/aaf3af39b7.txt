@@ -1,6 +1,6 @@
 # Wiki Roadmap — AB Paid Search Knowledge Base
 
-Last updated: 2026-04-17 (wiki-maintenance W16 run, evening pass)
+Last updated: 2026-05-01 (wiki-maintenance W18 run)
 
 ---
 
@@ -18,6 +18,11 @@ Last updated: 2026-04-17 (wiki-maintenance W16 run, evening pass)
 
 | Topic | Slug | Priority | Source | Why |
 |-------|------|----------|--------|-----|
+| **WBR callouts: guide + pipeline + voice** | operations/wbr-callout-guide, operations/wbr-callouts-pipeline, richard-style-wbr | **P1** | W18 — 16 signals across 7 days | Dominant cluster from W18 consume. Narrative-first discipline, qualitative sweep as mandatory step, Note-field rules, 10 sentence-level voice patterns, sensitivity-driven reframe pattern, sub-agent orchestration gotchas. Richard's call on split across the 3 docs before writer picks up. |
+| **MX CCP methodology + Sparkle annotations** | markets/mx-market-wiki, strategy/ieccp-planning-framework | **P1** | W18 — 9 signals from 4/22 projection session | Canonical CCP values (Brand $90 / NB $30), correct ie%CCP formula (per-reg weighting, not blended), Brand-anchor / NB-residual architecture, H1-H2 2025 regime shift, Sparkle decay methodology. Needs both articles updated in one pass. |
+| **SharePoint MCP troubleshooting playbook** | kiro-steering/04-kiro-sharepoint-protocol, kiro-steering/sharepoint-mcp-onboarding | **P2** | W18 — 10 signals over 6 days | 3 distinct auth failure modes, 3 distinct fixes. DevSpaces vs Windows cookie isolation, fsWrite-to-OneDrive bypass path, Orcha+GRASP as replacement candidate. Team-enablement critical — teammates will hit this first. |
+| **Dashboard design-language playbook** | strategy/dashboard-design-language-playbook | **P2** | W18 — 5 signals from 4/30 dashboard work | New article. Token-map scripts for theme ports, design-system semantic reuse, subtract-before-add, single-source-of-truth chaining, refresh-cadence UI patterns. Half-life reference. |
+| **Kiro-to-Harmony deploy enrichment** | methodology/kiro-to-harmony-dashboard-deploy | **P3** | W18 — 4 signals from 4/21 session | Enrich existing DRAFT with single-responsibility-hook principle, PS analytics dual-path consolidation, Harmony feature decision framework. |
 | Polaris program enrichment | polaris-program | ~~P1~~ SKIPPED 4/17 eve | Signal 4/17 | Reviewed 4/17 eve. Article already comprehensive through 4/17 and the fresh 4/16 "DDD alignment, Richard owes feedback" signal is a task, not article content. Keep proposal for next weekly run if a new substantive signal lands. |
 | OCI program enrichment + status refresh | oci-program | ~~P1~~ DONE 4/17 eve | Signal 4/17 + Audit 4/4 | Reviewed 4/17 eve. FR/IT/ES/JP already correct at 100% — no change needed. CA row updated from "April 7, On track" to "Targeted week of April 20, MCM readiness confirmed, Brandon coordinating with Mukesh" per 4/16 Slack signals. No other changes warranted. |
 | agent-architecture enrichment — 2 sections | agent-architecture | ~~P2~~ DONE 4/17 eve | Wiki-candidates 4/17 evening | Added "Agent Operating Norms" + "Wiki System Topology" sections. 4 clustered signals consumed. Article's `updated:` bumped to 2026-04-17; SharePoint copy now 1-doc stale (expected — will sync on next push). |
@@ -34,7 +39,10 @@ Last updated: 2026-04-17 (wiki-maintenance W16 run, evening pass)
 | Confidence calibration across all docs | (systematic) | P3 | Blind test 4/4 | Zero articles use HIGH/MEDIUM/LOW confidence framework from style guide. |
 | depends_on/consumed_by across all docs | (systematic) | P3 | Blind test 4/4 | Only 1 of 88 articles has these fields. Blackboard would help — but see kill signal below. |
 | Bare-noun headers → questions/imperatives | (systematic) | P3 | Blind test 4/4 | 3 of 5 tested articles have bare-noun headers violating style guide. |
-| 4-bucket doc-type retag pass (22 articles) | (systematic) | PENDING | 4-bucket vocab plan | Contingent on 2026-05-02 blackboard kill review passing. 22 articles missing `doc-type` plus existing `strategy`-tagged ones needing re-bucketing. |
+| 4-bucket doc-type retag pass (73 articles + 9 legacy `execution`) | (systematic) | **P2** | 4-bucket vocab applied 2026-05-01 | Vocabulary landed today (wiki-pipeline-rules.md §9 active, blackboard killed). 73 live articles still have no `doc-type:` and 9 carry the old `execution` value. Until this runs, decay audit is effectively dark on 75% of corpus. Heuristic: `meeting-*` / `meetings/` → snapshot, `-test-` / `q[1-4]-` / experiments → tactical, `playbook` / `guide` / `sop` / `how-to` → reference, default → strategy. |
+| Legacy-bucket `execution` retag (9 articles) | (systematic) | **P2** | Pre-vocab articles | Subset of above — mapping existing `execution` → likely `tactical` or `reference` depending on content. |
+| Required-frontmatter fill (24 articles) | (systematic) | P2 | W18 audit | 24 articles missing `title` / `status` / `audience` / `owner`. Largely overlaps with the 73 unset-doc-type set. Same sweep should fix both. |
+| SharePoint v2 layout — seed empty `markets/` stubs | (markets subtree) | P3 | W18 audit | 12 market subfolders were created on 4/28 but have no content. Either seed state files or remove the stubs; current state false-positives dashboard as "markets not published." |
 
 ## Pending decisions
 

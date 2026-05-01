@@ -302,3 +302,14 @@ All source documents referenced in or feeding this state file. Links open in bro
 *This document is designed for daily automated refresh via the Kiro agent swarm. Sections marked with placeholder tags in the DOCX template version are populated by the LLM output JSON and patched into the Word file via deterministic XML injection. The narrative sections above represent the current human-authored baseline that the agent will maintain and update as new weekly data arrives.*
 
 *Template location: OneDrive Kiro-Drive/state-files/au-paid-search-state.md*
+
+---
+
+## Recent signal
+
+### 2026-05-01 — weekly enrichment
+
+- AU Paid Search is transitioning from Richard Williams to Megan Oshry's team. Brandon confirmed the move in Hedy on 4/29, and the AU Transition doc has completed its feedback cycle (Brandon asked Richard to review his comments on 5/1). Alexis Eck is leaving the AU role; Richard is setting up new PTR access for the incoming team.
+- Brandon raised a pointed concern about the transition's measurability: the test of "dedicated person vs. time split 5 ways" lacks a clean counterfactual, and he has escalated this framing issue to Kate.
+- Megan's team is ramping up on AU data access. Megan asked for the Google Ads conversion data pipeline and the registration query. Richard confirmed AU uses database registration data (not Google Ads platform conversions), consistent with the data limitations documented in Appendix F.
+- The AU Transition doc feedback loop is now closed on Brandon's side. Richard's review is the remaining open action before the transition plan finalizes.

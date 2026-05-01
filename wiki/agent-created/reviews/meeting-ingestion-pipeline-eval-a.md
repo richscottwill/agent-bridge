@@ -1,0 +1,130 @@
+---
+title: "Eval A Review — Meeting Ingestion Pipeline"
+status: FINAL
+audience: amazon-internal
+owner: wiki-critic
+created: 2026-05-01
+reviewed_article: meeting-ingestion-pipeline
+---
+
+# Eval A Review: Meeting Ingestion Pipeline — Hedy to Asana
+
+Reviewed: 2026-05-01 20:58
+Slug: meeting-ingestion-pipeline
+Draft version: 2026-04-17 (from frontmatter `updated`)
+
+---
+
+## Constraint check
+
+The article's frontmatter contains no `constraints:` field. No sidecar blackboard file (`meeting-ingestion-pipeline.state.json`) exists alongside the draft. Per wiki-pipeline-rules §7, every markdown draft under active pipeline work must be accompanied by a sidecar state file. The blackboard protocol is experimental through 2026-05-02, so this is logged as a gap rather than a hard block, but it means there are no researcher-supplied constraints to validate against.
+
+**Result:** No constraints to check. Protocol gap noted — blackboard absent.
+
+---
+
+## TODO marker scan
+
+Searched the full article for `<!-- TODO: cite -->` and `<!-- TODO: constraint conflict -->`. Neither marker is present. The one "TODO" substring match (line 46) is the hyphenated word "to-dos" in prose, not a marker.
+
+**Result:** Clean. No blocking TODO markers.
+
+---
+
+## File corruption flag
+
+Lines 53–60 contain raw ANSI terminal escape sequences (`\033[38;5;10m`, `\033[0m`) embedded in the markdown. The "Failure modes" header and the three numbered items in that section are wrapped in color codes that will render as garbage in any markdown viewer. This is a data-integrity issue — the file was likely written or appended from a terminal session that leaked escape codes.
+
+**This must be fixed before any publish consideration.**
+
+---
+
+## Scores
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 6/10 | Describes the pipeline but does not enable a reader to operate, debug, or extend it — no runbooks, no commands, no decision trees. |
+| Clarity | 6/10 | Prose is readable and headers are descriptive, but the ANSI corruption in "Failure modes" breaks rendering, and the four-protocol-file section is a wall of inline code references without a table or ordered list to make it scannable. |
+| Accuracy | 4/10 | Zero citations on any claim. "Nine tools," "three invariants," "four protocol files" are all asserted without sources. `depends_on: []` in frontmatter contradicts the body, which explicitly depends on four protocol files. The "Related" link to "AB Acquisition Channel Map" appears unrelated to meeting ingestion — suspect copy-paste error. |
+| Dual-audience | 5/10 | AGENT_CONTEXT block is present and reasonably populated, but frontmatter `depends_on` is empty (agents indexing dependencies get nothing), and the `type: reference` tag is debatable for what reads more like an `execution` doc. Human prose is adequate but not optimized — no quick-reference summary, no TL;DR. |
+| Economy | 5/10 | "Hedy API coverage" section lists tools without saying when or why to use each one — padding. "Next Steps" is a wish list that belongs in a task tracker, not a reference doc. The "Related" section adds one unrelated link. The numbered list in "Failure modes" is fine structurally but the ANSI corruption makes it unreadable. Several paragraphs restate what the section header already implies. |
+| **Average** | **5.2/10** | |
+
+---
+
+## Verdict
+
+**REVISE**
+
+The article fails on three independent grounds: (1) average 5.2 is below the 8.0 threshold, (2) Accuracy at 4/10 is below the 7 floor, and (3) the ANSI escape code corruption is a data-integrity defect that blocks publishing regardless of scores.
+
+---
+
+## Required changes
+
+### 1. Fix ANSI escape code corruption (blocking)
+
+Lines 53–60 contain raw terminal escape sequences. Strip all ANSI codes from the file. The "Failure modes" section should read as clean markdown:
+
+Replace the corrupted block (lines 53–60) with:
+
+```markdown
+## Failure modes
+
+Three recurring failures:
+
+1. **Hedy API timeouts** stall ingestion — retry with exponential backoff; log skips.
+2. **Meeting series file conflicts** (concurrent edits) cause merge failures — default to append, not overwrite.
+3. **MotherDuck disconnection** causes silent DuckDB write failures if in-memory fallback goes undetected — check connection before every write.
+```
+
+### 2. Add citations to every factual claim (blocking — Accuracy)
+
+The following claims need sources:
+
+- "Hedy MCP exposes nine tools" — cite the Hedy MCP tool manifest or API docs.
+- "Four protocol files contain pieces of the pipeline" — cite each file path as a verifiable reference (e.g., `~/shared/context/protocols/eod-meeting-sync.md`).
+- "Three invariants" in Data freshness — cite the protocol or config where these invariants are enforced.
+- "`ops.data_freshness` table records the last successful ingestion timestamp" — cite the DuckDB schema or the protocol that writes to this table.
+- "Forty-eight hours triggers an alert" — cite the threshold configuration source.
+
+### 3. Fix `depends_on` frontmatter (blocking — Accuracy, Dual-audience)
+
+Replace `depends_on: []` with the actual dependencies:
+
+```yaml
+depends_on:
+  - "am-auto"
+  - "eod-meeting-sync"
+  - "meeting-to-task-pipeline"
+  - "eod-system-refresh"
+```
+
+### 4. Remove or fix the "Related" link (blocking — Accuracy)
+
+The link to "AB Acquisition Channel Map" (`sid-acquisition-funnel-map`) appears unrelated to meeting ingestion. Either explain the relationship in a sentence or remove the link. Do not leave orphan cross-references that confuse both human readers and agent indexers.
+
+### 5. Cut "Next Steps" section or move to task tracker (blocking — Economy)
+
+"Next Steps" lists future work that belongs in Asana, not in a reference document. A reference doc describes what IS, not what MIGHT BE. Remove the section entirely, or if the items are critical context, rewrite as a single sentence in the intro: "Three planned extensions — protocol consolidation, series visualization, and topic-routing documentation — are tracked in Asana."
+
+### 6. Make "Hedy API coverage" earn its place (blocking — Usefulness, Economy)
+
+The current section lists tools without explaining when or why an operator would use each one. Either cut it to a single sentence ("The pipeline uses `GetSessions` and `GetSessionDetails`; the remaining seven tools are documented in the Hedy MCP manifest") or add a table with columns: Tool, Used by pipeline?, When to use manually.
+
+### 7. Add a runbook or decision tree (blocking — Usefulness)
+
+The doc describes the pipeline but gives no guidance for operating it. Add a section that answers: "The pipeline didn't run last night — what do I check?" Walk through the three failure modes with specific diagnostic steps (which log to check, which DuckDB query to run, how to trigger a manual re-run). Without this, the doc is a description, not a reference.
+
+### 8. Create the blackboard sidecar file (non-blocking but flagged)
+
+Per wiki-pipeline-rules §7, create `meeting-ingestion-pipeline.state.json` alongside the draft with constraints populated by the researcher. This is experimental through 2026-05-02 but the protocol expects it for all drafts in the pipeline.
+
+---
+
+## Suggestions (non-blocking)
+
+- Consider whether `type: reference` is correct. The doc reads more like `type: execution` given its focus on a specific operational pipeline. If the audience is agents operating the pipeline, `execution` is the right type.
+- The opening paragraph is strong — "Meetings produce value when the decisions survive the calendar slot" is a good hook. Keep it.
+- The "Protocol files" section would benefit from a numbered list rather than an inline paragraph of four file references. Easier to scan for both humans and agents.
+- The `updated: 2026-04-17` date is 14 days old. If the pipeline has changed since then, the doc is already decaying. The `update_triggers` in AGENT_CONTEXT correctly flag "pipeline failure pattern" as a trigger — has one occurred since 4/17?

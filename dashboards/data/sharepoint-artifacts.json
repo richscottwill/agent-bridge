@@ -1,616 +1,724 @@
 {
-  "generated": "2026-04-17T19:02:13-07:00",
-  "source": "sharepoint-mcp list_files Artifacts/*",
-  "note": "Snapshot of SharePoint Documents/Artifacts/ published .docx files. Used by build-wiki-index.py to mark local wiki articles as published=yes/no. Refresh via wiki-maintenance Phase 2 or manual sharepoint_list_files calls.",
+  "generated": "2026-05-01T19:42:41+0000",
+  "layout_version": 2,
+  "layout_note": "v2 layout (2026-04-28+): AB-Paid-Acq-{Team,Dashboards,Ops}/** + .Richard-Private/** (excluded). Replaces the v1 Artifacts/<cat>/ tree.",
+  "sources": [
+    "AB-Paid-Acq-Team",
+    "AB-Paid-Acq-Dashboards",
+    "AB-Paid-Acq-Ops"
+  ],
   "artifacts": [
     {
-      "stem": "workstream-user-experience-v5",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-user-experience-v5.docx",
-      "modified": "2026-04-12T14:03:17Z",
-      "size": 40422
-    },
-    {
-      "stem": "testing-appendix",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-appendix.docx",
-      "modified": "2026-04-12T14:03:16Z",
-      "size": 46624
-    },
-    {
-      "stem": "ps-team-map",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/ps-team-map.docx",
-      "modified": "2026-04-12T14:03:15Z",
-      "size": 41361
-    },
-    {
-      "stem": "workstream-audiences-lifecycle",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-audiences-lifecycle.docx",
-      "modified": "2026-04-12T14:03:14Z",
-      "size": 39510
-    },
-    {
-      "stem": "testing-approach-outline",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-approach-outline.docx",
-      "modified": "2026-04-12T14:03:13Z",
-      "size": 40463
-    },
-    {
-      "stem": "workstream-modern-search",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-modern-search.docx",
-      "modified": "2026-04-12T14:03:12Z",
-      "size": 40769
-    },
-    {
-      "stem": "workstream-algorithmic-ads",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-algorithmic-ads.docx",
-      "modified": "2026-04-12T14:03:11Z",
-      "size": 40609
-    },
-    {
-      "stem": "testing-methodology",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-methodology.docx",
-      "modified": "2026-04-12T14:03:10Z",
-      "size": 40848
-    },
-    {
-      "stem": "workstream-oci-bidding",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-oci-bidding.docx",
-      "modified": "2026-04-12T14:03:10Z",
-      "size": 40807
-    },
-    {
-      "stem": "workstream-user-experience",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/workstream-user-experience.docx",
-      "modified": "2026-04-12T14:03:07Z",
-      "size": 40424
-    },
-    {
-      "stem": "testing-approach-kate-v5",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/testing-approach-kate-v5.docx",
-      "modified": "2026-04-12T14:03:06Z",
-      "size": 43405
-    },
-    {
-      "stem": "ps-operations",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/ps-operations.docx",
-      "modified": "2026-04-12T14:02:58Z",
-      "size": 40090
-    },
-    {
-      "stem": "project-baloo-overview",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/project-baloo-overview.docx",
-      "modified": "2026-04-12T14:02:57Z",
-      "size": 41518
-    },
-    {
-      "stem": "oci-rollout-playbook",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/oci-rollout-playbook.docx",
-      "modified": "2026-04-12T14:02:55Z",
-      "size": 43679
-    },
-    {
-      "stem": "oci-rollout-methodology",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/oci-rollout-methodology.docx",
-      "modified": "2026-04-12T14:02:54Z",
-      "size": 38994
-    },
-    {
-      "stem": "enhanced-match-liveramp",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/enhanced-match-liveramp.docx",
-      "modified": "2026-04-12T14:02:53Z",
-      "size": 40311
-    },
-    {
-      "stem": "email-overlay-ww-rollout",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/email-overlay-ww-rollout.docx",
-      "modified": "2026-04-12T14:02:52Z",
-      "size": 41054
-    },
-    {
-      "stem": "au-nb-mro-trades-proposal",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/au-nb-mro-trades-proposal.docx",
-      "modified": "2026-04-12T14:02:51Z",
-      "size": 38530
-    },
-    {
-      "stem": "ai-max-test-design",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/ai-max-test-design.docx",
-      "modified": "2026-04-12T14:02:50Z",
-      "size": 42529
-    },
-    {
-      "stem": "2024-12-it-bid-modifiers-test",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/2024-12-it-bid-modifiers-test.docx",
-      "modified": "2026-04-12T14:02:48Z",
-      "size": 38574
-    },
-    {
-      "stem": "2023-06-audience-post-mortem",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/2023-06-audience-post-mortem.docx",
-      "modified": "2026-04-12T14:02:47Z",
-      "size": 41081
-    },
-    {
-      "stem": "ad-copy-testing-framework",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/ad-copy-testing-framework.docx",
-      "modified": "2026-04-12T14:02:46Z",
-      "size": 41171
-    },
-    {
-      "stem": "2023-08-jp-app-testing-results",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/2023-08-jp-app-testing-results.docx",
-      "modified": "2026-04-12T14:02:45Z",
-      "size": 42239
-    },
-    {
-      "stem": "2023-01-jp-nb-experiment-google",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/2023-01-jp-nb-experiment-google.docx",
-      "modified": "2026-04-12T14:02:37Z",
-      "size": 44215
-    },
-    {
-      "stem": "2022-10-yahoo-jp-nb-experiment",
-      "category": "testing",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/testing/2022-10-yahoo-jp-nb-experiment.docx",
-      "modified": "2026-04-12T14:02:36Z",
-      "size": 39794
-    },
-    {
-      "stem": "q2-initiative-status",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/q2-initiative-status.docx",
-      "modified": "2026-04-12T14:02:35Z",
-      "size": 40381
-    },
-    {
-      "stem": "oci-business-case",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/oci-business-case.docx",
-      "modified": "2026-04-12T14:02:34Z",
-      "size": 41178
-    },
-    {
-      "stem": "ieccp-planning-framework",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/ieccp-planning-framework.docx",
-      "modified": "2026-04-12T14:02:32Z",
-      "size": 44812
-    },
-    {
-      "stem": "f90-lifecycle-strategy",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/f90-lifecycle-strategy.docx",
-      "modified": "2026-04-12T14:02:31Z",
-      "size": 41428
-    },
-    {
-      "stem": "cross-market-playbook",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/cross-market-playbook.docx",
-      "modified": "2026-04-12T14:02:30Z",
-      "size": 38945
-    },
-    {
-      "stem": "genai-search-traffic",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/genai-search-traffic.docx",
-      "modified": "2026-04-12T14:02:29Z",
-      "size": 39956
-    },
-    {
-      "stem": "body-system-architecture",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/body-system-architecture.docx",
-      "modified": "2026-04-12T14:02:28Z",
-      "size": 39433
-    },
-    {
-      "stem": "agentic-marketing-landscape",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/agentic-marketing-landscape.docx",
-      "modified": "2026-04-12T14:02:27Z",
-      "size": 39192
-    },
-    {
-      "stem": "competitive-landscape",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/competitive-landscape.docx",
-      "modified": "2026-04-12T14:02:26Z",
-      "size": 41884
-    },
-    {
-      "stem": "agentic-ps-vision",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/agentic-ps-vision.docx",
-      "modified": "2026-04-12T14:02:24Z",
-      "size": 39603
-    },
-    {
-      "stem": "agent-architecture",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/agent-architecture.docx",
-      "modified": "2026-04-12T14:02:16Z",
-      "size": 45469
-    },
-    {
-      "stem": "aeo-ai-overviews-pov",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/aeo-ai-overviews-pov.docx",
-      "modified": "2026-04-12T14:02:15Z",
-      "size": 38934
-    },
-    {
-      "stem": "05-the-engineer",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/05-the-engineer.docx",
-      "modified": "2026-04-12T14:02:14Z",
-      "size": 39011
-    },
-    {
-      "stem": "04-the-operator",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/04-the-operator.docx",
-      "modified": "2026-04-12T14:02:13Z",
-      "size": 38859
-    },
-    {
-      "stem": "03-the-questioner",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/03-the-questioner.docx",
-      "modified": "2026-04-12T14:02:12Z",
-      "size": 38704
-    },
-    {
-      "stem": "02-the-director",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/02-the-director.docx",
-      "modified": "2026-04-12T14:02:11Z",
-      "size": 38651
-    },
-    {
-      "stem": "01-grok-synthesizer",
-      "category": "strategy",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/strategy/01-grok-synthesizer.docx",
-      "modified": "2026-04-12T14:02:10Z",
-      "size": 38471
-    },
-    {
-      "stem": "seasonality-calendar-2026",
-      "category": "markets",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/seasonality-calendar-2026.docx",
-      "modified": "2026-04-12T17:33:02Z",
-      "size": 41942
-    },
-    {
-      "stem": "ww-testing-tracker",
-      "category": "markets",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/ww-testing-tracker.docx",
-      "modified": "2026-04-12T14:01:13Z",
-      "size": 40448
-    },
-    {
-      "stem": "team-workload-distribution",
-      "category": "markets",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/team-workload-distribution.docx",
-      "modified": "2026-04-12T14:01:12Z",
-      "size": 41454
-    },
-    {
-      "stem": "oci-implementation-guide",
-      "category": "markets",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/oci-implementation-guide.docx",
-      "modified": "2026-04-12T14:01:11Z",
-      "size": 39361
-    },
-    {
-      "stem": "polaris-rollout-status",
-      "category": "markets",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/polaris-rollout-status.docx",
-      "modified": "2026-04-12T14:01:09Z",
-      "size": 41168
-    },
-    {
-      "stem": "oci-execution-guide",
-      "category": "markets",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/oci-execution-guide.docx",
-      "modified": "2026-04-12T14:01:08Z",
-      "size": 40830
-    },
-    {
-      "stem": "mx-market-wiki",
-      "category": "markets",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/mx-market-wiki.docx",
-      "modified": "2026-04-12T14:01:06Z",
-      "size": 40322
-    },
-    {
-      "stem": "market-reference",
-      "category": "markets",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/market-reference.docx",
-      "modified": "2026-04-12T14:00:59Z",
-      "size": 41890
-    },
-    {
-      "stem": "au-paid-search-market-overview",
-      "category": "markets",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/au-paid-search-market-overview.docx",
-      "modified": "2026-04-12T14:00:58Z",
-      "size": 40281
-    },
-    {
-      "stem": "au-market-wiki",
-      "category": "markets",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/au-market-wiki.docx",
-      "modified": "2026-04-12T14:00:57Z",
-      "size": 40616
-    },
-    {
-      "stem": "au-market-overview",
-      "category": "markets",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/au-market-overview.docx",
-      "modified": "2026-04-12T14:00:56Z",
-      "size": 40116
-    },
-    {
-      "stem": "ab-paid-search-wiki",
-      "category": "markets",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/markets/ab-paid-search-wiki.docx",
-      "modified": "2026-04-12T14:00:54Z",
-      "size": 39611
-    },
-    {
-      "stem": "stakeholder-comms-guide",
-      "category": "operations",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/stakeholder-comms-guide.docx",
-      "modified": "2026-04-12T14:01:48Z",
-      "size": 42718
-    },
-    {
-      "stem": "polaris-rollout-timeline",
-      "category": "operations",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/polaris-rollout-timeline.docx",
-      "modified": "2026-04-12T14:01:47Z",
-      "size": 38629
-    },
-    {
-      "stem": "oci-playbook-rewrite",
-      "category": "operations",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/oci-playbook-rewrite.docx",
-      "modified": "2026-04-12T14:01:45Z",
-      "size": 43941
-    },
-    {
-      "stem": "oci-methodology-knowledge-share",
-      "category": "operations",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/oci-methodology-knowledge-share.docx",
-      "modified": "2026-04-12T14:01:44Z",
-      "size": 38832
-    },
-    {
-      "stem": "mx-ps-handoff-guide",
-      "category": "operations",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/mx-ps-handoff-guide.docx",
-      "modified": "2026-04-12T14:01:43Z",
-      "size": 39098
-    },
-    {
-      "stem": "landing-page-testing-playbook",
-      "category": "operations",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/landing-page-testing-playbook.docx",
-      "modified": "2026-04-12T14:01:37Z",
-      "size": 38952
-    },
-    {
-      "stem": "invoice-po-process-guide",
-      "category": "operations",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/invoice-po-process-guide.docx",
-      "modified": "2026-04-12T14:01:36Z",
-      "size": 38970
-    },
-    {
-      "stem": "google-ads-campaign-structure",
-      "category": "operations",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/google-ads-campaign-structure.docx",
-      "modified": "2026-04-12T14:01:36Z",
-      "size": 38785
-    },
-    {
-      "stem": "campaign-link-generator-spec",
-      "category": "operations",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/campaign-link-generator-spec.docx",
-      "modified": "2026-04-12T14:01:34Z",
-      "size": 40608
-    },
-    {
-      "stem": "budget-forecast-helper-spec",
-      "category": "operations",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/operations/budget-forecast-helper-spec.docx",
-      "modified": "2026-04-12T14:01:33Z",
-      "size": 40823
-    },
-    {
-      "stem": "wbr-callout-guide",
-      "category": "reporting",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/reporting/wbr-callout-guide.docx",
-      "modified": "2026-04-12T14:01:51Z",
-      "size": 39057
-    },
-    {
-      "stem": "au-keyword-cpa-dashboard",
-      "category": "reporting",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/reporting/au-keyword-cpa-dashboard.docx",
-      "modified": "2026-04-12T14:01:50Z",
-      "size": 38415
-    },
-    {
-      "stem": "ai-automation-impact",
-      "category": "reporting",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/reporting/ai-automation-impact.docx",
-      "modified": "2026-04-12T14:01:49Z",
-      "size": 43289
-    },
-    {
-      "stem": "slack-deep-context-ideas",
-      "category": "research",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/slack-deep-context-ideas.docx",
-      "modified": "2026-04-12T14:02:09Z",
-      "size": 47327
-    },
-    {
-      "stem": "op1-ps-testing-framework-draft",
-      "category": "research",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/op1-ps-testing-framework-draft.docx",
-      "modified": "2026-04-12T14:02:08Z",
-      "size": 43973
-    },
-    {
-      "stem": "slack-deep-context-test-prompts",
-      "category": "research",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/slack-deep-context-test-prompts.docx",
-      "modified": "2026-04-12T14:02:06Z",
-      "size": 40374
-    },
-    {
-      "stem": "testing-approach-outline",
-      "category": "research",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/testing-approach-outline.docx",
-      "modified": "2026-04-12T14:02:05Z",
-      "size": 41157
-    },
-    {
-      "stem": "oci-performance",
-      "category": "research",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/oci-performance.docx",
-      "modified": "2026-04-12T14:02:04Z",
-      "size": 38679
-    },
-    {
-      "stem": "five-year-outlook-research-brief",
-      "category": "research",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/five-year-outlook-research-brief.docx",
-      "modified": "2026-04-12T14:01:56Z",
-      "size": 51637
-    },
-    {
-      "stem": "daily-brief-latest",
-      "category": "research",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/daily-brief-latest.docx",
-      "modified": "2026-04-12T14:01:55Z",
-      "size": 37705
-    },
-    {
-      "stem": "competitor-intel",
-      "category": "research",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/competitor-intel.docx",
-      "modified": "2026-04-12T14:01:54Z",
-      "size": 39257
-    },
-    {
-      "stem": "ad-copy-results",
-      "category": "research",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/research/ad-copy-results.docx",
-      "modified": "2026-04-12T14:01:52Z",
-      "size": 39349
-    },
-    {
-      "stem": "wiki-structure",
-      "category": "_meta",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/wiki-structure.docx",
-      "modified": "2026-04-12T13:58:55Z",
-      "size": 41208
-    },
-    {
-      "stem": "wiki-pipeline-rules",
-      "category": "_meta",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/wiki-pipeline-rules.docx",
-      "modified": "2026-04-12T13:58:54Z",
-      "size": 39048
-    },
-    {
-      "stem": "wiki-index",
-      "category": "_meta",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/wiki-index.docx",
-      "modified": "2026-04-12T13:58:53Z",
-      "size": 43344
-    },
-    {
-      "stem": "roadmap",
-      "category": "_meta",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/roadmap.docx",
-      "modified": "2026-04-12T13:58:52Z",
-      "size": 39071
-    },
-    {
-      "stem": "markdown-to-xwiki",
-      "category": "_meta",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/markdown-to-xwiki.docx",
-      "modified": "2026-04-12T13:58:51Z",
-      "size": 38599
-    },
-    {
-      "stem": "health-2026-04-05",
-      "category": "_meta",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/health-2026-04-05.docx",
-      "modified": "2026-04-12T13:58:50Z",
-      "size": 38120
-    },
-    {
-      "stem": "health-2026-04-04",
-      "category": "_meta",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/health-2026-04-04.docx",
-      "modified": "2026-04-12T13:58:49Z",
-      "size": 41670
-    },
-    {
-      "stem": "demand-log",
-      "category": "_meta",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/demand-log.docx",
-      "modified": "2026-04-12T13:58:47Z",
-      "size": 37008
-    },
-    {
-      "stem": "context-catalog",
-      "category": "_meta",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/context-catalog.docx",
-      "modified": "2026-04-12T13:58:46Z",
-      "size": 54697
-    },
-    {
-      "stem": "audit-2026-04-05",
-      "category": "_meta",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/audit-2026-04-05.docx",
-      "modified": "2026-04-12T13:58:45Z",
-      "size": 37525
+      "stem": "command-center",
+      "category": "AB-Paid-Acq-Dashboards",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Dashboards/command-center.xlsx",
+      "modified": "2026-04-15T02:14:13Z",
+      "size": 8381,
+      "ext": "xlsx"
+    },
+    {
+      "stem": "ps-forecast-tracker",
+      "category": "AB-Paid-Acq-Dashboards",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Dashboards/ps-forecast-tracker.xlsx",
+      "modified": "2026-04-14T04:23:27Z",
+      "size": 182828,
+      "ext": "xlsx"
+    },
+    {
+      "stem": "ps-pacing-dashboard",
+      "category": "AB-Paid-Acq-Dashboards",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Dashboards/ps-pacing-dashboard.xlsx",
+      "modified": "2026-04-11T13:50:22Z",
+      "size": 7899,
+      "ext": "xlsx"
+    },
+    {
+      "stem": "ps-testing-dashboard",
+      "category": "AB-Paid-Acq-Dashboards",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Dashboards/ps-testing-dashboard.xlsx",
+      "modified": "2026-04-11T14:00:19Z",
+      "size": 14827,
+      "ext": "xlsx"
     },
     {
       "stem": "audit-2026-04-04",
-      "category": "_meta",
-      "path": "/personal/prichwil_amazon_com/Documents/Artifacts/_meta/audit-2026-04-04.docx",
+      "category": "audit-logs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Ops/audit-logs/audit-2026-04-04.docx",
       "modified": "2026-04-12T13:58:44Z",
-      "size": 42715
+      "size": 42715,
+      "ext": "docx"
+    },
+    {
+      "stem": "audit-2026-04-05",
+      "category": "audit-logs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Ops/audit-logs/audit-2026-04-05.docx",
+      "modified": "2026-04-12T13:58:45Z",
+      "size": 37525,
+      "ext": "docx"
+    },
+    {
+      "stem": "context-catalog",
+      "category": "audit-logs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Ops/audit-logs/context-catalog.docx",
+      "modified": "2026-04-12T13:58:46Z",
+      "size": 54697,
+      "ext": "docx"
+    },
+    {
+      "stem": "demand-log",
+      "category": "audit-logs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Ops/audit-logs/demand-log.docx",
+      "modified": "2026-04-12T13:58:47Z",
+      "size": 37008,
+      "ext": "docx"
+    },
+    {
+      "stem": "fortune-text_audit",
+      "category": "audit-logs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Ops/audit-logs/Fortune-Text_Audit.xlsx",
+      "modified": "2026-04-28T20:53:08Z",
+      "size": 2638360,
+      "ext": "xlsx"
+    },
+    {
+      "stem": "health-2026-04-04",
+      "category": "audit-logs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Ops/audit-logs/health-2026-04-04.docx",
+      "modified": "2026-04-12T13:58:49Z",
+      "size": 41670,
+      "ext": "docx"
+    },
+    {
+      "stem": "health-2026-04-05",
+      "category": "audit-logs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Ops/audit-logs/health-2026-04-05.docx",
+      "modified": "2026-04-12T13:58:50Z",
+      "size": 38120,
+      "ext": "docx"
+    },
+    {
+      "stem": "markdown-to-xwiki",
+      "category": "audit-logs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Ops/audit-logs/markdown-to-xwiki.docx",
+      "modified": "2026-04-12T13:58:51Z",
+      "size": 38599,
+      "ext": "docx"
+    },
+    {
+      "stem": "roadmap",
+      "category": "audit-logs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Ops/audit-logs/roadmap.docx",
+      "modified": "2026-04-12T13:58:52Z",
+      "size": 39071,
+      "ext": "docx"
+    },
+    {
+      "stem": "state-files_prompt",
+      "category": "audit-logs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Ops/audit-logs/State-Files_Prompt.docx",
+      "modified": "2026-04-12T14:56:51Z",
+      "size": 41987,
+      "ext": "docx"
+    },
+    {
+      "stem": "wiki-index",
+      "category": "audit-logs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Ops/audit-logs/wiki-index.docx",
+      "modified": "2026-04-12T13:58:53Z",
+      "size": 43344,
+      "ext": "docx"
+    },
+    {
+      "stem": "wiki-pipeline-rules",
+      "category": "audit-logs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Ops/audit-logs/wiki-pipeline-rules.docx",
+      "modified": "2026-04-12T13:58:54Z",
+      "size": 39048,
+      "ext": "docx"
+    },
+    {
+      "stem": "wiki-structure",
+      "category": "audit-logs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Ops/audit-logs/wiki-structure.docx",
+      "modified": "2026-04-12T13:58:55Z",
+      "size": 41208,
+      "ext": "docx"
+    },
+    {
+      "stem": "ad-copy-results",
+      "category": "library/ad-copy-results",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/library/ad-copy-results/ad-copy-results.docx",
+      "modified": "2026-04-12T14:01:52Z",
+      "size": 39349,
+      "ext": "docx"
+    },
+    {
+      "stem": "competitive-landscape",
+      "category": "library/competitor-intel",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/library/competitor-intel/competitive-landscape.docx",
+      "modified": "2026-04-12T14:02:26Z",
+      "size": 41884,
+      "ext": "docx"
+    },
+    {
+      "stem": "competitor-intel",
+      "category": "library/competitor-intel",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/library/competitor-intel/competitor-intel.docx",
+      "modified": "2026-04-12T14:01:54Z",
+      "size": 39257,
+      "ext": "docx"
+    },
+    {
+      "stem": "daily-brief-latest",
+      "category": "library/daily-briefs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/library/daily-briefs/daily-brief-latest.docx",
+      "modified": "2026-04-12T14:01:55Z",
+      "size": 37705,
+      "ext": "docx"
+    },
+    {
+      "stem": "meeting-briefs-index",
+      "category": "library/meeting-briefs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/library/meeting-briefs/meeting-briefs-index.md",
+      "modified": "2026-04-12T13:03:10Z",
+      "size": 1856,
+      "ext": "md"
+    },
+    {
+      "stem": "cross-market-playbook",
+      "category": "library/research-clips",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/library/research-clips/cross-market-playbook.docx",
+      "modified": "2026-04-12T14:02:30Z",
+      "size": 38945,
+      "ext": "docx"
+    },
+    {
+      "stem": "f90-lifecycle-strategy",
+      "category": "library/research-clips",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/library/research-clips/f90-lifecycle-strategy.docx",
+      "modified": "2026-04-12T14:02:31Z",
+      "size": 41428,
+      "ext": "docx"
+    },
+    {
+      "stem": "five-year-outlook-research-brief",
+      "category": "library/research-clips",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/library/research-clips/five-year-outlook-research-brief.docx",
+      "modified": "2026-04-12T14:01:56Z",
+      "size": 51637,
+      "ext": "docx"
+    },
+    {
+      "stem": "q2-initiative-status",
+      "category": "library/research-clips",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/library/research-clips/q2-initiative-status.docx",
+      "modified": "2026-04-12T14:02:35Z",
+      "size": 40381,
+      "ext": "docx"
+    },
+    {
+      "stem": "slack-deep-context-ideas",
+      "category": "library/research-clips",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/library/research-clips/slack-deep-context-ideas.docx",
+      "modified": "2026-04-12T14:02:09Z",
+      "size": 47327,
+      "ext": "docx"
+    },
+    {
+      "stem": "slack-deep-context-test-prompts",
+      "category": "library/research-clips",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/library/research-clips/slack-deep-context-test-prompts.docx",
+      "modified": "2026-04-12T14:02:06Z",
+      "size": 40374,
+      "ext": "docx"
+    },
+    {
+      "stem": "wbr-callout-guide",
+      "category": "methodology/callouts",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/callouts/wbr-callout-guide.docx",
+      "modified": "2026-04-12T14:01:51Z",
+      "size": 39057,
+      "ext": "docx"
+    },
+    {
+      "stem": "au-handoff-rewrite",
+      "category": "methodology/handoffs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/handoffs/au-handoff-rewrite.docx",
+      "modified": "2026-04-14T19:17:54Z",
+      "size": 38018,
+      "ext": "docx"
+    },
+    {
+      "stem": "budget-forecast-helper-spec",
+      "category": "methodology/handoffs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/handoffs/budget-forecast-helper-spec.docx",
+      "modified": "2026-04-12T14:01:33Z",
+      "size": 40823,
+      "ext": "docx"
+    },
+    {
+      "stem": "campaign-link-generator-spec",
+      "category": "methodology/handoffs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/handoffs/campaign-link-generator-spec.docx",
+      "modified": "2026-04-12T14:01:34Z",
+      "size": 40608,
+      "ext": "docx"
+    },
+    {
+      "stem": "google-ads-campaign-structure",
+      "category": "methodology/handoffs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/handoffs/google-ads-campaign-structure.docx",
+      "modified": "2026-04-12T14:01:36Z",
+      "size": 38785,
+      "ext": "docx"
+    },
+    {
+      "stem": "invoice-po-process-guide",
+      "category": "methodology/handoffs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/handoffs/invoice-po-process-guide.docx",
+      "modified": "2026-04-12T14:01:36Z",
+      "size": 38970,
+      "ext": "docx"
+    },
+    {
+      "stem": "stakeholder-comms-guide",
+      "category": "methodology/handoffs",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/handoffs/stakeholder-comms-guide.docx",
+      "modified": "2026-04-12T14:01:48Z",
+      "size": 42718,
+      "ext": "docx"
+    },
+    {
+      "stem": "00-readme",
+      "category": "methodology/kiro-for-team",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/kiro-for-team/00-README.md",
+      "modified": "2026-04-28T22:22:15Z",
+      "size": 4509,
+      "ext": "md"
+    },
+    {
+      "stem": "01-kiro-environment-matrix",
+      "category": "methodology/kiro-for-team",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/kiro-for-team/01-kiro-environment-matrix.md",
+      "modified": "2026-04-27T18:19:00Z",
+      "size": 6700,
+      "ext": "md"
+    },
+    {
+      "stem": "02-kiro-no-external-write-rule",
+      "category": "methodology/kiro-for-team",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/kiro-for-team/02-kiro-no-external-write-rule.md",
+      "modified": "2026-04-27T18:19:05Z",
+      "size": 6691,
+      "ext": "md"
+    },
+    {
+      "stem": "03-kiro-steering-packages",
+      "category": "methodology/kiro-for-team",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/kiro-for-team/03-kiro-steering-packages.md",
+      "modified": "2026-04-27T18:19:09Z",
+      "size": 5237,
+      "ext": "md"
+    },
+    {
+      "stem": "04-kiro-sharepoint-protocol",
+      "category": "methodology/kiro-for-team",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/kiro-for-team/04-kiro-sharepoint-protocol.md",
+      "modified": "2026-04-28T22:50:22Z",
+      "size": 5900,
+      "ext": "md"
+    },
+    {
+      "stem": "05-kiro-slack-mcp",
+      "category": "methodology/kiro-for-team",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/kiro-for-team/05-kiro-slack-mcp.md",
+      "modified": "2026-04-27T18:19:22Z",
+      "size": 5300,
+      "ext": "md"
+    },
+    {
+      "stem": "06-kiro-outlook-mcp",
+      "category": "methodology/kiro-for-team",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/kiro-for-team/06-kiro-outlook-mcp.md",
+      "modified": "2026-04-27T18:19:26Z",
+      "size": 6039,
+      "ext": "md"
+    },
+    {
+      "stem": "07-kiro-writing-with-kiro",
+      "category": "methodology/kiro-for-team",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/kiro-for-team/07-kiro-writing-with-kiro.md",
+      "modified": "2026-04-27T18:19:30Z",
+      "size": 5537,
+      "ext": "md"
+    },
+    {
+      "stem": "08-kiro-asana-mcp",
+      "category": "methodology/kiro-for-team",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/kiro-for-team/08-kiro-asana-mcp.md",
+      "modified": "2026-04-27T18:19:39Z",
+      "size": 5254,
+      "ext": "md"
+    },
+    {
+      "stem": "09-kiro-excel-source-of-truth",
+      "category": "methodology/kiro-for-team",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/kiro-for-team/09-kiro-excel-source-of-truth.md",
+      "modified": "2026-04-28T22:50:22Z",
+      "size": 6073,
+      "ext": "md"
+    },
+    {
+      "stem": "10-kiro-team-wiki",
+      "category": "methodology/kiro-for-team",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/kiro-for-team/10-kiro-team-wiki.md",
+      "modified": "2026-04-27T18:19:48Z",
+      "size": 5360,
+      "ext": "md"
+    },
+    {
+      "stem": "11-kiro-hooks-cookbook",
+      "category": "methodology/kiro-for-team",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/kiro-for-team/11-kiro-hooks-cookbook.md",
+      "modified": "2026-04-28T22:50:22Z",
+      "size": 7012,
+      "ext": "md"
+    },
+    {
+      "stem": "12-kiro-team-orchestration",
+      "category": "methodology/kiro-for-team",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/kiro-for-team/12-kiro-team-orchestration.md",
+      "modified": "2026-04-27T18:15:05Z",
+      "size": 10587,
+      "ext": "md"
+    },
+    {
+      "stem": "ai-automation-impact",
+      "category": "methodology/reporting",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/reporting/ai-automation-impact.docx",
+      "modified": "2026-04-12T14:01:49Z",
+      "size": 43289,
+      "ext": "docx"
+    },
+    {
+      "stem": "2023-06-audience-post-mortem",
+      "category": "methodology/testing",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/testing/2023-06-audience-post-mortem.docx",
+      "modified": "2026-04-12T14:02:47Z",
+      "size": 41081,
+      "ext": "docx"
+    },
+    {
+      "stem": "ad-copy-testing-framework",
+      "category": "methodology/testing",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/testing/ad-copy-testing-framework.docx",
+      "modified": "2026-04-12T14:02:46Z",
+      "size": 41171,
+      "ext": "docx"
+    },
+    {
+      "stem": "email-overlay-ww-rollout",
+      "category": "methodology/testing",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/testing/email-overlay-ww-rollout.docx",
+      "modified": "2026-04-12T14:02:52Z",
+      "size": 41054,
+      "ext": "docx"
+    },
+    {
+      "stem": "enhanced-match-liveramp",
+      "category": "methodology/testing",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/testing/enhanced-match-liveramp.docx",
+      "modified": "2026-04-12T14:02:53Z",
+      "size": 40311,
+      "ext": "docx"
+    },
+    {
+      "stem": "landing-page-testing-playbook",
+      "category": "methodology/testing",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/testing/landing-page-testing-playbook.docx",
+      "modified": "2026-04-12T14:01:37Z",
+      "size": 38952,
+      "ext": "docx"
+    },
+    {
+      "stem": "project-baloo-overview",
+      "category": "methodology/testing",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/testing/project-baloo-overview.docx",
+      "modified": "2026-04-12T14:02:57Z",
+      "size": 41518,
+      "ext": "docx"
+    },
+    {
+      "stem": "ps-operations",
+      "category": "methodology/testing",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/testing/ps-operations.docx",
+      "modified": "2026-04-12T14:02:58Z",
+      "size": 40090,
+      "ext": "docx"
+    },
+    {
+      "stem": "ps-team-map",
+      "category": "methodology/testing",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/testing/ps-team-map.docx",
+      "modified": "2026-04-12T14:03:15Z",
+      "size": 41361,
+      "ext": "docx"
+    },
+    {
+      "stem": "ww-testing-state",
+      "category": "methodology/testing",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/methodology/testing/ww-testing-state.md",
+      "modified": "2026-04-28T22:50:22Z",
+      "size": 33147,
+      "ext": "md"
+    },
+    {
+      "stem": "aeo-ai-overviews-pov",
+      "category": "programs/aeo-ai-overviews",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/aeo-ai-overviews/aeo-ai-overviews-pov.docx",
+      "modified": "2026-04-12T14:02:15Z",
+      "size": 38934,
+      "ext": "docx"
+    },
+    {
+      "stem": "genai-search-traffic",
+      "category": "programs/aeo-ai-overviews",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/aeo-ai-overviews/genai-search-traffic.docx",
+      "modified": "2026-04-12T14:02:29Z",
+      "size": 39956,
+      "ext": "docx"
+    },
+    {
+      "stem": "agent-architecture",
+      "category": "programs/agentic-ps",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/agentic-ps/agent-architecture.docx",
+      "modified": "2026-04-12T14:02:16Z",
+      "size": 45469,
+      "ext": "docx"
+    },
+    {
+      "stem": "agentic-marketing-landscape",
+      "category": "programs/agentic-ps",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/agentic-ps/agentic-marketing-landscape.docx",
+      "modified": "2026-04-12T14:02:27Z",
+      "size": 39192,
+      "ext": "docx"
+    },
+    {
+      "stem": "agentic-ps-vision",
+      "category": "programs/agentic-ps",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/agentic-ps/agentic-ps-vision.docx",
+      "modified": "2026-04-12T14:02:24Z",
+      "size": 39603,
+      "ext": "docx"
+    },
+    {
+      "stem": "body-system-architecture",
+      "category": "programs/agentic-ps",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/agentic-ps/body-system-architecture.docx",
+      "modified": "2026-04-12T14:02:28Z",
+      "size": 39433,
+      "ext": "docx"
+    },
+    {
+      "stem": "ai-max-test-design",
+      "category": "programs/ai-max",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/ai-max/ai-max-test-design.docx",
+      "modified": "2026-04-12T14:02:50Z",
+      "size": 42529,
+      "ext": "docx"
+    },
+    {
+      "stem": "ieccp-planning-framework",
+      "category": "programs/ieccp-planning",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/ieccp-planning/ieccp-planning-framework.docx",
+      "modified": "2026-04-12T14:02:32Z",
+      "size": 44812,
+      "ext": "docx"
+    },
+    {
+      "stem": "oci-business-case",
+      "category": "programs/oci",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/oci/oci-business-case.docx",
+      "modified": "2026-04-12T14:02:34Z",
+      "size": 41178,
+      "ext": "docx"
+    },
+    {
+      "stem": "oci-execution-guide",
+      "category": "programs/oci",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/oci/oci-execution-guide.docx",
+      "modified": "2026-04-12T14:01:08Z",
+      "size": 40830,
+      "ext": "docx"
+    },
+    {
+      "stem": "oci-implementation-guide",
+      "category": "programs/oci",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/oci/oci-implementation-guide.docx",
+      "modified": "2026-04-12T14:01:11Z",
+      "size": 39361,
+      "ext": "docx"
+    },
+    {
+      "stem": "oci-methodology-knowledge-share",
+      "category": "programs/oci",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/oci/oci-methodology-knowledge-share.docx",
+      "modified": "2026-04-12T14:01:44Z",
+      "size": 38832,
+      "ext": "docx"
+    },
+    {
+      "stem": "oci-performance",
+      "category": "programs/oci",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/oci/oci-performance.docx",
+      "modified": "2026-04-12T14:02:04Z",
+      "size": 38679,
+      "ext": "docx"
+    },
+    {
+      "stem": "oci-playbook-rewrite",
+      "category": "programs/oci",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/oci/oci-playbook-rewrite.docx",
+      "modified": "2026-04-12T14:01:45Z",
+      "size": 43941,
+      "ext": "docx"
+    },
+    {
+      "stem": "oci-rollout-methodology",
+      "category": "programs/oci",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/oci/oci-rollout-methodology.docx",
+      "modified": "2026-04-12T14:02:54Z",
+      "size": 38994,
+      "ext": "docx"
+    },
+    {
+      "stem": "oci-rollout-playbook",
+      "category": "programs/oci",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/oci/oci-rollout-playbook.docx",
+      "modified": "2026-04-12T14:02:55Z",
+      "size": 43679,
+      "ext": "docx"
+    },
+    {
+      "stem": "op1-ps-testing-framework-draft",
+      "category": "programs/op1-testing-framework",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/op1-testing-framework/op1-ps-testing-framework-draft.docx",
+      "modified": "2026-04-21T21:06:21Z",
+      "size": 41508,
+      "ext": "docx"
+    },
+    {
+      "stem": "testing-appendix",
+      "category": "programs/op1-testing-framework",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/op1-testing-framework/testing-appendix.docx",
+      "modified": "2026-04-12T14:03:16Z",
+      "size": 46624,
+      "ext": "docx"
+    },
+    {
+      "stem": "testing-approach-kate-v5",
+      "category": "programs/op1-testing-framework",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/op1-testing-framework/testing-approach-kate-v5.docx",
+      "modified": "2026-04-12T14:03:06Z",
+      "size": 43405,
+      "ext": "docx"
+    },
+    {
+      "stem": "testing-approach-outline",
+      "category": "programs/op1-testing-framework",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/op1-testing-framework/testing-approach-outline.docx",
+      "modified": "2026-04-12T14:03:13Z",
+      "size": 40463,
+      "ext": "docx"
+    },
+    {
+      "stem": "testing-methodology",
+      "category": "programs/op1-testing-framework",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/op1-testing-framework/testing-methodology.docx",
+      "modified": "2026-04-12T14:03:10Z",
+      "size": 40848,
+      "ext": "docx"
+    },
+    {
+      "stem": "workstream-algorithmic-ads",
+      "category": "programs/op1-testing-framework",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/op1-testing-framework/workstream-algorithmic-ads.docx",
+      "modified": "2026-04-12T14:03:11Z",
+      "size": 40609,
+      "ext": "docx"
+    },
+    {
+      "stem": "workstream-audiences-lifecycle",
+      "category": "programs/op1-testing-framework",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/op1-testing-framework/workstream-audiences-lifecycle.docx",
+      "modified": "2026-04-12T14:03:14Z",
+      "size": 39510,
+      "ext": "docx"
+    },
+    {
+      "stem": "workstream-modern-search",
+      "category": "programs/op1-testing-framework",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/op1-testing-framework/workstream-modern-search.docx",
+      "modified": "2026-04-12T14:03:12Z",
+      "size": 40769,
+      "ext": "docx"
+    },
+    {
+      "stem": "workstream-oci-bidding",
+      "category": "programs/op1-testing-framework",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/op1-testing-framework/workstream-oci-bidding.docx",
+      "modified": "2026-04-12T14:03:10Z",
+      "size": 40807,
+      "ext": "docx"
+    },
+    {
+      "stem": "workstream-user-experience",
+      "category": "programs/op1-testing-framework",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/op1-testing-framework/workstream-user-experience.docx",
+      "modified": "2026-04-12T14:03:07Z",
+      "size": 40424,
+      "ext": "docx"
+    },
+    {
+      "stem": "workstream-user-experience-v5",
+      "category": "programs/op1-testing-framework",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/op1-testing-framework/workstream-user-experience-v5.docx",
+      "modified": "2026-04-12T14:03:17Z",
+      "size": 40422,
+      "ext": "docx"
+    },
+    {
+      "stem": "2026-04-mx-polaris-nb-lp-test",
+      "category": "programs/polaris",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/polaris/2026-04-mx-polaris-nb-lp-test.docx",
+      "modified": "2026-04-28T16:07:39Z",
+      "size": 40396,
+      "ext": "docx"
+    },
+    {
+      "stem": "2026.04_mx_polaris-nb-lp_beauty-auto",
+      "category": "programs/polaris",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/polaris/2026.04_MX_Polaris-NB-LP_Beauty-Auto.xlsx",
+      "modified": "2026-04-28T13:58:11Z",
+      "size": 748684,
+      "ext": "xlsx"
+    },
+    {
+      "stem": "polaris-rollout-status",
+      "category": "programs/polaris",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/polaris/polaris-rollout-status.docx",
+      "modified": "2026-04-12T14:01:09Z",
+      "size": 41168,
+      "ext": "docx"
+    },
+    {
+      "stem": "polaris-rollout-timeline",
+      "category": "programs/polaris",
+      "path": "/personal/prichwil_amazon_com/Documents/AB-Paid-Acq-Team/programs/polaris/polaris-rollout-timeline.docx",
+      "modified": "2026-04-12T14:01:47Z",
+      "size": 38629,
+      "ext": "docx"
     }
   ]
 }
