@@ -1260,13 +1260,20 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
 /* WR-A10 (2026-04-30): scrub-the-chart interaction. When hovering the
    trend chart, a small overlay badge above the page signals that KPIs,
    three-question cards and variance table are showing values for the
-   hovered week, not the selected week. Released on mouseleave. */
+   hovered week, not the selected week. Released on mouseleave.
+
+   #52 (2026-05-01): overlay slides in from top-right (was top-center).
+   Coordinated with the existing sticky header and the variance panel's
+   action buttons — top-right leaves the sticky header's market axis
+   unobstructed. Shift+hover pins the scrub state so the reader can move
+   their mouse off the chart to read the updated narrative/variance/
+   three-Q without losing the hovered week. Escape or a non-shift hover
+   elsewhere on the chart unpins. */
 .wr-scrub-indicator {
   display: none;
   position: fixed;
-  top: 8px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 72px;  /* below the sticky header */
+  right: 16px;
   background: rgba(0, 102, 204, 0.95);
   color: #FFFFFF;
   padding: 4px 14px;
@@ -1277,8 +1284,20 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
   z-index: 1000;
   pointer-events: none;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transform: translateX(120%);
+  transition: transform 180ms cubic-bezier(0.2, 0, 0, 1), opacity 120ms ease;
+  opacity: 0;
 }
-.wr-scrub-indicator.active { display: block; }
+.wr-scrub-indicator.active {
+  display: block;
+  transform: translateX(0);
+  opacity: 1;
+}
+.wr-scrub-indicator.pinned {
+  background: rgba(212, 132, 30, 0.95);  /* amber — pinned signals lock */
+  pointer-events: auto;  /* allow click to unpin */
+  cursor: pointer;
+}
 body.wr-scrubbing .wr-since-last-week,
 body.wr-scrubbing .wr-three-q,
 body.wr-scrubbing #sec-variance,
@@ -1297,11 +1316,34 @@ body.wr-arch-spend .wr-scorecard-panel {
   background: linear-gradient(to bottom, #FFFCF3 0%, var(--color-panel-bg) 40%);
 }
 body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
-  content: "\1F4B0  ";  /* money bag */
-  font-size: 14px;
+  /* Spend-archetype marker. Was a money-bag glyph (WR-A11); removed
+     2026-05-01 per Richard's no-emoji directive. Amber border + cream
+     background already signal the archetype visually. */
+  content: "";
 }
 /* Rollup variance hiding is handled JS-side in renderVariance (already
    short-circuits when channel deltas are empty); no CSS needed. */
+
+/* #54 (2026-05-01): forecast hit-rate dot row. Unit-chart (Storytelling
+   with data, 2021) rendering of the 6 last graded weeks. Filled = inside
+   CI, hollow = outside. Sits in the In-CI rate tile alongside the
+   "inCi / total" count so both numeric and pattern readings are present. */
+.wr-dotrow {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  margin-top: 6px;
+}
+.wr-dotrow-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-brand, #0066cc);
+  box-sizing: border-box;
+  display: inline-block;
+}
+.wr-dotrow-dot.filled { background: var(--color-brand, #0066cc); }
+.wr-dotrow-dot.hollow { background: transparent; }
 
 /* WR-A9 (2026-04-30): forecast aging / drift strip inside the scorecard
    panel. Each bar pair shows per-week first-prediction vs latest-prediction.
@@ -3662,6 +3704,26 @@ function buildSignedErrorBars(recent) {
 // Renders the 4-panel scorecard once predictions_history has loaded and
 // are available for curMarket. Pulls directly from forecast-data.json's
 // predictions_history payload — no new data plumbing required.
+// #54 (2026-05-01): forecast hit-rate dot row. Six dots, oldest→newest,
+// filled = inside CI, hollow = outside. Unit-chart style (Storytelling
+// with data, 2021; GitHub contribution graph as reference). Lets the
+// reader read the pattern of misses (beginning-of-window vs recent)
+// without parsing the numeric "inCi / total" label. Skips weeks where
+// in_ci is null (no CI data to grade).
+function renderHitRateDotRow(recent) {
+  const graded = recent.filter(r => r.in_ci != null);
+  // Take up to the last 6 graded weeks, oldest-on-left.
+  const last6 = graded.slice(-6);
+  if (!last6.length) return '';
+  const dots = last6.map(r => {
+    const filled = r.in_ci === true;
+    const cls = filled ? 'filled' : 'hollow';
+    const title = `W${r.wk}: ${filled ? 'inside CI' : 'outside CI'}${r.latest_err != null ? ` (${r.latest_err > 0 ? '+' : ''}${r.latest_err.toFixed(1)}%)` : ''}`;
+    return `<span class="wr-dotrow-dot ${cls}" title="${title}" aria-label="${title}"></span>`;
+  }).join('');
+  return `<div class="wr-dotrow" role="group" aria-label="Forecast hit pattern, last ${last6.length} graded weeks">${dots}</div>`;
+}
+
 function renderScorecard() {
   const panel = document.getElementById('sec-scorecard');
   const row = document.getElementById('scorecardRow');
@@ -3814,6 +3876,7 @@ function renderScorecard() {
             : inCiPct >= 80 ? `${inCiPct.toFixed(0)}% — on target (80%+)`
             : `${inCiPct.toFixed(0)}% — target 80%+`
         }</div>
+        ${total > 0 ? renderHitRateDotRow(recent) : ''}
       </div>
       <div class="wr-score-tile" title="Skill vs naive baseline (drift-1): 1 - MAE_model / MAE_naive. Positive = model beats 'next week = this week'.">
         <div class="wr-score-label">Skill vs naive</div>
@@ -4010,10 +4073,17 @@ function updateStickyLabels() {
   if (mkEl) mkEl.textContent = curMarket || '\u2014';
   if (wkEl) wkEl.textContent = curWeek || '\u2014';
 }
+// WR-A10 (2026-04-30): wire chart scrub interaction. Bind mousemove +
 // mouseleave to the trend chart canvas. On move, compute the hovered
 // week from Chart.js's intersect-mode element detection, set scrubWeek,
 // re-render only the four scrub-targeted panels. On leave, clear
 // scrubWeek and re-render.
+//
+// #52 (2026-05-01): Shift+hover pins the scrub state. When pinned, the
+// reader can move their mouse off the chart to read the updated narrative
+// without losing the hovered week. Clicking the indicator or hitting
+// Escape unpins.
+let scrubPinned = false;
 function wireChartScrub() {
   const canvas = document.getElementById('trendChart');
   if (!canvas || !trendChart) return;
@@ -4036,21 +4106,44 @@ function wireChartScrub() {
     return match ? match[0] : null;
   };
 
+  const unpinScrub = () => {
+    if (!scrubPinned) return;
+    scrubPinned = false;
+    if (indicator) indicator.classList.remove('pinned');
+    // Return to selected week.
+    scrubWeek = null;
+    document.body.classList.remove('wr-scrubbing');
+    if (indicator) indicator.classList.remove('active');
+    renderCalloutNarrative();
+    renderThreeQ();
+    renderVariance();
+  };
+
   const onMove = (evt) => {
+    // When pinned, ignore hover moves unless user re-engages with Shift.
+    if (scrubPinned && !evt.shiftKey) return;
     const wk = resolveWeekFromEvent(evt);
     if (!wk) return;
     // Skip if user is hovering the selected week (no scrub needed).
-    if (wk === curWeek && !scrubWeek) return;
+    if (wk === curWeek && !scrubWeek && !scrubPinned) return;
     // Only scrub to weeks that have callout data; otherwise the
     // downstream renderers paint "No callout" and the effect looks broken.
     const hasCallout = ((CALLOUTS.callouts[curMarket] || {})[wk]);
     if (!hasCallout) return;
-    if (wk === scrubWeek) return;  // same week, no re-render
+    // Shift+hover → pin to this week. Repeat shift+hover on a different
+    // week re-pins. Non-shift hover while pinned is already bounced above.
+    const wantPin = !!evt.shiftKey;
+    if (wk === scrubWeek && scrubPinned === wantPin) return;  // no change
     scrubWeek = wk;
+    scrubPinned = wantPin;
     document.body.classList.add('wr-scrubbing');
     if (indicator) {
       indicator.classList.add('active');
-      indicator.textContent = `Scrub \u2192 ${wk} (release to return to ${curWeek})`;
+      indicator.classList.toggle('pinned', scrubPinned);
+      const instr = scrubPinned
+        ? `Pinned \u2192 ${wk} (click or Esc to unpin)`
+        : `Scrub \u2192 ${wk} (Shift+hover to pin)`;
+      indicator.textContent = instr;
     }
     // Re-render only the four scrub-targeted panels.
     renderCalloutNarrative();
@@ -4059,6 +4152,8 @@ function wireChartScrub() {
   };
 
   const onLeave = () => {
+    // Pinned scrubs survive mouseleave — that's the whole point of pinning.
+    if (scrubPinned) return;
     if (!scrubWeek) return;
     scrubWeek = null;
     document.body.classList.remove('wr-scrubbing');
@@ -4070,6 +4165,13 @@ function wireChartScrub() {
 
   canvas.addEventListener('mousemove', onMove);
   canvas.addEventListener('mouseleave', onLeave);
+  // Unpin interactions: click the indicator, or Escape.
+  if (indicator) {
+    indicator.addEventListener('click', unpinScrub);
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && scrubPinned) unpinScrub();
+  });
 }
 
 // WR-A11 (2026-04-30): specialized layouts per market archetype.
