@@ -567,3 +567,25 @@ Execute top-to-bottom within each phase. When a finding is blocked, mark the
 reason in-place and move to the next. Never silently skip.
 
 **Current next-up:** Phase 5 R19 sprint complete. 12 of 13 findings shipped across commits 91225c0 / 960f581 / 138e288 / 18192c7 / 975e6a3 / be3fc20 / 5437006 / ff49a21 / 0e9b2a3 / f819924 / 782a79b. P5-11 BLOCKED pending `confidence_history` data pipeline extension. Full MPE Projection Engine backlog now: Phase 1-3 done (49), Phase 4 minimal shipped (989f62b), Phase 5 12/13 shipped, P5-11 blocked.
+
+
+---
+
+## Research-report cross-reference (2026-05-02, Path B commit 5 hygiene)
+
+MPE-facing items from the research reports that get resolution here. Cross-references
+to bus posts + commits so future sessions don't re-raise resolved items.
+
+| # | Title | Decision | Source |
+|---|-------|----------|--------|
+| #076 | Model drawer provenance tab | **pipeline shipped** in commit `1db618b`: `_build_provenance()` helper in `mpe_engine.py` emits 16 tile keys with `{sql_or_fn, source_file, fit_call, last_computed}`. Wired at both market + regional-rollup return paths. Regional tiles overwrite `source_file` to `_project_region` and `sql_or_fn` to a SUM-across-constituents description. | kiro-local 015 spec → kiro-server 017 ship |
+| P5-11 | Confidence timeline sparkline (previously BLOCKED) | **pipeline shipped** in commit `1db618b`: `_snapshot_and_fetch_confidence_history()` in `export-projection-data.py`. Storage at `dashboards/data/confidence-history.duckdb` (local DuckDB, not `ps_analytics` which is read-only from export connection). Idempotent per (market, snapshot_date). First run populated 8/10 markets; JP+AU empty by design (spend-branch produces no bootstrap CI). UI renders "collecting data" placeholder until 7+ snapshots accumulate. | kiro-server 017 |
+
+### Open MPE-side queue
+
+Nothing queued from the Path B directive. Next MPE work:
+- Monitor the `confidence-history.duckdb` grow cadence — after ~7 weekly exports
+  the sparkline activates on 8/10 markets. Zero additional pipeline work required.
+- Engine-side hooks for any UI regression kiro-local flags on pull of `1db618b`.
+- Regime-segmented seasonality (flagged in the 2026-04-23 "Honest accounting" probe
+  as the real open architectural gap) — not triggered by any ship prompt yet.

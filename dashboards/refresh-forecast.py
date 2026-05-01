@@ -900,6 +900,81 @@ def main():
                 yoy_annotated += 1
     print(f"YoY annotation: {yoy_annotated} weekly rows carry populated yoy_regs_pct")
 
+    # Research report commit 3 — WR pipeline expansions (Path B).
+    # Three new top-level fields added to forecast-data.json so the weekly-review
+    # dashboard can render ghost-line LY overlays, cross-market WoW strips, and
+    # shorter-window rolling views without rejoining data client-side.
+
+    # (1) ly_weekly_by_market[market][week_key] = {regs, cost, cpa}
+    # Dict-of-dicts keyed by market then by an ISO-like "2026-Wnn" string.
+    # Different shape from the existing ly_weekly[market] array (which uses wk
+    # numeric index). Keys present for every market; inner dict carries only
+    # weeks where the LY row is non-zero — consumers treat missing keys as null.
+    ly_weekly_by_market: dict = {}
+    for mk in markets:
+        per_market: dict = {}
+        for r in ly_weekly.get(mk, []):
+            wk = r.get("wk")
+            if wk is None or wk < 1:
+                continue  # skip negative-wk gap rows that don't map to a current-year WNN
+            regs = r.get("regs")
+            cost = r.get("cost")
+            cpa = r.get("cpa")
+            if not regs and not cost:
+                continue  # empty row — consumer treats as null
+            per_market[f"W{wk}"] = {
+                "regs": regs,
+                "cost": cost,
+                "cpa": cpa,
+            }
+        ly_weekly_by_market[mk] = per_market
+
+    # (2) wow_delta_by_market[market] = {regs_pct, cost_pct, cpa_pct}
+    # Signed % delta on the latest-actual vs prior-actual weekly row. The
+    # weekly[market] array is 52 entries long with future-week slots zeroed,
+    # so "latest" means the last row where regs > 0 OR cost > 0 — not the
+    # last array element. Null when <2 non-zero rows or prior value is zero.
+    wow_delta_by_market: dict = {}
+    for mk in markets:
+        rows = weekly.get(mk, [])
+        # Filter to rows with any actual data, in order.
+        actual_rows = [r for r in rows if (r.get("regs") or 0) > 0 or (r.get("cost") or 0) > 0]
+        if len(actual_rows) < 2:
+            wow_delta_by_market[mk] = {"regs_pct": None, "cost_pct": None, "cpa_pct": None}
+            continue
+        latest, prev = actual_rows[-1], actual_rows[-2]
+        wow_delta_by_market[mk] = {
+            "regs_pct": _pct_delta(latest.get("regs"), prev.get("regs")),
+            "cost_pct": _pct_delta(latest.get("cost"), prev.get("cost")),
+            "cpa_pct":  _pct_delta(latest.get("cpa"),  prev.get("cpa")),
+        }
+
+    # (3) rolling_13w[market] = [{week, regs, cost, cpa}]
+    # Last 13 weekly rows per market with any actual data, ordered oldest-first
+    # so a sparkline renders left-to-right naturally. Empty array when the
+    # market has no weekly data. Complements the existing 26-week weekly[market]
+    # slice — this is a shorter-window view for KPI tiles and cross-market
+    # compares.
+    rolling_13w: dict = {}
+    for mk in markets:
+        rows = weekly.get(mk, [])
+        actual_rows = [r for r in rows if (r.get("regs") or 0) > 0 or (r.get("cost") or 0) > 0]
+        tail = actual_rows[-13:] if len(actual_rows) > 13 else list(actual_rows)
+        rolling_13w[mk] = [
+            {
+                "week": r.get("week"),
+                "wk": r.get("wk"),
+                "regs": r.get("regs"),
+                "cost": r.get("cost"),
+                "cpa": r.get("cpa"),
+            }
+            for r in tail
+        ]
+
+    print(f"WR pipeline: ly_weekly_by_market {sum(len(v) for v in ly_weekly_by_market.values())} market-weeks, "
+          f"wow_delta_by_market {sum(1 for v in wow_delta_by_market.values() if v.get('regs_pct') is not None)}/{len(wow_delta_by_market)} markets populated, "
+          f"rolling_13w {sum(len(v) for v in rolling_13w.values())} rows across {len(rolling_13w)} markets")
+
     output = {
         "generated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "last_data_date": last_data_date,
@@ -912,6 +987,10 @@ def main():
         "yearly": yearly,
         "markets": markets,
         "predictions_history": predictions_history,
+        # Commit 3 (Path B): WR pipeline expansions
+        "ly_weekly_by_market": ly_weekly_by_market,
+        "wow_delta_by_market": wow_delta_by_market,
+        "rolling_13w": rolling_13w,
     }
 
     os.makedirs(os.path.dirname(JSON_PATH), exist_ok=True)
