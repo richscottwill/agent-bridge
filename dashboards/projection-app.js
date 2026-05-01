@@ -2400,6 +2400,12 @@
       p.set('driver', currentDriver() || 'ieccp');
       const tv = currentTargetValue();
       if (tv != null && Number.isFinite(tv)) p.set('target', String(tv));
+      // #069 (2026-04-30): extend URL state to include regime multiplier + scenario override
+      // so shared links reproduce the full user-visible state. Previous URL state was scope/period/
+      // driver/target only; adding these two covers the remaining knobs exposed in controls.
+      const rm = STATE && typeof STATE.regimeMultiplier === 'number' ? STATE.regimeMultiplier : 1.0;
+      if (Math.abs(rm - 1.0) > 1e-6) p.set('regime', rm.toFixed(2));
+      if (STATE && STATE.scenarioOverride) p.set('scenario', String(STATE.scenarioOverride));
       // Keep URL clean — only write when something actually differs from
       // current querystring, avoids spurious history entries on every keystroke.
       const next = p.toString();
@@ -2416,6 +2422,8 @@
       const period = p.get('period');
       const driver = p.get('driver');
       const target = p.get('target');
+      const regime = p.get('regime');
+      const scenario = p.get('scenario');
       if (scope) {
         const el = document.getElementById('scope-select');
         if (el && [...el.options].some(o => o.value === scope)) el.value = scope;
@@ -2438,6 +2446,18 @@
       if (target && Number.isFinite(parseFloat(target))) {
         const el = document.getElementById('target-input');
         if (el) el.value = target;
+      }
+      // #069: restore regime multiplier + scenario from URL
+      if (regime != null && Number.isFinite(parseFloat(regime))) {
+        const rm = Math.max(0, Math.min(2, parseFloat(regime)));
+        STATE.regimeMultiplier = rm;
+        const slider = document.getElementById('regime-slider');
+        if (slider) slider.value = String(rm);
+        const val = document.getElementById('regime-slider-val');
+        if (val) val.textContent = rm.toFixed(2) + '×';
+      }
+      if (scenario) {
+        STATE.scenarioOverride = scenario;
       }
     } catch (e) { /* URL parse failure — fall through to defaults */ }
   }
@@ -3421,6 +3441,8 @@
       STATE.regimeMultiplier = parseFloat(e.target.value);
       document.getElementById('regime-slider-val').textContent = STATE.regimeMultiplier.toFixed(2) + '×';
       document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      // #069 (2026-04-30): slider is state too — keep URL in sync so shared links reproduce it.
+      if (typeof syncUrlFromState === 'function') syncUrlFromState();
       clearTimeout(recomputeTimer);
       recomputeTimer = setTimeout(() => recompute({ animated: false }), 250);
     });

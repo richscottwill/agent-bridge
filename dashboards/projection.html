@@ -292,8 +292,19 @@ details.sec-panel:not([open]) + details.sec-panel {
     </div>
     <div class="control-group">
       <label for="regime-slider" class="control-label">Lift multiplier</label>
-      <input type="range" id="regime-slider" class="control-input" min="0" max="2" value="1" step="0.05" style="padding:2px" aria-label="Campaign lift multiplier from 0 to 2 times">
-      <span id="regime-slider-val" class="mono" style="font-size:11px;color:var(--color-text-meta);text-align:center" aria-live="polite">1.00×</span>
+      <!-- #072 (2026-04-30): ticks at 0.5/1.0/1.5/2.0 + datalist for browser notch rendering. Value bubble promoted to a visible
+           badge next to the slider so sub-0.05 changes are readable. -->
+      <input type="range" id="regime-slider" class="control-input" min="0" max="2" value="1" step="0.05" list="regime-slider-ticks" style="padding:2px" aria-label="Campaign lift multiplier from 0 to 2 times">
+      <datalist id="regime-slider-ticks">
+        <option value="0.5" label="0.5×"></option>
+        <option value="1.0" label="1.0×"></option>
+        <option value="1.5" label="1.5×"></option>
+        <option value="2.0" label="2.0×"></option>
+      </datalist>
+      <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--color-text-subtle);font-family:var(--font-mono);padding:0 2px;letter-spacing:0.04em">
+        <span>0</span><span>0.5</span><span>1.0</span><span>1.5</span><span>2.0×</span>
+      </div>
+      <span id="regime-slider-val" class="mono" style="font-size:12px;font-weight:700;color:var(--color-text-hero);background:rgba(0,102,204,0.08);border:1px solid rgba(0,102,204,0.18);border-radius:4px;padding:2px 6px;text-align:center;display:inline-block;min-width:48px;margin-top:2px" aria-live="polite">1.00×</span>
     </div>
     <div class="control-group" style="flex:1;min-width:auto;justify-content:flex-end;flex-direction:row;align-items:flex-end;gap:6px">
       <button id="btn-save" class="disclosure-btn" title="Save this scenario to your local list">Save</button>
@@ -408,6 +419,20 @@ details.sec-panel:not([open]) + details.sec-panel {
     </div>
   </div>
 
+  <!-- #071 (2026-04-30): Alerts panel moved above decomposition per research #071
+       — the page's most actionable signal (trust recommendation, suggested scenario
+       switch, regime divergences) shouldn't be 1,800 px down. Put it right under the
+       chart where it's seen. Hidden by default; renderMarketAnomalies un-hides when
+       there are alerts to show.
+       P5-2 (2026-04-28): renamed from "Model alerts" to "Alerts" and now
+       merges solver warnings in as info-severity rows. The legacy
+       standalone "Warnings" sec-panel below is hidden by renderWarnings
+       on first render. -->
+  <div class="sec-panel" id="anomalies-panel" style="display:none;margin-top:var(--gap-lg);border-color:#F2A4A4">
+    <h3>Alerts <span id="anomalies-count" style="font-weight:400;color:var(--color-text-subtle)"></span></h3>
+    <ul id="anomalies-list"></ul>
+  </div>
+
   <!-- P2-04: 3-panel Prophet-style decomposition (Trend / Seasonality / Campaign lifts) -->
   <details class="sec-panel" id="decomposition-panel" style="margin-top:var(--gap-lg)">
     <summary style="cursor:pointer;font-weight:600;font-size:var(--size-meta);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.08em">Decomposition (trend · seasonality · campaign lifts)</summary>
@@ -445,16 +470,6 @@ details.sec-panel:not([open]) + details.sec-panel {
     <div class="nb-bar" id="nb-bar">
       <div class="nb-segment" id="nb-segment">—</div>
     </div>
-  </div>
-
-  <!-- Anomalies panel (Phase 4.1 + 6.5.3) — per-market scanner findings.
-       P5-2 (2026-04-28): renamed from "Model alerts" to "Alerts" and now
-       merges solver warnings in as info-severity rows. The legacy
-       standalone "Warnings" sec-panel below is hidden by renderWarnings
-       on first render. -->
-  <div class="sec-panel" id="anomalies-panel" style="display:none;margin-top:var(--gap-lg);border-color:#F2A4A4">
-    <h3>Alerts <span id="anomalies-count" style="font-weight:400;color:var(--color-text-subtle)"></span></h3>
-    <ul id="anomalies-list"></ul>
   </div>
 
   <!-- Secondary panels (warnings, constituents for regional, saved) -->
