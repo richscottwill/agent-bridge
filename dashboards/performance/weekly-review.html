@@ -815,6 +815,32 @@ body {
    surfaced per render — extracted from exception severity, context
    paragraphs, or scorecard state with graceful hide when nothing
    actionable surfaces. */
+/* #65 (2026-05-01): rewrite-for-{Kate,Brandon} menu under the callout
+   headline. Quiet utility buttons; output panel uses accent-colored
+   left border keyed to the reviewer (Kate=violet, Brandon=brand-blue). */
+.wr-rewrite-menu {
+  display: flex;
+  gap: 6px;
+  margin: 6px 0;
+}
+.wr-rewrite-btn {
+  background: transparent;
+  border: 1px solid var(--color-panel-border);
+  color: var(--color-text-subtle);
+  font-family: inherit;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+.wr-rewrite-btn:hover {
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+  background: rgba(0, 102, 204, 0.04);
+}
+.wr-rewrite-output { margin-bottom: 8px; }
+
 .wr-hardest-thing {
   margin-top: var(--gap-sm);
   padding: 10px 14px;
@@ -3014,6 +3040,11 @@ function renderCalloutNarrative() {
     '<div class="wr-callout-meta">' + curMarket + ' &middot; ' + rw +
       (c.period ? ' &middot; ' + c.period : '') + stateBadge + '</div>' +
     '<p class="wr-callout-headline" role="text">' + h3Content + '</p>' +
+    // #65 (2026-05-01): inline rewrite-for-Kate / rewrite-for-Brandon
+    // buttons. Deterministic reframing keyed to the lens-*.md steering
+    // file patterns — no LLM; no subagent call. Reframes headline+WoW
+    // via template substitution.
+    renderRewriteMenu(c, rw) +
     (bodyHtml ? '<div class="wr-callout-narrative">' + bodyHtml + '</div>' : '') +
     renderHardestThingCard(c, rw) +
     '</div>';
@@ -3174,6 +3205,101 @@ function renderHardestThingHtml(action, rationale, anchor) {
       '<div class="wr-hardest-thing-rationale">' + rationale + '</div>' +
     '</div>'
   );
+}
+
+// #65 (2026-05-01): rewrite-for-Kate / rewrite-for-Brandon — deterministic
+// reframing keyed to lens-kate.md / lens-brandon.md patterns. No LLM; no
+// subagent call. Click either button → renders the callout headline +
+// primary WoW signal through that reviewer's frame as a small inline
+// block. Idempotent — second click removes the rewrite. Source frames:
+//   Kate    (L8): customer-experience first, escalation-story, trust-status
+//   Brandon (L7): operational lens, action, owner
+function renderRewriteMenu(callout, weekLabel) {
+  return (
+    '<div class="wr-rewrite-menu" aria-label="Rewrite headline for a specific reader">' +
+      '<button class="wr-rewrite-btn" onclick="toggleRewrite(\'kate\')" title="Reframe headline through Kate\'s (L8 director) lens: customer experience, escalation story, trust status">Rewrite for Kate</button>' +
+      '<button class="wr-rewrite-btn" onclick="toggleRewrite(\'brandon\')" title="Reframe headline through Brandon\'s (L7 manager) lens: operational action, owner, unblock">Rewrite for Brandon</button>' +
+    '</div>' +
+    '<div class="wr-rewrite-output" id="wrRewriteOutput" style="display:none"></div>'
+  );
+}
+
+function toggleRewrite(who) {
+  const out = document.getElementById('wrRewriteOutput');
+  if (!out) return;
+  if (out.dataset.active === who) {
+    out.style.display = 'none';
+    out.innerHTML = '';
+    out.dataset.active = '';
+    return;
+  }
+  const c = (CALLOUTS.callouts[curMarket] || {})[curWeek] || {};
+  const m = c.metrics || {};
+  const brand = c.brand_detail || {};
+  const nb = c.nb_detail || {};
+  const regs = m.regs;
+  const regsWow = m.regs_wow;
+  const cpa = m.cpa;
+  const cpaWow = m.cpa_wow;
+  const yoyRegs = m.regs_yoy;
+  const hist = (FORECAST.predictions_history && FORECAST.predictions_history[curMarket]) || {};
+  const maxWk = FORECAST.max_week || 15;
+  // Trust status from last 6 weeks of CI coverage.
+  let hits = 0, total = 0, meanErr = null;
+  let errSum = 0, errCount = 0;
+  for (let w = Math.max(1, maxWk - 5); w <= maxWk; w++) {
+    const r = (hist[String(w)] || hist[w] || {}).regs || {};
+    if (r.actual != null && r.latest_ci_lo != null && r.latest_ci_hi != null) {
+      total++;
+      if (r.actual >= r.latest_ci_lo && r.actual <= r.latest_ci_hi) hits++;
+    }
+    if (Number.isFinite(r.error_pct)) { errSum += r.error_pct; errCount++; }
+  }
+  meanErr = errCount > 0 ? errSum / errCount : null;
+  const trustStatus = total >= 3
+    ? (hits / total >= 0.8 ? 'trusted' : hits / total >= 0.5 ? 'middling' : 'low-confidence')
+    : 'insufficient-history';
+  const stakeholders = (CALLOUTS.stakeholders && CALLOUTS.stakeholders[curMarket]) || {};
+  const owner = stakeholders.owner || stakeholders.primary || 'team lead';
+  // Hardest-thing extraction — re-run the same priority cascade as the
+  // dedicated card so both pieces stay in sync.
+  const maxAbs = Math.max(Math.abs((errCount ? (hist[String(maxWk)] || hist[maxWk] || {}).regs?.error_pct : 0) || 0), Math.abs(meanErr || 0));
+  let action;
+  if (maxAbs > 25) action = 'escalate (draft Brandon note — miss > 25%)';
+  else if (maxAbs > 15) action = 'open investigation (miss 15-25%)';
+  else if (regsWow != null && regsWow < -5) action = 'triage regs shortfall';
+  else action = 'maintain weekly cadence';
+  const fmtPct = (v) => (v == null || !Number.isFinite(v)) ? '\u2014' : (v > 0 ? '+' : '') + v.toFixed(1) + '%';
+  const fmtNum = (v) => (v == null || !Number.isFinite(v)) ? '\u2014' : Math.round(v).toLocaleString();
+  let prose;
+  if (who === 'kate') {
+    // Customer-experience first, trust status, escalation watch
+    prose =
+      `Customer-experience lens — ${curMarket} delivered ${fmtNum(regs)} registrations ${fmtPct(regsWow)} WoW ` +
+      `at ${(cpa != null ? '$' + Math.round(cpa) : '\u2014')} CPA. ` +
+      `Model is ${trustStatus === 'trusted' ? 'well-calibrated' : trustStatus === 'middling' ? 'middling on trust' : trustStatus === 'low-confidence' ? 'off its recent track' : 'not yet scored'} ` +
+      (total > 0 ? `(${hits}/${total} weeks inside CI). ` : '. ') +
+      `Escalation watch: ${maxAbs > 15 ? curMarket + ' ' + weekLabel + ' ' + action + ' — ' + owner + ' owns' : 'none this week'}.` +
+      (yoyRegs != null ? ` YoY: ${fmtPct(yoyRegs)}.` : '');
+  } else {
+    // Operational lens, action, owner
+    prose =
+      `Operational lens — ${curMarket} ${weekLabel}: ${fmtNum(regs)} regs (${fmtPct(regsWow)} WoW). ` +
+      `Action this week: ${action}. ` +
+      `Owner: ${owner}. ` +
+      (maxAbs > 15 ? `Unblock signal: forecast ${maxAbs > 25 ? 'materially off' : 'drifting'} (${meanErr != null ? fmtPct(meanErr) + ' mean err' : 'see scorecard'}).` : 'Cadence on track.') +
+      (cpaWow != null && Math.abs(cpaWow) > 10 ? ` CPA shift: ${fmtPct(cpaWow)}.` : '');
+  }
+  out.style.display = 'block';
+  out.dataset.active = who;
+  const label = who === 'kate' ? 'Kate (L8 director)' : 'Brandon (L7 manager)';
+  const accent = who === 'kate' ? '#6A4FBD' : '#0066CC';
+  out.innerHTML =
+    '<div style="border-left:3px solid ' + accent + ';padding:8px 12px;background:rgba(0,0,0,0.02);border-radius:3px;font-size:13px;line-height:1.6;color:var(--color-text-body)">' +
+      '<div style="font-family:var(--font-mono,ui-monospace,monospace);font-size:10px;color:' + accent + ';text-transform:uppercase;letter-spacing:0.05em;font-weight:600;margin-bottom:4px">Rewritten for ' + label + '</div>' +
+      prose +
+      '<button onclick="navigator.clipboard && navigator.clipboard.writeText(document.getElementById(\'wrRewriteOutput\').innerText.split(\'Rewritten for\')[1]?.split(\'\\n\').slice(1).join(\' \').trim())" style="margin-top:8px;background:transparent;border:1px solid var(--color-panel-border);color:var(--color-text-subtle);font-size:10px;padding:2px 8px;border-radius:2px;cursor:pointer;font-family:inherit">Copy</button>' +
+    '</div>';
 }
 
 // M2 (2026-04-30): Exception banner. Renders below the narrative when the
