@@ -815,6 +815,10 @@ body {
   line-height: 1.4;
 }
 
+/* #97 (2026-05-01): inline prose sparklines next to Wxx references. */
+.wr-inline-spark-wrap { white-space: nowrap; }
+.wr-inline-spark { display: inline-block; vertical-align: baseline; }
+
 /* #60 (2026-05-01): week-grid popover. 52 squares (W1-W52) colored by
    forecast-trust for the current market. Click to jump. */
 .wr-week-grid {
@@ -1401,8 +1405,7 @@ details.sec-panel.wr-collapsible > .wr-table-scroll {
 }
 .wr-callout-narrative {
   font-size: var(--size-body);
-  line-height: 1.7;
-  color: var(--color-text-body);
+  line-height: 1.7;  color: var(--color-text-body);
 }
 
 /* Chart mode toggle — secondary disclosure-btn styled for weekly review */
@@ -2033,6 +2036,20 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
 <details class="sec-panel" id="sec-calheatmap" style="margin-top:var(--gap-md)">
   <summary style="cursor:pointer;font-weight:600;font-size:var(--size-meta);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.08em">Calendar heatmap — this year's daily rhythm (current market)</summary>
   <div id="calHeatmapBody" style="margin-top:var(--gap-sm)"></div>
+</details>
+<!-- #89 + #90 + #92 + #97 (2026-05-01): experimental single-market visualizations.
+     All collapsed by default; lazy-render on open. -->
+<details class="sec-panel" id="sec-waffle" style="margin-top:var(--gap-md)">
+  <summary style="cursor:pointer;font-weight:600;font-size:var(--size-meta);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.08em">Channel mix waffle — Brand vs NB share of YTD regs</summary>
+  <div id="waffleBody" style="margin-top:var(--gap-sm)"></div>
+</details>
+<details class="sec-panel" id="sec-slope" style="margin-top:var(--gap-md)">
+  <summary style="cursor:pointer;font-weight:600;font-size:var(--size-meta);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.08em">Slope chart — Brand vs NB week-over-week rank change</summary>
+  <div id="slopeBody" style="margin-top:var(--gap-sm)"></div>
+</details>
+<details class="sec-panel" id="sec-strip" style="margin-top:var(--gap-md)">
+  <summary style="cursor:pointer;font-weight:600;font-size:var(--size-meta);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.08em">Strip plot — per-week forecast error dots across markets</summary>
+  <div id="stripBody" style="margin-top:var(--gap-sm)"></div>
 </details>
 
 </main>
@@ -2816,6 +2833,81 @@ function renderCalloutNarrative() {
     (bodyHtml ? '<div class="wr-callout-narrative">' + bodyHtml + '</div>' : '') +
     renderHardestThingCard(c, rw) +
     '</div>';
+  // #97 (2026-05-01): post-process the narrative prose to decorate
+  // references like "W17" with inline 40×12 sparklines of the 6 weeks
+  // ending at that week. Tufte-style word-sized graphics — turns a
+  // paragraph of numbers into claims visually anchored to their data.
+  decorateNarrativeSparklines();
+}
+
+// #97 (2026-05-01): walks the narrative text, finds "W\d+" tokens, and
+// wraps each with a tiny regs-sparkline for the last 6 weeks ending at
+// that referenced week. Skips tokens inside existing spans so it's
+// idempotent across re-renders. No-op when predictions/weekly data is
+// unavailable.
+function decorateNarrativeSparklines() {
+  if (!FORECAST || !FORECAST.weekly) return;
+  const narrative = document.querySelector('#sec-callout .wr-callout-narrative');
+  if (!narrative) return;
+  const weekly = FORECAST.weekly[curMarket] || [];
+  if (!weekly.length) return;
+  // Regex: match "W" followed by 1-2 digits as a whole word.
+  // Walk all text nodes; when we find a W-match, replace that text node
+  // with (before-text) + sparkline-span + (after-text).
+  const walker = document.createTreeWalker(narrative, NodeFilter.SHOW_TEXT, null);
+  const hits = [];
+  let node;
+  while ((node = walker.nextNode())) {
+    if (!node.nodeValue) continue;
+    if (node.parentNode && node.parentNode.classList && node.parentNode.classList.contains('wr-inline-spark-wrap')) continue;
+    const text = node.nodeValue;
+    const re = /\bW(\d{1,2})\b/g;
+    let m, matches = [];
+    while ((m = re.exec(text))) matches.push({ idx: m.index, end: m.index + m[0].length, token: m[0], wk: parseInt(m[1], 10) });
+    if (matches.length) hits.push({ node, text, matches });
+  }
+  hits.forEach(({ node, text, matches }) => {
+    const parent = node.parentNode;
+    if (!parent) return;
+    const frag = document.createDocumentFragment();
+    let cursor = 0;
+    matches.forEach(mt => {
+      if (mt.idx > cursor) frag.appendChild(document.createTextNode(text.slice(cursor, mt.idx)));
+      const wrap = document.createElement('span');
+      wrap.className = 'wr-inline-spark-wrap';
+      wrap.style.whiteSpace = 'nowrap';
+      wrap.textContent = mt.token + ' ';
+      const sparkSvg = narrativeSparklineFor(weekly, mt.wk);
+      if (sparkSvg) {
+        const svgWrap = document.createElement('span');
+        svgWrap.className = 'wr-inline-spark';
+        svgWrap.innerHTML = sparkSvg;
+        wrap.appendChild(svgWrap);
+      }
+      frag.appendChild(wrap);
+      cursor = mt.end;
+    });
+    if (cursor < text.length) frag.appendChild(document.createTextNode(text.slice(cursor)));
+    parent.replaceChild(frag, node);
+  });
+}
+
+function narrativeSparklineFor(weekly, endWk) {
+  const endIdx = weekly.findIndex(w => w.wk === endWk);
+  if (endIdx < 0) return '';
+  const startIdx = Math.max(0, endIdx - 5);
+  const slice = weekly.slice(startIdx, endIdx + 1);
+  const vals = slice.map(w => (w.regs > 0 ? w.regs : (w.pred_regs || 0))).filter(v => v > 0);
+  if (vals.length < 2) return '';
+  const W = 40, H = 12, PAD = 1;
+  const min = Math.min.apply(null, vals);
+  const max = Math.max.apply(null, vals);
+  const span = Math.max(max - min, 1);
+  const stepX = (W - PAD * 2) / (vals.length - 1);
+  const pts = vals.map((v, i) => (PAD + i * stepX).toFixed(1) + ',' + (H - PAD - ((v - min) / span) * (H - PAD * 2)).toFixed(1)).join(' ');
+  return '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" aria-hidden="true" style="vertical-align:-2px;margin-left:2px">'
+    + '<polyline points="' + pts + '" fill="none" stroke="#0066CC" stroke-width="1" stroke-linecap="round" opacity="0.8"/>'
+    + '</svg>';
 }
 
 // #56 (2026-05-01): "This week's hardest thing" — single auto-extracted
@@ -5019,6 +5111,163 @@ function showPillHoverCard(pill, pinned) {
   wrHoverCardEl.classList.toggle('pinned', !!pinned);
 }
 
+// #89 (2026-05-01): waffle chart of channel mix (Brand vs NB share of
+// YTD regs). 10×10 grid; one filled square = 1% of regs. Color = channel.
+// Usable for rollup markets (no channel split → one-color "Total" waffle)
+// + per-market.
+function renderWaffleChart() {
+  const host = document.getElementById('waffleBody');
+  if (!host) return;
+  const c = (CALLOUTS.callouts[curMarket] || {})[curWeek] || {};
+  const brand = c.brand_detail && c.brand_detail.regs;
+  const nb = c.nb_detail && c.nb_detail.regs;
+  if (!brand || !nb) {
+    host.innerHTML = '<div style="color:var(--color-text-subtle);padding:8px">No Brand/NB channel split for ' + curMarket + ' ' + curWeek + '.</div>';
+    return;
+  }
+  const total = brand + nb;
+  const brandPct = Math.round((brand / total) * 100);
+  const nbPct = 100 - brandPct;
+  const cells = [];
+  const W = 200, cellW = W / 10;
+  for (let r = 0; r < 10; r++) {
+    for (let c2 = 0; c2 < 10; c2++) {
+      const idx = r * 10 + c2;
+      const isBrand = idx < brandPct;
+      const fill = isBrand ? '#0066CC' : '#FF9900';
+      cells.push('<rect x="' + (c2 * cellW) + '" y="' + (r * cellW) + '" width="' + (cellW - 2) + '" height="' + (cellW - 2) + '" fill="' + fill + '" fill-opacity="0.78"/>');
+    }
+  }
+  host.innerHTML =
+    '<div style="display:flex;gap:16px;align-items:center">' +
+      '<svg viewBox="0 0 ' + W + ' ' + W + '" width="200" height="200" role="img" aria-label="Channel mix waffle: Brand ' + brandPct + '%, NB ' + nbPct + '%">' + cells.join('') + '</svg>' +
+      '<div style="font-size:12px;color:var(--color-text-hero);line-height:1.6">' +
+        '<div style="font-weight:600;margin-bottom:6px">' + curMarket + ' · ' + curWeek + '</div>' +
+        '<div><span style="display:inline-block;width:10px;height:10px;background:#0066CC;opacity:0.78;margin-right:6px;vertical-align:middle"></span>Brand: <strong>' + brand.toLocaleString() + '</strong> regs · ' + brandPct + '%</div>' +
+        '<div><span style="display:inline-block;width:10px;height:10px;background:#FF9900;opacity:0.78;margin-right:6px;vertical-align:middle"></span>Non-Brand: <strong>' + nb.toLocaleString() + '</strong> regs · ' + nbPct + '%</div>' +
+        '<div style="margin-top:8px;color:var(--color-text-subtle)">Each tile = 1% of total regs this week.</div>' +
+      '</div>' +
+    '</div>';
+}
+
+// #90 (2026-05-01): slope chart — Brand vs NB week-over-week regs change.
+// Two vertical axes (last week, this week); one line per channel. Visual
+// grammar: crossings = mix changes. Far simpler than the 6-week trajectory
+// chart and renders the "did we rotate share this week?" question fast.
+function renderSlopeChart() {
+  const host = document.getElementById('slopeBody');
+  if (!host) return;
+  const cW = (CALLOUTS.callouts[curMarket] || {})[curWeek] || {};
+  // Find prior week.
+  const weeks = CALLOUTS.weeks || [];
+  const idx = weeks.indexOf(curWeek);
+  const prevWeek = (idx >= 0 && idx + 1 < weeks.length) ? weeks[idx + 1] : null;
+  const cP = prevWeek ? ((CALLOUTS.callouts[curMarket] || {})[prevWeek] || {}) : {};
+  const bP = cP.brand_detail && cP.brand_detail.regs;
+  const nP = cP.nb_detail && cP.nb_detail.regs;
+  const bW = cW.brand_detail && cW.brand_detail.regs;
+  const nW = cW.nb_detail && cW.nb_detail.regs;
+  if (!bP || !nP || !bW || !nW) {
+    host.innerHTML = '<div style="color:var(--color-text-subtle);padding:8px">Need Brand + NB regs for both ' + (prevWeek || 'prior') + ' and ' + curWeek + ' — at least one is missing.</div>';
+    return;
+  }
+  const W = 440, H = 180, PAD_L = 70, PAD_R = 70, PAD_T = 20, PAD_B = 28;
+  const plotW = W - PAD_L - PAD_R;
+  const plotH = H - PAD_T - PAD_B;
+  const vMax = Math.max(bP, nP, bW, nW) * 1.05;
+  const y = (v) => PAD_T + plotH - (v / vMax) * plotH;
+  const xL = PAD_L;
+  const xR = W - PAD_R;
+  const brandCls = bW > bP ? '#2f7d3e' : bW < bP ? '#a63939' : '#6b7280';
+  const nbCls = nW > nP ? '#2f7d3e' : nW < nP ? '#a63939' : '#6b7280';
+  host.innerHTML =
+    '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Slope chart of Brand and NB WoW regs change" style="max-width:500px">' +
+      // axis lines
+      '<line x1="' + xL + '" y1="' + PAD_T + '" x2="' + xL + '" y2="' + (H - PAD_B) + '" stroke="#d1d5db" stroke-width="1"/>' +
+      '<line x1="' + xR + '" y1="' + PAD_T + '" x2="' + xR + '" y2="' + (H - PAD_B) + '" stroke="#d1d5db" stroke-width="1"/>' +
+      // labels
+      '<text x="' + xL + '" y="' + (H - PAD_B + 14) + '" text-anchor="middle" font-size="11" fill="#6b7280" font-family="ui-monospace,monospace">' + (prevWeek || 'prior') + '</text>' +
+      '<text x="' + xR + '" y="' + (H - PAD_B + 14) + '" text-anchor="middle" font-size="11" fill="#6b7280" font-family="ui-monospace,monospace">' + curWeek + '</text>' +
+      // Brand line
+      '<line x1="' + xL + '" y1="' + y(bP) + '" x2="' + xR + '" y2="' + y(bW) + '" stroke="' + brandCls + '" stroke-width="2.5" stroke-opacity="0.85"/>' +
+      '<circle cx="' + xL + '" cy="' + y(bP) + '" r="4" fill="' + brandCls + '"/>' +
+      '<circle cx="' + xR + '" cy="' + y(bW) + '" r="4" fill="' + brandCls + '"/>' +
+      '<text x="' + (xL - 8) + '" y="' + (y(bP) + 4) + '" text-anchor="end" font-size="11" fill="' + brandCls + '" font-family="ui-monospace,monospace">Brand ' + bP.toLocaleString() + '</text>' +
+      '<text x="' + (xR + 8) + '" y="' + (y(bW) + 4) + '" font-size="11" fill="' + brandCls + '" font-family="ui-monospace,monospace">' + bW.toLocaleString() + '</text>' +
+      // NB line
+      '<line x1="' + xL + '" y1="' + y(nP) + '" x2="' + xR + '" y2="' + y(nW) + '" stroke="' + nbCls + '" stroke-width="2.5" stroke-opacity="0.85" stroke-dasharray="4,3"/>' +
+      '<circle cx="' + xL + '" cy="' + y(nP) + '" r="4" fill="' + nbCls + '"/>' +
+      '<circle cx="' + xR + '" cy="' + y(nW) + '" r="4" fill="' + nbCls + '"/>' +
+      '<text x="' + (xL - 8) + '" y="' + (y(nP) + 4) + '" text-anchor="end" font-size="11" fill="' + nbCls + '" font-family="ui-monospace,monospace">NB ' + nP.toLocaleString() + '</text>' +
+      '<text x="' + (xR + 8) + '" y="' + (y(nW) + 4) + '" font-size="11" fill="' + nbCls + '" font-family="ui-monospace,monospace">' + nW.toLocaleString() + '</text>' +
+    '</svg>';
+}
+
+// #92 (2026-05-01): strip plot of per-week forecast errors — one row per
+// market, 26 weeks wide. Dot-plot each week's error along a fixed 0-line
+// per row. Complement to #59 horizon: horizon bands magnitude, strip plot
+// exposes outliers as distance-from-zero.
+function renderStripPlot() {
+  const host = document.getElementById('stripBody');
+  if (!host || !FORECAST || !FORECAST.predictions_history) {
+    if (host) host.innerHTML = '<div class="wr-empty" style="padding:12px">No predictions_history emitted.</div>';
+    return;
+  }
+  const markets = ['WW','US','UK','DE','FR','IT','ES','CA','JP','MX','AU','EU5'];
+  const maxWk = FORECAST.max_week || 15;
+  const firstWk = Math.max(1, maxWk - 25);
+  const weeks = [];
+  for (let w = firstWk; w <= maxWk; w++) weeks.push(w);
+  const W = 920, ROW_H = 32, LABEL_W = 56;
+  const plotW = W - LABEL_W - 8;
+  const stepX = plotW / (weeks.length - 1 || 1);
+  const rows = markets.map((mk, i) => {
+    const hist = FORECAST.predictions_history[mk] || {};
+    const dots = weeks.map((w, j) => {
+      const r = (hist[String(w)] || hist[w] || {}).regs || {};
+      if (!Number.isFinite(r.error_pct)) return '';
+      const err = r.error_pct;
+      // ±30% maps to ±row/2; clip beyond.
+      const magPct = Math.min(Math.abs(err) / 30, 1);
+      const yCenter = i * ROW_H + ROW_H / 2;
+      const yOffset = (err > 0 ? -1 : 1) * magPct * (ROW_H / 2 - 3);
+      const x = LABEL_W + 8 + j * stepX;
+      const a = Math.abs(err);
+      const color = a < 5 ? '#9ca3af' : a < 15 ? (err > 0 ? '#E8A800' : '#2f7d3e') : (err > 0 ? '#D13212' : '#047857');
+      return '<circle cx="' + x.toFixed(1) + '" cy="' + (yCenter + yOffset).toFixed(1) + '" r="2.5" fill="' + color + '" fill-opacity="0.7"><title>W' + w + ': ' + (err > 0 ? '+' : '') + err.toFixed(1) + '%</title></circle>';
+    }).join('');
+    const zeroLine = '<line x1="' + (LABEL_W + 8) + '" y1="' + (i * ROW_H + ROW_H / 2) + '" x2="' + (W - 4) + '" y2="' + (i * ROW_H + ROW_H / 2) + '" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="2,3"/>';
+    const label = '<text x="' + LABEL_W + '" y="' + (i * ROW_H + ROW_H / 2 + 4) + '" text-anchor="end" font-size="11" font-weight="600" fill="#1f2937" font-family="ui-monospace,monospace">' + mk + '</text>';
+    return zeroLine + label + dots;
+  }).join('');
+  const totalH = markets.length * ROW_H;
+  host.innerHTML =
+    '<div style="color:#6B6B6B;font-size:11px;margin-bottom:6px">Each dot = one week\'s forecast error; above the zero-line = over-predicted, below = under-predicted. Grey dots within ±5% noise band.</div>' +
+    '<svg viewBox="0 0 ' + W + ' ' + (totalH + 12) + '" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Strip plot of per-week forecast errors across ' + markets.length + ' markets">' +
+      rows +
+    '</svg>';
+}
+
+// #59 + #91 + #89 + #90 + #92: lazy-render on disclosure-open so cold-load isn't affected.
+function wireExperimentalDisclosures() {
+  if (wireExperimentalDisclosures._bound) return;
+  wireExperimentalDisclosures._bound = true;
+  const panels = [
+    ['sec-horizon', renderHorizonChart],
+    ['sec-calheatmap', renderCalendarHeatmap],
+    ['sec-waffle', renderWaffleChart],
+    ['sec-slope', renderSlopeChart],
+    ['sec-strip', renderStripPlot],
+  ];
+  panels.forEach(([id, fn]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('toggle', () => {
+      if (el.open) try { fn(); } catch (e) { console.warn('[' + id + '] failed:', e); }
+    });
+  });
+}
+
 // #59 (2026-05-01): horizon chart — one row per market, 26 weeks wide,
 // signed forecast error per week color-banded by magnitude. Horizon
 // graph (Heer CHI 2009) compresses ±% error into a 2-band view so
@@ -5135,24 +5384,6 @@ function renderCalendarHeatmap() {
     `<svg viewBox="0 0 ${W} ${H + 20}" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Calendar heatmap of ${curMarket} weekly YoY deltas">` +
       label + tiles.join('') + monthTicks +
     '</svg>';
-}
-
-// #59 + #91: lazy-render on disclosure-open so cold-load isn't affected.
-function wireExperimentalDisclosures() {
-  if (wireExperimentalDisclosures._bound) return;
-  wireExperimentalDisclosures._bound = true;
-  const horizon = document.getElementById('sec-horizon');
-  if (horizon) {
-    horizon.addEventListener('toggle', () => {
-      if (horizon.open) renderHorizonChart();
-    });
-  }
-  const cal = document.getElementById('sec-calheatmap');
-  if (cal) {
-    cal.addEventListener('toggle', () => {
-      if (cal.open) renderCalendarHeatmap();
-    });
-  }
 }
 
 // #60 (2026-05-01): week-grid popover — W1–W52 as 52 colored squares.
