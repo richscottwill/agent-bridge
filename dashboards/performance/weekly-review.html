@@ -727,6 +727,86 @@ body {
   background: var(--color-brand);
   color: var(--color-text-on-brand);
 }
+/* #41 (2026-05-01): secondary notify button. Less prominent than the
+   primary CTA but still action-styled so reader recognizes it as clickable.
+   Sits right of the primary button. */
+.wr-exception-action-btn-secondary {
+  margin-left: 6px;
+  background: transparent;
+  color: var(--color-text-subtle);
+  border-color: var(--color-text-subtle);
+}
+.wr-exception-action-btn-secondary:hover {
+  background: var(--color-text-subtle);
+  color: #FFFFFF;
+}
+
+/* #045 (2026-05-01): WoW-cell composition — bar + text side by side. */
+.wr-wow-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.wr-wow-inbar {
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* #42 (2026-05-01): always-visible Brand/NB channel summary card.
+   Two-column grid above the per-term detail disclosure. Compact — one
+   value line + WoW/YoY delta strip per channel. */
+.wr-channels-summary {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 4px;
+  padding: var(--gap-sm) var(--gap-md);
+}
+.wr-chsum-head {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  color: var(--color-text-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.wr-chsum-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-md);
+}
+.wr-chsum-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.wr-chsum-label {
+  font-size: 11px;
+  color: var(--color-text-subtle);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.wr-chsum-value {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 15px;
+  color: var(--color-text-hero);
+  font-variant-numeric: tabular-nums;
+}
+.wr-chsum-sub {
+  font-size: 12px;
+  color: var(--color-text-meta);
+  font-variant-numeric: tabular-nums;
+}
+.wr-chsum-delta.good { color: var(--color-success); }
+.wr-chsum-delta.bad  { color: var(--color-danger); }
+.wr-chsum-delta.warn { color: var(--color-warning); }
+.wr-chsum-empty .wr-chsum-note {
+  color: var(--color-text-subtle);
+  font-size: 12px;
+}
+@media (max-width: 700px) {
+  .wr-chsum-grid { grid-template-columns: 1fr; }
+}
 
 /* M8 (2026-04-30): Prior-week thread — 7 cells of {label, sparkline,
    signed-error}. Additive to WR-A10 scrub; persistent always-visible
@@ -1762,9 +1842,17 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
      principle. Channel detail (Brand + NB cards) and Context (external factors,
      drivers, stakeholders) are semantically distinct — a reader checking channel
      mix shouldn't have to scan through context to find it. Both collapsed on
-     cold load so the core WBR arc lands <1,800px. -->
+     cold load so the core WBR arc lands <1,800px.
+
+     #42 (2026-05-01): Brand + NB summary card is always visible above the
+     disclosure. Channel split is central to every weekly narrative —
+     collapsing it entirely buries one of the most-asked questions. The
+     summary shows {Regs · WoW · CPA} per channel in a compact 2-col grid;
+     the full per-term detail table stays inside the disclosure. Progressive
+     disclosure done correctly: essential first, detail on demand. -->
+<div id="calloutChannelsSummary" class="wr-channels-summary" style="margin-bottom:var(--gap-sm);display:none"></div>
 <details class="wr-collapsible" id="calloutChannelsWrap" style="margin-bottom:var(--gap-md)">
-  <summary class="wr-collapsible-summary sec-panel" style="margin-bottom:0">Channel detail &mdash; Brand + Non-Brand <span class="wr-collapsible-hint">(click to expand)</span></summary>
+  <summary class="wr-collapsible-summary sec-panel" style="margin-bottom:0">Channel detail &mdash; per-term table <span class="wr-collapsible-hint">(click to expand)</span></summary>
   <div class="wr-grid" id="calloutChannelsGrid" style="margin-top:var(--gap-md)">
     <div class="wr-grid-full wr-empty">Loading&hellip;</div>
   </div>
@@ -2180,6 +2268,42 @@ function safeWoW(cur, prev) {
   return (cur - prev) / prev * 100;
 }
 
+// #045 (2026-05-01): in-cell bar for WoW deltas inside table cells.
+// Tiny horizontal strip (60px × 10px) with a zero-line in the middle,
+// bar extending right for positive or left for negative. Color matches
+// the accompanying text delta (good=green, bad=red, warn=amber). Scale:
+// ±20% maps to full half-width; values outside that range clip. The
+// bar is rendered as inline SVG so it sits in the flow and doesn't
+// disturb the column's vertical rhythm. Returns empty string when v
+// is null so the caller can keep its em-dash fallback.
+function wrInCellBar(v, inv) {
+  if (v == null || !Number.isFinite(v)) return '';
+  const BAR_W = 60;
+  const BAR_H = 10;
+  const CENTER = BAR_W / 2;
+  const HALF = CENTER - 2;  // 2px padding on each side
+  const SCALE_MAX = 20;     // ±20% = full half-width
+  const mag = Math.min(Math.abs(v) / SCALE_MAX, 1);
+  const barLen = mag * HALF;
+  const isPos = v > 0;
+  const c = cls(v, inv);
+  // Resolve class -> hex so the SVG renders without inheriting link colors
+  // in nested anchors. Matches the --color-success / --color-danger /
+  // --color-warning design tokens.
+  const fill = c === 'good' ? '#2f7d3e'
+             : c === 'bad'  ? '#a63939'
+             : c === 'warn' ? '#c78a2e'
+             : '#9ca3af';
+  const rectX = isPos ? CENTER : (CENTER - barLen);
+  return (
+    '<svg class="wr-wow-inbar" width="' + BAR_W + '" height="' + BAR_H + '" '
+    + 'viewBox="0 0 ' + BAR_W + ' ' + BAR_H + '" aria-hidden="true" focusable="false">'
+    + '<line x1="' + CENTER + '" y1="1" x2="' + CENTER + '" y2="' + (BAR_H - 1) + '" stroke="#9ca3af" stroke-width="1"/>'
+    + '<rect x="' + rectX + '" y="2" width="' + barLen + '" height="' + (BAR_H - 4) + '" fill="' + fill + '" fill-opacity="0.8"/>'
+    + '</svg>'
+  );
+}
+
 // ============================================================================
 // RENDER — orchestrates callout + tracker on every market/week change
 // ============================================================================
@@ -2484,23 +2608,32 @@ function renderExceptionBanner() {
   //   >25% miss: "Draft Brandon note" (operational escalation)
   //   >15% miss: "Open investigation" (track as finding)
   //   CI coverage only:  "Review calibration"
+  //
+  // #41 (2026-05-01): every severity tier also gets a "Notify Brandon"
+  // secondary button with a pre-composed Slack draft. Primary CTA still
+  // routes by severity (investigation for 15-25%, scorecard review for
+  // drift-only); the notify button is additive.
   let action, actionLabel, actionUrl;
   const maxAbs = Math.max(
     Math.abs(meanError || 0),
     Math.abs(latestErr || 0)
   );
+  // Pre-compose the Slack draft body once — reused across severity tiers
+  // for the Notify button. Escalation (>25%) makes it the primary CTA;
+  // lower tiers offer it as a secondary action.
+  const slackDraft = encodeURIComponent(
+    `${curMarket} ${rw} forecast flag\n\n` +
+    `${diagnosis}\n\n` +
+    `Evidence: ${evidence.join(' \u00b7 ')}\n\n` +
+    `Weekly review: http://localhost:8089/performance/weekly-review.html?market=${curMarket}&week=${rw}`
+  );
+  const brandonSlackUrl = `https://slack.com/app_redirect?channel=D0123BRANDON&text=${slackDraft}`;
   if (maxAbs > 25) {
     action = `Miss > 25% — <strong>draft Brandon note</strong> with ${rw}, ${curMarket}, miss %, and diagnosis.`;
     actionLabel = 'Open draft';
-    const draftBody = encodeURIComponent(
-      `${curMarket} ${rw} forecast flag\n\n` +
-      `${diagnosis}\n\n` +
-      `Evidence: ${evidence.join(' · ')}\n\n` +
-      `Weekly review: http://localhost:8089/performance/weekly-review.html?market=${curMarket}&week=${rw}`
-    );
-    actionUrl = `https://slack.com/app_redirect?channel=D0123BRANDON&text=${draftBody}`;
+    actionUrl = brandonSlackUrl;
   } else if (maxAbs > 15) {
-    action = `Miss 15–25% — <strong>open investigation</strong> and track as a finding.`;
+    action = `Miss 15\u201325% — <strong>open investigation</strong> and track as a finding.`;
     actionLabel = 'Open investigation';
     actionUrl = '#sec-scorecard';
   } else {
@@ -2508,11 +2641,20 @@ function renderExceptionBanner() {
     actionLabel = 'Review scorecard';
     actionUrl = '#sec-scorecard';
   }
+  // Secondary Notify button only appears when it's not the primary CTA
+  // (>25% case already routes to the Slack draft as its primary action).
+  const notifyBtn = (maxAbs > 25) ? '' : (
+    '<a class="wr-exception-action-btn wr-exception-action-btn-secondary" ' +
+      'href="' + brandonSlackUrl + '" target="_blank" rel="noopener" ' +
+      'title="Open a pre-composed Slack draft with ' + curMarket + ' ' + rw + ' + diagnosis">' +
+      'Notify Brandon' +
+    '</a>'
+  );
 
   host.style.display = '';
   host.innerHTML =
     '<div class="wr-exception" role="alert">' +
-    '<div class="wr-exception-kicker">\u26A0 Exception \u00b7 Forecast</div>' +
+    '<div class="wr-exception-kicker">Exception \u00b7 Forecast</div>' +
     '<div class="wr-exception-diagnosis"><strong>' + diagnosis + '</strong>' +
       (evidence.length ? '<em>\u00b7 ' + evidence.join(' \u00b7 ') + '</em>' : '') +
     '</div>' +
@@ -2522,6 +2664,7 @@ function renderExceptionBanner() {
       '<a class="wr-exception-action-btn" href="' + actionUrl + '" ' +
         (actionUrl.startsWith('http') ? 'target="_blank" rel="noopener"' : '') +
         '>' + actionLabel + '</a>' +
+      notifyBtn +
     '</div>' +
     '</div>';
 }
@@ -3532,6 +3675,11 @@ function renderCalloutDetails() {
   channelsHtml += channelCard('Nonbrand', c.nb_detail);
   chEl.innerHTML = channelsHtml;
 
+  // #42 (2026-05-01): always-visible Brand/NB summary above the disclosure.
+  // Shows {Regs · WoW · CPA} per channel in a compact 2-col grid so the
+  // reader gets the top-line split without expanding.
+  renderChannelsSummary(c);
+
   // Context disclosure — external factors + drivers + stakeholders.
   let contextHtml = '';
   contextHtml += '<div class="sec-panel wr-grid-full" id="sec-context"><h3>Context &amp; External Factors</h3><ul class="wr-list" id="extList"></ul></div>';
@@ -3585,6 +3733,56 @@ function mRow(label, value, wow, wInv, yoy, yInv, vs4, v4Inv) {
     '<td>' + delta(wow, wInv) + '</td>' +
     '<td>' + delta(yoy, yInv) + '</td>' +
     '<td>' + delta(vs4, v4Inv) + '</td></tr>';
+}
+
+// #42 (2026-05-01): always-visible Brand/NB summary card. Renders above
+// the per-term detail disclosure so the channel split — central to every
+// weekly narrative — doesn't require expanding to read.
+// Compact 2-col grid: each column shows {Regs, WoW%, CPA} for one channel.
+// On rollup markets (WW/EU5/NA) where CPA/WoW come back sparse, shows
+// Regs + YoY% only and nudges the reader toward per-market tabs.
+function renderChannelsSummary(c) {
+  const host = document.getElementById('calloutChannelsSummary');
+  if (!host) return;
+  if (!c || (!c.brand_detail && !c.nb_detail)) {
+    host.style.display = 'none';
+    host.innerHTML = '';
+    return;
+  }
+  const REGIONS = ['WW', 'EU5', 'NA'];
+  const isRollup = REGIONS.includes(curMarket);
+  function cell(label, d) {
+    if (!d) {
+      return '<div class="wr-chsum-cell wr-chsum-empty"><div class="wr-chsum-label">' + label + '</div><div class="wr-chsum-note">No channel data</div></div>';
+    }
+    const regsStr = Number.isFinite(d.regs) ? fmt(d.regs, 'regs') : '\u2014';
+    const cpaStr = Number.isFinite(d.cpa) ? ('$' + Math.round(d.cpa).toLocaleString()) : '\u2014';
+    const wowHtml = (Number.isFinite(d.regs_wow))
+      ? '<span class="wr-chsum-delta ' + cls(d.regs_wow, false) + '">' + (d.regs_wow > 0 ? '+' : '') + d.regs_wow.toFixed(1) + '%</span>'
+      : '<span class="wr-chsum-delta">\u2014</span>';
+    const yoyHtml = (Number.isFinite(d.regs_yoy))
+      ? '<span class="wr-chsum-delta ' + cls(d.regs_yoy, false) + '">' + (d.regs_yoy > 0 ? '+' : '') + Math.round(d.regs_yoy) + '%</span>'
+      : '<span class="wr-chsum-delta">\u2014</span>';
+    if (isRollup) {
+      return '<div class="wr-chsum-cell">' +
+        '<div class="wr-chsum-label">' + label + '</div>' +
+        '<div class="wr-chsum-value">' + regsStr + '</div>' +
+        '<div class="wr-chsum-sub">YoY ' + yoyHtml + '</div>' +
+      '</div>';
+    }
+    return '<div class="wr-chsum-cell">' +
+      '<div class="wr-chsum-label">' + label + '</div>' +
+      '<div class="wr-chsum-value">' + regsStr + ' regs · ' + cpaStr + ' CPA</div>' +
+      '<div class="wr-chsum-sub">WoW ' + wowHtml + ' · YoY ' + yoyHtml + '</div>' +
+    '</div>';
+  }
+  host.innerHTML =
+    '<div class="wr-chsum-head">Channel summary</div>' +
+    '<div class="wr-chsum-grid">' +
+      cell('Brand', c.brand_detail) +
+      cell('Nonbrand', c.nb_detail) +
+    '</div>';
+  host.style.display = '';
 }
 
 // WR-C5 (2026-04-28): renderProj + pc helpers removed. Projection engine
@@ -4544,16 +4742,23 @@ function renderTable() {
     const prevRegs = prev && prev.regs > 0 ? prev.regs : (prev && prev.pred_regs ? prev.pred_regs : null);
     const curRegs = isActual ? w.regs : w.pred_regs;
     const regsWowRaw = safeWoW(curRegs, prevRegs);
+    // #045 (2026-05-01): in-cell bar rendering for WoW deltas. Tiny
+    // horizontal bar aligned with the text. Red left, green right,
+    // zero-line center. Scale: ±20% maps to full-width. Values outside
+    // that range are clipped to ±1.0 (so an extreme outlier doesn't
+    // distort the rest of the column's readability).
+    const regsWowBar = wrInCellBar(regsWowRaw, false);
     const regsWowTxt = regsWowRaw != null
-      ? `<span class="wr-delta ${cls(regsWowRaw, false)}">${regsWowRaw > 0 ? '+' : ''}${regsWowRaw.toFixed(1)}%</span>`
+      ? `<span class="wr-wow-cell">${regsWowBar}<span class="wr-delta ${cls(regsWowRaw, false)}">${regsWowRaw > 0 ? '+' : ''}${regsWowRaw.toFixed(1)}%</span></span>`
       : '\u2014';
     const prevCost = prev && prev.cost > 0 ? prev.cost : (prev && prev.pred_cost ? prev.pred_cost : null);
     const curCost = isActual && w.cost ? w.cost : (w.pred_cost || null);
     const costWowRaw = safeWoW(curCost, prevCost);
     // Cost WoW: higher is NOT intrinsically good or bad. Use the
     // neutral `inv=true` coloring so small moves don't get flagged.
+    const costWowBar = wrInCellBar(costWowRaw, true);
     const costWowTxt = costWowRaw != null
-      ? `<span class="wr-delta ${cls(costWowRaw, true)}">${costWowRaw > 0 ? '+' : ''}${costWowRaw.toFixed(1)}%</span>`
+      ? `<span class="wr-wow-cell">${costWowBar}<span class="wr-delta ${cls(costWowRaw, true)}">${costWowRaw > 0 ? '+' : ''}${costWowRaw.toFixed(1)}%</span></span>`
       : '\u2014';
 
     const rowCls = [];
@@ -4692,11 +4897,39 @@ function aggregatePeriod(weeks, periodKey, year) {
   return Array.from(groups.values());
 }
 
-function renderPeriodTable(periods, bodyId, scrollId, labelFn, currentKey, deltaLabel) {
+function renderPeriodTable(periods, bodyId, scrollId, labelFn, currentKey, deltaLabel, options) {
   const body = document.getElementById(bodyId);
   if (!body) return;
-  body.innerHTML = periods.map((p, i) => {
-    const prev = i > 0 ? periods[i - 1] : null;
+  // #047 (2026-05-01): decision-oriented row ordering for the monthly table.
+  // Default ordering is chronological (oldest first) which is wrong for a
+  // weekly review — the reader's decision is "how's April going compared to
+  // March", so April should be row 1, March row 2, then future months. The
+  // MoM computation still uses the chronological predecessor (so April's
+  // MoM references March), we just reorder rows for display.
+  const reorderCurrentFirst = !!(options && options.reorderCurrentFirst);
+  // Precompute each period's chronological predecessor reference so MoM math
+  // survives the reorder.
+  const indexedPeriods = periods.map((p, i) => ({
+    p,
+    chronPrev: i > 0 ? periods[i - 1] : null,
+  }));
+  let displayOrder = indexedPeriods;
+  if (reorderCurrentFirst && currentKey) {
+    const curIdx = indexedPeriods.findIndex(e => e.p.key === currentKey);
+    if (curIdx >= 0) {
+      // Current first, then prior (for decision context), then everything
+      // else in chronological order (skipping the two already placed).
+      const picked = new Set();
+      const current = indexedPeriods[curIdx]; picked.add(curIdx);
+      const prior = curIdx > 0 ? indexedPeriods[curIdx - 1] : null;
+      if (prior) picked.add(curIdx - 1);
+      const rest = indexedPeriods.filter((_, i) => !picked.has(i));
+      displayOrder = prior ? [current, prior, ...rest] : [current, ...rest];
+    }
+  }
+  body.innerHTML = displayOrder.map((entry) => {
+    const p = entry.p;
+    const prev = entry.chronPrev;
 
     // WR-S5 (2026-04-29): Regs and Cost MoM/QoQ deltas, both using the
     // "actual if present, else pred" rule for prev and current.
@@ -4788,7 +5021,8 @@ function renderMonthlyTable() {
   renderPeriodTable(
     periods, 'monthlyBody', 'monthlyScroll',
     (key) => MONTH_NAMES_FULL[parseInt(key.slice(1), 10) - 1] + ' ' + year,
-    curKey, 'MoM'
+    curKey, 'MoM',
+    { reorderCurrentFirst: true }
   );
 }
 
