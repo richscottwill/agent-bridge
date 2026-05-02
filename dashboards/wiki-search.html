@@ -181,6 +181,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .pipe-card{background:#FAFAFA;border:1px solid #E0E0E0;border-radius:5px;padding:8px 10px;cursor:pointer;transition:all .12s;position:relative}
 .pipe-card:hover{border-color:#BFD4F2;background:#F5F5F5}
 .pipe-card.viewing{border-color:#1E40AF;background:#F5F5F5}
+/* #41 wiki (2026-05-01): drag-drop visuals — source card fades while
+   dragging, drop-target column body gets a brand-blue ghost fill. */
+.pipe-card.pipe-card-dragging { opacity: 0.4; }
+.pipe-col-body.drop-target { background: rgba(30, 64, 175, 0.08); outline: 2px dashed #1E40AF; outline-offset: -4px; }
 .pipe-card-title{font-size:13px;font-weight:600;color:#1F2937;line-height:1.3;margin-bottom:4px;padding-right:44px}
 .pipe-card-meta{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
 .pipe-card-meta .b{font-size:10px;padding:1px 4px}
@@ -1413,6 +1417,52 @@ function effectiveStatus(doc){
   const o=loadStatusOverrides();
   return o[doc.id]||doc.status||'DRAFT';
 }
+// #41 wiki (2026-05-01): drag-drop pipeline card between columns. Uses
+// HTML5 drag-and-drop API. ondragstart sets the doc.id in dataTransfer;
+// ondrop on the target column body reads status from the column's data-
+// attribute and writes it as an override. Drag-drop can jump non-
+// adjacent columns (DRAFT→FINAL in one motion), matching Linear/Notion.
+function pipeCardDragStart(event, docId) {
+  try {
+    event.dataTransfer.setData('text/plain', docId);
+    event.dataTransfer.effectAllowed = 'move';
+    event.target.classList.add('pipe-card-dragging');
+  } catch (e) { /* older browsers */ }
+}
+function pipeCardDragEnd(event) {
+  event.target.classList.remove('pipe-card-dragging');
+  document.querySelectorAll('.pipe-col-body.drop-target').forEach(el => el.classList.remove('drop-target'));
+}
+function pipeColDragOver(event) {
+  event.preventDefault();
+  event.dataTransfer.dropEffect = 'move';
+  event.currentTarget.classList.add('drop-target');
+}
+function pipeColDragLeave(event) {
+  if (!event.currentTarget.contains(event.relatedTarget)) {
+    event.currentTarget.classList.remove('drop-target');
+  }
+}
+function pipeColDrop(event, targetStatus) {
+  event.preventDefault();
+  event.currentTarget.classList.remove('drop-target');
+  const docId = event.dataTransfer.getData('text/plain');
+  if (!docId) return;
+  const order = ['DRAFT','REVIEW','FINAL','ARCHIVED'];
+  const normalizedTarget = String(targetStatus).toUpperCase();
+  if (!order.includes(normalizedTarget)) return;
+  const allDocs = [...(IX ? IX.documents : []), ...uploadedDocs];
+  const doc = allDocs.find(d => d.id === docId);
+  if (!doc) return;
+  const currentEffective = effectiveStatus(doc);
+  if (currentEffective === normalizedTarget) return;
+  const o = loadStatusOverrides();
+  if ((doc.status || 'DRAFT') === normalizedTarget) delete o[docId];
+  else o[docId] = normalizedTarget;
+  saveStatusOverrides(o);
+  renderPipeline();
+}
+
 function bumpStatus(id,direction,event){
   if(event){event.stopPropagation();event.preventDefault()}
   const allDocs=[...(IX?IX.documents:[]),...uploadedDocs];
@@ -2395,7 +2445,180 @@ function restoreSearchState(){
     }
   }catch(e){}
 }
+
+// #19 wiki (2026-05-01): saved filter bundles. Cmd+S captures the current
+// query + F object, prompts for a name, stores in wk_saved_filters. Cmd+1
+// through Cmd+9 jump to the Nth saved bundle. Cmd+Shift+K opens the saved
+// filters dropdown for point-and-click recall.
+function loadSavedFilterBundles(){
+  try{
+    return JSON.parse(localStorage.getItem('wk_saved_filters')||'[]') || [];
+  }catch(e){ return []; }
+}
+function saveFilterBundle(){
+  const name = window.prompt('Name this filter bundle:', si.value || 'untitled');
+  if(!name) return;
+  const bundles = loadSavedFilterBundles();
+  // Dedup by name — replace if existing.
+  const existingIdx = bundles.findIndex(b => b.name === name);
+  const entry = {
+    name,
+    query: si.value || '',
+    filters: { ...F },
+    saved_at: new Date().toISOString(),
+  };
+  if(existingIdx >= 0){ bundles[existingIdx] = entry; }
+  else { bundles.push(entry); }
+  // Cap at 9 to match Cmd+1..9 keybinds.
+  if(bundles.length > 9) bundles.splice(0, bundles.length - 9);
+  try{ localStorage.setItem('wk_saved_filters', JSON.stringify(bundles)); }catch(e){}
+  renderSavedFiltersUi();
+}
+function applySavedFilterBundle(idx){
+  const bundles = loadSavedFilterBundles();
+  const entry = bundles[idx];
+  if(!entry) return;
+  si.value = entry.query || '';
+  if(entry.filters && typeof entry.filters === 'object'){
+    Object.keys(entry.filters).forEach(k => { if(k in F) F[k] = entry.filters[k]; });
+    document.querySelectorAll('.f').forEach(b=>{
+      const k=b.dataset.fk, v=b.dataset.fv;
+      if(k && v) b.classList.toggle('on', (F[k]||'all')===v);
+    });
+  }
+  doSearch();
+  persistSearchState();
+  if(typeof renderActiveChips==='function') renderActiveChips();
+}
+function deleteSavedFilterBundle(idx){
+  const bundles = loadSavedFilterBundles();
+  bundles.splice(idx, 1);
+  try{ localStorage.setItem('wk_saved_filters', JSON.stringify(bundles)); }catch(e){}
+  renderSavedFiltersUi();
+}
+function renderSavedFiltersUi(){
+  // Populate the dropdown panel if present.
+  const panel = document.getElementById('wkSavedFiltersPanel');
+  if(!panel) return;
+  const bundles = loadSavedFilterBundles();
+  if(!bundles.length){
+    panel.innerHTML = '<div style="padding:10px;color:#6B6B6B;font-size:12px">No saved filter bundles yet. Press Cmd+S (or Ctrl+S) to save the current filter state.</div>';
+    return;
+  }
+  panel.innerHTML = bundles.map((b, i) =>
+    '<div class="wk-saved-filter-row" data-idx="'+i+'" style="display:flex;gap:8px;padding:6px 10px;border-bottom:1px solid #F3F4F6;align-items:center">' +
+      '<span style="font-family:ui-monospace,monospace;font-size:10px;color:#6B6B6B;min-width:18px">Cmd+'+(i+1)+'</span>' +
+      '<button class="wk-saved-filter-apply" style="flex:1;text-align:left;background:none;border:none;color:#1E40AF;cursor:pointer;font-size:13px;padding:0" onclick="applySavedFilterBundle('+i+');toggleSavedFiltersPanel(false)">'+
+        esc(b.name)+
+        (b.query ? '<span style="color:#6B6B6B;margin-left:8px;font-size:11px">'+esc(b.query)+'</span>' : '')+
+      '</button>' +
+      '<button style="background:none;border:none;color:#991B1B;cursor:pointer;font-size:14px;padding:0 4px" title="Delete" onclick="deleteSavedFilterBundle('+i+')">x</button>' +
+    '</div>'
+  ).join('');
+}
+function toggleSavedFiltersPanel(forceState){
+  let panel = document.getElementById('wkSavedFiltersPanel');
+  if(!panel){
+    panel = document.createElement('div');
+    panel.id = 'wkSavedFiltersPanel';
+    panel.style.cssText = 'position:fixed;top:60px;right:20px;width:300px;max-height:360px;overflow-y:auto;background:#FFFFFF;border:1px solid #D1D5DB;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:1000;display:none';
+    document.body.appendChild(panel);
+  }
+  const show = typeof forceState === 'boolean' ? forceState : (panel.style.display === 'none');
+  panel.style.display = show ? 'block' : 'none';
+  if(show) renderSavedFiltersUi();
+}
+
 si.addEventListener('input',()=>{clearTimeout(dt);dt=setTimeout(()=>{if(currentView==='pipeline')renderPipeline();else{doSearch();persistSearchState();}},120)});
+
+// #19 + #22 wiki (2026-05-01): global keydown for saved filters +
+// query log. Cmd+S / Ctrl+S saves bundle. Cmd+1..9 applies saved
+// bundle by index. Cmd+Shift+K toggles the saved-filters panel.
+// Cmd+Shift+L toggles the query log panel. All match the Cmd-prefixed
+// Linear/Notion grammar already used by the Cmd+K palette.
+document.addEventListener('keydown', (e) => {
+  const mod = e.metaKey || e.ctrlKey;
+  if(!mod) return;
+  const t = e.target;
+  const tag = (t && t.tagName || '').toLowerCase();
+  const editable = t && (t.isContentEditable || tag === 'textarea');
+  // Allow within input[type=text] for Cmd+S (bundle save expected to work
+  // even when focus is in the query field), but block multi-line editors.
+  if(editable) return;
+  if(e.key === 's' || e.key === 'S'){
+    e.preventDefault();
+    saveFilterBundle();
+    return;
+  }
+  if(e.shiftKey && (e.key === 'k' || e.key === 'K')){
+    e.preventDefault();
+    toggleSavedFiltersPanel();
+    return;
+  }
+  if(e.shiftKey && (e.key === 'l' || e.key === 'L')){
+    e.preventDefault();
+    toggleQueryLogPanel();
+    return;
+  }
+  // Cmd+1..9 → apply Nth saved bundle.
+  const n = parseInt(e.key, 10);
+  if(Number.isFinite(n) && n >= 1 && n <= 9){
+    const bundles = loadSavedFilterBundles();
+    if(bundles[n - 1]){
+      e.preventDefault();
+      applySavedFilterBundle(n - 1);
+    }
+  }
+});
+
+// #22 wiki (2026-05-01): private query log. Each doSearch() call pushes
+// the query + result count into localStorage; the log panel (Cmd+Shift+L)
+// shows the last 20. Click a row to re-run. No network, no server —
+// single-user power-user affordance.
+function logQuery(q, resultCount){
+  if(!q || !q.trim()) return;
+  try{
+    const log = JSON.parse(localStorage.getItem('wk_query_log')||'[]') || [];
+    // Dedupe consecutive same-query entries.
+    if(log.length && log[0].q === q){
+      log[0].ts = new Date().toISOString();
+      log[0].count = resultCount;
+    } else {
+      log.unshift({ q, count: resultCount, ts: new Date().toISOString() });
+    }
+    if(log.length > 20) log.length = 20;
+    localStorage.setItem('wk_query_log', JSON.stringify(log));
+  }catch(e){}
+}
+function toggleQueryLogPanel(forceState){
+  let panel = document.getElementById('wkQueryLogPanel');
+  if(!panel){
+    panel = document.createElement('div');
+    panel.id = 'wkQueryLogPanel';
+    panel.style.cssText = 'position:fixed;top:60px;right:20px;width:320px;max-height:400px;overflow-y:auto;background:#FFFFFF;border:1px solid #D1D5DB;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:1000;display:none';
+    document.body.appendChild(panel);
+  }
+  const show = typeof forceState === 'boolean' ? forceState : (panel.style.display === 'none');
+  panel.style.display = show ? 'block' : 'none';
+  if(show){
+    const log = (()=>{ try{ return JSON.parse(localStorage.getItem('wk_query_log')||'[]'); }catch(_){ return []; }})();
+    if(!log.length){
+      panel.innerHTML = '<div style="padding:10px;color:#6B6B6B;font-size:12px">Query log is empty. Run a search — it will appear here.</div>';
+    } else {
+      panel.innerHTML = '<div style="padding:8px 10px;border-bottom:1px solid #F3F4F6;font-weight:600;font-size:12px;color:#374151">Query log (last '+log.length+')</div>' +
+        log.map((r, i) => {
+          const when = new Date(r.ts).toLocaleTimeString();
+          return '<div style="display:flex;gap:8px;padding:6px 10px;border-bottom:1px solid #F3F4F6;align-items:center">' +
+            '<button style="flex:1;text-align:left;background:none;border:none;color:#1E40AF;cursor:pointer;font-size:13px;padding:0" onclick="(function(q){document.getElementById(\'searchInput\').value=q;doSearch();persistSearchState();toggleQueryLogPanel(false);})(\''+r.q.replace(/"/g,'&quot;').replace(/\'/g,'\\\'')+'\')">' +
+              esc(r.q) +
+            '</button>' +
+            '<span style="font-size:10px;color:#6B6B6B;min-width:60px;text-align:right">'+r.count+' hits</span>' +
+            '<span style="font-size:10px;color:#9CA3AF;min-width:60px;text-align:right">'+when+'</span>' +
+          '</div>';
+        }).join('');
+    }
+  }
+}
 
 function doSearch(){
   if(!IX)return;
@@ -2637,6 +2860,8 @@ function render(items,q,isRecentFeed){
     return renderDocCard(doc,tokens,0);
   }).join('');
   c.innerHTML=html;
+  // #22 wiki (2026-05-01): push the executed query into the private log.
+  if(typeof logQuery === 'function') logQuery(q, items.length);
 }
 
 // ── Pipeline view ──
@@ -2771,11 +2996,16 @@ function renderPipeline(){
     const velocityHtml='<div class="wk-velocity-row">'+
       (recent>0?'<span class="good">+'+recent+' fresh (7d)</span>':'<span>—</span>')+
       ' · '+items.length+' total</div>';
-    return '<div class="pipe-col">'+
+    return '<div class="pipe-col" data-pipe-col-status="'+esc(label)+'">'+
       '<div class="pipe-col-head '+cls+'"><span class="pipe-col-title">'+esc(label)+'</span><span class="pipe-col-count">'+items.length+'</span></div>'+
       bar+
       velocityHtml+
-      '<div class="pipe-col-body">'+cards+'</div></div>';
+      '<div class="pipe-col-body" data-pipe-col-target="'+esc(label)+'" '+
+        'ondragover="pipeColDragOver(event)" '+
+        'ondragleave="pipeColDragLeave(event)" '+
+        'ondrop="pipeColDrop(event, \''+esc(label).replace(/"/g,'&quot;')+'\')">'+
+        cards+
+      '</div></div>';
   }).join('');
   container.innerHTML=html||'<div class="empty" style="margin:auto"><h3>No articles match these filters</h3><p>Clear filters or switch to Search view.</p></div>';
   // M07 (2026-04-30): render pipeline headline + exception banner above columns.
@@ -2804,7 +3034,11 @@ function renderPipeCard(doc,colKey){
     const days=Math.floor((Date.now()-new Date(doc.updated).getTime())/(864e5));
     age=days===0?'today':days<30?days+'d':Math.floor(days/30)+'mo';
   }
-  return '<div class="pipe-card'+(isViewing?' viewing':'')+'" onclick="openDoc(\''+doc.id+'\')">'+
+  return '<div class="pipe-card'+(isViewing?' viewing':'')+'" '+
+    'draggable="true" data-doc-id="'+doc.id+'" '+
+    'ondragstart="pipeCardDragStart(event, \''+doc.id+'\')" '+
+    'ondragend="pipeCardDragEnd(event)" '+
+    'onclick="openDoc(\''+doc.id+'\')">'+
     (actions?'<div class="pipe-actions">'+actions+'</div>':'')+
     '<div class="pipe-card-title">'+esc(doc.title)+(isOverride?'<span class="pipe-overlay-badge">override</span>':'')+'</div>'+
     '<div class="pipe-card-meta">'+
