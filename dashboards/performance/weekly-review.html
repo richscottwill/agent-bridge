@@ -866,6 +866,27 @@ body {
   transition: outline-color 200ms ease;
 }
 
+/* #96 (2026-05-01): dense "fingertip feel" view. Hides all progressive-
+   disclosure chrome so the 12×4 grid dominates the viewport — breaks
+   progressive disclosure on purpose per spec (Amazon WBR IS this density).
+   Opt-in via ?dense=1 URL param. */
+body.wr-dense-mode .wr-stick,
+body.wr-dense-mode #exceptionBanner,
+body.wr-dense-mode #calloutNarrative,
+body.wr-dense-mode #sec-kpi-scorecard,
+body.wr-dense-mode #sec-wbr612,
+body.wr-dense-mode #sec-variance,
+body.wr-dense-mode #sec-charts,
+body.wr-dense-mode #threadStrip,
+body.wr-dense-mode details.wr-collapsible,
+body.wr-dense-mode .wr-thread-strip,
+body.wr-dense-mode details.sec-panel,
+body.wr-dense-mode #wr-footer,
+body.wr-dense-mode .wr-toc-collapsed,
+body.wr-dense-mode #sec-small-multiples {
+  display: none !important;
+}
+
 /* #60 (2026-05-01): week-grid popover. 52 squares (W1-W52) colored by
    forecast-trust for the current market. Click to jump. */
 .wr-week-grid {
@@ -2455,6 +2476,8 @@ function init() {
   wireSectionObserver();
   // #62 (2026-05-01): render reviewer-lens overlay if URL has ?lens=*.
   applyWrLensFromUrl();
+  // #96 (2026-05-01): render dense "fingertip feel" view if URL has ?dense=1.
+  applyDenseViewFromUrl();
   // #17 (2026-05-01): restore section-scroll from URL on cold load.
   try {
     const urlSection = new URLSearchParams(location.search).get('section');
@@ -5828,6 +5851,105 @@ const WR_LENS_QUESTIONS = {
     ],
   },
 };
+
+// #96 (2026-05-01): "Fingertip feel" dense view — query-param ?dense=1
+// hides the top-of-fold chrome (callout card, exception, KPI, scorecard,
+// 6-12 chart, variance, tables, experimental panels) and reshapes the
+// small-multiples section into a 12-market × 4-metric grid = 48 tiny
+// panels. Experimental — breaks progressive disclosure on purpose per
+// spec (Amazon WBR IS this density). Power-user mode; opt-in via URL.
+function applyDenseViewFromUrl() {
+  try {
+    const params = new URLSearchParams(location.search);
+    if (params.get('dense') !== '1') return;
+    document.body.classList.add('wr-dense-mode');
+    // Insert a banner so users know why the page looks different.
+    let banner = document.getElementById('wr-dense-banner');
+    if (!banner) {
+      banner = document.createElement('div');
+      banner.id = 'wr-dense-banner';
+      banner.style.cssText = 'position:sticky;top:0;z-index:100;background:#1f2937;color:#FFF;padding:6px 16px;font-family:ui-monospace,monospace;font-size:11px;display:flex;justify-content:space-between;align-items:center';
+      banner.innerHTML = '<span><strong>DENSE VIEW</strong> · 12 markets × 4 metrics — progressive disclosure suspended per spec #96</span>' +
+        '<button onclick="window.location.search=window.location.search.replace(/[?&]dense=1/,\'\')" style="background:transparent;border:1px solid #FFF;color:#FFF;padding:2px 10px;border-radius:3px;cursor:pointer;font-family:inherit;font-size:11px">exit dense mode</button>';
+      document.body.insertBefore(banner, document.body.firstChild);
+    }
+    // Render the 4-metric dense grid into a NEW container injected
+    // before the existing small-multiples section. Preserves the
+    // original small-multiples for non-dense exit.
+    renderDenseGrid();
+  } catch (_) {}
+}
+
+function renderDenseGrid() {
+  let host = document.getElementById('wr-dense-grid');
+  if (!host) {
+    host = document.createElement('section');
+    host.id = 'wr-dense-grid';
+    host.className = 'wr-dense-grid';
+    host.style.cssText = 'display:grid;grid-template-columns:auto repeat(4, 1fr);gap:4px;padding:12px;background:#FFFFFF;border:1px solid #E5E7EB;border-radius:4px;margin:12px';
+    const target = document.getElementById('sec-small-multiples');
+    if (target && target.parentNode) {
+      target.parentNode.insertBefore(host, target);
+    } else {
+      document.body.appendChild(host);
+    }
+  }
+  host.innerHTML = '';
+  const markets = ['WW','US','EU5','CA','UK','DE','FR','IT','ES','JP','MX','AU'];
+  const metrics = [
+    { key: 'regs', label: 'Regs', color: '#0066CC' },
+    { key: 'cost', label: 'Cost', color: '#FF9900' },
+    { key: 'cpa', label: 'CPA', color: '#6A4FBD' },
+    { key: 'pred_regs', label: 'Pred', color: '#9CA3AF' },
+  ];
+  // Header row.
+  host.innerHTML += '<div></div>' + metrics.map(m =>
+    '<div style="font-family:ui-monospace,monospace;font-size:10px;color:#6b7280;text-align:center;padding:4px 0;font-weight:600;text-transform:uppercase;letter-spacing:0.04em">' + m.label + '</div>'
+  ).join('');
+  // Per-market rows.
+  markets.forEach(mk => {
+    const weekly = (FORECAST.weekly && FORECAST.weekly[mk]) || [];
+    if (!weekly.length) return;
+    const maxWk = FORECAST.max_week || 15;
+    const firstWk = Math.max(1, maxWk - 11);
+    const slice = weekly.filter(w => w.wk >= firstWk && w.wk <= maxWk);
+    host.innerHTML += '<div style="font-weight:700;color:#0F1111;font-size:11px;padding:4px 8px;border-right:1px solid #E5E7EB;display:flex;align-items:center">' + mk + '</div>';
+    metrics.forEach(m => {
+      const vals = slice.map(w => {
+        const v = w[m.key];
+        return Number.isFinite(v) && v > 0 ? v : null;
+      });
+      const nonNull = vals.filter(v => v != null);
+      if (nonNull.length < 2) {
+        host.innerHTML += '<div style="padding:4px;text-align:center;color:#9CA3AF;font-size:9px">—</div>';
+        return;
+      }
+      const W = 80, H = 30, PAD = 2;
+      const min = Math.min.apply(null, nonNull);
+      const max = Math.max.apply(null, nonNull);
+      const span = Math.max(max - min, 1);
+      const stepX = vals.length > 1 ? (W - PAD * 2) / (vals.length - 1) : 0;
+      const pts = vals.map((v, i) => {
+        if (v == null) return null;
+        const x = PAD + i * stepX;
+        const y = H - PAD - ((v - min) / span) * (H - PAD * 2);
+        return x.toFixed(1) + ',' + y.toFixed(1);
+      }).filter(Boolean).join(' ');
+      const latest = vals[vals.length - 1];
+      const prev = vals[vals.length - 2];
+      const wow = (latest != null && prev != null && prev > 0) ? (latest - prev) / prev * 100 : null;
+      const wowStr = wow != null ? (wow > 0 ? '+' : '') + wow.toFixed(0) + '%' : '—';
+      const wowCls = wow != null && wow > 2 ? '#2f7d3e' : wow != null && wow < -2 ? '#a63939' : '#6b7280';
+      host.innerHTML +=
+        '<div style="padding:2px 4px;border-right:1px solid #F3F4F6">' +
+          '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" style="display:block">' +
+            '<polyline points="' + pts + '" fill="none" stroke="' + m.color + '" stroke-width="1.2" opacity="0.85"/>' +
+          '</svg>' +
+          '<div style="font-size:9px;text-align:center;color:' + wowCls + ';font-family:ui-monospace,monospace">' + wowStr + '</div>' +
+        '</div>';
+    });
+  });
+}
 
 function applyWrLensFromUrl() {
   try {
