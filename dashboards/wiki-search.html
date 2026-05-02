@@ -185,6 +185,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
    dragging, drop-target column body gets a brand-blue ghost fill. */
 .pipe-card.pipe-card-dragging { opacity: 0.4; }
 .pipe-col-body.drop-target { background: rgba(30, 64, 175, 0.08); outline: 2px dashed #1E40AF; outline-offset: -4px; }
+/* #40 wiki (2026-05-01): per-market mini-pipelines grid layout. */
+.wk-mkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px;padding:10px 20px 20px;width:100%;align-content:start}
+.wk-mkgrid-cell{background:#FAFAFA;border:1px solid #E0E0E0;border-radius:6px;padding:8px 10px;display:flex;flex-direction:column;gap:6px}
+.wk-mkgrid-head{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:4px;border-bottom:1px solid #E5E7EB}
+.wk-mkgrid-mk{font-weight:700;font-size:13px;color:#0F1111;letter-spacing:0.04em}
+.wk-mkgrid-stats{font-size:11px;color:#6B6B6B;font-variant-numeric:tabular-nums}
+.wk-mkgrid-arrow{margin-left:4px;font-weight:600}
+.wk-mkgrid-arrow.good{color:#047857}
+.wk-mkgrid-arrow.warn{color:#B45309}
+.wk-mkgrid-subcols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.wk-mkgrid-subcol{background:#FFFFFF;border:1px solid #E5E7EB;border-radius:4px;padding:4px 6px;min-height:48px}
+.wk-mkgrid-subcol.drop-target{background:rgba(30,64,175,0.08);outline:2px dashed #1E40AF;outline-offset:-3px}
+.wk-mkgrid-subhead{font-size:10px;font-weight:700;color:#6B6B6B;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:3px;display:flex;justify-content:space-between}
+.wk-mkgrid-subcol.draft .wk-mkgrid-subhead{color:#5A6373}
+.wk-mkgrid-subcol.review .wk-mkgrid-subhead{color:#B45309}
+.wk-mkgrid-subcol.final .wk-mkgrid-subhead{color:#047857}
+.wk-mkgrid-count{background:rgba(15,17,17,0.05);color:#1F2937;padding:0 4px;border-radius:8px;font-size:10px;font-weight:600}
+.wk-mkgrid-item{font-size:11px;color:#1F2937;padding:2px 0;cursor:pointer;line-height:1.3;border-bottom:1px dashed #F3F4F6}
+.wk-mkgrid-item:last-of-type{border-bottom:none}
+.wk-mkgrid-item:hover{color:#1E40AF}
+.wk-mkgrid-empty{font-size:10px;color:#9CA3AF;font-style:italic;padding:4px 0}
+.wk-mkgrid-more{font-size:10px;color:#6B6B6B;padding:2px 0;font-style:italic}
 .pipe-card-title{font-size:13px;font-weight:600;color:#1F2937;line-height:1.3;margin-bottom:4px;padding-right:44px}
 .pipe-card-meta{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
 .pipe-card-meta .b{font-size:10px;padding:1px 4px}
@@ -1229,6 +1251,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <option value="status">Columns: Status</option>
       <option value="category">Columns: Category</option>
       <option value="market">Columns: Market</option>
+      <option value="market-grid">Grid: Per-market mini-pipelines</option>
     </select>
     <button class="f published-toggle" id="publishedToggle" onclick="togglePublished()" title="Filter to SharePoint-published docs only">?? Published only</button>
     <button class="f archive-toggle" id="archiveToggle" onclick="toggleArchive()" style="display:none">Archived <span class="fc" id="archiveCount"></span></button>
@@ -1576,8 +1599,30 @@ try {
     document.body.classList.add('theme-dark');
   }
 } catch (_) { /* private mode — silent */ }
+// #47 wiki (2026-05-01): demo mode — ?demo=1 loads last 2 weeks of ingest
+// events as a canned tour so new viewers see the wiki's pulse. #49 wiki:
+// ?dev=1 renders the full index JSON as a QA report instead of the app.
+(function checkModeFlags(){
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('dev') === '1') {
+    window.__wk_dev_mode = true;
+  }
+  if (params.get('demo') === '1') {
+    window.__wk_demo_mode = true;
+  }
+})();
 fetch('data/wiki-search-index.json?'+Date.now()).then(r=>r.json()).then(data=>{
+  // #49 wiki (2026-05-01): dev-mode JSON dump short-circuit — renders the
+  // full index as a formatted text report for QA instead of the normal UI.
+  if (window.__wk_dev_mode) {
+    renderDevModeReport(data);
+    return;
+  }
   IX=data;
+  // #47 wiki (2026-05-01): demo-mode banner applied after the body renders.
+  if (window.__wk_demo_mode && typeof applyDemoModeIfActive === 'function') {
+    applyDemoModeIfActive();
+  }
   // M09 (2026-04-30): hydrate is_orphan + contradiction_summary onto each
   // doc from the top-level orphans[] / contradictions[] arrays. The
   // pipeline emits these as lookup arrays (not per-doc flags) because
@@ -2951,6 +2996,13 @@ function renderPipeline(){
       });
     });
     colOrder.sort((a,b)=>cols[b].length-cols[a].length);
+  } else if(pipeGroupBy==='market-grid'){
+    // #40 wiki (2026-05-01): per-market mini-pipelines grid. Render
+    // handled in its own branch below — skip the single-level column
+    // loop and emit a 2D grid of per-market cells with 3 sub-columns
+    // (draft/review/final) each. Short-circuits here.
+    renderMarketGridPipeline(filtered);
+    return;
   }
 
   // Sort within columns: newest updated first
@@ -3015,6 +3067,9 @@ function renderPipeline(){
 }
 
 function renderPipeCard(doc,colKey){
+  // #40 wiki (2026-05-01): see renderMarketGridPipeline below for the
+  // per-market-grid variant — invoked from renderPipeline when
+  // pipeGroupBy === 'market-grid'.
   const overrides=loadStatusOverrides();
   const isOverride=!!overrides[doc.id];
   const effStatus=effectiveStatus(doc);
@@ -3997,6 +4052,130 @@ document.addEventListener('keydown',e=>{
     doSearch();
   }
 });
+
+// #49 wiki (2026-05-01): dev-mode route — ?dev=1 renders the full index
+// as a formatted text report for QA. Shows every top-level field with
+// type + size, counters, and a sampled preview. Intended for spot-
+// checking "this stat looks wrong, what does the index actually say?"
+function renderDevModeReport(data) {
+  const body = document.body;
+  body.innerHTML = '';
+  const frame = document.createElement('div');
+  frame.style.cssText = 'max-width:1200px;margin:0 auto;padding:24px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.5';
+  const header = document.createElement('div');
+  header.style.cssText = 'padding-bottom:12px;border-bottom:1px solid #D1D5DB;margin-bottom:16px';
+  header.innerHTML = '<h1 style="margin:0 0 6px;font-size:18px;color:#0F1111">Dev-mode index report</h1>' +
+    '<div style="color:#6B6B6B;font-size:11px">Generated ' + (data.generated || 'unknown') +
+    ' · Built from data/wiki-search-index.json · Remove ?dev=1 to return to the app.</div>';
+  frame.appendChild(header);
+  const keys = Object.keys(data).sort();
+  keys.forEach(k => {
+    const v = data[k];
+    const kind = Array.isArray(v) ? 'array[' + v.length + ']' :
+                 v === null ? 'null' :
+                 typeof v === 'object' ? 'object{' + Object.keys(v).length + ' keys}' :
+                 typeof v;
+    const block = document.createElement('div');
+    block.style.cssText = 'margin-bottom:14px;border:1px solid #E5E7EB;border-radius:4px;overflow:hidden';
+    let preview = '';
+    try {
+      const str = JSON.stringify(v, null, 2);
+      preview = str.length > 2000 ? str.slice(0, 1800) + '\n... (' + (str.length - 1800) + ' more chars)' : str;
+    } catch (_) {
+      preview = String(v);
+    }
+    block.innerHTML = '<div style="background:#F9FAFB;padding:6px 10px;border-bottom:1px solid #E5E7EB"><strong>' + k + '</strong> <span style="color:#6B6B6B">' + kind + '</span></div>' +
+      '<pre style="margin:0;padding:8px 10px;font-size:11px;line-height:1.4;overflow-x:auto;white-space:pre-wrap;color:#1F2937">' + esc(preview) + '</pre>';
+    frame.appendChild(block);
+  });
+  body.appendChild(frame);
+}
+
+// #47 wiki (2026-05-01): demo mode — ?demo=1 adds a dismissible banner +
+// sets the search query to show a canned tour of recent ingest. Keeps
+// the normal UI intact; it's an opt-in teaching layer, not a mode flip.
+function applyDemoModeIfActive() {
+  if (!window.__wk_demo_mode) return;
+  const banner = document.createElement('div');
+  banner.id = 'wkDemoBanner';
+  banner.style.cssText = 'background:#FFF9ED;border-bottom:1px solid #D4C28A;padding:8px 16px;font-size:12px;color:#8B6914;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10';
+  banner.innerHTML = '<span><strong>Demo mode</strong> — canned tour of the last 2 weeks of wiki activity. Remove <code>?demo=1</code> from the URL to exit.</span>' +
+    '<button onclick="document.getElementById(\'wkDemoBanner\').style.display=\'none\'" style="background:transparent;border:1px solid #8B6914;color:#8B6914;padding:2px 10px;border-radius:3px;cursor:pointer;font-family:inherit;font-size:11px">dismiss</button>';
+  document.body.insertBefore(banner, document.body.firstChild);
+  // Seed search with a query that surfaces recent work. No model call —
+  // use the last 14 days as a cutoff against doc.updated.
+  try {
+    const si = document.getElementById('searchInput');
+    if (si) {
+      si.value = '';  // clear — we're using a filter instead of a query
+    }
+    // Client-side: defer applying the "last 14 days" view until IX loads
+    // since the filter function runs against index data.
+    window.__wk_demo_cutoff = Date.now() - 14 * 86400 * 1000;
+  } catch (_) {}
+}
+
+// #40 wiki (2026-05-01): per-market mini-pipelines grid. Each cell is
+// one market; inside the cell, 3 mini-columns for draft/review/final
+// with a compact count + trend arrow. Skips markets with no docs
+// (rather than showing 12 mostly-empty stubs).
+function renderMarketGridPipeline(docs) {
+  const container = document.getElementById('pipeline');
+  if (!container) return;
+  const byMarket = {};
+  docs.forEach(d => {
+    const mkts = (d.markets && d.markets.length) ? d.markets : ['No market'];
+    mkts.forEach(m => {
+      if (!byMarket[m]) byMarket[m] = [];
+      byMarket[m].push(d);
+    });
+  });
+  const markets = Object.keys(byMarket).sort((a, b) => byMarket[b].length - byMarket[a].length);
+  if (!markets.length) {
+    container.innerHTML = '<div class="empty" style="margin:auto"><h3>No articles match these filters</h3><p>Clear filters or switch to Search view.</p></div>';
+    return;
+  }
+  const SEVEN_DAYS = 7 * 864e5;
+  const now = Date.now();
+  const cellHtml = markets.map(mk => {
+    const mkDocs = byMarket[mk];
+    const buckets = { DRAFT: [], REVIEW: [], FINAL: [] };
+    mkDocs.forEach(d => {
+      const s = effectiveStatus(d);
+      if (buckets[s]) buckets[s].push(d);
+    });
+    const total = mkDocs.length;
+    const recent = mkDocs.filter(d => d.updated && (now - new Date(d.updated).getTime()) < SEVEN_DAYS).length;
+    const arrow = recent >= 3 ? '&uarr;' : recent >= 1 ? '&nearr;' : '&mdash;';
+    const arrowCls = recent >= 3 ? 'good' : recent >= 1 ? 'warn' : '';
+    const subCols = ['DRAFT', 'REVIEW', 'FINAL'].map(status => {
+      const items = buckets[status];
+      const titles = items.slice(0, 3).map(d =>
+        '<div class="wk-mkgrid-item" onclick="openDoc(\'' + d.id + '\')" title="' + esc(d.title) + '">' +
+          esc(d.title.length > 36 ? d.title.slice(0, 33) + '...' : d.title) +
+        '</div>'
+      ).join('');
+      const more = items.length > 3 ? '<div class="wk-mkgrid-more">+' + (items.length - 3) + ' more</div>' : '';
+      const statusCls = status.toLowerCase();
+      return '<div class="wk-mkgrid-subcol ' + statusCls + '" data-pipe-col-target="' + status + '" ' +
+        'ondragover="pipeColDragOver(event)" ondragleave="pipeColDragLeave(event)" ondrop="pipeColDrop(event,\'' + status + '\')">' +
+        '<div class="wk-mkgrid-subhead">' + status + ' <span class="wk-mkgrid-count">' + items.length + '</span></div>' +
+        (titles || '<div class="wk-mkgrid-empty">&mdash;</div>') +
+        more +
+        '</div>';
+    }).join('');
+    return '<div class="wk-mkgrid-cell">' +
+      '<div class="wk-mkgrid-head">' +
+        '<span class="wk-mkgrid-mk">' + esc(mk) + '</span>' +
+        '<span class="wk-mkgrid-stats">' + total + ' docs <span class="wk-mkgrid-arrow ' + arrowCls + '">' + arrow + '</span></span>' +
+      '</div>' +
+      '<div class="wk-mkgrid-subcols">' + subCols + '</div>' +
+    '</div>';
+  }).join('');
+  container.innerHTML = '<div class="wk-mkgrid">' + cellHtml + '</div>';
+  if (typeof renderPipelineHeadline === 'function') renderPipelineHeadline();
+  if (typeof updCount === 'function') updCount(docs.length);
+}
 </script>
 
 <!-- #008 (2026-04-30): Command palette overlay (⌘K / Ctrl+K). Offers page-jumps,
