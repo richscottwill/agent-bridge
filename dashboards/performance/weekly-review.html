@@ -1733,6 +1733,11 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
 <!-- WR-A10 (2026-04-30): scrub-the-chart overlay indicator — shows
      current hovered week while user scrubs trend chart. -->
 <div class="wr-scrub-indicator" id="scrubIndicator">&mdash;</div>
+<!-- #62 (2026-05-01): reviewer-lens overlay — ?lens=kate / ?lens=brandon
+     adds sticky annotation callouts matching that reviewer's standard
+     questions so Richard can prep a 1:1 or skip-level walkthrough.
+     Hidden by default; activates on URL param. No LLM; just canned. -->
+<div id="wr-lens-overlay" class="wr-lens-overlay" style="display:none"></div>
 <!-- #049 (2026-05-01): aria-live region for entity-chip copy confirmations. -->
 <div id="wr-aria-live" aria-live="polite" aria-atomic="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden"></div>
 <div class="wr-frame">
@@ -2448,6 +2453,8 @@ function init() {
   // #17 (2026-05-01): observe which sec-* is most visible so URL
   // params?section=sec-xyz reflects the scroll position for sharing.
   wireSectionObserver();
+  // #62 (2026-05-01): render reviewer-lens overlay if URL has ?lens=*.
+  applyWrLensFromUrl();
   // #17 (2026-05-01): restore section-scroll from URL on cold load.
   try {
     const urlSection = new URLSearchParams(location.search).get('section');
@@ -5795,6 +5802,54 @@ function wireSectionObserver() {
   sections.forEach(s => obs.observe(s));
 }
 
+// #62 (2026-05-01): reviewer-lens overlay. ?lens=kate or ?lens=brandon
+// renders a sticky floating callout panel with that reviewer's standard
+// first-three questions — helps Richard prep a 1:1 or skip-level by
+// seeing the page through their lens. Questions are canned (no LLM)
+// and sourced from the lens-kate.md / lens-brandon.md steering files'
+// documented patterns.
+const WR_LENS_QUESTIONS = {
+  kate: {
+    label: 'Lens: Kate (L8 director)',
+    accent: '#6A4FBD',
+    questions: [
+      'What\'s the customer-experience signal beneath this number? Not just "did we hit OP2," but "did members get value?"',
+      'Are we within the forecast band? If not — baseline drift or regime change? Which markets are telling us the same story?',
+      'What\'s the one escalation risk in this week that I need to brief up? Plus the one bright spot worth scaling.',
+    ],
+  },
+  brandon: {
+    label: 'Lens: Brandon (L7 manager)',
+    accent: '#0066CC',
+    questions: [
+      'Which markets are operationally off-plan? What\'s the corrective action and who owns it?',
+      'Forecast trust — are we believing the current model, or is there calibration drift that changes our decisions?',
+      'What\'s blocking us from shipping the weekly cadence cleanly? Any single item I need to unblock this week?',
+    ],
+  },
+};
+
+function applyWrLensFromUrl() {
+  try {
+    const lens = new URLSearchParams(location.search).get('lens');
+    if (!lens || !WR_LENS_QUESTIONS[lens]) return;
+    const cfg = WR_LENS_QUESTIONS[lens];
+    const host = document.getElementById('wr-lens-overlay');
+    if (!host) return;
+    host.style.cssText = 'position:fixed;bottom:20px;left:20px;max-width:360px;background:#FFFFFF;border:1px solid ' + cfg.accent + ';border-left:4px solid ' + cfg.accent + ';border-radius:6px;padding:12px 14px;z-index:9000;box-shadow:0 8px 24px rgba(0,0,0,0.12);font-size:12px;line-height:1.5';
+    host.innerHTML =
+      '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">' +
+        '<strong style="color:' + cfg.accent + ';font-size:11px;text-transform:uppercase;letter-spacing:0.06em">' + cfg.label + '</strong>' +
+        '<button onclick="document.getElementById(\'wr-lens-overlay\').style.display=\'none\'" style="background:none;border:0;font-size:14px;line-height:1;color:#6b7280;cursor:pointer;padding:0 4px">x</button>' +
+      '</div>' +
+      '<ol style="margin:0;padding:0 0 0 18px;color:#1f2937">' +
+        cfg.questions.map(q => '<li style="margin-bottom:6px">' + q + '</li>').join('') +
+      '</ol>' +
+      '<div style="margin-top:8px;font-size:10px;color:#6b7280">Remove <code>?lens=' + lens + '</code> from URL to hide.</div>';
+    host.style.display = 'block';
+  } catch (_) {}
+}
+
 // #93 (2026-05-01): scrollytelling mode — press N to step through the
 // page's key insights in narrative order, with auto-scroll + a focus
 // highlight. Power-user alternative to free scrolling for 1:1 prep or
@@ -5914,6 +5969,25 @@ function wireChartDownloadButtons() {
       }
     };
     wrap.appendChild(btn);
+    // #64 (2026-05-01): long-press (750ms) gesture on the chart triggers
+    // the same PNG download. Cross-platform: works with mouse hold on
+    // desktop + touch-hold on tablets. Skips when the click lands on
+    // the PNG button itself (button onclick already handles that).
+    let pressTimer = null;
+    const clearPress = () => { if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; } };
+    const startPress = (e) => {
+      if (e.target.closest('.wr-chart-dl')) return;
+      clearPress();
+      pressTimer = setTimeout(() => {
+        btn.click();
+        // Visual feedback: brief ripple on the button.
+        btn.style.outline = '2px solid var(--color-brand)';
+        setTimeout(() => { btn.style.outline = ''; }, 400);
+      }, 750);
+    };
+    canvas.addEventListener('mousedown', startPress);
+    canvas.addEventListener('touchstart', startPress, { passive: true });
+    ['mouseup','mouseleave','touchend','touchcancel'].forEach(evt => canvas.addEventListener(evt, clearPress));
   });
   wireChartDownloadButtons._bound = true;
 }
