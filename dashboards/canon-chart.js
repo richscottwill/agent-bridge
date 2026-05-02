@@ -663,6 +663,35 @@
       tension: 0.25, yAxisID: 'y', spanGaps: true,
     });
 
+    // #95 (2026-05-01): curve-fit overlay on the actuals half. Centered
+    // 5-week moving average renders a smoothed trend line behind the raw
+    // totals — chart becomes readable at a glance without hiding the raw
+    // points (which remain visible on the Total registrations line above).
+    // Vercel Analytics 2022 "curve fitting for charts" / FT Chart Doctor
+    // smoothing guidance — we use MA-5 rather than polynomial fit because
+    // MA is robust to end-effects and has no train/test overhead.
+    if (sd.regsProjTotal && sd.todayIdx != null && sd.todayIdx > 4) {
+      const smoothed = new Array(sd.regsProjTotal.length).fill(null);
+      const W = 2;  // ±2 weeks = 5-week centered window
+      for (let i = 0; i < sd.todayIdx; i++) {
+        let sum = 0, cnt = 0;
+        for (let j = Math.max(0, i - W); j <= Math.min(sd.todayIdx - 1, i + W); j++) {
+          const v = sd.regsProjTotal[j];
+          if (Number.isFinite(v)) { sum += v; cnt++; }
+        }
+        if (cnt > 0) smoothed[i] = sum / cnt;
+      }
+      datasets.push({
+        label: '_trendSmooth',  // _ prefix hides from legend per existing filter convention
+        data: smoothed,
+        borderColor: 'rgba(26, 26, 26, 0.28)',
+        backgroundColor: 'transparent',
+        borderWidth: 1.5, pointRadius: 0,
+        tension: 0.45,
+        yAxisID: 'y', spanGaps: true,
+      });
+    }
+
     // Projected — STACKED AREA for Brand + NB so the chart reads as
     // "here's what we expect, and here's how Brand / NB split it." Brand
     // on the bottom, NB on top. Fills are solid enough to convey weight
