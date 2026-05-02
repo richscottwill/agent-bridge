@@ -2080,7 +2080,14 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
 <div id="calloutGrid" style="display:none"></div>
 <!-- WR-C2 (2026-04-28): removed #genTs footer timestamp — page-render
      time is always "now" and wasn't useful. Single data-freshness
-     timestamp lives in the header #dataTs. -->
+     timestamp lives in the header #dataTs.
+     #36 (2026-05-01): add a slim provenance footer so the header
+     can shed the run-on provenance subtitle per spec. Stays empty
+     until render populates dataTsFooter — keeps top-of-fold for signal. -->
+<footer id="wr-footer" class="wr-footer" style="margin-top:var(--gap-lg);padding:var(--gap-sm) var(--gap-md);border-top:1px solid var(--color-panel-border);font-size:11px;color:var(--color-text-subtle);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+  <span id="dataTsFooter">Data freshness — loading…</span>
+  <span>Weekly Review · Paid Search / Amazon Business</span>
+</footer>
 
 <!-- #59 + #91 (2026-05-01): experimental power-user panels behind disclosures.
      Both pull from FORECAST.predictions_history (already on the page) so no
@@ -2366,6 +2373,12 @@ function init() {
   const monthDay = calloutDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   document.getElementById('dataTs').textContent =
     `Data as of ${weekday} ${monthDay} \u00b7 Forecast through ${FORECAST.last_data_date || 'W' + FORECAST.max_week}`;
+  // #36 (2026-05-01): mirror to the footer so top-of-fold stays compact.
+  // Header shows "as of X" abbreviated; footer carries full provenance.
+  const footerTs = document.getElementById('dataTsFooter');
+  if (footerTs) {
+    footerTs.textContent = `Data as of ${weekday} ${monthDay} ${calloutDate.getFullYear()} · Forecast through ${FORECAST.last_data_date || 'W' + FORECAST.max_week} · Methodology v${FORECAST.methodology_version || '1.1-slim'} · Source: ${FORECAST.source || 'ps.forecasts'}`;
+  }
 
   // #15 + #16 (2026-05-01): keyboard power-user affordances.
   //   J/K    next/prev week (matches vim/Gmail conventions; Bloomberg uses
