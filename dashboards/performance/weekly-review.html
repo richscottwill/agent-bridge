@@ -672,6 +672,9 @@ body {
   line-height: 1.5;
 }
 .wr-exception-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-mono, ui-monospace, monospace);
   font-size: 10px;
   letter-spacing: 0.14em;
@@ -739,6 +742,77 @@ body {
 .wr-exception-action-btn-secondary:hover {
   background: var(--color-text-subtle);
   color: #FFFFFF;
+}
+
+/* #23 + #24 (2026-05-01): exception-banner kicker gets two quiet utility
+   buttons on the right: "why?" opens a plain-English trigger explainer,
+   "dismiss" hides the banner for 24 hours. Styled as tertiary actions
+   so they don't compete with the primary CTA below. */
+.wr-exception-why,
+.wr-exception-dismiss {
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid #D1D5DB;
+  color: var(--color-text-subtle);
+  font-family: inherit;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  padding: 1px 8px;
+  border-radius: 2px;
+  cursor: pointer;
+  text-transform: none;
+  font-weight: 500;
+}
+.wr-exception-why { margin-left: auto; }
+.wr-exception-dismiss { margin-left: 4px; }
+.wr-exception-why:hover,
+.wr-exception-dismiss:hover {
+  border-color: var(--color-text-hero);
+  color: var(--color-text-hero);
+}
+
+/* #056 (2026-05-01): "This week's hardest thing" compact card under the
+   callout headline. Amber left border to distinguish from the blue
+   accent of scenario-diff and the red exception banner. Single action
+   surfaced per render — extracted from exception severity, context
+   paragraphs, or scorecard state with graceful hide when nothing
+   actionable surfaces. */
+.wr-hardest-thing {
+  margin-top: var(--gap-sm);
+  padding: 10px 14px;
+  background: #FFF9ED;
+  border-left: 3px solid #C78A2E;
+  border-radius: 3px;
+}
+.wr-hardest-thing-kicker {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  color: #8B6914;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.wr-hardest-thing-action {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-hero);
+  line-height: 1.3;
+}
+.wr-hardest-thing-action-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(139, 105, 20, 0.3);
+}
+.wr-hardest-thing-action-link:hover {
+  border-bottom-color: #C78A2E;
+}
+.wr-hardest-thing-rationale {
+  font-size: 13px;
+  color: var(--color-text-body);
+  margin-top: 3px;
+  line-height: 1.4;
 }
 
 /* #049 (2026-05-01): entity chip — first-name stakeholders found in the
@@ -1754,7 +1828,7 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
 <div class="wr-chart-grid" id="sec-charts">
   <div class="sec-panel" id="sec-trend">
     <div class="wr-calib-head">
-      <h3 style="margin:0"><span>What happened — actuals vs OP2</span></h3>
+      <h3 style="margin:0"><span id="trendChartTitle">What happened — actuals vs OP2</span></h3>
       <!-- WR-F1 (2026-04-29): axis filter parity with the calibration
            panel. Defaults to Both because "What happened" is the
            at-a-glance panel and both axes usually belong together. -->
@@ -1768,7 +1842,7 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
   </div>
   <div class="sec-panel" id="sec-calibration">
     <div class="wr-calib-head">
-      <h3 style="margin:0"><span>Weekly forecast error</span></h3>
+      <h3 style="margin:0"><span id="calibChartTitle">Weekly forecast error</span></h3>
       <div class="wr-chart-axis-toggle" id="calibAxisToggle" role="group" aria-label="Forecast error axis filter">
         <button class="wr-tab wr-chart-mode-btn active" data-axis="regs">Regs</button>
         <button class="wr-tab wr-chart-mode-btn" data-axis="spend">Spend</button>
@@ -2159,6 +2233,28 @@ function init() {
   wireWrKeyboard();
 
   render();
+  // #68 (2026-05-01): restore pinned scrub from URL hash on cold load.
+  try {
+    const m = (window.location.hash || '').match(/#scrub=(W\d+)/);
+    if (m && m[1]) {
+      const wk = m[1];
+      const hasCallout = ((CALLOUTS.callouts[curMarket] || {})[wk]);
+      if (hasCallout) {
+        scrubWeek = wk;
+        scrubPinned = true;
+        document.body.classList.add('wr-scrubbing');
+        const indicator = document.getElementById('scrubIndicator');
+        if (indicator) {
+          indicator.classList.add('active');
+          indicator.classList.add('pinned');
+          indicator.textContent = `Pinned \u2192 ${wk} (click or Esc to unpin)`;
+        }
+        renderCalloutNarrative();
+        renderThreeQ();
+        renderVariance();
+      }
+    }
+  } catch (_) { /* hash parse failed — ignore */ }
 }
 
 // #15 (2026-05-01): power-user keyboard navigation. Ignores events when
@@ -2169,16 +2265,37 @@ function init() {
 function wireWrKeyboard() {
   if (wireWrKeyboard._bound) return;
   wireWrKeyboard._bound = true;
+  // #067 (2026-05-01): two-key vim-style TOC jump — press `g` then `c`
+  // within 1.2s to toggle the collapsed Sections <details>. Other
+  // g-prefixed sequences reserved for future TOC anchors.
+  let gPressedAt = 0;
   document.addEventListener('keydown', (e) => {
     const t = e.target;
     const tag = (t && t.tagName || '').toLowerCase();
     const editable = t && (t.isContentEditable || tag === 'input' || tag === 'textarea' || tag === 'select');
     if (editable) return;
-    // Don't swallow keys when the shortcut overlay is already open; the
-    // overlay has its own Escape handler.
+    // Two-key sequence handling for `g c`.
+    if (e.key === 'g' || e.key === 'G') {
+      gPressedAt = Date.now();
+      return;
+    }
+    if ((e.key === 'c' || e.key === 'C') && (Date.now() - gPressedAt) < 1200) {
+      e.preventDefault();
+      gPressedAt = 0;
+      const tocDetails = document.querySelector('.wr-toc-collapsed');
+      if (tocDetails) {
+        tocDetails.open = !tocDetails.open;
+        if (tocDetails.open) {
+          const firstLink = tocDetails.querySelector('.wr-toc a');
+          if (firstLink) firstLink.focus();
+        }
+      }
+      return;
+    }
+    gPressedAt = 0;
     switch (e.key) {
       case 'j': case 'J':
-        e.preventDefault(); navWeek(-1); break;  // newer weeks (lower index in weeks array — newest-first)
+        e.preventDefault(); navWeek(-1); break;
       case 'k': case 'K':
         e.preventDefault(); navWeek(1); break;
       case 'r': case 'R':
@@ -2193,13 +2310,13 @@ function wireWrKeyboard() {
     }
   });
   // #16 (2026-05-01): register the shortcut list with the shared overlay.
-  // The overlay binds its own "?" toggle inside install().
   if (window.ShortcutsOverlay) {
     window.ShortcutsOverlay.install([
       { keys: 'J',   description: 'Next week (newer)' },
       { keys: 'K',   description: 'Previous week (older)' },
       { keys: 'R',   description: 'Reset filters to defaults' },
       { keys: '/',   description: 'Focus week picker' },
+      { keys: 'g c', description: 'Toggle Sections table-of-contents' },
       { keys: '?',   description: 'Toggle this shortcut overlay' },
       { keys: 'Esc', description: 'Close overlay / unpin scrub' },
       { keys: 'Shift+hover', description: 'Pin scrub state to hovered week' },
@@ -2383,6 +2500,91 @@ renderWbrNote();
   applyMarketArchetype();
   // WR-A10 (2026-04-30): wire scrub handlers AFTER charts exist.
   wireChartScrub();
+  // #6 (2026-05-01): set active chart titles from narrative state.
+  // Must run after renderCallout (feeds trend title) and renderScorecard
+  // (feeds calibration title).
+  renderActiveChartTitles();
+}
+
+// #6 (2026-05-01): active chart titles — "name the insight, not the dataset."
+// For the trend chart: pulls the first sentence of the callout headline for
+// the current market+week. For the calibration chart: composes from the
+// scorecard's in-CI rate + mean error. Falls back to the default static
+// label when state isn't available (cold load, rollup markets with no
+// callout, insufficient backtest history).
+function renderActiveChartTitles() {
+  const trendEl = document.getElementById('trendChartTitle');
+  const calibEl = document.getElementById('calibChartTitle');
+  // Trend title — first sentence of the callout headline.
+  if (trendEl) {
+    const c = (CALLOUTS.callouts[curMarket] || {})[curWeek] || {};
+    const hl = (c.headline || '').trim();
+    if (hl) {
+      // First sentence — split on ". " but keep trailing period. Cap at 120 chars.
+      const firstSentence = (hl.split(/\.\s+/)[0] || hl).trim();
+      const titleText = firstSentence.length > 120
+        ? firstSentence.slice(0, 117) + '...'
+        : firstSentence + (firstSentence.endsWith('.') ? '' : '.');
+      trendEl.textContent = titleText;
+    } else {
+      trendEl.textContent = 'What happened — actuals vs OP2';
+    }
+  }
+  // Calibration title — compute from predictions_history.
+  if (calibEl && FORECAST && FORECAST.predictions_history) {
+    const hist = (FORECAST.predictions_history[curMarket] || {});
+    const weeks = Object.keys(hist).map(k => parseInt(k, 10)).filter(Number.isFinite).sort((a, b) => a - b);
+    const recent6 = weeks.slice(-6);
+    let hits = 0, total = 0, errSum = 0, errCount = 0;
+    for (const w of recent6) {
+      const r = (hist[String(w)] || hist[w] || {}).regs || {};
+      if (r.actual == null) continue;
+      if (r.latest_ci_lo != null && r.latest_ci_hi != null) {
+        total++;
+        if (r.actual >= r.latest_ci_lo && r.actual <= r.latest_ci_hi) hits++;
+      }
+      if (Number.isFinite(r.error_pct)) { errSum += r.error_pct; errCount++; }
+    }
+    if (total >= 3) {
+      const inCiPct = Math.round(hits / total * 100);
+      const meanErr = errCount > 0 ? errSum / errCount : null;
+      let lens;
+      if (meanErr != null && meanErr > 15) {
+        lens = `Model chronically under-predicts — ${inCiPct}% weeks in CI, mean +${meanErr.toFixed(0)}%`;
+      } else if (meanErr != null && meanErr < -15) {
+        lens = `Model chronically over-predicts — ${inCiPct}% weeks in CI, mean ${meanErr.toFixed(0)}%`;
+      } else if (inCiPct >= 80) {
+        lens = `Model well-calibrated — ${hits}/${total} weeks inside CI`;
+      } else if (inCiPct < 50) {
+        lens = `Model off — ${hits}/${total} weeks inside CI`;
+      } else {
+        lens = `Calibration middling — ${inCiPct}% weeks in CI`;
+      }
+      calibEl.textContent = lens;
+    } else {
+      calibEl.textContent = 'Weekly forecast error';
+    }
+  }
+  // 6-12 chart: upgrade the static "Registrations" to pull the trend
+  // direction WoW when available (close to spec for per-chart insight).
+  const wbr612TitleEl = document.getElementById('wbr612Title');
+  if (wbr612TitleEl) {
+    const weekly = (FORECAST.weekly && FORECAST.weekly[curMarket]) || [];
+    const maxWk = FORECAST.max_week || 15;
+    const latest = weekly.find(w => w.wk === maxWk) || weekly[weekly.length - 1];
+    const prev = weekly.find(w => w.wk === maxWk - 1);
+    const archetype = (typeof ARCHETYPE !== 'undefined' && ARCHETYPE[curMarket]) || 'regs';
+    const key = archetype === 'spend' ? 'cost' : 'regs';
+    const metricLabel = archetype === 'spend' ? 'Spend' : 'Registrations';
+    if (latest && prev && latest[key] && prev[key]) {
+      const wow = (latest[key] - prev[key]) / prev[key] * 100;
+      const dir = wow > 2 ? 'up' : wow < -2 ? 'down' : 'flat';
+      const pctStr = Math.abs(wow).toFixed(1) + '%';
+      wbr612TitleEl.textContent = `${metricLabel} — W${maxWk} ${dir} ${wow > 0 ? '+' : wow < 0 ? '-' : ''}${pctStr} WoW`;
+    } else {
+      wbr612TitleEl.textContent = metricLabel;
+    }
+  }
 }
 
 // ============================================================================
@@ -2532,7 +2734,90 @@ function renderCalloutNarrative() {
       (c.period ? ' &middot; ' + c.period : '') + stateBadge + '</div>' +
     '<p class="wr-callout-headline" role="text">' + h3Content + '</p>' +
     (bodyHtml ? '<div class="wr-callout-narrative">' + bodyHtml + '</div>' : '') +
+    renderHardestThingCard(c, rw) +
     '</div>';
+}
+
+// #56 (2026-05-01): "This week's hardest thing" — single auto-extracted
+// action surfaced right under the headline so the reader knows what to
+// do next. Extraction priority:
+//   1. If exception banner will render at >25% (draft Brandon note),
+//      surface that action. (Highest-severity signal always wins.)
+//   2. Else if a forecast exception will render at 15-25%, surface
+//      "open investigation" framing.
+//   3. Else if context paragraphs mention a stakeholder + verb ("Reply
+//      to Lorena…" / "Follow up with Brandon on…"), use that.
+//   4. Else if the scorecard is red (in-CI < 50%), suggest scorecard
+//      review.
+//   5. Else return empty string — the card hides rather than inventing.
+//
+// Per soul.md aMCC hard-thing discipline and Commoncog "what should we
+// do about it?" framing. No pipeline data needed.
+function renderHardestThingCard(callout, weekLabel) {
+  // Priority 1+2: exception-driven. Recompute magnitude since we're
+  // ahead of renderExceptionBanner in the render order (headline first).
+  const hist = (FORECAST && FORECAST.predictions_history && FORECAST.predictions_history[curMarket]) || {};
+  const maxWk = (FORECAST && FORECAST.max_week) || 0;
+  let latestErr = null, meanErr = null, errCount = 0, errSum = 0;
+  for (let w = Math.max(1, maxWk - 5); w <= maxWk; w++) {
+    const r = (hist[String(w)] || hist[w] || {}).regs || {};
+    if (Number.isFinite(r.error_pct)) { errSum += r.error_pct; errCount++; }
+    if (w === maxWk) latestErr = Number.isFinite(r.error_pct) ? r.error_pct : null;
+  }
+  meanErr = errCount > 0 ? errSum / errCount : null;
+  const maxAbs = Math.max(Math.abs(latestErr || 0), Math.abs(meanErr || 0));
+
+  if (maxAbs > 25) {
+    return renderHardestThingHtml(
+      'Draft Brandon note',
+      `${curMarket} ${weekLabel} missed by ${Math.abs(Math.round(latestErr || meanErr))}%. Pre-composed Slack draft is in the exception banner below — one click sends.`,
+      '#exceptionBanner'
+    );
+  }
+  if (maxAbs > 15) {
+    return renderHardestThingHtml(
+      'Open forecast investigation',
+      `${curMarket} is drifting (${Math.abs(Math.round(latestErr || meanErr))}% miss). Open the scorecard below and decide: regime shift, or calibration drift?`,
+      '#sec-scorecard'
+    );
+  }
+  // Priority 3: stakeholder verb-pattern in context paragraphs.
+  const contextParas = (callout && callout.context_paragraphs) || [];
+  const verbPattern = /\b(reply|follow up|ping|reach out|ask|sync with|escalate to|email|send)\s+[^.]*?\b([A-Z][a-z]{2,})/i;
+  for (const p of contextParas) {
+    const txt = typeof p === 'string' ? p : (p && p.text) || '';
+    const m = txt.match(verbPattern);
+    if (m) {
+      const action = m[0].trim();
+      return renderHardestThingHtml(
+        action.charAt(0).toUpperCase() + action.slice(1),
+        `Flagged in this week's context — single action most likely to unblock the next decision.`,
+        '#sec-context'
+      );
+    }
+  }
+  // Priority 4: scorecard red.
+  if (errCount >= 3) {
+    const inCiRate = errCount / 6;  // approximate
+    if (meanErr != null && Math.abs(meanErr) > 10) {
+      return renderHardestThingHtml(
+        'Review scorecard',
+        `Forecast hit rate degraded — model has been off by ${Math.abs(Math.round(meanErr))}% on average. Worth reviewing calibration before next week.`,
+        '#sec-scorecard'
+      );
+    }
+  }
+  return '';
+}
+
+function renderHardestThingHtml(action, rationale, anchor) {
+  return (
+    '<div class="wr-hardest-thing" role="note" aria-label="This week\'s hardest thing">' +
+      '<div class="wr-hardest-thing-kicker">This week\'s hardest thing</div>' +
+      '<div class="wr-hardest-thing-action"><a href="' + anchor + '" class="wr-hardest-thing-action-link">' + action + '</a></div>' +
+      '<div class="wr-hardest-thing-rationale">' + rationale + '</div>' +
+    '</div>'
+  );
 }
 
 // M2 (2026-04-30): Exception banner. Renders below the narrative when the
@@ -2549,6 +2834,14 @@ function renderCalloutNarrative() {
 function renderExceptionBanner() {
   const host = document.getElementById('exceptionBanner');
   if (!host || !FORECAST) return;
+  // #23 (2026-05-01): auto-dismiss-seen — if Richard dismissed this
+  // exception within the last 24 hours, don't re-surface until data
+  // moves to a new week.
+  if (exceptionDismissedRecently()) {
+    host.style.display = 'none';
+    host.innerHTML = '';
+    return;
+  }
 
   const rw = resolvedWeek();
   const hist = (FORECAST.predictions_history && FORECAST.predictions_history[curMarket]) || {};
@@ -2672,7 +2965,10 @@ function renderExceptionBanner() {
   host.style.display = '';
   host.innerHTML =
     '<div class="wr-exception" role="alert">' +
-    '<div class="wr-exception-kicker">Exception \u00b7 Forecast</div>' +
+    '<div class="wr-exception-kicker">Exception \u00b7 Forecast' +
+      '<button class="wr-exception-why" title="Why am I seeing this? Opens a short explanation of how this exception was triggered." aria-label="Why am I seeing this exception?" onclick="showExceptionWhy(event)">why?</button>' +
+      '<button class="wr-exception-dismiss" title="Dismiss this exception for 24 hours" aria-label="Dismiss exception for 24 hours" onclick="dismissExceptionFor24h(event)">dismiss</button>' +
+    '</div>' +
     '<div class="wr-exception-diagnosis"><strong>' + diagnosis + '</strong>' +
       (evidence.length ? '<em>\u00b7 ' + evidence.join(' \u00b7 ') + '</em>' : '') +
     '</div>' +
@@ -2685,6 +2981,80 @@ function renderExceptionBanner() {
       notifyBtn +
     '</div>' +
     '</div>';
+}
+
+// #23 (2026-05-01): dismiss an exception for 24 hours. Persists a
+// timestamp in localStorage keyed by market+week so the same exception
+// doesn't reappear on every page load within the window. Ambient UI per
+// soul.md invisible-over-visible — once Richard has seen and acted on
+// an exception, stop re-surfacing it until fresh data lands.
+function dismissExceptionFor24h(e) {
+  if (e) e.stopPropagation();
+  try {
+    const key = `wr-exc-dismissed-${curMarket}-${curWeek}`;
+    localStorage.setItem(key, String(Date.now()));
+  } catch (_) { /* quota — silent */ }
+  const host = document.getElementById('exceptionBanner');
+  if (host) {
+    host.style.display = 'none';
+    host.innerHTML = '';
+  }
+}
+
+function exceptionDismissedRecently() {
+  try {
+    const key = `wr-exc-dismissed-${curMarket}-${curWeek}`;
+    const ts = parseInt(localStorage.getItem(key) || '0', 10);
+    if (!ts) return false;
+    const ageMs = Date.now() - ts;
+    return ageMs < 24 * 60 * 60 * 1000;
+  } catch (_) {
+    return false;
+  }
+}
+
+// #24 (2026-05-01): "Why am I seeing this?" — opens a panel explaining
+// the exception trigger in plain English. Uses the same three conditions
+// (miss, coverage, trend) that renderExceptionBanner checks + the actual
+// numbers that led to the verdict.
+function showExceptionWhy(e) {
+  if (e) e.stopPropagation();
+  const hist = (FORECAST.predictions_history && FORECAST.predictions_history[curMarket]) || {};
+  const maxWk = FORECAST.max_week || 15;
+  const last = (hist[String(maxWk)] || hist[maxWk] || {}).regs || {};
+  const latestErr = Number.isFinite(last.error_pct) ? last.error_pct : null;
+  let hits = 0, total = 0, errSum = 0, errCount = 0;
+  for (let w = Math.max(1, maxWk - 5); w <= maxWk; w++) {
+    const r = (hist[String(w)] || hist[w] || {}).regs || {};
+    if (r.latest_ci_lo != null && r.latest_ci_hi != null && r.actual != null) {
+      total++;
+      if (r.actual >= r.latest_ci_lo && r.actual <= r.latest_ci_hi) hits++;
+    }
+    if (Number.isFinite(r.error_pct)) { errSum += r.error_pct; errCount++; }
+  }
+  const meanError = errCount > 0 ? errSum / errCount : null;
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px';
+  overlay.onclick = (ev) => { if (ev.target === overlay) overlay.remove(); };
+  const card = document.createElement('div');
+  card.style.cssText = 'background:#FFFFFF;border-radius:8px;padding:18px 22px;max-width:520px;box-shadow:0 12px 40px rgba(0,0,0,0.25);font-size:13px;line-height:1.5';
+  const rows = [
+    latestErr != null ? `<strong>Latest week error:</strong> ${latestErr > 0 ? '+' : ''}${latestErr.toFixed(1)}% ${Math.abs(latestErr) > 15 ? '(triggers miss threshold at 15%)' : '(under miss threshold)'}` : null,
+    total > 0 ? `<strong>In-CI coverage:</strong> ${hits}/${total} weeks ${(hits/total) < 0.5 ? '(triggers coverage threshold at 50%)' : '(above coverage threshold)'}` : null,
+    meanError != null ? `<strong>Mean error, last 6 weeks:</strong> ${meanError > 0 ? '+' : ''}${meanError.toFixed(1)}% ${Math.abs(meanError) > 20 ? '(triggers trend threshold at 20%)' : '(under trend threshold)'}` : null,
+  ].filter(Boolean);
+  card.innerHTML =
+    '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px">' +
+      '<h3 style="margin:0;font-size:15px;color:#111827">Why this exception?</h3>' +
+      '<button style="background:none;border:0;font-size:18px;line-height:1;color:#6b7280;cursor:pointer;padding:0 4px" onclick="this.closest(\'div[style*=fixed]\').remove()">x</button>' +
+    '</div>' +
+    '<p style="margin:0 0 8px;color:#4b5563">The exception banner fires when any one of three conditions holds. Here\'s what\'s happening for ' + curMarket + ' right now:</p>' +
+    '<ul style="margin:0 0 10px 18px;padding:0">' +
+      rows.map(r => '<li style="margin-bottom:6px">' + r + '</li>').join('') +
+    '</ul>' +
+    '<p style="margin:0;color:#6b7280;font-size:12px">Triggers: latest-week miss >15%, in-CI rate <50% (min 3 weeks), or mean error >20% across last 6 weeks.</p>';
+  overlay.appendChild(card);
+  document.body.appendChild(overlay);
 }
 
 // M8 (2026-04-30): Prior-week thread strip. Additive to WR-A10 scrub —
@@ -4417,8 +4787,7 @@ function renderLeaderboard() {
 // member markets are already independent pills in the bar.
 function renderStickyTrustBar() {
   const host = document.getElementById('trustBar');
-  if (!host || !FORECAST || !window.TrustBar) return;
-  // Keep the label span in place; the helper writes into a child container.
+  if (!host || !FORECAST || !window.TrustBar) return;  // Keep the label span in place; the helper writes into a child container.
   let pillHost = host.querySelector('.trust-pill-host');
   if (!pillHost) {
     pillHost = document.createElement('span');
@@ -4441,6 +4810,90 @@ function renderStickyTrustBar() {
       curMetric = defaultMetricForMarket(curMarket);
       try { localStorage.setItem('wr-last-market', mk); } catch (e) { /* ignore */ }
       render();
+    }
+  });
+  // #18 (2026-05-01): hover sparkline popup on each trust-bar pill.
+  // Reads FORECAST.predictions_history to compute last-6-weeks signed
+  // error, renders as a 150×40 floating card. Keeps the existing title=
+  // attribute as the accessible label + mobile fallback.
+  wireTrustPillHoverCards(pillHost);
+}
+
+// #18 (2026-05-01): attach hover-card popups showing a 6-week forecast-
+// error sparkline to each trust-bar pill. Uses event delegation on the
+// host so pills re-rendered after market/week changes still get the
+// behavior without re-wiring.
+let wrHoverCardEl = null;
+function wireTrustPillHoverCards(pillHost) {
+  if (!pillHost || !FORECAST || !FORECAST.predictions_history) return;
+  // Singleton hover card element.
+  if (!wrHoverCardEl) {
+    wrHoverCardEl = document.createElement('div');
+    wrHoverCardEl.className = 'wr-pill-hovercard';
+    wrHoverCardEl.style.cssText = 'position:fixed;display:none;z-index:1001;' +
+      'background:#FFFFFF;border:1px solid #D1D5DB;border-radius:4px;' +
+      'box-shadow:0 4px 12px rgba(0,0,0,0.12);padding:8px 10px;' +
+      'pointer-events:none;font-family:var(--font-mono, ui-monospace, monospace);' +
+      'font-size:11px;color:#1f2937;min-width:170px';
+    document.body.appendChild(wrHoverCardEl);
+  }
+  if (pillHost.dataset.hoverDelegated === '1') return;
+  pillHost.dataset.hoverDelegated = '1';
+  pillHost.addEventListener('mouseover', (e) => {
+    const pill = e.target.closest('.trust-pill');
+    if (!pill || !pillHost.contains(pill)) return;
+    const mk = pill.dataset.market;
+    if (!mk || !FORECAST.predictions_history) return;
+    const hist = FORECAST.predictions_history[mk] || {};
+    const maxWk = FORECAST.max_week;
+    const errs = [];
+    for (let w = Math.max(1, maxWk - 5); w <= maxWk; w++) {
+      const r = (hist[String(w)] || hist[w] || {}).regs || {};
+      if (r.actual == null || r.latest_pred == null) continue;
+      const err = (r.latest_pred - r.actual) / r.actual * 100;
+      const inCi = (r.latest_ci_lo != null && r.latest_ci_hi != null)
+        ? r.actual >= r.latest_ci_lo && r.actual <= r.latest_ci_hi : null;
+      errs.push({ wk: w, err, inCi });
+    }
+    if (errs.length < 2) {
+      wrHoverCardEl.innerHTML = `<strong>${mk}</strong> &middot; insufficient history`;
+    } else {
+      const max = Math.max.apply(null, errs.map(r => Math.abs(r.err))) || 1;
+      const W = 150, H = 40, PAD = 4;
+      const sx = (i) => PAD + (i / (errs.length - 1)) * (W - PAD * 2);
+      const sy = (v) => H / 2 - (v / max) * (H / 2 - PAD);
+      let svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">`;
+      svg += `<line x1="${PAD}" x2="${W - PAD}" y1="${H / 2}" y2="${H / 2}" stroke="#9ca3af" stroke-width="0.8" stroke-dasharray="2,2"/>`;
+      errs.forEach((r, i) => {
+        const color = r.inCi === true ? '#2f7d3e' : r.inCi === false ? '#a63939' : '#6b7280';
+        const y0 = H / 2;
+        const y1 = sy(r.err);
+        const yTop = Math.min(y0, y1);
+        const yH = Math.max(1, Math.abs(y1 - y0));
+        svg += `<rect x="${sx(i) - 4}" y="${yTop}" width="8" height="${yH}" fill="${color}" fill-opacity="0.7"/>`;
+      });
+      svg += '</svg>';
+      const latest = errs[errs.length - 1];
+      const latestStr = `${latest.err > 0 ? '+' : ''}${latest.err.toFixed(1)}%`;
+      wrHoverCardEl.innerHTML =
+        `<div style="font-weight:600;color:#0F1111;margin-bottom:4px">${mk} &middot; last ${errs.length}w</div>` +
+        svg +
+        `<div style="display:flex;justify-content:space-between;margin-top:2px">` +
+          `<span style="color:#6B6B6B">latest W${latest.wk}</span>` +
+          `<span style="font-weight:600">${latestStr}</span>` +
+        `</div>`;
+    }
+    const rect = pill.getBoundingClientRect();
+    wrHoverCardEl.style.display = 'block';
+    wrHoverCardEl.style.left = (rect.left + window.scrollX) + 'px';
+    wrHoverCardEl.style.top = (rect.bottom + 6) + 'px';
+  });
+  pillHost.addEventListener('mouseout', (e) => {
+    // Hide when the mouse leaves the pill entirely (not when it moves between
+    // children within the same pill).
+    const toEl = e.relatedTarget;
+    if (!toEl || !pillHost.contains(toEl) || !toEl.closest('.trust-pill')) {
+      if (wrHoverCardEl) wrHoverCardEl.style.display = 'none';
     }
   });
 }
@@ -4490,6 +4943,12 @@ function wireChartScrub() {
     if (!scrubPinned) return;
     scrubPinned = false;
     if (indicator) indicator.classList.remove('pinned');
+    // #68 (2026-05-01): clear scrub hash from URL on unpin.
+    try {
+      if (window.location.hash.startsWith('#scrub=')) {
+        window.history.replaceState({}, '', window.location.pathname + window.location.search);
+      }
+    } catch (_) {}
     // Return to selected week.
     scrubWeek = null;
     document.body.classList.remove('wr-scrubbing');
@@ -4517,6 +4976,13 @@ function wireChartScrub() {
     scrubWeek = wk;
     scrubPinned = wantPin;
     document.body.classList.add('wr-scrubbing');
+    // #68 (2026-05-01): sync scrub state to URL hash when pinned so
+    // the hovered view is shareable. Unpinned scrubs are ephemeral
+    // and don't touch the URL (would churn history). Pinned scrubs
+    // write the hash; unpin clears it.
+    if (wantPin) {
+      try { window.history.replaceState({}, '', '#scrub=' + wk); } catch (_) {}
+    }
     if (indicator) {
       indicator.classList.add('active');
       indicator.classList.toggle('pinned', scrubPinned);
