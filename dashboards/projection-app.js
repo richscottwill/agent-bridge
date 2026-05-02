@@ -1064,6 +1064,9 @@
     document.getElementById('kpi-brand-regs').textContent = fmtNum(t.brand_regs);
     document.getElementById('kpi-nb-regs').textContent = fmtNum(t.nb_regs);
     document.getElementById('kpi-cpa').textContent = fmt$(t.blended_cpa);
+    // #7 (2026-05-01): trailing 6-week sparklines on each KPI tile.
+    // Pulls from ytd_weekly (actuals) so each card shows level + trend.
+    renderKpiSparklines(marketData);
     const ieEl = document.getElementById('kpi-ieccp');
     ieEl.textContent = t.computed_ieccp != null ? fmtPct(t.computed_ieccp) : 'n/a';
     ieEl.classList.remove('warn', 'danger');
@@ -2661,6 +2664,79 @@
       '<div class="backtest-quarters-grid">' +
         populated.map(([q, rows]) => '<div class="backtest-quarter-cell">' + plotReliability(q, rows) + '</div>').join('') +
       '</div>';
+  }
+
+  // #7 (2026-05-01): trailing 6-week sparklines on hero KPI tiles.
+  // Pulls from marketData.ytd_weekly so each card shows its level + trend.
+  // Region scopes (WW/EU5/NA) have no ytd_weekly — cards keep current
+  // numeric-only rendering for those. No emoji. 60×16 SVG with endpoint
+  // dot, matches the grammar used on weekly-review KPI cards.
+  function renderKpiSparklines(marketData) {
+    const scope = currentScope();
+    if (MPE.ALL_REGIONS.includes(scope) || !marketData) {
+      ['kpi-brand-regs','kpi-nb-regs','kpi-cpa'].forEach(id => {
+        const tile = document.getElementById(id);
+        if (!tile) return;
+        const sparkSlot = tile.parentElement && tile.parentElement.querySelector('.hero-kpi-spark');
+        if (sparkSlot) sparkSlot.innerHTML = '';
+      });
+      return;
+    }
+    const ytd = marketData.ytd_weekly || [];
+    if (ytd.length < 2) return;
+    const last6 = ytd.slice(-6);
+    function mkSpark(vals, color) {
+      const nonNull = vals.filter(v => Number.isFinite(v) && v > 0);
+      if (nonNull.length < 2) return '';
+      const W = 60, H = 16, PAD = 1;
+      const min = Math.min.apply(null, nonNull);
+      const max = Math.max.apply(null, nonNull);
+      const span = Math.max(max - min, 1);
+      const stepX = (W - PAD * 2) / Math.max(vals.length - 1, 1);
+      const pts = vals.map((v, i) => {
+        if (!Number.isFinite(v) || v <= 0) return null;
+        const x = PAD + i * stepX;
+        const y = H - PAD - ((v - min) / span) * (H - PAD * 2);
+        return x.toFixed(1) + ',' + y.toFixed(1);
+      }).filter(Boolean).join(' ');
+      const lastIdx = vals.length - 1;
+      const lastV = vals[lastIdx];
+      let endDot = '';
+      if (Number.isFinite(lastV) && lastV > 0) {
+        const ex = PAD + lastIdx * stepX;
+        const ey = H - PAD - ((lastV - min) / span) * (H - PAD * 2);
+        endDot = `<circle cx="${ex.toFixed(1)}" cy="${ey.toFixed(1)}" r="2" fill="${color}"/>`;
+      }
+      return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="display:block;margin-top:4px;opacity:0.85" aria-hidden="true">` +
+        `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.2"/>` +
+        endDot +
+      '</svg>';
+    }
+    const brandSeries = last6.map(w => w.brand_regs || w.brand_registrations || 0);
+    const nbSeries = last6.map(w => w.nb_regs || w.nb_registrations || 0);
+    const cpaSeries = last6.map(w => {
+      const regs = (w.brand_regs || 0) + (w.nb_regs || 0);
+      const cost = (w.brand_spend || 0) + (w.nb_spend || 0);
+      return regs > 0 && cost > 0 ? cost / regs : null;
+    });
+    const slots = [
+      { tileId: 'kpi-brand-regs', series: brandSeries, color: '#0066CC' },
+      { tileId: 'kpi-nb-regs',    series: nbSeries,    color: '#FF9900' },
+      { tileId: 'kpi-cpa',        series: cpaSeries,   color: '#7B6D9E' },
+    ];
+    slots.forEach(({ tileId, series, color }) => {
+      const tile = document.getElementById(tileId);
+      if (!tile) return;
+      const parent = tile.parentElement;
+      if (!parent) return;
+      let sparkSlot = parent.querySelector('.hero-kpi-spark');
+      if (!sparkSlot) {
+        sparkSlot = document.createElement('div');
+        sparkSlot.className = 'hero-kpi-spark';
+        tile.insertAdjacentElement('afterend', sparkSlot);
+      }
+      sparkSlot.innerHTML = mkSpark(series, color);
+    });
   }
 
   function renderCpaBoxWhisker(projectedCpa) {
