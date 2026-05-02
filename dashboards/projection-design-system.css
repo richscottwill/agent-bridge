@@ -253,9 +253,13 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Numbers always tabular */
-.num, .tab-num { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+/* Numbers always tabular */.num, .tab-num { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
 .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+/* #2 (2026-05-01): site-wide tabular numbers. Every KPI, every table
+   cell, every axis label gets decimal-aligned columns by default.
+   One CSS line per spec — elements that specifically need proportional
+   figures can opt out with font-variant-numeric: proportional-nums. */
+body { font-variant-numeric: tabular-nums; }
 
 /* Hero layout — principle #1 (info hierarchy), #2 (progressive disclosure) */
 .hero-grid {

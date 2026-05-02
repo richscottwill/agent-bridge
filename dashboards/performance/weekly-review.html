@@ -2332,6 +2332,17 @@ function init() {
   wireWrKeyboard();
 
   render();
+  // #17 (2026-05-01): observe which sec-* is most visible so URL
+  // params?section=sec-xyz reflects the scroll position for sharing.
+  wireSectionObserver();
+  // #17 (2026-05-01): restore section-scroll from URL on cold load.
+  try {
+    const urlSection = new URLSearchParams(location.search).get('section');
+    if (urlSection) {
+      const el = document.getElementById(urlSection);
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
+  } catch (_) {}
   // #68 (2026-05-01): restore pinned scrub from URL hash on cold load.
   try {
     const m = (window.location.hash || '').match(/#scrub=(W\d+)/);
@@ -2556,6 +2567,10 @@ function render() {
   // WR-P1: keep URL in sync with state so the current view is shareable.
   try {
     const params = new URLSearchParams({ market: curMarket, week: curWeek });
+    // #17 (2026-05-01): carry the most-visible section in the URL so a
+    // Slack-pasted link lands on the exact panel. Section tracking is
+    // maintained by wireSectionObserver; we just read from a global.
+    if (window.__wr_visible_section) params.set('section', window.__wr_visible_section);
     const next = params.toString();
     if (next !== location.search.slice(1)) {
       history.replaceState({}, '', '?' + next);
@@ -5475,6 +5490,56 @@ function renderWeekGrid() {
       render();
     });
   });
+}
+
+// #17 (2026-05-01): IntersectionObserver tracks which sec-* element
+// occupies the most viewport area. Updates window.__wr_visible_section
+// so the URL sync (syncUrlFromState in render()) picks it up on each
+// render. Observer throttles via a debounce; no re-render fires from
+// scroll alone to keep scrolling smooth.
+let wrSectionObsDebounce = null;
+function wireSectionObserver() {
+  if (!('IntersectionObserver' in window)) return;
+  if (wireSectionObserver._bound) return;
+  wireSectionObserver._bound = true;
+  const sections = document.querySelectorAll('[id^="sec-"]');
+  if (!sections.length) return;
+  let maxSection = null;
+  let maxRatio = 0;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > maxRatio) {
+        maxRatio = e.intersectionRatio;
+        maxSection = e.target.id;
+      }
+    });
+    if (wrSectionObsDebounce) clearTimeout(wrSectionObsDebounce);
+    wrSectionObsDebounce = setTimeout(() => {
+      // Recompute from current entries list to find the current max-visible.
+      let best = null, bestRatio = 0;
+      sections.forEach(s => {
+        const r = s.getBoundingClientRect();
+        const viewH = window.innerHeight;
+        const visible = Math.max(0, Math.min(r.bottom, viewH) - Math.max(r.top, 0));
+        const ratio = viewH > 0 ? visible / viewH : 0;
+        if (ratio > bestRatio) { bestRatio = ratio; best = s.id; }
+      });
+      if (best && best !== window.__wr_visible_section) {
+        window.__wr_visible_section = best;
+        // Update URL without triggering render cascade.
+        try {
+          const params = new URLSearchParams(location.search);
+          params.set('section', best);
+          const next = params.toString();
+          if (next !== location.search.slice(1)) {
+            history.replaceState({}, '', '?' + next);
+          }
+        } catch (_) {}
+      }
+      maxSection = null; maxRatio = 0;
+    }, 300);
+  }, { threshold: [0.1, 0.25, 0.5, 0.75, 1.0] });
+  sections.forEach(s => obs.observe(s));
 }
 
 // #93 (2026-05-01): scrollytelling mode — press N to step through the
