@@ -3419,6 +3419,49 @@ function renderViewerBody(body,doc,md){
   }
 
   body.innerHTML=html;
+  // #48 wiki (2026-05-01): inline prose sparklines. Walks the viewer
+  // body, finds <!-- wk-spark:V1,V2,V3,... --> markers, and replaces
+  // each with a word-sized SVG.
+  decorateWikiInlineSparklines(body);
+}
+
+function decorateWikiInlineSparklines(body) {
+  if (!body) return;
+  const walker = document.createTreeWalker(body, NodeFilter.SHOW_COMMENT, null);
+  const comments = [];
+  let node;
+  while ((node = walker.nextNode())) {
+    const text = (node.nodeValue || '').trim();
+    const m = text.match(/^wk-spark:(.+)$/);
+    if (m) comments.push({ node, data: m[1].trim() });
+  }
+  comments.forEach(({ node, data }) => {
+    const vals = data.split(/[\s,]+/).map(Number).filter(v => Number.isFinite(v));
+    if (vals.length < 2) return;
+    const W = 48, H = 14, PAD = 1;
+    const min = Math.min.apply(null, vals);
+    const max = Math.max.apply(null, vals);
+    const span = Math.max(max - min, 0.001);
+    const stepX = (W - PAD * 2) / (vals.length - 1);
+    const pts = vals.map((v, i) => (PAD + i * stepX).toFixed(1) + ',' + (H - PAD - ((v - min) / span) * (H - PAD * 2)).toFixed(1)).join(' ');
+    const svgNs = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNs, 'svg');
+    svg.setAttribute('width', String(W));
+    svg.setAttribute('height', String(H));
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg.setAttribute('class', 'wk-inline-spark');
+    svg.setAttribute('aria-label', 'Inline sparkline: ' + vals.length + ' points from ' + min + ' to ' + max);
+    svg.style.verticalAlign = '-2px';
+    svg.style.marginLeft = '2px';
+    const line = document.createElementNS(svgNs, 'polyline');
+    line.setAttribute('points', pts);
+    line.setAttribute('fill', 'none');
+    line.setAttribute('stroke', '#0066CC');
+    line.setAttribute('stroke-width', '1');
+    line.setAttribute('opacity', '0.85');
+    svg.appendChild(line);
+    if (node.parentNode) node.parentNode.replaceChild(svg, node);
+  });
 }
 
 function refreshTagFilter(tag){

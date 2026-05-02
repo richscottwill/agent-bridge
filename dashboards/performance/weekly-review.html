@@ -819,6 +819,15 @@ body {
 .wr-inline-spark-wrap { white-space: nowrap; }
 .wr-inline-spark { display: inline-block; vertical-align: baseline; }
 
+/* #93 (2026-05-01): scrollytelling focus — section getting narrated
+   gets a brand-blue outline-offset ring so it pops from neighbors. */
+.wr-scrolly-focus {
+  outline: 3px solid var(--color-brand, #0066cc);
+  outline-offset: 4px;
+  border-radius: 6px;
+  transition: outline-color 200ms ease;
+}
+
 /* #60 (2026-05-01): week-grid popover. 52 squares (W1-W52) colored by
    forecast-trust for the current market. Click to jump. */
 .wr-week-grid {
@@ -2397,6 +2406,14 @@ function wireWrKeyboard() {
           if (sel) { sel.focus(); }
         }
         break;
+      case 'n': case 'N':
+        // #93 (2026-05-01): scrollytelling — next insight.
+        e.preventDefault(); wrScrollyAdvance(1); break;
+      case 'p': case 'P':
+        e.preventDefault(); wrScrollyAdvance(-1); break;
+      case 'Escape':
+        if (wrScrollyIdx >= 0) { e.preventDefault(); wrScrollyExit(); }
+        break;
     }
   });
   // #16 (2026-05-01): register the shortcut list with the shared overlay.
@@ -2406,9 +2423,11 @@ function wireWrKeyboard() {
       { keys: 'K',   description: 'Previous week (older)' },
       { keys: 'R',   description: 'Reset filters to defaults' },
       { keys: '/',   description: 'Focus week picker' },
+      { keys: 'N',   description: 'Scrollytelling: next insight' },
+      { keys: 'P',   description: 'Scrollytelling: previous insight' },
       { keys: 'g c', description: 'Toggle Sections table-of-contents' },
       { keys: '?',   description: 'Toggle this shortcut overlay' },
-      { keys: 'Esc', description: 'Close overlay / unpin scrub' },
+      { keys: 'Esc', description: 'Close overlay / exit scrollytelling / unpin scrub' },
       { keys: 'Shift+hover', description: 'Pin scrub state to hovered week' },
     ]);
   }
@@ -5456,6 +5475,58 @@ function renderWeekGrid() {
       render();
     });
   });
+}
+
+// #93 (2026-05-01): scrollytelling mode — press N to step through the
+// page's key insights in narrative order, with auto-scroll + a focus
+// highlight. Power-user alternative to free scrolling for 1:1 prep or
+// skip-level walkthroughs. Insights are a fixed ordered list of
+// sec-* anchors; pressing N advances one step, pressing P goes back,
+// pressing Escape exits the mode.
+const WR_SCROLLY_STEPS = [
+  { id: 'exceptionBanner', label: 'Exception banner', why: 'Highest-severity signal for this week' },
+  { id: 'sec-callout', label: 'Callout narrative', why: 'The week\'s story' },
+  { id: 'sec-kpi-scorecard', label: 'KPI scorecard', why: 'Top-line numbers' },
+  { id: 'sec-scorecard', label: 'Forecast hit rate', why: 'Can we trust the projection?' },
+  { id: 'sec-wbr612', label: '6-12 chart', why: 'Weekly + monthly arc' },
+  { id: 'sec-variance', label: 'Variance decomposition', why: 'Where the WoW delta came from' },
+  { id: 'sec-trend', label: 'Trend chart', why: 'Actuals vs OP2 over time' },
+  { id: 'threadStrip', label: 'Prior-week thread', why: 'Calibration pattern at a glance' },
+];
+let wrScrollyIdx = -1;
+function wrScrollyAdvance(dir) {
+  // Clear prior highlight.
+  document.querySelectorAll('.wr-scrolly-focus').forEach(el => el.classList.remove('wr-scrolly-focus'));
+  wrScrollyIdx = Math.max(0, Math.min(WR_SCROLLY_STEPS.length - 1, wrScrollyIdx + dir));
+  const step = WR_SCROLLY_STEPS[wrScrollyIdx];
+  if (!step) return;
+  const el = document.getElementById(step.id);
+  if (!el) return;
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  el.classList.add('wr-scrolly-focus');
+  // Show tiny HUD — top-right corner pill showing progress + why.
+  showWrScrollyHud(step);
+}
+function wrScrollyExit() {
+  document.querySelectorAll('.wr-scrolly-focus').forEach(el => el.classList.remove('wr-scrolly-focus'));
+  const hud = document.getElementById('wrScrollyHud');
+  if (hud) hud.style.display = 'none';
+  wrScrollyIdx = -1;
+}
+function showWrScrollyHud(step) {
+  let hud = document.getElementById('wrScrollyHud');
+  if (!hud) {
+    hud = document.createElement('div');
+    hud.id = 'wrScrollyHud';
+    hud.className = 'wr-scrolly-hud';
+    hud.style.cssText = 'position:fixed;top:16px;right:16px;background:rgba(15,17,17,0.92);color:#FFF;padding:8px 14px;border-radius:6px;z-index:10003;font-size:12px;line-height:1.4;max-width:280px;box-shadow:0 4px 16px rgba(0,0,0,0.25)';
+    document.body.appendChild(hud);
+  }
+  hud.innerHTML =
+    '<div style="font-weight:700;margin-bottom:2px">' + (wrScrollyIdx + 1) + ' / ' + WR_SCROLLY_STEPS.length + ' · ' + step.label + '</div>' +
+    '<div style="color:#D1D5DB;font-size:11px">' + step.why + '</div>' +
+    '<div style="color:#6B7280;font-size:10px;margin-top:4px;font-family:ui-monospace,monospace">N = next · P = prev · Esc = exit</div>';
+  hud.style.display = 'block';
 }
 
 // #19 (2026-05-01): dark-mode toggle. Writes preference to localStorage
