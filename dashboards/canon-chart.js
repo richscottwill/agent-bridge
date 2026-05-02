@@ -188,6 +188,12 @@
     const spendLatestAll = new Array(52).fill(null);
     const spendLatestFuture = new Array(52).fill(null);
     const spendFirst = new Array(52).fill(null);
+    // #13 (2026-05-01): prior-year ghost series. When FORECAST.weekly[mk][w].ly_regs
+    // or forecastData.ly_weekly[mk] is populated, collect it here so
+    // buildDefaultDatasets can render a muted ghost line behind the current-
+    // year trend. Amazon WBR explicit spec for same-week-last-year context.
+    const lyRegs = new Array(52).fill(null);
+    const lySpend = new Array(52).fill(null);
 
     // Cold-start / DuckDB-unreachable fallback: if refresh-forecast.py could
     // not overwrite pred_regs from ps.forecasts (e.g. MotherDuck offline),
@@ -249,6 +255,11 @@
 
       // OP2 target — regs only
       op2Regs[i] = toNumOrNull(row.op2_regs);
+      // #13 (2026-05-01): prior-year ghost series — populate from row.ly_regs
+      // if present (refresh-forecast.py already emits this field), else fall
+      // back to forecastData.ly_weekly[market] if that structure exists.
+      if (row.ly_regs != null && row.ly_regs > 0) lyRegs[i] = toNumOrNull(row.ly_regs);
+      if (row.ly_cost != null && row.ly_cost > 0) lySpend[i] = toNumOrNull(row.ly_cost) / 1000;
     }
 
     // Keep CI band anchored to the last actual so it starts visually at "Now"
@@ -261,6 +272,7 @@
       ciLoAll, ciHiAll, ciLoFuture, ciHiFuture,
       op2Regs,
       spendActual, spendLatestAll, spendLatestFuture, spendFirst,
+      lyRegs, lySpend,
     };
   }
 
@@ -294,6 +306,31 @@
         borderColor: GRAY, backgroundColor: 'transparent',
         borderWidth: 1.5, borderDash: [3, 3], pointRadius: 0, tension: 0,
         yAxisID: 'y', spanGaps: true,
+      });
+    }
+    // #13 (2026-05-01): prior-year ghost line — same-week-last-year regs
+    // as a muted pink line behind the current-year line. Single most-
+    // asked comparison in WBR callouts; always-visible, not derived from
+    // text. Hidden by default to keep cold-load chart uncluttered — users
+    // opt in via legend click (Chart.js dataset toggle).
+    if ((axis === 'regs' || axis === 'both') && s.lyRegs && s.lyRegs.some(v => v != null)) {
+      sets.push({
+        label: 'LY regs (same week)', data: s.lyRegs,
+        borderColor: 'rgba(200, 120, 140, 0.55)',
+        backgroundColor: 'transparent',
+        borderWidth: 1.5, borderDash: [2, 4], pointRadius: 0, tension: 0.25,
+        yAxisID: 'y', spanGaps: true,
+        hidden: true,  // opt-in via legend click
+      });
+    }
+    if ((axis === 'spend' || axis === 'both') && s.lySpend && s.lySpend.some(v => v != null)) {
+      sets.push({
+        label: 'LY spend (same week, $K)', data: s.lySpend,
+        borderColor: 'rgba(140, 160, 200, 0.55)',
+        backgroundColor: 'transparent',
+        borderWidth: 1.5, borderDash: [2, 4], pointRadius: 0, tension: 0.25,
+        yAxisID: 'y1', spanGaps: true,
+        hidden: true,
       });
     }
     if (axis === 'regs' || axis === 'both') {
