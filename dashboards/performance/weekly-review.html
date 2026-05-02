@@ -658,6 +658,44 @@ body {
 .wr-smallmult-yoy.bad  { color: var(--color-danger); }
 .wr-smallmult-yoy.warn { color: var(--color-warning); }
 
+/* #44 (2026-05-01): YoY-sorted leaderboard pill row below the small-
+   multiples grid. Compact, scannable; reader sees "who's hot, who's not"
+   in one sweep. Click a pill to jump to that market. */
+.wr-yoy-leaderboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: var(--gap-sm);
+  padding: 6px 0;
+  border-top: 1px dashed var(--color-panel-border);
+}
+.wr-yoy-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border: 1px solid var(--color-panel-border);
+  background: var(--color-panel-bg);
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  color: var(--color-text-subtle);
+  transition: border-color 120ms ease, background 120ms ease;
+}
+.wr-yoy-pill .mk { font-weight: 700; color: var(--color-text-hero); }
+.wr-yoy-pill .yoy { font-variant-numeric: tabular-nums; }
+.wr-yoy-pill.good .yoy { color: var(--color-success); }
+.wr-yoy-pill.bad  .yoy { color: var(--color-danger); }
+.wr-yoy-pill.warn .yoy { color: var(--color-warning); }
+.wr-yoy-pill.na   { opacity: 0.55; }
+.wr-yoy-pill.active {
+  border-color: var(--color-brand);
+  background: rgba(0, 102, 204, 0.08);
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.12);
+}
+.wr-yoy-pill:hover { border-color: var(--color-brand); }
+
 /* M2 (2026-04-30): Exception banner. Renders only when the forecast
    for the current market has materially missed in the last 1-6 weeks.
    Red lane, diagnosis + recommended-action row. */
@@ -1658,6 +1696,12 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
   background: linear-gradient(to bottom, #F4EEFD 0%, var(--color-panel-bg) 55%);
   border-left: 3px solid #6A4FBD;
 }
+/* #55 (2026-05-01): same period-state accent on the sticky header's
+   left edge so the global context travels with the reader as they
+   scroll past the callout card. */
+.wr-stick.period-refit    { border-left: 3px solid #0066CC; }
+.wr-stick.period-holiday  { border-left: 3px solid #D4931A; }
+.wr-stick.period-q_close  { border-left: 3px solid #6A4FBD; }
 .wr-period-badge {
   display: inline-block;
   margin-left: var(--gap-xs);
@@ -1880,6 +1924,9 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
     </span>
   </header>
   <div class="wr-smallmult-grid" id="smallMultiplesGrid"></div>
+  <!-- #44 (2026-05-01): leaderboard pill row sorted by YoY regs growth
+       so the "who's hot, who's not" question reads in one second. -->
+  <div class="wr-yoy-leaderboard" id="yoyLeaderboard" aria-label="Markets sorted by YoY regs growth"></div>
 </section>
 
 <!-- M8 (2026-04-30): Prior-week thread as 7-cell sparkline strip.
@@ -2858,6 +2905,13 @@ function renderCalloutNarrative() {
   const stateBadge = (ps.state && ps.state !== 'normal' && ps.label)
     ? ` <span class="wr-period-badge ${ps.state}">${ps.label}</span>`
     : '';
+  // #55 (2026-05-01): period-state tint promoted to the sticky header
+  // left-edge accent so the global context isn't buried one panel deep.
+  const stickEl = document.querySelector('.wr-stick');
+  if (stickEl) {
+    stickEl.classList.remove('period-refit', 'period-holiday', 'period-q_close');
+    if (ps.state && ps.state !== 'normal') stickEl.classList.add('period-' + ps.state);
+  }
   host.innerHTML =
     '<div class="sec-panel wr-callout-main' + stateClass + '" id="sec-callout" style="margin-bottom:var(--gap-lg)">' +
     (sinceHtml || '') +
@@ -3833,6 +3887,49 @@ function renderSmallMultiples() {
       try { localStorage.setItem('wr-last-market', mk); } catch (e) { /* ignore */ }
       render();
     };
+  });
+  // #44 (2026-05-01): render the YoY-sorted leaderboard pill row below
+  // the small-multiples grid. Reuses the seriesByMarket map that the
+  // small-multiples just computed so we don't recompute YoY.
+  renderYoyLeaderboard(seriesByMarket);
+}
+
+// #44 (2026-05-01): sorted-by-YoY leaderboard pill row. Best→worst
+// reading; click a pill to jump to that market (same handler as
+// small-multiples cells). Markets with no YoY data render at the end
+// with muted styling.
+function renderYoyLeaderboard(seriesByMarket) {
+  const host = document.getElementById('yoyLeaderboard');
+  if (!host || !seriesByMarket) return;
+  const rows = Object.entries(seriesByMarket).map(([mk, s]) => ({
+    mk, yoy: (s && Number.isFinite(s.yoyLatest)) ? s.yoyLatest : null,
+  }));
+  // Sort: defined YoY descending, nulls last.
+  rows.sort((a, b) => {
+    if (a.yoy == null && b.yoy == null) return 0;
+    if (a.yoy == null) return 1;
+    if (b.yoy == null) return -1;
+    return b.yoy - a.yoy;
+  });
+  host.innerHTML = rows.map(r => {
+    const yoyText = r.yoy == null ? '—' : (r.yoy > 0 ? '+' : '') + r.yoy.toFixed(0) + '%';
+    const cls = r.yoy == null ? 'na' : r.yoy > 0 ? 'good' : r.yoy < -5 ? 'bad' : 'warn';
+    const active = r.mk === curMarket ? ' active' : '';
+    return '<button class="wr-yoy-pill ' + cls + active + '" data-market="' + r.mk + '" title="' + r.mk + ': ' + yoyText + ' YoY regs">' +
+      '<span class="mk">' + r.mk + '</span>' +
+      '<span class="yoy">' + yoyText + '</span>' +
+    '</button>';
+  }).join('');
+  host.querySelectorAll('.wr-yoy-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const mk = btn.dataset.market;
+      if (!mk || mk === curMarket) return;
+      curMarket = mk;
+      curRegion = MARKET_TO_REGION[mk] || mk;
+      curMetric = defaultMetricForMarket(curMarket);
+      try { localStorage.setItem('wr-last-market', mk); } catch (_) {}
+      render();
+    });
   });
 }
 

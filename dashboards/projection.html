@@ -164,6 +164,20 @@ details.sec-panel:not([open]) + details.sec-panel {
 
 /* Scenario chip row (seeded for Phase 6.4 reuse) */
 .scenario-strip { margin: var(--gap-md) auto var(--gap-lg); }
+/* #73 (2026-05-01): promoted scenario chips — denser, sticky-adjacent.
+   Sits right under the controls row and scrolls with the page; visually
+   reads as a primary control rather than a mid-page decoration. */
+.scenario-chips-promoted {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: var(--gap-sm) var(--gap-lg);
+  background: rgba(0, 102, 204, 0.04);
+  border-top: 1px solid var(--color-panel-border);
+  border-bottom: 1px solid var(--color-panel-border);
+  margin: 0 0 var(--gap-md);
+}
 
 /* Provenance modal reused from design-system drawer pattern */
 .modal-overlay {
@@ -417,8 +431,11 @@ details.sec-panel:not([open]) + details.sec-panel {
     </div>
   </div>
 
-  <!-- Scenario chips (Phase 6.4 placeholder — seed with MX regime scenarios) -->
-  <div class="scenario-chips scenario-strip" id="scenario-chips"></div>
+  <!-- Scenario chips. #73 (2026-05-01): previously mid-page "Phase 6.4
+       placeholder" — now promoted directly under the controls as a
+       segmented control row. Scenario switching is a primary decision
+       (alongside market/period/driver), not a mid-page refinement. -->
+  <div class="scenario-chips scenario-strip scenario-chips-promoted" id="scenario-chips"></div>
 
   <!-- Primary chart + loading overlay -->
   <div class="chart-wrap" id="chart-wrap">
