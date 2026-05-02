@@ -2023,6 +2023,18 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
      time is always "now" and wasn't useful. Single data-freshness
      timestamp lives in the header #dataTs. -->
 
+<!-- #59 + #91 (2026-05-01): experimental power-user panels behind disclosures.
+     Both pull from FORECAST.predictions_history (already on the page) so no
+     new data plumbing needed. Collapsed by default so cold-load isn't affected. -->
+<details class="sec-panel" id="sec-horizon" style="margin-top:var(--gap-md)">
+  <summary style="cursor:pointer;font-weight:600;font-size:var(--size-meta);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.08em">Horizon chart — forecast errors across 12 markets × 26 weeks</summary>
+  <div id="horizonBody" style="margin-top:var(--gap-sm)"></div>
+</details>
+<details class="sec-panel" id="sec-calheatmap" style="margin-top:var(--gap-md)">
+  <summary style="cursor:pointer;font-weight:600;font-size:var(--size-meta);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.08em">Calendar heatmap — this year's daily rhythm (current market)</summary>
+  <div id="calHeatmapBody" style="margin-top:var(--gap-sm)"></div>
+</details>
+
 </main>
 </div> <!-- /.wr-frame -->
 
@@ -2563,6 +2575,11 @@ renderWbrNote();
   wireChartScrub();
   // #21 (2026-05-01): attach PNG download buttons to chart wrappers.
   wireChartDownloadButtons();
+  // #59 + #91 (2026-05-01): bind experimental-panel toggles; refresh cal
+  // heatmap if it's already open (market changed).
+  wireExperimentalDisclosures();
+  const calPanel = document.getElementById('sec-calheatmap');
+  if (calPanel && calPanel.open) renderCalendarHeatmap();
   // #6 (2026-05-01): set active chart titles from narrative state.
   // Must run after renderCallout (feeds trend title) and renderScorecard
   // (feeds calibration title).
@@ -5000,6 +5017,142 @@ function showPillHoverCard(pill, pinned) {
   wrHoverCardEl.style.left = (rect.left + window.scrollX) + 'px';
   wrHoverCardEl.style.top = (rect.bottom + 6) + 'px';
   wrHoverCardEl.classList.toggle('pinned', !!pinned);
+}
+
+// #59 (2026-05-01): horizon chart — one row per market, 26 weeks wide,
+// signed forecast error per week color-banded by magnitude. Horizon
+// graph (Heer CHI 2009) compresses ±% error into a 2-band view so
+// readers can spot persistent-miss patterns vs one-off misses at a
+// glance without zooming into any single market. Auto-renders when the
+// disclosure is opened for the first time.
+function renderHorizonChart() {
+  const host = document.getElementById('horizonBody');
+  if (!host || !FORECAST || !FORECAST.predictions_history) {
+    if (host) host.innerHTML = '<div class="wr-empty" style="padding:12px">No predictions_history emitted.</div>';
+    return;
+  }
+  const markets = ['WW','US','UK','DE','FR','IT','ES','CA','JP','MX','AU','EU5'];
+  const maxWk = FORECAST.max_week || 15;
+  const firstWk = Math.max(1, maxWk - 25);
+  const weeks = [];
+  for (let w = firstWk; w <= maxWk; w++) weeks.push(w);
+  // Row dims
+  const W = 900, ROW_H = 28, LABEL_W = 56;
+  const plotW = W - LABEL_W - 8;
+  const cellW = plotW / weeks.length;
+  const rowYPad = 2;
+  const rows = markets.map((mk, i) => {
+    const hist = FORECAST.predictions_history[mk] || {};
+    const errCells = weeks.map((w, j) => {
+      const r = (hist[String(w)] || hist[w] || {}).regs || {};
+      if (!Number.isFinite(r.error_pct)) return null;
+      const err = r.error_pct;
+      // 3 bands per direction: <5, 5-15, >15 (lighter → darker).
+      let color;
+      const a = Math.abs(err);
+      if (a < 5) color = 'rgba(148,163,184,0.35)';
+      else if (err > 0) {
+        if (a < 15) color = 'rgba(232,168,0,0.55)';
+        else color = 'rgba(209,50,18,0.70)';
+      } else {
+        if (a < 15) color = 'rgba(45,145,95,0.45)';
+        else color = 'rgba(5,94,50,0.65)';
+      }
+      const x = LABEL_W + 8 + j * cellW;
+      const y = i * (ROW_H + rowYPad);
+      return `<rect x="${x}" y="${y + 2}" width="${Math.max(cellW - 0.5, 1)}" height="${ROW_H - 4}" fill="${color}"><title>W${w}: ${err > 0 ? '+' : ''}${err.toFixed(1)}%</title></rect>`;
+    }).filter(Boolean).join('');
+    const label = `<text x="${LABEL_W}" y="${i * (ROW_H + rowYPad) + ROW_H / 2 + 3}" text-anchor="end" font-size="11" font-weight="600" fill="#1f2937" font-family="ui-monospace,monospace">${mk}</text>`;
+    return label + errCells;
+  }).join('');
+  const totalH = markets.length * (ROW_H + rowYPad);
+  // Week-axis labels (every 4 weeks)
+  const axis = weeks.map((w, j) => {
+    if (j % 4 !== 0 && j !== weeks.length - 1) return '';
+    const x = LABEL_W + 8 + j * cellW + cellW / 2;
+    return `<text x="${x}" y="${totalH + 12}" text-anchor="middle" font-size="10" fill="#6b7280" font-family="ui-monospace,monospace">W${w}</text>`;
+  }).join('');
+  host.innerHTML =
+    '<div style="color:#6B6B6B;font-size:11px;margin-bottom:6px">Signed forecast error per market-week. Red bands = over-predicted; green = under-predicted; grey = within ±5%. Darker = larger magnitude.</div>' +
+    `<svg viewBox="0 0 ${W} ${totalH + 20}" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Horizon chart of forecast errors across ${markets.length} markets and ${weeks.length} weeks">` +
+      rows + axis +
+    '</svg>';
+}
+
+// #91 (2026-05-01): calendar heatmap — 52 weeks × 1 row showing YoY
+// delta on regs for the current market. Each tile = one ISO week,
+// color-coded by YoY%. Lets readers see seasonality (e.g., W47
+// Thanksgiving) and anomalies (W41 CA Thanksgiving) at one glance.
+// Data source: FORECAST.weekly[market][wk] carries regs + ly_regs (LY)
+// so we compute (actual - LY) / LY directly. Renders on disclosure-open.
+function renderCalendarHeatmap() {
+  const host = document.getElementById('calHeatmapBody');
+  if (!host || !FORECAST || !FORECAST.weekly) return;
+  const weekly = FORECAST.weekly[curMarket] || [];
+  if (!weekly.length) {
+    host.innerHTML = '<div class="wr-empty" style="padding:12px">No weekly data for ' + curMarket + '.</div>';
+    return;
+  }
+  const maxWk = FORECAST.max_week || 15;
+  const W = 900, H = 48, LABEL_W = 48;
+  const plotW = W - LABEL_W - 8;
+  const cellW = plotW / 52;
+  const tiles = [];
+  for (let w = 1; w <= 52; w++) {
+    const row = weekly.find(r => r.wk === w) || {};
+    let color = 'rgba(148,163,184,0.18)';  // no data
+    let tooltip = `W${w}: no data`;
+    if (row.regs > 0 && row.ly_regs > 0) {
+      const yoy = (row.regs - row.ly_regs) / row.ly_regs * 100;
+      const a = Math.abs(yoy);
+      if (yoy > 0) {
+        if (a < 10) color = 'rgba(45,145,95,0.35)';
+        else if (a < 30) color = 'rgba(45,145,95,0.55)';
+        else color = 'rgba(5,94,50,0.75)';
+      } else {
+        if (a < 10) color = 'rgba(232,168,0,0.45)';
+        else if (a < 30) color = 'rgba(209,50,18,0.60)';
+        else color = 'rgba(153,27,27,0.80)';
+      }
+      tooltip = `W${w}: ${row.regs.toLocaleString()} regs vs LY ${row.ly_regs.toLocaleString()} (${yoy > 0 ? '+' : ''}${yoy.toFixed(1)}%)`;
+    } else if (row.pred_regs > 0) {
+      color = 'rgba(59,130,246,0.18)';  // future / predicted
+      tooltip = `W${w}: pred ${row.pred_regs.toLocaleString()} regs`;
+    }
+    const x = LABEL_W + 8 + (w - 1) * cellW;
+    const isCurrent = w === maxWk ? ' stroke="#0066CC" stroke-width="1.5"' : '';
+    tiles.push(`<rect x="${x}" y="8" width="${Math.max(cellW - 1, 1)}" height="${H - 20}" fill="${color}"${isCurrent}><title>${tooltip}</title></rect>`);
+  }
+  const label = `<text x="${LABEL_W}" y="${H / 2 + 3}" text-anchor="end" font-size="11" font-weight="600" fill="#1f2937" font-family="ui-monospace,monospace">${curMarket}</text>`;
+  // Month ticks — approximate W by month-start.
+  const monthTicks = [1,5,9,14,18,23,27,31,36,40,44,48].map((w, i) => {
+    const x = LABEL_W + 8 + (w - 1) * cellW;
+    const name = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][i];
+    return `<text x="${x}" y="${H + 12}" font-size="10" fill="#6b7280" font-family="ui-monospace,monospace">${name}</text>`;
+  }).join('');
+  host.innerHTML =
+    '<div style="color:#6B6B6B;font-size:11px;margin-bottom:6px">YoY delta per week. Green = up vs LY; red/amber = down. Blue = predicted (no LY comparable yet). Blue outline = current week.</div>' +
+    `<svg viewBox="0 0 ${W} ${H + 20}" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Calendar heatmap of ${curMarket} weekly YoY deltas">` +
+      label + tiles.join('') + monthTicks +
+    '</svg>';
+}
+
+// #59 + #91: lazy-render on disclosure-open so cold-load isn't affected.
+function wireExperimentalDisclosures() {
+  if (wireExperimentalDisclosures._bound) return;
+  wireExperimentalDisclosures._bound = true;
+  const horizon = document.getElementById('sec-horizon');
+  if (horizon) {
+    horizon.addEventListener('toggle', () => {
+      if (horizon.open) renderHorizonChart();
+    });
+  }
+  const cal = document.getElementById('sec-calheatmap');
+  if (cal) {
+    cal.addEventListener('toggle', () => {
+      if (cal.open) renderCalendarHeatmap();
+    });
+  }
 }
 
 // #60 (2026-05-01): week-grid popover — W1–W52 as 52 colored squares.
