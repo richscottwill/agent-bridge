@@ -248,7 +248,12 @@ details.sec-panel:not([open]) + details.sec-panel {
   <!-- View: Distance to target heat-grid -->
   <section id="view-heatgrid" role="tabpanel" aria-labelledby="view-heatgrid-tab" style="display:none">
     <p style="text-align:center;padding:var(--gap-md) var(--gap-lg);font-size:var(--size-ui);color:var(--color-text-meta)">Each cell colored by distance of projected ie%CCP from the market's target. AU uses spend vs OP2.</p>
+    <!-- #78 (2026-05-01): toggle between heat-cell grid (default) and bullet-chart row. -->
+    <div style="text-align:center;margin-bottom:var(--gap-sm)">
+      <button id="btn-heatgrid-mode" class="disclosure-btn" onclick="toggleHeatgridMode()" title="Switch between heat-cell grid and bullet-chart rows">View: Grid</button>
+    </div>
     <div class="heatgrid" id="heatgrid" role="grid" aria-label="Market distance to target heatgrid"></div>
+    <div class="heatgrid-bullets" id="heatgrid-bullets" style="display:none;padding:0 var(--gap-lg)"></div>
     <div class="heatgrid-regional" id="heatgrid-regional"></div>
     <div style="text-align:center;font-size:11px;color:var(--color-text-subtle);margin-top:var(--gap-sm)" aria-label="Heatgrid legend">
       <span style="display:inline-block;width:12px;height:12px;background:var(--color-success);vertical-align:middle;border-radius:2px" aria-hidden="true"></span> within ±5pp · 
@@ -591,6 +596,12 @@ details.sec-panel:not([open]) + details.sec-panel {
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3/dist/chartjs-plugin-annotation.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <script src="canon-chart.js?v=2026-04-29-1115"></script>
+<!-- #75 (2026-05-01): shared trust-bar module for PE/WR parity. -->
+<script src="shared/trust-bar.js?v=2026-05-01"></script>
+<link rel="stylesheet" href="shared/trust-bar.css?v=2026-05-01">
+<!-- #78 (2026-05-01): shared bullet-chart helper for Distance-to-Target bullets. -->
+<script src="shared/bullet.js?v=2026-05-01"></script>
+<link rel="stylesheet" href="shared/bullet.css?v=2026-05-01">
 
 <!-- MPE library + app -->
 <script src="v1_1_slim.js"></script>

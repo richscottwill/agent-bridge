@@ -1424,37 +1424,91 @@
       return;
     }
     host.style.display = '';
+    // #75 (2026-05-01): reuse the shared TrustBar renderer for parity with
+    // WR's forecast-trust bar. Same pill shape, same hover affordance,
+    // same click-to-select behavior. The trust-bar module takes a
+    // computeState callback so the PE pacing metric (not forecast accuracy)
+    // can still drive the color bands — different data, same surface.
+    if (!window.TrustBar || !window.TrustBar.renderTrustBar) {
+      // Fallback to prior custom renderer when module isn't loaded.
+      renderPulseStripLegacy();
+      return;
+    }
     const markets = STATE.data?.global?.market_list || MPE.ALL_MARKETS;
-    const rows = markets.map(m => {
-      const md = (STATE.data?.markets || {})[m];
-      if (!md) return { m, color: 'gray' };
-      const supported = md.parameters?.supported_target_modes?.value_json || ['spend'];
-      const ieTgt = md.parameters?.ieccp_target?.value_scalar;
-      let color = 'gray';
-      try {
-        if (supported.includes('ieccp') && ieTgt) {
-          const tgtPct = ieTgt * 100;
-          const out = V1_1_Slim.projectWithLockedYtd(md, 2026, 'ieccp', tgtPct, { regimeMultiplier: 1.0, periodType: 'Y2026' });
-          const achieved = out?.totals?.computed_ieccp;
-          if (Number.isFinite(achieved)) {
-            const distPp = Math.abs(achieved - tgtPct);
-            color = distPp < 10 ? 'green' : (distPp < 25 ? 'yellow' : 'red');
-          }
-        } else if (supported.includes('spend') || supported.includes('regs')) {
-          // Spend-only markets — compare projected annual spend to OP2.
-          const op2Spend = md.op2_targets?.annual_spend_target;
-          if (op2Spend && op2Spend > 0) {
-            const out = V1_1_Slim.projectWithLockedYtd(md, 2026, 'spend', op2Spend, { regimeMultiplier: 1.0, periodType: 'Y2026' });
-            const projSpend = out?.totals?.annual_total_spend;
-            if (Number.isFinite(projSpend)) {
-              const pacePct = Math.abs((projSpend - op2Spend) / op2Spend * 100);
-              color = pacePct < 5 ? 'green' : (pacePct < 15 ? 'yellow' : 'red');
-            }
+    host.innerHTML = '';
+    // TrustBar writes into a nested container — preserve a trust-bar-label
+    // slot for visual consistency with WR.
+    host.classList.add('trust-bar');
+    if (!host.querySelector('.trust-bar-label')) {
+      const lab = document.createElement('span');
+      lab.className = 'trust-bar-label';
+      lab.textContent = 'Market pacing';
+      host.appendChild(lab);
+    }
+    let pillHost = host.querySelector('.trust-pill-host');
+    if (!pillHost) {
+      pillHost = document.createElement('div');
+      pillHost.className = 'trust-pill-host';
+      pillHost.style.cssText = 'display:inline-flex;gap:3px;flex-wrap:wrap;margin-left:8px';
+      host.appendChild(pillHost);
+    }
+    window.TrustBar.renderTrustBar(pillHost, {
+      markets,
+      selected: scope,
+      computeState: (mk) => computePulseStateForTrustBar(mk),
+      onSelect: (mk) => {
+        document.getElementById('scope-select').value = mk;
+        scheduleRecompute();
+      },
+    });
+  }
+
+  // #75 (2026-05-01): compute PE pacing in TrustBar's computeState shape so
+  // the shared renderer can paint PE pills identically to WR. Color bands:
+  //   - ie%CCP markets: distance from target (<10pp green, <25pp amber, else red)
+  //   - spend-only markets: projected annual spend vs OP2 (<5% green, <15% amber, else red)
+  function computePulseStateForTrustBar(mk) {
+    const md = (STATE.data?.markets || {})[mk];
+    if (!md) return { rateCls: 'gray', rateText: '—', hits: null, total: null };
+    const supported = md.parameters?.supported_target_modes?.value_json || ['spend'];
+    const ieTgt = md.parameters?.ieccp_target?.value_scalar;
+    try {
+      if (supported.includes('ieccp') && ieTgt) {
+        const tgtPct = ieTgt * 100;
+        const out = V1_1_Slim.projectWithLockedYtd(md, 2026, 'ieccp', tgtPct, { regimeMultiplier: 1.0, periodType: 'Y2026' });
+        const achieved = out?.totals?.computed_ieccp;
+        if (Number.isFinite(achieved)) {
+          const distPp = Math.abs(achieved - tgtPct);
+          const rateCls = distPp < 10 ? 'good' : (distPp < 25 ? 'warn' : 'bad');
+          return { rateCls, rateText: `${Math.round(achieved)}%`, hits: null, total: null };
+        }
+      } else if (supported.includes('spend') || supported.includes('regs')) {
+        const op2Spend = md.op2_targets?.annual_spend_target;
+        if (op2Spend && op2Spend > 0) {
+          const out = V1_1_Slim.projectWithLockedYtd(md, 2026, 'spend', op2Spend, { regimeMultiplier: 1.0, periodType: 'Y2026' });
+          const projSpend = out?.totals?.annual_total_spend;
+          if (Number.isFinite(projSpend)) {
+            const pacePct = Math.abs((projSpend - op2Spend) / op2Spend * 100);
+            const rateCls = pacePct < 5 ? 'good' : (pacePct < 15 ? 'warn' : 'bad');
+            return { rateCls, rateText: `${pacePct.toFixed(0)}%`, hits: null, total: null };
           }
         }
-      } catch (e) {
-        // Keep color='gray' on any compute error so the dot still renders.
       }
+    } catch (_) { /* fall through */ }
+    return { rateCls: 'gray', rateText: '—', hits: null, total: null };
+  }
+
+  function renderPulseStripLegacy() {
+    const host = document.getElementById('market-pulse-strip');
+    if (!host) return;
+    const scope = currentScope();
+    const markets = STATE.data?.global?.market_list || MPE.ALL_MARKETS;
+    const rows = markets.map(m => {
+      const st = computePulseStateForTrustBar(m);
+      const color = st.rateCls === 'good' ? 'green'
+                  : st.rateCls === 'warn' ? 'yellow'
+                  : st.rateCls === 'bad'  ? 'red'
+                  : 'gray';
       return { m, color };
     });
     host.innerHTML = rows.map(r => {
@@ -1463,13 +1517,8 @@
     }).join('');
     host.querySelectorAll('.pulse-dot').forEach(el => {
       el.addEventListener('click', () => {
-        const tgt = el.dataset.market;
-        const sel = document.getElementById('scope-select');
-        if (sel && tgt && [...sel.options].some(o => o.value === tgt)) {
-          sel.value = tgt;
-          refreshScopeDependentUI();
-          scheduleRecompute();
-        }
+        document.getElementById('scope-select').value = el.dataset.market;
+        scheduleRecompute();
       });
     });
   }
@@ -3475,6 +3524,91 @@
   // 6.4.2 Regional heat-grid — distance-to-target
   // ========================================================================
 
+  // #78 (2026-05-01): renderHeatgridBullets — one row per market with a
+  // Bullet (actual/target/acceptable bands). Reader sees rank + magnitude
+  // in one sweep. Triggered by "View: Bullets" toggle.
+  async function renderHeatgridBullets() {
+    const host = document.getElementById('heatgrid-bullets');
+    if (!host) return;
+    host.innerHTML = '';
+    if (!window.Bullet || !window.Bullet.renderBullet) {
+      host.innerHTML = '<div style="padding:16px;color:var(--color-text-subtle);text-align:center">Bullet helper not loaded.</div>';
+      return;
+    }
+    const period = currentPeriod();
+    const periodWeeks = periodWeeksSet(period);
+    const rows = [];
+    for (const mkt of MPE.ALL_MARKETS) {
+      const md = (STATE.data.markets || {})[mkt];
+      if (!md) continue;
+      const supported = md.parameters?.supported_target_modes?.value_json || ['spend'];
+      const ieTgt = md.parameters?.ieccp_target?.value_scalar;
+      const op2Spend = md.op2_targets?.annual_spend_target;
+      try {
+        if (supported.includes('ieccp') && ieTgt) {
+          const target = ieTgt * 100;
+          let unconstrainedIe = null;
+          if (op2Spend) {
+            try {
+              const probeOut = V1_1_Slim.projectWithLockedYtd(
+                md, 2026, 'spend', op2Spend,
+                { regimeMultiplier: STATE.regimeMultiplier, scenarioOverride: STATE.scenarioOverride, periodWeeks, periodType: period }
+              );
+              unconstrainedIe = probeOut?.totals?.computed_ieccp;
+            } catch (_) {}
+          }
+          if (Number.isFinite(unconstrainedIe)) {
+            rows.push({ mkt, actual: unconstrainedIe, target, unit: '%', label: 'ie%CCP (unconstrained)' });
+          } else {
+            rows.push({ mkt, actual: target, target, unit: '%', label: 'ie%CCP (target-locked)', note: 'target-locked' });
+          }
+        } else if (op2Spend) {
+          const probeOut = V1_1_Slim.projectWithLockedYtd(
+            md, 2026, 'spend', op2Spend,
+            { regimeMultiplier: STATE.regimeMultiplier, scenarioOverride: STATE.scenarioOverride, periodWeeks, periodType: period }
+          );
+          const annualSpend = probeOut?.totals?.annual_total_spend || 0;
+          rows.push({ mkt, actual: annualSpend, target: op2Spend, unit: '$', label: 'Annual spend vs OP2' });
+        }
+      } catch (e) { console.warn('[heatgrid bullets]', mkt, e); }
+    }
+    rows.sort((a, b) => Math.abs(b.actual - b.target) - Math.abs(a.actual - a.target));
+    const rowsHtml = rows.map(r => {
+      const bullet = window.Bullet.renderBullet({ actual: r.actual, target: r.target, label: r.mkt + ': ' + r.label });
+      const valStr = r.unit === '$' ? fmt$(r.actual) : r.actual.toFixed(0) + '%';
+      const tgtStr = r.unit === '$' ? fmt$(r.target) : r.target.toFixed(0) + '%';
+      const delta = r.actual - r.target;
+      const deltaPct = r.target !== 0 ? (delta / r.target) * 100 : 0;
+      const deltaStr = (delta >= 0 ? '+' : '') + (r.unit === '$' ? fmt$(delta) : delta.toFixed(1) + 'pp');
+      const deltaCls = Math.abs(deltaPct) < 5 ? 'good' : Math.abs(deltaPct) < 15 ? 'warn' : 'bad';
+      const noteStr = r.note ? '<span style="font-size:10px;color:var(--color-text-subtle);margin-left:6px">(' + r.note + ')</span>' : '';
+      return '<div class="heatgrid-bullet-row" data-market="' + r.mkt + '" style="display:grid;grid-template-columns:60px 1fr 110px 100px;gap:var(--gap-md);align-items:center;padding:8px 0;border-bottom:1px solid var(--color-panel-border);cursor:pointer" onclick="(function(mk){var sel=document.getElementById(\'scope-select\');if(sel){sel.value=mk;if(typeof refreshScopeDependentUI===\'function\')refreshScopeDependentUI();}})(\'' + r.mkt + '\')">' +
+        '<div style="font-weight:600;font-size:13px;color:var(--color-text-hero)">' + r.mkt + noteStr + '</div>' +
+        '<div>' + bullet + '</div>' +
+        '<div style="font-size:12px;font-variant-numeric:tabular-nums;text-align:right">' + valStr + '<span style="color:var(--color-text-subtle);margin-left:4px">/ ' + tgtStr + '</span></div>' +
+        '<div style="font-size:12px;font-variant-numeric:tabular-nums;text-align:right;color:var(--color-' + (deltaCls === 'good' ? 'success' : deltaCls === 'warn' ? 'warning' : 'danger') + ')">' + deltaStr + '</div>' +
+      '</div>';
+    }).join('');
+    host.innerHTML =
+      '<div style="display:grid;grid-template-columns:60px 1fr 110px 100px;gap:var(--gap-md);padding:6px 0;border-bottom:1px solid var(--color-panel-border);font-size:10px;color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.05em">' +
+        '<div>Market</div><div>Distance to target</div><div style="text-align:right">Actual / Target</div><div style="text-align:right">Delta</div>' +
+      '</div>' +
+      (rowsHtml || '<div style="padding:16px;text-align:center;color:var(--color-text-subtle)">No markets match current filters.</div>');
+  }
+
+  // #78 (2026-05-01): toggle between heat-cell grid and bullet rows.
+  function toggleHeatgridMode() {
+    const grid = document.getElementById('heatgrid');
+    const bullets = document.getElementById('heatgrid-bullets');
+    const btn = document.getElementById('btn-heatgrid-mode');
+    if (!grid || !bullets) return;
+    const showBullets = grid.style.display !== 'none';
+    grid.style.display = showBullets ? 'none' : '';
+    bullets.style.display = showBullets ? '' : 'none';
+    if (btn) btn.textContent = showBullets ? 'View: Bullets' : 'View: Grid';
+    if (showBullets) renderHeatgridBullets();
+  }
+
   async function renderHeatGrid() {
     const grid = document.getElementById('heatgrid');
     const regionalEl = document.getElementById('heatgrid-regional');
@@ -4123,4 +4257,9 @@
     console.warn('unhandled promise rejection in projection-app:', ev.reason);
     ev.preventDefault();
   });
+  // #78 (2026-05-01): expose the heatgrid mode-toggle globally so the
+  // inline onclick in projection.html can find it. The function lives
+  // inside the IIFE scope for normal JS access; inline HTML onclick
+  // evaluates against the global scope so we pin it on window.
+  window.toggleHeatgridMode = toggleHeatgridMode;
 })();
