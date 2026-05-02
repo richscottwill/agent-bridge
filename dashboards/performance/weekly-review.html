@@ -815,6 +815,57 @@ body {
   line-height: 1.4;
 }
 
+/* #60 (2026-05-01): week-grid popover. 52 squares (W1-W52) colored by
+   forecast-trust for the current market. Click to jump. */
+.wr-week-grid {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.32);
+  display: none;
+  z-index: 10002;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 80px;
+}
+.wr-week-grid-inner {
+  background: var(--color-panel-bg, #FFFFFF);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  max-width: 680px;
+}
+.wr-week-grid-head { font-size: 13px; color: var(--color-text-hero); margin-bottom: 10px; }
+.wr-week-grid-body {
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  gap: 4px;
+  margin-bottom: 10px;
+}
+.wr-week-grid-cell {
+  aspect-ratio: 1;
+  border: 1px solid var(--color-panel-border);
+  border-radius: 2px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--color-text-subtle);
+  background: var(--color-panel-bg);
+  min-width: 28px;
+  min-height: 28px;
+}
+.wr-week-grid-cell.good { background: rgba(20, 165, 72, 0.22); border-color: #047857; color: #065f46; }
+.wr-week-grid-cell.warn { background: rgba(232, 168, 0, 0.22); border-color: #B45309; color: #92400e; }
+.wr-week-grid-cell.bad  { background: rgba(209, 50, 18, 0.22); border-color: #991B1B; color: #991B1B; }
+.wr-week-grid-cell.grey { opacity: 0.6; }
+.wr-week-grid-cell.future { opacity: 0.3; cursor: not-allowed; }
+.wr-week-grid-cell.current { outline: 2px solid var(--color-brand); outline-offset: -1px; }
+.wr-week-grid-cell:not(.has-callout):not(.future) { cursor: default; }
+.wr-week-grid-cell.has-callout { cursor: pointer; }
+.wr-week-grid-cell:hover:not(.future):not([disabled]) { transform: scale(1.12); transition: transform 80ms ease; }
+.wr-week-grid-foot { text-align: right; }
+
 /* #049 (2026-05-01): entity chip — first-name stakeholders found in the
    context text get wrapped into clickable chips. Click copies the role
    string and logs into the aria-live region (no popup). Styled as a
@@ -1667,6 +1718,13 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
     <div class="wr-week-nav" role="group" aria-label="Week navigation">
       <button class="wr-nav-btn" id="prevWeek" aria-label="Previous week">&#9664;</button>
       <select id="weekSelect" class="wr-nav-week" aria-label="Week"></select>
+      <!-- #60 (2026-05-01): mini-calendar button. Opens a popover grid of
+           W1–W52 as colored squares — green/amber/red based on forecast
+           trust for that week. Click a square to jump. Makes "when did we
+           last miss?" a glance. -->
+      <button class="wr-nav-btn" id="wrWeekGridBtn" aria-label="Open week-grid picker"
+              title="Open week-grid picker (W1–W52 with forecast-trust color)"
+              style="font-size:11px;padding:0 8px" onclick="toggleWeekGrid()">grid</button>
       <button class="wr-nav-btn" id="nextWeek" aria-label="Next week">&#9654;</button>
     </div>
     <span class="wr-stick-ts" id="dataTs"></span>
@@ -4810,6 +4868,25 @@ function renderStickyTrustBar() {
     computeState: (mk) => window.TrustBar.computeForecastTrust(FORECAST, mk, 6),
     markClass: (mk) => (!calloutSet.has(mk) && forecastSet.has(mk)) ? 'forecast-only' : '',
     onSelect: (mk) => {
+      // #61 (2026-05-01): Shift+click for pinned-compare card.
+      // The TrustBar module doesn't pass the event; we read the last-
+      // known modifier state from a module-level tracker set by the
+      // keydown/click listener below. If shiftKey was pressed on the
+      // last pointerdown, route to pin instead of select.
+      if (window.__wr_last_shift_click) {
+        window.__wr_last_shift_click = false;
+        const pill = document.querySelector('.trust-pill[data-market="' + mk + '"]');
+        if (pill) {
+          if (window.__wr_pinned_compare_market === mk) {
+            window.__wr_pinned_compare_market = null;
+            if (wrHoverCardEl) wrHoverCardEl.style.display = 'none';
+          } else {
+            window.__wr_pinned_compare_market = mk;
+            showPillHoverCard(pill, true);
+          }
+        }
+        return;
+      }
       curMarket = mk;
       curRegion = MARKET_TO_REGION[mk] || mk;
       curMetric = defaultMetricForMarket(curMarket);
@@ -4817,6 +4894,14 @@ function renderStickyTrustBar() {
       render();
     }
   });
+  // #61 (2026-05-01): capture shiftKey state on pointerdown so the
+  // onSelect callback (which doesn't receive the event) can route.
+  if (!pillHost.dataset.shiftWired) {
+    pillHost.dataset.shiftWired = '1';
+    pillHost.addEventListener('pointerdown', (e) => {
+      window.__wr_last_shift_click = !!e.shiftKey;
+    });
+  }
   // #18 (2026-05-01): hover sparkline popup on each trust-bar pill.
   // Reads FORECAST.predictions_history to compute last-6-weeks signed
   // error, renders as a 150×40 floating card. Keeps the existing title=
@@ -4847,59 +4932,145 @@ function wireTrustPillHoverCards(pillHost) {
   pillHost.addEventListener('mouseover', (e) => {
     const pill = e.target.closest('.trust-pill');
     if (!pill || !pillHost.contains(pill)) return;
-    const mk = pill.dataset.market;
-    if (!mk || !FORECAST.predictions_history) return;
-    const hist = FORECAST.predictions_history[mk] || {};
-    const maxWk = FORECAST.max_week;
-    const errs = [];
-    for (let w = Math.max(1, maxWk - 5); w <= maxWk; w++) {
-      const r = (hist[String(w)] || hist[w] || {}).regs || {};
-      if (r.actual == null || r.latest_pred == null) continue;
-      const err = (r.latest_pred - r.actual) / r.actual * 100;
-      const inCi = (r.latest_ci_lo != null && r.latest_ci_hi != null)
-        ? r.actual >= r.latest_ci_lo && r.actual <= r.latest_ci_hi : null;
-      errs.push({ wk: w, err, inCi });
-    }
-    if (errs.length < 2) {
-      wrHoverCardEl.innerHTML = `<strong>${mk}</strong> &middot; insufficient history`;
-    } else {
-      const max = Math.max.apply(null, errs.map(r => Math.abs(r.err))) || 1;
-      const W = 150, H = 40, PAD = 4;
-      const sx = (i) => PAD + (i / (errs.length - 1)) * (W - PAD * 2);
-      const sy = (v) => H / 2 - (v / max) * (H / 2 - PAD);
-      let svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">`;
-      svg += `<line x1="${PAD}" x2="${W - PAD}" y1="${H / 2}" y2="${H / 2}" stroke="#9ca3af" stroke-width="0.8" stroke-dasharray="2,2"/>`;
-      errs.forEach((r, i) => {
-        const color = r.inCi === true ? '#2f7d3e' : r.inCi === false ? '#a63939' : '#6b7280';
-        const y0 = H / 2;
-        const y1 = sy(r.err);
-        const yTop = Math.min(y0, y1);
-        const yH = Math.max(1, Math.abs(y1 - y0));
-        svg += `<rect x="${sx(i) - 4}" y="${yTop}" width="8" height="${yH}" fill="${color}" fill-opacity="0.7"/>`;
-      });
-      svg += '</svg>';
-      const latest = errs[errs.length - 1];
-      const latestStr = `${latest.err > 0 ? '+' : ''}${latest.err.toFixed(1)}%`;
-      wrHoverCardEl.innerHTML =
-        `<div style="font-weight:600;color:#0F1111;margin-bottom:4px">${mk} &middot; last ${errs.length}w</div>` +
-        svg +
-        `<div style="display:flex;justify-content:space-between;margin-top:2px">` +
-          `<span style="color:#6B6B6B">latest W${latest.wk}</span>` +
-          `<span style="font-weight:600">${latestStr}</span>` +
-        `</div>`;
-    }
-    const rect = pill.getBoundingClientRect();
-    wrHoverCardEl.style.display = 'block';
-    wrHoverCardEl.style.left = (rect.left + window.scrollX) + 'px';
-    wrHoverCardEl.style.top = (rect.bottom + 6) + 'px';
+    // When a pill is already pinned, mouseover doesn't replace the pinned content.
+    if (window.__wr_pinned_compare_market) return;
+    showPillHoverCard(pill);
   });
   pillHost.addEventListener('mouseout', (e) => {
-    // Hide when the mouse leaves the pill entirely (not when it moves between
-    // children within the same pill).
+    // Pinned — ignore mouseout.
+    if (window.__wr_pinned_compare_market) return;
     const toEl = e.relatedTarget;
     if (!toEl || !pillHost.contains(toEl) || !toEl.closest('.trust-pill')) {
       if (wrHoverCardEl) wrHoverCardEl.style.display = 'none';
     }
+  });
+}
+
+// #18 + #61 (2026-05-01): common renderer for the trust-pill hover card.
+// Extracted so both mouseover and shift+click paths share the same DOM.
+function showPillHoverCard(pill, pinned) {
+  if (!wrHoverCardEl || !pill) return;
+  const mk = pill.dataset.market;
+  if (!mk || !FORECAST.predictions_history) return;
+  const hist = FORECAST.predictions_history[mk] || {};
+  const maxWk = FORECAST.max_week;
+  const errs = [];
+  for (let w = Math.max(1, maxWk - 5); w <= maxWk; w++) {
+    const r = (hist[String(w)] || hist[w] || {}).regs || {};
+    if (r.actual == null || r.latest_pred == null) continue;
+    const err = (r.latest_pred - r.actual) / r.actual * 100;
+    const inCi = (r.latest_ci_lo != null && r.latest_ci_hi != null)
+      ? r.actual >= r.latest_ci_lo && r.actual <= r.latest_ci_hi : null;
+    errs.push({ wk: w, err, inCi });
+  }
+  if (errs.length < 2) {
+    wrHoverCardEl.innerHTML = `<strong>${mk}</strong> &middot; insufficient history`
+      + (pinned ? ' <span style="font-size:10px;color:#6B6B6B">(pinned — shift+click to unpin)</span>' : '');
+  } else {
+    const max = Math.max.apply(null, errs.map(r => Math.abs(r.err))) || 1;
+    const W = 150, H = 40, PAD = 4;
+    const sx = (i) => PAD + (i / (errs.length - 1)) * (W - PAD * 2);
+    const sy = (v) => H / 2 - (v / max) * (H / 2 - PAD);
+    let svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">`;
+    svg += `<line x1="${PAD}" x2="${W - PAD}" y1="${H / 2}" y2="${H / 2}" stroke="#9ca3af" stroke-width="0.8" stroke-dasharray="2,2"/>`;
+    errs.forEach((r, i) => {
+      const color = r.inCi === true ? '#2f7d3e' : r.inCi === false ? '#a63939' : '#6b7280';
+      const y0 = H / 2;
+      const y1 = sy(r.err);
+      const yTop = Math.min(y0, y1);
+      const yH = Math.max(1, Math.abs(y1 - y0));
+      svg += `<rect x="${sx(i) - 4}" y="${yTop}" width="8" height="${yH}" fill="${color}" fill-opacity="0.7"/>`;
+    });
+    svg += '</svg>';
+    const latest = errs[errs.length - 1];
+    const latestStr = `${latest.err > 0 ? '+' : ''}${latest.err.toFixed(1)}%`;
+    wrHoverCardEl.innerHTML =
+      `<div style="font-weight:600;color:#0F1111;margin-bottom:4px">${mk} &middot; last ${errs.length}w` +
+        (pinned ? ' <span style="font-size:10px;color:#B45309">(pinned)</span>' : '') +
+      `</div>` +
+      svg +
+      `<div style="display:flex;justify-content:space-between;margin-top:2px">` +
+        `<span style="color:#6B6B6B">latest W${latest.wk}</span>` +
+        `<span style="font-weight:600">${latestStr}</span>` +
+      `</div>` +
+      (pinned ? '<div style="font-size:10px;color:#6B6B6B;margin-top:4px">Shift+click again to unpin</div>' : '');
+  }
+  const rect = pill.getBoundingClientRect();
+  wrHoverCardEl.style.display = 'block';
+  wrHoverCardEl.style.left = (rect.left + window.scrollX) + 'px';
+  wrHoverCardEl.style.top = (rect.bottom + 6) + 'px';
+  wrHoverCardEl.classList.toggle('pinned', !!pinned);
+}
+
+// #60 (2026-05-01): week-grid popover — W1–W52 as 52 colored squares.
+// Color: forecast-trust for that market/week via FORECAST.predictions_
+// history. Green = inside CI, amber = near-miss, red = outside CI, grey
+// = no data. Click a square to jump to that week (only jumps to weeks
+// with callout data).
+let wrWeekGridEl = null;
+function toggleWeekGrid() {
+  if (!wrWeekGridEl) {
+    wrWeekGridEl = document.createElement('div');
+    wrWeekGridEl.className = 'wr-week-grid';
+    wrWeekGridEl.setAttribute('role', 'dialog');
+    wrWeekGridEl.setAttribute('aria-label', 'Week picker');
+    document.body.appendChild(wrWeekGridEl);
+    wrWeekGridEl.addEventListener('click', (e) => {
+      if (e.target === wrWeekGridEl) wrWeekGridEl.style.display = 'none';
+    });
+  }
+  const currentlyOpen = wrWeekGridEl.style.display === 'block';
+  if (currentlyOpen) { wrWeekGridEl.style.display = 'none'; return; }
+  renderWeekGrid();
+  wrWeekGridEl.style.display = 'block';
+}
+function renderWeekGrid() {
+  if (!wrWeekGridEl || !FORECAST) return;
+  const hist = (FORECAST.predictions_history && FORECAST.predictions_history[curMarket]) || {};
+  const maxWk = FORECAST.max_week || 15;
+  const validCalloutWeeks = new Set(CALLOUTS.weeks || []);
+  const squares = [];
+  for (let w = 1; w <= 52; w++) {
+    let trust = 'grey';
+    const r = (hist[String(w)] || hist[w] || {}).regs || {};
+    if (r.actual != null && r.latest_ci_lo != null && r.latest_ci_hi != null) {
+      const inCI = r.actual >= r.latest_ci_lo && r.actual <= r.latest_ci_hi;
+      if (inCI) trust = 'good';
+      else if (r.error_pct != null && Math.abs(r.error_pct) <= 15) trust = 'warn';
+      else trust = 'bad';
+    }
+    const wkLabel = 'W' + w;
+    const hasCallout = validCalloutWeeks.has(wkLabel);
+    const isCurrent = wkLabel === curWeek;
+    const isFuture = w > maxWk;
+    const cls = ['wr-week-grid-cell', trust,
+      isCurrent ? 'current' : '',
+      hasCallout ? 'has-callout' : '',
+      isFuture ? 'future' : ''].filter(Boolean).join(' ');
+    const title = `${wkLabel}${isFuture ? ' (future)' : ''}${hasCallout ? ' · callout' : ''}${trust !== 'grey' ? ' · ' + trust : ''}`;
+    squares.push(
+      `<button class="${cls}" data-wk="${wkLabel}" title="${title}" aria-label="${title}"` +
+      (isFuture || !hasCallout ? ' disabled' : '') + '>' + w + '</button>'
+    );
+  }
+  wrWeekGridEl.innerHTML =
+    '<div class="wr-week-grid-inner">' +
+      '<div class="wr-week-grid-head"><strong>Week picker</strong> · ' + curMarket +
+        ' <span style="color:#6b7280;font-weight:400;margin-left:8px">green=in-CI · amber=near-miss · red=outside-CI · grey=no data</span></div>' +
+      '<div class="wr-week-grid-body">' + squares.join('') + '</div>' +
+      '<div class="wr-week-grid-foot"><button onclick="toggleWeekGrid()" class="wr-nav-btn">close</button></div>' +
+    '</div>';
+  wrWeekGridEl.querySelectorAll('.wr-week-grid-cell').forEach(btn => {
+    if (btn.disabled) return;
+    btn.addEventListener('click', () => {
+      const wk = btn.dataset.wk;
+      if (!wk) return;
+      curWeek = wk;
+      const sel = document.getElementById('weekSelect');
+      if (sel) sel.value = wk;
+      wrWeekGridEl.style.display = 'none';
+      render();
+    });
   });
 }
 
