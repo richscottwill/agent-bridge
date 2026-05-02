@@ -450,16 +450,20 @@ details.sec-panel:not([open]) + details.sec-panel {
     <ul id="anomalies-list"></ul>
   </div>
 
-  <!-- P2-04: 3-panel Prophet-style decomposition (Trend / Seasonality / Campaign lifts) -->
-  <details class="sec-panel" id="decomposition-panel" style="margin-top:var(--gap-lg)">
-    <summary style="cursor:pointer;font-weight:600;font-size:var(--size-meta);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.08em">Decomposition (trend · seasonality · campaign lifts)</summary>
+  <!-- P2-04: 3-panel Prophet-style decomposition (Trend / Seasonality / Campaign lifts).
+       #79 (2026-05-01): promoted out of <details>. This chart IS the projection —
+       hiding it behind a collapse control buried the main visualization. Always
+       visible now. Backtest + per-quarter reliability stay inside their own
+       disclosure since they're audit surfaces, not the primary read. -->
+  <section class="sec-panel" id="decomposition-panel" style="margin-top:var(--gap-lg)" aria-label="Decomposition">
+    <h3 style="margin:0 0 var(--gap-sm);font-size:var(--size-meta);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.08em">Decomposition (trend · seasonality · campaign lifts)</h3>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--gap-md);margin-top:var(--gap-sm)" id="decomp-grid">
       <div class="decomp-panel"><div class="decomp-label">Trend (baseline)</div><div class="decomp-canvas-wrap"><canvas id="decomp-trend" style="height:120px"></canvas></div></div>
       <div class="decomp-panel"><div class="decomp-label">Seasonality</div><div class="decomp-canvas-wrap"><canvas id="decomp-seasonality" style="height:120px"></canvas></div></div>
       <div class="decomp-panel"><div class="decomp-label">Campaign lifts</div><div class="decomp-canvas-wrap"><canvas id="decomp-lifts" style="height:120px"></canvas></div></div>
     </div>
     <div style="font-size:11px;color:var(--color-text-subtle);margin-top:var(--gap-sm)">Each panel shows the estimated contribution per week across the year. Trend = 52-week moving average of actuals+projected. Seasonality = observed-over-trend per week (1.0 = neutral). Campaign lifts = summed regime multipliers minus 1.0 over each lift's active window.</div>
-  </details>
+  </section>
 
   <!-- P2-05: backtest panel (last 8 weeks — actual vs 8-weeks-ago prediction) -->
   <details class="sec-panel" id="backtest-panel" style="margin-top:var(--gap-md)">
