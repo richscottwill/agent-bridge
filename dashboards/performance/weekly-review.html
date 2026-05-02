@@ -1156,12 +1156,24 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+/* #37 (2026-05-01): axis toggle in the chart-wrap top-right corner.
+   Moved out of the .wr-calib-head row which consumed 36px above every
+   chart. Now 22px tall, absolute-positioned, 82% opacity at rest,
+   100% on chart-wrap hover. Still clickable both states. */
 .wr-chart-axis-toggle {
   display: inline-flex;
   border: 1px solid var(--color-panel-border);
   border-radius: 4px;
   overflow: hidden;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 4;
+  background: var(--color-panel-bg);
+  opacity: 0.82;
+  transition: opacity 150ms ease;
 }
+.wr-chart-wrap:hover .wr-chart-axis-toggle { opacity: 1; }
 .wr-chart-axis-toggle .wr-tab {
   border-radius: 0;
   border: none;
@@ -1949,27 +1961,31 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
   <div class="sec-panel" id="sec-trend">
     <div class="wr-calib-head">
       <h3 style="margin:0"><span id="trendChartTitle">What happened — actuals vs OP2</span></h3>
-      <!-- WR-F1 (2026-04-29): axis filter parity with the calibration
-           panel. Defaults to Both because "What happened" is the
-           at-a-glance panel and both axes usually belong together. -->
+    </div>
+    <div class="wr-chart-wrap">
+      <!-- WR-F1 (2026-04-29) + #37 (2026-05-01): axis filter pill moved
+           into the chart wrap so it hugs the top-right corner and
+           shares the panel's visual frame. -->
       <div class="wr-chart-axis-toggle" id="trendAxisToggle" role="group" aria-label="Trend axis filter">
         <button class="wr-tab wr-chart-mode-btn" data-axis="regs">Regs</button>
         <button class="wr-tab wr-chart-mode-btn" data-axis="spend">Spend</button>
         <button class="wr-tab wr-chart-mode-btn active" data-axis="both">Both</button>
       </div>
+      <canvas id="trendChart" role="img" aria-label="Weekly trend: actuals vs OP2 target"></canvas>
     </div>
-    <div class="wr-chart-wrap"><canvas id="trendChart" role="img" aria-label="Weekly trend: actuals vs OP2 target"></canvas></div>
   </div>
   <div class="sec-panel" id="sec-calibration">
     <div class="wr-calib-head">
       <h3 style="margin:0"><span id="calibChartTitle">Weekly forecast error</span></h3>
+    </div>
+    <div class="wr-chart-wrap">
       <div class="wr-chart-axis-toggle" id="calibAxisToggle" role="group" aria-label="Forecast error axis filter">
         <button class="wr-tab wr-chart-mode-btn active" data-axis="regs">Regs</button>
         <button class="wr-tab wr-chart-mode-btn" data-axis="spend">Spend</button>
         <button class="wr-tab wr-chart-mode-btn" data-axis="both">Both</button>
       </div>
+      <canvas id="calibrationChart" role="img" aria-label="Weekly forecast error: signed % per week with severity fill and CI reference band"></canvas>
     </div>
-    <div class="wr-chart-wrap"><canvas id="calibrationChart" role="img" aria-label="Weekly forecast error: signed % per week with severity fill and CI reference band"></canvas></div>
   </div>
 </div>
 
