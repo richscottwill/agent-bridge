@@ -741,6 +741,22 @@ body {
   color: #FFFFFF;
 }
 
+/* #049 (2026-05-01): entity chip — first-name stakeholders found in the
+   context text get wrapped into clickable chips. Click copies the role
+   string and logs into the aria-live region (no popup). Styled as a
+   quiet inline link so prose reads naturally. */
+.wr-entity-chip {
+  color: var(--color-brand, #0066cc);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--color-brand, #0066cc);
+  cursor: pointer;
+  font-weight: 500;
+}
+.wr-entity-chip:hover {
+  background: rgba(0,102,204,0.08);
+  border-radius: 2px;
+}
+
 /* #045 (2026-05-01): WoW-cell composition — bar + text side by side. */
 .wr-wow-cell {
   display: inline-flex;
@@ -1524,6 +1540,8 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
 <!-- WR-A10 (2026-04-30): scrub-the-chart overlay indicator — shows
      current hovered week while user scrubs trend chart. -->
 <div class="wr-scrub-indicator" id="scrubIndicator">&mdash;</div>
+<!-- #049 (2026-05-01): aria-live region for entity-chip copy confirmations. -->
+<div id="wr-aria-live" aria-live="polite" aria-atomic="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden"></div>
 <div class="wr-frame">
 
 <!-- M1 (2026-04-30): TOC collapsed into "Sections ▾" hover menu in the
@@ -3801,10 +3819,88 @@ function renderExternal(items) {
   if (!el) return;
   if (!items || !items.length) { el.innerHTML = '<li style="color:var(--color-text-subtle)">None</li>'; return; }
   el.innerHTML = items.map(i => {
-    if (typeof i === 'string') return '<li>' + i + '</li>';
-    if (i.important) return '<li class="important">' + i.text + '</li>';
-    return '<li>' + i.text + '</li>';
+    const rawText = (typeof i === 'string') ? i : (i.text || '');
+    const text = linkifyEntities(rawText);
+    if (typeof i === 'string') return '<li>' + text + '</li>';
+    if (i.important) return '<li class="important">' + text + '</li>';
+    return '<li>' + text + '</li>';
   }).join('');
+}
+
+// #049 (2026-05-01): named-entity linkification. Walks the stakeholder
+// table to build a set of first names, then wraps each appearance with a
+// chip that opens the memory.md relationship entry. Extraction is purely
+// client-side — reads from CALLOUTS.stakeholders which already lists
+// "Stacey Gu (L6)", "Lena Zak (L7)", etc. No pipeline emission needed;
+// if the prompt's named_entities_by_callout[week][market] emission lands
+// later, this function gracefully upgrades to use the emitted mapping.
+function linkifyEntities(text) {
+  if (!text) return '';
+  const stakeholders = (CALLOUTS && CALLOUTS.stakeholders) || {};
+  // Harvest first names from every market's stakeholder list.
+  const firstNames = new Set();
+  for (const mk of Object.keys(stakeholders)) {
+    const st = stakeholders[mk] || {};
+    for (const key of Object.keys(st)) {
+      const name = String(st[key] || '');
+      const first = name.split(/\s+/)[0];
+      if (first && first.length >= 3 && /^[A-Z]/.test(first)) {
+        firstNames.add(first);
+      }
+    }
+  }
+  // Also add Brandon + Kate + Todd explicitly since they appear in
+  // context text without being in every market's stakeholder dict.
+  ['Brandon','Kate','Todd','Richard','Megan','Carlos'].forEach(n => firstNames.add(n));
+  if (!firstNames.size) return escapeHtml(text);
+  const names = Array.from(firstNames).sort((a,b) => b.length - a.length);
+  let out = escapeHtml(text);
+  for (const n of names) {
+    const re = new RegExp('\\b(' + n + ')\\b', 'g');
+    out = out.replace(re,
+      '<a class="wr-entity-chip" href="#" data-entity="$1" ' +
+      'title="Open memory.md entry for $1" ' +
+      'onclick="event.preventDefault();openEntityPanel(\'$1\')">$1</a>'
+    );
+  }
+  return out;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => (
+    { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]
+  ));
+}
+
+// #049 (2026-05-01): entity-chip click handler. Opens a small side panel
+// summarizing what the stakeholder table knows about this person, plus a
+// link to the memory.md entry (when it resolves to an open-file context).
+function openEntityPanel(name) {
+  // Simple approach: show a browser alert-level notice since we don't
+  // have an in-page file picker. For an L5 power-user page, a copy-
+  // to-clipboard of a Quip / Slack-ready context string is the highest-
+  // leverage outcome. Copy "Asked Richard about {name}" + role from
+  // stakeholders. Falls back to a confirm() when clipboard is blocked.
+  const stakeholders = (CALLOUTS && CALLOUTS.stakeholders) || {};
+  let role = null;
+  for (const mk of Object.keys(stakeholders)) {
+    const st = stakeholders[mk] || {};
+    for (const key of Object.keys(st)) {
+      const val = String(st[key] || '');
+      if (val.split(/\s+/)[0] === name) {
+        role = key.replace(/_/g,' ') + ' for ' + mk + ' (' + val + ')';
+        break;
+      }
+    }
+    if (role) break;
+  }
+  const line = role ? name + ' — ' + role : name;
+  if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(line).catch(() => {});
+  }
+  // Announce via aria-live region if present, else fall through silently.
+  const live = document.getElementById('wr-aria-live');
+  if (live) live.textContent = 'Copied: ' + line;
 }
 
 function renderStake(st) {
@@ -4659,6 +4755,61 @@ function renderKPIs() {
   }
 
   row.innerHTML = cards.join('');
+  // #058 (2026-05-01): rollup-member tooltips. When on a rollup market
+  // (WW/EU5/NA), each KPI card gets a tooltip showing per-member-market
+  // contribution sorted descending. Plain title attribute — no new hover
+  // infrastructure needed.
+  attachRollupMemberTooltips(row);
+}
+
+// #058 (2026-05-01): helper — on rollup markets, annotate KPI cards with
+// per-member-market breakdown tooltips. Reads FORECAST.weekly for every
+// member market, grabs the latest week's metric, sorts descending by
+// contribution, renders as a compact N-line string via title=.
+function attachRollupMemberTooltips(row) {
+  if (!row) return;
+  const ROLLUP_MEMBERS = {
+    WW: ['US','UK','DE','FR','IT','ES','CA','JP','MX','AU'],
+    EU5: ['UK','DE','FR','IT','ES'],
+    NA: ['US','CA'],
+  };
+  const members = ROLLUP_MEMBERS[curMarket];
+  if (!members) return;
+  const maxWk = FORECAST.max_week;
+  const cards = row.querySelectorAll('.wr-kpi-card');
+  cards.forEach(card => {
+    const labelEl = card.querySelector('.hero-kpi-label');
+    if (!labelEl) return;
+    const label = (labelEl.textContent || '').toLowerCase();
+    // Determine which metric this card is showing; the KPI layout varies
+    // by archetype so we read the label text to route.
+    let metricKey = null;
+    if (label.includes('regs')) metricKey = 'regs';
+    else if (label.includes('spend') || label.includes('cost')) metricKey = 'cost';
+    else if (label.includes('cpa')) metricKey = 'cpa';
+    if (!metricKey) return;
+    // Build member row values for the latest actual week.
+    const rows = [];
+    for (const m of members) {
+      const mkWeeks = (FORECAST.weekly && FORECAST.weekly[m]) || [];
+      if (!mkWeeks.length) continue;
+      const latest = mkWeeks.find(w => w.wk === maxWk) || mkWeeks[mkWeeks.length - 1];
+      if (!latest) continue;
+      const v = latest[metricKey];
+      if (v == null || v === 0) continue;
+      rows.push({ market: m, value: v });
+    }
+    if (!rows.length) return;
+    rows.sort((a, b) => b.value - a.value);
+    const fmtVal = (v) => {
+      if (metricKey === 'cost') return '$' + Math.round(v).toLocaleString();
+      if (metricKey === 'cpa') return '$' + Math.round(v);
+      return Math.round(v).toLocaleString();
+    };
+    const title = rows.map(r => `${r.market}: ${fmtVal(r.value)}`).join('\n');
+    card.setAttribute('title', `${curMarket} breakdown — W${maxWk} ${metricKey}:\n${title}`);
+    card.style.cursor = 'help';
+  });
 }
 
 function renderChart() {

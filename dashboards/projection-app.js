@@ -1243,6 +1243,7 @@
     // rollups where decomposition + backtest don't have a clean data source.
     try { renderDecomposition(out, marketData); } catch (e) { console.warn('[mpe] decomposition failed:', e); }
     try { renderBacktest(marketData); } catch (e) { console.warn('[mpe] backtest failed:', e); }
+    try { renderQuarterReliability(marketData); } catch (e) { console.warn('[mpe] quarter reliability failed:', e); }
   }
 
   function renderNarrativeStandard() {
@@ -2517,6 +2518,78 @@
       msg = '';
     }
     host.textContent = msg;
+  }
+
+  // #086 (2026-05-01): per-quarter reliability diagrams — 4-up grid.
+  // Groups ytd_weekly rows by quarter (Q1=W1-13, Q2=W14-26, Q3=W27-39,
+  // Q4=W40-52), builds a reliability scatter (predicted x vs actual y)
+  // per quarter. Lets the reader see calibration drift over time —
+  // model was tight in Q1, drifted Q2, etc.
+  // Reuses the approach from weekly-review's buildReliabilityDiagram
+  // without introducing a cross-page shared module; keeps projection.js
+  // self-contained and avoids a shared-helper registration overhead
+  // for a single new consumer.
+  function renderQuarterReliability(marketData) {
+    const host = document.getElementById('backtest-quarters');
+    if (!host) return;
+    const ytd = (marketData && marketData.ytd_weekly) || [];
+    // Partition into quarters using period_start if present, else sequential.
+    const quarters = { Q1: [], Q2: [], Q3: [], Q4: [] };
+    for (const w of ytd) {
+      if (!Number.isFinite(w.pred_regs) || w.pred_regs <= 0) continue;
+      const actual = (w.brand_regs || 0) + (w.nb_regs || 0);
+      if (actual <= 0) continue;
+      // Prefer explicit week number if emitted; fall back to period_start date parse.
+      let wk = w.week_number;
+      if (!Number.isFinite(wk)) {
+        const d = w.period_start ? new Date(w.period_start) : null;
+        if (d && !isNaN(d)) {
+          const jan1 = new Date(d.getFullYear(), 0, 1);
+          wk = Math.ceil(((d - jan1) / 86400000 + jan1.getDay() + 1) / 7);
+        }
+      }
+      if (!Number.isFinite(wk)) continue;
+      const q = wk <= 13 ? 'Q1' : wk <= 26 ? 'Q2' : wk <= 39 ? 'Q3' : 'Q4';
+      quarters[q].push({ wk, pred: w.pred_regs, actual });
+    }
+    const populated = Object.entries(quarters).filter(([_, rows]) => rows.length >= 2);
+    if (populated.length === 0) {
+      host.innerHTML = '';
+      return;
+    }
+    // Build SVG per quarter.
+    const W = 180, H = 140, PAD = 24;
+    function plotReliability(qLabel, rows) {
+      const allVals = rows.flatMap(r => [r.pred, r.actual]);
+      const max = Math.max.apply(null, allVals) * 1.1;
+      const sx = (v) => PAD + (v / max) * (W - PAD * 2);
+      const sy = (v) => H - PAD - (v / max) * (H - PAD * 2);
+      // Identity diagonal
+      let svg = '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + qLabel + ' reliability diagram, ' + rows.length + ' weeks">';
+      svg += '<line x1="' + sx(0) + '" y1="' + sy(0) + '" x2="' + sx(max) + '" y2="' + sy(max) + '" stroke="#d1d5db" stroke-width="1" stroke-dasharray="3,3"/>';
+      // Axes
+      svg += '<line x1="' + PAD + '" y1="' + (H - PAD) + '" x2="' + (W - PAD) + '" y2="' + (H - PAD) + '" stroke="#9ca3af" stroke-width="0.8"/>';
+      svg += '<line x1="' + PAD + '" y1="' + (H - PAD) + '" x2="' + PAD + '" y2="' + PAD + '" stroke="#9ca3af" stroke-width="0.8"/>';
+      // Dots
+      for (const r of rows) {
+        const color = Math.abs(r.pred - r.actual) / r.actual < 0.1 ? '#2f7d3e' : '#a63939';
+        svg += '<circle cx="' + sx(r.pred) + '" cy="' + sy(r.actual) + '" r="3.5" fill="' + color + '" fill-opacity="0.65" stroke="' + color + '" stroke-width="1">';
+        svg += '<title>W' + r.wk + ': pred ' + Math.round(r.pred).toLocaleString() + ', actual ' + Math.round(r.actual).toLocaleString() + '</title>';
+        svg += '</circle>';
+      }
+      // Quarter label
+      svg += '<text x="' + PAD + '" y="' + (PAD - 8) + '" font-size="11" font-weight="600" fill="#1f2937">' + qLabel + ' (' + rows.length + 'w)</text>';
+      // MAPE
+      const mape = rows.reduce((s, r) => s + Math.abs(r.pred - r.actual) / r.actual, 0) / rows.length * 100;
+      svg += '<text x="' + (W - PAD) + '" y="' + (PAD - 8) + '" text-anchor="end" font-size="10" fill="#6b7280">MAPE ' + mape.toFixed(0) + '%</text>';
+      svg += '</svg>';
+      return svg;
+    }
+    host.innerHTML =
+      '<div class="backtest-quarters-head">Per-quarter calibration</div>' +
+      '<div class="backtest-quarters-grid">' +
+        populated.map(([q, rows]) => '<div class="backtest-quarter-cell">' + plotReliability(q, rows) + '</div>').join('') +
+      '</div>';
   }
 
   function renderCpaBoxWhisker(projectedCpa) {
