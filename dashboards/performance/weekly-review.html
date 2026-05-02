@@ -2160,6 +2160,22 @@ function resolvedWeek() { return scrubWeek || curWeek; }
 // WR-R1 (2026-04-29): sets of markets present in each data source.
 // Populated in init() once the JSON loads. Module-scoped so
 // renderSubmarketRow() can use them without re-reading the files.
+// #27 (2026-05-01, no-op): EU5 inline drill-down — the old separate
+// #submarketTabs band is hidden; UK/DE/FR/IT/ES render inline on the
+// trust bar alongside EU5 itself. Spec already met by the M1 sticky
+// trust bar architecture.
+// #28 (2026-05-01, no-op): global metric filter (#metricTabs) is
+// hidden; per-market metric preference still persists via localStorage.
+// Spec already met by the WR-B1 segmented control approach.
+// #50 (2026-05-01, no-op): "Since last week" paragraph already renders
+// via renderSinceLastWeekHtml above the callout headline (WR-D4 sprint).
+// #51 (2026-05-01, no-op): event annotations on trend + calibration
+// charts already implemented via WR-A8 eventAnnotations param in
+// canon-chart — dashed verticals at weeks with regime changes, holidays,
+// Q-close events, labels on hover.
+// #74 (2026-05-01, no-op): decomposition bar numeric labels inside
+// segments already rendered by renderContributionBar on projection —
+// "Seasonal ${pct}% · ${segRegs}" strings paint inside each segment.
 let calloutSet = new Set();
 let forecastSet = new Set();
 
@@ -6114,6 +6130,19 @@ function renderKPIs() {
   }
 
   row.innerHTML = cards.join('');
+  // #100 (2026-05-01): per-market archetype KPI ordering. For spend-only
+  // markets (JP / AU) the spend discipline is the lens, not regs growth —
+  // reorder the already-rendered cards so YTD spend is card 1 instead of
+  // card 4. DOM shuffle is cheaper than duplicating the card-build
+  // branches. Regs markets keep default ordering (Latest regs → vs-OP2 →
+  // CPA → YTD).
+  if (archetype === 'spend') {
+    const kids = Array.from(row.children);
+    if (kids.length === 4) {
+      // Move last card (YTD spend) to front.
+      row.insertBefore(kids[3], kids[0]);
+    }
+  }
   // #058 (2026-05-01): rollup-member tooltips. When on a rollup market
   // (WW/EU5/NA), each KPI card gets a tooltip showing per-member-market
   // contribution sorted descending. Plain title attribute — no new hover

@@ -6,6 +6,29 @@
    card / mobile responsive / zero-state-as-demo / small-multiples / demo-
    worthy defaults. */
 
+/* #10 (2026-05-01): published color semantics. One palette, one meaning
+   per color, documented so the two dashboards (WR + projection) read
+   as a single product. Any new chart or panel pulls from these tokens
+   rather than inventing local hex:
+     --color-actuals      neutral grey    YTD locked history; "what happened"
+     --color-brand        brand-blue      Brand anchor; actual totals; primary CTA
+     --color-nb           amazon-orange   NB lever; pred_regs in RoY
+     --color-target       red             target line / constraint / exception
+     --color-success      green           good / on-plan / positive delta
+     --color-warning      amber           at-risk / within-noise
+     --color-danger       red             bad / off-plan / negative delta (shared with --color-target)
+     --color-seasonal     muted teal      seasonal contribution stream
+     --color-trend        muted amber     trend/baseline contribution stream
+     --color-regime       muted purple    campaign-lift contribution stream
+     --color-qualitative  muted rose      judgment overrides
+     --color-text-hero    near-black      primary numeric content
+     --color-text-body    dark grey       secondary prose
+     --color-text-meta    mid grey        axis labels, kicker labels
+     --color-text-subtle  light grey      placeholders, unit suffixes
+   Where a chart needs a per-week severity band (green/amber/red around
+   zero), compose from --color-success / warning / danger — don't invent.
+   Rollup/region tints: blue=refit, amber=holiday, violet=q_close. */
+
 :root {
   /* 4-color semantic palette (principle #4) */
   --color-actuals: #4A4A4A;         /* neutral grey — YTD locked history */
