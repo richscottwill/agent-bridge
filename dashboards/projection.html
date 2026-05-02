@@ -506,6 +506,10 @@ details.sec-panel:not([open]) + details.sec-panel {
     <div class="sec-panel" id="saved-panel">
       <h3>Saved Projections <span id="saved-count" style="font-weight:400;color:var(--color-text-subtle)"></span></h3>
       <div id="saved-list"><div style="color:var(--color-text-subtle);font-size:11px">No saved projections yet.</div></div>
+      <!-- #85 (2026-05-01): side-by-side scenario compare diff table.
+           Populated by renderCompareDiffTable when one or both of the
+           A/B compare slots are filled. Empty → display:none. -->
+      <div id="compare-diff-table" class="compare-diff-table" style="margin-top:var(--gap-md)"></div>
     </div>
   </div>
 

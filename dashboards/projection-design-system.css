@@ -72,6 +72,67 @@
   --duration-ripple: 1200ms;
 }
 
+/* #85 (2026-05-01): side-by-side scenario compare diff table. Renders
+   in the Saved Projections panel when A (and optionally B) compare slot
+   is filled. Compact 6-row × 3-column table with delta columns. */
+.compare-diff-table:empty { display: none; }
+.compare-diff-head {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  color: var(--color-text-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--color-panel-border);
+}
+.compare-diff-table-inner {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.compare-diff-table-inner th {
+  text-align: left;
+  padding: 4px 8px 4px 0;
+  font-weight: 600;
+  color: var(--color-text-subtle);
+  border-bottom: 1px solid var(--color-panel-border);
+}
+.compare-diff-table-inner td {
+  padding: 4px 8px 4px 0;
+  vertical-align: top;
+}
+.compare-diff-table-inner td.cmp-label {
+  color: var(--color-text-subtle);
+  font-weight: 500;
+}
+.compare-diff-table-inner td.cmp-val {
+  color: var(--color-text-hero);
+  font-weight: 500;
+}
+.cmp-delta.pos { color: var(--color-success); }
+.cmp-delta.neg { color: var(--color-danger); }
+.cmp-col-cur { color: var(--color-brand); }
+.cmp-col-a   { color: var(--color-nb); }
+.cmp-col-b   { color: var(--color-regime); }
+.cmp-delta-col { color: var(--color-text-subtle); font-weight: 500; }
+
+/* #85 saved-list slot badges */
+.saved-slot-badge {
+  display: inline-block;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 2px;
+  margin-right: 6px;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+}
+.saved-slot-badge.slot-a { background: rgba(255, 153, 0, 0.18); color: #A05A00; }
+.saved-slot-badge.slot-b { background: rgba(123, 109, 158, 0.22); color: #4F3F73; }
+
 /* #19 (2026-05-01): dark mode override. Single class on <body> flips the
    palette to dark-grey (#121212 base per Natural20 research, not true-black
    which causes halation for the ~47% of users with astigmatism). Chart

@@ -1731,33 +1731,51 @@
     // is from a different scope (overlaying a different market would be
     // misleading: YTD + trajectory anchors wouldn't line up). Also skip
     // on regional rollups — the state plumbing covers single-market views.
+    //
+    // #85 (2026-05-01): support a second compare slot (STATE.compareIdB) so
+    // two saved scenarios can be overlaid side-by-side against current.
+    // When both slots are filled, both overlays render + the diff table
+    // below shows A-vs-B deltas.
     let compareOutput = null;
     let compareLabel = null;
-    try {
-      if (STATE.compareId && marketData) {
-        const rec = (STATE.saved || []).find(r => r.id === STATE.compareId);
-        if (rec && rec.scope === currentScope()
-            && typeof V1_1_Slim !== 'undefined'
-            && typeof V1_1_Slim.projectWithLockedYtd === 'function') {
-          const periodWeeks = periodWeeksSet(rec.period);
-          compareOutput = V1_1_Slim.projectWithLockedYtd(
-            marketData, 2026, rec.driver, rec.target_value,
-            {
-              regimeMultiplier: rec.regime_multiplier || 1.0,
-              periodWeeks,
-              periodType: rec.period,
-            }
-          );
-          let tv = rec.target_value;
-          if (rec.driver === 'spend' && Number.isFinite(tv)) tv = fmt$(tv);
-          else if (rec.driver === 'regs' && Number.isFinite(tv)) tv = fmtNum(tv);
-          else if (rec.driver === 'ieccp' && Number.isFinite(tv)) tv = tv + '%';
-          compareLabel = `Saved · ${rec.driver}=${tv}`;
+    let compareOutputB = null;
+    let compareLabelB = null;
+    function computeCompare(recordId) {
+      if (!recordId || !marketData) return { out: null, label: null, rec: null };
+      const rec = (STATE.saved || []).find(r => r.id === recordId);
+      if (!rec || rec.scope !== currentScope()
+          || typeof V1_1_Slim === 'undefined'
+          || typeof V1_1_Slim.projectWithLockedYtd !== 'function') {
+        return { out: null, label: null, rec: null };
+      }
+      const periodWeeks = periodWeeksSet(rec.period);
+      const projOut = V1_1_Slim.projectWithLockedYtd(
+        marketData, 2026, rec.driver, rec.target_value,
+        {
+          regimeMultiplier: rec.regime_multiplier || 1.0,
+          periodWeeks,
+          periodType: rec.period,
         }
+      );
+      let tv = rec.target_value;
+      if (rec.driver === 'spend' && Number.isFinite(tv)) tv = fmt$(tv);
+      else if (rec.driver === 'regs' && Number.isFinite(tv)) tv = fmtNum(tv);
+      else if (rec.driver === 'ieccp' && Number.isFinite(tv)) tv = tv + '%';
+      return { out: projOut, label: `Saved · ${rec.driver}=${tv}`, rec };
+    }
+    try {
+      if (STATE.compareId) {
+        const r = computeCompare(STATE.compareId);
+        compareOutput = r.out; compareLabel = r.label;
+      }
+      if (STATE.compareIdB) {
+        const r = computeCompare(STATE.compareIdB);
+        compareOutputB = r.out; compareLabelB = r.label;
       }
     } catch (e) {
       console.warn('[projection] compare recompute failed:', e);
       compareOutput = null;
+      compareOutputB = null;
     }
     try {
       renderProjectionChart(out, counterfactual, uncert, marketData, compareOutput, compareLabel);
@@ -1766,6 +1784,10 @@
       const chartEl = document.getElementById('chart-primary');
       if (chartEl) chartEl.innerHTML = '<div style="text-align:center;padding:24px;color:var(--color-text-meta)">Chart failed to render. Check console.</div>';
     }
+    // #85 (2026-05-01): render side-by-side diff table when A (and optionally B) are set.
+    // Chart overlay still shows slot A only — B adds a tabular row so the three-way
+    // comparison is visible without a crowded chart.
+    renderCompareDiffTable(out, compareOutput, compareLabel, compareOutputB, compareLabelB);
   }
 
   // ========================================================================
@@ -2682,6 +2704,75 @@
     );
   }
 
+  // #85 (2026-05-01): render the side-by-side compare diff table.
+  // Columns: Current / A (optional) / B (optional), with delta columns
+  // (A-Current, B-Current, A-B) when both slots filled. Six metric rows:
+  // total spend, total regs, brand regs, nb regs, ieccp, blended CPA.
+  // Renders "—" when slot empty so the table structure stays stable.
+  function renderCompareDiffTable(curOut, aOut, aLabel, bOut, bLabel) {
+    const host = document.getElementById('compare-diff-table');
+    if (!host) return;
+    if (!STATE.compareId && !STATE.compareIdB) {
+      host.innerHTML = '';
+      host.style.display = 'none';
+      return;
+    }
+    host.style.display = '';
+    const cur = (curOut && curOut.totals) || {};
+    const a = (aOut && aOut.totals) || null;
+    const b = (bOut && bOut.totals) || null;
+    const rows = [
+      { label: 'Total spend', key: 'total_spend', fmt: fmt$ },
+      { label: 'Total regs', key: (t) => ((t.brand_regs || 0) + (t.nb_regs || 0)), fmt: fmtNum, derived: true },
+      { label: 'Brand regs', key: 'brand_regs', fmt: fmtNum },
+      { label: 'NB regs', key: 'nb_regs', fmt: fmtNum },
+      { label: 'Blended CPA', key: 'blended_cpa', fmt: fmt$ },
+      { label: 'Efficiency (ie%CCP)', key: (t) => (t.computed_ieccp != null ? t.computed_ieccp : t.ieccp), fmt: (v) => v == null ? '—' : fmtPct(v), derived: true },
+    ];
+    function getVal(t, row) {
+      if (!t) return null;
+      const v = row.derived ? row.key(t) : t[row.key];
+      return Number.isFinite(v) ? v : null;
+    }
+    function fmtDelta(curV, cmpV) {
+      if (curV == null || cmpV == null) return '—';
+      const d = cmpV - curV;
+      if (Math.abs(d) < 0.5) return 'flat';
+      const pct = curV !== 0 ? (d / curV) * 100 : 0;
+      const sign = d > 0 ? '+' : '';
+      const cls = d > 0 ? 'pos' : 'neg';
+      return `<span class="cmp-delta ${cls}">${sign}${Math.abs(pct) >= 1 ? pct.toFixed(0) : pct.toFixed(1)}%</span>`;
+    }
+    const showB = !!b;
+    const header = `
+      <tr>
+        <th></th>
+        <th class="cmp-col-cur">Current</th>
+        ${a ? '<th class="cmp-col-a">A: ' + (aLabel || 'Saved') + '</th><th class="cmp-delta-col">Δ vs Cur</th>' : ''}
+        ${showB ? '<th class="cmp-col-b">B: ' + (bLabel || 'Saved') + '</th><th class="cmp-delta-col">Δ vs Cur</th>' : ''}
+        ${(a && b) ? '<th class="cmp-delta-col">A vs B</th>' : ''}
+      </tr>
+    `;
+    const body = rows.map(r => {
+      const curV = getVal(cur, r);
+      const aV = getVal(a, r);
+      const bV = getVal(b, r);
+      return '<tr>' +
+        '<td class="cmp-label">' + r.label + '</td>' +
+        '<td class="cmp-val">' + (curV != null ? r.fmt(curV) : '—') + '</td>' +
+        (a ? '<td class="cmp-val">' + (aV != null ? r.fmt(aV) : '—') + '</td><td>' + fmtDelta(curV, aV) + '</td>' : '') +
+        (showB ? '<td class="cmp-val">' + (bV != null ? r.fmt(bV) : '—') + '</td><td>' + fmtDelta(curV, bV) + '</td>' : '') +
+        ((a && b) ? '<td>' + fmtDelta(aV, bV) + '</td>' : '') +
+        '</tr>';
+    }).join('');
+    host.innerHTML =
+      '<div class="compare-diff-head">Scenario comparison</div>' +
+      '<table class="compare-diff-table-inner">' +
+        '<thead>' + header + '</thead>' +
+        '<tbody>' + body + '</tbody>' +
+      '</table>';
+  }
+
   function renderSavedList() {
     const list = document.getElementById('saved-list');
     const cnt = document.getElementById('saved-count');
@@ -2704,7 +2795,15 @@
     list.innerHTML = STATE.saved.map(r => {
       const when = new Date(r.saved_at).toLocaleString(undefined,
         { month: 'numeric', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
-      const cmpActive = STATE.compareId === r.id ? ' compare-active' : '';
+      // #85 (2026-05-01): two-slot compare — show A/B badge when row is
+      // slotted, cycle button label through Compare → Clear A → Clear B.
+      const slotA = STATE.compareId === r.id;
+      const slotB = STATE.compareIdB === r.id;
+      const cmpActive = (slotA || slotB) ? ' compare-active' : '';
+      const slotBadge = slotA ? '<span class="saved-slot-badge slot-a">A</span>'
+                      : slotB ? '<span class="saved-slot-badge slot-b">B</span>'
+                      : '';
+      const cmpLabel = slotA ? 'Clear A' : slotB ? 'Clear B' : 'Compare';
       // P3-09: format target_value via driver-appropriate formatter so saved
       // items like "MX · Y2026 · spend=12500000" render as "spend=$12.5M".
       let tv = r.target_value;
@@ -2720,13 +2819,13 @@
       return `
         <div class="saved-item${cmpActive}" data-id="${r.id}">
           <div style="flex:1;min-width:0">
-            <div style="font-weight:500">${r.scope} · ${r.period} · ${r.driver}=${tv}</div>
+            <div style="font-weight:500">${slotBadge}${r.scope} · ${r.period} · ${r.driver}=${tv}</div>
             <div class="saved-meta">${when}</div>
           </div>
           ${sparkHtml}
           <div class="saved-actions">
             <button class="saved-action" data-act="load"    title="Load this projection">Load</button>
-            <button class="saved-action" data-act="compare" title="Overlay as a dashed reference on the chart">${STATE.compareId === r.id ? 'Clear cmp' : 'Compare'}</button>
+            <button class="saved-action" data-act="compare" title="Overlay as dashed reference (two-slot — fills A, then B, then clears)">${cmpLabel}</button>
             <button class="saved-action saved-action-danger" data-act="delete" title="Delete this saved projection" aria-label="Delete">×</button>
           </div>
         </div>`;
@@ -2757,13 +2856,29 @@
     STATE.saved = STATE.saved.filter(r => r.id !== id);
     localStorage.setItem('mpe-saved', JSON.stringify(STATE.saved));
     if (STATE.compareId === id) STATE.compareId = null;
+    if (STATE.compareIdB === id) STATE.compareIdB = null;
     renderSavedList();
   }
 
   function toggleCompareSaved(id) {
-    STATE.compareId = (STATE.compareId === id) ? null : id;
+    // #85 (2026-05-01): two-slot compare. First click fills slot A, second
+    // click (on a different record) fills slot B, third click (on a
+    // record already in a slot) clears that slot.
+    if (STATE.compareId === id) {
+      STATE.compareId = null;
+    } else if (STATE.compareIdB === id) {
+      STATE.compareIdB = null;
+    } else if (!STATE.compareId) {
+      STATE.compareId = id;
+    } else if (!STATE.compareIdB) {
+      STATE.compareIdB = id;
+    } else {
+      // Both slots full — replace A and shift A to B.
+      STATE.compareIdB = STATE.compareId;
+      STATE.compareId = id;
+    }
     renderSavedList();
-    // Re-trigger a render so the chart overlays (or clears) the compare line.
+    // Re-trigger a render so the chart overlays (or clears) the compare lines.
     scheduleRecompute();
   }
 
@@ -2909,6 +3024,7 @@
     STATE.scenarioOverride = null;
     STATE.kpiIsolatedSeries = null;
     STATE.compareId = null;
+    STATE.compareIdB = null;
     // P-DRV-PERSIST v2 fix (2026-04-28): clear all per-scope driver
     // overrides so every market returns to its preferred driver.
     STATE.driverOverrides = {};
