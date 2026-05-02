@@ -315,6 +315,8 @@ details.sec-panel:not([open]) + details.sec-panel {
       <button id="btn-save" class="disclosure-btn" title="Save this scenario to your local list">Save</button>
       <button id="btn-copy-link" class="disclosure-btn" title="Copy a shareable URL that reproduces this exact scenario (market, period, target, driver, lift, active scenario)">Copy link</button>
       <button id="btn-export-csv" class="disclosure-btn" title="Download the current projection as CSV">Export CSV</button>
+      <button id="btn-theme" class="disclosure-btn" title="Toggle dark mode (Natural20 dark-grey #121212)" onclick="(function(){var d=!document.body.classList.contains('theme-dark');document.body.classList.toggle('theme-dark',d);try{localStorage.setItem('proj-theme',d?'dark':'light');}catch(_){}})()">Theme</button>
+      <button id="btn-print" class="disclosure-btn" title="Print or save as PDF (WBR-deck layout)" onclick="(function(){document.body.setAttribute('data-print-date',new Date().toLocaleString());window.print();})()">Print</button>
       <button id="btn-reset" class="disclosure-btn" title="Reset to defaults (MX · Y2026 · Efficiency 75%)">Reset</button>
       <button id="btn-recompute" class="disclosure-btn active" title="Re-fetch projection-data.json and recompute from fresh data">Recompute</button>
     </div>

@@ -3752,6 +3752,13 @@
   // ========================================================================
 
   async function init() {
+    // #19 (2026-05-01): restore dark-mode preference before first render
+    // so there's no light-to-dark flash.
+    try {
+      if (localStorage.getItem('proj-theme') === 'dark') {
+        document.body.classList.add('theme-dark');
+      }
+    } catch (_) { /* private mode — silent */ }
     const ok = await loadData();
     if (!ok) return;
 

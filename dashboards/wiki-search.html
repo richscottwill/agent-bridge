@@ -1219,6 +1219,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     </div>
     <input type="text" class="search-input" id="searchInput" placeholder="Search by keyword, topic, market, or concept — fuzzy matching enabled" autofocus>
     <kbd class="wk-kbd">⌘K</kbd>
+    <button class="vt" id="vt-theme" title="Toggle dark mode" onclick="(function(){var d=!document.body.classList.contains('theme-dark');document.body.classList.toggle('theme-dark',d);try{localStorage.setItem('wiki-theme',d?'dark':'light');}catch(_){}})()" style="margin-left:4px">theme</button>
+    <button class="vt" id="vt-print" title="Print or save as PDF" onclick="window.print()">print</button>
     <select class="pipe-group-by" id="pipeGroupBy" style="display:none" onchange="renderPipeline()">
       <option value="status">Columns: Status</option>
       <option value="category">Columns: Category</option>
@@ -1518,6 +1520,12 @@ function expandQuery(q){
 }
 
 // ── Load ──
+// #19 (2026-05-01): restore dark-mode preference before first render.
+try {
+  if (localStorage.getItem('wiki-theme') === 'dark') {
+    document.body.classList.add('theme-dark');
+  }
+} catch (_) { /* private mode — silent */ }
 fetch('data/wiki-search-index.json?'+Date.now()).then(r=>r.json()).then(data=>{
   IX=data;
   // M09 (2026-04-30): hydrate is_orphan + contradiction_summary onto each

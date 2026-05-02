@@ -72,6 +72,113 @@
   --duration-ripple: 1200ms;
 }
 
+/* #19 (2026-05-01): dark mode override. Single class on <body> flips the
+   palette to dark-grey (#121212 base per Natural20 research, not true-black
+   which causes halation for the ~47% of users with astigmatism). Chart
+   colors stay identical; only chrome changes. The shared/*.js modules use
+   the same tokens so they follow automatically. */
+body.theme-dark {
+  --color-neutral-bg: #121212;
+  --color-panel-bg: #1A1A1A;
+  --color-panel-border: #2A2A2A;
+  --color-text-hero: #E5E5E5;
+  --color-text-body: #D1D5DB;
+  --color-text-meta: #9CA3AF;
+  --color-text-subtle: #6B7280;
+  --color-text-on-brand: #FFFFFF;
+  --color-locked-ytd: #2A2A2A;
+  --color-locked-ytd-dark: #1F1F1F;
+  --color-unreachable: rgba(209, 50, 18, 0.22);
+  background: #121212;
+  color: #E5E5E5;
+}
+body.theme-dark .page-wrap,
+body.theme-dark main,
+body.theme-dark body {
+  background: #121212;
+  color: #E5E5E5;
+}
+/* Chart.js canvas needs an explicit inversion since it paints directly. */
+body.theme-dark canvas { filter: invert(0.92) hue-rotate(180deg); }
+/* Our inline SVG panels use CSS vars so they reflow automatically, but
+   force a safe background for white-background child elements. */
+body.theme-dark svg rect[fill="white"],
+body.theme-dark svg rect[fill="#FFFFFF"] { fill: #1A1A1A; }
+
+/* #20 + #57 (2026-05-01): print stylesheet + 1-page PDF. Triggers via
+   browser Ctrl+P / Cmd+P → "Save as PDF". Layout renders as a WBR deck:
+   hides controls/filters/scrub indicators, forces panels to full width,
+   breaks sensibly at section boundaries, prints text at 10pt for density.
+   Commoncog "format never changes" — the WBR printable is the same deck
+   regardless of whether Richard prints for a plane, a 1:1, or a review. */
+@media print {
+  @page { size: landscape; margin: 0.4in; }
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+  }
+  /* Hide interactive chrome */
+  .wr-stick, .wr-stick-search, .wr-controls,
+  .controls-row, .view-switcher,
+  .wr-chart-axis-toggle, .wr-exception-why, .wr-exception-dismiss,
+  .wr-scrub-indicator, .wr-metric-group,
+  .wk-stick-search, .wk-stick-head, .wk-agentic-ribbon,
+  .disclosure-btn, .saved-panel, .feedback-bar,
+  .toggle-row, .viewer-actions {
+    display: none !important;
+  }
+  /* Expand collapsed disclosures for print so content is complete */
+  details:not([open]) > summary { cursor: default; }
+  details > *:not(summary) { display: block !important; }
+  details { page-break-inside: auto; }
+  /* Panels stack full-width, page-break after major sections */
+  .sec-panel, .wr-callout-main {
+    box-shadow: none !important;
+    border: 1px solid #CCCCCC !important;
+    page-break-inside: avoid;
+    margin-bottom: 12pt;
+  }
+  /* Charts keep their aspect ratio but shrink to fit */
+  canvas, svg { max-width: 100% !important; height: auto !important; }
+  /* Hide the right sidebar if any */
+  .viewer { display: none !important; }
+  /* Footer — add URL + timestamp for shared context */
+  body::after {
+    content: "Printed " attr(data-print-date);
+    display: block;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-size: 8pt;
+    color: #666666;
+  }
+}
+
+/* #21 (2026-05-01): chart-download corner button. Shared styles for a
+   single unobtrusive PNG-download control placed over the primary trend
+   chart. Activates on hover via the parent .wr-chart-wrap. */
+.wr-chart-dl {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  color: var(--color-text-subtle);
+  font-size: 10px;
+  font-family: var(--font-mono);
+  padding: 2px 6px;
+  border-radius: 2px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 150ms ease;
+  z-index: 5;
+}
+.wr-chart-wrap { position: relative; }
+.wr-chart-wrap:hover .wr-chart-dl { opacity: 1; }
+.wr-chart-dl:hover { border-color: var(--color-brand); color: var(--color-brand); }
+
 /* Reset + base */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body {

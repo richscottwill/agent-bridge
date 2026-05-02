@@ -1670,6 +1670,9 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
       <button class="wr-nav-btn" id="nextWeek" aria-label="Next week">&#9654;</button>
     </div>
     <span class="wr-stick-ts" id="dataTs"></span>
+    <!-- #19 + #20/#57 + #21 (2026-05-01): theme toggle, print/PDF, download. -->
+    <button class="wr-nav-btn" id="wrThemeToggle" aria-label="Toggle dark mode" title="Toggle dark mode (Natural20 dark-grey #121212)" onclick="toggleTheme()" style="font-size:11px;padding:0 8px">theme</button>
+    <button class="wr-nav-btn" id="wrPrintBtn" aria-label="Print or save as PDF" title="Print this page or Save as PDF (WBR-deck layout)" onclick="printPage()" style="font-size:11px;padding:0 8px">print</button>
   </div>
 </header>
 
@@ -2500,6 +2503,8 @@ renderWbrNote();
   applyMarketArchetype();
   // WR-A10 (2026-04-30): wire scrub handlers AFTER charts exist.
   wireChartScrub();
+  // #21 (2026-05-01): attach PNG download buttons to chart wrappers.
+  wireChartDownloadButtons();
   // #6 (2026-05-01): set active chart titles from narrative state.
   // Must run after renderCallout (feeds trend title) and renderScorecard
   // (feeds calibration title).
@@ -4896,6 +4901,77 @@ function wireTrustPillHoverCards(pillHost) {
       if (wrHoverCardEl) wrHoverCardEl.style.display = 'none';
     }
   });
+}
+
+// #19 (2026-05-01): dark-mode toggle. Writes preference to localStorage
+// so it survives reload. Flipping toggles body.theme-dark which the design-
+// system CSS reads to override the token palette. Chart.js canvases get a
+// filter invert as a pragmatic fallback since they paint outside the token
+// system.
+function toggleTheme() {
+  const isDark = !document.body.classList.contains('theme-dark');
+  document.body.classList.toggle('theme-dark', isDark);
+  try { localStorage.setItem('wr-theme', isDark ? 'dark' : 'light'); } catch (_) {}
+}
+// Restore theme on cold load.
+(function restoreTheme(){
+  try {
+    if (localStorage.getItem('wr-theme') === 'dark') {
+      document.body.classList.add('theme-dark');
+    }
+  } catch (_) { /* private mode — silent */ }
+})();
+
+// #20 + #57 (2026-05-01): print / PDF. Stamps a data-print-date on the body
+// so the print stylesheet can include it in the footer, then fires the
+// browser print dialog. Browser "Save as PDF" produces the 1-page deck.
+function printPage() {
+  const now = new Date();
+  document.body.setAttribute('data-print-date', now.toLocaleString());
+  // Open all <details> so content is complete in the printed output, then
+  // restore closed state after the print dialog returns.
+  const wasClosed = Array.from(document.querySelectorAll('details:not([open])'));
+  wasClosed.forEach(d => d.open = true);
+  window.print();
+  // Not 100% reliable across browsers — some fire afterprint before the
+  // dialog dismisses — but best-effort restore keeps UX close to pre-print.
+  setTimeout(() => {
+    wasClosed.forEach(d => d.open = false);
+  }, 400);
+}
+
+// #21 (2026-05-01): download the primary trend chart as PNG. Chart.js
+// provides .toBase64Image() — wrap it in a one-click button anchored in
+// the chart wrap. Extended to ".wr-chart-wrap > canvas" so both the
+// trend and calibration charts get the affordance via DOM delegation.
+function wireChartDownloadButtons() {
+  if (wireChartDownloadButtons._bound) return;
+  document.querySelectorAll('.wr-chart-wrap').forEach(wrap => {
+    if (wrap.querySelector('.wr-chart-dl')) return;
+    const canvas = wrap.querySelector('canvas');
+    if (!canvas) return;
+    const btn = document.createElement('button');
+    btn.className = 'wr-chart-dl';
+    btn.type = 'button';
+    btn.textContent = 'PNG';
+    btn.title = 'Download this chart as PNG for Slack / Quip paste';
+    btn.onclick = (e) => {
+      e.preventDefault();
+      try {
+        const url = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = url;
+        const mk = (typeof curMarket !== 'undefined' ? curMarket : 'chart');
+        const wk = (typeof curWeek !== 'undefined' ? curWeek : '');
+        a.download = `wr-${canvas.id || 'chart'}-${mk}-${wk}.png`;
+        a.click();
+      } catch (err) {
+        console.warn('[wr] chart download failed:', err);
+      }
+    };
+    wrap.appendChild(btn);
+  });
+  wireChartDownloadButtons._bound = true;
 }
 
 // M1 (2026-04-30): sync the sticky header's market + week labels so the
