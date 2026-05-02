@@ -70,6 +70,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .viewer-title{font-size:16px;font-weight:700;color:#0F1111;flex:1;line-height:1.3}
 .viewer-close{background:none;border:none;color:#5A6373;font-size:20px;cursor:pointer;padding:2px 6px;border-radius:3px;flex-shrink:0}
 .viewer-close:hover{color:#0F1111;background:rgba(15,17,17,0.06)}
+/* #046 (2026-05-01): agent-eye-view toggle in viewer head. */
+.viewer-agent-toggle{background:transparent;border:1px solid #D1D5DB;color:#5A6373;font-size:11px;font-family:ui-monospace,monospace;cursor:pointer;padding:2px 8px;border-radius:3px;flex-shrink:0;letter-spacing:0.04em}
+.viewer-agent-toggle:hover{border-color:#0066CC;color:#0066CC}
+.viewer-agent-toggle.active{background:#0066CC;border-color:#0066CC;color:#FFFFFF}
 .viewer-meta{padding:8px 16px;border-bottom:1px solid #E0E0E0;display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0}
 .viewer-body{flex:1;overflow-y:auto;padding:16px;font-size:15px;color:#1F2937;line-height:1.7}
 .viewer-body h1{font-size:20px;font-weight:700;color:#0F1111;margin:16px 0 8px;border-bottom:1px solid #E0E0E0;padding-bottom:6px}
@@ -278,6 +282,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .wk-kpi-val.good { color: #047857; }
 .wk-kpi-val.warn { color: #B45309; }
 .wk-kpi-val.bad  { color: #991B1B; }
+.wk-kpi-spark {
+  min-height: 18px;
+  margin-top: 2px;
+}
+.wk-kpi-spark:empty { min-height: 0; }
 .wk-kpi-sub {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 10px;
@@ -1347,6 +1356,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div class="viewer-head">
       <button class="viewer-back" id="viewerBack" onclick="goBack()">← Back</button>
       <div class="viewer-title" id="viewerTitle"></div>
+      <!-- #046 (2026-05-01): agent-eye-view toggle. When on, renders the
+           raw markdown source instead of the HTML-rendered view so
+           Richard can spot-check what an LLM would parse (dual-audience
+           check per body-system portability principle). -->
+      <button class="viewer-agent-toggle" id="viewerAgentToggle" onclick="toggleAgentEyeView()"
+              title="Toggle agent-eye-view: show raw markdown as an LLM would parse it">agent view</button>
       <button class="viewer-close" onclick="closeViewer()">&times;</button>
     </div>
     <div class="viewer-meta" id="viewerMeta"></div>
@@ -1592,21 +1607,78 @@ function renderKpiStrip(data) {
   const orphans = data.orphan_count != null ? data.orphan_count : 0;
   const contras = data.contradiction_count != null ? data.contradiction_count : 0;
 
+  // #003 (2026-05-01): 6-week sparklines from wiki-health-history.json
+  // weekly_rollup. Fetch is sync-on-first-render; we cache the result on
+  // the function so subsequent calls read from cache. Graceful empty-
+  // sparkline when history is thin.
+  const history = renderKpiStrip._history || null;
+  if (!history && !renderKpiStrip._historyFetching) {
+    renderKpiStrip._historyFetching = true;
+    fetch('data/wiki-health-history.json', { cache: 'no-cache' })
+      .then(r => r.ok ? r.json() : null)
+      .then(h => {
+        renderKpiStrip._history = h || {};
+        renderKpiStrip._historyFetching = false;
+        renderKpiStrip(data);  // re-render with history now cached
+      })
+      .catch(() => { renderKpiStrip._historyFetching = false; });
+  }
+  const weekly = (history && history.weekly_rollup) || [];
+  const last6 = weekly.slice(-6);
+  function sparkFor(field) {
+    if (last6.length < 2) return '';
+    const vals = last6.map(r => {
+      // Support nested by_status.FINAL etc via dotted key convention.
+      if (field.startsWith('by_status.')) {
+        const sub = field.slice('by_status.'.length);
+        return (r.by_status && r.by_status[sub]) || 0;
+      }
+      return r[field] || 0;
+    });
+    return heroSparkline(vals);
+  }
+
   const cells = [
-    { label: 'Docs',            val: total,      cls: '',     sub: 'indexed' },
-    { label: 'Final',           val: finalCount, cls: 'good', sub: 'shipped' },
-    { label: 'Stale > 90d',     val: staleCount, cls: staleCount > 40 ? 'bad' : staleCount > 20 ? 'warn' : '', sub: 'review' },
-    { label: 'Orphans',         val: orphans,    cls: orphans > 5 ? 'bad' : orphans > 0 ? 'warn' : '', sub: 'unlinked' },
-    { label: 'Contradictions',  val: contras,    cls: contras > 0 ? 'bad' : '', sub: 'flagged' },
+    { label: 'Docs',            val: total,      cls: '',     sub: 'indexed',  spark: sparkFor('total_docs') },
+    { label: 'Final',           val: finalCount, cls: 'good', sub: 'shipped',  spark: sparkFor('by_status.FINAL') },
+    { label: 'Stale > 90d',     val: staleCount, cls: staleCount > 40 ? 'bad' : staleCount > 20 ? 'warn' : '', sub: 'review',   spark: sparkFor('stale') },
+    { label: 'Orphans',         val: orphans,    cls: orphans > 5 ? 'bad' : orphans > 0 ? 'warn' : '', sub: 'unlinked', spark: sparkFor('orphans') },
+    { label: 'Contradictions',  val: contras,    cls: contras > 0 ? 'bad' : '', sub: 'flagged',  spark: sparkFor('contradictions') },
   ];
 
   host.innerHTML = cells.map(c => (
     `<div class="wk-kpi">` +
     `<div class="wk-kpi-label">${c.label}</div>` +
     `<div class="wk-kpi-val ${c.cls}">${c.val.toLocaleString()}</div>` +
+    (c.spark ? `<div class="wk-kpi-spark">${c.spark}</div>` : '') +
     `<div class="wk-kpi-sub">${c.sub}</div>` +
     `</div>`
   )).join('');
+}
+
+// #003 (2026-05-01): hero sparkline helper for the KPI strip. 72×18,
+// endpoint dot, no axis/legend. Values assumed numeric; constant
+// series render as a flat line.
+function heroSparkline(vals) {
+  if (!Array.isArray(vals) || vals.length < 2) return '';
+  const W = 72, H = 18, PAD = 2;
+  const min = Math.min.apply(null, vals);
+  const max = Math.max.apply(null, vals);
+  const span = Math.max(max - min, 1);
+  const stepX = (W - PAD * 2) / (vals.length - 1);
+  const pts = vals.map((v, i) => {
+    const x = PAD + i * stepX;
+    const y = H - PAD - ((v - min) / span) * (H - PAD * 2);
+    return x.toFixed(1) + ',' + y.toFixed(1);
+  });
+  const endX = pts[pts.length - 1].split(',')[0];
+  const endY = pts[pts.length - 1].split(',')[1];
+  return (
+    '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" aria-hidden="true" focusable="false" style="display:block;margin:2px auto">'
+    + '<polyline points="' + pts.join(' ') + '" fill="none" stroke="#0066CC" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>'
+    + '<circle cx="' + endX + '" cy="' + endY + '" r="2" fill="#0066CC"/>'
+    + '</svg>'
+  );
 }
 
 // M11 (2026-04-30): Agent-authored drafts ribbon. Answers Richard's
@@ -2940,7 +3012,40 @@ function openDoc(id,fromLink){
   doSearch();
 }
 
+// #046 (2026-05-01): agent-eye-view mode renders raw markdown in a monospaced
+// pre block so Richard sees what an LLM ingests. Toggled from the viewer
+// head button; re-renders the current doc from the cached markdown.
+function toggleAgentEyeView() {
+  window.__wk_agent_eye_view = !window.__wk_agent_eye_view;
+  const btn = document.getElementById('viewerAgentToggle');
+  if (btn) {
+    btn.classList.toggle('active', !!window.__wk_agent_eye_view);
+    btn.textContent = window.__wk_agent_eye_view ? 'rendered' : 'agent view';
+  }
+  // Re-render current doc from cache if possible.
+  const id = (typeof viewingDoc !== 'undefined') ? viewingDoc : null;
+  const doc = id && window.__wk_doc_cache ? window.__wk_doc_cache[id] : null;
+  const cachedMd = id && window.__wk_viewer_raw_cache ? window.__wk_viewer_raw_cache[id] : null;
+  const body = document.getElementById('viewerBody');
+  if (doc && cachedMd && body) {
+    renderViewerBody(body, doc, cachedMd);
+  }
+}
+
 function renderViewerBody(body,doc,md){
+  // #046 (2026-05-01): agent-eye-view mode renders raw markdown in a
+  // monospaced pre block so Richard sees what an LLM ingests. Cached
+  // original body per doc.id so we can flip back to rendered without
+  // re-fetching.
+  window.__wk_viewer_raw_cache = window.__wk_viewer_raw_cache || {};
+  window.__wk_viewer_raw_cache[doc.id] = md;
+  window.__wk_doc_cache = window.__wk_doc_cache || {};
+  window.__wk_doc_cache[doc.id] = doc;
+  if (window.__wk_agent_eye_view) {
+    body.innerHTML = '<pre class="viewer-agent-raw" style="font-family:ui-monospace,monospace;font-size:12px;color:#1f2937;white-space:pre-wrap;line-height:1.5;background:#fafafa;padding:16px;border-radius:4px;margin:0">'
+      + esc(md) + '</pre>';
+    return;
+  }
   let html='';
 
   // #032 (2026-04-30): Stale banner upgraded to projection exception-banner pattern with
