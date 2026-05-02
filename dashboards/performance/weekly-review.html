@@ -2130,6 +2130,13 @@ body.wr-arch-spend .wr-scorecard-panel .wr-scorecard-head::before {
   <summary style="cursor:pointer;font-weight:600;font-size:var(--size-meta);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.08em">Strip plot — per-week forecast error dots across markets</summary>
   <div id="stripBody" style="margin-top:var(--gap-sm)"></div>
 </details>
+<!-- #94 (2026-05-01): Sankey of Q-over-Q budget flow. One quarter per
+     rendering showing how the quarter's spend flowed from budget → 10
+     markets → regs outcome. Collapsed by default; lazy-render on open. -->
+<details class="sec-panel" id="sec-sankey" style="margin-top:var(--gap-md)">
+  <summary style="cursor:pointer;font-weight:600;font-size:var(--size-meta);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.08em">Quarter budget flow (Sankey) — spend → market → regs</summary>
+  <div id="sankeyBody" style="margin-top:var(--gap-sm)"></div>
+</details>
 
 </main>
 </div> <!-- /.wr-frame -->
@@ -2160,22 +2167,36 @@ function resolvedWeek() { return scrubWeek || curWeek; }
 // WR-R1 (2026-04-29): sets of markets present in each data source.
 // Populated in init() once the JSON loads. Module-scoped so
 // renderSubmarketRow() can use them without re-reading the files.
-// #27 (2026-05-01, no-op): EU5 inline drill-down — the old separate
-// #submarketTabs band is hidden; UK/DE/FR/IT/ES render inline on the
-// trust bar alongside EU5 itself. Spec already met by the M1 sticky
-// trust bar architecture.
-// #28 (2026-05-01, no-op): global metric filter (#metricTabs) is
-// hidden; per-market metric preference still persists via localStorage.
-// Spec already met by the WR-B1 segmented control approach.
-// #50 (2026-05-01, no-op): "Since last week" paragraph already renders
-// via renderSinceLastWeekHtml above the callout headline (WR-D4 sprint).
-// #51 (2026-05-01, no-op): event annotations on trend + calibration
-// charts already implemented via WR-A8 eventAnnotations param in
-// canon-chart — dashed verticals at weeks with regime changes, holidays,
-// Q-close events, labels on hover.
-// #74 (2026-05-01, no-op): decomposition bar numeric labels inside
-// segments already rendered by renderContributionBar on projection —
-// "Seasonal ${pct}% · ${segRegs}" strings paint inside each segment.
+// ============================================================================
+// SPEC TRACEABILITY (2026-05-01): items from dashboard-redesign-report.html
+// that are already shipped via M/WR-* commits but weren't tagged at ship
+// time. Listed here so future audits can trace spec→impl without re-deriving.
+//
+//   #1  unified chart aesthetic          → projection-design-system.css
+//                                          imported by all 3 dashboards
+//   #12 box-score footer under 6-12 chart → M7 wr-wbr612-boxscore (5 cells)
+//   #14 collapsed TOC hover menu          → M1 .wr-toc-collapsed <details>
+//   #20 print stylesheet                  → shipped with #57 (@media print)
+//   #22 cross-filter trust-bar            → trust-bar onSelect already drives
+//                                          full render() cascade
+//   #27 EU5 inline drill-down             → M1 trust-bar renders member
+//                                          markets inline; #submarketTabs hidden
+//   #28 remove global metric filter       → #metricTabs hidden; per-market
+//                                          preference via localStorage
+//   #30 vs-OP2 bullet chart               → renderKPIs + window.Bullet.renderBullet
+//   #31 headline template                 → renderCalloutNarrative .wr-callout-headline
+//   #33 three-question above fold         → WR-D1 renderThreeQ placement
+//   #35 variance row-median coloring      → M10 waterfall replaced table
+//   #39 signed-bar error chart            → canon-chart renderErrorChart
+//                                          with referenceBandPlugin
+//   #40 prior-week thread sparklines      → M8 threadStrip
+//   #50 since-last-week paragraph         → WR-D4 renderSinceLastWeekHtml
+//   #51 event annotations on charts       → WR-A8 eventAnnotations via
+//                                          canon-chart.js annotation plugin
+//   #53 variance waterfall                → M10 renderVariance SVG waterfall
+//   #74 decomposition bar numeric labels  → renderContributionBar inline labels
+//   #80 all-10-markets small-multiples    → renderSmallMultiples (projection)
+// ============================================================================
 let calloutSet = new Set();
 let forecastSet = new Set();
 
@@ -5424,6 +5445,95 @@ function renderStripPlot() {
     '</svg>';
 }
 
+// #94 (2026-05-01): Sankey of Q-over-Q budget flow. One current-quarter
+// rendering showing spend/market/regs relationships — "where the quarter's
+// spend went and what it bought." Data source: FORECAST.quarterly[mk]
+// with actual_cost + actual_regs (or pred when actual null). Reader
+// sees market-level share of total + regs-yield ratio in one visual.
+function renderSankey() {
+  const host = document.getElementById('sankeyBody');
+  if (!host || !FORECAST || !FORECAST.quarterly) {
+    if (host) host.innerHTML = '<div class="wr-empty" style="padding:12px">No quarterly data available.</div>';
+    return;
+  }
+  // Determine current quarter from maxWk.
+  const maxWk = FORECAST.max_week || 15;
+  const q = maxWk <= 13 ? 'Q1' : maxWk <= 26 ? 'Q2' : maxWk <= 39 ? 'Q3' : 'Q4';
+  const markets = ['US','UK','DE','FR','IT','ES','CA','JP','MX','AU'];
+  const rows = markets.map(mk => {
+    const qList = FORECAST.quarterly[mk] || [];
+    const row = qList.find(r => r.period === q);
+    if (!row) return null;
+    const cost = (row.actual_cost != null && row.actual_cost > 0) ? row.actual_cost : (row.pred_cost || 0);
+    const regs = (row.actual_regs != null && row.actual_regs > 0) ? row.actual_regs : (row.pred_regs || 0);
+    const pred = (row.actual_regs == null || row.actual_regs <= 0);
+    return { mk, cost, regs, pred };
+  }).filter(r => r && r.cost > 0);
+  if (!rows.length) {
+    host.innerHTML = '<div class="wr-empty" style="padding:12px">No ' + q + ' data for the current markets.</div>';
+    return;
+  }
+  const totalCost = rows.reduce((s, r) => s + r.cost, 0);
+  const totalRegs = rows.reduce((s, r) => s + r.regs, 0);
+  rows.sort((a, b) => b.cost - a.cost);
+  // Layout: W=720, H=380, left col = single budget node, right col = single
+  // regs node, middle col = 10 market nodes stacked vertically. Flow width
+  // proportional to cost share (left→middle) and regs share (middle→right).
+  const W = 720, H = 420;
+  const LEFT_X = 40, LEFT_W = 18;
+  const RIGHT_X = W - 40 - 18, RIGHT_W = 18;
+  const MID_X_FROM = 200, MID_X_TO = W - 200;
+  const MID_X_NODE = (MID_X_FROM + MID_X_TO) / 2;
+  const MID_W = 12;
+  const nodeGap = 3;
+  const leftTop = 30;
+  const leftH = H - 60;
+  // Market node heights proportional to cost share.
+  const marketNodes = rows.map((r, i) => ({ ...r, h: (r.cost / totalCost) * (leftH - (rows.length - 1) * nodeGap) }));
+  let yCursor = leftTop;
+  marketNodes.forEach(n => { n.y = yCursor; yCursor += n.h + nodeGap; });
+  const rightTop = leftTop, rightH = leftH;
+  // Regs-side market heights — proportional to regs share.
+  let yCursor2 = rightTop;
+  marketNodes.forEach(n => { n.rh = (n.regs / Math.max(totalRegs, 1)) * (rightH - (rows.length - 1) * nodeGap); n.ry = yCursor2; yCursor2 += n.rh + nodeGap; });
+  // Colors.
+  const COLORS = ['#0066CC','#FF9900','#2f7d3e','#D13212','#6A4FBD','#0EA5E9','#DDA760','#EF4444','#7B6D9E','#059669'];
+  const flows = marketNodes.map((n, i) => {
+    const color = COLORS[i % COLORS.length];
+    // Flow left→mid (cost share)
+    const leftY0 = leftTop + marketNodes.slice(0, i).reduce((s, m, j) => s + m.h + (j > 0 ? nodeGap : 0), i > 0 ? nodeGap : 0);
+    const leftY1 = leftY0 + n.h;
+    const midY0 = n.y;
+    const midY1 = n.y + n.h;
+    // Bezier ribbon left-to-mid.
+    const leftPath = `M ${LEFT_X + LEFT_W} ${leftY0} C ${(LEFT_X + MID_X_NODE) / 2} ${leftY0}, ${(LEFT_X + MID_X_NODE) / 2} ${midY0}, ${MID_X_NODE - MID_W / 2} ${midY0} L ${MID_X_NODE - MID_W / 2} ${midY1} C ${(LEFT_X + MID_X_NODE) / 2} ${midY1}, ${(LEFT_X + MID_X_NODE) / 2} ${leftY1}, ${LEFT_X + LEFT_W} ${leftY1} Z`;
+    // Flow mid → right (regs share)
+    const midY0r = n.y;
+    const midY1r = n.y + n.h;
+    const rightY0 = n.ry;
+    const rightY1 = n.ry + n.rh;
+    const rightPath = `M ${MID_X_NODE + MID_W / 2} ${midY0r} C ${(MID_X_NODE + RIGHT_X) / 2} ${midY0r}, ${(MID_X_NODE + RIGHT_X) / 2} ${rightY0}, ${RIGHT_X} ${rightY0} L ${RIGHT_X} ${rightY1} C ${(MID_X_NODE + RIGHT_X) / 2} ${rightY1}, ${(MID_X_NODE + RIGHT_X) / 2} ${midY1r}, ${MID_X_NODE + MID_W / 2} ${midY1r} Z`;
+    return `<path d="${leftPath}" fill="${color}" fill-opacity="0.32"/><path d="${rightPath}" fill="${color}" fill-opacity="0.32"/>`;
+  }).join('');
+  const leftNode = `<rect x="${LEFT_X}" y="${leftTop}" width="${LEFT_W}" height="${leftH}" fill="#1f2937"/>` +
+    `<text x="${LEFT_X - 6}" y="${leftTop + leftH / 2}" text-anchor="end" font-size="12" font-weight="600" fill="#1f2937" font-family="ui-monospace,monospace">` +
+    `<tspan>Budget</tspan><tspan x="${LEFT_X - 6}" dy="14" font-weight="400" fill="#6b7280">${'$' + Math.round(totalCost / 1000).toLocaleString() + 'K'}</tspan></text>`;
+  const rightNode = `<rect x="${RIGHT_X}" y="${rightTop}" width="${RIGHT_W}" height="${rightH}" fill="#1f2937"/>` +
+    `<text x="${RIGHT_X + RIGHT_W + 6}" y="${rightTop + rightH / 2}" font-size="12" font-weight="600" fill="#1f2937" font-family="ui-monospace,monospace">` +
+    `<tspan>Regs</tspan><tspan x="${RIGHT_X + RIGHT_W + 6}" dy="14" font-weight="400" fill="#6b7280">${totalRegs.toLocaleString()}</tspan></text>`;
+  const midNodes = marketNodes.map((n, i) => {
+    const color = COLORS[i % COLORS.length];
+    return `<rect x="${MID_X_NODE - MID_W / 2}" y="${n.y}" width="${MID_W}" height="${n.h}" fill="${color}">` +
+      `<title>${n.mk}: ${'$' + Math.round(n.cost / 1000).toLocaleString() + 'K'} spend → ${n.regs.toLocaleString()} regs${n.pred ? ' (pred)' : ''}</title></rect>` +
+      `<text x="${MID_X_NODE + MID_W}" y="${n.y + n.h / 2 + 3}" font-size="10" font-weight="600" fill="#1f2937" font-family="ui-monospace,monospace">${n.mk}</text>`;
+  }).join('');
+  host.innerHTML =
+    `<div style="color:#6B6B6B;font-size:11px;margin-bottom:6px">${q} budget flow. Left = total spend; middle = market attribution; right = regs outcome. Ribbon width reflects share. Hover a market node for the pair.</div>` +
+    `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${q} budget flow Sankey">` +
+      flows + leftNode + midNodes + rightNode +
+    '</svg>';
+}
+
 // #59 + #91 + #89 + #90 + #92: lazy-render on disclosure-open so cold-load isn't affected.
 function wireExperimentalDisclosures() {
   if (wireExperimentalDisclosures._bound) return;
@@ -5434,6 +5544,7 @@ function wireExperimentalDisclosures() {
     ['sec-waffle', renderWaffleChart],
     ['sec-slope', renderSlopeChart],
     ['sec-strip', renderStripPlot],
+    ['sec-sankey', renderSankey],
   ];
   panels.forEach(([id, fn]) => {
     const el = document.getElementById(id);
