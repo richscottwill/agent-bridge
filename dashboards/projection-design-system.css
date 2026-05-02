@@ -193,6 +193,52 @@ html, body {
 .since-last-week .delta-tag.down { background: #FEE2E2; color: var(--color-danger); }
 .since-last-week .delta-tag.flat { background: #F3F3F3; color: var(--color-text-subtle); }
 
+/* #081 (2026-05-01): period-selector time-window preview. Compact caption
+   under the period select that spells out the actual date range for the
+   selected value. Disambiguates rolling (MY1/MY2) from calendar (Y2026)
+   at a glance. */
+.period-preview {
+  font-size: 11px;
+  color: var(--color-text-subtle);
+  margin-top: 4px;
+  line-height: 1.3;
+  min-height: 14px;
+}
+.period-preview:empty { display: none; }
+
+/* #084 (2026-05-01): scenario-diff line sits above since-last-week.
+   Composed only when the user has switched scenario chips since the
+   last render; hidden otherwise. Visual distinct from since-last-week
+   (amber tint vs neutral) so the reader knows this is a scenario
+   swing not a week-over-week shift. */
+.scenario-diff-line {
+  font-size: var(--size-ui);
+  line-height: 1.5;
+  color: var(--color-text-body);
+  margin: 0 0 var(--gap-sm);
+  padding: 6px 10px;
+  border-left: 3px solid var(--color-brand, #0066cc);
+  background: rgba(0, 102, 204, 0.05);
+  border-radius: 2px;
+}
+.scenario-diff-line:empty { display: none; }
+.scenario-diff-line strong { color: var(--color-text-hero); }
+
+/* #083 (2026-05-01): inline CPR box-whisker beneath the Cost-per-Reg
+   hero tile. Sits just below the existing kpi-cpa-delta; labels row
+   below gives min/max context. */
+.hero-kpi-boxwhisker {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.hero-kpi-boxwhisker:empty { display: none; }
+.hero-kpi-boxwhisker svg {
+  display: block;
+  margin: 0 auto;
+}
+
 /* P5-10 (2026-04-28): cross-market pulse strip. Compact horizontal row of
    10 dots, one per market, colored by distance-to-target. Sits at the
    top of the single-market view so the user keeps peripheral awareness

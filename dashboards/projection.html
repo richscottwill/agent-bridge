@@ -276,6 +276,11 @@ details.sec-panel:not([open]) + details.sec-panel {
         <option value="MY1">Next 1 year (MY1)</option>
         <option value="MY2">Next 2 years (MY2)</option>
       </select>
+      <!-- #081 (2026-05-01): time-window preview under the selector.
+           Shows the actual week range the selected period covers so the
+           reader can disambiguate rolling (MY1/MY2) vs calendar (Y2026)
+           without reading the code. -->
+      <div id="period-preview" class="period-preview" aria-live="polite"></div>
     </div>
     <div class="control-group">
       <label for="driver-select" class="control-label">Target Driver</label>
@@ -362,6 +367,10 @@ details.sec-panel:not([open]) + details.sec-panel {
         <div class="hero-kpi-label">Cost per Reg</div>
         <div class="hero-kpi-value" id="kpi-cpa">—</div>
         <div class="hero-kpi-delta" id="kpi-cpa-delta"></div>
+        <!-- #083 (2026-05-01): box-whisker showing projected CPR range vs
+             YTD actual distribution. Single number hides variance — weeks
+             ranged $45-$85 gives the reader a different read than "$60". -->
+        <div class="hero-kpi-boxwhisker" id="kpi-cpa-boxwhisker"></div>
       </div>
       <div class="hero-kpi" id="kpi-tile-ieccp">
         <div class="hero-kpi-label">Efficiency</div>
@@ -516,6 +525,7 @@ details.sec-panel:not([open]) + details.sec-panel {
        prose and auto-summarizes what moved since last week. -->
   <div class="sec-panel" id="narrative-panel" style="margin-top:var(--gap-lg)">
     <h3>Narrative</h3>
+    <div id="scenario-diff-line" class="scenario-diff-line"></div>
     <div id="since-last-week" class="since-last-week"></div>
     <div id="narrative-block" style="font-size:var(--size-ui);line-height:1.6;color:var(--color-text-body);white-space:pre-wrap">
       <em>Projection summary will render here.</em>

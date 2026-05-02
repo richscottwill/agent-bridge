@@ -704,6 +704,13 @@
       el.setAttribute('aria-label', `${chip.label} scenario — ${chip.description || 'no description'}`);
       el.onclick = () => {
         const prevTotals = STATE.currentOutput?.totals;
+        // #084 (2026-05-01): capture prev scenario label + totals for the
+        // scenario-diff narrative line (rendered on next recompute).
+        STATE.lastScenarioDiff = {
+          fromLabel: (STATE.activeChipId && chipsBy(STATE.activeChipId, chips)?.label) || 'previous',
+          toLabel: chip.label || chip.id,
+          prevTotals,
+        };
         STATE.activeChipId = chip.id;
         STATE.scenarioOverride = chip.override;
         document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
@@ -1064,6 +1071,8 @@
       if (t.computed_ieccp > 120) ieEl.classList.add('danger');
       else if (t.computed_ieccp > 100) ieEl.classList.add('warn');
     }
+    // #083 (2026-05-01): render CPR box-whisker for non-region scopes.
+    renderCpaBoxWhisker(t.blended_cpa);
 
     // P2-06: WoW delta sublines. Compute from the last two YTD weeks of
     // actuals — this is the "what's the trend on the ground" indicator.
@@ -1241,6 +1250,7 @@
     const panel = document.getElementById('narrative-panel');
     if (panel) panel.style.display = '';
     if (STATE.currentOutput) {
+      renderScenarioDiff();           // #084 (2026-05-01): scenario-swing diff line
       renderSinceLastWeek();         // P5-5: prose-level "what changed?" summary
       generateNarrative();
     }
@@ -1256,6 +1266,52 @@
   // about the ground truth moving week over week, not the projection).
   // Primary driver identification walks the three largest-magnitude
   // deltas and returns the biggest mover as the week's story.
+
+  // #084 (2026-05-01): scenario-diff narrative. When the user switches
+  // scenario chips, compose a one-line deterministic diff between the
+  // prev and current totals. Appears above the Since-last-week block
+  // so the reader sees the scenario swing first. Consumes the
+  // STATE.lastScenarioDiff breadcrumb set in the chip click handler.
+  function chipsBy(chipId, chips) {
+    if (!Array.isArray(chips)) return null;
+    return chips.find(c => c && c.id === chipId) || null;
+  }
+  function renderScenarioDiff() {
+    const host = document.getElementById('scenario-diff-line');
+    if (!host) return;
+    const diff = STATE.lastScenarioDiff;
+    const cur = STATE.currentOutput?.totals;
+    if (!diff || !diff.prevTotals || !cur) {
+      host.innerHTML = '';
+      return;
+    }
+    const prev = diff.prevTotals;
+    const regsPrev = (prev.brand_regs || 0) + (prev.nb_regs || 0);
+    const regsNow = (cur.brand_regs || 0) + (cur.nb_regs || 0);
+    const regsDelta = regsNow - regsPrev;
+    const spendPrev = prev.total_spend || 0;
+    const spendNow = cur.total_spend || 0;
+    const spendDelta = spendNow - spendPrev;
+    const ieccpPrev = prev.computed_ieccp ?? prev.ieccp;
+    const ieccpNow = cur.computed_ieccp ?? cur.ieccp;
+    const bits = [];
+    if (Math.abs(regsDelta) >= 1) {
+      bits.push(`regs ${regsDelta > 0 ? 'up' : 'down'} ${fmtNum(Math.abs(regsDelta))}`);
+    }
+    if (Math.abs(spendDelta) >= 1) {
+      bits.push(`spend ${spendDelta > 0 ? 'up' : 'down'} ${fmt$(Math.abs(spendDelta))}`);
+    }
+    if (Number.isFinite(ieccpNow) && Number.isFinite(ieccpPrev) && Math.abs(ieccpNow - ieccpPrev) >= 0.1) {
+      bits.push(`efficiency ${ieccpNow > ieccpPrev ? 'lifted' : 'dropped'} to ${fmtPct(ieccpNow)}`);
+    }
+    if (!bits.length) {
+      host.innerHTML = '';
+      return;
+    }
+    host.innerHTML =
+      '<strong>Switched to ' + (diff.toLabel || 'scenario') + ':</strong> '
+      + bits.join(', ') + '.';
+  }
 
   function renderSinceLastWeek() {
     const host = document.getElementById('since-last-week');
@@ -1434,6 +1490,7 @@
     document.getElementById('kpi-cpa').textContent = fmt$(t.blended_cpa);
     document.getElementById('kpi-ieccp').textContent = t.ieccp != null ? fmtPct(t.ieccp) : 'n/a';
     document.getElementById('kpi-spend').textContent = fmt$(t.total_spend);
+    renderCpaBoxWhisker(t.blended_cpa);
 
     // Render constituent table
     const tbody = document.getElementById('constituents-body');
@@ -2371,6 +2428,25 @@
   function saveProjection() {
     const out = STATE.currentOutput;
     if (!out || !out.totals) return;
+    // #082 (2026-05-01): capture a 6-point sparkline of the projected weekly
+    // regs trajectory so the saved-list row can render an inline sparkline.
+    // Pulls from brand_trajectory_y2026 (per-week weights) when available,
+    // else leaves null and the UI falls back to no-sparkline rendering.
+    let sparkRegs = null;
+    try {
+      const scope = currentScope();
+      const md = (STATE.data?.markets || {})[scope];
+      const bt = md?.brand_trajectory_y2026;
+      if (bt && Array.isArray(bt.regs_per_week) && bt.regs_per_week.length >= 6) {
+        // Downsample to 6 points evenly across the full 52-week trajectory.
+        const n = bt.regs_per_week.length;
+        const indices = [];
+        for (let i = 0; i < 6; i++) {
+          indices.push(Math.round((n - 1) * i / 5));
+        }
+        sparkRegs = indices.map(i => bt.regs_per_week[i] || 0);
+      }
+    } catch (e) { /* best-effort — never block save */ }
     const rec = {
       id: Date.now(),
       scope: currentScope(),
@@ -2379,6 +2455,7 @@
       target_value: currentTargetValue(),
       regime_multiplier: STATE.regimeMultiplier,
       totals: out.totals,
+      spark_regs: sparkRegs,
       saved_at: new Date().toISOString(),
       fingerprint: STATE.data.generated,
     };
@@ -2386,6 +2463,150 @@
     STATE.saved = STATE.saved.slice(0, 20);
     localStorage.setItem('mpe-saved', JSON.stringify(STATE.saved));
     renderSavedList();
+  }
+
+  // #083 (2026-05-01): render CPR box-whisker in the Cost per Reg hero tile.
+  // Box = IQR (25th-75th percentile), whiskers = min/max, thin vertical line
+  // at the projected value. Shows YTD CPA distribution so the reader sees
+  // variance — "$60 point estimate" vs actual weekly range $45-$85 is a
+  // different read. Hides cleanly when <4 weeks of YTD or no scope-level
+  // ytd_weekly (region scopes don't have per-week data).
+  // #081 (2026-05-01): write a compact time-window preview under the
+  // period selector. Disambiguates rolling (MY1/MY2 start next week,
+  // run for 52/104 weeks) vs calendar (Y2026 = W1-W52) vs narrow
+  // (W17 = one week, M04 = ~4 weeks). Called on every period change +
+  // once on init.
+  function updatePeriodPreview() {
+    const host = document.getElementById('period-preview');
+    if (!host) return;
+    const period = currentPeriod();
+    const now = new Date();
+    const year = now.getFullYear();
+    const fmtDate = (d) => d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+    const weekOfYear = (d) => {
+      const jan1 = new Date(d.getFullYear(), 0, 1);
+      const days = Math.floor((d - jan1) / 86400000);
+      return Math.ceil((days + jan1.getDay() + 1) / 7);
+    };
+    let msg = '';
+    if (/^W\d+$/.test(period)) {
+      const wk = parseInt(period.slice(1), 10);
+      msg = `Week ${wk} of ${year} (single week)`;
+    } else if (/^M\d+$/.test(period)) {
+      const mo = parseInt(period.slice(1), 10);
+      const monthName = new Date(year, mo - 1, 1).toLocaleDateString(undefined, { month: 'long' });
+      msg = `${monthName} ${year} (calendar month, ~4-5 weeks)`;
+    } else if (/^Q\d$/.test(period)) {
+      const q = parseInt(period.slice(1), 10);
+      const startMo = (q - 1) * 3;
+      const startMoName = new Date(year, startMo, 1).toLocaleDateString(undefined, { month: 'short' });
+      const endMoName = new Date(year, startMo + 2, 1).toLocaleDateString(undefined, { month: 'short' });
+      msg = `Q${q} ${year} (${startMoName}–${endMoName}, 13 weeks)`;
+    } else if (/^Y\d{4}$/.test(period)) {
+      const yr = parseInt(period.slice(1), 10);
+      msg = `Calendar year ${yr} (W1–W52)`;
+    } else if (period === 'MY1') {
+      const end = new Date(now);
+      end.setDate(end.getDate() + 364);
+      msg = `Rolling 1 year: next 52 weeks (${fmtDate(now)} – ${fmtDate(end)} ${end.getFullYear()})`;
+    } else if (period === 'MY2') {
+      const end = new Date(now);
+      end.setDate(end.getDate() + 729);
+      msg = `Rolling 2 years: next 104 weeks (${fmtDate(now)} – ${fmtDate(end)} ${end.getFullYear()})`;
+    } else {
+      msg = '';
+    }
+    host.textContent = msg;
+  }
+
+  function renderCpaBoxWhisker(projectedCpa) {
+    const host = document.getElementById('kpi-cpa-boxwhisker');
+    if (!host) return;
+    const scope = currentScope();
+    if (MPE && MPE.ALL_REGIONS && MPE.ALL_REGIONS.includes(scope)) {
+      host.innerHTML = '';
+      return;
+    }
+    const md = (STATE.data?.markets || {})[scope];
+    const ytd = (md && md.ytd_weekly) || [];
+    // Compute per-week CPA = cost / regs, filter to weeks with data.
+    const cpas = [];
+    for (const w of ytd) {
+      const regs = (w.brand_regs || 0) + (w.nb_regs || 0);
+      const cost = (w.brand_spend || 0) + (w.nb_spend || 0);
+      if (regs > 0 && cost > 0) cpas.push(cost / regs);
+    }
+    if (cpas.length < 4) {
+      host.innerHTML = '';
+      return;
+    }
+    cpas.sort((a, b) => a - b);
+    const pct = (arr, p) => {
+      const i = (arr.length - 1) * p;
+      const lo = Math.floor(i), hi = Math.ceil(i);
+      return arr[lo] + (arr[hi] - arr[lo]) * (i - lo);
+    };
+    const min = cpas[0];
+    const max = cpas[cpas.length - 1];
+    const q1 = pct(cpas, 0.25);
+    const med = pct(cpas, 0.5);
+    const q3 = pct(cpas, 0.75);
+    const W = 140, H = 18, PAD = 6;
+    const span = Math.max(max - min, 1);
+    const sx = (v) => PAD + ((v - min) / span) * (W - PAD * 2);
+    const projX = (Number.isFinite(projectedCpa) && projectedCpa > 0) ? sx(projectedCpa) : null;
+    // Whisker line
+    let svg = '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" '
+      + 'role="img" aria-label="Cost per Reg distribution: min $' + min.toFixed(0)
+      + ', median $' + med.toFixed(0) + ', max $' + max.toFixed(0) + '">';
+    svg += '<line x1="' + sx(min) + '" x2="' + sx(max) + '" y1="' + H / 2 + '" y2="' + H / 2
+      + '" stroke="#9ca3af" stroke-width="1"/>';
+    // Whisker ends
+    svg += '<line x1="' + sx(min) + '" x2="' + sx(min) + '" y1="' + (H / 2 - 4) + '" y2="' + (H / 2 + 4) + '" stroke="#9ca3af" stroke-width="1"/>';
+    svg += '<line x1="' + sx(max) + '" x2="' + sx(max) + '" y1="' + (H / 2 - 4) + '" y2="' + (H / 2 + 4) + '" stroke="#9ca3af" stroke-width="1"/>';
+    // IQR box
+    svg += '<rect x="' + sx(q1) + '" y="' + (H / 2 - 5) + '" width="' + (sx(q3) - sx(q1))
+      + '" height="10" fill="#6b7280" fill-opacity="0.35" stroke="#6b7280" stroke-width="1"/>';
+    // Median tick
+    svg += '<line x1="' + sx(med) + '" x2="' + sx(med) + '" y1="' + (H / 2 - 5) + '" y2="' + (H / 2 + 5) + '" stroke="#374151" stroke-width="1.5"/>';
+    // Projected value — taller vertical with contrast color
+    if (projX != null) {
+      svg += '<line x1="' + projX + '" x2="' + projX + '" y1="2" y2="' + (H - 2) + '" stroke="var(--color-brand,#0066cc)" stroke-width="2"/>';
+    }
+    svg += '</svg>';
+    // Tiny min / max labels below
+    const labels = '<div class="kpi-cpa-boxwhisker-labels" style="display:flex;justify-content:space-between;font-size:9px;color:var(--color-text-subtle);margin-top:2px;font-variant-numeric:tabular-nums">'
+      + '<span>$' + min.toFixed(0) + '</span>'
+      + '<span title="' + cpas.length + ' weeks of YTD CPA">YTD range</span>'
+      + '<span>$' + max.toFixed(0) + '</span>'
+      + '</div>';
+    host.innerHTML = svg + labels;
+  }
+
+  // #082 (2026-05-01): tiny inline SVG sparkline helper for saved-list
+  // rows. Takes a small array of numeric values (the 6-point downsampled
+  // trajectory captured at save time) and returns a 60×16 SVG. Designed
+  // to sit between the metadata column and the action buttons.
+  function savedRowSparkline(values) {
+    if (!Array.isArray(values) || values.length < 2) return '';
+    const W = 60, H = 16, PAD = 2;
+    const min = Math.min.apply(null, values);
+    const max = Math.max.apply(null, values);
+    const span = Math.max(max - min, 1);
+    const stepX = (W - PAD * 2) / (values.length - 1);
+    const pts = values.map((v, i) => {
+      const x = PAD + i * stepX;
+      const y = H - PAD - ((v - min) / span) * (H - PAD * 2);
+      return x.toFixed(1) + ',' + y.toFixed(1);
+    }).join(' ');
+    return (
+      '<svg class="saved-spark" width="' + W + '" height="' + H + '" '
+      + 'viewBox="0 0 ' + W + ' ' + H + '" aria-hidden="true" focusable="false" '
+      + 'style="flex-shrink:0;opacity:0.75;margin:0 8px">'
+      + '<polyline points="' + pts + '" fill="none" stroke="var(--color-brand,#0066cc)" stroke-width="1.5" '
+      + 'stroke-linecap="round" stroke-linejoin="round"/>'
+      + '</svg>'
+    );
   }
 
   function renderSavedList() {
@@ -2417,12 +2638,19 @@
       if (r.driver === 'spend' && Number.isFinite(tv)) tv = fmt$(tv);
       else if (r.driver === 'regs' && Number.isFinite(tv)) tv = fmtNum(tv);
       else if (r.driver === 'ieccp' && Number.isFinite(tv)) tv = tv + '%';
+      // #082 (2026-05-01): inline sparkline of 6-point regs trajectory
+      // captured at save time. Empty inline SVG when no data (older
+      // saved records from before this feature shipped).
+      const sparkHtml = (Array.isArray(r.spark_regs) && r.spark_regs.length >= 2)
+        ? savedRowSparkline(r.spark_regs)
+        : '';
       return `
         <div class="saved-item${cmpActive}" data-id="${r.id}">
           <div style="flex:1;min-width:0">
             <div style="font-weight:500">${r.scope} · ${r.period} · ${r.driver}=${tv}</div>
             <div class="saved-meta">${when}</div>
           </div>
+          ${sparkHtml}
           <div class="saved-actions">
             <button class="saved-action" data-act="load"    title="Load this projection">Load</button>
             <button class="saved-action" data-act="compare" title="Overlay as a dashed reference on the chart">${STATE.compareId === r.id ? 'Clear cmp' : 'Compare'}</button>
@@ -3519,6 +3747,7 @@
     });
     document.getElementById('period-select').addEventListener('change', () => {
       scheduleRecompute();
+      updatePeriodPreview();  // #081 (2026-05-01)
       // If on multi-market view, refresh those too
       if (STATE.activeView === 'multiples') renderSmallMultiples();
       else if (STATE.activeView === 'heatgrid') renderHeatGrid();
@@ -3677,6 +3906,7 @@
     document.getElementById('target-input').value = DEFAULT_TARGET_VALUE;
     updateHeaderMeta();
     renderSavedList();
+    updatePeriodPreview();  // #081 (2026-05-01): initial seed
 
     // Initial animated recompute
     await recompute({ animated: true });
