@@ -1,103 +1,76 @@
-# Daily Brief — Thu 2026-04-30 (W18)
+# Daily Brief — Sunday May 3, 2026
 
-**Generated:** 13:00 UTC (06:00 PT) | **Run:** am-backend parallel v2 | **Status:** SUCCESS with 2 non-blocking warnings (Asana MX + AU stale GIDs)
-
----
-
-## The hard thing today
-
-**Polaris Br-pages QA consolidation + MCS coordination.** Brandon explicitly put you in charge Wed (DM + ab-paid-search-global thread). You need to: (1) create/update a consolidated feedback input doc, (2) publish explicit feedback cutoff + timeline to the PS team, (3) set recurring sync with Alex VanDerStuyf where he defers to you, (4) follow up with MCS via email + Asana (not Asana-as-discussion). You ack'd at 18:34 UTC Wed; consolidated doc is not yet produced. **This is the hard thing. Start here.**
-
-Connected: Testing Document for Kate (the prior hard thing) closed 4/27 as obsolete — Kate meeting canceled + Testing Approach article Published 4/17. Polaris Brand LP is the live hard thing now.
-
-## Today's non-negotiables (before Brandon 1:1 at 1:30pm PT)
-
-1. **OP1 app acquisition projections — Peter sync 2-3pm PT** (`1214384590122162`). Pull CPI + install-rate by market (DE/ES efficient per Brandon 1:1 4/28), prep projections at flat YoY budget.
-2. **Polaris consolidated feedback doc** — minimum viable version before 1:30 1:1 so you can walk Brandon through it.
-3. **Reply to Lorena** — budget decision ($1.3M forecast + $435K channel tests). 1-min ack closes the thread.
-4. **Chase Google Ads support [0-1804000040849] + reply Diana** on MX dupe invoice $56K (draft saved 4/28).
-
-## Brandon 1:1 agenda (1:30pm PT)
-
-- **Polaris consolidation approach** — walk through feedback doc + timelines + Alex sync plan (earn trust via proactive communication — Brandon's explicit ask Wed).
-- **PAM budget kill-or-revive decision** (deferred to Tue 5/5 1:1 per your note — confirm scope today).
-- **Email overlay WW status** — CAT live vs MCS planned (Brandon ask 4/17, 13d unaddressed).
-- **Enhanced Match FAQ for legal** — bundle with Get EM details (21d OD).
-- **Kingpin MX** — kill or escalate to ABMA leadership (35d Andes-blocked, "forget about this task" per your prior note).
-
-## Due this week
-
-| Day | Task | Source |
-|-----|------|--------|
-| Thu 4/30 | OP1 app projections — Peter sync 2-3pm | asana:1214384590122162 |
-| Thu 4/30 | MX Experiments trend check (ending 4/30) | asana:1214044682239823 |
-| Thu 4/30 | MX Polaris NB LP Test (Beauty+Auto) mechanic | asana:1214044682239817 |
-| Thu 4/30 | Cross-marketing Refmarker audit | asana:1214044682239803 |
-| Thu 4/30 | DDD walkthrough with team | asana:1214074477111007 |
-| Fri 5/1 | Confirm /cp/beauty custom ref tags firing (MCS) | asana:1214372109571389 |
-| Fri 5/1 | Adobe Analytics cross-check MX Polaris Beauty | asana:1214365254391847 |
-| Fri 5/1 | ie%CCP calc — insert MX spend/regs | asana:1213983077428492 |
-| Sat 5/2 | MBR callout | asana:1213983342210449 |
-| Sat 5/2 | Build Adobe dashboard template MCS-2553 | asana:1214153596141526 |
-| Sat 5/2 | Send AU team invoice for prev month | asana:1213917691068688 |
-| Mon 5/4 | Google Ads MCC SSO admin confirm | asana:1214330091433878 |
-| Mon 5/4 | GenBI keyword-registration stitching w/ Mukesh | asana:1214386001212099 |
-| Mon 5/5 | AU handover formal start (Megan team) | hedy:meeting |
-| Tue 5/5 | Brand LP AU/MX alt measurement design | asana:1214330104198712 |
-| Tue 5/5 | Brandon 1:1 — PAM kill/revive + EM FAQ decision | — |
-| Wed 5/6 | App OP1 Internal Review | calendar |
-
-## Brandon coaching pattern (unasked-question-log candidate)
-
-Two explicit Brandon coaching messages Wed on responsiveness when leading cross-team work: *"need you to be responsive with the team"* + *"important function to earn trust across the team if you're leading these WW updates."* Third recent Brandon signal on this pattern. Worth considering whether to raise the underlying question — "how do I scale from doing WW work to being trusted to lead WW work?" — in your next 1:1 or skip-level.
-
-## DMs owed
-
-- **Megan Oshry** (`dm-meganos`): AU conversion-data methodology + reftag/reg-database query share. NEW DM, Wed 4/29.
-- **Anmol Rastogi** (`mpdm-rasanmol`): ABMA-11245 SIM PS metrics list. NEW MPDM, Wed 4/29.
-- Brandon created a new Slack chat for Polaris QA 19:37 UTC Wed — check DMs/mpdm for it.
-
-## Bucket cap violations (structural)
-
-Every bucket is 3-5x over cap. Sweep 18/5, Core 10/4, Engine Room 18/6, Admin 14/3. **Allocate 30 min this week for a WIP triage block** before adding new work — kill ~6 stale 15+day overdue candidates:
-
-1. PAM budget reply (`1213959904341162`) — scheduled kill decision Tue 5/5
-2. Enhanced Match details (`1213875146955582`) — bundle w/ PAM
-3. Deep Dive: IECCP FAQ (`1213968042348601`) — Brandon 1:1 ask, confirm still wanted
-4. Automated ASP reminders (`1213962513760099`) — Brandon 1:1 from 4/9, not started
-5. Kingpin MX (`1214146145384078`) — Andes-blocked 35d
-6. Duplicate monthly goal tasks (`1214216689942612` vs `1213690904654138`) — merge
-
-## Five Levels allocation check
-
-- **L1 Sharpen:** MBR callout, wiki articles in Review, Brandon coaching. ✓
-- **L2 WW Testing:** Polaris consolidation, MX NB LP, Brand LP alt-measurement, OP1. ✓
-- **L3 Team Automation:** Only bi-weekly Adi sync scheduled. **< 10%.**
-- **L4 Zero-Click:** None this week.
-- **L5 Agentic:** Kate demo prep queued for 5/29. Minimal this week.
-
-Stuck at L1/L2. Fine for Brandon-visible work, but the Five Levels spine says L3+ funds the next stage. If this allocation pattern persists 30-60 days, it becomes a Kate conversation.
-
-## Coherence flags (not blocking)
-
-- **Asana schema drift:** MX project GID `1212775592612917` and AU project GID `1212762061512767` both returned 424. Re-discover via AsanaSearch + update asana-command-center.md. Engine Room cleanup, not urgent.
-- **Loop word-count deltas:** 4/5 pages showed >100% word-count changes. Likely sync methodology difference, not genuine content jumps. Spot-check one content_markdown pair if the signal drives downstream logic.
-
-## Data freshness (all sources refreshed this run)
-
-All 9 tracked sources synced within the last 5 min: slack_messages, signal_tracker, emails, calendar_events, asana_tasks, loop_pages, hedy_meetings (0 new sessions), l1_streak.
+**Generated:** 13:35 UTC (06:35 PT) via manual am-backend-parallel Phases 2-5 after schema drift fix
+**Prior brief:** `am-brief-2026-05-01.md` (Friday)
 
 ---
 
-**Sources:**
-- slack-digest.md (8 topics reinforced, polaris-brand-lp +6.0)
-- email-triage.md (36 emails, 3 HIGH)
-- hedy-digest.md (0 new sessions)
-- asana-digest.md (79 incomplete, 27 Today)
-- asana-activity.md (5 tasks scanned for stories)
+## 🎯 Hard Thing #1 — polaris-brand-lp
 
-**For AM-Frontend consumption:**
-- am-enrichment-queue.json — task enrichment gaps + monday-create proposals
-- am-portfolio-findings.json — per-project overdue, blockers, event countdown
-- am-signals-processed.json — top signals + bucket cap + hard-thing + Five Levels
-- am-wiki-state.json — published articles + stale candidates + new-article candidates
+**Signal:** Score 22.12, 14 mentions across 6 channels, 7 non-Richard authors. 13-day incumbent. Still #1 by a wide margin.
+
+**Live task:** `1214330104198712` Brand LP AU/MX test design — alternate measurement (non-weblab) for MCS vs Reg Start. **Due Tuesday 5/6.**
+
+**What moves it:** Write the v1 1-pager. 6 sections, 90 min. Non-weblab measurement framework with reftag CVR, sample sizes (AU 245/wk MX 551/wk, 4wks each, MDE 8-10%), z-test analysis. Cross-link to the consolidated Polaris feedback doc from Brandon's 4/29 coaching.
+
+**Carry forward:** Polaris consolidated QA feedback doc from 4/29 still not visibly closed in Slack. Highest-leverage trust-earning item with Brandon.
+
+---
+
+## ⏰ This week — the 5 things that matter (Mon-Wed)
+
+1. **Brandon 1:1 Tuesday 5/5** — kill-or-revive decision on PAM budget reply (27d OD) + weblab dial-up (26d OD) + EM FAQ (11d OD). Bundle these three.
+2. **MCS Tech OP1 ideas reply to Brandon** — directly asked. OP1 intake deadline 5/5 (ambiguous 5/15 per Lina). Write 2 ideas before 5/5.
+3. **AU formal handoff to Megan Tuesday 5/5** — handover doc + Google Ads access + GenBI stitching fix (due 5/5). Megan becomes AU POC.
+4. **Brand LP AU/MX 1-pager (HARD THING)** — due 5/6. Kiro-block 9:30-11am Tuesday.
+5. **Google Ads MCC SSO admin decision** — due Monday 5/4 (SSO enforcement launches 5/4). Look up MCC admin assignments, decide own-or-delegate.
+
+---
+
+## 📬 Richard owes a reply (5 items, all from this weekend)
+
+| To | Topic | Source | Urgency |
+|---|---|---|---|
+| **Brandon** | MCS Tech OP1 ideas | dm-brandon 5/1 | Medium (5/5) |
+| **Brandon** | MBET issue reporting | email 5/1 (PO #2D-19910168) | Medium |
+| **Vijeth Shetty** | US Browse Category CTA greenlight | Asana 5/1 | Medium |
+| **Mukesh Gupta** | Current PS data-pull approach for GenBI | mpdm-rasanmol 5/1 | Low (but L3 opportunity) |
+| **Megan Oshry** | AU reftag + reg-database query | dm-meganos (carried from 4/29) | Medium |
+
+---
+
+## 📊 Task state
+
+- **82 active tasks**, 16 overdue (Richard-assigned)
+- **Bucket caps violated:** Engine Room 12/6, Core 10/4, Admin 6/3 — 15 over total. 36 tasks have no Routine_RW.
+- **Top 3 overdue (39d, 33d, 27d):** Make changes to AU/MX/PAM (weekly recurring stale — close + recreate), Paid App (Engine Room, legacy workstream), Reply to Brandon PAM budget (decision at 5/5 1:1).
+
+---
+
+## 🔔 Signals that moved this week
+
+- **Brandon's "Thanks guys!"** in ab-paid-search-global after Richard corrected AU 30% CVR stat. Trust signal intact.
+- **CVR LP personalization stat converged at 15-20%** (Stacey/Adi). If Brandon reuses externally in QBR/OP1, Richard should know provenance.
+- **Outlook MCP flaky** (Jesse Alcaraz active bug per agentspaces-interest) — impacts your Kiro workflow, worth knowing.
+- **GTMO 1-click Auto CBR launching end of May** (US/CA/EU/JP) — L3 Team Automation template worth watching.
+
+---
+
+## 🛠 System state
+
+**Ran today:**
+- Phase 1 subagents A/C/D/E completed (Slack +27 msgs, Email +51, Loop 5/5, Hedy no-op)
+- Schema drift fixed: AU/MX standalone GIDs archived, consolidated to ABIX in 3 protocol files
+- B1 partial UPSERT: 14 task refreshes + 8 new inserts (total 82 active)
+- B2 lean scan (no GetTaskStories — Slack/Email already covered the signal)
+- Phase 2.5 enrichment: relationship_activity, five_levels_weekly, project_timeline (+4 events) all updated
+- Phase 3 Kiro_RW enrichment on 7 high-priority tasks
+- Phase 4 portfolio scan: 8 projects mapped, 11 tasks flagged with stale AU/MX labels (next sync fixes)
+- hard_thing_candidates refreshed: polaris (22.12) / oci (8.15) / au-cpa-cvr (6.37)
+
+**Broken but flagged (logged to asana.schema_changes):**
+- `hard-thing-refresh.py` SyntaxError at line 115 — needs repair
+- `sync_metrics.py` BinderException on ps.metrics ON CONFLICT — needs PK constraint fix
+- Hard-thing computed directly from signal_tracker as workaround
+
+**Next AM run:** Will do full Asana UPSERT with corrected project list. The stale "AU"/"MX" project_name in 11 rows will resolve on next pass.

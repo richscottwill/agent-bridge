@@ -82,11 +82,13 @@ When setting up or verifying the Build project:
 
 Two portfolios contain Richard's active market and program projects. The agent discovers children dynamically via `GetPortfolioItems` and records profiles here.
 
-### ABIX PS Portfolio (`1212775592612914`)
+### ABIX PS Portfolio (`1212775592612914`) — DEPRECATED
+
+**⚠️ 2026-05-03:** The ABIX PS portfolio is empty (0 items). `GetPortfolioItems(1212775592612914)` returns `[]`. The former AU (`1212762061512767`) and MX (`1212775592612917`) standalone projects were archived/consolidated and now return 424 "Not a recognized ID". Market-specific tasks live inside **ABPS - ABIX** (`1206497185559287`) and **ABPS - WW Testing & Projects** (`1205997667578893`), identified by section name (`NA`, `WW`, `ABIX`) and task-name patterns. Pinned context tasks still work as anchors: `1213917747438931` (AU) and `1213917639688517` (MX). AM-backend should pull from ABPS portfolio (`1212762061512816`) not ABIX PS. The subsections below are **preserved as historical reference only** — do not use the AU/MX project GIDs.
 
 Children discovered via `GetPortfolioItems(portfolio_gid="1212775592612914")`: AU, MX.
 
-#### AU (`1212762061512767`)
+#### ~~AU (`1212762061512767`)~~ — ARCHIVED 2026-05-03 — see ABIX project for live tasks
 - Portfolio: ABIX PS (`1212775592612914`)
 - Owner: Richard Williams (`1212732742544167`)
 - URL: https://app.asana.com/1/8442528107068/project/1212762061512767
@@ -116,7 +118,7 @@ The agent detects completed tasks matching these patterns during AM-2 Phase 1C a
 **Detection keywords:** Weekly, Reporting, Agenda, MBR, Bi-monthly, Flash
 **Project-specific fields to copy:** AU Priority (`1212762061512785`), Task Progress (`1212762061512790`)
 
-#### MX (`1212775592612917`)
+#### ~~MX (`1212775592612917`)~~ — ARCHIVED 2026-05-03 — see ABIX project for live tasks
 - Portfolio: ABIX PS (`1212775592612914`)
 - Owner: Richard Williams (`1212732742544167`)
 - URL: https://app.asana.com/1/8442528107068/project/1212775592612917
@@ -601,8 +603,9 @@ Each Asana task maps to a Five Levels alignment based on its project membership 
 | L2 | Drive WW Testing | PS-Owned Global Testing | `1213279426031997` |
 | L2 | Drive WW Testing | Paid App | `1205997667578886` |
 | L2 | Drive WW Testing | PS ENG | `1213235338214787` |
-| L2 | Drive WW Testing | AU | `1212762061512767` |
-| L2 | Drive WW Testing | MX | `1212775592612917` |
+| L2 | Drive WW Testing | ABIX (contains AU + MX tasks) | `1206497185559287` |
+| L2 | Drive WW Testing | ~~AU~~ (archived 2026-05-03, now in ABIX) | ~~`1212762061512767`~~ |
+| L2 | Drive WW Testing | ~~MX~~ (archived 2026-05-03, now in ABIX) | ~~`1212775592612917`~~ |
 | L3 | Team Automation | Team visibility tasks, meeting prep, cross-team collaboration tasks | (detected by content/context) |
 | L4 | Zero-Click Future | AI/AEO research tasks, "Using AI for paid search", AEO POV work | (detected by task name/content) |
 | L5 | Agentic Orchestration | Agentic loop tasks, Kiro_RW as persistent memory, full AM→EOD loop | (detected by task name/content) |
@@ -680,8 +683,9 @@ _This section documents which Asana objects support writable Notes surfaces. Upd
 
 | Object | Type | GID | Notes Writable? | Expected Surface | Probed? | Protocol Doc |
 |--------|------|-----|-----------------|------------------|---------|--------------|
-| AU | Project | `1212762061512767` | No (API limitation) | Pinned context task | ✅ Live | GID: `1213917747438931` |
-| MX | Project | `1212775592612917` | No (API limitation) | Pinned context task | ✅ Live | GID: `1213917639688517` |
+| ~~AU~~ (archived 2026-05-03) | Project | ~~`1212762061512767`~~ | N/A | Live tasks now in ABIX | ❌ 424 | GID: `1213917747438931` (pinned task still live) |
+| ~~MX~~ (archived 2026-05-03) | Project | ~~`1212775592612917`~~ | N/A | Live tasks now in ABIX | ❌ 424 | GID: `1213917639688517` (pinned task still live) |
+| ABIX | Project | `1206497185559287` | No (API limitation) | Pinned context tasks | ✅ Live | GID: Richard-owned, contains AU+MX work |
 | Paid App | Project | `1205997667578886` | No (API limitation) | Pinned context task | ✅ Live | GID: `1213917771155873` |
 | WW Testing | Project | `1205997667578893` | No (API limitation) | Pinned context task | ✅ Live | GID: `1213917851621567` |
 | WW Acquisition | Project | `1206011235630048` | No (API limitation) | Pinned context task | ✅ Live | GID: `1213917771203342` |
@@ -891,8 +895,9 @@ These recur but aren't using Asana's recurring task feature — they're manually
 | ABPS - WW Testing & Projects | 1205997667578893 | Owner |
 | PS-Owned Global Testing | 1213279426031997 | Member |
 | ABPS - WW Acquisition | 1206011235630048 | Member |
-| AU | 1212762061512767 | Owner |
-| MX | 1212775592612917 | Owner |
+| ABIX | 1206497185559287 | Owner (AU+MX tasks consolidated here 2026-05-03) |
+| ~~AU~~ (archived) | ~~1212762061512767~~ | Former owner |
+| ~~MX~~ (archived) | ~~1212775592612917~~ | Former owner |
 | Paid App | 1205997667578886 | Member |
 | PS ENG | 1213235338214787 | Member |
 | EU SSR Acquisition Roadmap | 1211638878682721 | Member |

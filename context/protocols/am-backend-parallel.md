@@ -85,7 +85,7 @@ GetTasksFromProject, GetPortfolioItems — all via Asana MCP. execute_query via 
 **Execution:**
 1. SearchTasksInWorkspace(assignee_any="1212732742544167", completed=false, sort_by=due_date)
 2. GetTaskDetails for each task (batch — opt_fields include custom_fields, projects, memberships)
-3. GetTasksFromProject for 6 projects: My Tasks, AU, MX, WW Testing, WW Acquisition, Paid App
+3. GetTasksFromProject for 6 projects: My Tasks, WW Testing, WW Acquisition, Paid App, ABIX — plus any other portfolio projects discovered via GetPortfolioItems (ABPS portfolio GID `1212762061512816`)
 4. Merge by task_gid, map custom fields, UPSERT into asana.asana_tasks
 5. Soft-delete missing tasks
 6. Daily snapshot to asana.asana_task_history

@@ -1,0 +1,7 @@
+{
+  "hook": "eod",
+  "last_run_ts_iso": null,
+  "last_run_ts_pt": null,
+  "history": [],
+  "notes": "Tracks last successful EOD run for Phase 2.5 Daytime Asana Activity windowing. Updated at the END of a successful Phase 2.5 step. If last_run_ts_iso is null or older than 7 days, Phase 2.5 falls back to a 24h window. Sibling to am-triage-last-run.json."
+}

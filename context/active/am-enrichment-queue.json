@@ -1,75 +1,52 @@
 {
-  "schema_version": "2.0",
-  "generated_at_utc": "2026-04-30T13:00:00Z",
-  "run_type": "am_backend_parallel_v2",
-  "phase": "3_enrichment_scan",
-  "queue_summary": {
-    "tasks_needing_kiro_rw": 5,
-    "tasks_needing_next_action": 4,
-    "tasks_over_cap_to_demote": 42,
-    "tasks_missing_due_date": 8,
-    "monday_create_proposals": 3
+  "generated_at_utc": "2026-05-03T13:35:00Z",
+  "run_type": "am_backend_parallel_partial_resume",
+  "tasks_enriched_this_run": 7,
+  "bucket_cap_violations": [
+    {"bucket": "Engine Room", "count": 12, "cap": 6, "over_by": 6, "action": "demote 6 tasks to Backlog or close"},
+    {"bucket": "Core", "count": 10, "cap": 4, "over_by": 6, "action": "demote 6 tasks to Backlog or close"},
+    {"bucket": "Admin", "count": 6, "cap": 3, "over_by": 3, "action": "demote 3 tasks to Backlog or close"}
+  ],
+  "routing_gaps": {
+    "no_routine_rw": 36,
+    "note": "36 tasks have no Routine_RW assigned. Some are pinned-context tasks (expected). Others are fresh inserts or legacy tasks that dodged routing."
   },
-  "kiro_rw_gaps": [
-    {"task_gid": "1214372021755030", "name": "Weekly walkthrough testing view in Asana", "reason": "Kiro_RW null, needs weekly-agenda context"},
-    {"task_gid": "1214218448412299", "name": "US H2 PAM PO -", "reason": "Empty task name suffix + Kiro_RW null"},
-    {"task_gid": "1214218448412294", "name": "39K IT PO was put into US PAM campaign. Change to IT.", "reason": "Due 4/27 past, Kiro_RW null"},
-    {"task_gid": "1214416794397656", "name": "MotherDuck sync audit — autoresearch schema frozen since 2026-04-17", "reason": "Tactical DuckDB sync task, needs connection to ops.data_freshness signal"},
-    {"task_gid": "1214416809258489", "name": "MPE US baseline — Option 2: add YoY-acceleration regressor", "reason": "MPE projection work, L2 Testing"}
-  ],
-  "next_action_rw_gaps": [
-    {"task_gid": "1213530917597503", "name": "Monthly - Confirm actual budgets", "suggested_next_action": "Pull April finance actuals, cross-ref with Andrew's ENG budget and PAM underspend flag"},
-    {"task_gid": "1213828989831378", "name": "Bi-monthly Flash", "suggested_next_action": "No action until May — bi-monthly cycle"},
-    {"task_gid": "1213072707685849", "name": "AU opp: AE: Introduce RW to Amy for Amazon Essentials", "suggested_next_action": "Backlog — wait until AU NB MRO/Trades test is live, then assess"},
-    {"task_gid": "1212760973200416", "name": "Keep Change Log updated", "suggested_next_action": "Log next campaign change to change log — piggyback as Sweep micro-task"}
-  ],
-  "monday_create_proposals": [
+  "decision_detection_from_slack": [
     {
-      "proposed_name": "Polaris Br-pages QA consolidation — feedback doc + MCS timeline",
-      "source": "slack:dm-brandon 4-29 + ab-paid-search-global thread",
-      "brandon_direct_ask": true,
-      "proposed_routine": "Core Two",
-      "proposed_priority": "Today",
-      "proposed_due": "2026-04-30",
-      "proposed_kiro_rw": "4/30: Brandon designated Richard sole MCS consolidator. Need: consolidated feedback doc + timelines to team + explicit cutoff. Asana not as discussion board — use Slack + Loop doc."
+      "signal_source": "ab-paid-search-global 5/1",
+      "topic": "CVR LP personalization stat",
+      "decision": "Team converged at 15-20% CVR improvement as defensible stat (Stacey 20%, Adi CA 15%). Richard reframed AU 30% as switch-away decrease.",
+      "flag": "FYI — Brandon may reuse this stat in QBR/OP1 externally"
     },
     {
-      "proposed_name": "Reply to Megan Oshry — AU reftag + reg-database query share",
-      "source": "slack:dm-meganos 4-29",
-      "brandon_direct_ask": false,
-      "proposed_routine": "Sweep",
-      "proposed_priority": "Today",
-      "proposed_due": "2026-05-01",
-      "proposed_kiro_rw": "4/30: New DM from Megan Oshry asking about AU Google Ads conversion data methodology. Share the reftag + reg-database weekly-match query so she can pull herself."
+      "signal_source": "ab-outbound-marketing 5/1",
+      "topic": "OP1 Tech intake forms",
+      "decision": "Intakes due 5/5 for prioritization but continuous accepting. Lina email suggests 5/15 for some categories.",
+      "flag": "Deadline ambiguity — Richard should submit by 5/5 to be safe"
     },
     {
-      "proposed_name": "Reply to Anmol Rastogi — PS metrics list for ABMA-11245",
-      "source": "slack:mpdm-rasanmol 4-29",
-      "brandon_direct_ask": false,
-      "proposed_routine": "Sweep",
-      "proposed_priority": "Urgent",
-      "proposed_due": "2026-05-01",
-      "proposed_kiro_rw": "4/30: Anmol Rastogi asking Richard to clarify which PS data metrics are needed for ABMA-11245 SIM intake. 10 min: enumerate the metric list."
+      "signal_source": "dm-brandon 5/1",
+      "topic": "MCS Tech OP1 ideation",
+      "decision": "Brandon submitting customer-type recognition idea. Directly asked Richard for additional ideas.",
+      "flag": "Richard owes reply before 5/5"
+    },
+    {
+      "signal_source": "dm-asana-bot 5/1 (Vijeth)",
+      "topic": "Browse Category CTA US greenlight",
+      "decision": "International marketplaces live. Ref tag change documented. Awaiting Richard decision on US rollout.",
+      "flag": "Richard owes reply — cross-team coordination per Brandon 4/29 coaching"
     }
   ],
-  "decisions_detected_slack": [
-    {
-      "source": "dm-brandon 4-29",
-      "decision": "Richard is single point of contact for MCS on Polaris Br-pages. No segmented feedback.",
-      "decided_by": "Brandon",
-      "action_for_richard": "Announce to PS team + MCS via appropriate channels"
-    },
-    {
-      "source": "ab-paid-search-global 4-29 thread",
-      "decision": "Asana comments not to be used as discussion board for Polaris QA — use feedback doc + Slack + dedicated Alex syncs instead.",
-      "decided_by": "Brandon",
-      "action_for_richard": "Set up the alternative structure"
-    }
+  "kill_or_revive_queue": [
+    {"task_gid": "1213959904341162", "name": "Reply to Brandon — PAM budget", "days_overdue": 27, "decision_scheduled": "Brandon 1:1 Tue 5/5"},
+    {"task_gid": "1213764961716427", "name": "WW weblab dial-up (Richard)", "days_overdue": 26, "decision_scheduled": "Brandon 1:1 Tue 5/5 — milestone already passed"},
+    {"task_gid": "1213875146955582", "name": "Get Enhanced Match details", "days_overdue": 26, "recommendation": "Bundle close w/ Reply to Brandon PAM"},
+    {"task_gid": "1213968042348601", "name": "Deep Dive: Add IECCP FAQ to new account playbook", "days_overdue": 24, "recommendation": "Ask Brandon 1:1 if still wanted"}
   ],
-  "coherence_flags": [
-    {"flag": "schema_drift", "detail": "MX project GID 1212775592612917 and AU project GID 1212762061512767 returned 424 Not a recognized ID. Re-discover via AsanaSearch."},
-    {"flag": "over_cap_all_buckets", "detail": "Every routine bucket is 3-5x over cap. Structural WIP problem, not a single missed demotion pass."},
-    {"flag": "stale_kill_candidates", "detail": "6 tasks 15+ days overdue with no meaningful movement. Richard scheduled kill-or-revive for PAM bundle at 5/5 1:1."},
-    {"flag": "loop_sync_word_count_delta", "detail": "Loop sync returned word-count deltas >100% on 2 pages. Suggests methodology difference in prior vs current sync, not content jump. Spot-check if signal drives downstream."}
+  "new_signal_task_create_queue": [
+    {"topic": "MCS Tech OP1 ideas reply to Brandon", "due": "2026-05-04", "bucket": "Sweep"},
+    {"topic": "US Browse Category CTA greenlight reply to Vijeth", "due": "2026-05-04", "bucket": "Sweep"},
+    {"topic": "Mukesh GenBI data-pull approach reply", "due": "2026-05-05", "bucket": "Sweep"},
+    {"topic": "Brandon MBET issue logging reply", "due": "2026-05-05", "bucket": "Sweep"}
   ]
 }

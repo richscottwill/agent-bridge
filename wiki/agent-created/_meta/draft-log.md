@@ -52,3 +52,6 @@ Merged 37 files down to ~10 canonical program/topic documents. Updates at the to
 2026-04-17 16:00 — wiki-writer merged f90-lifecycle-strategy + f90-rollout-state → f90-program (~1700 words).
 2026-04-17 15:45 — wiki-writer merged polaris-rollout-status + polaris-rollout-timeline × 2 → polaris-program (~1600 words).
 2026-04-17 15:30 — wiki-writer merged liveramp-identity-primer + enhanced-match-liveramp-explainer + enhanced-match-liveramp → liveramp-program (~1600 words with chronology, mechanics, Enhanced Match, decision guide).
+2026-05-01 23:12 — wiki-critic reviewed five-year-outlook-v2 (Eval B, Kate persona) — verdict REVISE (avg 7.6/10, consecutive_sub8=1)
+2026-05-01 23:15 — wiki-writer expanded au-keyword-cpa-dashboard (category: reporting, audience: team, ~1450 words, revision)
+2026-05-01 23:20 — wiki-critic reviewed au-keyword-cpa-dashboard (Eval B, Lena Zak persona) — verdict REVISE (avg 7.4/10, consecutive_sub8=1). Gaps: $140 CPA target uncited, Lena's 4/1 follow-ups unaddressed, Megan handoff too thin, dead "Next steps" section.

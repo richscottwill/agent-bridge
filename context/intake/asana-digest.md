@@ -1,78 +1,79 @@
-# Asana Digest — 2026-04-30 (W18, Thursday)
+# Asana Digest — 2026-05-03 13:32 UTC
 
-**Sync run:** 2026-04-30 ~12:05 UTC | **Source:** SearchTasksInWorkspace + 4/6 portfolio pulls
-**Total incomplete tasks:** 79 | **Today:** 27 | **Urgent:** 18 | **Not urgent/Backlog:** 34
-**Overdue:** ~22 tasks (many flagged for kill-or-revive at today's Brandon 1:1)
+**Scope:** B1 partial sync (orchestrator-side, post-schema-fix run).
+**Total active tasks:** 82 (82 incomplete, 0 completed today).
+**Schema drift:** AU + MX standalone projects confirmed archived/consolidated into ABIX. Registry patched in `asana-duckdb-sync.md`, `am-backend-parallel.md`, `asana-command-center.md`. Logged to `asana.schema_changes`.
 
----
+## Bucket distribution (Richard-assigned)
 
-## ⚠️ SCHEMA DRIFT — 2 project GIDs stale
+| Bucket | Count | Cap | Over? |
+|---|---|---|---|
+| Engine Room | 12 | 6 | ⚠️ **6 over** |
+| Core | 10 | 4 | ⚠️ **6 over** |
+| Admin | 6 | 3 | ⚠️ **3 over** |
+| Sweep | 2 | 5 | OK |
+| Wiki | 0 | — | — |
+| No routine | 36 | — | ⚠️ routing gap |
 
-Two portfolio project GIDs returned `424 Not a recognized ID` today:
+**Bucket caps violated.** 36 tasks have no Routine_RW — either need triage or are pinned-context tasks. Phase 2C will queue demotion proposals.
 
-- **MX** — `1212775592612917` (per asana-command-center.md)
-- **AU** — `1212762061512767`
+## Priority=Today but no Routine_RW (triage queue)
+Auto-flagged during Phase 2. These need Richard to pick a bucket or demote.
 
-These were likely archived, merged, or renamed. **Incomplete tasks for both markets still appear in the SearchTasksInWorkspace results** (Richard is assignee), so the sync is not data-incomplete — we just can't enumerate by project. Action: run `AsanaSearch(query="AU Paid Search", resource_type="project")` and `AsanaSearch(query="MX", resource_type="project")` to re-discover; then update `shared/context/active/asana-command-center.md` + `shared/context/protocols/asana-duckdb-sync.md` portfolio tables. This is Engine Room cleanup — not urgent, but log in Asana as a sync-fix task.
+## Overdue tasks (20 shown, 16 total past-due)
 
----
+| Days OD | Name | Project | Priority | Routine |
+|---|---|---|---|---|
+| 39 | Make changes to AU/MX/PAM for the week | My Tasks | — | — |
+| 33 | Paid App | WW Testing | Urgent | Engine Room |
+| 27 | Reply to Brandon — PAM budget needs assessment | My Tasks | — | — |
+| 26 | WW weblab dial-up (Richard) | WW Testing | Urgent | Core |
+| 26 | Get Enhanced Match details | My Tasks | — | — |
+| 24 | Deep Dive: Add IECCP FAQ to new account playbook | My Tasks | — | — |
+| 24 | Deep Dive: Finalize market expansion playbook | My Tasks | — | — |
+| 24 | Brandon 1:1: Set up automated monthly ASP reminders | My Tasks | — | — |
+| 23 | Monthly: Individual Goals update | My Tasks | — | — |
+| 20 | Paid App PO — Create Q2 + Amend Google PO to Q2 | Paid App | Urgent | Sweep |
+| 16 | MCS LP Review: Connect with Lorena on paid social/PS synergy | MX (stale label) | Urgent | — |
+| 16 | Sitelink Audit/Update | WW Testing | Urgent | — |
+| 16 | PAM: Flag underspend risk to Brandon | My Tasks | — | — |
+| 16 | MX Experiments ending 4/30, check sooner for trend | My Tasks | — | — |
+| 15 | Email overlay WW rollout/testing | WW Testing | Urgent | Core |
+| 15 | Resolve MX duplicate invoice — Diana ($56K, PO Q1) | My Tasks | — | — |
+| 15 | PAM: Check US/EU spend pacing vs Q2 budget | My Tasks | — | — |
+| 13 | AU handover: switched to max clicks 4/17 | My Tasks | Urgent | — |
+| 11 | Brandon 1:1: Draft Enhanced Match FAQ for legal | My Tasks | — | — |
+| 5 | MX/AU confirm budgets | My Tasks | — | — |
 
-## TOP — Due today (Thu 4/30)
+## High-signal tasks due next 7 days (5/3 – 5/10)
 
-1. **OP1 app acquisition projections — Peter sync Wed 4/30 2-3pm** (`1214384590122162`) — Due TODAY. Pull CPI + install-rate by market (DE/ES efficient), prep projections for 2-3pm Peter sync.
-2. **MX Experiments ending 4/30** (`1214044682239823`) — 11d OD. Check MX Polaris Beauty+Auto experiment trend, extend test to 6 weeks if needed.
-3. **MX Polaris NB LP Test (Beauty+Auto)** (`1214044682239817`) — Due 4/30. Reuse mechanic framework from Brand LP AU/MX test design.
-4. **Cross-marketing Refmarker audit** (`1214044682239803`) — Due 4/30. Pull refmarker mapping from Google Ads for cross-marketing campaigns.
-5. **DDD walkthrough with team** (`1214074477111007`) — 12d OD, rescheduled to today. Walk team through Polaris alt-measurement mechanic + MX NB LP test (15 min).
+| Due | Name | Priority |
+|---|---|---|
+| 5/4 | Google Ads MCC SSO admin — confirm ownership by May 4 | Today |
+| 5/4 | Convert promptSubmit hooks to userTriggered | Today |
+| 5/4 | Follow up with Vijeth — /cp/auto-shop ref-tag overwrite fix | Today |
+| 5/5 | WW Kw URL inclusion | Urgent |
+| 5/5 | GenBI keyword-registration stitching fix with Mukesh (pre-AU handoff) | Urgent |
+| 5/5 | Update Kingpin for MX | Urgent |
+| 5/5 | Monthly - Confirm actual budgets | Urgent |
+| 5/5 | Update on app extension for regular MX meetings | Urgent |
+| 5/6 | WW Kw URL inclusion | Urgent |
+| 5/6 | Brand LP AU/MX test design — non-weblab MCS vs Reg Start (HARD THING) | Urgent |
+| 5/7 | Baloo Early Access — PS feedback consolidation | — |
+| 5/8 | Resolve am-auto.md vs am-backend-parallel.md duplication | Not urgent |
 
-## Brandon 1:1 agenda (1:30pm PT today)
+## New tasks inserted to DuckDB this run (8)
 
-- **Polaris Br-pages QA consolidation** — new from Wed (Brandon DM + ab-paid-search-global thread). Richard is sole consolidator; needs feedback doc + timelines. See slack-digest.md.
-- **PAM budget kill-or-revive** (`1213959904341162`) — 23d OD. Is "Extra $ for PAM" question still live or overtaken by Paid App PO motion?
-- **Email overlay WW status** (`1213125740755931` + `1214137998394047` + `1214351597615320`) — Brandon ask from 4/17, 13d unaddressed. Clarify CAT vs MCS overlay status for Outbound Marketing Goals.
-- **Enhanced Match FAQ for legal** (`1213964668984060`) — draft Enhanced Match FAQ for legal, building on LiveRamp context. Bundle with `1213875146955582` (Get EM details).
-- **Kingpin MX kill decision** — 35d blocked on Andes data. Kill or escalate to ABMA leadership?
+Created since last full sync (Apr 29):
+- WW Kw URL inclusion
+- Move LR Negative to NA MCC
+- Clarify CAT vs MCS email overlay status for Outbound Marketing Goals
+- Baloo Early Access — PS feedback consolidation + follow-ups
+- Resolve am-auto.md vs am-backend-parallel.md duplication
+- Convert promptSubmit hooks to userTriggered
+- MotherDuck sync audit — autoresearch schema frozen since 2026-04-17
+- MPE US baseline — Option 2: add YoY-acceleration regressor
 
-## High-signal due-this-week
+## B1 → B2 handoff
 
-- **Brand LP AU/MX test design — alt measurement (non-weblab)** (`1214330104198712`) — Due Tue 5/5. Richard owns non-weblab measurement for AU/MX Brand LP since these markets go to reg start. Decide mechanic (pre/post Adobe? holdout? staggered region ramp?) and document in SIM MCS-3004.
-- **Adobe Analytics cross-check — MX Polaris Beauty LP test** (`1214365254391847`) — Due Fri 5/1.
-- **Confirm /cp/beauty custom ref tags firing** (`1214372109571389`) — Due Fri 5/1. Ping Alex VanDerStuyf (MCS).
-- **Build Adobe dashboard template for MCS-2553** (`1214153596141526`) — Due Sat 5/2.
-- **ie%CCP calc — insert MX spend/regs** (`1213983077428492`) — Due Thu 5/1.
-- **MBR callout** (`1213983342210449`) — Due Sat 5/2.
-- **Send AU team invoice for prev month** (`1213917691068688`) — Due Sat 5/2. Monthly recurring from Yun reminder.
-- **Google Ads MCC SSO admin** (`1214330091433878`) — Due Mon 5/4. SSO enforcement launches 5/4; confirm MCC ownership + adopt Teams workflow.
-
-## Kill-or-revive / duplicate cleanup candidates
-
-- **"It's time to update your goal(s)"** (`1214216689942612`) — 6d OD, DUPLICATE of `1213690904654138` (Monthly Individual Goals update). Keep one, close the other.
-- **Email overlay WW rollout/testing** (`1213125740755931`) — Core Two, due 4/24, Brandon ask still stale. Surface at 1:1.
-- **AU: check genbi campaign data** — completed 4/21 per prior snapshot; confirm closed.
-- **Initial Testing** (`1213278917849558`) — generic name, completed 4/28; name unclear.
-- **Look into ABMX Registration and Verification Enhancement** (`1214372021755042`) — Due 4/29, 1d OD, unclear next-action.
-
-## Over-cap buckets (Routine_RW distribution)
-
-| Routine | Active Count | Cap | Status |
-|---------|-------------|-----|--------|
-| Sweep | ~18 | 5 | OVER CAP (3.6x) |
-| Core Two | ~10 | 4 | OVER CAP (2.5x) |
-| Engine Room | ~18 | 6 | OVER CAP (3x) |
-| Admin | ~14 | 3 | OVER CAP (4.6x) |
-| Wiki | ~3 | — | within norms |
-| No routine set | ~16 | — | triage needed |
-
-**Every bucket is over cap.** This is structural — not one missed demotion pass. Richard needs a 30-min "WIP triage" block this week before adding new work.
-
-## Coherence flags
-
-- 2 stale project GIDs (MX + AU) per schema drift section above.
-- PAM-related tasks (`1213959904341162`, `1214068215114017`, `1214068272596724`, `1212808474749819`) all tied to the same Brandon "Extra $ for PAM" question. Bundle as one decision at 1:1.
-- WW weblab dial-up (`1213764961716427`) still Today priority but milestone (4/7) passed 14d ago. Close or reframe.
-- "Make changes to AU/MX/PAM for the week" (`1214080130329568`) is 34d OD; stale weekly recurring — replace with fresh Fri 5/2 instance per next-action.
-
----
-
-Synced: 2026-04-30 ~12:05 UTC | 79 incomplete tasks | 27 Today / 18 Urgent / 34 Not Urgent/Backlog
-DuckDB: asana.asana_tasks UPSERT pending (schema drift will be logged to ops.schema_changes)
+Task list written to `asana-task-list-b1.json` for B2 activity-monitor consumption.

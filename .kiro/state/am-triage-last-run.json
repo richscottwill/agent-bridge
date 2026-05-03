@@ -1,0 +1,7 @@
+{
+  "hook": "am-triage",
+  "last_run_ts_iso": null,
+  "last_run_ts_pt": null,
+  "history": [],
+  "notes": "Tracks last successful AM-triage run for A1.5 Overnight Asana Activity windowing. Updated at the END of a successful A1.5 step. If last_run_ts_iso is null or older than 7 days, A1.5 falls back to a 24h window."
+}

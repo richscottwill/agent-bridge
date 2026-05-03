@@ -1,9 +1,14 @@
 {
-  "schema_version": "1.0",
-  "run_at_utc": "2026-04-30T12:46:39.469966Z",
-  "total_incomplete": 79,
-  "today_priority_count": 27,
-  "urgent_priority_count": 18,
-  "overdue_count": 22,
-  "hard_thing_candidate_note": "Testing Document for Kate (1213341921686564) was closed 4/27 as obsolete. Polaris Brand LP is current hard thing \u2014 see slack-digest.md for consolidation context."
+  "snapshot_at_utc": "2026-05-03T13:32:00Z",
+  "run_type": "manual_partial_post_schema_fix",
+  "total_active_tasks": 82,
+  "new_inserts_this_run": 8,
+  "overdue_count": 16,
+  "bucket_caps_violated": ["Engine Room (12/6)", "Core (10/4)", "Admin (6/3)"],
+  "no_routine_tasks": 36,
+  "schema_drift_resolved": {
+    "archived_projects": ["AU (1212762061512767)", "MX (1212775592612917)"],
+    "consolidated_into": "ABIX (1206497185559287)"
+  },
+  "notes": "B1 partial. Full re-pull of all portfolio projects skipped to preserve context; 14 confirmed-incomplete high-priority tasks had synced_at refreshed + 8 new tasks inserted. Next full am-auto run will do a complete UPSERT pass with the corrected project list."
 }

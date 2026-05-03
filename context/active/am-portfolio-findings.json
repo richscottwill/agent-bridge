@@ -1,95 +1,32 @@
 {
-  "schema_version": "2.0",
-  "generated_at_utc": "2026-04-30T13:00:00Z",
-  "run_type": "am_backend_parallel_v2",
-  "phase": "4_portfolio",
-  "portfolios_scanned": [
-    {
-      "name": "ABIX PS",
-      "project_count": "TBD — portfolio listing skipped this run to preserve orchestrator budget",
-      "status": "partial"
-    },
-    {
-      "name": "ABPS",
-      "project_count": "6 known",
-      "status": "4_of_6_synced",
-      "failures": [
-        {"project": "MX", "gid": "1212775592612917", "error": "424 Not a recognized ID"},
-        {"project": "AU", "gid": "1212762061512767", "error": "424 Not a recognized ID"}
-      ]
-    }
+  "generated_at_utc": "2026-05-03T13:35:00Z",
+  "portfolios_scanned": ["ABPS (1212762061512816)"],
+  "portfolios_skipped": ["ABIX PS (1212775592612914) — confirmed empty, deprecated"],
+  "projects_active": 8,
+  "projects_by_count": [
+    {"project": "My Tasks", "active": 34, "overdue": 18, "max_days_od": 39},
+    {"project": "ABPS - WW Testing & Projects", "active": 8, "overdue": 6, "max_days_od": 33},
+    {"project": "AU (stale label, now in ABIX)", "active": 7, "overdue": 0, "max_days_od": 0},
+    {"project": "ABPS - Paid App", "active": 6, "overdue": 2, "max_days_od": 20},
+    {"project": "MX (stale label, now in ABIX)", "active": 4, "overdue": 2, "max_days_od": 16},
+    {"project": "ABPS - ABIX", "active": 1, "overdue": 0, "max_days_od": 0}
   ],
-  "per_project_findings": {
-    "ABPS - WW Testing & Projects": {
-      "gid": "1205997667578893",
-      "open_tasks_richard": 12,
-      "overdue": [
-        {"gid": "1213764961716427", "name": "WW weblab dial-up (Richard)", "days_overdue": 23, "action": "Close or reframe — 4/7 dial-up passed"},
-        {"gid": "1214074477110993", "name": "Sitelink Audit/Update", "days_overdue": 13, "action": "30 min audit this week"},
-        {"gid": "1213125740755931", "name": "Email overlay WW rollout/testing", "days_overdue": 6, "action": "Carry to Brandon 1:1 today"}
-      ],
-      "stale_status_update": "none_in_last_14d",
-      "new_task_detection": [
-        {"gid": "1214330286428120", "name": "Kate AB Marketing AI demo", "created": "2026-04-28", "priority": "Urgent + Important"}
-      ]
-    },
-    "ABPS - Paid App": {
-      "gid": "1205997667578886",
-      "open_tasks_richard": 14,
-      "overdue": [
-        {"gid": "1214088494080582", "name": "Resolve MX duplicate invoice — Diana", "days_overdue": 2, "action": "Chase Google support today + reply Diana"},
-        {"gid": "1212808474749819", "name": "Paid App PO — Create Q2 + Amend Google PO", "days_overdue": 17, "action": "Bundled with PAM kill-decision Tue 5/5"},
-        {"gid": "1213959904341162", "name": "Reply to Brandon — PAM budget", "days_overdue": 23, "action": "Kill-or-revive at Brandon 1:1 Tue 5/5"}
-      ],
-      "blockers": [
-        {"detail": "Source DE/IT/ES (Apple accounts paused)", "recommendation": "Kill or defer to Q3"}
-      ]
-    },
-    "ABPS - WW Acquisition": {
-      "gid": "1206011235630048",
-      "open_tasks_richard": 1,
-      "note": "Mostly historical completed tasks. Only active: 📋 WW Acquisition Team Context (pinned reference, not a task)"
-    },
-    "ABPS - AU (stale_gid)": {
-      "gid": "1212762061512767",
-      "status": "schema_drift",
-      "action": "Re-discover via AsanaSearch(query='AU Paid Search', resource_type='project'). Update asana-command-center.md."
-    },
-    "ABPS - MX (stale_gid)": {
-      "gid": "1212775592612917",
-      "status": "schema_drift",
-      "action": "Re-discover via AsanaSearch(query='MX Paid Search', resource_type='project'). Update asana-command-center.md."
-    }
+  "schema_drift_to_resolve": {
+    "issue": "11 tasks still carry project_name='AU' or 'MX' in DuckDB from pre-consolidation",
+    "resolution": "Next full am-auto sync will re-pull via ABIX project_gid and overwrite project_name to 'ABPS - ABIX'"
   },
-  "portfolio_level_findings": {
-    "tasks_needing_enrichment": {
-      "missing_kiro_rw": 5,
-      "missing_next_action": 4,
-      "missing_due_date": 8,
-      "empty_task_names": 2
-    },
-    "recurring_task_health": {
-      "Weekly Reporting - Global WBR sheet (1214206277947986)": {"last_completion": "2026-04-20", "status": "current_instance_overdue", "action": "Populate W17 data before tomorrow AM"},
-      "AU meetings - Agenda": "no active instance this week",
-      "Mondays - Write into EU SSR Acq Asana (1214382691668678)": {"next_due": "2026-05-04", "status": "on_track"},
-      "Monthly - Confirm actual budgets (1213530917597503)": {"next_due": "2026-05-05", "status": "on_track"}
-    },
-    "cross_team_blockers": [
-      {"task": "Google Ads MCC SSO admin", "external_dep": "Rykier + Permissions tool Teams workflow", "due": "2026-05-04", "urgency": "Mon EOD"},
-      {"task": "Brand LP AU/MX test design — alt measurement", "external_dep": "Alex/Vijeth DE/FR finalize 4/29", "due": "2026-05-06"},
-      {"task": "GenBI keyword-registration stitching", "external_dep": "Mukesh", "due": "2026-05-05 (pre AU handoff)"}
-    ],
-    "budget_po_flags": [
-      "US PAM $70K underreported PO (1214044802323478)",
-      "Q2 PO (not FY increase) for PAM (1214044802323482)",
-      "Paid App PO Q2 + Google PO amendment (1212808474749819) — 17d overdue",
-      "MX duplicate invoice $56K (1214088494080582) — Google support 0-1804000040849"
-    ],
-    "event_countdown": {
-      "OP1 Peter sync": {"when": "2026-04-30 2-3pm PT", "hours_until": "~5"},
-      "AU handover (Megan team)": {"when": "2026-05-05", "days_until": 5},
-      "Google Ads MCC SSO enforcement": {"when": "2026-05-04", "days_until": 4},
-      "Kate AB Marketing AI demo": {"when": "2026-05-29", "days_until": 29}
-    }
-  }
+  "budget_po_tracking": [
+    {"task_gid": "1212808474749819", "name": "Paid App PO Q2 + Amend Google PO", "days_overdue": 20, "status": "blocked_on_brandon_pam_budget_reply", "critical": true},
+    {"task_gid": "1214218448412294", "name": "39K IT PO mis-allocated to US PAM", "days_overdue": 6, "status": "needs_MBET_PO_reclass_with_Diana"}
+  ],
+  "cross_team_blockers": [
+    {"topic": "polaris-brand-lp", "owner": "Richard (sole consolidator per Brandon 4/29)", "blocker": "Consolidated QA feedback doc still open", "age_days": 4},
+    {"topic": "MX Kingpin goals", "owner": "Richard", "blocker": "Andes data unavailable", "age_days": 35, "escalation_recommendation": "Escalate to ABMA leadership for delivery ETA"},
+    {"topic": "F90 audience request", "owner": "Richard", "blocker": "Paid Media Legal Approval pending", "age_days": "unknown", "downstream_tasks": 4}
+  ],
+  "event_countdowns": [
+    {"event": "AU formal handoff to Megan", "date": "2026-05-05", "days_to_go": 2, "critical_path": ["1214389396315760 AU handover doc", "1214386001212099 GenBI fix"]},
+    {"event": "Kate AB Marketing AI demo", "date": "2026-05-29", "days_to_go": 26, "critical_path": ["1214330286428120 Kiro PS use cases prep with Adi + Brandon run-through"]},
+    {"event": "OP1 Tech intake forms", "date": "2026-05-05 (or 5/15)", "days_to_go": 2, "critical_path": ["Submit MCS Tech OP1 ideas via intake form"]}
+  ]
 }

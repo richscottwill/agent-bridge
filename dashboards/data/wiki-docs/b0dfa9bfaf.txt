@@ -1,0 +1,108 @@
+# Review: AU Keyword CPA Dashboard (Eval A — Strict Rubric)
+
+Reviewed: 2026-05-01 23:18
+Slug: au-keyword-cpa-dashboard
+Draft version: 2026-05-01 (W18 upgrade)
+Consecutive sub-8: 1
+
+## Constraint check
+
+Three default constraints apply (no explicit `constraints:` list in frontmatter; §8 defaults for team-facing reference doc).
+
+| # | Constraint | Verdict | Evidence |
+|---|-----------|---------|----------|
+| 1 | **Citation discipline** — every substantive claim must cite a source or be flagged with a TODO marker | VIOLATED | Two `<!-- TODO: cite -->` markers present: (a) line 51, AU CPA target $140 source; (b) line 106, 10% attribution gap threshold. The markers are honest, but the claims are uncited. Per pipeline rules, TODO markers = REVISE regardless of other scores. |
+| 2 | **Reference-doc structure** — definitions + methodology + interpretation | PASS | The article has clear methodology ("How the data is sourced and refreshed"), metric definitions ("How metrics are defined"), interpretation guidance per view, and data quality notes. Structure matches the reference-doc archetype. |
+| 3 | **Audience-appropriate** — team-facing, operational | PASS | Written for the AU PS team (Lena, Megan's team). Tone is operational. No leadership framing, no coaching language, no jargon without definition. |
+
+## TODO-marker check
+
+Two `<!-- TODO: cite -->` markers found:
+
+1. **Line 51:** `<!-- TODO: cite AU CPA target $140 source — eyes.md Market Health → AU or current.md -->` — The $140 target is stated as fact but the source is not inline-cited. The Sources section at the bottom does list "AU CPA target $140: ~/shared/context/body/eyes.md, Market Health, AU" — so the citation exists in the doc, just not inline. This is a minor gap but the TODO marker makes it a formal violation.
+
+2. **Line 106:** `<!-- TODO: cite attribution gap threshold — is 10% the right number or should this be calibrated from historical data? -->` — This is a genuine open question. The 10% threshold is presented as operational guidance but the author is unsure whether it is calibrated. This is the more substantive of the two TODOs.
+
+**Binding rule:** Any `<!-- TODO: cite -->` marker present = REVISE verdict. Both markers must be resolved before this article can pass.
+
+## Scores
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Usefulness | 8/10 | Strong. A reader can pull the data, populate each view, interpret CPA thresholds, and know when to escalate. The action threshold table is the standout — it converts data into decisions. Loses a point because the keyword-to-product mapping section is thin (empty table, no worked example). |
+| Clarity | 8/10 | Well-structured. Headers are questions ("How to read the Top 20 by CPA view") which is the right pattern for a reference doc. The methodology section clearly explains why DB registrations are used instead of Google Ads conversions. One deduction: "$X,000" placeholder in the volume section (line 82) is sloppy — either calculate a real example or remove the placeholder. |
+| Accuracy | 6/10 | Two uncited claims (the TODO markers). The $140 target IS cited in the Sources section but the inline TODO contradicts that — either the inline cite is missing or the Sources entry is wrong. The 10% attribution gap threshold is genuinely unverified per the author's own admission. The rest of the claims trace to named sources. The "Next steps" section says "should be complete by now" which is speculative — either confirm completion or cut the section. |
+| Dual-audience | 8/10 | Frontmatter is complete (slug, doc-type, audience, level, category, tags, depends_on, consumed_by). AGENT_CONTEXT block is present with machine_summary, key_entities, action_verbs, and update_triggers. Prose serves humans well. The empty table schemas serve both audiences — agents can parse column structure, humans can see the layout. |
+| Economy | 7/10 | Three issues. (1) The "Next steps (historical context)" section is dead weight — four noun-only bullet items ("Pull first week's data", "Build template in Excel/Quip") retained "for provenance" but adding no operational value. Cut it or move to an appendix. (2) The dashboard ingester tool is described in both "How the data is sourced and refreshed" (paragraph 3) and "Automation path" — redundant. Merge into one location. (3) "Delivery" section (2 sentences) and "Transition context" section partially overlap — both mention the handoff from Richard to Megan's team and the weekly cadence. The noun-only bullet list in Next Steps is an explicit economy sub-rule violation. |
+| **Average** | **7.4/10** | |
+
+## Verdict
+
+**REVISE**
+
+Three independent reasons, any one of which is sufficient:
+
+1. **TODO markers (binding):** Two `<!-- TODO: cite -->` markers present. Per pipeline rules, this is an automatic REVISE regardless of scores.
+2. **Accuracy below 7:** The uncited claims and the speculative "should be complete by now" language pull Accuracy to 6/10, below the 7-floor.
+3. **Economy below 8:** Redundant sections and a noun-only bullet list pull Economy to 7/10. Not a floor violation, but contributes to the sub-8 average.
+
+## Required changes
+
+These three changes are required to clear the gate. The TODO markers are the binding constraint, but the other two are necessary to reach the 8/10 bar.
+
+### 1. Resolve both TODO markers
+
+**TODO #1 (line 51):** The $140 target is already cited in the Sources section. Either add an inline citation or remove the TODO marker. Suggested replacement:
+
+> Replace:
+> ```
+> **AU CPA target:** $140. Historical AU CPA has run $120 to $180 depending on the week and keyword mix. Brand CPA typically runs around $80. Non-brand CPA typically runs $200 or higher.
+> <!-- TODO: cite AU CPA target $140 source — eyes.md Market Health → AU or current.md -->
+> ```
+> With:
+> ```
+> **AU CPA target:** $140 (source: eyes.md, Market Health → AU). Historical AU CPA has run $120 to $180 depending on the week and keyword mix. Brand CPA typically runs around $80. Non-brand CPA typically runs $200 or higher.
+> ```
+
+**TODO #2 (line 106):** Either calibrate the 10% threshold from historical data and cite the source, or explicitly frame it as a provisional threshold. Suggested replacement:
+
+> Replace:
+> ```
+> When total dashboard registrations diverge from total AU DB registrations by more than 10%, investigate the attribution pipeline before interpreting keyword-level CPA.
+> <!-- TODO: cite attribution gap threshold — is 10% the right number or should this be calibrated from historical data? -->
+> ```
+> With:
+> ```
+> When total dashboard registrations diverge from total AU DB registrations by more than 10%, investigate the attribution pipeline before interpreting keyword-level CPA. The 10% threshold is a provisional starting point based on operator judgment; calibrate against historical divergence data once three or more weeks of paired totals are available.
+> ```
+
+### 2. Cut or compress the dead-weight sections
+
+**"Next steps (historical context)":** Delete this section entirely. It contains four noun-only bullet items for steps that were due in March 2026. Retaining them "for provenance" is not a reference-doc function — provenance lives in git history or the draft-log, not in the published article.
+
+**"Automation path":** Merge the unique content (standardize export template, configure column mapping, validate against manual pull) into the third paragraph of "How the data is sourced and refreshed" where the ingester is first mentioned. Delete the standalone section.
+
+**"Delivery":** Merge the delivery cadence sentence ("delivered weekly before the AU sync meeting") into the "Transition context" section, which already discusses the handoff. Delete the standalone section.
+
+Net effect: three sections removed, ~150 words cut, no information lost.
+
+### 3. Fix the "$X,000" placeholder (line 82)
+
+> Replace:
+> ```
+> A keyword with 500 clicks and 1 registration is a $X,000 CPA problem
+> ```
+> With:
+> ```
+> A keyword with 500 clicks and 1 registration at $2 CPC is a $1,000 CPA problem
+> ```
+
+Or use whatever CPC assumption is realistic for AU. The placeholder reads as unfinished.
+
+## Suggestions (optional, non-blocking)
+
+1. The keyword-to-product mapping section is the thinnest of the four views. Consider adding one worked example row showing how a keyword theme maps to a product category and what a CVR drop during Polaris migration looks like in practice. This would lift Usefulness from 8 to 9.
+
+2. The AGENT_CONTEXT block is solid but could add `decision_thresholds: {"pause_cpa": 200, "monitor_cpa": 140, "brand_spike_alert": 120}` as structured data for agent consumption. Currently these thresholds are only in prose and the action table.
+
+3. Consider adding a "Last validated" date to the Sources section so future audits can quickly assess staleness without reading every source path.

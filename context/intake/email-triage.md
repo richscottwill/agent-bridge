@@ -1,71 +1,43 @@
-# Email Triage — 2026-04-30
+# Email Triage — Sun May 3, 2026
 
-Scan window: 2026-04-29 00:00 → 2026-04-30 12:06 UTC
-Total: 36 emails processed | 3 HIGH / 2 MEDIUM / 31 LOW
-
----
+Scan window: 2026-05-01 13:09 UTC → 2026-05-03 13:02 UTC (48h backlog ingest)
+Total processed: 59 emails across all folders (inbox + sent). Counts: 3 high / 9 medium / 47 low.
 
 ## High Priority (respond)
 
-- **Budget follow-up** from Lorena Alvarez Larrea (lorealea) — "Leave our forecast with $1.3M and move $435K to channel tests." **Decision confirmed — thread can close, but acknowledge.** Rcvd Wed 04:57 UTC.
+- **Change Request for Richard Williams - PO #2D-19910168** from Munday, Brandon (Fri 5/1) — "That makes sense. Is there a way for you to report the issues with MBET? It'd be good for them to have this logged." Needs a reply with MBET feedback logged.
+- **Reminder: Brandon sent you a comment yesterday (Enhanced Match Legal)** from Brandon via Asana (Fri 5/1) — Brandon updated: Legal SIM no longer on hold, asking for call with LR next week. Needs confirmation on scheduling.
+- **Brandon assigned you a task: Move LR Negative to NA MCC** from Brandon via Asana (Fri 5/1) — New ABPS WW Testing task assigned, due May 29.
 
-- **Brandon mentioned you: ps-brand pages updates WW** from Brandon via Asana (brandoxy) — Brandon set ownership rule: "this needs to be routed through Richard to avoid confusion and overlapping communication. Alex VanDerStuyf please work with Richard to QA pages." **Acknowledge + action: coordinate with Alex on QA path.** Rcvd Wed 18:23 UTC.
+## Medium Priority (review)
 
-## High Priority (FYI)
+- **TBR: [Quarterly] CM All Teams** from Rundell, Kate (Fri 5/1) — TBR = to be rescheduled. Aiming to get this ahead of OP1. New invite coming soon. FYI only.
+- **(Please read and act): AB Marketing FY26 Apr Prelim actual - Due May 4th** from Cho, BK (Fri 5/1) — Apr underspend vs OP2 across central marketing, SSR, CPS. XCM tightening control. Action due Mon May 4.
+- **Action Required by May 8 – New Security Controls for Google MCC Access** from Doshi, Hitesh (Fri 5/1) — AFSS + Search Marketing implementing stronger security controls for 156 Google MCCs. Action required by May 8.
+- **Vijeth mentioned you: ps-brand pages updates WW** from Vijeth Shetty via Asana (Fri 5/1) — Update on Browse Category CTA implementation across marketplaces.
+- **Vijeth mentioned you: MX - PS Nonbrand pages** from Vijeth via Asana (Fri 5/1) — Still working on changes, will share preview URL.
+- **PSME Tech - Incentives & Promotions | OP1 2027 Intake | Submit by May 15** from Al Risheh, Lina (Fri 5/1) — InP Intake open through May 15.
+- **Competitive Bid Mechanism (CBM) - OP1 2027 Intake** from Patil, Arundhati (Fri 5/1) — OP1 Intake deadline extended to May 8, Friday 5PM PST.
+- **[Support Required] Duplicated invoice for MX** from Williams, Richard to Diana (sent Fri 5/1, 02:50) — Richard's own sent update; Google escalation in progress on MX duplicate invoice. Waiting on Google response.
+- **[EXTERNAL] Google Ads support - Invoice details** from Williams, Richard to Mike Babich (sent Fri 5/1, 02:44) — Richard's escalation to Google account rep. Waiting on response.
+- **[ABMA-11500] Paid Search MX - WBR error** from Pranay Sagar (Fri 5/1) — bssaga: Will get back to you by 05/04.
+- **New comment on: ps-brand pages updates WW** from Dwayne Palmer via Asana (Fri 5/1) — Adding Chetan Vajre for vis.
 
-- **Richard/Adi sync** from Williams, Richard (prichwil) — sent meeting (your own). No action.
+## External / Advisory Flags
 
-## Medium Priority
+- **PSME Seattle Summer Party** from Heimes, Todd (Fri 5/1) — Todd OOO auto-reply until Mon May 4th. Flag: Todd is a HIGH-priority sender but this is just his OOO bounce, no action required.
 
-- **Alex mentioned you: ps-brand pages updates WW** from Alex VanDerStuyf via Asana — "Hey Richard — I think you're seeing a cached version of the pages, take a look at these links (VPN required)." **Action: verify via VPN.** Rcvd Wed 20:39 UTC.
-- **New comment on: ps-brand pages updates WW** from Dwayne Palmer via Asana — "Once we've addressed the final requirements we should provide a single production URL per marketplace where Richard can go..." (same thread as Alex + Brandon above). Review only.
+## Low / No Action (summary)
 
-## Low / No Action (sampling by category)
-
-### Work signals worth noting
-- **2027 OP1 Registrations Inputs [Pending final workback]** from Cone, David — forwarded Brandon's thread on OP1 EU/JP SMB visibility. Review before weekly sync.
-- **Pre-Launch: Pay by Invoice Renaming to Business Credit Account on May 4** from Sharpnack, Louis — naming change effective 5/4. FYI.
-- **Launch announcement – Guided Buying CX revamp phase 3** from Janakiram M — FYI.
-- **Adobe "Today" Data** from Art Chuang — confirmation "today data" now visible in their UI. Review when pulling Adobe data.
-- **Hedy Session Recap: AU Paid Search Handover and Performance Review** from Hedy AI — recap of 4/28 meeting. Already captured by Subagent E.
-
-### Alerts / monitoring
-- **Adobe alert: Keyword clicks -50% 7-day rolling** — review, could matter.
-- **Google Ads user invited / added (AU account)** — routine, 2 notifications.
-- **ABMA - Unknown Ref Marker Report WW** from Quick Report — quarterly-ish report.
-- **Taskei Robot comment [MCS-2553]** — LP extension ticket update.
-
-### Training / corporate
-- Jasper.ai training × 2 (EU + West Coast Friendly).
-- AB Reshape 2026 nominations reminder.
-- Amazon Q1 2026 results announcement.
-- Trading Window Opens (Fri 5/1).
-- A to Z weekly + daily task digests.
-- Asana daily digest.
-- Asana unread notifications digest.
-- Blink Foxglove Beta × 3 (personal beta program).
-- AM Brief (self-sent).
-- Remi Schader (LiveRamp) — follow-up on canceled Monthly Status. Review if LiveRamp decisioning revives.
-- Google Ads invoice support follow-up (Kezia).
-- External: Faraz @ Houst (property inquiry, personal/spam).
-
-### Sent folder (your own replies)
-- Ref marker attribution reply to cansuozt (BALOO-8).
-- ABMA-11500 resurfaced to kanmal re: Lorena's question.
-- App OP1 Internal Review invite sent.
-- Google Drive sharing restriction reply to Zig.
+- 7 Apple Ads monthly billing summaries / March invoices (automated, attached)
+- 4 Google Ads admin user add notifications (IT/DE/ES/UK accounts)
+- 2 Adobe Advertising keyword-click alerts (-50% 7-day rolling) — worth a glance if accounts show softness
+- Asana digests (3): 19 overdue tasks, daily tasks-due summary, unread notifications
+- Foxglove Beta / Blink surveys (3) — personal
+- HQ1 May Day demonstration alerts (3) — security FYI, resolved All Clear
+- IT: laptop order created + expedite tag + upgrade reminder
+- Figma seat approved
+- Miscellaneous: GMV volunteer sign-up, RIF Book Kit event, AB Marketing Translation Newsletter, AB Selection & Value Marketing Wiki launch, Welcome to Brittany Parker, AWS event recap, AppTweak cancellation, misaddressed Brandon personal sign-in, external SMS cold outreach, Richard's own sent AM brief and Jasper.ai invite acceptance
 
 ---
-
-## Top 3 action-required for today (2026-04-30)
-
-1. **Brandon (HIGH):** Asana thread `ps-brand pages updates WW` — acknowledge her ownership call, then coordinate QA path with Alex VanDerStuyf (VPN-gated links). One thread, two names expecting Richard next.
-2. **Lorena (HIGH):** Reply to budget thread — she locked in $1.3M forecast + $435K to channel tests. Quick "confirmed, will update PO tracker" closes the loop.
-3. **Alex VanDerStuyf (MED):** Check the VPN links Alex provided for ps-brand pages. This is the execution half of Brandon's ownership call.
-
-All three tie to the same Polaris brand LP rollout workstream — handling them sequentially in one block closes the cluster.
-
----
-
-Synced: 2026-04-30 12:06 UTC | 36 emails | 3 HIGH / 2 MED / 31 LOW
-DuckDB: signals.emails (36 rows upserted) + ops.data_freshness updated.
+Synced: 2026-05-03 13:02 UTC | 59 emails processed | 3 high / 9 medium / 47 low | DuckDB: signals.emails +51 rows (709→760), main.calendar_events +10 rows (166→176, plus 49 upserts)

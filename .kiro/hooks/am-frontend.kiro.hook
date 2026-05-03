@@ -1,5 +1,5 @@
 {
-  "name": ".AM-Frontend: Brief + Triage + Command Center",
+  "name": ".AM-Frontend",
   "version": "3.0.0",
   "description": "Morning frontend: brief, triage, command center. Reads AM-Backend state.",
   "when": {

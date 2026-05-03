@@ -1,65 +1,66 @@
 {
   "schema_version": "1.0",
-  "last_scan_utc": "2026-04-30T12:50:00Z",
-  "last_scan_pt": "2026-04-30T05:50:00-07:00",
-  "scan_type": "am_backend_parallel_v2_b2",
-  "tasks_scanned_for_stories": 5,
-  "tasks_scanned_gids": [
-    "1214330286428120",
-    "1214384590122162",
-    "1214088494080582",
-    "1214044682239817",
-    "1213959904341162"
-  ],
-  "tasks_in_backlog": 74,
-  "prioritization_rules_applied": [
-    "Tasks with due_on = today or yesterday",
-    "Tasks with Brandon/Kate as recent commenter — none this window",
-    "Tasks with recent section moves — Kate demo moved WW→NA"
-  ],
-  "stale_state_flags": [
+  "last_scan_utc": "2026-05-03T13:32:00Z",
+  "last_scan_pt": "2026-05-03T06:32:00-07:00",
+  "scan_type": "am_backend_parallel_v2_b2_lean",
+  "tasks_scanned_for_stories": 0,
+  "tasks_scanned_gids": [],
+  "tasks_in_backlog": 82,
+  "scan_mode": "lean — skipped GetTaskStories scan, using Slack/Email digests for activity signal",
+  "rationale": "Phase 1 subagents (Slack +27 msgs, Email +51 msgs) already captured Brandon's MCS OP1 ask, Vijeth Browse Category CTA greenlight request, CVR LP personalization thread, and Kate quarterly TBR reschedule. GetTaskStories on 82 tasks would duplicate signal at high MCP cost.",
+  "stale_state_flags_carried_forward": [
     {
       "task_gid": "1213959904341162",
       "task_name": "Reply to Brandon — PAM budget needs assessment",
-      "status": "kill_decision_scheduled_5-5",
-      "days_overdue": 23,
-      "most_recent_event_utc": "2026-04-29T16:50:39Z",
-      "note": "Finally scheduled kill-or-revive at Brandon 1:1 Tue 5/5. Progress after 23d drift."
+      "status": "kill_decision_at_brandon_1on1_tue_5-5",
+      "days_overdue": 27
     },
     {
       "task_gid": "1214088494080582",
       "task_name": "Resolve MX duplicate invoice — Diana",
-      "status": "draft_saved_chase_pending",
-      "days_overdue": 2,
-      "most_recent_event_utc": "2026-04-28T13:32:12Z",
-      "note": "Draft saved 4/28 morning. Google ticket 0-1804000040849 open. Needs EOD send today."
+      "status": "google_ticket_0-1804000040849_open_chase_pending",
+      "days_overdue": 15
+    },
+    {
+      "task_gid": "1213764961716427",
+      "task_name": "WW weblab dial-up (Richard)",
+      "status": "stale_26d_needs_brandon_1on1_close_or_reframe",
+      "days_overdue": 26
     }
   ],
-  "completions_detected_not_yet_in_db": [],
-  "monday_create_signals": [
+  "new_signal_create_queue": [
     {
-      "source": "slack_dm-brandon_4-29",
-      "topic": "Polaris Br-pages QA consolidation (Richard as sole MCS consolidator)",
+      "source": "slack_dm-brandon_5-1",
+      "topic": "MCS Tech OP1 ideation",
       "brandon_direct_ask": true,
-      "matching_asana_task": null,
-      "action": "Create new Today-priority Sweep task: 'Polaris Br-pages QA consolidation — feedback doc + timeline for team + MCS.' Due 4/30 EOD."
+      "deadline": "2026-05-05 (OP1 Tech intake)",
+      "action_proposed": "Create Sweep task: 'Reply to Brandon — MCS Tech OP1 ideas (2 options)'. Due 5/4."
     },
     {
-      "source": "slack_dm-meganos_4-29",
-      "topic": "AU conversion-data methodology reply to Megan Oshry",
+      "source": "slack_dm-asana-bot_5-1",
+      "topic": "Vijeth Shetty Browse Category CTA — US greenlight",
       "brandon_direct_ask": false,
-      "matching_asana_task": null,
-      "action": "Create Sweep task: 'Reply to Megan Oshry — AU reftag + reg-database query share'. Due 5/1."
+      "action_proposed": "Create Sweep task: 'Reply to Vijeth — US Browse Category CTA greenlight or defer to Dwayne'. Due 5/4."
     },
     {
-      "source": "slack_mpdm-rasanmol_4-29",
-      "topic": "ABMA-11245 SIM intake — PS metrics clarification",
+      "source": "slack_mpdm-rasanmol_5-1",
+      "topic": "Mukesh Gupta — PS data pull approach for GenBI",
       "brandon_direct_ask": false,
-      "matching_asana_task": null,
-      "action": "Create Sweep task: 'Reply to Anmol Rastogi — PS metrics list for ABMA-11245'. Due 5/1."
+      "action_proposed": "Create Sweep task: 'Reply to Mukesh — current PS data pull approach + GenBI opportunity'. Due 5/5."
+    },
+    {
+      "source": "email_brandon_5-1",
+      "topic": "MBET issue reporting (PO #2D-19910168)",
+      "brandon_direct_ask": true,
+      "action_proposed": "Create Sweep task: 'Reply to Brandon — log MBET issues for visibility'. Due 5/5."
+    },
+    {
+      "source": "email_brandon_5-1_asana",
+      "topic": "Enhanced Match Legal — LR call scheduling",
+      "brandon_direct_ask": true,
+      "action_proposed": "Bundle with existing 1213964668984060 (Brandon 1:1: Draft Enhanced Match FAQ for legal) — schedule LR call next week."
     }
   ],
   "rate_limited": false,
-  "skipped_priority_tasks": 74,
-  "skipped_reason": "B2 budget — prioritize next run. All high-signal/Brandon-touched/due-this-week tasks captured this cycle."
+  "notes": "Schema drift fixed this run: AU + MX standalone projects confirmed archived, registry patched. B1 partial UPSERT completed. Full GetTaskStories scan deferred to next am-auto run."
 }

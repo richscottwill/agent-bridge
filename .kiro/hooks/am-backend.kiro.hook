@@ -8,8 +8,5 @@
   "then": {
     "type": "askAgent",
     "prompt": "Execute the AM-Backend parallel ingest + process protocol defined in ~/shared/context/protocols/am-backend-parallel.md. Read the protocol file first, then run all phases end-to-end. Output state files to ~/shared/context/active/ for AM-Frontend consumption.\n\nCommon failure: forgetting to check the output format matches the specification."
-  },
-  "enabled": true,
-  "workspaceFolderName": "prichwil",
-  "shortName": "am-backend"
+  }
 }

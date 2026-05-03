@@ -1,115 +1,23 @@
 {
-  "schema_version": "2.0",
-  "generated_at_utc": "2026-04-30T13:00:00Z",
-  "run_type": "am_backend_parallel_v2",
-  "phase": "2_processing",
-  "top_signals": [
-    {
-      "topic": "polaris-brand-lp",
-      "strength_added_this_scan": 6.0,
-      "cross_channel": ["slack:dm-brandon", "slack:ab-paid-search-global", "email:Brandon-Asana", "email:Alex-Asana", "email:Dwayne-Asana"],
-      "narrative": "Dominant topic. Brandon explicitly named Richard as sole MCS consolidator Wed. Yun's QA thread (subheadlines, ref tag overrides, page-load) + Alex/Dwayne Asana thread all routed through Richard. Needs feedback doc + timelines by EOD today.",
-      "richard_action_required": true,
-      "urgency": "critical"
-    },
-    {
-      "topic": "richard-responsiveness",
-      "strength_added_this_scan": 2.0,
-      "cross_channel": ["slack:dm-brandon"],
-      "narrative": "Two explicit Brandon coaching moments on Wed: 'need you to be responsive with the team' and 'important function to earn trust across the team if you're leading these WW updates.' Pattern: third recent Brandon signal on communicate-timelines-proactively. Unasked-question-log candidate.",
-      "richard_action_required": true,
-      "urgency": "high",
-      "unasked_question_candidate": true
-    },
-    {
-      "topic": "mcs-coordination-ownership",
-      "strength_added_this_scan": 2.0,
-      "cross_channel": ["slack:dm-brandon", "slack:ab-paid-search-global", "email:Brandon-Asana"],
-      "narrative": "Brandon designated Richard single point of contact for MCS on Polaris Br-pages. No segmented feedback. Richard needs to set recurring sync with Alex where Alex defers.",
-      "richard_action_required": true,
-      "urgency": "high"
-    },
-    {
-      "topic": "au-reftag-reg-data",
-      "strength_added_this_scan": 2.0,
-      "cross_channel": ["slack:dm-meganos"],
-      "narrative": "Megan Oshry (new DM) asking about AU Google Ads conversion data methodology. Wants the reftag + reg-database query. Owed response + query share.",
-      "richard_action_required": true,
-      "urgency": "medium"
-    },
-    {
-      "topic": "sim-abma-ps-metrics",
-      "strength_added_this_scan": 1.0,
-      "cross_channel": ["slack:mpdm-rasanmol"],
-      "narrative": "Anmol Rastogi asking Richard to clarify ABMA-11245 SIM intake: which PS data metrics are needed. Owed specific metric list.",
-      "richard_action_required": true,
-      "urgency": "medium"
-    },
-    {
-      "topic": "op1-cpi-app",
-      "strength_added_this_scan": 1.5,
-      "cross_channel": ["hedy:brandon-1on1-4-28", "asana:1214384590122162"],
-      "narrative": "OP1 app acquisition projections due today 2-3pm PT Peter sync. Flat YoY budget per Kate/Todd. CPI adopted as primary optimization metric. DE/ES efficient per Brandon 1:1 4/28.",
-      "richard_action_required": true,
-      "urgency": "critical"
-    },
-    {
-      "topic": "mx-dupe-invoice",
-      "strength_added_this_scan": 1.0,
-      "cross_channel": ["email:Diana", "asana:1214088494080582"],
-      "narrative": "MX duplicate invoice $56K (PO Q1 MS-20200908). Google support ticket 0-1804000040849 open. Draft reply saved 4/28. 12d overdue.",
-      "richard_action_required": true,
-      "urgency": "high"
-    },
-    {
-      "topic": "ai-tooling-ab-spend-match",
-      "strength_added_this_scan": 0.5,
-      "cross_channel": ["slack:cps-ai-win-share-learn"],
-      "narrative": "AB Manage Spend Match agent on Agent Registry hit 85% match rate on 1,500-product file in <10 min. L3-L5 tooling signal.",
-      "richard_action_required": false,
-      "urgency": "info"
-    }
+  "generated_at_utc": "2026-05-03T13:35:00Z",
+  "phase": "2.5C completion + wiki candidate surfacing",
+  "top_10_active_signals": [
+    {"topic": "polaris-brand-lp", "strength": 22.12, "channels": 6, "mentions": 14, "trend": "strong_ongoing"},
+    {"topic": "oci-rollout", "strength": 8.15, "channels": 3, "mentions": 5, "trend": "cooling"},
+    {"topic": "au-cpa-cvr", "strength": 6.37, "channels": 4, "mentions": 5, "trend": "reinforced_today"},
+    {"topic": "op1-strategy", "strength": 4.95, "channels": 3, "mentions": 3, "trend": "reinforced_today"},
+    {"topic": "mcs-coordination-ownership", "strength": 4.02, "channels": 2, "mentions": 3, "trend": "reinforced_today"},
+    {"topic": "mx-budget-ieccp", "strength": 4.37, "channels": 2, "mentions": 3, "trend": "stable"},
+    {"topic": "op1-forecast-flat-budget", "strength": 3.53, "channels": 2, "mentions": 2, "trend": "stable"},
+    {"topic": "au-transition", "strength": 3.53, "channels": 2, "mentions": 2, "trend": "stable"},
+    {"topic": "liveramp-enhanced-match", "strength": 2.39, "channels": 2, "mentions": 5, "trend": "cooling"},
+    {"topic": "ps-feedback-process", "strength": 1.62, "channels": 2, "mentions": 2, "trend": "stable"}
   ],
-  "signals_reinforced_from_previous": 3,
-  "signals_new_this_run": 8,
-  "bucket_cap_violations": {
-    "sweep": {"count": 18, "cap": 5, "over_by": 13, "status": "critical_overcap"},
-    "core": {"count": 10, "cap": 4, "over_by": 6, "status": "critical_overcap"},
-    "engine_room": {"count": 18, "cap": 6, "over_by": 12, "status": "critical_overcap"},
-    "admin": {"count": 14, "cap": 3, "over_by": 11, "status": "critical_overcap"},
-    "wiki": {"count": 3, "cap": null, "status": "within_norms"}
-  },
-  "overdue_clusters": {
-    "totals_by_age": {
-      "3_to_7_days": 6,
-      "8_to_14_days": 9,
-      "15_to_30_days": 5,
-      "30_plus_days": 2
-    },
-    "kill_candidates": [
-      "1213959904341162 (Reply to Brandon — PAM budget, 23d OD, scheduled kill-decision 5/5)",
-      "1214080130329568 (Make changes to AU/MX/PAM, 34d OD, replace w/ fresh weekly instance)",
-      "1213875146955582 (Get Enhanced Match details, 21d OD, bundle w/ PAM decision)",
-      "1213962513760099 (Automated ASP confirmation reminders, 19d OD)",
-      "1213968042348601 (IECCP FAQ for new-account playbook, 19d OD)",
-      "1214146145384078 (Kingpin MX, 35d Andes-blocked, 'forget about this task' per Richard)"
-    ],
-    "duplicates_to_merge": [
-      {"keep": "1213690904654138", "close": "1214216689942612", "reason": "Both are monthly Individual Goals update reminders"}
-    ]
-  },
-  "hard_thing_now": {
-    "current": "Polaris Brand LP consolidation (MCS coordination + feedback doc)",
-    "replaces": "Testing Document for Kate (closed 4/27 as obsolete)",
-    "source": "Brandon DM 4/29 + ab-paid-search-global thread 4/29",
-    "first_action_today": "Create consolidated feedback doc + email MCS with timeline, before Brandon 1:1 1:30 PM PT"
-  },
-  "five_levels_allocation_this_week": {
-    "L1_sharpen_yourself": "One-third — wiki articles in Review, Brandon coaching signals, MBR callout due 5/2",
-    "L2_drive_ww_testing": "One-third — Polaris LP consolidation, MX NB LP test, Brand LP alt-measurement design, OP1 Peter sync",
-    "L3_team_automation": "Minimal — one bi-weekly Adi sync scheduled 4/29",
-    "L4_zero_click_future": "None",
-    "L5_agentic_orchestration": "Minimal — Kate AI demo prep queued for May 29",
-    "flag": "L3 + L4 + L5 combined < 15% this week. Richard is stuck at L1/L2, which is OK for current Brandon-visible work, but will be a Kate conversation in 30-60 days if it persists."
-  }
+  "new_signals_created_this_run": ["mx-category-lp", "ps-data-gap", "ai-tooling-cbr", "mutation-testing", "agentspaces-platform", "deep-linking-ref-tags"],
+  "wiki_candidates": [],
+  "hard_thing_candidates": [
+    {"rank": 1, "topic": "polaris-brand-lp", "score": 22.12, "mode": "valuable-and-avoided", "days_since_richard_artifact": 6},
+    {"rank": 2, "topic": "oci-rollout", "score": 8.15, "mode": "valuable-and-avoided", "days_since_richard_artifact": 16},
+    {"rank": 3, "topic": "au-cpa-cvr", "score": 6.37, "mode": "valuable-and-avoided", "days_since_richard_artifact": 2}
+  ]
 }

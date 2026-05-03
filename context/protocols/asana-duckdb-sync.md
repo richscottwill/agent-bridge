@@ -16,11 +16,12 @@ DB path: `/home/prichwil/shared/data/duckdb/ps-analytics.duckdb`
 | Project | GID |
 |---------|-----|
 | My Tasks | `1212732838073807` |
-| AU | `1212762061512767` |
-| MX | `1212775592612917` |
 | WW Testing | `1205997667578893` |
 | WW Acquisition | `1206011235630048` |
 | Paid App | `1205997667578886` |
+| ABIX | `1206497185559287` |
+
+**Note (2026-05-03):** Standalone AU and MX project GIDs (previously `1212762061512767` and `1212775592612917`) were archived/consolidated into **ABIX** (`1206497185559287`) and **WW Testing & Projects** (`1205997667578893`). Market-specific tasks are now identified via section names (`NA`, `WW`, or `ABIX`) and task name patterns (e.g., `MX Polaris NB LP Test`, `AU handover`). The pinned context tasks remain as reference anchors: AU context = `1213917747438931`, MX context = `1213917639688517`. Do not call `GetTasksFromProject` with the old AU/MX GIDs — they will 424.
 
 **Wiki articles are NOT synced via Asana.** The wiki artifact pipeline lives in `~/shared/wiki/agent-created/` (source of truth) → SharePoint `Documents/Artifacts/` (published .docx) → Kiro dashboard `shared/dashboards/wiki-search.html` (search + pipeline view). Do not add article-tracking projects to this sync.
 
