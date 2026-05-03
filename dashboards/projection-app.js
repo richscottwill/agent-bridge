@@ -4405,4 +4405,165 @@
   // inside the IIFE scope for normal JS access; inline HTML onclick
   // evaluates against the global scope so we pin it on window.
   window.toggleHeatgridMode = toggleHeatgridMode;
+
+  // =========================================================================
+  // #99 (2026-05-01): Explain-this-number (right-click → floating card)
+  // =========================================================================
+  // Spec: right-click any number on the page to get a plain-English narration
+  // of how it was computed and what moved it this week. Scope-cut: no LLM —
+  // deterministic composition from existing provenance metadata on
+  // STATE.currentOutput.provenance (attached by attachProvenanceOnApp above,
+  // Bug 3 field from commit 26ad2dd). Templated sentence per tile type.
+  //
+  // Covers the main hero KPI tiles (#hero-number, kpi-brand-regs, kpi-nb-regs,
+  // kpi-cpa, kpi-ieccp, kpi-op2-spend, kpi-op2-regs) plus any element marked
+  // with class .hero-kpi-value / .kpi-op2-row-value. ESC or click-outside
+  // dismisses the card.
+
+  // Map DOM element id → provenance tile key. Other id patterns (kpi-*-delta,
+  // sparkline chart points) fall through and show a "no narration available"
+  // hint rather than surfacing the wrong tile.
+  const EXPLAIN_ID_TO_TILE = {
+    'hero-number':    'totals.total_regs',
+    'hero-secondary': 'totals.total_spend',
+    'kpi-brand-regs': 'totals.brand_regs',
+    'kpi-nb-regs':    'totals.nb_regs',
+    'kpi-cpa':        'totals.blended_cpa',
+    'kpi-ieccp':      'totals.computed_ieccp',
+    'kpi-op2-spend':  'totals.total_spend',
+    'kpi-op2-regs':   'totals.total_regs',
+  };
+
+  // Human-readable labels for each tile key.
+  const EXPLAIN_TILE_LABELS = {
+    'totals.total_regs':     'Total Registrations',
+    'totals.total_spend':    'Total Spend',
+    'totals.brand_regs':     'Brand Registrations',
+    'totals.nb_regs':        'Non-Brand Registrations',
+    'totals.blended_cpa':    'Blended Cost per Registration',
+    'totals.computed_ieccp': 'Efficiency (IECCP)',
+  };
+
+  function buildExplainCardHtml(el) {
+    const tileKey = el.dataset.explainTile || EXPLAIN_ID_TO_TILE[el.id] || null;
+    const displayedValue = (el.textContent || '').trim();
+    const label = tileKey ? (EXPLAIN_TILE_LABELS[tileKey] || tileKey) : (el.getAttribute('aria-label') || el.id || 'This number');
+
+    let provHtml = '';
+    let narrationHtml = '';
+    const out = STATE && STATE.currentOutput;
+    const prov = out && out.provenance;
+    const tile = (tileKey && prov && prov[tileKey]) || null;
+
+    if (tile) {
+      const src = tile.source_file || '—';
+      const fit = tile.fit_call || '';
+      const stamp = tile.last_computed
+        ? new Date(tile.last_computed).toLocaleString()
+        : '—';
+      const sql = tile.sql_or_fn || '';
+      const scenario = (STATE && STATE.activeChipId) || 'mixed';
+
+      // Deterministic narration: what the number is, where it comes from,
+      // how fresh it is, and what scenario is currently applied.
+      const parts = [];
+      parts.push(label + ' for the current scope, scenario <b>' + scenario + '</b>.');
+      parts.push('Computed by <code>' + escapeHtml(src) + '</code>, last refreshed ' + escapeHtml(stamp) + '.');
+      if (fit) {
+        parts.push('Model fit: <code>' + escapeHtml(fit) + '</code>.');
+      }
+      narrationHtml = parts.map(p => '<div style="margin:4px 0">' + p + '</div>').join('');
+
+      if (sql) {
+        provHtml =
+          '<div style="font-size:11px;color:var(--color-text-subtle);margin-top:8px">Source:</div>' +
+          '<pre style="margin:4px 0 0;padding:6px;background:#F5F5F5;border-radius:3px;' +
+          'font-size:10px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;' +
+          'max-height:120px">' + escapeHtml(sql) + '</pre>';
+      }
+    } else {
+      narrationHtml =
+        '<div style="margin:4px 0">' + escapeHtml(label) + ' — no provenance entry attached. ' +
+        'Open the Model View drawer to see the full parameter + provenance table.</div>';
+    }
+
+    return (
+      '<div style="font-weight:600;font-size:13px;margin-bottom:6px">' + escapeHtml(label) + '</div>' +
+      '<div style="font-size:18px;font-variant-numeric:tabular-nums;margin-bottom:8px">' + escapeHtml(displayedValue) + '</div>' +
+      '<div style="font-size:12px;line-height:1.5;color:var(--color-text-body)">' + narrationHtml + '</div>' +
+      provHtml +
+      '<div style="margin-top:10px;font-size:10px;color:var(--color-text-subtle)">ESC or click outside to close</div>'
+    );
+  }
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, c => (
+      { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]
+    ));
+  }
+
+  let explainCardEl = null;
+
+  function dismissExplainCard() {
+    if (explainCardEl && explainCardEl.parentNode) {
+      explainCardEl.parentNode.removeChild(explainCardEl);
+    }
+    explainCardEl = null;
+  }
+
+  function showExplainCard(el, x, y) {
+    dismissExplainCard();
+    const card = document.createElement('div');
+    card.id = 'explain-card';
+    card.setAttribute('role', 'dialog');
+    card.setAttribute('aria-label', 'Explain this number');
+    card.style.cssText = [
+      'position:fixed',
+      'z-index:9999',
+      'max-width:360px',
+      'min-width:240px',
+      'background:var(--color-surface, #FFFFFF)',
+      'color:var(--color-text-body, #1B1B1B)',
+      'border:1px solid var(--color-border, #D1D5DB)',
+      'border-radius:6px',
+      'box-shadow:0 6px 18px rgba(0,0,0,0.15)',
+      'padding:10px 12px',
+      'font-family:inherit',
+    ].join(';');
+    card.innerHTML = buildExplainCardHtml(el);
+    document.body.appendChild(card);
+    // Position: clamp to viewport.
+    const w = card.offsetWidth;
+    const h = card.offsetHeight;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const px = Math.max(8, Math.min(x, vw - w - 8));
+    const py = Math.max(8, Math.min(y, vh - h - 8));
+    card.style.left = px + 'px';
+    card.style.top = py + 'px';
+    explainCardEl = card;
+  }
+
+  // Attach a single delegated contextmenu handler on document. Much cheaper
+  // than per-element handlers and survives re-renders without rewiring.
+  document.addEventListener('contextmenu', function (e) {
+    const el = e.target && e.target.closest(
+      '.hero-kpi-value, .kpi-op2-row-value, #hero-number, #hero-secondary, [data-explain-tile]'
+    );
+    if (!el) return;
+    e.preventDefault();
+    showExplainCard(el, e.clientX, e.clientY);
+  });
+
+  // Click-outside and ESC dismiss the card.
+  document.addEventListener('click', function (e) {
+    if (!explainCardEl) return;
+    if (explainCardEl.contains(e.target)) return;
+    dismissExplainCard();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && explainCardEl) {
+      dismissExplainCard();
+    }
+  });
 })();
