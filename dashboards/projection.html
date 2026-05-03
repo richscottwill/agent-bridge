@@ -462,8 +462,30 @@ details.sec-panel:not([open]) + details.sec-panel {
        merges solver warnings in as info-severity rows. The legacy
        standalone "Warnings" sec-panel below is hidden by renderWarnings
        on first render. -->
+  <!-- #88 (2026-05-01): recommendation-change notification. The bell badge
+       lights up when the current recommendation (scope + scenario + top alert
+       severity) differs from the last one the user saw. Click-to-dismiss
+       writes the signature to localStorage. "Notify me" opens a pre-composed
+       Slack DM (no server required — same slack.com/app_redirect pattern as
+       weekly-review #41). Reframes the original "Slack DM on change" spec
+       as a local, pull-based notification so it works without an integration. -->
   <div class="sec-panel" id="anomalies-panel" style="display:none;margin-top:var(--gap-lg);border-color:#F2A4A4">
-    <h3>Alerts <span id="anomalies-count" style="font-weight:400;color:var(--color-text-subtle)"></span></h3>
+    <h3 style="display:flex;align-items:center;gap:var(--gap-sm)">
+      <span>Alerts</span>
+      <span id="anomalies-count" style="font-weight:400;color:var(--color-text-subtle)"></span>
+      <span id="reco-bell" role="button" tabindex="0"
+            title="Recommendation changed since you last looked — click to notify or dismiss"
+            aria-label="Recommendation change notification"
+            style="display:none;margin-left:auto;font-size:12px;font-weight:400;
+                   padding:2px 8px;border-radius:10px;border:1px solid var(--color-warning);
+                   background:rgba(255,165,0,0.1);color:var(--color-warning);cursor:pointer;
+                   user-select:none;line-height:1.4">
+        <span id="reco-bell-dot" style="display:inline-block;width:6px;height:6px;
+                                         border-radius:50%;background:var(--color-warning);
+                                         margin-right:6px;vertical-align:middle"></span>
+        <span>New recommendation</span>
+      </span>
+    </h3>
     <ul id="anomalies-list"></ul>
   </div>
 

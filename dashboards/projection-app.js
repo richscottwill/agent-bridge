@@ -398,6 +398,73 @@
         }
       });
     });
+    // #88 (2026-05-01): after the list is populated, update the bell badge.
+    // Compute a signature from scope + scenario + top alert and compare
+    // against the last one the user dismissed. If different, show the bell.
+    updateRecoBell(marketCode, rows);
+  }
+
+  // #88 (2026-05-01): Recommendation-change notification badge.
+  //
+  // Signature = scope + activeChipId + top-severity alert (or 'clean' if none).
+  // Stored in localStorage under 'proj-last-recommendation'. When current
+  // signature differs, render the bell. Click on bell opens a Slack deep-link
+  // with a pre-composed DM to the user; any click or 'Notify me' action
+  // dismisses by writing the current signature to localStorage.
+  //
+  // Same pattern as weekly-review #41 notify-Brandon — slack.com/app_redirect
+  // URL opens the native Slack app with a pre-composed message; the user
+  // hits send manually. No server integration needed.
+  function updateRecoBell(marketCode, rows) {
+    const bell = document.getElementById('reco-bell');
+    if (!bell) return;
+    const scenario = (typeof STATE !== 'undefined' && STATE.activeChipId) || 'mixed';
+    const top = Array.isArray(rows) && rows.length
+      ? (rows[0].check || rows[0].raw || 'alert') + ':' + (rows[0].severity || 'info')
+      : 'clean';
+    const sig = marketCode + '|' + scenario + '|' + top;
+    const KEY = 'proj-last-recommendation';
+    let last = '';
+    try { last = localStorage.getItem(KEY) || ''; } catch (e) { /* private mode */ }
+    if (!last) {
+      // First load — seed the baseline silently; don't show the bell.
+      try { localStorage.setItem(KEY, sig); } catch (e) { /* private mode */ }
+      bell.style.display = 'none';
+      return;
+    }
+    if (last === sig) {
+      bell.style.display = 'none';
+      return;
+    }
+    // Recommendation changed. Show bell with click-to-notify + click-to-dismiss.
+    bell.style.display = 'inline-flex';
+    bell.onclick = function (e) {
+      e.preventDefault();
+      const ppLast = last.split('|');
+      const ppNow = sig.split('|');
+      const pretty = (s) => {
+        if (!s || s === 'clean') return 'no alerts';
+        return s.replace(/:/g, ' (') + ')';
+      };
+      const body =
+        'Projection recommendation changed for ' + marketCode + '.\n\n' +
+        'Was: ' + (ppLast[0] || '?') + ' / ' + (ppLast[1] || '?') + ' / ' + pretty(ppLast[2] || 'clean') + '\n' +
+        'Now: ' + ppNow[0] + ' / ' + ppNow[1] + ' / ' + pretty(ppNow[2]) + '\n\n' +
+        'Link: ' + window.location.href;
+      // slack.com/app_redirect opens Slack with a pre-composed message.
+      // Leaving channel blank opens the compose modal; user picks recipient.
+      const slackUrl = 'https://slack.com/app_redirect?channel=&text=' + encodeURIComponent(body);
+      try { window.open(slackUrl, '_blank', 'noopener'); } catch (err) { /* popup blocked */ }
+      // Dismiss — write the current signature so the bell clears.
+      try { localStorage.setItem(KEY, sig); } catch (err) { /* private mode */ }
+      bell.style.display = 'none';
+    };
+    bell.onkeydown = function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        bell.click();
+      }
+    };
   }
 
   // ========================================================================
