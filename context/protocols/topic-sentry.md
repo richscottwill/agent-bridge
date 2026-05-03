@@ -146,7 +146,7 @@ Push `topic-sentry.md` to `Kiro-Drive/system-state/topic-sentry-YYYY-MM-DD.md` f
 - Line 3 bold `**Five Levels coverage (by hit count):** L1: X · L2: X · L3: X · L4: X · L5: X · operational: X`
 - First bullet under each H3 (used as one-line summary in brief)
 
-Topic Sentry produces `~/shared/context/active/topic-sentry.md`. AM-Frontend (hook #1 `.AM-Frontend: Brief + Triage + Command Center`) reads this file during Step 1 Brief — see `am-frontend.md` § Topic Radar Section. The frontend:
+Topic Sentry produces `~/shared/context/active/topic-sentry.md`. AM-Frontend (hook `.AM-Frontend`) reads this file during Step 1 Brief — see `am-frontend.md` § Topic Radar Section. The frontend:
 
 
 This is the structural closure of the loop — without AM-Frontend consuming the file, Sentry produces unread output. The Brief's Topic Radar section renders:

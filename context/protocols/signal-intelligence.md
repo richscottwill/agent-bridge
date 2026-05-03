@@ -28,13 +28,13 @@ Every mention of a topic across any channel creates or reinforces a signal in `s
 
 | Channel | Source | How Topics Are Extracted | Source ID |
 |---------|--------|------------------------|-----------|
-| Slack | AM-1 Slack scan | FTS match_bm25 against known topics + new topic detection from high-relevance messages | message ts |
-| Email | AM-1 email triage | Subject line + body keyword extraction | conversation id |
+| Slack | AM-Backend Slack scan | FTS match_bm25 against known topics + new topic detection from high-relevance messages | message ts |
+| Email | AM-Backend email triage | Subject line + body keyword extraction | conversation id |
 
 #### Channel-Specific Ingestion — Details
 
-| Asana | AM-2 task scan | Task name + description keywords, comment mentions | task gid |
-| Hedy | EOD-1 meeting sync | Meeting transcript topic extraction, agenda items | session id |
+| Asana | AM-Backend task scan | Task name + description keywords, comment mentions | task gid |
+| Hedy | EOD meeting sync | Meeting transcript topic extraction, agenda items | session id |
 
 
 
@@ -61,9 +61,9 @@ Topics are lowercase, hyphenated slugs: `oci-rollout`, `au-cpa-cvr`, `mx-budget-
 
 
 
-## Use Case 1: AM-1 Signal Reinforcement (replaces simple dedup)
+## Use Case 1: AM-Backend Signal Reinforcement (replaces simple dedup)
 
-During AM-1 Slack/Email ingestion:
+During AM-Backend Slack/Email ingestion:
 
 1. For each new message/email, extract topic keywords.
 2. FTS search existing slack_messages: `match_bm25(ts, 'topic keywords')`.
@@ -76,7 +76,7 @@ During AM-1 Slack/Email ingestion:
 5. For email: same logic but without BM25 (keyword match against signal_tracker topics instead).
 6. For Asana task comments: extract topic from task name + comment, match against signal_tracker.
 
-**Decay step (run once per AM-1):**
+**Decay step (run once per AM-Backend):**
 ```sql
 UPDATE signal_tracker 
 SET signal_strength = signal_strength * 0.9,
@@ -176,7 +176,7 @@ Output format for wiki-editor:
 
 ## Use Case 5: Meeting Prep Auto-Context
 
-During AM-3 meeting prep:
+During AM-Frontend meeting prep:
 
 1. For each upcoming meeting, identify attendees.
 2. Query signal_tracker for each attendee's recent topics:
@@ -229,7 +229,7 @@ These weights are applied during the reinforcement step in Use Case 1.
 A topic that appears in 3+ channels is qualitatively different from one in 1 channel:
 - 1 channel: noise until reinforced
 - 2 channels: emerging signal
-- 3+ channels: confirmed trend — auto-flag for AM-2 triage priority boost
+- 3+ channels: confirmed trend — auto-flag for AM-Frontend triage priority boost
 
 ---
 
@@ -253,9 +253,8 @@ A topic that appears in 3+ channels is qualitatively different from one in 1 cha
 
 | Hook/Protocol | How It Uses Signals |
 |---------------|-------------------|
-| AM-1 (am-auto) | Ingest: create/reinforce signals. Run decay step. |
-| AM-2 (am-triage) | Priority boost for tasks matching trending topics. |
-| AM-3 (am-auto) | Meeting prep: auto-load attendee topics. Daily brief: include trending signals. |
+| AM-Backend (am-backend) | Ingest: create/reinforce signals. Run decay step. |
+| AM-Frontend (am-frontend) | Priority boost for tasks matching trending topics. Meeting prep: auto-load attendee topics. Daily brief: include trending signals. |
 | Callout pipeline | Analyst step: query evidence for callout topic. |
 | Wiki lint (EOD Phase 4) | Freshness validation + idea sourcing from signal_wiki_candidates. |
 | Context-preloader | Auto-load signal context when user mentions a person + topic. |

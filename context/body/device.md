@@ -46,7 +46,7 @@ These are live. They execute without Richard thinking.
 - Sequential processing: signal routing, enrichment, portfolio scan
 - SharePoint sync. ~12 min. Protocol: `am-backend-parallel.md`
 
-**AM-Frontend** (`am-triage`):
+**AM-Frontend** (`am-frontend`):
 - Interactive: daily brief, email brief, calendar blocks, enrichment execution, ABPS AI triage, portfolio alerts, command center
 - Reads backend state (local first, SharePoint fallback). ~10 min. Protocol: `am-frontend.md`
 

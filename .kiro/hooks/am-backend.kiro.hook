@@ -1,5 +1,5 @@
 {
-  "name": ".AM-Backend: Ingest + Process",
+  "name": ".AM-Backend",
   "version": "5.2.1",
   "description": "Manual-trigger backend orchestration. Was previously promptSubmit (v5.1.0) which injected ~2k tokens of context into every chat \u2014 Mario/pi thesis: the context must be Richard's. Now userTriggered: fires only when Richard explicitly runs the hook. Display name prefixed with '.' to match .AM-Frontend convention. Underlying protocol (~/shared/context/protocols/am-backend-parallel.md) is unchanged. Re-enabled 2026-04-22.",
   "when": {
