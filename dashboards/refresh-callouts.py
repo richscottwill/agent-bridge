@@ -997,6 +997,22 @@ def main():
     weeks = sorted(weeks, reverse=True)
     print(f"Found weeks: {weeks}")
 
+    # 2026-05-04: Drop any discovered week that exceeds forecast.max_week — i.e.
+    # weeks where callout markdown files exist but the backend data refresh hasn't
+    # landed yet. Rendering a week with regs=None produces a "0" column in the WR
+    # sparkline and fabricated headlines (per-market synthesizers carry over stale
+    # copy). The rule: if we don't have the backend data, we don't render the week.
+    #
+    # forecast.max_week is the authoritative cutoff — set by refresh-forecast.py
+    # from the Redshift data landing, not from callout-file existence.
+    fc_max_wk = forecast.get("max_week")
+    if isinstance(fc_max_wk, int) and fc_max_wk > 0:
+        before = list(weeks)
+        weeks = [w for w in weeks if w <= fc_max_wk]
+        dropped = [w for w in before if w > fc_max_wk]
+        if dropped:
+            print(f"Dropped incomplete weeks (> forecast.max_week={fc_max_wk}): {dropped}")
+
     # Load WW summaries and projections
     ww_summaries = {}
     proj_data = {}
