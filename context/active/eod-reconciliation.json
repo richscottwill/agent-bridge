@@ -1,110 +1,40 @@
 {
-  "generated": "2026-04-27",
-  "status": "completed",
-  "run_context": "First EOD since 4/22. RW OOO Thu 4/23 – Sun 4/26. Returned Monday 4/27. DuckDB last sync 4/25 18:58 PT (stale 48h at run time). Delta sync executed on email-derived signals only since Asana signals since 4/25 are already in DuckDB from AM-backend.",
+  "generated": "2026-05-05",
+  "mode": "degraded-auth",
+  "auth_state": "Midway cookie 401 against amazon.sharepoint.com; all aim-launched MCPs (Slack/SharePoint/Outlook/Asana) blocked. DuckDB-only path.",
   "completed_today": [],
-  "completed_today_count": 0,
-  "completed_today_note": "Zero task completions on 4/27. RW first day back from OOO; day was spent reabsorbing context and triaging backlog, not shipping.",
+  "completed_today_note": "No Asana completions in last 24h per DuckDB (last sync 2026-05-04 14:50 UTC). Cannot confirm in-flight completions without fresh Asana read.",
   "carried_forward": [
-    {
-      "task_gid": "1214128634505816",
-      "name": "AU handover: switched to max clicks 4/17; check account Monday and make changes to budgets as needed.",
-      "from_priority": "Today",
-      "to_priority": "Urgent",
-      "reason": "Was flagged as Today since before OOO. Not actioned 4/27. 8 days since max-clicks switch — AU account unchecked for ~11 calendar days now.",
-      "next_action": "Check AU genbi account post max-clicks: traffic, CPA, impression volume. Adjust budgets if over-pacing."
-    },
-    {
-      "task_gid": "1213125740755931",
-      "name": "Email overlay WW rollout/testing",
-      "from_priority": "Today",
-      "to_priority": "Urgent",
-      "reason": "Due date 4/18 (was 4/24 after earlier bump). Brandon's Outbound Marketing Goals reply still unaddressed. Not progressed during OOO.",
-      "next_action": "Reply to Brandon on Outbound Marketing Goals re: overlay status. Link MCS-2553 work as the path."
-    }
+    {"gid": "1214351597615320", "name": "Clarify CAT vs MCS email overlay status for Outbound Marketing Goals", "reason": "still Today + overdue 7d (due 4/28) — Brandon ask; demote queued (write blocked)", "next_action": "Tue AM route to Brandon 1:1 ask batch once auth returns"},
+    {"gid": "1214384590122162", "name": "OP1 app acquisition projections — Peter sync Wed 4/30 2-3pm", "reason": "overdue 5d; meeting was last week — status update needed", "next_action": "Confirm Peter sync outcome; reclassify to Urgent + update Kiro_RW"},
+    {"gid": "1214450305673189", "name": "Convert promptSubmit hooks to userTriggered — market-constraints-staleness + open-items-reminder", "reason": "overdue 1d (due 5/4); L3 Engine Room work — self-owned", "next_action": "Ship this week; demote to Urgent"}
   ],
-  "carried_forward_count": 2,
-  "new_tasks": [
-    {
-      "task_gid": "1214330286428120",
-      "name": "Kate AB Marketing AI demo (May 29) — prep Kiro PS use cases with Adi",
-      "source": "Brandon 4/22 email (FW: [Monthly] AB Marketing AI sync)",
-      "due_on": "2026-05-29",
-      "start_on": "2026-05-04",
-      "project": "WW Testing",
-      "routine": "Core",
-      "priority": "Urgent",
-      "importance": "Important",
-      "strategic_weight": "Five Levels: L3 + L5 signal. Kate-visible demo. Kiro PS use cases that Adi has already adopted become visible up the chain. Direct line to Todd-level visibility via Kate."
-    },
-    {
-      "task_gid": "1214330104198712",
-      "name": "Brand LP AU/MX test design — alternate measurement (non-weblab) for MCS vs Reg Start",
-      "source": "Brandon/Dwayne 4/24 thread (RE: Brand LP - Consolidated feedback)",
-      "due_on": "2026-05-06",
-      "project": "WW Testing",
-      "routine": "Core",
-      "priority": "Urgent",
-      "importance": "Important",
-      "strategic_weight": "Five Levels: L2. Brandon-assigned, MCS-facing. Opportunity to design rigorous alternate measurement (pre/post, holdout, staggered ramp) and publish. Testing Approach credibility builder."
-    },
-    {
-      "task_gid": "1214330091433878",
-      "name": "Google Ads MCC SSO admin — confirm ownership + adopt Teams workflow (by May 4)",
-      "source": "Rykier 4/24 email",
-      "due_on": "2026-05-04",
-      "project": "My Tasks",
-      "routine": "Admin",
-      "priority": "Urgent",
-      "strategic_weight": "Five Levels: L1 admin (protect). Hard external deadline: after 05/04, unmanaged new users get auto-revoked. Potentially an L3 tool moment if Richard builds a standard new-user-add doc for the team across 10 markets."
-    }
-  ],
-  "new_tasks_count": 3,
+  "daily_reset_status": "QUEUED — 3 Today→Urgent demotions pending; cannot write to Asana (MCP auth blocked). Will execute on next authed run.",
+  "new_tasks": [],
+  "new_tasks_note": "No new triage signals in last 24h per signal_tracker (last ingest 2026-05-04 14:50 UTC).",
   "recurring_proposals": [],
-  "recurring_proposals_note": "No completions today → no recurring instances to create. Monday's EU SSR and Weekly Reporting tasks may need manual kickoff Tue 4/28 morning (RW returns to normal cadence).",
-  "blocker_updates": [
-    {
-      "task_gid": "1214145907193550",
-      "name": "ESCALATE: MX Auto page — Vijeth footer blocked",
-      "days_blocked": 32,
-      "status": "unchanged — still blocked on Vijeth footer delivery"
-    },
-    {
-      "task_gid": "1214146145384078",
-      "name": "ESCALATE: Kingpin Goals MX — Andes data",
-      "days_blocked": 35,
-      "status": "unchanged — still blocked on Andes"
-    },
-    {
-      "task_gid": "1214081017092577",
-      "name": "MCS LP Review: Connect with Lorena on paid social/PS synergy",
-      "days_overdue": 11,
-      "status": "carry-over — no movement during OOO"
-    }
-  ],
+  "blocker_updates": [],
   "five_levels": {
-    "L1": 0,
+    "L1": 1,
     "L2": 0,
-    "L3": 0,
+    "L3": 1,
     "L4": 0,
     "L5": 0,
-    "note": "Zero-effort day across all levels. Consistent with first-day-back-from-OOO context re-absorption. Will not count as a streak reset because OOO days don't accumulate workdays-at-zero (see rw-tracker 4/24-4/25 entries). Today (4/27) IS a regular workday — counts as workday #4 at zero for the hard thing."
+    "unclassified": 1,
+    "note": "Of today's 3 Today-tagged tasks: 1 Admin (L1), 1 Engine Room (L3), 1 My Tasks uncategorized routine. No L1 artifact shipped — workdays_at_zero now 4."
   },
+  "overdue_count": 35,
   "portfolio_changes": {
-    "tasks_created_on_RW": 3,
-    "tasks_completed_on_RW": 0,
-    "tasks_demoted_today_to_urgent": 2,
-    "duckdb_sync_lag_hours": 48,
-    "note": "Portfolio delta since 4/25 sync is small. Main changes are the 3 new tasks + 2 priority demotions logged in this run."
+    "note": "Cannot surface portfolio deltas without fresh Asana pull. Last snapshot 2026-05-04 14:50 UTC."
   },
   "abps_ai_changes": {
-    "note": "ABPS AI - Content project deprecated 2026-04-17. No activity expected. Wiki pipeline flows via ~/shared/wiki/agent-created/ and SharePoint Documents/Artifacts/."
+    "deprecated": true,
+    "note": "ABPS AI - Content project deprecated 2026-04-17"
   },
-  "hard_thing_status": {
-    "rank_1_topic": "polaris-brand-lp",
-    "incumbent_since": "2026-04-20",
-    "incumbent_age_days": 7,
-    "last_richard_artifact_date": null,
-    "note": "polaris-brand-lp has been the hard thing for 7 days — at the rw-trainer escalation threshold. Richard did produce 4/20 Brand LP feedback reply, but the strategic artifact (Testing Approach doc to Brandon/Kate) is still open. Signal: incumbent should escalate this cycle."
+  "hard_thing": {
+    "name": "polaris-brand-lp (AU/MX non-weblab test design, due 5/6)",
+    "gid": "1214330104198712",
+    "days_at_zero": 4,
+    "note": "Due 5/6 (tomorrow). No shipped artifact today. Brandon 1:1 today 11:30am PT was natural check-in for 1-pager v1."
   }
 }

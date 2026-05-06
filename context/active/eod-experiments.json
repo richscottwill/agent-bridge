@@ -1,18 +1,5 @@
 {
-  "generated": "2026-04-27",
-  "status": "running",
-  "loop_kickoff_time": "2026-04-28T04:40:16Z",
-  "starting_experiments": 588,
-  "eligible_combos": 136,
-  "unexplored": 5,
-  "underexplored": 39,
-  "proven_losers": 0,
-  "max_batches": 200,
-  "cooldown": ["hands.md", "eod-phase-tracker.md", "changelog.md", "eod-reconciliation.json", "eod-maintenance.json"],
-  "terminal_id": 8,
-  "note": "Loop running in background. Final results will be appended via karpathy's own DuckDB writes (autoresearch_experiments + experiment-log.tsv). Loop stops when priors exhaust or 200-batch safety ceiling hits. Frontend summary will read whatever exists when this file is consumed.",
-  "suggestions": [
-    "Defer suggestions until loop converges. The batch results themselves are the suggestions — anything KEPT across 2+ experiments is adopted; REVERTed configurations have been tested-and-rejected.",
-    "If loop exhausts priors before reasonable batch count, revisit prior state — may need new experiment techniques in the queue."
-  ]
+  "generated": "2026-05-05",
+  "status": "skipped",
+  "reason": "Karpathy experiments invoke via karpathy-loop.sh which relies on subagent orchestration; direct-agent turn can't spawn. Same as 2026-05-04 EOD. No loss — experiments compound weekly, not daily."
 }

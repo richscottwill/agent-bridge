@@ -1,58 +1,43 @@
 {
-  "generated": "2026-04-27",
-  "status": "completed",
-  "compression_audit": {
-    "body_total_words": 45269,
-    "changelog_share_pct": 25,
-    "largest_organs": [
-      {"organ": "changelog.md", "words": 11300, "pct_of_body": 25},
-      {"organ": "amcc.md", "words": 5132, "pct_of_body": 11},
-      {"organ": "current.md", "words": 4782, "pct_of_body": 11}
-    ],
-    "current_md_last_updated": "2026-04-21",
-    "current_md_stale_days": 6,
-    "action_required": "current.md has not been refreshed since 4/21 (pre-OOO). Its Live tomorrow / Meetings today sections are now 6 days stale. Flagged for AM-backend 4/28 morning refresh — should reflect 4/27 re-entry state and whatever the Tuesday 4/28 meetings are."
-  },
+  "generated": "2026-05-05",
+  "mode": "degraded-auth",
   "workflow_health": {
-    "last_hook_run": "2026-04-22",
-    "days_since_last_hook": 5,
-    "expected": true,
-    "reason": "RW OOO 4/23-4/26. No hook runs during OOO is expected. This EOD (4/27) is the first since then.",
-    "workflow_executions_24h": 0,
-    "workflow_executions_48h": 0
-  },
-  "communication_analytics": {
     "status": "skipped",
-    "reason": "Not Friday. Communication analytics runs weekly on Friday per protocol."
+    "reason": "workflow_executions 24h window unreliable — AM-Backend degraded mode recorded, AM-Frontend degraded mode recorded; insufficient successful runs for meaningful health metric"
+  },
+  "degraded_workflows": [
+    {"name": "am-backend-parallel", "reason": "Midway auth block — Slack/SharePoint/Outlook/Hedy/Asana MCPs all 401"},
+    {"name": "am-frontend", "reason": "Slack post + email + calendar writes blocked on auth"},
+    {"name": "topic-sentry", "reason": "DuckDB signal_tracker frozen at 2026-05-04 14:50 UTC (37h stale); scan would be on yesterday's window"}
+  ],
+  "data_freshness": [
+    {"source": "asana_tasks", "last_updated": "2026-05-04 14:50 UTC", "hrs_stale": 37, "status": "stale"},
+    {"source": "signal_tracker", "last_updated": "2026-05-04 14:50 UTC", "hrs_stale": 37, "status": "stale"},
+    {"source": "slack_messages", "last_updated": "2026-05-04 14:50 UTC", "hrs_stale": 37, "status": "stale"},
+    {"source": "emails", "last_updated": "2026-05-04 14:50 UTC", "hrs_stale": 37, "status": "stale"},
+    {"source": "calendar_events", "last_updated": "2026-05-04 14:50 UTC", "hrs_stale": 37, "status": "stale"},
+    {"source": "hedy_meetings", "last_updated": "2026-05-04 14:50 UTC", "hrs_stale": 37, "status": "stale"},
+    {"source": "ps_weekly_views", "last_updated": "fresh per 5/5 01:13 UTC xlsx sync", "hrs_stale": 27, "status": "ok"},
+    {"source": "market_constraints_manual", "last_updated": "within 60d", "status": "ok"}
+  ],
+  "compression": {
+    "status": "skipped",
+    "reason": "body.md compression audit runs on karpathy cycle; EOD does light pass only"
+  },
+  "enrichment": {
+    "status": "skipped",
+    "reason": "Asana MCP auth blocked — cannot enrich task custom fields"
+  },
+  "wiki_candidate": {
+    "added": true,
+    "line": "[2026-05-05T20:45 eod] signal: MCP auth dead all day despite mwinit -f refresh; same-cookie-different-state (CLI smoke tests passed 14:37 UTC, HTTP 401 sustained). Refresh pattern may need a second-factor or network-event trigger. | source: session-log 2026-05-05 entries | proposed: enrich: midway-cookie-silent-expiry-note"
+  },
+  "comms_analytics": {
+    "status": "weekly",
+    "reason": "runs Friday only; today is Tuesday"
   },
   "context_enrichment": {
     "status": "skipped",
-    "reason": "AM-enrichment queue last refreshed 4/27 03:33 AM PT (shared/context/active/am-enrichment-queue.json). Use that and skip re-running tonight. Fresh enrichment will run AM-backend 4/28."
-  },
-  "enrichment_gaps": {
-    "empty_kiro_rw": 70,
-    "empty_next_action": 71,
-    "empty_routine": 58,
-    "empty_priority": 54,
-    "total_incomplete": 85,
-    "note": "High enrichment gap — 82% of tasks missing Kiro_RW. Pattern is that ABPS AI - Content deprecated artifact tasks (~40 tasks) have no enrichment because they are dormant wiki carry-overs. The live working set (~25 tasks) has much higher enrichment coverage. Not a coherence alarm."
-  },
-  "coherence_checks": {
-    "stale_references_in_hands": 0,
-    "unflagged_overdue": 0,
-    "empty_projects": 0,
-    "over_cap_buckets": 0,
-    "completed_still_active_in_current": 0,
-    "status": "Defer full coherence sweep to AM-backend 4/28 (full sync, not delta). Quick spot-check: nothing obviously broken."
-  },
-  "organ_cascade": {
-    "status": "deferred",
-    "reason": "Zero-productive day (0 completions, 2 demotions, 3 new tasks from email). Not enough signal to merit a cascade across organs. AM-backend 4/28 should compute with full Outlook + Slack delta and push cascade then. Session-log entry at end of this EOD will capture key state changes for tomorrow AM pickup.",
-    "people_watch_events": [
-      "Brandon Munday — 4/22 (AB Marketing AI sync — Kate demo prep) + 4/24 (Brand LP consolidated feedback — AU/MX alternate measurement assignment). Two high-signal emails during OOO.",
-      "Dwayne Palmer — 4/23-4/24 (Brand LP thread). Engaged, asking Richard to share MCS vs Reg Start results.",
-      "Alex VanDerStuyf — 4/23 (Brand LP authoring — finalizing by 4/29)",
-      "Mateusz Rykier — 4/24 (Google Ads SSO — new contact, CC includes Kush/Hitesh/Sandeep/Meddy/Vasili, who may be the MCC admin cohort)"
-    ]
+    "reason": "KDS/ARCC auth likely same-gate; would return 0 findings"
   }
 }
