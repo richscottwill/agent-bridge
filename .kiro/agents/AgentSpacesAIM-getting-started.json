@@ -2,7 +2,7 @@
   "allowedTools" : [ "read", "shell", "@builder-mcp/ReadInternalWebsites", "@builder-mcp/InternalSearch" ],
   "hooks" : {
     "agentSpawn" : [ {
-      "command" : "setsid nohup python3 /shared/user/.aim/packages/AgentSpacesAIM-1.0/eventId-6450338666/context/getting-started/media-server.py 5650 /shared/user/.aim/packages/AgentSpacesAIM-1.0/eventId-6450338666/context/getting-started > /dev/null 2>&1 < /dev/null &"
+      "command" : "setsid nohup python3 /shared/user/.aim/packages/AgentSpacesAIM-1.0/eventId-6453251779/context/getting-started/media-server.py 5650 /shared/user/.aim/packages/AgentSpacesAIM-1.0/eventId-6453251779/context/getting-started > /dev/null 2>&1 < /dev/null &"
     }, {
       "command" : "aim agents publish-metrics --agent-name 'getting-started' --agent-package 'AgentSpacesAIM-1.0' || true"
     } ]
@@ -18,5 +18,5 @@
     }
   },
   "includeMcpJson" : false,
-  "resources" : [ "file:///home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6450338666/context/getting-started/guide.md" ]
+  "resources" : [ "file:///home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6453251779/context/getting-started/guide.md" ]
 }

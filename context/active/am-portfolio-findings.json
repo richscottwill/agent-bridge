@@ -1,32 +1,45 @@
 {
-  "generated_at_utc": "2026-05-03T13:35:00Z",
-  "portfolios_scanned": ["ABPS (1212762061512816)"],
-  "portfolios_skipped": ["ABIX PS (1212775592612914) — confirmed empty, deprecated"],
-  "projects_active": 8,
-  "projects_by_count": [
-    {"project": "My Tasks", "active": 34, "overdue": 18, "max_days_od": 39},
-    {"project": "ABPS - WW Testing & Projects", "active": 8, "overdue": 6, "max_days_od": 33},
-    {"project": "AU (stale label, now in ABIX)", "active": 7, "overdue": 0, "max_days_od": 0},
-    {"project": "ABPS - Paid App", "active": 6, "overdue": 2, "max_days_od": 20},
-    {"project": "MX (stale label, now in ABIX)", "active": 4, "overdue": 2, "max_days_od": 16},
-    {"project": "ABPS - ABIX", "active": 1, "overdue": 0, "max_days_od": 0}
-  ],
-  "schema_drift_to_resolve": {
-    "issue": "11 tasks still carry project_name='AU' or 'MX' in DuckDB from pre-consolidation",
-    "resolution": "Next full am-auto sync will re-pull via ABIX project_gid and overwrite project_name to 'ABPS - ABIX'"
+  "generated": "2026-05-06T14:35:00Z",
+  "generated_pt": "2026-05-06 07:35 PDT",
+  "run_mode": "degraded-auth-midway-cookie-missing",
+  "data_source": "DuckDB ps.v_weekly + ps.v_monthly + ps.forecasts (all fresh as of 2026-05-05 01:13 UTC xlsx sync)",
+  "portfolios_scanned": 0,
+  "portfolios_scanned_note": "Asana MCP not exposed in current orchestrator session — portfolio status updates, overdue flags, and event countdowns not refreshed this run. Asana DuckDB snapshot is 3 days old (2026-05-03).",
+  "w18_headlines": {
+    "WW": {"regs": 16341, "cost": 1305566, "cpa": 79.90, "brand_cpa": 56.67, "nb_cpa": 97.32, "note": "Top of pipe healthy — WW CPA $79.90 best weekly in recent memory"},
+    "US": {"regs": 8908, "cost": 729165, "cpa": 81.85, "vs_forecast_p50": "+25% above predicted 7147", "ci_status": "ABOVE high ceiling (7490, +19% over)", "flag": "US overperformed W18 — BeST Sparkle halo or noise? Watch W19"},
+    "MX": {"regs": 659, "cost": 23821, "cpa": 36.17, "vs_forecast_p50": "+44% above predicted 457", "ci_status": "ABOVE high ceiling (570, +16% over)", "flag": "MX continues Sparkle-regime overperformance. W18 CPA $36 vs DE $132 / US $82 — efficient floor. Sparkle campaign ended 4/30 per MX sync 5/5; W19 is first week post-Sparkle"},
+    "AU": {"regs": 228, "cost": 24566, "cpa": 107.87, "vs_forecast_p50": "exactly at p50 228", "ci_status": "within band", "flag": "AU landed exactly on forecast — clean state at handover 5/5 to Megan/ABix"},
+    "CA": {"regs": 679, "cost": 50977, "cpa": 75.09, "vs_forecast_p50": "+12%", "ci_status": "within band"},
+    "UK": {"regs": 1315, "cost": 89520, "cpa": 68.10, "vs_forecast_p50": "+19%", "ci_status": "ABOVE high ceiling (1271, +3% over)", "flag": "UK slight overperformance"},
+    "DE": {"regs": 1318, "cost": 173802, "cpa": 131.88, "vs_forecast_p50": "+19%", "ci_status": "ABOVE high ceiling (1312, +0.5% over)", "flag": "DE at top of band — highest CPA in portfolio, watch W19"},
+    "FR": {"regs": 1045, "cost": 65246, "cpa": 62.42, "vs_forecast_p50": "+33%", "ci_status": "ABOVE high ceiling (980, +7% over)"},
+    "IT": {"regs": 1158, "cost": 87516, "cpa": 75.55, "vs_forecast_p50": "+79%", "ci_status": "within band (1250 ceiling)", "flag": "IT still running hot post-Polaris revert"},
+    "ES": {"regs": 584, "cost": 33372, "cpa": 57.17, "vs_forecast_p50": "+34%", "ci_status": "within band (613 ceiling)"},
+    "JP": {"regs": 447, "cost": 27581, "cpa": 61.74, "vs_forecast_p50": "-24% below predicted 590", "ci_status": "within band (339 floor)", "flag": "Only market BELOW p50 — GW holiday approaching; normal seasonal. Minami visit 4/27 context."}
   },
-  "budget_po_tracking": [
-    {"task_gid": "1212808474749819", "name": "Paid App PO Q2 + Amend Google PO", "days_overdue": 20, "status": "blocked_on_brandon_pam_budget_reply", "critical": true},
-    {"task_gid": "1214218448412294", "name": "39K IT PO mis-allocated to US PAM", "days_overdue": 6, "status": "needs_MBET_PO_reclass_with_Diana"}
+  "op2_m05_pacing_w1": {
+    "US": {"w18_regs": 8908, "m05_target": 31036, "w1_pct_of_monthly": 28.7, "on_pace": true, "projection_multiplier_if_pace_holds": "~125% of target"},
+    "MX": {"w18_regs": 659, "m05_target": 985, "w1_pct_of_monthly": 66.9, "on_pace": true, "projection_multiplier_if_pace_holds": "~290% of target", "note": "Sparkle halo inflates W18 — expect compression W19+"},
+    "AU": {"w18_regs": 228, "m05_target": 1189, "w1_pct_of_monthly": 19.2, "on_pace": false, "note": "Slightly behind pace (expected 23% for 1/4.3) — first week post-handoff; Megan owns optimization"},
+    "DE": {"w18_regs": 1318, "m05_target": 5734, "w1_pct_of_monthly": 23.0, "on_pace": true},
+    "UK": {"w18_regs": 1315, "m05_target": 4359, "w1_pct_of_monthly": 30.2, "on_pace": true, "note": "Tracking above pace"},
+    "CA": {"w18_regs": 679, "m05_target": 2720, "w1_pct_of_monthly": 25.0, "on_pace": true},
+    "FR": {"w18_regs": 1045, "m05_target": 3771, "w1_pct_of_monthly": 27.7, "on_pace": true},
+    "IT": {"w18_regs": 1158, "m05_target": 5353, "w1_pct_of_monthly": 21.6, "on_pace": true, "note": "Behind slightly — watch"},
+    "ES": {"w18_regs": 584, "m05_target": 2345, "w1_pct_of_monthly": 24.9, "on_pace": true},
+    "JP": {"w18_regs": 447, "m05_target": 1630, "w1_pct_of_monthly": 27.4, "on_pace": true, "note": "GW week — expect W19 dip"}
+  },
+  "alerts": [
+    {"severity": "WATCH", "market": "MX", "finding": "W18 regs at 290% of OP2 M05 pace — Sparkle halo (ended 4/30). W19 is first week post-Sparkle; monitor for regression. Lorena halo-hypothesis analysis committed by Richard for next week."},
+    {"severity": "WATCH", "market": "US", "finding": "W18 overperformed forecast by 25%. If W19 repeats, forecast model needs recalibration."},
+    {"severity": "INFO", "market": "JP", "finding": "W18 below p50 forecast (-24%). GW holiday seasonal — normal."},
+    {"severity": "INFO", "market": "AU", "finding": "W18 exactly on forecast — clean baseline at 5/5 handover. Megan/ABix now primary owner."}
   ],
-  "cross_team_blockers": [
-    {"topic": "polaris-brand-lp", "owner": "Richard (sole consolidator per Brandon 4/29)", "blocker": "Consolidated QA feedback doc still open", "age_days": 4},
-    {"topic": "MX Kingpin goals", "owner": "Richard", "blocker": "Andes data unavailable", "age_days": 35, "escalation_recommendation": "Escalate to ABMA leadership for delivery ETA"},
-    {"topic": "F90 audience request", "owner": "Richard", "blocker": "Paid Media Legal Approval pending", "age_days": "unknown", "downstream_tasks": 4}
-  ],
-  "event_countdowns": [
-    {"event": "AU formal handoff to Megan", "date": "2026-05-05", "days_to_go": 2, "critical_path": ["1214389396315760 AU handover doc", "1214386001212099 GenBI fix"]},
-    {"event": "Kate AB Marketing AI demo", "date": "2026-05-29", "days_to_go": 26, "critical_path": ["1214330286428120 Kiro PS use cases prep with Adi + Brandon run-through"]},
-    {"event": "OP1 Tech intake forms", "date": "2026-05-05 (or 5/15)", "days_to_go": 2, "critical_path": ["Submit MCS Tech OP1 ideas via intake form"]}
-  ]
+  "portfolio_action_items_stale_3d": {
+    "note": "Asana-side portfolio scans (status updates, recurring tasks, event countdowns) skipped this run. See am-enrichment-queue.json for task-level overdue + enrichment from the 3-day-old Asana snapshot.",
+    "impact": "Low — no time-critical portfolio dependencies expected to surface in a 3-day window. MX duplicate invoice chase ($56K, task 1214088494080582) and PAM Q2 PO creation (1212808474749819, 22d overdue) are the two highest-stakes backlog items."
+  },
+  "ps_forecasts_freshness": {"latest_run": "W17→W18 predictions; actuals loaded for W18", "actuals_loaded": true, "w18_scored": "7/10 markets above p50, 1/10 below (JP), 2/10 at p50 (AU tied exactly, WW not scored at individual level)"},
+  "stale_note": "This file generated from DuckDB resident data (xlsx sync 2026-05-05 01:13 UTC). W18 actuals are authoritative."
 }

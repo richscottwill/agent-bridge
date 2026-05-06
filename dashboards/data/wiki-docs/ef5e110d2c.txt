@@ -121,17 +121,24 @@ by theme — top 5 below.
 ### P2 — mx-market-wiki + ieccp-planning-framework (Sparkle-specific enrichment, 9 signals)
 
 - [ ] **enrich: markets/mx-market-wiki + strategy/ieccp-planning-framework** —
-  9 entries from the 4/22 MX projection work. Canonical CCP values
-  (Brand $90 / NB $30 per 2026 rate card, sourced from WW Dashboard IECCP tab
-  rows 92-93) need to live in `ps.market_constraints_manual` not in Richard's
-  head. `ie%CCP = total_spend / (brand_regs × Brand_CCP + nb_regs × NB_CCP)` —
-  NOT blended_CPA / blended_CCP. Brand-anchor / NB-residual architecture.
-  H1-H2 2025 regime shift (ceiling applied W27+) needs to be a structural
-  annotation. Sparkle decay methodology. Per-week projection vs annual-average
-  produces 4-6pt ie%CCP deltas that matter for budget asks.
-  Action: ieccp-planning-framework absorbs the methodology; mx-market-wiki
-  absorbs the canonical CCP values + Sparkle-specific annotations. Single
-  editor pass, both articles updated together.
+  9 entries from the 4/22 MX projection work. Methodology is the durable
+  value here, not the numbers: `ie%CCP = total_spend / (brand_regs × Brand_CCP
+  + nb_regs × NB_CCP)` (NOT blended_CPA / blended_CCP); Brand-anchor /
+  NB-residual architecture; H1-H2 2025 regime shift (ceiling applied W27+);
+  Sparkle decay methodology; per-week vs annual-average projection produces
+  4-6pt ie%CCP deltas that matter for budget asks.
+  **Note on CCP values:** the 4/22 IECCP-tab values (Brand $90 / NB $30) were
+  superseded later that day by the canonical column U of `CCP Q1'26 check
+  yc.xlsx` Summary tab (MX rounds to $97 / $28, per 4/22 evening session-log
+  entry). Subsequent sources have also updated. Neither number should be
+  written into a canonical article as hard-coded; the articles should
+  reference column U as the source of truth and point readers at
+  `ps.market_constraints_manual` for the current value. This removes the
+  coupling between article freshness and rate-card negotiation cadence.
+  Action: ieccp-planning-framework absorbs the methodology + formula; 
+  mx-market-wiki references the column-U source of truth and the Sparkle
+  annotations. Single editor pass, both articles updated together. No 
+  Richard block — source-of-truth pattern replaces value-verification ask.
 
 ### P3 — kiro-sharepoint-protocol / sharepoint-mcp-onboarding (10 signals, team enablement)
 
@@ -195,16 +202,17 @@ Notable single-signal items with decent odds of promotion on repeat:
 
 ## Actions for Richard — W18
 
-- **Confirm P1 decomposition** (grammar → style / process → guide /
-  sub-agent → pipeline) before the wiki-writer picks up wbr-callouts
-  enrichments. I'm not going to decompose this unilaterally because the
-  callouts skill is yours.
-- **Confirm P2 sourcing** — the CCP values ($90/$30) came from your 4/22
-  notes. Before these land in a canonical article, worth re-verifying the
-  WW Dashboard IECCP tab rows 92-93 haven't been overwritten.
-- **P3, P4, P5 are agent-executable** — I can spec these and route to the
-  wiki-researcher / wiki-writer pipeline once the other blockers (pipeline
-  throughput, agent routing) clear.
+- **P1 WBR-callouts decomposition** — withdrawn 2026-05-01 as a Richard-block.
+  Insufficient shared context on what the decomposition specifically requires;
+  carrying it forward as a "Richard needs to decide X" item was premature.
+  Re-surface only when there's a concrete clarifying question (e.g., "here
+  are the 16 signals grouped by destination — does this split look right?").
+- **P2 CCP sourcing** — withdrawn 2026-05-01 as a Richard-block. Source-of-truth
+  pattern replaces value-verification ask: articles reference column U of
+  `CCP Q1'26 check yc.xlsx` Summary tab and `ps.market_constraints_manual`,
+  not hard-coded numbers. No Richard input required to write that pattern.
+- **P3, P4, P5 remain agent-executable.** P5 (au-keyword-cpa-dashboard upgrade)
+  shipped 2026-05-01 evening; now in revision-queue after dual-eval.
 
 ## Process note
 

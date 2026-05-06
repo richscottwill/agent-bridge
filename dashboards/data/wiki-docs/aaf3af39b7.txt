@@ -1,6 +1,6 @@
 # Wiki Roadmap — AB Paid Search Knowledge Base
 
-Last updated: 2026-05-01 (wiki-maintenance W18 second pass — polaris-program MX NB LP subsection shipped)
+Last updated: 2026-05-01 evening (wiki-maintenance W18 re-run — five-year-outlook-v2 blind-eval fired, au-keyword-cpa-dashboard upgrade shipped and critic-tested)
 
 ---
 
@@ -19,7 +19,7 @@ Last updated: 2026-05-01 (wiki-maintenance W18 second pass — polaris-program M
 | Topic | Slug | Priority | Source | Why |
 |-------|------|----------|--------|-----|
 | **WBR callouts: guide + pipeline + voice** | operations/wbr-callout-guide, operations/wbr-callouts-pipeline, richard-style-wbr | **P1** | W18 — 16 signals across 7 days | Dominant cluster from W18 consume. Narrative-first discipline, qualitative sweep as mandatory step, Note-field rules, 10 sentence-level voice patterns, sensitivity-driven reframe pattern, sub-agent orchestration gotchas. Richard's call on split across the 3 docs before writer picks up. |
-| **MX CCP methodology + Sparkle annotations** | markets/mx-market-wiki, strategy/ieccp-planning-framework | **P1** | W18 — 9 signals from 4/22 projection session | Canonical CCP values (Brand $90 / NB $30), correct ie%CCP formula (per-reg weighting, not blended), Brand-anchor / NB-residual architecture, H1-H2 2025 regime shift, Sparkle decay methodology. Needs both articles updated in one pass. |
+| **MX CCP methodology + Sparkle annotations** | markets/mx-market-wiki, strategy/ieccp-planning-framework | **P1** | W18 — 9 signals from 4/22 projection session | Correct ie%CCP formula (per-reg weighting, not blended), Brand-anchor / NB-residual architecture, H1-H2 2025 regime shift, Sparkle decay methodology. **CCP values are NOT hard-coded**: articles reference column U of `CCP Q1'26 check yc.xlsx` Summary tab and `ps.market_constraints_manual` as source-of-truth (the 4/22 IECCP-tab $90/$30 values were pre-negotiation; column U is post-negotiation canonical, MX rounds to $97/$28). Needs both articles updated in one pass. Agent-executable — no Richard block. |
 | **SharePoint MCP troubleshooting playbook** | kiro-steering/04-kiro-sharepoint-protocol, kiro-steering/sharepoint-mcp-onboarding | **P2** | W18 — 10 signals over 6 days | 3 distinct auth failure modes, 3 distinct fixes. DevSpaces vs Windows cookie isolation, fsWrite-to-OneDrive bypass path, Orcha+GRASP as replacement candidate. Team-enablement critical — teammates will hit this first. |
 | **Dashboard design-language playbook** | strategy/dashboard-design-language-playbook | **P2** | W18 — 5 signals from 4/30 dashboard work | New article. Token-map scripts for theme ports, design-system semantic reuse, subtract-before-add, single-source-of-truth chaining, refresh-cadence UI patterns. Half-life reference. |
 | **Kiro-to-Harmony deploy enrichment** | methodology/kiro-to-harmony-dashboard-deploy | **P3** | W18 — 4 signals from 4/21 session | Enrich existing DRAFT with single-responsibility-hook principle, PS analytics dual-path consolidation, Harmony feature decision framework. |
@@ -47,6 +47,23 @@ Last updated: 2026-05-01 (wiki-maintenance W18 second pass — polaris-program M
 ## Pending decisions
 
 - **Blackboard experiment — wait on build until 2026-04-30.** Current adoption 0/74 articles. Richard has decided to hold the 5/2 kill review until the creation hook is built. Track build start on 4/30. No nagging until then.
+
+## Completed (2026-05-01 — wiki-maintenance W18 re-run, evening)
+
+| Topic | Slug | Action | Date |
+|-------|------|--------|------|
+| **au-keyword-cpa-dashboard upgrade shipped** | reporting/au-keyword-cpa-dashboard | Expanded 478 → ~1,450 words. Fixed duplicate frontmatter blocks (2 → 1, `doc-type: reference`). Added methodology, interpretation guide with CPA action thresholds, data quality notes, transition context for Megan handoff. Author left 2 `<!-- TODO: cite -->` markers on honest uncited claims ($140 target, 10% attribution gap threshold). | 2026-05-01 eve |
+| **au-keyword-cpa-dashboard blind dual-eval fired** | reviews/au-keyword-cpa-dashboard-eval-a + eval-b | Eval A (rubric): REVISE 7.4/10 — TODO markers binding + Economy dead-weight sections (Next Steps historical, Automation Path, Delivery) need cutting + $X,000 placeholder on line 82. Eval B (Lena persona): REVISE 7.4/10 — $140 target uncited is the binding issue, Lena's 3 follow-ups (landing page URLs, repeat-visitor CPA inflation, redirect clicks) not addressed, Megan handoff section too thin. Article lands in revision-queue. | 2026-05-01 eve |
+| **five-year-outlook-v2 blind dual-eval fired** | reviews/five-year-outlook-v2-eval-a + eval-b | Eval A (rubric): PUBLISH 8.2/10 — no dim below 7, Economy at 7 is floor, suggestions to cut Appendix B + rewrite Gartner editorial + add 2026 subheadings. Eval B (Kate persona): REVISE 7.6/10 — same Appendix B + Gartner issues, plus 2026 section wall-of-prose Clarity (7) and agentic-tooling-next-to-AI-Max framing concern. Split verdict — does not clear §8 gate. Article lands in revision-queue. | 2026-05-01 eve |
+| **Wiki index rebuild** | build-wiki-index.py | 312 → 314 unique docs (+2 new eval files). 105 articles in wiki-index.md (46 published, 1 stale). No SP crawl (cache current, no upstream delta). | 2026-05-01 eve |
+| **Wiki health history snapshot** | wiki-health-history.json | Appended daily snapshot: row 2 of 7 needed for WS-M04 fan chart activation. | 2026-05-01 eve |
+
+### W18 run summary (morning + evening combined)
+
+- **Pipeline throughput this week:** 3 articles moved stages. Meeting-ingestion-pipeline DRAFT got first critic pair (REVISE/REVISE). Five-year-outlook-v2 got missing Eval A (PUBLISH) paired with fresh Eval B (REVISE) — split verdict. Au-keyword-cpa-dashboard upgraded from 478w → 1,450w and got full critic pair (REVISE/REVISE).
+- **Stage 2 Publish:** 0 eligible across both runs. Kill condition §2 tracks at 0/4 firings by 2026-07-01.
+- **Stage 4 Write:** Evening pass took the au-keyword-cpa-dashboard upgrade (executable without Richard input). Both previously-flagged Richard-blocks withdrawn 2026-05-01: WBR-callouts decomposition lacked concrete clarifying question; MX CCP verification replaced by source-of-truth pattern (article references column U + `ps.market_constraints_manual`, not hard-coded values). MX CCP enrichment is now agent-executable.
+- **Open to Richard:** None from W18 pipeline work. WIKI_AGENTIC_COMMIT_ENABLED flag reference dropped — unclear if still live.
 
 ## Completed (2026-04-17 — wiki-maintenance W16)
 

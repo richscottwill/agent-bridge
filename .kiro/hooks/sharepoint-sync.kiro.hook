@@ -1,10 +1,10 @@
 {
   "name": "2 · Sync to SharePoint",
-  "version": "2.0.0",
-  "description": "Two-phase wiki-to-SharePoint sync: convert md→docx locally, then upload via SharePoint MCP to OneDrive > Artifacts/wiki-sync/",
+  "version": "2.1.0",
+  "description": "Two-phase wiki-to-SharePoint sync: convert md→docx locally, then upload via SharePoint MCP to OneDrive. v2.1.0 (2026-05-06): Added ~/shared/wiki/topics/** to crawl targets; mirrors to Documents/Kiro-Drive/topic-logs/<type>/<slug>.docx preserving H1/H2/H3 heading levels.",
   "when": { "type": "userTriggered" },
   "then": {
     "type": "askAgent",
-    "prompt": "Run the SharePoint sync pipeline end-to-end:\n\n1. Phase 1 — Stage .docx files: Run `python3 ~/shared/tools/sharepoint-sync/cli.py --mode directory --output-path ~/shared/tools/sharepoint-sync/output` and show the sync report summary (created/updated/skipped/failed counts).\n\n2. If Phase 1 produced any created or updated files, proceed to Phase 2 — Upload to SharePoint: Run `python3 ~/shared/tools/sharepoint-sync/sp-upload.py` to get the upload plan JSON. For each entry in the plan, call sharepoint_write_file with libraryName='Documents', folderPath=entry.sp_folder, fileName=entry.filename, sourcePath=entry.local_path. Upload in parallel batches of 10 for speed.\n\n3. Show final results: how many files uploaded, any failures, and the SharePoint target path.\n\nIf Phase 1 shows 0 created and 0 updated, skip Phase 2 and report 'No changes to sync.'"
+    "prompt": "Run the SharePoint sync pipeline end-to-end:\n\n1. Phase 1 — Stage .docx files: Run `python3 ~/shared/tools/sharepoint-sync/cli.py --mode directory --output-path ~/shared/tools/sharepoint-sync/output` and show the sync report summary (created/updated/skipped/failed counts). Crawl targets include ~/shared/wiki/agent-created/**, ~/shared/wiki/state-files/**, ~/shared/wiki/meetings/**, and ~/shared/wiki/topics/** (topic logs added 2026-05-06).\n\n2. If Phase 1 produced any created or updated files, proceed to Phase 2 — Upload to SharePoint: Run `python3 ~/shared/tools/sharepoint-sync/sp-upload.py` to get the upload plan JSON. For each entry in the plan, call sharepoint_write_file with libraryName='Documents', folderPath=entry.sp_folder, fileName=entry.filename, sourcePath=entry.local_path. Upload in parallel batches of 10 for speed. Topic log .docx files target folderPath like 'Kiro-Drive/topic-logs/<type>' where type is tests/markets/initiatives/projects.\n\n3. Show final results: how many files uploaded, any failures, and the SharePoint target path.\n\nIf Phase 1 shows 0 created and 0 updated, skip Phase 2 and report 'No changes to sync.'"
   }
 }

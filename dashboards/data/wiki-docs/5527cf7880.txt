@@ -4,7 +4,7 @@
 
 > Knowledge base for Amazon Business Paid Search. Auto-generated from a filesystem scan of `~/shared/wiki/agent-created/` by `build-wiki-index.py`. SharePoint publication status pulled from `data/sharepoint-artifacts.json`.
 
-Last generated: 2026-05-01T21:41:40
+Last generated: 2026-05-01T23:25:42
 SharePoint cache as of: 2026-05-01T19:42:41+0000
 
 ---
@@ -313,8 +313,8 @@ _SOPs, playbooks, tool specs, vocabulary guides, process documentation._
 
 _Dashboards, WBR/MBR templates, analysis docs._
 
-- [AU Keyword CPA Dashboard — Design](~/shared/wiki/agent-created/reporting/au-keyword-cpa-dashboard.md): AU Keyword CPA Dashboard — Design STATUS: Design phase. Dashboard not yet built. First data pull pending. Due: Next week Lena wants weekly CPA review at the keyword level. This...
-  - slug: au-keyword-cpa-dashboard | status: REVIEW | doc-type: execution | audience: amazon-internal | level: 1 | sharepoint: local-only
+- [AU Keyword CPA Dashboard](~/shared/wiki/agent-created/reporting/au-keyword-cpa-dashboard.md): AU Keyword CPA Dashboard This document is the reference spec for the AU keyword-level CPA dashboard. It serves Lena Zak (AU PS lead) and the broader AU paid search team by...
+  - slug: au-keyword-cpa-dashboard | status: REVIEW | doc-type: reference | audience: team | level: L2 | sharepoint: local-only
 
 - [WBR Callout Template & Guide](~/shared/wiki/agent-created/reporting/wbr-callout-guide.md): WBR Callout Template & Guide Standardize WBR callout writing so anyone on the team can cover any market. Eliminates the "only Richard/Dwayne can write callouts" bottleneck....
   - slug: wbr-callout-guide | status: REVIEW | doc-type: execution | audience: amazon-internal | level: 1 | sharepoint: published

@@ -1,0 +1,31 @@
+{
+  "session_id": "04aea1f3-c2ef-40f5-bca6-daeda85ef019",
+  "cwd": "/home/prichwil/.workspace",
+  "created_at": "2026-05-06T14:05:20.305027780Z",
+  "updated_at": "2026-05-06T14:05:20.305027780Z",
+  "session_state": {
+    "version": "v1",
+    "conversation_metadata": {
+      "user_turn_metadatas": [],
+      "user_turn_start_request": null,
+      "last_request": null
+    },
+    "rts_model_state": {
+      "conversation_id": "04aea1f3-c2ef-40f5-bca6-daeda85ef019",
+      "model_info": null,
+      "context_usage_percentage": null
+    },
+    "permissions": {
+      "filesystem": {
+        "allowed_read_paths": [
+          "/home/prichwil/.workspace"
+        ],
+        "allowed_write_paths": [],
+        "denied_read_paths": [],
+        "denied_write_paths": []
+      },
+      "trusted_tools": [],
+      "denied_tools": []
+    }
+  }
+}

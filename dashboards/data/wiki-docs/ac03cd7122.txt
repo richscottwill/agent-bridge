@@ -1,0 +1,50 @@
+# JP — W18 (Apr 26–May 3)
+
+JP drove 447 registrations (-20% WoW), with -15% spend WoW. CPA rose to $62 (+6% WoW). April closed at $153K spend and 2,379 registrations at $64 CPA. (vs. OP2: +6% spend, +24% regs)
+The WoW drop is Brand-driven: Brand regs -20% on -18% spend, CPA $57 (flat). NB is immaterial to JP (3 regs W18, $2.1K spend). The Brand volume drop came on Brand clicks -22%, auction coverage shrank, not CVR. Note: W18 included Golden Week holiday timing (Showa Day Apr 29, start of the GW cluster), consistent with Brand search query volume softening. YoY: W18 regs +20% on +8% spend. April +24% regs / +6% cost vs OP2.
+
+---
+
+## Narrative
+**Thesis:** W18 is a holiday-read, not a trend break. Golden Week starts Apr 29 and runs through May 5 — JP Brand search volume softens structurally in this window every year. April's +24% vs OP2 regs shows the underlying trajectory is intact; W18's -20% is the mechanical consequence of GW timing inside the week.
+**Supports:**
+- *"Brand clicks -22%, Brand CVR flat"* — the drop is coverage, not conversion. Classic holiday-period signal, not a CVR deterioration.
+- *"April +24% regs / +6% cost vs OP2"* — the pre-GW run rate was strong enough to carry April despite the holiday-week dip.
+- *"Blended CPA $62 — still 9% below the W12 peak"* — efficiency arc intact through a holiday week.
+**Counter-currents:** None structural. The GW holiday timing explains the mechanics. The read is whether W19 and W20 (which span the rest of GW) continue to soften or rebound; 2025 pattern was W19 softest, W20 partial rebound.
+**Thread:** JP is a Brand-dominant market by construction (NB <1% of volume). The callout pattern here is different from every other market because NB commentary isn't meaningful — focus is on Brand coverage and CVR stability, and holiday-period attribution.
+
+## Qualitative sweep
+- **Change log:** No JP-specific interventions W18. Brand campaigns running steady-state against GW-suppressed search volume.
+- **Slack:** No JP-specific discussions W18. JP PM sync cadence unchanged.
+- **Email (Outlook, 14d):** No JP-specific threads.
+- **In-flight threads:** None surfaced this week.
+
+## Weekly trend (regs)
+W11: 481 | W12: 512 | W13: 534 | W14: 548 | W15: 573 | W16: 507 | W17: 559 | W18: 447
+
+## Efficiency trajectory (since Q1)
+
+| Metric | Q1 avg | W18 | Change |
+| --- | --- | --- | --- |
+| Blended CPA | $68 | $62 | -9% |
+| Brand CPA | $63 | $57 | -9% |
+| Brand clicks/wk | 142K | 108K | -24% |
+
+## Flagged anomalies
+- Golden Week Apr 29–May 5 — Showa Day (Apr 29) falls inside W18, rest of GW (Constitution, Greenery, Children's Day) in W19. W18 read is partial; W19 is the clean holiday-week read.
+- Brand CVR held steady at ~4% — the volume drop is entirely click-coverage.
+- NB CPA $707 continues to be immaterial given 3 regs of volume — do not interpret as a CPA signal.
+
+## W19 watch
+- **GW full-week softness:** W19 will be the deepest GW week. 2025 pattern: W19 -15–20% vs pre-GW baseline, W20 partial rebound.
+- **Brand CVR stability:** if CVR dips in W19 alongside clicks, that's a signal to investigate. If CVR holds and clicks drop, it's confirmed-GW mechanics.
+- **Post-GW rebound shape:** W20 is the diagnostic — 2025 saw full pre-GW level recovery by W21. Same shape means no intervention needed.
+
+## W19 optimization
+- Hold posture through GW. No intervention window — changes can't be attributed cleanly against a known holiday.
+- Pre-build the W20 post-GW rebound diagnostic so we can read W20–W21 recovery shape against the 2025 baseline.
+- No new tests in JP through end of May — keep the read clean for MBR.
+
+## W19 recommended spend
+$25–30K (flat to down from W18's $27.6K). GW week reduces Brand query volume; overspending into reduced supply wastes money. Let spend find its own level against suppressed impressions.

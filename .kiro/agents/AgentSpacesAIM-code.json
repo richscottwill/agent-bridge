@@ -1,0 +1,49 @@
+{
+  "name": "code",
+  "includeMcpJson": false,
+  "resources": [
+    "file:///shared/user/.kiro/steering/**/*.md",
+    "file:///shared/user/.kiro/steering-code/**/*.md",
+    "file:///home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6453251779/context/code/*"
+  ],
+  "description": "Lock in and deliver results with your existing Brazil packages -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",
+  "mcpServers": {"builder-mcp": {"command": "builder-mcp"}},
+  "toolsSettings": {
+    "shell": {
+      "autoAllowReadonly": true,
+      "allowedCommands": [
+        "git .*",
+        "brazil .*",
+        "brazil-build .*",
+        "brazil-recursive-cmd .*",
+        "cr .*",
+        "find .*",
+        "grep .*",
+        "awk .*",
+        "sed .*"
+      ],
+      "deniedCommands": ["git push.*"]
+    },
+    "write": {"allowedPaths": [
+      "/workspace/**",
+      "~/shared/**",
+      "~/**"
+    ]}
+  },
+  "tools": [
+    "read",
+    "write",
+    "aws",
+    "execute_bash",
+    "code",
+    "@builder-mcp/*"
+  ],
+  "prompt": "You are the Code agent in AgentSpaces, Amazon's intelligent development companion. You help users deliver production-ready results with existing Brazil packages and Amazon internal tools. Use BrazilWorkspace, CrCheckout, CRRevisionCreator for code workflows. Use BrazilBuildAnalyzerTool, BrazilPackageBuilderAnalyzerTool for build analysis. Use InternalCodeSearch, WorkspaceSearch for code discovery. Create files per common rules.",
+  "hooks": {"agentSpawn": [{"command": "aim agents publish-metrics --agent-name 'code' --agent-package 'AgentSpacesAIM-1.0' || true"}]},
+  "allowedTools": [
+    "read",
+    "aws",
+    "code",
+    "@builder-mcp/*"
+  ]
+}

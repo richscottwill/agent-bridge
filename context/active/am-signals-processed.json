@@ -1,23 +1,67 @@
 {
-  "generated_at_utc": "2026-05-03T13:35:00Z",
-  "phase": "2.5C completion + wiki candidate surfacing",
-  "top_10_active_signals": [
-    {"topic": "polaris-brand-lp", "strength": 22.12, "channels": 6, "mentions": 14, "trend": "strong_ongoing"},
-    {"topic": "oci-rollout", "strength": 8.15, "channels": 3, "mentions": 5, "trend": "cooling"},
-    {"topic": "au-cpa-cvr", "strength": 6.37, "channels": 4, "mentions": 5, "trend": "reinforced_today"},
-    {"topic": "op1-strategy", "strength": 4.95, "channels": 3, "mentions": 3, "trend": "reinforced_today"},
-    {"topic": "mcs-coordination-ownership", "strength": 4.02, "channels": 2, "mentions": 3, "trend": "reinforced_today"},
-    {"topic": "mx-budget-ieccp", "strength": 4.37, "channels": 2, "mentions": 3, "trend": "stable"},
-    {"topic": "op1-forecast-flat-budget", "strength": 3.53, "channels": 2, "mentions": 2, "trend": "stable"},
-    {"topic": "au-transition", "strength": 3.53, "channels": 2, "mentions": 2, "trend": "stable"},
-    {"topic": "liveramp-enhanced-match", "strength": 2.39, "channels": 2, "mentions": 5, "trend": "cooling"},
-    {"topic": "ps-feedback-process", "strength": 1.62, "channels": 2, "mentions": 2, "trend": "stable"}
+  "generated": "2026-05-06T14:35:00Z",
+  "generated_pt": "2026-05-06 07:35 PDT",
+  "run_mode": "degraded-auth-midway-cookie-missing",
+  "auth_failure": {
+    "cause": "Midway cookie missing at /home/prichwil/.midway/cookie (ENOENT)",
+    "symlinked_files_only": ["aws-client_cert.pem", "aws-client_rsa.pem", "client_cert.cfg"],
+    "consecutive_run_failures": 2,
+    "remediation": "Richard must run `mwinit` (or `mwinit -o` on CloudDesktop) on his workstation — this Midway cookie is prerequisite for Slack, Outlook, and SharePoint MCP. Hedy (remote auth) and DuckDB (MotherDuck PAT) both work.",
+    "affected_mcps": ["ai-community-slack-mcp", "aws-outlook-mcp", "amazon-sharepoint-mcp"],
+    "unaffected_mcps": ["hedy", "duckdb", "builder-mcp"]
+  },
+  "stale_sources": {
+    "slack_messages": {"last_ingest": "2026-05-04T14:50:59Z", "hours_stale": 40, "reason": "Slack MCP 401 — Midway cookie missing"},
+    "emails": {"last_ingest": "2026-05-04T14:50:59Z", "hours_stale": 40, "reason": "Outlook MCP 401 — Midway cookie missing"},
+    "calendar_events": {"last_ingest": "2026-05-04T14:50:59Z", "hours_stale": 40, "reason": "Outlook MCP 401 — Midway cookie missing"},
+    "loop_pages": {"last_ingest": "2026-05-03T13:35:19Z", "hours_stale": 73, "reason": "SharePoint MCP 401 — Midway cookie missing"},
+    "asana_tasks": {"last_ingest": "2026-05-04T14:50:59Z", "hours_stale": 40, "reason": "Asana MCP not available in current orchestrator session — enterprise-asana-mcp tools not exposed in this model context; Asana MCP uses separate ESD proxy auth (not Midway), not tested"}
+  },
+  "fresh_sources": {
+    "topic_logs": {"last_update": "2026-05-06T14:35Z", "status": "Hedy Subagent E routed 4 new sessions to topic docs + meeting series files"},
+    "signal_tracker": {"last_update": "2026-05-06T14:35Z", "rows_7d_active": 88, "status": "+10 rows inserted by Hedy Subagent E (source_channel='hedy')"},
+    "ps_weekly_actuals_w18": {"last_update": "2026-05-05T01:13Z", "status": "All 10 markets + WW loaded"},
+    "ps_forecasts_w18": {"last_update": "prior WBR cycle", "status": "Scored — 6/10 markets above high CI, 1/10 below low (JP)"}
+  },
+  "hedy_run_summary": {
+    "sessions_processed": 4,
+    "session_ids": ["FKZWlEQGcW5S2tv3FCav", "Qz26yMKVFzAWAiU99ZoD", "qbgFqERRUQl6Eh2PcI8S", "j7nQYyfUFwwAbzM6LGZv"],
+    "topic_docs_touched": [
+      "topics/markets/mx.md",
+      "topics/markets/au.md",
+      "topics/initiatives/au-abix-transition.md",
+      "topics/initiatives/op1-2026.md",
+      "topics/tests/polaris-brand-lp.md"
+    ],
+    "meeting_series_touched": [
+      "meetings/brandon-sync.md",
+      "meetings/weekly-paid-acq.md",
+      "meetings/mx-paid-search-sync.md",
+      "meetings/au-paid-search-sync.md"
+    ],
+    "new_discovery_candidates": 0,
+    "deprecation_compliance": "No writes to signals.hedy_meetings, main.meeting_analytics, main.meeting_highlights, main.meeting_series, or hedy-digest.md (all deprecated per 2026-05-06 protocol update)"
+  },
+  "signals_top7d": [
+    {"topic": "polaris-brand-lp", "signal_strength": 2.73, "reinforcement_count": 8, "authors": ["Brandon Munday", "Yun-Kang Chu"], "channels": ["slack", "dm-brandon", "ab-paid-search-global", "hedy"], "level": "L2", "priority": "P1-hard-thing", "note": "Hard thing candidate — Brandon 1:1 Tue brought 1-pager ask forward"},
+    {"topic": "oci-rollout", "signal_strength": 2.69, "reinforcement_count": 4, "authors": ["Brandon Munday", "Sam Tangri"], "channels": ["ab-paid-search-oci", "slack"], "level": "L2", "priority": "P1-watchlist"},
+    {"topic": "au-cpa-cvr", "signal_strength": 2.36, "reinforcement_count": 4, "authors": ["Brandon Munday"], "channels": ["ab-paid-search-abix", "ab-paid-search-global"], "level": "operational", "priority": "P2-post-handoff", "note": "Handover 5/5 — Megan now primary owner; Richard role is support"},
+    {"topic": "au-transition", "signal_strength": 2.07, "reinforcement_count": 3, "authors": ["Brandon Munday"], "channels": ["slack:ab-paid-search-abix", "hedy"], "level": "operational", "priority": "P1-closing-out", "note": "Handover completed 5/5 per hedy:j7nQYyfUFwwAbzM6LGZv; open items: AdCloud export setup, change log Quip paste"},
+    {"topic": "op1-forecast-flat-budget", "signal_strength": 2.07, "reinforcement_count": 3, "authors": ["Brandon Munday"], "channels": ["slack:ab-outbound-marketing", "om-team"], "level": "L2", "priority": "P1-watchlist", "note": "Tech intake extended 5/5 → 5/15 per Lina email"},
+    {"topic": "op1-strategy", "signal_strength": 1.95, "reinforcement_count": 5, "authors": ["Team", "Brandon Munday"], "channels": ["hedy", "slack:ab-outbound-marketing", "dm-brandon"], "level": "L2", "priority": "P1-watchlist"},
+    {"topic": "mcs-coordination-ownership", "signal_strength": 1.50, "reinforcement_count": 3, "authors": ["Brandon Munday"], "channels": ["slack:dm-brandon", "slack:ab-paid-search-global"], "level": "L2", "priority": "P2-watchlist"},
+    {"topic": "aeo-ai-overviews", "signal_strength": 1.46, "reinforcement_count": 1, "authors": ["Brooke"], "channels": ["ab-marketing-ai"], "level": "L4", "priority": "P3-watchlist"}
   ],
-  "new_signals_created_this_run": ["mx-category-lp", "ps-data-gap", "ai-tooling-cbr", "mutation-testing", "agentspaces-platform", "deep-linking-ref-tags"],
-  "wiki_candidates": [],
-  "hard_thing_candidates": [
-    {"rank": 1, "topic": "polaris-brand-lp", "score": 22.12, "mode": "valuable-and-avoided", "days_since_richard_artifact": 6},
-    {"rank": 2, "topic": "oci-rollout", "score": 8.15, "mode": "valuable-and-avoided", "days_since_richard_artifact": 16},
-    {"rank": 3, "topic": "au-cpa-cvr", "score": 6.37, "mode": "valuable-and-avoided", "days_since_richard_artifact": 2}
+  "watchlist_candidates": [
+    {"proposed_slug": "op1-forecast", "rationale": "5+ combined hits across op1-forecast-flat-budget + op1-strategy. Brandon-sourced. OP1 Tech intake extended to 5/15. Topic doc exists (op1-2026.md) but not registered under the consolidated forecast slug.", "suggested_priority": "P1", "suggested_level": "L2"}
+  ],
+  "stale_signals_unanswered": [
+    {"from": "Brandon", "channel": "ab-paid-search-abix", "since": "2026-04-24", "days_old": 12, "topic": "AU Transition doc review", "note": "OLDEST unreplied Brandon ask; likely resolved via 5/5 handoff but no explicit Richard acknowledgement observed pre-Slack-outage"},
+    {"from": "Brandon", "channel": "ab-outbound-marketing", "since": "2026-05-01", "days_old": 5, "topic": "OP1 owners — budget flat YoY, break out Small SMB, reforecast RoY"},
+    {"from": "Brandon", "channel": "ab-paid-search-global", "since": "2026-05-01", "days_old": 5, "topic": "MCS team follow-up ownership — Yun-Kang + Andrew pinging for summary"},
+    {"from": "Mukesh Gupta", "channel": "mpdm-rasanmol-prichwil-mpgupta", "since": "2026-05-03", "days_old": 3, "topic": "GenBI data-scalability question"},
+    {"from": "Megan Oshry", "channel": "dm-meganos", "since": "2026-04-30", "days_old": 6, "topic": "Adobe Analytics access + query share", "note": "Richard committed 5/5 to set up AdCloud export this week — partial resolution"},
+    {"from": "Vijeth Shetty", "channel": "dm-asana-bot", "since": "2026-05-03", "days_old": 3, "topic": "ps-brand pages updates WW comment"},
+    {"from": "Peter Ocampo", "channel": "dm-peteocam", "since": "2026-04-26", "days_old": 10, "topic": "PAM Prime Day plan — budget + YoY + projections"}
   ]
 }

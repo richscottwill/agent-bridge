@@ -22,6 +22,27 @@
 
 
 
+## Phase 0: Pre-flight Checks (~10s)
+
+Run before all other phases. Three quick checks that catch systemic issues early.
+
+### 0.1 Schema Check
+
+Verify DuckDB schemas expected by downstream phases exist: `ps.*`, `signals.*`, `main.*`, `asana.*`, `docs.*`, `ops.*`, `wiki.*`. If any target schema is missing, flag in the daily-brief header but continue (don't block).
+
+### 0.2 Market Constraints Staleness (added 2026-05-06)
+
+Run silently: `SELECT market, updated_at, DATE_DIFF('day', updated_at, CURRENT_TIMESTAMP) AS days_stale FROM ps.market_constraints_manual WHERE updated_at < CURRENT_TIMESTAMP - INTERVAL '60 days' ORDER BY updated_at`. If any rows return, include in the morning brief header: `⚠️ Market constraints stale: [market1 Nd], [market2 Nd]... — UPDATE on ps.market_constraints_manual before relying on governing_constraint / handoff_status / OCI fields`. If no rows, skip silently.
+
+Moved here from per-turn promptSubmit hook on 2026-05-06 — per-turn check was ~120 tokens for a table that rarely changes. Daily cadence is sufficient. Ad-hoc check still available via `market-constraints-staleness-alert.kiro.hook` (userTriggered).
+
+### 0.3 MCP Auth Smoke Test (if available)
+
+Quick curl against a known-good auth endpoint to detect Midway cookie expiry before Phase 1 subagents fail mid-run. Non-blocking — flag in brief header if dead but continue.
+
+---
+
+
 ## Timing Estimates
 
 | Phase | Sequential (old) | Parallel v1 (broken) | Parallel v2 (current) |
@@ -147,7 +168,7 @@ and the Kiro dashboard Pipeline view. Do not add article-tracking projects to th
 | Orchestrator B2 (Activity) fails | No asana-activity.md | Frontend skips activity signals section. Non-critical — no downstream dependencies. |
 | Subagent C (Email+Cal) fails | No email-triage.md, no calendar/email in DuckDB | Phase 2 signal-to-task skips email signals. Frontend falls back to live Outlook MCP for calendar. |
 | Subagent D (Loop) fails | No Loop page refresh | Stale content persists. Non-critical — no downstream dependencies. |
-| Subagent E (Hedy) fails | No hedy-digest.md, no meeting signals | Phase 2 signal-to-task skips Hedy signals. Frontend skips meeting recap section. Non-critical. |
+| Subagent E (Hedy) fails | No topic-log entries from today's meetings; signal_tracker misses meeting reinforcement | Phase 2 signal-to-task skips meeting signals. Topic docs simply lack today's meeting entries (recoverable next run). Frontend skips meeting recap section. Non-critical. |
 | DuckDB unreachable | Subagent A + orchestrator B1 partially fail | Slack digest still written to file. Asana digest still written to file. DuckDB-dependent processing skipped. |
 | Slack MCP rate limit | Subagent A slows/partial | Partial digest written. Missing channels flagged. |
 | Asana MCP rate limit | Orchestrator B1+B2 slow | B2 runs AFTER B1 (sequential), reducing contention. B2 prioritizes high-value tasks. Rate-limited tasks logged for next run. |
@@ -237,30 +258,44 @@ This ensures signals.slack_unanswered.richard_replied is accurate — it can det
 4. If clean: update am-auto.kiro.hook to reference v2 prompt pattern.
 5. Keep v1 failure documented in this file as a constraint (MCP Reliability section above).
 
-### Subagent E: Hedy Meeting Sync
+### Subagent E: Hedy Meeting Sync → Topic Log Router
 
 **Context files to load:**
 - spine.md (tool access)
 - memory.md (relationship graph for attendee context)
 - signal-intelligence.md (topic extraction for cross-channel reinforcement)
+- ~/shared/wiki/topics/INGEST-PROTOCOL.md (topic log ingest contract — source-of-truth)
+- ~/shared/wiki/topics/_registry.md (registered topic slugs + aliases + hedy_topic_id → doc path mapping)
 
 **MCP servers used:** Hedy MCP, DuckDB MCP
 
 **Execution order:**
-1. Pull recent meeting recaps/transcripts since last AM scan (use Hedy MCP tools: list sessions, get recaps, get action items)
-2. For each meeting: extract action items, decisions, topics, attendees
-3. Classify by meeting series (stakeholder/team/manager/peer) using attendee names
-4. INSERT meeting data into signals.hedy_meetings (DuckDB)
-5. Extract topics → reinforce in signals.signal_tracker (DuckDB) with +1.0 weight (meeting mentions are high-signal)
-6. Write hedy-digest.md (file)
+1. Pull recent meeting recaps/transcripts since last AM scan (Hedy MCP: GetSessions, GetSessionDetails, GetSessionToDos, GetSessionHighlights)
+2. For each meeting:
+   a. Extract what was said (direct quotes preferred), decisions as stated, actions as committed with owners + due dates, attendees
+   b. Identify target topic docs using INGEST-PROTOCOL topic identification order (hedy_topic_id match from `_registry.md` → slug/alias match → related-slug match)
+   c. For each target topic doc: prepend an H3 Log entry per the append contract (with `#### Source` citing `hedy:<session_id>`, `#### What was said / what happened`, `#### Decisions`, `#### Actions`, optional `#### Notes`)
+   d. Prepend a daily line to `## Simplified Timeline` under the current ISO-week H4 header
+   e. Move resolved items from Open Items to Closed Items — Audit Trail (append-only, never delete)
+   f. Update `updated:` frontmatter to today (PT)
+3. Reinforce `signals.signal_tracker` with extracted topics (+1.0 weight, source_channel='hedy') — the tracker remains the cross-channel topic index
+4. Append unregistered candidates (≥3 distinct mentions or strategic one-offs) to `~/shared/wiki/topics/_discovery-queue.md`
+5. If any topic doc accumulated ≥3 new entries since its last Summary refresh, emit a signal to the Summary-refresh debt file `~/shared/context/active/topic-log-summary-debt.json` (wiki-maintenance Stage 1 consumes it)
 
 **Writes:**
-- signals.hedy_meetings (DuckDB — INSERT)
-- signals.signal_tracker (DuckDB — UPDATE reinforcement only, shared with Subagent A but different source_channel values prevent conflicts)
-- ops.data_freshness (DuckDB — UPDATE hedy_meetings row)
-- ~/shared/context/intake/hedy-digest.md (file)
+- ~/shared/wiki/topics/<type>/<slug>.md (file — PREPEND Log entries, update Simplified Timeline, Open/Closed Items, `updated:`)
+- ~/shared/wiki/topics/_discovery-queue.md (file — APPEND unregistered candidates)
+- ~/shared/context/active/topic-log-summary-debt.json (file — UPDATE debt counters)
+- signals.signal_tracker (DuckDB — UPDATE reinforcement only, source_channel='hedy')
+
+**Does NOT write:**
+- `signals.hedy_meetings` — DEPRECATED 2026-05-06. Do NOT insert.
+- `main.meeting_analytics` / `main.meeting_highlights` / `main.meeting_series` — DEPRECATED 2026-05-06. Do NOT insert.
+- `~/shared/context/intake/hedy-digest.md` — DEPRECATED 2026-05-06. Do NOT write.
 
 **Does NOT touch:** Slack MCP, Asana MCP, Outlook MCP, SharePoint MCP, any slack-*/asana-*/email-* files
+
+**Hedy as source:** Hedy MCP remains the transcript source of truth. Topic log entries cite the specific `hedy:<session_id>` so future readers can retrieve the full transcript on demand. We do NOT duplicate transcripts into topic logs — we synthesize exactly what was said with attribution.
 
 ---
 
@@ -287,7 +322,10 @@ Subagents A, C, D, E are parallel and isolated from each other AND from the orch
 | signals.slack_messages | WRITE (incl. thread replies) | — | — | — | — | — |
 | signals.signal_tracker | WRITE | — | — | — | — | WRITE* |
 | signals.emails | — | — | — | WRITE | — | — |
-| signals.hedy_meetings | — | — | — | — | — | WRITE |
+| signals.hedy_meetings | — | — | — | — | — | DEPRECATED 2026-05-06 — NO WRITES |
+| wiki/topics/**/*.md | — | — | — | — | — | WRITE (PREPEND Log entries) |
+| wiki/topics/_discovery-queue.md | — | — | — | — | — | WRITE (APPEND candidates) |
+| context/active/topic-log-summary-debt.json | — | — | — | — | — | WRITE (UPDATE debt) |
 | asana.asana_tasks | — | WRITE | — | — | — | — |
 | asana.asana_task_history | — | WRITE | — | — | — | — |
 | main.calendar_events | — | — | — | WRITE | — | — |
@@ -363,11 +401,17 @@ AM-Backend Hook (orchestrator)
 │   │   ├─ UPDATE docs.loop_pages with content_markdown, content_preview, word_count
 │   │   └─ Update ops.data_freshness for loop_pages source
 │   │   Protocol: ~/shared/context/protocols/loop-page-sync.md
-│   └─ Subagent E: Hedy Meeting Sync (~1 min)
-│       ├─ Pull recent meeting transcripts/recaps since last scan
-│       ├─ Produce hedy-digest.md
-│       ├─ INSERT into signals.hedy_meetings (DuckDB)
-│       └─ Feed extracted topics into signal_tracker for cross-channel reinforcement
+│   └─ Subagent E: Hedy Meeting Sync → Topic Log Router (~1-2 min)
+│       ├─ Pull recent meeting transcripts/recaps since last scan (GetSessions, GetSessionDetails)
+│       ├─ For each session: route to target topic docs via _registry.md
+│       │    ├─ PREPEND H3 Log entry (with source cite, what-was-said, decisions, actions)
+│       │    ├─ PREPEND daily line to Simplified Timeline under ISO-week H4 header
+│       │    ├─ Move resolved items to Closed Items — Audit Trail
+│       │    └─ Update frontmatter `updated:` to today (PT)
+│       ├─ Feed extracted topics into signal_tracker (source_channel='hedy')
+│       ├─ Append unregistered candidates to topics/_discovery-queue.md
+│       └─ Update topic-log-summary-debt.json for ≥3-entry docs
+│       Protocol: ~/shared/wiki/topics/INGEST-PROTOCOL.md
 ├─ BARRIER: Wait for all subagents AND orchestrator Asana block to complete
 │   └─ If any subagent fails: log failure, continue with available data, flag in output
 ├─ Phase 2: SEQUENTIAL PROCESSING (orchestrator or single subagent, ~3 min)
@@ -410,13 +454,14 @@ AM-Backend Hook (orchestrator)
 │
 │   │   Protocol: ~/shared/context/protocols/context-enrichment.md
 │   │
-│   ├─ Step 2.5A: Meeting Series File Updates
-│   │   ├─ Query meeting_analytics for sessions since last enrichment
-│   │   ├─ Match sessions to series via Hedy topic_id → meeting_series
-│   │   ├─ Pull rich context: GetSessionDetails + GetSessionToDos + GetSessionHighlights
-│   │   ├─ Apply Multi-Source Ingestion Protocol (Hedy primary, email secondary)
-│   │   ├─ Update ~/shared/wiki/meetings/*.md (Latest Session, Open Items, Running Themes)
-│   │   ├─ UPDATE main.meeting_series (last_session_date, open_item_count)
+│   ├─ Step 2.5A: Topic Log Meeting Series Sync (optional complement to Subagent E)
+│   │   ├─ Subagent E has already prepended Hedy-sourced Log entries to test/market/initiative/project topic docs
+│   │   ├─ This step additionally updates legacy ~/shared/wiki/meetings/*.md files for recurring-meeting series that have their own doc (brandon-sync, mx-paid-search-sync, weekly-paid-acq, etc.)
+│   │   ├─ For each session whose `meeting_name` maps to a file in ~/shared/wiki/meetings/:
+│   │   │    ├─ Pull rich context: GetSessionDetails + GetSessionToDos + GetSessionHighlights (Hedy MCP)
+│   │   │    ├─ Prepend a "Latest Session" entry to the meeting series file
+│   │   │    └─ Update Open Items + Running Themes per existing meeting-series conventions
+│   │   └─ Meetings/ files remain as recurring-meeting logs; topics/ files are the cross-channel synthesis
 │   ├─ Step 2.5B: Relationship Activity Tracking
 │   │   └─ Weights: Slack 1x, Email 2x, Meeting 3x
 │   │   ├─ Query signals.wiki_candidates view (strength >= 3.0, spread >= 2, mentions >= 3)
@@ -425,6 +470,14 @@ AM-Backend Hook (orchestrator)
 │   ├─ Step 2.5D: Five Levels Tagging
 │   │   ├─ Classify signals + tasks by Level (L1-L5) using topic pattern matching
 │   │   └─ INSERT into main.five_levels_weekly (weekly heatmap of time allocation)
+│   │
+│   ├─ Step 2.5E: Topic Log Discovery Reconciliation
+│   │   ├─ Read ~/shared/wiki/topics/_registry.md (registered slugs + aliases)
+│   │   ├─ Query signals.signal_tracker for candidates: slugs with ≥3 mentions in last 60d not in registry
+│   │   ├─ Append any new candidates to ~/shared/wiki/topics/_discovery-queue.md (dedup against existing queue)
+│   │   ├─ Read ~/shared/context/active/topic-log-summary-debt.json — for any topic doc with debt ≥3, refresh Summary + Running Themes from last 5 Log entries (cite entry dates)
+│   │   └─ Reset debt counter after refresh
+│   │   Protocol: ~/shared/wiki/topics/INGEST-PROTOCOL.md
 │   │
 │   │   ├─ Extract Tier 1-2 events (decisions, milestones, blockers, launches, escalations)
 │   │   ├─ Tag with project_name + level
@@ -468,7 +521,7 @@ AM-Backend Hook (orchestrator)
 │   │   Source the hard thing from amcc.md or current.md pending actions (first unchecked item marked as hard thing).
 │   │   workdays_at_zero: carry forward from previous day's value (query MAX(tracker_date) < CURRENT_DATE).
 │   ├─ Update data freshness for all synced tables:
-│   │   Run: `python3 ~/shared/tools/state-files/refresh_data_freshness.py --sources asana_tasks,calendar_events,emails,slack_messages,signal_tracker,l1_streak,hedy_meetings`
+│   │   Run: `python3 ~/shared/tools/state-files/refresh_data_freshness.py --sources asana_tasks,calendar_events,emails,slack_messages,signal_tracker,l1_streak,topic_logs`
 │   └─ Log hook execution to DuckDB
 │   ├─ Execute ~/shared/context/protocols/sharepoint-durability-sync.md — AM section
 │   ├─ Push: ~/shared/context/active/am-enrichment-queue.json → Kiro-Drive/system-state/
@@ -542,7 +595,7 @@ Phase 1 (Data Collection) has independent data streams with no cross-dependencie
 - Asana activity (Orchestrator B2, after B1) → Asana MCP, asana-activity.md
 - Email + calendar (Subagent C) → Outlook MCP, signals.emails, main.calendar_events, email-triage.md
 - Loop page sync (Subagent D) → SharePoint MCP, docs.loop_pages
-- Hedy meetings (Subagent E) → Hedy MCP, signals.hedy_meetings, hedy-digest.md
+- Hedy meetings (Subagent E) → Hedy MCP, `~/shared/wiki/topics/**/*.md` (Log entries), `~/shared/wiki/topics/_discovery-queue.md`, signals.signal_tracker (reinforcement only)
 
 Wall-clock: max(Slack ~5min, Orchestrator B1+B2 ~5min, Email ~1min, Loop ~1min, Hedy ~1min) ≈ 5 min.
 

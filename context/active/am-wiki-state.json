@@ -1,35 +1,40 @@
 {
-  "generated_at_utc": "2026-05-03T13:35:00Z",
-  "stale_final_articles_30d": [],
-  "stale_final_articles_14d": [
-    {"topic": "polaris-brand-lp", "article_age_days": "14+ (last major refresh via v5 Testing Approach 4/17)", "recent_signal_strength": 22.12, "recommendation": "Article staging fresh pass due as part of hard-thing work"}
-  ],
-  "wiki_candidates_from_signals": [
+  "generated": "2026-05-06T14:35:00Z",
+  "generated_pt": "2026-05-06 07:35 PDT",
+  "run_mode": "degraded-auth-midway-cookie-missing",
+  "stale_final_articles": {
+    "scanned": false,
+    "reason": "wiki.publication_registry query not run this cycle — SharePoint access blocked, and 7d scan window didn't produce new candidates anyway"
+  },
+  "new_article_candidates_from_signals": [
     {
-      "topic": "mcs-coordination-ownership",
-      "strength": 4.02,
-      "mentions": 3,
-      "channels": 2,
-      "authors": ["Brandon Munday"],
-      "recommendation": "Not yet — single author (Brandon). Watch if it reaches 2+ distinct authors."
+      "slug": "midway-auth-recovery-protocol",
+      "rationale": "4th recurrence today (4/22, 4/25, 5/5, 5/6) of Midway cookie missing → Slack/Outlook/SharePoint all 401. Subagents consistently blocked. A concrete protocol doc would specify: (1) the ENOENT diagnostic, (2) which MCPs are Midway-auth vs not (Hedy/DuckDB/Asana-ESD all independent), (3) when 'degraded run' is valid vs misleading, (4) optional agent-side early-detection to skip work deterministically.",
+      "spread_sources": 4,
+      "strength_proxy": "session-log recurrence count",
+      "priority": "medium"
     },
     {
-      "topic": "ps-data-gap",
-      "strength": 1.5,
-      "mentions": 2,
-      "channels": 1,
-      "authors": ["Mukesh Gupta", "Richard Williams"],
-      "recommendation": "Too early — single-channel, just 2 mentions. But tracks with L3 Team Automation goal."
-    },
-    {
-      "topic": "ai-tooling-cbr",
-      "strength": 1.5,
-      "mentions": 2,
-      "channels": 1,
-      "authors": ["GTMO team"],
-      "recommendation": "Not wiki candidate. Watch as reference when building internal tools."
+      "slug": "hedy-topic-log-routing",
+      "rationale": "First full run under the 2026-05-06 protocol (topic logs replace signals.hedy_meetings + hedy-digest.md). Worth documenting: (1) routing order from INGEST-PROTOCOL, (2) meeting-series vs topic-log split (both get entries for recurring meetings), (3) signal_tracker dedup gotcha observed this run (10 rows inserted, no UPSERT) — either the subagent should UPSERT or consumers should dedupe on read.",
+      "spread_sources": 2,
+      "strength_proxy": "new protocol + observed gap",
+      "priority": "low"
     }
   ],
-  "no_wiki_candidates_meet_threshold": true,
-  "threshold_criteria": "strength >= 3.0 AND channel_spread >= 2 AND mentions >= 3 AND unique_non_richard_authors >= 2"
+  "pipeline_state": {
+    "scanned": false,
+    "reason": "Kiro dashboard Pipeline view is authoritative (not DuckDB)"
+  },
+  "topic_log_summary_debt": {
+    "docs_at_debt_ge_3": [
+      "topics/tests/baloo-shop-subdomain",
+      "topics/initiatives/mcs-polaris-migration",
+      "meetings/brandon-sync",
+      "meetings/weekly-paid-acq",
+      "meetings/mx-paid-search-sync",
+      "meetings/au-paid-search-sync"
+    ],
+    "note": "Wiki-maintenance Stage 1.5 should refresh Summary + Running Themes for these 6 docs on next run."
+  }
 }

@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Data Freshness Warning",
+  "description": "On every chat message, run a lightweight ops.data_freshness check and prepend a warning if any DuckDB source is >1.5x past its expected cadence. Prevents agents from producing stale-as-fresh outputs when AM-Backend has failed or run degraded. Externalized protocol at ~/shared/context/protocols/data-freshness-check.md keeps hook prompt ~30 tokens.",
+  "version": "1",
+  "when": {
+    "type": "promptSubmit"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Execute the data freshness check per ~/shared/context/protocols/data-freshness-check.md. If already run this conversation or no sources materially stale, skip silently. Non-blocking."
+  }
+}

@@ -7,7 +7,7 @@ format: Amazon 1-2 Page Narrative (Flash Report)
 cadence: Daily refresh
 destination: OneDrive Kiro-Drive/state-files/ww-testing-state.md
 created: 2026-04-12
-updated: 2026-05-01
+updated: 2026-05-04
 data_through: 2026 W15 (Apr 6–12)
 ---
 <!-- DOC-0402 | duck_id: state-file-ww-testing -->
@@ -60,12 +60,17 @@ UX is the workstream with the most W15 activity. Polaris WW dial-up ran 4/6–4/
 Hedy also logged a 4/17 AI Tool Demo session (51 min, 7 team members) where Richard demoed a code-based AI platform for WBR callout generation. Team aligned on adoption for WBR support, Markdown as the standard output format, and a shared SharePoint prompt repository. 6 team members committed to testing against their domains (Adi/MX by 4/25, Andrew/UK by 4/28, Stacey/Polaris by 5/2, Yun-Kang/Adobe NB, Dwayne/MCS, Peter/Apps). This is a Level 3 (Team Automation) advance — the program's first tool with committed teammate adoption.
 
 <!-- WBR-OWNED:prediction-scoring START -->
+W18 predictions scored across all 10 markets: 5 HIT (AU, CA, ES, IT, JP), 3 MISS (DE, UK, US — actuals 16–20% above CI high), 2 SURPRISE (FR 24.8%, MX 30.7% — both actuals above CI high). WW aggregate error trend: volume regimes are shifting upward across established markets; model calibration is catching up but CI widths remain tight on MX and FR. Across-market hit rate this cycle: 50%, consistent with the rolling 8-week average.
 <!-- WBR-OWNED:prediction-scoring END -->
 
 <!-- WBR-OWNED:forecast START -->
+**W19 forecasts (Bayesian seasonal brand/NB split, forecast date 2026-05-05, aggregate WW):** approximately 15,950 registrations (sum of per-market predictions: US 8,279; UK 1,405; DE 1,409; FR 981; IT 842; ES 484; JP 687; CA 692; AU 252; MX 891), $1.26M spend, $79 blended CPA. JP forecast (687) is the highest-risk read given Golden Week (Apr 29–May 5) straddles W18–W19; actual W19 JP below CI low of 246 would confirm GW suppression is deeper than 2025 pattern. US forecast (8,279) reflects the W18 NB diminishing-returns signal; if actual lands below CI low of 6,849, the Q2 auction-density firming hypothesis upgrades from candidate to confirmed and a bid-posture decision is required.
 <!-- WBR-OWNED:forecast END -->
 
 <!-- WBR-OWNED:signal-flags START -->
+- Polaris International Browse Category CTA live 5/1 (project_timeline Polaris milestone, 2026-05-01) — Vijeth requested US greenlight. Ref tag change b2b_ps_brand_carousel_details → b2b_mcs_cp_psbrand creates an attribution discontinuity in W19 US Brand regs; annotate dashboard before reading the trend.
+- MCS LP CVR personalization stat converged at 15-20% (project_timeline MCS LP decision, 2026-05-01) — Richard corrected the AU 30% myth as switch-away decrease not improvement. This changes the framing of LP testing ROI for the next Testing Approach update.
+- OP1 2027 deadline 5/5 — Brandon submitted MCS Tech customer-type recognition idea and asked Richard for additional ideas (project_timeline OP1 2027 decision, 2026-05-01). Blocks the Testing Approach doc shipping this week if OP1 input absorbs the writing capacity.
 <!-- WBR-OWNED:signal-flags END -->
 
 **Cost of inaction (null case):** The Testing Approach document (v5, 8.4/10 PUBLISH verdict) has been in draft for 4 months. The April 16 Polaris meeting did not include it; the document remains unsent to Brandon. Per Richard's own Friday brief, the visibility-avoidance pattern is now at 12 days and the L1 streak at 20 workdays at zero. Each week of delay extends the gap between PS testing methodology maturity and its formal leadership endorsement. Separately, the AI Max test design is now 6 days overdue (Apr 14 deadline). Each additional day compresses the Q2 2026 US pilot window, risking a slip to Q3 that would push learnings past the H2 planning cycle. On OCI, AU remains without a confirmed timeline and no MCC; each quarter without AU OCI forgoes the 18–24% reg uplift validated in US/UK/DE (now also CA).

@@ -60,10 +60,11 @@ The W15 pattern differs from W14: Brand and NB moved in opposite directions. Bra
 **April MTD (through W15):** 168 registrations and $25,829 spend against OP2 month targets of 1,071 regs and $147,592 spend — 15.7% pacing on registrations and 17.5% pacing on cost at 19% of the month elapsed. Week 1 of April captured only one week of data; April pacing will be reassessed at W16.
 
 <!-- WBR-OWNED:prediction-scoring START -->
+Last week's W18 forecast of 228 regs (CI 195–308) scored HIT — actual 228 fell inside CI with 0% error. AU calibration remains stable at 65% hit rate on 20 scored predictions.
 <!-- WBR-OWNED:prediction-scoring END -->
 
 <!-- WBR-OWNED:forecast START -->
-**W16 forecast (Bayesian seasonal brand/NB split, forecast date 2026-04-15):** 207 registrations (CI 188–288), $26,396 spend, $115 CPA. The forecast assumes a post-Easter recovery pattern consistent with April 2025, with brand CVR recovering toward the 8-week average of 7.46%. If actual W16 registrations fall below the CI low of 188, the Polaris tracking hypothesis upgrades from candidate root cause to confirmed driver.
+**W19 forecast (Bayesian seasonal brand/NB split, forecast date 2026-05-05):** 252 registrations (CI 212–318), $31.7K spend, $126 CPA. Assumes post-Anzac Day normalization with Brand CPA holding the $31–33 YTD floor and NB CVR returning to the 2.5–3.0% range. If actual W19 regs fall below CI low of 212, the post-Anzac softening hypothesis upgrades from candidate to confirmed Q2 demand pattern warranting settings review before W20.
 <!-- WBR-OWNED:forecast END -->
 
 No YoY comparison is available — AU launched in June 2025. The earliest YoY data will be available in June 2026.
@@ -86,6 +87,9 @@ No YoY comparison is available — AU launched in June 2025. The earliest YoY da
 <!-- AM-OWNED:trailing-week-flags END -->
 
 <!-- WBR-OWNED:signal-flags START -->
+- AU handoff locked 5/5 with Brandon (project_timeline AU_handoff decision, 2026-04-21) — biweekly cadence, no scheduled AU calls after handoff. This is the final WBR callout authored in the current ownership model.
+- Brandon asked for Kiro weekly AU change aggregator before 5/5 handoff (project_timeline AU_handoff commitment, 2026-04-21) — post-handoff oversight mechanism is an open deliverable.
+- Third AU operational reliability lapse in two weeks (project_timeline AU escalation, 2026-04-21, Brandon 6:32am live-escalation on Alexis biweekly call calendar confusion). Reliability pattern is not callout-derived but is the operational context for this handoff week.
 <!-- WBR-OWNED:signal-flags END -->
 
 ---

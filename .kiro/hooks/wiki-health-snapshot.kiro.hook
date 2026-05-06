@@ -8,6 +8,6 @@
   },
   "then": {
     "type": "runCommand",
-    "command": "python3 /shared/user/dashboards/build-wiki-health-history.py"
+    "command": "python3 ~/shared/dashboards/build-wiki-health-history.py"
   }
 }

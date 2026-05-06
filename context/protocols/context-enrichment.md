@@ -1,6 +1,18 @@
 <!-- DOC-0420 | duck_id: protocol-context-enrichment -->
 # Context Enrichment Protocol — Phase 2.5
 
+> **2026-05-06 DEPRECATION NOTICE**
+>
+> Step 2.5A (Meeting Series File Updates) as previously written depended on `main.meeting_analytics`, `main.meeting_highlights`, and `main.meeting_series` DuckDB tables. Those tables are deprecated.
+>
+> Replacement:
+> - Subagent E (AM-Backend Phase 1) now writes Hedy-sourced Log entries directly into `~/shared/wiki/topics/<type>/<slug>.md` per `~/shared/wiki/topics/INGEST-PROTOCOL.md`
+> - `~/shared/wiki/meetings/*.md` series files continue to be updated for recurring meetings (now via Hedy MCP GetSessionDetails on demand, not via DuckDB meeting tables)
+> - Step 2.5B (Relationship Activity): meeting_counts now derives from counting Log entries across topic docs + meeting-series files rather than querying `meeting_analytics`
+> - Step 2.5D (Five Levels Tagging): meeting signal now pulled from `signals.signal_tracker WHERE source_channel='hedy'` instead of `meeting_analytics`
+>
+> The SQL examples below that reference `meeting_analytics`, `meeting_highlights`, `meeting_series` are retained for historical reference but MUST NOT be executed. Use the replacements above.
+
 Runs after Phase 2 (signal processing) and before Phase 3 (task enrichment). Takes the raw ingested data from Phase 1 and flows it into richer context stores that compound over time.
 
 **Principle:** Ingestion captures what happened. Enrichment captures what it means. Signals are short-form (topic slug + strength). Enrichment is long-form (narrative, chronology, relationships, wiki candidates).

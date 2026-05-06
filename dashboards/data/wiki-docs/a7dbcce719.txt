@@ -62,9 +62,11 @@ NB CVR at 1.32% remains within the post-restructuring baseline of 1.3%–1.5%, c
 ie%CCP cannot be calculated for W15 because CCP values are null in the dashboard source. Using the Brand $90 / NB $30 model: total CCP surplus = 373 × $90 + 142 × $30 − (5,282 + 20,163) = $33,570 + $4,260 − $25,445 = +$12,385. Ratio is approximately 132%, above the 100% Q2 target and above W14's 126%.
 
 <!-- WBR-OWNED:prediction-scoring START -->
+Last week's W18 forecast of 457 regs (CI 288–570) scored SURPRISE — actual 659 overshot CI high by 16% (30.7% error). MX hit rate now 45% on 20 scored predictions with mean error 19.5%. The forecasting model's CI width adjustment (1.5×) is still too tight for MX's current efficiency-frontier regime where both Brand and NB are structurally accelerating.
 <!-- WBR-OWNED:prediction-scoring END -->
 
 <!-- WBR-OWNED:forecast START -->
+**W19 forecast (Bayesian seasonal brand/NB split, forecast date 2026-05-05):** 891 registrations (CI 30–1,025), $28.7K spend, $32 CPA. Assumes Brand CPA holds sub-$15 and NB CVR remains at the post-restructuring 1.3–1.5% baseline. Wide lower-bound CI reflects model uncertainty on MX's current regime. If actual W19 regs fall below CI low of ~400, the Brand surplus engine is decelerating and a decay-reforecast is needed before MBR; if they land above 700 for a second consecutive week, the current OP2 structurally underestimates Q2 trajectory and a written reforecast is required.
 <!-- WBR-OWNED:forecast END -->
 
 ## Flags
@@ -84,6 +86,9 @@ ie%CCP cannot be calculated for W15 because CCP values are null in the dashboard
 <!-- AM-OWNED:trailing-week-flags END -->
 
 <!-- WBR-OWNED:signal-flags START -->
+- MX April pacing 186% regs / 205% spend vs OP2 — Brandon confirmed the overspend is a choice tied to decay narrative (project_timeline MX_Budget blocker, 2026-04-22). Forecast reframe required before May MBR if W19–W21 don't bend.
+- W18 NB regs +19% rebound resolves Yun-Kang's W17 WBR callout flag (NB regs -19%, CVR -15% WoW; project_timeline WBR_MX_Callout escalation, 2026-04-21). The W17 dip was a one-week CVR wobble, not a structural break.
+- Kingpin Goals MX Andes data blocked 35 days (project_timeline MX_Kingpin blocker, 2026-04-21) — downstream MQC/CCP granularity unavailable; ie%CCP reads remain dashboard-derived rather than Andes-verified.
 <!-- WBR-OWNED:signal-flags END -->
 
 ---

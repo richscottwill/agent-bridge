@@ -1,5 +1,13 @@
 <!-- DOC-0343 | duck_id: protocol-communication-analytics -->
 
+> **2026-05-06 DEPRECATION NOTICE**
+>
+> This protocol previously queried `main.meeting_analytics` for richard_speaking_share, hedging_count, action_item_count trends. That table is deprecated.
+>
+> Replacement: query Hedy MCP directly on demand (GetSessions + GetSessionDetails) for the 28-day window. Speaking share and hedging metrics are computed at query time, not stored. This is a Loop 9 coaching signal used weekly; on-demand latency is acceptable.
+>
+> If query latency becomes a problem, restore a lightweight `main.meeting_communication_trends` view populated from topic-log Log entry counts + selective Hedy pulls — but DO NOT restore `meeting_analytics`.
+
 **Key consideration:** This section's content is critical for accurate operation. Cross-reference with related sections for full context.
 # Communication Analytics Protocol
 

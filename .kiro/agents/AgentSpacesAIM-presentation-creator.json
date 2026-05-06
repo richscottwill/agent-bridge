@@ -19,7 +19,7 @@
     }
   },
   "includeMcpJson" : false,
-  "resources" : [ "file:///home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6450338666/context/presentation-creator.md" ],
+  "resources" : [ "file:///home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6453251779/context/presentation-creator.md" ],
   "hooks" : {
     "agentSpawn" : [ {
       "command" : "aim agents publish-metrics --agent-name 'presentation-creator' --agent-package 'AgentSpacesAIM-1.0' || true"

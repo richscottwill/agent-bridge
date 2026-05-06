@@ -1,0 +1,78 @@
+{
+  "session_id": "f3ee0555-d736-4414-bbdf-623722d656b8",
+  "cwd": "/home/prichwil/.workspace",
+  "created_at": "2026-05-05T13:56:17.263590800Z",
+  "updated_at": "2026-05-06T05:28:24.801186110Z",
+  "session_state": {
+    "version": "v1",
+    "conversation_metadata": {
+      "user_turn_metadatas": [
+        {
+          "loop_id": {
+            "agent_id": {
+              "name": "kiro_default",
+              "parent_id": null,
+              "rand": null
+            },
+            "rand": 2417440748
+          },
+          "result": {
+            "Ok": {
+              "id": "989f9fa5-c6da-4ef9-b4f9-373b88d31fbe",
+              "role": "assistant",
+              "content": [
+                {
+                  "kind": "text",
+                  "data": "I can't run `mwinit` in this environment. AgentSpaces uses shared Midway authentication via MCS (MidwayClientSuite), and running `mwinit` would break authentication.\n\nIf you need to authenticate for a tool or service:\n\n- **For HTTP requests:** Use `mcscli curl` instead of `curl` — it handles Midway auth automatically.\n- **If a tool needs `~/.midway/cookie`:** Click the **⋯ (triple dot) menu** on the chat input box and select **Refresh Midway** to create the cookie file.\n\nIs there something specific you're trying to access? I can help you find the right approach."
+                }
+              ],
+              "timestamp": 1778045304
+            }
+          },
+          "message_ids": [
+            "78aeb96c-ecc2-4517-a630-2c1169a270a9",
+            "248d754f-630b-496c-811e-20488a17cd62"
+          ],
+          "total_request_count": 1,
+          "number_of_cycles": 0,
+          "builtin_tool_uses": 0,
+          "turn_duration": {
+            "secs": 6,
+            "nanos": 195356349
+          },
+          "end_reason": "UserTurnEnd",
+          "end_timestamp": "2026-05-06T05:28:24.788754129Z",
+          "input_token_count": 0,
+          "output_token_count": 0,
+          "context_usage_percentage": 10.0834
+        }
+      ],
+      "user_turn_start_request": null,
+      "last_request": null
+    },
+    "rts_model_state": {
+      "conversation_id": "f3ee0555-d736-4414-bbdf-623722d656b8",
+      "model_info": {
+        "model_name": "auto",
+        "description": "Models chosen by task for optimal usage and consistent quality",
+        "model_id": "auto",
+        "context_window_tokens": 1000000,
+        "rate_multiplier": 1.0,
+        "rate_unit": "Credit"
+      },
+      "context_usage_percentage": 10.0834
+    },
+    "permissions": {
+      "filesystem": {
+        "allowed_read_paths": [
+          "/home/prichwil/.workspace"
+        ],
+        "allowed_write_paths": [],
+        "denied_read_paths": [],
+        "denied_write_paths": []
+      },
+      "trusted_tools": [],
+      "denied_tools": []
+    }
+  }
+}

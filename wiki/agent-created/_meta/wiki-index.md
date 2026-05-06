@@ -4,7 +4,7 @@ status: FINAL
 audience: amazon-internal
 owner: Richard Williams
 created: 2026-04-12
-updated: 2026-05-01
+updated: 2026-05-05
 doc-type: reference
 auto_generated: true
 ---
@@ -15,7 +15,7 @@ auto_generated: true
 
 > Knowledge base for Amazon Business Paid Search. Auto-generated from a filesystem scan of `~/shared/wiki/agent-created/` by `build-wiki-index.py`. SharePoint publication status pulled from `data/sharepoint-artifacts.json`.
 
-Last generated: 2026-05-01T23:25:42
+Last generated: 2026-05-05T01:46:19
 SharePoint cache as of: 2026-05-01T19:42:41+0000
 
 ---

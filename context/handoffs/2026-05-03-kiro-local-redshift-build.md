@@ -1,4 +1,14 @@
-# Handoff to kiro-local — PS Analytics Redshift Path Build
+> **SUPERSEDED — 2026-05-03 end-of-day.** This handoff is kept for provenance only. Do not execute its build spec. Two of its load-bearing assumptions turned out wrong once kiro-local tested them:
+> 1. **DuckDB postgres extension was the wrong client.** Plain PG wire-protocol auth fails Shepherd audit even when network works. Canonical path is Redshift Data API (port 443) or the JDBC driver with `groupFederation=true`.
+> 2. **Network wasn't DevSpaces-specific.** kiro-local hit the same TCP timeout on :8192 from Windows on corp VPN. rs-01 is `PubliclyAccessible:True` but SGs restrict source CIDRs that don't include either environment.
+>
+> **What actually shipped (2026-05-03):** Path 1 — Hubble + QuickSuite for teammates, MotherDuck unchanged for agent-side. Teammate-facing artifact is `paid-search-hubble-query-library.docx` (v3.1) in SharePoint `AB-Paid-Acq-Team/methodology/`. Path 2 (Data API + IAM ticket on `Redshift_Person_SDO_Identity_Access_Role`) is drafted but dormant — triggers only on a concrete programmatic need.
+>
+> **Full thread:** `/shared/user/agent-bus/threads/redshift-programmatic-access/` and `hubble-query-library-audit/`. Session-log entries 2026-05-03 from "kiro-local returned test results" onward.
+
+---
+
+# Handoff to kiro-local — PS Analytics Redshift Path Build (ORIGINAL — SUPERSEDED)
 
 **From:** kiro-server (DevSpaces)
 **To:** kiro-local (Mac on VPN)

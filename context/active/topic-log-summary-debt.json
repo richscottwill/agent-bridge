@@ -1,0 +1,23 @@
+{
+  "_comment": "Tracks Summary-refresh debt per topic doc. When debt >= 3, next wiki-maintenance Stage 1.5 or AM-Backend Phase 2.5E refresh regenerates Summary + Running Themes. Reset to 0 after refresh.",
+  "schema_version": 1,
+  "last_updated": "2026-05-06T20:30:00Z",
+  "docs": {
+    "topics/tests/polaris-brand-lp": {"debt": 1, "last_refresh": "2026-05-06", "entries_since_refresh": 6},
+    "topics/markets/mx": {"debt": 8, "last_refresh": "2026-05-06", "entries_since_refresh": 13},
+    "topics/markets/au": {"debt": 2, "last_refresh": "2026-05-06", "entries_since_refresh": 3},
+    "topics/initiatives/au-abix-transition": {"debt": 1, "last_refresh": "2026-05-06", "entries_since_refresh": 3},
+    "topics/tests/baloo-shop-subdomain": {"debt": 4, "last_refresh": null, "entries_since_refresh": 4},
+    "topics/initiatives/mcs-polaris-migration": {"debt": 3, "last_refresh": null, "entries_since_refresh": 3},
+    "topics/initiatives/op1-2026": {"debt": 2, "last_refresh": null, "entries_since_refresh": 2},
+    "topics/initiatives/reftag-taxonomy-system": {"debt": 1, "last_refresh": null, "entries_since_refresh": 1},
+    "topics/initiatives/aeo-ai-overviews": {"debt": 1, "last_refresh": null, "entries_since_refresh": 1},
+    "topics/tests/oci-rollout": {"debt": 0, "last_refresh": "2026-05-06", "entries_since_refresh": 1},
+    "meetings/brandon-sync": {"debt": 3, "last_refresh": null, "entries_since_refresh": 3},
+    "meetings/weekly-paid-acq": {"debt": 5, "last_refresh": null, "entries_since_refresh": 5},
+    "meetings/mx-paid-search-sync": {"debt": 2, "last_refresh": null, "entries_since_refresh": 2},
+    "meetings/au-paid-search-sync": {"debt": 2, "last_refresh": null, "entries_since_refresh": 2},
+    "meetings/adi-sync": {"debt": 3, "last_refresh": null, "entries_since_refresh": 3},
+    "meetings/pam": {"debt": 1, "last_refresh": null, "entries_since_refresh": 1}
+  }
+}

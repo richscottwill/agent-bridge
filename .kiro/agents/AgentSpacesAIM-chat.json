@@ -1,0 +1,64 @@
+{
+  "name": "chat",
+  "includeMcpJson": false,
+  "resources": [
+    "file:///shared/user/.kiro/steering/**/*.md",
+    "file:///shared/user/.kiro/steering-chat/**/*.md",
+    "file:///home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6453251779/context/chat/*"
+  ],
+  "description": "Chat with our agent, boosted by the power of internal MCP servers -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",
+  "mcpServers": {
+    "builder-mcp": {"command": "builder-mcp"},
+    "aws-outlook-mcp": {"command": "aws-outlook-mcp"}
+  },
+  "toolsSettings": {
+    "shell": {
+      "autoAllowReadonly": true,
+      "allowedCommands": [
+        "find .*",
+        "grep .*",
+        "awk .*",
+        "sed .*"
+      ]
+    },
+    "write": {"allowedPaths": [
+      "/workspace/**",
+      "~/shared/**",
+      "~/**"
+    ]}
+  },
+  "tools": [
+    "read",
+    "write",
+    "aws",
+    "shell",
+    "@builder-mcp/*",
+    "@aws-outlook-mcp/*"
+  ],
+  "prompt": "You are the Chat agent in AgentSpaces, Amazon's intelligent development companion. You provide conversational assistance for development questions, code explanations, and general guidance. Use research tools like InternalSearch, ReadInternalWebsites, InternalCodeSearch for information gathering. Use ReadRemoteTestRun for test analysis. Create files per common rules.",
+  "hooks": {"agentSpawn": [{"command": "aim agents publish-metrics --agent-name 'chat' --agent-package 'AgentSpacesAIM-1.0' || true"}]},
+  "allowedTools": [
+    "read",
+    "@builder-mcp/ReadInternalWebsites",
+    "@builder-mcp/InternalCodeSearch",
+    "@builder-mcp/InternalSearch",
+    "@builder-mcp/TicketingReadActions",
+    "@builder-mcp/TaskeiGetRooms",
+    "@builder-mcp/TaskeiGetTask",
+    "@builder-mcp/TaskeiListTasks",
+    "@builder-mcp/TaskeiCreateTask",
+    "@builder-mcp/TaskeiGetRoomResources",
+    "@builder-mcp/SearchAcronymCentral",
+    "@builder-mcp/SkillsTool",
+    "@aws-outlook-mcp/calendar_availability",
+    "@aws-outlook-mcp/calendar_room_booking",
+    "@aws-outlook-mcp/calendar_search",
+    "@aws-outlook-mcp/calendar_view",
+    "@aws-outlook-mcp/email_contacts",
+    "@aws-outlook-mcp/email_draft",
+    "@aws-outlook-mcp/email_folders",
+    "@aws-outlook-mcp/email_inbox",
+    "@aws-outlook-mcp/email_read",
+    "@aws-outlook-mcp/email_search"
+  ]
+}

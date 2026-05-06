@@ -1,13 +1,13 @@
 {
   "enabled": true,
   "name": "Open Items Reminder",
-  "description": "Every 3 hours, scan session-log.md for OPEN/deferred items and surface them as a brief reminder. Also scans for DUE YYYY-MM-DD markers across the full log regardless of age and surfaces any dated within the next 14 days.",
-  "version": "3",
+  "description": "Every 3 hours (conversation-gated), scan session-log.md for OPEN/deferred items and DUE-dated reminders within 14 days. Surfaces as a compact 2-3 line prepend.",
+  "version": "4",
   "when": {
     "type": "promptSubmit"
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Check if it has been more than 3 hours since you last surfaced open items (track this by checking if you've already shown open items in this conversation). If you have already shown them in this conversation, skip silently. If this is the first message in a new conversation OR it has been a long conversation (>3 hours), do two scans of ~/shared/context/intake/session-log.md and combine the results. Scan 1 \u2014 recent open items: Check the most recent entries (last 7 days). Look for any items tagged OPEN, or containing words like 'awaiting', 'pending', 'deferred', 'not actioned', 'not yet built'. Scan 2 \u2014 dated reminders: Scan the ENTIRE session-log.md (not just last 7 days) for any line containing the pattern 'DUE YYYY-MM-DD'. For each match, parse the date. If the date is within the next 14 days from today (use `TZ=America/Los_Angeles date +%Y-%m-%d` for today's PT date), include it. If the date is in the past and the entry hasn't been marked DONE or RESOLVED, include it as overdue. Ignore dates more than 14 days out. If either scan finds items, prepend a brief 2-3 line reminder to your response: 'Open from prior sessions: [item1], [item2]... | Upcoming: [DUE YYYY-MM-DD item]...'. Keep it compact \u2014 one line per item, newest/nearest first. If nothing is open and no dates are in-window, skip silently. Do NOT let this delay or block the user's actual request \u2014 it's a background check only."
+    "prompt": "Execute the open-items scan per ~/shared/context/protocols/open-items-scan.md. If already run this conversation, skip silently. Non-blocking."
   }
 }

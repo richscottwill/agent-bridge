@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-30T15:04:02.017234+00:00",
+  "generated": "2026-05-05T01:41:30.103855+00:00",
   "data_source": "live",
   "token_source": "mcp.json:duckdb",
   "five_levels": [
@@ -40,6 +40,46 @@
     }
   ],
   "five_levels_weekly": [
+    {
+      "week_start": "2026-04-27",
+      "level": 1,
+      "level_name": "Sharpen Yourself",
+      "tasks_completed": 0,
+      "artifacts_shipped": 0,
+      "streak_weeks": 0
+    },
+    {
+      "week_start": "2026-04-27",
+      "level": 2,
+      "level_name": "Drive WW Testing",
+      "tasks_completed": 0,
+      "artifacts_shipped": 0,
+      "streak_weeks": 1
+    },
+    {
+      "week_start": "2026-04-27",
+      "level": 3,
+      "level_name": "Team Automation",
+      "tasks_completed": 0,
+      "artifacts_shipped": 0,
+      "streak_weeks": 0
+    },
+    {
+      "week_start": "2026-04-27",
+      "level": 4,
+      "level_name": "Zero-Click Future",
+      "tasks_completed": 0,
+      "artifacts_shipped": 0,
+      "streak_weeks": 0
+    },
+    {
+      "week_start": "2026-04-27",
+      "level": 5,
+      "level_name": "Agentic Orchestration",
+      "tasks_completed": 0,
+      "artifacts_shipped": 0,
+      "streak_weeks": 0
+    },
     {
       "week_start": "2026-04-20",
       "level": 1,
@@ -120,7 +160,7 @@
       "actual": 1454,
       "budget": 2500,
       "utilization": 58,
-      "days_stale": 0,
+      "days_stale": 5,
       "updated": "2026-04-30"
     },
     {
@@ -129,7 +169,7 @@
       "actual": 2509,
       "budget": 3500,
       "utilization": 72,
-      "days_stale": 0,
+      "days_stale": 5,
       "updated": "2026-04-30"
     },
     {
@@ -138,7 +178,7 @@
       "actual": 2819,
       "budget": 3500,
       "utilization": 81,
-      "days_stale": 0,
+      "days_stale": 5,
       "updated": "2026-04-30"
     },
     {
@@ -147,7 +187,7 @@
       "actual": 1363,
       "budget": 2500,
       "utilization": 55,
-      "days_stale": 0,
+      "days_stale": 5,
       "updated": "2026-04-30"
     },
     {
@@ -156,7 +196,7 @@
       "actual": 5081,
       "budget": 2000,
       "utilization": 254,
-      "days_stale": 0,
+      "days_stale": 5,
       "updated": "2026-04-30"
     },
     {
@@ -165,7 +205,7 @@
       "actual": 1286,
       "budget": 2000,
       "utilization": 64,
-      "days_stale": 8,
+      "days_stale": 13,
       "updated": "2026-04-22"
     },
     {
@@ -174,8 +214,8 @@
       "actual": 2642,
       "budget": 2000,
       "utilization": 132,
-      "days_stale": 0,
-      "updated": "2026-04-30"
+      "days_stale": 2,
+      "updated": "2026-05-03"
     },
     {
       "organ": "Nervous System",
@@ -183,7 +223,7 @@
       "actual": 1743,
       "budget": 1500,
       "utilization": 116,
-      "days_stale": 0,
+      "days_stale": 5,
       "updated": "2026-04-30"
     },
     {
@@ -192,8 +232,8 @@
       "actual": 1235,
       "budget": 1500,
       "utilization": 82,
-      "days_stale": 0,
-      "updated": "2026-04-30"
+      "days_stale": 2,
+      "updated": "2026-05-03"
     },
     {
       "organ": "Gut",
@@ -201,7 +241,7 @@
       "actual": 1708,
       "budget": 2000,
       "utilization": 85,
-      "days_stale": 0,
+      "days_stale": 5,
       "updated": "2026-04-30"
     },
     {
@@ -210,7 +250,7 @@
       "actual": 703,
       "budget": 0,
       "utilization": 0,
-      "days_stale": 0,
+      "days_stale": 5,
       "updated": "2026-04-30"
     }
   ],
@@ -226,10 +266,10 @@
   "experiment_windows": {
     "n_7d": 0,
     "kept_7d": 0,
-    "n_30d": 116,
-    "kept_30d": 92,
+    "n_30d": 1,
+    "kept_30d": 0,
     "last_experiment_at": "2026-04-22 13:45:48",
-    "hours_since_last": 194
+    "hours_since_last": 300
   },
   "experiment_by_run": [
     {
@@ -420,24 +460,6 @@
     }
   ],
   "experiment_by_day": [
-    {
-      "day": "2026-04-02 00:00:00",
-      "n": 17,
-      "kept": 16,
-      "word_delta": -1474
-    },
-    {
-      "day": "2026-04-03 00:00:00",
-      "n": 45,
-      "kept": 30,
-      "word_delta": -1488
-    },
-    {
-      "day": "2026-04-04 00:00:00",
-      "n": 53,
-      "kept": 46,
-      "word_delta": -1118
-    },
     {
       "day": "2026-04-22 00:00:00",
       "n": 1,
@@ -1377,13 +1399,6 @@
       "last_touched": "2026-04-04T08:02:00"
     },
     {
-      "organ": "amcc",
-      "exp_count": 8,
-      "kept": 5,
-      "total_delta": -292,
-      "last_touched": "2026-04-04T15:14:10.222373"
-    },
-    {
       "organ": "nervous-system",
       "exp_count": 8,
       "kept": 8,
@@ -1391,10 +1406,10 @@
       "last_touched": "2026-04-04T15:14:10.222373"
     },
     {
-      "organ": "gut",
-      "exp_count": 7,
+      "organ": "amcc",
+      "exp_count": 8,
       "kept": 5,
-      "total_delta": -426,
+      "total_delta": -292,
       "last_touched": "2026-04-04T15:14:10.222373"
     },
     {
@@ -1403,6 +1418,13 @@
       "kept": 6,
       "total_delta": -1026,
       "last_touched": "2026-04-04T08:00:00"
+    },
+    {
+      "organ": "gut",
+      "exp_count": 7,
+      "kept": 5,
+      "total_delta": -426,
+      "last_touched": "2026-04-04T15:14:10.222373"
     },
     {
       "organ": "hands",
@@ -1478,12 +1500,52 @@
     }
   ],
   "streak": {
-    "current": 1,
+    "current": 3,
     "artifact_shipped": false,
-    "hard_thing": "polaris-brand-lp (AU/MX non-weblab test design, due 5/6)",
-    "tracker_date": "2026-04-29"
+    "hard_thing": null,
+    "tracker_date": "2026-05-04"
   },
   "streak_history": [
+    {
+      "tracker_date": "2026-05-04",
+      "workdays_at_zero": 3,
+      "artifact_shipped": false,
+      "artifact_name": null,
+      "hard_thing_name": null,
+      "notes": null
+    },
+    {
+      "tracker_date": "2026-05-03",
+      "workdays_at_zero": 3,
+      "artifact_shipped": false,
+      "artifact_name": null,
+      "hard_thing_name": "polaris-brand-lp (AU/MX non-weblab test design, due 5/6)",
+      "notes": "Sunday 5/3 \u2014 workdays_at_zero unchanged at 3. Manual AM-backend partial run. Schema drift fixed (AU/MX archived, consolidated to ABIX). Brandon 1:1 tomorrow Tue 5/5 \u2014 kill-or-revive decision on 4 aged tasks bundled. OP1 MCS reply and Brand LP 1-pager are this week's ship targets."
+    },
+    {
+      "tracker_date": "2026-05-02",
+      "workdays_at_zero": 3,
+      "artifact_shipped": false,
+      "artifact_name": null,
+      "hard_thing_name": "polaris-brand-lp (AU/MX non-weblab test design, due 5/6)",
+      "notes": "Saturday 5/2 \u2014 workdays_at_zero unchanged at 3 (weekends don't count). No new artifacts."
+    },
+    {
+      "tracker_date": "2026-05-01",
+      "workdays_at_zero": 3,
+      "artifact_shipped": false,
+      "artifact_name": null,
+      "hard_thing_name": "polaris-brand-lp (AU/MX non-weblab test design, due 5/6)",
+      "notes": "AM 5/1 backfill. Day 3 since reset. Brandon OP1 Tech MCS ideation direct DM to Richard, response pending. Brandon CVR LP stat question \u2014 Richard corrected AU 30% myth cleanly. Trust signal intact."
+    },
+    {
+      "tracker_date": "2026-04-30",
+      "workdays_at_zero": 2,
+      "artifact_shipped": false,
+      "artifact_name": null,
+      "hard_thing_name": "polaris-brand-lp (AU/MX non-weblab test design, due 5/6)",
+      "notes": "AM 4/30 backfill from session record. Day 2 since 4/28 reset. Live task: 1214330104198712. Brandon 1:1 Tue 5/5 coming up."
+    },
     {
       "tracker_date": "2026-04-29",
       "workdays_at_zero": 1,
@@ -1555,46 +1617,6 @@
       "artifact_name": null,
       "hard_thing_name": "Testing Document for Kate",
       "notes": "20 workdays at zero. v5 not started."
-    },
-    {
-      "tracker_date": "2026-04-16",
-      "workdays_at_zero": 19,
-      "artifact_shipped": false,
-      "artifact_name": null,
-      "hard_thing_name": "Send Testing Approach v5 to Brandon",
-      "notes": "EOD: Day 19 at zero L1. No progress on Testing Approach. 1 Sweep completed. 2 meetings (DDD Polaris, AU Adobe Alignment)."
-    },
-    {
-      "tracker_date": "2026-04-15",
-      "workdays_at_zero": 18,
-      "artifact_shipped": false,
-      "artifact_name": null,
-      "hard_thing_name": "Testing Document for Kate",
-      "notes": "AM-Backend: Hard thing = Testing Approach doc, 14d overdue. Core block 12:30-2PM today. Workdays at zero carried from yesterday (18)."
-    },
-    {
-      "tracker_date": "2026-04-14",
-      "workdays_at_zero": 0,
-      "artifact_shipped": false,
-      "artifact_name": null,
-      "hard_thing_name": "Send Testing Approach v5 to Brandon",
-      "notes": "AM-Backend: Hard thing unchanged from amcc.md. Doc is v5 PUBLISH (8.4/10). 5 minor fixes remain. Ship to Brandon."
-    },
-    {
-      "tracker_date": "2026-04-13",
-      "workdays_at_zero": 0,
-      "artifact_shipped": false,
-      "artifact_name": null,
-      "hard_thing_name": "Send Testing Approach v5 to Brandon",
-      "notes": null
-    },
-    {
-      "tracker_date": "2026-04-09",
-      "workdays_at_zero": 0,
-      "artifact_shipped": false,
-      "artifact_name": null,
-      "hard_thing_name": "Send Testing Approach v5 to Brandon",
-      "notes": "AM-Backend: Testing Doc 8d overdue. Team at Austin offsite today."
     }
   ],
   "patterns": [
@@ -1855,23 +1877,13 @@
   "hook_reliability": [
     {
       "hook_name": "am-frontend",
-      "total_runs": 2,
-      "avg_duration_s": 1410.0,
+      "total_runs": 3,
+      "avg_duration_s": 940.0,
       "max_duration_s": 1620.0,
       "total_failures": 2,
       "total_asana_writes": 9,
-      "last_run": "2026-04-30",
-      "days_since_last_run": 0
-    },
-    {
-      "hook_name": "eod-frontend",
-      "total_runs": 1,
-      "avg_duration_s": null,
-      "max_duration_s": null,
-      "total_failures": null,
-      "total_asana_writes": 0,
-      "last_run": "2026-04-28",
-      "days_since_last_run": 2
+      "last_run": "2026-05-01",
+      "days_since_last_run": 4
     },
     {
       "hook_name": "eod-backend",
@@ -1881,17 +1893,17 @@
       "total_failures": 3,
       "total_asana_writes": 12,
       "last_run": "2026-04-28",
-      "days_since_last_run": 2
+      "days_since_last_run": 7
     },
     {
-      "hook_name": "am-backend",
-      "total_runs": 2,
-      "avg_duration_s": 1890.0,
-      "max_duration_s": 2640.0,
-      "total_failures": 3,
+      "hook_name": "eod-frontend",
+      "total_runs": 1,
+      "avg_duration_s": null,
+      "max_duration_s": null,
+      "total_failures": null,
       "total_asana_writes": 0,
-      "last_run": "2026-04-22",
-      "days_since_last_run": 8
+      "last_run": "2026-04-28",
+      "days_since_last_run": 7
     },
     {
       "hook_name": "am-backend-remediation",
@@ -1901,7 +1913,17 @@
       "total_failures": 2,
       "total_asana_writes": 7,
       "last_run": "2026-04-22",
-      "days_since_last_run": 8
+      "days_since_last_run": 13
+    },
+    {
+      "hook_name": "am-backend",
+      "total_runs": 2,
+      "avg_duration_s": 1890.0,
+      "max_duration_s": 2640.0,
+      "total_failures": 3,
+      "total_asana_writes": 0,
+      "last_run": "2026-04-22",
+      "days_since_last_run": 13
     },
     {
       "hook_name": "am-backend-parallel-v2",
@@ -1911,7 +1933,7 @@
       "total_failures": 0,
       "total_asana_writes": 104,
       "last_run": "2026-04-17",
-      "days_since_last_run": 13
+      "days_since_last_run": 18
     },
     {
       "hook_name": "manual-hedy-backfill",
@@ -1921,7 +1943,7 @@
       "total_failures": null,
       "total_asana_writes": 0,
       "last_run": "2026-04-11",
-      "days_since_last_run": 19
+      "days_since_last_run": 24
     },
     {
       "hook_name": "am-backend-parallel",
@@ -1931,7 +1953,7 @@
       "total_failures": 1,
       "total_asana_writes": 0,
       "last_run": "2026-04-08",
-      "days_since_last_run": 22
+      "days_since_last_run": 27
     },
     {
       "hook_name": "eod-meeting-sync",
@@ -1941,7 +1963,7 @@
       "total_failures": 1,
       "total_asana_writes": 5,
       "last_run": "2026-04-07",
-      "days_since_last_run": 23
+      "days_since_last_run": 28
     },
     {
       "hook_name": "eod-refresh",
@@ -1951,7 +1973,7 @@
       "total_failures": 0,
       "total_asana_writes": 0,
       "last_run": "2026-04-07",
-      "days_since_last_run": 23
+      "days_since_last_run": 28
     },
     {
       "hook_name": "am-auto-phase1",
@@ -1961,18 +1983,45 @@
       "total_failures": null,
       "total_asana_writes": 0,
       "last_run": "2026-04-06",
-      "days_since_last_run": 24
+      "days_since_last_run": 29
     }
   ],
   "workflow_reliability": [
     {
-      "workflow_name": "am-backend-parallel-v2",
-      "total_runs": 5,
+      "workflow_name": "am-frontend",
+      "total_runs": 1,
       "successes": 0,
       "success_rate": 0.0,
-      "avg_duration_s": 1387.4,
-      "last_run": "2026-04-29 13:50:00",
+      "avg_duration_s": 300.0,
+      "last_run": "2026-05-04 14:54:10.562937",
       "days_since_last_run": 1
+    },
+    {
+      "workflow_name": "am-backend",
+      "total_runs": 1,
+      "successes": 1,
+      "success_rate": 100.0,
+      "avg_duration_s": 1500.0,
+      "last_run": "2026-05-04 14:30:00",
+      "days_since_last_run": 1
+    },
+    {
+      "workflow_name": "am-backend-parallel",
+      "total_runs": 1,
+      "successes": 0,
+      "success_rate": 0.0,
+      "avg_duration_s": 2700.0,
+      "last_run": "2026-05-03 13:07:32.299721",
+      "days_since_last_run": 2
+    },
+    {
+      "workflow_name": "am-backend-parallel-v2",
+      "total_runs": 2,
+      "successes": 0,
+      "success_rate": 0.0,
+      "avg_duration_s": 779.5,
+      "last_run": "2026-04-29 13:50:00",
+      "days_since_last_run": 6
     }
   ]
 }

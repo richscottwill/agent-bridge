@@ -1,12 +1,12 @@
 {
   "name": ".AM-Backend",
-  "version": "5.2.1",
-  "description": "Manual-trigger backend orchestration. Was previously promptSubmit (v5.1.0) which injected ~2k tokens of context into every chat \u2014 Mario/pi thesis: the context must be Richard's. Now userTriggered: fires only when Richard explicitly runs the hook. Display name prefixed with '.' to match .AM-Frontend convention. Underlying protocol (~/shared/context/protocols/am-backend-parallel.md) is unchanged. Re-enabled 2026-04-22.",
+  "version": "5.3.0",
+  "description": "Manual-trigger backend orchestration. v5.3.0 (2026-05-06): Subagent E now routes Hedy sessions to topic-log markdown files instead of signals.hedy_meetings DuckDB table. Added Phase 2.5E topic-log discovery reconciliation. Underlying protocol (~/shared/context/protocols/am-backend-parallel.md) updated to match. v5.2.2 (2026-05-04): reworded 'common failure' line — 'specification' was routing to spec-creation agents. Was userTriggered from v5.2.x onward to avoid injecting ~2k tokens into every chat.",
   "when": {
     "type": "userTriggered"
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Execute the AM-Backend parallel ingest + process protocol defined in ~/shared/context/protocols/am-backend-parallel.md. Read the protocol file first, then run all phases end-to-end. Output state files to ~/shared/context/active/ for AM-Frontend consumption.\n\nCommon failure: forgetting to check the output format matches the specification."
+    "prompt": "Execute the AM-Backend parallel ingest + process protocol defined in ~/shared/context/protocols/am-backend-parallel.md. This is NOT a spec-creation task — do not invoke spec agents or create requirements/design/tasks docs. Read the protocol file first, then run all phases end-to-end as plain orchestration. Output state files to ~/shared/context/active/ for AM-Frontend consumption.\n\nCRITICAL (2026-05-06): Subagent E MUST route Hedy sessions to ~/shared/wiki/topics/<type>/<slug>.md per ~/shared/wiki/topics/INGEST-PROTOCOL.md. Do NOT insert into signals.hedy_meetings, main.meeting_analytics, main.meeting_highlights, or main.meeting_series — those tables are deprecated. Do NOT write ~/shared/context/intake/hedy-digest.md. Hedy MCP remains the transcript source; topic logs are the sourced synthesis.\n\nCommon failure: writing state files in a shape that doesn't match what AM-Frontend reads. Before finishing, verify the output files match the schema described in the protocol."
   }
 }

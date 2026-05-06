@@ -1,52 +1,96 @@
 {
-  "generated_at_utc": "2026-05-03T13:35:00Z",
-  "run_type": "am_backend_parallel_partial_resume",
-  "tasks_enriched_this_run": 7,
-  "bucket_cap_violations": [
-    {"bucket": "Engine Room", "count": 12, "cap": 6, "over_by": 6, "action": "demote 6 tasks to Backlog or close"},
-    {"bucket": "Core", "count": 10, "cap": 4, "over_by": 6, "action": "demote 6 tasks to Backlog or close"},
-    {"bucket": "Admin", "count": 6, "cap": 3, "over_by": 3, "action": "demote 3 tasks to Backlog or close"}
-  ],
-  "routing_gaps": {
-    "no_routine_rw": 36,
-    "note": "36 tasks have no Routine_RW assigned. Some are pinned-context tasks (expected). Others are fresh inserts or legacy tasks that dodged routing."
+  "generated": "2026-05-06T14:35:00Z",
+  "generated_pt": "2026-05-06 07:35 PDT",
+  "run_mode": "degraded-auth-midway-cookie-missing",
+  "source": "DuckDB asana.asana_tasks snapshot 2026-05-03 13:36 UTC (3 days old) — Asana MCP not exposed in current orchestrator session, no B1/B2 refresh this run",
+  "summary": {
+    "total_incomplete_tasks": 89,
+    "overdue": 37,
+    "today_due": 2,
+    "missing_priority": 52,
+    "missing_routine": 58,
+    "missing_next_action": 53,
+    "missing_kiro": 52,
+    "brandon_1_1_bundle_overdue": 5
   },
-  "decision_detection_from_slack": [
+  "today_due": [
     {
-      "signal_source": "ab-paid-search-global 5/1",
-      "topic": "CVR LP personalization stat",
-      "decision": "Team converged at 15-20% CVR improvement as defensible stat (Stacey 20%, Adi CA 15%). Richard reframed AU 30% as switch-away decrease.",
-      "flag": "FYI — Brandon may reuse this stat in QBR/OP1 externally"
+      "task_gid": "1214330104198712",
+      "name": "Brand LP AU/MX test design — alternate measurement (non-weblab) for MCS vs Reg Start",
+      "due_on": "2026-05-06",
+      "priority_rw": "Urgent",
+      "routine_rw": "Core",
+      "next_action": "Write v1 1-pager in shared/wiki/staging/ — 6 sections in 90 min, non-weblab measurement framework. Before Brandon 1:1 Tue 5/5.",
+      "flag": "HARD THING — polaris-brand-lp artifact. Brandon 1:1 5/5 already happened; 1-pager slipped. Today (5/6) is day-after-1:1 deadline for the artifact per that commitment."
     },
     {
-      "signal_source": "ab-outbound-marketing 5/1",
-      "topic": "OP1 Tech intake forms",
-      "decision": "Intakes due 5/5 for prioritization but continuous accepting. Lina email suggests 5/15 for some categories.",
-      "flag": "Deadline ambiguity — Richard should submit by 5/5 to be safe"
-    },
-    {
-      "signal_source": "dm-brandon 5/1",
-      "topic": "MCS Tech OP1 ideation",
-      "decision": "Brandon submitting customer-type recognition idea. Directly asked Richard for additional ideas.",
-      "flag": "Richard owes reply before 5/5"
-    },
-    {
-      "signal_source": "dm-asana-bot 5/1 (Vijeth)",
-      "topic": "Browse Category CTA US greenlight",
-      "decision": "International marketplaces live. Ref tag change documented. Awaiting Richard decision on US rollout.",
-      "flag": "Richard owes reply — cross-team coordination per Brandon 4/29 coaching"
+      "task_gid": "1214426066517377",
+      "name": "WW Kw URL inclusion",
+      "due_on": "2026-05-06",
+      "priority_rw": "Urgent",
+      "routine_rw": null,
+      "next_action": null,
+      "flag": "Missing routine_rw + next_action — enrichment needed. Scope unclear."
     }
   ],
-  "kill_or_revive_queue": [
-    {"task_gid": "1213959904341162", "name": "Reply to Brandon — PAM budget", "days_overdue": 27, "decision_scheduled": "Brandon 1:1 Tue 5/5"},
-    {"task_gid": "1213764961716427", "name": "WW weblab dial-up (Richard)", "days_overdue": 26, "decision_scheduled": "Brandon 1:1 Tue 5/5 — milestone already passed"},
-    {"task_gid": "1213875146955582", "name": "Get Enhanced Match details", "days_overdue": 26, "recommendation": "Bundle close w/ Reply to Brandon PAM"},
-    {"task_gid": "1213968042348601", "name": "Deep Dive: Add IECCP FAQ to new account playbook", "days_overdue": 24, "recommendation": "Ask Brandon 1:1 if still wanted"}
+  "critical_overdue_top10": [
+    {"task_gid": "1212988092117041", "name": "Paid App", "due_on": "2026-03-31", "days_overdue": 36, "priority_rw": "Urgent", "routine_rw": "Engine Room", "flag": "Longest overdue in backlog. BAU workstream — kill-or-revive decision pending."},
+    {"task_gid": "1213959904341162", "name": "Reply to Brandon — PAM budget needs assessment", "due_on": "2026-04-06", "days_overdue": 30, "priority_rw": null, "next_action": "At 5/5 Brandon 1:1: ask kill-or-revive. If revive: new Today-priority + concrete scope.", "flag": "Brandon 1:1 5/5 was the kill-or-revive gate — check outcome"},
+    {"task_gid": "1213764961716427", "name": "WW weblab dial-up (Richard)", "due_on": "2026-04-07", "days_overdue": 29, "priority_rw": "Urgent", "routine_rw": "Core", "next_action": "Coordinate with Alex/Vijeth on weblab dial-up settings"},
+    {"task_gid": "1213875146955582", "name": "Get Enhanced Match details", "due_on": "2026-04-07", "days_overdue": 29, "priority_rw": null, "flag": "Blocks Enhanced Match FAQ task (1213964668984060)"},
+    {"task_gid": "1212808474749819", "name": "Paid App PO — Create Q2 + Amend Google PO to Q2", "due_on": "2026-04-13", "days_overdue": 23, "priority_rw": "Urgent", "routine_rw": "Sweep", "flag": "Depends on PAM budget confirmation with Brandon (kill-or-revive at 5/5 1:1)"},
+    {"task_gid": "1214074477110993", "name": "Sitelink Audit/Update", "due_on": "2026-04-17", "days_overdue": 19, "priority_rw": "Urgent", "routine_rw": null, "next_action": "Audit sitelinks across AU/MX/PAM next week"},
+    {"task_gid": "1214081017092577", "name": "MCS LP Review: Connect with Lorena on paid social/PS synergy", "due_on": "2026-04-17", "days_overdue": 19, "priority_rw": "Urgent", "routine_rw": null, "next_action": "Ping Lorena — partially addressed in 5/5 MX sync (Lorena raised halo hypothesis); follow up with correlation analysis"},
+    {"task_gid": "1213125740755931", "name": "Email overlay WW rollout/testing", "due_on": "2026-04-18", "days_overdue": 18, "priority_rw": "Urgent", "routine_rw": "Core"},
+    {"task_gid": "1214088494080582", "name": "Resolve MX duplicate invoice — Diana ($56K, PO Q1 MS-20200908)", "due_on": "2026-04-18", "days_overdue": 18, "priority_rw": null, "next_action": "Chase Google Ads support ticket 0-1804000040849. Reply Diana EOD. Reply Brandon MBET issue logging format.", "flag": "Google support ticket open; Diana escalated to manager 4/27"},
+    {"task_gid": "1214128634505816", "name": "AU handover: switched to max clicks 4/17; check account Monday and make changes to budgets as needed.", "due_on": "2026-04-20", "days_overdue": 16, "priority_rw": "Urgent", "routine_rw": null, "next_action": "5/5 handover completed per hedy:j7nQYyfUFwwAbzM6LGZv — verify Megan has Google Ads access, AdCloud export setup is the remaining Richard action", "flag": "RESOLUTION in flight — mark complete after AdCloud export set up this week"}
   ],
-  "new_signal_task_create_queue": [
-    {"topic": "MCS Tech OP1 ideas reply to Brandon", "due": "2026-05-04", "bucket": "Sweep"},
-    {"topic": "US Browse Category CTA greenlight reply to Vijeth", "due": "2026-05-04", "bucket": "Sweep"},
-    {"topic": "Mukesh GenBI data-pull approach reply", "due": "2026-05-05", "bucket": "Sweep"},
-    {"topic": "Brandon MBET issue logging reply", "due": "2026-05-05", "bucket": "Sweep"}
+  "brandon_1_1_bundle_overdue": [
+    {"task_gid": "1213959904341162", "name": "Reply to Brandon — PAM budget needs assessment", "due_on": "2026-04-06", "days_overdue": 30, "flag": "5/5 kill-or-revive gate — check outcome"},
+    {"task_gid": "1213962513760099", "name": "Brandon 1:1: Set up automated monthly ASP confirmation reminders", "due_on": "2026-04-09", "days_overdue": 27},
+    {"task_gid": "1214068272596724", "name": "PAM: Flag underspend risk to Brandon", "due_on": "2026-04-17", "days_overdue": 19},
+    {"task_gid": "1213964668984060", "name": "Brandon 1:1: Draft Enhanced Match FAQ for legal", "due_on": "2026-04-22", "days_overdue": 14},
+    {"task_gid": "1214137998394047", "name": "Brandon ask: Clarify email overlay status for Outbound Marketing Goals", "due_on": null, "days_overdue": null, "flag": "No due date — likely dropped or superseded by 1214351597615320 (also overdue 8d)"}
+  ],
+  "tomorrow_hard_thing": {
+    "name": "Follow through on Brand LP test design 1-pager from 5/5 Brandon commitment",
+    "context": "Task 1214330104198712 due today (5/6). Brandon 1:1 5/5 discussed polaris-brand-lp as the measurement gap; non-weblab measurement framework is the deliverable. Hedy session hedy:Qz26yMKVFzAWAiU99ZoD captured the specific ask.",
+    "level": "L1 + L2 (Sharpen Yourself + WW Testing)"
+  },
+  "enrichment_proposals": [
+    {
+      "task_gid": "1214426066517377",
+      "task_name": "WW Kw URL inclusion",
+      "missing": ["routine_rw", "next_action_rw", "kiro_rw"],
+      "suggested": {"routine_rw": "Core", "next_action_rw": "Unclear scope — ask Brandon or de-duplicate against Polaris LP URL work stream"},
+      "flag": "Due today with no direction — ask Brandon at next sync"
+    },
+    {
+      "task_gid": "1213875146955582",
+      "task_name": "Get Enhanced Match details",
+      "missing": ["priority_rw", "routine_rw", "next_action_rw"],
+      "suggested": {"priority_rw": "Urgent", "routine_rw": "Core", "next_action_rw": "Request LiveRamp technical spec for Enhanced Match to feed FAQ task 1213964668984060"},
+      "flag": "29d overdue — gates the Enhanced Match FAQ work. Bundle with Brandon 1:1 discussion if still alive."
+    },
+    {
+      "task_gid": "1213959904341162",
+      "task_name": "Reply to Brandon — PAM budget needs assessment",
+      "missing": ["priority_rw", "routine_rw"],
+      "suggested": {"priority_rw": "Today (if revived) OR close (if killed)", "routine_rw": "Admin"},
+      "flag": "5/5 kill-or-revive gate — outcome likely set, update when Slack restored"
+    },
+    {
+      "task_gid": "1214128634505816",
+      "task_name": "AU handover: switched to max clicks 4/17",
+      "missing": ["routine_rw"],
+      "suggested": {"routine_rw": "Sweep"},
+      "flag": "5/5 handover complete — close or reframe as 'AU AdCloud export setup' (the remaining Richard commitment from hedy:j7nQYyfUFwwAbzM6LGZv)"
+    }
+  ],
+  "flags": [
+    {"type": "asana-sync-stale", "note": "Asana snapshot 3 days old. Task state may have shifted at 5/5 Brandon 1:1 (PAM kill-or-revive gate, Enhanced Match bundle) and 5/5 AU handover (Megan now primary). Re-sync when Asana MCP available."},
+    {"type": "data-coverage-gap", "note": "53 tasks (60%) missing next_action_rw. Normal AM-Backend enrichment would propose fixes by pulling Slack/email context, but those sources are 401'd. Enrichment backlog will grow until mwinit."},
+    {"type": "post-handoff-cleanup", "note": "AU handover officially completed 5/5 per hedy:j7nQYyfUFwwAbzM6LGZv. Multiple AU-specific tasks should be closed or transferred to Megan. Backlog carries AU handover / ABix transition as active — needs triage pass."},
+    {"type": "sparkle-regime-change", "note": "Sparkle campaign ended 2026-04-30 per MX sync 5/5. MX forecast model assumptions may need update; MX W19 is the first post-Sparkle baseline week."}
   ]
 }

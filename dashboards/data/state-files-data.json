@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-30T14:43:43.213866+00:00",
+  "generated": "2026-05-05T01:41:30.236764+00:00",
   "markets": [
     "au",
     "mx",
@@ -16,10 +16,10 @@
     "ww": "ww-testing-state.md"
   },
   "live_recency": {
-    "forecast_generated": "2026-04-29T22:35:42Z",
-    "forecast_last_data_date": "2026-04-19",
-    "forecast_max_week": 16,
-    "projection_generated": "2026-04-28T20:09:10.215922+00:00"
+    "forecast_generated": "2026-05-05T01:40:43Z",
+    "forecast_last_data_date": "2026-05-03",
+    "forecast_max_week": 18,
+    "projection_generated": "2026-05-05T01:40:47.827323+00:00"
   },
   "data": {
     "au": {
@@ -32,15 +32,15 @@
         "cadence": "Daily refresh",
         "destination": "OneDrive Kiro-Drive/state-files/au-paid-search-state.md",
         "created": "2026-04-12",
-        "updated": "2026-04-20",
+        "updated": "2026-05-04",
         "data_through": "2026 W15 (Apr 6–12)"
       },
       "title": "AU Paid Search — Daily State File",
       "status": "ACTIVE",
       "owner": "Richard Williams",
-      "updated": "2026-04-20",
-      "updated_frontmatter": "2026-04-20",
-      "updated_mtime": "2026-04-29",
+      "updated": "2026-05-04",
+      "updated_frontmatter": "2026-05-04",
+      "updated_mtime": "2026-05-05",
       "data_through": "2026 W15 (Apr 6–12)",
       "sections": {
         "introduction": [
@@ -57,7 +57,7 @@
           "<!-- AM-OWNED:trailing-week-flags START --> 4 anomalies detected (>20% deviation from 8-week average):",
           "**Recommended action:** Do not treat the W15 regression as proof of structural decline without first validating Polaris tracking. Brand CVR is the highest-signal metric to monitor post-tracking-fix because Brand CVR is the least-dependent on market demand fluctuation. If Brand CVR returns to 7.0%+ within 7 days of tracking validation, the decline is resolvable; if it does not, structural keyword or LP investigation is required.",
           "**Cost of inaction (null case):** If the Polaris URL migration tracking is not validated within the next 7 days, 3 consecutive weeks of CVR data will remain ambiguous — the team cannot distinguish genuine demand softness from a tracking artifact. At the current W15 run rate of 168 registrations per week, AU would deliver approximately 8,736 FY26 registrations — 32% below the 12,906 OP2 target and $600K below the $1.8M budget plan. Separately, OCI has no confirmed AU timeline and no MCC has been created. Every quarter without OCI forgoes the 18–24% registration uplift observed in comparable OCI markets (US +24%, UK +23%, DE +18%). At AU's current 168 regs/week baseline, a 20% OCI uplift would add approximately 34 registrations per week — 1,768 annualized registrations worth approximately $271K at $153 CPA. <!-- AM-OWNED:trailing-week-flags END -->",
-          "<!-- WBR-OWNED:signal-flags START --> <!-- WBR-OWNED:signal-flags END -->",
+          "<!-- WBR-OWNED:signal-flags START --> - AU handoff locked 5/5 with Brandon (project_timeline AU_handoff decision, 2026-04-21) — biweekly cadence, no scheduled AU calls after handoff. This is the final WBR callout authored in the current ownership model. - Brandon asked for Kiro weekly AU change aggregator before 5/5 handoff (project_timeline AU_handoff commitment, 2026-04-21) — post-handoff oversight mechanism is an open deliverable. - Third AU operational reliability lapse in two weeks (project_timeline AU escalation, 2026-04-21, Brandon 6:32am live-escalation on Alexis biweekly call calendar confusion). Reliability pattern is not callout-derived but is the operational context for this handoff week. <!-- WBR-OWNED:signal-flags END -->",
           "---"
         ],
         "lessons": [
@@ -732,15 +732,15 @@
         "cadence": "Daily refresh",
         "destination": "OneDrive Kiro-Drive/state-files/mx-paid-search-state.md",
         "created": "2026-04-12",
-        "updated": "2026-04-20",
+        "updated": "2026-05-04",
         "data_through": "2026 W15 (Apr 6–12)"
       },
       "title": "MX Paid Search — Daily State File",
       "status": "ACTIVE",
       "owner": "Richard Williams",
-      "updated": "2026-04-20",
-      "updated_frontmatter": "2026-04-20",
-      "updated_mtime": "2026-04-29",
+      "updated": "2026-05-04",
+      "updated_frontmatter": "2026-05-04",
+      "updated_mtime": "2026-05-05",
       "data_through": "2026 W15 (Apr 6–12)",
       "sections": {
         "introduction": [
@@ -757,7 +757,7 @@
           "<!-- AM-OWNED:trailing-week-flags START --> 3 anomalies detected (>20% deviation from 8-week average):",
           "**Recommended action:** The W15 surge is favorable but the Brand CVR level of 8.08% is not sustainable as a baseline. If W16 Brand CVR retreats toward 6.0%–6.5% while W15's spend levels persist, Brand CPA will normalize back to the $19–$23 band and blended CPA will settle into the $55–$65 range. No operational change is warranted — the priority is to avoid over-extrapolating a rebound week into Q2 budget commitments.",
           "**Cost of inaction (null case):** The W14 NB CVR concern was resolved by the W15 clean read. The outstanding operational risks now concentrate on stakeholder-facing actions. Lorena's Q2 expected-spend request (for PO submission) is now 26 days overdue and the keyword data / strategy request is 32 days overdue. Each additional week of delay erodes the new-stakeholder trust dynamic flagged in Tenet 4. Separately, the duplicate Google MX invoice (first flagged by Diana De la Fuente on Apr 14, acknowledged Apr 17) is still unresolved pending Google's response; if unresolved by end of April, the $56K duplicate could block Q2 PO submission and force manual finance intervention. Finally, MX Auto landing page ref tag overwrite (Vijeth) continues to break paid search attribution on the automotive vertical, so automotive-specific reporting is still directional. <!-- AM-OWNED:trailing-week-flags END -->",
-          "<!-- WBR-OWNED:signal-flags START --> <!-- WBR-OWNED:signal-flags END -->",
+          "<!-- WBR-OWNED:signal-flags START --> - MX April pacing 186% regs / 205% spend vs OP2 — Brandon confirmed the overspend is a choice tied to decay narrative (project_timeline MX_Budget blocker, 2026-04-22). Forecast reframe required before May MBR if W19–W21 don't bend. - W18 NB regs +19% rebound resolves Yun-Kang's W17 WBR callout flag (NB regs -19%, CVR -15% WoW; project_timeline WBR_MX_Callout escalation, 2026-04-21). The W17 dip was a one-week CVR wobble, not a structural break. - Kingpin Goals MX Andes data blocked 35 days (project_timeline MX_Kingpin blocker, 2026-04-21) — downstream MQC/CCP granularity unavailable; ie%CCP reads remain dashboard-derived rather than Andes-verified. <!-- WBR-OWNED:signal-flags END -->",
           "---"
         ],
         "lessons": [
@@ -1455,15 +1455,15 @@
         "cadence": "Daily refresh",
         "destination": "OneDrive Kiro-Drive/state-files/ww-testing-state.md",
         "created": "2026-04-12",
-        "updated": "2026-04-20",
+        "updated": "2026-05-04",
         "data_through": "2026 W15 (Apr 6–12)"
       },
       "title": "WW Testing — Daily State File",
       "status": "ACTIVE",
       "owner": "Richard Williams",
-      "updated": "2026-04-20",
-      "updated_frontmatter": "2026-04-20",
-      "updated_mtime": "2026-04-29",
+      "updated": "2026-05-04",
+      "updated_frontmatter": "2026-05-04",
+      "updated_mtime": "2026-05-05",
       "data_through": "2026 W15 (Apr 6–12)",
       "sections": {
         "introduction": [
@@ -2190,11 +2190,11 @@
       "market": "AU Paid Search",
       "key": "au",
       "status": "ACTIVE",
-      "data_through": "2026 W16 (Apr 13–19)",
+      "data_through": "2026 W18 (Apr 27–May 3)",
       "data_through_frontmatter": "2026 W15 (Apr 6–12)",
-      "updated": "2026-04-29",
-      "updated_frontmatter": "2026-04-20",
-      "stale_days": 9,
+      "updated": "2026-05-05",
+      "updated_frontmatter": "2026-05-04",
+      "stale_days": 1,
       "owner": "Richard Williams",
       "goals": 5,
       "tenets": 4,
@@ -2216,11 +2216,11 @@
       "market": "MX Paid Search",
       "key": "mx",
       "status": "ACTIVE",
-      "data_through": "2026 W16 (Apr 13–19)",
+      "data_through": "2026 W18 (Apr 27–May 3)",
       "data_through_frontmatter": "2026 W15 (Apr 6–12)",
-      "updated": "2026-04-29",
-      "updated_frontmatter": "2026-04-20",
-      "stale_days": 9,
+      "updated": "2026-05-05",
+      "updated_frontmatter": "2026-05-04",
+      "stale_days": 1,
       "owner": "Richard Williams",
       "goals": 5,
       "tenets": 4,
@@ -2242,11 +2242,11 @@
       "market": "WW Testing",
       "key": "ww",
       "status": "ACTIVE",
-      "data_through": "2026 W16 (Apr 13–19)",
+      "data_through": "2026 W18 (Apr 27–May 3)",
       "data_through_frontmatter": "2026 W15 (Apr 6–12)",
-      "updated": "2026-04-29",
-      "updated_frontmatter": "2026-04-20",
-      "stale_days": 9,
+      "updated": "2026-05-05",
+      "updated_frontmatter": "2026-05-04",
+      "stale_days": 1,
       "owner": "Richard Williams",
       "goals": 4,
       "tenets": 4,

@@ -102,12 +102,18 @@ def main():
     asana = q(con, """
         SELECT COUNT(*) AS open_tasks FROM asana.asana_tasks WHERE completed = false
     """)
-    hedy = q(con, """
-        SELECT COUNT(*) AS meetings_30d,
-               COUNT(DISTINCT meeting_name) AS series
-        FROM signals.hedy_meetings
-        WHERE meeting_date >= CURRENT_DATE - INTERVAL '30 days'
-    """)
+    # DEPRECATED 2026-05-06: signals.hedy_meetings no longer written to.
+    # Counts now come from topic-log file scan.
+    try:
+        import subprocess
+        result = subprocess.run(
+            ["find", os.path.expanduser("~/shared/wiki/topics"), "-name", "*.md", "-not", "-path", "*/_*"],
+            capture_output=True, text=True, timeout=10
+        )
+        topic_count = len([l for l in result.stdout.strip().split("\n") if l])
+    except Exception:
+        topic_count = 0
+    hedy = [{"meetings_30d": topic_count, "series": topic_count, "_note": "topic-log file count (hedy_meetings DEPRECATED)"}]
     cal = q(con, """
         SELECT COUNT(*) AS events_7d FROM main.calendar_events
         WHERE start_time >= CURRENT_TIMESTAMP - INTERVAL '7 days'
@@ -136,7 +142,7 @@ def main():
     print(f"  Slack: {slack[0]['channels'] if slack else 0} channels, {slack[0]['msgs_7d'] if slack else 0} msgs/7d")
     print(f"  Email: {emails[0]['emails_7d'] if emails else 0}/7d")
     print(f"  Asana: {asana[0]['open_tasks'] if asana else 0} open")
-    print(f"  Hedy: {hedy[0]['meetings_30d'] if hedy else 0} meetings/30d")
+    print(f"  Hedy → topic logs: {topic_count} topic files (hedy_meetings table DEPRECATED)")
     print(f"  Tables: {total_tables} across {len(schemas)} schemas")
 
     # ── Ingest freshness ──
@@ -148,7 +154,7 @@ def main():
         FROM ops.data_freshness
         WHERE last_updated IS NOT NULL
           AND source_name IN ('slack_messages', 'emails', 'asana_tasks',
-                              'hedy_meetings', 'loop_pages', 'calendar_events',
+                              'topic_logs', 'loop_pages', 'calendar_events',
                               'signal_tracker')
         ORDER BY source_name
     """)

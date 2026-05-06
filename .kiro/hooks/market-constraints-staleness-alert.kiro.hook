@@ -1,13 +1,13 @@
 {
   "enabled": true,
   "name": "Market Constraints Staleness Alert",
-  "description": "On chat start, flag any ps.market_constraints_manual rows that haven't been updated in >60 days. Surfaces stale governing_constraint / handoff_status / OCI status that should be reviewed.",
-  "version": "1",
+  "description": "On-demand check of ps.market_constraints_manual for rows that haven't been updated in >60 days. Flags stale governing_constraint / handoff_status / OCI status that should be reviewed. Moved from promptSubmit → userTriggered on 2026-05-06: per-turn cost was ~120 tokens/turn for a check that rarely returns results (constraints change <1x/day). Daily auto-check now folded into AM-Backend Phase 0; this userTriggered hook is the ad-hoc escape hatch.",
+  "version": "2",
   "when": {
-    "type": "promptSubmit"
+    "type": "userTriggered"
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Run this DuckDB query silently and ONLY mention it in your response if there are results: SELECT market, updated_at, DATE_DIFF('day', updated_at, CURRENT_TIMESTAMP) AS days_stale FROM ps.market_constraints_manual WHERE updated_at < CURRENT_TIMESTAMP - INTERVAL '60 days' ORDER BY updated_at; If rows exist, prepend a compact one-liner to your response: 'Market constraints stale: [market1 Nd], [market2 Nd]... \u2014 consider UPDATE on ps.market_constraints_manual'. If no rows, skip silently. Do NOT block or delay the user's actual request \u2014 this is a background check only."
+    "prompt": "Run DuckDB query: SELECT market, updated_at, DATE_DIFF('day', updated_at, CURRENT_TIMESTAMP) AS days_stale FROM ps.market_constraints_manual WHERE updated_at < CURRENT_TIMESTAMP - INTERVAL '60 days' ORDER BY updated_at. If rows exist, report 'Market constraints stale: [market1 Nd], [market2 Nd]... — consider UPDATE on ps.market_constraints_manual'. If no rows, report 'All market constraints fresh (<60d).'"
   }
 }

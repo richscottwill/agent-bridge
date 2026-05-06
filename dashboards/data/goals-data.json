@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-30T14:30:44.936082+00:00",
+  "generated": "2026-05-05T01:41:30.486743+00:00",
   "source": "Outbound Marketing Goals.xlsx",
   "owner_count": 18,
   "goal_count": 30,
@@ -2082,7 +2082,7 @@
         }
       ],
       "forecast_source": "forecast-data.json (same as Weekly Review)",
-      "forecast_generated": "2026-04-29T22:35:42Z",
+      "forecast_generated": "2026-05-05T01:40:43Z",
       "target_source": "ps.targets via projection-data.json"
     },
     "Globalized Cross-Market Testing": {

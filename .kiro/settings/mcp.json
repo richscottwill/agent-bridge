@@ -274,7 +274,8 @@
         "sharepoint_delete_file",
         "sharepoint_delete_file",
         "sharepoint_resolve_url"
-      ]
+      ],
+      "disabledTools": []
     },
     "enterprise-asana-mcp": {
       "command": "aim",

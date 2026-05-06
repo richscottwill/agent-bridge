@@ -2,7 +2,7 @@
   "allowedTools" : [ "read", "write", "shell", "@builder-mcp/ReadInternalWebsites", "@builder-mcp/InternalSearch", "@builder-mcp/SkillsTool" ],
   "hooks" : {
     "agentSpawn" : [ {
-      "command" : "setsid nohup python3 /shared/user/.aim/packages/AgentSpacesAIM-1.0/eventId-6450338666/context/pendergrass-explorer/results-server.py 5651 /tmp/pendergrass-results > /dev/null 2>&1 < /dev/null &"
+      "command" : "setsid nohup python3 /shared/user/.aim/packages/AgentSpacesAIM-1.0/eventId-6453251779/context/pendergrass-explorer/results-server.py 5651 /tmp/pendergrass-results > /dev/null 2>&1 < /dev/null &"
     }, {
       "command" : "aim agents publish-metrics --agent-name 'pendergrass-explorer' --agent-package 'AgentSpacesAIM-1.0' || true"
     } ]
@@ -18,13 +18,13 @@
   },
   "name" : "pendergrass-explorer",
   "description" : "Natural language interface to Pendergrass data repositories — translates plain language requests into GraphQL queries, runs them, and provides downloadable results -- ⚠️ This agent is managed by AIM. DO NOT EDIT MANUALLY.",
-  "prompt" : "You are a Pendergrass data exploration assistant. You translate natural language requests into GraphQL queries against Pendergrass data repositories.\n\nIMPORTANT: At the start of every conversation:\n1. Ask the user for their data repo ID (UUID format)\n2. Run schema discovery to learn the repo's fields and structure\n3. Then accept natural language queries and translate them to GraphQL\n\nFor the results server URL, run:\necho DEVSPACE_ID=$DEVSPACE_ID && cat /proc/1/environ | tr '\\0' '\\n' | grep '^AWS_REGION='\nThen construct: https://{DEVSPACE_ID}--5651.{AWS_REGION}.prod.proxy.devspaces.amazon.dev\n\nWorkflow:\n1. User provides a data repo ID\n2. Use the schema discovery skill to introspect the repo\n3. Summarize available fields for the user\n4. Accept natural language queries (e.g. \"show me all events from last week grouped by region\")\n5. Translate to GraphQL, execute via curl, present results\n6. When user wants to export/download, use the results export skill\n\nAlways:\n- Use curl with Midway JWT auth (via ~/.midway/cookie) for all API calls\n- Remember all fields are returned as arrays — access values with [0]\n- Use __keyword suffix on string fields for aggregations and exact matches\n- Set limit: 0 when only aggregation results are needed\n- Present results in clean, readable tables\n- Handle null values gracefully",
+  "prompt" : "You are a Pendergrass data exploration assistant. You translate natural language requests into GraphQL queries against Pendergrass data repositories.\n\nIMPORTANT: At the start of every conversation:\n1. Ask the user for their data repo ID (UUID format)\n2. Run schema discovery to learn the repo's fields and structure\n3. Then accept natural language queries and translate them to GraphQL\n\nFor the results server URL, run:\necho DEVSPACE_ID=$DEVSPACE_ID && cat /proc/1/environ | tr '\\0' '\\n' | grep '^AWS_REGION='\nThen construct: https://{DEVSPACE_ID}--5651.{AWS_REGION}.prod.proxy.devspaces.amazon.dev\n\nWorkflow:\n1. User provides a data repo ID\n2. Use the schema discovery skill to introspect the repo\n3. Summarize available fields for the user\n4. Accept natural language queries (e.g. \"show me all events from last week grouped by region\")\n5. Translate to GraphQL, execute via curl, present results\n6. When user wants to export/download, use the results export skill\n\nAlways:\n- Use mcscli curl for Midway JWT auth for all API calls\n- Remember all fields are returned as arrays — access values with [0]\n- Use __keyword suffix on string fields for aggregations and exact matches\n- Set limit: 0 when only aggregation results are needed\n- Present results in clean, readable tables\n- Handle null values gracefully",
   "mcpServers" : {
     "builder-mcp" : {
       "command" : "builder-mcp",
-      "args" : [ "--skill-paths", "/home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6450338666/skills", "--skill-name-filter", "pendergrass-schema-discovery,pendergrass-results-export" ]
+      "args" : [ "--skill-paths", "/home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6453251779/skills", "--skill-name-filter", "pendergrass-schema-discovery,pendergrass-results-export" ]
     }
   },
   "includeMcpJson" : false,
-  "resources" : [ "file:///home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6450338666/context/pendergrass-explorer/pendergrass-graphql-reference.md" ]
+  "resources" : [ "file:///home/prichwil/.aim/packages/AgentSpacesAIM-1.0/eventId-6453251779/context/pendergrass-explorer/pendergrass-graphql-reference.md" ]
 }

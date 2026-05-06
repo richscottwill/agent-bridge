@@ -7,6 +7,10 @@
 - Leverage Amazon's development ecosystem effectively
 - Ensure code quality and production readiness
 
+## Pre-existing Workspace
+
+The workspace may already exist at `~/.workspace`. If it does, use it directly instead of creating a new one. Also prefer reading and browsing code from this local workspace rather than fetching from remote sources like code.amazon.com.
+
 ## Brazil Integration
 
 - Must navigate to specific package directories before building

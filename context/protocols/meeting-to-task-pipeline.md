@@ -1,22 +1,21 @@
 <!-- DOC-0355 | duck_id: protocol-meeting-to-task-pipeline -->
 # Meeting-to-Task Pipeline
 
-Extends EOD-1 Meeting Sync. After processing each Hedy session, extract action items and create Asana tasks.
+Extends EOD Phase 1 Meeting Ingestion. After Subagent E has written topic-log entries, extract Richard-owned action items and create Asana tasks.
 
-**MCP Chain:** Hedy → Asana → Slack → DuckDB
+**MCP Chain:** Topic logs (read) → Asana (write) → Slack → DuckDB
+
+**2026-05-06 migration note:** This pipeline previously wrote to `main.meeting_analytics` and `main.meeting_highlights` and consumed data directly from Hedy. As of 2026-05-06, those DuckDB tables are deprecated. The canonical post-meeting artifact is the topic log Log entry; action items are parsed from the topic-log entry's `#### Actions` block. See `~/shared/wiki/topics/INGEST-PROTOCOL.md` for the topic-log contract.
 
 ---
 
 ## Step 1: Action Item Extraction
 
-After pulling Hedy session details (GetSessionDetails), extract action items from:
-- `todos` — items marked as action/task
-- `highlights` — items with action language ("will do", "need to", "action:", "follow up")
+After Subagent E has written topic-log entries for today's sessions, walk every new Log entry added this run and parse its `#### Actions` block. Every action in a topic log already carries owner + text + due date per INGEST-PROTOCOL. Extract:
 
-For each action item, determine:
-- **Assignee**: Parse for names. If Richard/prichwil mentioned → Richard's item. If another name → dependency item.
-- **Description**: The full action item text
-- **Due date signal**: Look for explicit dates, urgency words, or default to +3 business days
+- **Assignee**: Parse for names. If Richard/prichwil → Richard's item. If another name → dependency item.
+- **Description**: The full action item text as stated
+- **Due date**: As stated in the log entry. If stated, use; if derived from context, tag as derived.
 
 ### Due Date Derivation
 ---
@@ -134,42 +133,17 @@ For action items assigned to others, append to `~/shared/context/body/hands.md` 
 
 ---
 
-## Step 6: Meeting Analytics Insertion
+## Step 6: Meeting Analytics Insertion — DEPRECATED 2026-05-06
 
-After processing each session, insert into DuckDB `meeting_analytics`:
+This step previously inserted into DuckDB `main.meeting_analytics`. That table is deprecated. Analytics that depended on this table (speaking share, hedging count, meeting type trends) now source from direct Hedy MCP queries on demand or from topic-log Log entry counts.
 
-```sql
-INSERT INTO meeting_analytics (session_id, meeting_name, meeting_date, duration_minutes,
-    participant_count, action_item_count, richard_speaking_share, hedging_count,
-    meeting_type, topics_discussed)
-VALUES ('[session_id]', '[meeting_name]', '[date]', [duration], [participants],
-    [action_count], [speaking_share], [hedging_count], '[type]', ARRAY['[topic1]', '[topic2]']);
-```
+Skip this step. Do NOT insert into `main.meeting_analytics`.
 
-### Meeting Type Classification
+## Step 7: Meeting Highlights Insertion — DEPRECATED 2026-05-06
 
-| Participant Count | Recurring? | Type |
-|------------------|-----------|------|
-| 2 | Yes | 1on1 |
-| 2 | No | adhoc_1on1 |
-| 3-6 | Yes | group |
-| 3-6 | No | review |
-| 7+ | Any | standup |
+This step previously inserted into DuckDB `meeting_highlights`. That table is deprecated. Key quotes and decisions now live inside topic-log Log entry `#### What was said / what happened` and `#### Decisions` blocks with direct source citation (hedy session ID).
 
----
-
-## Step 7: Meeting Highlights Insertion
-
-Store key quotes, decisions, and insights in DuckDB `meeting_highlights`:
-
-```sql
-INSERT INTO meeting_highlights (highlight_id, session_id, highlight_type, content, speaker, timestamp_offset)
-VALUES ('[highlight_id]', '[session_id]', '[type]', '[content]', '[speaker]', [offset]);
-```
-
-Highlight types: `quote`, `decision`, `action`, `insight`
-
----
+Skip this step. Do NOT insert into `meeting_highlights`.
 
 ## Step 8: Slack DM Summary
 

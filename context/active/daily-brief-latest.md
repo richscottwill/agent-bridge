@@ -1,76 +1,141 @@
-# Daily Brief — Sunday May 3, 2026
+# Daily Brief — Wednesday May 6, 2026
 
-**Generated:** 13:35 UTC (06:35 PT) via manual am-backend-parallel Phases 2-5 after schema drift fix
-**Prior brief:** `am-brief-2026-05-01.md` (Friday)
-
----
-
-## 🎯 Hard Thing #1 — polaris-brand-lp
-
-**Signal:** Score 22.12, 14 mentions across 6 channels, 7 non-Richard authors. 13-day incumbent. Still #1 by a wide margin.
-
-**Live task:** `1214330104198712` Brand LP AU/MX test design — alternate measurement (non-weblab) for MCS vs Reg Start. **Due Tuesday 5/6.**
-
-**What moves it:** Write the v1 1-pager. 6 sections, 90 min. Non-weblab measurement framework with reftag CVR, sample sizes (AU 245/wk MX 551/wk, 4wks each, MDE 8-10%), z-test analysis. Cross-link to the consolidated Polaris feedback doc from Brandon's 4/29 coaching.
-
-**Carry forward:** Polaris consolidated QA feedback doc from 4/29 still not visibly closed in Slack. Highest-leverage trust-earning item with Brandon.
+**Generated:** 14:35 UTC (07:35 PDT) via manual am-backend-parallel Phases 1-5 (degraded-auth mode)
+**Prior brief:** 2026-05-05 (Tuesday — `am-brief-2026-05-05.md`)
+**Run mode:** DEGRADED — Midway cookie missing → Slack/Outlook/SharePoint all 401. Hedy + DuckDB fresh. Asana MCP not exposed this session (separate auth path).
 
 ---
 
-## ⏰ This week — the 5 things that matter (Mon-Wed)
+## 🔴 Immediate — before anything else
 
-1. **Brandon 1:1 Tuesday 5/5** — kill-or-revive decision on PAM budget reply (27d OD) + weblab dial-up (26d OD) + EM FAQ (11d OD). Bundle these three.
-2. **MCS Tech OP1 ideas reply to Brandon** — directly asked. OP1 intake deadline 5/5 (ambiguous 5/15 per Lina). Write 2 ideas before 5/5.
-3. **AU formal handoff to Megan Tuesday 5/5** — handover doc + Google Ads access + GenBI stitching fix (due 5/5). Megan becomes AU POC.
-4. **Brand LP AU/MX 1-pager (HARD THING)** — due 5/6. Kiro-block 9:30-11am Tuesday.
-5. **Google Ads MCC SSO admin decision** — due Monday 5/4 (SSO enforcement launches 5/4). Look up MCC admin assignments, decide own-or-delegate.
+**Run `mwinit`** (or `mwinit -o` on CloudDesktop). 2 consecutive AM runs have failed Slack/Outlook/SharePoint ingestion. ~40h of Slack + email backlog is queued, will ingest automatically on next run once cookie is refreshed.
 
 ---
 
-## 📬 Richard owes a reply (5 items, all from this weekend)
+## 🎯 Hard Thing — polaris-brand-lp 1-pager
 
-| To | Topic | Source | Urgency |
+**Task:** `1214330104198712` Brand LP AU/MX test design — alternate measurement (non-weblab) for MCS vs Reg Start. **Due today 5/6.**
+
+**Context from 5/5 Brandon 1:1** (hedy:Qz26yMKVFzAWAiU99ZoD — already in topics/tests/polaris-brand-lp.md and meetings/brandon-sync.md):
+- Brandon wants visibility. Scope has narrowed (AU exited 5/5, EU earlier, ABIX whittled). MX + WW project-manager role is where growth shows up or doesn't.
+- Brandon specifically flagged "I don't know where you're making progress" as the framing Richard needs to invert.
+- The 1-pager is visible progress — ship it.
+
+**What moves it:** Non-weblab measurement framework (reftag CVR, sample sizes ~AU 245/wk, MX 551/wk, 4wks each, MDE 8-10%), z-test analysis, 6 sections, 90 min. Stage draft under `~/shared/wiki/staging/`.
+
+---
+
+## 📅 Today (Wed 5/6)
+
+- **12:00 PT — Richard/Adi sync (25 min)** — AI tool workflow cadence
+- **12:00 PT — App OP1 Internal Review (Brandon, 60 min)** — OP1 app acquisition; Peter likely leading
+- **13:00 PT — Bi-Weekly Google + AB Performance Sync (Mike Babich, 30 min)** — APAC MCC access thread still open per 5/5 AU handover context
+
+---
+
+## 🗓️ Tomorrow (Thu 5/7)
+
+- **09:00 PT — Paid Acq: Deep Dive & Debate (Brandon, 30 min)**
+- **13:00 PT — Adobe Bi-Weekly (Suzane Huynh, 30 min)**
+
+---
+
+## 📊 W18 Performance Headlines (authoritative — xlsx synced 5/5 01:13 UTC)
+
+| Market | Regs | vs Forecast | Flag |
 |---|---|---|---|
-| **Brandon** | MCS Tech OP1 ideas | dm-brandon 5/1 | Medium (5/5) |
-| **Brandon** | MBET issue reporting | email 5/1 (PO #2D-19910168) | Medium |
-| **Vijeth Shetty** | US Browse Category CTA greenlight | Asana 5/1 | Medium |
-| **Mukesh Gupta** | Current PS data-pull approach for GenBI | mpdm-rasanmol 5/1 | Low (but L3 opportunity) |
-| **Megan Oshry** | AU reftag + reg-database query | dm-meganos (carried from 4/29) | Medium |
+| **WW** | 16,341 | — | CPA $79.90, healthiest weekly in recent memory |
+| **US** | 8,908 | +25% vs p50, ABOVE CI | Overperformance; watch W19 for recalibration signal |
+| **MX** | 659 | +44% vs p50, ABOVE CI | Sparkle halo (ended 4/30). W19 is post-Sparkle baseline |
+| **AU** | 228 | exactly on p50 | Clean baseline at 5/5 handover to Megan |
+| **JP** | 447 | -24% vs p50 | Only market below — GW seasonal |
+| **DE** | 1,318 | ABOVE CI (+0.5%) | Top of band, watch W19 |
+| **FR/IT/ES/UK/CA** | all above p50 | within or above CI | EU5 strong week |
+
+**OP2 M05 W1 pacing:**
+- MX at 67% of monthly target in W1 (Sparkle halo — expect compression)
+- US at 29% of monthly target — on pace for ~125% of target
+- AU at 19% — slightly behind pace (Megan now owns)
+- DE/UK/FR/IT/ES/CA/JP all tracking 22-30% of monthly in W1
 
 ---
 
-## 📊 Task state
+## 📬 Richard owes replies (backlog from last successful Slack scan 5/4 14:50)
 
-- **82 active tasks**, 16 overdue (Richard-assigned)
-- **Bucket caps violated:** Engine Room 12/6, Core 10/4, Admin 6/3 — 15 over total. 36 tasks have no Routine_RW.
-- **Top 3 overdue (39d, 33d, 27d):** Make changes to AU/MX/PAM (weekly recurring stale — close + recreate), Paid App (Engine Room, legacy workstream), Reply to Brandon PAM budget (decision at 5/5 1:1).
-
----
-
-## 🔔 Signals that moved this week
-
-- **Brandon's "Thanks guys!"** in ab-paid-search-global after Richard corrected AU 30% CVR stat. Trust signal intact.
-- **CVR LP personalization stat converged at 15-20%** (Stacey/Adi). If Brandon reuses externally in QBR/OP1, Richard should know provenance.
-- **Outlook MCP flaky** (Jesse Alcaraz active bug per agentspaces-interest) — impacts your Kiro workflow, worth knowing.
-- **GTMO 1-click Auto CBR launching end of May** (US/CA/EU/JP) — L3 Team Automation template worth watching.
+| To | Topic | Days Old | Notes |
+|---|---|---|---|
+| **Brandon** | AU Transition doc review | 12d | Likely resolved via 5/5 handoff, but no explicit acknowledgement observed |
+| **Brandon** | OP1 owners — flat YoY budget + Small SMB break-out | 5d | Affects MX/AU RoY reforecast |
+| **Brandon** | MCS team follow-up summary | 5d | Yun-Kang + Andrew waiting |
+| **Peter Ocampo** | PAM Prime Day plan | 10d | Budget + YoY + projections |
+| **Mukesh Gupta** | GenBI data-scalability approach | 3d | Partial resolution promised in 5/5 MX sync (time-based paid-social/branded correlation analysis — next week) |
+| **Vijeth Shetty** | ps-brand pages updates WW | 3d | Asana comment |
+| **Megan Oshry** | Adobe Analytics access | 6d | Richard committed 5/5 to set up AdCloud export this week — in motion |
 
 ---
 
-## 🛠 System state
+## 🧾 Commitments from 5/5 Brandon 1:1 (Qz26yMKVFzAWAiU99ZoD)
 
-**Ran today:**
-- Phase 1 subagents A/C/D/E completed (Slack +27 msgs, Email +51, Loop 5/5, Hedy no-op)
-- Schema drift fixed: AU/MX standalone GIDs archived, consolidated to ABIX in 3 protocol files
-- B1 partial UPSERT: 14 task refreshes + 8 new inserts (total 82 active)
-- B2 lean scan (no GetTaskStories — Slack/Email already covered the signal)
-- Phase 2.5 enrichment: relationship_activity, five_levels_weekly, project_timeline (+4 events) all updated
-- Phase 3 Kiro_RW enrichment on 7 high-priority tasks
-- Phase 4 portfolio scan: 8 projects mapped, 11 tasks flagged with stale AU/MX labels (next sync fixes)
-- hard_thing_candidates refreshed: polaris (22.12) / oci (8.15) / au-cpa-cvr (6.37)
+- **Submit OP1 automation request** connecting Google Ads data directly (bypass Adobe) — EOW (5/8)
+- **Re-engage LiveRamp on F90 TPS approval** — 5/7; Brandon explicit call-out ("I sat in your queue for quite some time")
+- **Timestamped Asana progress notes on major tasks** — ongoing, review 5/12
 
-**Broken but flagged (logged to asana.schema_changes):**
-- `hard-thing-refresh.py` SyntaxError at line 115 — needs repair
-- `sync_metrics.py` BinderException on ps.metrics ON CONFLICT — needs PK constraint fix
-- Hard-thing computed directly from signal_tracker as workaround
+---
 
-**Next AM run:** Will do full Asana UPSERT with corrected project list. The stale "AU"/"MX" project_name in 11 rows will resolve on next pass.
+## 🧾 Commitments from 5/5 MX sync (FKZWlEQGcW5S2tv3FCav)
+
+- Update monthly sheet with March + projections for QBR — EOW
+- Confirm R&O budget transition timing with finance BOC — 5/10
+- Time-based paid social vs branded search correlation analysis — next week
+- Adobe Analytics journey flow analysis — next week
+- Add OP1 journey test documentation to OP1 doc — 5/15
+
+---
+
+## 🧾 Commitments from 5/5 AU handover (j7nQYyfUFwwAbzM6LGZv) — Richard-side
+
+- Set up Adobe AdCloud reporting exports (weekly start) — this week
+- Paste change log historical entries + RefTag structure example in handover Quip — post-call
+- Confirm Megan is on AB Paid Search Flash distribution — post-call
+
+---
+
+## 📈 Top signals (7d, DuckDB)
+
+1. **polaris-brand-lp** (2.73) — 8 reinforcements, Brandon + Yun-Kang, cross-channel. The hard thing.
+2. **oci-rollout** (2.69) — 4 reinforcements, quiet week
+3. **au-cpa-cvr** (2.36) — now a Megan concern, not Richard's primary
+4. **au-transition** (2.07) — closing out via 5/5 handover
+5. **op1-forecast-flat-budget** (2.07) — Brandon-sourced, OP1 tech intake deadline 5/15
+6. **op1-strategy** (1.95) — 5 reinforcements cross-channel
+7. **mcs-coordination-ownership** (1.50) — Brandon's explicit ask for Richard single-point-of-contact
+
+---
+
+## 🗂️ Topic log work completed this run
+
+- 4 Hedy sessions routed to topic docs + meeting series files (2026-05-06 protocol: topic logs replace deprecated hedy-digest.md / signals.hedy_meetings / main.meeting_*)
+- Meeting series files updated: brandon-sync (already done earlier), weekly-paid-acq (already done), **mx-paid-search-sync (added 5/5 entry this run)**, **au-paid-search-sync (added 5/5 handover + 4/28 pre-handover this run)**
+- 6 topic docs at Summary-refresh debt ≥3: baloo-shop-subdomain, mcs-polaris-migration, brandon-sync, weekly-paid-acq, mx-paid-search-sync, au-paid-search-sync — wiki-maintenance will refresh these
+
+---
+
+## ⚠️ What's stale / unknown
+
+- **Slack / Email / Calendar / SharePoint / Loop:** 40-73h stale pending `mwinit`
+- **Asana:** 3 days stale (last DuckDB sync 5/3 13:36 UTC). 5/5 Brandon 1:1 kill-or-revive outcomes on PAM/EM tasks not captured. Asana MCP not exposed in current orchestrator model context either — tools would need to be made available.
+- **Hard thing candidates table:** last refresh 5/3. Polaris still #1 by wide margin; no recompute needed to be confident.
+
+---
+
+## 🔁 Open items that have rolled multiple runs
+
+- WW sitelink audit (19d overdue, `1214074477110993`)
+- Email overlay WW rollout (18d overdue, `1213125740755931`)
+- Paid App Q2 PO + amend Google PO (23d overdue, `1212808474749819`) — blocked on 5/5 Brandon PAM kill-or-revive outcome
+- Enhanced Match FAQ for legal (14d overdue, `1213964668984060`) — blocked on Enhanced Match details (29d overdue, `1213875146955582`)
+- AU handover tasks (multiple) — mark complete or transfer to Megan post-5/5 handoff
+
+---
+
+**State files produced:** am-signals-processed.json, am-enrichment-queue.json, am-portfolio-findings.json, am-wiki-state.json — all under `~/shared/context/active/`.
