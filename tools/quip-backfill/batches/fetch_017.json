@@ -1,0 +1,31 @@
+{
+  "urls": [
+    "https://quip-amazon.com/LLJ9AAmkj0W",
+    "https://quip-amazon.com/MQD9AAT1lD8",
+    "https://quip-amazon.com/CFL9AACJeKF",
+    "https://quip-amazon.com/HNL9AA4Zse1",
+    "https://quip-amazon.com/NXb9AAss6tU"
+  ],
+  "refs": [
+    [
+      "LLJ9AAmkj0W",
+      "testing/landing-pages/LLJ9AAmkj0W-brand-lp-test-cps-column.md"
+    ],
+    [
+      "MQD9AAT1lD8",
+      "testing/landing-pages/MQD9AAT1lD8-mcs-vs-regstart.md"
+    ],
+    [
+      "CFL9AACJeKF",
+      "testing/na/CFL9AACJeKF-algo-stabilization.md"
+    ],
+    [
+      "HNL9AA4Zse1",
+      "testing/na/HNL9AA4Zse1-primelis-brand-core-test.md"
+    ],
+    [
+      "NXb9AAss6tU",
+      "testing/na/NXb9AAss6tU-ca-nb-cvr-analysis.md"
+    ]
+  ]
+}

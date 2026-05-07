@@ -1,0 +1,31 @@
+{
+  "urls": [
+    "https://quip-amazon.com/EPO9AAg62RR",
+    "https://quip-amazon.com/CTM9AAFeei5",
+    "https://quip-amazon.com/OfJ9AAhVjVX",
+    "https://quip-amazon.com/ZaW9AAwBxg8",
+    "https://quip-amazon.com/bUR9AAl2WjT"
+  ],
+  "refs": [
+    [
+      "EPO9AAg62RR",
+      "creative/EPO9AAg62RR-mcs-page-creation.md"
+    ],
+    [
+      "CTM9AAFeei5",
+      "eu/CTM9AAFeei5-eu5-cvr-investigation.md"
+    ],
+    [
+      "OfJ9AAhVjVX",
+      "eu/OfJ9AAhVjVX-eu-callouts-notes.md"
+    ],
+    [
+      "ZaW9AAwBxg8",
+      "eu/ZaW9AAwBxg8-google-po-faqs.md"
+    ],
+    [
+      "bUR9AAl2WjT",
+      "eu/bUR9AAl2WjT-eu-tactical-log.md"
+    ]
+  ]
+}

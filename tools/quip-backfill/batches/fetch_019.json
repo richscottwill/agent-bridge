@@ -1,0 +1,31 @@
+{
+  "urls": [
+    "https://quip-amazon.com/KCY9AAYqWd2",
+    "https://quip-amazon.com/NQA9AAX2DOp",
+    "https://quip-amazon.com/ReG9AAvZFTS",
+    "https://quip-amazon.com/UCa9AAcbP8I",
+    "https://quip-amazon.com/VDf9AA5JiIY"
+  ],
+  "refs": [
+    [
+      "KCY9AAYqWd2",
+      "testing/root/KCY9AAYqWd2-ps-testing-ad-copy.md"
+    ],
+    [
+      "NQA9AAX2DOp",
+      "testing/root/NQA9AAX2DOp-ps-testing-incrementality.md"
+    ],
+    [
+      "ReG9AAvZFTS",
+      "testing/root/ReG9AAvZFTS-ps-testing-ads-ad-copy.md"
+    ],
+    [
+      "UCa9AAcbP8I",
+      "testing/root/UCa9AAcbP8I-ps-measurement-rct.md"
+    ],
+    [
+      "VDf9AA5JiIY",
+      "testing/root/VDf9AA5JiIY-ps-testing-cps.md"
+    ]
+  ]
+}

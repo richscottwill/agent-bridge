@@ -1,0 +1,31 @@
+{
+  "urls": [
+    "https://quip-amazon.com/NJa9AA36eTD",
+    "https://quip-amazon.com/QYQ9AAmBqdJ",
+    "https://quip-amazon.com/DRd9AAewJmz",
+    "https://quip-amazon.com/ETC9AAVBfHC",
+    "https://quip-amazon.com/ISQ9AAo3soI"
+  ],
+  "refs": [
+    [
+      "NJa9AA36eTD",
+      "mobile-app/NJa9AA36eTD-ab-mobile-app-op1.md"
+    ],
+    [
+      "QYQ9AAmBqdJ",
+      "mobile-app/QYQ9AAmBqdJ-app-holidays-readiness.md"
+    ],
+    [
+      "DRd9AAewJmz",
+      "onboarding/DRd9AAewJmz-onboarding-eu.md"
+    ],
+    [
+      "ETC9AAVBfHC",
+      "onboarding/ETC9AAVBfHC-onboarding-links.md"
+    ],
+    [
+      "ISQ9AAo3soI",
+      "onboarding/ISQ9AAo3soI-sql-databases-queries.md"
+    ]
+  ]
+}

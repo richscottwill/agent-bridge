@@ -1,0 +1,31 @@
+{
+  "urls": [
+    "https://quip-amazon.com/dFZ9AA5fAz2",
+    "https://quip-amazon.com/fcU9AAjhD9R",
+    "https://quip-amazon.com/AZW9AAdOQYk",
+    "https://quip-amazon.com/BLP9AAhFfua",
+    "https://quip-amazon.com/KKI9AAboWRC"
+  ],
+  "refs": [
+    [
+      "dFZ9AA5fAz2",
+      "testing/jp/dFZ9AA5fAz2-jp-nb-tests-2024.md"
+    ],
+    [
+      "fcU9AAjhD9R",
+      "testing/jp/fcU9AAjhD9R-jp-discovery-experiment-2023.md"
+    ],
+    [
+      "AZW9AAdOQYk",
+      "testing/landing-pages/AZW9AAdOQYk-percolate-guest.md"
+    ],
+    [
+      "BLP9AAhFfua",
+      "testing/landing-pages/BLP9AAhFfua-ps-testing-lps.md"
+    ],
+    [
+      "KKI9AAboWRC",
+      "testing/landing-pages/KKI9AAboWRC-promo-wts-test.md"
+    ]
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "urls": [
+    "https://quip-amazon.com/ARO9AAwdXlU",
+    "https://quip-amazon.com/FAZ9AAzxU6P",
+    "https://quip-amazon.com/IPB9AAeNAQB",
+    "https://quip-amazon.com/IUA9AAGTmnc",
+    "https://quip-amazon.com/KBL9AAquAv5"
+  ],
+  "refs": [
+    [
+      "ARO9AAwdXlU",
+      "testing/paid-app/ARO9AAwdXlU-jp-app-testing-2023.md"
+    ],
+    [
+      "FAZ9AAzxU6P",
+      "testing/root/FAZ9AAzxU6P-dg-test-cps-plan.md"
+    ],
+    [
+      "IPB9AAeNAQB",
+      "testing/root/IPB9AAeNAQB-ps-testing-current-weblabs.md"
+    ],
+    [
+      "IUA9AAGTmnc",
+      "testing/root/IUA9AAGTmnc-cps-dg-test-results.md"
+    ],
+    [
+      "KBL9AAquAv5",
+      "testing/root/KBL9AAquAv5-us-promo-test.md"
+    ]
+  ]
+}

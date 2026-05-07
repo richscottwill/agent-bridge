@@ -1,0 +1,31 @@
+{
+  "urls": [
+    "https://quip-amazon.com/JNa9AA24e9W",
+    "https://quip-amazon.com/Mfc9AAnH9Pp",
+    "https://quip-amazon.com/PWB9AAbFqoy",
+    "https://quip-amazon.com/TRe9AADWLrk",
+    "https://quip-amazon.com/ZfB9AA8dyA6"
+  ],
+  "refs": [
+    [
+      "JNa9AA24e9W",
+      "onboarding/JNa9AA24e9W-adobe-activity-map.md"
+    ],
+    [
+      "Mfc9AAnH9Pp",
+      "onboarding/Mfc9AAnH9Pp-account-creation-checklist.md"
+    ],
+    [
+      "PWB9AAbFqoy",
+      "onboarding/PWB9AAbFqoy-adobe-ftp-files.md"
+    ],
+    [
+      "TRe9AADWLrk",
+      "onboarding/TRe9AADWLrk-cps-ps-transition-doc.md"
+    ],
+    [
+      "ZfB9AA8dyA6",
+      "onboarding/ZfB9AA8dyA6-oci-roas-bid-strategies.md"
+    ]
+  ]
+}

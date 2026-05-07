@@ -1,0 +1,31 @@
+{
+  "urls": [
+    "https://quip-amazon.com/Zee9AAlSBEB",
+    "https://quip-amazon.com/NXF9AAy02OQ",
+    "https://quip-amazon.com/LJb9AAugth6",
+    "https://quip-amazon.com/AeG9AAmSPdu",
+    "https://quip-amazon.com/CRB9AARVJK8"
+  ],
+  "refs": [
+    [
+      "Zee9AAlSBEB",
+      "review/Zee9AAlSBEB-oci-paid-search-instructions.md"
+    ],
+    [
+      "NXF9AAy02OQ",
+      "root/NXF9AAy02OQ-po-process-options.md"
+    ],
+    [
+      "LJb9AAugth6",
+      "testing/eu/LJb9AAugth6-it-bid-modifiers-test.md"
+    ],
+    [
+      "AeG9AAmSPdu",
+      "testing/jp/AeG9AAmSPdu-fy25-jp-testing.md"
+    ],
+    [
+      "CRB9AARVJK8",
+      "testing/jp/CRB9AARVJK8-jp-nb-test-results-2022.md"
+    ]
+  ]
+}

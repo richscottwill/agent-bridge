@@ -1,0 +1,31 @@
+{
+  "urls": [
+    "https://quip-amazon.com/bOO9AAV1PNw",
+    "https://quip-amazon.com/fQD9AAKPTX0",
+    "https://quip-amazon.com/UML9AAMg0J8",
+    "https://quip-amazon.com/ABW9AA8Xivl",
+    "https://quip-amazon.com/Aee9AAqhAAa"
+  ],
+  "refs": [
+    [
+      "bOO9AAV1PNw",
+      "onboarding/bOO9AAV1PNw-partnership-onboarding.md"
+    ],
+    [
+      "fQD9AAKPTX0",
+      "onboarding/fQD9AAKPTX0-ai-resources.md"
+    ],
+    [
+      "UML9AAMg0J8",
+      "partnerships/ab-seller/UML9AAMg0J8-ab-seller-launch.md"
+    ],
+    [
+      "ABW9AA8Xivl",
+      "partnerships/cps/ABW9AA8Xivl-eu-cps-paid-search.md"
+    ],
+    [
+      "Aee9AAqhAAa",
+      "partnerships/cps/Aee9AAqhAAa-us-cps-paid-search.md"
+    ]
+  ]
+}

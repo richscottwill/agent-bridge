@@ -1,0 +1,31 @@
+{
+  "urls": [
+    "https://quip-amazon.com/EGR9AANdsKO",
+    "https://quip-amazon.com/OcF9AABMjFY",
+    "https://quip-amazon.com/PSa9AAWBFPB",
+    "https://quip-amazon.com/PbI9AAI6SDn",
+    "https://quip-amazon.com/SCD9AATSR90"
+  ],
+  "refs": [
+    [
+      "EGR9AANdsKO",
+      "testing/jp/EGR9AANdsKO-jp-nb-experiment-2023.md"
+    ],
+    [
+      "OcF9AABMjFY",
+      "testing/jp/OcF9AABMjFY-yahoo-jp-nb-experiment-2022.md"
+    ],
+    [
+      "PSa9AAWBFPB",
+      "testing/jp/PSa9AAWBFPB-jp-post-mhlw-analysis.md"
+    ],
+    [
+      "PbI9AAI6SDn",
+      "testing/jp/PbI9AAI6SDn-jp-lp-experiment-2025.md"
+    ],
+    [
+      "SCD9AATSR90",
+      "testing/jp/SCD9AATSR90-jp-pmax-experiment-2023.md"
+    ]
+  ]
+}

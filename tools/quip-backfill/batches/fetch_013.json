@@ -1,0 +1,31 @@
+{
+  "urls": [
+    "https://quip-amazon.com/TVV9AAKgfea",
+    "https://quip-amazon.com/TaH9AAAK0Le",
+    "https://quip-amazon.com/WdY9AAy8tDh",
+    "https://quip-amazon.com/YKf9AAbVkG8",
+    "https://quip-amazon.com/ZJR9AAdi0DC"
+  ],
+  "refs": [
+    [
+      "TVV9AAKgfea",
+      "review/TVV9AAKgfea-global-acq-wbr-callouts.md"
+    ],
+    [
+      "TaH9AAAK0Le",
+      "review/TaH9AAAK0Le-2025-mbr-qbr.md"
+    ],
+    [
+      "WdY9AAy8tDh",
+      "review/WdY9AAy8tDh-paid-acq-sims.md"
+    ],
+    [
+      "YKf9AAbVkG8",
+      "review/YKf9AAbVkG8-outbound-marketing-meetings.md"
+    ],
+    [
+      "ZJR9AAdi0DC",
+      "review/ZJR9AAdi0DC-deep-dive-debate.md"
+    ]
+  ]
+}

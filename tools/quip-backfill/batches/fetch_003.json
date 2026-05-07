@@ -1,0 +1,31 @@
+{
+  "urls": [
+    "https://quip-amazon.com/dSM9AAaMwDD",
+    "https://quip-amazon.com/KDe9AAMBNvL",
+    "https://quip-amazon.com/XNO9AAHRoBN",
+    "https://quip-amazon.com/DWe9AA5KfMp",
+    "https://quip-amazon.com/ETF9AASoPAb"
+  ],
+  "refs": [
+    [
+      "dSM9AAaMwDD",
+      "eu/dSM9AAaMwDD-eu5-bidding-strategy.md"
+    ],
+    [
+      "KDe9AAMBNvL",
+      "events/KDe9AAMBNvL-2023-event-plans.md"
+    ],
+    [
+      "XNO9AAHRoBN",
+      "events/XNO9AAHRoBN-2022-event-plans.md"
+    ],
+    [
+      "DWe9AA5KfMp",
+      "jp/DWe9AA5KfMp-jp-2022-paid-search.md"
+    ],
+    [
+      "ETF9AASoPAb",
+      "jp/ETF9AASoPAb-jp-competitive-analysis.md"
+    ]
+  ]
+}

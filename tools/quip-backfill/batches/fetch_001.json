@@ -1,0 +1,31 @@
+{
+  "urls": [
+    "https://quip-amazon.com/JMZ9AAput1I",
+    "https://quip-amazon.com/ZZR9AAs7OfO",
+    "https://quip-amazon.com/EZZ9AAR7EEz",
+    "https://quip-amazon.com/GCX9AAbP5Rh",
+    "https://quip-amazon.com/eTF9AAkPHUu"
+  ],
+  "refs": [
+    [
+      "JMZ9AAput1I",
+      "abix/au/JMZ9AAput1I-au-ps-launch.md"
+    ],
+    [
+      "ZZR9AAs7OfO",
+      "abix/au/ZZR9AAs7OfO-au-ps-weekly-performance.md"
+    ],
+    [
+      "EZZ9AAR7EEz",
+      "abix/mx/EZZ9AAR7EEz-mx-keyword-cleanup.md"
+    ],
+    [
+      "GCX9AAbP5Rh",
+      "abix/mx/GCX9AAbP5Rh-mx-transition.md"
+    ],
+    [
+      "eTF9AAkPHUu",
+      "abix/mx/eTF9AAkPHUu-mx-ps-sync.md"
+    ]
+  ]
+}

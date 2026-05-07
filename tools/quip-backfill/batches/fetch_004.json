@@ -1,0 +1,31 @@
+{
+  "urls": [
+    "https://quip-amazon.com/PVL9AACnGJv",
+    "https://quip-amazon.com/SLO9AALz93k",
+    "https://quip-amazon.com/XHJ9AAlDwnq",
+    "https://quip-amazon.com/aOE9AA8Vhsq",
+    "https://quip-amazon.com/AKQ9AALzRZN"
+  ],
+  "refs": [
+    [
+      "PVL9AACnGJv",
+      "jp/PVL9AACnGJv-jp-meeting-notes.md"
+    ],
+    [
+      "SLO9AALz93k",
+      "jp/SLO9AALz93k-jp-ps-tracker.md"
+    ],
+    [
+      "XHJ9AAlDwnq",
+      "jp/XHJ9AAlDwnq-jp-transition.md"
+    ],
+    [
+      "aOE9AA8Vhsq",
+      "jp/aOE9AA8Vhsq-jp-weekly-status.md"
+    ],
+    [
+      "AKQ9AALzRZN",
+      "mobile-app/AKQ9AALzRZN-jp-apple-search-ads.md"
+    ]
+  ]
+}

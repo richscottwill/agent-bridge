@@ -1,0 +1,1163 @@
+[
+  {
+    "rel_path": "abix/au/IAJ9AAZJsDL-2026-au-testing.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/IAJ9AAZJsDL",
+    "quip_id": "IAJ9AAZJsDL",
+    "doc_type": "document",
+    "title": "2026 AU Testing",
+    "top_folder": "abix"
+  },
+  {
+    "rel_path": "abix/au/JMZ9AAput1I-au-ps-launch.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/JMZ9AAput1I",
+    "quip_id": "JMZ9AAput1I",
+    "doc_type": "document",
+    "title": "AU PS Launch",
+    "top_folder": "abix"
+  },
+  {
+    "rel_path": "abix/au/ZZR9AAs7OfO-au-ps-weekly-performance.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/ZZR9AAs7OfO",
+    "quip_id": "ZZR9AAs7OfO",
+    "doc_type": "document",
+    "title": "AU PS Weekly Performance",
+    "top_folder": "abix"
+  },
+  {
+    "rel_path": "abix/mx/EZZ9AAR7EEz-mx-keyword-cleanup.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/EZZ9AAR7EEz",
+    "quip_id": "EZZ9AAR7EEz",
+    "doc_type": "document",
+    "title": "MX Audit - Keyword Cleanup Framework",
+    "top_folder": "abix"
+  },
+  {
+    "rel_path": "abix/mx/GCX9AAbP5Rh-mx-transition.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/GCX9AAbP5Rh",
+    "quip_id": "GCX9AAbP5Rh",
+    "doc_type": "document",
+    "title": "MX Transition",
+    "top_folder": "abix"
+  },
+  {
+    "rel_path": "abix/mx/eTF9AAkPHUu-mx-ps-sync.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/eTF9AAkPHUu",
+    "quip_id": "eTF9AAkPHUu",
+    "doc_type": "document",
+    "title": "AB MX Paid Search Sync",
+    "top_folder": "abix"
+  },
+  {
+    "rel_path": "creative/EPO9AAg62RR-mcs-page-creation.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/EPO9AAg62RR",
+    "quip_id": "EPO9AAg62RR",
+    "doc_type": "document",
+    "title": "MCS Page Creation & Authoring",
+    "top_folder": "creative"
+  },
+  {
+    "rel_path": "eu/CTM9AAFeei5-eu5-cvr-investigation.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/CTM9AAFeei5",
+    "quip_id": "CTM9AAFeei5",
+    "doc_type": "document",
+    "title": "Paid Search EU5 CVR investigation",
+    "top_folder": "eu"
+  },
+  {
+    "rel_path": "eu/JcZ9AACc8Tp-eu5-monthly-budget.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/JcZ9AACc8Tp",
+    "quip_id": "JcZ9AACc8Tp",
+    "doc_type": "spreadsheet",
+    "title": "EU5 Monthly Budget",
+    "top_folder": "eu"
+  },
+  {
+    "rel_path": "eu/OfJ9AAhVjVX-eu-callouts-notes.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/OfJ9AAhVjVX",
+    "quip_id": "OfJ9AAhVjVX",
+    "doc_type": "document",
+    "title": "EU Callouts notes",
+    "top_folder": "eu"
+  },
+  {
+    "rel_path": "eu/UUE9AAVEGuj-eu5-cvr-investigation.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/UUE9AAVEGuj",
+    "quip_id": "UUE9AAVEGuj",
+    "doc_type": "spreadsheet",
+    "title": "EU5 CVR Investigation",
+    "top_folder": "eu"
+  },
+  {
+    "rel_path": "eu/ZaW9AAwBxg8-google-po-faqs.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/ZaW9AAwBxg8",
+    "quip_id": "ZaW9AAwBxg8",
+    "doc_type": "document",
+    "title": "Google PO FAQs",
+    "top_folder": "eu"
+  },
+  {
+    "rel_path": "eu/bUR9AAl2WjT-eu-tactical-log.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/bUR9AAl2WjT",
+    "quip_id": "bUR9AAl2WjT",
+    "doc_type": "document",
+    "title": "EU tactical log",
+    "top_folder": "eu"
+  },
+  {
+    "rel_path": "eu/dSM9AAaMwDD-eu5-bidding-strategy.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/dSM9AAaMwDD",
+    "quip_id": "dSM9AAaMwDD",
+    "doc_type": "document",
+    "title": "New EU5 Bidding Strategy",
+    "top_folder": "eu"
+  },
+  {
+    "rel_path": "eu/fHM9AAY65z2-eu-changes-log.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/fHM9AAY65z2",
+    "quip_id": "fHM9AAY65z2",
+    "doc_type": "spreadsheet",
+    "title": "EU Changes Log",
+    "top_folder": "eu"
+  },
+  {
+    "rel_path": "events/KDe9AAMBNvL-2023-event-plans.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/KDe9AAMBNvL",
+    "quip_id": "KDe9AAMBNvL",
+    "doc_type": "document",
+    "title": "2023 Event Plans",
+    "top_folder": "events"
+  },
+  {
+    "rel_path": "events/XNO9AAHRoBN-2022-event-plans.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/XNO9AAHRoBN",
+    "quip_id": "XNO9AAHRoBN",
+    "doc_type": "document",
+    "title": "2022 Event Plans: SBM, PEAS, Holiday",
+    "top_folder": "events"
+  },
+  {
+    "rel_path": "events/eDK9AA8NTtB-sbm-performance.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/eDK9AA8NTtB",
+    "quip_id": "eDK9AA8NTtB",
+    "doc_type": "spreadsheet",
+    "title": "SBM - Paid Search Performance (Events Reporting)",
+    "top_folder": "events"
+  },
+  {
+    "rel_path": "jp/DWe9AA5KfMp-jp-2022-paid-search.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/DWe9AA5KfMp",
+    "quip_id": "DWe9AA5KfMp",
+    "doc_type": "document",
+    "title": "JP 2022 Paid Search",
+    "top_folder": "jp"
+  },
+  {
+    "rel_path": "jp/ETF9AASoPAb-jp-competitive-analysis.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/ETF9AASoPAb",
+    "quip_id": "ETF9AASoPAb",
+    "doc_type": "document",
+    "title": "JP Paid Search Competitive Analysis",
+    "top_folder": "jp"
+  },
+  {
+    "rel_path": "jp/PVL9AACnGJv-jp-meeting-notes.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/PVL9AACnGJv",
+    "quip_id": "PVL9AACnGJv",
+    "doc_type": "document",
+    "title": "JP Meeting notes",
+    "top_folder": "jp"
+  },
+  {
+    "rel_path": "jp/SLO9AALz93k-jp-ps-tracker.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/SLO9AALz93k",
+    "quip_id": "SLO9AALz93k",
+    "doc_type": "document",
+    "title": "JP Paid Search Tracker",
+    "top_folder": "jp"
+  },
+  {
+    "rel_path": "jp/XHJ9AAlDwnq-jp-transition.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/XHJ9AAlDwnq",
+    "quip_id": "XHJ9AAlDwnq",
+    "doc_type": "document",
+    "title": "JP Transition",
+    "top_folder": "jp"
+  },
+  {
+    "rel_path": "jp/XQO9AATB6b0-jp-nb-sqr.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/XQO9AATB6b0",
+    "quip_id": "XQO9AATB6b0",
+    "doc_type": "spreadsheet",
+    "title": "2023.01.24 JP-NB SQR",
+    "top_folder": "jp"
+  },
+  {
+    "rel_path": "jp/aOE9AA8Vhsq-jp-weekly-status.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/aOE9AA8Vhsq",
+    "quip_id": "aOE9AA8Vhsq",
+    "doc_type": "document",
+    "title": "AB JP Paid Search Weekly Status",
+    "top_folder": "jp"
+  },
+  {
+    "rel_path": "jp/dGY9AAktaBd-jp-5th-anniversary-kws.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/dGY9AAktaBd",
+    "quip_id": "dGY9AAktaBd",
+    "doc_type": "spreadsheet",
+    "title": "JP 5th Anniversary Campaign Keywords",
+    "top_folder": "jp"
+  },
+  {
+    "rel_path": "mobile-app/AKQ9AALzRZN-jp-apple-search-ads.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/AKQ9AALzRZN",
+    "quip_id": "AKQ9AALzRZN",
+    "doc_type": "document",
+    "title": "JP - Apple Search Ads",
+    "top_folder": "mobile-app"
+  },
+  {
+    "rel_path": "mobile-app/MFU9AAIrfqV-2024-paid-app-and-eng.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/MFU9AAIrfqV",
+    "quip_id": "MFU9AAIrfqV",
+    "doc_type": "spreadsheet",
+    "title": "2024 Paid App and ENG",
+    "top_folder": "mobile-app"
+  },
+  {
+    "rel_path": "mobile-app/NJa9AA36eTD-ab-mobile-app-op1.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/NJa9AA36eTD",
+    "quip_id": "NJa9AA36eTD",
+    "doc_type": "document",
+    "title": "AB Mobile App OP1",
+    "top_folder": "mobile-app"
+  },
+  {
+    "rel_path": "mobile-app/QYQ9AAmBqdJ-app-holidays-readiness.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/QYQ9AAmBqdJ",
+    "quip_id": "QYQ9AAmBqdJ",
+    "doc_type": "document",
+    "title": "App Marketing - Holidays Readiness List",
+    "top_folder": "mobile-app"
+  },
+  {
+    "rel_path": "mobile-app/RPR9AAcmTeG-2025-paid-app-marketing.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/RPR9AAcmTeG",
+    "quip_id": "RPR9AAcmTeG",
+    "doc_type": "spreadsheet",
+    "title": "2025 Paid App Marketing",
+    "top_folder": "mobile-app"
+  },
+  {
+    "rel_path": "onboarding/DRd9AAewJmz-onboarding-eu.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/DRd9AAewJmz",
+    "quip_id": "DRd9AAewJmz",
+    "doc_type": "document",
+    "title": "On-boarding to EU",
+    "top_folder": "onboarding"
+  },
+  {
+    "rel_path": "onboarding/ETC9AAVBfHC-onboarding-links.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/ETC9AAVBfHC",
+    "quip_id": "ETC9AAVBfHC",
+    "doc_type": "document",
+    "title": "Onboarding Links & Reference",
+    "top_folder": "onboarding"
+  },
+  {
+    "rel_path": "onboarding/ISQ9AAo3soI-sql-databases-queries.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/ISQ9AAo3soI",
+    "quip_id": "ISQ9AAo3soI",
+    "doc_type": "document",
+    "title": "AB Channel Marketing - SQL Databases & Queries",
+    "top_folder": "onboarding"
+  },
+  {
+    "rel_path": "onboarding/JNa9AA24e9W-adobe-activity-map.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/JNa9AA24e9W",
+    "quip_id": "JNa9AA24e9W",
+    "doc_type": "document",
+    "title": "Adobe Activity Map",
+    "top_folder": "onboarding"
+  },
+  {
+    "rel_path": "onboarding/Mfc9AAnH9Pp-account-creation-checklist.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/Mfc9AAnH9Pp",
+    "quip_id": "Mfc9AAnH9Pp",
+    "doc_type": "document",
+    "title": "Account Creation Checklist",
+    "top_folder": "onboarding"
+  },
+  {
+    "rel_path": "onboarding/PWB9AAbFqoy-adobe-ftp-files.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/PWB9AAbFqoy",
+    "quip_id": "PWB9AAbFqoy",
+    "doc_type": "document",
+    "title": "Adobe FTP files",
+    "top_folder": "onboarding"
+  },
+  {
+    "rel_path": "onboarding/Rec9AAvn14r-ai-usage.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/Rec9AAvn14r",
+    "quip_id": "Rec9AAvn14r",
+    "doc_type": "spreadsheet",
+    "title": "Outbound Marketing - AI Usage",
+    "top_folder": "onboarding"
+  },
+  {
+    "rel_path": "onboarding/TRe9AADWLrk-cps-ps-transition-doc.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/TRe9AADWLrk",
+    "quip_id": "TRe9AADWLrk",
+    "doc_type": "document",
+    "title": "CPS PS Transition Doc",
+    "top_folder": "onboarding"
+  },
+  {
+    "rel_path": "onboarding/ZfB9AA8dyA6-oci-roas-bid-strategies.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/ZfB9AA8dyA6",
+    "quip_id": "ZfB9AA8dyA6",
+    "doc_type": "document",
+    "title": "OCI/ROAS bid strategies",
+    "top_folder": "onboarding"
+  },
+  {
+    "rel_path": "onboarding/bOO9AAV1PNw-partnership-onboarding.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/bOO9AAV1PNw",
+    "quip_id": "bOO9AAV1PNw",
+    "doc_type": "document",
+    "title": "Partnership accounts - Onboarding",
+    "top_folder": "onboarding"
+  },
+  {
+    "rel_path": "onboarding/fQD9AAKPTX0-ai-resources.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/fQD9AAKPTX0",
+    "quip_id": "fQD9AAKPTX0",
+    "doc_type": "document",
+    "title": "AI resources",
+    "top_folder": "onboarding"
+  },
+  {
+    "rel_path": "partnerships/ab-seller/HKZ9AAG7ieL-ab-seller-keywords.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/HKZ9AAG7ieL",
+    "quip_id": "HKZ9AAG7ieL",
+    "doc_type": "spreadsheet",
+    "title": "AB Seller Keywords",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/ab-seller/UML9AAMg0J8-ab-seller-launch.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/UML9AAMg0J8",
+    "quip_id": "UML9AAMg0J8",
+    "doc_type": "document",
+    "title": "2023.01_AB-Seller_Launch",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/ABW9AA8Xivl-eu-cps-paid-search.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/ABW9AA8Xivl",
+    "quip_id": "ABW9AA8Xivl",
+    "doc_type": "document",
+    "title": "EU CPS - Paid Search",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/Aee9AAqhAAa-us-cps-paid-search.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/Aee9AAqhAAa",
+    "quip_id": "Aee9AAqhAAa",
+    "doc_type": "document",
+    "title": "US CPS - Paid Search",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/DQY9AARyPQg-ca-cps-paid-search.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/DQY9AARyPQg",
+    "quip_id": "DQY9AARyPQg",
+    "doc_type": "document",
+    "title": "CA CPS - Paid Search",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/DVL9AAJQkxm-cps-q3-performance.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/DVL9AAJQkxm",
+    "quip_id": "DVL9AAJQkxm",
+    "doc_type": "document",
+    "title": "Y24 Q3 CPS Performance Summary Draft",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/FTE9AAzU0II-eu-cps-performance.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/FTE9AAzU0II",
+    "quip_id": "FTE9AAzU0II",
+    "doc_type": "spreadsheet",
+    "title": "EU CPS - Performance Over Time",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/JOK9AAJ1qah-cps-meeting-notes.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/JOK9AAJ1qah",
+    "quip_id": "JOK9AAJ1qah",
+    "doc_type": "document",
+    "title": "CPS meeting notes",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/JOc9AAKJ1MZ-eu-h2-2023-cpa-targets.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/JOc9AAKJ1MZ",
+    "quip_id": "JOc9AAKJ1MZ",
+    "doc_type": "spreadsheet",
+    "title": "EU H2 2023 CPA Targets",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/KQV9AAHIFB6-2024-seo-content-asks.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/KQV9AAHIFB6",
+    "quip_id": "KQV9AAHIFB6",
+    "doc_type": "spreadsheet",
+    "title": "2024 SEO Content Asks - PS Copy",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/LbQ9AAdtRdq-eu-cps-conversions.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/LbQ9AAdtRdq",
+    "quip_id": "LbQ9AAdtRdq",
+    "doc_type": "spreadsheet",
+    "title": "2022.11.7 EU CPS Conversions",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/PRL9AACSMZl-jp-cps-paid-search.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/PRL9AACSMZl",
+    "quip_id": "PRL9AACSMZl",
+    "doc_type": "document",
+    "title": "JP CPS - Paid Search",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/QQW9AADRqL9-ca-cps-campaign-request.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/QQW9AADRqL9",
+    "quip_id": "QQW9AADRqL9",
+    "doc_type": "document",
+    "title": "Paid Search Campaign Request Form - CA CPS",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/QTb9AASIOQn-ca-mcs-updates.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/QTb9AASIOQn",
+    "quip_id": "QTb9AASIOQn",
+    "doc_type": "document",
+    "title": "CA MCS Updates",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/UPM9AAnF3ht-eu-cps-2023.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/UPM9AAnF3ht",
+    "quip_id": "UPM9AAnF3ht",
+    "doc_type": "document",
+    "title": "EU CPS 2023",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/Ude9AA0BeMu-eu-cps-ad-copy.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/Ude9AA0BeMu",
+    "quip_id": "Ude9AA0BeMu",
+    "doc_type": "spreadsheet",
+    "title": "EU CPS Ad Copy",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/WVY9AApilNf-ca-cps-pilot-recap.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/WVY9AApilNf",
+    "quip_id": "WVY9AApilNf",
+    "doc_type": "document",
+    "title": "CA Paid Search CPS Pilot Recap",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/Wfd9AADdVwy-ca-cps-ads-sitelinks.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/Wfd9AADdVwy",
+    "quip_id": "Wfd9AADdVwy",
+    "doc_type": "spreadsheet",
+    "title": "CA CPS - Ad and Sitelinks",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/YLc9AAQDSpu-eu5-cps-h1-2023.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/YLc9AAQDSpu",
+    "quip_id": "YLc9AAQDSpu",
+    "doc_type": "document",
+    "title": "H1 2023 EU5 CPS Paid Search",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/ZbX9AA0HMVB-eu5-cps-sitelinks-translations.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/ZbX9AA0HMVB",
+    "quip_id": "ZbX9AA0HMVB",
+    "doc_type": "spreadsheet",
+    "title": "EU5 CPS Sitelinks Translations",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/cps/fYP9AAqwKen-cps-keywords.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/fYP9AAqwKen",
+    "quip_id": "fYP9AAqwKen",
+    "doc_type": "spreadsheet",
+    "title": "CPS Keywords",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/engagement/NNS9AA8S5bA-bp-results.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/NNS9AA8S5bA",
+    "quip_id": "NNS9AA8S5bA",
+    "doc_type": "document",
+    "title": "BP Results",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/engagement/QWe9AAjUSk8-engagement-test-planning.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/QWe9AAjUSk8",
+    "quip_id": "QWe9AAjUSk8",
+    "doc_type": "document",
+    "title": "Engagement Paid Search Account - Test Planning",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/engagement/XbW9AA3gq9l-bp-media-plan.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/XbW9AA3gq9l",
+    "quip_id": "XbW9AA3gq9l",
+    "doc_type": "document",
+    "title": "BP Media Plan - Paid Search",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/engagement/cFb9AAeMyiG-bp-engagement-keywords.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/cFb9AAeMyiG",
+    "quip_id": "cFb9AAeMyiG",
+    "doc_type": "spreadsheet",
+    "title": "BP Engagement - Keywords",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "partnerships/engagement/eJR9AANYuIY-existing-traffic-experience.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/eJR9AANYuIY",
+    "quip_id": "eJR9AANYuIY",
+    "doc_type": "document",
+    "title": "Existing traffic experience",
+    "top_folder": "partnerships"
+  },
+  {
+    "rel_path": "planning/JUE9AAZm6cd-op1-2026-paid-acq.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/JUE9AAZm6cd",
+    "quip_id": "JUE9AAZm6cd",
+    "doc_type": "document",
+    "title": "OP1 2026 - Paid Acquisition",
+    "top_folder": "planning"
+  },
+  {
+    "rel_path": "planning/MYP9AAixN3T-op1-2025.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/MYP9AAixN3T",
+    "quip_id": "MYP9AAixN3T",
+    "doc_type": "document",
+    "title": "OP1 2025 - Paid Acquisition",
+    "top_folder": "planning"
+  },
+  {
+    "rel_path": "planning/OAA9AAOTvDS-op1-op2-2026.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/OAA9AAOTvDS",
+    "quip_id": "OAA9AAOTvDS",
+    "doc_type": "document",
+    "title": "2026 OP1 / OP2",
+    "top_folder": "planning"
+  },
+  {
+    "rel_path": "planning/PXA9AAUlEXZ-oci-error-investigation.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/PXA9AAUlEXZ",
+    "quip_id": "PXA9AAUlEXZ",
+    "doc_type": "document",
+    "title": "OCI Error Investigation",
+    "top_folder": "planning"
+  },
+  {
+    "rel_path": "planning/XWZ9AAnZsPs-project-codename.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/XWZ9AAnZsPs",
+    "quip_id": "XWZ9AAnZsPs",
+    "doc_type": "document",
+    "title": "Project [insert codename here]",
+    "top_folder": "planning"
+  },
+  {
+    "rel_path": "planning/dSZ9AAZBXQy-oci-planning-phased-rollout.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/dSZ9AAZBXQy",
+    "quip_id": "dSZ9AAZBXQy",
+    "doc_type": "document",
+    "title": "OCI Planning - Phased Rollout",
+    "top_folder": "planning"
+  },
+  {
+    "rel_path": "planning/eFd9AAdpR3K-ab-competitors.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/eFd9AAdpR3K",
+    "quip_id": "eFd9AAdpR3K",
+    "doc_type": "document",
+    "title": "AB Competitors",
+    "top_folder": "planning"
+  },
+  {
+    "rel_path": "review/2023-mbr-qbr.md",
+    "status": "ok",
+    "source_url": null,
+    "quip_id": null,
+    "doc_type": null,
+    "title": "2023 Paid Acq MBR / QBR",
+    "top_folder": "review"
+  },
+  {
+    "rel_path": "review/GCI9AA5aLG0-cps-ps-review-2023.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/GCI9AA5aLG0",
+    "quip_id": "GCI9AA5aLG0",
+    "doc_type": "document",
+    "title": "Y23 CPS Paid Search Review",
+    "top_folder": "review"
+  },
+  {
+    "rel_path": "review/JMJ9AAK2OKX-2026-mbr-qbr.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/JMJ9AAK2OKX",
+    "quip_id": "JMJ9AAK2OKX",
+    "doc_type": "document",
+    "title": "2026 Paid Acq MBR / QBR",
+    "top_folder": "review"
+  },
+  {
+    "rel_path": "review/PcT9AAjVFnR-2024-mbr-qbr.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/PcT9AAjVFnR",
+    "quip_id": "PcT9AAjVFnR",
+    "doc_type": "document",
+    "title": "2024 Paid Acq MBR / QBR",
+    "top_folder": "review"
+  },
+  {
+    "rel_path": "review/ROf9AAUIHIK-bp-ps-review-sep.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/ROf9AAUIHIK",
+    "quip_id": "ROf9AAUIHIK",
+    "doc_type": "document",
+    "title": "BP Paid Search Review 9/26/23",
+    "top_folder": "review"
+  },
+  {
+    "rel_path": "review/TRA9AAguFLk-bp-ps-review-aug.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/TRA9AAguFLk",
+    "quip_id": "TRA9AAguFLk",
+    "doc_type": "document",
+    "title": "BP Paid Search Review 8/28/23",
+    "top_folder": "review"
+  },
+  {
+    "rel_path": "review/TVV9AAKgfea-global-acq-wbr-callouts.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/TVV9AAKgfea",
+    "quip_id": "TVV9AAKgfea",
+    "doc_type": "document",
+    "title": "Global Acq WBR Callouts",
+    "top_folder": "review"
+  },
+  {
+    "rel_path": "review/TaH9AAAK0Le-2025-mbr-qbr.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/TaH9AAAK0Le",
+    "quip_id": "TaH9AAAK0Le",
+    "doc_type": "document",
+    "title": "2025 Paid Acq MBR / QBR",
+    "top_folder": "review"
+  },
+  {
+    "rel_path": "review/WdY9AAy8tDh-paid-acq-sims.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/WdY9AAy8tDh",
+    "quip_id": "WdY9AAy8tDh",
+    "doc_type": "document",
+    "title": "Paid Acquisition SIMs",
+    "top_folder": "review"
+  },
+  {
+    "rel_path": "review/YKf9AAbVkG8-outbound-marketing-meetings.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/YKf9AAbVkG8",
+    "quip_id": "YKf9AAbVkG8",
+    "doc_type": "document",
+    "title": "Outbound Marketing Meetings",
+    "top_folder": "review"
+  },
+  {
+    "rel_path": "review/ZJR9AAdi0DC-deep-dive-debate.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/ZJR9AAdi0DC",
+    "quip_id": "ZJR9AAdi0DC",
+    "doc_type": "document",
+    "title": "Deep Dive & Debate",
+    "top_folder": "review"
+  },
+  {
+    "rel_path": "review/Zee9AAlSBEB-oci-paid-search-instructions.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/Zee9AAlSBEB",
+    "quip_id": "Zee9AAlSBEB",
+    "doc_type": "document",
+    "title": "OCI - Paid Search Instructions",
+    "top_folder": "review"
+  },
+  {
+    "rel_path": "review/paid-acq-flash.md",
+    "status": "ok",
+    "source_url": null,
+    "quip_id": null,
+    "doc_type": null,
+    "title": "Paid Acq Flash",
+    "top_folder": "review"
+  },
+  {
+    "rel_path": "root/FZQ9AARARAN-mbet-process-improvement.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/FZQ9AARARAN",
+    "quip_id": "FZQ9AARARAN",
+    "doc_type": "document",
+    "title": "MBet Process Improvement",
+    "top_folder": "root"
+  },
+  {
+    "rel_path": "root/NXF9AAy02OQ-po-process-options.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/NXF9AAy02OQ",
+    "quip_id": "NXF9AAy02OQ",
+    "doc_type": "document",
+    "title": "PO Process Options - Paid Search",
+    "top_folder": "root"
+  },
+  {
+    "rel_path": "root/bXT9AA5YdtN-paid-acq-projects.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/bXT9AA5YdtN",
+    "quip_id": "bXT9AA5YdtN",
+    "doc_type": "spreadsheet",
+    "title": "Paid Acq Projects",
+    "top_folder": "root"
+  },
+  {
+    "rel_path": "root/dGM9AARtQnG-outbound-holiday-tracker.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/dGM9AARtQnG",
+    "quip_id": "dGM9AARtQnG",
+    "doc_type": "spreadsheet",
+    "title": "Outbound Holiday Tracker",
+    "top_folder": "root"
+  },
+  {
+    "rel_path": "testing/eu/LJb9AAugth6-it-bid-modifiers-test.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/LJb9AAugth6",
+    "quip_id": "LJb9AAugth6",
+    "doc_type": "document",
+    "title": "2024.12.10 - IT Bid Modifiers Test",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/eu/eBO9AANgQtu-it-location-modifiers.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/eBO9AANgQtu",
+    "quip_id": "eBO9AANgQtu",
+    "doc_type": "spreadsheet",
+    "title": "2024.12.10 - IT Location Modifiers (EU Test Data)",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/jp/AeG9AAmSPdu-fy25-jp-testing.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/AeG9AAmSPdu",
+    "quip_id": "AeG9AAmSPdu",
+    "doc_type": "document",
+    "title": "FY25 JP Testing",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/jp/CRB9AARVJK8-jp-nb-test-results-2022.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/CRB9AARVJK8",
+    "quip_id": "CRB9AARVJK8",
+    "doc_type": "document",
+    "title": "JP NB Test Results 2022",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/jp/EGR9AANdsKO-jp-nb-experiment-2023.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/EGR9AANdsKO",
+    "quip_id": "EGR9AANdsKO",
+    "doc_type": "document",
+    "title": "2023.01_JP-NB_Experiment-Doc",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/jp/OcF9AABMjFY-yahoo-jp-nb-experiment-2022.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/OcF9AABMjFY",
+    "quip_id": "OcF9AABMjFY",
+    "doc_type": "document",
+    "title": "2022.10_Yahoo-JP-NB_Experiment",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/jp/PSa9AAWBFPB-jp-post-mhlw-analysis.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/PSa9AAWBFPB",
+    "quip_id": "PSa9AAWBFPB",
+    "doc_type": "document",
+    "title": "JP Performance: Post-MHLW Normalization Analysis",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/jp/PbI9AAI6SDn-jp-lp-experiment-2025.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/PbI9AAI6SDn",
+    "quip_id": "PbI9AAI6SDn",
+    "doc_type": "document",
+    "title": "2025.06_JP_LP-Experiment",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/jp/SCD9AATSR90-jp-pmax-experiment-2023.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/SCD9AATSR90",
+    "quip_id": "SCD9AATSR90",
+    "doc_type": "document",
+    "title": "2023.10_JP_Pmax-Experiment",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/jp/dFZ9AA5fAz2-jp-nb-tests-2024.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/dFZ9AA5fAz2",
+    "quip_id": "dFZ9AA5fAz2",
+    "doc_type": "document",
+    "title": "2024 JP NB Tests",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/jp/fcU9AAjhD9R-jp-discovery-experiment-2023.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/fcU9AAjhD9R",
+    "quip_id": "fcU9AAjhD9R",
+    "doc_type": "document",
+    "title": "2023.04_JP_Discovery-Experiment",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/landing-pages/AZW9AAdOQYk-percolate-guest.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/AZW9AAdOQYk",
+    "quip_id": "AZW9AAdOQYk",
+    "doc_type": "document",
+    "title": "PS LP Testing: Percolate / Guest",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/landing-pages/BLP9AAhFfua-ps-testing-lps.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/BLP9AAhFfua",
+    "quip_id": "BLP9AAhFfua",
+    "doc_type": "document",
+    "title": "PS Testing: Landing Pages (LP)",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/landing-pages/BTA9AASZEtA-cp-url-transition.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/BTA9AASZEtA",
+    "quip_id": "BTA9AASZEtA",
+    "doc_type": "spreadsheet",
+    "title": "/CP URL Transition",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/landing-pages/KKI9AAboWRC-promo-wts-test.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/KKI9AAboWRC",
+    "quip_id": "KKI9AAboWRC",
+    "doc_type": "document",
+    "title": "PS Testing: Promo WTS",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/landing-pages/LLJ9AAmkj0W-brand-lp-test-cps-column.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/LLJ9AAmkj0W",
+    "quip_id": "LLJ9AAmkj0W",
+    "doc_type": "document",
+    "title": "2023.11 - Brand LP Test - CPS column",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/landing-pages/MQD9AAT1lD8-mcs-vs-regstart.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/MQD9AAT1lD8",
+    "quip_id": "MQD9AAT1lD8",
+    "doc_type": "document",
+    "title": "Paid Search MCS LP vs. Email Submit Page Test Results",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/landing-pages/TVY9AAomVYU-project-baloo-kws-urls.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/TVY9AAomVYU",
+    "quip_id": "TVY9AAomVYU",
+    "doc_type": "spreadsheet",
+    "title": "Project Baloo Keywords/URLs",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/landing-pages/cJa9AAFzKqY-guest-testing-urls.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/cJa9AAFzKqY",
+    "quip_id": "cJa9AAFzKqY",
+    "doc_type": "spreadsheet",
+    "title": "Guest Testing URLs",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/na/CFL9AACJeKF-algo-stabilization.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/CFL9AACJeKF",
+    "quip_id": "CFL9AACJeKF",
+    "doc_type": "document",
+    "title": "Testing: Algorithm Stabilization",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/na/HNL9AA4Zse1-primelis-brand-core-test.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/HNL9AA4Zse1",
+    "quip_id": "HNL9AA4Zse1",
+    "doc_type": "document",
+    "title": "Brand Core - Primelis Test",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/na/NXb9AAss6tU-ca-nb-cvr-analysis.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/NXb9AAss6tU",
+    "quip_id": "NXb9AAss6tU",
+    "doc_type": "document",
+    "title": "CA NB CVR analysis v1.27 v2",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/paid-app/ARO9AAwdXlU-jp-app-testing-2023.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/ARO9AAwdXlU",
+    "quip_id": "ARO9AAwdXlU",
+    "doc_type": "document",
+    "title": "2023.08 - JP App Testing Results",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/root/FAZ9AAzxU6P-dg-test-cps-plan.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/FAZ9AAzxU6P",
+    "quip_id": "FAZ9AAzxU6P",
+    "doc_type": "document",
+    "title": "DG Test results and CPS Y25 Testing Plan",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/root/IPB9AAeNAQB-ps-testing-current-weblabs.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/IPB9AAeNAQB",
+    "quip_id": "IPB9AAeNAQB",
+    "doc_type": "document",
+    "title": "PS Testing: Current Weblab/Tests",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/root/IUA9AAGTmnc-cps-dg-test-results.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/IUA9AAGTmnc",
+    "quip_id": "IUA9AAGTmnc",
+    "doc_type": "document",
+    "title": "US/UK CPS DG Test results",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/root/KBL9AAquAv5-us-promo-test.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/KBL9AAquAv5",
+    "quip_id": "KBL9AAquAv5",
+    "doc_type": "document",
+    "title": "PS Testing: US Promo Test",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/root/KCY9AAYqWd2-ps-testing-ad-copy.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/KCY9AAYqWd2",
+    "quip_id": "KCY9AAYqWd2",
+    "doc_type": "document",
+    "title": "PS Testing: Ad Copy Updates",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/root/NQA9AAX2DOp-ps-testing-incrementality.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/NQA9AAX2DOp",
+    "quip_id": "NQA9AAX2DOp",
+    "doc_type": "document",
+    "title": "PS Testing: Incrementality Test",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/root/ReG9AAvZFTS-ps-testing-ads-ad-copy.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/ReG9AAvZFTS",
+    "quip_id": "ReG9AAvZFTS",
+    "doc_type": "document",
+    "title": "PS Testing: Ads & Ad Copy",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/root/UCa9AAcbP8I-ps-measurement-rct.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/UCa9AAcbP8I",
+    "quip_id": "UCa9AAcbP8I",
+    "doc_type": "document",
+    "title": "Amazon Business - Paid Search Measurement",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/root/VDf9AA5JiIY-ps-testing-cps.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/VDf9AA5JiIY",
+    "quip_id": "VDf9AA5JiIY",
+    "doc_type": "document",
+    "title": "PS Testing: CPS",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/root/WKS9AAlN5pT-ps-testing-secondary-language.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/WKS9AAlN5pT",
+    "quip_id": "WKS9AAlN5pT",
+    "doc_type": "document",
+    "title": "PS Testing: Secondary Language",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/root/YEG9AAoOEiO-uk-mac-impact.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/YEG9AAoOEiO",
+    "quip_id": "YEG9AAoOEiO",
+    "doc_type": "document",
+    "title": "PS Testing: UK MAC Impact",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/root/abc9AAsI8rV-ps-testing-audiences.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/abc9AAsI8rV",
+    "quip_id": "abc9AAsI8rV",
+    "doc_type": "document",
+    "title": "PS Testing: Audiences",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/root/dKf9AAexRbL-ca-it-carousel-test.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/dKf9AAexRbL",
+    "quip_id": "dKf9AAexRbL",
+    "doc_type": "document",
+    "title": "PS Testing: CA and IT Carousel",
+    "top_folder": "testing"
+  },
+  {
+    "rel_path": "testing/root/ePH9AAU0wIA-ps-testing-bidding.md",
+    "status": "ok",
+    "source_url": "https://quip-amazon.com/ePH9AAU0wIA",
+    "quip_id": "ePH9AAU0wIA",
+    "doc_type": "document",
+    "title": "PS Testing: Bidding Algorithms",
+    "top_folder": "testing"
+  }
+]

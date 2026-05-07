@@ -1,0 +1,31 @@
+{
+  "urls": [
+    "https://quip-amazon.com/GCI9AA5aLG0",
+    "https://quip-amazon.com/JMJ9AAK2OKX",
+    "https://quip-amazon.com/PcT9AAjVFnR",
+    "https://quip-amazon.com/ROf9AAUIHIK",
+    "https://quip-amazon.com/TRA9AAguFLk"
+  ],
+  "refs": [
+    [
+      "GCI9AA5aLG0",
+      "review/GCI9AA5aLG0-cps-ps-review-2023.md"
+    ],
+    [
+      "JMJ9AAK2OKX",
+      "review/JMJ9AAK2OKX-2026-mbr-qbr.md"
+    ],
+    [
+      "PcT9AAjVFnR",
+      "review/PcT9AAjVFnR-2024-mbr-qbr.md"
+    ],
+    [
+      "ROf9AAUIHIK",
+      "review/ROf9AAUIHIK-bp-ps-review-sep.md"
+    ],
+    [
+      "TRA9AAguFLk",
+      "review/TRA9AAguFLk-bp-ps-review-aug.md"
+    ]
+  ]
+}
