@@ -14,8 +14,14 @@ topics:
 - creative
 - mcs
 - landing-pages
+backfill_status: backfilled
 ---
 
 # MCS Page Creation & Authoring
-Source: https://quip-amazon.com/EPO9AAg62RR
-Guide for creating and authoring MCS pages.
+TBD - Team gaining permissions to Author.
+Request to Author: https://issues.amazon.com/issues/ABMCSDev-12545
+
+Authoring:
+
+Once the page is created,[ submit here][1] for Content Bar Raising
+[1]: https://issues.amazon.com/issues/create?assignedFolder=79ee6dee-1861-4b3d-b7fc-1a0d07c1769f
