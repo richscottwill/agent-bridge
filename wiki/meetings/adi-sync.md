@@ -4,7 +4,7 @@ status: DRAFT
 audience: amazon-internal
 owner: Richard Williams
 created: 2026-04-12
-updated: 2026-04-12
+updated: 2026-05-06
 ---
 <!-- DOC-0196 | duck_id: meeting-adi-sync -->
 
@@ -23,6 +23,21 @@ Richard mentors Adi on pacing, ICCP management, campaign optimization, and analy
 Key dynamic: Peer-level but mentoring relationship. Adi is receptive, asks good follow-up questions, and is building independence. Richard should continue pushing Adi toward structured thinking and documentation habits.
 
 ## Latest Session
+### 2026-05-06 — Kiro Tool Integration and AI Workflow Planning (50 min)
+Source: hedy:4wXByGD0G0PKgoB4iApc
+
+- **OP1 dynamics (start of session):** Adi asked about OP1 end date and general cadence. Richard explained OP2 is more binding than OP1 per Brandon's framing ("OP1 has been to be aggressive... whenever we get to OP2 we're like, whoops, this was all wrong. It becomes really hard to downsize"). Richard also summarized how leadership visibility drives OP1 framing — underprojecting signals risk, overprojecting locks the team into targets that hurt the next year.
+- **Tomorrow's team demo (5/7):** Brandon asked Adi to lead "Kiro 101" installation walk for the team. Richard and Adi split it: Adi covers IDE vs Agent + tools 101 overview; Richard covers Kiro installation. Agreed to demo one reliable workflow (drop weekly dashboard → agent analyzes → callout generation) instead of a broad feature tour.
+- **Tools comparison:** Kiro (IDE, highest capability but intimidating), Archi (browser, low-barrier for non-technical users — Brandon cited a prior demo), Orc (file-sync alternative), Playwright MCP (browser automation). Quick added as a team-familiar benchmark.
+- **Adi's adoption read:** "It seems a lot more intimidating than it actually is. As you get into the mix of things, it becomes a bit more understandable... Kiro is probably more suited for people who are trying to build this stuff." Richard's read: for Brandon/Yun/Stacey, a minimal-barrier browser-based tool likely beats the IDE path.
+- **Playwright exploration:** Richard showed Adi how Playwright can open a browser and run SQL or scrape data, with the caveat that leadership demos should rely on proper data access (he already filed a Google Ads API ticket). Richard: "I think Playwright is something that might be a leader look at it and look at it funny."
+- **Kiro steering file test:** Richard had Adi point Kiro at a local share and test read/write. Adi confirmed agent followed steering rules and created files correctly.
+- **Action items:**
+  - Richard — polish the AI tools comparison doc before tomorrow's 9am demo — 2026-05-07 09:00 PT
+  - Adi — test Kiro SQL-automation for the weekly dashboard use case — next week
+  - Adi/Richard — sync after tomorrow's demo; iterate based on team feedback
+
+## Previous Session
 ### 2026-04-22 — Automation + AI Workflow Sync (43 min)
 Source: hedy:ZWN2w2OmaUCKWK5nD7so
 - **OCI transition discussion**: Data sensitivity during CPC → ROAS transition. Every market differs; Adi leveraging Stacey's US file as template.

@@ -1,4 +1,14 @@
 <!-- DOC-0342 | duck_id: protocol-changelog -->
+### EOD Run — 2026-05-06 (Wednesday)
+- Phase 1: Meeting ingestion. 3 Hedy sessions today (AMX launch prep 18min, OP1 Peter sync 58min, Adi Kiro tooling 50min). Routed to topics/initiatives/op1-2026.md (2 new Log entries) + meetings/adi-sync.md (Latest Session updated). Yesterday's 5/5 sessions (AU handoff + MX + Brandon + Weekly + Lorena biweekly) already ingested in prior cycles.
+- Phase 2: Asana reconciliation. 17 completions (11:06–11:28 PT batch). ABPS-ABIX 7, ABPS-Paid App 5, ABPS-WW 1, My Tasks 4. 4 Today-tagged still incomplete → demoted Today→Urgent with Kiro_RW carry-fwd notes. No new tasks. Net delta -17.
+- Phase 3: Organ cascade + maintenance. Skipped — DuckDB MCP down, compression audit/enrichment/workflow observability writes unavailable this cycle (reads via python3 duckdb fallback). current.md last updated 2026-04-21 — separate refresh pass needed (flag).
+- Phase 4: Recurring task state checks. Skipped — DuckDB MCP down.
+- Phase 5: Housekeeping. Git sync + changelog update + rw-tracker entry. Session-log + wiki-candidates appended.
+- Phase 5.5: Wiki candidate. 1 line queued (OP1 forecasting playbook — Brandon's multi-year YoY method).
+- Phase 6: Karpathy experiments. Loop launched via karpathy-loop.sh (max_batches=15, cooldown=hands/current/rw-tracker/changelog/session-log). First batch running experiment 2/~10 at EOD wrap — subagents invoking eval-a/b/c agents confirmed separate processes per protocol. First time experiments have run since 2026-04-30 (5-day gap from AgentSpaces degraded-auth days).
+- Phase 7/7.5: Output compiled. SharePoint durability sync deferred.
+
 ### EOD-2 Run 22 — 2026-04-06 (Monday)
 - Phase 1: Asana reconciliation. 0 completions, 0 Today tasks (clean slate), 5 overdue, 97 incomplete. DuckDB synced with 47 tasks. Blockers: Vijeth 18d, Andes 21d.
 - Phase 2: ABPS AI: 35 active, 5 Published, 0 advances today. Portfolio: no changes.

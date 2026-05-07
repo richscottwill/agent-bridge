@@ -108,3 +108,18 @@ See brain.md → Level Graduation Criteria. Weekly artifact. Monthly tool. Quart
 - **Blockers:** MX Auto page (Vijeth, 29d), Kingpin Goals MX (Andes, 32d). Both unchanged.
 - **Wiki pipeline:** 24 new DRAFTs + 7 consolidation merges. 0 DRAFT→FINAL promotions — critic-review is bottleneck.
 - **Adi DM:** asked for Kiro setup walkthrough in next 1:1. Concrete L3 adoption signal — worth protecting.
+
+
+### Wednesday 5/6 EOD — Asana Reconciliation
+- **Completed today (My Tasks + ABPS): 17** — Large batch 11:06–11:28 PT: Reply to Brandon PAM budget, Make changes to AU/MX/PAM for the week, Come prepared: Adi bi-weekly, Mondays EU SSR, Confirm /cp/beauty ref tags, Weekly walkthrough testing view (✅ weekly meeting slot), OP1 app acq projections, Peter OP1 prep (3 tasks: CPI, install rate, projection table), Update Feature Registry refmarker mappings, GenBI keyword-reg stitching (pre-AU handoff), Google Ads MCC SSO confirmation, Follow up Vijeth /cp/auto-shop, Raise PO Q2 (PAM), Look into ABMX reg enhancement, Raise US PAM $70K underreported PO, Paid App PO Q2, Monthly MX/AU confirm budgets, Weekly Reporting Global WBR sheet (2x), Convert promptSubmit hooks to userTriggered, Update Kingpin for MX
+- **Carried forward: 4 Today tasks** demoted Today→Urgent (Weekly walkthrough testing view — actually a dupe of an already-closed instance, Block 15-20 min Adi 1:1 Kiro walkthrough — covered in today's Adi sync, Come prepared Adi bi-weekly — covered in today's sync, Mondays EU SSR — Monday-recurring, surfacing Wed)
+- **New tasks: 0 detected** (Hedy todos from today's sessions routed to topic logs, not Asana)
+- **Net delta: −17** (strong close-out cycle ahead of Kate offsite next week)
+- **Overdue: TBD** (DuckDB view stale; live Asana shows large close-out so count likely dropped materially)
+- **Five Levels today:** L1: 0 (hard thing = Testing Approach, still zero), L2: 0–1 (OP1 prep for Peter might qualify), L3: 1 (Adi Kiro tooling sync — L3 automation lever, 5/7 team demo tomorrow is the forcing function), L4: 0, L5: 0.
+- **Hard thing status:** Testing Approach v5 still unsent. Workdays-at-zero climbing.
+- **Blockers:** No new blocker signals today; Andes / Vijeth blockers unchanged (will refresh when DuckDB catches up).
+- **Meeting ingestion:** 3 Hedy sessions (AMX launch prep 18min, OP1 Peter sync 58min, Adi Kiro tooling 50min). Routed to `topics/initiatives/op1-2026.md` + `meetings/adi-sync.md`.
+- **Portfolio:** ABPS-ABIX 7 completions, ABPS-Paid App 5 completions, ABPS-WW Testing 1 completion, My Tasks-level 4 completions. No new overdue items detected.
+- **Asana writes (Kiro_RW carry-fwd notes):** 4 task updates, all "5/6 EOD: Carried fwd — [reason]. Demoted Today→Urgent."
+- **Mode:** Mostly-up. Asana/Slack/Hedy/SharePoint/Outlook MCPs live. DuckDB MCP down — direct python3 duckdb fallback. Karpathy loop launched in background with max_batches=15.

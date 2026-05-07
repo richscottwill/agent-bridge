@@ -1,40 +1,56 @@
 {
-  "generated": "2026-05-05",
-  "mode": "degraded-auth",
-  "auth_state": "Midway cookie 401 against amazon.sharepoint.com; all aim-launched MCPs (Slack/SharePoint/Outlook/Asana) blocked. DuckDB-only path.",
-  "completed_today": [],
-  "completed_today_note": "No Asana completions in last 24h per DuckDB (last sync 2026-05-04 14:50 UTC). Cannot confirm in-flight completions without fresh Asana read.",
-  "carried_forward": [
-    {"gid": "1214351597615320", "name": "Clarify CAT vs MCS email overlay status for Outbound Marketing Goals", "reason": "still Today + overdue 7d (due 4/28) — Brandon ask; demote queued (write blocked)", "next_action": "Tue AM route to Brandon 1:1 ask batch once auth returns"},
-    {"gid": "1214384590122162", "name": "OP1 app acquisition projections — Peter sync Wed 4/30 2-3pm", "reason": "overdue 5d; meeting was last week — status update needed", "next_action": "Confirm Peter sync outcome; reclassify to Urgent + update Kiro_RW"},
-    {"gid": "1214450305673189", "name": "Convert promptSubmit hooks to userTriggered — market-constraints-staleness + open-items-reminder", "reason": "overdue 1d (due 5/4); L3 Engine Room work — self-owned", "next_action": "Ship this week; demote to Urgent"}
+  "generated": "2026-05-06",
+  "mode": "mostly-up",
+  "infra_state": "Asana/Slack/Hedy/SharePoint/Outlook MCPs all live. DuckDB MCP down (direct python3 duckdb fallback for reads; no Asana sync into DuckDB this cycle).",
+  "completed_today": [
+    {"gid":"1213959904341162","name":"Reply to Brandon — PAM budget needs assessment","completed_at":"2026-05-06T18:06:27.747Z"},
+    {"gid":"1214055207544514","name":"Come prepared: Bi-weekly with Adi to brainstorm usable AI","completed_at":"2026-05-06T18:06:33.013Z"},
+    {"gid":"1214372109571389","name":"Confirm /cp/beauty custom ref tags firing — ping Alex VanDerStuyf (MCS)","completed_at":"2026-05-06T18:06:52.541Z"},
+    {"gid":"1214382691668678","name":"Mondays - Write into EU SSR Acq Asana","completed_at":"2026-05-06T18:06:55.819Z"},
+    {"gid":"1214372021755030","name":"Weekly walkthrough testing view in Asana - Weekly team meeting","completed_at":"2026-05-06T18:07:29.153Z"},
+    {"gid":"1214434624651194","name":"Peter OP1 prep — Assemble projection table + share before 2pm","completed_at":"2026-05-06T18:09:03.282Z"},
+    {"gid":"1214434979605216","name":"Peter OP1 prep — Pull CPI by market (trailing 4w)","completed_at":"2026-05-06T18:09:13.539Z"},
+    {"gid":"1214434983157503","name":"Peter OP1 prep — Pull install rate + install→reg ratio by market","completed_at":"2026-05-06T18:09:32.264Z"},
+    {"gid":"1214044682239813","name":"Update Feature Registry with the standardized refmarker to channel mappings","completed_at":"2026-05-06T18:09:44.282Z"},
+    {"gid":"1214080130329568","name":"Make changes to AU/MX/PAM for the week","completed_at":"2026-05-06T18:12:29.008Z"},
+    {"gid":"1214386001212099","name":"GenBI keyword-registration stitching fix with Mukesh (pre-AU handoff)","completed_at":"2026-05-06T18:12:54.085Z"},
+    {"gid":"1214384590122162","name":"OP1 app acquisition projections — Peter sync Wed 4/30 2-3pm","completed_at":"2026-05-06T18:13:15.022Z"},
+    {"gid":"1214330091433878","name":"Google Ads MCC SSO admin — confirm ownership + adopt Teams workflow (by May 4)","completed_at":"2026-05-06T18:21:59.167Z"},
+    {"gid":"1214365124765717","name":"Follow up with Vijeth — /cp/auto-shop ref-tag overwrite fix","completed_at":"2026-05-06T18:21:48.350Z"},
+    {"gid":"1214450305673189","name":"Convert promptSubmit hooks to userTriggered — market-constraints-staleness + open-items-reminder","completed_at":"2026-05-06T18:22:06.862Z"},
+    {"gid":"1213983332107930","name":"Monthly - MX/AU confirm budgets","completed_at":"2026-05-06T18:24:36.871Z"},
+    {"gid":"1214044802323482","name":"Raise PO for Q2 instead of increasing to FY (amount too large)","completed_at":"2026-05-06T18:24:50.714Z"},
+    {"gid":"1212808474749819","name":"Paid App PO — Create Q2 + Amend Google PO to Q2","completed_at":"2026-05-06T18:25:36.623Z"},
+    {"gid":"1214206277947986","name":"Weekly Reporting - Global WBR sheet","completed_at":"2026-05-06T18:28:26.688Z"},
+    {"gid":"1214372021755042","name":"Look into ABMX Registration and Verification Enhancement","completed_at":"2026-05-06T18:28:30.885Z"},
+    {"gid":"1214589895036128","name":"Weekly Reporting - Global WBR sheet (My Tasks dupe)","completed_at":"2026-05-06T18:28:37.019Z"},
+    {"gid":"1213983090951838","name":"Update Kingpin for MX","completed_at":"2026-05-06T18:58:53.754Z"},
+    {"gid":"1214044802323478","name":"Raise PO for US PAM for $70K underreported amount","completed_at":"2026-05-06T03:50:38.757Z"}
   ],
-  "daily_reset_status": "QUEUED — 3 Today→Urgent demotions pending; cannot write to Asana (MCP auth blocked). Will execute on next authed run.",
+  "carried_forward": [
+    {"gid":"1214589092631971","name":"Weekly walkthrough testing view in Asana - Weekly team meeting","demoted_to":"Urgent","reason":"Not actioned today; likely weekly slot next Tuesday."},
+    {"gid":"1214589125918606","name":"Block 15-20 min in next Adi 1:1 for Kiro technical setup walkthrough","demoted_to":"Urgent","reason":"Adi 1:1 today covered Kiro walkthrough plan for tomorrow's team demo. Close after 5/7 demo."},
+    {"gid":"1214589330394414","name":"Come prepared: Bi-weekly with Adi to brainstorm usable AI","demoted_to":"Urgent","reason":"Adi 1:1 today covered Kiro tooling directly; prep folded in."},
+    {"gid":"1214589330507959","name":"Mondays - Write into EU SSR Acq Asana","demoted_to":"Urgent","reason":"Monday-recurring still open on Wed. Close for this week; next Monday recreates."}
+  ],
   "new_tasks": [],
-  "new_tasks_note": "No new triage signals in last 24h per signal_tracker (last ingest 2026-05-04 14:50 UTC).",
-  "recurring_proposals": [],
+  "recurring_proposals": [
+    {"task_name":"Weekly Reporting - Global WBR sheet","cadence":"weekly","next_due":"2026-05-13","status":"parent instance 1214590118409396 exists in ABPS-Paid App backlog"},
+    {"task_name":"Update Kingpin for MX","cadence":"monthly","next_due":"2026-06-02","status":"next instance 1214591148687794 exists and flagged Today/Sweep"},
+    {"task_name":"Monthly - MX/AU confirm budgets","cadence":"monthly","next_due":"2026-06-01","status":"next instance 1214590009810538 exists in My Tasks Admin bucket"}
+  ],
   "blocker_updates": [],
-  "five_levels": {
-    "L1": 1,
-    "L2": 0,
-    "L3": 1,
-    "L4": 0,
-    "L5": 0,
-    "unclassified": 1,
-    "note": "Of today's 3 Today-tagged tasks: 1 Admin (L1), 1 Engine Room (L3), 1 My Tasks uncategorized routine. No L1 artifact shipped — workdays_at_zero now 4."
-  },
-  "overdue_count": 35,
+  "five_levels": {"l1": 0, "l2": 1, "l3": 1, "l4": 0, "l5": 0, "notes": "L2 credit for Peter OP1 prep (supports Friday CP1 submission). L3 for Adi Kiro tooling sync (direct support for 5/7 team demo — adoption lever). L1 still zero — Testing Approach v5 unsent, hard-thing-at-zero streak continues."},
   "portfolio_changes": {
-    "note": "Cannot surface portfolio deltas without fresh Asana pull. Last snapshot 2026-05-04 14:50 UTC."
+    "ABPS-ABIX": {"completed": 7},
+    "ABPS-Paid App": {"completed": 5},
+    "ABPS-WW Testing & Projects": {"completed": 1},
+    "My Tasks (user task list)": {"completed": 4}
   },
-  "abps_ai_changes": {
-    "deprecated": true,
-    "note": "ABPS AI - Content project deprecated 2026-04-17"
-  },
-  "hard_thing": {
-    "name": "polaris-brand-lp (AU/MX non-weblab test design, due 5/6)",
-    "gid": "1214330104198712",
-    "days_at_zero": 4,
-    "note": "Due 5/6 (tomorrow). No shipped artifact today. Brandon 1:1 today 11:30am PT was natural check-in for 1-pager v1."
-  }
+  "abps_ai_changes": {"completed": 0, "note": "Wiki pipeline moved out of Asana per 2026-04-17 deprecation"},
+  "meetings_ingested": [
+    {"session_id":"ZY9a1noorNN7f23ZllUT","title":"AMX Launch Preparation and Question Prioritization","duration_min":18,"topic":"Programmatic Ads","routed_to":["session-log"]},
+    {"session_id":"lJsFwKc78UIFqqZeMlpo","title":"Paid Acquisition OP1 Strategy and 2026/2027 Planning","duration_min":58,"topic":"^op1","routed_to":["topics/initiatives/op1-2026.md"]},
+    {"session_id":"4wXByGD0G0PKgoB4iApc","title":"Kiro Tool Integration and AI Workflow Planning","duration_min":50,"topic":".Adi","routed_to":["topics/initiatives/op1-2026.md","meetings/adi-sync.md"]}
+  ]
 }

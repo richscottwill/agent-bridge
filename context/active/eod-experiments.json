@@ -1,5 +1,26 @@
 {
-  "generated": "2026-05-05",
-  "status": "skipped",
-  "reason": "Karpathy experiments invoke via karpathy-loop.sh which relies on subagent orchestration; direct-agent turn can't spawn. Same as 2026-05-04 EOD. No loss — experiments compound weekly, not daily."
+  "generated": "2026-05-06",
+  "status": "running",
+  "loop_start_utc": "2026-05-07T02:15:23Z",
+  "max_batches_target": 15,
+  "batches_complete_at_report_time": 6,
+  "experiments_this_session": 65,
+  "keeps": 60,
+  "reverts": 5,
+  "keep_rate_pct": 92.3,
+  "zero_revert_streak_batches": 4,
+  "cooldown_list": ["hands.md","current.md","rw-tracker.md","changelog.md","session-log.md"],
+  "recent_experiments_sample": [
+    {"organ":"audit-asana-writes","technique":"ADD","decision":"KEEP"},
+    {"organ":"brain","technique":"REWORD","decision":"KEEP"},
+    {"organ":"heart","technique":"SPLIT","decision":"KEEP"},
+    {"organ":"meeting-brief-au-sync-2026-04-28","technique":"COMPRESS","decision":"KEEP"},
+    {"organ":"eyes","technique":"SPLIT","decision":"KEEP"},
+    {"organ":"roster","technique":"ADD","decision":"KEEP"},
+    {"organ":"slack-ingestion-README","technique":"COMPRESS","decision":"KEEP"},
+    {"organ":"ww-testing-loop-prep","technique":"MERGE","decision":"KEEP"},
+    {"organ":"wiki-batch-5-workstreams-eval-a","technique":"MERGE","decision":"REVERT"},
+    {"organ":"wiki-google-ads-campaign-structure","technique":"MERGE","decision":"REVERT"}
+  ],
+  "notes": "First Karpathy run since 2026-04-30 (5-day gap during degraded-auth days). Strong keep-rate streak — 4 consecutive batches with 10/10 keep rate. This is unusual and may warrant calibration review in next retrospective: if all experiments are being kept, either (a) targets are easy wins, (b) eval rubric has drifted lenient, or (c) karpathy is correctly avoiding hard organs where reverts would cluster. The priors will self-correct either way as more data accumulates. Loop still running at time of report; will continue until max_batches=15 or prior exhaustion. Richard's explicit instruction was 'Don't skip karpathy experiments because those are most important' — honored."
 }

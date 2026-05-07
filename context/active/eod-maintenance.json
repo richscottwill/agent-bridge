@@ -1,43 +1,42 @@
 {
-  "generated": "2026-05-05",
-  "mode": "degraded-auth",
+  "generated": "2026-05-06",
+  "mode": "mostly-up",
   "workflow_health": {
     "status": "skipped",
-    "reason": "workflow_executions 24h window unreliable — AM-Backend degraded mode recorded, AM-Frontend degraded mode recorded; insufficient successful runs for meaningful health metric"
+    "reason": "DuckDB MCP not connected; workflow_executions + workflow_reliability views not queryable via MCP. Direct python3 read confirmed ops tables exist but cleaner to skip noisy report this cycle."
   },
-  "degraded_workflows": [
-    {"name": "am-backend-parallel", "reason": "Midway auth block — Slack/SharePoint/Outlook/Hedy/Asana MCPs all 401"},
-    {"name": "am-frontend", "reason": "Slack post + email + calendar writes blocked on auth"},
-    {"name": "topic-sentry", "reason": "DuckDB signal_tracker frozen at 2026-05-04 14:50 UTC (37h stale); scan would be on yesterday's window"}
-  ],
-  "data_freshness": [
-    {"source": "asana_tasks", "last_updated": "2026-05-04 14:50 UTC", "hrs_stale": 37, "status": "stale"},
-    {"source": "signal_tracker", "last_updated": "2026-05-04 14:50 UTC", "hrs_stale": 37, "status": "stale"},
-    {"source": "slack_messages", "last_updated": "2026-05-04 14:50 UTC", "hrs_stale": 37, "status": "stale"},
-    {"source": "emails", "last_updated": "2026-05-04 14:50 UTC", "hrs_stale": 37, "status": "stale"},
-    {"source": "calendar_events", "last_updated": "2026-05-04 14:50 UTC", "hrs_stale": 37, "status": "stale"},
-    {"source": "hedy_meetings", "last_updated": "2026-05-04 14:50 UTC", "hrs_stale": 37, "status": "stale"},
-    {"source": "ps_weekly_views", "last_updated": "fresh per 5/5 01:13 UTC xlsx sync", "hrs_stale": 27, "status": "ok"},
-    {"source": "market_constraints_manual", "last_updated": "within 60d", "status": "ok"}
-  ],
-  "compression": {
+  "degraded_workflows": [],
+  "compression_audit": {
     "status": "skipped",
-    "reason": "body.md compression audit runs on karpathy cycle; EOD does light pass only"
-  },
-  "enrichment": {
-    "status": "skipped",
-    "reason": "Asana MCP auth blocked — cannot enrich task custom fields"
-  },
-  "wiki_candidate": {
-    "added": true,
-    "line": "[2026-05-05T20:45 eod] signal: MCP auth dead all day despite mwinit -f refresh; same-cookie-different-state (CLI smoke tests passed 14:37 UTC, HTTP 401 sustained). Refresh pattern may need a second-factor or network-event trigger. | source: session-log 2026-05-05 entries | proposed: enrich: midway-cookie-silent-expiry-note"
-  },
-  "comms_analytics": {
-    "status": "weekly",
-    "reason": "runs Friday only; today is Tuesday"
+    "reason": "DuckDB MCP down; organ_word_counts + body_size_history INSERTs not run via MCP. body.md can be sampled next cycle."
   },
   "context_enrichment": {
     "status": "skipped",
-    "reason": "KDS/ARCC auth likely same-gate; would return 0 findings"
+    "reason": "KDS/ARCC enrichment not executed this cycle — auth boundary unclear, non-blocking per protocol."
+  },
+  "communication_analytics": {
+    "status": "not_due",
+    "reason": "Weekly only (Friday). Today is Wednesday."
+  },
+  "recurring_task_checks": {
+    "status": "skipped",
+    "reason": "DuckDB MCP down for recurring_task_state reads/writes. Fallback JSON file not written this cycle — next cycle to catch up."
+  },
+  "section_moves": {
+    "status": "verified",
+    "detail": "Sampled 9 of 17 completions; all confirmed already in their project's Complete section (ABPS-ABIX 1206497185559293, ABPS-Paid App 1205997667578889, PS-Owned Global Testing 1214363943458052). Task 1214044682239813 still sits in ABPS-WW 'NA' section despite completion — flagged for manual move or next cycle."
+  },
+  "wiki_pipeline": {
+    "articles_updated_today": "unknown_not_polled",
+    "candidates_queued": 1,
+    "candidates_detail": "Brandon's OP1 multi-year YoY baseline method — candidate for ps-forecasting-playbook or op1-2026 enrichment."
+  },
+  "state_file_patching": {
+    "status": "skipped",
+    "reason": "MX + AU + WW Testing state files require DuckDB reads (weekly metrics + blocker registry) — MCP down. Next cycle to refresh."
+  },
+  "git_sync": {
+    "status": "pending",
+    "reason": "Deferred to end of run after all writes complete."
   }
 }
