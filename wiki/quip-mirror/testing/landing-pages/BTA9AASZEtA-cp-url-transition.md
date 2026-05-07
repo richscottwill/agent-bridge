@@ -14,8 +14,7 @@ topics:
 - URL-transition
 - CP-pages
 - tracking
+backfill_status: spreadsheet-skipped
 ---
 
-# /CP URL Transition
-
-*Spreadsheet not fetched — listed in inventory. See source URL for data.*
+_Source is a spreadsheet. See: https://quip-amazon.com/BTA9AASZEtA_

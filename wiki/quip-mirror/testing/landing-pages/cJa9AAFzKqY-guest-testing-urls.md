@@ -14,8 +14,7 @@ topics:
 - guest-testing
 - URLs
 - QA
+backfill_status: spreadsheet-skipped
 ---
 
-# Guest Testing URLs
-
-*Spreadsheet not fetched — listed in inventory. See source URL for data.*
+_Source is a spreadsheet. See: https://quip-amazon.com/cJa9AAFzKqY_

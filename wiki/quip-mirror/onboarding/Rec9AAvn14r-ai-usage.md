@@ -17,8 +17,7 @@ topics:
 - Cedric
 - PartyRock
 - automation
+backfill_status: spreadsheet-skipped
 ---
 
-# Outbound Marketing - AI Usage
-
-Team AI usage tracker. Documents which team members use which AI tools (Q, Cedric, PartyRock, Aryabot, Zoom AI) for what use cases: WBR/goal performance callouts, meeting summarization, forte feedback generation, SQL/script/formula generation, and survey analysis. Includes estimated time savings and noted limitations.
+_Source is a spreadsheet. See: https://quip-amazon.com/Rec9AAvn14r_

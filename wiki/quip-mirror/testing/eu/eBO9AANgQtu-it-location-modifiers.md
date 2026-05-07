@@ -16,8 +16,7 @@ topics:
 - location-modifiers
 - bid-modifiers
 - test-data
+backfill_status: spreadsheet-skipped
 ---
 
-# 2024.12.10 - IT Location Modifiers (EU Test Data)
-
-*Spreadsheet not fetched — listed in inventory. See source URL for data.*
+_Source is a spreadsheet. See: https://quip-amazon.com/eBO9AANgQtu_

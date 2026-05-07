@@ -17,8 +17,7 @@ topics:
 - MQL
 - SQL
 - H2-2023
+backfill_status: spreadsheet-skipped
 ---
 
-# EU H2 2023 CPA Targets
-
-H2 2023 CPS budget and CPA target planning for EU5. Includes H1 2023 results baseline, then four budget scenarios: MQL/SQL-based, 100% budget allocation, partial budget (conservative), and Giulia-adjusted. Monthly spend breakdowns by market (UK/DE/FR/IT/ES) with MQL targets and CPA goals. Total H2 budget: $280K across scenarios.
+_Source is a spreadsheet. See: https://quip-amazon.com/JOc9AAKJ1MZ_

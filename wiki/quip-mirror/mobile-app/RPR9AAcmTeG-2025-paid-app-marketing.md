@@ -24,8 +24,7 @@ topics:
 - events
 - installs
 - CPA
+backfill_status: spreadsheet-skipped
 ---
 
-# 2025 Paid App Marketing
-
-FY2025 Paid App Marketing master tracker. Comprehensive multi-tab spreadsheet covering: OP2 spend allocation ($1.9M total across US/DE/UK/IT), monthly cost/install/CPA targets and actuals by market, weekly performance tracking, event performance (PD, PBDD, BFCM, BGG with YoY comparisons), WBR registration data, SSR Acquisitions Mobile App budget, creative specs, and pacing tabs. Key metrics: 505K planned installs, $3.8 blended CPA target. Actual YTD: 490K installs at $1.55 CPA (148% of install target).
+_Source is a spreadsheet. See: https://quip-amazon.com/RPR9AAcmTeG_

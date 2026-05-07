@@ -18,8 +18,7 @@ topics:
 - ES
 - FR
 - IT
+backfill_status: spreadsheet-skipped
 ---
 
-# EU5 CPS Sitelinks Translations
-
-Sitelink translations for EU5 CPS campaigns. 5 sitelink headlines, 5 description line 1s, and 5 description line 2s translated from English into DE, ES, FR, and IT. Covers: Enterprise Solutions, Reduce Costs, Work With Us, Optimize Cash Flow, Streamline Procurement. Character limits enforced (25/35 chars).
+_Source is a spreadsheet. See: https://quip-amazon.com/ZbX9AA0HMVB_

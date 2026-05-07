@@ -15,8 +15,7 @@ topics:
 - procurement
 - sourcing
 - Google-Ads
+backfill_status: spreadsheet-skipped
 ---
 
-# CPS Keywords
-
-66 keywords for CPS (Commercial/Procurement/Sourcing) campaigns. Covers exact, phrase, and broad match across themes: procurement business, strategic sourcing, supply chain optimization, digital procurement, supplier sourcing, and purchasing office.
+_Source is a spreadsheet. See: https://quip-amazon.com/fYP9AAqwKen_

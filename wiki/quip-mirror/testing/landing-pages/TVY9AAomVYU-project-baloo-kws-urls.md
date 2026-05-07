@@ -14,8 +14,7 @@ topics:
 - Project-Baloo
 - keywords
 - URLs
+backfill_status: spreadsheet-skipped
 ---
 
-# Project Baloo Keywords/URLs
-
-*Spreadsheet not fetched — listed in inventory. See source URL for data.*
+_Source is a spreadsheet. See: https://quip-amazon.com/TVY9AAomVYU_

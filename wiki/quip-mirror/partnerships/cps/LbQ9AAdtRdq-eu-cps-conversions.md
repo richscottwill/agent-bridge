@@ -17,8 +17,7 @@ topics:
 - AMO
 - DE
 - UK
+backfill_status: spreadsheet-skipped
 ---
 
-# 2022.11.7 EU CPS Conversions
-
-Daily conversion comparison between Google Ads conversions and AMO (Amazon Marketing Operations) conversions for DE Enterprise and UK Enterprise CPS campaigns. Oct 24 - Nov 6, 2022. Includes suggested CPA targets and 14-day cost/conversion benchmarks.
+_Source is a spreadsheet. See: https://quip-amazon.com/LbQ9AAdtRdq_

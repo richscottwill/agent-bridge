@@ -14,8 +14,7 @@ topics:
 - SBM
 - paid-search
 - performance-reporting
+backfill_status: spreadsheet-skipped
 ---
 
-# SBM - Paid Search Performance (Events Reporting)
-
-*Spreadsheet not fetched — listed in inventory. See source URL for data.*
+_Source is a spreadsheet. See: https://quip-amazon.com/eDK9AA8NTtB_

@@ -14,8 +14,7 @@ topics:
 - campaign-changes
 - optimization-log
 - Google-Ads
+backfill_status: spreadsheet-skipped
 ---
 
-# EU Changes Log
-
-Multi-tab change log tracking campaign optimizations across EU5 markets (UK, DE, IT, FR, ES). Each tab records date, campaign, ad group, changes made, reason, and owner. Primarily Dec 2023 changes including disabling Search Partners and pausing high-CPA ad groups.
+_Source is a spreadsheet. See: https://quip-amazon.com/fHM9AAY65z2_

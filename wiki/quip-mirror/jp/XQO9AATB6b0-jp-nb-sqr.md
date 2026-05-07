@@ -16,8 +16,7 @@ topics:
 - keywords
 - Google-Ads
 - negative-keywords
+backfill_status: spreadsheet-skipped
 ---
 
-# 2023.01.24 JP-NB SQR
-
-Japan non-brand search query report analysis. Two tabs: raw SQR data with 340+ search terms (Japanese with DeepL and Google translations), and a consolidated summary tab with Mao's exclude/keep recommendations. Covers Purchase (仕入れ), Wholesale (卸売), Bulk (まとめ買い), and Corporate (業務用/法人向け) ad groups. Many irrelevant terms flagged for exclusion (Mercari, Sedori, Alibaba, adult goods, etc.).
+_Source is a spreadsheet. See: https://quip-amazon.com/XQO9AATB6b0_

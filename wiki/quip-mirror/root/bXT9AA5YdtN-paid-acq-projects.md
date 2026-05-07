@@ -15,8 +15,7 @@ topics:
 - task-tracking
 - associate-tags
 - URL-transition
+backfill_status: spreadsheet-skipped
 ---
 
-# Paid Acq Projects
-
-Project tracker for Paid Acquisition team tasks. Includes due dates, owners, completion status by market (WW/EU/NA/JP/ABIX), and SIM links. Covers: associate tag application, TM infringement process, /CP URL transition, KwID structure, offsite planning, image asset updates, and keyword parameter appends.
+_Source is a spreadsheet. See: https://quip-amazon.com/bXT9AA5YdtN_

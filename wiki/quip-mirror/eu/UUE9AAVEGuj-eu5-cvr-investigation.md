@@ -16,8 +16,7 @@ topics:
 - brand-vs-NB
 - UK
 - performance-analysis
+backfill_status: spreadsheet-skipped
 ---
 
-# EU5 CVR Investigation
-
-Data analysis investigating EU5 conversion rate decline. Multi-tab spreadsheet with Brand-in-Brand, Brand-in-NB, NB-in-NB, and NB-in-Brand breakdowns for UK and EU5. Includes YoY comparisons (2022-2024), impression/click/cost/conversion data, and Adobe Analytics funnel analysis (unique visitors → reg start → registration). Key finding: UK CVR from reg start to registration dropped significantly YoY despite traffic increases.
+_Source is a spreadsheet. See: https://quip-amazon.com/UUE9AAVEGuj_

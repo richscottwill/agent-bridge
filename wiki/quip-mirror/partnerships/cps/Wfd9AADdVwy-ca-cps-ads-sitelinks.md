@@ -15,8 +15,7 @@ topics:
 - ad-copy
 - sitelinks
 - Google-Ads
+backfill_status: spreadsheet-skipped
 ---
 
-# CA CPS - Ad and Sitelinks
-
-Canada CPS campaign ad copy and sitelinks. Tab 1: 13 headlines (30 char limit) and 2 descriptions (90 char limit) for enterprise procurement ads. Tab 2: 20 sitelinks with text, descriptions, and final URLs covering Business Prime, enterprise solutions, payment solutions, government, healthcare, education, and more.
+_Source is a spreadsheet. See: https://quip-amazon.com/Wfd9AADdVwy_
